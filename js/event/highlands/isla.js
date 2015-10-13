@@ -16,12 +16,10 @@ function Isla(storage) {
 	this.body.SetRace(Race.Ferret);
 	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Ferret, Color.brown);
 	
-	this.FirstVag().virgin = false;
-	this.Butt().virgin = false;
-	
 	this.flags["Met"] = Isla.Met.NotMet;
 	this.flags["Talk"] = 0;
 	this.flags["Figure"] = Isla.Figure.Girly;
+	this.flags["Kids"] = 0; //Number of kids birthed (by the PC)
 
 	if(storage) this.FromStorage(storage);
 }
@@ -41,7 +39,8 @@ Isla.Figure = {
 
 Isla.Talk = { //Bitmask
 	Spring : 1,
-	Sex : 2 //First time fucked
+	Sex    : 2, //First time fucked
+	SexVag : 4 //First time pitch vag
 };
 
 /* TODO
@@ -56,8 +55,7 @@ Isla.Available = function() {
 
 // Number of kids Isla birthed by the PC
 Isla.prototype.Kids = function() {
-	//TODO Use flag
-	return 0;
+	return this.flags["Kids"];
 }
 
 Isla.prototype.Figure = function() {
@@ -70,6 +68,9 @@ Isla.prototype.FromStorage = function(storage) {
 	
 	// Load flags
 	this.LoadFlags(storage);
+	
+	if(this.flags["Talk"] & Isla.Talk.Sex)
+		this.FirstVag().virgin = false;
 }
 
 Isla.prototype.ToStorage = function() {
@@ -90,6 +91,18 @@ Isla.prototype.IsAtLocation = function(location) {
 
 
 //SCENES
+
+Scenes.Isla.Impregnate = function(father, cum) {
+	isla.PregHandler().Impregnate({
+		slot   : PregnancyHandler.Slot.Vag,
+		mother : isla,
+		father : father,
+		race   : Race.Ferret,
+		num    : _.random(1,3),
+		time   : 24, //TODO time
+		load   : cum
+	});
+}
 
 Scenes.Isla.Introduction = function() {
 	var parse = {
@@ -292,13 +305,11 @@ Scenes.Isla.Approach = function() {
 	Scenes.Isla.Prompt();
 }
 
-//TODO
 Scenes.Isla.Prompt = function() {
 	var parse = {
 		
 	};
 	
-	//[name]
 	var options = new Array();
 	options.push({ nameStr : "Appearance",
 		tooltip : "Take a once over of the sable-girl.",
@@ -325,12 +336,15 @@ Scenes.Isla.Prompt = function() {
 			func : Scenes.Isla.TummyRub, enabled : true
 		});
 	}
-	/* TODO
-	options.push({ nameStr : "name",
-		tooltip : "",
-		func : Scenes.Isla.Appearance, enabled : true
+	options.push({ nameStr : "Sex",
+		tooltip : "Proposition Isla for sex.",
+		func : function() {
+			if(isla.flags["Talk"] & Isla.Talk.Sex)
+				Scenes.Isla.Sex.Repeat();
+			else
+				Scenes.Isla.Sex.First();
+		}, enabled : true
 	});
-	*/
 	Gui.SetButtonsFromList(options, true, function() {
 		Text.Clear();
 		Text.Add("<i>“Well, see you around!”</i>", parse);
@@ -338,14 +352,6 @@ Scenes.Isla.Prompt = function() {
 		Gui.NextPrompt();
 	});
 }
-
-
-/*
- * 
-[] - 
-//Requires Isla to be visibly pregnant. Else, hide.
-
- */
 
 Scenes.Isla.Appearance = function() {
 	var parse = {
@@ -493,6 +499,10 @@ Scenes.Isla.Appearance = function() {
 	Text.Add("<i>“Phew! So now that that’s over with, what you want to get done today?”</i>", parse);
 	Text.Flush();
 	
+	isla.relation.IncreaseStat(30, 1);
+	
+	world.TimeStep({minute: 15});
+	
 	Scenes.Isla.Prompt();
 }
 
@@ -531,6 +541,9 @@ Scenes.Isla.TalkPrompt = function() {
 			Text.NL();
 			Text.Add("Isla looks you up and down, then returns the grin. “Yeah, I guess. But there we have it. I like to think I’m a pretty down-to-earth girl, so there we have it.”</i>", parse);
 			Text.Flush();
+			
+			isla.relation.IncreaseStat(40, 2);
+			world.TimeStep({minute: 15});
 			
 			Scenes.Isla.TalkPrompt();
 		}, enabled : true
@@ -584,6 +597,9 @@ Scenes.Isla.TalkPrompt = function() {
 			Text.Add("<i>“Sorta. Coulda. Woulda. Shoulda. Just forget I said anything, right? Let’s move on.”</i>", parse);
 			Text.Flush();
 			
+			isla.relation.IncreaseStat(40, 2);
+			world.TimeStep({minute: 15});
+			
 			Scenes.Isla.TalkPrompt();
 		}, enabled : true
 	});
@@ -609,6 +625,9 @@ Scenes.Isla.TalkPrompt = function() {
 			Text.NL();
 			Text.Add("That’s a surprisingly stark admission, and you agree to drop the issue.", parse);
 			Text.Flush();
+			
+			isla.relation.IncreaseStat(40, 2);
+			world.TimeStep({minute: 15});
 			
 			Scenes.Isla.TalkPrompt();
 		}, enabled : true
@@ -641,6 +660,9 @@ Scenes.Isla.TalkPrompt = function() {
 			Text.NL();
 			Text.Add("Isla sniffs, wrinkling her nose. <i>“Well, if you really want to. I don’t know if I’d feel the same way if I were in your place, but I’m obviously not you. Can we move onto something else, please?”</i>", parse);
 			Text.Flush();
+			
+			isla.relation.IncreaseStat(40, 2);
+			world.TimeStep({minute: 15});
 			
 			Scenes.Isla.TalkPrompt();
 		}, enabled : true
@@ -722,7 +744,9 @@ Scenes.Isla.TalkPrompt = function() {
 					Text.Add("<i>“I guess I just needed that push to take the plunge,”</i> Isla replies as she studies her reflection in the spring, her ire fading into contentment at the sight, perhaps even a little surprise at how effective the changes were. Slowly, the sable-morph cups one furry breast in the palm of her hand and gives it a gentle squeeze, sighing softly at the pressure. <i>“Suppose I should thank you.”</i>", parse);
 					Text.NL();
 					Text.Add("No worries. If she ever feels the need to… ah, explore her improved figure, you’ll be more than happy to help.", parse);
-					//TODO Rel
+					
+					isla.relation.IncreaseStat(100, 10);
+					world.TimeStep({hour: 1});
 				}
 				else if(figure == Isla.Figure.Womanly) {
 					isla.flags["Figure"] = Isla.Figure.Voluptuous;
@@ -766,7 +790,9 @@ Scenes.Isla.TalkPrompt = function() {
 					Text.Add("Well, if she ever needs help adjusting to her new body…", parse);
 					Text.NL();
 					Text.Add("Isla’s muzzle splits into a grin. <i>“Yeah, yeah, I know. Don’t worry.”</i>", parse);
-					//TODO Rel
+					
+					isla.relation.IncreaseStat(100, 10);
+					world.TimeStep({hour: 1});
 				}
 				else { //Curvies
 					Text.Add("<i>“Heh. Much as I’d like to be the best looker on the whole of Eden, the spring does have its limits, you know,”</i> Isla says with a chuckle and sultry grin. <i>“‘Sides, I’m already pretty smashing like this. Can’t improve on a figure of perfection, can ya? Being balanced and all that.”</i>", parse);
@@ -1030,14 +1056,907 @@ Scenes.Isla.TummyRub = function() {
 	Text.Flush();
 	
 	world.TimeStep({hour: 4});
-	//TODO REL
+	
+	isla.relation.IncreaseStat(100, 5);
 	
 	Gui.NextPrompt(function() {
 		MoveToLocation(world.loc.Highlands.Hills);
 	});
 }
 
+Scenes.Isla.Sex = {};
 
-/* TODO Rel boosts + time (talks)
+Scenes.Isla.Sex.First = function() {
+	var p1cock = player.BiggestCock(null, true);
+	var strapon = p1cock ? p1cock.isStrapon : null;
+	var knot = p1cock ? p1cock.Knot() : null;
+	
+	var parse = {
+		playername : player.name
+	};
+	parse = player.ParserTags(parse);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+	
+	isla.flags["Talk"] |= Isla.Talk.Sex;
+	
+	Text.Clear();
+	Text.Add("<i>“What?”</i> Isla says as you broach the subject with her. The sable-morph’s round eyes grow - well, rounder, she looks pensively down at the remains in the fire pit, poking at it agitatedly. <i>“C’mon, [playername], you know better than to tease me like that.”</i>", parse);
+	Text.NL();
+	Text.Add("Well, that’s your cue to muster your most shocked expression. Tease her? Whatever does she mean by that? You’re completely and absolutely serious about your proposition.", parse);
+	Text.NL();
+	Text.Add("<i>“See, there you go again, being sarcastic and all.”</i> Isla licks her muzzle, that little pink tongue of her running over her lips, although she still isn’t looking at you. <i>“You keep on being like this, I’ll have to get mad, and I’d rather not get mad. Would spoil my day <b>and</b> yours to boot.”</i>", parse);
+	Text.NL();
+	Text.Add("Well… nah. You reach up to Isla’s head and muss her dark fur a little, pet those little round ears of hers. She squirms under your touch, but doesn’t pull away. What’s her hang-up?", parse);
+	Text.NL();
+	Text.Add("<i>“You damn well know what it is.”</i>", parse);
+	Text.NL();
+	Text.Add("Then it’s their loss for rejecting such a perfectly good specimen of a nice young woman like her. She may not be the prettiest face around, yes, but it’s not as if she’s some kind of hideous troll, either.", parse);
+	Text.NL();
+	Text.Add("<i>“It was just a bad time,”</i> Isla mumbles, although she’s clearly trying to convince herself more than tell you anything. <i>“Too many marriage alliances those couple of years amongst the clans and not enough suitable men to go around. Meanwhile, I’m not getting any younger.”</i>", parse);
+	Text.NL();
+	Text.Add("Well, she should just relax and enjoy her time as the spring’s guardian - since she’s going to be here for a while and there’s no changing that, she might as well be happy, shouldn’t she? Although there is one thing you do want to ask…", parse);
+	Text.NL();
+	Text.Add("<i>“What’s that?”</i> Isla sighs as she sinks into your arms, not knowing or caring that she’s quite literally fallen into your embrace. Her silken fur is smooth and sleek to the touch, her braid tickles your [skin], and you find yourself running your hands through her luxuriant coat as you try to frame the words properly in your mind before letting them loose.", parse);
+	Text.NL();
+	Text.Add("Well, there’s the spring, right?", parse);
+	Text.NL();
+	Text.Add("<i>“Yeah…”</i>", parse);
+	Text.NL();
+	Text.Add("And it does change people in certain ways, doesn’t it?", parse);
+	Text.NL();
+	Text.Add("<i>“That’s true… what’cha getting at?”</i>", parse);
+	Text.NL();
+	Text.Add("Well, if she doesn’t like how she looks, why doesn’t she just use the spring to change herself to her liking?", parse);
+	Text.NL();
+	Text.Add("<i>“Uh, uh, I shouldn’t.”</i>", parse);
+	Text.NL();
+	Text.Add("You asked for a reason. She didn’t give you a reason.", parse);
+	Text.NL();
+	Text.Add("Isla looks a little unsure, and you comfort the sable-morph with a series of rubs to that fuzzy tummy of hers; toned and lithe… not that you’d expect anything less from someone as active as her. <i>“Well, I <b>am</b> the guardian of the spring and all, y’know. I shouldn’t be - be using it for my own selfish wants. Wouldn’t be right.”</i>", parse);
+	Text.NL();
+	Text.Add("But according to her own story, wasn’t the whole point of the spirit putting it here to be for morphs of her kind to go and have a soak? Doesn’t that just make it using it for its intended purpose?", parse);
+	Text.NL();
+	Text.Add("Silence. As you continue stroking Isla’s front, you note that her heartbeat is speeding up, her usually slow and easy breathing coming in short huffs. Making a pleased noise in the back of your throat, you assure Isla that you know that it’s hard, and that you don’t mind if she doesn’t give an answer upfront… but it’s still something she should consider deeply.", parse);
+	Text.NL();
+	Text.Add("<i>“Yeah… I’ll do that.”</i>", parse);
+	Text.NL();
+	Text.Add("Yes, she should. Slowly nuzzling the nape of her neck, you run your palms down and across Isla’s slim hips, one hand lingering on the gentle swell thereof while the other inches closer and closer to her mound. You can feel her shivering slightly - the poor thing is so tense as your fingers dig into the soft fur between her legs and easily find the hot, bare flesh of her virgin pussy. Isla arches her back into you, whimpering uncertainly at the strange sensations coursing through her limber body, her fluffy tail wrapping itself about your waist as you spread her legs wide to get unfettered access to her nethers.", parse);
+	Text.NL();
+	Text.Add("Best not to ruin the moment, then. Grinning, you decide to break in Isla slowly; while she may be adept at scaling cliffs and navigating the wilds, this is a completely different kettle of fish for the sable-morph altogether, and hence uncharted territory. Best to give her some space to adjust… tracing your fingers along the outside of her netherlips, you dig into her chest fur for the nipple you know will be there. Indeed, it is, and she lets out a surprised squeak as you gently roll the soft nub of flesh between thumb and forefinger until it swells and stiffens into a hard, pink pearl in response to the stimulation.", parse);
+	Text.NL();
+	Text.Add("Why, what’s so surprising?", parse);
+	Text.NL();
+	Text.Add("<i>“N-nothing,”</i> Isla manages to choke out. <i>“It’s just that… well, I’ve done this sort of thing for myself before, and I could never get myself to feel like what you’re doing to me right now… wait, why am I admitting this to you? What am I saying?”</i>", parse);
+	Text.NL();
+	Text.Add("She <i>is</i> so much cuter when flustered and embarrassed than when she’s all serious, isn’t she?", parse);
+	Text.NL();
+	Text.Add("<i>“H-hey! I’m not stupid, I’m just not ready, I think…”</i>", parse);
+	Text.NL();
+	Text.Add("No one’s ever truly ready for anything; you have just to roll with the punches as they come. If she likes, she can just think of this as another kind of exploration… she does like to explore, doesn’t she?", parse);
+	Text.NL();
+	Text.Add("Isla doesn’t reply, instead mewling piteously as you slide a finger into her virgin passage, invading the tight, heat-filled tunnel and wiggling about within. <i>“Ngh!”</i>", parse);
+	Text.NL();
+	Text.Add("Was that pain, or was that pleasure? It’s a little hard to tell, so you’ll just have to experiment a little more… she’d like that, wouldn’t she? You don’t give Isla the opportunity to manage a reply before sliding a second finger into her wet pussy, followed by a third.", parse);
+	Text.NL();
+	Text.Add("<i>“Ngggh!”</i> she cries, and you feel powerful muscles clamping down on your invading digits, a movement accompanied by the soft squelching sensation of fluids being squeezed. Heh, that athletic body of hers is good for something, after all. The sable-morph wriggles in your embrace, strong enough for her to feel the latent power in her muscles, and you’re curious at just how far the slightest sensation can take her. Is she really that much of a hair trigger?", parse);
+	Text.NL();
+	Text.Add("Only one way to find out. Your fingers still suffused in the heat of Isla’s womanly flower, you begin caressing her slick inner walls with your fingertips, feeling them pulse and undulate in response to your tender ministrations. Slowly, you turn that into a steady, rhythmic motion as you finger the sable-morph, digits pumping in and out of her snatch even as you wiggle them about inside her.", parse);
+	Text.NL();
+	Text.Add("She’s as much of a hair trigger as you hoped, heh. With a short, sharp yip that echoes off the mountainside, Isla forces the air from her lungs and convulses, her body wriggling against yours.", parse);
+	Text.NL();
+	Text.Add("<i>“C’mon… be gentle!”</i>", parse);
+	Text.NL();
+	Text.Add("What does she mean? You’re already being gentle - it’s her who’s being oversensitive. Besides, if she’s getting so much enjoyment out of just a little teasing, then you can only wonder what will happen when the main course arrives.", parse);
+	Text.NL();
+	Text.Add("Isla lets out a plaintive mewl at that, but another thrust of your fingers into her fresh, needy cunt shuts her up well enough. With the top of your palm mashed against her wet, dripping lips, you can feel her hymen with your fingertips, stretched out inside her. The temptation is there, but you decide to hold off for now - it’ll be so much more satisfying to claim her properly later. Instead, you continue fingering her - as your fingers slide in and out of the sable-morph’s gash, your thumb is also busy at work, caressing her outer lips in smooth, gentle touches in contrast to the increasingly frenzied nature of your thrusts. On her part, Isla sure is responding well to your tender ministrations, her body working to fulfill a need it didn’t realize it had until a few moments ago.", parse);
+	Text.NL();
+	Text.Add("All of a sudden, the sable-morph stiffens against you, her entire form trembling ever so slightly; with a smile, you search with your thumb under her hood and caress the throbbing clit you know you’ll find there.", parse);
+	Text.NL();
+	Text.Add("It’s too much for her. Isla twists and writhes, then a loud wail comes unbidden from her muzzle as streams of hot nectar flow freely from her honeypot and collect in your hand. Moaning and panting to catch her breath after the orgasm, Isla leans into you as you rub her slick nectar all over her inner thighs, spreading it evenly into her fur like jam on a slice of bread.", parse);
+	Text.NL();
+	Text.Add("Has she always been so… ah, sensitive?", parse);
+	Text.NL();
+	Text.Add("<i>“Ah, well…”</i> Is that a flush of heat you feel in her body? <i>“I wouldn’t rightly know, y’know… not as if I go round comparing this sort of thing with the other ladies, right? And it doesn’t feel the same way when I go about touching myself…”</i>", parse);
+	Text.NL();
+	Text.Add("It shouldn’t, and that’s a good thing.", parse);
+	Text.NL();
+	Text.Add("<i>“So, uh, I guess I really <b>am</b> more sensitive than most, like you said? I dunno how I feel ‘bout that…”</i>", parse);
+	Text.NL();
+	Text.Add("Oh, that’s not too pressing a question. Besides, you get the feeling that she’ll have made up her mind by the time you’re done with her.", parse);
+	Text.NL();
+	Text.Add("<i>“W-wait, there’s - oh. Ohh.”</i> Her words are cut of as one of your hands snakes over to engulf one of her baby feeders, massaging away at firm breastflesh. Hmm… they’re not <i>small</i>, the word wouldn’t do her bust justice - more firm and <i>compact</i>. Either way, they’re still very fun to play with, and Isla herself is more than willing to help out, pushing her chest forward and into your hands so you can get a good feel of her.", parse);
+	Text.NL();
+	Text.Add("Time to get to the meat of the matter, though. ", parse);
+	if(p1cock) {
+		Text.Add("Slowly, you rise from your sitting position, letting Isla fall out of your lap and onto all fours like the animal she is. She’s too far gone to even think of protesting as you grab ahold of her hips, tail instinctively lifting to display her wet cunt winking at you. The sable-morph’s breasts heave as she pants, tiny tongue and sharp little teeth clearly visible in her open mouth as she looks pleadingly over her shoulder.", parse);
+		Text.NL();
+		Text.Add("Time to break her in, then; it’s not as if she’s unwilling. ", parse);
+		parse["biggest"] = player.NumCocks() > 1 ? " biggest" : "";
+		if(strapon) {
+			Text.Add("Working as quickly as you can to seize the moment, you pull out your strap-on from your gear and fasten it against your groin.", parse);
+		}
+		else {
+			Text.Add("Taking hold of your[biggest] shaft and whipping it out, you stroke your member to full attention and get ready to do the deed.", parse);
+		}
+		parse["c"] = strapon ? "" : " mixing in with your own pre";
+		Text.Add(" It’s not as if you need any encouragement on your part, not with all that foreplay and the sight of sexy sable snatch drooling at you. Moving up to Isla’s presented ass, you lean in and grind your shaft along the folds of her honeypot, smearing nectar all along its length, a glistening layer of lubricant[c]. A tremble runs through her form, and she nestles her head in her hands, muffling the mewl that escapes her muzzle.", parse);
+		Text.NL();
+		Text.Add("<i>“C’mon…”</i> Isla’s words are strained, her voice breathless. <i>“Don’t keep a girl like me waiting already…”</i>", parse);
+		Text.NL();
+		parse["knot"] = knot ? "knot" : "hilt";
+		Text.Add("Oh fine, if that’s what she wants. Reaching forward and grabbing the sable-morph by the waist, you forcefully slide the entirety of your shaft into her offered pussy. Halfway through, there’s a brief resistance, but it gives way with a bit of insistent pushing, and you’re in up to the [knot].", parse);
+		Text.NL();
+		
+		Sex.Vaginal(player, isla);
+		isla.FuckVag(isla.FirstVag(), p1cock, 5);
+		player.Fuck(p1cock, 5);
+		
+		Text.Add("<i><b>“Ngggggh!</b></i> The cry is more pained than the others, and you quickly realize that you’ve deflowered the poor girl. Well, time to make up for it - securing your hold on Isla, you begin jackhammering yourself in and out of her, doing your best impression of a mindless, rutting beast, your bodies moving involuntarily against each other. She can’t see what you’re doing, and neither can you see her face, but with how enthusiastically she’s responding, she can definitely <i>feel</i> it.", parse);
+		Text.NL();
+		if(player.NumCocks() > 1) {
+			Text.Add("Your other shaft[s] slap[notS] heavily against her thin ass and slick thighs, spanking her in time with your thrusts. Isla yelps, and soon you’re dribbling pre from [itThem] too, smearing her calves and feet with your sticky slime.", parse);
+			Text.NL();
+		}
+		if(player.HasBalls()) {
+			Text.Add("At the same time, your [balls] heave and jiggle against her soft, silken fur, beginning to churn in preparation for their eventual release into the sable-morph’s warm insides.", parse);
+			Text.NL();
+		}
+		if(strapon) {
+			Text.Add("While it’s not as good as a real cock might be, you nevertheless get no small amount of satisfaction from the feeling of the strap-on’s base mashing and pounding against your groin in your frenzied mating, all that vigor soon causing warmth to well up in your groin.", parse);
+			Text.NL();
+		}
+		parse["c"] = strapon ? " even though you’re wearing a strap-on," : "";
+		Text.Add("With how sensitive she is, it doesn’t take long before Isla starts losing it. The sable-morph is propped up on a forearm, one of her hands busy rubbing at her small breasts and stiff nipples, teasing them and feeling how they’ve become taut with arousal. Her breathing comes as small whines and wails, and[c] you feel her pussy squeeze at your stiff shaft.", parse);
+		Text.NL();
+		Text.Add("<i>“Ngh… I said be gentle!”</i> Isla gasps. <i>“You’re… you’re going to make me scream!”</i>", parse);
+		Text.NL();
+		Text.Add("Hey, maybe that’s exactly what you’re gunning to do. Not that you can hold yourself back, not with surges of pleasure overwhelming your thoughts and forcing your hips back and forth. Isla’s words soon become realized as her entire body trembles, and she presses her ass all the way up against you, trying to take as much of you into her even as her insides clench tight against your shaft. Pained squeals escape her muzzle, quickly turning into muffled screams as she presses her face against the ground.", parse);
+		Text.NL();
+		if(strapon) {
+			Text.Add("With all the grinding against your netherlips, you can feel yourself growing more than a little aroused, a thin, slimy layer of honey gathering between your skin and the strap-on’s base. Though you’re nowhere as much of a hair trigger as Isla is, you get no small measure of enjoyment from the motions, especially when you’ve a partner as enthusiastic and flexible as the sable-morph.", parse);
+			Text.NL();
+			Text.Add("<i>“I can’t believe I’m losing my virginity to a girl…”</i> Isla pants as sweat gathers in her fur.", parse);
+			Text.NL();
+			Text.Add("Well, seeing is believing, as they say. Or in her case, maybe it’s more of a feeling. Either way, it’s happening, so it doesn’t matter whether she believes in it or not.", parse);
+			Text.NL();
+			Text.Add("The only reply you get is a lusty moan as Isla’s pleasure mounts again.", parse);
+			Text.NL();
+			Text.Add("Besides, isn’t it better this way? Then she won’t have to worry about accidentally getting pregnant.", parse);
+			Text.NL();
+			Text.Add("<i>“C’mon, don’t joke…<b>ngh</b>!”</i>", parse);
+		}
+		else {
+			Text.Add("It’s too much for you as well. With a final throb, your cock twitches in her tight, sensitive cunt and sends forth a flood of baby batter to complete her deflowering. You pump and pump away, and Isla moans as she feels your seed wash into her, hot and slippery.", parse);
+			Text.NL();
+			
+			var cum = player.OrgasmCum();
+			Scenes.Isla.Impregnate(player, cum);
+			
+			if(player.NumCocks() > 1) {
+				Text.Add("Your other shaft[s] blast[notS] away, too, jetting string after string of sperm down the back of her thighs to mix with her juices. It gets all over her legs and tail, marring that beautiful, dark fur of hers, but at least it’ll wash off well later. You hope.", parse);
+				Text.NL();
+			}
+			parse["knot"] = knot ? " and neatly tied to your knot" : "";
+			Text.Add("<i>“Spirits above,”</i> Isla gasps, the sable-morph utterly exhausted. Her body isn’t, though, and you feel pressure mounting about your shaft yet again as Isla’s powerful inner walls clamp down tight in preparation for yet another mind-blowing orgasm. When she’s finally done twisting and squealing, she sags to the ground, still impaled on your prick[knot].", parse);
+			Text.NL();
+			Text.Add("<i>“Ngh. Oh. Nggh.”</i> Clumsily, Isla tries to struggle back onto all fours, then gives up and just lets go of her body, allowing herself to slump to the ground. <i>“You came in me! I can’t believe… you came in me!”</i>", parse);
+			Text.NL();
+			Text.Add("What? What else was she expecting?", parse);
+			Text.NL();
+			Text.Add("<i>“I dunno, for you to pull out or something…<b>nggh</b>!”</i>", parse);
+		}
+		Text.NL();
+		
+		parse["knot"] = knot ? "your knot" : "the base of your shaft";
+		Text.Add("Seems like that last blow was a particularly nasty one. Isla squeaks and squeals, fingers clawing at the thin soil and grass in a fit of desperate need. Her slender body wriggles this way and that as more and more of her fluids force their way out of her, spurting forth to stain [knot]. As the tremors of her final orgasm die down, she slumps onto the ground, held up only by your hands about her warm midriff and your rod keeping her rear up high.", parse);
+		Text.NL();
+		Text.Add("Seems like you’ve truly gone and fucked the brains out of Isla, reduced the sable-morph to a pliant mound of putty that’s currently engulfing your shaft. With slow deliberation, you withdraw yourself from her, letting her hindquarters down on the grassy ground with the rest of her while that freshly broken, well-used gash of hers gapes up at you.", parse);
+		Text.NL();
+		Text.Add("A job well done, then.", parse);
+	}
+	else {
+		Text.Add("Slowly, so as not to alarm her, you begin spreading your fingers, forcing Isla’s gash wider and wider apart. Her nectar glistens on your fingers as cool air sweeps over it, and she squeaks in surprise as she realizes what you’re up to.", parse);
+		Text.NL();
+		Text.Add("<i>“What-what are you doing?”</i>", parse);
+		Text.NL();
+		Text.Add("Preparing to enter her, of course. Whatever did she think you were about to do? It may not be the so-called best way to introduce her to this whole business - if you had a real cock on you, perhaps you could start with the common and work your way up to the exotic - but it definitely is one of the safer ways of breaking her into this whole sex thing.", parse);
+		Text.NL();
+		Text.Add("<i>“B-but-”</i> the sable-morph begins, but is cut off by you bunching your fingers together and moving to slide your entire hand into her widened gash. Isla bites back a cry as her virgin insides struggle to take the strain, testing the limits of their stretchiness as your entire fist invades her cunt, your wrist grinding against her increasingly heat-swollen lips and rigid love-button.", parse);
+		Text.NL();
+		
+		isla.FuckVag(isla.FirstVag(), null, 5);
+		player.Fuck(null, 5);
+		
+		Text.Add("It wouldn’t hurt so much if she were more accommodating, but that’s her prerogative. As before, you begin feeling out Isla’s slick insides, your fingers spreading out and exploring those wet, heated walls. Impaled as she is on your forearm, the sable-morph herself makes little squeaking noises and wriggles atop your wrist as her delicate insides react to your presence.", parse);
+		Text.NL();
+		Text.Add("<i>“Ngh! No! I never dared…”</i>", parse);
+		Text.NL();
+		Text.Add("She never dared to what? If you stretch your fingers just right, you can feel her hymen, stretched tight across her love-tunnel. All it would take to break it would be a forceful push… but for now, you settle for prodding that fragile barrier with your fingertips again and again, rolling your palms all the while so her insides are always tightly pressed against your hand.", parse);
+		Text.NL();
+		Text.Add("Isla summons up enough strength to twist her body around and look at you, eyes wide and uncertain as she realizes what you intend to do; her small breasts heave with her labored breathing as a soft squeak escapes her muzzle. You give her a reassuring pat on the head with your free hand, then thrust quick and hard.", parse);
+		Text.NL();
+		Text.Add("<i><b>“Nggh!”</b></i> Isla whimpers as you deflower her in one swift move. You can <i>feel</i> her hymen tear and give way under your fingers, and the moment truly is one to be savored. There’s a little blood, but nothing out of the ordinary for a young, sprightly girl like her.", parse);
+		Text.NL();
+		Text.Add("Bet her own “experiments” never felt like this, did they?", parse);
+		Text.NL();
+		Text.Add("<i>“N-no…”</i>", parse);
+		Text.NL();
+		Text.Add("Nothing for it now. You need to do deeper! Keen as her cunt is, Isla is all too aware of your continued invasion into her depths, and the sable-morph practically yowls as you hit rock bottom, knuckles bumping against her cervix. From there, you start up a steady rhythm, pulling your fist out until the glistening appendage is barely prodding her labia, then ramming it in again. Back and forth, back and forth your arm goes, while the other roams about Isla’s body, exulting in how luxurious the sable-morph’s dark coat of fur is, how glossy her braid…", parse);
+		Text.NL();
+		Text.Add("On her part, Isla responds to your fist-fucking eagerly, her body running on automatic as she moves in time with your thrusts, trying to take as much of it into herself as she can, as if your forearm were a particularly thick cock. It’s quite the feat, really, considering how slim she is, but the squeaks and squeals coming from her muzzle assure you she’s having a good time.", parse);
+		Text.NL();
+		Text.Add("At last, the poor sable-morph can’t take it anymore - for the second time, or was it the third? Throwing back her head, her entire body stiffens as her cunt clamps down hard on your wrist, nectar bubbling and oozing out of her folds and crawling down your wrist as she screams, her voice echoing off the mountainside.", parse);
+		Text.NL();
+		Text.Add("Now, now, there’s a good girl. As an exhausted Isla sags against you, you gently kiss the back of her neck and finally extract your utterly soaked fingers from within her, wiping them off on the most luxurious sable fur you’ve ever seen.", parse);
+	}
+	Text.NL();
+	Text.Add("Panting and heaving, her maw open to reveal her small pink tongue and sharp little teeth, Isla pushes herself away from you and lies spread-eagled on the grassy ground for a moment to recover. Eyes trained on the sky above, chest heaving, she lies there for a good five minutes under your gaze as she waits for life to flow back into her limbs.", parse);
+	Text.NL();
+	Text.Add("<i>“Ooh. Ow.”</i>", parse);
+	Text.NL();
+	Text.Add("Did she like it?", parse);
+	Text.NL();
+	Text.Add("<i>“I feel all weird inside.”</i>", parse);
+	Text.NL();
+	Text.Add("That’s only to be expected, considering this was her first time.", parse);
+	Text.NL();
+	Text.Add("<i>“You’d know, I guess.”</i> Isla flicks her eyes to you, then refocuses her gaze upon the sky. <i>“Y’know, about what you said earlier?”</i>", parse);
+	Text.NL();
+	Text.Add("Yes?", parse);
+	Text.NL();
+	Text.Add("<i>“I’ll think deeply about it.”</i>", parse);
+	Text.NL();
+	Text.Add("You chuckle. Glad to have changed her mind on the issue.", parse);
+	Text.NL();
+	Text.Add("<i>“I didn’t say nothing about changing my mind, just that I’d give thought to it.”</i>", parse);
+	Text.NL();
+	Text.Add("In that case, she should think about it really deeply. She’s not that bad inside, both figuratively and literally… she’s just got to change her wrapping so that people will get past the outside and into the warm, gooey inside.", parse);
+	Text.NL();
+	Text.Add("<i>“Shucks… don’t talk dirty, you. I thought we were already done.”</i>", parse);
+	Text.NL();
+	Text.Add("Hey, you could go for another if she’s up for it.", parse);
+	Text.NL();
+	Text.Add("<i>“Ngh! No… not just yet. Need a little time… and got other stuff to do, too. Like cleaning up. And… and maybe when I don’t feel so odd.”</i>", parse);
+	Text.NL();
+	Text.Add("All right, then. You’ll give her a little alone time, but you’ll be back. That’s a promise.", parse);
+	Text.NL();
+	Text.Add("<i>“Oh, and [playername]?”</i>", parse);
+	Text.NL();
+	Text.Add("Yes?", parse);
+	Text.NL();
+	Text.Add("<i>“Thanks.”</i>", parse);
+	Text.NL();
+	Text.Add("Nah, it was your pleasure. With that, you stand up and are on your way off the plateau and down the mountain, giving a freshly deflowered sable-morph some time to ponder her fate.", parse);
+	Text.Flush();
+	
+	isla.relation.IncreaseStat(100, 10);
+	
+	world.TimeStep({hour: 4});
+	
+	Gui.NextPrompt(function() {
+		MoveToLocation(world.loc.Highlands.Hills);
+	});
+}
 
- */
+Scenes.Isla.Sex.Repeat = function() {
+	var parse = {
+		
+	};
+	
+	var womb = isla.PregHandler().Womb();
+	var preg = womb && womb.pregnant;
+	var stage = preg ? womb.progress : 0;
+	
+	Text.Clear();
+	if(world.time.hour >= 8 && world.time.hour < 17) {
+		if(stage >= 0.75) {
+			Text.Add("Isla looks away, rubbing her pregnant midsection. <i>“You sure ‘bout this? Even with me looking as I am?”</i>", parse);
+			Text.NL();
+			Text.Add("Of course you are. Honestly, she doesn’t need to be so conscious about her appearance; there’s no one else besides the two of you -", parse);
+			Text.NL();
+			Text.Add("<i>“That’s what I mean -”</i>", parse);
+			Text.NL();
+			Text.Add("- And since you’re the one who put that in there, what should it matter to you? If anything, it should make her all the <i>more</i> attractive in your eyes, as the mother of your cubs.", parse);
+			Text.NL();
+			Text.Add("<i>“Gee…”</i>", parse);
+			Text.NL();
+			Text.Add("Well?", parse);
+			Text.NL();
+			Text.Add("She smiles, twitching her small, round ears. <i>“Sure, but not now. I’m kinda busy at the moment, and gotta make sure there’s enough to eat tomorrow. I’m just kinda feeling always hungry and - no, I don’t want you to help me out on this. Gotta get some things done myself. Why don’t you come back after sundown? That’ll be a good time for us.”</i>", parse);
+		}
+		else {
+			Text.Add("<i> “Sorry,”</i> Isla replies. <i>“Don’t rightly have the time for that at the moment, too busy making the most of my daylight and seeing to it that I’ve something to eat tomorrow, amongst other things.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“But if you’re really interested… ask again after sundown, ‘kay? I’ll be around; it’s not as if there’s anywhere to go in these mountains.”</i>", parse);
+		}
+		Text.Flush();
+		
+		Scenes.Isla.Prompt();
+	}
+	else {
+		if(stage >= 0.75) {
+			Text.Add("<i>“Heh. You sure?”</i> Raising both hands to cradle her swollen tummy, Isla runs her delicate fingers over the taut skin and thin fur. <i>“Not that I’m not willing, but with this in the way…”</i>", parse);
+			Text.NL();
+			Text.Add("There are ways of having fun even when she’s in her condition. Besides, with someone as lithe and flexible as she is, that shouldn’t be a problem at all.", parse);
+			Text.NL();
+			Text.Add("<i>“Hah. Lithe.”</i> Closing her eyes, Isla closes her eyes and cradles her swollen tummy, and when she opens them again a new light’s crept into them. <i>“So! You feeling like anything special tonight?”</i>", parse);
+		}
+		else {
+			Text.Add("Isla looks pensive at the suggestion. <i>“Huh. Well, guess I’ve got a bit of time to burn at the moment. ‘S better than just waiting and staring while guarding, so, what’re you interested in doing?”</i>", parse);
+			Text.NL();
+			Text.Add("Heh. Her nonchalant act isn’t fooling anyone, not with her own body betraying her - the way her tail got agitated all of a sudden isn’t lost on you, and nor is the glint in those beady eyes of hers.", parse);
+			Text.NL();
+			Text.Add("Well, it’s as she said. What are you interested in doing today?", parse);
+		}
+		Text.Flush();
+		
+		Scenes.Isla.Sex.Prompt();
+	}
+}
+
+Scenes.Isla.Sex.Prompt = function() {
+	var p1cock = player.BiggestCock(null, true);
+	
+	var parse = {
+		
+	};
+	
+	//[PitchVaginal] //TODO
+	var options = new Array();
+	options.push({ nameStr : "Pitch Vaginal",
+		tooltip : "Pound her sensitive insides until she screams.",
+		func : Scenes.Isla.Sex.PitchVaginal, enabled : p1cock
+	});
+	Gui.SetButtonsFromList(options, true, function() {
+		Text.Clear();
+		Text.Add("<i>“Such a tease,”</i> she complains.", parse);
+		Text.Flush();
+		
+		Scenes.Isla.Prompt();
+	});
+}
+
+Scenes.Isla.Sex.PitchVaginal = function() {
+	var p1cock = player.BiggestCock(null, true);
+	var strapon = p1cock ? p1cock.isStrapon : null;
+	var knot = p1cock ? p1cock.Knot() : null;
+	
+	var parse = {
+		playername : player.name,
+		lowerarmordesc : player.LowerArmorDesc()
+	};
+	parse = player.ParserTags(parse);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
+	
+	var womb = isla.PregHandler().Womb();
+	var preg = womb && womb.pregnant;
+	var stage = preg ? womb.progress : 0;
+	var num = womb.litterSize;
+	
+	var figure = isla.Figure();
+	
+	Text.Clear();
+	if(stage >= 0.75) {
+		Text.Add("<i>“Ooof.”</i> The sable-morph cradles her massively swollen midsection, rubbing the stretched skin and feeling the cubs within squirm. <i>“Ya know you aren’t going to knock me up any further than you have already, right?”</i>", parse);
+		Text.NL();
+		Text.Add("Well, yes. It’s not as if you’re not aware of how these things work.", parse);
+		Text.NL();
+		Text.Add("<i>“Yeah, yeah, just checking. There’s all sorts of weird stuff and strange folks out there, y’know… I once heard of a bird who could get knocked up even while she was already carrying. Kept herself perpetually pregnant… silly bint got off on it.</i>", parse);
+	}
+	else if(preg) {
+		Text.Add("At your suggestion, Isla moves both hands down to her small baby bump. <i>“Ya still going through with it?”</i>", parse);
+		Text.NL();
+		Text.Add("Of course. It just makes her more attractive - and horny, of course. Did she think that’s escaped you?", parse);
+		Text.NL();
+		Text.Add("<i>“Gee, I think you’re only saying that ‘cause you’re the father, but hey.</i>", parse);
+	}
+	else if(strapon) {
+		Text.Add("<i>“Sure. I’ll take what ya’ve got, even if it isn’t real.”</i>", parse);
+		Text.NL();
+		Text.Add("So nice of her to be a good sport. She won’t regret this, you promise.", parse);
+		Text.NL();
+		Text.Add("<i>“Hey, it’s not as if I’m particularly hard to please. You oughta know that by now.”</i>", parse);
+	}
+	else { //real cock
+		Text.Add("<i>“I guess you’re looking to knock me up, huh?”</i>", parse);
+		Text.NL();
+		Text.Add("She sure is direct about it, huh? No, you’re looking to turn her into a quivering mound of fur and flesh, fucked senseless thanks to her incredibly sensitive insides. Whatever else happens… well, it’ll be a bonus on the side.", parse);
+		Text.NL();
+		Text.Add("Isla merely rolls her eyes and grins. <i>“Hah.</i>", parse);
+	}
+	Text.NL();
+	Text.Add("<i>“Well, any particular preference ya got?”</i>", parse);
+	Text.NL();
+	Text.Add("Why, you’ll go for the tried and true method of going about things - you’ll stick something long and hard into her, then pound away at her until she screams. After all, you know from personal experience that this is quite the surefire way to please her.", parse);
+	Text.NL();
+	parse["f"] = figure == Isla.Figure.Girly ? "small" :
+		figure == Isla.Figure.Womanly ? "generous" : "hefty";
+	Text.Add("Isla says nothing, but licks her muzzle, her stare growing more intense. Smiling, you push her tongue back into her mouth, then trail that finger down her chin, between her [f] breasts, down ", parse);
+	if(preg)
+		Text.Add("the fecund, womanly swell of her pregnancy", parse);
+	else
+		Text.Add("her trim, muscular tummy", parse);
+	Text.Add(" and eventually ending up on her loincloth. With exaggerated slowness, you circle her cunt a few times through the fabric with your finger, then begin tugging at the waistband of her loincloth.", parse);
+	Text.NL();
+	Text.Add("Isla doesn’t need telling twice. The sable-morph is more than willing to help you divest herself of her simple clothing, kicking it out of the way as it falls to the ground. Now it’s time for her to help you.", parse);
+	Text.NL();
+	Text.Add("Moving both eagerly and predatorily, Isla kneels before you and begins dealing with your [lowerarmordesc]. Her fingers aren’t really used to such things, but you give her the time she needs to get things going. ", parse);
+	if(strapon)
+		Text.Add("It takes longer than it should, your [lowerarmordesc] falls away, and you reach into your possessions and draw out your toy. Fake as it might be, Isla’s beady little eyes glint mischievously at the thought of that delightful, ramrod shaft plowing deep into her, and she hastens her movements in helping you affix the strap-on properly.", parse);
+	else
+		Text.Add("Finally, your [lowerarmordesc] falls to the ground, and you eagerly thrust your semi-hard shaft[s] into the sable-morph’s face. She deftly catches [itThem] between quick, nimble paws, and begins stroking you off energetically. It’s for her benefit, after all - the harder you get, the more fun she’ll be getting out of this whole exercise.", parse);
+	Text.NL();
+	Text.Add("All readied up now, you reach for the sable-morph’s arms and haul her upwards. Despite her strength, she’s quite light, and it’s not long before you’re staring each other eye-to-eye; wasting no more time, you lean forward and lock your lips with hers in a long, delightful kiss. Her muzzle may not be made for tongue-wrestling, but she tries to make up for it with sufficient enthusiasm in nuzzling you, that tiny nose of hers cool against your [skin].", parse);
+	Text.NL();
+	if(player.FirstBreastRow().Size() >= 2) {
+		Text.Add("At the same time, Isla worms her hands up to your chest and slides them against your [breasts], her strong yet delicate fingers squeezing and caressing away to the point that you moan straight into her face - and she hasn’t even reached your nipples yet.", parse);
+		Text.NL();
+		Text.Add("When she does, though, you feel it immediately. Her clever little fingers tweak, squeeze and press, and though she’s not as experienced as some, your body nevertheless reacts well enough, your already stiff nipples swelling even further as a flush of arousal radiates outwards from your chest.", parse);
+		Text.NL();
+	}
+	if(stage >= 0.4) {
+		Text.Add("Greedily, you gently rub Isla’s baby bump, feeling the life inside kick at your touch. Oof. Seems like the cub, or cubs, are going to be every bit as strong as she is… and does she remember how she got to be like this?", parse);
+		Text.NL();
+		Text.Add("<i>“Yeah, and you’re gonna do it to me again, aren’t ya?”</i>", parse);
+		Text.NL();
+		Text.Add("Every bit as thoroughly for the mommy that she’s going to be. It’ll be as much a delight for her as it will be for you.", parse);
+		Text.NL();
+	}
+	Text.Add("Sighing softly into Isla’s face, you move your hands down to the sable-morph’s tail. ", parse);
+	if(figure == Isla.Figure.Girly)
+		Text.Add("Her slender hips are firm and solid, and as you press down with your fingers on skin and fur you can feel muscle shift underneath. She may not look it, but there’s no doubt the sable-morph is a fine girl in her own right and has the strength to be just as vigorous when the situation calls for it.", parse);
+	else if(figure == Isla.Figure.Womanly)
+		Text.Add("Her widened hips and rounded butt have definitely improved her overall figure, and the difference is distinct under your fingertips as you reach for her firm, fleshy butt for a squeeze and pinch. No matter how many times you do it, it’s always worth that flustered squeak that it elicits from her muzzle.", parse);
+	else //curvy
+		Text.Add("Her broodmother-worthy hips and swollen rump are a delight to grope, testament to how the spring’s changed her. Feeling your fingers at her crack, the sable-morph thrusts her ass firmly into your grasp, giving you a delightful handful of tail.", parse);
+	Text.NL();
+	Text.Add("Ah, right. Now that she’s all softened up and ready, how do you want to proceed?", parse);
+	Text.Flush();
+	
+	world.TimeStep({minute: 30});
+	
+	Scenes.Isla.Sex.PitchVaginalPrompt(parse, {
+		p1cock  : p1cock,
+		strapon : strapon,
+		knot    : knot,
+		preg    : preg,
+		stage   : stage,
+		figure  : figure
+	});
+}
+
+Scenes.Isla.Sex.PitchVaginalPrompt = function(parse, opts) {
+	//[Against Wall][Mount Her][Go Under]
+	var options = new Array();
+	options.push({ nameStr : "Against Wall",
+		tooltip : "Pin the slippery sable to a wall and nail her good.",
+		func : function() {
+			Text.Clear();
+			if(opts.stage >= 0.75) {
+				opts.nowall = true;
+				Text.Add("As much as you might want to try, there’s no way you’re going to have standing sex with Isla, not with her massive pregnancy low, heavy, and wedged between the two of you. Maybe you should hurry up and figure out something else before your momentum is broken…", parse);
+				Text.Flush();
+				
+				Scenes.Isla.Sex.PitchVaginalPrompt(parse, opts);
+			}
+			else {
+				Scenes.Isla.Sex.PitchVaginalWall(parse, opts);
+			}
+		}, enabled : !opts.nowall
+	});
+	options.push({ nameStr : "Mount Her",
+		tooltip : "Get that slinky sable on all fours and breed her like the animal she is.",
+		func : function() {
+			Scenes.Isla.Sex.PitchVaginalMount(parse, opts);
+		}, enabled : true
+	});
+	options.push({ nameStr : "Go Under",
+		tooltip : "Let her get on top and ride you.",
+		func : function() {
+			Scenes.Isla.Sex.PitchVaginalMount(parse, opts);
+		}, enabled : true
+	});
+	Gui.SetButtonsFromList(options, false, null);
+}
+
+Scenes.Isla.Sex.PitchVaginalUnder = function(parse, opts) {
+	Text.Clear();
+	Text.Add("You give Isla a wink and ease yourself to the ground, stretching languidly and making sure the sable-morph is taking in your every motion. The soft grass is cool against your [skin] with dew, and your [cocks] jut[notS] proudly into the night air.", parse);
+	Text.NL();
+	if(player.FirstCock()) {
+		Text.Add("[ItThey] throb[notS] with anticipation, veins standing out thickly on [itsTheir] surface, a bead of pre already beginning to form on your [cockTip]. You can’t see it that well, but you can definitely <i>feel</i> it as it overflows and runs down your length, wet and slippery and upset about having gone to waste.", parse);
+		Text.NL();
+	}
+	Text.Add("Come on, then, there’s no need to be shy. She’s a spry, energetic young lass; if she wants to get fucked, she’ll have to work for it. There it is, waiting for her - all she has to do is to come and get nailed.", parse);
+	Text.NL();
+	parse["cl"] = opts.p1cock.Len() >= 25 ? Text.Parse(" taking in [itsTheir] sheer length,", parse) : "";
+	Text.Add("Isla looks down at your [cocks],[cl] and swallows hard. Slowly, she gets down on her knees, her legs straddling you, and shuffles up until your cock is poking against her ", parse);
+	if(opts.stage >= 0.75) {
+		Text.Add("heavily pregnant tummy. She has to hoist it above your stiff shaft in order to align her cunt with your [cockTip], and heaves a sigh of relief as she lets its weight rest on your chest. You have to admit it doesn’t feel half bad, the warm fullness of her firm, fur-covered and life-filled womb, your seed rapidly growing inside.", parse);
+		Text.NL();
+		Text.Add("<i>“Hunh,”</i> she says. <i>“I know I’m young an’ all, but this is starting to take it out of me.”</i>", parse);
+		Text.NL();
+		Text.Add("It’s a good thing she’s going to be popping soon, then. In the meantime, why doesn’t she get a little relief from her daily stresses?", parse);
+		Text.NL();
+		Text.Add("<i>“Relief… yeah, I sure could do with some of that.”</i>", parse);
+	}
+	else if(opts.preg) {
+		Text.Add("rounded baby bump. It’s not large to the point where it’s getting in the way, but staring you in the eyes as it is, it’s rather noticeable in all its budding glory. Isla settles on top of you, her hands on your shoulders for support, the petals of her womanly flower resting lightly on your [cockTip], and she gives you a very definitive look.", parse);
+		Text.NL();
+		Text.Add("<i>“My eyes are up here, hon.”</i>", parse);
+		Text.NL();
+		Text.Add("Of course they are, but you’re not exactly admiring her eyes, are you? No, you’re far too busy admiring your handiwork - that part of her is much more eye-catching than her eyes.", parse);
+		Text.NL();
+		Text.Add("<i>“Ya cheeky bastard.”</i>", parse);
+		Text.NL();
+		Text.Add("Well, if she doesn’t like it, then she’ll just have to <i>make</i> you pay attention, and there’s one certain way to do that.", parse);
+	}
+	else {
+		Text.Add("cunt. You can distinctly feel the moistness contained within, the hot slipperiness of her girl-cum already providing more than adequate lube for the furious fucking that you’re about to impart to her, and to say it’s arousing would be a terrible understatement of tragic proportions.", parse);
+		Text.NL();
+		Text.Add("She looks tense. She shouldn’t; this should be a fun exercise for everyone involved, right?", parse);
+		Text.NL();
+		Text.Add("<i>“Mind if I make the opening move?”</i>", parse);
+		Text.NL();
+		Text.Add("Why, you’d practically <i>invited</i> her to do it. The conclusion’s never really in doubt… with how much of a hair trigger her cunt is, the only question is how many times she’ll be mewling and squeaking as you fuck her brains out.", parse);
+		Text.NL();
+		Text.Add("Something flashes in Isla’s beady eyes. <i>“Here I go, then!”</i>", parse);
+	}
+	Text.NL();
+	Text.Add("Arching her back and pushing her hips forward, Isla grinds her cunt along[oneof] your length[s]. The sable-morph’s crotch fur brushes against your [skin], her increasingly wet and puffy folds a delight against your [cock]. You can feel them throb and pulse as they kiss your [cock], those petals of her womanly flower, painting her girl-cum all over your shaft. You ache to thrust away, your instincts raring to get going already, but you make an effort to hold back and wait until the going gets good to unleash your full fury.", parse);
+	Text.NL();
+	Text.Add("When you’re sufficiently lubed up, Isla slowly leans her weight on you, guiding you into the tight walls of her pussy. Slowly, she takes your [cockTip] into her, then withdraws until you’re almost completely out, then plunges in onto your shaft again. In such a manner is the entirety of your [cock] consumed - bit by bit, inch by inch, Isla’s cunt devours your man-meat until you’re almost hilted into her.", parse);
+	if(opts.figure >= Isla.Figure.Womanly) {
+		parse["f"] = opts.figure == Isla.Figure.Womanly ? "wide" : "broodmother-worthy";
+		Text.Add(" Her [f] hips easily accommodate your length and girth - a happy side-effect of their widening thanks to the transformative spring’s powers.", parse);
+	}
+	Text.NL();
+	
+	Sex.Vaginal(player, isla);
+	isla.FuckVag(isla.FirstVag(), opts.p1cock, 3);
+	player.Fuck(opts.p1cock, 3);
+	
+	if(opts.knot) {
+		Text.Add("A furious downthrust, and her netherlips gape wide to admit your knot, eliciting a short, sharp exhalation on Isla’s part.", parse);
+		Text.NL();
+		Text.Add("<i>“Ngh!”</i>", parse);
+		Text.NL();
+		parse["f"] = opts.figure == Isla.Figure.Girly ? "slender" : opts.figure == Isla.Figure.Womanly ? "curvaceous" : "luscious";
+		Text.Add("You pant and rock under the [f] sable-morph, electric tingles travelling through the base of your shaft as you feel your knot swell and tie her neatly. Isla squeals as she rocks back and forth on your cock, gripping your shoulders tightly to steady herself.", parse);
+	}
+	else {
+		Text.Add("A savage downthrust, and she’s taken in every last bit of rod you have to offer, her velvety pussy walls clenching down hard on your [cock] as the tingles of the sudden penetration fade, allowing her to regain some of her breath.", parse);
+		Text.NL();
+		Text.Add("<i>”Ngh!”</i>", parse);
+	}
+	Text.NL();
+	Text.Add("Now, it’s time for you to make your move. Working up a passionate, powerful rhythm, you begin to drill into Isla from below, feeling her love-juices seep down and out from her tight, muscular cunt and stain your [skin]. Isla yelps openly, her fingers clenching tight about your shoulders, which only encourages you to go faster.", parse);
+	Text.NL();
+	parse["f"] = opts.figure == Isla.Figure.Girly ? "small" : opts.figure == Isla.Figure.Womanly ? "generous" : "hefty";
+	Text.Add("Up and down. Up and down. Her [f] breasts jiggle with the motions, ", parse);
+	if(opts.stage >= 0.75)
+		Text.Add("her massive baby bump heaves in time with your movements, sending her nipples to leaking, ", parse);
+	Text.Add("her cunt begins to reflexively milk your [cock], pulsating and shivering along the entirety of the impaled length. As Isla’s pleasure mounts, you can see her gaze grow distant and jaws slack, until she’s completely lost in the heat of the moment, lithe, wiry muscles keeping her balanced while her mind is elsewhere.", parse);
+	Text.NL();
+	Text.Add("Her first orgasm comes readily enough; almost as if in preparation, her whole body tenses, then she squeezes her eyes shut and lets out a loud squeal that echoes out over the highlands. You can feel her insides desperately milking your [cock], convulsing with the throes of pleasure that’re rippling through her body.", parse);
+	Text.NL();
+	Text.Add("Not that you’re going to give her any time to recover. Encouraged by your lover’s enthusiastic response, you redouble your efforts, jackhammering away into her cunt, an effort that’s made all the easier by gravity.", parse);
+	
+	var cockSize = opts.p1cock.Volume();
+	
+	if(cockSize >= 400)
+		Text.Add(" With your [cock] as large as it is, it creates a distinct rise in Isla’s lower belly. It visibly squirms about in her like a live thing as she continues to ride you, causing the poor sable-morph no small amount of consternation.", parse);
+	else if(cockSize >= 100)
+		Text.Add(" Churning about within Isla’s heated depths, your [cock] creates a bulge in the sable-morph’s lower belly as she rides you. She may not be able to see it like you can, but she can definitely <i>feel</i> how your size’s amplifying your every motion, turning her into a wriggling mess of pleasure.", parse);
+	Text.NL();
+	Text.Add("Seems like she didn’t get very far, despite having had the initiative. Or then again, was she planning on losing from the outset?", parse);
+	Text.NL();
+	Text.Add("<i>“Ngh!”</i>", parse);
+	Text.NL();
+	Text.Add("Well, was she?", parse);
+	Text.NL();
+	Text.Add("<i>“Ngh…”</i>", parse);
+	Text.NL();
+	Text.Add("You’ll take that as a yes, then. With a final burst of energy, you try and get poor Isla back to climaxing again as quickly as you can, putting your back into it. Isla yowls like a… well, she <i>is</i> a stuck animal, nailed on your [cock] as she is, so that’s hardly surprising. Squelching and slapping noises rise from the both of you as you quickly gather momentum once more, furiously assaulting her insides.", parse);
+	Text.NL();
+	Text.Add("<i>“Ngh… no! Slow down!”</i>", parse);
+	Text.NL();
+	Text.Add("Her protests only encourage you to do just the opposite, and with the sable-morph being the hair trigger she is, it can’t have been more than another five minutes before she’s screaming her lungs out again, writhing on you as her second orgasm wracks her body.", parse);
+	Text.NL();
+	if(player.FirstCock()) {
+		Text.Add("<i>“Fuck,”</i> Isla gasps, sweat soaking her dark, lustrous fur. <i>“Fuuuuck. Just cum in me already, I want to fucking feel your cum in me.", parse);
+		if(opts.preg)
+			Text.Add(" No reason not t’ do it… you’ve knocked me up good already.", parse);
+		Text.Add("”</i>", parse);
+		Text.NL();
+		Text.Add("Her wish is your command - well, judging by the ominous feeling welling up at the base of your [cocks], looks like she’s going to see her desires realized whether she likes it or not. With a grunt, you expel your seed straight into Isla’s heated cunt, the sable-morph gripping your hips with her thighs and pulling you in close to her.", parse);
+		Text.NL();
+		
+		var cum = player.OrgasmCum();
+		Scenes.Isla.Impregnate(player, cum);
+		
+		if(opts.preg) {
+			parse["knot"] = opts.knot ? "knot" : "shaft";
+			Text.Add("Your seed hits her cervix, then floods outwards of her cunt, oozing out around your [knot] and mixing with her honeypot’s nectar to create the stickiest, slipperiest mess you’ve made in some time. The stuff flows over your join crotches, down onto the ground, and leaves you lying in a puddle of… stuff. Seems like you’ll be needing a wash-up later.", parse);
+		}
+		else if(cum > 6) {
+			parse["knot"] = opts.knot ? "your knot" : "the base of your shaft";
+			Text.Add("You gasp as you feel your seed rushing up your [cocks], your hips bucking of their own accord as you send shot after shot of cum straight into Isla’s cunt and womb. Slowly, her belly starts to swell outwards, growing bigger and bigger; eventually, she’s ended up with a large, rounded tummy, giving you a lovely preview of what might very well happen should your seed take hold. With so much of it blasted straight into her womb, it’s hard to imagine it <i>not</i> doing so. The leftovers, unable to fit into her insides, spurt out and about [knot], splattering onto your crotch and oozing down your hips, leaving you lying in a small puddle of your own spunk and her feminine juices.", parse);
+		}
+		else if(cum > 3) {
+			Text.Add("With a groan, you feel your cock twitch inside Isla one last time, and begin shooting off your copious load directly into her cunt and womb. There’s no small amount of satisfaction as you see her belly begin to swell, rounding outwards in a nice little paunch, a preview of how she’ll end up should your seed take.", parse);
+		}
+		else {
+			Text.Add("Panting, you groan, tingles of electricity running down your spine, and begin pumping your load straight into Isla’s baby-making hole. It’s not a ridiculous amount, but it’s definitely more than enough to knock her up should she happen to be fertile right now. The sensation of release, of pumping your baby batter straight into a receptive womb - it’s all you can do not to gasp too loudly as Isla’s muscular inner walls milk you for all you’re worth.", parse);
+		}
+		Text.NL();
+		if(player.NumCocks() > 1)
+			Text.Add("Your other shaft[s2] erupt[notS2] at the same time as well, spraying strings of thick cum all over Isla’s front and painting her dark, luxurious fur with your essence, leaving the poor thing an utter mess. ", parse);
+		Text.Add("At last, though, you’re done, and you’re utterly spent. She clearly takes no small measure of delight in feeling your cum inside her, hot and slippery, and sags against you with a sigh of relief.", parse);
+		Text.NL();
+		Text.Add("<i>“Damn. No matter how many times y’ go and cum inside me, it still makes me feel really damn satisfied.”</i>", parse);
+		Text.NL();
+		Text.Add("You… you’re glad you could please.", parse);
+	}
+	else {
+		Text.Add("Mashing and grinding against your own petals, the base of your strap-on has your own juices flowing freely from your [vag] with wanton abandon. The sheer amount of energy that Isla is putting into this effort only makes it all the better - breathlessly so, if you might say.", parse);
+		Text.NL();
+		Text.Add("The climax, when it comes, takes you completely by surprise; one moment, a great prickling surge is running through your body from head to toe, and the next thing you know, copious amounts of girl-cum are oozing out from the straps holding your shaft in place, making the mess even larger. You moan like the whore you are, shuddering under Isla as the both of you ride out the storm together.", parse);
+		
+		var cum = player.OrgasmCum();
+	}
+	Text.NL();
+	
+	Scenes.Isla.Sex.PitchVaginalExit(parse, opts);
+}
+
+Scenes.Isla.Sex.PitchVaginalMount = function(parse, opts) {
+	var figure = opts.figure;
+	
+	Text.Clear();
+	Text.Add("Placing your hands on her shoulders, you push gently and guide Isla to her knees, then to all fours. Isla is only more than eager to please, and soon she’s on her hands and knees, tail swishing from side to side as you run your fingers along her spine.", parse);
+	if(opts.stage >= 0.75)
+		Text.Add(" Her heavily swollen baby bag hangs under her, so heavy that it almost touches the ground. It wobbles and jiggles slightly as she moves, the weight of the cubs within continually testing the firm muscle of her womb.", parse);
+	else if(opts.preg)
+		Text.Add(" The sable-morph’s pregnancy hangs under her noticeably, a round bump that protrudes downward from her midriff. You smile and reach down to caress it, eliciting a happy purring sound from the back of her throat.", parse);
+	Text.Add(" Greedily, you grab one of her taut asscheeks and give it a firm squeeze, which only serves to arouse her further.", parse);
+	Text.NL();
+	Text.Add("<i>“Wanna count how many times you can make me scream in one sitting?”</i>", parse);
+	Text.NL();
+	parse["f"] = figure == Isla.Figure.Girly ? "firm" : figure == Isla.Figure.Womanly ? "rounded" : "lush";
+	parse["c"] = player.NumCocks() > 1 ? Text.Parse("the largest of your [cocks]", parse) : Text.Parse("your [cock]", parse);
+	Text.Add("From how the juices are running from her cunt and soaking her crotch fur, you’re pretty sure she’s already well on her way to the next one. Giving your lover’s [f] behind a firm swat, you get down behind her and inspect what’s to be had. Isla backs up a little, thrusting her ass towards you to present herself better, and it’s only when you’re satisfied with her tight little asshole and glistening, swollen cunt that you get [c] lined up, ready to drill into her at any moment.", parse);
+	Text.NL();
+	Text.Add("You tease your [cockTip] against her puffy, wet lips - back and forth, back and forth - and grin as she moans and begs to get fucked, wriggling about like the slinky thing that she is. ", parse);
+	if(opts.preg)
+		Text.Add("Being as pregnant as she is hasn’t diminished the sable-morph’s libido any - if nothing else, it’s made her even more horny than ever. Wriggling in your grasp, Isla squeaks pleadingly, her little pink tongue hanging out of her open maw even as she grabs a milk-laden breast with a hand, shamelessly groping away until drops of pearly white goodness leak from her swollen nipples and seep into her fur. ", parse);
+	Text.Add("Seems like she’s really worked up and ready, then - grunting softly, you thrust into your needy lover. She arches her back and stiffens her muscles, crying out as your [cockTip] pushes its way past her folds and into her heated depths, burying itself well and deep as you finally mount her like she deserves.", parse);
+	Text.NL();
+	
+	Sex.Vaginal(player, isla);
+	isla.FuckVag(isla.FirstVag(), opts.p1cock, 3);
+	player.Fuck(opts.p1cock, 3);
+	
+	Text.Add("<i>“Nggh!”</i>", parse);
+	Text.NL();
+	Text.Add("No need to hold back, you reassure the poor girl. Just scream… but she’ll have to keep count, since you won’t be.", parse);
+	Text.NL();
+	Text.Add("With that, you begin to drill her furiously, putting as much animalistic enthusiasm and vigor into the exercise as befits the position. Isla yowls, pausing only to gasp before wordless, animal noises start coming from the back of her throat. Her mouth is open, exposing those sharp little teeth of hers, and her little pink tongue is hanging out of her mouth as she pants in ecstasy, oozing a thin strand of drool onto the grassy ground.", parse);
+	Text.NL();
+	Text.Add("<i>“Ngh! Ngh!”</i>", parse);
+	Text.NL();
+	Text.Add("Why hold back? She’s already a hopeless mess. Just let it go. Let it all go…", parse);
+	Text.NL();
+	parse["f"] = figure == Isla.Figure.Girly ? "perky" : figure == Isla.Figure.Womanly ? "rounded" : "heavy";
+	parse["c"] = player.NumCocks() > 1 ? Text.Parse(", your unused cock[s2] slapping against the backs of her thighs as you continue drilling into her", parse) : "";
+	parse["k"] = opts.knot ? "r knot" : "";
+	parse["ks"] = opts.knot ? "s" : "";
+	Text.Add("Her hips are moving in time with yours to take as much of you into her as she can, her [f] breasts sway under her as you fuck her with everything you’ve got[c]. Her cunt squeezes and clenches about your shaft as you[k] grind[ks] against the lips of her womanly flower, the entirety of her body responding to the bestial fucking she’s receiving.", parse);
+	Text.NL();
+	Text.Add("Heh, the fact that she’s so firm and athletic only makes the fucking all the better - you can’t imagine a frail wallflower having the kind of energy she’s putting into being fucked by you. Bending a little further over her, you catch hold of the sable-morph’s swaying braid, tugging insistently on it until she half-turns about to look at you.", parse);
+	Text.NL();
+	Text.Add("Isla’s dark, beady eyes are half-glazed over, but what’s left of her wits that isn’t already addled looks back at you pleadingly. Hmm… maybe you’ve teased her enough… or maybe not. Pulling her flexible body up to you by her braid, you lean in and plant a kiss on Isla’s muzzle before letting her fall back onto all fours. That done, you gather yourself and begin drilling her fast and furiously, trying to push her to the finish line as quickly as you can.", parse);
+	Text.NL();
+	parse["f"] = figure == Isla.Figure.Girly ? "slim" : figure == Isla.Figure.Womanly ? "protruding" : "prominent";
+	Text.Add("The effect is immediate. Unable to withstand the relentless assault on her delicate, sensitive pussy, Isla wails like she’s been caught in a trap, her paws scrabbling at the ground and throwing up little crumbs of earth in the throes of her passion. Her body is flush with heat that you can distinctly feel, even as you grab her [f] hips to steady yourself in your assault.", parse);
+	Text.NL();
+	Text.Add("She’s the first one to orgasm yet again; her entire body locks up and stiffens about your [cock], a drop of blood welling up at her muzzle where she’s bitten it in a bid not to cry out.", parse);
+	Text.NL();
+	if(player.FirstCock()) {
+		Text.Add("<i>“Fuuuuuck,”</i> Isla moans. <i>“Damn ya, just finish it and cum inside me already. I… I dunno if I can take it a third time without passing out o’ something.", parse);
+		if(opts.preg)
+			Text.Add(" Damn it, there’s no reason for you not to, I’m already knocked up, so just hurry up and get it done.", parse);
+		Text.Add("”</i>", parse);
+		Text.NL();
+	}
+	Text.Add("You stay like that for a few seconds, hips locked together as she rides out her orgasm, then as she sags with exhaustion and exhilaration, it’s your turn to take things to their natural conclusion.", parse);
+	Text.NL();
+	parse["k"] = opts.knot ? ", her pussy giving only the most token of resistances before your knot pops in, tying her" : "";
+	Text.Add("Bashing your hips against her ass, you thrust into her one last time[k]. ", parse);
+	if(player.FirstCock()) {
+		Text.Add("As the last of her girl-cum slides down her thighs, it’s your turn to shoot off your thick, heated load into her, letting the sable-morph get a distinct taste of your virility.", parse);
+		Text.NL();
+		
+		var cum = player.OrgasmCum();
+		Scenes.Isla.Impregnate(player, cum);
+		
+		if(opts.preg) {
+			Text.Add("Since she’s already carrying your cubs, though, Isla’s cervix holds tight against the flood of spunk that’s battering against it. With nowhere else to go, it eventually creeps out of her cunt by way of seeping in between your rod and dripping onto the ground between her knees, forming a large, sticky puddle.", parse);
+		}
+		else if(cum > 6) {
+			Text.Add("Isla moans as your spunk rapidly floods her cunt and womb, pushing past her cervix to invade her well and good. With each shot of seed you send into her, the sable-morph’s belly swells further and further outwards until she’s rounded like a ball and barely able to keep touch with the ground to maintain her balance.", parse);
+			Text.NL();
+			Text.Add("Heh, with how virile this load of yours must be, hopefully she doesn’t swell up with your cubs to this extent. It’d certainly be a load on her…", parse);
+		}
+		else if(cum > 3) {
+			Text.Add("Isla gasps as you blast off your sperm into her, quickly filling her cunt and womb with your baby batter. Slowly, her flat belly begins to push outward until she’s sporting a nice, rounded tummy swollen with your cum, letting you get a preview of how she’s going to end up in the event your seed takes root in her waiting womb.", parse);
+			Text.NL();
+			Text.Add("You do have to admit, she looks better this way.", parse);
+		}
+		else {
+			Text.Add("With a loud grunt, you blast of wave after wave of seed into Isla’s waiting cunt. The sable-morph squeaks and squeals as she feels the hot slipperiness enter her body, and you can feel her insides milking you for all you’re worth. With such encouragement, it doesn’t take you long to drain everything you’ve got into your lover, who is more than willing to accept what you’ve got.", parse);
+		}
+	}
+	else {
+		Text.Add("Even though your shaft isn’t real, the sensations which it’s causing are very much so. Pummeling and grinding against your own crotch even as you pound away into Isla’s cunt, it’s with some reluctance that you let yourself slow down. Sure, you might not have gotten off like she did - to be fair, she <i>is</i> a hair trigger - but you still nevertheless enjoyed yourself quite thoroughly.", parse);
+	}
+	Text.NL();
+	Text.Add("Alas, all good things must come to an end, and it seems like forever before you can gather the strength to slide out of her. ", parse);
+	if(opts.knot)
+		Text.Add("Your knot pulls free of Isla with an audible squelch and pop, and she slumps onto her side, panting and heaving in her utterly worn-out state.", parse);
+	else
+		Text.Add("You pull free of an exhausted Isla with a soft squelch, cum slowly oozing from her well-used hole. The sable-morph lets out a gentle sigh of satisfaction, and slumps onto her side on the grass.", parse);
+	Text.NL();
+	
+	Scenes.Isla.Sex.PitchVaginalExit(parse, opts);
+}
+
+Scenes.Isla.Sex.PitchVaginalWall = function(parse, opts) {
+	Text.Add("Grabbing Isla by the shoulders, you whirl her around, leading her to the nearest mountain face and pinning her against the cool, mossy rock.", parse);
+	if(opts.preg)
+		Text.Add(" The sable-morph’s small baby bump protrudes from her midriff, but it isn’t large enough yet to be too much of an impediment for what you’re intending to do to her. Having blatant proof of her fertility - or conversely, your virility - so close only serves to excite you more, and you lean in to plant another kiss on her muzzle.", parse);
+	Text.NL();
+	Text.Add("Isla makes a bit of a show pretending to escape, wriggling this way and that as she squeaks in mock terror, her braid swaying in time with the motions of her head. Hah. There’s no escape for a juicy little morsel like her, you tell her, and you’re going to nail her straight through and into the rock face beyond.", parse);
+	Text.NL();
+	Text.Add("<i>“Oh no! Anything but that!”</i>", parse);
+	Text.NL();
+	Text.Add("She sure is a slippery little thing, but now you’ve caught her well and good. Time for her punishment!", parse);
+	Text.NL();
+	Text.Add("Another squeak escapes Isla’s muzzle, and she involuntarily moves her hips up against the stiffness of your rod, grinding the petals of her womanly flower across its head and leaving a faint sheen of moistness in its wake. You smile at the steady warmth building in your groin, then reach down and slide a finger into her sensitive cunt. Isla responds immediately, her breath quickening and inner walls tensing at your invading digit, and she whimpers softly as you withdraw, wanting more.", parse);
+	Text.NL();
+	Text.Add("Shouldn’t keep her waiting, then. Moving closer until there’s but an inch or two separating your bodies, you work your stiff rod in between her thighs, teasing lightly at her increasingly swollen lips. Isla shudders, clenching the pit of her stomach, and barely stifles a loud squeal as you thrust forward and nail her squarely where it counts.", parse);
+	Text.NL();
+	
+	Sex.Vaginal(player, isla);
+	isla.FuckVag(isla.FirstVag(), opts.p1cock, 3);
+	player.Fuck(opts.p1cock, 3);
+	
+	Text.Add("Pressed against the wall as she is, Isla’s whimpers turn to moans as you start up a steady rhythm, spreading her legs ever further to encourage your furious thrusts.", parse);
+	Text.NL();
+	parse["f"] = opts.figure == Isla.Figure.Girly ? "small" :
+		opts.figure == Isla.Figure.Womanly ? "shapely" : "generous";
+	Text.Add("<I>“Ya may have me pinned down, but you’ll never break me!”</i> Isla gasps, even as you press her further against the wall until her hands are spread out and head is thrown back against it. Each firm movement of your hips sends her [f] breasts jiggling, and you can’t help but smile at the mock bravado she’s putting on despite the orgasmic sensations that must be coursing through her body at the moment.", parse);
+	Text.NL();
+	Text.Add("Oh? Is that an invitation for you to do your best, then? Well, since she asked so nicely, guess you’ll just have to oblige her wishes. Even from up here, you can get a good whiff of the scents carried by the sable-morph’s crotch fur and leaking pussy, and it only serves to excite you more.", parse);
+	if(!opts.strapon) {
+		Text.Add(" Your [cocks] begin[notS] to feel painfully full with all the blood that’s rushing into them - you can practically <i>feel</i> your pulse making your man-meat[s] twitch in anticipation, eager to blast off a full load already.", parse);
+		Text.NL();
+		Text.Add("Patience, patience. Good things come to those who wait.", parse);
+		Text.NL();
+	}
+	Text.Add("Isla’s sensitive pussy doesn’t fail you, quick to betray her with its hair trigger nature. Wailing, her entire body convulses as her first orgasm washes over her, and she whips her hands forward to grab your shoulder as she rides out the wave of pleasure. Squeezing and clenching about your shaft, her cunt only encourages you to keep up the pounding you’re giving the poor sable-morph.", parse);
+	Text.NL();
+	Text.Add("So much for not breaking her, eh?", parse);
+	Text.NL();
+	Text.Add("She gasps. <i>“Ya shouldn’t underestimate me. I’m still in the fight.”</i>", parse);
+	Text.NL();
+	Text.Add("All right, then. Let’s see how she deals with <i>this</i>!", parse);
+	Text.NL();
+	parse["c"] = player.NumCocks() > 1 ? " your unused shaft[s2] slapping against her soaked thighs," : "";
+	Text.Add("Greedily, you pick up the pace,[c] your midriff pounding against ", parse);
+	if(opts.preg)
+		Text.Add("her small baby bump", parse);
+	else
+		Text.Add("hers", parse);
+	parse["knot"] = opts.knot ? "to your knot" : "in";
+	Text.Add(" as you mash your crotch against hers, hilting yourself all the way [knot] as you seek to breed her as thoroughly as possible. ", parse);
+	var cockSize = opts.p1cock.Volume();
+	if(cockSize >= 400)
+		Text.Add("The phallic bulge from your massive member is blatant on her lower belly as her cunt struggles to contain as much cock as it can, and although she’s fairly flexible as a sable-morph, she’s not <i>that</i> flexible.", parse);
+	else if(cockSize >= 100)
+		Text.Add("You can’t help but notice that your member is creating a gentle bulge on Isla’s lower belly with each downstroke, her insides seeking to accommodate your hefty shaft as best as they can. Sure, she’s a sable-morph and hence quite flexible, but even she doesn’t go <i>that</i> far.", parse);
+	else
+		Text.Add("Isla squeaks and wriggles as she moves herself into a better position to serve as your sheath. She feels wonderfully tight and juicy with powerful muscles equipped to clench, suck and squeeze, no doubt the result of her rather active lifestyle.", parse);
+	Text.NL();
+	Text.Add("When Isla finally climaxes for the second time, her pussy goes into overdrive, squeezing and milking at your cock as she cries out for you to breed her. Pressing her firmly against the wall, you drive hard into her a few more times, making sure she gets her wish good and hard.", parse);
+	Text.NL();
+	if(player.FirstCock()) {
+		Text.Add("With a grunt of effort, you throw your head back, feeling your groin clench at the familiar sensation of cum welling up at the base of your cock. Before you know it, you’re blasting spurt after spurt of hot seed into Isla’s cunt, seeking to fill the sable-morph with delicious baby batter. ", parse);
+		
+		var cum = player.OrgasmCum();
+		Scenes.Isla.Impregnate(player, cum);
+		
+		if(opts.preg) {
+			Text.Add("Considering that she’s stuffed with your cubs, though, it doesn’t look like any of your spunk’s forcing its way in, even considering the high pressure it’s under. Instead, your seed forces its way out of her cunt, her folds stretching just enough to let it seep out and drip onto the ground.", parse);
+			Text.NL();
+			Text.Add("Bah, no matter. Not as if it wasn’t going to waste anyway, was it?", parse);
+		}
+		else if(cum > 6) {
+			Text.Add("Isla moans and lets out a scream of delight, going limp against the rock face behind her. Deep inside, you feel her womb preparing itself to accept your load, and accept it she does - you keep on pumping and pumping away, your massive load leaving the poor sable girl so bloated and full with all that hot seed locked inside her womb.", parse);
+			Text.NL();
+			Text.Add("Once you finally manage to withdraw, she flops to the floor, too stuffed to do anything but lie against the wall and rub her paws over her overstuffed womb as your sperm slowly leaks out of her cunt.", parse);
+		}
+		else if(cum > 3) {
+			Text.Add("Isla gasps and squeals out loud, her knees buckling as her poor, sensitive cunt finally gives in and orgasms yet another time. Deep within her, you can feel her cervix stretch wide to accept the torrent’s of hot seed you’re unleashing into her - although the pressure is such that a little escapes and trickles down her thighs, most of it gets where it needs to go and stays there.", parse);
+			Text.NL();
+			Text.Add("Your large load leaves the sable-morph with a full and bloated tummy that she happily strokes as the throes of orgasm begin to die down, panting with unfocused eyes as she struggles to catch her breath.", parse);
+		}
+		else {
+			Text.Add("You may not have that much cum to spare, but Isla’s body is determined to not let a single drop go to waste. Her insides clench and unclench as she milks your shaft for all it’s worth, her body instinctively doing everything it can to get itself pregnant.", parse);
+			Text.NL();
+			Text.Add("Seeing her so enthusiastic, you drive into her hard a few more times, trying to save your seed a little travelling distance, then slowly withdraw from her wet, oozing pussy.", parse);
+		}
+		if(player.NumCocks() > 1) {
+			Text.NL();
+			Text.Add("Your other shaft[s2] explode[notS2] with sperm, spraying [itsTheir2] load all over your lover’s groin and thighs, staining her fur.", parse);
+		}
+	}
+	else {
+		Text.Add("Without a real shaft, you don’t have any seed with which to fill Isla up with, but at least you can still savor the satisfaction of driving your lover to cum over and over again until she’s utterly spent and exhausted, a limp meat-puppet impaled on your strap-on. When you’re certain she’s had enough, you reluctantly withdraw from her dripping cunt, leaving her to slump against the rock face behind the two of you.", parse);
+	}
+	Text.NL();
+	
+	Scenes.Isla.Sex.PitchVaginalExit(parse, opts);
+}
+
+Scenes.Isla.Sex.PitchVaginalExit = function(parse, opts) {
+	Text.Add("<i>“Oog… enough…”</i>", parse);
+	Text.NL();
+	Text.Add("Yeah, now that the rush is beginning to die down, you’re starting to feel more than a little spent, too. Isla displays no shame in sprawling out on the ground beside you, making little happy noises in the back of her throat as she catches her breath. You see no reason not to join her, running your hands through what little clean fur she has left, toying with the adornments tied therein.", parse);
+	Text.NL();
+	Text.Add("Out of nowhere, Isla sighs out loud and hugs you, ", parse);
+	if(opts.stage >= 0.4)
+		Text.Add("pressing her baby bump against your midriff and ", parse);
+	Text.Add("making more happy noises in the back of her throat. You feel her soft little tongue run against your neck as the sable-morph licks you, and it’s hard not to feel warm and fuzzy inside as the both of you bask in the afterglow of sex. Isla still smells of herself, but you’ve definitely added something of your scent to hers, still lingering on her body… or at least, until she goes to wash herself off.", parse);
+	Text.NL();
+	if(player.FirstCock() && !opts.preg) {
+		Text.Add("<i>“Welp. Chances are you probably just knocked me up, ya bastard,”</i> Isla whispers softly.", parse);
+		Text.NL();
+		if(!(isla.flags["Talk"] & Isla.Talk.SexVag)) {
+			Text.Add("Is that going to be a problem?", parse);
+			Text.NL();
+			Text.Add("<i>“Naah, else I wouldn’t have agreed to fuck you.”</i> Isla sighs again and presses her body against you, trying to get comfortable. <i>“To be honest, since a number of the marriage alliances have been out of the clan the last few rounds, we do need some fresh blood… I’ll just keep the little tykes ‘round till they’re weaned and bring them back to the tribe when I next pop by to get stuff. Know plenty of older folk who’d love another cub, but can’t have one anymore.”</i>", parse);
+			Text.NL();
+			Text.Add("Well, if she’s sure about it. Won’t that injure her chances of being paired off at the next gather, though?", parse);
+			Text.NL();
+			Text.Add("Isla chuckles. <i>“What, a young lady like me with proof of her fertility injure her chances? Waving the fact that I can have cubs in their face would actually <b>improve</b> them.”</i>", parse);
+			Text.NL();
+			Text.Add("All right, then. She’s set your mind at ease.", parse);
+		}
+		else {
+			Text.Add("That’s a good thing. Eden could use a whole lot more adorable sable-morphs like her.", parse);
+			Text.NL();
+			Text.Add("<i>“Hey, you’ve already gotten into my pants. There’s no need t’ flatter me anymore.”</i>", parse);
+			Text.NL();
+			Text.Add("What, does she think so lowly of herself that the only reason someone might flatter her would be to fuck her and knock her up?", parse);
+			Text.NL();
+			Text.Add("<i>“I know, I know…”</i>", parse);
+		}
+		Text.NL();
+		
+		isla.flags["Talk"] |= Isla.Talk.SexVag;
+	}
+	Text.Add("Now, she really ought to be getting some sleep. Tomorrow’s still going to come along, and work isn’t going to get itself done.", parse);
+	Text.NL();
+	Text.Add("<i>“Yeah, but stay with me a moment, ‘kay?”</i>", parse);
+	Text.NL();
+	Text.Add("Sure, you can do that. Reaching up to give Isla an affectionate pat on the head, you gather her into your arms, and she’s fast asleep before long. Her soft, silky fur is the best blanket one could hope for against the cold highlands nights, and before too long you’ve drifted off yourself, too.", parse);
+	Text.Flush();
+	
+	isla.relation.IncreaseStat(100, 5);
+	
+	world.StepToHour(6);
+	
+	Gui.NextPrompt();
+}
