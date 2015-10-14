@@ -62,8 +62,12 @@ Halloween.IsSeason = function() {
 }
 
 Halloween.prototype.Restore = function() {
-	// Restore player/oarty
+	// Restore player/party
+	_.remove(world.EntityStorage, function(e) {
+		return e == player;
+	});
 	player = new Player(this.player);
+	world.EntityStorage.push(player);
 	party = new Party(this.party);
 }
 
