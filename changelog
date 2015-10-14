@@ -5,6 +5,14 @@ CHANGELOG for Fall of Eden
                   CURRENT
 --------------------------------------------
 
+Version 0.4m2
+-------------
+* Fixed a parser bug in spring description
+
+--------------------------------------------
+             PREVIOUS VERSIONS
+--------------------------------------------
+
 Version 0.4m
 ------------
 * Fixed a bug in Halloween which would cause your party to duplicate
@@ -27,10 +35,6 @@ Version 0.4m
 * Removed Kyna from the game (no longer available even in debug)
 * Added Isla the sable morph. Find her at the highland spring (yes, you need to do Asche's third quest first)
  - The spring itself has transformative effects, turning you toward a ferret morph
-
---------------------------------------------
-             PREVIOUS VERSIONS
---------------------------------------------
 
 Version 0.4l
 ------------
