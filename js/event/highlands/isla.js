@@ -1554,7 +1554,7 @@ Scenes.Isla.Sex.PitchVaginalPrompt = function(parse, opts) {
 	options.push({ nameStr : "Go Under",
 		tooltip : "Let her get on top and ride you.",
 		func : function() {
-			Scenes.Isla.Sex.PitchVaginalMount(parse, opts);
+			Scenes.Isla.Sex.PitchVaginalUnder(parse, opts);
 		}, enabled : true
 	});
 	Gui.SetButtonsFromList(options, false, null);
