@@ -41,6 +41,9 @@ Orifice.prototype.FromStorage = function(storage) {
 	this.virgin          = storage.hasOwnProperty("virgin") ? parseInt(storage.virgin) == 1 : this.virgin;
 }
 
+Orifice.prototype.Capacity = function() {
+	return this.capacity.Get();
+}
 Orifice.prototype.Cap = function() {
 	return this.capacity.Get() * this.stretch.Get();
 }

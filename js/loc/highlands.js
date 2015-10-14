@@ -141,3 +141,10 @@ world.loc.Highlands.Spring.events.push(new Link(
 		Scenes.Isla.Approach();
 	}
 ));
+world.loc.Highlands.Spring.events.push(new Link(
+	"Bathe", true, true,
+	null,
+	function() {
+		Scenes.Isla.Bathe();
+	}
+));

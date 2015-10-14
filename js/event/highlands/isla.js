@@ -21,6 +21,8 @@ function Isla(storage) {
 	this.flags["Figure"] = Isla.Figure.Girly;
 	this.flags["Kids"] = 0; //Number of kids birthed (by the PC)
 
+	this.springTimer = new Time();
+	
 	if(storage) this.FromStorage(storage);
 }
 Isla.prototype = new Entity();
@@ -43,11 +45,11 @@ Isla.Talk = { //Bitmask
 	SexVag : 4 //First time pitch vag
 };
 
-/* TODO
 Isla.prototype.Update = function(step) {
 	Entity.prototype.Update.call(this, step);
+	
+	this.springTimer.Dec(step);
 }
-*/
 
 Isla.Available = function() {
 	return asche.flags["Tasks"] & Asche.Tasks.Spring_Visited;
@@ -71,6 +73,8 @@ Isla.prototype.FromStorage = function(storage) {
 	
 	if(this.flags["Talk"] & Isla.Talk.Sex)
 		this.FirstVag().virgin = false;
+	
+	this.springTimer.FromStorage(storage.ST);
 }
 
 Isla.prototype.ToStorage = function() {
@@ -80,6 +84,8 @@ Isla.prototype.ToStorage = function() {
 	this.SavePregnancy(storage);
 	this.SavePersonalityStats(storage);
 	this.SaveFlags(storage);
+	
+	storage.ST = this.springTimer.ToStorage();
 	
 	return storage;
 }
@@ -1958,5 +1964,356 @@ Scenes.Isla.Sex.PitchVaginalExit = function(parse, opts) {
 	
 	world.StepToHour(6);
 	
+	Gui.NextPrompt();
+}
+
+// Isla's spring
+
+Isla.Bathing = {
+	Quick  : 0,
+	Medium : 1,
+	Long   : 2
+};
+
+Scenes.Isla.Bathe = function() {
+	var parse = {
+		
+	};
+	parse = player.ParserTags(parse);
+	
+	Text.Clear();
+	if(!isla.springTimer.Expired()) {
+		Text.Add("You consider taking another dip in the transformative spring, but it’s probably not a good idea when you’re still all raw and tingly from your last soak. Sure, Isla might pull you out if you faint from the heat, but who knows how long she might take getting to you?", parse);
+		Text.Flush();
+		
+		Gui.NextPrompt();
+		
+		return;
+	}
+
+	Text.Add("You step out over the spring’s clear waters and peer into its depths. Are you sure you want to have anything to do with it at the moment? If you soak in this, it’s likely that you’ll come out different than when you went in.", parse);
+	Text.Flush();
+	
+	//[name]
+	var options = new Array();
+	options.push({ nameStr : "Quick Dip",
+		tooltip : "Take a quick dip in the spring.",
+		func : function() {
+			Text.Clear();
+			Text.Add("Deciding to take just a quick dip, you remove your [armor] and wade out into the hot spring. The waist-high water is delightfully warm, and it’s a pleasure to be able to wash off the dust and dirt of your journey - and of course, any other things which you might’ve picked up along the way. You dunk your head in a few times, making sure you’re thoroughly rinsed all over, and a strange warm tingling creeps into your [skin] as the spring’s transformative magic takes effect…", parse);
+			
+			world.TimeStep({minute: 10});
+			
+			isla.springTimer = new Time(0,0,1,0,0);
+			
+			Scenes.Isla.BatheTF(parse, Isla.Bathing.Quick);
+		}, enabled : true
+	});
+	options.push({ nameStr : "Relax",
+		tooltip : "Have a longer, more relaxing and transformative soak.",
+		func : function() {
+			Text.Clear();
+			Text.Add("Since you’re here, you might as well settle in and relax for a while. Stripping yourself of your [armor], you toe the spring’s bubbling surface - delightfully warm, as expected. Even the best bathhouses in Rigard don’t compare to this… or at least, when it comes to the water.", parse);
+			Text.NL();
+			Text.Add("In you go, up to your neck; you find a nice spot to lie against with your head out of the water, and close your eyes to relax. The water churns and swirls about your body, running across every nook and cranny of your form, seeking out the dust and sweat of your travels and carrying it away.", parse);
+			Text.NL();
+			Text.Add("Then you feel it - a pleasant buzz against your [skin] as the spring’s transformative magic begins, seeping through your limbs and into your bones…", parse);
+			
+			world.TimeStep({minute: 30});
+			
+			isla.springTimer = new Time(0,0,1,0,0);
+			
+			Scenes.Isla.BatheTF(parse, Isla.Bathing.Medium);
+		}, enabled : true
+	});
+	options.push({ nameStr : "Long Soak",
+		tooltip : "Take a long soak in the spring, letting its magic take full effect.",
+		func : function() {
+			Text.Clear();
+			Text.Add("Ah… you’ve come all the way up here to use this thing, and you’re getting the most out of it. Yes, you’re not getting out of this little spring until you’re thoroughly clean and every bit of you has been scrubbed clean and raw. Throwing off your [armor] without a care in the world, you lower yourself into the water, feeling the bubbles fizz delightfully against your body and the rising steam work its way into your lungs, leaving you feeling refreshed both inside and out.", parse);
+			Text.NL();
+			Text.Add("Once you’re somewhat adjusted to the hot spring’s waters, you wade out towards the middle, crouching a little such that the water comes up to your chin, and begin scrubbing. Being able to take a bath rivaling that offered by Rigard’s finest bathhouses is a treat, to make an understatement, and you close your eyes and lose yourself in the simple wonder of being able to feel <i>clean</i>.", parse);
+			Text.NL();
+			Text.Add("Of course, getting clean isn’t the only thing happening to you. With such a vigorous and enthusiastic scrubbing taking place, it isn’t long before you feel the transformative tingle of the spring’s magic at work…", parse);
+			
+			world.TimeStep({hour: 1});
+			
+			isla.springTimer = new Time(0,0,1,0,0);
+			
+			Scenes.Isla.BatheTF(parse, Isla.Bathing.Long);
+		}, enabled : true
+	});
+	Gui.SetButtonsFromList(options, true, function() {
+		Text.Clear();
+		Text.Add("On second thought, you’d rather avoid the spring for the moment. It’s not going anywhere, should you change your mind.", parse);
+		Text.Flush();
+		
+		Gui.NextPrompt();
+	});
+}
+
+Scenes.Isla.BatheTF = function(parse, level) {
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+	
+	var scenes = new EncounterTable();
+	
+	scenes.AddEnc(function() {
+		Text.NL();
+		Text.Add("A warm tingling sensation envelopes your form, tendrils of heat working their way into your body from the water. It’s not an unpleasant feeling - in fact, quite the opposite, and you feel renewed and rejuvenated by the experience.", parse);
+		Text.NL();
+		Text.Add("Which is not surprising, considering that the spring’s magic has given you an entirely new body - that of a long, slinky ferret, complete with fur and limbs to match.", parse);
+		var body = player.LowerBodyType();
+		parse["odd"] = (body == LowerBodyType.Taur) ? "tauric" : player.IsNaga() ? "serpentine" : "odd";
+		if(body != LowerBodyType.Humanoid)
+			Text.Add(" Gone is your [odd] lower half, replaced by a wiry pair of legs and light feet.", parse);
+		
+		player.body.torso.race = Race.Ferret;
+		player.body.legs.race = Race.Ferret;
+		player.body.arms.race = Race.Ferret;
+		
+		return true;
+	}, 1.0, function() {
+		return !player.body.torso.race.isRace(Race.Ferret) ||
+			!player.body.legs.race.isRace(Race.Ferret) || 
+			!player.body.arms.race.isRace(Race.Ferret); });
+	scenes.AddEnc(function() {
+		Text.NL();
+		Text.Add("As you dunk your head beneath the water’s surface to scrub at your [hair], your head’s overcome by a strange sensation. A cursory examination, followed by a look at your reflection in the spring confirms your suspicions - your ears now sit on top of your head, the very likeness of a ferret.", parse);
+		var ant = player.HasAntenna();
+		var horns = player.HasHorns();
+		if(ant || horns) {
+			var h = "";
+			if(ant) h += "antennae";
+			if(ant && horns) h += " and ";
+			if(horns) h += "horns";
+			parse["h"] = h;
+			Text.Add(" Even as you look on, your [h] shrink and dwindle, receding into your head with the most queer sensation until they’re completely gone.", parse);
+		}
+		
+		player.Ears().race = Race.Ferret;
+		TF.RemoveAppendage(player.Appendages(), AppendageType.horn, -1);
+		TF.RemoveAppendage(player.Appendages(), AppendageType.antenna, -1);
+		
+		return true;
+	}, 1.0, function() {
+		return !player.Ears().race.isRace(Race.Ferret) ||
+			player.HasAntenna() || player.HasHorns(); });
+	scenes.AddEnc(function() {
+		Text.NL();
+		Text.Add("Basking in the steam rising from the hot spring, you feel it gather on your face, wetting your skin. And then there’s a strange tightness, not altogether unpleasant…", parse);
+		Text.NL();
+		Text.Add("Wait, a tightness? You open your eyes and study your reflection in the spring’s surface to find that your face has stretched into a long, pointed muzzle - a ferret’s, to be exact.", parse);
+
+		player.body.head.race = Race.Ferret;
+		
+		return true;
+	}, 1.0, function() { return !player.body.head.race.isRace(Race.Ferret); });
+	scenes.AddEnc(function() {
+		Text.NL();
+		Text.Add("As you continue your soak in the pool, a sudden intense warmth builds up at the base of your spine. Before you realize it, you’re sporting a furry new tail, soaked from the spring’s water.", parse);
+		
+		TF.SetAppendage(player.Back(), AppendageType.tail, Race.Ferret, Color.brown);
+		
+		return true;
+	}, 1.0, function() { var tail = player.HasTail(); return !tail || !tail.race.isRace(Race.Ferret); });
+	
+	var IncompleteCockTf = function() {
+		var changed = false;
+		_.each(player.AllCocks(), function(c) {
+			if(!c.race.isRace(Race.Ferret)) changed = true;
+			if(c.Knot()) changed = true;
+		});
+		if(player.Genitalia().Sheath()) changed = true;
+		return changed;
+	}
+	
+	scenes.AddEnc(function() {
+		var knot = false;
+		_.each(player.AllCocks(), function(c) {
+			if(c.Knot()) knot = true;
+			c.race = Race.Ferret;
+			c.knot = 0;
+		});
+		var sheath = player.Genitalia().Sheath();
+		player.Genitalia().SetCover(Genitalia.Cover.NoCover);
+		
+		Text.NL();
+		Text.Add("Gently, the water churns about your [cocks] - if you didn’t know better, you’d have imagined the spring itself was giving you a slow-paced handjob. It certainly <i>feels</i> that way, with your [cocks] stiff and at attention - without warning, your [cocks] [isAre] suddenly infused with a burst of heat, and you watch with your breath in your throat as the spring’s magic has its way with your shaft[s]. ", parse);
+		if(knot || sheath) {
+			var ks = "";
+			if(knot) ks = "your knot deflating";
+			if(knot && sheath) ks = " and ";
+			if(sheath) ks = "your sheath receding into your body with a soft slurp";
+			parse["ks"] = ks;
+			Text.Add("You can’t help but let out a moan, [ks]. ", parse);
+		}
+		parse["c"] = player.NumCocks() > 1 ? "several fine specimens of" : "a fine specimen of";
+		Text.Add("When the changes are finally over, you’re left with [c] mustelid manhood, just waiting to be used.", parse);
+		
+		return true;
+	}, 1.0, function() { return player.FirstCock() && IncompleteCockTf(); });
+	scenes.AddEnc(function() {
+		Text.NL();
+		Text.Add("The spring’s warm flow soothes your body, and you lie back to better enjoy the mineral-rich waters and their touch against your [skin]. As you do, though, you can’t help but notice that the spring’s magic is working away on your figure, progressively trading bulk for lean, wiry mass that’s no less powerful.", parse);
+		
+		player.body.muscleTone.DecreaseStat(0, 0.25, true);
+		
+		return true;
+	}, 1.0, function() { return player.body.muscleTone.Get() > 0; });
+	
+	if(level >= Isla.Bathing.Medium) {
+		var IncompleteCockLenTf = function() {
+			var changed = false;
+			_.each(player.AllCocks(), function(c) {
+				if(c.Len() < 23) changed = true;
+			});
+			return changed;
+		}
+		
+		scenes.AddEnc(function() {
+			Text.NL();
+			Text.Add("With a gasp of pleasure, you feel the magical spring’s currents take hold of your [cocks], quickly stroking [itThem] to attention and sending tingles running down [itsTheir] length[s]. Before long, [itsTheyre] painfully erect, struggling to contain the exquisite sensations within - then a loud moan of release escapes your lips as your [cocks] surge[notS] forward, gaining an inch or thereabouts in length.", parse);
+			
+			_.each(player.AllCocks(), function(c) {
+				c.length.IncreaseStat(23, 2.5);
+			});
+			
+			return true;
+		}, 1.0, function() { return IncompleteCockLenTf(); });
+		scenes.AddEnc(function() {
+			Text.NL();
+			Text.Add("For a moment, you feel your scrotum grow a little tighter. At first, you think it might just be the heat, but no - your balls have indeed plumped up a little with a surge of extra virility, rendering your seed more apt to take root in a welcoming womb.", parse);
+			player.Balls().size.IncreaseStat(6, level);
+			
+			return true;
+		}, 1.0, function() { return player.HasBalls() && player.Balls().BallSize() < 6; });
+		scenes.AddEnc(function() {
+			Text.NL();
+			Text.Add("As you lie in the delightfully warm water, tingles begin to spread across your chest, and a strange sensation of pressure begins to build behind your [nips]. As you look down, you catch sight of your breasts swelling, maturing before your very eyes. Bigger and bigger, rounder and rounder - slow but steady, the growth and pressure doesn’t stop until you’re a cup size bigger than you were when you went in.", parse);
+			player.FirstBreastRow().size.IncreaseStat(12.5, 2.5);
+			
+			return true;
+		}, 1.0, function() { return player.FirstBreastRow().Size() < 12.5; });
+		scenes.AddEnc(function() {
+			Text.NL();
+			Text.Add("You shudder as a shiver runs up your spine, and some things shift around in your lower belly. Shortly after, a sudden wave of lust races over you, and when you’ve finally recovered, you notice that your pussy lips have swollen and thickened - probing your insides with a finger reveals that you’re definitely more stretchy than before.", parse);
+			
+			player.FirstVag().capacity.IncreaseStat(8, 2);
+			
+			return true;
+		}, 1.0, function() { return player.FirstVag() && player.FirstVag().Capacity() < 8; });
+		scenes.AddEnc(function() {
+			Text.NL();
+			Text.Add("With a sudden rush of heat, a faint itching sensation grows in your lower body, slowly reaching around to envelop your [butt]. Reaching down to grab your hips, you can <i>feel</i> them growing wider, your stance widening even as your bones reshape themselves to better allow for things both coming in and going out of your pelvis.", parse);
+			Text.NL();
+			Text.Add("Not to be outdone, your butt swells a little, working with your newly-endowed hips to give you a more fertile appearance courtesy of the spring.", parse);
+			
+			player.body.torso.hipSize.IncreaseStat(HipSize.VeryWide, 5);
+			player.Butt().buttSize.IncreaseStat(9, 3);
+			
+			return true;
+		}, 1.0, function() { return player.body.torso.hipSize.Get() < HipSize.VeryWide || player.Butt().Size() < 9; });
+		scenes.AddEnc(function() {
+			Text.NL();
+			Text.Add("As you lean back to relax in the water, a queer sensation of tingling change washes over you, leaving your head spinning. It only lasts for a moment or two, but when you’ve righted yourself and gathered your senses, you catch sight of yourself in the water - yeah, you definitely look more girly than you did moments ago.", parse);
+			player.body.femininity.IncreaseStat(1, 0.25);
+			
+			return true;
+		}, 1.0, function() { return player.body.femininity.Get() < 1; });
+		scenes.AddEnc(function() {
+			Text.NL();
+			if(player.PregHandler().BellySize() < 0.1) {
+				Text.Add("The longer you stay in the pool’s waters, the hotter your body seems to become, especially in your lower belly where it’s the most prominent, forming a subtle warm glow. At the same time, you can feel a small hard lump pushing outward, and a tingling grows deep within your [breasts]…", parse);
+				Text.NL();
+				Text.Add("Curious, you let your hands wander down to your waist, and discover that your once flat belly has grown into a slight swell - barely perceptible, but still there. Uh-oh - seems like that last sexual encounter you had wasn’t as safe as you thought it’d be. You’re going to be a mommy now, and the spring’s magic was just kind enough to let you know.", parse);
+			}
+			else {
+				Text.Add("With a contented sigh, you lean back into the hot spring and let the water lap over your [belly]. The soothing warmth is absolutely divine, with the way it’s working all the aches and pains out of your body, and filling it with vitality. So much vitality, in fact, that you soon become aware of a gentle pressure within your lower belly. As your hands run over your midsection, you feel it swelling and growing, your womb becoming a little heavier with life. Seems like you’re going to be giving birth a little sooner than expected…", parse);
+			}
+			_.each(player.PregHandler().PregnantWombs(), function(womb) {
+				womb.progress += 0.15;
+			});
+			
+			return true;
+		}, 1.0, function() { return player.PregHandler().IsPregnant(); });
+	}
+	if(level >= Isla.Bathing.Long) {
+		scenes.AddEnc(function() {
+			Text.NL();
+			var cock;
+			if(player.FirstVag()) {
+				Text.Add("All of a sudden, a strange surge of energy pulses within your groin - maybe you’ve dallied in the spring too long. Before you can finish that thought, though, you feel the energy gather and dive straight into your clit, which then trembles uneasily. You groan, clutching at your groin as your love button begins to pulse and grow, rapidly enlarging into a phallus of no small size and breaking away from your cunt.", parse);
+				Text.NL();
+				Text.Add("With a final surge of lust, your now fully-erect cock displays its functionality by blasting off a couple strings of cum, even as a new clit grows in your cunt to occupy the recently-vacated space.", parse);
+				
+				cock = player.FirstVag().CreateClitcock();
+			}
+			else {
+				Text.Add("The spring’s magic finally takes hold, and the changes begin. You moan and squirm as the skin on your groin bulges and shifts, erupting into a sensitive new phallus of considerable size. Thick and painfully erect, it announces its arrival by firing off a few strings of cum to land sloppily in the pool, then lets up a little, although you can still feel it pulsing with excitement.", parse);
+				
+				cock = new Cock();
+			}
+			cock.length.base = 18;
+			cock.thickness.base = 4;
+			cock.race = Race.Ferret;
+			player.body.cock.push(cock);
+			
+			return true;
+		}, 1.0, function() { return !player.FirstCock(); });
+		scenes.AddEnc(function() {
+			Text.NL();
+			Text.Add("You moan and pant as a churning sensation gathers beneath your [cocks]. Without warning, a sudden build-up of pressure has you gasping for breath, and then a pair of freshly-grown balls pop out forcefully to hang heavy on your groin.", parse);
+			Text.NL();
+			Text.Add("Gingerly, you reach down and cup your new balls. Yep, they’re real all right - goodly-sized, sensitive, and ready to get down to business.", parse);
+			
+			player.Balls().count.base = 2;
+			
+			return true;
+		}, 1.0, function() { return player.FirstCock() && !player.HasBalls(); });
+		scenes.AddEnc(function() {
+			Text.NL();
+			Text.Add("Heat slowly gathers in your groin, and you wriggle and squirm in place as the sensations become more intense. Without warning, a line of tender flesh rises in your groin, followed by a tremendous wave of pleasure as it parts, your feminine flower opening for business and ready to receive seed.", parse);
+			Text.NL();
+			Text.Add("The changes aren’t over, though. Your lower belly clenches and twists as internal changes begin taking place, and by the end of it all you’re feeling quite horny, flush with the desire to have a child growing in your new womb.", parse);
+			
+			player.body.vagina.push(new Vagina());
+			
+			return true;
+		}, 1.0, function() { return !player.FirstVag(); });
+		scenes.AddEnc(function() {
+			Text.NL();
+			
+			if(player.PregHandler().BellySize() < 0.1) {
+				Text.Add("Without warning, a small, hard knot forms in the pit of your stomach, and your insides churn most unsettlingly. The sensation travels up your torso, too, and rapidly wells up in your chest as a warm tingling.", parse);
+				Text.NL();
+				Text.Add("Then it all fades away, and nothing happens for a second or two before your [belly] and [breasts] begin pushing outwards, ballooning up until you’re left with a small but noticeable potbelly and a perkier, fuller chest.", parse);
+				Text.NL();
+				Text.Add("Huh. Guess that last sexual encounter you had took, and the spring was nice enough to notify you of it…", parse);
+			}
+			else {
+				Text.Add("Out of nowhere, you get the sudden need to rub your [belly]. It doesn’t make any sense at first, but the urge is practically overwhelming, and before long you’re running your hands over the stretched skin of your midriff, delighting in how good it feels to be stroking and caressing the swell of your pregnancy.", parse);
+				Text.NL();
+				Text.Add("As your pleasure peaks, you become vaguely aware of a faint pressure coming from within your womb; you watch in amazement as your pregnancy advances rapidly, the spring’s magic pushing the moment of birth nearer and nearer. At last, though, the pleasure fades, and with it the strange growth, leaving you considerably more pregnant than when you got into the spring.", parse);
+			}
+			_.each(player.PregHandler().PregnantWombs(), function(womb) {
+				womb.progress += 0.3;
+			});
+			
+			return true;
+		}, 1.0, function() { return player.PregHandler().IsPregnant(); });
+	}
+	
+	var changed = false;
+	//1-5 effects
+	_.times(_.random(1,3) + level, function() {
+		changed |= scenes.Get();
+	});
+	
+	if(!changed) {
+		parse["man"] = player.mfTrue("man", "woman");
+		Text.Add("Ah, that was quite the fine soak! Although you don’t look any different, you definitely feel like a new [man] inside and out, completely rejuvenated thanks to the spring’s therapeutic waters. In a decidedly better mood than you went in with, you get dressed and gather your things.", parse);
+	}
+	
+	Text.Flush();
 	Gui.NextPrompt();
 }
