@@ -539,7 +539,7 @@ Scenes.Isla.TalkPrompt = function() {
 			Text.NL();
 			Text.Add("You grin. Probably because you don’t know how important her job is and hence cheerfully disturbs her seclusion, eh? ", parse);
 			Text.NL();
-			Text.Add("Isla looks you up and down, then returns the grin. “Yeah, I guess. But there we have it. I like to think I’m a pretty down-to-earth girl, so there we have it.”</i>", parse);
+			Text.Add("Isla looks you up and down, then returns the grin. <i>“Yeah, I guess. But there we have it. I like to think I’m a pretty down-to-earth girl.”</i>", parse);
 			Text.Flush();
 			
 			isla.relation.IncreaseStat(40, 2);
