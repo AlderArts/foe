@@ -8,6 +8,7 @@ CHANGELOG for Fall of Eden
 Version 0.4m2
 -------------
 * Fixed a parser bug in spring description
+* Fixed a bug in the new Lei scene where the PC would duplicate
 
 --------------------------------------------
              PREVIOUS VERSIONS

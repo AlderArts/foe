@@ -1858,7 +1858,7 @@ Scenes.Lei.GuardStalkingEntry = function(parse, nv) {
 	}
 	
 	var comps = party.CloneParty();
-	comps = _.without(comps, miranda, kiakai);
+	comps = _.without(comps, miranda, kiakai, player);
 	//#if non-Kiai/non-Miranda companions are present
 	if(comps.length > 0) {
 		parse["nv"] = nv ? "deep shadows" : "blank darkness";
