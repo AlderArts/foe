@@ -99,7 +99,7 @@ Scenes.Layla.SexFirstTime = function() {
 	Text.NL();
 	Text.Add("<i>“What now?”</i> she asks innocently.", parse);
 	Text.NL();
-	if(layla.flags["Skin"] != 0) {
+	if(layla.flags["Skin"] == 0) {
 		Scenes.Layla.FirstTimeSkinShift();
 	}
 	//TODO Armor
