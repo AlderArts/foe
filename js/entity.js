@@ -388,16 +388,22 @@ Entity.prototype.PregnancyTrigger = function(womb, slot) {
 	Gui.Callstack.unshift(function() {
 		womb.pregnant = false;
 		
-		var parse = {
-			name : this.name
-		};
-		
-		Text.Clear();
-		Text.Add("PLACEHOLDER: [name] gave birth.", parse);
-		Text.NL();
-		Text.Flush();
-		Gui.NextPrompt();
+		if(DEBUG) {
+			var parse = {
+				name : this.name
+			};
+			
+			Text.Clear();
+			Text.Add("PLACEHOLDER: [name] gave birth.", parse);
+			Text.NL();
+			Text.Flush();
+			Gui.NextPrompt();
+		}
 	});
+}
+
+Entity.prototype.CanGiveBirth = function() {
+	return true;
 }
 
 DrunkLevel = {

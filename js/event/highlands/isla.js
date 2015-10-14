@@ -95,6 +95,14 @@ Isla.prototype.IsAtLocation = function(location) {
 	return true;
 }
 
+Isla.prototype.PregnancyTrigger = function(womb, slot) {
+	// Use unshift instead of push to make sure pregnancy doesn't interfere with scene progression
+	Gui.Callstack.unshift(function() {
+		womb.pregnant = false;
+		
+		isla.flags["Kids"] += womb.litterSize;
+	});
+}
 
 //SCENES
 

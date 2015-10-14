@@ -330,7 +330,7 @@ PregnancyHandler.prototype.Update = function(hours) {
 			womb.hoursToBirth -= hours;
 			// Check for completion
 			// Added the clause that you need to be in a safe spot
-			if(womb.hoursToBirth <= 0 && party.location.safe()) {
+			if(womb.hoursToBirth <= 0 && ent.CanGiveBirth()) {
 				womb.triggered = true;
 				ent.PregnancyTrigger(womb, PregnancyHandler.Slot.Vag);
 			}

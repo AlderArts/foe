@@ -506,6 +506,10 @@ Player.prototype.PregnancyProgess = function(womb, slot, oldProgress, progress) 
 	}
 }
 
+Player.prototype.CanGiveBirth = function() {
+	return party.location.safe();
+}
+
 // Pregnancy TODO
 Player.prototype.PregnancyTrigger = function(womb, slot) {
 	if(!womb) return;
