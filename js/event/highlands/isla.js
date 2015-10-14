@@ -2239,7 +2239,10 @@ Scenes.Isla.BatheTF = function(parse, level) {
 				Text.Add("With a contented sigh, you lean back into the hot spring and let the water lap over your [belly]. The soothing warmth is absolutely divine, with the way it’s working all the aches and pains out of your body, and filling it with vitality. So much vitality, in fact, that you soon become aware of a gentle pressure within your lower belly. As your hands run over your midsection, you feel it swelling and growing, your womb becoming a little heavier with life. Seems like you’re going to be giving birth a little sooner than expected…", parse);
 			}
 			_.each(player.PregHandler().PregnantWombs(), function(womb) {
+				var oldProgress = womb.progress;
 				womb.progress += 0.15;
+				var hours = 0.15 * womb.hoursToBirth / (1-oldProgress);
+				womb.hoursToBirth -= hours;
 			});
 			
 			return true;
@@ -2304,7 +2307,10 @@ Scenes.Isla.BatheTF = function(parse, level) {
 				Text.Add("As your pleasure peaks, you become vaguely aware of a faint pressure coming from within your womb; you watch in amazement as your pregnancy advances rapidly, the spring’s magic pushing the moment of birth nearer and nearer. At last, though, the pleasure fades, and with it the strange growth, leaving you considerably more pregnant than when you got into the spring.", parse);
 			}
 			_.each(player.PregHandler().PregnantWombs(), function(womb) {
+				var oldProgress = womb.progress;
 				womb.progress += 0.3;
+				var hours = 0.3 * womb.hoursToBirth / (1-oldProgress);
+				womb.hoursToBirth -= hours;
 			});
 			
 			return true;
