@@ -894,7 +894,7 @@ Scenes.Cale.SexGetEatenEntrypoint = function(outside) {
 	Text.NL();
 	
 	var clitcock = player.FirstVag().clitCock;
-	var clitlen  = player.FirstVag().clitLength.Get();
+	var clitlen  = player.FirstVag().clit.Get();
 	
 	var scenes = new EncounterTable();
 	scenes.AddEnc(function() {

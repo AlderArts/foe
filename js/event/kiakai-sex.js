@@ -1231,7 +1231,7 @@ Scenes.Kiakai.PleasureElf = function() {
 				Text.Clear();
 				Text.Add("Humoring the horny elf, you drag your fingers across [hisher] lower lips, giving [hisher] [kClitDesc] a light flick before spreading [hisher] labia with both hands. Agonizingly slow, you push two digits inside [name]'s wet [kVagDesc], probing deeply into [hisher] slick tunnel.", parse);
 				Text.NL();
-				parse["tinyOversized"] = kiakai.FirstVag().clitLength.Get() > 2 ? "oversized" : "tiny";
+				parse["tinyOversized"] = kiakai.FirstVag().clit.Get() > 2 ? "oversized" : "tiny";
 				Text.Add("<i>“Mmm... ah!”</i> The elf's simpering moan turns into a shrill yelp, incited by your other hand pinching [hisher] [kClitDesc]. Your treatment of the [tinyOversized] nub sends electric shocks up [name]'s spine and coats your already slick fingers in even more girly juices. Stepping up your fingering, you start pumping [name]'s [kVagDesc], adding another digit after a while. With two fingers, you spread [hisher] passage wide, using the third one to rub against the roof of the tunnel.", parse);
 				Text.NL();
 				Text.Add("<i>“B-by Aria, that feels good, [playername]!”</i> [name] moans softly, urging you on. [HeShe] even starts to grind [hisher] hips against your hand, meeting your thrusts and allowing you to sink your digits even deeper into [hisher] [kVagDesc]. Teasingly, you ask [himher] just what Aria would think of this - and of having her name invoked in such a fashion. You are rewarded with a bright blush from the elf, your remark clearly hitting home. Whether or not [heshe] really regrets [hisher] statement is unclear as [heshe] keeps moving [hisher] hips, biting [hisher] lips so as to not utter more blasphemies.", parse);
@@ -1368,7 +1368,7 @@ Scenes.Kiakai.PleasureElf = function() {
 				Text.NL();
 				Text.Add("[name], by this point, is moaning deliriously, whether for you to stop or to ream [himher] harder, it's a bit difficult to tell. Somehow, you discern from [hisher] ramblings that [heshe] wants you to pay some attention to [hisher] clit too.", parse);
 				Text.NL();
-				if(kiakai.FirstVag().clitLength.Get() > 10) {
+				if(kiakai.FirstVag().clit.Get() > 10) {
 					Text.Add("Rather than a regular clit, the elf has a large, almost cock-like spear crowning [hisher] parted labia. Stiff and trembling with need, the shaft twitches under your light touch, every bit as sensitive as ever.", parse);
 					Text.NL();
 					Text.Add("Its sheer size allows you to gently jerk the giant clit as if it were a dick. The stimulation is too much for [name], who cries out in [hisher] first climax not a minute after you begin your combined assault, [hisher] cock-like clit twitching helplessly in your hand.", parse);
@@ -1381,7 +1381,7 @@ Scenes.Kiakai.PleasureElf = function() {
 					Text.Add("When you judge that [heshe] has had enough time to recover, you once more grasp [hisher] absurdly large clit, preparing to unleash another barrage of pleasure. [HeShe] <i>did</i> ask for it, after all. The appendage seems to be incredibly sensitive, your every touch sending shocks up the elf's spine. In the span of fifteen minutes, you make the elf cum no less than three more times.", parse);
 				}
 				else {
-					parse["tinyOversized"] = kiakai.FirstVag().clitLength.Get() > 2 ? "oversized" : "tiny";
+					parse["tinyOversized"] = kiakai.FirstVag().clit.Get() > 2 ? "oversized" : "tiny";
 					Text.Add("Grinning, you give the [tinyOversized] button a gentle flick with your finger, eliciting a shocked gasp from the elf. Seeing the obvious effect on [himher], you repeat the action, ignoring [name]'s muffled protests.", parse);
 					Text.NL();
 					Text.Add("[HisHer] defenses quickly erode under your merciless dual-pronged assault, and [heshe] crosses [hisher] legs in a futile attempt to keep you at bay. The plan backfires as the motion grinds your fingers deeper into [hisher] female parts. [name] cries out and helplessly bucks [hisher] hips, riding out [hisher] climax.", parse);
