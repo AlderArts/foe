@@ -563,7 +563,7 @@ Player.prototype.PregnancyTrigger = function(womb, slot) {
 		
 		if(partynum == 2 && comp) {
 			parse["comp"] = comp.name;
-			parse = comp.ParserTags(parse);
+			parse = comp.ParserPronouns(parse);
 			Text.Add(" [comp] is more than willing to give you your space, excusing [himher]self as [heshe] waits nearby anxiously.", parse);
 		}
 		else if(partynum > 2) {
