@@ -9,6 +9,7 @@ Version 0.4m2
 -------------
 * Fixed a parser bug in spring description
 * Fixed a bug in the new Lei scene where the PC would duplicate
+* Fixed a bunch of bugs reported on the forums
 
 --------------------------------------------
              PREVIOUS VERSIONS

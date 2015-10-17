@@ -76,8 +76,6 @@ TODO:
 * Look through Lactation code, there is something wrong with it (TEST)
 * Preg stuff:
  - Slots
- - StomachDesc
- - Counter
 
 * Burrows writing
  - Lagon. Vena. Ophelia.
@@ -116,7 +114,6 @@ REWRITE OF GUI:
 
 TODO stuff
 ----------
-* Pregnancy
 
 * Rewrite farm stuff
  - Gwendy
@@ -371,7 +368,7 @@ PART I:
 -------
 * Miranda (pre-follower)
 * Terry
-* Momo (?)
+* Momo (rewrite)
 * Outlaws
  - Maria (jobs)
  - Cveta (pre-follower, tobs)
