@@ -1867,7 +1867,7 @@ Scenes.Isla.Sex.PitchVaginalWall = function(parse, opts) {
 	Text.NL();
 	Text.Add("All right, then. Let’s see how she deals with <i>this</i>!", parse);
 	Text.NL();
-	parse["c"] = player.NumCocks() > 1 ? " your unused shaft[s2] slapping against her soaked thighs," : "";
+	parse["c"] = player.NumCocks() > 1 ? Text.Parse(" your unused shaft[s2] slapping against her soaked thighs,", parse) : "";
 	Text.Add("Greedily, you pick up the pace,[c] your midriff pounding against ", parse);
 	if(opts.preg)
 		Text.Add("her small baby bump", parse);
