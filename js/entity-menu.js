@@ -246,6 +246,7 @@ Entity.prototype.EquipPrompt = function(backfunc) {
 			}, enabled : true,
 			tooltip : ""
 		});
+		var enabled = that.topArmorSlot ? (that.topArmorSlot.subtype != ItemSubtype.FullArmor) : true;
 		options.push({ nameStr : "Bottom",
 			func : function() {
 				Text.Clear();
@@ -255,7 +256,7 @@ Entity.prototype.EquipPrompt = function(backfunc) {
 				Text.AddDiv("<hr>");
 				Text.Flush();
 				party.inventory.ShowEquippable(that, ItemSubtype.BotArmor, equipFunc);
-			}, enabled : true,
+			}, enabled : enabled,
 			tooltip : ""
 		});
 		options.push({ nameStr : "Acc.1",
