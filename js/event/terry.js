@@ -167,6 +167,12 @@ Terry.PersonalQuest = {
 	Completed  : 2
 };
 
+Terry.prototype.Changed = function() {
+	return this.flags["breasts"] != 0 ||
+		this.flags["vag"]     != 0 ||
+		this.flags["cock"]    != 0;
+}
+
 Terry.prototype.Recruited = function() {
 	return this.flags["Saved"] >= Terry.Saved.Saved;
 }
