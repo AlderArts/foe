@@ -2174,7 +2174,7 @@ Scenes.Halloween.HarthonDefeatedPrompt = function() {
 					parse["mc"] = player.NumCocks() > 1 ? Text.Parse(", even as its ignored sibling[s2] poke[notS2] into [hisher] buttock cleavage", parse) : "";
 					Text.Add("With this thought in mind, you keep your pace as slow and gentle as the two of you can tolerate. Coaxing inch after inch inside until [hisher] plush butt is nestling gently in your lap, your cock buried to the very hilt[mc].", parse);
 					Text.NL();
-					Text.Add("As you penetrate the vampire’s tender backdoor, something weird happens. For a moment, your vision goes dark and you feel something flow over your body. Initially you feel dizzy, but right afterward you feel a new surge of energy. It’s as if a new kind of power has taken hold of you, and becomes a part of you. Experimentally, you try focusing it on the vixen currently riding your [cock].", parse);
+					Text.Add("As you penetrate the vampire’s tender backdoor, something weird happens. For a moment, your vision goes dark and you feel something flow over your body. Initially you feel dizzy, but right afterward you feel a new surge of energy. It’s as if a new kind of power has taken hold of you, and becomes a part of you. Experimentally, you try focusing it on the [foxvixen] currently riding your [cock].", parse);
 					Text.NL();
 					Text.Add("[HeShe] locks up, as if [himher] mind had gone blank for an instant, and you feel something change between the two of you. Terraphilius… no… Terry has changed, becoming malleable. Instinctively, you know it. You’ve made [himher] your thrall…", parse);
 					Text.NL();
@@ -2294,11 +2294,11 @@ Scenes.Halloween.HarthonPitchAnal = function(parse) {
 	Text.Add("You just smile back, warm and comforting, even as you weave your will into Terry’s flesh. [HeShe]’s already nice and tight, but there’s just a few little tweaks you can make here... some lube would be nice...", parse);
 	Text.NL();
 	parse["c"] = p1cock ? Text.Parse(" soaking into your [cock] and", parse) : "";
-	Text.Add("The vampiric [foxvixen] moans as a ripple of pleasure runs through her anus and spreads throughout [hisher] body. Through [hisher] clenching muscles, you can feel liquid warmth[c] seeping out around [hisher] spread entrance. The scent of female in heat permeates the air, ", parse);
+	Text.Add("The vampiric [foxvixen] moans as a ripple of pleasure runs through [hisher] anus and spreads throughout [hisher] body. Through [hisher] clenching muscles, you can feel liquid warmth[c] seeping out around [hisher] spread entrance. The scent of female in heat permeates the air, ", parse);
 	if(femHarthon)
 		Text.Add("even stronger than her natural scent.", parse);
 	else
-		Text.Add("it completely overpower Terry’s male musk.", parse);
+		Text.Add("completely overpowering Terry’s male musk.", parse);
 	Text.Add(" You give a few experimental thrusts and find that you can move much better now, the satisfying squelch of flesh on moist flesh only adds to your lust.", parse);
 	Text.NL();
 	Text.Add("<i>“M-my ass, what did yo- oh!”</i>", parse);
