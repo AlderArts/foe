@@ -89,12 +89,13 @@ Halloween.prototype.RonnieAvailable = function() {
 }
 
 Halloween.CockParser = function(parse) {
+	parse = parse || {};
 	if(!player.FirstCock()) {
-		parse = parse || {};
 		parse["cocks"] = "stake-strapon";
 		parse["cock"] = "stake-strapon";
 		parse["cockTip"] = "tip";
 	}
+	return parse;
 }
 
 Halloween.prototype.HarthonParser = function(parse) {
@@ -2069,11 +2070,11 @@ Scenes.Halloween.HarthonDefeatedPrompt = function() {
 		
 	};
 	
-	parse = Halloween.CockParser(parse);
 	parse = Scenes.Halloween.HW.HarthonParser(parse);
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
+	parse = Halloween.CockParser(parse);
 	
 	//[Sex][Holy Water][Leave]
 	var options = new Array();
@@ -2856,11 +2857,11 @@ Scenes.Halloween.HarthonThrall = function() {
 	var parse = {
 		phisher : player.mfTrue("his", "her")
 	};
-	parse = Halloween.CockParser(parse);
 	parse = Scenes.Halloween.HW.HarthonParser(parse);
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
+	parse = Halloween.CockParser(parse);
 	
 	Text.Clear();
 	if(werewolf)
