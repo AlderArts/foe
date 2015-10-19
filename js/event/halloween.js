@@ -714,6 +714,7 @@ Scenes.Halloween.Ronnie = function() {
 	
 	Text.Clear();
 	Text.Add("This dry, dusty path winds its way through the trees, twisting and turning under gnarled branches and over knobbly roots as it leads… well, somewhere. You’re not quite sure <i>exactly</i> where, but your [feet] seem to have taken on a life of their own, ferrying you down the path to your fate. Come to think of it, you’re not even sure where all the trees came from - they just seem to have sprung up all of a sudden to block out as much moonlight as they can with their twisted, thinly-leafed branches.", parse);
+	Text.NL();
 	// Check out what's going on with Ronnie and select correct path
 	var first = Scenes.Halloween.HW.ronnie == Halloween.Ronnie.NotMet;
 	
