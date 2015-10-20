@@ -122,6 +122,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/event/global.js \
 	js/event/dreams.js \
 	js/event/nursery.js \
+	js/event/masturbation.js \
 	js/event/asche.js \
 	js/event/asche-tasks.js \
 	js/event/asche-sex.js \
