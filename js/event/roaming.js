@@ -444,17 +444,18 @@ Scenes.Roaming.Bandits = function() {
 			Text.Add("Squaring your shoulders and doing your best to look menacing, you rap once on the farm door, before pushing it open with a loud screech of grating hinges. Taking a step inside, you are greeted by [num] scowling faces[c].", parse);
 			Text.NL();
 			
-			var success = player.Cha() + Math.random() * 20 >= 40;
+			var success = (player.Cha() + Math.random() * 20) >= 40;
 			
 			if(success) {
 				Text.Add("In the foreword of your speech, you explain that you do understand that everyone must make a living in this world, and that you fully understand their decisions. From there, you proceed to remark that, however, their chosen path entails some additional costs of doing business, to wit, payment for the maintenance of secrecy.", parse);
 				Text.NL();
 				Text.Add("You don’t know whether it’s because of your seemingly fearless appearance or the crime boss mannerisms you’ve done your best to imitate, but the bandits quickly surrender before your verbiage, clearly outgunned. They hand over a decent payment and see you out the door, bowing and scraping the whole way. Not only does crime apparently pay, but you can’t help but think that it’s quite fun too.", parse);
 				Text.NL();
-				Text.Add("<b>You successfully convinced the bandits to hand over 20 coin in hush money, and the experience taught you a little about the art of persuasion.</b>", parse);
+				var inc = player.charisma.IncreaseStat(40, 1);
+				parse["inc"] = inc ? ", and the experience taught you a little about the art of persuasion" : "";
+				Text.Add("<b>You successfully convinced the bandits to hand over 20 coin in hush money[inc].</b>", parse);
 				Text.Flush();
 				
-				player.charisma.IncreaseStat(40, 1);
 				
 				party.coin += 20;
 				
