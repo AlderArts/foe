@@ -553,7 +553,7 @@ Scenes.Kiakai.HealingNice = function() {
 										Text.Add("[HisHer] restraint lifted by your eager nod, [name] slowly pushes [hisher] way past your sphincter, probing at your softer inner passage. Somehow knowing just what to do, the elf begins to finger-fuck you, eventually adding a third digit to the mix.", parse);
 										Text.NL();
 										parse.s = player.NumCocks() > 1 ? "s" : "";
-										parse.itsTheir = player.NumCocks() > 1 ? "their" : "it's";
+										parse.itsTheir = player.NumCocks() > 1 ? "their" : "its";
 										Text.Add("Meanwhile, [heshe] isn't letting up on your [multiCockDesc]. With [hisher] free hand, [name] strokes your member[s], while sucking on [itsTheir] [cockTip][s]. You moan as you feel the elf lap at your urethra, the dual-pronged assault intensifying your pleasure.", parse);
 										Text.NL();
 										Text.Add("[HeShe] isn't bad at all with [hisher] fingers, rapidly pumping them in and out of your [anusDesc]. Each thrust deals a glancing blow to your prostate, rewarding [name] with a shuddering moan for [hisher] efforts.", parse);
@@ -568,7 +568,7 @@ Scenes.Kiakai.HealingNice = function() {
 											Text.NL();
 											parse.s = player.NumCocks() > 2 ? "s" : "";
 											parse.notEs = player.NumCocks() > 2 ? "" : "es";
-											parse.itsTheir = player.NumCocks() > 2 ? "their" : "it's";
+											parse.itsTheir = player.NumCocks() > 2 ? "their" : "its";
 											
 											Text.Add("Your other cock[s] thrash[notEs], spending [itsTheir] seed uselessly on the elf's face and hair.", parse);
 										}

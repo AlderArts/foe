@@ -1259,7 +1259,7 @@ Scenes.Kiakai.TalkDimensionalViolation = function() {
 				Text.Clear();
 				Text.Add("You hold the elf's hand, telling [himher] that you'd like to hear the rest of it. [HeShe] nods hesitantly, seeming to take strength from your grip.", parse);
 				Text.NL();
-				Gui.NextPrompt(Scenes.Kiakai.TalkDimensionalViolationCont);
+				Scenes.Kiakai.TalkDimensionalViolationCont();
 			}, enabled : true,
 			tooltip : "Ask the elf to continue."
 		});
