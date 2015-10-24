@@ -31,6 +31,7 @@ CreditsScreen = function() {
 	Text.Add("Lady's Blessing and Room 69: Del<br/>");
 	Text.Add("Lei: Del<br/>");
 	Text.Add("Lizard encounter: Salrith<br/>");
+	Text.Add("Masturbation - Breasts, Pussy, Ass: The Observer<br/>");
 	Text.Add("Some of Miranda's sex scenes: LukaDoc and QuietBrowser<br/>");
 	Text.Add("Momo: QuietBrowser and LukaDoc<br/>");
 	Text.Add("Mothgirl: Savin<br/>");

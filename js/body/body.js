@@ -335,6 +335,11 @@ Body.prototype.HasSkin = function(race) {
 	return BodyPart.HasSkin(this.torso.race);
 }
 
+
+Body.prototype.IsFlexible = function() {
+	return this.torso.race.isRace(Race.Feline, Race.Ferret, Race.Reptile);
+}
+
 // TODO
 Body.prototype.FaceDesc = function() {
 	var desc = this.head.race.qShort();

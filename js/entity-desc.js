@@ -339,8 +339,14 @@ Entity.prototype.IsNaga = function() {
 	return (this.body.legs.count < 2) &&
 		(this.body.legs.race == Race.Snake); //TODO
 }
+Entity.prototype.IsTaur = function() {
+	return this.LowerBodyType() == LowerBodyType.Taur;
+}
 Entity.prototype.IsGoo = function() {
 	return (this.body.legs.race == Race.Goo); //TODO
+}
+Entity.prototype.IsFlexible = function() {
+	return this.body.IsFlexible(); //TODO Perks
 }
 Entity.prototype.Butt = function() {
 	return this.body.ass;

@@ -684,16 +684,7 @@ Player.prototype.Interact = function(switchSpot) {
 	});
 	options.push({ nameStr: "Release",
 		func : function() {
-			Text.Clear();
-			Text.Add("[Placeholder] You masturbate fiercely, cumming buckets.");
-			Text.Flush();
-			world.TimeStep({minute : 10});
-			
-			that.OrgasmCum();
-			
-			Gui.NextPrompt(function() {
-				that.Interact(switchSpot);
-			});
+			Scenes.Masturbation.Entry();
 		}, enabled : true,
 		tooltip : "Pleasure yourself."
 	});
