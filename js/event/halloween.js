@@ -3319,7 +3319,7 @@ Scenes.Halloween.HarthonThrallPrompt = function(parse) {
 				Text.NL();
 				Text.Add("A chorus of ecstatic mewls and moans fill your ears as you work, pre-cum flowing sticky and sluggish over your fingers. With deceptive slowness, Terry’s old maleness shrinks away into his body.", parse);
 				Text.NL();
-				Text.Add("His nuts are barely present now, just soft lumps to either side of the wet cleft you have opened. With utmost care, you massage the edge of his cleft with one hand, slowly tweaking and stroking. You can feel them smoothing out, shedding fur for naked flesh as you tenderly coax them into their true form; juicy, puffy labia.", parse);
+				Text.Add("His nuts are barely present now, just soft lumps to either side of the wet cleft you have opened. With utmost care, you massage its edge with one hand, slowly tweaking and stroking. You can feel them smoothing out, shedding fur for naked flesh as you tenderly coax them into their true form; juicy, puffy labia.", parse);
 				Text.NL();
 				Text.Add("His cock, still oozing pre-cum along his folds, is nothing more than a glans just barely peeking from beneath his stretched hood. As you rub it with your thumb, you can feel it shrinking smaller and smaller, until it slowly creeps away back into hiding.", parse);
 				Text.NL();
