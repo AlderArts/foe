@@ -3086,9 +3086,15 @@ Scenes.Rosalin.SexPrompt = function(state) {
 							else
 								Text.Add(" The trembling alchemist can't do anything but hug the barrel [heshe] is splayed over, holding on for dear life as you rail [himher].", parse);
 							Text.NL();
-							Text.Add("Keeping your pace up as long as your stamina allows it, you eventually groan, allowing your rising orgasm to surge through you. The dam opened, your seed pours into the [raceDesc].", parse);
-							if(p1Cock.knot)
-								Text.Add(" You push your [knotDesc] inside, sealing the two of you together.", parse);
+							Text.Add("Keeping your pace up as long as your stamina allows it, you eventually groan, allowing your rising orgasm to surge through you. ", parse);
+							if(!p1Cock.isStrapon) {
+								Text.Add("The dam opened, your seed pours into the [raceDesc].", parse);
+								if(p1Cock.knot)
+									Text.Add(" You push your [knotDesc] inside, sealing the two of you together.", parse);
+							}
+							else {
+								Text.Add("Shuddering, you collapse on top of the [raceDesc], utterly spent.", parse);
+							}
 						}
 					}, 1.0, function() { return true; });
 					/*
