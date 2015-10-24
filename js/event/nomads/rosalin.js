@@ -3007,7 +3007,7 @@ Scenes.Rosalin.SexPrompt = function(state) {
 					scenes.AddEnc(function() {
 						Text.Add("Spinning [himher] around and pushing [himher] down on top of a nearby barrel, you rub your [multiCockDesc] against [hisher] wet labia.", parse);
 						Text.NL();
-						if(player.FirstCock().race != Race.Human)
+						if(p1Cock.race != Race.Human)
 							Text.Add("<i>“Ooh, a bad boy,”</i> Rosalin breathlessly compliments your [cockDesc]. <i>“Fuck me good! Fuck me like an animal!”</i>", parse);
 						else
 							Text.Add("<i>“Come on, what are you waiting for?”</i> [heshe] moans, shivering from your teasing.", parse);
