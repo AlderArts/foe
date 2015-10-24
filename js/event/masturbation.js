@@ -204,11 +204,11 @@ Scenes.Masturbation.AnalOpening = function(func, obj) {
 
 Scenes.Masturbation.AnalFingerCockblock = function(parse, cum) {
 	if(player.FirstCock()) {
-		Text.Add("Unable to take the pounding at your prostate any longer, your [cocks] choose[notS] this moment to shoot off [itsTheir] load, string after string of hot, sticky seed arcing into the air and landing on the ground a good distance away. All the anticipation and stimulation seems to have done you good - your current load of sperm looks much thicker and richer than normal, speaking well of your prostate-milking skills.", parse);
+		Text.Add("Unable to take the pounding at your prostate any longer, your [cocks] choose[notS] this moment to shoot off [itsTheir] load, string after string of hot, sticky seed arcing into the air and landing on the ground a good distance away. All the anticipation and stimulation seems to have done you good - your current load of semen looks much thicker and richer than normal, speaking well of your prostate-milking skills.", parse);
 		if(cum > 9)
 			Text.Add(" It seems never-ending, the viscous, white flow that’s practically inhuman to behold. More and more sperm just keeps on coming out of your [cockTip] like an overflowing font, your prostate and balls working together in blissful union to flood your surroundings with as much seed as they can summon up.", parse);
 		else if(cum > 6)
-			Text.Add(" You’ve certainly got quite the reserve of sperm in you, make even more voluminous by the attention you’ve lavished upon your prostate. Despite the long, bountiful spurts of seed blasting from your [cockTip],  spurts that leave little doubt as to your virility, it takes a good while for you to be drained of every last drop of seed that you’re worth.", parse);
+			Text.Add(" You’ve certainly got quite the reserve of sperm in you, make even more voluminous by the attention you’ve lavished upon your prostate. Despite the long, bountiful spurts of seed blasting from your [cockTip],  spurts that leave little doubt as to your virility, it takes a good while for you to be drained of every last drop.", parse);
 		Text.NL();
 	}
 }
@@ -380,7 +380,7 @@ Scenes.Masturbation.VagOpening = function(func, obj) {
 		Text.Add("As you tease and test away, a flush of arousal springs up from your groin and into your lower belly, causing you to moan with anticipation.", parse);
 	}
 	else {
-		Text.Add("Tenderly, you begin to rub at your outermost folds, tingles of arousal sparking outwards from the contact and collecting in your lower belly. As the sensation of heat grows, you can feel the petals of your womanly flower swelling and moistening beneath your fingertips, which only drives you to be a little more insistent in your ministrations.", parse);
+		Text.Add("Tenderly, you begin to rub at your outermost folds, tingles of arousal sparking outwards from the contact and collecting in your lower belly. As the sensation of heat grows, you can feel the petals of your womanly flower swelling and moistening beneath your fingers, which only drives you to be a little more insistent in your ministrations.", parse);
 	}
 	Text.NL();
 	Text.Add("The soft scent of feminine excitement is making itself known to you even as your slit grows wetter and wetter, and you begin in earnest. ", parse);
