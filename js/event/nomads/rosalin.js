@@ -236,10 +236,9 @@ world.loc.Plains.Nomads.Fireplace.events.push(new Link(
 		if(!rosalin.IsAtLocation(world.loc.Plains.Nomads.Fireplace)) return;
 		
 		var parse = {
-			extinguishedLit : (world.time.hour >= 19 || world.time.hour < 2) ? "lit" : "extinguished",
-			hisher          : rosalin.hisher(),
-			himher          : rosalin.himher()
+			extinguishedLit : (world.time.hour >= 19 || world.time.hour < 2) ? "lit" : "extinguished"
 		};
+		parse = rosalin.ParserPronouns(parse);
 		
 		if(rosalin.flags["Met"] == 0) {
 			Text.Add("Near the [extinguishedLit] fire pit, you see a strange young woman busying herself with a collection of strange flasks, mixing their contents into a larger beaker. She has prominent catlike features, brown-furred ears poking out of her teal hair, and a long sinuous tail swaying behind her generous bottom. Acrid fumes are rising from her concoction, making you wonder if approaching her is really a good idea.", parse);
@@ -263,13 +262,9 @@ Scenes.Rosalin.TalkPrompt = function() {
 	
 	var parse = {
 		playername : player.name,
-		himher     : rosalin.himher(),
-		HeShe      : rosalin.HeShe(),
-		heshe      : rosalin.heshe(),
-		HisHer     : rosalin.HisHer(),
-		hisher     : rosalin.hisher(),
 		raceDesc       : function() { return rosalin.raceDesc(compScore); }
 	};
+	parse = rosalin.ParserPronouns(parse);
 	
 	Text.Add("What would you like to ask [himher] about?", parse);
 	Text.Flush();
@@ -644,10 +639,9 @@ Scenes.Rosalin.FirstTime = function() {
 		faceDesc   : function() { return player.FaceDesc(); },
 		armDesc    : function() { return player.ArmDesc(); },
 		legDesc    : function() { return player.LegDesc(); },
-		kiakai     : kiakai.name,
-		heshe      : kiakai.heshe(),
-		himher     : kiakai.himher()
+		kiakai     : kiakai.name
 	};
+	parse = kiakai.ParserPronouns(parse);
 	
 	Text.Add("You uncertainly edge closer to the catgirl, ready to jump back at a moment's notice, should her mixture suddenly explode. There seems to be a prominent risk of this, considering the patchily scorched ground surrounding her makeshift laboratory. Humming softly to herself, she pours the contents of an unmarked flask into a beaker while stirring the mixture with a spoon. She seems completely absorbed by her work, her brow furrowed in concentration and her small pink tongue sticking out of the corner of her mouth.", parse);
 	Text.NL();
@@ -1160,12 +1154,6 @@ Scenes.Rosalin.CombineCallback = function(item) {
 	var compScore = rosalin.origRaceScore.Compare(racescore);
 	
 	var parse = {
-		heshe    : rosalin.heshe(),
-		HeShe    : rosalin.HeShe(),
-		himher   : rosalin.himher(),
-		hisher   : rosalin.hisher(),
-		HisHer   : rosalin.HisHer(),
-		hishers  : rosalin.hishers(),
 		raceDesc       : function() { return rosalin.raceDesc(compScore); },
 		rBreastDesc    : function() { return rosalin.FirstBreastRow().Short(); },
 		rNipsDesc      : function() { return rosalin.FirstBreastRow().NipsShort(); },
@@ -1178,6 +1166,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 		rTailDesc      : function() { return rosalin.HasTail().Short(); },
 		breastDesc     : function() { return player.FirstBreastRow().Short(); }
 	};
+	parse = rosalin.ParserPronouns(parse);
 	
 	player.AddAlchemy(item);
 	
@@ -2562,12 +2551,6 @@ Scenes.Rosalin.SexPrompt = function(state) {
 	var p2Cock = player.BiggestCock(allCocks);
 	
 	var parse = {
-		heshe    : rosalin.heshe(),
-		HeShe    : rosalin.HeShe(),
-		himher   : rosalin.himher(),
-		hisher   : rosalin.hisher(),
-		HisHer   : rosalin.HisHer(),
-		hishers  : rosalin.hishers(),
 		raceDesc       : function() { return rosalin.raceDesc(compScore); },
 		rBreastDesc    : function() { return rosalin.FirstBreastRow().Short(); },
 		rNipplesDesc   : function() { return rosalin.FirstBreastRow().NipsShort(); },
@@ -2612,6 +2595,7 @@ Scenes.Rosalin.SexPrompt = function(state) {
 		lowerArmorDesc : function() { return player.LowerArmorDesc(); },
 		undressedReady : player.Armor() ? "undressed" : "ready"
 	};
+	parse = rosalin.ParserPronouns(parse);
 	
 	if(state == RosalinSexState.Rut) {
 		Text.Add("You gulp uncertainly, eying the horny alchemist. Looks like [heshe] intends to use that on you...", parse);
@@ -3003,7 +2987,7 @@ Scenes.Rosalin.SexPrompt = function(state) {
 							parse["coatingdrenching"] = cum > 3 ? "drenching" : "coating";
 							Text.Add("Your other member[s] fire[notS] [itsTheir] own seed, [coatingdrenching] the alchemist in strands of white.", parse);
 						}
-					}, 1.0, function() { return true; });
+					}, 1.0, function() { return !p1Cock.isStrapon; });
 					scenes.AddEnc(function() {
 						Text.Add("Spinning [himher] around and pushing [himher] down on top of a nearby barrel, you rub your [multiCockDesc] against [hisher] wet labia.", parse);
 						Text.NL();
@@ -3146,12 +3130,6 @@ Scenes.Rosalin.CockWorship = function(sexState) {
 	var cock = rosalin.BiggestCock();
 	
 	var parse = {
-		heshe    : rosalin.heshe(),
-		HeShe    : rosalin.HeShe(),
-		himher   : rosalin.himher(),
-		hisher   : rosalin.hisher(),
-		HisHer   : rosalin.HisHer(),
-		hishers  : rosalin.hishers(),
 		raceDesc       : function() { return rosalin.raceDesc(compScore); },
 		rBreastDesc    : function() { return rosalin.FirstBreastRow().Short(); },
 		rNipplesDesc   : function() { return rosalin.FirstBreastRow().NipsShort(); },
@@ -3179,6 +3157,8 @@ Scenes.Rosalin.CockWorship = function(sexState) {
 		face           : function() { return player.FaceDesc(); },
 		clothing       : function() { return player.ArmorDesc(); }
 	};
+	parse = rosalin.ParserPronouns(parse);
+	
 	parse["genDesc"] = player.FirstCock() ? function() { return player.MultiCockDesc(); } :
 					   player.FirstVag() ? function() { return player.FirstVag().Short(); } :
 					   "featureless crotch";
@@ -3319,12 +3299,6 @@ Scenes.Rosalin.VagAftermath = function() {
 	var compScore = rosalin.origRaceScore.Compare(racescore);
 	
 	var parse = {
-		heshe    : rosalin.heshe(),
-		HeShe    : rosalin.HeShe(),
-		himher   : rosalin.himher(),
-		hisher   : rosalin.hisher(),
-		HisHer   : rosalin.HisHer(),
-		hishers  : rosalin.hishers(),
 		raceDesc       : function() { return rosalin.raceDesc(compScore); },
 		rBreastDesc    : function() { return rosalin.FirstBreastRow().Short(); },
 		rNipplesDesc   : function() { return rosalin.FirstBreastRow().NipsShort(); },
@@ -3347,6 +3321,7 @@ Scenes.Rosalin.VagAftermath = function() {
 		armorDesc      : function() { return player.ArmorDesc(); },
 		undressedReady : player.Armor() ? "undressed" : "ready"
 	};
+	parse = rosalin.ParserPronouns(parse);
 	
 	parse["itThem"] = player.NumCocks() > 1 ? "them" : "it";
 	
