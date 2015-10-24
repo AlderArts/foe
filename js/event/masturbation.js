@@ -170,7 +170,7 @@ Scenes.Masturbation.AnalOpening = function(func, obj) {
 	parse["arm"] = player.LowerArmor() && fullArm ? Text.Parse(", quickly followed by your [bottomarmordesc]", parse) : "";
 	Text.Add("After a final check to make sure that you’re well alone and won’t be interrupted, you find a comfortable spot to settle down in and begin disrobing yourself with glee. Soon, your [armor] falls to the ground[arm], leaving you in your birthday suit. ", parse);
 	if(lusty)
-		Text.Add("You’ve been waiting a long time to scratch this particular itch - it’s been nagging at the back of your mind for far too long now! - and get to it with particular glee.", parse);
+		Text.Add("You’ve been waiting a long time to scratch this particular itch - it’s been nagging at the back of your mind for far too long now - and get to it brimming with excitement.", parse);
 	else
 		Text.Add("Time to get to it, then! Some relief for that itch in the back of your mind would be nice.", parse);
 	Text.NL();
