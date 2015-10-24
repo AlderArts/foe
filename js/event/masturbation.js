@@ -12,7 +12,7 @@ Scenes.Masturbation.Entry = function() {
 	};
 	
 	var lust = player.LustLevel();
-	parse["comp"] = party.Num() == 2 ? party.Get(1).name : "";
+	parse["comp"] = party.Num() == 2 ? party.Get(1).name : "your companions";
 	
 	Text.Clear();
 	if(party.Num() > 1)
@@ -58,7 +58,7 @@ Scenes.Masturbation.Entry = function() {
 		var vagCap = player.FirstVag().Cap();
 		
 		var optsT = new Array();
-		var addToy = function(toy) {
+		var addVagToy = function(toy) {
 			if(party.Inv().QueryNum(toy)) {
 				optsT.push({ nameStr : toy.name,
 					tooltip : toy.Long(),
@@ -68,17 +68,17 @@ Scenes.Masturbation.Entry = function() {
 				});
 			}
 		}
-		addToy(Items.Toys.SmallDildo);
-		addToy(Items.Toys.MediumDildo);
-		addToy(Items.Toys.LargeDildo);
-		addToy(Items.Toys.ThinDildo);
-		addToy(Items.Toys.ButtPlug);
-		addToy(Items.Toys.LargeButtPlug);
-		addToy(Items.Toys.AnalBeads);
-		addToy(Items.Toys.LargeAnalBeads);
-		addToy(Items.Toys.EquineDildo);
-		addToy(Items.Toys.CanidDildo);
-		addToy(Items.Toys.ChimeraDildo);
+		addVagToy(Items.Toys.SmallDildo);
+		addVagToy(Items.Toys.MediumDildo);
+		addVagToy(Items.Toys.LargeDildo);
+		addVagToy(Items.Toys.ThinDildo);
+		addVagToy(Items.Toys.ButtPlug);
+		addVagToy(Items.Toys.LargeButtPlug);
+		addVagToy(Items.Toys.AnalBeads);
+		addVagToy(Items.Toys.LargeAnalBeads);
+		addVagToy(Items.Toys.EquineDildo);
+		addVagToy(Items.Toys.CanidDildo);
+		addVagToy(Items.Toys.ChimeraDildo);
 		if(optsT.length >= 1) {
 			options.push({ nameStr : "Vag - toys",
 				tooltip : "",
@@ -108,10 +108,10 @@ Scenes.Masturbation.Entry = function() {
 	
 	var analCap = player.Butt().Cap();
 	
-	var optsT = new Array();
-	var addToy = function(toy) {
+	var optsT2 = new Array();
+	var addAnalToy = function(toy) {
 		if(party.Inv().QueryNum(toy)) {
-			optsT.push({ nameStr : toy.name,
+			optsT2.push({ nameStr : toy.name,
 				tooltip : toy.Long(),
 				func : function(obj) {
 					Scenes.Masturbation.AnalOpening(Scenes.Masturbation.AnalToy, obj);
@@ -119,22 +119,22 @@ Scenes.Masturbation.Entry = function() {
 			});
 		}
 	}
-	addToy(Items.Toys.SmallDildo);
-	addToy(Items.Toys.MediumDildo);
-	addToy(Items.Toys.LargeDildo);
-	addToy(Items.Toys.ThinDildo);
-	addToy(Items.Toys.ButtPlug);
-	addToy(Items.Toys.LargeButtPlug);
-	addToy(Items.Toys.AnalBeads);
-	addToy(Items.Toys.LargeAnalBeads);
-	addToy(Items.Toys.EquineDildo);
-	addToy(Items.Toys.CanidDildo);
-	addToy(Items.Toys.ChimeraDildo);
-	if(optsT.length >= 1) {
+	addAnalToy(Items.Toys.SmallDildo);
+	addAnalToy(Items.Toys.MediumDildo);
+	addAnalToy(Items.Toys.LargeDildo);
+	addAnalToy(Items.Toys.ThinDildo);
+	addAnalToy(Items.Toys.ButtPlug);
+	addAnalToy(Items.Toys.LargeButtPlug);
+	addAnalToy(Items.Toys.AnalBeads);
+	addAnalToy(Items.Toys.LargeAnalBeads);
+	addAnalToy(Items.Toys.EquineDildo);
+	addAnalToy(Items.Toys.CanidDildo);
+	addAnalToy(Items.Toys.ChimeraDildo);
+	if(optsT2.length >= 1) {
 		options.push({ nameStr : "Anal - toys",
 			tooltip : "",
 			func : function() {
-				Gui.SetButtonsFromList(optsT, false, null);
+				Gui.SetButtonsFromList(optsT2, false, null);
 			}, enabled : !taur
 		});
 	}
@@ -370,7 +370,7 @@ Scenes.Masturbation.VagOpening = function(func, obj) {
 	parse["arm"] = Text.Parse(armor ? "both [toparmordesc] and [bottomarmordesc]" : "your [armor]", parse);
 	Text.Add("Wasting no time, you find a comfortable spot, divesting yourself of [arm] before ", parse);
 	if(player.HasLegs())
-		Text.Add("lying down on the ground and spreading your legs wide, allowing you easy access to your [vag].");
+		Text.Add("lying down on the ground and spreading your legs wide, allowing you easy access to your [vag].", parse);
 	else
 		Text.Add("stretching out on the ground, exposing your [vag] for the world to see.", parse);
 	Text.Add(" With a soft sigh, you make sure you’re completely comfortable before snaking a hand down across your [belly] and over your [hips] to get at your netherlips, gently testing them with your fingertips in foreplay of sorts. ", parse);
