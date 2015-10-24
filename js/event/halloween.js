@@ -2128,13 +2128,13 @@ Scenes.Halloween.HarthonDefeatedPrompt = function() {
 						if(player.FirstCock())
 							Text.Add("You can feel the heat emanating from her puffy netherlips, a faint drizzle of feminine juices already dribbling over your [cockTip] as it slides teasingly against her cunt. She feels soft and wet as you slowly guide yourself inside of her, until you can feel yourself pressing against her hymen.", parse);
 						else
-							Text.Add("As you sweep your strapon against the vixen’s new cunt, she moans hungrily and grinds her hips against you, helping you to align the tip of the stake with her hole. Carefully, you start to push inside, trying to avoid popping her cherry too roughly.", parse);
+							Text.Add("As you sweep your strap-on against the vixen’s new cunt, she moans hungrily and grinds her hips against you, helping you to align the tip of the stake with her hole. Carefully, you start to push inside, trying to avoid popping her cherry too roughly.", parse);
 						Text.NL();
 						Text.Add("<i>“Go on, I need this,”</i> she pleads with a pout.", parse);
 						Text.NL();
 						Text.Add("Thus reassured, you push on, sliding inside of Harthon’s pussy until you can feel her membrane tear around your invading shaft. You can feel her tremble, see her biting her lip to keep from crying out at the pain, and you stop to let her adjust. Your arms fold themselves around the newly-deflowered vixen, hugging her and her ample bosom to your chest to offer her what comfort you can.", parse);
 						Text.NL();
-						Text.Add("Holding onto her like this, something weird happens. For a moment, your vision goes dark and you feel something flow over your body. Initially you feel dizzy, but right afterward you feel a new surge of energy. It’s as if a new kind of power has taken hold of you, and becomes a part of you. Experimentally, you try focusing it on the vixen currently riding your [cock].", parse);
+						Text.Add("Holding onto her like this, something weird happens. For a moment, your vision goes dark and you feel something flow over your body. Initially, you feel dizzy, but right afterward you feel a new surge of energy. It’s as if a new kind of power has taken hold of you, and becomes a part of you. Experimentally, you try focusing it on the vixen currently riding your [cock].", parse);
 						Text.NL();
 						Text.Add("She locks up, as if her mind had gone blank for an instant, and you feel something change between the two of you. Terraphilius… no… Terry has changed, becoming malleable. Instinctively, you know it. You’ve made her your thrall…", parse);
 						Text.NL();
@@ -2162,7 +2162,7 @@ Scenes.Halloween.HarthonDefeatedPrompt = function() {
 					Text.Add("Hush, now; you’ll give [himher] what [heshe] needs. Your hands close on the vulpine’s perky rear, groping the luscious buttocks as you manhandle [himher] into position.", parse);
 					Text.NL();
 					if(femHarthon)
-						Text.Add("The newly-made vixen actually whimpers in protest as your cock drags across the puffy, leaking folds of her new cunt and slides between her thighs to about her asshole. As horny as she is, though, it seems she’s well past the point of caring where she gets fucked, so long as she gets fucked.", parse);
+						Text.Add("The newly-made vixen actually whimpers in protest as your cock drags across the puffy, leaking folds of her new cunt and slides between her thighs to about her asshole. As horny as she is, though, it seems she’s well past the point of caring where she gets fucked, so long as she is.", parse);
 					else
 						Text.Add("Lost in his lust, the fox can’t even look disgruntled as your [cockTip] slides along his taint to press itself against his virgin hole. Indeed, he actually seems to get even harder at his imminent buggering, pre-cum dripping onto your belly as his cock throbs in anticipation.", parse);
 					Text.NL();
@@ -2173,9 +2173,9 @@ Scenes.Halloween.HarthonDefeatedPrompt = function() {
 					Text.Add("Pleasantly surprised at this turn of events, you still don’t let it go to your head. You’re going to thoroughly enjoy spearing this former ‘master of the night’ up [hisher] asshole, but there’s no need to be a monster about it.", parse);
 					Text.NL();
 					parse["mc"] = player.NumCocks() > 1 ? Text.Parse(", even as its ignored sibling[s2] poke[notS2] into [hisher] buttock cleavage", parse) : "";
-					Text.Add("With this thought in mind, you keep your pace as slow and gentle as the two of you can tolerate. Coaxing inch after inch inside until [hisher] plush butt is nestling gently in your lap, your cock buried to the very hilt[mc].", parse);
+					Text.Add("With this thought in mind, you keep your pace as slow and gentle as the two of you can tolerate. You continue, coaxing inch after inch inside until [hisher] plush butt is nestling gently in your lap, your cock buried to the very hilt[mc].", parse);
 					Text.NL();
-					Text.Add("As you penetrate the vampire’s tender backdoor, something weird happens. For a moment, your vision goes dark and you feel something flow over your body. Initially you feel dizzy, but right afterward you feel a new surge of energy. It’s as if a new kind of power has taken hold of you, and becomes a part of you. Experimentally, you try focusing it on the [foxvixen] currently riding your [cock].", parse);
+					Text.Add("As you penetrate the vampire’s tender backdoor, something weird happens. For a moment, your vision goes dark and you feel something flow over your body. Initially, you feel dizzy, but right afterward you feel a new surge of energy. It’s as if a new kind of power has taken hold of you, and becomes a part of you. Experimentally, you try focusing it on the [foxvixen] currently riding your [cock].", parse);
 					Text.NL();
 					Text.Add("[HeShe] locks up, as if [hisher] mind had gone blank for an instant, and you feel something change between the two of you. Terraphilius… no… Terry has changed, becoming malleable. Instinctively, you know it. You’ve made [himher] your thrall…", parse);
 					Text.NL();
@@ -2248,7 +2248,7 @@ Scenes.Halloween.HarthonPitchAnal = function(parse) {
 	var femHarthon = Scenes.Halloween.HW.harthon & Halloween.Harthon.Feminized;
 	
 	if(p1cock)
-		Text.Add("Your senses are awash in bliss as Terry’s warmth embraces you. [HisHer] hot tunnel squeezes your [cock] in a tight embrace, inundating every inch of your shaft without mercy. Each beat of [hisher] heart makes [hisher] asshole flex, squeezing you gently with a tightness that is just shy of being painful. However, as [heshe] adjusts, [heshe] loosens up just enough to ensure that there is only pleasure at being wrapped inside of [himher].", parse);
+		Text.Add("Your senses are awash in bliss as Terry’s warmth envelops you. [HisHer] hot tunnel squeezes your [cock] in a tight embrace, inundating every inch of your shaft without mercy. Each beat of [hisher] heart makes [hisher] asshole flex, squeezing you gently with a tightness that is just shy of being painful. However, as [heshe] adjusts, [heshe] loosens up just enough to ensure that there is only pleasure at being wrapped inside of [himher].", parse);
 	else
 		Text.Add("Naturally, you don’t get much out of being buried inside of Terry’s tailhole. Your toy is quite something, but it’s not <i>that</i> realistic.", parse);
 	Text.NL();
@@ -2312,11 +2312,11 @@ Scenes.Halloween.HarthonPitchAnal = function(parse) {
 	Text.NL();
 	Text.Add("<i>“Control?”</i>", parse);
 	Text.NL();
-	Text.Add("Absently, you nod your head, already stirring Terry’s former power and directing its flow back into [hisher] ass. ", parse);
+	Text.Add("Absently, you nod your head, already stirring Terry’s former power and directing its flow back into [hisher] butt. ", parse);
 	if(p1cock)
 		Text.Add("You can <b>feel</b> the shudder that races through [himher], a ripple that spreads through every inch of [hisher] clenched asshole like a wave across the shore. Terry’s ass squeezes and flexes with impossible acuity, molding to every ridge, crease and wrinkle of your [cock].", parse);
 	else
-		Text.Add("Despite the lack of connection to your cock, you can practically feel the way Terry’s ass clenches down on it, almost sucking it free of its bindings as it moulds itself around the faux-phallus with impossible flexibility.", parse);
+		Text.Add("Despite the lack of connection to your cock, you can practically feel the way Terry’s ass clenches down on it, almost sucking it free of its bindings as it molds itself around the faux-phallus with impossible flexibility.", parse);
 	Text.NL();
 	Text.Add("<i>“Hng! Ah! This… Ahn! H-how many more changes are you going to make bef - ah! - before you’re happy!?”</i>", parse);
 	Text.NL();
@@ -2329,7 +2329,7 @@ Scenes.Halloween.HarthonPitchAnal = function(parse) {
 	Text.Add("<i>“Well… okay, [mastermistress].”</i>", parse);
 	Text.NL();
 	parse["fake"] = p1cock ? "" : " fake";
-	Text.Add("With closed eyes, the [foxvixen] starts to pump away on your shaft again; slowly, at first, but steadily building up in speed and enthusiasm. [HisHer] jaws fall open soundlessly as [heshe] clenches and releases, milking your[fake] shaft with rapidly growing expertise. From the way ", parse);
+	Text.Add("With closed eyes, the [foxvixen] starts to pump away on your shaft again; slowly, at first, but steadily building up in speed and enthusiasm. [HisHer] jaws fall open soundlessly as [heshe] clenches and releases, milking your[fake] member with rapidly growing expertise. From the way ", parse);
 	if(femHarthon)
 		Text.Add("her netherlips are steadily drooling female lubricant between their puckered labia, glazed with sexual juices until they glitter,", parse);
 	else
@@ -2383,7 +2383,7 @@ Scenes.Halloween.HarthonPitchAnal = function(parse) {
 		parse["c"] = player.NumCocks() > 1 ? Text.Parse(" even as your other neglected cock[s2] spray[notS2] seed onto [hisher] generous ass", parse) : "";
 		Text.Add("Your [cock] explodes inside of [himher], thick jets rushing into [hisher] overstuffed colon[c].", parse);
 		Text.NL();
-		Text.Add("Clinging to your lover for support, your world fades away to the feel of [himher] wrapped around your dick, greedily milking you dry and ensuring that [heshe] swallows up every last drop you have to give him. And you are feeling in quite a generous mood...", parse);
+		Text.Add("Clinging to your lover for support, your world fades away to the feel of [himher] wrapped around your dick, greedily milking you dry and ensuring that [heshe] swallows up every last drop you have to give [himher]. And you are feeling in quite a generous mood...", parse);
 	}
 	else {
 		Text.Add("Your own neglected [vag] clenches hard, envious of the delicious toy invading your lover’s tailhole. Spurts of female honey gush over your [thighs], sliding wetly down your [legs] as you instinctively buck into Terry’s ass.", parse);
@@ -2418,7 +2418,7 @@ Scenes.Halloween.HarthonPitchAnal = function(parse) {
 		Text.NL();
 		Text.Add("His first target is your [breasts], he starts by softly lapping your nipples before moving to the area around. ", parse);
 		if(player.FirstBreastRow().Size() >= 2)
-			Text.Add("From your vantage point, you can see the fox has a smile on his face; it seems he enjoys licking your breasts, not that you’re complaining. Terry’s dexterous tongue finds and cleans every bit of his spent seed easily enough, though you’re not sure your nipples needed a second pass.", parse);
+			Text.Add("From your vantage point, you can see the fox has a smile on his face; it seems he enjoys licking your breasts, not that you’re complaining. Terry’s dexterous tongue finds and cleans every bit of his spent seed easily enough, though you’re not sure your teats needed a second pass.", parse);
 		else
 			Text.Add("The fox doesn’t take too long to clean up every little trace of his cum, his dexterous tongue easily laps everything in a few passes.", parse);
 		Text.NL();
@@ -2574,7 +2574,7 @@ Scenes.Halloween.HarthonPitchVag = function(parse) {
 		if(pregStage > 0)
 			Text.Add(" Before you leave her, though, something makes you pause for a moment - a strange little spark that seems to be emanating from Terry’s belly. Inquisitively, you let a tendril of power brush against her, and what you find brings a brief smile to your lips. Seems your lovemaking has borne fruit; your seed has taken root inside of the vixen’s womb.", parse);
 		Text.NL();
-		Text.Add("After your little <i>readjustment,</i> Terry becomes much more enthusiastic, lapping and sucking on your cock like a baby on a teat. She moves her tongue expertly to lap the underside of your [cock], moaning in pleasure as she takes you as far as she can.", parse);
+		Text.Add("After your little <i>readjustment,</i> Terry becomes much more enthusiastic, lapping and sucking on your cock like a baby on a teat. She moves her tongue expertly to service the underside of your [cock], moaning in pleasure as she takes you as far as she can.", parse);
 		Text.NL();
 		Text.Add("You moan softly, praising Terry on her efforts. Such a good little vixen; she’ll have you all cleaned up in no time, won’t she?", parse);
 		Text.NL();
@@ -2795,7 +2795,7 @@ Scenes.Halloween.HarthonBadend = function() {
 	Text.NL();
 	Text.Add("You sigh in longing, content to lie here; this where you were <b>meant</b> to be. Senses awash in bliss, you don’t register Master Harthon nuzzling your neck until his lips press themselves against the [skin], soft and tender.", parse);
 	Text.NL();
-	Text.Add("His tongue glides against your throat, lapping with gentle insistence, and you wriggle slightly beneath him to expose yourself, offering him your throat. To be held and mated by your master, then offer him your blood… there’s nothing that could equal the bliss you feel right now.", parse);
+	Text.Add("His tongue glides against your neck, lapping with gentle insistence, and you wriggle slightly beneath him to expose yourself, offering him your throat. To be held and mated by your master, then offer him your blood… there’s nothing that could equal the bliss you feel right now.", parse);
 	Text.NL();
 	Text.Add("<i>“No, thrall.”</i>", parse);
 	Text.NL();
@@ -2814,7 +2814,7 @@ Scenes.Halloween.HarthonBadend = function() {
 	Text.NL();
 	Text.Add("You gasp and moan as your Master tries to free himself; even though you try to help him escape your depths, his knot is just too big. Each tug sends sparks crackling into your brain, warmth flooding your bowels as another rope of seed erupts inside of you.", parse);
 	Text.NL();
-	Text.Add("Each pull draws him further and further out of you, until finally he pops free, one final spurt of semen splashing against your gaping ass and trickling down the canyon of your cleavage.", parse);
+	Text.Add("Each pull draws him further and further out of you until finally, he pops free as one final spurt of semen splashes against your gaping ass and trickles down the canyon of your cleavage.", parse);
 	Text.NL();
 	Text.Add("<i>“Turn around and lick me clean, thrall. Drink deep and become a proper vessel for my seed.”</i>", parse);
 	Text.NL();
@@ -2961,7 +2961,7 @@ Scenes.Halloween.HarthonThrallPrompt = function(parse) {
 			Text.NL();
 			Text.Add("Upon hearing your words, ", parse);
 			if(pregStage >= 5) {
-				Text.Add("Terry removes her cloak and wraps the baby in it. She kisses the kit on the forehead then uses what little remains of her dark power to lull the baby into sleep. The vampire vixen smiles for a few moments, before setting the baby down on a stump nearby, where she can keep an eye on her.", parse);
+				Text.Add("Terry removes her cloak and wraps the baby in it. She kisses the kit on the forehead then uses what little remains of her dark power to lull the young one to sleep. The vampire vixen smiles for a few moments, before setting her daughter down on a stump nearby, where she can keep an eye on her.", parse);
 				Text.NL();
 				Text.Add("<i>“She should be safe there,”</i> she says, before turning to you. <i>“So, what exactly do you want of me, [mastermistress]? Do you want my pussy? My butt? Or maybe do you want me to lick you?”</i>", parse);
 			}
@@ -3147,7 +3147,7 @@ Scenes.Halloween.HarthonThrallPrompt = function(parse) {
 					else
 						Text.Add("Again? Is [heshe] seriously going to make you go through this every single time? But you’ll be nice and give [himher] a chance to get into this on [hisher] own before you bring out your trump card.", parse);
 					Text.NL();
-					Text.Add("You start to slowly thrust your hips back and forth, rocking slightly as you slowly stroke your pulsating member along Terry’s mouth. You push the [cockTip] in until you are just shy of Terry’s throat, then leisurely draw back. The feeling of [hisher] tongue under your cock makes you shiver, the slight roughness of [hisher] taste buds rippling along your sensitive skin making your heartbeat quicken.", parse);
+					Text.Add("You start to thrust your hips back and forth, rocking slightly as you slowly stroke your pulsating member along Terry’s mouth. You push the [cockTip] in until you are just shy of Terry’s throat, then leisurely draw back. The feeling of [hisher] tongue under your cock makes you shiver, the slight roughness of [hisher] taste buds rippling along your sensitive skin making your heartbeat quicken.", parse);
 					Text.NL();
 					if(first) {
 						Text.Add("Still, despite your gentle efforts to coax the [foxvixen] into participating... nothing. [HeShe] won’t even close [hisher] mouth on your cock.", parse);
@@ -3182,12 +3182,12 @@ Scenes.Halloween.HarthonThrallPrompt = function(parse) {
 					Text.NL();
 					Text.Add("With Terry’s mouth otherwise occupied, you’re quite happy to just sit back and enjoy Terry’s efforts. You occasionally thrust your hips, but with the [foxvixen]’s new enthusiasm, you can gladly leave the bulk of the work to [himher].", parse);
 					Text.NL();
-					Text.Add("The lewd slurps and sucks of Terry’s lips greedily wrapped around your dick echo softly in the cool night air. Your breathing comes in short, sharp pants, the tightness welling up ", parse);
+					Text.Add("The lewd slurps and sucks of Terry’s lips greedily wrapped around your dick echo softly in the cool night air. Your breathing comes in short, sharp pants, and tightness wells up ", parse);
 					if(player.HasBalls())
-						Text.Add("your aching [balls],", parse);
+						Text.Add("in your aching [balls]", parse);
 					else
-						Text.Add("at the base of your spine,", parse);
-					Text.Add(" and you know that you can’t hold out much longer.", parse);
+						Text.Add("at the base of your spine", parse);
+					Text.Add(". You know that you can’t hold out much longer.", parse);
 					Text.NL();
 					Text.Add("Your whole body trembles, eyes squeezing tight as pleasure creeps along your nerves. Feeling your reserves starting to crumble, you shout for Terry to take it all, like the greedy little cum-dumpster [heshe] is, and then give yourself over to climax hammering at your self-control.", parse);
 					Text.NL();
@@ -3195,7 +3195,7 @@ Scenes.Halloween.HarthonThrallPrompt = function(parse) {
 					Text.NL();
 					Text.Add("You shudder and squirm, writhing like a worm on a hook as your tame vampire greedily guzzles down your dick-cream, sucking and slurping until you feel that [heshe]’s going to ", parse);
 					if(player.HasBalls())
-						Text.Add("suck your balls out through your dick.", parse);
+						Text.Add("suck your balls out through your shaft.", parse);
 					else
 						Text.Add("slurp up your spine like a noodle.", parse);
 					Text.Add(" Caught by your own ploy, you desperately reach for the power within you, breaking the enchantment you laid on your formerly-reluctant pet.", parse);
@@ -3275,15 +3275,15 @@ Scenes.Halloween.HarthonThrallPrompt = function(parse) {
 				Text.NL();
 				Text.Add("You tap into the dark power you stole from the former lord, letting it carry your will as you tell him to <b>relax</b>.", parse);
 				Text.NL();
-				Text.Add("<i>“Yes, [mastermistress].”</i>The effect is almost instantaneous, Terry takes a deep breath and his breathing evens out as he grows more relaxed.", parse);
+				Text.Add("<i>“Yes, [mastermistress].”</i> The effect is almost instantaneous, Terry takes a deep breath and his breathing evens out as he grows more relaxed.", parse);
 				Text.NL();
 				Text.Add("That’s a good boy. You affectionately stroke Terry’s ears, and then turn your attention to the canteen in your other hand.", parse);
 				Text.NL();
-				Text.Add("Since Terry’s being so cooperative, rather than just dumping the liquid over his head, you decide to apply it to him yourself. First, you gather some of the liquid in the canteen on your hand. As soon as it’s out of the canteen it begins to glow blue, and you see a blue flame emerge. At first you’re somewhat alarmed, but when you see that the fire doesn’t burn and that it’s merely lukewarm, your worry dissipates.", parse);
+				Text.Add("Since Terry’s being so cooperative, rather than just dumping the liquid over his head, you decide to apply it to him yourself. First, you gather some of the liquid in the canteen on your hand. As soon as it’s out of the canteen, it begins to glow blue, and you see an azure flame emerge. At first you’re somewhat alarmed, but when you see that the fire doesn’t burn and that it’s merely lukewarm, your worry dissipates.", parse);
 				Text.NL();
 				Text.Add("You begin with Terry’s head, massaging the flaming liquid into his scalp, covering his head with the bluish glow of the holy flames. Little by little the flames dissipate, leaving behind only Terry’s silky locks of red hair.", parse);
 				Text.NL();
-				Text.Add("The next target is the vampire’s face; he closes his eyes and you massage the liquid into his fur. You can feel his features changing under your touch, shifting from their previous androgynous features into something more feminine. With your thumb, you stroke his lips as if applying lipstick to the fox, and you feel them become plumper, softer, and more inviting. By the time you’re done, Terry is left with puffy lips that are just perfect for kissing… or sucking cock.", parse);
+				Text.Add("The next target is the vampire’s face; he closes his eyes and you massage the liquid into his fur. You can feel his features changing under your touch, shifting from their previous androgynous form into something more feminine. With your thumb, you stroke his lips as if applying lipstick to the fox, and you feel them become plumper, softer, and more inviting. By the time you’re done, Terry is left with puffy lips that are just perfect for kissing… or sucking cock.", parse);
 				Text.NL();
 				Text.Add("A soft mewl bubbles from Terry’s new mouth, already sounding more womanly. It brings a smile to your face, but you’re not done yet.", parse);
 				Text.NL();
@@ -3297,9 +3297,9 @@ Scenes.Halloween.HarthonThrallPrompt = function(parse) {
 				Text.NL();
 				Text.Add("Terry moans at your touch, visibly quivering, and you wonder for a second what the magic may be doing to him, deep inside. For a moment, the urge to rush ahead to the best part wells up inside of you, but you force it down. This is something to savor, to enjoy to the fullest. It will be all the sweeter for having waited.", parse);
 				Text.NL();
-				Text.Add("Leisurely, you stalk around your mewling, panting vixen-to-be, kneeling down beside her. More of the holy water sluices down her back, flowing over her tail and through the cleft of her buttocks, making her moan as it seeps through her fur.", parse);
+				Text.Add("Leisurely, you stalk around your mewling, panting vixen-to-be, kneeling down beside him. More of the holy water sluices down his back, flowing over his tail and through the cleft of his buttocks, making him moan as it seeps through his fur.", parse);
 				Text.NL();
-				Text.Add("Your hands circle her waist, stroking and pinching; in all honesty, there’s very little room for improvement here. The former fox has quite a set of hips on her already... still, you delight in making what changes you can. A little tug here, and a little pull there, and you spread her wider, giving her even more of a girlish waistline and hips more suited for birthing.", parse);
+				Text.Add("Your hands circle his waist, stroking and pinching; in all honesty, there’s very little room for improvement here. The former fox has quite a set of hips on him already... still, you delight in making what changes you can. A little tug here, and a little pull there, and you spread him wider, giving him even more of a girlish waistline and hips more suited for birthing.", parse);
 				Text.NL();
 				Text.Add("With lecherous glee, you caress your thrall’s butt. So ripe, so round, so fully packed; even as you eagerly molest them, you can think of little to do to improve them. Ultimately, you decide that he needs no further treatment here; it would be a shame to ruin something so wonderful by trying too hard to “fix” it, after all.", parse);
 				Text.NL();
@@ -3323,12 +3323,13 @@ Scenes.Halloween.HarthonThrallPrompt = function(parse) {
 				Text.NL();
 				Text.Add("His cock, still oozing pre-cum along his folds, is nothing more than a glans just barely peeking from beneath his stretched hood. As you rub it with your thumb, you can feel it shrinking smaller and smaller, until it slowly creeps away back into hiding.", parse);
 				Text.NL();
-				Text.Add("Gently, you press into Terry’s gash, slowly kneading the soft, vulnerable flesh. As you push, you can feel it giving way, opening up into a waiting love tunnel. First, one finger fits inside, and then a second, both vanishing to the knuckle. Terry trembles and whimpers, teeth clicking in sensory overload as you finish sculpting him inside and out.", parse);
+				//Terry turns female HERE
+				Text.Add("Gently, you press into Terry’s gash, slowly kneading the soft, vulnerable flesh. As you push, you can feel it giving way, opening up into a waiting love tunnel. First, one finger fits inside, and then a second, both vanishing to the knuckle. Terry trembles and whimpers, teeth clicking in sensory overload as you finish sculpting her inside and out.", parse);
 				Text.NL();
 				if(werewolf)
-					Text.Add("You can <b>smell</b> the changes flowing through him; masculine musk almost entirely swallowed by the sweet scent of femininity. It makes your cock ache in need, trembles of anxiety sweeping over your hulking lupine frame, but you hold it at bay. Just a little more...", parse);
+					Text.Add("You can <b>smell</b> the changes flowing through her; masculine musk almost entirely swallowed by the sweet scent of femininity. It makes your cock ache in need, trembles of anxiety sweeping over your hulking lupine frame, but you hold it at bay. Just a little more...", parse);
 				else
-					Text.Add("Terry is even starting to <b>smell</b> different; a distinctly feminine scent starting to fill your nostrils as you approach the pinnacle of your efforts. You savor the sexual bouquet, even as you continue to tweak his new canal.", parse);
+					Text.Add("Terry is even starting to <b>smell</b> different; a distinctly feminine scent starting to fill your nostrils as you approach the pinnacle of your efforts. You savor the sexual bouquet, even as you continue to tweak her new canal.", parse);
 				Text.NL();
 				Text.Add("Only when you add the third finger does the magic take place. Terry arches her back and howls like a bitch in heat. Her folds spasm under your touch, her tunnel clenching down on the intruding digits with crushing force as she is wracked by her first female orgasm.", parse);
 				Text.NL();
@@ -3366,7 +3367,7 @@ Scenes.Halloween.HarthonThrallPrompt = function(parse) {
 					Text.NL();
 					Text.Add("<i>“Uh, yeah...”</i>", parse);
 					Text.NL();
-					Text.Add("Well, how does she think it’ll feel the next time, now she’s got a body just made for being smitten with this?", parse);
+					Text.Add("Well, how does she think it’ll feel next time, now that she’s got a body just made for being smitten with this?", parse);
 					Text.NL();
 					Text.Add("<i>“Well, I’ll admit I’m at least a little curious,”</i> she says, biting her lower lip.", parse);
 					Text.NL();
@@ -3454,7 +3455,7 @@ Scenes.Halloween.HarthonBirth = function(parse) {
 	Text.NL();
 	Text.Add("<i>“T-thanks, [mastermistress],”</i> she says, still out of breath. <i>“Get the baby, use my cloak.”</i>", parse);
 	Text.NL();
-	Text.Add("You nod your understanding and carefully slide your lap out from under the tired vixen’s head. Terry pants as she lays there on the leaves, wriggling slightly as you slowly pull the cape out from under her before approaching her legs.", parse);
+	Text.Add("You nod your understanding and carefully slide your lap out from under the tired vixen’s head. Terry pants as she lies there on the leaves, wriggling slightly as you slowly pull the cape out from under her before approaching her legs.", parse);
 	Text.NL();
 	Text.Add("Sprawled between the vampiress’ legs, little fists clenched and shaking as it continues to howl at being thrust from its warm home, your baby is fluffy, covered in slime, and at once both adorable and disgusting. A grin of paternal pride stretches across your face as you carefully scoop the little one into your arms, using Terry’s cloak as a makeshift blanket.", parse);
 	Text.NL();
