@@ -3299,7 +3299,7 @@ Scenes.Halloween.HarthonThrallPrompt = function(parse) {
 				Text.NL();
 				Text.Add("Leisurely, you stalk around your mewling, panting vixen-to-be, kneeling down beside him. More of the holy water sluices down his back, flowing over his tail and through the cleft of his buttocks, making him moan as it seeps through his fur.", parse);
 				Text.NL();
-				Text.Add("Your hands circle his waist, stroking and pinching; in all honesty, there’s very little room for improvement here. The former fox has quite a set of hips on him already... still, you delight in making what changes you can. A little tug here, and a little pull there, and you spread him wider, giving him even more of a girlish waistline and hips more suited for birthing.", parse);
+				Text.Add("Your hands circle his waist, stroking and pinching; in all honesty, there’s very little room for improvement here. The fox has quite a set of hips on him already... still, you delight in making what changes you can. A little tug here, and a little pull there, and you spread him wider, giving him even more of a girlish waistline and hips more suited for birthing.", parse);
 				Text.NL();
 				Text.Add("With lecherous glee, you caress your thrall’s butt. So ripe, so round, so fully packed; even as you eagerly molest them, you can think of little to do to improve them. Ultimately, you decide that he needs no further treatment here; it would be a shame to ruin something so wonderful by trying too hard to “fix” it, after all.", parse);
 				Text.NL();
