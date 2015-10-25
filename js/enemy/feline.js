@@ -1403,7 +1403,7 @@ Scenes.Felines.WinGroupService = function(enc, enemy) {
 	
 	parse["ghisher"] = group ? "their" : betaCat.hisher();
 	parse["gheshe"] = group ? "they" : betaCat.heshe();
-	Text.Add("Seeing [ghisher] boss so eager, the other feline[gs] follow in suit. ", parse);
+	Text.Add("Seeing [ghisher] boss so eager, the other feline[gs] follow[gnotS] in suit. ", parse);
 	if(player.NumCocks() == 1) {
 		Text.Add("Unfortunately, you only got one [cock], so [gheshe]’ll have to come to an agreement if [gheshe] intend to get some cream.", parse);
 		Text.NL();
