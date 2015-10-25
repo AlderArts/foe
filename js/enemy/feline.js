@@ -529,6 +529,7 @@ Scenes.Felines.WinPrompt = function() {
 	var enemy   = enc.enemy;
 	var group   = enemy.Num() > 1;
 	var mainCat = enemy.Get(0);
+	var taur    = player.IsTaur();
 	
 	var parse = {
 		oneof        : group ? " one of" : "",
@@ -650,7 +651,15 @@ Scenes.Felines.WinPrompt = function() {
 				});
 			}
 		}
-		/*
+		if(group && !taur && player.FirstCock()) {
+			options.push({ nameStr : "Service Cock" + (player.NumCocks() > 1 ? "s" : ""),
+				func : function() {
+					Scenes.Felines.WinGroupService(enc, enemy);
+				}, enabled : true,
+				tooltip : "Cats love milk, don’t they? So how about serving these naughty pussies a bit of your male-milk?"
+			});
+		}
+		/* TODO more
 			options.push({ nameStr : "Nah",
 				func : function() {
 					Scenes.Felines.WinFuckVag(female, enc);
@@ -1353,6 +1362,165 @@ Scenes.Felines.WinGetBlowjob = function(cat, group, enc) {
 		
 		Gui.NextPrompt();
 	});
+}
+
+
+Scenes.Felines.WinGroupService = function(enc, enemy) {
+	var mainCat = enemy.Get(0);
+	var betaCat = enemy.Get(1);
+	var gammaCat = enemy.Get(2);
+	var deltaCat = enemy.Get(3);
+	var numCats = enemy.Num();
+	var group = numCats > 2;
+	
+	var numCocks = player.NumCocks();
+	
+	var parse = {
+		
+	};
+	parse = player.ParserTags(parse);
+	parse = mainCat.ParserPronouns(parse);
+	parse = betaCat.ParserPronouns(parse, "B");
+	if(gammaCat)
+		parse = gammaCat.ParserPronouns(parse, "G");
+	if(deltaCat)
+		parse = deltaCat.ParserPronouns(parse, "D");
+	parse = Text.ParserPlural(parse, numCocks > 1);
+	parse = Text.ParserPlural(parse, numCocks > 2, "", "2");
+	parse = Text.ParserPlural(parse, group, "g");
+	
+	Text.Clear();
+	Text.Add("Decision made, you quickly strip your [armor] and pick each cat up, settling them down on their knees in front of you.", parse);
+	Text.NL();
+	Text.Add("Once you have their undivided attention, you point to your [cocks] and utter a single order: <i>“Lick.”</i>", parse);
+	Text.NL();
+	Text.Add("The one that appears to be their leader leans closer to sniff at[oneof] your [cocks], then mewls softly and smiles. [HeShe] extends [hisher] tongue and begins gently lapping your [cock].", parse);
+	Text.NL();
+	
+	Sex.Blowjob(mainCat, player);
+	mainCat.FuckOral(mainCat.Mouth(), player.FirstCock(), 2);
+	player.Fuck(player.FirstCock(), numCats); //2, 3, 4
+	
+	parse["ghisher"] = group ? "their" : betaCat.hisher();
+	parse["gheshe"] = group ? "they" : betaCat.heshe();
+	Text.Add("Seeing [ghisher] boss so eager, the other feline[gs] follow in suit. ", parse);
+	if(player.NumCocks() == 1) {
+		Text.Add("Unfortunately you only got one [cock], so [gheshe]’ll have to come to an agreement if [gheshe] intend to get some cream.", parse);
+		Text.NL();
+		Text.Add("The cats push and pull, silently trying to get into an agreement. Their leader stops licking you to bicker with [hisher] lackey[gs] and you cough to remind them what they’re supposed to be doing here…", parse);
+		Text.NL();
+		Text.Add("They immediately stop their bickering and look at you apologetically, then they talk amongst themselves and seem to reach an understanding.", parse);
+		Text.NL();
+		Text.Add("The boss gets your glans, gently sucking and tonguing it. Despite [hisher] rough tongue, [heshe]’s careful enough that it doesn’t hurt you in the least, and in fact feels pretty pleasurable in a weird kind of way. It’s as if [heshe] was tickling your [cockTip] whilst also pleasuring it… it’s hard to put into words…", parse);
+		Text.NL();
+		if(deltaCat)
+			Text.Add("One of them is in charge of licking along the sides of your shaft. [DHeShe]’s not as skilled as the boss, but the warm, wet tongue feels good on your length all the same. ", parse);
+		if(gammaCat) {
+			parse["f"] = numCats > 3 ? "Another o" : "O";
+			Text.Add("[f]ne decides to lay little kisses and suckles along your length. [GHisHer] whiskers tickle a bit, but it’s still a very pleasurable sensation, and [Gheshe] certainly doesn’t lose to [Ghisher] boss in terms of enthusiasm. ", parse);
+		}
+		parse["last"] = numCats > 2 ? "last" : "other";
+		parse["friends"] = numCats > 2 ? "friends" : "boss";
+		parse["k"] = player.FirstCock().Knot() ? ", right besides your knot" : "";
+		Text.Add("The [last] one looks under your [cock] and ", parse);
+		if(player.HasBalls())
+			Text.Add("decides to nuzzle and suckle on your [balls], coaxing them into producing more tasty cream for [Bhisher] [friends].", parse);
+		else if(player.FirstVag())
+			Text.Add("mewls happily when [Bheshe] sees that you have a [vag] ripe for some attention. [BHeShe] immediately digs in, licking and kissing with abandon. The sudden bout of enthusiasm makes you lose balance and you almost fall, but you recover quickly enough.", parse);
+		else
+			Text.Add("mewls in confusion. Seeing that you have nothing for [Bhimher] to play with underneath, [Bheshe] shrugs and decides to stick to suckling and licking the base of your [cock][k].", parse);
+		Text.NL();
+		parse["vb"] = player.HasBalls() ? Text.Parse(" and [balls]", parse) :
+			player.FirstVag() ? Text.Parse(" and [vag]", parse) : "";
+		Text.Add("You let the kitties go to town on your [cock] as you’re driven ever close to the edge of your climax. Since they’re doing such a good job tending to your needs, you decide to pat them lightly on their heads. This causes them to start purring, sending wonderful vibrations coursing throughout your member[vb], further tearing at your resistance.", parse);
+		Text.NL();
+		Text.Add("So close to cumming, you throw a warning to your pet pussies that you’re about to blow, and they immediately react by doubling their efforts! When you’re on the very brink, the other cat[gs] clear[gnotS] the way and the boss takes you as far into [hisher] throat as [heshe] can.", parse);
+		Text.NL();
+		Text.Add("The act sends you over the edge and cry out in pleasure as your climax hits you like a truck.", parse);
+		Text.NL();
+		
+		var cum = player.OrgasmCum();
+		
+		if(cum > 6) {
+			Text.Add("You cum with such force that you nearly knock the cat currently deepthroating you off your [cock], but [heshe] perseveres until [heshe]’s gotten a few mouthfuls worth of seed.", parse);
+			Text.NL();
+			parse["next"] = numCats < 3 ? "other" : "next";
+			Text.Add("Next, [heshe] releases you, getting blasted on [hisher] face as [heshe] steps away for the [next] cat in line for your bountiful cream.", parse);
+		}
+		else if(cum > 3) {
+			Text.Add("You give the cat currently deepthroating you a fat load straight down [hisher] stomach before [heshe] withdraws enough to taste your subsequent loads. When [heshe]’s had a few more mouthfuls, [heshe] steps away to let the other cat[gs] have a go.", parse);
+			Text.NL();
+			Text.Add("Switching so suddenly earns them a jet straight on the face, but they don’t seem to mind.", parse);
+		}
+		else {
+			Text.Add("You gasp as you cum what feels like buckets worth of virile seed!", parse);
+			Text.NL();
+			Text.Add("The cat boss pulls away so only your tip is inside [hisher] maw, purring as you unload into [hisher] willing throat. [HeShe] drinks [hisher] fill, then releases you, earning [himher]self a splash of seed on [hisher] face before the next cat takes over.", parse);
+		}
+		Text.NL();
+		Text.Add("The cats rotate, each getting their turn and well-earned mouthful of spunk. By the time you’re done, they’re left mewling, licking each other’s faces clean of your sperm. Each one enjoying it as if it was the finest drink they’ve ever had...", parse);
+		Text.NL();
+		Text.Add("You take a seat on the ground and give yourself a few moments to rest. The cats clean themselves up and settle down for a nap. That’s not a half-bad idea… but not here. Who knows what these naughty kitties will be up to once they awaken?", parse);
+		Text.NL();
+		Text.Add("You quickly collect and don your [armor], then leave the sleeping felines behind.", parse);
+	}
+	else {
+		var share = false;
+		var spare = false;
+		if(numCats > numCocks) {
+			parse["sll"] = group ? "ll" : "s";
+			Text.Add("Unfortunately you don’t have enough cocks for all of them, so [gheshe]'[sll] have to share if everyone hopes for a turn at your [cocks].", parse);
+			share = true;
+		}
+		else if(numCats < numCocks) {
+			Text.Add("Fortunately you got more cocks that you got willing kitties, so there’s plenty to go around. Maybe one of them will want seconds?", parse);
+			spare = true;
+		}
+		else {
+			Text.Add("Fortunately it’s a match made in heaven, you have just enough cocks to feed each of their drooling kitty-muzzles some of your cream.", parse);
+		}
+		Text.NL();
+		Text.Add("Their eager feline muzzles engulf each of your shafts as they begin sucking on them like hungry kittens.", parse);
+		if(share)
+			Text.Add(" Those that are left without a cock sit behind, patiently waiting for their turn.", parse);
+		else if(spare)
+			Text.Add(" Once every cat has their mouth full of dick, they spare a paw or two to stroke your remaining cock[s].", parse);
+		Text.NL();
+		Text.Add("You pet their heads and encourage them to suck deeper and harder. They respond by purring, sending wonderful vibrations coursing through your [cocks]. Pre seeps constantly out of each of your shafts, feeding the felines and spurring them on.", parse);
+		Text.NL();
+		if(share) {
+			Text.Add("At about this time, the cats decide to rotate, switching their respective cocks around and shuffling so those that were standing in line have a chance to get some of your cream too. Those that wind up without a cock suck, just lick their lips and preen themselves by licking their paws.", parse);
+			Text.NL();
+		}
+		else if(spare) {
+			Text.Add("The cats decide it’s time to shuffle things about, so they switch their cocks around, leaving the dicks they were previously sucking exposed to the cool air as they engulf new shafts with a mewl.", parse);
+			Text.NL();
+		}
+		Text.Add("You can feel yourself teetering on the edge of your climax, and though you warn the friendly felines they don’t seem to hear or mind.", parse);
+		Text.NL();
+		
+		var cum = player.OrgasmCum();
+		
+		if(cum > 6) {
+			parse["sp"] = spare ? Text.Parse(", even as your other shaft[s2] whip around and splatter [hisher] body with cum", parse) : "";
+			Text.Add("When you finally you cum, your explosion of cum surprises the cats with its overwhelming volume. The boss holds steady, hanging on your shaft and drinking it down merrily[sp]. The other cat[gs] have to stop [ghisher] ministrations to cough and breath, and [gheshe] winds up covered in semen, much to [ghisher] delight.", parse);
+		}
+		else if(cum > 3) {
+			parse["sp"] = spare ? Text.Parse(", your other cock[s2] spill cum all over across their bodies, but they don’t seem to care", parse) : "";
+			Text.Add("You let out a cry of pleasure as your cum jets out into the felines’ waiting throats. Each one gets a hearty serving[sp].", parse);
+		}
+		else {
+			Text.Add("Cum sprays out of your [cocks] to be quickly lapped up by the hungry cats. Not satisfied with your smaller load, they stroke and suck until you give them more. Only when they’re sure there’s absolutely no more cum do they stop.", parse);
+		}
+		
+		Text.NL();
+		Text.Add("After you’ve come down from your orgasmic high, you watch the cats settle down on the ground, huddled together for a quick nap. While the prospect is tempting, you decide that it’d be best if you got going. This encounter wasn’t half bad, you hope you’ll see more of these friendly felines soon…", parse);
+	}
+	Text.Flush();
+
+	world.TimeStep({minute: 30});
+	
+	Gui.NextPrompt();
 }
 
 Scenes.Felines.LossRegular = function() {
@@ -2109,3 +2277,4 @@ Scenes.Felines.WinPrompt = function() {
 	Text.Flush();
 }
 */
+
