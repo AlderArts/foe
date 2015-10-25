@@ -461,7 +461,7 @@ Scenes.Masturbation.CockOpening = function(p1cock) {
 			Text.Add("Spunk flies from your [cockTip], arcing through the air before splattering soundly on the ground below. Each new jet is a thrill of its own, and each one sends you straight to heaven. The process repeats itself several times, until you’ve literally cum enough to fill a few buckets worth of jism. Ah… you needed that...", parse);
 		}
 		else if(cum > 3) {
-			Text.Add("You continue pumping as your cock spews rope after rope of jism into the air. Your orgasm carries on in intervals, each dotted by a new rope of cum; as you cum, you feel your tension evaporate, replaced by satisfaction and relief at finally unloading yourself…", parse);
+			Text.Add("You continue pumping as your cock spews rope after rope of jism into the air. Your orgasm carries on in intervals, each dotted by a new rope of sticky white; as you cum, you feel your tension evaporate, replaced by satisfaction and relief at finally unloading yourself…", parse);
 			Text.NL();
 			Text.Add("When it finally ends, you feel spent, but relaxed. Phew… that was great...", parse);
 		}
