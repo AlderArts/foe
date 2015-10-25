@@ -35,7 +35,8 @@ Halloween.Flags = {
 	PatchesPW : 512,
 	Carepack  : 1024,
 	Laggoth   : 2048,
-	Mausoleum : 4096
+	Mausoleum : 4096,
+	TRoom     : 8192
 };
 Halloween.Ronnie = {
 	NotMet  : 0,
@@ -120,6 +121,7 @@ Halloween.Loc = {
 	Path : new Event("Beaten path"),
 	Graveyard : new Event("Graveyard"),
 	Mausoleum : new Event("Mausoleum"),
+	TortureRoom : new Event("Torture room"),
 	Chapel : new Event("Burned chapel"),
 	WitchHut : new Event("Witch's hut")
 };
@@ -1867,10 +1869,6 @@ Halloween.Loc.Mausoleum.description = function() {
 		Text.Add("One is a black coffin, seemingly out of place with how well it’s maintained compared to everything else. Just approaching it fills you with dread.");
 }
 
-/* //TODO
-[Door]
- */
-
 Halloween.Loc.Mausoleum.links.push(new Link(
 	"Leave", true, true,
 	null,
@@ -1878,22 +1876,15 @@ Halloween.Loc.Mausoleum.links.push(new Link(
 		MoveToLocation(Halloween.Loc.Graveyard);
 	}
 ));
-/* TODO Torture room
 Halloween.Loc.Mausoleum.links.push(new Link(
-	"", true, true,
+	function() {
+		return (Scenes.Halloween.HW.flags & Halloween.Flags.TRoom) ? "Torture room" : "Door";
+	}, true, true,
 	null,
 	function() {
-		
+		MoveToLocation(Halloween.Loc.TortureRoom);
 	}
 ));
-Halloween.Loc.Mausoleum.events.push(new Link(
-	"", true, true,
-	null,
-	function() {
-		
-	}
-));
-*/
 
 Halloween.Loc.Mausoleum.events.push(new Link(
 	"Coffin", function() {
@@ -1904,6 +1895,213 @@ Halloween.Loc.Mausoleum.events.push(new Link(
 		Scenes.Halloween.HarthonFirst();
 	}
 ));
+
+
+Halloween.Loc.TortureRoom.description = function() {
+	var first = !(Scenes.Halloween.HW.flags & Halloween.Flags.TRoom);
+	Scenes.Halloween.HW.flags |= Halloween.Flags.TRoom;
+	
+	Text.Add("Your first impression of the chamber is that it’s some kind of dungeon. A second impression confirms it, although a rather different sort of dungeon than you had initially believed.");
+	Text.NL();
+	Text.Add("Whoever stocked this room must have been quite the BDSM fanatic. Flickering torches keep everything in a sinisterly array of light and dark, shifting shadows adding an air of menace even with the lack of bodily harm threatened. Several tables are laid out, all with either arrays of heavy leather straps fixed to them, rotating bases, or both. A rack - repurposed for less lethal interrogations - sits in one corner, whilst a large rocking horse sits in another.");
+	Text.NL();
+	Text.Add("The walls are bedecked with all kinds of tools of sexual humiliation and punishment. Whips and cat-o-nine-tails in more styles than you had ever seen in one place before. Intricately crafted paddles, pegs, gags and masks. And in pride of place, sex toys: beads, vibrators, and especially dildos, the latter in an array of shapes and sheer sizes that ");
+	if(player.Slut() < 50)
+		Text.Add("makes you flush and cast your eyes away, unable to look at them.");
+	else
+		Text.Add("makes even an experienced slut like you look at them a little askance.");
+	Text.NL();
+	Text.Add("Aside from all of the sexual paraphernalia, the room is pretty much empty. The only thing of interest lies at the center of the room; an expensive-looking urn fashioned in the likeness of a dog. It’s carved with ancient drawings and glyphs you couldn’t hope to puzzle out.");
+}
+
+Halloween.Loc.TortureRoom.links.push(new Link(
+	"Leave", true, true,
+	null,
+	function() {
+		Text.Clear();
+		if(player.Slut() < 50)
+			Text.Add("You’re more than happy to leave this creepy place and all these perverted devices to keep gathering dust.");
+		else
+			Text.Add("Although you can’t resist casting an appreciative eye over the many delicious toys scattered around, you ultimately shrug your shoulders and leave. They’re just no fun when there’s nobody else to play with.");
+		Text.Flush();
+		
+		Gui.NextPrompt(function() {
+			MoveToLocation(Halloween.Loc.Mausoleum);
+		});
+	}
+));
+
+Halloween.Loc.TortureRoom.events.push(new Link(
+	"Urn", true, true,
+	null,
+	function() {
+		Scenes.Halloween.NadirMaApproach();
+	}
+));
+
+Scenes.Halloween.NadirMaApproach = function() {
+	var parse = {
+		
+	};
+	Text.Clear();
+	Text.Add("It certainly doesn’t look very fancy. Roughly a foot tall and about four inches across, and made from undecorated clay, it wouldn’t go amiss on a bar somewhere filled with roasted nuts or pickled eggs. The most unusual thing about it is the presence of a few small engravings, depicting hieroglyphs you can’t decipher, and its lid. Someone went to the trouble of sculpting a small bust of a canid’s head - you think it’s a jackal, but you’re not sure - and fitting it atop the urn as a plug.", parse);
+	Text.NL();
+	Text.Add("As you reach for the plug, you’re overcome with a powerful sense of dread. Something about this urn just exhales an ominous vibe… Should you really open it?", parse);
+	Text.Flush();
+	
+	//[Yes][No]
+	var options = new Array();
+	options.push({ nameStr : "Yes",
+		tooltip : "It’s just a damned jar, what are you afraid of? What could go wrong?",
+		func : function() {
+			Scenes.Halloween.NadirMa();
+		}, enabled : true
+	});
+	options.push({ nameStr : "No",
+		tooltip : "No, you’re not going to fall for this. Let sleeping evils lie.",
+		func : function() {
+			PrintDefaultOptions();
+		}, enabled : true
+	});
+	Gui.SetButtonsFromList(options, false, null);
+}
+
+Scenes.Halloween.NadirMa = function() { //TODO
+	var werewolf = Scenes.Halloween.HW.Werewolf();
+	
+	var parse = {
+		
+	};
+	parse = player.ParserTags(parse);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+	
+	Text.Clear();
+	Text.Add("Having made your decision, you wrap your hands around the muzzle and give the head a good twist to break the seal. There’s a faint hiss of displaced air, and then you lift the lid and carefully place it aside before stepping closer and peering within.", parse);
+	Text.NL();
+	Text.Add("Whatever you might have been expecting... you’re underwhelmed. The darkness of the chamber works to obscure most of the urn’s depths, but you can faintly make out something wet and shimmering with the stray traces of light that make it through its clay lips.", parse);
+	Text.NL();
+	Text.Add("Something about the muffled gleam makes you uneasy... And then, you swear you see something <b>move</b> inside!", parse);
+	Text.NL();
+	Text.Add("Startled, you skip backwards as a spout of chocolate-brown substance erupts from inside of the urn. It gushes over the rim and spills down over its sides, forcing you to scurry backwards as it puddles on the stone floor.", parse);
+	Text.NL();
+	Text.Add("The urn ceases its unnatural fountain only when a great pool of warm, brown, viscous liquid is rippling on the ground. As if you needed further proof of its unearthly origin, it begins to well upwards, bubbles forming streamers that twine around each other like magical vines, supporting each other as they climb towards the ceiling.", parse);
+	Text.NL();
+	Text.Add("Before your amazed eyes, the liquid forms the shape of a humanoid being... and then, its color changes; from the earthen hue of the liquid to more lively-looking tones, until what stands before you is no simulacra, but a flesh-and-blood creature.", parse);
+	Text.NL();
+	if(miranda.Met())
+		Text.Add("What stands before you now is a trim, toned, female dobermorph whose ample curves offset the muscles of a trained fighter. She looks exactly like Miranda, save for one key detail - the very noticeable emptiness between her thighs. Whoever or whatever this creature is, she lacks the impressive maleness that Miranda takes such pride in.", parse);
+	else
+		Text.Add("It’s a statuesque and <i>very</i> amply female canine-morph - a doberman, you think. Though her naked breasts are full, and even from here you can make out the lusciousness of her buttocks, her belly is flat and toned, and her limbs visibly ripple with power. Whoever this is, she’s not just a pretty face.", parse);
+	Text.NL();
+	Text.Add("As you finish your observations, the statuesque figure suddenly begins to move. Long, toned arms pivot, reaching for the ceiling as she stretches until she is up on her toes, the act thrusting out her ample bosom even more. Her mouth falls open in a jaw-cracking yawn, the noise echoing through the mausoleum as she twists her shoulders. Rich green eyes open, gazing blearily about the chamber as she dreamily smacks her lips, scratching quite indelicately at her shapely rump.", parse);
+	Text.NL();
+	Text.Add("Before you can think to move, her gaze falls on you and she visibly snaps fully awake, eyes sharpening as she takes in the sight of you.", parse);
+	Text.NL();
+	Text.Add("<i>”Well, what do we have here?”</i> she says, sashaying towards you with a predatory smile.", parse);
+	Text.NL();
+	parse["proverbial"] = player.HasLegs() ? "" : " proverbial";
+	Text.Add("Something in the way she looks at you makes your skin crawl; there’s a hunger there that seems sexual, but with something ever so slightly <i>off</i> about it. You find yourself swallowing a lump that rises in your throat, unable to bring yourself to meet her gaze as you take a[proverbial] step back. Instead, you focus your gaze firmly on her feet, watching her strut towards you.", parse);
+	Text.NL();
+	Text.Add("She chuckles at your reaction. <i>”What’s the problem? Feeling shy?”</i>", parse);
+	Text.NL();
+	Text.Add("Feeling defensive, you assure her that it’s not so much shyness as uncertainty about where to look. She’s rather...underdressed.", parse);
+	Text.NL();
+	Text.Add("<i>”Oh? So you are the type that gets nervous around naked women? How cute!”</i> She chuckles once more. <i>”Alright then, if you can’t bear to look at my naked body, I think I can do something about it.”</i>", parse);
+	Text.NL();
+	Text.Add("Confused, you look up from the floor you have been so busily inspecting as the naked dobermorph raises a hand with a lazy wave. The urn behind her - from which she recently emerged - visibly rocks on its base, clattering softly against the stone floor. It shudders violently, and then goes still as what looks like a huge, off-white serpent suddenly erupts from its depths!", parse);
+	Text.NL();
+	Text.Add("As the serpent lashes through the air, curling towards the strange canid female, you realize your first impression was mistaken. It’s not a snake at all, but a great mass of long, linen bandages, all clustered together and moving with a single will.", parse);
+	Text.NL();
+	Text.Add("On reaching the dobermorph, the bandages start to break apart, becoming a linen hydra that starts to envelop her frame. They twine themselves sinuously around her limbs, crisscrossing bands that form diamond-like gaps of exposed fur. They curl over her chest, looping past her breasts rather than over them.", parse);
+	Text.NL();
+	Text.Add("The overall effect is reminiscent of some sort of bondage gear, serving to emphasize her womanhood rather than to obscure it. About the only concession to modesty is at her hips. There, the bandages intricately twine around themselves, circling her waist and diving down through her buttock cleavage before rising up to join the circle, forming a skimpy pair of panties made purely from bandages.", parse);
+	Text.NL();
+	Text.Add("The dobermorph makes a few poses, examining herself with a smile. <i>”There. Is this better?”</i>", parse);
+	Text.NL();
+	Text.Add("Since she’s clearly not hostile, you feel the tension draining out of your body. Looking her in the eye, you dryly note that you’d guess it’s better. A little. You rather thought she was going to put some actual clothes on, not just tie a few ribbons on to show herself off some more.", parse);
+	Text.NL();
+	Text.Add("<i>”Humph, you’re one to talk.”</i> She makes a gesture at you. ", parse);
+	if(werewolf) {
+		Text.Add("<i>”You walk around completely in the buff, showing off all your naughty bits to anyone that cares to look,”</i> she adds with a smirk.", parse);
+		Text.NL();
+		Text.Add("Well, it’s different in your case. People don’t make much clothing that fits someone with your proportions, and you have a certain difficulty in putting them on. You wriggle your fingers, emphasizing the long, sharp claws tipping them, to make it clear what that difficulty might be. Besides, the fur hides everything important on you anyway.", parse);
+		Text.NL();
+		Text.Add("<i>”Not that beautiful pair of jewels you have dangling there,”</i> she points at your crotch, chuckling at her own remark.", parse);
+		Text.NL();
+		Text.Add("...Okay, she’s got a point there.", parse);
+		Text.NL();
+		Text.Add("<i>”Make no mistake, cutie. I’m not criticizing you; in fact, I love the whole birthday suit look you got going there. It’s really… <b>interesting</b>.”</i> She grins.", parse);
+	}
+	else {
+		Text.Add("<i>”You walk around with these skimpy clothes that leave <b>very</b> little to the imagination. So what if I’m a bit more… showy? ”</i> she adds with a smirk.", parse);
+		Text.NL();
+		Text.Add("You’re just making do with what you have, though. These are the only clothes you’ve been able to find. She looked like she could have whipped up a lot more coverage out of all those bandages of hers, though.", parse);
+		Text.NL();
+		Text.Add("<i>”Oh? I could have? And who are you to make that claim? You act as if you knew me well...”</i>", parse);
+		Text.NL();
+		Text.Add("You quickly apologize; you don’t know her well, but she manipulated those bandages with such skill, you were sure she could have dressed herself up with them however she wished, if she felt it necessary.", parse);
+		Text.NL();
+		Text.Add("The dobermorph chuckles. <i>”Apologies accepted. But really, I just wanted to match your style. It’s not fair that I’m the only one getting all the eye candy.”</i> She grins.", parse);
+	}
+	Text.NL();
+	Text.Add("<i>”I believe we haven’t introduced ourselves yet. I would surely remember a cutie like yourself. What’s your name?”</i>", parse);
+	Text.NL();
+	Text.Add("Seeing no harm in answering, you tell the morph that your name is [playername].", parse);
+	Text.NL();
+	Text.Add("<i>”Pleasure meeting you, [playername]. I am Nadir-Ma.”</i>", parse);
+	Text.NL();
+	Text.Add("It’s nice to meet her.", parse);
+	Text.NL();
+	Text.Add("<i>”Now that we’re acquainted, [playername], how about we talk business?”</i>", parse);
+	Text.NL();
+	Text.Add("Puzzled, you ask her what she means.", parse);
+	Text.NL();
+	Text.Add("<i>”You see, I’ve been stuck inside that jar for the better part of a millennium, and I’m feeling just a little bit pent up.”</i>", parse);
+	Text.NL();
+	Text.Add("Wait, is she going where you think she’s going?", parse);
+	Text.NL();
+	parse["wo"] = player.mfTrue("", "wo");
+	Text.Add("<i>”And now I’m faced with such a delicious looking [wo]man… it’s just too much to bear, trust me. I’m already wet!”</i> she shamelessly declares touching the wet bandages covering her honeypot.", parse);
+	Text.NL();
+	Text.Add("...Yeah, you suspected that’s where she was going.", parse);
+	Text.NL();
+	Text.Add("<i>”How about you be a gentle[wo]man and help a girl relieve some tension?”</i>", parse);
+	Text.NL();
+	Text.Add("Well, it’s not like you can’t understand where she’s coming from. That’s a <b>long</b> time to go without getting any sex. Wouldn’t it be nice to help her out, like she asked you to? On the other hand... she’s clearly something supernatural. Getting that close to her mightn’t be a good idea...", parse);
+	Text.Flush();
+	
+	//[Yes] [No]
+	var options = new Array();
+	options.push({ nameStr : "Yes",
+		tooltip : "She’s attractive, she’s polite and she’s clearly very willing. You can certainly think of worse partners to have.",
+		func : function() {
+			Text.Clear();
+			Text.Add("PLACEHOLDER", parse);
+			Text.NL();
+			Text.Add("", parse);
+			Text.Flush();
+			Gui.NextPrompt();
+		}, enabled : true
+	});
+	options.push({ nameStr : "No",
+		tooltip : "If something’s too good to be true, it certainly is. No chance.",
+		func : function() {
+			Text.Clear();
+			Text.Add("PLACEHOLDER", parse);
+			Text.NL();
+			Text.Add("", parse);
+			Text.Flush();
+			Gui.NextPrompt();
+			//TODO
+			//#goto Nadir-Ma No Entry Point
+		}, enabled : true
+	});
+	Gui.SetButtonsFromList(options, false, null);
+}
+
+/*
+
+ */
 
 Scenes.Halloween.HarthonFirst = function() {
 	var werewolf = Scenes.Halloween.HW.Werewolf();
