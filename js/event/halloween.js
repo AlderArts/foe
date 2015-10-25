@@ -1980,9 +1980,9 @@ Scenes.Halloween.NadirMa = function() { //TODO
 	Text.NL();
 	Text.Add("Whatever you might have been expecting... you’re underwhelmed. The darkness of the chamber works to obscure most of the urn’s depths, but you can faintly make out something wet and shimmering with the stray traces of light that make it through its clay lips.", parse);
 	Text.NL();
-	Text.Add("Something about the muffled gleam makes you uneasy... And then, you swear you see something <b>move</b> inside!", parse);
+	Text.Add("Something about the muffled gleam makes you uneasy... and then, you swear you see something <b>move</b> inside!", parse);
 	Text.NL();
-	Text.Add("Startled, you skip backwards as a spout of chocolate-brown substance erupts from inside of the urn. It gushes over the rim and spills down over its sides, forcing you to scurry backwards as it puddles on the stone floor.", parse);
+	Text.Add("Startled, you skip backwards as a spout of chocolate-brown substance erupts from inside of the urn. It gushes over the rim and spills down over its sides, forcing you to scurry away as it puddles on the stone floor.", parse);
 	Text.NL();
 	Text.Add("The urn ceases its unnatural fountain only when a great pool of warm, brown, viscous liquid is rippling on the ground. As if you needed further proof of its unearthly origin, it begins to well upwards, bubbles forming streamers that twine around each other like magical vines, supporting each other as they climb towards the ceiling.", parse);
 	Text.NL();
