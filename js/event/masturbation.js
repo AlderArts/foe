@@ -35,17 +35,30 @@ Scenes.Masturbation.Entry = function() {
 	//[Cock][Pussy][Breasts][Ass]
 	var options = new Array();
 	
-	/*
 	if(player.FirstCock()) {
-		//TODO
-		options.push({ nameStr : "",
-			tooltip : "",
-			func : function() {
-				
-			}, enabled : !taur
+		var optsTc = new Array();
+		_.each(player.AllCocks(), function(c) {
+			optsTc.push({ nameStr : c.race.qCShort(),
+				tooltip : c.aLong(),
+				func : function(obj) {
+					Scenes.Masturbation.CockOpening(obj);
+				}, enabled : true,
+				obj : c
+			});
 		});
+		
+		if(optsTc.length >= 1) {
+			options.push({ nameStr : "Jerk cock",
+				tooltip : "",
+				func : function() {
+					if(optsTc.length >= 2)
+						Gui.SetButtonsFromList(optsTc, false, null);
+					else
+						optsTc[0].func(optsTc[0].obj);
+				}, enabled : !taur
+			});
+		}
 	}
-	*/
 	
 	if(player.FirstVag()) {
 		options.push({ nameStr : "Vag - finger",
@@ -57,14 +70,15 @@ Scenes.Masturbation.Entry = function() {
 		
 		var vagCap = player.FirstVag().Cap();
 		
-		var optsT = new Array();
+		var optsTv = new Array();
 		var addVagToy = function(toy) {
 			if(party.Inv().QueryNum(toy)) {
-				optsT.push({ nameStr : toy.name,
+				optsTv.push({ nameStr : toy.name,
 					tooltip : toy.Long(),
 					func : function(obj) {
 						Scenes.Masturbation.VagOpening(Scenes.Masturbation.VagToy, obj);
-					}, enabled : vagCap >= toy.cock.Thickness(), obj : toy
+					}, enabled : vagCap >= toy.cock.Thickness(),
+					obj : toy
 				});
 			}
 		}
@@ -79,11 +93,11 @@ Scenes.Masturbation.Entry = function() {
 		addVagToy(Items.Toys.EquineDildo);
 		addVagToy(Items.Toys.CanidDildo);
 		addVagToy(Items.Toys.ChimeraDildo);
-		if(optsT.length >= 1) {
+		if(optsTv.length >= 1) {
 			options.push({ nameStr : "Vag - toys",
 				tooltip : "",
 				func : function() {
-					Gui.SetButtonsFromList(optsT, false, null);
+					Gui.SetButtonsFromList(optsTv, false, null);
 				}, enabled : !taur
 			});
 		}
@@ -108,14 +122,15 @@ Scenes.Masturbation.Entry = function() {
 	
 	var analCap = player.Butt().Cap();
 	
-	var optsT2 = new Array();
+	var optsTa = new Array();
 	var addAnalToy = function(toy) {
 		if(party.Inv().QueryNum(toy)) {
-			optsT2.push({ nameStr : toy.name,
+			optsTa.push({ nameStr : toy.name,
 				tooltip : toy.Long(),
 				func : function(obj) {
 					Scenes.Masturbation.AnalOpening(Scenes.Masturbation.AnalToy, obj);
-				}, enabled : analCap >= toy.cock.Thickness(), obj : toy
+				}, enabled : analCap >= toy.cock.Thickness(),
+				obj : toy
 			});
 		}
 	}
@@ -130,11 +145,11 @@ Scenes.Masturbation.Entry = function() {
 	addAnalToy(Items.Toys.EquineDildo);
 	addAnalToy(Items.Toys.CanidDildo);
 	addAnalToy(Items.Toys.ChimeraDildo);
-	if(optsT2.length >= 1) {
+	if(optsTa.length >= 1) {
 		options.push({ nameStr : "Anal - toys",
 			tooltip : "",
 			func : function() {
-				Gui.SetButtonsFromList(optsT2, false, null);
+				Gui.SetButtonsFromList(optsTa, false, null);
 			}, enabled : !taur
 		});
 	}
@@ -154,6 +169,370 @@ Scenes.Masturbation.Entry = function() {
 		Gui.NextPrompt();
 	});
 }
+
+Scenes.Masturbation.CockOpening = function(p1cock) {
+	var allCocks = player.AllCocksCopy();
+	for(var i = 0; i < allCocks.length; i++) {
+		if(allCocks[i] == p1cock) {
+			allCocks.remove(i);
+			break;
+		}
+	}
+	
+	var parse = {
+		cocks2 : function() { return player.MultiCockDesc(allCocks); }
+	};
+	parse = player.ParserTags(parse);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
+	
+	parse["cock"]      = function() { return p1cock.Short(); }
+	parse["cockTip"]   = function() { return p1cock.TipShort(); }
+	
+	Text.Clear();
+	Text.Add("Having made your decision, you quickly strip off your [armor] and sit down on a comfortable spot on the ground.", parse);
+	Text.NL();
+	
+	var cover = player.Genitalia().cover;
+	var slit = false;
+	
+	if(cover == Genitalia.Cover.Slit) {
+		Text.Add("You look at your genital slit, gently stroking the outer folds before you carefully spread them open and slip a finger inside. The feeling is exquisite, and you find your [cocks] already getting hard at the prospect of some fun.", parse);
+		Text.NL();
+		if(player.NumCocks() == 2)
+			Text.Add("You search around, gently stroking the tips of your two cocks. As thrilling as it would be to touch both of them, you’ve already decided which one you’ll be using to relieve yourself, so you flex your muscles to coax it out whilst leaving the other one safely tucked away in your slit.", parse);
+		else if(player.NumCocks() > 2)
+			Text.Add("You let your fingers roam the tips of your [cocks] until you find the one you picked for today’s activities. It’s a bit complicated to draw only that one out, but somehow you know exactly which muscles to flex to make it come out.", parse);
+		else
+			Text.Add("It doesn’t take long before you feel your fingers roam the [cockTip] of your [cock]. You tease yourself as you flex your muscles to make it come out of its hiding place.", parse);
+		slit = true;
+	}
+	else if(cover == Genitalia.Cover.Sheath) {
+		Text.Add("You gently massage your sheath, feeling the little waves of pleasure beginning to harden your [cocks]. That being the case, you pull your sheath open and watch as your [cocks] spill out of [itsTheir] hiding place.", parse);
+		Text.NL();
+		if(player.NumCocks() == 2)
+			Text.Add("You give both your [cocks] a tender stroke, but quickly move to your chosen [cock]. Maybe some other time you’ll play with your other one.", parse);
+		else if(player.NumCocks() > 2)
+			Text.Add("You have such a nice selection… but for now, you’ll focus your attention on your [cock]. The others will just have to wait for another time.", parse);
+		else
+			Text.Add("With your [cock] out in the open, it’s only a matter of working it into a proper erection.", parse);
+	}
+	else {
+		Text.Add("With nothing standing between you and your [cocks], it’s only a matter of getting started.", parse);
+	}
+	Text.NL();
+	//#Erection block
+	
+	var knot = p1cock.Knot();
+	
+	if(p1cock.type == CockType.tentacle) {
+		Text.Add("First, you start with some gentle stroking. It feels good, but isn’t necessary considering what you can do with your prehensile [cock]. With a mischievous glint in your eyes, you release your member and flex your muscles.", parse);
+		Text.NL();
+		Text.Add("Surely enough, your [cock] starts hardening as you work it into a proper erection. It’s an odd feeling, but it’s also very pleasurable to get an erection in this fashion. It’s almost as if your muscles were cramping, getting rigid and tough to move, yet none of this hurts like it would if it happened anywhere else. Instead, it just feels better and better.", parse);
+		Text.NL();
+		Text.Add("Eventually, you work yourself to full mast, and wiggle your shaft experimentally, contracting your muscles rhythmically to draw a dollop of pre on your [cockTip]. Feels like you’re ready to start!", parse);
+	}
+	else {
+		Text.Add("You start with a gentle yet brisk pace, working your hands around your [cock] as you stroke it to full mast.", parse);
+		if(player.NumCocks() == 2 && !slit)
+			Text.Add(" Your other [cocks2] grows erect too, despite lying forgotten.", parse);
+		else if(player.NumCocks() > 2 && !slit)
+			Text.Add(" Your other [cocks2] begin growing in sympathetic pleasure, but you remain focused on the one you picked.", parse);
+		Text.NL();
+		Text.Add("As great as it might feel to actually have sex, there’s also an undeniable thrill in exploring yourself in this fashion. No one knows your sensitive spots quite like you do yourself, and no one can tease them in the same fashion. With that in mind, you easily reach full mast and stroke until you’ve milked a dollop of pre, a sign of your mounting excitement.", parse);
+	}
+	Text.NL();
+	
+	// Type variations
+	if(p1cock.race.isRace(Race.Feline)) {
+		Text.Add("Your kitty-prick stands proudly erect before you, throbbing slightly as you examine it more closely.", parse);
+		Text.NL();
+		Text.Add("It has a tapered tip, with barbs lining the length just before the head. With a cock like this, you could easily scrape the semen off any competitors if you so wished, not to mention the texture would give your partners quite a thrill.", parse);
+		if(p1cock.Knot())
+			Text.Add(" The knot forming at the base of your shaft might give it a weird look. It’s not exactly something you’d expect to see on a cat’s dong, but you’re pretty sure any partner of yours would appreciate the surprise. Scrape them with the barbs, then tie them down for the finale...", parse);
+		Text.NL();
+		
+		Scenes.Masturbation.CockSize(parse, p1cock);
+		
+		Text.Add("Looking is nice and all, but it’s time you got down to business. Smiling to yourself, you close a hand around your length, milking it up and down at a gentle pace. The little barbs lining your tip tickle you every time you move your hand up, and you find yourself gently teasing them before collecting the dollop of pre that’s formed and spread it along your shaft to make your job easier.", parse);
+		Text.NL();
+		Text.Add("As your vision begins to blur in the haze of your self-inflicted pleasure, your mind wanders, and you imagine that you’re a wild cat yourself, mewling and yowling as you elope with a fellow feline. Their tight holes grip you as you scrape their walls with your barbs and prepare to pump them full of your kitty-jism...", parse);
+		Text.NL();
+		Text.Add("You moan as a shudder of pleasure rocks your whole body, snapping out of your reverie. Your cock’s grown rock-hard, and you’re leaking pre like a faucet.", parse);
+	}
+	else if(p1cock.race.isRace(Race.Canine)) {
+		Text.Add("Your canine-prick is fully erect, the dollop of pre you milked earlier barely sticks to it as it threatens to slide down your shaft. ", parse);
+		if(knot)
+			Text.Add("Despite your arousal, your knot still hasn’t fully formed, but you’re sure that’ll change in a few moments...", parse);
+		else
+			Text.Add("Curiously, you lack the knot most canines are famous for. Whether this makes you more exotic or simply weird you don’t know… nor care. You don’t need a knot to feel good...", parse);
+		Text.NL();
+		
+		Scenes.Masturbation.CockSize(parse, p1cock);
+		
+		Text.Add("That’s enough looking, now it’s time for action! You close your hands around your doggy-dick at the base, then begin pumping up and down.", parse);
+		Text.NL();
+		Text.Add("With your fervent fapping, it doesn’t take long before that dollop from earlier begins sliding down your pointy tip. To prevent it from falling over onto the ground, you angle your shaft up and let it slide till it reaches your hand, lubing them up and making your efforts at pleasuring yourself all the easier.", parse);
+		if(knot)
+			Text.Add(" Every time your roaming hands pass over your forming knot, you give it a squeeze, enjoying the tightness it provides you before continuing to masturbate normally.", parse);
+		Text.NL();
+		Text.Add("As you wank your puppy-pecker, you find your mind wandering… You imagine yourself as an alpha dog, getting ready to mount your bitch. All they can do is whine plaintively as you hold down their hips and align yourself. The first thrust misses its mark, so you adjust yourself a little more then try again. On your fourth thrust, you hit your mark and push more than half your shaft inside, pressing onwards until ", parse);
+		if(knot) {
+			Text.Add("your knot has almost popped in.", parse);
+			Text.NL();
+			Text.Add("Just you wait, you tell your bitch. You’ll have them tied up to your dick like the good puppy they are in a jiffy, then you’ll make sure to pump them full of your doggy-cum.", parse);
+		}
+		else {
+			Text.Add("you bottom out.", parse);
+			Text.NL();
+			Text.Add("It doesn’t matter that you don’t have a knot; you’ll just have to hold your bitch extra-tight, to make sure they take all you have to give...", parse);
+		}
+		Text.NL();
+		Text.Add("A particularly fierce spasm knocks you out of your reverie, and you realize that you’re leaking pre like a faucet.", parse);
+	}
+	else if(p1cock.race.isRace(Race.Horse)) {
+		Text.Add("Your stallionhood stands proudly before you, like a bastion of virility. The musk is so potent that you can smell it clearly even from this distance, and it only makes you all the more excited. The veins lining your shaft bulge with the power of your muscles, pumping enough blood into your member to keep as hard as a rock. The flat tip is shaped like a battering ram, and you’ll use it as such the next time you fuck someone.", parse);
+		if(knot)
+			Text.Add(" You don’t know if the knot bulging at the base of your [cock] would make your partner even hornier or if it would scare them away. An equine-prick like yours is a member of might, and the idea of having something like that locked inside them? It gives you goosebumps just imagining it...", parse);
+		Text.NL();
+		
+		Scenes.Masturbation.CockSize(parse, p1cock);
+		
+		Text.Add("Enough looking, it’s time for some workout! You grab your shaft and squeeze it tightly, then begin pumping away. The powerful muscles ripple under your touch as you trace the veins leading up to the flattened tip. Sparing a finger, you gently trace the broad contours of your cumvein, gathering some of your pre-cum to spread it along as much of your length as you can.", parse);
+		Text.NL();
+		Text.Add("Now properly slickened, you feel like you can truly start fapping, and as you do so, your mind wanders…", parse);
+		Text.NL();
+		Text.Add("You imagine yourself in a field, with powerful legs propelling you forward as you run with all your might. There’s a small ravine, but that proves to be no obstacle as you clear it with a mighty leap, and then you reach your destination. Lazing about in the fields, you see your harem.", parse);
+		Text.NL();
+		Text.Add("They all turn to look at you, nostrils flaring as they smell your powerful scent. All it takes is a snort and everyone gets back on their feet and bends over for you, side by side. You take a stroll along the row of raised butts and flagging tails, slapping their asses to send them jiggling shortly before their strong muscles hold their cheeks taut. One by one, you check their holes, sometimes leaning over to spare a lick and taste them. And when you’re done, you fuck them. One by one, you split them over your member, marking them as yours as you pump them full of your fertile seed.", parse);
+		Text.NL();
+		Text.Add("You’re way too virile to be satisfied with just a fuck or two, so you mount all of them several times, until their behinds are rendered a veritable mess, with their entrances gaping in the shape of your dick.", parse);
+		Text.NL();
+		Text.Add("A shudder of pleasure rocks your body, snapping you out of your little daydream. Your shaft is leaking pre profusely, and somehow it feels even harder than before! That was a nice little trip down dreamland, but it’s time to get real.", parse);
+	}
+	else if(p1cock.race.isRace(Race.Dragon)) {
+		Text.Add("You watch your dragon-dick throb in front of you. It’s somewhat similar to a reptilian pecker, but instead of having only the underside lined with ridges, this one has ridges along the entirely of its length. The glans are spear-shaped, with the crown being lined with rounded nubs; shaped as it is, the tip would allow you to penetrate <i>any</i> hole, no matter how small it is and the small protrusions along the crown would make it extra-pleasurable as they scraped along the tight walls holding your dick on your way out. At the base, you have a mighty knot; it’s still not completely inflated, but you know that given the proper <i>motivation</i>, it can grow into a big bulb capable of locking anyone in place while you pump your cum inside...", parse);
+		Text.NL();
+		
+		Scenes.Masturbation.CockSize(parse, p1cock);
+		
+		Text.Add("That’s enough looking though. A mighty tool like this was meant to be touched. The cock feels like a veritable sword as you grasp its length, the sensitive ridges sets your nerves alight with pleasure; as you stroke your way up, you’re forced to let go of your shaft and move your hand to tease your tip, spreading the dollop of pre gathered there along the rest of your spearheaded glans. It doesn’t take long before you set into a comfortable pace and you find yourself letting your mind wander...", parse);
+		Text.NL();
+		Text.Add("You imagine yourself being a mighty dragon, soaring through the skies with barely a beat from your wide wings. Your speed and grace is unmatched as the birds flock away to get out of your way. That’s when you smell it… competition; another dragon takes to the skies today. Being the proud lord of the skies in this area, you immediately set to pursue to intruder.", parse);
+		Text.NL();
+		Text.Add("From the scent, this is a younger dragon. They should know better than to fly into the territory of their betters…", parse);
+		Text.NL();
+		Text.Add("You easily catch up to the youngling, and as they catch sight of you, they yelp in fear. Though they try their best to run, it’s useless. You’re older, faster, and stronger. Catching up to them is easy enough, and once you do, you grab them, immobilizing their wings as you dive-bomb towards the ground.", parse);
+		Text.NL();
+		Text.Add("The landing is rough, but you don’t care. Dragons are sturdy, and though the force of the impact leaves a small crater in your wake, you barely feel a thing, and you doubt your little prey’s felt anything either. You pin them and immediately expose your erect dick; at the sight of your throbbing dragonhood, they immediately stop their struggle, submitting to their fate, honored to have aroused one as powerful as you. They lower themselves on fours, raising their tail to present you with your target.", parse);
+		Text.NL();
+		Text.Add("There’s no wait and no hesitation as you mount the younger dragon, plunging your cock into them like a sword entering its sheath. You nearly drag the smaller dragon along with you each time you pull out. The sensation of your ridged member’s nubs scraping their walls is heaven to you; in a sudden bout of dominance, you bite the nape of their neck, marking them as your property and your roar!", parse);
+		Text.NL();
+		Text.Add("And just like that, the illusion is gone and you’re back in reality, with your mighty <i>dragonslayer</i> in hand - hard as steel - nearly on the verge of blowing its load...", parse);
+	}
+	else if(p1cock.race.isRace(Race.Reptile)) {
+		parse["lizard"] = p1cock.race.qShort();
+		Text.Add("Your [lizard]-prick is already fully erect and throbbing. The shape might resemble a human’s, from your point of view, but the underside is lined with sensitive ridges. Those ridges feel great, both for you and your partner. With them, they’ll be able to tell exactly how much cock you’ve filled them with.", parse);
+		if(knot)
+			Text.Add(" Your ridges only end where your knot starts, and you’re pretty sure they’ll feel <i>that</i> when it’s inside. A fitting ending to a very pleasurable journey… for the both of you.", parse);
+		Text.NL();
+		Text.Add("The tip is resembles a spear-head. Perhaps a bit more mushroom-shaped, but it tapers slightly towards the end; this would make it extra-easy if you wanted to fuck a particularly tight hole.", parse);
+		Text.NL();
+		
+		Scenes.Masturbation.CockSize(parse, p1cock);
+		
+		Text.Add("You’ve looked enough, now it’s time to get your hands dirty! You start at the tip, making a tight ring with your hand and pushing it against your shaft. The tapered shape of your glans makes it easier for you to spear through, and the dollop of pre on the tip acts like lube, making your descent smooth.", parse);
+		Text.NL();
+		Text.Add("You push until the head pops through, and you have your digits wrapped up just behind your glans. The ridges feel nice under your palms, and you start pumping at a brisk pace. The feeling is amazing, and as you settle on a comfortable rhythm, you let your mind wander…", parse);
+		Text.NL();
+		Text.Add("You’re stark naked in the oasis, and you’re not alone; lining the shores of the big oasis, you see males and females, both completely naked. The air is hot and the sun beats down on your scaled body mercilessly, as you scan the scenery, until you find a pair of lizan waving you over.", parse);
+		Text.NL();
+		Text.Add("Smiling to yourself, you decide to run over and see what they want. When they kneel before you with happy smiles, licking their lips, you find out exactly what they want… and you’re happy to oblige. You lie on your back in the soft, warm sand and let the two eager lizans get to work.", parse);
+		Text.NL();
+		Text.Add("Their muzzles and sinuous tongues feel wonderful on your shaft; they kiss, nuzzle and suck, licking your ridged prick like a lollypop, scraping the pre-cum right off your ridged underside as their long tongues draw even more out of you.", parse);
+		Text.NL();
+		Text.Add("When you finally snap out of your reverie, you note that you’re dribbling pre like a faucet. Too bad you don’t have an actual pair of lizans to help you clean up...", parse);
+	}
+	else if(p1cock.race.isRace(Race.Plant)) {
+		Text.Add("You gaze at your floral cock wiggling softly before you. The length is green, but the color slowly shifts towards purple near the mushroom-shaped glans; the tip itself is perhaps a bit more bulbous than what you’d see on a human penis, and it emits a faint fruity smell along with your usual musk. More amusing though, is the fact that you can exert some control over the way your shaft moves.", parse);
+		Text.NL();
+		Text.Add("It takes a bit of practice - it was a bit weird at first, but now that you’ve grown used to it, you can move your cock however you wish. Experimentally, you try stretching it taut, and while the muscles resist a bit due to your aroused state, the vine-like prick does obey your commands. Then you try to wiggle it side-to-side, and it does so without issue. Your whole member is stretchy enough that such erratic movements barely bother you. In fact, you were thinking that it might feel amazing to just let your floral dick go wild when you penetrate someone...", parse);
+		Text.NL();
+		
+		Scenes.Masturbation.CockSize(parse, p1cock);
+		
+		Text.Add("That’s enough looking! Without further ado, you grab your wiggling floral pecker and stroke it upward, flexing your muscles to make it stay taut. You squeeze your [cock], milking more pre so you can spread it along your length and mushroom-shaped bulbous tip. The feeling is wonderful, and you sometimes wind up losing control over your cock, letting it spasm wildly as electrical shocks of pleasure travel through your nerves. As you settle in a decent rhythm, you feel your mind wander…", parse);
+		Text.NL();
+		Text.Add("You’re in a clearing, surrounded by fertile trees, flowers, and other plant life. This place is your orchard, where you grow flowers, and speaking of flowers, it’s mating season! If you want more flowers, you’ll have to properly pollinate the current ones.", parse);
+		Text.NL();
+		Text.Add("You let your vine-like wiggling cocks loose, letting their sinuous shapes stretch and curl in the warm air before you direct it to a different flower. They have all sorts of shapes, colors and smells, but the one thing they all share in common is how they spread open to accept your floral dicks whenever you press them into the scenter.", parse);
+		Text.NL();
+		Text.Add("The bulbous tips means that they have some stretching to do, but you don’t think the flowers themselves mind; watching the process is almost like watching a whole new form of bloom. As each of your stretchy phalluses make their way inside one of the flowers, you begin fucking them in earnest. The flower stems are about as stretchy as your dicks, and each one feels like a tight cocksleeve. Some are rougher, while others are smoother, but they all manage to send fireworks tingling through your members.", parse);
+		Text.NL();
+		Text.Add("You awaken as a gob of pre smacks you on the cheek, your wiggling plant-pecker is swinging about completely out of control, and for good reason too. It’s dribbling pre-cum like a faucet! It takes all your focus, but somehow you manage to keep it under control. Too bad, you’ll have to continue your gardening daydream some other time...", parse);
+	}
+	else if(p1cock.race.isRace(Race.Demon)) {
+		Text.Add("You gaze at your demonic-pecker. With its purplish color and assets, you’d think a dick like this could easily pass for a perverse dildo. The tip is mushroom-shaped, much like a human’s, but the crown is lined up with sensitive nubs. Merely touching one of them is enough to send you shuddering in pleasure; it must feel great to feel these going in, for both parties.", parse);
+		Text.NL();
+		parse["knot"] = knot ? ", before you reach the knot," : "";
+		Text.Add("Right behind your glans, along your length, you have tinier nubs meant to massage and stimulate, and running your hand through them makes it feel like your cock is vibrating slightly. This greatly stimulates you as each nub is almost as sensitive as the ones lining the crown of your cock. Further down[knot] the shaft becomes smooth, but the area is slightly girthier compared to the rest of your cock; this is clearly meant to stretch your partner out and make repeated entry even easier and more pleasurable…", parse);
+		Text.NL();
+		Text.Add("Overall, this cock is a true tool of pleasure. Say what you will about demons, they really know how to fuck.", parse);
+		Text.NL();
+		
+		Scenes.Masturbation.CockSize(parse, p1cock);
+		
+		Text.Add("Well, enough looking. It’s time to take your demon-dick for a spin. You start off by gently rubbing the dollop of pre along your [cockTip], biting your lip when you reach the nubs lining the crown. Sparks fly as the sensitive nubs set your nerves ablaze and you’re flooded with unbelievable pleasure. More pre seeps out of your [cockTip] and you eagerly get more to spread along your shaft.", parse);
+		Text.NL();
+		Text.Add("This feels so good that you can’t help but let your mind wander…", parse);
+		Text.NL();
+		Text.Add("You’re in a chapel, walking purposefully towards the altar where several willing virgins lie, covered in nothing but a sheet around each of their bodies. You can tell that they’re as scared as they’re excited; it’s not everyday that you get to lose your virginity to a sex demon, much less one as well equipped as you.", parse);
+		Text.NL();
+		Text.Add("You scan your options, and the room falls silent. There’s a tension in the air as they wonder who’ll be the first…", parse);
+		Text.NL();
+		Text.Add("To ease them into the act, you have not one, but several of them drop their sheets and step forward, guiding each to their knees as you present them with your [cock]. To your surprise, you don’t even have to coax them into touching your member; they do so of their own volition. The heat, the musk and the potent air of virility emanating from your dick is enough to send them moaning, as they open their mouths and extend their tongues to begin licking you in earnest.", parse);
+		Text.NL();
+		Text.Add("You watch with a wicked smile as their moans fill the chapel and the other virgins eagerly drop their sheets, running to get a piece of you. You’re lifted and set down among soft bodies, each one grasping you for a chance to service you with their nubile bodies. You lose yourself in the mass of licks and kisses, and when you feel yourself penetrating a hole, you snap out of your daydream...", parse);
+		Text.NL();
+		Text.Add("T-that was pretty intense… you almost came then and there.", parse);
+	}
+	/*
+	else if() { //TODO Additional racial variations
+		Text.Add("", parse);
+		Text.NL();
+		Text.Add("", parse);
+	}
+	*/
+	else {
+		Text.Add("Now that it’s fully erect, you can finally appreciate your [cock] in its full glory.", parse);
+		Text.NL();
+		
+		Scenes.Masturbation.CockSize(parse, p1cock);
+		
+		Text.Add("Looking is nice and all, but it won’t get the job done, so you grab that dollop of pre and begin spreading it across your shaft as you settle into a brisk pace. As you pump your shaft, you also buck your hips, doing your best to be elevate your own pleasure. More pre gathers on the tip, and you make sure you spread it all over your length, each dollop only makes it easier for you to fap, which in turn produces even more pre. With a rhythm like this, it doesn’t take long until you are leaking pre-cum like a faucet.", parse);
+	}
+	Text.NL();
+	
+	Scenes.Masturbation.CockSlut(parse, p1cock);
+	
+	Scenes.Masturbation.CockKnot(parse, p1cock);
+	
+	Text.Add("You can feel it coming, ", parse);
+	if(player.HasBalls())
+		Text.Add("your [balls] churn in preparation, and", parse);
+	else
+		Text.Add("there’s a pressure deep in the base of your spine, as", parse);
+	parse["mc"] = player.NumCocks() > 1 ? " in unison" : "";
+	Text.Add(" your [cocks] throb[notS][mc].", parse);
+	Text.NL();
+	var selfpaint = false;
+	if(player.Slut() >= 50) {
+		if(p1cock.type == CockType.tentacle)
+			Text.Add("You flex your [cock], aiming at yourself in preparation for your climax.", parse);
+		else
+			Text.Add("You start pumping at a certain angle, aiming the [cockTip] of your [cock] at yourself in preparation for your orgasm.", parse);
+		Text.NL();
+		selfpaint = true;
+	}
+	Text.Add("As close as you are to the edge, all that’s left is to take the leap. With that in mind, you begin furiously masturbating with renewed vigor, until you feel yourself cross over into the wonderful orgasmic haze.", parse);
+	Text.NL();
+	
+	var cum = player.OrgasmCum();
+	
+	if(selfpaint) {
+		if(cum > 6) {
+			Text.Add("A veritable eruption of seed blasts against you, covering you in your own spunk in seconds. The seemingly never ending wave of semen continues to hose you down, and you bask in the slimy warmth covering your very being. It’s truly a wonderful feeling. Sometimes your seed winds up splattering against your lips, and you have a chance to drink your own delicious cum. Ah…", parse);
+			Text.NL();
+			Text.Add("You lose track of time, but eventually your climax is reduced to a trickle and you’re left covered in a layer of glaze.", parse);
+		}
+		else if(cum > 3) {
+			Text.Add("Rope after hot rope of white seed spills over you, splattering against your body and face in a constant stream as you hold your mouth open to catch what you can of your own delicious spunk.", parse);
+			Text.NL();
+			Text.Add("It’s too bad this has to end, but after several ropes, your orgasm is reduced to nothing more than a thin trickle as your [cock] throbs and spasms.", parse);
+		}
+		else {
+			Text.Add("You may not be super-productive, but you can still shoot your seed far. Small jets of cum fly through the air to spatter against your face and torso, sometimes hitting you squarely in your mouth so can get a taste of yourself.", parse);
+			Text.NL();
+			Text.Add("All too soon, your climax reaches its end. It’s such a great feeling… too bad it doesn’t last longer...", parse);
+		}
+	}
+	else {
+		if(cum > 6) {
+			Text.Add("Spunk flies from your [cockTip], arcing through the air before splattering soundly on the ground below. Each new jet is a thrill of its own, and each one sends you straight to heaven. The process repeats itself several times, until you’ve literally cum enough to fill a few buckets worth of jism. Ah… you needed that...", parse);
+		}
+		else if(cum > 3) {
+			Text.Add("You continue pumping as your cock spews rope after rope of jism into the air. Your orgasm carries on in intervals, each dotted by a new rope of cum; as you cum, you feel your tension evaporate, replaced by satisfaction and relief at finally unloading yourself…", parse);
+			Text.NL();
+			Text.Add("When it finally ends, you feel spent, but relaxed. Phew… that was great...", parse);
+		}
+		else {
+			Text.Add("You’re not exactly backed up; however, more than a few spurts fly from your [cockTip] to spatter noisily on the ground below.", parse);
+			Text.NL();
+			Text.Add("When you’re done you feel awash with pleasure, as if a great pressure had been removed from your [balls].", parse);
+		}
+	}
+	Text.NL();
+	if(player.NumCocks() > 1 && !slit) {
+		Text.Add("Looking around, you see that your other cock[s2] seem[notS2] to have made a bit of a mess too...", parse);
+		Text.NL();
+	}
+	if(selfpaint) {
+		parse["fur"] = player.HasFur() ? ", especially when you have fur" : "";
+		Text.Add("Much as you’d like to take a nap right now, you gotta at least try and clean yourself up. Dry cum can be pretty hard to clean up[fur]. Plus it’d be a waste, you think to yourself, licking your lips.", parse);
+		Text.NL();
+		if(player.IsFlexible())
+			Text.Add("You set about licking yourself clean. This might be a bit challenging, but with your impressive flexibility you manage to get most of yourself cleaned up before you have to resort to rag for those hard-to-reach spots.", parse);
+		else
+			Text.Add("You use your hands to scrape off as much sperm as you can, licking it off your hands lasciviously with each pass. When you feel confident you’ve gotten all that you can, you resort to a rag to clean the rest of yourself up.", parse);
+		Text.NL();
+	}
+	Text.Add("That really hit the spot; maybe you should take a short half hour nap before heading off on your way. Yes… that would be great, you think to yourself as you yawn…", parse);
+	Text.Flush();
+	
+	world.TimeStep({minute: 30});
+	
+	Gui.NextPrompt();
+}
+
+Scenes.Masturbation.CockSize = function(parse, p1cock) {
+	var len = p1cock.Len();
+	var girth = p1cock.Thickness();
+	
+	if(len < 15)
+		Text.Add("The length might not be too impressive, but it still feels as good as any other penis might. Plus you know what they say… size doesn’t matter if you don’t know how to use it!", parse);
+	else if(len < 25)
+		Text.Add("In terms of length, you’re pretty average you’d say. Sure, you won’t be bottoming out on anyone but the smallest of partners, but there’s enough cock here to give them a nice pole to ride their climax out. And there’s more than a little for you to play with too!", parse);
+	else
+		Text.Add("There’s no way to describe your cock other than <i>big</i>. With your size, you wouldn’t be surprised if you bottomed on most partners, not that this would be a problem. There’s something to be said about having a dick so big you can fill anyone up with cock-flesh. Not to mention you can also stroke their deepest reaches!", parse);
+	Text.NL();
+	if(girth < 3)
+		Text.Add("You’re not very broad, and depending on your partner, that might be good. If you were too large, you’d need to take a lot of care when penetrating, but with your current girth, you’re pretty sure you can stab your manhood in any orifice without much worry. Plus it’s great that you can wrap your whole hand around it.", parse);
+	else if(girth < 6)
+		Text.Add("You’re thick enough that you’d need some care when splitting open a tight hole. It might hurt a bit at first, but it’ll feel great once they get used to it, plus this gives your whole member a lot more area to feel said <i>tight holes</i> squeezing you down.", parse);
+	else
+		Text.Add("Your penis is a real monster. It’s so thick that you can barely get your hand to close around its impressive girth. With a dick this large, any hole feels like a skin-tight cocksleeve. Sure, you have to work and be careful whenever you decide to stick it in someone, but nothing beats that tight feeling all around your shaft...", parse);
+	Text.NL();
+}
+
+Scenes.Masturbation.CockSlut = function(parse, p1cock) {
+	if(player.Slut() >= 30) {
+		Text.Add("In a bid to further increase your enjoyment, you gather some of your pre-ejaculate and take the musky liquid to your mouth, where you lap it all off your hand. Damn, you taste great!", parse);
+		if(player.Slut() >= 50 && (p1cock.Len() >= 25 || player.IsFlexible()))
+			Text.Add(" You have half a mind to blow yourself… but you’ll do that some other time. After all, you’re looking forward to what awaits you in the end of this little personal session...", parse);
+		Text.NL();
+	}
+}
+
+Scenes.Masturbation.CockKnot = function(parse, p1cock) {
+	if(p1cock.Knot()) {
+		Text.Add("Your mounting excitement causes your knot to bloat up like a balloon, and you adapt by sparing a hand to squeeze it. It feels great! Each squeeze makes a small rope of pre to spew from your [cockTip] and makes your knot grow ever larger. When you tire of that, you move your hand just behind the bulbous mass to hold tightly to the base of your dick. Doing this, it’s almost like you’d tied someone!", parse);
+		Text.NL();
+	}
+}
+
+/* TODO
+
+ */
 
 Scenes.Masturbation.AnalOpening = function(func, obj) {
 	var parse = {
@@ -691,7 +1070,3 @@ Scenes.Masturbation.Breasts = function() {
 	world.TimeStep({minute: 30});
 	Gui.NextPrompt();
 }
-
-/*
-
- */
