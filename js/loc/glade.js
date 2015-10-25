@@ -588,9 +588,9 @@ Scenes.DryadGlade.FirstWin = function(enc) {
 			Text.Clear();
 			Text.Add("Orchid sniffles, wiping away her tears as she tries to compose herself.", parse);
 			Text.NL();
-			Text.Add("<i>“It’s all fuzzy, I don’t… I was playing around deeper within the forest, when I saw a strange creature. It looked like a person, but all hunched over and weird and huddled in a cape… so I followed it.”</i> She sniffles again, shuddering.", parse);
+			Text.Add("<i>“It’s all fuzzy, I don’t… I was playing around deeper within the forest, when I saw a strange creature. It looked like a person, but it was huddled in a cape and it looked suspicious… so I followed it.”</i> She sniffles again, shuddering.", parse);
 			Text.NL();
-			Text.Add("<i>“It was heading for one of the clear springs, and the way it was moving, I thought it was hurt. When it got there though, it didn’t drink, it… it had a flask of some kind, and it poured it into the water, which turned all murky and icky.”</i> The child called Spirit pats her sister on the head consolingly, urging her to go on.", parse);
+			Text.Add("<i>“It was heading for one of the clear springs, and the way it was moving, I thought it was hurt. When it got there though, it didn’t drink, it… it took a big stone… a gem of some kind I think, and put it into the water, which turned all murky and icky.”</i> The child called Spirit pats her sister on the head consolingly, urging her to go on.", parse);
 			Text.NL();
 			Text.Add("<i>“That’s when they ambushed me, half a dozen… creatures. Pointy ears.”</i> The dryad whimpers, wiping her tears with a sodden tentacle. <i>“They were elves, but really really nasty ones! Their skins were all purple and veiny, and they had sharp pointy teeth!”</i>", parse);
 			Text.NL();
@@ -602,7 +602,7 @@ Scenes.DryadGlade.FirstWin = function(enc) {
 				Text.Add("The dryad shrinks back, suddenly fearful of possibly the least intimidating person you’ve ever met. Whatever those elves were, they clearly left an impression on her. You admonish [name] with a stern glance. You can discuss this later, for now you should both listen to the rest of her tale.", parse);
 				Text.NL();
 			}
-			Text.Add("<i>“T-they dragged me to the spring, and threw me in front of the robed creep. He… I didn’t see, but I think it was some sort of lizard, with scales and a thin tail. He made my skin crawl,”</i> she whimpers, shuddering as she hugs herself.", parse);
+			Text.Add("<i>“T-they dragged me to the spring, and threw me in front of the robed creep. He… I didn’t see, but I think it was some sort of lizard, with scales and a thin tail. He had a staff… like a snake, with burning eyes. He made my skin crawl,”</i> she whimpers, shuddering as she hugs herself.", parse);
 			Text.NL();
 			Text.Add("<i>“Then, they made me… they made me drink the water. After that, it’s all fuzzy. I grew these… <b>things</b> too,”</i> she adds, waving at her tentacles. The dryad slumps down, tired. <i>“I… I don’t even want to consider what I did after that, but I somehow came back here. I came back to… to...”</i> she breaks down wailing again, and you let the little girl comfort her.", parse);
 			Text.NL();
