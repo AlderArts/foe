@@ -63,6 +63,7 @@ function Terry(storage) {
 	
 	this.Equip();
 	this.SetLevelBonus();
+	this.RecallAbilities();
 	this.RestFull();
 	
 	this.flags["Met"]   = 0;
@@ -1411,6 +1412,8 @@ Scenes.Terry.Release = function() {
 		terry.name = "Terry";
 		terry.avatar.combat = Images.terry_c;
 		terry.uniqueName = null;
+		terry.monsterName = null;
+		terry.MonsterName = null;
 		party.SwitchIn(terry);
 		
 		if(party.InParty(miranda)) {
