@@ -8,7 +8,7 @@
 
 // Create namespace
 world.loc.Burrows = {
-	Enterance : new Event("The Burrows"),
+	Entrance  : new Event("The Burrows"),
 	Tunnels   : new Event("Burrows: Tunnels"),
 	Pit       : new Event("Burrows: The Pit"),
 	Lab       : new Event("Burrows: Lab"),
@@ -110,7 +110,7 @@ Burrows.prototype.FromStorage = function(storage) {
 //
 // Burrows entrance
 //
-world.loc.Burrows.Enterance.description = function() {
+world.loc.Burrows.Entrance.description = function() {
 	var parse = {
 		TreeFar : world.TreeFarDesc(),
 		l : burrows.LagonDefeated() ? "the lagomorph" : "Lagon’s"
@@ -149,14 +149,14 @@ world.loc.Burrows.Enterance.description = function() {
 	scenes.Get();
 }
 
-world.loc.Burrows.Enterance.links.push(new Link(
+world.loc.Burrows.Entrance.links.push(new Link(
 	"Plains", true, true,
 	null,
 	function() {
 		MoveToLocation(world.loc.Plains.Crossroads, {minute: 30});
 	}
 ));
-world.loc.Burrows.Enterance.links.push(new Link(
+world.loc.Burrows.Entrance.links.push(new Link(
 	"Inside", true, true,
 	null,
 	function() {
@@ -170,7 +170,7 @@ world.loc.Burrows.Enterance.links.push(new Link(
 ));
 
 
-world.loc.Burrows.Enterance.onEntry = function() {
+world.loc.Burrows.Entrance.onEntry = function() {
 	if(burrows.flags["Access"] == Burrows.AccessFlags.KnownNotVisited) {
 		Scenes.Burrows.FirstApproach();
 	}
@@ -187,7 +187,7 @@ world.loc.Plains.Crossroads.links.push(new Link(
 		}
 	},
 	function() {
-		MoveToLocation(world.loc.Burrows.Enterance, {minute: 30});
+		MoveToLocation(world.loc.Burrows.Entrance, {minute: 30});
 	}
 ));
 
@@ -204,7 +204,7 @@ world.loc.Burrows.Tunnels.links.push(new Link(
 	"Outside", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Burrows.Enterance, {minute: 10});
+		MoveToLocation(world.loc.Burrows.Entrance, {minute: 10});
 	}
 ));
 
@@ -810,7 +810,7 @@ Scenes.Burrows.ArrivalLagonTalk = function() {
 			Text.Flush();
 			
 			Gui.NextPrompt(function() {
-				MoveToLocation(world.loc.Burrows.Enterance, {hour: 1});
+				MoveToLocation(world.loc.Burrows.Entrance, {hour: 1});
 			});
 		}, enabled : true,
 		tooltip : "Ask him about the job he mentioned."

@@ -19,7 +19,7 @@ world.loc.Plains = {
 	Gate           : new Event("Rigard gates"),
 	Burrows        :
 	{
-		Enterance  : new Event("Plains: Burrows enterance"),
+		Entrance   : new Event("Plains: Burrows entrance"),
 		Burrows    : new Event("Burrows"),
 		Pit        : new Event("Mating pit")
 	}

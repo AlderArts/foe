@@ -1868,7 +1868,7 @@ Scenes.Lagon.PitDefianceWin = function() {
 		lagon.flags["Usurp"] |= Lagon.Usurp.FirstFight;
 		
 		world.TimeStep({minute: 30});
-		party.location = world.loc.Burrows.Enterance;
+		party.location = world.loc.Burrows.Entrance;
 		
 		Gui.NextPrompt();
 	});
