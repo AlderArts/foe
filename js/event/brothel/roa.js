@@ -945,6 +945,7 @@ Scenes.Roa.TSLCatchVaginal = function() {
 		roa.flags["Met"] = Roa.Met.Sexed;
 	
 	var parse = {
+		playername : player.name,
 		hand       : function() { return player.HandDesc(); },
 		vagDesc    : function() { return player.FirstVag().Short(); },
 		clitDesc   : function() { return player.FirstVag().ClitShort(); },
