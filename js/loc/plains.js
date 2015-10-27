@@ -9,17 +9,17 @@ world.loc.Plains = {
 	Nomads         :
 	{
 		Tent       : new Event("Tent"), // Start area
-		Fireplace  : new Event("Fireplace"),
-		Nursery    : new Event("Nursery")
+		Fireplace  : new Event("Nomads: Fireplace"),
+		Nursery    : new Event("Nomads: Nursery")
 	},
-	Crossroads     : new Event("Crossroads"),
+	Crossroads     : new Event("Plains: Crossroads"),
 	Portals        : new Event(function() {
-		return Scenes.Global.PortalsOpen() ? "Nexus" : "Mound";
+		return Scenes.Global.PortalsOpen() ? "Plains: Nexus" : "Plains: Mound";
 	}),
-	Gate           : new Event("Town gates"),
+	Gate           : new Event("Rigard gates"),
 	Burrows        :
 	{
-		Enterance  : new Event("Burrows enterance"),
+		Enterance  : new Event("Plains: Burrows enterance"),
 		Burrows    : new Event("Burrows"),
 		Pit        : new Event("Mating pit")
 	}

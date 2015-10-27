@@ -1970,7 +1970,7 @@ Scenes.Halloween.NadirMa = function() { //TODO
 	var werewolf = Scenes.Halloween.HW.Werewolf();
 	
 	var parse = {
-		
+		playername : player.name
 	};
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);

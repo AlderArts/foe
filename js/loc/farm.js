@@ -56,7 +56,7 @@ Farm.prototype.Found = function() {
 
 // Create namespace
 world.loc.Farm = {
-	Fields : new Event("Gwendy's farm"),
+	Fields : new Event("Plains: Gwendy's farm"),
 	Barn   : new Event("The barn"),
 	Loft   : new Event("Gwendy's loft")
 }
