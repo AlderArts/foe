@@ -75,5 +75,5 @@ Items.Accessories.GreenScentedCandle = new Item("charm1", "G.Candle", ItemType.A
 Items.Accessories.GreenScentedCandle.price = 50;
 Items.Accessories.GreenScentedCandle.Short = function() { return "Green scented candle"; }
 Items.Accessories.GreenScentedCandle.Long = function() { return "A small scented candle fashioned with nightshade, among other ingredients. Protects the holder from poison and other forces of nature."; }
-Items.Accessories.SimpleCharm.effect.spirit = 2;
-Items.Accessories.SimpleCharm.effect.dmNature = 0.5;
+Items.Accessories.GreenScentedCandle.effect.spirit = 2;
+Items.Accessories.GreenScentedCandle.effect.dmNature = 0.5;
