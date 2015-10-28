@@ -2543,7 +2543,7 @@ Scenes.Miranda.HomeSubbySexTakeAnal = function(location, Loc) {
 							Text.Add("Totally spent, the two of you collapse in each other’s arms.", parse);
 							
 							miranda.subDom.DecreaseStat(-75, 1);
-							player.relation.IncreaseStat(75, 1);
+							miranda.relation.IncreaseStat(75, 1);
 							
 							PrintDefaultOptions();
 						}, enabled : p1Cock,

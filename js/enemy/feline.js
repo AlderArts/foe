@@ -1503,7 +1503,7 @@ Scenes.Felines.WinGroupService = function(enc, enemy) {
 		
 		if(cum > 6) {
 			parse["sp"] = spare ? Text.Parse(", even as your other shaft[s2] whip[notS2] around and splatter[notS2] [hisher] body with semen", parse) : "";
-			Text.Add("When you finally you cum, your explosion of pearly cream surprises the cats with its overwhelming volume. The boss holds steady, hanging on your cock and drinking it down merrily[sp]. The other cat[gs] have to stop [ghisher] ministrations to cough and breath, and [gheshe] winds up covered in semen, much to [ghisher] delight.", parse);
+			Text.Add("When you finally you cum, your explosion of pearly cream surprises the cats with its overwhelming volume. The boss holds steady, hanging on your cock and drinking it down merrily[sp]. The other cat[gs] [ghasHave] to stop [ghisher] ministrations to cough and breath, and [gheshe] winds up covered in semen, much to [ghisher] delight.", parse);
 		}
 		else if(cum > 3) {
 			parse["sp"] = spare ? Text.Parse(", your other cock[s2] spill seed all over and across their bodies, but they don’t seem to care", parse) : "";

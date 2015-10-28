@@ -219,7 +219,7 @@ Scenes.Terry.SexPromptChoice = function(backPrompt, haveadrink) {
 			}
 			if(player.FirstVag()) {
 				parse["vag"] = player.FirstVag().Short();
-				var tooltip = player.Relation() < 60 ? "Terry can start by licking your [vag]." : "Well, how about a nice dose of honey, straight from your own pretty little flower?";
+				var tooltip = terry.Relation() < 60 ? "Terry can start by licking your [vag]." : "Well, how about a nice dose of honey, straight from your own pretty little flower?";
 				options.push({ nameStr : "Pussy",
 					func : function() {
 						Text.Clear();
