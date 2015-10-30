@@ -37,7 +37,8 @@ Halloween.Flags = {
 	Carepack  : 1024,
 	Laggoth   : 2048,
 	Mausoleum : 4096,
-	TRoom     : 8192
+	TRoom     : 8192,
+	NadirMa   : 16384
 };
 Halloween.Ronnie = {
 	NotMet  : 0,
@@ -54,7 +55,8 @@ Halloween.Harthon = {
 };
 Halloween.NadirMa = {
 	GaveCock  : 1,
-	GaveBalls : 2
+	GaveBalls : 2,
+	SaidNo    : 4
 };
 
 Halloween.PW = function() {
@@ -1768,11 +1770,9 @@ Scenes.Halloween.KiaiRun = function() {
 	scenes.AddEnc(function() {
 		dest = Halloween.Loc.Path;
 	}, 1.0, function() { return true; });
-	/* TODO #randomly move PC to the mausoleum, burnt chapel or beaten path.
 	scenes.AddEnc(function() {
 		dest = Halloween.Loc.Mausoleum;
 	}, 1.0, function() { return true; });
-	*/
 	scenes.AddEnc(function() {
 		dest = Halloween.Loc.Chapel;
 	}, 1.0, function() { return true; });
@@ -1937,7 +1937,9 @@ Halloween.Loc.TortureRoom.links.push(new Link(
 ));
 
 Halloween.Loc.TortureRoom.events.push(new Link(
-	"Urn", true, true,
+	"Urn", function() {
+		return !(Scenes.Halloween.HW.flags & Halloween.Flags.NadirMa);
+	}, true,
 	null,
 	function() {
 		Scenes.Halloween.NadirMaApproach();
@@ -1971,7 +1973,7 @@ Scenes.Halloween.NadirMaApproach = function() {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Halloween.NadirMa = function() { //TODO
+Scenes.Halloween.NadirMa = function() {
 	var werewolf = Scenes.Halloween.HW.Werewolf();
 	
 	var parse = {
@@ -1979,6 +1981,8 @@ Scenes.Halloween.NadirMa = function() { //TODO
 	};
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+	
+	Scenes.Halloween.HW.flags |= Halloween.Flags.NadirMa;
 	
 	Text.Clear();
 	Text.Add("Having made your decision, you wrap your hands around the muzzle and give the head a good twist to break the seal. There’s a faint hiss of displaced air, and then you lift the lid and carefully place it aside before stepping closer and peering within.", parse);
@@ -2075,210 +2079,216 @@ Scenes.Halloween.NadirMa = function() { //TODO
 	Text.Add("Well, it’s not like you can’t understand where she’s coming from. That’s a <b>long</b> time to go without getting any sex. Wouldn’t it be nice to help her out, like she asked you to? On the other hand... she’s clearly something supernatural. Getting that close to her mightn’t be a good idea...", parse);
 	Text.Flush();
 	
+	var prompt1 = function() {
+		Text.Clear();
+		Text.Add("You tell Nadir-Ma that you’d be more than happy to help her relieve some tension.", parse);
+		Text.NL();
+		Text.Add("<i>“Excellent answer, cutie. But before we get down to it, I’ll have you ‘serve’ me for a little bit.”</i>", parse);
+		Text.NL();
+		Text.Add("Oh? Sounds like someone has something particular in mind...", parse);
+		Text.NL();
+		Text.Add("<i>“Just a little foreplay to get us going.”</i>", parse);
+		Text.NL();
+		if(player.LustLevel() < 0.35) {
+			Text.Add("Well, you certainly don’t have any complaints about that, but you thought she was already raring to go, herself.", parse);
+			Text.NL();
+			Text.Add("<i>“Well, I really am. But I’ve been waiting over a thousand years for this, so I think I can wait a few minutes longer.”</i>", parse);
+			Text.NL();
+			Text.Add("You can only admire her patience. If that’s what she wants to do, you’re happy to oblige.", parse);
+		}
+		else {
+			Text.Add("Foreplay...? Does she <i>really</i> need it? You’re ready to get straight to the good stuff!", parse);
+			Text.NL();
+			Text.Add("<i>“Patience, mortal. You’re about to lay with a goddess. That’s not a chance most mortals get. Plus, I’ve been waiting for over a thousand years; surely you can wait a little longer?”</i>", parse);
+			Text.NL();
+			Text.Add("There is something to be said for savoring the moment. You’ll follow her lead, in that case.", parse);
+		}
+		Text.NL();
+		Text.Add("<i>“Very well; first of all, I need to prepare myself. Normally, I’d have my servants do that for me, but we seem to have a little problem,”</i> she says, motioning to the room around you.", parse);
+		Text.NL();
+		Text.Add("Namely that there’s nobody here except you and her?", parse);
+		Text.NL();
+		Text.Add("<i>“Precisely. During all these years I’ve been stuck in that cramped little jar, I’ve never had room to even groom myself, so I’d really like to get a few things taken care of. And since there’s no one here but you and me, I’ll have you act as my servant. Okay?”</i>", parse);
+		Text.Flush();
+		
+		var prompt2 = function() {
+			Text.Clear();
+			Text.Add("You give the matter a moment’s thought and decide that it sounds agreeable. With a nod of emphasis, you tell Nadir-Ma that she just needs to tell you what to do.", parse);
+			Text.NL();
+			Text.Add("<i>“Excellent, cutie. ", parse);
+			if(werewolf) {
+				Text.Add("Normally, I’d be asking you to take off your clothes, but since you’re already naked, how about you put on a little show for me? Do a few sexy poses so I can see exactly what I’m working with?”</i>", parse);
+				Text.NL();
+				Text.Add("A soft growl of contentment rumbles in your chest. Your long claws curl into half-fists as you pump your arms; first upwards, and then downwards, flaunting the impressive swell of your biceps. You twist your hips and stretch, lewdly thrusting the impressive lupine package swaying between your thighs.", parse);
+				Text.NL();
+				Text.Add("Your lips curl into a feral smile as you look at Nadir-Ma, confident she must be pleased with your efforts.", parse);
+				Text.NL();
+				Text.Add("<i>“That’s nice and all, but I did say I want to see <b>everything</b>. That means also showing me your tail.”</i> She grins.", parse);
+				Text.NL();
+				Text.Add("Huh? ...Oh, well, if that’s what she wants.", parse);
+				Text.NL();
+				Text.Add("Obligingly, you spin on the spot, bending over to better show off your [butt] as you proudly wag your tail, letting her watch it slowly arc back and forth across your buttocks.", parse);
+				Text.NL();
+				Text.Add("<i>“That’s more like it,”</i> she says, looking you over appreciatively. <i>“You have a very nice rump, cutie. Should show it off more often.”</i>", parse);
+				Text.NL();
+				Text.Add("Your tail wags faster at the compliment, and you thank her for appreciating the view.", parse);
+				Text.NL();
+				Text.Add("<i>“That’s enough of that. Since you’ve been such a good puppy, I think you deserve a reward.”</i>", parse);
+			}
+			else {
+				Text.Add("First of all, let’s get you off those skimpy clothes of yours. My servants wore none, and you certainly don’t need them right now. But don’t just take them off, put on a show for me.”</i>", parse);
+				Text.NL();
+				parse["br"] = player.mfTrue("", " even as you remove the bikini covering them");
+				parse["thongpanties"] = player.mfTrue("thong", "panties");
+				Text.Add("That’s a fair enough request. With slow, deliberate motions, you begin removing your cloak and stick out your chest, emphasizing your [breasts][br]. Your arms sweep slowly around your frame in languid, delicate motions, the arc of their spiral drawing the eye to examine every inch of you. You shake your hips slowly from side to side, twisting and turning in a perverse little dance, slowly turning so that Nadir-Ma can admire the curves of your [butt], even as you begin peeling off your [thongpanties].", parse);
+				Text.NL();
+				var gen = "";
+				if(player.FirstCock()) gen += "[cocks]";
+				if(player.FirstCock() && player.FirstVag()) gen += " and ";
+				if(player.FirstVag()) gen += "[vag]";
+				parse["gen"] = Text.Parse(gen, parse);
+				Text.Add("Fabric drifts into a little pile at your [feet] before you kick it aside, an exaggerated twirl that flamboyantly exposes your [gen]. Slowly, you look up at the dobermorph, waiting to see her reaction.", parse);
+				Text.NL();
+				Text.Add("She applauds you. <i>“Very good. That was a nice show, so how about I give you a little reward?”</i>", parse);
+			}
+			Text.NL();
+			Text.Add("Standing up as tall as you can, you smile and thank Nadir-Ma for her generosity.", parse); 
+			Text.NL();
+			Text.Add("<i>“You’re welcome, cutie! Now... ", parse);
+			if(!player.FirstCock()) {
+				Text.Add("let’s make a few changes to this nice body of yours.”</i> She grins.", parse);
+				Text.NL();
+				Text.Add("Changes? Like what? What’s wrong with your body?", parse);
+				Text.NL();
+				Text.Add("<i>“Well, how do you expect us to have sex when you have so little to offer up front?”</i>", parse);
+				Text.NL();
+				Text.Add("Puzzled, you fish out your ‘stake’ and present it to her, telling her that if she really needs something hard inside of her, this would work. Besides, there’s plenty of fun ", parse);
+				if(player.Gender() == Gender.female)
+					Text.Add("two girls", parse);
+				else
+					Text.Add("a girl like her and a guy like you", parse);
+				Text.Add(" can have on their own, no cocks required.", parse);
+				Text.NL();
+				Text.Add("<i>“Yes, of course. But after being stuck inside a cramped jar for more than a few years, I think I deserve to have the real thing, right cutie?”</i>", parse);
+				Text.NL();
+				Text.Add("But wouldn’t a dildo like yours suffice?", parse);
+				Text.NL();
+				Text.Add("<i>“As much fun as it would be, I don’t want to just use a toy. I want to feel a real cock inside me, a real cock than can pump me full of real cum. Besides, imagine how good it’d feel to have my tight, wet pussy wrapped around your meat.”</i>", parse);
+				Text.NL();
+				Text.Add("From the dreamy look on Nadir-Ma’s face, it seems quite evident that she has her heart set on this. You aren’t going to change her mind; all you can do is decide whether you’re going to agree with her plan to change your body more to her liking.", parse);
+				Text.Flush();
+				
+				var prompt3 = function() {
+					Scenes.Halloween.HW.nadirma |= Halloween.NadirMa.GaveCock;
+					
+					// ADD COCK
+					var cock = new Cock();
+					cock.length.base = 33;
+					cock.thickness.base = 6;
+					player.body.cock.push(cock);
+					
+					//Reset parser
+					parse = player.ParserTags(parse);
+					
+					Text.Clear();
+					Text.Add("<i>“Excellent! Stay still.”</i>", parse);
+					Text.NL();
+					Text.Add("Obediently, you hold your position, watching curiously to see how the magical dobermorph will change you to her liking. Nadir-Ma regally gestures with her hands, and you watch with a politely impressed look as some of her bandages uncurl from around her body and stretch out towards you.", parse);
+					Text.NL();
+					parse["boygirl"] = player.mfTrue("boy", "girl");
+					Text.Add("With a sinuous grace that is mildly disconcerting, the bandages twine themselves around you like fabric tentacles. They gently fall on your [hips] and drape themselves across your loins, rapidly twining themselves into a fairly well-designed set of panties. Maybe not the flashiest of lingerie in the world, but a [boygirl] can’t be too choosy in circumstances like these, right?", parse);
+					Text.NL();
+					Text.Add("The line strands reaching between your crotch and Nadir-Ma’s body snap, just an inch or two from your new garment. The bandages retract back to their place on their owner’s body - you’d question why she doesn’t seem to have diminished her own clothing at all, but that’s hardly the weirdest thing about this situation.", parse);
+					Text.NL();
+					Text.Add("You wonder what your new underwear has to do with Nadir-Ma’s plans for you; a question that is promptly answered when a wave of warmth pulses through your body, emanating from your panties and sweeping through you. Caught off guard despite yourself, you moan softly; it feels... it feels <b>good</b>.", parse);
+					Text.NL();
+					Text.Add("Nadir-Ma’s smile burns itself into your subconscious, even as the rest of you is lost in the feeling washing through your bones. It pulses like some alien heart, concentrating its warmth over your crotch. You can feel your [vag] dampening slightly, but more than that... you can feel something <i>growing</i> there.", parse);
+					Text.NL();
+					Text.Add("You puff and pant, gasping quietly as the bandages grow tighter, and tighter. They squeeze your sensitive, shifting flesh in a deceptive grip, and yet you just keep on growing!", parse);
+					Text.NL();
+					parse["p"] = player.HasLegs() ? "" : " proverbial";
+					Text.Add("The sudden snap of fabric echoes in your ear like a thunderclap. First, one bandage gives way, brushing against your [legs] as it sways in the breeze, and then another follows suit, a third hot on its heels. And the thing between your[p] thighs keeps on growing bigger, until finally your panties burst asunder.", parse);
+					Text.NL();
+					Text.Add("There, bouncing proudly as it swells to its full glory, is a sizable human cock. It has to be at least thirteen inches long, two inches thick and very sensitive; you shiver at the pleasant tingle that crawls across your [skin] as a gentle breeze wafts over your new appendage.", parse);
+					Text.NL();
+					Text.Add("<i>“You look <b>much</b> better now, cutie. And much more fun too.”</i> She chuckles.", parse);
+					Text.NL();
+					Text.Add("You declare that you’re glad that she approves, idly stroking your new appendage and enjoying the tingles that race along your spine at your own touch.", parse);
+					Text.NL();
+					Text.Add("<i>“Now… why don’t you kneel and present yourself to me?”</i>", parse);
+					Text.NL();
+					Scenes.Halloween.NadirMaCont(parse);
+				}
+				
+				//[Yes] [No]
+				var options = new Array();
+				options.push({ nameStr : "Yes",
+					tooltip : "It might not be so bad to have a cock of your own. Would be more fun to stick into things than a toy, that’s for sure.",
+					func : prompt3, enabled : true
+				});
+				options.push({ nameStr : "No",
+					tooltip : "Nobody is changing your body, no matter who they think they are.",
+					func : function() {
+						Text.Clear();
+						Scenes.Halloween.NadirMaNoEntry(parse, prompt3);
+					}, enabled : true
+				});
+				Gui.SetButtonsFromList(options, false, null);
+			}
+			else {
+				Text.Add("why don’t you kneel and present yourself to me?”</i>", parse);
+				Text.NL();
+				Scenes.Halloween.NadirMaCont(parse);
+			}
+		}
+		
+		//[Yes] [No]
+		var options = new Array();
+		options.push({ nameStr : "Yes",
+			tooltip : "Well, it’s a reasonable enough request, and it’s not like it should take much effort, right?",
+			func : prompt2, enabled : true
+		});
+		options.push({ nameStr : "No",
+			tooltip : "You’re nobody’s servant, not even for a piece of tail like her.",
+			func : function() {
+				Text.Clear();
+				Scenes.Halloween.NadirMaNoEntry(parse, prompt2);
+			}, enabled : true
+		});
+		Gui.SetButtonsFromList(options, false, null);
+	}
+	
 	//[Yes] [No]
 	var options = new Array();
 	options.push({ nameStr : "Yes",
 		tooltip : "She’s attractive, she’s polite and she’s clearly very willing. You can certainly think of worse partners to have.",
-		func : function() {
-			Text.Clear();
-			Text.Add("You tell Nadir-Ma that you’d be more than happy to help her relieve some tension.", parse);
-			Text.NL();
-			Text.Add("<i>”Excellent answer, cutie. But before we get down to it, I’ll have you ‘serve’ me for a little bit.”</i>", parse);
-			Text.NL();
-			Text.Add("Oh? Sounds like someone has something particular in mind...", parse);
-			Text.NL();
-			Text.Add("<i>”Just a little foreplay to get us going.”</i>", parse);
-			Text.NL();
-			if(player.LustLevel() < 0.35) {
-				Text.Add("Well, you certainly don’t have any complaints about that, but you thought she was already raring to go, herself.", parse);
-				Text.NL();
-				Text.Add("<i>”Well, I really am. But I’ve been waiting over a thousand years for this, so I think I can wait a few minutes longer.”</i>", parse);
-				Text.NL();
-				Text.Add("You can only admire her patience. If that’s what she wants to do, you’re happy to oblige.", parse);
-			}
-			else {
-				Text.Add("Foreplay...? Does she <i>really</i> need it? You’re ready to get straight to the good stuff!", parse);
-				Text.NL();
-				Text.Add("<i>”Patience, mortal. You’re about to lay with a goddess. That’s not a chance most mortals get. Plus, I’ve been waiting for over a thousand years; surely you can wait a little longer?”</i>", parse);
-				Text.NL();
-				Text.Add("There is something to be said for savoring the moment. You’ll follow her lead, in that case.", parse);
-			}
-			Text.NL();
-			Text.Add("<i>”Very well; first of all, I need to prepare myself. Normally, I’d have my servants do that for me, but we seem to have a little problem,”</i> she says, motioning to the room around you.", parse);
-			Text.NL();
-			Text.Add("Namely that there’s nobody here except you and her?", parse);
-			Text.NL();
-			Text.Add("<i>”Precisely. During all these years I’ve been stuck in that cramped little jar, I’ve never had room to even groom myself, so I’d really like to get a few things taken care of. And since there’s no one here but you and me, I’ll have you act as my servant. Okay?”</i>", parse);
-			Text.Flush();
-			
-			//[Yes] [No]
-			var options = new Array();
-			options.push({ nameStr : "Yes",
-				tooltip : "Well, it’s a reasonable enough request, and it’s not like it should take much effort, right?",
-				func : function() {
-					Text.Clear();
-					Text.Add("You give the matter a moment’s thought and decide that it sounds agreeable. With a nod of emphasis, you tell Nadir-Ma that she just needs to tell you what to do.", parse);
-					Text.NL();
-					Text.Add("<i>”Excellent, cutie. ", parse);
-					if(werewolf) {
-						Text.Add("Normally, I’d be asking you to take off your clothes, but since you’re already naked, how about you put on a little show for me? Do a few sexy poses so I can see exactly what I’m working with?”</i>", parse);
-						Text.NL();
-						Text.Add("A soft growl of contentment rumbles in your chest. Your long claws curl into half-fists as you pump your arms; first upwards, and then downwards, flaunting the impressive swell of your biceps. You twist your hips and stretch, lewdly thrusting the impressive lupine package swaying between your thighs.", parse);
-						Text.NL();
-						Text.Add("Your lips curl into a feral smile as you look at Nadir-Ma, confident she must be pleased with your efforts.", parse);
-						Text.NL();
-						Text.Add("<i>”That’s nice and all, but I did say I want to see <b>everything</b>. That means also showing me your tail.”</i> She grins.", parse);
-						Text.NL();
-						Text.Add("Huh? ...Oh, well, if that’s what she wants.", parse);
-						Text.NL();
-						Text.Add("Obligingly, you spin on the spot, bending over to better show off your [butt] as you proudly wag your tail, letting her watch it slowly arc back and forth across your buttocks.", parse);
-						Text.NL();
-						Text.Add("<i>”That’s more like it,”</i> she says, looking you over appreciatively. <i>”You have a very nice rump, cutie. Should show it off more often.”</i>", parse);
-						Text.NL();
-						Text.Add("Your tail wags faster at the compliment, and you thank her for appreciating the view.", parse);
-						Text.NL();
-						Text.Add("<i>”That’s enough of that. Since you’ve been such a good puppy, I think you deserve a reward.”</i>", parse);
-					}
-					else {
-						Text.Add("First of all, let’s get you off those skimpy clothes of yours. My servants wore none, and you certainly don’t need them right now. But don’t just take them off, put on a show for me.”</i>", parse);
-						Text.NL();
-						parse["br"] = player.mfTrue("", " even as you remove the bikini covering them");
-						parse["thongpanties"] = player.mfTrue("thong", "panties");
-						Text.Add("That’s a fair enough request. With slow, deliberate motions, you begin removing your cloak and stick out your chest, emphasizing your [breasts][br]. Your arms sweep slowly around your frame in languid, delicate motions, the arc of their spiral drawing the eye to examine every inch of you. You shake your hips slowly from side to side, twisting and turning in a perverse little dance, slowly turning so that Nadir-Ma can admire the curves of your [butt], even as you begin peeling off your [thongpanties].", parse);
-						Text.NL();
-						var gen = "";
-						if(player.FirstCock()) gen += "[cocks]";
-						if(player.FirstCock() && player.FirstVag()) gen += " and ";
-						if(player.FirstVag()) gen += "[vag]";
-						parse["gen"] = Text.Parse(gen, parse);
-						Text.Add("Fabric drifts into a little pile at your [feet] before you kick it aside, an exaggerated twirl that flamboyantly exposes your [gen]. Slowly, you look up at the dobermorph, waiting to see her reaction.", parse);
-						Text.NL();
-						Text.Add("She applauds you. <i>”Very good. That was a nice show, so how about I give you a little reward?”</i>", parse);
-					}
-					Text.NL();
-					Text.Add("Standing up as tall as you can, you smile and thank Nadir-Ma for her generosity.", parse); 
-					Text.NL();
-					Text.Add("<i>”You’re welcome, cutie! Now... ", parse);
-					if(!player.FirstCock()) {
-						Text.Add("let’s make a few changes to this nice body of yours.”</i> She grins.", parse);
-						Text.NL();
-						Text.Add("Changes? Like what? What’s wrong with your body?", parse);
-						Text.NL();
-						Text.Add("<i>”Well, how do you expect us to have sex when you have so little to offer up front?”</i>", parse);
-						Text.NL();
-						Text.Add("Puzzled, you fish out your ‘stake’ and present it to her, telling her that if she really needs something hard inside of her, this would work. Besides, there’s plenty of fun ", parse);
-						if(player.Gender() == Gender.female)
-							Text.Add("two girls", parse);
-						else
-							Text.Add("a girl like her and a guy like you", parse);
-						Text.Add(" can have on their own, no cocks required.", parse);
-						Text.NL();
-						Text.Add("<i>”Yes, of course. But after being stuck inside a cramped jar for more than a few years, I think I deserve to have the real thing, right cutie?”</i>", parse);
-						Text.NL();
-						Text.Add("But wouldn’t a dildo like yours suffice?", parse);
-						Text.NL();
-						Text.Add("<i>”As much fun as it would be, I don’t want to just use a toy. I want to feel a real cock inside me, a real cock than can pump me full of real cum. Besides, imagine how good it’d feel to have my tight, wet pussy wrapped around your meat.”</i>", parse);
-						Text.NL();
-						Text.Add("From the dreamy look on Nadir-Ma’s face, it seems quite evident that she has her heart set on this. You aren’t going to change her mind; all you can do is decide whether you’re going to agree with her plan to change your body more to her liking.", parse);
-						Text.Flush();
-						
-						//[Yes] [No]
-						var options = new Array();
-						options.push({ nameStr : "Yes",
-							tooltip : "It might not be so bad to have a cock of your own. Would be more fun to stick into things than a toy, that’s for sure.",
-							func : function() {
-								Scenes.Halloween.HW.nadirma |= Halloween.NadirMa.GaveCock;
-								
-								// ADD COCK
-								var cock = new Cock();
-								cock.length.base = 33;
-								cock.thickness.base = 6;
-								player.body.cock.push(cock);
-								
-								//Reset parser
-								parse = player.ParserTags(parse);
-								
-								Text.Clear();
-								Text.Add("<i>”Excellent! Stay still.”</i>", parse);
-								Text.NL();
-								Text.Add("Obediently, you hold your position, watching curiously to see how the magical dobermorph will change you to her liking. Nadir-Ma regally gestures with her hands, and you watch with a politely impressed look as some of her bandages uncurl from around her body and stretch out towards you.", parse);
-								Text.NL();
-								parse["boygirl"] = player.mfTrue("boy", "girl");
-								Text.Add("With a sinuous grace that is mildly disconcerting, the bandages twine themselves around you like fabric tentacles. They gently fall on your [hips] and drape themselves across your loins, rapidly twining themselves into a fairly well-designed set of panties. Maybe not the flashiest of lingerie in the world, but a [boygirl] can’t be too choosy in circumstances like these, right?", parse);
-								Text.NL();
-								Text.Add("The line strands reaching between your crotch and Nadir-Ma’s body snap, just an inch or two from your new garment. The bandages retract back to their place on their owner’s body - you’d question why she doesn’t seem to have diminished her own clothing at all, but that’s hardly the weirdest thing about this situation.", parse);
-								Text.NL();
-								Text.Add("You wonder what your new underwear has to do with Nadir-Ma’s plans for you; a question that is promptly answered when a wave of warmth pulses through your body, emanating from your panties and sweeping through you. Caught off guard despite yourself, you moan softly; it feels... it feels <b>good</b>.", parse);
-								Text.NL();
-								Text.Add("Nadir-Ma’s smile burns itself into your subconscious, even as the rest of you is lost in the feeling washing through your bones. It pulses like some alien heart, concentrating its warmth over your crotch. You can feel your [vag] dampening slightly, but more than that... you can feel something <i>growing</i> there.", parse);
-								Text.NL();
-								Text.Add("You puff and pant, gasping quietly as the bandages grow tighter, and tighter. They squeeze your sensitive, shifting flesh in a deceptive grip, and yet you just keep on growing!", parse);
-								Text.NL();
-								parse["p"] = player.HasLegs() ? "" : " proverbial";
-								Text.Add("The sudden snap of fabric echoes in your ear like a thunderclap. First, one bandage gives way, brushing against your [legs] as it sways in the breeze, and then another follows suit, a third hot on its heels. And the thing between your[p] thighs keeps on growing bigger, until finally your panties burst asunder.", parse);
-								Text.NL();
-								Text.Add("There, bouncing proudly as it swells to its full glory, is a sizable human cock. It has to be at least thirteen inches long, two inches thick and very sensitive; you shiver at the pleasant tingle that crawls across your [skin] as a gentle breeze wafts over your new appendage.", parse);
-								Text.NL();
-								Text.Add("<i>”You look <b>much</b> better now, cutie. And much more fun too.”</i> She chuckles.", parse);
-								Text.NL();
-								Text.Add("You declare that you’re glad that she approves, idly stroking your new appendage and enjoying the tingles that race along your spine at your own touch.", parse);
-								Text.NL();
-								Text.Add("<i>”Now… why don’t you kneel and present yourself to me?”</i>", parse);
-								Text.NL();
-								Scenes.Halloween.NadirMaCont(parse);
-							}, enabled : true
-						});
-						options.push({ nameStr : "No",
-							tooltip : "Nobody is changing your body, no matter who they think they are.",
-							func : function() {
-								Text.Clear();
-								Scenes.Halloween.NadirMaNoEntry(parse);
-							}, enabled : true
-						});
-						Gui.SetButtonsFromList(options, false, null);
-					}
-					else {
-						Text.Add("why don’t you kneel and present yourself to me?”</i>", parse);
-						Text.NL();
-						Scenes.Halloween.NadirMaCont(parse);
-					}
-				}, enabled : true
-			});
-			options.push({ nameStr : "No",
-				tooltip : "You’re nobody’s servant, not even for a piece of tail like her.",
-				func : function() {
-					Text.Clear();
-					Scenes.Halloween.NadirMaNoEntry(parse);
-				}, enabled : true
-			});
-			Gui.SetButtonsFromList(options, false, null);
-		}, enabled : true
+		func : prompt1, enabled : true
 	});
 	options.push({ nameStr : "No",
 		tooltip : "If something’s too good to be true, it certainly is. No chance.",
 		func : function() {
 			Text.Clear();
-			Scenes.Halloween.NadirMaNoEntry(parse);
+			Scenes.Halloween.NadirMaNoEntry(parse, prompt1);
 		}, enabled : true
 	});
 	Gui.SetButtonsFromList(options, false, null);
 }
 
 Scenes.Halloween.NadirMaCont = function(parse) {
-	Text.Add("Well, if that’s what she wants. You carefully lower yourself to the ground, adjusting your stance until you are settled firmly, [cocks] outthrust before you.", parse);
+	Text.Add("Well, if that’s what she wants. You carefully lower yourself to the ground, adjusting your stance until you are settled firmly, your [cocks] outthrust before you.", parse);
 	Text.NL();
 	parse["boygirl"] = player.mfTrue("boy", "girl");
-	Text.Add("<i>”Good [boygirl]!”</i> She says patting you on the head. <i>”This is a great position for you,”</i> she says, sitting on the table before you.", parse);
+	Text.Add("<i>“Good [boygirl]!”</i> She says patting you on the head. <i>“This is a great position for you,”</i> she says, sitting on the table before you.", parse);
 	Text.NL();
 	Text.Add("You watch, understanding swiftly dawning as the near-naked dobermorph imperiously raises one of her paw-like feet. It arcs delicately through the air, settling against the base of your shaft with just enough pressure that you can feel it. With a slow, deliberate motion, she starts to stroke the underside of your cock with the tip of her toe.", parse);
 	Text.NL();
-	Text.Add("<i>”You should feel honored. It’s not every day that a goddess rewards a servant by letting their shaft touch her feet.”</i>", parse);
+	Text.Add("<i>“You should feel honored. It’s not every day that a goddess rewards a servant by letting their shaft touch her feet.”</i>", parse);
 	Text.NL();
 	Text.Add("Grunting softly, you absently assure her that you do feel honored. It’s a little hard to focus on her words; she surprisingly good at this! She keeps up a steady, measured pace; not so fast that you can’t savor the feel of her dainty digit gliding across your soft, tender skin, but not so slow that you can’t get excited by it. Her toenails are cut short, but just long enough that the drag of it adds to the pleasure she’s bringing you.", parse);
 	Text.NL();
 	Text.Add("When she rubs the very tip of your glans with the underside of her toe, you shudder, squirming as your [skin] tingles uncontrollably.", parse);
 	Text.NL();
-	Text.Add("<i>”Ah ah! No moving!”</i> she reprimands you.", parse);
+	Text.Add("<i>“Ah ah! No moving!”</i> she reprimands you.", parse);
 	Text.NL();
 	Text.Add("You moan an apology, feeling her pinch the base between two toes in reprimand. Smirking, she resumes sweeping along your shaft, your cock trapped between her toes. She expertly uses them to squeeze and caress you, milking you with the care of someone who’s done this before.", parse);
 	Text.NL();
@@ -2289,7 +2299,7 @@ Scenes.Halloween.NadirMaCont = function(parse) {
 	parse["goo"] = player.IsGoo() ? " No pun intended." : "";
 	Text.Add("Your senses sing under the dobermorph’s assault, a duet of pleasure that leaves you putty in her paws.[goo] Pre-cum spouts and gushes, bubbling thickly over the toes dabbling at your [cockTip] and being massaged into your length by her other sweeping foot. You start to groan and grunt, feeling your heart pounding in your chest; you don’t know how much longer you can hold out like this... you’re going to cum, you can just <b>feel</b> it...", parse);
 	Text.NL();
-	Text.Add("<i>”Alright, I think that’s enough,”</i> she says, removing her feet from your throbbing [cock].", parse);
+	Text.Add("<i>“Alright, I think that’s enough,”</i> she says, removing her feet from your throbbing [cock].", parse);
 	Text.NL();
 	Text.Add("You can no more stop the disappointed, heartfelt mewl of dismay that escapes your lips than you can stop breathing. ", parse);
 	if(player.SubDom() < 25)
@@ -2297,249 +2307,1065 @@ Scenes.Halloween.NadirMaCont = function(parse) {
 	else
 		Text.Add("Angrily, your head snaps up to face her, wordlessly demanding an explanation as to what she thinks she’s doing.", parse);
 	Text.NL();
-	Text.Add("<i>”That’s enough of a reward, don’t you think so, cutie? If you want more, then you’ll have to serve me more,”</i> she states matter-of-factly.", parse);
+	Text.Add("<i>“That’s enough of a reward, don’t you think so, cutie? If you want more, then you’ll have to serve me more,”</i> she states matter-of-factly.", parse);
 	Text.NL();
 	if(player.SubDom() < 25)
 		Text.Add("That sounds fair to you. Nodding your head in a docile fashion, you ask how you may serve her pleasure.", parse);
 	else
 		Text.Add("Well... you won’t say you’re exactly thrilled, but it is fair. Sighing, you ask what she wants you to do.", parse);
 	Text.NL();
-	Text.Add("<i>”Well, you made quite the mess.”</i> She lifts her feet, wiggling her toes to show you the cum covering each digit. <i>”How about you start by cleaning this up?”</i>", parse);
+	Text.Add("<i>“Well, you made quite the mess.”</i> She lifts her feet, wiggling her toes to show you the cum covering each digit. <i>“How about you start by cleaning this up?”</i>", parse);
 	Text.Flush();
+	
+	var prompt = function() {
+		Text.Clear();
+		Text.Add("Nadir-Ma grins at you. <i>“Good answer, cutie. Come now and clean your mistress’ feet. It’s not everyday that a mere mortal like you gets to clean a goddess’ foot!”</i>", parse);
+		Text.NL();
+		if(player.SubDom() < 35) {
+			Text.Add("Smiling softly to yourself, you meekly extend your hands and carefully take one beautiful, pre-cum smeared paw between them. Holding it as if it were a precious flower, you tenderly draw it closer before lowering your face to it.", parse);
+			Text.NL();
+			Text.Add("Your [tongue] slides out over your lips, curling delicately down before sweeping across the top of Nadir-Ma’s paw. With such a slow, deep lick, you have ample time to register every nuance of her flavor; the salty sweetness of the pre-cum, mingling with a strange, musky flavor that just has to be her. All undercut by the faintest oily aftertaste; her fur, maybe?", parse);
+			Text.NL();
+			Text.Add("Whatever, it’s more than enough for you to happily keep licking, steadily lapping away at the beautiful dobermorph’s paw.", parse);
+		}
+		else {
+			Text.Add("You puff out your cheeks and sigh at her attitude. But if this is going to be done, you may as well get it over with now. Though not rude enough to be a brute about it, the indelicacy with which you snatch up the dobermorph’s paw makes it clear that you are less than thrilled to be doing this.", parse);
+			Text.NL();
+			Text.Add("Hesitantly, you flick out your tongue and brush it quickly over Nadir-Ma’s foot. Even with that quick taste, you shudder as the flavor hits you. You can hardly believe you’re doing this, and for a moment, you consider refusing... then the aching throb of your [cocks] convince[notS] you otherwise.", parse);
+			Text.NL();
+			Text.Add("Grimacing distastefully, you start to lap away at the dobermorph’s paw, trying to get it clean as quickly as possible so you can avoid tasting more than you have to.", parse);
+		}
+		Text.NL();
+		Text.Add("<i>“That’s pretty good, servant, but don’t forget my other foot.”</i>", parse);
+		Text.NL();
+		Text.Add("You nod absently, putting down the fairly clean paw you were just bent over and reaching for the second.", parse);
+		Text.NL();
+		Text.Add("She grins. <i>“Since you’re down there, and doing such a good job, how about a massage too? Actually, how about you just worship my feet? It’s been such a long time since I had a servant worship me like the goddess I am...”</i>", parse);
+		Text.NL();
+		if(player.SubDom() < 35)
+			Text.Add("Oh, but of course! Smiling happily, you eagerly turn to your task.", parse);
+		else
+			Text.Add("Do you really have to? Glancing upwards, you sigh to yourself. Of course you do. Well, let’s just get this over with.", parse);
+		Text.NL();
+		Text.Add("Lifting Nadir-Ma’s paw to your mouth, you gently kiss each dainty toe in turn, suckling softly as you deepen the liplock. An approving giggle bubbles down to you from above, the dobermorph playfully wriggling her toes in your mouth. With your hands, you gently stroke the rest of her foot, tenderly massaging her ankles as you start to lick her pads.", parse);
+		Text.NL();
+		Text.Add("<i>“Hmm, this is some excellent service you’re giving me here, cutie. If you keep this up, I might have to wind up rewarding you.”</i>", parse);
+		Text.NL();
+		if(player.SubDom() < 35)
+			Text.Add("Oh, you wouldn’t presume to ask for something like a reward, not for something like this. But if she insists...", parse);
+		else
+			Text.Add("Well, that makes this a little more bearable. You wonder what she has in mind...", parse);
+		Text.Add(" Spurred on by her words, you resume your efforts with renewed zeal, licking and kissing, stroking and sucking, worshipping her foot with the ardent fervor of a true believer.", parse);
+		Text.NL();
+		Text.Add("Nadir-Ma giggles. <i>“That’s good, but it’s enough for this foot. Do my other one and I’ll reward you handsomely.”</i> She grins.", parse);
+		Text.NL();
+		Text.Add("With those words ringing in your [ears], you don’t hesitate for a second to transfer your attentions back to where they came from. You only stop suckling and massaging when Nadir-Ma herself interrupts your worship by gently drawing her paw from your grasp. You look up at her expectantly, waiting hungrily for what she’ll say and do next.", parse);
+		Text.NL();
+		Text.Add("<i>“Very good, cutie. You’ve earned your reward. Why don’t you lie down on the table and make[oneof] your [cocks] available for me? I promise you’ll love this.”</i>", parse);
+		Text.NL();
+		Text.Add("Eagerly, you haul yourself off of the floor. Nadir-Ma daintily slips off of the table, giving you ample space in which to take her place. You lie down on your back, shifting your [legs] so that your dribbling [cocks] [isAre] thrust towards the ceiling, blatantly exposed for the dobermorph’s appraisal.", parse);
+		Text.NL();
+		Text.Add("Giggling, Nadir-Ma leans over and lets your [cock] drag along her bosom.", parse);
+		Text.NL();
+		Text.Add("You groan deeply in approval; you like where this is going.", parse);
+		Text.NL();
+		Text.Add("She moves her breasts to sandwich your shaft in their rich fullness, moving them up and down as she strokes you with her boobs.", parse);
+		Text.NL();
+		Text.Add("You arch your back, lifting yourself off of the table; that feels <i>sooo</i> good! Oh, yes, you’re glad you were a good [boygirl] now.", parse);
+		Text.NL();
+		Text.Add("Next, she moves far down enough to expose your [cockTip], which she promptly takes into her mouth and begins tonguing expertly.", parse);
+		Text.NL();
+		Text.Add("A strangled, wheezing squeal fights its way out of your clenched throat. Oh, god!", parse);
+		Text.NL();
+		Text.Add("<i>“It’s been so long since I’ve had such a nice cock to play with. I’m just giddy with anticipation!”</i> she says, giving your [cockTip] another lick.", parse);
+		Text.NL();
+		Text.Add("You are in heaven; that’s the only way you can possibly hope to describe your situation. Nadir-Ma’s wonderfully soft breasts swallow your cock, the luxuriant fur on them adding a delightfully ticklish edge as they brush up and down. Her tongue darts back and forth with devilish enthusiasm, striking spots you don’t even remember <i>having</i>.", parse);
+		Text.NL();
+		Text.Add("With such a wonderful partner doing all this to you, you’d find yourself on the brink within a few minutes. With your previous arousal, it takes barely half that time before your whole body is twitching, on the verge of what you know would be one of the biggest orgasms you’ve ever had in your life...", parse);
+		Text.NL();
+		Text.Add("<i>“Getting ready to cum? Well, I’m not done playing yet.”</i>", parse);
+		Text.NL();
+		parse["k"] = player.FirstCock().Knot() ? ", just behind your swelling knot" : "";
+		Text.Add("A dismal moan bubbles from your throat as, before your disbelieving eyes, a bandage snakes out from Nadir-Ma’s enchanted apparel. With perverse grace, it slithers through the air and brushes against the base of your cock[k]. In an instant, it twines itself around your sensitive flesh, tying itself so tightly that you haven’t a hope of getting off.", parse);
+		Text.NL();
+		Text.Add("You turn a pleading eye towards Nadir-Ma, but the doberman is oblivious to your desperation. Instead, she goes right back to what she was doing, only slower and more teasing.", parse);
+		Text.NL();
+		Text.Add("You are helpless beneath her feminine wiles. Your cock throbs so hard that it feels like it’s going to burst, the tightness inside as your seed boils to a froth. You writhe and you squirm, pleading with Nadir-Ma to end it already, and to let you cum.", parse);
+		Text.NL();
+		Text.Add("<i>“Okay, I’m ready for my snack! Cum for me!”</i> She says, sucking on your tip and flicking her fingers on the bandages holding your cumvein shut, disintegrating them almost instantly.", parse);
+		Text.NL();
+		Text.Add("You need no further invitation; no sooner has the bandage crumbled into nothingness than the first cascade of cum erupts from your depths, roaring through your abused cock and exploding into Nadir-Ma’s mouth. The sweeping surge of sensation scatters your thoughts like flotsam before a tidal wave, leaving you barely cognizant enough to wonder how the dobermorph is so easily guzzling your generous serving of baby batter. All your thoughts are focused on riding out this monstrous climax without your mind breaking into pieces in the process.", parse);
+		Text.NL();
+		Text.Add("Finally, inevitably, you run dry, and you fall back against the table with a hollow groan of release. Panting desperately for breath, you are barely aware of your surroundings, too occupied with hauling life-giving air back into your lungs.", parse);
+		Text.NL();
+		Text.Add("Nadir-Ma removes herself from your spent [cock], wiping her mouth and licking her hand clean. <i>“Hmm, tasty.”</i>", parse);
+		Text.NL();
+		Text.Add("You manage a dull groan of happiness at her appraisal.", parse);
+		Text.NL();
+		if(player.HasBalls()) {
+			Text.Add("<i>“That was a nice load, cutie, but you could stand to be more productive. Can’t keep a goddess hungry, can you?”</i>", parse);
+			Text.NL();
+			Text.Add("...Probably not. Bemused, you lift your head and manage to weakly ask her what she intends to do about it.", parse);
+			Text.NL();
+			Text.Add("Smiling mischievously, Nadir-Ma cradles your [balls] in her palms and uses one of her enchanted bandages to wrap them into a cozy warmer.", parse);
+			Text.NL();
+			Text.Add("You hiss sharply as a strange tingling sensation washes over your [balls]. Your [cocks] immediately rise[notS] to the occasion once again as the weird yet pleasant feeling courses through you, sweeping away the fatigue of your recent climax and letting you feel more alert and alive than before.", parse);
+			Text.NL();
+			Text.Add("<i>“That should do it,”</i> she says, pulling the bandages off your [balls].", parse);
+			Text.NL();
+			Scenes.Halloween.NadirMaCont2(parse);
+		}
+		else {
+			Text.Add("<i>“Not bad, but there was way too little for my taste. You need to be more productive, cutie. And I have a feeling your lack of proper balls is to blame,”</i> she says, pointing to the base of your [cocks].", parse);
+			Text.NL();
+			Text.Add("...Maybe? You guess she has a point.", parse);
+			Text.NL();
+			if(Scenes.Halloween.HW.nadirma & Halloween.NadirMa.GaveCock) {
+				Text.Add("...Oh. She plans on changing that for you, doesn’t she?", parse);
+				Text.NL();
+				Text.Add("<i>“Good guess, cutie.”</i> She giggles.", parse);
+			}
+			else {
+				Text.Add("So, what is she implying? It sounds like she has something in mind.", parse);
+				Text.NL();
+				Text.Add("<i>“If you don’t have balls, all we gotta do is give you a pair.”</i>", parse);
+				Text.NL();
+				Text.Add("Can she <b>do</b> that?! Looking at her, though, she seems quite confident about it, and you have a sneaking suspicion that she really can.", parse);
+			}
+			Text.NL();
+			Text.Add("<i>“So, how about it, cutie? Ready to grow a pair?”</i>", parse);
+			Text.Flush();
+			
+			var prompt2 = function() {
+				Scenes.Halloween.HW.nadirma |= Halloween.NadirMa.GaveBalls;
+				
+				//ADD BALLS
+				player.Balls().count.base = 2;
+				player.Balls().size.base = 6;
+				
+				Text.Clear();
+				Text.Add("<i>“Excellent! Let’s begin right away!”</i>", parse);
+				Text.NL();
+				if(Scenes.Halloween.HW.nadirma & Halloween.NadirMa.GaveCock) {
+					Text.Add("With a recognizable gesture, the dobermorph sends her bandages undulating out again. You watch as they wrap themselves around your loins for the second time tonight, forming themselves into a familiar set of panties - save for the hole expertly woven to spare your cock, of course.", parse);
+					Text.NL();
+					parse["proverbial"] = player.HasLegs() ? "" : " proverbial";
+					Text.Add("You moan in lazy bliss as a familiar warmth seeps through your body, pleasantly tingling you from head to[proverbial] toe. Your cock stiffens, rising up as the warmth pulses from your enchanted undies, pussy dampening as you feel yourself starting to grow inside of them again.", parse);
+					Text.NL();
+					Text.Add("Lost in pleasure as you are, you can’t help but laugh and chant for your new flesh to grow, grow, grow! Each strand of linen that ruptures at the strain of trying to contain your swelling flesh becomes a trophy, and when your panties finally burst into tatters, you feel a huge sense of pride that mingles with your release as your new flesh flops into view.", parse);
+				}
+				else {
+					Text.Add("You watch entranced as Nadir-Ma gives a regal gesture, some of her bandages lazily flowing away from her body like linen serpents. They delicately loop and curl around your loins, intricately wrapping themselves around your naked nethers until they have taken a recognizably lingerie-like form.", parse);
+					Text.NL();
+					Text.Add("The dobermorph smiles proudly, the bandages connecting to your new panties snapping off and curling back to her. Weirdly, her own covering hasn’t diminished at all, but then, that’s hardly the strangest thing about this situation.", parse);
+					Text.NL();
+					Text.Add("You wonder what your new underwear has to do with Nadir-Ma’s plans for you - a question that is promptly answered when a wave of warmth pulses through your body, emanating from your panties and sweeping through you. Caught off guard despite yourself, you moan softly; it feels... it feels <b>good</b>.", parse);
+					Text.NL();
+					Text.Add("Nadir-Ma’s smile burns itself into your subconscious, even as the rest of you is lost in the feeling washing through your bones. It pulses like some alien heart, concentrating its warmth over your crotch. You can feel your [vag] dampening and your cock swelling erect once again, but more than that... you can feel something <i>growing</i> there.", parse);
+					Text.NL();
+					Text.Add("You puff and pant, gasping quietly as the bandages grow tighter, and tighter. They squeeze your sensitive, shifting flesh in a deceptive grip, and yet you just keep on growing!", parse);
+					Text.NL();
+					parse["proverbial"] = player.HasLegs() ? "" : " proverbial";
+					Text.Add("The sudden snap of fabric echoes in your ear like a thunderclap. First, one bandage gives way, brushing against your [legs] as it sways in the breeze, and then another follows suit, a third hot on its heels. And the thing between your[proverbial] thighs keeps on growing bigger, until finally your panties burst asunder.", parse);
+				}
+				Text.NL();
+				Text.Add("A great pair of plum-sized balls now sways below your [cocks], skin stretched taut over nuts filled with a fresh load of cum, just waiting to be shot into Nadir-Ma’s hungry holes.", parse);
+				Text.NL();
+				Scenes.Halloween.NadirMaCont2(parse);
+			}
+			
+			//[Yes] [No]
+			var options = new Array();
+			options.push({ nameStr : "Yes",
+				tooltip : "Well, you really do look kind of odd with a cock and no balls to go with it. Let’s get fixed up.",
+				func : prompt2, enabled : true
+			});
+			options.push({ nameStr : "No",
+				tooltip : "No way; the cock is one thing, but you don’t need a pair of ugly balls hanging over your cunt too!",
+				func : function() {
+					Text.Clear();
+					Scenes.Halloween.NadirMaNoEntry(parse, prompt2);
+				}, enabled : true
+			});
+			Gui.SetButtonsFromList(options, false, null);
+		}
+	}
 	
 	//[Yes] [No]
 	var options = new Array();
 	options.push({ nameStr : "Yes",
 		tooltip : "It’s not really that big a deal, certainly not in the face of finally getting to cum!",
-		func : function() {
-			Text.Clear();
-			Text.Add("Nadir-Ma grins at you. <i>”Good answer, cutie. Come now and clean your mistress’ feet. It’s not everyday that a mere mortal like you gets to clean a goddess’ foot!”</i>", parse);
-			Text.NL();
-			if(player.SubDom() < 35) {
-				Text.Add("Smiling softly to yourself, you meekly extend your hands and carefully take one beautiful, pre-cum smeared paw between them. Holding it as if it were a precious flower, you tenderly draw it closer before lowering your face to it.", parse);
-				Text.NL();
-				Text.Add("Your [tongue] slides out over your lips, curling delicately down before sweeping across the top of Nadir-Ma’s paw. With such a slow, deep lick, you have ample time to register every nuance of her flavor; the salty sweetness of the pre-cum, mingling with a strange, musky flavor that just has to be her. All undercut by the faintest oily aftertaste; her fur, maybe?", parse);
-				Text.NL();
-				Text.Add("Whatever, it’s more than enough for you to happily keep licking, steadily lapping away at the beautiful dobermorph’s paw.", parse);
-			}
-			else {
-				Text.Add("You puff out your cheeks and sigh at her attitude. But if this is going to be done, you may as well get it over with now. Though not rude enough to be a brute about it, the indelicacy with which you snatch up the dobermorph’s paw makes it clear that you are less than thrilled to be doing this.", parse);
-				Text.NL();
-				Text.Add("Hesitantly, you flick out your tongue and brush it quickly over Nadir-Ma’s foot. Even with that quick taste, you shudder as the flavor hits you. You can hardly believe you’re doing this, and for a moment, you consider refusing... then the aching throb of your [cocks] convince[notS] you otherwise.", parse);
-				Text.NL();
-				Text.Add("Grimacing distastefully, you start to lap away at the dobermorph’s paw, trying to get it clean as quickly as possible so you can avoid tasting more than you have to.", parse);
-			}
-			Text.NL();
-			Text.Add("<i>”That’s pretty good, servant, but don’t forget my other foot.”</i>", parse);
-			Text.NL();
-			Text.Add("You nod absently, putting down the fairly clean paw you were just bent over and reaching for the second.", parse);
-			Text.NL();
-			Text.Add("She grins. <i>”Since you’re down there, and doing such a good job, how about a massage too? Actually, how about you just worship my feet? It’s been such a long time since I had a servant worship me like the goddess I am...”</i>", parse);
-			Text.NL();
-			if(player.SubDom() < 35)
-				Text.Add("Oh, but of course! Smiling happily, you eagerly turn to your task.", parse);
-			else
-				Text.Add("Do you really have to? Glancing upwards, you sigh to yourself. Of course you do. Well, let’s just get this over with.", parse);
-			Text.NL();
-			Text.Add("Lifting Nadir-Ma’s paw to your mouth, you gently kiss each dainty toe in turn, suckling softly as you deepen the liplock. An approving giggle bubbles down to you from above, the dobermorph playfully wriggling her toes in your mouth. With your hands, you gently stroke the rest of her foot, tenderly massaging her ankles as you start to lick her pads.", parse);
-			Text.NL();
-			Text.Add("<i>”Hmm, this is some excellent service you’re giving me here, cutie. If you keep this up, I might have to wind up rewarding you.”</i>", parse);
-			Text.NL();
-			if(player.SubDom() < 35)
-				Text.Add("Oh, you wouldn’t presume to ask for something like a reward, not for something like this. But if she insists...", parse);
-			else
-				Text.Add("Well, that makes this a little more bearable. You wonder what she has in mind...", parse);
-			Text.Add(" Spurred on by her words, you resume your efforts with renewed zeal, licking and kissing, stroking and sucking, worshipping her foot with the ardent fervor of a true believer.", parse);
-			Text.NL();
-			Text.Add("Nadir-Ma giggles. <i>”That’s good, but it’s enough for this foot. Do my other one and I’ll reward you handsomely.”</i> She grins.", parse);
-			Text.NL();
-			Text.Add("With those words ringing in your [ears], you don’t hesitate for a second to transfer your attentions back to where they came from. You only stop suckling and massaging when Nadir-Ma herself interrupts your worship by gently drawing her paw from your grasp. You look up at her expectantly, waiting hungrily for what she’ll say and do next.", parse);
-			Text.NL();
-			Text.Add("<i>”Very good, cutie. You’ve earned your reward. Why don’t you lie down on the table and make[oneof] your [cocks] available for me? I promise you’ll love this.”</i>", parse);
-			Text.NL();
-			Text.Add("Eagerly, you haul yourself off of the floor. Nadir-Ma daintily slips off of the table, giving you ample space in which to take her place. You lie down on your back, shifting your [legs] so that your dribbling [cocks] [isAre] thrust towards the ceiling, blatantly exposed for the dobermorph’s appraisal.", parse);
-			Text.NL();
-			Text.Add("Giggling, Nadir-Ma leans over and lets your [cock] drag along her bosom.", parse);
-			Text.NL();
-			Text.Add("You groan deeply in approval; you like where this is going.", parse);
-			Text.NL();
-			Text.Add("She moves her breasts to sandwich your shaft in their rich fullness, moving them up and down as she strokes you with her boobs.", parse);
-			Text.NL();
-			Text.Add("You arch your back, lifting yourself off of the table; that feels <i>sooo</i> good! Oh, yes, you’re glad you were a good [boygirl] now.", parse);
-			Text.NL();
-			Text.Add("Next, she moves far down enough to expose your [cockTip], which she promptly takes into her mouth and begins tonguing expertly.", parse);
-			Text.NL();
-			Text.Add("A strangled, wheezing squeal fights its way out of your clenched throat. Oh, god!", parse);
-			Text.NL();
-			Text.Add("<i>”It’s been so long since I’ve had such a nice cock to play with. I’m just giddy with anticipation!”</i> she says, giving your [cockTip] another lick.", parse);
-			Text.NL();
-			Text.Add("You are in heaven; that’s the only way you can possibly hope to describe your situation. Nadir-Ma’s wonderfully soft breasts swallow your cock, the luxuriant fur on them adding a delightfully ticklish edge as they brush up and down. Her tongue darts back and forth with devilish enthusiasm, striking spots you don’t even remember <i>having</i>.", parse);
-			Text.NL();
-			Text.Add("With such a wonderful partner doing all this to you, you’d find yourself on the brink within a few minutes. With your previous arousal, it takes barely half that time before your whole body is twitching, on the verge of what you know would be one of the biggest orgasms you’ve ever had in your life...", parse);
-			Text.NL();
-			Text.Add("<i>”Getting ready to cum? Well, I’m not done playing yet.”</i>", parse);
-			Text.NL();
-			Text.Add("A dismal moan bubbles from your throat as, before your disbelieving eyes, a bandage snakes out from Nadir-Ma’s enchanted apparel. With perverse grace, it slithers through the air and brushes against the base of your cock[, just behind your swelling knot]. In an instant, it twines itself around your sensitive flesh, tying itself so tightly that you haven’t a hope of getting off.", parse);
-			Text.NL();
-			Text.Add("You turn a pleading eye towards Nadir-Ma, but the doberman is oblivious to your desperation. Instead, she goes right back to what she was doing, only slower and more teasing.", parse);
-			Text.NL();
-			Text.Add("You are helpless beneath her feminine wiles. Your cock throbs so hard that it feels like it’s going to burst, the tightness inside as your seed boils to a froth. You writhe and you squirm, pleading with Nadir-Ma to end it already, and to let you cum.", parse);
-			Text.NL();
-			Text.Add("<i>”Okay, I’m ready for my snack! Cum for me!”</i> She says, sucking on your tip and flicking her fingers on the bandages holding your cumvein shut, disintegrating them almost instantly.", parse);
-			Text.NL();
-			Text.Add("You need no further invitation; no sooner has the bandage crumbled into nothingness than the first cascade of cum erupts from your depths, roaring through your abused cock and exploding into Nadir-Ma’s mouth. The sweeping surge of sensation scatters your thoughts like flotsam before a tidal wave, leaving you barely cognizant enough to wonder how the dobermorph is so easily guzzling your generous serving of baby batter. All your thoughts are focused on riding out this monstrous climax without your mind breaking into pieces in the process.", parse);
-			Text.NL();
-			Text.Add("Finally, inevitably, you run dry, and you fall back against the table with a hollow groan of release. Panting desperately for breath, you are barely aware of your surroundings, too occupied with hauling life-giving air back into your lungs.", parse);
-			Text.NL();
-			Text.Add("Nadir-Ma removes herself from your spent [cock], wiping her mouth and licking her hand clean. <i>”Hmm, tasty.”</i>", parse);
-			Text.NL();
-			Text.Add("You manage a dull groan of happiness at her appraisal.", parse);
-			Text.NL();
-			if(player.HasBalls()) {
-				Text.Add("<i>”That was a nice load, cutie, but you could stand to be more productive. Can’t keep a goddess hungry, can you?”</i>", parse);
-				Text.NL();
-				Text.Add("...Probably not. Bemused, you lift your head and manage to weakly ask her what she intends to do about it.", parse);
-				Text.NL();
-				Text.Add("Smiling mischievously, Nadir-Ma cradles your [balls] in her palms and uses one of her enchanted bandages to wrap them into a cozy warmer.", parse);
-				Text.NL();
-				Text.Add("You hiss sharply as a strange tingling sensation washes over your [balls]. Your [cocks] immediately rise[notS] to the occasion once again as the weird yet pleasant feeling courses through you, sweeping away the fatigue of your recent climax and letting you feel more alert and alive than before.", parse);
-				Text.NL();
-				Text.Add("<i>”That should do it,”</i> she says, pulling the bandages off your [balls].", parse);
-				Text.NL();
-				Scenes.Halloween.NadirMaCont2(parse);
-			}
-			else {
-				Text.Add("<i>”Not bad, but there was way too little for my taste. You need to be more productive, cutie. And I have a feeling your lack of proper balls is to blame,”</i> she says, pointing to the base of your [cocks].", parse);
-				Text.NL();
-				Text.Add("...Maybe? You guess she has a point.", parse);
-				Text.NL();
-				if(Scenes.Halloween.HW.nadirma & Halloween.NadirMa.GaveCock) {
-					Text.Add("...Oh. She plans on changing that for you, doesn’t she?", parse);
-					Text.NL();
-					Text.Add("<i>”Good guess, cutie.”</i> She giggles.", parse);
-				}
-				else {
-					Text.Add("So, what is she implying? It sounds like she has something in mind.", parse);
-					Text.NL();
-					Text.Add("<i>”If you don’t have balls, all we gotta do is give you a pair.”</i>", parse);
-					Text.NL();
-					Text.Add("Can she <b>do</b> that?! Looking at her, though, she seems quite confident about it, and you have a sneaking suspicion that she really can.", parse);
-				}
-				Text.NL();
-				Text.Add("<i>”So, how about it, cutie? Ready to grow a pair?”</i>", parse);
-				Text.Flush();
-				
-				//[Yes] [No]
-				var options = new Array();
-				options.push({ nameStr : "Yes",
-					tooltip : "Well, you really do look kind of odd with a cock and no balls to go with it. Let’s get fixed up.",
-					func : function() {
-						Scenes.Halloween.HW.nadirma |= Halloween.NadirMa.GaveBalls;
-						
-						//ADD BALLS
-						player.Balls().count.base = 2;
-						player.Balls().size.base = 6;
-						
-						Text.Clear();
-						Text.Add("<i>”Excellent! Let’s begin right away!”</i>", parse);
-						Text.NL();
-						if(Scenes.Halloween.HW.nadirma & Halloween.NadirMa.GaveCock) {
-							Text.Add("With a recognizable gesture, the dobermorph sends her bandages undulating out again. You watch as they wrap themselves around your loins for the second time tonight, forming themselves into a familiar set of panties - save for the hole expertly woven to spare your cock, of course.", parse);
-							Text.NL();
-							parse["proverbial"] = player.HasLegs() ? "" : " proverbial";
-							Text.Add("You moan in lazy bliss as a familiar warmth seeps through your body, pleasantly tingling you from head to[proverbial] toe. Your cock stiffens, rising up as the warmth pulses from your enchanted undies, pussy dampening as you feel yourself starting to grow inside of them again.", parse);
-							Text.NL();
-							Text.Add("Lost in pleasure as you are, you can’t help but laugh and chant for your new flesh to grow, grow, grow! Each strand of linen that ruptures at the strain of trying to contain your swelling flesh becomes a trophy, and when your panties finally burst into tatters, you feel a huge sense of pride that mingles with your release as your new flesh flops into view.", parse);
-						}
-						else {
-							Text.Add("You watch entranced as Nadir-Ma gives a regal gesture, some of her bandages lazily flowing away from her body like linen serpents. They delicately loop and curl around your loins, intricately wrapping themselves around your naked nethers until they have taken a recognizably lingerie-like form.", parse);
-							Text.NL();
-							Text.Add("The dobermorph smiles proudly, the bandages connecting to your new panties snapping off and curling back to her. Weirdly, her own covering hasn’t diminished at all, but then, that’s hardly the strangest thing about this situation.", parse);
-							Text.NL();
-							Text.Add("You wonder what your new underwear has to do with Nadir-Ma’s plans for you - a question that is promptly answered when a wave of warmth pulses through your body, emanating from your panties and sweeping through you. Caught off guard despite yourself, you moan softly; it feels... it feels <b>good</b>.", parse);
-							Text.NL();
-							Text.Add("Nadir-Ma’s smile burns itself into your subconscious, even as the rest of you is lost in the feeling washing through your bones. It pulses like some alien heart, concentrating its warmth over your crotch. You can feel your [vag] dampening and your cock swelling erect once again, but more than that... you can feel something <i>growing</i> there.", parse);
-							Text.NL();
-							Text.Add("You puff and pant, gasping quietly as the bandages grow tighter, and tighter. They squeeze your sensitive, shifting flesh in a deceptive grip, and yet you just keep on growing!", parse);
-							Text.NL();
-							parse["proverbial"] = player.HasLegs() ? "" : " proverbial";
-							Text.Add("The sudden snap of fabric echoes in your ear like a thunderclap. First, one bandage gives way, brushing against your [legs] as it sways in the breeze, and then another follows suit, a third hot on its heels. And the thing between your[proverbial] thighs keeps on growing bigger, until finally your panties burst asunder.", parse);
-						}
-						Text.NL();
-						Text.Add("A great pair of plum-sized balls now sways below your [cocks], skin stretched taut over nuts filled with a fresh load of cum, just waiting to be shot into Nadir-Ma’s hungry holes.", parse);
-						Text.NL();
-						Scenes.Halloween.NadirMaCont2(parse);
-					}, enabled : true
-				});
-				options.push({ nameStr : "No",
-					tooltip : "No way; the cock is one thing, but you don’t need a pair of ugly balls hanging over your cunt too!",
-					func : function() {
-						Text.Clear();
-						Scenes.Halloween.NadirMaNoEntry(parse);
-					}, enabled : true
-				});
-				Gui.SetButtonsFromList(options, false, null);
-			}
-		}, enabled : true
+		func : prompt, enabled : true
 	});
 	options.push({ nameStr : "No",
 		tooltip : "Gross! You’re not licking cum off of anything, especially not off of someone’s foot!",
 		func : function() {
 			Text.Clear();
-			Scenes.Halloween.NadirMaNoEntry(parse);
+			Scenes.Halloween.NadirMaNoEntry(parse, prompt);
 		}, enabled : true
 	});
 	Gui.SetButtonsFromList(options, false, null);
 }
 
 Scenes.Halloween.NadirMaCont2 = function(parse) {
-	Text.Add("<i>”I’ll go get a little something while you produce more tasty cum for me,”</i> Nadir-Ma says, walking around the table and moving out of your field of vision.", parse);
+	var werewolf = Scenes.Halloween.HW.Werewolf();
+	
+	Text.Add("<i>“I’ll go get a little something while you produce more tasty cum for me,”</i> Nadir-Ma says, walking around the table and moving out of your field of vision.", parse);
 	Text.NL();
 	parse["b"] = (Scenes.Halloween.HW.nadirma & Halloween.NadirMa.GaveBalls) ? "" : "ly tweaked";
 	Text.Add("You nod absently, too caught up with rubbing your new[b] balls to really pay much attention. They feel so heavy, and so sensitive! You bite your lip as even brushing them sends tingles racing along your spine.", parse);
 	Text.NL();
 	Text.Add("And you don’t think they’re done growing yet; you swear that you can feel them filling up with cum, your sack stretching tighter as it bloats with seed. Oh, how you want to be plugged into a warm, wet, willing hole and emptying yourself...", parse);
 	Text.NL();
-	Text.Add("<i>”Alright, cutie. Since you’re eager for more,”</i> she motions at your erect [cocks], <i>”how about we play a little game?”</i>", parse);
+	Text.Add("<i>“Alright, cutie. Since you’re eager for more,”</i> she motions at your erect [cocks], <i>“how about we play a little game?”</i>", parse);
 	Text.NL();
 	Text.Add("Looking back up at the returned dobermorph, you ask her what sort of game she has in mind.", parse);
 	Text.NL();
-	Text.Add("<i>”I’ll put this inside your ass.”</i> She shows you the dildo. <i>”And play with it like this.”</i> She flicks a remote, making the dildo spin around in her hand. <i>”While you pleasure me.”</i>", parse);
+	Text.Add("<i>“I’ll put this inside your ass.”</i> She shows you the dildo. <i>“And play with it like this.”</i> She snaps her fingers, making the dildo spin around in her hand. <i>“While you pleasure me.”</i>", parse);
 	Text.NL();
-	Text.Add("<i>”Get me to cum first, and you win, but if you cum before me, you lose!”</i> She grins. <i>”So, what will it be, cutie?”</i>", parse);
+	Text.Add("<i>“Get me to cum first, and you win, but if you cum before me, you lose!”</i> She grins. <i>“So, what will it be, cutie?”</i>", parse);
 	Text.Flush();
 	
-	//[name]
+	var prompt = function() {
+		Text.Clear();
+		Text.Add("<i>“Great, let’s get started then!”</i> she says merrily, approaching you and gently grasping[oneof] your [cocks].", parse);
+		Text.NL();
+		parse["chosen"] = player.NumCocks() > 1 ? " chosen" : "";
+		Text.Add("You gasp softly, moaning as Nadir-Ma’s mouth closes teasingly around just the [cockTip] of your[chosen] dick. Her plump lips squish deliciously as they clamp around the base of your glans, her tongue tickling the sensitive dickflesh inside her warm, wet maw.", parse);
+		Text.NL();
+		Text.Add("When the dobermorph’s slender fingers wrap themselves tenderly around your [balls], you groan deeply, shuddering slightly as she caresses you. With expert touches, she coaxes you into a warm, comforting veil of bliss...", parse);
+		Text.NL();
+		Text.Add("When she suddenly squeezes your balls, it comes as a complete shock. You can’t help instinctively spurting cum into her mouth; just a trifle, compared to what you gave her before, but more than enough that you can feel the liquid seed gushing up your shaft.", parse);
+		Text.NL();
+		Text.Add("Without saying a word, Nadir-Ma pulls away and grabs the dildo. She then begins covering the dildo with your cum, slickening it until it’s covered by a nice layer of seed. <i>“Hmmhmm, now it’s ready. Get on fours and show me your cute backdoor, cutie!”</i>", parse);
+		Text.NL();
+		parse["t"] = player.HasTail() ? Text.Parse(", [tail] curled up out of the way for her", parse) : "";
+		Text.Add("You roll over as best you can, sliding around atop the table until you have assumed the position as instructed. You look back at her over your shoulder[t], expectantly waiting for her to get started.", parse);
+		Text.NL();
+		Text.Add("Nadir-Ma leans over and gives one of your butt cheeks a kiss.", parse);
+		Text.NL();
+		if(player.SubDom() < 45)
+			Text.Add("You give her a soft, embarrassed laugh, unable to keep a blush from warming your other set of cheeks.", parse);
+		else
+			Text.Add("You smirk proudly at her obvious appreciation of your ass.", parse);
+		Text.NL();
+		Text.Add("Then she licks your taint, probing your [anus] with her tongue, and drilling her way inside.", parse);
+		Text.NL();
+		if(player.Slut() < 40) {
+			Text.Add("You squeal in dismay; this is a little more than you bargained for! You try to clamp down, clenching your ass as tightly as possible, but the dobermorph’s skilled tongue effortlessly worms its way inside.", parse);
+			Text.NL();
+			Text.Add("You moan helplessly, cheeks burning as your traitorous [cocks] stand[notS] at attention; this is so gross! But... it’s also arousing...", parse);
+		}
+		else {
+			Text.Add("You moan, deep and low, lustily sighing as the dobermorph’s squirming tongue wriggles its sloppy way deeper and deeper into your asshole. Mmm, yes, she really knows how to eat anus all right! You discretely grind back against her, pushing your [butt] into her face so that Nadir-Ma can get as deep into your back passage as possible.", parse);
+		}
+		Text.NL();
+		Text.Add("After she’s done, she places the tip of dildo, still slick with your cum, and begins pushing it inside.", parse);
+		Text.NL();
+		Text.Add("You grunt and groan, eyes rolling back into your head as she slowly coaxes the toy inside of you. It pierces you in the most intimate way, spreading you mercilessly as she drives it inside. She doesn’t stop until the very last few inches of it have disappeared up your ass, leaving you intimately aware of the solid mass of fake-cock buried inside of you.", parse);
+		Text.NL();
+		Text.Add("<i>“There we go. That’s a perfect fit!”</i> She says proudly, patting your ass. <i>“Now, hop off the table and give me room.”</i>", parse);
+		Text.NL();
+		Text.Add("Slowly, you haul yourself off of the table; each motion jostles the dildo up your ass, making moving an awkward process. You can feel it blocking your muscles as you move, sending tingles up your spine, causing you to take things slowly and carefully.", parse);
+		Text.NL();
+		Text.Add("Once on the floor, you stand upright, shifting slightly as you try to adjust to the mass wedged inside of you whilst waiting for Nadir-Ma’s next command.", parse);
+		Text.NL();
+		Text.Add("The dobermorph lies down on the table and spreads her legs, sparing a pair of fingers to hold her pussy lips open for your viewing pleasure. <i>“You’ll eat me out, and remember that if you cum before I do, you lose. Now, let the games begin!”</i> she says happily as she snaps her fingers, working her magic on the toy embedded in your anus.", parse);
+		Text.NL();
+		Text.Add("You manage to bite back the yelp as the dildo starts to buzz, a deliciously, ticklish tingling that you cannot ignore, but you can push to the back of your mind. Settling between Nadir-Ma’s thighs, you bend in and extend your [tongue], starting to glide it across her pearl-pink netherlips.", parse);
+		Text.NL();
+		Text.Add("Rivulets of thick feminine honey greet your probing tongue, already drooling in lazy yet copious streams from between her parted labia. You don’t know why she’s so wet already, but that just makes your job easier. You hope. With great care, you slowly slide your tongue between each fold, feeling the ridges and creases of her pussy before sloppily lapping at the thick river pouring from her center.", parse);
+		Text.NL();
+		Text.Add("Nadir-Ma giggles. <i>“That’s good, honey. But you can be a bit more… enthusiastic if you want. Or maybe you want some incentive? I think I’ll give you some anyway,”</i> she says, snapping her fingers again.", parse);
+		Text.NL();
+		Text.Add("This time, you yelp as the toy inside your ass moves in a very unexpected way - it literally spins around in your hole, as if it was gyrating inside you. It brushes firmly against your prostate, the vibrations rippling through the sensitive organ and making your own [cocks] jolt. Pre-cum starts to bubble from your aching tip[s], and you grit your teeth as you try to force the pleasure at bay.", parse);
+		Text.NL();
+		Text.Add("Desperate to hold out, you dive into the dobermorph’s muff with renewed vigor. The sound of your own lewd slurping and squelching fills your ears as you gobble and lap at Nadir-Ma’s cunt. Her wet, drooling petals smear their nectar across your chin and cheeks, but you ignore it, instead worming your tongue deeply into her oozing tunnel.", parse);
+		Text.NL();
+		Text.Add("<i>“That’s it, cutie! Some more incentive for you!”</i> She turns the dial up one more stage. <i>“Almost there!”</i> she cries, panting.", parse);
+		Text.NL();
+		Text.Add("The only thing that keeps you from screaming as her blasted toy kicks it up higher is the fact you currently have a mouthful of mutt-muff. Feeling you are about to explode as the spinning, vibrating toy mashes itself against your prostate, almost audibly buzzing against your anal walls, you desperately gorge yourself on Nadir-Ma’s cunt. You lick and kiss, suckle and smack, slurp and gulp and lap as if your life depends on it...", parse);
+		Text.NL();
+		Text.Add("<i>“I’m cumming!”</i> Nadir-Ma cries, thighs closing around your head to hold you in place as her pussy spasm and squirts the dobermorph’s femcum right on your face.", parse);
+		Text.NL();
+		Text.Add("Trapped where you are, you have no recourse but to try and drink the juice sluicing down your throat, its sweet taste flooding your brain, but incapable of drowning out the sensations of her toy buzzing around in your butt.", parse);
+		Text.NL();
+		Text.Add("<i>“Ah… good job, cutie,”</i> she says, turning off the dildo.", parse);
+		Text.NL();
+		Text.Add("You slump to the floor, panting for breath, feeling more frustrated than relieved; you’re so close that it’s almost painful, even the slow ebbing of lust as it bleeds away a near-torturous experience.", parse);
+		Text.NL();
+		parse["k"] = player.FirstCock().Knot() ? ", knot included" : "";
+		Text.Add("<i>“Now, about your reward...”</i> Nadir-Ma suddenly hoists you up as if you weighed nothing and lays you down on the table. In one smooth move, she climbs on the table and aligns[oneof] your [cocks] with juice-dripping pussy. <i>“You’ll get to fuck a goddess.”</i> And with that, she lets gravity take its course, impaling herself on your shaft all the way to hilt[k].", parse);
+		Text.NL();
+		Text.Add("You cry out in pleasure, a strangled gasp of pure lust at being so directly enveloped within her. The heat of her drooling cunt swallows your senses, and for a moment, it’s as if there’s nothing but her cooch greedily devouring your cock, slurping back and forth along your length as she bounces atop you.", parse);
+		Text.NL();
+		Text.Add("<i>“Fuck me, cutie! Fuck me good, and fill me with all that you have here in these treasures of yours!”</i> she cries, grabbing and gently massaging your balls.", parse);
+		Text.NL();
+		Text.Add("You scream in ecstatic frustration; <b>sooo</b> close! You just can’t -", parse);
+		Text.NL();
+		Text.Add("<i>“Here’s a little help for you!”</i> she cries between moans, her magic finally unleashing the dildo to its full frenzy.", parse);
+		Text.NL();
+		Text.Add("That’s the last straw; howling like ", parse);
+		if(werewolf)
+			Text.Add("the animal you are,", parse);
+		else
+			Text.Add("an animal,", parse);
+		Text.Add(" you explode inside of Nadir-Ma’s sopping cunt, your tidal wave of seed mixing with her own geyser of femjism; a swirling, seething deluge of juices that somehow vanishes without a trace into her greedy pussy.", parse);
+		Text.NL();
+		Text.Add("You thrust away with all you have, mindlessly pouring every last drop of semen you have to give into the dobermorph’s twat. She swallows it all, and still wants more, relentlessly milking you until even your reserves of climax run dry. As you collapse atop the table, too limp to move, you can still feel her pussy suckling around your dick. But you’re so tired... you can’t get more than half-hard, even when faced with a juicy cunt like hers.", parse);
+		Text.NL();
+		parse["k"] = p1cock.Knot() ? " tugging on your knot and eventually" : "";
+		Text.Add("<i>“Hmm, yes. I really needed that. It’s been <b>so</b> long since I got fucked this well… Ah, cutie, you’re the best...”</i> she trails off, turning off the dildo and[k] pulling herself off your [cock]. A thick stream of semen leaks from her pussy, and she happily dips a finger in and takes it to her mouth to taste it. <i>“Tastes like a piece of heaven...”</i>", parse);
+		Text.NL();
+		Text.Add("You groan softly. Somehow, you find the energy to thank her for the compliment, and tell her that you’re happy to please.", parse);
+		Text.NL();
+		Text.Add("<i>“No, cutie. Thank you,”</i> she says, crawling over to you and pulling you into a hot, passionate kiss.", parse);
+		Text.NL();
+		Text.Add("You happily melt into the liplock, cautiously wrapping your arms around the happy self-proclaimed goddess as she thrusts her tongue into your mouth. It was quite a trip getting here, but for now, you’re content to just lie here in her bountiful, pleasantly fluffy embrace.", parse);
+		Text.NL();
+		Text.Add("You don’t know how long it takes until Nadir-Ma breaks the kiss, but you gently part your arms and let her sit up, happy to watch her bountiful breasts jiggling as she rears above you.", parse);
+		Text.NL();
+		Text.Add("<i>“You did a really good job packing me full of semen. I don’t think there’s any room left in my womb.”</i> She giggles. <i>“If I was any ordinary girl, I’d be pregnant for sure. However, that’s not the case with goddesses.”</i> She grins, winking at you.", parse);
+		Text.NL();
+		Text.Add("Grinning tiredly, you assure her that you’re happy to have helped her.", parse);
+		Text.NL();
+		Text.Add("<i>“In any case, you did such a good job that I think you deserve a little more in terms of reward.”</i>", parse);
+		Text.NL();
+		Text.Add("Perking up, you look at her quizzically, wondering what she has in mind for you.", parse);
+		Text.NL();
+		Text.Add("<i>“But first, maybe we should get that dildo out of your ass, unless you’d like to keep it there?”</i> she suggests with a mischievous grin.", parse);
+		Text.NL();
+		if(player.Slut() < 15)
+			Text.Add("No. Not a chance. You want this thing out of you, and you want it out <b>now</b>!", parse);
+		else if(player.Slut() < 35)
+			Text.Add("Well, it is kind of fun to have it up there... but you do have places to go, so it’s probably better if she takes it out.", parse);
+		else
+			Text.Add("You’re so very tempted to tell her to just leave it there; you’d <b>love</b> to have this little beauty stuffed up your ass as you go exploring. But... it’s her toy; you’d have to be a real jerk to take it from her, especially when she has so much fun to catch up on. So, you tell her to pull it out.", parse);
+		Text.NL();
+		Text.Add("Nadir-Ma grabs the butt-end of the dildo and begins pulling it out, dragging it slowly so you can feel every little inch that slips out; when it’s finally gone, you feel kinda empty…", parse);
+		Text.NL();
+		Text.Add("<i>“Alrighty then, come here,”</i> she says, taking a seat on the table beside you and tapping her lap. <i>“Have a drink, and receive my blessing.”</i> She grins, squeezing one of her pillowy breasts until a drop of brownish liquid seeps out of her nipple.", parse);
+		Text.NL();
+		Text.Add("That... is a rather unsettling color for milk. Then again, she looked a little like that when she first came out of her jar, didn’t she? Hesitantly, you push yourself up off of the table and slide into her lap, feeling the stickiness under your butt from her recent climax.", parse);
+		Text.NL();
+		Text.Add("The dobermorph patiently watches you, still grinning as she holds her breast out to you expectantly. You swallow nervously, and then raise your mouth to her dripping nipple and wrap your lips around it, letting the fluid slowly trickle over your tongue.", parse);
+		Text.NL();
+		Text.Add("...Wow. This actually tastes pretty good! It’s warm and rich, but with a sweetness you’re hard-pressed to place. Velvety on your tongue, it makes you feel good just to have it steeping in your mouth.", parse);
+		Text.NL();
+		Text.Add("You happily swallow the first mouthful, feeling it softly blaze a trail down into your stomach, and then start to suckle in earnest. One hand reaches up to caress Nadir-Ma’s luscious breast, gently kneading the soft flesh to coax her strange, chocolatey milk forth, even as you busily gulp and slurp what fluid flows into your mouth.", parse);
+		Text.NL();
+		Text.Add("<i>“That’s it, cutie. Drink deep and you’ll become even cuter!”</i> She grins, holding you against her bosom as her other hand travels lower to caress[oneof] your [cocks].", parse);
+		Text.NL();
+		Text.Add("More than willing to comply, you drink deeply of the dobermorph’s bounty, feeling the intoxicating warmth blossoming in your belly and spreading through your body. You feel so safe and content here, just lying in her arms, happy to drink until your goddess deigns to stop you.", parse);
+		Text.NL();
+		if(werewolf) {
+			if(player.FirstBreastRow().Size() < 12.5) {
+				Text.Add("Your [breasts] tingle deliciously, a strange tightness filling your [skin] as they stiffen. Absently, you realize that your boobs are growing bigger, swelling from their former size into lush, pillowy E-cups that jiggle wonderfully with each mouthful you swallow.", parse);
+				Text.NL();
+				Text.Add("<i>“Hmm, you look much better like this, cutie. Plus you’ll come to love the feeling you get when someone grabs you like this,”</i> she says, quickly moving a hand up to squeeze one of your tits.", parse);
+				Text.NL();
+				Text.Add("A muffled mewl of pleasure escapes you as you wriggle in Nadir-Ma’s grip. Mmm, that does feel good...", parse);
+				Text.NL();
+			}
+			if(player.Balls().BallSize() < 5) {
+				parse["h"] = player.HasHair() ? Text.Parse(" and making your [hair] stand on end", parse) : "";
+				Text.Add("Your [balls] prickle beneath your swaying [cocks], sending shivers up your spine[h]. You squirm in Nadir-Ma’s lap, the wetness under your ass not helping as you feel your nuts bulging.", parse);
+				Text.NL();
+				Text.Add("You don’t have words to describe the sensation as cum boils and froths inside the taut skin of your sack, making your balls bloat until they feel as round and full as ripe apples. Liquid weight churns inside your overstuffed scrotum, settling down but still leaving you intimately aware of the new girth down there.", parse);
+				Text.NL();
+				Text.Add("<i>“With a pair this full, I bet you could knock up an entire village.”</i> She chuckles, massaging your newly-grown orbs.", parse);
+				Text.NL();
+				Text.Add("You can’t say for sure if it is the mental image or the blissful feeling of her fingers ghosting over your tight, sensitive flesh that makes you mewl in pleasure around her nipple.", parse);
+				Text.NL();
+			}
+		}
+		else {
+			if(player.FirstBreastRow().Size() < 10) {
+				Text.Add("The [skin] of your [breasts] tingles as a strange tightness washes over them, making you wriggle and squirm in Nadir-Ma’s lap. Absently, you realize that your breasts are <i>growing</i>, getting bigger and bigger with each mouthful of sweet chocolate milk that you swallow. Only when a pair of bountiful DD-cups bounce on your chest does the tightness end, suggesting that this is as big as they will grow.", parse);
+				Text.NL();
+				Text.Add("<i>“These love-pillows of yours fit you nicely, cutie.”</i> Nadir-Ma chuckles, lifting a hand to massage your [breasts].", parse);
+				Text.NL();
+				Text.Add("You smile proudly around the dobermorph’s nipple, thirst not yet quenched even as you squirm appreciatively at her groping fingers.", parse);
+				Text.NL();
+			}
+			if(player.Balls().BallSize() < 4) {
+				parse["proverbial"] = player.HasLegs() ? "" : " proverbial";
+				Text.Add("A prickling sensation in your [balls] makes your [skin] crawl, spurring you to suck harder and deeper at the dobermorph’s delicious breasts. You can literally feel your balls bloating between your[proverbial] thighs, skin stretching taut as they grow bigger and bigger. Only when they have swollen to the size of ripe plums does the feeling of cum frothing to a boil beneath the surface fade away.", parse);
+				Text.NL();
+				Text.Add("<i>“Can’t have my best servant frolic about without a decent package now, can I?”</i> she asks, gently patting your nuts.", parse);
+				Text.NL();
+				Text.Add("You wriggle happily in her lap at the attention; you do feel better now with her generous gift.", parse);
+				Text.NL();
+			}
+		}
+		var p1cock = player.BiggestCock();
+		if(player.NumCocks() > 1) {
+			Text.Add("Your [cocks] stand erect in your lap, twitching as you feel them starting to tingle. You wriggle and squirm as if ants are crawling all over you, but somehow, you just can’t bring yourself to let go of Nadir-Ma’s teat and the liquid goodness it is sharing with you.", parse);
+			Text.NL();
+			Text.Add("Shifting in her lap, you manage to look down at your cocks, which you realize are starting to rub together. They slide back and forth against each other with unnatural flexibility, squeezing together tighter and tighter, so that it’s hard to tell where one cock ends and another begins.", parse);
+			Text.NL();
+			Text.Add("...In fact, you realize that you really can’t tell anymore. It’s like... like your dicks are fusing together!", parse);
+			Text.NL();
+			Text.Add("<i>“Don’t worry, cutie. <b>One</b> is the magic number of dicks you’ll need when I’m done with you.”</i> She grins.", parse);
+			Text.NL();
+			
+			//#Pick PC’s biggest cock and make it cock number 1, all other cocks disappear.
+			
+			player.body.cock = [p1cock];
+			
+			parse = player.ParserTags(parse);
+			
+			Text.Add("Looking at your loins, you can’t help but agree with the canine goddess. Really, what do you need more than one cock for? Better to take one hole at a time and do it well than to waste half your seed or more just spewing it over the ground! Eagerly, you watch as your over-abundant nethers reshape themselves into something more elegant.", parse);
+			Text.NL();
+			if(p1cock.Len() < 38 || p1cock.Thickness() < 7) {
+				Text.Add("Moments later, your [cock] stands alone at your crotch once the other[s2] [hasHave2] disappeared - though not without leaving a parting gift. Your cock swells and grows, getting bigger and fatter, until a proud fifteen inches long shaft pulsates in your lap, its two and a half inch girth aching to stretch some lucky soul around its broad width and make them scream in pleasure.", parse);
+			}
+			else {
+				parse["wo"] = player.mfTrue("", "wo");
+				Text.Add("When it is all over, your [cock] stands alone and triumphant in your lap, having vanquished its unworthy rival[s]. Now you <i>truly</i> feel like a [wo]man!", parse);
+			}
+			Text.NL();
+		}
+		else if(p1cock.Len() < 38 || p1cock.Thickness() < 7) {
+			Text.Add("Your cock tingles and twitches, your [skin] prickling wonderfully as you rise to your full glory. It throbs ardently in your lap, a strange tightness that makes you squirm. It feels as if your dick’s skin is too small for it...", parse);
+			Text.NL();
+			Text.Add("Nadir-Ma grabs your shaft and begins stroking it slowly. <i>“C’mon, cutie, grow up for me.”</i>", parse);
+			Text.NL();
+			Text.Add("Moaning around the dobermorph’s nipple, you thrust fervently into her palm, eager to comply. Oh, yes, you want to grow for her!", parse);
+			Text.NL();
+			parse["l"] = player.HasLegs() ? " between your thighs" : "";
+			Text.Add("Dimly, you can feel yourself stretching and swelling, your cock getting bigger and fatter as the canine goddess carefully guides its growth. When the tightness fades, a mighty [cock] juts[l], fifteen inches long and two and a half inches thick.", parse);
+			Text.NL();
+			Text.Add("From the smile on her face, Nadir-Ma is quite satisfied with your new tool. She strokes it one last time and then lets it go.", parse);
+			Text.NL();
+		}
+		//Inc cock size
+		p1cock.length.IncreaseStat(38, 100);
+		p1cock.thickness.IncreaseStat(7, 100);
+		
+		if(!player.FirstVag()) {
+			Text.Add("You can feel a prickling sensation behind your [balls], building in intensity until you squirm irritably in Nadir-Ma’s lap, suckling grumpily at her delicious tit.", parse);
+			Text.NL();
+			Text.Add("Nadir-Ma reaches behind your balls to gently stroke your tender flesh. <i>“Relax, cutie. Just relax and you’ll feel good.”</i>", parse);
+			Text.NL();
+			Text.Add("Shivering, you lay yourself against the dobermorph’s breast and allow her to stroke you. Her touch is strangely soothing, yet as she brushes her fingers over your flesh, each pass sends the faintest spark of pleasure crackling through your nerves.", parse);
+			Text.NL();
+			Text.Add("It’s a weird mixture of feelings that lulls you into a stupor, only to bring you back to reality with a jump when you feel her fingertip gliding through a cleft that wasn’t there before!", parse);
+			Text.NL();
+			Text.Add("<i>“Brace yourself, this is going to hurt a little.”</i>", parse);
+			Text.NL();
+			Text.Add("Without further ado, the goddess slips her fingers inside, deliberately pressing against an unfamiliar barrier. You can feel it tearing as she steadily pushes her way inside, making you mewl in pain and instinctively clench down.", parse);
+			Text.NL();
+			
+			var vag = new Vagina();
+			vag.virgin = false;
+			player.body.vagina.push(vag);
+			
+			Text.Add("<b>You have lost your virginity.</b>", parse);
+			Text.NL();
+			Text.Add("The kindly dobermorph ignores your protestations, gently working your innards with her touch. As her fingers slide around your new netherlips, the pain is dulled until it slips away entirely, leaving only the first inklings of soothing pleasure.", parse);
+			Text.NL();
+			Text.Add("<i>“There, there, the pain is gone,”</i> she says, rubbing your head softly. <i>“From now on, there’ll only be pleasure for you, cutie.”</i>", parse);
+			Text.NL();
+			Text.Add("You sigh lustily and absently nod your agreement before taking her nipple again. Pleasure sounds good... especially if it promises to be like what she’s doing down there now.", parse);
+			Text.NL();
+			Text.Add("Contentment fills you as Nadir-Ma’s wonderful fingers stretch and twirl your depths, making sure everything is in working order inside you before she pulls them out. You watch her lazily lick herself clean, savoring the juices smeared across her digits.", parse);
+			Text.NL();
+		}
+		Text.Add("Seized by a sudden incredible thirst, you start to suck as if your very life depends on it. Your goddess’ moans and sighs barely register, falling on deaf ears as you greedily guzzle and gorge at her tit.", parse);
+		Text.NL();
+		Text.Add("Nadir-Ma giggles. <i>“Oh, you servants are all the same. Once you get a taste, you never want to let go… normally, I’d be stopping you here, but I think you deserve to go all the way. It’s been a long time, and you did do everything I asked of you; good servants like you are hard to come by. Go ahead then, cutie, drink your fill. Your goddess’ body is nothing if not bountiful, and I’ll be damned if I can’t at least feed my best girl.”</i>", parse);
+		Text.NL();
+		Text.Add("Enthralled by your goddess’ generosity, you eagerly suckle harder, anxious to draw as much of the rich, life-giving nectar from her bosom as she will deign to give you.", parse);
+		Text.NL();
+		parse["h"] = player.HasHair() ? "through your hair" : "over your shaven scalp";
+		parse["h2"] = player.HasHair() ? " Her digits playfully intertwine with your locks, sweeping down through them." : "";
+		parse["h3"] = player.HasHair() ? " the length of your hair - down" : "";
+		parse["w"] = player.HasWings() ? Text.Parse(", between your [wings]", parse) : "";
+		Text.Add("Dimly, you can see her smiling down at you as she reaches out and clasps your cheeks, running her fingers over your face as much as she can. Her hands curl across your cheekbones, sweeping up your temples and then start to run [h].[h2] You can feel her digits dragging down[h3] and down, from the top of your skull down over your shoulders[w], across the small of your back, not stopping until you feel them playfully brush your ass.", parse);
+		Text.NL();
+		Text.Add("You smile proudly around the dobermorph’s nipple as she starts to openly grope your butt. Rich and full, perky and firm, it’s a beautiful little eye-catcher. Naturally, her hands sweep further in, encompassing the strong, wide bones of your child-bearing hips; you have a body made for birthing beautiful, healthy children, and from somewhere deep inside, the alien lament that your goddess lacks a cock with which to bless you with some pups of her own surfaces.", parse);
+		Text.NL();
+		if(player.HasTail())
+			Text.Add("Your [tail] wags happily, swaying over your ass, and Nadir-Ma smiles at the sight. It only swishes faster when she reaches around to play with it, scratching its base before creeping down between your plump, squeezable buttocks.", parse);
+		else
+			Text.Add("Nadir-Ma caresses your hips, visibly savoring their curves as she feels the strength and potential in them. But your hips cannot hold the attention of a goddess like her for long, and inevitably she drifts back to your ass, her delicate fingers creeping down the crevasse of your buttock cleavage.", parse);
+		Text.NL();
+		Text.Add("The goddess’ long, slender digit begins to poke at your asshole, slowly rubbing circles around the puckered orifice, letting it feel her pressure before she starts to press on it for real. With the inexorable might of a true queen, she drives on; even were you of a mind to resist, you would be unable to keep her from spreading you open as she pushes herself in to the very knuckle.", parse);
+		Text.NL();
+		Text.Add("A brief flicker of confusion crosses your mind; why are you so <b>tight</b>? Didn’t you just have her favorite toy buried to the hilt in your ass a few minutes ago?", parse);
+		Text.NL();
+		Text.Add("Nadir-Ma’s finger twitches, brushing feather-softly against your prostate, and the confusion vanishes into ether. What does it matter, when it feels this good?", parse);
+		Text.NL();
+		Text.Add("The goddess just smiles knowingly, continuing to twist her wrist and tickle your innards with her finger; it feels so good, but you want more, you <b>need</b> more!", parse);
+		Text.NL();
+		Text.Add("Nadir-Ma’s eyes glitter like dark stars above you, her smile wrapped across her pretty face as she delicately draws her finger from your anus. You don’t have more than a moment to lament being empty before she drives back in again - two digits, this time.", parse);
+		Text.NL();
+		Text.Add("You expect your body to betray you and resist your goddess, but, to your awe, it does no such thing. Nadir-Ma’s two fingers slide inside of you without the slightest resistance, easily spreading you open with each twitch and flex of her wrist. You can feel her stretching you  wider than ever, and yet you know you can fit more - that you <b>want</b> more...", parse);
+		Text.NL();
+		Text.Add("<i>“Gotta make sure you’re able to have fun back here too. What kind of servant would you be if you couldn’t do anal during an orgy?”</i>", parse);
+		Text.NL();
+		Text.Add("If you didn’t have a mouth filled with the most delicious tit you’ve ever sucked, you’d heartily agree with your goddess’ assessment. As it is, you settle for just nodding proudly, already imagining the fun you and your new butt can get up to after this.", parse);
+		Text.NL();
+		Text.Add("Nadir-Ma smiles, and demurely draws her digits from your asshole. Patiently, she runs her hands down over your [legs], her soft palms soothing on your delicate [skin] as she feels the dainty contours of your lower limbs. She doesn’t stop until she reaches your [feet], playfully brushing them with ticklish passes of her fingers.", parse);
+		Text.NL();
+		Text.Add("Finally, the strange craving fades as mysteriously as it arrived, and you settle down again. You gently open your mouth and allow the now-dry nipple to pop wetly from between your lips, your thirst well and truly sated.", parse);
+		Text.NL();
+		Text.Add("<i>“Aww, aren’t you the prettiest girl ever? Now you’re a cutie for real, cutie.”</i>", parse);
+		Text.NL();
+		Text.Add("You blink up at her, absently smiling. Her words sound so nice, but... you don’t really understand what she means.", parse);
+		Text.NL();
+		Text.Add("<i>“Come here, I’ll show you what I mean.”</i> She grins, getting back on her feet and motioning to the storage room.", parse);
+		Text.NL();
+		Text.Add("Wondering what she has in mind, you quietly pick yourself up and follow along, trying not to ogle her juicy butt <i>too</i> much as she silently pads along.", parse);
+		Text.NL();
+		Text.Add("<i>“Well, I suppose it’s around here somewhere... ”</i> she trails off, digging through some of the old, dusty rags. <i>“Aha!”</i> Nadir-Ma picks up a full body mirror and sets it up against the wall. <i>“Take a look, cutie,”</i> she says, stepping aside.", parse);
+		Text.NL();
+		Text.Add("You immediately step forward to see what she was talking about.", parse);
+		Text.NL();
+		parse["toes"] = player.HasLegs() ? "toes" : parse["feet"];
+		if(werewolf)
+			Text.Add("...Wow. Nadir-Ma is right; you’re absolutely <b>stunning</b>! Your body remains the same, a strong and proud she-wolf, but there’s no denying your raw femininity either. From the delicate curves of your muzzle, down to the dainty toes of your paws, you are one gorgeous wolfess. Huge breasts jiggle enticingly on your chest, rising and falling with each breath, and your silky tail swishes above big, round, gropable butt cheeks. Even the mighty wolf-cock already jutting from your loins only emphasizes your feral sexuality.", parse);
+		else
+			Text.Add("...Oh, baby. Is that really you? You’re <b>gorgeous</b>! A picture of utter womanhood, from your plump cock-sucking lips down to your dainty little [toes]. Long, sleek hair cascades down your back, shimmering against your beautiful [skin], highlighting curves fit to die for. You push out one baby-making hip, pouting critically as you watch the way your plump tits and your big, fat [cock] bounce with the movement, and then smile in admiration; you are just a fucking <b>machine</b>, aren’t you?", parse);
+		Text.NL();
+		Text.Add("Licking your lips lasciviously, your hand unthinkingly reaches for your [cock], already outthrust and drooling with desire at the vision of loveliness staring back at you from the mirror.", parse);
+		Text.NL();
+		Text.Add("Nadir-Ma laughs. <i>“Such a horny little servant...”</i> she trails off, hugging you from behind.", parse);
+		Text.NL();
+		Text.Add("You simply smile stupidly and nod your agreement, still fixated on your reflection. You only look away when you feel the dobermorph’s warm, delicate hand insistently brushing away your hand. As you look down, her dainty fingers wrap around your cock, even that simple contact enough to make you moan with pleasure.", parse);
+		Text.NL();
+		Text.Add("<i>“Now, I wouldn’t be much of a goddess if I wasn’t willing to give my best girl a hand, would I?”</i>", parse);
+		Text.NL();
+		Text.Add("Well, you wouldn’t say that -", parse);
+		Text.NL();
+		Text.Add("<i>“It’ll just be a quick handjob though. I got places to be, things to see, people to fuck.”</i> She giggles. <i>“And I’m willing to bet you do too, but for now enjoy your goddess’ touch.”</i>", parse);
+		Text.NL();
+		Text.Add("Before you can think of a response to that, she starts to stroke your shaft. With the ease of a true expert, her fingers glide back and forth along your skin, caressing every special spot without fail. Each digit unerringly seeks out a particular crease, ridge or crinkle, reducing your brain to a warm puddle of fuck. You can’t possibly hold out much longer...", parse);
+		Text.NL();
+		parse["proverbial"] = player.HasLegs() ? "" : " proverbial";
+		Text.Add("And then, all of a sudden, your goddess releases you. Your plaintive whine dies on your lips as she fiercely spins you around on your[proverbial] heel and pulls you into a deep kiss. The heat of her floods your mind, the taste of her washing over your tongue, and you don’t have a chance in hell of stopping what happens next.", parse);
+		Text.NL();
+		Text.Add("Your overheated cock explodes like a poorly-capped geyser, your [balls] spewing their frothing, churning contents over the dobermorph’s belly. Gush after gut-clenching gush pours from you, surging over Nadir-Ma’s stomach, spattering against the underside of her tits and washing over her thighs, yet she keeps kissing you until you finally run dry. Your cock belches one last gobbet of seed over the dobie’s now-white torso and goes limp; only then does she let you go.", parse);
+		Text.NL();
+		Text.Add("Nadir-Ma chuckles. <i>“I can see you’re putting those big balls of yours to good use,”</i> she teases, swiping a finger over her cum-caked belly and sucking on her digit. <i>“Tasty!”</i>", parse);
+		Text.NL();
+		Text.Add("Sheepishly, you apologize for making such a mess of her beautiful, clean fur like that. You just couldn’t help yourself when she kissed you like that.", parse);
+		Text.NL();
+		Text.Add("<i>“Nah, don’t worry about that, bestie. It’s just a little cum.”</i> She chuckles. <i>“Plus I don’t mind; feels kinda nice to have your servant’s appreciation covering you,”</i> she adds, rubbing your seed into her fur, one hand slipping down to rub her labia, another hiking up to spread your cream onto her breasts.", parse);
+		Text.NL();
+		Text.Add("You watch her lathering your jism into her fur with hungry eyes, licking your lips as your cock proudly swells again. Nothing like seeing someone enjoy the fruits of your loins to put you in a generous mood... unless it’s watching such ample curves being shaken and stroked in the process.", parse);
+		Text.NL();
+		Text.Add("Nadir-Ma pays you no attention, instead continuing to spread your cum across her body. As you watch, it fades away, leaving her fur looking glossier and silkier than it did before.", parse);
+		Text.NL();
+		Text.Add("<i>“Hmm, so tasty!”</i>", parse);
+		Text.NL();
+		Text.Add("Licking your lips, you tell her that if she thinks it’s so tasty, she’s welcome to have some more. You’ll even let her have it straight from the tap, if she wants...", parse);
+		Text.NL();
+		Text.Add("The dobermorph waves you off. <i>“Sorry, cutie, but I did tell you that was just a quickie and I’d be gone. I’ve got other subjects to visit too, y’know?”</i>", parse);
+		Text.NL();
+		Text.Add("You wilt slightly at her words, but accept it graciously. She’s already been so generous to you; she should go and share her gifts with other lucky souls as well.", parse);
+		Text.NL();
+		Text.Add("<i>“I’ll be going now, but I might call on you again in the future. So make sure you’re ready when I do. And keep that boner prepped for me! Ciao!”</i> She blows you a kiss and hurries out of the storage room.", parse);
+		Text.NL();
+		if(werewolf) {
+			Text.Add("You watch her disappear through the door, her steps swiftly fading even with your sensitive hearing. You lazily run your fingers through your silky fur, and then lope off out of the chamber; there’s got to be some lucky souls out there ready to pound a fine bitch... or, better yet, to get pounded by a bitch, heh.", parse);
+		}
+		else {
+			Text.Add("By the time you have pulled your so-called clothes back on, there isn’t the faintest sign of your divine dobermorph lover. But as you admire the way you fill out your tattered clothes, you must admit she certainly left you with some splendid gifts to remember her by.", parse);
+			Text.NL();
+			Text.Add("Bolstered by that thought, you set off once again; the night is young, and you are hot.", parse);
+		}
+		Text.Flush();
+		
+		Gui.NextPrompt();
+	}
+	
+	//[Yes] [No]
 	var options = new Array();
-	options.push({ nameStr : "name",
-		tooltip : "",
+	options.push({ nameStr : "Yes",
+		tooltip : "What the hell, after all that’s gone on so far, what’s a little buttplay between friends? Tell her that she can go right ahead.",
+		func : prompt, enabled : true
+	});
+	options.push({ nameStr : "No",
+		tooltip : "Uh-uh, no way, your ass is strictly exit only! You draw the line here!",
 		func : function() {
 			Text.Clear();
-			Text.Add("PLACEHOLDER", parse);
-			Text.NL();
-			Text.Add("", parse);
-			Text.Flush();
-			
-			Gui.NextPrompt();
+			Scenes.Halloween.NadirMaNoEntry(parse, prompt);
 		}, enabled : true
 	});
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Halloween.NadirMaNoEntry = function(parse) {
+Scenes.Halloween.NadirMaNoEntry = function(parse, func) {
+	Text.Clear();
 	
-			Text.Clear();
-			Text.Add("PLACEHOLDER", parse);
-			Text.NL();
-			Text.Add("", parse);
-			Text.Flush();
-			
-			Gui.NextPrompt();
+	var first = !(Scenes.Halloween.HW.nadirma & Halloween.NadirMa.SaidNo);
+	Scenes.Halloween.HW.nadirma |= Halloween.NadirMa.SaidNo;
+	
+	if(first) {
+		Text.Add("As politely as you can, you shake your head and decline the offer.", parse);
+		Text.NL();
+		Text.Add("Nadir-Ma chuckles softly. <i>“Excuse me? For a moment there I thought you refused me.“</i>", parse);
+		Text.NL();
+		Text.Add("What is she, deaf? You take a breath and prepare to repeat yourself.", parse);
+		Text.NL();
+		Text.Add("<i>“Before you wind up saying anything you might regret, I should warn you that I <b>hate</b> it when people say no to me. And it’s not a very bright idea to deny a goddess when she’s been stuck in a jar for very long. I might get angry, you know?”</i> She smiles.", parse);
+		Text.NL();
+		Text.Add("You’d have to be a complete and total idiot to not notice the hint of fang in her grin, or the menace underlying her words. Whoever she is - and whatever, you can’t forget that whole manifestation business - she really doesn’t like to be told ‘no’. Maybe going along with her wishes might be the smart choice here...", parse);
+		Text.Flush();
+		
+		//[Obey] [Defy]
+		var options = new Array();
+		options.push({ nameStr : "Obey",
+			tooltip : "Best not to piss off someone who’s obviously supernatural.",
+			func : function() {
+				Text.Clear();
+				Text.Add("Swallowing your pride, you put on your best apologetic smile and tell her that you didn’t mean it. You’ll be happy to do what she wants.", parse);
+				Text.NL();
+				Text.Add("<i>“Of course you will.”</i> She laughs merrily.", parse);
+				Text.Flush();
+				Gui.NextPrompt(func);
+			}, enabled : true
+		});
+		options.push({ nameStr : "Defy",
+			tooltip : "You don’t care who or what she is, no means no!",
+			func : function() {
+				Text.Clear();
+				Text.Add("Looking her straight in the eye, you tell her that you said no, and you meant it.", parse);
+				Text.NL();
+				Scenes.Halloween.NadirMaNoEntry(parse);
+			}, enabled : true
+		});
+		Gui.SetButtonsFromList(options, false, null);
+	}
+	else {
+		Text.Add("Nadir-Ma’s face turns to a scowl of pure anger. <i>“How <b>dare</b> you refuse me!”</i> Her voice thunders around the storage room.", parse);
+		/* TODO
+#if Bandages - same line
+Her previously discarded bandages immediately wrap themselves around her body as if they were snakes pouncing on their prey.
+#converge
+		 */
+		Text.NL();
+		Text.Add("The urge to take a step back flashes through your mind, before you discard it. Folding your arms across your [breasts], you chastise the angry dobermorph that you said no. Who does she think she is, to be a throwing a tantrum like this?", parse);
+		Text.NL();
+		Text.Add("<i>“I am a goddess!”</i> she exclaims. Wind booms around the room, snuffing out the torches and slamming the door behind you. The darkness lasts only an instant, before an eerie green flame lights up each torch.", parse);
+		Text.NL();
+		Text.Add("You have a sinking feeling about all this...", parse);
+		Text.NL();
+		Text.Add("Without a second thought, you turn and race for the door. You grab the latch and pull with all your might, groaning with the effort... but you can’t budge it an inch. A darkly amused chuckle from behind makes you swallow, and turn to face the outraged dobermorph.", parse);
+		Text.NL();
+		Text.Add("The eldritch flames cast their eerie light over her, making her fur shine with its own unnatural radiance. You can make out every inch of her... and see that something isn’t normal. Her panties are starting to bulge out, fabric distending as if something were growing inside of them.", parse);
+		Text.NL();
+		Text.Add("Whatever it is, it just keeps on swelling, getting bigger and bigger by the moment. It pushes out of her cunt until the bandages can’t take any more. First, one snaps completely, fluttering forlornly between her knees. And then the others swiftly follow, torn asunder by the mass growing between her loins.", parse);
+		Text.NL();
+		Text.Add("When you can see what it is, your jaw drops in surprise. It’s a dick. Rather, it’s a full set of male genitalia; two throbbing balls that completely obscure the doberherm’s womanhood, the sheath above disgorging a long, thick, dripping doggie-dong now that it’s no longer constrained by her shredded panties. Pre-cum visibly drools down its tip, dripping onto the floor beneath her.", parse);
+		Text.NL();
+		Text.Add("<i>“Come here and show me that pretty ass of yours, mortal. I’ll put you back in your place: underneath me, with my cock lodged deep inside you, and you begging while I make you my bitch!”</i>", parse);
+		Text.NL();
+		Text.Add("The lustfully sneering morph suddenly springs at you. You throw yourself aside, narrowly evading her efforts to pounce, but when you try to scramble upright, you feel something wrap around your [legs].", parse);
+		Text.NL();
+		Text.Add("Looking back, you see some of Nadir-Ma’s bandages have lashed out from her body like cloth tentacles, ensnaring you; before you can even process that image, more of them spring for you. They wrap around your wrists, binding them together and sending you toppling to the ground, even as more work to completely entrap your [legs]. You struggle desperately, but you can’t break them apart; you’re completely helpless!", parse);
+		Text.NL();
+		Text.Add("<i>“Gotcha!”</i> she exclaims triumphantly, reeling you in as she sends more bandages to bind you.", parse);
+		Text.NL();
+		parse["lisAre"] = player.HasLegs() ? "are" : "is";
+		Text.Add("You pull and wriggle and squirm, trying your best to fight it off as Nadir-Ma’s enchanted linen coils around you, but it’s no use. Your arms are pulled behind your back and knotted together, incapable of exerting any leverage. Bandages twine themselves over your [breasts] and [belly], forming bondage patterns that hold the whole mess together, even as your [legs] [lisAre] made similarly useless.", parse);
+		Text.NL();
+		Text.Add("For added insult, a final roll of cloth loops its way around your face, sealing your mouth shut and cutting off any attempts you might make to speak. When it’s all done, you can still wriggle feebly, but that is the extent of your options. Nadir-Ma has you right where she wants you.", parse);
+		Text.NL();
+		Text.Add("The dobermorph hoists you over her shoulder, carrying you to a rotating table and dumping you on top of it. With a few extra motions, she sends more bandages to loop around you and secure you tightly.", parse);
+		Text.NL();
+		Scenes.Halloween.NadirMaBadend(parse);
+	}
 }
 
-/* TODO
-
- */
+Scenes.Halloween.NadirMaBadend = function() {
+	var werewolf = Scenes.Halloween.HW.Werewolf();
+	
+	var parse = {
+		
+	};
+	parse = player.ParserTags(parse);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
+	
+	Text.Add("You wouldn’t call your position painful, but it’s not comfortable, either. You are flat on your chest and knees, your [butt] thrust up into the air for all the world to see. And you have a pretty good idea of what Nadir-Ma has in mind for you, with this pose...", parse);
+	Text.NL();
+	parse["gen"] = player.FirstVag() ? parse["vag"] : "taint";
+	Text.Add("<i>“Now that’s a pretty sight. I wonder where I should start...”</i> She steps over you, grinding her rock-hard member against your [gen]. <i>“It’s been so long. Maybe I should just let loose and ravage you until you’re nothing more than a used cum-bucket? Or should I savor this moment and fuck you so thoroughly that you’ll have my cock burned into your mind for eternity...”</i>", parse);
+	Text.NL();
+	Text.Add("Even as she muses, she continues to idly grind her hips against yours. You can feel the warmth of her throbbing maleness as it slides against your most intimate parts, so close you’d swear you can feel her heartbeat. It brushes you tantalizingly, almost playfully, smearing a gloss of musky pre-cum over your loins with its passage.", parse);
+	Text.NL();
+	var gen = "";
+	if(player.FirstCock()) gen += "your [cocks] starting to stiffen as the blood rushes to [itThem]";
+	if(player.FirstCock() && player.FirstVag()) gen += " and ";
+	if(player.FirstVag()) gen += "your [vag] starting to dampen, wrinkling in anticipation as her glans brushes along your folds";
+	parse["gen"] = Text.Parse(gen, parse);
+	Text.Add("Despite everything else about the situation, you can’t help yourself but respond to the doberherm’s treatment. You can feel [gen].", parse);
+	Text.NL();
+	Text.Add("Nadir-Ma laughs out loud when she feels the telltale signs of your arousal. <i>“I knew it! A goddess always knows! You’re enjoying this!”</i> she accuses.", parse);
+	Text.NL();
+	if(player.SubDom() > 0) {
+		Text.Add("You go to shout that it’s not true, that you hate this, but with your gag in place, all that comes out are muffled grunts and rumbles. Instead, you try to convey your message by shaking your head.", parse);
+		Text.NL();
+		Text.Add("<i>“It’s no use denying it! Even if you say no, your body says yes!”</i>", parse);
+		Text.NL();
+		Text.Add("Unable to fight back, you just groan in frustration, letting your head loll resentfully on the table.", parse);
+	}
+	else {
+		Text.Add("Despite how strongly she came on before, this is straight out of one of your wet dreams. Already starting to forget yourself, you let out an aroused moan that’s clear even through your gag, nodding happily in agreement.", parse);
+		Text.NL();
+		Text.Add("<i>“Don’t worry, my bitch. We’re just getting started,”</i> she says, giving you a slap on your butt.", parse);
+		Text.NL();
+		Text.Add("Your whole body jolts in that delicious mix of pleasure and pain at her touch. An appreciative laugh buffets your gag and you do your best to give your butt a flirty little shake.", parse);
+	}
+	Text.NL();
+	Text.Add("The doberherm roughly grabs your ass, spreading your butt cheeks apart to check out your [anus]. <i>“Now <b>this</b> is a tempting target!”</i>", parse);
+	Text.NL();
+	if(player.SubDom() > 0) {
+		Text.Add("The pain from her manhandling sparks a fresh spurt of resentment and you squirm angrily on the tabletop, trying to shout your protests through your gag as you vainly attempt to wriggle out of her grasp.", parse);
+	}
+	else {
+		Text.Add("Mewling lustfully, you shake your hips and squirm across the tabletop, trying to crawl away from her... but not trying <b>too</b> hard.", parse);
+	}
+	Text.NL();
+	Text.Add("<i>“Yes! Keep at it, bitch! Your resistance only makes my penis harder!”</i>", parse);
+	Text.NL();
+	Text.Add("She grinds her cock against you one last time, and then suddenly she pulls away, leaving you tingling from her touch. Your confusion at her actions doesn’t last long, however; warm breath gusts over your vulnerable flesh, making your [skin] crawl as you feel her canid nose sniffing audibly at your clenched butthole.", parse);
+	Text.NL();
+	Text.Add("<i>“Such a tasty morsel you are! Don’t mind if I do!”</i> She lets her drooling mouth open and begins lapping your taint.", parse);
+	Text.NL();
+	if(player.Slut() > 25) {
+		Text.Add("You try to scream your revulsion as her warm, wet tongue slides across your ass crack - ew! What does she think she’s doing?!", parse);
+		Text.NL();
+		Text.Add("Grossed out, you writhe and squirm, but her bindings have you stuck fast. The doberherm pays no attention to your lack of enthusiasm, instead steadily lapping away at your ass.", parse);
+		Text.NL();
+		Text.Add("To your shame, you actually start to enjoy it, the slow passing of tongueflesh over your soft [skin] making your arousal grow, coaxing you to relax despite yourself...", parse);
+		Text.NL();
+		Text.Add("And that’s when her tongue suddenly dives into your vulnerable [anus]. Even through your gag, your stunned bellow is quite audible, and Nadir-Ma chuckles as you try to clamp down and squeeze her out of there. Oh, god, it’s so soft and slimy... you can’t seem to get a grip on it, and she just keeps drilling deeper and deeper, worming her way into crannies you didn’t even know you had...", parse);
+		Text.NL();
+		Text.Add("You can feel your cheeks burn as you realize that, despite everything, this is actually feeling pretty good - it’s turning you on to have this... this... woman, licking at your asshole.", parse);
+	}
+	else {
+		parse["guygirl"] = player.mfTrue("guy", "girl");
+		Text.Add("You moan appreciatively through your gag as Nadir-Ma’s tongue glides across your ass crack. She may have her flaws, but she definitely knows how to make a [guygirl] feel <i>good</i>. You almost wish you weren’t gagged just so you could tell her what a good job she’s doing; she knows her way around an asshole!", parse);
+		Text.NL();
+		Text.Add("Nadir-Ma seems to understand what you’re thinking. Her tongue dances across your taint, caressing you as she slowly spirals her way towards your pucker. Mischievously, you clench yourself shut; not too tight, just enough that she has to work in order to wriggle her way in.", parse);
+		Text.NL();
+		Text.Add("Mmm... oh, yes, she feels sooo good inside of you. Warm, wet flesh worms into your most intimate of crevices, expertly stroking every last delicious spot, making you shudder in pleasure with the slightest of touches.", parse);
+	}
+	Text.NL();
+	Text.Add("Nadir-Ma withdraws with a pop, a thin string of saliva linking her lips to your winking anus. Laughing, she wipes her mouth on her bandages and hops on the table, aligning her throbbing member with your saliva-lubed ass. <i>“Any last words, bitch?”</i>", parse);
+	Text.NL();
+	Text.Add("Your reply is swallowed by your gag; all that comes out are a few indecipherable mutters.", parse);
+	Text.NL();
+	Text.Add("<i>“That’s what I thought.”</i> She pushes forward in a mighty thrust, sinking almost half of her member into your [anus].", parse);
+	Text.NL();
+	Text.Add("A strangled howl nearly blows the gag out of your mouth as she so roughly violates you. Fire dances through your asshole at being so suddenly penetrated... so big; it feels like she’s nearly splitting you apart!", parse);
+	Text.NL();
+	Text.Add("<i>“Hmm, yes. I’m loving this! C’mon bitch! Tighten up for me!”</i> she yells, giving your butt another resounding slap.", parse);
+	Text.NL();
+	Text.Add("You moan deep and low, a near sob of effort. Unthinkingly, you clench down around her member, trying to ignore the burning as you do so. You can feel her heartbeat through the throbbing of her cock, her pre-cum seeping steadily into your depths, almost but not quite soothing the sensation of being so stretched.", parse);
+	Text.NL();
+	Text.Add("<i>“Yes, just like that!”</i> she says as she thrusts once more, burying even more of her shaft inside you.", parse);
+	Text.NL();
+	Text.Add("You rock at the impact, groaning as you feel her cock pushing deeper inside, spreading you further with each effort. How much more does she have to put inside of you? You don’t know if you can take much more!", parse);
+	Text.NL();
+	Text.Add("With the last thrust, you feel her knot push against your stretched sphincter; she’s forceful, but thankfully makes no effort to tie you. <i>“There, you took it all like a good bitch. Since I’m such a generous mistress, I’ll give you moment to adjust.”</i>", parse);
+	Text.NL();
+	Text.Add("Quick to grab this opportunity, you start inhaling and exhaling, trying to keep your breathing steady as you coax your body to accept this violation of its capacity. Slowly, you can feel your heart resume its normal pace.", parse);
+	Text.NL();
+	Text.Add("<i>“Time’s up!”</i> she declares, pulling away in preparation to slam into you again.", parse);
+	Text.NL();
+	Text.Add("Oh no...", parse);
+	Text.NL();
+	Text.Add("You do your best, but still, you can barely brace yourself before she hammers herself home again, the meaty spike of her girl-cock splitting you open again. In that single, powerful thrust, she buries herself to the knot, holding herself there for maybe three seconds before pulling herself free with equal roughness - only to slam herself back into you again. And again. And again...", parse);
+	Text.NL();
+	Text.Add("Heedless of your whimpering or wriggling, she keeps on fucking you rough and hard. It hurts, at first, to be used like this... but with each thrust, you can take it a little easier than the one before. A warmth starts to spread through you, pooling in your ass and then trickling down your spine. In its wake, pleasure begins to replace pain; on her next thrust, you can’t hold back a soft, lustful moan.", parse);
+	Text.NL();
+	Text.Add("<i>“What is that I just heard?”</i>", parse);
+	Text.NL();
+	Text.Add("All you give her is muffled murmurs.", parse);
+	Text.NL();
+	Text.Add("Nadir-Ma chuckles. <i>“Here, let me take care of this.”</i> With a wave of her hand, she wills the bandages to release your mouth.", parse);
+	Text.NL();
+	Text.Add("You gasp as you can finally breathe through your mouth again. You pant softly, trying to catch your breath, but Nadir-Ma’s next thrust knocks the air from your lungs, forcing another pleased moan from your lips.", parse);
+	Text.NL();
+	Text.Add("<i>“Hmm, such delicious sound! C’mon, moan for me!”</i> she says, grinding her knot against your used [anus].", parse);
+	Text.NL();
+	Text.Add("With such encouragement, you can’t even think about resisting. You moan again, deliberately this time, doing your best to emphasize how good it feels now to be so full, so well used.", parse);
+	Text.NL();
+	Text.Add("<i>“That’s a good bitch! Now here’s your reward!”</i> she says, groaning with effort as she pumps into you with renewed vigor.", parse);
+	Text.NL();
+	Text.Add("The two of you grunt and groan in unison, a crescendo of raw, animal lust as she hungrily pounds your ass. You can feel her cock throbbing, her knot bulging with need, the only warning you get before she thrusts as deeply as she can without tying you and explodes.", parse);
+	Text.NL();
+	Text.Add("Thick, hot musky girl-seed pours into your gaping ass, swirling down into your belly. You can feel the weight of it, liquid and sloppy as she paints your innards white. By the time she grunts in satisfaction, you can feel it sloshing inside of you. But you can’t feel her going slack... not by a long shot.", parse);
+	Text.NL();
+	Text.Add("As soon as she’s done, Nadir-Ma pulls out, letting her seed drip in a thick stream from your gaping hole. A weak, final spurt of cum clings to your butt as she steps off the table.", parse);
+	Text.NL();
+	Text.Add("You pant slowly, feeling your heart returning to its normal pace, still throbbing with unsated pleasure. Without warning, the doberherm spins the table around, your vision rippling as you are twirled like a cooked turkey. When you blink your eyes, you realize you are facing Nadir-Ma now, your face on level with her crotch, and your vision filled with the sight of her half-erect, cum-dripping maleness.", parse);
+	Text.NL();
+	Text.Add("<i>“We’re just getting warmed up, my bitch. I figured you could use a snack after last round, and I could use some cleaning up, so get to work!”</i> she orders, slapping your face with her half-erect cock and letting the cum-soaked length rest on your cheek.", parse);
+	Text.NL();
+	if(player.SubDom() > 0)
+		Text.Add("Well and truly broken at this point, the thought of resistance doesn’t even cross your mind. Instead, you meekly open your mouth and twist your face slightly, gently drawing her cock between your lips.", parse);
+	else
+		Text.Add("You need no further instruction, already opening your mouth and drawing her tasty treat inside, happy for a chance to really taste her dick.", parse);
+	Text.NL();
+	Text.Add("<i>“And if I feel teeth, you’d better be ready for some <b>hard</b> punishment, the likes only a goddess could give.”</i>", parse);
+	Text.NL();
+	parse["boygirl"] = player.mfTrue("boy", "girl");
+	if(player.SubDom() > 0)
+		Text.Add("A fearful tremor wracks your body; no more, please, no more. You keep your eyes downcast, trying to look as docile and obedient as you can.", parse);
+	else
+		Text.Add("If you weren’t distracted by the tasty treat in your mouth, you’d probably snort derisively. As if you would do something like that! You’re a <b>good</b> [boygirl]!", parse);
+	Text.NL();
+	Text.Add("The taste of her - thick and musky, with a just a little smokiness that you try not to think too hard about - fills your mouth. Gently, you suckle at her cock like a baby at the teat, your [tongueTip] occasionally flicking against her pointy tip, but content to leave the bulk of the work to your pulsing lips and cheeks. You can feel her starting to throb against your tongue, slowly growing harder and harder as you work.", parse);
+	Text.NL();
+	Text.Add("As she grows more erect, you suck harder and work your tongue more, eagerly coaxing her upright again. The salty-spice of her cum gives way to a taste that can only be her flesh, a surprisingly pleasant experience that only stokes your eagerness to suckle at her dick. A perverse hint of pride raises its head as you realize she’s fully hard again, pulsating eagerly against your tongue as pre-cum starts to pool at the bottom of your mouth.", parse);
+	Text.NL();
+	Text.Add("<i>“Good work, but I think you can do better than this,”</i> she says, taking a step forward and burying her shaft all the way to the knot down your throat.", parse);
+	Text.NL();
+	Text.Add("Though a small part of you tries to keep positive, reminding you of how much worse it would be had she actually knotted your mouth, it’s drowned out by the rest of you. Even without her knot, Nadir-Ma’s mammoth fuckmeat is more than enough to pose a very real problem to your ability to breathe...", parse);
+	Text.NL();
+	Text.Add("<i>“Come on, bitch. Put those throat muscles to work!”</i>", parse);
+	Text.NL();
+	Text.Add("Desperate for air, you try your hardest to do as she tells you. Your lips suck desperately at her knot, your tongue squirming feebly as it is crushed to the floor of your mouth by the sheer weight of dickflesh crammed inside. And all the while, your throat clenches and squeezes, trying vainly to milk Nadir-Ma’s cock.", parse);
+	Text.NL();
+	Text.Add("Amazingly - impossibly - you swear you can feel her growing even <b>bigger</b> and harder than before, swelling up until she has completely blocked off your throat. You’re starting to feel lightheaded, the world spinning around you...", parse);
+	Text.NL();
+	Text.Add("With an indelicate grunt, Nadir-Ma suddenly tugs herself free of your mouth. Air, blessed air pours down your gullet and you greedily drink until your head spins. The doberherm watches you patiently as you gasp and pant, until she judges you’ve recovered.", parse);
+	Text.NL();
+	Text.Add("You don’t realize how tempting a target you present until, on your next gasp, your inhalation brings Nadir-Ma’s cock jamming itself back into your mouth. With a pleased bark, it bulges and then explodes, hot jets of doggy-cream painting your gullet white as they pour down your throat. You can feel your stomach gurgling, growing tight and heavy under this massive liquid repast; by the time Nadir-Ma runs dry a second time, you’re sure you’ve put on a few pounds, and that if you were wearing actual clothes, they’d be uncomfortably tight around the belly.", parse);
+	Text.NL();
+	Text.Add("Nadir-Ma pulls out with a chuckle. <i>“How’d you like your treat?”</i>", parse);
+	Text.NL();
+	Text.Add("You just groan, stifling a soft burp as the air and cum you swallowed settles in your belly.", parse);
+	Text.NL();
+	Text.Add("<i>“Well, you’re not done yet. You still have to clean up my balls,”</i> she says, pushing her orbs right on your face.", parse);
+	Text.NL();
+	Text.Add("Tiredly, but not so tired as to disobey, you open your mouth and extend your tongue, starting to softly lap at the cum-caked girl-balls you have been presented. After all you have just swallowed, you barely register the taste of her thick musk in your mouth; it’s just that normal to you now.", parse);
+	Text.NL();
+	Text.Add("What is less normal is how the skin of Nadir-Ma’s nutsack is still stretched taut over its contents, and you’d swear that as you gently suck on one, you can feel it swelling between your lips. Even after cumming twice, Nadir-Ma isn’t sated <b>yet</b>, and as if to rub your lack of success in relieving her in your face, a fat bead of pre-cum drips onto your nose from her throbbing cock above.", parse);
+	Text.NL();
+	Text.Add("<i>“That’s good enough,”</i> she says, taking a step back. She leans down to look in your tired eyes and grins predatorily.", parse);
+	Text.NL();
+	Text.Add("<i>“What’s this? Already tired?”</i>", parse);
+	Text.NL();
+	Text.Add("You pause for a moment, thinking how to answer that. Truthfully, your stomach quakes and your orifices clench at the thought of another bone-jarring pounding like the two you have just received. On the other hand, an answer she didn’t want to hear is what got you into this mess in the first place!", parse);
+	Text.NL();
+	Text.Add("Calculating your odds, you decide to bite the bullet. Doing the best to hide the tiredness from your eyes, you shake your head and assure her that you’re fine, that you can keep going as long as she wants.", parse);
+	Text.NL();
+	Text.Add("<i>“Great! I was thinking about giving you some time before we got to the next part, but since you’re fine, let’s get right to it.”</i>", parse);
+	Text.NL();
+	Text.Add("Your head sinks back to the tabletop. You and your big mouth...", parse);
+	Text.NL();
+	Text.Add("With a kick, Nadir-Ma sends the table spinning again, stopping it just as your butt is back to facing her. She hops on the table and unceremoniously sticks her dick back inside your well-used asshole.", parse);
+	Text.NL();
+	Text.Add("In your gaping, cum-slick condition, there’s not the slightest resistance to her impalement of you. You simply moan softly as she fills you up again, the spark of pleasure cutting through the fog of fatigue shrouding your brain. You absently note that, just like last time, she stops just short of fully penetrating you, letting you feel the solid weight of her knot grinding against your gaping hole.", parse);
+	Text.NL();
+	Text.Add("<i>“Hmm, I love your ass, bitch. Think I’ll keep you around for a while.”</i>", parse);
+	Text.NL();
+	Text.Add("Anything that you might have to say on that matter is cut off when she bucks inside of you, forcing another quiet moan from your throat. Nadir-Ma doesn’t seem to notice your less than enthusiastic response to her efforts; she just happily humps away at your ass, treating you as little more than a fleshy onahole in her quest to empty herself for a third and hopefully final time.", parse);
+	Text.NL();
+	Text.Add("You can hear her panting as her lust builds, and you can certainly feel the force increase as she starts to truly slap her hips against your own. A bestial growl rumbles up her throat as she truly pounds you, battering your ass in an effort to cram the bloated bulb of her knot through your too-tight opening.", parse);
+	Text.NL();
+	Text.Add("<i>“Come on, bitch. Just open up and take it, you know you want it!”</i>", parse);
+	Text.NL();
+	Text.Add("You moan plaintively; you’re trying to open up more for her, really you are, but she’s just so <b>BIG</b>!", parse);
+	Text.NL();
+	Text.Add("<i>“Guess I haven’t been pounding you hard enough then!”</i>", parse);
+	Text.NL();
+	Text.Add("Despite everything, you still have enough in you to scream in equal parts pleasure and pain as she suddenly drives herself home with a strength you didn’t know she had. You can <b>feel</b> your pucker being forced open, stretching to the brink of tearing as her knot slowly, agonizingly, forces its way inside.", parse);
+	Text.NL();
+	Text.Add("You have no words to describe the sheer <b>fullness</b> you feel as your ass manages to swallow the doberherm’s mighty knot, clamping down around it in an air-tight seal. It hurts, but it feels so <b>good</b> at the same time...", parse);
+	Text.NL();
+	Text.Add("And not just for you, either; Nadir-Ma’s ecstatic howl nearly deafens you as she cums, firing ropes of seed down your ass with such force that you can feel them hammering into your belly, twice as long as she did the last time she came inside of you.", parse);
+	Text.NL();
+	Text.Add("<i>“Yes, that’s a good bitch,”</i> the dobermorph says, patting you on the back. <i>“You’re definitely a keeper.”</i>", parse);
+	Text.NL();
+	Text.Add("Panting weakly, you try to sound grateful at her praise.", parse);
+	Text.NL();
+	Text.Add("<i>“I think I’ll keep you around forever instead of just for a while.”</i>", parse);
+	Text.NL();
+	Text.Add("F-forever?!", parse);
+	Text.NL();
+	Text.Add("<i>“Yes, you’ll be with me forever… as part of me.”</i>", parse);
+	Text.NL();
+	Text.Add("Chills run down your spine, beads of sweat pouring from your body. You saw her shapeshifting, yes, but that’s not possible! Is it?!", parse);
+	Text.NL();
+	Text.Add("<i>“Rejoice, bitch. It’s not everyday a lowly mortal is invited to join with a goddess.”</i> Nadir-Ma motions for her bandages to release you from the table, and she hoists you into the air and onto her lap, sitting down on the table that held you not moments ago.", parse);
+	Text.NL();
+	if(player.SubDom() > 0)
+		Text.Add("She hasn’t broken your spirit so badly that you’re just going to sit here and take this! You try to make a move, to break free somehow, but disoriented, exhausted and weighed down by cum, you haven’t a chance of getting out of her arms.", parse);
+	else
+		Text.Add("You croon in bliss, happily snuggling into your goddess’s lap. You’ve always wanted someone stronger to take care of you, and what greater care and comfort could there be than to be of one flesh with your master forever?", parse);
+	Text.NL();
+	parse["own"] = player.HasLegs() ? "own" : parse["legs"];
+	Text.Add("She hugs you from behind, grabbing your hands in hers and willing her bandages to wrap around your arms, binding them with hers. Her legs do the same to your [own], and the bindings covering her chest repeat the motion over your [breasts]. In no time, you’re tied to her, fully aware of the heat emanating from her body as she presses her [breasts] to your back.", parse);
+	Text.NL();
+	if(player.SubDom() > 0)
+		Text.Add("Shouting in protest, you try to pull free of her bonds, to escape her amorous clutches.", parse);
+	else
+		Text.Add("Moaning in desire, you snuggle up to her, anxious to become one.", parse);
+	Text.Add(" The bindings around your frame grow tighter, ensuring you cannot get so much as an inch away from Nadir-Ma. You can feel her body under you changing... softening. You try to think of a simile, and the best you can come up with is sitting in a couch of half-melted butter, especially as you remember the ooze-like mass the doberherm was when she originally appeared.", parse);
+	Text.NL();
+	Text.Add("Nadir-Ma’s cock plunges into your ass with preternatural flexibility, sliding into your depths with an ease that has less to do than you’d think with how well she stretched you out before. Looking down, you can see the ooze-like substances of her limbs starting to creep across your [skin], feel its tight, wet warmth as it envelops you, absorbs you...", parse);
+	Text.NL();
+	Text.Add("<i>“Relax, bitch. There’s nothing you can do about it now; in fact, there was never anything you could’ve done at all. Your fate was sealed the moment you thought it wise to say ‘no’ to the great Nadir-Ma. Besides… you’ll love it! I promise you.”</i>", parse);
+	Text.NL();
+	if(player.SubDom() > 0)
+		Text.Add("You very much doubt that! But it’s not as if you can change your fate now... all you can do is hope that there’s some truth in what she says.", parse);
+	else
+		Text.Add("You sigh lustily, impatient for this to be over already. Just being this connected feels <i>sooo</i> good; you can’t wait to truly be made one with her.", parse);
+	Text.NL();
+	var wings = player.HasWings();
+	parse["wings"] = wings ? wings.Short() : "";
+	parse["w"] = wings ? Text.Parse(", coating over your [wings] in the process", parse) : "";
+	Text.Add("Inexorable as the tide, Nadir-Ma’s amorphous flesh creeps around you. You can feel the lush softness of her breasts as they push against your back, slowly squishing against your spine before seeping around your shoulders[w]. Her cock throbs inside of you as you sink further and further into her lap, her balls joining her dick in your belly as her thighs envelop your own.", parse);
+	Text.NL();
+	parse["h"] = player.HasHair() ? "through your hair" : "over your baldness";
+	Text.Add("Soon, all that remains of you is your face, and even that is being pulled into her neck. Her warmth is all-encompassing, creeping with deceptive sluggishness to devour this last lingering fragment of you. Streamers of glutinous slime ooze [h] and drip down over your [eyes], blinding you. You can feel it melting over and into your [ears], covering your nose, seeping over your chin. Your mouth takes one final gasp for air... and then it too is gone.", parse);
+	Text.NL();
+	Text.Add("You know nothing but darkness...", parse);
+	Text.Flush();
+	
+	Gui.NextPrompt(function() {
+		Text.Clear();
+		Text.Add("You open your eyes to gaze at the walls of the torture room, previously lit by the greenish flames that appeared when you got Nadir-Ma angry. However, the greenish glow is gone now, having been replaced by the warm orange of regular burning flames.", parse);
+		Text.NL();
+		Text.Add("Confused, you look around, but there’s no sign of Nadir-Ma. Slowly, feeling uncertain about your own body, you push yourself upright, staggering a little. She must have really fucked you good; you’re all off-balance.", parse);
+		Text.NL();
+		Text.Add("Groaning softly, you rub your brow with your hand - and then stop, starting in horror. That is <b>not</b> your hand. In fact, neither is the other one, and when you take a look down, you don’t recognize yourself - a mirror, you need a mirror!", parse);
+		Text.NL();
+		Text.Add("On that thought, you stride quickly towards the storage room, where you know a mirror can be found. For a heartbeat, you find yourself wondering <i>how</i> you know that, but you dismiss the matter; you need to see what’s happened to you.", parse);
+		Text.NL();
+		Text.Add("Moments later, you are standing before a full-body mirror, gaping at yourself. Or, rather, at your <b>new</b> self. Staring back at you out of the mirror is Nadir-Ma’s face; she really did absorb you. But... it doesn’t look like the merger was entirely one way. Once you get over the shock, you’re sure Nadir-Ma’s body has changed as well.", parse);
+		Text.NL();
+		Text.Add("But when you try to get closer for a better look, you find you can’t move. You can’t swing your arm, you can’t lift your leg, you can’t even blink! It’s as if your body has turned against you all of a sudden!", parse);
+		Text.NL();
+		Text.Add("<i>“Hello, bitch. Enjoying the new look?”</i> You… Nadir-Ma asks.", parse);
+		Text.NL();
+		if(player.SubDom() > 0) {
+			Text.Add("You monster! Let me out of here - give me my body back!", parse);
+			Text.NL();
+			Text.Add("...You want to scream, but you can’t speak.", parse);
+			Text.NL();
+			Text.Add("<i>“Tsk, tsk.”</i> The doberherm waves a finger at the reflection in the mirror. <i>“Silly bitch, it’s not <b>your</b> body, it’s <b>our</b> body now. And let’s not forget who’s in control here. Me!”</i> She says, pointing a thumb at herself.", parse);
+			Text.NL();
+			Text.Add("This is a nightmare...", parse);
+			Text.NL();
+			Text.Add("<i>“Oh, it’s no nightmare, bitch. If anything, it’s a dream come true for you. I promise to let you have some fun of your own once in a while, but for now? Just sit back and let your mistress take care of everything. Give me a few days and I’ll have you loving every second of being me!”</i>", parse);
+			Text.NL();
+			Text.Add("...Do you really have a choice?", parse);
+			Text.NL();
+			Text.Add("<i>“No, you don’t. But that’s why you’re the bitch and I’m the goddess. Now, let’s have a look at what’s new on our body...”</i>", parse);
+		}
+		else {
+			Text.Add("You try to purr your approval, to thank her for making you into something so beautiful, but you can’t seem to get your voice to work, to your dismay.", parse);
+			Text.NL();
+			Text.Add("Nadir-Ma grins. <i>“There’s no need to speak, bitch. I can hear your thoughts just fine, and you’re welcome. I told you that you’d love it!”</i>", parse);
+			Text.NL();
+			Text.Add("And she was right; mmm, it feels so good to be here, under her beautiful skin, walking around seeing the world through her lovely eyes.", parse);
+			Text.NL();
+			Text.Add("<i>“But you haven’t even begun to fathom what this delicious body of ours is capable of. Just sit back like the good bitch that you are, and let your mistress take control.”</i>", parse);
+			Text.NL();
+			Text.Add("Mmm, you can’t wait...", parse);
+			Text.NL();
+			Text.Add("<i>“Ah, but first? Let’s examine the changes...”</i>", parse);
+			Text.NL();
+			Text.Add("Oh, yes, please. You want to see how your old body has helped your beautiful mistress become even more magnificent.", parse);
+		}
+		Text.NL();
+		if(werewolf) {
+			Text.Add("If the old Nadir-Ma was intimidating in her blend of strength and sexuality, than the new her is a true monster. She easily stands at least a foot taller than she used to, and muscles visibly ripple up and down her limbs. She has visible biceps, and thighs that look like they could crack nuts. Ever her belly is ripped, with a visible six-pack defined through the tight fur.", parse);
+			Text.NL();
+			Text.Add("She flexes a bit, then whistles. <i>“Not bad, I kinda like the new muscular look...”</i>", parse);
+			Text.NL();
+			Text.Add("But your little “makeover” hasn’t been purely physical, either. Her sexiness has been kicked up a couple of notches, too. Her firm, round breasts have to be an E-cup, easily, and her hips have broadened into a pair of wide, sexy flares that help keep her womanly figure. Her butt’s also picked up just the right sort of weight; big and round, but firm and toned.", parse);
+			Text.NL();
+			Text.Add("Not that she looks like she’s inclined to let any cocks near her ass, especially with the beast between her <b>own</b> legs. You thought the old Nadir-Ma was sporting an imposing package, but this new model... if she’s not at least twice the size she was, you don’t know what you’re talking about. What a monster... does she even have her pussy anymore?", parse);
+			Text.NL();
+			Text.Add("As if to prove a point, she reaches between her legs, pushing her balls aside and pushing a finger into her moist slit.", parse);
+			Text.NL();
+			Text.Add("A spark of pleasure snaps through your brain; you’d hiss at the feeling if you had control over the tongue.", parse);
+			Text.NL();
+			Text.Add("<i>“That answers your question, bitch?”</i>", parse);
+			Text.NL();
+			Text.Add("It certainly does... but it seems she’s picked up a bit of extra bitchy-ness herself... you don’t remember her nails being this long and, well, claw-like before. The tail idly flexing over her ass is definitely not the stumpy little doberman’s tail she had before. And you can’t quite put your finger on it, but there’s a hint of wolf around her face too.", parse);
+			Text.NL();
+			Text.Add("<i>“All welcome changes, bitch. I guess the werewolf in you somehow got to me, but no matter. I like the whole ‘wild beast’ look I got going now.”</i>", parse);
+			Text.NL();
+			Text.Add("It does suit her well.", parse);
+		}
+		else {
+			Text.Add("There is absolutely no question, once you take a proper look, that you <i>really</i> did Nadir-Ma’s body good! It’s like absorbing you gave her a concentrated dose of pure sex appeal booster.", parse);
+			Text.NL();
+			Text.Add("<i>“Not gonna argue with you there, bitch. Seems like you really did me some good.”</i>", parse);
+			Text.NL();
+			Text.Add("The first thing to catch your eyes are her - and, technically, your - new breasts. Nadir-Ma was surprisingly busty for her build before, but now, she’s incredible; these pumpkin-sized babies have to be at <i>least</i> an F-cup, and though they clearly show the weight of themselves in how they sit, they’re not sagging down to her belly, either. Just the right blend of soft and firm to be appealing.", parse);
+			Text.NL();
+			Text.Add("<i>“Imagine how good these would feel during a titjob,”</i> she says, hefting her heavy bosom.", parse);
+			Text.NL();
+			Text.Add("A passenger in Nadir-Ma’s mind as you are, you can feel her doing so, and your ‘voice’ is lost in a wave of blissful murmuring. It feels good just to have her touching them, fingers sinking into their lushness; you can only imagine what it’d feel like for someone with their junk wrapped inside of them.", parse);
+			Text.NL();
+			Text.Add("<i>“I bet it’d be heaven, but now that we know what’s change up here, how about we check what’s going on down below?”</i>", parse);
+			Text.NL();
+			Text.Add("Of course, what’s a little up top without something down below to go with it? As the doberherm pivots slightly, checking herself out in the mirror, you can only marvel at how her hips have blossomed, spreading into a gloriously fuckable set of broodmother’s hips. You can’t imagine any straight guy who wouldn’t want to just grab onto those and start fucking as if his life depended on it.", parse);
+			Text.NL();
+			Text.Add("<i>“Hmm, yes. I get what you’re saying, but it’d be hard finding a bitch that’d deserve the honor.”</i>", parse);
+			Text.NL();
+			Text.Add("Of course, that’s not all the adjustment she got down below. Talk about baby got back... Nadir-Ma’s ass was pretty hot before, but you can’t imagine a soul failing to notice this glorious bubble-butt now. So big and round and firm... you’d bet good money she could probably carry a full ale stein from one end of a bar to the other by parking it on her butt, no hands needed.", parse);
+			Text.NL();
+			Text.Add("<i>“I do like big butts, and having one of my own only makes things all the sweeter.”</i>", parse);
+			Text.NL();
+			Text.Add("A good thing she likes it, because... well, it’s not the only part of her that seems to have gotten a little fluffier.", parse);
+			Text.NL();
+			Text.Add("<i>“Really? Elaborate, bitch.”</i>", parse);
+			Text.NL();
+			Text.Add("Well, she used to be trim and toned - not a bodybuilder, but still sort of femininely buff. Now, she looks... softer. There’s no hint of that “I work out a lot” leanness to her frame now; it’s all delicate, womanly curves.", parse);
+			Text.NL();
+			Text.Add("Nadir-Ma laughs at your remark. <i>“Oh, my little bitch, you crack me up. Take a look at this.”</i> She flexes her arm. <i>“You should feel it, looks can be deceiving. Even if I look all soft and cuddly, don’t you dare doubt my fury when I’m denied what I want.”</i>", parse);
+			Text.NL();
+			Text.Add("You certainly don’t doubt that. Sneaking one last look in the mirror, you study the voluptuous doberherm’s loins, before metaphorically shrugging your shoulders. You’re pretty sure she hasn’t lost anything down there with this sudden upsurge of femininity, but you don’t think she’s really grown any there, either.", parse);
+			Text.NL();
+			Text.Add("<i>“I guess so, but that doesn’t matter. Having a big dick is good and all, but how you use it is also important.”</i>", parse);
+			Text.NL();
+			Text.Add("Well, you doubt there’s any man or otherwise alive who can use their dick the way she can.", parse);
+		}
+		Text.NL();
+		Text.Add("<i>“Well, I guess we’ve seen enough. Think it’s time to see how the outside world fares, right sister?”</i>", parse);
+		Text.NL();
+		Text.Add("Confusion wells within you; she can’t be talking to you, surely? As you puzzle it over, you realize you can feel something else in this strange limbo-state you now exist in. Something soft and fluffy brushing against you - teasingly, enough to let you feel it, but not enough to get a clear grip on what it is.", parse);
+		Text.NL();
+		Text.Add("<i>“Yes, I agree. Maybe we’ll find more worshippers and get them to build our temple again,”</i> the ‘sister’ says.", parse);
+		Text.NL();
+		Text.Add("Nadir-Ma chuckles. <i>“Yes, yes. I’ll let you handle that, sis. Switch with me.”</i>", parse);
+		Text.NL();
+		parse["monstrous"] = werewolf ? " monstrous" : "";
+		Text.Add("Darkness takes you as Nadir-Ma covers her eyes. A strange tingling sensation runs through your borrowed senses; somehow, you can <i>feel</i> Nadir-Ma’s[monstrous] cock fading away and being absorbed into her body, leaving her all-female once more.", parse);
+		Text.NL();
+		Text.Add("Nadir-Ma’s eyes open, and you feel... different. You don’t have the words to describe it, but somehow, you know that “the sister” has taken over, and that Nadir-Ma - at least, the Nadir-Ma who brought you inside - has retreated into the limbo in which you dwell. You can feel her... a bit <i>too</i> well, actually. It’s like she’s surrounding you, wrapping you in silken coils, embracing your every inch...", parse);
+		Text.NL();
+		Text.Add("It’s a strange feeling...", parse);
+		Text.NL();
+		Text.Add("<i>“Call me if someone gets any bright ideas, till then, I’ll be inside bitch,”</i> Nadir-Ma says.", parse);
+		Text.NL();
+		Text.Add("<i>“Of course, sis,”</i> the sister replies, grinning.", parse);
+		Text.NL();
+		Text.Add("‘Inside’ of you? What in the world is that supposed to mean?", parse);
+		Text.NL();
+		Text.Add("Before you have finished the thought, you get your answer. It’s like... there are no words to describe accurately what’s happening to you. You can feel the breeze on Nadir-Ma’s fur, the stone under her feet, her fingers leisurely exploring her newly improved body. But you can also feel her arms wrapped around you, her hot breath on the back of your neck... her cock sliding effortlessly inside of you, filling you as she starts to pump away with all of her previous enthusiasm and then some.", parse);
+		Text.NL();
+		Text.Add("Your thoughts are getting so cloudy; all you can think of is how good this feels, all you can feel is Nadir-Ma as she fucks you. ‘Sister’ and body fade away into nothingness; there is just the endless darkness, the huge cock inside you, and the endless hunger of the woman splitting you on it...", parse);
+		Text.Flush();
+		
+		Gui.NextPrompt(function() {
+			Scenes.Halloween.WakingUp(true);
+		});
+	});
+}
 
 Scenes.Halloween.HarthonFirst = function() {
 	var werewolf = Scenes.Halloween.HW.Werewolf();
