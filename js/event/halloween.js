@@ -2511,7 +2511,6 @@ Scenes.Halloween.NadirMaCont = function(parse) {
 
 Scenes.Halloween.NadirMaCont2 = function(parse) {
 	var werewolf = Scenes.Halloween.HW.Werewolf();
-	var p1cock = player.BiggestCock();
 	
 	Text.Add("<i>“I’ll go get a little something while you produce more tasty cum for me,”</i> Nadir-Ma says, walking around the table and moving out of your field of vision.", parse);
 	Text.NL();
@@ -2530,6 +2529,7 @@ Scenes.Halloween.NadirMaCont2 = function(parse) {
 	Text.Flush();
 	
 	var prompt = function() {
+		var p1cock = player.BiggestCock();
 		Text.Clear();
 		Text.Add("<i>“Great, let’s get started then!”</i> she says merrily, approaching you and gently grasping[oneof] your [cocks].", parse);
 		Text.NL();
@@ -2784,7 +2784,9 @@ Scenes.Halloween.NadirMaCont2 = function(parse) {
 		parse["h"] = player.HasHair() ? "through your hair" : "over your shaven scalp";
 		parse["h2"] = player.HasHair() ? " Her digits playfully intertwine with your locks, sweeping down through them." : "";
 		parse["h3"] = player.HasHair() ? " the length of your hair - down" : "";
-		parse["w"] = player.HasWings() ? Text.Parse(", between your [wings]", parse) : "";
+		var wings = player.HasWings();
+		parse["wings"] = wings ? wings.Short() : "";
+		parse["w"] = wings ? Text.Parse(", between your [wings]", parse) : "";
 		Text.Add("Dimly, you can see her smiling down at you as she reaches out and clasps your cheeks, running her fingers over your face as much as she can. Her hands curl across your cheekbones, sweeping up your temples and then start to run [h].[h2] You can feel her digits dragging down[h3] and down, from the top of your skull down over your shoulders[w], across the small of your back, not stopping until you feel them playfully brush your ass.", parse);
 		Text.NL();
 		Text.Add("You smile proudly around the dobermorph’s nipple as she starts to openly grope your butt. Rich and full, perky and firm, it’s a beautiful little eye-catcher. Naturally, her hands sweep further in, encompassing the strong, wide bones of your child-bearing hips; you have a body made for birthing beautiful, healthy children, and from somewhere deep inside, the alien lament that your goddess lacks a cock with which to bless you with some pups of her own surfaces.", parse);
