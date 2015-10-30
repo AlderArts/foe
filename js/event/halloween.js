@@ -2718,6 +2718,8 @@ Scenes.Halloween.NadirMaCont2 = function(parse) {
 			player.body.cock = [p1cock];
 			
 			parse = player.ParserTags(parse);
+			parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+			parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
 			
 			Text.Add("Looking at your loins, you can’t help but agree with the canine goddess. Really, what do you need more than one cock for? Better to take one hole at a time and do it well than to waste half your seed or more just spewing it over the ground! Eagerly, you watch as your over-abundant nethers reshape themselves into something more elegant.", parse);
 			Text.NL();
