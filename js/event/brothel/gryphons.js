@@ -375,7 +375,7 @@ Scenes.Brothel.Gryphons.Outro = function(gender, preg) {
 				return "A gentle wave of pleasure runs through your balls and up into your groin. While it’s over just as quickly as it began, you can feel your balls churning with increased production.";
 			},
 			odds: 1,
-			cond: function() { return player.HasBalls() && player.Balls().cumProduction.Get() < 3 && player.Balls().cumCap.Get() < 30; }
+			cond: function() { return player.HasBalls() && player.Balls().cumProduction.Get() < 4 && player.Balls().cumCap.Get() < 30; }
 		});
 		func({
 			tf: function() {
