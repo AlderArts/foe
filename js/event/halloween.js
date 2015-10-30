@@ -1981,6 +1981,7 @@ Scenes.Halloween.NadirMa = function() {
 	};
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
 	
 	Scenes.Halloween.HW.flags |= Halloween.Flags.NadirMa;
 	
