@@ -2275,6 +2275,8 @@ Scenes.Halloween.NadirMa = function() {
 }
 
 Scenes.Halloween.NadirMaCont = function(parse) {
+	var p1cock = player.BiggestCock();
+	
 	Text.Add("Well, if that’s what she wants. You carefully lower yourself to the ground, adjusting your stance until you are settled firmly, your [cocks] outthrust before you.", parse);
 	Text.NL();
 	parse["boygirl"] = player.mfTrue("boy", "girl");
@@ -2385,7 +2387,7 @@ Scenes.Halloween.NadirMaCont = function(parse) {
 		Text.NL();
 		Text.Add("<i>“Getting ready to cum? Well, I’m not done playing yet.”</i>", parse);
 		Text.NL();
-		parse["k"] = player.FirstCock().Knot() ? ", just behind your swelling knot" : "";
+		parse["k"] = p1cock.Knot() ? ", just behind your swelling knot" : "";
 		Text.Add("A dismal moan bubbles from your throat as, before your disbelieving eyes, a bandage snakes out from Nadir-Ma’s enchanted apparel. With perverse grace, it slithers through the air and brushes against the base of your cock[k]. In an instant, it twines itself around your sensitive flesh, tying itself so tightly that you haven’t a hope of getting off.", parse);
 		Text.NL();
 		Text.Add("You turn a pleading eye towards Nadir-Ma, but the doberman is oblivious to your desperation. Instead, she goes right back to what she was doing, only slower and more teasing.", parse);
@@ -2595,7 +2597,7 @@ Scenes.Halloween.NadirMaCont2 = function(parse) {
 		Text.NL();
 		Text.Add("You slump to the floor, panting for breath, feeling more frustrated than relieved; you’re so close that it’s almost painful, even the slow ebbing of lust as it bleeds away a near-torturous experience.", parse);
 		Text.NL();
-		parse["k"] = player.FirstCock().Knot() ? ", knot included" : "";
+		parse["k"] = p1cock.Knot() ? ", knot included" : "";
 		Text.Add("<i>“Now, about your reward...”</i> Nadir-Ma suddenly hoists you up as if you weighed nothing and lays you down on the table. In one smooth move, she climbs on the table and aligns[oneof] your [cocks] with juice-dripping pussy. <i>“You’ll get to fuck a goddess.”</i> And with that, she lets gravity take its course, impaling herself on your shaft all the way to hilt[k].", parse);
 		Text.NL();
 		Text.Add("You cry out in pleasure, a strangled gasp of pure lust at being so directly enveloped within her. The heat of her drooling cunt swallows your senses, and for a moment, it’s as if there’s nothing but her cooch greedily devouring your cock, slurping back and forth along your length as she bounces atop you.", parse);
