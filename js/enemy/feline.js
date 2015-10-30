@@ -1667,7 +1667,7 @@ Scenes.Felines.LossPCblowsCat = function(mainCat, enemy) {
 	}
 	Text.NL();
 	parse["l"] = player.HasLegs() ? " on your knees," : "";
-	Text.Add("Tired of waiting, [heshe] decides to take matters in [hisher] own hands. [HeShe] grabs you and pulls you up, settling you down[l] level with [hisher], now fully hardened, [cock].", parse);
+	Text.Add("Tired of waiting, [heshe] decides to take matters in [hisher] own hands. [HeShe] grabs you and pulls you up, settling you down[l] level with [hisher] now fully hardened cock.", parse);
 	Text.NL();
 	Text.Add("[HeShe] pets you lightly, and grabs your head, gently nudging you towards [hisher] sheath, while [hisher] tail drapes over your shoulder, looping around behind your neck to gently stroke your cheek and rub over your lips and nose. Suddenly, you’re very aware of the [cat]’s scent, particularly the musk emanating from [hisher] sex. [HeShe] smells ready...", parse);
 	Text.NL();
@@ -1739,6 +1739,7 @@ Scenes.Felines.LossPCblowsCat = function(mainCat, enemy) {
 		cum = CumLevel.High;
 	}, 1.0, function() { return true; });
 	scenes.Get();
+	Text.NL();
 	
 	if(herm) {
 		Text.Add("As you service her balls, you begin moving a hand up between her thighs, slowly inching your way towards her moist pussy. When you make contact with her folds, the [cat] shudders and hisses. Initially, you think it might be from pleasure, but when her grip tightens on your head, you immediately freeze.", parse);
