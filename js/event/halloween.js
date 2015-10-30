@@ -2509,6 +2509,7 @@ Scenes.Halloween.NadirMaCont = function(parse) {
 
 Scenes.Halloween.NadirMaCont2 = function(parse) {
 	var werewolf = Scenes.Halloween.HW.Werewolf();
+	var p1cock = player.BiggestCock();
 	
 	Text.Add("<i>“I’ll go get a little something while you produce more tasty cum for me,”</i> Nadir-Ma says, walking around the table and moving out of your field of vision.", parse);
 	Text.NL();
