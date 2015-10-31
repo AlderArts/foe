@@ -185,7 +185,7 @@ Scenes.Rosalin.Interact = function() {
 	var anusolIngredients = true;
 	if(anusol < Rosalin.Anusol.AskedForCalesHelp) {
 		_.each(Items.Anusol.recipe, function(it) {
-			anusolIngredients &= (party.Inv().QueryNum(it) > 0);
+			anusolIngredients = anusolIngredients && (party.Inv().QueryNum(it) > 0);
 		});
 	}
 	
