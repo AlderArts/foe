@@ -256,6 +256,7 @@ Inventory.prototype.ShowInventory = function(preventClear) {
                                     inv.RemoveItem(item);
                                 Gui.NextPrompt(backPrompt);
                             }
+                            Text.Flush();
                         },
                         enabled : t.ItemUsable(item),
                         obj     : t
