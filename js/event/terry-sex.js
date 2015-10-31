@@ -16,17 +16,12 @@ Scenes.Terry.Impregnate = function(mother, father, cum, slot) {
 Scenes.Terry.SexPrompt = function(backPrompt) {
 	var parse = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
-		HeShe   : terry.HeShe(),
-		heshe   : terry.heshe(),
-		HisHer  : terry.HisHer(),
-		hisher  : terry.hisher(),
-		himher  : terry.himher(),
-		hishers : terry.hishers(),
 		tarmorDesc : function() { return terry.ArmorDesc(); },
 		master : player.mfTrue("master", "mistress"),
 		lowerArmorDesc : function() { return player.LowerArmorDesc(); },
 		playername : player.name
 	};
+	parse = terry.ParserPronouns(parse);
 	
 	Gui.Callstack.push(function() {
 		Text.Add("Done appreciating your vulpine pet’s naked form, you step around so that you are in front of [himher], rubbing your chin idly as you consider how you want to fuck the [foxvixen] this time...", parse);
@@ -276,7 +271,6 @@ Scenes.Terry.SexPromptChoice = function(backPrompt, haveadrink) {
 	Gui.SetButtonsFromList(options, backPrompt, backPrompt);
 }
 
-//TODO
 Scenes.Terry.SexGetOralPussy = function() {
 	var parse = {
 		playername : player.name,
@@ -932,12 +926,6 @@ Scenes.Terry.SexPitchAnal = function(cocksInAss) {
 	var parse = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		boygirl : terry.mfPronoun("boy", "girl"),
-		HeShe   : terry.HeShe(),
-		heshe   : terry.heshe(),
-		HisHer  : terry.HisHer(),
-		hisher  : terry.hisher(),
-		himher  : terry.himher(),
-		hishers : terry.hishers(),
 		tcockDesc : function() { return terry.FirstCock().Short(); },
 		master  : player.mfTrue("master", "mistress"),
 		MasterMistress : player.mfTrue("Master", "Mistress"),
@@ -951,6 +939,7 @@ Scenes.Terry.SexPitchAnal = function(cocksInAss) {
 		hipsDesc : function() { return player.HipsDesc(); },
 		ballsDesc : function() { return player.BallsDesc(); }
 	};
+	parse = terry.ParserPronouns(parse);
 	
 	var virgin = terry.Butt().virgin;
 	var promise;
@@ -1530,12 +1519,6 @@ Scenes.Terry.SexFuckButtEntrypoint = function(p1Cock, promise, retFunc) {
 	var parse = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		boygirl  : terry.mfPronoun("boy", "girl"),
-		HeShe   : terry.HeShe(),
-		heshe   : terry.heshe(),
-		HisHer  : terry.HisHer(),
-		hisher  : terry.hisher(),
-		himher  : terry.himher(),
-		hishers : terry.hishers(),
 		tcockDesc : function() { return terry.FirstCock().Short(); },
 		tbreastDesc : function() { return terry.FirstBreastRow().Short(); },
 		master  : player.mfTrue("master", "mistress"),
@@ -1551,6 +1534,7 @@ Scenes.Terry.SexFuckButtEntrypoint = function(p1Cock, promise, retFunc) {
 		breastsDesc : function() { return player.FirstBreastRow().Short(); },
 		nipsDesc : function() { return player.FirstBreastRow().NipsShort(); }
 	};
+	parse = terry.ParserPronouns(parse);
 	
 	Text.Add("You spare a quick thought for how you should take Terry’s tailhole; gently, or roughly?", parse);
 	if(promise)
