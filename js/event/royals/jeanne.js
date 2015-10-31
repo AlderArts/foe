@@ -59,6 +59,8 @@ Jeanne.prototype.FromStorage = function(storage) {
 	
 	// Load flags
 	this.LoadFlags(storage);
+	if(rosalin.flags["Anusol"] >= Rosalin.Anusol.ShowedJeanne)
+		this.recipes.push(Items.AnusolPlus);
 }
 
 Jeanne.prototype.ToStorage = function() {
@@ -156,7 +158,16 @@ Scenes.Jeanne.AlchemyCallback = function(item) {
 	var parse = {};
 	
 	Text.Clear();
-	Text.Add("<i>“Here you go,”</i> Jeanne tells you as she hands over the finished potion. <i>“Just be wary of the effects it may have on you. Anything else?”</i>", parse);
+	if(item == Items.AnusolPlus) {
+		Text.Add("<i>“Just wait for a bit and I will have your potion ready,”</i> she says, walking off towards her alchemical supplies.", parse);
+		Text.NL();
+		Text.Add("True to her word, it only takes a few moments for her to finish preparing the mixture. It’s a clear blue liquid, thick and slimy, but with a fragrant scent. The bottle she presents you with is clearly labeled ‘Anusol+’.", parse);
+		Text.NL();
+		Text.Add("You thank Jeanne and pocket the bottle.", parse);
+	}
+	else {
+		Text.Add("<i>“Here you go,”</i> Jeanne tells you as she hands over the finished potion. <i>“Just be wary of the effects it may have on you. Anything else?”</i>", parse);
+	}
 	Text.NL();
 	
 	player.AddAlchemy(item);
@@ -418,6 +429,44 @@ Scenes.Jeanne.Talk = function() {
 			}, enabled : true,
 			tooltip : "Ask the court mage about her former pupil."
 		});
+		
+		if(party.Inv().QueryNum(Items.Anusol) && rosalin.flags["Anusol"] < Rosalin.Anusol.ShowedJeanne) {
+			options.push({ nameStr : "Rosalin’s pot",
+				tooltip : "You wonder what Jeanne would have to say about this new potion of Rosalin’s. Maybe showing it to her would be a good idea?",
+				func : function() {
+					rosalin.flags["Anusol"] = Rosalin.Anusol.ShowedJeanne;
+					jeanne.recipes.push(Items.AnusolPlus);
+					
+					Text.Clear();
+					Text.Add("Reaching into your belongings, you draw forth a bottle of Anusol and offer it to the elven mage.", parse);
+					Text.NL();
+					Text.Add("<i>“This looks familiar. Where did you get this?”</i>", parse);
+					Text.NL();
+					Text.Add("You explain to her that it’s a custom brew you got from Rosalin.", parse);
+					Text.NL();
+					Text.Add("The elven mage sighs. <i>“I should have known. Let me take a look,”</i> she says, taking the bottle off your hands a pouring a small bit into a beaker. Jeanne examines the potion, distilling it and separating the contents before analyzing and mixing them back together.", parse);
+					Text.NL();
+					Text.Add("<i>“My silly apprentice… always adding that customary ‘extra punch’ to her mixes. This mixture will not do much for you. Might make your ass more sensitive, and possibly wetter, but that is as far as it will go. If she really wanted to augment it, she should have mixed it with something more adequate...”</i>", parse);
+					Text.NL();
+					Text.Add("You blink in surprise; does Jeanne really mean this potion could have an effect even stronger than the one it already has?", parse);
+					Text.NL();
+					Text.Add("<i>“You sound interested. You realize that if we were to actually augment this potion’s potency you would wind up turning your anus into a vagina, right? And I am not talking about just the way it feels, but a functional one. You could even get pregnant if you’re careless.”</i>", parse);
+					Text.NL();
+					Text.Add("You can’t conceal your surprise at the elf’s words; would such a transformation actually be possible?! You can’t imagine a person actually getting pregnant by their anus...", parse);
+					Text.NL();
+					Text.Add("<i>“It might be awkward at first. The anus is much tighter than a vagina, and we would have to add something to help with capacity and dilation. However, it is certainly possible.”</i>", parse);
+					Text.NL();
+					Text.Add("Your tongue idly flicks over your lips as you consider the possibility. Then, almost despite yourself, you inquisitively ask just what she’d need to make a stronger version of this potion.", parse);
+					Text.NL();
+					Text.Add("<i>“Just bring the ingredients for Fertilium. Or a potion I can distill, and I will see about undoing my apprentice’s mistake.”</i>", parse);
+					Text.NL();
+					Text.Add("Nodding to show you understand, you thank her. So, Anusol and Fertilium for an enhanced Anusol potion? You’ll need to remember that.", parse);
+					Text.Flush();
+					
+					Scenes.Jeanne.Talk();
+				}, enabled : true
+			});
+		}
 	}
 	
 	Gui.SetButtonsFromList(options, true, Scenes.Jeanne.InteractPrompt);

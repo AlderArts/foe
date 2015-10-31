@@ -69,7 +69,8 @@ Rosalin.Anusol = {
 	TalkedToCale      : 2,
 	AskedForCalesHelp : 3,
 	DeliveryFromCale  : 4,
-	Brewed            : 5
+	Brewed            : 5,
+	ShowedJeanne      : 6
 }
 
 Rosalin.prototype.Met = function() {
