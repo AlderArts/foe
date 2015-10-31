@@ -50,6 +50,7 @@ function Rosalin(storage) {
 	this.flags["Lepida"]         = 0;
 	this.flags["Avia"]           = 0;
 	this.flags["Ovis"]           = 0;
+	this.flags["Anusol"]         = 0;
 	
 	if(storage) this.FromStorage(storage);
 }
@@ -61,6 +62,14 @@ Rosalin.PastDialog = {
 	Teacher  : 1,
 	Nomads   : 2,
 	TreeCity : 3
+}
+
+Rosalin.Anusol = {
+	OnTask            : 1,
+	TalkedToCale      : 2,
+	AskedForCalesHelp : 3,
+	DeliveryFromCale  : 4,
+	Brewed            : 5
 }
 
 Rosalin.prototype.Met = function() {
@@ -77,6 +86,9 @@ Rosalin.prototype.FromStorage = function(storage) {
 	// Load flags
 	this.LoadFlags(storage);
 	this.LoadPersonalityStats(storage);
+	
+	if(this.flags["Anusol"] >= Rosalin.Anusol.Brewed)
+		this.AddAlchemy(Items.Anusol);
 }
 
 Rosalin.prototype.ToStorage = function() {
@@ -168,11 +180,23 @@ Rosalin.prototype.IsAtLocation = function(location) {
 }
 
 Scenes.Rosalin.Interact = function() {
+	var anusol = rosalin.flags["Anusol"];
+	var anusolIngredients = true;
+	if(anusol < Rosalin.Anusol.AskedForCalesHelp) {
+		_.each(Items.Anusol.recipe, function(it) {
+			anusolIngredients &= (party.Inv().QueryNum(it) > 0);
+		});
+	}
+	
 	// First time meeting
 	if(rosalin.flags["Met"] == 0) {
 		rosalin.flags["Met"] = 1;
 		cale.flags["Met"]    = Cale.Met.First;
 		Scenes.Rosalin.FirstTime();
+		return;
+	}
+	else if((anusol >= Rosalin.Anusol.OnTask) && (anusol < Rosalin.Anusol.Brewed) && anusolIngredients) {
+		Scenes.Rosalin.BrewAnusol();
 		return;
 	}
 	
@@ -250,7 +274,9 @@ world.loc.Plains.Nomads.Fireplace.events.push(new Link(
 			// TODO: Plant description
 		}
 	},
-	Scenes.Rosalin.Interact /*,
+	function() {
+		Scenes.Rosalin.Interact();
+	} /*,
 	function() { return rosalin.flags["Met"] == 0 ? "Approach the catgirl alchemist." : "Talk with Rosalin the alchemist."; } */
 ));
 
@@ -561,7 +587,7 @@ Scenes.Rosalin.TalkPrompt = function() {
 				world.TimeStep({minute: 45});
 				
 				parse["canusDesc"] = function() { return cale.Butt().AnalShort(); }
-				parse["multiCockDesc"] = function() { return player.MultiCockDesc(); }
+				parse["cocks"] = function() { return player.MultiCockDesc(); }
 				//[Take him][Rosalin]
 				var options = new Array();
 				options.push({ nameStr : "Take him",
@@ -580,7 +606,7 @@ Scenes.Rosalin.TalkPrompt = function() {
 							player.strapOn = Items.StrapOn.CanidStrapon;
 							player.Equip();
 						}
-						Text.Add("Over by the campfire, Cale is growing anxious. The horny wolf, desperate to be filled, is pumping three of his fingers into his [canusDesc], trying his outmost to sate his desires. He lights up when you step up behind him, grinding your [multiCockDesc] between his cheeks. His tail is wagging back and forth in excitement, conveniently raised high to allow you full access.", parse);
+						Text.Add("Over by the campfire, Cale is growing anxious. The horny wolf, desperate to be filled, is pumping three of his fingers into his [canusDesc], trying his outmost to sate his desires. He lights up when you step up behind him, grinding your [cocks] between his cheeks. His tail is wagging back and forth in excitement, conveniently raised high to allow you full access.", parse);
 						Text.NL();
 						
 						Scenes.Cale.SexFuckHim(true, {goop: true});
@@ -591,10 +617,10 @@ Scenes.Rosalin.TalkPrompt = function() {
 					options.push({ nameStr : "Rosalin",
 						func : function() {
 							Text.Clear();
-							parse["rmultiCockDesc"] = function() { return rosalin.MultiCockDesc(); }
+							parse["rcocks"] = function() { return rosalin.MultiCockDesc(); }
 							Text.Add("You ask if the alchemist wants to take care of him.", parse);
 							Text.NL();
-							Text.Add("<i>“Sure, I can do that!”</i> Rosalin grins as [heshe] pulls out [hisher] [rmultiCockDesc]. <i>“Wolfie! Down boy!”</i> Cale’s tongue is lolling and his tail is wagging happily as Rosalin takes position behind him, grinding against his now incredibly sensitive taint.", parse);
+							Text.Add("<i>“Sure, I can do that!”</i> Rosalin grins as [heshe] pulls out [hisher] [rcocks]. <i>“Wolfie! Down boy!”</i> Cale’s tongue is lolling and his tail is wagging happily as Rosalin takes position behind him, grinding against his now incredibly sensitive taint.", parse);
 							Text.NL();
 							parse["s"] = rosalin.NumCocks() > 1 ? "s": "";
 							Text.Add("<i>“T-take me Rosie, just take me!”</i> he howls, pushing his hips back against the alchemists stiff shaft[s]. There is a wild gleam in Rosalin’s eyes as [hisher] desires start to well up. You settle down for the show, eager to see how the new changes will affect Cale.", parse);
@@ -609,6 +635,39 @@ Scenes.Rosalin.TalkPrompt = function() {
 			}, enabled : true,
 			tooltip : Text.Parse("You aren’t sure this is such a good idea… but ask [himher] if [heshe] can make something for Cale.", parse)
 		});
+	}
+	else if((cale.Buttslut()) || (player.sex.gAnal + player.sex.rAnal >= 10)) {
+		var caleScene = cale.Buttslut();
+		var tooltip = caleScene ? "You’ve been wondering about that mixture [heshe] made for Cale’s butt..." : "You’ve been wondering about something that would make anal more pleasurable...";
+		if(rosalin.flags["Anusol"] == 0) {
+			options.push({ nameStr : "Anal experiment",
+				func : function() {
+					rosalin.flags["Anusol"] = Rosalin.Anusol.OnTask;
+					
+					Text.Clear();
+					Text.Add(tooltip, parse);
+					Text.NL();
+					Text.Add("<i>“Yeah? What about it?”</i>", parse);
+					Text.NL();
+					Text.Add("Does Rosalin think [heshe] could make you ", parse);
+					if(caleScene)
+						Text.Add("another batch of that stuff [heshe] mixed up for Cale?", parse);
+					else
+						Text.Add("something to help you with that?", parse);
+					Text.NL();
+					Text.Add("The alchemist thinks for a bit, then sifts over [hisher] supplies. <i>“I think I can do that… but I’m gonna need some ingredients.”</i>", parse);
+					Text.NL();
+					Text.Add("That makes sense, given Rosalin’s constant experiments. You nod your understanding and ask [himher] what [heshe] needs you to bring [himher] for the mixture.", parse);
+					Text.NL();
+					Text.Add("<i>“Some <b>Snake Oil</b>, <b>Spring Water</b>, and <b>Fruit Seeds</b>. For extra punch. I’m sure you won’t have to look too hard to find these,”</i> [heshe] nods. <i>“Of course, if you don’t want to go hunting for my stuff, you could always get Wolfie to get them for you. But that’s your business with him,”</i> [heshe] adds.", parse);
+					Text.NL();
+					Text.Add("You thank Rosalin for agreeing to help you and promise [himher] you’ll be back when you have the ingredients [heshe] needs.", parse);
+					Text.Flush();
+					Gui.NextPrompt();
+				}, enabled : true,
+				tooltip : Text.Parse(tooltip, parse)
+			});
+		}
 	}
 	if(party.InParty(terry) && terry.flags["TF"] & Terry.TF.TriedItem && !(terry.flags["TF"] & Terry.TF.Rosalin)) {
 		options.push({ nameStr : "Terry",
@@ -629,6 +688,66 @@ Scenes.Rosalin.TalkPrompt = function() {
 	});
 	*/
 	Gui.SetButtonsFromList(options, true, Scenes.Rosalin.Interact);
+}
+
+Scenes.Rosalin.BrewAnusol = function() {
+	
+	
+	var racescore = new RaceScore(rosalin.body);
+	var compScore = rosalin.origRaceScore.Compare(racescore);
+	
+	var parse = {
+		race   : function() { return rosalin.raceDesc(compScore); },
+		rcocks : function() { return rosalin.MultiCockDesc(); }
+	};
+	parse = rosalin.ParserPronouns(parse);
+	parse = Text.ParserPlural(parse, rosalin.NumCocks() > 1);
+	
+	rosalin.flags["Anusol"] = Rosalin.Anusol.Brewed;
+	
+	Text.Clear();
+	if(rosalin.flags["Anusol"] >= Rosalin.Anusol.AskedForCalesHelp) {
+		Text.Add("As you approach the humming chimeric alchemist, [heshe] whirls around to face you.", parse);
+		Text.NL();
+		Text.Add("<i>“Ah, I was wondering where you had gone to! Wolfie already delivered the goods, so lets get started shall we?”</i>", parse);
+	}
+	else {
+		Text.Add("As you approach the humming chimeric alchemist, you tell [himher] that you found the ingredients [heshe] needed, holding them out as proof of your words.", parse);
+		Text.NL();
+		Text.Add("Rosalin quickly swipes the bag off your hands and checks its contents. <i>“Excellent!”</i> [heshe] purrs. <i>“Wait for a bit and I’ll get started on this.”</i>", parse);
+	}
+	Text.NL();
+	Text.Add("You nod and take a few subtle steps backwards, putting a little extra distance between yourself and Rosalin’s makeshift laboratory for safety’s sake. Just in case [hisher] experiment doesn’t quite turn out the way [heshe] expects it to.", parse);
+	Text.NL();
+	Text.Add("Rosalin begins mixing the ingredients. [HeShe] carelessly dumps both the Snake Oil and the Spring Water into a pot, then begins stirring the mixture. Once it’s turned into a bubbling mix, [heshe] adds the Fruit Seeds. You cover your eyes as there’s a small explosion, smoke pouring out of the pot as Rosalin finishes with a grin.", parse);
+	Text.NL();
+	Text.Add("<i>“Now let’s see...”</i> [HeShe] takes a bit of the resulting mix and downs it. There is a moment of inactivity before the effects kick in, sending the alchemist into an instant orgasm as [hisher] butt bucks and quivers. It’s almost as if [heshe] was being fucked anally…", parse);
+	Text.NL();
+	Text.Add("<i>“Oh yes! This! Is! Great!”</i> [heshe] says, as [heshe] achieves orgasm.", parse);
+	if(rosalin.FirstCock())
+		Text.Add(" [HisHer] [rcocks] spew[notS] forth a load of semen.", parse);
+	if(rosalin.FirstVag())
+		Text.Add(" [HisHer] pussy clenches as a flood of juices escape [himher].", parse);
+	Text.NL();
+	Text.Add("You watch the panting [race] as [heshe] shivers and quakes to a stop, moaning in release. When you think [heshe] can speak again, you ask if this experiment was a success.", parse);
+	Text.NL();
+	Text.Add("<i>“I’d say yes, here’s your share,”</i> [heshe] says, bottling up the remaining liquid and passing the bottle to you.", parse);
+	Text.NL();
+	Text.Add("Accepting the potion, you tuck it carefully away and thank [himher] for [hisher] efforts before you leave [himher] to enjoy [hisher] afterglow.", parse);
+	Text.Flush();
+	
+	if(rosalin.flags["Anusol"] < Rosalin.Anusol.AskedForCalesHelp) {
+		_.each(Items.Anusol.recipe, function(it) {
+			party.Inv().RemoveItem(it);
+		});
+	}
+	
+	party.Inv().AddItem(Items.Anusol);
+	
+	player.AddAlchemy(Items.Anusol);
+	rosalin.AddAlchemy(Items.Anusol);
+	
+	Gui.NextPrompt();
 }
 
 Scenes.Rosalin.FirstTime = function() {
@@ -709,22 +828,22 @@ Scenes.Rosalin.FirstFuck = function() {
 	
 	var parse = {
 		armorDesc     : function() { return player.ArmorDesc(); },
-		multiCockDesc : function() { return player.MultiCockDesc(); },
+		cocks : function() { return player.MultiCockDesc(); },
 		vagDesc       : function() { return player.FirstVag().Short(); },
 		anusDesc      : function() { return player.Butt().AnalShort(); },
 		earsDesc      : function() { return player.EarDesc(); },
-		breastDesc    : function() { return player.FirstBreastRow().Short(); },
+		breasts    : function() { return player.FirstBreastRow().Short(); },
 		buttDesc      : function() { return player.Butt().Short(); },
 		hipsDesc      : function() { return player.HipsDesc(); },
 		tongueDesc    : function() { return player.TongueDesc(); },
 		faceDesc      : function() { return player.FaceDesc(); },
 		
-		rVagDesc      : function() { return rosalin.FirstVag().Short(); }
+		rvag      : function() { return rosalin.FirstVag().Short(); }
 	};
 	
 	var cocks            = player.CocksThatFit(rosalin.FirstVag());
 	var p1Cock           = player.BiggestCock(cocks);
-	parse["cockDesc"]    = function() { return p1Cock.Short(); };
+	parse["cock"]    = function() { return p1Cock.Short(); };
 	parse["cockTipDesc"] = function() { return p1Cock.TipShort(); }
 	cocks                = player.CocksThatFit(cale.Butt());
 	var p2Cock           = player.BiggestCock(cocks);
@@ -740,19 +859,19 @@ Scenes.Rosalin.FirstFuck = function() {
 			
 			rosalin.relation.IncreaseStat(100, 5);
 			
-			Text.Add("Insisting that you can handle this on your own, you push the wolf back. He growls and complains a bit, but reluctantly backs off. The wolf already forgotten, you pull off your [armorDesc], revealing your [multiCockDesc]. Delighted, the horny catgirl all but throws herself at you, greedily lapping away at your [multiCockDesc].", parse);
+			Text.Add("Insisting that you can handle this on your own, you push the wolf back. He growls and complains a bit, but reluctantly backs off. The wolf already forgotten, you pull off your [armorDesc], revealing your [cocks]. Delighted, the horny catgirl all but throws herself at you, greedily lapping away at your [cocks].", parse);
 			Text.NL();
 			if(player.NumCocks() > 1) {
-				Text.Add("Deciding to only focus on one of your cocks, Rosalin decides on the biggest one she can take, your [cockDesc].", parse);
+				Text.Add("Deciding to only focus on one of your cocks, Rosalin decides on the biggest one she can take, your [cock].", parse);
 				Text.NL();
 			}
-			Text.Add("After properly lathering you up, the alchemist twirls around, rubbing her private parts against your [cockDesc], mewling needily. Not wanting to keep the lady waiting, you line up with her [rVagDesc], prying apart her soaked labia. ", parse);
+			Text.Add("After properly lathering you up, the alchemist twirls around, rubbing her private parts against your [cock], mewling needily. Not wanting to keep the lady waiting, you line up with her [rvag], prying apart her soaked labia. ", parse);
 			if(p1Cock.length.Get() < 25)
 				Text.Add("<i>“J-just take me already! I <b>need</b> you inside me!”</i> she moans.", parse);
 			else
 				Text.Add("<i>“So <b>big</b>,”</i> she moans. <i>“B-be gentle with me, okay?”</i> Even in her aroused state, she looks slightly worried about your size.", parse);
 			Text.NL();
-			Text.Add("Feels like you're not the first one to pound this kitty; her [rVagDesc] easily give way to your [cockDesc], her walls clamping down around your length hungrily. <i>“Yes! <b>Yes!</b> Breed me!”</i> Rosalin eagerly begins to grind against your crotch, her soaking hole swallowing more and more of you with each thrust.", parse);
+			Text.Add("Feels like you're not the first one to pound this kitty; her [rvag] easily give way to your [cock], her walls clamping down around your length hungrily. <i>“Yes! <b>Yes!</b> Breed me!”</i> Rosalin eagerly begins to grind against your crotch, her soaking hole swallowing more and more of you with each thrust.", parse);
 			Text.NL();
 			
 			Sex.Vaginal(player, rosalin);
@@ -763,7 +882,7 @@ Scenes.Rosalin.FirstFuck = function() {
 			Text.NL();
 			Text.Add("Around you, the nomad camp continues with its usual activities, though there are a few amused glances cast in your direction. Apparently, petting the cat is a regular event here. Even so, you intend to make the experience a memorable one for her.", parse);
 			Text.NL();
-			Text.Add("The catgirl's breaths come in short grunts, in time with your rhythmic pumping. With a final loud yowl, she contracts around your [cockDesc], milking you for all she is worth. You let out a cry of your own, as you paint her well-used cavern white. ", parse);
+			Text.Add("The catgirl's breaths come in short grunts, in time with your rhythmic pumping. With a final loud yowl, she contracts around your [cock], milking you for all she is worth. You let out a cry of your own, as you paint her well-used cavern white. ", parse);
 			if(player.CumOutput() > 3)
 				Text.Add("<i>“Y-yes, get me pregnant!”</i> she screams, loud enough for the whole camp to hear, as load upon potent load fills her up, some starting to leak back out.", parse);
 			else
@@ -816,14 +935,14 @@ Scenes.Rosalin.FirstFuck = function() {
 				func : function() {
 					Text.Add("Amused, you aid her in undressing you, exposing your [genDesc]. The catgirl quickly adjusts to pleasuring both of you, ", parse);
 					if(player.FirstCock())
-						Text.Add("alternating between sucking you off and stroking your [multiCockDesc].", parse);
+						Text.Add("alternating between sucking you off and stroking your [cocks].", parse);
 					else if(player.FirstVag())
 						Text.Add("licking and lapping at your [vagDesc], gently probing the orifice with two fingers.", parse);
 					else
 						Text.Add("gently probing your [anusDesc] with one finger.", parse);
 					
 					Text.NL();
-					Text.Add("<i>“I'm taking her first,”</i> the wolf-morph growls, asserting himself. Roughly pushing the mewling girl on her back, he lines up his cock with her [rVagDesc], spearing her in one smooth motion. Grunting, the wolf pushes himself all the way inside, pushing his knot into the catgirl.", parse);
+					Text.Add("<i>“I'm taking her first,”</i> the wolf-morph growls, asserting himself. Roughly pushing the mewling girl on her back, he lines up his cock with her [rvag], spearing her in one smooth motion. Grunting, the wolf pushes himself all the way inside, pushing his knot into the catgirl.", parse);
 					Text.NL();
 					Text.Add("Slightly miffed at being left out, you play with yourself while waiting for the wolf to finish.", parse);
 					Text.Flush();
@@ -848,7 +967,7 @@ Scenes.Rosalin.FirstFuck = function() {
 							
 							Text.Add("Shrugging, you shuffle around so that you are straddling the alchemist's face, your back to the wolf. Without hesitation, she leans in, ", parse);
 							if(player.FirstCock())
-								Text.Add("sucking your [cockDesc] into her eager mouth. ", parse);
+								Text.Add("sucking your [cock] into her eager mouth. ", parse);
 							else if(player.FirstVag())
 								Text.Add("burying her tongue in your wet [vagDesc]. ", parse);
 							else
@@ -856,13 +975,13 @@ Scenes.Rosalin.FirstFuck = function() {
 							
 							Text.Add("Thoroughly enjoying yourself, you ride her face, rocking your hips back and forth.", parse);
 							if(p1Cock && p1Cock.length.Get() > 20)
-								Text.Add(" With little effort, your [cockDesc] is firmly lodged in her throat.", parse);
+								Text.Add(" With little effort, your [cock] is firmly lodged in her throat.", parse);
 							Text.NL();
-							Text.Add("The wolf-morph leans against you, playfully nibbling at one of your [earsDesc] before continuing his pounding. Before long, it seems like he's reaching his limit, howling as he unloads inside the catgirl. He reaches his arms around you, pulling you into a rough embrace while caressing your [breastDesc]. <i>“Quite the little minx, isn't she?”</i> he grunts, resting against your back as his knot swells, locking him inside the catgirl.", parse);
+							Text.Add("The wolf-morph leans against you, playfully nibbling at one of your [earsDesc] before continuing his pounding. Before long, it seems like he's reaching his limit, howling as he unloads inside the catgirl. He reaches his arms around you, pulling you into a rough embrace while caressing your [breasts]. <i>“Quite the little minx, isn't she?”</i> he grunts, resting against your back as his knot swells, locking him inside the catgirl.", parse);
 							Text.NL();
 							Text.Add("Said minx quickly brings you to your own orgasm, ", parse);
 							if(player.FirstCock()) {
-								Text.Add("milking your [cockDesc] for its seed.", parse);
+								Text.Add("milking your [cock] for its seed.", parse);
 								if(player.NumCocks() > 1)
 									Text.Add(" Your other dick[s] also erupt[notS], drenching the slutty catgirl, strands of white staining her teal hair.",
 										{s    : (player.NumCocks() == 2) ? "" : "s",
@@ -907,7 +1026,7 @@ Scenes.Rosalin.FirstFuck = function() {
 					Text.NL();
 					Text.Add("In what seems to be an attempt to top you, Rosalin starts to give the morph a titjob, massaging his length with her soft mounds. ", parse);
 					if(player.FirstBreastRow().size.Get() >= 10)
-						Text.Add("Not to be outdone, you mash your own [breastDesc] against Rosalin's, the wolf's cock suddenly enveloped between four soft cushions.", parse);
+						Text.Add("Not to be outdone, you mash your own [breasts] against Rosalin's, the wolf's cock suddenly enveloped between four soft cushions.", parse);
 					else
 						Text.Add("Unable to match her in size, you content yourself with sucking at the canid's cock tip.", parse);
 					Text.NL();
@@ -971,16 +1090,16 @@ Scenes.Rosalin.FirstFuck = function() {
 					func : function() {
 						player.subDom.IncreaseStat(100, 3);
 						
-						Text.Add("Rather than waiting for him to get ready, you pull out your [multiCockDesc], circling the prone catgirl and pulling at her tail insistently. Mouth clamped tight around several inches of canid cock, she nonetheless raises her butt, arching her back to ease your access as you grin at the glowering wolf. First come, first served. Still, with his dick buried inside the catgirl's throat, he can hardly complain.", parse);
+						Text.Add("Rather than waiting for him to get ready, you pull out your [cocks], circling the prone catgirl and pulling at her tail insistently. Mouth clamped tight around several inches of canid cock, she nonetheless raises her butt, arching her back to ease your access as you grin at the glowering wolf. First come, first served. Still, with his dick buried inside the catgirl's throat, he can hardly complain.", parse);
 						Text.NL();
-						Text.Add("Quickly lining yourself up with Rosalin's [rVagDesc], you push yourself inside her slick, hot furnace. Not virgin-tight, though. <i>“I'm afraid I'll have to disappoint you if you thought you got there first,”</i> the wolf grunts, grinning back at you. Apparently the catgirl has been around.", parse);
+						Text.Add("Quickly lining yourself up with Rosalin's [rvag], you push yourself inside her slick, hot furnace. Not virgin-tight, though. <i>“I'm afraid I'll have to disappoint you if you thought you got there first,”</i> the wolf grunts, grinning back at you. Apparently the catgirl has been around.", parse);
 						Text.NL();
 						
 						Sex.Vaginal(player, rosalin);
 						rosalin.FuckVag(rosalin.FirstVag(), p1Cock, 4);
 						player.Fuck(p1Cock, 4);
 						
-						Text.Add("Well, no matter. Setting a rhythm, you begin to pound away at the moaning alchemist, gripping her butt tightly lest her legs give out. Spit-roasted, Rosalin soon reaches her first climax, her [rVagDesc] contracting and convulsing around your [cockDesc]. The pulsing member quickly deposits its load inside her.", parse);
+						Text.Add("Well, no matter. Setting a rhythm, you begin to pound away at the moaning alchemist, gripping her butt tightly lest her legs give out. Spit-roasted, Rosalin soon reaches her first climax, her [rvag] contracting and convulsing around your [cock]. The pulsing member quickly deposits its load inside her.", parse);
 						Text.NL();
 
 						var cum = player.OrgasmCum();
@@ -988,12 +1107,12 @@ Scenes.Rosalin.FirstFuck = function() {
 						Text.Add("Pulling out, you allow the wolf to have a go at her. ", parse);
 						
 						if(cum > 3)
-							Text.Add("He almost looks a bit intimidated, seeing your plentiful spunk leak out of Rosalin's [rVagDesc]. <i>“Huh, you don't pull any punches, do you?”</i>", parse);
+							Text.Add("He almost looks a bit intimidated, seeing your plentiful spunk leak out of Rosalin's [rvag]. <i>“Huh, you don't pull any punches, do you?”</i>", parse);
 						else
 							Text.Add("<i>“Got her nice and slick for me eh?”</i>", parse);
 						Text.Add(" Without further ado, he hilts his throbbing cock inside the catgirl. Looking pretty close to his limit after his deepthroat treatment, he erratically ruts at her, trying to force his thick knot inside her.", parse);
 						Text.NL();
-						Text.Add("The whole display is getting you raunchy again, your [cockDesc] rising to attention...", parse);
+						Text.Add("The whole display is getting you raunchy again, your [cock] rising to attention...", parse);
 						Text.Flush();
 
 						player.AddLustFraction(-1);
@@ -1004,7 +1123,7 @@ Scenes.Rosalin.FirstFuck = function() {
 						options.push({ nameStr : "Oral",
 							func : function() {
 								Text.Clear();
-								Text.Add("Sauntering around to the panting alchemist's face, you present Rosalin with a replacement for the recently removed canid cock. She is quick to take up the challenge, enclosing your [cockDesc] with her mouth, allowing her tongue to quickly lap at the [cockTipDesc], hoping to get a treat.", parse);
+								Text.Add("Sauntering around to the panting alchemist's face, you present Rosalin with a replacement for the recently removed canid cock. She is quick to take up the challenge, enclosing your [cock] with her mouth, allowing her tongue to quickly lap at the [cockTipDesc], hoping to get a treat.", parse);
 								Text.NL();
 								Text.Add("Howling, the wolf-morph hunches over the alchemist, blasting her already sticky insides with even more seed. The whole gathering quickly deteriorates into a mess of cum and feminine fluids, as both you and Rosalin make your own contributions.", parse);
 
@@ -1050,23 +1169,23 @@ Scenes.Rosalin.FirstFuckPegWolf = function() {
 	
 	var parse = {
 		armorDesc     : function() { return player.ArmorDesc(); },
-		multiCockDesc : function() { return player.MultiCockDesc(); },
+		cocks : function() { return player.MultiCockDesc(); },
 		vagDesc       : function() { return player.FirstVag().Short(); },
 		anusDesc      : function() { return player.Butt().AnalShort(); },
 		earsDesc      : function() { return player.EarDesc(); },
-		breastDesc    : function() { return player.FirstBreastRow().Short(); },
+		breasts    : function() { return player.FirstBreastRow().Short(); },
 		buttDesc      : function() { return player.Butt().Short(); },
 		hipsDesc      : function() { return player.HipsDesc(); },
 		tongueDesc    : function() { return player.TongueDesc(); },
 		faceDesc      : function() { return player.FaceDesc(); },
 		
-		rVagDesc      : function() { return rosalin.FirstVag().Short(); },
+		rvag      : function() { return rosalin.FirstVag().Short(); },
 		wAnusDesc     : function() { return cale.Butt().AnalShort(); }
 	};
 	
 	var cocks         = player.CocksThatFit(cale.Butt());
 	var p1Cock        = player.BiggestCock(cocks);
-	parse.cockDesc    = function() { return p1Cock.Short(); };
+	parse.cock    = function() { return p1Cock.Short(); };
 	parse.cockTipDesc = function() { return p1Cock.TipShort(); }
 	
 	Text.Add("A naughty plan formulating in your head, you settle back and wait, stroking yourself as the morph mercilessly fucks Rosalin. You can hardly wait to have your fun...", parse);
@@ -1075,7 +1194,7 @@ Scenes.Rosalin.FirstFuckPegWolf = function() {
 	Text.NL();
 	Text.Add("The wolf's thrusts slow down, his movements impeded by the trapping knot. Frustrated, he tries to rut against Rosalin, dragging the moaning catgirl across the ground with each trust. If there ever was a perfect time to strike, now would be it, with the wolf completely at your mercy. You stroke his fur fondly, groping the immobilized wolf shamelessly.", parse);
 	Text.NL();
-	Text.Add("His annoyed growl changes to a slightly fearful whimper as you grab one of his buttcheeks, stroking yourself with your other hand. <i>“J-just what do you think yo-”</i> he begins uncertainly, his complaints deteriorating into an incoherent drawn-out moan as you bury your [cockDesc] in his ass.", parse);
+	Text.Add("His annoyed growl changes to a slightly fearful whimper as you grab one of his buttcheeks, stroking yourself with your other hand. <i>“J-just what do you think yo-”</i> he begins uncertainly, his complaints deteriorating into an incoherent drawn-out moan as you bury your [cock] in his ass.", parse);
 	Text.NL();
 	
 	Sex.Anal(player, cale);
@@ -1155,17 +1274,11 @@ Scenes.Rosalin.CombineCallback = function(item) {
 	
 	var parse = {
 		raceDesc       : function() { return rosalin.raceDesc(compScore); },
-		rBreastDesc    : function() { return rosalin.FirstBreastRow().Short(); },
-		rNipsDesc      : function() { return rosalin.FirstBreastRow().NipsShort(); },
-		rCockDesc      : function() { return rosalin.FirstCock().Short(); },
-		rCockTip       : function() { return rosalin.FirstCock().TipShort(); },
-		rMultiCockDesc : function() { return rosalin.MultiCockDesc(); },
-		rVagDesc       : function() { return rosalin.FirstVag().Short(); },
-		rClitDesc      : function() { return rosalin.FirstVag().ClitShort(); },
-		rHairDesc      : function() { return rosalin.Hair().Short(); },
-		rTailDesc      : function() { return rosalin.HasTail().Short(); },
-		breastDesc     : function() { return player.FirstBreastRow().Short(); }
+		
+		breasts     : function() { return player.FirstBreastRow().Short(); }
 	};
+	parse = player.ParserTags(parse);
+	parse = rosalin.ParserTags(parse, "r");
 	parse = rosalin.ParserPronouns(parse);
 	
 	player.AddAlchemy(item);
@@ -1222,7 +1335,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				Text.Add("<i>“Down the hatch!”</i> Rosalin gleefully exclaims, drinking the potion in one go.", parse);
 				Text.NL();
 				if(rosalin.FirstCock()) {
-					Text.Add("<i>“It was fun while it lasted, I guess,”</i> [heshe] reminisces, watching [hisher] [rCockDesc] shrink back into [hisher] body.", parse);
+					Text.Add("<i>“It was fun while it lasted, I guess,”</i> [heshe] reminisces, watching [hisher] [rcock] shrink back into [hisher] body.", parse);
 					Text.NL();
 				}
 				parse["randomlongershorter"] = Math.random() > 0.5 ? "longer" : "shorter";
@@ -1289,7 +1402,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				var scenes = new EncounterTable();
 				// EARS
 				scenes.AddEnc(function() {
-					Text.Add("A pair of floppy rabbit ears pop out of Rosalin's [rHairDesc]. Cute!", parse);
+					Text.Add("A pair of floppy rabbit ears pop out of Rosalin's [rhair]. Cute!", parse);
 					TF.SetRaceOne(rosalin.Ears(), Race.Rabbit);
 					Text.NL();
 				}, 1.0, function() { return rosalin.Ears().race != Race.Rabbit; });
@@ -1301,7 +1414,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				}, 1.0, function() { var tail = rosalin.HasTail(); return !tail || (tail.race != Race.Rabbit); });
 				scenes.AddEnc(function() {
 					parse["oneof"] = rosalin.NumCocks() > 1 ? "One of " : "";
-					Text.Add("[oneof]Rosalin's [rMultiCockDesc] shifts into a smooth rabbit-like cock.", parse);
+					Text.Add("[oneof]Rosalin's [rcocks] shifts into a smooth rabbit-like cock.", parse);
 					TF.SetRaceOne(rosalin.AllCocks(), Race.Rabbit);
 					Text.NL();
 				}, 1.0, function() {
@@ -1425,7 +1538,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 					if(changed == TF.Effect.Changed) {
 						parse["quantity"] = rosalin.NumCocks() > 1 ? Text.Quantify(rosalin.NumCocks()) + " of " : "";
 						Text.NL();
-						Text.Add("Not long after [heshe] has finished the potion, [allof]the alchemist's [rMultiCockDesc] jerk[notS] to attention, hard as rock. Changing in coloration and size, [itThey] quickly transform[notS] into a [quantity]horsecock[s], complete with sheath[s] and flared tip[s].", parse);
+						Text.Add("Not long after [heshe] has finished the potion, [allof]the alchemist's [rcocks] jerk[notS] to attention, hard as rock. Changing in coloration and size, [itThey] quickly transform[notS] into a [quantity]horsecock[s], complete with sheath[s] and flared tip[s].", parse);
 					}
 					
 					var size = false;
@@ -1441,11 +1554,11 @@ Scenes.Rosalin.CombineCallback = function(item) {
 					}
 					if(size) {
 						Text.NL();
-						Text.Add("Rosalin's [rMultiCockDesc] shudder[notS], the stiff dick[s] growing significantly longer and thicker.", parse);
+						Text.Add("Rosalin's [rcocks] shudder[notS], the stiff dick[s] growing significantly longer and thicker.", parse);
 					}
 					
 					if(rosalin.FirstVag() && Math.random() < 0.2) {
-						parse["tail"] = rosalin.HasTail() ? Text.Parse(" and lifting [hisher][rTailDesc]", parse) : "";
+						parse["tail"] = rosalin.HasTail() ? Text.Parse(" and lifting [hisher][rtail]", parse) : "";
 						Text.NL();
 						Text.Add("<i>“H-ah,”</i> the alchemist pants, [hisher] knees quivering. <i>“Would you look at that!”</i> Spinning around[tail], the former herm presents you with [hisher] crotch. Underneath [hisher] heavy balls, the skin where [heshe] previously had a vagina is smooth and unbroken.", parse);
 						Text.NL();
@@ -1457,7 +1570,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 						}
 					}
 					Text.NL();
-					Text.Add("<i>“Now then, I'm feeling up for a test run,”</i> Rosalin grins, brandishing [hisher] [rMultiCockDesc].", parse);
+					Text.Add("<i>“Now then, I'm feeling up for a test run,”</i> Rosalin grins, brandishing [hisher] [rcocks].", parse);
 				}
 				else {
 					Text.Add("<i>“Hmm, so you'd like me to drink this? Even knowing what it will do to me?”</i> Rosalin grins at you smugly. <i>“Couldn't stand to be without my dick for long, huh?”</i> Not waiting to hear your response, [heshe] quickly chugs down the potion.", parse);
@@ -1537,7 +1650,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				var scenes = new EncounterTable();
 				// EARS
 				scenes.AddEnc(function() {
-					Text.Add("A pair of equine ears pop out of Rosalin's [rHairDesc], perking up to attention. Cute!", parse);
+					Text.Add("A pair of equine ears pop out of Rosalin's [rhair], perking up to attention. Cute!", parse);
 					TF.SetRaceOne(rosalin.Ears(), Race.Horse);
 					Text.NL();
 				}, 1.0, function() { return rosalin.Ears().race != Race.Horse; });
@@ -1549,7 +1662,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				}, 1.0, function() { var tail = rosalin.HasTail(); return !tail || (tail.race != Race.Horse); });
 				scenes.AddEnc(function() {
 					parse["oneof"] = rosalin.NumCocks() > 1 ? "one of " : "";
-					Text.Add("Rosalin groans slightly as [oneof][hisher] [rMultiCockDesc] shifts into a more equine form, complete with a flat, flared head.", parse);
+					Text.Add("Rosalin groans slightly as [oneof][hisher] [rcocks] shifts into a more equine form, complete with a flat, flared head.", parse);
 					TF.SetRaceOne(rosalin.AllCocks(), Race.Horse);
 					Text.NL();
 				}, 1.0, function() {
@@ -1570,7 +1683,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				var state = RosalinSexState.Regular;
 				if(rosalin.FirstCock()) {
 					parse["these"] = rosalin.NumCocks() > 1 ? "These aren't" : "This isn't";
-					Text.Add("<i>“Ah, just the right stuff!”</i> The arousing effects are immediate, Rosalin's [rMultiCockDesc] peeking out from beneath [hisher] clothes. <i>“[these] going to go down before I get a good fuck. You up for it?”</i> The [raceDesc] begins stroking [himher]self, awaiting your response.", parse);
+					Text.Add("<i>“Ah, just the right stuff!”</i> The arousing effects are immediate, Rosalin's [rcocks] peeking out from beneath [hisher] clothes. <i>“[these] going to go down before I get a good fuck. You up for it?”</i> The [raceDesc] begins stroking [himher]self, awaiting your response.", parse);
 					state = RosalinSexState.Rut;
 				}
 				else {
@@ -1659,7 +1772,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 					return unchanged;
 				});
 				scenes.AddEnc(function() {
-					Text.Add("<i>“I... I have heard about this,”</i> Rosalin gasps as [hisher] [rCockDesc] suddenly splits, two identical members forming. <i>“D-double the fun for you!”</i>", parse);
+					Text.Add("<i>“I... I have heard about this,”</i> Rosalin gasps as [hisher] [rcock] suddenly splits, two identical members forming. <i>“D-double the fun for you!”</i>", parse);
 					rosalin.AllCocks().push(rosalin.FirstCock().Clone());
 					Text.NL();
 				}, 1.0, function() { return rosalin.NumCocks() == 1; });
@@ -1708,7 +1821,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				Text.Clear();
 				Items.Bovia.Use(player);
 				if(player.Lactation()) {
-					Text.Add("<i>“Would be a shame to let all that milk go to waste, wouldn't it?”</i> Rosalin eyes your dripping [breastDesc] hungrily.", parse);
+					Text.Add("<i>“Would be a shame to let all that milk go to waste, wouldn't it?”</i> Rosalin eyes your dripping [breasts] hungrily.", parse);
 					Text.Flush();
 					Gui.NextPrompt(function() {
 						Scenes.Rosalin.SexPrompt(RosalinSexState.Regular);
@@ -1743,17 +1856,17 @@ Scenes.Rosalin.CombineCallback = function(item) {
 					Text.NL();
 				}, 1.0, function() { var horns = rosalin.HasHorns(); return !horns || (horns.race != Race.Cow); });
 				scenes.AddEnc(function() {
-					Text.Add("A pair of bovine ears pop out of Rosalin's [rHairDesc]! <i>“Moo.”</i>", parse);
+					Text.Add("A pair of bovine ears pop out of Rosalin's [rhair]! <i>“Moo.”</i>", parse);
 					TF.SetRaceOne(rosalin.Ears(), Race.Cow);
 					Text.NL();
 				}, 1.0, function() { return rosalin.Ears().race != Race.Cow; });
 				scenes.AddEnc(function() {
-					Text.Add("<i>“Won't these get in the way?”</i> Rosalin ponders, feeling [hisher] expanding [rBreastDesc].", parse);
+					Text.Add("<i>“Won't these get in the way?”</i> Rosalin ponders, feeling [hisher] expanding [rbreasts].", parse);
 					rosalin.FirstBreastRow().size.IncreaseStat(40, 10);
 					Text.NL();
 				}, 1.0, function() { return rosalin.FirstBreastRow().size.Get() < 40; });
 				scenes.AddEnc(function() {
-					Text.Add("Rosalin's [rNipsDesc] starts dripping milk. [HeShe] experimentally gives the liquid a taste. <i>“So yummy!”</i> [heshe] exclaims excitedly, <i>“I wonder if I can use this in cooking?”</i>", parse);
+					Text.Add("Rosalin's [rnips] starts dripping milk. [HeShe] experimentally gives the liquid a taste. <i>“So yummy!”</i> [heshe] exclaims excitedly, <i>“I wonder if I can use this in cooking?”</i>", parse);
 					rosalin.lactHandler.lactationRate.IncreaseStat(10, 1);
 					Text.NL();
 				}, 1.0, function() { return true; });
@@ -1894,7 +2007,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				}, 1.0, function() { return rosalin.Ears().race != Race.Dog; });
 				scenes.AddEnc(function() {
 					parse["oneof"] = rosalin.NumCocks() > 1 ? "one of " : "";
-					Text.Add("<i>“Ahn!”</i> Rosalin exclaims, moaning loudly as [hisher] hands go to [hisher] crotch. Pulling [hisher] dress up, [heshe] reveals that [oneof][hisher] [rMultiCockDesc] has turned into a pointed canine cock, complete with a knot.", parse);
+					Text.Add("<i>“Ahn!”</i> Rosalin exclaims, moaning loudly as [hisher] hands go to [hisher] crotch. Pulling [hisher] dress up, [heshe] reveals that [oneof][hisher] [rcocks] has turned into a pointed canine cock, complete with a knot.", parse);
 					var ret = {};
 					TF.SetRaceOne(rosalin.AllCocks(), Race.Dog, ret);
 					if(ret.bodypart) ret.bodypart.knot = 1;
@@ -1999,7 +2112,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				}, 1.0, function() { return rosalin.Ears().race != Race.Wolf; });
 				scenes.AddEnc(function() {
 					parse["oneof"] = rosalin.NumCocks() > 1 ? "one of " : "";
-					Text.Add("<i>“Ahn!”</i> Rosalin exclaims, moaning loudly as [hisher] hands go to [hisher] crotch. Pulling [hisher] dress up, [heshe] reveals that [oneof][hisher] [rMultiCockDesc] has turned into a pointed canine cock, complete with a knot.", parse);
+					Text.Add("<i>“Ahn!”</i> Rosalin exclaims, moaning loudly as [hisher] hands go to [hisher] crotch. Pulling [hisher] dress up, [heshe] reveals that [oneof][hisher] [rcocks] has turned into a pointed canine cock, complete with a knot.", parse);
 					var ret = {};
 					TF.SetRaceOne(rosalin.AllCocks(), Race.Wolf, ret);
 					if(ret.bodypart) ret.bodypart.knot = 1;
@@ -2103,7 +2216,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				}, 1.0, function() { return rosalin.Ears().race != Race.Fox; });
 				scenes.AddEnc(function() {
 					parse["oneof"] = rosalin.NumCocks() > 1 ? "one of " : "";
-					Text.Add("<i>“Ahn!”</i> Rosalin exclaims, moaning loudly as [hisher] hands go to [hisher] crotch. Pulling [hisher] dress up, [heshe] reveals that [oneof][hisher] [rMultiCockDesc] has turned into a pointed canine cock, complete with a knot.", parse);
+					Text.Add("<i>“Ahn!”</i> Rosalin exclaims, moaning loudly as [hisher] hands go to [hisher] crotch. Pulling [hisher] dress up, [heshe] reveals that [oneof][hisher] [rcocks] has turned into a pointed canine cock, complete with a knot.", parse);
 					var ret = {};
 					TF.SetRaceOne(rosalin.AllCocks(), Race.Fox, ret);
 					if(ret.bodypart) ret.bodypart.knot = 1;
@@ -2451,6 +2564,84 @@ Scenes.Rosalin.CombineCallback = function(item) {
 		}
 		prompt();
 	}
+	else if(item == Items.Anusol) {
+		Text.Add("<i>“One butt-lotion coming up!”</i>", parse);
+		Text.NL();
+		Text.Add("Before long, the alchemist presents you with a bottle containing a greenish fluid. It’s somewhat oily, and almost clear-looking. It looks almost like juice from some fruit, but the lack of smell instantly throws that hypothesis out of the window.", parse);
+		Text.NL();
+		Text.Add("<i>“Wonder what this one’ll do,”</i> [heshe] muses, handing the Anusol to you.", parse);
+		Text.Flush();
+		
+		//[You][Rosalin][Discard]
+		var options = new Array();
+		options.push({ nameStr : "You",
+			func : function() {
+				Text.Clear();
+				Items.Anusol.Use(player);
+				Text.Add("You take the oily green fluid a little cautiously, then slowly drink it down. No sooner have you finished off the last of it, when you drop the bottle in shock as a tingling sensation sweeps across your [skin]. Warmth emanates from deep inside of you, and your arms sweep around your stomach as you moan. ", parse);
+				Text.NL();
+				Text.Add("The feelings seem to be coming from your [anus]... a sort of prickling that sends pleasure coiling up your spine, making you wriggle and shake your [hips]. It grows stronger and stronger, and you pant heavily in desire. It feels like you are being fucked by the biggest, longest, hardest cock you can image - a dream cock that is ravaging your ass with unnatural expertise, blotting out everything but the feelings sweeping through you.", parse);
+				Text.NL();
+				parse["botArmor"] = player.LowerArmorDesc();
+				Text.Add("You don’t even recognize where you are until you finally cum, snapping abruptly back to reality with your [botArmor] drenched in fluids. Rosalin simply smiles happily at you, leaving you to shuffle there in the puddle you have made.", parse);
+				Text.NL();
+				Text.Flush();
+				Gui.NextPrompt(function() {
+					Alchemy.AlchemyPrompt(rosalin, party.inventory, Scenes.Rosalin.Interact, Scenes.Rosalin.CombineCallback);
+				});
+			}, enabled : true,
+			tooltip : "Drink the potion yourself."
+		});
+		options.push({ nameStr : "Rosalin",
+			func : function() {
+				Text.Clear();
+				
+				var scenes = new EncounterTable();
+				scenes.AddEnc(function() {
+					Text.Add("The [raceDesc] lets out an excited squeal and eagerly knocks back the potion. [HisHer] whole body quivers and [heshe] nearly falls forward, hands thumping onto the desk to support [hisher] weight. [HeShe] arches [hisher] back and moans, buttocks swaying and thrusting, [rtail] flicking in agitation as [heshe] reacts to some invisible cock roughly pounding [hisher] ass.", parse);
+					Text.NL();
+					if(rosalin.FirstCock()) {
+						parse["notS"] = rosalin.NumCocks() > 1 ? "" : "s";
+						Text.Add("Rosalin’s [rcocks] stand[notS] erect, drooling thick ropes of pre-cum from [hisher] anal contractions, the potion’s effects kicking [hisher] prostate into overdrive.", parse);
+						Text.NL();
+					}
+					if(rosalin.FirstVag()) {
+						Text.Add("The potion has the [raceDesc] so hot and horny that you can see [hisher] pussy watering in sympathy, drooling a veritable waterfall of feminine fluids.", parse);
+						Text.NL();
+					}
+					var gen = "";
+					if(rosalin.FirstCock()) gen += "[rcocks] firing";
+					if(rosalin.FirstCock() && rosalin.FirstVag()) gen += " and ";
+					if(rosalin.FirstVag()) gen += "pussy gushing";
+					parse["gen"] = Text.Parse(gen, parse);
+					Text.Add("Rosalin gasps loudly, repeated sharp moans bubbling from [hisher] throat before giving voice to a high-pitched scream of ecstasy as [heshe] experiences an obvious assgasm, [gen] in sympathy. Fluids stain the ground as [heshe] just keeps writhing in pleasure, before [heshe] finally trails off in a long, low sigh, slumping bonelessly to [hisher] knees.", parse);
+					Text.NL();
+					Text.Add("<i>“Mmm, I just love this potion... your loss if you don’t want to give it a try,”</i> [heshe] purrs, then lets out a satisfied giggle.", parse);
+				}, 1.0, function() { return true; });
+				
+				scenes.Get();
+				
+				Text.NL();
+				Text.Flush();
+				Gui.NextPrompt(function() {
+					Scenes.Rosalin.SexPrompt(RosalinSexState.Regular);
+				});
+			}, enabled : true,
+			tooltip : "Offer the potion to Rosalin."
+		});
+		options.push({ nameStr : "Discard",
+			func : function() {
+				Text.Clear();
+				Text.Add("Shaking your head, you decide to discard the results of the experiment. Rosalin looks slightly disappointed as you pour the contents of the bottle on the ground. The plants around her lab open wide, pink-red blooms, leaking visible rivers of nectar as the potion is soaked up into them.", parse);
+				Text.Flush();
+				Gui.NextPrompt(function() {
+					Alchemy.AlchemyPrompt(rosalin, party.inventory, Scenes.Rosalin.Interact, Scenes.Rosalin.CombineCallback);
+				});
+			}, enabled : true,
+			tooltip : "Pour out the potion."
+		});
+		Gui.SetButtonsFromList(options);
+	}
 
 	//TODO MORE TFS
 	/*
@@ -2552,21 +2743,21 @@ Scenes.Rosalin.SexPrompt = function(state) {
 	
 	var parse = {
 		raceDesc       : function() { return rosalin.raceDesc(compScore); },
-		rBreastDesc    : function() { return rosalin.FirstBreastRow().Short(); },
-		rNipplesDesc   : function() { return rosalin.FirstBreastRow().NipsShort(); },
-		rCockDesc      : function() { return rosalin.FirstCock().Short(); },
+		rbreasts    : function() { return rosalin.FirstBreastRow().Short(); },
+		rnips   : function() { return rosalin.FirstBreastRow().NipsShort(); },
+		rcock      : function() { return rosalin.FirstCock().Short(); },
 		rCockLen       : function() { return rosalin.FirstCock().Desc().len; },
-		rCockTip       : function() { return rosalin.FirstCock().TipShort(); },
-		rMultiCockDesc : function() { return rosalin.MultiCockDesc(); },
-		rVagDesc       : function() { return rosalin.FirstVag().Short(); },
-		rClitDesc      : function() { return rosalin.FirstVag().ClitShort(); },
+		rcockTip       : function() { return rosalin.FirstCock().TipShort(); },
+		rcocks : function() { return rosalin.MultiCockDesc(); },
+		rvag       : function() { return rosalin.FirstVag().Short(); },
+		rclit      : function() { return rosalin.FirstVag().ClitShort(); },
 		rBallsDesc     : function() { return rosalin.BallsDesc(); },
 		rButtDesc      : function() { return rosalin.Butt().Short(); },
-		rAnusDesc      : function() { return rosalin.Butt().AnalShort(); },
-		rHairDesc      : function() { return rosalin.Hair().Short(); },
-		rTailDesc      : function() { return rosalin.HasTail().Short(); },
-		rLegsDesc      : function() { return rosalin.LegsDesc(); },
-		rSkinDesc      : function() { return rosalin.SkinDesc(); },
+		ranus      : function() { return rosalin.Butt().AnalShort(); },
+		rhair      : function() { return rosalin.Hair().Short(); },
+		rtail      : function() { return rosalin.HasTail().Short(); },
+		rlegs      : function() { return rosalin.LegsDesc(); },
+		rskin      : function() { return rosalin.SkinDesc(); },
 		rEyesDesc      : function() { return rosalin.EyeDesc() + "s"; },
 		
 		wName          : cale.name,
@@ -2576,19 +2767,19 @@ Scenes.Rosalin.SexPrompt = function(state) {
 		boygirl        : player.body.Gender() == Gender.male ? "boy" : "girl",
 		skinDesc       : function() { return player.SkinDesc(); },
 		ballsDesc      : function() { return player.Balls().Short(); },
-		breastDesc     : function() { return player.FirstBreastRow().Short(); },
+		breasts     : function() { return player.FirstBreastRow().Short(); },
 		nipsDesc       : function() { return player.FirstBreastRow().NipsShort(); },
 		vagDesc        : function() { return player.FirstVag().Short(); },
 		clitDesc       : function() { return player.FirstVag().ClitShort(); },
-		cockDesc       : function() { return p1Cock.Short(); },
-		cockDesc2      : function() { return p2Cock.Short(); },
+		cock       : function() { return p1Cock.Short(); },
+		cock2      : function() { return p2Cock.Short(); },
 		cockTip        : function() { return p1Cock.TipShort(); },
 		cockTip2       : function() { return p2Cock.TipShort(); },
 		knotDesc       : function() { return p1Cock.KnotShort(); },
 		knotDesc2      : function() { return p2Cock.KnotShort(); },
 		tailDesc       : function() { return player.HasTail().Short(); },
 		legsDesc       : function() { return player.LegsDesc(); },
-		multiCockDesc  : function() { return player.MultiCockDesc(); },
+		cocks  : function() { return player.MultiCockDesc(); },
 		tongueDesc     : function() { return player.TongueDesc(); },
 		hairDesc       : function() { return player.Hair().Short(); },
 		armorDesc      : function() { return player.ArmorDesc(); },
@@ -2608,10 +2799,10 @@ Scenes.Rosalin.SexPrompt = function(state) {
 				Text.Clear();
 				p1Cock     = player.BiggestCock();
 				
-				Text.Add("<i>“Get ready for some rough lovin' [playername],”</i> Rosalin grins as [heshe] pushes you down on your back. Brandishing [hisher] stiff [rCockDesc] like a battering ram, [heshe] lines [himher]self up with your crotch.", parse);
+				Text.Add("<i>“Get ready for some rough lovin' [playername],”</i> Rosalin grins as [heshe] pushes you down on your back. Brandishing [hisher] stiff [rcock] like a battering ram, [heshe] lines [himher]self up with your crotch.", parse);
 				if(player.FirstCock()) {
 					parse["thisThese"] = player.NumCocks() > 1 ? "these" : "this";
-					Text.Add(" <i>“Tempting, but I have no use for [thisThese] right now,”</i> the [raceDesc] alchemist callously dismisses your [multiCockDesc].", parse);
+					Text.Add(" <i>“Tempting, but I have no use for [thisThese] right now,”</i> the [raceDesc] alchemist callously dismisses your [cocks].", parse);
 				}
 				Text.NL();
 				
@@ -2633,9 +2824,9 @@ Scenes.Rosalin.SexPrompt = function(state) {
 					function() { return player.FirstVag().Short(); } :
 					function() { return player.Butt().AnalShort(); };
 				
-				Text.Add("[HeShe] positions [hisher] [rCockTip] at your [targetDesc], quickly soaking it in the contents of a tiny bottle procured from [hisher] bodice. <i>“Lubricant,”</i> [heshe] explains apologetically, <i>“can't go breaking my favorite toy!”</i> The alchemist pauses for a moment. <i>“Um, I think that is what it was anyways.”</i> The liquid has a slightly luminescent sheen, and feels icy cold as it drips on your [skinDesc].", parse);
+				Text.Add("[HeShe] positions [hisher] [rcockTip] at your [targetDesc], quickly soaking it in the contents of a tiny bottle procured from [hisher] bodice. <i>“Lubricant,”</i> [heshe] explains apologetically, <i>“can't go breaking my favorite toy!”</i> The alchemist pauses for a moment. <i>“Um, I think that is what it was anyways.”</i> The liquid has a slightly luminescent sheen, and feels icy cold as it drips on your [skinDesc].", parse);
 				Text.NL();
-				Text.Add("Eager to get started, the horny [raceDesc] prods against your opening. <i>“Now, be a good [boygirl] and. Open. Up!”</i> The last word is punctuated with a rough shove, as [hisher] [rCockDesc] pushes its way inside your [targetDesc]. Your surprised gasp turns into an elongated moan as Rosalin begins to rapidly fuck you, not wasting any time on foreplay.", parse);
+				Text.Add("Eager to get started, the horny [raceDesc] prods against your opening. <i>“Now, be a good [boygirl] and. Open. Up!”</i> The last word is punctuated with a rough shove, as [hisher] [rcock] pushes its way inside your [targetDesc]. Your surprised gasp turns into an elongated moan as Rosalin begins to rapidly fuck you, not wasting any time on foreplay.", parse);
 				Text.NL();
 				
 				if(target == BodyPartType.vagina) {
@@ -2653,14 +2844,14 @@ Scenes.Rosalin.SexPrompt = function(state) {
 				}
 				var looseness = targetObj.Cap() / rosalin.FirstCock().Thickness();
 				if(looseness < 0.8)
-					Text.Add("<i>“Fuck, so tight,”</i> [heshe] grunts, thrusting as much of [hisher] [rCockDesc] inside you as [heshe] can fit. <i>“Gotta work you over more often, I think!”</i>", parse);
+					Text.Add("<i>“Fuck, so tight,”</i> [heshe] grunts, thrusting as much of [hisher] [rcock] inside you as [heshe] can fit. <i>“Gotta work you over more often, I think!”</i>", parse);
 				else {
 					Text.Add("<i>“Woah, seems you have been around!”</i> [heshe] exclaims, <i>“guess I'm not the first one to this hole!”</i>", parse);
 					if(rosalin.FirstCock().Size() > 250)
 						Text.Add(" Rosalin chuckles, thrusting [hisher] hips into you. <i>“‘Course, not sure that level of sluttiness will help, seeing what I'm packing.”</i>", parse);
 				}
 				Text.NL();
-				Text.Add("Done with words, the [raceDesc] alchemist lets [hisher] [rCockDesc] do the talking. Pistoning in and out of your [targetDesc], the throbbing member is starting to have a definite effect on you. Rosalin kneads the [skinDesc] of your [breastDesc] with [hisher] hands, pinching and pulling at your [nipsDesc].", parse);
+				Text.Add("Done with words, the [raceDesc] alchemist lets [hisher] [rcock] do the talking. Pistoning in and out of your [targetDesc], the throbbing member is starting to have a definite effect on you. Rosalin kneads the [skinDesc] of your [breasts] with [hisher] hands, pinching and pulling at your [nipsDesc].", parse);
 				Text.NL();
 				if(rHumanity < 0.8) {
 					Text.Add("You can hardly believe how roughly [heshe] is handling you; blinded by lust, [hisher] insistent pounding is animalistic, almost feral. The alchemist has a wild look in [hisher] [rEyesDesc] as [heshe] hugs you possessively, growling <i>“Mine!”</i> into your ear.", parse);
@@ -2668,21 +2859,21 @@ Scenes.Rosalin.SexPrompt = function(state) {
 					Text.Add("With [rCockLen] of hot meat pummeling your [targetDesc], you can hardly voice a complaint. Or do anything but moan ecstatically, really.", parse);
 				}
 				else
-					Text.Add("While [heshe] still seems in command of [hisher] senses, Rosalin is very rough, thrusting [hisher] [rCockDesc] inside you like there is no tomorrow.", parse);
+					Text.Add("While [heshe] still seems in command of [hisher] senses, Rosalin is very rough, thrusting [hisher] [rcock] inside you like there is no tomorrow.", parse);
 				Text.NL();
 				Text.Add("A rapid series of rough thrusts quickly has you reduced to a moaning slut, slave to your desires.", parse);
 				if(player.FirstCock()) {
 					parse["s"] = player.NumCocks() > 1 ? "s" : "";
 					parse["notS"] = player.NumCocks() > 1 ? "" : "s";
 					parse["itThem"] = player.NumCocks() > 1 ? "them" : "it";
-					Text.Add(" Your own [multiCockDesc] stand[notS] at attention, pearly precum splattering from the tip[s], dripping onto your stomach. Rosalin occasionally teases you by rubbing against [itThem] with [hisher] hands, but never letting you get too excited. As if you could focus on anything but your [targetDesc] right now.", parse);
+					Text.Add(" Your own [cocks] stand[notS] at attention, pearly precum splattering from the tip[s], dripping onto your stomach. Rosalin occasionally teases you by rubbing against [itThem] with [hisher] hands, but never letting you get too excited. As if you could focus on anything but your [targetDesc] right now.", parse);
 				}
 
 				if(target == BodyPartType.vagina)
 					Text.Add(" Even though the alchemist is railing you like a rutting beast, [hisher] progress is significantly eased by the clear juices flowing from your depths, each rhythmic thunk into your [targetDesc] keeping the torrid invader slick and wet.", parse);
 				else {
 					parse["tail"] = player.HasTail() ? Text.Parse(", soaking your [tailDesc]", parse) : "";
-					Text.Add(" A clear pool of your juices is forming on the ground, fed by a small stream flowing past Rosalin's thrusting [rCockDesc][tail]. The way your loins ache, you desperately wish you had something stuffed in there as well.", parse);
+					Text.Add(" A clear pool of your juices is forming on the ground, fed by a small stream flowing past Rosalin's thrusting [rcock][tail]. The way your loins ache, you desperately wish you had something stuffed in there as well.", parse);
 				}
 				Text.NL();
 				
@@ -2701,7 +2892,7 @@ Scenes.Rosalin.SexPrompt = function(state) {
 				
 				parse["balls"] = rosalin.HasBalls() ? Text.Parse(" and [rBallsDesc]", parse) : "";
 				Text.NL();
-				Text.Add("Rosalin increases [hisher] pace, rutting irregularly against your loins. By now, [heshe] has reached your innermost depths, each thrust smacking [hisher] hips[balls] against your [skinDesc]. The alchemist cries out, and you feel [hisher] [rCockDesc] convulse inside your tight hole.", parse);
+				Text.Add("Rosalin increases [hisher] pace, rutting irregularly against your loins. By now, [heshe] has reached your innermost depths, each thrust smacking [hisher] hips[balls] against your [skinDesc]. The alchemist cries out, and you feel [hisher] [rcock] convulse inside your tight hole.", parse);
 				Text.NL();
 				parse["balls"] = rosalin.HasBalls() ? Text.Parse(", fresh from Rosalin's [rBallsDesc]", parse) : "";
 				Text.Add("The dam released, your [targetDesc] is assaulted by load after load of hot cum[balls]. The [raceDesc] continues to rail you all the way through [hisher] climax, [hisher] body going on auto-pilot as [hisher] mind goes blank.", parse);
@@ -2710,7 +2901,7 @@ Scenes.Rosalin.SexPrompt = function(state) {
 					parse["s"]        = rosalin.NumCocks() > 2 ? "s" : "";
 					parse["notS"]     = rosalin.NumCocks() > 2 ? "" : "s";
 					parse["itsTheir"] = rosalin.NumCocks() > 2 ? "their" : "its";
-					Text.Add("Rosalin's other cock[s] spray[notS] [itsTheir] fertile seed all over your [skinDesc], some landing on your [breastDesc] and some even reaching your jaw, dribbling down in a pearly necklace.", parse);
+					Text.Add("Rosalin's other cock[s] spray[notS] [itsTheir] fertile seed all over your [skinDesc], some landing on your [breasts] and some even reaching your jaw, dribbling down in a pearly necklace.", parse);
 					Text.NL();
 				}
 				parse["hardWet"] = player.FirstVag() ? "wet" : "hard";
@@ -2719,9 +2910,9 @@ Scenes.Rosalin.SexPrompt = function(state) {
 				
 				var scenes = new EncounterTable();
 				scenes.AddEnc(function() {
-					Text.Add("<i>“Didn't get to cum, pet?”</i> Rosalin bemoans your fate, grinning mischievously, still panting from [hisher] own climax. [HisHer] [rCockDesc], somehow still hard, begins to move inside you, slower than before, but somehow more pleasurable. <i>“Let's fix that, shall we?”</i> the [raceDesc] purrs smugly, slowly sawing [hisher] way in and out of your [targetDesc].", parse);
+					Text.Add("<i>“Didn't get to cum, pet?”</i> Rosalin bemoans your fate, grinning mischievously, still panting from [hisher] own climax. [HisHer] [rcock], somehow still hard, begins to move inside you, slower than before, but somehow more pleasurable. <i>“Let's fix that, shall we?”</i> the [raceDesc] purrs smugly, slowly sawing [hisher] way in and out of your [targetDesc].", parse);
 					Text.NL();
-					parse["cocks"] = player.FirstCock() ? Text.Parse(", your [multiCockDesc] twitching uncontrollably", parse) : "";
+					parse["cocks"] = player.FirstCock() ? Text.Parse(", your [cocks] twitching uncontrollably", parse) : "";
 					Text.Add("You cannot withstand the alchemists intimate massage for long, and soon your moans turn into a drawn out cry[cocks].", parse);
 					Text.NL();
 					Text.Add("[HisHer] excessive energy finally spent, the alchemist collapse on top of you. A pool of spunk spreads from your abused [targetDesc], unleashed as Rosalin pulls [hisher] softening member out of you.", parse);
@@ -2729,20 +2920,20 @@ Scenes.Rosalin.SexPrompt = function(state) {
 				scenes.AddEnc(function() {
 					parse["s"] = rosalin.NumCocks() > 1 ? "s" : "";
 					parse["oneof"] = rosalin.NumCocks() > 1 ? " one of" : "";
-					Text.Add("<i>“After that fuck, I don't mind giving a little back,”</i> Rosalin smiles at you. Pulling out of your [targetDesc] and leaving a large pool of cum behind [himher], the [raceDesc] straddles your face, [hisher] [rMultiCockDesc] rubbing against you.", parse);
+					Text.Add("<i>“After that fuck, I don't mind giving a little back,”</i> Rosalin smiles at you. Pulling out of your [targetDesc] and leaving a large pool of cum behind [himher], the [raceDesc] straddles your face, [hisher] [rcocks] rubbing against you.", parse);
 					Text.NL();
-					Text.Add("<i>“Lick me, and I'll do the same for you,”</i> [heshe] orders imperiously, waiting for your [tongueDesc] to start lapping at [hisher] [rMultiCockDesc] before going down on you. Under [hisher] expert ministrations, your tension is soon released in the stickiest manner possible.", parse);
+					Text.Add("<i>“Lick me, and I'll do the same for you,”</i> [heshe] orders imperiously, waiting for your [tongueDesc] to start lapping at [hisher] [rcocks] before going down on you. Under [hisher] expert ministrations, your tension is soon released in the stickiest manner possible.", parse);
 					Text.NL();
 					Text.Add("Rosalin licks [hisher] lips, patting you on the stomach. <i>“Good [boygirl]! One present for me...”</i> [heshe] raises [hisher] hips, lining up [hisher] cannon[s], <i>“... and one. For. You!”</i> The last words are grunted out, Rosalin's hands tight around[oneof] [hisher] cock[s]. This time, [heshe] hits you point-blank, cum splattering all over your face and [hairDesc].", parse);
 				}, 1.0, function() { return true; });
 				scenes.AddEnc(function() {
 					Text.Add("<i>“Hah... haah... oh?”</i> Rosalin pants, noticing you've yet to climax. <i>“Ah well,”</i> [heshe] shrugs as [heshe] pulls out of you, [hisher] cum leaking out from your [targetDesc]. <i>“Don't worry, gimme a few minutes and I'll have you screaming.”</i>", parse);
 					Text.NL();
-					Text.Add("You look at [himher] incredulously. Surely not... One look down at the alchemist's stiffening [rMultiCockDesc] confirms your fears. <i>“Thought I was done? We have barely gotten started yet!”</i> Rolling you over on your stomach, Rosalin pries your [legsDesc] apart, exposing your crotch.", parse);
+					Text.Add("You look at [himher] incredulously. Surely not... One look down at the alchemist's stiffening [rcocks] confirms your fears. <i>“Thought I was done? We have barely gotten started yet!”</i> Rolling you over on your stomach, Rosalin pries your [legsDesc] apart, exposing your crotch.", parse);
 					Text.NL();
 					
 					parse["holes"] = player.FirstVag() ? "both of your holes." : "your bloated stomach.";
-					Text.Add("<i>“Better brace yourself!”</i> Without further ado, the [raceDesc] once again spears you on [hisher] [rCockDesc]. True to [hisher] word, over the coming hours Rosalin makes you climax more times than you can count. What feels like gallons of [hisher] spunk fill [holes] You'll be sore for days after this, but decide that you don't mind...", parse);
+					Text.Add("<i>“Better brace yourself!”</i> Without further ado, the [raceDesc] once again spears you on [hisher] [rcock]. True to [hisher] word, over the coming hours Rosalin makes you climax more times than you can count. What feels like gallons of [hisher] spunk fill [holes] You'll be sore for days after this, but decide that you don't mind...", parse);
 					
 					player.FuckAnal(player.Butt(), rosalin.FirstCock(), 2);
 					if(player.FirstVag())
@@ -2815,9 +3006,9 @@ Scenes.Rosalin.SexPrompt = function(state) {
 				else if(cale.Slut() < 30) {
 					Text.Add("Out of the corner of your eye, you see [wName] passing by behind you. Grasping at the opportunity, you make a wild dash, shouldering past the surprised wolf-morph. Turning after you [wName] growls something under his breath, before it is violently crushed from him.", parse);
 					Text.NL();
-					Text.Add("Rosalin, rushing after you in pursuit, boulders into the poor wolf-morph, and the two of them roll around on the ground. After a brief tussle, the [raceDesc] alchemist comes out on top, panting slightly. [HeShe] moves to go after you, but stops when [heshe] notices the wolf pinned face-down underneath [himher]. Rosalin's aggressive snarl slowly turns into a wide grin as [heshe] makes a few experimental thrusts with [hisher] hips, letting [hisher] [rMultiCockDesc] lightly brush against [wName]'s taint.", parse);
+					Text.Add("Rosalin, rushing after you in pursuit, boulders into the poor wolf-morph, and the two of them roll around on the ground. After a brief tussle, the [raceDesc] alchemist comes out on top, panting slightly. [HeShe] moves to go after you, but stops when [heshe] notices the wolf pinned face-down underneath [himher]. Rosalin's aggressive snarl slowly turns into a wide grin as [heshe] makes a few experimental thrusts with [hisher] hips, letting [hisher] [rcocks] lightly brush against [wName]'s taint.", parse);
 					Text.NL();
-					Text.Add("<i>“R-rosie, let me go!”</i> the wolf-morph begs piteously, trying to reason with the alchemist. One look at Rosalin's flushed expression tells you that's not likely to work. <i>“I don't think so! You always so nice, helping me out when I get horny.”</i> The [raceDesc] leans in close, hotdogging [hisher] [rMultiCockDesc] between the increasingly desperate wolf's cheeks. <i>“And right now, I'm very, very horny,”</i> [heshe] purrs.", parse);
+					Text.Add("<i>“R-rosie, let me go!”</i> the wolf-morph begs piteously, trying to reason with the alchemist. One look at Rosalin's flushed expression tells you that's not likely to work. <i>“I don't think so! You always so nice, helping me out when I get horny.”</i> The [raceDesc] leans in close, hotdogging [hisher] [rcocks] between the increasingly desperate wolf's cheeks. <i>“And right now, I'm very, very horny,”</i> [heshe] purrs.", parse);
 					Text.NL();
 					Text.Add("Seems you are off the hook for now, as Rosalin has found a new toy to play with. You could use this opportunity to escape, or...", parse);
 					Text.Flush();
@@ -2827,7 +3018,7 @@ Scenes.Rosalin.SexPrompt = function(state) {
 					options.push({ nameStr : "Leave",
 						func : function() {
 							Text.Clear();
-							Text.Add("You hurry off, leaving the pair on the ground. Looks like [wName] is in for a rough ride. He lets out a pained yelp as Rosalin gets down to business, spearing the poor wolf-morph on [hisher] [rCockDesc]. Better avoid this area for a while.", parse);
+							Text.Add("You hurry off, leaving the pair on the ground. Looks like [wName] is in for a rough ride. He lets out a pained yelp as Rosalin gets down to business, spearing the poor wolf-morph on [hisher] [rcock]. Better avoid this area for a while.", parse);
 							
 							player.AddLustFraction(0.1);
 							world.TimeStep({hour: 1});
@@ -2924,14 +3115,14 @@ Scenes.Rosalin.SexPrompt = function(state) {
 			options.push({ nameStr : "Fuck Vag",
 				func : function() {
 					Text.Clear();
-					Text.Add("<i>“Hey, feeling up for a bit of fun?”</i> Rosalin coyly lifts [hisher] dress, exposing the wet slit between [hisher] [rLegsDesc].", parse);
+					Text.Add("<i>“Hey, feeling up for a bit of fun?”</i> Rosalin coyly lifts [hisher] dress, exposing the wet slit between [hisher] [rlegs].", parse);
 					if(rosalin.FirstCock())
-						Text.Add(" The [raceDesc] pulls [hisher] [rMultiCockDesc] aside, inviting you to use [hisher] feminine parts.", parse);
+						Text.Add(" The [raceDesc] pulls [hisher] [rcocks] aside, inviting you to use [hisher] feminine parts.", parse);
 					Text.NL();
 					
 					var scenes = new EncounterTable();
 					scenes.AddEnc(function() {
-						Text.Add("Grinning, you push [himher] down on [hisher] back, prying [hisher] [rLegsDesc] apart and rubbing your [multiCockDesc] against [hisher] eager nether lips. The horny alchemist moans in appreciation, [hisher] hands busy tearing off the remainder of [hisher] clothes, baring [hisher] [rBreastDesc].", parse);
+						Text.Add("Grinning, you push [himher] down on [hisher] back, prying [hisher] [rlegs] apart and rubbing your [cocks] against [hisher] eager nether lips. The horny alchemist moans in appreciation, [hisher] hands busy tearing off the remainder of [hisher] clothes, baring [hisher] [rbreasts].", parse);
 						Text.NL();
 						var r = Math.random();
 						if(r < 0.33)
@@ -2941,28 +3132,28 @@ Scenes.Rosalin.SexPrompt = function(state) {
 						else
 							Text.Add("<i>“Fuck me [playername], fill me with your seed!”</i> the needy [raceDesc] begs you.", parse);
 						Text.NL();
-						Text.Add("You grunt as you comply with [hisher] wishes, pushing a good portion of your [cockDesc] inside [hisher] honeypot in one thrust. Building up a rhythm, you start railing [himher] in earnest, your [cockDesc] pushing deep inside [himher], coated by [hisher] dripping juices.", parse);
+						Text.Add("You grunt as you comply with [hisher] wishes, pushing a good portion of your [cock] inside [hisher] honeypot in one thrust. Building up a rhythm, you start railing [himher] in earnest, your [cock] pushing deep inside [himher], coated by [hisher] dripping juices.", parse);
 						Text.NL();
 						
 						Sex.Vaginal(player, rosalin);
 						rosalin.FuckVag(rosalin.FirstVag(), p1Cock, 3);
 						player.Fuck(p1Cock, 3);
 						
-						Text.Add("<i>“Yes! Yes! Yes!”</i> Rosalin screams, each of your thrusts causing waves of pleasure to surge through [hisher] body. [HisHer] [rVagDesc] is clamping down tight around your [cockDesc], [hisher] vaginal walls clenching sensually around your thrusting member.", parse);
+						Text.Add("<i>“Yes! Yes! Yes!”</i> Rosalin screams, each of your thrusts causing waves of pleasure to surge through [hisher] body. [HisHer] [rvag] is clamping down tight around your [cock], [hisher] vaginal walls clenching sensually around your thrusting member.", parse);
 						if(player.NumCocks() == 2)
-							Text.Add(" You reach down, your hand jerking your other [cockDesc2] eagerly. The [raceDesc] is going to receive a sticky gift if you have any say in the matter.", parse);
+							Text.Add(" You reach down, your hand jerking your other [cock2] eagerly. The [raceDesc] is going to receive a sticky gift if you have any say in the matter.", parse);
 						else if(player.NumCocks() > 2)
-							Text.Add(" Grasping your free [multiCockDesc] with your hands, you start preparing to drench the [raceDesc] alchemist in your seed.", parse);
+							Text.Add(" Grasping your free [cocks] with your hands, you start preparing to drench the [raceDesc] alchemist in your seed.", parse);
 						else
 							Text.Add(" You grasp the [raceDesc] alchemist by the hips, seeking a better hold.", parse);
 						
 						if(rosalin.FirstBreastRow().size.Get() > 5)
-							Text.Add(" Rosalin starts playing with [hisher] [rBreastDesc], rubbing and tweaking [hisher] [rNipplesDesc].", parse);
+							Text.Add(" Rosalin starts playing with [hisher] [rbreasts], rubbing and tweaking [hisher] [rnips].", parse);
 						Text.NL();
 						
-						Text.Add("<i>“Y-you are gonna make me cuuuum-”</i> Rosalin shrieks, clenching down on your [cockDesc]. The slut is true to [hisher] words, as you feel [hisher] juices seeping out of [hisher] ravaged hole.", parse);
+						Text.Add("<i>“Y-you are gonna make me cuuuum-”</i> Rosalin shrieks, clenching down on your [cock]. The slut is true to [hisher] words, as you feel [hisher] juices seeping out of [hisher] ravaged hole.", parse);
 						if(rosalin.FirstCock())
-							Text.Add(" Rosalin's male parts also make their contribution, as [heshe] spills [hisher] seed on [hisher] stomach, staining [hisher] [rSkinDesc].", parse);
+							Text.Add(" Rosalin's male parts also make their contribution, as [heshe] spills [hisher] seed on [hisher] stomach, staining [hisher] [rskin].", parse);
 						Text.Add(" You slow your thrusts a bit, allowing [himher] to recuperate before resuming your full-on vaginal assault.", parse);
 						Text.NL();
 						Text.Add("Before long you feel your own climax approaching. Groaning, you deposit your load in the panting [raceDesc], your virile spunk painting [hisher] insides white.", parse);
@@ -2976,7 +3167,7 @@ Scenes.Rosalin.SexPrompt = function(state) {
 						else {
 							Text.Add(" Some of your seed leaks out, trailing down [hisher] buttocks", parse);
 							if(rosalin.HasTail())
-								Text.Add(", pooling in the indentation of [hisher] [rAnusDesc] and [hisher] [rTailDesc]", parse);
+								Text.Add(", pooling in the indentation of [hisher] [ranus] and [hisher] [rtail]", parse);
 							Text.Add(".");
 						}
 						Text.NL();
@@ -2989,14 +3180,14 @@ Scenes.Rosalin.SexPrompt = function(state) {
 						}
 					}, 1.0, function() { return !p1Cock.isStrapon; });
 					scenes.AddEnc(function() {
-						Text.Add("Spinning [himher] around and pushing [himher] down on top of a nearby barrel, you rub your [multiCockDesc] against [hisher] wet labia.", parse);
+						Text.Add("Spinning [himher] around and pushing [himher] down on top of a nearby barrel, you rub your [cocks] against [hisher] wet labia.", parse);
 						Text.NL();
 						if(p1Cock.race != Race.Human)
-							Text.Add("<i>“Ooh, a bad boy,”</i> Rosalin breathlessly compliments your [cockDesc]. <i>“Fuck me good! Fuck me like an animal!”</i>", parse);
+							Text.Add("<i>“Ooh, a bad boy,”</i> Rosalin breathlessly compliments your [cock]. <i>“Fuck me good! Fuck me like an animal!”</i>", parse);
 						else
 							Text.Add("<i>“Come on, what are you waiting for?”</i> [heshe] moans, shivering from your teasing.", parse);
 						Text.NL();
-						Text.Add("Seeing as [heshe] is practically begging for it, you amiably comply, shoving your throbbing [cockDesc] into [hisher] waiting tunnel. The [raceDesc] gives a cute yelp as you start to repeatedly spear [himher] on your manhood, [hisher] [rLegsDesc] trembling weakly. If it wasn't for the barrel, [heshe]'d probably be lying on the ground by now.", parse);
+						Text.Add("Seeing as [heshe] is practically begging for it, you amiably comply, shoving your throbbing [cock] into [hisher] waiting tunnel. The [raceDesc] gives a cute yelp as you start to repeatedly spear [himher] on your manhood, [hisher] [rlegs] trembling weakly. If it wasn't for the barrel, [heshe]'d probably be lying on the ground by now.", parse);
 						Text.NL();
 						
 						Sex.Vaginal(player, rosalin);
@@ -3009,19 +3200,19 @@ Scenes.Rosalin.SexPrompt = function(state) {
 						parse["oneof"] = player.NumCocks() > 2  ? " one of" : "";
 							
 						if(player.NumCocks() > 1 && Math.random() < 0.5) {
-							Text.Add("The alchemist's [rVagDesc] is surprisingly stretchy, easily taking your [cockDesc]. Your other dick[s] [isAre] hotdogged tightly between [hisher] buttocks, giving you a nasty idea...", parse);
+							Text.Add("The alchemist's [rvag] is surprisingly stretchy, easily taking your [cock]. Your other dick[s] [isAre] hotdogged tightly between [hisher] buttocks, giving you a nasty idea...", parse);
 							Text.NL();
-							Text.Add("Pulling out, you ignore Rosalin's moaned complaints as you lather each of your [multiCockDesc] in [hisher] hot pussy-juices.", parse);
+							Text.Add("Pulling out, you ignore Rosalin's moaned complaints as you lather each of your [cocks] in [hisher] hot pussy-juices.", parse);
 							Text.NL();
 							
 							var target = BodyPartType.vagina;
 							var scenes = new EncounterTable();
 							scenes.AddEnc(function() {
-								Text.Add("Lining up again, you press [both] of your [multiCockDesc] against [hisher] eager snatch. You push in, enjoying the suddenly much tighter fit. The [raceDesc], meanwhile, is going nuts, yowling in pleasure as [hisher] [rVagDesc] gets double the amount of cock stuffed inside it.", parse);
+								Text.Add("Lining up again, you press [both] of your [cocks] against [hisher] eager snatch. You push in, enjoying the suddenly much tighter fit. The [raceDesc], meanwhile, is going nuts, yowling in pleasure as [hisher] [rvag] gets double the amount of cock stuffed inside it.", parse);
 							}, 1.0, function() { return true; });
 							scenes.AddEnc(function() {
 								var target = BodyPartType.ass;
-								Text.Add("Resuming your brutal conquest of [hisher] [rVagDesc], you line up[oneof] your other cock[s] with [hisher] puckered [rAnusDesc], insistently prodding at the tight opening. Rosalin lets out a drawn out yowl as you slowly push the [cockTip2] of your [cockDesc2] past [hisher] tight ring, sealing it inside [hisher] back door.", parse);
+								Text.Add("Resuming your brutal conquest of [hisher] [rvag], you line up[oneof] your other cock[s] with [hisher] puckered [ranus], insistently prodding at the tight opening. Rosalin lets out a drawn out yowl as you slowly push the [cockTip2] of your [cock2] past [hisher] tight ring, sealing it inside [hisher] back door.", parse);
 							}, 1.0, function() { return true; });
 							scenes.Get();
 							
@@ -3031,23 +3222,23 @@ Scenes.Rosalin.SexPrompt = function(state) {
 							parse["s"] = target == BodyPartType.vagina ? "s" : "";
 							Text.Add("The horny alchemist cums before you, soaking your shaft[s] in [hisher] sweet juices.", parse);
 							if(rosalin.FirstCock())
-								Text.Add(" The barrel is generously coated by [hisher] twitching [rMultiCockDesc], the sticky strands slowly dripping down, fertilizing the ground below.", parse);
+								Text.Add(" The barrel is generously coated by [hisher] twitching [rcocks], the sticky strands slowly dripping down, fertilizing the ground below.", parse);
 							Text.NL();
 							parse["bd"] = player.HasBalls() ? Text.Parse(" your [ballsDesc] tightening,", parse) : "";
-							Text.Add("Not long after, your [multiCockDesc] throb insistently,[bd] as you feel the surge of your orgasm rising.", parse);
+							Text.Add("Not long after, your [cocks] throb insistently,[bd] as you feel the surge of your orgasm rising.", parse);
 							if(p1Cock.knot)
-								Text.Add(" Growling, you push your [knotDesc] past [hisher] feeble defenses, locking your member - and your seed - inside [hisher] twitching [rVagDesc].", parse);
+								Text.Add(" Growling, you push your [knotDesc] past [hisher] feeble defenses, locking your member - and your seed - inside [hisher] twitching [rvag].", parse);
 							else
-								Text.Add(" Groaning, you let your [cockDesc] erupt inside the alchemist, pumping [himher] full of your seed.", parse);
+								Text.Add(" Groaning, you let your [cock] erupt inside the alchemist, pumping [himher] full of your seed.", parse);
 							Text.NL();
 							
 							var cum = player.OrgasmCum();
 							
 							parse["kd"] = p2Cock.knot ? Text.Parse(", the [knotDesc2] sealing it inside", parse) : "";
 							if(target == BodyPartType.vagina)
-								Text.Add("Your [cockDesc2] joins its sibling, pressing inside Rosalin's tight passage[kd].", parse);
+								Text.Add("Your [cock2] joins its sibling, pressing inside Rosalin's tight passage[kd].", parse);
 							else // butt
-								Text.Add("Your [cockDesc2] pushes its way into Rosalin's [rAnusDesc][kd].", parse);
+								Text.Add("Your [cock2] pushes its way into Rosalin's [ranus][kd].", parse);
 							Text.NL();
 							if(cum > 3) {
 								Text.Add("The [raceDesc] moans weakly as your huge load settles in [hisher] womb, slightly distending [hisher] stomach. ", parse);
@@ -3063,7 +3254,7 @@ Scenes.Rosalin.SexPrompt = function(state) {
 								}
 								else {
 									parse["s"] = target == BodyPartType.ass ? "s" : "";
-									Text.Add("The passage[s] unable to contain all of your seed, much of the sticky liquid spills outside, trailing down Rosalin's [rLegsDesc].", parse);
+									Text.Add("The passage[s] unable to contain all of your seed, much of the sticky liquid spills outside, trailing down Rosalin's [rlegs].", parse);
 								}
 							}
 						}
@@ -3076,13 +3267,13 @@ Scenes.Rosalin.SexPrompt = function(state) {
 								Text.Add("<i>“N-nyaa! So big!”</i> the alchemist yowls as [heshe] is speared by your brutally large member, penetrating deep into [hisher] folds.", parse);
 							else
 								Text.Add("<i>“Faster! Deeper!”</i> [heshe] yelps, urging you to fuck [himher] even more roughly.", parse);
-							Text.Add(" The angle is perfect for reaching deep inside [himher], and your [cockDesc] is soon lodged in [hisher] [rVagDesc], buried to the hilt.", parse);
+							Text.Add(" The angle is perfect for reaching deep inside [himher], and your [cock] is soon lodged in [hisher] [rvag], buried to the hilt.", parse);
 							if(player.HasBalls())
 								Text.Add(" The sound of your [ballsDesc] slapping against [hisher] [rButtDesc] forms a nice accompaniment to the rhythmic thuds caused by your repeated railing of the alchemist.", parse);
 							Text.NL();
 							Text.Add("Pounded almost into insensibility, Rosalin shudders as [hisher] orgasm overcomes [himher], coating your shaft in [hisher] sweet juices.", parse);
 							if(rosalin.FirstCock())
-								Text.Add(" Even untended, [hisher] [rMultiCockDesc] is drooling, [hisher] wasted load dripping down the side of the barrel, fertilizing nothing but the ground.", parse);
+								Text.Add(" Even untended, [hisher] [rcocks] is drooling, [hisher] wasted load dripping down the side of the barrel, fertilizing nothing but the ground.", parse);
 							else
 								Text.Add(" The trembling alchemist can't do anything but hug the barrel [heshe] is splayed over, holding on for dear life as you rail [himher].", parse);
 							Text.NL();
@@ -3137,28 +3328,28 @@ Scenes.Rosalin.CockWorship = function(sexState) {
 	
 	var parse = {
 		raceDesc       : function() { return rosalin.raceDesc(compScore); },
-		rBreastDesc    : function() { return rosalin.FirstBreastRow().Short(); },
-		rNipplesDesc   : function() { return rosalin.FirstBreastRow().NipsShort(); },
-		rCockDesc      : function() { return cock.Short(); },
-		rCockTip       : function() { return cock.TipShort(); },
-		rMultiCockDesc : function() { return rosalin.MultiCockDesc(); },
+		rbreasts    : function() { return rosalin.FirstBreastRow().Short(); },
+		rnips   : function() { return rosalin.FirstBreastRow().NipsShort(); },
+		rcock      : function() { return cock.Short(); },
+		rcockTip       : function() { return cock.TipShort(); },
+		rcocks : function() { return rosalin.MultiCockDesc(); },
 		rBallsDesc     : function() { return rosalin.BallsDesc(); },
-		rVagDesc       : function() { return rosalin.FirstVag().Short(); },
-		rClitDesc      : function() { return rosalin.FirstVag().ClitShort(); },
-		rAnusDesc      : function() { return rosalin.Butt().AnalShort(); },
-		rHairDesc      : function() { return rosalin.Hair().Short(); },
-		rTailDesc      : function() { return rosalin.HasTail().Short(); },
-		rLegsDesc      : function() { return rosalin.LegsDesc(); },
-		rSkinDesc      : function() { return rosalin.SkinDesc(); },
+		rvag       : function() { return rosalin.FirstVag().Short(); },
+		rclit      : function() { return rosalin.FirstVag().ClitShort(); },
+		ranus      : function() { return rosalin.Butt().AnalShort(); },
+		rhair      : function() { return rosalin.Hair().Short(); },
+		rtail      : function() { return rosalin.HasTail().Short(); },
+		rlegs      : function() { return rosalin.LegsDesc(); },
+		rskin      : function() { return rosalin.SkinDesc(); },
 		rHipsDesc      : function() { return rosalin.HipsDesc(); },
 		
 		playername     : player.name,
 		hairDesc       : function() { return player.Hair().Short(); },
 		vagDesc        : function() { return player.FirstVag().Short(); },
-		cockDesc       : function() { return player.FirstCock().Short(); },
-		cockDesc2      : function() { return player.AllCocks()[1].Short(); },
+		cock       : function() { return player.FirstCock().Short(); },
+		cock2      : function() { return player.AllCocks()[1].Short(); },
 		knotDesc       : function() { return player.FirstCock().KnotShort(); },
-		multiCockDesc  : function() { return player.MultiCockDesc(); },
+		cocks  : function() { return player.MultiCockDesc(); },
 		eyeDesc        : function() { return player.EyeDesc(); },
 		face           : function() { return player.FaceDesc(); },
 		clothing       : function() { return player.ArmorDesc(); }
@@ -3171,9 +3362,9 @@ Scenes.Rosalin.CockWorship = function(sexState) {
 	parse["notS"] = player.NumCocks() > 1 ? "" : "s";
 	
 	if(sexState == RosalinSexState.Rut)
-		Text.Add("<i>“Like what you see?”</i> Rosalin purrs, jutting [hisher] hips your way. Your [eyeDesc]s hone in on [hisher] magnificent [rCockDesc]. <i>“Don't you want to touch it? Lick it?”</i> ", parse);
+		Text.Add("<i>“Like what you see?”</i> Rosalin purrs, jutting [hisher] hips your way. Your [eyeDesc]s hone in on [hisher] magnificent [rcock]. <i>“Don't you want to touch it? Lick it?”</i> ", parse);
 	else
-		Text.Add("<i>“Mmm... that felt nice,”</i> Rosalin almost audibly purrs. It's an incongruous sound given the [rCockDesc] [heshe]'s sporting down south. ", parse);
+		Text.Add("<i>“Mmm... that felt nice,”</i> Rosalin almost audibly purrs. It's an incongruous sound given the [rcock] [heshe]'s sporting down south. ", parse);
 	if(rosalin.HasBalls())
 		Text.Add("[HisHer] [rBallsDesc] sway heavily below, almost oiled with the fine sheen of sweat the [raceDesc] has broken out in.", parse);
 	else
@@ -3181,11 +3372,11 @@ Scenes.Rosalin.CockWorship = function(sexState) {
 	Text.NL();
 	parse["ballsCunt"] = rosalin.HasBalls() ? Text.Parse("[rBallsDesc]", parse) : "cunt";
 	parse["type"] = cock.race.qShort();
-	Text.Add("[HeShe] cups [hisher] [ballsCunt] lewdly and hefts [hisher] [type] endowment with the other, unashamedly jacking [himher]self off in your direction, the [rCockTip] expanding ever-so-slightly under [hisher] ministration. ", parse);
+	Text.Add("[HeShe] cups [hisher] [ballsCunt] lewdly and hefts [hisher] [type] endowment with the other, unashamedly jacking [himher]self off in your direction, the [rcockTip] expanding ever-so-slightly under [hisher] ministration. ", parse);
 	if(cock.Sheath())
 		Text.Add("Rosalin sighs and digs a digit into [hisher] sheath, massaging [himher]self under the folds of concealing skin to further fuel [hisher] ardor. Gathering some of the moisture from inside, the [raceDesc] works it across [hisher] glistening shaft, moaning a little whenever [hisher] hands pass the ring of prepuce in the middle and pushing [himher]self toward greater pleasure.", parse);
 	else
-		Text.Add("Rosalin happily jerks off [hisher] [rCockDesc], [hisher] hands rapidly pumping the erect shaft.", parse);
+		Text.Add("Rosalin happily jerks off [hisher] [rcock], [hisher] hands rapidly pumping the erect shaft.", parse);
 	Text.NL();
 	parse["knees"] = player.LowerBodyType() != LowerBodyType.Single ? " onto your knees" : "";
 	Text.Add("The view is rather erotic, and you find your own [genDesc] engorging quite speedily with untamed lust. Rosalin smiles as you draw a bit nearer, waving [hisher] cock back and forth tantalizingly, the unmistakable scent of musky pheromones rolling off [himher] in waves. You inhale before sighing. There's something about the way [heshe] smells ever since growing that cock that makes you just want to... want to... Mmm, you drop down[knees] with another blissful exhalation, making room so that you can inhale a more concentrated dose of [hisher] pheromones from up close.", parse);
@@ -3196,7 +3387,7 @@ Scenes.Rosalin.CockWorship = function(sexState) {
 	else
 		Text.Add("Rosalin, still lost in self-pleasure, gradually becomes aware of you. <i>“Uh, [playername]. W-what are you doing down there?”</i> [HeShe] groans after a particularly powerful bolt of pleasure assails [himher]. <i>“J-just hurry up and do something!”</i> [heshe] stammers.", parse);
 	Text.NL();
-	Text.Add("As if you needed any encouragement. You open your maw, leaning forward to snare Rosalin's [rCockTip] with your tongue. [HisHer] urethra opens and leaks a droplet of sticky pre-cum onto your tongue. You swoon, stretching your jaw to accommodate the alchemist's girth, sinking the first four inches of [hisher] length inside you, its veins pulsating powerfully against your tongue. The [raceDesc] can barely contain [himher]self, and [hisher] [rHipsDesc] lurch forward of their own accord, pushing at least two more inches into your throat. You gurgle around the impeding mass of engorged arousal, your lips clinging tightly to the slick tool, massaging it with your mouth in order to bring the wonderfully endowed alchemist as much pleasure as possible.", parse);
+	Text.Add("As if you needed any encouragement. You open your maw, leaning forward to snare Rosalin's [rcockTip] with your tongue. [HisHer] urethra opens and leaks a droplet of sticky pre-cum onto your tongue. You swoon, stretching your jaw to accommodate the alchemist's girth, sinking the first four inches of [hisher] length inside you, its veins pulsating powerfully against your tongue. The [raceDesc] can barely contain [himher]self, and [hisher] [rHipsDesc] lurch forward of their own accord, pushing at least two more inches into your throat. You gurgle around the impeding mass of engorged arousal, your lips clinging tightly to the slick tool, massaging it with your mouth in order to bring the wonderfully endowed alchemist as much pleasure as possible.", parse);
 	Text.NL();
 	
 	player.FuckOral(player.Mouth(), cock, 2);
@@ -3208,7 +3399,7 @@ Scenes.Rosalin.CockWorship = function(sexState) {
 	if(rosalin.HasBalls())
 		Text.Add("You respond by gripping [hisher] [rBallsDesc] in your hand, rubbing your fingers across the cum factories to heft their mass and encourage them to produce more, rolling them in your palm.", parse);
 	else if(rosalin.FirstVag())
-		Text.Add("You respond by palming [hisher] [rVagDesc], your thumb resting upon [hisher] [rClitDesc], slowly ticking back and forth like the arm of a perverse metronome. [HisHer] juices run freely into your hand, anointing you with the warm secretions of [hisher] pleasure.", parse);
+		Text.Add("You respond by palming [hisher] [rvag], your thumb resting upon [hisher] [rclit], slowly ticking back and forth like the arm of a perverse metronome. [HisHer] juices run freely into your hand, anointing you with the warm secretions of [hisher] pleasure.", parse);
 	Text.NL();
 	parse["anim"] = cock.race != Race.Human ? " and animalistic" : "";
 	Text.Add("The alchemist's marvellous genitalia are so potent[anim] that you unwittingly find yourself pushing forward, trying to cram [himher] further into your throat. It's difficult to resist, but you endure in order to more properly worship [hisher] wonderful tool. There will be time to deepthroat it when [heshe]'s about to climax.", parse);
@@ -3218,9 +3409,9 @@ Scenes.Rosalin.CockWorship = function(sexState) {
 	Text.Add("A spurt of overly anxious jism escapes the tumescent prick, smearing neatly across your lips and chin as you shift positions.", parse);
 	Text.NL();
 	parse["hair"] = player.Hair().Bald() ? "onto your head" : Text.Parse("into your [hairDesc]", parse);
-	Text.Add("Leaning forward, you assume a more submissive position, placing [hisher] cock upon your [face] so that you can truly enjoy the sheer size of it. Tipping your head to the side, you peer out from under it with one eye, meeting Rosalin's lust-addled, pleasure-drunk view. The [raceDesc]'s eyelids flutter closed and [hisher] mouth lolls open. [HisHer] [rCockTip] expands slightly, and a fat droplet of pre-cum oozes out [hair] as a reward.", parse);
+	Text.Add("Leaning forward, you assume a more submissive position, placing [hisher] cock upon your [face] so that you can truly enjoy the sheer size of it. Tipping your head to the side, you peer out from under it with one eye, meeting Rosalin's lust-addled, pleasure-drunk view. The [raceDesc]'s eyelids flutter closed and [hisher] mouth lolls open. [HisHer] [rcockTip] expands slightly, and a fat droplet of pre-cum oozes out [hair] as a reward.", parse);
 	Text.NL();
-	Text.Add("You giggle, tipping your head back, sliding your tongue along the underside with slow wet strokes, culminating in a movement that puts [hisher] flare flat against your tongue. The delicious flavor of [hisher] [rCockDesc] assaults your tastebuds, while [hisher] odd musk inundates your nostrils, encouraging you to further depravity. You work one hand along [hisher] slippery length while sucking the pre from [hisher] cumslit, encouraging [himher] to produce more.", parse);
+	Text.Add("You giggle, tipping your head back, sliding your tongue along the underside with slow wet strokes, culminating in a movement that puts [hisher] flare flat against your tongue. The delicious flavor of [hisher] [rcock] assaults your tastebuds, while [hisher] odd musk inundates your nostrils, encouraging you to further depravity. You work one hand along [hisher] slippery length while sucking the pre from [hisher] cumslit, encouraging [himher] to produce more.", parse);
 	Text.NL();
 	if(sexState == RosalinSexState.Rut)
 		Text.Add("<i>“Mmm, yes! Keep going... and maybe I'll fuck you later!”</i> Rosalin moans. ", parse);
@@ -3232,16 +3423,16 @@ Scenes.Rosalin.CockWorship = function(sexState) {
 		Text.Add("Your [vagDesc] feels like a sordid swamp of depravity, soaking through the front of your outfit so that any passersby can see and smell just how turned on you've become by giving oral service.", parse);
 	if(player.FirstCock()) {
 		parse["itThey"] = player.NumCocks() > 1 ? "they are" : "it is";
-		Text.Add("Your [multiCockDesc] tent[notS] powerfully, constrained and aching for touches. Right now, [itThey]n't the focus of your passion, instead acting as a pleasant, tactile reminder of how much you're enjoying the act of bringing Rosalin to culmination.", parse);
+		Text.Add("Your [cocks] tent[notS] powerfully, constrained and aching for touches. Right now, [itThey]n't the focus of your passion, instead acting as a pleasant, tactile reminder of how much you're enjoying the act of bringing Rosalin to culmination.", parse);
 	}
 	Text.NL();
-	Text.Add("Rosalin grunts from your latest affections, a slightly more confident expression appearing on [hisher] face in between exhalations of bliss. <i>“If you like me this much like this.... I need more Equinium, don't I?”</i> You're too busy lavishing [hisher] [rCockDesc] with adulation to respond. <i>“Would you like me to dose myself with it a few more times, maybe add some extra equine spunk to see if we can make it so potent that you get addicted to my pheromones? Or maybe just the taste of my cream? I can put it in any potions I make for you.”</i>", parse);
+	Text.Add("Rosalin grunts from your latest affections, a slightly more confident expression appearing on [hisher] face in between exhalations of bliss. <i>“If you like me this much like this.... I need more Equinium, don't I?”</i> You're too busy lavishing [hisher] [rcock] with adulation to respond. <i>“Would you like me to dose myself with it a few more times, maybe add some extra equine spunk to see if we can make it so potent that you get addicted to my pheromones? Or maybe just the taste of my cream? I can put it in any potions I make for you.”</i>", parse);
 	Text.NL();
 	Text.Add("That sounds lovely. Though being addicted might be a bit much, you're too turned on to think clearly. You show your agreement in the only way a horny, cock-addled mouth-slut can: by opening wide and sucking [himher] inside.", parse);
 	if(cock.race.isRace(Race.Horse))
 		Text.Add(" [HisHer] flare is getting so large that it nearly catches on your teeth, but you wrangle it in, gulping noisily as it slides into the back of your throat to keep yourself from gagging.", parse);
 	Text.NL();
-	Text.Add("[HisHer] rigid [rCockDesc] is just soft and spongy enough to bend and slide into your throat, stretching you uncomfortably.", parse);
+	Text.Add("[HisHer] rigid [rcock] is just soft and spongy enough to bend and slide into your throat, stretching you uncomfortably.", parse);
 	if(cock.Sheath())
 		Text.Add(" You carry on, not satisfied until [hisher] sheath is bunching up underneath your nose, sandwiched between your lips and [hisher] wonderful crotch.", parse);
 	Text.NL();
@@ -3267,14 +3458,14 @@ Scenes.Rosalin.CockWorship = function(sexState) {
 	Text.NL();
 	Text.Add("Your belly is being used as a tight cum-dump for the turned on [raceDesc], little more than a slowly filling sperm-tank. You can feel the pulsing ejaculations rippling through [hisher] length before they explode into you. Your belly is filling with strange, thick spooge, rounding with each virile insemination until you appear slightly pregnant from the sheer volume of [hisher] load.", parse);
 	Text.NL();
-	Text.Add("The pressure builds and builds until Rosalin realizes what [heshe]'s doing. [HeShe] stumbles away in a rush, still cumming, [hisher] [rCockDesc] yanking out of your throat mid-spasm. Your tongue is covered in a juicy, salty trail. Your lips and [face] are splattered with spunk. Finally, Rosalin's panicked retreat carries [himher] into some alchemical equipment, causing [himher] to trip and fall onto [hisher] back, with [hisher] ass in the air and [hisher] dick unloading straight into [hisher] own face. [HeShe] groans as [heshe] lets out the last few squirts of jism, soaking [hisher] face and filling [hisher] mouth.", parse);
+	Text.Add("The pressure builds and builds until Rosalin realizes what [heshe]'s doing. [HeShe] stumbles away in a rush, still cumming, [hisher] [rcock] yanking out of your throat mid-spasm. Your tongue is covered in a juicy, salty trail. Your lips and [face] are splattered with spunk. Finally, Rosalin's panicked retreat carries [himher] into some alchemical equipment, causing [himher] to trip and fall onto [hisher] back, with [hisher] ass in the air and [hisher] dick unloading straight into [hisher] own face. [HeShe] groans as [heshe] lets out the last few squirts of jism, soaking [hisher] face and filling [hisher] mouth.", parse);
 	Text.NL();
 	Text.Add("Cradling your stuffed middle, you crawl after [himher] and begin to lick [himher] clean, putting every single drop of [hisher] cockslime straight into your burgeoning belly, where it belongs.", parse);
 	Text.NL();
 	if(player.FirstCock()) {
 		parse["oneof"] = rosalin.NumCocks() > 1 ? " one of" : "";
 		parse["itsTheyre"] = rosalin.NumCocks() > 1 ? "they're" : "it's";
-		Text.Add("Rosalin takes some pity on you, grabbing hold of[oneof] your [multiCockDesc] and squeezing it through your [clothing]. You're so turned at this point that the touch of [hisher] hand is electric, so wonderful that your [multiCockDesc] feel[notS] like [itsTheyre] melting into a puddle of bliss, which is exactly what your undergarments are turning into. You cum out every drop of pent-up list, basting yourself in your own goo.", parse);
+		Text.Add("Rosalin takes some pity on you, grabbing hold of[oneof] your [cocks] and squeezing it through your [clothing]. You're so turned at this point that the touch of [hisher] hand is electric, so wonderful that your [cocks] feel[notS] like [itsTheyre] melting into a puddle of bliss, which is exactly what your undergarments are turning into. You cum out every drop of pent-up list, basting yourself in your own goo.", parse);
 		Text.NL();
 		if(player.CumOutput() > 3) {
 			Text.Add("The amount you're shooting soon becomes too much for your beleaguered [clothing], and white begins to leak out of every crack and crevice until you lie in a puddle of your own spent spunk.", parse);
@@ -3285,7 +3476,7 @@ Scenes.Rosalin.CockWorship = function(sexState) {
 		Text.Add("Rosalin takes some pity on you then, grabbing hold of your [vagDesc] and squeezing it through your [clothing]. You're so turned on at this point that the touch of [hisher] hand is electric, so wonderful that your [vagDesc] feels like it's liquefying into pure pleasure, leaking orgasmic delight all over the inside of your gear.", parse);
 		Text.NL();
 	}
-	Text.Add("You hold each other in sexual bliss for a while, though Rosalin doesn't seem quite sure what to make of it when you nuzzle back into [hisher] groin, licking the last few drops from [hisher] [rCockDesc]. [HeShe] clearly enjoys it, however. ", parse);
+	Text.Add("You hold each other in sexual bliss for a while, though Rosalin doesn't seem quite sure what to make of it when you nuzzle back into [hisher] groin, licking the last few drops from [hisher] [rcock]. [HeShe] clearly enjoys it, however. ", parse);
 	Text.NL();
 	Text.Add("An indeterminate amount of time later, you separate with a satisfied smile and a slow rub of your swollen belly, trying to ignore the way your [clothing] stick to you with every moment, alerting everyone with a nose to just how much of a sexual mess you are.", parse);
 	
@@ -3306,28 +3497,17 @@ Scenes.Rosalin.VagAftermath = function() {
 	
 	var parse = {
 		raceDesc       : function() { return rosalin.raceDesc(compScore); },
-		rBreastDesc    : function() { return rosalin.FirstBreastRow().Short(); },
-		rNipplesDesc   : function() { return rosalin.FirstBreastRow().NipsShort(); },
-		rCockDesc      : function() { return rosalin.FirstCock().Short(); },
-		rCockTip       : function() { return rosalin.FirstCock().TipShort(); },
-		rMultiCockDesc : function() { return rosalin.MultiCockDesc(); },
-		rVagDesc       : function() { return rosalin.FirstVag().Short(); },
-		rClitDesc      : function() { return rosalin.FirstVag().ClitShort(); },
-		rAnusDesc      : function() { return rosalin.Butt().AnalShort(); },
-		rHairDesc      : function() { return rosalin.Hair().Short(); },
-		rTailDesc      : function() { return rosalin.HasTail().Short(); },
-		rLegsDesc      : function() { return rosalin.LegsDesc(); },
-		rSkinDesc      : function() { return rosalin.SkinDesc(); },
 		
 		playername     : player.name,
-		cockDesc       : function() { return player.FirstCock().Short(); },
-		cockDesc2      : function() { return player.AllCocks()[1].Short(); },
+		cock       : function() { return player.FirstCock().Short(); },
+		cock2      : function() { return player.AllCocks()[1].Short(); },
 		knotDesc       : function() { return player.FirstCock().KnotShort(); },
-		multiCockDesc  : function() { return player.MultiCockDesc(); },
+		cocks  : function() { return player.MultiCockDesc(); },
 		armorDesc      : function() { return player.ArmorDesc(); },
 		undressedReady : player.Armor() ? "undressed" : "ready"
 	};
 	parse = rosalin.ParserPronouns(parse);
+	parse = rosalin.ParserTags(parse, "r");
 	
 	parse["itThem"] = player.NumCocks() > 1 ? "them" : "it";
 	
@@ -3342,7 +3522,7 @@ Scenes.Rosalin.VagAftermath = function() {
 		Text.NL();
 	}
 	
-	Text.Add("You pull out, your [multiCockDesc] still dripping sticky fluids from your lovemaking.", parse);
+	Text.Add("You pull out, your [cocks] still dripping sticky fluids from your lovemaking.", parse);
 	Text.NL();
 	
 	var scenes = new EncounterTable();
@@ -3359,7 +3539,7 @@ Scenes.Rosalin.VagAftermath = function() {
 		Text.Add("<i>“Always up for a good fuck,”</i> Rosalin sighs, rubbing against you sleepily.", parse);
 	});
 	scenes.AddEnc(function() {
-		Text.Add("<i>“Mm, thank you for the present,”</i> Rosalin purrs. Seemingly still entranced from the fucking she just received, the slut leans over to your [multiCockDesc] and meticulously licks [itThem] clean.", parse);
+		Text.Add("<i>“Mm, thank you for the present,”</i> Rosalin purrs. Seemingly still entranced from the fucking she just received, the slut leans over to your [cocks] and meticulously licks [itThem] clean.", parse);
 	});
 	
 	scenes.Get();

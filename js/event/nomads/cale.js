@@ -124,6 +124,10 @@ Cale.prototype.Met = function() {
 	return this.flags["Met2"] >= Cale.Met2.Talked;
 }
 
+Cale.prototype.Buttslut = function() {
+	return this.flags["Met2"] >= Cale.Met2.Goop;
+}
+
 Cale.prototype.FromStorage = function(storage) {
 	this.Butt().virgin       = parseInt(storage.virgin) == 1;
 	
@@ -175,6 +179,32 @@ Scenes.Cale.Interact = function() {
 	else if((cale.flags["Met2"] == Cale.Met2.Talked) && cale.Slut() >= 50) {
 		cale.flags["Met2"] = Cale.Met2.TalkedSlut;
 		Scenes.Cale.TalkSlut();
+		return;
+	}
+	else if((rosalin.flags["Anusol"] >= Rosalin.Anusol.AskedForCalesHelp) &&
+		(rosalin.flags["Anusol"] < Rosalin.Anusol.DeliveryFromCale)) {
+		
+		rosalin.flags["Anusol"] = Rosalin.Anusol.DeliveryFromCale;
+		
+		Text.Clear();
+		Text.Add("<i>“Hey, [playername]. Got your goods!”</i> the wolf announces as you approach. <i>“I delivered it to Rosie already, so just go talk to her when you want to run your experiment.”</i>", parse);
+		Text.NL();
+		Text.Add("With a grateful smile, you thank the wolf for his efforts.", parse);
+		Text.NL();
+		if(cale.Buttslut()) {
+			Text.Add("<i>“Say, since I did such a good job, how about you show me your appreciation? I have an itch that’s tough to scratch, and last time I checked, you had the proper equipment to help me,”</i> he says, eyeing you predatorily and licking his chops.", parse);
+			Text.NL();
+			Text.Add("You can’t help but chuckle at the wolf’s words; he really is such a slut now, isn’t he?", parse);
+			Text.NL();
+			Text.Add("<i>“Can’t help what feels good. Personally, I just like what I like, and I like what you can do,”</i> he grins.", parse);
+			Text.NL();
+			Text.Add("Smirking back, you tell him that you’ll think about it; you do have other business to take care of as well.", parse);
+		}
+		else {
+			Text.Add("<i>“Nice doing business, bud. Now, something else you want with me?”</i>", parse);
+		}
+		Text.Flush();
+		Scenes.Cale.Prompt();
 		return;
 	}
 	
@@ -795,6 +825,135 @@ Scenes.Cale.TalkPrompt = function() {
 				Scenes.Cale.TalkPrompt();
 			}, enabled : true,
 			tooltip : "Ask him about how it feels to be the one on the receiving end."
+		});
+	}
+	if((rosalin.flags["Anusol"] >= Rosalin.Anusol.OnTask) &&
+		(rosalin.flags["Anusol"] < Rosalin.Anusol.AskedForCalesHelp)) {
+		//[name]
+		options.push({ nameStr : "Anal experiment",
+			tooltip : "Cale goes on frequent runs for Rosalin, maybe he could get some stuff for you on the side?",
+			func : function() {
+				
+				var first = (rosalin.flags["Anusol"] < Rosalin.Anusol.TalkedToCale);
+				rosalin.flags["Anusol"] = Rosalin.Anusol.TalkedToCale;
+				
+				var coin = 200;
+				parse["coin"] = Text.NumToText(coin);
+				
+				Text.Clear();
+				if(first) {
+					Text.Add("<i>“Sure, I wouldn’t mind some extra cash. What do you need?”</i>", parse);
+					Text.NL();
+					Text.Add("Recalling what Rosalin told you, you explain to the lupine hunter what you need him to keep an eye out for.", parse);
+					Text.NL();
+					if(cale.Buttslut()) {
+						Text.Add("<i>“Alright, I can get these for you, but let’s talk about business...”</i>", parse);
+						Text.NL();
+						Text.Add("Curious, you ask Cale what he means.", parse);
+						Text.NL();
+						Text.Add("<i>“The price for this stuff usually goes for about [coin], give or take. Depends on how much I like you,”</i> he says with a lopsided smile, <i>“but luckily for you, I happen to like you a lot. I’m willing to tone the price down if you show me a good time.”</i>", parse);
+						Text.NL();
+						Text.Add("Despite yourself, you find yourself being a little surprised at Cale’s words; who knew he had gotten so... <i>attached</i> to you? Maybe you ought to take him up on his offer; [coin] coins isn’t chicken feed by any stretch of the imagination...", parse);
+						Text.NL();
+						Text.Add("<i>“Do this for me and I’ll give you a fifty off my services, but only if you do me good. I’ve been aching for a good buttfucking,”</i> he chuckles.", parse);
+					}
+					else {
+						Text.Add("<i>“Alright, I can get these for you, but let’s talk cash. These ingredients shouldn’t be too hard to find. So let’s say… [coin].”</i>", parse);
+					}
+				}
+				else {
+					Text.Add("<i>“Oh yeah, I remember this. Got the cash yet?”</i>", parse);
+				}
+				Text.Flush();
+				
+				//[name]
+				var options = new Array();
+				if(cale.Buttslut()) {
+					//[Deal][No sex][No deal]
+					options.push({ nameStr : "Deal",
+						tooltip : "Fuck Cale’s butt <i>and</i> get a discount? Sounds like a bargain!",
+						func : function() {
+							Text.Clear();
+							Text.Add("<i>“Knew you’d see things my way. After all, who doesn’t like Cale?”</i> he grins.", parse);
+							Text.NL();
+							Text.Add("<i>“Alright, fork over the coins and meet me back at my tent. I think my pants are getting too tight for comfort,”</i> he says, extending his hand.", parse);
+							Text.NL();
+							Text.Add("Your lips curl into a smirk as you take the coins from your belongings and reach for his hand, fingers brushing his as you drop the money into his palm. Before he can move to transfer them to his pocket, your fingers wrap around his hand and the coins alike and you start leading Cale towards his tent. The wolf catches on in an instant and keeps up, tail wagging happily all the way.", parse);
+							Text.NL();
+							
+							rosalin.flags["Anusol"] = Rosalin.Anusol.AskedForCalesHelp;
+							
+							party.coin -= (coin - 50);
+							
+							Scenes.Cale.TentSex();
+						}, enabled : (party.coin >= coin - 50) && player.BiggestCock(null, true)
+					});
+					options.push({ nameStr : "No sex",
+						tooltip : "You’d rather pay the full price than take his wolfy butt.",
+						func : function() {
+							Text.Clear();
+							Text.Add("<i>“Ouch, you really know how to hurt a wolf’s feelings...”</i> he replies with a grimace.", parse);
+							Text.NL();
+							Text.Add("Feeling a twinge of guilt, you start to apologize for what you said.", parse);
+							Text.NL();
+							Text.Add("He bursts out laughing at your reaction. <i>“Just pulling your leg, bud. No hard feelings!”</i> he grins. <i>“But seriously, if you don’t want some wolf-tail, then you gotta pay full. That’ll be [coin],”</i> he extends his hand for you.", parse);
+							Text.NL();
+							Text.Add("That’s only fair. After a few moments of searching, you fish out the money that Cale requested and it tinkles into his open palm before he makes it vanish with a smirk.", parse);
+							Text.Flush();
+							
+							rosalin.flags["Anusol"] = Rosalin.Anusol.AskedForCalesHelp;
+							
+							party.coin -= coin;
+							
+							Scenes.Cale.Prompt();
+						}, enabled : (party.coin >= coin)
+					});
+					options.push({ nameStr : "No deal",
+						tooltip : "Unfortunately, you can’t afford to pay for his services at this time.",
+						func : function() {
+							Text.Clear();
+							Text.Add("<i>“Having a hard time getting your coin? No problem, if you change your mind you could always come back to me.”</i>", parse);
+							Text.NL();
+							Text.Add("You nod in understanding; you’ll have to see about filling your pockets if you want Cale’s help in acquiring Rosalin’s ingredients.", parse);
+							Text.Flush();
+							
+							Scenes.Cale.Prompt();
+						}, enabled : true
+					});
+				}
+				else {
+					//[Deal][No deal]
+					options.push({ nameStr : "Deal",
+						tooltip : "Sounds fair, he’s got himself a deal!",
+						func : function() {
+							Text.Clear();
+							Text.Add("<i>“Alright then, just hand me the money and I’ll get you everything you need in three days time tops!”</i> he says with a confident smirk.", parse);
+							Text.NL();
+							Text.Add("With a smile of your own, you count out the gold he needs and pass it to him, watching as the wolf-morph makes it disappear into one of his pockets.", parse);
+							Text.Flush();
+							
+							rosalin.flags["Anusol"] = Rosalin.Anusol.AskedForCalesHelp;
+							
+							party.coin -= coin;
+							
+							Scenes.Cale.Prompt();
+						}, enabled : party.coin >= coin
+					});
+					options.push({ nameStr : "No deal",
+						tooltip : "You can’t afford to pay for his services at this moment...",
+						func : function() {
+							Text.Clear();
+							Text.Add("<i>“Having a hard time getting your coin? No problem, if you change your mind you could always come back to me.”</i>", parse);
+							Text.NL();
+							Text.Add("You nod in understanding; you’ll have to see about filling your pockets if you want Cale’s help in acquiring Rosalin’s ingredients.", parse);
+							Text.Flush();
+							
+							Scenes.Cale.Prompt();
+						}, enabled : true
+					});
+				}
+				Gui.SetButtonsFromList(options, false, null);
+			}, enabled : true
 		});
 	}
 	Gui.SetButtonsFromList(options, true, Scenes.Cale.Prompt);
