@@ -708,7 +708,7 @@ Scenes.Rosalin.BrewAnusol = function() {
 	if(anusol >= Rosalin.Anusol.AskedForCalesHelp) {
 		Text.Add("As you approach the humming chimeric alchemist, [heshe] whirls around to face you.", parse);
 		Text.NL();
-		Text.Add("<i>“Ah, I was wondering where you had gone to! Wolfie already delivered the goods, so lets get started shall we?”</i>", parse);
+		Text.Add("<i>“Ah, I was wondering where you had gone to! Wolfie already delivered the goods, so let’s get started shall we?”</i>", parse);
 	}
 	else {
 		Text.Add("As you approach the humming chimeric alchemist, you tell [himher] that you found the ingredients [heshe] needed, holding them out as proof of your words.", parse);
