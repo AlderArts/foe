@@ -543,7 +543,8 @@ Player.prototype.PregnancyTrigger = function(womb, slot) {
 		
 		// #Initiation block
 		
-		Text.Add("All of a sudden, a warm trickle of fluid erupts from your [vag] and runs down your [thighs], followed by a sharp pain in your lower belly.", parse);
+		parse["v"] = slot != PregnancyHandler.Slot.Butt ? parse["vag"] : "womb";
+		Text.Add("All of a sudden, a warm trickle of fluid erupts from your [v] and runs down your [thighs], followed by a sharp pain in your lower belly.", parse);
 		Text.NL();
 		
 		var scenes = new EncounterTable();
