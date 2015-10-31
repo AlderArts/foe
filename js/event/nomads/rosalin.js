@@ -739,7 +739,7 @@ Scenes.Rosalin.BrewAnusol = function() {
 	
 	if(rosalin.flags["Anusol"] < Rosalin.Anusol.AskedForCalesHelp) {
 		_.each(Items.Anusol.recipe, function(it) {
-			party.Inv().RemoveItem(it);
+			party.Inv().RemoveItem(it.it);
 		});
 	}
 	
