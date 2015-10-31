@@ -692,8 +692,6 @@ Scenes.Rosalin.TalkPrompt = function() {
 }
 
 Scenes.Rosalin.BrewAnusol = function() {
-	
-	
 	var racescore = new RaceScore(rosalin.body);
 	var compScore = rosalin.origRaceScore.Compare(racescore);
 	
@@ -704,10 +702,10 @@ Scenes.Rosalin.BrewAnusol = function() {
 	parse = rosalin.ParserPronouns(parse);
 	parse = Text.ParserPlural(parse, rosalin.NumCocks() > 1);
 	
-	rosalin.flags["Anusol"] = Rosalin.Anusol.Brewed;
+	var anusol = rosalin.flags["Anusol"];
 	
 	Text.Clear();
-	if(rosalin.flags["Anusol"] >= Rosalin.Anusol.AskedForCalesHelp) {
+	if(anusol >= Rosalin.Anusol.AskedForCalesHelp) {
 		Text.Add("As you approach the humming chimeric alchemist, [heshe] whirls around to face you.", parse);
 		Text.NL();
 		Text.Add("<i>“Ah, I was wondering where you had gone to! Wolfie already delivered the goods, so lets get started shall we?”</i>", parse);
@@ -737,7 +735,7 @@ Scenes.Rosalin.BrewAnusol = function() {
 	Text.Add("Accepting the potion, you tuck it carefully away and thank [himher] for [hisher] efforts before you leave [himher] to enjoy [hisher] afterglow.", parse);
 	Text.Flush();
 	
-	if(rosalin.flags["Anusol"] < Rosalin.Anusol.AskedForCalesHelp) {
+	if(anusol < Rosalin.Anusol.AskedForCalesHelp) {
 		_.each(Items.Anusol.recipe, function(it) {
 			party.Inv().RemoveItem(it.it);
 		});
@@ -747,6 +745,8 @@ Scenes.Rosalin.BrewAnusol = function() {
 	
 	player.AddAlchemy(Items.Anusol);
 	rosalin.AddAlchemy(Items.Anusol);
+	
+	rosalin.flags["Anusol"] = Rosalin.Anusol.Brewed;
 	
 	Gui.NextPrompt();
 }
