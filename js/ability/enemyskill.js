@@ -197,10 +197,14 @@ Abilities.EnemySkill.TViolate.castTree.push(AbilityNode.Template.Physical({
 				Sex.Vaginal(orchid, player);
 				player.FuckVag(player.FirstVag(), orchid.FirstCock(), 2);
 				orchid.Fuck(orchid.FirstCock(), 2);
+				
+				Scenes.Orchid.Impregnate(player);
 			}
 			Sex.Anal(orchid, player);
 			player.FuckAnal(player.Butt(), orchid.FirstCock(), 2);
 			orchid.Fuck(orchid.FirstCock(), 2);
+			
+			Scenes.Orchid.Impregnate(player, PregnancyHandler.Slot.Butt);
 			
 			Sex.Blowjob(player, orchid);
 			player.FuckOral(player.Mouth(), orchid.FirstCock(), 2);

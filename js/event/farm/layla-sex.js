@@ -1,4 +1,17 @@
 
+
+Scenes.Layla.Impregnate = function(mother, father, load, slot) {
+	mother.PregHandler().Impregnate({
+		slot   : slot || PregnancyHandler.Slot.Vag,
+		mother : mother,
+		father : father,
+		race   : Race.Chimera,
+		num    : 1,
+		time   : 15 * 24,
+		load   : load
+	});
+}
+
 //TODO
 Scenes.Layla.SexPrompt = function(switchSpot) {
 	var parse = {
@@ -1183,17 +1196,9 @@ Scenes.Layla.SexCatchAnalCont2 = function(parse, kiss, tailcock) {
 				Text.NL();
 				
 				var cum = layla.OrgasmCum();
-				// TODO preg
-				player.PregHandler().Impregnate({
-					slot   : PregnancyHandler.Slot.Butt,
-					mother : player,
-					father : layla,
-					race   : Race.Chimera,
-					num    : 1,
-					time   : 24,
-					load   : 3
-				});
 				
+				Scenes.Layla.Impregnate(player, layla, cum, PregnancyHandler.Slot.Butt);
+
 				Text.Add("You cry out in pleasure, squeezing down for all you’re worth. Sparks spit and crackle inside your brain, racing along your nerves as your own boundary is reached and passed.", parse);
 				if(player.FirstCock()) {
 					Text.Add(" Your [cocks] ache[notS] and throb[notS], hard as diamond before erupting in[a] geyser[notS] of semen that wash[notEs] over your belly, spilling messily down your [thighs] and puddling on the ground.", parse);
@@ -1263,18 +1268,10 @@ Scenes.Layla.SexCatchAnalCont3 = function(parse) {
 	Text.Add("As you thrust and moan, you feel your own pleasure building, curling your limbs around your chimeric lover as you grind together. Layla cries out, arching her back as the first shot of her cum erupts inside of you. The feeling of it - sticky and warm, like wet heat slurping lewdly inside of you - pushes you past the limit, and you climax in turn.", parse);
 	Text.NL();
 	
-	//TODO Preg
-	player.PregHandler().Impregnate({
-		slot   : PregnancyHandler.Slot.Butt,
-		mother : player,
-		father : layla,
-		race   : Race.Chimera,
-		num    : 1,
-		time   : 24,
-		load   : 1
-	});
-	
 	var cum = layla.OrgasmCum();
+	
+	Scenes.Layla.Impregnate(player, layla, cum, PregnancyHandler.Slot.Butt);
+	
 	var cum = player.OrgasmCum();
 	
 	if(player.FirstCock()) {
@@ -2011,17 +2008,8 @@ Scenes.Layla.SexPitchVaginalCont3 = function(opts, p1cock, parse) {
 				
 				cum = cum * multiplier;
 				
-				//TODO IMPREGNATE LAYLA
-				layla.PregHandler().Impregnate({
-					slot   : PregnancyHandler.Slot.Vag,
-					mother : layla,
-					father : player,
-					race   : Race.Chimera,
-					num    : 1,
-					time   : 24,
-					load   : cum
-				});
-				
+				Scenes.Layla.Impregnate(layla, player, cum);
+			
 				if(cum < 3) {
 					Text.Add("Thick, sloppy ropes of seed pour from your manhood, effortlessly sucked away by the chimera’s milking walls and ferried off to her womb.", parse);
 				}
@@ -2273,17 +2261,8 @@ Scenes.Layla.SexPitchVaginalCont3 = function(opts, p1cock, parse) {
 				
 				var cum = layla.OrgasmCum();
 				
-				//TODO IMPREG PC WITH LAYLA
-				player.PregHandler().Impregnate({
-					slot   : PregnancyHandler.Slot.Vag,
-					mother : player,
-					father : layla,
-					race   : Race.Chimera,
-					num    : 1,
-					time   : 24,
-					load   : cum
-				});
-				
+				Scenes.Layla.Impregnate(player, layla, cum, PregnancyHandler.Slot.Vag);
+
 				Text.Add("You can’t tell which of you breaks down first. The two of you sing your pleasure together, crooning in bliss as you reach a mutual climax. Hot jets of thick, sticky girl-seed gush up your cunt, soothing the itch that has been driving you mad, even as a mixture of cum and feminine honey slops over Layla’s thighs.", parse);
 				Text.NL();
 				Text.Add("By the time you both fall slack, panting for breath as Layla absently helps you balance atop of her, your belly is visibly rounded, several inches gained from the sheer volume of her seed packed away inside. But you couldn’t care less; you feel sooo good...", parse);

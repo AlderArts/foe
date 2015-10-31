@@ -93,6 +93,18 @@ OrchidBoss.prototype.ToStorage = function() {
 	return storage;
 }
 
+Scenes.Orchid.Impregnate = function(mother, slot) {
+	mother.PregHandler().Impregnate({
+		slot   : slot || PregnancyHandler.Slot.Vag,
+		mother : mother,
+		father : orchid,
+		race   : Race.Plant,
+		num    : 1,
+		time   : 10 * 24,
+		load   : 3
+	});
+}
+
 OrchidBoss.prototype.Act = function(encounter, activeChar) {
 	Text.Add("Orchid squirms and sways her hips.");
 	Text.NL();

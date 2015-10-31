@@ -128,14 +128,14 @@ Equine.prototype.Act = function(encounter, activeChar) {
 		Abilities.Seduction.Tease.Use(encounter, this, t);
 }
 
-Scenes.Equine.StallionImpregnate = function(mother, father) {
+Scenes.Equine.StallionImpregnate = function(mother, father, slot) {
 	mother.PregHandler().Impregnate({
-		slot   : PregnancyHandler.Slot.Vag,
+		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother : mother,
 		father : father,
 		race   : Race.Horse,
 		num    : 1,
-		time   : 24,
+		time   : 30 * 24,
 		load   : 3
 	});
 }

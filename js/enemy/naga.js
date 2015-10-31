@@ -115,14 +115,14 @@ Naga.prototype.Act = function(encounter, activeChar) {
 		Abilities.Seduction.Tease.Use(encounter, this, t);
 }
 
-Scenes.Naga.Impregnate = function(mother, father) {
+Scenes.Naga.Impregnate = function(mother, father, slot) {
 	mother.PregHandler().Impregnate({
-		slot   : PregnancyHandler.Slot.Vag,
+		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother : mother,
 		father : father,
 		race   : Race.Snake,
 		num    : 1,
-		time   : 24,
+		time   : 20 * 24,
 		load   : 3
 	});
 }

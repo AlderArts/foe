@@ -312,14 +312,14 @@ LagomorphWizard.prototype.Act = function(encounter, activeChar) {
 		Abilities.Seduction.Tease.Use(encounter, this, t);
 }
 
-Scenes.Lagomorph.Impregnate = function(mother, father) {
+Scenes.Lagomorph.Impregnate = function(mother, father, slot) {
 	mother.PregHandler().Impregnate({
-		slot   : PregnancyHandler.Slot.Vag,
+		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother : mother,
 		father : father,
 		race   : Race.Rabbit,
 		num    : 4,
-		time   : 20
+		time   : 20 * 24
 	});
 }
 

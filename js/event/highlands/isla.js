@@ -113,7 +113,7 @@ Scenes.Isla.Impregnate = function(father, cum) {
 		father : father,
 		race   : Race.Ferret,
 		num    : _.random(1,3),
-		time   : 24, //TODO time
+		time   : 24*24,
 		load   : cum
 	});
 }

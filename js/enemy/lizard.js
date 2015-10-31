@@ -126,14 +126,14 @@ Lizard.prototype.Act = function(encounter, activeChar) {
 		Abilities.Seduction.Tease.Use(encounter, this, t);
 }
 
-Scenes.Lizards.Impregnate = function(mother, father) {
+Scenes.Lizards.Impregnate = function(mother, father, slot) {
 	mother.PregHandler().Impregnate({
-		slot   : PregnancyHandler.Slot.Vag,
+		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother : mother,
 		father : father,
 		race   : Race.Lizard,
 		num    : 1,
-		time   : 16
+		time   : 16 * 24
 	});
 }
 

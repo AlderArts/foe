@@ -101,14 +101,14 @@ Roa.prototype.IsAtLocation = function(location) {
 	return true;
 }
 
-Scenes.Roa.Impregnate = function(mother, load) {
+Scenes.Roa.Impregnate = function(mother, load, slot) {
 	mother.PregHandler().Impregnate({
-		slot   : PregnancyHandler.Slot.Vag,
+		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother : mother,
 		father : roa,
 		race   : Race.Rabbit,
 		num    : 3,
-		time   : 24,
+		time   : 20 * 24,
 		load   : 2 * load
 	});
 }

@@ -125,7 +125,7 @@ Scenes.Lagon.LagonImpregnate = function(mother, slot) {
 		father : lagon,
 		race   : Race.Rabbit,
 		num    : 5,
-		time   : 24,
+		time   : 20 * 24,
 		load   : 4
 	});
 }

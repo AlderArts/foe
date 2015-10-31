@@ -1,5 +1,17 @@
 
 
+Scenes.Terry.Impregnate = function(mother, father, cum, slot) {
+	isla.PregHandler().Impregnate({
+		slot   : slot || PregnancyHandler.Slot.Vag,
+		mother : mother,
+		father : father,
+		race   : Race.Fox,
+		num    : 1,
+		time   : 29*24,
+		load   : cum
+	});
+}
+
 // TODO
 Scenes.Terry.SexPrompt = function(backPrompt) {
 	var parse = {
@@ -3742,16 +3754,7 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 					
 					var cum = player.OrgasmCum();
 					
-					//TODO
-					terry.PregHandler().Impregnate({
-						slot   : PregnancyHandler.Slot.Vag,
-						mother : terry,
-						father : player,
-						race   : Race.Fox,
-						num    : 1,
-						time   : 24,
-						load   : cum
-					});
+					Scenes.Terry.Impregnate(terry, player, cum);
 					
 					if(p1cock.knot != 0) {
 						var knot2 = p2cock && p2cock.knot != 0;
@@ -4144,17 +4147,7 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 					
 					var cum = player.OrgasmCum();
 					
-					//TODO
-					terry.PregHandler().Impregnate({
-						slot   : PregnancyHandler.Slot.Vag,
-						mother : terry,
-						father : player,
-						race   : Race.Fox,
-						num    : 1,
-						time   : 24,
-						load   : cum * 3
-					});
-					
+					Scenes.Terry.Impregnate(terry, player, cum * 3);
 					
 					if(cum > 6) {
 						Text.Add("Great gushes of semen wash into Terry like an ocean of spunk, filling [himher] to the brim and beyond. Such is the cascade of cum you have unleashed that Terry’s stomach distends, hanging pendulously down until it almost brushes the ground; [heshe] looks like [heshe] could drop a kit or two any day now. You’re almost certain that [heshe]’s going to get pregnant from this.", parse);

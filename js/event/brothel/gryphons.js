@@ -502,7 +502,7 @@ Scenes.Brothel.Gryphons.Outro = function(gender, preg) {
 						father: gryphons,
 						race: Race.Gryphon,
 						num: 3,
-						time: 48, //TODO
+						time: 25*24,
 						force: true
 					});
 					return "As you examine your midriff, a palpable wave of warmth and contentment ripples through your lower belly, spreading out into the rest of your body. There’s no apparent change, but you have an uneasy feeling…";

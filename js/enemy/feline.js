@@ -381,14 +381,14 @@ Lion.prototype.constructor = Lion;
 
 
 
-Scenes.Felines.Impregnate = function(mother, father) {
+Scenes.Felines.Impregnate = function(mother, father, slot) {
 	mother.PregHandler().Impregnate({
-		slot   : PregnancyHandler.Slot.Vag,
+		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother : mother,
 		father : father,
 		race   : father.race,
 		num    : 3,
-		time   : 24
+		time   : 24 * 24
 	});
 }
 

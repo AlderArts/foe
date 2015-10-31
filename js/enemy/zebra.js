@@ -184,6 +184,18 @@ ZebraBrave.prototype.Act = function(encounter, activeChar) {
 		Abilities.Attack.Use(encounter, this, t);
 }
 
+Scenes.ZebraShaman.Impregnate = function(mother, father, slot) {
+	mother.PregHandler().Impregnate({
+		slot   : slot || PregnancyHandler.Slot.Vag,
+		mother : mother,
+		father : father,
+		race   : Race.Zebra,
+		num    : 1,
+		time   : 30 * 24,
+		load   : 3
+	});
+}
+
 Scenes.ZebraShaman.LoneEnc = function(levelbonus) {
  	var enemy = new Party();
  	var zebra = new ZebraShaman(levelbonus);
@@ -540,6 +552,9 @@ Scenes.ZebraShaman.OnWinVaginal = function(enc) {
 		Text.NL();
 		Text.Add("The shaman pulls away from the kiss and throws his head back, letting out a loud snort as the tip of his member flares up and sends wave after wave of potent seed flooding into your well-used hole. The amount of spunk he pours into you is far greater than what you can handle, and most of it ends up spraying back out. His orgasm sets off your own, sending your mind into a whirlwind of pleasure as your [vag] clamps down once more, this time making sure to get the spunk it needs.", parse);
 		Text.NL();
+		
+		Scenes.ZebraShaman.Impregnate(player, zebra);
+		
 		if(player.FirstCock()) {
 			Text.Add("Just when you thought it couldn't get any better, the shaman surprises you by grabbing[oneof] your [cocks] and starting to pump it furiously, making you shoot several strands of seed into the air which splatter across your [breasts] and face, mixing with the fluids he covered you in earlier.", parse);
 			Text.NL();
