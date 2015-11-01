@@ -72,33 +72,37 @@ Scenes.Masturbation.Entry = function() {
 		
 		var optsTv = new Array();
 		var addVagToy = function(toy) {
+			var enabled = vagCap >= toy.cock.Thickness();
 			if(party.Inv().QueryNum(toy)) {
 				optsTv.push({ nameStr : toy.name,
 					tooltip : toy.Long(),
 					func : function(obj) {
 						Scenes.Masturbation.VagOpening(Scenes.Masturbation.VagToy, obj);
-					}, enabled : vagCap >= toy.cock.Thickness(),
+					}, enabled : enabled,
 					obj : toy
 				});
+				return enabled;
 			}
+			return false;
 		}
-		addVagToy(Items.Toys.SmallDildo);
-		addVagToy(Items.Toys.MediumDildo);
-		addVagToy(Items.Toys.LargeDildo);
-		addVagToy(Items.Toys.ThinDildo);
-		addVagToy(Items.Toys.ButtPlug);
-		addVagToy(Items.Toys.LargeButtPlug);
-		addVagToy(Items.Toys.AnalBeads);
-		addVagToy(Items.Toys.LargeAnalBeads);
-		addVagToy(Items.Toys.EquineDildo);
-		addVagToy(Items.Toys.CanidDildo);
-		addVagToy(Items.Toys.ChimeraDildo);
+		var toyAvailable = false;
+		toyAvailable |= addVagToy(Items.Toys.SmallDildo);
+		toyAvailable |= addVagToy(Items.Toys.MediumDildo);
+		toyAvailable |= addVagToy(Items.Toys.LargeDildo);
+		toyAvailable |= addVagToy(Items.Toys.ThinDildo);
+		toyAvailable |= addVagToy(Items.Toys.ButtPlug);
+		toyAvailable |= addVagToy(Items.Toys.LargeButtPlug);
+		toyAvailable |= addVagToy(Items.Toys.AnalBeads);
+		toyAvailable |= addVagToy(Items.Toys.LargeAnalBeads);
+		toyAvailable |= addVagToy(Items.Toys.EquineDildo);
+		toyAvailable |= addVagToy(Items.Toys.CanidDildo);
+		toyAvailable |= addVagToy(Items.Toys.ChimeraDildo);
 		if(optsTv.length >= 1) {
 			options.push({ nameStr : "Vag - toys",
 				tooltip : "",
 				func : function() {
 					Gui.SetButtonsFromList(optsTv, false, null);
-				}, enabled : !taur
+				}, enabled : !taur && toyAvailable
 			});
 		}
 		
@@ -124,33 +128,37 @@ Scenes.Masturbation.Entry = function() {
 	
 	var optsTa = new Array();
 	var addAnalToy = function(toy) {
+		var enabled = analCap >= toy.cock.Thickness();
 		if(party.Inv().QueryNum(toy)) {
 			optsTa.push({ nameStr : toy.name,
 				tooltip : toy.Long(),
 				func : function(obj) {
 					Scenes.Masturbation.AnalOpening(Scenes.Masturbation.AnalToy, obj);
-				}, enabled : analCap >= toy.cock.Thickness(),
+				}, enabled : enabled,
 				obj : toy
 			});
+			return enabled;
 		}
+		return false;
 	}
-	addAnalToy(Items.Toys.SmallDildo);
-	addAnalToy(Items.Toys.MediumDildo);
-	addAnalToy(Items.Toys.LargeDildo);
-	addAnalToy(Items.Toys.ThinDildo);
-	addAnalToy(Items.Toys.ButtPlug);
-	addAnalToy(Items.Toys.LargeButtPlug);
-	addAnalToy(Items.Toys.AnalBeads);
-	addAnalToy(Items.Toys.LargeAnalBeads);
-	addAnalToy(Items.Toys.EquineDildo);
-	addAnalToy(Items.Toys.CanidDildo);
-	addAnalToy(Items.Toys.ChimeraDildo);
+	var toyAvailable = false;
+	toyAvailable |= addAnalToy(Items.Toys.SmallDildo);
+	toyAvailable |= addAnalToy(Items.Toys.MediumDildo);
+	toyAvailable |= addAnalToy(Items.Toys.LargeDildo);
+	toyAvailable |= addAnalToy(Items.Toys.ThinDildo);
+	toyAvailable |= addAnalToy(Items.Toys.ButtPlug);
+	toyAvailable |= addAnalToy(Items.Toys.LargeButtPlug);
+	toyAvailable |= addAnalToy(Items.Toys.AnalBeads);
+	toyAvailable |= addAnalToy(Items.Toys.LargeAnalBeads);
+	toyAvailable |= addAnalToy(Items.Toys.EquineDildo);
+	toyAvailable |= addAnalToy(Items.Toys.CanidDildo);
+	toyAvailable |= addAnalToy(Items.Toys.ChimeraDildo);
 	if(optsTa.length >= 1) {
 		options.push({ nameStr : "Anal - toys",
 			tooltip : "",
 			func : function() {
 				Gui.SetButtonsFromList(optsTa, false, null);
-			}, enabled : !taur
+			}, enabled : !taur && toyAvailable
 		});
 	}
 	
