@@ -2047,7 +2047,7 @@ Scenes.Halloween.NadirMa = function() {
 		Text.NL();
 		Text.Add("You’re just making do with what you have, though. These are the only clothes you’ve been able to find. She looked like she could have whipped up a lot more coverage out of all those bandages of hers, though.", parse);
 		Text.NL();
-		Text.Add("<i>“Oh? I could have? And who are you to make that claim? You act as if you knew me well...”</i>", parse);
+		Text.Add("<i>“Oh? I could have? And who are you to make that claim? You act as if you know me well...”</i>", parse);
 		Text.NL();
 		Text.Add("You quickly apologize; you don’t know her well, but she manipulated those bandages with such skill, you were sure she could have dressed herself up with them however she wished, if she felt it necessary.", parse);
 		Text.NL();
@@ -2599,7 +2599,7 @@ Scenes.Halloween.NadirMaCont2 = function(parse) {
 		Text.Add("You slump to the floor, panting for breath, feeling more frustrated than relieved; you’re so close that it’s almost painful, even the slow ebbing of lust as it bleeds away a near-torturous experience.", parse);
 		Text.NL();
 		parse["k"] = p1cock.Knot() ? ", knot included" : "";
-		Text.Add("<i>“Now, about your reward...”</i> Nadir-Ma suddenly hoists you up as if you weighed nothing and lays you down on the table. In one smooth move, she climbs on the table and aligns[oneof] your [cocks] with juice-dripping pussy. <i>“You’ll get to fuck a goddess.”</i> And with that, she lets gravity take its course, impaling herself on your shaft all the way to hilt[k].", parse);
+		Text.Add("<i>“Now, about your reward...”</i> Nadir-Ma suddenly hoists you up as if you weighed nothing and lays you down on the table. In one smooth move, she climbs on the table and aligns[oneof] your [cocks] with her juice-dripping pussy. <i>“You’ll get to fuck a goddess.”</i> And with that, she lets gravity take its course, impaling herself on your shaft all the way to hilt[k].", parse);
 		Text.NL();
 		Text.Add("You cry out in pleasure, a strangled gasp of pure lust at being so directly enveloped within her. The heat of her drooling cunt swallows your senses, and for a moment, it’s as if there’s nothing but her cooch greedily devouring your cock, slurping back and forth along your length as she bounces atop you.", parse);
 		Text.NL();
@@ -3100,7 +3100,7 @@ Scenes.Halloween.NadirMaBadend = function() {
 	Text.NL();
 	Text.Add("You gasp as you can finally breathe through your mouth again. You pant softly, trying to catch your breath, but Nadir-Ma’s next thrust knocks the air from your lungs, forcing another pleased moan from your lips.", parse);
 	Text.NL();
-	Text.Add("<i>“Hmm, such delicious sound! C’mon, moan for me!”</i> she says, grinding her knot against your used [anus].", parse);
+	Text.Add("<i>“Hmm, such a delicious sound! C’mon, moan for me!”</i> she says, grinding her knot against your used [anus].", parse);
 	Text.NL();
 	Text.Add("With such encouragement, you can’t even think about resisting. You moan again, deliberately this time, doing your best to emphasize how good it feels now to be so full, so well used.", parse);
 	Text.NL();
@@ -3287,7 +3287,7 @@ Scenes.Halloween.NadirMaBadend = function() {
 		}
 		Text.NL();
 		if(werewolf) {
-			Text.Add("If the old Nadir-Ma was intimidating in her blend of strength and sexuality, than the new her is a true monster. She easily stands at least a foot taller than she used to, and muscles visibly ripple up and down her limbs. She has visible biceps, and thighs that look like they could crack nuts. Ever her belly is ripped, with a visible six-pack defined through the tight fur.", parse);
+			Text.Add("If the old Nadir-Ma was intimidating in her blend of strength and sexuality, then the new her is a true monster. She easily stands at least a foot taller than she used to, and muscles visibly ripple up and down her limbs. She has visible biceps, and thighs that look like they could crack nuts. Even her belly is ripped, with a visible six-pack defined through the tight fur.", parse);
 			Text.NL();
 			Text.Add("She flexes a bit, then whistles. <i>“Not bad, I kinda like the new muscular look...”</i>", parse);
 			Text.NL();
