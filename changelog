@@ -7,7 +7,9 @@ CHANGELOG for Fall of Eden
 
 Version 0.4n2
 -------------
-* Fixed bug with Anusol-crafting
+* Fixed a bug with Anusol-crafting
+* Fixed a bug that would lock you in the toy masturbation menu. Menu is now unavailable if no valid toy is present
+* Fixed a bunch of typos
 
 --------------------------------------------
              PREVIOUS VERSIONS
