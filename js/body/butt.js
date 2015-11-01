@@ -33,7 +33,7 @@ Butt.prototype.noun = function() {
 	nouns.push("tush");
 	nouns.push("posterior");
 	nouns.push("flank");
-	return nouns[Rand(nouns.length)];
+	return _.sample(nouns);
 }
 Butt.prototype.adj = function() {
 	var size = this.buttSize.Get();
@@ -73,19 +73,18 @@ Butt.prototype.adj = function() {
 		adjs.push("enormous");
 		adjs.push("titanic");
 	}
-	return adjs[Rand(adjs.length)];
+	return _.sample(adjs);
 }
 Butt.prototype.analNoun = function() {
-	var noun;
-	r = Rand(7);
-	if     (r == 0) noun = "pucker";
-	else if(r == 1) noun = "anus";
-	else if(r == 2) noun = "anal opening";
-	else if(r == 3) noun = "asshole";
-	else if(r == 4) noun = "colon";
-	else if(r == 5) noun = "sphincter";
-	else            noun = "ass"; // sligthly higher prio
-	return noun;
+	var nouns = [];
+	nouns.push("pucker");
+	nouns.push("anus");
+	nouns.push("anal opening");
+	nouns.push("asshole");
+	nouns.push("colon");
+	nouns.push("sphincter");
+	nouns.push("ass");
+	return _.sample(nouns);
 }
 Butt.prototype.AnalDesc = function() {
 	var area = this.capacity.Get() * this.stretch.Get();
@@ -97,7 +96,7 @@ Butt.prototype.AnalDesc = function() {
 	else if(area <= 9 ) ret = {a:"a", adj: "very flexible"};
 	else if(area <= 11) ret = {a:"a", adj: "loose"};
 	else if(area <= 15) ret = {a:"a", adj: "slutty"};
-	else                    ret = {a:"a", adj: "gaping"};
+	else                ret = {a:"a", adj: "gaping"};
 	return ret;
 }
 // TODO
@@ -119,3 +118,6 @@ Butt.prototype.AnalLong = function() {
 	return desc.a + " " + desc.adj + v + this.analNoun();
 }
 
+Butt.prototype.holeDesc = function() {
+	return this.analNoun();
+}

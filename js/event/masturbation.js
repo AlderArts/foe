@@ -725,6 +725,8 @@ Scenes.Masturbation.AnalToy = function(parse, toy) {
 	}
 	Text.NL();
 	
+	player.Butt().StretchOrifice(player, toy.cock, false);
+	
 	var cum = player.OrgasmCum(2);
 	
 	Scenes.Masturbation.AnalFingerCockblock(parse, cum);
@@ -875,6 +877,8 @@ Scenes.Masturbation.VagToy = function(parse, toy) {
 		Text.Add("like a bitch in heat", parse);
 	Text.Add(" before finally surrendering in a explosion of girl-cum that sends you to convulsing, both on the inside and the outside. Sweet nectar coats toy and hand alike as pleasure turns you into a quivering mass of jelly, and you feel like someone’s kicked you in the lungs, with much the same effect.", parse);
 	Text.NL();
+	
+	player.FirstVag().StretchOrifice(player, toy.cock, false);
 	
 	var cum = player.OrgasmCum(2);
 	

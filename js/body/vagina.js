@@ -32,33 +32,31 @@ Vagina.prototype.CreateClitcock = function() {
 }
 
 Vagina.prototype.noun = function() {
-	var noun;
-	var r = Rand(10);
-	if     (r == 0) noun = "pussy";
-	else if(r == 1) noun = "box";
-	else if(r == 2) noun = "crevice";
-	else if(r == 3) noun = "cunny";
-	else if(r == 4) noun = "cunt";
-	else if(r == 5) noun = "cooch";
-	else if(r == 6) noun = "slit";
-	else if(r == 7) noun = "snatch";
-	else if(r == 8) noun = "vagina";
-	else            noun = "fuckhole";
-	return noun;
+	var nouns = [];
+	nouns.push("pussy");
+	nouns.push("box");
+	nouns.push("crevice");
+	nouns.push("cunny");
+	nouns.push("cunt");
+	nouns.push("cooch");
+	nouns.push("slit");
+	nouns.push("snatch");
+	nouns.push("vagina");
+	nouns.push("fuckhole");
+	return _.sample(nouns);
 }
 Vagina.prototype.nounPlural = function() {
-	var noun;
-	var r = Rand(9);
-	if     (r == 0) noun = "pussies";
-	else if(r == 1) noun = "boxes";
-	else if(r == 2) noun = "crevices";
-	else if(r == 3) noun = "cunnies";
-	else if(r == 4) noun = "cunts";
-	else if(r == 5) noun = "slits";
-	else if(r == 6) noun = "snatches";
-	else if(r == 7) noun = "vaginas";
-	else            noun = "fuckholes";
-	return noun;
+	var nouns = [];
+	nouns.push("pussies");
+	nouns.push("boxes");
+	nouns.push("crevices");
+	nouns.push("cunnies");
+	nouns.push("cunts");
+	nouns.push("slits");
+	nouns.push("snatches");
+	nouns.push("vaginas");
+	nouns.push("fuckholes");
+	return _.sample(nouns);
 }
 Vagina.prototype.Desc = function() {
 	var vagArea = this.capacity.Get() * this.stretch.Get();
@@ -70,7 +68,7 @@ Vagina.prototype.Desc = function() {
 	else if(vagArea <= 10) ret = {a:"a", adj: "very flexible"};
 	else if(vagArea <= 12) ret = {a:"a", adj: "loose"};
 	else if(vagArea <= 15) ret = {a:"a", adj: "slutty"};
-	else                    ret = {a:"a", adj: "gaping"};
+	else                   ret = {a:"a", adj: "gaping"};
 	return ret;
 }
 // TODO
@@ -85,4 +83,7 @@ Vagina.prototype.ClitShort = function() {
 		return "clit-cock";
 	else
 		return "clit";
+}
+Vagina.prototype.holeDesc = function() {
+	return this.noun();
 }

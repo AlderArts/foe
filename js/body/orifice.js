@@ -62,3 +62,39 @@ Orifice.prototype.HandleStretchOverTime = function(hours) {
 	//TODO rate
 	this.stretch.DecreaseStat(this.minStretch.Get(), hours * 0.05);
 }
+
+Orifice.prototype.StretchOrifice = function(entity, cock, silent) {
+	var parse = {
+		poss : entity.Possessive(),
+		or   : this.holeDesc()
+	};
+	
+	var stretch = this.Tightness();
+	var thk     = cock.Thickness();
+	var cap     = this.Cap();
+	var ratio   = thk / cap;
+	
+	if(ratio < 0.5)
+		this.stretch.IncreaseStat(Orifice.Tightness.flexible, 0.25);
+	else if(ratio < 1)
+		this.stretch.IncreaseStat(Orifice.Tightness.loose, 0.5);
+	else
+		this.stretch.IncreaseStat(Orifice.Tightness.gaping, 0.75);
+	
+	if(!silent) {
+		var stretch2 = this.Tightness();
+		if(stretch < Orifice.Tightness.flexible && stretch2 >= Orifice.Tightness.flexible) {
+			Text.Add("<b>[poss] [or] has become loose.</b>", parse);
+			Text.NL();
+		}
+		if(stretch < Orifice.Tightness.loose && stretch2 >= Orifice.Tightness.loose) {
+			Text.Add("<b>[poss] [or] has become gaping.</b>", parse);
+			Text.NL();
+		}
+	}
+}
+
+//Should be overridden
+Orifice.prototype.holeDesc = function() {
+	return "ORIFICE";
+}
