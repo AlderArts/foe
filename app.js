@@ -6,8 +6,8 @@ windowHeight = 700;
 APP_NAME = "Fall of Eden";
 VERSION_MAJOR = 0;
 VERSION_MINOR = 4;
-VERSION_SUBSCRIPT = "n";
-VERSION_NAME = "Halloween pt.3";
+VERSION_SUBSCRIPT = "n2";
+VERSION_NAME = "Halloween pt.3-1";
 
 SAVE_VERSION = 28;
 // Save version 1: Initial
