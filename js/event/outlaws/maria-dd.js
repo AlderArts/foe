@@ -300,7 +300,7 @@ Scenes.Maria.DeadDrops.First.Start = function() {
 		Text.NL();
 		Text.Add("What was the message, if you may ask?", parse);
 		Text.NL();
-		Text.Add("<i>“A note from one of our better people in Rigard,”</i> comes the reply. <i>“The City Guard’s onto us, but as expected, they’re still running around like chickens. If I didn’t know better, I’d say they’ve ducked their heads down and are hoping that this will all blow over, but they aren’t <b>completely</b> stupid, either.</i>", parse);
+		Text.Add("<i>“A note from one of our better people in Rigard,”</i> comes the reply. <i>“The City Watch’s onto us, but as expected, they’re still running around like chickens. If I didn’t know better, I’d say they’ve ducked their heads down and are hoping that this will all blow over, but they aren’t <b>completely</b> stupid, either.</i>", parse);
 		Text.NL();
 		Text.Add("<i>“A few more interesting bits here and there, some more pillow talk… this might come in useful later on.”</i> Maria folds up the papers and stuffs them back into her pocket. <i>“Stupid kid, trying to run off with these - if the City Watch got wind of what he was carrying, he’d be in no end of trouble. We work to free them from Rigard, and this is what we get…”</i>", parse);
 		Text.NL();

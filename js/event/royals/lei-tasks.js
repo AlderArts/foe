@@ -453,7 +453,7 @@ Scenes.Lei.Tasks.Escort.CombatWin = function() {
 		
 		Text.Clear();
 		parse["l"] = player.HasLegs() ? "at your feet" : "before you";
-		Text.Add("Your enemies lie [l], your victory complete. You’re catching your breath, wondering what to do next, when you see a trio of the City Guard jogging toward you from up the street.", parse);
+		Text.Add("Your enemies lie [l], your victory complete. You’re catching your breath, wondering what to do next, when you see a trio of the City Watch jogging toward you from up the street.", parse);
 		Text.NL();
 		parse["comp"] = party.Num() > 1 ? " the two of" : "";
 		Text.Add("Apparently, your employer ran into them and asked them to assist you. You tell the guards that for opponents of this caliber[comp] you were quite enough, though they are welcome to apprehend the attackers. Ventor would probably appreciate knowing how they knew to set the ambush here.", parse);

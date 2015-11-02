@@ -1436,7 +1436,7 @@ Scenes.Miranda.CatchThatThief = function() {
 	Text.Clear();
 	Text.Add("As you[comp] walk down the street, you become aware of a disturbance quickly moving your way. You deftly move out of the way as a man shoulders past you, running at full speed. He is dressed in cheap, dirty commoners clothes, probably just a thug from the waterfront district. In his hands, he is clutching a tightly wrapped bundle.", parse);
 	Text.NL();
-	Text.Add("Just as you begin to process all of this, three pursuers dash by, dressed in the uniforms of the Rigard city guard. While they look determined, the thief is lighter on his feet, unencumbered by armor as he is. For a while, it seems certain that he will escape their clutches and disappear down some alley, but his hopes are suddenly dashed by a whirling tornado of dark fur and hard muscle.", parse);
+	Text.Add("Just as you begin to process all of this, three pursuers dash by, dressed in the uniforms of the Rigard City Watch. While they look determined, the thief is lighter on his feet, unencumbered by armor as he is. For a while, it seems certain that he will escape their clutches and disappear down some alley, but his hopes are suddenly dashed by a whirling tornado of dark fur and hard muscle.", parse);
 	Text.NL();
 	Text.Add("Just as the man is passing by a shady passageway, Miranda the dog-morph guardswoman intercepts him, easily wrestling the thief to the ground despite his greater weight. He struggles a bit, but quiets down when the dobie tightens her hold, threatening to dislocate his shoulder.", parse);
 	Text.NL();
@@ -1842,7 +1842,7 @@ Scenes.Miranda.BarChatOptions = function(options, back) {
 			
 			back();
 		}, enabled : true,
-		tooltip : "Ask her about her job as a city guard."
+		tooltip : "Ask her about her job as a guardswoman."
 	});
 	options.push({ nameStr : "Forest",
 		func : function() {

@@ -373,7 +373,8 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 		npcsA.push({noun: "skinny bard", a: "a", gender: Gender.male});
 		npcsA.push({noun: "ragged beggar", a: "a", gender: Math.random() > 0.3 ? Gender.male : Gender.female});
 		npcsA.push({noun: "muscular farmer", a: "a", gender: Gender.male});
-		npcsA.push({noun: "city guard", a: "a", gender: Math.random() > 0.3 ? Gender.male : Gender.female});
+		var gen = Math.random() > 0.3;
+		npcsA.push({noun: gen ? "guardsman" : "guardswoman", a: "a", gender: gen ? Gender.male : Gender.female});
 		
 		npcsB.push({noun: "rich merchant", a: "a", gender: Math.random() > 0.3 ? Gender.male : Gender.female});
 		npcsB.push({noun: "shopping noblewoman", a: "a", gender: Gender.female});

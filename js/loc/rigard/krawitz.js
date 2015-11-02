@@ -1359,7 +1359,7 @@ Scenes.Krawitz.AddSuspicion = function(num, surpressNext) {
 			Text.Clear();
 			Text.Add("As you move along, you hear confused shouting, and the shuffling of boots running rapidly in your direction. Seems like your actions have finally caught up to you, and from the sounds of it, you have managed to rouse the entire mansion. And you were just causing some peaceful mayhem, how rude.");
 			Text.NL();
-			Text.Add("You throw one last look of regret toward the mansion grounds as you vault over the fence and onto the street. There is no way you could avoid detection in the pandemonium inside. Before long, the city guard will probably arrive as well, so you’d best leave the area while you still can.");
+			Text.Add("You throw one last look of regret toward the mansion grounds as you vault over the fence and onto the street. There is no way you could avoid detection in the pandemonium inside. Before long, the City Watch will probably arrive as well, so you’d best leave the area while you still can.");
 			Text.Flush();
 
 			Scenes.Krawitz.stat.AlarmRaised = true;
@@ -2021,7 +2021,7 @@ Scenes.Krawitz.OrgyEntrypoint = function() {
 		Text.NL();
 		Text.Add("<i>“Off my estate, you are all fired! You will hang for this!”</i> the lord yowls, ranting and waving his sword in the air. At his feet, the ladies of his household lie panting, semen dripping from their well-used bodies. This seems like a good time to leave, so you take advantage of the confusion as the former staff scramble to escape the wrath of their master.", parse);
 		Text.NL();
-		Text.Add("You throw one last look of regret toward the mansion grounds as you vault over the fence and onto the street. There is no way you could avoid detection in the pandemonium inside. Before long, the city guard will probably arrive as well, so you’d best leave the area while you still can.", parse);
+		Text.Add("You throw one last look of regret toward the mansion grounds as you vault over the fence and onto the street. There is no way you could avoid detection in the pandemonium inside. Before long, the City Watch will probably arrive as well, so you’d best leave the area while you still can.", parse);
 		Text.Flush();
 		
 		Gui.NextPrompt(Scenes.Krawitz.Aftermath);
