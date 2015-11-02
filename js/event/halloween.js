@@ -4018,7 +4018,7 @@ Scenes.Halloween.HarthonPitchVag = function(parse) {
 		parse["k"] = p1cock && p1cock.Knot() ? ", and with your knot now-deflated" : "";
 		Text.Add("Eventually, Terry stirs restlessly in your arms, making a feeble effort to climb from your lap. Feeling recovered yourself[k], you slowly guide her to the ground and pull your [cock] free with a wet slurp.", parse);
 		Text.NL();
-		parse["bloated"] = pregStage > 0 ? " bloated" : "";
+		parse["bloated"] = (pregStage > 0 && pregStage < 5) ? " bloated" : "";
 		Text.Add("Hesitantly pushing yourself off the ground, you admire the[bloated] vixen’s supine form and, as best you can, the thick glaze of sexual juices adorning your cock. With great care, you saunter around to Terry’s head, cheerfully noting that it looked like she had quite a lot of fun with that.", parse);
 		Text.NL();
 		Text.Add("Her only reply is to nod weakly.", parse);
@@ -4041,7 +4041,7 @@ Scenes.Halloween.HarthonPitchVag = function(parse) {
 		Text.Add("You can <b>feel</b> her hesitancy melting away, her lust igniting like a roaring inferno that consumes her very being. She wants the juices smeared across your [cock] - she <b>needs</b> them, if she’s going to quench the hunger gnawing at her.", parse);
 		Text.NL();
 		Text.Add("Watching the vixen twitch and shiver, hungrily licking her lips as she stares fixedly at your loins, you allow the power to recede from her.", parse);
-		if(pregStage > 0)
+		if(pregStage == 1)
 			Text.Add(" Before you leave her, though, something makes you pause for a moment - a strange little spark that seems to be emanating from Terry’s belly. Inquisitively, you let a tendril of power brush against her, and what you find brings a brief smile to your lips. Seems your lovemaking has borne fruit; your seed has taken root inside of the vixen’s womb.", parse);
 		Text.NL();
 		Text.Add("After your little <i>readjustment,</i> Terry becomes much more enthusiastic, lapping and sucking on your cock like a baby on a teat. She moves her tongue expertly to service the underside of your [cock], moaning in pleasure as she takes you as far as she can.", parse);
@@ -4397,7 +4397,7 @@ Scenes.Halloween.HarthonThrall = function() {
 	}
 	
 	var pregStage = Scenes.Halloween.HW.harthonPreg;
-	if(pregStage > 0)
+	if(pregStage > 0 && pregStage < 6)
 		Scenes.Halloween.HW.harthonPreg++;
 	
 	if(Scenes.Halloween.HW.harthonPreg == 5) {
@@ -4449,9 +4449,7 @@ Scenes.Halloween.HarthonThrallPrompt = function(parse) {
 				options.push({ nameStr : "Pussy",
 					tooltip : "You want that sweet pussy of hers.",
 					func : function() {
-						var pregStage = Scenes.Halloween.HW.harthonPreg;
-						
-						parse["preg"] = pregStage > 0 ? ", beneath the gravid swell of her belly" : "";
+						parse["preg"] = (pregStage > 0 && pregStage < 5) ? ", beneath the gravid swell of her belly" : "";
 						
 						Text.Clear();
 						Text.Add("Looking down the vixen’s body[preg], your gaze falls on her womanhood. You dab the [tongueTip] of your [tongue] at your lips as you tell Terry that you want to know her like the woman she is.", parse);
@@ -4492,7 +4490,7 @@ Scenes.Halloween.HarthonThrallPrompt = function(parse) {
 						Text.NL();
 						Text.Add("In one quick swoop, she slides along your length and lets your [cockTip] pop inside her warm honeypot.", parse);
 						Text.NL();
-						parse["g"] = pregStage > 0 ? " gravid" : "";
+						parse["g"] = (pregStage > 0 && pregStage < 5) ? " gravid" : "";
 						Text.Add("Eagerly, you reach up and catch her by her ample hips, the warm, wet tightness of her around your [cockTip] spurring you to help her. The[g] vulpine moans softly, glad of the support, and the two of you together slowly guide her down your length.", parse);
 						Text.NL();
 						if(player.FirstCock())
