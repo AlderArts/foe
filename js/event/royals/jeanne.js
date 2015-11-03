@@ -211,7 +211,7 @@ Scenes.Jeanne.Talk = function() {
 			else {
 				Text.Add("<i>“Once the stone has enough power, it may be able to reopen the portals again, and that will allow us to investigate what is threatening Eden. I have been unable to find the source of this threat up until now, it is very elusive. I believe it to be external to our world.”</i> The magician looks worried.", parse);
 				Text.NL();
-				Text.Add("<i>“Please hurry in finding a source of power, we need to commune with one of the more powerful helpful spirits, and soon. Perhaps Lady Aria, if she can be reached. From what you have told me, she knows of the danger that looms over us.”</i>", parse);
+				Text.Add("<i>“Please hurry in finding a source of power, we need to commune with one of the more powerful, helpful spirits - and soon. Perhaps Lady Aria, if she can be reached. From what you have told me, she knows of the danger that looms over us.”</i>", parse);
 				Text.NL();
 				Text.Add("<i>“Travel deep inside the forest, under the branches of the Great Tree, and find the dryads' glade. There you will find an old and wise being known as the Mother Tree, a dear friend of mine. She will know of a way to help you, just tell her that I sent you.”</i>", parse);
 			}
@@ -230,19 +230,19 @@ Scenes.Jeanne.Talk = function() {
 				Text.NL();
 				Text.Add("<i>“The fundamentals of magic is focus, knowing how to channel the energies in and around you and mold them to your will,”</i> the magician explains. <i>“Learn to feel the ebb and flow, become the fulcrum upon which the energy spins...”</i>", parse);
 				Text.NL();
-				Text.Add("As she speaks, you feel a throbbing warmth suffusing your hands, as if the magician’s heartbeat was magnified tenfold. Is she attempting to aid you by focusing her own magic? The gem in your hands responds, the light within pulsing in time with Jeanne’s heart.", parse);
+				Text.Add("As she speaks, you feel a throbbing warmth suffusing your hands, as if the magician’s heartbeat was magnified tenfold. Is she attempting to aid you by focusing her own magic? The gem in your grasp responds, the light within pulsing in time with Jeanne’s heart.", parse);
 				Text.NL();
 				Text.Add("It takes time - perhaps an hour or so - but more and more, you begin to sense the energy that she spoke of. The warmth surrounding your hands is only the tip of the iceberg; you can see trickles of it flowing around you wistfully, curling around your limbs and surging through your veins.", parse);
 				Text.NL();
 				Text.Add("When you look up to meet the magician’s eyes, she is beaming at you. In your heightened state of focus, the elf is literally glowing with power, surrounded by a pulsing aura the same pink color as her hair.", parse);
 				Text.NL();
-				Text.Add("<i>“Good, good!”</i> she congratulates you on your progress. <i>“You should spend some time every day repeating this until you can summon this state in an instant.”</i> Jeanne stretches out her hands in front of her, forming a rough sphere. Between her hands, the magic molds into a compact orb, swirling and changing until it is a ball of fire.", parse);
+				Text.Add("<i>“Good, good!”</i> she congratulates you on your progress. <i>“You should spend some time every day repeating this until you can summon this state in an instant.”</i> Jeanne stretches out her hands in front of her, forming a rough sphere. Between them, the magic molds into a compact orb, swirling and changing until it is a ball of fire.", parse);
 				Text.NL();
-				Text.Add("<i>“Elemental magic is the simplest to start with,”</i> she continues, <i>“but it is by no means the full extent of this power. Once you have gathered the necessary energy and molded it into an appropriate form, you must trigger its release. Some can do it with merely a hand movement or the blink of an eye, but for beginners, the spoken word helps channel the magic. Like so.”</i>", parse);
+				Text.Add("<i>“Elemental magic is the simplest to start with,”</i> she continues, <i>“but it is by no means the full extent of this power. Once you have gathered the necessary energy and molded it into an appropriate form, you must trigger its release. Some can do it with merely a hand movement or the blink of an eye, but for beginners, the spoken word helps channel the magic - like so.”</i>", parse);
 				Text.NL();
 				Text.Add("<i>“Fireball!”</i> she snaps, sending the burning orb flying from her hands and hurtling out a window. <i>“To what extent you can control this, and how much energy you can gather, is limited only by your experience and your focus,”</i> she continues, raising a hand to catch the ball of fire again as it zips back in through another window. Exhaling, she disperses the magic harmlessly.", parse);
 				Text.NL();
-				Text.Add("Jeanne instructs you to practice on your own, while she fetches a few scrolls. <i>“Once you have the basics down, look through these in order to apply it,”</i> she shows you the scrolls, explaining what the symbols mean and how they relate to each other. It strikes you what a competent teacher she is, and how natural it all seems to be. In no time at all, you are juggling your own fireball between your hands, marvelling at how easy the task is.", parse);
+				Text.Add("Jeanne instructs you to practice on your own, while she fetches a few scrolls. <i>“Once you have the basics down, look through these in order to apply it,”</i> she shows you the scrolls, explaining what the symbols mean and how they relate to each other. It strikes you what a competent teacher she is, and how natural it all seems to be. In no time at all, you are juggling your own fireball between your hands, marveling at how easy the task is.", parse);
 				Text.NL();
 				Text.Add("<i>“I would say we have done enough for today,”</i> Jeanne concludes, after the two of you have spent several hours practicing your new skills. <i>“Look over the scrolls I gave you, and take time to apply these basic skills. I have more to teach you later, but I need a foundation to build on.”</i>", parse);
 				Text.NL();
@@ -338,7 +338,7 @@ Scenes.Jeanne.Talk = function() {
 	options.push({ nameStr : "Elves",
 		func : function() {
 			Text.Clear();
-			Text.Add("<i>“I no longer keep in touch with my kin. Any I considered family are long dead, centuries upon centuries ago,”</i> there is a twinge of sadness in her composure, but it quickly fades. <i>“Do I miss some of them? Of course I do… but I have no regrets about my decisions.”</i>", parse);
+			Text.Add("<i>“I no longer keep in touch with my kin. Any I considered family are long dead, centuries upon centuries ago.”</i> There is a twinge of sadness in her composure, but it quickly fades. <i>“Do I miss some of them? Of course I do… but I have no regrets about my decisions.”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“Elves have no special relation to their parents. As we grow up, we are raised by the community as a whole. I had friends, even lovers… but none that understood the deep thirst for knowledge that I had. After a few decades, I could no longer stay among them.”</i>", parse);
 			Text.NL();
@@ -370,7 +370,7 @@ Scenes.Jeanne.Talk = function() {
 			Text.NL();
 			Text.Add("Why did she choose Rigard as her home?", parse);
 			Text.NL();
-			Text.Add("<i>“I traveled for many years before I settled down here. This particular spot is very attuned to magic, and is close to several other interesting areas, such as the crossroads. That there happened to be a castle built here already was merely an inconvenience. I offer my services to whoever happens to be in power, in exchange for them leaving me alone.”</i>", parse);
+			Text.Add("<i>“I traveled for many years before I settled down here. This particular spot is highly attuned to magic, and is close to several other interesting areas, such as the crossroads. That there happened to be a castle built here already was merely an inconvenience. I offer my services to whoever happens to be in power, in exchange for them leaving me alone.”</i>", parse);
 			Text.NL();
 			Text.Add("How is that working out for her?", parse);
 			Text.NL();
@@ -525,7 +525,7 @@ Scenes.Jeanne.FirstPrompt = function() {
 					Text.Add("<i>“Ah, good, good. I think I have figured out what it was.”</i>", parse);
 				}
 				Text.NL();
-				Text.Add("<i>“I do apologize for that,”</i> she bows her head, looking genuinely sorry. <i>“I have so much to do these days… but I still should not let stray magic linger. Especially not of that kind.”</i>", parse);
+				Text.Add("<i>“I do apologize for that,”</i> she bows her head, looking genuinely sorry. <i>“I have so much to do these days… but I still should not let stray magic linger - especially not of that kind.”</i>", parse);
 				Text.NL();
 				Text.Add("<i>“If you wish, we can speak more about her later.”</i>", parse);
 				Text.Flush();
@@ -540,7 +540,7 @@ Scenes.Jeanne.FirstPrompt = function() {
 		options.push({ nameStr : "Jeanne",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>“It matters little to me who rules in Rigard, I have been here longer than they.”</i> The beautiful elf gestures to the laboratory around her. <i>“I’ve lived here for centuries, long before the current king came along with his silly ideas. And I will stay here, long after he is gone. There is so very much to learn about the world, and as long as the royals provide me with materials and stay out of my way, I give them advice.”</i>", parse);
+				Text.Add("<i>“It matters little to me who rules in Rigard, I have been here longer than they.”</i> The beautiful elf gestures to the laboratory around her. <i>“I’ve lived here for centuries, long before the current king came along with his silly ideas; I will stay here, long after he is gone. There is so very much to learn about the world, and as long as the royals provide me with materials and stay out of my way, I give them advice.”</i>", parse);
 				Text.NL();
 				Text.Add("For centuries? The woman looks like she is in her thirties, mature but still possessing a stunning beauty. Once again, you are reminded that the age of elves cannot be judged by their looks. There is an iron glint in the magician's eyes as she adds: <i>“And if they do not like it, getting rid of me is going to be more trouble than it is worth.”</i>", parse);
 				Text.NL();
@@ -563,7 +563,7 @@ Scenes.Jeanne.FirstPrompt = function() {
 				Text.NL();
 				Text.Add("In response to your puzzled look, she explains: <i>“This gem is a key. It has very little power left, but filled with enough magic, it could reopen the pathways to other realms!”</i> The magician quickly clears a spot on a nearby table, reverently placing the gemstone on it.", parse);
 				Text.NL();
-				Text.Add("<i>“I have seen something like this before, I would recognize the craftsmanship anywhere. This jewel was crafted by Alliser, the sage. He lived on Eden long, long ago, but suddenly disappeared while exploring a portal. I have never met the man, but his work is legendary.”</i> You confirm that the gem does indeed seem to have the power to open portals, but that you have no idea how it works. And from your previous experiences, you are not sure that you’d like to do so.", parse);
+				Text.Add("<i>“I have seen something like this before; I would recognize the craftsmanship anywhere. This jewel was crafted by Alliser, the sage. He lived on Eden long, long ago, but suddenly disappeared while exploring a portal. I have never met the man, but his work is legendary.”</i> You confirm that the gem does indeed seem to have the power to open portals, but that you have no idea how it works - and from your previous experiences, you are not sure that you’d like to do so.", parse);
 				Text.NL();
 				Text.Add("<i>“You have met Uru and Aria? Those are very powerful spirits, you should be happy to still be alive! I am just glad that the old one has been sealed, and can no longer enter our world.”</i>", parse);
 				Text.NL();
