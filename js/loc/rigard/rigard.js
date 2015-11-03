@@ -838,7 +838,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.NL();
 		Text.Add("<i>“Have you seen the prince and princess?”</i> the [NPC1] asks.", parse);
 		Text.NL();
-		Text.Add("[NPC2] grimances. <i>“No, I somehow have to work every time there’s any public appearance.”</i>", parse);
+		Text.Add("The [NPC2] grimaces. <i>“No, I somehow have to work every time there’s any public appearance.”</i>", parse);
 		Text.NL();
 		Text.Add("<i>“You’re really missing out. They have such beautiful shoulder-length red hair, and such poise, and somehow every time I see them, I can’t help but imagine what they’d be like as a couple.”</i> The [NPC1] stops, apparently realizing what [heshe1] just said.", parse);
 		Text.NL();
