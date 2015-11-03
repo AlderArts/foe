@@ -374,7 +374,7 @@ Scenes.Cale.FirstApproach = function() {
 				Text.NL();
 				
 				cale.relation.IncreaseStat(100, 10);
-				cale.relation.DecreaseStat(0, 10);
+				cale.subDom.DecreaseStat(0, 10);
 				
 				Text.Add("You tell him that you're grateful that he's so understanding. Now, since that's behind the two of you; perhaps he wouldn't mind telling you his name? Since he never mentioned it earlier.", parse);
 				Text.NL();
