@@ -185,7 +185,7 @@ Scenes.Cveta.Dates.DryadGlade = function() {
 		Text.NL();
 		Text.Add("You ask Cveta if she’d rather not play this time, but the songstress simply shakes her head and laughs off the question.", parse);
 		Text.NL();
-		Text.Add("<i>“Please, [playername]. If I didn’t feel like playing, I wouldn’t have come.”</i>", parse);
+		Text.Add("<i>“Please, [playername]. If I did not feel like playing, I would not have come.”</i>", parse);
 	}
 	Text.NL();
 	Text.Add("Arrangements are quickly made for the two of you; a fallen log is found and hefted out onto the flower field, a seat for Cveta, and you seat yourself in on the grass a little distance away. One by one, the glade’s denizens gather in a half-circle to hear the songstress play; the grass and flowers are enough respite for them.", parse);
