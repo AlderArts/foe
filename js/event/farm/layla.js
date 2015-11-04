@@ -365,7 +365,7 @@ Scenes.Layla.TalkPrompt = function(switchSpot) {
 		Text.Clear();
 		Text.Add("On second thought, maybe you two could chat some other time…", parse);
 		Text.NL();
-		Text.Add("The chimera twists her head in confusion, but she smiles all the same, replying with a timid, <i>”Okay.”</i>", parse);
+		Text.Add("The chimera twists her head in confusion, but she smiles all the same, replying with a timid, <i>“Okay.”</i>", parse);
 		Text.Flush();
 		
 		Scenes.Layla.Prompt(switchSpot);

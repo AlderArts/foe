@@ -762,7 +762,7 @@ Scenes.Felines.WinCatchVag = function(mainCat, enemy) {
 	if(player.FirstCock())
 		Text.Add(" Up above, your [cocks] stand[notS] fully erect in arousal, though the [cat] pays [itThem] no mind.", parse);
 	Text.NL();
-	Text.Add("The feline pussy-licker, takes the opportunity to nuzzle your [vag], nosing your [clit] as you mat [hisher] snout with a smidge of your juices, which the [cat] is all too happy to lap off. As ready as you are, you still lose your balance when [heshe] finally lets [hisher] tongue slip inside of your folds, gently stroking your sensitive walls with [hisher] rough tongue.", parse);
+	Text.Add("The feline pussy-licker takes the opportunity to nuzzle your [vag], nosing your [clit] as you mat [hisher] snout with a smidge of your juices, which the [cat] is all too happy to lap off. As ready as you are, you still lose your balance when [heshe] finally slips inside of your folds, gently stroking your sensitive walls with [hisher] rough tongue.", parse);
 	Text.NL();
 	Text.Add("You wind up having to hold onto [hisher] head for support, but it seems [heshe] doesn’t mind as [heshe] continues drilling your [vag] and tasting you. [HisHer] purring sends vibrations coursing through your walls, stimulating the production of even more juices; for a moment, you think he might finish you off then and there, but since you have different plans, you push [himher] away, forcing the feline to begrudgingly stop.", parse);
 	Text.NL();
