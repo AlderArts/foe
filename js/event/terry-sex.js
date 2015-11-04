@@ -7824,7 +7824,8 @@ Scenes.Terry.SexHaveADrinkBreastsArousalHorsecock = function(parse) {
 						Text.NL();
 						Text.Add("[HeShe] has gotten way too good at this. Still, you can’t find it in you to be mad.", parse);
 						Text.NL();
-						Text.Add("<i>“Alright then, I’ll be a good sport and let you pick what we’ll be doing. But try not to take too long,”</i> [heshe] adds, [standing at the tip of [hisher] toes and] giving you a soft peck on the cheek.", parse);
+						parse["len"] = player.Height() > terry.Height() + 10 ? Text.Parse(" standing on the tips of [hisher] toes and", parse) : "";
+						Text.Add("<i>“Alright then, I’ll be a good sport and let you pick what we’ll be doing. But try not to take too long,”</i> [heshe] adds,[len] giving you a soft peck on the cheek.", parse);
 						Text.Flush();
 						
 						Scenes.Terry.SexPromptChoice();
