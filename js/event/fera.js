@@ -1125,7 +1125,7 @@ Scenes.Fera.SexPrompt = function() {
 					}
 					Text.Add("Taking turns bouncing and grinding, she does her best to stimulate your [cockDesc]. You shudder at the pleasure running through you, and grab her [fbreastDesc] to try and return the favor.", parse);
 					Text.NL();
-					Text.Add("You squeeze her [fbreastDesc] firmly and begin to fondle her, your fingers occasionally pausing to circle and twist her [fnipsDesc], as she kisses you again. You try to hold your voices back to avoid discovery, but the sensation is too much, and loud moans escape both of you as Fera bounces desperately in your lap.", parse);
+					Text.Add("You squeeze her [fbreastDesc] firmly and begin to fondle her, your fingers occasionally pausing to circle and twist her [fnipsDesc] as she kisses you again. You try to hold your voices back to avoid discovery, but the sensation is too much, and loud moans escape both of you as Fera bounces desperately in your lap.", parse);
 					Text.NL();
 					
 					if(player.NumCocks() === 0) {

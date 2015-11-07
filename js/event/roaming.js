@@ -120,7 +120,7 @@ Scenes.Roaming.KingdomPatrol = function(entering) {
 				var humanity = player.Humanity();
 				
 				parse["human"] = humanity > 0.8 ? " human" : "...";
-				Text.Add("[rHeShe] sigh, lowering [rhisher] hand. <i>“So, I guess you can go. <b>Try</b> to be a decent[human] being, though? Please?”</i>", parse);
+				Text.Add("[rHeShe] sighs, lowering [rhisher] hand. <i>“So, I guess you can go. <b>Try</b> to be a decent[human] being, though? Please?”</i>", parse);
 				Text.NL();
 				Text.Add("You nod with some relief, and the sergeant turns to mount and leave. <i>“Oh, and no, I will not have sex with you,”</i> [rheshe] throws back in your direction, before riding off.", parse);
 				Text.NL();

@@ -4571,7 +4571,7 @@ Scenes.Terry.SexCatchAnal = function() {
 				Text.Add("It’s not at full extension yet, but there’s at least nine or ten inches of semi-turgid horsemeat waving before you. Plenty to wrap your fingers around and then pull closer, letting the [tonguetipDesc] of your tongue glide teasingly over its surface. You lick the [foxvixen]’s stallionhood like an icecream, getting it nicely shiny before you pop it inside. The salty-sweet taste of pre-cum washes over your senses and your eyes close to concentrate on it better. You bob your head back and forth, audibly humming your delight as you work it around inside your mouth, drooling unabashedly upon the proud erection.", parse);
 			}
 			else {
-				Text.Add("Terry’s dainty little piece is so cute, really. [HeShe]’s really going to need to work it hard, but you just know [heshe] can pull it off. Your lips close around the tip in a mock-nip, then you noisily slurp it insides, burying your nose up against Terry’s belly. You lavish loving licks upon the pre-dripping piece of meat between your lips, tasting salty-sweet washing over your tastebuds and crooning with pleasure as you do.", parse);
+				Text.Add("Terry’s dainty little piece is so cute, really. [HeShe]’s really going to need to work it hard, but you just know [heshe] can pull it off. Your lips close around the tip in a mock-nip, then you noisily slurp it inside, burying your nose up against Terry’s belly. You lavish loving licks upon the pre-dripping piece of meat between your lips, tasting salty-sweet washing over your taste buds and crooning with pleasure as you do.", parse);
 			}
 			Text.NL();
 			

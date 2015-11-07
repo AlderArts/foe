@@ -641,10 +641,12 @@ Scenes.Lei.Tasks.Escort.Debrief = function() {
 		var p1 = party.Get(1);
 		parse["comp"] = p1.name;
 		parse["heshe"] = p1.heshe();
+		parse["notS"] = "s";
 	}
 	else {
 		parse["comp"] = "your companions";
 		parse["heshe"] = "they";
+		parse["notS"] = "";
 	}
 	
 	var won = lei.flags["T1"] & Lei.EscortTask.WonCombat;
@@ -662,7 +664,7 @@ Scenes.Lei.Tasks.Escort.Debrief = function() {
 	parse["lt"] = world.time.LightStr("but well-lit room", "room, lighting several candles on the way in");
 	Text.Add("Sounds of the royals having fun come from a room further along, but Lei instead takes a left from the entrance, leading you into a small [lt]. It seems like this was intended to be a small guest room - there’s a bed, a narrow desk with a single chair, and a wardrobe opposite it, but no other furniture.", parse);
 	if(party.Num() > 1)
-		Text.Add(" With you and Lei in, there’s not really any space for [comp], and [heshe] decide to wait in the lounge deeper in the suite.", parse);
+		Text.Add(" With you and Lei in, there’s not really any space for [comp], and [heshe] decide[notS] to wait in the lounge deeper in the suite.", parse);
 	Text.NL();
 	Text.Add("Lei pulls out the chair. <i>“Sit.”</i> You do as indicated, and he himself hops on top of the desk, one foot resting on the edge, and looks down at you expectantly.", parse);
 	Text.NL();

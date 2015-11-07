@@ -910,7 +910,7 @@ Scenes.Rigard.LB.OrvinTalkPrompt = function(innPrompt) {
 			
 			if(rigard.LB["OTerry"] != 0) {
 				if(party.InParty(terry)) {
-					Text.Add("<i>“It’s hard to trust you again, but it's a tough world out there. Take care of yourself, Terry,”</i> Orvin give a gruff nod to the [foxvixen].", parse);
+					Text.Add("<i>“It’s hard to trust you again, but it's a tough world out there. Take care of yourself, Terry.”</i> Orvin gives a gruff nod to the [foxvixen].", parse);
 					Text.NL();
 					Text.Add("<i>“Thanks, and I’m really sorry about tricking you...”</i> Terry replies, bowing [hisher] head in shame.", parse);
 					Text.NL();
