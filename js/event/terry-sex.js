@@ -4646,6 +4646,11 @@ Scenes.Terry.SexCatchAnal = function() {
 				Text.NL();
 				Text.Add("You gasp as you feel your folds spreading, then moan blissfully as Terry sinks inside of you. Unthinkingly, you clench down, trying to pull the [foxvixen] deeper, wriggling your hips to try and help guide [himher] inside. That feels good...", parse);
 				Text.NL();
+				
+				Sex.Vaginal(terry, player);
+				player.FuckVag(player.FirstVag(), terry.FirstCock(), 1);
+				terry.Fuck(terry.FirstCock(), 1);
+				
 				Text.Add("A moan of pleasure emanates from your pet [foxvixen], but [heshe] doesn’t change [hisher] pace. [HeShe] keeps slowly pressing inside you until [heshe] bottoms out. <i>“Dammit, [playername]. If you keep gripping me like this I’m gonna wind up shooting my load up your pussy,”</i> [heshe] says with a gasp of pleasure. ", parse);
 				Text.NL();
 				Text.Add("A moan bubbles from deep inside you, the temptation to tell the [foxvixen] to just go ahead welling up. But you shake your head and start breathing deep and slow, until your body stops shaking and you can unclench your folds. Feeling more sure of yourself now, you ask if Terry feels [heshe] is lubed enough now.", parse);
