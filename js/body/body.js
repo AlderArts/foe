@@ -602,18 +602,20 @@ Body.prototype.HipsDesc = function(plural) {
 		adjs.push("bony");
 		adjs.push("thin");
 		adjs.push("slender");
+		adjs.push("slim");
 		adjs.push("boyish");
 		if(this.muscleTone.Get() > 0.2)
 			adjs.push("tight");
 	}
 	if(size >= HipSize.Thin && size < HipSize.Medium) {
 		adjs.push("well-proportioned");
+		adjs.push("noticeable");
+		adjs.push("shapely");
 		if(this.femininity.Get() > 0)
 			adjs.push("girly");
-		adjs.push("unnoticeable");
 	}
 	if(size >= HipSize.Medium && size < HipSize.Wide) {
-		adjs.push("noticeable");
+		adjs.push("burgeoning");
 		adjs.push("pleasant");
 		adjs.push("waspish");
 		adjs.push("flared");
@@ -632,7 +634,7 @@ Body.prototype.HipsDesc = function(plural) {
 		if(this.femininity.Get() > 0)
 			adjs.push("broodmother");
 	}
-	var adj = Math.random() < 0.5 ? _.sample(adjs) + " " : "";
+	var adj = Math.random() < 0.5 ? (_.sample(adjs) + " ") : "";
 	
 	return adj + (plural ? "hips" : "hip");
 }
