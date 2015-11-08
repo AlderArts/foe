@@ -1864,6 +1864,9 @@ Scenes.Cveta.Performance = function() {
 		Text.NL();
 		Text.Add("All good things must come to an end, though, and music and storm alike begin to die down, the last few raindrops petering out as Cveta strikes the final chord with a flourish. Carefully, she sets both violin and bow back into their case, and turns to face her audience.", parse);
 		
+		Text.NL();
+		Text.Add("You feel stronger.", parse, 'bold');
+		
 		_.each(party.members, function(ent) {
 			Status.Buff(ent, {hours: 24, Str: 1.1});
 		});
@@ -1897,6 +1900,9 @@ Scenes.Cveta.Performance = function() {
 		Text.NL();
 		Text.Add("<i>“Thank you, Ernest,”</i> Cveta says as she carefully sets down her lyre. <i>“I believe I speak for everyone present when I say that you performed admirably just now. Please, do not trouble yourself; I will have someone else bring back your instruments.”</i> With that, she stands and takes in her cheering audience with a satisfied air.", parse);
 
+		Text.NL();
+		Text.Add("You feel tougher.", parse, 'bold');
+		
 		_.each(party.members, function(ent) {
 			Status.Buff(ent, {hours: 24, Sta: 1.1});
 		});
@@ -1939,6 +1945,9 @@ Scenes.Cveta.Performance = function() {
 		Text.NL();
 		Text.Add("Finally, the music stops, but it takes a few moments for most of the audience to register that fact. Most of them are sniffling openly, and even the most hardened of the outlaws look slightly less curmudgeonly after sitting through the performance. Taking a few deep breaths to calm her voice, Cveta slowly opens her eyes and unclasps her hands from her breast.", parse);
 
+		Text.NL();
+		Text.Add("You feel more stoic.", parse, 'bold');
+		
 		_.each(party.members, function(ent) {
 			Status.Buff(ent, {hours: 24, Spi: 1.1});
 		});
@@ -1985,6 +1994,9 @@ Scenes.Cveta.Performance = function() {
 		
 		player.AddLustFraction(0.5);
 
+		Text.NL();
+		Text.Add("You feel more horny.", parse, 'bold');
+		
 		_.each(party.members, function(ent) {
 			Status.Buff(ent, {hours: 24, Lib: 1.1});
 		});
@@ -2008,6 +2020,9 @@ Scenes.Cveta.Performance = function() {
 		Text.NL();
 		Text.Add("Gradually, the melody begins to fade, the pause between each note lengthening, the movements of Cveta’s fingers still smooth and practiced. With great deliberation, she plucks the strings of her lyre for the final time, then closes her eyes and bows her head even as the veil begins to lift from your own thoughts, now sharp, refreshed and possessed of a clarity you’d scarcely thought possible.", parse);
 
+		Text.NL();
+		Text.Add("You feel more quick-witted.", parse, 'bold');
+		
 		_.each(party.members, function(ent) {
 			Status.Buff(ent, {hours: 24, Int: 1.1});
 		});
@@ -2031,6 +2046,9 @@ Scenes.Cveta.Performance = function() {
 		Text.NL();
 		Text.Add("The sudden silence hits like a ton of bricks, a deathly quietness hanging about the fire pit like a thick blanket. Then, and only then, is the inferno in your body allowed to slow.", parse);
 
+		Text.NL();
+		Text.Add("You feel swifter.", parse, 'bold');
+		
 		_.each(party.members, function(ent) {
 			Status.Buff(ent, {hours: 24, Dex: 1.1});
 		});
@@ -2055,6 +2073,9 @@ Scenes.Cveta.Performance = function() {
 		Text.NL();
 		Text.Add("At long last, Cveta’s song begins to fade, the songstress lingering on her last few notes before letting the music trail off into nothingness. With careful deliberation, she folds in upon herself, takes a step back, then casts her gaze over her audience to survey her handiwork.", parse);
 
+		Text.NL();
+		Text.Add("You feel more charmy.", parse, 'bold');
+		
 		_.each(party.members, function(ent) {
 			Status.Buff(ent, {hours: 24, Cha: 1.1});
 		});
