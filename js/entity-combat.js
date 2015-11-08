@@ -195,19 +195,19 @@ Entity.prototype.GetSingleTarget = function(encounter, activeChar, strategy) {
 Entity.prototype.HP = function() {
 	var buff = this.combatStatus.stats[StatusEffect.Buff];
 	var mod = (buff && buff.HP) ? buff.HP : 1;
-	return Math.floor((this.maxHp.Get() + Math.pow((this.strength.Get() + this.stamina.Get())/2, 1.3)) * mod);
+	return Math.ceil((this.maxHp.Get() + Math.pow((this.strength.Get() + this.stamina.Get())/2, 1.3)) * mod);
 }
 
 Entity.prototype.SP = function() {
 	var buff = this.combatStatus.stats[StatusEffect.Buff];
 	var mod = (buff && buff.SP) ? buff.SP : 1;
-	return Math.floor((this.maxSp.Get() + Math.pow((this.spirit.Get() + this.intelligence.Get() + this.stamina.Get())/3, 1.3)) * mod);
+	return Math.ceil((this.maxSp.Get() + Math.pow((this.spirit.Get() + this.intelligence.Get() + this.stamina.Get())/3, 1.3)) * mod);
 }
 
 Entity.prototype.Lust = function() {
 	var buff = this.combatStatus.stats[StatusEffect.Buff];
 	var mod = (buff && buff.LP) ? buff.LP : 1;
-	return Math.floor((this.maxLust.Get() + Math.pow(this.libido.Get(), 1.3)) * mod);
+	return Math.ceil((this.maxLust.Get() + Math.pow(this.libido.Get(), 1.3)) * mod);
 }
 
 Entity.prototype.MinLust = function() {

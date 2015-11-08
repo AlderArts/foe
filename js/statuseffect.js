@@ -28,9 +28,9 @@ StatusEffect = {
 	Decoy    : 20, //OK
 	Counter  : 21, //OK
 	Confuse  : 22, //OK
-	Full     : 23,
+	Full     : 23, //OK
 	Weakness : 24, //OK
-	Buff     : 25,
+	Buff     : 25, //OK
 	
 	LAST     : 26
 };
@@ -85,6 +85,9 @@ StatusList.prototype.FromStorage = function(storage) {
 			case StatusEffect.Buff:
 				that.stats[StatusEffect.Buff] = Status.Buff.FromStorage(stat);
 				break;
+			case StatusEffect.Full:
+				that.stats[StatusEffect.Full] = Status.Full.FromStorage(stat);
+				break;
 				
 			default:
 				break;
@@ -108,6 +111,8 @@ StatusList.prototype.Update = function(ent, hours) {
 	//TODO Add Status effects
 	if(this.stats[StatusEffect.Buff])
 		this.stats[StatusEffect.Buff].Update(ent, hours);
+	if(this.stats[StatusEffect.Full])
+		this.stats[StatusEffect.Full].Update(ent, hours);
 }
 
 StatusList.prototype.Clear = function() {
@@ -587,24 +592,46 @@ Status.Counter.Tick = function(target) {
 	}
 }
 
-
+// opts.exp is a modifier that adds extra exp. 1.05 means 5% extra, rounded up.
 Status.Full = function(target, opts) {
 	if(!target) return;
 	opts = opts || {};
 	
 	// Apply decoy
 	target.combatStatus.stats[StatusEffect.Full] = {
-		hours  : opts.hours
+		hours     : opts.hours,
+		exp       : opts.exp,
+		
+		Update    : Status.Full.Update,
+		ToStorage : Status.Full.ToStorage
 	};
 	
 	return true;
 }
-Status.Full.OverTime = function(target, hours) {
-	this.hours -= hours;
+Status.Full.Update = function(target, step) {
+	this.hours -= step;
 	// Remove full effect
 	if(this.hours <= 0) {
 		target.combatStatus.stats[StatusEffect.Full] = null;
 	}
+}
+Status.Full.ToStorage = function() {
+	var ret = {};
+	if(this.hours) ret["hours"] = this.hours.toFixed(2);
+	if(this.exp)   ret["exp"]   = this.exp.toFixed(2);
+	
+	return ret;
+}
+Status.Full.FromStorage = function(storage) {
+	storage = storage || {};
+	var obj = {};
+	if(storage["hours"]) obj.hours = parseFloat(storage["hours"]);
+	if(storage["exp"])   obj.exp   = parseFloat(storage["exp"]);
+	
+	obj.Update    = Status.Full.Update;
+	obj.ToStorage = Status.Full.ToStorage;
+	
+	return obj;
 }
 
 /*
@@ -690,6 +717,7 @@ Status.Weakness.Tick = function(target) {
 	}
 }
 
+//All modifiers are multipliers, so 1.05 means 5% extra.
 Status.Buff = function(target, opts) {
 	if(!target) return;
 	opts = opts || {};

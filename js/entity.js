@@ -228,6 +228,11 @@ Entity.prototype.Strapon = function() {
 }
 
 Entity.prototype.AddExp = function(exp, reserve) {
+	var buff = this.combatStatus.stats[StatusEffect.Full];
+	if(buff && buff.exp) {
+		exp = Math.ceil(buff.exp * exp);
+	}
+	
 	if(DEBUG) {
 		Text.NL();
 		Text.Add(Text.BoldColor("[reserve][name] gains [x] xp."), {reserve: reserve ? "RESERVE: " : "", name: this.name, x: exp});
