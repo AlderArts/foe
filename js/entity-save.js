@@ -215,7 +215,7 @@ Entity.prototype.LoadCombatStats = function(storage) {
 
 Entity.prototype.LoadStatusEffects = function(storage) {
 	if(storage.stat) {
-		this.combatStatus(storage.stat);
+		this.combatStatus.FromStorage(storage.stat);
 	}
 }
 

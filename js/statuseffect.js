@@ -82,8 +82,8 @@ StatusList.prototype.FromStorage = function(storage) {
 		
 		switch(idx) {
 			//TODO Add permanent status effects here
-			case StatusEffect.Venom: //TEMP TODO
-				that.stats[StatusEffect.Venom] = Status.Venom.FromStorage(stat);
+			case StatusEffect.Buff:
+				that.stats[StatusEffect.Buff] = Status.Buff.FromStorage(stat);
 				break;
 				
 			default:
@@ -104,10 +104,10 @@ StatusList.prototype.ToStorage = function() {
 	return storage.length > 0 ? storage : null;
 }
 
-StatusList.prototype.Update = function(hours) {
+StatusList.prototype.Update = function(ent, hours) {
 	//TODO Add Status effects
 	if(this.stats[StatusEffect.Buff])
-		this.stats[StatusEffect.Buff].Update(hours);
+		this.stats[StatusEffect.Buff].Update(ent, hours);
 }
 
 StatusList.prototype.Clear = function() {
@@ -697,7 +697,19 @@ Status.Buff = function(target, opts) {
 	var hours = opts.hours || 0;
 	// Apply weakness
 	target.combatStatus.stats[StatusEffect.Buff] = {
-		turns     : turns,
+		hours     : hours,
+		
+		Str       : opts.Str,
+		Sta       : opts.Sta,
+		Dex       : opts.Dex,
+		Int       : opts.Int,
+		Spi       : opts.Spi,
+		Lib       : opts.Lib,
+		Cha       : opts.Cha,
+		HP        : opts.HP,
+		SP        : opts.SP,
+		LP        : opts.LP,
+		
 		Update    : Status.Buff.Update,
 		ToStorage : Status.Buff.ToStorage
 	};
@@ -706,9 +718,44 @@ Status.Buff = function(target, opts) {
 }
 Status.Buff.Update = function(target, step) {
 	this.hours -= step;
-	
 	if(this.hours <= 0) {
 		target.combatStatus.stats[StatusEffect.Buff] = null;
 	}
 }
-Status.Buff.ToStorage 
+Status.Buff.ToStorage = function() {
+	var ret = {};
+	if(this.hours) ret["hours"] = this.hours.toFixed(2);
+
+	if(this.Str) ret["Str"] = this.Str.toFixed(2);
+	if(this.Sta) ret["Sta"] = this.Sta.toFixed(2);
+	if(this.Dex) ret["Dex"] = this.Dex.toFixed(2);
+	if(this.Int) ret["Int"] = this.Int.toFixed(2);
+	if(this.Spi) ret["Spi"] = this.Spi.toFixed(2);
+	if(this.Lib) ret["Lib"] = this.Lib.toFixed(2);
+	if(this.Cha) ret["Cha"] = this.Cha.toFixed(2);
+	if(this.HP)  ret["HP"]  = this.HP.toFixed(2);
+	if(this.SP)  ret["SP"]  = this.SP.toFixed(2);
+	if(this.LP)  ret["LP"]  = this.LP.toFixed(2);
+	return ret;
+}
+Status.Buff.FromStorage = function(storage) {
+	storage = storage || {};
+	var obj = {};
+	if(storage["hours"]) obj.hours = parseFloat(storage["hours"]);
+	
+	if(storage["Str"]) obj.Str = parseFloat(storage["Str"]);
+	if(storage["Sta"]) obj.Sta = parseFloat(storage["Sta"]);
+	if(storage["Dex"]) obj.Dex = parseFloat(storage["Dex"]);
+	if(storage["Int"]) obj.Int = parseFloat(storage["Int"]);
+	if(storage["Spi"]) obj.Spi = parseFloat(storage["Spi"]);
+	if(storage["Lib"]) obj.Lib = parseFloat(storage["Lib"]);
+	if(storage["Cha"]) obj.Cha = parseFloat(storage["Cha"]);
+	if(storage["HP"])  obj.HP  = parseFloat(storage["HP"]);
+	if(storage["SP"])  obj.SP  = parseFloat(storage["SP"]);
+	if(storage["LP"])  obj.LP  = parseFloat(storage["LP"]);
+	
+	obj.Update    = Status.Buff.Update;
+	obj.ToStorage = Status.Buff.ToStorage;
+	
+	return obj;
+}

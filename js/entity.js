@@ -315,7 +315,7 @@ Entity.prototype.Update = function(step) {
 		this.HandleDrunknessOverTime(hours);
 		this.HandleStretchOverTime(hours);
 		
-		this.combatStatus.Update(hours);
+		this.combatStatus.Update(this, hours);
 	}
 }
 

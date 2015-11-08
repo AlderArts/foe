@@ -1810,7 +1810,6 @@ Scenes.Cveta.FirstMeetingCont = function() {
 	Gui.NextPrompt();
 }
 
-//TODO Buffs
 Scenes.Cveta.Performance = function() {
 	var parse = {
 		playername : player.name,
@@ -1865,8 +1864,9 @@ Scenes.Cveta.Performance = function() {
 		Text.NL();
 		Text.Add("All good things must come to an end, though, and music and storm alike begin to die down, the last few raindrops petering out as Cveta strikes the final chord with a flourish. Carefully, she sets both violin and bow back into their case, and turns to face her audience.", parse);
 		
-		//TODO
-		//#Party gains 10% strength for the next twelve hours.
+		_.each(party.members, function(ent) {
+			Status.Buff(ent, {hours: 24, Str: 1.1});
+		});
 	}, 1.0, function() { return cveta.Violin(); });
 	scenes.AddEnc(function() {
 		Text.Add("Once everyone is seated and quiet, Cveta stands, brushing away the locks of hair that usually obscure her left eye. Off to one side, you notice a dog-morph dragging in a set of large drums fashioned from wood and cured hide, and once the instruments are set up by the fire pit, Cveta gives him a nod and directs him to take up position with a pair of drumsticks.", parse);
@@ -1896,8 +1896,10 @@ Scenes.Cveta.Performance = function() {
 		Text.Add("Alas, all good things must eventually come to an end. As the pounding of the drums grows louder and louder as the music approaches its zenith, Cveta coaxes a few more notes out of the tortured strings of her lyre and with three, final, thunderous notes, brings the entire beat to a stop. The effect is immediate: it feels as if the heart had been ripped out of a living body. It's only then that the dog-morph seems to realize how utterly exhausted - and exhilarated - he is, mopping off his damp fur with a paw.", parse);
 		Text.NL();
 		Text.Add("<i>“Thank you, Ernest,”</i> Cveta says as she carefully sets down her lyre. <i>“I believe I speak for everyone present when I say that you performed admirably just now. Please, do not trouble yourself; I will have someone else bring back your instruments.”</i> With that, she stands and takes in her cheering audience with a satisfied air.", parse);
-		//TODO
-		//#Party gains 10% stamina for the next twelve hours.
+
+		_.each(party.members, function(ent) {
+			Status.Buff(ent, {hours: 24, Sta: 1.1});
+		});
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
 		Text.Add("Once everyone has seated themselves and quieted down, Cveta stands and acknowledges her audience with a brisk nod. She's brought nothing but herself this time round, but has made every effort to doll herself up, her hair and feathers preened to perfection, the worst of the blemishes on her gown hidden from view. The bird-morph opens and shuts her beak a few times in what looks like a silent set of vocal exercises, then finally speaks.", parse);
@@ -1936,8 +1938,10 @@ Scenes.Cveta.Performance = function() {
 		Text.Add("Cveta's song continues to flow through the outlaws' camp, surging and growing as it nears its conclusion. The hope of the hymn fills your spirit, and in that moment you feel stronger, more focused, more determined to go on; the bird-morph herself has raised her voice to the heavens, her wings spread slightly, and you can't help but think she does resemble an angel quite a fair bit…", parse);
 		Text.NL();
 		Text.Add("Finally, the music stops, but it takes a few moments for most of the audience to register that fact. Most of them are sniffling openly, and even the most hardened of the outlaws look slightly less curmudgeonly after sitting through the performance. Taking a few deep breaths to calm her voice, Cveta slowly opens her eyes and unclasps her hands from her breast.", parse);
-		//TODO
-		//#Party gains 10% spirit for the next 12 hours.
+
+		_.each(party.members, function(ent) {
+			Status.Buff(ent, {hours: 24, Spi: 1.1});
+		});
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
 		Text.Add("Satisfied that everyone who will be present is accounted for and paying attention, Cveta rises and acknowledges their presence with a dip of her head.", parse);
@@ -1980,8 +1984,10 @@ Scenes.Cveta.Performance = function() {
 		Text.Add("After sitting through all that, you definitely feel more seductive, for the lack of a better word to describe it. Well, at least until that melody gets out of your head…", parse);
 		
 		player.AddLustFraction(0.5);
-		//TODO
-		//#Party gains 10% libido for the next 12 hours.
+
+		_.each(party.members, function(ent) {
+			Status.Buff(ent, {hours: 24, Lib: 1.1});
+		});
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
 		Text.Add("When everyone is seated - be it on stools dragged in, fallen logs or on the dirt ground, Cveta stands, adjusts the silken sash about her waist, and addresses her audience.", parse);
@@ -2001,8 +2007,10 @@ Scenes.Cveta.Performance = function() {
 		Text.Add("Even unto his death, the magister never discovers the source of the aurora, yet through chasing its origins, learns so much to pass on to the next generation.", parse);
 		Text.NL();
 		Text.Add("Gradually, the melody begins to fade, the pause between each note lengthening, the movements of Cveta’s fingers still smooth and practiced. With great deliberation, she plucks the strings of her lyre for the final time, then closes her eyes and bows her head even as the veil begins to lift from your own thoughts, now sharp, refreshed and possessed of a clarity you’d scarcely thought possible.", parse);
-		//TODO
-		//#Party gains 10% intelligence for the next 12 hours.
+
+		_.each(party.members, function(ent) {
+			Status.Buff(ent, {hours: 24, Int: 1.1});
+		});
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
 		Text.Add("Once everyone is calmed - a few of the more unruly outlaws shushed into silence by their peers - Cveta stands and hefts her violin from its case, no simple undertaking for her small frame.", parse);
@@ -2022,8 +2030,10 @@ Scenes.Cveta.Performance = function() {
 		Text.Add("As impossible as it sounds, the screaming from Cveta’s violin can only intensify, most of the outlaws shouting and chanting along to the music, fists, paws and claws alike pumping in the air, the resultant rabble of noise a twin to the screeching or Cveta’s violin up to the point she finishes with a brazen flourish, and lets the bow in her hand hang limply by her side.", parse);
 		Text.NL();
 		Text.Add("The sudden silence hits like a ton of bricks, a deathly quietness hanging about the fire pit like a thick blanket. Then, and only then, is the inferno in your body allowed to slow.", parse);
-		//TODO
-		//#Party gains 10% dexterity for the next 12 hours.
+
+		_.each(party.members, function(ent) {
+			Status.Buff(ent, {hours: 24, Dex: 1.1});
+		});
 	}, 1.0, function() { return cveta.Violin(); });
 	scenes.AddEnc(function() {
 		parse["dawn"] = dawn ? "morning" : "evening";
@@ -2044,8 +2054,10 @@ Scenes.Cveta.Performance = function() {
 		Text.Add("The songstress herself is lost in the effort of bringing forth her music, her single uncovered eye locked onto something unseen in the far distance, her bosom heaving with each breath she draws to turn into song. This is her gift, which she has shared with you, the warmth of the slow, drawling music filling you up and reminding you of sweet summer scents and fruit fresh from the bough, a warmth that lingers in the core of your chest and makes you want to share it with others…", parse);
 		Text.NL();
 		Text.Add("At long last, Cveta’s song begins to fade, the songstress lingering on her last few notes before letting the music trail off into nothingness. With careful deliberation, she folds in upon herself, takes a step back, then casts her gaze over her audience to survey her handiwork.", parse);
-		//TODO
-		//#Party gains 10% charisma for the next 12 hours.
+
+		_.each(party.members, function(ent) {
+			Status.Buff(ent, {hours: 24, Cha: 1.1});
+		});
 	}, 1.0, function() { return true; });
 	
 	scenes.Get();

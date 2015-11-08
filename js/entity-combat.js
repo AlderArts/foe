@@ -193,15 +193,21 @@ Entity.prototype.GetSingleTarget = function(encounter, activeChar, strategy) {
 
 //STATS
 Entity.prototype.HP = function() {
-	return Math.floor(this.maxHp.Get() + Math.pow((this.strength.Get() + this.stamina.Get())/2, 1.3));
+	var buff = this.combatStatus.stats[StatusEffect.Buff];
+	var mod = (buff && buff.HP) ? buff.HP : 1;
+	return Math.floor((this.maxHp.Get() + Math.pow((this.strength.Get() + this.stamina.Get())/2, 1.3)) * mod);
 }
 
 Entity.prototype.SP = function() {
-	return Math.floor(this.maxSp.Get() + Math.pow((this.spirit.Get() + this.intelligence.Get() + this.stamina.Get())/3, 1.3));
+	var buff = this.combatStatus.stats[StatusEffect.Buff];
+	var mod = (buff && buff.SP) ? buff.SP : 1;
+	return Math.floor((this.maxSp.Get() + Math.pow((this.spirit.Get() + this.intelligence.Get() + this.stamina.Get())/3, 1.3)) * mod);
 }
 
 Entity.prototype.Lust = function() {
-	return Math.floor(this.maxLust.Get() + Math.pow(this.libido.Get(), 1.3));
+	var buff = this.combatStatus.stats[StatusEffect.Buff];
+	var mod = (buff && buff.LP) ? buff.LP : 1;
+	return Math.floor((this.maxLust.Get() + Math.pow(this.libido.Get(), 1.3)) * mod);
 }
 
 Entity.prototype.MinLust = function() {
@@ -210,25 +216,53 @@ Entity.prototype.MinLust = function() {
 
 // STATS
 Entity.prototype.Str = function() {
-	return this.strength.Get();
+	var buff = this.combatStatus.stats[StatusEffect.Buff];
+	if(buff && buff.Str)
+		return this.strength.Get() * buff.Str;
+	else
+		return this.strength.Get();
 }
 Entity.prototype.Sta = function() {
-	return this.stamina.Get();
+	var buff = this.combatStatus.stats[StatusEffect.Buff];
+	if(buff && buff.Sta)
+		return this.stamina.Get() * buff.Sta;
+	else
+		return this.stamina.Get();
 }
 Entity.prototype.Dex = function() {
-	return this.dexterity.Get();
+	var buff = this.combatStatus.stats[StatusEffect.Buff];
+	if(buff && buff.Dex)
+		return this.dexterity.Get() * buff.Dex;
+	else
+		return this.dexterity.Get();
 }
 Entity.prototype.Int = function() {
-	return this.intelligence.Get();
+	var buff = this.combatStatus.stats[StatusEffect.Buff];
+	if(buff && buff.Int)
+		return this.intelligence.Get() * buff.Int;
+	else
+		return this.intelligence.Get();
 }
 Entity.prototype.Spi = function() {
-	return this.spirit.Get();
+	var buff = this.combatStatus.stats[StatusEffect.Buff];
+	if(buff && buff.Spi)
+		return this.spirit.Get() * buff.Spi;
+	else
+		return this.spirit.Get();
 }
 Entity.prototype.Lib = function() {
-	return this.libido.Get();
+	var buff = this.combatStatus.stats[StatusEffect.Buff];
+	if(buff && buff.Lib)
+		return this.libido.Get() * buff.Lib;
+	else
+		return this.libido.Get();
 }
 Entity.prototype.Cha = function() {
-	return this.charisma.Get();
+	var buff = this.combatStatus.stats[StatusEffect.Buff];
+	if(buff && buff.Cha)
+		return this.charisma.Get() * buff.Cha;
+	else
+		return this.charisma.Get();
 }
 
 // TODO: Certain status effects like paralyze should also count as incapacitated
