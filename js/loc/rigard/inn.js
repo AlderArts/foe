@@ -312,9 +312,12 @@ Scenes.Rigard.LB.OrderFood = function() {
 		Text.Add(", and, after your companions pay for themselves", parse);
 	Text.Add(", get ready to go on your way.", parse);
 	
-	/* TODO
-#some bonus for eating food? (+20% xp for next 4 combat encounters?)
-	 */
+	Text.NL();
+	Text.Add("You feel full. The good food makes you think you can better focus on learning new things.", parse, 'bold');
+	
+	_.each(party.members, function(ent) {
+		Status.Full(ent, {hours: 12, exp: 1.1});
+	});
 	
 	Text.Flush();
 	world.TimeStep({minute: 35});

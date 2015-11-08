@@ -407,7 +407,7 @@ Entity.prototype.RestFull = function() {
 	this.curSp = this.SP();
 	this.curLust = this.MinLust();
 	
-	this.combatStatus.Clear();
+	//this.combatStatus.Clear();
 }
 
 Entity.prototype.Sleep = function() {

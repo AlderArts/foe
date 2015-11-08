@@ -630,7 +630,6 @@ Status.Full.FromStorage = function(storage) {
 	
 	obj.Update    = Status.Full.Update;
 	obj.ToStorage = Status.Full.ToStorage;
-	
 	return obj;
 }
 
