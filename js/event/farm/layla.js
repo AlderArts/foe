@@ -95,7 +95,6 @@ Layla.prototype.FromStorage = function(storage) {
 	this.LoadCombatStats(storage);
 	this.LoadPersonalityStats(storage);
 	
-	this.LoadEffects(storage);
 	this.LoadJobs(storage);
 	
 	this.RecallAbilities();
@@ -116,7 +115,6 @@ Layla.prototype.ToStorage = function() {
 	this.SaveCombatStats(storage);
 	this.SavePersonalityStats(storage);
 	
-	this.SaveEffects(storage);
 	this.SaveJobs(storage);
 	
 	storage.ft = this.farmTimer.ToStorage();

@@ -54,6 +54,15 @@ Entity.prototype.SaveCombatStats = function(storage) {
 	
 	if(this.monsterName) storage.mName = this.monsterName;
 	if(this.MonsterName) storage.MName = this.MonsterName;
+	
+	this.SaveStatusEffects(storage);
+}
+
+Entity.prototype.SaveStatusEffects = function(storage) {
+	storage = storage || {};
+	var s = this.combatStatus.ToStorage();
+	if(s)
+		storage.stat = s;
 }
 
 Entity.prototype.SavePersonalityStats = function(storage) {
@@ -90,16 +99,6 @@ Entity.prototype.SaveRecipes = function(storage) {
 		storage.recipes = [];
 		for(var i = 0; i < this.recipes.length; i++)
 			storage.recipes.push(this.recipes[i].id);
-	}
-}
-
-Entity.prototype.SaveEffects = function(storage) {
-	storage = storage || {};
-	
-	if(this.effects) {
-		storage.effects = [];
-		for(var i = 0; i < this.effects.length; i++)
-			storage.effects.push(this.effects[i].ToStorage());
 	}
 }
 
@@ -160,7 +159,6 @@ Entity.prototype.ToStorage = function() {
 	this.SaveCombatStats(storage);
 	this.SavePersonalityStats(storage);
 	this.SaveRecipes(storage);
-	this.SaveEffects(storage);
 	this.SaveJobs(storage);
 	this.SaveEquipment(storage);
 	this.SavePregnancy(storage);
@@ -170,14 +168,6 @@ Entity.prototype.ToStorage = function() {
 	this.SaveSexFlags(storage);
 	this.SavePerks(storage);
 	
-	// TODO
-	/*
-	// Timers, updated in Update()
-	// Timers should be in the format {timer: 10, callback: function() {}}
-	// Where timer = 10 is the amount of ticks until the timer runs out, and
-	// callback is the function to call (use closures)
-	this.timers = new Array();
-	*/
 	return storage;
 }
 
@@ -219,6 +209,14 @@ Entity.prototype.LoadCombatStats = function(storage) {
 	this.spirit.growth       = !isNaN(parseFloat(storage.spiG))     ? parseFloat(storage.spiG) : this.spirit.growth;
 	this.libido.growth       = !isNaN(parseFloat(storage.libG))     ? parseFloat(storage.libG) : this.libido.growth;
 	this.charisma.growth     = !isNaN(parseFloat(storage.chaG))     ? parseFloat(storage.chaG) : this.charisma.growth;
+
+	this.LoadStatusEffects(storage);
+}
+
+Entity.prototype.LoadStatusEffects = function(storage) {
+	if(storage.stat) {
+		this.combatStatus(storage.stat);
+	}
 }
 
 Entity.prototype.LoadPersonalityStats = function(storage) {
@@ -234,15 +232,6 @@ Entity.prototype.LoadRecipes = function(storage) {
 		this.recipes = [];
 		for(var i = 0; i < storage.recipes.length; i++)
 			this.recipes.push(ItemIds[storage.recipes[i]]);
-	}
-}
-
-Entity.prototype.LoadEffects = function(storage) {
-	if(storage.effects) {
-		this.effects = [];
-		for(var i = 0; i < storage.effects.length; i++) {
-			this.effects.push(EffectFromStorage(storage.effects[i]));
-		}
 	}
 }
 
@@ -311,24 +300,13 @@ Entity.prototype.FromStorage = function(storage) {
 	this.LoadPersonalityStats(storage);
 	
 	this.LoadRecipes(storage);
-	this.LoadEffects(storage);
 	this.LoadJobs(storage);
 	this.LoadEquipment(storage);
 	this.LoadPerks(storage);
 	
-	
 	this.RecallAbilities(); // TODO: Implement for special abilitiy sources (flag dependent)
 	this.SetLevelBonus();
 	this.Equip();
-	
-	// TODO
-	/*	
-	// Timers, updated in Update()
-	// Timers should be in the format {timer: 10, callback: function() {}}
-	// Where timer = 10 is the amount of ticks until the timer runs out, and
-	// callback is the function to call (use closures)
-	this.timers = new Array();
-	*/
 }
 
 Entity.prototype.RecallAbilities = function() {

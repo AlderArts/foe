@@ -47,7 +47,6 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/entity-dict.js \
 	js/event/player.js \
 	js/party.js \
-	js/effect.js \
 	js/perks.js \
 	js/combat.js \
 	js/enemy/boss.js \

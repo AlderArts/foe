@@ -128,25 +128,3 @@ world.loc.Plains.Nomads.Fireplace.links.push(new Link(
 world.loc.Plains.Nomads.Fireplace.switchSpot = function() {
 	return !Scenes.Global.PortalsOpen();
 }
-
-
-/* // TODO TEMP EFFECT TEST
-world.loc.Plains.Nomads.Fireplace.events.push(new Link(
-	"Preggo", true, true,
-	function() {
-		Text.Add(Text.BoldColor("PLACEHOLDER: Get preggo!"));
-		Text.NL();
-		Text.Flush();
-	},
-	function() {
-		Text.Clear();
-		
-		Text.Add(Text.BoldColor("PLACEHOLDER TEXT. Got preggo. Mother = Unknown"));
-		Text.NL();
-		Text.Flush();
-		
-		player.effects.push(new Effect(EffectFuncCodes.PregnancyRegular, {day: 1}, {mother: "unknown"}));
-		Gui.NextPrompt();
-	}
-));
-*/

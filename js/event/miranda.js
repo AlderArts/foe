@@ -142,7 +142,6 @@ Miranda.prototype.Nasty = function() {
 Miranda.prototype.FromStorage = function(storage) {
 	this.LoadCombatStats(storage);
 	this.LoadPersonalityStats(storage);
-	this.LoadEffects(storage);
 	this.LoadJobs(storage);
 	this.LoadEquipment(storage);
 	this.body.FromStorage(storage.body);
@@ -163,7 +162,6 @@ Miranda.prototype.ToStorage = function() {
 	
 	this.SaveCombatStats(storage);
 	this.SavePersonalityStats(storage);
-	this.SaveEffects(storage);
 	this.SaveJobs(storage);
 	this.SaveEquipment(storage);
 	this.SaveBodyPartial(storage, {ass: true, vag: true, balls: true});

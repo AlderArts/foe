@@ -19,9 +19,6 @@ PrintDefaultOptions = function(preventClear) {
 	if(!preventClear)
 		Text.Clear();
 	
-	if(world.HandleTimers())
-		return;
-	
 	if(party.location == null) {
 		Text.Add("ERROR, LOCATION IS NULL");
 		Text.Flush();

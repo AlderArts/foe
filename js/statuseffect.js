@@ -29,9 +29,10 @@ StatusEffect = {
 	Counter  : 21, //OK
 	Confuse  : 22, //OK
 	Full     : 23,
-	Weakness : 24,
+	Weakness : 24, //OK
+	Buff     : 25,
 	
-	LAST     : 25
+	LAST     : 26
 };
 
 LoadStatusImages = function(imageArray) {
@@ -57,6 +58,7 @@ LoadStatusImages = function(imageArray) {
 	Images.status[StatusEffect.Full]     = "data/status/full.png";
 	Images.status[StatusEffect.Confuse]  = "data/status/confuse.png";
 	Images.status[StatusEffect.Weakness] = "data/status/weakness.png";
+	Images.status[StatusEffect.Buff]     = "data/status/buff.png";
 	
 	for(var i = 0; i < StatusEffect.LAST; i++) {
 		if(Images.status[i] == "") continue;
@@ -72,6 +74,42 @@ function StatusList() {
 
 StatusList.NumStatus = 6;
 
+StatusList.prototype.FromStorage = function(storage) {
+	if(!_.isArray(storage)) return;
+	var that = this;
+	_.each(storage, function(stat) {
+		var idx = (stat.idx === undefined) ? 0 : parseInt(stat.idx);
+		
+		switch(idx) {
+			//TODO Add permanent status effects here
+			case StatusEffect.Venom: //TEMP TODO
+				that.stats[StatusEffect.Venom] = Status.Venom.FromStorage(stat);
+				break;
+				
+			default:
+				break;
+		}
+	});
+}
+StatusList.prototype.ToStorage = function() {
+	var storage = [];
+	for(var i = 0; i < StatusEffect.LAST; i++) {
+		var stat = this.stats[i];
+		if(stat && stat.ToStorage) {
+			var s = stat.ToStorage() || {};
+			s["idx"] = i.toFixed();
+			storage.push(s);
+		}
+	}
+	return storage.length > 0 ? storage : null;
+}
+
+StatusList.prototype.Update = function(hours) {
+	//TODO Add Status effects
+	if(this.stats[StatusEffect.Buff])
+		this.stats[StatusEffect.Buff].Update(hours);
+}
+
 StatusList.prototype.Clear = function() {
 	for(var i = 0; i < StatusEffect.LAST; i++)
 		this.stats[i] = null;
@@ -84,6 +122,8 @@ StatusList.prototype.Render = function(obj) {
 		if(this.stats[i]) {
 			if(Images.status[i]) obj[j].attr({src: Images.status[i]});
 			j++;
+			if(j >= StatusList.NumStatus)
+				break;
 		}
 	}
 	
@@ -124,6 +164,8 @@ StatusList.prototype.EndOfCombat = function() {
 	this.stats[StatusEffect.Counter] = null;
 	//this.stats[StatusEffect.Full]    = null;
 	this.stats[StatusEffect.Confuse] = null;
+	this.stats[StatusEffect.Weakness] = null;
+	//this.stats[StatusEffect.Buff]    = null;
 }
 
 Status.Venom = function(target, opts) {
@@ -647,3 +689,26 @@ Status.Weakness.Tick = function(target) {
 		target.combatStatus.stats[StatusEffect.Weakness] = null;
 	}
 }
+
+Status.Buff = function(target, opts) {
+	if(!target) return;
+	opts = opts || {};
+	
+	var hours = opts.hours || 0;
+	// Apply weakness
+	target.combatStatus.stats[StatusEffect.Buff] = {
+		turns     : turns,
+		Update    : Status.Buff.Update,
+		ToStorage : Status.Buff.ToStorage
+	};
+	
+	return true;
+}
+Status.Buff.Update = function(target, step) {
+	this.hours -= step;
+	
+	if(this.hours <= 0) {
+		target.combatStatus.stats[StatusEffect.Buff] = null;
+	}
+}
+Status.Buff.ToStorage 

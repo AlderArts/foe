@@ -65,14 +65,6 @@ world.StepToHour = function(hour, minute) {
 	return step;
 }
 
-world.HandleTimers = function() {
-	for(var i = 0; i < this.EntityStorage.length; i++) {
-		if(this.EntityStorage[i].HandleTimers && this.EntityStorage[i].HandleTimers())
-			return true;
-	}
-	return false;
-}
-	
 // Render function
 world.Render = function() {
 	

@@ -191,7 +191,6 @@ Terry.prototype.FromStorage = function(storage) {
 	this.LoadCombatStats(storage);
 	this.LoadPersonalityStats(storage);
 	
-	this.LoadEffects(storage);
 	this.LoadJobs(storage);
 	this.LoadEquipment(storage);
 	
@@ -219,7 +218,6 @@ Terry.prototype.ToStorage = function() {
 	this.SaveCombatStats(storage);
 	this.SavePersonalityStats(storage);
 	
-	this.SaveEffects(storage);
 	this.SaveJobs(storage);
 	this.SaveEquipment(storage);
 	

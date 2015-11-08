@@ -125,7 +125,6 @@ function Entity() {
 	};
 	
 	this.perks   = [];
-	this.effects = [];
 	this.aggro   = [];
 	
 	// Personality stats
@@ -316,8 +315,7 @@ Entity.prototype.Update = function(step) {
 		this.HandleDrunknessOverTime(hours);
 		this.HandleStretchOverTime(hours);
 		
-		for(var i = 0; i < this.effects.length; i++)
-			this.effects[i].timer.Dec(step);
+		this.combatStatus.Update(hours);
 	}
 }
 
@@ -325,21 +323,6 @@ Entity.prototype.HandleStretchOverTime = function(hours) {
 	this.body.HandleStretchOverTime(hours);
 }
 
-Entity.prototype.HandleTimers = function() {
-	for(var i = 0; i < this.effects.length; i++) {
-		var effect = this.effects[i];
-		
-		if(effect.timer.Expired()) {
-			var result = false;
-			if(effect.func) {
-				result = effect.func(effect.obj);
-			}
-			this.effects.remove(i--);
-			if(result) return true;
-		}
-	}
-	return false;
-}
 //TODO
 Entity.prototype.AccumulateCumOverTime = function(hours) {
 	var balls = this.Balls();
