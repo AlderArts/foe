@@ -1476,6 +1476,9 @@ Scenes.Lizards.WinPowerbottomAssert = function(enc) {
 		else
 			Text.Add("tight, clenching hole. You feel his dicks stiffen, growing thicker right before a wet, sticky gush of reptilian sperm pumps into your body. As one dick fills you with his slimy essence, you feel warm spunk splattering between your cheeks, [m1name]’s second shaft coating you in his warmth.", parse);
 		Text.NL();
+		
+		Scenes.Lizards.Impregnate(player, enemy, PregnancyHandler.Slot.Butt);
+		
 		Text.Add("<i>“Y... yes,”</i> he hisses, pushing his hips up against you.", parse);
 		Text.NL();
 		Text.Add("Eventually, you feel yourself coming down from that carnal high, feel the reptile under you finally taper off to small spurts, then nothing. You pant heavily, slowly getting control of yourself. [m1Name] looks covered in a sheen of sweat, laying there in the dirt. Slowly, you stand up and turn away, shaking your head.", parse);
