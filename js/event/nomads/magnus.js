@@ -70,6 +70,8 @@ Magnus.prototype.ToStorage = function() {
 	return storage;
 }
 
+Scenes.Magnus = {};
+
 Scenes.Magnus.Impregnate = function(mother, slot) {
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
@@ -81,8 +83,6 @@ Scenes.Magnus.Impregnate = function(mother, slot) {
 		load   : 4
 	});
 }
-
-Scenes.Magnus = {};
 
 Scenes.Magnus.Interact = function() {
 	Text.Clear();
