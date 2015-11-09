@@ -1544,14 +1544,14 @@ Scenes.BullTower.CorishevFuck = function(corishev) {
 				player.FuckVag(player.FirstVag(), corishev.FirstCock(), 4);
 				corishev.Fuck(corishev.FirstCock(), 4);
 				
-				Scenes.BullTower.CorishevImpregnate(player, corishev, PregnancyHandler.Vag);
+				Scenes.BullTower.CorishevImpregnate(player, corishev, PregnancyHandler.Slot.Vag);
 			}
 			else {
 				Sex.Anal(corishev, player);
 				player.FuckAnal(player.Butt(), corishev.FirstCock(), 4);
 				corishev.Fuck(corishev.FirstCock(), 4);
 				
-				Scenes.BullTower.CorishevImpregnate(player, corishev, PregnancyHandler.Butt);
+				Scenes.BullTower.CorishevImpregnate(player, corishev, PregnancyHandler.Slot.Butt);
 			}
 			
 			parse["target"] = Text.Parse(pussy ? "[vag]" : "[anus]", parse);
