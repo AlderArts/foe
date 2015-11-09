@@ -1,6 +1,6 @@
 
 
-Scenes.Cale.Impregnate = function(mother, slot) {
+Scenes.Cale.Impregnate = function(mother, slot, cum) {
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother : mother,
@@ -8,7 +8,7 @@ Scenes.Cale.Impregnate = function(mother, slot) {
 		race   : Race.Wolf,
 		num    : 1,
 		time   : 27 * 24,
-		load   : 3
+		load   : cum
 	});
 }
 
@@ -1636,6 +1636,9 @@ Scenes.Cale.SexCatchVagEntrypoint = function(outside, fromAnal) {
 				Text.Clear();
 				Text.Add("Cale’s thrusts increase in potency, each slap loosening you just a tiny bit as he works to force that huge knot of his inside. With a triumphant howl, he finally pops it inside and proceeds to dump his considerable load inside you.", parse);
 				Text.NL();
+				
+				Scenes.Cale.Impregnate(player, PregnancyHandler.Slot.Vag, 4);
+				
 				Text.Add("You cry out, deep and low as you feel his thick knot forcing its way through your netherlips, blindly clamping down to wring every last drop from his balls, grinding his knot with the walls of your cunt. Liquid warmth bubbles and seethes inside of you as his seed races up, the seal of his knot so tight that his sperm has nowhere to go but inside your womb, your stomach visibly bulging before he shudders and goes slack.", parse);
 				Text.NL();
 				Text.Add("Cale collapses, tongue lolling out as he groans due to his recent activities. His knot pulling to lay atop him. <i>“Damn, [playername]. Hell of a pussy you’ve got there,”</i> he compliments you with a lopsided grin.", parse);
@@ -1673,6 +1676,9 @@ Scenes.Cale.SexCatchVagEntrypoint = function(outside, fromAnal) {
 				Text.Clear();
 				Text.Add("Cale’s thrust double in speed as he becomes a blur, trying his best to not let his knot slip into your used [vagDesc].  With a triumphant howl, the wolf cums! Spurt after spurt of his lupine spunk painting your walls white, even as some of his copious load escapes your entrance to drench his knot and balls. You can feel him throbbing inside, his hips still moving, or perhaps just trembling, in pleasure until he finally collapses in a panting heap of satisfied wolf.", parse);
 				Text.NL();
+				
+				Scenes.Cale.Impregnate(player, PregnancyHandler.Slot.Vag, 2);
+				
 				parse["cum"] = cum > 3 ? " cum-slickened" : "";
 				Text.Add("With a great heaving sigh of satisfaction, you allow yourself to slowly sink atop him, cuddling him like a fluffy[cum] pillow as you rest on his form, bathing in your own warm glow of pleasure. Cheek to cheek you nuzzle him softly, content to lay here until you feel like your [legsDesc] won’t just give if you try to stand.", parse);
 				Text.Flush();
@@ -2187,6 +2193,8 @@ Scenes.Cale.SexCatchAnalEntrypoint = function(outside, fromVag) {
 				Text.Add("<i>“Knew you had it in you.,”</i> he chuckles, switching from his long thrusts to smaller one as his knot stirs your insides. It doesn’t take long before he tightens his grip on your flanks and howls. The distinct warmth of Cale’s hot seed flooding your insides as the wolf orgasms.", parse);
 				Text.NL();
 				
+				Scenes.Cale.Impregnate(player, PregnancyHandler.Slot.Butt, 4);
+				
 				var cum = player.OrgasmCum();
 				
 				Text.Add("Even as Cale’s seed gushes inside of you, your own limit is reached and you cry out, echoing the wolf-morph’s howl of ecstasy as your own body quakes and shudders with orgasm.", parse);
@@ -2237,12 +2245,18 @@ Scenes.Cale.SexCatchAnalEntrypoint = function(outside, fromVag) {
 				Text.NL();
 				Text.Add("With one last push, Cale hilts himself inside you, or as far as he can without pushing his fat knot inside you. He howls and you feel the distinct warmth of his wolf seed painting the walls of your abused ass.", parse);
 				Text.NL();
+				
+				Scenes.Cale.Impregnate(player, PregnancyHandler.Slot.Butt, 2);
+				
 				Text.Add("That’s the last straw for you as well; you sing out as if in counterpoint to his howl of ecstasy as pleasure surges through your body.", parse);
 				if(player.FirstCock())
 					Text.Add(" Your [multiCockDesc] erupt[notS] in climax, painting the ground beneath you with your seed.", parse);
 				if(player.FirstVag())
 					Text.Add(" Your neglected womanhood rains down juices, smearing your [thighsDesc] before splattering onto the earth below.", parse);
 				Text.NL();
+				
+				var cum = player.OrgasmCum();
+				
 				Text.Add("Without his knot to hold the seed in, most of it wind up leaking around the seal of your ass, splattering your butt with white. Only when the jets are reduced to a trickle does Cale pull away, sputtering a couple weak ropes onto your [buttDesc]. <i>“Ah, that hit the spot. Too bad y’ wouldn’t let me tie,”</i> he says, panting as he sits down beside you and leans on the [log].", parse);
 				Text.NL();
 				Text.Add("You simply pant, regaining your strength. Once you can move again, you gather your gear and thank Cale for the nice time, already absently looking for a place to properly clean yourself up.", parse);
