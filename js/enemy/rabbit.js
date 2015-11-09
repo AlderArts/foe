@@ -1825,6 +1825,8 @@ Scenes.Lagomorph.GroupWinOnPlainsGetFuckedM = function(enc, group) {
 	player.FuckAnal(player.Butt(), male.FirstCock(), 2);
 	male.Fuck(male.FirstCock(), 2);
 	
+	Scenes.Lagomorph.Impregnate(player, male, PregnancyHandler.Slot.Butt);
+	
 	// COMPANION SECTION BEGIN
 	//TODO Miranda
 	if(party.InParty(kiakai)) {

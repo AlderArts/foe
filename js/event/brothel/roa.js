@@ -1076,7 +1076,7 @@ Scenes.Roa.TSLCatchVaginal = function() {
 			
 			var cum = roa.OrgasmCum();
 			//Impreg
-			Scenes.Roa.Impregnate(player, cameinside);
+			Scenes.Roa.Impregnate(player, cameinside, PregnancyHandler.Slot.Vag);
 			
 			PrintDefaultOptions();
 		}, enabled : true,
@@ -1216,7 +1216,7 @@ Scenes.Roa.TSLCatchVaginal = function() {
 					Text.Add("After a few moments of adding molten heat to your cunt, Roa sighs and goes limp, clearly spent from his climax. Affectionately petting his head, you slowly lift yourself from his body. A thick stream of off-white flows from your loins as you pull out and slide out of the bed.", parse);
 					
 					var cum = roa.OrgasmCum();
-					Scenes.Roa.Impregnate(player, cameinside);
+					Scenes.Roa.Impregnate(player, cameinside, PregnancyHandler.Slot.Vag);
 					
 					PrintDefaultOptions();
 				}, enabled : true,

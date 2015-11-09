@@ -1921,6 +1921,8 @@ Scenes.Lagon.PitDefianceLoss = function() {
 		player.FuckAnal(player.Butt(), lagon.FirstCock(), 4);
 		lagon.Fuck(lagon.FirstCock(), 4);
 		
+		Scenes.Lagon.LagonImpregnate(player, PregnancyHandler.Slot.Butt);
+		
 		Text.Add("You bite down your response, trying to keep hold of your sanity while the rabbit king ravages your [anusDesc]. Visions of the brutes created by Ophelia’s alchemy swims into your mind. As big as Lagon’s cock is now - something you’re rather intimately familiar with now - how big would it be once he took something like that? Three feet? Four?", parse);
 		Text.NL();
 		Text.Add("<i>“I’ve barely even gotten started with you, little bitch,”</i> Lagon growls, his hips a blur as he goes to town on your ass, <i>“and once I’m satisfied, once I’ve put enough loads in you to make your belly swell even larger than Vena’s, then I’ll let the rest of the Pit have you. Hundreds of bunnies fucking you without rest for days on end, and each time one of them cums in you, you’ll be reminded of your mistake; the day that you dared raise your hand against me.”</i>", parse);

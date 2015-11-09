@@ -71,6 +71,18 @@ Estevan.prototype.ToStorage = function() {
 
 Scenes.Estevan = {};
 
+Scenes.Estevan.Impregnate = function(mother, slot) {
+	mother.PregHandler().Impregnate({
+		slot   : slot || PregnancyHandler.Slot.Vag,
+		mother : mother,
+		father : estevan,
+		race   : Race.Satyr,
+		num    : 1,
+		time   : 26 * 24,
+		load   : 3
+	});
+}
+
 // Schedule
 Estevan.prototype.IsAtLocation = function(location) {
 	location = location || party.location;
@@ -471,6 +483,9 @@ Scenes.Estevan.SexGay = function() {
 					Text.NL();
 					Text.Add("You tell Estevan that you want that, too. You want to feel him filling you up again with his horny satyr juice. He scoots so close to you that you can feel his sweaty skin against yours and he gives you the length of his dick. Between his hand clamped hard on your shoulder and his shallow breathing, you guess that he’s about to cum and he proves you right by blowing another hot load inside you.", parse);
 					Text.NL();
+					
+					Scenes.Estevan.Impregnate(player, PregnancyHandler.Slot.Butt);
+					
 					Text.Add("One hot blast comes hard after another; his balls seem to have an infinite capacity, as this orgasm is much longer than his first. Estevan pumps so much seed into you that you feel it dribbling out of your loosened butt and onto his erection.", parse);
 					Text.NL();
 					Text.Add("There is a vast amount of cum inside you between the leftovers of Estevan’s first orgasm and the heavy volume of his second. You can feel it pressing up into your bowels. There’s no chance of alleviating the pressure either with Estevan still fucking your sloppy hole. Both the fullness of your gut and the feeling of Estevan trampling your prostate trigger your own release.", parse);

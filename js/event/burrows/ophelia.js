@@ -2106,11 +2106,15 @@ Scenes.Ophelia.Reward = function() {
 					Sex.Vaginal(vena, player);
 					player.FuckVag(player.FirstVag(), vena.FirstCock(), 25);
 					vena.Fuck(vena.FirstCock(), 25);
+					
+					Scenes.Vena.Impregnate(player, vena, PregnancyHandler.Slot.Vag);
 				}
 				else {
 					Sex.Anal(vena, player);
 					player.FuckAnal(player.Butt(), vena.FirstCock(), 25);
 					vena.Fuck(vena.FirstCock(), 25);
+					
+					Scenes.Vena.Impregnate(player, vena, PregnancyHandler.Slot.Butt);
 				}
 				
 				if(cap < 60) {

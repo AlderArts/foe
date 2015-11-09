@@ -1308,6 +1308,9 @@ Scenes.Lizards.WinPowerbottom = function(enc) {
 								Text.NL();
 								Text.Add("You feel his spurts grow less and less, until you can't feel his hot sperm flowing any longer. His hands fall away from you.", parse);
 								Text.NL();
+								
+								Scenes.Lizards.Impregnate(player, enemy, PregnancyHandler.Slot.Butt);
+								
 								Text.Add("In a moment, you can see that he's passed out.", parse);
 								Text.NL();
 								Text.Add("Gingerly you stand up, breathing hard, your cheeks burning. As his flesh pops free from your pucker you tremble, feeling his potent slime dripping from your hole. ", parse);
@@ -1807,6 +1810,9 @@ Scenes.Lizards.LossMaleVagVariations = function() {
 		Gui.NextPrompt(function() {
 			Text.Clear();
 			Text.Add("Finally, with a powerful thrust of his hips, his [m1cockDesc] slams deep into your body. [m1Name] howls out, a bestial cry that makes a shudder run down your spine. He lets go of your hands, grabbing hold of your [buttDesc], rocking his hips against you. You feel his shafts pulsing heavily, before thick, warm fluid starts to fill your [anusDesc]. Thick gouts of it splatter over your back, making a mess of you both inside and out. Deeper and deeper his seed spills into your body, until he simply... pushes you off, jerking his first [m1cockDesc] out from you and leaving you in the dirt. A few, last ropes splatter over your body as he picks up his weapon, before turning and walking away. Exhausted and quivering from your own cruelly teased arousal, you roll onto your back and consign yourself to rest.", parse);
+			
+			Scenes.Lizards.Impregnate(player, enc.male, PregnancyHandler.Slot.Butt);
+			
 			if(player.body.Gender() == Gender.herm) {
 				Text.NL();
 				Text.Add("You feel your [numCocks] pulsing in the air, but after [m1name]'s heavy romp, you can't quite summon up the energy to do more than lie there, feeling your sexes throb in time to each other.", parse);
@@ -1876,6 +1882,8 @@ Scenes.Lizards.LossMaleVagVariations = function() {
 				Text.NL();
 				Text.Add("Finally, the growing ache seems to build inside your [clitDesc], every ounce of your being focusing into a point. Your [clitDesc] feels like it grows so very hot, and spots burst in front of your eyes as his [m1multiCockDesc] pound you over the edge. You cry out up at him, his eyes boring into yours as you feel your [vagDesc] convulse around his heavy, thick shafts. Your lips clench around him and you feel the pleasure swamp your vision as your legs give out from under you, leaving you propped up by his rock solid [m1multiCockDesc]. As your [vagDesc] juices itself, he smirks, feeling your fluids make a mess of both your groins. He pulls out of your sloppy [vagDesc], letting you slump to the ground. Picking up his weapon, he turns and walks away.", parse);
 				Text.NL();
+				
+				Scenes.Lizards.Impregnate(player, enc.male, PregnancyHandler.Slot.Vag);
 				
 				player.AddLustFraction(-1);
 				
@@ -2191,6 +2199,8 @@ Scenes.Lizards.LossMaleCockVariations = function() {
 			
 			Text.Add("Finally, with a powerful thrust of his hips, his [m1cockDesc] slams deep into your body. [m1Name] howls out, a bestial cry that makes a shudder run down your spine. He roughly squeezes your [buttDesc], rocking his hips against you. You feel his two shafts pulsing heavily, before thick, warm fluid starts to coat your back and fill your [anusDesc]. Deeper and deeper his seed spills into your body, until he simply... pushes you off, jerking his [m1cockDesc] out from you and leaving you in the dirt. A few, last ropes splatter over your body as he picks up his weapon, before turning and walking away. Exhausted and quivering from your cruelly teased arousal, you roll onto your back and consign yourself to rest.", parse);
 			Text.NL();
+			
+			Scenes.Lizards.Impregnate(player, enc.male, PregnancyHandler.Slot.Butt);
 			
 			if(!party.Alone())
 				Text.Add("Dimly, you can hear the other reptile[s] finishing with [party], leaving [all] of you in a similar state...", { s: enc.third ? "s" : "", party: party.Two() ? member1.name : "your group", all: party.Two() ? "both" : "all" });

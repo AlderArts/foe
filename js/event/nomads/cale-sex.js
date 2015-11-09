@@ -1,4 +1,17 @@
 
+
+Scenes.Cale.Impregnate = function(mother, slot) {
+	mother.PregHandler().Impregnate({
+		slot   : slot || PregnancyHandler.Slot.Vag,
+		mother : mother,
+		father : cale,
+		race   : Race.Wolf,
+		num    : 1,
+		time   : 27 * 24,
+		load   : 3
+	});
+}
+
 Scenes.Cale.TentSex = function() {
 	var parse = {
 		playername : player.name

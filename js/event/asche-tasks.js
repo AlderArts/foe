@@ -390,6 +390,8 @@ Scenes.Asche.Tasks.Ginseng.Whore = function() {
 		Text.Add("You yourself lose all sense of time or place, fucked thoroughly into submission like the whore you presented yourself as - up to the point where, by some perverse coincidence, each and every one of the trio violating you decides to orgasm at the same time. You twist and writhe on the ground, filled up in front and back alike by the zebras’ baby batter, with even more of it slopping over your [breasts] and running down your torso as the third zebra blasts great gouts of hot seed to paint your [skin], making you thoroughly used inside and out.", parse);
 		Text.NL();
 		
+		Scenes.ZebraShaman.Impregnate(player, zebra);
+		
 		var cum = player.OrgasmCum();
 		
 		Text.Add("Hell, you don’t even remember if you came yourself. What you <i>do</i> remember, though, is all of them pulling out of and away from you, finally having had some relief for their… ah, aches and pains. You’re dropped in the most ignoble fashion in the puddle of cum you helped with creating, trickles of the sticky fluid running from your mouth and cunt.", parse);

@@ -172,6 +172,18 @@ Rosalin.prototype.raceDesc = function(compScore) {
 
 Scenes.Rosalin = {};
 
+Scenes.Rosalin.Impregnate = function(mother, father, slot) {
+	mother.PregHandler().Impregnate({
+		slot   : slot || PregnancyHandler.Slot.Vag,
+		mother : mother,
+		father : father,
+		race   : Race.Human,
+		num    : 1,
+		time   : 30 * 24,
+		load   : 2
+	});
+}
+
 // Schedule
 Rosalin.prototype.IsAtLocation = function(location) {
 	location = location || party.location;
@@ -1059,10 +1071,12 @@ Scenes.Rosalin.FirstFuck = function() {
 					if(targetType == BodyPartType.ass) {
 						Sex.Anal(cale, player);
 						player.FuckAnal(target, cale.FirstCock(), 3);
+						Scenes.Cale.Impregnate(player, PregnancyHandler.Slot.Butt);
 					}
 					else {
 						Sex.Vaginal(cale, player);
 						player.FuckVag(target, cale.FirstCock(), 3);
+						Scenes.Cale.Impregnate(player, PregnancyHandler.Slot.Vag);
 					}
 					
 					Text.Add("<i>“Ah... not bad,”</i> the wolf sighs, repeatedly pounding your [targetDesc], trying to build a rhythm. Being so close to the edge already pushes his instincts to the forefront, and soon you feel an even thicker mass press against your [targetDesc]. <i>“Gonna breed you, little slut,”</i> he hisses into your ear as his knot forces it's way inside your [targetDesc]", parse);
@@ -1073,6 +1087,7 @@ Scenes.Rosalin.FirstFuck = function() {
 					Text.NL();
 					Text.Add("Not wanting to be left out, Rosalin crawls around in front of you, spreading her legs and presenting you with her loose cunt. Eagerly burying your [tongueDesc] in her folds, you feel your tastebuds being assaulted with a variety of flavors; the catgirl's sweet juices, blended with the salty taste of precum. Howling, the wolf-morph fills your [targetDesc] with his seed, his expanding knot effectively trapping the sticky substance inside.", parse);
 					Text.NL();
+					
 					Text.Add("<i>“Mm, I'll definitely have to get more of this later,”</i> the canid sighs as he collapses on top of you, his weight pushing you to the ground. Rosalin whimpers as another orgasm hits her, drenching your [faceDesc]. When she is spent, she snuggles up against you, the worst of her heat apparently worn off.", parse);
 					
 					Text.NL();
@@ -2833,10 +2848,12 @@ Scenes.Rosalin.SexPrompt = function(state) {
 				if(target == BodyPartType.vagina) {
 					Sex.Vaginal(rosalin, player);
 					player.FuckVag(player.FirstVag(), rosalin.FirstCock(), 3);
+					Scenes.Rosalin.Impregnate(player, rosalin, PregnancyHandler.Slot.Vag);
 				}
 				else {
 					Sex.Anal(rosalin, player);
 					player.FuckAnal(player.Butt(), rosalin.FirstCock(), 3);
+					Scenes.Rosalin.Impregnate(player, rosalin, PregnancyHandler.Slot.Butt);
 				}
 				
 				if(player.LowerBodyType() == LowerBodyType.Humanoid) {

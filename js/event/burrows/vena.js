@@ -64,6 +64,18 @@ Vena.prototype.ToStorage = function() {
 	return storage;
 }
 
+Scenes.Vena.Impregnate = function(mother, father, slot) {
+	mother.PregHandler().Impregnate({
+		slot   : slot || PregnancyHandler.Slot.Vag,
+		mother : mother,
+		father : father,
+		race   : Race.Rabbit,
+		num    : 5,
+		time   : (mother == vena) ? 24 : 20 * 24,
+		load   : 4
+	});
+}
+
 Scenes.Vena.PitApproach = function() {
 	var parse = {
 		

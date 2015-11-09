@@ -70,6 +70,17 @@ Magnus.prototype.ToStorage = function() {
 	return storage;
 }
 
+Scenes.Magnus.Impregnate = function(mother, slot) {
+	mother.PregHandler().Impregnate({
+		slot   : slot || PregnancyHandler.Slot.Vag,
+		mother : mother,
+		father : magnus,
+		race   : Race.Demon,
+		num    : 1,
+		time   : 15 * 24,
+		load   : 4
+	});
+}
 
 Scenes.Magnus = {};
 
@@ -686,6 +697,10 @@ Scenes.Magnus.Meditation = function() {
 				Text.Add("<i>It’s such a… bind to have been imprisoned in this host. He holds no… thought but that which seeks to further his, knowledge, of magic. Our seduction, doesn’t work… But. If we are drawn forth by… naughty souls such as you, we can… thrive. We will one day be… free.</i>", parse);
 				Text.NL();
 				Text.Add("The raspy voice echoes, leaving you with an uneasy feeling as consciousness fades.", parse);
+				
+				Scenes.Magnus.Impregnate(player, PregnancyHandler.Slot.Vag);
+				Scenes.Magnus.Impregnate(player, PregnancyHandler.Slot.Butt);
+				
 				Text.Flush();
 				
 				Gui.NextPrompt(function() {

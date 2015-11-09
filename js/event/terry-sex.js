@@ -4870,7 +4870,10 @@ Scenes.Terry.SexCatchAnal = function() {
 			Text.Add("The sound of flesh slapping against flesh competes with the sound of your heartbeat racing in your [earDesc]s, drowning out the world around you. There is only you and Terry, connected by the [tcockDesc] ravaging your [anusDesc]. Finally, in one definitive thrust, Terry slams [himher]self home, bulging knot stretching your asshole to its breaking point before gliding inside.", parse);
 			Text.NL();
 			
-			var cum = terry.OrgasmCum(); //TODO
+			var cum = terry.OrgasmCum();
+			
+			Scenes.Terry.Impregnate(player, terry, cum, PregnancyHandler.Slot.Butt);
+					
 			var cum = player.OrgasmCum();
 			
 			Text.Add("As your pucker grinds shut, Terry howls like the fox [heshe] resembles, firing ropes of hot cum into your sealed-tight hole, the feel of liquid warmth splashing around inside of you the final thing you needed to push you over the edge. Your own cry of ecstasy rises to match your partner’s as your body quakes in orgasm.", parse);
@@ -4948,6 +4951,8 @@ Scenes.Terry.SexCatchAnal = function() {
 			Text.NL();
 			
 			var cum = terry.OrgasmCum();
+			
+			Scenes.Terry.Impregnate(player, terry, 2*cum, PregnancyHandler.Slot.Butt);
 			
 			Text.Add("As you unconsciously squeeze down on the sensitive dickmeat with all your might, Terry yips loudly behind your ear. ", parse);
 			if(terry.HorseCock()) {
@@ -5108,7 +5113,10 @@ Scenes.Terry.SexCatchAnal = function() {
 				Text.Add("[HisHer] eyes home in on your [multiCockDesc], and in one fell swoop [heshe] takes[oneof] your cock[notS] into [hisher] mouth. Sucking on the [cockTip] in an effort to grant you that last spike you need to orgasm yourself.", parse);
 				Text.NL();
 				
-				var cum = terry.OrgasmCum(); //TODO
+				var cum = terry.OrgasmCum();
+				
+				Scenes.Terry.Impregnate(player, terry, cum, PregnancyHandler.Slot.Butt);
+				
 				var cum = player.OrgasmCum();
 				
 				Text.Add("You fling your head back and cry out as you explode into the [foxvixen]’s suckling mouth. Terry valiantly swallows and gulps, drinking every last drop you have to give [himher].", parse);
@@ -5126,7 +5134,10 @@ Scenes.Terry.SexCatchAnal = function() {
 				Text.Add("[HisHer] eyes home in on your [vagDesc], and in a moment of desperation [heshe] shuffles to finger your moist entrance. Two fingers are crammed inside your pussy, while [hisher] thumb teases your [clitDesc]. This is the last straw, you can’t hold back anymore!", parse);
 				Text.NL();
 				
-				var cum = terry.OrgasmCum(); //TODO
+				var cum = terry.OrgasmCum();
+				
+				Scenes.Terry.Impregnate(player, terry, cum, PregnancyHandler.Slot.Butt);
+				
 				var cum = player.OrgasmCum();
 				
 				Text.Add("You cry out in pleasure, quaking violently against your vulpine lover. Your [vagDesc] clasps shut, trying to squeeze [hisher] fingers like the cock they have pretended to be, drenching [hisher] wrist in your feminine honey.", parse);
