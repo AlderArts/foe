@@ -1,7 +1,7 @@
 
 
 Scenes.Terry.Impregnate = function(mother, father, cum, slot) {
-	isla.PregHandler().Impregnate({
+	terry.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother : mother,
 		father : father,
