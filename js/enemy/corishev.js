@@ -2,7 +2,7 @@
  * Lt Corishev
  */
 
-function Corishev(storage) {
+function Corishev() {
 	BossEntity.call(this);
 	this.ID = "corishev";
 	
@@ -39,8 +39,6 @@ function Corishev(storage) {
 	this.RestFull();
 	// Start with some lust
 	this.AddLustFraction(0.4);
-
-	if(storage) this.FromStorage(storage);
 }
 Corishev.prototype = new BossEntity();
 Corishev.prototype.constructor = Corishev;

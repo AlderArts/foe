@@ -1426,11 +1426,11 @@ Scenes.BullTower.CorishevWin = function() {
 	Encounter.prototype.onVictory.call(enc);
 }
 
-Scenes.BullTower.CorishevImpregnate = function(mother, slot) {
+Scenes.BullTower.CorishevImpregnate = function(mother, father, slot) {
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother : mother,
-		father : corishev,
+		father : father,
 		race   : Race.Human,
 		num    : 1,
 		time   : 30 * 24,
@@ -1544,14 +1544,14 @@ Scenes.BullTower.CorishevFuck = function(corishev) {
 				player.FuckVag(player.FirstVag(), corishev.FirstCock(), 4);
 				corishev.Fuck(corishev.FirstCock(), 4);
 				
-				Scenes.BullTower.CorishevImpregnate(player, PregnancyHandler.Vag);
+				Scenes.BullTower.CorishevImpregnate(player, corishev, PregnancyHandler.Vag);
 			}
 			else {
 				Sex.Anal(corishev, player);
 				player.FuckAnal(player.Butt(), corishev.FirstCock(), 4);
 				corishev.Fuck(corishev.FirstCock(), 4);
 				
-				Scenes.BullTower.CorishevImpregnate(player, PregnancyHandler.Butt);
+				Scenes.BullTower.CorishevImpregnate(player, corishev, PregnancyHandler.Butt);
 			}
 			
 			parse["target"] = Text.Parse(pussy ? "[vag]" : "[anus]", parse);
