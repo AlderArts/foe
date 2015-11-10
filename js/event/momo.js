@@ -519,8 +519,7 @@ Scenes.Momo.CookPrompt = function() {
 				var c = tempParty[i];
 				c.AddHPFraction(0.3);
 				c.AddSPFraction(0.3);
-				//TODO
-				//#apply Full debuff (cannot trigger any food eating scenes)  for 6 hours
+				Status.Full(c, {hours: 8, exp: 1.1});
 			}
 			
 			Scenes.Momo.Prompt();
