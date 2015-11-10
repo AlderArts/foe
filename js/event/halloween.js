@@ -6799,7 +6799,6 @@ Scenes.Halloween.WakingUp = function(badend) {
 		Text.NL();
 		Text.Add("Oh well, if the dream was important, it’ll probably show up again. Time to wake up and get started on your day.", parse);
 	}
-	Text.Flush();
 	
 	Scenes.Halloween.HW.Restore();
 	//Sleep
@@ -6807,6 +6806,15 @@ Scenes.Halloween.WakingUp = function(badend) {
 	party.RestFull();
 	//Return to Eden
 	party.location = world.loc.Plains.Nomads.Tent;
+	
+	Text.NL();
+	Text.Add("You feel full. The good food makes you think you can better focus on learning new things.", parse, 'bold');
+	
+	_.each(party.members, function(ent) {
+		Status.Full(ent, {hours: 12, exp: 1.1});
+	});
+	
+	Text.Flush();
 	
 	Gui.NextPrompt();
 }
