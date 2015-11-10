@@ -81,7 +81,7 @@ Scenes.Roaming.KingdomPatrol = function(entering) {
 		rigard.bandits = Scenes.Roaming.BanditsGen(capt, bonus ? 3 : 0);
 		parse["rbanditsdesc"] = rigard.bandits.desc;
 		
-		Text.Add("The [rmanwoman] at the front of the group waves for [rhisher] companions to wait, and rides up to you on [rhisher] own. [rHeShe] is a young pure human [rmanwoman] and is wearing new looking armor, though dirt staining the tabard points to heavier recent use.", parse);
+		Text.Add("The [rmanwoman] at the front of the group waves for [rhisher] companions to wait, and rides up to you on [rhisher] own. [rHeShe] is a young, pure human [rmanwoman] and is wearing new looking armor, though dirt staining the tabard points to heavier recent use.", parse);
 		Text.NL();
 		Text.Add("<i>“We’ve received reports of a few bandits raiding the farms in this area,”</i> [rheshe] says without preamble, <i>“and were sent here to investigate. I have been told it’s [rbanditsdesc]. Have you seen them around here?”</i> [rHeShe] doesn’t sound too happy with the job, glancing around, as if [rheshe] just wants to get this conversation over with.", parse);
 		Text.NL();
@@ -106,7 +106,7 @@ Scenes.Roaming.KingdomPatrol = function(entering) {
 		options.push({ nameStr : "Adventurers",
 			func : function() {
 				Text.Clear();
-				Text.Add("You tell the sergeants that you are adventurers, and you’re here as part of your quest. Okay, it might not be an <i>essential</i> part of your quest, but there’s no reason to tell [rhimher] that.", parse);
+				Text.Add("You tell the sergeant that you are adventurers, and you’re here as part of your quest. Okay, it might not be an <i>essential</i> part of your quest, but there’s no reason to tell [rhimher] that.", parse);
 				Text.NL();
 				Text.Add("The sergeant’s lips curl into a frown. <i>“Really? I know your kind. Think you’re on some goddess-sent mission to restore ancient powers and save the world, I bet.”</i>", parse);
 				Text.NL();
@@ -173,7 +173,7 @@ Scenes.Roaming.KingdomPatrol = function(entering) {
 				Text.Add("<i>“I’m fining you fifteen coins for wasting my time. I call it the ‘not killing you for being an idiot’ tax.”</i>", parse);
 				Text.NL();
 				if(party.coin >= 15) {
-					Text.Add("You grumble a little at [rhimher] being unable to take a joke, but faced with the [rmanwoman]’s menacing glare, agree to pay up. It's not worth getting in trouble with the kingdom to avoid a petty fine. The coins neatly disappear from your hand into [rhisher] purse.", parse);
+					Text.Add("You grumble a little at [rhimher] being unable to take a joke, but faced with the [rmanwoman]’s menacing glare, grudgingly agree to pay up. It's not worth getting in trouble with the kingdom to avoid a petty fine. The coins neatly disappear from your hand into [rhisher] purse.", parse);
 					Text.NL();
 					Text.Add("<i>“Pleasure doing business with you.”</i> The sergeant says, spitting to the side. <i>“Do respect the bloody soldiers, though. Or don’t, I suppose, I could always use more ale… or a new punching bag.”</i>", parse);
 					party.coin -= 15;
@@ -266,7 +266,7 @@ Scenes.Roaming.BanditsGen = function(capt, levelbonus) {
 	enc.onVictory   = Scenes.Roaming.BanditsWin;
 	
 	enc.leader = enemy.Get(0);
-	enc.desc = Text.Parse("a small group, certainly not more than half a dozen. Apparently they all wear [rclothing] and " + desc, {rclothing : rclothing});
+	enc.desc = Text.Parse("a small group, certainly not more than half a dozen. Apparently, they all wear [rclothing] and " + desc, {rclothing : rclothing});
 	enc.rclothing = rclothing;
 	enc.capt = capt;
 	
@@ -328,11 +328,11 @@ Scenes.Roaming.Bandits = function() {
 	rigard.bandits = null;
 	
 	Text.Clear();
-	Text.Add("As you make your way, the fields around you grow wilder, more unkempt, until after walking for a few minutes more, it’s hard to imagine that anyone works the land here at all. Wild grass reaches almost to your waist, and weeds sprout in prickly bushes.", parse);
+	Text.Add("As you make your way, the fields around you grow wilder, more unkempt. After walking for a few minutes more, it’s hard to imagine that anyone works the land here at all. Wild grass reaches almost to your waist, and weeds sprout in prickly bushes.", parse);
 	Text.NL();
 	Text.Add("You’re not sure why, but it seems that cultivation has been abandoned in this area. A little further, at the top of a small incline, you spot a derelict farmhouse, confirming your guess. Its roof is tilted at an odd angle, and where glass windows must have once been, empty holes gape onto its interior.", parse);
 	Text.NL();
-	Text.Add("To your surprise however, ", parse);
+	Text.Add("To your surprise, ", parse);
 	if(world.time.hour >= 8 && world.time.hour < 20)
 		Text.Add("you notice an orange flicker on the open window shutter.", parse);
 	else
@@ -403,7 +403,7 @@ Scenes.Roaming.Bandits = function() {
 			Text.NL();
 			Text.Add("Looking more carefully, you notice that it’s not just [rhisher] cheeks that are flushed. The sergeant’s nose is quite red as well, and a strong smell of liquor assaults your nose. Well, they might not be in the best condition to take on the bandits right now, but they do have a lot more men, so they probably won’t lose, at least.", parse);
 			Text.NL();
-			Text.Add("Not seeing much of an alternative at this point, you tell the sergeant that you found the bandits, and explain how to locate the abandoned farm. Just in case, you tell [rhisher] second in command as well, who seems a little more sober at least.", parse);
+			Text.Add("Not seeing much of an alternative at this point, you tell the sergeant that you found the bandits, and explain how to locate the abandoned farm. Just in case, you tell [rhisher] second-in-command as well, who seems a little more sober at least.", parse);
 			Text.NL();
 			Text.Add("<i>“Thank ye, really,”</i> the sergeant tells you. <i>“That’s quite a help. We’ll get there and clear them out, have no fear! Right after we rest up a li’l more, anyway.”</i> [rHeShe] scratches [rhisher] chin, eyes going out of focus before snapping back. <i>“Oh! Right, here, have a reward for your help.”</i>", parse);
 			Text.NL();
@@ -428,7 +428,7 @@ Scenes.Roaming.Bandits = function() {
 				Text.Add("Your companions a step behind you, you", parse);
 			else
 				Text.Add("You", parse);
-			Text.Add(" give the door a hard kick, sending it screeching open on rusted hinges. As [num] startled faces look up at you from around the table, you step inside, readying yourself for combat.", parse);
+			Text.Add(" bust down the door, sending it screeching open on rusted hinges. As [num] startled faces look up at you from around the table, you step inside, readying yourself for combat.", parse);
 			Text.NL();
 			Text.Add("It takes the bandits a moment to react, and by then you’re upon them!", parse);
 			bandits.Start();
