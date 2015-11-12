@@ -749,7 +749,7 @@ Scenes.Terry.JeanneTFStopLactate = function() {
 	
 	Text.Clear();
 	if(terry.Lactation()) {
-		Text.Add("Terry’s breasts quiver to the extent [hisher] nipples vibrate, the formerly engorged nubs shrinking down and compacting into their original small, perky selves. Once they have dwindled away, the shuddering wracking the [foxvixen]’s titflesh vanishes, leaving [hisher] [terrybreasts] the way they were before.", parse);
+		Text.Add("Terry’s breasts quiver to the extent [hisher] nipples vibrate, the formerly engorged nubs shrinking down and compacting into their original small, perky selves. Once they have dwindled away, the shuddering of the [foxvixen]’s titflesh vanishes, leaving [hisher] [terrybreasts] the way they were before.", parse);
 		Text.NL();
 		Text.Add("Terry experimentally pinches one of [hisher] teats, but nothing comes out. <i>“I guess that’s the end of that, then.”</i>", parse);
 		Text.NL();
@@ -870,7 +870,7 @@ Scenes.Terry.JeanneTFGrowCockEntrypoint = function() {
 	
 	Text.Add("Terry’s whole body quakes with violent tremors, the [foxvixen] letting out a high-pitched cry as [hisher] legs fail [himher], sending [himher] pitching down onto [hisher] knees. Eyes screwed closed, whimpering, [heshe] rubs frantically at [hisher] loins, just above [hisher] pussy.", parse);
 	Text.NL();
-	Text.Add("As you watch, the flesh over Terry’s cunt begins to bulge and bloat, swelling into an oval-shaped mass. Finally, [heshe] wraps [hisher] fingers around it and its tip splits apart, revealing something crimson-colored and conical in shape jutting from the interior of what is clearly [hisher] new sheath. Curling [hisher] fingers around it, Terry strokes away in an almost trance-like state, coaxing centimeter after centimeter of turgid flesh from its depths. Its base begins to swell, bloating into the iconic vulpine knot, engorged and clearly ready to be used to anchor Terry to someone. But after that happens... nothing else happens.", parse);
+	Text.Add("As you watch, the flesh over Terry’s cunt begins to bulge and bloat, swelling into an oval-shaped mass. Finally, [heshe] wraps [hisher] fingers around it and its tip splits apart, revealing something crimson-colored and conical in shape jutting from the interior of what is clearly [hisher] new sheath. Curling [hisher] digits around it, Terry strokes away in an almost trance-like state, coaxing centimeter after centimeter of turgid flesh from its depths. Its base begins to swell, bloating into the iconic vulpine knot, engorged and clearly ready to be used to anchor Terry to someone, but after that... nothing else happens.", parse);
 }
 
 Scenes.Terry.JeanneTFHorsegasmEntrypoint = function() {
@@ -883,9 +883,9 @@ Scenes.Terry.JeanneTFHorsegasmEntrypoint = function() {
 	};
 	parse = terry.ParserPronouns(parse);
 	
-	Text.Add("Terry immediately falls to [hisher] knees, hands darting to stroke [hisher] already engorged [tcockDesc]. Knot already fully formed, all [heshe] needs is a small touch on [hisher] inflated thickness to send forth a veritable geyser of jism. And once [heshe]’s begun you know there’s just no stopping [himher]. [HisHer] equine endowment never stops spewing gob after gob of cum, even as [heshe] gets the brilliant idea to lean over and take the flared tip of [hisher] horse-cock into [hisher] foxy muzzle. In the end [heshe] winds up blasting [hisher] own face with spunk, not that [heshe]’d care at this point, and though [heshe] does [hisher] best to suckle it all, in reality most of the spent juices wind up on [hisher] body rather than [hisher] muzzle.", parse);
+	Text.Add("Terry immediately falls to [hisher] knees, hands darting to stroke [hisher] already engorged [tcockDesc]. Knot already fully formed, all [heshe] needs is a small touch on [hisher] inflated thickness to send forth a veritable geyser of jism; once [heshe]’s begun, you know there’s just no stopping [himher]. [HisHer] equine endowment never stops spewing gob after gob of cum, even as [heshe] gets the brilliant idea to lean over and take the flared tip of [hisher] horse-cock into [hisher] foxy muzzle. In the end, [heshe] winds up blasting [hisher] own face with spunk - not that [heshe]’d care at this point - and though [heshe] does [hisher] best to suckle it all, most of the spent juices wind up on [hisher] body rather than in [hisher] muzzle.", parse);
 	if(terry.FirstVag())
-		Text.Add(" Somewhere in [hisher] continuous climax, Terry’s pussy’s decided to make its own contribution to the mess, by squirting some femcum down below, between the [foxvixen]’s legs.", parse);
+		Text.Add(" Somewhere in [hisher] continuous climax, Terry’s pussy has decided to make its own contribution to the mess by squirting some femcum down below, between the [foxvixen]’s legs.", parse);
 	Text.NL();
 	Text.Add("You watch as the semen-hose masquerading as a [foxvixen] slowly comes to a halt, [hisher] perversely equine cock slapping wetly against [hisher] [tbreastDesc] and lying slack on [hisher] visibly bulging belly. You slowly scrape a stray bead of semen off of your cheek and ", parse);
 	if(player.Slut() >= 60)
