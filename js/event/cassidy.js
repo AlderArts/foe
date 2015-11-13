@@ -147,6 +147,8 @@ Scenes.Cassidy.First = function() {
 	Text.NL();
 	Text.Add("You’ll see about that…", parse);
 	Text.Flush();
+	
+	Gui.NextPrompt();
 }
 
 // The Pale Flame interior
