@@ -183,7 +183,7 @@ RaceScore.prototype.Sorted = function() {
 	return sorted;
 }
 
-//TODO Current max 42
+//TODO Current max 43
 
 //{a:"", noun:""}
 Race.Human = new RaceDesc("human", 0, {
@@ -390,3 +390,6 @@ Race.Chimera = new RaceDesc("chimera", 42, {
 	desc: [{a:"a", noun:"chimera"}],
 	quantify: [{a:"a", noun:"chimerous"}]
 });
+Race.Salamander = new RaceDesc("salamander", 43, {
+	desc: [{a:"a", noun:"salamander"}]
+}, Race.Reptile);

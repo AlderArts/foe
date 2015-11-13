@@ -64,6 +64,7 @@ InitCache = function() {
 	
 	fera    = new Fera(gameCache.fera);
 	asche   = new Asche(gameCache.asche);
+	cassidy = new Cassidy(gameCache.cass);
 	
 	jeanne  = new Jeanne(gameCache.jeanne);
 	golem   = new GolemBoss(gameCache.golem);
@@ -133,6 +134,7 @@ InitCache = function() {
 	
 	world.EntityStorage.push(fera);
 	world.EntityStorage.push(asche);
+	world.EntityStorage.push(cassidy);
 	
 	world.EntityStorage.push(jeanne);
 	world.EntityStorage.push(golem);
@@ -460,6 +462,7 @@ GameToCache = function() {
 	
 	gameCache.fera     = fera.ToStorage();
 	gameCache.asche    = asche.ToStorage();
+	gameCache.cass     = cassidy.ToStorage();
 	
 	gameCache.jeanne   = jeanne.ToStorage();
 	gameCache.golem    = golem.ToStorage();
