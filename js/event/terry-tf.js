@@ -923,7 +923,7 @@ Scenes.Terry.JeanneTFGrowCock = function() {
 		terry.SetCock();
 	}
 	else if(terry.flags["cock"] == Terry.Cock.Regular) {
-		Text.Add("Terry immediately falls to [hisher] knees, furiously fapping at [hisher] fox-cock as it reaches its fully engorged state and dripping pre. The knot inflates in record time and each time [hisher] paws connect with [hisher] knot, [heshe] spews a long strand of fox-cum.", parse);
+		Text.Add("Terry immediately falls to [hisher] knees, furiously fapping at [hisher] fox-cock as it reaches its fully engorged state and dripping pre. The knot inflates in record time. Each time [hisher] paws connect with it, [heshe] spews a long strand of fox-cum.", parse);
 		if(terry.FirstVag())
 			Text.Add(" The [foxvixen]’s pussy reacts in a similar manner, squirting small but constant, gushes of fluids underneath, quickly forming a pool of female-scented arousal.", parse);
 		Text.NL();
