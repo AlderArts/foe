@@ -101,12 +101,7 @@ world.loc.Rigard.ShopStreet.street.links.push(new Link(
 world.loc.Rigard.ShopStreet.street.links.push(new Link(
 	"Weapons", true, function() { return Scenes.Rigard.WeaponShop.IsOpen(); },
 	function() {
-		/*
-		Text.Add("");
-		if(!Scenes.Rigard.WeaponShop.IsOpen())
-			Text.Add("");
-		Text.Add("<br/>");
-		*/
+		Scenes.Rigard.WeaponShop.StreetDesc();
 	},
 	function() {
 		MoveToLocation(world.loc.Rigard.ShopStreet.WeaponShop, {minute: 5});
