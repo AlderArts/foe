@@ -958,7 +958,7 @@ Scenes.Terry.JeanneTFRemCock = function() {
 			Text.NL();
 			Text.Add("Crossing the distance between you both, you seat yourself behind the [foxvixen] and pull [himher] into your lap, reaching around to take hold of the horsecock as it throbs away in [hisher] lap. You can feel that it’s shrunk, shorter and thinner now than it was before.", parse);
 			Text.NL();
-			Text.Add("Moving your fingers to its inflated knot and gripping the bloated bulge of flesh with your hand, you caress it. Slowly, you massage it against your palm with smooth, even motions. Terry moans like a whore in heat, thick spurts of cum geysering from [hisher] flare, each climactic outburst causing [hisher] knot to shrink a little bit in your grip until finally it disappears, leaving [himher] with just a normal horsecock.", parse);
+			Text.Add("Moving your fingers to its inflated knot and gripping the bloated bulge of flesh with your hand, you caress it. Slowly, you massage it against your palm with smooth, even motions. Terry moans like a whore in heat, thick spurts of cum geysering from [hisher] flare, each climactic outburst causing [hisher] bulb to shrink a little bit in your grip until finally it disappears, leaving [himher] with just a normal horsecock.", parse);
 			Text.NL();
 			Text.Add("Smiling, your hand glides in a long, slow stroke up Terry’s shaft, not stopping until you reach the flared tip. Your digits trace circles around the bulging flesh, rubbing every bump and wrinkle, teasing out great jets of semen that spill down [hisher] length. Looking over Terry’s shoulder confirms what your fingers are telling you: Terry’s dick is shrinking, and quite rapidly, inches vanishing with every spurt of seed.", parse);
 			Text.NL();
@@ -967,7 +967,7 @@ Scenes.Terry.JeanneTFRemCock = function() {
 			Text.Add("Terry’s balls remain, dangling lonely in their former space. You move to cup them, fondling and rolling them around in your palm, feeling them shrink smaller and smaller until they have receded totally into Terry’s body, leaving a blank space where [hisher] cock was.", parse);
 			Text.NL();
 			parse["vag"] = terry.FirstVag() ? Text.Parse(", apart from [hisher] pussy, of course", parse) : "";
-			Text.Add("As your [foxvixen] pants heavily for breath, you give [himher] a moment’s respite, then gently wriggle your way out from under [himher] once it looks like [heshe] can support [himher]self. As [heshe] continues catching [hisher] breath, you walk back around to [hisher] front, so you can properly examine [hisher] new state. Sure enough, it’s totally smooth and blank[vag].", parse);
+			Text.Add("As your [foxvixen] pants heavily for breath, you give [himher] a moment’s respite, then gently wriggle your way out from under [himher] once it looks like [heshe] can support [himher]self. As [heshe] continues catching [hisher] breath, you walk back around to [hisher] front so you can properly examine [hisher] new state. Sure enough, it’s totally smooth and blank[vag].", parse);
 		}
 		else {
 			Text.Add("The [foxvixen] arches [hisher] back, eyes screwed shut as [hisher] vulpine dick thrusts from [hisher] sheath. It visibly throbs, knot swelling as if tying with some ethereal pussy... and then, with a body-wracking shudder, Terry cums, spraying [hisher] usual meager splash of semen across the floor. Instead of going limp, however, it fires off again, and then again, multiple orgasms wracking the vulpine-morph in quick succession.", parse);
