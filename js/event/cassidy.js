@@ -1020,6 +1020,10 @@ Scenes.Cassidy.InsidePrompt = function() {
 			Scenes.Cassidy.InsideTalkPrompt();
 		}, enabled : true
 	});
+	options.push({ nameStr : "Meal",
+		tooltip : "Just sit back and have Cass cook up something for the two of you.",
+		func : Scenes.Cassidy.InsideMeal, enabled : true
+	});
 	/* TODO
 	options.push({ nameStr : "name",
 		tooltip : "",
@@ -1049,6 +1053,218 @@ Scenes.Cassidy.InsidePrompt = function() {
 			
 			MoveToLocation(world.loc.Rigard.ShopStreet.street);
 		});
+	});
+}
+
+Scenes.Cassidy.InsideMeal = function() {
+	var parse = {
+		playername : player.name
+	};
+	parse = cassidy.ParserPronouns(parse);
+	
+	Text.Clear();
+	Text.Add("Right. Better get down to the good stuff, then - you’re getting a little hungry.", parse);
+	Text.NL();
+	Text.Add("<i>“Yep.”</i> Cass eyes the remaining curry buns, then sighs and pushes the plate to the side. <i>“I’ll find a way to get these into the meal. Would be a pity to let them go stale.</i>", parse);
+	Text.NL();
+	Text.Add("<i>“Now you just hold on a moment, and I’ll have something cooked up for the both of us.”</i>", parse);
+	Text.NL();
+	Text.Add("Cassidy is good to [hisher] word. The salamander dons a white apron emblazoned with “this shit is going to be <b>delicious</b> across it in big red letters, and soon enough there’s a merry fire going on underneath the stove and a couple of pots and pans steaming above it. Unsurprisingly, [heshe] makes heavy use of the spice rack, and soon a distinctly hot and sour aroma is wafting through the air, bringing with it the promise of scorched tongues and sweaty brows.", parse);
+	Text.NL();
+	Text.Add("Time passes, but watching Cass create something - be it as simple and mundane as a meal - is fascinating in and of itself. The salamander works away with exact precision, [hisher] tail swaying behind [himher], chopping and stirring to the cracking of the wood stove; you’re not sure exactly how long has passed, but the sun’s pretty much gone down at this point, leaving the streets of Rigard shrouded in dusk.", parse);
+	Text.NL();
+	Text.Add("<i>“Just about done here!”</i> Cassidy calls out. <i>“Just hold it for a little while longer, and we can begin!”</i>", parse);
+	Text.NL();
+	Text.Add("Well, you’ve waited for so long, a little longer isn’t going to hurt. It’s not as if you’re going to keel over from hunger any moment soon. Your protests fall on deaf ears as Cass quickly finishes cooking and serves up the food.", parse);
+	Text.NL();
+	Text.Add("<i>“Aand we’re done,”</i> [heshe] says, untying the apron from about [hisher] waist. It’s gained a couple of stains in the process… but that’s not surprising, considering the enthusiasm with which [heshe] does everything. <i>“This shit is going to be <b>delicious</b>.”</i>", parse);
+	Text.NL();
+	Text.Add("Sure smells like it. Does [heshe] mind if you get started?", parse);
+	Text.NL();
+	Text.Add("<i>“Mind? Mind?”</i> A grin and laugh as Cass pulls up a chair of [hisher] own. <i>“I don’t just not mind, I’d be gloriously honored. Food is so much better when you’re sharing it with someone else, don’tcha know?”</i>", parse);
+	Text.NL();
+	Text.Add("Right. Picking up fork and spoon, you can’t wait to dig into Cassidy’s offering this evening. This so happens to be ", parse);
+	
+	var scenes = new EncounterTable();
+	
+	scenes.AddEnc(function() {
+		Text.Add("a heap of curried vegetables - you recognize carrots, potatoes, long beans, okra and shredded cabbage in the mix, and alongside that, another pot, this time holding plenty of steaming white rice. Cassidy serves the both of you, first scooping out the rice and then heaping the vegetables on top of that, letting the curry seep into the fluffy grains.", parse);
+		Text.NL();
+		Text.Add("<i>“Don’t forget to wipe your plate with the leftover buns afterwards,”</i> [heshe] reminds you. <i>“They make great sops for the curry.”</i>", parse);
+		Text.NL();
+		Text.Add("Oh, it certainly smells fragrant enough that you’ll be doing that, all right.", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("a spicy seafood stew, the main component of which appears to be fish of some sort. Amongst the mashed fish meat, you can make out bits of shrimp and freshwater mussels, as well as a bunch of aromatic, crunchy herbs that you don’t quite recognize. Cassidy ladles a hearty portion onto your plate, then does the same for [himher]self and spoons the steaming stew into one of the buns [heshe] grabs from the small pile of leftovers from earlier on.", parse);
+		Text.NL();
+		Text.Add("<i>“Tastes best when eaten with bread, I’d say. But it still tastes great on its own.”</i>", parse);
+		Text.NL();
+		Text.Add("You know what they say: do as the locals do.", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("a large plate of devilled eggs, each one still wet and glistening from the spicy marinate they’ve been preserved in. Add to that a bunch of heated vegetable preserves, smelling distinctly of vinegar, chilies and garlic, and it looks like you’re in for a meal that’s going to be heavy on the taste buds.", parse);
+		Text.NL();
+		Text.Add("<i>“It’s my dad’s recipe,”</i> Cass tells you as [heshe] serves out portions. <i>“Tastes good, and pickled like that with all those hot spices, they keep practically forever without spoiling. Who’s to complain?”</i>", parse);
+		Text.NL();
+		Text.Add("Anyone who doesn’t like having their tongue burnt out of their mouth, or alternatively, who isn’t a salamander? It doesn’t seem like you’ll actually die from this lot, though, so you shut up and chow down. It really isn’t <i>that</i> bad, even if it does go heavy on the heat at times.", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("a deep, flat-bottomed pot full of curried chicken and pork, cut sweet peppers thrown into the mix. It certainly looks sumptuous, and there’s the distinct edge of turmeric and pepper in the air. There’s also a small stack of flatbreads - they look pre-prepared, although Cassidy’s warmed them over - and it’s the latter that Cass doles out onto your plate before dumping heaps of rich meat and vegetables onto them.", parse);
+		Text.NL();
+		Text.Add("<i>“Just spoon it out, wrap it up, and go to town. Doesn’t get easier than that.”</i>", parse);
+		Text.NL();
+		Text.Add("Easy for [himher] to say - you can see chilies aplenty floating on the curry’s surface. Oh well.", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("a large serving of leafy greens, fried with shrimp, onions and garlic for flavor. The scent of heated oil that rises from the stove is wonderfully mouth-watering, and you find yourself wanting to just get down to it already.", parse);
+		Text.NL();
+		Text.Add("<i>“Everything’s pretty local,”</i> Cass tells you as [heshe] works the pan. <i>“Only way to be sure the shrimp is fresh. Well, other than catching it yourself, and I really don’t have the time for going fishing these days.”</i>", parse);
+		Text.NL();
+		Text.Add("[HeShe] sure puts a lot of effort into [hisher] cooking.", parse);
+		Text.NL();
+		Text.Add("<i>“You’ve got to put some thought into anything you make, even if it’s a meal. Doubly so since I’m not eating alone, you know?”</i>", parse);
+		Text.NL();
+		Text.Add("Aww, you’re flattered.", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("a hearty salad consisting of lightly steamed mushrooms and vegetables. Of course, with this being Cassidy, [heshe]’s gone ahead and sprinkled ground, dried peppers over everything. Surprisingly, it doesn’t drown out the earthy flavor of the mushrooms, but it does give them an edge that they wouldn’t have had otherwise…", parse);
+		Text.NL();
+		Text.Add("So, you’re wondering, where did [heshe] learn to cook, anyway?", parse);
+		Text.NL();
+		Text.Add("Cass looks contemplative for a moment. <i>“Well, some from mom, and some from dad, but most of it from gran. In the last couple years before she passed away, grandma couldn’t walk very far any more, and she spent her days just trying to pass on all she knew before she finally kicked it, you know? She saw it coming and was prepared for it.”</i>", parse);
+		Text.NL();
+		Text.Add("Right. Um maybe this wasn’t the best -", parse);
+		Text.NL();
+		Text.Add("<i>“You live. You die.”</i> Cass shrugs. <i>“No need to feel bad about it, ace. C’mon, eat up.”</i>", parse);
+		Text.NL();
+		Text.Add("All right, all right.", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("a thick stew consisting mainly of chili peppers, minced meat, tomatoes and beans. You’d love to be able to at least try and figure out exactly what <i>kind</i> of meat it’s been made of, but the spicy stew has more or less disguised the appearance, smell and taste of the meat to the point where it may very well be a mystery.", parse);
+		Text.NL();
+		Text.Add("Wait. [HeShe] expects you to eat <i>that</i> as is?", parse);
+		Text.NL();
+		Text.Add("Cass smiles as [heshe] ladles out portions into bowls. <i>“I do, ace. Now are you up to the challenge, champ, or are you going to chicken out?”</i>", parse);
+		Text.NL();
+		Text.Add("What does [heshe] mean, chicken out? It’s just food - it can’t be <i>that</i> bad, no matter how spicy it can get! Challenge accepted!", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("an enormous stuffed cabbage. On closer inspection, you note that the cabbage’s core has been removed, sliced, and arranged around what remains of the cabbage - which in turn has been filled with a fragrant mash.", parse);
+		Text.NL();
+		Text.Add("You ask Cassidy what’s in it.", parse);
+		Text.NL();
+		Text.Add("<i>“Lemon juice, rice, onions, garlic, peppers, ground beef, a few fresh mussels, and potatoes. Have fun - I know I will!”</i>", parse);
+		Text.NL();
+		Text.Add("After the cabbage’s been cut and you’ve had a bite, it’s hard to disagree with Cass.", parse);
+	}, 1.0, function() { return true; });
+	
+	scenes.Get();
+	
+	Text.Add(" Come to think of it, though, there’s a lot of food. Cass can’t be expecting you to help eat all that, right? Either that, or [heshe] really has a huge appetite for someone as thin as [heshe] is - well, one supposes working at the forge all day must take a huge amount of energy. You eye Cass as [heshe] refills the water pitcher, takes a seat, and starts digging in heartily.", parse);
+	Text.NL();
+	
+	var scenes = new EncounterTable();
+	scenes.AddEnc(function() {
+		Text.Add("<i>“Hope you aren’t thinking of getting up to any hanky-panky after this,”</i> Cass says with a contented sigh. <i>“Got a few other things I need to take care of tonight, and I’ve got to keep focused.”</i>", parse);
+		Text.NL();
+		Text.Add("Aw…", parse);
+		Text.NL();
+		Text.Add("Cassidy sticks her tongue out at you and snickers. <i>“Well, if you want to try any funny business with a sally-mander, it’s best to do so <b>before</b> you feed her. You’d do well to keep that in mind for next time.”</i>", parse);
+		Text.NL();
+		Text.Add("Oh, you will. You will.", parse);
+	}, 1.0, function() { return cassidy.Relation() >= 50; });
+	scenes.AddEnc(function() {
+		Text.Add("Wow. Cass sure can pack a lot away. Where does all that room come from?", parse);
+		Text.NL();
+		Text.Add("Cass pauses mid-bite and swallows hard. <i>“You saying that I’m eating a lot, or that I’m tiny?”</i>", parse);
+		Text.NL();
+		Text.Add("Hmm… a tough choice.", parse);
+		Text.NL();
+		Text.Add("A laugh, and Cass shakes [hisher] head. <i>“I don’t deny it - I do eat a lot. Gotta keep my strength up, you see. Beating metal all day takes energy, and what comes out must’ve gotten in from somewhere.”</i>", parse);
+		Text.NL();
+		Text.Add("Appearances do deceive, don’t they?", parse);
+		Text.NL();
+		Text.Add("<i>“Yep. If I saw myself on the street, I’d probably think to myself - ‘what a scrawny little thing.’ Now help me eat this lot, I made it just for you.”</i>", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("<i>“It’s nice to have someone at the table again,”</i> Cassidy says with a sigh. <i>“Never thought I’d miss having my folks at the table, but there it is. In between them going and you coming along, mealtimes were awfully empty.”</i>", parse);
+		Text.NL();
+		Text.Add("They must’ve been pretty lively affairs, then.", parse);
+		Text.NL();
+		Text.Add("<i>“Oh, you bet. We had two big meals a day - one to get the day started, and another to pay ourselves off for the hard work put in, as mom would say. I preferred dinner - breakfast was a bit too rushed for me, but big bro always loved it. Me, the calm energy of everyone getting together after a day’s work was the best.</i>", parse);
+		Text.NL();
+		Text.Add("<i>“No one talked shop at the dinner table, ace. It was practically forbidden - if you didn’t have a joke, a laugh, or an interesting story to tell, you sat down and shut up while someone else shared theirs. Worries and serious business were for the breakfast table. It wasn’t always the end of work - dad would often keep the forge heated and anvil ringing deep into the night - but it was sure the end of the day, if you get what I mean.”</i>", parse);
+		Text.NL();
+		Text.Add("Yeah, you think you’re getting an idea of what [heshe]’s driving at.", parse);
+		Text.NL();
+		Text.Add("<i>“Which is why I’m kinda glad you came along, ace. You sure can liven up the atmosphere when you put your mind to it. Even if you don’t, though, having someone else on the other end of the table is a nice thing.”</i>", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("So… no drink ever, not even at dinner?", parse);
+		Text.NL();
+		Text.Add("Cassidy eyeballs you. <i>“You one of those people who get really upset when they have to drink - gosh darn it - water? Water, that lowliest of drinks?”</i>", parse);
+		Text.NL();
+		Text.Add("Well…", parse);
+		Text.NL();
+		Text.Add("<i>“Because by all accounts, great-grandma was one of them,”</i> Cass continues. <i>“Didn’t touch water if she could help it, just booze all day. We sally-manders have a weakness for it…</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Which is why I don’t touch the stuff as far as I’m concerned. Don’t keep any in the house lest I be tempted to start. And once we start, it’s pretty hard to stop until we’re completely wasted or the booze runs dry. So no drink for me, just water. You want to call it miserable, I call it disciplined.”</i>", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("<i>“So, what d’ya think of tonight’s cooking, ace?”</i>", parse);
+		Text.NL();
+		Text.Add("It’s certainly a different cuisine from what’s usually found about Rigard. Did [hisher] grandma bring this over from where she used to live?", parse);
+		Text.NL();
+		Text.Add("<i>“Haha, nah. With how such a wastrel great-grandma was, I don’t think she even taught grandma how to cook. No, she just tried different things with the local goods until she figured out something she liked. There were many mistakes along the way, but she got there in the end.”</i>", parse);
+		Text.NL();
+		Text.Add("You’ve got to respect that - learning a skill from scratch without guidance has got to be hard.", parse);
+		Text.NL();
+		Text.Add("Cassidy grins. <i>“Grandma says she almost killed granddad with the first meal she served him, then realized that not everyone’s amenable to obscene amounts of spices in their food. Grandpa might have been a lizan, but even he had his limits. I toned down my usual nosh a little since you were over… it’s hard to not underdo or overdo it, but I hope I got it right.”</i>", parse);
+	}, 1.0, function() { return true; });
+	
+	scenes.Get();
+	
+	Text.NL();
+	Text.Add("The two of you fall silent as you apply yourselves to the food, and with the spiciness helping your appetite, you soon find yourselves amongst the remains of the meal - which mostly consists of plenty of dirty dishes.", parse);
+	Text.NL();
+	Text.Add("Cassidy sighs contentedly. <i>“Damn, that was great.”</i>", parse);
+	Text.NL();
+	Text.Add("Does [heshe] need help with the cleaning up?", parse);
+	Text.NL();
+	Text.Add("<i>“What? No, you’re my guest here, and guests don’t do that kind of shit. I’ll sort out this mess later, don’t you fret about it. Right now, though, all I wanna do is to sit down here and think about how much better that tasted with you around, ace.”</i>", parse);
+	Text.NL();
+	Text.Add("Oh hey, is [heshe] flattering you?", parse);
+	Text.NL();
+	Text.Add("<i>“Sucking up? Nah, just stating what’s obvious. I’ll have to head back to the forge and anvil in a bit, put in an hour or two working on those really special orders where I <b>need</b> to concentrate… but there’s still some time. Why don’t we just shut up and enjoy it?”</i>", parse);
+	Text.NL();
+	Text.Add("And enjoy it you do, spending the next few moments in silence before Cass finally speaks up again.", parse);
+	Text.NL();
+	Text.Add("<i>“Welp, I guess that’s that. Thanks for coming around, ace. I’ll show you out, if you don’t mind - gotta lock up after you leave.”</i>", parse);
+	Text.NL();
+	Text.Add("Reluctantly, you lever yourself out of your seat and wobble after Cassidy to the door. [HeShe] grabs the handle with [hisher] tail, flinging it open.", parse);
+	Text.NL();
+	Text.Add("<i>“Oh, and before you go…”</i>", parse);
+	Text.NL();
+	Text.Add("Without warning, Cassidy surges forward and ", parse);
+	if(cassidy.Relation() >= 50)
+		Text.Add("embraces you, planting a kiss on your cheek. <i>“Totally platonic,”</i> [heshe] whispers, then snickers.", parse);
+	else
+		Text.Add("squeezes you in a tight hug.", parse);
+	Text.Add(" <i>“All right, then. See you! Don’t be a stranger - come back soon!”</i>", parse);
+	Text.NL();
+	Text.Add("Yeah, you’ll do that all right, you think to yourself as you stumble out the door.", parse);
+	Text.Flush();
+	
+	if(world.time.hour < 17)
+		world.StepToHour(17);
+	world.TimeStep({hour: 1});
+	
+	cassidy.relation.IncreaseStat(30, 2);
+	
+	Status.Full(player, {hours: 12, exp: 1.15});
+	
+	Gui.NextPrompt(function() {
+		MoveToLocation(world.loc.Rigard.ShopStreet.street);
 	});
 }
 
