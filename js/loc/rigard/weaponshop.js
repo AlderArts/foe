@@ -25,9 +25,9 @@ world.loc.Rigard.ShopStreet.WeaponShop.onEntry = function() {
 //TODO
 
 world.loc.Rigard.ShopStreet.WeaponShop.events.push(new Link(
-	"Shopkeeper", true, true, null,
+	"Cassidy", true, true, null,
 	function() {
-		Scenes.Rigard.WeaponShop.Prompt();
+		Scenes.Cassidy.Approach();
 	}
 ));
 
@@ -38,40 +38,12 @@ world.loc.Rigard.ShopStreet.WeaponShop.events.push(new Link(
 	}
 ));
 
-Scenes.Rigard.WeaponShop.Prompt = function() {
-	var parse = {
-		
-	};
-	
-	Text.Clear();
-	Text.Add("This is pretty placeholder", parse);
-	Text.NL();
-	Text.Flush();
-	var prompt = function() {
-		//[name]
-		var options = new Array();
-		options.push({ nameStr : "Buy",
-			func : function() {
-				rigard.WeaponShop.Buy(prompt);
-			}, enabled : true
-		});
-		options.push({ nameStr : "Sell",
-			func : function() {
-				rigard.WeaponShop.Sell(prompt);
-			}, enabled : true
-		});
-		Gui.SetButtonsFromList(options, true);
-	};
-	prompt();
-}
-
-
 Scenes.Rigard.WeaponShop.StreetDesc = function() {
 	var parse = {};
 	
 	var first = cassidy.flags["Met"] < Cassidy.Met.Met;
 	var open  = Scenes.Rigard.WeaponShop.IsOpen();
-	var order = false; //TODO Cass working on an order
+	var order = (cassidy.flags["Order"] != Cassidy.Order.None) && !cassidy.orderTimer.Expired();
 	
 	if(first) {
 		if(open)

@@ -165,7 +165,7 @@ Shop.prototype.Buy = function(back, preventClear) {
 	Gui.SetButtonsFromList(options, true, back);
 }
 
-Shop.prototype.Sell = function(back, preventClear) {
+Shop.prototype.Sell = function(back, preventClear, customSellFunc) {
 	var shop = this;
 	back = back || PrintDefaultOptions;
 	
@@ -202,10 +202,12 @@ Shop.prototype.Sell = function(back, preventClear) {
 				// Remove item from inv
 				party.inventory.RemoveItem(obj.it);
 				
+				if(customSellFunc) customSellFunc(obj.it, 1);
+				
 				num -= 1;
 				if(num <= 0) {
 					// Recreate the menu
-					shop.Sell(back, true);
+					shop.Sell(back, true, customSellFunc);
 				}
 				else
 					sellFunc(obj, true);
@@ -222,10 +224,12 @@ Shop.prototype.Sell = function(back, preventClear) {
 				// Remove item from inv
 				party.inventory.RemoveItem(obj.it, sold);
 				
+				if(customSellFunc) customSellFunc(obj.it, 5);
+				
 				num -= sold;
 				if(num <= 0) {
 					// Recreate the menu
-					shop.Sell(back, true);
+					shop.Sell(back, true, customSellFunc);
 				}
 				else
 					sellFunc(obj, true);
@@ -241,9 +245,11 @@ Shop.prototype.Sell = function(back, preventClear) {
 				// Remove item from inv
 				party.inventory.RemoveItem(obj.it, num);
 				
+				if(customSellFunc) customSellFunc(obj.it, num);
+				
 				// Recreate the menu
 				// TODO: Keep page!
-				shop.Sell(back, true);
+				shop.Sell(back, true, customSellFunc);
 			}, enabled : true,
 			tooltip : ""
 		});

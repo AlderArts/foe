@@ -64,13 +64,6 @@ function Rigard(storage) {
 	this.ArmorShop = Scenes.Rigard.ArmorShop.Shop;
 	this.ArmorShopSpecial = Scenes.Rigard.ArmorShop.SpecialShop;
 	
-	this.WeaponShop = new Shop();
-	this.WeaponShop.AddItem(Items.Weapons.Dagger, 5);
-	this.WeaponShop.AddItem(Items.Weapons.Rapier, 5);
-	this.WeaponShop.AddItem(Items.Weapons.WoodenStaff, 5);
-	this.WeaponShop.AddItem(Items.Weapons.ShortSword, 5);
-	this.WeaponShop.AddItem(Items.Weapons.GreatSword, 5);
-	
 	this.SexShop = new Shop();
 	this.SexShop.AddItem(Items.StrapOn.PlainStrapon, 5);
 	this.SexShop.AddItem(Items.StrapOn.LargeStrapon, 5);
