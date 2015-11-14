@@ -145,3 +145,49 @@ Items.Weapons.GolWhip.effect.charisma = 5;
 Items.Weapons.GolWhip.effect.apSlash = 1;
 Items.Weapons.GolWhip.effect.amNature = 0.5;
 Items.Weapons.GolWhip.effect.alust = 0.5;
+
+Items.Weapons.OakSpear = new Item("spear0", "Oak Spear", ItemType.Weapon);
+Items.Weapons.OakSpear.price = 85;
+Items.Weapons.OakSpear.sDesc = function() { return "oak spear"; }
+Items.Weapons.OakSpear.lDesc = function() { return "an oak spear"; }
+Items.Weapons.OakSpear.Short = function() { return "Oak spear"; }
+Items.Weapons.OakSpear.Long = function() { return "A shaft of treated wood with a pointed tip attached. Good for the defensive fighter in keeping your distance."; }
+Items.Weapons.OakSpear.effect.atkMod   = 0.2;
+Items.Weapons.OakSpear.effect.defMod   = 0.2;
+Items.Weapons.OakSpear.effect.apPierce = 1;
+
+Items.Weapons.Halberd = new Item("spear1", "Halberd", ItemType.Weapon);
+Items.Weapons.Halberd.price = 115;
+Items.Weapons.Halberd.sDesc = function() { return "halberd"; }
+Items.Weapons.Halberd.lDesc = function() { return "a halberd"; }
+Items.Weapons.Halberd.Short = function() { return "Halberd"; }
+Items.Weapons.Halberd.Long = function() { return "Like a spear, but it slashes, too!"; }
+Items.Weapons.Halberd.effect.atkMod   = 0.3;
+Items.Weapons.Halberd.effect.defMod   = 0.3;
+Items.Weapons.Halberd.effect.apPierce = 0.5;
+Items.Weapons.Halberd.effect.apSlash  = 0.5;
+
+Items.Weapons.HeavyFlail = new Item("flail0", "Heavy flail", ItemType.Weapon);
+Items.Weapons.HeavyFlail.price = 125;
+Items.Weapons.HeavyFlail.sDesc = function() { return "heavy flail"; }
+Items.Weapons.HeavyFlail.lDesc = function() { return "a heavy flail"; }
+Items.Weapons.HeavyFlail.Short = function() { return "Heavy flail"; }
+Items.Weapons.HeavyFlail.Long = function() { return "A spiked wrecking ball on a stick for the offensively oriented. Hampers your ability to defend yourself, but grants considerable attacking momentum."; }
+Items.Weapons.HeavyFlail.effect.atkMod    = 0.5;
+Items.Weapons.HeavyFlail.effect.defMod    = -0.1;
+Items.Weapons.HeavyFlail.effect.apBlunt   = 0.8;
+Items.Weapons.HeavyFlail.effect.apPierce  = 0.2;
+Items.Weapons.HeavyFlail.effect.dexterity = 2;
+Items.Weapons.HeavyFlail.effect.strenght  = 2;
+
+Items.Weapons.WarHammer = new Item("hammer0", "Warhammer", ItemType.Weapon);
+Items.Weapons.WarHammer.price = 125;
+Items.Weapons.WarHammer.sDesc = function() { return "warhammer"; }
+Items.Weapons.WarHammer.lDesc = function() { return "a warhammer"; }
+Items.Weapons.WarHammer.Short = function() { return "Warhammer"; }
+Items.Weapons.WarHammer.Long = function() { return "Unwieldy, but learn to hold this thing right and you’ll be popping skulls like overripe fruit."; }
+Items.Weapons.WarHammer.effect.atkMod    = 0.6;
+Items.Weapons.WarHammer.effect.apBlunt   = 1;
+Items.Weapons.WarHammer.effect.dexterity = -1;
+Items.Weapons.WarHammer.effect.strenght  = 4;
+

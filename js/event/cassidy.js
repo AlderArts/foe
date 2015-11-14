@@ -30,11 +30,16 @@ function Cassidy(storage) {
 	this.shop = Scenes.Cassidy.CreateShop();
 	this.flags["shop"]     = 0;
 	this.shopItems = [];
+	
 	this.shopItems.push(Items.Weapons.Dagger);
 	this.shopItems.push(Items.Weapons.Rapier);
 	this.shopItems.push(Items.Weapons.WoodenStaff);
 	this.shopItems.push(Items.Weapons.ShortSword);
 	this.shopItems.push(Items.Weapons.GreatSword);
+	this.shopItems.push(Items.Weapons.OakSpear);
+	this.shopItems.push(Items.Weapons.Halberd);
+	this.shopItems.push(Items.Weapons.HeavyFlail);
+	this.shopItems.push(Items.Weapons.WarHammer);
 	
 	if(storage) this.FromStorage(storage);
 }
