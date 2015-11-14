@@ -60,7 +60,8 @@ Cassidy.Met = {
 Cassidy.Talk = {
 	Salamanders : 1,
 	Family      : 2,
-	Loner       : 4
+	Loner       : 4,
+	MShop       : 8 //One off manage the shop event
 };
 
 Cassidy.Order = {
@@ -1658,3 +1659,670 @@ Scenes.Cassidy.InsideTalkPrompt = function() {
 	});
 }
 
+Scenes.Cassidy.ManagingShop = function() {
+	var parse = {
+		playername : player.name
+	};
+	parse = cassidy.ParserPronouns(parse);
+	
+	cassidy.flags["Talk"] |= Cassidy.Talk.MShop;
+	
+	Text.Clear();
+	Text.Add("<i>“Heya, ace!”</i>", parse);
+	Text.NL();
+	Text.Add("Cassidy’s voice greets you the moment you step into The Pale Flame, and you turn in its direction to find the salamander behind the shop counter, waving you over urgently. Well, it <i>has</i> to be you - a quick glance around shows that the two of you are practically alone in the shop at the moment. A little odd, that - you know how Cass prefers to be at the forge by far, but nevertheless make your way over to see what [heshe] wants.", parse);
+	Text.NL();
+	Text.Add("<i>“Do you have a bit of time, ace?”</i> Cass says, looking at you hopefully.", parse);
+	Text.NL();
+	Text.Add("Good morning. Is there something [heshe] needs of you?", parse);
+	Text.NL();
+	Text.Add("Cassidy whistles and leans on the counter, [hisher] gaze trained on yours. <i>“Straight to the point, like always; I’m not going to pussyfoot around, either. Yeah, you came at just the right time - y’see, there’s a favor I need to ask.”</i>", parse);
+	Text.NL();
+	Text.Add("What would that be?", parse);
+	Text.NL();
+	Text.Add("<i>“Hmm… how to explain it…”</i> Cassidy thinks a moment, [hisher] expression growing serious. <i>“See, I was expecting a delivery this evening. As it turned out, the caravan which was delivering it showed up earlier in the day than I expected. Good for them, ‘cause they made good time and can set off in the evening instead of tomorrow, bad for me ‘cause I’ve now gotta grab my goods before they leave.</i>", parse);
+	Text.NL();
+	Text.Add("<i>“Problem is, I can’t leave the shop and forge unattended, yet I don’t really want to close up the shop for a quick joint out, if you get what I mean. Seemed like I was going to have to do it anyway, and then you showed up.”</i>", parse);
+	Text.NL();
+	Text.Add("Huh. You’re to watch the shop while Cass gets the package?", parse);
+	Text.NL();
+	Text.Add("Cassidy nods, shrugs and sighs. <i>“I know, I know. It’s kinda outta the blue, but fact is that no one else I trust enough to actually mind the shop for me has come in this morning. You’re practically the first one, and if I don’t get moving soon, I won’t be able to close the shop and make it in time.</i>", parse);
+	Text.NL();
+	Text.Add("<i>“So… would you mind doing me this favor?”</i>", parse);
+	Text.NL();
+	Text.Add("Hmm…", parse);
+	Text.Flush();
+	
+	world.TimeStep({minute: 15});
+	
+	var askprompt = function(asked) {
+		var options = new Array();
+		//[What Do?][Yes][No]
+		if(!asked) {
+			options.push({ nameStr : "What Do?",
+				tooltip : "Just what does minding the shop entail, anyway?",
+				func : function() {
+					Text.Clear();
+					Text.Add("Before you make any promises, what does minding the shop entail, anyway?", parse);
+					Text.NL();
+					Text.Add("<i>“Gah!”</i> Cassidy takes a few deep breaths to calm [himher]self down. <i>“Sorry about that. I guess it’s a reasonable thing to ask, it’s just that there’s not much time…”</i>", parse);
+					Text.NL();
+					Text.Add("Then [heshe]’ll just have to give you the short version.", parse);
+					Text.NL();
+					Text.Add("<i>“Right, it’s simple. Just attend to the customers, get them what they want, see to it that they pay the right prices for whatever’s sold, okay? I’ve got a list of prices in the old ledger here -”</i> [heshe] reaches out and thumps a heavy, dusty book on the counter’s side - <i>“so there shouldn’t be any problem with figuring out what the prices are. That’s all that really needs to be done - I shouldn’t be too long, really.”</i>", parse);
+					Text.NL();
+					Text.Add("Right, you understand.", parse);
+					Text.NL();
+					Text.Add("<i>“Great! So, are you going to do it or not?”</i>", parse);
+					Text.Flush();
+					
+					world.TimeStep({minute: 5});
+					
+					askprompt(true);
+				}, enabled : true
+			});
+		}
+		options.push({ nameStr : "Yes",
+			tooltip : "Yeah, you’ll do it.",
+			func : function() {
+				Scenes.Cassidy.ManagingShopAccept();
+			}, enabled : true
+		});
+		options.push({ nameStr : "No",
+			tooltip : "Hmm, you don’t think yourself up to the task.",
+			func : function() {
+				Text.Clear();
+				Text.Add("Actually, to be honest, Cass would be better off just closing the shop. You don’t think you’ve it in you to properly handle the forge’s customers without knowing much about the business yourself, plus you have a few things to attend to yourself.", parse);
+				Text.NL();
+				Text.Add("Cass sighs and smiles weakly, moving to remove [hisher] apron and wipe off the worst of the soot from [hisher] scales. <i>“Aah, well. Guess it was worth a shot. Thanks for considering it, anyway.”</i>", parse);
+				Text.NL();
+				Text.Add("Nah, you don’t really deserve thanks…", parse);
+				Text.NL();
+				Text.Add("<i>“Either way, guess I gotta close up the shop now. You mind moving?”</i>", parse);
+				Text.NL();
+				Text.Add("Well, you can’t blame Cassidy for being just a little brusque. In the end, you find yourself standing out on the street, watching Cassidy lock from the outside first the door, then the iron grilles.", parse);
+				Text.NL();
+				Text.Add("<i>“Good luck on whatever it is you have to be doing, ace. Gotta run!”</i>", parse);
+				Text.NL();
+				Text.Add("With that, the salamander turns tail and sets off at a leisurely jog, claws clicking on the cobblestones. Time for you to be off, too.", parse);
+				Text.Flush();
+				
+				world.TimeStep({hour: 2});
+				
+				Gui.NextPrompt(function() {
+					MoveToLocation(world.loc.Rigard.ShopStreet.street);
+				});
+			}, enabled : true
+		});
+		Gui.SetButtonsFromList(options, false, null);
+	}
+	askprompt();
+}
+
+Scenes.Cassidy.ManagingShopAccept = function() {
+	var parse = {
+		playername : player.name
+	};
+	parse = cassidy.ParserPronouns(parse);
+	
+	Text.Clear();
+	Text.Add("Oh, all right. You’re not sure if you’re the best suited for this job, but at least you give it a try for Cassidy’s sake.", parse);
+	Text.NL();
+	Text.Add("<i>“Thanks, ace!”</i> Cass replies as [heshe] busies [himher]self with removing [hisher] leather apron and wiping off the worst of the soot from [hisher] scales. <i>“This means a lot to me.”</i>", parse);
+	Text.NL();
+	Text.Add("Oh, you’re only too glad to help out.", parse);
+	Text.NL();
+	Text.Add("<i>“One last thing ‘fore I head out the door,”</i> Cassidy tells you as [heshe] sets [hisher] folded smith’s apron on the counter. <i>“Let me show you the page where all of today’s prices are listed, so you don’t have to go crazy searching for it later. No, no need to thank me.”</i>", parse);
+	Text.NL();
+	Text.Add("Hooking a claw under the ledger’s cover, Cass flips it open to one of the pages within. On it, the following is written:", parse);
+	Text.NL();
+	Text.Add("<i>Dagger- 75 coins</i><br/>", parse);
+	Text.Add("<i>Short Sword - 250 coins</i><br/>", parse);
+	Text.Add("<i>Greatsword - 500 coins</i><br/>", parse);
+	Text.Add("<i>Rapier - 375 coins</i><br/>", parse);
+	Text.Add("<i>Oak Spear - 425 coins</i><br/>", parse);
+	Text.Add("<i>Halberd - 575 coins</i><br/>", parse);
+	Text.Add("<i>Heavy Flail - 600 coins</i><br/>", parse);
+	Text.Add("<i>War Hammer - 600 coins</i>", parse);
+	Text.NL();
+	Text.Add("<i>“It’s not that long or hard, so you oughta remember it well,”</i> Cassidy suggests.", parse);
+	Text.NL();
+	Text.Add("[HeShe]’s right - you’d better get this down or memorized. You probably won’t have time to check the ledger while serving a customer.", parse);
+	Text.NL();
+	Text.Add("<i>“Okay, then,”</i> Cass says. <i>“Ready or not, I’ve got to go now, else I might miss the caravan. Shouldn’t be too long, now - just hold the fort until I get back, okay? Good luck, ace!”</i>", parse);
+	Text.NL();
+	Text.Add("With that and a shake of [hisher] tail, [heshe]’s gone, leaving you to swim or sink.", parse);
+	Text.Flush();
+	
+	world.TimeStep({hour: 1});
+	
+	var score = 0;
+	
+	Gui.NextPrompt(function() {
+		Scenes.Cassidy.ManagingShop1(score);
+	});
+}
+
+Scenes.Cassidy.ManagingShop1 = function(score) {
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	Text.Add("It doesn’t take long for your first customer to arrive. Barely is Cassidy out the door when a young wolf-morph, barely an adult, stumbles into the shop, looking a little bewildered before finally settling on a direction and making a beeline for the counter.", parse);
+	Text.NL();
+	Text.Add("<i>“Um… excuse me…?”</i>", parse);
+	Text.NL();
+	Text.Add("Yes?", parse);
+	Text.NL();
+	Text.Add("<i>“Well, dad thinks it’s about time I stopped poking around with wooden weapons and graduated to real steel. Only problem is, I’m still not very confident… so do you have anything for a beginner?”</i>", parse);
+	Text.Flush();
+	
+	world.TimeStep({minute: 15});
+	
+	parse["mistermiss"] = player.mfFem("mister", "miss");
+	
+	var wrong = function() {
+		Text.Clear();
+		Text.Add("You hand the little guy your weapon of choice and watch with growing dread as he struggles with it. Eventually, he gives up trying and hands it back to you.", parse);
+		Text.NL();
+		Text.Add("<i>“Um… thanks, [mistermiss], but I don’t think this is what I was looking for. Maybe I’ll come back later?”</i>", parse);
+		Text.NL();
+		Text.Add("You fight the urge to suppress a groan. Not the best foot forward, it would appear.", parse);
+		Text.Flush();
+		
+		Gui.NextPrompt(function() {
+			Scenes.Cassidy.ManagingShop2(score);
+		});
+	}
+	
+	//[name]
+	var options = new Array();
+	options.push({ nameStr : "Rapier",
+		tooltip : "He doesn't look very strong... perhaps a light weapon would be good for him?",
+		func : wrong, enabled : true
+	});
+	options.push({ nameStr : "Short sword",
+		tooltip : "It's pretty plain, but with any luck he won't cut himself to shreds with it.",
+		func : function() {
+			Text.Clear();
+			Text.Add("Ah, you have just the thing for the little guy. Pulling out a short sword, you hand it to the young wolf-morph; the little guy tests its balance and gives you a nod.", parse);
+			Text.NL();
+			Text.Add("<i>“Thanks, [mistermiss]. This one’s good.”</i>", parse);
+			Text.NL();
+			Text.Add("Great, your first sale! You feel like a proper shopkeeper already… nah, that’s just the ego talking. Nevertheless, you settle in for the next customer…", parse);
+			Text.Flush();
+			
+			Gui.NextPrompt(function() {
+				Scenes.Cassidy.ManagingShop2(score + 1);
+			});
+		}, enabled : true
+	});
+	options.push({ nameStr : "Greatsword",
+		tooltip : "For kids like him, bigger is always better.",
+		func : wrong, enabled : true
+	});
+	Gui.SetButtonsFromList(options, false, null);
+}
+
+Scenes.Cassidy.ManagingShop2 = function(score) {
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	Text.Add("No time to rest, though. Another customer’s just popped in - a well-dressed young lady, and a noblewoman by the looks of her. At the very least, she’s not wanting for money, and after a little browsing, the young woman steps up to the counter and clears her throat.", parse);
+	Text.NL();
+	Text.Add("<i>“Give me one of your finest rapiers.”</i>", parse);
+	Text.NL();
+	Text.Add("Right. You can do that. There’re a bunch of ready-made ones on the racks behind the counter, and it’s one of these that you hand to the young-lady hilt-first. She gives it a cursory inspection, then nods.", parse);
+	Text.NL();
+	Text.Add("<i>“This’ll suffice. How much do I owe you?”</i>", parse);
+	Text.NL();
+	Text.Add("Right. How much <i>does</i> a rapier cost?", parse);
+	Text.Flush();
+	
+	world.TimeStep({minute: 15});
+	
+	var wrong = function() {
+		Text.Clear();
+		Text.Add("<i>“Hmm? That doesn’t sound quite right… but I suppose it’s just my memory playing tricks on me. You’re the shopkeep, after all.”</i>", parse);
+		PrintDefaultOptions();
+	}
+	
+	//[325 coins][375 coins][425 coins]
+	var options = new Array();
+	options.push({ nameStr : "325 coins",
+		tooltip : "",
+		func : wrong, enabled : true
+	});
+	options.push({ nameStr : "375 coins",
+		tooltip : "",
+		func : function() {
+			score++;
+			Text.Clear();
+			Text.Add("<i>“That does sound about right. Here’s your money, then.”</i>", parse);
+			PrintDefaultOptions();
+		}, enabled : true
+	});
+	options.push({ nameStr : "425 coins",
+		tooltip : "",
+		func : wrong, enabled : true
+	});
+	
+	Gui.Callstack.push(function() {
+		Text.NL();
+		Text.Add("With that, the young lady draws out her purse and makes the payment.", parse);
+		Text.NL();
+		Text.Add("Right. You’ve seen Cass do this before - take the cash, open the ledger, make the entry… oh, and of course, count the coins. It’s something all shopkeepers seem to do these days, making sure everyone sees them counting the money on purchases. Oh well.", parse);
+		Text.NL();
+		Text.Add("<i>“Thank you very much.”</i>", parse);
+		Text.NL();
+		Text.Add("No, thank <i>you</i>. As you watch the young lady leave, you settle in for the second customer…", parse);
+		Text.Flush();
+		
+		Gui.NextPrompt(function() {
+			Scenes.Cassidy.ManagingShop3(score);
+		});
+	});
+	
+	Gui.SetButtonsFromList(options, false, null);
+}
+
+Scenes.Cassidy.ManagingShop3 = function(score) {
+	var parse = {
+		
+	};
+	parse = cassidy.ParserPronouns(parse);
+	
+	Text.Clear();
+	Text.Add("…Which, unfortunately enough for you, doesn’t take long to come in. Just how long is Cassidy going to take getting that delivery of [hishers]? Just your luck for all the business to come in when you agreed to help [himher] out!", parse);
+	Text.NL();
+	Text.Add("It’s an off-duty member of the City Watch, helmet tucked under his arm, and he looks askance as he steps up to the counter, not daring to meet your eye.", parse);
+	Text.NL();
+	Text.Add("Is there something you can help him with?", parse);
+	Text.NL();
+	Text.Add("<i>“Uh, yeah,”</i> he replies in almost a whisper. <i>“Look, I kinda need something which’ll let me keep my distance, yet still has a bit of weight to it… and I need it quickly. You got anything like that?”</i>", parse);
+	Text.Flush();
+	
+	world.TimeStep({minute: 15});
+	
+	var wrong = function() {
+		Text.Clear();
+		Text.Add("<i>“Eh… that’s not really what I was looking for.”</i>", parse);
+		Text.NL();
+		Text.Add("Aw, you gave it your best shot.", parse);
+		Text.NL();
+		Text.Add("The watchman shakes his head. <i>“I’ll just have to go elsewhere for what I’m looking for. Thanks, though.”</i> With that, he’s out the door as quickly and quietly as he came in. Just what was that all about, anyway? Seemed a bit shady… does Cass ever wonder what the weapons [heshe] sells are used for, anyway?", parse);
+		Text.Flush();
+		
+		Gui.NextPrompt(function() {
+			Scenes.Cassidy.ManagingShop4(score);
+		});
+	}
+	
+	//[Oak Spear][Greatsword][Halberd]
+	var options = new Array();
+	options.push({ nameStr : "Oak Spear",
+		tooltip : "The oak spear is the cheapest thing that you have that could fit that bill... and this guy doesn't really look like he's swimming in coins.",
+		func : wrong, enabled : true
+	});
+	options.push({ nameStr : "Greatsword",
+		tooltip : "You remember that ridiculous blade that Miranda totes around... this guy is being kinda vague, perhaps she has something to do with it?",
+		func : wrong, enabled : true
+	});
+	options.push({ nameStr : "Halberd",
+		tooltip : "You think you saw a halberd in the back, that ought to fit the bill, right?",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>“Right, right. That’s perfect.”</i> A furtive glance. <i>“Look, how much do I owe you?”</i>", parse);
+			Text.NL();
+			Text.Add("Soon enough, the transaction’s concluded, and the watchman is out the door with his new halberd. Just what was that all about, anyway? Come to think of it, does Cass care about what the weapons [heshe] sells are being used for, anyway?", parse);
+			Text.Flush();
+			
+			Gui.NextPrompt(function() {
+				Scenes.Cassidy.ManagingShop4(score + 1);
+			});
+		}, enabled : true
+	});
+	Gui.SetButtonsFromList(options, false, null);
+}
+
+//Intermission 1! Only use if the PC knows who Lei is and if he hasn’t been recruited. Lei doesn’t count as a customer.
+Scenes.Cassidy.ManagingShop4 = function(score) {
+	var parse = {
+		
+	};
+	
+	world.TimeStep({minute: 15});
+	
+	if(rigard.RoyalAccess() && !lei.Recruited()) {
+		Text.Clear();
+		Text.Add("You don’t have that much time to recover from your last customer when footsteps sound at the door. Oh no, not again…", parse);
+		Text.NL();
+		Text.Add("<i>“I must admit, this is a mild surprise.”</i>", parse);
+		Text.NL();
+		Text.Add("Wait. That voice… Lei?", parse);
+		Text.NL();
+		Text.Add("Indeed, it <i>is</i> Lei. The mercenary isn’t kidding - he looks honestly surprised at seeing you behind the counter, but doesn’t hesitate to step up and eye you as if you were a particularly interesting insect under a lens.", parse);
+		Text.NL();
+		Text.Add("Riiight. So… what brings him to The Pale Flame this fine day? He certainly doesn’t look like he needs a new weapon.", parse);
+		Text.NL();
+		Text.Add("<i>“It is true that I am not in need of a new weapon at the moment,”</i> Lei replies, a hint of a smile playing on his lips. <i>“But I must have my blade reforged from time to time, something that is beyond my skills, and Cassidy is one of the best smiths around - which is why I find it interesting that you are here.”</i>", parse);
+		Text.NL();
+		Text.Add("You’re just watching the shop for a bit while Cass picks something up out in town. And him? Isn’t he supposed to be watching the twins?", parse);
+		Text.NL();
+		Text.Add("<i>“They are presently occupied with their royal duties. As such, I have a short reprieve from mine, although there is still little time to waste.”</i>", parse);
+		Text.NL();
+		Text.Add("Well, either way, you’re not a smith, so you can’t help Lei with what he wants. Perhaps he should come back when Cass is actually in.", parse);
+		Text.NL();
+		Text.Add("<i>“As you say.”</i> Lei bows and makes for the door. <i>“I will be back another day, then.”</i>", parse);
+		Text.Flush();
+		
+		Gui.NextPrompt(function() {
+			Scenes.Cassidy.ManagingShop5(score);
+		});
+	}
+	else {
+		Scenes.Cassidy.ManagingShop5(score);
+	}
+}
+
+Scenes.Cassidy.ManagingShop5 = function(score) {
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	Text.Add("Phew. At least after that last one, business slows down a little, and you have a little time to catch your breath before the next customer inevitably comes in. How long has Cassidy been gone, anyway? An hour? Two? It certainly <i>feels</i> longer… and whatever the case, it’s been far too long since Cass left.", parse);
+	Text.NL();
+	Text.Add("Your thoughts are cut short, though, by a heavy clomping in the shop’s doorway, and you fear the worst. It’s only one pair of footsteps… and they belong to a massive, hulking minotaur, clad in animal skins as if he’d just stepped off the highlands and so tall that his horns practically bump against the upper edge of the doorframe as he storms in. How did such a fellow get into Rigard? The world may never know.", parse);
+	Text.NL();
+	Text.Add("<i>“Shopkeep!”</i> the minotaur bellows, and you swear you can hear the displays rattling in their racks. <i>“I hear this is the only place in this city where I may find a weapon suiting my stature!”</i>", parse);
+	Text.NL();
+	Text.Add("Heh. You have to admit, that may very well be true. You take it he would like this thing, then?", parse);
+	Text.NL();
+	Text.Add("<i><b>“Yes! There is no doubt about it! Bring me your mightiest thing for pounding and beating and crushing!”</b></i> He hammers a beefy fist into a palm for emphasis.", parse);
+	Text.NL();
+	Text.Add("Ugh, cow breath - and straight in your face, too! Hurriedly, you scour Cassidy’s inventory for something that’ll appease this muscle-bound giant…", parse);
+	Text.Flush();
+	
+	world.TimeStep({minute: 30});
+	
+	var wrong = function() {
+		Text.Clear();
+		Text.Add("The minotaur grunts as he takes your choice into those huge hands of his and tests its weight and balance. <i>“It’s big,”</i> he admits. <i>“And heavy. But it can’t be doing much in the way of pounding. Think it’s better for people who want some more control. Me, I just want to pound things.”</i>", parse);
+		Text.NL();
+		Text.Add("Sorry about that.", parse);
+		Text.NL();
+		Text.Add("<i>“Is not a big problem,”</i> the minotaur rumbles. <i>“City doesn’t have much in the way for me. Maybe should just get the job done and head back home.”</i>", parse);
+		Text.NL();
+		Text.Add("Right. Heading home. That’s something which he should be doing really soon, isn’t it?", parse);
+		PrintDefaultOptions();
+	}
+	
+	//[Halberd][Greatsword][Warhammer]
+	var options = new Array();
+	options.push({ nameStr : "Halberd",
+		tooltip : "Surely a big halberd will do the trick?",
+		func : wrong, enabled : true
+	});
+	options.push({ nameStr : "Greatsword",
+		tooltip : "That greatsword hanging on the wall is just about one of the biggest weapons you've ever seen, that should be something for him, right?",
+		func : wrong, enabled : true
+	});
+	options.push({ nameStr : "Warhammer",
+		tooltip : "Sure, the two-handed warhammer isn't very fancy, but it should certainly be able to deliver a thorough pounding, right?",
+		func : function() {
+			score++;
+			
+			Text.Clear();
+			Text.Add("He wants a weapon suited to his stature, does he? In that case, you’ve got just the thing for this overbearing fellow. Looking behind you, it’s not hard to pick out the heaviest, weightiest and most solid looking war hammer - so much so that just picking it up is a struggle - and lop it into the minotaur’s hands. The bull-man wastes no time in testing its balance, although thankfully he seems to have enough awareness to not actually test it out in front of you.", parse);
+			Text.NL();
+			Text.Add("<i>“Yes!”</i> he bellows. <i>“I like this new weapon!”</i>", parse);
+			Text.NL();
+			Text.Add("That’s very nice, only does he absolutely have to shout in your face when he speaks?", parse);
+			Text.NL();
+			Text.Add("<i>“Many thanks! I shall make my payment now!”</i>", parse);
+			Text.NL();
+			Text.Add("Uh, okay. So long as he doesn’t mind stepping back a little to do it. The brute doesn’t even bother to count his payment - he simply reaches into his furs and draws out a fistful of old, battered coins. Admittedly, it’s a minotaur-sized fistful, so it’s almost certain the fellow is overpaying - but hey, you deserve as much for putting up with a sweaty, stanky hunk of meat.", parse);
+			Text.NL();
+			Text.Add("Right. Now that that’s over with…", parse);
+			PrintDefaultOptions();
+		}, enabled : true
+	});
+	
+	Gui.Callstack.push(function() {
+		Text.Add(" The minotaur doesn’t need telling twice - specks of dust and old plaster fall from the ceiling as he stomps out.", parse);
+		Text.NL();
+		Text.Add("Right. Next one in line, please…", parse);
+		Text.Flush();
+		
+		Gui.NextPrompt(function() {
+			Scenes.Cassidy.ManagingShop6(score);
+		});
+	})
+	
+	Gui.SetButtonsFromList(options, false, null);
+}
+
+Scenes.Cassidy.ManagingShop6 = function(score) {
+	var parse = {
+		
+	};
+	parse = cassidy.ParserPronouns(parse);
+	
+	Text.Clear();
+	Text.Add("Right. You’re starting to get a little tired - hopefully, Cass will be back soon. You don’t know how [heshe] manages it all day -", parse);
+	Text.NL();
+	Text.Add("<i>“Hello?”</i>", parse);
+	Text.NL();
+	Text.Add("Right, another customer. You look up to find an elderly lady strolling in through the door and making a beeline for the counter. Now that’s someone you don’t really expect to see in a place like this… what does she want?", parse);
+	Text.NL();
+	Text.Add("<i>“Good day.”</i>", parse);
+	Text.NL();
+	Text.Add("Yes, a very fine day to her, too. Can you help her?", parse);
+	Text.NL();
+	Text.Add("<i>“Yes. Is the smith in?”</i>", parse);
+	Text.NL();
+	Text.Add("Huh. It’s that obvious that you aren’t the one who works the metal, is it? Nevertheless, you keep you smile and assure the little old lady that while Cassidy is out at the moment, you’re more than willing to help her with what she needs.", parse);
+	Text.NL();
+	Text.Add("<i>“Oh, right. Well, my daughter’s getting married in a month’s time, and I’d like to have something very special made for her. I’ve seen the work from this place, and it’s of amazing quality, so I want to commission a special order of a pendant.”</i>", parse);
+	Text.NL();
+	Text.Add("Right. A special order.", parse);
+	Text.NL();
+	Text.Add("She looks up at you hopefully. <i>“Can it be done? My estate can provide the materials, and I’ve a very good idea of what I want - I’ve even got it down in drawing. It would mean a lot to me…”</i>", parse);
+	Text.Flush();
+	
+	world.TimeStep({minute: 15});
+	
+	//[Yes][No]
+	var options = new Array();
+	options.push({ nameStr : "Yes",
+		tooltip : "",
+		func : function() {
+			Text.Clear();
+			Text.Add("You tell the elderly lady that the special order can indeed be arranged, and she brightens immediately.", parse);
+			Text.NL();
+			Text.Add("<i>“It can? Thank you so much. I’ll have my husband send down someone with the materials and drawings tomorrow, then.”</i>", parse);
+			Text.NL();
+			Text.Add("No problem. Knowing Cass, it should turn out good!", parse);
+			PrintDefaultOptions();
+		}, enabled : true
+	});
+	options.push({ nameStr : "No",
+		tooltip : "",
+		func : function() {
+			score++;
+			
+			Text.Clear();
+			Text.Add("You regretfully inform the elderly lady that it can’t really be done. Cassidy’s masterpieces are done on the fly, after all - [heshe] works by [hisher] muse, and asking for something exact… well, it’s not like [heshe] won’t do it, but it simply won’t have the top-tier quality desired.", parse);
+			Text.NL();
+			Text.Add("<i>“My friends did tell me something to that effect, but I didn’t think it was real,”</i> the elderly lady admits with a sigh. <i>“Well, if it can’t be done, it can’t be done. I’ll just have to take my business elsewhere.”</i>", parse);
+			Text.NL();
+			Text.Add("Alas, you wish you could have been of more help, but things are what they are.", parse);
+			PrintDefaultOptions();
+		}, enabled : true
+	});
+	
+	Gui.Callstack.push(function() {
+		Text.NL();
+		Text.Add("As the little old lady toddles out, you just wait behind the counter. The next customer’s probably going to come in soon, if your luck is going to continue like this - and indeed, you can see the silhouette beyond the barred windows, hear the click-click-click of footsteps on the cobblestones outside. There’s nothing for it but to steel yourself; such is the horror of working retail -", parse);
+		Text.NL();
+		Text.Add("- And who should it be but Cassidy coming in through the door, an enormous bundle in the salamander’s hands.", parse);
+		Text.NL();
+		Text.Add("Spirits, finally. <i>Finally</i>.", parse);
+		Text.NL();
+		Text.Add("<i>“What’s the matter, ace?”</i> Cassidy says as [heshe] sets down the bundle on the shop floor with a soft thump. <i>“You look as if you’ve seen a ghost.”</i>", parse);
+		Text.NL();
+		Text.Add("No, no. You just weren’t expecting [himher], that’s all.", parse);
+		Text.NL();
+		Text.Add("<i>“Oh. Sorry about being a little later than expected - I just got into a bit of a delay out there, that’s all.”</i>", parse);
+		Text.NL();
+		Text.Add("What kind of delay?", parse);
+		Text.NL();
+		Text.Add("Cass waves a clawed hand dismissively <i>“A little bit of this and that, nothing much to worry about. Important thing is that I’m back, right?”</i>", parse);
+		Text.NL();
+		Text.Add("Uh. Yeah. It’s clear that Cassidy doesn’t want to discuss it at the moment, and yeah, you guess the important thing is that [heshe]’s back now. Dusting off [hisher] hands, the salamander smith saunters up to the counter and flips open the ledger.", parse);
+		Text.NL();
+		Text.Add("<i>“So! Let’s see how well you did while I was gone - why don’t you give me an account of the details while I look through the books?”</i>", parse);
+		Text.NL();
+		Text.Add("Easily done. You recount to Cass the events which transpired since [hisher] departure, and [heshe] listens intently as [heshe] goes over the books. At last, you’re done, and [heshe] slams the ledger shut before looking straight at you.", parse);
+		Text.NL();
+		if(DEBUG) {
+			Text.Add("Score: " + score + "/5", parse, 'bold');
+			Text.NL();
+		}
+		
+		if(score >= 5) {
+			Text.Add("<i>“Hey, you’re pre-tty good, ace!”</i> Cass whistles appreciatively. <i>“If I didn’t know you were busy with your own stuff, I’d be tempted to ask you to stay on and cook the books for me. It’d certainly give me more time to do what I like doing, instead of just dealing with numbers every day.”</i>", parse);
+			Text.NL();
+			Text.Add("Uh… no. Definitely, no please.", parse);
+			Text.NL();
+			Text.Add("<i>“Aww.”</i> A grin. <i>“Seriously though, ace, you did pretty damn well - give yourself a pat on the back. You’ve earned it.”</i>", parse);
+			Text.NL();
+			Text.Add("Phew... you definitely feel like you did.", parse);
+			Text.NL();
+			Text.Add("<i>“Don’t be so tired. I’ll make you feel better.”</i> Smirking, Cass leans over and wraps [hisher] arms about you in a big hug - [hisher] touch is distinctly warmer than your average person’s, but not uncomfortably so. It’s a few moments before [heshe] finally releases you, [hisher] breathing a little quicker.", parse);
+			
+			cassidy.relation.IncreaseStat(50, 4);
+			
+			Scenes.Cassidy.ManagingShopCookies();
+		}
+		else if(score >= 2) {
+			Text.Add("<i>“Guess you didn’t do too badly, ace.”</i> Cass grins and shrugs. <i>“A couple mistakes here and there, but that’s only to be expected if this isn’t your day job.”</i>", parse);
+			Text.NL();
+			Text.Add("Heh. You were certainly feeling a bit worn by the end of it all.", parse);
+			Text.NL();
+			Text.Add("<i>“Tell me about it. But then, I had my dad and big bro to ease me into this side of things, at the very least.”</i>", parse);
+			Text.NL();
+			Text.Add("Yeah… thanks.", parse);
+
+			cassidy.relation.IncreaseStat(50, 2);
+			
+			Scenes.Cassidy.ManagingShopCookies();
+		}
+		else { // 0,1
+			Text.Add("<i>“Heh.”</i> Cass grins weakly and turns [hisher] gaze skyward for a moment. <i>“Maybe closing up the shop would’ve been a better choice.”</i>", parse);
+			Text.NL();
+			Text.Add("Sorry…", parse);
+			Text.NL();
+			Text.Add("<i>“Guess you’re just not cut out for this, huh, ace?”</i> Cass continues. <i>“You and me both… but I gotta do it, so nose to the grindstone for me.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Look, thanks for watching the shop for me anyway, okay, ace? Don’t take it too hard on yourself - it was me who asked you to do my job and threw you in to sink or swim. Either way, though, I’ve got to be correcting the books and do a whole lot of stuff to fix things, so if you don’t mind, could you leave for a bit?”</i>", parse);
+			Text.NL();
+			Text.Add("Yeah, you guess…", parse);
+			Text.NL();
+			Text.Add("<i>“Damn it, stop acting like I’m chasing you out. But I gotta be alone for a bit.”</i>", parse);
+			Text.NL();
+			Text.Add("All right, you understand. Removing yourself from behind the counter, you receive a nod and clap on the shoulder from Cassidy.", parse);
+			Text.NL();
+			Text.Add("<i>“Take it easy, okay? I’ll see you around.”</i>", parse);
+			Text.NL();
+			Text.Add("Yeah, you will.", parse);
+			Text.Flush();
+			
+			world.TimeStep({hour: 1});
+			
+			Gui.NextPrompt(function() {
+				MoveToLocation(world.loc.Rigard.ShopStreet.street);
+			});
+		}
+	});
+	
+	Gui.SetButtonsFromList(options, false, null);
+}
+
+Scenes.Cassidy.ManagingShopCookies = function() {
+	var parse = {
+		
+	};
+	parse = cassidy.ParserPronouns(parse);
+	
+	Text.NL();
+	Text.Add("<i>“Now for the big reveal.”</i> Cass rubs [hisher] hands together as [heshe] stalks back to the parcel and crouches by it. <i>“Since I kept you waiting so long, I guess you oughta see what’s in it that’s so important.”</i>", parse);
+	Text.NL();
+	Text.Add("You have to admit, it would be interesting to see what was so important that Cass had to drop everything to go and get them. Like she said, it should be pretty important…", parse);
+	Text.NL();
+	Text.Add("Cassidy’s claws make short work of the twine holding the parcel shut, and then [heshe] practically tears apart the brown packaging paper trying to get the thing open. Within are about a dozen lumps of rock - some ruddy, some smooth - all of them varying shades of different color. There’s another parcel, though - a smaller one consisting of tightly wrapped wax paper, and Cass immediately pulls it out of the mess and hoists it aloft like some kind of treasured prize.", parse);
+	Text.NL();
+	Text.Add("<i>“Yep, it’s all in here,”</i> [heshe] tells you, very much satisfied. <i>“Help me bring the rocks over to the shelf behind the counter, will you?”</i>", parse);
+	Text.NL();
+	Text.Add("It’s not as if you have anything better to do, so you shrug and move to help Cassidy.", parse);
+	Text.NL();
+	Text.Add("<i>“Don’t remember if I’ve told you this before, ace, but dad’s isn’t taking his retirement lying down. He’s always looking for new materials - minerals and ores mostly, but there’s value in keeping an open mind - and sends the more interesting bits of his findings for me to experiment with when I’ve got some free time. He knows how much I love doing that kind of stuff.”</i>", parse);
+	Text.NL();
+	Text.Add("And the smaller package?", parse);
+	Text.NL();
+	Text.Add("Cassidy smiles, then breaks out into a small fit of laughter. <i>“My mom’s cookies. Love the damned things to bits - want any, ace? They’re really good, and I think you deserve a reward for helping me watch the shop.”</i>", parse);
+	Text.Flush();
+	
+	world.TimeStep({hour: 1});
+	
+	//[Yes][No]
+	var options = new Array();
+	options.push({ nameStr : "Yes",
+		tooltip : "Sure, you’d love some cookies.",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>“Great! Help me get this open, okay?”</i>", parse);
+			Text.NL();
+			Text.Add("It doesn’t take too long for the little wax paper parcel to be torn apart and set out on the counter, and then Cass and you are enjoying the glorious taste of home-baked peanut cookies.", parse);
+			PrintDefaultOptions();
+		}, enabled : true
+	});
+	options.push({ nameStr : "No",
+		tooltip : "Nah, you’ll pass.",
+		func : function() {
+			Text.Clear();
+			Text.Add("Cassidy squints at you. <i>“You on a diet or something? Welp, more for me.”</i>", parse);
+			Text.NL();
+			Text.Add("It doesn’t take too long for the little wax paper parcel to be torn apart and unfurled on the counter, and then Cassidy’s gleefully munching on a handful of home-baked peanut cookies.", parse);
+			Text.NL();
+			Text.Add("<i>“Really, you shouldn’t have said no, this stuff is delicious.”</i> A few crumbs spray out of [hisher] mouth. <i>“I suppose it makes me sound like a kid, but I really miss these.”</i>", parse);
+			PrintDefaultOptions();
+		}, enabled : true
+	});
+	
+	Gui.Callstack.push(function() {
+		Text.NL();
+		Text.Add("In the back of your mind, you’re vaguely aware that the shop’s still technically open and that a customer might come in any time, but Cassidy looks so blissful that you don’t really want to screw up the moment for [himher]. Add that to the fact that the cookies are all gone in no time, and… it’s all for the better.", parse);
+		Text.NL();
+		Text.Add("<i>“That really hit the spot,”</i> Cassidy mumbles, wiping [hisher] mouth with the back of [hisher] hand. <i>“Going to need the energy if I’m going to start work on these tonight.”</i>", parse);
+		Text.NL();
+		Text.Add("Already?", parse);
+		Text.NL();
+		Text.Add("Cass boggles at you. <i>“Are you crazy? Of course! Can’t wait till I can close the shop and get to them. If I’d missed the caravan… bah, don’t think about that, Cass. Look, ace, really glad you could watch the shop for me, if I haven’t already said it.”</i>", parse);
+		Text.NL();
+		Text.Add("No worries. It was your - well, can’t honestly say it was a complete pleasure, but slogging through it to see Cass happy was definitely worth it. Okay, then.", parse);
+		Text.NL();
+		Text.Add("<i>“Okay, then! See you around, ace - don’t be too long in coming back!”</i>", parse);
+		Text.Flush();
+		
+		Gui.NextPrompt(function() {
+			MoveToLocation(world.loc.Rigard.ShopStreet.street);
+		});
+	});
+	
+	Gui.SetButtonsFromList(options, false, null);
+}
