@@ -2326,3 +2326,208 @@ Scenes.Cassidy.ManagingShopCookies = function() {
 	
 	Gui.SetButtonsFromList(options, false, null);
 }
+
+Scenes.Cassidy.BigReveal = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	cassidy.flags["Met"] = Cassidy.Met.KnowGender;
+	
+	Text.Clear();
+	Text.Add("In through the door of The Pale Flame, out to the familiar smells of oil, steel and soot that pervade the smithy. The place is spick and span as always, but there’s no sign of Cassidy anywhere - when searching the forge’s immediate area fails to turn up either skin or shadow of the salamander, you turn your attention to the displays, and then the counter.", parse);
+	Text.NL();
+	Text.Add("Nope, no sign of him, either. Although, you do notice that there’s an unwrapped case lying on the counter, one of those fancy boxes lined with velvet - or at least, it <i>looks</i> like velvet to you. Arranged in it are five bottles of distilled spirits, according to the labels, and there’s an empty spot where one should be…", parse);
+	Text.NL();
+	Text.Add("Wait. Oh. You make to step around the counter, and before you even do, a soft snore sounds from behind it, confirming your suspicions without even needing to look. Cass is pretty much knocked out behind the counter, smelling of drink and looking most undignified. He’s sprawled out, hugging his tail like some kind of bolster, his hair even messier than usual as he snores away with an open mouth. As you’d expected, the missing bottle is beside him - the glass is cracked, which suggests that it wasn’t placed, but rather, dropped. There’s only a thimbleful or two left in it - half has been spilled all over Cass, and presumably, the other half is in him, judging by the strong smell of booze on his breath.", parse);
+	Text.NL();
+	Text.Add("If it’s any consolation, though, the flame on his tail-tip is blazing away merrily with plenty of heat and strong light. Seems like he had a good time, huh? Too bad that he didn’t remember to close up the shop before knocking himself out, but an explanation can wait. For now, you’ve got to make sure the place is secure and get this poor fellow somewhere more comfortable.", parse);
+	Text.Flush();
+	
+	world.TimeStep({minute: 10});
+	
+	Gui.NextPrompt(function() {
+		Text.Clear();
+		Text.Add("Closing that shop isn’t hard - all you’ve to do is to shut the door and bar it from the inside. You don’t know where Cassidy keeps the keys, but this’ll have to do until the salamander comes to. With that, all that remains is getting Cass into the back - he’s surprisingly light, even with you knowing how thin he is, and doesn’t protest as you pick up the salamander and sling him over your shoulder. Quite the opposite, in fact - murmuring to himself, the salamander wiggles happily in your grasp, his body noticeably warmer than usual. Must be the drink. Well, you’ll get him into bed soon enough; solutions first, questions later.", parse);
+		Text.NL();
+		Text.Add("First into the back, and from there, into Cassidy’s room. He wasn’t kidding when he’d said it used to be his parents’ before they’d retired - the bed is large enough for two, and it’s not just the bed. Even though Cass has filled it with his own effects, everything seems just a little too big for one person alone.", parse);
+		Text.NL();
+		Text.Add("Well, that’s none of your business. Wrinkling your nose at reek of heated alcohol that continues to rise from Cassidy’s limp form, you try and figure out what to do with him. It’s not the worst that could have happened, but it’s pretty darn close. Anyone could have walked into the shop when he was out and made away with pretty much anything and everything in it.", parse);
+		Text.NL();
+		Text.Add("Cass murmurs in your grasp - seems like all the jostling around has caused him to come to, even if he’s not very coherent. He rolls a weak, bleary eye at you, then gives you a shit-eating grin. <i>“Halp. Ah’ve fallen down an’ can’t get up.”</i>", parse);
+		Text.NL();
+		Text.Add("After this, you’re <i>really</i> going to want an explanation from him for his drunkenness, especially since it seems he’s been drinking on an empty stomach. There’s no way he’s going straight on the bed, not with his clothes fouled and reeking of alcohol, so you set him down carefully on the wooden floorboards and look in the cabinet for some fresh clothes. Yep, there’re plenty of them all right, shirts and shorts all neatly folded and stowed away in the drawers. There’re also plenty of towels, and you’re going to need those…", parse);
+		Text.NL();
+		Text.Add("With a sigh - and a hope that he doesn’t take this the wrong way - you tug at Cass’ drink-soiled shirt, pulling it up and over his head. Cass seems only too eager to cooperate, giggling softly to himself as you toss away the shirt and bring a fresh one, along with a wetted towel. Now to wipe off the worst of the -", parse);
+		Text.NL();
+		Text.Add("- Wait, are those breasts on him? They’re small and pointed, barely more than mosquito bites, which would explain why they’re so easily hidden or why Cass needs no bra. Yet they <i>are</i> there, and you’re pretty sure he’s not fat or muscular enough to -", parse);
+		Text.NL();
+		Text.Add("Know what? There’s only one way to resolve this. It’s not as if Cass’ shorts haven’t been stained either, and you’ll need to change those, too… with a firm yank, you have them down, and take a good, hard look at the soft panties beneath. Another yank, and… well. Smack in the middle of Cassidy’s unremarkable hips, between his - or rather, her - legs, is a heated little cunt, wet with… uh… just why is Cass wet?", parse);
+		Text.NL();
+		Text.Add("<i>“Mmmh.”</i> In a sudden surge of strength, Cassidy grabs hold of you with scaly fingers and plants a wet, slobbering kiss on your cheek, the flame on her tail-tip practically an inferno as she embraces. <i>“G’day, ace. Love you.”</i>", parse);
+		Text.NL();
+		Text.Add("Right, right. You don’t need <i>that</i> now, and even if you did, the all-encompassing stink of distilled spirits is a more than sufficient mood-killer. Cass doesn’t seem to mind the chill of the cold water as you towel her down, and three more towels later, you think you’ve done what you can without outright giving her a bath. With your aid, the salamander cheerily slips into the fresh change of clothes that you’ve prepared for her. That much, at least, goes smoothly.", parse);
+		Text.NL();
+		Text.Add("<i>“Gee, thanks,”</i> she slurs, then hiccups and collapses against you, rubbing her face into the crook of your shoulder. And… yes, it’s definite, her body is a <i>lot</i> warmer than it was when you first brought her in…", parse);
+		Text.NL();
+		Text.Add("Bah. Whatever you had in mind when stepping in through The Pale Flame’s door today, it sure as hell wasn’t playing nurse to an inebriated salamander. Right. No nonsense now, though, it’s bedtime for her. Grabbing Cass under her shoulder, you move to lead her to bed. It’s just a little way away… shouldn’t be too far… she tries to stand, fails, and eventually has to be dragged by you onto the mattress.", parse);
+		Text.NL();
+		Text.Add("Bed, now!", parse);
+		Text.NL();
+		Text.Add("She refuses. Tiny claws prick you as the salamander smith grasps at you, nuzzling her face aggressively into your neck.", parse);
+		Text.NL();
+		Text.Add("<i>“Wanna hug.”</i>", parse);
+		Text.NL();
+		Text.Add("Hey, this wasn’t part of the deal! You try to disentangle yourself from the rough-scaled arms, but only end up with even more of a death grip about you and Cass’ tail wrapped about your lower body to boot.", parse);
+		Text.NL();
+		Text.Add("<i>“C’mon. Ace. Wanna hug. Y’r warm.”</i>", parse);
+		Text.NL();
+		parse["skin"] = player.HasScales() ? "" : ", and you only do so after leaving a few thin red lines on your skin in the process";
+		Text.Add("It takes a little effort - well, more than a little effort - to pry Cassidy free from you[skin]. Eventually, though, you manage to loosen her grasp on you, and she plummets onto the mattress like a stone, with much the same effect. You take a moment to make sure she’s comfortable, sliding a pillow under that unruly mop of red hair of hers, then finally can you relax a bit and take in your surroundings in detail.", parse);
+		Text.NL();
+		Text.Add("The bed aside, Cassidy’s room is sparse, but neat. There’re lighter patches on the floorboards where larger pieces of furniture once stood, so it’s likely that her folks took out most of their stuff when they left, leaving her with a few necessities. A cabinet, a dresser, a full-length mirror set into a wall… there’s a bedside table with a small dish in it, and in that dish, a number of burnt-down candle stubs.", parse);
+		Text.NL();
+		Text.Add("The only decoration to be had is a… well, it looks like a plate. A plate of coppery metal it is, then, with numerous small colored stones set into it - a few of them are recognizable as raw gemstones, although most of them are simply minerals of some sort. Another small door in the back presumably leads to a bathroom of some sorts, judging by the brass pipes running in and out of it.", parse);
+		Text.NL();
+		Text.Add("All in all, there’s a lot of empty space, but that’s only to be expected.", parse);
+		Text.NL();
+		Text.Add("Your work’s still not done yet, though. If you know anything about overindulging, Cass is going to be feeling pretty horrible when she wakes up, and you head out to the dining room to get a pitcher of water and a couple of mugs. By the time you’ve returned, Cass is snoozing merrily on the bed, hugging her burning tail like a body pillow.", parse);
+		Text.NL();
+		Text.Add("Time for you to settle in too, then. Clearing the candle holder off the bedside table, you sit down and try to make yourself comfortable.", parse);
+		Text.NL();
+		Text.Add("Time passes…", parse);
+		Text.Flush();
+		
+		Gui.NextPrompt(function() {
+			world.StepToHour(19);
+			
+			Text.Clear();
+			Text.Add("<i>“Spirits above.”</i>", parse);
+			Text.NL();
+			Text.Add("Cassidy’s voice jolts you back to wakefulness - you must’ve dozed off sometime. Judging by the darkness outside, night must’ve fallen already. Right. First things first - you light one of the candles in the holder, bathing the room in a soft glow. Next, the water; you pour some out from the pitcher and hand it to Cassidy. She stares at it dumbly for a few moments - you can see the gears turning in her head - and then everything clicks into place.", parse);
+			Text.NL();
+			Text.Add("<i>“[playername]? Is that you, ace?”</i>", parse);
+			Text.NL();
+			Text.Add("Yes, it is. Here, have some water.", parse);
+			Text.NL();
+			Text.Add("<i>“Crap.”</i> Cass takes the mug into her hands, although you remain close just in case her hold on it slips. <i>“I’ve been drinking again, haven’t I?”</i>", parse);
+			Text.NL();
+			Text.Add("Again? You don’t know about the other times, but yeah, she’s been drinking.", parse);
+			Text.NL();
+			Text.Add("<i>“Shit.”</i> Cass downs the water in one big gulp so quickly that you’re afraid she’ll choke, then flops back into the mattress and stares up at the ceiling. <i>“Shit shit shit shit shit.”</i>", parse);
+			Text.NL();
+			Text.Add("There’s a story behind this, isn’t there?", parse);
+			Text.NL();
+			Text.Add("<i>“Gimme a moment. My mouth feels like someone went and stuffed powdered charcoal in it.”</i> You dutifully pour out another mug of water for Cass, and she downs it. For a moment, she goes cross-eyed, and you wonder if she’s going to throw up again, but she swallows hard and the fit passes. <i>“But what happened on your side?”</i>", parse);
+			Text.NL();
+			Text.Add("You? Well, you came into the shop, found her out cold behind the counter with a cracked bottle by her side. Things being what they were, you went ahead and barred the door, cleaned her up and put her to bed.", parse);
+			Text.NL();
+			Text.Add("Cass squeezes her eyes shut, and it’s not the candlelight. <i>“R-right. That matches up. Last thing I remember was something hitting me in the back of the head. Must’ve gone and thumped my skull against one of the shelves or something.”</i>", parse);
+			Text.NL();
+			Text.Add("Huh. Is that right?", parse);
+			Text.NL();
+			Text.Add("<i>“Shit. I owe you one. Or two. Maybe three. Anyone coulda walked in and… I dunno. Thinking’s hard.”</i>", parse);
+			Text.NL();
+			Text.Add("Hard or not, she’ll have to give you the story. She owes you as much.", parse);
+			Text.NL();
+			Text.Add("<i>“Fine. Fine.”</i> A long, deep sigh. Cassidy sinks into the mattress and is silent for a minute or two, clearly gathering her thoughts, then groans. <i>“See, I was doing this job for this guy, okay? Pr-etty rich fellow if you ask me. When it’s done, he sends me some drink my way of thanks. Now, normally I’d pass it straight back to my folks back in the mountains, they know what to do with it, but…”</i>", parse);
+			Text.Flush();
+			
+			Gui.NextPrompt(function() {
+				world.TimeStep({hour: 2});
+				
+				Text.Clear();
+				Text.Add("But yes?", parse);
+				Text.NL();
+				Text.Add("<i>“Well, I said to myself: ‘I ought to try just a bit, you know? Make sure mom and dad don’t get any bad stuff. Thimbleful can’t hurt.’ So I do just that, and it’s pretty good, so I’m having another, and I dunno, I think I may have finished half the bottle when I feel a thump in the back of my head, and it’s lights out.</i>", parse);
+				Text.NL();
+				Text.Add("<i>“Shit. I feel like shit. This is the exact sort of thing that grandma used to warn me against - making up excuses to get around my own rules just ‘cause it feels good. I <b>knew</b> that it’s in the blood - that once I started, I wouldn’t be able to stop, and yet I went ahead and did it anyway. And if you hadn’t come along…”</i>", parse);
+				Text.NL();
+				Text.Add("Hey, there’s no need for her to beat herself up like that over-", parse);
+				Text.NL();
+				Text.Add("<i>“But there <b>is</b>,” Cassidy spits. “You have no idea what it’s like to let down my grandma.”</i> ", parse);
+				Text.NL();
+				Text.Add("Best to change the topic before she blows up. So… um… how come she never told you she was a girl?", parse);
+				Text.NL();
+				Text.Add("Cass stares at you, dumbstruck. <i>“W-what? I thought you always knew!”</i>", parse);
+				Text.NL();
+				Text.Add("Actually, just the opposite. It was only because you had to change her stained clothes that you finally figured out she wasn’t a guy.", parse);
+				Text.NL();
+				Text.Add("Cassidy shrinks back into the bed, as if trying to hide from you. <i>“Oh wow. I manage to screw up not just one, but two things. This is not a good day.”</i>", parse);
+				Text.NL();
+				Text.Add("This is one of those stupid things where everything could’ve been resolved with a few minutes’ talking, isn’t it? Does she want some more water?", parse);
+				Text.NL();
+				Text.Add("<i>“My mouth’s filled with dog hair right now, but I don’t think I could drink any.”</i> Feebly, Cass waves off the mug. <i>“I just… well, it just annoys me that people think of me as a boy, instead of a <b>tom</b>boy. There’s a difference there, ya know.”</i>", parse);
+				Text.NL();
+				Text.Add("If she wants your honest answer, it was her appearance that swung the needle that way when you first met her. Her actions...well, they just reinforced whatever initial impression you had. If you’d known she was a girl from the outset, then yeah, she’d have been more tomboyish.", parse);
+				Text.NL();
+				Text.Add("<i>“Guess it doesn’t change anything, though.”</i>", parse);
+				Text.NL();
+				Text.Add("Hm?", parse);
+				Text.NL();
+				Text.Add("A weak grin. <i>“I mean, it’s not as if we’re getting up to any dirty business, yeah? So in the end, that doesn’t matter, does it? What’s between my legs, that is?”</i>", parse);
+				Text.NL();
+				Text.Add("Perhaps not, but you’ll have to speak to her about it in more detail when she’s feeling better. Seems like she doesn’t remember being clingy while inebriated, though.", parse);
+				Text.NL();
+				Text.Add("<i>“Me, I’d rather get it all sorted now, but…”</i> she groans again and rubs her head. <i>“Yeah, you’re right, ace. I ought to have a clear head when facing this. Look, thanks again for bringing me in and closing up the shop. I know I’m saying it again and again, but it really means a lot to me. If mom and dad knew that I was putting the shop in such danger, they’d kill me.”</i>", parse);
+				Text.NL();
+				Text.Add("Good thing you’re not her mom or her dad. Or her grandma, for that matter.", parse);
+				Text.NL();
+				Text.Add("<i>“Oh fuck. Yeah, good thing grandma’s not here to see this…”</i>", parse);
+				Text.NL();
+				Text.Add("Right. For now, she should lie down and get some sleep until the next morning; there’s work to be done, after all. And a proper bath to get that alcohol smell out of her hair.", parse);
+				Text.NL();
+				Text.Add("<i>“Night, [playername].”</i>", parse);
+				Text.NL();
+				Text.Add("Yeah, night. You’ll just head out to the table and watch things until morning.", parse);
+				Text.NL();
+				Text.Add("Time passes…", parse);
+				Text.Flush();
+				
+				Gui.NextPrompt(function() {
+					world.StepToHour(8);
+					
+					Text.Clear();
+					Text.Add("You awake again, this time to the smell of cooking. It’s warm, slightly peppery, and promises to be thick and heavy - opening your eyes, you find yourself slouched in one of Cassidy’s dining chairs where you’d placed yourself last night. Cass herself, on her part, is bent over the stove, stirring a large pot of porridge. She still looks a little haggard, but at least in better shape than she was in the day before; it’s clear that she’s had a bath, as the reek of drink about her is barely present now.", parse);
+					Text.NL();
+					Text.Add("<i>“Top of the morning to you, ace.”</i>", parse);
+					Text.NL();
+					Text.Add("Is she sure she should be standing like that, or cooking?", parse);
+					Text.NL();
+					Text.Add("<i>“I’m not gonna lie and say I feel amazing,”</i> Cass replies quietly, her tail curling about her leg. <i>“But I’m feeling good enough. Can’t just keep lying in bed all day. Been up for a bit already - cleaned up the mess behind the counter while you were out cold. Don’t worry too much - we sally-manders burn off our drink pretty fast.”</i>", parse);
+					Text.NL();
+					Text.Add("And the remaining bottles…?", parse);
+					Text.NL();
+					Text.Add("<i>“Wrapped them up. I’ll arrange for it to be sent to my folks before I open the shop this morning. It doesn’t matter if mom and dad get flaming drunk, because they’re retired. They ought to enjoy themselves a bit.”</i>", parse);
+					Text.NL();
+					Text.Add("Right, right. All’s well that ends well, then.", parse);
+					Text.NL();
+					Text.Add("<i>“No, it isn’t well,”</i> Cass mutters as she shuts off the stove and hefts the pot of rice porridge over to the table. Mm, thick, bland, rice porridge. You watch as she ladles out the stuff into bowls - a large one for you, and a more modest one for herself.", parse);
+					Text.NL();
+					Text.Add("Look, you can clearly see she’s beating herself up over this. Has she ever considered having a bit every now and then? Just to prevent binging like what just happened?", parse);
+					Text.NL();
+					Text.Add("Cass sighs, tapping her tail-tip on the ground. <i>“What part of ‘once started, can’t stop’ didn’t get through your head, ace? Trust me, I’ve tried it before. When grandma first discovered booze, she’d only intended to have a sip after seeing great-grandma have some, then wound up guzzling straight from the still. It was a good thing I managed to knock myself out on the shelf, else I might’ve emptied all six bottles into myself.</i>", parse);
+					Text.NL();
+					Text.Add("<i>“I don’t suppose you would understand. You’re not a sally-mander, after all.”</i>", parse);
+					Text.NL();
+					Text.Add("No, you aren’t.", parse);
+					Text.NL();
+					Text.Add("Cass mumbles as she picks at her porridge. <i>“It’s not just that I actually put a bottle of distilled spirits in me. It’s that I should’ve known better. It’s that I was making excuses for myself. To make things even worse, it was while I was on the clock. Even if it was extra tempting… grandma lived her entire life without slipping, to the best of my knowledge. I… I just feel like I’ve let her down.”</i>", parse);
+					Text.NL();
+					Text.Add("The way Cassidy speaks of her grandma, you’d think that she was some kind of saint.", parse);
+					Text.NL();
+					Text.Add("<i>“Heh. I suppose I do have a chip in that pot, if you get my meaning.”</i> A weak grin, followed by a sigh. <i>“I was gran’s favorite grandchild, you know that? But… well, I guess there aren’t any buts to be had. C’mon, let’s eat up before it gets cold. Busy day ahead of us.”</i>", parse);
+					Text.NL();
+					Text.Add("Silence reigns as both of you apply yourselves to the surprisingly bland porridge, and you watch as Cass polishes off her bowl, although not as voraciously as she might have done. At last, she’s finished.", parse);
+					Text.NL();
+					Text.Add("<i>“Welp, I’m going to open up the forge. You go ahead and take your time, ace; I’ll see you out front.”</i>", parse);
+					Text.Flush();
+					
+					Gui.NextPrompt(function() {
+						MoveToLocation(world.loc.Rigard.ShopStreet.street);
+					});
+				});
+			});
+		});
+	});
+}

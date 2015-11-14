@@ -20,6 +20,9 @@ world.loc.Rigard.ShopStreet.WeaponShop.onEntry = function() {
 	else if(!(cassidy.flags["Talk"] & Cassidy.Talk.MShop) && (cassidy.Relation() >= 10) && (world.time.hour < 12)) {
 		Scenes.Cassidy.ManagingShop();
 	}
+	else if((cassidy.flags["Met"] == Cassidy.Met.WentBack) && (cassidy.Relation() >= 30)) {
+		Scenes.Cassidy.BigReveal();
+	}
 	else {
 		PrintDefaultOptions();
 	}
