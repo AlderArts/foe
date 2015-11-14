@@ -13,6 +13,7 @@ CreditsScreen = function() {
 	Text.Add("Asche: The Observer<br/>");
 	Text.Add("Aquilius: The Observer<br/>");
 	Text.Add("Cale: Alder, LukaDoc and QuietBrowser<br/>");
+	Text.Add("Cassidy: The Observer<br/>");
 	Text.Add("Cat Dynasty theme room: LukaDoc and QuietBrowser<br/>");
 	Text.Add("Cats loss scenes: LukaDoc and QuietBrowser<br/>");
 	Text.Add("Cveta: The Observer<br/>");
