@@ -379,13 +379,13 @@ Terry.prototype.Interact = function(switchSpot) {
 	Text.Add("Terry is a [truegender] fox-morph follower you 'recruited' from Rigard’s Jail; [heshe]’s currently wearing [armordesc] and wielding [weapondesc].", parse);
 	Text.NL();
 	if(terry.Relation() < 30)
-		Text.Add("[HeShe] scratches [hisher] neck sometimes, around the enchanted collar you gave [himher] to ensure [heshe]’s kept under control. Sometimes [heshe] gives you an irritated glance, when [heshe] thinks you’re not looking.", parse);
+		Text.Add("[HeShe] occasionally scratches [hisher] neck, around the enchanted collar you gave [himher] to ensure [heshe]’s kept under control. Sometimes, [heshe] gives you an irritated glance when [heshe] thinks you’re not looking.", parse);
 	else if(terry.Relation() < 60)
 		Text.Add("Around [hisher] neck is an enchanted collar that prevents [himher] from leaving you or otherwise disobeying you. It was the only way you could take the petite [foxvixen] away from the death row. It’s probably a good thing [heshe]’s wearing it too; considering [hisher] thieving past, there’s no guarantee [heshe] won’t get in trouble again. When [heshe] spots you looking, [heshe] quickly nods in acknowledgement at you.", parse);
 	else if(terry.flags["pQ"] >= Terry.PersonalQuest.Completed)
-		Text.Add("The [foxvixen] is always wearing that enchanted collar you gave [himher] when you bailed [himher] out of jail, even though [heshe] technically doesn’t have to wear it anymore. You didn’t think the crafty [foxvixen] would find a way out of it, but [heshe] did. Even so, [heshe] insists on wearing it. “As proof of ownership,” you quote. You didn’t think [heshe] would take to [hisher] station so well, nor that you’d grow this close as you travelled together. When your eyes meet, [heshe] smiles warmly at you.", parse);
+		Text.Add("The [foxvixen] is always wearing that enchanted collar you gave [himher] when you bailed [himher] out of jail, even though [heshe] technically doesn’t have to wear it anymore. You didn’t think the crafty [foxvixen] would find a way out of it, but [heshe] did. Even so, [heshe] insists on wearing it: “As proof of ownership,” you quote. You didn’t think [heshe] would take to [hisher] station so well, nor that you’d grow this close as you travelled together. When your eyes meet, [heshe] smiles warmly at you.", parse);
 	else
-		Text.Add("[HeShe]’s grown quite close to you as you spent time together, and you gotta admit, the [foxvixen] is not so bad once you get to know [himher]. You’ve found [himher] to be quite amorous when [heshe] wants to, and even a bit clingy at times… but nevertheless you’re glad to have the company of the pretty [foxvixen]. When your eyes meet, [heshe] smiles warmly at you.", parse);
+		Text.Add("[HeShe]’s grown quite close to you as you spent time together, and you gotta admit, the [foxvixen] is not so bad once you get to know [himher]. You’ve found [himher] to be quite amorous when [heshe] wants to, and even a bit clingy at times… but nevertheless, you’re glad to have the company of the pretty [foxvixen]. When your eyes meet, [heshe] smiles warmly at you.", parse);
 	
 	if(DEBUG) {
 		Text.NL();
@@ -442,10 +442,10 @@ Scenes.Terry.Appearance = function() {
 		parse["c"] = terry.FirstCock() ? Text.Parse(", contrasting the [tcockDesc] between [hisher] legs", parse) : "";
 		Text.Add("A pair of [tbreastDesc] bulge noticeably atop Terry’s chest[c]. ", parse);
 		if(terry.Cup() == Terry.Breasts.Dcup) {
-			Text.Add("Though only D-cups, Terry is so slenderly built elsewhere that they seem exaggeratedly large. The full quivering breasts jiggle softly whenever [heshe] moves, making even the act of breathing almost hypnotic as they rise, fall, expand and contract. It really is incredible that such a dainty [foxvixen] could have such huge breasts.", parse);
+			Text.Add("Though only D-cups, Terry is so slenderly built elsewhere that they seem exaggeratedly large. The full quivering breasts jiggle softly whenever [heshe] moves, making even the act of breathing almost hypnotic as they rise, fall, expand and contract. It really is incredible that such a dainty [foxvixen] could have such huge boobs.", parse);
 			if(terry.Lactation()) {
 				Text.NL();
-				Text.Add("The huge [foxvixen] tits contain an equally huge supply of warm, creamy milk, just waiting to be tapped whenever you want. As if to prove your point, a small bead leaks from each perky pink nipple in turn, sliding down Terry’s areolae. With practised disinterest, [heshe] wipes the smears of milk away with a quick flick of [hisher] fingers over each breast.", parse);
+				Text.Add("The huge [foxvixen] tits contain an equally huge supply of warm creamy milk, just waiting to be tapped. As if to prove your point, a small bead leaks from each perky pink nipple in turn, sliding down Terry’s areolae. With practiced disinterest, [heshe] wipes the smears of milk away with a quick flick of [hisher] fingers over each breast.", parse);
 			}
 		}
 		else if(terry.Cup() == Terry.Breasts.Ccup) {
@@ -481,7 +481,7 @@ Scenes.Terry.Appearance = function() {
 			Text.Add("You sigh mentally and roll your eyes, but choose to listen. There’s nothing to be gained by making [himher] upset over something so trivial.", parse);
 		}
 		else if(terry.Cup() >= Terry.Breasts.Acup) {
-			Text.Add("<i>“Umm… it’s kinda embarrassing when you stare at them like that,”</i> the [foxvixen] says, cupping [hisher] breasts.", parse);
+			Text.Add("<i>“Umm… it’s kinda embarrassing when you stare at them like that,”</i> the [foxvixen] says, cupping [hisher] tits.", parse);
 			Text.NL();
 			Text.Add("You smile slightly and shake your head. Terry really needs to stop being so shy; [heshe] has a perfectly nice set of breasts, so naturally you’re going to look at them.", parse);
 		}
@@ -494,7 +494,7 @@ Scenes.Terry.Appearance = function() {
 	else if(terry.Slut() < 60) {
 		if(terry.Cup() >= Terry.Breasts.Acup) {
 			parse["heft"] = terry.Cup() >= Terry.Breasts.Ccup ? " and hefting" : "";
-			Text.Add("Terry cups [hisher] breasts, massaging[heft] them. <i>“You like them?”</i> [heshe] asks teasingly, <i>“Well, you’d better. Cuz it was you who gave them to me.”</i>", parse);
+			Text.Add("Terry cups [hisher] breasts, massaging[heft] them. <i>“You like them?”</i> [heshe] asks teasingly, <i>“Well, you’d better, 'cuz it was you who gave them to me.”</i>", parse);
 			Text.NL();
 			Text.Add("You enthusiastically nod your head in agreement; you most certainly do like them.", parse);
 		}
@@ -529,11 +529,11 @@ Scenes.Terry.Appearance = function() {
 	if     (preg && stage > 0.8)
 		Text.Add("Seems like Terry’s pregnancy is in its final stages. The [foxvixen]’s belly is nice and round. When you put your hand on [hisher] belly, you can feel the baby inside kick you. The big belly coupled with the [foxvixen]’s sometimes distant gaze make [himher] look very attractive...", parse);
 	else if(preg && stage > 0.6)
-		Text.Add("[HisHer] pregnancy has come a long way. You don’t think there’s much more [heshe] can grow before [heshe]’s ripe for birthing a little fox into the world. Terry sometimes rubs [hisher] belly with a smile, it’s clear that despite the burdens [hisher] pregnancy have imposed on [himher], [heshe]’s looking forward to popping the little fox out.", parse);
+		Text.Add("[HisHer] pregnancy has come a long way. You don’t think there’s much more [heshe] can grow before [heshe]’s ripe for birthing a little kit into the world. Terry sometimes rubs [hisher] belly with a smile, it’s clear that despite the burdens [hisher] pregnancy have imposed on [himher], [heshe]’s looking forward to popping the little pup out.", parse);
 	else if(preg && stage > 0.4)
 		Text.Add("Terry’s belly is growing nicely. The [foxvixen] sometimes has cravings, but that’s to be expected of a pregnant [foxvixen] - at least [heshe]’s not feeling sick anymore. You gotta say though, this pretty belly of [hishers] makes [himher] look very feminine and attractive. Maybe you should consider calling Terry over for some alone time later...", parse);
 	else if(preg && stage > 0.2)
-		Text.Add("[HisHer] belly’s developing a nice paunch, and you can see that [hisher] pregnancy is taking its toll on the poor [foxvixen]. Sometimes Terry looks sick or tired, but that only lasts an instant before the [foxvixen] recomposes [himher]self.", parse);
+		Text.Add("[HisHer] belly’s developing a nice paunch, and you can see that [hisher] pregnancy is taking its toll on the poor [foxvixen]. Sometimes, Terry looks sick or tired, but that only lasts an instant before the [foxvixen] recomposes [himher]self.", parse);
 	else
 		Text.Add("Your [foxvixen] is nicely trim, lean, flat-bellied and perfectly suited for sneaking through windows or wriggling under couches. But there’s not really anything else to say about it, so your gaze keeps sweeping down toward [hisher] loins...", parse);
 	Text.NL();
@@ -682,18 +682,18 @@ Scenes.Terry.ExploreGates = function() {
 		Text.Add("As best you can, the pair of you make your way through the crowds, looking for the slightest sign of the thief you're chasing, eyes ever alert for a telltale vulpine form. With the sheer number of people here, it doesn't make your task easy, and you keep having to push your way through the scrum.", parse);
 		Text.NL();
 		if(terry.hidingSpot == world.loc.Rigard.Gate) {
-			Text.Add("Your search finally pays off when you see a vulpine tail rounding a corner toward an alleyway. You signal to Miranda and she opens a path in the crowd so you can give chase. As soon as she notices she’s being followed she makes a mad dash toward the other side. <i>“Dammit!</i> Miranda curses as she rushes ahead. You follow in tow.", parse);
+			Text.Add("Your search finally pays off when you see a vulpine tail rounding a corner toward an alleyway. You signal to Miranda and she opens a path in the crowd so you can give chase. As soon as she notices she’s being followed, she makes a mad dash toward the other side. <i>“Dammit!</i> Miranda curses as she rushes ahead. You follow in tow.", parse);
 			Text.NL();
-			Text.Add("After a while she finally makes a mistake and rounds a corner on a dead end. Without so much a batting an eye she readies herself for combat!", parse);
+			Text.Add("After a while, she finally makes a mistake and rounds a corner on a dead end. Without so much a batting an eye she readies herself for combat!", parse);
 			Text.Flush();
 			
 			Scenes.Terry.CombatVsMiranda();
 			return;
 		}
 		else {
-			Text.Add("In the end you come back empty-handed. Wherever the vixen is, she doesn’t seem to be here.", parse);
+			Text.Add("In the end, you come back empty-handed. Wherever the vixen is, she doesn’t seem to be here.", parse);
 			Text.NL();
-			Text.Add("<i>“Come on, let’s look somewhere else,”</i> Miranda says in annoyance, pushing a path open in the crows so the two of you can get out.", parse);
+			Text.Add("<i>“Come on, let’s look somewhere else,”</i> Miranda says in annoyance, pushing a path open through the crowd so the two of you can get out.", parse);
 		}
 	}
 	else {
@@ -716,9 +716,9 @@ Scenes.Terry.ExploreResidential = function() {
 	if(terry.flags["Met"] >= Terry.Met.Found) {
 		Text.Add("You decide to look around and ask a few people. Someone might’ve seen her. ", parse);
 		if(terry.hidingSpot == world.loc.Rigard.Residental.street) {
-			Text.Add("After a long string of complaints, annoyed comments and plain rudeness, one of the residents finally provides a lead.<i>“A vixen? You mean that one?”</i> they point toward an alleyway, where you see a distinct vulpine running off.", parse);
+			Text.Add("After a long string of complaints, annoyed comments and plain rudeness, one of the residents finally provides a lead.<i>“A vixen? You mean that one?”</i> They point toward an alleyway, where you see a distinct vulpine running off.", parse);
 			Text.NL();
-			Text.Add("Without missing a beat you call for Miranda and make a mad dash after the thief. You chase after her for a while, until Miranda manages to corner her at a dead end. She draws her blade and prepares for battle!", parse);
+			Text.Add("Without missing a beat, you call for Miranda and make a mad dash after the thief. You chase after her for a while, until Miranda manages to corner her at a dead end. She draws her blade and prepares for battle!", parse);
 			Text.Flush();
 			
 			Scenes.Terry.CombatVsMiranda();
@@ -729,7 +729,7 @@ Scenes.Terry.ExploreResidential = function() {
 			Text.NL();
 			Text.Add("You shake your head.", parse);
 			Text.NL();
-			Text.Add("<i>“Dammit! When I catch that thief...”</i> she trails off into a growl, signalling you to follow.", parse);
+			Text.Add("<i>“Dammit! When I catch that thief...”</i> she trails off into a growl, signaling you to follow.", parse);
 		}
 	}
 	else {
@@ -751,7 +751,7 @@ Scenes.Terry.ExploreMerchants = function() {
 	
 	if(terry.flags["Met"] >= Terry.Met.Found) {
 		if(terry.hidingSpot == world.loc.Rigard.ShopStreet.street) {
-			Text.Add("You and Miranda wander through the warehouses of the merchant’s district, looking for any sign of the sleek vixen. The two of you check a few of them before you catch a glimpse of a moving shadow. Without thinking you rush ahead, Miranda following after you, and as soon as round the corner you’re faced with the vixen thief, already ready for combat!", parse);
+			Text.Add("You and Miranda wander through the warehouses of the merchant’s district, looking for any sign of the sleek vixen. The two of you check a few of them before you catch a glimpse of a moving shadow. You rush ahead without thinking, Miranda following hot on your heels, and as soon as round the corner, you’re faced with the vixen thief, already ready for combat!", parse);
 			Text.Flush();
 			Scenes.Terry.CombatVsMiranda();
 			return;
@@ -772,7 +772,7 @@ Scenes.Terry.ExploreMerchants = function() {
 		
 		Gui.NextPrompt(function() {
 			Text.Clear();
-			Text.Add("Despite your efforts, so far the search has been for nothing; you're both empty-handed despite how thoroughly you keep checking. You are just about to leave the warehouse district and search elsewhere when you spot something; a warehouse with its doors ajar. Recalling Miranda said there isn't much activity here even when things are normal, you deem that suspicious and call her attention to it, suggesting that you should both check it out.", parse);
+			Text.Add("Despite your efforts, the search so far has been for nothing; you're both empty-handed despite how thoroughly you keep checking. You are just about to leave the warehouse district and search elsewhere when you spot something; a warehouse with its doors ajar. Recalling Miranda said there isn't much activity here even when things are normal, you deem that suspicious and call her attention to it, suggesting that you should both check it out.", parse);
 			Text.NL();
 			Text.Add("Miranda boldly walks up to the door and kicks it open. <i>“Hey! Is the bastard that stole Krawitz stuff here?”</i>", parse);
 			Text.NL();
@@ -785,9 +785,9 @@ Scenes.Terry.ExploreMerchants = function() {
 			Text.NL();
 			Text.Add("<i>“Get your weapon ready,”</i> Miranda snarls, taking her sword in her hands and assuming a battle stance. You follow her lead as Miranda shouts, <i>“Show yourself!”</i>", parse);
 			Text.NL();
-			Text.Add("The two of you wait patiently, but when no reply comes Miranda takes a step forward. Immediately you note a small sphere flying toward her. She has no time to react as the sphere bursts open into a cloud of dust, temporarily blinding the canine guard. <i>“Shit!”</i> she exclaims trying to shake off the dust.", parse);
+			Text.Add("The two of you wait patiently, but when no reply comes, Miranda takes a step forward. Immediately, you note a small sphere flying toward her. She has no time to react as the sphere bursts open into a cloud of dust, temporarily blinding the canine guard. <i>“Shit!”</i> she exclaims, trying to shake off the dust.", parse);
 			Text.NL();
-			Text.Add("Thankfully you manage to protect your eyes, and by the time you uncover them you’re faced with a blur heading your way, no doubt making a run for it! You quickly strike them with your [weapon], narrowly missing your mark as the blur takes a step back. Their mask comes loose, falling on the ground, as it does so you’re faced with a familiar face. It’s the vixen from the Lady’s Blessing!", parse);
+			Text.Add("Thankfully, you manage to protect your eyes, and by the time you uncover them, you’re faced with a blur heading your way, no doubt making a run for it! You quickly strike them with your [weapon], narrowly missing your mark as the blur takes a step back. Their mask comes loose, falling on the ground, and as it does so, you’re faced with a familiar face. It’s the vixen from the Lady’s Blessing!", parse);
 			Text.NL();
 			Text.Add("She's traded her uniform for a practical, tight-fitting suit of leather armor. A hood rises from the neck to cover her scalp and partially obscure her features, its long sleeves and pant-legs reaching to her wrists and ankles, but tight against the limbs so as to not get in the way. Bracers and pads add a little extra protection, and the front sports a number of pockets and a holster covered in pouches wrapped diagonally around her chest. All in all, perfect gear for a thief.", parse);
 			Text.NL();
@@ -995,13 +995,13 @@ Scenes.Terry.CaughtTheThief = function() {
 		Text.NL();
 		Text.Add("Miranda doesn’t bother with a reply, she roughly grabs the thief’s pants and with a quick tug pulls them down, exposing the vixen’s butt and her cock. Shaking your head you take another glance, cock?", parse);
 		Text.NL();
-		Text.Add("Miranda cackles like a hyena in laughter, grabbing the vixen’s below-average sheath and checking behind. <i>“What a nice surprise! So you’re actually a boy?”</i> she asks, checking behind her… his balls. <i>“Nothing, what a kinky slut you are, mr. thief.”</i>", parse);
+		Text.Add("Miranda cackles like a hyena in laughter, grabbing the vixen’s below-average sheath and checking behind. <i>“What a nice surprise! So you’re actually a boy?”</i> she asks, checking behind her… his balls. <i>“Nothing, what a kinky slut you are, Mr. Thief.”</i>", parse);
 		Text.NL();
-		Text.Add("<i>“C-Cut it out! So what if I’m a guy?”</i>", parse);
+		Text.Add("<i>“C-cut it out! So what if I’m a guy?”</i>", parse);
 		Text.NL();
 		Text.Add("Miranda forces the fox down on his knees, eliciting a yelp. <i>“Pretty thing like you is too girly to be a guy,”</i> Miranda teases. <i>“I’m gonna show you what’s it like to be a real man,”</i> Miranda says, pulling her pants down and letting her half-erect doggy-dong flop against the trembling fox’s shoulder.", parse);
 		Text.NL();
-		Text.Add("You realise that Miranda's serious about this; she's in one of her moods again. What should you do?", parse);
+		Text.Add("You realize that Miranda's serious about this; she's in one of her moods again. What should you do?", parse);
 		Text.Flush();
 		
 		world.TimeStep({minute: 30});
@@ -1011,7 +1011,7 @@ Scenes.Terry.CaughtTheThief = function() {
 		options.push({ nameStr : "Let her",
 			func : function() {
 				Text.Clear();
-				Text.Add("Miranda spins the poor fox around, making him come face to cock with Miranda’s shaft. <i>“You’d better do a good job blowing me, slut. This is all the lube you’re going to get when I fuck your ass later,”</i> Miranda warns him, shoving her cock against his cheek.", parse);
+				Text.Add("Miranda spins the poor fox around, making him come face to cock with Miranda’s shaft. <i>“You’d better do a good job blowing me, slut. This is all the lube you’re going to get when I fuck your ass later,”</i> Miranda warns him, shoving her hermhood against his cheek.", parse);
 				Text.NL();
 				Text.Add("He tries his best to look away to no avail, he opens his mouth to utter a protest, which winds up being a terrible mistake as Miranda takes the opportunity to shove half of her eleven inches of doghood down his throat.", parse);
 				Text.NL();
@@ -1021,9 +1021,9 @@ Scenes.Terry.CaughtTheThief = function() {
 					Text.Add("You can't help but wince at the unusual roughness with which Miranda starts fucking the thief. If that's how she tends to act when angry, maybe you should avoid getting on her bad side...", parse);
 				else
 					Text.Add("You actually feel a pang of sympathy for the thief. You can remember being on the receiving end of Miranda when she's in that sort of mood all too vividly.", parse);
-				Text.Add(" Silently you stand by and watch as Miranda unceremoniously fucks the fox's face, grunting lewdly to herself with effort as she slaps her cock back and forth down his throat. The thief tries his hardest, but he's ultimately little more than a living onahole, casting pleading looks in your direction as he does his best not to choke on her dick.", parse);
+				Text.Add(" Silently, you stand by and watch as Miranda unceremoniously fucks the fox's face, grunting lewdly to herself with effort as she slaps her cock back and forth down his throat. The thief tries his hardest, but he's ultimately little more than a living onahole, casting pleading looks in your direction as he does his best not to choke on her dick.", parse);
 				Text.NL();
-				Text.Add("<i>“What a nice throat you have, you dirty fox, but let’s not get ahead of ourselves,”</i> Miranda says pulling out of the fox’s abused mouth. He gasps and coughs, thankful for the opportunity to breathe fresh air. Unfortunately it seems his ordeal is just not over yet. Miranda roughly grabs him and pins him down on the floor, butt up in the air as she teases him one more time before finally taking him, <i>“Get ready fox, I’m gonna split you in two!”</i> She pushes forward.", parse);
+				Text.Add("<i>“What a nice throat you have, you dirty fox, but let’s not get ahead of ourselves,”</i> Miranda says pulling out of the fox’s abused mouth. He gasps and coughs, thankful for the opportunity to breathe fresh air. Unfortunately, it seems his ordeal is just not over yet. Miranda roughly grabs him and pins him down on the floor, butt up in the air as she teases him one more time before finally taking him, <i>“Get ready fox, I’m gonna split you in two!”</i> She pushes forward.", parse);
 				Text.NL();
 				Text.Add("Before she can press into his tight butthole, the doors of the warehouse burst open.", parse);
 				Text.Flush();
@@ -1047,11 +1047,11 @@ Scenes.Terry.CaughtTheThief = function() {
 					if(dom > 50) {
 						Text.Add("Stopping her, you reply calmly. You don't want her fucking this thief - does your bitch have a problem with that?", parse);
 						Text.NL();
-						Text.Add("<i>“But this bastard made us chase after him through the whole town!”</i> Miranda protests. It’s obvious she’s frustrated, normally she’d never talk back to you like this. Still you won’t budge on that. You said no, and that’s final.", parse);
+						Text.Add("<i>“But this bastard made us chase after him through the whole town!”</i> Miranda protests. It’s obvious she’s frustrated; normally she’d never talk back to you like this. Still, you won’t budge on that. You said no, and that’s final.", parse);
 						Text.NL();
-						Text.Add("<i>“Listen here [playername]. I <b>am</b> your bitch, I don’t deny that. I’d be happy to take your orders and shut up anytime, but this bastard,”</i> she points at the fox, <i>“made it personal! So Aria help me, I’m going to wreck his ass!”</i>", parse);
+						Text.Add("<i>“Listen here, [playername]. I <b>am</b> your bitch, I don’t deny that. I’d be happy to take your orders and shut up anytime, but this bastard,”</i> she points at the fox, <i>“made it personal! So Aria help me, I’m going to wreck his ass!”</i>", parse);
 						Text.NL();
-						Text.Add("The two of you yell at each other as you scold Miranda. The thief doesn’t utter a single peep through this whole discussion, but you do detect a that he’s at least relieved you didn’t let Miranda have her way. You’re about to add something on top of your arguments when the doors to the warehouse burst open.", parse);
+						Text.Add("The two of you yell at each other as you scold Miranda. The thief doesn’t utter a single peep through this whole discussion, but you do detect that he’s at least relieved you didn’t let Miranda have her way. You’re about to add something on top of your arguments when the doors to the warehouse burst open.", parse);
 					}
 					else {
 						Text.Add("Keeping her from making a big mistake, you tell her. What she was planning is not right and she knows it; she caught the thief, she'll get the glory, leave it at that.", parse);
@@ -1060,7 +1060,7 @@ Scenes.Terry.CaughtTheThief = function() {
 						Text.NL();
 						Text.Add("You shake your head and insist that you mean what you say; you won't let her do this. It's not right.", parse);
 						Text.NL();
-						Text.Add("<i>“Don’t you dare tell me what’s right or wrong in <b>my</b> city, [playername]. If you care so much I have no problem letting you take his place, but Aria forbids me, I’m going to wreck someone’s ass over this!”</i>", parse);
+						Text.Add("<i>“Don’t you dare tell me what’s right or wrong in <b>my</b> city, [playername]. If you care so much, I have no problem letting you take his place, but Aria forbids me, I’m going to wreck someone’s ass over this!”</i>", parse);
 						Text.NL();
 						Text.Add("The two of you argue vehemently, hurling statement and rebuttal back and forth like knives, the stubborn bitch refusing to back down a foot and doing everything she can to force you to let her past, something you refuse to do. You're dimly aware that the thief remains on his knees behind you throughout the argument, and you can sense relief from him at your unexpected salvation of his anus. Things are just starting to get particularly heated when the doors to the warehouse are violently thrown open.", parse);
 					}
@@ -1071,11 +1071,11 @@ Scenes.Terry.CaughtTheThief = function() {
 					if(miranda.Sexed()) {
 						Text.Add("Despite your natural nervousness, you manage to square your shoulders and shake your head, insisting you won't let her do this. Remembering the things she's done to you adds a little stiffness to your spine; you refuse to let her do those same things to someone else! ...Though, privately, you yourself can't tell if it's nobility or jealousy that makes you unable to stand the thought.", parse);
 						Text.NL();
-						Text.Add("<i>“So the slut’s jealous someone might be stealing their thunder… Well don’t worry, I’ve got enough in me for both of you, now step aside.”</i>", parse);
+						Text.Add("<i>“So the slut’s jealous someone might be stealing their thunder… Well, don’t worry; I’ve got enough in me for both of you, now step aside.”</i>", parse);
 						Text.NL();
 						Text.Add("A perverse thrill tickles down your spine, but you insistently shake your head and refuse to move.", parse);
 						Text.NL();
-						Text.Add("<i>“You’re making me mad, slut. And trust me, you won’t like me when I’m mad, now step aside before I decide to rip you apart as well!”</i> she threatens with a growl.", parse);
+						Text.Add("<i>“You’re making me mad, slut; trust me, you won’t like me when I’m mad. Now, step aside before I decide to rip you apart as well!”</i> she threatens with a growl.", parse);
 						Text.NL();
 						Text.Add("As hard as it is for you, you manage to hold your ground, trying to convince Miranda to leave the thief alone, standing firm even in the face of her increasingly volatile and lewd threats, innuendoes and outright profanity. It comes as something of a relief when the warehouse doors suddenly slam open; you were so very close to losing your nerve and caving before her will.", parse);
 					}
@@ -1086,7 +1086,7 @@ Scenes.Terry.CaughtTheThief = function() {
 						Text.NL();
 						Text.Add("Folding your arms over your chest, you shake your head.", parse);
 						Text.NL();
-						Text.Add("<i>“So the slut’s found some balls to stand up to me, huh? Well it’s either his ass or <b>your</b> ass. And trust me, if you thought I was being rough with you before you haven’t seen anything! Now step aside!”</i>", parse);
+						Text.Add("<i>“So the slut’s found some balls to stand up to me, huh? Well it’s either his ass or <b>your</b> ass. And trust me, if you thought I was being rough with you before, you haven’t seen anything! Now step aside!”</i>", parse);
 						Text.NL();
 						Text.Add("That was the worst thing she could have said to try and make you back down; on general principle, you ball your fists and start calling her out, the enraged morph screaming back at you. It's almost a good thing when someone suddenly storms into the warehouse, distracting the pair of you; one more word either way, and you both know that the pair of you would have started swinging.", parse);
 					}
@@ -1101,7 +1101,7 @@ Scenes.Terry.CaughtTheThief = function() {
 				
 				PrintDefaultOptions();
 			}, enabled : true,
-			tooltip : "Criminal or not, letting her rape him just isn't right. She's not going going to appreciate you interfering in her affairs, but it's still the noble thing to do."
+			tooltip : "Criminal or not, letting her rape him just isn't right. She's not going to appreciate you interfering in her affairs, but it's still the noble thing to do."
 		});
 		if(player.FirstCock() || player.Strapon()) {
 			options.push({ nameStr : "Take him",
