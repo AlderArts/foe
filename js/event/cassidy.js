@@ -450,7 +450,7 @@ Scenes.Cassidy.Prompt = function() {
 					Text.NL();
 					Text.Add("Oh…", parse);
 					Text.NL();
-					Text.Add("Cass takes a deep breath. <i>“But as grandma would say, if you can’t go to the mountain, move the mountain to you. Sure, going out is hard on me, but I wouldn’t mind if you’d want to stay in with me sometime after I close the shop, yeah? Sit around, have a bite to eat, chat a bit, maybe watch me at work? The company would be appreciated - I know it’s probably not what you had in mind, but I really just do feel more comfortable in here than out somewhere like the Lady’s Blessing.”</i>", parse);
+					Text.Add("Cass takes a deep breath. <i>“But as Grandma would say, if you can’t go to the mountain, move the mountain to you. Sure, going out is hard on me, but I wouldn’t mind if you’d want to stay in with me sometime after I close the shop, yeah? Sit around, have a bite to eat, chat a bit, maybe watch me at work? The company would be appreciated - I know it’s probably not what you had in mind, but I really just do feel more comfortable in here than out somewhere like the Lady’s Blessing.”</i>", parse);
 					Text.NL();
 					Text.Add("Ah… well, that’s an option, too.", parse);
 					Text.NL();
@@ -936,7 +936,7 @@ Scenes.Cassidy.HeadInside = function() {
 		Text.NL();
 		Text.Add("It truly is a beautiful blade, yes.", parse);
 		Text.NL();
-		Text.Add("The salamander grins. <i>“We’re pretty proud of that piece, because it’s got a bunch of history with us sally-manders. You see, there’s this ancient legend about grandma’s old world that she used to tell me.</i>", parse);
+		Text.Add("The salamander grins. <i>“We’re pretty proud of that piece, because it’s got a bunch of history with us sally-manders. You see, there’s this ancient legend about Grandma’s old world that she used to tell me.</i>", parse);
 		Text.NL();
 		Text.Add("<i>“As the story goes, a pair of salamander master smiths - they were brothers to boot - sought out a great dragon, stole from his horde the first steel that world had ever seen, and forged it into a magic sword.  It was so beautiful, the legend went, that the local spirit of that world took it for her own and gave it to the greatest of her champions for generations: once even to their own descendants.”</i>", parse);
 		Text.NL();
@@ -950,7 +950,7 @@ Scenes.Cassidy.HeadInside = function() {
 		Text.NL();
 		Text.Add("Oh. Then why is it in that place of honor?", parse);
 		Text.NL();
-		Text.Add("<i>“Because it’s one of the few things grandma took from her old world. She might’ve had good claws, but she needed a proper weapon for the road. I dunno how great-granddad came across the blade, but she swiped it from him the night she left for good. Later on, when dad left for Rigard to start The Pale Flame, she gave it to him to keep him safe on the road. And now that dad’s retired…”</i>", parse);
+		Text.Add("<i>“Because it’s one of the few things Grandma took from her old world. She might’ve had good claws, but she needed a proper weapon for the road. I dunno how Great-granddad came across the blade, but she swiped it from him the night she left for good. Later on, when dad left for Rigard to start The Pale Flame, she gave it to him to keep him safe on the road. And now that dad’s retired…”</i>", parse);
 		Text.NL();
 		Text.Add("Ah, you see.", parse);
 		Text.NL();
@@ -990,7 +990,7 @@ Scenes.Cassidy.HeadInside = function() {
 	Text.NL();
 	Text.Add("Who is [heshe], your mother? [HeShe]’s far from old enough for that.", parse);
 	Text.NL();
-	Text.Add("<i>“Suit yourself, ace; I hope you brought a big appetite. Now,”</i> [heshe] pours [himher]self a glass from the pitcher, <i>“What’cha wanna do this evening? Chat a bit and do some catching up? Have some proper food?”</i>", parse);
+	Text.Add("<i>“Suit yourself, ace; I hope you brought a big appetite. Now,”</i> [heshe] pours [himher]self a glass from the pitcher, <i>“what’cha wanna do this evening? Chat a bit and do some catching up? Have some proper food?”</i>", parse);
 	if(cassidy.KnowGender() && cassidy.Relation() >= 50) {
 		Text.NL();
 		Text.Add("Silence.", parse);
@@ -1075,7 +1075,7 @@ Scenes.Cassidy.InsideMeal = function() {
 	Text.NL();
 	Text.Add("<i>“Now you just hold on a moment, and I’ll have something cooked up for the both of us.”</i>", parse);
 	Text.NL();
-	Text.Add("Cassidy is good to [hisher] word. The salamander dons a white apron emblazoned with “this shit is going to be <b>delicious</b> across it in big red letters, and soon enough there’s a merry fire going on underneath the stove and a couple of pots and pans steaming above it. Unsurprisingly, [heshe] makes heavy use of the spice rack, and soon a distinctly hot and sour aroma is wafting through the air, bringing with it the promise of scorched tongues and sweaty brows.", parse);
+	Text.Add("Cassidy is good to [hisher] word. The salamander dons a white apron emblazoned with “this shit is going to be <b>delicious</b>” across it in big red letters, and soon enough there’s a merry fire going on underneath the stove and a couple of pots and pans steaming above it. Unsurprisingly, [heshe] makes heavy use of the spice rack, and soon a distinctly hot and sour aroma is wafting through the air, bringing with it the promise of scorched tongues and sweaty brows.", parse);
 	Text.NL();
 	Text.Add("Time passes, but watching Cass create something - be it as simple and mundane as a meal - is fascinating in and of itself. The salamander works away with exact precision, [hisher] tail swaying behind [himher], chopping and stirring to the cracking of the wood stove; you’re not sure exactly how long has passed, but the sun’s pretty much gone down at this point, leaving the streets of Rigard shrouded in dusk.", parse);
 	Text.NL();
@@ -1137,7 +1137,7 @@ Scenes.Cassidy.InsideMeal = function() {
 		Text.NL();
 		Text.Add("So, you’re wondering, where did [heshe] learn to cook, anyway?", parse);
 		Text.NL();
-		Text.Add("Cass looks contemplative for a moment. <i>“Well, some from mom, and some from dad, but most of it from gran. In the last couple years before she passed away, grandma couldn’t walk very far any more, and she spent her days just trying to pass on all she knew before she finally kicked it, you know? She saw it coming and was prepared for it.”</i>", parse);
+		Text.Add("Cass looks contemplative for a moment. <i>“Well, some from mom, and some from dad, but most of it from gran. In the last couple years before she passed away, Grandma couldn’t walk very far any more, and she spent her days just trying to pass on all she knew before she finally kicked it, you know? She saw it coming and was prepared for it.”</i>", parse);
 		Text.NL();
 		Text.Add("Right. Um maybe this wasn’t the best -", parse);
 		Text.NL();
@@ -1212,16 +1212,16 @@ Scenes.Cassidy.InsideMeal = function() {
 		Text.NL();
 		Text.Add("Well…", parse);
 		Text.NL();
-		Text.Add("<i>“Because by all accounts, great-grandma was one of them,”</i> Cass continues. <i>“Didn’t touch water if she could help it, just booze all day. We sally-manders have a weakness for it…</i>", parse);
+		Text.Add("<i>“Because by all accounts, Great-grandma was one of them,”</i> Cass continues. <i>“Didn’t touch water if she could help it, just booze all day. We sally-manders have a weakness for it…</i>", parse);
 		Text.NL();
 		Text.Add("<i>“Which is why I don’t touch the stuff as far as I’m concerned. Don’t keep any in the house lest I be tempted to start. And once we start, it’s pretty hard to stop until we’re completely wasted or the booze runs dry. So no drink for me, just water. You want to call it miserable, I call it disciplined.”</i>", parse);
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
 		Text.Add("<i>“So, what d’ya think of tonight’s cooking, ace?”</i>", parse);
 		Text.NL();
-		Text.Add("It’s certainly a different cuisine from what’s usually found about Rigard. Did [hisher] grandma bring this over from where she used to live?", parse);
+		Text.Add("It’s certainly a different cuisine from what’s usually found about Rigard. Did [hisher] Grandma bring this over from where she used to live?", parse);
 		Text.NL();
-		Text.Add("<i>“Haha, nah. With how such a wastrel great-grandma was, I don’t think she even taught grandma how to cook. No, she just tried different things with the local goods until she figured out something she liked. There were many mistakes along the way, but she got there in the end.”</i>", parse);
+		Text.Add("<i>“Haha, nah. With how such a wastrel Great-grandma was, I don’t think she even taught Grandma how to cook. No, she just tried different things with the local goods until she figured out something she liked. There were many mistakes along the way, but she got there in the end.”</i>", parse);
 		Text.NL();
 		Text.Add("You’ve got to respect that - learning a skill from scratch without guidance has got to be hard.", parse);
 		Text.NL();
@@ -1294,7 +1294,7 @@ Scenes.Cassidy.InsideTalkPrompt = function() {
 			Text.NL();
 			Text.Add("Seems like Cass has it made in life, then.", parse);
 			Text.NL();
-			Text.Add("<i>“I’m only enjoying this much because I’m building on the efforts grandma and dad made before me. Credit’s where credit’s due.”</i> Cass sighs, [hisher] cheery demeanor evaporating for a split second as the flames on [hisher] tail smolder. <i>“I understand that a lot’s expected of me, and I don’t intend to disappoint.</i>", parse);
+			Text.Add("<i>“I’m only enjoying this much because I’m building on the efforts Grandma and dad made before me. Credit’s where credit’s due.”</i> Cass sighs, [hisher] cheery demeanor evaporating for a split second as the flames on [hisher] tail smolder. <i>“I understand that a lot’s expected of me, and I don’t intend to disappoint.</i>", parse);
 			Text.NL();
 			Text.Add("<i>“I guess that’s all I gotta say on the matter. Come on, this is boring. Let’s chat about something else, yeah?”</i>", parse);
 			Text.Flush();
@@ -1329,23 +1329,23 @@ Scenes.Cassidy.InsideTalkPrompt = function() {
 				Text.Add("<i>“Guess I’ve got to admit that it <b>is</b> a one-of a kind tale. All right then, here goes again…</i>", parse);
 			}
 			Text.NL();
-			Text.Add("<i>“Where should I start? At the beginning, I guess - that’s always a good place. All of this happened before I was born, so I only know what grandma told me before she passed away. How much of it is true, and how much is just gran’s memory playing tricks on her, I dunno, but I’m telling you every word she said.”</i>", parse);
+			Text.Add("<i>“Where should I start? At the beginning, I guess - that’s always a good place. All of this happened before I was born, so I only know what Grandma told me before she passed away. How much of it is true, and how much is just gran’s memory playing tricks on her, I dunno, but I’m telling you every word she said.”</i>", parse);
 			Text.NL();
 			Text.Add("Right, you get the deal.", parse);
 			Text.NL();
-			Text.Add("Cass nods, and takes a deep draught of water to wet [hisher] lips before continuing. <i>“Like most other folks on Eden, my kind didn’t start off here. Nope, there was another world, another plane - whatever the magicians want to call it, you know what I mean. Anyways, great-grandma was living there, and so was great-granddad.</i>", parse);
+			Text.Add("Cass nods, and takes a deep draught of water to wet [hisher] lips before continuing. <i>“Like most other folks on Eden, my kind didn’t start off here. Nope, there was another world, another plane - whatever the magicians want to call it, you know what I mean. Anyways, Great-grandma was living there, and so was Great-granddad.</i>", parse);
 			Text.NL();
-			Text.Add("<i>“Now, great-grandma was a salamander like me, and also - well, there’s no way to cut it nicely, so I’ll just say that she was the town horse. I mean, she didn’t just end up being ridden by almost everyone she took a fancying to, but also went out and looked for people to beat up and ride, not necessarily in that order. She just loved being an unrepentant whore.</i>", parse);
+			Text.Add("<i>“Now, Great-grandma was a salamander like me, and also - well, there’s no way to cut it nicely, so I’ll just say that she was the town horse. I mean, she didn’t just end up being ridden by almost everyone she took a fancying to, but also went out and looked for people to beat up and ride, not necessarily in that order. She just loved being an unrepentant whore.</i>", parse);
 			Text.NL();
-			Text.Add("<i>“Not that great-grandad was any better, of course. In fact, he probably outwhored great-grandma and eventually became a better fighter to boot, so you can imagine they hit it off quite well.”</i>", parse);
+			Text.Add("<i>“Not that Great-grandad was any better, of course. In fact, he probably outwhored Great-grandma and eventually became a better fighter to boot, so you can imagine they hit it off quite well.”</i>", parse);
 			Text.NL();
 			Text.Add("You can imagine.", parse);
 			Text.NL();
-			Text.Add("Cassidy sighs and rolls [hisher] eyes. <i>“Well then. Gran was a little vague on what great-grandad did to impress his future mate, but it just so comes to happen that great-grandma’s decided that she’s found the love of her life and wants to start a family with him. Yep, I’m not kidding - great-grandma, the notorious sally-mander slut, suddenly decides out of nowhere that she’s fallen in love and her body’s ready to have babies.”</i>", parse);
+			Text.Add("Cassidy sighs and rolls [hisher] eyes. <i>“Well then. Gran was a little vague on what Great-grandad did to impress his future mate, but it just so comes to happen that Great-grandma’s decided that she’s found the love of her life and wants to start a family with him. Yep, I’m not kidding - Great-grandma, the notorious sally-mander slut, suddenly decides out of nowhere that she’s fallen in love and her body’s ready to have babies.”</i>", parse);
 			Text.NL();
 			Text.Add("It does sound a little too good to be true. Like… something out of a fairy tale. Or a lonely loser’s sexual fantasy, come to think of it.", parse);
 			Text.NL();
-			Text.Add("<i>“I know, I did a double-take too when I first heard it. Grandma just said, ‘you’re standing here, aren’t you?’ At least she didn’t tell me that great-grandma had given up fucking around - that’d have been too much for me to swallow.”</i>", parse);
+			Text.Add("<i>“I know, I did a double-take too when I first heard it. Grandma just said, ‘you’re standing here, aren’t you?’ At least she didn’t tell me that Great-grandma had given up fucking around - that’d have been too much for me to swallow.”</i>", parse);
 			Text.Flush();
 			
 			world.TimeStep({minute: 5});
@@ -1354,9 +1354,9 @@ Scenes.Cassidy.InsideTalkPrompt = function() {
 				Text.Clear();
 				Text.Add("This is quite the sordid tale you’re hearing, isn’t it?", parse);
 				Text.NL();
-				Text.Add("Cassidy grins and whistles. <i>“Trust me, ace, it gets better. Much better. So long story short, great-granddad and great-grandma shack up together for a bit. Now that great-grandma’s body wants a baby, the inevitable happens, and her tummy starts getting bigger. Before too long, Grandma’s born so quick that it practically surprises even great-grandma, even scares her a little.", parse);
+				Text.Add("Cassidy grins and whistles. <i>“Trust me, ace, it gets better. Much better. So long story short, Great-granddad and Great-grandma shack up together for a bit. Now that Great-grandma’s body wants a baby, the inevitable happens, and her tummy starts getting bigger. Before too long, Grandma’s born so quick that it practically surprises even Great-grandma, even scares her a little.</i>", parse);
 				Text.NL();
-				Text.Add("<i>“Now grandma… she was a wild thing when she was young. Great-grandma was a slut, great-grandad was a man-whore, but grandma… she combined the two together in a glorious blaze of slutty, drunken whorishness. Must be a salamander thing, I guess... she told me about the time when great-granddad caught her drinking great-grandma’s booze straight from the still when the latter was away…”</i>", parse);
+				Text.Add("<i>“Now Grandma… she was a wild thing when she was young. Great-grandma was a slut, Great-grandad was a man-whore, but Grandma… she combined the two together in a glorious blaze of slutty, drunken whorishness. Must be a salamander thing, I guess... she told me about the time when Great-granddad caught her drinking Great-grandma’s booze straight from the still when the latter was away…”</i>", parse);
 				Text.NL();
 				Text.Add("You take it he gave her a good talking-to?", parse);
 				Text.NL();
@@ -1364,11 +1364,11 @@ Scenes.Cassidy.InsideTalkPrompt = function() {
 				Text.NL();
 				Text.Add("That’s…", parse);
 				Text.NL();
-				Text.Add("<i>“Some pretty damned awful parenting, that’s what.”</i> Grabbing a curried bun from the plate, Cass stuffs it whole into [hisher] mouth and chews furiously. It’s a little wonder [heshe] doesn’t choke or bite [hisher] tongue in the bargain. <i>“That wasn’t all, though. There was the time great-granddad caught grandma with her ‘boyfriend’... to hear her speak of it, the only good thing they did was to teach her how to fight - so she could go and beat down some nookie herself.”</i>", parse);
+				Text.Add("<i>“Some pretty damned awful parenting, that’s what.”</i> Grabbing a curried bun from the plate, Cass stuffs it whole into [hisher] mouth and chews furiously. It’s a little wonder [heshe] doesn’t choke or bite [hisher] tongue in the bargain. <i>“That wasn’t all, though. There was the time Great-granddad caught Grandma with her ‘boyfriend’... to hear her speak of it, the only good thing they did was to teach her how to fight - so she could go and beat down some nookie herself.”</i>", parse);
 				Text.NL();
 				Text.Add("So… what happened next? You’re almost afraid to ask.", parse);
 				Text.NL();
-				Text.Add("<i>“Grandma finally figured out that great-granddad was looking to bone her.”</i>", parse);
+				Text.Add("<i>“Grandma finally figured out that Great-granddad was looking to bone her.”</i>", parse);
 				Text.Flush();
 				
 				world.TimeStep({minute: 5});
@@ -1377,13 +1377,13 @@ Scenes.Cassidy.InsideTalkPrompt = function() {
 					Text.Clear();
 					Text.Add("[HeShe] can’t be serious.", parse);
 					Text.NL();
-					Text.Add("<i>“I <b>am</b> serious,”</i> Cass replies, thinning [hisher] lips. <i>“It didn’t all happen at once, but gran finally connected the dots as to why great-granddad was being such a nice, cool dad, letting her slut and booze it up all the time. Again, mind my language, but he was looking to groom her such that she wouldn’t give a shit if she took his cock inside her. The sly, furtive looks… the fact that he was still helping great-grandma dress her every so often even though she was a teenager by then… the occasional touch that lingered a bit too long… there was no doubt about it; my great-granddad was looking to bone his own daughter. Gran thinks he didn’t even intend for great-gran to find out.</i>", parse);
+					Text.Add("<i>“I <b>am</b> serious,”</i> Cass replies, thinning [hisher] lips. <i>“It didn’t all happen at once, but gran finally connected the dots as to why Great-granddad was being such a nice, cool dad, letting her slut and booze it up all the time. Again, mind my language, but he was looking to groom her such that she wouldn’t give a shit if she took his cock inside her. The sly, furtive looks… the fact that he was still helping Great-grandma dress her every so often even though she was a teenager by then… the occasional touch that lingered a bit too long… there was no doubt about it; my great-granddad was looking to bone his own daughter. Gran thinks he didn’t even intend for great-gran to find out.</i>", parse);
 					Text.NL();
 					Text.Add("<i>“Maybe in a year or so she’d have been broken into being a good slut and wouldn’t have cared, but there and then, the realization made gran’s blood run cold. For maybe the first time in her life, she had a thought that wasn’t about food, sleep, booze or sex, and if her blood was cold, her feet got colder. She couldn’t stay there any longer, [playername]. Not with a sick fuck of a father and a drunk loser of a mother… there’s a bit more story to be had, but eventually she found a creepy merchant guy to bring her through a portal to Eden.”</i>", parse);
 					Text.NL();
 					Text.Add("Wow.", parse);
 					Text.NL();
-					Text.Add("Cass nods and sighs, daintily picking bits of bread out from between [hisher] teeth with a claw. <i>“Being all alone in a strange world… it was hard, but if great-grandma did a turn-around, gran spun like hell itself was after her. She spent the rest of her life trying desperately to prove that blood wasn’t going to out, that she wasn’t cursed by her loser parents - and made sure to teach all her sons and daughters, and <b>their</b> sons and daughters as much. It did help that Grandpa was a calming influence on her, helped her rein in her nature a bit, too… all of us handful of ‘manders on Eden, we’re all descended from gran, and we’ve done pretty well for ourselves, if I dare say so.”</i>", parse);
+					Text.Add("Cass nods and sighs, daintily picking bits of bread out from between [hisher] teeth with a claw. <i>“Being all alone in a strange world… it was hard, but if Great-grandma did a turn-around, gran spun like hell itself was after her. She spent the rest of her life trying desperately to prove that blood wasn’t going to out, that she wasn’t cursed by her loser parents - and made sure to teach all her sons and daughters, and <b>their</b> sons and daughters as much. It did help that Grandpa was a calming influence on her, helped her rein in her nature a bit, too… all of us handful of ‘manders on Eden, we’re all descended from gran, and we’ve done pretty well for ourselves, if I dare say so.”</i>", parse);
 					Text.NL();
 					Text.Add("Of course. The Pale Flame’s success is proof enough of that.", parse);
 					Text.NL();
@@ -1391,7 +1391,7 @@ Scenes.Cassidy.InsideTalkPrompt = function() {
 					Text.NL();
 					Text.Add("If they’re all like [himher], then sure! One question, though: shouldn’t the salamander blood have gotten watered down a bit? If there weren’t any others of her grandmother’s kind…", parse);
 					Text.NL();
-					Text.Add("Cass shrugs. <i>“I don’t get this stuff myself, either, so I’m not going to think about it.”</i> [HeShe] stops and points at the tiny scales that dot [hisher] face, collar and shoulders. <i>“Grandma only really had these on her face, and she tells me that great-grandma didn’t even have any stray scales. If anything, I think we’re looking a little less like humans every generation. Not my business to be worrying about it, though.”</i>", parse);
+					Text.Add("Cass shrugs. <i>“I don’t get this stuff myself, either, so I’m not going to think about it.”</i> [HeShe] stops and points at the tiny scales that dot [hisher] face, collar and shoulders. <i>“Grandma only really had these on her face, and she tells me that Great-grandma didn’t even have any stray scales. If anything, I think we’re looking a little less like humans every generation. Not my business to be worrying about it, though.”</i>", parse);
 					Text.NL();
 					Text.Add("Mm.", parse);
 					Text.NL();
@@ -1440,13 +1440,13 @@ Scenes.Cassidy.InsideTalkPrompt = function() {
 				Text.Add("<i>“If you like it so much, who am I to complain? All right, here goes again…</i>", parse);
 			}
 			Text.NL();
-			Text.Add("<i>“Not sure if I mentioned it before, but all of us sally-manders here on Eden are descended from grandma, who came here from another world through a portal. Not unlike most people, really. Grandma didn’t really have much in the way of marketable skills and had a tough time of things at first - she had her pride and wasn’t going to resort to the world’s oldest profession, even if it meant going hungry.”</i> Cass takes a swig of water, emptying [hisher] glass, then decides that’s not enough and guzzles straight from the pitcher, a small waterfall cascading from the glass rim into [hisher] mouth. It’s a sight to see, and the show’s concluded when [heshe] smacks [hisher] lips and sets down the pitcher with a satisfying thud.", parse);
+			Text.Add("<i>“Not sure if I mentioned it before, but all of us sally-manders here on Eden are descended from Grandma, who came here from another world through a portal. Not unlike most people, really. Grandma didn’t really have much in the way of marketable skills and had a tough time of things at first - she had her pride and wasn’t going to resort to the world’s oldest profession, even if it meant going hungry.”</i> Cass takes a swig of water, emptying [hisher] glass, then decides that’s not enough and guzzles straight from the pitcher, a small waterfall cascading from the glass rim into [hisher] mouth. It’s a sight to see, and the show’s concluded when [heshe] smacks [hisher] lips and sets down the pitcher with a satisfying thud.", parse);
 			Text.NL();
 			Text.Add("<i>“Sorry about that,”</i> Cass says with a sheepish grin. <i>“Suddenly realized how dry my mouth was. But hey, that’s how I get when I wind up talking to you.”</i>", parse);
 			Text.NL();
 			Text.Add("Why, was that an attempt at flattery?", parse);
 			Text.NL();
-			Text.Add("<i>“Anyways! Grandma managed to get settled somewhat when she met granddad, a lizan, and they set up a homestead on a small plot of land midway between Talras and Afaris up to the north. It’s a little hard to find if you don’t know what you’re looking for, but I’m sure I could get back blindfolded. Between the two of them, they had five children, which adds up to dad, my uncle, and three aunts.", parse);
+			Text.Add("<i>“Anyways! Grandma managed to get settled somewhat when she met granddad, a lizan, and they set up a homestead on a small plot of land midway between Talras and Afaris up to the north. It’s a little hard to find if you don’t know what you’re looking for, but I’m sure I could get back blindfolded. Between the two of them, they had five children, which adds up to dad, my uncle, and three aunts.</i>", parse);
 			Text.NL();
 			Text.Add("<i>“As for dad… well, he met mom, and then they had big bro and me. Mom always complained to me that she wanted at least a couple more kids before she was too old for that, but there was no way she could drag dad away from the forge for long enough to get down to business. The fact that my brother and I were made was a small miracle in and of itself,”</i> Cass adds with a laugh.", parse);
 			Text.NL();
@@ -1458,9 +1458,9 @@ Scenes.Cassidy.InsideTalkPrompt = function() {
 			Text.NL();
 			Text.Add("And what of [hisher] parents?", parse);
 			Text.NL();
-			Text.Add("<i>“Retired. Of course, dad’s never <b>really</b> retired - he and mom just spend their days hunting around Eden for better minerals and ores. Sometimes, dad sends a few of his findings for me to experiment with.”</i> Cassidy shrugs and grins. <i>“I guess he’s just not the kind to have a relaxing retirement; grandma worked until the day she died.</i>", parse);
+			Text.Add("<i>“Retired. Of course, dad’s never <b>really</b> retired - he and mom just spend their days hunting around Eden for better minerals and ores. Sometimes, dad sends a few of his findings for me to experiment with.”</i> Cassidy shrugs and grins. <i>“I guess he’s just not the kind to have a relaxing retirement; Grandma worked until the day she died.</i>", parse);
 			Text.NL();
-			Text.Add("<i>“All in all…”</i> Cass hesitates for a bit, staring at a point past your shoulder as [heshe] mumbles under [hisher] breath. <i>“Right. All in all, they were fun people to have around. Absolutely crazy when need be, and absolutely serious, too. I still kinda miss them… but I also get why dad’s making me go through something like what grandma did when she first arrived.”</i>", parse);
+			Text.Add("<i>“All in all…”</i> Cass hesitates for a bit, staring at a point past your shoulder as [heshe] mumbles under [hisher] breath. <i>“Right. All in all, they were fun people to have around. Absolutely crazy when need be, and absolutely serious, too. I still kinda miss them… but I also get why dad’s making me go through something like what Grandma did when she first arrived.”</i>", parse);
 			Text.NL();
 			Text.Add("Well, if [heshe] ever needs a listening ear, all [heshe] ever needs to do is to invite you in here, maybe serve you a meal…", parse);
 			Text.NL();
@@ -1626,7 +1626,7 @@ Scenes.Cassidy.InsideTalkPrompt = function() {
 					Gui.SetButtonsFromList(options, false, null);
 				}
 				else {
-					Text.Add("Cass rolls her eyes, grins weakly and tries to hide the fact that her tail’s practically thrashing behind her. <i>“I get where you’re coming from, ace. I really do. But seriously… the fact that whatever caused great-grandma and grandma to be stacked sky-high missed me is a <b>good</b> thing. I couldn’t work the forge with hair getting in my way all the time, nor properly swing a hammer with a huge chest or falling on my ass all the time…”</i>", parse);
+					Text.Add("Cass rolls her eyes, grins weakly and tries to hide the fact that her tail’s practically thrashing behind her. <i>“I get where you’re coming from, ace. I really do. But seriously… the fact that whatever caused Great-grandma and Grandma to be stacked sky-high missed me is a <b>good</b> thing. I couldn’t work the forge with hair getting in my way all the time, nor properly swing a hammer with a huge chest or falling on my ass all the time…”</i>", parse);
 					Text.NL();
 					Text.Add("So changing her looks is off the table, is it?", parse);
 					Text.NL();
@@ -2262,7 +2262,7 @@ Scenes.Cassidy.ManagingShopCookies = function() {
 	Text.NL();
 	Text.Add("<i>“Now for the big reveal.”</i> Cass rubs [hisher] hands together as [heshe] stalks back to the parcel and crouches by it. <i>“Since I kept you waiting so long, I guess you oughta see what’s in it that’s so important.”</i>", parse);
 	Text.NL();
-	Text.Add("You have to admit, it would be interesting to see what was so important that Cass had to drop everything to go and get them. Like she said, it should be pretty important…", parse);
+	Text.Add("You have to admit, it would be interesting to see what was so important that Cass had to drop everything to go and get them. Like [heshe] said, it should be pretty important…", parse);
 	Text.NL();
 	Text.Add("Cassidy’s claws make short work of the twine holding the parcel shut, and then [heshe] practically tears apart the brown packaging paper trying to get the thing open. Within are about a dozen lumps of rock - some ruddy, some smooth - all of them varying shades of different color. There’s another parcel, though - a smaller one consisting of tightly wrapped wax paper, and Cass immediately pulls it out of the mess and hoists it aloft like some kind of treasured prize.", parse);
 	Text.NL();
@@ -2441,7 +2441,7 @@ Scenes.Cassidy.BigReveal = function() {
 				Text.NL();
 				Text.Add("<i>“Well, I said to myself: ‘I ought to try just a bit, you know? Make sure mom and dad don’t get any bad stuff. Thimbleful can’t hurt.’ So I do just that, and it’s pretty good, so I’m having another, and I dunno, I think I may have finished half the bottle when I feel a thump in the back of my head, and it’s lights out.</i>", parse);
 				Text.NL();
-				Text.Add("<i>“Shit. I feel like shit. This is the exact sort of thing that grandma used to warn me against - making up excuses to get around my own rules just ‘cause it feels good. I <b>knew</b> that it’s in the blood - that once I started, I wouldn’t be able to stop, and yet I went ahead and did it anyway. And if you hadn’t come along…”</i>", parse);
+				Text.Add("<i>“Shit. I feel like shit. This is the exact sort of thing that Grandma used to warn me against - making up excuses to get around my own rules just ‘cause it feels good. I <b>knew</b> that it’s in the blood - that once I started, I wouldn’t be able to stop, and yet I went ahead and did it anyway. And if you hadn’t come along…”</i>", parse);
 				Text.NL();
 				Text.Add("Hey, there’s no need for her to beat herself up like that over-", parse);
 				Text.NL();
@@ -2473,7 +2473,7 @@ Scenes.Cassidy.BigReveal = function() {
 				Text.NL();
 				Text.Add("Good thing you’re not her mom or her dad. Or her grandma, for that matter.", parse);
 				Text.NL();
-				Text.Add("<i>“Oh fuck. Yeah, good thing grandma’s not here to see this…”</i>", parse);
+				Text.Add("<i>“Oh fuck. Yeah, good thing Grandma’s not here to see this…”</i>", parse);
 				Text.NL();
 				Text.Add("Right. For now, she should lie down and get some sleep until the next morning; there’s work to be done, after all. And a proper bath to get that alcohol smell out of her hair.", parse);
 				Text.NL();
@@ -2506,13 +2506,13 @@ Scenes.Cassidy.BigReveal = function() {
 					Text.NL();
 					Text.Add("Look, you can clearly see she’s beating herself up over this. Has she ever considered having a bit every now and then? Just to prevent binging like what just happened?", parse);
 					Text.NL();
-					Text.Add("Cass sighs, tapping her tail-tip on the ground. <i>“What part of ‘once started, can’t stop’ didn’t get through your head, ace? Trust me, I’ve tried it before. When grandma first discovered booze, she’d only intended to have a sip after seeing great-grandma have some, then wound up guzzling straight from the still. It was a good thing I managed to knock myself out on the shelf, else I might’ve emptied all six bottles into myself.</i>", parse);
+					Text.Add("Cass sighs, tapping her tail-tip on the ground. <i>“What part of ‘once started, can’t stop’ didn’t get through your head, ace? Trust me, I’ve tried it before. When Grandma first discovered booze, she’d only intended to have a sip after seeing Great-grandma have some, then wound up guzzling straight from the still. It was a good thing I managed to knock myself out on the shelf, else I might’ve emptied all six bottles into myself.</i>", parse);
 					Text.NL();
 					Text.Add("<i>“I don’t suppose you would understand. You’re not a sally-mander, after all.”</i>", parse);
 					Text.NL();
 					Text.Add("No, you aren’t.", parse);
 					Text.NL();
-					Text.Add("Cass mumbles as she picks at her porridge. <i>“It’s not just that I actually put a bottle of distilled spirits in me. It’s that I should’ve known better. It’s that I was making excuses for myself. To make things even worse, it was while I was on the clock. Even if it was extra tempting… grandma lived her entire life without slipping, to the best of my knowledge. I… I just feel like I’ve let her down.”</i>", parse);
+					Text.Add("Cass mumbles as she picks at her porridge. <i>“It’s not just that I actually put a bottle of distilled spirits in me. It’s that I should’ve known better. It’s that I was making excuses for myself. To make things even worse, it was while I was on the clock. Even if it was extra tempting… Grandma lived her entire life without slipping, to the best of my knowledge. I… I just feel like I’ve let her down.”</i>", parse);
 					Text.NL();
 					Text.Add("The way Cassidy speaks of her grandma, you’d think that she was some kind of saint.", parse);
 					Text.NL();
