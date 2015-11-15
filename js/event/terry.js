@@ -529,7 +529,7 @@ Scenes.Terry.Appearance = function() {
 	if     (preg && stage > 0.8)
 		Text.Add("Seems like Terry’s pregnancy is in its final stages. The [foxvixen]’s belly is nice and round. When you put your hand on [hisher] belly, you can feel the baby inside kick you. The big belly coupled with the [foxvixen]’s sometimes distant gaze make [himher] look very attractive...", parse);
 	else if(preg && stage > 0.6)
-		Text.Add("[HisHer] pregnancy has come a long way. You don’t think there’s much more [heshe] can grow before [heshe]’s ripe for birthing a little kit into the world. Terry sometimes rubs [hisher] belly with a smile, it’s clear that despite the burdens [hisher] pregnancy have imposed on [himher], [heshe]’s looking forward to popping the little pup out.", parse);
+		Text.Add("[HisHer] pregnancy has come a long way. You don’t think there’s much more [heshe] can grow before [heshe]’s ripe for birthing a little kit into the world. Terry sometimes rubs [hisher] belly with a smile; it’s clear that despite the burdens [hisher] pregnancy have imposed on [himher], [heshe]’s looking forward to popping the little pup out.", parse);
 	else if(preg && stage > 0.4)
 		Text.Add("Terry’s belly is growing nicely. The [foxvixen] sometimes has cravings, but that’s to be expected of a pregnant [foxvixen] - at least [heshe]’s not feeling sick anymore. You gotta say though, this pretty belly of [hishers] makes [himher] look very feminine and attractive. Maybe you should consider calling Terry over for some alone time later...", parse);
 	else if(preg && stage > 0.2)
@@ -684,7 +684,7 @@ Scenes.Terry.ExploreGates = function() {
 		if(terry.hidingSpot == world.loc.Rigard.Gate) {
 			Text.Add("Your search finally pays off when you see a vulpine tail rounding a corner toward an alleyway. You signal to Miranda and she opens a path in the crowd so you can give chase. As soon as she notices she’s being followed, she makes a mad dash toward the other side. <i>“Dammit!</i> Miranda curses as she rushes ahead. You follow in tow.", parse);
 			Text.NL();
-			Text.Add("After a while, she finally makes a mistake and rounds a corner on a dead end. Without so much a batting an eye she readies herself for combat!", parse);
+			Text.Add("After a while, she finally makes a mistake and rounds a corner on a dead end. Without so much a batting an eye, she readies herself for combat!", parse);
 			Text.Flush();
 			
 			Scenes.Terry.CombatVsMiranda();
