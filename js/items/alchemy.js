@@ -633,32 +633,34 @@ Items.Testos.PushEffect(function(target) {
 		var randVag = Math.floor(Math.random() * vags.length);
 		var vag = vags[randVag];
 		
-		vag.capacity.DecreaseStat(1, 1);
-		
-		if(vag.capacity.Get() <= 2)
-		{
-			vags.remove(randVag);
-			//Clear clitcock
-			if(vag.clitCock)
-				vag.clitCock.vag = null;
-			if(vags.length > 0) {
-				Text.Add("[Name] loses one of [hisher] cunts!", parse);
-			}
-			else {
-				Text.Add("[Poss] pussy shrinks until it disappears completely.", parse);
-				if(cocks.length == 0) {
-					Text.Add(" It's replaced by a brand new cock!");
-					cocks.push(new Cock());
+		if(!vag.womb.pregnant) {
+			vag.capacity.DecreaseStat(1, 1);
+			
+			if(vag.capacity.Get() <= 2)
+			{
+				vags.remove(randVag);
+				//Clear clitcock
+				if(vag.clitCock)
+					vag.clitCock.vag = null;
+				if(vags.length > 0) {
+					Text.Add("[Name] loses one of [hisher] cunts!", parse);
+				}
+				else {
+					Text.Add("[Poss] pussy shrinks until it disappears completely.", parse);
+					if(cocks.length == 0) {
+						Text.Add(" It's replaced by a brand new cock!");
+						cocks.push(new Cock());
+					}
 				}
 			}
+			else {
+				if(vags.length > 0)
+					Text.Add("One of [poss] pussies shrinks, becoming tighter.", parse);
+				else
+					Text.Add("[Poss] pussy shrinks, becoming tighter.", parse);
+			}
+			Text.Flush();
 		}
-		else {
-			if(vags.length > 0)
-				Text.Add("One of [poss] pussies shrinks, becoming tighter.", parse);
-			else
-				Text.Add("[Poss] pussy shrinks, becoming tighter.", parse);
-		}
-		Text.Flush();
 	}
 	if(Math.random() < 0.75) {
 		var len = false, thk = false;
