@@ -745,6 +745,27 @@ Scenes.DryadGlade.MotherTreeTalk = function() {
 		}, enabled : true,
 		tooltip : "Ask her about her younger daughter, Spirit, who resides in your Gem."
 	});
+	if(false) { //TODO Unlocks after being to the Spring for the first time.
+		options.push({ nameStr : "Spring",
+			tooltip : "Ask Mother Tree if she knows a way you could get past the thorns and get to the spring.",
+			func : function() {
+				Text.Clear();
+				Text.Add("You tell Mother Tree about your expedition to the Spring using the directions Orchid gave you, and ask about the seemingly invincible canopy of thorns that block your path. Is there any way you could get past those thorny trees?", parse);
+				Text.NL();
+				Text.Add("Mother Tree looks in deep-thought for a moment, then replies, <i>“A powerful dryad might be able to force the thorns apart and let you slip through, but taking one there would be a problem...”</i>", parse);
+				Text.NL();
+				Text.Add("Problem? What kind of problem?", parse);
+				Text.NL();
+				Text.Add("<i>“I can feel the corruption spreading from that side of the forest, and I fear that if we send any my daughters, they might be corrupted like Orchid was.”</i>", parse);
+				Text.NL();
+				Text.Add("That is a problem… Perhaps sometime you’ll find a way of taking a dryad over there, but for now there doesn’t seem to be anything either of you could do. You thank Mother Tree all the same.", parse);
+				Text.NL();
+				Text.Add("<i>“I’m sorry, [playername]. Is there anything else you’d like to talk about?”</i>", parse);
+				Text.Flush();
+				Scenes.DryadGlade.MotherTreeTalk();
+			}, enabled : true
+		});
+	}
 	options.push({ nameStr : "Lifegiver",
 		func : function() {
 			Text.Clear();
