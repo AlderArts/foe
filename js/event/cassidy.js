@@ -423,7 +423,7 @@ Scenes.Cassidy.Prompt = function() {
 				Text.Add("Leaning forward, you ask if Cass would like to join you for a drink sometime in the evening, after the shop’s closed. Maybe somewhere nice, like the Lady’s Blessing? They have very good drinks there, after all.", parse);
 				Text.NL();
 				Text.Add("Cassidy arches an eyebrow at you and coughs loudly", parse);
-				if(player.Femininity() < 0 && player.Relation() >= 10)
+				if(player.Femininity() < 0 && cassidy.Relation() >= 10)
 					Text.Add(", wiping soot off his scales as if he’d just noticed it", parse);
 				Text.Add(". <i>“Hey hey hey. Wait a minute, ace. You’re asking me to hang out with you?”</i>", parse);
 				Text.NL();

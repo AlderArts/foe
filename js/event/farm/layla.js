@@ -79,7 +79,8 @@ Layla.Met = {
 };
 
 Layla.Talk = {
-	Sex : 1 //Talked about sex
+	Sex    : 1, //Talked about sex
+	Origin : 2
 };
 
 

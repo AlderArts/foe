@@ -53,6 +53,7 @@ Oasis = function(storage) {
 	this.shopItems.push(Items.RawHoney);
 	this.shopItems.push(Items.BeeChitin);
 	
+	this.flags["Visit"] = Oasis.Visit.NotVisited;
 	this.flags["Rakh"] = Oasis.RakhFlag.NotSeen;
 	
 	if(storage) this.FromStorage(storage);
@@ -74,6 +75,11 @@ Oasis.prototype.FromStorage = function(storage) {
 
 Oasis.prototype.Update = function(step) {
 	
+}
+
+Oasis.Visit = {
+	NotVisited : 0,
+	Visited : 1
 }
 
 //oasis.flags["Rakh"]
