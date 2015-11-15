@@ -61,7 +61,8 @@ Cassidy.Talk = {
 	Salamanders : 1,
 	Family      : 2,
 	Loner       : 4,
-	MShop       : 8 //One off manage the shop event
+	MShop       : 8, //One off manage the shop event
+	Forge       : 16
 };
 
 Cassidy.Order = {
@@ -670,6 +671,50 @@ Scenes.Cassidy.TalkPrompt = function() {
 		Text.Flush();
 		
 		Scenes.Cassidy.Prompt();
+	});
+}
+
+//[Forge] - Ask Cass about firing up that forge and making a special order for you.
+Scenes.Cassidy.ForgeFirst = function() {
+	var parse = {
+		
+	};
+	parse = cassidy.ParserPronouns(parse);
+	
+	cassidy.flags["Talk"] |= Cassidy.Talk.Forge;
+	
+	Text.Clear();
+	Text.Add("<i>“Ah-ha,”</i> Cassidy says, striding up and catching you by the shoulder as [heshe] notices your attention being drawn to the forge in the back. <i>“Let me guess… you want me to make a custom job for you, right? You think you’ve got your hands on some bits of a one-of-a-kind material, and want me to turn it into something you can actually use?”</i>", parse);
+	Text.NL();
+	Text.Add("You were having some thoughts along those lines, yes. How much will it cost you?", parse);
+	Text.NL();
+	Text.Add("<i>“Truth be told? I don’t know.”</i>", parse);
+	Text.NL();
+	Text.Add("What?", parse);
+	Text.NL();
+	Text.Add("<i>“I’m being honest here. I can’t tell you how much something’ll cost if I don’t know what I’m going to be making in the first place.”</i> The salamander sucks in a breath, then exhales a blast of hot air all in one go. <i>“Look here. Lemme just explain, and it’ll all make sense…”</i>", parse);
+	Text.NL();
+	Text.Add("Why then, [heshe] should go on, because you’re all ears.", parse);
+	Text.NL();
+	Text.Add("<i>“Okay, then. First off, if you want me to make something <b>really</b> good for you, you’ve got to inspire me, get me into that strange mood. Best way to do that is to show me something that’s…”</i> Cass pauses for a moment, [hisher] lips moving wordlessly as [heshe] searches for the right words. <i>“I’ve got to have good vibes about it. It’s got to <b>sing</b> to me. Too many folks come in, plonk down Afaris steel in my face and think that’ll do the trick, that I’ll be able to make the best gear in the world for them just because they spent a bit of money. Oh no, no, that won’t work.”</i>", parse);
+	Text.NL();
+	Text.Add("All right, you think you understand what Cassidy is getting at - [heshe] needs some really unique materials to begin with, to inspire [himher].", parse);
+	Text.Flush();
+	
+	Gui.NextPrompt(function() {
+		Text.Clear();
+		Text.Add("<i>“You ever have one of those strange moods, ace? Where you’re so excited, your head’s full of all the things that you could do and it’s just you, the hammer, and the flames? It’s that spark that makes us sally-manders the best metalworkers in all the planes - you want me to fire up and forge and create something exceptional, you’ve got to bring me something just as remarkable.</i>", parse);
+		Text.NL();
+		Text.Add("<i>“And that leads us to the problem of working by one’s muse.”</i> Cassidy looks a little sheepish and scratches [hisher] head. <i>“I go where the mood takes me - each and every piece, it’s got a song, it wants to be something, and all I do is bring that out. I can’t force it into something it wouldn’t be otherwise, else you’d get a half-assed failure, and I’m not lowering myself to that. What those materials eventually end up as is anyone’s guess, so… that’s why I can’t name you a price right off the bat.”</i>", parse);
+		Text.NL();
+		Text.Add("All right. You think you understand.", parse);
+		Text.NL();
+		Text.Add("<i>“You do? Not everyone can accept that, you know. They want exactly what they want… and damned if anything else comes up. Only promise I can make is that whatever comes out of the forge, it’ll knock your socks off. If it isn’t exactly what you were hoping for, well, maybe you could try something new, or pass it along to someone who could use it better?</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Anyways, that being said, I’ll give you the low-down again: you give me something which gets my creative juices flowing, and I’ll fire up the forge. Wait a day or two, and I’ll have something amazing for you - plus the fees for work and extra materials, of course. It may not be exactly what you want… but it’s what you’re going to get.”</i>", parse);
+		Text.Flush();
+		
+		//TODO
 	});
 }
 
@@ -2156,11 +2201,22 @@ Scenes.Cassidy.ManagingShop6 = function(score) {
 			score++;
 			
 			Text.Clear();
-			Text.Add("You regretfully inform the elderly lady that it can’t really be done. Cassidy’s masterpieces are done on the fly, after all - [heshe] works by [hisher] muse, and asking for something exact… well, it’s not like [heshe] won’t do it, but it simply won’t have the top-tier quality desired.", parse);
-			Text.NL();
-			Text.Add("<i>“My friends did tell me something to that effect, but I didn’t think it was real,”</i> the elderly lady admits with a sigh. <i>“Well, if it can’t be done, it can’t be done. I’ll just have to take my business elsewhere.”</i>", parse);
-			Text.NL();
-			Text.Add("Alas, you wish you could have been of more help, but things are what they are.", parse);
+			if(cassidy.flags["Talk"] & Cassidy.Talk.Forge) {
+				Text.Add("You regretfully inform the elderly lady that it can’t really be done. Cassidy’s masterpieces are done on the fly, after all - [heshe] works by [hisher] muse, and asking for something exact… well, it’s not like [heshe] won’t do it, but it simply won’t have the top-tier quality desired.", parse);
+				Text.NL();
+				Text.Add("<i>“My friends did tell me something to that effect, but I didn’t think it was real,”</i> the elderly lady admits with a sigh. <i>“Well, if it can’t be done, it can’t be done. I’ll just have to take my business elsewhere.”</i>", parse);
+				Text.NL();
+				Text.Add("Alas, you wish you could have been of more help, but things are what they are.", parse);
+			}
+			else {
+				Text.Add("Hmm. The offer looks reasonable, but you haven’t asked Cass about how [heshe] does special orders before, and [heshe] did imply that you were only to concern yourself with over-the-counter sales. With that in mind, you decide that it’s probably not the best idea to make promises in other peoples’ stead without knowing all the details, and regretfully inform the old lady that you can’t give her an answer right now.", parse);
+				Text.NL();
+				Text.Add("<i>“But you can check with the smith when she gets back, can’t you?”</i>", parse);
+				Text.NL();
+				Text.Add("Now <i>that’s</i> something you can agree to.", parse);
+				Text.NL();
+				Text.Add("<i>“It’ll have to do, I suppose. I’ll be back another time.”</i>", parse);
+			}
 			PrintDefaultOptions();
 		}, enabled : true
 	});
