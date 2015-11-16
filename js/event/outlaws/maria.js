@@ -506,7 +506,7 @@ Scenes.Maria.ForestAftermath = function() {
 		Text.Add("Dropping your [weaponDesc], you ", parse);
 	else
 		Text.Add("You ");
-	Text.Add("step back and raise your hands non-threateningly. An orange cat-morph steps forward and ties your hands behind your back, then forces you down onto the ground and ties your feet to your hands. Shakily, the archer rises to her feet with the help of a red-armoured, wolf-eared man. She takes the lead and heads... well, you don't know where she plans on taking you, but you're beginning to think it might not have been such a good idea to attack her.", parse);
+	Text.Add("step back and raise your hands non-threateningly. An orange cat-morph steps forward and ties your hands behind your back, then forces you down onto the ground and ties your feet to your hands. Shakily, the archer rises to her feet with the help of a red-armored, wolf-eared man. She takes the lead and heads... well, you don't know where she plans on taking you, but you're beginning to think it might not have been such a good idea to attack her.", parse);
 
 	Text.Flush();
 	Gui.NextPrompt(Scenes.Maria.ForestFollow);

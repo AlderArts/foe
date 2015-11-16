@@ -405,7 +405,7 @@ Scenes.Cassidy.Prompt = function() {
 		tooltip : "Hock your excess stuff onto the sally-mander.",
 		func : function() {
 			//TODO Restrict item type?
-			//Cassidy will buy spare weapons and armour off your hands.
+			//Cassidy will buy spare weapons and armor off your hands.
 			Text.Clear();
 			Text.Add("You call Cassidy over, and the salamander wastes no time in sauntering over to the counter, plopping down on it like [heshe] owns the place - which [heshe] does. <i>“So, you’re looking to sell something, ace? Gonna say it one more time, so we’re on the level - I don’t do resale, so I’m only going to buy anything you hock off onto me at scrap values. If you’re cool with that, then we can do business.</i>", parse);
 			Text.NL();

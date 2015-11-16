@@ -162,7 +162,7 @@ Scenes.Brothel.MStrap = function() {
 	var parse = {
 		earDesc : function() { return player.EarDesc(); },
 		legsDesc : function() { return player.LegsDesc(); },
-		lowerArmourDesc : function() { return player.LowerArmorDesc(); }
+		lowerArmorDesc : function() { return player.LowerArmorDesc(); }
 	};
 	
 	var num = rigard.Brothel["MStrap"];
@@ -172,17 +172,17 @@ Scenes.Brothel.MStrap = function() {
 	Text.NL();
 	Text.Add("You’re still wearing that enchanted strap-on that you borrowed! You had better take that off before you leave the brothel; it can’t have been cheap, and you’d rather not get banned from the place as a thief.", parse);
 	Text.NL();
-	Text.Add("Spotting an empty room that’s been used recently, you duck inside; just long enough to give you some privacy should be okay, right? Once inside, you remove your [lowerArmourDesc] and expose the artificial dick. Boy, it sure feels natural; no wonder you pulled your [lowerArmourDesc] on over the top of it without stopping to think. But then, that’s magic, you guess.", parse);
+	Text.Add("Spotting an empty room that’s been used recently, you duck inside; just long enough to give you some privacy should be okay, right? Once inside, you remove your [lowerArmorDesc] and expose the artificial dick. Boy, it sure feels natural; no wonder you pulled your [lowerArmorDesc] on over the top of it without stopping to think. But then, that’s magic, you guess.", parse);
 	Text.NL();
 	if(num < 10) {
 		Text.Add("It’s funny, but it is being a little harder to remove your fake cock than you remember it being to put it on in the first place. You get an odd twinge of pleasure as your hand brushes the artificial shaft, but you soon have it removed.", parse);
 		Text.NL();
-		Text.Add("Placing it on the bedside table for the inevitable maid to pick up, you pull your [lowerArmourDesc] back on and set off again.", parse);
+		Text.Add("Placing it on the bedside table for the inevitable maid to pick up, you pull your [lowerArmorDesc] back on and set off again.", parse);
 	}
 	else if(num < 15) {
 		Text.Add("...Wow, this strap-on you borrowed is <b>really</b> attached to you. You have to keep yanking and tugging before it finally pops free of its place at your nethers, sparks of pleasure dancing through your brain with each stroke of your hand over the increasingly erect shaft.", parse);
 		Text.NL();
-		Text.Add("You find yourself leaning against the bed as you recover, panting for breath. When your [legsDesc] stop trembling, you carelessly drop the fake cock on the bed and start gingerly pulling your [lowerArmourDesc] back on.", parse);
+		Text.Add("You find yourself leaning against the bed as you recover, panting for breath. When your [legsDesc] stop trembling, you carelessly drop the fake cock on the bed and start gingerly pulling your [lowerArmorDesc] back on.", parse);
 		Text.NL();
 		Text.Add("As you set back off again, the thought will not leave you alone that it feels like that toy you keep borrowing is getting harder and harder to take off...", parse);
 	}
@@ -213,7 +213,7 @@ Scenes.Brothel.MStrap = function() {
 		Text.NL();
 		Text.Add("<i>“T-Thank you, [fem]. That was… amazing...”</i> she says before closing her eyes and passing out.", parse);
 		Text.NL();
-		Text.Add("Unthinkingly, you check on her to be sure she’s alright, then slowly rise from the bed. Looks like your new appendage is the real deal, then. Carefully you pull your [lowerArmourDesc] back on, then slip quietly out of the room, leaving your partner to sleep the sleep of the soundly fucked behind you.", parse);
+		Text.Add("Unthinkingly, you check on her to be sure she’s alright, then slowly rise from the bed. Looks like your new appendage is the real deal, then. Carefully you pull your [lowerArmorDesc] back on, then slip quietly out of the room, leaving your partner to sleep the sleep of the soundly fucked behind you.", parse);
 		
 		player.body.cock.push(Scenes.Brothel.NewMStrap());
 	}

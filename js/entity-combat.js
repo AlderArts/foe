@@ -514,15 +514,15 @@ Entity.prototype.PDefense = function() {
 	// Stat based
 	var defStat = this.Sta() * 3 + this.Spi();
 	if(defStat < 0) defStat = 0;
-	// Defense based on armour
-	var defArmour = this.defMod;
-	// Reduce effect of armour due to armour penetration (TODO)
+	// Defense based on armor
+	var defArmor = this.defMod;
+	// Reduce effect of armor due to armor penetration (TODO)
 	
 	// Currently range the attack between 0.9 and 1.1
 	var defRand = _.random(0.9, 1.1);
 	
 	// Combine the result
-	return defStat * defArmour * defRand;
+	return defStat * defArmor * defRand;
 }
 
 // TODO temp
@@ -582,13 +582,13 @@ Entity.prototype.LAttack = function() {
 	/*
 	var sedLust = this.LustLevel();
 	*/
-	// Armour sluttiness based (TODO)
-	var sedArmour = 1;
+	// Armor sluttiness based (TODO)
+	var sedArmor = 1;
 	
 	// Currently range the attack between 0.9 and 1.1
 	var sedRand = _.random(0.9, 1.1);
 	
-	return sedStat /* * sedLust*/ * sedArmour * sedRand;
+	return sedStat /* * sedLust*/ * sedArmor * sedRand;
 }
 
 Entity.prototype.LDefense = function() {
