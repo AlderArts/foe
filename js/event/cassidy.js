@@ -967,7 +967,7 @@ Scenes.Cassidy.HeadInside = function() {
 	
 	if(first) {
 		cassidy.flags["Met"] = Cassidy.Met.WentBack;
-		Text.Add("Tailing closely behind Cassidy, you step into what looks to be a small-ish living room-cum-kitchen - there’s a grated fireplace in one corner of the room, a dining table situated close by to let diners back in both warmth and light of the flames whilst they eat.", parse);
+		Text.Add("Tailing closely behind Cassidy, you step into what looks to be a small-ish living room-cum-kitchen - there’s a grated fireplace in one corner of the room, a dining table situated close by to let diners bask in both warmth and light of the flames whilst they eat.", parse);
 		Text.NL();
 		Text.Add("On the opposite end of the room, a small kitchen - like the forge, it has a hood to draw away the grease and fumes of cooking, and that aside, it’s quite well-equipped. Racks of preserves line the walls alongside a small grain bin; it seems that Cassidy’s tastes in food lie along the spicy. There’re also two doors on either side of the room, each leading to different bedrooms.", parse);
 		Text.NL();
@@ -2326,7 +2326,7 @@ Scenes.Cassidy.ManagingShopCookies = function() {
 	Text.NL();
 	Text.Add("It’s not as if you have anything better to do, so you shrug and move to help Cassidy.", parse);
 	Text.NL();
-	Text.Add("<i>“Don’t remember if I’ve told you this before, ace, but dad’s isn’t taking his retirement lying down. He’s always looking for new materials - minerals and ores mostly, but there’s value in keeping an open mind - and sends the more interesting bits of his findings for me to experiment with when I’ve got some free time. He knows how much I love doing that kind of stuff.”</i>", parse);
+	Text.Add("<i>“Don’t remember if I’ve told you this before, ace, but dad isn’t taking his retirement lying down. He’s always looking for new materials - minerals and ores mostly, but there’s value in keeping an open mind - and sends the more interesting bits of his findings for me to experiment with when I’ve got some free time. He knows how much I love doing that kind of stuff.”</i>", parse);
 	Text.NL();
 	Text.Add("And the smaller package?", parse);
 	Text.NL();
@@ -2441,7 +2441,7 @@ Scenes.Cassidy.BigReveal = function() {
 		parse["skin"] = player.HasScales() ? "" : ", and you only do so after leaving a few thin red lines on your skin in the process";
 		Text.Add("It takes a little effort - well, more than a little effort - to pry Cassidy free from you[skin]. Eventually, though, you manage to loosen her grasp on you, and she plummets onto the mattress like a stone, with much the same effect. You take a moment to make sure she’s comfortable, sliding a pillow under that unruly mop of red hair of hers, then finally can you relax a bit and take in your surroundings in detail.", parse);
 		Text.NL();
-		Text.Add("The bed aside, Cassidy’s room is sparse, but neat. There’re lighter patches on the floorboards where larger pieces of furniture once stood, so it’s likely that her folks took out most of their stuff when they left, leaving her with a few necessities. A cabinet, a dresser, a full-length mirror set into a wall… there’s a bedside table with a small dish in it, and in that dish, a number of burnt-down candle stubs.", parse);
+		Text.Add("The bed aside, Cassidy’s room is sparse, but neat. There’re lighter patches on the floorboards where larger pieces of furniture once stood, so it’s likely that her folks took out most of their stuff when they left, leaving her with a few necessities. A cabinet, a dresser, a full-length mirror set into a wall… there’s a bedside table with a small dish on it, and in that dish, a number of burnt-down candle stubs.", parse);
 		Text.NL();
 		Text.Add("The only decoration to be had is a… well, it looks like a plate. A plate of coppery metal it is, then, with numerous small colored stones set into it - a few of them are recognizable as raw gemstones, although most of them are simply minerals of some sort. Another small door in the back presumably leads to a bathroom of some sorts, judging by the brass pipes running in and out of it.", parse);
 		Text.NL();
