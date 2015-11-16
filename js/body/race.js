@@ -204,7 +204,7 @@ Race.Horse = new RaceDesc("horse", 1, {
 });
 Race.Zebra = new RaceDesc("zebra", 39, {
 	desc: [{a:"a", noun:"zebra"}]
-});
+}, Race.Horse);
 Race.Feline = new RaceDesc("feline", 2, {
 	desc: [{a:"a", noun:"cat"}, {a:"a", noun:"feline"}],
 	descMale: [{a:"a", noun:"tom"}],
