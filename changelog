@@ -5,6 +5,14 @@ CHANGELOG for Fall of Eden
                   CURRENT
 --------------------------------------------
 
+Version 0.4p
+------------
+* Fixed a bug related to Zebra's (specifically when viewing their offspring in the nursery, but likely to have other effects too)
+
+--------------------------------------------
+             PREVIOUS VERSIONS
+--------------------------------------------
+
 Version 0.4o
 ------------
 * Typos and bugfixes galore
@@ -17,10 +25,6 @@ Version 0.4o
 * Restricted the effects of Testos. If you are pregnant, that womb cannot be removed by the TF
 * Added Cassidy the weapon shop owner to Rigard, written by The Observer.
 * Added initial talks + talk menu to Orchid. A work in progress. Written by LukaDoc and sponsored by Patreon
-
---------------------------------------------
-             PREVIOUS VERSIONS
---------------------------------------------
 
 Version 0.4n2
 -------------
