@@ -2211,7 +2211,7 @@ Scenes.Cassidy.ManagingShop6 = function(score) {
 			else {
 				Text.Add("Hmm. The offer looks reasonable, but you haven’t asked Cass about how [heshe] does special orders before, and [heshe] did imply that you were only to concern yourself with over-the-counter sales. With that in mind, you decide that it’s probably not the best idea to make promises in other peoples’ stead without knowing all the details, and regretfully inform the old lady that you can’t give her an answer right now.", parse);
 				Text.NL();
-				Text.Add("<i>“But you can check with the smith when she gets back, can’t you?”</i>", parse);
+				Text.Add("<i>“But you can check with the smith when he gets back, can’t you?”</i>", parse);
 				Text.NL();
 				Text.Add("Now <i>that’s</i> something you can agree to.", parse);
 				Text.NL();

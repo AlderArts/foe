@@ -178,7 +178,7 @@ Items.Weapons.HeavyFlail.effect.defMod    = -0.1;
 Items.Weapons.HeavyFlail.effect.apBlunt   = 0.8;
 Items.Weapons.HeavyFlail.effect.apPierce  = 0.2;
 Items.Weapons.HeavyFlail.effect.dexterity = 2;
-Items.Weapons.HeavyFlail.effect.strenght  = 2;
+Items.Weapons.HeavyFlail.effect.strength  = 2;
 
 Items.Weapons.WarHammer = new Item("hammer0", "Warhammer", ItemType.Weapon);
 Items.Weapons.WarHammer.price = 125;
@@ -189,5 +189,5 @@ Items.Weapons.WarHammer.Long = function() { return "Unwieldy, but learn to hold 
 Items.Weapons.WarHammer.effect.atkMod    = 0.6;
 Items.Weapons.WarHammer.effect.apBlunt   = 1;
 Items.Weapons.WarHammer.effect.dexterity = -1;
-Items.Weapons.WarHammer.effect.strenght  = 4;
+Items.Weapons.WarHammer.effect.strength  = 4;
 
