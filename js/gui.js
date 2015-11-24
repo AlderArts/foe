@@ -260,10 +260,11 @@ Gui.SetupPortrait = function(xoffset, yoffset, set, obj, isParty, index) {
 }
 
 Gui.HandlePortraitClick = function(index, isParty) {
-	if(gameState == GameState.Game) {
+	if(gameState == GameState.Game && !Intro.active) {
 		if(isParty) {
 			var character = party.Get(index);
 			if(character) {
+                LastSubmenu = Input.exploreButtons[ExploreButtonIndex.Party];
 				character.Interact(party.location.switchSpot());
 			}
 		}
