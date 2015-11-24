@@ -264,7 +264,7 @@ Gui.HandlePortraitClick = function(index, isParty) {
 		if(isParty) {
 			var character = party.Get(index);
 			if(character) {
-                LastSubmenu = Input.exploreButtons[ExploreButtonIndex.Party];
+				LastSubmenu = Input.exploreButtons[ExploreButtonIndex.Party];
 				character.Interact(party.location.switchSpot());
 			}
 		}
