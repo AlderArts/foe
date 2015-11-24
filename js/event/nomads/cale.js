@@ -1128,7 +1128,8 @@ Scenes.Cale.Rogue = function() {
 		legsDesc   : function() { return player.LegsDesc(); },
 		buttDesc   : function() { return player.Butt().Short(); },
 		anusDesc   : function() { return player.Butt().AnalShort(); },
-		lowerArmorDesc : function() { return player.LowerArmorDesc(); }
+		lowerArmorDesc : function() { return player.LowerArmorDesc(); },
+		vagDesc : function() { return player.FirstVag().Short(); }
 	};
 	
 	Text.Clear();
