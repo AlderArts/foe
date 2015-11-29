@@ -7,7 +7,7 @@ CHANGELOG for Fall of Eden
 
 Version 0.4p
 ------------
-* Fixed a bug related to Zebra's (specifically when viewing their offspring in the nursery, but likely to have other effects too)
+* Fixed a bug related to Zebras (specifically when viewing their offspring in the nursery, but likely to have other effects too)
 * The usual bugs and typos
 * Fixed a bug that would crash the game if a very specific set of actions were taken during the intro
 

@@ -22,8 +22,8 @@ StatusEffect = {
 	Regen    : 14,
 	Boon     : 15,
 	Horny    : 16, //OK
-	Aroused  : 17,
-	Limp     : 18,
+	Aroused  : 17, //WIP
+	Limp     : 18, //OK
 	Bimbo    : 19,
 	Decoy    : 20, //OK
 	Counter  : 21, //OK
@@ -53,6 +53,8 @@ LoadStatusImages = function(imageArray) {
 	Images.status[StatusEffect.Haste]    = "data/status/haste.png";
 	Images.status[StatusEffect.Slow]     = "data/status/slow.png";
 	Images.status[StatusEffect.Horny]    = "data/status/horny.png";
+	Images.status[StatusEffect.Aroused]  = "data/status/aroused.png";
+	Images.status[StatusEffect.Limp]     = "data/status/limp.png";
 	Images.status[StatusEffect.Decoy]    = "data/status/decoy.png";
 	Images.status[StatusEffect.Counter]  = "data/status/counter.png";
 	Images.status[StatusEffect.Full]     = "data/status/full.png";
@@ -82,11 +84,17 @@ StatusList.prototype.FromStorage = function(storage) {
 		
 		switch(idx) {
 			//TODO Add permanent status effects here
+			case StatusEffect.Aroused:
+				that.stats[StatusEffect.Aroused] = Status.Aroused.FromStorage(stat);
+				break;
 			case StatusEffect.Buff:
 				that.stats[StatusEffect.Buff] = Status.Buff.FromStorage(stat);
 				break;
 			case StatusEffect.Full:
 				that.stats[StatusEffect.Full] = Status.Full.FromStorage(stat);
+				break;
+			case StatusEffect.Limp:
+				that.stats[StatusEffect.Limp] = Status.Limp.FromStorage(stat);
 				break;
 				
 			default:
@@ -109,10 +117,14 @@ StatusList.prototype.ToStorage = function() {
 
 StatusList.prototype.Update = function(ent, hours) {
 	//TODO Add Status effects
+	if(this.stats[StatusEffect.Aroused])
+		this.stats[StatusEffect.Aroused].Update(ent, hours);
 	if(this.stats[StatusEffect.Buff])
 		this.stats[StatusEffect.Buff].Update(ent, hours);
 	if(this.stats[StatusEffect.Full])
 		this.stats[StatusEffect.Full].Update(ent, hours);
+	if(this.stats[StatusEffect.Limp])
+		this.stats[StatusEffect.Limp].Update(ent, hours);
 }
 
 StatusList.prototype.Clear = function() {
@@ -162,8 +174,8 @@ StatusList.prototype.EndOfCombat = function() {
 	this.stats[StatusEffect.Regen]   = null;
 	this.stats[StatusEffect.Boon]    = null;
 	this.stats[StatusEffect.Horny]   = null;
-	this.stats[StatusEffect.Aroused] = null;
-	this.stats[StatusEffect.Limp]    = null;
+	//this.stats[StatusEffect.Aroused] = null;
+	//this.stats[StatusEffect.Limp]    = null;
 	//this.stats[StatusEffect.Bimbo]   = null;
 	this.stats[StatusEffect.Decoy]   = null;
 	this.stats[StatusEffect.Counter] = null;
@@ -549,6 +561,52 @@ Status.Horny.Tick = function(target) {
 	if(this.turns <= 0) {
 		target.combatStatus.stats[StatusEffect.Horny] = null;
 	}
+}
+
+//All modifiers are multipliers, so 1.05 means 5% extra.
+Status.Limp = function(target, opts) {
+	if(!target) return;
+	opts = opts || {};
+	
+	var hours = opts.hours || 0;
+	// Apply weakness
+	target.combatStatus.stats[StatusEffect.Limp] = {
+		hours     : hours,
+		
+		fer       : opts.fer || 0,
+		
+		Update    : Status.Limp.Update,
+		ToStorage : Status.Limp.ToStorage
+	};
+	
+	return true;
+}
+Status.Limp.Update = function(target, step) {
+	this.hours -= step;
+	if(this.hours <= 0) {
+		target.combatStatus.stats[StatusEffect.Limp] = null;
+	}
+}
+Status.Limp.ToStorage = function() {
+	var ret = {};
+	if(this.hours) ret["hours"] = this.hours.toFixed(2);
+	
+	if(this.fer != 0) ret["fer"] = this.fer.toFixed(2);
+
+	return ret;
+}
+Status.Limp.FromStorage = function(storage) {
+	storage = storage || {};
+	var obj = {};
+	if(storage["hours"]) obj.hours = parseFloat(storage["hours"]);
+	
+	if(storage["fer"]) obj.fer = parseFloat(storage["fer"]);
+	else obj.fer = 0;
+	
+	obj.Update    = Status.Limp.Update;
+	obj.ToStorage = Status.Limp.ToStorage;
+	
+	return obj;
 }
 
 Status.Decoy = function(target, opts) {

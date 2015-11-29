@@ -251,12 +251,18 @@ PregnancyHandler.prototype.Impregnate = function(opts) {
 	// TODO: Check for sterility, herbs etc
 	
 	var fertility = (this.fertility.Get() * father.Virility() * Math.sqrt(opts.load || 1));
+	// Perks etc for mother
 	if(mother.HasPerk(Perks.Fertility))
 		fertility *= 1.5;
+	var limp = mother.combatStatus[StatusEffect.Limp];
+	if(limp) fertility *= limp.fer;
+	// Perks etc for father
 	if(father.HasPerk(Perks.Virility))
 		fertility *= 1.5;
-	var chance = Math.random();
+	var limp = father.combatStatus[StatusEffect.Limp];
+	if(limp) fertility *= limp.fer;
 	
+	var chance = Math.random();
 	var parse = {
 		mother : mother.name,
 		father : father.name,
