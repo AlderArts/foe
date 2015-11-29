@@ -564,6 +564,52 @@ Status.Horny.Tick = function(target) {
 }
 
 //All modifiers are multipliers, so 1.05 means 5% extra.
+Status.Aroused = function(target, opts) {
+	if(!target) return;
+	opts = opts || {};
+	
+	var hours = opts.hours || 0;
+	// Apply weakness
+	target.combatStatus.stats[StatusEffect.Aroused] = {
+		hours     : hours,
+		
+		fer       : opts.fer || 0,
+		
+		Update    : Status.Aroused.Update,
+		ToStorage : Status.Aroused.ToStorage
+	};
+	
+	return true;
+}
+Status.Aroused.Update = function(target, step) {
+	this.hours -= step;
+	if(this.hours <= 0) {
+		target.combatStatus.stats[StatusEffect.Aroused] = null;
+	}
+}
+Status.Aroused.ToStorage = function() {
+	var ret = {};
+	if(this.hours) ret["hours"] = this.hours.toFixed(2);
+	
+	if(this.fer != 0) ret["fer"] = this.fer.toFixed(2);
+
+	return ret;
+}
+Status.Aroused.FromStorage = function(storage) {
+	storage = storage || {};
+	var obj = {};
+	if(storage["hours"]) obj.hours = parseFloat(storage["hours"]);
+	
+	if(storage["fer"]) obj.fer = parseFloat(storage["fer"]);
+	else obj.fer = 0;
+	
+	obj.Update    = Status.Aroused.Update;
+	obj.ToStorage = Status.Limp.ToStorage;
+	
+	return obj;
+}
+
+//All modifiers are multipliers, so 1.05 means 5% extra.
 Status.Limp = function(target, opts) {
 	if(!target) return;
 	opts = opts || {};

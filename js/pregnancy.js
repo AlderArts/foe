@@ -256,11 +256,15 @@ PregnancyHandler.prototype.Impregnate = function(opts) {
 		fertility *= 1.5;
 	var limp = mother.combatStatus.stats[StatusEffect.Limp];
 	if(limp) fertility *= limp.fer;
+	var aroused = mother.combatStatus.stats[StatusEffect.Aroused];
+	if(aroused) fertility *= aroused.fer;
 	// Perks etc for father
 	if(father.HasPerk(Perks.Virility))
 		fertility *= 1.5;
 	var limp = father.combatStatus.stats[StatusEffect.Limp];
 	if(limp) fertility *= limp.fer;
+	var aroused = father.combatStatus.stats[StatusEffect.Aroused];
+	if(aroused) fertility *= aroused.fer;
 	
 	var chance = Math.random();
 	var parse = {
