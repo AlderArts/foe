@@ -582,6 +582,9 @@ world.loc.Plains.Nomads.Tent.events.push(new Link(
 		party.inventory.AddItem(Items.Anusol);
 		party.inventory.AddItem(Items.AnusolPlus);
 		
+		party.inventory.AddItem(Items.Infertilium);
+		party.inventory.AddItem(Items.InfertiliumPlus);
+		
 		party.inventory.AddItem(Items.Toys.SmallDildo);
 		party.inventory.AddItem(Items.Toys.MediumDildo);
 		party.inventory.AddItem(Items.Toys.LargeDildo);

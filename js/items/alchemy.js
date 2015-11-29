@@ -765,3 +765,104 @@ Items.Estros.PushEffect(function(target) {
 		}
 	}
 });
+
+
+Items.Infertilium = new TFItem("sex4", "Infertilium");
+Items.Infertilium.isTF = false;
+Items.Infertilium.price = 15;
+Items.Infertilium.lDesc = function() { return "a bottle of Infertilium"; }
+Items.Infertilium.Short = function() { return "A bottle of Infertilium"; }
+Items.Infertilium.Long = function() { return "A small, unmarked glass vial that feels cool to the touch. Drinking this will render the drinker practically sterile for one day."; }
+//TODO Items.Infertilium.recipe = [{it: Items.Felinix}, {it: Items.Leporine}, {it: Items.Bovia}];
+Items.Infertilium.useStr = function(target) {
+	var parse = {
+		Name: target.NameDesc(),
+		name: target.nameDesc()
+	};
+	parse = target.ParserPronouns(parse);
+	parse = Text.ParserPlural(parse, target.plural());
+	
+	Text.Add("[Name] uncork[notS] the vial and drink[notS] down the liquid within. It’s surprisingly clear and refreshing, and goes down without a hitch. ", parse);
+	if(target.FirstCock() || target.FirstVag()) {
+		Text.Add("Quickly, [name] feel[notS] [hisher] loins cooling down. Seems like [heshe] ", parse);
+		var preg = target.PregHandler().IsPregnant();
+		if(target.FirstVag() || target.PregHandler().MPregEnabled()) {
+			if(preg)
+				Text.Add("is a little too late, though - since [heshe] [isAre] already pregnant, the potion has no effect on [hisher] womb.", parse);
+			else
+				Text.Add("won’t be getting knocked up while the potion is in effect.", parse);
+			
+			if(target.FirstCock()) {
+				if(preg)
+					Text.Add(" At least, though, [heshe] ", parse);
+				else
+					Text.Add(" Furthermore, [heshe] ", parse);
+			}
+		}
+		if(target.FirstCock())
+			Text.Add("will be firing blanks for a little bit, until the potion’s worn off.", parse);
+	}
+	else {
+		Text.Add("However, there appears to be no effect whatsoever, mostly because of the fact that there’s nothing for the potion to act upon. Guess that wasn’t such a good idea.", parse);
+	}
+	Text.NL();
+	Text.Flush();
+	
+	target.AddLustFraction(-0.5);
+	
+	Status.Limp(target, {hours: 24, fer: 0.05});
+};
+// Effects
+Items.Infertilium.PushEffect(TF.ItemEffects.DecLib, {odds: 0.2, ideal: 15, max: 1});
+
+
+Items.InfertiliumPlus = new TFItem("sex5", "Infertilium+");
+Items.InfertiliumPlus.isTF = false;
+Items.InfertiliumPlus.price = 25;
+Items.InfertiliumPlus.lDesc = function() { return "a bottle of Infertilium+"; }
+Items.InfertiliumPlus.Short = function() { return "A bottle of Infertilium+"; }
+Items.InfertiliumPlus.Long = function() { return "A small, unmarked glass vial with a thin sheen of frost clinging to its sides. Drinking this will render the drinker practically sterile for five days."; }
+//TODO Items.InfertiliumPlus.recipe = [{it: Items.Felinix}, {it: Items.Leporine}, {it: Items.Bovia}];
+Items.InfertiliumPlus.useStr = function(target) {
+	var parse = {
+		Name: target.NameDesc(),
+		name: target.nameDesc()
+	};
+	parse = target.ParserPronouns(parse);
+	parse = Text.ParserPlural(parse, target.plural());
+	
+	Text.Add("[Name] uncork[notS] the vial and drink[notS] down the liquid within. It’s so cold that it numbs the tongue and throat as it goes down, but [name] manage[notS] to swallow it all, albeit with a little difficulty. ", parse);
+	if(target.FirstCock() || target.FirstVag()) {
+		Text.Add("Quickly, [name] feel[notS] [hisher] loins cooling down, lustful thoughts rapidly leaving [himher]. Seems like [heshe] ", parse);
+		var preg = target.PregHandler().IsPregnant();
+		if(target.FirstVag() || target.PregHandler().MPregEnabled()) {
+			if(preg)
+				Text.Add("is a little too late, though - since [heshe] [isAre] already pregnant, the potion has no effect on [hisher] womb, however strong it might be.", parse);
+			else
+				Text.Add("won’t be getting knocked up for a good long time now. Practically frigid, as the name suggests.", parse);
+			
+			if(target.FirstCock()) {
+				if(preg)
+					Text.Add(" At least, though, [heshe] ", parse);
+				else
+					Text.Add(" Furthermore, [heshe] ", parse);
+			}
+		}
+		if(target.FirstCock())
+			Text.Add("will be firing blanks for quite a while until the potion’s effects finally fade.", parse);
+	}
+	else {
+		Text.Add("However, there appears to be no effect whatsoever, mostly because of the fact that there’s nothing for the potion to act upon. Ugh, what a waste.", parse);
+	}
+	Text.NL();
+	Text.Add("Nevertheless, the potion’s effects won’t last forever, so [name] would probably do well to keep an eye on [himher]self if [heshe] want[notS] to avoid sowing or growing any bastards by accident.", parse);
+	Text.NL();
+	Text.Flush();
+	
+	target.AddLustFraction(-1);
+	
+	Status.Limp(target, {hours: 24*5, fer: 0.01});
+};
+// Effects
+Items.InfertiliumPlus.PushEffect(TF.ItemEffects.DecLib, {odds: 0.75, ideal: 15, max: 2});
+

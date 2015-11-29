@@ -254,12 +254,12 @@ PregnancyHandler.prototype.Impregnate = function(opts) {
 	// Perks etc for mother
 	if(mother.HasPerk(Perks.Fertility))
 		fertility *= 1.5;
-	var limp = mother.combatStatus[StatusEffect.Limp];
+	var limp = mother.combatStatus.stats[StatusEffect.Limp];
 	if(limp) fertility *= limp.fer;
 	// Perks etc for father
 	if(father.HasPerk(Perks.Virility))
 		fertility *= 1.5;
-	var limp = father.combatStatus[StatusEffect.Limp];
+	var limp = father.combatStatus.stats[StatusEffect.Limp];
 	if(limp) fertility *= limp.fer;
 	
 	var chance = Math.random();
