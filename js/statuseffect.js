@@ -568,16 +568,27 @@ Status.Aroused = function(target, opts) {
 	if(!target) return;
 	opts = opts || {};
 	
+	var old = target.combatStatus.stats[StatusEffect.Aroused];
+	
 	var hours = opts.hours || 0;
+	var fer   = opts.fer   || 0;
+	
+	if(old) {
+		hours = Math.max(old.hours, hours);
+		fer   = Math.max(old.fer, fer);
+	}
 	// Apply weakness
 	target.combatStatus.stats[StatusEffect.Aroused] = {
 		hours     : hours,
 		
-		fer       : opts.fer || 0,
+		fer       : fer,
 		
 		Update    : Status.Aroused.Update,
 		ToStorage : Status.Aroused.ToStorage
 	};
+	// Heals limp
+	if(target.combatStatus.stats[StatusEffect.Limp])
+		target.combatStatus.stats[StatusEffect.Limp] = null;
 	
 	return true;
 }
@@ -614,16 +625,28 @@ Status.Limp = function(target, opts) {
 	if(!target) return;
 	opts = opts || {};
 	
+	var old = target.combatStatus.stats[StatusEffect.Limp];
+	
 	var hours = opts.hours || 0;
+	var fer   = opts.fer   || 0;
+	
+	if(old) {
+		hours = Math.max(old.hours, hours);
+		fer   = Math.min(old.fer, fer);
+	}
 	// Apply weakness
 	target.combatStatus.stats[StatusEffect.Limp] = {
 		hours     : hours,
 		
-		fer       : opts.fer || 0,
+		fer       : fer,
 		
 		Update    : Status.Limp.Update,
 		ToStorage : Status.Limp.ToStorage
 	};
+	
+	// Heals aroused
+	if(target.combatStatus.stats[StatusEffect.Aroused])
+		target.combatStatus.stats[StatusEffect.Aroused] = null;
 	
 	return true;
 }
