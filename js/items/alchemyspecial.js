@@ -598,7 +598,7 @@ Items.AnusolPlus.price = 25;
 Items.AnusolPlus.lDesc = function() { return "a bottle of Anusol+"; }
 Items.AnusolPlus.Short = function() { return "A bottle of Anusol+"; }
 Items.AnusolPlus.Long  = function() { return "A bottle labled Anusol+, filled with a thick and slimy-looking blue fluid. It’s supposed to make anal sex out of this world for the drinker."; }
-Items.AnusolPlus.recipe = [{it: Items.SnakeOil}, {it: Items.SpringWater}, {it: Items.Fertilium}];
+Items.AnusolPlus.recipe = [{it: Items.SnakeOil}, {it: Items.SpringWater}, {it: Items.Gestarium}];
 // Effects
 Items.AnusolPlus.PushEffect(function(target) {
 	var parse = {

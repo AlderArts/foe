@@ -44,6 +44,9 @@ function Patchwork(storage) {
 	
 	this.Shop.AddItem(Items.Hummus, 5, null, Scenes.Patchwork.BuyFunc);
 	
+	this.Shop.AddItem(Items.Fertilium, 5, null, Scenes.Patchwork.BuyFunc);
+	this.Shop.AddItem(Items.FertiliumPlus, 5, null, Scenes.Patchwork.BuyFunc);
+	
 	this.Shop.AddItem(Items.Infertilium, 5, null, Scenes.Patchwork.BuyFunc);
 	this.Shop.AddItem(Items.InfertiliumPlus, 5, null, Scenes.Patchwork.BuyFunc);
 	

@@ -143,7 +143,7 @@ OpheliaBrute.prototype.DropTable = function() {
 	drops.push({ it: Items.Leporine });
 	drops.push({ it: Items.EquiniumPlus });
 	drops.push({ it: Items.Estros });
-	drops.push({ it: Items.Fertilium });
+	drops.push({ it: Items.GestariumPlus });
 	return drops;
 }
 

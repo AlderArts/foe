@@ -530,16 +530,16 @@ Items.Virilium.PushEffect(TF.ItemEffects.IncTone, {odds: 0.1, ideal: .7, max: .1
 Items.Virilium.PushEffect(TF.ItemEffects.DecFem, {odds: 0.1, ideal: -1, max: .1});
 
 
-Items.Fertilium = new TFItem("sex1", "Fertilium");
-Items.Fertilium.price = 100;
-Items.Fertilium.lDesc = function() { return "a bottle of Fertilium"; }
-Items.Fertilium.Short = function() { return "A bottle of Fertilium"; }
-Items.Fertilium.Long = function() { return "A bottle of fertility-enhancing Fertilium."; }
-Items.Fertilium.recipe = [{it: Items.Felinix}, {it: Items.Leporine}, {it: Items.Bovia}];
+Items.GestariumPlus = new TFItem("sex1", "Gestarium+");
+Items.GestariumPlus.price = 100;
+Items.GestariumPlus.lDesc = function() { return "a bottle of Gestarium+"; }
+Items.GestariumPlus.Short = function() { return "A bottle of Gestarium+"; }
+Items.GestariumPlus.Long = function() { return "A bottle of fertility-enhancing Gestarium+."; }
+Items.GestariumPlus.recipe = [{it: Items.Felinix}, {it: Items.Leporine}, {it: Items.Bovia}];
 // Effects
-Items.Fertilium.PushEffect(TF.ItemEffects.IncLib, {odds: 0.3, ideal: 40, max: 2});
-Items.Fertilium.PushEffect(TF.ItemEffects.IncCha, {odds: 0.2, ideal: 40, max: 2});
-Items.Fertilium.PushEffect(function(target) {
+Items.GestariumPlus.PushEffect(TF.ItemEffects.IncLib, {odds: 0.3, ideal: 40, max: 2});
+Items.GestariumPlus.PushEffect(TF.ItemEffects.IncCha, {odds: 0.2, ideal: 40, max: 2});
+Items.GestariumPlus.PushEffect(function(target) {
 	var parse = {
 		Poss: target.Possessive(),
 		notS: target.plural() ? "" : "s"
@@ -558,7 +558,7 @@ Items.Fertilium.PushEffect(function(target) {
 	}
 	Text.Flush();
 });
-Items.Fertilium.PushEffect(function(target) {
+Items.GestariumPlus.PushEffect(function(target) {
 	var parse = {
 		name  : target.nameDesc(),
 		heshe : target.heshe(),
@@ -569,22 +569,40 @@ Items.Fertilium.PushEffect(function(target) {
 	Text.Add("A shiver runs through [name] as [heshe] [is] hit by a wave of lust!", parse);
 	Text.NL();
 });
-// TODO: parse
-Items.Fertilium.PushEffect(function(target) {
-	var parse = {};
-	if(Math.random() < 0.15) {
-		var res = target.pregHandler.gestationRate.IncreaseStat(2, .2, true);
+Items.GestariumPlus.PushEffect(function(target) {
+	var parse = {
+		name : target.nameDesc(),
+		poss : target.possessive()
+	};
+	parse = target.ParserPronouns(parse);
+	parse = Text.ParserPlural(parse, target.plural());
+	// No effect if not vialble
+	if(!target.FirstVag() && !target.PregHandler().MPregEnabled()) {
+		Text.Add("A rumble runs through [poss] belly, but [heshe] lack[notS] the organs for the potion to fully take hold.", parse);
+		Text.NL();
 	}
-	if(Math.random() < 0.2) {
-		var res = target.pregHandler.fertility.IncreaseStat(.7, .1, true);
+	else {
+		if(Math.random() < 0.3) {
+			var res = target.pregHandler.gestationRate.IncreaseStat(3, .2, true);
+			if(res) {
+				Text.Add("A rumble runs through [poss] belly as [hisher] womb quickens. From now on, pregnancies are going to be quicker for [name]!", parse);
+				Text.NL();
+			}
+		}
+		if(Math.random() < 0.4) {
+			var res = target.pregHandler.fertility.IncreaseStat(.8, .1, true);
+			if(res) {
+				Text.Add("A rumble runs through [poss] belly as [hisher] womb quickens. From now on, [name] [isAre] going to be more receptive to impregnation!", parse);
+				Text.NL();
+			}
+		}
 	}
 	Text.Flush();
 });
-Items.Fertilium.PushEffect(TF.ItemEffects.DecTone, {odds: 0.1, ideal: 0, max: .1});
-Items.Fertilium.PushEffect(TF.ItemEffects.IncFem, {odds: 0.1, ideal: 1, max: .1});
+Items.GestariumPlus.PushEffect(TF.ItemEffects.DecTone, {odds: 0.1, ideal: 0, max: .1});
+Items.GestariumPlus.PushEffect(TF.ItemEffects.IncFem, {odds: 0.1, ideal: 1, max: .1});
 
 
-//TODO Effects
 Items.Testos = new TFItem("sex2", "Testos");
 Items.Testos.price = 100;
 Items.Testos.lDesc = function() { return "a bottle of Testos"; }
@@ -866,3 +884,91 @@ Items.InfertiliumPlus.useStr = function(target) {
 // Effects
 Items.InfertiliumPlus.PushEffect(TF.ItemEffects.DecLib, {odds: 0.75, ideal: 15, max: 2});
 
+
+Items.Fertilium = new Item("sex6", "Fertilium", ItemType.Potion);
+Items.Fertilium.commonUse = function(target) {
+	var parse = {
+		name: target.nameDesc(),
+		lowerArmor: target.LowerArmorDesc()
+	};
+	parse = target.ParserPronouns(parse);
+	parse = target.ParserTags(parse);
+	parse = Text.ParserPlural(parse, target.NumCocks() > 1);
+	
+	var ret = true; // Set to false if the pot is refused
+	
+	if(target == player) {
+		var gen = "";
+		if(target.FirstCock()) gen += "[cocks]";
+		if(target.FirstCock() && target.FirstVag()) gen += " and ";
+		if(target.FirstVag()) gen += "[vag]";
+		parse["gen"] = Text.Parse(gen, parse);
+		Text.Add("You open the vial of Fertilium, and immediately your nostrils are assaulted by the potion’s sickly sweet scent. Slowly, you take an experimental sip, reeling at the potion’s equally cloying taste. Better get this done with quickly. You upend the vial and gulp down the liquid in one big chug, coughing at the aftertaste as you dispose of the vial. It takes a few moments, but surely enough you feel a deep warmth flow throughout your body, focusing on your [gen].", parse);
+		if(target.FirstCock()) {
+			Text.NL();
+			Text.Add("Your [lowerArmor] suddenly feels very tight as your [cocks] grow erect, wetness gathering on [itsTheir] tip[s] as you begin leaking pre. Hmm, you could certainly use a warm wet hole to plug right about now…", parse);
+		}
+		if(target.FirstVag()) {
+			Text.NL();
+			Text.Add("A sudden, unbearable ache causes your [vag] to immediately moisten up, trickling your arousal into your [lowerArmor]. Your mind is suddenly filled with thoughts about being pregnant. You need a stud to fill you up and plug you full of thick, heavy baby batter and make this bothersome itch go away!", parse);
+		}
+	}
+	/* TODO followers
+	else if(target == X) {
+		Text.Add("", parse);
+		Text.NL();
+		Text.Add("", parse);
+	}
+	*/
+	else { // Default
+		Text.Add("As [name] opens the vial of Fertilium, you can immediately smell the sweet scent emanating for the liquid within. [HeShe] tips the vial, downing the liquid in a single chug. Moments later, you see [name] shudder as [hisher] face becomes flushed with arousal.", parse);
+		if(target.FirstCock())
+			Text.Add(" Looking down between [hisher] legs you see a bulge forming, followed by wetness where the tip[s] of [hisher] [cocks] [isAre] straining against [hisher] garments.", parse);
+		if(target.FirstVag())
+			Text.Add(" The scent of female in heat assaults your nostrils, and your eyes immediately turn to [name]. From the way [heshe]’s shuffling and rubbing [hisher] thighs together, you’d guess this potion just made [himher] go into heat.", parse);
+	}
+	
+	Text.NL();
+	Text.Flush();
+	
+	return ret;
+}
+Items.Fertilium.price = 15;
+Items.Fertilium.lDesc = function() { return "a bottle of Fertilium"; }
+Items.Fertilium.Short = function() { return "A bottle of Fertilium"; }
+Items.Fertilium.Long = function() { return "A vial containing a sweet-smelling pink liquid. On the label there’s the picture of a man having sex with a woman, pouring her swelling belly full of virile seed. Its purpose seems to be to enhance potency."; }
+//TODO Items.Fertilium.recipe = [{it: Items.Felinix}, {it: Items.Leporine}, {it: Items.Bovia}];
+Items.Fertilium.Use = function(target) {
+	if(Items.Fertilium.commonUse(target)) {
+		target.AddLustFraction(0.5);
+
+		Status.Aroused(target, {hours: 24, fer: 2});
+		
+		TF.ItemEffects.IncLib(target, {odds: 0.3, ideal: 40, max: 1});
+		
+		return {consume: true};
+	}
+	else
+		return {consume: false};
+};
+
+
+Items.FertiliumPlus = new Item("sex7", "Fertilium+", ItemType.Potion);
+Items.FertiliumPlus.price = 25;
+Items.FertiliumPlus.lDesc = function() { return "a bottle of Fertilium+"; }
+Items.FertiliumPlus.Short = function() { return "A bottle of Fertilium+"; }
+Items.FertiliumPlus.Long = function() { return "A vial containing a cloyingly sweet-smelling pink liquid. On the label there’s the picture of a man having sex with a woman, pouring her obscenely swollen belly full of virile seed. Its purpose seems to be to greatly enhance potency."; }
+//TODO Items.FertiliumPlus.recipe = [{it: Items.Felinix}, {it: Items.Leporine}, {it: Items.Bovia}];
+Items.FertiliumPlus.Use = function(target) {
+	if(Items.Fertilium.commonUse(target)) {
+		target.AddLustFraction(1);
+
+		Status.Aroused(target, {hours: 5*24, fer: 3});
+		
+		TF.ItemEffects.IncLib(target, {odds: 0.5, ideal: 45, max: 2});
+		
+		return {consume: true};
+	}
+	else
+		return {consume: false};
+};

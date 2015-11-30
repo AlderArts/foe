@@ -71,7 +71,7 @@ GolQueen.prototype.DropTable = function() {
 	var drops = [];
 	drops.push({ it: Items.Quest.Scepter });
 	drops.push({ it: Items.Weapons.GolClaw });
-	drops.push({ it: Items.Fertilium });
+	drops.push({ it: Items.GestariumPlus });
 	
 	drops.push({ it: Items.Letter, num: 3 });
 	drops.push({ it: Items.Trinket, num: 3 });
@@ -84,8 +84,8 @@ GolQueen.prototype.DropTable = function() {
 	if(Math.random() < 0.1) drops.push({ it: Items.BlackGem });
 	
 	if(Math.random() < 0.2) drops.push({ it: Items.Estros });
-	if(Math.random() < 0.2) drops.push({ it: Items.Fertilium });
 	if(Math.random() < 0.2) drops.push({ it: Items.Gestarium });
+	if(Math.random() < 0.2) drops.push({ it: Items.GestariumPlus });
 	
 	return drops;
 }

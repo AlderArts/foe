@@ -574,14 +574,16 @@ world.loc.Plains.Nomads.Tent.events.push(new Link(
 		party.inventory.AddItem(Items.HoneyBrew);
 		
 		party.inventory.AddItem(Items.Virilium);
-		party.inventory.AddItem(Items.Fertilium);
 		party.inventory.AddItem(Items.Testos);
 		party.inventory.AddItem(Items.Estros);
 		party.inventory.AddItem(Items.Androgyn);
 		party.inventory.AddItem(Items.Gestarium);
+		party.inventory.AddItem(Items.GestariumPlus);
 		party.inventory.AddItem(Items.Anusol);
 		party.inventory.AddItem(Items.AnusolPlus);
 		
+		party.inventory.AddItem(Items.Fertilium);
+		party.inventory.AddItem(Items.FertiliumPlus);
 		party.inventory.AddItem(Items.Infertilium);
 		party.inventory.AddItem(Items.InfertiliumPlus);
 		

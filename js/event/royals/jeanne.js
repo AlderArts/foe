@@ -16,7 +16,8 @@ function Jeanne(storage) {
 	this.recipes.push(Items.Homos);
 	this.recipes.push(Items.Estros);
 	this.recipes.push(Items.Testos);
-	this.recipes.push(Items.Fertilium);
+	this.recipes.push(Items.Gestarium);
+	this.recipes.push(Items.GestariumPlus);
 	this.recipes.push(Items.Virilium);
 	
 	//this.avatar.combat = new Image();
@@ -458,9 +459,9 @@ Scenes.Jeanne.Talk = function() {
 					Text.NL();
 					Text.Add("Your tongue idly flicks over your lips as you consider the possibility. Then, almost despite yourself, you inquisitively ask just what she’d need to make a stronger version of this potion.", parse);
 					Text.NL();
-					Text.Add("<i>“Just bring the ingredients for Fertilium. Or a potion I can distill, and I will see about undoing my apprentice’s mistake.”</i>", parse);
+					Text.Add("<i>“Just bring the ingredients for Gestarium or a potion I can distill, and I will see about undoing my apprentice’s mistake.”</i>", parse);
 					Text.NL();
-					Text.Add("Nodding to show you understand, you thank her. So, Anusol and Fertilium for an enhanced Anusol potion? You’ll need to remember that.", parse);
+					Text.Add("Nodding to show you understand, you thank her. So, Anusol and Gestarium for an enhanced Anusol potion? You’ll need to remember that.", parse);
 					Text.Flush();
 					
 					Scenes.Jeanne.Talk();
