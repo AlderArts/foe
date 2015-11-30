@@ -1529,7 +1529,7 @@ Scenes.Cale.SexCatchVag = function(outside) {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Cale.SexCatchVagEntrypoint = function(outside, fromAnal) {
+Scenes.Cale.SexCatchVagEntrypoint = function(outside, fromAnal, customIntro) {
 	var cocksInAss = player.CocksThatFit(cale.Butt(), true);
 	var cock = player.BiggestCock(null, true);
 	
@@ -1552,20 +1552,23 @@ Scenes.Cale.SexCatchVagEntrypoint = function(outside, fromAnal) {
 		ballsDesc     : function() { return player.BallsDesc(); }
 	};
 	
-	Text.Add("Cale grins widely when he sees what you have in mind. ", parse);
-	if(cale.Relation() < 40) {
-		Text.Add("<i>“Keep doing this and you’ll have a very happy wolf pretty soon,”</i> he comments, licking his lips.", parse);
+	//Note, use custom intro instead if applicable
+	if(!customIntro) {
+		Text.Add("Cale grins widely when he sees what you have in mind. ", parse);
+		if(cale.Relation() < 40) {
+			Text.Add("<i>“Keep doing this and you’ll have a very happy wolf pretty soon,”</i> he comments, licking his lips.", parse);
+			Text.NL();
+			Text.Add("Maybe so, but let’s see if he can make you a happy [guygal] first, you reply.", parse);
+		}
+		else {
+			Text.Add("<i>“Aw, [playername]. Now you’re just spoiling me,”</i> he says, batting his eyes teasingly at you.", parse);
+			Text.NL();
+			Text.Add("Grinning back, you reach out and gently pat his head, assuring him that only the best is good enough for your favorite wolf. Your grin widens as you hear an arrhythmic thumping noise; Cale’s tail is wagging so hard he’s drumming on the [log] behind him.", parse);
+		}
 		Text.NL();
-		Text.Add("Maybe so, but let’s see if he can make you a happy [guygal] first, you reply.", parse);
-	}
-	else {
-		Text.Add("<i>“Aw, [playername]. Now you’re just spoiling me,”</i> he says, batting his eyes teasingly at you.", parse);
+		Text.Add("Now that the foreplay is over with, it’s time to have some real fun. With a final breath, you finish your descent, allowing his cock to close the distance between you and push into your folds. The feeling of him spearing into your needy [vagDesc] sends jolts of both pain and pleasure coursing throughout your body. A groan escapes your throat at the stimulus, only enticing you to sink yourself downward further, refusing to stop until you have reached to just above his knot.", parse);
 		Text.NL();
-		Text.Add("Grinning back, you reach out and gently pat his head, assuring him that only the best is good enough for your favorite wolf. Your grin widens as you hear an arrhythmic thumping noise; Cale’s tail is wagging so hard he’s drumming on the [log] behind him.", parse);
 	}
-	Text.NL();
-	Text.Add("Now that the foreplay is over with, it’s time to have some real fun. With a final breath, you finish your descent, allowing his cock to close the distance between you and push into your folds. The feeling of him spearing into your needy [vagDesc] sends jolts of both pain and pleasure coursing throughout your body. A groan escapes your throat at the stimulus, only enticing you to sink yourself downward further, refusing to stop until you have reached to just above his knot.", parse);
-	Text.NL();
 	
 	Sex.Vaginal(cale, player);
 	player.FuckVag(player.FirstVag(), cale.FirstCock(), 3);

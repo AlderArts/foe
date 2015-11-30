@@ -1231,11 +1231,11 @@ Scenes.Cale.Rogue = function() {
 					parse["vag"] = player.FirstVag() ? Text.Parse("and [vagDesc]", parse) : "";
 					Text.Add("Cale chuckles, <i>“Alright then, no mercy it is!”</i> He wrestles with your [lowerArmorDesc] and somehow manages to rip it off your, exposing your naked [anusDesc] [vag] to his appreciative eyes.", parse);
 					Text.NL();
-					Text.Add("<i>“One final lesson, [playername]. Us rogues do it from behind.”</i> With that, Cale thrusts forward, driving his point and his cock home.", parse);
+					Text.Add("<i>“One final lesson, [playername]. Us rogues do it from behind.”</i> With that, Cale thrusts forward, driving his point and his cock home. A groan escapes your throat at the stimulus, enticing you to thrust back and refusing to stop until you have reached to just above his knot.", parse);
 					Text.NL();
 					
 					if(player.FirstVag())
-						Scenes.Cale.SexCatchVagEntrypoint(true);
+						Scenes.Cale.SexCatchVagEntrypoint(true, false, true); // Use the customIntro flag to repress the usual initial dialogue
 					else
 						Scenes.Cale.SexCatchAnalEntrypoint(true);
 				}, enabled : true,

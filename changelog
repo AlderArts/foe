@@ -9,6 +9,7 @@ Version 0.4p
 ------------
 * Fixed a bug related to Zebras (specifically when viewing their offspring in the nursery, but likely to have other effects too)
 * The usual bugs and typos
+* Fixed some weirdness in Cale's Rogue training fuck, [Take it] branch
 * Fixed a bug that would crash the game if a very specific set of actions were taken during the intro
 * Added the Infertilium and Infertilium+ potions, which work as contraceptives. Adds a debuff for 1 or 5 days that almost certainly prevents pregnancy. Buy them from Patchwork for the moment
 
