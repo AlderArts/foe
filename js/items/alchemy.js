@@ -910,7 +910,7 @@ Items.Fertilium.commonUse = function(target) {
 		}
 		if(target.FirstVag()) {
 			Text.NL();
-			Text.Add("A sudden, unbearable ache causes your [vag] to immediately moisten up, trickling your arousal into your [lowerArmor]. Your mind is suddenly filled with thoughts about being pregnant. You need a stud to fill you up and plug you full of thick, heavy baby batter and make this bothersome itch go away!", parse);
+			Text.Add("A sudden, unbearable ache causes your [vag] to immediately moisten up, trickling your arousal into your [lowerArmor]. Your mind is suddenly filled with thoughts about being pregnant. You need a stud to fuck you and fill you with thick, heavy baby batter to make this bothersome itch go away!", parse);
 		}
 	}
 	/* TODO followers
