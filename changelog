@@ -5,8 +5,8 @@ CHANGELOG for Fall of Eden
                   CURRENT
 --------------------------------------------
 
-Version 0.4p
-------------
+Version 0.4o2
+-------------
 * Fixed a bug related to Zebras (specifically when viewing their offspring in the nursery, but likely to have other effects too)
 * The usual bugs and typos
 * Fixed some weirdness in Cale's Rogue training fuck, [Take it] branch
