@@ -1,7 +1,6 @@
 /*
  * 
- * Highlands area, connects to the mountains and to the dragons' den.
- * Good hunting grounds
+ * Lake area
  * 
  */
 
@@ -11,7 +10,7 @@ world.loc.Lake = {
 }
 
 //
-// Hills, main hunting grounds
+// Shore
 //
 world.loc.Lake.Shore.description = function() {
 	Text.Add("You are standing on the shore of the great lake in which the river that passes Rigard pours its waters. Further upstream, you can see the slums and docks of the great city spread out. Despite this, the lake looks pristine; you figure there must be multiple sources of its waters. Further out, you spot an island, and beyond that Eden ends and the cloudy void begins.");
