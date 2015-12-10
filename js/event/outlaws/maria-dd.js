@@ -911,7 +911,7 @@ Scenes.Maria.DeadDrops.Docks.GuardInspection = function() {
 				
 				world.TimeStep({hour: 5});
 				
-				maria.relation.IncreaseStat(50, 30);
+				maria.relation.IncreaseStat(50, 3);
 				outlaws.relation.IncreaseStat(30, 2);
 				
 				Gui.NextPrompt(Scenes.Maria.DeadDrops.Docks.Ending);
