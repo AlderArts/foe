@@ -1624,7 +1624,7 @@ Scenes.Lizards.LossMale = function() {
 		faceDesc   : function() { return player.FaceDesc(); },
 		m1name     : function() { return enc.male.nameDesc(); },
 		m1Name     : function() { return enc.male.NameDesc(); },
-		m1race     : function() { enc.male.body.RaceStr(); },
+		m1race     : function() { return enc.male.body.RaceStr(); },
 		m1hisher   : function() { return enc.male.hisher(); },
 		m1HeShe    : function() { return enc.male.HeShe(); },
 		m1heshe    : function() { return enc.male.heshe(); },
