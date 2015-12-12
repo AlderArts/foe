@@ -126,6 +126,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/event/asche-tasks.js \
 	js/event/asche-sex.js \
 	js/event/cassidy.js \
+	js/event/cassidy-sex.js \
 	js/event/fera.js \
 	js/event/miranda.js \
 	js/event/miranda-date.js \
