@@ -260,7 +260,7 @@ Kiakai.prototype.TalkPrompt = function() {
 	// TALK ABOUT MAIN QUEST
 	options.push({ nameStr: "Quest",
 		func : Scenes.Kiakai.TalkQuest, enabled : true,
-		tooltip : "Talk about your goals."
+		tooltip : "Ta	lk about your goals."
 	});
 	// TALK ABOUT ARIA
 	options.push({ nameStr: "Aria",

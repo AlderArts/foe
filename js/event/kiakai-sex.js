@@ -2035,7 +2035,7 @@ Scenes.Kiakai.HealingAssertive = function() {
 								
 								kiakai.AddLustFraction(-1);
 								player.AddLustFraction(-1);
-					
+								
 								Gui.NextPrompt(kiakai.Interact);
 							}, enabled : true,
 							tooltip : Text.Parse("Relent and allow the elf to cum. With the amount [heshe] has stacked up, it'll probably be a big one.", parse)
