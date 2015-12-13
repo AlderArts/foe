@@ -386,6 +386,9 @@ Entity.prototype.HipDesc = function() {
 Entity.prototype.HipsDesc = function() {
 	return this.body.HipsDesc(true);
 }
+Entity.prototype.HipSize = function() {
+	return this.body.HipSize();
+}
 // TODO
 Entity.prototype.ArmDesc = function() {
 	return this.body.ArmDesc();

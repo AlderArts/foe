@@ -146,6 +146,7 @@ Entity.prototype.ParserTags = function(parse, prefix, p1cock) {
 	
 	parse[prefix + "weapon"]    = function() { return ent.WeaponDesc(); }
 	parse[prefix + "armor"]     = function() { return ent.ArmorDesc(); }
+	parse[prefix + "botarmor"]  = function() { return ent.LowerArmorDesc(); }
 	return parse;
 }
 

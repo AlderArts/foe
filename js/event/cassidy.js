@@ -19,6 +19,7 @@ function Cassidy(storage) {
 	
 	this.FirstVag().capacity.base = 10;
 	this.FirstVag().virgin = false;
+	this.Butt().capacity.base = 20;
 	this.Butt().virgin = false;
 	
 	this.flags["Met"]   = Cassidy.Met.NotMet;
@@ -64,7 +65,8 @@ Cassidy.Talk = {
 	Loner       : 4,
 	MShop       : 8, //One off manage the shop event
 	Forge       : 16,
-	SexIndoor   : 32
+	SexIndoor   : 32,
+	Spar        : 64
 };
 
 Cassidy.Order = {
@@ -235,7 +237,7 @@ Scenes.Cassidy.ShopDesc = function() {
 		Text.Add("<i>We shall live - or die - as one.</i>", parse);
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
-		Text.Add("war hammer, a truly imposing weapon almost as long as you’re tall - something tells you that this weapon wasn’t designed for someone your size. A slightly rounded flat on one end of the tempered steel head for crushing, a curved spike on the other for gouging - one can only wonder at the being that would wield this to the full extent of its potential.", parse);
+		Text.Add("warhammer, a truly imposing weapon almost as long as you’re tall - something tells you that this weapon wasn’t designed for someone your size. A slightly rounded flat on one end of the tempered steel head for crushing, a curved spike on the other for gouging - one can only wonder at the being that would wield this to the full extent of its potential.", parse);
 		Text.NL();
 		Text.Add("A few words have been etched into a plaque attached to its rack:", parse);
 		Text.NL();
@@ -1053,10 +1055,16 @@ Scenes.Cassidy.HeadInside = function() {
 	
 	world.TimeStep({minute: 15});
 	
-	Scenes.Cassidy.InsidePrompt();
+	if(cassidy.KnowGender() && cassidy.Relation() >= 30 && !(cassidy.flags["Talk"] & Cassidy.Talk.Spar)) {
+		Gui.NextPrompt(function() {
+			Scenes.Cassidy.SparFirst();
+		});
+	}
+	else {
+		Scenes.Cassidy.InsidePrompt();
+	}
 }
 
-//TODO PLACEHOLDER
 Scenes.Cassidy.InsidePrompt = function() {
 	var parse = {
 		playername : player.name
@@ -1065,7 +1073,7 @@ Scenes.Cassidy.InsidePrompt = function() {
 	
 	var options = new Array();
 	options.push({ nameStr : "Talk",
-		tooltip : "",
+		tooltip : "Have a chat.",
 		func : function() {
 			Text.Clear();
 			Text.Add("<i>“Nothing better than spending the evening chatting away with a friend,”</i> Cassidy says, smiling. <i>“Go on, you pick the topic.”</i>", parse);
@@ -1083,19 +1091,41 @@ Scenes.Cassidy.InsidePrompt = function() {
 			tooltip : "Ask Cass if she’d like to head a little further in back and have some fun.",
 			func : Scenes.Cassidy.Sex.Indoors, enabled : true
 		});
+		if(cassidy.flags["Talk"] & Cassidy.Talk.Spar) {
+			options.push({ nameStr : "Spar",
+				tooltip : "Test your strength against Cassidy’s.",
+				func : function() {
+					Text.Clear();
+					Text.Add("<i>“Oh, you wanna fight, ace?”</i> Cassidy instantly perks up at the suggestion. She sure does enjoy fighting, doesn’t she? ", parse);
+					if(cassidy.Relation() >= 40)
+						Text.Add("You even suspect the violence turns her on… ", parse);
+					Text.Add("<i>“Got no reason to say no. Let’s head out to the yard and do it!”</i>", parse);
+					Text.NL();
+					Text.Add("It doesn’t take long for Cass to grab her warhammer and lead you out to the back yard. <i>“All right, I’ve been practicing really hard myself! ", parse);
+					
+					var scenes = new EncounterTable();
+					scenes.AddEnc(function() {
+						Text.Add("Don’t hold back, because I won’t!", parse);
+					}, 1.0, function() { return true; });
+					scenes.AddEnc(function() {
+						Text.Add("Go ahead, ace, knock me out!", parse);
+					}, 1.0, function() { return true; });
+					scenes.AddEnc(function() {
+						Text.Add("Come on, show me what you’ve got!", parse);
+					}, 1.0, function() { return true; });
+					scenes.AddEnc(function() {
+						Text.Add("Don’t pull any punches, I can take them!", parse);
+					}, 1.0, function() { return true; });
+					scenes.Get();
+					
+					Text.Add("”</i>", parse);
+					Text.Flush();
+					
+					Scenes.Cassidy.Spar();
+				}, enabled : true
+			});
+		}
 	}
-	/* TODO
-	options.push({ nameStr : "name",
-		tooltip : "",
-		func : function() {
-			Text.Clear();
-			Text.Add("", parse);
-			Text.NL();
-			Text.Add("", parse);
-			Text.Flush();
-		}, enabled : true
-	});
-	 */
 	Gui.SetButtonsFromList(options, true, function() {
 		Text.Clear();
 		Text.Add("It’s been nice catching up with [himher], but you don’t really have plenty of time to burn faffing around this evening. Sorry about that.", parse);
@@ -1851,7 +1881,7 @@ Scenes.Cassidy.ManagingShopAccept = function() {
 	Text.Add("<i>Oak Spear - 425 coins</i><br/>", parse);
 	Text.Add("<i>Halberd - 575 coins</i><br/>", parse);
 	Text.Add("<i>Heavy Flail - 600 coins</i><br/>", parse);
-	Text.Add("<i>War Hammer - 600 coins</i>", parse);
+	Text.Add("<i>Warhammer - 600 coins</i>", parse);
 	Text.NL();
 	Text.Add("<i>“It’s not that long or hard, so you oughta remember it well,”</i> Cassidy suggests.", parse);
 	Text.NL();
@@ -2610,3 +2640,175 @@ Scenes.Cassidy.BigReveal = function() {
 		});
 	});
 }
+
+
+//Trigger this at 30 or more rel upon entering the back room and having saved her from her drunkenness.
+Scenes.Cassidy.SparFirst = function() {
+	var parse = {
+		
+	};
+	
+	cassidy.flags["Talk"] |= Cassidy.Talk.Spar;
+	
+	Text.Clear();
+	Text.Add("As Cassidy and you settle down at the table, she gives you a glance.", parse);
+	Text.NL();
+	Text.Add("Yes? It’s clear she wants to say something - could she spit it out? There’s no need to be shy.", parse);
+	Text.NL();
+	Text.Add("<i>“Nothing gets past you, does it, ace? Fine then, I’ll get to the point: you wanna have a bout sometime, ace?”</i>", parse);
+	Text.NL();
+	Text.Add("A bout, huh. What does she mean, exactly?", parse);
+	Text.NL();
+	Text.Add("<i>“You know. A fight. A friendly match. A bit of rough and tumble. You see, I kind of get the feeling that I’m going to be making quite a bit of stuff for you in the future, that you’re going to be a pretty good customer of mine.”</i>", parse);
+	Text.NL();
+	Text.Add("Good vibes, huh?", parse);
+	Text.NL();
+	Text.Add("Cass grins and drums her claws on the table. <i>“Yep. You seem to be getting yourself in plenty of danger, ace. If I’m going to be doing plenty of custom jobs for you, I oughta take your measure. Get a feel for your strength and style, right?”</i>", parse);
+	Text.NL();
+	Text.Add("Riight. Is she sure that this isn’t some kind of convoluted excuse to spar with you?", parse);
+	Text.NL();
+	Text.Add("<i>“Gee, ace. Me?”</i> Cassidy feigns shock and hurt. <i>“If I just wanted to have a bout with you, I’d say so directly.”</i>", parse);
+	Text.NL();
+	Text.Add("Like she’s doing right now.", parse);
+	Text.NL();
+	Text.Add("<i>“Oh, don’t play word salad with me, ace. I’m not <b>that</b> dumb. But yeah, end of the day? I want to know how you work, so I can better tailor your stuff to your style.”</i>", parse);
+	Text.NL();
+	Text.Add("All right, then. How does she want to do this? Certainly, you’re not going to be crossing swords in her dining room, right?", parse);
+	Text.NL();
+	Text.Add("Cass thumbs behind her shoulder. <i>“In the yard out back. It’s not too large, but it’s space enough for when big bro and I wanted to horse around a bit. Don’t worry about the neighbours - those around me mostly keep houses elsewhere, so we won’t bother anyone.</i>", parse);
+	Text.NL();
+	Text.Add("<i>“We don’t have to do it now; we can always put it off till later, when you’re ready. But if you want to get to it right now, I wouldn’t say no to that.”</i> She winks at you and grins, thumping a fist on the table. <i>“So… what do you say? I will admit, it <b>will</b> take up most of the night, so if you want to do anything else, we can move it to another date.”</i>", parse);
+	Text.Flush();
+	
+	var options = [];
+	options.push({nameStr : "Yeah",
+		tooltip : Text.Parse("Sure, a bit of sparring wouldn’t hurt.", parse),
+		enabled : true,
+		func : function() {
+			Text.Clear();
+			Text.Add("Sure, why not? To be honest, you’re also a bit curious about how well the salamander smith can fight.", parse);
+			Text.NL();
+			Text.Add("<i>“Not as well as your kind, I guess. But you’ve got to know something about how things are used in order to account for their making. Give me a moment to get my stuff, and I’ll lead you out back.”</i>", parse);
+			Text.NL();
+			Text.Add("With that, Cass heads into her room, and returns shortly with a massive war hammer that’s almost as big as herself. With her arms, it’s a wonder how she manages to lift the thing, let alone wield it effectively, then you remember that she’s wiry, not thin.", parse);
+			Text.NL();
+			Text.Add("<i>“Come on. Let’s head out back.”</i>", parse);
+			Text.NL();
+			Text.Add("Cassidy leads you through the storeroom, then through a door on the other side. Like she said, it opens out into the back yard - pretty much a patch of grass with a single apple tree growing out back. The salamander smith takes a few moments to test the hammer’s weight, then gives you one of her trademark shit-eating grins.", parse);
+			Text.NL();
+			Text.Add("<i>“Okay, ace. Ready or not, here I come!”</i>", parse);
+			Text.NL();
+			Text.Add("<b>It’s a fight!</b>", parse);
+			Text.Flush();
+			
+			Scenes.Cassidy.Spar();
+		}
+	});
+	options.push({nameStr : "Nah",
+		tooltip : Text.Parse("Not right now. You came here to relax, not to get worked up.", parse),
+		enabled : true,
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>“Yeah, I get it, no worries. Like I said, it’d probably have taken up the rest of the evening anyway, and you probably wanted to do other things.”</i>", parse);
+			Text.NL();
+			Text.Add("You assure her that you’ll get to it some other time. To be honest, you’re a bit curious yourself.", parse);
+			Text.NL();
+			Text.Add("<i>“All right, ace. It’s a date, then!”</i> Cassidy chuckles. <i>“Now, let’s get started with the night, shall we?”</i>", parse);
+			Text.Flush();
+			
+			Scenes.Cassidy.InsidePrompt();
+		}
+	});
+	Gui.SetButtonsFromList(options, false, null);
+}
+
+
+
+function CassidySpar() {
+	Entity.call(this);
+	this.ID = "cassidyspar";
+	
+	// Character stats
+	this.name = "Cassidy";
+	
+	this.avatar.combat = Images.cassidy;
+	
+	this.maxHp.base        = 100;
+	this.maxSp.base        = 10;
+	this.maxLust.base      = 50; this.maxLust.growth      = 6;
+	// Main stats
+	this.strength.base     = 26; this.strength.growth     = 1.7;
+	this.stamina.base      = 24; this.stamina.growth      = 1.7;
+	this.dexterity.base    = 19; this.dexterity.growth    = 1.4;
+	this.intelligence.base = 18; this.intelligence.growth = 1.4;
+	this.spirit.base       = 13; this.spirit.growth       = 1.1;
+	this.libido.base       = 17; this.libido.growth       = 1.1;
+	this.charisma.base     = 14; this.charisma.growth     = 1.1;
+	
+	this.level    = 8;
+	this.sexlevel = 3;
+	
+	
+	this.body.DefFemale();
+	this.FirstBreastRow().size.base = 2;
+	this.body.SetRace(Race.Salamander);
+	
+	this.FirstVag().capacity.base = 10;
+	this.FirstVag().virgin = false;
+	this.Butt().capacity.base = 20;
+	this.Butt().virgin = false;
+	
+	this.weaponSlot   = Items.Weapons.WarHammer;
+	this.topArmorSlot = Items.Armor.BronzeChest;
+	this.botArmorSlot = Items.Armor.BronzeLeggings;
+	
+	this.Equip();
+	this.SetLevelBonus();
+	this.RestFull();
+}
+CassidySpar.prototype = new Entity();
+CassidySpar.prototype.constructor = CassidySpar;
+
+CassidySpar.prototype.Act = function(encounter, activeChar) {
+	// TODO: Very TEMP
+	Text.Add(this.name + " acts! Rawr!");
+	Text.NL();
+	Text.Flush();
+	
+	// Pick a random target
+	var t = this.GetSingleTarget(encounter, activeChar);
+
+	//TODO Abilities
+	
+	var choice = Math.random();
+	if(choice < 0.6)
+		Abilities.Attack.Use(encounter, this, t);
+	else if(choice < 0.8 && Abilities.Physical.Bash.enabledCondition(encounter, this))
+		Abilities.Physical.Bash.Use(encounter, this, t);
+	else
+		Abilities.Seduction.Tease.Use(encounter, this, t);
+}
+
+
+// SET UP ENCOUNTER SPAR
+Scenes.Cassidy.Spar = function() {
+	var cass = new CassidySpar();
+	
+	party.SaveActiveParty();
+	party.ClearActiveParty();
+	party.SwitchIn(player);
+
+	var enemy = new Party();
+	enemy.AddMember(cass);
+	var enc = new Encounter(enemy);
+
+	enc.canRun = false;
+
+	enc.onLoss    = Scenes.Cassidy.SparSex.Loss;
+	enc.onVictory = Scenes.Cassidy.SparSex.Win;
+
+	Gui.NextPrompt(function() {
+		enc.Start();
+	});
+}
+
