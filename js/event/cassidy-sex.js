@@ -1509,7 +1509,7 @@ Scenes.Cassidy.SparSex.Loss = function() {
 	Text.Add("<i>“What are you doing? Get up! Get up!”</i>", parse);
 	Text.NL();
 
-	player.relation.IncreaseStat(50, 1);
+	cassidy.relation.IncreaseStat(50, 1);
 
 	if((cassidy.flags["Talk"] & Cassidy.Talk.SexIndoor) && (Math.random() < 0.5)) {
 		Text.Add("Ouch. You’re doing your best, but evidently your best isn’t enough for your body to obey you. The most you manage is a soft groan, accompanied by a vague flop like a rather pathetic fish out of water.", parse);
