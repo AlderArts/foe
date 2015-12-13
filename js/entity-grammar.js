@@ -107,12 +107,12 @@ Entity.prototype.ParserPronouns = function(parse, prefix, forcegender) {
 	return parse;
 }
 
-Entity.prototype.ParserTags = function(parse, prefix) {
+Entity.prototype.ParserTags = function(parse, prefix, p1cock) {
 	var ent = this;
 	parse  = parse  || {};
 	prefix = prefix || "";
 	
-	var p1cock = ent.BiggestCock(null, true);
+	p1cock = p1cock || ent.BiggestCock(null, true);
 	
 	parse[prefix + "cocks"]     = function() { return ent.MultiCockDesc(); }
 	parse[prefix + "cock"]      = function() { return p1cock.Short(); }

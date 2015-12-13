@@ -17,6 +17,7 @@ function Cassidy(storage) {
 	this.FirstBreastRow().size.base = 2;
 	this.body.SetRace(Race.Salamander);
 	
+	this.FirstVag().capacity.base = 10;
 	this.FirstVag().virgin = false;
 	this.Butt().virgin = false;
 	
@@ -62,7 +63,8 @@ Cassidy.Talk = {
 	Family      : 2,
 	Loner       : 4,
 	MShop       : 8, //One off manage the shop event
-	Forge       : 16
+	Forge       : 16,
+	SexIndoor   : 32
 };
 
 Cassidy.Order = {
@@ -675,6 +677,7 @@ Scenes.Cassidy.TalkPrompt = function() {
 }
 
 //[Forge] - Ask Cass about firing up that forge and making a special order for you.
+//TODO
 Scenes.Cassidy.ForgeFirst = function() {
 	var parse = {
 		
@@ -1069,12 +1072,18 @@ Scenes.Cassidy.InsidePrompt = function() {
 			Text.Flush();
 			
 			Scenes.Cassidy.InsideTalkPrompt();
-		}, enabled : true
+		}, enabled : world.time.hour < 20
 	});
 	options.push({ nameStr : "Meal",
 		tooltip : "Just sit back and have Cass cook up something for the two of you.",
 		func : Scenes.Cassidy.InsideMeal, enabled : true
 	});
+	if(cassidy.KnowGender()) {
+		options.push({ nameStr : "Sex",
+			tooltip : "Ask Cass if she’d like to head a little further in back and have some fun.",
+			func : Scenes.Cassidy.Sex.Indoors, enabled : true
+		});
+	}
 	/* TODO
 	options.push({ nameStr : "name",
 		tooltip : "",
@@ -1324,6 +1333,20 @@ Scenes.Cassidy.InsideTalkPrompt = function() {
 		playername : player.name
 	};
 	parse = cassidy.ParserPronouns(parse);
+	
+	// Ensure that you can't go to the next day by talking all day
+	if(world.time.hour >= 20) {
+		Gui.NextPrompt(function() {
+			Text.Clear();
+			parse["girl"] = cassidy.mfPronoun("guy", "girl");
+			Text.Add("<i>“Look ace, it's getting a bit late.”</i> Cassidy yawns. <i>“You sure know how to work a [girl]'s mouth.”</i>", parse);
+			Text.NL();
+			Text.Add("Right, enough talking.", parse);
+			Text.Flush();
+			Scenes.Cassidy.InsidePrompt();
+		});
+		return;
+	}
 	
 	//[Smithing][Salamanders][Family][Loner][Tomboy]
 	var options = new Array();
