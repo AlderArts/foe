@@ -1265,7 +1265,7 @@ Scenes.Cassidy.SparSex.GetBlown = function() {
 	var fem = cassidy.Feminized();
 	
 	Text.Clear();
-	Text.Add("<i>“Heh,” Cassidy says, dropping to her knees on the soft grass and resting her head against your hips. A noise not too unlike a low, gentle hiss sounds in the back of her throat as she rubs a cheek against you. <i>“Guessed you’d ask for that sooner or later.”</i>", parse);
+	Text.Add("<i>“Heh,”</i> Cassidy says, dropping to her knees on the soft grass and resting her head against your hips. A noise not too unlike a low, gentle hiss sounds in the back of her throat as she rubs a cheek against you. <i>“Guessed you’d ask for that sooner or later.”</i>", parse);
 	Text.NL();
 	Text.Add("Without further ado, Cassidy flicks her forked tongue out of her mouth and begins licking your [cockTip], a heated ribbon enthusiastically lashing against your man-meat. Already half-hard, your [cocks] acknowledge[notS] that this is by far better than getting yourself stiff all by your lonesome, and you lean back to let her work her magic. Before long, she’s got you all hard and heavy.", parse);
 	Text.NL();
