@@ -1850,6 +1850,7 @@ Scenes.Cassidy.SparSex.Tribbing = function() {
 	
 	Text.Add("With such exquisite stimulation, her entire body heaving against yours with each of her powerful thrusts, you’re finally broken and give in to your body’s demands. Juices gush forth from your [vag] as a slutty moan escapes your lips, your body pressing against Cassidy’s with wanton lust as your netherlips kiss a final time.", parse);
 	if(player.FirstCock()) {
+		Text.NL();
 		Text.Add("Following [itsTheir] sister’s lead, your [cocks] explode[notS] vigorously, spurting your pent-up load all over your pressed bodies. It fountains up and splatters onto Cassidy, then runs off her skin and scales to land onto you below. ", parse);
 		if(cum > 9) {
 			Text.Add("The torrential stream of spunk that erupts from your shaft is seemingly never-ending, managing to surprise even you as your body works on automatic, blasting away like a raging river.", parse);
