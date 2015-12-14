@@ -153,7 +153,7 @@ Cavalcade.prototype.EvaluateHand = function(hand) {
 			suits.push({num: 1, suit: cardSuit});
 		}
 	}
-	counts.sort(Cavalcade.CardCountSorter);
+	suits.sort(Cavalcade.CardCountSorter);
 	
 	// Add stag to num
 	if(hasStag) {
