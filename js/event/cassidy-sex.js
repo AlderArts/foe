@@ -1541,7 +1541,7 @@ Scenes.Cassidy.SparSex.Loss = function() {
 		Text.Add("<i>“Fuck.”</i> Still straddling you, Cass fumbles with her belt and pulls it off, then rises ever so slightly to get rid of her shorts and panties, her movements growing ever so more erratic and desperate. <i>“C’mon, champ. You can’t just collapse in the heat of the moment and leave a girl hanging like that, all empty and unfulfilled. I know you’re capable of more than that.”</i>", parse);
 		Text.NL();
 		var armor = "";
-		if(player.Armor()) armor += "[armor]";
+		if(player.Armor() || !player.LowerArmor()) armor += "[armor]";
 		if(player.Armor() && player.LowerArmor()) armor += " and ";
 		if(player.LowerArmor()) armor += "[botarmor]";
 		parse["arm"] = Text.Parse(armor, parse);
