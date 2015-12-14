@@ -2780,6 +2780,7 @@ CassidySpar.prototype = new Entity();
 CassidySpar.prototype.constructor = CassidySpar;
 
 CassidySpar.prototype.Act = function(encounter, activeChar) {
+	var that = this;
 	// TODO: Very TEMP
 	Text.Add(this.name + " acts! Rawr!");
 	Text.NL();
@@ -2792,23 +2793,23 @@ CassidySpar.prototype.Act = function(encounter, activeChar) {
 	
 	var scenes = new EncounterTable();
 	scenes.AddEnc(function() {
-		Abilities.Attack.Use(encounter, this, t);
+		Abilities.Attack.Use(encounter, that, t);
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
-		Abilities.Physical.Bash.Use(encounter, this, t);
-	}, 1.0, function() { return Abilities.Physical.Bash.enabledCondition(encounter, this); });
+		Abilities.Physical.Bash.Use(encounter, that, t);
+	}, 1.0, function() { return Abilities.Physical.Bash.enabledCondition(encounter, that); });
 	scenes.AddEnc(function() {
-		Abilities.Physical.DAttack.Use(encounter, this, t);
-	}, 1.0, function() { return Abilities.Physical.DAttack.enabledCondition(encounter, this); });
+		Abilities.Physical.DAttack.Use(encounter, that, t);
+	}, 1.0, function() { return Abilities.Physical.DAttack.enabledCondition(encounter, that); });
 	scenes.AddEnc(function() {
-		Abilities.EnemySkill.Cassidy.TailSlap.Use(encounter, this, t);
-	}, 1.0, function() { return Abilities.EnemySkill.Cassidy.TailSlap.enabledCondition(encounter, this); });
+		Abilities.EnemySkill.Cassidy.TailSlap.Use(encounter, that, t);
+	}, 1.0, function() { return Abilities.EnemySkill.Cassidy.TailSlap.enabledCondition(encounter, that); });
 	scenes.AddEnc(function() {
-		Abilities.EnemySkill.Cassidy.Smoke.Use(encounter, this, t);
-	}, 1.0, function() { return Abilities.EnemySkill.Cassidy.Smoke.enabledCondition(encounter, this); });
+		Abilities.EnemySkill.Cassidy.Smoke.Use(encounter, that, t);
+	}, 1.0, function() { return Abilities.EnemySkill.Cassidy.Smoke.enabledCondition(encounter, that); });
 	
 	scenes.AddEnc(function() {
-		Abilities.Seduction.Tease.Use(encounter, this, t);
+		Abilities.Seduction.Tease.Use(encounter, that, t);
 	}, 1.0, function() { return true; });
 	scenes.Get();
 }
