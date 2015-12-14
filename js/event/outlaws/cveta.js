@@ -2403,6 +2403,8 @@ Scenes.Cveta.IntimateNuzzle = function() {
 	Scenes.Cveta.Prompt();
 	
 	cveta.relation.IncreaseStat(100, 2);
+	
+	Gui.NextPrompt();
 }
 
 Scenes.Cveta.IntimateCuddle = function() {
@@ -2455,6 +2457,8 @@ Scenes.Cveta.IntimateCuddle = function() {
 	Scenes.Cveta.Prompt();
 	
 	cveta.relation.IncreaseStat(100, 2);
+	
+	Gui.NextPrompt();
 }
 
 Scenes.Cveta.IntimateGrope = function() {
