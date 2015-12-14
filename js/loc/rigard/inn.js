@@ -58,6 +58,11 @@ world.loc.Rigard.Inn.common.links.push(new Link(
 	}
 ));
 
+world.loc.Rigard.Inn.common.endDescription = function() {
+	if(Scenes.Vaughn.Tasks.Poisoning.InnAvailable()) {
+		Scenes.Vaughn.Tasks.Poisoning.ArrivalAtInn(true);
+	}
+}
 
 
 // Twins' room
