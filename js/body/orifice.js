@@ -6,7 +6,7 @@ Capacity = {
 };
 
 function Orifice() {
-	this.capacity   = new Stat(4);
+	this.capacity   = new Stat(6);
 	this.minStretch = new Stat(1);
 	this.stretch    = new Stat(1);
 	this.womb       = new Womb();
