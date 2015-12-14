@@ -876,6 +876,8 @@ Scenes.Cassidy.SparSex.Win = function() {
 	
 	Text.Clear();
 	
+	cassidy.flags["SparL"]++;
+	
 	player.AddExp(10);
 	
 	Text.Add("With a final clash, you send Cassidy reeling. She staggers a bit, then crouches on the ground, using the handle of her hammer for support.", parse);

@@ -24,7 +24,7 @@ function Cassidy(storage) {
 	
 	this.flags["Met"]   = Cassidy.Met.NotMet;
 	this.flags["Talk"]  = 0; //Bitmask
-	
+	this.flags["SparL"] = 0; //Times lost
 	this.flags["Order"] = Cassidy.Order.None;
 	this.orderTimer = new Time();
 	
@@ -2733,21 +2733,31 @@ function CassidySpar() {
 	
 	this.avatar.combat = Images.cassidy;
 	
-	this.maxHp.base        = 100;
-	this.maxSp.base        = 10;
+	this.maxHp.base        = 300; this.maxHp.growth       = 15;
+	this.maxSp.base        = 90; this.maxSp.growth        = 8;
 	this.maxLust.base      = 50; this.maxLust.growth      = 6;
 	// Main stats
-	this.strength.base     = 26; this.strength.growth     = 1.7;
-	this.stamina.base      = 24; this.stamina.growth      = 1.7;
-	this.dexterity.base    = 19; this.dexterity.growth    = 1.4;
-	this.intelligence.base = 18; this.intelligence.growth = 1.4;
-	this.spirit.base       = 13; this.spirit.growth       = 1.1;
-	this.libido.base       = 17; this.libido.growth       = 1.1;
-	this.charisma.base     = 14; this.charisma.growth     = 1.1;
+	this.strength.base     = 26; this.strength.growth     = 2;
+	this.stamina.base      = 24; this.stamina.growth      = 2;
+	this.dexterity.base    = 19; this.dexterity.growth    = 1.6;
+	this.intelligence.base = 18; this.intelligence.growth = 1.6;
+	this.spirit.base       = 13; this.spirit.growth       = 1.2;
+	this.libido.base       = 17; this.libido.growth       = 1.2;
+	this.charisma.base     = 14; this.charisma.growth     = 1.2;
 	
-	this.level    = 8;
+	var levelLimit = 6 + cassidy.flags["SparL"] * 2;
+	// In act 1, max out at level 14
+	if(!Scenes.Global.PortalsOpen())
+		levelLimit = Math.min(levelLimit, 14);
+	
+	var level = Math.min(levelLimit, player.level);
+	
+	this.level    = level;
 	this.sexlevel = 3;
 	
+	this.elementDef.dmg[Element.mFire]  = 1;
+	this.elementDef.dmg[Element.mIce]   = -0.5;
+	this.elementDef.dmg[Element.mWater] = -0.5;
 	
 	this.body.DefFemale();
 	this.FirstBreastRow().size.base = 2;
@@ -2780,13 +2790,27 @@ CassidySpar.prototype.Act = function(encounter, activeChar) {
 
 	//TODO Abilities
 	
-	var choice = Math.random();
-	if(choice < 0.6)
+	var scenes = new EncounterTable();
+	scenes.AddEnc(function() {
 		Abilities.Attack.Use(encounter, this, t);
-	else if(choice < 0.8 && Abilities.Physical.Bash.enabledCondition(encounter, this))
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
 		Abilities.Physical.Bash.Use(encounter, this, t);
-	else
+	}, 1.0, function() { return Abilities.Physical.Bash.enabledCondition(encounter, this); });
+	scenes.AddEnc(function() {
+		Abilities.Physical.DAttack.Use(encounter, this, t);
+	}, 1.0, function() { return Abilities.Physical.DAttack.enabledCondition(encounter, this); });
+	scenes.AddEnc(function() {
+		Abilities.EnemySkill.Cassidy.TailSlap.Use(encounter, this, t);
+	}, 1.0, function() { return Abilities.EnemySkill.Cassidy.TailSlap.enabledCondition(encounter, this); });
+	scenes.AddEnc(function() {
+		Abilities.EnemySkill.Cassidy.Smoke.Use(encounter, this, t);
+	}, 1.0, function() { return Abilities.EnemySkill.Cassidy.Smoke.enabledCondition(encounter, this); });
+	
+	scenes.AddEnc(function() {
 		Abilities.Seduction.Tease.Use(encounter, this, t);
+	}, 1.0, function() { return true; });
+	scenes.Get();
 }
 
 

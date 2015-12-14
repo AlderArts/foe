@@ -448,3 +448,73 @@ Abilities.EnemySkill.Corishev.Punish.castTree.push(AbilityNode.Template.Physical
 		}
 	}]
 }));
+
+
+
+// Cassidy Spar
+Abilities.EnemySkill.Cassidy = {};
+
+Abilities.EnemySkill.Cassidy.TailSlap = new Ability("CassTailSlap");
+Abilities.EnemySkill.Cassidy.TailSlap.cost = { hp: null, sp: 10, lp: null};
+Abilities.EnemySkill.Cassidy.TailSlap.Short = function() { return "CassTailSlap"; }
+Abilities.EnemySkill.Cassidy.TailSlap.cooldown = 3;
+Abilities.EnemySkill.Cassidy.TailSlap.castTree.push(AbilityNode.Template.Physical({
+	damageType: {pBlunt: 0.5, mFire: 0.5},
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("<i>“Oh hey, ace. You really like swinging that thing around, don’t you? Don’t I get a go, too?”</i>", parse);
+		Text.NL();
+		Text.Add("Smiling cheerfully, Cassidy rushes up at you with her hammer raised for a swing. At the last moment, she drops the feint and half-turns, lashing at you with her prehensile, burning tail!", parse);
+		Text.NL();
+	}],
+	onMiss: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(null, target);
+		Text.Add("You narrowly manage to dodge Cassidy’s tail as it sails through the air. Despite the setback, she takes a step back and to the side, easily recovering from the miss and ready to come back at you!", parse);
+		Text.NL();
+	}],
+	onDamage: [function(ability, encounter, caster, target, dmg) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("The weight of Cassidy’s flaming tail smacks you silly! You take " + Text.BoldColor(-dmg, "#800000") + " damage!", parse);
+		Text.NL();
+	}, AbilityNode.Template.Cancel()],
+	onAbsorb: [Abilities.Physical._onAbsorb],
+	onHit: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		if(Status.Numb(target, { hit : 0.2, turns : 1, turnsR : 1, proc : 0.25 })) {
+			Text.Add("[tName] [thas] been afflicted with numb!", parse);
+			Text.NL();
+		}
+	}]
+}));
+
+
+Abilities.EnemySkill.Cassidy.Smoke = new Ability("CassSmoke");
+Abilities.EnemySkill.Cassidy.Smoke.cost = { hp: null, sp: 20, lp: null};
+Abilities.EnemySkill.Cassidy.Smoke.Short = function() { return "CassSmoke"; }
+Abilities.EnemySkill.Cassidy.Smoke.cooldown = 4;
+Abilities.EnemySkill.Cassidy.Smoke.castTree.push(AbilityNode.Template.Physical({
+	damageType: {mFire: 1},
+	atkMod: 0.5,
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("Breathing deeply, Cassidy coughs up clouds of thick, hot smoke, interspersed with cinders. They wind their way in your direction, threatening to engulf you!", parse);
+		Text.NL();
+	}],
+	onMiss: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(null, target);
+		Text.Add("The cloud of smoke and cinders envelopes you, but you push the worst of it away before you’re overwhelmed.", parse);
+		Text.NL();
+	}],
+	onDamage: [function(ability, encounter, caster, target, dmg) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("The cinders burn you! You take " + Text.BoldColor(-dmg, "#800000") + " damage!", parse);
+		Text.NL();
+	}, AbilityNode.Template.Cancel()],
+	onAbsorb: [Abilities.Physical._onAbsorb],
+	onHit: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		if(Status.Blind(target, { hit : 0.5, str : 0.5, turns : 1, turnsR : 3 })) {
+			Text.Add("The thick smoke surrounds you. [tName] [tis] blinded!", parse);
+		}
+	}]
+}));
