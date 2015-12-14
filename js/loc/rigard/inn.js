@@ -58,13 +58,6 @@ world.loc.Rigard.Inn.common.links.push(new Link(
 	}
 ));
 
-world.loc.Rigard.Inn.common.endDescription = function() {
-	if(Scenes.Vaughn.Tasks.Poisoning.InnAvailable()) {
-		Scenes.Vaughn.Tasks.Poisoning.ArrivalAtInn(true);
-	}
-}
-
-
 // Twins' room
 world.SaveSpots["LB2"] = world.loc.Rigard.Inn.penthouse;
 world.loc.Rigard.Inn.penthouse.SaveSpot = "LB2";
@@ -122,6 +115,10 @@ world.loc.Rigard.Inn.common.endDescription = function() {
 		}
 	}
 	Text.Flush();
+	
+	if(Scenes.Vaughn.Tasks.Poisoning.InnAvailable()) {
+		Scenes.Vaughn.Tasks.Poisoning.ArrivalAtInn(true);
+	}
 }
 
 //TODO: Companion reactions?
