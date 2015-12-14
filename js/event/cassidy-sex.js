@@ -810,7 +810,7 @@ Scenes.Cassidy.Sex.Anal = function(cocksInAss) {
 		Text.Add("... um, magical essence", parse);
 	else
 		Text.Add(" sperm", parse);
-	Text.Add(" thoroughly flooding the salamander smith’s colon from the back, filling her increasingly heated body until you’ve got nothing left in you. The two of you just lie there for a moment", parse);
+	Text.Add(" thoroughly flooding the salamander smith’s ass, filling her increasingly heated body until you’ve got nothing left in you. The two of you just lie there for a moment", parse);
 	if(p1cock.Knot())
 		Text.Add(", tied together by your swollen knot", parse);
 	Text.Add(" - you swear you can <i>see</i> heat shimmering in a haze off Cassidy’s body - to savor the aftermath ", parse);
