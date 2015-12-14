@@ -1170,7 +1170,7 @@ Scenes.Vaughn.Tasks.Poisoning.InnAvailable = function() {
 	return true;
 }
 
-Scenes.Vaughn.Tasks.Poisoning.ArrivalAtInn = function(onWait) {
+Scenes.Vaughn.Tasks.Poisoning.ArrivalAtInn = function(onWait, oldLocation) {
 	var parse = {
 		Orvin : Rigard.LB.KnowsOrvin() ? "Orvin" : "the innkeeper"
 	};
@@ -1180,7 +1180,8 @@ Scenes.Vaughn.Tasks.Poisoning.ArrivalAtInn = function(onWait) {
 		Text.Add("There's a sudden influx of activity as you overhear a conversation between [Orvin] and his staff. Apparently, the Lady Heydrich and her entourage are about to arrive any minute. As if summoned, small groups of chattering nobles wearing fancy clothes start filtering in through the front doors, quickly greeted by the waiters and ushered into a back room. Meanwhile, the rest of the staff busy themselves with their tasks, working with feverish determination.", parse);
 	}
 	else {
-		Text.Add("Pushing open the door of the Lady’s Blessing, you find the the common room a whirl of activity. Not with patrons - the evening crowd is thin today - but with numerous staff, almost all of them darting between the kitchen and the stairs leading up to the rooms. The few patrons who are present are almost exclusively gathered about the gambling tables, keeping themselves out of the way of the busy waiters darting to and fro.", parse);
+		parse["start"] = (oldLocation == world.loc.Rigard.Plaza) ? "Pushing open the door of the Lady’s Blessing" : "Walking down the stairs";
+		Text.Add("[start], you find the the common room a whirl of activity. Not with patrons - the evening crowd is thin today - but with numerous staff, almost all of them darting between the kitchen and the stairs leading up to the rooms. The few patrons who are present are almost exclusively gathered about the gambling tables, keeping themselves out of the way of the busy waiters darting to and fro.", parse);
 	}
 	Text.NL();
 	Text.Add("An organized scene indeed… but teetering on the edge of confusion, an insidious current of chaos under the rushing surface. All it’d take is a push in the right direction to create a situation you could take advantage of… ", parse);

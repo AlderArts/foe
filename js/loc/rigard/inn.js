@@ -134,9 +134,9 @@ world.loc.Rigard.Inn.common.DrunkHandler = function() {
 	Gui.NextPrompt();
 }
 
-world.loc.Rigard.Inn.common.onEntry = function() {
+world.loc.Rigard.Inn.common.onEntry = function(preventClear, oldLocation) {
 	if(Scenes.Vaughn.Tasks.Poisoning.InnAvailable()) {
-		Scenes.Vaughn.Tasks.Poisoning.ArrivalAtInn();
+		Scenes.Vaughn.Tasks.Poisoning.ArrivalAtInn(false, oldLocation);
 		return;
 	}
 	
