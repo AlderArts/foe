@@ -476,8 +476,6 @@ Scenes.Fera.SexPrompt = function() {
 	if(player.LowerArmor()) armor += "[botarmor]";
 	parse["arm"] = Text.Parse(armor, parse);
 	
-	parse["toparmor"] = (player.Armor() && player.Armor().type != ItemSubtype.FullArmor) ? " and " + player.ArmorDesc() : "";
-
 	Text.Clear();
 	Text.Add("You decide you want to have some fun with Fera, and tell her you need some help trying something on.", parse);
 	Text.NL();
@@ -659,7 +657,7 @@ Scenes.Fera.SexPrompt = function() {
 					Text.NL();
 					
 					if(player.FirstCock().length.Get() > 25) {
-						Text.Add("Upon seeing your [cocks], the cute catgirl's eyes widen in shock. <i>“[itsTheyre] <b>huge</b>, [playername]! But I'll try my best...”</i> Fera says with a nervous smile. You give her a gentle push, telling her to assume a kneeling position in front of you. Clearly, she's intimidated by your sheer size.", parse);
+						Text.Add("Upon seeing your [cocks], the cute catgirl's eyes widen in shock. <i>“[ItsTheyre] <b>huge</b>, [playername]! But I'll try my best...”</i> Fera says with a nervous smile. You give her a gentle push, telling her to assume a kneeling position in front of you. Clearly, she's intimidated by your sheer size.", parse);
 						Text.NL();
 					}
 					
@@ -716,6 +714,7 @@ Scenes.Fera.SexPrompt = function() {
 					Text.Add("The cute catgirl seems to be enjoying herself as well, and you can see her blue eyes looking up at you as she licks your [vag] enthusiastically. Her fingers shift to play with your [clit], pinching it while she continues licking. Fera's tongue reaches deeper inside your [vag], its roughness pleasant against your walls.", parse);
 					Text.NL();
 					if(player.FirstBreastRow().size.Get() > 3) {
+						parse["toparmor"] = player.Armor() ? " through your " + player.ArmorDesc() : "";
 						Text.Add("You grab hold of your [breasts], and begin to fondle them roughly[toparmor]. Using your fingers to twist and stimulate your [nips], you enjoy the catgirl's tongue as it licks your inner walls. Moaning softly, you squeeze your [breasts] harder with each lick. The sensations of your body are so intense that you can't take much more.", parse);
 						Text.NL();
 					}
