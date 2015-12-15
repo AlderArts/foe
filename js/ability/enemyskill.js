@@ -502,7 +502,7 @@ Abilities.EnemySkill.Cassidy.Smoke.castTree.push(AbilityNode.Template.Physical({
 	}],
 	onMiss: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(null, target);
-		Text.Add("The cloud of smoke and cinders envelopes you, but you push the worst of it away before you’re overwhelmed.", parse);
+		Text.Add("The cloud of smoke and cinders envelops you, but you push the worst of it away before you’re overwhelmed.", parse);
 		Text.NL();
 	}],
 	onDamage: [function(ability, encounter, caster, target, dmg) {
