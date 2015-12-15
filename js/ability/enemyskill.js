@@ -527,7 +527,7 @@ Abilities.EnemySkill.Cassidy.Impact.cooldown = 5;
 Abilities.EnemySkill.Cassidy.Impact.castTime = 100;
 Abilities.EnemySkill.Cassidy.Impact.castTree.push(AbilityNode.Template.Physical({
 	damageType: {pBlunt:1, mFire: 1},
-	atkMod: 3,
+	atkMod: 2,
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("Cassidy winks at you. <i>“Oh, you’re pushing me, aren’tcha? It looks like I’ve got to use my <b>special attack</b>. I’ve spent quite a bit of time practicing… do hope you like it!”</i>", parse);
