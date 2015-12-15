@@ -968,6 +968,8 @@ Scenes.Cassidy.HeadInside = function() {
 	
 	scenes.Get();
 	
+	Text.NL();
+	
 	var first = cassidy.flags["Met"] < Cassidy.Met.WentBack;
 	
 	if(first) {
@@ -2807,10 +2809,18 @@ CassidySpar.prototype.Act = function(encounter, activeChar) {
 	scenes.AddEnc(function() {
 		Abilities.EnemySkill.Cassidy.Smoke.Use(encounter, that, t);
 	}, 1.0, function() { return Abilities.EnemySkill.Cassidy.Smoke.enabledCondition(encounter, that); });
-	
 	scenes.AddEnc(function() {
 		Abilities.Seduction.Tease.Use(encounter, that, t);
 	}, 1.0, function() { return true; });
+	
+	// Conditional abilities (only available at higher Cass levels)
+	
+	if(that.level >= 14) {
+		scenes.AddEnc(function() {
+			Abilities.EnemySkill.Cassidy.Impact.Use(encounter, that, t);
+		}, 1.0, function() { return Abilities.EnemySkill.Cassidy.Impact.enabledCondition(encounter, that); });
+	}
+	
 	scenes.Get();
 }
 

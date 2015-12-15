@@ -518,3 +518,50 @@ Abilities.EnemySkill.Cassidy.Smoke.castTree.push(AbilityNode.Template.Physical({
 		}
 	}]
 }));
+
+
+Abilities.EnemySkill.Cassidy.Impact = new Ability("CassImpact");
+Abilities.EnemySkill.Cassidy.Impact.cost = { hp: null, sp: 50, lp: null};
+Abilities.EnemySkill.Cassidy.Impact.Short = function() { return "CassImpact"; }
+Abilities.EnemySkill.Cassidy.Impact.cooldown = 5;
+Abilities.EnemySkill.Cassidy.Impact.castTime = 100;
+Abilities.EnemySkill.Cassidy.Impact.castTree.push(AbilityNode.Template.Physical({
+	damageType: {pBlunt:1, mFire: 1},
+	atkMod: 3,
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("Cassidy winks at you. <i>“Oh, you’re pushing me, aren’tcha? It looks like I’ve got to use my <b>special attack</b>. I’ve spent quite a bit of time practicing… do hope you like it!”</i>", parse);
+		Text.NL();
+		Text.Add("It looks like Cass is preparing something…", parse);
+		Text.NL();
+	}],
+	onMiss: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(null, target);
+		Text.Add("<i>“Heh. Here goes nothing!”</i> Cass roars as she brings her war hammer down, its head wreathed in flame. <i>“I pity you, ace - you’re gonna have a bad time!”</i>", parse);
+		Text.NL();
+		Text.Add("Imagine her surprise, then, when you duck under the arc of her hammer swing. It swooshes most impressively through empty air, creating a fiery arc; she wasn’t lying when she said you were going to have a bad time.", parse);
+		Text.NL();
+		Text.Add("<i>“H-hey! I spent so long winding that up!”</i>", parse);
+		Text.NL();
+		Text.Add("What? Did she think you were just going to stand there and take it?", parse);
+		Text.NL();
+		Text.Add("<i>“Oh, a smart one, aren’t you? Come at me, ace!”</i>", parse);
+		Text.NL();
+	}],
+	onDamage: [function(ability, encounter, caster, target, dmg) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("<i>“Heh. Here goes nothing!”</i> Cass roars as she brings her war hammer down, its head wreathed in flame. <i>“I pity you, ace - you’re gonna have a bad time!”</i>", parse);
+		Text.NL();
+		Text.Add("Gah! You reel as Cass’ hammer connects with the impact of a fiery meteor, shaking you to the bone and burning you badly! You take " + Text.BoldColor(-dmg, "#800000") + " damage!", parse);
+		Text.NL();
+	}, AbilityNode.Template.Cancel()],
+	onAbsorb: [Abilities.Physical._onAbsorb],
+	onHit: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		if(Status.Burn(target, { hit : 1, turns : 3, turnsR : 5, str : 1, dmg : 0.3 })) {
+			Text.NL();
+			Text.Add("[tName] [thas] been burned!", parse);
+		}
+	}]
+}));
+
