@@ -89,7 +89,7 @@ Abilities.EnemySkill.TSpray.castTree.push(AbilityNode.Template.Physical({
 Abilities.EnemySkill.TVenom = new Ability("T.Venom");
 Abilities.EnemySkill.TVenom.Short = function() { return "Sprays one target in poisonous goop."; }
 Abilities.EnemySkill.TVenom.cost = { hp: null, sp: 20, lp: null};
-Abilities.EnemySkill.TSpray.cooldown = 1;
+Abilities.EnemySkill.TVenom.cooldown = 1;
 Abilities.EnemySkill.TVenom.castTree.push(AbilityNode.Template.Physical({
 	hitMod: 0.8,
 	damageType: {lust: 0.3},
@@ -518,6 +518,17 @@ Abilities.EnemySkill.Cassidy.Smoke.castTree.push(AbilityNode.Template.Physical({
 		}
 	}]
 }));
+
+
+Abilities.EnemySkill.Cassidy.Reflex = new Ability("CassReflex");
+Abilities.EnemySkill.Cassidy.Reflex.cost = { hp: null, sp: 30, lp: null};
+Abilities.EnemySkill.Cassidy.Reflex.Short = function() { return "CassReflex"; }
+Abilities.EnemySkill.Cassidy.Reflex.cooldown = 5;
+//Push a regular attack
+Abilities.EnemySkill.Cassidy.Reflex.castTree.push(Abilities.Attack.castTree[0]);
+Abilities.EnemySkill.Cassidy.Reflex.castTree.push(function(ability, encounter, caster) {
+	caster.reflexFlag = true;
+});
 
 
 Abilities.EnemySkill.Cassidy.Impact = new Ability("CassImpact");

@@ -2790,8 +2790,6 @@ CassidySpar.prototype.Act = function(encounter, activeChar) {
 	
 	// Pick a random target
 	var t = this.GetSingleTarget(encounter, activeChar);
-
-	//TODO Abilities
 	
 	var scenes = new EncounterTable();
 	scenes.AddEnc(function() {
@@ -2815,6 +2813,15 @@ CassidySpar.prototype.Act = function(encounter, activeChar) {
 	
 	// Conditional abilities (only available at higher Cass levels)
 	
+	if(that.level >= 10) {
+	{
+		if(!that.reflexFlag) {
+			scenes.AddEnc(function() {
+				Abilities.EnemySkill.Cassidy.Reflex.Use(encounter, that, t);
+			}, 1.0, function() { return Abilities.EnemySkill.Cassidy.Reflex.enabledCondition(encounter, that); });
+		}
+	}
+	
 	if(that.level >= 14) {
 		scenes.AddEnc(function() {
 			Abilities.EnemySkill.Cassidy.Impact.Use(encounter, that, t);
@@ -2822,6 +2829,25 @@ CassidySpar.prototype.Act = function(encounter, activeChar) {
 	}
 	
 	scenes.Get();
+}
+
+CassidySpar.prototype.PhysDmgHP = function(encounter, caster, val) {
+	var parse = {};
+	
+	if(this.reflexFlag) {
+		Text.Add("Before your attack connects, Cassidy dances out of the way so quickly that the salamander smith is practically a blur. Your wasted attack goes wide, and she gives you one of her trademark shit-eating grins.", parse);
+		Text.NL();
+		Text.Add("Hey!", parse);
+		Text.NL();
+		Text.Add("<i>“What?”</i> Cassidy snickers. <i>“You thought I was just gonna stand there and take it like a champ?”</i>", parse);
+		Text.Flush();
+		
+		this.reflexFlag = false;
+		
+		return false;
+	}
+	else
+		return Entity.prototype.PhysDmgHP.call(this, encounter, caster, val);
 }
 
 
