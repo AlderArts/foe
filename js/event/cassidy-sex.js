@@ -518,7 +518,7 @@ Scenes.Cassidy.Sex.Pet = function() {
 			Text.NL();
 			Text.Add("<i>“Hey, I - oh. <b>Oh.</b>”</i> Compared to the air outside, Cass’ inner walls are as warm and toasty as they are as silken and smooth; she squirms and makes an urgent, needy little noise in the back of her throat as you slip a finger in, followed by another and begin a grand adventure of exploration in this tight, heated crevice. Bet she doesn’t manage to do this with as much vigor as you can; it’s one of the benefits of not having claws.", parse);
 			Text.NL();
-			Text.Add("A particularly energetic probe sends her squealing in a most un-tomboylike fashion, and she instinctively raises her pert little butt high into the air, lifting her tail in the process. Now that’s an invitation if you ever saw one - it’s a very tight fit, but you manage to slip your entire fist into her feminine flower. Scalding love-juices squelch loudly as you effect your entrance, and you can <i>feel</i> Cassidy shiver and shudder as you begin massaging her on the inside with one hand and on the outside with the other.", parse);
+			Text.Add("A particularly energetic probe sends her squealing in a most un-tomboy-like fashion, and she instinctively raises her pert little butt high into the air, lifting her tail in the process. Now that’s an invitation if you ever saw one - it’s a very tight fit, but you manage to slip your entire fist into her feminine flower. Scalding love-juices squelch loudly as you effect your entrance, and you can <i>feel</i> Cassidy shiver and shudder as you begin massaging her on the inside with one hand and on the outside with the other.", parse);
 			Text.NL();
 			Text.Add("Doesn’t that feel good? Isn’t she feeling all her stress melt away?", parse);
 			Text.NL();
@@ -540,7 +540,7 @@ Scenes.Cassidy.Sex.Pet = function() {
 			Text.NL();
 			Text.Add("It’s not nice? But she’s smiling, and golly, what a big soppy smile it is, even if it does tremble a little. C’mon, she can’t deny that she likes it.", parse);
 			Text.NL();
-			Text.Add("<I>“I am and I… I…”</i>", parse);
+			Text.Add("<i>“I am and I… I…”</i>", parse);
 			Text.NL();
 			Text.Add("She what? You brush your palm further up ever closer towards the base like pianist gracefully sweeping across a keyboard, then give it a good rub on the underside. Cass bites back a yelp - for a single appendage, her tail’s pretty strong, perhaps even moreso than an arm - but you manage to keep a grip on the salamander’s tail. It wriggles desperately in your grasp like some kind of giant worm or tentacle, and Cass makes an increasingly needy noise in the back of her throat as you slide a hand downwards to caress the slightly more leathery underside.", parse);
 			Text.NL();
@@ -563,7 +563,7 @@ Scenes.Cassidy.Sex.Pet = function() {
 	});
 	
 	Gui.Callstack.push(function() {
-		Text.Add("As you move to continue, though, you feel something sinuous and scaly wrap itself about your leg, quickly snaking across your [skin]. You have barely enough time to wonder what Cass is about to do before it coils tight about your lower body, pulling you off-balance and sending you landing heavily on the mattress. Cass is huffing and puffing from your earlier ministrations, but it’s clear that her stamina is far from spent.", parse);
+		Text.Add("As you move to continue, though, you feel something sinuous and scaly wrap itself about you, quickly snaking across your [skin]. You have barely enough time to wonder what Cass is about to do before it coils tight about your lower body, pulling you off-balance and sending you landing heavily on the mattress. Cass is huffing and puffing from your earlier ministrations, but it’s clear that her stamina is far from spent.", parse);
 		Text.NL();
 		Text.Add("<i>“Hey,”</i> she pants. <i>“Shouldn’t let you have all the fun, should I? It’s not fair to you.”</i>", parse);
 		Text.NL();
@@ -571,7 +571,7 @@ Scenes.Cassidy.Sex.Pet = function() {
 		Text.NL();
 		Text.Add("Cass aims a playful swipe at your head that you easily dodge. <i>“As they say, better to give than to receive, champ. Time to turn the tables!”</i>", parse);
 		Text.NL();
-		Text.Add("Another tug of her strong tail, and she has you on your back and is on you, pinning you to the mattress - or would be if she were heavy enough for it. Once she’s certain she’s got you subdued and prone on the sheets belly-up, she secures your shoulders with her hands and your [thigh] with her feet, then uncoils her tail from around you. You just go along with the game, feigning helplessness at your predicament, then almost double-take as Cassidy gives you an evil grin and gets down to work.", parse);
+		Text.Add("Another tug of her strong tail, and she has you on your back and is on you, pinning you to the mattress - or would be if she were heavy enough for it. Once she’s certain she’s got you subdued and prone on the sheets belly-up, she secures your shoulders with her hands and your [thigh] with her feet, then uncoils her appendage from around you. You just go along with the game, feigning helplessness at your predicament, then almost double-take as Cassidy gives you an evil grin and gets down to work.", parse);
 		Text.NL();
 		
 		var scenes = new EncounterTable();
@@ -587,10 +587,10 @@ Scenes.Cassidy.Sex.Pet = function() {
 			Text.NL();
 			Text.Add("<i>“And I bet you want more! Well, since you like it so much, why don’t you have some, then! Giving is better than receiving, blessed are the generous and all that!”</i>", parse);
 			Text.NL();
-			Text.Add("Taking her time to be slow and sensual, Cassidy wraps more and more of her burning tail about your [cock], gradually encasing the entirety of its length in coils of scaly tail. ", parse);
+			Text.Add("Taking her time to be slow and sensual, Cassidy wraps more and more of her burning tail about your [cock], gradually encasing the entirety of its length in coils of scaly cock-wrapper. ", parse);
 			if(player.NumCocks() > 1)
 				Text.Add("Once the first is fully enveloped, she moves onto the next, and so forth until all the tail length she can spare is wrapped up one way or the other. ", parse);
-			Text.Add("Tightly bound up in your salacious serpentine lover, your [cocks] begin[notS] to ache terribly with growing pressure, bulging and straining against their constraints. On her part, Cass greedily wrings out your [cocks] with her tail, the end ", parse);
+			Text.Add("Tightly bound up in your salacious serpentine lover, your [cocks] begin[notS] to ache terribly with growing pressure, bulging and straining against [itsTheir] constraints. On her part, Cass greedily wrings out your [cocks] with her tail, the end ", parse);
 			if(player.NumCocks() > 1)
 				Text.Add("darting from tip to exposed tip", parse);
 			else
@@ -601,14 +601,14 @@ Scenes.Cassidy.Sex.Pet = function() {
 			var cum = player.OrgasmCum();
 			
 			if(cum >= 4) {
-				Text.Add("Try as she might, though, the sheer amount of sperm you’ve got stored in you is simply too much to be contained. The constriction Cassidy’s tail is applying to your [cocks] only serves to ensure that your cum blasts forth in a pressurized jet, blasting against and painting her entire underside before raining down on you in a lewd drizzle. Cass just squeals and laughs as more and more jizz stains the sheets, lasting for a good while before her slick tail manages to shut off the flow.", parse);
+				Text.Add("Try as she might, though, the sheer amount of sperm you’ve got stored in you is simply too much to be contained. The constriction Cassidy’s tail is applying to your [cocks] only serves to ensure that your cum blasts forth in a pressurized jet, blasting against and painting her entire underside before raining down on you in a lewd drizzle. Cass just squeals and laughs as more and more jizz stains the sheets, lasting for a good while before her slick appendage manages to shut off the flow.", parse);
 				Text.NL();
 				Text.Add("<i>“Hah,”</i> she says, licking her lips clean of a few stray drops of sperm. <i>“Can’t deny that failure’s never quite been just as sweet.”</i>", parse);
 				Text.NL();
 				Text.Add("Exhausted, you barely manage to muster the strength to nod.", parse);
 			}
 			else {
-				Text.Add("Your urge to shoot off you load is strong, practically overpowering, but Cassidy’s tail is stronger. Muscles squeeze and contract in your lower belly, desperate to force your seed out, but Cass keeps a tight grip on your [cocks], effectively denying you your orgasm with a cheery smile. The two of you hold it there for a good five or ten minutes, the constricting coils of Cassidy’s tail holding you teetering on the brink, but unable to fall over or set foot on solid ground.", parse);
+				Text.Add("Your urge to shoot off you load is strong, practically overpowering, but Cassidy’s tail is stronger. Muscles squeeze and contract in your lower belly, desperate to force your seed out, but Cass keeps a tight grip on your [cocks], effectively denying you your orgasm with a cheery smile. The two of you hold it there for a good five or ten minutes, Cassidy’s constricting coils holding you teetering on the brink; unable to fall over or set foot on solid ground.", parse);
 				Text.NL();
 				Text.Add("You appear to have reached what some people call an impasse.", parse);
 				Text.NL();
@@ -616,7 +616,7 @@ Scenes.Cassidy.Sex.Pet = function() {
 				Text.NL();
 				Text.Add("You don’t reply, just grit your teeth and strain. Once, twice - after the second, you feel Cass having to adjust her grip on your shaft[s] - and hey, the third try’s the charm. Summoning up all the aching, pent-up desire in your loins, you grunt and tense one last time, and fast and thick ropes of sperm blast from you, defying Cassidy’s tight grip to splurt out and onto yourself.", parse);
 				Text.NL();
-				Text.Add("Cass laughs. <i>“Thought I was determined, ace, but seems like you’re more determined than I am. Great show.”</i> Without warning, she releases her grip on your shaft[s], withdrawing her tail in a fast, whipping motion. While you might not have that much cum to spare, the sheer pent-up nature of your release and the exquisite wringing that Cass has given you conspire to send your seed practically geysering out from your [cockTip] in a fountain of spunk, rising far higher than you’d imagined. Cassidy nimbly nips back and only catches a few drops on her skin and scales as she watches you paint yourself with your own arcing jism.", parse);
+				Text.Add("Cass laughs. <i>“Thought I was determined, ace, but seems like you’re more determined than I am. Great show.”</i> Without warning, she releases her grip on your shaft[s], withdrawing her tail in a fast, whipping motion. While you might not have that much cum to spare, the sheer pent-up nature of your release and the exquisite wringing that Cass has given you conspire to send your seed out from your [cockTip] in a fountain of spunk, rising far higher than you’d imagined. Cassidy nimbly nips back and only catches a few drops on her skin and scales as she watches you paint yourself with your own arcing jism.", parse);
 				Text.NL();
 				Text.Add("<i>“At least you didn’t make it all the way to the ceiling,”</i> she informs you cheerily, a shit-eating grin plastered on her face. <i>“That’d be hard to clean up.”</i> ", parse);
 			}
@@ -657,7 +657,7 @@ Scenes.Cassidy.Sex.Pet = function() {
 			Text.NL();
 			Text.Add("Your lady lumps feel so tender, so exquisite, and the small, sharp pricks of tentative pain that come from Cassidy’s claws just make everything worse. Sweat runs down your body, easily lubricating that tail’s passage between your tits; the tender touch of two hands’ worth of fingers <i>and</i> a tail-tip have your [nips] fat, engorged and as hard as diamonds.", parse);
 			Text.NL();
-			Text.Add("Just when you think you’re going to have a boobgasm, though, Cass pulls away, withdrawing her tail and lifting her hands free from your chest. You groan loudly, the departure of the salamander’s body heat all the too obvious as cold air - bitingly cold - by comparison rushes in to take its place. Dismayed at this sudden betrayal, you jerk your head up to find Cass smiling coyly down at you.", parse);
+			Text.Add("Just when you think you’re going to have a boobgasm, though, Cass pulls away, withdrawing her tail and lifting her hands free from your chest. You groan loudly, the departure of the salamander’s body heat all the too obvious as cold air - bitingly cold by comparison - rushes in to take its place. Dismayed at this sudden betrayal, you jerk your head up to find Cass smiling coyly down at you.", parse);
 			Text.NL();
 			Text.Add("<i>“Hey, shouldn’t work you too hard. The idea’s to work out the kinks in your body, not put more in there.”</i>", parse);
 			Text.NL();
@@ -774,7 +774,7 @@ Scenes.Cassidy.Sex.Anal = function(cocksInAss) {
 		Text.Add("magic wand", parse);
 	else
 		Text.Add("shaft", parse);
-	Text.Add(", making you push and pound for each inch of man-meat you sink into her, a veritable battle to claim greater and greater lengths of her colon. Cass pants heavily and moans, finally letting out a little cry as you hilt your entire cock in her, her insides gripping you as tightly as one of the clamps in the shopfront.", parse);
+	Text.Add(", making you push and pound for each inch of man-meat you sink into her, a veritable battle to claim greater and greater lengths of her colon. Cass pants heavily and moans, finally letting out a little cry as you hilt your entire cock in her, her insides gripping you as tightly as one of the clamps in the storefront.", parse);
 	Text.NL();
 	
 	Sex.Anal(player, cassidy);
@@ -917,17 +917,19 @@ Scenes.Cassidy.SparSex.Win = function() {
 					enabled : true,
 					func : function() {
 						Text.Clear();
-						Text.Add("You may not be a salamander, but you’ll be damned if your blood isn’t as heated as Cassidy’s is from all that fighting. You can’t strip off your gear fast enough and throw it to the side even as Cassidy tosses her warhammer safely out of reach in the heat of the moment.", parse);
+						if(!player.Race().isRace(Race.Salamander))
+							Text.Add("You may not be a salamander, but you’ll be damned if your blood isn’t as heated as Cassidy’s is from all that fighting. ", parse);
+						Text.Add("You can’t strip off your gear fast enough and throw it to the side even as Cassidy tosses her warhammer safely out of reach in the heat of the moment.", parse);
 						Text.NL();
 						Text.Add("<i>“Come on, [playername],”</i> Cass groans, swaying unsteadily before plopping onto the ground. <i>“Kick my ass a little harder, why don’t you?”</i>", parse);
 						Text.NL();
-						Text.Add("You chuckle, reach down and reach for her belt buckle; she gets the hint and tugs at her shirt. The heat from her skin and scales rises in great gouts, dissipating into the cool night air, and her long tail wraps about your body as she pushes herself against you.", parse);
+						Text.Add("You chuckle, reach down and grab her belt buckle; she gets the hint and tugs at her shirt. The heat from her skin and scales rises in great gouts, dissipating into the cool night air, and her long tail wraps about your body as she pushes herself against you.", parse);
 						Text.NL();
 						Text.Add("To the victor go the spoils, don’t they?", parse);
 						Text.NL();
 						Text.Add("<i>“Hah. That depends on what you mean by spoils, ace.”</i> By the pale light of the moon, you notice Cass’ blush growing as you pull her into a tight embrace; the wetness beneath her shorts a reminder of how much she seems to get off on violence. With her turned on like this, it’s only natural that you treat her to a little rough loving…", parse);
 						Text.NL();
-						Text.Add("Either she’s read your mind or just gotten fed up and taken the initiative. As you look on, Cass drops her shorts, you help her with her panties, and then she practically leaps into your embrace. Pressing her toasty, scaly body against you, Cassidy slobbers you with kisses as you return her embrace and try to decide just what you want to do with her tonight…", parse);
+						Text.Add("Either she’s read your mind or just gotten fed up and taken the initiative. As you look on, Cass drops her shorts, you help her with her panties, and then she practically leaps into your arms. Pressing her toasty, scaly body against you, Cassidy slobbers you with kisses as you return her embrace and try to decide just what you want to do with her tonight…", parse);
 						Text.Flush();
 
 						Scenes.Cassidy.SparSex.WinPrompt();
@@ -1126,7 +1128,11 @@ Scenes.Cassidy.SparSex.AllFours = function() {
 			
 			var cum = player.OrgasmCum();
 			
-			Text.Add("Oozing and splattering all over, the excess spunk that simply won’t fit in Cass backflows out, staining the two of you as it runs down your [skin] and creates a mess on the ground below. Joined in the throes of sexual bliss, the two of you grind against each other as each contraction of your throbbing prick sends another shot of seed into poor Cass and the contours of her burning pussy, seemingly lasting forever until the your balls gradually empty of their load. Utterly spent and sated, you finally let go of Cassidy’s thighs, allowing her to collapse on the ground, and then you bend besides her to catch your breath.", parse);
+			parse["b"] = player.HasBalls() ? "r balls gradually empty of their load" : " finally run out";
+			
+			if(cum >= 3)
+				Text.Add("Oozing and splattering all over, the excess spunk that simply won’t fit in Cass backflows out, staining the two of you as it runs down your [skin] and creates a mess on the ground below. ", parse);
+			Text.Add("Joined in the throes of sexual bliss, the two of you grind against each other as each contraction of your throbbing prick sends another shot of seed into poor Cass and the contours of her burning pussy, seemingly lasting forever until the you[b]. Utterly spent and sated, you finally let go of Cassidy’s thighs, allowing her to collapse on the ground, and then you bend besides her to catch your breath.", parse);
 			Text.NL();
 			Text.Add("It’s a few minutes before either of you are able to speak.", parse);
 			Text.NL();
@@ -1145,7 +1151,7 @@ Scenes.Cassidy.SparSex.AllFours = function() {
 		enabled : true,
 		func : function() {
 			Text.Clear();
-			Text.Add("…And stuff yourself straight into the salamander’s ass, your [cockTip] brushing her spinchter for the briefest of moments before the tight ring’s rammed open and you bury yourself ", parse);
+			Text.Add("…And stuff yourself straight into the salamander’s ass, your [cockTip] brushing her sphincter for the briefest of moments before the tight ring’s rammed open and you bury yourself ", parse);
 			if(p1cock.Len() >= 23)
 				Text.Add("as far as you can go, until Cassidy’s poor, abused asshole simply can’t take any more of your man-meat", parse);
 			else
@@ -1161,7 +1167,7 @@ Scenes.Cassidy.SparSex.AllFours = function() {
 			Text.NL();
 			Text.Add("- And then slam back into her with all the force you can muster, bottoming out inside the poor salamander and forcing her wide open. Cassidy’s head snaps back, the salamander biting back another scream as you ram and pound your way back into her abused asshole. With her so thoroughly reamed, you can’t help but feel a touch of satisfaction at being responsible for her predicament.", parse);
 			Text.NL();
-			Text.Add("An errant thrust of yours has her anus convulsing and flexing about your [cock], dribbles of thick pre-cum escaping around your shaft. Unused to such intrusions in her back door, Cass quickly begins to give in to her pleasure, the pleasure that comes hard and fast with each thrust of your man-meat as you jackhammer away with playful glee.", parse);
+			Text.Add("An errant thrust of yours has her anus convulsing and flexing about your [cock], dribbles of thick pre-cum escaping around your shaft. Unused to such intrusions in her back door, Cass quickly begins to give in to her pleasure; pleasure that comes hard and fast with each thrust of your man-meat as you jackhammer away with playful glee.", parse);
 			Text.NL();
 			Text.Add("There, there. It’ll be alright. It’ll be alright.", parse);
 			Text.NL();
@@ -1170,13 +1176,13 @@ Scenes.Cassidy.SparSex.AllFours = function() {
 				Text.Add("even after its improvement, ", parse);
 			Text.Add("she’s doing remarkably well, to be honest. For a few moments, you just take a step back and relax, letting the exquisite sensations of her asshole having swallowed your cock run down your spine, a steady current of electricity joining the two of you in perverse bliss.", parse);
 			Text.NL();
-			Text.Add("That isn’t enough for Cassidy, though. Her tail’s been unused all this while, but no longer; desperate for more pleasure, the salamander’s whipped her prehensile tail under herself and between her legs. The very tip winds its way up between her thighs, and before you know it, it’s dived straight into her box with a rather rude squelching sound, pumping up and down furiously as she seeks to stuff herself as full as possible even as you bounce her back and forth on your cock.", parse);
+			Text.Add("That isn’t enough for Cassidy, though. Her tail’s been unused all this while, but no longer; desperate for more pleasure, the salamander’s whipped her prehensile appendage under herself and between her legs. The very tip winds its way up between her thighs, and before you know it, it’s dived straight into her box with a rather rude squelching sound, pumping up and down furiously as she seeks to stuff herself as full as possible even as you bounce her back and forth on your cock.", parse);
 			Text.NL();
 			Text.Add("Time to bring this to an end. Falling back to your initial plan of attack, you hilt yourself as far as you can into Cassidy’s warm bowels, then withdraw to the tip. In and out, in and out, the two of you move as one instinctively, working in tandem; again and again, you stretch her until the going isn’t that bad despite her tight pucker. Still furiously tailfucking herself like a woman possessed, Cassidy moans and mewls incoherently, juices flowing freely from her twat as she pounds herself on you.", parse);
 			Text.NL();
 			Text.Add("At last, your desire for release is far too great to be denied any further. Trembling from head to toe, you feel that familiar churning in your loins as a torrent of spunk shoots down your shaft and blasts out your [cockTip] straight into Cassidy’s asshole.", parse);
 			if(player.NumCocks() > 1)
-				Text.Add(" Not to be left out, your other shaft[s2] blast[notS2] considerable portions of your load all over her pert, lovable ass, leaving it all warm and sticky.", parse);
+				Text.Add(" Not to be left out, your other dick[s2] blast[notS2] considerable portions of your load all over her pert, lovable ass, leaving it all warm and sticky.", parse);
 			Text.NL();
 			
 			var cum = player.OrgasmCum();
@@ -1206,7 +1212,7 @@ Scenes.Cassidy.SparSex.AllFours = function() {
 				Text.NL();
 				Text.Add("She needn’t worry, you reply as you feel your [cockTip] slowly start to ooze pre. Now that you’re pretty much as hard as you’ll ever get under your own power, you intend to claim your prize to the fullest. Easing yourself against Cassidy, you slide your shafts along the salamander’s scaly skin until the first’s lined up with her tailhole and the second nudging at her glistening netherlips. You take a few moments to grind back and forth, eliciting tiny shocked gasps from Cass as both orifices are teased simultaneously.", parse);
 				Text.NL();
-				Text.Add("Well, you don’t want to wear her out before the fun’s started. Summoning your strength, you grit your teeth and shove both lengths into Cassidy’s burning body. She gasps and trembles, her insides turning uncomfortably hot about your invading members for a second, then the licking flames quickly subside to a gentle warmth that envelops your manhoods. You can see Cass’ muscular ass flex and clench as she tries to adjust to the fullness within her ass - and utterly fails. The salamander grits her teeth and bites back a whorish cry of ecstasy, but a strained gurgling sound still escapes her throat involuntarily.", parse);
+				Text.Add("Well, you don’t want to wear her out before the fun’s started. Summoning your strength, you grit your teeth and shove both lengths into Cassidy’s burning body. She gasps and trembles, her insides turning uncomfortably hot about your invading members for a second, then the licking flames quickly subside to a gentle warmth that envelops your manhoods. You can see Cass’ muscular ass flex and clench as she tries to adjust to the fullness within her - and utterly fails. The salamander grits her teeth and bites back a whorish cry of ecstasy, but a strained gurgling sound still escapes her throat involuntarily.", parse);
 				Text.NL();
 				Text.Add("Why, is she feeling a little strained?", parse);
 				Text.NL();
@@ -1223,7 +1229,7 @@ Scenes.Cassidy.SparSex.AllFours = function() {
 				
 				Text.Add("And you deliver it, forcing more of your length and girth straight into her tight little holes. The warmth about your manhoods flares into intense, burning heat, shooting up into the rest of your body and lighting you aflame with lust and desire. Bracing herself against the ground, Cass whips her tail to the side and rams herself backwards, impaling her ass on both your shafts, taking you as deep as possible. Coupled with her baser instincts, the sensation of being so utterly stuffed with man-meat sets her off - breathing in fits and starts, Cassidy just barely manages to avoid screaming her sheer, unadulterated bliss for the entire of the merchants’ district to hear.", parse);
 				Text.NL();
-				Text.Add("You give your hips a wiggle and thrust, and Cass flops limply on the ground. Why, is it that good, being stuffed in two holes? Maybe you should find a way of spitroasting her at the same time; that should <i>really</i> set her off…", parse);
+				Text.Add("You give your hips a wiggle and thrust, and Cass flops limply on the ground. Why, is it that good, being stuffed in two holes? Maybe you should find a way of spit roasting her at the same time; that should <i>really</i> set her off…", parse);
 				Text.NL();
 				Text.Add("Cassidy doesn’t answer this time, either; the salamander’s head rolls back and her tongue lolls out from between her lips, her breasts heaving with each gasp she takes. Ooh, it looks like she can’t take very much more of this, can she?", parse);
 				Text.NL();
@@ -1301,7 +1307,7 @@ Scenes.Cassidy.SparSex.GetBlown = function() {
 	Text.NL();
 	Text.Add("Seemingly as prehensile as her tail, Cassidy’s tongue continues its glorious work, and before too long you’re feeling the first tingles of mounting pressure in your groin as your impending release draws ever closer.", parse);
 	Text.NL();
-	Text.Add("Speaking of her tail, it hasn’t been idle, either. Since Cass needs her hands to steady herself against you, it’s up to her tail to pick up the slack - it slithers over to her needy, untouched cunt and begins to gleefully tailfuck herself with practiced motions. Heh, guess she’s no stranger to <i>that</i>, then. With the speed at which she’s pleasuring herself, Cass can’t help but follow up in front, and soon you’re being treated to a veritable symphony of sensations.", parse);
+	Text.Add("Speaking of her tail, it hasn’t been idle, either. Since Cass needs her hands to steady herself against you, it’s up to the prehensile appendage to pick up the slack - it slithers over to her needy, untouched cunt and begins to gleefully tailfuck herself with practiced motions. Heh, guess she’s no stranger to <i>that</i>, then. With the speed at which she’s pleasuring herself, Cass can’t help but follow up in front, and soon you’re being treated to a veritable symphony of sensations.", parse);
 	Text.NL();
 	
 	var cum = player.OrgasmCum();
@@ -1313,7 +1319,7 @@ Scenes.Cassidy.SparSex.GetBlown = function() {
 		Text.Add("ropes", parse);
 	else
 		Text.Add("spurts", parse);
-	Text.Add(" of seed straight into her throat. Cass splutters a bit, a portion of it leaking out of her mouth and dribbling down her chin, but by and large enough gets into her stomach that you feel satisfied with her performance. Maybe she’ll improve with enough practice, and if not… well, there are other things that she’s more proficient at. The two of you just lean against each other for a bit to catch your breath and recover your strength, and by and large Cass is the first one to speak.", parse);
+	Text.Add(" of seed straight into her throat. Cass splutters a bit, a portion of it leaking out of her mouth and dribbling down her chin, but by and large enough gets into her stomach that you feel satisfied with her performance. Maybe she’ll improve with enough practice, and if not… well, there are other things that she’s more proficient at. The two of you just lean against each other for a bit to catch your breath and recover your strength. Eventually, Cass is the first one to speak.", parse);
 	Text.NL();
 	Text.Add("<i>“How was it?”</i> she whispers, wiping stray strands of cum off her lip and chin with the back of her hand.", parse);
 	Text.NL();
@@ -1346,7 +1352,8 @@ Scenes.Cassidy.SparSex.GetLicked = function() {
 		Text.Add("Her eyes dart to your [cock]", parse);
 		if(player.HasBalls())
 			Text.Add(" and [balls]", parse);
-		Text.Add(", but you shake your head and spread your legs further to let her get at your cunt. Cass rolls her eyes, smiles, and shrugs, as if to say “it’s all the same to me.”</i>", parse);
+		parse["l"] = player.HasLegs() ? "spread your legs further" : "shuffle forward";
+		Text.Add(", but you shake your head and [l] to let her get at your cunt. Cass rolls her eyes, smiles, and shrugs, as if to say “it’s all the same to me.”</i>", parse);
 	}
 	else {
 		Text.Add("She instinctively hesitates a little when she sees your love box on display, but quickly recovers and gives you a shrug and smile.", parse);
@@ -1356,7 +1363,7 @@ Scenes.Cassidy.SparSex.GetLicked = function() {
 	Text.NL();
 	Text.Add("Yep, that’s it. As if to emphasize your point, you grab Cass by the shoulders, steadying yourself and pressing her lips to the petals of your womanhood in one deft movement. Cass lets out a slightly muffled, lusty moan, then it’s your turn to cry out when the full force of her burning lips spreads up your tunnel and outwards from there.", parse);
 	Text.NL();
-	Text.Add("<i>“Gee, I have no idea I was <b>that</b> good.”</i>", parse);
+	Text.Add("<i>“Gee, I had no idea I was <b>that</b> good.”</i>", parse);
 	Text.NL();
 	Text.Add("This isn’t the time for her to get cocky, it’s the time for her to get licking. Try as you might, though, you can’t say that with a straight face, and Cass catches onto your mood easily. The salamander doesn’t go for the gold immediately, instead taking her time to shower your increasingly puffy labia with a series of hot kisses, watching with satisfaction as you grow wetter and wetter under her tender ministrations. Need blossoms hard and urgent as she extends the very tip of her forked tongue from her mouth and runs it across the same route a few times, eventually coming to a stop at the hooded nub of your love-button.", parse);
 	Text.NL();
@@ -1367,7 +1374,7 @@ Scenes.Cassidy.SparSex.GetLicked = function() {
 	
 	Text.Add("Cass pauses a few moments and withdraws both head and tongue to take in the glistening, drooling mess that your cunt has turned into, then pushes her face back into your muff and redoubles her efforts to please you. She doesn’t have much in the way of spit, but your girl-juices are more than enough for the both of you, and Cass gets a face full of such as she peels back the hood of your [clit] and starts toying with it with the forked tip of her tongue. Maybe it’s the heated blood from your recent bout, maybe it’s the sheer aggressiveness with which she’s eating you out, but you can’t help but arch your back and push your hips forward, bumping and grinding against Cassidy’s face, practically begging her to just get over with the foreplay already.", parse);
 	Text.NL();
-	Text.Add("Cass, on her part, is slow and measured, her nimble tongue teasing and twisting about your [clit] just enough to get your feminine love-button all hard and hot. Each pass of her tongue’s rough surface is a medley of wonder and ecstasy; you have to wonder how she’s doing this without having had much in the way of practice - either Cassidy’s inherited some skills from her reputed slut of a Great-grandmother, or she’s just a born natural.", parse);
+	Text.Add("Cass, on her part, is slow and measured, her nimble tongue teasing and twisting about your [clit] just enough to get your feminine love-button all hard and hot. Each pass of her tongue’s rough surface is a medley of wonder and ecstasy; you have to wonder how she’s doing this without having had much in the way of practice - either Cassidy’s inherited some skills from her reputed slut of a great-grandmother, or she’s just a born natural.", parse);
 	Text.NL();
 	Text.Add("Either way, seems like she’s finished with the appetizer and is ready to eat your pie in earnest. More of Cass’ long tongue darts forward as she presses her lips to yours once again, testing the petals of your womanly flower before diving inside to quest for the nectar within. You squeeze your eyes shut, your entire body stiffening as you let out a yowl that rings out in the merchants’ district - your body just can’t help but be overwhelmed by the heated lance of pleasure that thrusts into you, squirming, probing, flexing.", parse);
 	Text.NL();
