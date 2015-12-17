@@ -2814,7 +2814,6 @@ CassidySpar.prototype.Act = function(encounter, activeChar) {
 	// Conditional abilities (only available at higher Cass levels)
 	
 	if(that.level >= 10) {
-	{
 		if(!that.reflexFlag) {
 			scenes.AddEnc(function() {
 				Abilities.EnemySkill.Cassidy.Reflex.Use(encounter, that, t);

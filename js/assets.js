@@ -22,6 +22,7 @@ Images.momo         = "data/momo.png";
 Images.layla        = "data/layla.png";
 Images.layla_f      = "data/layla_f.png";
 Images.uru1         = "data/uru1.png";
+Images.cassidy      = "data/avatar_cass.png";
 
 Images.lagon_r      = "data/lagon_r.png";
 Images.lagon_b      = "data/lagon_b.png";
