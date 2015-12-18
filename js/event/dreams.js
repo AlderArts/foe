@@ -101,7 +101,7 @@ Scenes.Dreams.RavenAfterDream = function(ravenTrigger, func) {
 		}
 		else if(r == RavenMother.Stage.ravenstage2 + 1) {
 			Text.NL();
-			Text.Add("The memories come clearer this time. And amid the clear memories, you distinguish one spot that is veiled in blackness, as if excised from your mind. You grab at it, pushing the veil aside with a mental effort, but it’s already faded too far. Next time you will be quicker.");
+			Text.Add("The memories come clearer this time. And amid the clear memories, you distinguish one spot that is veiled in blackness, as if excised from your mind. You grab at it, pushing the veil aside with a mental effort, but it’s already faded too far. Next time, you will be quicker.");
 			Text.Flush();
 		}
 		else if(r == RavenMother.Stage.ravenstage2 + 2) {
@@ -224,14 +224,14 @@ Scenes.Dreams.Harem = function(ravenTrigger) {
 
 Scenes.Dreams.BackHome = function(ravenTrigger) {
 	var parse = {
-		raven : Scenes.Dreams.RavenText(ravenTrigger, " A beat of wings and a blur of black feathers distracts you for a moment as some bird flaps away from your doorstep.", " A raven flaps away from the opening door. Once again the bird. You have to remember it. Wait...")
+		raven : Scenes.Dreams.RavenText(ravenTrigger, " A beat of wings and a blur of black feathers distracts you for a moment as some bird flaps away from your doorstep.", " A raven flaps away from the opening door. Once again, the bird. You have to remember it. Wait...")
 	};
 	
 	Text.Add("You wake up in your own bed, momentarily confused about your dream. There were strange creatures, talking animals, demons… at any rate, you are happy to be back home again. You don’t feel like there is anything in particular that you have to do today, so you linger for a while before getting up.", parse);
 	Text.NL();
 	Text.Add("There is a bit of confusion as you step outside.[raven] Surely, the sky wasn’t green yesterday? And you are pretty sure that there wasn’t a large moat surrounding your house. No matter, you think as you wade across it, at least you are finally back home.", parse);
 	Text.NL();
-	Text.Add("Unfortunately, reality settles in soon enough. This time you wake up for real, as far from home as when you went to sleep.", parse);
+	Text.Add("Unfortunately, reality settles in soon enough. This time, you wake up for real, as far from home as when you went to sleep.", parse);
 }
 
 Scenes.Dreams.Heartstone = function(ravenTrigger) {
@@ -242,7 +242,7 @@ Scenes.Dreams.Heartstone = function(ravenTrigger) {
 	
 	Text.Add("You are looking at yourself from outside your own sleeping body, curiously studying yourself.[raven] Do you really look that way to others? You are quickly distracted from your surface appearance, however, as you delve deeper, below your [skinDesc]. Seeing every tiny cell of your body in exquisite detail, your unnatural vision flits back and forth, focusing here and there on some odd part of your anatomy.", parse);
 	Text.NL();
-	Text.Add("As if being dragged there, you gravitate toward the core of you being, speeding through your veins lightning quick and arriving at where your heart should be. There, inside your chest, is the living purple gemstone, pulsing rhythmically, giving your body life.", parse);
+	Text.Add("As if being dragged there, you gravitate toward the core of your being, speeding through your veins lightning quick and arriving at where your heart should be. There, inside your chest, is the living purple gemstone, pulsing rhythmically, giving your body life.", parse);
 	Text.NL();
 	Text.Add("You awaken, a bit unsettled by the eerie vision.", parse);
 }
@@ -313,7 +313,7 @@ Scenes.Dreams.FirePet = function(ravenTrigger) {
 Scenes.Dreams.House = function(ravenTrigger) {
 	var parse = {
 		mastermistress : player.mfFem("master", "mistress"),
-		raven1 : Scenes.Dreams.RavenText(ravenTrigger, " marvelling at the beautiful raven design painted on your plates,", ""),
+		raven1 : Scenes.Dreams.RavenText(ravenTrigger, " marveling at the beautiful raven design painted on your plates,", ""),
 		raven2 : Scenes.Dreams.RavenText(ravenTrigger, "", " You notice a lifelike raven design painted on your plate. So lifelike, indeed, that its eyes seem to move. You almost admire them for watching you from something like this. Still, you’ve got to figure out why the birds are here, once you’re awake.")
 	};
 	if(party.NumTotal() <= 1) {
@@ -368,7 +368,7 @@ Scenes.Dreams.Alchemy = function(ravenTrigger) {
 	
 	Text.Add("You throw in the beet leaves, stir seven times, counting in your head, then rabbit fur, another four stirs and a count of fourteen, and the iron shavings go in. The process seems to go on for hours, with an endless procession of ingredients you pull from the shelf beside you.", parse);
 	Text.NL();
-	Text.Add("Finally you throw in the last one - worm soil - and the mixture gurgles unpleasantly. ", parse);
+	Text.Add("Finally, you throw in the last one - worm soil - and the mixture gurgles unpleasantly. ", parse);
 	if(ravenTrigger) {
 		Text.Add("A sharp beak pokes its way out of the murky liquid, and a black bird follows. It hops to the edge of the pot, and shakes itself, droplets flying in all directions, before quickly preening its feathers and taking off.");
 		Text.NL();
@@ -377,7 +377,7 @@ Scenes.Dreams.Alchemy = function(ravenTrigger) {
 		Text.Add(Scenes.Dreams.RavenText(true, raven1, raven2));
 	}
 	else {
-		Text.Add("No, no, that wasn’t supposed to happen! That smell, that texture it’s all wrong. That’s right, you made a mistake with the wood shavings! You empty the pot, and start over. This has to be perfect.");
+		Text.Add("No, no, that wasn’t supposed to happen! That smell, that texture... it’s all wrong. That’s right, you made a mistake with the wood shavings! You empty the pot, and start over. This has to be perfect.");
 	}
 	Text.NL();
 	Text.Add("The next attempt fails because of the cat whiskers, the one after that you use the wrong kind of water. Failures continue time after time, as your mistakes become more and more basic.", parse);
@@ -445,7 +445,7 @@ Scenes.Dreams.UruChoice = function(ravenTrigger) {
 				Text.Add("your [cockDesc] plunging smoothly into her front hole.", parse);
 			Text.NL();
 			parse["somehow"] = player.FirstCock().length.Get() > 25 ? " somehow" : "";
-			Text.Add("In one motion she[somehow] drives all the way down, her bountiful butt smothering your groin, while her own enormous erection bounces awkwardly around your face. The sensation of being inside her is overwhelming, as much pain at her incredible tightness as pleasure.", parse);
+			Text.Add("In one motion, she[somehow] drives all the way down, her bountiful butt smothering your groin, while her own enormous erection bounces awkwardly around your face. The sensation of being inside her is overwhelming, as much pain at her incredible tightness as pleasure.", parse);
 			Text.NL();
 			Text.Add("The demonic goddess has no mercy for you, however, as she begins bouncing up and down, while her insides pulsate and massage, tearing against your self control. Within minutes, you find yourself plunging over the edge, your [multiCockDesc] exploding inside her, coating her soaking wet insides in an extra layer of fluids.", parse);
 			Text.NL();
@@ -453,27 +453,27 @@ Scenes.Dreams.UruChoice = function(ravenTrigger) {
 		}
 		else {
 			parse["vag"] = player.FirstVag() ? Text.Parse(", and your [vagDesc] grows soaking wet in return", parse) : "";
-			Text.Add("forces you to service her enormous member. With every touch, every contact of lips or tongue with her pulsing penis, you feel lust fill your mind[vag].", parse);
+			Text.Add("forces you to service her enormous member. With every touch, every contact of lips or tongue with her pulsating penis, you feel lust fill your mind[vag].", parse);
 			Text.NL();
-			Text.Add("Apparently satisfied, the demon goddess pulls away momentarily, before plunging deep inside you in a single thrust. No amount of lust prepared you for that, and you scream out much more in pain than pleasure as you feel your [vagDesc] streched far beyond its normal limits.", parse);
+			Text.Add("Apparently satisfied, the demon goddess pulls away momentarily, before plunging deep inside you in a single thrust. No amount of lust prepared you for that, and you scream out much more in pain than pleasure as you feel your [vagDesc] stretched far beyond its normal limits.", parse);
 			Text.NL();
 			Text.Add("However, even this pain is eventually subsumed beneath the need you feel from simple contact with Uru. Soon, you find yourself moaning in pleasure, almost against your will, and your nethers shudder around the massive intruder, as your body rocks with a massive orgasm.", parse);
 			Text.NL();
 			Text.Add("A cruel smile graces Uru’s full lips above you. <i>“Oh, you like it that much, do you, little slut?”</i> You feel a wave of magic pressing into you, driving you into an ever greater frenzy of need and desire. <i>“Then I suppose it’s time to take things to the next level.”</i>", parse);
 		}
 		Text.NL();
-		Text.Add("Things get much less clear after that. You have a vague sense of mating with Uru in every possible way for hours on end - and once those are exhausted, in ways only made possible by Uru’s magic transforming your body into stranger and stranger shapes.", parse);
+		Text.Add("Things get much less clear after that. You have a vague sense of mating with Uru in every possible way for hours on end - and once those are exhausted, in ways only made possible by Uru’s magic, your body transforms into stranger and stranger shapes.", parse);
 		Text.NL();
 		Text.Add("By the end, you hardly even feel pleasure or pain anymore, there is only the single imperative to mate with your Goddess. And then at last, after an eternity, it ends, and the demon queen steps away from you.", parse);
 		Text.NL();
-		Text.Add("<i>“That about settles the reward I owe you, pet. Be glad, many in my hordes have fought to the death to earn just a minute with me.”</i> As she looks down at your immobile form, Uru’s face darkens. <i>“But of course, in addition to the reward you’ve earned a punishment. You fled from me to that bitch Aria, you failed to assist me in escaping, you even made some pathetic attempt to stop me.”</i>", parse);
+		Text.Add("<i>“That about settles the reward I owe you, pet. Be glad, many in my hordes have fought to the death to earn just a minute with me.”</i> As she looks down at your immobile form, Uru’s face darkens. <i>“But of course, in addition to the reward, you’ve earned a punishment. You fled from me to that bitch Aria, you failed to assist me in escaping, you even made some pathetic attempt to stop me.”</i>", parse);
 		Text.NL();
 		Text.Add("<i>“Because of you, my poor pets have been trapped in a desolate realm much longer than they needed to be. And they have grown hungry.”</i>", parse);
 		Text.NL();
-		Text.Add("The omnibus reaches down, and grabs hold of you, her nails digging into your flesh, and, with a flick of her wrist tosses you through the portal behind her. You do not see the ground beyond, as it is covered in an endless mass of demons. You are almost saved by them being packed in too tight to move, but at last your deformed body is grabbed by a dozen hands, pulled in different directions.", parse);
+		Text.Add("The omnibus reaches down, and grabs hold of you, her nails digging into your flesh and with a flick of her wrist, tosses you through the portal behind her. You do not see the ground beyond, as it is covered in an endless mass of demons. You are almost saved by them being packed in too tight to move, but at last your deformed body is grabbed by a dozen hands, pulled in different directions.", parse);
 		Text.NL();
 		if(ravenTrigger) {
-			Text.Add(Scenes.Dreams.RavenText(true, "High above, a raven circles, apparently waiting to see if anything remains of you for it to feast on.", "High above, a raven circles. You note with the dimmest shard of awareness that even in the demon world beyond the portal they are watching you. You make an effort to recall the significance of this, but it does not last long."));
+			Text.Add(Scenes.Dreams.RavenText(true, "High above, a raven circles, apparently waiting to see if anything remains of you for it to feast on.", "High above, a raven circles. You note with the dimmest shard of awareness that even in the demon world beyond the portal, they are watching you. You make an effort to recall the significance of this, but it does not last long."));
 			Text.NL();
 		}
 		Text.Add("Sharp teeth dig into your flesh, and the sensation is almost welcome after the abuse Uru inflicted. As you feel your throat tear, you sit up and open your eyes, gasping for breath. A feeling of nauseous relief washes over you as you realize you are awake at last.", parse);
@@ -512,12 +512,12 @@ Scenes.Dreams.AriaTemple = function(ravenTrigger) {
 	Text.Add("You awaken slowly in the familiar marble temple of the goddess of light, Lady Aria. You are resting on a soft bed of white, light blue and pink flower petals. The air is thick with their pleasant fragrance, and for once in your travels you feel completely safe - as if nothing could harm you.", parse);
 	Text.NL();
 	if(ravenTrigger) {
-		var raven1 = "Oddly, a little ways off, a pitch black raven sits at the edge of a pool. It preens its feathers with a graceful nonchalance that says it belongs here however, so you pay it no mind.";
+		var raven1 = "Oddly, a little ways off, a pitch black raven sits at the edge of a pool. It preens its feathers with a graceful nonchalance that says it belongs here, however, so you pay it no mind.";
 		var raven2 = "A little ways off, a raven sits at the edge of a pool, nonchalantly preening its feathers. You stare at it for a moment, surprised. Have they come to watch you even here? You should try to recall this when you wake up.";
 		Text.Add(Scenes.Dreams.RavenText(true, raven1, raven2));
 		Text.NL();
 	}
-	Text.Add("The lady herself hovers above you, a look of concern on her perfect features. Golden tresses fall down her back, swaying softly to an ethereal wind you cannot perceive. She reaches over and touches your brow, soothing you.", parse);
+	Text.Add("The Lady herself hovers above you, a look of concern on her perfect features. Golden tresses fall down her back, swaying softly to an ethereal wind you cannot perceive. She reaches over and touches your brow, soothing you.", parse);
 	Text.NL();
 	Text.Add("<i>We meet again, [playername]. This time, it is but a fleeting dream, however.</i>", parse);
 	Text.Flush();
@@ -567,7 +567,7 @@ Scenes.Dreams.AriaTemple = function(ravenTrigger) {
 				parse["betweenOn"] = player.FirstBreastRow().Size() > 3 ? "between" : "on";
 				Text.Add("Purring softly, Aria shifts around so she straddles your [stomachDesc], her girthy sixteen inch cock planted firmly [betweenOn] your [breastDesc], drooling divine pre. Greedily, you open your mouth, eager to taste her nectar.", parse);
 				Text.NL();
-				Text.Add("The dream turns strange from there, a jumbled mess of sensations and flashes of colors. You bodies writhe together, rolling on the bed of flowers. The Lady behaves in a decidedly unladylike manner, groping you roughly before she turns you over on your stomach.", parse);
+				Text.Add("The dream turns strange from there, a jumbled mess of sensations and flashes of colors. Your bodies writhe together, rolling on the bed of flowers. The Lady behaves in a decidedly unladylike manner, groping you roughly before she turns you over on your stomach.", parse);
 				Text.NL();
 				Text.Add("<i>Receive my blessing, oh great hero.</i> Her voice is mocking as she positions her cock against your [anusDesc].", parse);
 				Text.NL();
@@ -622,12 +622,12 @@ Scenes.Dreams.KiakaiMonster = function(ravenTrigger) {
 		heshe : kiakai.heshe(),
 		hisher : kiakai.hisher(),
 		raven1 : Scenes.Dreams.RavenText(ravenTrigger, ", decorated with a pattern of ravens,", ", decorated with a pattern of ravens,"),
-		raven2 : Scenes.Dreams.RavenText(ravenTrigger, "", " Surely they can’t watch you from a simple design. Although who knows what’s possible in dreams. You’ll have to consider this when you’re awake.")
+		raven2 : Scenes.Dreams.RavenText(ravenTrigger, "", " Surely, they can’t watch you from a simple design. Although who knows what’s possible in dreams. You’ll have to consider this when you’re awake.")
 	};
 	
 	Text.Add("You hear a scream somewhere, and rush over to the source, only to find [name] sitting up in [hisher] bed, clutching the sheets[raven1] practically up to [hisher] eyes.[raven2]", parse);
 	Text.NL();
-	Text.Add("<i>“[playername], there’s a monster under my bed,”</i> the elf says, as soon as [heshe] sees you.", parse);
+	Text.Add("<i>“[playername], there is a monster under my bed,”</i> the elf says, as soon as [heshe] sees you.", parse);
 	Text.NL();
 	Text.Add("You knew [name] could be a little childish, but to this extent? You roll your eyes in exasperation, but still, if that’s what it’s going to take, you might as well do it. You get down on your knees on the hardwood floor, then lean down on your hands, and look under the bed.", parse);
 	Text.NL();
@@ -655,7 +655,7 @@ Scenes.Dreams.Kiakai63 = function(ravenTrigger) {
 		parse["hisher"] = "his";
 	}
 	
-	Text.Add("You groan as you wake up, hoping that this isn't going to become a recurring theme in your life. You are lying flat on your back, in what looks like a circular tent made from tough animal hide. A small slanted opening near the top, designed to let light in while keeping rain out, illuminates the dim interior.[raven]", parse);
+	Text.Add("You groan as you wake up, hoping that this isn't going to become a recurring theme in your life. You are lying flat on your back in what looks like a circular tent made from tough animal hide. A small slanted opening near the top, designed to let light in while keeping rain out, illuminates the dim interior.[raven]", parse);
 	Text.NL();
 	Text.Add("<i>...?</i>", parse);
 	Text.NL();
@@ -667,9 +667,9 @@ Scenes.Dreams.Kiakai63 = function(ravenTrigger) {
 	Text.NL();
 	Text.Add("You gently dislodge yourself from the horny elf, pushing yourself into a sitting position. Your chest is bare, but someone has put a pair of comfortable pants on you. A better look at your bedmate confirms that [str]. [HeShe] is clad in a pale blue robe, ending a few inches above [hisher] bared knees.", parse);
 	Text.NL();
-	Text.Add("<i>“Ah, you are awake!”</i> the elf says happily. Confronted with the question as to what exactly [heshe] was doing in your bed, and where your bed <i>is</i> for that matter, the elf blushes slightly. <i>“L-lets not get hasty here. I know it might look bad, but really, I'm just trying to help.”</i> [HeShe] looks a bit distraught.", parse);
+	Text.Add("<i>“Ah, you are awake!”</i> the elf says happily. Confronted with the question as to what exactly [heshe] was doing in your bed, and where your bed <i>is</i> for that matter, the elf blushes slightly. <i>“L-let us not get hasty here. I know it might look bad, but really, I am just trying to help.”</i> [HeShe] looks a bit distraught.", parse);
 	Text.NL();
-	Text.Add("You continue talking with the elf for a while, but can’t shake the sense of deja vu. When you wake up for real, you feel a bit confused.", parse);
+	Text.Add("You continue talking with the elf for a while, but can’t shake the sense of déjà vu. When you wake up for real, you feel a bit confused.", parse);
 }
 
 Scenes.Dreams.RosalinNursing = function(ravenTrigger) {
@@ -742,7 +742,7 @@ Scenes.Dreams.GwendyStallion = function(ravenTrigger) {
 
 Scenes.Dreams.FeraKittens = function(ravenTrigger) {
 	var parse = {
-		raven : Scenes.Dreams.RavenText(ravenTrigger, " For some reason a scrawny baby raven is also nestled among the kittens.", " A scrawny baby raven is nestled among the kittens. It’s a little cute, but that doesn’t make the fact that it’s watching you better. You’ll have to remember this when you wake up."),
+		raven : Scenes.Dreams.RavenText(ravenTrigger, " For some reason, a scrawny baby raven is also nestled among the kittens.", " A scrawny baby raven is nestled among the kittens. It’s a little cute, but that doesn’t make the fact that it’s watching you better. You’ll have to remember this when you wake up."),
 		raven2 : Scenes.Dreams.RavenText(ravenTrigger, "Fera", "Fera", "she"),
 		raven3 : Scenes.Dreams.RavenText(ravenTrigger, "the lot", "the lot", "them")
 	};
@@ -815,7 +815,7 @@ Scenes.Dreams.BlowjobGive = function(ravenTrigger) {
 		raven : Scenes.Dreams.RavenText(ravenTrigger, " As you look up, the raven’s black eyes meet yours, nodding sagely as you dig in.", " You freeze slightly as you look up at the cock’s owner, a slight smirk on his beak. Well, lets see how the spy likes this.")
 	};
 	
-	Text.Add("You swallow greedily, euphoric as wad after wad of thick seed pours down your throat, joining the steadily growing pool inside your stomach. No sooner does the spent cock retreat from your thirsty lips, than it is replaced with another one. The throbbing shaft is huge, as long and as thick as your forearms.[raven]", parse);
+	Text.Add("You swallow greedily, euphoric as wad after wad of thick seed pours down your throat, joining the steadily growing pool inside your stomach. No sooner does the spent cock retreat from your thirsty lips than it is replaced with another one. The throbbing shaft is huge, as long and as thick as your forearms.[raven]", parse);
 	Text.NL();
 	Text.Add("Another would have been easily overwhelmed to have the veiny monster shoved down their throats, but you are in bliss, sucking eagerly in anticipation of your sticky reward. You close your eyes as you feel it twitch in your mouth, almost cumming yourself as the first splatter of semen hits your tongue. This taste could sustain you forever.", parse);
 	Text.NL();
@@ -838,7 +838,7 @@ Scenes.Dreams.BlowjobRec = function(ravenTrigger) {
 		Text.Add("[HeShe] is no one special, just another worshipper at the altar of your manhood. These days, you need a blowjob just to get going in the morning. Fortunately, there has been no end of prospective suitors to sate your desires. Even now, two others hover nearby, eyeing your lover jealously. Perhaps you will have to go a few more rounds today.", parse);
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
-		Text.Add("Uru’s long flexible tongue wraps itself around your cock, a small smile playing on the demon’s full lips. The succubus is, as always, a master fellatrix, sucking your shaft greedily, trying to coax out your seed. Somewhere in the back of your head, a small voice is trying to scream something at you, but it feels so good… You shake away the uneasy feeling.", parse);
+		Text.Add("Uru’s long, flexible tongue wraps itself around your cock, a small smile playing on the demon’s full lips. The succubus is, as always, a master fellatrix, sucking your shaft greedily, trying to coax out your seed. Somewhere in the back of your head, a small voice is trying to scream something at you, but it feels so good… You shake away the uneasy feeling.", parse);
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
 		var p1 = party.GetRandom(true);
@@ -855,7 +855,7 @@ Scenes.Dreams.BlowjobRec = function(ravenTrigger) {
 	Text.NL();
 	Text.Add("You are just about to cum, so very close, your thick member buried deep inside your lover's throat, when…", parse);
 	Text.NL();
-	Text.Add("Blearily, you stir, back in reality again. ", parse);
+	Text.Add("Blearily, you stir - back in reality again. ", parse);
 	if(player.FirstCock())
 		Text.Add("With the biggest morning wood ever, of course.", parse);
 	else
@@ -1050,7 +1050,7 @@ Scenes.Dreams.AscheHotSpring = function(ravenTrigger) {
 	}
 	Text.Add("Out of your half-lidded eyes, you notice Asche rising to her feet, water cascading off her curvaceous contours as she wades towards you. Her blond hair and dark golden fur cling to her body, leaving little to the imagination as the distance between your bodies dwindles. Looking down at you, the jackaless grins. You swear her nipples are swelling and hardening before your eyes - although whether it’s with the cold, or with something else, is anyone’s guess…", parse);
 	Text.NL();
-	Text.Add("Perhaps you ought to do something, but by the time the thought forms in your mind she’s upon you, the firm flesh of her generous dugs rubbing against your [breasts]", parse);
+	Text.Add("Perhaps you ought to do something, but by the time the thought forms in your mind, she’s upon you, the firm flesh of her generous dugs rubbing against your [breasts]", parse);
 	if(player.FirstCock())
 		Text.Add(", her fingers curling about your [cocks], quickly stroking [itThem] to painful erection", parse);
 	else if(player.FirstVag())
