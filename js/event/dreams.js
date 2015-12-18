@@ -462,7 +462,7 @@ Scenes.Dreams.UruChoice = function(ravenTrigger) {
 			Text.Add("A cruel smile graces Uru’s full lips above you. <i>“Oh, you like it that much, do you, little slut?”</i> You feel a wave of magic pressing into you, driving you into an ever greater frenzy of need and desire. <i>“Then I suppose it’s time to take things to the next level.”</i>", parse);
 		}
 		Text.NL();
-		Text.Add("Things get much less clear after that. You have a vague sense of mating with Uru in every possible way for hours on end - and once those are exhausted, in ways only made possible by Uru’s magic, your body transforms into stranger and stranger shapes.", parse);
+		Text.Add("Things get much less clear after that. You have a vague sense of mating with Uru in every possible way for hours on end - and once those are exhausted, in ways only made possible by Uru’s magic transforming your body into stranger and stranger shapes.", parse);
 		Text.NL();
 		Text.Add("By the end, you hardly even feel pleasure or pain anymore, there is only the single imperative to mate with your Goddess. And then at last, after an eternity, it ends, and the demon queen steps away from you.", parse);
 		Text.NL();
