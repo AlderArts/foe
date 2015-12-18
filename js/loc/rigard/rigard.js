@@ -614,7 +614,7 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 			Text.NL();
 			Text.Add("<i>“Yeah, but look at it this way. At least it’s better to die by bandits than just vanish into the unknown. Leastways there’s a body, right?”</i>", parse);
 			Text.NL();
-			Text.Add("<i>“You’re asking if it’s better to die from being run through or burned alive, you dolt. Dead either way, you know?”</i> [NPC1] sighs. <i>“The old king should never have decommissioned Bull Tower.”</i>", parse);
+			Text.Add("<i>“You’re asking if it’s better to die from being run through or burned alive, you dolt. Dead either way, you know?”</i> The [NPC1] sighs. <i>“The old king should never have decommissioned Bull Tower.”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“Those were safer times…”</i>", parse);
 			Text.NL();
