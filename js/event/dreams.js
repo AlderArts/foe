@@ -301,7 +301,7 @@ Scenes.Dreams.FirePet = function(ravenTrigger) {
 	
 	Text.Add("You rush back to your house. Your darling must be so hungry by now! You’ve been away for too long. You toss your overfull bag down at the doorstep and hurriedly close the door.", parse);
 	Text.NL();
-	Text.Add("Ah, good, there it is. Burning brightly in the center of the room, stifling the room with its heat. It’s still fine. You open your bag and pull a weighty tome of philosophy out. It's eaten in a whisper by the flames - only the best for your dear. You reach in for the next book.[raven]", parse);
+	Text.Add("Ah, good, there it is, burning brightly in the center of the room, stifling the house with its heat. It’s still fine. You open your bag and pull a weighty tome of philosophy out. It's eaten in a whisper by the flames - only the best for your dear. You reach in for the next book.[raven]", parse);
 	Text.NL();
 	Text.Add("The bag is empty, and the blaze burns larger, a tinge of blue mixed in with its orange. But it still hungers. You can feel it. You take off your hat, and put it into the flame, where it’s consumed with a satisfied burp.", parse);
 	Text.NL();
