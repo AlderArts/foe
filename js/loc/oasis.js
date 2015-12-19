@@ -393,7 +393,7 @@ Scenes.Oasis.DesertCaravanEncounter = function() {
 					Text.NL();
 				}
 				if(lizan.Gender() == Gender.female) {
-					Text.Add("You give your companion a shove, pushing her down onto the bed with a squeal of surprise, and follow her down, crouching on top of her. ", parse);
+					Text.Add("You give your companion a shove, pushing her down onto the bed with a squeal of surprise and follow her, crouching on top of her. ", parse);
 				}
 				if(lizan.Gender() != Gender.male) {
 					Text.Add("You meet her eyes for a moment, licking your lips, before you find her nipple and suck it into your mouth. Massaging the other heavy breast, you lap at the lizan’s teat, before rolling the rock hard nub between your lips.", parse);
