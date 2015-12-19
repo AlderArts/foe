@@ -27,6 +27,8 @@ function Cassidy(storage) {
 	this.flags["SparL"] = 0; //Times lost
 	this.flags["Order"] = Cassidy.Order.None;
 	this.orderTimer = new Time();
+	//Use for feminize
+	this.femTimer   = new Time();
 	
 	//Shop stuff
 	this.shop = Scenes.Cassidy.CreateShop();
@@ -55,8 +57,8 @@ Cassidy.Met = {
 	WentBack   : 3,
 	KnowGender : 4,
 	TalkFem    : 5,
-	//TODO TalkFem steps
-	Feminized  : 9
+	BeganFem   : 6,
+	Feminized  : 7
 };
 
 Cassidy.Talk = {
@@ -77,6 +79,7 @@ Cassidy.prototype.Update = function(step) {
 	Entity.prototype.Update.call(this, step);
 	
 	this.orderTimer.Dec(step);
+	this.femTimer.Dec(step);
 }
 
 Cassidy.prototype.FromStorage = function(storage) {
@@ -90,6 +93,7 @@ Cassidy.prototype.FromStorage = function(storage) {
 	this.LoadSexFlags(storage);
 	
 	this.orderTimer.FromStorage(storage.oTime);
+	this.femTimer.FromStorage(storage.fTime);
 }
 
 Cassidy.prototype.ToStorage = function() {
@@ -104,6 +108,7 @@ Cassidy.prototype.ToStorage = function() {
 	this.SaveSexFlags(storage);
 	
 	storage.oTime = this.orderTimer.ToStorage();
+	storage.fTime = this.femTimer.ToStorage();
 	
 	return storage;
 }
