@@ -200,7 +200,7 @@ world.loc.Plains.Crossroads.links.push(new Link(
 			Text.Add("As you make your way, a farmers’ wagon catches up to you from behind. ", parse);
 			var scenes = new EncounterTable();
 			scenes.AddEnc(function() {
-				Text.Add("The friendly couple offers you a ride in the back, and you get to watch the man groping his companion the whole way, while she returns occasional strokes of his trouser leg. Once in a while you notice them alternatively smirking and blushing in your direction.", parse);
+				Text.Add("The friendly couple offers you a ride in the back, and you get to watch the man groping his companion the whole way, while she returns occasional strokes of his trouser leg. Once in a while, you notice them alternatively smirking and blushing in your direction.", parse);
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
 				Text.Add("The two elderly men greet you, and offer you a lift to town, which you graciously accept. Along the way you get to hear all about the state of their crops, the prospects for a cold winter, and the lives of their adopted children.", parse);

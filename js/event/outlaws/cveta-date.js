@@ -429,7 +429,7 @@ Scenes.Cveta.Dates.Spring = function() {
 		Text.NL();
 		Text.Add("<i>“The food served was simple, perhaps, but the important thing was that everyone ate together. There were no acceptable excuses for not showing up for dinner, save being bedridden or being away at court - Father would excuse himself and literally fly back just to make it in time for dinner. Everyone knew where they were supposed to be. Everyone saw the three of us at dinner, and if we were unexpectedly missing - like Mother was one time, due to a sudden illness - would ask about us.</i>", parse);
 		Text.NL();
-		Text.Add("<i>“That is the important thing - that we weren’t just some faceless rulers hiding in - ah!”</i>", parse);
+		Text.Add("<i>“That is the important thing - that we were not just some faceless rulers hiding in - ah!”</i>", parse);
 		Text.NL();
 		Text.Add("Cveta’s cry of dismay is short-lived, the songstress’ face crumpling into scowl of frustration. Seems like she wasn’t paying that much attention to where she was dipping her flatbread, and went ahead and stained her fingers with the preserves.", parse);
 		Text.NL();
