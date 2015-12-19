@@ -546,7 +546,7 @@ Scenes.Cassidy.Appearance = function() {
 		Text.NL();
 		Text.Add("Hey, didn’t she once say her body isn’t something she should feel ashamed of? She may not be voluptuous, but even a boyish girl like her has her own charms. It’s just a tool like any other.", parse);
 		Text.NL();
-		Text.Add("Cass lowers her eyes and mumbles something not quite under her breath, her cheeks reddening even more.", parse);
+		Text.Add("Cass lowers her eyes and mumbles something not quite under her breath, her cheeks reddening even more. ", parse);
 	}
 	if(cassidy.KnowGender()) {
 		Text.Add("Now that you know Cass is a girl, a number of oddities fall into place: the almost invisible rises on her chest you always assumed was muscle from working at the forge, the way she walks… her frame is still thin, her hips slender and boyish, but it’s true that she wouldn’t be able to work as effectively at the forge if she were a busty bimbo, what with those assets getting in the way.", parse);
