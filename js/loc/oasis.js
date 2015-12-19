@@ -289,18 +289,18 @@ Scenes.Oasis.DesertCaravanEncounter = function() {
 					Text.Add("<i>“Not a clue. There have always been some that didn’t make it, but never this many. Something must’ve changed in the desert.”</i> [rHeShe] shrugs. <i>“Either way, the goods must flow, so we make the trip and do our best to stay vigilant.", parse);
 				}, 1.0, function() { return true; });
 				scenes.AddEnc(function() {
-					Text.Add("<i>“There’s a lot of talk going of people wanting out of the caravan business,”</i> [rheshe] says, <i>“or of wanting to switch to a route from Rigard to the free cities, at least. And I can relate - really, I can - insurance is going up, merchants are cutting back on shipments, guards are getting dearer… these are tough times.”</i>", parse);
+					Text.Add("<i>“There’s a lot of talk going of people wanting out of the caravan business,”</i> [rheshe] says, <i>“or of wanting to switch to a route from Rigard to the Free Cities, at least. And I can relate - really, I can - insurance is going up, merchants are cutting back on shipments, guards are getting dearer… these are tough times.”</i>", parse);
 					Text.NL();
-					Text.Add("<i>“But the thing is, you just can’t take the Rakhs along if you’re going to the free cities, nor the desert tents, nor the sand sleds. You have to sell all your stuff and start anew. So what I figure is if people are looking to sell, I’ll snap up gear on the cheap, and grow the caravan.”</i>", parse);
+					Text.Add("<i>“But the thing is, you just can’t take the Rakhs along if you’re going to the Free Cities, nor the desert tents, nor the sand sleds. You have to sell all your stuff and start anew. So what I figure is if people are looking to sell, I’ll snap up gear on the cheap, and grow the caravan.”</i>", parse);
 					Text.NL();
 					Text.Add("[rHeShe]’s not afraid of making the trips?", parse);
 					Text.NL();
 					Text.Add("<i>“Ha! I’m terrified. But in these matters, to the brave go the spoils. And besides, if I can expand, I can get more guards, and maybe if the caravan is huge enough, that will grant a measure of safety.”</i>", parse);
 				}, 1.0, function() { return true; });
 				scenes.AddEnc(function() {
-					Text.Add("<i>“All sorts of crazy talk have sprung up since the troubles began in the desert,”</i> [rheshe] says. <i>“There’s some that want to keep their money at home, just build some buildings, start a shop, wait for the troubles to blow over. That, I can understand, though I think it isn’t gonna work.”</i>", parse);
+					Text.Add("<i>“All sorts of crazy talk have sprung up since the troubles began in the desert,”</i> [rheshe] says. <i>“There’s some that want to keep their money at home, just build some buildings, start a shop, wait for the troubles to blow over. That I can understand, though I think it isn’t gonna work.”</i>", parse);
 					Text.NL();
-					Text.Add("<i>“Others, though… there’s perfectly respectable merchants wanting to strike up an expedition into the forest. Trade with the elves! Climb the tree to the mythical, but definitely-not-made-up city and trade with them!”</i> The caravan master rolls [rhisher] eyes in derision.", parse);
+					Text.Add("<i>“Others, though… there’re perfectly respectable merchants wanting to strike up an expedition into the forest. Trade with the elves! Climb the tree to the mythical, but definitely-not-made-up city and trade with them!”</i> The caravan master rolls [rhisher] eyes in derision.", parse);
 					Text.NL();
 					Text.Add("<i>“Well, the more of my competition suddenly goes barking mad, the easier it is for me, I suppose.”</i>", parse);
 				}, 1.0, function() { return true; });
@@ -337,11 +337,11 @@ Scenes.Oasis.DesertCaravanEncounter = function() {
 				Text.Add("The caravan master leads you to a side door, ", parse);
 				if(day)
 					Text.Add("careful to avoid the swaying tail of the Rakh pulling the structure, ", parse);
-				Text.Add("and after giving you a hand up, hops in behind you. The room is small but cozy, with a bed, a desk, and a hamper full of books being its main furnishings. To you surprise, the cabin ", parse);
+				Text.Add("and after giving you a hand up, hops in behind you. The room is small but cozy, with a bed, a desk, and a hamper full of books being its main furnishings. To your surprise, the cabin ", parse);
 				if(day)
 					Text.Add("is merely warm, a very welcome relief from the blistering heat outside.", parse);
 				else
-					Text.Add("is quite warm, a pleasant surprise in the chill desert night.", parse);
+					Text.Add("is quite warm, a pleasant delight in the chill desert night.", parse);
 				Text.NL();
 				Text.Add("The caravan master smiles, noticing your reaction. <i>“I’ve been able to buy some minor enchantments,”</i> [rheshe] explains, stroking your hand, <i>“but the most important part is that the trooma wood is porous, providing excellent insulation against the weather.”</i>", parse);
 				Text.NL();
@@ -358,14 +358,14 @@ Scenes.Oasis.DesertCaravanEncounter = function() {
 					Text.Add("[rHeShe] traces [rhisher] fingers along your neck before cupping your chin in [rhisher] palm, and drawing closer", parse);
 				Text.Add(" until you feel [rhisher] moist breath brushing against your lips. ", parse);
 				if(lizan.FirstBreastRow().Size() > 3)
-					Text.Add("Her breasts press against your [chestDesc], as she", parse);
+					Text.Add("Her breasts press against your [chestDesc] as she", parse);
 				else if(player.FirstBreastRow().Size() > 3)
-					Text.Add("Your breasts press against his toned chest, as he", parse);
+					Text.Add("Your breasts press against his toned chest as he", parse);
 				else
 					Text.Add("He", parse);
 				Text.Add(" leans in, [rhisher] mouth pressing hungrily against yours. You wrap your arms around [rhimher], pressing your bodies tighter together, your lips parting eagerly to admit [rhisher] long, flexible tongue into your mouth.", parse);
 				Text.NL();
-				Text.Add("The caravan master moans in pleasure, as you return the favor, tracing [rhisher] teeth with your [tongueDesc] before pushing inside. The two of you stand locked in breathless pleasure for a long minute, while your hands move down [rhisher] body, settling on [rhisher] butt and giving a firm squeeze. ", parse);
+				Text.Add("The caravan master moans in pleasure as you return the favor, tracing [rhisher] teeth with your [tongueDesc] before pushing inside. The two of you stand locked in breathless pleasure for a long minute, while your hands move down [rhisher] body, settling on [rhisher] butt and giving a firm squeeze. ", parse);
 				var tail = player.HasTail();
 				if(tail) {
 					parse["tailDesc"] = tail.Short();
