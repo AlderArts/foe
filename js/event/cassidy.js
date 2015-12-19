@@ -1685,6 +1685,7 @@ Scenes.Cassidy.InsideTalkPrompt = function() {
 							Text.Add("<i>“Right. I’m not making any promises or anything, just so we’re clear on that.”</i>", parse);
 							
 							cassidy.flags["Met"] = Cassidy.Met.TalkFem;
+							cassidy.femTimer = new Time(0,0,2,0,0);
 							
 							PrintDefaultOptions();
 						}, enabled : true
@@ -2648,6 +2649,135 @@ Scenes.Cassidy.BigReveal = function() {
 	});
 }
 
+//FEMINIZING
+Scenes.Cassidy.FemTalk2 = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	cassidy.flags["Met"] = Cassidy.Met.BeganFem;
+	
+	Text.Clear();
+	Text.Add("Stepping into The Pale Flame, you’re greeted by the ringing of Cassidy’s hammer on metal. With the shop empty of customers at the moment, she’s taken advantage of the lull in business to get back to working at what she loves to do. The salamander’s brow is furrowed in concentration, having removed her gloves in order to handle the yellow-hot sword blank she’s working on with her bare hands. Sure, Cass may be impervious to heat, but the edge is mighty sharp… oh well, you’ll trust her to know what she’s doing.", parse);
+	Text.NL();
+	Text.Add("You stand there in silence for ten minutes or so, waiting for her to finish hammering out all the flaws in the sword blank, then dunk it into the quenching trough. A huge cloud of steam rises from the water’s surface, and it’s only then that you’re sure that your eyes aren’t deceiving you.", parse);
+	Text.NL();
+	Text.Add("There’s something… different about Cassidy today. You didn’t realize it at first, but there’s no doubt about it now. The salamander smith looks just a little bustier and hippier, her assets having filled out her shirt and shorts a little. Not very much, but at least now you don’t think anyone looking at her would mistake her for a scrawny guy.", parse);
+	Text.NL();
+	Text.Add("At length, Cass looks up and notices you.", parse);
+	Text.NL();
+	Text.Add("<i>“Oh, hey, [playername]. Didn’t realize that you were there - I guess I should’ve said you should’ve said something, but then I know you know I wouldn’t have heard you anyway.”</i> She laughs a little at her own joke. <i>“Hope I didn’t keep you waiting too long, in any case. What’s up?”</i>", parse);
+	Text.NL();
+	Text.Add("To be honest, you came here for something completely different, but now that you’ve noticed it… does she know she’s a little heavier in the chest and rear? Was it… well, was it because of that talk you had earlier on? You didn’t think that she’d just up and do it that quickly without discussing it some more with you…", parse);
+	Text.NL();
+	Text.Add("Cass stares hard at you for a few seconds, then breaks into a large belly laugh. <i>“Oh, yeah. This.”</i> Setting down her hammer, she pulls down the neckline of her shirt a little to reveal… sandbags. They’re not very big or very thick, but yeah, there’re two small sandbags sewn from sackcloth strapped to her chest, and you can only assume the padding on her hips and ass is the same.", parse);
+	Text.NL();
+	Text.Add("<i>“Don’t worry about it, champ,”</i> Cass continues, giving you a wink at your incredulous look of disbelief. <i>“I don’t jump into these things headfirst without toeing the water beforehand. Gotta get a feel for it, you know?”</i>", parse);
+	Text.NL();
+	Text.Add("To be honest, if she’s doing this to see how she’d hold up under a more curvaceous form, sandbags might be overdoing it a little. They’re bound to be far heavier than any actual meat she’d be putting on, at any rate.", parse);
+	Text.NL();
+	Text.Add("She sticks her tongue out at you. <i>“Of course, duh. You don’t temper steel until it’s barely satisfactory - you make sure it’s got a lot of take. If I can take a bit of sand, I can take a bit of tits and ass just fine.”</i>", parse);
+	Text.NL();
+	Text.Add("And is she holding up well? No walking around awkwardly? No back pains?", parse);
+	Text.NL();
+	Text.Add("<i>“Oh come on, champ. It’s not as if I’m aiming to turn myself into some kind of bimbo. Yeah, I’m holding up pretty well.”</i> She snickers and blows you a kiss. <i>“Hardly even notice it, but I guess I’m pretty solidly built. Think I’ll give it a few more days, then make the decision.”</i>", parse);
+	Text.NL();
+	Text.Add("Right. How does she plan to perform the… um, enhancement?", parse);
+	Text.NL();
+	Text.Add("A shrug. <i>“Oh, it’s not that big of a deal. There’s a potion for everything these days - I’ll just swing by Asche’s on my usual material-shopping jaunt and ask her if she can brew up something for me. Great prices to be had there, too.”</i>", parse);
+	Text.NL();
+	Text.Add("Seems like she’s got all this planned out, then.", parse);
+	Text.NL();
+	Text.Add("<i>“You bet I do. I’m not in the habit of half-assing things, ace.”</i> Cass looks left and right, and then her eyes finally settle on you. <i>“Guess I also ought to thank you.”</i>", parse);
+	Text.NL();
+	Text.Add("Whatever for?", parse);
+	Text.NL();
+	Text.Add("<i>“That talk we had. I guess I didn’t realize it at first, but after trying it out, at least I think I’m getting the proper message across, if you know what I mean. If someone mistook me for a guy today, well, I didn’t notice.”</i>", parse);
+	Text.NL();
+	Text.Add("There’re still some things that she can do, but yeah, you get her point. If this is what she wants, and it’s working out for her, then all’s well that ends well, it seems.", parse);
+	Text.NL();
+	Text.Add("<i>“Yeah. Look here, ace - I’d love to chat a little longer, but there’s business to be done and orders to fill. Feel free to browse and shout out if you need me, but I’m still on the clock and have got to be getting back to work.”</i>", parse);
+	Text.NL();
+	Text.Add("All right, then, you understand. You give Cass a wave, which she returns, and then the salamander smith turns back to the forge, her free hand already reaching for another sword blank from the pile.", parse);
+	Text.NL();
+	Text.Add("What do you do now?", parse);
+	Text.Flush();
+	
+	world.TimeStep({minute: 30});
+	cassidy.femTimer = new Time(0,0,2,0,0);
+	
+	Scenes.Cassidy.Prompt();
+}
+
+Scenes.Cassidy.FemFinal = function() {
+	var parse = {
+		
+	};
+	
+	cassidy.flags["Met"] = Cassidy.Met.Feminized;
+	
+	Text.Clear();
+	Text.Add("The first thing that strikes you when you step into The Pale Flame is Cass. Seems like she’s stepped up the ante of her experimentation - at the very least, she’s grown out her hair a bit to the point where it curls about her ears and sticks close to the back of her neck. It’s not a pretty cut, but it <i>is</i> cute. Like she said the last time, it’s not as if she’s gunning to be some sort of bimbo, after all.", parse);
+	Text.NL();
+	Text.Add("Smiling, you make your way up to the counter and throw a compliment her way. She just rolls her eyes and returns your smile.", parse);
+	Text.NL();
+	Text.Add("<i>“I was wondering when you’d notice.”</i>", parse);
+	Text.NL();
+	Text.Add("Almost immediately, to be honest.", parse);
+	Text.NL();
+	Text.Add("A small smile creeps onto the salamander smith’s lips. <i>“It’s that obvious? It took you a while to notice the last couple of changes.”</i>", parse);
+	Text.NL();
+	Text.Add("Well, she knows what they say about the whole being greater than the sum of the parts. With everything in place, she really does look a lot better than before - now she can be sure that everyone’s getting the tomboy persona she’d like to project, and not just mistake her for a thin guy.", parse);
+	Text.NL();
+	Text.Add("<i>“Thanks. I spent a little while in front of the mirror today, but you know how it is. Can’t trust yourself on these things when you’re too close to the issue.”</i>", parse);
+	Text.NL();
+	Text.Add("Yeah, everything’s perfect. She can get rid of those sandbags and make them real.", parse);
+	Text.NL();
+	Text.Add("<i>“Oh, I already did. Dropped by Asche’s last night and picked up the order, then chugged it down when I got up in the morning.”</i>", parse);
+	Text.NL();
+	Text.Add("Right. You didn’t quite expect it all to be so sudden - maybe she should have invited you to watch?", parse);
+	Text.NL();
+	Text.Add("Cass reaches forward and taps you on the chest. <i>“Hey, don’t let it get to your head. I didn’t do it for you, I did it because I wanted to, and the fact that you get something out of it is just a bonus, okay? I’m running on my own timeline here.”</i>", parse);
+	Text.NL();
+	Text.Add("Whatever helps her sleep at night, heh.", parse);
+	Text.NL();
+	Text.Add("Cassidy shakes her head and rolls her eyes, but she’s smiling. <i>“Yeah, I’m sleeping pretty well at night, thank you very much.”</i>", parse);
+	Text.NL();
+	Text.Add("All right, then - does she mind if you assure yourself that they’re real and not some kind of big practical joke?", parse);
+	Text.NL();
+	Text.Add("<i>“Sure thing, champ! Go ahead and touch them, if that’s what it takes for you to be sure that they’re real and mine.”</i>", parse);
+	Text.NL();
+	Text.Add("That’s an invitation if you’ve ever heard one, and you’re not daft enough to spurn such a welcome from a peppy thing like Cassidy. Reaching your arm across the counter, you slide your fingers under the neckline of the salamander’s shirt, smiling at the pleasant feel of Cassidy’s newly improved tits. They’re not large, a little less than palmable if you’d had to make a guess, but they’re pleasantly perky and just only slightly less firm than the muscle supporting them - cute, if you’d had to put a description to them.", parse);
+	Text.NL();
+	Text.Add("Sensing no resistance from Cass, you slide your hand further down, exploring how the pointy tips of her breasts have rounded out into a far more pleasant curve. There’s been no change to her nipples, though - they’re as they always were, quick to grow into little nubs of pleasure as you roll them in turn between thumb and forefinger, but then she wasn’t lacking in that department before.", parse);
+	Text.NL();
+	Text.Add("A small gasp of breath draws your attention, and you turn to meet Cassidy’s golden eyes and dilated pupils. The salamander’s hand trembles a little, but she summons the will to yank your hand out of her shirt and bat it away.", parse);
+	Text.NL();
+	Text.Add("<i>“H-hey! I said touch, not grope!”</i>", parse);
+	Text.NL();
+	Text.Add("Groping falls neatly under the purview of touching, and she didn’t say not to grope, either!", parse);
+	Text.NL();
+	Text.Add("Cass makes an exasperated sound with her lips and mumbles not quite under her breath. <i>“Yeah, yeah. Save it for the back room tonight, okay? Just because there’s no one else in the shop right now doesn’t mean I’m not on the clock.”</i>", parse);
+	Text.NL();
+	Text.Add("Sure, sure. One question, though… no bra? You understood it before, but now…", parse);
+	Text.NL();
+	Text.Add("<i>“Never got used to wearing one. Don’t think I’ll start just yet - it’d get in the way. Not as if I need them, anyway.”</i>", parse);
+	Text.NL();
+	Text.Add("Welp, it’s her wardrobe. You watch as Cass fumbles with her shirt and gets everything back in order, then takes a few deep breaths to calm herself.", parse);
+	Text.NL();
+	Text.Add("<i>“Everything in its proper time and in its proper place, champ. It’s not that I wouldn’t dearly love to have some fun with you, especially now that I’m… well, you know. But not now, okay? Maybe later in the back room, when I’ve closed up shop.”</i>", parse);
+	Text.NL();
+	Text.Add("You’ll be looking forward to it, then.", parse);
+	Text.NL();
+	Text.Add("Cass winks at you. <i>“See you later, ace! You want to do business, just yell for me, okay?”</i>", parse);
+	Text.Flush();
+	
+	world.TimeStep({minute: 30});
+	
+	Scenes.Cassidy.Prompt();
+}
+
+
 
 //Trigger this at 30 or more rel upon entering the back room and having saved her from her drunkenness.
 Scenes.Cassidy.SparFirst = function() {
@@ -2729,8 +2859,7 @@ Scenes.Cassidy.SparFirst = function() {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-
-
+// SPARRING
 function CassidySpar() {
 	Entity.call(this);
 	this.ID = "cassidyspar";

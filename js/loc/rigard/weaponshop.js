@@ -23,6 +23,12 @@ world.loc.Rigard.ShopStreet.WeaponShop.onEntry = function() {
 	else if((cassidy.flags["Met"] == Cassidy.Met.WentBack) && (cassidy.Relation() >= 30)) {
 		Scenes.Cassidy.BigReveal();
 	}
+	else if((cassidy.flags["Met"] == Cassidy.Met.TalkFem) && (cassidy.femTimer.Expired())) {
+		Scenes.Cassidy.FemTalk2();
+	}
+	else if((cassidy.flags["Met"] == Cassidy.Met.BeganFem) && (cassidy.femTimer.Expired())) {
+		Scenes.Cassidy.FemFinal();
+	}
 	else {
 		PrintDefaultOptions();
 	}
