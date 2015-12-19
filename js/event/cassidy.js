@@ -542,7 +542,7 @@ Scenes.Cassidy.Appearance = function() {
 		Text.NL();
 		Text.Add("Yeah, and those hips, the way they pull at her shorts… definitely a tomboyish girl now, instead of an effeminate guy. No way anyone’s making that mistake now.", parse);
 		Text.NL();
-		Text.Add("<i>“H-hey!”</i>Cassidy hisses at you despite herself, her cheeks beginning to color as she notices you ogling her. <i>“I didn’t do this so you could lech at me in public, you know!”</i>", parse);
+		Text.Add("<i>“H-hey!”</i> Cassidy hisses at you despite herself, her cheeks beginning to color as she notices you ogling her. <i>“I didn’t do this so you could lech at me in public, you know!”</i>", parse);
 		Text.NL();
 		Text.Add("Hey, didn’t she once say her body isn’t something she should feel ashamed of? She may not be voluptuous, but even a boyish girl like her has her own charms. It’s just a tool like any other.", parse);
 		Text.NL();
