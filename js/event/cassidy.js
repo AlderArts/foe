@@ -2894,7 +2894,7 @@ Scenes.Cassidy.Model = function() {
 				Text.Add("Cass just snickers", parse);
 				var buttsize = player.Butt().Size();
 				if(buttsize >= 5) {
-					Text.Add("and gives you a good pinch on the butt", parse);
+					Text.Add(" and gives you a good pinch on the butt", parse);
 					if(buttsize >= 9)
 						Text.Add(". Of course, with how ample your ass is, it’s more of a knead than a pinch, but it’s the thought that counts", parse);
 				}
