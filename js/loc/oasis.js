@@ -42,7 +42,7 @@ Oasis = function(storage) {
 	this.shopItems.push(Items.Trinket);
 	this.shopItems.push(Items.FruitSeed);
 	this.shopItems.push(Items.MFluff);
-	this.shopItems.push(Items.MDust);of you, [rhisher] snout inches away
+	this.shopItems.push(Items.MDust);
 	this.shopItems.push(Items.Stinger);
 	this.shopItems.push(Items.SVenom);
 	this.shopItems.push(Items.SClaw);
