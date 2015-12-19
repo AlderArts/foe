@@ -180,11 +180,11 @@ Scenes.Twins.TalkPrompt = function() {
 					Text.NL();
 					Text.Add("<i>“And he can’t harm you either. If he breaks one of these rules, the collar will unleash its magic and... disable him,”</i> Rani adds.", parse);
 					Text.NL();
-					Text.Add("<i>“We’ll let you figure out exactly how it does that,”</i> Rumi says, as the twins grin mischievously. <i>“Go to the jail in the castle grounds and present the guardsmen with this letter,”</i> Rumi says, handing you a sealed letter.", parse);
+					Text.Add("<i>“We’ll let you figure out exactly how it does that,”</i> Rumi says, as the twins grin mischievously. <i>“Go to the jail in the castle grounds and present the guardsman with this letter,”</i> Rumi says, handing you a sealed message.", parse);
 					Text.NL();
 					Text.Add("<i>“And don’t forget to attach the collar,”</i> Rani adds, presenting you with the collar.", parse);
 					Text.NL();
-					Text.Add("You take the letter and the collar from the prince's hands. Tucking the letter away safely, you turn the collar around in your hands, looking it over. It certainly doesn't look as impressive as it sounds; it's nothing more than a simple leather band, with metallic tips for fixing it into place.", parse);
+					Text.Add("You take the missive and the collar from the prince's hands. Tucking the letter away safely, you turn the collar around in your hands, looking it over. It certainly doesn't look as impressive as it sounds; it's nothing more than a simple leather band, with metallic tips for fixing it into place.", parse);
 					Text.NL();
 					Text.Add("<i>“Put this around his neck and say the activation word, 'Featherfall',”</i> Rumi says.", parse);
 					Text.NL();
