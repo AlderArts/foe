@@ -68,7 +68,8 @@ Cassidy.Talk = {
 	MShop       : 8, //One off manage the shop event
 	Forge       : 16,
 	SexIndoor   : 32,
-	Spar        : 64
+	Spar        : 64,
+	Model       : 128
 };
 
 Cassidy.Order = {
@@ -1065,6 +1066,11 @@ Scenes.Cassidy.HeadInside = function() {
 	if(cassidy.KnowGender() && cassidy.Relation() >= 30 && !(cassidy.flags["Talk"] & Cassidy.Talk.Spar)) {
 		Gui.NextPrompt(function() {
 			Scenes.Cassidy.SparFirst();
+		});
+	}
+	else if((cassidy.flags["Talk"] & Cassidy.Talk.Spar) && (cassidy.flags["Talk"] & Cassidy.Talk.MShop) && !(cassidy.flags["Talk"] & Cassidy.Talk.Model)) {
+		Gui.NextPrompt(function() {
+			Scenes.Cassidy.Model();
 		});
 	}
 	else {
@@ -2648,6 +2654,335 @@ Scenes.Cassidy.BigReveal = function() {
 		});
 	});
 }
+
+
+Scenes.Cassidy.Model = function() {
+	var parse = {
+		playername : player.name
+	};
+	parse = player.ParserTags(parse);
+	
+	cassidy.flags["Talk"] |= Cassidy.Talk.Model;
+	
+	Text.Clear();
+	Text.Add("<i>“Hey, ace,”</i> Cassidy pipes up as the two of you ease yourself into your respective seats, a comforting ritual by now. <i>“I know that you might’ve had your own plans for tonight… but I wanted to ask you something. Had an idea while lying in bed last night and I want to know if you’re up for it.”</i>", parse);
+	Text.NL();
+	Text.Add("What might that be?", parse);
+	Text.NL();
+	Text.Add("<i>“Huh. How to put it…”</i> Cass looks sheepish for a bit, her tail instinctively curling about her ankles, then shakes off the mood in the blink of an eye. <i>“I want you to model for me. Stand around for a bit, do some poses, that kind of thing. Think it’d be a good idea, myself.”</i>", parse);
+	Text.NL();
+	Text.Add("Huh. You’re not sure if you’re qualified for that…", parse);
+	Text.NL();
+	Text.Add("<i>“You don’t need any qualifications for that, ace. All you need to be is inspiring, and I’ve seen you fight.”</i>", parse);
+	Text.NL();
+	Text.Add("Is… that supposed to be good or bad?", parse);
+	Text.NL();
+	Text.Add("Cass grins and flicks her tail, burning brightly with excitement. <i>“A little bit of both, really. But yeah. I’m working on an order right now, and I think that you might be what I need to add that extra touch of something to it, if you get what I mean. You’d be perfect.”</i>", parse);
+	Text.NL();
+	Text.Add("You… sort of do, and yet sort of don’t. Just what <i>is</i> she working on, anyway? It might help if you knew that.", parse);
+	Text.NL();
+	Text.Add("<i>“Sorry, ace; customer confidentiality and all. Wouldn’t run my mouth to someone else about something I was making for you, so gotta do the same for others, right? Now… gonna cut back to the chase - you want to model for me, or not?”</i>", parse);
+	Text.Flush();
+	
+	var options = [];
+	// [Sure!][No Thanks]
+	options.push({nameStr : "Sure!",
+		tooltip : Text.Parse("Modeling for Cass sounds like fun!", parse),
+		enabled : true,
+		func : function() {
+			Text.Clear();
+			Text.Add("Yeah, sure, that sounds like a lot of fun! Besides, Cass is so enthusiastic and eager, her golden eyes so bright - it’d practically be a travesty to say no to such a face. All right, then. What do you need to do? Just stand around and pose some, maybe flex a little?", parse);
+			Text.NL();
+			Text.Add("<i>“Umm… shit. I wasn’t really expecting you to agree to this… but yeah, I’ve done this before.”</i> Cassidy’s uncertainty is suddenly blown away like so much dust on the wind, leaving her with a half-crazed grin on her face. <i>“Know what? I think I’ve just got <b>the</b> idea for you. C’mon, let’s head out to the forge! Let me get some stuff - I’ll be right behind you!”</i>", parse);
+			Text.NL();
+			Text.Add("All right, then. Standing up from the table, you head back out to the shop floor and wait by the forge - while the heat’s been turned down a little, you don’t remember a single moment where Cass actually let the forge’s flames die out completely. The burning embers within flicker with a soft light, emanating warmth.", parse);
+			Text.NL();
+			Text.Add("Cass is out after you, a small stack of papers and pencils in hand, as well as a couple of lanterns and a stick of charcoal.", parse);
+			Text.NL();
+			Text.Add("<i>“Okay, ace,”</i> she says as she pulls up a seat by the forge. <i>“Gonna use these lanterns to get the mood and lighting down, but… yes, what is it?”</i>", parse);
+			Text.NL();
+			Text.Add("Pardon, but what exactly is she looking for here? You’d just like to know, so you can do your best in helping out.", parse);
+			Text.NL();
+			Text.Add("Cassidy smirks and brushes the tip of her tail about your lower body. <i>“I need you to inspire me, ace. You don’t need to do anything special - just pose a bit, do what naturally comes to you, ya know? Don’t force anything or think about it too hard, just let whatever you’re feeling come out on its own, and I’ll sketch you as you go.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Oh, and I’ll also need you to strip to your undies, if you don’t mind.”</i>", parse);
+			Text.NL();
+			
+			var slut = player.Slut() >= 50;
+			
+			if(slut)
+				Text.Add("Hey, you’ve no problem with that. Come to think of it, this whole modeling thing is sounding better by the moment.", parse);
+			else
+				Text.Add("Wha…?", parse);
+			Text.NL();
+			Text.Add("<i>“I <b>did</b> say I’d need to get a good look at your figure and muscles, ace. See what makes you tick inside and all. That’s where the inspiration comes from - at least, when it comes to people.”</i>", parse);
+			Text.NL();
+			var armor = "";
+			if(player.Armor() || !player.LowerArmor()) armor += "[armor]";
+			if(player.Armor() && player.LowerArmor()) armor += " followed by your ";
+			if(player.LowerArmor()) armor += "[botarmor]";
+			parse["arm"] = Text.Parse(armor, parse);
+			Text.Add("More and more mysterious. You step back and watch as Cassidy clears a small circle of space by the forge, then sets up the lanterns such that you’re illuminated from three sides. In the meantime, you busy yourself with removing your [arm], Cassidy’s gaze never leaving your form for so much as a moment.", parse);
+			Text.NL();
+			Text.Add("<i>“Hold on, ace, gotta adjust the lights - there we go. Now, ready to be my muse?”</i>", parse);
+			Text.NL();
+			Text.Add("Aww, that’s so sweet.", parse);
+			Text.NL();
+			Text.Add("<i>“Don’t be getting any ideas just yet, buster. This isn’t one of those stupid art classes those nobles have where it’s just a thinly-veiled excuse to go and bang the models. This is <b>Art</b>, with a capital A, and I actually intend to do something productive here. So let’s get cracking!”</i>", parse);
+			Text.NL();
+			Text.Add("Okay, okay! You get the point. What should you do, then?", parse);
+			Text.NL();
+			Text.Add("Cass grins and settles in the chair, bringing up paper, pencils and charcoal. <i>“Stretch a bit first; limber up and let me take in the details of how you move. After that… hmm. Then you can strike a pose which makes you feel like, well, what you think you’d like to be. How you’d like to portray yourself to others. Don’t be shy - we’re all friends here, right?”</i>", parse);
+			Text.NL();
+			parse["toe"] = player.IsNaga() ? "tail" : "toe";
+			Text.Add("Point taken. You take a few moments to stretch yourself out, as if you were warming up for a sparring session, working every single one of your muscles - or at least, those you know you have - from head to [toe]. Cassidy looks on with a completely straight face, taking in your every movement - she’s got her pencil in hand, although she hasn’t started drawing yet.", parse);
+			Text.NL();
+			Text.Add("All right, then; time for the big decision. What kind of pose do you want to strike?", parse);
+			Text.Flush();
+			
+			var options = [];
+			options.push({nameStr : "Heroic",
+				tooltip : Text.Parse("Brave and dashing! A traditional favorite!", parse),
+				enabled : true,
+				func : function() {
+					Text.Clear();
+					Text.Add("You decide to go with the timeless favorite - brave, heroic and dashing. After all, you’re supposed to be saving Eden, right? Right? That ought to qualify you for something, at the very least.", parse);
+					Text.NL();
+					Text.Add("<i>“Hmm. I see, I see,”</i> Cass muses to herself as she starts sketching away. <i>“Could you turn around so I can get a better look at your back?”</i>", parse);
+					Text.NL();
+					Text.Add("Well, okay. You do just that, and the soft scratching of pencil against paper fills the air.", parse);
+					Text.NL();
+					Text.Add("<i>“Okay, ace! Now pretend to do something you think is heroic!”</i>", parse);
+					Text.NL();
+					Text.Add("Um, something heroic? Right. Um… you point dramatically at the ceiling, doing your best to appear visionary and undaunted. Cass just giggles. Somehow, you get the feeling that this wasn’t quite the intended effect you were hoping for.", parse);
+					Text.NL();
+					Text.Add("<i>“I see. Bit of a safe choice, but you manage to pull it off, I guess.”</i>", parse);
+					Text.NL();
+					Text.Add("That’s better than falling completely flat on your face, you suppose.", parse);
+					Text.NL();
+					PrintDefaultOptions();
+				}
+			});
+			options.push({nameStr : "Determined",
+				tooltip : Text.Parse("Show your resolve of stone!", parse),
+				enabled : true,
+				func : function() {
+					Text.Clear();
+					Text.Add("Determined, that’s what you want to be, that’s how you want others to see you. Resolute in the face of adversity, plowing ahead in the face of the oncoming storm, unbroken in the wake of danger. With such thoughts in mind, you strike the most determined pose that you can possibly think of, widening your stance and just daring, <i>daring</i> anything to come at you.", parse);
+					Text.NL();
+					Text.Add("Yes! Standing in front of the forge in this strong, stoic pose, watching Cassidy’s hands move in a blur as the salamander smith sketches savagely…", parse);
+					Text.NL();
+					Text.Add("…It fills you with determination, doesn’t it? Yes, yes it does.", parse);
+					Text.NL();
+					Text.Add("<i>“Very powerful,”</i> Cass mutters to herself as the sound of pencil and charcoal against paper fills the air. <i>Very tenacious. Something hard and heavy, then? Hmm…“</i>", parse);
+					Text.NL();
+					Text.Add("Hard and heavy, like a mace or a hammer or something on those lines, you presume.", parse);
+					Text.NL();
+					PrintDefaultOptions();
+				}
+			});
+			options.push({nameStr : "Mysterious",
+				tooltip : Text.Parse("Dark and Mysterious, that’s you.", parse),
+				enabled : true,
+				func : function() {
+					Text.Clear();
+					Text.Add("Nothing for it, then. You draw in upon yourself and do your best to appear dark, mysterious and dangerous. The brooding type, an enigma unto itself. Layer wrapped within layers of, um, deep and rich backstory. Something like that, anyway, the kind of person that shows up in two-bit adventure and romance novels.", parse);
+					Text.NL();
+					Text.Add("Are the narrowed eyes good enough, or would a little chin-rubbing help, maybe? Hmm, it’s hard to tell without being able to see yourself. But Cass <i>did</i> say not to force things, so you’ll just have to wait for her verdict…", parse);
+					Text.NL();
+					Text.Add("<i>“Gee, you know, looking at you, I realize that there’s still so much I’ve got to learn about the world. And you too, of course.”</i>", parse);
+					Text.NL();
+					Text.Add("Really?", parse);
+					Text.NL();
+					Text.Add("<i>“No.”</i> Cass studies your reaction, then smiles. <i>“Great! Just like that! That face… that’s perfect; it’s exactly what I needed. Hold it right there… and I’ve got it. Wonderful!</i>", parse);
+					Text.NL();
+					PrintDefaultOptions();
+				}
+			});
+			
+			Gui.Callstack.push(function() {
+				Text.Add("<i>“Yes, yes! I’m seeing it coming together now, on the arms…”</i> Cass doodles away, her eyes alight with concentration, her tongue sticking out the corner of her half-open mouth, small, pointy teeth glistening in the lamplight. Seeing her go at it, you’re half-wishing you had a mirror right now. <i>“Here, ace, you see that sword blank over there by the forge?”</i>", parse);
+				Text.NL();
+				Text.Add("You look in the direction Cass’ pointing in and see a half-finished blade, little more than a dull strip of metal without even so much as a hilt.", parse);
+				Text.NL();
+				Text.Add("<i>“Yep, that one. Go ahead; pick it up and take a few swings at the air. I’d like to see how you cope with - uh - inadequacies.”</i>", parse);
+				Text.NL();
+				Text.Add("All righty then. You take a few swings at the air as instructed, striking at an imaginary foe, then at Cass’ encouragement, try a few thrusts and hacking motions.", parse);
+				Text.NL();
+				Text.Add("<i>“That’s it! I can definitely feel those creative juices flowing. Now, just imagine there’s something trying to crush you from above - a rock or dragon or something - and you’re desperately trying to block the blow with your cheap, unbalanced weapon.”</i>", parse);
+				Text.NL();
+				Text.Add("Okie-dokie. By the looks of her, that distinctive heat that practically washes off her skin and scales, and the sheer look of bliss on Cass’ face, it’s not inconceivable that there’re juices of a completely different kind flowing as well. Eventually, though, she finishes her sketching, slaps half of the papers down onto the ground, then jabs a finger in the air as she gets up from her seat and draws near.", parse);
+				Text.NL();
+				Text.Add("<i>“Okay, then! That’s the first part done! Now, I’m going to take your measure.”</i>", parse);
+				Text.NL();
+				Text.Add("For some reason, that sounded more menacing than it otherwise implied…", parse);
+				Text.NL();
+				Text.Add("Cassidy laughs and punches you on the shoulder. <i>“No need to get so antsy about things, ace. Just going to get a feel of you, nothing else to it.”</i>", parse);
+				Text.NL();
+				Text.Add("Get a feel of you?", parse);
+				Text.NL();
+				Text.Add("<i>“Like I said, take your measure, get a feel of, scope out your proportions, however you wanna put it.”</i> She grins widely and waggles her fingers. <i>“Now, do you mind holding very, very still? Just hold it for a moment and think of Eden if you need to - you’re doing a great service for Art.”</i>", parse);
+				Text.NL();
+				if(slut) {
+					Text.Add("A great service for Art, she says. Sure, you can do that. In fact, if she’d like to, you can most certainly perform other services as well.", parse);
+					Text.NL();
+					Text.Add("<i>“All in good time, all in good time. Just hold that pose, beautiful. Shall we begin?”</i>", parse);
+				}
+				else {
+					Text.Add("Um… sure?", parse);
+					Text.NL();
+					Text.Add("<i>“No need to be shy. I’ve made things for a great number of people in all sorts of proportions, after all. No different than a tailor taking your measure for clothes.”</i> Cass gives you a reassuring pat on the shoulder. <i>“You’re an inspiration on so many levels, [playername]. Would be a shame for someone like you to not go through the whole process.”</i>", parse);
+				}
+				Text.NL();
+				Text.Add("All right, then. Since she’s being so flattering, you’ll trust her to know what she’s doing.", parse);
+				Text.NL();
+				Text.Add("<i>“Heh. Have fun. I know I will.”</i> With that said, Cass adjusts the lanterns’ positions a little so you’re well-lit from all angles, and begins stalking around you like a predator circling her helpless quarry. Like it or not, you’re distinctly aware of the salamander’s gaze on your [skin] and just how naked you are…", parse);
+				if(slut)
+					Text.Add(" sure, it’s ostensibly for art and completely platonic, but your body still can’t help but feel a little thrill run through it, especially with the heat of the forge bare against you.", parse);
+				Text.NL();
+				Text.Add("The first thing you feel are Cassidy’s fingers, wrapping from behind you and encircling your wrist. Her tiny claws prickle your skin, and you feel them wandering up and down your forearm and shoulder, probing and testing as if you were a prime cut of beef at market. ", parse);
+				var tone = player.MuscleTone() > 0.5;
+				if(tone) {
+					if(player.dexterity.GrowthRank() >= 10)
+						Text.Add("<i>“Lean. Defined. No excess space. Quick too, I see.”</i> You’re not sure if Cass’ murmuring is meant for you or for herself, but her tail swishes against the floor gaily. <i>“Very nice; I approve. There are a bunch of things I can see you swinging.”</i>", parse);
+					else
+						Text.Add("<i>“Pretty well-defined, eh? Good arms, good arms. Although whether it’s just for show, or if there’s any actual strength in them… I suppose we’ll have to determine that another time, won’t we?”</i> Cassidy chuckles to herself, then traces her fingers across your defined muscles.", parse);
+				}
+				else {
+					Text.Add("<i>“Hmm… not bad, but not good either. A bit soft, perhaps - that just means that maybe you’ll be swinging something a little lighter, something with a little less brute force behind it. We’ll just have to make accommodations, then.”</i>", parse);
+				}
+				Text.NL();
+				Text.Add("With a final appreciative squeeze of your biceps, Cass runs her fingers across your shoulder and collarbone, down to your chest. The salamander smith takes a step back to take you in from a few different angles, her eyes hard and lips thin, then her gaze softens as she returns to poking and prodding you.", parse);
+				Text.NL();
+				
+				var size = player.FirstBreastRow().Size();
+				
+				if(size > 10) { //E
+					Text.Add("<i>“Ah yes, the old two saucepans and tin bath, as Dad used to put it. For putting the ‘breast’ in breastplate.”</i> Shaking her head, Cassidy reaches out and gives them each a squeeze, as if a little hesitant to believe they’re real. <i>“How do you actually manage with those things, anyway? Don’t they ever get in your way? Or do you somehow manage to adjust your style to their bulk?”</i>", parse);
+					Text.NL();
+					Text.Add("You’ve never really thought of it, to be honest. You just seem to manage somehow.", parse);
+					Text.NL();
+					Text.Add("<i>“Hmm. Can’t say I envy you, but there are those I’ve had to make such accommodations for in the past, so you’re not alone in this regard. Grandma used to tell me that Great-grandma was about this size or thereabouts, so it’s not out of the question, I guess.”</i>", parse);
+				}
+				else if(size > 5) {
+					Text.Add("<i>“Huh. You certainly are bigger than you look from a distance, and definitely more than -”</i> Cass cuts herself off mid-sentence and frowns.", parse);
+					Text.NL();
+					Text.Add("More than what?", parse);
+					Text.NL();
+					Text.Add("<i>“More than what would be expected, I suppose.”</i> Shamelessly, Cassidy reaches out and rolls each of your [breasts] in her palm one at a time, testing their warm weight, the hide and scales of her hands neatly cupping their rounded bottoms. <i>“Reminds me of some of the mannequins Mom used to put up the pieces with, those ones which were more for show than anything else. I still remember the chainmail bikini craze from when I was young, that one’s still worth a laugh.”</i>", parse);
+				}
+				else if(size > 2) {
+					Text.Add("<i>“Yep, a good size for someone who often gets into a bit of rough and tumble.”</i> Cassidy peers at your [breasts] with her golden eyes and scratches her chin thoughtfully. <i>“Pretty good range of movement you’ve got there, ace, without anything getting in the way. Even better, this way I won’t need to beat things out of the old tin bath and two saucepans, as Dad used to put it.”</i>", parse);
+					Text.NL();
+					Text.Add("Oh?", parse);
+					Text.NL();
+					Text.Add("Cass grins and pokes your lady lumps with her scaly fingers, clearly pleased at their texture. <i>“That’s how he used to refer to those who came in with… ah… impressive assets. Never made anything but special orders for ceremonial stuff, as far as I remember things.”</i>", parse);
+				}
+				else {
+					if(tone)
+						Text.Add("<i>“Heh, quite impressive,”</i> Cass says appreciatively as she runs a palm across your chest. <i>“Looking good, eh? But looking good is one thing, and actually being able to do something with it is another.”</i>", parse);
+					else
+						Text.Add("<i>“Hmm, not much to look at,”</i> she says, poking at your chest, then breaks into a grin. <i>“But appearances can be deceiving, can’t they? I’m pretty scrawny myself, so I should know, heh.”</i>", parse);
+					Text.NL();
+					Text.Add("With a small hum in the back of her throat, Cass rubs her palm across your chest, clearly taking plenty of pleasure from the motion and finishing up with a trembling sigh. <i>“Let’s move on then, ace.”</i>", parse);
+				}
+				Text.NL();
+				Text.Add("Cass’ wiry body circles around you in the blink of an eye, and before you know it, she’s pressing against you from behind, her arms sliding down from your torso down to your waist and hips.", parse);
+				Text.NL();
+				Text.Add("Oh, you can definitely see - and feel - that she’s got skilled hands indeed.", parse);
+				Text.NL();
+				Text.Add("Cass just snickers", parse);
+				var buttsize = player.Butt().Size();
+				if(buttsize >= 5) {
+					Text.Add("and gives you a good pinch on the butt", parse);
+					if(buttsize >= 9)
+						Text.Add(". Of course, with how ample your ass is, it’s more of a knead than a pinch, but it’s the thought that counts", parse);
+				}
+				Text.Add(".", parse);
+				Text.NL();
+				Text.Add("<i>“Whoa whoa whoa there. Don’t lead a good girl like me down along those paths.”</i> Her voice drips sarcasm, and she brushes her fingers across your waist, her claws leaving tiny flushes of heat in their wake. <i>“I’m just here to get your measure and proportions, remember? Now pipe down and let me finish conceptualizing, yeah?”</i>", parse);
+				Text.NL();
+				Text.Add("Her gaze then sweeps down your hips and [thighs], and ", parse);
+				var hipsize = player.HipSize();
+				if(!player.Humanoid()) {
+					Text.Add("shakes her head in an exasperated manner. <i>“I, uh, think I’ll have to use my imagination for this part,”</i> she grumbles. <i>“As much as I’d like to run wild with this, I think it would get me a bit off topic.”</i>", parse);
+				}
+				else if(hipsize >= HipSize.Wide) {
+					Text.Add("shakes her head. <i>“That’s one way to get a wide, stable stance all right, but I wouldn’t be able to keep up with the waggle.”</i>", parse);
+					Text.NL();
+					Text.Add("What’s wrong with the waggle?", parse);
+					Text.NL();
+					Text.Add("<i>“It’s not obvious and not practical to boot.”</i> Cass takes a step back and reconsiders her words. <i>“Although I suppose I can see how it can be inspiring to the right people. Still, it’s not my type.”</i>", parse);
+				}
+				else {
+					Text.Add("flows all the way down to your calves and ankles. <i>“Some pretty decent legs you’ve got down there. Good musculature; maybe a pair of greaves would fit nicely… huh.”</i>", parse);
+					Text.NL();
+					Text.Add("Should you take that as a compliment?", parse);
+					Text.NL();
+					Text.Add("Cass holds up a hand. <i>“I’m trying to think here, ace. Got some really good ideas going…”</i>", parse);
+				}
+				Text.NL();
+				var cock = player.BiggestCock();
+				if(cock && cock.Len() >= 30) {
+					Text.Add("Her eyes then sweep upwards to your groin, and she snickers, snapping her fingers. <i>“Ah, good times. You’d be amazed at the demand for custom-made reinforced codpieces. With such a large package, I’m sure it makes for a very tempting target - only anyone stupid enough to try kicking it ends up with a sprained ankle.”</i>", parse);
+					Text.NL();
+					Text.Add("She actually makes such things? You might be tempted…", parse);
+					Text.NL();
+					Text.Add("<i>“Hey, at least they’re more functional than the average chainmail bikini, I can tell you as much. Saved many a package in their time. You’ve got the goods, you need to protect them if you want to be using them later on.”</i>", parse);
+					Text.NL();
+					Text.Add("She’s being awfully blaisé about this, isn’t she?", parse);
+					Text.NL();
+					Text.Add("Cass shrugs. <i>“Familiarity breeds resentment, as Mom used to say. Someone has to do the measuring and all… and it wasn’t always Dad, if you get my meaning.”</i>", parse);
+					Text.NL();
+				}
+				Text.Add("Cass circles you a few more moments, eyeing you up and down, then returns to her seat and resumes sketching. <i>“Just about done here, ace. Gotta get it all down before it slips out of my mind.”</i>", parse);
+				Text.NL();
+				Text.Add("Does that mean that you can finally drop the pose now? The sword blank is starting to get just a <i>little</i> heavy in your hands, and you wouldn’t mind being able to set it down.", parse);
+				Text.NL();
+				Text.Add("More scratching; Cass doesn’t even look up from her paper. <i>“Yeah, go ahead. You can get dressed again if you like.”</i>", parse);
+				Text.NL();
+				Text.Add("Phew. Up until this moment, you weren’t sure exactly how much your arms were aching, but once you set down the sword blank on the rack, your muscles groan in protest. Cass finishes up the last of her sketches, and you busy yourself with getting all your gear on once more.", parse);
+				Text.NL();
+				Text.Add("<i>“And that’s that!”</i> Cassidy sets aside several sheets of paper, scrunches up the rest and throws them into the forge, and gives you a winning smile. <i>“I’ve certainly fished up a lot of ideas just from studying you tonight - seriously, I owe you one, ace.”</i>", parse);
+				Text.NL();
+				Text.Add("Oh, it was no problem. If she needs you to play muse for her, she just needs to ask. You’d be more than happy to oblige.", parse);
+				Text.NL();
+				Text.Add("<i>“Right. I mean, I wouldn’t mind continuing this session in other ways - ahem - but it’s gotten quite late and I do need to reopen the shop tomorrow. Maybe you’d like to come back another day? We can continue this in other ways, yeah?”</i>", parse);
+				Text.NL();
+				Text.Add("You’ll think about it.", parse);
+				Text.NL();
+				Text.Add("<i>“Great! Let me let you out, and I’ll see you around. Don’t be too long in coming back, okay?”</i>", parse);
+				Text.Flush();
+				
+				party.location = world.loc.Rigard.ShopStreet.street;
+				world.StepToHour(22);
+				
+				Gui.NextPrompt();
+			});
+			
+			Gui.SetButtonsFromList(options, false, null);
+		}
+	});
+	options.push({nameStr : "No Thanks",
+		tooltip : Text.Parse("You had other plans for this evening.", parse),
+		enabled : true,
+		func : function() {
+			Text.Clear();
+			Text.Add("It’s a little hard to refuse such eagerness, especially coming from someone like Cassidy, but you’ve got to turn her down. After all, you <i>did</i> have other plans for this evening.", parse);
+			Text.NL();
+			Text.Add("<i>“Aww.”</i> Cass pouts. <i>“You’d really look quite good - I really do think your body shape’s perfect to use as a base. Could work out the rest of it from there with a few properly inspiring poses… but eh. Not gonna force you to do it if you don’t wanna. That’d just ruin it - everything’s got to have soul to come out well.”</i>", parse);
+			Text.NL();
+			Text.Add("Maybe another time, and perhaps she could let you know in advance?", parse);
+			Text.NL();
+			Text.Add("<i>“Yeah, I guess.”</i> Cass settles down a little. <i>“All right then, ace. What did you want to do tonight?”</i>", parse);
+			Text.Flush();
+			
+			Scenes.Cassidy.InsidePrompt();
+		}
+	});
+	Gui.SetButtonsFromList(options, false, null);
+}
+
 
 //FEMINIZING
 Scenes.Cassidy.FemTalk2 = function() {
