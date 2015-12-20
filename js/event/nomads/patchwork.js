@@ -154,7 +154,7 @@ Scenes.Patchwork.Interact = function() {
 		Text.NL();
 		Text.Add("The robed figure turns to look at you. <i>“You’re new,”</i> a muffled voice states.", parse);
 		Text.NL();
-		Text.Add("You’re about to introduce yourself, when a small telescope emerges from the sea of patched cloth, extending until it’s a bit too close for comfort. You can see what looks like an eye through the lens. It swoops over you in a quick examination before retracting back into the robes.", parse);
+		Text.Add("You’re about to introduce yourself when a small telescope emerges from the sea of patched cloth, extending until it’s a bit too close for comfort. You can see what looks like an eye through the lens. It swoops over you in a quick examination before retracting back into the robes.", parse);
 		Text.NL();
 		Text.Add("<i>“Welcome to my shop, stranger. What’s your business?”</i>", parse);
 		Text.NL();
@@ -163,7 +163,7 @@ Scenes.Patchwork.Interact = function() {
 		Scenes.Patchwork.Prompt();
 	}
 	else if(patchwork.flags["Met"] < Patchwork.Met.Met2) {
-		Text.Add("With a little trepidation, you approach the eccentric pedlar in their patchworked robes again, asking if they are willing to do business with you.", parse);
+		Text.Add("With a little trepidation, you approach the eccentric peddler in their patchworked robes again, asking if they are willing to do business with you.", parse);
 		Text.NL();
 		Text.Add("<i>“Password?”</i>", parse);
 		Text.NL();
@@ -198,7 +198,7 @@ Scenes.Patchwork.Interact = function() {
 	else {
 		Text.Add("<i>“Password?”</i> the shady merchant asks.", parse);
 		Text.NL();
-		Text.Add("You shrug your shoulders, and spit out whatever random word pops into your head. You know [heshe]’ll let you shop just for playing along with whatever this silly game of [hishers] is.", parse);
+		Text.Add("You shrug your shoulders, and spit out whatever random words pop into your head. You know [heshe]’ll let you shop just for playing along with whatever this silly game of [hishers] is.", parse);
 		Text.NL();
 		Text.Add("<i>“Close enough, what’s your business stranger?”</i>", parse);
 		
@@ -280,7 +280,7 @@ Scenes.Patchwork.Prompt = function() {
 		else if(patchwork.flags["Met"] < Patchwork.Met.Met2) {
 			Text.Add("<i>“Next time’s password is: [pw].”</i>", parse);
 			Text.NL();
-			Text.Add("Slowly you nod your head, dryly assuring them that you have it... but, privately, you ask yourself if you really need it; so long as you play along, it looks like they’ll accept whatever you say.", parse);
+			Text.Add("Slowly you nod your head, dryly assuring them that you have it... but privately, you ask yourself if you really need it; so long as you play along, it looks like they’ll accept whatever you say.", parse);
 			patchwork.flags["Met"] = Patchwork.Met.Met2;
 		}
 		else {
