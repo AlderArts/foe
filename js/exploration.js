@@ -83,18 +83,24 @@ SetExploreButtons = function() {
 	}
 }
 
-LimitedDataPrompt = function(backFunc) {
-	SetGameState(GameState.Event);
-	
+Gui.SavePromptText = function() {
 	Text.Clear();
-	Gui.ClearButtons();
-	
 	Text.Add("Fall of Eden saves using JavaScript localStorage (also known as Web Storage). Exactly how and where this will put your save is up to browser implementation, but the standard ensures at least 5MB of storage space, more than enough for 12 full save slots.");
+	Text.NL();
+	Text.Add("IMPORTANT: Saves are kept by your browser, for the specific domain you are playing in atm. If you clear browsing history or the domain changes, you may lose saves. See these saves as temporary, ALWAYS use Save to File to backup if you want to ensure not losing your progress!", null, 'bold');
 	Text.NL();
 	Text.Add("You can only save at 'safe' locations in the world (the same places you can sleep), but you can load/start a new game from anywhere.");
 	Text.NL();
 	Text.Add("<b>NEW:</b> Use the save to text if you are having problems using save to file. Copy the text that appears into a text file, and save it. You will be able to use it with load from file.");
 	Text.Flush();
+}
+
+LimitedDataPrompt = function(backFunc) {
+	SetGameState(GameState.Event);
+	
+	Gui.ClearButtons();
+	
+	Gui.SavePromptText();
 	
 	Input.buttons[0].Setup("Save game", function() {
 		Saver.SavePrompt(function() {
@@ -131,16 +137,10 @@ DataPrompt = function() {
 	SetGameState(GameState.Event);
 	// At safe locations you can sleep and save
 	var safeLocation = party.location.safe();
-    	
-	Text.Clear();
+    
 	Gui.ClearButtons();
 	
-	Text.Add("Fall of Eden saves using JavaScript localStorage (also known as Web Storage). Exactly how and where this will put your save is up to browser implementation, but the standard ensures at least 5MB of storage space, more than enough for 12 full save slots.");
-	Text.NL();
-	Text.Add("You can only save at 'safe' locations in the world (the same places you can sleep), but you can load/start a new game from anywhere.");
-	Text.NL();
-	Text.Add("<b>NEW:</b> Use the save to text if you are having problems using save to file. Copy the text that appears into a text file, and save it. You will be able to use it with load from file.");
-	Text.Flush();
+	Gui.SavePromptText();
 	
 	Input.buttons[0].Setup("Save game", function() {
 		Saver.SavePrompt(DataPrompt);
