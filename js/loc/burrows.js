@@ -132,17 +132,17 @@ world.loc.Burrows.Entrance.description = function() {
 	scenes.AddEnc(function() {
 		Text.Add("You see a strange structure being put together close by. A pile of scrap material is being stacked in the rough semblance of a house, but with barely enough room for a person to fit in. A short female lagomorph seems to be directing a small workforce in the assembly, gesturing insistently. Nodding to herself, she waves the others off and crawls inside the rickety hovel, smiling triumphantly at this defiance of the elements.", parse);
 		Text.NL();
-		Text.Add("The elements in question have something else to say about the matter though, as a slight breeze causes the structure to wobble unsteadily, before slowly collapsing in on itself, trapping the squealing architect beneath the rubble. Her fellow construction workers mill around uncertainly, apparently unsure if they should be helping her, before pulling away some of the material, freeing her head. She seems to be largely unharmed, although trapped in place.", parse);
+		Text.Add("The elements in question have something else to say about the matter though as a slight breeze causes the structure to wobble unsteadily, before slowly collapsing in on itself, trapping the squealing architect beneath the rubble. Her fellow construction workers mill around uncertainly, apparently unsure if they should be helping her, before pulling away some of the material, freeing her head. She seems to be largely unharmed, although trapped in place.", parse);
 		Text.NL();
 		Text.Add("At her insistent pleading, most of the rubble covering the lagomorph is removed, but a particularly heavy crossbeam is pinning her midsection to the ground. The others make a few half-hearted attempts to pull it aside, but failing that, they shrug and make the best of the situation. Ignoring her muffled protests, three of the male workers set to filling her front and back, quickly reducing the enterprising architect to a moaning slut.", parse);
 		Text.NL();
 	}, 1.0, function() { return burrows.BrainyActive(); });
 	scenes.AddEnc(function() {
-		Text.Add("A group of female lagomorphs are flocking around a bulging brute of a rabbit, at least twice as tall as the regular creatures. He looks almost as wide as he is tall, bulging with muscles, and from the delighted oohs and aahs of the crowd, he is likely sporting quite the third leg. The hulking rabbit is wearing a huge grin and not much else, flexing pompously for his admirers.", parse);
+		Text.Add("A group of female lagomorphs are flocking around a bulging brute of a rabbit, at least twice as tall as the regular creatures. He looks almost as wide as he is tall, rippling with muscles, and from the delighted 'oohs' and 'aahs' of the crowd, he is likely sporting quite the third leg. The hulking rabbit is wearing a huge grin and not much else, flexing pompously for his admirers.", parse);
 		Text.NL();
 	}, 1.0, function() { return burrows.BruteActive(); });
 	scenes.AddEnc(function() {
-		Text.Add("There is a small crowd of rabbits gathered close by, hooting and cheering. The focus of their attention is a trio of lagomorphs, panting and grinding against each other. At first you judge them to be female due to their breasts, but all three seems to be sporting rather respectable dicks. One is on her back, cock flopping around freely as she is railed by one of her moaning companions. She, in turn, is getting a good fucking from the third hermaphrodite.", parse);
+		Text.Add("There is a small crowd of rabbits gathered close by, hooting and cheering. The focus of their attention is a trio of lagomorphs, panting and grinding against each other. You judge them to be female due to their breasts at first, but all three seems to be sporting rather respectable dicks. One is on her back, cock flopping around freely as she is railed by one of her moaning companions. She, in turn, is getting a good fucking from the third hermaphrodite.", parse);
 		Text.NL();
 	}, 1.0, function() { return burrows.HermActive(); });
 	
@@ -293,7 +293,7 @@ world.loc.Burrows.Pit.description = function() {
 		Lagon : burrows.VenaRestored() ? "Vena" : "Lagon"
 	};
 	
-	Text.Add("The Pit is probably the largest cavern in the lagomorph colony, a giant breeding chamber filled with the never-ending grunts and moans of the giant orgy. Several hundred rabbits have joined in the party, with those too tired to go on continually being replaced by new arrivals. The floor tilts toward the center of the chamber, the narrow open pathways sticky with cum.", parse);
+	Text.Add("The Pit is probably the largest cavern in the lagomorph colony, a massive breeding chamber filled with the never-ending grunts and moans of the giant orgy. Several hundred rabbits have joined in the party, with those too tired to go on continually being replaced by new arrivals. The floor tilts toward the center of the chamber, the narrow open pathways sticky with cum.", parse);
 	Text.NL();
 	if(burrows.LagonPit()) {
 		if(world.time.hour >= 2 && world.time.hour < 6)
@@ -466,15 +466,15 @@ Scenes.Burrows.Arrival = function(alpha) {
 	Text.NL();
 	Text.Add("Although you aren’t sure what “the Pit” is, you suspect it’s not good for your continued well-being. You are quickly carried into a large tunnel, dimly lit by small earthenware pots holding a faintly glowing powder. Passages split off to each side, and your sense of direction is soon thoroughly confused by the maze.", parse);
 	Text.NL();
-	Text.Add("Lewd moans from many of the shady paths leave you with little doubt what the main pastime is in this little community, with your guess confirmed by the fact that most if not all of the females you see are in various stages of pregnancy.", parse);
+	Text.Add("Lewd moans from many of the shady paths leave you with little doubt what the main pastime is in this little community, with your guess confirmed by the fact that most - if not all - of the females you see are in various stages of pregnancy.", parse);
 	Text.NL();
 	Text.Add("Your troupe slows down, apparently closing in on its destination. You stare as you are carried into an immense chamber, so large that you are unable to see the opposite side in the dim light. Haphazard structures of piled-up wood act as supporting pillars, presumably preventing the roof from crashing in. Exactly how they manage to do this is bewildering, as the collective engineering skill of the rabbits seems about equal to that of a five-year old. A five-year old with broken arms.", parse);
 	Text.NL();
-	Text.Add("The room is packed with more of the small creatures, engaged in undoubtedly the largest orgy you have ever witnessed. There must be hundreds of them in there. The air is thick with the smells and sounds of sex; lustful moans and grunts so numerous they meld into a continuous drone.", parse);
+	Text.Add("The room is packed with more of the small creatures, engaged in undoubtedly the largest orgy you have ever witnessed. There must be hundreds of them in there. The air is thick with the smells and sounds of sex; lustful moans and grunts so numerous that they meld into a continuous drone.", parse);
 	Text.NL();
 	Text.Add("You are carried down a slope, presumably toward the center of the chamber. Sneaking a look to the side, you see what almost looks like irrigation canals carrying sticky sexual fluids downstream. Everywhere your eye can see, large clusters of rabbits are fornicating, driven by their frantic lust and seemingly endless supply of energy. It doesn’t seem just for reproduction either, as you see plenty of already pregnant females - as well as a large number of males - being on the receiving end.", parse);
 	Text.NL();
-	Text.Add("The small streams of the intricate irrigation system join together into larger streams, finally seeping into what looks like a pool - a very sticky, cream-colored pool. You idly wonder how long this has been going on to gather this much... fluids. Knee-deep in the accumulated spooge is without a doubt the largest lagomorph specimen you have seen so far.", parse);
+	Text.Add("The small streams of the intricate irrigation system join together into larger streams, finally seeping into what looks like a pool - a very sticky, cream-colored pool. You idly wonder how long this has been going on to gather this much... fluid. Knee-deep in the accumulated spooge is without a doubt the largest lagomorph specimen you have seen so far.", parse);
 	Text.NL();
 	Text.Add("She is immense, so swollen with child that you don’t doubt that her eventual litter will number at least a dozen. Her heaving breasts continually leak of milk, adding to the mess she wallows in. The matriarch is attended by a group of males, at least four of them filling her at any given moment. The remaining ones wait their turn, taking out their frustrated sexual urges on lesser females, or on each other. The focus of the orgy is in constant rapture, her eyes rolled back in her head.", parse);
 	Text.NL();
@@ -500,7 +500,7 @@ Scenes.Burrows.Arrival = function(alpha) {
 		Text.NL();
 		Text.Add("<i>“You’ve already met my mother,”</i> Ophelia waves at the grossly pregnant matriarch, all her holes still stuffed by her worshippers. <i>“Her name is Vena, though she hardly even responds to it anymore,”</i> the woman tells you sadly as she walks a winding path out of the Pit.", parse);
 		Text.NL();
-		Text.Add("You are plagued with questions, but for now, you are happy just to get away from this place. You[comp] walk in silence, following the rabbit intellectual. After passing through some more serpentine tunnels, you end up in a larger room, cluttered with various bottles, vials and alchemical instruments.", parse);
+		Text.Add("You are plagued with questions, but for now you are happy just to get away from this place. You[comp] walk in silence, following the rabbit intellectual. After passing through some more serpentine tunnels, you end up in a larger room, cluttered with various bottles, vials and alchemical instruments.", parse);
 		Text.Flush();
 		
 		party.location = world.loc.Burrows.Lab;
@@ -518,9 +518,9 @@ Scenes.Burrows.ArrivalOphelia = function() {
 	Text.Clear();
 	Text.Add("Unlike the rest of the underground complex, the room is brightly lit, though the unidentified lightsource casts a greenish tinge to everything you see. Near the back of the room, three lagomorphs are chained to the wall, one of them sleeping and the other two locked together in intercourse.", parse);
 	Text.NL();
-	Text.Add("<i>“Please, don’t mind them,”</i> Ophelia waves at them dismissively, <i>“they help me with my work. Have a seat.”</i> You are ushered onto a narrow bench along one wall, taking your seat carefully to avoid breaking something. The woman hands you a relatively clean towel, gesturing for you to get the worst of the Pit off yourself. She takes off her own coat, shamelessly revealing her nude body. You get a good display of everything she’s got, as she twirls around and hops over to a nearby closet, bending inside to fetch another identical coat.", parse);
+	Text.Add("<i>“Please, don’t mind them,”</i> Ophelia waves at them dismissively, <i>“they help me with my work. Have a seat.”</i> You are ushered onto a narrow bench along one wall, taking your seat carefully to avoid breaking something. The woman hands you a relatively clean towel, gesturing for you to get the worst of the Pit off yourself. She takes off her own coat, shamelessly revealing her nude body. You get a good display of everything she’s got as she twirls around and hops over to a nearby closet, bending inside to fetch another identical coat.", parse);
 	Text.NL();
-	Text.Add("<i>“Visiting mother is always such a messy business,”</i> Ophelia complains as she fastens the garment, fitting it snugly across her chest. She adjusts her glasses and purses her lips, scrutinizing you. <i>“Now, what do we have here? You said your name was [playername]?”</i>", parse);
+	Text.Add("<i>“Visiting Mother is always such a messy business,”</i> Ophelia complains as she fastens the garment, fitting it snugly across her chest. She adjusts her glasses and purses her lips, scrutinizing you. <i>“Now, what do we have here? You said your name was [playername]?”</i>", parse);
 	Text.NL();
 	Text.Add("You nod, and tell her that the rabbits accosted you while you were traveling to the city to visit the market. She doesn’t seem entirely convinced, but nods amiably.", parse);
 	Text.NL();
@@ -577,7 +577,7 @@ Scenes.Burrows.ArrivalOpheliaTalk = function() {
 				Text.NL();
 				Text.Add("<i>“I carry a rare mutation, inherited from my father. It significantly increases my intelligence and rational thinking abilities, and I’ve been sure to cultivate this gift as well as I can.”</i> She gestures around the room. Besides the alchemical instruments, there is a large number of books packed on shelves, ranging across a multitude of topics.", parse);
 				Text.NL();
-				Text.Add("<i>“Father got them for me,”</i> she beams proudly, <i>“I’ve read all of them several times, though father insists I should only focus on those pertaining to alchemy.”</i> The lagomorph hops over to one of the shelves, touching the backs of the books fondly.", parse);
+				Text.Add("<i>“Father got them for me,”</i> she beams proudly, <i>“I’ve read all of them several times, though Father insists I should only focus on those pertaining to alchemy.”</i> The lagomorph hops over to one of the shelves, touching the backs of the books fondly.", parse);
 				Text.NL();
 				Text.Add("<i>“I... sometimes rebel, though,”</i> she admits, <i>“I’ve taken a liking to tales of adventure and romance. It’s just too bad I so rarely get to go outside to expand my collection, since my work here keeps me too busy. You wouldn’t happen to have such books, would you?”</i> she asks hopefully.", parse);
 				Text.NL();
@@ -599,13 +599,13 @@ Scenes.Burrows.ArrivalOpheliaTalk = function() {
 				Text.NL();
 				Text.Add("You try to keep your expression neutral, as she is clearly conflicted on the matter. How can one woman make such a huge difference, though? And... what about Ophelia’s father?", parse);
 				Text.NL();
-				Text.Add("<i>“Mother is... different.”</i> Ophelia points to several large earthenware jugs lining one side of the room. <i>“My early experiments didn’t have the same potency as they do now, but at times I would hit gold. Though the effect is rare, I managed to brew a potion that would increase the fertility and lower the gestation period of females. On most subjects, it caused sterility, but on mother it proved more than effective. She can produce a litter in less than a day.”</i>", parse);
+				Text.Add("<i>“Mother is... different.”</i> Ophelia points to several large earthenware jugs lining one side of the room. <i>“My early experiments didn’t have the same potency as they do now, but at times I would hit gold. Though the effect is rare, I managed to brew a potion that would increase the fertility and lower the gestation period of females. On most subjects, it caused sterility, but on Mother it proved more than effective. She can produce a litter in less than a day.”</i>", parse);
 				Text.NL();
 				Text.Add("<i>“The process is... exhausting, however.”</i> She bows her head. <i>“She barely knows anything other than the pleasure of breeding and birthing. Her dedication to the colony is truly admirable.”</i>", parse);
 				Text.NL();
 				Text.Add("You repeat your last question.", parse);
 				Text.NL();
-				Text.Add("<i>“What about my father?”</i> she asks, confused, <i>“he mates with her at times, but there are many others vying for his attention. It is the highest of honors to be bred by him.”</i>", parse);
+				Text.Add("<i>“What about my father?”</i> she asks, confused. <i>“He mates with her at times, but there are many others vying for his attention. It is the highest of honors to be bred by him.”</i>", parse);
 				Text.Flush();
 				Scenes.Burrows.OpheliaTalkVena = true;
 				Scenes.Burrows.ArrivalOpheliaTalk();
@@ -678,7 +678,7 @@ Scenes.Burrows.ArrivalOpheliaTalk = function() {
 					Text.NL();
 					Text.Add("Before you have time to make your next move, you feel a sharp prick on the side of your neck. Ophelia lithely hops back as you twirl around to face your attacker. There is a dripping needle in one of her hands.", parse);
 					Text.NL();
-					Text.Add("<i>“Sorry, but you’ll have to go meet father,”</i> Ophelia tells you. You take a step toward her, but you are growing weak, your vision blurring as the substance injected into your veins starts to take effect. Sound fades as the world spins, the ground speeding in from the side, connecting with your skull in a dull thud.", parse);
+					Text.Add("<i>“Sorry, but you’ll have to go meet Father,”</i> Ophelia tells you. You take a step toward her, but you are growing weak, your vision blurring as the substance injected into your veins starts to take effect. Sound fades as the world spins, the ground speeding in from the side, connecting with your skull in a dull thud.", parse);
 					Text.NL();
 					Text.Add("...", parse);
 					Text.NL();
