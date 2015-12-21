@@ -1985,7 +1985,7 @@ Scenes.Miranda.TakeHome = function() {
 	
 	Text.Clear();
 	if(miranda.Attitude() < Miranda.Attitude.Neutral) {
-		Text.Add("</i>”Heh, craving some cock are you?”</i> Miranda chortles, draining the last of her drink and slamming the mug down on the table. </i>”Very well then, slut. Dating you is a waste of time anyway, so let’s get your sweet ass back to my den and skip straight to the part you love above all else, my cock,”</i> she says grabbing your arm and dragging you after her as she exits the bar.", parse);
+		Text.Add("</i>”Heh, craving some dick, are you?”</i> Miranda chortles, draining the last of her drink and slamming the mug down on the table. </i>”Very well then, slut. Dating you is a waste of time anyway, so let’s get your sweet ass back to my den and skip straight to the part you love above all else, my cock,”</i> she says grabbing your arm and dragging you after her as she exits the bar.", parse);
 		Text.NL();
 		if(player.SubDom() > 0)
 			Text.Add("Whatever last-second doubts you may have, you can't do anything to stop her now. Her grip around your wrist is like iron and you have no choice but to follow her as she leads you toward her home.", parse);
