@@ -330,7 +330,7 @@ Scenes.DryadGlade.FirstLoss = function() {
 				else {
 					Text.Add("<i>“What is this now? I thought you were a girl!”</i> the dryad exclaims at the sight of Terry’s rock hard member, amused by her discovery.", parse);
 					if(terry.FirstVag())
-						Text.Add(" <i>“Well, I guess you have those parts too,”</i> she adds, splaying Terry’s legs wide in order to expose his pussy.", parse);
+						Text.Add(" <i>“Well, I guess you have those parts too,”</i> she adds, splaying Terry’s legs wide in order to expose [hisher] pussy.", parse);
 					Text.Add(" <i>“I won’t go easy on you, rebellious little fox,”</i> Orchid purrs, her tentacles swaying into position.", parse);
 				}
 			}
@@ -743,7 +743,7 @@ Scenes.DryadGlade.MotherTreeTalk = function() {
 			Text.Flush();
 			Scenes.DryadGlade.MotherTreeTalk();
 		}, enabled : true,
-		tooltip : "Ask her about her younger daughter Spirit who resides in your Gem."
+		tooltip : "Ask her about her younger daughter Spirit, who resides in your Gem."
 	});
 	if(false) { //TODO Unlocks after being to the Spring for the first time.
 		options.push({ nameStr : "Spring",
