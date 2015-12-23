@@ -33,7 +33,7 @@ world.loc.Desert.Drylands.enc.AddEnc(function() {
 		};
 		
 		Text.Clear();
-		Text.Add("Wandering the desert, you find a tiny spiky turtle slowly crawling across the sands. Taking care to avoid the prickly needles on its back, you pick up the thing and put it in your inventory.", parse);
+		Text.Add("Wandering the desert, you find a tiny, spiky turtle slowly crawling across the sands. Taking care to avoid the prickly needles on its back, you pick up the thing and put it in your inventory.", parse);
 		Text.NL();
 		Text.Add("<b>Received a cactoid!</b>", parse);
 		
