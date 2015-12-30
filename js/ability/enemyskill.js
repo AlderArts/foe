@@ -281,7 +281,7 @@ Abilities.EnemySkill.GolCuntDash.castTree.push(AbilityNode.Template.Physical({
 		Text.NL();
 		Text.Add("The Gol queen bashes [tname] for " + Text.BoldColor(-dmg, "#800000") + " damage, staggering [thimher]!", parse);
 		Text.NL();
-		Text.Add("When she finishes charging past, [tname] blink[tnotS] in a daze and stagger to [thisher] feet, uncomfortably warm in all the wrong places.", parse);
+		Text.Add("When she finishes charging past, [tname] blink[tnotS] in a daze and stagger to [thisher] [feet], uncomfortably warm in all the wrong places.", parse);
 		target.AddLustFraction(0.3);
 	}],
 	onAbsorb: [Abilities.Physical._onAbsorb]
@@ -297,7 +297,7 @@ Abilities.EnemySkill.GolPollen.castTree.push(AbilityNode.Template.Physical({
 	toDamage: null,
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = {};
-		Text.Add("Sighing, the Gol runs her hands through her shimmering black hair in frustration. After her fingers' first pass, she repeats the action, then does it again. And again. Soon the air around her seems slightly foggy, and your nose itches. A sneeze wracks your body as she continues the motion, filling the air with... something. You can't say what, but it's making you sneeze, and causing your nose to get itchy and irritable. The insectile beauty seems taller and more imposing after each involuntary spasm of your body. Her breasts appear larger, her pussy more inviting, and her face more charmingly human. For a monster, she wouldn't be a bad one to settle down with.", parse);
+		Text.Add("Sighing, the Gol runs her hands through her shimmering black hair in frustration. After her fingers' first pass, she repeats the action, then does it again. And again. Soon, the air around her seems slightly foggy, and your nose itches. A sneeze wracks your body as she continues the motion, filling the air with... something. You can't say what, but it's making you sneeze, and causing your nose to get itchy and irritable. The insectile beauty seems taller and more imposing after each involuntary spasm of your body. Her breasts appear larger, her pussy more inviting, and her face more charmingly human. For a monster, she wouldn't be a bad one to settle down with.", parse);
 		Text.NL();
 	}],
 	onMiss: [Abilities.Physical._onMiss],

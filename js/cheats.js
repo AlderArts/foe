@@ -19,7 +19,7 @@ world.loc.Plains.Nomads.Tent.events.push(new Link(
 	function() {
 		if(DEBUG) {
 			Text.NL();
-			Text.Add(Text.BoldColor("Mr Johnson, the cocksmith, is sitting inconspicuously in a corner."));
+			Text.Add(Text.BoldColor("Mr. Johnson, the cocksmith, is sitting inconspicuously in a corner."));
 			Text.NL();
 		}
 	},
