@@ -277,6 +277,7 @@ Abilities.EnemySkill.GolCuntDash.castTree.push(AbilityNode.Template.Physical({
 	}],
 	onDamage: [function(ability, encounter, caster, target, dmg) {
 		var parse = AbilityNode.DefaultParser(caster, target);
+		parse["feet"] = target.FeetDesc();
 		Text.Add("[tName] react[tnotS] a little too late to dive out the way, but [theshe] manage[tnotS] to duck low in an attempt to slip under her scythes… just not low enough. Her oncoming crotch and abdomen smack into [tname], and her fragrant pussy drags across [tposs] face and slimes it with a thick coat of her vaginal juices. The chitin of her underbelly is quite soft on [tposs] cheek, almost like a pleasant caress.", parse);
 		Text.NL();
 		Text.Add("The Gol queen bashes [tname] for " + Text.BoldColor(-dmg, "#800000") + " damage, staggering [thimher]!", parse);
