@@ -7408,7 +7408,7 @@ Scenes.Terry.SexHaveADrinkBreastsMilk = function(parse) {
 		Text.Add("Feeling very good, and very pleased with yourself, you consider how to properly thank your pet for providing such a delicious treat. Ah, that sounds promising...", parse);
 	}
 	else if(milk >= Terry.MilkLevel.Mid) {
-		Text.Add("After a few seconds of nursing, your reward is a smooth, steady flow of rich creamy [foxivixen] milk. Happily, you guzzle it down, gulping each heady mouthful before sucking forth a fresh one. Eventually, the flow becomes a thin trickle, and you turn to Terry’s other breast to fully sate your thirst.", parse);
+		Text.Add("After a few seconds of nursing, your reward is a smooth, steady flow of rich creamy [foxvixen] milk. Happily, you guzzle it down, gulping each heady mouthful before sucking forth a fresh one. Eventually, the flow becomes a thin trickle, and you turn to Terry’s other breast to fully sate your thirst.", parse);
 		Text.NL();
 		Text.Add("After several long, dreamy minutes, your belly grumbles its satiation and you allow Terry’s nipple to fall from your mouth. Sighing in contentment, basking in the feeling of warm fullness that ripples out from your stomach, you cuddle [himher] closer.", parse);
 		Text.NL();
