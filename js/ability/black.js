@@ -47,7 +47,7 @@ Abilities.Black.Fireball.castTree.push(AbilityNode.Template.Magical({
 	atkMod: 2,
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
-		Text.Add("[Name] make[notS] mystic incantations, waving [hisher] [hand]s in the air. Fiery glyphs appear in front of [himher], coalescing in a large fireball forming between [hisher] outstretched [hand]s. With a great roar, the molten ball of magic surge toward [tname]! ", parse);
+		Text.Add("[Name] make[notS] mystic incantations, waving [hisher] [hand]s in the air. Fiery glyphs appear in front of [himher], coalescing in a large fireball forming between [hisher] outstretched [hand]s. With a great roar, the molten ball of magic surges toward [tname]! ", parse);
 	}],
 	onMiss: [Abilities.Black._onMiss],
 	onDamage: [Abilities.Black._onDamage],
@@ -240,7 +240,7 @@ Abilities.Black.WindShear.castTree.push(AbilityNode.Template.Magical({
 	atkMod: 1.5,
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
-		Text.Add("[Poss] [hand]s weave back and forth, summoning a powerful gale of shrieking winds. A frenzy of cutting and slicing air surge toward [tname]! ", parse);
+		Text.Add("[Poss] [hand]s weave back and forth, summoning a powerful gale of shrieking winds. A frenzy of cutting and slicing air surges toward [tname]! ", parse);
 	}],
 	onMiss: [Abilities.Black._onMiss],
 	onDamage: [Abilities.Black._onDamage],
@@ -455,7 +455,7 @@ Abilities.Black.Scream.castTree.push(AbilityNode.Template.Magical({
 	atkMod: 2,
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster);
-		Text.Add("[Poss] lets out a ear-splitting shriek, the sheer force of [hisher] voice rippling through the air.", parse);
+		Text.Add("[Poss] let[notS] out a ear-splitting shriek, the sheer force of [hisher] voice rippling through the air.", parse);
 		Text.NL();
 	}],
 	onDamage: [function(ability, encounter, caster, target, dmg) {
