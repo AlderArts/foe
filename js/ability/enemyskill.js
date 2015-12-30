@@ -282,7 +282,7 @@ Abilities.EnemySkill.GolCuntDash.castTree.push(AbilityNode.Template.Physical({
 		Text.NL();
 		Text.Add("The Gol queen bashes [tname] for " + Text.BoldColor(-dmg, "#800000") + " damage, staggering [thimher]!", parse);
 		Text.NL();
-		Text.Add("When she finishes charging past, [tname] blink[tnotS] in a daze and stagger to [thisher] [feet], uncomfortably warm in all the wrong places.", parse);
+		Text.Add("When she finishes charging past, [tname] blink[tnotS] in a daze and stagger back on [thisher] [feet], uncomfortably warm in all the wrong places.", parse);
 		target.AddLustFraction(0.3);
 	}],
 	onAbsorb: [Abilities.Physical._onAbsorb]
