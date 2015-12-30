@@ -1090,6 +1090,7 @@ Scenes.Isla.Sex.First = function() {
 	};
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
 	
 	isla.flags["Talk"] |= Isla.Talk.Sex;
 	
@@ -1208,7 +1209,7 @@ Scenes.Isla.Sex.First = function() {
 		Text.Add("<i><b>“Ngggggh!</b></i> The cry is more pained than the others, and you quickly realize that you’ve deflowered the poor girl. Well, time to make up for it - securing your hold on Isla, you begin jackhammering yourself in and out of her, doing your best impression of a mindless, rutting beast, your bodies moving involuntarily against each other. She can’t see what you’re doing, and neither can you see her face, but with how enthusiastically she’s responding, she can definitely <i>feel</i> it.", parse);
 		Text.NL();
 		if(player.NumCocks() > 1) {
-			Text.Add("Your other shaft[s] slap[notS] heavily against her thin ass and slick thighs, spanking her in time with your thrusts. Isla yelps, and soon you’re dribbling pre from [itThem] too, smearing her calves and feet with your sticky slime.", parse);
+			Text.Add("Your other shaft[s2] slap[notS2] heavily against her thin ass and slick thighs, spanking her in time with your thrusts. Isla yelps, and soon you’re dribbling pre from [itThem2] too, smearing her calves and feet with your sticky slime.", parse);
 			Text.NL();
 		}
 		if(player.HasBalls()) {
@@ -1247,7 +1248,7 @@ Scenes.Isla.Sex.First = function() {
 			Scenes.Isla.Impregnate(player, cum);
 			
 			if(player.NumCocks() > 1) {
-				Text.Add("Your other shaft[s] blast[notS] away, too, jetting string after string of sperm down the back of her thighs to mix with her juices. It gets all over her legs and tail, marring that beautiful, dark fur of hers, but at least it’ll wash off well later. You hope.", parse);
+				Text.Add("Your other shaft[s2] blast[notS2] away, too, jetting string after string of sperm down the back of her thighs to mix with her juices. It gets all over her legs and tail, marring that beautiful, dark fur of hers, but at least it’ll wash off well later. You hope.", parse);
 				Text.NL();
 			}
 			parse["knot"] = knot ? " and neatly tied to your knot" : "";
