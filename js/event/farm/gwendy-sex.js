@@ -204,7 +204,7 @@ Scenes.Gwendy.ChallengeSexWonPrompt = function(hangout, options, disableSleep) {
 			options.push({ nameStr : "D.Dildo",
 				func : function() {
 					Scenes.Gwendy.ChallengeSexAnal(Gwendy.Toys.DDildo, hangout);
-				}, enabled : player.AnalCap() >= 30, // TODO Scale
+				}, enabled : player.AnalCap() >= Items.Toys.EquineDildo.cock.Thickness(),
 				tooltip : "Bring out Gwendy’s double-ended horsedildo for some double anal fun."
 			});
 		}
@@ -1003,7 +1003,7 @@ Scenes.Gwendy.ChallengeSexAnal = function(toys, hangout) {
 			options.push({ nameStr : "D.Dildo",
 				func : function() {
 					Scenes.Gwendy.ChallengeSexAnalToys(Gwendy.Toys.DDildo, hangout, first);
-				}, enabled : player.AnalCap() >= 30, // TODO Scale
+				}, enabled : player.AnalCap() >= Items.Toys.EquineDildo.cock.Thickness(),
 				tooltip : "Bring out Gwendy’s double-ended horsedildo for some double anal fun."
 			});
 			Gui.SetButtonsFromList(options);
@@ -1147,7 +1147,7 @@ Scenes.Gwendy.ChallengeSexAnalToys = function(toy, hangout, first) {
 	parse["gits"]     = gwendy.NumCocks() > 1 ? "their" : "its";
 	
 	
-	if(toy == Gwendy.Toys.Strapon) {
+	if(toy == Gwendy.Toys.Strapon) { //TODO Write scene
 		Text.Add("", parse);
 		Text.NL();
 		Text.Add("", parse);
@@ -1159,7 +1159,7 @@ Scenes.Gwendy.ChallengeSexAnalToys = function(toy, hangout, first) {
 		
 		Gui.NextPrompt();
 	}
-	else if(toy == Gwendy.Toys.RStrapon) {
+	else if(toy == Gwendy.Toys.RStrapon) { //TODO Write scene
 		Text.Add("", parse);
 		Text.NL();
 		Text.Add("", parse);
