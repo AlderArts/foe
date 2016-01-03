@@ -85,22 +85,31 @@ CatboyMage.prototype.constructor = CatboyMage;
 //TODO DROPS
 CatboyMage.prototype.DropTable = function() {
 	var drops = [];
-	if(Math.random() < 0.05) drops.push({ it: Items.Equinium });
-	if(Math.random() < 0.5)  drops.push({ it: Items.HorseHair });
-	if(Math.random() < 0.5)  drops.push({ it: Items.HorseShoe });
-	if(Math.random() < 0.5)  drops.push({ it: Items.HorseCum });
+	if(Math.random() < 0.1)  drops.push({ it: Items.Felinix });
+	if(Math.random() < 0.02) drops.push({ it: Items.Tigris });
+	if(Math.random() < 0.5)  drops.push({ it: Items.Whiskers });
+	if(Math.random() < 0.5)  drops.push({ it: Items.HairBall });
+	if(Math.random() < 0.5)  drops.push({ it: Items.CatClaw });
 	
 	if(Math.random() < 0.3)  drops.push({ it: Items.FreshGrass });
-	if(Math.random() < 0.2)  drops.push({ it: Items.Foxglove });
-	if(Math.random() < 0.2)  drops.push({ it: Items.SpringWater });
+	if(Math.random() < 0.3)  drops.push({ it: Items.SpringWater });
+	if(Math.random() < 0.1)  drops.push({ it: Items.Foxglove });
 	if(Math.random() < 0.1)  drops.push({ it: Items.FlowerPetal });
-	if(Math.random() < 0.1)  drops.push({ it: Items.Feather });
+	if(Math.random() < 0.1)  drops.push({ it: Items.FoxBerries });
+	if(Math.random() < 0.1)  drops.push({ it: Items.TreeBark });
+	if(Math.random() < 0.1)  drops.push({ it: Items.AntlerChip });
+	if(Math.random() < 0.1)  drops.push({ it: Items.SVenom });
+	if(Math.random() < 0.1)  drops.push({ it: Items.MDust });
+	if(Math.random() < 0.1)  drops.push({ it: Items.RawHoney });
+	if(Math.random() < 0.1)  drops.push({ it: Items.BeeChitin });
 	
-	if(Math.random() < 0.01) drops.push({ it: Items.Bovia });
-	if(Math.random() < 0.01) drops.push({ it: Items.Ovis });
-	if(Math.random() < 0.01) drops.push({ it: Items.Virilium });
-	if(Math.random() < 0.01) drops.push({ it: Items.Gestarium });
-	if(Math.random() < 0.01) drops.push({ it: Items.GestariumPlus });
+	if(Math.random() < 0.05) drops.push({ it: Items.Wolfsbane });
+	if(Math.random() < 0.05) drops.push({ it: Items.Ramshorn });
+	
+	if(Math.random() < 0.01) drops.push({ it: Items.BlackGem });
+	if(Math.random() < 0.01) drops.push({ it: Items.CorruptPlant });
+	if(Math.random() < 0.01) drops.push({ it: Items.CorruptSeed });
+	if(Math.random() < 0.01) drops.push({ it: Items.DemonSeed });
 	
 	return drops;
 }
@@ -112,16 +121,41 @@ CatboyMage.prototype.Act = function(encounter, activeChar) {
 	Text.Flush();
 	
 	// Pick a random target
+	var targets = this.GetPartyTarget(encounter, activeChar);
 	var t = this.GetSingleTarget(encounter, activeChar);
+	
+	this.turnCounter = this.turnCounter || 0;
+	
+	var first = (this.turnCounter == 0);
+	this.turnCounter++;
+	
+	if(first) {
+		Items.Combat.DecoyStick.combat.Use(encounter, this);
+		return;
+	}
+	
+	var that = this;
 
-	//TODO ABILITIES
-	var choice = Math.random();
-	if(choice < 0.6)
-		Abilities.Attack.Use(encounter, this, t);
-	else if(choice < 0.8 && Abilities.Physical.Bash.enabledCondition(encounter, this))
-		Abilities.Physical.Bash.Use(encounter, this, t);
-	else
-		Abilities.Seduction.Tease.Use(encounter, this, t);
+	var scenes = new EncounterTable();
+	scenes.AddEnc(function() {
+		Abilities.Attack.Use(encounter, that, t);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Items.Combat.DecoyStick.combat.Use(encounter, that);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Items.Combat.HPotion.combat.Use(encounter, that);
+	}, 1.0, function() { return that.HPLevel() < 0.5; });
+	scenes.AddEnc(function() {
+		Abilities.Black.Bolt.Use(encounter, that, t);
+	}, 3.0, function() { return Abilities.Black.Bolt.enabledCondition(encounter, that); });
+	scenes.AddEnc(function() {
+		Abilities.Black.Eruption.Use(encounter, that, targets);
+	}, 4.0, function() { return Abilities.Black.Eruption.enabledCondition(encounter, that); });
+	scenes.AddEnc(function() {
+		Abilities.Black.ThunderStorm.Use(encounter, that, targets);
+	}, 3.0, function() { return Abilities.Black.ThunderStorm.enabledCondition(encounter, that); });
+	scenes.Get();
 }
 
 /* TODO
@@ -197,4 +231,70 @@ Scenes.MaliceScouts.Catboy.LoneEncounter = function(levelbonus) {
 	enc.onVictory = Scenes.MaliceScouts.Catboy.WinPrompt;
 	
 	return enc;
+}
+
+Scenes.MaliceScouts.Catboy.WinPrompt = function() {
+	var enc  = this;
+	SetGameState(GameState.Event);
+	
+	var parse = {
+		
+	};
+	
+	Gui.Callstack.push(function() {
+		Text.Clear();
+		Text.Add("A loud yowl sounds from the catboy mage as he stumbles back. It’s impressive how despite his frail-looking frame, he’s managed to take as much punishment as he already has and still remain standing - you’re not exactly sure when you actually hit him in the face, but there’s blood pouring out of his nose in a frenetic nosebleed and his large, floppy ears have folded flat against his tattered hood.", parse);
+		Text.NL();
+		Text.Add("<i>“Okay, okay, you win,”</i> he mumbles in a distinctly nasal voice, no thanks to his nosebleed. <i>“Maybe being captured isn’t so bad, after all. At least I’ll be able to get away from everything.”</i> He holds out a hand as if about to fashion a spell, then thinks the better of it and lets it fall to his side.", parse);
+		Text.NL();
+		Text.Add("So… now that you’re talking like reasonable people… just what in the seven hells was he doing, anyway?", parse);
+		Text.NL();
+		Text.Add("He blows his nose into his hands and looks aghast at the bloody mess that results, his tail drooping. <i>“You want to know?”</i>", parse);
+		Text.NL();
+		Text.Add("Yes.", parse);
+		Text.NL();
+		Text.Add("<i>“You really want to know?”</i>", parse);
+		Text.NL();
+		Text.Add("Given that he was going to ensnare you, no doubt for whatever nefarious purposes he had in mind, you’d like to think you’re owed a small courtesy for not thrashing him within an inch of his life like he deserves.", parse);
+		Text.NL();
+		Text.Add("Upon hearing this, the catboy shrinks back even more and mewls pathetically. Actual fright, or an attempt to play off your emotions? Who knows? <i>“Um, well, you see, the others at the camp said I needed to go out and be a man, if you know what I mean… really aren’t enough camp followers to go around, and to be honest I’m not really very good at this sort of thing…”</i>", parse);
+		Text.NL();
+		Text.Add("You motion for him to go on, and to stop mumbling.", parse);
+		Text.NL();
+		Text.Add("<i>“So I thought that if I actually went and did it with an outsider, at least word wouldn’t spread about how useless I am…”</i>", parse);
+		Text.NL();
+		Text.Add("Right. You’re seeing how this is shaping up. ", parse);
+		if(party.Num() > 1) {
+			parse["s"] = party.Num() > 2 ? "s" : "";
+			Text.Add("Maybe he should’ve, you don’t know, at least not picked a target which would leave him outnumbered?", parse);
+			Text.NL();
+			Text.Add("<i>“Didn’t see your friend[s] there. Grass was tall.”</i>", parse);
+			Text.NL();
+		}
+		Text.Add("Yeah, hopeless. What’re you going to do with this poor sop?", parse);
+		Text.Flush();
+		
+		var options = [];
+		
+		options.push({nameStr : "",
+			tooltip : Text.Parse("", parse),
+			enabled : true,
+			func : function() {
+				Text.Clear();
+				Text.Add("", parse);
+				Text.NL();
+				Text.Add("", parse);
+				Text.Flush();
+			}
+		});
+		
+		Gui.SetButtonsFromList(options, true, function() {
+			Text.NL();
+			Text.Add("", parse);
+			Text.Flush();
+			
+			Gui.NextPrompt();
+		});
+	});
+	Encounter.prototype.onVictory.call(enc);
 }
