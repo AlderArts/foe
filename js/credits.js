@@ -17,6 +17,7 @@ CreditsScreen = function() {
 	Text.Add("Cat Dynasty theme room: LukaDoc and QuietBrowser<br/>");
 	Text.Add("Cats loss scenes: LukaDoc and QuietBrowser<br/>");
 	Text.Add("Cveta: The Observer<br/>");
+	Text.Add("Highlands catboy: The Observer<br/>");
 	Text.Add("Desert caravan: Del<br/>");
 	Text.Add("Donovan Twopenny: The Observer<br/>");
 	Text.Add("Dreams & ravens: About half of them, Del<br/>");
