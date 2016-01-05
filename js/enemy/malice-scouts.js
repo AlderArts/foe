@@ -30,7 +30,7 @@ function CatboyMage(levelbonus) {
 	this.strength.base     = 20;
 	this.stamina.base      = 25;
 	this.dexterity.base    = 30;
-	this.intelligence.base = 50;
+	this.intelligence.base = 50s;
 	this.spirit.base       = 45;
 	this.libido.base       = 20;
 	this.charisma.base     = 15;
@@ -275,11 +275,18 @@ Scenes.MaliceScouts.Catboy.WinPrompt = function() {
 		
 		var options = [];
 		
-		options.push({nameStr : "Pet",
+		options.push({nameStr : "Petting",
 			tooltip : Text.Parse("Aww, what a pathetic little kitty. Why don’t you give him a scratch?", parse),
 			enabled : true,
 			func : function() {
 				Scenes.MaliceScouts.Catboy.Petting(enc);
+			}
+		});
+		options.push({nameStr : "Petplay",
+			tooltip : Text.Parse("Play around with the kitty, put him in his place. Have him put that mouth of his to good use.", parse),
+			enabled : true,
+			func : function() {
+				Scenes.MaliceScouts.Catboy.PetPlay(enc);
 			}
 		});
 		/* TODO
@@ -306,6 +313,277 @@ Scenes.MaliceScouts.Catboy.WinPrompt = function() {
 		});
 	});
 	Encounter.prototype.onVictory.call(enc);
+}
+
+Scenes.MaliceScouts.Catboy.PetPlay = function(enc) {
+	var catboy = enc.catboy;
+	var p1cock = player.BiggestCock();
+	var parse = {
+		
+	};
+	parse = player.ParserTags(parse);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
+	
+	Text.Clear();
+	Text.Add("A smile crosses your face as an idea comes to mind. Yes… yes, that should do very nicely. With how pathetic the catboy is, you bet he’ll even like it. Acting all innocent, you step forward, crook a finger under the catboy’s chin and tell him to lose the clothes. After all, animals aren’t in the habit of wearing clothes, and you’re pretty sure he’s too much of a simpering sop to be anything but one.", parse);
+	Text.NL();
+	Text.Add("The catboy mage looks up at you, eyes wide with alarm. <i>“No! What do you mean? I-”</i>", parse);
+	Text.NL();
+	Text.Add("Animals don’t talk either, you remind him as you grab him by the collar of his cloak. And those who make too much noise are badly trained, and badly trained animals often are in dire need of… well, <i>correction</i>.", parse);
+	Text.NL();
+	Text.Add("He’s so pathetic, he’s not even fit to wield the smallest shred of dignity. Loose and baggy as they are, the catboy’s cloak and pants come off with ease; he tries to shy away, but his token resistance is soon defeated by you taking a step forward and batting his arms away.", parse);
+	Text.NL();
+	Text.Add("Bad! Bad kitty!", parse);
+	Text.NL();
+	Text.Add("The catboy flinches a little, but his submissive nature wins out in the end and he mewls pathetically, cringing as he folds his ears flat against his head. So much for the stereotypical devil-may-care feline attitude; this fine specimen will make someone a great pet. Grabbing his tunic, you pull it off with a flourish, leaving him as naked as the day he entered the world.", parse);
+	Text.NL();
+	Text.Add("Truth be told, he doesn’t actually <i>look</i> that bad - under his clothes, the catboy’s a fine, long-haired specimen, his fur as white as his large, floppy ears and fluffed up against the cold highland air. Most incongruous, though, is his slightly above-average shaft and balls - the former possibly a considerable nine inches when fully engorged with bumpy, nubby protrusions running down its length and clustered on its head. He squirms and flushes as he feels your gaze on his fur, clearly desperate to cover himself as you size him up.", parse);
+	Text.NL();
+	Text.Add("Time to get him properly tamed, then. The hallmark of a well-trained pet is being comfortable about familiar people, after all. Reaching up to the spot between the catboy’s large, floppy ears, you give the thick fur a good scratching, making sure to let your touch play generously with his ears. He starts to groan and purr, making happy little noises in the back of his throat; once you’re certain he’s well and truly out of it, you divert one of your hands downwards to cup his balls.", parse);
+	Text.NL();
+	Text.Add("Hmm. They’re certainly not minotaur-sized, but on the other hand they’re very palm-filling - almost large enough to spill over the edges of your hand. A twitch of movement nearby draws your attention, and your eyes are drawn to his shaft to see it swell and stiffen with his growing arousal. The nubby protrusions, too, are swelling - although not as drastically as his cock itself - the cartilaginous nubs hardening into something more approaching the traditional barbs of a cat-cock.", parse);
+	Text.NL();
+	Text.Add("Aww, does he like it?", parse);
+	Text.NL();
+	Text.Add("The catboy just mewls and looks at you with kitten-like eyes. Well, time to move on to the next stage. Grinning, you focus on your hand still on his head and gently but firmly start pushing downwards. He gets your intentions clear as day, and happily settles down on all fours like a proper pet cat should before giving you an affectionate nuzzle of his head and rubbing his body all about your [legs].", parse);
+	Text.NL();
+	Text.Add("Good kitty. Good, good kitty.", parse);
+	Text.NL();
+	Text.Add("He mewls happily and paws at you, eager to please.", parse);
+	Text.NL();
+	Text.Add("Time to move on, then. You’ll need a collar for your pet kitten, something to let others know he’s a proper pet and not some stray out in the woods. Turning your attention to the catboy’s discarded clothes, you spy the belt he’d been using to hold his baggy pants up - yes, this will do very nicely. You move over, pick it up, then return to your pet’s side and fashion the belt into a makeshift collar - loose enough so that he can breathe easily, but secure enough that he won’t be accidentally slipping out of it when you’re not looking. The metal buckle is a bit loose, and jingles against itself as it moves much like a bell would.", parse);
+	Text.NL();
+	Text.Add("Wonderful. It’s not the best, but it’ll do for a properly claimed pet. The catboy barely makes a fuss throughout the whole process, shying away a little at first but soon warming up to the notion as you pet him some more and make general noises of approval in his direction. With a final click, you secure the collar in place and note that makeshift as it is, it’s really very fetching on him.", parse);
+	Text.NL();
+	Text.Add("Now, since he’s been such a good kitten, would he like a treat?", parse);
+	Text.NL();
+	Text.Add("An enthusiastic nod, followed by two more.", parse);
+	Text.NL();
+	Text.Add("Right. He’ll have to be trained to take it properly, though. First, he’ll have to learn some self-restraint… with that thought in mind, you quickly divest yourself of your [botarmor], letting your", parse);
+	if(player.FirstCock() && player.FirstVag())
+		Text.Add(" mixed genitalia enjoy the cool mountain breeze as they’re exposed to the elements", parse);
+	else if(player.FirstVag())
+		Text.Add(" juicy pussy wink at him as fabric falls away to reveal your womanhood to the world", parse);
+	else if(player.FirstCock()) {
+		Text.Add(" shaft[s] ", parse);
+		if(player.HasBalls())
+			Text.Add("and balls ", parse);
+		parse["their"] = (player.NumCocks() > 1 || player.HasBalls()) ? "their" : "its";
+		Text.Add("hang out and flop in the cool mountain air, finally released from [their] cramped confines", parse);
+	}
+	Text.Add(".", parse);
+	Text.NL();
+	
+	var scenes = new EncounterTable();
+	scenes.AddEnc(function() {
+		Text.Add("At the sight of your womanly flower, the catboy’s eyes go wide to sickeningly sweet proportions. The entirety of his body trembles with repressed need - he’s clearly fighting it, trying to be an obedient, good kitty in the face of your commands, but it’s a losing battle that he’s waging against his treacherous body.", parse);
+		Text.NL();
+		Text.Add("No! Bad kitten! He’s not going to release until you give him the go-ahead!", parse);
+		Text.NL();
+		Text.Add("The catboy meows piteously, but is unable to stem the rising tide that’s gathering within him. Already stiff from before, you see his cat-cock throb between his legs, looking ever bigger than before - even the barbs are fully extruded, and the slightest mountain breeze against them sends more blood rushing to his manhood.", parse);
+		Text.NL();
+		Text.Add("A single dollop of pre wells up on the catboy’s cockhead; he mewls again, feeling it thin out into a strand and drip onto the grass underneath him.", parse);
+		Text.NL();
+		Text.Add("If he dares…", parse);
+		Text.NL();
+		Text.Add("He makes the mistake of looking up at you again - right into the glistening lips of your cunt, ", parse);
+		if(player.FirstCock())
+			Text.Add("nestled underneath your [cocks]", parse);
+		else
+			Text.Add("not six inches from his face", parse);
+		Text.Add(" and smelling heavily of sex. That’s it - unable to hold himself back any longer, the catboy flops back onto his rump and instinctively thrusts his hips forward as spooge bursts from his shaft in great gouts, his balls shrinking slightly as they empty their load to who-cares-where. Most of it lands on himself, soiling his skin and fur, but some manages to get on your [feet].", parse);
+		Text.NL();
+		Text.Add("Bad kitten! Now look at what he’s done - that’s a right proper mess he’s made here, and who’s going to clean it up?", parse);
+		Text.NL();
+		Text.Add("The catboy meows and shrinks back on himself, cringing.", parse);
+		Text.NL();
+		Text.Add("Him, that’s who! He can start with you, then clean himself up; that’ll be adequate punishment for such a bad kitty. Or does he need you get out the squirt bottle? Actually, it’s highly unlikely that you actually <i>have</i> a squirt bottle, but he’s just a silly kitten; he doesn’t know that.", parse);
+		Text.NL();
+		Text.Add("At the mere mention of a squirt bottle, your kitten goes completely prone on the floor, covering his eyes with his hands as he lands in his own puddle of cum with a soft squelch. Sighing, you step up, give him a little pat between the ears, then instruct him to hurry up and get to cleaning if he wants to make things right and have a chance at being a good kitty again.", parse);
+		Text.NL();
+		Text.Add("The mere suggestion is enough to get him springing into action once more. Getting up to all fours, your kitten rubs himself against your [legs], giving you a couple of nuzzles for good measure, then starts lapping up the messy spooge like milk from a saucer. Now that’s not so bad - the feel of your pussy’s damp, warm and rough tongue moving rhythmically would be so much better against your pussy - but you’ll have to exhibit a tad of self-restraint on your part if you’re going to teach him that important lesson.", parse);
+		Text.NL();
+		Text.Add("Before too long, he’s done, and then he starts on himself, bending his body in ways that can only be attributed to a healthy dose of feline flexibility. With that much seed, though, and how he’s gotten it all over himself lying down in that puddle of his own making, it’s going to take some time for him to be done, more than you have on hand. Besides, even if he’s trying to make amends now, he‘s been a bad kitten, and you’re not sure if he still deserves that treat any more.", parse);
+		Text.NL();
+		Text.Add("…Hah, interesting. Given his longer than normal cock and prodigious flexibility, you catch your kitten sucking himself off - barely so, with only the tip of his head fitting in between his lips, but he technically still <i>is</i> giving himself a blowjob. He looks up at you guiltily when he feels your gaze upon him, but you decide to let it slide - after all, you have to suppose he is cleaning himself up in a fashion.", parse);
+		Text.NL();
+		Text.Add("Still, you don’t have to be idle here. Since your kitten’s all hunched over sucking himself off, that leaves his tailhole open to attack - and that’s what you do, swiftly stepping around him, pulling his tail up, and jabbing a finger right into that tight, virgin pucker. Your pretty kitty, mewls in surprise, eyes going wide with shock, and almost chokes on his own barbed cat-cock.", parse);
+		Text.NL();
+		Text.Add("Hehe. You can tell he likes it, though, judging by the way he wiggles his body in response to you flexing your finger. Inch by inch, you sink your digit deeper into his warm tailhole, violating it and forcing it to take in something which it’s never had the pleasure of taking before. Deeper and deeper you go, until every last joint is firmly sequestered in his butt - and then you start trying to find his prostate.", parse);
+		Text.NL();
+		Text.Add("It doesn’t take you long for you to hit gold - the reaction from your kitten is obvious as he tries to hold back the second surge of cum that he feels welling up in his balls. Tears spring into his large, clear eyes as he realizes that he’s going to be a bad kitty again, but you give him a quick pat between the ears with your free hand and tell him that you’re giving him permission to spill his seed if need be.", parse);
+		Text.NL();
+		Text.Add("He seems to enjoy it a lot more after that, almost as much as you do - you can feel his body trembling as it tries to adjust to this strange, alien pleasure you’re giving him, even as he continues to suck himself off. Judging by the familiarity with which he’s going through the motions, it’s clear that this isn’t the first time he’s given himself a blowjob, and you can’t help but wonder if this is how he usually gets himself off when you’re not around to watch him…", parse);
+		Text.NL();
+		Text.Add("Well, that’s a thought for later. Here and now, your business is having a good time playing with your cute, subby pet, and that’s just what you go ahead and do with great relish. Feeling his cum surge again, your kitten closes his eyes and clamps his lips down tight around his barbed cocktip. His balls churn again, and then spurts of white seed are gushing from his shaft again.", parse);
+		Text.NL();
+		Text.Add("Try as he might, your feline pet can’t help but cough and splutter; his shaft slips free from his mouth and he struggles to contain it. That, too, is a fruitless endeavor, and before long your kitten is looking up at you again with forlorn eyes that peer through the creamy white facial he’s given himself. For a second load in so short a time, that’s quite the production he’s got going over there.", parse);
+		Text.NL();
+		Text.Add("Sensing that some consolation is in order, you give your pet a few more ear scritches and let him know that he hasn’t been a bad kitty this time round. Not that he’s been a <i>good</i> kitten, either, but he hasn’t been bad because what just happened wasn’t his fault. Also, seeing him like this has put you in a marginally better mood.", parse);
+		Text.NL();
+		Text.Add("He just mewls again and paws at his face with his hands, trying to wipe off the worst of the mess. Sheesh, even at this point, he can’t help but appear pathetic, can he? It’s almost as if it’s baked into his nature.", parse);
+		Text.NL();
+		Text.Add("Very well, then - you’ll let him off this time. No more freebies from you, though, so he shouldn’t get used to it!", parse);
+		Text.NL();
+		Text.Add("Your pet looks at you hopefully, silently promising that he won’t.", parse);
+		
+		player.AddLustFraction(0.4);
+		player.AddSexExp(2);
+	}, 3.0, function() { return player.FirstVag(); });
+	scenes.AddEnc(function() {
+		Text.Add("Eyeing your [cocks], the catboy ", parse);
+		if(p1cock.Len() >= 30) {
+			Text.Add("shudders a little at the sight of your massive cock[s]. He swallows hard and shies away a little, clearly intimidated by the thought of what you intend.", parse);
+			Text.NL();
+			Text.Add("He hadn’t counted on this? Well, that’s too bad for him. Yes indeed, this is a <i>big</i> treat, and you’re going to require that he eat it <i>all</i> up. Kitties who waste even the smallest portions of their treats are bad kitties, and bad kitties don’t just not get treats in the future, but they also need to be punished.", parse);
+			Text.NL();
+			Text.Add("He doesn’t want to be punished, does he?", parse);
+			if(player.NumCocks() > 1)
+				Text.Add(" You imperiously motion to the biggest of your shafts.", parse);
+			Text.NL();
+			Text.Add("Your kitten meows and shakes his head vigorously, the makeshift bell on his belt-collar clattering away. Yes, he knows the score. Gingerly, almost timidly, he gets off all fours and kneels in front of you, bowing his head submissively. You waggle your massive treat in his face for a few seconds, getting his attention, and smile as he takes it mid-length in both hands and opens his mouth wide.", parse);
+			Text.NL();
+			Text.Add("That’s right. That’s a good kitty. Now, open wide and say ‘ah’.", parse);
+			Text.NL();
+			Text.Add("He obeys unthinkingly, the soft tones of your voice lulling him into a sense of security. Once that cute little mouth of his is open, you thrust with everything you’ve got, slip out of his grasp, and plunge as deep into his throat as he’s capable of accommodating. The poor kitten’s eyes go wide as his breath is suddenly cut off, making piteous, strangled noises in the back of his throat as he struggles for breath, but you remain resolute in your actions; he needs to be properly trained if he’ll even make a good pet.", parse);
+			if(player.NumCocks() > 1)
+				Text.Add(" Your other dick[s2] grind[notS2] against his forehead, reminding the effeminate pussy that this’ll end messily for him, no matter how good he is at swallowing.", parse);
+			Text.NL();
+			
+			Sex.Blowjob(catboy, player);
+			catboy.FuckOral(catboy.Mouth(), player.FirstCock(), 2);
+			player.Fuck(player.FirstCock(), 2);
+			
+			Text.Add("As you’d expected, your kitten gets over his surprise quickly enough, wheezing and spluttering several times but eventually settling into a rhythm that allows him to get some measure of his breath back while pleasuring you.", parse);
+		}
+		else if(p1cock.Len() >= 18) {
+			Text.Add("seems a little unsure at the sheer sight of your stupendous shaft[s], but gets over his uncertainties soon enough and closes in. You take the moment to praise him for being such a brave kitty, ready to face a task that he very well knows might be daunting, and he practically blushes with pride.", parse);
+			Text.NL();
+			Text.Add("Aww, is he unaccustomed to being praised? Well, he’ll get a lot more of it if he continues proving himself to be a good, obedient kitty. Now, won’t he please go ahead and get his treat?", parse);
+			Text.NL();
+			Text.Add("Your pretty kitten purrs delightedly and grabs hold of[oneof] your [cocks] in both hands, closing his eyes in delight as he slides his lips over your [cockTip]. You feel it, too, waves of pleasure radiating outwards like ripples on a still pond surface. Deeper and deeper, he takes you into his mouth, breath hot against your man-meat, and it’s only after you bump against the back of his throat that he begins scraping at the underside of your shaft with his rough, warm tongue.", parse);
+			if(player.NumCocks() > 1)
+				Text.Add(" Feeling left out, your other cock[s2] grind[notS2] against the feline’s upturned face, dribbling [itsTheir2] sticky pre all over his soft fur.", parse);
+			Text.NL();
+			
+			Sex.Blowjob(catboy, player);
+			catboy.FuckOral(catboy.Mouth(), player.FirstCock(), 2);
+			player.Fuck(player.FirstCock(), 2);
+			
+			Text.Add("Mm, that feels good, doesn’t it? You were already hard before, but faced with such a tender touch, the entirety of your length feels full to bursting, hard as diamonds - or at least, it <i>feels</i> that way.", parse);
+			Text.NL();
+			Text.Add("So, does he like his treat? Is it a yummy one?", parse);
+			Text.NL();
+			Text.Add("Your kitten nods vigorously, the warm and wet insides of his mouth shifting against your shaft and making you moan with delight. Well, he should know that you’re enjoying giving him this treat as much as he’s enjoying having it, so he should be an obedient kitty as much as possible in the future, yes?", parse);
+			Text.NL();
+			Text.Add("He purrs, and the vibrations carry through his flesh, up your rod and into your groin. Ah, the simple pleasures of life.", parse);
+		}
+		else {
+			Text.Add("opens his mouth eagerly and without hesitation, revealing its warm, pink insides and that little sandpapery tongue of his. Mmm… you can practically feel it against your [cock] now, wrapping lovingly about the girth of[oneof] your man-meat[s] while you’re stroked to fullness…", parse);
+			Text.NL();
+			Text.Add("The lewd thoughts flood into your mind unbidden, coming fast and hard, and you take a moment to take a deep breath and let it all out in a happy sigh. It’s not as if your kitten’s going anywhere, anyway - he’s staring enraptured at your prick[s], watching the meaty member[s] bob up and down in time with your heartbeat. You can see him just itching to bat at[oneof] [itThem] like some kind of plaything, but he’s successfully resisting the urge so far. What a strong-willed pet you have - maybe he deserves a <i>double</i> helping of kitty treats as a reward…", parse);
+			Text.NL();
+			parse["it"] = player.NumCocks() > 1 ? "one" : "it";
+			Text.Add("Wasting no more time, you thrust your [cocks] at the catboy, practically poking him in the face with [itThem] a few times before he manages to catch [it] in both hands and guide it into his waiting maw. Your kitten’s mouth is as warm and wet as the inside of any other hole, and his tongue as divine as you’d envisioned it to be.", parse);
+			if(player.NumCocks() > 1)
+				Text.Add(" Your other member[s2] grind[notS2] against his upturned face, reminding him that there’s more treats to go around.", parse);
+			Text.NL();
+			
+			Sex.Blowjob(catboy, player);
+			catboy.FuckOral(catboy.Mouth(), player.FirstCock(), 2);
+			player.Fuck(player.FirstCock(), 2);
+			
+			Text.Add("Sure, he’s lacking in experience, but a desperate, almost childish eagerness to please manages to make up for that somewhat. Purring deeply in the back of his throat, your kitty slides your shaft in and out of his mouth a few times, leaving it glistening with his spit before commencing to lick his delicious kitty treat like a large lollipop.", parse);
+			Text.NL();
+			Text.Add("Now, there’s no need to be conservative with enjoying his just reward; all he needs to do is continue being a good kitty, and he’ll get more treats just like this one. He should eat up with gusto, you tell your pet as you ruffle his fur and ears. It really <i>does</i> feel very good when you do that…", parse);
+			Text.NL();
+			Text.Add("Obediently, he takes a deep breath, then slides his head and body forward to swallow the entirety of your [cock] up to the base, suppressing his gag reflex as your [cockTip] hits the back of his throat. Now <i>that’s</i> a trick!", parse);
+		}
+		Text.NL();
+		Text.Add("This goes on for a little while longer as your pet continues to worship you, licking and sucking away, the natural movements of his mouth seemingly in time with the throbbing of your shaft[s]. Pleasured in such a fashion, it’s not long before you begin feeling the warning tingles of impending orgasm, and you smile at the thought of your pet discovering the creamy center of his delectable kitty treat.", parse);
+		if(player.NumCocks() > 1)
+			Text.Add(" The pre leaking from your unused cock[s2] might give him a hint.", parse);
+		Text.NL();
+		Text.Add("With the catboy’s rough, sandpapery tongue working away, you blow your load in no time at all - it happens so quickly that you’re surprised yourself. Your kitten’s eyes flick open in surprise as the first thick rope of seed explodes in his mouth; reeling instinctively, he lets go of your shaft, coughing and spluttering as you empty the rest of your tank straight onto his face.", parse);
+		if(player.NumCocks() > 1)
+			Text.Add(" Not to be left out, your other dick[s2] [isAre2] quick to add [itsTheir2] generous addition[s2] to his already tasty treat.", parse);
+		Text.NL();
+		
+		var cum = player.OrgasmCum();
+		
+		if(cum > 7) {
+			Text.Add("Try as you might to hold back, you can’t slow, let alone stifle the deluge of thick, gooey cum that’s built up in ", parse);
+			if(player.HasBalls())
+				Text.Add("your balls", parse);
+			else
+				Text.Add("you", parse);
+			Text.Add(". Throwing your head back from the sheer force of it all, you let out a cry as you sperm bursts free of you and gushes all over the catboy. Your poor kitty has barely enough time to try and shield himself ineffectually with an arm before the barrage of sperm hits him.", parse);
+			Text.NL();
+			Text.Add("And a deluge it is, a veritable flood that sweeps over the catboy and threatens to carry him off his feet and away into the distance - or at least, that’s what it <i>feels</i> like. Once you’ve started, you can scarcely stop, and the most you manage to hear from your pet is a few plaintive meows as globs upon globs of thick sperm land on his skin and fur, horribly despoiling his once-pristine vestige even further.", parse);
+			Text.NL();
+			Text.Add("On his part, your pet kitten doesn’t seem to care - if anything, he seems equally curious and amused by the thick coat of seed which you’re covering him with. Once he gets over his initial fear and shyness of this new situation, he quickly takes to being bathed in cum like a duck to water; he happily splashes around in the thick, sticky puddles you’re creating on the ground and rubbing his paws all over his body, smearing it across himself as if it was some kind of lotion. Come to think of it, it probably is…", parse);
+			Text.NL();
+			Text.Add("Nevertheless, that’s so adorably cute; there’re few things more endearing in life than a cute kitten enjoying himself for real. By the time you’re done, the catboy looks like a dribbly candle - an unevenly-shaped pillar of white with wide eyes and the faint outline of large, floppy ears.", parse);
+		}
+		else if(cum > 4) {
+			Text.Add("Your pet instinctively averts his gaze, turning his cheek towards you - but alas, it does him little good given the force of the flow that erupts from your [cocks]. It’s got all the volume and power of a fire hose, but a lot thicker and weightier than one would expect of a fire hose’s usual fare - the first ropes of spunk to hit your kitten do so with gusto, staggering him and nearly knocking him over.", parse);
+			Text.NL();
+			Text.Add("Well, if that isn’t a show to watch! Not that you could’ve stopped if you wanted to - with so much sperm pent up in you, rippling waves of satiation and satisfaction course through your body as ", parse);
+			if(player.HasBalls())
+				Text.Add("your [balls] empty themselves with shocking speed", parse);
+			else
+				Text.Add("you spew string after string of virile seed", parse);
+			Text.Add(" onto your poor pet kitty, making him mewl and whimper in shock and surprise as he’s momentarily blinded by having his face plastered with sperm.", parse);
+			Text.NL();
+			Text.Add("Oh, come now - why does he have to be so fussy about it? It’s not as if you’ve turned the squirt bottle on him, have you?", parse);
+			Text.NL();
+			Text.Add("The catboy just meows again as spooge runs off his face, dripping off his chin and running down his neck to stain the rest of his body. Grabbing the length of[oneof] your [cocks] with both hands, you pump back and forth desperately, wringing out every last drop of jism you have in you and sending it right onto the catboy’s face. There’s little left of his features now save for the vague outline of his head and above all odds, his ears, two vaguely triangular spooge-covered points jutting out from the top of his creamy head.", parse);
+			Text.NL();
+			Text.Add("At length, your ejaculation does begin to abate somewhat, but not before your pretty kitty has been thoroughly despoiled, his skin and fur covered with a glistening layer of cum that stretches from head to toe. It’s a bit uneven in parts, but that’s only to be expected - it’s not as if you’ve managed enough production to give him an even coating, alas.", parse);
+			Text.NL();
+			Text.Add("Finally managing to open one eye and look about him, your pet kitten meows at you curiously, pawing at you; you reach down and give him a reassuring pat on the head. There, there.", parse);
+		}
+		else {
+			Text.Add("While your production isn’t as high as you’d hoped it would be, you nevertheless manage to come up with enough ejaculate to give your pet kitty a hearty faceful of delicious cream. He certainly seems to take an instant liking to it, his small, pink tongue darting out of his mouth and touching his lips in an experimental taste before coming out for more.", parse);
+			Text.NL();
+			Text.Add("Well, let him have all he wants - there’s still more where that came from.", parse);
+			Text.NL();
+			Text.Add("Since he’s not sucking you off any more, it’s up to you to bring yourself the rest of the way and you do just that, grabbing[oneof] your rock-solid [cocks] with both hands and pumping up and down its length furiously. It’s like this that you spend the next few moments, playing your manhood like a fiddle in a bid to wring out every last drop of cum out from you and onto your pet kitten’s face. Your breathing becomes short and labored as you ride out your orgasm, feeling the workings of your body shift and ebb. Seeing what you’re up to, the catboy leans forward and begins licking your [cockTip] once more, catching stray strands and droplets of creamy seed on his dainty little tongue, purring all the while.", parse);
+			Text.NL();
+			Text.Add("What a good little kitty he is, to sense your need like that and volunteer his help without you needing to ask! Surely he deserves a second helping of delectable creamy kitty treats - and right on cue, you feel a huge load coming down the pipe!", parse);
+			Text.NL();
+			Text.Add("Your pet kitty must have sensed it too, for he meows happily and wastes no time in locking his lips with your [cockTip], determined to not waste the treat this time. Such a good kitty - yes, yes, he deserves everything that’s coming to him!", parse);
+			Text.NL();
+			Text.Add("With an air-rending groan, you shake and shudder a second time, blasting gob after gob of creamy feline treat into the catboy’s mouth. It’s probably nowhere as thick and nutritious as your first load, but that’s probably for the best given your pet’s inexperience in receiving goodies like these. ", parse);
+			if(player.NumCocks() > 1)
+				Text.Add("Your other cock[s2] add[notS2] [itsTheir2] load to [itsTheir2] previous mess on his innocent face, soiling his fur in your seed. ", parse);
+			Text.Add("You see his cheeks balloon outwards as he struggles to take all your sperm in without wasting even a single drop of his precious kitty treat, swallowing furiously, and give him yet another pat on his cum-smeared head, ruffling his hair and ears as you praise your precious little pet for trying so hard.", parse);
+			Text.NL();
+			Text.Add("Finishing the last of his treat, the catboy pulls away from your manhood with an audible pop and smack of his lips, wiping away a strand of seed with the back of his hand. ", parse);
+			if(player.NumCocks() > 1)
+				Text.Add("Taking meticulous care to not waste your sticky gift, the catboy cleans up the load you deposited on him and eagerly slurps them up, starved for more of your precious cream. ", parse);
+			Text.Add("He looks up at you with wide, adoring eyes and meows, closing his eyes in pure bliss and rubbing his head against your crotch.", parse);
+			Text.NL();
+			Text.Add("Aww… isn’t that so cute.", parse);
+		}
+		
+		Text.NL();
+		Text.Add("Eventually, your feline pet gets himself cleaned up a bit - from the spunk dripping off him onto the ground, if nothing else. Looking at the facial - and a bit more - that you’ve just given him, you smile at your kitten approvingly and tell him what a delightful pet he’s been.", parse);
+		Text.NL();
+		Text.Add("He purrs and bows his head submissively, exposing enough of his neck such that you can bestow scritches unto him. Between the makeshift collar you’ve given him and all the spooge that coats his exterior, it’s not an easy task, but you manage it nonetheless - he’s earned as much for his efforts at being a good kitten.", parse);
+	}, 1.0, function() { return player.FirstCock(); });
+	scenes.Get();
+	
+	Text.NL();
+	Text.Add("All right, then - that’s enough play for today. You’ve had a bit of fun, but you’ve got other things that need doing and have to be on your way. Your pet whimpers a little, sad to see you go, but you pull on your [botarmor] and tell him firmly that he can wait for you if he wants, but he shouldn’t expect you to be back that soon.", parse);
+	Text.NL();
+	Text.Add("He mewls unhappily, but doesn’t try to follow when you fold up his clothes and place them neatly by the side of the road. After all, you’ve trained him better than that, and he knows he’d be a bad kitty if he disobeyed.", parse);
+	Text.NL();
+	Text.Add("Throwing one last look over your shoulder as you saunter back down the road, the parting sight you have of your pet is that of him sitting on his haunches, staring at you forlornly. You swallow hard - now, you can’t just take in every stray who looks like he might make a good pet - you’d be swamped in cats before long!", parse);
+	Text.Flush();
+	
+	Gui.NextPrompt();
 }
 
 Scenes.MaliceScouts.Catboy.Petting = function(enc) {
@@ -489,3 +767,5 @@ Scenes.MaliceScouts.Catboy.LossPrompt = function() {
 	});
 	Encounter.prototype.onLoss.call(enc);
 }
+
+
