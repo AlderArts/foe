@@ -71,6 +71,11 @@ function CatboyMage(levelbonus) {
 	
 	this.body.SetEyeColor(Color.green);
 
+	this.weaponSlot   = Items.Weapons.MageStaff;
+	this.topArmorSlot = Items.Armor.MageRobes;
+	
+	this.Equip();
+	
 	// Set hp and mana to full
 	this.SetLevelBonus();
 	this.RestFull();

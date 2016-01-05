@@ -98,6 +98,8 @@ function Wildcat(gender, levelbonus) {
 	this.libido.base       = 17;
 	this.charisma.base     = 16;
 	
+	this.elementDef.dmg[Element.mWater]  = -0.5;
+	
 	this.level             = 1;
 	if(Math.random() > 0.8) this.level++;
 	this.level             += levelbonus || 0;
