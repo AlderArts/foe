@@ -10,7 +10,6 @@ Scenes.MaliceScouts.Catboy = {};
  * Catboy Mage, lvl 9-13
  * 
  */
-//TODO STATS
 function CatboyMage(levelbonus) {
 	Entity.call(this);
 	this.ID = "catboymage";
@@ -24,22 +23,19 @@ function CatboyMage(levelbonus) {
 	this.FirstCock().length.base = 19;
 	this.Balls().size.base = 2;
 	
-	this.maxHp.base        = 100;
-	this.maxSp.base        = 14;
-	this.maxLust.base      = 15;
+	this.maxHp.base        = 500;
+	this.maxSp.base        = 800;
+	this.maxLust.base      = 50;
 	// Main stats
-	this.strength.base     = 18;
-	this.stamina.base      = 15;
-	this.dexterity.base    = 7;
-	this.intelligence.base = 9;
-	this.spirit.base       = 11;
-	this.libido.base       = 14;
-	this.charisma.base     = 12;
+	this.strength.base     = 20;
+	this.stamina.base      = 25;
+	this.dexterity.base    = 30;
+	this.intelligence.base = 60;
+	this.spirit.base       = 55;
+	this.libido.base       = 20;
+	this.charisma.base     = 15;
 	
-	//TODO
-	this.elementDef.dmg[Element.mEarth] = 0.5;
-	this.elementDef.dmg[Element.mWind]  = 0.5;
-	this.elementDef.dmg[Element.pBlunt] = 0.3;
+	this.elementDef.dmg[Element.mWater]  = -0.5;
 	
 	var level = 0;
 	
@@ -82,7 +78,6 @@ function CatboyMage(levelbonus) {
 CatboyMage.prototype = new Entity();
 CatboyMage.prototype.constructor = CatboyMage;
 
-//TODO DROPS
 CatboyMage.prototype.DropTable = function() {
 	var drops = [];
 	if(Math.random() < 0.1)  drops.push({ it: Items.Felinix });
@@ -91,17 +86,18 @@ CatboyMage.prototype.DropTable = function() {
 	if(Math.random() < 0.5)  drops.push({ it: Items.HairBall });
 	if(Math.random() < 0.5)  drops.push({ it: Items.CatClaw });
 	
+	if(Math.random() < 0.01) drops.push({ it: Items.Bovia });
+	if(Math.random() < 0.1)  drops.push({ it: Items.GoatMilk });
+	if(Math.random() < 0.1)  drops.push({ it: Items.SheepMilk });
+	if(Math.random() < 0.1)  drops.push({ it: Items.CowMilk });
+	if(Math.random() < 0.05) drops.push({ it: Items.LizardEgg });
+	if(Math.random() < 0.05) drops.push({ it: Items.MFluff });
+	
 	if(Math.random() < 0.3)  drops.push({ it: Items.FreshGrass });
 	if(Math.random() < 0.3)  drops.push({ it: Items.SpringWater });
 	if(Math.random() < 0.1)  drops.push({ it: Items.Foxglove });
-	if(Math.random() < 0.1)  drops.push({ it: Items.FlowerPetal });
-	if(Math.random() < 0.1)  drops.push({ it: Items.FoxBerries });
 	if(Math.random() < 0.1)  drops.push({ it: Items.TreeBark });
-	if(Math.random() < 0.1)  drops.push({ it: Items.AntlerChip });
-	if(Math.random() < 0.1)  drops.push({ it: Items.SVenom });
-	if(Math.random() < 0.1)  drops.push({ it: Items.MDust });
 	if(Math.random() < 0.1)  drops.push({ it: Items.RawHoney });
-	if(Math.random() < 0.1)  drops.push({ it: Items.BeeChitin });
 	
 	if(Math.random() < 0.05) drops.push({ it: Items.Wolfsbane });
 	if(Math.random() < 0.05) drops.push({ it: Items.Ramshorn });
