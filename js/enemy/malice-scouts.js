@@ -30,7 +30,7 @@ function CatboyMage(levelbonus) {
 	this.strength.base     = 20;
 	this.stamina.base      = 25;
 	this.dexterity.base    = 30;
-	this.intelligence.base = 50s;
+	this.intelligence.base = 50;
 	this.spirit.base       = 45;
 	this.libido.base       = 20;
 	this.charisma.base     = 15;
