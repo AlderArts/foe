@@ -342,7 +342,7 @@ Scenes.MaliceScouts.Catboy.PetPlay = function(enc) {
 	Text.NL();
 	Text.Add("Time to get him properly tamed, then. The hallmark of a well-trained pet is being comfortable about familiar people, after all. Reaching up to the spot between the catboy’s large, floppy ears, you give the thick fur a good scratching, making sure to let your touch play generously with his ears. He starts to groan and purr, making happy little noises in the back of his throat; once you’re certain he’s well and truly out of it, you divert one of your hands downwards to cup his balls.", parse);
 	Text.NL();
-	Text.Add("Hmm. They’re certainly not minotaur-sized, but on the other hand they’re very palm-filling - almost large enough to spill over the edges of your hand. A twitch of movement nearby draws your attention, and your eyes are drawn to his shaft to see it swell and stiffen with his growing arousal. The nubby protrusions, too, are swelling - although not as drastically as his cock itself - the cartilaginous nubs hardening into something more approaching the traditional barbs of a cat-cock.", parse);
+	Text.Add("Hmm. They’re certainly not minotaur-sized, but on the other hand they’re very palm-filling - almost large enough to spill over the edges of your hand. A twitch of movement nearby draws your attention, and your eyes are drawn to his dick to see it swell and stiffen with his growing arousal. The nubby protrusions, too, are engorging - although not as drastically as his shaft itself - the cartilaginous nubs hardening into something more approaching the traditional barbs of a cat-cock.", parse);
 	Text.NL();
 	Text.Add("Aww, does he like it?", parse);
 	Text.NL();
@@ -563,7 +563,7 @@ Scenes.MaliceScouts.Catboy.PetPlay = function(enc) {
 			Text.Add("Finishing the last of his treat, the catboy pulls away from your manhood with an audible pop and smack of his lips, wiping away a strand of seed with the back of his hand. ", parse);
 			if(player.NumCocks() > 1)
 				Text.Add("Taking meticulous care to not waste your sticky gift, the catboy cleans up the load you deposited on him and eagerly slurps them up, starved for more of your precious cream. ", parse);
-			Text.Add("He looks up at you with wide, adoring eyes and meows, closing his eyes in pure bliss and rubbing his head against your crotch.", parse);
+			Text.Add("He looks up at you with wide, adoring eyes and meows, closing them in pure bliss and rubbing his head against your crotch.", parse);
 			Text.NL();
 			Text.Add("Aww… isn’t that so cute.", parse);
 		}
@@ -635,11 +635,11 @@ Scenes.MaliceScouts.Catboy.Petting = function(enc) {
 			Text.NL();
 			Text.Add("Oooh…", parse);
 			Text.NL();
-			Text.Add("Greedily, you brush the heel of your palm against one of the barbs, while taking another into your fingers and teasing it much like your other hand is doing with the catboy’s ear-fluff. He whimpers and puts up a last smidgen of resistance, feebly trying to bat your hands away while his body betrays him and his hips start pushing against your fingers.", parse);
+			Text.Add("Greedily, you brush the heel of your palm against one of the barbs, while taking another into your fingers and teasing it much like your other hand is doing with the catboy’s ear-fluff. He whimpers and puts up a last smidgen of resistance, feebly trying to bat them away while his body betrays him and his hips start pushing against your fingers.", parse);
 			Text.NL();
 			Text.Add("<i>“No… don’t do this to me…”</i>", parse);
 			Text.NL();
-			Text.Add("Your only answer to that is to pump away at his shaft with renewed vigor, a motion that has him go practically catatonic with delight, his little pink tongue hanging out of the corner of his mouth, his eyes glazed over and unfocused. Wrapped about his shaft, your hand distinctly picks up on the increasingly powerful throbbing of the virile and desperate cat-cock in its grasp.", parse);
+			Text.Add("Your only answer to that is to pump away at his shaft with renewed vigor, a motion that has him go practically catatonic with delight, his little pink tongue hanging out of the corner of his mouth, his eyes glazed over and unfocused. Wrapped about his member, your hand distinctly picks up on the increasingly powerful throbbing of the virile and desperate cat-cock in its grasp.", parse);
 			Text.NL();
 			Text.Add("Dividing your attention between the catboy’s ears and his shaft, you begin to stroke him off in earnest; your effeminate friend responds instinctively, mirroring each tug on his manhood with a thrust of his hips. The catboy pants and mewls, his chest heaving and straining with each gasp and moan, need and desperation welling up as his cock continues to strain at your fingers. Soon, your hand is soaked with feline seed as he grows dangerously close to release, brain completely scrambled by the conflicting sensations of comfort and arousal coming from both ends of his body.", parse);
 			Text.NL();
@@ -669,7 +669,7 @@ Scenes.MaliceScouts.Catboy.Petting = function(enc) {
 			Text.NL();
 			Text.Add("<i>“A-aah!”</i> the feline yelps, arching his back as you pinch his sensitive ears. The magician’s staff throbs erratically in response to your teasing, sending a gout of sticky white pre that mats his snowy fur.", parse);
 			Text.NL();
-			Text.Add("<i>“No, d-don’t… don’t...”</i> he gasps. The kitty squirms helplessly as you keep relentlessly petting him without regards for his demands. He’s just so cuddly and cute! The mage has his eyes almost closed, eyes drawn into some heavenly realm not allowed mere mortals. You chuckle as he begins purring despite himself, fully giving in to his weakness.", parse);
+			Text.Add("<i>“No, d-don’t… don’t...”</i> he gasps. The kitty squirms helplessly as you keep relentlessly petting him without regards for his demands. He’s just so cuddly and cute! The mage has his eyes almost closed, vision drawn into some heavenly realm not allowed mere mortals. You chuckle as he begins purring despite himself, fully giving in to his weakness.", parse);
 			Text.NL();
 			Text.Add("<i>“Don’t… stop,”</i> he mewls pleadingly. There’s a good, honest pussy!", parse);
 			Text.NL();
