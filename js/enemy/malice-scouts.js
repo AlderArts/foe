@@ -635,7 +635,7 @@ Scenes.MaliceScouts.Catboy.Petting = function(enc) {
 			Text.NL();
 			Text.Add("Oooh…", parse);
 			Text.NL();
-			Text.Add("Greedily, you brush the heel of your palm against one of the barbs, while taking another into your fingers and teasing it much like your other hand is doing with the catboy’s ear-fluff. He whimpers and puts up a last smidgen of resistance, feebly trying to bat them away while his body betrays him and his hips start pushing against your fingers.", parse);
+			Text.Add("Greedily, you brush the heel of your palm against one of the barbs, while taking another into your fingers and teasing it much like your other hand is doing with the catboy’s ear-fluff. He whimpers and puts up a last smidgen of resistance, feebly trying to bat your [hand]s away while his body betrays him and his hips start pushing against your fingers.", parse);
 			Text.NL();
 			Text.Add("<i>“No… don’t do this to me…”</i>", parse);
 			Text.NL();
@@ -669,7 +669,7 @@ Scenes.MaliceScouts.Catboy.Petting = function(enc) {
 			Text.NL();
 			Text.Add("<i>“A-aah!”</i> the feline yelps, arching his back as you pinch his sensitive ears. The magician’s staff throbs erratically in response to your teasing, sending a gout of sticky white pre that mats his snowy fur.", parse);
 			Text.NL();
-			Text.Add("<i>“No, d-don’t… don’t...”</i> he gasps. The kitty squirms helplessly as you keep relentlessly petting him without regards for his demands. He’s just so cuddly and cute! The mage has his eyes almost closed, vision drawn into some heavenly realm not allowed mere mortals. You chuckle as he begins purring despite himself, fully giving in to his weakness.", parse);
+			Text.Add("<i>“No, d-don’t… don’t...”</i> he gasps. The kitty squirms helplessly as you keep relentlessly petting him without regards for his demands. He’s just so cuddly and cute! The mage has his eyes almost closed, gaze drawn into some heavenly realm not allowed mere mortals. You chuckle as he begins purring despite himself, fully giving in to his weakness.", parse);
 			Text.NL();
 			Text.Add("<i>“Don’t… stop,”</i> he mewls pleadingly. There’s a good, honest pussy!", parse);
 			Text.NL();
