@@ -172,7 +172,6 @@ Scenes.MaliceScouts.Catboy.Impregnate = function(mother, father, slot) {
 }
 */
 
-//TODO LINK
 Scenes.MaliceScouts.Catboy.LoneEncounter = function(levelbonus) {
 	var enemy    = new Party();
  	var catboy   = new CatboyMage(levelbonus);
@@ -226,7 +225,6 @@ Scenes.MaliceScouts.Catboy.LoneEncounter = function(levelbonus) {
 	enc.canRun = false;
 	enc.VictoryCondition = ...
 	*/
-	//TODO
 	enc.onLoss    = Scenes.MaliceScouts.Catboy.LossPrompt;
 	enc.onVictory = Scenes.MaliceScouts.Catboy.WinPrompt;
 	
@@ -425,4 +423,68 @@ Scenes.MaliceScouts.Catboy.Petting = function(enc) {
 	});
 	
 	Gui.SetButtonsFromList(options, false, null);
+}
+
+Scenes.MaliceScouts.Catboy.LossPrompt = function() {
+	SetGameState(GameState.Event);
+	Text.Clear();
+	
+	// this = encounter
+	var enc = this;
+	
+	var parse = {
+		
+	};
+	
+	Gui.Callstack.push(function() {
+		Text.Clear();
+		Text.Add("Slight as the catboy may be, the raw destructive force of his magics is too much for you to you bear. Bruised and battered from sheer force, your body finally gives up the ghost and buckles under its own weight, sending you toppling to the ground. Before you can recover, more tendrils of that same magical mist wind about your limbs, quickly solidifying and trussing you up like a pig in a poke.", parse);
+		if(party.Num() > 1) {
+			if(party.Num() > 2) {
+				parse["comp"]    = "your companions";
+				parse["notS"]    = "";
+				parse["heshe"]   = "they";
+				parse["hasHave"] = "have";
+			}
+			else {
+				var p1 = party.Get(1);
+				parse["comp"]    = p1.name;
+				parse["notS"]    = "s";
+				parse["heshe"]   = p1.heshe();
+				parse["hasHave"] = "has";
+			}
+			Text.Add(" A quick glance at [comp] reveal[notS] that [heshe] [hasHave] pretty much befallen the same fate, restrained with magical bonds identical to the ones which you now bear.", parse);
+		}
+		Text.NL();
+		Text.Add("Hesitantly, uncertainly, the catboy approaches you, panting from the tussle you’ve just gone through. He distinctly avoids looking you in the eye as he reaches into a pocket in his baggy pants and pulls out a small slip of paper.", parse);
+		Text.NL();
+		Text.Add("<i>“Hmm, what to do now… okay, that’s ambush done, and now subdue…”</i> he draws out a stub of pencil and ticks the items off the list. <i>“And right at number four is become a man, so… hey, he left the third step out, there’re only just question marks here!”</i> The catboy flicks his large, fluffy ears and grumbles irritably, tail swishing about as he pockets the paper. <i>“Guess he wanted me to figure it out for myself…”</i>", parse);
+		Text.NL();
+		Text.Add("Oh, great. Not only are you facing an unappealing rapist, you’re facing an unappealing rapist who <i>doesn’t even know what he’s doing</i>. You don’t think things can get any worse from here on out… can they?", parse);
+		Text.NL();
+		
+		//TODO Scenes
+		//Return true for valid scenes, indicating successful scene proc
+		
+		var scenes = new EncounterTable();
+		/* TODO
+		scenes.AddEnc(function() {
+			Text.Add("", parse);
+			Text.NL();
+			Text.Add("", parse);
+			return true;
+		}, 1.0, function() { return true; });
+		*/
+		var ret = scenes.Get();
+		
+		// Default fallback
+		if(!ret) {
+			Text.Add("He looks you up and down a few times, scratching his head intermittently, and then mumbles to himself. <i>“Don’t think this is what he meant by that… guess I’ll have to find another one. Oh, bother.”</i>", parse);
+			Text.NL();
+			Text.Add("With that, he shuffles off, leaving you in the lurch to recover on your own time. That’s quite a while thanks to the magical beating he gave you, but at length you do manage to get up - albeit shakily - without anything else coming to harass you in the meantime.", parse);
+			Text.Flush();
+			Gui.NextPrompt();
+		}
+	});
+	Encounter.prototype.onLoss.call(enc);
 }
