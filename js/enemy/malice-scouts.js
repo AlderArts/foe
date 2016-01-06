@@ -159,7 +159,6 @@ CatboyMage.prototype.Act = function(encounter, activeChar) {
 	scenes.Get();
 }
 
-/* TODO
 Scenes.MaliceScouts.Catboy.Impregnate = function(mother, father, slot) {
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
@@ -171,7 +170,6 @@ Scenes.MaliceScouts.Catboy.Impregnate = function(mother, father, slot) {
 		load   : 2
 	});
 }
-*/
 
 Scenes.MaliceScouts.Catboy.LoneEncounter = function(levelbonus) {
 	var enemy    = new Party();
@@ -289,7 +287,16 @@ Scenes.MaliceScouts.Catboy.WinPrompt = function() {
 				Scenes.MaliceScouts.Catboy.PetPlay(enc);
 			}
 		});
-		/* TODO
+		if(player.FirstVag()) {
+			options.push({nameStr : "Pity fuck",
+				tooltip : Text.Parse("Take pity on the poor guy and let him have it.", parse),
+				enabled : true,
+				func : function() {
+					Scenes.MaliceScouts.Catboy.PityFuck(enc, true);
+				}
+			});
+		}
+		/* TODO (fuck him)
 		options.push({nameStr : "",
 			tooltip : Text.Parse("", parse),
 			enabled : true,
@@ -313,6 +320,202 @@ Scenes.MaliceScouts.Catboy.WinPrompt = function() {
 		});
 	});
 	Encounter.prototype.onVictory.call(enc);
+}
+
+Scenes.MaliceScouts.Catboy.PityFuck = function(enc, win) {
+	var catboy = enc.catboy;
+	var p1cock = player.BiggestCock();
+	var parse = {
+		
+	};
+	parse = player.ParserTags(parse);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
+	
+	Text.Clear();
+	if(win) {
+		Text.Add("Shit, this kitty-boy is so sad, you can’t even believe such a wretched little cumrag is possible. Several spirits of utter misfortune must have conspired to produce him, and even so…", parse);
+		Text.NL();
+		Text.Add("The catboy’s ears perk up at your words. <i>“Sad enough for pity sex?”</i>", parse);
+		Text.NL();
+		Text.Add("Well, technically it might be possible for someone to be so pathetic and hopeless that they go all the way around to be actually sexy, but unfortunately for him, he hasn’t quite gotten to that point yet - he’ll have to be a lot more of a loser before he even approaches that point. It’s like… like drinking so much coffee that your sobriety wraps about itself and you end up in whatever the opposite of drunk is.", parse);
+		Text.NL();
+		Text.Add("His ears flatten again. <i>“Oh.”</i>", parse);
+		Text.NL();
+		Text.Add("Come on, he has to try. You’re quite sure that he’s much, much worse, isn’t he? If he wants, he can start with the light stuff and work his way deeper. So, when was the last time he kissed a girl? He’ll have to get waaaay more pathetic to turn you on, that’s for sure.", parse);
+		Text.NL();
+		Text.Add("His brow furrows weakly. <i>“Um… I don’t remember…”</i>", parse);
+		Text.NL();
+		Text.Add("Does he not remember because he forgot when was the last time he locked lips, or is it because he’s actually never kissed anyone save for maybe his own mother?", parse);
+		Text.NL();
+		Text.Add("He flushes and looks away. <i>“All right, you got me. I’ve never kissed an actual girl before… and before you mention it, I’ve never kissed a guy, either.”</i>", parse);
+		Text.NL();
+		Text.Add("That’s better, although still pretty far off the mark. What else has he got to prove how much of a pathetic wimp he is?", parse);
+		Text.NL();
+		Text.Add("<i>“Hmm… let me think... “</i> He gasps all of a sudden. <i>“I know! I know! I secretly collect life-size cushions with erotic art on them! Things like nude catgirls in seductive and suggestive poses! I’ve given them all names… don’t tell the alchemist, though. He’d be mad.”</i>", parse);
+		Text.NL();
+		Text.Add("All right, that <i>is</i> pretty pathetic - just listening to that was enough to make your stomach turn and a creepy feeling crawl all over your body. He’ll have to do just a bit better, though…", parse);
+		Text.NL();
+		Text.Add("<i>“Hmm.”</i> He thinks a moment more. <i>“Well, there was that time when Meredith demanded that I finally learn to be a man, and so she went ahead and got me a night with one of the whores amongst the camp followers…”</i> he hesitates, coughs and whimpers.", parse);
+		Text.NL();
+		Text.Add("Yes? What happened?", parse);
+		Text.NL();
+		Text.Add("<i>“So she’d just gotten undressed, you see, and came over to do the same to me. She’d just gotten my pants down to about my knees when her fingers just brushed against my cock, and… and… I just came right there and then before anything even happened.”</i>", parse);
+		Text.NL();
+		Text.Add("Oh fuck, now that <i>is</i> wretched.", parse);
+		Text.NL();
+		Text.Add("<i>“She didn’t even bother to put her clothes back on, just ran out of the place to tell her sisters about what’d just happened, and they all started laughing, and more people came, which just meant they got to hear about it, and that drew more people…”</i> He bursts into a flood of tears that run down his cheeks. <i>“I’m such a useless piece of shit… I’m sure even Malice himself knows how much of a loser I am. He’d boot me straight out of camp or order me turned into a cocksleeve, only I’m too lowly and pathetic to even warrant his notice.”</i>", parse);
+		Text.NL();
+		Text.Add("Fine, fine, you’ve heard enough; he can come over. You want to see just how badly someone can fuck. Lying down on the ground, you beckon the catboy forward with a “come hither” finger, a predatory grin on your face.", parse);
+	}
+	else {
+		Text.Add("Astonished, the catboy stares down at his furry paw-hands disbelievingly, clearly uncertain as to whether his victory was for real or just some figment of his imagination. He pinches his cheeks a few times, then his arm, and finally his tail before reluctantly admitting that yes, this is real and it is happening.", parse);
+		Text.NL();
+		Text.Add("Well? He beat you fair and square. Isn’t he going to finish what he started?", parse);
+		Text.NL();
+		Text.Add("<i>“Umm… I’m not sure what happens next. I didn’t think that far ahead.”</i>", parse);
+		Text.NL();
+		Text.Add("What?", parse);
+		Text.NL();
+		Text.Add("<i>“Err… I was told by my friend to go out there and be a man, you see… and if I didn’t become a man, I shouldn’t bother to head back, that this was the last straw and I was a total loser if I couldn’t even get this simple thing done. So…”</i> he hesitates a little more. <i>“I’m not sure what happens next. He just said to go and beat up some likely-looking traveler, and he stopped there.”</i>", parse);
+		Text.NL();
+		Text.Add("There’s a moment of uncomfortable silence as you digest this, and the catboy mage flicks his eyes this way and that.", parse);
+		Text.NL();
+		Text.Add("<i>“Hey, my magic was pretty good, wasn’t it?”</i>", parse);
+		Text.NL();
+		Text.Add("Seeing as how he’s the one still standing, you kinda have to agree with that.", parse);
+		Text.NL();
+		Text.Add("More silence.", parse);
+		Text.NL();
+		Text.Add("Look, does he even know what his friend <i>meant</i> by being a man?", parse);
+		Text.NL();
+		Text.Add("<i>“Um… I think I have some idea, but I’m not entirely sure on the details. Whenever I ask, everyone seems to get flustered and shy away from me, especially the girls.”</i>", parse);
+		Text.NL();
+		Text.Add("Gah. Sure, he may be a pathetic loser, but since you lost to him, what does that make <i>you</i>? Fine, fine; since you’ve stalled long enough for some strength to return to your limbs, guess you’ll just have to show this young feline friend exactly what it means to be a man. With any chance, you’ll also discover just how badly someone can fuck.", parse);
+	}
+	Text.NL();
+	Text.Add("Hesitantly, the catboy closes the distance between you. Despite his usual spineless demeanor, you can see that he’s trying to be brave and resolute about it - too bad that “trying” simply isn’t going to be enough. After all, there is only do or do not, no “try”. The moment he kneels down within arm’s reach, you shoot out your hand and catch him by the collar of his shirt.", parse);
+	Text.NL();
+	Text.Add("<i>“Hey! What-”</i>", parse);
+	Text.NL();
+	Text.Add("You’re going to teach him to be a man; in short, you’re going to give him a pity fuck. Isn’t that what he wanted?", parse);
+	Text.NL();
+	Text.Add("<i>“Y-yes, but-”</i>", parse);
+	Text.NL();
+	Text.Add("Sure, it <i>is</i> a pity fuck and you’re going to make sure that you take every opportunity to remind him of that fact, but considering how pathetic he is, he should be thankful to just be able to get his dick wet.", parse);
+	Text.NL();
+	Text.Add("The catboy mewls and whimpers, holding his face in his hands with his large, fluffy ears pressed flat against his hair. Right, that seems to shut him up well enough; time to get to business. With a flourish, you rip down the waistband of his baggy pants, pulling it about his knees and revealing his junk and balls hanging free for all who want to take a gander.", parse);
+	Text.NL();
+	Text.Add("Hey, so he likes to go commando, does he?", parse);
+	Text.NL();
+	Text.Add("<i>“H-hey! What business of it is yours what I wear under my clothes?”</i>", parse);
+	Text.NL();
+	Text.Add("That’s nice; might that be the beginnings of a spine developing in him?", parse);
+	Text.NL();
+	Text.Add("The catboy does his best to remain resolute, but eventually breaks down under your withering gaze. You just smirk and study his tackle a little more closely; on such an effeminate guy, the catboy mage is surprisingly well-endowed. About nine inches of feline cock stands at attention before you, stiff and turgid in every sense of the word as it twitches in time with his heartbeat. This goes double for the soft cartilaginous barbs of pleasure interspersed along its length - teasing one of them elicits a plaintive, needy mewl from the catboy, and a small dribble of pre works its way out from the tip of his manhood. Truly hopeless; you’ve barely touched him and he’s already fit to bust.", parse);
+	Text.NL();
+	Text.Add("Come to think of it, what <i>would</i> happen if you did just that?", parse);
+	Text.NL();
+	Text.Add("<i>“W-what are you thinking?”</i>", parse);
+	Text.NL();
+	Text.Add("Oh, nothing much. You just need him to kneel atop you, straddle your chest for a bit.", parse);
+	Text.NL();
+	Text.Add("He clearly doesn’t like the idea and makes to shuffle away, but you sit up and grab him by one of his large ears, tugging until he mewls plaintively and complies, shedding his pants in the process.", parse);
+	Text.NL();
+	Text.Add("See? That wasn’t so bad. He’s going to have to get bigger balls if he wants to be an actual man instead of a cringing cat only fit for being a cocksleeve.", parse);
+	Text.NL();
+	Text.Add("<i>“Um, they’re already pretty heavy… it’s why I prefer to let them loose instead of packing them up like that, it gets really uncomfortable… I was once considering a potion to make them more manageable, but Meredith laughed and asked if I really wanted to be less of a man than I already was…”</i>", parse);
+	Text.NL();
+	Text.Add("All right, you meant that figuratively, and you did <i>not</i> need to know that snippet of information. The catboy mage is already pretty stiff, but rapidly becomes even more so when you take his maleness in hand; the pleasure-nubs rapidly swell from small pimple-like nubs into something actually approaching barbs. Grinning, you rub the soft barbs one at a time, taking care to tease them between thumb and forefinger. There’s a moment of tension, a moment of electricity in the air, and then a huge dollop of pre plops out of the tip of his cock.", parse);
+	Text.NL();
+	Text.Add("Well, you can’t blame him for not having had experience. You’ll just have to get this over with before he just blows his load all over you. The catboy is quite light, and it doesn’t take much strength for you to shift him into a more proper position.", parse);
+	Text.NL();
+	Text.Add("Now, maybe you should start slowly. Considering how the catboy’s face is utterly flushed and - yep, he’s actually bleeding from his nose, just a thin trickle, but it’s there. He looks at you dumbfounded for a bit, then realizes why you’re staring at him and summons the willpower to daub at his face with a sleeve.", parse);
+	Text.NL();
+	Text.Add("Now, does he understand what missionary is?", parse);
+	Text.NL();
+	Text.Add("<i>“Kinda sorta.”</i>", parse);
+	Text.NL();
+	Text.Add("Kinda sorta?", parse);
+	Text.NL();
+	Text.Add("The blush intensifies, and you feel the feline cock against your skin strain at its physical confines, desperate with desire. <i>“Um, I’ve read books… so I’m pretty good on the theory, just not the practical aspect of things…”</i>", parse);
+	Text.NL();
+	Text.Add("Oh-kay…", parse);
+	Text.NL();
+	Text.Add("<i>“I mean, I’ve even memorized how to do the grand pincer movement!”</i> He brightens up a little. <i>“I’ve practiced a lot, just not with anyone…”</i>", parse);
+	Text.NL();
+	Text.Add("Then who or what… wait, you probably shouldn’t give too much thought to that. He’s already gone around from being so pathetic that he’s sexy; you don’t need him to come full circle and go back to being utterly pathetic again. Look, you’ve drawn this out long enough; he should just stuff it in you before he shoots himself in the foot again.", parse);
+	Text.NL();
+	Text.Add("<i>“Wha…?”</i>", parse);
+	Text.NL();
+	Text.Add("Just stuff it in already!", parse);
+	Text.NL();
+	
+	Sex.Vaginal(catboy, player);
+	player.FuckVag(player.FirstVag(), catboy.FirstCock(), 3);
+	catboy.Fuck(catboy.FirstCock(), 3);
+	
+	Text.Add("The snappiness finally gets to him, and he rushes to obey, stuffing your [vag] full of cat cock. The petals of your womanly flower bump against each soft, nubby barb as he stretches you wide, sad yellow eyes going wide with a mixture of awe and instinctual desire as your inner walls pulse and flex against his manhood.", parse);
+	Text.NL();
+	Text.Add("<i>“Ah! I think - I think I’m going to-”</i>", parse);
+	Text.NL();
+	Text.Add("No, he’s not going to. He’s going to pack it in and hold on for as long as he can. If he dares to blow his load before you give him the go-ahead, he’s going to regret it.", parse);
+	Text.NL();
+	Text.Add("<i>“I… I’ll try…”</i> The way his voice is trembling and eyes are crossed doesn’t inspire great confidence in his abilities.", parse);
+	Text.NL();
+	Text.Add("Do or do not. There is no try.", parse);
+	Text.NL();
+	Text.Add("He just mewls piteously and continues thrusting. You have to admit, there’s at least some potential there; the way his barbs caress at your folds, the way his fingers grip at your waist. It’s not as if he’s ugly or not well-endowed; if only he could find it in himself to be more assertive, a little more forceful instead of cringing all the time which frankly is a huge turn-off.", parse);
+	Text.NL();
+	Text.Add("Well, he just needs to grow a spine, damn it. If he’s going to get any pleasure out of this, he’s going to have to <i>work</i> for it. Even as you’re thinking this, he stops his thrusting for a moment, fingers tightening as he prepares to-", parse);
+	Text.NL();
+	Text.Add("No! Bad!", parse);
+	Text.NL();
+	Text.Add("The catboy’s body tenses again and he manages to fight back the rising tide, but by the looks of it, he won’t be able to hold the line much longer. One supposes it’s a miracle that he’s already lasted this long… but you’re going to push him to his limits.", parse);
+	Text.NL();
+	Text.Add("In and out. In and out. If there were a textbook example of a pity fuck, well, this is it. The catboy looks as if he’s enjoying himself, inasmuch as one can enjoy himself while being utterly terrified. You would liked to have enjoyed yourself a little more, but them’s the breaks, as they say.", parse);
+	Text.NL();
+	Text.Add("Unfortunately for the poor catboy, he can’t take it anymore. The entirety of his lithe frame shakes and shudders as he blows his load into you with a resounding yowl, balls visibly deflating in the process. With how much there is, the spunk quickly fills up your cunt, then forces its way into your womb. Squelching noises rise from your hips as the catboy’s body runs on automatic, pounding away with an intensity that’s most uncharacteristic of his lithe body.", parse);
+	Text.NL();
+	
+	Scenes.MaliceScouts.Catboy.Impregnate(player, catboy);
+	
+	Text.Add("<i>“Ah! Ah! Ah!”</i> He’s still going at it - even though the stream of seed has slowed, it’s a good minute or so before he finally finishes up, his body sagging with exhaustion. It certainly looks like he’s put everything he had into it; sweat sheens on his brow and drips down his body. Eventually, though, even he has to give up and withdraws from you with a wet, sucking sound.", parse);
+	Text.NL();
+	Text.Add("Well, he’s a man now. How does that make him feel?", parse);
+	Text.NL();
+	Text.Add("The catboy winces and rubs his temples; his ears twitch this way and that. <i>“A little dizzy.”</i>", parse);
+	Text.NL();
+	Text.Add("Aah, that happens sometimes. It’ll pass soon enough.", parse);
+	Text.NL();
+	Text.Add("<i>“Um, well.”</i> He looks down at his now-deflating cock, at the dribble of spunk oozing out from your [vag], and then at you. <i>“Thanks.”</i>", parse);
+	Text.NL();
+	Text.Add("He shouldn’t get used to this. Not everyone is going to be as nice as you are.", parse);
+	Text.NL();
+	Text.Add("<i>“Oh, don’t I know that.”</i> He mutters to himself.", parse);
+	Text.NL();
+	Text.Add("It would really help if he stood up for himself more… can he do that for you? He doesn’t need to start kicking asses and taking names all at once, but maybe he should start watching out for himself instead of letting others push him about all the time. He’d be a lot more sexy then, you can assure him of that.", parse);
+	Text.NL();
+	Text.Add("He perks up. <i>“I’ll do my best!”</i>", parse);
+	Text.NL();
+	Text.Add("Right, right. Now if he doesn’t mind, he needs to get lost for a bit?", parse);
+	Text.NL();
+	Text.Add("<i>“Um… not immediately!”</i>", parse);
+	Text.NL();
+	Text.Add("An admirable attempt, but he needs to be more forceful about it.", parse);
+	Text.NL();
+	Text.Add("<i>“No!”</i>", parse);
+	Text.NL();
+	Text.Add("<b>Much</b> better.", parse);
+	Text.NL();
+	parse["comp"] = party.Num() == 2 ? party.Get(1).name : "your companions";
+	parse["c"] = party.Num() > 1 ? Text.Parse(" and [comp]", parse) : "";
+	Text.Add("Business taken care of, the two of you part ways, and you[c] continue on your journey.", parse);
+	Text.Flush();
+	
+	player.subDom.IncreaseStat(50, 1);
+	
+	Gui.NextPrompt();
 }
 
 Scenes.MaliceScouts.Catboy.PetPlay = function(enc) {
@@ -746,6 +949,11 @@ Scenes.MaliceScouts.Catboy.LossPrompt = function() {
 		//Return true for valid scenes, indicating successful scene proc
 		
 		var scenes = new EncounterTable();
+		
+		scenes.AddEnc(function() {
+			Scenes.MaliceScouts.Catboy.PityFuck(enc, false);
+			return true;
+		}, 1.0, function() { return player.FirstVag() && player.Femininity() > 0.3; });
 		/* TODO
 		scenes.AddEnc(function() {
 			Text.Add("", parse);
