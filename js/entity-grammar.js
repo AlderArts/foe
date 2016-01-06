@@ -94,16 +94,17 @@ Entity.prototype.mfTrue = function(male, female) {
 	return (this.body.Gender() == Gender.male) ? male : female;
 }
 
-Entity.prototype.ParserPronouns = function(parse, prefix, forcegender) {
-	parse  = parse  || {};
-	prefix = prefix || "";
-	parse[prefix + "HeShe"]   = this.HeShe(forcegender);
-	parse[prefix + "heshe"]   = this.heshe(forcegender);
-	parse[prefix + "HisHer"]  = this.HisHer(forcegender);
-	parse[prefix + "hisher"]  = this.hisher(forcegender);
-	parse[prefix + "HimHer"]  = this.HimHer(forcegender);
-	parse[prefix + "himher"]  = this.himher(forcegender);
-	parse[prefix + "hishers"] = this.hishers(forcegender);
+Entity.prototype.ParserPronouns = function(parse, prefix, postfix, forcegender) {
+	parse   = parse   || {};
+	prefix  = prefix  || "";
+	postfix = postfix || "";
+	parse[prefix + "HeShe" + postfix]   = this.HeShe(forcegender);
+	parse[prefix + "heshe" + postfix]   = this.heshe(forcegender);
+	parse[prefix + "HisHer" + postfix]  = this.HisHer(forcegender);
+	parse[prefix + "hisher" + postfix]  = this.hisher(forcegender);
+	parse[prefix + "HimHer" + postfix]  = this.HimHer(forcegender);
+	parse[prefix + "himher" + postfix]  = this.himher(forcegender);
+	parse[prefix + "hishers" + postfix] = this.hishers(forcegender);
 	return parse;
 }
 

@@ -1575,7 +1575,7 @@ Scenes.Halloween.Kiai = function() {
 		name : kiakai.name
 	};
 	var gender = kiakai.flags["InitialGender"];
-	parse = kiakai.ParserPronouns(parse, "", gender);
+	parse = kiakai.ParserPronouns(parse, "", "", gender);
 	
 	var werewolf = Scenes.Halloween.HW.Werewolf();
 	
@@ -1789,7 +1789,7 @@ Scenes.Halloween.KiaiGangrape = function() {
 		name : kiakai.name
 	};
 	var gender = kiakai.flags["InitialGender"];
-	parse = kiakai.ParserPronouns(parse, "", gender);
+	parse = kiakai.ParserPronouns(parse, "", "", gender);
 	parse = player.ParserTags(parse);
 	
 	var vag = player.FirstVag();

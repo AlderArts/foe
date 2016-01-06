@@ -16,6 +16,7 @@ CreditsScreen = function() {
 	Text.Add("Cassidy: The Observer<br/>");
 	Text.Add("Cat Dynasty theme room: LukaDoc and QuietBrowser<br/>");
 	Text.Add("Cats loss scenes: LukaDoc and QuietBrowser<br/>");
+	Text.Add("Cats loss scenes (double teamed): Tala<br/>");
 	Text.Add("Cveta: The Observer<br/>");
 	Text.Add("Highlands catboy: The Observer<br/>");
 	Text.Add("Desert caravan: Del<br/>");
