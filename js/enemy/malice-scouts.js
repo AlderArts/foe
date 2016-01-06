@@ -954,6 +954,10 @@ Scenes.MaliceScouts.Catboy.LossPrompt = function() {
 			Scenes.MaliceScouts.Catboy.PityFuck(enc, false);
 			return true;
 		}, 1.0, function() { return player.FirstVag() && player.Femininity() > 0.3; });
+		scenes.AddEnc(function() {
+			Scenes.MaliceScouts.Catboy.GetMilked(enc);
+			return true;
+		}, 1.0, function() { return player.Lactation(); });
 		/* TODO
 		scenes.AddEnc(function() {
 			Text.Add("", parse);
@@ -976,4 +980,91 @@ Scenes.MaliceScouts.Catboy.LossPrompt = function() {
 	Encounter.prototype.onLoss.call(enc);
 }
 
-
+Scenes.MaliceScouts.Catboy.GetMilked = function(enc) {
+	var catboy = enc.catboy;
+	var parse = {
+		
+	};
+	parse = player.ParserTags(parse);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
+	
+	Text.Clear();
+	Text.Add("While the catboy is thinking, he suddenly stops and sniffs at the air. Once, twice, and then he closes his eyes to better concentrate on the source of whatever he’s sensed. Slowly, he turns his head to follow it, stoops down a little, and then his eyelids flick open again.", parse);
+	Text.NL();
+	Text.Add("Oh. The exertion of the battle <i>has</i> squished your [breasts] about a bit, causing them to leak into your [armor], creating two damp blotches, wet and still spreading. A gentle, sweet smell rises from your chest, and it’s this that the adorable little kitty cat has traced back to its origins, his small, pink tongue running over his lips as the full realization of what he’s seeing hits home.", parse);
+	Text.NL();
+	Text.Add("<i>“Whoa, you’ve got milk!”</i> The catboy mage’s eyes practically bulge at the sight of your leaky, milk-laden [breasts], and he makes a pathetic little sound in the back of his throat. <i>“Hnnnn… I’ve got to have a sip of good milk… but then, I’m supposed to be out here learning to be a man... “</i>", parse);
+	Text.NL();
+	Text.Add("You’d have shaken your head in disbelief at the sight of a full-grown man literally drooling over the thought of breast milk, but calling this guy a man is probably stretching it.", parse);
+	Text.NL();
+	Text.Add("<i>“<b>Hnnnnnn!!!</b> I’ve been dying for some now, never managed to get any since Malice waded in and started bossing people around…”</i>", parse);
+	Text.NL();
+	Text.Add("By now, he’s sweating bullets and biting his nails as his tail thrashes madly behind him. Somehow, you get the idea that this desperate craving in response to the mere idea of warm milk isn’t a completely voluntary thing.", parse);
+	Text.NL();
+	Text.Add("Screw it. It’s better than getting raped by a complete loser, and you do eerily get the impression that you’ll regret it if you insist on refusing the catboy his milk. Beckoning to the mage with an outstretched finger, you make sure his full attention is on your rack, then pull off your [armor]. Almost as if anticipation what you’re about to do, your [nips] seem bigger, fuller and darker than usual; the catboy himself is just trembling from head to toe and chewing his lips furiously as sweat beads on his brow.", parse);
+	Text.NL();
+	Text.Add("It would be comical if it weren’t so utterly pathetic.", parse);
+	Text.NL();
+	Text.Add("At last, the inevitable happens; the catboy’s entire body coils like a large spring, and he pounces forward to land on you with a soft thump and a ruffle of loose fabric. Wasting no time, the effeminate feline happily opens his mouth in an “O” and throws himself forward, latching onto your breast with surprising ferocity and sucking for all he’s worth.", parse);
+	Text.NL();
+	Text.Add("Pleasant tingles run through the lady lump in question, spreading out into the rest of your chest as his warm lips begin applying pressure to get your milk flowing; it’s clear he’s no stranger to this. Try as you might, you can’t help but grin and take the chance to run your fingers through his white hair and large, fluffy ears; he purrs gloriously, eyes closing in pure bliss as you tuck him against your breast while he nurses.", parse);
+	Text.NL();
+	var lactation = player.LactHandler().Rate();
+	if(lactation <= 1) {
+		Text.Add("Continuing to mewl to himself, the catboy suckles harder and harder until your feel your milk let down in a flush of warmth from the base of your breast; a pleasant trickle of your cream runs from your nipple into his mouth. Although there’s not that much to be had, his rough, sandpapery tongue rubs against your nipple until you’re a moaning wreck, coaxing every last drop of nourishing cream that you’ve to spare.", parse);
+		Text.NL();
+		Text.Add("It’s not long before the first tap runs dry, and the kitty cat of a mage moves onto the next, repeating the process with gusto. All cross-eyed and dreamy, the poor guy looks like he’s having the time of his life draining you dry; you just don’t have the heart to stop him even if you had the mind to do so.", parse);
+	}
+	else if(lactation <= 3) {
+		Text.Add("The catboy pulls hard on your nipple, but it’s unnecessary considering how eager your milk is to let down. It flows and gushes into the catboy’s mouth, leaving you feeling wonderfully maternal as a warm stream joins the base of your breast to your nipple, leaving you gasping in delight to mirror the catboy’s bliss. Ah, this is the life…", parse);
+		Text.NL();
+		Text.Add("With how ferocious the catboy is, it’s not long before you’re down and out despite the considerable reserves you’d started with. Not enough for the catboy mage, though - fighting you seems to have worked up an appetite in him, and he goes straight for your other nipple, attacking it with an increasingly maddened ferocity as you feel your milk let down again.", parse);
+		Text.NL();
+		Text.Add("You have to wonder at his desperate love of milk - sure, he’s a cat, but even so he’s fitting the stereotype a bit <i>too</i> comfortably… oh well, it does take all sorts to make a world. The suckling goes on nearly as long as it did with the first, until he finally finishes and pulls away with a pop. Your [breasts] do feel much lighter now, and he continues eyeing you hungrily even as his stomach gurgles from all the milk he’s taken from you.", parse);
+	}
+	else {
+		Text.Add("The catboy suckles hard momentarily, and winds up sputtering at the flood of milk that jets out of your nipple in response. Backed up for goodness knows how long, your lady lumps revel as much as your feline friend in their long-awaited release. Breast milk gushes over his face, wetting his hair and fur, and he can only look on with ravenous pleasure at what he's started.", parse);
+		Text.NL();
+		Text.Add("Wasting no time, the catboy leans forward and latches back on, his throat swallowing visibly and often as he gulps away, struggling to keep up with your production as you let down in earnest, a torrent of warmth joining the base of your breast to the nipple.  His arms worm their way around your back and lock together in an effort to hold onto you even as your milk squirts out from the corners of his mouth with glorious gusto, forcing himself to either drink or drown in your engulfing flow.", parse);
+		Text.NL();
+		Text.Add("Lost in all the milk he could ever need or want, the catboy mage purrs away blissfully as he dutifully nurses, somehow managing to keep up with your production. His stomach gurgles noisily as if begins to swell with your cream, but he doesn’t care one bit.", parse);
+		Text.NL();
+		Text.Add("Gee, this cat sure does like his cream, doesn’t he?", parse);
+		Text.NL();
+		Text.Add("The suckling goes on and on, until your milk slows to a reasonable trickle.  Content to have drained one milk spout, the catboy mage detaches himself with a wet pop, smacking his lips before moving on to the next milk tank on your chest. His hunger hasn’t diminished any as he applies the same vigorous ministrations as he did with your first breast, gleefully massaging the firm titflesh with his lips and sending pleasant vibrations racing through you with each deepthroated purr he makes.", parse);
+		Text.NL();
+		Text.Add("Ah… despite your knowledge that the catboy is supposed to be, well, your rapist, it’s an uphill battle to not just lie back, close your eyes, and revel in the ungodly sensations of having your milky burden relieved in the best possible way.", parse);
+	}
+	player.MilkDrain(30);
+	Text.NL();
+	Text.Add("Eventually, though, you’ve been absolutely drained, ", parse);
+	if(lactation > 3) {
+		Text.Add("your breasts having deflated by a good two or three cup sizes in the process. This change is only temporary, though - you can feel your milk makers revving up their production once more, a gushing sensation filling your chest as they do their best to ensure that your tits are always full, turgid and deliciously milky.", parse);
+		Text.NL();
+		Text.Add("On his part, the catboy looks absolutely ecstatic, if not exactly sated. His milk-swollen tummy wobbles dangerously with each movement he makes, and he can’t stop purring to himself with each breath he draws.", parse);
+	}
+	else if(lactation > 1) {
+		Text.Add("your breasts having shrunk half or perhaps even a whole cup size now that they’ve been emptied. Not for long, though - you can feel a sensation of churning warmth in your chest as your [breasts] hurry to replace what you’ve lost to the catboy. Bit by bit, they start to grow fat and full again - it’ll be a little while before they’re back at full capacity, but the feeling in the meantime is just wondrous.", parse);
+	}
+	else {
+		Text.Add("an overwhelming sensation of relief washing over you as the nursing comes to an end.", parse);
+	}
+	Text.Add(" On his part, the catboy looks up at you and licks his milky lips; there’s a bit of cream left on your [breasts] and he laps that right up, his little pink tongue flicking in and out of his mouth like a kitten lapping from a saucer.", parse);
+	Text.NL();
+	Text.Add("There’s a good kitty, you murmur as you give the catboy a weak scratch between his large, snow-white ears. There’s a very good, and very hungry kitty indeed.", parse);
+	Text.NL();
+	Text.Add("He purrs and swipes his tail at you. It tickles.", parse);
+	Text.NL();
+	Text.Add("Aww, that’s so cute. Like it or not, though, you’re getting quite sleepy - first from being beaten up like that, then having your nourishment drained from you. The gentle scraping of the catboy’s tongue against your increasingly sensitive titflesh and nipples is heavenly, and it’s a little hard to think straight…", parse);
+	Text.NL();
+	Text.Add("You wake up a little while later on the windy hilltop, the magical bindings having long since evaporated from your limbs. There’s no sign of the catboy mage, but your exposed and drained lady lumps are proof enough that he wasn’t just a figment of your imagination.", parse);
+	Text.NL();
+	Text.Add("Well… that could have been worse. For example, the catboy could have remembered that he was out here to “become a man”, whatever that meant - with how pathetic-looking he was, though, you probably don’t want word to get out that you lost to him. Picking yourself off the ground, you get your [armor] in shape and prepare to be on your way.", parse);
+	Text.Flush();
+	
+	player.AddLustFraction(0.2);
+	player.AddSexExp(1);
+	
+	Gui.NextPrompt();
+}
