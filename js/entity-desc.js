@@ -322,7 +322,7 @@ LowerBodyType = {
 	Taur     : 2
 };
 Entity.prototype.LowerBodyType = function() {
-	if     (this.body.legs.count < 2)  return LowerBodyType.Single;
+	if     (this.body.legs.count <  2) return LowerBodyType.Single;
 	else if(this.body.legs.count == 2) return LowerBodyType.Humanoid;
 	else                               return LowerBodyType.Taur;
 }
@@ -337,13 +337,13 @@ Entity.prototype.HasLegs = function() {
 }
 Entity.prototype.IsNaga = function() {
 	return (this.body.legs.count < 2) &&
-		(this.body.legs.race == Race.Snake); //TODO
+		(this.body.legs.race.isRace(Race.Snake));
 }
 Entity.prototype.IsTaur = function() {
 	return this.LowerBodyType() == LowerBodyType.Taur;
 }
 Entity.prototype.IsGoo = function() {
-	return (this.body.legs.race == Race.Goo); //TODO
+	return (this.body.legs.race.isRace(Race.Goo));
 }
 Entity.prototype.IsFlexible = function() {
 	return this.body.IsFlexible(); //TODO Perks
