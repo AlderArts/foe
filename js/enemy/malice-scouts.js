@@ -50,7 +50,7 @@ function CatboyMage(levelbonus) {
 		level = 11;
 	}, 3.0, function() { return true; });
 	scenes.AddEnc(function() {
-		level = 9;
+		level = 12;
 	}, 2.0, function() { return true; });
 	scenes.AddEnc(function() {
 		level = 13;
