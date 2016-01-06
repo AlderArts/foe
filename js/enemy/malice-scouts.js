@@ -426,7 +426,7 @@ Scenes.MaliceScouts.Catboy.PityFuck = function(enc, win) {
 	Text.NL();
 	Text.Add("<i>“Um, they’re already pretty heavy… it’s why I prefer to let them loose instead of packing them up like that, it gets really uncomfortable… I was once considering a potion to make them more manageable, but Meredith laughed and asked if I really wanted to be less of a man than I already was…”</i>", parse);
 	Text.NL();
-	Text.Add("All right, you meant that figuratively, and you did <i>not</i> need to know that snippet of information. The catboy mage is already pretty stiff, but rapidly becomes even more so when you take his maleness in hand; the pleasure-nubs rapidly swell from small pimple-like nubs into something actually approaching barbs. Grinning, you rub the soft barbs one at a time, taking care to tease them between thumb and forefinger. There’s a moment of tension, a moment of electricity in the air, and then a huge dollop of pre plops out of the tip of his cock.", parse);
+	Text.Add("All right, you meant that figuratively, and you did <i>not</i> need to know that snippet of information. The catboy mage is already pretty stiff, but rapidly becomes even more so when you take his maleness in hand; the pleasure-nubs rapidly swell from small pimple-like bumps into something actually approaching barbs. Grinning, you rub the soft spines one at a time, taking care to tease them between thumb and forefinger. There’s a moment of tension, a moment of electricity in the air, and then a huge dollop of pre plops out of the tip of his cock.", parse);
 	Text.NL();
 	Text.Add("Well, you can’t blame him for not having had experience. You’ll just have to get this over with before he just blows his load all over you. The catboy is quite light, and it doesn’t take much strength for you to shift him into a more proper position.", parse);
 	Text.NL();
@@ -455,7 +455,7 @@ Scenes.MaliceScouts.Catboy.PityFuck = function(enc, win) {
 	player.FuckVag(player.FirstVag(), catboy.FirstCock(), 3);
 	catboy.Fuck(catboy.FirstCock(), 3);
 	
-	Text.Add("The snappiness finally gets to him, and he rushes to obey, stuffing your [vag] full of cat cock. The petals of your womanly flower bump against each soft, nubby barb as he stretches you wide, sad yellow eyes going wide with a mixture of awe and instinctual desire as your inner walls pulse and flex against his manhood.", parse);
+	Text.Add("The snappiness finally gets to him, and he rushes to obey, stuffing your [vag] full of cat cock. The petals of your womanly flower bump against each soft, nubby barb as he stretches you wide, sad green eyes going wide with a mixture of awe and instinctual desire as your inner walls pulse and flex against his manhood.", parse);
 	Text.NL();
 	Text.Add("<i>“Ah! I think - I think I’m going to-”</i>", parse);
 	Text.NL();
@@ -820,7 +820,7 @@ Scenes.MaliceScouts.Catboy.Petting = function(enc) {
 	Text.NL();
 	Text.Add("That certainly hits the spot. A desperate, needy caterwaul escapes the catboy mage’s lips as his slight form quakes with repressed pleasure; his breath comes hot and heavy even as you notice that his formerly baggy pants are tenting, the fabric growing tight with evidence of his mounting arousal. As you watch, the very peak of the tent grows ever higher as something strains within…", parse);
 	Text.NL();
-	Text.Add("Well, there’s no reason you shouldn’t let that all out. Pausing your scritching for a moment, you reach for the catboy’s pants with a hand and yank them down hard to his knees, revealing a thick and throbbing cat-cock complete with barbs along its length. It’s not <i>huge</i>, but is nevertheless large enough to look out of place on the catboy mage’s slight, effeminate frame. Thick, pulsating veins wrap about its surface, joining one feline barb to another - just as your thumb brushes against the catboy’s delicate ear-tufts, he shudders from head to toe and looses a small squirt of pre from the tip of his maleness.", parse);
+	Text.Add("Well, there’s no reason you shouldn’t let that all out. Pausing your scritching for a moment, you reach for the catboy’s pants with a hand and yank them down hard to his knees, revealing a thick and throbbing cat-cock complete with spines along its length. It’s not <i>huge</i>, but is nevertheless large enough to look out of place on the catboy mage’s slight, effeminate frame. Thick, pulsating veins wrap about its surface, joining one feline barb to another - just as your thumb brushes against the catboy’s delicate ear-tufts, he shudders from head to toe and looses a small squirt of pre from the tip of his maleness.", parse);
 	Text.NL();
 	Text.Add("<i>“There’s a good kitty,”</i> you whisper to the catboy as focus your attentions on his ear-tufts, rubbing the fine hairs between thumb and forefinger. <i>“There’s a very, very good kitty.”</i>", parse);
 	Text.NL();
@@ -994,7 +994,7 @@ Scenes.MaliceScouts.Catboy.GetMilked = function(enc) {
 	Text.NL();
 	Text.Add("Oh. The exertion of the battle <i>has</i> squished your [breasts] about a bit, causing them to leak into your [armor], creating two damp blotches, wet and still spreading. A gentle, sweet smell rises from your chest, and it’s this that the adorable little kitty cat has traced back to its origins, his small, pink tongue running over his lips as the full realization of what he’s seeing hits home.", parse);
 	Text.NL();
-	Text.Add("<i>“Whoa, you’ve got milk!”</i> The catboy mage’s eyes practically bulge at the sight of your leaky, milk-laden [breasts], and he makes a pathetic little sound in the back of his throat. <i>“Hnnnn… I’ve got to have a sip of good milk… but then, I’m supposed to be out here learning to be a man... “</i>", parse);
+	Text.Add("<i>“Whoa, you’ve got milk!”</i> The catboy mage’s eyes practically bulge at the sight of your leaky, milk-laden [breasts], and he makes a pathetic little sound in the back of his throat. <i>“Hnnnn… I’ve got to have a sip… but then, I’m supposed to be out here learning to be a man... “</i>", parse);
 	Text.NL();
 	Text.Add("You’d have shaken your head in disbelief at the sight of a full-grown man literally drooling over the thought of breast milk, but calling this guy a man is probably stretching it.", parse);
 	Text.NL();
@@ -1012,16 +1012,16 @@ Scenes.MaliceScouts.Catboy.GetMilked = function(enc) {
 	Text.NL();
 	var lactation = player.LactHandler().Rate();
 	if(lactation <= 1) {
-		Text.Add("Continuing to mewl to himself, the catboy suckles harder and harder until your feel your milk let down in a flush of warmth from the base of your breast; a pleasant trickle of your cream runs from your nipple into his mouth. Although there’s not that much to be had, his rough, sandpapery tongue rubs against your nipple until you’re a moaning wreck, coaxing every last drop of nourishing cream that you’ve to spare.", parse);
+		Text.Add("Continuing to mewl to himself, the catboy suckles harder and harder until your feel your milk let down in a flush of warmth from the base of your breast; a pleasant trickle of your milky goodness runs from your nipple into his mouth. Although there’s not that much to be had, his rough, sandpapery tongue rubs against your [nip] until you’re a moaning wreck, coaxing every last drop of nourishing cream that you’ve to spare.", parse);
 		Text.NL();
 		Text.Add("It’s not long before the first tap runs dry, and the kitty cat of a mage moves onto the next, repeating the process with gusto. All cross-eyed and dreamy, the poor guy looks like he’s having the time of his life draining you dry; you just don’t have the heart to stop him even if you had the mind to do so.", parse);
 	}
 	else if(lactation <= 3) {
-		Text.Add("The catboy pulls hard on your nipple, but it’s unnecessary considering how eager your milk is to let down. It flows and gushes into the catboy’s mouth, leaving you feeling wonderfully maternal as a warm stream joins the base of your breast to your nipple, leaving you gasping in delight to mirror the catboy’s bliss. Ah, this is the life…", parse);
+		Text.Add("The catboy pulls hard on your nipple, but it’s unnecessary considering how eager your milk is to let down. It flows and gushes into the catboy’s mouth, leaving you feeling wonderfully maternal as a warm stream joins the base of your breast to your [nip], leaving you gasping in delight to mirror the catboy’s bliss. Ah, this is the life…", parse);
 		Text.NL();
 		Text.Add("With how ferocious the catboy is, it’s not long before you’re down and out despite the considerable reserves you’d started with. Not enough for the catboy mage, though - fighting you seems to have worked up an appetite in him, and he goes straight for your other nipple, attacking it with an increasingly maddened ferocity as you feel your milk let down again.", parse);
 		Text.NL();
-		Text.Add("You have to wonder at his desperate love of milk - sure, he’s a cat, but even so he’s fitting the stereotype a bit <i>too</i> comfortably… oh well, it does take all sorts to make a world. The suckling goes on nearly as long as it did with the first, until he finally finishes and pulls away with a pop. Your [breasts] do feel much lighter now, and he continues eyeing you hungrily even as his stomach gurgles from all the milk he’s taken from you.", parse);
+		Text.Add("You have to wonder at his desperate love of milk - sure, he’s a cat, but even so he’s fitting the stereotype a bit <i>too</i> comfortably… oh well, it does take all sorts to make a world. The suckling goes on nearly as long as it did with the first, until he finally finishes and pulls away with a pop. Your [breasts] do feel much lighter now, and he continues eyeing you hungrily even as his stomach gurgles from all the cream he’s taken from you.", parse);
 	}
 	else {
 		Text.Add("The catboy suckles hard momentarily, and winds up sputtering at the flood of milk that jets out of your nipple in response. Backed up for goodness knows how long, your lady lumps revel as much as your feline friend in their long-awaited release. Breast milk gushes over his face, wetting his hair and fur, and he can only look on with ravenous pleasure at what he's started.", parse);
