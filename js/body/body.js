@@ -314,15 +314,19 @@ BodyPart.prototype.Feathered = function() {
 }
 
 Body.prototype.SkinDesc = function(part) {
+	var ret = "";
+	
 	var col = Color.Desc(this.torso.color);
+	if(Math.random() < 0.3 && this.HasSkin()) ret += "bare ";
+	if(Math.random() < 0.3) ret += col + " ";
 	part = part ? part.race : this.torso.race;
 	
-	if(part.isRace(Race.Reptile)) return col + " scales";
-	if(part.isRace(Race.Avian))   return col + " feathers";
-	if(part.isRace(Race.Cow, Race.Horse)) return col + " hide";
-	if(part.isRace(Race.Canine, Race.Feline, Race.Goat, Race.Sheep, Race.Musteline, Race.Rabbit)) return col + " fur";
-	if(part.isRace(Race.Goo))     return col + " slime";
-	return col + " skin";
+	if(part.isRace(Race.Reptile)) return ret + "scales";
+	if(part.isRace(Race.Avian))   return ret + "feathers";
+	if(part.isRace(Race.Cow, Race.Horse)) return ret + "hide";
+	if(part.isRace(Race.Canine, Race.Feline, Race.Goat, Race.Sheep, Race.Musteline, Race.Rabbit)) return ret + "fur";
+	if(part.isRace(Race.Goo))     return ret + "slime";
+	return ret + "skin";
 }
 
 Body.prototype.HasFur = function(race) {
