@@ -417,7 +417,7 @@ Body.prototype.HasNightvision = function() {
 
 Body.prototype.SoftFeet = function() {
 	var legs = this.legs;
-	if(!legs || legs.count == 0) return false;
+	if(!legs || legs.count < 2) return false;
 	
 	return !legs.race.isRace(
 		Race.Cow,
@@ -430,7 +430,7 @@ Body.prototype.SoftFeet = function() {
 
 Body.prototype.FeetDesc = function() {
 	var legs = this.legs;
-	if(!legs || legs.count == 0) {
+	if(!legs || legs.count < 2) {
 		if(legs.race.isRace(Race.Snake))
 			return "tail";
 		else
@@ -446,7 +446,7 @@ Body.prototype.FeetDesc = function() {
 }
 Body.prototype.FootDesc = function() {
 	var legs = this.legs;
-	if(!legs || legs.count == 0) {
+	if(!legs || legs.count < 2) {
 		if(legs.race.isRace(Race.Snake))
 			return "tail";
 		else
@@ -463,7 +463,7 @@ Body.prototype.FootDesc = function() {
 // TODO
 Body.prototype.LegDesc = function() {
 	var legs = this.legs;
-	if(!legs || legs.count == 0) {
+	if(!legs || legs.count < 2) {
 		if(legs.race.isRace(Race.Snake))
 			return "tail";
 		else
@@ -475,7 +475,7 @@ Body.prototype.LegDesc = function() {
 // TODO
 Body.prototype.LegsDesc = function() {
 	var legs = this.legs;
-	if(!legs || legs.count == 0) {
+	if(!legs || legs.count < 2) {
 		if(legs.race.isRace(Race.Snake))
 			return "tail";
 		else
@@ -487,14 +487,14 @@ Body.prototype.LegsDesc = function() {
 // TODO
 Body.prototype.ThighDesc = function() {
 	var legs = this.legs;
-	if(!legs || legs.count == 0) return "body";
+	if(!legs || legs.count < 2) return "body";
 	
 	return "thigh";
 }
 // TODO
 Body.prototype.ThighsDesc = function() {
 	var legs = this.legs;
-	if(!legs || legs.count == 0) return "body";
+	if(!legs || legs.count < 2) return "body";
 	
 	return "thighs";
 }

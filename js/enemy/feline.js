@@ -2684,7 +2684,7 @@ Scenes.Felines.LossDoubleTeam = function(cat, cat2, group, enc) {
 		Text.Add("Before you can react, the feline yanks your [botarmor] off. ", parse);
 	Text.Add("Your captor licks [hisher] lips, purring as [heshe] admires [hisher] prize. You stand stark naked in a clump of short grass, and shudder as a [season] your [skin]. Nothing but a freshly caught morsel about to be devoured.", parse);
 	if(subby)
-		Text.Add("Not that you wouldn’t mind devouring some of that big, thick kitty-cock yourself, maybe with some hot cream to wash it down with… You shake the thought away, swearing to stop doing that.", parse);
+		Text.Add(" Not that you wouldn’t mind devouring some of that big, thick kitty-cock yourself, maybe with some hot cream to wash it down with… You shake the thought away, swearing to stop doing that.", parse);
 	Text.NL();
 	Text.Add("<i>“You like what you see,”</i> [name] mewls. It wasn’t a question. <i>“You want us,”</i> [heshe] continues. Again, not a question. <i>“We want you, yes?”</i>", parse);
 	Text.NL();
@@ -2867,7 +2867,7 @@ Scenes.Felines.LossDoubleTeam = function(cat, cat2, group, enc) {
 			
 			Scenes.Felines.Impregnate(player, cat2);
 			
-			parse["h"] = player.Hair().Bald() ? "" : " by the [hair]";
+			parse["h"] = player.Hair().Bald() ? "" : Text.Parse(" by the [hair]", parse);
 			Text.Add("<i>”Lots of practice,”</i> [PapaMama] replies, pulling you[h] off [hisher] musky rod. <i>”See, it’s all about staying in control.”</i> [Name] wraps the other paw around [hisher] phallus, and two quick jerks later [heshe] erupts onto your face. Spurts of kitty spunk fill your nose and mouth, others arc over your head, splattering on your back. The feline lets go, allowing you to slide off the cock in your rear and collapse in the puddle of fluids, exhausted but satisfied. [HeShe] leans down, wipes a thick glob of cum from your nose and gives you a playful lick. <i>”Now, didn’t we all have a good time?”</i>", parse);
 			Text.NL();
 			Text.Add("We sure did. You are dimly aware of one of the felines patting your [butt] as you sink into a satisfied, yet sticky, slumber.", parse);
@@ -2896,7 +2896,7 @@ Scenes.Felines.LossDoubleTeam = function(cat, cat2, group, enc) {
 				else
 					Text.Add("You have to admit, you’re really getting into this now. As your tongue dances across [PapaMama]’s meat, the urge hits to take things a step further. You give the tip a final lick, open your mouth and…", parse);
 				Text.NL();
-				parse["h"] = player.Hair().Bald() ? "" :  " by your [hair]";
+				parse["h"] = player.Hair().Bald() ? "" :  Text.Parse(" by your [hair]", parse);
 				Text.Add("<i>“Slow down there, hot stuff!”</i> The feline’s mate yanks you backward[h]. <i>“I’m not gonna let you two hog all the fun,”</i> Bitch growls, [hisher] cock poking your rear as a friendly reminder that [heshe] wants to play too.", parse);
 				Text.NL();
 				Text.Add("<i>“Come on then,”</i> [PapaMama] purrs. [HeShe] lies prone in the grass before you, legs together, barbed prick standing invitingly erect. <i>“You waiting for an invitation? Hop on.”</i>", parse);
