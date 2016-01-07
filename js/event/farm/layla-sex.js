@@ -469,7 +469,7 @@ Scenes.Layla.SexFirstTime = function() {
 					Text.Clear();
 					Text.Add("<i>“Okay,”</i> she replies with a smile, wrapping her digits around her tail-cock and gently stroking it.", parse);
 					Text.NL();
-					Text.Add("You watch as she continue to caress the smaller penis, observing as her cheeks turn a slightly purplish hue. Finally, after a few more moments, she grunts, and you watch as a rope of clear-looking fluid shoots out of her tail-cock’s head and lands on the [floor].", parse);
+					Text.Add("You watch as she continue to caress the smaller penis, observing as her cheeks turn a slightly purplish hue. Finally, after a few more moments, she grunts, and you watch as a rope of clear-looking fluid shoots out of her tail-cock’s head and lands on the ground.", parse);
 					Text.NL();
 					PrintDefaultOptions();
 				}, enabled : true,
