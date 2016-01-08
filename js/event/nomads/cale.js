@@ -219,9 +219,9 @@ Scenes.Cale.Interact = function() {
 	Text.Add("<i>“I’m fine, thanks for asking,”</i> he replies.", parse);
 	Text.NL();
 	if(cale.Slut() >= 60)
-		Text.Add("He glances at you sideways with an expectant look, a seductive smirk plastered on his canine muzzle. <i>“Everytime I see you around, I get a nice tingling in my butt. You here to do something about that or is there something else you want?”</i>", parse);
+		Text.Add("He glances at you sideways with an expectant look, a seductive smirk plastered on his canine muzzle. <i>“Every time I see you around, I get a nice tingling in my butt. You here to do something about that or is there something else you want?”</i>", parse);
 	else if(cale.Slut() >= 30)
-		Text.Add("He averts his gaze for a moment, an awkward silence settling between the two of you before he breaks the ice, <i>“So… you here for another go at me, or is it something else you want?”</i>", parse);
+		Text.Add("He averts his gaze for a moment, an awkward silence settling between the two of you before he breaks the ice. <i>“So… you here for another go at me, or is it something else you want?”</i>", parse);
 	else
 		Text.Add("He glances at you with a smile on his wolfish muzzle. <i>“What’s up? Here for business or pleasure?”</i>", parse);
 	
@@ -246,9 +246,9 @@ Scenes.Cale.Desc = function() {
 	}
 	else {
 		if(cale.Slut() >= 60)
-			Text.Add("Cale is sitting by the fire, he looks at you with a lecherous look and an evil smirk. You note that he’s idly pawing his butt, while his tail wags above. The moment he spots you staring, he calls you over with a crooked finger. No doubt he’s thinking about all the fun you’ve had together.", parse);
+			Text.Add("Cale is sitting by the fire. He glances at you with a lecherous look and an evil smirk. You note that he’s idly pawing his butt, while his tail wags above. The moment he spots you staring, he calls you over with a crooked finger. No doubt he’s thinking about all the fun you’ve had together.", parse);
 		else if(cale.Slut() >= 30)
-			Text.Add("Cale sits by the fire, idly looking at the flames dance, sometimes he glances your way and when your eyes meet he casts you a lopsided grin.", parse);
+			Text.Add("Cale sits by the fire, idly looking at the flames dance. He sometimes glances your way and when your eyes meet, he casts you a lopsided grin.", parse);
 		else
 			Text.Add("Cale is sitting by the fire, staring idly into the flames.", parse);
 	}
@@ -288,7 +288,7 @@ Scenes.Cale.FirstApproach = function() {
 	if(cale.flags["Met"] == Cale.Met.SharedFuckedHim) {
 		Text.Add("Your eyes roam appreciatively over the wolf's form until they focus on the sweet ass you fucked before, and you can't help but lick your lips at the memory.", parse);
 		Text.NL();
-		Text.Add("He jumps a little at your greeting, looking to sides nervously as he finally lets his gaze settle on you. <i>“Oh, umm… H-Hey there,”</i> he greets you back with a nervous grin. <i>“How you’re doing… err…”</i> He trails off realising he didn’t quite catch your name.", parse);
+		Text.Add("He jumps a little at your greeting, looking to the sides nervously as he finally lets his gaze settle on you. <i>“Oh, umm… H-hey there,”</i> he greets you back with a nervous grin. <i>“How you doing… err…”</i> He trails off realizing he didn’t quite catch your name.", parse);
 		Text.NL();
 		Text.Add("You tell him that your name is [playername]. So, how about him? How has he been doing since the two of you... met?", parse);
 		Text.NL();
@@ -300,7 +300,7 @@ Scenes.Cale.FirstApproach = function() {
 		options.push({ nameStr : "Be forward",
 			func : function() {
 				Text.Clear();
-				Text.Add("Smirking to yourself, you saunter closer to the wolf-morph, who visibly restrains himself from flinching. Your hand reaches out and presses itself gently against his thigh, feeling the soft fur underneath. With slow, sensuous motions your fingers start to rub up and down, trailing the contour of his nicely muscled legs.", parse);
+				Text.Add("Smirking to yourself, you saunter closer to the wolf-morph, who visibly restrains himself from flinching. Your hand reaches out and presses itself gently against his thigh, feeling the soft fur underneath. With slow, sensuous motions, your fingers start to rub up and down, trailing the contour of his nicely muscled legs.", parse);
 				Text.NL();
 				Text.Add("As you continue stroking his thigh, you casually ask what he was thinking about. You feign ignorance of his growing arousal, but really you are drinking in every reaction, delight flooding you as you see the bulge between his legs growing ever more pronounced.", parse);
 				Text.NL();
@@ -309,9 +309,9 @@ Scenes.Cale.FirstApproach = function() {
 				
 				Text.Add("He swallows audibly, looking at your hand rubbing his thigh. <i>“I was thinking about what we did…”</i> he trails off. <i>“Not with Rosie. That’s run of the mill. But what <b>we</b> did over there. Or rather, what <b>you</b> did to <b>me</b>,”</i> he adds, averting his gaze with a slight frown.", parse);
 				Text.NL();
-				Text.Add("You know he's not going to say he didn't like it, you declare, your hand slowly creeping inwards, over his thigh and toward his loins. You dexterously flick the button holding his pants closed, exposing the tip of his canine member and drawing a shudder from the wolf. Enjoying every moment of this exchange, you wrap a hand possessively around the warmth of his now-erect cock. Up and down you stroke him in slow, languid pumps, your thumb rubbing circles over his pointy glans.", parse);
+				Text.Add("You know he's not going to say he didn't like it, you declare, your hand slowly creeping inwards, over his thigh and toward his loins. You dexterously flick the button holding his pants closed, exposing the tip of his canine member and drawing a shudder from the wolf. Enjoying every moment of this exchange, you wrap your fingers possessively around the warmth of his now-erect cock. Up and down, you stroke him in slow, languid pumps, your thumb rubbing circles over his pointy glans.", parse);
 				Text.NL();
-				Text.Add("He moves his hip in tandem with your stroking, wary of disturbing your pace lest you stop your ministrations. He moans softly as he begins gyrating his hips. <i>“I didn’t… I mean, I didn’t say I didn’t like it,”</i> he replies, humping your hand softly. Considering the way his face is scrunching up in pleasure, you’d guess this simple handjob is feeling nearly as good as Rosalin’s pussy.", parse);
+				Text.Add("He thrusts in tandem with your stroking, wary of disturbing your pace lest you stop your ministrations. He moans softly as he begins gyrating his hips. <i>“I didn’t… I mean, I didn’t say I didn’t like it,”</i> he replies, humping your hand softly. Considering the way his face is scrunching up in pleasure, you’d guess this simple handjob is feeling nearly as good as Rosalin’s pussy.", parse);
 				Text.NL();
 				Text.Add("Smirking, you ask if he remembers asking for another go after your last encounter, continuing to pump and rub as you do so. His eyes force themselves open and he looks at you, nodding mutely. In reply, you remove your hand from his dick.", parse);
 				Text.NL();
@@ -321,13 +321,13 @@ Scenes.Cale.FirstApproach = function() {
 					Text.Add("Leaning toward him, you stage whisper into his ear that you have just the thing for him, despite your current lack of a cock.", parse);
 				else
 					Text.Add("Leaning toward him, you stage whisper into his ear that it might not be the same as before, but you're looking for another round yourself.", parse);
-				Text.Add(" He begins panting at your declaration. After a quick look around he points to a tent nearby. <i>“That’s my tent,”</i> he says, getting up on his feet and walking over, not caring that his erect wolf prick is bobbing in the wind for all the world to see. He looks over his shoulder to see if you’re coming or not.", parse);
+				Text.Add(" He begins panting at your declaration. After a quick look around, he points to a tent nearby. <i>“That’s my tent,”</i> he says, getting up on his feet and walking over, not caring that his erect wolf prick is bobbing in the wind for all the world to see. He looks over his shoulder to see if you’re coming or not.", parse);
 				Text.NL();
-				Text.Add("Chuckling, you remark that he’s in quite a hurry to be used isn’t he? Well you’d like to at least know the name of your beta before going any further.", parse);
+				Text.Add("Chuckling, you remark that he’s in quite a hurry to be used isn’t he? Well, you’d like to at least know the name of your beta before going any further.", parse);
 				Text.NL();
-				Text.Add("He slaps his forehead with an open palm. Clearly he forgot his manners in his eagerness to get you inside his tent. <i>“S-Sorry,”</i> he apologizes in embarrassment. <i>“I’m Cale,”</i> he says, tail wagging as he bows slightly. <i>“Umm… [playername].”</i>", parse);
+				Text.Add("He slaps his forehead with an open palm. Clearly, he forgot his manners in his eagerness to get you inside his tent. <i>“S-sorry,”</i> he apologizes in embarrassment. <i>“I’m Cale,”</i> he says, tail wagging as he bows slightly. <i>“Umm… [playername].”</i>", parse);
 				Text.NL();
-				Text.Add("Now, that’s better. You get up on your feet and walk up to him, deftly buttoning his pants up. Can’t have the whole world sizing up your beta now, can you? Then you turn him toward the tent he pointed at earlier, and send him on his way with an audible slap on his butt. He yelps in surprise, but quickly moves to comply as you follow in tow.", parse);
+				Text.Add("Now, that’s better. You get up on your [feet] and approach him, deftly buttoning his pants up. Can’t have the whole world sizing up your beta now, can you? Then you turn him toward the tent he pointed at earlier, and send him on his way with an audible slap on his butt. He yelps in surprise, but quickly moves to comply as you follow in tow.", parse);
 				Text.Flush();
 				
 				cale.slut.IncreaseStat(50, 5);
@@ -348,9 +348,9 @@ Scenes.Cale.FirstApproach = function() {
 				Text.NL();
 				Text.Add("Shrugging your shoulders, you ask what the problem is then; he enjoyed it, he admits he enjoyed it, he thinks he could enjoy doing it again. What's to worry about it?", parse);
 				Text.NL();
-				Text.Add("But, anyway, you were hoping he might tell you his name? You didn't catch it when you two were... ‘introduced’ by Rosalin.", parse);
+				Text.Add("But anyway, you were hoping he might tell you his name? You didn't catch it when you two were... ‘introduced’ by Rosalin.", parse);
 				Text.NL();
-				Text.Add("His ears twitch in realisation. <i>“Yeah, that’s right,”</i> he clears his throat. <i>“I’m Cale. I suppose it’s a bit late, but nice to meet you… umm… [playername].”</i> He offers you a hand in a friendly gesture. <i>“I said I’d get you back for what you did when we were with Rosie, but I guess it’s fine. Let bygones be bygones.”</i>", parse);
+				Text.Add("His ears twitch in realization. <i>“Yeah, that’s right,”</i> he clears his throat. <i>“I’m Cale. I suppose it’s a bit late, but nice to meet you… umm… [playername].”</i> He offers you a hand in a friendly gesture. <i>“I said I’d get you back for what you did when we were with Rosie, but I guess it’s fine. Let bygones be bygones.”</i>", parse);
 				Text.NL();
 				Text.Add("You reach out and take his hand, shaking it firmly as you return the sentiment.", parse);
 				Text.NL();
@@ -364,11 +364,11 @@ Scenes.Cale.FirstApproach = function() {
 		options.push({ nameStr : "Comfort",
 			func : function() {
 				Text.Clear();
-				Text.Add("Smiling gently, you ask if he's alright, and apologise for how you treated him that time with Rosalin.", parse);
+				Text.Add("Smiling gently, you ask if he's alright, and apologize for how you treated him that time with Rosalin.", parse);
 				Text.NL();
 				Text.Add("He looks a bit surprised at the apology. <i>“Huh? Oh, right. Sure, no problem. It’s not like I didn’t enjoy it,”</i> he examines you, a bit unsure of himself. <i>“A bit, just a bit,”</i> he hurriedly adds.", parse);
 				Text.NL();
-				Text.Add("You tell him that you're glad to hear that; you didn't realise he was a virgin when you picked to take him that way. You'll try to give him more of a choice in the matter in the future. If there is one, you quickly add.", parse);
+				Text.Add("You tell him that you're glad to hear that; you didn't realize he was a virgin when you picked to take him that way. You'll try to give him more of a choice in the matter in the future. If there is one, you quickly add.", parse);
 				Text.NL();
 				Text.Add("<i>“Right, though I should hope the terms are different. I’m a guy, and I’m sure I don’t swing that way. My thing is pitching, not catching,”</i> he states, you’re not sure if to reassure you or himself. <i>“I said I’d get you back for doing that to me, but you seem like a pretty cool [guyGal]. So you can forget about that threat,”</i> he adds, tail wagging slightly.", parse);
 				Text.NL();
@@ -395,7 +395,7 @@ Scenes.Cale.FirstApproach = function() {
 		Text.Add("You swallow hard, mind replaying the memories of him as he fucked you earlier, a pang of equal parts lust and intimidation momentarily rocking through you.", parse);
 		Text.NL();
 		parse["thigh"] = player.LowerBodyType() == LowerBodyType.Single ? parse["hipDesc"] : parse["thighDesc"];
-		Text.Add("His ears perk up as he catches your greeting. Looking you over with a big grin. <i>“Hello, how you doing?”</i> the wolf asks, wagging his tail. <i>“What brings you my humble spot by the bonfire?”</i> he flirts, placing a hand on your [thigh].", parse);
+		Text.Add("His ears perk up as he catches your greeting, looking you over with a big grin. <i>“Hello, how you doing?”</i> the wolf asks, wagging his tail. <i>“What brings you my humble spot by the bonfire?”</i> he flirts, placing a hand on your [thigh].", parse);
 		Text.NL();
 		Text.Add("You wanted to talk to him, you reply, doing your best to ignore his hand as it rests upon your [skinDesc].", parse);
 		Text.NL();
@@ -418,11 +418,11 @@ Scenes.Cale.FirstApproach = function() {
 					Text.Add("<i>“Frisky one, aren’t you? But fair enough. I can take a hint.”</i>", parse);
 				else
 					Text.Add("<i>“Didn’t like getting done by me, huh?”</i> he chortles. <i>“That’s alright then. I can take a hint.”</i>", parse);
-				Text.Add(" He takes a moment clear his throat then offers you a hand. </i>”The name’s Cale. Bit late for greeting, I think, but nice to meetcha,”</i> Cale grins, tail wagging behind him.", parse);
+				Text.Add(" He takes a moment clear his throat, then offers you a hand. </i>”The name’s Cale. Bit late for greeting, I think, but nice to meetcha,”</i> Cale grins, tail wagging behind him.", parse);
 				Text.NL();
 				Text.Add("You take his hand and shake it, sharing your own name in turn.", parse);
 				Text.NL();
-				Text.Add("<i>“So, now that we’ve met. What can I do ya for?</i> he smirks.", parse);
+				Text.Add("<i>“So, now that we’ve met. What can I do ya for?”</i> he smirks.", parse);
 				Text.Flush();
 				
 				Scenes.Cale.Prompt();
@@ -438,7 +438,7 @@ Scenes.Cale.FirstApproach = function() {
 				Text.NL();
 				Text.Add("You nod in acknowledgement, returning the greeting and providing your own name in return.", parse);
 				Text.NL();
-				Text.Add("<i>“So, what brings you? Came to take me up on my offer or is there something else you want?</i> he asks with a lopsided grin.", parse);
+				Text.Add("<i>“So, what brings you? Came to take me up on my offer or is there something else you want?”</i> he asks with a lopsided grin.", parse);
 				Text.Flush();
 				
 				Scenes.Cale.Prompt();
@@ -475,9 +475,9 @@ Scenes.Cale.FirstApproach = function() {
 						
 						player.slut.IncreaseStat(100, 3);
 						
-						Text.Add("<i>“Good. Come with me,”</i> he says, giving your [buttDesc] a quick grope. He gets up, adjusting his trousers to make his bulge just a bit more pronounced. You find your eyes homing in on that bulge and the promise it holds. <i>“My eyes are up here,”</i> he chuckles, breaking you out of your reverie. He extends a hand to help you stand.", parse);
+						Text.Add("<i>“Good. Come with me,”</i> he says, giving your [buttDesc] a quick grope. He gets up, adjusting his trousers to make his bulge just a bit more pronounced. You find your eyes homing in on said bulge and the promise it holds. <i>“My eyes are up here,”</i> he chuckles, breaking you out of your reverie. He extends a hand to help you stand.", parse);
 						Text.NL();
-						Text.Add("Eagerly you reach out and take it, happily accepting his help and pulling yourself right up against him once you are upright again.", parse);
+						Text.Add("Eagerly, you reach out and take it, happily accepting his help and pulling yourself right up against him once you are upright again.", parse);
 						Text.NL();
 						Text.Add("Looping an arm around your waist to grab your butt and pull you close, he leads you toward his tent. <i>“This is gonna be fun.”</i>", parse);
 						Text.Flush();
@@ -512,7 +512,7 @@ Scenes.Cale.FirstApproach = function() {
 		Text.NL();
 		Text.Add("<i>“Rosie? Hah! Nah, she just likes me for my cock.”</i> He certainly seems sure of himself. <i>“Name’s Cale, by the way. A pleasure.”</i> He pats the wooden log he’s sitting on. <i>“Have a seat, [playername].”</i>", parse);
 		Text.NL();
-		Text.Add("He goes on to explain that he and Rosalin are fuckbuddies, if more by happenstance than design. <i>“I just happened to be around when she went into heat, and she’s consistently come back for more ever since. If you have your eyes set on her I don’t mind, though. She’s a bit crazy, but a really nice fuck.”</i>", parse);
+		Text.Add("He goes on to explain that he and Rosalin are fuckbuddies, if more by happenstance than design. <i>“I just happened to be around when she went into heat, and she’s consistently come back for more ever since. If you have your eyes set on her, I don’t mind, though. She’s a bit crazy, but a really nice fuck.”</i>", parse);
 		Text.NL();
 		Text.Add("<i>“So, what did you want to talk about?”</i>", parse);
 		Text.Flush();
@@ -522,7 +522,7 @@ Scenes.Cale.FirstApproach = function() {
 	else { // You took Rosalin
 		Text.Add("You explain that you were wondering if he's alright with what happened back with Rosalin.", parse);
 		Text.NL();
-		Text.Add("He turns to look at you, chuckling, he replies, <i>“Sure. I like Rosie but it’s not like we’re attached on the hips or anything. She just does her thing with whomever is handy at the time,”</i> he shrugs. <i>“I just make sure to be handy most of the time,”</i> he adds with a grin.", parse);
+		Text.Add("He turns to look at you, chuckling, he replies, <i>“Sure. I like Rosie, but it’s not like we’re attached on the hips or anything. She just does her thing with whomever is handy at the time,”</i> he shrugs. <i>“I just make sure to be handy most of the time,”</i> he adds with a grin.", parse);
 		Text.NL();
 		Text.Add("You nod as you digest that fact. Then, prompted by curiosity, you ask how he knows Rosalin - it looks and sounds like the two of them are pretty close.", parse);
 		Text.NL();
@@ -534,7 +534,7 @@ Scenes.Cale.FirstApproach = function() {
 		Text.NL();
 		Text.Add("You nod to show that you understand what he's saying, and then ask what his name is, politely offering your own in exchange.", parse);
 		Text.NL();
-		Text.Add("<i>“Oh, yeah. Sorry bout my manners. I’m Cale, pleased to meetcha [playername].”</i> He offers you a friendly hand.", parse);
+		Text.Add("<i>“Oh, yeah. Sorry 'bout my manners. I’m Cale, pleased to meetcha [playername].”</i> He offers you a friendly hand.", parse);
 		Text.NL();
 		Text.Add("You take his hand and shake it.", parse);
 		Text.NL();
@@ -585,7 +585,7 @@ Scenes.Cale.Prompt = function() {
 			if(cale.Slut() >= 60)
 				Text.Add("<i>“Why, are you getting shy all of a sudden?”</i> Cale teases you with a grin. <i>“You can take me for a ride anytime, any place.”</i> Eager to get started, the wolf pulls you along, heading for his tent.", parse);
 			else if(cale.Slut() >= 30)
-				Text.Add("<i>“Sure, I don’t mind,”</i> Cale nods, licking his lips. <i>“my butt is always ready for action!”</i> He motions for you to follow, heading for his tent.", parse);
+				Text.Add("<i>“Sure, I don’t mind,”</i> Cale nods, licking his lips. <i>“My butt is always ready for action!”</i> He motions for you to follow, heading for his tent.", parse);
 			else
 				Text.Add("<i>“If you’re offering, I’m game,”</i> he replies, grinning. <i>“This dog is always ready for action.”</i> You roll your eyes, but follow him as he heads for his tent.", parse);
 			Text.NL();
@@ -600,7 +600,7 @@ Scenes.Cale.Prompt = function() {
 			Text.Clear();
 			Scenes.Cale.OutsideSex();
 		}, enabled : true,
-		tooltip : "Ask the wolf if he's up for a fuck, right here, right now."
+		tooltip : "Ask the wolf if he's up for a fuck - right here, right now."
 	});
 	options.push({ nameStr : "Shop",
 		func : function() {
@@ -634,7 +634,7 @@ Scenes.Cale.Shop = function() {
 		if(Scenes.Cale.Shopbought)
 			Text.Add("<i>“Knew I'd have something you wanted, thanks for buying!”</i> he quips, giving you a toothy grin of appreciation.", parse);
 		else
-			Text.Add("<i>“Nothing of interest right now? Alright, come back tomorrow, I should have some new things then,”</i> he assures you.", parse);
+			Text.Add("<i>“Nothing of interest right now? Alright, come back tomorrow. I should have some new things then,”</i> he assures you.", parse);
 		Text.Flush();
 		
 		Scenes.Cale.Prompt();
@@ -688,11 +688,11 @@ Scenes.Cale.TalkPrompt = function() {
 			Text.NL();
 			Text.Add("Smiling, he replies, <i>“Well, if you insist. I’m called Cale, I’m a wolf, and my job is currently Rosie’s fetcher of alchemical goods and convenient fuckbuddy. Though I really go out there to get stuff for Rosie, I set a few interesting catches aside for selling. Rosie doesn’t seem to mind, as long as I meet her demands, so why not make some money on the side, right?”</i>", parse);
 			Text.NL();
-			Text.Add("You give him a politely neutral response, mentally tucking that little titbit away as being potentially helpful.", parse);
+			Text.Add("You give him a politely neutral response, mentally tucking that little tidbit away as being potentially helpful.", parse);
 			Text.NL();
 			Text.Add("<i>“I’m not a very deep or thoughtful guy. Life is short, so I prefer to live in the moment. My interests lie in eating, drinking, gambling and sex, of course. Then again, who doesn’t enjoy a good shagging, right?”</i> he laughs at his own statement.", parse);
 			Text.NL();
-			Text.Add("Very few people that you can think of, you confess. Especially here in Eden.", parse);
+			Text.Add("Very few people that you can think of, you confess - especially here in Eden.", parse);
 			Text.NL();
 			Text.Add("<i>“Elaborating on the sex part, I like pussy. Wet, tight, slippery and hot pussies. The taste, the scent, the feel and the sound of my dick scraping against their walls as they work to milk me, I simply love it. ", parse);
 			if(cale.Slut() >= 60) {
@@ -700,12 +700,12 @@ Scenes.Cale.TalkPrompt = function() {
 				Text.NL();
 				Text.Add("So, he hasn't had any problems with his new kink?", parse);
 				Text.NL();
-				Text.Add("<i>“Not at all. I’m a sexy wolf. Some people fantasize about my cock tying them and filling them up with my hot seed. Others think about my [cAnusDesc] milking their cocks for all its worth as they flood my guts with their hot seed. I can appreciate one just as much as the other. All in all, I should be thanking you for broadening my horizons. I seriously would never have imagined anal would feel this good.”</i>", parse);
+				Text.Add("<i>“Not at all. I’m a sexy wolf. Some people fantasize about my cock tying them and filling them up with my hot seed. Others think about my [cAnusDesc] milking their dicks for all its worth as they flood my guts with their hot jizz. I can appreciate one just as much as the other. All in all, I should be thanking you for broadening my horizons. I seriously would never have imagined anal would feel this good.”</i>", parse);
 				Text.NL();
 				Text.Add("You tell him that it's perfectly alright; you're happy to have helped him out. You always knew he'd love catching if he only gave it a try.", parse);
 			}
 			else if(cale.Slut() >= 30) {
-				Text.Add(" I… lately I’ve been thinking that fooling around and getting my ass stuffed might not be so bad. Y’know? Not that I’d rather be stuffed rather than being the stuffee. But… let’s just say it’s not so bad. At least it feels good when we do it.”</i> He coughs awkwardly, trying to mask his bashfulness at broaching the subject.", parse);
+				Text.Add(" I… lately I’ve been thinking that fooling around and getting my ass stuffed might not be so bad. Y’know? Not that I’d rather be stuffed rather than being the stuffee. But… let’s just say it’s not so bad. At least, it feels good when we do it.”</i> He coughs awkwardly, trying to mask his bashfulness at broaching the subject.", parse);
 				Text.NL();
 				Text.Add("You simply smile happily. Sounds like your wolf-slut is coming along nicely; now he's starting to admit he enjoys having your [multiCockDesc] in his ass, it's time to start pushing him to really relish it. A bit more tutelage and he should be a ripe, ready buttslut for you.", parse);
 			}
@@ -781,7 +781,7 @@ Scenes.Cale.TalkPrompt = function() {
 			if(cale.Relation() > 30)
 				Text.Add("<i>“To tell you the truth, I’ll always have a soft spot for her. She’s kinda crazy, but she has her heart in the right place.”</i>", parse);
 			else
-				Text.Add("<i>“All in all, she’s harmless. Well, basically harmless. As long as you don’t accept any food or drinks she offers you.”</i>", parse);
+				Text.Add("<i>“All in all, she’s harmless. Well, basically harmless - as long as you don’t accept any food or drinks she offers you.”</i>", parse);
 			Text.NL();
 			if(rosalin.flags["PrefGender"] == Gender.male) {
 				Text.Add("He, you point out.", parse);
@@ -973,10 +973,10 @@ Scenes.Cale.TalkPast = function() {
 	if(cale.Slut() >= 60) {
 		Text.Add("After all the times you’ve plowed my [cAnusDesc], it’s fair to say that you enjoy me plenty.”</i> He grins confidently. <i>“And you should know I enjoy you a lot too.”</i> He licks his lips with a predatory leer.", parse);
 		Text.NL();
-		Text.Add("You simply smirk back, reaching around to give his [cbuttDesc] an appreciative slap, squeezing his buttcheek through his pants before removing your hand.", parse);
+		Text.Add("You simply smirk back, reaching around to give his [cbuttDesc] an appreciative slap, squeezing his butt cheek through his pants before removing your hand.", parse);
 	}
 	else if(cale.Slut() >= 30) {
-		Text.Add("Don’t know if I care much for you buggering me, but after all the times you’ve done it. It’d be a lie to say you don’t enjoy a good Cale.”</i>", parse);
+		Text.Add("Don’t know if I care much for you buggering me. After all the times you’ve done it tho, it’d be a lie to say you don’t enjoy a good Cale.”</i>", parse);
 		Text.NL();
 		Text.Add("You just give him a cocky look back, remembering his ecstatic howls and moans as you ravaged his [cAnusDesc] with your [multiCockDesc]. ”I don't know if I care much for it?” Hah! He'll be admitting the truth soon enough.", parse);
 	}
@@ -1002,11 +1002,11 @@ Scenes.Cale.TalkPast = function() {
 	
 	// Long
 	scenes.push(function() {
-		Text.Add("<i>“Okay then, but fair warning, I’m no storyteller. My past is hardly that interesting; it’s just the story of a guy scraping by and enjoying himself when he could. Now, where do I begin...”</i> he furrows his brows in thought.", parse);
+		Text.Add("<i>“Okay then, but fair warning - I’m no storyteller. My past is hardly that interesting; it’s just the story of a guy scraping by and enjoying himself when he could. Now, where do I begin...”</i> he furrows his brows in thought.", parse);
 		Text.NL();
-		Text.Add("<i>“I guess I’ll just go ahead and say that I wasn’t always such a nice guy. Back in the day, I was running with some rather… unsavory sorts. Thugs, thieves, robbers and the likes. The wrong crowd, if you will. I wasn’t born in a very golden cradle. In fact, I don’t think I actually had a cradle to begin with, but life was good - as good as it could be for a kid living in the slums. Never met my mum, and dad worked hard at the docks to keep us fed.”</i> He smiles softly, remembering the good old days.", parse);
+		Text.Add("<i>“I guess I’ll just go ahead and say that I wasn’t always such a nice guy. Back in the day, I was running with some rather… unsavory sorts. Thugs, thieves, robbers and the likes. The wrong crowd, if you will. I wasn’t born in a very golden cradle. In fact, I don’t think I actually had a cradle to begin with, but life was good - as good as it could be for a kid living in the slums. Never met my mum, and Dad worked hard at the docks to keep us fed.”</i> He smiles softly, remembering the good old days.", parse);
 		Text.NL();
-		Text.Add("<i>“But yeah… might be a little cliché, but my dad was involved in an accident. Box full of iron fittings fell right over him. Got his leg smashed to bits. After that, life got harder cuz dad couldn’t work anymore and we didn’t have enough coins to afford a decent healer to look at his leg. So, that’s about when I started looking for work. I should have been so lucky to find actual work… but in my case, work found me.”</i>", parse);
+		Text.Add("<i>“But yeah… might be a little cliché, but my dad was involved in an accident. Box full of iron fittings fell right over him. Got his leg smashed to bits. After that, life got harder 'cuz Dad couldn’t work anymore and we didn’t have enough coins to afford a decent healer to look at his leg. So, that’s about when I started looking for work. I should have been so lucky to find actual work… but in my case, work found me.”</i>", parse);
 		Text.NL();
 		Text.Add("You have two really good ideas about what that 'work' might have been, but you ask him to explain what happened.", parse);
 		Text.NL();
@@ -1018,7 +1018,7 @@ Scenes.Cale.TalkPast = function() {
 		Text.NL();
 		Text.Add("You can't blame him for being surprised in a situation like that.", parse);
 		Text.NL();
-		Text.Add("<i>“If you think the dead guy was surprising, that’s because you haven’t heard the next part. Lady was standing there, all smiles, after just having killed a guy and I’m frozen in fear as she strides over. She reaches out and pats my head, sayin: Boy, you got fire. I like you. Come work for me.”</i>", parse);
+		Text.Add("<i>“If you think the dead guy was surprising, that’s because you haven’t heard the next part. Lady was standing there, all smiles, after just having killed a guy and I’m frozen in fear as she strides over. She reaches out and pats my head, sayin: 'Boy, you got fire. I like you. Come work for me.'”</i>", parse);
 		Text.NL();
 		Text.Add("Definitely not how a person would expect to get a job, and certainly not what he must have expected for playing the knight in shining armor.", parse);
 		Text.NL();
@@ -1033,7 +1033,7 @@ Scenes.Cale.TalkPast = function() {
 		Text.NL();
 		Text.Add("<i>“Joining the gang was a spur of the moment thing, but I stayed on for quite a while. Back then, I thought I had hit the jackpot. Suddenly, I had cash I could spend, and people were throwing me fearful glances on the streets. Some proper respect ‘n all, you know?”</i>", parse);
 		Text.NL();
-		Text.Add("<i>“’Course, dad wanted to know where the money came from, but he didn’t dig too deep. Beggars can’t be choosers, and deep down, I think he suspected what was going on.”</i>", parse);
+		Text.Add("<i>“’Course, Dad wanted to know where the money came from, but he didn’t dig too deep. Beggars can’t be choosers, and deep down I think he suspected what was going on.”</i>", parse);
 		Text.NL();
 		Text.Add("<i>“At first, things weren’t so bad. Small jobs, like standing guard or fetching things from contacts and so on. I had to shake some people down, but I didn’t hurt anyone, just scared ‘em, you know.”</i>", parse);
 		Text.NL();
@@ -1046,9 +1046,9 @@ Scenes.Cale.TalkPast = function() {
 		Text.NL();
 		Text.Add("<i>“I became a common thug in Lady’s gang, as I showed promise as a fighter. A swift kick here, a dagger held to the throat there - I had a knack for ending fights quickly, a talent much appreciated in that business. Still have use of the stuff old Brawler taught me up to this day.”</i>", parse);
 		Text.NL();
-		Text.Add("<i>“Anyway, I kept training until the Lady and Brawler decided I was good enough to start going on missions for real. This was more dangerous than the basic grunt-stuff that I had been doing for them before, but it got me noticed. Soon, people would talk about me with respect when they said my name,”</i> he smiles proudly at the thought. <i>“I tell you, nothing felt so good back then as to have people notice me like that and talk about me that way. A lot of muscleheads would have started throwing their weight around, picking fights so they could get more and more of a reputation. Me? I was smarter than that,”</i> he smirks.", parse);
+		Text.Add("<i>“Anyway, I kept training until the Lady and Brawler decided I was good enough to start going on missions for real. This was more dangerous than the basic grunt stuff that I had been doing for them before, but it got me noticed. Soon, people would talk about me with respect when they said my name,”</i> he smiles proudly at the thought. <i>“I tell you, nothing felt so good back then as to have people notice me like that and talk about me that way. A lot of muscleheads would have started throwing their weight around, picking fights so they could get more and more of a reputation. Me? I was smarter than that,”</i> he smirks.", parse);
 		Text.NL();
-		Text.Add("<i>“I never picked a fight just for the hell of it; I realised a pointless fight was just going to get people to see me as another stupid, violent thug. I got more respect for not fighting unless I had to than any of those bad-tempered dimwits ever did,”</i> he brags.", parse);
+		Text.Add("<i>“I never picked a fight just for the hell of it; I realized a pointless fight was just going to get people to see me as another stupid, violent thug. I got more respect for not fighting unless I had to than any of those bad-tempered dimwits ever did,”</i> he brags.", parse);
 		Text.NL();
 		Text.Add("<i>“Of course, even when I made a name for myself, Brawler would never leave off on his training. He made it a habit to always pick me out to spar with at least once a week, and he just loved to announce a surprise match whenever he could. He always said it was good training, kept me on my toes. Me? I think he just liked fighting,”</i> Cale grins, clearly amused at the memories. <i>“I certainly can’t complain, not with all the moves I picked up because of his little matches.”</i>", parse);
 		Text.NL();
@@ -1070,7 +1070,7 @@ Scenes.Cale.TalkPast = function() {
 			Text.NL();
 			Text.Add("<i>“No one ever figured out what really happened that night. There were a few dead bodies, but they were… their wounds were strange, not caused by any weapon I’ve ever seen. They looked like they’d been mauled by some wild animal. Neither Lady nor the rival gang leader were among them, and there were a whole lot of men missing on both sides. To this day, neither hide nor hair has been seen of any of them.”</i>", parse);
 			Text.NL();
-			Text.Add("<i>“Even the watch were stumped as to what had happened, but with the two largest roughnecks of the slums out of the way, they weren’t exactly complaining. Never saw Brawler after that, either.”</i>", parse);
+			Text.Add("<i>“Even the Watch were stumped as to what had happened, but with the two largest roughnecks of the slums out of the way, they weren’t exactly complaining. Never saw Brawler after that, either.”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“Things got kind of chaotic, with everyone in the gang running around like headless chickens, the whole underworld was kinda messed up for a while, with a lot of new folks running in to fill the power gap.”</i>", parse);
 			Text.NL();
@@ -1178,7 +1178,7 @@ Scenes.Cale.Rogue = function() {
 					Text.NL();
 					if(cale.Slut() >= 30) {
 						parse["eager"] = cale.Slut() >= 60 ? " eager" : "";
-						Text.Add("<i>“Mmm...”</i> Cale moans, lost in the sensations as you grope him. <i>“N-no mercy!”</i> he yips happily, rubbing back against your hand. He sighs languidly as you hooks your thumb into the hem of his pants, pulling them down and exposing his[eager] rosebud.", parse);
+						Text.Add("<i>“Mmm...”</i> Cale moans, lost in the sensations as you grope him. <i>“N-no mercy!”</i> he yips happily, rubbing back against your hand. He sighs languidly as you hook your thumb into the hem of his pants, pulling them down and exposing his[eager] rosebud.", parse);
 					}
 					else {
 						parse["virgin"] = cale.Butt().virgin ? " virgin" : "";
@@ -1206,11 +1206,11 @@ Scenes.Cale.Rogue = function() {
 			if(player.Str() >= 40)
 				Text.Add("with your superior strength you can’t break his hold.", parse);
 			else
-				Text.Add("if you were stronger you wouldn’t be able to break his hold.", parse);
+				Text.Add("if you were stronger, you wouldn’t be able to break his hold.", parse);
 			Text.NL();
 			Text.Add("He further subdues you by using your own weight to slam you into the ground. It doesn’t really hurt, but the impact manages to knock the air right out of your lungs. As you gasp to catch your breath, you can feel a distinct bulge grinding against your [buttDesc]. Looks like this little rough-housing’s gotten Cale excited…", parse);
 			Text.NL();
-			Text.Add("<i>“Now that I have you under control, I would deliver the finishing blow. From this position I could pull a knife and stab you before you had the chance to fight back, or I could choke you to knock you out, or...”</i> he grinds against your butt again, making sure you can feel his growing hardness. <i>“I could take you right here, right now. But since I’m such a nice guy, if you give up now I’ll let you go. How about it?”</i>", parse);
+			Text.Add("<i>“Now that I have you under control, I would deliver the finishing blow. From this position, I could pull a knife and stab you before you had the chance to fight back, or I could choke you to knock you out, or...”</i> he grinds against your butt again, making sure you can feel his growing hardness. <i>“I could take you right here, right now. But since I’m such a nice guy, if you give up now I’ll let you go. How about it?”</i>", parse);
 			Text.Flush();
 			
 			//[Yield][Take it]
@@ -1218,7 +1218,7 @@ Scenes.Cale.Rogue = function() {
 			options.push({ nameStr : "Yield",
 				func : function() {
 					Text.Clear();
-					Text.Add("<i>“Good choice,”</i> he comments, releasing you. Relieved from your awkward hold, you take a moment to stretch out and work out the kinks on your muscles before you get back up. <i>“One of the most important rules if you wanna live to see the next day is to know your limits. There’s always someone better than you out there. And surrendering might save your life or give you an opportunity to fight back.”</i> He grins.", parse);
+					Text.Add("<i>“Good choice,”</i> he comments, releasing you. Relieved from your awkward hold, you take a moment to stretch out and work out the kinks in your muscles before you get back up. <i>“One of the most important rules is if you wanna live to see the next day is to know your limits. There’s always someone better than you out there. And surrendering might save your life or give you an opportunity to fight back.”</i> He grins.", parse);
 					Text.NL();
 					
 					Scenes.Cale.RogueTeach();
