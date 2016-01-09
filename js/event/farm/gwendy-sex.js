@@ -1342,7 +1342,7 @@ Scenes.Gwendy.ChallengeSexAnalToys = function(toy, hangout, first) {
 		Text.NL();
 		Text.Add("<i>“I know you’ll love it, don’t worry,”</i> Gwendy murmurs, nudging her hips forward, easing the other head against your spread cheeks. Due to its flexibility, it’s hard for her to guide it in by herself, so you lean down to lend a hand, keeping her aim straight.", parse);
 		Text.NL();
-		if(player.AnalCap() >= 45)
+		if(player.AnalCap() >= 8)
 			Text.Add("A toy like this is hardly a match for you, and you are easily able to take it in, greedily swallowing several inches of it, letting the flare settle inside your stretched back passage.", parse);
 		else
 			Text.Add("You now know why it took so long for Gwendy to take the equine toy, it is so thick! The farmer is persistent though, keeping the pressure on your anus up. Slowly, ever so slowly, you can feel the flared head force its way inside your stretched rectum, each undulation of her hips pushing it further in. At long last, it passes the point of no return, trapped inside your stretched back passage.", parse);
@@ -1358,7 +1358,7 @@ Scenes.Gwendy.ChallengeSexAnalToys = function(toy, hangout, first) {
 		Text.Add(" Entwining your legs together, you start to pull toward each other, pushing more and more of the double-ended toy into your respective holes. Before long, you start encountering the nubs. Oh Aria, the nubs. As if the toy itself wasn’t girthy enough, a myriad of bulging studs are set at irregular intervals, stretching your ring even farther when they pass it. Once inside, they drag against the walls of your colon, stirring you up even more.", parse);
 		Text.NL();
 		Text.Add("Nodding to Gwendy, you both get back on all fours, facing opposite directions. In unison, you start to rock your hips, trying to push against each other in order to force the toy deeper inside. ", parse);
-		if(player.AnalCap() >= 45) {
+		if(player.AnalCap() >= 8) {
 			Text.Add("Soon, your asses touch, as both of you have impaled yourselves as far as you can go on the massive dildo. Gwendy looks back over her shoulder in surprise.", parse);
 			Text.NL();
 			Text.Add("<i>“You are quite good at this, someone has been getting a lot of practise!”</i> she moans happily as your butts grind together.", parse);
@@ -1374,7 +1374,7 @@ Scenes.Gwendy.ChallengeSexAnalToys = function(toy, hangout, first) {
 		Text.Add("<i>“Hah… just… tell me when you’ve had enough!”</i> Gwendy groans, still showing her fighting spirit. Like animals, you rut against each other, caught up in your lust. You tumble around, trying to get a better angle of penetration on the other. It’s like a playful wrestling match, only you are sharing a two foot equine dildo between the two of you, grinding and thrusting.", parse);
 		Text.NL();
 		Text.Add("Finally, you’ve both run out of energy. Exhausted, you collapse in a pile of sexual juices, the horsecock dildo pulling free from your ass with a loud pop. Gwendy lies next to you panting, the other end still firmly lodged in her stretched behind. After giving her a kiss, you leave her like that", parse);
-		if(player.AnalCap() < 45)
+		if(player.AnalCap() < 8)
 			Text.Add(", rubbing your sore butt.", parse);
 		else
 			Text.Add(" and head out back on your adventures.", parse);
@@ -1386,7 +1386,7 @@ Scenes.Gwendy.ChallengeSexAnalToys = function(toy, hangout, first) {
 		}
 		
 		//TODO Stretch butt
-		if(player.Butt().capacity.IncreaseStat(45, 1)) {
+		if(player.Butt().capacity.IncreaseStat(8, .5)) {
 			Text.NL();
 			Text.Add("<b>Your butt feels slightly stretchier.</b>", parse);
 		}
