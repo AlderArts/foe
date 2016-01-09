@@ -191,7 +191,7 @@ Scenes.Gwendy.LoftSexPrompt = function(back, disableSleep) {
 				Text.NL();
 				Text.Add("With that said, the farm girl undresses, putting on quite a show for you. There is a slight sheen of perspiration on her freckled skin, and she dries herself off with a towel before heading for her bed, stark naked. She sways her butt enticingly as she walks, showing off the horseshoe tattoo on her lower back.", parse);
 				Text.NL();
-				Text.Add("<i>“Sure you haven’t changed your mind?”</i> Gwendy asks sultrily, noticing your stare. You shake your head a bit, trying to clear it. Undressing, you join her in bed. You fall asleep to the calm beat of her heart, her skin warm against yours.", parse);
+				Text.Add("<i>“Sure you haven’t changed your mind?”</i> Gwendy asks sultrily, noticing your stare. You shake your head a bit, trying to clear it. Undressing, you join her in bed. You fall asleep to the calm beat of her heart, her skin warm against you.", parse);
 				Text.Flush();
 				
 				Gui.NextPrompt(function() {
@@ -234,7 +234,7 @@ Scenes.Gwendy.BarnPrompt = function() {
 	});
 	options.push({ nameStr : "Work",
 		func : Scenes.Gwendy.Work, enabled : true,
-		tooltip : "Be a little productive, lend an able hand."
+		tooltip : "Be a little productive, and lend an able hand."
 	});
 	Gui.SetButtonsFromList(options, true);
 }
@@ -263,7 +263,7 @@ Scenes.Gwendy.FieldsPrompt = function() {
 	});
 	options.push({ nameStr : "Work",
 		func : Scenes.Gwendy.Work, enabled : true,
-		tooltip : "Be a little productive, lend an able hand."
+		tooltip : "Be a little productive, and lend an able hand."
 	});
 	Gui.SetButtonsFromList(options, true);
 }
@@ -351,7 +351,7 @@ Scenes.Gwendy.Talk = function(backfunc) {
 					return;
 				}
 				else if(gwendy.Relation() < 30) {
-					Text.Add("<i>“While I do have a pass to get within the gates, you wouldn’t believe what I had to go through just to get one. No offense, [playername]. But I think we should get to know each other a little more before I’m willing to vouch for you. If you do something bad within the city limits, I’d be the one taking the fall.</i>", parse);
+					Text.Add("<i>“While I do have a pass to get within the gates, you wouldn’t believe what I had to go through just to get one. No offense, [playername], but I think we should get to know each other a little more before I’m willing to vouch for you. If you do something bad within the city limits, I’d be the one taking the fall.</i>", parse);
 					Text.NL();
 					Text.Add("You nod in understanding. That seems reasonable.", parse);
 					Text.NL();
@@ -366,10 +366,10 @@ Scenes.Gwendy.Talk = function(backfunc) {
 				
 				var humanity = player.Humanity();
 				
-				Text.Add("<i>“You’d like to help me? Great, but you should know this first. Rigard isn’t a particularly nice city, just warning you. There is a reason I usually do this alone and don’t bring Adrian along.”</i>", parse);
+				Text.Add("<i>“You’d like to help me? Great, but you should know this first: Rigard isn’t a particularly nice city, just warning you. There is a reason I usually do this alone and don’t bring Adrian along.”</i>", parse);
 				Text.NL();
 				if(humanity < 0.95)
-					Text.Add("<i>“That place is going to give you a hard time [playername]. They’re not very fond of morphs, or anything that doesn’t look… well… human in general. Are you sure you want to go?”</i>", parse);
+					Text.Add("<i>“That place is going to give you a hard time, [playername]. They’re not very fond of morphs, or anything that doesn’t look… well… human in general. Are you sure you want to go?”</i>", parse);
 				else
 					Text.Add("<i>“You being a ‘pure’ human helps, but I wouldn’t expect any kind of niceties from that lot. I think they might hate on you just for associating, given my reputation.”</i> She sighs. <i>“You still wanna go?”</i>", parse);
 				Text.Flush();
@@ -473,14 +473,14 @@ Scenes.Gwendy.WorkFeedingDanie = function() {
 	if(gwendy.flags["WorkFeed"] == 0) {
 		Text.Add("Arriving before a large shed with a padlock keeping intruders out, Gwendy pulls a key out of her back pocket and undoes the lock, revealing to you two bags containing oats and other grains.", parse);
 		Text.NL();
-		Text.Add("<i>“Fortunately, all we really need to feed the critters here are vegetables and such. Saves a lot of money on meats - for the most part I make the food from some of the crops here and mix it with grains I buy.”</i>", parse);
+		Text.Add("<i>“Fortunately, all we really need to feed the critters here are vegetables and such. Saves a lot of money on meats - for the most part, I make the food from some of the crops here and mix it with grains I buy.”</i>", parse);
 		Text.NL();
 		Text.Add("You mention the pigs and wonder if she just feeds them vegetables all the time. The girl shakes her head. <i>“If I did, they’d be in pretty poor health. So...”</i> Gwendy turns on her heels and shows you what looks to be buckets filled with slop. <i> “Give these to the pigs along with the feed. They should be alright. Well, I’ve got things to do, see you later!”</i>", parse);
 	}
 	else
-		Text.Add("After undoing the lock on the shed, Gwendy smiles slightly before going off to take care of her own work. You don’t really have the time to flirt with her, since the assignment is rather time-consuming.", parse);
+		Text.Add("After undoing the lock on the shed, Gwendy smiles slightly before going off to take care of her own work. You don’t really have the time to flirt with her since the assignment is rather time-consuming.", parse);
 	Text.NL();
-	Text.Add("Fetching a wheelbarrow from the shed, you put what you think you’ll need into it, when you suddenly see Danie skipping along, singing her song, oblivious to the world around her. You hold your breath, wondering if she’s going to trip... ", parse);
+	Text.Add("Fetching a wheelbarrow from the shed, you put what you think you’ll need into it when you suddenly see Danie skipping along, singing her song, oblivious to the world around her. You hold your breath, wondering if she’s going to trip... ", parse);
 	if(Math.random() < 0.5)
 		Text.Add("but she spots you, changing her direction.", parse);
 	else
@@ -490,7 +490,7 @@ Scenes.Gwendy.WorkFeedingDanie = function() {
 	Text.NL();
 	Text.Add("You nod, before pushing the wheelbarrow forward and handing her an apple. <i>“Oh, can I come with you? I like spending time with you!”</i> You tell her yes, and the ovine girl joins your side as the two of you set off.", parse);
 	Text.NL();
-	Text.Add("In due time, you end up singing and humming simple melodies together with the sheep-girl, while spreading happiness and food to the waiting hungry denizens. You note that some of the animals and morphs look expectantly at you, and wonder if it's your voice, face, or the food that have caught their attention. Still, you carry on without complaint, trying to keep up with Danie.", parse);
+	Text.Add("In due time, you end up singing and humming simple melodies together with the sheep-girl while spreading happiness and food to the waiting, hungry denizens. You note that some of the animals and morphs look expectantly at you, and wonder if it's your voice, face, or the food that have caught their attention. Still, you carry on without complaint, trying to keep up with Danie.", parse);
 	Text.NL();
 	var scenes = new EncounterTable();
 	scenes.AddEnc(function() {
@@ -499,7 +499,7 @@ Scenes.Gwendy.WorkFeedingDanie = function() {
 		Text.Add("<i>“E-eep! Hold on, horsie!”</i> she giggles, pulling a sack of grains from the wheelbarrow, pouring its contents into the trough in the horse’s pen. Given the option, the stallion stops munching on sheep and digs into his meal.", parse);
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
-		Text.Add("You head over to the sheep paddock, where Danie briefly leaves you to frolic with her kin. Well, now it looks like you have to feed all of them yourself. Eventually she comes back to you, apologizing for dallying.", parse);
+		Text.Add("You head over to the sheep paddock, where Danie briefly leaves you to frolic with her kin. Well, now it looks like you have to feed all of them yourself. Eventually, she comes back to you, apologizing for dallying.", parse);
 		world.TimeStep({minute:20});
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
@@ -555,7 +555,7 @@ Scenes.Gwendy.WorkMilking = function() {
 	
 	Text.Add("She looks up into the sky while deciding what you should do on the farm and instructs you to follow her into the barn. <i>“I'm milking the cows today and could use some help, if you don't mind.”</i> You wouldn't mind spending some more time with the lovely farmer, so you agree to help her. <i>“Great, let's go!”</i>", parse);
 	Text.NL();
-	Text.Add("Upon entering the section where the cows are kept, you see the bovine creatures look up expectantly as you and Gwendy walk down the aisle to where milk pails are stored, neatly stacked one atop another. Gwendy lets out a small sigh as she hands you two buckets before taking two herself. <i>“I hope you're not expecting to do too much today, because we have to drain all of these cows and the cowgirls here, and then the goats, and a few sheep. And we only have so many buckets, so we've got to store the milk as we go.”</i>", parse);
+	Text.Add("Upon entering the section where the cows are kept, you see the bovine creatures look up expectantly as you and Gwendy head down the aisle to where the milk pails are stored, neatly stacked one atop another. Gwendy lets out a small sigh as she hands you two buckets before taking two herself. <i>“I hope you're not expecting to do too much today because we have to drain all of these cows and the cowgirls here, and then the goats, and a few sheep. And we only have so many buckets, so we've got to store the milk as we go.”</i>", parse);
 	Text.NL();
 	Text.Add("It's sounding like hard work so far, and to top it all off, it seems this is to be done by hand, no less. You might be cramping before the day's done. Still, the two of you get to it, starting with the cows and cow-like girls.", parse);
 	Text.NL();
@@ -574,12 +574,12 @@ Scenes.Gwendy.WorkMilking = function() {
 	else if(gwendy.flags["WorkMilked"] < 10) {
 		Text.Add("No matter how many times you do it, you still find the prospect of milking teats a bit iffy. Still, it is a task that needs doing, and you square your shoulders in preparation.", parse);
 		Text.NL();
-		Text.Add("Before the two of you part to work in your separate areas, Gwendy taps your shoulder. Turning, you're met with a catlike grin and playful look that tells you she's up to no good. <i>“I've seen your work, and I gotta say, it's rather impressive for someone who's still wet behind the ears. So, why don't we make a little bet? Whoever can milk the most buckets of milk the fastest gets a treat from the loser, rightly speaking. Do you think you can handle it?”</i>", parse);
+		Text.Add("Before the two of you part to work in your separate areas, Gwendy taps your shoulder. Turning, you're met with a cat-like grin and playful look that tells you she's up to no good. <i>“I've seen your work, and I gotta say it's rather impressive for someone who's still wet behind the ears. So, why don't we make a little bet? Whoever can gather the most buckets of milk the fastest gets a treat from the loser, rightly speaking. Do you think you can handle it?”</i>", parse);
 	}
 	else {
 		Text.Add("By now, you are a practiced hand at this, due to your many hours working with Gwendy. You are no longer particularly bothered by the notion, either, even finding yourself looking forward to relieving some poor cowgirl of her stress.", parse);
 		Text.NL();
-		Text.Add("Before the two of you part to work in your separate areas, your eyes meet Gwendy's. <i>“So, what do you say we add a bit of excitement to work? Fastest milker gets a treat from the loser, up for it?”</i> The farmer cracks her knuckles. <i>“And don't think I'll go easy on you, I've seen you work, and you've gotten pretty good!”</i>", parse);
+		Text.Add("Before the two of you part to work in your separate areas, your eyes meet Gwendy's. <i>“So, what do you say we add a bit of excitement to work? Fastest milker gets a treat from the loser, up for it?”</i> The farmer cracks her knuckles. <i>“And don't think I'll go easy on you - I've seen you work, and you've gotten pretty good!”</i>", parse);
 	}
 	
 	Text.Flush();
@@ -590,7 +590,7 @@ Scenes.Gwendy.WorkMilking = function() {
 	options.push({ nameStr : "Yeah!",
 		func : function() {
 			Text.Clear();
-			Text.Add("You tell Gwendy you wouldn't mind taking her on, especially considering what winning seems to entail. <i>“I figured you'd say something like that. But don't think I'm gonna go easy on you, either.”</i> The two of you stare at one another for a moment, adopting challenging smiles on your faces before dashing off to try and best one another!", parse);
+			Text.Add("You tell Gwendy you wouldn't mind taking her on, especially considering what winning seems to entail. <i>“I figured you'd say something like that, but don't think I'm gonna go easy on you, either.”</i> The two of you stare at one another for a moment, adopting challenging smiles on your faces before dashing off to try and best one another!", parse);
 			PrintDefaultOptions();
 		}, enabled : true,
 		tooltip : "Sounds like fun!"
@@ -758,7 +758,7 @@ world.loc.Farm.Barn.events.push(new Link(
 			Text.Add("Gwendy is here.");
 		}
 		else
-			Text.Add("Gwendy doesn't seem to be in at the moment.");			
+			Text.Add("Gwendy doesn't seem to be here at the moment.");			
 		Text.NL();
 	},
 	Scenes.Gwendy.BarnPrompt
@@ -770,7 +770,7 @@ world.loc.Farm.Fields.events.push(new Link(
 			Text.Add("Gwendy is here.");
 		}
 		else
-			Text.Add("Gwendy doesn't seem to be in at the moment.");			
+			Text.Add("Gwendy doesn't seem to be here at the moment.");			
 		Text.NL();
 	},
 	Scenes.Gwendy.FieldsPrompt
