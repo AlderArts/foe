@@ -236,7 +236,7 @@ Scenes.FarmIntro.Start = function() {
 	
 	var parse = {};
 	
-	Text.Add("While trekking along the rolling grasslands of the plains, you briefly wonder what else might lie out here, until you spot a foreign structure with a muddy pathway leading toward it. In the distance you see what appears to be an old and worn building. Although from here you are not sure what it is, you feel compelled to go out there and have a look.", parse);
+	Text.Add("While trekking along the rolling grasslands of the plains, you briefly wonder what else might lie out here, until you spot a foreign structure with a muddy pathway leading toward it. In the distance, you see what appears to be an old and worn building. Although from here you are not sure what it is, you feel compelled to go out there and have a look.", parse);
 	Text.Flush();
 	
 	//[Approach][Nah]
@@ -274,13 +274,13 @@ Scenes.FarmIntro.Approach = function() {
 		Text.NL();
 	}
 	else if(!party.Alone()) {
-		Text.Add("Facing your group you see they are fine, looking a bit refreshed by the passing breeze. With that, you head forward to your destination.", parse);
+		Text.Add("Facing your group, you see they are fine, looking a bit refreshed by the passing breeze. With that, you head forward to your destination.", parse);
 		Text.NL();
 	}
 	
-	Text.Add("The building is a fair distance away, and you vaguely wonder how much longer it will take you to reach it. Much to your relief, you reach the building quickly, and are immediately rewarded with its identity. It turns out to be a timeworn barn in apparent danger of collapsing, if the patchwork repairs are any indication.", parse);
+	Text.Add("The building is a fair distance away, and you vaguely wonder how much longer it will take you to reach it. Much to your relief, you reach it quickly, and are immediately rewarded with its identity. It turns out to be a timeworn barn in apparent danger of collapsing, if the patchwork repairs are any indication.", parse);
 	Text.NL();
-	Text.Add("To its sides, you see a variety of animals quietly grazing on the rather fertile-looking fields. Another look reveals various other life around, as well. The occasional equine and dog-morph tend to menial tasks, such as moving hay and sheaf, or watering cattle.", parse);
+	Text.Add("To its sides, you see a variety of animals quietly grazing on the rather fertile-looking fields. Another look reveals various other life around as well. The occasional equine and dog-morph tend to menial tasks, such as moving hay and sheaf, or watering cattle.", parse);
 	if(party.Two()) {
 		var member = party.Get(1);
 		Text.Add(" You decide to split up for a while, and [name] heads off to explore the farm for [himher]self, leaving you alone.", { name: member.name, himher : member.himher() });
@@ -344,7 +344,7 @@ Scenes.FarmIntro.Approach = function() {
 			Text.Flush();
 			Gui.NextPrompt(Scenes.FarmIntro.EnterBarn);
 		}, enabled : true,
-		tooltip : "You just came for the sake of it, you don't really have any inclination to help out."
+		tooltip : "You just came for the sake of it; you don't really have any inclination to help out."
 	});
 	Gui.SetButtonsFromList(options);
 }
@@ -357,13 +357,13 @@ Scenes.FarmIntro.EnterBarn = function() {
 	
 	Text.Clear();
 
-	Text.Add("Following the girl into the barn, the first sight to strike you is the animals. It is almost like a zoo in here; horses, cows, sheep, and goats, alongside chickens, ducks, rabbits, and pigs. The collection is quite impressive and you say as much to Gwendy.", parse);
+	Text.Add("Following the girl into the barn, the first sight to strike you is the animals. It is almost like a zoo in here: horses, cows, sheep, and goats, alongside chickens, ducks, rabbits, and pigs. The collection is quite impressive and you say as much to Gwendy.", parse);
 	Text.NL();
-	Text.Add("She casually laughs it off while pouring the water into a trough for the pigs. <i>“Shoot, this is just another day in the life of a farmer for me. Tending to these guys is all I do, and I'm good at it. But enough of that,”</i> she says as the last of the water empties from the bucket, casting it aside neatly in a corner. <i>“Come with me, there's something I want you to see.”</i> With a happy turn she heads for the back.", parse);
+	Text.Add("She casually laughs it off while pouring the water into a trough for the pigs. <i>“Shoot, this is just another day in the life of a farmer for me. Tending to these guys is all I do, and I'm good at it. But enough of that,”</i> she says as the last of the water empties from the bucket, casting it aside neatly in a corner. <i>“Come with me, there's something I want you to see.”</i> With a happy turn, she heads for the back.", parse);
 	Text.NL();
 	
 	if(Scenes.FarmIntro.hasBucket) {
-		Text.Add("Before you go any further, Gwendy asks you to pour the bucket you carried into the trough for the cattle before following her to the back of the barn. You quickly do so, more than eager to help her out. Afterward, you the put the empty bucket in the corner.", parse);
+		Text.Add("Before you go any further, Gwendy asks you to pour the bucket you carried into the trough for the cattle before following her to the back of the barn. You quickly do so, more than eager to help her out. Afterward, you the put the empty pail in the corner.", parse);
 		Text.NL();
 	}
 	
@@ -384,7 +384,7 @@ Scenes.FarmIntro.EnterLoft = function() {
 	Text.NL();
 	Text.Add("As you finish looking around her room, your attention returns to Gwendy, who has a slightly embarrassed look on her face. <i>“I don't usually get company, so pardon the mess. Anyways, this is my simple abode, where my day starts and ends.”</i> She spreads her arms for emphasis. <i>“At least, this is where I stay most of the time. I have another smaller house close-by, but it's usually easier to just stay here on the ranch. Maybe I'll show you, if you want.”</i> Though she offers, the expression on her face suggests she would rather not deal with that right now.", parse);
 	Text.NL();
-	Text.Add("<i>“Well, I'm a bit busy today, but if you want to talk for a bit, I don't mind taking some time off for that... not that spending time with someone like you is ever a bad thing.”</i> She stands before you, her hands behind her back waiting for your response.", parse);
+	Text.Add("<i>“Well, I'm a bit busy today, but if you want to talk for a bit, I don't mind taking some time off for that... not that spending time with someone like you is ever a bad thing.”</i> She stands before you, her hands behind her back, waiting for your response.", parse);
 	
 	Scenes.FarmIntro.talkedAboutGwendy = false;
 	Scenes.FarmIntro.talkedAboutBarn   = false;
@@ -422,7 +422,7 @@ Scenes.FarmIntro.GwendyQuestions1 = function() {
 		options.push({ nameStr : "Barn",
 			func : function() {
 				Text.Clear();
-				Text.Add("Though you admire the girl's obvious effort in maintaining the farm, you can't help but note the declining state of the barn. Gwendy's happy expression becomes a bit more sober when you point that out. You try to take your words back, but the girl shakes her head at your apologies. <i>“It's alright, I know that it's shabby. Even with trying to do repairs when I can, I don't have enough time and money to do that and keep paying these taxes <b>and</b> chase off the fools who come and make trouble... still, I do what I can to keep it functioning at least. That's the duty of a farmer, right?”</i> Even though she ends with a somewhat positive tone, the pain of dealing with a farm on the brink of collapse is apparent on her face. <i>“Well, it is what it is, but I promise I will have this place up and running, even if it takes me the rest of my life to do it!”</i>", parse);
+				Text.Add("Though you admire the girl's obvious effort in maintaining the farm, you can't help but note the declining state of the barn. Gwendy's happy expression becomes a bit more somber when you point that out. You try to take your words back, but the girl shakes her head at your apologies. <i>“It's alright, I know that it's shabby. Even with trying to do repairs when I can, I don't have enough time and money to do that and keep paying these taxes <b>and</b> chase off the fools who come and make trouble... Still, I do what I can to keep it functioning at least. That's the duty of a farmer, right?”</i> Even though she ends with a somewhat positive tone, the pain of dealing with a farm on the brink of collapse is apparent on her face. <i>“Well, it is what it is, but I promise I will have this place up and running, even if it takes me the rest of my life to do it!”</i>", parse);
 				Text.NL();
 				Text.Add("Looking over the barn once more, it becomes obvious that accomplishing that would be almost miraculous, but perhaps you could lend a hand or two to revive this place? It would definitely win the favor of the farm girl for you...", parse);
 				Scenes.FarmIntro.talkedAboutBarn = true;
@@ -444,7 +444,7 @@ Scenes.FarmIntro.GwendyQuestions1 = function() {
 				if(player.body.Race() == Race.Human)
 					Text.Add("<i>“Why, were you thinking of coming around a bit more to keep me company, as a fellow human?”</i> She asks the question in an innocent enough tone, but her eyes look at you with some expectancy. You tease her, saying that you might just do that, if she doesn't mind. At that, she giggles before casting a flirtatious glance at you. <i>“Oh, I wouldn't mind at all. It might be a bit more fun with you around.”</i>", parse);
 				else
-					Text.Add("<i>“Thinking about introducing me to a few other humans... or maybe getting to know me a little better, as a [race]”</i> Her question intrigues you, but you say it was simple curiosity, though you might come around more if she doesn't mind having a friend that isn't a regular on the ranch. <i>“Well, thanks, I'd appreciate that. You'd better follow through and visit often!”</i>", parse);
+					Text.Add("<i>“Thinking about introducing me to a few other humans... or maybe getting to know me a little better, as a [race]?”</i> Her question intrigues you, but you say it was simple curiosity, though you might come around more if she doesn't mind having a friend that isn't a regular on the ranch. <i>“Well, thanks, I'd appreciate that. You'd better follow through and visit often!”</i>", parse);
 				Scenes.FarmIntro.talkedAboutAlone = true;
 				Scenes.FarmIntro.GwendyQuestions1();
 			}, enabled : true,
@@ -525,7 +525,7 @@ Scenes.FarmIntro.GwendyQuestions2 = function() {
 						Text.Clear();
 						player.AddLustFraction(0.1);
 						gwendy.relation.IncreaseStat(100, 2);
-						Text.Add("You say her lips are undoubtedly the most alluring part of her. At this, she tilts her head to the side while looking at you with a sultry gaze through half-lidded eyes.<i>“Is that so? I wonder what you're imagining me doing with those lips of mine?”</i> In an effort to turn the insinuations back on her, you quip, saying the only person with dirty thoughts is her.", parse);
+						Text.Add("You say her lips are undoubtedly the most alluring part of her. At this, she tilts her head to the side while looking at you with a sultry gaze through half-lidded eyes. <i>“Is that so? I wonder what you're imagining me doing with those lips of mine?”</i> In an effort to turn the insinuations back on her, you quip, saying the only person with dirty thoughts is her.", parse);
 						Text.NL();
 						Text.Add("<i>“Is that so? You might be right, but we'll never know, now will we?”</i> As she says that, she runs her tongue slowly over sumptuous lips, making them glossy and attractive. <i>“Oh well, I got my answer, so I'll be a bit more appreciative of these lips then.”</i> As she finishes, she blows a kiss to you, a playful smile on her face.", parse);
 						Scenes.FarmIntro.GwendyQuestions2();
@@ -541,7 +541,7 @@ Scenes.FarmIntro.GwendyQuestions2 = function() {
 						Text.NL();
 						Text.Add("As she says that, Gwendy moves from her seat to your lap, a perverted smile on her face, as she wraps her arms around your neck. <i>“Since you can't decide, let me just give you a treat as a thank you...”</i> Leaning in, she presses her lips against yours while her lovely chest closes against your [breastDesc]. Meanwhile, in your lap, she grinds a bit, causing her ass to lightly brush against your crotch. All in all, she's doing more than teasing, but you don't mind at all.", parse);
 						Text.NL();
-						Text.Add("Before it goes any further though, Gwendy breaks the kiss and stops her lapdance. Getting up, she slowly walks back to her seat, tantalizingly shaking her ass. When she sits back down, she smiles and says, <i>“By the way, I like you too... all of you, if you couldn't tell.”</i>", parse);
+						Text.Add("Before it goes any further though, Gwendy breaks the kiss and stops her lap dance. Getting up, she slowly walks back to her seat, tantalizingly shaking her ass. When she sits back down, she smiles and says, <i>“By the way, I like you too... all of you, if you couldn't tell.”</i>", parse);
 						Scenes.FarmIntro.GwendyQuestions2();
 					}, enabled : true,
 					tooltip : "She's got it all, honestly."
@@ -563,7 +563,7 @@ Scenes.FarmIntro.GwendyQuestions2 = function() {
 			}
 			
 			gwendy.relation.IncreaseStat(100, 5);
-			Text.Add("<i>“Wanna help, huh? Well, I know I mentioned it earlier, but it wouldn't be right of me to impose on you like that.”</i> You insist on helping, saying you have more than enough time to help out the person that greeted you so kindly and welcomed you to the farm. She looks a little unconvinced, but she shrugs her shoulders and says, <i>“Alright, if you say so. But in that case, don't complain about the work once we get started!”</i> With that the girl stands up from the table and climbs back down the ladder. You follow behind.", parse);
+			Text.Add("<i>“Wanna help, huh? Well, I know I mentioned it earlier, but it wouldn't be right of me to impose on you like that.”</i> You insist on helping, saying you have more than enough time to help out the person that greeted you so kindly and welcomed you to the farm. She looks a little unconvinced, but she shrugs her shoulders and says, <i>“Alright, if you say so. But in that case, don't complain about the work once we get started!”</i> With that, the girl stands up from the table and climbs back down the ladder. You follow behind.", parse);
 			
 			Text.Flush();
 			Gui.NextPrompt(Scenes.FarmIntro.HelpAdrian);
@@ -579,7 +579,7 @@ Scenes.FarmIntro.GwendyQuestions2 = function() {
 			Text.NL();
 			Text.Add("Standing up, she saunters away teasingly before climbing down the ladder, and you follow her promptly, not wanting to catch any accusations of loitering or doing anything else untoward in her room.", parse);
 			Text.NL();
-			Text.Add("You look over the farm once more, but decide that right now, you're too busy with current events to dawdle around.", parse);
+			Text.Add("You look over the farm once more, but decide that right now you're too busy with current events to dawdle around.", parse);
 			Text.NL();
 			
 			if(party.Two()) {
@@ -605,7 +605,7 @@ Scenes.FarmIntro.GwendyQuestions2 = function() {
 			Text.Add("You chuckle a bit at the two, happy to meet some interesting characters here before leaving. Still, as much as you’d like to get to know them, you pardon yourself with a wave.", parse);
 			Text.NL();
 			
-			Text.Add("With that you head out for your next destination.", parse);
+			Text.Add("With that, you head out for your next destination.", parse);
 			Text.NL();
 			farm.flags["Visit"] = 1;
 			Text.Add("<b>Found Gwendy's Farm (can now be visited from plains)</b>");
@@ -634,7 +634,7 @@ Scenes.FarmIntro.HelpAdrian = function() {
 		buttDesc   : function() { return player.Butt().Short(); }
 	};
 	
-	Text.Add("Getting off the ladder, you are met with the butt-end of a pitchfork as you face the perky girl. Next to her is a rather tall equine-morph, having easily a foot over the girl. He is quite the specimen, too. He has a well-toned body with short silky brown fur coating the bulging muscles of his bare chest, and a flowing dark brown mane falling a little past his shoulders to emphasize his equine physique. He is wearing a pair of trousers made from rough cloth, hiding his presumably equine genitals.", parse);
+	Text.Add("Getting off the ladder, you are met with the butt-end of a pitchfork as you face the perky girl. Next to her is a rather tall equine-morph, having easily a foot over the girl. He is quite the specimen, too. He has a well-toned body with short, silky brown fur coating the bulging muscles of his bare chest, and a flowing, dark brown mane falling a little past his shoulders to emphasize his equine physique. He is wearing a pair of trousers made from rough cloth, hiding his presumably equine genitals.", parse);
 	Text.NL();
 	Text.Add("<i>“Hey, [playername], quit staring off into space! We've got work to do!”</i> Gwendy commands as she presses the pitchfork into your hand. <i>“I see you've taken notice of Adrian, here. He's a farmhand who helps me out on occasion, so he's familiar with the pace of things around here. Anyway, let's get started. The two of you can work on getting the hay up while I tend to the cows. Afterward, we'll take care of whatever else comes up.”</i>", parse);
 	Text.NL();
@@ -728,7 +728,7 @@ Scenes.FarmIntro.HelpAdrianFinished = function() {
 		Text.Add("You struggle to get as much done as the equine, who does his task with very little apparent effort. For every pile you make, he is working a third. You feel a bit embarrassed, but press on, if only to maintain your dignity.", parse);
 	}
 	else {
-		Text.Add("It is a bit of a hassle but you manage to keep somewhat of an even pace with Adrian. Despite his skill at this, he is rather slow about it, but makes up for it by making monstrous piles that easily dwarf yours. Still, all in all, the two of you mass together quite a number of haystacks before calling it a day.", parse);
+		Text.Add("It is a bit of a hassle, but you manage to keep somewhat of an even pace with Adrian. Despite his skill at this, he is rather slow about it, but makes up for it by making monstrous piles that easily dwarf yours. Still, all in all, the two of you mass together quite a number of haystacks before calling it a day.", parse);
 	}
 	Text.NL();
 	Text.Add("After an hour or so of backbreaking raking and piling, the field appears to be done. Wiping the sweat off your forehead, you look around to see what Adrian is up to. He seems to be busy moving the piles into larger ones under what looks to be some type of canopy, likely where the hay will be stored to await further processing.", parse);
@@ -739,7 +739,7 @@ Scenes.FarmIntro.HelpAdrianFinished = function() {
 	Text.NL();
 	Text.Add("Stopping her for just a moment, you ask her what else she would like you to do. <i>“Well, I didn't really expect for you to be done so soon, but I suppose this is for the best. The faster we finish, the better, after all.”</i>", parse);
 	Text.NL();
-	Text.Add("Standing up to stretch, Gwendy looks you in the eyes and smiles. <i>“Alright, your next job is tending the sheep. They have yet to be fed and watered, and I need to bring them in before nightfall, so if you wouldn't mind.”</i> After a few instructions on where they are and what to do before you go, Gwendy gives you a quick peck on the cheek.", parse);
+	Text.Add("Standing up to stretch, Gwendy looks you in the eyes and smiles. <i>“Alright, your next job is tending the sheep. They have yet to be fed and watered, and I need to bring them in before nightfall, so if you wouldn't mind...”</i> After a few instructions on where they are and what to do before you go, Gwendy gives you a quick peck on the cheek.", parse);
 	Text.NL();
 	Text.Add("<i>“That's for being such a great help. There might be more if you can keep it up!”</i> She gives a brief pat to your [buttDesc] before going back to her duties, leaving you to yours.", parse);
 	Text.Flush();
@@ -762,13 +762,13 @@ Scenes.FarmIntro.MeetDanie = function() {
 	
 	Text.Add("Heading out to the pasture, you are greeted with the bleating of sheep as they lazily graze about. In the mix, you see a few sheep people, walking and conversing as if it was the most normal thing in the world. It is an odd sight, seeing a bunch of wool-clad people with sheep horns curving down the sides of their faces, but this <i>is</i> Eden after all. This is just another oddity you have to get used to, right?", parse);
 	Text.NL();
-	Text.Add("In any event, you set about rounding up the sheep to feed and water when a dark-skinned sheep-girl with gray wool approaches you, her curious, stormy eyes looking into your own [eyeColor] ones. <i>“Hi there,”</i> the sheep-girl says in a sweet voice.", parse);
+	Text.Add("In any event, you set about rounding up the sheep to feed and water when a dark-skinned sheep girl with gray wool approaches you, her curious, stormy eyes looking into your own [eyeColor] ones. <i>“Hi there,”</i> the sheep girl says in a sweet voice.", parse);
 	Text.NL();
-	Text.Add("There is a brief moment of silence as the two of you look at one another before she grabs your hand and drags you toward the prairie where the other sheep people are. You pull back a bit and try to tell the girl that you are busy with something, but she is not listening. <i>“I can't wait to show you to my friends, [mistermiss]!”</i> Well, it seems you are along for the ride, and she is not exactly stopping you from working, as you do have to round up the sheep from around the pasture. As the eager sheep-girl leads on, you take in her appearance, noting her similarities to the others.", parse);
+	Text.Add("There is a brief moment of silence as the two of you look at one another before she grabs your hand and drags you toward the prairie where the other sheep people are. You pull back a bit and try to tell the girl that you are busy with something, but she is not listening. <i>“I can't wait to show you to my friends, [mistermiss]!”</i> Well, it seems you are along for the ride, and she is not exactly stopping you from working as you do have to round up the sheep from around the pasture. As the eager sheep girl leads on, you take in her appearance, noting her similarities to the others.", parse);
 	Text.NL();
-	Text.Add("The sheep-girl has curly gray hair, styled in a cute little bob barely passing her shoulders, with two horns curving slightly down the length of either side of her human face. Her body is almost fully exposed, the few exceptions being what seems to be a fuzzy collar around her neck, the fur bracelets around her wrists, and the knee-high fur going down her lower legs. Though mostly having a human appearance, she has sheep-like ears jutting from her hair, a short sheep tail resting above the crack of her butt, and hooves in place of feet.", parse);
+	Text.Add("The sheep girl has curly gray hair, styled in a cute little bob barely passing her shoulders, with two horns curving slightly down the length of either side of her human face. Her body is almost fully exposed, the few exceptions being what seems to be a fuzzy collar around her neck, the fur bracelets around her wrists, and the knee-high fur going down her lower legs. Though mostly having a human appearance, she has sheep-like ears jutting from her hair, a short sheep tail resting above the crack of her butt, and hooves in place of feet.", parse);
 	Text.NL();
-	Text.Add("Before you know it, the girl has stopped, and you now stand before a group of sheep-people, all of whom look at you with evident happiness. <i>“[MisterMiss], these are my friends! Let's introduce ourselves to each other.”</i> You try to tell the girl, yet again, that you cannot goof around, right now, but it seems the other sheep just follow her decree to introduce one another, and you decide you might as well go along and get the most out of it.", parse);
+	Text.Add("Before you know it, the girl has stopped, and you now stand before a group of sheep people, all of whom look at you with evident happiness. <i>“[MisterMiss], these are my friends! Let's introduce ourselves to each other.”</i> You try to tell the girl, yet again, that you cannot goof around right now, but it seems the other sheep just follow her decree to introduce one another, and you decide you might as well go along and get the most out of it.", parse);
 	Text.NL();
 	Text.Add("They all seem like nice people, and the girl that brought you out here, whose name you find out is Danie, cheerfully chats with her peers about minor matters that fail to catch your interest. Taking advantage of the situation, you start slinking slowly away when Danie spots you. <i>“Hey, where are you going, [playername]? I thought we were going to play?”</i> As gently as you can, you explain that you have work to do, so you cannot play right now. You have to give food and water to all of the sheep, and maybe more work after that.", parse);
 	Text.NL();
@@ -783,21 +783,21 @@ Scenes.FarmIntro.MeetDanie = function() {
 			Text.Clear();
 			danie.relation.IncreaseStat(100, 5);
 			player.AddLustFraction(0.2);
-			Text.Add("You tell the sheep-girl she can join you while you work, and she gives a happy squeal. It should not be too bad, as long as you make sure the two of you do not stray off course.", parse);
+			Text.Add("You tell the sheep girl she can join you while you work, and she gives a happy squeal. It should not be too bad, as long as you make sure the two of you do not stray off course.", parse);
 			Text.NL();
-			Text.Add("Picking up the supplies from before the escapade with Danie, you begin feeding the sheep and sheep-folk. As you go about it, Danie walks beside you in companionable silence, looking up at you, her eyes filled with wonder. It seems she is content with just being around you, which is sort of a relief.", parse);
+			Text.Add("Picking up the supplies from before the escapade with Danie, you begin feeding the sheep and sheep folk. As you go about it, Danie walks beside you in companionable silence, looking up at you, her eyes filled with wonder. It seems she is content with just being around you, which is sort of a relief.", parse);
 			Text.NL();
-			Text.Add("While you are feeding a group of sheep, you notice Danie chasing a butterfly, her hands spread wide as she goes after it. The scene unfolding is an adorable sight... until she trips over a rock. Her fall, while by no means dangerous or threatening, does reveal the slit of her cunt and her puckered back entrance, both a subtle shade lighter than her skin tone. You quickly avert your eyes from the sight, and the sheep-girl soon returns to your side, allowing you to check up on her just in case while avoiding meeting her eyes. Fortunately the girl is still bright and perky, and seems unaware of her exposure.", parse);
+			Text.Add("While you are feeding a group of sheep, you notice Danie chasing a butterfly, her hands spread wide as she goes after it. The scene unfolding is an adorable sight... until she trips over a rock. Her fall, while by no means dangerous or threatening, does reveal the slit of her cunt and her puckered back entrance, both a subtle shade lighter than her skin tone. You quickly avert your eyes from the sight, and the sheep girl soon returns to your side, allowing you to check up on her just in case while avoiding meeting her eyes. Fortunately, the girl is still bright and perky, and seems unaware of her exposure.", parse);
 			Text.NL();
-			Text.Add("Trying to get the event out of mind, you do your best to hurry with the chores, trying to keep the girl from having any further mishaps, and you from seeing any more from her accidental exposures. It seems your plan is working, as Danie watches you in fascination, with no opportunity for getting into any more trouble.", parse);
+			Text.Add("Trying to get the event out of mind, you do your best to hurry with the chores, trying to keep the girl from having any further mishaps, and you from seeing any more from her accidental exposures. It seems your plan is working as Danie watches you in fascination, and hopefully with no opportunity for getting into any more trouble.", parse);
 			Text.NL();
-			Text.Add("You sigh with relief as you come to the last group, a bunch of sheep people just gabbing while you bring their share of food. All goes well and you finish with the feeding, and, as a bonus, Danie has not gotten into trouble. You call the girl over and she starts skipping to your side. Unfortunately, before she can get there, she trips over an upturned root, and, while flailing to try and catch herself, knocks you down and lands on top of you. The two of you lie like that for a moment, her warm, nude body pressing against you.", parse);
+			Text.Add("You sigh with relief as you come to the last group, a bunch of sheep people just gabbing while you bring their share of food. All goes well and you finish with the feeding, and, as a bonus, Danie has not gotten into trouble. You call the girl over and she starts skipping to your side. Unfortunately, before she can get there, she trips over an upturned root and, while flailing to try and catch herself, knocks you down and lands on top of you. The two of you lie like that for a moment, her warm, nude body pressing against you.", parse);
 			Text.NL();
 			Text.Add("Danie finally gets off of you, looking down with an apologetic expression. <i>“Sorry, [playername]! I didn't mean to hurt you!”</i> She offers a hand, but you have gotten up before she can do anything. Still worried, she gently touches your body to check for injuries, her soft, warm fingers gliding gracefully over any exposed skin. Satisfied with her search, she grabs your hand and pulls you back toward the barn, where you should continue your work.", parse);
 			Text.NL();
-			Text.Add("Danie leads the way calmly, for once refraining from chasing flying objects or wandering off to play around with a few of her friends who call out to her. As she lead the way, you are given quick smiles and shy glances over her shoulder. As well as treated to a full view of her body. Whether you like it or not, the sheep-girl stays directly in front of you, and you can do little but appreciate her curvy figure.", parse);
+			Text.Add("Danie leads the way calmly, for once refraining from chasing flying objects or wandering off to play around with a few of her friends who call out to her. As she lead the way, you are given quick smiles and shy glances over her shoulder - as well as treated to a full view of her body. Whether you like it or not, the sheep girl stays directly in front of you, and you can do little but appreciate her curvy figure.", parse);
 			Text.NL();
-			Text.Add("She is clearly in her prime, with wide hips and a plump, juicy bottom. Her thighs are thick and voluptuous, and you can almost imagine her rear spilling over in your hands. It does not help that she is as soft as cotton, the girl having practically no muscle definition on her. Despite this, it is not that she is fat or chubby; just cute, soft, and cuddly with a bouncing rear. Her breasts, from what you can tell, would just barely overlap your hands, if you were to grasp them.", parse);
+			Text.Add("She is clearly in her prime, with wide hips and a plump, juicy bottom. Her thighs are thick and voluptuous, and you can almost imagine her rear spilling over in your hands. It does not help that she is as soft as cotton, the girl having practically no muscle definition on her. Despite this, it is not that she is fat or chubby - just cute, soft, and cuddly with a bouncing rear. Her breasts, from what you can tell, would just barely overlap your [hand]s, if you were to grasp them.", parse);
 			Text.NL();
 			Text.Add("<i>“We're here!”</i> Danie proudly announces as you reach the barn. She turns to look at you when, lo and behold, she manages to trip over her own feet. Once more, the two of you fall, this time with you on top of her.", parse);
 			Text.Flush();
@@ -811,7 +811,7 @@ Scenes.FarmIntro.MeetDanie = function() {
 			danie.relation.DecreaseStat(-100, 5);
 			Text.Add("As sweet as she is, you can't take the time to look after her and do your job at the same time, so you tell her no. Maybe when you're free you can come and play, but you have a job and you need to do it as quickly as possible. ", parse);
 			Text.NL();
-			Text.Add("She looks dispirited and a little devastated, but smiles nonetheless and says, <i>“It was nice meeting you though, [playername]. Hopefully next time you won't be too busy.”</i> Looking at you one last time with the same sweet smile, she turns around and rejoins her friends.", parse);
+			Text.Add("She looks dispirited and a little devastated, but smiles nonetheless and says, <i>“It was nice meeting you though, [playername]. Hopefully, next time you won't be too busy.”</i> Looking at you one last time with the same sweet smile, she turns around and rejoins her friends.", parse);
 			Text.NL();
 			Text.Add("She took that rather well and you're still acquainted with her, which is good. Still, this is how things are right now. Work first, play later, right?", parse);
 			Text.NL();
@@ -836,7 +836,7 @@ Scenes.FarmIntro.HornyDanie = function() {
 	
 	Text.Add("This is not a good position for you, aroused as you are. You try to hide the [erectionwetness] in your groin, but you are sure Danie can feel it. Much to your dismay, she remarks that there she feels something odd against her stomach, and you quickly get up. Mentally calming yourself, you try to preserve your dignity as you offer her a hand up.", parse);
 	Text.NL();
-	Text.Add("The sheep-girl looks at you attentively. You really should get going, but talking to her for a bit would probably not hurt...", parse);
+	Text.Add("The sheep girl looks at you attentively. You really should get going, but talking to her for a bit would probably not hurt...", parse);
 	Text.Flush();
 	
 	//[Talk][Leave]
@@ -867,7 +867,7 @@ Scenes.FarmIntro.HornyDanie = function() {
 			danie.relation.DecreaseStat(-100, 5);
 			Text.Add("You just barely recovered from your aroused state, and you really don't need anything to push you back into it at this point. It pains you to admit it, but you're going to have to leave the girl. Knowing her attitude and behavior, she will likely be a little crushed, but you can explain the next time you see her... you hope, at least.", parse);
 			Text.NL();
-			Text.Add("Excusing yourself, you leave the disappointed sheep-girl behind you. Glancing over your shoulder, you notice that she has already found something else to distract her.", parse);
+			Text.Add("Excusing yourself, you leave the disappointed sheep girl behind you. Glancing over your shoulder, you notice that she has already found something else to distract her.", parse);
 			Text.Flush();
 			Gui.NextPrompt(Scenes.FarmIntro.ReturnToGwendy);
 		}, enabled : true,
@@ -940,19 +940,19 @@ Scenes.FarmIntro.DanieOralSex = function(bits) {
 		clitDesc   : function() { return player.FirstVag().ClitShort(); }
 	};
 	
-	Text.Add("You tell the sheep-girl to get on her knees . She looks at you with a hint of fear, but does as told. <i>“W-what are we going to do, [playername]?”</i> she asks with understandable nervousness.", parse);
+	Text.Add("You tell the sheep girl to get on her knees. She looks at you with a hint of fear, but does as told. <i>“W-what are we going to do, [playername]?”</i> she asks with understandable nervousness.", parse);
 	Text.NL();
 	Text.Add("Her uncertainty makes you feel a bit uneasy about proceeding, and you ask the girl if she really wants to help out this way. Though her tone is shy, she nods, telling you she's willing to help however she can. <i>“I... I'm not going to back away now.”</i>", parse);
 	Text.NL();
 	Text.Add("With that resolved, you undo your pants to reveal ", parse);
 	
 	if(player.body.Gender() == Gender.herm) {
-		Text.Add("both sets of sexes, a small bit of confusion on Danie's face as she comments, <i>“Umm, [playername], I didn't know you had both of these! It's going to be hard if I have to do both...”</i> You chuckle slightly and tell her that it isn't necessary, as you decide on ", parse);
+		Text.Add("both sets of sexes, a small bit of confusion on Danie's face as she comments, <i>“Umm, [playername], I didn't know you had both of these! It's going to be hard if I have to do both...”</i> You chuckle slightly and tell her that it isn't necessary as you decide on ", parse);
 	}
 	
 	// MALE/HERM: BLOWJOB
 	if(bits) {
-		Text.Add("your [cockDesc], which sptings out erect and ready for what's to come. Danie actually lets out a cute whimper as she inches closer to it, apparently understanding what to do.", parse);
+		Text.Add("your [cockDesc], which springs out erect and ready for what's to come. Danie actually lets out a cute whimper as she inches closer to it, apparently understanding what to do.", parse);
 		Text.NL();
 		
 		// Big cock
@@ -997,7 +997,7 @@ Scenes.FarmIntro.DanieOralSex = function(bits) {
 	else {
 		Text.Add("your [cuntDesc], already wet and ready as Danie looks at it expectantly. <i>“Okay, I think I can help with this!”</i> she says with what sounds like an upbeat voice.", parse);
 		Text.NL();
-		Text.Add("She moves closer, still a little uneasy, though not voicing any complaints. With a tentative lick, her thick tongue strokes gently over your [clitDesc], making you twitch with lust. She surprises you by pushing her tongue further, and you can feel the first inch or so delve into your cleft. A whimpering moan escapes your lips.", parse);
+		Text.Add("She moves closer, still a little uneasy, though not voicing any complaints. With a tentative lick, her thick tongue strokes gently over your [clitDesc], making you twitch with lust. She surprises you by pushing her flexible organ further, and you can feel the first inch or so delve into your cleft. A whimpering moan escapes your lips.", parse);
 		Text.NL();
 		Text.Add("The noise makes Danie look up at you, her eyes asking if it hurts you, but in small moans you coax her to continue. It seems the girl is rather agile with her tongue. It moves with remarkable grace, and as the thick muscle touches and caresses your vaginal walls, you tremble at her slightest touch. A small part of you is left wondering if she's had practice, but the thought vanishes in a flash of pleasure as her nose brushes against your [clitDesc] yet again.", parse);
 		Text.NL();
@@ -1036,7 +1036,7 @@ Scenes.FarmIntro.DanieVaginalSex = function() {
 	Text.NL();
 	Text.Add("Huh? The girl is a virgin? Your surprise is met with a blush from Danie as she looks at the ground and draws circles in the dirt with her hoof. <i>“I... I never thought about doing stuff like this. It's so sudden, b-but I don't mind if it's to help you out, [playername].”</i> You ask if she would rather do something else, but Danie insists that you stick to your choice. <i>“Really, it's okay, but can you please be gentle?”</i>", parse);
 	Text.NL();
-	Text.Add("With that settled, you instruct Danie to sit on your lap as you stroke your [cockDesc] to full erection. As she straddles your lap, you rub your member against her sex, making both it and her [cuntDesc] nice and slick, as well as rewarding you with a light moan from the girl. Grabbing her hips, you instruct Danie to rise as you align your [cockDesc] with her [cuntDesc] before slowly guiding the sheep-girl down.", parse);
+	Text.Add("With that settled, you instruct Danie to sit on your lap as you stroke your [cockDesc] to full erection. As she straddles you, you rub your member against her sex, making both it and her [cuntDesc] nice and slick, as well as rewarding you with a light moan from the girl. Grabbing her hips, you instruct Danie to rise as you align your [cockDesc] with her [cuntDesc] before slowly guiding the sheep girl down.", parse);
 	Text.NL();
 	Text.Add("Danie hisses through clenched teeth, and her face scrunches up in pain as you push into her, trying not to cause too much discomfort. But before long, you're all the way in, and Danie lets out a small sigh of relief as she sinks further down.", parse);
 	Text.NL();
@@ -1048,7 +1048,7 @@ Scenes.FarmIntro.DanieVaginalSex = function() {
 	
 	Text.Add("You look into her eyes to see how she's doing, but it seems she's a lot better off than you expected, eyes glowing with lust, replacing the previous innocent light. She wraps her arms around your neck and begins bouncing up and down slowly, causing quiet moans to escape you. <i>“There's no need to dillydally, right? I have to help you, [playername],”</i> Danie tells you, the heat evident in her voice, as she presses her hand-consuming tits against your [breastDesc]. You nod in agreement, and she begins moving faster and faster. It seems Danie wants to decide the pace, so you reach around and squeeze her big, soft butt, making her let out a moan.", parse);
 	Text.NL();
-	Text.Add("The two of you continue for a while, Danie controlling the pace while you tease and play with her body. Playtime is cut short, however, when Danie's back arches and she lets loose a shrill cry that you're sure everyone on the farm can hear. You have no time to worry about that, as a sudden rush of fluids soaks your lap, while your [cockDesc] is assaulted by the contractions of her [cuntDesc].", parse);
+	Text.Add("The two of you continue for a while, Danie controlling the pace while you tease and play with her body. Playtime is cut short, however, when Danie's back arches and she lets loose a shrill cry that you're sure everyone on the farm can hear. You have no time to worry about that as a sudden rush of fluids soaks your lap, while your [cockDesc] is assaulted by the contractions of her [cuntDesc].", parse);
 	Text.NL();
 	Text.Add("The delightfully tight tunnel rhythmically clamps down, milking your [cockDesc] for cum, and you are happy to oblige. Grabbing her rear, you thrust as far as you can into her before releasing yourself, warm fluids coating her insides. When the two of you settle down from your orgasm, Danie casts a happy look at you before hugging you tightly. <i>“That felt really good, [playername]! I'm glad I could help you, too!”</i> Well, it seems the ewe doesn't mind too much that you've taken her virginity. Maybe she isn't a bad person to come to whenever you have problems like these...", parse);
 	
@@ -1075,7 +1075,7 @@ Scenes.FarmIntro.DanieAnalSex = function() {
 		buttDesc   : function() { return danie.Butt().Short(); }
 	};
 	
-	Text.Add("Gathering some courage, you ask Danie if she'd mind letting you use her ass for your problems. She frowns a bit as she asks, <i>“What do you mean, use my ass?”</i> In as short a way as possible, you explain that you would like to have a little fun with her butt. She blushes even harder than when you told her you were horny, but she complies with the plan. Turning around she presents her tush to you, though it's evident that she is exceptionally nervous. Concerned, you ask why.", parse);
+	Text.Add("Gathering some courage, you ask Danie if she'd mind letting you use her ass for your problems. She frowns a bit as she asks, <i>“What do you mean, use my ass?”</i> In as short a way as possible, you explain that you would like to have a little fun with her butt. She blushes even harder than when you told her you were horny, but she complies with the plan. Turning around, she presents her tush to you, though it's evident that she is exceptionally nervous. Concerned, you ask why.", parse);
 	Text.NL();
 	Text.Add("<i>“I-it's just this is the first time I'm doing something like this. I'm a little scared, but if it'll help you out... I... I don't mind doing it.”</i> Well, that was unexpected, but you can tell she's being sincere. To ease her tension, you tell her softly that it'll be fine, she just has to relax and trust you. <i>“Alright, if you say so, [playername]. I can trust you,”</i> she says as she looks at you, her eyes showing determination.", parse);
 	Text.NL();
@@ -1086,13 +1086,13 @@ Scenes.FarmIntro.DanieAnalSex = function() {
 	player.Fuck(p1Cock, 5);
 	danie.FuckAnal(danie.Butt(), p1Cock);
 	
-	Text.Add("Danie lets out a cute, prolonged whimper and her tail flits some more while you take a moment to get accustomed to one another. Turns out she was right about being a virgin; her [anusDesc] is quite possibly hotter than anything you've felt so far, and so tight it actually hurts a bit to just sit there. After a minute or so, you give an experimental push, at which Danie lets out another whimper as she takes more of your [cockDesc] inside. The process continues until your groin is flush against her [buttDesc], her tail continuing to wag, brushing against your stomach.", parse);
+	Text.Add("Danie lets out a cute, prolonged whimper and her tail flits some more while you take a moment to get accustomed to one another. Turns out she was right about being a virgin; her [anusDesc] is quite possibly hotter than anything you've felt so far, and so tight that it actually hurts a bit to just sit there. After a minute or so, you give an experimental push, at which Danie lets out another whimper as she takes more of your [cockDesc] inside. The process continues until your groin is flush against her [buttDesc], her tail continuing to wag, brushing against your stomach.", parse);
 	Text.NL();
-	Text.Add("Picking up the pace, you begin moving her up and down your shaft, with her making enticing whimpers, moans, and coos. You grin slightly as you watch Danie's facial expression switch between wonder, delight, and lust, one of her hands digging into the cleft between her legs as she begins to frig herself. You give her a light spank, making her jolt and cause a ripple to spread through her body, making it jiggle wondrously. The sheep-girl begins to make cute bleating noises, delirious with pleasure.", parse);
+	Text.Add("Picking up the pace, you begin moving her up and down your shaft, with her making enticing whimpers, moans, and coos. You grin slightly as you watch Danie's facial expression switch between wonder, delight, and lust, one of her hands digging into the cleft between her legs as she begins to frig herself. You give her a light spank, making her jolt and cause a ripple to spread through her body, making it jiggle wondrously. The sheep girl begins to make cute bleating noises, delirious with pleasure.", parse);
 	Text.NL();
 	Text.Add("Her ass is hot as only Aria knows what, and seems to have adjusted to your [cockDesc]'s girth, letting you move smoother and faster. Her butt repeatedly smacks against your groin now, causing the sounds of your act to carry to anyone in the vicinity. You give Danie another spank and call out to ask her how she feels, but she is long lost in a world of lust, her tail wagging nonstop while her tongue lolls out of her mouth. The sight drives you close to the edge, but you hold back.", parse);
 	Text.NL();
-	Text.Add("However, that effort is wasted, as Danie suddenly cries out, her [anusDesc] crushing down on your [cockDesc] as she cums. With her back door gripping and squeezing your overstimulated member, you can't help but to release your load. With one last, shallow thrust your dam bursts, filling her with your seed. When you both finish you pull out of her, cum following you and dripping down from her ass.", parse);
+	Text.Add("However, that effort is wasted as Danie suddenly cries out, her [anusDesc] crushing down on your [cockDesc] as she cums. With her back door gripping and squeezing your overstimulated member, you can't help but to release your load. With one last shallow thrust, your dam bursts, filling her with your seed. When you both finish, you pull out of her, semen following you and dripping down from her ass.", parse);
 	Text.NL();
 	Text.Add("Checking on the girl, you find she's still dazed and glossy-eyed, with a dopey smile on her face. Seems either you went overboard, or she really enjoyed herself just now. In any event, you get the girl on her bed before leaving, thanking her for helping you out.", parse);
 	
@@ -1112,7 +1112,7 @@ Scenes.FarmIntro.ReturnToGwendy = function() {
 	
 	Text.Add("Although your first day with the sheep was rather frantic, you can't say you didn't enjoy it. Meeting Danie, while a little frustrating, made a good impression on you, especially considering her sweet and innocent attitude. Maybe you can visit her later and spend more time with her? For now, you decide to head back to Gwendy.", parse);
 	Text.NL();
-	Text.Add("You find the farmer humming to herself while watering a vegetable patch. When you approach her, she smiles at you and says, <i>“Well then, didn't think you'd finish with the sheep already. Or, did someone decide to have a little <b>fun</b> with the flock?”</i> ", parse);
+	Text.Add("You find the farmer humming to herself while watering a vegetable patch. When you approach her, she smiles at you and says, <i>“Well then, didn't think you'd finish with the sheep already. Or did someone decide to have a little <b>fun</b> with the flock?”</i> ", parse);
 	Text.NL();
 	
 	if(Scenes.FarmIntro.fuckedDanie) {
@@ -1158,9 +1158,9 @@ Scenes.Farm.GoToMarketFirst = function(backfunc) {
 	Text.NL();
 	Text.Add("You promptly tell her that you just need to know what she wants done.", parse);
 	Text.NL();
-	Text.Add("<i>“My usual load is a mix of things - wool, milk, cheese, butter, fruits and vegetables. Can you start fetching me some of the prepared goods from the barn where they're stored?”</i> Gwendy asks you, instructing you where the storage area is.", parse);
+	Text.Add("<i>“My usual load is a mix of things - wool, milk, cheese, butter, fruits and vegetables. Can you start fetching me some of the prepared goods from the barn where they're stored?”</i> Gwendy asks you, instructing you to where the storage area is.", parse);
 	Text.NL();
-	Text.Add("You tell her that's fine, and promptly set off to start grabbing the things that she needs. Boxes of fruits and veggies, gallon jugs of milk, bales of cleaned wool, wax-sealed cheeses, knobs of butter... Eventually, Gwendy's wagon is starting to groan under the weight of its load of produce, and your own shoulders are aching as well. It's quite a workout getting all this stuff together. You can only imagine the work it took to grow and prepare it.", parse);
+	Text.Add("You tell her that's fine, and promptly set off to start grabbing the things that she needs: boxes of fruits and veggies, gallon jugs of milk, bales of cleaned wool, wax-sealed cheeses, knobs of butter... Eventually, Gwendy's wagon is starting to groan under the weight of its load of produce, and your own shoulders are aching as well. It's quite a workout getting all this stuff together. You can only imagine the work it took to grow and prepare it.", parse);
 	Text.NL();
 	Text.Add("<i>“Looks like that’ll be all,”</i> the buxom farmer affirms, after a final check. <i>“Ready to go?”</i> she asks you with a smile.", parse);
 	Text.NL();
@@ -1178,9 +1178,9 @@ Scenes.Farm.GoToMarketFirst = function(backfunc) {
 	Text.NL();
 	Text.Add("As the road starts passing through a forested area, Gwendy grows noticeably tenser. Her easy dialogue dies away and she becomes much terser, prompting you to stop talking in response. She flicks urgently at the reins, softly urging the carthorse to go faster, causing the wagon to pick up its pace. Unable to bear the silence, you ask her what's wrong.", parse);
 	Text.NL();
-	Text.Add("<i>“I've heard a lot of stories about bandits preying on people traveling along these roads,”</i> Gwendy replies quickly, eyes scanning the forest around the two of you as she talks. <i>“Used to be that this road was a lot safer, but with the current trouble in Rigard you can never be too certain,”</i> she looks around. <i>“Unfortunately there’s no way around this forest. While I'm not carrying a lot of money myself, the food we’re carting might be tempting.”</i>", parse);
+	Text.Add("<i>“I've heard a lot of stories about bandits preying on people traveling along these roads,”</i> Gwendy replies quickly, eyes scanning the forest around the two of you as she talks. <i>“Used to be that this road was a lot safer, but with the current trouble in Rigard you can never be too certain,”</i> she looks around. <i>“Unfortunately, there’s no way around this forest. While I'm not carrying a lot of money myself, the food we’re carting might be tempting.”</i>", parse);
 	Text.NL();
-	Text.Add("You stand ready, just in case. Off in the distance you hear the sound of hooves, though they don’t see to be getting closer. Instead they stop after some time.", parse);
+	Text.Add("You stand ready, just in case. Off in the distance, you hear the sound of hooves, though they don’t see to be getting closer. Instead, they stop after some time.", parse);
 	Text.NL();
 	parse["wepDesc"] = player.WeaponDesc();
 	Text.Add("<i>“You better be ready, [playername]. I think we’re walking straight into an ambush,”</i> she says, slowing down as she prepares for the worst. You grip your [wepDesc] tightly as you feel the tension building up.", parse);
@@ -1199,9 +1199,9 @@ Scenes.Farm.GoToMarketFirst = function(backfunc) {
 
 	Gui.NextPrompt(function() {
 		Text.Clear();
-		Text.Add("When the attack comes, it’s swift and sudden. Four horses come crashing through the undergrowth, quickly surrounding your cart. The riders - three male and one female - are all wearing masks, and are armed with swords and cludgels.", parse);
+		Text.Add("When the attack comes, it’s swift and sudden. Four horses come crashing through the undergrowth, quickly surrounding your cart. The riders - three male and one female - are all wearing masks, and are armed with swords and cudgels.", parse);
 		Text.NL();
-		Text.Add("<i>“Woah, hang on there girlie!”</i> their leader calls out, blocking the path with his steed. <i>“Don’t ya know there is a toll on this road?”</i>", parse);
+		Text.Add("<i>“Woah, hang on there, girlie!”</i> their leader calls out, blocking the path with his steed. <i>“Don’t ya know there is a toll on this road?”</i>", parse);
 		Text.NL();
 		Text.Add("Gwendy is livid, and quickly reaches for a blade she has hidden under her seat. <i>“Knew this would be trouble,”</i> she mutters, trying to keep her eyes on all four assailants at once. <i>“Keep back, scum!”</i> she growls, brandishing the old sword.", parse);
 		Text.NL();
@@ -1209,7 +1209,7 @@ Scenes.Farm.GoToMarketFirst = function(backfunc) {
 		Text.NL();
 		Text.Add("<i>“What’s the toll?”</i> she asks, gritting her teeth.", parse);
 		Text.NL();
-		Text.Add("<i>“Your money, your maidenhood or your life,”</i> the bandit leader replies. <i>“Though I suspect you have little of the first, and lost the second to some farm animal ages ago.”</i>", parse);
+		Text.Add("<i>“Your money, your maidenhood, or your life,”</i> the bandit leader replies. <i>“Though I suspect you have little of the first, and lost the second to some farm animal ages ago.”</i>", parse);
 		Text.NL();
 		Text.Add("<i>“Fuck you!”</i> Gwendy shouts as she springs from her seat, confronting the bandits. You stand beside her, ready for combat. Your assailants doesn’t seem to be experienced riders, as they choose to dismount to face you. The four highwaymen close in on you, blocking off any escape.", parse);
 		Text.NL();
@@ -1230,7 +1230,7 @@ Scenes.Farm.GoToMarketFirst = function(backfunc) {
 			Text.NL();
 			Text.Add("<i>“How the fuck do you know my name, bastard?”</i> she demands, holding the leader of the bandits at swordpoint. <i>“Who are you people?”</i>", parse);
 			Text.NL();
-			Text.Add("<i>“Just the friendly neighbourhood watch cleaning out the trash,”</i> he replies mockingly.", parse);
+			Text.Add("<i>“Just the friendly neighborhood watch cleaning out the trash,”</i> he replies mockingly.", parse);
 			Text.NL();
 			Text.Add("<i>“Answer me, why did you attack us?”</i>", parse);
 			Text.NL();
@@ -1268,9 +1268,9 @@ Scenes.Farm.GoToMarketFirst = function(backfunc) {
 			Text.NL();
 			Text.Add("<i>“Mind your filthy mouth, slut.”</i> The bandit callously delivers a kick to her stomach, making the girl cry out in pain.", parse);
 			Text.NL();
-			Text.Add("<i>“Boss, lets not lose sight of why we are here,”</i> the woman holding you down calls. The bandit leader nods, waving to his companions. <i>“The cart.”</i>", parse);
+			Text.Add("<i>“Boss, let's not lose sight of why we are here,”</i> the woman holding you down calls. The bandit leader nods, waving to his companions. <i>“The cart.”</i>", parse);
 			Text.NL();
-			Text.Add("<i>“Stay away from that you damn cocksuckers!”</i> Gwendy screams as the two remaining assailants stalk around to the back of the wagon, pulling out the contents and scattering them carelessly on the ground.", parse);
+			Text.Add("<i>“Stay away from that, you damn cocksuckers!”</i> Gwendy screams as the two remaining assailants stalk around to the back of the wagon, pulling out the contents and scattering them carelessly on the ground.", parse);
 			Text.NL();
 			Text.Add("<i>“Thanks for reminding me,”</i> the bandit leader grabs the farmer by her braid, dragging her to her feet. <i>“Let’s see who the real cocksucker is here.”</i> Saying that, he pulls out his stiffening dick, rubbing it on Gwendy’s freckled cheek.", parse);
 			Text.NL();
@@ -1279,7 +1279,7 @@ Scenes.Farm.GoToMarketFirst = function(backfunc) {
 			parse["hisher"] = player.mfFem("his", "her");
 			Text.Add("<i>“Listen closely now,”</i> The bandit hisses. <i>“You are going to suck my cock until I cum. You are going to drink it all down. If I feel even a nibble of teeth, your friend gets [hisher] throat slit. Got it?”</i>", parse);
 			Text.NL();
-			Text.Add("The woman holding you down rolls her eyes. <i>“Can you stop thinking with your cock for one fucking second?”</i> She gestures to the other two, who are returning from the back of the cart. <i>“Our job here is done, lets get out of here.”</i>", parse);
+			Text.Add("The woman holding you down rolls her eyes. <i>“Can you stop thinking with your cock for one fucking second?”</i> She gestures to the other two, who are returning from the back of the cart. <i>“Our job here is done, let's get out of here.”</i>", parse);
 			Text.NL();
 			Text.Add("The leader throws her a curse, but reluctantly pulls his pants back up, joining his companions as they jump up on their horses.", parse);
 			Text.NL();
@@ -1316,7 +1316,7 @@ Scenes.Farm.GoToMarketFirstAfterBandits = function(won) {
 	Text.NL();
 	Text.Add("<i>“No, I’m not going to give them that,”</i> she says tersely. <i>“I’m taking this damn haul to market, and I’m gonna sell it.”</i> You ask her if she know who they were, they seemed to know her.", parse);
 	Text.NL();
-	Text.Add("<i>“I don’t know them specifically,”</i> she explains, <i>“but I suspect who they are working for. If it is who I think it is, this is just another strike for the record. This guy has a huge grudge against my father for some reason, and since dad is dead, he wants to take it out on me and my farm instead.”</i>", parse);
+	Text.Add("<i>“I don’t know them specifically,”</i> she explains, <i>“but I suspect who they are working for. If it is who I think it is, this is just another strike for the record. This guy has a huge grudge against my father for some reason, and since Dad is dead he wants to take it out on me and my farm instead.”</i>", parse);
 	Text.NL();
 	Text.Add("You’ve gotten the cart in order again, and set out for Rigard. As you ride, you try to cheer her up and take her mind off the assault. After a while, she starts to loosen up, even cracking a smile now and then at your jokes.", parse);
 	Text.NL();
@@ -1340,7 +1340,7 @@ Scenes.Farm.GoToMarketFirstAfterBandits = function(won) {
 		Text.Add("<i>“Hold a minute,”</i> a familiar voice calls out behind you. Gwendy freezes up as Miranda the guardswoman approaches, her look turning from rebellious to incredulous when the dog-morph ignores her and walks up to you. <i>“Thought I recognized you, luv,”</i> she grins up at you.", parse);
 		Text.NL();
 		if(miranda.flags["Met"] >= Miranda.Met.TavernAftermath) {
-			Text.Add("<i>“Why [playername], back for more already?”</i> the guardswoman jests. <i>“You know where to find me, I’ve got a special gift waiting, just for you.”</i> The last proposal is delivered with a sultry wink, the faint bulge beneath her tight leather armor giving you an idea about just what kind of gift she is alluding to. She briefly inspects Gwendy, summarily dismissing her. <i>“Don’t bother bringing the hussy tho. Not my type.”</i>", parse);
+			Text.Add("<i>“Why, [playername], back for more already?”</i> the guardswoman jests. <i>“You know where to find me - I’ve got a special gift waiting, just for you.”</i> The last proposal is delivered with a sultry wink, the faint bulge beneath her tight leather armor giving you an idea about just what kind of gift she is alluding to. She briefly inspects Gwendy, summarily dismissing her. <i>“Don’t bother bringing the hussy tho. Not my type.”</i>", parse);
 		}
 		else {
 			Text.Add("<i>“I see you took my advice and scoured the farms for someone to help you in, [playername],”</i> Miranda nods, giving Gwendy a brief glance. <i>“Didn’t know you had a thing for blonde bimbos.”</i>", parse);
@@ -1404,7 +1404,7 @@ Scenes.Farm.Market = function(haul, next) {
 	party.location = world.loc.Rigard.ShopStreet.street;
 	var score = 0;
 	
-	Text.Add("<i>“Aright, [playername]. Put on your best smile and let’s get this gig started,”</i> Gwendy declares with a smile of her own. ", parse);
+	Text.Add("<i>“Alright, [playername]. Put on your best smile and let’s get this gig started,”</i> Gwendy declares with a smile of her own. ", parse);
 	if(haul.badenc)
 		Text.Add("Despite the earlier events of the day, Gwendy is just as enthusiastic as she’d be in any other day. ", parse);
 	Text.Add("Encouraged by her cheerful attitude, you join her in shouting to get the attention of the masses.", parse);
@@ -1425,7 +1425,7 @@ Scenes.Farm.Market = function(haul, next) {
 	else if(chacheck < 100) {
 		Text.Add("Your efforts are very effective, if you do say so yourself. With a stream of witty dialogue and well-aimed compliments, back by elaborate assurances of the quality and bargain prices of your wares, you have a steady flow of customers coming to check you out.", parse);
 		if(humanity < 0.95)
-			Text.Add(" Your inhuman features do attract some prejudiced stares, theres' no denying that. But so eloquent is your presentation that far more eventually swallow their prejudice and approach then staunchly refuse to have any dealings with you.", parse);
+			Text.Add(" Your inhuman features do attract some discriminating stares, there's no denying that. But so eloquent is your presentation that far more eventually swallow their prejudice and approach then staunchly refuse to have any dealings with you.", parse);
 		
 		score += 2;
 	}
@@ -1457,7 +1457,7 @@ Scenes.Farm.Market = function(haul, next) {
 		score += 2;
 	}
 	else {
-		Text.Add("You pounce on every tell, gauge every reaction to the prices you're asking, and always walk away from a deal with a hefty profit. On the fly, you make up fictitious promotions and flash sales, maximising your profits whilst at the same time keeping your customers from getting too disgruntled. It's amazing how many people walk away happily, thinking they have a bargain, when in reality you're the one who's got the better deal. Gwendy herself watches you out of the corner of her eye, amazed at how well you're doing - better than she is, even.", parse);
+		Text.Add("You pounce on every tell, gauge every reaction to the prices you're asking, and always walk away from a deal with a hefty profit. On the fly, you make up fictitious promotions and flash sales, maximizing your profits whilst at the same time keeping your customers from getting too disgruntled. It's amazing how many people walk away happily, thinking they have a bargain, when in reality you're the one who's got the better deal. Gwendy herself watches you out of the corner of her eye, amazed at how well you're doing - better than she is, even.", parse);
 		if(humanity < 0.95)
 			Text.Add(" Though there's still some grumbling from the bigots about your success, the promotions and sales you offer keep feathers smoothed so successfully that nobody really objects to you, no matter how prejudiced.", parse);
 		score += 3;
@@ -1480,7 +1480,7 @@ Scenes.Farm.Market = function(haul, next) {
 		Text.Add("You accept the offered coins while she pockets the rest.", parse);
 	}
 	else if(score < 5) {
-		Text.Add("It doesn't take you long to realise you've more than achieved a basic profit from today's dealings. Gwendy smiles happily. <i>“Now this is what I call a successful run, [playername],”</i> she declares, procuring a bag to stash all the gold. <i>“And it was all thanks to you!”</i> she adds.", parse);
+		Text.Add("It doesn't take you long to realize you've more than achieved a basic profit from today's dealings. Gwendy smiles happily. <i>“Now this is what I call a successful run, [playername],”</i> she declares, procuring a bag to stash all the gold. <i>“And it was all thanks to you!”</i> she adds.", parse);
 		Text.NL();
 		Text.Add("You thank her for her kind words, accepting the praise with your usual modesty.", parse);
 		Text.NL();
@@ -1491,17 +1491,17 @@ Scenes.Farm.Market = function(haul, next) {
 	else {
 		Text.Add("The day's profits are staggering; the two of you made more money than Gwendy could in three regular runs by herself.", parse);
 		Text.NL();
-		Text.Add("<i>“Wow… Someone’s got quite the silver tongue. Pulling all those customers to our stall,”</i> Gwendy remarks sidling up to gently bump your hips with the side of hers. Your body rocks slightly at the impact, and you twist around to look her in the eyes, smiling in pride as you do so.", parse);
+		Text.Add("<i>“Wow… Someone’s got quite the silver tongue, pulling all those customers to our stall,”</i> Gwendy remarks sidling up to gently bump your hips with the side of hers. Your body rocks slightly at the impact, and you twist around to look her in the eyes, smiling in pride as you do so.", parse);
 		Text.NL();
-		Text.Add("<i>“I think this calls for a celebration,”</i> she says, tracing a finger around your collar bone. Before you can formulate a reply she pulls you into a deep kiss, tongue pushing and twisting against your own.", parse);
+		Text.Add("<i>“I think this calls for a celebration,”</i> she says, tracing a finger around your collarbone. Before you can formulate a reply, she pulls you into a deep kiss, tongue pushing and twisting against your own.", parse);
 		Text.NL();
 		if(player.SubDom() - gwendy.SubDom() > 0)
 			Text.Add("You waste no time in hungrily pulling her to you, rapaciously consuming her lips in return even as your tongue wrestles hers into submission.", parse);
 		else
-			Text.Add("Eagerly you surrender yourself to her, allowing her to molest your mouth with her tongue, moaning softly in pleasure at her ministrations.", parse);
+			Text.Add("Eagerly, you surrender yourself to her, allowing her to molest your mouth with her tongue, moaning softly in pleasure at her ministrations.", parse);
 		Text.Add(" Breaking the kiss, she giggles.", parse);
 		Text.NL();
-		Text.Add("<i>“Good to see that silvery tongue of yours isn’t just good for talking,”</i> she bats her eyes flirtatiously. <i>“But let’s save the celebration for later, right now help me bag all this gold. You can keep that mound as your cut.”</i> She points to a nearby pile of gold. <i>“I’m really glad you came along, [playername].”</i>", parse);
+		Text.Add("<i>“Good to see that silvery tongue of yours isn’t just good for talking,”</i> she bats her eyes flirtatiously. <i>“But let’s save the celebration for later; right now, help me bag all this gold. You can keep that mound as your cut.”</i> She points to a nearby pile of gold. <i>“I’m really glad you came along, [playername].”</i>", parse);
 		Text.NL();
 		Text.Add("The pleasure is all yours, you reply, already taking your indicated share.", parse);
 	}
