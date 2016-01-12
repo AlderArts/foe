@@ -4,6 +4,7 @@ Tier 1 Malice scouts and outriders
 
 Scenes.MaliceScouts = {};
 Scenes.MaliceScouts.Catboy = {};
+Scenes.MaliceScouts.Mare = {};
 
 /*
  * 
@@ -61,7 +62,7 @@ function CatboyMage(levelbonus) {
 	this.sexlevel          = 0;
 	
 	this.combatExp         = this.level;
-	this.coinDrop          = this.level * 4;
+	this.coinDrop          = this.level * 5;
 	
 	this.body.SetRace(Race.Feline);
 	
@@ -171,6 +172,152 @@ Scenes.MaliceScouts.Catboy.Impregnate = function(mother, father, slot) {
 	});
 }
 
+
+/*
+ * 
+ * Centaur Mare, lvl 9-13
+ * 
+ */
+function CentaurMare(levelbonus) {
+	Entity.call(this);
+	this.ID = "centaurmare";
+	
+	this.avatar.combat     = Images.mare; //TODO
+	this.name              = "Centauress";
+	this.monsterName       = "the centauress";
+	this.MonsterName       = "The centauress";
+	this.body.DefFemale();
+	this.FirstVag().virgin = false;
+	this.Butt().virgin     = false;
+	
+	this.maxHp.base        = 1000;
+	this.maxSp.base        = 400;
+	this.maxLust.base      = 400;
+	// Main stats
+	// High stamina, dex. Mid str, int, spi, libido. Low cha.
+	this.strength.base     = 40;
+	this.stamina.base      = 50;
+	this.dexterity.base    = 45;
+	this.intelligence.base = 35;
+	this.spirit.base       = 35;
+	this.libido.base       = 30;
+	this.charisma.base     = 15;
+	
+	this.elementDef.dmg[Element.mEarth]  = 0.5;
+	
+	var level = 0;
+	
+	var scenes = new EncounterTable();
+	scenes.AddEnc(function() {
+		level = 9;
+	}, 4.0, function() { return true; });
+	scenes.AddEnc(function() {
+		level = 10;
+	}, 5.0, function() { return true; });
+	scenes.AddEnc(function() {
+		level = 11;
+	}, 3.0, function() { return true; });
+	scenes.AddEnc(function() {
+		level = 12;
+	}, 2.0, function() { return true; });
+	scenes.AddEnc(function() {
+		level = 13;
+	}, 1.0, function() { return true; });
+	scenes.Get();
+	
+	this.level             = level + (levelbonus || 0);
+	this.sexlevel          = 0;
+	
+	this.combatExp         = this.level;
+	this.coinDrop          = this.level * 5;
+	
+	this.body.SetRace(Race.Horse);
+	
+	this.body.SetBodyColor(Color.brown);
+	
+	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Horse, Color.black);
+	
+	this.body.SetEyeColor(Color.blue);
+
+	this.weaponSlot   = Items.Weapons.OakSpear;
+	this.topArmorSlot = Items.Armor.BronzeChest;
+	this.botArmorSlot = Items.Armor.BronzeLeggings;
+	
+	this.Equip();
+	
+	// Set hp and mana to full
+	this.SetLevelBonus();
+	this.RestFull();
+}
+CentaurMare.prototype = new Entity();
+CentaurMare.prototype.constructor = CentaurMare;
+
+CentaurMare.prototype.DropTable = function() {
+	var drops = [];
+	
+	if(Math.random() < 0.1)  drops.push({ it: Items.Equinium });
+	if(Math.random() < 0.05) drops.push({ it: Items.Taurico });
+	if(Math.random() < 0.01) drops.push({ it: Items.EquiniumPlus });
+	if(Math.random() < 0.5)  drops.push({ it: Items.HorseHair });
+	if(Math.random() < 0.5)  drops.push({ it: Items.HorseShoe });
+	if(Math.random() < 0.5)  drops.push({ it: Items.HorseCum });
+	
+	if(Math.random() < 0.3)  drops.push({ it: Items.FruitSeed });
+	if(Math.random() < 0.2)  drops.push({ it: Items.Hummus });
+	if(Math.random() < 0.2)  drops.push({ it: Items.SpringWater });
+	if(Math.random() < 0.1)  drops.push({ it: Items.FlowerPetal });
+	if(Math.random() < 0.1)  drops.push({ it: Items.Wolfsbane });
+	
+	if(Math.random() < 0.05) drops.push({ it: Items.Weapons.OakSpear });
+	if(Math.random() < 0.05) drops.push({ it: Items.Armor.BronzeChest });
+	if(Math.random() < 0.05) drops.push({ it: Items.Toys.EquineDildo });
+	if(Math.random() < 0.05) drops.push({ it: Items.Combat.HPotion });
+	if(Math.random() < 0.05) drops.push({ it: Items.Combat.LustDart });
+	
+	if(Math.random() < 0.01) drops.push({ it: Items.Caprinium });
+	if(Math.random() < 0.01) drops.push({ it: Items.Cerventine });
+	if(Math.random() < 0.01) drops.push({ it: Items.Estros });
+	if(Math.random() < 0.01) drops.push({ it: Items.Fertilium });
+	if(Math.random() < 0.01) drops.push({ it: Items.FertiliumPlus });
+	
+	return drops;
+}
+
+CentaurMare.prototype.Act = function(encounter, activeChar) {
+	// TODO: Very TEMP
+	Text.Add(this.name + " acts! Hyaaah!");
+	Text.NL();
+	Text.Flush();
+	
+	// Pick a random target
+	var t = this.GetSingleTarget(encounter, activeChar);
+	
+	var that = this;
+
+	var scenes = new EncounterTable();
+	
+	scenes.AddEnc(function() {
+		Abilities.Attack.Use(encounter, that, t);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Abilities.Physical.Bash.Use(encounter, that, t);
+	}, 2.0, function() { return Abilities.Physical.Bash.enabledCondition(encounter, that); });
+	scenes.AddEnc(function() {
+		Abilities.Physical.CrushingStrike.Use(encounter, that, t);
+	}, 3.0, function() { return Abilities.Physical.CrushingStrike.enabledCondition(encounter, that); });
+	scenes.AddEnc(function() {
+		Abilities.Physical.FocusStrike.Use(encounter, that, t);
+	}, 2.0, function() { return Abilities.Physical.FocusStrike.enabledCondition(encounter, that); });
+	/* TODO Taunt attack? (focus)
+	scenes.AddEnc(function() {
+		Abilities.Physical.TAttack.Use(encounter, that, t);
+	}, 3.0, function() { return Abilities.Physical.TAttack.enabledCondition(encounter, that); });
+	*/
+	scenes.Get();
+}
+
+
+// CATBOY SCENES
 Scenes.MaliceScouts.Catboy.LoneEncounter = function(levelbonus) {
 	var enemy    = new Party();
  	var catboy   = new CatboyMage(levelbonus);
@@ -1065,6 +1212,735 @@ Scenes.MaliceScouts.Catboy.GetMilked = function(enc) {
 	
 	player.AddLustFraction(0.2);
 	player.AddSexExp(1);
+	
+	Gui.NextPrompt();
+}
+
+
+
+
+
+
+
+
+
+
+
+Scenes.MaliceScouts.Mare.LoneEncounter = function(levelbonus) {
+	var enemy    = new Party();
+ 	var mare     = new CentaurMare(levelbonus);
+	enemy.AddMember(mare);
+	var enc      = new Encounter(enemy);
+	enc.mare     = mare;
+	
+	enc.onEncounter = function() {
+		var parse = {
+			
+		};
+		parse = player.ParserTags(parse);
+
+		Text.Clear();
+		parse["oneself"] = player.HasLegs() ? "one’s feet" : "oneself";
+		Text.Add("This part of the highlands that you’re currently exploring is more well-traveled than most. Enough, at least, for a proper mountain trail to have materialized amongst the hills and valleys; it twists and winds its way amongst the highland downs, rarely making a straight line between two points, but the extra distance is worth not having to cut [oneself] on the rocky trails and plateaus.", parse);
+		Text.NL();
+		Text.Add("There’s no sign of who maintains these roads - if anything, it looks like they’ve been made by many, many feet and wheels simply trampling out the path until the grass won’t grow there anymore.", parse);
+		Text.NL();
+		Text.Add("All of a sudden, your attention is drawn by the sounds of hooves clopping on the road’s hard surface. At first, you think it’s someone on horseback, but as the figure draws closer you realize that your initial assessment was close, but not quite on the mark. It’s a centaur mare, her human half slightly tanned with her equine half a shiny chestnut brown, her long black hair pulled back in a tightly-knotted braid. A quite literal breastplate - it has to be so, to accommodate her generous mammaries - shields her front half; perhaps it was magnificent once, but time and use have worn away the swirly engravings and taken away any shine it might have once had, leaving it slightly dented but functional. Behind that, barding clearly intended for a warhorse, but the thin, overlapping plates of steel have been refitted to suit a centaur better.", parse);
+		Text.NL();
+		Text.Add("In her hand, a long, sharp spear; on the other arm, a buckler of leather and hardened wood. There’s some slight muscle definition to her human portion that speaks of training and experience, but not quite enough to be considered bulk.", parse);
+		Text.NL();
+		Text.Add("Slowly, the centaur mare canters up to you and stops in the middle of the road, blocking your advance. <i>“Halt, traveler.”</i>", parse);
+		Text.NL();
+		Text.Add("Okay, okay, you’ve stopped. What does she want? This isn’t a hold-up or anything along those lines, is it?", parse);
+		Text.NL();
+		Text.Add("She scowls. You note that her spear is shaking slightly, her eyes a little wider than you’d expect, her breathing a little too deep. And not to mention, there’s an odd scent in the air that you can’t quite put words to…", parse);
+		Text.NL();
+		Text.Add("<i>“No,”</i> she replies, then scowls. <i>“I need a fuck.”</i>", parse);
+		Text.NL();
+		Text.Add("Um, come again? She needs a <i>what</i>?", parse);
+		Text.NL();
+		Text.Add("<i>“I said, I need a fuck. I don’t care how I get it, I just need a good fucking, and you’re the only outsider I’ve seen all day.”</i> The centaur mare lowers her spear at you such that its head is level with your chest. <i>“Now, I don’t want to have to fight you, but I will if I have to. I’m going to ask once, and once only - I’m fucking desperate, and what with my poor body meaning not being able to reach my own pussy means I’ve to turn to others. So, are you going to get me off out of your own free will, or am I going to have to make you do it for me?”</i>", parse);
+		Text.NL();
+		Text.Add("Right. Um…", parse);
+		Text.Flush();
+		
+		//[Yes][No]
+		var options = [];
+		options.push({nameStr : "Yes",
+			tooltip : Text.Parse("Oh, why not? She’s clearly in a bad spot.", parse),
+			enabled : true,
+			func : function() {
+				Text.Clear();
+				Text.Add("The mare visibly sags in relief, her shoulders slumping as she puts away her weapon. <i>“Thanks for being reasonable,”</i> she mumbles, her body now quaking ever so slightly with repressed need. <i>“Shit, just thinking about it is already getting me all wet - not that I don’t like this body of mine, but some days it just wants to do something at the most inconvenient times, if you get what I mean.”</i>", parse);
+				Text.NL();
+				Text.Add("Oh, you understand perfectly.", parse);
+				Text.NL();
+				Text.Add("<i>“Let’s find a spot off the road for this, then. Hope you’re not too alarmed by my tastes…”</i>", parse);
+				Text.NL();
+				Text.Add("Without any warning, the centaur mare charges at you, catching you by surprise and sending you sprawling to the ground dazed. She looms over you, spear in hand, then drops her weapon onto the grass and smiles down at you.", parse);
+				Text.NL();
+				Text.Add("<i>“Phew, sorry about that; hope I didn’t hurt you too badly. Just had to get that out of my system before we began fucking like a bunch of fucking animals.”</i> She pauses a moment and draws a deep breath, panting away - whether from heat or exertion is anyone’s guess. <i>“Damn it, it’s already getting to my vocabulary. Let’s just hurry up and scratch this itch of mine before it gets very much worse.”</i>", parse);
+				Text.Flush();
+				
+				Gui.NextPrompt(function() {
+					world.TimeStep({hour: 1});
+					Text.Clear();
+					Scenes.MaliceScouts.Mare.LossEntry(enc);
+				});
+			}
+		});
+		options.push({nameStr : "No",
+			tooltip : Text.Parse("No thanks, you’re just not feeling up to it today.", parse),
+			enabled : true,
+			func : function() {
+				Text.Clear();
+				Text.Add("You do your best to explain to the centaur mare that you’re really not interested in the offer she’s soliciting for, but she won’t have any of it.", parse);
+				Text.NL();
+				Text.Add("<i>“See?”</i> she rails, waving her buckler at the heavens. <i>“You ask them nicely, maybe even say ‘please’ and ‘thank you’, and it’s not as if there’s any meaningful difference in the end anyway! You want to do it the hard way, lowlander? I’ll give you the hard way, then! Mmm… hard… fuck, not right now!”</i>", parse);
+				Text.NL();
+				Text.Add("Her expression turns steely, and you barely have enough time to throw yourself aside as she levels her spear at you and charges!", parse);
+				Text.NL();
+				Text.Add("<b>It’s a fight!</b>", parse);
+				Text.Flush();
+				
+				// Start combat
+				Gui.NextPrompt(function() {
+					enc.PrepCombat();
+				});
+			}
+		});
+		Gui.SetButtonsFromList(options, false, null);
+	};
+	
+	/*
+	enc.canRun = false;
+	enc.VictoryCondition = ...
+	*/
+	enc.onLoss    = Scenes.MaliceScouts.Mare.LossPrompt;
+	enc.onVictory = Scenes.MaliceScouts.Mare.WinPrompt;
+	
+	return enc;
+}
+
+Scenes.MaliceScouts.Mare.WinPrompt = function() {
+	var enc  = this;
+	SetGameState(GameState.Event);
+	
+	var parse = {
+		
+	};
+	
+	Gui.Callstack.push(function() {
+		Text.Clear();
+		Text.Add("Unable to keep on fighting any longer, the centaur mare sinks to her knees - all four of them - and makes little urgent noises in the back of her throat. Despite being soundly beaten, it looks like her desperate need hasn’t diminished any from the combat. Letting her spear and shield fall to the grassy ground with soft thuds, the centaur wiggles her rump, and when you half-circle around her to investigate you can see a dark streak of wetness running down her hind legs as her flanks heave.", parse);
+		Text.NL();
+		Text.Add("<i>“Well,”</i> she mumbles. <i>“You’ve gone and beaten me, lowlander. Why don’t you go ahead and humiliate me further by just walking away? Just walk away, and leave me to wallow in my...”</i>", parse);
+		Text.NL();
+		Text.Add("The centaur mare’s words cut off, but she continues grumbling under her breath, crossing her arms under the bulges on her breastplate. What will you do now?", parse);
+		Text.Flush();
+		
+		//[Walk away][Fuck][Fist]
+		var options = [];
+		
+		if(player.FirstCock()) {
+			var p1cock = player.BiggestCock();
+			options.push({nameStr : "Fuck",
+				tooltip : Text.Parse("Give her what she wants - but on your terms.", parse),
+				enabled : function() { return player.HasLegs() && p1cock.Len() >= 25; }, //Gotta have legs and a 10" cock
+				func : function() {
+					Scenes.MaliceScouts.Mare.WinFuck(enc);
+				}
+			});
+		}
+		options.push({nameStr : "Fist",
+			tooltip : Text.Parse("Literally pound the mare’s pussy.", parse),
+			enabled : true,
+			func : function() {
+				Scenes.MaliceScouts.Mare.WinFist(enc);
+			}
+		});
+		/* TODO
+		options.push({nameStr : "",
+			tooltip : Text.Parse("", parse),
+			enabled : true,
+			func : function() {
+				Text.Clear();
+				Text.Add("", parse);
+				Text.NL();
+				Text.Add("", parse);
+				Text.Flush();
+			}
+		});
+		*/
+		
+		Gui.SetButtonsFromList(options, true, function() {
+			Text.Clear();
+			Text.Add("Yeah. Either horses aren’t quite your style, or you’re just not feeling up to it today. Either way, since she was so kind to point it out to you, you’re going to do just that - humiliate her by just walking away after having soundly thrashed the stuffing out of her.", parse);
+			Text.NL();
+			Text.Add("As you turn to leave, she blinks in surprise and calls out to you. <i>“Wait, what are you doing?”</i>", parse);
+			Text.NL();
+			Text.Add("Why, you’re just leaving like she told you to.", parse);
+			Text.NL();
+			Text.Add("<i>“No! You’re not supposed to actually <b>listen</b> to what I just said, you’re supposed to do the opposite of -”</i> the mare blurts out, then rubs her temples and heaves a huge sigh. <i>“Fucking reverse psychology.”</i>", parse);
+			Text.NL();
+			Text.Add("Okay, then! You’re going to do the opposite of what she just said and do the opposite of the opposite, which is just… well, would you know it, just walking away and leaving her in the dust. Bye!", parse);
+			Text.NL();
+			Text.Add("The centaur mare glares at you with all the viciousness of a cauldron fit to bubble over, but doesn’t have the strength to follow up on the desire writ large on her face. You give her a cheery smile and wave, then skip on down the road, leaving her in the dust.", parse);
+			Text.Flush();
+			
+			Gui.NextPrompt();
+		});
+	});
+	Encounter.prototype.onVictory.call(enc);
+}
+
+Scenes.MaliceScouts.Mare.WinFuck = function(enc) {
+	var mare   = enc.mare;
+	var p1cock = player.BiggestCock();
+	var parse = {
+		
+	};
+	parse = player.ParserTags(parse);
+	
+	Text.Clear();
+	Text.Add("Aww, she just wants some desperate relief. Really, getting a standing dildo of some sort would be far more efficient than waylaying travelers on the road and asking for a fuck. Or even just asking nicely instead of demanding it… catch more flies with honey than vinegar and all that. Did that ever occur to her?", parse);
+	Text.NL();
+	Text.Add("The centaur mare mumbles something under her breath, then replies. <i>“It is the proud ethos of my people that -”</i>", parse);
+	Text.NL();
+	Text.Add("Okay, okay, you get the idea just where this is going. Let’s just get this over with. Circling around to the centaur’s hindquarters, you take your own sweet time studying her butt, making sure she feels your gaze on her rump before you whip out your fingers and shamelessly grab that sexy rear of hers.", parse);
+	Text.NL();
+	Text.Add("Of course, touching isn’t enough - far from it - and you make sure to dig in as far as you can, past the thin layer of fat and into the solid, athletic muscle of her butt, clenching and squeezing with your digits fingers before moving onto the other half and repeating the same process. The centaur’s body shudders, her flanks heaving even more than before, and she desperately cranes her neck in a bid to try and look at just what you’re doing.", parse);
+	Text.NL();
+	Text.Add("And you’ve barely even gotten started here.", parse);
+	Text.NL();
+	Text.Add("<i>“Didn’t you want to get this over with?”</i>", parse);
+	Text.NL();
+	Text.Add("Yes, but proper procedures must be followed, mustn’t they? You’ve got to inspect any and all horseflesh before settling on a decision.", parse);
+	Text.NL();
+	Text.Add("The centaur mare swallows hard and turns her gaze forward. All the better for you, then - grabbing hold of one butt cheek in each hand, you force them apart, revealing the centaur’s equine cunt. Like the dark streaks down her legs suggest, it winks and drips at you, making her heated need all the more evident to you.", parse);
+	Text.NL();
+	Text.Add("Geez. And there are <i>no</i> centaur men in camp who wouldn’t happily service her?", parse);
+	Text.NL();
+	Text.Add("<i>“Not that I haven’t pestered over and over again already,”</i> comes the very grumpy reply. <i>“Do you think I do this out of boredom?”</i>", parse);
+	Text.NL();
+	Text.Add("Hrrmph. ", parse);
+	if(player.IsTaur()) {
+		Text.Add("Well, it looks like all the goods check out. Time to get down to business, then - you take a moment to take aim, then rear up and get mounted on the mare. She lets out a sharp breath as your weight descends upon her - not a surprise, since you did just beat the stuffing out of her - but her body is sturdy with a strong constitution, and before long you’ve got yourself all nicely mounted up atop her.", parse);
+		Text.NL();
+		if(p1cock.Len() >= 38) {
+			Text.Add("Even for someone of equine proportions, your tackle is a force to be reckoned with", parse);
+			if(p1cock.race.isRace(Race.Horse))
+				Text.Add(", especially since it’s appropriately shaped for the task at hand", parse);
+			Text.Add(". The mare’s walls clench needily about your member as it slides deeper and deeper into her, no doubt sending palpable waves of satisfaction and satiation as you fill her insides with rock-hard cock. She’s so well-lubed up from her own juices that you have scarcely any problem plunging into her nethers until you’re hilted well and deep, man-meat firmly wrapped up in mare-meat.", parse);
+			Text.NL();
+			
+			Sex.Vaginal(player, mare);
+			mare.FuckVag(mare.FirstVag(), p1cock, 4);
+			player.Fuck(p1cock, 4);
+			
+			Text.Add("<i>“Shit,”</i> she murmurs, then heaves a trembling sigh at finally having something huge enough to fully stuff that deep, juicy cunt of hers. <i>“Now that’s something. Finally, someone who can actually fill me.”</i>", parse);
+			Text.NL();
+			Text.Add("Why, you only seek to please.", parse);
+			Text.NL();
+			Text.Add("The centaur mare simply snorts at that, but she doesn’t say anything more. Very well, then - you grin and concentrate on proving that you’re more than a worthwhile fuck for what her sensibilities must be demanding of her.", parse);
+		}
+		else {
+			Text.Add("Grinning, you take a few moments to tease her pussy lips with your [cockTip], causing a burst of clear girl-cum to erupt from her equine pussy. Yeah, it looks like you won’t be needing any additional lube for this one.", parse);
+			Text.NL();
+			Text.Add("<i>“Just hurry up and put it inside me already, you bastard!”</i>", parse);
+			Text.NL();
+			Text.Add("Bah, she’s in no position to make demands, you’ll take your time if you please. The mare just bucks up against you, trying to take you into her; she manages to grind against your [cockTip] a few times, but you keep your distance and she only manages to ramp up her already considerable arousal and anticipation by no small amount.", parse);
+			Text.NL();
+			Text.Add("At last, when you’re sure that your [cock] is as stiff and large as it’ll ever be - thanks in no small part to the desperate scent of sex wafting up from the mare’s sweaty body - you lean forward and slide your shaft into the centaur’s oozing cunt. It eagerly devours your man-meat with a wet slurping sound, and you’re in.", parse);
+			Text.NL();
+			
+			Sex.Vaginal(player, mare);
+			mare.FuckVag(mare.FirstVag(), p1cock, 4);
+			player.Fuck(p1cock, 4);
+			
+			Text.Add("<i>“Ffff-”</i>the centaur mare looks fit to bust even as her inner walls try to grasp at your tackle, which you unfortunately have to admit is at least a little too small for the cavernous tunnel which she possesses. <i>“Shit, you’ve got so much body - would it really kill you to find a potion or something and make yourself, I don’t know, more proportional?”</i>", parse);
+			Text.NL();
+			Text.Add("Hey, a small dick is better than no dick. Or is she going to look a gift horse in the mouth?", parse);
+			Text.NL();
+			Text.Add("There’s more grumbling, but you cut it short with a quick thrust of your shaft, turning it into a moan.", parse);
+		}
+		Text.NL();
+		Text.Add("At the same time, you run your hands up the centaur’s human torso, up from her belly and up to her breastplate, tugging at the leather straps that hold it in place. She eagerly aids you in that endeavor, and before long both halves of armor clatter on the ground, giving you clean access to her plump, oh-so-human breasts.", parse);
+		Text.NL();
+		Text.Add("Mm - her nipples and areolae are dark and lovely, enough to provide sharp contrast against even her tanned skin. Rock-hard, they protrude proudly from her lady lumps, which themselves are swollen and tender from arousal. Yes, they’re definitely bigger since you’ve mounted her - not very much so, but still enough for the difference to be perceptible.", parse);
+		Text.NL();
+		Text.Add("Taking each plump nipple between thumb and forefinger, you tease them in tandem, the centaur mare’s inner walls quivering and sliding against your shaft with each back-and-forth motion. Instinctively, she arches her back to push her breasts into your hands, clearly wanting more; seeing no reason to deny her, you start clenching and squeezing all the breastflesh your hands can gather. It’s not milking her - she’s not producing any milk to drain - but it sure is coming close. From the growing heat in the centaur mare’s chest, it’s clear that she is more than happy to receive such attentions, and she half-turns to look back at you with a softer gaze this time, biting her lip furiously.", parse);
+		Text.NL();
+		Text.Add("Time to seize the moment, then. You nuzzle and kiss at her neck briefly before your arousal builds to the point that you're just grunting and panting in her ear; she's certainly enjoying being mounted and stuffed as much as you are in doing the stuffing.  With her deep cunt squeezing and gripping around as much of your manhood as it can get, you're both quite content to focus on fucking.", parse);
+		Text.NL();
+		Text.Add("With such stimulation, it doesn’t take long before you feel your seed well up ", parse);
+		if(player.HasBalls())
+			Text.Add("and your balls churn ominously ", parse);
+		Text.Add("as your body prepares for release. Still, it’s not as if you can do anything but the inevitable at this point - you can only close your eyes and grasp tightly at your tauric lover’s torso as orgasm descends upon you.", parse);
+		Text.NL();
+		Text.Add("Sensing the first signs that you’re about to blow, the centaur mare’s body reacts just as quickly, driving her mind over the edge with a loud whinny of delight that echoes about the hilly countryside. Her body tenses in preparation to receive your load, and so you dump it all into her in a wonderfully glorious fashion. Her cunt squeezes about your shaft, desperately milking you for all you’re worth, but it’s not as if you need any extra encouragement to do your best.", parse);
+		Text.NL();
+		
+		var cum = player.OrgasmCum();
+		
+		if(cum >= 8) {
+			Text.Add("You’re not exactly sure how long you spend unloading your seed into the centaur mare, but you know what they say - time flies when you’re having fun. As the first rush of spunk floods the mare’s tunnel, she gasps orgasmically and writhes in your grasp, thrown into ecstasy by the sheer sensation of being filled with baby batter like this.", parse);
+			Text.NL();
+			Text.Add("With such a high volume that’s pouring out of your [cock]", parse);
+			if(p1cock.Knot())
+				Text.Add(" and a knot to keep it in to boot", parse);
+			Text.Add(", the poor centaur’s womb doesn’t stand a chance. Her cunt fills with spunk almost immediately, the sheer pressure of being stuffed so deeply forcing her cervix apart to admit torrents upon torrents of your seed into her freshly heated oven.", parse);
+			Text.NL();
+			Text.Add("No way you’re stopping now! The centaur mare gasps in alarm as her belly begins to bloat and distend downwards as you continue to cum, but you grip her tightly and comfortingly, the closeness of your tauric body to her own seeming to impart some measure of comfort to her as her underbelly inflates to obscene proportions with your sperm.", parse);
+			Text.NL();
+			Text.Add("With so much spunk expended, you’d be surprised if you haven’t already seeded a foal or two on her baby bag. Maybe three, if luck is on your side, but hey, that’d certainly put her out of commission for a while now.", parse);
+			Text.NL();
+			Text.Add("When you’re done, the centaur mare is so swollen that her equine underbelly is almost touching the ground. She quavers a moment, then heaves a huge sigh of relief.", parse);
+			Text.NL();
+			Text.Add("<i>“Fuuuuuck. Now <b>that</b> was what I needed. See? If you were going to do that, then you didn’t need to beat me up in the first place.”</i>", parse);
+			Text.NL();
+			Text.Add("Yeah, you can definitely agree with her. Question, though - now, how is she going to be getting back to her camp, her tribe, or wherever she lives?", parse);
+			Text.NL();
+			Text.Add("<i>“Heh. I wasn’t expecting to get back for some time anyway. Maybe…”</i> she breathes a deep sigh and adjusts herself to better bear your weight. <i>“Bah, I won’t be missed for a while anyway. This was most definitely worth it - I don’t think I’ll be feeling so fucking needy for a while now.”</i>", parse);
+		}
+		else if(cum >= 5) {
+			Text.Add("You spend a fairly long while giving the mare a good taste of your wild oats. Of course, it doesn’t <i>seem</i> that long, but as they say - time flies when you’re having fun. At the first rush of spunk into her, the centaur mare gasps and closes her eyes, relief clearly washing over her entire form as she instinctively moves to accept your seed.", parse);
+			Text.NL();
+			Text.Add("<i>“Fuuuuck,”</i> the mare groans, pushing her massive hips against you in a bid to ensure that as much of you as she can take is in her. <i>“Fuuuuuuuck.”</i>", parse);
+			Text.NL();
+			Text.Add("Yes, yes, that’s what you’re doing to her right now.", parse);
+			Text.NL();
+			Text.Add("She moans again and rolls her hindquarters some more, little nickers coming from her mouth amidst flutters of breath. Uncertainly, the centaur mare summons up enough presence of mind to glance back at you, and you notice that her face is a delightful shade of hearty red.", parse);
+			Text.NL();
+			Text.Add("More and more spunk courses through your [cock] and fills her cunt", parse);
+			if(p1cock.Knot())
+				Text.Add(" held firmly in place by your bloated, swollen knot such that there’s no chance of any going to waste", parse);
+			Text.Add(". Slowly but gradually, the centaur mare’s underbelly begins to grow round and heavy, stretching with the load you’re forcing into her womb. You see her bite her lip a little uncertainly at the queer sensations of being filled this way, but a hearty grope to her firm breasts is enough to take her mind off such trivialities and back to the business of fucking.", parse);
+			Text.NL();
+			Text.Add("Faster and faster the both of you move, riding out the crest of your high, until she herself reaches hers just as yours is starting to die down. With a savage push against you, the centaur mare stamps at the ground and screams into the cool highland air, her fists clenched into tight, white-knuckled balls. Those deep inner walls pulse and shift against your shaft, coaxing it into the depths of her warm, slippery embrace.", parse);
+			Text.NL();
+			Text.Add("At last, though, the bliss finally begins to die down, leaving the two of you panting. The centaur mare shifts her weight a little, clearly unused to the load of sperm she’s now carrying inside her - large enough to look as if there’s already a lovely little foal growing inside her.", parse);
+			Text.NL();
+			Text.Add("<i>“Huh,”</i> she huffs, sweat running down her flanks and torso. <i>“Well, that’s going to be one hell of a weight to carry back to camp.”</i>", parse);
+			Text.NL();
+			Text.Add("And that’s one hell of a weight you won’t be lugging around with you.", parse);
+			Text.NL();
+			Text.Add("<i>“Well then, it’s a good thing that I won’t be expected around camp for a bit just yet,”</i> she replies with a number of heavy sighs. <i>“That, and with any luck it’ll be a good long while before I’m itching for a fuck again.”</i>", parse);
+		}
+		else {
+			Text.Add("You grit your teeth and close your eyes as you pound the centaur mare again and again, giving her equine half a good taste of the wild oats you have on offer. Rope after rope of thick, hot cum passes from your [cock] into her waiting pussy, which flexes and clenches as it slurps it up greedily. Maybe there’s not as much as you might have hoped there would be, but there’s far more than enough to put a foal into her baby bag if it came to that.", parse);
+			Text.NL();
+			Text.Add("Come to think of it, <i>will</i> it come to that? Who knows? It’s not as if you’re likely to see this particular centaur mare again, after all.", parse);
+			Text.NL();
+			Text.Add("Keeping that thought in mind, you redouble your efforts in hammering yourself against the centaur, pounding her equine pussy as if the energy and ferocity of your copulation will make up for your modest load. Who knows? Maybe it will.", parse);
+			Text.NL();
+			Text.Add("On her part, the centaur mare responds eagerly to your enthusiasm, pushing her hindquarters against you to meet your thrusts. Juices slap and squelch wetly and messily as the two of you spiral into an increasingly frenzied bout of rutting and she seamlessly picks up the dying crest of your pleasure with her own, cunt walls trembling and flexing with a primal need to gather up all the seed you’ve so kindly given her.", parse);
+			Text.NL();
+			Text.Add("Moments tick by, and eventually the two of you relax a little, joints and muscles loosening as the high passes and afterglow begins to set in. The centaur mare mumbles something to herself, then reaches back to pat her flank and let out a long, contented sigh.", parse);
+			Text.NL();
+			Text.Add("<i>“Fuck, that was just what I needed - really hit the spot there,”</i> she says as she wipes the sweat off her brow. <i>“Not the best I’ve had, that’s for sure, but it was still pretty damn good.”</i>", parse);
+			Text.NL();
+			Text.Add("Oh, she doesn’t need to be modest, really.", parse);
+			Text.NL();
+			Text.Add("A snort. <i>“Fine, take it as you will.”</i>", parse);
+		}
+		Text.NL();
+		Text.Add("When you're done and feel you’ve had enough, you pull out with a wet slurp and dismount, enjoying the sight of her creamy, well-fucked cunt. She seems quite pleased after her release, tail raised to show off those cum-stained lips of her equine pussy.", parse);
+		if(cum >= 5)
+			Text.Add(" For a moment, you wonder if all the spunk you just pumped into her is going to blow back out in a small geyser of white, creamy fury, but by some small miracle both her womb and cunt hold, with little more than a trickle of spunk oozing down her hindquarters.", parse);
+		Text.NL();
+		Text.Add("She catches you eyeing her cum-stained cunt, and turns up the corner of her mouth in a small smile. <i>“Enjoying your handiwork?”</i>", parse);
+		Text.NL();
+		Text.Add("Why not? It’s something to be proud of.", parse);
+		Text.NL();
+		Text.Add("<i>“Still don’t get why you were going to go to all this trouble if you were going to fuck me anyway. Could’ve just cut to the chase and gotten down to business.”</i>", parse);
+		Text.NL();
+		Text.Add("Hey, maybe it’s just an elaborate form of foreplay to turn you on, or maybe you just wanted to be sure that she was too tired to pull off some kind of tricksy stunt on you while you were fucking her. Highlanders are supposed to have their ways, after all.", parse);
+		Text.NL();
+		Text.Add("She huffs at that and reaches for her spear and shield, leaning her weight on the former in a bid to get about. It’s not very successful - she manages to totter for a few steps before having to sink back down onto the grass. Sure, you’d just beaten the stuffing out of her <i>and</i> then replaced it with a fresh stuffing of spunk, but you didn’t expect her to be <i>that</i> worn-down from all that attention.", parse);
+		Text.NL();
+		Text.Add("<i>“I’ll be fine.”</i> The mare waves you off. <i>“Go ahead and trot back to the lowlands or wherever you came from; all I need is to catch my breath and I’ll be fine.”</i>", parse);
+		Text.NL();
+		Text.Add("If she says so, then. With one last look back at the centaur mare, you turn and head on past her and down the road.", parse);
+	}
+	else { // Biped
+		Text.Add("Well, it looks like everything’s where it should be and she’s in good health. No reason not to go ahead with your plan, then - finding a hollow log nearby, you heft it over and secure it solidly on the ground. With it, you’re able to get a proper boost up in order to properly get at her hindquarters - what with not being a taur and all - giving that firm horseflesh of hers a resounding smack with the flat of your palm.", parse);
+		Text.NL();
+		Text.Add("She yelps. <i>“H-hey!”</i>", parse);
+		Text.NL();
+		Text.Add("Why, did that feel good? It’d be a crime to leave her unbalanced so… smiling sweetly, you aim for her other butt cheek and give it a sharp slap, too. A soft moan escapes unbidden from the centaur mare - she stifles it quickly, but her juicy cunt betrays her as the dark streaks trickling down her hind legs grow ever so slightly.", parse);
+		Text.NL();
+		Text.Add("Oh, all right. You’ll not tease her anymore than is strictly necessary. The centaur mare’s swollen, drooling pussy lips make for a large, easy target, and you get all lined up, grinding your [cockTip] against them until she’s squealing and bucking against you, inadvertently getting you all lubed up with her juices.", parse);
+		Text.NL();
+		Text.Add("No time like the present, then. With a mighty thrust, you slide your man-meat into the centaur’s heated folds, ", parse);
+		if(p1cock.Len() >= 38) {
+			Text.Add("fitting her deep tunnel like a sleeve - almost as if you were made for this.", parse);
+			if(p1cock.race.isRace(Race.Horse))
+				Text.Add(" That goes double considering the equine tackle you’re packing at the moment - suited in both shape and size, as it were.", parse);
+			Text.NL();
+			
+			Sex.Vaginal(player, mare);
+			mare.FuckVag(mare.FirstVag(), p1cock, 3);
+			player.Fuck(p1cock, 3);
+			
+			Text.Add("<i>“Damn,”</i> the centaur mare says with a satisfied sigh. <i>“It’s been a good long while since I’ve found a shaft capable of actually filling me.”</i>", parse);
+			Text.NL();
+			Text.Add("Why, are there no guy centaurs around?", parse);
+			Text.NL();
+			Text.Add("<i>“I’d have to get in line to see those who <b>are</b> in camp. Now shut up and fuck.”</i>", parse);
+		}
+		else {
+			Text.Add("eventually bottoming out in her cavernous cunt.", parse);
+			Text.NL();
+			
+			Sex.Vaginal(player, mare);
+			mare.FuckVag(mare.FirstVag(), p1cock, 3);
+			player.Fuck(p1cock, 3);
+			
+			Text.Add("<i>“Wait, that’s all you’ve got?”</i>", parse);
+			Text.NL();
+			Text.Add("Why, is it not enough? Some cock is better than no cock - would she rather have that?", parse);
+			Text.NL();
+			Text.Add("A sigh, followed by what might be the faintest trace of a pout <i>“Well, no…”</i>", parse);
+			Text.NL();
+			Text.Add("You shrug and keep on working away at it. Sure, her body might be clearly signaling that it could do with more than what it’s currently receiving, but it’s not as if you can do much about that - not right now, in any case.", parse);
+		}
+		Text.NL();
+		Text.Add("Soon enough, you settle into a steady rhythm, pounding away to the musky smell of sex and squelching of juices. ", parse);
+		if(player.HasBalls())
+			Text.Add("Your [balls], full of sperm waiting to be unleashed, slap heavily against her butt cheeks as you grip her hindquarters to steady yourself", parse);
+		else
+			Text.Add("Your pounding is so ferocious that you’ve to widen your stance a little and grip her hindquarters tightly as you steady yourself against the mare’s powerful bucking", parse);
+		Text.Add(" - and frankly speaking, what fine ass cheeks they are. Round and plump, yet with firm muscle supporting them from underneath and pushing them up, you have to admit that they’re fine pieces of horseflesh indeed. So fine, in fact, that you can’t help but palm them - an action which the centaur returns by way of pushing herself eagerly against you.", parse);
+		Text.NL();
+		Text.Add("Now that’s an invitation if you ever had one. It would be a shame to turn down that advance, so you shift your grasp from her hips to her ass, shamelessly squeezing, kneading, rolling that juicy horseflesh in your hands even as the centaur mare’s inner walls quiver and slide along your [cock] as you continue to fuck her silly.", parse);
+		Text.NL();
+		Text.Add("After a while, though, you feel that it’s time to move on to greener pastures. You can’t reach her human breasts - your arms aren’t quite long enough for that - but you <i>can</i> reach down to her underbelly and tweak her mare nipples. On her part, the centaur mare reaches up to her chest, and cupping her bosom, begins to molest herself with wanton, shameless abandon, half-turning so that you can get a good side view of her boobsterbation.", parse);
+		Text.NL();
+		Text.Add("<i>“Like what you see?”</i> she asks, tacking a whorish moan onto the end of her question. When no response is forthcoming, the centaur mare shrugs and redoubles her efforts. Her human mammaries seem to be far more sensitive and pleasure-inducing than her equine ones, by all appearances, and you grit your teeth and make sure you don’t start falling behind.", parse);
+		Text.NL();
+		Text.Add("<i>“Keep up, lowlander!”</i> the centaur mare yells as the two of you buck and writhe against each other with increasing, warlike ferocity. <i>“If you can beat me, sure you have the staying power for this!”</i>", parse);
+		Text.NL();
+		Text.Add("You’re doing what you can! The centaur mare looks back at you once more, and little hisses of heated breath escape from between her gritted teeth as she throws a determined glare in your direction.", parse);
+		Text.NL();
+		parse["b"] = player.HasBalls() ? "r balls" : "";
+		Text.Add("Guess what? You’re determined, too! With her deep cunt squeezing and gripping around as much of your manhood as it can get, you can practically feel the cum being sucked out of you, drawn out of you[b] by the insistent suction being applied to your shaft.", parse);
+		Text.NL();
+		Text.Add("Subjected to such an intense fucking, you quickly feel yourself approaching your peak despite your best efforts to hold on. Sensing that you don’t have much time left, you desperately smash your hips against the centaur mare’s in a furious bout of fucking, trying to get her to break down before you do.", parse);
+		Text.NL();
+		Text.Add("She wins - barely. With a final thrust of your [cock] into the centaur mare’s warm, inviting insides, you groan aloud and blow your load straight into the centaur mare", parse);
+		if(player.HasBalls())
+			Text.Add(", balls churning and squelching audibly as they disgorge their cargo with terrible efficiency", parse);
+		Text.Add(". She squeals and whinnies, her voice ringing in the cool highland air, and presses herself against you in a bid to take your seed.", parse);
+		if(p1cock.Knot())
+			Text.Add(" Even now, you feel your knot swelling and growing, greedily tying the two of you together, corking her cunt to make sure that as little of your sperm escapes as possible.", parse);
+		Text.NL();
+		
+		var cum = player.OrgasmCum();
+		
+		if(cum >= 8) {
+			Text.Add("And what a load this one is. The deluge of spunk that’s been kept in reserve within you jets from your [cockTip] like water from a fire hose, an overwhelming sensation of delight washing over your entire body as you feel thick, hot jism run down the entirety of your shaft, down, down, down -", parse);
+			Text.NL();
+			Text.Add("- Clearly, the mare feels it too, for she lets out a loud whinny of orgasming delight just before her equine underbelly begins to bloat with your seed, her cervix unable to withstand the pressure of so much cum being forced into her that it has to no choice but to allow the flood into her heated, waiting womb, your bodies working together to ensure she receives your fertile cock cream.", parse);
+			Text.NL();
+			Text.Add("Bigger and bigger the centaur grows, almost as if gripped by some kind of unnatural pregnancy, ballooning away with your cum. Blushing furiously with a strawberry-red flush that covers her face and reaches all the way into her breasts, the mare pants lustily as the fires in her body are finally quenched by the liquid warmth pouring into her.", parse);
+			Text.NL();
+			Text.Add("<i>“Damn,”</i> the centaur mare manages to choke out after a little while, when your flow begins to abate somewhat and the two of you can think straight again. <i>“That was something.”</i>", parse);
+			Text.NL();
+			Text.Add("You look around to her huge, cum-inflated equine underbelly, so taut, round and low that it brushes against the grass as it sloshes from side to side as she tries to move. Yeah, that’s definitely something all right.", parse);
+			Text.NL();
+			Text.Add("<i>“Aren’t going to be moving about very much, not when I’m filled up like this.”</i> A sigh. <i>“But I guess it’s worth it if it means that I won’t be squirming around for a long time. Not as if I’m expected back in camp any time soon, anyway.”</i>", parse);
+		}
+		else if(cum >= 5) {
+			Text.Add("The load that blasts out of your [cockTip] is certainly respectable, certainly heavy enough for you to palpably feel the rush of thick, liquid warmth that gushes through your manhood before erupting out into the centaur mare’s cunt. The feel of your hot spunk flooding her insides is enough to send the mare careening over the edge of pleasure and she goes down wildly, sweat pouring off her flanks as she shakes and trembles with sated need and desire.", parse);
+			Text.NL();
+			Text.Add("<i>“Fuuuuuck,”</i> she moans, her breasts heaving as she gasps great lungfuls of air. The centaur mare’s sex-swollen breasts bob up and down on her chests, nipples as hard as diamonds, and you have little doubt that her mare ones down below are as equally stiff. <i>“Fuck this. Fuck it all.”</i>", parse);
+			Text.NL();
+			Text.Add("Your only desire is to serve. So yes, you’ll fuck her.", parse);
+			Text.NL();
+			Text.Add("Filled to the brim with your sperm, the centaur mare’s only response is to moan and shift her weight as her equine underbelly begins to swell outwards, growing lower and rounder as if there’s already a foal growing unnaturally fast in her. Of course, you know it’s just cum from the way it sloshes around, but one can’t deny that it’s quite the satisfying sight.", parse);
+			Text.NL();
+			Text.Add("Eventually, your flow begins to ebb a little - although it’s far from stopped - and the centaur mare sighs in satisfaction. <i>“Well. Won’t <b>this</b> get a few odd looks when I return to camp.”</i>", parse);
+		}
+		else {
+			Text.Add("Greedily, you press yourself against the fine piece of equine horseflesh that the centaur mare is, determined to give her a good taste of your wild oats. As you pump and thrust away, trying to get your sperm in as deep as you can, she on her part rears up against you to take it all into her cavernous pussy, the muscles of her inner walls undulating against and massaging your shaft. Sure, there’s not as much as one might have hoped, but one takes what one can get.", parse);
+			Text.NL();
+			Text.Add("<i>“Is that all you’ve got?”</i> the centaur mare says as your flow begins to ebb and falter. <i>“Sheesh, maybe I should have just let you pass by and jumped the next idiot with a dick to come down the road.”</i>", parse);
+			Text.NL();
+			Text.Add("She sure wasn’t holding that line of thought when she jumped <i>you</i>, though.", parse);
+			Text.NL();
+			Text.Add("<i>“Oh, just shut up and focus on fucking me.”</i>", parse);
+		}
+		Text.NL();
+		Text.Add("Eventually, though, ", parse);
+		if(player.HasBalls())
+			Text.Add("your [balls] exhaust themselves", parse);
+		else
+			Text.Add("you exhaust yourself", parse);
+		Text.Add(", the last of your available sperm dribbling out to join what you’ve already put deep in the mare. Winded and breathing hard, you wait for yourself to soften ", parse);
+		if(p1cock.Knot())
+			Text.Add("and your knot to deflate ", parse);
+		Text.Add("enough for you to be able to pull out. There’s a loud, wet pop followed by the unsettling noise of slick juices, and you’re free.", parse);
+		if(cum >= 5)
+			Text.Add(" Despite your initial apprehensions, her cunt holds against the internal pressure of her cumflated womb with little more than a slight trickle that soon comes to a stop. Hah, seems like she’s going to be carrying your load about for a while, then.", parse);
+		Text.NL();
+		Text.Add("<i>“So, question.”</i>", parse);
+		Text.NL();
+		Text.Add("Yes?", parse);
+		Text.NL();
+		Text.Add("<i>“If you were going to fuck me anyway, why bother with beating me up in the first place? Is that your kink or what?”</i>", parse);
+		Text.NL();
+		Text.Add("You shrug; she stares at you with steely eyes before shrugging herself and picking up her spear and shield, leaning her weight on the former. She staggers a few steps, totters, and then sinks onto the ground with a small sigh.", parse);
+		Text.NL();
+		Text.Add("<i>“Welp, guess you did a number on me. I’ll just wait here for a bit until I get my breath back. For what it was worth… you were an okay fuck, lowlander.”</i>", parse);
+		Text.NL();
+		Text.Add("Merely okay? Next time, you’re just going to beat the stuffing out of her and leave her to work out her lusts by herself - assuming you ever run into her again, that is.", parse);
+		Text.NL();
+		Text.Add("<i>“Sheesh, don’t be so sore about it - it’s not in the way of my people to gush over or flatter others.”</i> The centaur mare sighs. <i>“Word of advice - I think you’d look a lot more fetching on four legs instead of two, but of course I’m biased.”</i>", parse);
+		Text.NL();
+		Text.Add("Heh. You’ll keep that in mind, then. Quickly, you tidy yourself off as best as you can, dust the dirt off your feet, then are on your way down the highland road.", parse);
+	}
+	Text.Flush();
+	
+	world.TimeStep({hour: 1});
+	
+	Gui.NextPrompt();
+}
+
+
+Scenes.MaliceScouts.Mare.WinFist = function(enc) {
+	var mare   = enc.mare;
+	var p1cock = player.BiggestCock();
+	var parse = {
+		
+	};
+	parse = player.ParserTags(parse);
+
+	Text.Clear();
+	Text.Add("Huh. She just wants to let loose a bit of steam, doesn’t she?", parse);
+	Text.NL();
+	Text.Add("The centaur mare just huffs. <i>“Whatever you’re going to do, do it. If you’re not going to make a move, then just get on down the road and leave me be.”</i>", parse);
+	Text.NL();
+	Text.Add("Ha ha - there’s no need to get her jimmies all rustled up and be so prissy about things. You’re sure that her people have a proud warrior people ethos going on that requires her to be such an uptight stick all of the time, but you’re sure that she can let her hair down now. After all, you <i>did</i> beat the stuffing out of her - and what better excuse is there for her current predicament than that?", parse);
+	Text.NL();
+	Text.Add("The centaur mare attempts to twist her lips into a scowl, but the renewed trickle of girl-cum down her equine hind legs betrays her thoughts, or at the very least, her instinctive desires. Musky and clearly smelling of arousal, it beckons you to her swollen and puffy pussy lips, slightly parted and just begging to be penetrated.", parse);
+	Text.NL();
+	Text.Add("Time to get started, then. Circling around behind the centaur mare, you take your time in inspecting her like a prize pony at a show fair. Placing your hands on her well-toned rump, you let out a contented sigh of victory at her firm yet pliable ass cheeks, reveling in the sheer sensation of healthy fat supported by an athletic musculature. Soft horsehair runs under your fingertips, and you raise her tail and force her ass cheeks apart, fully exposing the centaur mare’s pussy to full view.", parse);
+	Text.NL();
+	Text.Add("She gasps as the shock of cool air hits her wet, toasty pussy, and you see her innards clench, a fresh stream of girl-cum oozing down her rear as she makes a strangled noise in the back of her throat and color rises into her chest and cheeks.", parse);
+	Text.NL();
+	Text.Add("<i>“Come on, lowlander,”</i> she snarls through clenched teeth. <i>“There’s no need to keep anyone waiting.”</i>", parse);
+	Text.NL();
+	Text.Add("Hah, so she says. ", parse);
+	if(p1cock) {
+		Text.Add("Sure, you might have the equipment to do so, but you’re not in the mood for getting your dick wet today", parse);
+		if(p1cock.Len() < 20)
+			Text.Add(" - that, or you’re too well aware that you’d be completely insufficient for the satiation of the mare’s carnal needs", parse);
+		Text.Add(". No, instead you have a much better idea, and you’re certain that the mare will be on board with you once you’re in.", parse);
+	}
+	else {
+		Text.Add("It’s not like you have the equipment to do things the orthodox way… but then again, it’s not as if you ever had that in mind from the get go, right? No, you’ve got something better in mind to slake the mare’s desperate thirst, and you’re fairly certain she’ll be on board with you once she gets a taste of what you intend to serve up.", parse);
+	}
+	Text.NL();
+	Text.Add("Slowly, you run two fingertips across the mare’s wet petals, lightly touching them with just the slightest hint of pressure. The centaur mare stiffens her entire body, drawing a sharp breath; you grin and work your way up her womanly flower until you’re faced with her love-button. Fat and swollen with her desperate arousal, it peeks out from under its hood stiffly; you take it between thumb and forefinger, slowly rubbing circles across the glistening nub of flesh, occasionally taking a moment to grind your thumb back and forth across its tip.", parse);
+	Text.NL();
+	Text.Add("The reaction is immediate - you move to the side just in time to avoid a squirt of clear girl-cum jet from her cunt and splash to the grass behind you. Trembling at all four knees, the centaur mare lets out a desperate, whorish moan, her eyes closed and fists balled so tightly her knuckles have turned white.", parse);
+	Text.NL();
+	Text.Add("Heh heh. Now <i>that’s</i> better. All right, then - now that she’s got a proper perspective and attitude about things, you’ll give her the relief that she was willing to fight you for.", parse);
+	Text.NL();
+	Text.Add("Bit by bit, you sink two fingers into the centaur mare’s cunt, enveloping them in wet horsey heat. Sensing the intrusion into her most intimate place, the centaur mare’s muscles pulse and flex, trying to draw what they imagine is a cock deeper into her cavernous pussy.", parse);
+	Text.NL();
+	Text.Add("However, you stay your hand, resisting the temptation to dive straight into the mare. Patience, patience - you force your breathing to remain calm and measured as you massage the mare’s inner walls with both fingers, occasionally spreading them wide so as to stretch her out a bit, get her more flexible and receptive to what you intend later. Barely able to remain standing, the mare wiggles desperately against your hand, letting loose juices that trickle down your wrist before falling to the ground.", parse);
+	Text.NL();
+	Text.Add("<i>“Spirits above, just fuck me already.”</i> It’s clear that instead of satiating her lusts, your foreplay has only served to exponentially ignite them further. <i>“Damn it, what are you waiting for? Are you dragging things out just to see me squirm?”</i>", parse);
+	Text.NL();
+	Text.Add("You were just waiting for her to say the magic word.", parse);
+	Text.NL();
+	Text.Add("<i>“Fuck you!”</i>", parse);
+	Text.NL();
+	Text.Add("Nope, that’s not the magic word. Come on, you’re pretty sure that she knows it - everyone does, unless they were brought up in a barn.", parse);
+	Text.NL();
+	Text.Add("The centaur mare half-turns to look back at you, biting her lip, and something in her eyes seems to snap. <i>“Please?”</i>", parse);
+	Text.NL();
+	Text.Add("And <i>there’s</i> the magic word. Seriously, if she’d just bothered with asking at the outset instead of jumping other people and trying to rape them, you suspect that she’d have gotten a much more favorable response to her advances. And since she’s now asked so nicely, you see no reason not to give her what she wants.", parse);
+	Text.NL();
+	Text.Add("Two fingers quickly become three, then four, until your entire fist has sunk into the mare’s pussy with a loud squelch of juices. True to its equine nature, her cunt stretches and gapes to admit the entirety of your hand, the sudden straining of her muscles eliciting a cry of pleasure from her lips.", parse);
+	Text.NL();
+	Text.Add("You’re only just getting started, though. Even as the centaur mare’s pussy tries to clamp down on your fist with vice-like vigor, you spread your palm within her inner walls, clenching and unclenching your fingers as her slick tunnel pushes and slides against your hand. It’s just so wet, warm and <i>slick</i> that you almost pity the mare for having to deal with this on a regular basis and yet have no means of actually satisfying herself under her own power.", parse);
+	Text.NL();
+	Text.Add("What a pity, indeed. Good thing that you’re here to scratch that itch, then!", parse);
+	Text.NL();
+	Text.Add("It’s not an actual, massive equine shaft, but your fist and forearm are a pretty good approximation, judging by how the centaur mare nickers. Her inner walls continue to squeeze and ripple against your arm as you push more and more of it into her, stopping just past your wrist before beginning to pull out again. She’s just as toned and muscular on the inside as she is on the outside, and you can’t help but wonder why the centaur men wherever she lives wouldn’t want a piece of her. ", parse);
+	if(player.IsTaur())
+		Text.Add("Yeah, you may be not quite in the mood for that kind of fun right now, but surely <i>all</i> the tauric guys can’t be having a headache <i>all</i> the time.", parse);
+	else
+		Text.Add("You know you would, if you were on four legs instead of two. It’s such a waste, to be honest.", parse);
+	Text.NL();
+	Text.Add("<i>“H-hey!”</i> the centaur mare says as you move to extract your fist. <i>“You’re not going to pull out already, are you? Come on!”</i>", parse);
+	Text.NL();
+	Text.Add("Whatever made her think that you were anywhere near done? Really, all she needs to do is to just stand there and relax, anything else is a bonus. Don’t worry about performance, take a load off and enjoy the show!", parse);
+	Text.NL();
+	Text.Add("<i>“I can’t -”</i> her words are cut off mid-sentence as you gather your strength and literally punch into her cunt, driving your arm through those meat curtains and lodging yourself up to the elbow in fine horseflesh.", parse);
+	Text.NL();
+	Text.Add("Her eyes wide and mouth formed into a small ‘o’, the centaur mare dances on the spot for a few seconds, her hooves trampling the grass underfoot - you’re a little worried that she might bolt and take you with her, but her lust eventually overcomes the shock of the sudden penetration and she pushes her hindquarters against you.", parse);
+	Text.NL();
+	Text.Add("<i>“Ah! Ah!”</i>", parse);
+	Text.NL();
+	Text.Add("Feels good, doesn’t it? Bracing your [feet] on the grassy ground, you pull your arm out of the centaur mare - it’s a bit of effort considering how reluctant she is to let you go, but you pull back such that only your wrist still remains in her. Taking a deep breath, you shift your weight and lunge forward, a loud squelch sounding in the air as you pound her pussy with your fist. This time, you sink in almost all the way to your shoulder, and feel a satisfying hardness as you hit her cervix.", parse);
+	Text.NL();
+	Text.Add("Fully stuffed by way of being impaled on your arm, the centaur mare whinnies while you jiggle your limb up and down, to and fro, stretching her cunt for what’s going to come next. Once you’re sure you have a good footing, you begin jackhammering her insides with your fist, making sure to spread your fingers every so often for maximum effect. ", parse);
+	Text.NL();
+	Text.Add("Slick, glistening juices and slurping sounds abound as you throw your weight back and forth, withdrawing to your wrist before lunging forward to hammer at her cervix like a battering ram at the gates. The centaur mare completely loses it at this point - she can barely remain standing, and screams her arousal like a cheap, overacting whore over the mountains and foothills. With how loud she is, you’re pretty sure that everyone will be able to hear you for miles - not that you care, or that you could back out now even if you did.", parse);
+	Text.NL();
+	Text.Add("Feebly, the centaur mare tries to reciprocate your efforts, but you’re moving too quickly and she’s simply too addled by her mounting lust that there’s no way she’s keeping up with you. Feminine honey oozes out from around your arm, dripping onto the grass at a steady rate, and the slow trembling in her body alerts you to her impending orgasm.", parse);
+	Text.NL();
+	Text.Add("Best to let it all out, then. Grinning widely, you give the centaur mare one good final thrust, twisting and wiggling your arm in her heated depths like some kind of tentacle. Her entire body tenses for a split second, and then her love-tunnel is gripping tightly at your limb as waves of orgiastic pleasure cascade through her form, leaving her a quivering wreck. Unable to keep standing, the centaur mare collapses on her knees, dragging you to the ground with her even as the puddle of slick juices she’s standing in continues to grow.", parse);
+	Text.NL();
+	Text.Add("Time to get out of here, then - your job is done. One last surge of effort has you free of her, your glistening fist emerging from the centaur’s now-gaping cunt with a pop and spray of girl-cum. Looking down at the centaur mare, you can’t help but feel at least a small amount of satisfaction as she whines and groans, the aftershocks of her tremendous orgasm carrying her a good way with their momentum before she finally comes to a panting, wheezing stop.", parse);
+	Text.NL();
+	Text.Add("Did she enjoy herself?", parse);
+	Text.NL();
+	Text.Add("<i>“Fuck.”</i>", parse);
+	Text.NL();
+	Text.Add("You’ll take that as a yes. Did this sate her, and does that mean that she won’t be troubling people on the highland roads for a little while now?", parse);
+	Text.NL();
+	Text.Add("<i>“Fuck. Fuck. Fuck.”</i> The centaur mare’s underbelly heaves in and out as she looks at you with stupid, glazed-over eyes. Compared to the proud warrior race girl schtick she was trying to pull off earlier, this suits her so much better. Either way, having had some much-needed relief for her heated cunt, she looks to be in no condition to be menacing the roads, so you’ve probably done the highlands a public service. Go you!", parse);
+	Text.NL();
+	Text.Add("Pumping in and out of the mare for that long did take quite a bit out of you as well, but you’re able to stroll on over to the centaur’s human half and give her a pat on the head with your cum-stained hand, then wipe your arm off all over her face and torso, as if you were applying some kind of lewd war-paint on her.", parse);
+	Text.NL();
+	Text.Add("There, much better! Smiling, you turn your back on the dazed centaur, leaving her by the roadside behind you. Before long, you are on your way.", parse);
+	Text.Flush();
+	
+	player.AddSexExp(2);
+	player.AddLustFraction(0.5);
+	
+	Gui.NextPrompt();
+}
+
+Scenes.MaliceScouts.Mare.LossPrompt = function() {
+	SetGameState(GameState.Event);
+	Text.Clear();
+	
+	// this = encounter
+	enc = this;
+	
+	var parse = {
+		
+	};
+	parse = player.ParserTags(parse);
+	
+	Gui.Callstack.push(function() {
+		Text.Clear();
+		Text.Add("There’s something about a huge mass of horseflesh that has a sense of weight and inevitability about it, one that you get a very keen appreciation for when the centaur mare charges and blindsides you, knocking ", parse);
+		if(player.weapon)
+			Text.Add("your [weapon] out of your [hand]s", parse);
+		else
+			Text.Add("the wind out of you", parse);
+		Text.Add(" and sending you reeling. Before you know it, she’s got the tip of her spear a hair’s breadth away from your throat.", parse);
+		Text.NL();
+		Text.Add("<i>“I told you that I’d <b>make</b> you service me if it came down to that, and so it has.”</i> She draws a deep breath of cool highland air to steady her words, shaking with mounting arousal, and continues. <i>“You fought well - or at least, as well as you could - but your strength has failed you. I hope that you’ve the good sense to acquiesce, or if not, at least submit to your fate.”</i>", parse);
+		Text.NL();
+		Text.Add("And what if you don’t?", parse);
+		Text.NL();
+		Text.Add("The centaur mare licks her lips. <i>“Then like it or not, I will take whatever I want from you anyway.”</i>", parse);
+		Text.NL();
+		
+		var armor = "";
+		if(player.Armor() || !player.LowerArmor()) armor += "[armor]";
+		if(player.Armor() && player.LowerArmor()) armor += " followed by your ";
+		if(player.LowerArmor()) armor += "[botarmor]";
+		parse["arm"] = Text.Parse(armor, parse);
+		
+		Text.Add("Your concentration is so focused on her spear-tip that you don’t notice one of her hooved forefeet lashing out, catching you soundly on the chest and sending you sprawling onto your back. Before you know it, she’s tossed aside her spear and shield and is on you, pawing messily at your [arm] in a frantic bid to get it off. It takes somewhat longer than one would expect thanks to how haphazardly she’s grabbing at the material, but eventually the lot is off and you’re at her mercy.", parse);
+		Text.NL();
+		Scenes.MaliceScouts.Mare.LossEntry(enc);
+	});
+	Encounter.prototype.onLoss.call(enc);
+}
+
+Scenes.MaliceScouts.Mare.LossEntry = function(enc) {
+	//TODO More Loss Scenes
+	var scenes = new EncounterTable();
+
+	scenes.AddEnc(function() {
+		Scenes.MaliceScouts.Mare.LossFacesit(enc);
+	}, 1.0, function() { return true; });
+	
+	/* TODO
+	scenes.AddEnc(function() {
+		
+	}, 1.0, function() { return true; });
+	*/
+	scenes.Get();
+}
+
+
+Scenes.MaliceScouts.Mare.LossFacesit = function(enc) {
+	var parse = {
+		
+	};
+	parse = player.ParserTags(parse);
+
+	Text.Add("Out of breath, the centaur mare pauses for a moment and considers you on the ground as she takes a moment to recover.", parse);
+	Text.NL();
+	Text.Add("<i>“Fuck. How to make sure this one won’t run away while fucking me.”</i> Another moment of hesitation as her eyes dart this way and that - guess she hasn’t actually thought anywhere past “waylay and beat up travelers on the road”, eh?", parse);
+	Text.NL();
+	Text.Add("<i>“Shut up,”</i> she replies, a scowl on her face. <i>“I’m trying to think.”</i>", parse);
+	Text.NL();
+	Text.Add("She scratches her head, looks around a little more, and then her eyes fall upon a large, flat-sided boulder a little ways to the side of the road. <i>“Guess that’ll have to do.”</i>", parse);
+	Text.NL();
+	Text.Add("Guess <i>what</i> will have to do? Before you can ask the question, though, the centaur mare’s grabbed you by the scruff of your neck and has begun dragging you towards the boulder. Of course, you’re obligated to put up a token resistance - which, of course, is ultimately ineffectual as she hoists you upright and pushes your back against the boulder’s smooth, flat side.", parse);
+	Text.NL();
+	Text.Add("Okay, now what?", parse);
+	Text.NL();
+	Text.Add("<i>“Don’t get lippy with me,”</i> the centaur mare snarls. <i>“Just because I need you to pleasure me doesn’t mean I can’t break a limb or two while at it.”</i>", parse);
+	Text.NL();
+	Text.Add("Twisting her neck so she can keep an eye on you, the mare turns about such that her shapely equine rear is directly facing you. Even like this, you can see her cunny winking at you from between her hindquarters, literally wet and dripping with arousal. There’s only a moment to wonder what she’s up to when she bucks backward forcefully, sandwiching you between a rock and a weighty mass of horseflesh.", parse);
+	Text.NL();
+	Text.Add("<i>“There’s no way you’re getting out from under this,”</i> she tells you as you put up yet another round of token struggle. <i>“You can enjoy it, or not, but either way the end result is the same.”</i>", parse);
+	Text.NL();
+	Text.Add("With that said, she wiggles her rounded rear all over your torso, giving you a good feel of all that supple, solid horseflesh rolling over your [skin], spreading her scent all over you. That goes doubly so for the musk rising from her juicy pussy - although it’s still some distance from your face, the very air itself is saturated with the needy scent of sex. You can’t escape it - the pervading aura forces its way into your nostrils and down your throat, making you cough and splutter a bit even as the centaur mare continues grinding against you.", parse);
+	Text.NL();
+	Text.Add("Another thrust up against you, and the mare has her ass cheeks spread wide, her cunny winking and dripping with heated need as she slides it further and further up, leaving a slick trail of girl-cum along the length of your body. Without warning, she shifts her weight again, and now she’s got your face well up and against her butt, her womanly flower overflowing with nectar and barely an inch or two from your lips.", parse);
+	Text.NL();
+	Text.Add("You can’t breathe! While you can get just enough air to avoid passing out - if you struggle to fill your lungs - the bulk of the mare’s supple butt cheeks are pressed into your face. All you can smell - or even taste - is her sex, and there’s no way to escape that overpowering scent now, so close as you are to its source.", parse);
+	Text.NL();
+	Text.Add("<i>“Lick,”</i> the centaur mare commands in an authoritative voice - or at least, as authoritative as one can get when one’s practically riddled with need. <i>“I’m sorry, but I can’t risk you getting away. The sooner you’re done, the sooner you can be released.”</i>", parse);
+	Text.NL();
+	Text.Add("Nothing for it, then. Gingerly, you brush the tip of your [tongue] across her mare folds, and taste her feminine nectar for real. Back and forth, back and forth, you begin teasing the centaur mare’s labia with your tongue-tip, quick touches and flicks that while providing enough sensation, also harbor the promise of so much more.", parse);
+	Text.NL();
+	Text.Add("The centaur mare shifts her weight again, her voice trembling. <i>“T-there’s no need to bother with foreplay. Just get to it already!”</i>", parse);
+	Text.NL();
+	Text.Add("She may have beaten you and may be forcing you to eat her out, but at least this is something you still have control over. Taking your time, you lap at her love-button like a kitten at a saucer of milk, with much the same effect - the centaur mare nickers and moans as you continue your tender ministrations, juices practically gushing down her cunt, dribbling down your chin and running down her legs, but the sheer bulk of her body and barding is ensuring that you still aren’t going anywhere in a hurry.", parse);
+	Text.NL();
+	Text.Add("Fine, now that you’re done with the appetizers, time to get on with the main course. You pause a moment beforehand to get all the air you can, then press your lips to her juicy cunt and start licking. With her rump in your face, you can’t quite see her face, but you can definitely <i>hear</i> her scream in a mixture of release and relief as she’s given a reprieve from her desperate lusts.", parse);
+	Text.NL();
+	Text.Add("<i>“Fuck,”</i> she groans. <i>“Fuuuuck. That’s it, yes. That’s. Just. It.”</i>", parse);
+	Text.NL();
+	Text.Add("Great! Since she liked that, who wants to bet she wants even more! You work your tongue over the centaur mare's cunny and dive into it shamelessly, putting all your strength into it as you do your best to bring her to climax as quickly as possible. One has to admit, the taste of the mare's hot juices is deliciously arousing despite the circumstances, and you lap up as much of it as you can get.", parse);
+	Text.NL();
+	Text.Add("Hot and sticky, the scent and taste of her nectar overwhelms your senses, blinding you to pretty much everything else but the mare and her pussy. The more you lick away, the faster and freer it flows, and with her ass pressed up against your face, you can feel the muscles beneath shifting, flexing, squeezing as you drive her closer and closer to finally letting loose all that pent-up sexual energy she’s got in her body.", parse);
+	Text.NL();
+	Text.Add("At long last, you break down the last of the centaur mare’s inhibitions and she cums with a loud whinny of release, stamping at the ground with her hooved forefeet as shockwaves of ecstasy travel up and down the length of her body. Hot and sticky with girl-cum, you pant for breath as she finally pulls her ass away and collapses onto her knees and equine underbelly, her head bowed as she balls her fists and groans needily.", parse);
+	Text.NL();
+	Text.Add("My, my, wasn’t she just so pent-up - it must have taken an iron will for her to have held it back for so long. As you look on, the centaur mare cums not once but twice more from the aftershocks of her first orgasm, needing no further stimulation on your part - the sheer rush from the release of all that sexual energy is enough to drive her over the edge. Squirt after squirt of nectar lands on the grass, wetting it until her hind legs are in a messy puddle of her own sexual fluids.", parse);
+	Text.NL();
+	Text.Add("<i>“Shit,”</i> she groans, then looks back at you. Her lips move and she tries to say something, but all that comes out is a bunch of garbled nonsense - she tries this a few more times, then finally gives up and shuts her yap. Well, it’s not as if you’d had have the energy to carry on a meaningful conversation anyway - it’s all you can do to slump down on the ground, sliding down the boulder’s smooth surface until the you can feel the cool grass beneath you.", parse);
+	Text.NL();
+	Text.Add("And just like that, it’s over. It’s clear that the centaur mare has gotten some much-needed relief for her heat-filled cunt - hopefully by taking one for the team, she won’t be harassing travelers on the highlands roads for some time now. Quick and dirty, with perhaps no real pleasure from the deed, but what needs to be done has been done.", parse);
+	Text.NL();
+	
+	var armor = "";
+	if(player.Armor() || !player.LowerArmor()) armor += "[armor]";
+	if(player.Armor() && player.LowerArmor()) armor += " followed by your ";
+	if(player.LowerArmor()) armor += "[botarmor]";
+	parse["arm"] = Text.Parse(armor, parse);
+	
+	Text.Add("Seems there nothing left for you here now. Leaving the centaur mare to recover in her own time, you gather your [arm] and are on your way. Before long, you crest the next hill, and the centaur vanishes from sight.", parse);
+	Text.Flush();
+	
+	player.AddSexExp(2);
+	player.AddLustFraction(0.5);
 	
 	Gui.NextPrompt();
 }

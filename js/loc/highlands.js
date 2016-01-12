@@ -68,6 +68,14 @@ world.loc.Highlands.Hills.AddEncounter({
 	visible : true, enabled : true, hunt : true
 });
 
+world.loc.Highlands.Hills.AddEncounter({
+	nameStr : "Centauress",
+	func    : function() {
+		return Scenes.MaliceScouts.Mare.LoneEncounter(1);
+	}, odds : 1, enc : true,
+	visible : true, enabled : true, hunt : true
+});
+
 world.loc.Highlands.Hills.enc.AddEnc(function() {
 	return Scenes.Momo.MomoEnc;
 }, 1.0, function() { return momo.Wandering(); });
