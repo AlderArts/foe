@@ -732,7 +732,7 @@ Scenes.Felines.WinCatchVag = function(mainCat, enemy) {
 	Text.NL();
 	Text.Add("The feline mewls softly in pleasure, thrusting [hisher] chest out to give you easier access, and you reward [himher] with a few more pinches on [hisher] nipples.", parse);
 	Text.NL();
-	Text.Add("Now that the [cat] is feeling more at ease, you decide to show [himher] what you really want. You touch [hisher] belly, then move downwards to [hisher] furry sheath, pulling it down to expose the tip of his kitty-pecker.", parse);
+	Text.Add("Now that the [cat] is feeling more at ease, you decide to show [himher] what you really want. You touch [hisher] belly, then move downwards to [hisher] furry sheath, pulling it down to expose the tip of [hisher] kitty-pecker.", parse);
 	Text.NL();
 	Text.Add("The [cat] mewls in pleasure, sitting on [hisher] haunches and further spreading [hisher] legs to give you better access.", parse);
 	Text.NL();
