@@ -2303,9 +2303,9 @@ Scenes.Felines.LossPitchVaginal = function(cat, group, enc, cocksInVag) {
 	Text.NL();
 	Text.Add("By this time, your [cock] is as hard as it's going to get - thick and strong with your desire as her fingers trace designs across its sensitive surface with playful possessiveness. Your breathing quickens involuntarily, and you watch her intently, waiting to see what she intends for you.", parse);
 	Text.NL();
-	parse["legs"] = player.LowerBodyType() == LowerBodyType.Single ? "besides your" : "between your spread";
+	parse["l"] = player.LowerBodyType() == LowerBodyType.Single ? "besides your" : "between your spread";
 	parse["fem"] = player.mfFem("Y", "Despite not looking like it, y");
-	Text.Add("Smirking knowingly at you, [name] kneels [legs] [legs], extending her feline tongue to lap at your [cockTip] and tasting your pre. <i>“Such a thick cream...”</i> she trails off in a purr. <i>“[fem]ou are quite the stud aren’t you?”</i> she asks teasingly.", parse);
+	Text.Add("Smirking knowingly at you, [name] kneels [l] [legs], extending her feline tongue to lap at your [cockTip] and tasting your pre. <i>“Such a thick cream...”</i> she trails off in a purr. <i>“[fem]ou are quite the stud aren’t you?”</i> she asks teasingly.", parse);
 	Text.NL();
 	if(dom)
 		Text.Add("Despite yourself, you feel pride at that. It's good to see that she recognizes your natural abilities. Now, if only you were the one leading, this might not be so bad...", parse);
