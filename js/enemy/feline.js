@@ -82,6 +82,13 @@ function Wildcat(gender, levelbonus) {
 		if(Math.random() < 0.6)
 			this.FirstVag().virgin = false;
 	}
+	if(this.FirstVag()) {
+		this.FirstVag().capacity.base = 8;
+	}
+	this.Butt().capacity.base = 8;
+	if(Math.random() < 0.6)
+		this.Butt().virgin = false;
+	
 	this.desc      = "large wildcat";
 	this.GroupName = "The wildcats";
 	this.groupName = "the wildcats";
@@ -888,7 +895,7 @@ Scenes.Felines.WinFuckVag = function(cat, group, enc, cocks, numFemales) {
 		parse["notS2"] = player.NumCocks() > 2 ? "" : "s";
 		Text.Add(" Your other cock[s2] bob[notS2] up and down, rubbing against her sensitive [clitCock] each time you thrust into her.", parse);
 	}
-	parse["thick"] = pCock.thickness.Get() > 7 ? ", wondering how long that is going to last, if you run into her more frequently" : "";
+	parse["thick"] = pCock.thickness.Get() >= 6 ? ", wondering how long that is going to last, if you run into her more frequently" : "";
 	Text.Add(" You grunt, complimenting her on her tightness[thick]. She only gasps in response. You can feel her heart pounding as you bottom out, your groins joined as one.", parse);
 	if(player.HasBalls())
 		Text.Add(" Below the tight embrace of her pussy, your balls rub against her exposed cheeks, making a promise to fill her with their stored seed.", parse);
