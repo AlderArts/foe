@@ -1135,7 +1135,6 @@ Scenes.Felines.WinFuckButt = function(cat, group, enc, cocks) {
 	Text.NL();
 	
 	parse["oneof"] = player.NumCocks() > 1 && !pCock.isStrapon ? " one of" : "";
-	parse["cock"] = pCock.strapOn ? pCock.Short() : player.MultiCockDesc();
 	Text.Add("The kitty gulps nervously as you line up[oneof] your [cock] with [hisher] puckered ass, though by now, [hisher] fear has been all but squashed by [hisher] lust. As a further testament to this, [heshe] betrays [hisher] eagerness to be fucked by grasping [hisher] buttcheeks with [hisher] paws, spreading them wide and welcoming you to ravage [himher]. ", parse);
 	if(player.sex.gAnal >= 20)
 		Text.Add("Always happy to introduce another slut to the joys of anal sex, you gleefully thrust your [cock] into [hisher] butt. [HeShe] is in for quite a ride.", parse);
@@ -1149,8 +1148,8 @@ Scenes.Felines.WinFuckButt = function(cat, group, enc, cocks) {
 	Sex.Anal(player, cat);
 	player.Fuck(pCock, 3);
 	
-	parse["cock"] = cat.FirstCock() ? Text.Parse("around [hisher] cock", parse) : "into her cunt";
-	Text.Add("At first, you are only able to force your [cockTip] past [possessive] withering defenses, but after a bit of work, more and more of [hisher] anal passage falls to your advancing [cock]. Grunting with pleasure, you rock your [hips], digging deeper and deeper inside the pliant kitty. [HeShe] adapts surprisingly quick to the rough pace you set, moaning appreciatively [cock]. [Name] seems to be having a good time so far, but you are barely getting started.", parse);
+	parse["catcock"] = cat.FirstCock() ? Text.Parse("around [hisher] cock", parse) : "into her cunt";
+	Text.Add("At first, you are only able to force your [cockTip] past [possessive] withering defenses, but after a bit of work, more and more of [hisher] anal passage falls to your advancing [cock]. Grunting with pleasure, you rock your [hips], digging deeper and deeper inside the pliant kitty. [HeShe] adapts surprisingly quick to the rough pace you set, moaning appreciatively [catcock]. [Name] seems to be having a good time so far, but you are barely getting started.", parse);
 	Text.NL();
 	if(pCock.length.Get() > 30)
 		Text.Add("The feline is protesting every bit of the way, [hisher] cries and moans alternating between pain at being stretched wide open and the pleasure of being fucked like the subservient slut [heshe] is. Eventually you realize that you are simply too big for [himher], not that this fact will stop you from fucking [possessive] brains out.", parse);
@@ -1160,8 +1159,8 @@ Scenes.Felines.WinFuckButt = function(cat, group, enc, cocks) {
 	if(player.NumCocks() > 1) {
 		parse["s"] = player.NumCocks() > 2 ? "s" : "";
 		parse["isAre"] = player.NumCocks() > 2 ? "are" : "is";
-		parse["cock"] = cat.FirstCock() ? Text.Parse("sucking [hisher] cock", parse) : "lapping at her cunt";
-		Text.Add("Your other bobbing shaft[s] [isAre] dancing hypnotizingly in front of [possessive] half-closed eyes. Taking some time off from [cock], [heshe] raises [hisher] head to give you a lick. The kitty runs [hisher] rough tongue along the bottom of[oneof] your dick[s], lathering it from root to tip.", parse);
+		parse["catcock"] = cat.FirstCock() ? Text.Parse("sucking [hisher] cock", parse) : "lapping at her cunt";
+		Text.Add("Your other bobbing shaft[s] [isAre] dancing hypnotizingly in front of [possessive] half-closed eyes. Taking some time off from [catcock], [heshe] raises [hisher] head to give you a lick. The kitty runs [hisher] rough tongue along the bottom of[oneof] your dick[s], lathering it from root to tip.", parse);
 		Text.NL();
 	}
 	Text.NL();
