@@ -2296,7 +2296,7 @@ Scenes.Felines.LossPitchVaginal = function(cat, group, enc, cocksInVag) {
 	var dom    = player.SubDom() > 0;
 	
 	Text.NL();
-	Text.Add("<i>“Let’s see what you’re hiding behind this [armor].”</i> [Name] doesn’t wait for a reply before stripping you down to your birthday suit, tossing the pieces of your [armor] about. Once done, she takes a step back to examine what you have to offer.", parse);
+	Text.Add("<i>“Let’s see what you’re hiding behind this [armor].”</i> [Name] doesn’t wait for a reply before stripping you down to your birthday suit, tossing your [armor] away. Once done, she takes a step back to examine what you have to offer.", parse);
 	Text.NL();
 	parse["pushingRolling"] = player.LowerBodyType() == LowerBodyType.Single ? "rolling" : "pushing";
 	Text.Add("[HisHer] gaze immediately settles on your [cocks]. <i>“Oh, what a juicy treat you have here. Is all of that for me? You shouldn’t have,”</i> [name] giggles, [pushingRolling] you onto your back. She extends a clawed hand to grip[oneof] your [cocks], taking extreme care not to hurt you as she gives it an experimental stroke.", parse);
@@ -2313,7 +2313,7 @@ Scenes.Felines.LossPitchVaginal = function(cat, group, enc, cocksInVag) {
 	Text.NL();
 	parse["l"] = player.LowerBodyType() == LowerBodyType.Single ? "besides your" : "between your spread";
 	parse["fem"] = player.mfFem("Y", "Despite not looking like it, y");
-	Text.Add("Smirking knowingly at you, [name] kneels [l] [legs], extending her feline tongue to lap at your [cockTip] and tasting your pre. <i>“Such a thick cream...”</i> she trails off in a purr. <i>“[fem]ou are quite the stud aren’t you?”</i> she asks teasingly.", parse);
+	Text.Add("Smirking knowingly at you, [name] kneels [l] [legs], extending her feline tongue to lap at your [cockTip] and tasting your pre. <i>“Such a thick cream...”</i> she trails off in a purr. <i>“[fem]ou are quite the stud, aren’t you?”</i> she asks teasingly.", parse);
 	Text.NL();
 	if(dom)
 		Text.Add("Despite yourself, you feel pride at that. It's good to see that she recognizes your natural abilities. Now, if only you were the one leading, this might not be so bad...", parse);
@@ -2322,7 +2322,7 @@ Scenes.Felines.LossPitchVaginal = function(cat, group, enc, cocksInVag) {
 	Text.NL();
 	if(group) {
 		parse["s"] = group ? "s" : "";
-		Text.Add("<i>“Let’s hope you can show me a good time, unlike present company,”</i> she looks at her friend[s] in disdain. <i>“Now where was I? Oh yes, tasty cock for the hungry cat,”</i> she licks her lips crawling over your prone form until you can feel her soft, warm folds aligning with your [cock].", parse);
+		Text.Add("<i>“Let’s hope you can show me a good time, unlike present company,”</i> she looks at her friend[s] in disdain. <i>“Now, where was I? Oh yes, tasty cock for the hungry cat.”</i> She licks her lips and starts crawling over your prone form until you can feel her soft, warm folds aligning with your [cock].", parse);
 	}
 	else {
 		Text.Add("<i>“Well, I think I’ll be taking you for a ride. It’s not every day I come across such a tasty specimen as yourself, dear,”</i> [name] says, grinning. She gives your [cockTip] a kiss and crawls over your prone form until you can feel her soft, warm folds teasing your [cock] with the promise of its velvety embrace.", parse);
@@ -2341,15 +2341,15 @@ Scenes.Felines.LossPitchVaginal = function(cat, group, enc, cocksInVag) {
 		Text.Add("<i>“That was nice, but we both know you can do better. Come here, there’s no need to be shy,”</i> she teases, giggling as she pull you into a kiss of her own. She licks your lips experimentally, and you respond by granting her access, allowing your tongues to stroke each other inside your mouth. [Name] holds the embrace for a moment, before breaking it with a smile, drawing a sigh of pleasure from you. <i>“This is a real kiss, dear,”</i> she says, licking her lips clean of your saliva. <i>“But let’s not get sidetracked,”</i> she adds, finally bearing down upon you.", parse);
 	}
 	Text.NL();
-	Text.Add("Your whole body tenses as her warmth begins sliding with tantalising slowness over your [cockTip]. You are engulfed in warm, wet flesh, surrounding you and enveloping you, clinging to you even as she hungrily sucks you inside. Unthinkingly, you moan in desire, trying to buck your [hips] in an effort to feed more and more of your length inside of her.", parse);
+	Text.Add("Your whole body tenses as her warmth begins sliding with tantalizing slowness over your [cockTip]. You are engulfed in warm, wet flesh, surrounding and enveloping you, clinging to you even as she hungrily sucks you inside. Unthinkingly, you moan in desire, trying to buck your [hips] in an effort to feed more and more of your length inside of her.", parse);
 	Text.NL();
 	
 	Sex.Vaginal(player, cat);
 	player.Fuck(pCock, 3);
 	
-	Text.Add("[Possessive] own moans of pleasure matches your own, and you can hear the deep rumbling of her purrs as your hips finally connect. Your short humps make soft slapping noises as her tunnel grows wet enough to drip rivulets of femcum down your shaft. <i>“Oh, yessss…”</i> she trails off from a meow as she begins rising.", parse);
+	Text.Add("[Possessive] own moans of pleasure matches yours, and you can hear the deep rumbling of her purrs as your hips finally connect. Your short humps make soft slapping noises as her tunnel grows wet enough to drip rivulets of femcum down your shaft. <i>“Oh, yessss…”</i> she trails off from a meow as she begins rising.", parse);
 	Text.NL();
-	Text.Add("Your hands reach for your partner's hips, sinking your fingers into the firm flesh of her buttcheeks for stability. With a lewd moan of your own, you start to meet her back, thrust for thrust, and then push the pace. Your [cock] is surrounded in steamy hot, silken flesh, her walls wringing down around your length, grinding you in pursuit of pleasure.", parse);
+	Text.Add("Your hands reach for your partner's hips, sinking your fingers into the firm flesh of her butt cheeks for stability. With a lewd moan of your own, you start to meet her back, thrust for thrust, and then push the pace. Your [cock] is surrounded in steamy, hot, silken flesh, her walls wringing down around your length, grinding you in pursuit of pleasure.", parse);
 	if(cat.FirstCock())
 		Text.Add(" Her own neglected catdick slaps wetly against your belly, forgotten about in your mutual eagerness to quench the fires in her cunt.", parse);
 	Text.NL();
@@ -2357,19 +2357,19 @@ Scenes.Felines.LossPitchVaginal = function(cat, group, enc, cocksInVag) {
 		Text.Add("Your [cock2Desc] rubs through the toned cheeks of her ass, poking away at the base of her flicking tail with each thrust you make. Her soft fur tickles quite pleasantly against your dick. ", parse);
 	}
 	else if(player.NumCocks() >= 3) {
-		Text.Add("Your [cock2Desc] rubs through the toned cheeks of her ass, poking away at the base of her flicking tail with each thrust you make. Her soft fur tickles quite pleasantly against your dick. Meanwhile, your [cocks2] slaps and jabs against her stomach and her thighs, completely abandoned. ", parse);
+		Text.Add("Your [cock2Desc] rubs through the toned cheeks of her ass, poking away at the base of her flicking tail with each thrust you make. Her soft fur tickles quite pleasantly against your dick. Meanwhile, your [cocks2] slap[notS] and jab[notS] against her stomach and her thighs, completely abandoned. ", parse);
 	}
 	var lactation = player.Lactation();
 	parse["lact"] = lactation ? "purring louder when she tastes a drop of your milk" : "purring as you ream her pussy";
 	Text.Add("[Name] bends down to give your [nips] a lick, [lact].", parse);
 	Text.NL();
 	if(lactation) {
-		Text.Add("<i>“Milk!?”</i> she exclaims in surprise, giving your [breasts] a squeeze and watching in glee as a white droplet slides down your soft mound. <i>“You’ve got cream and milk? Oh my, you’re quite the find aren’t you?”</i> she purrs appreciatively, leaning down to take on of your [nips] into her mouth and drain you of your milk.", parse);
+		Text.Add("<i>“Milk!?”</i> she exclaims in surprise, giving your [breasts] a squeeze and watching in glee as a white droplet slides down your soft mound. <i>“You’ve got cream and milk? Oh my, you’re quite the find, aren’t you?”</i> she purrs appreciatively, leaning down to take on of your [nips] into her mouth and drain you of your milk.", parse);
 	Text.NL();
 	if(dom)
 		Text.Add("That you are, you reply, before informing her that she better drink up; she's going to need her strength. For emphasis, one of your hands rises from her sweet ass and presses against the back of her head, pushing her harder against your tit. Not that she seems to need the encouragement; you moan in delight as she avidly suckles from you.", parse);
 	else
-		Text.Add("You tell her that you can only hope she enjoys it, moaning ecstatically as her tongue dances teasingly across your [nip], unthinkingly pushing your chest out so she will dive ever deeper into your bosom. You feel so <i>good</i>, your cock wrapped in kitten pussy, your milk pouring into an appreciative belly...", parse);
+		Text.Add("You tell her that you can only hope she enjoys it, moaning ecstatically as her tongue dances teasingly across your [nip], unthinkingly pushing your chest out so she will dive ever deeper into your bosom. You feel so <i>good</i>, your cock wrapped in kitty pussy, and your milk pouring into an appreciative belly...", parse);
 	Text.NL();
 	}
 	Text.Add("As the pleasure builds up, you feel her honeypot clamping down on your [cock]. Her shaky knees and weakening legs indicate that it’s only a matter of time before she cums. You can’t say you’re lagging behind either. As her oncoming climax nears and she grows weak, you figure that you could take matters into your own hands and give her a pounding that she’ll remember for weeks. Or you could just sit back and let her cocksleeve milk you dry. Then again, you could also pull out and finish up on her chest. What do you do?", parse);
@@ -2388,18 +2388,18 @@ Scenes.Felines.LossPitchVaginal = function(cat, group, enc, cocksInVag) {
 			Text.Add("[Name] is initially surprised by your sudden burst of enthusiasm, but whatever form of protest she might be thinking of is quickly dashed into a string of moans, yowls and screams as you pound her raw. She doesn’t struggle against your grip, more than happy to receive your rough fucking. All she does is grip the grass for balance as she tries her best to hump you back.", parse);
 			Text.NL();
 			parse["throughInside"] = player.HasBalls() ? "through" : "inside";
-			Text.Add("Grunting with mingled pleasure and effort, you keep on fucking her with all your might; you can feel it building inside of you, electricity crackling [throughInside] your [ballsDesc]. You can feel the limits of your resistance fraying with every fraction of a second, until finally they snap; with a roar of pleasure, you slam yourself inside of her to the hilt and cum, holding her as tightly as you can to ensure not a drop of it goes astray.", parse);
+			Text.Add("Grunting with mingled pleasure and effort, you keep on fucking her with all your might; you can feel it building within you, electricity crackling [throughInside] your [ballsDesc]. You can feel the limits of your resistance fraying with every fraction of a second, until finally they snap; with a roar of pleasure, you slam yourself inside of her to the hilt and cum, holding her as tightly as you can to ensure not a drop of it goes astray.", parse);
 			Text.NL();
 			parse["cum"] = player.OrgasmCum() > 4 ? ", her stomach bulging from the sheer volume of your climax" : "";
-			Text.Add("Finally you have emptied yourself completely into her[cum], and you pull your [cock] free before allowing her legs to drop beside you. Breathing hard, you flop ungraciously onto the ground below you, hanging your head as you inhale and exhale in an effort to recover.", parse);
+			Text.Add("Finally, you have emptied yourself completely into her[cum], and you pull your [cock] free before allowing her legs to drop beside you. Breathing hard, you flop ungraciously onto the ground below you, hanging your head as you inhale and exhale in an effort to recover.", parse);
 			Text.NL();
-			Text.Add("It takes a moment before [name] find the energy to stand. Once she does, she approaches you, giving you an appreciative pat on the head. <i>“That was pretty good! I can’t remember the last time I came this hard,”</i> she purrs.", parse);
+			Text.Add("It takes a moment before [name] finds the energy to stand. Once she does, she approaches you, giving you an appreciative pat on the head. <i>“That was pretty good! I can’t remember the last time I came this hard,”</i> she purrs.", parse);
 			Text.NL();
 			Text.Add("Looking up at the feline, you can see her lips curled in an honest smile of appreciation.", parse);
 			if(cat.FirstCock())
 				Text.Add("You can also see pearly strands of her own semen splashed across her tits and even speckling her face.", parse);
 			Text.NL();
-			Text.Add("She rubs her sore nethers, wincing a bit as she dips her finger inside to withdraw a stray dollop of your jism. Licking her lips, she unceremoniously licks finger clean, enjoying the flavor of your thick cream. <i>“Hmm, tasty!”</i> she remarks. Turning to look down at you, she grins. <i>“Sorry for not sticking around, stud. But I really must be going. So I’ll see you around,”</i> she bids you farewell, throwing a smooch at you. ", parse);
+			Text.Add("She rubs her sore nethers, wincing a bit as she dips her finger inside to withdraw a stray dollop of your jism. Running her tongue over her lips, she unceremoniously licks finger clean, enjoying the flavor of your thick cream. <i>“Hmm, tasty!”</i> she remarks. Turning to look down at you, she grins. <i>“Sorry for not sticking around, stud. But I really must be going, so I’ll see you around,”</i> she bids you farewell, throwing a smooch at you. ", parse);
 			if(cat.FirstCock() && group) {
 				parse["oneof"] = enc.enemy.length > 2 ? " one of" : "";
 				parse["s"]     = enc.enemy.length > 2 ? "s" : "";
@@ -2426,30 +2426,30 @@ Scenes.Felines.LossPitchVaginal = function(cat, group, enc, cocksInVag) {
 	options.push({ nameStr : "LayBack",
 		func : function() {
 			Text.Clear();
-			Text.Add("With a soft, moaning sigh of contentment, you allow yourself to settle back against the ground. Your own motions nearly cease, content as you are to languidly lay there and cup her buttocks in your hands, feeling the flesh squish and flex most interestingly amidst your fingers. Giving yourself over to her entirely, you submit to being used like a toy, content to allow her to bring you both to your mutual climax. Your mind goes nearly blank, casting aside everything but the weight of your feline lover atop you, the feel of her fur against your [skin], the slapping of flesh on flesh and the sensations of her milking your cock for all she's worth.", parse);
+			Text.Add("With a soft, moaning sigh of contentment, you allow yourself to settle back against the ground. Your own motions nearly cease, content as you are to languidly lie there and cup her buttocks in your hands, feeling the flesh squish and flex most interestingly amidst your fingers. Giving yourself over to her entirely, you submit to being used like a toy, content to allow her to bring you both to your mutual climax. Your mind goes nearly blank, casting aside everything but the weight of your feline lover atop you, the feel of her fur against your [skin], the slapping of flesh on flesh and the sensations of her milking your cock for all she's worth.", parse);
 			Text.NL();
-			parse["balls"] = player.HasBalls() ? Text.Parse(" and your [ballsDesc] churn,", parse) : "";
-			Text.Add("It doesn’t take long before you feel yourself throbbing within [possessive] vagina. Pleasure surges across your body,[balls] as you spill the first jet of cum within her waiting cunt.", parse);
+			parse["balls"] = player.HasBalls() ? Text.Parse(", and your [ballsDesc] churn,", parse) : "";
+			Text.Add("It doesn’t take long before you feel yourself throbbing within [possessive] vagina. Pleasure surges across your body[balls] as you spill the first jet of cum within her waiting cunt.", parse);
 			Text.NL();
 			parse["deep"] = pCock.length.Get() > 20 ? "forcefully jam against her cervix" : "reach as deep within her quivering pussy as possible";
-			Text.Add("Your orgasm draws a startled yelp from [name], knocking her off balance and forcing her to fall onto your [cock], causing your [cockTip] to [deep]. [Name] screams in delight as you fill her to capacity. Her pussy spasms around your [cock], coaxing you to deposit as much of your fertile cream as you can manage.", parse);
+			Text.Add("Your orgasm draws a startled yelp from [name], knocking her off balance and forcing her to fall onto your [cock], causing your [cockTip] to [deep]. [Name] screams in delight as you fill her to capacity. Her cunt spasms around your [cock], coaxing you to deposit as much of your fertile cream as you can manage.", parse);
 			Text.NL();
-			Text.Add("You are more than happy to comply with her efforts, crying out your pleasure in sync with hers as you empty yourself her willing depths.", parse);
+			Text.Add("You are more than happy to comply with her efforts, crying out your pleasure in sync with hers as you empty yourself in her willing depths.", parse);
 			if(player.FirstVag())
 				Text.Add(" Your neglected [vag] pours its fluids into the thirsty earth below you.", parse);
 			if(cat.FirstCock())
 				Text.Add(" Ignored between you, her girl-cock sprays a thick, hot, sticky splash of jism across your stomach, smearing you both with dickcream.", parse);
-			Text.Add(" Finally, inevitably, the electric thrill of ejaculation fades away and is replaced by the warmth of your afterglow.", parse);
+			Text.Add(" Finally - inevitably - the electric thrill of ejaculation fades away and is replaced by the warmth of your afterglow.", parse);
 			if(player.OrgasmCum() > 4)
 				Text.Add(" You can feel her seed-distended stomach pushing against your own [belly], visibly bloated by the sheer volume of your climax.", parse);
 			Text.NL();
-			Text.Add("With a sigh of contentment, you settle back into the divot your body has occupied on the ground, unthinkingly cradling your feline lover to give her greater comfort atop your body.", parse);
+			Text.Add("With a sigh of contentment, you settle back into the divot your body has occupied on the ground. Unthinkingly, you cradle your feline lover to give her greater comfort atop of you", parse);
 			if(cat.FirstCock())
-				Text.Add(" As best that's possible given the herm-seed squelching wetly between your bodies.", parse);
+				Text.Add(" as best that's possible given the herm-seed squelching wetly between your bodies", parse);
 			if(dom)
-				Text.Add(" Absently, you pet her head, caressing her ears.", parse);
+				Text.Add(". Absently, you pet her head, caressing her ears.", parse);
 			else
-				Text.Add(" With a smile, you nuzzle her cheek with your own, running your fingers affectionately through her hair.", parse);
+				Text.Add(". With a smile, you nuzzle her cheek with your own, running your fingers affectionately through her hair.", parse);
 			Text.NL();
 			Text.Add("<i>“Ah… that was great, lover. Just what I needed,”</i> she purrs.", parse);
 			var cocked = 0;
@@ -2468,10 +2468,10 @@ Scenes.Felines.LossPitchVaginal = function(cat, group, enc, cocksInVag) {
 				Text.Add("Next time, though, you get to be on top, you reply to her.", parse);
 			else
 				Text.Add("You tell her that you're already looking forward to it.", parse);
-			Text.Add(" Extracting herself from your used member, she stretches the kinks out of her joints and saunters away.<i> “You can clean yourself up, right? Right. Cya around, stud. Do visit me again when I’m in heat,”</i> she giggles.", parse);
+			Text.Add(" Extracting herself from your used member, she stretches the kinks out of her joints and saunters away. <i>“You can clean yourself up, right? Right. See ya around, stud. Do visit me again when I’m in heat,”</i> she giggles.", parse);
 			if(group) {
 				parse["s"] = group ? "s" : "";
-				Text.Add(" As she goes you notice her signalling for her companion[s] to follow, which they do.", parse);
+				Text.Add(" As she goes, you notice her signaling for her companion[s] to follow, which they do.", parse);
 			}
 			Text.Flush();
 			
@@ -2487,27 +2487,27 @@ Scenes.Felines.LossPitchVaginal = function(cat, group, enc, cocksInVag) {
 		func : function() {
 			Text.Clear();
 			if(dom)
-				Text.Add("It's time to take charge of this matter. With a fierceness more becoming of you, you suddenly surge into motion, pushing the startled [name] atop you over onto her back and pinning her down with your weight.", parse);
+				Text.Add("It's time to take charge of this matter. With a fierceness more becoming of you, you suddenly surge into motion, pushing the startled feline atop of you over onto her back and pinning her down with your weight.", parse);
 			else
-				Text.Add("It's not really like you at all, but this is one time when you need to assert yourself. Unexpecting your sudden, uncharacteristic display of defiance, the [name] mounting you is unprepared when you suddenly give her a fierce shove. With surprise on your side, you are able to lever her over and pin her down underneath you.", parse);
+				Text.Add("It's not really like you at all, but this is one time when you need to assert yourself. Unexpecting your sudden, uncharacteristic display of defiance, [name] mounting you is unprepared when you suddenly give her a fierce shove. With surprise on your side, you are able to lever her over and pin her down underneath you.", parse);
 			Text.NL();
 			Text.Add("[Possessive] startled yelp is silenced as you plunge inside her deeper than ever, battering her cervix with your [cockTip], drawing a whorish moan of pleasure, and then frustration as you pull out. As quickly as you can manage, you shove your [cock] between her luxurious mounds.", parse);
 			Text.NL();
 			parse["balls"] = player.HasBalls() ? Text.Parse("your [ballsDesc] churn", parse) : "an electric shock course through your prostate";
-			Text.Add("[Name] quickly catches on to your plans, as she grips her tits and mashes them together onto your shaft. The fur of her orbs tickle you as you plaster them with your mixed fluids, groaning as you feel [balls].", parse);
+			Text.Add("[Name] quickly catches on to your plans, and she grips her tits and mashes them together onto your shaft. The fur of her orbs tickle you as you plaster them with your mixed fluids, groaning as you feel [balls].", parse);
 			Text.NL();
-			Text.Add("Her breasts feel incredible on your dick, the warm flesh and its soft coating of fur tickling deliciously against your pleasure-sensitive cockmeat. After a few humps, you find your limit reached. Crying out in pleasure, you bury yourself as deep into her cleavage as possible and let loose, showering her tits and her face alike.", parse);
+			Text.Add("Her breasts feel incredible on your dick, the warm flesh and its soft coating of fur tickling deliciously against your pleasure sensitive cockmeat. After a few humps, you find your limit reached. Crying out in pleasure, you bury yourself as deep into her cleavage as possible and let loose, showering her tits and her face alike.", parse);
 			Text.NL();
-			Text.Add("In the midst of your climax, a thought pierces the haze, and reacting on pure instinct you reach back and forcefully stuff a couple of fingers into her now-empty pussy. You drive them into the grasping walls to the knuckles, and she yowls in rapture as your action provides the last bit of stimulus she needs. Her hands fly from her tits to grip madly at the soil below her, clawing for a grip as her jaws gape in pleasure. Though most of it misses the mark, some of your seed is definitely making its way inside her open mouth.", parse);
+			Text.Add("In the midst of your climax, a thought pierces the haze, and reacting on pure instinct you reach back and forcefully stuff a couple of fingers into her now-empty pussy. You drive them into the grasping walls to the knuckles, and she yowls in rapture as your action provides the last bit of stimulus she needs. Her hands fly from her tits to grab madly at the soil below her, clawing for a grip as her jaws gape in pleasure. Though most of it misses the mark, some of your seed is definitely making its way inside her open mouth.", parse);
 			Text.NL();
 			player.OrgasmCum();
-			Text.Add("Finally, blissfully, the feelings of climax come to an end and you collapse tiredly beside your feline partner. Laying there on your side in the dirt, basking in the warmth of afterglow, you watch absently as [name] heaves for breath, making her tits jiggle quite nicely.", parse);
+			Text.Add("Finally - blissfully - the feelings of climax come to an end and you collapse tiredly beside your feline partner. Lying there on your side in the dirt, basking in the warmth of afterglow, you watch absently as [name] heaves for breath, making her tits jiggle quite nicely.", parse);
 			Text.NL();
 			Text.Add("The kitty takes a moment to catch her breath, before she starts scraping the strands of your thick cream from her face and licking her hand clean. <i>“That was unexpected,”</i> she remarks. <i>“But you did show me a good time,”</i> she adds, propping herself up on her elbows.", parse);
 			if(group) {
 				parse["oneof"] = enc.enemy.length > 2 ? " one of" : "";
 				parse["s"] = enc.enemy.length > 2 ? "s" : "";
-				Text.Add("<i>“Guess I’ll have[oneof] my friend[s] clean me up later,”</i> she says absent-mindedly.", parse);
+				Text.Add("<i>“Guess I’ll have[oneof] my friend[s] clean me up later,”</i> she says absentmindedly.", parse);
 			}
 			else
 				Text.Add("<i>“I’ll save the rest to eat on the go,”</i> she giggles.", parse);
@@ -2562,7 +2562,7 @@ Scenes.Felines.LossDrainMilk = function(mainCat, group, enc) {
 	Text.NL();
 	Text.Add("<i>“That smell!”</i> [name] purrs, licking [hisher] lips eagerly. <i>“You’re backed up… let me help you with that...”</i> ", parse);
 	if(rate >= 3) {
-		Text.Add("[HisHer] delight is only made all the more clear as [heshe] stares at the milk flowing freely from your [nips], all of that delicious cream going to waste, just flowing away into nothingness. Wasting no time, [heshe] pads over and latches onto a nipple eagerly, sucking for all [heshe]’s worth, and you cry out as your nerves sing in pleasure and being simulated thus.", parse);
+		Text.Add("[HisHer] delight is only made all the more clear as [heshe] stares at the milk flowing freely from your [nips], all of that delicious cream going to waste, just flowing away into nothingness. Wasting no time, [heshe] pads over and latches onto a nipple eagerly, sucking for all [heshe]’s worth, and you cry out as your nerves sing in pleasure and being stimulated thus.", parse);
 	}
 	else if(rate >= 1) {
 		Text.Add("Slowly, the feline moves [hisher] mouth to your [breasts], eyes greedily drinking in the sight of your slowly leaking [nips]. [HeShe] meows softly, once, twice, then begins lapping at the leakage like a good little kitten, [hisher] little pink tongue darting in and out of [hisher] mouth in a blur. The little jabs of pressure against your breastflesh only serve to make you gasp in pleasure and stimulates even more milk to ooze from your nips, and before long the big cat’s suckling from you.", parse);
@@ -2604,7 +2604,7 @@ Scenes.Felines.LossDrainMilk = function(mainCat, group, enc) {
 	Text.Add("<i>“As you wish,”</i> the feline purrs, and dips [hisher] head a final time, nuzzling aggressively at your breasts, pressing down hard and feeling heated boobflesh squash against [hisher] cheeks. A look of pure bliss spreads across [hisher] face and [hisher] eyelids begin to droop dangerously, but [heshe] does manage to drain you of the last of your milk. After that, [heshe] pushes [himher]self off you, satiated.", parse);
 	Text.NL();
 	if(milk > 20) {
-		Text.Add("It takes quite a bit of effort for the big cat to do so, and you realize why when you get a good glimpse of [hisher] underbelly. It’s massively swollen to the point that you can’t quite believe <i>all</i> of that is your milk - just how did all that manage to fit inside of you? Is your milk secretly condensed while in your [breasts], and then rapidly expanded when it leaks out your [nips]? The world may never know.", parse);
+		Text.Add("It takes quite a bit of effort for the big cat to do so, and you realize why when you get a good glimpse of [hisher] underbelly. It’s massively swollen to the point that you can’t quite believe <i>all</i> of that is your cream - just how did all that manage to fit inside of you? Is your milk secretly condensed while in your [breasts], and then rapidly expanded when it leaks out your [nips]? The world may never know.", parse);
 		Text.NL();
 		Text.Add("Wobbling and trembling all over, the feline curls up beside you, [hisher] stomach massively swollen with nourishment. [HisHer] steps are unsteady, [hisher] gaze dreamy; as you watch, [heshe] lets out a massive burp and groans in satisfaction.", parse);
 		Text.NL();
@@ -2622,7 +2622,7 @@ Scenes.Felines.LossDrainMilk = function(mainCat, group, enc) {
 	}
 	Text.NL();
 	parse["group"] = group ? Text.Parse(" with the rest of [hisher] pride", parse) : "";
-	Text.Add("With that, the feline stalks off[group], leaving you to lie back and wonder if it wouldn’t be so much easier to make a living by selling your own delicious milk. At length, you recover enough to at least sit up and redress yourself, wiping the worst of the milk stains from your [skin] and [armor], then heave yourself back on your feet.", parse);
+	Text.Add("With that, the feline stalks off[group], leaving you to lie back and wonder if it wouldn’t be so much easier to make a living by selling your own delicious creamy goodness. At length, you recover enough to at least sit up and redress yourself, wiping the worst of the milk stains from your [skin] and [armor], then heave yourself back on your feet.", parse);
 	Text.Flush();
 	
 	player.MilkDrain(15);
@@ -2678,7 +2678,7 @@ Scenes.Felines.LossDoubleTeam = function(cat, cat2, group, enc) {
 	Text.NL();
 	Text.Add("The cat-morph struts over, tail swishing lazily behind [hisher] well-toned rear, kitty-prick bobbing casually in front. [Name] comes to a stop before you, [hisher] ears twitching excitedly, green feline eyes leisurely sweeping up and down your body. As [heshe] takes you in, you become keenly aware of a strong, musky scent wafting from [hisher] genitals.", parse);
 	Text.NL();
-	Text.Add("Now that you can view [himher] up close, it is clear that the feline member [name] possesses is quite the impressive specimen. The cat-morph slowly strokes [himher]self,  barely able to wrap a paw around the girth of [hisher] appendage in all its unsheathed glory, to say nothing of the bulging scrotum underneath.", parse);
+	Text.Add("Now that you can view [himher] up close, it is clear that the feline member [name] possesses is quite the impressive specimen. The cat-morph slowly strokes [himher]self, barely able to wrap a paw around the girth of [hisher] appendage in all its unsheathed glory, to say nothing of the bulging scrotum underneath.", parse);
 	Text.NL();
 	if(subby) {
 		Text.Add("Despite everything, a familiar sensation stirs in your loins. Your head swims, your mind suddenly filled with the image of taking that barbed kitty-prick deep in your ready, needy… You shake it off and return to reality.", parse);
@@ -2808,7 +2808,7 @@ Scenes.Felines.LossDoubleTeam = function(cat, cat2, group, enc) {
 			player.FuckAnal(player.Butt(), cat2.FirstCock(), 2);
 			cat2.Fuck(cat2.FirstCock(), 2);
 			
-			Text.Add("[Name] continues [hisher2] assault on your [butt], heavy balls slapping mightily against your ass cheeks. The pounding would have you on the verge of collapse were you not held fast by the cock in your mouth. Ragged breathing and flushed cheeks are the first signs of your lustful surrender. ", parse);
+			Text.Add("[Name] continues [hisher2] assault on your [butt], heavy balls slapping mightily against your ass cheeks. The pounding would have you on the verge of collapse were you not held fast by the dick in your mouth. Ragged breathing and flushed cheeks are the first signs of your lustful surrender. ", parse);
 			if(breastSize >= 2) {
 				Text.Add("Your [breasts] ", parse);
 				if(breastSize < 7.5)
@@ -2823,9 +2823,9 @@ Scenes.Felines.LossDoubleTeam = function(cat, cat2, group, enc) {
 				Text.Add("Your cock[s] flail[notS] about, pre-cum already leaking from [itsTheir] tip[s]. ", parse);
 			if(player.FirstVag())
 				Text.Add("Slick juices threaten to gush from the swollen lips of your untouched cunt. ", parse);
-			Text.Add("As the twin cocks continue sliding into your mouth and ass, you reach back with one [hand] to where your own bits remain untouched. But just as you are about to ", parse);
+			Text.Add("As the twin shafts continue sliding into your mouth and ass, you reach back with one [hand] to where your own bits remain untouched. But just as you are about to ", parse);
 			if(player.FirstCock())
-				Text.Add("wrap your fingers around[oneof] your cock[s] and jerk yourself, ", parse);
+				Text.Add("wrap your fingers around[oneof] your member[s] and jerk yourself, ", parse);
 			else
 				Text.Add("plunge a couple digits into your needy slit, ", parse);
 			Text.Add("Bitch smacks your hand away. <i>”No need for that,”</i> [heshe2] chides with a click of the cat-tongue.", parse);
@@ -2846,11 +2846,11 @@ Scenes.Felines.LossDoubleTeam = function(cat, cat2, group, enc) {
 			Text.NL();
 			Text.Add("<i>”You’re really into this, aren’t you?</i> [PapaMama] teases. <i>”If you need to cum, just cum, darling.”</i>", parse);
 			Text.NL();
-			Text.Add("With [PapaMama]’s musky cock throbbing in your mouth, and Bitch’s deep in your bowels, that’s all you needed to hear. ", parse);
+			Text.Add("With [PapaMama]’s musky phallus throbbing in your mouth, and Bitch’s deep in your bowels, that’s all you needed to hear. ", parse);
 			if(player.FirstCock()) {
 				Text.Add("Your cock[s] tremble[notS]", parse);
 				if(player.HasBalls())
-					Text.Add(" and balls grow tense", parse);
+					Text.Add(" and your balls grow tense", parse);
 				Text.Add(". ", parse);
 			}
 			if(player.FirstVag())
@@ -2869,7 +2869,7 @@ Scenes.Felines.LossDoubleTeam = function(cat, cat2, group, enc) {
 			Text.NL();
 			Text.Add("Hntshdd plshh. You are suddenly aware of why you shouldn’t talk with your mouth full.", parse);
 			Text.NL();
-			Text.Add("<i>”I heard ‘inside.’ All right, here it comes!”</i> The dick in your rear throbs once, twice, and with a squeal the cat-morph blows [hisher2] load inside you. Powerful jets of hot seed fill you up, sticky warmth spreading inside as [name] empties [hisher2] balls. With a final twitch, Bitch shoots the last of [hisher2] cream into you. [HeShe2] leans on you for support, dick still in your ass, and pants at [PapaMama], <i>”Your turn. I don’t know how you always hold out so long.”</i>", parse);
+			Text.Add("<i>”I heard ‘inside.’ All right, here it comes!”</i> The cock in your rear throbs once, twice, and with a squeal the cat-morph blows [hisher2] load inside you. Powerful jets of hot seed fill you up, sticky warmth spreading inside as [name] empties [hisher2] balls. With a final twitch, Bitch shoots the last of [hisher2] cream into you. [HeShe2] leans on you for support, dick still in your ass, and pants at [PapaMama], <i>”Your turn. I don’t know how you always hold out so long.”</i>", parse);
 			Text.NL();
 			
 			Scenes.Felines.Impregnate(player, cat2);
@@ -2914,7 +2914,7 @@ Scenes.Felines.LossDoubleTeam = function(cat, cat2, group, enc) {
 					Text.Add("You slither atop the supine cat-morph and seat yourself upon [hisher] crotch, ", parse);
 				else
 					Text.Add("You swing a bare leg over the supine cat-morph and straddle [himher], ", parse);
-				Text.Add("your [vag] brushing against furry balls and shaft. [HeShe] slides both paws down your sides, settling on your hips, and gives them a squeeze. Another set roughly grabs both cheeks of your [butt]. The second [race] gently pushes you forward, [PapaMama] cat’s now twitching cock sending waves of pleasure through your bits. You wind up prone atop your former opponent, [breasts] squishing against [hisher] ", parse);
+				Text.Add("your [vag] brushing against furry balls and shaft. [HeShe] slides both paws down your sides, settling on your hips, and gives them a squeeze. Another set roughly grabs both cheeks of your [butt]. The second [race] gently pushes you forward, [PapaMama] cat’s now twitching dick sending waves of pleasure through your bits. You wind up prone atop your former opponent, [breasts] squishing against [hisher] ", parse);
 				if(cat.Gender() == Gender.male)
 					Text.Add("fuzzy chest.", parse);
 				else
