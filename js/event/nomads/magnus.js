@@ -748,7 +748,7 @@ Scenes.Magnus.Meditation = function() {
 
 Scenes.Magnus.SexSounding = function() {
 	var parse = {
-		
+		setof : player.NumCocks() > 1 ? " set of" : "";
 	};
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
