@@ -120,11 +120,9 @@ Scenes.Cale.TentSex = function() {
 
 Scenes.Cale.OutsideSex = function() {
 	var parse = {
-		playername : player.name,
-		HeShe : rosalin.HeShe(),
-		heshe : rosalin.heshe(),
-		himher : rosalin.himher()
+		playername : player.name
 	};
+	parse = rosalin.ParserPronouns(parse);
 	
 	if(cale.Slut() < 60) {
 		Text.Add("<i>“In front of everyone?”</i> he asks a bit nervously.", parse);
@@ -249,16 +247,10 @@ Scenes.Cale.SexSuckHimEntryPoint = function(outside) {
 		log        : outside ? "log" : "bedroll",
 		playername : player.name,
 		girlBoy    : player.mfTrue("boy", "girl"),
-		hairDesc   : function() { return player.Hair().Short(); },
-		tongueDesc : function() { return player.TongueDesc(); },
-		faceDesc   : function() { return player.FaceDesc(); },
-		breastDesc : function() { return player.FirstBreastRow().Short(); },
-		armorDesc  : function() { return player.ArmorDesc(); },
-		earDesc    : function() { return player.EarDesc(); },
 		cAnusDesc  : function() { return cale.Butt().AnalShort(); },
-		tight      : cale.Slut() >= 60 ? "pliant" : "tight",
-		hand       : function() { return player.HandDesc(); }
+		tight      : cale.Slut() >= 60 ? "pliant" : "tight"
 	};
+	parse = player.ParserTags(parse);
 	
 	Text.Add("The wolf’s crimson member is already starting to poke out of its furry sheath, roused at the promise of a wet mouth to bury itself into. You fondly caress his heavy balls as you rile him up, whispering that you can’t wait to release all that pent up wolf seed. He responds accordingly, his canine shaft giving a visible twitch as it swells bigger and bigger, further urged on by the light touch of your fingers grasping it.", parse);
 	Text.NL();
@@ -266,7 +258,7 @@ Scenes.Cale.SexSuckHimEntryPoint = function(outside) {
 	Text.NL();
 	Text.Add("With his musky taste still lingering on your tongue, you are eager to dig in, to wrap your lips around his meaty wolf-hood. Starting low, you slowly lick your way up his shaft, lathering him from root to tip in your saliva.", parse);
 	Text.NL();
-	Text.Add("<i>“Come on, stop teasing,”</i> Cale pants, shifting his hips slightly, rubbing his cock against your upturned face. He gently caresses your [hairDesc], not so gently urging you to get to sucking. Grasping him just above the knot, you give him a few more licks before rising to the level of his head. Your puckered lips hover a fraction of an inch from his trembling glans.", parse);
+	Text.Add("<i>“Come on, stop teasing,”</i> Cale pants, shifting his hips slightly, rubbing his cock against your upturned face. He gently caresses your [hair], not so gently urging you to get to sucking. Grasping him just above the knot, you give him a few more licks before rising to the level of his head. Your puckered lips hover a fraction of an inch from his trembling glans.", parse);
 	Text.Flush();
 	
 	var finger = false;
@@ -359,7 +351,7 @@ Scenes.Cale.SexSuckHimEntryPoint = function(outside) {
 				Text.Add("<i>“H-hey!”</i> Quizzically, you ask him if he wants you to stop - the unspoken implication being that he won’t be getting that blowjob either. <i>“I- uh, I guess it’s fine,”</i> he replies, looking a bit uncomfortable.", parse);
 			Text.Add(" The wolf’s [tight] rosebud opens up to your probing finger, offering little resistance to the invading object. Whether due to willingness or to your simultaneous blowjob, neither does Cale. Further emboldened, you add a second digit to your anal teasing, searching for and quickly finding his sensitive prostate.", parse);
 			Text.NL();
-			Text.Add("You start to enthusiastically blow the wolf, going deeper and deeper on his cock; all the while, you keep up your fingering of his butt. Before long, you plant a kiss on his furred sheath, his nine inch erection halfway down your throat and his thick knot resting on your [tongueDesc].", parse);
+			Text.Add("You start to enthusiastically blow the wolf, going deeper and deeper on his cock; all the while, you keep up your fingering of his butt. Before long, you plant a kiss on his furred sheath, his nine inch erection halfway down your throat and his thick knot resting on your [tongue].", parse);
 			Text.NL();
 			
 			var max = virgin ? 25 : 40;
@@ -374,11 +366,11 @@ Scenes.Cale.SexSuckHimEntryPoint = function(outside) {
 	Gui.SetButtonsFromList(options, false, null);
 	
 	Gui.Callstack.push(function() {
-		Text.Add("You suppress your gag reflex at the long lupine dick thrusting down your throat, its conical tip helping Cale to plunge farther inside of you. Lapping at his knot with your [tongueDesc], you moan softly, sending delightful vibrations along his member as you coax him slowly and steadily deeper. You worm your tongue inside his sheath as far as you can, further teasing him as it slides against the sensitive flesh.", parse);
+		Text.Add("You suppress your gag reflex at the long lupine dick thrusting down your throat, its conical tip helping Cale to plunge farther inside of you. Lapping at his knot with your [tongue], you moan softly, sending delightful vibrations along his member as you coax him slowly and steadily deeper. You worm your tongue inside his sheath as far as you can, further teasing him as it slides against the sensitive flesh.", parse);
 		Text.NL();
 		Text.Add("<i>“Damn, [playername]. If you keep this up, I’m gonna blow!”</i>", parse);
 		Text.NL();
-		Text.Add("Well, that just won’t do, now will it? You draw your tongue from his sheath and slowly pull your head back, letting his member glide out between your lips until it is bobbing wetly in the air before you. You kiss him gently on the very tip of his glans, stealing a quick lick at his urethra, and then move your mouth down to his knot. Slowly and luxuriantly, you stroke the very tip of your [tongueDesc] over his knot, then lick him again just above it. In a series of smooth, gliding motions, you gently lap your way back up to his cockhead, then open your maw and envelop him once more. You suckle his length with smooth, soft gulping motions, making Cale moan and buck against you.", parse);
+		Text.Add("Well, that just won’t do, now will it? You draw your tongue from his sheath and slowly pull your head back, letting his member glide out between your lips until it is bobbing wetly in the air before you. You kiss him gently on the very tip of his glans, stealing a quick lick at his urethra, and then move your mouth down to his knot. Slowly and luxuriantly, you stroke the very tip of your [tongue] over his knot, then lick him again just above it. In a series of smooth, gliding motions, you gently lap your way back up to his cockhead, then open your maw and envelop him once more. You suckle his length with smooth, soft gulping motions, making Cale moan and buck against you.", parse);
 		Text.NL();
 		if(finger) {
 			Text.Add("You slowly withdraw your finger from Cale’s used tailhole, easing up on the pressure you’re exerting. With teasing strokes, you trace circles around his flexing ring, even making the occasional tantalizing thrust inside, but your motions are always light, and you avoid going so deep as to stroke his prostate. He won’t get off that easily...", parse);
@@ -435,7 +427,7 @@ Scenes.Cale.SexSuckHimEntryPoint = function(outside) {
 				Text.NL();
 				Text.Add("<i>“I think I’m going to stick here for a while… yeah… maybe take a nap.”</i> He opens his maw wide for a drawn-out yawn. <i>“'Scuse me, [playername].”</i>", parse);
 				Text.NL();
-				Text.Add("That’s Cale alright; he really needs to work on his stamina. Seeing no reason to disrupt him from his nap, you get up and start to gather your things, slipping back into your [armorDesc]. By the time you’re finished dressing up again, the wolf-morph is out like a snuffed candle. You can’t resist a grin and gently petting him between the ears before you wander off, leaving him to his sleep.", parse);
+				Text.Add("That’s Cale alright; he really needs to work on his stamina. Seeing no reason to disrupt him from his nap, you get up and start to gather your things, slipping back into your [armor]. By the time you’re finished dressing up again, the wolf-morph is out like a snuffed candle. You can’t resist a grin and gently petting him between the ears before you wander off, leaving him to his sleep.", parse);
 				Text.NL();
 				
 				PrintDefaultOptions();
@@ -449,10 +441,10 @@ Scenes.Cale.SexSuckHimEntryPoint = function(outside) {
 				Text.NL();
 				Text.Add("<i>“Mmm, keep going... just like that,”</i> Cale pants, his cock twitching erratically in your hands. <i>“It’s gonna be a big one - don’t say I didn’t warn you!”</i> Grinning, you tell him that you expect no less from a big, bad wolf like him. You can hardly wait to taste his fertile seed, to have him splash it all over your body and cover you in his jizz.", parse);
 				Text.NL();
-				parse["breast"] = player.FirstBreastRow().Size() > 3 ? Text.Parse(", between your [breastDesc]", parse) : "";
-				Text.Add("Egged on by your sultry, encouraging whispers, it’s not long before the wolf lets out a howl, his pent-up reserve of semen rushing from his sloshing balls and through his swelling knot. The first volley hits you squarely on your [tongueDesc], a thick serving of wolf-spunk for your starving taste buds. The following shots stray to your [faceDesc], your [hairDesc] and down your front[breast].", parse);
+				parse["breast"] = player.FirstBreastRow().Size() > 3 ? Text.Parse(", between your [breasts]", parse) : "";
+				Text.Add("Egged on by your sultry, encouraging whispers, it’s not long before the wolf lets out a howl, his pent-up reserve of semen rushing from his sloshing balls and through his swelling knot. The first volley hits you squarely on your [tongue], a thick serving of wolf-spunk for your starving taste buds. The following shots stray to your [face], your [hair] and down your front[breast].", parse);
 				Text.NL();
-				Text.Add("Hobbling slightly, the wolf-morph leans down and scratch you behind your [earDesc], commending you for a job well done. <i>“Damn, you look a right mess now, [playername],”</i> Cale grins at you. <i>“How do you like the new coat of paint I gave you? You look just <b>lovely</b> in white.”</i>", parse);
+				Text.Add("Hobbling slightly, the wolf-morph leans down and scratch you behind your [ears], commending you for a job well done. <i>“Damn, you look a right mess now, [playername],”</i> Cale grins at you. <i>“How do you like the new coat of paint I gave you? You look just <b>lovely</b> in white.”</i>", parse);
 				Text.NL();
 				
 				mess = true;
@@ -465,7 +457,7 @@ Scenes.Cale.SexSuckHimEntryPoint = function(outside) {
 			options.push({ nameStr : "Reverse",
 				func : function() {
 					Text.Clear();
-					Text.Add("With drops of his pre still lingering on your [tongueDesc], you pull off his cock, rising in one smooth motion to give the wolf a big, fat kiss. He sputters, losing his balance in a vain effort to get away from you, which makes pushing him on his back all the more easy. A sharp shove and the confused Cale is prone, ass propped up in the air by the [log]. He gasps as you shove your fingers back into his [cAnusDesc], spreading him wide.", parse);
+					Text.Add("With drops of his pre still lingering on your [tongue], you pull off his cock, rising in one smooth motion to give the wolf a big, fat kiss. He sputters, losing his balance in a vain effort to get away from you, which makes pushing him on his back all the more easy. A sharp shove and the confused Cale is prone, ass propped up in the air by the [log]. He gasps as you shove your fingers back into his [cAnusDesc], spreading him wide.", parse);
 					Text.NL();
 					if(virgin)
 						Text.Add("<i>“N-no,”</i> he pants, deep down realizing what you are building up toward. Regardless, he makes no move to stop you, too caught up with pleasure to offer more than a token resistance.", parse);
@@ -523,9 +515,9 @@ Scenes.Cale.SexGetTrickBJ = function(outside) {
 	var virgin = cale.Butt().virgin;
 	
 	var parse = {
-		thatThose : player.NumCocks() > 1 ? "those" : "that",
-		s         : player.NumCocks() > 1 ? "s" : ""
+		
 	};
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	
 	Text.Clear();
 	Text.Add("<i>“Sure, I don’t mind giving a lady some head,”</i> Cale grins. <i>“Drop ‘em and spread ‘em!”</i>", parse);
@@ -626,63 +618,54 @@ Scenes.Cale.SexGetBJSneakyEntry = function(outside, sneaky) {
 	
 	var parse = {
 		playername     : player.name,
-		stutterName    : player.name[0] + "-" + player.name,
-		lowerArmorDesc : function() { return player.LowerArmorDesc(); },
-		multiCockDesc  : function() { return player.MultiCockDesc(); },
-		cockDesc       : function() { return p1cock.Short(); },
-		cockTip        : function() { return p1cock.TipShort(); },
-		ballsDesc      : function() { return player.BallsDesc(); },
-		vagDesc        : function() { return player.FirstVag().Short(); },
-		anusDesc       : function() { return player.Butt().AnalShort(); },
-		hipsDesc       : function() { return player.HipsDesc(); },
-		hand           : function() { return player.HandDesc(); }
+		stutterName    : player.name[0] + "-" + player.name
 	};
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	
 	var sneakyFirst = (cale.flags["trickBJ"] == 0);
 	
-	Text.Add("<i>“Now, let's get started on you, shall we?”</i> Quickly shrugging out of your [lowerArmorDesc], you pull out your [multiCockDesc]. ", parse);
+	Text.Add("<i>“Now, let's get started on you, shall we?”</i> Quickly shrugging out of your [botarmor], you pull out your [cocks]. ", parse);
 	
 	if(sneaky) {
 		cale.flags["trickBJ"]++;
 		
 		parse["legs"] = player.LowerBodyType() != LowerBodyType.Single ? ", spreading your legs," : "";
-		parse["balls"] = player.HasBalls() ? Text.Parse(" and [ballsDesc]", parse) : "";
-		Text.Add("Cale gulps at the sight of your slick shaft[s], but is still enticed with the promise of your pussy. Feeling that he needs some encouragement, you lie down[legs] and shift your cock[s][balls] aside to reveal your [vagDesc].", parse);
+		parse["b"] = player.HasBalls() ? Text.Parse(" and [balls]", parse) : "";
+		Text.Add("Cale gulps at the sight of your slick shaft[s], but is still enticed with the promise of your pussy. Feeling that he needs some encouragement, you lie down[legs] and shift your cock[s][b] aside to reveal your [vag].", parse);
 		Text.NL();
 		Text.Add("Taking your invitation, the wolf greedily digs into your folds, lapping at your labia with his long, flexible tongue. You sigh in pleasure, leaning back. ", parse);
 		if(player.HasBalls())
 			Text.Add("Your new position requires that you prop yourself up, however, which means that your now unattended sack flop down on Cale’s nose. He looks up at you, a flash of irritation clear on his obscured features, but you just whistle innocently. ", parse);
-		parse["balls"] = player.HasBalls() ? ", inadvertently filling his nose with your scent as you rub your sack against it" : "";
-		Text.Add("Deciding to take a more active part, you start grinding against you lover’s snout[balls].", parse);
+		parse["b"] = player.HasBalls() ? ", inadvertently filling his nose with your scent as you rub your sack against it" : "";
+		Text.Add("Deciding to take a more active part, you start grinding against you lover’s snout[b].", parse);
 		Text.NL();
 		
 		Sex.Cunnilingus(cale, player);
 		cale.Fuck(null, 1);
 		player.Fuck(null, 1);
 		
-		Text.Add("As you lean back even further, you are going to need both arms to prop yourself up. Stretching languidly, you put your weight on your elbows, smiling faintly when you see the wolf wince as your [multiCockDesc] flops onto his face. You let him keep up his lapping for a while, chuckling internally as he unsuccessfully tries to ignore your erection[s] rubbing his forehead.", parse);
+		Text.Add("As you lean back even further, you are going to need both arms to prop yourself up. Stretching languidly, you put your weight on your elbows, smiling faintly when you see the wolf wince as your [cocks] flops onto his face. You let him keep up his lapping for a while, chuckling internally as he unsuccessfully tries to ignore your erection[s] rubbing his forehead.", parse);
 		Text.NL();
-		Text.Add("<i>“How about we change positions?”</i> Cale suggests, surfacing for air. The wolf tries to avoid looking directly at your stiff member[s] - a feat that is hard to pull off as [itThey] [isAre] hovering a mere inch from his face. You nod, appearing to humor him. You instruct the soon-to-be-cocksucker to roll over on his back, and shuffle around so your bared crotch is hovering over his face. Cale seems happy as he doesn’t have to worry about your [multiCockDesc] from this angle. How naive.", parse);
+		Text.Add("<i>“How about we change positions?”</i> Cale suggests, surfacing for air. The wolf tries to avoid looking directly at your stiff member[s] - a feat that is hard to pull off as [itThey] [isAre] hovering a mere inch from his face. You nod, appearing to humor him. You instruct the soon-to-be-cocksucker to roll over on his back, and shuffle around so your bared crotch is hovering over his face. Cale seems happy as he doesn’t have to worry about your [cocks] from this angle. How naive.", parse);
 		Text.NL();
-		Text.Add("Taking the initiative, you sink down on the wolf’s raised snout, letting his long tongue drill into your cooch. He’s doing a very good job of it - almost making you lose your flow - but your [multiCockDesc] is quick to remind you of your plan. You let him settle into it, luring him in with a false sense of security - not that you don’t enjoy yourself - before setting your plan into motion.", parse);
+		Text.Add("Taking the initiative, you sink down on the wolf’s raised snout, letting his long tongue drill into your cooch. He’s doing a very good job of it - almost making you lose your flow - but your [cocks] is quick to remind you of your plan. You let him settle into it, luring him in with a false sense of security - not that you don’t enjoy yourself - before setting your plan into motion.", parse);
 		Text.NL();
-		Text.Add("Moaning encouragingly, you start grinding your [hipsDesc] erratically, rubbing your cunt on the canine’s face. Spurred on by your enthusiasm, Cale redoubles his lapping, raking his flexible organ over and inside your folds. Bit by bit, your movements grow more inconsistent, your swaying becoming wider. Pretty soon, the wolf only has to hold out his tongue as you eagerly ride him, rubbing the entire length of your [vagDesc] on his face.", parse);
+		Text.Add("Moaning encouragingly, you start grinding your [hips] erratically, rubbing your cunt on the canine’s face. Spurred on by your enthusiasm, Cale redoubles his lapping, raking his flexible organ over and inside your folds. Bit by bit, your movements grow more inconsistent, your swaying becoming wider. Pretty soon, the wolf only has to hold out his tongue as you eagerly ride him, rubbing the entire length of your [vag] on his face.", parse);
 		Text.NL();
-		parse["balls"] = player.HasBalls() ? " balls and" : "";
-		Text.Add("You start hearing muffled protests from Cale as you turn your grinding into long strokes, rubbing not only your cunt but also your[balls] [multiCockDesc] against him. Every time he grows too agitated, you let him have some more of your cooch before returning to grinding your shaft[s] on his mouth. Before long, he stops complaining altogether, and even starts to actively lick the undercarriage of your cock[s] when you present him with [itThem].", parse);
+		parse["b"] = player.HasBalls() ? " balls and" : "";
+		Text.Add("You start hearing muffled protests from Cale as you turn your grinding into long strokes, rubbing not only your cunt but also your[b] [cocks] against him. Every time he grows too agitated, you let him have some more of your cooch before returning to grinding your shaft[s] on his mouth. Before long, he stops complaining altogether, and even starts to actively lick the undercarriage of your cock[s] when you present him with [itThem].", parse);
 		Text.NL();
-		Text.Add("Purring, you tell the wolf what a good job he’s doing, your words emphasized by twitches in your [multiCockDesc]. Pushing down, you give Cale something to do other than worry about his own sexuality, pretty much impaling yourself on his snout. Once he’s sufficiently mollified, you turn back to your grinding, slowly shifting the focus from your pussy to your erect shaft[s]. The wolf obediently lathers you up, doing just about as good a job with his tongue on his new target as he did on your female parts.", parse);
+		Text.Add("Purring, you tell the wolf what a good job he’s doing, your words emphasized by twitches in your [cocks]. Pushing down, you give Cale something to do other than worry about his own sexuality, pretty much impaling yourself on his snout. Once he’s sufficiently mollified, you turn back to your grinding, slowly shifting the focus from your pussy to your erect shaft[s]. The wolf obediently lathers you up, doing just about as good a job with his tongue on his new target as he did on your female parts.", parse);
 		Text.NL();
-		Text.Add("As you grind against him, Cale licks you from root to tip, only realizing what he’s doing when you pull back, the [cockTip] of[oneof] your [multiCockDesc] poised in front of his open mouth, a splatter of pre dripping onto his extended tongue.", parse);
+		Text.Add("As you grind against him, Cale licks you from root to tip, only realizing what he’s doing when you pull back, the [cockTip] of[oneof] your [cocks] poised in front of his open mouth, a splatter of pre dripping onto his extended tongue.", parse);
 		Text.NL();
 		if(virgin) {
 			if(sneakyFirst) {
 				Text.Add("<i>“[stutterName], what- when?”</i> the wolf stutters, struggling to regain control of the situation. Smiling down on him hypnotically, you tell him that he was just about to suck your cock, like you asked him to. <i>“W-what? No! I’m not gay!”</i> Cale struggles, trying to avoid contact with the offending shaft bobbing in front of his mouth.", parse);
 			}
 			else {
-				Text.Add("<i>“We said no funny business!”</i> the wolf whines desperately, struggling to regain control of the situation. <i>“I told you, I’m not gay, I’m not!”</i> he protests loudly, his eyes transfixed on the bobbing [cockTip] of your [cockDesc]. Who said he was? You just need him to suck your cock, that doesn’t make him gay, does it? He did it before, so…", parse);
+				Text.Add("<i>“We said no funny business!”</i> the wolf whines desperately, struggling to regain control of the situation. <i>“I told you, I’m not gay, I’m not!”</i> he protests loudly, his eyes transfixed on the bobbing [cockTip] of your [cock]. Who said he was? You just need him to suck your cock, that doesn’t make him gay, does it? He did it before, so…", parse);
 			}
 			Text.NL();
 			parse["len"] = p1cock.length.Get() >= 20 ? " and down his throat" : "";
@@ -697,7 +680,7 @@ Scenes.Cale.SexGetBJSneakyEntry = function(outside, sneaky) {
 				Text.Add("<i>“Who says that isn’t exactly what I want?”</i> he retorts glibly. As fun as that would be...", parse);
 		}
 		Text.NL();
-		Text.Add("<i>“Suck,”</i> you repeat your previous command more forcefully, pinning him down. His will is faltering, and you can feel his tongue moving around uncertainly, inadvertently licking your [cockDesc]. To give him that extra push over the edge, your hand trails down his furry stomach to his stiff, crimson erection, insinuating that if he’s a good boy, maybe you’ll return the favor.", parse);
+		Text.Add("<i>“Suck,”</i> you repeat your previous command more forcefully, pinning him down. His will is faltering, and you can feel his tongue moving around uncertainly, inadvertently licking your [cock]. To give him that extra push over the edge, your hand trails down his furry stomach to his stiff, crimson erection, insinuating that if he’s a good boy, maybe you’ll return the favor.", parse);
 		Text.NL();
 		if(virgin)
 			Text.Add("Cale lets out a muffled sigh as he capitulates, unable to resist the urges of his body. The wolf closes his eyes in defeat as he allows you to have your way with him.", parse);
@@ -706,15 +689,15 @@ Scenes.Cale.SexGetBJSneakyEntry = function(outside, sneaky) {
 	}
 	else {
 		parse["slut"] = cale.Slut() < 30 ? " nervously" : "";
-		Text.Add("<i>“Woah, pent up, aren’t we,”</i> Cale chuckles[slut], getting down on his knees and prodding the offered dick[s] experimentally. Seeing [itThem] twitch in response, he grows bolder, grabbing[oneof] your [multiCockDesc] in his paw. A moan slips out of your lips as the wolf starts jerking you off. The soft skin on his palms feels really good on your sensitive flesh, but the main course has yet to come.", parse);
+		Text.Add("<i>“Woah, pent up, aren’t we,”</i> Cale chuckles[slut], getting down on his knees and prodding the offered dick[s] experimentally. Seeing [itThem] twitch in response, he grows bolder, grabbing[oneof] your [cocks] in his paw. A moan slips out of your lips as the wolf starts jerking you off. The soft skin on his palms feels really good on your sensitive flesh, but the main course has yet to come.", parse);
 		Text.NL();
-		Text.Add("Eager to get going, you place a [hand] on his shoulder, slowly pushing the wolf down on his back, erratically rubbing your [cockDesc] against his tight grip. ", parse);
+		Text.Add("Eager to get going, you place a [hand] on his shoulder, slowly pushing the wolf down on his back, erratically rubbing your [cock] against his tight grip. ", parse);
 		if(cale.Slut() < 30)
 			Text.Add("<i>“Alright,”</i> Cale gulps, giving your shaft a tentative lick, sending a shiver up your spine. You let him take his time, stretching languidly while the wolf drags his tongue along the underside of your cock, lathering you up.", parse);
 		else
 			Text.Add("<i>“Give me a taste of that delicious cock,”</i> Cale breathes, putting a paw on your butt and pulling you in, guiding you toward his open mouth. A drop of your pre lands on his outstretched tongue, quickly lapped up by the slutty wolf.", parse);
 		Text.NL();
-		Text.Add("After teasing you some more, the wolf finally gets to the meat of it and wraps his lips around your [cockDesc], taking you into his mouth.", parse);
+		Text.Add("After teasing you some more, the wolf finally gets to the meat of it and wraps his lips around your [cock], taking you into his mouth.", parse);
 	}
 	Text.NL();
 	
@@ -730,22 +713,22 @@ Scenes.Cale.SexGetBJSneakyEntry = function(outside, sneaky) {
 		Text.Add("Humoring you, the wolf pulls off your cock for a moment to commend you on your good taste. Shaking your head in defeat, you just gesture for him to get back to business.", parse);
 	Text.NL();
 	parse["len"] = p1cock.length.Get() >= 20 ? " until you are pressing against the entrance to his throat" : "";
-	Text.Add("Grasping your [cockDesc] by its base, Cale gets back to sucking you, his bobbing mouth taking more and more of you each stroke[len]. ", parse);
+	Text.Add("Grasping your [cock] by its base, Cale gets back to sucking you, his bobbing mouth taking more and more of you each stroke[len]. ", parse);
 	if(p1cock.length.Get() >= 20) {
-		Text.Add("Figuring the wolf could use some help, you start rocking your hips slowly, building up a rhythm intended to plunge your cock even further into your slut. You’ve already gotten the taste of his skilled tongue; you’re not going to be satisfied until you’ve buried every inch of your [cockDesc] into his tight throat.", parse);
+		Text.Add("Figuring the wolf could use some help, you start rocking your hips slowly, building up a rhythm intended to plunge your cock even further into your slut. You’ve already gotten the taste of his skilled tongue; you’re not going to be satisfied until you’ve buried every inch of your [cock] into his tight throat.", parse);
 		Text.NL();
-		Text.Add("Progress is slow, but each thrust pushes a little farther down his esophagus, triggering a delightful gag reflex. You let him surface for air now and then - a few gasping breaths before you plunge your cock back in, plugging his mouth again. Finally, much to the surprise of the wolf, your entire [cockDesc] is firmly lodged down his throat, his muzzle pressed against your crotch.", parse);
+		Text.Add("Progress is slow, but each thrust pushes a little farther down his esophagus, triggering a delightful gag reflex. You let him surface for air now and then - a few gasping breaths before you plunge your cock back in, plugging his mouth again. Finally, much to the surprise of the wolf, your entire [cock] is firmly lodged down his throat, his muzzle pressed against your crotch.", parse);
 	}
 	else {
 		Text.Add("You inadvertently moan as his tongue laps at your sensitive glans, greedily licking up your pre. The wolf’s mouth is tight as a vice around your man-meat, his lips caressing every vein on your shaft.", parse);
 	}
 	Text.NL();
-	Text.Add("You caress the back of Cale’s head, twirling his fur with your fingers as he sucks on your [cockDesc]. Your touch is light, yet a constant reminder of just who is in charge here.", parse);
+	Text.Add("You caress the back of Cale’s head, twirling his fur with your fingers as he sucks on your [cock]. Your touch is light, yet a constant reminder of just who is in charge here.", parse);
 	Text.NL();
 	Text.Add("Steadily, you can feel your orgasm building as your wolf-slut really gets into it. You briefly consider warning him about his approaching protein addition, but it’ll be much more fun if he finds out about it for himself.", parse);
 	Text.NL();
 	if(cale.Slut() >= 60) {
-		Text.Add("Cale seems to want nothing else than to milk you, however, as you suddenly feel a probing finger rubbing against your taint, searching for your [anusDesc]. As a veteran of anal sex - though usually as the one on the receiving end - the wolf knows exactly how to drive you crazy, his thick digit quickly penetrating your colon and pressing against your prostate. If you weren’t close to cumming already, this sure as hell would do it.", parse);
+		Text.Add("Cale seems to want nothing else than to milk you, however, as you suddenly feel a probing finger rubbing against your taint, searching for your [anus]. As a veteran of anal sex - though usually as the one on the receiving end - the wolf knows exactly how to drive you crazy, his thick digit quickly penetrating your colon and pressing against your prostate. If you weren’t close to cumming already, this sure as hell would do it.", parse);
 		Text.NL();
 		
 		player.AddLustFraction(0.3);
@@ -756,7 +739,7 @@ Scenes.Cale.SexGetBJSneakyEntry = function(outside, sneaky) {
 	var cum = player.OrgasmCum();
 	
 	if(cum > 6) {
-		Text.Add("Before you’re even halfway done, the wolf is completely filled with your cum - mouth, throat and stomach. His eyes widen as he pats your [hipsDesc] urgently, pushing you off him before his belly inflates even further. Taking mercy on him, you pull out and let the rest of your load splash all over his face and body. When you are done, Cale looks like he is more cum than wolf, thoroughly painted white in your spunk. ", parse);
+		Text.Add("Before you’re even halfway done, the wolf is completely filled with your cum - mouth, throat and stomach. His eyes widen as he pats your [hips] urgently, pushing you off him before his belly inflates even further. Taking mercy on him, you pull out and let the rest of your load splash all over his face and body. When you are done, Cale looks like he is more cum than wolf, thoroughly painted white in your spunk. ", parse);
 	}
 	else if(cum > 3) {
 		Text.Add("Cale gets more than he bargained for as your excessive load is enough to bloat the wolf’s belly to levels resembling pregnancy. When you finally pull out, the wolf is filled to the brim with cum, a slow trickle dribbling out his mouth. ", parse);
@@ -789,7 +772,7 @@ Scenes.Cale.SexGetBJSneakyEntry = function(outside, sneaky) {
 			Text.Add("True, but doing things this way is much more fun, you reply with a grin.", parse);
 		}
 		else {
-			Text.Add("<i>“Hmm, tasty,”</i> he remarks, licking his lips and sneaking a last flick of the tongue on your [cockTip]. <i>“If you’re hurting for attention on both ends, I’m happy to oblige. I’d have paid more attention to your [multiCockDesc] from the get-go if you had told me you wanted me to play with [itThem]. Not that I mind a surprise now and then.”</i>", parse);
+			Text.Add("<i>“Hmm, tasty,”</i> he remarks, licking his lips and sneaking a last flick of the tongue on your [cockTip]. <i>“If you’re hurting for attention on both ends, I’m happy to oblige. I’d have paid more attention to your [cocks] from the get-go if you had told me you wanted me to play with [itThem]. Not that I mind a surprise now and then.”</i>", parse);
 			Text.NL();
 			Text.Add("It was a sporadic decision, really, you quip back.", parse);
 			Text.NL();
@@ -833,47 +816,28 @@ Scenes.Cale.SexGetEatenEntrypoint = function(outside) {
 	var parse = {
 		playername     : player.name,
 		stutterName    : player.name[0] + "-" + player.name,
-		lowerArmorDesc : function() { return player.LowerArmorDesc(); },
-		multiCockDesc  : function() { return player.MultiCockDesc(); },
-		ballsDesc      : function() { return player.BallsDesc(); },
-		vagDesc        : function() { return player.FirstVag().Short(); },
-		clitDesc       : function() { return player.FirstVag().ClitShort(); },
-		anusDesc       : function() { return player.Butt().AnalShort(); },
-		hipsDesc       : function() { return player.HipsDesc(); },
-		thighDesc      : function() { return player.ThighDesc(); },
-		skinDesc       : function() { return player.SkinDesc(); },
-		nipsDesc       : function() { return player.FirstBreastRow().NipsShort(); },
-		hand           : function() { return player.HandDesc(); },
-		cockDesc       : function() { return biggestCock.Short(); },
-		cockTip        : function() { return biggestCock.TipShort(); },
-		s              : player.NumCocks() > 1 ? "s" : "",
-		notS           : player.NumCocks() > 1 ? "" : "s",
-		itThey         : player.NumCocks() > 1 ? "they" : "it",
-		isAre          : player.NumCocks() > 1 ? "are" : "is",
-		itThem         : player.NumCocks() > 1 ? "them" : "it",
-		itsTheir       : player.NumCocks() > 1 ? "their" : "its",
-		thatThose      : player.NumCocks() > 1 ? "those" : "that",
-		oneof          : player.NumCocks() > 1 ? " one of" : "",
 		biggest        : player.NumCocks() > 1 ? " biggest" : ""
 	};
+	parse = player.ParserTags(parse);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	
 	if(player.FirstCock() && virgin) {
 		Text.Add("<i>“Just… keep [thatThose] cock[s] out of my face, okay? I’m not gay,”</i> he adds hurriedly. You roll your eyes.", parse);
 		Text.NL();
 	}
 	parse["legs"] = player.LowerBodyType() != LowerBodyType.Single ? " and spreading your legs" : "";
-	Text.Add("Swaying your [hipsDesc] seductively, you twirl around, showing him the goods. The wolf-morph all but jumps you, quickly tearing off your [lowerArmorDesc] and exposing your wet netherlips. You shy back for a brief second as he flashes his sharp teeth in a wide predatory smile. His long canine tongue is lolling hungrily, eager to dig in. The wolf looks like he could eat more than your pussy, given the chance. Still, you try to trust him and relax, reclining on your back[legs].", parse);
+	Text.Add("Swaying your [hips] seductively, you twirl around, showing him the goods. The wolf-morph all but jumps you, quickly tearing off your [botarmor] and exposing your wet netherlips. You shy back for a brief second as he flashes his sharp teeth in a wide predatory smile. His long canine tongue is lolling hungrily, eager to dig in. The wolf looks like he could eat more than your pussy, given the chance. Still, you try to trust him and relax, reclining on your back[legs].", parse);
 	if(player.FirstCock())
-		Text.Add(" You pull your [multiCockDesc] out of the way, giving him full access to your crotch.", parse);
+		Text.Add(" You pull your [cocks] out of the way, giving him full access to your crotch.", parse);
 	Text.NL();
 	
 	var scenes = new EncounterTable();
 	scenes.AddEnc(function() {
-		Text.Add("<i>“Just lie back and relax, and let this big, bad wolf eat you up whole~”</i> Cale quips as he hovers over your spread labia, hot saliva dripping from his fangs on your [skinDesc].", parse);
+		Text.Add("<i>“Just lie back and relax, and let this big, bad wolf eat you up whole~”</i> Cale quips as he hovers over your spread labia, hot saliva dripping from his fangs on your [skin].", parse);
 		Text.NL();
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
-		Text.Add("<i>“Ah, my favorite snack, juicy pussy,”</i> Cale teases, caressing your [thighDesc] as he eyes his meal.", parse);
+		Text.Add("<i>“Ah, my favorite snack, juicy pussy,”</i> Cale teases, caressing your [thigh] as he eyes his meal.", parse);
 		Text.NL();
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
@@ -885,7 +849,7 @@ Scenes.Cale.SexGetEatenEntrypoint = function(outside) {
 	
 	scenes.Get();
 	
-	Text.Add("Wasting no further time, the wolf digs in, burying his snout in your crotch. You gasp as his flexible tongue forces its way inside your [vagDesc], lapping up your juices greedily. <i>“Wanna know why my tongue is so big? It is to...”</i> Cale murmurs, the rest of his pun muffled by your muff. You squirm as the vibrations spread into your nethers, the quaking setting off cascading spikes of pleasure racing up your spine.", parse);
+	Text.Add("Wasting no further time, the wolf digs in, burying his snout in your crotch. You gasp as his flexible tongue forces its way inside your [vag], lapping up your juices greedily. <i>“Wanna know why my tongue is so big? It is to...”</i> Cale murmurs, the rest of his pun muffled by your muff. You squirm as the vibrations spread into your nethers, the quaking setting off cascading spikes of pleasure racing up your spine.", parse);
 	Text.NL();
 	
 	Sex.Cunnilingus(cale, player);
@@ -894,9 +858,9 @@ Scenes.Cale.SexGetEatenEntrypoint = function(outside) {
 	
 	Text.Add("Letting him handle the reins, you close your eyes, basking in the ecstasy roused by the wolf’s experienced tongue. Rosalin has certainly given him plenty opportunity to practice at this. ", parse);
 	if(player.FirstCock()) {
-		Text.Add("Cale’s ministrations haven’t gone unnoticed by your [multiCockDesc] - roused by the intense feelings of his flexible organ eating out your cunt, the shaft[s] stand[notS] erect, bobbing proudly.", parse);
+		Text.Add("Cale’s ministrations haven’t gone unnoticed by your [cocks] - roused by the intense feelings of his flexible organ eating out your cunt, the shaft[s] stand[notS] erect, bobbing proudly.", parse);
 		if(cale.Slut() >= 30) {
-			Text.Add(" Not wanting to let [itThem] feel left out, the wolf wraps his paw around your[biggest] [cockDesc], stroking it sensuously.", parse);
+			Text.Add(" Not wanting to let [itThem] feel left out, the wolf wraps his paw around your[biggest] [cock], stroking it sensuously.", parse);
 		}
 	}
 	else {
@@ -919,19 +883,19 @@ Scenes.Cale.SexGetEatenEntrypoint = function(outside) {
 	scenes.AddEnc(function() {
 		parse["clit1"] = clitlen > 4 ? " the base of" : "";
 		parse["clit2"] = clitlen > 4 ? " engorged" : "";
-		Text.Add("<i>“And what do we have here, hmm?”</i> Cale purrs, giving your [clitDesc] a flick with the tip of his tongue. A shock runs up your spine, triggered by the sudden stimuli, racking your brains as you try to hold in a gasp. <i>“Seems like I found a tasty spot, I’ll have to explore further.”</i> Spurred by your reaction, the wolf focuses his attention on[clit1] your[clit2] clit, sending stars across your field of vision every times his tongue rakes your sensitive organ.", parse);
+		Text.Add("<i>“And what do we have here, hmm?”</i> Cale purrs, giving your [clit] a flick with the tip of his tongue. A shock runs up your spine, triggered by the sudden stimuli, racking your brains as you try to hold in a gasp. <i>“Seems like I found a tasty spot, I’ll have to explore further.”</i> Spurred by your reaction, the wolf focuses his attention on[clit1] your[clit2] clit, sending stars across your field of vision every times his tongue rakes your sensitive organ.", parse);
 		Text.NL();
-		Text.Add("<i>“Good reaction,”</i> the wolf chuckles. He goes back to pleasuring your folds, but often swaps back to your [clitDesc] to tease you further, keeping you dancing on a fine edge.", parse);
+		Text.Add("<i>“Good reaction,”</i> the wolf chuckles. He goes back to pleasuring your folds, but often swaps back to your [clit] to tease you further, keeping you dancing on a fine edge.", parse);
 		Text.NL();
 		
 		player.AddLustFraction(0.3);
 	}, 1.0, function() { return (cale.Slut() >= 30) || clitcock == null; });
 	scenes.AddEnc(function() {
-		parse["balls"] = player.HasBalls() ? Text.Parse(" and [ballsDesc]", parse) : "";
-		Text.Add("Despite Cale’s enthusiastic lapping, you feel him stray sometimes. The wolf sneaks in a few licks and kisses on your [multiCockDesc][balls]. You flick one of his triangular ears, chastising him for not focusing on his job.", parse);
+		parse["b"] = player.HasBalls() ? Text.Parse(" and [balls]", parse) : "";
+		Text.Add("Despite Cale’s enthusiastic lapping, you feel him stray sometimes. The wolf sneaks in a few licks and kisses on your [cocks][b]. You flick one of his triangular ears, chastising him for not focusing on his job.", parse);
 		Text.NL();
 		parse["c"] = (player.NumCocks() > 1 || player.FirstCock().Size() > 75) ? " so much" : "";
-		Text.Add("<i>“Wolves are carnivores, you can’t expect me to hold myself back with[c] meat on display,”</i> he chuckles, sneaking a lick on the [cockTip] of[oneof] your [cockDesc].", parse);
+		Text.Add("<i>“Wolves are carnivores, you can’t expect me to hold myself back with[c] meat on display,”</i> he chuckles, sneaking a lick on the [cockTip] of[oneof] your [cock].", parse);
 		Text.NL();
 		Text.Add("Well, if he’s a good boy and gets you off, you might consider throwing him a bone later.", parse);
 		Text.NL();
@@ -946,7 +910,7 @@ Scenes.Cale.SexGetEatenEntrypoint = function(outside) {
 	
 	var cum = player.OrgasmCum();
 	
-	Text.Add("It isn’t long before the wolf has pushed you to orgasm, forcing a lustful cry out of you as your dam breaks and you buck your [hipsDesc], spraying his muzzle with your feminine juices. You bite your lip in an effort to not rouse the whole camp with your cries, one hand inadvertently straying to twist one of your [nipsDesc].", parse);
+	Text.Add("It isn’t long before the wolf has pushed you to orgasm, forcing a lustful cry out of you as your dam breaks and you buck your [hips], spraying his muzzle with your feminine juices. You bite your lip in an effort to not rouse the whole camp with your cries, one hand inadvertently straying to twist one of your [nips].", parse);
 	if(player.FirstCock()) {
 		parse["isntArent"] = player.NumCocks() > 1 ? "aren't" : "isn't";
 		parse["cum1"] = cum > 6 ? "unleashing on" :
@@ -955,7 +919,7 @@ Scenes.Cale.SexGetEatenEntrypoint = function(outside) {
 		parse["cum2"] = cum > 6 ? " massive" :
 		                cum > 3 ? " considerable" :
 		                "";
-		Text.Add(" Your [multiCockDesc] [isntArent] far behind, [cum1] the wolf with [itsTheir][cum2] load.", parse);
+		Text.Add(" Your [cocks] [isntArent] far behind, [cum1] the wolf with [itsTheir][cum2] load.", parse);
 		Text.NL();
 		if(cale.Slut() >= 60)
 			Text.Add("<i>“Mm… so tasty,”</i> he sighs as he laps up your cum, reveling in the taste.", parse);
@@ -998,35 +962,27 @@ Scenes.Cale.SexFuckHim = function(outside, opts) {
 	var parse = {
 		log            : outside ? "wooden log" : "bedroll",
 		playername     : player.name,
-		hipsDesc       : function() { return player.HipsDesc(); },
-		lowerArmorDesc : function() { return player.LowerArmorDesc(); },
-		multiCockDesc  : function() { return player.MultiCockDesc(); },
-		multiCockDesc2 : function() { return player.MultiCockDesc(allCocks); },
-		cockDesc       : function() { return p1cock.Short(); },
-		cockTip        : function() { return p1cock.TipShort(); },
+		cocks2 : function() { return player.MultiCockDesc(allCocks); },
 		stiffening     : p1cock.isStrapon ? "" : " stiffening",
 		artificial     : p1cock.isStrapon ? " artificial" : "",
 		cAnusDesc      : function() { return cale.Butt().AnalShort(); }
 	};
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
-	if(p1cock.isStrapon && player.NumCocks() == 0) {
-		parse["multiCockDesc"] = function() { return p1cock.Short(); };
-	}
 	
 	parse["virgin"] = virgin ? " virgin" : "";
 	if(cale.Slut() >= 60)
-		Text.Add("With Cale’s peculiar attributes, there is no need for additional lube. His hole is as ready for you as it’ll ever be. You remove your [lowerArmorDesc], itching to start pounding the wolf into oblivion.", parse);
+		Text.Add("With Cale’s peculiar attributes, there is no need for additional lube. His hole is as ready for you as it’ll ever be. You remove your [botarmor], itching to start pounding the wolf into oblivion.", parse);
 	else
-		Text.Add("As you fumble with your [lowerArmorDesc], you fish out a bottle of lube, pouring its contents on Cale’s tight[virgin] hole. He yips as the cool liquid splashes between his cheeks, shivering in anticipation of what's to come. You rub it in with your thumb, probing and teasing his anus.", parse);
-	Text.Add(" Once he’s ready, you pull out your[stiffening] [multiCockDesc], rubbing [itThem] in the sloppy lubricating mess between the wolf’s butt cheeks. Just to tease him even more, you grasp him by the hips, hotdogging your[artificial] shaft[s] and coating [itsTheir] length in the slippery liquid.", parse);
+		Text.Add("As you fumble with your [botarmor], you fish out a bottle of lube, pouring its contents on Cale’s tight[virgin] hole. He yips as the cool liquid splashes between his cheeks, shivering in anticipation of what's to come. You rub it in with your thumb, probing and teasing his anus.", parse);
+	Text.Add(" Once he’s ready, you pull out your[stiffening] [cocks], rubbing [itThem] in the sloppy lubricating mess between the wolf’s butt cheeks. Just to tease him even more, you grasp him by the hips, hotdogging your[artificial] shaft[s] and coating [itsTheir] length in the slippery liquid.", parse);
 	Text.NL();
 	if(virgin)
 		Text.Add("<i>“I’ve changed my mind, I’ve changed my mind!”</i> he yips desperately, trying to scramble away but hindered by his pants wrapping around his knees.", parse);
 	else
 		Text.Add("<i>“Just take me already!”</i> Cale whines, eager to get some dick. He tries pushing back against you, forcing your cock[s] to rub against his sensitive [cAnusDesc].", parse);
 	Text.NL();
-	Text.Add("Ignoring the wolf, you grasp[oneof] your [multiCockDesc] and press it against his back door. The [cockTip] of your [cockDesc] popping inside him does wonders for shutting him up - unless you count the loud moaning.", parse);
+	Text.Add("Ignoring the wolf, you grasp[oneof] your [cocks] and press it against his back door. The [cockTip] of your [cock] popping inside him does wonders for shutting him up - unless you count the loud moaning.", parse);
 	Text.NL();
 	
 	Sex.Anal(player, cale);
@@ -1034,11 +990,11 @@ Scenes.Cale.SexFuckHim = function(outside, opts) {
 	player.Fuck(player.FirstCock(), virgin ? 10 : 3);
 	
 	parse["protestingWelcoming"] = cale.Slut() >= 60 ? "welcoming" : "protesting";
-	Text.Add("Cale groans as you thrust forward, sinking half of your [cockDesc] inside his [protestingWelcoming] bowels. The wolf’s anal walls wrap themselves tightly around your shaft, almost sucking you inside. ", parse);
+	Text.Add("Cale groans as you thrust forward, sinking half of your [cock] inside his [protestingWelcoming] bowels. The wolf’s anal walls wrap themselves tightly around your shaft, almost sucking you inside. ", parse);
 	if(virgin) {
 		Text.Add("The rogue is panting heavily, apparently at a loss for words over his lost virginity.", parse);
 		Text.NL();
-		Text.Add("<i>“Do you like it?”</i> you tease him, shifting your [hipsDesc] slightly, sending another tremble through the paralyzed wolf.", parse);
+		Text.Add("<i>“Do you like it?”</i> you tease him, shifting your [hips] slightly, sending another tremble through the paralyzed wolf.", parse);
 		Text.NL();
 		Text.Add("<i>“N-no, of course not!”</i> he gasps defiantly, squirming under your gaze. A rather bad plan, considering his current position.", parse);
 		Text.NL();
@@ -1047,7 +1003,7 @@ Scenes.Cale.SexFuckHim = function(outside, opts) {
 		Text.Add("The wolf is <i>definitely</i> enjoying this… but there is so much more you can show him. You tell him that you are going to start moving, and this time he doesn’t even protest, just offering a low whimper in response as he raises his tail to allow you easier access.", parse);
 	}
 	else {
-		Text.Add("He accommodates to your [cockDesc] easily enough, this being far from his first time taking it in the butt.", parse);
+		Text.Add("He accommodates to your [cock] easily enough, this being far from his first time taking it in the butt.", parse);
 		Text.NL();
 		if(cale.Slut() >= 60)
 			Text.Add("<i>“Fuck me, [playername]!”</i> he begs, pushing his hips back against yours in an attempt to further impale himself on you. Such a well trained little slut.", parse);
@@ -1055,9 +1011,9 @@ Scenes.Cale.SexFuckHim = function(outside, opts) {
 			Text.Add("<i>“Ngh… you are so rough,”</i> he pants, his legs trembling as he gets used to the feeling. Oh, this isn’t rough. You haven’t started with rough yet.", parse);
 	}
 	Text.NL();
-	parse["vagDesc"] = player.FirstVag() ? function() { return player.FirstVag().Short(); } : "crotch";
-	parse["real"] = p1cock.isStrapon ? Text.Parse("pressure of the toy grinding against your [vagDesc]", parse) : "snug pressure around your dick";
-	Text.Add("Starting out slow, you rock your [hipsDesc] back and forth, establishing a rhythm. Your [cockDesc] is glistening with moisture as you pull out, leaving only the [cockTip] inside Cale’s hole, making pushing it inside again all that much easier. With each slow, determined thrust, you bury yourself deeper and deeper inside the wolf, sighing in pleasure at the [real].", parse);
+	parse["vag"] = player.FirstVag() ? function() { return player.FirstVag().Short(); } : "crotch";
+	parse["real"] = p1cock.isStrapon ? Text.Parse("pressure of the toy grinding against your [vag]", parse) : "snug pressure around your dick";
+	Text.Add("Starting out slow, you rock your [hips] back and forth, establishing a rhythm. Your [cock] is glistening with moisture as you pull out, leaving only the [cockTip] inside Cale’s hole, making pushing it inside again all that much easier. With each slow, determined thrust, you bury yourself deeper and deeper inside the wolf, sighing in pleasure at the [real].", parse);
 	Text.NL();
 	if(cale.Slut() >= 60)
 		Text.Add("From his moans, you guess that the horny wolf has gone into heat again, but you know just the cure for that condition: a hot, deep dicking, applied roughly and repeatedly.", parse);
@@ -1066,7 +1022,7 @@ Scenes.Cale.SexFuckHim = function(outside, opts) {
 	Text.NL();
 	if(allCocks.length > 0) {
 		parse["isAre"] = allCocks.length > 1 ? "are" : "is";
-		Text.Add("Your remaining [multiCockDesc2] [isAre] rubbing snugly between the wolf’s spread cheeks, tickled by the soft fur of his raised tail. Speaking of cocks...", parse);
+		Text.Add("Your remaining [cocks2] [isAre] rubbing snugly between the wolf’s spread cheeks, tickled by the soft fur of his raised tail. Speaking of cocks...", parse);
 		Text.NL();
 	}
 	Text.Add("The wolf pants for breath, letting out a lewd howl as a shudder goes through his entire body, his legs giving out. If he wasn’t already propped up by the convenient [log], he’d probably collapse. Reaching down to confirm your suspicion, you feel Cale’s rigid member twitching, the knot at the base twice his usual size.", parse);
@@ -1112,7 +1068,7 @@ Scenes.Cale.SexFuckHim = function(outside, opts) {
 				Text.Clear();
 				Text.Add("You lean forward, nuzzling the pliant wolf and burying your head in the fluffy fur of his neck. His insides feel <i>so</i> good, you can barely contain your rutting. Cale is mumbling something about you being his alpha, though it’s difficult to make out between his cries of pleasure.", parse);
 				Text.NL();
-				Text.Add("Damn straight you are. Caught up in the moment, you redouble your efforts, ramming your [cockDesc] into the poor wolf for all you’re worth. You wrap your arms around his chest, playing with his nipples hidden between his fur, and reach down between his spread legs once more. Cale is rock hard, his bobbing cock still leaking a thick trail of cum. He probably isn’t very far from another climax, and neither are you.", parse);
+				Text.Add("Damn straight you are. Caught up in the moment, you redouble your efforts, ramming your [cock] into the poor wolf for all you’re worth. You wrap your arms around his chest, playing with his nipples hidden between his fur, and reach down between his spread legs once more. Cale is rock hard, his bobbing cock still leaking a thick trail of cum. He probably isn’t very far from another climax, and neither are you.", parse);
 				Text.NL();
 				if(player.SubDom() > 25) {
 					parse["real"] = p1cock.isStrapon ? "" : " as you unleash your seed into his bowels";
@@ -1157,11 +1113,11 @@ Scenes.Cale.SexFuckHim = function(outside, opts) {
 				Text.Clear();
 				Text.Add("You’ve already made him cum, how about asking him to return the favor? Grabbing the wolf by the armpits, you haul him into an upright position, shifting him around as you sit down on the [log] again, with Cale riding you reverse cowgirl.", parse);
 				Text.NL();
-				Text.Add("<i>“Now, bounce for me,”</i> you purr, holding his arms behind his back in a light grip. He whimpers and whines, but complies quickly enough. The wolf leans back against you to support himself while he strains his powerful legs, pushing himself up until only your [cockTip] remains inside his stretched butt. Either by design or his legs giving out, the wolf then slides down your [cockDesc], letting gravity handle the rest.", parse);
+				Text.Add("<i>“Now, bounce for me,”</i> you purr, holding his arms behind his back in a light grip. He whimpers and whines, but complies quickly enough. The wolf leans back against you to support himself while he strains his powerful legs, pushing himself up until only your [cockTip] remains inside his stretched butt. Either by design or his legs giving out, the wolf then slides down your [cock], letting gravity handle the rest.", parse);
 				Text.NL();
 				Text.Add("You grab hold of his hips, helping him repeat the motion. ", parse);
 				if(knotted)
-					Text.Add("Every time the wolf reaches the root of your [cockDesc], his stretched colon meets further resistance in the form of your knot. At first, he has trouble taking it, but as he continues riding you, he manages to push himself lower and lower. ", parse);
+					Text.Add("Every time the wolf reaches the root of your [cock], his stretched colon meets further resistance in the form of your knot. At first, he has trouble taking it, but as he continues riding you, he manages to push himself lower and lower. ", parse);
 				Text.Add("Cale is doing most of the work, with you gently guiding him - one hand raising his butt and the other on the small of his back, keeping him upright. There is no doubt at this point that he likes this new position even more, as his own canid member is standing at attention in all its nine inch glory. Drops of cum are still dangling from his pointed tip, remnants of his last orgasm.", parse);
 				Text.NL();
 				parse["knot"] = knotted ? ", knot and all" : "";
@@ -1200,7 +1156,7 @@ Scenes.Cale.SexFuckHim = function(outside, opts) {
 			if(allCocks.length > 0) {
 				parse["notS"]     = allCocks.length > 1 ? "" : "s";
 				parse["itsTheir"] = allCocks.length > 1 ? "their" : "its";
-				Text.Add("Your remaining [multiCockDesc2] spray[notS] [itsTheir] load on Cale’s back, drenching him even further. At the end of this, the wolf is going to need a long and thorough bath.", parse);
+				Text.Add("Your remaining [cocks2] spray[notS] [itsTheir] load on Cale’s back, drenching him even further. At the end of this, the wolf is going to need a long and thorough bath.", parse);
 				Text.NL();
 			}
 			Text.Add("You sigh contentedly, collapsing beside your lupine companion.", parse);
@@ -1240,13 +1196,13 @@ Scenes.Cale.SexFuckHim = function(outside, opts) {
 							
 							player.AddLustFraction(0.3);
 							
-							Text.Add("He swallows audibly. <i>“I was thinking about what we did…”</i> he trails off. <i>“What <b>you</b> did to <b>me</b>,”</i> he adds, as if that wasn’t obvious. Just to mess with him, you nudge him in the back with your [multiCockDesc].", parse);
+							Text.Add("He swallows audibly. <i>“I was thinking about what we did…”</i> he trails off. <i>“What <b>you</b> did to <b>me</b>,”</i> he adds, as if that wasn’t obvious. Just to mess with him, you nudge him in the back with your [cocks].", parse);
 							Text.NL();
 							Text.Add("You know he's not going to say he didn't like it, you declare, your hand slowly creeping downward, toward his loins. Enjoying every moment of it, you wrap your fingers possessively around the warmth of his now-erect cock. Up and down, you stroke him in slow, languid pumps, your thumb rubbing circles over his pointy, cum-soaked glans.", parse);
 							Text.NL();
 							Text.Add("He thrusts in tandem with your stroking, wary of disturbing your pace lest you stop your ministrations. He moans softly as he begins gyrating his hips. <i>“I didn’t… I mean, I didn’t say I didn’t like it,”</i> he replies, humping your hand softly. Considering the way his face is scrunching up in pleasure, you’d guess this simple handjob is feeling nearly as good as Rosalin’s pussy.", parse);
 							Text.NL();
-							Text.Add("Smirking, you ask if he wants another go so soon after your last romp, rubbing your [cockDesc] against his back suggestively.", parse);
+							Text.Add("Smirking, you ask if he wants another go so soon after your last romp, rubbing your [cock] against his back suggestively.", parse);
 							Text.NL();
 							Text.Add("<i>“I… kinda wish I could, but I’m spent,”</i> Cale sighs, shuddering as you keep jerking him off. <i>“I… hah… I’ve never felt like this before, not once…”</i> he trails off, moaning softly as you stroke him. In record time, another throb runs through the stiff cock in your hands as Cale’s third, significantly weaker, orgasm splatters uselessly on the ground.", parse);
 							Text.NL();
@@ -1416,13 +1372,7 @@ Scenes.Cale.SexFuckHim = function(outside, opts) {
 Scenes.Cale.SexCatchVag = function(outside) {
 	var parse = {
 		log           : outside ? "log" : "bedroll",
-		playername    : player.name,
-		skinDesc      : function() { return player.SkinDesc(); },
-		tongueDesc    : function() { return player.TongueDesc(); },
-		faceDesc      : function() { return player.FaceDesc(); },
-		multiCockDesc : function() { return player.MultiCockDesc(); },
-		vagDesc       : function() { return player.FirstVag().Short(); },
-		hipsDesc      : function() { return player.HipsDesc(); }
+		playername    : player.name
 	};
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
@@ -1474,9 +1424,9 @@ Scenes.Cale.SexCatchVag = function(outside) {
 	options.push({ nameStr : "Blowjob",
 		func : function() {
 			Text.Clear();
-			Text.Add("Smirking seductively, you sashay your way over to Cale and kneel with exaggeratedly demure motions before him. You slowly run your tongue over your lips in a tantalizing motion that makes the wolf move his hands, allowing you to lower your [faceDesc] toward his groin.", parse);
+			Text.Add("Smirking seductively, you sashay your way over to Cale and kneel with exaggeratedly demure motions before him. You slowly run your tongue over your lips in a tantalizing motion that makes the wolf move his hands, allowing you to lower your [face] toward his groin.", parse);
 			Text.NL();
-			Text.Add("Your [tongueDesc] glides out and then slowly strokes up his half-erect shaft, starting just above his sheath and moving up to his tip. You circle his glans with the tip of your tongue, then release him before applying your [tongueTip] back at his base and gliding up again, smooth, even strokes up and down.", parse);
+			Text.Add("Your [tongue] glides out and then slowly strokes up his half-erect shaft, starting just above his sheath and moving up to his tip. You circle his glans with the tip of your tongue, then release him before applying your [tongueTip] back at his base and gliding up again, smooth, even strokes up and down.", parse);
 			Text.NL();
 			Text.Add("<i>“Shit! Just don’t go overboard on it. Don’t wanna disappoint and cum before I’ve had a chance at your pussy.”</i>", parse);
 			Text.NL();
@@ -1496,7 +1446,7 @@ Scenes.Cale.SexCatchVag = function(outside) {
 		options.push({ nameStr : "Stroke self",
 			func : function() {
 				Text.Clear();
-				Text.Add("Grinning cockily back at him, you shift your pose slightly to more prominently display your [multiCockDesc], hands on your [hipsDesc].", parse);
+				Text.Add("Grinning cockily back at him, you shift your pose slightly to more prominently display your [cocks], hands on your [hips].", parse);
 				Text.NL();
 				var biggestCock = player.BiggestCock();
 				if(biggestCock) {
@@ -1506,16 +1456,16 @@ Scenes.Cale.SexCatchVag = function(outside) {
 					Text.Add("Your skin tickles at the friction, blood rushing into your shaft[s] as you repeat the milking motion again with your first [hand], the second [hand] taking its place around the base of your dick. With smooth, even strokes, you rhythmically pull and stroke, moaning softly in your arousal, eyes hooded in lust as you glance at your wolfy slut and see if he’s enjoying the show.", parse);
 				}
 				else {
-					Text.Add("Adjusting the straps around your loins to make sure it’s properly fixed, you grab your prosthetic [multiCockDesc] and slot it home, checking to see that it’s set properly with slow, purposeful motions. Once satisfied that it’s secure, you smirk at Cale and begin to caress the faux-dick with your fingers, a lewd groan of appreciation bubbling from your lips as they dance up and down across the dildo’s length, acting as if you can truly feel yourself upon the imitation phallus.", parse);
+					Text.Add("Adjusting the straps around your loins to make sure it’s properly fixed, you grab your prosthetic [cocks] and slot it home, checking to see that it’s set properly with slow, purposeful motions. Once satisfied that it’s secure, you smirk at Cale and begin to caress the faux-dick with your fingers, a lewd groan of appreciation bubbling from your lips as they dance up and down across the dildo’s length, acting as if you can truly feel yourself upon the imitation phallus.", parse);
 				}
 				Text.NL();
-				Text.Add("Cale watches the spectacle unfold, tongue lolling out as he pants and strokes his own cock with a hand. His other hand is busy teasing his entrance. The slutty wolf lets out a wanton moan as he finally pierces his tight ring with his middle fingers, masturbating as he dreams of your [multiCockDesc] entering him.", parse);
+				Text.Add("Cale watches the spectacle unfold, tongue lolling out as he pants and strokes his own cock with a hand. His other hand is busy teasing his entrance. The slutty wolf lets out a wanton moan as he finally pierces his tight ring with his middle fingers, masturbating as he dreams of your [cocks] entering him.", parse);
 				Text.NL();
 				Text.Add("<i>“Damn, [playername]. That’s playing dirty, teasing me with the promise of buttsex,”</i> he says, stifling a moan as he wills himself to stop masturbating. His cock is already throbbing at full mast, the veins bulging out as a droplet of pre slides down his length.", parse);
 				Text.NL();
 				Text.Add("Maybe so, you concede, but it certainly got him in the mood, now didn’t it? Now, you’ve a hungry pussy here just waiting for some stuffing of its own; if he does a good job, you’ll see about stuffing his ass in turn, you promise.", parse);
 				Text.NL();
-				Text.Add("<i>“Deal! Now, why don’t you see about settling on that [log]-”</i> You stop him with a finger on his lips. Smiling, you shake your head and move to take his shoulders, pushing him down and leaning him back against the [log] before moving to straddle him. Deliberately letting your [multiCockDesc] rest against his chest, you grind your hips into his torso and slowly glide down until your [vagDesc] is hovering just above his hot erection.", parse);
+				Text.Add("<i>“Deal! Now, why don’t you see about settling on that [log]-”</i> You stop him with a finger on his lips. Smiling, you shake your head and move to take his shoulders, pushing him down and leaning him back against the [log] before moving to straddle him. Deliberately letting your [cocks] rest against his chest, you grind your hips into his torso and slowly glide down until your [vag] is hovering just above his hot erection.", parse);
 				Text.NL();
 				
 				Scenes.Cale.SexCatchVagEntrypoint(outside);
@@ -1533,21 +1483,9 @@ Scenes.Cale.SexCatchVagEntrypoint = function(outside, fromAnal, customIntro) {
 	var parse = {
 		log           : outside ? "log" : "bedroll",
 		playername    : player.name,
-		guygal        : player.mfTrue("guy", "gal"),
-		buttDesc      : function() { return player.Butt().Short(); },
-		anusDesc      : function() { return player.Butt().AnalShort(); },
-		vagDesc       : function() { return player.FirstVag().Short(); },
-		legsDesc      : function() { return player.LegsDesc(); },
-		feetDesc      : function() { return player.FeetDesc(); },
-		breastsDesc   : function() { return player.FirstBreastRow().Short(); },
-		nipDesc       : function() { return player.FirstBreastRow().NipShort(); },
-		multiCockDesc : function() { return player.MultiCockDesc(); },
-		cockDesc      : function() { return cock.Short(); },
-		cockTip       : function() { return cock.TipShort(); },
-		armorDesc     : function() { return player.ArmorDesc(); },
-		tailDesc      : function() { return player.HasTail().Short(); },
-		ballsDesc     : function() { return player.BallsDesc(); }
+		guygal        : player.mfTrue("guy", "gal")
 	};
+	parse = player.ParserTags(parse, "", cock);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	
 	//Note, use custom intro instead if applicable
@@ -1564,7 +1502,7 @@ Scenes.Cale.SexCatchVagEntrypoint = function(outside, fromAnal, customIntro) {
 			Text.Add("Grinning back, you reach out and gently pat his head, assuring him that only the best is good enough for your favorite wolf. Your grin widens as you hear an arrhythmic thumping noise; Cale’s tail is wagging so hard that he’s drumming on the [log] behind him.", parse);
 		}
 		Text.NL();
-		Text.Add("Now that the foreplay is over with, it’s time to have some real fun. With a final breath, you finish your descent, allowing his cock to close the distance between you and push into your folds. The feeling of him spearing into your needy [vagDesc] sends jolts of both pain and pleasure coursing throughout your body. A groan escapes your throat at the stimulus, only enticing you to sink yourself downward further, refusing to stop until you have reached to just above his knot.", parse);
+		Text.Add("Now that the foreplay is over with, it’s time to have some real fun. With a final breath, you finish your descent, allowing his cock to close the distance between you and push into your folds. The feeling of him spearing into your needy [vag] sends jolts of both pain and pleasure coursing throughout your body. A groan escapes your throat at the stimulus, only enticing you to sink yourself downward further, refusing to stop until you have reached to just above his knot.", parse);
 		Text.NL();
 	}
 	
@@ -1574,11 +1512,11 @@ Scenes.Cale.SexCatchVagEntrypoint = function(outside, fromAnal, customIntro) {
 	
 	Text.Add("Cale’s hands immediately fly to your hips, and you can see his muscles tense as he works to lift you.", parse);
 	Text.NL();
-	Text.Add("You push with your [legsDesc], helping Cale to lift you up and down, your breathing coming in short pants as you feel his fat dick grinding away inside of you with each rise and fall. Your [vagDesc] clamps down as you rise up his length, clenching him as best you can to make it as hard as possible to remove you, slackening only when gravity starts to bring you back down to delicious fullness.", parse);
+	Text.Add("You push with your [legs], helping Cale to lift you up and down, your breathing coming in short pants as you feel his fat dick grinding away inside of you with each rise and fall. Your [vag] clamps down as you rise up his length, clenching him as best you can to make it as hard as possible to remove you, slackening only when gravity starts to bring you back down to delicious fullness.", parse);
 	Text.NL();
-	Text.Add("It doesn’t take long for you to feel Cale’s cold nose bumping against your [nipDesc], and for him to begin licking you slowly and carefully.", parse);
+	Text.Add("It doesn’t take long for you to feel Cale’s cold nose bumping against your [nip], and for him to begin licking you slowly and carefully.", parse);
 	if(player.Lactation())
-		Text.Add(" When a droplet of your milk touches his tongue, he simply chuckles and envelops your nipple in his wolfish muzzle, and begins draining your [breastsDesc] of their precious cream.", parse);
+		Text.Add(" When a droplet of your milk touches his tongue, he simply chuckles and envelops your nipple in his wolfish muzzle, and begins draining your [breasts] of their precious cream.", parse);
 	Text.NL();
 	
 	if(outside)
@@ -1596,7 +1534,7 @@ Scenes.Cale.SexCatchVagEntrypoint = function(outside, fromAnal, customIntro) {
 			Text.Add("Though you naturally can’t feel anything from the action itself, the sight of it and the knowledge that this cocky lady-killer is now eagerly sucking your favorite toy for all he’s worth simply goads your pleasure higher and higher.", parse);
 		Text.NL();
 		parse["pre"] = cock.isStrapon ? "" : ", draining it of your pre";
-		Text.Add("He takes your [cockDesc] into his mouth, sucking it like a teat[pre] as you work toward your inevitable high. The ever increasing tempo of your fucking drawing a howling moan from the wolf as he releases your [cockDesc] to let it slap noisily against his chest.", parse);
+		Text.Add("He takes your [cock] into his mouth, sucking it like a teat[pre] as you work toward your inevitable high. The ever increasing tempo of your fucking drawing a howling moan from the wolf as he releases your [cock] to let it slap noisily against his chest.", parse);
 		Text.NL();
 	}
 	
@@ -1655,7 +1593,7 @@ Scenes.Cale.SexCatchVagEntrypoint = function(outside, fromAnal, customIntro) {
 				
 				Gui.NextPrompt(function() {
 					Text.Clear();
-					Text.Add("Stretching yourself, enjoying the tingles racing through your nerves, you finish pulling on your [armorDesc], looking back to see Cale just making the final adjustments to his own clothes.", parse);
+					Text.Add("Stretching yourself, enjoying the tingles racing through your nerves, you finish pulling on your [armor], looking back to see Cale just making the final adjustments to his own clothes.", parse);
 					Text.NL();
 					Text.Add("<i>“Thanks for the awesome ride, [playername]. Glad to play pony for your cowgirl fantasies anytime,”</i> he teases.", parse);
 					if(cale.Slut() >= 60)
@@ -1675,18 +1613,18 @@ Scenes.Cale.SexCatchVagEntrypoint = function(outside, fromAnal, customIntro) {
 		options.push({ nameStr : "No",
 			func : function() {
 				Text.Clear();
-				Text.Add("Cale’s thrust double in speed as he becomes a blur, trying his best to not let his knot slip into your used [vagDesc]. With a triumphant howl, the wolf cums! Spurt after spurt of his lupine spunk painting your walls white, even as some of his copious load escapes your entrance to drench his knot and balls. You can feel him throbbing inside, his hips still moving, or perhaps just trembling, in pleasure until he finally collapses in a panting heap of satisfied wolf.", parse);
+				Text.Add("Cale’s thrust double in speed as he becomes a blur, trying his best to not let his knot slip into your used [vag]. With a triumphant howl, the wolf cums! Spurt after spurt of his lupine spunk painting your walls white, even as some of his copious load escapes your entrance to drench his knot and balls. You can feel him throbbing inside, his hips still moving, or perhaps just trembling, in pleasure until he finally collapses in a panting heap of satisfied wolf.", parse);
 				Text.NL();
 				
 				Scenes.Cale.Impregnate(player, PregnancyHandler.Slot.Vag, 2);
 				
 				parse["cum"] = cum > 3 ? " cum-slickened" : "";
-				Text.Add("With a great heaving sigh of satisfaction, you allow yourself to slowly sink atop him, cuddling him like a fluffy[cum] pillow as you rest on his form, bathing in your own warm glow of pleasure. Cheek to cheek, you nuzzle him softly, content to lie here until you feel like your [legsDesc] won’t just give if you try to stand.", parse);
+				Text.Add("With a great heaving sigh of satisfaction, you allow yourself to slowly sink atop him, cuddling him like a fluffy[cum] pillow as you rest on his form, bathing in your own warm glow of pleasure. Cheek to cheek, you nuzzle him softly, content to lie here until you feel like your [legs] won’t just give if you try to stand.", parse);
 				Text.Flush();
 				
 				Gui.NextPrompt(function() {
 					Text.Clear();
-					Text.Add("Having finished getting back into your [armorDesc], you turn to Cale and thank him for the nice time, but you have to go now.", parse);
+					Text.Add("Having finished getting back into your [armor], you turn to Cale and thank him for the nice time, but you have to go now.", parse);
 					Text.NL();
 					Text.Add("Cale, still nonchalantly naked, simply smiles a crooked smile back and waves a hand lightly. <i>“Sure thing, [playername]. Me, I’m gonna stick around a little longer; enjoy the fresh night air.”</i> He closes his eyes and stretches luxuriantly, a soft groan escaping him, then smirks and gently pats at his balls. <i>“Not to mention the tingles my balls get after a great fuck,”</i> he quips.", parse);
 					Text.NL();
@@ -1714,24 +1652,24 @@ Scenes.Cale.SexCatchVagEntrypoint = function(outside, fromAnal, customIntro) {
 			Text.Add("Giving him a slightly dopey grin, you nod and assure him that you’re okay with that idea; you feel far too good to protest the idea of more sex. Add in that Cale hasn’t cum yet and, well, that’s even more reason.", parse);
 			Text.NL();
 			parse["is"] = player.HasLegs() ? "are" : "is";
-			Text.Add("When the wolf attempts to lift you from his lap, you comply as well as you can, using his shoulders to help rise out of his lap. Your [legsDesc] [is] still too wobbly to have a hope of standing up, but that’s alright; it doesn’t seem like Cale has any plans to move too far as he helps you to sprawl across the [log] behind him.", parse);
+			Text.Add("When the wolf attempts to lift you from his lap, you comply as well as you can, using his shoulders to help rise out of his lap. Your [legs] [is] still too wobbly to have a hope of standing up, but that’s alright; it doesn’t seem like Cale has any plans to move too far as he helps you to sprawl across the [log] behind him.", parse);
 			Text.NL();
 			Text.Add("Once you are properly positioned to his liking, he gives your shoulder a friendly pat and moves behind you, where you can feel his hands coming down to rest on your ass.", parse);
 			Text.NL();
-			Text.Add("<i>“What a nice view we got from back here,”</i> he comments, chuckling as he caresses your [buttDesc].", parse);
+			Text.Add("<i>“What a nice view we got from back here,”</i> he comments, chuckling as he caresses your [butt].", parse);
 			Text.NL();
 			if(player.HasPrehensileTail()) {
-				Text.Add("You roll your eyes in exaggerated annoyance; does he have to always throw around those cheesy lines of his? Your [tailDesc] flicks around in a half-playful reprimand to slap his cheek, firmly enough that he can feel it, yet not so hard as to actually hurt him.", parse);
+				Text.Add("You roll your eyes in exaggerated annoyance; does he have to always throw around those cheesy lines of his? Your [tail] flicks around in a half-playful reprimand to slap his cheek, firmly enough that he can feel it, yet not so hard as to actually hurt him.", parse);
 				Text.NL();
 				Text.Add("<i>“Hey!”</i> he protests weakly at your tail slap.", parse);
 			}
 			else
 				Text.Add("You don’t even bother trying to hide the fact you are rolling your eyes, heaving an exaggerated sigh at hearing yet another lame line of his. Doesn’t he have any better material than that?", parse);
 			Text.NL();
-			Text.Add("Clicking your tongue in the iconic 'tsk-tsk' noise, you teasingly ask if he really has to use those same corny lines all the time. If he’s going to be that lame that he has to keep yapping like that, well, then you’re done - you got what you wanted, after all. Smirking to yourself, you start to push yourself up off of the [log] with your arms as if you're intending to rise to your [feetDesc] and leave.", parse);
+			Text.Add("Clicking your tongue in the iconic 'tsk-tsk' noise, you teasingly ask if he really has to use those same corny lines all the time. If he’s going to be that lame that he has to keep yapping like that, well, then you’re done - you got what you wanted, after all. Smirking to yourself, you start to push yourself up off of the [log] with your arms as if you're intending to rise to your [feet] and leave.", parse);
 			Text.NL();
 			parse["dudelady"] = player.mfTrue("dude", "lady");
-			Text.Add("<i>“W-wait, I’m not done yet!”</i> He grasps your [buttDesc], firmly holding you in position. <i>“Hold on there, [dudelady]. Geez, no need to be so pushy; never heard of foreplay?”</i> he teases.", parse);
+			Text.Add("<i>“W-wait, I’m not done yet!”</i> He grasps your [butt], firmly holding you in position. <i>“Hold on there, [dudelady]. Geez, no need to be so pushy; never heard of foreplay?”</i> he teases.", parse);
 			Text.NL();
 			Text.Add("You wouldn’t call what he was doing foreplay, you promptly shoot back. You have higher standards than that, you declare, a playful smirk on your lips.", parse);
 			Text.NL();
@@ -1754,7 +1692,7 @@ Scenes.Cale.SexCatchVagEntrypoint = function(outside, fromAnal, customIntro) {
 				Text.Add("<i>“Ouch! Now you’re just being cruel, [playername].”</i> He feigns hurt, but you know he’s actually enjoying this. Still… you’d like to get things going; after all, you can only humor him for so long. ", parse);
 			}
 			Text.NL();
-			parse["ass"] = cale.Slut() >= 30 ? Text.Parse(" and up your ass crack, making sure to tease your [anusDesc]", parse) : "";
+			parse["ass"] = cale.Slut() >= 30 ? Text.Parse(" and up your ass crack, making sure to tease your [anus]", parse) : "";
 			Text.Add("<i>“Okay then, I suppose there are better things I could do with my mouth than keep talking.”</i> He leans over to give a long lick over your pussy[ass].", parse);
 			Text.NL();
 			parse["sf"] = player.body.SoftFeet() ? ", your toes curling at the sensation" : "";
@@ -1770,7 +1708,7 @@ Scenes.Cale.SexCatchVagEntrypoint = function(outside, fromAnal, customIntro) {
 				Text.Add("Cale sets about fingering you, ensuring you’re wet and horny again.", parse);
 			Text.Add(" Once he’s done with that, he aligns his cock with your pussy once more and thrusts in, grinding and stirring up your insides to ensure your juices cling to his dick.", parse);
 			Text.NL();
-			Text.Add("<i>“This should be enough.”</i>  Pulling out, he aligns his cock with your [anusDesc] and grins. <i>“Ready?”</i>", parse);
+			Text.Add("<i>“This should be enough.”</i>  Pulling out, he aligns his cock with your [anus] and grins. <i>“Ready?”</i>", parse);
 			Text.NL();
 			Text.Add("You grin to yourself and wriggle your ass enticingly at the wolf-morph, playfully asking what he thinks the answer is.", parse);
 			Text.Flush();
@@ -1782,14 +1720,14 @@ Scenes.Cale.SexCatchVagEntrypoint = function(outside, fromAnal, customIntro) {
 		}, 1.0, function() { return true; });
 		
 		scenes.AddEnc(function() {
-			Text.Add("Without so much as a warning, Cale pulls out of your used vagina and nests his knotty wolf-pecker between the cheeks of your [buttDesc]. He presses them together as he fucks your ass cleavage, rubbing his length against your rosebud.", parse);
+			Text.Add("Without so much as a warning, Cale pulls out of your used vagina and nests his knotty wolf-pecker between the cheeks of your [butt]. He presses them together as he fucks your ass cleavage, rubbing his length against your rosebud.", parse);
 			Text.NL();
 			
 			Scenes.Cale.SexCaleShowerEntrypoint(outside);
 		}, 1.0, function() { return true; });
 		scenes.AddEnc(function() {
 			var p1cock = player.BiggestCock(cocksInAss);
-			parse["cockDesc"] = function() { return p1cock.Short(); }
+			parse["cock"] = function() { return p1cock.Short(); }
 			parse["cockTip"]  = function() { return p1cock.TipShort(); }
 			
 			Text.Add("<i>“[playername]?”</i>", parse);
@@ -1798,23 +1736,23 @@ Scenes.Cale.SexCatchVagEntrypoint = function(outside, fromAnal, customIntro) {
 			Text.NL();
 			Text.Add("<i>“Since you’re properly equipped,”</i> he flicks your [cockTip] with a finger, gathering some spunk on his digit, <i>“and you’ve already had your fun, how about throwing me a bone?”</i> he grins, lapping your cum off his finger.", parse);
 			Text.NL();
-			Text.Add("With a weak grin and a faint chuckle, you point out that the spirit may be willing, but the flesh is weak; indicating your spent [cockDesc], you point out you’re not exactly properly set up to give him his bone.", parse);
+			Text.Add("With a weak grin and a faint chuckle, you point out that the spirit may be willing, but the flesh is weak; indicating your spent [cock], you point out you’re not exactly properly set up to give him his bone.", parse);
 			Text.NL();
 			Text.Add("<i>“No worry, [playername]. Don'cha know that wolves always lick their bones before the grind?”</i> he suggests with a smirk, hands gripping your hips as he slowly moves you off of his shaft and closer to his maw. Realizing what he has in mind, smirking back, you wriggle a little to help him bring your dick into reach of his mouth.", parse);
 			Text.NL();
 			Text.Add("Cale wastes no time and engulfs your cock, quickly lathering it with saliva before pulling out and nosing your [cockTip] while his tongue laps at the underside. Tingles race up your spine, your lips pouting in a soft moan as your already sensitive flesh responds to his tender licks and suckles. In your state, he has you at half-mast within moments, your dick throbbing in time with your heartbeat as it rests against his flexible organ.", parse);
 			Text.NL();
 			if(player.HasBalls()) {
-				Text.Add("He moves under your [multiCockDesc] to lap at your [ballsDesc], sucking on them until they’re nice and plump. Then he moves back to your [cockDesc], returning to his mission.", parse);
+				Text.Add("He moves under your [cocks] to lap at your [balls], sucking on them until they’re nice and plump. Then he moves back to your [cock], returning to his mission.", parse);
 				Text.NL();
 			}
 			parse["sh"] = player.Genitalia().Sheath() ? "your sheath" : "the base of your cock";
-			Text.Add("Cale nuzzles your [cockDesc] amorously, kissing [sh] in the process. Under such treatment, it doesn’t take long for your erection to become as hard as it can get, throbbing and ready for some wolfie ass. <i>“Now ain’t that a sight for sore eyes?”</i> Cale chuckles.", parse);
+			Text.Add("Cale nuzzles your [cock] amorously, kissing [sh] in the process. Under such treatment, it doesn’t take long for your erection to become as hard as it can get, throbbing and ready for some wolfie ass. <i>“Now ain’t that a sight for sore eyes?”</i> Cale chuckles.", parse);
 			Text.NL();
 			Text.Add("You simply grin back, happy to let Cale make his bad jokes when you know what’s coming to you. Besides, you have to agree with him a little anyway.", parse);
 			Text.NL();
 			parse["legs"] = player.LowerBodyType() != LowerBodyType.Single ? "legs are spread and your " : "";
-			Text.Add("<i>“A’ight, let’s get down to business.”</i> He maneuvers you off him and seats you on the [log], ensuring your [legs][cockDesc] is in plain sight. He saunters up to you and aligns you with his needy boypussy. He grins at you expectantly, daring you to take the next step. Certainly not one to back away from this challenge, you grab his hips for leverage and roughly pull him down, plunging your cock into the wolf’s greedy ass in a single swift, powerful thrust.", parse);
+			Text.Add("<i>“A’ight, let’s get down to business.”</i> He maneuvers you off him and seats you on the [log], ensuring your [legs][cock] is in plain sight. He saunters up to you and aligns you with his needy boypussy. He grins at you expectantly, daring you to take the next step. Certainly not one to back away from this challenge, you grab his hips for leverage and roughly pull him down, plunging your cock into the wolf’s greedy ass in a single swift, powerful thrust.", parse);
 			Text.NL();
 			
 			Scenes.Cale.SexCaleButtslutEntrypoint(cocksInAss, outside);
@@ -1827,13 +1765,9 @@ Scenes.Cale.SexCatchVagEntrypoint = function(outside, fromAnal, customIntro) {
 Scenes.Cale.SexCaleShowerEntrypoint = function(outside) {
 	var parse = {
 		log        : outside ? "log" : "bedroll",
-		playername : player.name,
-		tailDesc   : function() { return player.HasTail().Short(); },
-		wingsDesc  : function() { return player.HasWings().Short(); },
-		hairDesc   : function() { return player.Hair().Short(); },
-		buttDesc   : function() { return player.Butt().Short(); },
-		skin       : function() { return player.SkinDesc(); }
+		playername : player.name
 	};
+	parse = player.ParserTags(parse);
 	
 	if(player.SubDom() > 0)
 		Text.Add("Hey! You’re not done yet! What the hell is he doing?", parse);
@@ -1842,9 +1776,9 @@ Scenes.Cale.SexCaleShowerEntrypoint = function(outside) {
 	Text.NL();
 	Text.Add("<i>“Just feel like showering you with my appreciation, [playername]. Plus you’ve got a really nice butt,”</i> he slaps your ass. <i>“Can ya blame me for wanting to take it for a spin?”</i>", parse);
 	Text.NL();
-	parse["tail"] = player.HasTail() ? Text.Parse("[tailDesc], ", parse) : "";
-	parse["wing"] = player.HasWings() ? Text.Parse("[wingsDesc], ", parse) : "";
-	Text.Add("Before you can answer that, the wolf-morph shudders, and cums right then and there. Jets of hot lupine jism raining down upon your back, splattering your [tail][wing][hairDesc], and your butt. Cale pumps in-between your butt cheeks a few times more and showers you with a fresh batch. The process continues until he’s spent and you’re absolutely plastered in white wolf sperm.", parse);
+	parse["t"] = player.HasTail() ? Text.Parse("[tail], ", parse) : "";
+	parse["wing"] = player.HasWings() ? Text.Parse("[wings], ", parse) : "";
+	Text.Add("Before you can answer that, the wolf-morph shudders, and cums right then and there. Jets of hot lupine jism raining down upon your back, splattering your [t][wing][hair], and your butt. Cale pumps in-between your butt cheeks a few times more and showers you with a fresh batch. The process continues until he’s spent and you’re absolutely plastered in white wolf sperm.", parse);
 	Text.NL();
 	Text.Add("<i>“Hehe, that’s a nice look for you,”</i> Cale comments, leaning back against the [log] to rest. <i>“You’re now officially marked as my territory.”</i>", parse);
 	Text.NL();
@@ -1857,7 +1791,7 @@ Scenes.Cale.SexCaleShowerEntrypoint = function(outside) {
 	Text.NL();
 	Text.Add("<i>“That sure hit the spot,”</i> Cale chuckles, leaning onto the [log] for a quick rest. ", parse);
 	if(cale.Slut() >= 60)
-		Text.Add("<i>“Just remember to return the favor sometime. My ass is aching for a decent fuck, and I could use a bath of my own.”</i> He gives you a gentle slap on your [buttDesc].", parse);
+		Text.Add("<i>“Just remember to return the favor sometime. My ass is aching for a decent fuck, and I could use a bath of my own.”</i> He gives you a gentle slap on your [butt].", parse);
 	else if(cale.Slut() >= 30)
 		Text.Add("<i>“How’d you enjoy your bath? Feels good, doesn’t it? I heard it was good for your skin,”</i> Cale teases, chuckling.", parse);
 	else
@@ -1874,27 +1808,25 @@ Scenes.Cale.SexCaleShowerEntrypoint = function(outside) {
 
 Scenes.Cale.SexCaleCleanCockEntrypoint = function(cock, outside) {
 	var parse = {
-		breastsDesc : function() { return player.FirstBreastRow().Short(); },
-		cockDesc    : function() { return cock.Short(); },
-		ballsDesc   : function() { return player.BallsDesc(); },
-		cockTip     : function() { return cock.TipShort(); }
+		
 	};
+	parse = player.ParserTags(parse, "", cock);
 	
 	Text.Add("<i>“Hey, let me take care of that for you,”</i> he points at your messy belly and chest. <i>“No sense letting good seed go to waste, right?”</i> he licks his lips.", parse);
 	Text.NL();
 	Text.Add("No, there most certainly isn’t, you agree, grinning as you lean back to better let him have access to the mess he made.", parse);
 	Text.NL();
-	Text.Add("Cale immediately sets to work, starting off by cleaning your belly. He laps along your navel, playfully teasing you by inserting his tongue into your belly button. Then he moves upward, licking your [breastsDesc] of their fine layer of wolf-cum.", parse);
+	Text.Add("Cale immediately sets to work, starting off by cleaning your belly. He laps along your navel, playfully teasing you by inserting his tongue into your belly button. Then he moves upward, licking your [breasts] of their fine layer of wolf-cum.", parse);
 	if(player.Lactation())
 		Text.Add(" 'Course, being the cocky bastard he is, he just can’t resist getting a taste of your nutritious milk along the way. <i>“What? You keep them on display,”</i> he grins.", parse);
 	Text.NL();
-	Text.Add("As soon as he’s done, he moves to lick your [cockDesc]. <i>“Some tasty meat for the big, bad wolf,”</i> he quips.", parse);
+	Text.Add("As soon as he’s done, he moves to lick your [cock]. <i>“Some tasty meat for the big, bad wolf,”</i> he quips.", parse);
 	Text.NL();
 	Text.Add("You roll your eyes at the cheesy pun, noting to yourself that he certainly wasn’t so bad earlier.", parse);
 	Text.NL();
 	Text.Add("He licks the entirety of your shaft clean", parse);
 	if(player.HasBalls())
-		Text.Add(", even making a detour to suck on your [ballsDesc]", parse);
+		Text.Add(", even making a detour to suck on your [balls]", parse);
 	Text.Add(". Not satisfied, he immediately moves to kiss your [cockTip], stimulating your urethra with his tongue and drawing just a tiny bit of extra cum. <i>“Oy! You were holding out of me? That’s not cool!”</i> he playfully chides you.", parse);
 	Text.NL();
 	Text.Add("Looks like you both missed that bit. You’ll just have to try harder next time.", parse);
@@ -1916,34 +1848,26 @@ Scenes.Cale.SexCaleButtslutEntrypoint = function(cocks, outside) {
 	
 	var parse = {
 		log        : outside ? "log" : "bedroll",
-		playername : player.name,
-		s          : player.NumCocks() > 1 ? "s" : "",
-		tailDesc   : function() { return player.HasTail().Short(); },
-		wingsDesc  : function() { return player.HasWings().Short(); },
-		hairDesc   : function() { return player.Hair().Short(); },
-		buttDesc   : function() { return player.Butt().Short(); },
-		cockDesc   : function() { return p1cock.Short(); },
-		skinDesc   : function() { return player.SkinDesc(); },
-		tongueDesc : function() { return player.TongueDesc(); },
-		breastsDesc : function() { return player.FirstBreastRow().Short(); }
+		playername : player.name
 	};
 	parse = player.ParserTags(parse);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	
 	Text.Add("<i>“Hehe, I knew you’d come around. Now, why don’t you relax and let me milk your cock[s] of all its tasty spunk? Not that you have to restrain yourself, I like it rough,”</i> he grins.", parse);
 	Text.NL();
 	Text.Add("Sounds good to you, and your [hand]s slide down Cale’s back so you can squeeze his ass cheeks appreciatively, one hand moving to stroke the base of his tail.", parse);
 	Text.NL();
-	Text.Add("Cale’s legs bulge with exertion as he flexes them in order to rise, letting his quivering sphincter deform around the contour of your [cockDesc]. As soon as only your head remains embedded in his slutty ass Cale stops, there is a brief delay as he lets gravity take over to impale himself back on your flesh pole with a wet squelch. His anal juices cover your shaft with his hot excitement, his trained butt contracts powerfully, giving the impression he’s sucking you in. Cale only stops his descent when he reaches ", parse);
+	Text.Add("Cale’s legs bulge with exertion as he flexes them in order to rise, letting his quivering sphincter deform around the contour of your [cock]. As soon as only your head remains embedded in his slutty ass Cale stops, there is a brief delay as he lets gravity take over to impale himself back on your flesh pole with a wet squelch. His anal juices cover your shaft with his hot excitement, his trained butt contracts powerfully, giving the impression he’s sucking you in. Cale only stops his descent when he reaches ", parse);
 	if(knotted)
 		Text.Add("your knot, already fully inflated and ready to tie your bitch.", parse);
 	else
 		Text.Add("the base of your cock, having nothing more to take inside himself.", parse);
 	Text.NL();
-	Text.Add("As he stops with a resounding wet slap, you watch his own shaft bobbing to plop wetly against your belly. Some of his wolfy pre leaves an imprint of his tip on your [skinDesc].", parse);
+	Text.Add("As he stops with a resounding wet slap, you watch his own shaft bobbing to plop wetly against your belly. Some of his wolfy pre leaves an imprint of his tip on your [skin].", parse);
 	Text.NL();
 	Text.Add("You’d have to be a fool to deny Cale’s considerable charms when he decides he wants to be the good cockhungry slut you trained him to be. As great as it feels to have him wrapped around your meat, you can’t simply sit back and let him do it all himself. If he wants to be a proper bitch-boy and take it rough, who are you to deny him?", parse);
 	Text.NL();
-	Text.Add("Sitting up, you wrap your arms around his neck to hold him in place for a wet, rough kiss, bluntly thrusting your [tongueDesc] through his lips to dance and tangle with his own broad, flat tongue. Noisily, you slurp and moan into each other’s mouths before he breaks the lip-lock with a gasp.", parse);
+	Text.Add("Sitting up, you wrap your arms around his neck to hold him in place for a wet, rough kiss, bluntly thrusting your [tongue] through his lips to dance and tangle with his own broad, flat tongue. Noisily, you slurp and moan into each other’s mouths before he breaks the lip-lock with a gasp.", parse);
 	Text.NL();
 	Text.Add("Playfully, your head moves to the crook of his neck and you give him a gentle bite, the wolf shuddering in your arms at the gesture. He starts to lift himself back up off of your cock, and you use the motion to help you plant a trail of soft kisses down his neck and over his broad chest until you are level with the exposed pink nub of his nipple. Your tongue playfully flicks out, trailing circles around its expanse before you carefully close your teeth on it in a pleasure-inducing nip that makes him quake.", parse);
 	Text.NL();
@@ -1952,7 +1876,7 @@ Scenes.Cale.SexCaleButtslutEntrypoint = function(cocks, outside) {
 		Text.Add("until your knot nearly pops in.", parse);
 	else
 		Text.Add("as deep as you can.", parse);
-	Text.Add(" He moans like a whore, and your hands move to his thighs, lifting at him, coaxing him to rise again until you shove him back down again as hard and fast as before. Cale practically sings in his pleasure as you hammer him up and down upon your dick, rutting the lupine buttslut until you can feel the tension boiling up inside of you. You’re going to blow any moment now; you can feel your [cockDesc] throbbing madly with the need to cum, your breathing coming quicker and harder as it grows and builds within...", parse);
+	Text.Add(" He moans like a whore, and your hands move to his thighs, lifting at him, coaxing him to rise again until you shove him back down again as hard and fast as before. Cale practically sings in his pleasure as you hammer him up and down upon your dick, rutting the lupine buttslut until you can feel the tension boiling up inside of you. You’re going to blow any moment now; you can feel your [cock] throbbing madly with the need to cum, your breathing coming quicker and harder as it grows and builds within...", parse);
 	Text.NL();
 	Text.Add("<i>“Yeah! Give it to me, give it to me good, [playername]! Mate me like a bitch in heat!”</i> he shamelessly begs.", parse);
 	Text.NL();
@@ -1970,7 +1894,7 @@ Scenes.Cale.SexCaleButtslutEntrypoint = function(cocks, outside) {
 		options.push({ nameStr : "Tie Him",
 			func : function() {
 				Text.Clear();
-				Text.Add("With a roar of effort, you drive Cale and your cock together as hard as you possibly can, jamming the swollen bulb of your flesh through his tight boypussy until he is wedged against you. The feel of his flesh enveloping your knot, grinding it fit to burst, is the last straw for you; you are barely aware of Cale’s cries of pleasure, or the warm semen splattering over your chest and running down your [skinDesc] as your own seed erupts inside of him.", parse);
+				Text.Add("With a roar of effort, you drive Cale and your cock together as hard as you possibly can, jamming the swollen bulb of your flesh through his tight boypussy until he is wedged against you. The feel of his flesh enveloping your knot, grinding it fit to burst, is the last straw for you; you are barely aware of Cale’s cries of pleasure, or the warm semen splattering over your chest and running down your [skin] as your own seed erupts inside of him.", parse);
 				Text.NL();
 				
 				var cum = player.OrgasmCum();
@@ -2004,8 +1928,8 @@ Scenes.Cale.SexCaleButtslutEntrypoint = function(cocks, outside) {
 					Text.NL();
 					Text.Add("Of course you don’t mind, and you quickly tell him so.", parse);
 					Text.NL();
-					parse["balls"] = player.HasBalls() ? " balls deep" : "";
-					Text.Add("<i>“Thanks.”</i> He nuzzles you and closes his eyes, his breathing stabilizing as he falls asleep with your cock still buried[balls] inside him.", parse);
+					parse["b"] = player.HasBalls() ? " balls deep" : "";
+					Text.Add("<i>“Thanks.”</i> He nuzzles you and closes his eyes, his breathing stabilizing as he falls asleep with your cock still buried[b] inside him.", parse);
 					Text.NL();
 					Text.Add("You can’t help but smile; that’s Cale for you, alright. Shifting him to be a little more comfortable against you, you try to shuffle a little to make yourself more comfortable as well. It's going to take a while for your knot to deflate, after all.", parse);
 				}
@@ -2035,7 +1959,7 @@ Scenes.Cale.SexCaleButtslutEntrypoint = function(cocks, outside) {
 	options.push({ nameStr : "Nah",
 		func : function() {
 			Text.Clear();
-			Text.Add("You thrust into Cale’s colon as deeply as you can, the two of you crying out in mutual pleasure as your limits are breached and the both of you climax in unison. Cale’s seed sprays across your stomach and [breastsDesc], trickling strands of off-white running down your [skinDesc], even as your cum floods inside of his ass.", parse);
+			Text.Add("You thrust into Cale’s colon as deeply as you can, the two of you crying out in mutual pleasure as your limits are breached and the both of you climax in unison. Cale’s seed sprays across your stomach and [breasts], trickling strands of off-white running down your [skin], even as your cum floods inside of his ass.", parse);
 			Text.NL();
 			
 			var cum = player.OrgasmCum();
@@ -2087,10 +2011,9 @@ Scenes.Cale.SexCaleButtslutEntrypoint = function(cocks, outside) {
 Scenes.Cale.SexCatchAnal = function(outside) {
 	var parse = {
 		log : outside ? "log" : "bedroll",
-		playername : player.name,
-		lowerArmorDesc : function() { return player.LowerArmorDesc(); },
-		anusDesc : function() { return player.Butt().AnalShort(); }
+		playername : player.name
 	};
+	parse = player.ParserTags(parse);
 	
 	Text.Clear();
 	Text.Add("<i>“It’d be my pleasure,”</i> he says, wagging his tail.", parse);
@@ -2099,11 +2022,11 @@ Scenes.Cale.SexCatchAnal = function(outside) {
 	Text.NL();
 	Text.Add("Orange eyes glitter with amusement as he watches you, lips curved in a wolfish grin. His lupine ears flick atop his head in visible impatience, tail wagging over a toned butt. Though his body is covered in dark fur, it isn't dense enough to stop you from making out that he has a trim build: solid and graceful, with some visible muscle, but not swollen and hulking - a runner, more than a weightlifter. Jutting between his legs, his nine inches of wolf-cock practically throbs before your eyes, eager to be buried inside of you.", parse);
 	Text.NL();
-	Text.Add("Putting an end to your scrutiny, Cale moves to work on your [lowerArmorDesc] himself. You don’t wait to get started on your top, shrugging out of your clothes in record speed. Cale loops an arm around your lower back and motions to the [log]. His intentions clear, you bend over and await the wolf’s next move.", parse);
+	Text.Add("Putting an end to your scrutiny, Cale moves to work on your [botarmor] himself. You don’t wait to get started on your top, shrugging out of your clothes in record speed. Cale loops an arm around your lower back and motions to the [log]. His intentions clear, you bend over and await the wolf’s next move.", parse);
 	Text.NL();
 	Text.Add("<i>“Let’s prep you first. I dunno 'bout you, but I’m not a fan of painful intrusions.”</i> He moves to his discarded top, fumbling about with a pouch to draw a small tube containing what look to be a clear gel.", parse);
 	Text.NL();
-	Text.Add("You shiver unconsciously as the cool gel oozes over your flesh, tingling against the skin as he applies it. Once he judges the amount sufficient, an expert digit moves to massage the lube into your [anusDesc], slow and deliberate motions stirring it around and around. Once he judges your ring has been sufficiently coated, he starts to work his way inside your pucker with a fingertip, thrusting in and out with the same tantalizing purposefulness. Slowly, he adds a second finger, pumping them deeper inside of you as he does. Blissfully, he adds a third, painstakingly reaming your ass with all three.", parse);
+	Text.Add("You shiver unconsciously as the cool gel oozes over your flesh, tingling against the skin as he applies it. Once he judges the amount sufficient, an expert digit moves to massage the lube into your [anus], slow and deliberate motions stirring it around and around. Once he judges your ring has been sufficiently coated, he starts to work his way inside your pucker with a fingertip, thrusting in and out with the same tantalizing purposefulness. Slowly, he adds a second finger, pumping them deeper inside of you as he does. Blissfully, he adds a third, painstakingly reaming your ass with all three.", parse);
 	Text.NL();
 	Text.Add("<i>“How ya doing up there? Feel ready yet?”</i> he asks continuing to pump his three fingers inside you.", parse);
 	Text.NL();
@@ -2114,7 +2037,7 @@ Scenes.Cale.SexCatchAnal = function(outside) {
 	else
 		Text.Add("Trembling with a cocktail of emotions you can't describe, you slowly confirm that you're ready as you're going to get.", parse);
 	Text.NL();
-	Text.Add("<i>“Alright, let’s get down to business then.”</i> Cale moves to mount you, aligning his canine pecker with your [anusDesc] and gently prodding your entrance. <i>“Hey, [playername]?”</i>", parse);
+	Text.Add("<i>“Alright, let’s get down to business then.”</i> Cale moves to mount you, aligning his canine pecker with your [anus] and gently prodding your entrance. <i>“Hey, [playername]?”</i>", parse);
 	Text.NL();
 	if(cale.flags["sneakAtk"] < 5) {
 		Text.Add("Yes? What is it?", parse);
@@ -2127,7 +2050,7 @@ Scenes.Cale.SexCatchAnal = function(outside) {
 	else if(cale.flags["sneakAtk"] == 5) {
 		Text.Add("Ugh, not again. You roll your eyes in contempt and cut him off, telling him to drop the stupid ‘sneak attack’ joke, it's really gotten old. Just stick his dick in your ass and let's get down to what you're both here for.", parse);
 		Text.NL();
-		Text.Add("<i>“Aw, you’re no fun,”</i> he protests weakly, but complies. After some minor adjusting, he spears himself into you, all nine inches, until he’s balls deep inside your [anusDesc].", parse);
+		Text.Add("<i>“Aw, you’re no fun,”</i> he protests weakly, but complies. After some minor adjusting, he spears himself into you, all nine inches, until he’s balls deep inside your [anus].", parse);
 	}
 	else {
 		Text.Add("<i>“Here I come~”</i> He thrusts into you, burying all of his nine inch wolfhood balls deep into your rectum.", parse);
@@ -2144,24 +2067,12 @@ Scenes.Cale.SexCatchAnalEntrypoint = function(outside, fromVag) {
 	
 	var parse = {
 		log : outside ? "log" : "bedroll",
-		playername    : player.name,
-		multiCockDesc : function() { return player.MultiCockDesc(); },
-		notS          : player.NumCocks() > 1 ? "" : "s",
-		s             : player.NumCocks() > 1 ? "s" : "",
-		thisThese     : player.NumCocks() > 1 ? "these" : "this",
-		oneof         : player.NumCocks() > 1 ? " one of" : "",
-		vagDesc       : function() { return player.FirstVag().Short(); },
-		anusDesc      : function() { return player.Butt().AnalShort(); },
-		buttDesc      : function() { return player.Butt().Short(); },
-		wingsDesc     : function() { return player.HasWings().Short(); },
-		legsDesc      : function() { return player.LegsDesc(); },
-		thighsDesc    : function() { return player.ThighsDesc(); },
-		breastsDesc   : function() { return player.FirstBreastRow().Short(); },
-		tongueDesc    : function() { return player.TongueDesc(); },
-		armorDesc     : function() { return player.ArmorDesc(); }
+		playername    : player.name
 	};
+	parse = player.ParserTags(parse);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	
-	Text.Add("You cry out as the wolf's cock so forcibly spears inside of you without hesitation. In seconds, he’s briskly thrusting back and forth, pumping away at your ass with every ounce of enjoyment, roughly pistoning your [anusDesc] like a man possessed.", parse);
+	Text.Add("You cry out as the wolf's cock so forcibly spears inside of you without hesitation. In seconds, he’s briskly thrusting back and forth, pumping away at your ass with every ounce of enjoyment, roughly pistoning your [anus] like a man possessed.", parse);
 	Text.NL();
 
 	Sex.Anal(cale, player);
@@ -2171,18 +2082,18 @@ Scenes.Cale.SexCatchAnalEntrypoint = function(outside, fromVag) {
 	if(outside)
 		Scenes.Cale.SexGettingFuckedOutsideComments();
 
-	parse["wings"] = player.HasWings() ? Text.Parse(" being careful with your [wingsDesc],", parse) : "";
+	parse["w"] = player.HasWings() ? Text.Parse(" being careful with your [wings],", parse) : "";
 	parse["p"] = player.FirstCock() ? ", including your prostate" : "";
-	Text.Add("Cale bends over your back,[wings] as he hugs your from behind. His position is reminiscent of a wolf mounting his bitch, a detail that probably passes him by as he’s too busy thrusting away into your ass. The position does allow him to go a bit deeper than before and though erratic, his thrusts manage to hit all the right spots inside you[p].", parse);
+	Text.Add("Cale bends over your back,[w] as he hugs your from behind. His position is reminiscent of a wolf mounting his bitch, a detail that probably passes him by as he’s too busy thrusting away into your ass. The position does allow him to go a bit deeper than before and though erratic, his thrusts manage to hit all the right spots inside you[p].", parse);
 	Text.NL();
 	Text.Add("You groan and growl, deep and low, in your throat as you feel him gyrating and grinding against your inner walls; he’s rough - but in a good way. Stirred by his efforts, you shift yourself around slightly, allowing you to start meeting his humping with backwards bucks of your own, swallowing each thrusting of his cock with eager ease. Even in your increasingly addled state, you’re aware of the thick, swollen girth of his excited knot as it sometimes forces its way inside of you, stretching you a few delicious extra inches when it does.", parse);
 	Text.NL();
-	Text.Add("<i>“So tight and hot…”</i> you hear Cale comment, his pumping slowly becoming a bit more well paced. Now that you’re actively fucking him back, he doesn’t feel the need to be so… desperate in his taking of your [anusDesc]. Short strokes become long ones, and with each synced thrust and buck, the resulting impact sends ripples along your [buttDesc]. His knot has inflated enough that he can’t just idly push it inside you anymore, and you can feel its girth whenever Cale grinds into your butt. It feels like he might push in at a moment’s notice, but he always withdraws in the last second.", parse);
+	Text.Add("<i>“So tight and hot…”</i> you hear Cale comment, his pumping slowly becoming a bit more well paced. Now that you’re actively fucking him back, he doesn’t feel the need to be so… desperate in his taking of your [anus]. Short strokes become long ones, and with each synced thrust and buck, the resulting impact sends ripples along your [butt]. His knot has inflated enough that he can’t just idly push it inside you anymore, and you can feel its girth whenever Cale grinds into your butt. It feels like he might push in at a moment’s notice, but he always withdraws in the last second.", parse);
 	Text.NL();
 	
 	var scenes = new EncounterTable();
 	scenes.AddEnc(function() {
-		Text.Add("<i>“Hey, [playername]. You ready for this?”</i> he asks, grinding against your [anusDesc] so you can feel his inflated knot. <i>“So how about it? Can you take all that Cale has to offer,”</i> he pants, waiting for your reply.", parse);
+		Text.Add("<i>“Hey, [playername]. You ready for this?”</i> he asks, grinding against your [anus] so you can feel his inflated knot. <i>“So how about it? Can you take all that Cale has to offer,”</i> he pants, waiting for your reply.", parse);
 		Text.NL();
 		Text.Add("You realize he’s giving you the final say; you better make a decision quickly...", parse);
 		Text.Flush();
@@ -2209,7 +2120,7 @@ Scenes.Cale.SexCatchAnalEntrypoint = function(outside, fromVag) {
 					Text.Add(" Your sperm splashes onto the earth below you, [cum] where it lands and filling the air with its distinctive musk.", parse);
 				}
 				if(player.FirstVag()) {
-					Text.Add(" Your womanhood drools its nectar down your [legsDesc], soaking into the thirsty ground below.", parse);
+					Text.Add(" Your womanhood drools its nectar down your [legs], soaking into the thirsty ground below.", parse);
 				}
 				Text.NL();
 				Text.Add("Cale’s seed continues its assault, plowing deep inside you to settle in your belly. With nowhere to go, all of it winds up inside you. You can feel his liquid burden stretching your stomach, slowly inflating you as his powerful jets are reduced to a faint trickle. <i>“F-fuck. That’s one sweet ass you got there, [playername]. My balls are even sore now,”</i> he chuckles.", parse);
@@ -2218,18 +2129,18 @@ Scenes.Cale.SexCatchAnalEntrypoint = function(outside, fromVag) {
 				Text.NL();
 				Text.Add("<i>“It’ll be a while before I can let ya go, so let’s get ya in a more comfortable position.”</i> The wolf grabs you around your waist, just below the paunch his seed’s given you and hauls you up into a sitting position on his lap. The motions send the liquid inside you sloshing, and you react by tightening your sphincter around his knot. Cale spurts a fresh rope of wolf-seed in reply.", parse);
 				Text.NL();
-				Text.Add("You grunt a little at the treatment, your [legsDesc] wobbling a little, but manage to shift in Cale’s lap to find a position that you feel comfortable in. That done, you settle back against his furry chest and allow yourself to relax.", parse);
+				Text.Add("You grunt a little at the treatment, your [legs] wobbling a little, but manage to shift in Cale’s lap to find a position that you feel comfortable in. That done, you settle back against his furry chest and allow yourself to relax.", parse);
 				Text.Flush();
 				
 				Gui.NextPrompt(function() {
 					Text.Clear();
 					Text.Add("It takes the better part of an hour for his knot to deflate, a time that he spent being nothing but gentlemanly. Although he’s shrunk enough that he could pull out, he’s too engrossed in his current task to actually do so. The wolf is busy grooming you with licks around your collarbone, drinking in the sweat resulting of your taking.", parse);
 					Text.NL();
-					Text.Add("Sighing softly, you tell him that as enjoyable as this is, you can’t stay here forever; there’s things you need to do. You allow him a last cuddle and then, once he’s let you go, you pull yourself free of his lap. Naturally, without his cock plugging your ass anymore, a cascade of semen falls down your [legsDesc] and splatters messily over his own crotch before you manage to close your asshole again, but he doesn’t seem to care in the slightest.", parse);
+					Text.Add("Sighing softly, you tell him that as enjoyable as this is, you can’t stay here forever; there’s things you need to do. You allow him a last cuddle and then, once he’s let you go, you pull yourself free of his lap. Naturally, without his cock plugging your ass anymore, a cascade of semen falls down your [legs] and splatters messily over his own crotch before you manage to close your asshole again, but he doesn’t seem to care in the slightest.", parse);
 					Text.NL();
 					Text.Add("<i>“Y’know where to find me - anytime you need,”</i> he says with a cocky smile, waving you away as he leans back against the [log], enjoying his afterglow too much to even bother putting his clothes back for now.", parse);
 					Text.NL();
-					Text.Add("You finish cleaning yourself off as best you can, then grab your [armorDesc] and get dressed again before leaving the happy wolf-morph to his relaxation.", parse);
+					Text.Add("You finish cleaning yourself off as best you can, then grab your [armor] and get dressed again before leaving the happy wolf-morph to his relaxation.", parse);
 					Text.Flush();
 					
 					cale.relation.IncreaseStat(100, 4);
@@ -2254,14 +2165,14 @@ Scenes.Cale.SexCatchAnalEntrypoint = function(outside, fromVag) {
 				
 				Text.Add("That’s the last straw for you as well; you sing out as if in counterpoint to his howl of ecstasy as pleasure surges through your body.", parse);
 				if(player.FirstCock())
-					Text.Add(" Your [multiCockDesc] erupt[notS] in climax, painting the ground beneath you with your seed.", parse);
+					Text.Add(" Your [cocks] erupt[notS] in climax, painting the ground beneath you with your seed.", parse);
 				if(player.FirstVag())
-					Text.Add(" Your neglected womanhood rains down juices, smearing your [thighsDesc] before splattering onto the earth below.", parse);
+					Text.Add(" Your neglected womanhood rains down juices, smearing your [thighs] before splattering onto the earth below.", parse);
 				Text.NL();
 				
 				var cum = player.OrgasmCum();
 				
-				Text.Add("Without his knot to hold the seed in, most of it winds up leaking around the seal of your ass, splattering your butt with white. Only when the jets are reduced to a trickle does Cale pull away, sputtering a couple weak ropes onto your [buttDesc]. <i>“Ah, that hit the spot. Too bad y’ wouldn’t let me tie,”</i> he says, panting as he sits down beside you and leans on the [log].", parse);
+				Text.Add("Without his knot to hold the seed in, most of it winds up leaking around the seal of your ass, splattering your butt with white. Only when the jets are reduced to a trickle does Cale pull away, sputtering a couple weak ropes onto your [butt]. <i>“Ah, that hit the spot. Too bad y’ wouldn’t let me tie,”</i> he says, panting as he sits down beside you and leans on the [log].", parse);
 				Text.NL();
 				Text.Add("You simply pant, regaining your strength. Once you can move again, you gather your gear and thank Cale for the nice time, already absently looking for a place to properly clean yourself up.", parse);
 				Text.NL();
@@ -2280,24 +2191,24 @@ Scenes.Cale.SexCatchAnalEntrypoint = function(outside, fromVag) {
 	
 	if(fromVag == null) {
 		scenes.AddEnc(function() {
-			Text.Add("You find yourself growling in frustration, so close to the edge that you can nearly taste it. As Cale pulls his hips back again, you find him suddenly withdrawing his cock out entirely, leaving your [anusDesc] squeezing in vain on empty air and you asking what’s wrong - doesn’t he want to finish this?", parse);
+			Text.Add("You find yourself growling in frustration, so close to the edge that you can nearly taste it. As Cale pulls his hips back again, you find him suddenly withdrawing his cock out entirely, leaving your [anus] squeezing in vain on empty air and you asking what’s wrong - doesn’t he want to finish this?", parse);
 			Text.NL();
 			Text.Add("<i>“Don’t worry, I wanna get off as much as ya do - just thought I’d mix things up a bit.”</i>", parse);
 			Text.NL();
 			Text.Add("Twisting around to look back over your shoulder at him, you raise an eyebrow and ask what he has in mind.", parse);
 			Text.NL();
 			if(cale.Slut() >= 60 && player.FirstCock())
-				Text.Add("<i>“Normally, I’d home in on [thisThese] juicy cock[s] of yours,”</i> he says, giving your [multiCockDesc] an appreciative stroke. <i>“But this time, I think I’ll try this bit.”</i> He runs a finger along the moist slit of your [vagDesc].", parse);
+				Text.Add("<i>“Normally, I’d home in on [thisThese] juicy cock[s] of yours,”</i> he says, giving your [cocks] an appreciative stroke. <i>“But this time, I think I’ll try this bit.”</i> He runs a finger along the moist slit of your [vag].", parse);
 			else
 				Text.Add("<i>“Well, you got such a pretty pussy down here,”</i> he runs a finger along your moist slit, <i>“that I can’t help but want to give it a shot. So I’mma do just that.”</i> He grins.", parse);
 			Text.NL();
 			Text.Add("A shiver of appreciation races down your spine at his touch, and you find yourself grinning wickedly. Well, if that’s what he has in mind, why say no? But you think this requires a more... delicate touch.", parse);
 			Text.NL();
-			Text.Add("You push yourself upright, whirling around to face the startled wolf before pulling him into a possessive kiss, authoritatively thrusting your [tongueDesc] in between his lips and molesting his mouth. His legs slacken at your surprise burst of aggressiveness, and so he offers no resistance as you gently spin him around so that your positions are reversed.", parse);
+			Text.Add("You push yourself upright, whirling around to face the startled wolf before pulling him into a possessive kiss, authoritatively thrusting your [tongue] in between his lips and molesting his mouth. His legs slacken at your surprise burst of aggressiveness, and so he offers no resistance as you gently spin him around so that your positions are reversed.", parse);
 			Text.NL();
 			parse["br"] = player.FirstBreastRow().Size() >= 5 ? ", smothering him in your cleavage" : "";
-			parse["c"] = player.FirstCock() ? Text.Parse(", your hard [multiCockDesc] rubbing against his belly", parse) : "";
-			Text.Add("Your hands reach for his shoulders and you push down, firmly and insistently, sending him thumping softly to the ground below. You break the kiss at last, leaving him panting for breath, and close the distance between you by straddling him, arms pulling his face against your [breastsDesc][br][c]. You slide downwards until you can feel your [vagDesc] in proper alignment with his straining wolfhood, smirking as you look into his eyes. Cale licks his lips, eager to begin.", parse);
+			parse["c"] = player.FirstCock() ? Text.Parse(", your hard [cocks] rubbing against his belly", parse) : "";
+			Text.Add("Your hands reach for his shoulders and you push down, firmly and insistently, sending him thumping softly to the ground below. You break the kiss at last, leaving him panting for breath, and close the distance between you by straddling him, arms pulling his face against your [breasts][br][c]. You slide downwards until you can feel your [vag] in proper alignment with his straining wolfhood, smirking as you look into his eyes. Cale licks his lips, eager to begin.", parse);
 			Text.Flush();
 			
 			Gui.NextPrompt(function() {
@@ -2307,7 +2218,7 @@ Scenes.Cale.SexCatchAnalEntrypoint = function(outside, fromVag) {
 		}, 1.0, function() { return player.FirstVag(); });
 		
 		scenes.AddEnc(function() {
-			Text.Add("Without so much as a warning, Cale pulls out of your abused ass and nests his knotty wolf-pecker between the cheeks of your [buttDesc]. He presses them together as he fucks your ass cleavage, rubbing his length against your rosebud.", parse);
+			Text.Add("Without so much as a warning, Cale pulls out of your abused ass and nests his knotty wolf-pecker between the cheeks of your [butt]. He presses them together as he fucks your ass cleavage, rubbing his length against your rosebud.", parse);
 			Text.NL();
 			
 			Scenes.Cale.SexCaleShowerEntrypoint(outside);
@@ -2320,7 +2231,7 @@ Scenes.Cale.SexCatchAnalEntrypoint = function(outside, fromVag) {
 			Text.NL();
 			Text.Add("<i>“No offense, but I really need this.”</i>", parse);
 			Text.NL();
-			Text.Add("That statement is enough to make you blink in surprise. You open your mouth, intending to ask him what he means, but all that escapes you is a drawn-out blissful moan as he smoothly extracts himself from you. This gives way to a surprised grunt when he suddenly grabs you by the hips and spins you around, leaving you sitting back against the [log] you were previously leaning over. You shake your head, but any attempt to gather your thoughts are cut off when Cale, having moved to squat over you, suddenly drops ass-first into your lap, audibly squelching wetly as[oneof] your [multiCockDesc] plunges meatily into the well-trained tailhole of your lupine buttslut.", parse);
+			Text.Add("That statement is enough to make you blink in surprise. You open your mouth, intending to ask him what he means, but all that escapes you is a drawn-out blissful moan as he smoothly extracts himself from you. This gives way to a surprised grunt when he suddenly grabs you by the hips and spins you around, leaving you sitting back against the [log] you were previously leaning over. You shake your head, but any attempt to gather your thoughts are cut off when Cale, having moved to squat over you, suddenly drops ass-first into your lap, audibly squelching wetly as[oneof] your [cocks] plunges meatily into the well-trained tailhole of your lupine buttslut.", parse);
 			Text.NL();
 			Text.Add("<i>“Yes! This is the best. Nothing quite like a hard cock to plug up my needy behind.”</i>", parse);
 			Text.NL();
@@ -2376,12 +2287,11 @@ Scenes.Cale.SexFuckingHimOutsideComments = function(cock, opts) {
 	
 	var parse = {
 		playername : player.name,
-		racedesc       : function() { return rosalin.raceDesc(compScore); },
-		rmultiCockDesc : function() { return rosalin.MultiCockDesc(); },
-		cockDesc   : cock.Short(),
-		cockTip    : cock.TipShort()
+		racedesc       : function() { return rosalin.raceDesc(compScore); }
 	};
 	parse = rosalin.ParserPronouns(parse);
+	parse = rosalin.ParserTags(parse, "r");
+	parse = player.ParserTags(parse, "", cock);
 	
 	var breakpoint = false;
 	
@@ -2390,9 +2300,9 @@ Scenes.Cale.SexFuckingHimOutsideComments = function(cock, opts) {
 		Text.NL();
 		Text.Add("<i>“That’s good,”</i> [heshe] says, fetching a notepad nearby and jotting down some notes. <i>“[playername], go a bit deeper, I want to see his reaction.”</i>", parse);
 		Text.NL();
-		Text.Add("You nod at [hisher] request. Not like you weren’t planning on doing so anyway. Drawing back your [cockDesc] until only your [cockTip] remains planted inside the wolf’s quivering rosebud, you thrust inside with all your strength.", parse);
+		Text.Add("You nod at [hisher] request. Not like you weren’t planning on doing so anyway. Drawing back your [cock] until only your [cockTip] remains planted inside the wolf’s quivering rosebud, you thrust inside with all your strength.", parse);
 		Text.NL();
-		Text.Add("Cale’s butt yields easily, practically sucking you in as your hips connect with his in a perverted slap. The wolf’s moans quickly devolve into a short howl as you feel his butt contracting all over your [cockDesc], milking you for your seed in what you could only classify as an ass-gasm.", parse);
+		Text.Add("Cale’s butt yields easily, practically sucking you in as your hips connect with his in a perverted slap. The wolf’s moans quickly devolve into a short howl as you feel his butt contracting all over your [cock], milking you for your seed in what you could only classify as an ass-gasm.", parse);
 		Text.NL();
 		Text.Add("<i>“Yeaaaah… do that again!”</i> Cale exclaims, panting in delirious pleasure.", parse);
 		Text.NL();
@@ -2459,13 +2369,13 @@ Scenes.Cale.SexFuckingHimOutsideComments = function(cock, opts) {
 				parse["reluctantly"] = cale.Slut() < 30 ? " reluctantly" : "";
 				Text.Add("Cale[reluctantly] opens his maw and lets his broad tongue roll out. You resolve to simply slow down and appreciate the show before you resume giving Cale’s butt the treatment it deserves.", parse);
 				Text.NL();
-				Text.Add("Estevan wastes no time in taking the wolf’s invitation. He jams the first few inches in a single thrust, muffling a surprised yelp from the wolf. You grind against Cale’s butt, watching as Estevan grabs Cale’s scalp and pulls him toward himself. The wolf has no choice but to comply; at the same time his muzzle is impaled onto Estevan’s cock, his ass is drawn away from your [cockDesc] until only the [cockTip] is left inside.", parse);
+				Text.Add("Estevan wastes no time in taking the wolf’s invitation. He jams the first few inches in a single thrust, muffling a surprised yelp from the wolf. You grind against Cale’s butt, watching as Estevan grabs Cale’s scalp and pulls him toward himself. The wolf has no choice but to comply; at the same time his muzzle is impaled onto Estevan’s cock, his ass is drawn away from your [cock] until only the [cockTip] is left inside.", parse);
 				Text.NL();
-				Text.Add("You can’t be having that; your hands lock onto the wolf’s boyish hips and you pull backwards, firmly dragging his ass back down the length of your [cockDesc]. The satyr catches on quickly, grinning as he throws himself into this new game. The poor wolf is pulled back and forth between you, helpless to stop either of you from ravaging his holes.", parse);
+				Text.Add("You can’t be having that; your hands lock onto the wolf’s boyish hips and you pull backwards, firmly dragging his ass back down the length of your [cock]. The satyr catches on quickly, grinning as he throws himself into this new game. The poor wolf is pulled back and forth between you, helpless to stop either of you from ravaging his holes.", parse);
 				Text.NL();
 				Text.Add("<i>“Mmm, nice and tight! How is your end, [playername]?”</i> the satyr quips, scratching Cale behind the ear as one would a dog. ", parse);
 				if(cale.Slut() >= 60)
-					Text.Add("Tight and wet, as usual. You’ve marked Cale’s butt as your territory so many times that his ass is pretty much shaped to your [cockDesc].", parse);
+					Text.Add("Tight and wet, as usual. You’ve marked Cale’s butt as your territory so many times that his ass is pretty much shaped to your [cock].", parse);
 				else if(cale.Slut() >= 30)
 					Text.Add("Nice and tight as well. Cale’s butt is familiar territory, and you know just how to push his buttons when you want him tighter or looser for the taking.", parse);
 				else
@@ -2481,7 +2391,7 @@ Scenes.Cale.SexFuckingHimOutsideComments = function(cock, opts) {
 				Text.NL();
 				Text.Add("Cale - bullied from every side - finally gives up his pretense to resistance, rocking his hips in rhythm with you and Estevan. His surrender hasn’t escaped the satyr, who doubles his pace, deepthroating the wolf in almost a frenzy. From your perspective, it’s quite clear he’s just about to cum, though the slut with his lips wrapped around the satyr’s cock is still blissfully unaware.", parse);
 				Text.NL();
-				Text.Add("The wolf’s eyes bulge wide open as the satyr suddenly reaches his climax, pouring a load worthy of his hefty balls down Cale’s throat. The process goes on for quite a bit longer than the wolf is comfortable with, and you can feel him struggle weakly against his rival. You give him an admonishing slap on the butt, taking the chance to shove your [cockDesc] home to remind him of his place.", parse);
+				Text.Add("The wolf’s eyes bulge wide open as the satyr suddenly reaches his climax, pouring a load worthy of his hefty balls down Cale’s throat. The process goes on for quite a bit longer than the wolf is comfortable with, and you can feel him struggle weakly against his rival. You give him an admonishing slap on the butt, taking the chance to shove your [cock] home to remind him of his place.", parse);
 				Text.NL();
 				Text.Add("When he’s finally done, the satyr pulls out his sloppy cock, still draped in thick strands of goat cream. To add further insult to insult, he takes his time wiping his member in the wolf’s fur, soaking the coughing canine.", parse);
 				Text.NL();
@@ -2532,7 +2442,7 @@ Scenes.Cale.SexFuckingHimOutsideComments = function(cock, opts) {
 			Text.Add("<i>“Hiii Cale!”</i> Rosalin waves as [heshe] notices the two of you going at it. [HeShe] wanders over, seemingly oblivious to the wolf’s current situation. The [racedesc] carries a few bottles, and [heshe] looks very preoccupied. <i>“Listen, do you think you could get a few dozen canis roots for me? I need some for an experiment.”</i>", parse);
 			Text.NL();
 			if(rosalin.FirstCock()) {
-				Text.Add("Though [heshe] might act coyly nonchalant, [hisher] body is more than aware of what is going on as you can see [hisher] [rmultiCockDesc] straining against [hisher] skirt, aching for release. Cale himself must have an even better view of it from his front-row seat.", parse);
+				Text.Add("Though [heshe] might act coyly nonchalant, [hisher] body is more than aware of what is going on as you can see [hisher] [rcocks] straining against [hisher] skirt, aching for release. Cale himself must have an even better view of it from his front-row seat.", parse);
 				Text.NL();
 			}
 			Text.Add("<i>“I- Ah! - now is a b-bad time, Rosie,”</i> the wolf whimpers, wincing as you drive into him with undiminished fervor.", parse);
