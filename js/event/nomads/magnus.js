@@ -7,7 +7,6 @@ function Magnus(storage) {
 	Entity.call(this);
 	this.ID = "magnus";
 	
-	
 	this.name         = "Magnus";
 	
 	this.body.DefMale();
@@ -318,17 +317,9 @@ Scenes.Magnus.Interact = function() {
 
 Scenes.Magnus.Meditation = function() {
 	var parse = {
-		playername    : player.name,
-		multiCockDesc : function() { return player.MultiCockDesc(); },
-		vagDesc       : function() { return player.FirstVag().Short(); },
-		hand          : function() { return player.HandDesc(); },
-		legsDesc      : function() { return player.LegsDesc(); },
-		skinDesc      : function() { return player.SkinDesc(); },
-		breastDesc    : function() { return player.FirstBreastRow().Short(); },
-		nipsDesc      : function() { return player.FirstBreastRow().NipsShort(); },
-		buttDesc      : function() { return player.Butt().Short(); },
-		anusDesc      : function() { return player.Butt().AnalShort(); }
+		playername    : player.name
 	};
+	parse = player.ParserTags(parse);
 	
 	Text.Clear();
 	Text.Add("You ask Magnus if the two of you can meditate together.", parse);
@@ -399,10 +390,10 @@ Scenes.Magnus.Meditation = function() {
 				Text.Add("You find it very difficult to focus on anything productive, finally giving up and letting your mind wander. Thinking back to various sexual encounters and situations you’ve had so far in your travels, you begin to fantasize about the various people you’ve met, imagining them naked and horny.", parse);
 				if(player.FirstCock()) {
 					parse["isAre"] = player.NumCocks() > 1 ? "are" : "is";
-					Text.Add(" Untouched, your [multiCockDesc] [isAre] stirring, clamoring for attention.", parse);
+					Text.Add(" Untouched, your [cocks] [isAre] stirring, clamoring for attention.", parse);
 				}
 				if(player.FirstVag())
-					Text.Add(" A wet spot is spreading from your [vagDesc], as it aches with need.", parse);
+					Text.Add(" A wet spot is spreading from your [vag], as it aches with need.", parse);
 				Text.NL();
 				Text.Add("Eventually, your thoughts wander to Magnus - naturally, since he is sitting right next to you. To be honest, he doesn’t have much going for him. Thin, scraggly and a bit of a nerd, bad eyesight, socially awkward… but what the heck, you still find yourself wondering what he is hiding under those robes.", parse);
 				Text.NL();
@@ -447,7 +438,7 @@ Scenes.Magnus.Meditation = function() {
 				
 				Text.Add(" The raspy voice sounds puzzled. It doesn’t look like the creature is interested in your response, however, as it moves quickly into action.", parse);
 				Text.NL();
-				Text.Add("In short order, your arms and [legsDesc] are tied up by slithering purple tentacles, binding you securely while additional tendrils remove your gear. In the unnatural twilight of the other plane, you don’t feel any wind nor cold, yet you shiver as your body is laid bare before the creature, knowing what it is capable of.", parse);
+				Text.Add("In short order, your arms and [legs] are tied up by slithering purple tentacles, binding you securely while additional tendrils remove your gear. In the unnatural twilight of the other plane, you don’t feel any wind nor cold, yet you shiver as your body is laid bare before the creature, knowing what it is capable of.", parse);
 				Text.NL();
 				Text.Add("<i>Now… what to, do with you...?</i>", parse);
 			}
@@ -457,15 +448,15 @@ Scenes.Magnus.Meditation = function() {
 				Text.Clear();
 				Text.Add("<i>We so seldom… awake. Though his body is frail, this Magnus… is strong... of mind.</i> The demon sounds almost sulky, complaining that it can’t rampage at will. <i>The academy was… fun, it sated… us. We could have stayed… there, made it our nest. But when they threw us out, we could not act, the… host, resisted.</i>", parse);
 				Text.NL();
-				Text.Add("As it speaks, the creature’s tentacles are wrapping around you, pulling you closer. The thick appendages ooze some kind of slime, leaving sticky patches of goo on your [skinDesc] where they pass.", parse);
+				Text.Add("As it speaks, the creature’s tentacles are wrapping around you, pulling you closer. The thick appendages ooze some kind of slime, leaving sticky patches of goo on your [skin] where they pass.", parse);
 				if(player.FirstBreastRow().Size() > 3)
-					Text.Add(" The creature seems to give special attention to your [breastDesc], squeezing them roughly, making your [nipsDesc] stand out, puffy and aroused.", parse);
+					Text.Add(" The creature seems to give special attention to your [breasts], squeezing them roughly, making your [nips] stand out, puffy and aroused.", parse);
 				Text.Add(" You can almost feel the corrupting essence of the creature slipping into you, changing you to the very core. And - perhaps due to its influence - you find that you no longer care if it does.", parse);
 				Text.NL();
 				if(first)
-					Text.Add("<i>We are sure you… can imagine what comes next,</i> the voice mocks you, swatting your [buttDesc] playfully.", parse);
+					Text.Add("<i>We are sure you… can imagine what comes next,</i> the voice mocks you, swatting your [butt] playfully.", parse);
 				else if(magnus.flags["Sexed"] < 5)
-					Text.Add("<i>You know what… comes next, pet,</i> the voice purrs, caressing your [buttDesc].", parse);
+					Text.Add("<i>You know what… comes next, pet,</i> the voice purrs, caressing your [butt].", parse);
 				else
 					Text.Add("<i>We had not expected… to find such, a, slut. Coming back over and over… again, wanting to be… used.</i> The voice is triumphant, certain that it has broken you.", parse);
 				Text.Add(" Suddenly, the tentacles wrap tighter and tighter around you, binding you securely. You are swiveled around, face inches from Magnus’ throbbing trio of demonic cocks, limbs splayed wide.", parse);
@@ -476,15 +467,15 @@ Scenes.Magnus.Meditation = function() {
 				Sex.Blowjob(player, magnus);
 				player.FuckOral(player.Mouth(), magnus.FirstCock(), 3);
 				
-				parse["vag"] = player.FirstVag() ? Text.Parse(" your [vagDesc] and", parse) : "";
-				Text.Add("As if that wasn’t enough, the roaming tentacles have started to take an interest in your own nethers, roughly probing[vag] your [anusDesc].", parse);
+				parse["vag"] = player.FirstVag() ? Text.Parse(" your [vag] and", parse) : "";
+				Text.Add("As if that wasn’t enough, the roaming tentacles have started to take an interest in your own nethers, roughly probing[vag] your [anus].", parse);
 				if(player.FirstCock()) {
 					parse["setof"]  = player.NumCocks() > 1 ? " set of" : "";
 					parse["s"]      = player.NumCocks() > 1 ? "s" : "";
 					parse["notS"]   = player.NumCocks() > 1 ? "" : "s";
 					parse["itselfThemselves"] = player.NumCocks() > 1 ? "themselves" : "itself";
 					parse["itThem"] = player.NumCocks() > 1 ? "them" : "it";
-					Text.Add(" Another[setof] tendril[s] wrap[notS] [itselfThemselves] around your [multiCockDesc], squeezing [itThem] painfully.", parse);
+					Text.Add(" Another[setof] tendril[s] wrap[notS] [itselfThemselves] around your [cocks], squeezing [itThem] painfully.", parse);
 				}
 				Text.Add(" Wherever the monster violates you, it leaves large gobs of its corrupting slime, which soon coat you inside and out.", parse);
 				Text.NL();
@@ -512,8 +503,8 @@ Scenes.Magnus.Meditation = function() {
 				scenes.AddEnc(function() {
 					Text.Add("<i>You… seem to be enjoying your… self,</i> the raspy voice gloats. You can almost sense the trap as you open your mouth to throw back a response, but you are quite shaken from the ordeal, and a bit slow on the uptake. Before you have a chance to utter a word, you are deep-throating cock again, your entire body moving like a puppet on its master’s strings.", parse);
 					Text.NL();
-					parse["vag"] = player.FirstVag() ? Text.Parse(" and your [vagDesc]", parse) : "";
-					Text.Add("<i>Do you… enjoy... <b>this?</b></i> the demon asks, sounding half mocking, half genuinely curious, as the tentacles poised at your [anusDesc][vag] shoot forth, plunging inside you with little resistance.", parse);
+					parse["vag"] = player.FirstVag() ? Text.Parse(" and your [vag]", parse) : "";
+					Text.Add("<i>Do you… enjoy... <b>this?</b></i> the demon asks, sounding half mocking, half genuinely curious, as the tentacles poised at your [anus][vag] shoot forth, plunging inside you with little resistance.", parse);
 					Text.NL();
 					
 					Sex.Anal(magnus, player);
@@ -526,9 +517,9 @@ Scenes.Magnus.Meditation = function() {
 					
 					Text.Add("You’d scream, if you could. In pain? Pleasure? The borders are blurring, you can’t even think straight anymore… all you can do is focus on the intense sensations of the multitude of cocks and tentacles roughly penetrating every available hole in your body. The long thick vines writhe and slither inside you, probing deeper and deeper, twisting and turning as they snake their way through your bowels.", parse);
 					Text.NL();
-					Text.Add("You honestly have no idea how many feet of tentacles the monster shoves inside your [anusDesc], but you feel multiple tendrils working your abused orifice, stretching it wider and wider, pulsing as they explore your insides.", parse);
+					Text.Add("You honestly have no idea how many feet of tentacles the monster shoves inside your [anus], but you feel multiple tendrils working your abused orifice, stretching it wider and wider, pulsing as they explore your insides.", parse);
 					if(player.FirstVag()) {
-						Text.Add(" The tentacles thrusting into your [vagDesc] find resistance much sooner, poking at the entrance to your uterus.", parse);
+						Text.Add(" The tentacles thrusting into your [vag] find resistance much sooner, poking at the entrance to your uterus.", parse);
 						if(player.FirstVag().Pregnant())
 							Text.Add(" Finding your womb already occupied, they content themselves with snaking back and forth in your vaginal passage, increasing the thickness of the insertion manyfold.", parse);
 						else
@@ -560,19 +551,19 @@ Scenes.Magnus.Meditation = function() {
 					if(player.LowerBodyType() == LowerBodyType.Single)
 						Text.Add(" The tentacles are wrapping tightly around your lower body, preventing any possible struggle.", parse);
 					else
-						Text.Add(" Your [legsDesc] are splayed out wide, baring your hole[s] for the inevitable penetration.", parse);
+						Text.Add(" Your [legs] are splayed out wide, baring your hole[s] for the inevitable penetration.", parse);
 					Text.Add(" Without further ado, the monster lowers you onto Magnus’ waiting cocks.", parse);
 					Text.NL();
 					parse["s"]    = player.FirstVag() ? "s" : "";
 					parse["aThe"] = player.FirstVag() ? "a" : "the";
 					parse["notS"] = player.FirstVag() ? "" : "s";
-					parse["vag"]  = player.FirstVag() ? Text.Parse("[vagDesc] and ", parse) : "";
+					parse["v"]  = player.FirstVag() ? Text.Parse("[vag] and ", parse) : "";
 					parse["itsTheir"] = player.FirstVag() ? "their" : "its";
 					parse["itThey"]   = player.FirstVag() ? "they" : "it";
 					parse["isAre"]    = player.FirstVag() ? "are" : "is";
-					Text.Add("You groan, wincing as [aThe] massive pillar[s] impale[notS] your [vag][anusDesc], stretching the orifice[s] far beyond [itsTheir] limit[s]. The excessive amount of slimy goo that the demonic tip[s] leak[notS] makes [itsTheir] penetration somewhat easier, but [itThey] [isAre] still far beyond the capacity of any ordinary human. You can see the bulge on you belly crawling upward slowly as ten, fifteen, twenty inches slip inside. Whenever the monster encounters resistance, the tentacles holding your limbs just pull harder, using brute strength to open you up.", parse);
+					Text.Add("You groan, wincing as [aThe] massive pillar[s] impale[notS] your [v][anus], stretching the orifice[s] far beyond [itsTheir] limit[s]. The excessive amount of slimy goo that the demonic tip[s] leak[notS] makes [itsTheir] penetration somewhat easier, but [itThey] [isAre] still far beyond the capacity of any ordinary human. You can see the bulge on you belly crawling upward slowly as ten, fifteen, twenty inches slip inside. Whenever the monster encounters resistance, the tentacles holding your limbs just pull harder, using brute strength to open you up.", parse);
 					if(player.FirstVag())
-						Text.Add(" The cock in your [vagDesc] twists and turns, much like the monsters tentacles limbs, rubbing against your crevix.", parse);
+						Text.Add(" The cock in your [vag] twists and turns, much like the monsters tentacles limbs, rubbing against your crevix.", parse);
 					Text.NL();
 					
 					Sex.Anal(magnus, player);
@@ -601,19 +592,19 @@ Scenes.Magnus.Meditation = function() {
 						if(player.FirstVag().Pregnant())
 							Text.Add("<i>Already… bred. Come, back, when you have given birth, pet,</i> the demon rasps. <i>We shall make, you... the mother of our brood, make your belly… swell, crawling with tentacle spawn.</i>", parse);
 						else
-							Text.Add("<i>You shall… be the willing - yes, yes… willing - vessel for our spawn,</i> the demon gloats as it pounds your [vagDesc], each thrust threatening to invade your almost defenseless womb. <i>We shall fill you up, little thing… yes, bloat your tummy with thousands of tentacle spawn.</i>", parse);
+							Text.Add("<i>You shall… be the willing - yes, yes… willing - vessel for our spawn,</i> the demon gloats as it pounds your [vag], each thrust threatening to invade your almost defenseless womb. <i>We shall fill you up, little thing… yes, bloat your tummy with thousands of tentacle spawn.</i>", parse);
 						Text.NL();
 					}
 					Text.NL();
 					Text.Add("Your eyes roll back as the demon cums, pouring massive loads of corrupted semen into your every orifice. Within seconds, your stomach is dangerously swollen, permeated by sticky goop from two directions. ", parse);
 					if(player.FirstVag()) {
 						if(player.FirstVag().Pregnant())
-							Text.Add("The last of Magnus’ members unload inside your [vagDesc], flooding your passage with demonic seed.", parse);
+							Text.Add("The last of Magnus’ members unload inside your [vag], flooding your passage with demonic seed.", parse);
 						else
 							Text.Add("The last of Magnus’ members unload directly into your womb, flooding it just like the creature promised.", parse);
 					}
 					else
-						Text.Add("Magnus’ remaining cock has been rubbing against your expanding belly the entire time, and now it explodes in a fountain of sperm, coating your entire front and seeping into your [skinDesc].", parse);
+						Text.Add("Magnus’ remaining cock has been rubbing against your expanding belly the entire time, and now it explodes in a fountain of sperm, coating your entire front and seeping into your [skin].", parse);
 					Text.NL();
 					Text.Add("The feeling of absolute fullness, a constant pressure in your insides, finally sends you over the edge. Wracked by a powerful orgasm, you pass out, your body spent.", parse);
 					Text.NL();
@@ -626,7 +617,7 @@ Scenes.Magnus.Meditation = function() {
 					parse["s"] = magnus.flags["Sexed"] > 1 ? "s" : "";
 					Text.Add("<i>We have… perhaps, been too kind to you,</i> the demon gurgles maliciously, pulling at your body like one would at a toy. If what happened during your previous visit[s] is the creature’s definition of kind, you are in for a <i>really</i> rough ride.", parse);
 					Text.NL();
-					Text.Add("One of its tentacles - scratch that - four of its tentacles mash against your [anusDesc], lathering themselves in the slimy goop now covering your entire body as they pry for entry. That is familiar enough, you think to yourself, grunting as they inevitably succeed, snaking through your bowels. More and more of the tendrils join the fray, each one stretching your tortured colon farther and farther. If it wasn’t for the demonic magic working on you - either from the creature itself or by this strange ethereal realm - you would have long ago been split in two, torn asunder by the cruel demon.", parse);
+					Text.Add("One of its tentacles - scratch that - four of its tentacles mash against your [anus], lathering themselves in the slimy goop now covering your entire body as they pry for entry. That is familiar enough, you think to yourself, grunting as they inevitably succeed, snaking through your bowels. More and more of the tendrils join the fray, each one stretching your tortured colon farther and farther. If it wasn’t for the demonic magic working on you - either from the creature itself or by this strange ethereal realm - you would have long ago been split in two, torn asunder by the cruel demon.", parse);
 					Text.NL();
 					
 					Sex.Anal(magnus, player);
@@ -634,8 +625,8 @@ Scenes.Magnus.Meditation = function() {
 					
 					Text.Add("But no such fate awaits you. You are forced to feel every second of it, even as your ravaged body teeters on the brink of oblivion.", parse);
 					if(player.FirstVag())
-						Text.Add(" Additional tentacles quickly find your remaining hole, eagerly plugging it shut. You moan helplessly as a mass of the slithery tendrils invade your [vagDesc], stretching this part of your body as well.", parse);
-					Text.Add(" The writhing vines surging into your [anusDesc] have somehow reached your stomach, meaning that there are feet and feet of tentacles violating you. Your eyes widen, and you wordlessly shake your head, knowing what comes next and begging it to stop, but the demon callously ignores your pleas.", parse);
+						Text.Add(" Additional tentacles quickly find your remaining hole, eagerly plugging it shut. You moan helplessly as a mass of the slithery tendrils invade your [vag], stretching this part of your body as well.", parse);
+					Text.Add(" The writhing vines surging into your [anus] have somehow reached your stomach, meaning that there are feet and feet of tentacles violating you. Your eyes widen, and you wordlessly shake your head, knowing what comes next and begging it to stop, but the demon callously ignores your pleas.", parse);
 					Text.NL();
 					
 					if(player.FirstVag()) {
@@ -666,10 +657,10 @@ Scenes.Magnus.Meditation = function() {
 					
 					var cum = player.OrgasmCum(2);
 					
-					Text.Add("You groan helplessly, pushed far beyond your own limits as the heat spreading through your straining belly triggering your own orgasm. Tugging your body roughly, the tentacled creature pulls you off its cocks, a rapidly rising wall of semen following closely behind the retracting tips. It pulls out of your lips and your [anusDesc] at approximately the same time, first pausing in order to fill up the little remaining space inside you with its corrupted seed.", parse);
+					Text.Add("You groan helplessly, pushed far beyond your own limits as the heat spreading through your straining belly triggering your own orgasm. Tugging your body roughly, the tentacled creature pulls you off its cocks, a rapidly rising wall of semen following closely behind the retracting tips. It pulls out of your lips and your [anus] at approximately the same time, first pausing in order to fill up the little remaining space inside you with its corrupted seed.", parse);
 					Text.NL();
-					parse["vag"] = player.FirstVag() ? Text.Parse(", [vagDesc]", parse) : "";
-					Text.Add("When it does retract its tentacles, the suppressed demonic cream spews out of your mouth[vag] and [anusDesc] in a huge cascade, ceaselessly fountaining out as your body writhes, trying to expel the alien substance.", parse);
+					parse["v"] = player.FirstVag() ? Text.Parse(", [vag]", parse) : "";
+					Text.Add("When it does retract its tentacles, the suppressed demonic cream spews out of your mouth[v] and [anus] in a huge cascade, ceaselessly fountaining out as your body writhes, trying to expel the alien substance.", parse);
 				}, 1.0, function() { return !first; });
 				
 				scenes.Get();
@@ -757,20 +748,14 @@ Scenes.Magnus.Meditation = function() {
 
 Scenes.Magnus.SexSounding = function() {
 	var parse = {
-		multiCockDesc : function() { return player.MultiCockDesc(); },
-		ballsDesc     : function() { return player.BallsDesc(); },
-		a             : player.NumCocks() > 1 ? " a" : "",
-		s             : player.NumCocks() > 1 ? "s" : "",
-		notS          : player.NumCocks() > 1 ? "" : "s",
-		itThem        : player.NumCocks() > 1 ? "them" : "it",
-		setof         : player.NumCocks() > 1 ? " set of" : "",
-		itsTheir      : player.NumCocks() > 1 ? "their" : "its",
-		itThey        : player.NumCocks() > 1 ? "they" : "it",
-		anusDesc      : function() { return player.Butt().AnalShort(); }
+		
 	};
-	Text.Add("Spare tentacles are wrapping themselves about your [multiCockDesc], squeezing [itThem] as if to coax the milk from your [ballsDesc]. Quickly, the monster has set into a jerking rhythm, keeping to the same pace it’s fucking you at. Forming a[setof] tight cocksleeve[s], the tentacles jerk you off, spreading their slimy goo along the length[s] of your shaft[s].", parse);
+	parse = player.ParserTags(parse);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+	
+	Text.Add("Spare tentacles are wrapping themselves about your [cocks], squeezing [itThem] as if to coax the milk from your [balls]. Quickly, the monster has set into a jerking rhythm, keeping to the same pace it’s fucking you at. Forming a[setof] tight cocksleeve[s], the tentacles jerk you off, spreading their slimy goo along the length[s] of your shaft[s].", parse);
 	Text.NL();
-	Text.Add("Another convulsion runs through you as[a] thinner tendril[s] - thin, but not nearly thin enough - probe[notS] [itsTheir] way into your urethra. Quick as a snake, [itThey] travel[notS] up your cock[s] from the inside, triggering pleasure centers you weren’t even sure you had. Before long, the monster is mashing against your prostate, not only through your abused [anusDesc], but also tickling it directly through your rock-hard [multiCockDesc].", parse);
+	Text.Add("Another convulsion runs through you as[a] thinner tendril[s] - thin, but not nearly thin enough - probe[notS] [itsTheir] way into your urethra. Quick as a snake, [itThey] travel[notS] up your cock[s] from the inside, triggering pleasure centers you weren’t even sure you had. Before long, the monster is mashing against your prostate, not only through your abused [anus], but also tickling it directly through your rock-hard [cocks].", parse);
 	Text.NL();
 }
 
