@@ -1814,10 +1814,10 @@ Scenes.Felines.LossPCblowsCat = function(mainCat, enemy) {
 		Text.Add("Somehow, you can guess what exactly the feline wants from you...", parse);
 	}
 	Text.NL();
-	parse["l"] = player.HasLegs() ? " on your knees," : "";
+	parse["l"] = player.HasLegs() ? " on your knees and" : " on your [legs] and";
 	Text.Add("Tired of waiting, [heshe] decides to take matters in [hisher] own hands. [HeShe] grabs you and pulls you up, settling you down[l] level with [hisher] now fully hardened cock.", parse);
 	Text.NL();
-	Text.Add("[HeShe] pets you lightly, and grabs your head, gently nudging you towards [hisher] sheath, while [hisher] tail drapes over your shoulder, looping around behind your neck to gently stroke your cheek and rub over your lips and nose. Suddenly, you’re very aware of the [cat]’s scent, particularly the musk emanating from [hisher] sex. [HeShe] smells ready...", parse);
+	Text.Add("[HeShe] pets you lightly, and grabs your head, gently nudging you towards [hisher] sheath. [HisHer] tail drapes over your shoulder, looping around behind your neck to gently stroke your cheek and rub over your lips and nose. Suddenly, you’re very aware of the [cat]’s scent, particularly the musk emanating from [hisher] sex. [HeShe] smells ready...", parse);
 	Text.NL();
 	if(player.SubDom() < -15) {
 		Text.Add("Submissive as you are, the [cat] doesn’t need to put much emphasis in what [heshe] wants from you before you look up with a smile, showing that you’re more than willing to comply.", parse);
@@ -1902,9 +1902,9 @@ Scenes.Felines.LossPCblowsCat = function(mainCat, enemy) {
 	Text.Add("You start by licking [hisher] sheath, right where it meets [hisher] pink shaft, then begin making your way up [hisher] length. It feels a bit weird when you get to [hisher] barbs; the little protrusions scrape your tongue, but it doesn’t hurt. And when you finally get to the tapered tip, you catch a taste of [hisher] pre.", parse);
 	Text.NL();
 	if(cum == CumLevel.Light) {
-		Text.Add("Your suspicions are confirmed, and the taste is remarkably similar to what it was like on [hisher] balls along with the female’s juices, except it’s much stronger. Speaking of juices, you’re pretty sure you can still taste it on this [cat]’s dick, just not as strongly as on [hisher] balls.", parse);
+		Text.Add("Your suspicions are confirmed, and the taste is remarkably similar to what it was like on [hisher] balls along with the female’s juices, except it’s much stronger. Speaking of juices, you’re pretty sure you can still taste it on this [cat]’s dick, just not as strongly as on [hisher] nuts.", parse);
 		Text.NL();
-		Text.Add("On [hisher] sack, the taste of dry female juice was stronger, but here on [hisher] shaft, it’s the taste of male seed that’s stronger. It’s a familiar yet different taste - not too bad. You can’t help associating licking [hisher] cock to licking a lollypop, with all its different flavors...", parse);
+		Text.Add("On [hisher] sack, the taste of dry female juice was stronger, but here on [hisher] shaft it’s the taste of male seed that’s stronger. It’s a familiar yet different taste - not too bad. You can’t help associating licking [hisher] cock to licking a lollipop, with all its different flavors...", parse);
 	}
 	else if(cum == CumLevel.Mid) {
 		Text.Add("[HeShe] doesn’t taste half bad; in fact, you’re feeling a bit hot yourself…", parse);
@@ -1916,7 +1916,7 @@ Scenes.Felines.LossPCblowsCat = function(mainCat, enemy) {
 		Text.Add("Seems like [heshe] wants something a little more involved.", parse);
 	}
 	else {
-		Text.Add("No sooner have you licked off the first bead of pre, a small spurt of more pre catches you across your nose. With the way [hisher] shaft is throbbing, you wouldn’t be surprised if a few more feather-touches is all [heshe] needed to blow then and there.", parse);
+		Text.Add("No sooner have you licked off the first bead of pre, a small spurt of more pre catches you across your nose. With the way [hisher] shaft is throbbing, you wouldn’t be surprised if a few more feather-light touches is all [heshe] needed to blow then and there.", parse);
 		Text.NL();
 		Text.Add("You continue to lick along [hisher] rock-hard length, paying special attention to [hisher] bulging veins. The constant flow of pre sliding down mixes with your saliva, making for excellent lube as you run your tongue through [hisher] ticklish barbs. It’s an odd but pleasant feeling, and from the moans and mewls of pleasure, you’d guess [heshe] approves too.", parse);
 		Text.NL();
@@ -1939,9 +1939,9 @@ Scenes.Felines.LossPCblowsCat = function(mainCat, enemy) {
 	if(player.sexlevel < 3) {
 		Text.Add("The sudden thrust surprises you, but you quickly adapt to it and begin sucking, tonguing [hisher] tip and barbs whenever you can. It’s a sloppy effort, but you think the [cat] is beyond caring at this point.", parse);
 		Text.NL();
-		Text.Add("With each thrust, [heshe] goes deeper into your mouth, eventually reaching the back of your throat. You can’t stop your gag reflex, and you nearly choke as [heshe] continues to facefuck you, you’re really not trained enough to do this.", parse);
+		Text.Add("With each thrust, [heshe] goes deeper into your mouth, eventually reaching the back of your throat. You can’t stop your gag reflex, and you nearly choke as [heshe] continues to facefuck you; you’re really not trained enough to do this.", parse);
 		Text.NL();
-		Text.Add("The [cat] doesn’t seem to care about that either; [heshe] grabs ", parse);
+		Text.Add("The [cat] doesn’t seem to care about that either. [HeShe] grabs ", parse);
 		if(horns)
 			Text.Add("you by the [horns]", parse);
 		else
@@ -1954,7 +1954,7 @@ Scenes.Felines.LossPCblowsCat = function(mainCat, enemy) {
 		parse["guygirl"] = mainCat.mfTrue("guy", "girl");
 		Text.Add("Despite the suddenness of [hisher] first thrust, you barely flinch. You expected this would happen, given the [cat]’s distant gaze. Seems like your little foreplay sent the poor [guygirl] into a rut! You’d chuckle, but that’s a bit difficult when your mouth is full of cock.", parse);
 		Text.NL();
-		Text.Add("With each hump, [heshe] goes a little deeper into your mouth. You quickly catch on and move yourself to match [hisher] every thrust in a way that doesn’t hurt you and makes this extra-pleasurable for the [cat]. The effects are visible when [heshe] ", parse);
+		Text.Add("With each hump, [heshe] goes a little deeper into your mouth. You quickly catch on and move yourself to match [hisher] every thrust in a way that doesn’t hurt you and makes this extra pleasurable for the [cat]. The effects are visible when [heshe] ", parse);
 		if(horns)
 			Text.Add("grabs your [horns] for support.", parse);
 		else
@@ -1969,7 +1969,7 @@ Scenes.Felines.LossPCblowsCat = function(mainCat, enemy) {
 		else
 			Text.Add("Well, there’s no point in holding back - you’re not exactly doing this because you wanted - and honestly, your jaw is beginning to get tired. Time to make this kitty blow.", parse);
 		Text.NL();
-		Text.Add("You angle yourself and take the cat’s entire shaft down your throat, the suction practically forming a vacuum as you use your tongue to lick along [hisher] underside. The tiny barbs do little more than tickle your throat as you subject the [cat] to what’s quite possibly the best blowjob [heshe]’ll ever have.", parse);
+		Text.Add("You angle yourself and take the cat’s entire shaft down your gullet, the suction practically forming a vacuum as you use your tongue to lick along [hisher] underside. The tiny barbs do little more than tickle your throat as you subject the [cat] to what’s quite possibly the best blowjob [heshe]’ll ever have.", parse);
 	}
 	Text.NL();
 	Text.Add("[HeShe] holds you down flush on [hisher] sheath as [hisher] balls churn against your chin, and with a loud yowl, the [cat] finally cums.", parse);
@@ -1989,7 +1989,7 @@ Scenes.Felines.LossPCblowsCat = function(mainCat, enemy) {
 	else if(cum == CumLevel.Mid) {
 		Text.Add("[HeShe] has a lot to give. You get several mouthfuls before [hisher] flow begins to taper off, and at the end of it, you’re left to fall nervelessly on the ground with a full belly.", parse);
 		Text.NL();
-		Text.Add("The [cat]’s taste is rich inside your mouth; you’ll probably be tasting [himher] for a while. For a moment, you think you might be done, until [heshe] suddenly kneels beside you, holding [hisher] dick out to you. It takes a moment for you to register that [heshe] wants you to lick [himher] clean…", parse);
+		Text.Add("The [cat]’s flavor is rich inside your mouth; you’ll probably be tasting [himher] for a while. For a moment, you think you might be done until [heshe] suddenly kneels beside you, holding [hisher] dick out to you. It takes a moment for you to register that [heshe] wants you to lick [himher] clean…", parse);
 		Text.NL();
 		Text.Add("With a groan, you force yourself up so you can get to [hisher] cum-slathered prick. You’re a bit wobbly, but the [cat] holds you up as you get to work, licking [hisher] length and sucking on [hisher] tip to make sure you’ve got everything. Once you’re done, the cat helps you down and pats you on your belly, and then proceeds to saunter off.", parse);
 		Text.NL();
@@ -2006,7 +2006,7 @@ Scenes.Felines.LossPCblowsCat = function(mainCat, enemy) {
 		Text.NL();
 		Text.Add("You close your eyes, ready for a nap, but it seems the [cat] isn’t done with you just yet. [HeShe] straddles you and lets [hisher] half-hard cock slap wetly against your face, meowing something you barely make out - an order to lick [himher] clean, you think.", parse);
 		Text.NL();
-		Text.Add("Nevertheless you do just that; you poke your [tongue] out and begin licking [hisher] whole shaft, tip and balls clean. That seems to satisfy the [cat] and [heshe] gets off you to go on [hisher] way, thankfully.", parse);
+		Text.Add("Nevertheless, you do just that; you poke your [tongue] out and begin licking [hisher] whole shaft, tip and balls clean. That seems to satisfy the [cat] and [heshe] gets off you to go on [hisher] way, thankfully.", parse);
 		Text.NL();
 		Text.Add("You lie there on the ground for a few more minutes, until darkness claims you...", parse);
 	}
@@ -2078,7 +2078,7 @@ Scenes.Felines.LossCatchVaginal = function(cat, group, enc) {
 		if(player.FirstCock()) {
 			parse["balls"] = player.HasBalls() ? Text.Parse(" and your attendant [ballsDesc]", parse) : "";
 			parse["things"] = player.HasBalls() == false && player.NumCocks() == 1 ? "a thing" : "things";
-			Text.Add("[HisHer] eyes flick in surprise and more than a hint of disappointment over your [cocks][balls], clearly not expecting to see such [things] on you. As [hisher] eyes find what [heshe] is after, though, [heshe] smiles in contentment.", parse);
+			Text.Add("[HisHer] eyes flick in surprise and more than a hint of disappointment over your [cocks][balls], clearly not expecting to see such [things] on you. As [hisher] gaze finds what [heshe] is after, though, [heshe] smiles in contentment.", parse);
 			Text.NL();
 		}
 		Text.Add("<i>“What a pretty flower you have, beautiful,”</i> [heshe] says, reaching to softly caress your [vag].", parse);
@@ -2094,9 +2094,9 @@ Scenes.Felines.LossCatchVaginal = function(cat, group, enc) {
 			Text.NL();
 			Text.Add("<i>“Thank you, my dear. I promise this will feel good for both us,”</i> [heshe] replies, leaning over to lick at your labia.", parse);
 			Text.NL();
-			Text.Add("You squeal suddenly in shock, wriggling as the warm, wet flesh brushes tantalisingly against your lower lips. Shyly, you reply that you have a feeling [heshe]'ll keep [hisher] word.", parse);
+			Text.Add("You squeal suddenly in shock, wriggling as the warm, wet flesh brushes tantalizingly against your lower lips. Shyly, you reply that you have a feeling [heshe]'ll keep [hisher] word.", parse);
 			Text.NL();
-			Text.Add("<i>“Of course I will, now be a darling and get on all fours for me,</i> [heshe] says, licking [hisher] lips.", parse);
+			Text.Add("<i>“Of course I will. Now, be a darling and get on all fours for me,</i> [heshe] says, licking [hisher] lips.", parse);
 			Text.NL();
 			Text.Add("You hasten to obey, scrambling over on the spot and assuming the indicated position, all but presenting yourself in your eagerness.", parse);
 		}
@@ -2104,12 +2104,12 @@ Scenes.Felines.LossCatchVaginal = function(cat, group, enc) {
 	Text.NL();
 	var tail = player.HasTail();
 	parse["tail"] = tail ? Text.Parse("and gently stroking your [tailDesc] with the other", parse) : "";
-	Text.Add("[Name] approaches you from behind, laying a hand on your [hips] [tail]. Without saying a word [heshe] leans forward to kiss your lower back, trailing soft pecks along your spine as [heshe] simultaneously aligns [himher]self with your [vag].", parse);
+	Text.Add("[Name] approaches you from behind, laying a hand on your [hips] [tail]. Without saying a word, [heshe] leans forward to kiss your lower back, trailing soft pecks along your spine as [heshe] simultaneously aligns [himher]self with your [vag].", parse);
 	Text.NL();
 	parse["bitingbackUttering"] = dom > 0 ? "biting back" : "uttering";
-	Text.Add("Involuntarily you arch your back, [bitingbackUttering] a moan of desire as you feel [hisher] feather-light touch dancing down your back. You're intimately aware of the warmth of [hisher] cock as it hovers temptingly just outside your [vag], and you feel the ache for [himher] to start claiming you well inside your stomach.", parse);
+	Text.Add("Involuntarily, you arch your back, [bitingbackUttering] a moan of desire as you feel [hisher] feather-light touch dancing down your back. You're intimately aware of the warmth of [hisher] cock as it hovers temptingly just outside your [vag], and you feel the ache for [himher] to start claiming you well inside your stomach.", parse);
 	Text.NL();
-	Text.Add("[HisHer] hands slide to your [butt], gripping the cheeks and spreading them apart. You’re dimly aware of [hisher] claws gently prickling your [skin].", parse);
+	Text.Add("[HisHer] hands slide to your [butt], gripping the cheeks and spreading them apart. You’re dimly aware of [hisher] claws gently prickling you.", parse);
 	Text.NL();
 	parse["virgin"] = virgin ? " virgin" : "";
 	Text.Add("<i>“Here I come~”</i> [name] says in a singsong voice, thrusting [himher]self into your[virgin] folds.", parse);
@@ -2123,7 +2123,7 @@ Scenes.Felines.LossCatchVaginal = function(cat, group, enc) {
 		if(dom) {
 			Text.Add("You bite your lip savagely to avoid crying out as [heshe] tears through your hymen, but you can't help the way your body quakes in pain, abused folds instinctively clamping down on [hisher] intruding member.", parse);
 			Text.NL();
-			Text.Add("<i>“So tight! Sorry my dear, I didn’t think you were a virgin,”</i> [heshe] apologizes, stroking your [tail]. <i>“I promise I’ll make your first time memorable,”</i> [heshe] grins, leaning over to give your back a gentle kiss.", parse);
+			Text.Add("<i>“So tight! Sorry, my dear, I didn’t think you were a virgin,”</i> [heshe] apologizes, stroking your [tail]. <i>“I promise I’ll make your first time memorable,”</i> [heshe] grins, leaning over to give your back a gentle kiss.", parse);
 		}
 		else {
 			Text.Add("You cry out in pain as your hymen is torn, your [maleherm] partner having just claimed your female virginity. Unconsciously, your body shudders at the sensations, instinctively squeezing [hisher] cock in an effort to try and keep [himher] at bay.", parse);
@@ -2132,22 +2132,22 @@ Scenes.Felines.LossCatchVaginal = function(cat, group, enc) {
 		}
 	}
 	else {
-		Text.Add("You moan unconsciously as you feel [himher] spearing inside of you, your [vag] enveloping [himher] in response. You can feel its warmth burning inside of you, its strange bristly surface stroking and tickling your walls in all directions. Your whole body shivers and unthinkingly you clench down on [himher].", parse);
+		Text.Add("You moan unconsciously as you feel [himher] spearing inside of you, your [vag] enveloping [himher] in response. You can feel its warmth burning within you, its strange bristly surface stroking and tickling your walls in all directions. Your whole body shivers and unthinkingly you clench down on [himher].", parse);
 		Text.NL();
-		Text.Add("[Name] yowls as [heshe] hilts within you, obviously enjoying [himher]self as [heshe] waits for you to adjust to [hisher] girth.", parse);
+		Text.Add("[Name] yowls as [heshe] hilts inside you, obviously enjoying [himher]self as [heshe] waits for you to adjust to [hisher] girth.", parse);
 	}
 	Text.NL();
 	parse["herm"] = cat.mfTrue("", ", gently pressing her boobs against you");
 	parse["tits"] = player.FirstBreastRow().Size() > 3 ? Text.Parse(" massage your [breasts] and ", parse) : "";
-	Text.Add("Once the feline deems you ready, [heshe] begins pumping slowly. First at a slow, drawn-out rhythm, but as your juices mix with [hisher] own, [heshe] hastens the pace. [Name] leans over your back[herm]. [HisHer] hands trail along your sides to gently[tits] pinch your [nips].", parse);
+	Text.Add("Once the feline deems you ready, [heshe] begins pumping slowly. First at a slow, drawn-out rhythm, but as your juices mix with [hisher] own [heshe] hastens the pace. [Name] leans over your back[herm]. [HisHer] hands trail along your sides to gently[tits] pinch your [nips].", parse);
 	Text.NL();
 	parse["dom"] = dom ? "However involuntarily, y" : "Y";
-	Text.Add("You shudder as [heshe] tweaks and plays with you, rewarding [himher] by clenching down on [hisher] cock. You can feel [hisher] bristles inside of you, each fleshy barb dragging against a different point inside of you with each thrust [heshe] makes. The sensation is indescribable, a strange tickling feeling from dozens of points inside of you that only stokes the pleasure of [hisher] thrusts. [dom]ou start to thrust your [butt] back into [hisher] crotch, trying to match [hisher] rhythm, coaxing [himher] to go faster.", parse);
+	Text.Add("You shudder as [heshe] tweaks and plays with you, rewarding [himher] by clenching down on [hisher] cock. You can feel [hisher] bristles within you, each fleshy barb dragging against a different point of your inner walls with each thrust [heshe] makes. The sensation is indescribable, a strange, tickling feeling from dozens of points inside of you that only stokes the pleasure of [hisher] thrusts. [dom]ou start to thrust your [butt] back into [hisher] crotch, trying to match [hisher] rhythm, coaxing [himher] to go faster.", parse);
 	Text.NL();
-	Text.Add("[Possessive] thrusts grows more enthusiastic as you begin reciprocating [hisher] efforts. [HeShe] hugs your midriff, gaining more leverage so that [heshe] can pump [himher]self deeper into you. As [heshe] does so, you can feel something vibrating against your back. The sound that follows confirms your suspicion, [heshe]’s purring.", parse);
+	Text.Add("[Possessive] thrusts grows more enthusiastic as you begin reciprocating [hisher] efforts. [HeShe] hugs your midriff, gaining more leverage so that [heshe] can pump [himher]self deeper into you. As [heshe] does so, you can feel something vibrating against your back. The sound that follows confirms your suspicion: [heshe]’s purring.", parse);
 	Text.NL();
 	if(dom)
-		Text.Add("A flush of mingled shame and pride bubbles through you as you realise your rapist is so thoroughly enamored with your [vag], the conflicted emotions forming a knot in your guts. Still, you have to concede [heshe] is good... you're getting close yourself...", parse);
+		Text.Add("A flush of mingled shame and pride bubbles through you as you realize your rapist is so thoroughly enamored with your [vag], the conflicted emotions forming a knot in your guts. Still, you have to concede [heshe] is good... you're getting close yourself...", parse);
 	else
 		Text.Add("You smile proudly as you hear the rumbling purrs vibrating through your [skin]; to think, you're making [himher] so very happy with your body! And, oohh, you're getting so close, too! You're going to cum soon... you hope [heshe] is feeling the same...", parse);
 	Text.NL();
@@ -2157,7 +2157,7 @@ Scenes.Felines.LossCatchVaginal = function(cat, group, enc) {
 	Text.Add("You nod and reply that you're ready,[reluctantly] admitting that you're close to cumming too.", parse);
 	Text.NL();
 	parse["fem"] = player.mfFem("handsome", "pretty");
-	Text.Add("<i>“Tell me, then. Where do you want me to cum? I’d be loathe to make such a [fem] girl like you pregnant against their will. Though I’m sure our kittens would be the cutest,”</i> [heshe] adds with a smile. </i>“What do you say? Would you carry my kits?”</i>", parse);
+	Text.Add("<i>“Tell me, then. Where do you want me to cum? I’d be loathe to make such a [fem] girl like you pregnant against their will. Though I’m sure our kittens would be the cutest,”</i> [heshe] adds with a smile. </i>“What do you say? Would you carry my kittens?”</i>", parse);
 	Text.Flush();
 	
 	//[Inside][Outside]
@@ -2168,7 +2168,7 @@ Scenes.Felines.LossCatchVaginal = function(cat, group, enc) {
 			Text.Add("<i>“I’m so glad to hear you say this, my darling. I’ll make sure to shoot as deep inside you as I can,”</i> [heshe] says, smiling as [heshe] redoubles [hisher] efforts to thrust into you.", parse);
 			Text.NL();
 			if(dom)
-				Text.Add("Like [hisher] weak seed will be strong enough to get you pregnant in the first place, you assure yourself, even as you rock your hips back against [himher]. You so close now, you just want to get this over with!", parse);
+				Text.Add("Like [hisher] weak seed will be strong enough to get you pregnant in the first place, you assure yourself, even as you rock your hips back against [himher]. You're so close now that you just want to get this over with!", parse);
 			else {
 				parse["handsomebeautiful"] = cat.mfTrue("handsome", "beautiful");
 				Text.Add("A thrill races along your spine on hearing those words. You tell [himher] that you couldn't hope for something more wonderful than to bear the kittens of such a [handsomebeautiful], virile [manherm]! For emphasis, you start to grind yourself back against [himher] with all the strength you can muster, wringing [hisher] dick with your cunt in an effort to milk [hisher] inevitable orgasm.", parse);
@@ -2188,7 +2188,7 @@ Scenes.Felines.LossCatchVaginal = function(cat, group, enc) {
 			if(player.FirstCock())
 				Text.Add(" Between your [legs], your [cocks] go limp, swaying loosely between your thighs.", parse);
 			Text.NL();
-			Text.Add("[Name] collapses atop you, sending both of you crashing onto the ground. <i>“Ah, thanks my dear. I really needed that,”</i> [heshe] says, licking your neck affectionately.", parse);
+			Text.Add("[Name] collapses atop you, sending both of you crashing onto the ground. <i>“Ah, thanks, my dear. I really needed that,”</i> [heshe] says, licking your neck affectionately.", parse);
 			Text.NL();
 			if(dom) {
 				Text.Add("You huff indignantly and wriggle your shoulders, telling [himher] to keep [hisher] tongue to [himher]self and to get off of you already. [HeShe] got what [heshe] was after.", parse);
@@ -2221,7 +2221,7 @@ Scenes.Felines.LossCatchVaginal = function(cat, group, enc) {
 	options.push({ nameStr : "Outside",
 		func : function() {
 			Text.Clear();
-			Text.Add("<i>“As you wish”</i> [heshe] replies, thrusting into you forcefully a couple more times; then finally withdrawing and leaning back as [hisher] hands fly to [hisher] throbbing cathood, violently stroking.", parse);
+			Text.Add("<i>“As you wish,”</i> [heshe] replies, thrusting into you forcefully a couple more times, then finally withdrawing and leaning back as [hisher] hands fly to [hisher] throbbing cathood, violently stroking.", parse);
 			Text.NL();
 			parse["tail"]  = player.HasTail() ? Text.Parse(" [tailDesc],", parse) : "";
 			parse["wings"] = player.HasWings() ? Text.Parse(" [wingDesc],", parse) : "";
@@ -2229,13 +2229,13 @@ Scenes.Felines.LossCatchVaginal = function(cat, group, enc) {
 			Text.NL();
 			Text.Add("You groan in frustration, feeling your own need throbbing down below. You're so close, but you can't manage to climb the edge on your own... As your [vag] flexes in frustration, you feel something warm and wet glide suddenly across your [butt]. [Name] is licking you!", parse);
 			Text.NL();
-			Text.Add("<i>“Don’t worry, I didn’t forget about you,”</i> you hear [himher] say as [heshe] slowly approaches your used pussy and sticks [hisher] tongue inside, penetrating you with [hisher] tongue and licking all over your vaginal walls.", parse);
+			Text.Add("<i>“Don’t worry, I didn’t forget about you,”</i> you hear [himher] say as [heshe] slowly approaches your used pussy and sticks [hisher] tongue inside, penetrating you with [hisher] rough, flexible muscle and licking all over your vaginal walls.", parse);
 			Text.NL();
 			Text.Add("Your eyes squeeze themselves shut and you moan loudly, your cunt clamping down on the squirming intruder inside of you. It's just what you needed to push you over the edge, and with an ecstatic cry, your whole body quakes as your climax, letting your juices seep over [hisher] tongue.", parse);
 			if(player.FirstCock())
 				Text.Add("Ignored by both of you until now, you feel your [cocks] erupt, spraying seed across the ground below you.", parse);
 			Text.NL();
-			Text.Add("[Name] drinks down all of your femcum with gusto, even licking around your honeypot to ensure [heshe] gets every last drop of your sweet-tasting juices.", parse);
+			Text.Add("[Name] drinks down all of your femcum with gusto, even licking around your honeypot to ensure [heshe] gets every last drop of your sweet tasting juices.", parse);
 			Text.NL();
 			parse["s"] = enc.enemy.Num() > 2 ? "s" : "";
 			parse["comp"] = group ? Text.Parse(", calling [hisher] companion[s] to follow after [himher]", parse) : "";
