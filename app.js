@@ -6,8 +6,8 @@ windowHeight = 700;
 APP_NAME = "Fall of Eden";
 VERSION_MAJOR = 0;
 VERSION_MINOR = 4;
-VERSION_SUBSCRIPT = "p";
-VERSION_NAME = "Cass snusnu";
+VERSION_SUBSCRIPT = "q";
+VERSION_NAME = "Highland scouts";
 
 SAVE_VERSION = 28;
 // Save version 1: Initial
