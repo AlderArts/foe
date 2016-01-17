@@ -182,7 +182,7 @@ function CentaurMare(levelbonus) {
 	Entity.call(this);
 	this.ID = "centaurmare";
 	
-	this.avatar.combat     = Images.mare; //TODO
+	this.avatar.combat     = Images.centaur_mare;
 	this.name              = "Centauress";
 	this.monsterName       = "the centauress";
 	this.MonsterName       = "The centauress";

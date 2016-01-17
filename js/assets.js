@@ -55,6 +55,7 @@ Images.naga         = "data/naga.png";
 Images.drake        = "data/drake.png";
 Images.gol          = "data/gol.png";
 Images.catboy       = "data/catboy.png";
+Images.centaur_mare = "data/centaur_mare.png";
 
 Images.bandit_male1 = "data/bandit_male1.png";
 Images.bandit_male2 = "data/bandit_male2.png";
