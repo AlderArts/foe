@@ -1026,7 +1026,7 @@ Scenes.Layla.SexCatchAnalCont = function(parse) {
 			options.push({ nameStr : "Yes",
 				func : function() {
 					Text.Clear();
-					Text.Add("She leans in toward you, caressing your cheek, as she wraps your lips in a passionate kiss, thrusting her tongue inside and exploring your mouth as her tongue digs ever closer to your throat.", parse);
+					Text.Add("She leans in toward you, caressing your cheek, as she wraps your lips in a passionate kiss, thrusting her tongue inside and exploring your mouth as her flexible organ digs ever closer to your throat.", parse);
 					Text.NL();
 					
 					Scenes.Layla.SexCatchAnalCont2(parse, true);
@@ -1048,7 +1048,7 @@ Scenes.Layla.SexCatchAnalCont = function(parse) {
 								Text.Clear();
 								Text.Add("She smiles and turns her attention back to your nipples, gently biting, forcing a moan out of you as the pain mixes with pleasure. Her tail enters your field of vision, and you watch as it splits open, a single drop of its tasty juices landing on your lips.", parse);
 								Text.NL();
-								Text.Add("Without thinking, your tongue sweeps over your lips, savoing the warming minty taste of her goo. With no hesitation, you open as wide as you can, welcoming the chimera’s second cock as it snakes into your mouth. Wrapping your lips around it, you start to suckle, and fluids pour down your throat in response.", parse);
+								Text.Add("Without thinking, your tongue sweeps over your lips, savoring the warming minty taste of her goo. With no hesitation, you open as wide as you can, welcoming the chimera’s second cock as it snakes into your mouth. Wrapping your lips around it, you start to suckle, and fluids pour down your throat in response.", parse);
 								Text.NL();
 								
 								Scenes.Layla.SexCatchAnalCont2(parse, null, true);
@@ -1058,7 +1058,7 @@ Scenes.Layla.SexCatchAnalCont = function(parse) {
 						options.push({ nameStr : "No",
 							func : function() {
 								Text.Clear();
-								Text.Add("<i>“Okay,”</i> she says, leaning over and licking your nipples once more, before resuming her sucking.", parse);
+								Text.Add("<i>“Okay,”</i> she says, leaning over and licking your nipples once more before resuming her sucking.", parse);
 								Text.NL();
 								Scenes.Layla.SexCatchAnalCont2(parse);
 							}, enabled : true,
@@ -1078,7 +1078,7 @@ Scenes.Layla.SexCatchAnalCont = function(parse) {
 			
 		}, 1.0, function() { return true; });
 		scenes.AddEnc(function() {
-			Text.Add("Your eyes flutter closed and you moan softly. Pleasure sings through your veins, dances under your [skin]. A gentle nip on your nipple makes your eyes open again. Before your face, Layla’s tail undulates, dancing on some ethereal breeze.", parse);
+			Text.Add("Your eyes flutter closed and you moan softly. Pleasure sings through your veins and dances under your [skin]. A gentle nip on your nipple makes your eyes open again. Before your face, Layla’s tail undulates, dancing on some ethereal breeze.", parse);
 			Text.NL();
 			Text.Add("Like a perverse flower, the chimera’s tail-tip opens, revealing the drooling length of her secondary shaft. It curls through the air, brushing its slimy tip against your lips, but then hovers there, waiting for you to make the choice to accept it or not.", parse);
 			Text.Flush();
@@ -1088,7 +1088,7 @@ Scenes.Layla.SexCatchAnalCont = function(parse) {
 			options.push({ nameStr : "Accept",
 				func : function() {
 					Text.Clear();
-					Text.Add("You open your mouth without hesitation and immediately Layla’s tail glides inside. Wrapping your lips around its girth, you suckle happily, feeling the warming, mint-tinged goo trickling down your throat.", parse);
+					Text.Add("You open your mouth without hesitation, and immediately Layla’s tail glides inside. Wrapping your lips around its girth, you suckle happily, feeling the warming, mint-tinged goo trickling down your throat.", parse);
 					Text.NL();
 					
 					Scenes.Layla.SexCatchAnalCont2(parse, null, true);
@@ -1114,7 +1114,7 @@ Scenes.Layla.SexCatchAnalCont = function(parse) {
 							Text.Clear();
 							Text.Add("Layla smiles and leans over you, pressing her lips to yours.", parse);
 							Text.NL();
-							Text.Add("Without hesitation, you open your lips, inviting the chimera’s tongue inside, an invitation she immediately seizes upon. A long, writhing appendage squirms inside, filling your tastebuds with her flavor as it ensnares your [tongue].", parse);
+							Text.Add("Without hesitation, you open your lips, inviting the chimera’s tongue inside, an invitation she immediately seizes upon. A long, writhing appendage squirms inside, filling your taste buds with her flavor as it ensnares your [tongue].", parse);
 							Text.NL();
 							
 							kiss = true;
@@ -1145,7 +1145,7 @@ Scenes.Layla.SexCatchAnalCont = function(parse) {
 
 Scenes.Layla.SexCatchAnalCont2 = function(parse, kiss, tailcock) {
 	if(kiss) {
-		Text.Add("Writhing in the chimera’s arms, you hug her as tightly as you can. Her tongue thrashes in your mouth, while your own tries to defend itself against the onslaught. Down below, her hips smack meatily against your own, a rhythmic thrusting that sends warmth and pleasure tingling along your spine.", parse);
+		Text.Add("Writhing in the chimera’s arms, you hug her as tightly as you can. Her tongue thrashes in your mouth while your own tries to defend itself against the onslaught. Down below, her hips smack meatily against yours, a rhythmic thrusting that sends warmth and pleasure tingling along your spine.", parse);
 		Text.NL();
 		Text.Add("Layla attacks you like a chimera possessed, humming and moaning into your kiss as she moves to probe your throat. Luckily, she stops for a moment, giving you time to catch your breath.", parse);
 		Text.NL();
@@ -1162,13 +1162,13 @@ Scenes.Layla.SexCatchAnalCont2 = function(parse, kiss, tailcock) {
 		
 		Text.Add("The taste of Layla’s tail floods your mouth, searing its way down your throat as you swallow. You nurse like a starving baby at its mother’s teat, working with lips and tongue to pleasure her quasi-phallus.", parse);
 		Text.NL();
-		Text.Add("From down below, you are aware of her cock as it ploughs away at your ass, and the feeling of her own lips wrapped around your [nip], nursing with equal fervor. But your own attentions remain wrapped around her tail-cock, feeling it throbbing and pulsing in your mouth as you lavish it with your oral affections.", parse);
+		Text.Add("From down below, you are aware of her dick as it plows away at your ass, and the feeling of her lips wrapped around your [nip], nursing with equal fervor. But your own attentions remain wrapped around her tail-cock, feeling it throbbing and pulsating in your mouth as you lavish it with your oral affections.", parse);
 		Text.NL();
 		Text.Add("It squirms and wriggles, writhing past your lips and bucking in and out of your mouth. It tenses suddenly, and you draw it deeper, allowing it to explode around your tongue. Thick gushes of warm, minty goo cascade down your throat, burning deliciously inside your stomach.", parse);
 		Text.NL();
 		Text.Add("You swallow without pause, without thinking, just letting it wash you away in pleasure. Only when it goes slack do you release your lips, allowing Layla to pull her limp member from your mouth.", parse);
 		Text.NL();
-		parse["lact"] = player.Lactation() ? " your milk stains her mouth" : "";
+		parse["lact"] = player.Lactation() ? " your milk stains on her mouth" : "";
 		Text.Add("As your eyes open and you inhale slowly, taking deep breaths, Layla’s face drifts lazily into view. Her eyes are hazy with pleasure,[lact] and her lips curl into a dreamy smile.", parse);
 	}
 	else {
@@ -1182,7 +1182,7 @@ Scenes.Layla.SexCatchAnalCont2 = function(parse, kiss, tailcock) {
 	}
 	Text.NL();
 	if(layla.sexlevel >= 2 && !player.PregHandler().IsPregnant()) {
-		Text.Add("<i>“[playername]. C-Can I…?”</i> she asks, hilting herself completely into you and grinding herself into your well-used [anus].", parse);
+		Text.Add("<i>“[playername]. C-can I…?”</i> she asks, hilting herself completely into you and grinding herself into your well-used [anus].", parse);
 		Text.NL();
 		Text.Add("Any confusion you might have felt is lost as you feel the bulging flesh pushing so insistently against your stretched hole. The chimera wants to knot you... but will you let her?", parse);
 		Text.Flush();
@@ -1201,7 +1201,7 @@ Scenes.Layla.SexCatchAnalCont2 = function(parse, kiss, tailcock) {
 
 				Text.Add("You cry out in pleasure, squeezing down for all you’re worth. Sparks spit and crackle inside your brain, racing along your nerves as your own boundary is reached and passed.", parse);
 				if(player.FirstCock()) {
-					Text.Add(" Your [cocks] ache[notS] and throb[notS], hard as diamond before erupting in[a] geyser[notS] of semen that wash[notEs] over your belly, spilling messily down your [thighs] and puddling on the ground.", parse);
+					Text.Add(" Your [cocks] ache[notS] and throb[notS], hard as diamond before erupting in[a] geyser[notS] of semen that wash[notEs] over your [belly], spilling messily down your [thighs] and puddling on the ground.", parse);
 				}
 				if(player.FirstVag()) {
 					Text.Add(" Your [vag] squeezes itself as tight as it can, wringing itself around an absent cock and gushing its nectar over Layla’s nethers.", parse);
@@ -1212,24 +1212,24 @@ Scenes.Layla.SexCatchAnalCont2 = function(parse, kiss, tailcock) {
 				
 				Text.Add("You can feel it. Her knot is growing inside your [anus], effectively trapping you as her climax slows down to a trickle.", parse);
 				Text.NL();
-				Text.Add("Without thinking, you clench your sphincter, squeezing down on Layla’s knot. As if to defy you, it grows fuller still, making it harder for you to grip, ensuring you are never going to push it out. As full as you are, you can feel her cock bulging as another jet of semen floods up its length, spurting inside your stuffed guts, sending  a ripple of pleasure through you.", parse);
+				Text.Add("Without thinking, you clench your sphincter, squeezing down on Layla’s knot. As if to defy you, it grows fuller still, making it harder for you to grip, ensuring you are never going to push it out. As full as you are, you can feel her cock bulging as another jet of semen floods up its length, spurting inside your stuffed guts, sending a ripple of pleasure through you.", parse);
 				Text.NL();
-				Text.Add("Layla hugs you close, nuzzling your [breasts] as she coos lovingly. Another jet of cum spurting inside you as she seems to almost purr.", parse);
+				Text.Add("Layla hugs you close, nuzzling your [breasts] as she coos lovingly. Another jet of cum spurts inside you as she seems to almost purr.", parse);
 				Text.NL();
 				Text.Add("Helpless and, in truth, enjoying it, you curl your own limbs around the chimera, pressing your cheek to hers. Your own nethers throb in sympathy as she cums inside you with rhythmic precision. A thick jet of girl-cream rushes inside your ass, and then the seconds tick by, just long enough to make you think she’s finished, before she fires again.", parse);
 				Text.NL();
-				Text.Add("You feel warm and flushed, the liquid heat within you enveloping you from the inside out. Your belly begins to feel full, stuffed to the brim, but she continues to creampie you. Like a loaf of bread in an oven, your stomach begins to rise, inch by inch thrusting itself against your lover’s own belly.", parse);
+				Text.Add("You feel warm and flushed, the liquid heat within you enveloping you from the inside out. Your belly begins to feel full, stuffed to the brim, but she continues to creampie you. Like a loaf of bread in an oven, your stomach begins to rise inch by inch, thrusting itself against your lover’s own belly.", parse);
 				Text.NL();
-				Text.Add("Thicker and fuller she fills you, leaving you to moan plaintively as you are stuffed and stuffed. You feel like you are about to burst, but at the same time, it feels so wonderful...", parse);
+				Text.Add("Thicker and fuller she fills you, leaving you to moan plaintively as you are stuffed and stuffed. You feel like you are about to burst, but at the same time it feels so wonderful...", parse);
 				Text.NL();
-				Text.Add("Bigger, bigger, how much bigger is she going to make you? Your stomach looks like a watermelon, skin stretched tight over the cum-crammed organs within. Finally, mercifully, Layla seems to run out of cum. Curling somewhat awkwardly around your flagrantly distended middle, she yawns hugely and tucks her head into the crook of your shoulder.", parse);
+				Text.Add("Bigger, bigger, how much bigger is she going to make you? Your stomach looks like a watermelon, skin stretched tight over the cum-crammed organs within. Finally - mercifully - Layla seems to run out of semen. Curling somewhat awkwardly around your flagrantly distended middle, she yawns hugely and tucks her head into the crook of your shoulder.", parse);
 				Text.NL();
 				Text.Add("Her breathing slows quietly, and you realize she’s drifted off to sleep. Smiling wistfully, you stroke her hair, nuzzling your cheek against hers as you allow yourself to likewise drift into slumber.", parse);
 				Text.Flush();
 				
 				Gui.NextPrompt(function() {
 					Text.Clear();
-					Text.Add("You awaken to the feeling of something tugging at your ass. Layla groans in exertion as she tugs at your butt lightly, willing her knot to subside enough to pull out. It takes a bit of work, but after a minute of awkward struggles, you’re rewarded with a wet pop as she finally manages to withdraw.", parse);
+					Text.Add("You awaken to the feeling of something tugging at your ass. Layla groans in exertion as she tugs at your butt lightly, willing her knot to subside enough to pull out. It takes a bit of work, but after a minute of awkward struggles you’re rewarded with a wet pop as she finally manages to withdraw.", parse);
 					Text.NL();
 					Text.Add("You let out a huge sigh of relief, feeling the liquid inside of you shifting. The sensation of being an emptying bottle is hard to articulate as your filling comes gurgling from your gaping ass, pouring wetly across the ground.", parse);
 					Text.NL();
@@ -1237,7 +1237,7 @@ Scenes.Layla.SexCatchAnalCont2 = function(parse, kiss, tailcock) {
 					Text.NL();
 					Text.Add("Reaching up, you clasp hold of it, allowing Layla to assist you in getting off the ground. With a little help, you are soon standing upright once again, stretching the kinks from your joints.", parse);
 					Text.NL();
-					Text.Add("Layla approaches you, rubbing her cheeks against you affectionately, before she takes a step back and shifts her skin back into clothes.", parse);
+					Text.Add("Layla approaches you, rubbing her cheeks against you affectionately before she takes a step back and shifts her skin back into clothes.", parse);
 					Text.NL();
 					Text.Add("Since you can’t just conjure clothes on and off like that, it takes you a little longer before you are dressed and ready to set out again.", parse);
 					Text.Flush();
@@ -1263,7 +1263,7 @@ Scenes.Layla.SexCatchAnalCont2 = function(parse, kiss, tailcock) {
 }
 
 Scenes.Layla.SexCatchAnalCont3 = function(parse) {
-	Text.Add("<i>“O-Okay,”</i> she replies, furrowing her brows to will her knot away, all the while pumping herself into you.", parse);
+	Text.Add("<i>“O-okay,”</i> she replies, furrowing her brows to will her knot away, all the while pumping herself into you.", parse);
 	Text.NL();
 	Text.Add("As you thrust and moan, you feel your own pleasure building, curling your limbs around your chimeric lover as you grind together. Layla cries out, arching her back as the first shot of her cum erupts inside of you. The feeling of it - sticky and warm, like wet heat slurping lewdly inside of you - pushes you past the limit, and you climax in turn.", parse);
 	Text.NL();
@@ -1275,7 +1275,7 @@ Scenes.Layla.SexCatchAnalCont3 = function(parse) {
 	var cum = player.OrgasmCum();
 	
 	if(player.FirstCock()) {
-		Text.Add("Your [cocks], sandwiched between the two of you, goes off in a shower of cum, smearing you both with your fluids.", parse);
+		Text.Add("Your [cocks], sandwiched between the two of you, go[notEs] off in a shower of cum, smearing you both with your fluids.", parse);
 		Text.NL();
 	}
 	if(player.FirstVag()) {
@@ -1339,11 +1339,11 @@ Scenes.Layla.FirstTimeSkinShift = function() {
 	Text.NL();
 	Text.Add("Her clothes - they just sort of melted into her skin. How did she make them do that?", parse);
 	Text.NL();
-	Text.Add("<i>“Oh, that? Miss Gwendy said I shouldn’t walk around naked, so I shifted my skin to look like a few clothes she had.”</i> She demonstrates it by shifting her clothes back on, then off again.", parse);
+	Text.Add("<i>“Oh, that? Miss Gwendy said I shouldn’t walk around naked, so I shifted my skin to look like a few clothes she had.”</i> She demonstrates it by shifting her 'clothes' back on, then off again.", parse);
 	Text.NL();
 	Text.Add("She... shifted her skin? Shaking your head in bewilderment, you ask her how she does that; you’ve never seen anyone who could do that before!", parse);
 	Text.NL();
-	Text.Add("Layla shrugs. <i>“I don’t know. I just do. It’s like raising your hand I guess...”</i>", parse);
+	Text.Add("Layla shrugs. <i>“I don’t know. I just do. It’s like raising your hand, I guess...”</i>", parse);
 	Text.NL();
 	Text.Add("Well, it seems she’s not going to be able to clear up that little mystery. You’ll just have to accept that the ability is part of who she is. With a chuckle, you quip that Layla is just full of surprises. Back to business then...", parse);
 	Text.NL();
@@ -1369,13 +1369,13 @@ Scenes.Layla.SexPitchVaginal = function() {
 	};
 	
 	Text.Clear();
-	Text.Add("As the excited chimera nods and shifts her skin to reveal her true glory, you set about stripping out of your own [armor]. You nudge the discarded clothing out of the way with your [feet] and stand ready for Layla’s inspection, taking this opportunity to ogle her own newly-nude form.", parse);
+	Text.Add("As the excited chimera nods and shifts her skin to reveal her true glory, you set about stripping out of your own [armor]. You nudge the discarded clothing out of the way with your [feet] and stand ready for Layla’s inspection, taking this opportunity to ogle her own newly nude form.", parse);
 	Text.NL();
 	if(player.FirstCock()) {
 		if(player.LustLevel() < 0.5) {
 			Text.Add("Unfortunately, as much as you appreciate the view, it’s not quite enough to get your cock[s] going, but you know another way to get yourself properly in the mood for a little fun...", parse);
 			Text.NL();
-			Text.Add("Smiling innocently, you ask Layla if she would be a dear and help you get ready for her? You just need a little help before you both can start.", parse);
+			Text.Add("Smiling innocently, you ask Layla if she would be a dear and help you get ready for her? You just need a little assistance before you both can start.", parse);
 			Text.NL();
 			Text.Add("<i>“Sure! What do I do?”</i>", parse);
 			Text.Flush();
@@ -1396,22 +1396,22 @@ Scenes.Layla.SexPitchVaginal = function() {
 					Text.Add("Such a good girl, so quick to help out someone in need. Still smiling, you sit down on the ground and [l], giving as much access as possible to the expectant chimera.", parse);
 					Text.NL();
 					parse["knot"] = p1cock.Knot() ? "knot" : "base";
-					Text.Add("Layla wastes no time, she grabs[oneof] your [cocks] by the [knot] and begins slowly stroking your shaft.", parse);
+					Text.Add("Layla wastes no time; she grabs[oneof] your [cocks] by the [knot] and begins slowly stroking your shaft.", parse);
 					Text.NL();
 					Text.Add("You coo your approval as the chimera’s fingers trail feather-light touches across your sensitive flesh, causing a shudder to ripple throughout your body.", parse);
 					Text.NL();
 					if(laylaSexlevel < 3) {
 						Text.Add("While she isn’t exactly experienced, she does manage to touch a few key spots - plus her eagerness to please you is simply adorable.", parse);
 						Text.NL();
-						Text.Add("Patiently, you try to guide her in her efforts; offering the occasional instruction as to where to stroke you for best effect, and lightly praising her efforts at pleasing you. She’s a hard worker, and learns quite quickly. Slowly, you can feel the tingling building inside of you, your manhood[s] creeping into erection as she works.", parse);
+						Text.Add("Patiently, you try to guide her in her efforts by offering the occasional instruction as to where to stroke you for best effect, and lightly praising her efforts at pleasing you. She’s a hard worker, and learns quite quickly. Slowly, you can feel the tingling building inside of you, your manhood[s] creeping into erection as she works.", parse);
 					}
 					else if(laylaSexlevel < 5) {
-						Text.Add("The chimera’s attention is completely dominated by your [cock], you can tell as she traces your veins, slowly trying, learning. It already feels pretty good, but it only gets better as she continue to explore your length.", parse);
+						Text.Add("The chimera’s attention is completely dominated by your [cock]; you can tell as she traces your veins - slowly trying, learning. It already feels pretty good, but it only gets better as she continue to explore your length.", parse);
 						Text.NL();
-						Text.Add("Though you offer the occasional pointer, you find yourself content primarily to sit back and enjoy her efforts. She truly has come a long way from the naive virgin she was when you took her in, and you’re happy to reap the results. All too soon, it feels like, you can feel yourself growing harder and stiffer in her hands.", parse);
+						Text.Add("Though you offer the occasional pointer, you find yourself content primarily to sit back and enjoy her efforts. She truly has come a long way from the naive virgin she was when you took her in, and you’re happy to reap the results. All too soon - it feels like - you can feel yourself growing harder and stiffer in her hands.", parse);
 					}
 					else {
-						Text.Add("The chimera is so familiar with your body that she doesn’t really need to try and find your special spots, she already knows them by heart. Although she is a lot more experienced now, she’s still just as eager to please as she was back when she was inexperienced.", parse);
+						Text.Add("The chimera is so familiar with your body that she doesn’t really need to try and find your special spots - she already knows them by heart. Although she is a lot more experienced now, she’s still just as eager to please as she was back when she was inexperienced.", parse);
 						Text.NL();
 						Text.Add("Under such an assault, you can’t muster the concentration to offer any commentary, even if you felt it were necessary. Layla has reduced you to little more than putty in her capable fingers; your maleness practically jumps erect under her touch, the chimera working you into a passion with hardly any effort on her part.", parse);
 					}
@@ -1436,7 +1436,7 @@ Scenes.Layla.SexPitchVaginal = function() {
 				tooltip : "Having her stroke you with her tail would be pretty hot...",
 				func : function() {
 					Text.Clear();
-					Text.Add("Watching the chimera’s reptilian tail with its hidden surprise idly flicking through the air, your decision is easy to make. You tell Layla that you’d love to see what she can do by wrapping that tail of hers around your cock and jerking you off with it.", parse);
+					Text.Add("Watching the chimera’s reptilian appendage with its hidden surprise idly flicking through the air, your decision is easy to make. You tell Layla that you’d love to see what she can do by wrapping that tail of hers around your cock and jerking you off with it.", parse);
 					Text.NL();
 					Text.Add("<i>“Okay,”</i> she says, bringing her tail around her front.", parse);
 					Text.NL();
@@ -1448,10 +1448,10 @@ Scenes.Layla.SexPitchVaginal = function() {
 					Text.NL();
 					Text.Add("<i>“Thanks! I think you’re pretty clever too!”</i> she replies, tightening her hold on your [cock].", parse);
 					Text.NL();
-					Text.Add("The sensation is so strange; it’s tight and warm, but it feels different to having fingers or a mouth wrapped around you. It’s just a solid ring of muscle that embraces every inch of your shaft, skin to skin and enveloping it in Layla’s warmth. It feels... wonderful.", parse);
+					Text.Add("The sensation is so strange; it’s tight and warm, but it feels different to having fingers or a mouth wrapped around you. It’s just a solid ring of muscle that embraces every inch of your shaft, skin to skin, and envelops it in Layla’s warmth. It feels... wonderful.", parse);
 					Text.NL();
 					if(laylaSexlevel < 5) {
-						Text.Add("Layla’s tail tightens just a fraction more, then starts to slowly stroke back and forth along your length. She rhythmically clenches and unclenches her tail with each pass, steadily milking your member with a dexterity no hand could hope to equate. You can feel yourself growing stiffer by the moment, the chimera smiling merrily as she painstakingly pumps you erect.", parse);
+						Text.Add("Layla’s cock-wrapper tightens just a fraction more, then starts to slowly stroke back and forth along your length. She rhythmically clenches and unclenches her tail with each pass, steadily milking your member with a dexterity no hand could hope to equate. You can feel yourself growing stiffer by the moment, the chimera smiling merrily as she painstakingly pumps you erect.", parse);
 						Text.NL();
 						Text.Add("Once she’s sure that you’re about as hard as you’ll get, she uncoils herself from your [cock] and removes her tail.", parse);
 						Text.NL();
@@ -1460,7 +1460,7 @@ Scenes.Layla.SexPitchVaginal = function() {
 						Text.Add("Oh, yes, it’s just perfect. Now, if she wouldn’t mind helping you up?", parse);
 					}
 					else {
-						Text.Add("With just the faintest of wet sounds, Layla’s tail parts, exposing the indigo blue flesh of her tail-cock. As the meat of her tail keeps your own cock trapped in a warm, tight clutch, slowly clenching and unclenching, she starts to gently brush her drooling cock-tip against your own cock-flesh.", parse);
+						Text.Add("With just the faintest of wet sounds, Layla’s tail parts, exposing the indigo blue flesh of her tail-cock. As the meat of her c keeps your own cock trapped in a warm, tight clutch, slowly clenching and unclenching, she starts to gently brush her drooling cock-tip against your own cock-flesh.", parse);
 						Text.NL();
 						Text.Add("You can feel its wet heat as it traces over your skin, painting pre-cum and her strange, natural lube on your cock. Your member tingles, thrusting itself erect in her coils with an intensity that is almost painful, heat building in the base of your cock. You might have momentarily forgotten about the aphrodisiac properties of her tail-cock’s fluids... but Layla sure hasn’t.", parse);
 						Text.NL();
