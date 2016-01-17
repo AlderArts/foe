@@ -126,7 +126,7 @@ Scenes.Isla.Introduction = function() {
 	isla.flags["Met"] = Isla.Met.Met;
 	
 	Text.Clear();
-	Text.Add("As you explore the highlands, you find yourself in the general area of the strange spring Asche sent you to investigate last time. Yes, there’s the mountainside, and if you strain your eyes a little, you can make out the plateau on its side. Last time, you were there on business, and as they say, going somewhere on your own time is bound to be plenty different than going someplace on business… at least this time you’ll get to see the sights.", parse);
+	Text.Add("As you explore the Highlands, you find yourself in the general area of the strange spring Asche sent you to investigate last time. Yes, there’s the mountainside, and if you strain your eyes a little, you can make out the plateau on its side. Last time, you were there on business, and as they say, going somewhere on your own time is bound to be plenty different than going someplace on business… at least this time you’ll get to see the sights.", parse);
 	Text.NL();
 	Text.Add("The mountain trail is as treacherous as you remember it being, but you manage to struggle up the steep slope with but a few minor scrapes from a thorny bush. At last, the ground levels out, and you’re greeted with the sight of the spring plateau once again. Yeah, it’s definitely more peaceful now that you’re not under pressure to get a job done or stay hidden… and neither is the husky trio anywhere to be seen.", parse);
 	Text.NL();
@@ -158,7 +158,7 @@ Scenes.Isla.Introduction = function() {
 		tooltip : "Tell her you got lost and stumbled upon this place.",
 		func : function() {
 			Text.Clear();
-			Text.Add("<i>“Lost? You’re a long way from any of the proper roads, friend - or at least, what passes for roads in the highlands. Just how long have you been wandering around?”</i>", parse);
+			Text.Add("<i>“Lost? You’re a long way from any of the proper roads, friend - or at least, what passes for roads in the Highlands. Just how long have you been wandering around?”</i>", parse);
 			Text.NL();
 			Text.Add("You’re not sure, you reply. You’ve been walking for some time, trying to keep in a straight line, then you saw a trail that looked like it might lead to a road - or at least, somewhere where there might be people who could direct you to one.", parse);
 			Text.NL();
@@ -170,7 +170,7 @@ Scenes.Isla.Introduction = function() {
 		tooltip : "Tell her you saw the plateau from afar and went to investigate.",
 		func : function() {
 			Text.Clear();
-			Text.Add("Isla raises an eyebrow at you, her tiny black nose twitching as she sniffs in mild distaste. <i>“Oh, come on. There’re hundreds of little pools in the highlands, and you chose this particular one to take a look-see at?”</i>", parse);
+			Text.Add("Isla raises an eyebrow at you, her tiny black nose twitching as she sniffs in mild distaste. <i>“Oh, come on. There’re hundreds of little pools in the Highlands, and you chose this particular one to take a look-see at?”</i>", parse);
 			Text.NL();
 			Text.Add("It’s pretty high up here, the air’s good, and you were passing by, anyway. It’s not as if you knew this place was inhabited until you saw her little camp.", parse);
 			Text.NL();
@@ -184,7 +184,7 @@ Scenes.Isla.Introduction = function() {
 			Text.Clear();
 			Text.Add("Honesty is the best policy, you guess. You tell Isla that you were looking for a magic spring in the vicinity, and to your surprise, the sable-morph just folds her arms, rolls her eyes and smiles.", parse);
 			Text.NL();
-			Text.Add("<i>“Can’t say I’m surprised, lowlander. This is <b>a</b> magic spring, to use that term, but whether it’s the one you’re looking for or not… well, that’s anyone’s guess. The highlands are full of little pools like these, touched by a spot of magic or the other. Don’t know if it’s the one you were looking for, but the fact that you’re admitting it so readily means that you probably aren’t up to any mischief. Probably.”</i>", parse);
+			Text.Add("<i>“Can’t say I’m surprised, lowlander. This is <b>a</b> magic spring, to use that term, but whether it’s the one you’re looking for or not… well, that’s anyone’s guess. The Highlands are full of little pools like these, touched by a spot of magic or the other. Don’t know if it’s the one you were looking for, but the fact that you’re admitting it so readily means that you probably aren’t up to any mischief. Probably.”</i>", parse);
 			Text.NL();
 			Text.Add("Nice to see she took it so well.", parse);
 			Text.NL();
@@ -225,7 +225,7 @@ Scenes.Isla.Introduction = function() {
 		Text.NL();
 		Text.Add("<i>“Trio of husky brats from the minotaur village of Horkan, that’s all,”</i> Isla replies with a shake of her head. <i>“No one to actually worry about. They just make my life more annoying than it has to be, but they don’t do anything actually <b>bad</b>.”</i>", parse);
 		Text.NL();
-		Text.Add("You see. Both of you lapse into silence for a bit, and Isla takes the chance to have another swig from the waterskin. At last, you’re the one to speak - she doesn’t seem like she’s enjoying the job very much, is she? While you’re not overly familiar with the ins and outs of all the highlands’ little tribes, “spring guardian” sounds like something fairly prestigious.", parse);
+		Text.Add("You see. Both of you lapse into silence for a bit, and Isla takes the chance to have another swig from the waterskin. At last, you’re the one to speak - she doesn’t seem like she’s enjoying the job very much, is she? While you’re not overly familiar with the ins and outs of all the Highlands’ little tribes, “spring guardian” sounds like something fairly prestigious.", parse);
 		Text.NL();
 		Text.Add("The sable-morph rolls her eyes skyward. <i>“Guess it might’ve been once. I know it wasn’t my first choice of what to do with my life.”</i>", parse);
 		Text.NL();
@@ -504,7 +504,7 @@ Scenes.Isla.Appearance = function() {
 		}
 	}
 	Text.NL();
-	Text.Add("Finished with surveying the generalities, you shift your attention to the details. Although graced with long, flexible fingers, Isla’s hands look more like an animal’s than a human’s, her palms possessed to paw-pads of sorts, each digit capped with a small, hooked claw instead of nails. Her toes aren’t too different, too, and you can see how such would be an advantage in the rough, uneven terrain of the highlands, considering she goes about barefoot with no problems at all. Of course, that long fluffy tail of hers has a practical use in helping her keep balance, but that doesn’t stop you from wanting to pet and stroke it.", parse);
+	Text.Add("Finished with surveying the generalities, you shift your attention to the details. Although graced with long, flexible fingers, Isla’s hands look more like an animal’s than a human’s, her palms possessed to paw-pads of sorts, each digit capped with a small, hooked claw instead of nails. Her toes aren’t too different, too, and you can see how such would be an advantage in the rough, uneven terrain of the Highlands, considering she goes about barefoot with no problems at all. Of course, that long fluffy tail of hers has a practical use in helping her keep balance, but that doesn’t stop you from wanting to pet and stroke it.", parse);
 	Text.NL();
 	Text.Add("<i>“You done? Standing still is so tiring.”</i>", parse);
 	Text.NL();
@@ -531,9 +531,9 @@ Scenes.Isla.TalkPrompt = function() {
 		tooltip : "Ask Isla about herself.",
 		func : function() {
 			Text.Clear();
-			Text.Add("<i>“About me? I can’t really say much. I guess I’ve had a pretty good life so far… peaceful childhood, was sometimes a bit hungry but never actually starved, the neighboring tribes never actually bothered us… that’s how it is in the highlands. Little scattered tribes of morphs living beyond the reach of the kingdom in the mountains, just doing their own thing and staying out of peoples’ way.”</i>", parse);
+			Text.Add("<i>“About me? I can’t really say much. I guess I’ve had a pretty good life so far… peaceful childhood, was sometimes a bit hungry but never actually starved, the neighboring tribes never actually bothered us… that’s how it is in the Highlands. Little scattered tribes of morphs living beyond the reach of the kingdom in the mountains, just doing their own thing and staying out of peoples’ way.”</i>", parse);
 			Text.NL();
-			Text.Add("You weren’t asking about the polity of the highlands, you were asking her about herself.", parse);
+			Text.Add("You weren’t asking about the polity of the Highlands, you were asking her about herself.", parse);
 			Text.NL();
 			Text.Add("<i>“What <i>is</i> there to say? My tribe may once have had a patron spirit like the minotaurs do with Horkan, but that’s so many generations ago that even the stories are faded. We were so small that everyone tended to do a bit of everything, so that’s what I did, too. We don’t have the luxury of having, say, the village shaman sit in a dank cave and smoke strange herbs all day long - no, fellow’s out there catching fish and drying beans from dawn to dusk with the rest of us.</i>", parse);
 			Text.NL();
@@ -650,7 +650,7 @@ Scenes.Isla.TalkPrompt = function() {
 		tooltip : "So, what are her people like, anyway?",
 		func : function() {
 			Text.Clear();
-			Text.Add("So, what are her people like, anyway? With all the small tribes that dot the highlands, it’s hard to run into any particular one, whether it be intentional or by accident.", parse);
+			Text.Add("So, what are her people like, anyway? With all the small tribes that dot the Highlands, it’s hard to run into any particular one, whether it be intentional or by accident.", parse);
 			Text.NL();
 			Text.Add("<i>“Y’know, that word always trips me up. ‘Like’. Sure, a lowlander like you’s probably seen much, but when walking anywhere either means going ‘round a mountain or climbing it, you don’t tend to see much.”</i> She thinks a moment. <i>“Don’t know if I’m rightly answering your question, but we’re doing as we’ve always done, so long as anyone can remember. Couple hundred folks living in a hidey-hole between two hills out of the wind and rain, digging out land good dirt won’t wash off from during the rains and finding spots to graze the herds.”</i>", parse);
 			Text.NL();
@@ -660,7 +660,7 @@ Scenes.Isla.TalkPrompt = function() {
 			Text.NL();
 			Text.Add("<i>“Of course, now that I’ve been here a while, I’ve been rethinking things,”</i> she finishes with a small sigh. <i>“Long stretches of absolutely nothing punctuated with moments of sheer terror - it’s enough to make me think that once all this is over and I head back, I should be just grateful to be tending to the herds. If I want excitement, a spot of gossip will do just fine.”</i>", parse);
 			Text.NL();
-			Text.Add("Right. Coming back to the point, though, so her tribe is mostly like the others in the highlands?", parse);
+			Text.Add("Right. Coming back to the point, though, so her tribe is mostly like the others in the Highlands?", parse);
 			Text.NL();
 			Text.Add("<i>“Most are, to be honest. What we are aside, this place has a tendency to mold people into its liking. The old stories had it that when many of the peoples first arrived, they brought with them their own ways of doing things from the places they’d come from. Over time, though, living up in these mountains, they changed to suit the land rather than the other way around.</i>", parse);
 			Text.NL();
@@ -670,7 +670,7 @@ Scenes.Isla.TalkPrompt = function() {
 			Text.NL();
 			Text.Add("<i>“I guess I haven’t really answered your question,”</i> Isla continues. <i>“But what <b>do</b> you expect me to say about us? Anything you’ve heard about the highland tribes that’s true, you could probably apply it to mine and you wouldn’t be too far off the mark.”</i>", parse);
 			Text.NL();
-			Text.Add("Well, while she may think it completely mundane, perhaps others who aren’t so familiar with the highlands and the local cultures might think otherwise. You can see where she’s coming from, though - familiarity breeds contempt, as the saying goes, and maybe she’s too close to things to see them clearly. Guess you’ll just have to wander the highlands some more and hope you bump into the locals to be able to judge for yourself.", parse);
+			Text.Add("Well, while she may think it completely mundane, perhaps others who aren’t so familiar with the Highlands and the local cultures might think otherwise. You can see where she’s coming from, though - familiarity breeds contempt, as the saying goes, and maybe she’s too close to things to see them clearly. Guess you’ll just have to wander the Highlands some more and hope you bump into the locals to be able to judge for yourself.", parse);
 			Text.NL();
 			Text.Add("Isla sniffs, wrinkling her nose. <i>“Well, if you really want to. I don’t know if I’d feel the same way if I were in your place, but I’m obviously not you. Can we move onto something else, please?”</i>", parse);
 			Text.Flush();
@@ -1654,7 +1654,7 @@ Scenes.Isla.Sex.PitchVaginalUnder = function(parse, opts) {
 		Text.Add("her massive baby bump heaves in time with your movements, sending her nipples to leaking, ", parse);
 	Text.Add("her cunt begins to reflexively milk your [cock], pulsating and shivering along the entirety of the impaled length. As Isla’s pleasure mounts, you can see her gaze grow distant and jaws slack, until she’s completely lost in the heat of the moment, lithe, wiry muscles keeping her balanced while her mind is elsewhere.", parse);
 	Text.NL();
-	Text.Add("Her first orgasm comes readily enough; almost as if in preparation, her whole body tenses, then she squeezes her eyes shut and lets out a loud squeal that echoes out over the highlands. You can feel her insides desperately milking your [cock], convulsing with the throes of pleasure that’re rippling through her body.", parse);
+	Text.Add("Her first orgasm comes readily enough; almost as if in preparation, her whole body tenses, then she squeezes her eyes shut and lets out a loud squeal that echoes out over the Highlands. You can feel her insides desperately milking your [cock], convulsing with the throes of pleasure that’re rippling through her body.", parse);
 	Text.NL();
 	Text.Add("Not that you’re going to give her any time to recover. Encouraged by your lover’s enthusiastic response, you redouble your efforts, jackhammering away into her cunt, an effort that’s made all the easier by gravity.", parse);
 	
@@ -1966,7 +1966,7 @@ Scenes.Isla.Sex.PitchVaginalExit = function(parse, opts) {
 	Text.NL();
 	Text.Add("<i>“Yeah, but stay with me a moment, ‘kay?”</i>", parse);
 	Text.NL();
-	Text.Add("Sure, you can do that. Reaching up to give Isla an affectionate pat on the head, you gather her into your arms, and she’s fast asleep before long. Her soft, silky fur is the best blanket one could hope for against the cold highlands nights, and before too long you’ve drifted off yourself, too.", parse);
+	Text.Add("Sure, you can do that. Reaching up to give Isla an affectionate pat on the head, you gather her into your arms, and she’s fast asleep before long. Her soft, silky fur is the best blanket one could hope for against the cold Highland nights, and before too long you’ve drifted off yourself, too.", parse);
 	Text.Flush();
 	
 	isla.relation.IncreaseStat(100, 5);

@@ -77,7 +77,7 @@ Scenes.Asche.Tasks.Ginseng.Initiation = function() {
 	Text.NL();
 	Text.Add("The jackaless chuckles. <i>“Well, there are choices customer can be having. First one is that customer can be having money, as is traditional way of rewarding questers. Other way is”</i> - she gazes at you, those lovely, dark eyes seeming to grow as they draw you into their depths - <i>“also very traditional reward, although less spoken of. But yes, Asche can be teaching you some things if that is [handsomepretty] customer’s desire.”</i>", parse);
 	Text.NL();
-	Text.Add("Got it. You’ll have to make a trip out to the highlands, then. Where’s this spring that she speaks of?", parse);
+	Text.Add("Got it. You’ll have to make a trip out to the Highlands, then. Where’s this spring that she speaks of?", parse);
 	Text.NL();
 	Text.Add("<i>“Asche can be giving you directions. To be waiting a moment, please.”</i>", parse);
 	Text.NL();
@@ -95,7 +95,7 @@ Scenes.Asche.Tasks.Ginseng.OnTask = function() {
 	};
 	
 	Text.Clear();
-	Text.Add("<i>“Oh? Customer is back already? Surely could not have lost way in highlands - Asche’s directions are very good. Used to play pranks on stuffy old shamans when Asche was a little girl.”</i>", parse);
+	Text.Add("<i>“Oh? Customer is back already? Surely could not have lost way in Highlands - Asche’s directions are very good. Used to play pranks on stuffy old shamans when Asche was a little girl.”</i>", parse);
 	Text.NL();
 	Text.Add("You try to imagine the sexy shopkeeper as a little girl - to say that it’s hard would be an understatement of the greatest degree.", parse);
 	Text.NL();
@@ -127,7 +127,7 @@ Scenes.Asche.Tasks.Ginseng.Highlands = function() {
 	Text.Clear();
 	Text.Add("Remembering Asche’s directions, you step off the main highland path at the crossroads she’d indicated and set off in a northwesterly direction. Crossing the uneven, hilly terrain is far more tiring than following the mountain trails, and it’s not long before you begin to feel the difference in your muscles.", parse);
 	Text.NL();
-	Text.Add("At least her directions are good: you’ve walked for little more than an hour before you spot the twin moss-covered arches that Asche mentioned, then another hour’s walk west brings the entrance to the ravine into view. As you were told, you see a long, narrow gash in the mountains, as if someone had taken a cleaver and rent a high plateau in two; from where you stand near the bottom, the lower slopes appear thickly forested and the upper slopes strewn with light sprinkles of snow. The woods seem a sanctuary for life in the grass and shrub-dominated highlands. If that’s what the entrance looks like, surely it must be even lusher further inside…", parse);
+	Text.Add("At least her directions are good: you’ve walked for little more than an hour before you spot the twin moss-covered arches that Asche mentioned, then another hour’s walk west brings the entrance to the ravine into view. As you were told, you see a long, narrow gash in the mountains, as if someone had taken a cleaver and rent a high plateau in two; from where you stand near the bottom, the lower slopes appear thickly forested and the upper slopes strewn with light sprinkles of snow. The woods seem a sanctuary for life in the grass and shrub-dominated Highlands. If that’s what the entrance looks like, surely it must be even lusher further inside…", parse);
 	Text.NL();
 	parse["footsteps"] = player.HasLegs() ? "footsteps echo" : "passage echoes";
 	Text.Add("Cautiously, you enter the ravine, eyes peeled for any sign of the zebra-morphs whose territory this is. Your [footsteps] off the ravine’s towering walls - so high that a narrow slit is all that remains visible of the sky - sounding deafeningly loud to you, yet you attract no attention from anything larger than a few rodents and lizards. The reason for that becomes clear as you near the ravine’s other end: stationed by the entrance - or exit, depending on how you look at it - is a zebra-morph shaman and two savage-looking warriors - you believe you’ve heard such as them referred to as ‘braves’. The marked, hooded robes along with the staff propped up against a rock leave no doubt to the shaman’s identity. Likewise, the braves wear little more than loincloths and have accentuated their natural patterning with streaks and stripes of blue body-paint; the end result is certainly quite fearsome in appearance, especially when one considers their bronze-tipped spears.", parse);
@@ -1009,7 +1009,7 @@ Scenes.Asche.Tasks.Spring.Initiation = function() {
 	Text.NL();
 	Text.Add("Naturally, you’d have to hear what it is before committing yourself to the task.", parse);
 	Text.NL();
-	Text.Add("<i>“Of course. Asche is not being one to snare others with tricksy words, yes yes.”</i> The jackaless flicks her ears and smiles up at you. <i>“Two days ago, minotaur traveler is being coming into Asche’s shop. This jackaless is not seeing many travelers from highlands of late, what with rules about entering city. She is encouraging minotaur to be staying a while and chatting some, giving her knowledge of what is going on at home, yes. Amongst things traveler is telling Asche is knowledge of certain hot spring in mountains. Asche was thinking that she is knowing all the springs in her homeland, but this is being new one.</i>", parse);
+	Text.Add("<i>“Of course. Asche is not being one to snare others with tricksy words, yes yes.”</i> The jackaless flicks her ears and smiles up at you. <i>“Two days ago, minotaur traveler is being coming into Asche’s shop. This jackaless is not seeing many travelers from Highlands of late, what with rules about entering city. She is encouraging minotaur to be staying a while and chatting some, giving her knowledge of what is going on at home, yes. Amongst things traveler is telling Asche is knowledge of certain hot spring in mountains. Asche was thinking that she is knowing all the springs in her homeland, but this is being new one.</i>", parse);
 	Text.NL();
 	Text.Add("Just throwing out a guess there - she would like you to investigate, right?", parse);
 	Text.NL();
@@ -1023,9 +1023,9 @@ Scenes.Asche.Tasks.Spring.Initiation = function() {
 	Text.NL();
 	Text.Add("Picking up the vials, you stow them away and turn back to Asche. So, how are you supposed to get to this place?", parse);
 	Text.NL();
-	Text.Add("<i>“Asche is managing to get directions to the place from traveler, and she will be telling you now. Is big surprise, really - although this jackaless knows craggy highlands are holding many such hidden places, she is also thinking that she is knowing most of them. Hah… is always good to be getting nice surprise. Now to be listening up…”</i>", parse);
+	Text.Add("<i>“Asche is managing to get directions to the place from traveler, and she will be telling you now. Is big surprise, really - although this jackaless knows craggy Highlands are holding many such hidden places, she is also thinking that she is knowing most of them. Hah… is always good to be getting nice surprise. Now to be listening up…”</i>", parse);
 	Text.NL();
-	Text.Add("Quickly, Asche sketches out a few directions, starting off from the main road leading from the crossroads to the highlands, prodding the countertop every so often to emphasize a particular point.  You have the jackaless go over them a few times, then feel confident enough in them that if this spring really exists, you’ll be able to find it based on her directions.", parse);
+	Text.Add("Quickly, Asche sketches out a few directions, starting off from the main road leading from the crossroads to the Highlands, prodding the countertop every so often to emphasize a particular point.  You have the jackaless go over them a few times, then feel confident enough in them that if this spring really exists, you’ll be able to find it based on her directions.", parse);
 	Text.NL();
 	Text.Add("<i>“Good, good. Asche will be awaiting [handsomepretty] customer’s return, then. Is hard to get good help in the city these days, she thinks. Young people are being having no work ethic at all.”</i>", parse);
 	Text.NL();
@@ -1045,7 +1045,7 @@ Scenes.Asche.Tasks.Spring.Initiation = function() {
 	Scenes.Asche.Prompt();
 }
 
-//Select “spring” from highlands menu.
+//Select “spring” from Highlands menu.
 Scenes.Asche.Tasks.Spring.Highlands = function() {
 	var parse = {
 		feet : player.FeetDesc()
@@ -1055,7 +1055,7 @@ Scenes.Asche.Tasks.Spring.Highlands = function() {
 	
 	Text.Clear();
 	parse["season"] = world.time.season == Season.Summer ? ", even for summer" : "";
-	Text.Add("Following Asche’s directions, you leave the beaten trail and head out into the rough, rocky terrain of Eden’s highlands. The air is cool[season], the ground uneven with stony outcroppings thrusting through the mountain meadows, and small wildflowers poke through the grass, reaching for the sky. Barely half an hour into your hike, you’re already starting to feel the toll the off-trail journey is taking on you, but you forge on anyway - the open nature of your surroundings has you confident that you’ll be able to see any danger coming from far away.", parse);
+	Text.Add("Following Asche’s directions, you leave the beaten trail and head out into the rough, rocky terrain of Eden’s Highlands. The air is cool[season], the ground uneven with stony outcroppings thrusting through the mountain meadows, and small wildflowers poke through the grass, reaching for the sky. Barely half an hour into your hike, you’re already starting to feel the toll the off-trail journey is taking on you, but you forge on anyway - the open nature of your surroundings has you confident that you’ll be able to see any danger coming from far away.", parse);
 	Text.NL();
 	Text.Add("Sitting down on a nearby flat-topped boulder, you review Asche’s directions to the hot spring she mentioned. Considering how far you’ve already come, the spring she mentioned should be on that mountainside plateau over there to the east. It isn’t that far, but the climb up looks like a tough one and there’s no obvious trail leading to it. At least that explains why Asche, who claims to know much of the mystical mysteries of her homeland, wasn’t aware of the spring’s existence.", parse);
 	Text.NL();
@@ -1081,7 +1081,7 @@ Scenes.Asche.Tasks.Spring.Highlands = function() {
 			Text.Clear();
 			Text.Add("Working the last of the aches out of your body, you leave your hiding place and plant yourself at the end of the trail, ready to meet whoever it is who’s coming straight up to you. Soon enough, the newcomers emerge - a trio of husky dog-morphs, the biggest one a female, a male behind her, and a bound captive hefted between the two of them on a makeshift contraption of wood and vine that looks much like a stretcher. There’s a distinct resemblance between the former two, and you wonder if they’re related somehow.", parse);
 			Text.NL();
-			Text.Add("All of them wear little save for loincloths, body paint and the occasional string of colorful beads that passes for fashion in the highlands, and when they spot you, the jovial air about them is instantly replaced with one of wary shock.", parse);
+			Text.Add("All of them wear little save for loincloths, body paint and the occasional string of colorful beads that passes for fashion in the Highlands, and when they spot you, the jovial air about them is instantly replaced with one of wary shock.", parse);
 			Text.NL();
 			Text.Add("<i>“You’re not Isla!”</i> the female shouts.", parse);
 			Text.NL();
@@ -1099,7 +1099,7 @@ Scenes.Asche.Tasks.Spring.Highlands = function() {
 			Text.Clear();
 			Text.Add("Choosing to remain hidden, you hunker down in the grasses, pressing yourself as flat as you can and willing your breathing to slow as the footsteps draw closer. Your patience is rewarded with the sight of a trio of husky dog-morphs bursting onto the plateau meadow - the biggest of them a female, a male behind her, and a bound captive hefted between the two of them on a makeshift contraption of wood and vine that looks much like a stretcher. There’s a distinct resemblance between the former two, and you wonder if they’re related somehow.", parse);
 			Text.NL();
-			Text.Add("All of them wear little save for loincloths, body paint and the occasional string of colorful beads that passes for fashion in the highlands, and they come to a stop at the spring’s edge. With a peal of shared laughter, they tip their captive off the stretcher and into the spring’s softly bubbling waters, pinning his body under the surface with it. This clearly isn’t very welcome to the poor bastard being held there - his head easily breaks the surface, but he thrashes for all the good it’ll do, trying to fight both his captors and bonds.", parse);
+			Text.Add("All of them wear little save for loincloths, body paint and the occasional string of colorful beads that passes for fashion in the Highlands, and they come to a stop at the spring’s edge. With a peal of shared laughter, they tip their captive off the stretcher and into the spring’s softly bubbling waters, pinning his body under the surface with it. This clearly isn’t very welcome to the poor bastard being held there - his head easily breaks the surface, but he thrashes for all the good it’ll do, trying to fight both his captors and bonds.", parse);
 			Text.NL();
 			Text.Add("<i>“Oi! You! How many times do I have to tell you the spring’s not a damned toy, you layabouts!”</i>", parse);
 			Text.NL();
@@ -1155,7 +1155,7 @@ Scenes.Asche.Tasks.Spring.OnTask = function() {
 	};
 	
 	Text.Clear();
-	Text.Add("<i>“Did good customer forget where [heshe] was supposed to be going? Asche is wanting [himher] to be investigating spring in highlands. Directions have already been given, just are needing to follow them from main road, that is all.”</i>", parse);
+	Text.Add("<i>“Did good customer forget where [heshe] was supposed to be going? Asche is wanting [himher] to be investigating spring in Highlands. Directions have already been given, just are needing to follow them from main road, that is all.”</i>", parse);
 	Text.Flush();
 }
 
@@ -1174,7 +1174,7 @@ Scenes.Asche.Tasks.Spring.Complete = function() {
 	asche.flags["Tasks"] |= Asche.Tasks.Spring_Finished;
 	
 	Text.Clear();
-	Text.Add("<i>“Ah, customer is being returning, and with scent of highlands still on [himher],”</i> Asche says, her eyes trained on you eagerly. <i>“This jackaless is being sensing magics of a unique nature on customer’s person, is it related to task she has sent customer on?”</i>", parse);
+	Text.Add("<i>“Ah, customer is being returning, and with scent of Highlands still on [himher],”</i> Asche says, her eyes trained on you eagerly. <i>“This jackaless is being sensing magics of a unique nature on customer’s person, is it related to task she has sent customer on?”</i>", parse);
 	Text.NL();
 	Text.Add("Of course it is. With a flourish, you pull out the three vials of spring water and set them down on the counter before the jackaless. Asche’s gaze lights up at the sight, and her tongue runs over her muzzle as she packs them away under the counter. <i>“Ah, very good, very good. It is seeming that water is still retaining small portion of power, even when it is being removed from source. While this jackaless is being requiring some experimenting to be determining in what way she can safely make use of spring water, [handsomepretty] customer has more than earned [hisher] reward.”</i>", parse);
 	Text.NL();

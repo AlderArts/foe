@@ -333,7 +333,7 @@ Scenes.MaliceScouts.Catboy.LoneEncounter = function(levelbonus) {
 
 		Text.Clear();
 		parse["f"] = player.HasLegs() ? " in your feet" : "";
-		Text.Add("Wandering of the foothills of the highlands for about an hour, you don’t find anything of note amongst the rocky ground and tall grasses. The air is crisp and the [day] upon you; although you’re starting to feel the rigors of the hard, uneven ground[f], there’s a certain quality to it that you nevertheless find quite refreshing and invigorating.", parse);
+		Text.Add("Wandering of the foothills of the Highlands for about an hour, you don’t find anything of note amongst the rocky ground and tall grasses. The air is crisp and the [day] upon you; although you’re starting to feel the rigors of the hard, uneven ground[f], there’s a certain quality to it that you nevertheless find quite refreshing and invigorating.", parse);
 		Text.NL();
 		parse["f"] = player.HasLegs() ? " - or perhaps where your thighs would have been, if you’d had any" : "";
 		Text.Add("No better time for a quick break, then, before all that traveling really gets to you. The gently rounded top of a nearby hill offers a perfect spot to take a breather - high up in the midst of a stiff breeze, and with a good view of the surrounding lands to survey them and plan your next move. The grasses get taller as you move along, reaching up to perhaps mid-thigh[f], but you press on ahead and are at the top before long.", parse);
@@ -1241,7 +1241,7 @@ Scenes.MaliceScouts.Mare.LoneEncounter = function(levelbonus) {
 
 		Text.Clear();
 		parse["oneself"] = player.HasLegs() ? "one’s feet" : "oneself";
-		Text.Add("This part of the highlands that you’re currently exploring is more well-traveled than most. Enough, at least, for a proper mountain trail to have materialized amongst the hills and valleys; it twists and winds its way amongst the highland downs, rarely making a straight line between two points, but the extra distance is worth not having to cut [oneself] on the rocky trails and plateaus.", parse);
+		Text.Add("This part of the Highlands that you’re currently exploring is more well-traveled than most. Enough, at least, for a proper mountain trail to have materialized amongst the hills and valleys; it twists and winds its way amongst the highland downs, rarely making a straight line between two points, but the extra distance is worth not having to cut [oneself] on the rocky trails and plateaus.", parse);
 		Text.NL();
 		Text.Add("There’s no sign of who maintains these roads - if anything, it looks like they’ve been made by many, many feet and wheels simply trampling out the path until the grass won’t grow there anymore.", parse);
 		Text.NL();
@@ -1804,7 +1804,7 @@ Scenes.MaliceScouts.Mare.WinFist = function(enc) {
 	Text.NL();
 	Text.Add("You’ll take that as a yes. Did this sate her, and does that mean that she won’t be troubling people on the highland roads for a little while now?", parse);
 	Text.NL();
-	Text.Add("<i>“Fuck. Fuck. Fuck.”</i> The centaur mare’s underbelly heaves in and out as she looks at you with stupid, glazed-over eyes. Compared to the proud warrior race girl schtick she was trying to pull off earlier, this suits her so much better. Either way, having had some much-needed relief for her heated cunt, she looks to be in no condition to be menacing the roads, so you’ve probably done the highlands a public service. Go you!", parse);
+	Text.Add("<i>“Fuck. Fuck. Fuck.”</i> The centaur mare’s underbelly heaves in and out as she looks at you with stupid, glazed-over eyes. Compared to the proud warrior race girl schtick she was trying to pull off earlier, this suits her so much better. Either way, having had some much-needed relief for her heated cunt, she looks to be in no condition to be menacing the roads, so you’ve probably done the Highlands a public service. Go you!", parse);
 	Text.NL();
 	Text.Add("Pumping in and out of the mare for that long did take quite a bit out of you as well, but you’re able to stroll on over to the centaur’s human half and give her a pat on the head with your cum-stained hand, then wipe your arm off all over her face and torso, as if you were applying some kind of lewd war-paint on her.", parse);
 	Text.NL();
@@ -1927,7 +1927,7 @@ Scenes.MaliceScouts.Mare.LossFacesit = function(enc) {
 	Text.NL();
 	Text.Add("<i>“Shit,”</i> she groans, then looks back at you. Her lips move and she tries to say something, but all that comes out is a bunch of garbled nonsense - she tries this a few more times, then finally gives up and shuts her yap. Well, it’s not as if you’d had have the energy to carry on a meaningful conversation anyway - it’s all you can do to slump down on the ground, sliding down the boulder’s smooth surface until the you can feel the cool grass beneath you.", parse);
 	Text.NL();
-	Text.Add("And just like that, it’s over. It’s clear that the centaur mare has gotten some much-needed relief for her heat-filled cunt - hopefully by taking one for the team, she won’t be harassing travelers on the highlands roads for some time now. Quick and dirty, with perhaps no real pleasure from the deed, but what needs to be done has been done.", parse);
+	Text.Add("And just like that, it’s over. It’s clear that the centaur mare has gotten some much-needed relief for her heat-filled cunt - hopefully by taking one for the team, she won’t be harassing travelers on the Highlands roads for some time now. Quick and dirty, with perhaps no real pleasure from the deed, but what needs to be done has been done.", parse);
 	Text.NL();
 	
 	var armor = "";

@@ -2148,7 +2148,7 @@ Scenes.Cassidy.ManagingShop5 = function(score) {
 	Text.Clear();
 	Text.Add("Phew. At least after that last one, business slows down a little, and you have a little time to catch your breath before the next customer inevitably comes in. How long has Cassidy been gone, anyway? An hour? Two? It certainly <i>feels</i> longer… and whatever the case, it’s been far too long since Cass left.", parse);
 	Text.NL();
-	Text.Add("Your thoughts are cut short, though, by a heavy clomping in the shop’s doorway, and you fear the worst. It’s only one pair of footsteps… and they belong to a massive, hulking minotaur, clad in animal skins as if he’d just stepped off the highlands and so tall that his horns practically bump against the upper edge of the doorframe as he storms in. How did such a fellow get into Rigard? The world may never know.", parse);
+	Text.Add("Your thoughts are cut short, though, by a heavy clomping in the shop’s doorway, and you fear the worst. It’s only one pair of footsteps… and they belong to a massive, hulking minotaur, clad in animal skins as if he’d just stepped off the Highlands and so tall that his horns practically bump against the upper edge of the doorframe as he storms in. How did such a fellow get into Rigard? The world may never know.", parse);
 	Text.NL();
 	Text.Add("<i>“Shopkeep!”</i> the minotaur bellows, and you swear you can hear the displays rattling in their racks. <i>“I hear this is the only place in this city where I may find a weapon suiting my stature!”</i>", parse);
 	Text.NL();

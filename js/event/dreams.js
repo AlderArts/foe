@@ -999,7 +999,7 @@ Scenes.Dreams.AscheDance = function(ravenTrigger) {
 		skin : player.SkinDesc()
 	};
 	
-	Text.Add("A light drizzle sprinkles down from the overcast sky - it’s been coming down for most of the spring, with more rainy days than dry ones, let alone the precious few moments when the clouds actually part and let some sunshine through. But such is the nature of life in the highlands, and one learns to put up with it.", parse);
+	Text.Add("A light drizzle sprinkles down from the overcast sky - it’s been coming down for most of the spring, with more rainy days than dry ones, let alone the precious few moments when the clouds actually part and let some sunshine through. But such is the nature of life in the Highlands, and one learns to put up with it.", parse);
 	Text.NL();
 	Text.Add("You’ve been waiting for her in the circle of standing stones for ten minutes now - she’s never actually tardy, but always just enough to be fashionably late. And indeed, here she comes, stepping into the circle as if she owns the grounds.", parse);
 	Text.NL();
