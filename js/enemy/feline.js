@@ -2353,7 +2353,8 @@ Scenes.Felines.LossPitchVaginal = function(cat, group, enc, cocksInVag) {
 		Text.Add("Your [cock2Desc] rubs through the toned cheeks of her ass, poking away at the base of her flicking tail with each thrust you make. Her soft fur tickles quite pleasantly against your dick. ", parse);
 	}
 	else if(player.NumCocks() >= 3) {
-		Text.Add("Your [cock2Desc] rubs through the toned cheeks of her ass, poking away at the base of her flicking tail with each thrust you make. Her soft fur tickles quite pleasantly against your dick. Meanwhile, your [cocks2] slaps and jabs against her stomach and her thighs, completely abandoned. ", parse);
+		parse = Text.ParserPlural(parse, player.NumCocks() > 3);
+		Text.Add("Your [cock2Desc] rubs through the toned cheeks of her ass, poking away at the base of her flicking tail with each thrust you make. Her soft fur tickles quite pleasantly against your dick. Meanwhile, your lower [cocks2] slaps and jabs against her stomach and her thighs, completely abandoned. ", parse);
 	}
 	var lactation = player.Lactation();
 	parse["lact"] = lactation ? "purring louder when she tastes a drop of your milk" : "purring as you ream her pussy";
