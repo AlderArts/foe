@@ -848,7 +848,6 @@ Scenes.Felines.WinFuckVag = function(cat, group, enc, cocks, numFemales) {
 		name     : cat.nameDesc(),
 		Possessive  : cat.Possessive(),
 		possessive  : cat.possessive(),
-		ballsDesc   : function() { return player.BallsDesc(); },
 		clitCock    : cat.FirstCock() ? "clitcock" : "clit"
 	};
 	parse = cat.ParserPronouns(parse);
@@ -909,7 +908,7 @@ Scenes.Felines.WinFuckVag = function(cat, group, enc, cocks, numFemales) {
 	Gui.Callstack.push(function() {
 		Text.NL();
 		if(!pCock.isStrapon) {
-			Text.Add("It’s not long before you can feel a surge in your [ballsDesc], announcing the coming of your orgasm. With a final thrust, you drive yourself hips deep into the feline, shuddering as you unleash the torrent of your seed inside her.", parse);
+			Text.Add("It’s not long before you can feel a surge in your [balls], announcing the coming of your orgasm. With a final thrust, you drive yourself hips deep into the feline, shuddering as you unleash the torrent of your seed inside her.", parse);
 			Text.NL();
 			
 			var load = player.OrgasmCum();
@@ -1087,7 +1086,6 @@ Scenes.Felines.WinFuckButt = function(cat, group, enc, cocks) {
 		name     : cat.nameDesc(),
 		Possessive  : cat.Possessive(),
 		possessive  : cat.possessive(),
-		ballsDesc   : function() { return player.BallsDesc(); },
 		clitCock    : cat.FirstCock() ? "clitcock" : "clit"
 	};
 	parse = cat.ParserPronouns(parse);
@@ -1325,8 +1323,7 @@ Scenes.Felines.WinGetBlowjob = function(cat, group, enc) {
 		name     : cat.nameDesc(),
 		boyGirl  : cat.mfTrue("boy", "girl"),
 		Possessive  : cat.Possessive(),
-		possessive  : cat.possessive(),
-		ballsDesc   : function() { return player.BallsDesc(); }
+		possessive  : cat.possessive()
 	};
 	parse = cat.ParserPronouns(parse);
 	parse = player.ParserTags(parse);
@@ -1366,7 +1363,7 @@ Scenes.Felines.WinGetBlowjob = function(cat, group, enc) {
 		Text.Add("Putting a bit more pressure on [name], you start rocking your hips a bit, keeping a light but firm hand on the back of [hisher] head. [HeShe] balks a little, but is somehow able to keep up.", parse);
 	Text.NL();
 	if(player.HasBalls()) {
-		Text.Add("Much to your surprise, one of [possessive] paws hesitantly reach up to cradle your [ballsDesc], feeling their weight. Chuckling, you promise [himher] that you’ll soon give the good little kitty [hisher] cream, just like [heshe] wants. All [heshe] has to do is continue to be a good kitty.", parse);
+		Text.Add("Much to your surprise, one of [possessive] paws hesitantly reach up to cradle your [balls], feeling their weight. Chuckling, you promise [himher] that you’ll soon give the good little kitty [hisher] cream, just like [heshe] wants. All [heshe] has to do is continue to be a good kitty.", parse);
 		Text.NL();
 	}
 	Text.Add("You can feel that you aren’t going to last much longer, as [name] has gotten quite enthusiastic about [hisher] task. You briefly consider telling [himher], but figure it’ll be more fun if [heshe] discovered it on [hisher] own.", parse);
@@ -2028,10 +2025,7 @@ Scenes.Felines.LossCatchVaginal = function(cat, group, enc) {
 		manherm  : cat.mfTrue("man", "herm"),
 		maleherm : cat.mfTrue("male", "herm"),
 		Possessive  : cat.Possessive(),
-		possessive  : cat.possessive(),
-		tailDesc    : function() { return player.HasTail().Short(); },
-		wingDesc    : function() { return player.HasWings().Short(); },
-		ballsDesc   : function() { return player.BallsDesc(); }
+		possessive  : cat.possessive()
 	};
 	parse = cat.ParserPronouns(parse);
 	parse = player.ParserTags(parse);
@@ -2053,8 +2047,8 @@ Scenes.Felines.LossCatchVaginal = function(cat, group, enc) {
 	if(player.Femininity() < 0) { // masculine
 		if(player.FirstCock()) {
 			parse["s"] = player.NumCocks() > 1 ? "s" : "";
-			parse["balls"] = player.HasBalls() ? Text.Parse(" and your [ballsDesc]", parse) : "";
-			Text.Add("The big cat's eyes flick down the length[s] of your [cocks][balls], frowning with disapproval before [heshe] finds something more enticing.", parse);
+			parse["b"] = player.HasBalls() ? Text.Parse(" and your [balls]", parse) : "";
+			Text.Add("The big cat's eyes flick down the length[s] of your [cocks][b], frowning with disapproval before [heshe] finds something more enticing.", parse);
 			Text.NL();
 		}
 		Text.Add("<i>“My, I didn’t expect someone like you to have such a pretty flower,”</i> [heshe] says, softly caressing your [vag].", parse);
@@ -2062,7 +2056,8 @@ Scenes.Felines.LossCatchVaginal = function(cat, group, enc) {
 		if(dom) {
 			Text.Add("You furrow your brows and tell [himher] to just get on with it already. You don't have to put up with empty flattery.", parse);
 			Text.NL();
-			Text.Add("<i>“As you wish,”</i> [heshe] states, stepping over and maneuvering you onto all fours.", parse);
+			parse["l"] = player.HasLegs() ? "maneuvering you onto all fours" : "bending you over";
+			Text.Add("<i>“As you wish,”</i> [heshe] states, closing in and [l].", parse);
 		}
 		else {
 			parse["fur"] = player.HasSkin() ? "" : Text.Parse(", though your [skin] hides the color change", parse);
@@ -2070,14 +2065,15 @@ Scenes.Felines.LossCatchVaginal = function(cat, group, enc) {
 			Text.NL();
 			Text.Add("<i>“Of course, you’re so handsome that this came as quite the shock. But not an unpleasant one,”</i> [heshe] says, grinning as [heshe] leans over to look into your eyes.", parse);
 			Text.NL();
-			Text.Add("Sheepishly, you look back into [hisher] eyes, marveling at how deep they seem to be. When [heshe] starts to maneuver you onto all fours, you eagerly comply, anxious to feel [himher] inside of you.", parse);
+			parse["l"] = player.HasLegs() ? "maneuver you onto all fours" : "bend you over";
+			Text.Add("Sheepishly, you look back into [hisher] eyes, marveling at how deep they seem to be. When [heshe] starts to [l], you eagerly comply, anxious to feel [himher] inside of you.", parse);
 		}
 	}
 	else {
 		if(player.FirstCock()) {
-			parse["balls"] = player.HasBalls() ? Text.Parse(" and your attendant [ballsDesc]", parse) : "";
+			parse["b"] = player.HasBalls() ? Text.Parse(" and your attendant [balls]", parse) : "";
 			parse["things"] = player.HasBalls() == false && player.NumCocks() == 1 ? "a thing" : "things";
-			Text.Add("[HisHer] eyes flick in surprise and more than a hint of disappointment over your [cocks][balls], clearly not expecting to see such [things] on you. As [hisher] eyes find what [heshe] is after, though, [heshe] smiles in contentment.", parse);
+			Text.Add("[HisHer] eyes flick in surprise and more than a hint of disappointment over your [cocks][b], clearly not expecting to see such [things] on you. As [hisher] eyes find what [heshe] is after, though, [heshe] smiles in contentment.", parse);
 			Text.NL();
 		}
 		Text.Add("<i>“What a pretty flower you have, beautiful,”</i> [heshe] says, reaching to softly caress your [vag].", parse);
@@ -2085,7 +2081,8 @@ Scenes.Felines.LossCatchVaginal = function(cat, group, enc) {
 		if(dom) {
 			Text.Add("You snap back that [heshe] can spare you the flirtations, [heshe]'s already getting what [heshe] wants.", parse);
 			Text.NL();
-			Text.Add("<i>“As you wish,”</i> [heshe] states, stepping over and maneuvering you onto all fours.", parse);
+			parse["l"] = player.HasLegs() ? "maneuvering you onto all fours" : "bend you over";
+			Text.Add("<i>“As you wish,”</i> [heshe] states, closing in and [l].", parse);
 		}
 		else {
 			parse["fur"] = player.HasSkin() ? "" : Text.Parse(" through your [skin]", parse);
@@ -2095,15 +2092,16 @@ Scenes.Felines.LossCatchVaginal = function(cat, group, enc) {
 			Text.NL();
 			Text.Add("You squeal suddenly in shock, wriggling as the warm, wet flesh brushes tantalisingly against your lower lips. Shyly, you reply that you have a feeling [heshe]'ll keep [hisher] word.", parse);
 			Text.NL();
-			Text.Add("<i>“Of course I will, now be a darling and get on all fours for me,</i> [heshe] says, licking [hisher] lips.", parse);
+			parse["l"] = player.HasLegs() ? "get on all fours" : "bend over";
+			Text.Add("<i>“Of course I will, now be a darling and [l] for me,</i> [heshe] says, licking [hisher] lips.", parse);
 			Text.NL();
 			Text.Add("You hasten to obey, scrambling over on the spot and assuming the indicated position, all but presenting yourself in your eagerness.", parse);
 		}
 	}
 	Text.NL();
 	var tail = player.HasTail();
-	parse["tail"] = tail ? Text.Parse("and gently stroking your [tailDesc] with the other", parse) : "";
-	Text.Add("[Name] approaches you from behind, laying a hand on your [hips] [tail]. Without saying a word [heshe] leans forward to kiss your lower back, trailing soft pecks along your spine as [heshe] simultaneously aligns [himher]self with your [vag].", parse);
+	parse["t"] = tail ? Text.Parse("and gently stroking your [tail] with the other", parse) : "";
+	Text.Add("[Name] approaches you from behind, laying a hand on your [hips] [t]. Without saying a word [heshe] leans forward to kiss your lower back, trailing soft pecks along your spine as [heshe] simultaneously aligns [himher]self with your [vag].", parse);
 	Text.NL();
 	parse["bitingbackUttering"] = dom > 0 ? "biting back" : "uttering";
 	Text.Add("Involuntarily you arch your back, [bitingbackUttering] a moan of desire as you feel [hisher] feather-light touch dancing down your back. You're intimately aware of the warmth of [hisher] cock as it hovers temptingly just outside your [vag], and you feel the ache for [himher] to start claiming you well inside your stomach.", parse);
@@ -2118,16 +2116,16 @@ Scenes.Felines.LossCatchVaginal = function(cat, group, enc) {
 	player.FuckVag(player.FirstVag(), cat.FirstCock(), 3);
 	
 	if(virgin) {
-		parse["tail"] = player.HasTail() ? Text.Parse("[tailDesc]", parse) : "back";
+		parse["t"] = player.HasTail() ? Text.Parse("[tail]", parse) : "back";
 		if(dom) {
 			Text.Add("You bite your lip savagely to avoid crying out as [heshe] tears through your hymen, but you can't help the way your body quakes in pain, abused folds instinctively clamping down on [hisher] intruding member.", parse);
 			Text.NL();
-			Text.Add("<i>“So tight! Sorry my dear, I didn’t think you were a virgin,”</i> [heshe] apologizes, stroking your [tail]. <i>“I promise I’ll make your first time memorable,”</i> [heshe] grins, leaning over to give your back a gentle kiss.", parse);
+			Text.Add("<i>“So tight! Sorry my dear, I didn’t think you were a virgin,”</i> [heshe] apologizes, stroking your [t]. <i>“I promise I’ll make your first time memorable,”</i> [heshe] grins, leaning over to give your back a gentle kiss.", parse);
 		}
 		else {
 			Text.Add("You cry out in pain as your hymen is torn, your [maleherm] partner having just claimed your female virginity. Unconsciously, your body shudders at the sensations, instinctively squeezing [hisher] cock in an effort to try and keep [himher] at bay.", parse);
 			Text.NL();
-			Text.Add("<i>“Shh, it’ll pass, don’t worry.”</i> [heshe] softly caresses your [tail], waiting for you to adjust to [hisher] girth.", parse);
+			Text.Add("<i>“Shh, it’ll pass, don’t worry.”</i> [heshe] softly caresses your [t], waiting for you to adjust to [hisher] girth.", parse);
 		}
 	}
 	else {
@@ -2184,8 +2182,10 @@ Scenes.Felines.LossCatchVaginal = function(cat, group, enc) {
 				Text.Add("Your [cocks] explode[notS] in [itsTheir] own climax, your seed [cum] onto the earth below you. ", parse);
 			}
 			Text.Add("You shudder and moan as the electricity of climax races through your body, singing through you until finally it seeps away, leaving behind its soothing warm afterglow.", parse);
-			if(player.FirstCock())
-				Text.Add(" Between your [legs], your [cocks] go limp, swaying loosely between your thighs.", parse);
+			if(player.FirstCock()) {
+				parse["l"] = player.HasLegs() ? Text.Parse("Between your [legs]", parse) : "In the valley of your crotch";
+				Text.Add(" [l], your [cocks] go limp, swaying loosely down your [thighs].", parse);
+			}
 			Text.NL();
 			Text.Add("[Name] collapses atop you, sending both of you crashing onto the ground. <i>“Ah, thanks my dear. I really needed that,”</i> [heshe] says, licking your neck affectionately.", parse);
 			Text.NL();
@@ -2199,8 +2199,8 @@ Scenes.Felines.LossCatchVaginal = function(cat, group, enc) {
 				Text.NL();
 				Text.Add("<i>“A sweet thing like you? Of course you will,”</i> [heshe] purrs.", parse);
 				Text.NL();
-				parse["tail"] = player.HasTail() ? player.HasTail().Short() : "butt";
-				Text.Add("The two of you stay locked in this position for a moment longer before [heshe] finally announces, <i>“I’m sorry, my dear. But I can’t stay with you.”</i> [HeShe] extracts [himher]self from your used [vag] and gently pats you on your [tail].", parse);
+				parse["t"] = player.HasTail() ? player.HasTail().Short() : "butt";
+				Text.Add("The two of you stay locked in this position for a moment longer before [heshe] finally announces, <i>“I’m sorry, my dear. But I can’t stay with you.”</i> [HeShe] extracts [himher]self from your used [vag] and gently pats you on your [t].", parse);
 			}
 			Text.NL();
 			parse["s"] = enc.enemy.Num() > 2 ? "s" : "";
@@ -2222,9 +2222,9 @@ Scenes.Felines.LossCatchVaginal = function(cat, group, enc) {
 			Text.Clear();
 			Text.Add("<i>“As you wish”</i> [heshe] replies, thrusting into you forcefully a couple more times; then finally withdrawing and leaning back as [hisher] hands fly to [hisher] throbbing cathood, violently stroking.", parse);
 			Text.NL();
-			parse["tail"]  = player.HasTail() ? Text.Parse(" [tailDesc],", parse) : "";
-			parse["wings"] = player.HasWings() ? Text.Parse(" [wingDesc],", parse) : "";
-			Text.Add("With a yowl of satisfaction, [name] cums. Strands of white fly through the air to settle all over your [butt],[tail] back,[wings] and [hair]. This is one messy kitty, you think to yourself as a few more strands of warmth fall upon your prone form.", parse);
+			parse["t"]  = player.HasTail() ? Text.Parse(" [tail],", parse) : "";
+			parse["w"] = player.HasWings() ? Text.Parse(" [wings],", parse) : "";
+			Text.Add("With a yowl of satisfaction, [name] cums. Strands of white fly through the air to settle all over your [butt],[t] back,[w] and [hair]. This is one messy kitty, you think to yourself as a few more strands of warmth fall upon your prone form.", parse);
 			Text.NL();
 			Text.Add("You groan in frustration, feeling your own need throbbing down below. You're so close, but you can't manage to climb the edge on your own... As your [vag] flexes in frustration, you feel something warm and wet glide suddenly across your [butt]. [Name] is licking you!", parse);
 			Text.NL();
@@ -2284,10 +2284,7 @@ Scenes.Felines.LossPitchVaginal = function(cat, group, enc, cocksInVag) {
 		Possessive  : cat.Possessive(),
 		possessive  : cat.possessive(),
 		cocks2      : function() { return player.MultiCockDesc(allCocks); },
-		cock2Desc   : function() { return pCock2.Short(); },
-		tailDesc    : function() { return player.HasTail().Short(); },
-		wingDesc    : function() { return player.HasWings().Short(); },
-		ballsDesc   : function() { return player.BallsDesc(); }
+		cock2Desc   : function() { return pCock2.Short(); }
 	};
 	parse = cat.ParserPronouns(parse);
 	parse = player.ParserTags(parse, "", pCock);
@@ -2387,7 +2384,7 @@ Scenes.Felines.LossPitchVaginal = function(cat, group, enc, cocksInVag) {
 			Text.Add("[Name] is initially surprised by your sudden burst of enthusiasm, but whatever form of protest she might be thinking of is quickly dashed into a string of moans, yowls and screams as you pound her raw. She doesn’t struggle against your grip, more than happy to receive your rough fucking. All she does is grip the grass for balance as she tries her best to hump you back.", parse);
 			Text.NL();
 			parse["throughInside"] = player.HasBalls() ? "through" : "inside";
-			Text.Add("Grunting with mingled pleasure and effort, you keep on fucking her with all your might; you can feel it building inside of you, electricity crackling [throughInside] your [ballsDesc]. You can feel the limits of your resistance fraying with every fraction of a second, until finally they snap; with a roar of pleasure, you slam yourself inside of her to the hilt and cum, holding her as tightly as you can to ensure not a drop of it goes astray.", parse);
+			Text.Add("Grunting with mingled pleasure and effort, you keep on fucking her with all your might; you can feel it building inside of you, electricity crackling [throughInside] your [balls]. You can feel the limits of your resistance fraying with every fraction of a second, until finally they snap; with a roar of pleasure, you slam yourself inside of her to the hilt and cum, holding her as tightly as you can to ensure not a drop of it goes astray.", parse);
 			Text.NL();
 			parse["cum"] = player.OrgasmCum() > 4 ? ", her stomach bulging from the sheer volume of your climax" : "";
 			Text.Add("Finally you have emptied yourself completely into her[cum], and you pull your [cock] free before allowing her legs to drop beside you. Breathing hard, you flop ungraciously onto the ground below you, hanging your head as you inhale and exhale in an effort to recover.", parse);
@@ -2427,8 +2424,8 @@ Scenes.Felines.LossPitchVaginal = function(cat, group, enc, cocksInVag) {
 			Text.Clear();
 			Text.Add("With a soft, moaning sigh of contentment, you allow yourself to settle back against the ground. Your own motions nearly cease, content as you are to languidly lay there and cup her buttocks in your hands, feeling the flesh squish and flex most interestingly amidst your fingers. Giving yourself over to her entirely, you submit to being used like a toy, content to allow her to bring you both to your mutual climax. Your mind goes nearly blank, casting aside everything but the weight of your feline lover atop you, the feel of her fur against your [skin], the slapping of flesh on flesh and the sensations of her milking your cock for all she's worth.", parse);
 			Text.NL();
-			parse["balls"] = player.HasBalls() ? Text.Parse(" and your [ballsDesc] churn,", parse) : "";
-			Text.Add("It doesn’t take long before you feel yourself throbbing within [possessive] vagina. Pleasure surges across your body,[balls] as you spill the first jet of cum within her waiting cunt.", parse);
+			parse["b"] = player.HasBalls() ? Text.Parse(" and your [balls] churn,", parse) : "";
+			Text.Add("It doesn’t take long before you feel yourself throbbing within [possessive] vagina. Pleasure surges across your body,[b] as you spill the first jet of cum within her waiting cunt.", parse);
 			Text.NL();
 			parse["deep"] = pCock.length.Get() > 20 ? "forcefully jam against her cervix" : "reach as deep within her quivering pussy as possible";
 			Text.Add("Your orgasm draws a startled yelp from [name], knocking her off balance and forcing her to fall onto your [cock], causing your [cockTip] to [deep]. [Name] screams in delight as you fill her to capacity. Her pussy spasms around your [cock], coaxing you to deposit as much of your fertile cream as you can manage.", parse);
@@ -2492,8 +2489,8 @@ Scenes.Felines.LossPitchVaginal = function(cat, group, enc, cocksInVag) {
 			Text.NL();
 			Text.Add("[Possessive] startled yelp is silenced as you plunge inside her deeper than ever, battering her cervix with your [cockTip], drawing a whorish moan of pleasure, and then frustration as you pull out. As quickly as you can manage, you shove your [cock] between her luxurious mounds.", parse);
 			Text.NL();
-			parse["balls"] = player.HasBalls() ? Text.Parse("your [ballsDesc] churn", parse) : "an electric shock course through your prostate";
-			Text.Add("[Name] quickly catches on to your plans, as she grips her tits and mashes them together onto your shaft. The fur of her orbs tickle you as you plaster them with your mixed fluids, groaning as you feel [balls].", parse);
+			parse["b"] = player.HasBalls() ? Text.Parse("your [balls] churn", parse) : "an electric shock course through your prostate";
+			Text.Add("[Name] quickly catches on to your plans, as she grips her tits and mashes them together onto your shaft. The fur of her orbs tickle you as you plaster them with your mixed fluids, groaning as you feel [b].", parse);
 			Text.NL();
 			Text.Add("Her breasts feel incredible on your dick, the warm flesh and its soft coating of fur tickling deliciously against your pleasure-sensitive cockmeat. After a few humps, you find your limit reached. Crying out in pleasure, you bury yourself as deep into her cleavage as possible and let loose, showering her tits and her face alike.", parse);
 			Text.NL();
