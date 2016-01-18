@@ -576,8 +576,7 @@ Scenes.Room69.Discovering69Sex = function() {
 	else if(player.FirstVag()) {
 		Text.Add("After an almost painful minute of playing with you, in which your hands practically twitch with their need to act, Sixtynine finally makes its move. Despite your anticipation, the motion still takes you unawares, and you gasp in surprise and excitement as a tentacle brushes lightly against your [clitDesc], while another runs along your nether lips, tracing around the opening.", parse);
 		Text.NL();
-		parse["wet"] = player.FirstVag().wetness.Get() >= 2 ? "almost fountaining fluids" : "abundantly flowing fluids";
-		Text.Add("Despite yourself, you buck your hips, pressing desperately into the cloth, willing it to do more. <i>“Patience, little one,”</i> the voice chides you. <i>“Anticipation is the best part.”</i> Still, showing mercy, the tentacles advance a little, one circling your clitoris, pressing it gently through the hood, while the other explores your opening, soaking up your [wet].", parse);
+		Text.Add("Despite yourself, you buck your hips, pressing desperately into the cloth, willing it to do more. <i>“Patience, little one,”</i> the voice chides you. <i>“Anticipation is the best part.”</i> Still, showing mercy, the tentacles advance a little, one circling your clitoris, pressing it gently through the hood, while the other explores your opening, soaking up your abundantly flowing fluids.", parse);
 		Text.NL();
 		Text.Add("Apparently satisfied with the look of desperation on your face, the lower cloth feeler suddenly abandons its slow creeping pace of exploration, and pushes further inside. It penetrates easily, a thin rope of cloth rubbing slowly against just the front wall of your [vaginaDesc]. Once it’s a few inches in, however, it untwists in a flowing silky massage of your interior, as it uncoils and fills you to capacity.", parse);
 		Text.NL();
