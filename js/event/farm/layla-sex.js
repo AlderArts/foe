@@ -1168,7 +1168,7 @@ Scenes.Layla.SexCatchAnalCont2 = function(parse, kiss, tailcock) {
 		Text.NL();
 		Text.Add("You swallow without pause, without thinking, just letting it wash you away in pleasure. Only when it goes slack do you release your lips, allowing Layla to pull her limp member from your mouth.", parse);
 		Text.NL();
-		parse["lact"] = player.Lactation() ? " your milk stains on her mouth" : "";
+		parse["lact"] = player.Lactation() ? " your milk stains her mouth" : "";
 		Text.Add("As your eyes open and you inhale slowly, taking deep breaths, Layla’s face drifts lazily into view. Her eyes are hazy with pleasure,[lact] and her lips curl into a dreamy smile.", parse);
 	}
 	else {
@@ -1845,7 +1845,7 @@ Scenes.Layla.SexPitchVaginalCont2 = function(opts, p1cock, parse) {
 					Text.Add("You simply nod your assent.", parse);
 					Text.NL();
 					parse["av"] = player.Butt().virgin ? ", even though she’s taking your virginity" : "";
-					Text.Add("Smiling softly, the chimera begins pressing into your [anus]. She doesn’t make too much effort to pierce your sphincter, but when her tail-cock spurts a small rope of its aphrodisiac juice, you find yourself unable to resist, even involuntarily. Your [anus] relaxes enough to let her tip inside, and once it’s in, the rest of the shaft follows. The slick juices coating her member makes her entry easy and painless[av].", parse);
+					Text.Add("Smiling softly, the chimera begins pressing into your [anus]. She doesn’t make too much effort to pierce your sphincter, but when her tail-cock spurts a small rope of its aphrodisiac juice, you find yourself unable to resist, even involuntarily. Your [anus] relaxes enough to let her tip inside, and once it’s in, the rest of the shaft follows. The slick juices coating her member make her entry easy and painless[av].", parse);
 					Text.NL();
 					
 					Sex.Anal(layla, player);
@@ -2269,7 +2269,7 @@ Scenes.Layla.SexPitchVaginalCont3 = function(opts, p1cock, parse) {
 				Text.NL();
 				Text.Add("Sighing happily, you bend forward to ask Layla how she enjoyed that... only to get a quiet, girlish snore in response. You wore the poor girl out.", parse);
 				Text.NL();
-				Text.Add("Despite yourself, an amused smile spreads across your face as you carefully lie down atop of her. Getting a little shut-eye sounds good to you... and she makes a lovely little body pillow.", parse);
+				Text.Add("Despite yourself, an amused smile spreads across your face as you carefully lie down atop her. Getting a little shut-eye sounds good to you... and she makes a lovely little body pillow.", parse);
 				Text.Flush();
 				
 				world.TimeStep({hour: 2});
