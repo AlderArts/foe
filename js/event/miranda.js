@@ -1123,7 +1123,7 @@ Scenes.Miranda.RigardGatesBribe = function() {
 				Text.NL();
 				Text.Add("At first.", parse);
 				Text.NL();
-				Text.Add("But before long, the pain is swallowed by a far greater sensation, intense pleasure. Each time Miranda rams her immense rod home, it sends another jolt of blissful ecstasy up your spine. You find yourself moaning loudly, any shreds of defiance long reduced to dust by the inexorable thrusting of her hips.", parse);
+				Text.Add("But before long, the pain is swallowed by a far greater sensation: intense pleasure. Each time Miranda rams her immense rod home, it sends another jolt of blissful ecstasy up your spine. You find yourself moaning loudly, any shreds of defiance long reduced to dust by the inexorable thrusting of her hips.", parse);
 				Text.NL();
 				Text.Add("<i>“Better hope you are ready for this,”</i> Miranda grunts.", parse);
 				Text.NL();
@@ -1460,6 +1460,7 @@ Scenes.Miranda.HeyThere = function() {
 	var parse = {
 		boygirl : function() { return player.mfFem("boy", "girl"); }
 	};
+	parse = player.ParserTags(parse);
 	
 	miranda.flags["Met"] = Miranda.Met.Tavern;
 	
@@ -1501,7 +1502,7 @@ Scenes.Miranda.HeyThere = function() {
 		options.push({ nameStr : "Flirt",
 			func : function() {
 				Text.Clear();
-				Text.Add("The booze is getting to your head, and you are finding it more difficult to keep your eyes to the more civilized parts of the shapely woman sitting beside you. You shift a bit closer to her until you touch her thigh with you leg, and murmur softly: <i>“<b>I</b> could show you a good time.”</i>", parse);
+				Text.Add("The booze is getting to your head, and you are finding it more difficult to keep your eyes to the more civilized parts of the shapely woman sitting beside you. You shift a bit closer to her until you touch her thigh with you [leg], and murmur softly: <i>“<b>I</b> could show you a good time.”</i>", parse);
 				Text.NL();
 				Text.Add("Miranda, in the middle of chugging down a mug of booze, almost chokes as she starts coughing and wheezing uncontrollably. When she eventually winds down, you realize that she is giggling drunkenly. She leans over to get another bottle, the side of her huge breasts brushing against your arm as she reaches past you. ", parse);
 				Text.NL();
@@ -1694,7 +1695,7 @@ Scenes.Miranda.HeyThereCatPorn = function() {
 							Text.NL();
 						}
 						
-						Text.Add("You continue to suck on her huge dog-dick, hands moving to pleasure the part of her length you simply cannot force down your throat. Dollops of precum leak down from your lips, while inside your overfull mouth, Miranda's tool begins to swell even more. You can feel the heat radiating from her heaving scrotum and see the growing knot in front of you, and realize she is very close to the edge.", parse);
+						Text.Add("You continue to suck on her huge dog-dick, hands moving to pleasure the part of her length you simply cannot force down your throat. Dollops of pre-cum leak down from your lips, while inside your overfull mouth, Miranda's tool swells even more. You can feel the heat radiating from her heaving scrotum and see the growing knot in front of you, and realize she is very close to the edge.", parse);
 						Text.NL();
 						Text.Add("Repressing your gag reflex, you grab her ample butt and push yourself forward until your nose rests in her furry crotch. Miranda cries out loudly in pleasure - probably alerting the few patrons not already aware of what was going on - and grabs the back of your head, holding you down. In short rapid strokes she fucks your ragged throat mercilessly, until she finally hits her peak.", parse);
 						Text.NL();
