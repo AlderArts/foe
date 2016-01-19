@@ -147,7 +147,7 @@ Scenes.Felines.WildcatEnc = function(levelbonus) {
 	else {
 		enemy.AddMember(new Wildcat(Gender.Rand([3,4,1]), levelbonus));
 		for(var i = 0; i < 3; i++) {
-			if(Math.random() < 0.2)
+			if(Math.random() < 0.5)
 				enemy.AddMember(new Wildcat(Gender.Rand([3,4,1]), levelbonus));
 		}
 	}
@@ -211,7 +211,7 @@ Scenes.Felines.PumaEnc = function(levelbonus) {
 	else {
 		enemy.AddMember(new Puma(Gender.Rand([3,4,1]), levelbonus));
 		for(var i = 0; i < 3; i++) {
-			if(Math.random() < 0.2)
+			if(Math.random() < 0.5)
 				enemy.AddMember(new Puma(Gender.Rand([3,4,1]), levelbonus));
 		}
 	}
@@ -275,7 +275,7 @@ Scenes.Felines.JaguarEnc = function(levelbonus) {
 	else {
 		enemy.AddMember(new Jaguar(Gender.Rand([3,4,1]), levelbonus));
 		for(var i = 0; i < 3; i++) {
-			if(Math.random() < 0.2)
+			if(Math.random() < 0.5)
 				enemy.AddMember(new Jaguar(Gender.Rand([3,4,1]), levelbonus));
 		}
 	}
@@ -339,7 +339,7 @@ Scenes.Felines.LynxEnc = function(levelbonus) {
 	else {
 		enemy.AddMember(new Lynx(Gender.Rand([3,4,1]), levelbonus));
 		for(var i = 0; i < 3; i++) {
-			if(Math.random() < 0.2)
+			if(Math.random() < 0.5)
 				enemy.AddMember(new Lynx(Gender.Rand([3,4,1]), levelbonus));
 		}
 	}
