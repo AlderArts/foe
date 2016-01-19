@@ -1698,14 +1698,14 @@ Scenes.Miranda.HeyThereCatPorn = function() {
 						Text.NL();
 						Text.Add("Repressing your gag reflex, you grab her ample butt and push yourself forward until your nose rests in her furry crotch. Miranda cries out loudly in pleasure - probably alerting the few patrons not already aware of what was going on - and grabs the back of your head, holding you down. In short, rapid strokes, she fucks your ragged throat mercilessly, until she finally hits her peak.", parse);
 						Text.NL();
-						Text.Add("As her huge member begins to twitch violently in your mouth, you can feel the thick semen being deposited right into your stomach, load after hot load. Just before you black out from lack of air, Miranda pulls out enough for you to breathe. You cough as a few more spurts hit your face, but you feel proud that most of her large load now resides in your slightly distended stomach.", parse);
+						Text.Add("As her huge member begins to twitch violently in your mouth, you can feel the thick semen being deposited right into your belly, load after hot load. Just before you black out from lack of air, Miranda pulls out enough for you to breathe. You cough as a few more spurts hit your face, but you feel proud that most of her large load now resides in your slightly distended stomach.", parse);
 						
 						var mCum = miranda.OrgasmCum();
 						
 						Text.NL();
-						Text.Add("You eagerly lick your lips and give the cock before you a few more slurps, cleaning it up. Miranda smiles down on you with a very satisfied look on her face as you greedily swallow every ounce of thick sperm you can get your lips on. As you climb up from your kneeling position, you realize that the room is silent and everyone's eyes are honed at the two of you. Quite a few of the patrons are openly stroking themselves.", parse);
+						Text.Add("You eagerly lick your lips and give the cock before you a few more slurps, cleaning it up. Miranda smiles down on you with a very satisfied look on her face as you greedily swallow every ounce of thick sperm you can get. As you climb up from your kneeling position, you realize that the room is silent and everyone's eyes are honed at the two of you. Quite a few of the patrons are openly stroking themselves.", parse);
 						Text.NL();
-						Text.Add("<i>“I think we just outmatched the felines from earlier, honey,”</i> Miranda says as she leans over, hugging you tightly. One of her hands reach down behind you and grabs your butt, squeezing it tightly. <i>“You were wonderful dear,”</i> she murmurs into your ear as she leans against you, wrecked with exhaustion.", parse);
+						Text.Add("<i>“I think we just outmatched the felines from earlier, honey,”</i> Miranda says as she leans over, hugging you tightly. One of her hands reach down behind you and grabs your butt, squeezing it tightly. <i>“You were wonderful, dear,”</i> she murmurs into your ear as she rests against you, wrecked with exhaustion.", parse);
 						Text.NL();
 						Text.Add("The bartender, a gruff equine clad in a dark tunic, comes over to your table with two jugs of mead.", parse);
 						Text.NL();
@@ -1716,7 +1716,7 @@ Scenes.Miranda.HeyThereCatPorn = function() {
 						else
 							Text.Add("<i>“Too bad we are the center of attention, I’d love to… continue this,”</i> she grins, caressing your [buttDesc] fondly.", parse);
 						Text.NL();
-						Text.Add("You snuggle with Miranda for a while longer, enjoying the mead, until the two of you decide to leave for the night. Before the two of you part on the street outside, Miranda pulls you close into a deep kiss, her hands groping your ass roughly. <i>“I think I'll be seeing more of you, and better sooner than later,”</i> she announces as she saunters off into the night, <i>“you know where to find me.”</i>", parse);
+						Text.Add("You snuggle with Miranda for a while longer, enjoying the mead, until the two of you decide to leave for the night. Before the two of you part on the street outside, Miranda pulls you close into a deep kiss, her hands groping your ass roughly. <i>“I think I'll be seeing more of you, and better sooner than later,”</i> she announces as she saunters off into the night. <i>“You know where to find me.”</i>", parse);
 						Text.Flush();
 						
 						miranda.flags["Attitude"] = Miranda.Attitude.Nice;
@@ -1754,7 +1754,7 @@ Scenes.Miranda.BarChatOptions = function(options, back) {
 				Text.Add("Miranda talks for a while about her biggest hobby, hunting game in the woods. While she usually uses a two-handed blade, she is apparently also really proficient with a bow and arrow. She talks a bit about some of her conquests. You get the feeling that she is searching for something in the forest.", parse);
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
-				Text.Add("The two of you chat a bit about Rigard. <i>“Well, it's a nice enough place,”</i> Miranda concedes, <i>“the bar is nice, I have a decent job that brings the dough in.”</i> She grins widely, <i>“and though the place might not be as interesting as the feline home town, I have you around now to keep me entertained!”</i>", parse);
+				Text.Add("The two of you chat a bit about Rigard. <i>“Well, it's a nice enough place,”</i> Miranda concedes, <i>“the bar is nice, I have a decent job that brings the dough in.”</i> She grins widely. <i>“And though the place might not be as interesting as the feline home town, I have you around now to keep me entertained!”</i>", parse);
 				player.AddLustFraction(0.1);
 				miranda.AddLustFraction(0.1);
 			}, 1.0, function() { return true; });
@@ -1772,7 +1772,7 @@ Scenes.Miranda.BarChatOptions = function(options, back) {
 				Text.Add("<i>“...Still, I’d tap that,”</i> she adds after a thoughtful pause.", parse);
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
-				Text.Add("<i>“Watch your back if you head to the mountains,”</i> Miranda warns you, <i>“I've heard that there are bandits hiding out somewhere there, and it is very close to the boneyard, and that place you should <b>really</b> avoid.”</i>", parse);
+				Text.Add("<i>“Watch your back if you head to the mountains,”</i> Miranda warns you, <i>“I've heard that there are bandits hiding out somewhere there, and it is very close to the Boneyard, and that place you should <b>really</b> avoid.”</i>", parse);
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
 				Text.Add("<i>“There’s been a rather odd rumor going around lately,”</i> Miranda tells you. <i>“Apparently, there have been increased sightings of rabbits roaming the countryside. Don’t look at me like that, I’m not making this shit up!”</i> The dog-morph gives you a light punch on the shoulder.", parse);
@@ -1781,7 +1781,7 @@ Scenes.Miranda.BarChatOptions = function(options, back) {
 				Text.NL();
 				Text.Add("You ask her if she’s ever seen one.", parse);
 				Text.NL();
-				Text.Add("<i>“Yeah, they are pretty common critters, I saw them running around occasionally when I worked as a merc, before I joined the watch. Usually kept to themselves, living in holes underground. They are dumb as doorposts, not interested in anything but eating and fucking all day long, which makes those reports even stranger.”</i> She grins at you playfully. <i>“Wouldn’t that be the life, eh?”</i>", parse);
+				Text.Add("<i>“Yeah, they are pretty common critters, I saw them running around occasionally when I worked as a merc, before I joined the Watch. Usually kept to themselves, living in holes underground. They are dumb as doorposts, not interested in anything but eating and fucking all day long, which makes those reports even stranger.”</i> She grins at you playfully. <i>“Wouldn’t that be the life, eh?”</i>", parse);
 			}, 1.0, function() { return !burrows.Access(); });
 
 			scenes.Get();
@@ -1800,7 +1800,7 @@ Scenes.Miranda.BarChatOptions = function(options, back) {
 			var scenes = [];
 			
 			scenes.push(function() {
-				Text.Add("<i>“Walking the beat keeps the coin coming, though it isn’t as exciting as mercenary work. Believe it or not, things are usually pretty quiet here.”</i> She shrugs irritably. <i>“I hate doing paper work, give me a thug to beat up any day of the week.”</i>", parse);
+				Text.Add("<i>“Walking the beat keeps the coin coming, though it isn’t as exciting as mercenary work. Believe it or not, things are usually pretty quiet here.”</i> She shrugs irritably. <i>“I hate doing paperwork, give me a thug to beat up any day of the week.”</i>", parse);
 				if(miranda.Relation() >= 25) {
 					Text.NL();
 					Text.Add("She brightens up a bit. <i>“You could always show up at the barracks sometime and keep me company!”</i> she suggests. <i>“You know... take my mind off things for a while,”</i> she grins wickedly.", parse);
@@ -1891,10 +1891,10 @@ Scenes.Miranda.BarChatOptions = function(options, back) {
 				scenes.AddEnc(function() {
 					Text.Add("<i>“Ok,”</i> she begins, <i>“you know those big wolves that prowl around there? Did you know that some of them used to be people?”</i> She goes on to explain that overuse of certain substances enhancing their animal attributes can change a persons body and mind so much that they lose themselves.", parse);
 					Text.NL();
-					Text.Add("<i>“As long as you keep your wits about you, you should be fine,”</i> she finishes, ordering another mug of mead. <i>“Who knows, I might like having a pet around though...”</i> she adds teasingly. <i>“Just be careful ok?”</i>", parse);
+					Text.Add("<i>“As long as you keep your wits about you, you should be fine,”</i> she finishes, ordering another mug of mead. <i>“Who knows, I might like having a pet around though...”</i> she adds teasingly. <i>“Just be careful, ok?”</i>", parse);
 				}, 1.0, function() { return true; });
 				scenes.AddEnc(function() {
-					Text.Add("<i>“The goblin tribes of the deeper woods are a weird bunch,”</i> she muses, taking a long draft of the strong mead in her cup. <i>“They are so constantly mad with lust that they fuck like rabbits. Yet they somehow keep their numbers down with a surprisingly high fatality rate,”</i> she ponders that a bit. <i>“It's probably because they are really, really stupid,”</i> she decides, <i>“just be careful that they don't gang up on you.”</i>", parse);
+					Text.Add("<i>“The goblin tribes of the deeper woods are a weird bunch,”</i> she muses, taking a long draft of the strong mead in her cup. <i>“They are so constantly mad with lust that they fuck like rabbits. Yet they somehow keep their numbers down with a surprisingly high fatality rate,”</i> she ponders that a bit. <i>“It's probably because they are really, really stupid,”</i> she decides. <i>“Just be careful that they don't gang up on you.”</i>", parse);
 				}, 1.0, function() { return true; });
 				scenes.AddEnc(function() {
 					Text.Add("<i>“There are some wild feline beasts running around the forest,”</i> she informs you, <i>“they may look cute, but be very careful around them. Unlike the domesticated house cats you might see here in the city, these are natural predators, and are very dangerous. Don't head into their territory unless you have some kind of death wish.”</i>", parse);
@@ -1985,14 +1985,14 @@ Scenes.Miranda.TakeHome = function() {
 	
 	Text.Clear();
 	if(miranda.Attitude() < Miranda.Attitude.Neutral) {
-		Text.Add("</i>”Heh, craving some dick, are you?”</i> Miranda chortles, draining the last of her drink and slamming the mug down on the table. </i>”Very well then, slut. Dating you is a waste of time anyway, so let’s get your sweet ass back to my den and skip straight to the part you love above all else, my cock,”</i> she says grabbing your arm and dragging you after her as she exits the bar.", parse);
+		Text.Add("</i>”Heh, craving some dick, are you?”</i> Miranda chortles, draining the last of her drink and slamming the mug down on the table. </i>”Very well then, slut. Dating you is a waste of time anyway, so let’s get your sweet ass back to my den and skip straight to the part you love above all else: my cock,”</i> she says, grabbing your arm and dragging you after her as she exits the bar.", parse);
 		Text.NL();
 		if(player.SubDom() > 0)
 			Text.Add("Whatever last-second doubts you may have, you can't do anything to stop her now. Her grip around your wrist is like iron and you have no choice but to follow her as she leads you toward her home.", parse);
 		else
 			Text.Add("Shame and excitement chase each other through your mind as your alpha bitch drags you back to her den. Lost in the throes of lust, you eagerly keep up with her, anxious to let her decide what to do with you.", parse);
 		Text.NL();
-		Text.Add("Once you’re at her doorstep, Miranda opens the door and hauls you inside, slamming the door shut and locking it behind her. <i>“Alright then, let’s begin,”</i> she grins, licking her lips.", parse);
+		Text.Add("Once you’re at her doorstep, Miranda opens the door and hauls you inside, slamming it shut and locking it behind her. <i>“Alright then, let’s begin,”</i> she grins, licking her lips.", parse);
 		
 		world.TimeStep({hour: 1});
 		
@@ -2001,20 +2001,20 @@ Scenes.Miranda.TakeHome = function() {
 	else {
 		var dom = miranda.SubDom() - player.SubDom();
 		if(dom < -25) {
-			Text.Add("A smirk curling your lips, you reach around the table and run your hand appreciatively over the firmly toned cheeks of Miranda's ass, reaching through the hole in her pants to scratch at the base of her tail, eliciting a moan from the doberherm. Sliding yourself closer to her, your thigh touching hers, your other hand reaches up to her chest, caressing her tits as best you can through the studded leather armor she wears. An appreciative growl rumbles out of her throat, but it's not the reaction you're after.", parse);
+			Text.Add("A smirk curling your lips, you reach around the table and run your [hand] appreciatively over the firmly toned cheeks of Miranda's ass, reaching through the hole in her pants to scratch at the base of her tail, eliciting a moan from the doberherm. Sliding yourself closer to her, your thigh touching hers, your other hand reaches up to her chest, caressing her tits as best you can through the studded leather armor she wears. An appreciative growl rumbles out of her throat, but it's not the reaction you're after.", parse);
 			Text.NL();
-			Text.Add("Your hand traces its way down her belly, to a much more vulnerable target. Her maleness is far less protected as you cup her between her legs, stroking and fondling her sheath and her bulging balls with abandon. Miranda's ears flick as she fidgets in her seat, and you can feel her bulging through her pants as her foot-long girl-cock begins poking forth and tenting her pants.", parse);
+			Text.Add("Your hand traces its way down her belly to a much more vulnerable target. Her maleness is far less protected as you cup her between her legs, stroking and fondling her sheath and her bulging balls with abandon. Miranda's ears flick as she fidgets in her seat, and you can feel her hardening through her pants as her foot-long girl-cock begins poking forth and tenting her pants.", parse);
 			Text.NL();
-			Text.Add("With a playful smile, you coyly scold your naughty bitch for getting so hot and bothered in a place like this. But, since you're such a nice [guyGirl], you'll take her home and let her have some fun. To emphasize your last word, you squeeze her, firmly but gently, through her pants.", parse);
+			Text.Add("With a playful smile, you coyly scold your naughty bitch for getting so hot and bothered in a place like this. But since you're such a nice [guyGirl], you'll take her home and let her have some fun. To emphasize your last word, you squeeze her, firmly but gently, through her pants.", parse);
 			Text.NL();
-			Text.Add("<i>“T-Thank you, [masterMistress],”</i> she whispers, holding back a moan at your ministrations.", parse);
+			Text.Add("<i>“T-thank you, [masterMistress],”</i> she whispers, holding back a moan at your ministrations.", parse);
 			Text.NL();
 			Text.Add("Grinning, you tell her to come on then, giving her one last squeeze to the ass before you remove your hands from her body and imperiously begin heading toward the door. Out of the corner of your eye, you watch the aroused morph eagerly following you, her blatantly tented pants attracting a chorus of whispers and smirks as she follows.", parse);
 			Text.NL();
 			Text.Add("Meeting her at the door, you sling your arm around her and blatantly grope her ass, squeezing her and worming your fingers between her cheeks. Miranda moans lustfully and wriggles her hips in delight, allowing you to lead her in the direction of her home without the slightest protest.", parse);
 		}
 		else {
-			Text.Add("</i>”Hmm, on one hand I do like spending time with you. On the other hand I also like dessert. So which one should I pick? Should I make you wine and dine me before we get to the good bits?”</i> she muses with a mischievous grin.", parse);
+			Text.Add("</i>”Hmm, on one hand I do like spending time with you. On the other hand, I also like dessert. So which one should I pick? Should I make you wine and dine me before we get to the good bits?”</i> she muses with a mischievous grin.", parse);
 			Text.NL();
 			Text.Add("You casually quip to her that if she does skip straight to dessert, that leaves the both of you with a lot more time to have nookie.", parse);
 			Text.NL();
@@ -2024,7 +2024,7 @@ Scenes.Miranda.TakeHome = function() {
 		}
 		Text.NL();
 		parse["dom"] = dom < -25 ? "fumbles to open" : "opens";
-		Text.Add("You reach her home in record time, where Miranda [dom] the door. Once she’s inside she looks at you expectantly, holding the door for you.", parse);
+		Text.Add("You reach her home in record time, where Miranda [dom] the door. Once she’s inside, she looks at you expectantly, holding the door for you.", parse);
 		Text.Flush();
 		
 		world.TimeStep({hour: 1});
@@ -2034,10 +2034,10 @@ Scenes.Miranda.TakeHome = function() {
 		options.push({ nameStr : "Take Charge",
 			func : function() {
 				Text.Clear();
-				Text.Add("You lunge forward, wrapping your arms around her and pulling her into a passionate kiss. Idly you slam the door shut behind you, blatantly squeezing her ass cheeks as you feel her tented erection rubbing against your midriff.", parse);
+				Text.Add("You lunge forward, wrapping your arms around her and pulling her into a passionate kiss. Idly, you slam the door shut behind you, blatantly squeezing her ass cheeks as you feel her tented erection rubbing against your midriff.", parse);
 				Scenes.Miranda.HomeDommySex();
 			}, enabled : true,
-			tooltip : "This time you get to run this show."
+			tooltip : "This time, you get to run this show."
 		});
 		options.push({ nameStr : "Passive",
 			func : function() {
@@ -2077,16 +2077,14 @@ Scenes.Miranda.JustOneMore = function() {
 	miranda.flags["Met"] = Miranda.Met.TavernAftermath;
 	
 	if(miranda.flags["Attitude"] == Miranda.Attitude.Nice) {
-		Text.Add("<i>“Well, I honestly didn't think I would see you again after last time,”</i> she laughs softly as you squirm a bit, then pats the bench beside her. Miranda seems very happy that you decided to return, which she makes more clear as she reaches over and whispers in your ear:", parse);
-		Text.NL();
-		Text.Add("<i>“If you decided to come back, I guess that means you liked my extra equipment. Perhaps you are yearning for round two?”</i> She gently reaches down into your pants, ", parse);
+		Text.Add("<i>“Well, I honestly didn't think I would see you again after last time,”</i> she laughs softly as you squirm a bit, then pats the bench beside her. Miranda seems very happy that you decided to return, which she makes more clear as she reaches over and whispers in your ear, <i>“If you decided to come back, I guess that means you liked my extra equipment. Perhaps you are yearning for round two?”</i> She gently reaches down into your pants, ", parse);
 		if(player.FirstCock())
 			Text.Add("fondling your now aroused [multiCockDesc].", parse);
 		else if(player.FirstVag())
 			Text.Add("lightly rubbing your moist [vagDesc].", parse);
 		else
 			Text.Add("fondling you.", parse);
-		Text.Add(" Her probing fingers traces lower, drawing soft moans from you as she slowly circles your [anusDesc]. She slowly starts to push her middle finger up your rectum, feeling around for a while before withdrawing. She winks at you and pats the hidden monster between her legs.", parse);
+		Text.Add(" Her probing fingers traces lower, drawing soft moans from you as she leisurely circles your [anusDesc]. She slowly starts to push her middle finger up your rectum, feeling around for a while before withdrawing. She winks at you and pats the hidden monster between her legs.", parse);
 		Text.NL();
 		Text.Add("<i>“Just know that I'd be more than happy to help you with that, if you ever feel you need to let off some steam.”</i> She chuckles at your discomfort and orders some drinks for you.", parse);
 		Text.Flush();
