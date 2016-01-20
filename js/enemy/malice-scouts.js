@@ -868,7 +868,7 @@ Scenes.MaliceScouts.Catboy.PetPlay = function(enc) {
 				Text.Add("your balls", parse);
 			else
 				Text.Add("you", parse);
-			Text.Add(". Throwing your head back from the sheer force of it all, you let out a cry as you sperm bursts free of you and gushes all over the catboy. Your poor kitty has barely enough time to try and shield himself ineffectually with an arm before the barrage of sperm hits him.", parse);
+			Text.Add(". Throwing your head back from the sheer force of it all, you let out a cry as your sperm bursts free of you and gushes all over the catboy. Your poor kitty has barely enough time to try and shield himself ineffectually with an arm before the barrage of spunk hits him.", parse);
 			Text.NL();
 			Text.Add("And a deluge it is, a veritable flood that sweeps over the catboy and threatens to carry him off his feet and away into the distance - or at least, that’s what it <i>feels</i> like. Once you’ve started, you can scarcely stop, and the most you manage to hear from your pet is a few plaintive meows as globs upon globs of thick sperm land on his skin and fur, horribly despoiling his once-pristine vestige even further.", parse);
 			Text.NL();
