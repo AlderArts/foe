@@ -1002,7 +1002,7 @@ Scenes.Miranda.RigardGatesBribe = function() {
 				if(first) { // first
 					Text.Add("<i>“Mmm… depends on how good you are,”</i> she purrs at your offer. <i>“But I’m not one to say no to such an offer. Come along here, my little slut.”</i> She leads you to a narrow back alley close to the barracks. For the slums, the smell isn’t so bad. <i>“C’mon, show me the goods,”</i> Miranda murmurs, licking her lips hungrily.", parse);
 					Text.NL();
-					Text.Add("Turning around, you blush as you lean against the wall of one of the nearby shacks, shivering as her rough hands quickly relieve you of your [botarmor], groping the [skin] of you [butt]. You jolt and whimper in surprise when the herm places the tip of her [mcockDesc] against your [anus]. R-really? Not even any preparation?", parse);
+					Text.Add("Turning around, you blush as you lean against the wall of one of the nearby shacks, shivering as her rough hands quickly relieve you of your [botarmor], groping the [skin] of your [butt]. You jolt and whimper in surprise when the herm places the tip of her [mcockDesc] against your [anus]. R-really? Not even any preparation?", parse);
 					Text.NL();
 					Text.Add("<i>“What? You did offer it yourself, did you not?”</i> You feel a wet splatter against your back door as she applies some spit. <i>“There, feel better now? You might want to bite down for this though...”</i>", parse);
 					Text.NL();
