@@ -759,6 +759,7 @@ Scenes.FarmIntro.MeetDanie = function() {
 		mistermiss : player.body.Gender() == Gender.male ? "mister" : "miss",
 		MisterMiss : player.body.Gender() == Gender.male ? "Mister" : "Miss"
 	};
+	parse = player.ParserTags(parse);
 	
 	Text.Add("Heading out to the pasture, you are greeted with the bleating of sheep as they lazily graze about. In the mix, you see a few sheep people, walking and conversing as if it was the most normal thing in the world. It is an odd sight, seeing a bunch of wool-clad people with sheep horns curving down the sides of their faces, but this <i>is</i> Eden after all. This is just another oddity you have to get used to, right?", parse);
 	Text.NL();
