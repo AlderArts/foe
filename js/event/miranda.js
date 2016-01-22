@@ -1973,6 +1973,7 @@ Scenes.Miranda.BarChatOptions = function(options, back) {
 		tooltip : Text.Parse(kidsFirst ? "So… uh, from her tales, it sounds like she gets around a lot. Isn’t she ever worried about fathering a bastard? Or getting pregnant herself?" : "Has she ever considered getting kids?", parse),
 		enabled : miranda.flags["ssRotMax"] >= 3 && miranda.flags["bgRotMax"] >= 5 && miranda.Relation() >= 10,
 		func : function() {
+			miranda.flags["Talk"] |= Miranda.Talk.Kids;
 			Text.Clear();
 			if(kidsFirst) {
 				Text.Add("<i>“I know that judging look,”</i> Miranda growls, squinting at you. <i>“‘How can she go sleeping around like that when she knows how difficult it is to grow up without parents?’ Is that it?”</i>", parse);
