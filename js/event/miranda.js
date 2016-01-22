@@ -1305,15 +1305,11 @@ Scenes.Miranda.WelcomeToRigardQnA = function() {
 	
 	var parse = {
 		playername : player.name,
-		name   : kiakai.name,
-		heshe  : kiakai.heshe(),
-		HeShe  : kiakai.HeShe(),
-		himher : kiakai.himher(),
-		hisher : kiakai.hisher(),
-		HisHer : kiakai.HisHer(),
-		
-		guygirl : player.body.femininity.Get() > 0 ? "girl" : "guy"
+		name       : kiakai.name,
+		guygirl    : player.body.femininity.Get() > 0 ? "girl" : "guy"
 	};
+	parse = kiakai.ParserPronouns(parse);
+	
 	Text.Flush();
 	//[Pass][Outlaws][Miranda]
 	var options = new Array();
@@ -1372,13 +1368,9 @@ Scenes.Miranda.WelcomeToRigardQnA = function() {
 Scenes.Miranda.WelcomeToRigardEnd = function() {
 	var parse = {
 		playername : player.name,
-		name   : kiakai.name,
-		heshe  : kiakai.heshe(),
-		HeShe  : kiakai.HeShe(),
-		himher : kiakai.himher(),
-		hisher : kiakai.hisher(),
-		HisHer : kiakai.HisHer()
+		name       : kiakai.name
 	};
+	parse = kiakai.ParserPronouns(parse);
 	
 	if(party.Two())
 		parse["comp"] = " and " + party.Get(1).name;
@@ -1729,6 +1721,7 @@ Scenes.Miranda.HeyThereCatPorn = function() {
 
 Scenes.Miranda.BarChatOptions = function(options, back) {
 	var parse = {};
+	parse = player.ParserTags(parse);
 	
 	back = back || PrintDefaultOptions;
 	
@@ -1857,7 +1850,7 @@ Scenes.Miranda.BarChatOptions = function(options, back) {
 				options.push({ nameStr : "Hunting",
 					func : function() {
 						Text.NL();
-						Text.Add("<i>“I'm a bit different,”</i> she says, <i>“I've walked those woods for years hunting game, I know which creatures to avoid.”</i> She gives you a playful glance and places a hand on your thigh.", parse);
+						Text.Add("<i>“I'm a bit different,”</i> she says, <i>“I've walked those woods for years hunting game, I know which creatures to avoid.”</i> She gives you a playful glance and places a hand on your [thigh].", parse);
 						Text.NL();
 						Text.Add("<i>“...And I know which ones are good in the sack, if you want some tips.”</i> She howls with laughter at your shocked expression.", parse);
 						Text.Flush();
@@ -2432,14 +2425,31 @@ Scenes.Miranda.MaidensBanePrompt = function() {
 	
 	var options = new Array();
 	
+	var dom = miranda.SubDom() - player.SubDom();
+	
 	options.push({ nameStr : "Talk",
 		func : function() {
 			Text.Clear();
-			Text.Add("What did you want to talk about?", parse);
+			
+			var scenes = new EncounterTable();
+			scenes.AddEnc(function() {
+				Text.Add("What did you want to ask the dobie about?", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("<i>“What’s on your mind?”</i> the guardswoman asks, leaning back in her seat.", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("<i>“You want to talk? But there’s so many better uses for that tongue of yours,”</i> Miranda replies, smirking. <i>“Well, spit it out.”</i>", parse);
+			}, 1.0, function() { return dom > 50; });
+			scenes.AddEnc(function() {
+				Text.Add("<i>“Get on with it, I don’t have all day.”</i> The doberherm is wearing a slightly annoyed expression.", parse);
+			}, 1.0, function() { return miranda.Nasty(); });
+			scenes.Get();
+			
 			Text.Flush();
 			Scenes.Miranda.MaidensBaneTalkPrompt();
 		}, enabled : true,
-		tooltip : "Chat with Miranda"
+		tooltip : "Have a chat with Miranda."
 	});
 	
 	if(miranda.flags["Met"] >= Miranda.Met.TavernAftermath) {
@@ -2454,6 +2464,7 @@ Scenes.Miranda.MaidensBanePrompt = function() {
 Scenes.Miranda.MaidensBaneTalkPrompt = function() {
 	var parse = {};
 	
+	var dom = miranda.SubDom() - player.SubDom();
 	
 	var options = new Array();
 	if(miranda.flags["Attitude"] >= Miranda.Attitude.Neutral)
@@ -2464,7 +2475,28 @@ Scenes.Miranda.MaidensBaneTalkPrompt = function() {
 		Scenes.Miranda.BarTalkOptions(options, Scenes.Miranda.MaidensBaneTalkPrompt);
 	}
 	
-	Gui.SetButtonsFromList(options, true, Scenes.Miranda.MaidensBanePrompt);
+	Gui.SetButtonsFromList(options, true, function() {
+		Text.Clear();
+		var scenes = new EncounterTable();
+		
+		scenes.AddEnc(function() {
+			Text.Add("<i>“Right, my throat was getting parched anyways.”</i> Miranda drains her tankard and calls for another one.", parse);
+		}, 1.0, function() { return true; });
+		scenes.AddEnc(function() {
+			Text.Add("<i>“Night’s still young. Anything else on your mind?”</i>", parse);
+		}, 1.0, function() { return true; });
+		scenes.AddEnc(function() {
+			Text.Add("<i>“Enough questions,”</i> Miranda states. <i>“I’m getting bored, entertain me.”</i>", parse);
+		}, 1.0, function() { return dom > 50; });
+		scenes.AddEnc(function() {
+			Text.Add("<i>“You owe me for all this small talk. I think I might collect later tonight,”</i> Miranda drawls ominously.", parse);
+		}, 1.0, function() { return miranda.Nasty(); });
+
+		scenes.Get();
+		
+		Text.Flush();
+		Scenes.Miranda.MaidensBanePrompt();
+	});
 }
 
 Scenes.Miranda.MaidensBaneNice = function() {
