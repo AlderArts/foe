@@ -770,6 +770,9 @@ Scenes.Miranda.TalkConquests = function(atBar) {
 	
 	miranda.flags["ssRot"] = sceneId + 1;
 	
+	if(miranda.flags["ssRotMax"] < sceneId)
+		miranda.flags["ssRotMax"] = sceneId;
+	
 	// Play scene
 	scenes[sceneId]();
 }

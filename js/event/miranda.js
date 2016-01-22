@@ -57,6 +57,7 @@ function Miranda(storage) {
 	this.RestFull();
 	
 	this.flags["Met"]      = Miranda.Met.NotMet;
+	this.flags["Talk"]     = 0; // bitmask
 	this.flags["Herm"]     = 0; // Know she is a herm
 	this.flags["Attitude"] = Miranda.Attitude.Neutral;
 	this.flags["Thief"]    = 0;
@@ -103,6 +104,10 @@ Miranda.Met = {
 	Met    : 1,
 	Tavern : 2,
 	TavernAftermath : 3
+};
+
+Miranda.Talk = {
+	Kids : 1
 };
 
 Miranda.Public = {
@@ -1834,7 +1839,7 @@ Scenes.Miranda.BarChatOptions = function(options, back) {
 			// First
 			if(miranda.flags["Forest"] == 0) {
 				miranda.flags["Forest"] = 1;
-				Text.Add("<i>“You said you have been in the big forest, didn't you?”</i> She asks you. <i>“Not that you could miss it, it's practically crawling over our walls.”</i> You nod and tell her about the various strange creatures you've heard inhabits it. <i>“It's a very wild place, where one shouldn't walk around unprepared,”</i> she notes, <i>“you might get some nasty surprises otherwise.”</i>", parse);
+				Text.Add("<i>“You said you have been in the big forest, didn't you?”</i> She asks you. You nod and tell her about the various strange creatures you saw there. <i>“That is a very wild place where one shouldn't walk around unprepared,”</i> she notes. <i>“You might get some nasty surprises otherwise.”</i>", parse);
 				Text.Flush();
 				
 				//[Sure][Nah]
@@ -1875,17 +1880,17 @@ Scenes.Miranda.BarChatOptions = function(options, back) {
 				
 				var scenes = new EncounterTable();
 				scenes.AddEnc(function() {
-					Text.Add("<i>“Ok,”</i> she begins, <i>“you know those big wolves that prowl around there? Did you know that some of them used to be people?”</i> She goes on to explain that overuse of certain substances enhancing their animal attributes can change a persons body and mind so much that they lose themselves.", parse);
+					Text.Add("<i>“Okay,”</i> she begins. <i>“You know those big wolves that prowl around there? Did you know that some of them used to be people?”</i> She goes on to explain that overuse of certain substances enhancing their animal attributes can change a person’s body and mind so much that they lose themselves.", parse);
 					Text.NL();
-					Text.Add("<i>“As long as you keep your wits about you, you should be fine,”</i> she finishes, ordering another mug of mead. <i>“Who knows, I might like having a pet around though...”</i> she adds teasingly. <i>“Just be careful, ok?”</i>", parse);
+					Text.Add("<i>“As long as you keep your wits about you, you should be fine,”</i> she finishes, ordering another mug of mead. <i>“Who knows, I might like having a pet around though…”</i> she adds teasingly. <i>“Just be careful, ok?”</i>", parse);
 				}, 1.0, function() { return true; });
 				scenes.AddEnc(function() {
-					Text.Add("<i>“The goblin tribes of the deeper woods are a weird bunch,”</i> she muses, taking a long draft of the strong mead in her cup. <i>“They are so constantly mad with lust that they fuck like rabbits. Yet they somehow keep their numbers down with a surprisingly high fatality rate,”</i> she ponders that a bit. <i>“It's probably because they are really, really stupid,”</i> she decides. <i>“Just be careful that they don't gang up on you.”</i>", parse);
+					Text.Add("<i>“The goblin tribes of the deeper woods are a weird bunch,”</i> she muses, taking a long draft of the strong mead in her cup. <i>“They are so constantly mad with lust that they fuck like rabbits, yet they somehow keep their numbers down with a surprisingly high fatality rate,”</i> she ponders that a bit. <i>“It’s probably because they are really, really stupid,”</i> she decides, <i>“just be careful that they don't gang up on you.”</i>", parse);
 				}, 1.0, function() { return true; });
 				scenes.AddEnc(function() {
-					Text.Add("<i>“There are some wild feline beasts running around the forest,”</i> she informs you, <i>“they may look cute, but be very careful around them. Unlike the domesticated house cats you might see here in the city, these are natural predators, and are very dangerous. Don't head into their territory unless you have some kind of death wish.”</i>", parse);
+					Text.Add("<i>“There are some wild feline beasts running around the forest,”</i> she informs you. <i>“They may look cute, but be very careful around them. Unlike the domesticated house cats you might see here in the city, these are natural predators, and are very dangerous. Don't head into their territory unless you have some kind of death wish.”</i>", parse);
 				}, 1.0, function() { return true; });
-				
+
 				scenes.Get();
 				Text.Flush();
 				
@@ -1894,6 +1899,123 @@ Scenes.Miranda.BarChatOptions = function(options, back) {
 		}, enabled : true,
 		tooltip : "Ask her about the forest surrounding Rigard."
 	});
+	
+	
+	options.push({nameStr : "Outlaws",
+		tooltip : Text.Parse("Ask her about the rebels in the forest.", parse),
+		enabled : true,
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>“The Outlaws, huh.”</i> Miranda pauses for a second, taking a long drink from her tankard. <i>“Don’t get me wrong, it’s hard to stand on their side when they start ambushing caravans and burning down countryside manors, but I can at least see where they are coming from.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“The rebellion and the war… those were rough times. Don’t remember much of it, what with it being over twenty years ago, and not particularly interested in the politics of it. Some people with loads of money were jealous of other people with lots of money, some princess was kidnapped and killed, and somehow all morphs in the kingdom were put at fault for it.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“A lot of dissidents were hunted down and killed in the chaos, and the surviving ones banded together, claiming to fight for the common people.”</i> She takes another swig. <i>“Dunno about that, sure as hell never helped me with anything. They may talk about lofty morals and corrupt noblemen - heck, some of it they or spot on with - but seeing their criminal activity, it’s hard to look at them and not see a bunch of bandits.”</i>", parse);
+			Text.Flush();
+			
+			back();
+		}
+	});
+	options.push({nameStr : "Rigard",
+		tooltip : Text.Parse("Ask her about the city she calls home.", parse),
+		enabled : true,
+		func : function() {
+			Text.Clear();
+			var scenes = new EncounterTable();
+			
+			scenes.AddEnc(function() {
+				Text.Add("<i>“There’s a merchant’s district where most of the shops and markets are located,”</i> Miranda tells you. <i>“Don’t go there too often, my job and lifestyle doesn’t exactly afford me luxury items.”</i>", parse);
+				Text.NL();
+				Text.Add("She ponders a bit.", parse);
+				Text.NL();
+				Text.Add("<i>“If anything, I’d like to buy something from the Pale Flame if I had the cash. That salamander seems to have a gift for weapon making. Would certainly be a step up from the junk the Watch doles out. Those swords are more fit for bashing than slashing.”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“Watch out for that creep Donovan, though,”</i> she warns you. <i>“Always be wary of someone trying to sell you used armor.”</i>", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("<i>“The slums aren’t such a bad place, you know. Bit less safe, due to it being outside the walls, but it breeds hardy people. Bit gruff, but you get used to them. Certainly beats some posh people I’ve come across when it comes to conversation. Never understood how a drop of ‘old blood’ and a bag of cash from daddy can sour someone’s personality that much.”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“Case and point, attended a break-in at some noble mansion near the plaza. The lady of the house looked like she was going to break her neck, the way she was trying to look down her nose at us. Ever seen someone try to look down on a centaur almost twice their height?”</i>", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("The two of you chat a bit about Rigard. <i>“Well, it's a nice enough place, all things considered,”</i> Miranda concedes. <i>“The booze is passable, and I have a decent job that brings the dough in.”</i> She grins widely. <i>“Nightlife is a real kicker, and now I have you around to keep me entertained!”</i>", parse);
+				player.AddLustFraction(0.1);
+				miranda.AddLustFraction(0.1);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("You ask Miranda about the royal family living in the castle. Her mood darkens immediately, and she spits on the floor besides the table.", parse);
+				Text.NL();
+				Text.Add("<i>“Rigard may be my home, but don’t think for a second I’ve got anything but scorn for that bunch. Fucking aristocrats...”</i>", parse);
+				Text.NL();
+				Text.Add("When you ask her why she thinks that way, she gives you a deadpan stare. <i>“Try living in Rigard for a week as a morph, might give you an idea why I left to be a merc.”</i>", parse);
+				Text.NL();
+				Text.Add("Well, what about the rest of the royals?", parse);
+				Text.NL();
+				Text.Add("<i>“Heh, they are a right depraved bunch,”</i> Miranda laughs, a wicked grin playing across her features. <i>“There is plenty a rumor about the dear queen, and don’t get me started on the kids. It’s common knowledge they hit the sack together, and you’d have to look hard to find a girlier prince than Rani.”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“...Still, I’d tap that.”</i>", parse);
+			}, 1.0, function() { return true; });
+			
+			scenes.Get();
+			Text.Flush();
+
+			back();
+		}
+	});
+	var kidsFirst = !(miranda.flags["Talk"] & Miranda.Talk.Kids);
+	options.push({nameStr : "Kids",
+		tooltip : Text.Parse(kidsFirst ? "So… uh, from her tales, it sounds like she gets around a lot. Isn’t she ever worried about fathering a bastard? Or getting pregnant herself?" : "Has she ever considered getting kids?", parse),
+		enabled : miranda.flags["ssRotMax"] >= 3 && miranda.flags["bgRotMax"] >= 5 && miranda.Relation() >= 10,
+		func : function() {
+			Text.Clear();
+			if(kidsFirst) {
+				Text.Add("<i>“I know that judging look,”</i> Miranda growls, squinting at you. <i>“‘How can she go sleeping around like that when she knows how difficult it is to grow up without parents?’ Is that it?”</i>", parse);
+				Text.NL();
+				Text.Add("Well, perhaps not the way you would phrase it… but isn’t it true though?", parse);
+				Text.NL();
+				Text.Add("The dobie regards you thoughtfully. It’s difficult to read her, but her usually confident and assertive expression is somewhat dampened… perhaps even slightly hurt.", parse);
+				Text.NL();
+				Text.Add("<i>“Not that it’s any of your business,”</i> she begins guardedly, <i>“this is just so you don’t get the wrong impression. It’s not a topic I take lightly, nor something I take chances on.”</i>", parse);
+				Text.NL();
+				Text.Add("You remain silent.", parse);
+				Text.NL();
+				Text.Add("<i>“I don’t plan on putting someone else through what me and my sister had to live through growing up. If I ever <b>did</b> get a kid, you could be damn sure I’d take care of the little rascal. Not that I have any such plans.”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“There’s certain herbs you can take… suffice to say, I take precautions. It’s worked too, as far as I can tell. No dobie litter running around Rigard, and not for lack of opportunity, believe me.”</i>", parse);
+			}
+			else {
+				Text.Add("You ask her if she’d ever consider getting kids.", parse);
+				Text.NL();
+				parse["gen"] = player.FirstVag() ? "You offering" : "You think I’d let you put a baby in me";
+				Text.Add("<i>“Why is it such a big issue for you? [gen]?”</i> Miranda seems amused by your inquiry. <i>“I’ve made up my mind about this, not about to change it at the drop of a hat.”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“Besides, I can’t be showing favoritism. If I knock up one gal, there’s going to be lines forming. I could probably handle one or two tykes running around, but several dozen?”</i> she shakes her head at the thought. <i>”As for spoiling my figure with pups... forget about it,</i> she adds, almost as an afterthought.", parse);
+				Text.NL();
+				Text.Add("...Right. Let’s just drop the subject for now.", parse);
+			}
+			Text.Flush();
+			
+			back();
+		}
+	});
+	/*
+#reqs? Seen a few of the “conquest” scenes + backstory up to leaving Rigard? some rel?
+*/
+	
+	/* TODO 
+	options.push({nameStr : "",
+		tooltip : Text.Parse("", parse),
+		enabled : true,
+		func : function() {
+			Text.Clear();
+			Text.Add("", parse);
+			Text.NL();
+			Text.Add("", parse);
+			Text.Flush();
+		}
+	});
+	*/
+	
 	if((rigard.Krawitz["Q"] >= Rigard.KrawitzQ.CaughtTerry) && (terry.flags["Saved"] == Terry.Saved.NotStarted)) {
 		options.push({ nameStr : "Thief",
 			func : function() {
