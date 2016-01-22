@@ -1763,9 +1763,9 @@ Scenes.Miranda.BarChatOptions = function(options, back) {
 			Text.Add("You ask Miranda about her job in the City Watch. What’s the hot gossip? Any juicy details on criminals?", parse);
 			Text.NL();
 			
-			var scenes = new EncounterTable();
+			var scenes = [];
 			
-			scenes.AddEnc(function() {
+			scenes.push(function() {
 				Text.Add("<i>“Walking the beat keeps the coin coming, though it isn’t as exciting as mercenary work. Believe it or not, things are usually pretty quiet here.”</> She shrugs irritably. <i>“I hate doing paperwork - give me a thug to beat up any day of the week.”</i>", parse);
 				Text.NL();
 				Text.Add("With a city this size, there must always be something, right?", parse);
@@ -1777,8 +1777,8 @@ Scenes.Miranda.BarChatOptions = function(options, back) {
 					player.AddLustFraction(0.1);
 					miranda.AddLustFraction(0.1);
 				}
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			});
+			scenes.push(function() {
 				Text.Add("She tells you a few tidbits of information about her comrades in the guard and their peculiarities. You are particularly surprised that the gruff wolf usually standing guard at the main gates is into writing sleazy erotic poetry, and has quite the following in the female population of the town.", parse);
 				Text.NL();
 				Text.Add("<i>“He is way too shy to tell anyone about it though, so he writes under an alias”</i>, she grins. <i>“You didn't hear that from me though.”</i>", parse);
@@ -1786,38 +1786,44 @@ Scenes.Miranda.BarChatOptions = function(options, back) {
 				Text.Add("Any particular style he specializes in?", parse);
 				Text.NL();
 				Text.Add("<i>“It’s mostly romance schlock, not really my thing. I tried reading it once, but I got kinda bored. Could use some more action, if you know what I mean.”</i> She winks at you.", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			});
+			scenes.push(function() {
 				Text.Add("She tells you a bit more about her guard troop.", parse);
 				Text.NL();
 				Text.Add("<i>“Did you meet the centaur yet?”</i> she asks you. <i>“He is the strongest guy around here, and a really good archer too.”</i> She brings up a few stories about the two of them hunting together in the forest. Seems like a dependable guy.", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
-				Text.Add("<i>“Tell the truth, the most action there’s been recently is that whole mess with Krawitz. That fox was damn slippery, that’s for sure.”</i> Miranda looks irritated. <i>“That thing with Preston after snagged away all the joy I could get from it, though. The Royal Guard always finds a way to shove their feet in where they aren’t wanted and claim glory for work they haven’t done.”</i>", parse);
-				Text.NL();
-				Text.Add("She sighs, taking another draft of her drink.", parse);
-				Text.NL();
-				Text.Add("<i>“Not that they would’ve showed up at all if a noble wasn’t involved. Heck, at this point I doubt they’d bat an eye even if the city stood in flames. If the right person gave the orders, they’d probably be the ones lighting the matches. Whole damn organization is rotten to the core.”</i>", parse);
-			}, 1.0, function() { return rigard.RoyalAccess() && !terry.Recruited(); }); //Finished Krawitz, but didn't recruit Terry yet
-			scenes.AddEnc(function() {
-				Text.Add("<i>“There’s been some ugly rumors about that brothel, the Shadow Lady.”</i> Miranda frowns. <i>“Nothing concrete, but word on the street is that some of their services aren’t exactly legal. People who go there often… change. Not that it’s likely to come to anything... the place is off limits to the Watch.”</i>", parse);
-				Text.NL();
-				Text.Add("How come? It sounds like if there’s precedent, it’d at least warrant an investigation.", parse);
-				Text.NL();
-				Text.Add("<i>“Yeah… not going to happen. The management seems fishy to me, but they have connections in high places. Possibly because of the customers. The kind of customers that bring an escort of Royal Guards on their outings to the whorehouses, if you catch my drift.”</i>", parse);
-				Text.NL();
-				if(belinda.Met())
-					Text.Add("What with her sister working at the brothel, you can understand that she’d be worried… Miranda seems to be very protective of Belinda, despite their estrangement.", parse);
-				else
-					Text.Add("For some reason, she looks really bothered about the whole thing, but you decide to not press the issue.", parse);
-			}, 1.0, function() { return !Scenes.Global.PortalsOpen(); });  //Act 1
-			scenes.AddEnc(function() {
-				Text.Add("<i>“Well, it has been a lot more entertaining with you around, I'll tell you that!”</i> she giggles. <i>“The other guys there are complaining that my mind is not on the job any more, due to... distractions,”</i> she grins as you blush faintly.", parse);
-				Text.NL();
-				Text.Add("<i>“It's not a problem though, I can do this job in my sleep... not that you’d ever let me sleep, honey,”</i> she places a big sloppy kiss on your cheek.", parse);
-				player.AddLustFraction(0.1);
-				miranda.AddLustFraction(0.1);
-			}, 1.0, function() { return miranda.Relation() >= 25; });
+			});
+			if(rigard.RoyalAccess() && !terry.Recruited()) {
+				scenes.push(function() {
+					Text.Add("<i>“Tell the truth, the most action there’s been recently is that whole mess with Krawitz. That fox was damn slippery, that’s for sure.”</i> Miranda looks irritated. <i>“That thing with Preston after snagged away all the joy I could get from it, though. The Royal Guard always finds a way to shove their feet in where they aren’t wanted and claim glory for work they haven’t done.”</i>", parse);
+					Text.NL();
+					Text.Add("She sighs, taking another draft of her drink.", parse);
+					Text.NL();
+					Text.Add("<i>“Not that they would’ve showed up at all if a noble wasn’t involved. Heck, at this point I doubt they’d bat an eye even if the city stood in flames. If the right person gave the orders, they’d probably be the ones lighting the matches. Whole damn organization is rotten to the core.”</i>", parse);
+				}); //Finished Krawitz, but didn't recruit Terry yet
+			}
+			if(!Scenes.Global.PortalsOpen()) {
+				scenes.push(function() {
+					Text.Add("<i>“There’s been some ugly rumors about that brothel, the Shadow Lady.”</i> Miranda frowns. <i>“Nothing concrete, but word on the street is that some of their services aren’t exactly legal. People who go there often… change. Not that it’s likely to come to anything... the place is off limits to the Watch.”</i>", parse);
+					Text.NL();
+					Text.Add("How come? It sounds like if there’s precedent, it’d at least warrant an investigation.", parse);
+					Text.NL();
+					Text.Add("<i>“Yeah… not going to happen. The management seems fishy to me, but they have connections in high places. Possibly because of the customers. The kind of customers that bring an escort of Royal Guards on their outings to the whorehouses, if you catch my drift.”</i>", parse);
+					Text.NL();
+					if(belinda.Met())
+						Text.Add("What with her sister working at the brothel, you can understand that she’d be worried… Miranda seems to be very protective of Belinda, despite their estrangement.", parse);
+					else
+						Text.Add("For some reason, she looks really bothered about the whole thing, but you decide to not press the issue.", parse);
+				});  //Act 1
+			}
+			if(miranda.Relation() >= 25) {
+				scenes.push(function() {
+					Text.Add("<i>“Well, it has been a lot more entertaining with you around, I'll tell you that!”</i> she giggles. <i>“The other guys there are complaining that my mind is not on the job any more, due to... distractions,”</i> she grins as you blush faintly.", parse);
+					Text.NL();
+					Text.Add("<i>“It's not a problem though, I can do this job in my sleep... not that you’d ever let me sleep, honey,”</i> she places a big sloppy kiss on your cheek.", parse);
+					player.AddLustFraction(0.1);
+					miranda.AddLustFraction(0.1);
+				});
+			}
 			
 			var sceneId = miranda.flags["RotGuard"];
 			if(sceneId >= scenes.length) sceneId = 0;
