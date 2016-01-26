@@ -134,13 +134,13 @@ Scenes.Maria.DeadDrops.First.Start = function() {
 		var p1 = party.Get(1);
 		parse["comp"] = group ? "your companions" : p1.name;
 		if(group) {
-			parse = p1.ParserPronouns(parse);
-			parse["s"] = p1.plural() ? "" : "s";
-		}
-		else {
 			parse["heshe"] = "they";
 			parse["himher"] = "them";
 			parse["s"] = "";
+		}
+		else {
+			parse = p1.ParserPronouns(parse);
+			parse["s"] = p1.plural() ? "" : "s";
 		}
 	}
 	

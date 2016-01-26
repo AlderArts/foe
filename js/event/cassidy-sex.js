@@ -942,11 +942,11 @@ Scenes.Cassidy.SparSex.Win = function() {
 						Text.Clear();
 						Text.Add("Despite the heat radiating off her body, Cass isn’t sweating in the slightest at all, and grins maniacally as you lead her back into the building. She leans her warhammer against the wall, then whisks the both of you into her room, pulling at her shirt and unbuckling her belt even before you’ve reached the bed.", parse);
 						Text.NL();
-						Text.Add("<i>“Dunno why, but I always feel extra alive when I’m done playing with you, ace. It’s not when I feel when I’m struck by inspiration, but it’s pretty darn strong, if strong in a different way… damn it, damn it, damn it.</i>", parse);
+						Text.Add("<i>“Dunno why, but I always feel extra alive when I’m done playing with you, ace. It’s not like I feel when I’m struck by inspiration, but it’s pretty darn strong, if strong in a different way… damn it, damn it, damn it.</i>", parse);
 						Text.NL();
 						Text.Add("<i>“Hey, why do you still have those on? Get them off! We’re getting started here!”</i>", parse);
 						Text.NL();
-						Text.Add("You waste no time in divesting yourself of your weapons and armor, then move to join Cass. Now, what are you up for this evening?", parse);
+						Text.Add("You waste no time in divesting yourself of your gear, then move to join Cass. Now, what are you up for this evening?", parse);
 						Text.Flush();
 
 						Scenes.Cassidy.Sex.IndoorPrompt();

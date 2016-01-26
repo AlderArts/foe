@@ -2074,7 +2074,7 @@ Scenes.Cveta.Performance = function() {
 		Text.Add("At long last, Cveta’s song begins to fade, the songstress lingering on her last few notes before letting the music trail off into nothingness. With careful deliberation, she folds in upon herself, takes a step back, then casts her gaze over her audience to survey her handiwork.", parse);
 
 		Text.NL();
-		Text.Add("You feel more charmy.", parse, 'bold');
+		Text.Add("You feel more charming.", parse, 'bold');
 		
 		_.each(party.members, function(ent) {
 			Status.Buff(ent, {hours: 24, Cha: 1.1});

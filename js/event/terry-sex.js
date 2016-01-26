@@ -4925,7 +4925,7 @@ Scenes.Terry.SexCatchAnal = function() {
 				Text.Add("Your [wingsDesc] spread themselves in invitation, rewarded with Terry’s soft touch as the [foxvixen] kneads the muscles at their base before tenderly stroking out along their lengths and then returning. ", parse);
 			Text.Add("Terry’s hands busily massage your neck and shoulders, loosening the tension in your muscles. You arch your back to better draw [hisher] attentions, making the [foxvixen] chuckle. Terry’s [tbreastsDesc] touch your back as [heshe] bends over, leaning [himher]self across your torso.", parse);
 			Text.NL();
-			Text.Add("[HeShe] nuzzles you softly, the new position helping him go deeper inside you. You can feel [hisher] knot batting your [buttDesc], as if asking to be allowed in. Yet Terry makes no effort to push past your barrier. <i>“How does this feel?”</i> [heshe] asks, hugging you from behind.", parse);
+			Text.Add("[HeShe] nuzzles you softly, the new position helping [himher] go deeper inside you. You can feel [hisher] knot batting your [buttDesc], as if asking to be allowed in. Yet Terry makes no effort to push past your barrier. <i>“How does this feel?”</i> [heshe] asks, hugging you from behind.", parse);
 			Text.NL();
 			Text.Add("It feels wonderful, you reply, making no effort to hide the pleased purr underlying your words. In a playful act, you clench your buttocks, feeling Terry’s knot grinding between your [buttDesc] cheeks. You wriggle your hips slightly, caressing the bulge of flesh within your anal cleavage, and ask why [heshe] is holding that back - you’re sure the two of you can make it fit, if [heshe] wants...", parse);
 			Text.NL();
@@ -7226,7 +7226,7 @@ Scenes.Terry.SexHaveADrinkBreasts = function() {
 		Text.Add("One final wet slurp across the nipple before your tongue withdraws. You descend on Terry’s chest, jaws agape to envelop all of [hisher] petite teat. Warm, fuzzy breastflesh fills your mouth as your lips seal themselves around it, and you suck softly as you seek the warm deliciousness within.", parse);
 	}
 	else if(terry.Cup() <= Terry.Breasts.Bcup) {
-		Text.Add("Looking over Terry’s chest, you see the undeniable curves of [hisher] perky breasts. The fluff that would usually cover [hisher] nipples has since receded, exposing the bottom of half of  the [foxvixen]’s cleavage. There’s still plenty of soft fur for you to play with, should you feel inclined to.", parse);
+		Text.Add("Looking over Terry’s chest, you see the undeniable curves of [hisher] perky breasts. The fluff that would usually cover [hisher] nipples has since receded, exposing the bottom half of the [foxvixen]’s cleavage. There’s still plenty of soft fur for you to play with, should you feel inclined to.", parse);
 		Text.NL();
 		Text.Add("You smile and gently sweep Terry’s fluffy fur away, exposing [hisher] hand-filling breasts to your viewing pleasure. They are perky and soft, just big enough to give you a handful as you reach to knead each mound. The [foxvixen] inhales sharply, and you can feel [hisher] nipples hardening against your palms.", parse);
 		Text.NL();

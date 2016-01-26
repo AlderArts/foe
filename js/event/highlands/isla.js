@@ -664,7 +664,7 @@ Scenes.Isla.TalkPrompt = function() {
 			Text.NL();
 			Text.Add("<i>“Most are, to be honest. What we are aside, this place has a tendency to mold people into its liking. The old stories had it that when many of the peoples first arrived, they brought with them their own ways of doing things from the places they’d come from. Over time, though, living up in these mountains, they changed to suit the land rather than the other way around.</i>", parse);
 			Text.NL();
-			Text.Add("<i>“My tribe, we’ve got a stone circle. The zebras, they’ve got a spring. We mustelids dance to bring the rain, and the jackals dance to drive it away. I’m sure the minotaur do their own rituals and have their own sacred places, too, although I’ve never stopped to ask those three whelps about it. Point I’m getting at, though, is that all the highland tribes are quite the same in what we do. It’s the what it do it <b>with</b> and why we do it that’s the important difference.”</i>", parse);
+			Text.Add("<i>“My tribe, we’ve got a stone circle. The zebras, they’ve got a spring. We mustelids dance to bring the rain, and the jackals dance to drive it away. I’m sure the minotaur do their own rituals and have their own sacred places, too, although I’ve never stopped to ask those three whelps about it. Point I’m getting at, though, is that all the highland tribes are quite the same in what we do. It’s what we do it <b>with</b> and why we do it that’s the important difference.”</i>", parse);
 			Text.NL();
 			Text.Add("Ah.", parse);
 			Text.NL();
