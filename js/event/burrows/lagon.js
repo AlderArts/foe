@@ -1189,7 +1189,7 @@ Scenes.Lagon.RulerGetFuckedEntrypoint2 = function(angry, target, opheliaPresent)
 		bunny.Fuck(bunny.FirstCock(), 1);
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
-		Text.Add("<i>“It seems like you’ve gathered the attention of my daughters, my little slut,”</i> the king grunts in your ear. You raise your eyes, and sure enough, two pretty lagomorph are standing nearby beaming down at you. <i>“We wouldn’t want to deprive them of their treats, now would we?”</i>", parse);
+		Text.Add("<i>“It seems like you’ve gathered the attention of my daughters, my little slut,”</i> the king grunts in your ear. You raise your eyes, and sure enough, two pretty does are standing nearby beaming down at you. <i>“We wouldn’t want to deprive them of their treats, now would we?”</i>", parse);
 		Text.NL();
 		Text.Add("Saying so, Lagon lifts you up by your armpits. Still lodged firmly inside you, the king takes his throne again, letting you sit in his lap, back leaning against his chest. Returning his hands to your hips, he elevates you until only his tip remains inside, then let gravity do the work. Your [cocks] twitch[notEs] ecstatically as you sink down, the entire length of his turgid shaft rubbing against your prostate. The girls lean in eagerly, licking and sucking on your cock[s], hungrily lapping up your pre.", parse);
 		Text.NL();
