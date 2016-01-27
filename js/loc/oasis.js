@@ -144,10 +144,9 @@ Scenes.Oasis.CaravanShop = function(back) {
 
 Scenes.Oasis.DesertCaravanEncounter = function() {
 	var parse = {
-		chestDesc  : function() { return player.FirstBreastRow().Short(); },
-		tongueDesc : function() { return player.TongueDesc(); },
-		legs       : function() { return player.LegsDesc(); }
+		
 	};
+	parse = player.ParserTags(parse);
 	
 	var lizan = new Entity();
 	var rand = Math.random();
@@ -207,17 +206,17 @@ Scenes.Oasis.DesertCaravanEncounter = function() {
 	
 	if(day) {
 		parse["dir"] = direction == Direction.Kingdom ? "kingdom" : "Oasis";
-		Text.Add("As the sun burns overhead, you discern the thuds of many feet striking the sand on the opposite side of a large dune, and feeling curious, decide to investigate. Unsure what you’ll find, you peek cautiously over the crest of the dune. Your shoulders slump and you relax, however, as you see that it's just a caravan plodding along toward the [dir].", parse);
+		Text.Add("As the sun burns overhead, you discern the thuds of many feet striking the sand on the opposite side of a large dune and, feeling curious, decide to investigate. Unsure what you’ll find, you peek cautiously over the crest of the mound. Your shoulders slump and you relax, however, as you see that it's just a caravan plodding along toward the [dir].", parse);
 		Text.NL();
 		if(oasis.SeenRakh())
 			Text.Add("The caravan is pulled by strong-looking Rakhs, their webbed feet leaving wide footprints in the sand as they drag the laden sand sleds behind them. You have to admit there’s a certain majesty to a column of the reptilian beasts marching stoically through the desert.", parse);
 		else
 			Text.Add("The caravan is pulled by huge fearsome-looking reptilian creatures with webbed feet, leaving wide footprints in the sand as they drag the laden sand sleds behind them. You’ve never seen such strange beasts before… but apparently these are domesticated.", parse);
 		Text.NL();
-		Text.Add("You decide it’s rare enough to see a friendly soul out here that any meeting is a good reason to talk. You head for the front of the procession, sand sliding under your feet, and when you get close, the caravan master greets you with a friendly wave. You meet up with [rhimher] and exchange introductions, matching pace with the caravan.", parse);
+		Text.Add("You decide it’s rare enough to see a friendly soul out here that any meeting is a good reason to talk. You head for the front of the procession, sand sliding under your [feet], and when you get close, the caravan master greets you with a friendly wave. You meet up with [rhimher] and exchange introductions, matching pace with the caravan.", parse);
 	}
 	else {
-		Text.Add("You see the faint orange glow of campfires in the distance, and feeling curious, decide to investigate. As you get closer, you are able to distinguish the shapes of sand sleds around the central fire, ", parse);
+		Text.Add("You see the faint orange glow of campfires in the distance and, feeling curious, decide to investigate. As you get closer, you are able to distinguish the shapes of sand sleds around the central fire, ", parse);
 		if(oasis.SeenRakh())
 			Text.Add("with the massive Rakhs that pull them resting nearby.", parse);
 		else
@@ -273,7 +272,7 @@ Scenes.Oasis.DesertCaravanEncounter = function() {
 			}, enabled : true,
 			tooltip : Text.Parse("See what the caravan master has to offer.", parse)
 		});
-		options.push({ nameStr : "Rumours",
+		options.push({ nameStr : "Rumors",
 			func : function() {
 				Text.Clear();
 				if(busy) busyFunc();
@@ -286,7 +285,7 @@ Scenes.Oasis.DesertCaravanEncounter = function() {
 					Text.NL();
 					Text.Add("Does [rheshe] know what’s happening?", parse);
 					Text.NL();
-					Text.Add("<i>“Not a clue. There have always been some that didn’t make it, but never this many. Something must’ve changed in the desert.”</i> [rHeShe] shrugs. <i>“Either way, the goods must flow, so we make the trip and do our best to stay vigilant.", parse);
+					Text.Add("<i>“Not a clue. There have always been some that didn’t make it, but never this many. Something must’ve changed in the desert.”</i> [rHeShe] shrugs. <i>“Either way, the goods must flow, so we make the trip and do our best to stay vigilant.</i>", parse);
 				}, 1.0, function() { return true; });
 				scenes.AddEnc(function() {
 					Text.Add("<i>“There’s a lot of talk going of people wanting out of the caravan business,”</i> [rheshe] says, <i>“or of wanting to switch to a route from Rigard to the Free Cities, at least. And I can relate - really, I can - insurance is going up, merchants are cutting back on shipments, guards are getting dearer… these are tough times.”</i>", parse);
@@ -315,7 +314,7 @@ Scenes.Oasis.DesertCaravanEncounter = function() {
 				
 				prompt();
 			}, enabled : rumors,
-			tooltip : Text.Parse("Ask if there are any interesting rumours [rheshe] can share.", parse)
+			tooltip : Text.Parse("Ask if there are any interesting rumors [rheshe] can share.", parse)
 		});
 		var tooltip = "It sounds like the caravan master is up for more than just trade.";
 		if(lizan.Gender() == Gender.herm)
@@ -345,7 +344,7 @@ Scenes.Oasis.DesertCaravanEncounter = function() {
 				Text.NL();
 				Text.Add("The caravan master smiles, noticing your reaction. <i>“I’ve been able to buy some minor enchantments,”</i> [rheshe] explains, stroking your hand, <i>“but the most important part is that the trooma wood is porous, providing excellent insulation against the weather.”</i>", parse);
 				Text.NL();
-				Text.Add("As [rheshe] speaks, [rheshe] gently turns you, until you’re standing face to face, barely more than a handspan apart. This close, you smell the stale scent of desert clinging to [rhimher], can distinguish every individual scale along [rhisher] cheekbones.", parse);
+				Text.Add("As [rheshe] speaks, [rheshe] gently turns you until you’re standing face to face, barely more than a handspan apart. This close, you smell the stale scent of desert clinging to [rhimher], and can distinguish every individual scale along [rhisher] cheekbones.", parse);
 				Text.NL();
 				if(tattoos) {
 					Text.Add("You trace your hand along the weave of blue ink twining around [rhisher] arm. To your surprise, the scales are slightly raised along it. You look up at your companion in curiosity, and find [rhimher] grinning at you.", parse);
@@ -358,23 +357,22 @@ Scenes.Oasis.DesertCaravanEncounter = function() {
 					Text.Add("[rHeShe] traces [rhisher] fingers along your neck before cupping your chin in [rhisher] palm, and drawing closer", parse);
 				Text.Add(" until you feel [rhisher] moist breath brushing against your lips. ", parse);
 				if(lizan.FirstBreastRow().Size() > 3)
-					Text.Add("Her breasts press against your [chestDesc] as she", parse);
+					Text.Add("Her breasts press against your [breasts] as she", parse);
 				else if(player.FirstBreastRow().Size() > 3)
 					Text.Add("Your breasts press against his toned chest as he", parse);
 				else
 					Text.Add("He", parse);
 				Text.Add(" leans in, [rhisher] mouth pressing hungrily against yours. You wrap your arms around [rhimher], pressing your bodies tighter together, your lips parting eagerly to admit [rhisher] long, flexible tongue into your mouth.", parse);
 				Text.NL();
-				Text.Add("The caravan master moans in pleasure as you return the favor, tracing [rhisher] teeth with your [tongueDesc] before pushing inside. The two of you stand locked in breathless pleasure for a long minute, while your hands move down [rhisher] body, settling on [rhisher] butt and giving a firm squeeze. ", parse);
+				Text.Add("The caravan master moans in pleasure as you return the favor, tracing [rhisher] teeth with your [tongue] before pushing inside. The two of you stand locked in breathless arousal for a long minute. Your hands move down [rhisher] body, settling on [rhisher] butt and giving a firm squeeze. ", parse);
 				var tail = player.HasTail();
 				if(tail) {
-					parse["tailDesc"] = tail.Short();
-					Text.Add("You feel the lizan’s scaled tail brushing against your leg, and instinctively, your own [tailDesc] reaches out to meet it, twining together with it.", parse);
+					Text.Add("You feel the lizan’s scaled tail brushing against your leg, and instinctively your own [tail] reaches out to meet it, twining together with it.", parse);
 				}
 				else
 					Text.Add("The lizan’s scaled tail brushes against you, stroking back and forth excitedly, before twining around your [legs], gripping you tight.", parse);
 				Text.NL();
-				Text.Add("You part for a moment, breathing heavily, a string of saliva connecting your lips. The slitted eyes looking into yours are dilated in clear arousal, and the caravan master’s strong hands move to greedily grope your body.", parse);
+				Text.Add("You part for a moment, breathing heavily, a string of saliva connecting your lips. The slitted eyes looking into your [eyes] are dilated in clear arousal, and the caravan master’s strong hands move to greedily grope your body.", parse);
 				Text.NL();
 				Text.Add("You take the lead this time, biting playfully at [rhisher] lip. As you look up to meet [rhisher] unfocused gaze, the caravan master squirms in pleasure, making your teeth tug harder with [rhisher] movements. ", parse);
 				if(piercings)
@@ -383,22 +381,22 @@ Scenes.Oasis.DesertCaravanEncounter = function() {
 				Text.NL();
 				Text.Add("Nonetheless, you decide to pull back and give [rhimher] a little break… and focus your attention elsewhere. ", parse);
 				if(lizan.FirstCock()) {
-					Text.Add("Your hands glide down [rhisher] body, feeling the relief of toned muscles under your fingertips, until you reach [rhisher] hips. You stroke along [rhisher] butt, to the front of [rhisher] thighs, and inward. The hard pair of ridged cocks strain against the fabric of [rhisher] pants, desperately pressing into your palms.", parse);
+					Text.Add("Your hands glide down [rhisher] body, feeling the relief of toned muscles under your fingertips, until you reach [rhisher] hips. You stroke along [rhisher] butt to the front of [rhisher] thighs, and inward. The hard pair of ridged cocks strain against the fabric of [rhisher] pants, desperately pressing into your palms.", parse);
 					Text.NL();
 					Text.Add("Your strokes seem to reawaken your companion, and [rheshe] grabs hold of you, pushing you firmly toward the bed. You stumble going over backwards and land softly on the mattress with an involuntary squeal. The lizan is not far behind, dropping onto hands and knees on top of you, [rhisher] snout inches away from you.", parse);
 					Text.NL();
 				}
 				if(lizan.Gender() != Gender.male) {
-					Text.Add("You take hold of the bottom edge of the caravan master’s tunic, and pull up slowly, the tight garment catching on her voluptuous breasts. You struggle for a moment, until with a final tug, it releases them to a heavy bounce. <i>“Mm, yes,”</i> she breathes out. They’re even bigger than you suspected, the tunic apparently having squeezed them tight.", parse);
+					Text.Add("You take hold of the bottom edge of the caravan master’s tunic, and pull up slowly, the tight garment catching on her voluptuous breasts. You struggle for a moment until with a final tug, it releases them to a heavy bounce. <i>“Mm, yes,”</i> she breathes out. They’re even bigger than you suspected, the tunic apparently having squeezed them tight.", parse);
 					Text.NL();
 				}
 				if(lizan.Gender() == Gender.female) {
 					Text.Add("You give your companion a shove, pushing her down onto the bed with a squeal of surprise and follow her, crouching on top of her. ", parse);
 				}
 				if(lizan.Gender() != Gender.male) {
-					Text.Add("You meet her eyes for a moment, licking your lips, before you find her nipple and suck it into your mouth. Massaging the other heavy breast, you lap at the lizan’s teat, before rolling the rock hard nub between your lips.", parse);
+					Text.Add("You meet her eyes for a moment, licking your lips, before you find her nipple and suck it into your mouth. Massaging the other heavy breast, you lap at the lizan’s teat before rolling the rock hard nub between your lips.", parse);
 					Text.NL();
-					Text.Add("Your efforts are rewarded with your companion screaming loudly enough in pleasure that they probably heard the two of you in the next wagon over. She arches her back in pleasure, pressing her breasts harder into you, apparently seeking extra stimulation.", parse);
+					Text.Add("Your efforts are rewarded with your companion screaming loudly enough in pleasure that they probably heard the two of you in the next wagon over. She arches her back in ecstasy, pressing her breasts harder into you, apparently seeking extra stimulation.", parse);
 					Text.NL();
 					Text.Add("Instead, you stop your teasing for a moment, moving up face to face with the lizan. She is panting heavily with excitement, and her eyes are dilated, looking up at you desperately.", parse);
 					Text.NL();
