@@ -1025,7 +1025,7 @@ Scenes.Naga.DesertWinGetFuckedVag = function(enc, hypno) {
 	Text.Add("Lifting your face from the naga’s crotch, you leave her cock drenched in a mixture of pre-cum and your spit. Satisfied with the wet sheen coating her girthy erection, you raise your hips off of her face, hearing her inhale deeply, finally given a clear breath. Smiling down at her [hypno1] eyes and face covered in your juices, you stride over to her crotch[c].", parse);
 	Text.NL();
 	parse["hypno1"] = hypno ? ", hypnotized" : "";
-	Text.Add("Lowering yourself once more toward your scaly[hypno1] lover, you crouch down until the tip of the cock you fellated grinds against the soaked entrance to your [vagDesc]. Both of your voices rise in a shared exaltation of pleasure as you push your hips further down, spearing yourself on the naga’s huge member. As more of her length passes into your love tunnel, you reach down to your [clit] and begin rubbing it slowly. Your voice full of passion, you cry out, feeling the rush of a minor vaginal orgasm from the thickness of the invader inside you.", parse);
+	Text.Add("Lowering yourself once more toward your scaly[hypno1] lover, you crouch down until the tip of the cock you fellated grinds against the soaked entrance to your [vag]. Both of your voices rise in a shared exaltation of pleasure as you push your hips further down, spearing yourself on the naga’s huge member. As more of her length passes into your love tunnel, you reach down to your [clit] and begin rubbing it slowly. Your voice full of passion, you cry out, feeling the rush of a minor vaginal orgasm from the thickness of the invader inside you.", parse);
 	Text.NL();
 	
 	Sex.Vaginal(naga, player);
@@ -1116,9 +1116,10 @@ Scenes.Naga.DesertWinGetFuckedVag = function(enc, hypno) {
 
 Scenes.Naga.DesertWinTailpeg = function(opts) {
 	var parse = {
-		anusDesc : function() { return player.Butt().AnalShort(); }
+		
 	};
 	
+	parse = player.ParserTags(parse);
 	var next  = opts.next || PrintDefaultOptions;
 	var naga  = opts.naga || new Naga();
 	var hypno = opts.hypno || false;
@@ -1131,7 +1132,7 @@ Scenes.Naga.DesertWinTailpeg = function(opts) {
 			parse["hypno1"] = hypno ? "order" : "instruct";
 			parse["hypno2"] = hypno ? "entranced, " : "";
 			parse["hypno3"] = hypno ? "her " + player.mfTrue("master", "mistress") : "you";
-			Text.Add("Licking your lips, you [hypno1] the naga to put her tail to good use and fuck you in your [anus]. Her [hypno2]lusty [neyes] light up, clearly excited at the chance to please [hypno3]. You feel her serpentine lower body shift ever so slightly just before you feel a tickle at your lonely pucker. That tickle becomes a gentle push and in no time, her scaly appendage is probing inside your back door. More and more smooth, scaly skin enters you, and your anal passage stretches to accommodate. The feeling of fullness inside you is exquisite; your eyes roll back in their sockets as the sensation floods your body with warmth.", parse);
+			Text.Add("Licking your lips, you [hypno1] the naga to put her tail to good use and fuck you in your [anus]. Her [hypno2]lusty eyes light up, clearly excited at the chance to please [hypno3]. You feel her serpentine lower body shift ever so slightly just before you feel a tickle at your lonely pucker. That tickle becomes a gentle push and in no time, her scaly appendage is probing inside your back door. More and more smooth, scaly skin enters you, and your anal passage stretches to accommodate. The feeling of fullness inside you is exquisite; your eyes roll back in their sockets as the sensation floods your body with warmth.", parse);
 			Text.NL();
 			
 			Sex.Anal(naga, player);
