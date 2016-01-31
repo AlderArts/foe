@@ -451,7 +451,7 @@ Scenes.Lagon.Defeated.PunishmentPCCont = function(came) {
 	Text.NL();
 	Text.Add("You smirk to yourself; you thought that he’d warm up to it. Even as he clenches down as if his life depends on it, you keep pushing. Inch by teeth-gritting inch, you manage to wriggle your way inside, until he has taken you to ", parse);
 	if(p1cock.Knot())
-		Text.Add("just above your throbbing [knot].", parse);
+		Text.Add("just above your bulging [knot].", parse);
 	else
 		Text.Add("the very hilt.", parse);
 	Text.Add(" Looking over his shoulder, you can see that his own cock is throbbing like mad, visibly pulsating in his arousal.", parse);
