@@ -2635,6 +2635,13 @@ Scenes.Lagon.WinToOphelia = function() {
 	Encounter.prototype.onVictory.call(enc);
 }
 
+
+
+//TODO REMOVE
+// MARK: OLD LAGON DEFEATED CONTENT
+
+
+
 Scenes.Lagon.InteractDefeated = function() {
 	var parse = {
 		playername : player.name

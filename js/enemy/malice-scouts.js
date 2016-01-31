@@ -61,7 +61,7 @@ function CatboyMage(levelbonus) {
 	this.level             = level + (levelbonus || 0);
 	this.sexlevel          = 0;
 	
-	this.combatExp         = this.level;
+	this.combatExp         = this.level * 2;
 	this.coinDrop          = this.level * 5;
 	
 	this.body.SetRace(Race.Feline);
@@ -228,7 +228,7 @@ function CentaurMare(levelbonus) {
 	this.level             = level + (levelbonus || 0);
 	this.sexlevel          = 0;
 	
-	this.combatExp         = this.level;
+	this.combatExp         = this.level * 2;
 	this.coinDrop          = this.level * 5;
 	
 	this.body.SetRace(Race.Horse);
