@@ -104,6 +104,11 @@ Lagon.Talk = {
 Lagon.prototype.IsAtLocation = function(location) {
 	//if(burrows.LagonChained()) //Slave
 	location = location || party.location;
+	if(burrows.LagonChained()) {
+		if(burrows.LagonJudged()) return (location == world.loc.Burrows.Throne);
+		else return false;
+	}
+	else
 	//if(world.time.hour >= 9 && world.time.hour < 20)
 		return (location == world.loc.Burrows.Throne);
 	/*else

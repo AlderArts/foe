@@ -7,10 +7,12 @@ Scenes.Lagon.Defeated.RoomApproach = function() {
 	};
 	
 	Text.Clear();
-	Text.Add("", parse);
+	Text.Add("PLACEHOLDER", parse);
 	Text.NL();
 	Text.Add("", parse);
 	Text.Flush();
+	
+	Gui.NextPrompt();
 }
 
 Scenes.Lagon.Defeated.Punishment = function() {
@@ -370,7 +372,7 @@ Scenes.Lagon.Defeated.PunishmentPCCont = function(came) {
 	Text.Add("Smiling modestly, you assure her that it was nothing.", parse);
 	Text.NL();
 	if(came) {
-		Text.Add("<i>“And you such a huge load too. You sure you got enough saved up for my dear husband?”</i>", parse);
+		Text.Add("<i>“And you gave me such a huge load too. You sure you got enough saved up for my dear husband?”</i>", parse);
 		Text.NL();
 		Text.Add("You hear a muffled protest from Lagon, still subdued by the guards.", parse);
 		Text.NL();
@@ -761,7 +763,7 @@ Scenes.Lagon.Defeated.PunishmentVena = function() {
 	Text.NL();
 	Text.Add("From your position on the sidelines, you can’t resist shouting that it looks like Lagon and Roa have more in common than he thought.", parse);
 	Text.NL();
-	Text.Add("<i>“Shut up! - Haa... - Both of you! I d-don’t like this! - Ahn... - I <b>hate</b< this! Pull out now!”</i>", parse);
+	Text.Add("<i>“Shut up! - Haa... - Both of you! I d-don’t like this! - Ahn... - I <b>hate</b> this! Pull out now!”</i>", parse);
 	Text.NL();
 	Text.Add("Smirking, you loudly ask why he’s still rock hard, if he hates it so much.", parse);
 	Text.NL();

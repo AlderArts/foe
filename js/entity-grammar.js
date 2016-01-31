@@ -118,6 +118,7 @@ Entity.prototype.ParserTags = function(parse, prefix, p1cock) {
 	parse[prefix + "cocks"]     = function() { return ent.MultiCockDesc(); }
 	parse[prefix + "cock"]      = function() { return p1cock.Short(); }
 	parse[prefix + "cockTip"]   = function() { return p1cock.TipShort(); }
+	parse[prefix + "knot"]      = function() { return p1cock.KnotShort(); }
 	parse[prefix + "balls"]     = function() { return ent.BallsDesc(); }
 	parse[prefix + "butt"]      = function() { return ent.Butt().Short(); }
 	parse[prefix + "anus"]      = function() { return ent.Butt().AnalShort(); }
