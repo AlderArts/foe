@@ -168,6 +168,11 @@ Entity.prototype.AddPerk = function(perk) {
 	this.perks.push(perk);
 }
 
+Entity.prototype.KnowsRecipe = function(item) {
+	var idx = this.recipes.indexOf(item); // Find the index
+	return (idx != -1);
+}
+
 Entity.prototype.AddAlchemy = function(item) {
 	var idx = this.recipes.indexOf(item); // Find the index
 	if(idx==-1)

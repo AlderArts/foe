@@ -37,8 +37,9 @@ Vena.prototype = new Entity();
 Vena.prototype.constructor = Vena;
 
 Vena.Met = {
-	PitFirst : 1,
-	Restored : 2
+	PitFirst  : 1,
+	Restored  : 2,
+	Judgement : 4
 }
 
 Vena.Sex = {

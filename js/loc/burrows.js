@@ -84,6 +84,9 @@ Burrows.prototype.LagonAlly = function() {
 Burrows.prototype.LagonChained = function() {
 	return burrows.LagonDefeated(); //TODO
 }
+Burrows.prototype.LagonJudged = function() {
+	return vena.flags["Met"] & Vena.Met.Judgement;
+}
 //TODO
 Burrows.prototype.LagonPit = function() {
 	return false;
@@ -270,6 +273,16 @@ world.loc.Burrows.Throne.links.push(new Link(
 ));
 
 world.loc.Burrows.Throne.events.push(new Link(
+	"Vena", function() {
+		return burrows.VenaRestored();
+	}, true,
+	null,
+	function() {
+		Scenes.Vena.Restored.Approach();
+	}
+));
+
+world.loc.Burrows.Throne.events.push(new Link(
 	"Lagon", function() {
 		return lagon.IsAtLocation();
 	}, true,
@@ -277,8 +290,8 @@ world.loc.Burrows.Throne.events.push(new Link(
 	function() {
 		if(burrows.LagonAlly() && !(lagon.flags["Talk"] & Lagon.Talk.AlliedFirst))
 			Scenes.Lagon.AlliedFirst();
-		else if(burrows.LagonChained())
-			Scenes.Lagon.InteractDefeated();
+		else if(burrows.LagonJudged())
+			Scenes.Lagon.Defeated.RoomApproach();
 		else
 			Scenes.Lagon.InteractRuler();
 	}
