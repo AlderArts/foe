@@ -149,6 +149,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/event/burrows/lagon-defeated.js \
 	js/event/burrows/ophelia.js \
 	js/event/burrows/vena.js \
+	js/event/burrows/vena-restored.js \
 	js/event/farm/gwendy.js \
 	js/event/farm/gwendy-sex.js \
 	js/event/farm/adrian.js \
