@@ -1,0 +1,6 @@
+
+Scenes.Lagon.Defeated = {};
+
+
+
+
