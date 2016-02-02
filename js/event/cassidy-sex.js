@@ -1121,7 +1121,7 @@ Scenes.Cassidy.SparSex.AllFours = function() {
 			Text.NL();
 			Text.Add("It’s in this position that you gleefully ravage Cassidy’s tight cunt with every last bit of violent force you can muster, lewd and perverse squelching noises rising from your conspicuous copulation. Rough and violent - just what a salamander needs to get off, and unsurprisingly, Cassidy yelps as another orgasm racks her body, her vagina squeezing and pulsing about your member, desperate to feel your sperm in it.", parse);
 			if(p1cock.Len() >= 23)
-			   Text.Add("Your [cockTip] rams again and again against her cervix, but it may as well be made of steel - despite your best attempts, it remains impervious to your best efforts at forcing it open. Oh well, you’ll just make do with what you have.", parse);
+			   Text.Add(" Your [cockTip] rams again and again against her cervix, but it may as well be made of steel - despite your best attempts, it remains impervious to your best efforts at forcing it open. Oh well, you’ll just make do with what you have.", parse);
 			Text.NL();
 			Text.Add("<i>“Ah! AH! DAMN IT!”</i> Cassidy screams, the coils of her tail squeezing you tightly as your release becomes imminent, boiling and bubbling in your loins with the most queer sensation - probably one instigated by the salamander’s close presence. Her claws scrabble at the earth, throwing up clods of dirt; her hips buck against you as you release a vicious load of baby batter just as hot and sticky as her depths into her. With a loud woosh, Cassidy’s scaly tail erupts into life; although none of the flames actually hurt you, it’s still unnerving.", parse);
 			Text.NL();
