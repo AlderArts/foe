@@ -327,9 +327,10 @@ Scenes.Miranda.HomeDommySexRideDobieCockVag = function() {
 				Text.NL();
 				Text.Add("For a while, the burning need in your loins are subdued by a sudden urge to dominate the horny morph, and you hump away, enjoying the feeling of her hot, tight throat. She still has some fighting spirit left though; even as her mouth is being filled by your throbbing cock, the naughty doggie sneaks her fingers in from below, making you gasp as she plunges them into your snatch.", parse);
 				Text.NL();
-				Text.Add("Your stamina is short lived with Miranda’s digits probing your soddy depths, her thumb prodding at your [clit]. With the dual stimulation, it’s not long before you cry out and cum, pouring your seed down the herm’s gullet[ and splashing all over her face and bed]. When you finally pull out, she’s a panting mess, though she hasn’t forgotten her promised reward.", parse);
+				parse["c"] = player.NumCocks() > 1 ? " and splashing all over her face and bed" : "";
+				Text.Add("Your stamina is short lived with Miranda’s digits probing your soddy depths, her thumb prodding at your [clit]. With the dual stimulation, it’s not long before you cry out and cum, pouring your seed down the herm’s gullet[c]. When you finally pull out, she’s a panting mess, though she hasn’t forgotten her promised reward.", parse);
 				
-				if(player.FirstCock() > 1) stickymiranda = true;
+				if(player.NumCocks() > 1) stickymiranda = true;
 			}, 1.0, function() { return player.FirstCock() && dom > 0; });
 			scenes.AddEnc(function() {
 				parse["c"] = player.FirstVag().clitCock ? " the base of" : "";
