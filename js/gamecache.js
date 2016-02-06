@@ -407,6 +407,10 @@ CacheToGame = function() {
 		// LEI TASKS
 		if(lei.flags["Met"] > Lei.Met.KnowName) lei.flags["Met"] = Lei.Met.KnowName;
 	}
+	if(gameCache.version < 29) {
+		// LAGON DEFEATED FLAGS (clear unused)
+		lagon.flags["Usurp"] &= 0x7;
+	}
 }
 
 GameToCache = function() {

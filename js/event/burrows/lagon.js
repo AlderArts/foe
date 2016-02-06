@@ -32,9 +32,6 @@ function Lagon(storage) {
 	
 	this.flags["Usurp"] = 0;
 	this.flags["Talk"]  = 0; // bitmask
-	this.flags["Deny"]  = 0;
-	
-	this.bbTimer = new Time();
 	
 	if(storage) this.FromStorage(storage);
 }
@@ -48,8 +45,6 @@ Lagon.prototype.FromStorage = function(storage) {
 	// Load flags
 	this.LoadFlags(storage);
 	this.LoadSexFlags(storage);
-	
-	this.bbTimer.FromStorage(storage.bbTim);
 }
 
 Lagon.prototype.ToStorage = function() {
@@ -61,35 +56,11 @@ Lagon.prototype.ToStorage = function() {
 	this.SaveFlags(storage);
 	this.SaveSexFlags(storage);
 	
-	storage.bbTim  = this.bbTimer.ToStorage();
-	
 	return storage;
 }
 
 Lagon.prototype.Update = function(step) {
 	Entity.prototype.Update.call(this, step);
-	
-	this.bbTimer.Dec(step);
-	if(this.bbTimer.Expired() && this.flags["Deny"] >= 3)
-		this.flags["Deny"] = 0;
-}
-
-Lagon.prototype.OrgasmCum = function(mult) {
-	Entity.prototype.OrgasmCum.call(this, mult);
-	
-	this.bbTimer = new Time();
-	this.flags["Deny"] = 0;
-}
-
-Lagon.prototype.Deny = function(inc) {
-	inc = inc || 1;
-	this.flags["Deny"] += inc;
-	if(this.flags["Deny"] >= 3)
-		this.bbTimer = new Time(0,0,1,0,0); //24 hours
-}
-
-Lagon.prototype.Blueballed = function() {
-	return !this.bbTimer.Expired();
 }
 
 Lagon.Talk = {
@@ -116,11 +87,13 @@ Lagon.prototype.IsAtLocation = function(location) {
 }
 
 Lagon.Usurp = {
-	FirstFight : 1,
-	Defeated   : 2,
-	SidedWith  : 4,
-	JailFirst  : 8,
-	JailSec    : 16
+	FirstFight   : 1,
+	Defeated     : 2,
+	SidedWith    : 4,
+	JailSexFirst : 8,
+	JailSexed    : 16,
+	NiceFlag     : 32,
+	NiceFirst    : 64
 }
 
 Scenes.Lagon.LagonImpregnate = function(mother, slot) {
@@ -833,6 +806,7 @@ Scenes.Lagon.RulerBlowjobEntrypoint = function() {
 			func : function() {
 				Text.Clear();
 				if(first) {
+					lagon.flags["Talk"] |= Lagon.Talk.BJfinger;
 					Text.Add("Lagon’s just on the cusp of climaxing, but you can’t help yourself but mess with him. Having the high and mighty king melt like butter in your hands is such a delight to see… and speaking of hands, that gives you a <i>very</i> naughty idea. You pop his cock out of your mouth, using your [tongue] to tease his glans. One of your hands lightly strokes him, tracing his veins and moving down to cradle his huge sack, teeming with tasty cum. Purring, you wet your fingers and coax him to lean back and enjoy; this is how you pleasure a man on the surface.", parse);
 					Text.NL();
 					Text.Add("Your other hand is busy even lower down, steadily increasing the pressure on Lagon’s virgin rosebud. ", parse);

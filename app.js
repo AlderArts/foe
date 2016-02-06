@@ -9,7 +9,7 @@ VERSION_MINOR = 4;
 VERSION_SUBSCRIPT = "q";
 VERSION_NAME = "Highland scouts";
 
-SAVE_VERSION = 28;
+SAVE_VERSION = 29;
 // Save version 1: Initial
 // Save version 2: Added inventory
 // Save version 3: Fixed clitcock restoration + height, weigth
@@ -38,7 +38,7 @@ SAVE_VERSION = 28;
 // Save version 26: Uru intro flags
 // Save version 27: Outlaws flags
 // Save version 28: Lei flags fix
-
+// Save version 29: Cleared some unused flags from Lagon
 
 VERSION_STRING = APP_NAME + " " + VERSION_MAJOR + "." + VERSION_MINOR + VERSION_SUBSCRIPT + ": " + VERSION_NAME;
 
