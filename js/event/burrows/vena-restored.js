@@ -171,12 +171,11 @@ Scenes.Vena.Restored.Prompt = function() {
 		}
 	});
 	*/
-	//TODO PLACEHOLDER
 	Gui.SetButtonsFromList(options, true, function() {
 		Text.Clear();
-		Text.Add("", parse);
+		Text.Add("You thank the matriarch for her time, telling her you have to be on your way.", parse);
 		Text.NL();
-		Text.Add("", parse);
+		Text.Add("<i>“Do return soon, champion,”</i> Vena replies sincerely. She glances around at the growing gathering of her children around the throne. <i>“Meanwhile, it seems I have other ‘petitions’ to take care of...”</i> The lagomorph queen smiles apologetically.", parse);
 		Text.Flush();
 		
 		world.TimeStep({minute: 5});
