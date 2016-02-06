@@ -42,7 +42,7 @@ Scenes.Lagon.Defeated.RoomApproach = function() {
 	}
 	Text.Flush();
 	
-	Gui.NextPrompt();
+	Scenes.Lagon.Defeated.Prompt();
 }
 
 Scenes.Lagon.Defeated.Prompt = function() {
@@ -71,10 +71,6 @@ Scenes.Lagon.Defeated.Prompt = function() {
 			Text.Flush();
 		}
 	});
-	*/
-	
-	/*
-	
 	*/
 	
 	Gui.SetButtonsFromList(options, true, function() {
@@ -146,8 +142,6 @@ Scenes.Lagon.Defeated.SexPrompt = function() {
 		Text.Add("<i>“Bah! It’s a waste to say anything to a peasant like you.”</i> He gets up from his chair and makes his way to his bed. <i>“Let’s get this over with then.”</i>", parse);
 		Text.NL();
 		Text.Add("You just smirk, watching him as he goes. For all his tough talk, he knows his place. Besides, from the flash of pink between his thighs before he turned around, you know that he’s looking forward to this despite himself.", parse);
-		Text.NL();
-		Text.Add("", parse);
 	}
 	Text.NL();
 	Text.Add("With Lagon now safely settled in his bed, you quickly remove your [armor] and cast it onto the table in the center of the room. Now naked, you look over the nude form of the fallen tyrant and lick your lips, trying to decide what you’re going to do with him.", parse);
