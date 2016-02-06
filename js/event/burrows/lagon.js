@@ -30,7 +30,8 @@ function Lagon(storage) {
 	this.body.SetBodyColor(Color.white);
 	this.body.SetEyeColor(Color.blue);
 	
-	this.flags["Usurp"] = 0;
+	this.flags["Usurp"] = 0; // bitmask
+	this.flags["JSex"]  = 0; // bitmask
 	this.flags["Talk"]  = 0; // bitmask
 	
 	if(storage) this.FromStorage(storage);
@@ -91,9 +92,15 @@ Lagon.Usurp = {
 	Defeated     : 2,
 	SidedWith    : 4,
 	JailSexFirst : 8,
-	JailSexed    : 16,
-	NiceFlag     : 32,
-	NiceFirst    : 64
+	NiceFlag     : 16,
+	NiceFirst    : 32
+};
+Lagon.JailSex = {
+	PitchAnal : 1
+};
+
+Lagon.prototype.JailSexed = function() {
+	return this.flags["JSex"] != 0;
 }
 
 Scenes.Lagon.LagonImpregnate = function(mother, slot) {
