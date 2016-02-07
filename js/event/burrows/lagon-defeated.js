@@ -208,8 +208,8 @@ Scenes.Lagon.Defeated.PitchAnal = function() {
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
 	
-	var first = !(lagon.flags["JSex"] & Lagon.Usurp.PitchAnal);
-	lagon.flags["JSex"] |= Lagon.Usurp.PitchAnal;
+	var first = !(lagon.flags["JSex"] & Lagon.JailSex.PitchAnal);
+	lagon.flags["JSex"] |= Lagon.JailSex.PitchAnal;
 	
 	Text.Clear();
 	Text.Add("Looking at Lagon's supine form, your eyes trail over his naked body until they are drawn like magnets to the tantalizing hint of his rear.", parse);
@@ -735,6 +735,8 @@ Scenes.Lagon.Defeated.ScepterPitchAnal = function() {
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
+	
+	lagon.flags["JSex"] |= Lagon.JailSex.PitchAnal;
 	
 	Text.Clear();
 	Text.Add("Lasciviously licking your lips, you tell Lagon to spin around and let you get a good look at that cute little rump of his.", parse);
