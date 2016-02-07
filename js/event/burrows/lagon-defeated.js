@@ -281,6 +281,7 @@ Scenes.Lagon.Defeated.PitchAnal = function() {
 	lagon.FuckAnal(lagon.Butt(), p1cock, 3);
 	player.Fuck(p1cock, 3);
 	
+	parse["knothilt"] = p1cock.Knot() ? "knot" : "hilt";
 	if(timesFucked < 5) {
 		Text.Add("So. Fucking. <b>TIGHT</b>!", parse);
 		Text.NL();
@@ -333,7 +334,6 @@ Scenes.Lagon.Defeated.PitchAnal = function() {
 		Text.NL();
 		Text.Add("His stupor only lasts a few seconds, but the burning of his cheeks shows its impact. Scowling furiously, he glares up at you and clenches down in an effort to deny your advance.", parse);
 		Text.NL();
-		parse["knothilt"] = p1cock.Knot() ? "knot" : "hilt";
 		Text.Add("Supple as his tunnel is, all it does is add a delicious bit of extra tightness, enticing you press on in your quest to bury yourself to the [knothilt] in Lagon's ass.", parse);
 		Text.NL();
 		Text.Add("The last few inches of your shaft glide home, and Lagon lets out a half-sob of bliss, clenching down extra hard. You don't know if he's even trying to push you out now; all his efforts do is lock you firmly in place, ensuring you can't even try to back out.", parse);
