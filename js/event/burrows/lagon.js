@@ -93,7 +93,8 @@ Lagon.Usurp = {
 	SidedWith    : 4,
 	JailSexFirst : 8,
 	NiceFlag     : 16,
-	NiceFirst    : 32
+	NiceFirst    : 32,
+	NiceReact    : 64
 };
 Lagon.JailSex = {
 	PitchAnal : 1
