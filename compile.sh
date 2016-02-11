@@ -1,12 +1,6 @@
 #!/bin/bash
 
 java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
-	js/lodash.min.js \
-	js/jquery-1.9.1.min.js \
-	js/raphael-min.js \
-	js/pre-loader.js \
-	data/cufon/Kimberley_Bl_900.font.js \
-	js/droidsans.loader.js \
 	app.js \
 	js/assets.js \
 	js/utility.js \
@@ -216,11 +210,17 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	
 rm -rf build
 mkdir build
+mkdir build/js
 
-cp foe.min.js build/foe.js
-cp js/excanvas.compiled.js build/excanvas.compiled.js
+cp foe.min.js build/foe.min.js
+cp js/excanvas.compiled.js build/js/excanvas.compiled.js
+cp js/lodash.min.js build/js/lodash.min.js
+cp js/jquery-1.9.1.min.js build/js/jquery-1.9.1.min.js
+cp js/raphael-min.js build/js/raphael-min.js
+cp js/pre-loader.js build/js/pre-loader.js
+cp js/droidsans.loader.js build/js/droidsans.loader.js
 
-cp foe_min.html build/foe.html
+cp foe_min.html build/foe_min.html
 cp style.css build/style.css
 cp output.css build/output.css
 cp droidsans.css build/droidsans.css
