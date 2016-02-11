@@ -7,14 +7,8 @@ gulp.task('default', function() {
 
 gulp.task('buildJS', function() {
     return gulp.src([
-        // Shouldn't those be linked externally?
-        'js/lodash.min.js',
-        'js/jquery-1.9.1.min.js',
-        'js/raphael-min.js',
-        'js/pre-loader.js',
-        'data/cufon/Kimberley_Bl_900.font.js',
-        'js/droidsans.loader.js',
-
+        // Might be better to switch to switch to a glob,
+        // but load order is important for certain modules.
         'app.js',
         'js/assets.js',
         'js/utility.js',
@@ -220,7 +214,8 @@ gulp.task('buildJS', function() {
         'js/main.js',
         'js/credits.js',
         'js/cheats.js'
-    ],{ base: '.'}).pipe(closureCompiler({
+    ],{ base: '.'})
+        .pipe(closureCompiler({
         // NOTE: Remove "base : '.'" if we switch to using globs.
         compilerPath: 'compiler.jar',
         fileName: 'foe.min.js',
