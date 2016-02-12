@@ -152,7 +152,7 @@ world.loc.Rigard.ShopStreet.street.events.push(new Link(
 	"Scepter", function() { return rigard.flags["Scepter"] != 0 && burrows.flags["Access"] < Burrows.AccessFlags.Stage5; }, true,
 	null,
 	function() {
-		Scenes.Rigard.ShopStreet();
+		Scenes.Rigard.ShopStreet.Scepter();
 	}
 ));
 
@@ -625,7 +625,7 @@ Scenes.Rigard.ShopStreet.Speculate = function() {
 	Gui.SetButtonsFromList(options);
 }
 
-Scenes.Rigard.ShopStreet = function() {
+Scenes.Rigard.ShopStreet.Scepter = function() {
 	var parse = {
 		
 	};

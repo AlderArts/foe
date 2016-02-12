@@ -648,7 +648,7 @@ Quests.quests.push(new Quest({
 		}),
 		new QuestItem({
 			desc: function() {
-				return "Follow the merchant lead.";
+				return rigard.flags["Scepter"] == 0 ? "Follow the merchant lead, trail the caravan along the King's Road." : "Follow the merchant lead, probably best to check the merchant street.";
 			},
 			active: function() {
 				var status = Quests.Type.NotStarted;
