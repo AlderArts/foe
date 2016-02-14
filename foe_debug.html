@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<!-- Main page title -->
+		<title>Fall of Eden</title>
+		
+		<!-- Set up CSS styles -->
+		<link rel="stylesheet" type="text/css" href="style.css" />
+		<link rel="stylesheet" type="text/css" href="output.css" />
+		<!--[if IE]><script type="text/javascript" src="js/excanvas.compiled.js"></script><![endif]-->
+	</head>
+	
+	<body onresize="GuiResize()">
+		<div id=wrap>
+			<div id="mainTextWrapper">
+				<div id="mainTextArea"> </div>
+			</div>
+			<input id="textInputArea"/>
+			<div id="tooltipTextArea"> </div>
+			
+			<div class="overlay" id="overlay_load">
+				<div>
+					<p>Load a file from disk:</p>
+					<input type="file" id="loadFileFiles" />
+					<br/>
+					<button type="submit" id="loadFileOk" onclick="Saver.OnLoadFromFileClick()">Ok</button>
+					<button type="button" id="loadFileCancel" onclick="loadfileOverlay()">Cancel</button>
+				</div>
+			</div>
+			<div class="overlay" id="overlay_assets">
+				<div>
+					<p id="progressLabel">Loading assets...</p>
+					<progress id="progressDiv"></progress>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Load script files -->
+		<script type="text/javascript" src="js/lodash.min.js"></script>
+		<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+		<script type="text/javascript" src="js/raphael-min.js"></script>
+		<script type="text/javascript" src="js/pre-loader.js"></script>
+		<!-- Fonts -->
+		<script type="text/javascript" src="data/cufon/Kimberley_Bl_900.font.js"></script>
+		<script type="text/javascript" src="js/droidsans.loader.js"></script>
+		
+		<!-- App -->
+		<script type="text/javascript" src="app.js"></script>
+		<script type="text/javascript" src="js/assets.js"></script>
+		
+		<!-- Utility stuff -->
+		<script type="text/javascript" src="js/utility.js"></script>
+		<script type="text/javascript" src="js/input.js" charset="utf-8"></script>
+		<script type="text/javascript" src="js/text.js"></script>
+		<script type="text/javascript" src="js/button.js"></script>
+		<script type="text/javascript" src="js/gui.js"></script>
+		
+		<script type="text/javascript" src="js/gamecache.js"></script>
+		<script type="text/javascript" src="js/saver.js"></script>
+		
+		<!-- Entity scripts -->
+		<script type="text/javascript" src="js/statuseffect.js"></script>
+		<script type="text/javascript" src="js/ability.js"></script>
+		
+		<script type="text/javascript" src="js/stat.js"></script>
+		
+		<script type="text/javascript" src="js/pregnancy.js"></script>
+		<script type="text/javascript" src="js/lactation.js"></script>
+		
+		<script type="text/javascript" src="js/body/gender.js"></script>
+		<script type="text/javascript" src="js/body/color.js"></script>
+		<script type="text/javascript" src="js/body/race.js"></script>
+		<script type="text/javascript" src="js/body/bodypart.js"></script>
+		<script type="text/javascript" src="js/body/appendage.js"></script>
+		<script type="text/javascript" src="js/body/balls.js"></script>
+		<script type="text/javascript" src="js/body/breasts.js"></script>
+		<script type="text/javascript" src="js/body/orifice.js"></script>
+		<script type="text/javascript" src="js/body/butt.js"></script>
+		<script type="text/javascript" src="js/body/cock.js"></script>
+		<script type="text/javascript" src="js/body/vagina.js"></script>
+		<script type="text/javascript" src="js/body/hair.js"></script>
+		<script type="text/javascript" src="js/body/head.js"></script>
+		<script type="text/javascript" src="js/body/genitalia.js"></script>
+		<script type="text/javascript" src="js/body/body.js"></script>
+		
+		<script type="text/javascript" src="js/defbody.js"></script>
+		
+		<script type="text/javascript" src="js/entity.js"></script>
+		<script type="text/javascript" src="js/entity-combat.js"></script>
+		<script type="text/javascript" src="js/entity-desc.js"></script>
+		<script type="text/javascript" src="js/entity-grammar.js"></script>
+		<script type="text/javascript" src="js/entity-menu.js"></script>
+		<script type="text/javascript" src="js/entity-save.js"></script>
+		<script type="text/javascript" src="js/entity-sex.js"></script>
+		<script type="text/javascript" src="js/entity-dict.js"></script>
+		
+		<script type="text/javascript" src="js/event/player.js"></script>
+		<script type="text/javascript" src="js/party.js"></script>
+		<script type="text/javascript" src="js/perks.js"></script>
+		
+		<!-- Combat -->
+		<script type="text/javascript" src="js/combat.js"></script>
+		<script type="text/javascript" src="js/enemy/boss.js"></script>
+		
+		<!-- World description -->
+		<script type="text/javascript" src="js/time.js"></script>
+		<script type="text/javascript" src="js/event.js"></script>
+		<script type="text/javascript" src="js/world.js"></script>
+		<script type="text/javascript" src="js/exploration.js"></script>
+		<script type="text/javascript" src="js/maze.js"></script>
+		
+		<!-- Abilities -->
+		<script type="text/javascript" src="js/ability/node.js"></script>
+		<script type="text/javascript" src="js/ability/attack.js"></script>
+		<script type="text/javascript" src="js/ability/physical.js"></script>
+		<script type="text/javascript" src="js/ability/seduction.js"></script>
+		<script type="text/javascript" src="js/ability/tease.js"></script>
+		<script type="text/javascript" src="js/ability/wait.js"></script>
+		<script type="text/javascript" src="js/ability/run.js"></script>
+		<script type="text/javascript" src="js/ability/white.js"></script>
+		<script type="text/javascript" src="js/ability/black.js"></script>
+		<script type="text/javascript" src="js/ability/enemyskill.js"></script>
+		
+		<!-- Jobs -->
+		<script type="text/javascript" src="js/job.js"></script>
+		
+		<!-- Items -->
+		<script type="text/javascript" src="js/item.js"></script>
+		<script type="text/javascript" src="js/inventory.js"></script>
+		<script type="text/javascript" src="js/tf.js"></script>
+		<script type="text/javascript" src="js/items/quest.js"></script>
+		<script type="text/javascript" src="js/items/ingredients.js"></script>
+		<script type="text/javascript" src="js/items/alchemy.js"></script>
+		<script type="text/javascript" src="js/items/alchemyspecial.js"></script>
+		<script type="text/javascript" src="js/items/toys.js"></script>
+		<script type="text/javascript" src="js/items/cards.js"></script>
+		<script type="text/javascript" src="js/items/combatitems.js"></script>
+		<script type="text/javascript" src="js/items/accessories.js"></script>
+		<script type="text/javascript" src="js/items/armor.js"></script>
+		<script type="text/javascript" src="js/items/strapon.js"></script>
+		<script type="text/javascript" src="js/items/weapons.js"></script>
+		
+		<script type="text/javascript" src="js/items/halloween.js"></script>
+		
+		<script type="text/javascript" src="js/shop.js"></script>
+		<script type="text/javascript" src="js/alchemy.js"></script>
+		<script type="text/javascript" src="js/quest.js"></script>
+		<script type="text/javascript" src="js/cavalcade.js"></script>
+		<script type="text/javascript" src="js/prison.js"></script>
+		
+		<!-- Locations and events -->
+		<script type="text/javascript" src="js/event/introduction.js"></script>
+		
+		<script type="text/javascript" src="js/loc/rigard/rigard.js"></script>
+		<script type="text/javascript" src="js/loc/rigard/residential.js"></script>
+		<script type="text/javascript" src="js/loc/rigard/guards.js"></script>
+		<script type="text/javascript" src="js/loc/rigard/merchants.js"></script>
+		<script type="text/javascript" src="js/loc/rigard/plaza.js"></script>
+		<script type="text/javascript" src="js/loc/rigard/slums.js"></script>
+		<script type="text/javascript" src="js/loc/rigard/tavern.js"></script>
+		<script type="text/javascript" src="js/loc/rigard/brothel.js"></script>
+		<script type="text/javascript" src="js/loc/rigard/krawitz.js"></script>
+		<script type="text/javascript" src="js/loc/rigard/castle.js"></script>
+		<script type="text/javascript" src="js/loc/rigard/clothstore.js"></script>
+		<script type="text/javascript" src="js/loc/rigard/sexstore.js"></script>
+		<script type="text/javascript" src="js/loc/rigard/magicshop.js"></script>
+		<script type="text/javascript" src="js/loc/rigard/armorshop.js"></script>
+		<script type="text/javascript" src="js/loc/rigard/weaponshop.js"></script>
+		<script type="text/javascript" src="js/loc/rigard/inn.js"></script>
+		<script type="text/javascript" src="js/loc/rigard/magetower.js"></script>
+		
+		<script type="text/javascript" src="js/loc/treecity/treecity.js"></script>
+		
+		<script type="text/javascript" src="js/loc/plains.js"></script>
+		<script type="text/javascript" src="js/loc/nomads.js"></script>
+		<script type="text/javascript" src="js/loc/highlands.js"></script>
+		<script type="text/javascript" src="js/loc/dragonden.js"></script>
+		<script type="text/javascript" src="js/loc/forest.js"></script>
+		<script type="text/javascript" src="js/loc/desert.js"></script>
+		<script type="text/javascript" src="js/loc/farm.js"></script>
+		<script type="text/javascript" src="js/loc/lake.js"></script>
+		<script type="text/javascript" src="js/loc/kingsroad.js"></script>
+		
+		<script type="text/javascript" src="js/loc/oasis.js"></script>
+		
+		<script type="text/javascript" src="js/loc/outlaws.js"></script>
+		<script type="text/javascript" src="js/loc/glade.js"></script>
+		
+		<script type="text/javascript" src="js/loc/burrows.js"></script>
+		
+		<script type="text/javascript" src="js/event/global.js"></script>
+		<script type="text/javascript" src="js/event/dreams.js"></script>
+		<script type="text/javascript" src="js/event/nursery.js"></script>
+		<script type="text/javascript" src="js/event/masturbation.js"></script>
+		<!-- Characters -->
+		<script type="text/javascript" src="js/event/asche.js"></script>
+		<script type="text/javascript" src="js/event/asche-tasks.js"></script>
+		<script type="text/javascript" src="js/event/asche-sex.js"></script>
+		<script type="text/javascript" src="js/event/cassidy.js"></script>
+		<script type="text/javascript" src="js/event/cassidy-sex.js"></script>
+		<script type="text/javascript" src="js/event/fera.js"></script>
+		<script type="text/javascript" src="js/event/miranda.js"></script>
+		<script type="text/javascript" src="js/event/miranda-date.js"></script>
+		<script type="text/javascript" src="js/event/miranda-sex.js"></script>
+		<script type="text/javascript" src="js/event/terry.js"></script>
+		<script type="text/javascript" src="js/event/terry-tf.js"></script>
+		<script type="text/javascript" src="js/event/terry-sex.js"></script>
+		<script type="text/javascript" src="js/event/momo.js"></script>
+		<script type="text/javascript" src="js/event/sylistraxia.js"></script>
+		<script type="text/javascript" src="js/event/kiakai.js"></script>
+		<script type="text/javascript" src="js/event/kiakai-sex.js"></script>
+		
+		<script type="text/javascript" src="js/event/brothel/roa.js"></script>
+		<script type="text/javascript" src="js/event/brothel/ches.js"></script>
+		<script type="text/javascript" src="js/event/brothel/lucille.js"></script>
+		<script type="text/javascript" src="js/event/brothel/belinda.js"></script>
+		<script type="text/javascript" src="js/event/brothel/bastet.js"></script>
+		<script type="text/javascript" src="js/event/brothel/gryphons.js"></script>
+		<script type="text/javascript" src="js/event/brothel/fireblossom.js"></script>
+		
+		<script type="text/javascript" src="js/event/burrows/lagon.js"></script>
+		<script type="text/javascript" src="js/event/burrows/lagon-defeated.js"></script>
+		<script type="text/javascript" src="js/event/burrows/ophelia.js"></script>
+		<script type="text/javascript" src="js/event/burrows/vena.js"></script>
+		<script type="text/javascript" src="js/event/burrows/vena-restored.js"></script>
+		
+		<script type="text/javascript" src="js/event/farm/gwendy.js"></script>
+		<script type="text/javascript" src="js/event/farm/gwendy-sex.js"></script>
+		<script type="text/javascript" src="js/event/farm/adrian.js"></script>
+		<script type="text/javascript" src="js/event/farm/danie.js"></script>
+		<script type="text/javascript" src="js/event/farm/layla.js"></script>
+		<script type="text/javascript" src="js/event/farm/layla-sex.js"></script>
+
+		<script type="text/javascript" src="js/event/highlands/isla.js"></script>
+		
+		<script type="text/javascript" src="js/event/uru.js"></script>
+		<script type="text/javascript" src="js/event/aria.js"></script>
+		
+		<script type="text/javascript" src="js/event/royals/lei.js"></script>
+		<script type="text/javascript" src="js/event/royals/lei-tasks.js"></script>
+		<script type="text/javascript" src="js/event/royals/lei-sex.js"></script>
+		<script type="text/javascript" src="js/event/royals/twins.js"></script>
+		<script type="text/javascript" src="js/event/royals/jeanne.js"></script>
+		<script type="text/javascript" src="js/event/royals/golem.js"></script>
+		
+		<script type="text/javascript" src="js/event/room69.js"></script>
+		<script type="text/javascript" src="js/event/poet.js"></script>
+		
+		<script type="text/javascript" src="js/event/nomads/chief.js"></script>
+		<script type="text/javascript" src="js/event/nomads/patchwork.js"></script>
+		<script type="text/javascript" src="js/event/nomads/rosalin.js"></script>
+		<script type="text/javascript" src="js/event/nomads/estevan.js"></script>
+		<script type="text/javascript" src="js/event/nomads/cale.js"></script>
+		<script type="text/javascript" src="js/event/nomads/cale-sex.js"></script>
+		<script type="text/javascript" src="js/event/nomads/magnus.js"></script>
+		<script type="text/javascript" src="js/event/nomads/cavalcade.js"></script>
+		
+		<script type="text/javascript" src="js/event/outlaws/outlaws.js"></script>
+		<script type="text/javascript" src="js/event/outlaws/aquilius.js"></script>
+		<script type="text/javascript" src="js/event/outlaws/maria.js"></script>
+		<script type="text/javascript" src="js/event/outlaws/maria-dd.js"></script>
+		<script type="text/javascript" src="js/event/outlaws/cveta.js"></script>
+		<script type="text/javascript" src="js/event/outlaws/cveta-date.js"></script>
+		<script type="text/javascript" src="js/event/outlaws/vaughn.js"></script>
+		<script type="text/javascript" src="js/event/outlaws/vaughn-sex.js"></script>
+		<script type="text/javascript" src="js/event/outlaws/vaughn-tasks.js"></script>
+		<script type="text/javascript" src="js/event/outlaws/bulltower.js"></script>
+		<script type="text/javascript" src="js/event/outlaws/cavalcade.js"></script>
+		
+		<script type="text/javascript" src="js/event/raven.js"></script>
+		
+		<script type="text/javascript" src="js/event/roaming.js"></script>
+		<script type="text/javascript" src="js/event/portalopening.js"></script>
+		<script type="text/javascript" src="js/event/citywatch.js"></script>
+		
+		<!-- Seasonal -->
+		<script type="text/javascript" src="js/event/halloween.js"></script>
+		
+		<!-- Enemies -->
+		<script type="text/javascript" src="js/enemy/bandit.js"></script>
+		<script type="text/javascript" src="js/enemy/knight.js"></script>
+		<script type="text/javascript" src="js/enemy/imp.js"></script>
+		<script type="text/javascript" src="js/enemy/introdemon.js"></script>
+		<script type="text/javascript" src="js/enemy/rabbit.js"></script>
+		<script type="text/javascript" src="js/enemy/equine.js"></script>
+		<script type="text/javascript" src="js/enemy/feline.js"></script>
+		<script type="text/javascript" src="js/enemy/lizard.js"></script>
+		<script type="text/javascript" src="js/enemy/mothgirl.js"></script>
+		<script type="text/javascript" src="js/enemy/feralwolf.js"></script>
+		<script type="text/javascript" src="js/enemy/scorp.js"></script>
+		<script type="text/javascript" src="js/enemy/naga.js"></script>
+		<script type="text/javascript" src="js/enemy/drake.js"></script>
+		<script type="text/javascript" src="js/enemy/zebra.js"></script>
+		
+		<script type="text/javascript" src="js/enemy/orchid.js"></script>
+		<script type="text/javascript" src="js/enemy/gol.js"></script>
+		<script type="text/javascript" src="js/enemy/corishev.js"></script>
+		<script type="text/javascript" src="js/enemy/malice-scouts.js"></script>
+		
+		<!-- Start up the main text -->
+		<script type="text/javascript" src="js/main.js"></script>
+		<script type="text/javascript" src="js/credits.js"></script>
+		<script type="text/javascript" src="js/cheats.js"></script>
+	</body>
+</html>
