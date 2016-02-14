@@ -6,8 +6,8 @@ windowHeight = 700;
 APP_NAME = "Fall of Eden";
 VERSION_MAJOR = 0;
 VERSION_MINOR = 4;
-VERSION_SUBSCRIPT = "q";
-VERSION_NAME = "Highland scouts";
+VERSION_SUBSCRIPT = "r";
+VERSION_NAME = "Lagon defeated; revamped";
 
 SAVE_VERSION = 29;
 // Save version 1: Initial
