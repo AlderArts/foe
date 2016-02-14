@@ -14,6 +14,7 @@ Version 0.4q2
 * Catboy and Centauress should give significantly higher xp rewards now
 * Clarified a section of the Search for the Scepter quest log, pointing you to where to go
 * Defeated Lagon has been revamped and replaced with new content. Written by LD and QB, and sponsored by Patreon
+* Added gulp as alternate build system (thanks ElAcechador on github). This changed the effective file to run if you are playing from git - run foe_debug.html instead of foe.html. If you are running online or using the downloaded zip, ignore this and play as usual
 
 --------------------------------------------
              PREVIOUS VERSIONS
