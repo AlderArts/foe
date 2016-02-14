@@ -237,7 +237,7 @@ gulp.task('updateAssets', ['clean-build'], function() {
         'js/raphael-min.js',
         'js/pre-loader.js',
         'js/droidsans.loader.js',
-        'foe_min.html',
+        'foe.html',
         'style.css',
         'output.css',
         'droidsans.css',
