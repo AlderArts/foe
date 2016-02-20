@@ -4,10 +4,10 @@ Saver.slots = 12;
 
 Saver.SavePrompt = function(backFunc) {
 	Text.Clear();
-	
+
 	Text.Add("Save game:");
 	Text.NL();
-	
+
 	var options = new Array();
 	for(var i=0; i<Saver.slots; i++) {
 		Text.Add("Game " + i + ": ");
@@ -33,23 +33,23 @@ Saver.SavePrompt = function(backFunc) {
 		Text.NL();
 	}
 	Gui.SetButtonsFromList(options, true, backFunc);
-	
-    Text.NL();
-    if(Saver.HasSaves())
-    	Text.Add("DEBUG: localStorage usage: " + JSON.stringify(localStorage).length / 2636625);
-    Text.Flush();
+
+	Text.NL();
+	if(Saver.HasSaves())
+		Text.Add("DEBUG: localStorage usage: " + JSON.stringify(localStorage).length / 2636625);
+	Text.Flush();
 }
 
 Saver.SaveGame = function(nr, cmt) {
 	GameToCache();
 	var seen = [];
 	localStorage["savedata" + nr] = JSON.stringify(gameCache, function(key, val) {
-	   if (typeof val == "object") {
-	        if (seen.indexOf(val) >= 0)
-	            return;
-	        seen.push(val);
-	    }
-	    return val;
+		if (typeof val == "object") {
+			if (seen.indexOf(val) >= 0)
+				return;
+			seen.push(val);
+		}
+		return val;
 	});
 	var saveName = gameCache.name;
 	if(cmt)
@@ -72,12 +72,12 @@ Saver.SaveToFile = function() {
 		var seen = [];
 		GenerateFile({filename: filename, content: JSON.stringify(gameCache,
 			function(key, val) {
-			   if (typeof val == "object") {
-			        if (seen.indexOf(val) >= 0)
-			            return;
-			        seen.push(val);
-			    }
-			    return val;
+				if (typeof val == "object") {
+					if (seen.indexOf(val) >= 0)
+						return;
+					seen.push(val);
+				}
+				return val;
 			})
 		});
 	}
@@ -98,10 +98,10 @@ Saver.HasSaves = function() {
 
 Saver.LoadPrompt = function(backFunc) {
 	Text.Clear();
-	
+
 	Text.Add("Load game:");
 	Text.NL();
-	
+
 	var options = new Array();
 	for(var i=0; i<Saver.slots; i++) {
 		Text.Add("Game " + i + ": ");
@@ -116,11 +116,11 @@ Saver.LoadPrompt = function(backFunc) {
 		});
 	}
 	Gui.SetButtonsFromList(options, true, backFunc);
-	
-    Text.NL();
-    if(Saver.HasSaves())
-    	Text.Add("DEBUG: localStorage usage: " + JSON.stringify(localStorage).length / 2636625);
-    Text.Flush();
+
+	Text.NL();
+	if(Saver.HasSaves())
+		Text.Add("DEBUG: localStorage usage: " + JSON.stringify(localStorage).length / 2636625);
+	Text.Flush();
 }
 
 Saver.LoadGame = function(nr) {
@@ -155,32 +155,32 @@ function loadfileOverlay() {
 }
 
 Saver.OnLoadFromFileClick = function() {
-	
+
 	var files = document.getElementById('loadFileFiles').files;
-    if (!files.length) {
+	if (!files.length) {
 		alert('Please select a file!');
 		return;
-    }
-    
+	}
+
 	loadfileOverlay();
 
-    var file = files[0];
-    
-    Saver.LoadFromFile(file);
+	var file = files[0];
+
+	Saver.LoadFromFile(file);
 }
 
 // Takes a File as argument
 Saver.LoadFromFile = function(file) {
 	if(!file) return;
-	
+
 	var reader = new FileReader();
-	
+
 	reader.onload = function(e) {
 		gameCache = JSON.parse(e.target.result);
 		CacheToGame();
 		PrintDefaultOptions();
 		Render();
 	}
-	
+
 	reader.readAsText(file);
 }

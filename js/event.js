@@ -1,9 +1,9 @@
 
 /*
- * 
+ *
  * Event/Location. Is used as a template to set up
  * locations or events that can be navigated.
- * 
+ *
  * When used as a location, "links" can be used for exploration and "events" for people
  *
  */
@@ -39,7 +39,7 @@ Event.prototype.AddEncounter = function(opts) {
 	var enabled = opts.enabled;
 	var odds    = opts.odds;
 	var obj     = opts.obj;
-	
+
 	if(opts.enc)
 		this.enc.AddEnc(func, odds, cond, obj);
 	if(opts.hunt) {
@@ -76,7 +76,7 @@ MoveToLocation = function(location, timestep, preventClear) {
 	// Step time
 	timestep = timestep || new Time();
 	world.TimeStep(timestep);
-	
+
 	location.onEntry(preventClear, oldLocation);
 }
 
@@ -94,10 +94,10 @@ Event.prototype.SleepFunc = function() {
 		var func = function() {
 			world.TimeStep({hour: 8});
 			party.Sleep();
-			
+
 			PrintDefaultOptions();
 		}
-		
+
 		Scenes.Dreams.Entry(func);
 	});
 }
@@ -107,7 +107,7 @@ Event.prototype.WaitFunc = function() {
 	Text.Clear();
 	Text.Add("How long do you want to wait?");
 	Text.Flush();
-	
+
 	var options = new Array();
 	options.push({ nameStr : "Half hour",
 		tooltip : "Wait for half an hour.",
@@ -214,13 +214,13 @@ Event.prototype.DrunkHandler = function() {
 	Text.NL();
 	Text.Add("Some of the decisions that led you to this state were probably not the best. Still, there’s a dark whisper in your mind asking if perhaps you’d feel better if you had just one more drink...", parse);
 	Text.Flush();
-	
+
 	Gui.NextPrompt();
 }
 
 Event.prototype.SetButtons = function(links) {
 	var list = [];
-	
+
 	if(!links) {
 		links = [];
 		_.each(this.links, function(link) {
@@ -231,24 +231,24 @@ Event.prototype.SetButtons = function(links) {
 			links.push(evt);
 		});
 	}
-	
+
 	for(var i = 0; i < links.length; i++) {
 		var link = links[i];
-		
+
 		var visible = isFunction(link.visibleCondition) ? link.visibleCondition() : link.visibleCondition;
 		if(!visible) continue;
 		var enabled = isFunction(link.enabledCondition) ? link.enabledCondition() : link.enabledCondition;
 		var nameStr = isFunction(link.name) ? link.name() : link.name;
-		
+
 		list.push({nameStr: nameStr, func: link.func, enabled: enabled, tooltip: link.tooltip, image: link.image});
 		//Input.buttons[i].Setup(nameStr, link.func, enabled);
 	}
 	//list.sort( function(a, b) { return a.nameStr > b.nameStr; } );
-	
+
 	Gui.SetButtonsFromList(list, null, null, GameState.Event);
 }
 
-// Shows 
+// Shows
 Event.prototype.PrintDesc = function() {
 	if(this.description) {
 		if(isFunction(this.description))
@@ -256,7 +256,7 @@ Event.prototype.PrintDesc = function() {
 		else
 			Text.Add(this.description);
 	}
-	
+
 	for(var i = 0; i < this.links.length; i++) {
 		var link = this.links[i];
 		if(link.print) {
@@ -266,7 +266,7 @@ Event.prototype.PrintDesc = function() {
 				Text.Add(link.print);
 		}
 	}
-	
+
 	for(var i = 0; i < this.events.length; i++) {
 		var e = this.events[i];
 		if(e.print) {
@@ -276,14 +276,14 @@ Event.prototype.PrintDesc = function() {
 				Text.Add(e.print);
 		}
 	}
-	
+
 	if(this.endDescription) {
 		if(isFunction(this.endDescription))
 			this.endDescription();
 		else
 			Text.Add(this.endDescription);
 	}
-	
+
 	// At safe locations you can sleep and save
 	if(party.location.safe()) {
 		Text.NL();
@@ -318,14 +318,14 @@ function EncounterTable() {
 
 /*
  Example code for adding encounters:
-  
+
  encs.AddEnc(function() {
  	var enemy = new Party();
 	enemy.AddMember(new IntroDemon());
 	enemy.AddMember(new Imp());
 	enemy.AddMember(new Imp());
 	var enc = new Encounter(enemy);
-	
+
 	enc.canRun = false;
 	enc.onEncounter = ...
 	enc.onLoss = ...
@@ -334,7 +334,7 @@ function EncounterTable() {
 	
 	return enc;
  }, 1.0);
- 
+
  */
 
 // Setup phase
@@ -349,7 +349,7 @@ EncounterTable.prototype.Num = function() {
 // Get a fight
 EncounterTable.prototype.Get = function() {
 	var scenes = [];
-	
+
 	// Calculate total scale of odds
 	var sum = 0;
 	for(var i = 0; i < this.encounters.length; i++) {
@@ -361,16 +361,16 @@ EncounterTable.prototype.Get = function() {
 			if(canFind) {
 				var odds = e.odds;
 				if(odds === undefined) odds = 1.0;
-				if(isFunction(odds)) odds = odds(); 
+				if(isFunction(odds)) odds = odds();
 				scenes.push({func: e.func, odds: odds, obj: e.obj});
 				sum += odds;
 			}
 		}
 	}
-	
+
 	// Pick an encounter
 	var step = Math.random() * sum;
-	
+
 	for(var i = 0; i < scenes.length; i++) {
 		var enc = scenes[i];
 		step -= enc.odds;

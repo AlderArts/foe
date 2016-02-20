@@ -1,6 +1,6 @@
 
 Input = {
-	
+
 	//TODO: Raphael sets?
 	buttons        : new Array(),
 	navButtons     : new Array(),
@@ -8,9 +8,9 @@ Input = {
 	menuButtons    : new Array(),
 	// Input array that holds the inputs keys as true/false values
 	keyinput       : new Array(),
-	
+
 	keyDownValid   : true,
-	
+
 	// Mouse button states and mouse position
 	mousebutton    : false,
 	MousePos       : {x: 0, y: 0}
@@ -21,28 +21,28 @@ Input = {
 Input.Init = function() {
 	var canvas = document.getElementById("canvas");
 
-    window.onkeydown   = Input.Keydown;
-    window.onkeyup     = Input.Keyup;
-    /*
-    canvas.onmousedown = Mousedown;
-    canvas.onmouseup   = Mouseup;
-    canvas.onmousemove = Mousemove;
-    */
+	window.onkeydown   = Input.Keydown;
+	window.onkeyup     = Input.Keyup;
+	/*
+	canvas.onmousedown = Mousedown;
+	canvas.onmouseup   = Mouseup;
+	canvas.onmousemove = Mousemove;
+	*/
 
-    Input.buttonSet        = Gui.canvas.set();
-    Input.navButtonSet     = Gui.canvas.set();
-    Input.exploreButtonSet = Gui.canvas.set();
-    Input.menuButtonSet    = Gui.canvas.set();
+	Input.buttonSet        = Gui.canvas.set();
+	Input.navButtonSet     = Gui.canvas.set();
+	Input.exploreButtonSet = Gui.canvas.set();
+	Input.menuButtonSet    = Gui.canvas.set();
 
-    Input.InitButtons();
-    
-    Input.InitMenuButtons();
+	Input.InitButtons();
+
+	Input.InitMenuButtons();
 }
 
 // Init functions for the button sets
 Input.InitButtons = function() {
 	var offset = {x: 270, y:600};
-	
+
 	var x, y, button;
 	for(y = 0; y < 3; y++) {
 		for(x = 0; x < 4; x++) {
@@ -50,7 +50,7 @@ Input.InitButtons = function() {
 			Input.buttons.push(button);
 			Input.buttonSet.push(button.set);
 		}
-		
+
 		button = new Button({x : offset.x + 162*4, y : offset.y + 40*y, w : 75, h : 35}, "Nav" + y, null, true, Images.imgNavButtonEnabled, Images.imgNavButtonDisabled);
 		Input.navButtons.push(button);
 		Input.navButtonSet.push(button.set);
@@ -73,7 +73,7 @@ Input.InitButtons = function() {
 
 Input.InitMenuButtons = function() {
 	var offset = {x: 15, y:620};
-	
+
 	// TOP, Data menu
 	var button = new Button({x : 10, y : 10, w : 155, h : 35}, "DATA", null, true, Images.imgButtonEnabled, Images.imgButtonDisabled);
 	Input.menuButtons.push(button);
@@ -197,9 +197,9 @@ Input.Keydown = function(event) {
 	// Used for text input, when we don't want to have shortcut keys active
 	if(!Input.keyDownValid)
 		return true;
-		
+
 	//event.preventDefault();
-	
+
 	// TODO: Prioritze layers
 	var i;
 	switch(gameState) {
@@ -218,7 +218,7 @@ Input.Keydown = function(event) {
 				Input.navButtons[i].HandleKeydown(event.keyCode);
 		break;
 	}
-	
+
 	/* TODO Not really used atm
 	switch(event.keyCode) {
 		case KEY_A: Input.keyinput[LEFT_ARROW]  = true; break;
