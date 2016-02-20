@@ -26,7 +26,7 @@ Abilities.Run.CastInternal = function(encounter, caster) {
 		var goal = caster.level / (caster.level + runlevel);
 		if(caster.HasPerk(Perks.Fleetfoot)) goal *= 1.5;
 		
-		if(goal < Math.random() || DEBUG) {
+		if((Math.random() < goal) || DEBUG) {
 			encounter.onRun();
 		}
 		else {
