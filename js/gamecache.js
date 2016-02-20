@@ -5,12 +5,12 @@ InitCache = function() {
 	// Reset exploration
 	LastSubmenu = null;
 	Intro.active = false;
-	
+
 	// SAVE VERSION
 	gameCache.version = parseInt(gameCache.version) || SAVE_VERSION;
-	
+
 	// TIME
-	gameCache.time = gameCache.time || 
+	gameCache.time = gameCache.time ||
 	{
 		year   : 890,
 		season : Season.Summer,
@@ -18,7 +18,7 @@ InitCache = function() {
 		hour   : 8,
 		minute : 0
 	};
-	
+
 	rigard   = new Rigard(gameCache.rigard);
 	farm     = new Farm(gameCache.farm);
 	burrows  = new Burrows(gameCache.burrows);
@@ -26,7 +26,7 @@ InitCache = function() {
 	treecity = new TreeCity(gameCache.treecity);
 	oasis    = new Oasis(gameCache.oasis);
 	nursery  = new Nursery(gameCache.nursery);
-	
+
 	// ENTITIES
 	player  = new Player(gameCache.player);
 	kiakai  = new Kiakai(gameCache.kiakai);
@@ -36,58 +36,58 @@ InitCache = function() {
 	lei     = new Lei(gameCache.lei);
 	twins   = new Twins(gameCache.twins);
 	room69  = new Room69(gameCache.room69);
-	
+
 	chief   = new Chief(gameCache.chief);
 	rosalin = new Rosalin(gameCache.rosalin);
 	cale    = new Cale(gameCache.wolfie);
 	estevan = new Estevan(gameCache.estevan);
 	magnus  = new Magnus(gameCache.magnus);
 	patchwork = new Patchwork(gameCache.patches);
-	
+
 	lagon   = new Lagon(gameCache.lagon);
 	ophelia = new Ophelia(gameCache.ophelia);
 	vena    = new Vena(gameCache.vena);
 	roa     = new Roa(gameCache.roa);
-	
+
 	gwendy  = new Gwendy(gameCache.gwendy);
 	danie   = new Danie(gameCache.danie);
 	adrian  = new Adrian(gameCache.adrian);
 	layla   = new Layla(gameCache.layla);
-	
+
 	isla    = new Isla(gameCache.isla);
-	
+
 	outlaws  = new Outlaws(gameCache.outlaws);
 	aquilius = new Aquilius(gameCache.aquilius);
 	maria    = new Maria(gameCache.maria);
 	cveta    = new Cveta(gameCache.cveta);
 	vaughn   = new Vaughn(gameCache.vaughn);
-	
+
 	fera    = new Fera(gameCache.fera);
 	asche   = new Asche(gameCache.asche);
 	cassidy = new Cassidy(gameCache.cass);
-	
+
 	jeanne  = new Jeanne(gameCache.jeanne);
 	golem   = new GolemBoss(gameCache.golem);
-	
+
 	orchid  = new OrchidBoss(gameCache.orchid);
-	
+
 	ravenmother = new RavenMother(gameCache.raven);
 	uru         = new Uru(gameCache.uru);
-	
+
 	lucille     = new Lucille(gameCache.lucille);
 	belinda     = new Belinda(gameCache.belinda);
 	// Themerooms
 	bastet      = new Bastet(gameCache.bastet);
 	gryphons    = new Gryphons(gameCache.gryphons);
 	fireblossom = new Fireblossom(gameCache.fb);
-	
+
 	// Don't load for now
 	aria        = new Aria();
 	sylistraxia = new Sylistraxia();
 	ches        = new Ches(); //TODO
-	
+
 	world.EntityStorage = new Array();
-	
+
 	// Stuff that also has update methods
 	world.EntityStorage.push(rigard);
 	world.EntityStorage.push(farm);
@@ -95,7 +95,7 @@ InitCache = function() {
 	world.EntityStorage.push(oasis);
 	world.EntityStorage.push(outlaws);
 	world.EntityStorage.push(nursery);
-	
+
 	// Put entities in world storage
 	world.EntityStorage.push(player);
 	world.EntityStorage.push(kiakai);
@@ -107,80 +107,80 @@ InitCache = function() {
 	world.EntityStorage.push(twins.rumi);
 	world.EntityStorage.push(twins.rani);
 	world.EntityStorage.push(room69);
-	
+
 	world.EntityStorage.push(chief);
 	world.EntityStorage.push(rosalin);
 	world.EntityStorage.push(cale);
 	world.EntityStorage.push(estevan);
 	world.EntityStorage.push(magnus);
 	world.EntityStorage.push(patchwork);
-	
+
 	world.EntityStorage.push(lagon);
 	world.EntityStorage.push(ophelia);
 	world.EntityStorage.push(vena);
 	world.EntityStorage.push(roa);
-	
+
 	world.EntityStorage.push(gwendy);
 	world.EntityStorage.push(danie);
 	world.EntityStorage.push(adrian);
 	world.EntityStorage.push(layla);
-	
+
 	world.EntityStorage.push(isla);
-	
+
 	world.EntityStorage.push(aquilius);
 	world.EntityStorage.push(maria);
 	world.EntityStorage.push(cveta);
 	world.EntityStorage.push(vaughn);
-	
+
 	world.EntityStorage.push(fera);
 	world.EntityStorage.push(asche);
 	world.EntityStorage.push(cassidy);
-	
+
 	world.EntityStorage.push(jeanne);
 	world.EntityStorage.push(golem);
-	
+
 	world.EntityStorage.push(orchid);
-	
+
 	world.EntityStorage.push(ravenmother);
-	
+
 	world.EntityStorage.push(aria);
 	world.EntityStorage.push(uru);
 	world.EntityStorage.push(sylistraxia);
-	
+
 	world.EntityStorage.push(ches);
 	world.EntityStorage.push(lucille);
 	world.EntityStorage.push(belinda);
 	world.EntityStorage.push(bastet);
 	world.EntityStorage.push(gryphons);
 	world.EntityStorage.push(Fireblossom);
-	
+
 	// PARTY
 	party = new Party();
 	party.FromStorage(gameCache.party);
-	
+
 	// FLAGS
 	gameCache.flags = gameCache.flags || {};
-	
+
 	gameCache.flags["LearnedMagic"]            = gameCache.flags["LearnedMagic"] || 0;
 	gameCache.flags["Portals"]                 = gameCache.flags["Portals"] || 0;
-	
+
 	// Intro flags
 	gameCache.flags["IntroOutset"]             = gameCache.flags["IntroOutset"] || Intro.Outset.SaveWorld;
 
 	gameCache.flags["NagaVenom"]      = gameCache.flags["NagaVenom"] || 0;
 	gameCache.flags["NagaMate"]       = gameCache.flags["NagaMate"] || 0;
-	
+
 	gameCache.flags["Moth"]      = gameCache.flags["Moth"] || 0;
-	
+
 	//Halloween event
 	gameCache.flags["HW"] = gameCache.flags["HW"] || 0;
-	
+
 	if(burrows.flags["Access"] >= Burrows.AccessFlags.Stage5) rigard.flags["Scepter"] = 0;
 }
 
 CacheToGame = function() {
 	InitCache();
-	
+
 	// Load flags
 	for(var flag in gameCache.flags)
 		gameCache.flags[flag] = parseInt(gameCache.flags[flag]);
@@ -190,7 +190,7 @@ CacheToGame = function() {
 	                      parseInt(gameCache.time.day),
 	                      parseInt(gameCache.time.hour),
 	                      parseInt(gameCache.time.minute));
-	
+
 	// Adjust for old save formats
 	if(gameCache.version < 4) {
 		kiakai.body.SetRace(Race.Elf);
@@ -206,7 +206,7 @@ CacheToGame = function() {
 		gwendy.flags["Met"] = gameCache.flags["GwendyMet"] || 0;     gameCache.flags["GwendyMet"] = null;
 		adrian.flags["Met"] = gameCache.flags["AdrianMet"] || 0;     gameCache.flags["AdrianMet"] = null;
 		danie.flags["Met"]  = gameCache.flags["DanieMet"] || 0;      gameCache.flags["DanieMet"] = null;
-		
+
 		// Kiakai
 		kiakai.flags["InitialGender"]           = gameCache.flags["KiakaiInitialGender"] || Gender.male; gameCache.flags["KiakaiInitialGender"] = null;
 
@@ -241,12 +241,12 @@ CacheToGame = function() {
 	if(gameCache.version < 11) {
 		kiakai.weaponSlot   = Items.Weapons.WoodenStaff;
 		kiakai.topArmorSlot = Items.Armor.SimpleRobes;
-		
+
 		Gui.Callstack.push(function() {
 			Text.Clear();
 			Text.Add("What profession do you wish to start as?");
 			Text.Flush();
-			
+
 			var options = new Array();
 			options.push({ nameStr : "Fighter",
 				func : function() {
@@ -307,7 +307,7 @@ CacheToGame = function() {
 					player.jobs["Courtesan"].mult = 0.5;
 					player.jobs["Fighter"].mult   = 1;
 					player.Equip();
-			    	PrintDefaultOptions();
+					PrintDefaultOptions();
 				}, enabled : true,
 				tooltip : "Focused on sensual abilities and charming your foes into submission."
 			});
@@ -321,20 +321,20 @@ CacheToGame = function() {
 		}
 	}
 	if(gameCache.version < 13) {
-	    if(rigard.flags["KrawitzQ"]) {
-	        rigard.Krawitz["Q"]      = rigard.flags["KrawitzQ"];
-	        rigard.flags["KrawitzQ"] = null;
-	    }
+		if(rigard.flags["KrawitzQ"]) {
+			rigard.Krawitz["Q"]      = rigard.flags["KrawitzQ"];
+			rigard.flags["KrawitzQ"] = null;
+		}
 	}
 	if(gameCache.version < 14) {
 		miranda.flags["Herm"] = (miranda.flags["Met"] >= Miranda.Met.TavernAftermath) ? 1 : 0;
 	}
 	if(gameCache.version < 15) {
-		if(rigard.Krawitz["Q"] >= Rigard.KrawitzQ.HeistDone) 
+		if(rigard.Krawitz["Q"] >= Rigard.KrawitzQ.HeistDone)
 			twins.flags["Met"] = Twins.Met.Access;
 	}
 	if(gameCache.version < 16) {
-		if(golem.flags["Met"] > Scenes.Golem.State.Lost) 
+		if(golem.flags["Met"] > Scenes.Golem.State.Lost)
 			jeanne.flags["Met"] = 1;
 	}
 	if(gameCache.version < 17) {
@@ -417,9 +417,9 @@ GameToCache = function() {
 	gameCache.version  = SAVE_VERSION;
 	// For debugging
 	gameCache.build    = VERSION_STRING;
-	
+
 	gameCache.time     = world.time;
-	
+
 	gameCache.rigard   = rigard.ToStorage();
 	gameCache.farm     = farm.ToStorage();
 	gameCache.burrows  = burrows.ToStorage();
@@ -427,7 +427,7 @@ GameToCache = function() {
 	gameCache.treecity = treecity.ToStorage();
 	gameCache.oasis    = oasis.ToStorage();
 	gameCache.nursery  = nursery.ToStorage();
-	
+
 	// Party
 	gameCache.player  = player.ToStorage();
 	gameCache.kiakai  = kiakai.ToStorage();
@@ -437,13 +437,13 @@ GameToCache = function() {
 	gameCache.lei     = lei.ToStorage();
 	gameCache.twins   = twins.ToStorage();
 	gameCache.room69  = room69.ToStorage();
-	
+
 	gameCache.outlaws  = outlaws.ToStorage();
 	gameCache.aquilius = aquilius.ToStorage();
 	gameCache.maria    = maria.ToStorage();
 	gameCache.cveta    = cveta.ToStorage();
 	gameCache.vaughn   = vaughn.ToStorage();
-	
+
 	// Other NPCs
 	gameCache.chief    = chief.ToStorage();
 	gameCache.rosalin  = rosalin.ToStorage();
@@ -451,31 +451,31 @@ GameToCache = function() {
 	gameCache.estevan  = estevan.ToStorage();
 	gameCache.magnus   = magnus.ToStorage();
 	gameCache.patches  = patchwork.ToStorage();
-	
+
 	gameCache.lagon    = lagon.ToStorage();
 	gameCache.ophelia  = ophelia.ToStorage();
 	gameCache.vena     = vena.ToStorage();
 	gameCache.roa      = roa.ToStorage();
-	
+
 	gameCache.gwendy   = gwendy.ToStorage();
 	gameCache.adrian   = adrian.ToStorage();
 	gameCache.danie    = danie.ToStorage();
 	gameCache.layla    = layla.ToStorage();
-	
+
 	gameCache.isla     = isla.ToStorage();
-	
+
 	gameCache.fera     = fera.ToStorage();
 	gameCache.asche    = asche.ToStorage();
 	gameCache.cass     = cassidy.ToStorage();
-	
+
 	gameCache.jeanne   = jeanne.ToStorage();
 	gameCache.golem    = golem.ToStorage();
-	
+
 	gameCache.orchid   = orchid.ToStorage();
-	
+
 	gameCache.raven    = ravenmother.ToStorage();
 	gameCache.uru      = uru.ToStorage();
-	
+
 	gameCache.lucille  = lucille.ToStorage();
 	gameCache.belinda  = belinda.ToStorage();
 	gameCache.bastet   = bastet.ToStorage();
@@ -486,11 +486,11 @@ GameToCache = function() {
 	gameCache.sylistraxia = sylistraxia.ToStorage();
 	gameCache.ches    = ches.ToStorage();
 	*/
-	
+
 	// Current party
 	gameCache.party   = party.ToStorage();
-	
-	
+
+
 	var parse = {
 		name   : gameCache.player.name,
 		gender : Gender.Short(player.body.Gender()),
@@ -498,7 +498,7 @@ GameToCache = function() {
 		slvl   : gameCache.player.slvl,
 		date   : gameCache.time.DateString()
 	};
-	
-	gameCache.name   = 
+
+	gameCache.name   =
 		Text.Parse("[name]([gender]), Lvl [lvl]/[slvl], [date]", parse);
 }

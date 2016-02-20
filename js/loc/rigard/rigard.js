@@ -1,19 +1,19 @@
 /*
- * 
+ *
  * Town area that can be explored
- * 
+ *
  */
 
 // Create namespace
 world.loc.Rigard = {
 	Gate         : new Event("Main Gate"),
-	Barracks     : 
+	Barracks     :
 	{
 		common   : new Event("Barracks commons"),
 		sparring : new Event("Sparring yard"),
 		captains : new Event("Captains quarters")
 	},
-	
+
 	Residental   :
 	{
 		street   : new Event("Residental street"), // Will also contain gate to slums
@@ -21,13 +21,13 @@ world.loc.Rigard = {
 		miranda  : new Event("Miranda's house"),
 		mDungeon : new Event("Miranda's dungeon")
 	},
-	
+
 	Brothel      :
 	{
 		brothel  : new Event("Brothel"),
 		cellar   : new Event("Brothel: Cellar")
 	},
-	
+
 	Plaza        : new Event("Plaza"),
 	Inn          :
 	{
@@ -38,7 +38,7 @@ world.loc.Rigard = {
 		room69    : new Event("Room 369"),
 		penthouse : new Event("Penthouse")
 	},
-	
+
 	Slums        :
 	{
 		gate     : new Event("Peasants' Gate"),
@@ -55,15 +55,15 @@ Scenes.Rigard = {};
 // Class to handle global flags and logic for town
 function Rigard(storage) {
 	this.flags = {};
-	
+
 	// TODO: Store
 	this.ClothShop = new Shop();
 	this.ClothShop.AddItem(Items.Armor.SimpleRobes, 5);
 	this.ClothShop.AddItem(Items.Armor.StylizedClothes, 5);
-	
+
 	this.ArmorShop = Scenes.Rigard.ArmorShop.Shop;
 	this.ArmorShopSpecial = Scenes.Rigard.ArmorShop.SpecialShop;
-	
+
 	this.SexShop = new Shop();
 	this.SexShop.AddItem(Items.StrapOn.PlainStrapon, 5);
 	this.SexShop.AddItem(Items.StrapOn.LargeStrapon, 5);
@@ -71,9 +71,9 @@ function Rigard(storage) {
 	this.SexShop.AddItem(Items.StrapOn.EquineStrapon, 5);
 	this.SexShop.AddItem(Items.StrapOn.ChimeraStrapon, 5);
 	this.SexShop.AddItem(Items.Weapons.LWhip, 5);
-	
+
 	this.MagicShop = Scenes.Rigard.MagicShop.Shop;
-	
+
 	// Have accessed town (not necessarily free access)
 	this.flags["Visa"] = 0;
 	this.flags["CityHistory"] = 0;
@@ -82,17 +82,17 @@ function Rigard(storage) {
 	// Have access to royal grounds (not necessarily free access)
 	this.flags["RoyalAccess"] = 0;
 	this.flags["RoyalAccessTalk"] = 0;
-	
+
 	this.flags["TalkedStatue"] = 0;
-	
+
 	this.flags["TailorMet"]   = 0;
 	this.flags["BuyingExp"]   = 0;
 	this.flags["Scepter"]     = 0;
-	
+
 	this.Twopenny = {};
 	this.Twopenny["Met"]   = 0;
 	this.Twopenny["TShop"] = 0;
-	
+
 	this.LB = {};
 	this.LB["Visit"]    = 0;
 	this.LB["Orvin"]    = 0;
@@ -109,27 +109,27 @@ function Rigard(storage) {
 	this.LB["Fairy"]    = 0;
 	this.LB["Red"]      = 0;
 	this.LBroomTimer    = new Time();
-	
+
 	// Non-permanent
 	this.RotOrvinInnTalk = 0;
-	
+
 	this.Krawitz = {};
-    this.Krawitz["Q"]    = Rigard.KrawitzQ.NotStarted; // Krawitz quest status
-    this.Krawitz["F"]    = 0; // Aftermath flags
-    this.Krawitz["Work"] = 0; // 
-    this.KrawitzWorkDay  = null; // Time
+	this.Krawitz["Q"]    = Rigard.KrawitzQ.NotStarted; // Krawitz quest status
+	this.Krawitz["F"]    = 0; // Aftermath flags
+	this.Krawitz["Work"] = 0; //
+	this.KrawitzWorkDay  = null; // Time
 	this.Krawitz["Duel"] = 0; // 0 = no, 1 = superwin, 2 = win, 3 = loss
-	
+
 	this.Brothel = {};
 	this.Brothel["Visit"]  = 0;
 	this.Brothel["MStrap"] = 0;
-	
+
 	this.CW = {};
 	this.CW["Visit"] = 0;
 	this.cwrel = new Stat(0);
-	
+
 	this.alianaRel = new Stat(0);
-	
+
 	if(storage) this.FromStorage(storage);
 }
 
@@ -151,25 +151,25 @@ Rigard.KrawitzQ = {
 
 Rigard.prototype.ToStorage = function() {
 	var storage = {};
-	
+
 	storage.flags   = this.flags;
-    storage.twoP    = this.Twopenny;
-    storage.Krawitz = this.Krawitz;
-    storage.Brothel = this.Brothel;
-    storage.CW      = this.CW;
-    if(this.cwrel.base != 0)
-    	storage.cwrel = this.cwrel.base.toFixed();
+	storage.twoP    = this.Twopenny;
+	storage.Krawitz = this.Krawitz;
+	storage.Brothel = this.Brothel;
+	storage.CW      = this.CW;
+	if(this.cwrel.base != 0)
+		storage.cwrel = this.cwrel.base.toFixed();
 	storage.LB      = this.LB;
 	storage.LBroom  = this.LBroomTimer.ToStorage();
 	storage.PT      = this.ParadeTimer.ToStorage();
 	if(this.KrawitzWorkDay)
 		storage.KWork   = this.KrawitzWorkDay.ToStorage();
-	
+
 	storage.MS = this.MagicShop.ToStorage();
-	
-    if(this.alianaRel.base != 0)
-    	storage.alrel = this.alianaRel.base.toFixed();
-	
+
+	if(this.alianaRel.base != 0)
+		storage.alrel = this.alianaRel.base.toFixed();
+
 	return storage;
 }
 
@@ -186,21 +186,21 @@ Rigard.prototype.FromStorage = function(storage) {
 		this.flags[flag] = parseInt(storage.flags[flag]);
 	for(var flag in storage.twoP)
 		this.Twopenny[flag] = parseInt(storage.twoP[flag]);
-    for(var flag in storage.Krawitz)
-        this.Krawitz[flag] = parseInt(storage.Krawitz[flag]);
-    for(var flag in storage.Brothel)
-        this.Brothel[flag] = parseInt(storage.Brothel[flag]);
-    for(var flag in storage.CW)
-        this.CW[flag] = parseInt(storage.CW[flag]);
-    if(storage.cwrel)
-    	this.cwrel.base = parseInt(storage.cwrel) || this.cwrel.base;
+	for(var flag in storage.Krawitz)
+		this.Krawitz[flag] = parseInt(storage.Krawitz[flag]);
+	for(var flag in storage.Brothel)
+		this.Brothel[flag] = parseInt(storage.Brothel[flag]);
+	for(var flag in storage.CW)
+		this.CW[flag] = parseInt(storage.CW[flag]);
+	if(storage.cwrel)
+		this.cwrel.base = parseInt(storage.cwrel) || this.cwrel.base;
 	for(var flag in storage.LB)
 		this.LB[flag] = parseInt(storage.LB[flag]);
-		
+
 	this.MagicShop.FromStorage(storage.MS);
-	
-    if(storage.alrel)
-    	this.alianaRel.base = parseInt(storage.alrel) || this.alianaRel.base;
+
+	if(storage.alrel)
+		this.alianaRel.base = parseInt(storage.alrel) || this.alianaRel.base;
 }
 
 Rigard.prototype.Update = function(step) {
@@ -225,7 +225,7 @@ Rigard.prototype.RoyalAccess = function() {
 }
 // TODO: use flags
 Rigard.prototype.CastleAccess = function() {
-	return false; 
+	return false;
 }
 
 Rigard.prototype.GatesOpen = function() {
@@ -239,7 +239,7 @@ Rigard.prototype.UnderLockdown = function() {
 Scenes.Rigard.CityHistory = function() {
 	Text.Clear();
 	var parse = {};
-	
+
 	if(party.location == world.loc.Rigard.Plaza) {
 		parse.person = "a well-dressed youngster";
 		parse.finish = "after ruffling her hair,";
@@ -249,18 +249,18 @@ Scenes.Rigard.CityHistory = function() {
 		parse.finish = "after scratching behind her ears,";
 	}
 	else if(party.location == world.loc.Rigard.Residental.street ||
-		    party.location == world.loc.Rigard.Slums.gate) {
+	        party.location == world.loc.Rigard.Slums.gate) {
 		parse.person = "a shabbily-dressed young dog-girl";
 		parse.finish = "after scratching behind her ears,";
-    }
+	}
 	else if(party.location == world.loc.Rigard.Gate) {
 		parse.person = "a straight-backed youngster";
 		parse.finish = "after ruffling her hair,";
 	}
-	
+
 	// Disable the scene from proccing more times
 	rigard.flags["CityHistory"] = 1;
-	
+
 	Text.Add("You're walking through the streets, looking around, when you're approached by [person].", parse);
 	Text.NL();
 	Text.Add("<i>“You're new here, aren't you?”</i> she asks. <i>“Everyone else just walks past everything without even glancing, but you're constantly looking around!”</i>", parse);
@@ -285,7 +285,7 @@ Scenes.Rigard.CityHistory = function() {
 	Text.NL();
 	Text.Add("You smile warmly at her, and thank her for telling you the story, and, [finish] you part ways.", parse);
 	Text.Flush();
-	
+
 	world.TimeStep({minute: 20});
 	Gui.NextPrompt();
 }
@@ -333,7 +333,7 @@ Scenes.Rigard.ChatterOutro = function(parse) {
 Scenes.Rigard.Chatter = function(enteringArea) {
 	Text.Clear();
 	var parse = {};
-	
+
 	var posh = false;
 	
 	var npcsA = [];
@@ -341,7 +341,7 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 	if(party.location == world.loc.Rigard.Plaza) {
 		parse.areaname = "plaza";
 		posh = true;
-		
+
 		npcsA.push({noun: "old nobleman", a: "an", gender: Gender.male});
 		npcsA.push({noun: "wealthy merchant", a: "a", gender: Math.random() > 0.2 ? Gender.male : Gender.female});
 		npcsA.push({noun: "old noblewoman", a: "an", gender: Gender.female});
@@ -350,7 +350,7 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 		npcsA.push({noun: "priest", a: "a", gender: Gender.male});
 		npcsA.push({noun: "priestess", a: "a", gender: Gender.female});
 		npcsA.push({noun: "royal guard", a: "a", gender: Math.random() > 0.2 ? Gender.male : Gender.female, royalGuard: true});
-		
+
 		npcsB.push({noun: "ragged servant", a: "a", gender: Gender.male});
 		npcsB.push({noun: "errand boy", a: "an", gender: Gender.male});
 		npcsB.push({noun: "ornate page", a: "an", gender: Gender.male});
@@ -360,7 +360,7 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 	}
 	else if(party.location == world.loc.Rigard.ShopStreet.street) {
 		parse.areaname = "merchant's district";
-		
+
 		npcsA.push({noun: "poor merchant", a: "a", gender: Math.random() > 0.5 ? Gender.male : Gender.female});
 		npcsA.push({noun: "colorful actor", a: "a", gender: Math.random() > 0.5 ? Gender.male : Gender.female});
 		npcsA.push({noun: "skinny bard", a: "a", gender: Gender.male});
@@ -368,7 +368,7 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 		npcsA.push({noun: "muscular farmer", a: "a", gender: Gender.male});
 		var gen = Math.random() > 0.3;
 		npcsA.push({noun: gen ? "guardsman" : "guardswoman", a: "a", gender: gen ? Gender.male : Gender.female});
-		
+
 		npcsB.push({noun: "rich merchant", a: "a", gender: Math.random() > 0.3 ? Gender.male : Gender.female});
 		npcsB.push({noun: "shopping noblewoman", a: "a", gender: Gender.female});
 		npcsB.push({noun: "well-dressed retainer", a: "a", gender: Gender.male});
@@ -380,14 +380,14 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 			parse.areaname = "residental district";
 		else
 			parse.areaname = "slums";
-		
+
 		npcsA.push({noun: "filthy laborer", a: "a", gender: Gender.male});
 		npcsA.push({noun: "poor workman", a: "a", gender: Gender.male});
 		npcsA.push({noun: "breastfeeding mother", a: "a", gender: Gender.female});
 		npcsA.push({noun: "gaunt woman", a: "a", gender: Gender.female});
 		npcsA.push({noun: "lean adolescent", a: "a", gender: Math.random() > 0.5 ? Gender.male : Gender.female});
 		npcsA.push({noun: "fisherman", a: "a", gender: Gender.male});
-		
+
 		npcsB.push({noun: "stooped man", a: "a", gender: Gender.male});
 		npcsB.push({noun: "half-naked woman", a: "a", gender: Gender.female});
 		npcsB.push({noun: "cloaked man", a: "a", gender: Gender.male});
@@ -398,13 +398,13 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 	}
 	else if(party.location == world.loc.Rigard.Gate) {
 		parse.areaname = "gate district";
-		
+
 		npcsA.push({noun: "rugged guard", a: "a", gender: Math.random() > 0.4 ? Gender.male : Gender.female});
 		npcsA.push({noun: "rookie guard", a: "a", gender: Math.random() > 0.4 ? Gender.male : Gender.female});
 		npcsA.push({noun: "guard trainer", a: "a", gender: Math.random() > 0.3 ? Gender.male : Gender.female});
 		npcsA.push({noun: "guard lieutenant", a: "a", gender: Math.random() > 0.2 ? Gender.male : Gender.female});
 		npcsA.push({noun: "court official", a: "a", gender: Math.random() > 0.2 ? Gender.male : Gender.female});
-		
+
 		npcsB.push({noun: "plump farmer", a: "a", gender: Math.random() > 0.3 ? Gender.male : Gender.female});
 		npcsB.push({noun: "worn-out traveler", a: "a", gender: Math.random() > 0.5 ? Gender.male : Gender.female});
 		npcsB.push({noun: "poor merchant", a: "a", gender: Math.random() > 0.5 ? Gender.male : Gender.female});
@@ -412,7 +412,7 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 		npcsB.push({noun: "tired messenger", a: "a", gender: Math.random() > 0.4 ? Gender.male : Gender.female});
 	}
 	else return; // Incorrect location
-	
+
 	// Pick two random npcs, from the same list
 	var npc1, npc2; var poshList = false;
 	if(Math.random() > 0.5) {
@@ -428,7 +428,7 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 		npc2 = npcsB[Rand(npcsB.length)];
 	}
 	var hasRoyalGuard = npc1.royalGuard || npc2.royalGuard;
-	
+
 	parse.NPC1     = npc1.noun;
 	parse.aAn1     = npc1.a;
 	parse.heshe1   = npc1.gender == Gender.male ? "he" : "she";
@@ -436,7 +436,7 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 	parse.hisher1  = npc1.gender == Gender.male ? "his" : "her";
 	parse.himher1  = npc1.gender == Gender.male ? "him" : "her";
 	parse.hishers1 = npc1.gender == Gender.male ? "his" : "hers";
-	
+
 	parse.NPC2     = npc2.noun;
 	parse.aAn2     = npc2.a;
 	parse.heshe2   = npc2.gender == Gender.male ? "he" : "she";
@@ -444,7 +444,7 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 	parse.hisher2  = npc2.gender == Gender.male ? "his" : "her";
 	parse.himher2  = npc2.gender == Gender.male ? "him" : "her";
 	parse.hishers2 = npc2.gender == Gender.male ? "his" : "hers";
-	
+
 	if(Math.random() > 0.5) {
 		parse.randommanWoman = "man";
 		parse.rheshe         = "he";
@@ -461,12 +461,12 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 		parse.rhimher        = "her";
 		parse.rhishers       = "hers";
 	}
-	
+
 	// Introductory text
 	Scenes.Rigard.ChatterIntro(parse, enteringArea);
-	
+
 	Text.NL();
-	
+
 	// Main rumor body
 	var scenes = new EncounterTable();
 	scenes.AddEnc(function() {
@@ -521,7 +521,7 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 			Text.NL();
 			Text.Add("<i>“No, what happened?”</i>", parse);
 			Text.NL();
-			
+
 			var opts = [];
 			opts.push("<i>“He said I was loitering, and my clothes were of a cut not allowed in the city. Ugh...”</i> [heshe1] groans in frustration. <i>“Basically, he was demanding a bribe, and I had no choice but to buy him off.”</i>");
 			opts.push("<i>“He said that I was too non-human, that being so morphed is beyond Lady Aria's will. I think he was just looking for an excuse to beat me up, but I managed to run off.”</i>");
@@ -630,17 +630,17 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 			Text.Add("<i>“I don’t know about that - I haven’t seen a single outlaw in the city…”</i>", parse);
 		}, 1.0, function() { return true; });
 	}
-	
+
 	// TODO: MORE RUMORS AFTER NIGHT INFILTRATION
 	scenes.Get();
-	
+
 	Text.NL();
 	// Outro text
 	Scenes.Rigard.ChatterOutro(parse);
-	
+
 	if(!enteringArea)
 		world.TimeStep({minute: 10});
-	
+
 	Text.Flush();
 	// Next button
 	Gui.NextPrompt();
@@ -652,12 +652,12 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 	var parse = {
 		playername : player.name
 	};
-	
+
 	var npcsLower   = [];
 	var npcsMiddle1 = [];
 	var npcsMiddle2 = [];
 	var npcsNoble   = [];
-	
+
 	npcsLower.push({noun: "ragged servant", a: "a"});
 	npcsLower.push({noun: "tired servant", a: "a"});
 	npcsLower.push({noun: "skinny bard", a: "a"});
@@ -668,14 +668,14 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 	npcsLower.push({noun: "gaunt woman", a: "a", gender: Gender.female});
 	npcsLower.push({noun: "drab farmer", a: "a"});
 	npcsLower.push({noun: "bedraggled laborer", a: "a"});
-	
+
 	var CreateLower = function() {
 		var idx = Rand(npcsLower.length);
 		var npc = npcsLower[idx]; npcsLower.remove(idx);
 		if(!npc.gender) npc.gender = Math.random() > 0.5 ? Gender.male : Gender.female;
 		return npc;
 	}
-	
+
 	npcsMiddle1.push({noun: "poor merchant", a: "a"});
 	npcsMiddle1.push({noun: "colorful actor", a: "a", gender: Gender.male});
 	npcsMiddle1.push({noun: "pudgy farmer", a: "a"});
@@ -686,14 +686,14 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 	npcsMiddle1.push({noun: "muscular trades" + gender == Gender.male ? "man" : "woman", a: "a", gender: gender});
 	var gender = Math.random() > 0.5 ? Gender.male : Gender.female;
 	npcsMiddle1.push({noun: "stylish " + gender == Gender.male ? "man" : "woman", a: "a", gender: gender});
-	
+
 	var CreateMiddle1 = function() {
 		var idx = Rand(npcsMiddle1.length);
 		var npc = npcsMiddle1[idx]; npcsMiddle1.remove(idx);
 		if(!npc.gender) npc.gender = Math.random() > 0.5 ? Gender.male : Gender.female;
 		return npc;
 	}
-	
+
 	npcsMiddle2.push({noun: "well-off merchant", a: "a"});
 	npcsMiddle2.push({noun: "plump farmer", a: "a"});
 	npcsMiddle2.push({noun: "well-dressed retainer", a: "a"});
@@ -701,14 +701,14 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 	npcsMiddle2.push({noun: "guild administrator", a: "a"});
 	npcsMiddle2.push({noun: "prim clerk", a: "a"});
 	npcsMiddle2.push({noun: "haughty painter", a: "a"});
-	
+
 	var CreateMiddle2 = function() {
 		var idx = Rand(npcsMiddle2.length);
 		var npc = npcsMiddle2[idx]; npcsMiddle2.remove(idx);
 		if(!npc.gender) npc.gender = Math.random() > 0.5 ? Gender.male : Gender.female;
 		return npc;
 	}
-	
+
 	npcsNoble.push({noun: "colorful", a: "a"});
 	npcsNoble.push({noun: "wealthy", a: "a"});
 	npcsNoble.push({noun: "tall", a: "a"});
@@ -723,7 +723,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 	npcsNoble.push({noun: "motherly", a: "a", gender: Gender.female});
 	npcsNoble.push({noun: "muscular", a: "a", gender: Gender.male});
 	npcsNoble.push({noun: "curvy", a: "a", gender: Gender.female});
-	
+
 	var CreateNoble = function() {
 		var idx = Rand(npcsNoble.length);
 		var npc = npcsNoble[idx]; npcsNoble.remove(idx);
@@ -732,7 +732,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		npc.noun += (gender == Gender.male ? "man" : "woman");
 		return npc;
 	}
-	
+
 	if(party.location == world.loc.Rigard.Plaza)
 		parse.areaname = "plaza";
 	else if(party.location == world.loc.Rigard.ShopStreet.street)
@@ -746,7 +746,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 	else if(party.location == world.loc.Rigard.Castle.Grounds)
 		parse.areaname = "royal grounds";
 	else return; // Incorrect location
-	
+
 	var SetGenders = function(npc1, npc2) {
 		npc1  = npc1  || {};
 		npc2  = npc2  || {};
@@ -757,7 +757,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		parse.hisher1  = npc1.gender == Gender.male ? "his" : "her";
 		parse.himher1  = npc1.gender == Gender.male ? "him" : "her";
 		parse.hishers1 = npc1.gender == Gender.male ? "his" : "hers";
-		
+
 		parse.NPC2     = npc2.noun;
 		parse.aAn2     = npc2.a;
 		parse.heshe2   = npc2.gender == Gender.male ? "he" : "she";
@@ -766,7 +766,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		parse.himher2  = npc2.gender == Gender.male ? "him" : "her";
 		parse.hishers2 = npc2.gender == Gender.male ? "his" : "hers";
 	}
-	
+
 	var SetRandomGender = function() {
 		if(Math.random() > 0.5) {
 			parse.rguygirl       = "guy";
@@ -791,7 +791,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 			return Gender.female;
 		}
 	}
-	
+
 	var nobleArea  = party.location == world.loc.Rigard.Plaza ? 1 :
 	                 party.location == world.loc.Rigard.ShopStreet.street ? 1 :
 	                 party.location == world.loc.Rigard.Castle.Grounds ? 1 : 0;
@@ -803,7 +803,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 	                 party.location == world.loc.Rigard.Residental.street ? 1 :
 	                 party.location == world.loc.Rigard.Gate ? 1 :
 	                 party.location == world.loc.Rigard.Slums.gate ? 1 : 0;
-	
+
 	var CreateNPC = function(lower, mid1, mid2, noble) {
 		var scenes = new EncounterTable();
 		scenes.AddEnc(function() {
@@ -820,12 +820,12 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		}, nobleArea, noble);
 		return scenes.Get();
 	}
-	
+
 	var scenes = new EncounterTable();
 	scenes.AddEnc(function() {
 		SetGenders(CreateNPC(true, true, true, false),
 		           CreateNPC(true, true, true, false));
-		
+
 		// Introductory text
 		Scenes.Rigard.ChatterIntro(parse, enteringArea);
 		Text.NL();
@@ -1310,7 +1310,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		}
 		Text.NL();
 		Text.Add("A moment later, you hear shrill whistles and the pounding of heavy boots, as the crowd parts to let through a trio of angry-looking watchmen", parse);
-		
+
 		var scenes = new EncounterTable();
 		scenes.AddEnc(function() {
 			Text.Add(" led by Miranda.", parse);
@@ -1320,9 +1320,9 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		scenes.AddEnc(function() {
 			Text.Add(", who run past, huffing for air under the weight of their gear. They’re making a valiant effort, but unless the thief trips or some passerby catches [rhimher], you doubt they’ll be able to catch up.", parse);
 		}, 1.0, function() { return true; });
-		
+
 		scenes.Get();
-		
+
 		Text.NL();
 		Text.Add("You feel a little guilty for not catching on quickly enough to stop the thief. Perhaps you’ll do better another time.", parse);
 	}, 1.0, function() { return world.time.hour >= 6 && world.time.hour < 19; });
@@ -1337,7 +1337,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.NL();
 		Text.Add("<i>“No, you must come!”</i> He grabs your hand and you don’t react quite quickly enough to get away. <i>“If the tension bound up within you is not let out soon, you will most certainly suffer great consequences! Why, it must be months, if not years, since your last time!”</i>", parse);
 		Text.Flush();
-		
+
 		//[Accept][Run]
 		var options = new Array();
 		options.push({ nameStr : "Accept",
@@ -1352,7 +1352,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 				Text.NL();
 				Text.Add("Your escort glances through the door and exchanges a few words with someone inside before motioning for you to step through, and walking away.", parse);
 				Text.Flush();
-				
+
 				world.TimeStep({minute: 30});
 				Gui.NextPrompt();
 			}, enabled : true,
@@ -1367,7 +1367,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 					parse["comp"] = "your companions";
 				else
 					parse["comp"] = "";
-					
+
 				parse["c1"] = party.Num() > 1 ? Text.Parse(", without even waiting to see if [comp] can keep up", parse) : "";
 				Text.Add("You probably look a little silly, but you determinedly speed up to a jog, pushing past passersby[c1]. There are shouts about you running away because you’re afraid of intimacy behind you, but after half a minute you’re far enough that even the man’s prodigious voice begins to fade in the distance.", parse);
 				Text.NL();
@@ -1376,14 +1376,14 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 				Text.NL();
 				Text.Add("Problem. Solved.", parse);
 				Text.Flush();
-				
+
 				world.TimeStep({minute: 10});
 				Gui.NextPrompt();
 			}, enabled : true,
 			tooltip : "Nope. You’re not having any of that. The best plan is to just get away from him."
 		});
 		Gui.SetButtonsFromList(options, false, null);
-		
+
 		return true;
 	}, 1.0, function() { return rigard.Access() && world.time.hour >= 6 && world.time.hour < 19; });
 	scenes.AddEnc(function() {
@@ -1434,11 +1434,11 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.NL();
 		Text.Add("Unfortunately, the stand is solidly made, and the boards press closely together. You curse the quality carpentry. After hesitating a few seconds longer, you conclude that you’re not going to see much by standing around, and decide to move on.", parse);
 	}, 1.0, function() { return party.location == world.loc.Rigard.ShopStreet.street; });
-	
+
 	if(!scenes.Get()) {
 		if(!enteringArea)
 			world.TimeStep({minute: 10});
-		
+
 		Text.Flush();
 		// Next button
 		Gui.NextPrompt();
@@ -1455,11 +1455,11 @@ Scenes.Rigard.Lockdown = function() {
 		tongueDesc : function() { return player.TongueDesc(); },
 		armorDesc : function() { return player.ArmorDesc(); }
 	};
-	
+
 	rigard.Krawitz["Q"] = Rigard.KrawitzQ.HuntingTerry;
-	
+
 	var dom = miranda.SubDom() - player.SubDom();
-	
+
 	Text.Clear();
 	Text.Add("As you approach the gates you’re surprised to see them closed. There appears to be some commotion over a few [merchantsCitizens] wanting to leave. One of the guards nearby spots you and moves to talk to you, but a familiar dog-morph butts in and greets you first.", parse);
 	Text.NL();
@@ -1498,12 +1498,12 @@ Scenes.Rigard.Lockdown = function() {
 		Text.Add("You tell [comp] to wait for you at the Lady’s Blessing, looks like this is going to take some time.", parse);
 		Text.NL();
 	}
-	
+
 	party.SaveActiveParty();
 	party.ClearActiveParty();
 	party.SwitchIn(player);
 	party.AddMember(miranda, true);
-	
+
 	if(miranda.Sexed()) {
 		if(miranda.SubDom() > 25) {
 			Text.Add("As you make your way past the gates, the dog-morph pulls you close by the shoulders to whisper into your [earDesc], <i>“Bet you can’t wait for us to have a duck down a dark corner.</i>", parse);
@@ -1532,10 +1532,10 @@ Scenes.Rigard.Lockdown = function() {
 	Text.NL();
 	Text.Add("<i>“We should discuss a few details before we get started. So, let’s go to the Maiden’s Bane and plan our moves,”</i> she says, leading you toward her favorite watering hole.", parse);
 	Text.Flush();
-	
+
 	party.location = world.loc.Rigard.Tavern.common;
 	world.TimeStep({hour : 1});
-	
+
 	Gui.NextPrompt(function() {
 		Text.Clear();
 		parse["lady"] = player.Femininity() < -0.5 ? "stepping in" : "motioning for you to get inside";
@@ -1568,7 +1568,7 @@ Scenes.Rigard.Lockdown = function() {
 			Text.Add("poured a transformative in the old fool’s food, ", parse);
 		Text.Add("and last but not least, they also left that damn card mocking us all.”</i>", parse);
 		Text.NL();
-		
+
 		if(rigard.Krawitz["F"] != 0) {
 			Text.Add("A pang of unease stabs into your heart; you knew it was almost inevitable that your own actions would be discovered, but so soon? Still... sounds like whoever this mystery thief is, they decided it'd be easier to just blame them for the things you did as well. Although you are relieved at the fact your own cover hasn't been blown, a part of you does still feel a little guilty about someone else taking the blame. Still, it’s in your best interest to not take the fall for your crimes. Good thing you’re helping investigate rather than being investigated yourself.", parse);
 			Text.NL();
@@ -1583,9 +1583,9 @@ Scenes.Rigard.Lockdown = function() {
 		Text.NL();
 		Text.Add("Nothing that might help immediately springs to mind, and you admit as such to Miranda. Looks like you'll have to just get out there and start looking.", parse);
 		Text.NL();
-		
+
 		var cocksInVag = player.CocksThatFit(miranda.FirstVag());
-		
+
 		if(miranda.flags["Herm"] == 0) {
 			Text.Add("<i>“Before we get going, how about you help me with an itch I’m having?”</i> the guardswoman asks with a mischievous grin. It looks like the drinks are starting to take effect, as the dobie’s eyes are slightly unfocused and her breathing is getting heavy.", parse);
 			Text.NL();
@@ -1603,7 +1603,7 @@ Scenes.Rigard.Lockdown = function() {
 			Text.NL();
 			Text.Add("<b>You now know Miranda is a herm (duh).</b>", parse);
 			Text.Flush();
-			
+
 			miranda.flags["Herm"] = 1;
 			miranda.flags["Met"]  = Miranda.Met.TavernAftermath;
 			//[Hot]
@@ -1617,7 +1617,7 @@ Scenes.Rigard.Lockdown = function() {
 					Text.NL();
 					Text.Add("You insist that you should probably get going. That thief isn’t going to catch himself. She chuckles, amused at your reaction. <i>“Well, lets get to it then!”</i> The two of you leave the tavern and return inside the city proper. From what you gather, you aren’t going to get out of here before the thief is caught.", parse);
 					Text.Flush();
-					
+
 					miranda.flags["Attitude"] = Miranda.Attitude.Neutral;
 					PrintDefaultOptions();
 				}, enabled : true,
@@ -1630,7 +1630,7 @@ Scenes.Rigard.Lockdown = function() {
 					Text.NL();
 					Text.Add("Yes, you have to admit. This is very <i>interesting</i> indeed. Now that you have a proper ‘grasp’ of the situation, what should you do about her?", parse);
 					Text.Flush();
-					
+
 					//[TakeCharge]
 					var options = new Array();
 					options.push({ nameStr : "Take charge",
@@ -1641,7 +1641,7 @@ Scenes.Rigard.Lockdown = function() {
 							Text.Add("For several long, pleasant moments the two of you tongue-wrestle, softly moaning and mumbling your pleasure into each other's lips, before you release her. Smirking down at the panting herm, a bead of pre forming at the tip of her erection. You mockingly ask her if she intends to stay dressed for this or is she going to take off the rest of her uniform? Not that you mind either way… that pretty rump of hers is good enough for the taking, after all.", parse);
 							Text.NL();
 							Text.Flush();
-							
+
 							Scenes.Miranda.TerryTavernSexSubbyVag(cocksInVag);
 						}, enabled : cocksInVag.length > 0,
 						tooltip : "She wants sex, but who says she has to get it on her terms? Why not take charge of scratching her itch?"
@@ -1652,7 +1652,7 @@ Scenes.Rigard.Lockdown = function() {
 							Text.Add("The dog-herm wastes no time in hopping on her feet, stripping off the rest of her armor as she approaches you to help you take off your [armorDesc]. Though she fumbles with both your outfits she has you naked in record time. Without so much as a word, she takes you by the arm and sets you down on your knees atop the cushions in the corner of the room.", parse);
 							Text.NL();
 							Text.Flush();
-							
+
 							Scenes.Miranda.TerryTavernSexDommyBJ();
 						}, enabled : true,
 						tooltip : "If she wants her itch scratched, then she can come and get it."
@@ -1687,7 +1687,7 @@ Scenes.Rigard.Lockdown = function() {
 					Text.Add("Jolted into action, you follow after her, as she leads you out of the Maiden’s Bane and back inside Rigard’s gates.", parse);
 					Text.Flush();
 					miranda.flags["Attitude"] = Miranda.Attitude.Hate;
-					
+
 					PrintDefaultOptions();
 				}, enabled : true,
 				tooltip : "Eww, you’re not about to touch <b>that!</b>"
@@ -1700,7 +1700,7 @@ Scenes.Rigard.Lockdown = function() {
 				Text.NL();
 				Text.Add("Oh, Miranda, she's just never going to change, is she? You fight back a smile as you consider the offer.", parse);
 				Text.Flush();
-				
+
 				//[TakeCharge] [Submit] [Later]
 				var options = new Array();
 				options.push({ nameStr : "Take charge",
@@ -1710,7 +1710,7 @@ Scenes.Rigard.Lockdown = function() {
 						Text.NL();
 						Text.Add("For several long, pleasant moments the two of you tongue-wrestle, softly moaning and mumbling your pleasure into each other's lips, before you release her. Smirking down at the panting herm, her erection visibly tenting her pants from this angle, you mockingly ask her how she intends to have you sex her whilst she insists on keeping that pretty rump of hers all covered up in her uniform.", parse);
 						Text.Flush();
-						
+
 						Scenes.Miranda.TerryTavernSexSubbyVag(cocksInVag);
 					}, enabled : cocksInVag.length > 0,
 					tooltip : "Even if she wants sex, who says she has to get it on her terms? Why not take charge of scratching her itch?"
@@ -1720,7 +1720,7 @@ Scenes.Rigard.Lockdown = function() {
 						Text.Clear();
 						Text.Add("The dog-herm wastes no time in hopping on her feet, stripping off her armor as she approaches you to help you take off your [armorDesc]. Though she fumbles with both your outfits she has you naked in record time. Without so much as a word, she takes you by the arm and sets you down on your knees atop the cushions in the corner of the room.", parse);
 						Text.Flush();
-						
+
 						Scenes.Miranda.TerryTavernSexDommyBJ();
 					}, enabled : true,
 					tooltip : "If she wants her itch scratched, then she can come and get it."
@@ -1736,7 +1736,7 @@ Scenes.Rigard.Lockdown = function() {
 						Text.NL();
 						Text.Add("<i>“Good, I’m holding you to that promise,”</i> she replies, following after you as you exit the Maiden’s Bane and move back inside the gates.", parse);
 						Text.Flush();
-						
+
 						PrintDefaultOptions();
 					}, enabled : true,
 					tooltip : "This is hardly the time to be having fun. The two of you have a thief to catch."
@@ -1750,7 +1750,7 @@ Scenes.Rigard.Lockdown = function() {
 				Text.NL();
 				Text.Add("<i>“Make no mistake, this is what I called you here for. If I’m going to be working overtime to catch this thief, then I’m damn well getting a kicker out of it. Now strip before you go from partner to suspect.”</i>", parse);
 				Text.Flush();
-				
+
 				var Choice = {
 					Reluctant: 0,
 					Eager: 1
@@ -1762,13 +1762,13 @@ Scenes.Rigard.Lockdown = function() {
 					func : function() {
 						Text.Clear();
 						Text.Add("You cower in your seat, helpless to resist the authority of the herm before you. You couldn't resist her, even if she didn't have such a charge to label against you. Shyly you stand up from your seat, unable to meet her eyes in your embarrassment as you begin meekly stripping yourself down.", parse);
-						
+
 						miranda.relation.IncreaseStat(100, 5);
 						player.subDom.DecreaseStat(-100, 2);
 						miranda.subDom.IncreaseStat(100, 10);
-						
+
 						choice = Choice.Eager;
-						
+
 						PrintDefaultOptions();
 					}, enabled : true,
 					tooltip : "Give in, you have no choice but to follow her whims."
@@ -1792,24 +1792,24 @@ Scenes.Rigard.Lockdown = function() {
 						Text.Add("<i>“Perhaps I wasn’t clear,”</i> Miranda’s eyes narrow dangerously. <i>“Either you are getting down on your knees right here, right now, and suck my dick, or I’m hauling your ass straight to prison and performing a cavity search on you. Your choice.”</i>", parse);
 						Text.NL();
 						miranda.relation.DecreaseStat(-100, 10);
-						
+
 						reluctant();
 					}, enabled : true,
 					tooltip : "Just… no. This is hardly the time to even consider this. Plus you’re just not in the mood."
 				});
 				Gui.SetButtonsFromList(options, false, null);
-				
+
 				Gui.Callstack.push(function() {
 					Text.NL();
 					parse["reluctantlyEagerly"] = choice == Choice.Eager ? "eagerly" : "reluctantly";
 					Text.Add("Miranda's eyes never leave you, her lips curled into a smirk and her fingers brushing almost mockingly against the bulge in her trousers as she watches you finish undressing. As her gaze hungrily follows you, you [reluctantlyEagerly] head for the cushioned corner of the room and obediently kneel there, just waiting for her to claim you.", parse);
 					Text.Flush();
-					
+
 					Scenes.Miranda.TerryTavernSexDommyBJ();
 				});
 			}
 		}
-		
+
 		Gui.Callstack.push(function() {
 			Gui.NextPrompt(function() {
 				MoveToLocation(world.loc.Rigard.Residental.street, {hour: 1});
@@ -1817,4 +1817,3 @@ Scenes.Rigard.Lockdown = function() {
 		});
 	});
 }
-

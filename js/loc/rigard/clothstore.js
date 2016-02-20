@@ -11,14 +11,14 @@ Scenes.Rigard.ClothShop.IsOpen = function() {
 
 world.loc.Rigard.ShopStreet.ClothShop.onEntry = function() {
 	var parse = {};
-	
+
 	if(party.Two())
 		parse["comp"] = " and " + party.Get(1).name;
 	else if(!party.Alone())
 		parse["comp"] = " and your companions";
 	else
 		parse["comp"] = "";
-	
+
 	if(rigard.flags["TailorMet"] == 0) {
 		rigard.flags["TailorMet"] = 1;
 		Text.Clear();
@@ -51,12 +51,12 @@ world.loc.Rigard.ShopStreet.ClothShop.description = function() {
 	Text.Add("The Silken Delights clothing shop is clearly a high-end establishment, with two private guards, red velvet curtains and expensive-looking paintings all over. The counter is straight ahead from the door, and draped with the same red velvet as the walls and windows. Long racks of clothes stretch down a hallway to the left where you can see large shelves of shoes and four large stalls along the back wall which you assume are fitting rooms for customers. The whole store is amazingly clean, with no dirt or dust anywhere. There are hat racks by the counter with all sorts of fancy looking hats.", parse);
 	Text.NL();
 	/*
-    	if(world.time.hour >= 20 || world.time.hour < 9) {
-    		Text.Add("The shop is currently closed, and you are asked to leave.", parse);
-    		Gui.NextPrompt(function() {
-    			MoveToLocation(world.loc.Rigard.ShopStreet.street, {minute: 5});
-    		});
-    	}
+		if(world.time.hour >= 20 || world.time.hour < 9) {
+			Text.Add("The shop is currently closed, and you are asked to leave.", parse);
+			Gui.NextPrompt(function() {
+				MoveToLocation(world.loc.Rigard.ShopStreet.street, {minute: 5});
+			});
+		}
 	*/
 }
 
@@ -69,12 +69,12 @@ world.loc.Rigard.ShopStreet.ClothShop.enc.AddEnc(function() { return Scenes.Riga
 world.loc.Rigard.ShopStreet.ClothShop.events.push(new Link(
 	"Nexelle", true, true,
 	function() {
-		
+
 		var tailorRand = ["the tailor", "the owner", "Miss Nexelle"];
 		var parse = {
 			tailorName : function() { return tailorRand[Math.floor(Math.random() * tailorRand.length)]; }
 		};
-		
+
 		var scenes = new EncounterTable();
 		scenes.AddEnc(function() {
 			Text.Add("You see [tailorName] sitting at the counter, cutting some fabric.", parse);
@@ -92,7 +92,7 @@ world.loc.Rigard.ShopStreet.ClothShop.events.push(new Link(
 			Text.Add("You see [tailorName] placing some new hats on the racks by the counter.", parse);
 		}, 1.0, function() { return true; });
 		scenes.Get();
-		
+
 		Text.NL();
 	},
 	function() {
@@ -105,7 +105,7 @@ world.loc.Rigard.ShopStreet.ClothShop.events.push(new Link(
 				});
 				return;
 			}
-			
+
 			var parse = {
 				sirmadam : player.body.Gender() == Gender.male ? "sir" : "madam"
 			};
@@ -116,22 +116,22 @@ world.loc.Rigard.ShopStreet.ClothShop.events.push(new Link(
 			Text.NL();
 			Text.Add("She looks at you as you approach her.", parse);
 			Text.NL();
-			
+
 			var human = new RaceScore();
 			human.score[Race.Human] = 1;
 			var humanScore = human.Compare(new RaceScore(player.body));
-			
+
 			if(humanScore > 0.9 || player.charisma.Get() >= 50)
 				Text.Add("<i>“Oh, hello, [sirmadam], I am Miss Elaine Nexelle, proprietor of Silken Delights, where we have the finest selection of apparel in Rigard. If you have any questions regarding any of our finer apparel, I would be happy to help you make a selection...”</i> she says with a smile.", parse);
 			else if(humanScore > 0.5)
 				Text.Add("<i>“Yes? Do you need something?”</i> she asks without pausing in her work.", parse);
 			else
 				Text.Add("You can feel her cold stare as you walk over. <i>“The bargain clothes are over by the door, that’s probably what you want. If you need help you should go find Fera, and remember, if you damage anything, you buy it. If you can't afford it, I'll make you work it off,”</i> she says coldly before resuming her work.", parse);
-			
+
 			Text.Flush();
 			//[Nexelle][Store][Guards][City][Fera][Fera's mom]
 			var options = new Array();
-			
+
 			options.push({ nameStr : "Buy",
 				func : function() {
 					rigard.ClothShop.Buy(nexellePrompt);
@@ -200,12 +200,12 @@ world.loc.Rigard.ShopStreet.ClothShop.events.push(new Link(
 				options.push({ nameStr : "Fera's mom",
 					func : function() {
 						Text.Clear();
-						
-						if(player.FirstVag())									
+
+						if(player.FirstVag())
 							Text.Add("You tell Miss Nexelle how sad and lonely Fera seems to be, and ask her about Fera's mother. She stops working and stays silent for a moment. When it finally comes, her response is uncharacteristically short. <i>“I miss her too, you know...”</i> she says quietly.", parse);
 						else
 							Text.Add("You ask Miss Nexelle about Fera's mother, but she just ignores you and continues with her work.", parse);
-						
+
 						fera.flags["Mom"] = 3;
 						Text.Flush();
 						Gui.NextPrompt(nexellePrompt);
@@ -238,7 +238,7 @@ world.loc.Rigard.ShopStreet.ClothShop.events.push(new Link(
 			Text.Add("You can see the cute catgirl organizing some robes on the racks.", parse);
 		}, 1.0, function() { return true; });
 		scenes.Get();
-		
+
 		Text.NL();
 	},
 	function() { Scenes.Fera.Interact(); }
@@ -253,7 +253,7 @@ world.loc.Rigard.ShopStreet.ClothShop.events.push(new Link(
 
 world.loc.Rigard.ShopStreet.ClothShop.endDescription = function() {
 	var parse = {};
-	
+
 	if(world.time.hour >= 9 && world.time.hour < 12)
 		Text.Add("It is still early but there are a few customers currently in the clothing store.", parse);
 	if(world.time.hour >= 12 && world.time.hour < 17)
@@ -261,7 +261,7 @@ world.loc.Rigard.ShopStreet.ClothShop.endDescription = function() {
 	if(world.time.hour >= 17 && world.time.hour < 20)
 		Text.Add("It is now fairly late and the shop is almost deserted.", parse);
 	Text.NL();
-	
+
 	if(party.Two()) {
 		Text.Add("[p1name] walks around while you look around.", { p1name : party.Get(1).name });
 		Text.NL();

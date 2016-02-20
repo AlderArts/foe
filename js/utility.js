@@ -1,13 +1,13 @@
 
 // Borrowed from Underscore.js
 isFunction = function(obj) {
-  return !!(obj && obj.constructor && obj.call && obj.apply);
+	return !!(obj && obj.constructor && obj.call && obj.apply);
 };
 
 if(!Array.isArray) {
-  Array.isArray = function (vArg) {
-    return Object.prototype.toString.call(vArg) === "[object Array]";
-  };
+	Array.isArray = function (vArg) {
+		return Object.prototype.toString.call(vArg) === "[object Array]";
+	};
 }
 
 Rand = function(max) {

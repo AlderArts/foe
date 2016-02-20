@@ -29,14 +29,14 @@ Entity.prototype.InteractDefault = function(options, switchSpot, enableEquip, en
 
 Entity.prototype.LevelUpPrompt = function(backFunc) {
 	Text.Clear();
-	
+
 	Text.Add("[name] has [points] stat points pending.",
 		{name: this.name, points: this.pendingStatPoints != 0 ? Text.BoldColor(this.pendingStatPoints) : "no"});
-	
+
 	Text.NL();
-	
+
 	this.SetLevelBonus();
-	
+
 	Text.Add("<table class='party' style='width:50%'>");
 	Text.Add("<tr><td><b>Level:</b></td><td>"     + Math.floor(this.level) + "</td></tr>");
 	Text.Add("<tr><td><b>Exp:</b></td><td>"       + Math.floor(this.experience) + "/" + Math.floor(this.expToLevel) + "</td></tr>");
@@ -50,7 +50,7 @@ Entity.prototype.LevelUpPrompt = function(backFunc) {
 				lvl        : jd.level,
 				maxlvl     : jd.job.levels.length + 1
 			};
-			
+
 			// Check for maxed out job
 			var master   = jd.job.Master(this);
 			var toLevel;
@@ -58,7 +58,7 @@ Entity.prototype.LevelUpPrompt = function(backFunc) {
 				var newLevel = jd.job.levels[jd.level-1];
 				toLevel      = newLevel.expToLevel * jd.mult;
 			}
-			
+
 			Text.Add("<tr><td><b>Job:</b></td><td>");
 			if(master)
 				Text.Add("<b>(MASTER) [job]</b></td></tr>", parse);
@@ -76,14 +76,14 @@ Entity.prototype.LevelUpPrompt = function(backFunc) {
 	Text.Add("<tr><td><b>Spirit:</b></td><td>"       + Math.floor(this.Spi())  + " (Rank " + this.spirit.GrowthRank() + ")</td></tr>");
 	Text.Add("<tr><td><b>Libido:</b></td><td>"       + Math.floor(this.Lib())  + " (Rank " + this.libido.GrowthRank() + ")</td></tr>");
 	Text.Add("<tr><td><b>Charisma:</b></td><td>"     + Math.floor(this.Cha())  + " (Rank " + this.charisma.GrowthRank() + ")</td></tr>");
-	
+
 	Text.Add("</table>");
 	Text.NL();
-	
+
 	if(this.currentJob) {
 		Text.Add(Text.BoldColor("Job abilities:<br/>"));
 		var abSet = this.currentJob.abilities;
-		
+
 		for(var i = 0; i < abSet.AbilitySet.length; i++) {
 			var ability = abSet.AbilitySet[i];
 			Text.Add("[ability] ([cost]): [desc]<br/>",
@@ -94,7 +94,7 @@ Entity.prototype.LevelUpPrompt = function(backFunc) {
 	Text.Add(Text.BoldColor("Known abilities:<br/>"));
 	for(set in this.abilities) {
 		var abSet = this.abilities[set];
-		
+
 		for(var i = 0; i < abSet.AbilitySet.length; i++) {
 			var ability = abSet.AbilitySet[i];
 			Text.Add("[ability] ([cost]): [desc]<br/>",
@@ -103,14 +103,14 @@ Entity.prototype.LevelUpPrompt = function(backFunc) {
 	}
 
 	Text.Flush();
-	
+
 	var that = this;
-	
+
 	if(this.pendingStatPoints <= 0) {
 		Gui.NextPrompt(backFunc);
 		return;
 	}
-	
+
 	var options = new Array();
 	options.push({ nameStr: "Strength",
 		func : function() {
@@ -184,43 +184,43 @@ Entity.prototype.EquipPrompt = function(backfunc) {
 		hishers : function() { return that.hishers(); },
 		es      : function() { return that.plural() ? "" : "es"; }
 	};
-	
+
 	var equipFunc = function() {
 		Text.Clear();
-		
+
 		var slotFunc = function(slotname, slot) {
 			//Text.AddDiv("<hr>");
-	        Text.AddDiv(slotname, null, "itemTypeHeader");
-	        //Text.AddDiv("<hr>");
-	        if(slot) {
-	        	Text.AddDiv(slot.name, null, "itemSubtypeHeader");
-	        	Text.AddDiv(slot.Short(), null, "itemName");
-	        }
-	        else
-	        	Text.AddDiv("None", null, "itemSubtypeHeader");
+			Text.AddDiv(slotname, null, "itemTypeHeader");
+			//Text.AddDiv("<hr>");
+			if(slot) {
+				Text.AddDiv(slot.name, null, "itemSubtypeHeader");
+				Text.AddDiv(slot.Short(), null, "itemName");
+			}
+			else
+				Text.AddDiv("None", null, "itemSubtypeHeader");
 		}
-		
+
 		Text.Add("[name] [isAre] currently equipped with:", parse);
 		Text.NL();
-        slotFunc("Weapon", that.weaponSlot);
-        slotFunc("Top armor", that.topArmorSlot);
-        slotFunc("Bottom armor", that.botArmorSlot);
-        slotFunc("Accessory", that.acc1Slot);
-        slotFunc("Accessory", that.acc2Slot);
-        slotFunc("Toy", that.strapOn);
+		slotFunc("Weapon", that.weaponSlot);
+		slotFunc("Top armor", that.topArmorSlot);
+		slotFunc("Bottom armor", that.botArmorSlot);
+		slotFunc("Accessory", that.acc1Slot);
+		slotFunc("Accessory", that.acc2Slot);
+		slotFunc("Toy", that.strapOn);
 		Text.Flush();
-		
+
 		var slotFunc2 = function(slotname, slot) {
 			Text.AddDiv(slotname, null, "itemTypeHeader");
 			Text.AddDiv("<hr>");
 			Text.Add("[name] [isAre] currently equipped with:", parse);
 			Text.AddDiv("<hr>");
-	        if(slot)
-	        	slot.ShowEquipStats();
-	        else
-	        	Text.AddDiv("None", null, "itemSubtypeHeader");
+			if(slot)
+				slot.ShowEquipStats();
+			else
+				Text.AddDiv("None", null, "itemSubtypeHeader");
 		}
-		
+
 		var options = new Array();
 		options.push({ nameStr : "Weapon",
 			func : function() {
@@ -310,7 +310,7 @@ Entity.prototype.JobPrompt = function(backfunc) {
 		Gui.NextPrompt(backfunc);
 		return;
 	}
-	
+
 	var jd  = this.jobs[this.currentJob.name];
 	if(jd == null) {
 		Text.Add("ERROR, NO JOB DESCRIPTOR");
@@ -318,7 +318,7 @@ Entity.prototype.JobPrompt = function(backfunc) {
 		Gui.NextPrompt(backfunc);
 		return;
 	}
-	
+
 	var parse = {
 		name       : this.NameDesc(),
 		has        : this.has(),
@@ -327,7 +327,7 @@ Entity.prototype.JobPrompt = function(backfunc) {
 		lvl        : jd.level,
 		maxlvl     : jd.job.levels.length + 1
 	};
-	
+
 	// Check for maxed out job
 	var master   = jd.job.Master(this);
 	var toLevel;
@@ -335,7 +335,7 @@ Entity.prototype.JobPrompt = function(backfunc) {
 		var newLevel = jd.job.levels[jd.level-1];
 		toLevel      = newLevel.expToLevel * jd.mult;
 	}
-	
+
 	Text.Add("[Possessive] current job is a level [lvl]/[maxlvl] <b>[job]</b>.", parse);
 	Text.NL();
 	if(jd.job.Long) {
@@ -348,14 +348,14 @@ Entity.prototype.JobPrompt = function(backfunc) {
 		Text.Add("Exp: " + Math.floor(jd.experience) + "/" + Math.floor(toLevel));
 	Text.NL();
 	Text.Add("Available jobs:<br/>");
-	
+
 	var options = [];
-	
+
 	for(var jobName in this.jobs) {
 		var jd = this.jobs[jobName];
-		
+
 		if(!jd.job.Unlocked(this)) continue;
-		
+
 		parse.job = jd.job.Short(this);
 		parse.lvl = jd.level;
 		// Check for maxed out job
@@ -365,7 +365,7 @@ Entity.prototype.JobPrompt = function(backfunc) {
 			var newLevel = jd.job.levels[jd.level-1];
 			toLevel      = newLevel.expToLevel * jd.mult;
 		}
-		
+
 		if(jd.job.Available(this)) {
 			if(master)
 				Text.Add("[job] <b>(MASTER)</b><br/>", parse);
@@ -383,7 +383,7 @@ Entity.prototype.JobPrompt = function(backfunc) {
 			}
 			Text.Add(".<br/>");
 		}
-		
+
 		options.push({ nameStr : jd.job.Short(this),
 			func : function(obj) {
 				parse.job = obj.Short(this);
@@ -391,17 +391,17 @@ Entity.prototype.JobPrompt = function(backfunc) {
 				Text.Add("[Possessive] current job is <b>[job]</b>.", parse);
 				Text.NL();
 				Text.Flush();
-				
+
 				that.currentJob = obj;
-				
+
 				Gui.NextPrompt(backfunc);
 			}, enabled : jd.job.Available(this),
-			obj : jd.job, 
+			obj : jd.job,
 			tooltip : jd.job.Long ? jd.job.Long(this) : ""
 		});
 	}
-	
+
 	Text.Flush();
-	
+
 	Gui.SetButtonsFromList(options, true, backfunc);
 }

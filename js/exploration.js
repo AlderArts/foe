@@ -13,24 +13,24 @@ PrintDefaultOptions = function(preventClear) {
 		e();
 		return;
 	}
-	
+
 	Gui.ClearButtons();
-	
+
 	if(!preventClear)
 		Text.Clear();
-	
+
 	if(party.location == null) {
 		Text.Add("ERROR, LOCATION IS NULL");
 		Text.Flush();
 		return;
 	}
-	
+
 	SetGameState(GameState.Game);
-	
+
 	if(LastSubmenu)
-    	LastSubmenu.func(preventClear);
-    else
-    	Explore();
+		LastSubmenu.func(preventClear);
+	else
+		Explore();
 }
 
 ExploreButtonIndex = {
@@ -41,7 +41,7 @@ ExploreButtonIndex = {
 	Alchemy : 4,
 	Quests  : 5,
 	Hunt    : 6,
-	
+
 	Wait    : 8,
 	Sleep   : 9,
 	Look    : 10
@@ -51,35 +51,35 @@ SetExploreButtons = function() {
 	var waitLocation = party.location.wait();
 	// At safe locations you can sleep and save
 	var safeLocation = party.location.safe();
-	
+
 	Input.exploreButtons[ExploreButtonIndex.Explore].Setup("Explore", Explore, true);
 
 	if(!Intro.active) {
 		Input.exploreButtons[ExploreButtonIndex.Party].enabledImage = (party.location.switchSpot()) ? Images.imgButtonEnabled2 : Images.imgButtonEnabled;
-	    Input.exploreButtons[ExploreButtonIndex.Party].Setup("Party", PartyInteraction, true);
-	    if(party.members.length == 0) Input.exploreButtons[ExploreButtonIndex.Party].SetEnabled(false);
-	    
-	    Input.exploreButtons[ExploreButtonIndex.Items].Setup("Items", ShowInventory, true);
-	    
-	    Input.exploreButtons[ExploreButtonIndex.Ability].Setup("Abilities", ShowAbilities, true);
-	    if(player.alchemyLevel > 0)
-	    	Input.exploreButtons[ExploreButtonIndex.Alchemy].Setup("Alchemy", ShowAlchemy, true);
-    	Input.exploreButtons[ExploreButtonIndex.Quests].Setup("Quests", ShowQuests, true);
-    	if(DEBUG) // TODO
-	    	Input.exploreButtons[ExploreButtonIndex.Hunt].Setup("Hunt", ShowHunting, true);
-	    
-	    if(safeLocation) { // SLEEP
-	    	Input.exploreButtons[ExploreButtonIndex.Sleep].Setup("", party.location.SleepFunc, waitLocation, null,
-		    "Sleep until you are fully rested (restores HP/SP).");
-	    }
-	    else { // WAIT
-	    	Input.exploreButtons[ExploreButtonIndex.Wait].Setup("", party.location.WaitFunc, waitLocation, null,
-		    "Wait for a while.");
-	    }
-	    
-	    // FIGHT/SEARCH
-	    Input.exploreButtons[ExploreButtonIndex.Look].Setup("", Fight, party.location.enc != null, null,
-		    "Explore the immediate surroundings, possibly finding enemies, new locations or hidden treasures.", GameState.Event);
+		Input.exploreButtons[ExploreButtonIndex.Party].Setup("Party", PartyInteraction, true);
+		if(party.members.length == 0) Input.exploreButtons[ExploreButtonIndex.Party].SetEnabled(false);
+
+		Input.exploreButtons[ExploreButtonIndex.Items].Setup("Items", ShowInventory, true);
+
+		Input.exploreButtons[ExploreButtonIndex.Ability].Setup("Abilities", ShowAbilities, true);
+		if(player.alchemyLevel > 0)
+			Input.exploreButtons[ExploreButtonIndex.Alchemy].Setup("Alchemy", ShowAlchemy, true);
+		Input.exploreButtons[ExploreButtonIndex.Quests].Setup("Quests", ShowQuests, true);
+		if(DEBUG) // TODO
+			Input.exploreButtons[ExploreButtonIndex.Hunt].Setup("Hunt", ShowHunting, true);
+
+		if(safeLocation) { // SLEEP
+			Input.exploreButtons[ExploreButtonIndex.Sleep].Setup("", party.location.SleepFunc, waitLocation, null,
+				"Sleep until you are fully rested (restores HP/SP).");
+		}
+		else { // WAIT
+			Input.exploreButtons[ExploreButtonIndex.Wait].Setup("", party.location.WaitFunc, waitLocation, null,
+				"Wait for a while.");
+		}
+
+		// FIGHT/SEARCH
+		Input.exploreButtons[ExploreButtonIndex.Look].Setup("", Fight, party.location.enc != null, null,
+			"Explore the immediate surroundings, possibly finding enemies, new locations or hidden treasures.", GameState.Event);
 	}
 }
 
@@ -97,30 +97,30 @@ Gui.SavePromptText = function() {
 
 LimitedDataPrompt = function(backFunc) {
 	SetGameState(GameState.Event);
-	
+
 	Gui.ClearButtons();
-	
+
 	Gui.SavePromptText();
-	
+
 	Input.buttons[0].Setup("Save game", function() {
 		Saver.SavePrompt(function() {
 			LimitedDataPrompt(backFunc);
 		});
-    }, online);
-    
-    Input.buttons[2].Setup("Save file", Saver.SaveToFile, true);
-    
-    Input.buttons[6].Setup("Save text", function() {
+	}, online);
+
+	Input.buttons[2].Setup("Save file", Saver.SaveToFile, true);
+
+	Input.buttons[6].Setup("Save text", function() {
 		GameToCache();
 		var seen = [];
 		var data = JSON.stringify(gameCache,
 			function(key, val) {
-			   if (typeof val == "object") {
-			        if (seen.indexOf(val) >= 0)
-			            return;
-			        seen.push(val);
-			    }
-			    return val;
+				if (typeof val == "object") {
+					if (seen.indexOf(val) >= 0)
+						return;
+					seen.push(val);
+				}
+				return val;
 			});
 		Text.Clear();
 		Text.Add(data);
@@ -129,83 +129,83 @@ LimitedDataPrompt = function(backFunc) {
 			LimitedDataPrompt(backFunc);
 		});
 	}, true);
-	
-    Input.buttons[11].Setup("Back", backFunc, true);
+
+	Input.buttons[11].Setup("Back", backFunc, true);
 }
 
 DataPrompt = function() {
 	SetGameState(GameState.Event);
 	// At safe locations you can sleep and save
 	var safeLocation = party.location.safe();
-    
+
 	Gui.ClearButtons();
-	
+
 	Gui.SavePromptText();
-	
+
 	Input.buttons[0].Setup("Save game", function() {
 		Saver.SavePrompt(DataPrompt);
-    }, online && safeLocation);
-    
-    Input.buttons[1].Setup("Load game", function() {
-    	Saver.LoadPrompt(DataPrompt);
-    }, Saver.HasSaves());
-    
-    Input.buttons[2].Setup("Save file", Saver.SaveToFile, safeLocation);
-	
-    Input.buttons[3].Setup("Load file", function() {
-    	loadfileOverlay();
-    }, true);
-    
-    Input.buttons[4].Setup("Toggle debug", function() {
-    	DEBUG = !DEBUG;
-    	if(DEBUG) Gui.debug.show(); else Gui.debug.hide();
-    	for(var i = 0; i < party.members.length; i++) {
-    		party.members[i].DebugMode(DEBUG);
-    	}
+	}, online && safeLocation);
+
+	Input.buttons[1].Setup("Load game", function() {
+		Saver.LoadPrompt(DataPrompt);
+	}, Saver.HasSaves());
+
+	Input.buttons[2].Setup("Save file", Saver.SaveToFile, safeLocation);
+
+	Input.buttons[3].Setup("Load file", function() {
+		loadfileOverlay();
 	}, true);
-	
-    Input.buttons[5].Setup("Quit game", SplashScreen, true);
-    
-    Input.buttons[6].Setup("Save text", function() {
+
+	Input.buttons[4].Setup("Toggle debug", function() {
+		DEBUG = !DEBUG;
+		if(DEBUG) Gui.debug.show(); else Gui.debug.hide();
+		for(var i = 0; i < party.members.length; i++) {
+			party.members[i].DebugMode(DEBUG);
+		}
+	}, true);
+
+	Input.buttons[5].Setup("Quit game", SplashScreen, true);
+
+	Input.buttons[6].Setup("Save text", function() {
 		GameToCache();
 		var seen = [];
 		var data = JSON.stringify(gameCache,
 			function(key, val) {
-			   if (typeof val == "object") {
-			        if (seen.indexOf(val) >= 0)
-			            return;
-			        seen.push(val);
-			    }
-			    return val;
+				if (typeof val == "object") {
+					if (seen.indexOf(val) >= 0)
+						return;
+					seen.push(val);
+				}
+				return val;
 			});
 		Text.Clear();
 		Text.Add(data);
 		Text.Flush();
 		Gui.NextPrompt(DataPrompt);
 	}, safeLocation);
-	
+
 	Input.buttons[7].Setup(Gui.ShortcutsVisible ? "Keys: On" : "Keys: Off", function() {
-    	Gui.ShortcutsVisible = !Gui.ShortcutsVisible;
-    	if(online)
-	    	localStorage["ShortcutsVisible"] = Gui.ShortcutsVisible ? 1 : 0;
-    	DataPrompt();
+		Gui.ShortcutsVisible = !Gui.ShortcutsVisible;
+		if(online)
+			localStorage["ShortcutsVisible"] = Gui.ShortcutsVisible ? 1 : 0;
+		DataPrompt();
 	}, true);
-	
-    Input.buttons[8].Setup("Set bg color", function() {
-    	Gui.BgColorPicker(DataPrompt);
+
+	Input.buttons[8].Setup("Set bg color", function() {
+		Gui.BgColorPicker(DataPrompt);
 	}, true);
-    
-    Input.buttons[9].Setup("Set font", function() {
-    	Gui.FontPicker(DataPrompt);
+
+	Input.buttons[9].Setup("Set font", function() {
+		Gui.FontPicker(DataPrompt);
 	}, true);
-	
+
 	Input.buttons[10].Setup(RENDER_PICTURES ? "Pics: On" : "Pics: Off", function() {
-    	RENDER_PICTURES = !RENDER_PICTURES;
-    	
-    	DataPrompt();
+		RENDER_PICTURES = !RENDER_PICTURES;
+
+		DataPrompt();
 	}, true);
-	
-    Input.buttons[11].Setup("Back", PrintDefaultOptions, true);
+
+	Input.buttons[11].Setup("Back", PrintDefaultOptions, true);
 }
 
 //***************************************************//
@@ -217,24 +217,24 @@ DataPrompt = function() {
 Explore = function(preventClear) {
 	if(!preventClear)
 		Text.Clear();
-	
+
 	if(party.location == null) {
 		Text.Add("ERROR, LOCATION IS NULL");
 		Text.Flush();
 		return;
 	}
-	
+
 	party.location.SetButtons();
 	party.location.PrintDesc();
 	LastSubmenu = Input.exploreButtons[ExploreButtonIndex.Explore];
-	
+
 	SetExploreButtons();
 }
 
 PartyInteraction = function(preventClear) {
 	party.Interact(preventClear, party.location.switchSpot());
 	LastSubmenu = Input.exploreButtons[ExploreButtonIndex.Party];
-	
+
 	SetExploreButtons();
 }
 
@@ -248,7 +248,7 @@ Fight = function(preventClear) {
 	}
 
 	var enc = party.location.enc.Get();
-	
+
 	if(enc) {
 		if(enc.Start)
 			enc.Start();
@@ -271,10 +271,10 @@ ShowInventory = function(preventClear) {
 		return;
 	}
 	Gui.ClearButtons();
-	
+
 	party.inventory.ShowInventory(preventClear);
 	LastSubmenu = Input.exploreButtons[ExploreButtonIndex.Items];
-	
+
 	SetExploreButtons();
 }
 
@@ -282,10 +282,10 @@ ShowAbilities = function(preventClear) {
 	if(!preventClear)
 		Text.Clear();
 	Gui.ClearButtons();
-	
+
 	party.ShowAbilities();
 	LastSubmenu = Input.exploreButtons[ExploreButtonIndex.Ability];
-	
+
 	SetExploreButtons();
 }
 
@@ -293,10 +293,10 @@ ShowAlchemy = function(preventClear) {
 	if(!preventClear)
 		Text.Clear();
 	Gui.ClearButtons();
-	
+
 	Alchemy.AlchemyPrompt(player, party.inventory);
 	LastSubmenu = Input.exploreButtons[ExploreButtonIndex.Alchemy];
-	
+
 	SetExploreButtons();
 }
 
@@ -304,10 +304,10 @@ ShowQuests = function(preventClear) {
 	if(!preventClear)
 		Text.Clear();
 	Gui.ClearButtons();
-	
+
 	Quests.Print();
 	LastSubmenu = Input.exploreButtons[ExploreButtonIndex.Quests];
-	
+
 	SetExploreButtons();
 }
 
@@ -315,11 +315,11 @@ ShowHunting = function(preventClear) {
 	if(!preventClear)
 		Text.Clear();
 	Gui.ClearButtons();
-	
+
 	party.location.SetButtons(party.location.hunt);
 	party.location.PrintDesc();
-	
+
 	LastSubmenu = Input.exploreButtons[ExploreButtonIndex.Hunt];
-	
+
 	SetExploreButtons();
 }

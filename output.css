@@ -2,8 +2,8 @@
 * Contains various CSS classes that are used for text output.
 */
 
-.bold{
-    font-weight: bold;
+.bold {
+	font-weight: bold;
 }
 
 
@@ -13,67 +13,67 @@
 /*
 Item display CSS classes
 */
-.itemTypeHeader{
-    font-weight: bold;
-    font-size: 40px;
-    text-align:center;
+.itemTypeHeader {
+	font-weight: bold;
+	font-size: 40px;
+	text-align:center;
 }
-.itemSubtypeHeader{
-    font-weight: bold;
-    font-size:25px;
-    text-align:center;
+.itemSubtypeHeader {
+	font-weight: bold;
+	font-size:25px;
+	text-align:center;
 }
-.itemName{
-    text-align:center;
+.itemName {
+	text-align:center;
 }
 /*
 Toolbar CSS classes
 */
 /*Automatically added to all toolbar inputs*/
-.tbarInput{
-    background-repeat: no-repeat;
-    font: bold 14pt Tahoma, 'Droid Sans', sans-serif;
-    border:0;
-    margin: 3px;
+.tbarInput {
+	background-repeat: no-repeat;
+	font: bold 14pt Tahoma, 'Droid Sans', sans-serif;
+	border:0;
+	margin: 3px;
 }
 /*Automatically added to all toolbar labels*/
-.tbarLbl{
-    font-style: italic;
+.tbarLbl {
+	font-style: italic;
 }
 
 /*Button backgrounds - NOTE: Alternatively can simply apply them via code with Jquery .css() method*/
-.bigBlueButton{
-    background-image: url('data/gui/big_blue.png');
-    height: 35px;
-    width: 155px;
+.bigBlueButton {
+	background-image: url('data/gui/big_blue.png');
+	height: 35px;
+	width: 155px;
 }
-.bigGoldButton{
-    background-image: url('data/gui/big_gold.png');
-    height: 35px;
-    width: 155px;
+.bigGoldButton {
+	background-image: url('data/gui/big_gold.png');
+	height: 35px;
+	width: 155px;
 }
-.bigGrayButton{
-    background-image: url('data/gui/big_gray.png');
-    height: 35px;
-    width: 155px;
+.bigGrayButton {
+	background-image: url('data/gui/big_gray.png');
+	height: 35px;
+	width: 155px;
 }
-.bigGreenButton{
-    background-image: url('data/gui/big_green.png');
-    height: 35px;
-    width: 155px;
+.bigGreenButton {
+	background-image: url('data/gui/big_green.png');
+	height: 35px;
+	width: 155px;
 }
-.smallBlueButton{
-    background-image: url('data/gui/small_blue.png');
-    height: 35px;
-    width: 155px;
+.smallBlueButton {
+	background-image: url('data/gui/small_blue.png');
+	height: 35px;
+	width: 155px;
 }
-.smallGoldButton{
-    background-image: url('data/gui/small_gray.png');
-    height: 35px;
-    width: 155px;
+.smallGoldButton {
+	background-image: url('data/gui/small_gray.png');
+	height: 35px;
+	width: 155px;
 }
-.smallGreenButton{
-    background-image: url('data/gui/small_green.png');
-    height: 35px;
-    width: 155px;
+.smallGreenButton {
+	background-image: url('data/gui/small_green.png');
+	height: 35px;
+	width: 155px;
 }
