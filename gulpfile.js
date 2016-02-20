@@ -142,6 +142,7 @@ gulp.task('buildJS', ['clean-build'], function() {
         'js/event/terry.js',
         'js/event/terry-tf.js',
         'js/event/terry-sex.js',
+        'js/event/terry-sex-drink.js',
         'js/event/momo.js',
         'js/event/sylistraxia.js',
         'js/event/kiakai.js',
