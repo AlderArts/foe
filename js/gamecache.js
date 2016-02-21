@@ -499,6 +499,5 @@ GameToCache = function() {
 		date   : gameCache.time.DateString()
 	};
 
-	gameCache.name   =
-		Text.Parse("[name]([gender]), Lvl [lvl]/[slvl], [date]", parse);
+	gameCache.name = Text.Parse("[name]([gender]), Lvl [lvl]/[slvl], [date]", parse);
 }

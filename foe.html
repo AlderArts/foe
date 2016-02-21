@@ -1,29 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang='en'>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta charset='utf-8'>
 		<!-- Main page title -->
 		<title>Fall of Eden</title>
-		
+
 		<!-- Set up CSS styles -->
-		<link rel="stylesheet" type="text/css" href="style.css" />
-		<link rel="stylesheet" type="text/css" href="output.css" />
-		<!--[if IE]><script type="text/javascript" src="js/excanvas.compiled.js"></script><![endif]-->
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" href="output.css">
+		<!--[if lte IE 8]><script src="js/excanvas.compiled.js"></script><![endif]-->
 	</head>
-	
+
 	<body onresize="GuiResize()">
 		<div id=wrap>
 			<div id="mainTextWrapper">
 				<div id="mainTextArea"> </div>
 			</div>
-			<input id="textInputArea"/>
+			<input id="textInputArea">
 			<div id="tooltipTextArea"> </div>
-			
+
 			<div class="overlay" id="overlay_load">
 				<div>
 					<p>Load a file from disk:</p>
-					<input type="file" id="loadFileFiles" />
-					<br/>
+					<input type="file" id="loadFileFiles">
+					<br>
 					<button type="submit" id="loadFileOk" onclick="Saver.OnLoadFromFileClick()">Ok</button>
 					<button type="button" id="loadFileCancel" onclick="loadfileOverlay()">Cancel</button>
 				</div>
@@ -36,14 +36,14 @@
 			</div>
 		</div>
 		<!-- Load script files -->
-		<script type="text/javascript" src="js/lodash.min.js"></script>
-		<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
-		<script type="text/javascript" src="js/raphael-min.js"></script>
-		<script type="text/javascript" src="js/pre-loader.js"></script>
+		<script src="js/lodash.min.js"></script>
+		<script src="js/jquery-1.9.1.min.js"></script>
+		<script src="js/raphael-min.js"></script>
+		<script src="js/pre-loader.js"></script>
 		<!-- Fonts -->
-		<script type="text/javascript" src="data/cufon/Kimberley_Bl_900.font.js"></script>
-		<script type="text/javascript" src="js/droidsans.loader.js"></script>
+		<script src="data/cufon/Kimberley_Bl_900.font.js"></script>
+		<script src="js/droidsans.loader.js"></script>
 		<!-- Load script files -->
-		<script type="text/javascript" src="foe.min.js"></script>
+		<script src="foe.min.js"></script>
 	</body>
 </html>
