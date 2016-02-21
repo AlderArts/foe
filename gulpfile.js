@@ -231,7 +231,6 @@ gulp.task('buildJS', ['clean-build'], function() {
 
 gulp.task('updateAssets', ['clean-build'], function() {
 	return gulp.src([
-		'js/excanvas.compiled.js',
 		'js/lodash.min.js',
 		'js/jquery-1.9.1.min.js',
 		'js/raphael-min.js',

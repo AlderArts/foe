@@ -208,13 +208,12 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/credits.js \
 	js/cheats.js \
 	--js_output_file foe.min.js
-	
+
 rm -rf build
 mkdir build
 mkdir build/js
 
 cp foe.min.js build/foe.min.js
-cp js/excanvas.compiled.js build/js/excanvas.compiled.js
 cp js/lodash.min.js build/js/lodash.min.js
 cp js/jquery-1.9.1.min.js build/js/jquery-1.9.1.min.js
 cp js/raphael-min.js build/js/raphael-min.js
