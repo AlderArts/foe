@@ -212,13 +212,14 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 rm -rf build
 mkdir build
 mkdir build/js
+mkdir build/js/vendor
 
 cp foe.min.js build/foe.min.js
-cp js/lodash.min.js build/js/lodash.min.js
-cp js/jquery-1.9.1.min.js build/js/jquery-1.9.1.min.js
-cp js/raphael-min.js build/js/raphael-min.js
-cp js/pre-loader.js build/js/pre-loader.js
-cp js/droidsans.loader.js build/js/droidsans.loader.js
+cp js/vendor/lodash.min.js build/js/vendor/lodash.min.js
+cp js/vendor/jquery-2.2.0.min.js build/js/vendor/jquery-2.2.0.min.js
+cp js/vendor/raphael-min.js build/js/vendor/raphael-min.js
+cp js/vendor/pre-loader.js build/js/vendor/pre-loader.js
+cp js/vendor/droidsans.loader.js build/js/vendor/droidsans.loader.js
 
 cp foe.html build/foe.html
 cp style.css build/style.css

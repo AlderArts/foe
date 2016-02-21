@@ -231,11 +231,11 @@ gulp.task('buildJS', ['clean-build'], function() {
 
 gulp.task('updateAssets', ['clean-build'], function() {
 	return gulp.src([
-		'js/lodash.min.js',
-		'js/jquery-1.9.1.min.js',
-		'js/raphael-min.js',
-		'js/pre-loader.js',
-		'js/droidsans.loader.js',
+		'js/vendor/lodash.min.js',
+		'js/vendor/jquery-2.2.0.min.js',
+		'js/vendor/raphael-min.js',
+		'js/vendor/pre-loader.js',
+		'js/vendor/droidsans.loader.js',
 		'foe.html',
 		'style.css',
 		'output.css',
