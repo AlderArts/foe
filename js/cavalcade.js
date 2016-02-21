@@ -80,7 +80,7 @@ Cavalcade.prototype.Finish = function() {
 			p.hand.push(h);
 		});
 		// TODO: TEMP
-		Text.Add("[Poss] hand:<br/>", {Poss: p.Possessive()});
+		Text.Add("[Poss] hand:<br>", {Poss: p.Possessive()});
 		_.each(p.hand, function(h, key) {
 			if(key > 0)
 				Text.Add(", ");
@@ -89,7 +89,7 @@ Cavalcade.prototype.Finish = function() {
 			else
 				Text.Add(h.name);
 		});
-		Text.Add("<br/>");
+		Text.Add("<br>");
 	});
 	Text.Flush();
 }
@@ -385,7 +385,7 @@ Cavalcade.prototype.CoinGameRound = function() {
 		});
 		
 		_.each(that.winners, function(w) {
-			Text.Add("HAND EVALUATION ([p]):<br/>", {p: w.name});
+			Text.Add("HAND EVALUATION ([p]):<br>", {p: w.name});
 			w.res = that.EvaluateHand(w.hand);
 			Text.Add("Hand evaluated as: " + that.ResultStr(w.res));
 			Text.NL();

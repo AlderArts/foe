@@ -231,7 +231,7 @@ Scenes.Cassidy.ShopDesc = function() {
 		Text.NL();
 		Text.Add("A few words have been etched into a plaque attached to its rack:", parse);
 		Text.NL();
-		Text.Add("<i>Gold spends, friends leave and booze runs dry,</i><br/>", parse);
+		Text.Add("<i>Gold spends, friends leave and booze runs dry,</i><br>", parse);
 		Text.Add("<i>But I am a companion for life.</i>", parse);
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
@@ -239,7 +239,7 @@ Scenes.Cassidy.ShopDesc = function() {
 		Text.NL();
 		Text.Add("A few words have been etched into a plaque attached to its rack:", parse);
 		Text.NL();
-		Text.Add("<i>You and I, we shall fight as one.</i><br/>", parse);
+		Text.Add("<i>You and I, we shall fight as one.</i><br>", parse);
 		Text.Add("<i>We shall live - or die - as one.</i>", parse);
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
@@ -254,7 +254,7 @@ Scenes.Cassidy.ShopDesc = function() {
 		Text.NL();
 		Text.Add("A few words have been etched into a plaque attached to its rack:", parse);
 		Text.NL();
-		Text.Add("<i>Keep your wit sharp</i><br/>", parse);
+		Text.Add("<i>Keep your wit sharp</i><br>", parse);
 		Text.Add("<i>But keep me sharper still.</i>", parse);
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
@@ -262,17 +262,17 @@ Scenes.Cassidy.ShopDesc = function() {
 		Text.NL();
 		Text.Add("A few words have been etched into a plaque attached to its rack:", parse);
 		Text.NL();
-		Text.Add("<i>Me?</i><br/>", parse);
-		Text.Add("<i>Just keep walking and swinging</i><br/>", parse);
-		Text.Add("<i>and walking and swinging</i><br/>", parse);
-		Text.Add("<i>and walking and swinging</i><br/>", parse);
-		Text.Add("<i>and crack!</i><br/>", parse);
+		Text.Add("<i>Me?</i><br>", parse);
+		Text.Add("<i>Just keep walking and swinging</i><br>", parse);
+		Text.Add("<i>and walking and swinging</i><br>", parse);
+		Text.Add("<i>and walking and swinging</i><br>", parse);
+		Text.Add("<i>and crack!</i><br>", parse);
 		Text.Add("<i>Smashed skulls!</i>", parse);
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
 		Text.Add("firm oaken spear. The treated wood of its haft carries no varnish, yet merely touching it gives you the impression that it’s as strong as steel. The ugly barbed head affixed to its end promises much in the way of pain, too - both on insertion and removal.", parse);
 		Text.NL();
-		Text.Add("<i>I turn the direst of situations around</i><br/>", parse);
+		Text.Add("<i>I turn the direst of situations around</i><br>", parse);
 		Text.Add("<i>Keep them at bay and you, safe and sound.</i>", parse);
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
@@ -280,7 +280,7 @@ Scenes.Cassidy.ShopDesc = function() {
 		Text.NL();
 		Text.Add("A few words have been etched into a plaque attached to its rack:", parse);
 		Text.NL();
-		Text.Add("<i>There are times when a strong word suffices.</i><br/>", parse);
+		Text.Add("<i>There are times when a strong word suffices.</i><br>", parse);
 		Text.Add("<i>I exist for other times.</i>", parse);
 	}, 1.0, function() { return miranda.flags["Bruiser"] >= Miranda.Bruiser.Taught; });
 	scenes.AddEnc(function() {
@@ -288,9 +288,9 @@ Scenes.Cassidy.ShopDesc = function() {
 		Text.NL();
 		Text.Add("A few words have been etched into a plaque attached to its rack:", parse);
 		Text.NL();
-		Text.Add("<i>At your hip,</i><br/>", parse);
-		Text.Add("<i>I you keep.</i><br/>", parse);
-		Text.Add("<i>In your hand,</i><br/>", parse);
+		Text.Add("<i>At your hip,</i><br>", parse);
+		Text.Add("<i>I you keep.</i><br>", parse);
+		Text.Add("<i>In your hand,</i><br>", parse);
 		Text.Add("<i>Lives I reap.</i>", parse);
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
@@ -298,9 +298,9 @@ Scenes.Cassidy.ShopDesc = function() {
 		Text.NL();
 		Text.Add("A few words have been etched into a plaque attached to its rack:", parse);
 		Text.NL();
-		Text.Add("<i>Bear me, and with each blow, you shall not fall.</i><br/>", parse);
-		Text.Add("<i>Unbowed.</i><br/>", parse);
-		Text.Add("<i>Unbroken.</i><br/>", parse);
+		Text.Add("<i>Bear me, and with each blow, you shall not fall.</i><br>", parse);
+		Text.Add("<i>Unbowed.</i><br>", parse);
+		Text.Add("<i>Unbroken.</i><br>", parse);
 		Text.Add("<i>Undeterred.</i>", parse);
 	}, 1.0, function() { return true; });
 	scenes.Get();
@@ -1888,13 +1888,13 @@ Scenes.Cassidy.ManagingShopAccept = function() {
 	Text.NL();
 	Text.Add("Hooking a claw under the ledger’s cover, Cass flips it open to one of the pages within. On it, the following is written:", parse);
 	Text.NL();
-	Text.Add("<i>Dagger- 75 coins</i><br/>", parse);
-	Text.Add("<i>Short Sword - 250 coins</i><br/>", parse);
-	Text.Add("<i>Greatsword - 500 coins</i><br/>", parse);
-	Text.Add("<i>Rapier - 375 coins</i><br/>", parse);
-	Text.Add("<i>Oak Spear - 425 coins</i><br/>", parse);
-	Text.Add("<i>Halberd - 575 coins</i><br/>", parse);
-	Text.Add("<i>Heavy Flail - 600 coins</i><br/>", parse);
+	Text.Add("<i>Dagger- 75 coins</i><br>", parse);
+	Text.Add("<i>Short Sword - 250 coins</i><br>", parse);
+	Text.Add("<i>Greatsword - 500 coins</i><br>", parse);
+	Text.Add("<i>Rapier - 375 coins</i><br>", parse);
+	Text.Add("<i>Oak Spear - 425 coins</i><br>", parse);
+	Text.Add("<i>Halberd - 575 coins</i><br>", parse);
+	Text.Add("<i>Heavy Flail - 600 coins</i><br>", parse);
 	Text.Add("<i>Warhammer - 600 coins</i>", parse);
 	Text.NL();
 	Text.Add("<i>“It’s not that long or hard, so you oughta remember it well,”</i> Cassidy suggests.", parse);

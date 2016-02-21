@@ -2330,9 +2330,9 @@ Scenes.BullTower.EndingDebrief = function(injured) {
 	
 	Gui.NextPrompt(function() {
 		Text.Clear();
-		Text.Add("<b>Final Score:</b><br/>", parse);
-		Text.Add("Suspicion raised: " + outlaws.BT.Suspicion() + "/100<br/>", parse);
-		Text.Add("Mayhem spread: " + score + "/10<br/>", parse);
+		Text.Add("<b>Final Score:</b><br>", parse);
+		Text.Add("Suspicion raised: " + outlaws.BT.Suspicion() + "/100<br>", parse);
+		Text.Add("Mayhem spread: " + score + "/10<br>", parse);
 		Text.Add("Alarm raised: " + (foundOut ? "yes" : "no"), parse);
 		Text.Flush();
 		

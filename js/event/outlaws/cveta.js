@@ -1703,10 +1703,10 @@ Scenes.Cveta.FirstMeetingPrompt = function(opts) {
 				Text.NL();
 				Text.Add("<i>“[playername]…", parse);
 				Text.NL();
-				Text.Add("Whether the weather be fine<br/>", parse);
-				Text.Add("Or whether the weather be not,<br/>", parse);
-				Text.Add("We'll weather the weather,<br/>", parse);
-				Text.Add("Whatever the weather,<br/>", parse);
+				Text.Add("Whether the weather be fine<br>", parse);
+				Text.Add("Or whether the weather be not,<br>", parse);
+				Text.Add("We'll weather the weather,<br>", parse);
+				Text.Add("Whatever the weather,<br>", parse);
 				Text.Add("Whether we like it or not.”</i>", parse);
 				Text.NL();
 				Text.Add("Well. That seems to have put paid to <b>that</b> line of conversation.", parse);

@@ -146,12 +146,12 @@ Scenes.Nursery.PrintPCbirthed = function() {
 			if(father) {
 				Text.Add(", fathered by " + father.name);
 			}
-			Text.Add(".<br/>", parse);
+			Text.Add(".<br>", parse);
 			num += kid.num;
 		});
 		parse["number"] = Text.NumToText(num);
 		parse["ren"]    = num > 1 ? "ren" : "";
-		Text.Add("<br/>For a total of [number] child[ren].", parse);
+		Text.Add("<br>For a total of [number] child[ren].", parse);
 		Text.NL();
 	}
 }
@@ -172,12 +172,12 @@ Scenes.Nursery.PrintPCfathered = function() {
 			if(mother) {
 				Text.Add(", birthed by " + mother.name);
 			}
-			Text.Add(".<br/>", parse);
+			Text.Add(".<br>", parse);
 			num += kid.num;
 		});
 		parse["number"] = Text.NumToText(num);
 		parse["ren"]    = num > 1 ? "ren" : "";
-		Text.Add("<br/>For a total of [number] child[ren].", parse);
+		Text.Add("<br>For a total of [number] child[ren].", parse);
 		Text.NL();
 	}
 }

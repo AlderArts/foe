@@ -89,7 +89,7 @@ world.loc.Rigard.Inn.penthouse.events.push(new Link(
 world.loc.Rigard.Inn.common.links.push(new Link(
 	"Backroom", true, false,
 	function() {
-		Text.Add("Go backroom?<br/>");
+		Text.Add("Go backroom?<br>");
 	},
 	function() {
 		MoveToLocation(world.loc.Rigard.Inn.backroom);
@@ -98,7 +98,7 @@ world.loc.Rigard.Inn.common.links.push(new Link(
 world.loc.Rigard.Inn.common.links.push(new Link(
 	"Cellar", true, false,
 	function() {
-		Text.Add("Go cellar?<br/>");
+		Text.Add("Go cellar?<br>");
 	},
 	function() {
 		MoveToLocation(world.loc.Rigard.Inn.cellar);

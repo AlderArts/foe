@@ -247,8 +247,8 @@ Scenes.Jeanne.Talk = function() {
 				Text.NL();
 				Text.Add("<i>“I would say we have done enough for today,”</i> Jeanne concludes, after the two of you have spent several hours practicing your new skills. <i>“Look over the scrolls I gave you, and take time to apply these basic skills. I have more to teach you later, but I need a foundation to build on.”</i>", parse);
 				Text.NL();
-				Text.Add("<b>Unlocked the Mage job.</b><br/>", parse);
-				Text.Add("<b>Unlocked the Mystic job.</b><br/>", parse);
+				Text.Add("<b>Unlocked the Mage job.</b><br>", parse);
+				Text.Add("<b>Unlocked the Mystic job.</b><br>", parse);
 				Text.Add("<b>Unlocked the Healer job.</b>", parse);
 				Text.NL();
 				Text.Add("You thank her for her time, stretching awkwardly. Time ended up just flying by.", parse);
@@ -296,7 +296,7 @@ Scenes.Jeanne.Talk = function() {
 					Text.NL();
 					Text.Add("<i>“Now that you have learned the fundamentals of magic, I can teach you more advanced techniques. First, I have prepared these scrolls for you, in case you would like to proceed down the path of pure magic. The spells are more complex than you are used to, but the general idea is the same.”</i> She hands you a set of scrolls, detailing several new spells for you to learn.", parse);
 					Text.NL();
-					Text.Add("<b>Unlocked the Elementalist job.</b><br/>", parse);
+					Text.Add("<b>Unlocked the Elementalist job.</b><br>", parse);
 					Text.Add("<b>Unlocked the Warlock job.</b>", parse);
 					Text.NL();
 					Text.Add("<i>“I will let you learn these yourself, if you find them interesting. What I wanted to introduce you to is how magic can be combined with other disciplines in order to enhance them.”</i> Jeanne spends some time outlining how magic can be used in order to power up your physical attacks, adding an elemental punch to your blows. <i>“Sword mages are very powerful warriors, especially against elemental foes,”</i> she concludes. <i>“Of course, you’d have to be both a proficient fighter and magician in order to apply these techniques to actual combat.”</i>", parse);
@@ -307,7 +307,7 @@ Scenes.Jeanne.Talk = function() {
 					Text.NL();
 					Text.Add("<i>“To start with, try to use spells intended to muddle the minds of your foes. Fuel your magic with your own emotions and transfer them to the unsuspecting enemy. I have found that someone thinking with their libido is far more… agreeable, compared to one suffused with rage.”</i> She hands you yet another scroll, the contents of which makes you blush faintly.", parse);
 					Text.NL();
-					Text.Add("<b>Unlocked the Hypnotist job.</b><br/>", parse);
+					Text.Add("<b>Unlocked the Hypnotist job.</b><br>", parse);
 					Text.Add("<b>Unlocked the Eromancer job.</b>", parse);
 					Text.NL();
 					Text.Add("<i>“I could spend more time to explain how to each of the disciplines work, and additional spells you could apply, but you would be better served by applying what I have shown you.”</i> Jeanne looks troubled. <i>“Had things been different, you could have taken your time to study this for a few years, but time is not a luxury we possess.”</i>", parse);

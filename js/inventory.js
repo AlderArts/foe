@@ -83,7 +83,7 @@ Inventory.prototype.RemoveItem = function(item, num) {
 // Todo temp
 Inventory.prototype.Print = function() {
 	for(var i = 0; i < this.items.length; i++) {
-		Text.Add(this.items[i].num + "x " + this.items[i].it.name + " - " + this.items[i].it.Short() + "<br/>");
+		Text.Add(this.items[i].num + "x " + this.items[i].it.name + " - " + this.items[i].it.Short() + "<br>");
 	}
 	Text.Flush();
 }
@@ -321,7 +321,7 @@ Inventory.prototype.CombatInventory = function(encounter, entity, back) {
 		var it  = usable[i].it;
 		var num = usable[i].num;
 
-		//Text.Add(num + "x " + it.name + " - " + it.Short() + "<br/>");
+		//Text.Add(num + "x " + it.name + " - " + it.Short() + "<br>");
 		options.push({
 			nameStr: it.name,
 			enabled: it.combat ? it.combat.enabledCondition(encounter, entity) : true,

@@ -92,7 +92,7 @@ Entity.prototype.PrintDescription = function() {
 		parse.breastSize = breastDesc.size;
 		Text.Add("Multiple rows of " + breast.nounPlural() + " sprout from [hisher] chest. [HisHer] first pair of [breastDesc] are [breastSize] in circumference.", parse);
 		for(i = 1; i < breasts.length; i++) {
-			Text.Add("<br/>Another two breasts.");
+			Text.Add("<br>Another two breasts.");
 		}
 	}
 	else {
@@ -152,9 +152,9 @@ Entity.prototype.PrintDescription = function() {
 	}
 	else if(vags.length > 1) {
 		var vag = vags[0];
-		Text.Add("[name] [has] multiple " + vag.nounPlural() + ". [HisHer] first " + vag.noun() + " is slutty.<br/>", parse);
+		Text.Add("[name] [has] multiple " + vag.nounPlural() + ". [HisHer] first " + vag.noun() + " is slutty.<br>", parse);
 		for(i = 1; i < vags.length; i++) {
-			Text.Add("<br/>Another of [hisher] " + vag.nounPlural() + " is slutty.", parse);
+			Text.Add("<br>Another of [hisher] " + vag.nounPlural() + " is slutty.", parse);
 		}
 	}
 	if(vags[0])

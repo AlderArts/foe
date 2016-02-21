@@ -431,7 +431,7 @@ Party.prototype.ShowAbilities = function() {
 				if(ability.OOC) {
 					var en = ability.enabledCondition(null, entity);
 					
-					Text.Add("[name] can use [ability] for [cost]: [desc]<br/>",
+					Text.Add("[name] can use [ability] for [cost]: [desc]<br>",
 						{name: Text.BoldColor(entity.name), ability: ability.name, cost: ability.CostStr(), desc: ability.Short()});
 					
 					list.push({

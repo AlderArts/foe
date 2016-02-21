@@ -141,7 +141,7 @@ world.loc.Rigard.ShopStreet.street.links.push(new Link(
 		Text.Add("One particular shop catch your eye. A garish sign hanging outside announce it the 'Shoppe of oddities', though from just the exterior, it is a bit unclear what is actually on sale.");
 		if(!Scenes.Rigard.OddShop.IsOpen())
 			Text.Add(" A small paper stapled to the front door states that the shop is 'Cloosd' at the moment.");
-		Text.Add("<br/>");
+		Text.Add("<br>");
 	},
 	function() {
 		MoveToLocation(world.loc.Rigard.ShopStreet.OddShop, {minute: 5});

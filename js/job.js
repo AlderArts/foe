@@ -69,7 +69,7 @@ Job.prototype.AddExp = function(entity, exp, reserve) {
 			has  : entity.has()
 		};
 		Text.NL();
-		Text.Add(Text.BoldColor("[name] [is] now a level [lvl] [job]!<br/>"), parse);
+		Text.Add(Text.BoldColor("[name] [is] now a level [lvl] [job]!<br>"), parse);
 		// Teach new skills
 		if(skills) {
 			// [ { ab: Ablities.Black.Fireball, set: "Spells" }, ... ]
@@ -81,22 +81,22 @@ Job.prototype.AddExp = function(entity, exp, reserve) {
 				parse["ability"] = ability.name;
 				
 				if(!entity.abilities[set].HasAbility(ability))
-					Text.Add(Text.BoldColor("[name] [has] mastered [ability]!<br/>"), parse);
+					Text.Add(Text.BoldColor("[name] [has] mastered [ability]!<br>"), parse);
 				entity.abilities[set].AddAbility(ability);
 			}
 		}
 		// Apply bonuses
 		if(bonus) {
-			if(bonus["hp"])  { entity.maxHp.growth        += bonus["hp"];  Text.Add("HP+"   + (bonus["hp"]  /  5) + "<br/>"); }
-			if(bonus["sp"])  { entity.maxSp.growth        += bonus["sp"];  Text.Add("SP+"   + (bonus["sp"]  /  5) + "<br/>"); }
-			if(bonus["lp"])  { entity.maxLust.growth      += bonus["lp"];  Text.Add("Lust+" + (bonus["lp"]  /  5) + "<br/>"); }
-			if(bonus["str"]) { entity.strength.growth     += bonus["str"]; Text.Add("Str+"  + (bonus["str"] * 10) + "<br/>"); }
-			if(bonus["sta"]) { entity.stamina.growth      += bonus["sta"]; Text.Add("Sta+"  + (bonus["sta"] * 10) + "<br/>"); }
-			if(bonus["dex"]) { entity.dexterity.growth    += bonus["dex"]; Text.Add("Dex+"  + (bonus["dex"] * 10) + "<br/>"); }
-			if(bonus["int"]) { entity.intelligence.growth += bonus["int"]; Text.Add("Int+"  + (bonus["int"] * 10) + "<br/>"); }
-			if(bonus["spi"]) { entity.spirit.growth       += bonus["spi"]; Text.Add("Spi+"  + (bonus["spi"] * 10) + "<br/>"); }
-			if(bonus["lib"]) { entity.libido.growth       += bonus["lib"]; Text.Add("Lib+"  + (bonus["lib"] * 10) + "<br/>"); }
-			if(bonus["cha"]) { entity.charisma.growth     += bonus["cha"]; Text.Add("Cha+"  + (bonus["cha"] * 10) + "<br/>"); }
+			if(bonus["hp"])  { entity.maxHp.growth        += bonus["hp"];  Text.Add("HP+"   + (bonus["hp"]  /  5) + "<br>"); }
+			if(bonus["sp"])  { entity.maxSp.growth        += bonus["sp"];  Text.Add("SP+"   + (bonus["sp"]  /  5) + "<br>"); }
+			if(bonus["lp"])  { entity.maxLust.growth      += bonus["lp"];  Text.Add("Lust+" + (bonus["lp"]  /  5) + "<br>"); }
+			if(bonus["str"]) { entity.strength.growth     += bonus["str"]; Text.Add("Str+"  + (bonus["str"] * 10) + "<br>"); }
+			if(bonus["sta"]) { entity.stamina.growth      += bonus["sta"]; Text.Add("Sta+"  + (bonus["sta"] * 10) + "<br>"); }
+			if(bonus["dex"]) { entity.dexterity.growth    += bonus["dex"]; Text.Add("Dex+"  + (bonus["dex"] * 10) + "<br>"); }
+			if(bonus["int"]) { entity.intelligence.growth += bonus["int"]; Text.Add("Int+"  + (bonus["int"] * 10) + "<br>"); }
+			if(bonus["spi"]) { entity.spirit.growth       += bonus["spi"]; Text.Add("Spi+"  + (bonus["spi"] * 10) + "<br>"); }
+			if(bonus["lib"]) { entity.libido.growth       += bonus["lib"]; Text.Add("Lib+"  + (bonus["lib"] * 10) + "<br>"); }
+			if(bonus["cha"]) { entity.charisma.growth     += bonus["cha"]; Text.Add("Cha+"  + (bonus["cha"] * 10) + "<br>"); }
 			entity.SetLevelBonus();
 		}
 		// Apply special functions

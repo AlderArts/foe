@@ -535,8 +535,8 @@ Player.prototype.PregnancyTrigger = function(womb, slot) {
 		parse["newborn"] = egg ? "egg" : "newborn";
 		
 		if(DEBUG) {
-			Text.Add("<b>Preg-debug:<br/>", parse);
-			Text.Add("Num: [num]<br/>", parse);
+			Text.Add("<b>Preg-debug:<br>", parse);
+			Text.Add("Num: [num]<br>", parse);
 			Text.Add("Type: [type]</b>", parse);
 			Text.NL();
 		}

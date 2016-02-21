@@ -6,7 +6,7 @@ Items.Halloween.SkimpyCostume.price = 0;
 Items.Halloween.SkimpyCostume.sDesc = function() { return "skimpy costume"; }
 Items.Halloween.SkimpyCostume.lDesc = function() { return "a skimpy costume"; }
 Items.Halloween.SkimpyCostume.Short = function() { return "Skimpy costume"; }
-Items.Halloween.SkimpyCostume.Long = function() { return "Clothing you found inside the tent you woke up in. It beats being naked, but not by much. To be honest you can’t be sure this isn’t some kind of kinky costume the previous owner wore during one of their sexual escapades, but still, little protection is better than <i>no</i> protection at all. The undies have a small slot for inserting a dildo, effectively doubling up as a strap-on.<br/><b>+2 kinky, +1 leather fetish, +4 scantily clad, +1 cool cloak.</b>"; }
+Items.Halloween.SkimpyCostume.Long = function() { return "Clothing you found inside the tent you woke up in. It beats being naked, but not by much. To be honest you can’t be sure this isn’t some kind of kinky costume the previous owner wore during one of their sexual escapades, but still, little protection is better than <i>no</i> protection at all. The undies have a small slot for inserting a dildo, effectively doubling up as a strap-on.<br><b>+2 kinky, +1 leather fetish, +4 scantily clad, +1 cool cloak.</b>"; }
 Items.Halloween.SkimpyCostume.subtype = ItemSubtype.FullArmor;
 
 
@@ -84,7 +84,7 @@ Items.Halloween.WerewolfHide.price = 0;
 Items.Halloween.WerewolfHide.sDesc = function() { return "werewolf hide"; }
 Items.Halloween.WerewolfHide.lDesc = function() { return "a werewolf hide"; }
 Items.Halloween.WerewolfHide.Short = function() { return "Werewolf hide"; }
-Items.Halloween.WerewolfHide.Long = function() { return "Your natural, furry hide. You feel much warmer than you did in your previous skimpy clothes plus cloak combo, and your new muscles ripple with power whenever you flex them. All that combined with the fact that you still retain your ability to reason and think straight, maybe getting turned into a werewolf wasn’t so bad… It also feels great to feel the wind ruffling your fur with your junk dangling below.<br/><b>+3 Muscles, +2 Howling, +10 Nakedness, +2 Static generation, +1 Fluffy tail.</b>"; }
+Items.Halloween.WerewolfHide.Long = function() { return "Your natural, furry hide. You feel much warmer than you did in your previous skimpy clothes plus cloak combo, and your new muscles ripple with power whenever you flex them. All that combined with the fact that you still retain your ability to reason and think straight, maybe getting turned into a werewolf wasn’t so bad… It also feels great to feel the wind ruffling your fur with your junk dangling below.<br><b>+3 Muscles, +2 Howling, +10 Nakedness, +2 Static generation, +1 Fluffy tail.</b>"; }
 Items.Halloween.WerewolfHide.subtype = ItemSubtype.FullArmor;
 
 
@@ -93,5 +93,5 @@ Items.Halloween.WerewolfClaw.price = 0;
 Items.Halloween.WerewolfClaw.sDesc = function() { return "werewolf claws"; }
 Items.Halloween.WerewolfClaw.lDesc = function() { return "a set of werewolf claws"; }
 Items.Halloween.WerewolfClaw.Short = function() { return "Werewolf claws"; }
-Items.Halloween.WerewolfClaw.Long = function() { return "Razor-sharp claws, ideal for defending yourself against any threat you meet in your way. Just not that great when you want to <i>not</i> rip and shred stuff apart… but it’s universally agreed that ripping the clothes off someone is way faster than stripping them anyway.<br/><b>-3 Stripping, +10 Ripping clothes apart, +2 Back scratching power, +3 Holding bitches down for mating, +4 Badass.</b>"; }
+Items.Halloween.WerewolfClaw.Long = function() { return "Razor-sharp claws, ideal for defending yourself against any threat you meet in your way. Just not that great when you want to <i>not</i> rip and shred stuff apart… but it’s universally agreed that ripping the clothes off someone is way faster than stripping them anyway.<br><b>-3 Stripping, +10 Ripping clothes apart, +2 Back scratching power, +3 Holding bitches down for mating, +4 Badass.</b>"; }
 

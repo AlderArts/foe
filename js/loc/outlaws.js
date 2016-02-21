@@ -15,7 +15,7 @@ world.loc.Outlaws.Camp.SaveSpot = "Outlaws";
 world.loc.Outlaws.Camp.safe = function() { return true; };
 //TODO
 world.loc.Outlaws.Camp.description = function() {
-	Text.Add("You are in the outlaws' camp.<br/>");
+	Text.Add("You are in the outlaws' camp.<br>");
 	
 	if(DEBUG) {
 		Text.NL();

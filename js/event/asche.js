@@ -937,13 +937,13 @@ Scenes.Asche.MagicBoxWin = function() {
 	scenes.AddEnc(function() {
 		Text.Add("Feeling something smooth under your fingertips, you close in on the object and pull it out of the box’s indeterminate depths. It’s a small leather pouch, and you draw open the strings to reveal a handful of alchemical ingredients. Not the best value that your money could have brought you, but more reagents on hand are always welcome.", parse);
 		Text.NL();
-		Text.Add("Putting away the reagents and throwing the pouch back into the bin, you turn to other matters.<br/>", parse);
+		Text.Add("Putting away the reagents and throwing the pouch back into the bin, you turn to other matters.<br>", parse);
 		_.times(_.random(4,10), function() {
 			var item = _.sample(Scenes.Rigard.MagicShop.Shop.ingredients);
 			
 			party.Inv().AddItem(item);
 			
-			Text.Add("<br/><b>Acquired [lDesc]!</b>", {lDesc : item.lDesc()});
+			Text.Add("<br><b>Acquired [lDesc]!</b>", {lDesc : item.lDesc()});
 		});
 		
 		Scenes.Asche.MagicBoxRepeat();

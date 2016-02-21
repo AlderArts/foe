@@ -129,7 +129,7 @@ Text.ResetToolbars = function(){
 }
 
 Text.NL = function() {
-	Text.buffer += "<br/><br/>";
+	Text.buffer += "<br><br>";
 }
 
 Text.Flush = function(textCssClasses, toolbarCssClasses) {

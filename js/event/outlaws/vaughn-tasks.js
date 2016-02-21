@@ -988,7 +988,7 @@ Scenes.Vaughn.Tasks.Snitch.DebriefSuccess = function(parse) {
 	Text.Add("<i>“Dunno if it’s a pleasure or not, but it damn well felt good to receive the news of the bastard’s demise. Here, it’s not much, but I set these aside for you from the last consignment which came in. We don’t have any actual <b>money</b> to spare at the moment, so goods is all that I can reward you with.”</i>", parse);
 	Text.NL();
 	
-	Text.Add("Received 5x Energy Potions.<br/>", parse, 'bold');
+	Text.Add("Received 5x Energy Potions.<br>", parse, 'bold');
 	Text.Add("Received 5x Speed Potions.", parse, 'bold');
 	
 	Text.NL();

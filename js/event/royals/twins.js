@@ -190,7 +190,7 @@ Scenes.Twins.TalkPrompt = function() {
 					Text.NL();
 					Text.Add("Nodding your understanding, you carefully stow the collar away before thanking the royal twins for their efforts. That said, you make your excuses and depart.", parse);
 					Text.NL();
-					Text.Add("<b>Received enchanted collar!</b><br/>", parse);
+					Text.Add("<b>Received enchanted collar!</b><br>", parse);
 					Text.Add("<b>Received royal letter!</b>", parse);
 					terry.flags["Saved"] = Terry.Saved.TalkedTwins2;
 				}

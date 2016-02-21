@@ -884,9 +884,9 @@ Scenes.Magnus.LearnMagic = function() {
 		Text.NL();
 		Text.Add("<i>“To further your studies,”</i> he explains. <i>“With such talent, I’m sure you will surpass me in no time!”</i> The scrolls seem to line out a few basic spells, and with the aid of Magnus, you manage to decipher them.", parse);
 		Text.NL();
-		Text.Add("<b>Unlocked the Mage job.</b><br/>", parse);
-		Text.Add("<b>Unlocked the Mystic job.</b><br/>", parse);
-		Text.Add("<b>Unlocked the Healer job.</b><br/>", parse);
+		Text.Add("<b>Unlocked the Mage job.</b><br>", parse);
+		Text.Add("<b>Unlocked the Mystic job.</b><br>", parse);
+		Text.Add("<b>Unlocked the Healer job.</b><br>", parse);
 		Text.NL();
 		Text.Add("You thank him for his help, and set out on your journey, a new power at your beck and call.", parse);
 		Text.Flush();

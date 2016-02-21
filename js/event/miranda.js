@@ -2242,7 +2242,7 @@ Scenes.Miranda.JustOneMore = function() {
 				
 				Gui.NextPrompt();
 			}, enabled : true,
-			tooltip : "Not interested. Find an excuse to ditch her.<br/><br/>...On second thought, getting on the bad side of the law might have reprecussions."
+			tooltip : "Not interested. Find an excuse to ditch her.<br><br>...On second thought, getting on the bad side of the law might have reprecussions."
 		});
 		Gui.SetButtonsFromList(options);
 	}
@@ -2296,7 +2296,7 @@ Scenes.Miranda.JustOneMore = function() {
 				
 				Gui.NextPrompt();
 			}, enabled : true,
-			tooltip : "Not interested. Find an excuse to ditch her.<br/><br/>...On second thought, getting on the bad side of the law might have reprecussions."
+			tooltip : "Not interested. Find an excuse to ditch her.<br><br>...On second thought, getting on the bad side of the law might have reprecussions."
 		});
 		options.push({ nameStr : "Touch it",
 			func : function() {

@@ -81,23 +81,23 @@ Entity.prototype.LevelUpPrompt = function(backFunc) {
 	Text.NL();
 
 	if(this.currentJob) {
-		Text.Add(Text.BoldColor("Job abilities:<br/>"));
+		Text.Add(Text.BoldColor("Job abilities:<br>"));
 		var abSet = this.currentJob.abilities;
 
 		for(var i = 0; i < abSet.AbilitySet.length; i++) {
 			var ability = abSet.AbilitySet[i];
-			Text.Add("[ability] ([cost]): [desc]<br/>",
+			Text.Add("[ability] ([cost]): [desc]<br>",
 				{ability: ability.name, cost: ability.CostStr(), desc: ability.Short()});
 		}
-		Text.Add("<br/>");
+		Text.Add("<br>");
 	}
-	Text.Add(Text.BoldColor("Known abilities:<br/>"));
+	Text.Add(Text.BoldColor("Known abilities:<br>"));
 	for(set in this.abilities) {
 		var abSet = this.abilities[set];
 
 		for(var i = 0; i < abSet.AbilitySet.length; i++) {
 			var ability = abSet.AbilitySet[i];
-			Text.Add("[ability] ([cost]): [desc]<br/>",
+			Text.Add("[ability] ([cost]): [desc]<br>",
 				{ability: ability.name, cost: ability.CostStr(), desc: ability.Short()});
 		}
 	}
@@ -347,7 +347,7 @@ Entity.prototype.JobPrompt = function(backfunc) {
 	else
 		Text.Add("Exp: " + Math.floor(jd.experience) + "/" + Math.floor(toLevel));
 	Text.NL();
-	Text.Add("Available jobs:<br/>");
+	Text.Add("Available jobs:<br>");
 
 	var options = [];
 
@@ -368,9 +368,9 @@ Entity.prototype.JobPrompt = function(backfunc) {
 
 		if(jd.job.Available(this)) {
 			if(master)
-				Text.Add("[job] <b>(MASTER)</b><br/>", parse);
+				Text.Add("[job] <b>(MASTER)</b><br>", parse);
 			else
-				Text.Add("[job]: level [lvl] (exp " + Math.floor(jd.experience) + "/" + Math.floor(toLevel) + ")<br/>", parse);
+				Text.Add("[job]: level [lvl] (exp " + Math.floor(jd.experience) + "/" + Math.floor(toLevel) + ")<br>", parse);
 		}
 		else
 		{
@@ -381,7 +381,7 @@ Entity.prototype.JobPrompt = function(backfunc) {
 				var lvl  = preq.lvl || 1;
 				Text.Add(" [job2] lvl [lvl2]", {job2: job.Short(this), lvl2: lvl});
 			}
-			Text.Add(".<br/>");
+			Text.Add(".<br>");
 		}
 
 		options.push({ nameStr : jd.job.Short(this),

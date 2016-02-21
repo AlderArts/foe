@@ -638,7 +638,7 @@ Scenes.Dreams.KiakaiMonster = function(ravenTrigger) {
 
 Scenes.Dreams.Kiakai63 = function(ravenTrigger) {
 	var parse = {
-		raven : Scenes.Dreams.RavenText(ravenTrigger, " A black bird is perched on the edge of the opening, looking down on you placidly.", " A raven is perched on the edge of the opening, curiously regarding you.<br/><br/>So, they are watching you once more. You wonder what they’re looking for, and decide to consider the question when you wake up.")
+		raven : Scenes.Dreams.RavenText(ravenTrigger, " A black bird is perched on the edge of the opening, looking down on you placidly.", " A raven is perched on the edge of the opening, curiously regarding you.<br><br>So, they are watching you once more. You wonder what they’re looking for, and decide to consider the question when you wake up.")
 	};
 	
 	// Reverse initial gender

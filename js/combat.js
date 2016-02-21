@@ -273,7 +273,7 @@ Encounter.prototype.onVictory = function() {
 			var it  = drops[j].it;
 			var num = drops[j].num || 1;
 			
-			Text.Add("The party finds " + num + "x " + it.name + ".<br/>");
+			Text.Add("The party finds " + num + "x " + it.name + ".<br>");
 			party.inventory.AddItem(it, num);
 		}
 	}
@@ -442,8 +442,8 @@ Encounter.prototype.CombatTick = function() {
 			Text.Clear();
 			// TODO: DEBUG ?
 			var entityName = currentActiveChar.uniqueName ? currentActiveChar.uniqueName : currentActiveChar.name;
-			Text.Add(Text.BoldColor("Turn order:<br/>"));
-			Text.Add(Text.BoldColor(entityName + "<br/>"));
+			Text.Add(Text.BoldColor("Turn order:<br>"));
+			Text.Add(Text.BoldColor(entityName + "<br>"));
 			
 			var tempParty = [];
 			_.each(enc.combatOrder, function(c) {
@@ -470,7 +470,7 @@ Encounter.prototype.CombatTick = function() {
 				
 				found.ini -= 100; //TODO cast time for predict
 				var tempCasting = found.entry.casting ? " (casting...)" : "";
-				Text.Add(found.name + tempCasting + "<br/>");
+				Text.Add(found.name + tempCasting + "<br>");
 			});
 			Text.NL();
 			

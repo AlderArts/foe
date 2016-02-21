@@ -118,7 +118,7 @@ Scenes.Krawitz.EntitySuspicion = function(entity) {
 // Mansion
 //
 world.loc.Rigard.Krawitz.street.description = function() {
-	Text.Add("You are in front of Krawitz's estate.<br/>");
+	Text.Add("You are in front of Krawitz's estate.<br>");
 }
 
 world.SaveSpots["Krawitz"] = world.loc.Rigard.Krawitz.street;
@@ -150,7 +150,7 @@ world.loc.Rigard.Krawitz.street.links.push(new Link(
 world.loc.Rigard.Krawitz.street.links.push(new Link(
 	"Grounds", true, function() { return world.time.hour >= 20; },
 	function() {
-		Text.Add("Sneak into the main grounds? Better do this in the late hours of the day, though not too late. You suspect you'll need all the time you can get once inside.<br/>");
+		Text.Add("Sneak into the main grounds? Better do this in the late hours of the day, though not too late. You suspect you'll need all the time you can get once inside.<br>");
 	},
 	function() {
 		Scenes.Krawitz.ApproachGates();
@@ -441,7 +441,7 @@ world.loc.Rigard.Krawitz.Mansion.hall.description = function() {
 world.loc.Rigard.Krawitz.Mansion.hall.links.push(new Link(
 	"Grounds", true, true,
 	function() {
-		Text.Add("Go outside?<br/>");
+		Text.Add("Go outside?<br>");
 	},
 	function() {
 		MoveToLocation(world.loc.Rigard.Krawitz.grounds);
@@ -506,7 +506,7 @@ world.loc.Rigard.Krawitz.Mansion.hall.links.push(new Link(
 world.loc.Rigard.Krawitz.Mansion.hall.links.push(new Link(
 	"Storeroom", true, true,
 	function() {
-		Text.Add("Go to the storeroom?<br/>");
+		Text.Add("Go to the storeroom?<br>");
 	},
 	function() {
 		MoveToLocation(world.loc.Rigard.Krawitz.Mansion.storeroom);
@@ -516,7 +516,7 @@ world.loc.Rigard.Krawitz.Mansion.hall.links.push(new Link(
 world.loc.Rigard.Krawitz.Mansion.hall.links.push(new Link(
 	"Study", true, function() { return Scenes.Krawitz.stat.Orgy || (!Scenes.Krawitz.stat.TFdKrawitz && Scenes.Krawitz.stat.KrawitzFood != 3); },
 	function() {
-		Text.Add("Go to Krawitz' study?<br/>");
+		Text.Add("Go to Krawitz' study?<br>");
 	},
 	function() {
 		party.location = world.loc.Rigard.Krawitz.Mansion.study;
@@ -2060,9 +2060,9 @@ Scenes.Krawitz.Aftermath = function() {
 	if(Scenes.Krawitz.stat.TFdKrawitz) rigard.Krawitz["F"] |= Scenes.Krawitz.Flags.TF;
 	
 	Text.Clear();
-	Text.Add("<b>Final Score:</b><br/>", parse);
-	Text.Add("Suspicion raised: " + Scenes.Krawitz.stat.Suspicion + "/100<br/>", parse);
-	Text.Add("Mayhem spread: " + points + "/10<br/>", parse);
+	Text.Add("<b>Final Score:</b><br>", parse);
+	Text.Add("Suspicion raised: " + Scenes.Krawitz.stat.Suspicion + "/100<br>", parse);
+	Text.Add("Mayhem spread: " + points + "/10<br>", parse);
 	Text.Add("Alarm raised: " + (Scenes.Krawitz.stat.AlarmRaised ? "yes" : "no"), parse);
 	Text.Flush();
 	
