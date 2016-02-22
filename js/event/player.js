@@ -691,18 +691,9 @@ Player.prototype.Interact = function(switchSpot) {
 	});
 	options.push({ nameStr: "Meditate",
 		func : function() {
-			Text.Clear();
-			Text.Add("[Placeholder] You sit down and attempt to calm your thoughts.");
-			Text.Flush();
-			world.TimeStep({minute : 30});
-			
-			that.AddLustFraction(-1);
-			
-			Gui.NextPrompt(function() {
-				that.Interact(switchSpot);
-			});
+			Scenes.Meditation.Entry();
 		}, enabled : true,
-		tooltip : "Calm yourself."
+		tooltip : "Calm yourself through meditation."
 	});
 	//Equip, stats, job, switch
 	that.InteractDefault(options, switchSpot, true, true, true, false);
