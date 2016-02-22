@@ -85,24 +85,24 @@ Items.Cards.Shadow[4].Short = function() { return "The Dancer of Shadow"; }
 Items.Cards.Shadow[4].Long = function() { return "The Dancer of Shadow, a playing card from the game Cavalcade."; }
 
 LoadCardImages = function(imageArray) {
-	Items.Cards.Light[0].Img    = "data/cards/L1.png";
-	Items.Cards.Light[1].Img    = "data/cards/L2.png";
-	Items.Cards.Light[2].Img    = "data/cards/L3.png";
-	Items.Cards.Light[3].Img    = "data/cards/L4.png";
-	Items.Cards.Light[4].Img    = "data/cards/L5.png";
-	Items.Cards.Darkness[0].Img = "data/cards/D1.png";
-	Items.Cards.Darkness[1].Img = "data/cards/D2.png";
-	Items.Cards.Darkness[2].Img = "data/cards/D3.png";
-	Items.Cards.Darkness[3].Img = "data/cards/D4.png";
-	Items.Cards.Darkness[4].Img = "data/cards/D5.png";
-	Items.Cards.Shadow[0].Img   = "data/cards/S1.png";
-	Items.Cards.Shadow[1].Img   = "data/cards/S2.png";
-	Items.Cards.Shadow[2].Img   = "data/cards/S3.png";
-	Items.Cards.Shadow[3].Img   = "data/cards/S4.png";
-	Items.Cards.Shadow[4].Img   = "data/cards/S5.png";
-	
-	Images.card_back            = "data/cards/back.png";
-	
+	Items.Cards.Light[0].Img    = "assets/img/cards/L1.png";
+	Items.Cards.Light[1].Img    = "assets/img/cards/L2.png";
+	Items.Cards.Light[2].Img    = "assets/img/cards/L3.png";
+	Items.Cards.Light[3].Img    = "assets/img/cards/L4.png";
+	Items.Cards.Light[4].Img    = "assets/img/cards/L5.png";
+	Items.Cards.Darkness[0].Img = "assets/img/cards/D1.png";
+	Items.Cards.Darkness[1].Img = "assets/img/cards/D2.png";
+	Items.Cards.Darkness[2].Img = "assets/img/cards/D3.png";
+	Items.Cards.Darkness[3].Img = "assets/img/cards/D4.png";
+	Items.Cards.Darkness[4].Img = "assets/img/cards/D5.png";
+	Items.Cards.Shadow[0].Img   = "assets/img/cards/S1.png";
+	Items.Cards.Shadow[1].Img   = "assets/img/cards/S2.png";
+	Items.Cards.Shadow[2].Img   = "assets/img/cards/S3.png";
+	Items.Cards.Shadow[3].Img   = "assets/img/cards/S4.png";
+	Items.Cards.Shadow[4].Img   = "assets/img/cards/S5.png";
+
+	Images.card_back            = "assets/img/cards/back.png";
+
 	var cards = [
 		Items.Cards.Light[0].Img,
 		Items.Cards.Light[1].Img,
@@ -121,7 +121,7 @@ LoadCardImages = function(imageArray) {
 		Items.Cards.Shadow[4].Img,
 		Images.card_back
 	];
-	
+
 	for(var i = 0; i < cards.length; i++)
 		imageArray.push(cards[i]);
 }

@@ -58,7 +58,7 @@ SplashScreen = function() {
 	Text.Add("<span style=\"font-size: 26pt; font-family:Calibri;\">" + VERSION_STRING + "</span>");
 	Text.NL();
 
-	Text.Add(Text.InsertImage("data/avatar_gwendy.png")); // TEMP
+	Text.Add(Text.InsertImage(Images.gwendy)); // TEMP
 	Text.Add("<i>Game developed by <a href=\"http://www.furaffinity.net/user/aldergames/\">Alder</a></i>");
 	Text.NL();
 	Text.Add("Editors: MrKrampus, Del, Johnathan Roberts, Ryous, CalmKhaos. Thanks a bunch for your hard work!")

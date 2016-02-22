@@ -1,7 +1,7 @@
 /*
- * 
+ *
  * Define Adrian
- * 
+ *
  */
 function Adrian(storage) {
 	Entity.call(this);
@@ -9,9 +9,9 @@ function Adrian(storage) {
 
 	// Character stats
 	this.name = "Adrian";
-	
+
 	//this.avatar.combat = new Image();
-	//this.avatar.combat.src = "data/adrian_avatar.png";
+	//this.avatar.combat.src = "assets/img/adrian_avatar.png";
 	
 	this.maxHp.base        = 100;
 	this.maxSp.base        = 80;
@@ -24,18 +24,18 @@ function Adrian(storage) {
 	this.spirit.base       = 15;
 	this.libido.base       = 20;
 	this.charisma.base     = 18;
-	
+
 	this.level = 5;
 	this.sexlevel = 3;
 	this.SetExpToLevel();
-	
+
 	this.body.DefMale();
 	this.body.SetRace(Race.Horse);
 	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Horse, Color.brown);
-	
+
 	this.SetLevelBonus();
 	this.RestFull();
-	
+
 	this.flags["Met"] = 0;
 
 	if(storage) this.FromStorage(storage);
@@ -47,19 +47,19 @@ Adrian.prototype.constructor = Adrian;
 Adrian.prototype.FromStorage = function(storage) {
 	this.body.FromStorage(storage.body);
 	this.LoadPersonalityStats(storage);
-	
+
 	// Load flags
 	this.LoadFlags(storage);
 }
 
 Adrian.prototype.ToStorage = function() {
 	var storage = {};
-	
+
 	this.SaveBodyPartial(storage, {ass: true});
 	this.SavePersonalityStats(storage);
-	
+
 	this.SaveFlags(storage);
-	
+
 	return storage;
 }
 
@@ -73,8 +73,8 @@ Adrian.prototype.IsAtLocation = function(location) {
 Adrian.prototype.Interact = function() {
 	Text.Clear();
 	Text.Add("Rawr Imma horse.");
-	
-	
+
+
 	if(DEBUG) {
 		Text.NL();
 		Text.Add(Text.BoldColor("DEBUG: relation: " + adrian.relation.Get()));
@@ -84,7 +84,7 @@ Adrian.prototype.Interact = function() {
 		Text.Add(Text.BoldColor("DEBUG: slut: " + adrian.slut.Get()));
 		Text.NL();
 	}
-	
+
 	Text.Flush();
 	Gui.NextPrompt(function() {
 		PartyInteraction();
