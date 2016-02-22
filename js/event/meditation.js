@@ -81,7 +81,7 @@ Scenes.Meditation.Entry = function() {
 		Text.NL();
 		Text.Add("Well, it sounds like a decent plan. At least with [Kiai] about helping you with this, it’d probably be more effective than trying to meditate on your own.", parse);
 		Text.NL();
-		Text.Add("[Kiai] beams. <i>“Excellent! Yrissa did say they were excellent for calming the spirit and releasing negative energies from within both mind and body, and I know from my own experience that she was making an understatement when she said that. Without further ado, why don’t we begin? Just follow my lead - breathe in the good air that Aria has blessed us with today…”</i>", parse);
+		Text.Add("[Kiai] beams. <i>“Excellent! Yrissa did say they were excellent for calming the spirit and releasing negative energies from within both mind and body, and I know from my own experience that she was making an understatement when she said that. Without further ado, shall we begin? Just follow my lead - breathe in the good air that Aria has blessed us with today…”</i>", parse);
 		Text.NL();
 		Text.Add("<i>Gaaasp…</i>", parse);
 		Text.NL();
