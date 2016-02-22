@@ -1,9 +1,17 @@
-#Fall of Eden
+# Fall of Eden
+Fall of Eden (FoE) is currently in alpha stage.
 
-## Status
-Fall of Eden (or FoE) is currently in alpha stage.
+## Starting
+You can run the game by opening the `index.html` in your web browser.
 
 ## Building
-The game can be played right off the bat by opening foe_debug.html. There is also a building process using google closure compiler. This creates a more streamlined version, deposited in the folder build/
+To build the game you need [Node.js](https://nodejs.org). Once you have Node.js installed you need to install gulp-cli globally by running:
 
-The build process uses Node.js and gulp. You need to install gulp-cli globally with npm and gulp, gulp-clean, gulp-closure-compiler locally to your project directory.
+	$ npm install -g gulp-cli
+
+You are now ready to build the game by running the following commands at the root of the project:
+
+	$ npm install
+	$ gulp build
+
+_Note: The build process only reduces file sizes and is not required to run the game._

@@ -1,0 +1,93 @@
+html, body {
+	margin:           0;
+	padding:          0;
+	overflow:         hidden;
+	height:           100%;
+	width:            100%;
+}
+#wrap {
+	height: 100%;
+	width:  100%;
+	background-color: black;
+}
+svg { width: 100%; height: 100%; }
+
+#mainTextWrapper {
+	position:    absolute;
+}
+#mainTextArea {
+	height:      100%;
+	width:       100%;
+	padding:     10px 20px;
+	z-index:     3;
+	overflow:    auto;
+	font-size:   medium;
+	font-family: Georgia, sans-serif, "Arial", "Helvetica";
+}
+#textInputArea {
+	border:     4px inset #000;
+	position:   absolute;
+	width:      250px;
+	height:     24px;
+	z-index:    4;
+	visibility: hidden;
+}
+#tooltipTextArea {
+	position:    absolute;
+	z-index:     3;
+	overflow:    auto;
+	color:       #FFFFFF;
+	text-shadow: 0px 0px 3px #000000;
+	font:        16px/26px Georgia, Garamond, Serif;
+	text-align:  center;
+	visibility:  hidden;
+}
+
+.overlay {
+	visibility: hidden;
+	position:   absolute;
+	left:       0px;
+	top:        0px;
+	width:      100%;
+	height:     100%;
+	text-align: center;
+	z-index:    1000;
+	background: rgba(0,0,0,0.5);
+}
+.overlay div {
+	width:            400px;
+	margin:           200px auto;
+	background-color: #fff;
+	border:           1px solid #000;
+	padding:          15px;
+	text-align:       center;
+}
+#progressDiv {
+	width:            300px;
+	margin:           auto;
+	background-color: #fff;
+	padding:          15px;
+	text-align:       center;
+}
+
+table.party {
+	border-width:    5px;
+	border-spacing:  5px;
+	border-style:    none;
+	border-collapse: collapse;
+}
+table.party tr {
+	border-width: 4px;
+	padding:      5px;
+	border-style: solid;
+	border-color: black;
+	-moz-border-radius: ;
+}
+table.party td {
+	text-align:   center;
+	border-width: 4px;
+	padding:      5px;
+	border-style: solid;
+	border-color: black;
+	-moz-border-radius: ;
+}

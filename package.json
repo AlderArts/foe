@@ -1,0 +1,20 @@
+{
+  "name": "fall-of-eden",
+  "version": "0.4.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "build": "gulp build"
+  },
+  "author": "aldergames",
+  "repository": "https://github.com/AlderArts/foe",
+  "dependencies": {
+    "del": "^2.2.0",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-filter": "^3.0.1",
+    "gulp-html-replace": "^1.5.5",
+    "gulp-uglify": "^1.5.2",
+    "run-sequence": "^1.1.5"
+  }
+}
