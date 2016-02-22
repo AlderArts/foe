@@ -8,5 +8,6 @@ build/*
 *.zip
 *.fenoxo
 **/Thumbs.db
+.project
 desktop.ini
 node_modules
