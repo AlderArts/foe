@@ -583,3 +583,20 @@ Abilities.Black.PrismaticBurst.castTree.push(AbilityNode.Template.Magical({
 	onDamage: [Abilities.Black._onDamage],
 	onAbsorb: [Abilities.Black._onAbsorb]
 }));
+
+
+Abilities.Black.Lifetap = new Ability("Lifetap");
+Abilities.Black.Lifetap.Short = function() { return "Convert one fifth of your max HP to SP. While it cannot reduce your HP below 1, be careful!"; }
+Abilities.Black.Lifetap.cost = { hp: null, sp: null, lp: null};
+Abilities.Black.Lifetap.targetMode = TargetMode.Self;
+Abilities.Black.Lifetap.castTree.push(function(ability, encounter, caster, target) {
+	var parse = AbilityNode.DefaultParser(caster);
+	
+	var hp = Math.floor(Math.min(caster.HP() / 5, caster.curHp-1));
+	
+	caster.AddHPAbs(-hp);
+	caster.AddSPAbs(hp);
+	
+	Text.Add("[Name] focus[notEs] inwards, drawing upon [hisher] own life force to power [hisher] abilities! [Name] gain[notS] " + Text.BoldColor(hp, "#000080") + " SP!", parse);
+	Text.NL();
+});
