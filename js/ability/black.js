@@ -543,5 +543,24 @@ Abilities.Black.Hailstorm.castTree.push(AbilityNode.Template.Magical({
 			Text.NL();
 			Text.Add("[tName] [thas] been afflicted with freeze!", parse);
 		}
+	}]
+}));
+
+
+Abilities.Black.Quake = new Ability("Quake");
+Abilities.Black.Quake.Short = function() { return "Earth magic, targets all enemies."; }
+Abilities.Black.Quake.cost = { hp: null, sp: 40, lp: null};
+Abilities.Black.Quake.targetMode = TargetMode.Enemies;
+Abilities.Black.Quake.castTime = 90;
+Abilities.Black.Quake.castTree.push(AbilityNode.Template.Magical({
+	atkMod: 2,
+	damageType: {mEarth: 1},
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster);
+		Text.Add("Muttering under [hisher] breath and gesturing at the ground, [name] suddenly summon[notS] a small earthquake under the enemy party!", parse);
+		Text.NL();
 	}],
+	onMiss: [Abilities.Black._onMiss],
+	onDamage: [Abilities.Black._onDamage],
+	onAbsorb: [Abilities.Black._onAbsorb]
 }));
