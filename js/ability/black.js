@@ -496,3 +496,26 @@ Abilities.Black.Dischord.castTree.push(AbilityNode.Template.Magical({
 	}],
 	onMiss: [Abilities.Black.Dischord._onMiss]
 }));
+
+
+Abilities.Black.DrainingTouch = new Ability("Drain touch");
+Abilities.Black.DrainingTouch.Short = function() { return "Magical darkness attack. Damage dealt is returned to the caster as HP."; }
+Abilities.Black.DrainingTouch.cost = { hp: null, sp: 25, lp: null};
+Abilities.Black.DrainingTouch.castTime = 75;
+Abilities.Black.DrainingTouch.castTree.push(AbilityNode.Template.Magical({
+	atkMod: 1,
+	damageType: {mDark: 1},
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[Name] conjure[notS] up a wreath of shadowy tendrils that race towards [tname]!", parse);
+		Text.NL();
+	}],
+	onMiss: [Abilities.Black._onMiss],
+	onDamage: [function(ability, encounter, caster, target, dmg) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("The tendrils wrap themselves about [tname], leeching " + Text.BoldColor(-dmg, "#800000") + " health from [thimher]!", parse);
+		Text.NL();
+		caster.AddHPAbs(-dmg);
+	}],
+	onAbsorb: [Abilities.Black._onAbsorb]
+}));
