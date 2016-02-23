@@ -1,7 +1,7 @@
 /*
- * 
+ *
  * Mothgirl, lvl 4-6
- * 
+ *
  */
 
 Scenes.FeralWolf = {};
@@ -9,7 +9,7 @@ Scenes.FeralWolf = {};
 function FeralWolf(levelbonus) {
 	Entity.call(this);
 	this.ID = "wolf";
-	
+
 	this.avatar.combat     = Images.wolf;
 	this.name              = "Wolf";
 	this.monsterName       = "the wolf";
@@ -18,7 +18,7 @@ function FeralWolf(levelbonus) {
 	this.FirstCock().thickness.base = 6;
 	this.FirstCock().length.base = 28;
 	this.Balls().size.base = 5;
-	
+
 	this.maxHp.base        = 200;
 	this.maxSp.base        = 60;
 	this.maxLust.base      = 45;
@@ -30,20 +30,20 @@ function FeralWolf(levelbonus) {
 	this.spirit.base       = 19;
 	this.libido.base       = 18;
 	this.charisma.base     = 14;
-	
+
 	this.level             = 4 + Math.floor(Math.random() * 4);
 	this.sexlevel          = 2;
 	if(levelbonus)
 		this.level += levelbonus;
-	
+
 	this.combatExp         = 5 + this.level;
 	this.coinDrop          = 2 + this.level * 4;
-	
+
 	this.body.SetRace(Race.Wolf);
 	this.body.SetBodyColor(Color.gray);
-	
+
 	this.body.SetEyeColor(Color.gold);
-	
+
 	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Wolf, Color.gray);
 
 	// Set hp and mana to full
@@ -59,12 +59,12 @@ FeralWolf.prototype.DropTable = function() {
 	if(Math.random() < 0.5)  drops.push({ it: Items.WolfFang });
 	if(Math.random() < 0.5)  drops.push({ it: Items.Wolfsbane });
 	if(Math.random() < 0.5)  drops.push({ it: Items.CanisRoot });
-	
+
 	if(Math.random() < 0.1)  drops.push({ it: Items.DogBiscuit });
 	if(Math.random() < 0.1)  drops.push({ it: Items.DogBone });
 	if(Math.random() < 0.1)  drops.push({ it: Items.FoxBerries });
 	if(Math.random() < 0.1)  drops.push({ it: Items.Foxglove });
-	
+
 	if(Math.random() < 0.01) drops.push({ it: Items.Canis });
 	if(Math.random() < 0.01) drops.push({ it: Items.Vulpinix });
 	if(Math.random() < 0.01) drops.push({ it: Items.Testos });
@@ -77,7 +77,7 @@ FeralWolf.prototype.Act = function(encounter, activeChar) {
 	Text.Add(this.name + " acts! Growl!");
 	Text.NL();
 	Text.Flush();
-	
+
 	// Pick a random target
 	var t = this.GetSingleTarget(encounter, activeChar);
 
@@ -99,7 +99,7 @@ FeralWolf.prototype.Act = function(encounter, activeChar) {
 }
 
 Scenes.FeralWolf.LoneEnc = function() {
- 	var enemy = new Party();
+	var enemy = new Party();
 	enemy.AddMember(new FeralWolf());
 	var enc = new Encounter(enemy);
 	/*

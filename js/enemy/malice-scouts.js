@@ -7,14 +7,14 @@ Scenes.MaliceScouts.Catboy = {};
 Scenes.MaliceScouts.Mare = {};
 
 /*
- * 
+ *
  * Catboy Mage, lvl 9-13
- * 
+ *
  */
 function CatboyMage(levelbonus) {
 	Entity.call(this);
 	this.ID = "catboymage";
-	
+
 	this.avatar.combat     = Images.catboy;
 	this.name              = "Catboy";
 	this.monsterName       = "the catboy";
@@ -23,7 +23,7 @@ function CatboyMage(levelbonus) {
 	this.FirstCock().thickness.base = 4;
 	this.FirstCock().length.base = 19;
 	this.Balls().size.base = 2;
-	
+
 	this.maxHp.base        = 500;
 	this.maxSp.base        = 800;
 	this.maxLust.base      = 50;
@@ -35,11 +35,11 @@ function CatboyMage(levelbonus) {
 	this.spirit.base       = 45;
 	this.libido.base       = 20;
 	this.charisma.base     = 15;
-	
+
 	this.elementDef.dmg[Element.mWater]  = -0.5;
-	
+
 	var level = 0;
-	
+
 	var scenes = new EncounterTable();
 	scenes.AddEnc(function() {
 		level = 9;
@@ -57,26 +57,26 @@ function CatboyMage(levelbonus) {
 		level = 13;
 	}, 1.0, function() { return true; });
 	scenes.Get();
-	
+
 	this.level             = level + (levelbonus || 0);
 	this.sexlevel          = 0;
-	
+
 	this.combatExp         = this.level * 2;
 	this.coinDrop          = this.level * 5;
-	
+
 	this.body.SetRace(Race.Feline);
-	
+
 	this.body.SetBodyColor(Color.white);
-	
+
 	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Feline, Color.white);
-	
+
 	this.body.SetEyeColor(Color.green);
 
 	this.weaponSlot   = Items.Weapons.MageStaff;
 	this.topArmorSlot = Items.Armor.MageRobes;
-	
+
 	this.Equip();
-	
+
 	// Set hp and mana to full
 	this.SetLevelBonus();
 	this.RestFull();
@@ -91,28 +91,28 @@ CatboyMage.prototype.DropTable = function() {
 	if(Math.random() < 0.5)  drops.push({ it: Items.Whiskers });
 	if(Math.random() < 0.5)  drops.push({ it: Items.HairBall });
 	if(Math.random() < 0.5)  drops.push({ it: Items.CatClaw });
-	
+
 	if(Math.random() < 0.01) drops.push({ it: Items.Bovia });
 	if(Math.random() < 0.1)  drops.push({ it: Items.GoatMilk });
 	if(Math.random() < 0.1)  drops.push({ it: Items.SheepMilk });
 	if(Math.random() < 0.1)  drops.push({ it: Items.CowMilk });
 	if(Math.random() < 0.05) drops.push({ it: Items.LizardEgg });
 	if(Math.random() < 0.05) drops.push({ it: Items.MFluff });
-	
+
 	if(Math.random() < 0.3)  drops.push({ it: Items.FreshGrass });
 	if(Math.random() < 0.3)  drops.push({ it: Items.SpringWater });
 	if(Math.random() < 0.1)  drops.push({ it: Items.Foxglove });
 	if(Math.random() < 0.1)  drops.push({ it: Items.TreeBark });
 	if(Math.random() < 0.1)  drops.push({ it: Items.RawHoney });
-	
+
 	if(Math.random() < 0.05) drops.push({ it: Items.Wolfsbane });
 	if(Math.random() < 0.05) drops.push({ it: Items.Ramshorn });
-	
+
 	if(Math.random() < 0.01) drops.push({ it: Items.BlackGem });
 	if(Math.random() < 0.01) drops.push({ it: Items.CorruptPlant });
 	if(Math.random() < 0.01) drops.push({ it: Items.CorruptSeed });
 	if(Math.random() < 0.01) drops.push({ it: Items.DemonSeed });
-	
+
 	return drops;
 }
 
@@ -121,21 +121,21 @@ CatboyMage.prototype.Act = function(encounter, activeChar) {
 	Text.Add(this.name + " acts! Meow!");
 	Text.NL();
 	Text.Flush();
-	
+
 	// Pick a random target
 	var targets = this.GetPartyTarget(encounter, activeChar);
 	var t = this.GetSingleTarget(encounter, activeChar);
-	
+
 	this.turnCounter = this.turnCounter || 0;
-	
+
 	var first = (this.turnCounter == 0);
 	this.turnCounter++;
-	
+
 	if(first) {
 		Items.Combat.DecoyStick.combat.Use(encounter, this);
 		return;
 	}
-	
+
 	var that = this;
 
 	var scenes = new EncounterTable();
@@ -174,14 +174,14 @@ Scenes.MaliceScouts.Catboy.Impregnate = function(mother, father, slot) {
 
 
 /*
- * 
+ *
  * Centaur Mare, lvl 9-13
- * 
+ *
  */
 function CentaurMare(levelbonus) {
 	Entity.call(this);
 	this.ID = "centaurmare";
-	
+
 	this.avatar.combat     = Images.centaur_mare;
 	this.name              = "Centauress";
 	this.monsterName       = "the centauress";
@@ -189,7 +189,7 @@ function CentaurMare(levelbonus) {
 	this.body.DefFemale();
 	this.FirstVag().virgin = false;
 	this.Butt().virgin     = false;
-	
+
 	this.maxHp.base        = 1000;
 	this.maxSp.base        = 400;
 	this.maxLust.base      = 400;
@@ -202,11 +202,11 @@ function CentaurMare(levelbonus) {
 	this.spirit.base       = 35;
 	this.libido.base       = 30;
 	this.charisma.base     = 15;
-	
+
 	this.elementDef.dmg[Element.mEarth]  = 0.5;
-	
+
 	var level = 0;
-	
+
 	var scenes = new EncounterTable();
 	scenes.AddEnc(function() {
 		level = 9;
@@ -224,27 +224,27 @@ function CentaurMare(levelbonus) {
 		level = 13;
 	}, 1.0, function() { return true; });
 	scenes.Get();
-	
+
 	this.level             = level + (levelbonus || 0);
 	this.sexlevel          = 0;
-	
+
 	this.combatExp         = this.level * 2;
 	this.coinDrop          = this.level * 5;
-	
+
 	this.body.SetRace(Race.Horse);
-	
+
 	this.body.SetBodyColor(Color.brown);
-	
+
 	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Horse, Color.black);
-	
+
 	this.body.SetEyeColor(Color.blue);
 
 	this.weaponSlot   = Items.Weapons.OakSpear;
 	this.topArmorSlot = Items.Armor.BronzeChest;
 	this.botArmorSlot = Items.Armor.BronzeLeggings;
-	
+
 	this.Equip();
-	
+
 	// Set hp and mana to full
 	this.SetLevelBonus();
 	this.RestFull();
@@ -254,32 +254,32 @@ CentaurMare.prototype.constructor = CentaurMare;
 
 CentaurMare.prototype.DropTable = function() {
 	var drops = [];
-	
+
 	if(Math.random() < 0.1)  drops.push({ it: Items.Equinium });
 	if(Math.random() < 0.05) drops.push({ it: Items.Taurico });
 	if(Math.random() < 0.01) drops.push({ it: Items.EquiniumPlus });
 	if(Math.random() < 0.5)  drops.push({ it: Items.HorseHair });
 	if(Math.random() < 0.5)  drops.push({ it: Items.HorseShoe });
 	if(Math.random() < 0.5)  drops.push({ it: Items.HorseCum });
-	
+
 	if(Math.random() < 0.3)  drops.push({ it: Items.FruitSeed });
 	if(Math.random() < 0.2)  drops.push({ it: Items.Hummus });
 	if(Math.random() < 0.2)  drops.push({ it: Items.SpringWater });
 	if(Math.random() < 0.1)  drops.push({ it: Items.FlowerPetal });
 	if(Math.random() < 0.1)  drops.push({ it: Items.Wolfsbane });
-	
+
 	if(Math.random() < 0.05) drops.push({ it: Items.Weapons.OakSpear });
 	if(Math.random() < 0.05) drops.push({ it: Items.Armor.BronzeChest });
 	if(Math.random() < 0.05) drops.push({ it: Items.Toys.EquineDildo });
 	if(Math.random() < 0.05) drops.push({ it: Items.Combat.HPotion });
 	if(Math.random() < 0.05) drops.push({ it: Items.Combat.LustDart });
-	
+
 	if(Math.random() < 0.01) drops.push({ it: Items.Caprinium });
 	if(Math.random() < 0.01) drops.push({ it: Items.Cerventine });
 	if(Math.random() < 0.01) drops.push({ it: Items.Estros });
 	if(Math.random() < 0.01) drops.push({ it: Items.Fertilium });
 	if(Math.random() < 0.01) drops.push({ it: Items.FertiliumPlus });
-	
+
 	return drops;
 }
 
@@ -288,14 +288,14 @@ CentaurMare.prototype.Act = function(encounter, activeChar) {
 	Text.Add(this.name + " acts! Hyaaah!");
 	Text.NL();
 	Text.Flush();
-	
+
 	// Pick a random target
 	var t = this.GetSingleTarget(encounter, activeChar);
-	
+
 	var that = this;
 
 	var scenes = new EncounterTable();
-	
+
 	scenes.AddEnc(function() {
 		Abilities.Attack.Use(encounter, that, t);
 	}, 1.0, function() { return true; });
@@ -320,11 +320,11 @@ CentaurMare.prototype.Act = function(encounter, activeChar) {
 // CATBOY SCENES
 Scenes.MaliceScouts.Catboy.LoneEncounter = function(levelbonus) {
 	var enemy    = new Party();
- 	var catboy   = new CatboyMage(levelbonus);
+	var catboy   = new CatboyMage(levelbonus);
 	enemy.AddMember(catboy);
 	var enc      = new Encounter(enemy);
 	enc.catboy   = catboy;
-	
+
 	enc.onEncounter = function() {
 		var parse = {
 			day : world.time.LightStr("sun beats down warmly", "moon shines softly")
@@ -360,31 +360,31 @@ Scenes.MaliceScouts.Catboy.LoneEncounter = function(levelbonus) {
 		Text.NL();
 		Text.Add("<b>It’s a fight, although you wonder if it really has to be one…</b>", parse);
 		Text.Flush();
-	
+
 		// Start combat
 		Gui.NextPrompt(function() {
 			enc.PrepCombat();
 		});
 	};
-	
+
 	/*
 	enc.canRun = false;
 	enc.VictoryCondition = ...
 	*/
 	enc.onLoss    = Scenes.MaliceScouts.Catboy.LossPrompt;
 	enc.onVictory = Scenes.MaliceScouts.Catboy.WinPrompt;
-	
+
 	return enc;
 }
 
 Scenes.MaliceScouts.Catboy.WinPrompt = function() {
 	var enc  = this;
 	SetGameState(GameState.Event);
-	
+
 	var parse = {
-		
+
 	};
-	
+
 	Gui.Callstack.push(function() {
 		Text.Clear();
 		Text.Add("A loud yowl sounds from the catboy mage as he stumbles back. It’s impressive how despite his frail-looking frame, he’s managed to take as much punishment as he already has and still remain standing. You’re not exactly sure when you actually hit him in the face, but there’s blood pouring out of his nose in a frenetic nosebleed and his large, floppy ears have folded flat against his tattered hood.", parse);
@@ -417,9 +417,9 @@ Scenes.MaliceScouts.Catboy.WinPrompt = function() {
 		}
 		Text.Add("Yeah, hopeless. What’re you going to do with this poor sop?", parse);
 		Text.Flush();
-		
+
 		var options = [];
-		
+
 		options.push({nameStr : "Petting",
 			tooltip : Text.Parse("Aww, what a pathetic little kitty. Why don’t you give him a scratch?", parse),
 			enabled : true,
@@ -456,7 +456,7 @@ Scenes.MaliceScouts.Catboy.WinPrompt = function() {
 			}
 		});
 		*/
-		
+
 		Gui.SetButtonsFromList(options, true, function() {
 			Text.Clear();
 			Text.Add("This doesn’t have anything on you. Whatever’s been going on between this catboy and his friends, it’s nothing that you want any part of. If he wants to be a man, he can go learn to be one somewhere else.", parse);
@@ -473,12 +473,12 @@ Scenes.MaliceScouts.Catboy.PityFuck = function(enc, win) {
 	var catboy = enc.catboy;
 	var p1cock = player.BiggestCock();
 	var parse = {
-		
+
 	};
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
-	
+
 	Text.Clear();
 	if(win) {
 		Text.Add("Shit, this kitty-boy is so sad, you can’t even believe such a wretched little cumrag is possible. Several spirits of utter misfortune must have conspired to produce him, and even so…", parse);
@@ -597,11 +597,11 @@ Scenes.MaliceScouts.Catboy.PityFuck = function(enc, win) {
 	Text.NL();
 	Text.Add("Just stuff it in already!", parse);
 	Text.NL();
-	
+
 	Sex.Vaginal(catboy, player);
 	player.FuckVag(player.FirstVag(), catboy.FirstCock(), 3);
 	catboy.Fuck(catboy.FirstCock(), 3);
-	
+
 	Text.Add("The snappiness finally gets to him, and he rushes to obey, stuffing your [vag] full of cat cock. The petals of your womanly flower bump against each soft, nubby barb as he stretches you wide, sad green eyes going wide with a mixture of awe and instinctual desire as your inner walls pulse and flex against his manhood.", parse);
 	Text.NL();
 	Text.Add("<i>“Ah! I think - I think I’m going to-”</i>", parse);
@@ -624,9 +624,9 @@ Scenes.MaliceScouts.Catboy.PityFuck = function(enc, win) {
 	Text.NL();
 	Text.Add("Unfortunately for the poor catboy, he can’t take it anymore. The entirety of his lithe frame shakes and shudders as he blows his load into you with a resounding yowl, balls visibly deflating in the process. With how much there is, the spunk quickly fills up your cunt, then forces its way into your womb. Squelching noises rise from your hips as the catboy’s body runs on automatic, pounding away with an intensity that’s most uncharacteristic of his lithe body.", parse);
 	Text.NL();
-	
+
 	Scenes.MaliceScouts.Catboy.Impregnate(player, catboy);
-	
+
 	Text.Add("<i>“Ah! Ah! Ah!”</i> He’s still going at it - even though the stream of seed has slowed, it’s a good minute or so before he finally finishes up, his body sagging with exhaustion. It certainly looks like he’s put everything he had into it; sweat sheens on his brow and drips down his body. Eventually, though, even he has to give up and withdraws from you with a wet, sucking sound.", parse);
 	Text.NL();
 	Text.Add("Well, he’s a man now. How does that make him feel?", parse);
@@ -659,9 +659,9 @@ Scenes.MaliceScouts.Catboy.PityFuck = function(enc, win) {
 	parse["c"] = party.Num() > 1 ? Text.Parse(" and [comp]", parse) : "";
 	Text.Add("Business taken care of, the two of you part ways, and you[c] continue on your journey.", parse);
 	Text.Flush();
-	
+
 	player.subDom.IncreaseStat(50, 1);
-	
+
 	Gui.NextPrompt();
 }
 
@@ -669,12 +669,12 @@ Scenes.MaliceScouts.Catboy.PetPlay = function(enc) {
 	var catboy = enc.catboy;
 	var p1cock = player.BiggestCock();
 	var parse = {
-		
+
 	};
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
-	
+
 	Text.Clear();
 	Text.Add("A smile crosses your face as an idea comes to mind. Yes… yes, that should do very nicely. With how pathetic the catboy is, you bet he’ll even like it. Acting all innocent, you step forward, crook a finger under the catboy’s chin and tell him to lose the clothes. After all, animals aren’t in the habit of wearing clothes, and you’re pretty sure he’s too much of a simpering sop to be anything but one.", parse);
 	Text.NL();
@@ -724,7 +724,7 @@ Scenes.MaliceScouts.Catboy.PetPlay = function(enc) {
 	}
 	Text.Add(".", parse);
 	Text.NL();
-	
+
 	var scenes = new EncounterTable();
 	scenes.AddEnc(function() {
 		Text.Add("At the sight of your womanly flower, the catboy’s eyes go wide to sickeningly sweet proportions. The entirety of his body trembles with repressed need - he’s clearly fighting it, trying to be an obedient, good kitty in the face of your commands, but it’s a losing battle that he’s waging against his treacherous body.", parse);
@@ -777,7 +777,7 @@ Scenes.MaliceScouts.Catboy.PetPlay = function(enc) {
 		Text.Add("Very well, then - you’ll let him off this time. No more freebies from you, though, so he shouldn’t get used to it!", parse);
 		Text.NL();
 		Text.Add("Your pet looks at you hopefully, silently promising that he won’t.", parse);
-		
+
 		player.AddLustFraction(0.4);
 		player.AddSexExp(2);
 	}, 3.0, function() { return player.FirstVag(); });
@@ -800,11 +800,11 @@ Scenes.MaliceScouts.Catboy.PetPlay = function(enc) {
 			if(player.NumCocks() > 1)
 				Text.Add(" Your other dick[s2] grind[notS2] against his forehead, reminding the effeminate pussy that this’ll end messily for him, no matter how good he is at swallowing.", parse);
 			Text.NL();
-			
+
 			Sex.Blowjob(catboy, player);
 			catboy.FuckOral(catboy.Mouth(), player.FirstCock(), 2);
 			player.Fuck(player.FirstCock(), 2);
-			
+
 			Text.Add("As you’d expected, your kitten gets over his surprise quickly enough, wheezing and spluttering several times but eventually settling into a rhythm that allows him to get some measure of his breath back while pleasuring you.", parse);
 		}
 		else if(p1cock.Len() >= 18) {
@@ -816,11 +816,11 @@ Scenes.MaliceScouts.Catboy.PetPlay = function(enc) {
 			if(player.NumCocks() > 1)
 				Text.Add(" Feeling left out, your other cock[s2] grind[notS2] against the feline’s upturned face, dribbling [itsTheir2] sticky pre all over his soft fur.", parse);
 			Text.NL();
-			
+
 			Sex.Blowjob(catboy, player);
 			catboy.FuckOral(catboy.Mouth(), player.FirstCock(), 2);
 			player.Fuck(player.FirstCock(), 2);
-			
+
 			Text.Add("Mm, that feels good, doesn’t it? You were already hard before, but faced with such a tender touch, the entirety of your length feels full to bursting, hard as diamonds - or at least, it <i>feels</i> that way.", parse);
 			Text.NL();
 			Text.Add("So, does he like his treat? Is it a yummy one?", parse);
@@ -839,11 +839,11 @@ Scenes.MaliceScouts.Catboy.PetPlay = function(enc) {
 			if(player.NumCocks() > 1)
 				Text.Add(" Your other member[s2] grind[notS2] against his upturned face, reminding him that there’s more treats to go around.", parse);
 			Text.NL();
-			
+
 			Sex.Blowjob(catboy, player);
 			catboy.FuckOral(catboy.Mouth(), player.FirstCock(), 2);
 			player.Fuck(player.FirstCock(), 2);
-			
+
 			Text.Add("Sure, he’s lacking in experience, but a desperate, almost childish eagerness to please manages to make up for that somewhat. Purring deeply in the back of his throat, your kitty slides your shaft in and out of his mouth a few times, leaving it glistening with his spit before commencing to lick his delicious kitty treat like a large lollipop.", parse);
 			Text.NL();
 			Text.Add("Now, there’s no need to be conservative with enjoying his just reward; all he needs to do is continue being a good kitty, and he’ll get more treats just like this one. He should eat up with gusto, you tell your pet as you ruffle his fur and ears. It really <i>does</i> feel very good when you do that…", parse);
@@ -859,9 +859,9 @@ Scenes.MaliceScouts.Catboy.PetPlay = function(enc) {
 		if(player.NumCocks() > 1)
 			Text.Add(" Not to be left out, your other dick[s2] [isAre2] quick to add [itsTheir2] generous addition[s2] to his already tasty treat.", parse);
 		Text.NL();
-		
+
 		var cum = player.OrgasmCum();
-		
+
 		if(cum > 7) {
 			Text.Add("Try as you might to hold back, you can’t slow, let alone stifle the deluge of thick, gooey cum that’s built up in ", parse);
 			if(player.HasBalls())
@@ -917,14 +917,14 @@ Scenes.MaliceScouts.Catboy.PetPlay = function(enc) {
 			Text.NL();
 			Text.Add("Aww… isn’t that so cute.", parse);
 		}
-		
+
 		Text.NL();
 		Text.Add("Eventually, your feline pet gets himself cleaned up a bit - from the spunk dripping off him onto the ground, if nothing else. Looking at the facial - and a bit more - that you’ve just given him, you smile at your kitten approvingly and tell him what a delightful pet he’s been.", parse);
 		Text.NL();
 		Text.Add("He purrs and bows his head submissively, exposing enough of his neck such that you can bestow scritches unto him. Between the makeshift collar you’ve given him and all the spooge that coats his exterior, it’s not an easy task, but you manage it nonetheless - he’s earned as much for his efforts at being a good kitten.", parse);
 	}, 1.0, function() { return player.FirstCock(); });
 	scenes.Get();
-	
+
 	Text.NL();
 	Text.Add("All right, then - that’s enough play for today. You’ve had a bit of fun, but you’ve got other things that need doing and have to be on your way. Your pet whimpers a little, sad to see you go, but you pull on your [botarmor] and tell him firmly that he can wait for you if he wants, but he shouldn’t expect you to be back that soon.", parse);
 	Text.NL();
@@ -932,16 +932,16 @@ Scenes.MaliceScouts.Catboy.PetPlay = function(enc) {
 	Text.NL();
 	Text.Add("Throwing one last look over your shoulder as you saunter back down the road, the parting sight you have of your pet is that of him sitting on his haunches, staring at you forlornly. You swallow hard - now, you can’t just take in every stray who looks like he might make a good pet - you’d be swamped in cats before long!", parse);
 	Text.Flush();
-	
+
 	Gui.NextPrompt();
 }
 
 Scenes.MaliceScouts.Catboy.Petting = function(enc) {
 	var parse = {
-		
+
 	};
 	parse = player.ParserTags(parse);
-	
+
 	Text.Clear();
 	Text.Add("An idea comes into your mind, and you hold out your hands as you advance upon the catboy mage, waggling your fingers suggestively. The poor bastard’s eyes widen in fear as you close the distance between the two of you, grinning like a madman.", parse);
 	Text.NL();
@@ -973,7 +973,7 @@ Scenes.MaliceScouts.Catboy.Petting = function(enc) {
 	Text.NL();
 	Text.Add("He yowls again, his member twitching as it strains against its fleshy confines, trying to get even bigger than what its physical form will allow. Heh, it’s just like the rest of him - a grand spirit constrained by the body it inhabits… as you watch, pre starts oozing down its length, glistening all the while…", parse);
 	Text.Flush();
-	
+
 	//[Handjob][Tease]
 	var options = [];
 	options.push({nameStr : "Handjob",
@@ -1035,7 +1035,7 @@ Scenes.MaliceScouts.Catboy.Petting = function(enc) {
 			PrintDefaultOptions();
 		}
 	});
-	
+
 	Gui.Callstack.push(function() {
 		Text.Add("See? That wasn’t so bad after all. He may not have become a man in the sense that he might have put it, but he most certainly had a bit of fun, didn’t he?", parse);
 		Text.NL();
@@ -1047,24 +1047,24 @@ Scenes.MaliceScouts.Catboy.Petting = function(enc) {
 		Text.NL();
 		Text.Add("With that, you get yourself cleaned up and prepare to go on your way.", parse);
 		Text.Flush();
-		
+
 		Gui.NextPrompt();
 	});
-	
+
 	Gui.SetButtonsFromList(options, false, null);
 }
 
 Scenes.MaliceScouts.Catboy.LossPrompt = function() {
 	SetGameState(GameState.Event);
 	Text.Clear();
-	
+
 	// this = encounter
 	var enc = this;
-	
+
 	var parse = {
-		
+
 	};
-	
+
 	Gui.Callstack.push(function() {
 		Text.Clear();
 		Text.Add("Slight as the catboy may be, the raw destructive force of his magics is too much for you to you bear. Bruised and battered from sheer force, your body finally gives up the ghost and buckles under its own weight, sending you toppling to the ground. Before you can recover, more tendrils of that same magical mist wind about your limbs, quickly solidifying and trussing you up like a pig in a poke.", parse);
@@ -1091,12 +1091,12 @@ Scenes.MaliceScouts.Catboy.LossPrompt = function() {
 		Text.NL();
 		Text.Add("Oh, great. Not only are you facing an unappealing rapist, you’re facing an unappealing rapist who <i>doesn’t even know what he’s doing</i>. You don’t think things can get any worse from here on out… can they?", parse);
 		Text.NL();
-		
+
 		//TODO Scenes
 		//Return true for valid scenes, indicating successful scene proc
-		
+
 		var scenes = new EncounterTable();
-		
+
 		scenes.AddEnc(function() {
 			Scenes.MaliceScouts.Catboy.PityFuck(enc, false);
 			return true;
@@ -1114,7 +1114,7 @@ Scenes.MaliceScouts.Catboy.LossPrompt = function() {
 		}, 1.0, function() { return true; });
 		*/
 		var ret = scenes.Get();
-		
+
 		// Default fallback
 		if(!ret) {
 			Text.Add("He looks you up and down a few times, scratching his head intermittently, and then mumbles to himself. <i>“Don’t think this is what he meant by that… guess I’ll have to find another one. Oh, bother.”</i>", parse);
@@ -1130,12 +1130,12 @@ Scenes.MaliceScouts.Catboy.LossPrompt = function() {
 Scenes.MaliceScouts.Catboy.GetMilked = function(enc) {
 	var catboy = enc.catboy;
 	var parse = {
-		
+
 	};
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
-	
+
 	Text.Clear();
 	Text.Add("While the catboy is thinking, he suddenly stops and sniffs at the air. Once, twice, and then he closes his eyes to better concentrate on the source of whatever he’s sensed. Slowly, he turns his head to follow it, stoops down a little, and then his eyelids flick open again.", parse);
 	Text.NL();
@@ -1209,10 +1209,10 @@ Scenes.MaliceScouts.Catboy.GetMilked = function(enc) {
 	Text.NL();
 	Text.Add("Well… that could have been worse. For example, the catboy could have remembered that he was out here to “become a man”, whatever that meant - with how pathetic-looking he was, though, you probably don’t want word to get out that you lost to him. Picking yourself off the ground, you get your [armor] in shape and prepare to be on your way.", parse);
 	Text.Flush();
-	
+
 	player.AddLustFraction(0.2);
 	player.AddSexExp(1);
-	
+
 	Gui.NextPrompt();
 }
 
@@ -1228,14 +1228,14 @@ Scenes.MaliceScouts.Catboy.GetMilked = function(enc) {
 
 Scenes.MaliceScouts.Mare.LoneEncounter = function(levelbonus) {
 	var enemy    = new Party();
- 	var mare     = new CentaurMare(levelbonus);
+	var mare     = new CentaurMare(levelbonus);
 	enemy.AddMember(mare);
 	var enc      = new Encounter(enemy);
 	enc.mare     = mare;
-	
+
 	enc.onEncounter = function() {
 		var parse = {
-			
+
 		};
 		parse = player.ParserTags(parse);
 
@@ -1263,7 +1263,7 @@ Scenes.MaliceScouts.Mare.LoneEncounter = function(levelbonus) {
 		Text.NL();
 		Text.Add("Right. Um…", parse);
 		Text.Flush();
-		
+
 		//[Yes][No]
 		var options = [];
 		options.push({nameStr : "Yes",
@@ -1281,7 +1281,7 @@ Scenes.MaliceScouts.Mare.LoneEncounter = function(levelbonus) {
 				Text.NL();
 				Text.Add("<i>“Phew, sorry about that; hope I didn’t hurt you too badly. Just had to get that out of my system before we began fucking like a bunch of fucking animals.”</i> She pauses a moment and draws a deep breath, panting away - whether from heat or exertion is anyone’s guess. <i>“Damn it, it’s already getting to my vocabulary. Let’s just hurry up and scratch this itch of mine before it gets very much worse.”</i>", parse);
 				Text.Flush();
-				
+
 				Gui.NextPrompt(function() {
 					world.TimeStep({hour: 1});
 					Text.Clear();
@@ -1302,7 +1302,7 @@ Scenes.MaliceScouts.Mare.LoneEncounter = function(levelbonus) {
 				Text.NL();
 				Text.Add("<b>It’s a fight!</b>", parse);
 				Text.Flush();
-				
+
 				// Start combat
 				Gui.NextPrompt(function() {
 					enc.PrepCombat();
@@ -1311,25 +1311,25 @@ Scenes.MaliceScouts.Mare.LoneEncounter = function(levelbonus) {
 		});
 		Gui.SetButtonsFromList(options, false, null);
 	};
-	
+
 	/*
 	enc.canRun = false;
 	enc.VictoryCondition = ...
 	*/
 	enc.onLoss    = Scenes.MaliceScouts.Mare.LossPrompt;
 	enc.onVictory = Scenes.MaliceScouts.Mare.WinPrompt;
-	
+
 	return enc;
 }
 
 Scenes.MaliceScouts.Mare.WinPrompt = function() {
 	var enc  = this;
 	SetGameState(GameState.Event);
-	
+
 	var parse = {
-		
+
 	};
-	
+
 	Gui.Callstack.push(function() {
 		Text.Clear();
 		Text.Add("Unable to keep on fighting any longer, the centaur mare sinks to her knees - all four of them - and makes little urgent noises in the back of her throat. Despite being soundly beaten, it looks like her desperate need hasn’t diminished any from the combat. Letting her spear and shield fall to the grassy ground with soft thuds, the centaur wiggles her rump, and when you half-circle around her to investigate you can see a dark streak of wetness running down her hind legs as her flanks heave.", parse);
@@ -1338,10 +1338,10 @@ Scenes.MaliceScouts.Mare.WinPrompt = function() {
 		Text.NL();
 		Text.Add("The centaur mare’s words cut off, but she continues grumbling under her breath, crossing her arms under the bulges on her breastplate. What will you do now?", parse);
 		Text.Flush();
-		
+
 		//[Walk away][Fuck][Fist]
 		var options = [];
-		
+
 		if(player.FirstCock()) {
 			var p1cock = player.BiggestCock();
 			options.push({nameStr : "Fuck",
@@ -1372,7 +1372,7 @@ Scenes.MaliceScouts.Mare.WinPrompt = function() {
 			}
 		});
 		*/
-		
+
 		Gui.SetButtonsFromList(options, true, function() {
 			Text.Clear();
 			Text.Add("Yeah. Either horses aren’t quite your style, or you’re just not feeling up to it today. Either way, since she was so kind to point it out to you, you’re going to do just that - humiliate her by just walking away after having soundly thrashed the stuffing out of her.", parse);
@@ -1387,7 +1387,7 @@ Scenes.MaliceScouts.Mare.WinPrompt = function() {
 			Text.NL();
 			Text.Add("The centaur mare glares at you with all the viciousness of a cauldron fit to bubble over, but doesn’t have the strength to follow up on the desire writ large on her face. You give her a cheery smile and wave, then skip on down the road, leaving her in the dust.", parse);
 			Text.Flush();
-			
+
 			Gui.NextPrompt();
 		});
 	});
@@ -1398,10 +1398,10 @@ Scenes.MaliceScouts.Mare.WinFuck = function(enc) {
 	var mare   = enc.mare;
 	var p1cock = player.BiggestCock();
 	var parse = {
-		
+
 	};
 	parse = player.ParserTags(parse);
-	
+
 	Text.Clear();
 	Text.Add("Aww, she just wants some desperate relief. Really, getting a standing dildo of some sort would be far more efficient than waylaying travelers on the road and asking for a fuck. Or even just asking nicely instead of demanding it… catch more flies with honey than vinegar and all that. Did that ever occur to her?", parse);
 	Text.NL();
@@ -1433,11 +1433,11 @@ Scenes.MaliceScouts.Mare.WinFuck = function(enc) {
 				Text.Add(", especially since it’s appropriately shaped for the task at hand", parse);
 			Text.Add(". The mare’s walls clench needily about your member as it slides deeper and deeper into her, no doubt sending palpable waves of satisfaction and satiation as you fill her insides with rock-hard cock. She’s so well-lubed up from her own juices that you have scarcely any problem plunging into her nethers until you’re hilted well and deep, man-meat firmly wrapped up in mare-meat.", parse);
 			Text.NL();
-			
+
 			Sex.Vaginal(player, mare);
 			mare.FuckVag(mare.FirstVag(), p1cock, 4);
 			player.Fuck(p1cock, 4);
-			
+
 			Text.Add("<i>“Shit,”</i> she murmurs, then heaves a trembling sigh at finally having something huge enough to fully stuff that deep, juicy cunt of hers. <i>“Now that’s something. Finally, someone who can actually fill me.”</i>", parse);
 			Text.NL();
 			Text.Add("Why, you only seek to please.", parse);
@@ -1453,11 +1453,11 @@ Scenes.MaliceScouts.Mare.WinFuck = function(enc) {
 			Text.NL();
 			Text.Add("At last, when you’re sure that your [cock] is as stiff and large as it’ll ever be - thanks in no small part to the desperate scent of sex wafting up from the mare’s sweaty body - you lean forward and slide your shaft into the centaur’s oozing cunt. It eagerly devours your man-meat with a wet slurping sound, and you’re in.", parse);
 			Text.NL();
-			
+
 			Sex.Vaginal(player, mare);
 			mare.FuckVag(mare.FirstVag(), p1cock, 4);
 			player.Fuck(p1cock, 4);
-			
+
 			Text.Add("<i>“Ffff-”</i>the centaur mare looks fit to bust even as her inner walls try to grasp at your tackle, which you unfortunately have to admit is at least a little too small for the cavernous tunnel which she possesses. <i>“Shit, you’ve got so much body - would it really kill you to find a potion or something and make yourself, I don’t know, more proportional?”</i>", parse);
 			Text.NL();
 			Text.Add("Hey, a small dick is better than no dick. Or is she going to look a gift horse in the mouth?", parse);
@@ -1480,9 +1480,9 @@ Scenes.MaliceScouts.Mare.WinFuck = function(enc) {
 		Text.NL();
 		Text.Add("Sensing the first signs that you’re about to blow, the centaur mare’s body reacts just as quickly, driving her mind over the edge with a loud whinny of delight that echoes about the hilly countryside. Her body tenses in preparation to receive your load, and so you dump it all into her in a wonderfully glorious fashion. Her cunt squeezes about your shaft, desperately milking you for all you’re worth, but it’s not as if you need any extra encouragement to do your best.", parse);
 		Text.NL();
-		
+
 		var cum = player.OrgasmCum();
-		
+
 		if(cum >= 8) {
 			Text.Add("You’re not exactly sure how long you spend unloading your seed into the centaur mare, but you know what they say - time flies when you’re having fun. As the first rush of spunk floods the mare’s tunnel, she gasps orgasmically and writhes in your grasp, thrown into ecstasy by the sheer sensation of being filled with baby batter like this.", parse);
 			Text.NL();
@@ -1578,11 +1578,11 @@ Scenes.MaliceScouts.Mare.WinFuck = function(enc) {
 			if(p1cock.race.isRace(Race.Horse))
 				Text.Add(" That goes double considering the equine tackle you’re packing at the moment - suited in both shape and size, as it were.", parse);
 			Text.NL();
-			
+
 			Sex.Vaginal(player, mare);
 			mare.FuckVag(mare.FirstVag(), p1cock, 3);
 			player.Fuck(p1cock, 3);
-			
+
 			Text.Add("<i>“Damn,”</i> the centaur mare says with a satisfied sigh. <i>“It’s been a good long while since I’ve found a shaft capable of actually filling me.”</i>", parse);
 			Text.NL();
 			Text.Add("Why, are there no guy centaurs around?", parse);
@@ -1592,11 +1592,11 @@ Scenes.MaliceScouts.Mare.WinFuck = function(enc) {
 		else {
 			Text.Add("eventually bottoming out in her cavernous cunt.", parse);
 			Text.NL();
-			
+
 			Sex.Vaginal(player, mare);
 			mare.FuckVag(mare.FirstVag(), p1cock, 3);
 			player.Fuck(p1cock, 3);
-			
+
 			Text.Add("<i>“Wait, that’s all you’ve got?”</i>", parse);
 			Text.NL();
 			Text.Add("Why, is it not enough? Some cock is better than no cock - would she rather have that?", parse);
@@ -1635,9 +1635,9 @@ Scenes.MaliceScouts.Mare.WinFuck = function(enc) {
 		if(p1cock.Knot())
 			Text.Add(" Even now, you feel your knot swelling and growing, greedily tying the two of you together, corking her cunt to make sure that as little of your sperm escapes as possible.", parse);
 		Text.NL();
-		
+
 		var cum = player.OrgasmCum();
-		
+
 		if(cum >= 8) {
 			Text.Add("And what a load this one is. The deluge of spunk that’s been kept in reserve within you jets from your [cockTip] like water from a fire hose, an overwhelming sensation of delight washing over your entire body as you feel thick, hot jism run down the entirety of your shaft, down, down, down -", parse);
 			Text.NL();
@@ -1701,9 +1701,9 @@ Scenes.MaliceScouts.Mare.WinFuck = function(enc) {
 		Text.Add("Heh. You’ll keep that in mind, then. Quickly, you tidy yourself off as best as you can, dust the dirt off your feet, then are on your way down the highland road.", parse);
 	}
 	Text.Flush();
-	
+
 	world.TimeStep({hour: 1});
-	
+
 	Gui.NextPrompt();
 }
 
@@ -1712,7 +1712,7 @@ Scenes.MaliceScouts.Mare.WinFist = function(enc) {
 	var mare   = enc.mare;
 	var p1cock = player.BiggestCock();
 	var parse = {
-		
+
 	};
 	parse = player.ParserTags(parse);
 
@@ -1810,25 +1810,25 @@ Scenes.MaliceScouts.Mare.WinFist = function(enc) {
 	Text.NL();
 	Text.Add("There, much better! Smiling, you turn your back on the dazed centaur, leaving her by the roadside behind you. Before long, you are on your way.", parse);
 	Text.Flush();
-	
+
 	player.AddSexExp(2);
 	player.AddLustFraction(0.5);
-	
+
 	Gui.NextPrompt();
 }
 
 Scenes.MaliceScouts.Mare.LossPrompt = function() {
 	SetGameState(GameState.Event);
 	Text.Clear();
-	
+
 	// this = encounter
 	enc = this;
-	
+
 	var parse = {
-		
+
 	};
 	parse = player.ParserTags(parse);
-	
+
 	Gui.Callstack.push(function() {
 		Text.Clear();
 		Text.Add("There’s something about a huge mass of horseflesh that has a sense of weight and inevitability about it, one that you get a very keen appreciation for when the centaur mare charges and blindsides you, knocking ", parse);
@@ -1844,13 +1844,13 @@ Scenes.MaliceScouts.Mare.LossPrompt = function() {
 		Text.NL();
 		Text.Add("The centaur mare licks her lips. <i>“Then like it or not, I will take whatever I want from you anyway.”</i>", parse);
 		Text.NL();
-		
+
 		var armor = "";
 		if(player.Armor() || !player.LowerArmor()) armor += "[armor]";
 		if(player.Armor() && player.LowerArmor()) armor += " followed by your ";
 		if(player.LowerArmor()) armor += "[botarmor]";
 		parse["arm"] = Text.Parse(armor, parse);
-		
+
 		Text.Add("Your concentration is so focused on her spear-tip that you don’t notice one of her hooved forefeet lashing out, catching you soundly on the chest and sending you sprawling onto your back. Before you know it, she’s tossed aside her spear and shield and is on you, pawing messily at your [arm] in a frantic bid to get it off. It takes somewhat longer than one would expect thanks to how haphazardly she’s grabbing at the material, but eventually the lot is off and you’re at her mercy.", parse);
 		Text.NL();
 		Scenes.MaliceScouts.Mare.LossEntry(enc);
@@ -1865,10 +1865,10 @@ Scenes.MaliceScouts.Mare.LossEntry = function(enc) {
 	scenes.AddEnc(function() {
 		Scenes.MaliceScouts.Mare.LossFacesit(enc);
 	}, 1.0, function() { return true; });
-	
+
 	/* TODO
 	scenes.AddEnc(function() {
-		
+
 	}, 1.0, function() { return true; });
 	*/
 	scenes.Get();
@@ -1877,7 +1877,7 @@ Scenes.MaliceScouts.Mare.LossEntry = function(enc) {
 
 Scenes.MaliceScouts.Mare.LossFacesit = function(enc) {
 	var parse = {
-		
+
 	};
 	parse = player.ParserTags(parse);
 
@@ -1929,18 +1929,18 @@ Scenes.MaliceScouts.Mare.LossFacesit = function(enc) {
 	Text.NL();
 	Text.Add("And just like that, it’s over. It’s clear that the centaur mare has gotten some much-needed relief for her heat-filled cunt - hopefully by taking one for the team, she won’t be harassing travelers on the Highlands roads for some time now. Quick and dirty, with perhaps no real pleasure from the deed, but what needs to be done has been done.", parse);
 	Text.NL();
-	
+
 	var armor = "";
 	if(player.Armor() || !player.LowerArmor()) armor += "[armor]";
 	if(player.Armor() && player.LowerArmor()) armor += " followed by your ";
 	if(player.LowerArmor()) armor += "[botarmor]";
 	parse["arm"] = Text.Parse(armor, parse);
-	
+
 	Text.Add("Seems there nothing left for you here now. Leaving the centaur mare to recover in her own time, you gather your [arm] and are on your way. Before long, you crest the next hill, and the centaur vanishes from sight.", parse);
 	Text.Flush();
-	
+
 	player.AddSexExp(2);
 	player.AddLustFraction(0.5);
-	
+
 	Gui.NextPrompt();
 }

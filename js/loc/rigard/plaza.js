@@ -96,9 +96,9 @@ world.loc.Rigard.Plaza.links.push(new Link(
 				Text.NL();
 				Text.Add("Before you’ve had a chance to as much as open your mouth, you are faced with drawn swords.", parse);
 				Text.NL();
-				
+
 				var humanity = player.Humanity();
-				
+
 				if(humanity < 0.95) {
 					Text.Add("<i>“Stand back, filthy creature!”</i> one of the guards snarl, spitting at your feet.", parse);
 					Text.NL();
@@ -111,7 +111,7 @@ world.loc.Rigard.Plaza.links.push(new Link(
 				Text.NL();
 				Text.Add("From what you gather these men belong to the Royal Guard, whose only task is to protect the nobility and the royal family. It seems like you are causing a bit of a scene, and a few curious passersby stop to watch, whispering among themselves. Frustrated, you decide to back down for now.", parse);
 				Text.NL();
-				
+
 				Text.Add("As you turn to leave, you spot a postern gate open in the wall a few hundred paces to your left, and two people come out. Both of them wear gray cloaks, their hoods drawn, so you cannot make out much of their features. They are of a height, and walk companionably side by side, heading out toward the city. You point them out, and ask the guards who they are, curiously.", parse);
 				Text.NL();
 				if(humanity < 0.95) {
@@ -151,7 +151,7 @@ world.loc.Rigard.Plaza.links.push(new Link(
 				}
 				Text.NL();
 				Text.Add("You idly wonder if perhaps helping them with their stalker could get you a favor in return.", parse);
-				
+
 				rigard.flags["RoyalAccessTalk"] = 1;
 			}
 			else {
@@ -166,11 +166,11 @@ world.loc.Rigard.Plaza.links.push(new Link(
 				Text.Clear();
 				Text.Add("Once again, you approach the hostile Royal Guardsmen manning the entrance to the innermost parts of Rigard.", parse);
 				Text.NL();
-				
+
 				var humanity = player.Humanity();
-				
+
 				parse["plebFilth"] = humanity > 0.95 ? "pleb" : "filth";
-				
+
 				Text.Add("<i>“I thought we told you not to come here, [plebFilth]!”</i> the officer in charge growls as you saunter up. You grin at him smugly as you present him with the sealed letter you received from the royal twins. The man looks suspiciously at the envelope, his eyebrows rising as he sees the seal. Wordlessly, he breaks the seal and opens it, mulling over the contents, his face paling as he goes down the page.", parse);
 				Text.NL();
 				Text.Add("He looks very confused as he hands back the piece of paper, muttering that you are free to enter, to the surprise of his companion. Whatever instructions the note contained, it seemed to have been enough to convince him. You pass through a smaller door just next to the closed main gates, and find yourself within the royal grounds.", parse);
@@ -185,7 +185,7 @@ world.loc.Rigard.Plaza.links.push(new Link(
 				else
 					Text.Add("Your search for the court magician should probably start here.", parse);
 				Text.Flush();
-				
+
 				rigard.flags["RoyalAccessTalk"] = 2;
 				Gui.NextPrompt(function() {
 					MoveToLocation(world.loc.Rigard.Castle.Grounds, {minute: 10});
@@ -252,9 +252,9 @@ world.loc.Rigard.Plaza.events.push(new Link(
 		Text.NL();
 		Text.Add("Hearing the dismissal in his words, you thank him and leave. A bit pompous, but he did direct you at least.");
 		Text.Flush();
-		
+
 		room69.flags["Hinges"] = Room69.HingesFlags.TalkedToGoldsmith;
-		
+
 		world.TimeStep({minute: 10});
 		Gui.NextPrompt();
 	}
@@ -300,9 +300,9 @@ Scenes.Rigard.Plaza.StatueInfo = function() {
 	Text.NL();
 	Text.Add("<i>“Though it is told that Riorbane had some hand in the statue's construction also, and underneath the garment, it bears far more detail than is needful, if you understand what I mean,”</i> he adds, a lascivious grin splitting his wizened face.", parse);
 	Text.NL();
-	
+
 	player.AddExp(10);
-	
+
 	Text.Add("A little embarrassed, you nonetheless thank him for telling you the story ", parse);
 	if(!party.InParty(kiakai)) {
 		Text.Add("and set off on your way, glad to have learned a little of the city's history.", parse);
@@ -311,7 +311,7 @@ Scenes.Rigard.Plaza.StatueInfo = function() {
 	}
 	else {
 		kiakai.flags["TalkedStatue"] = 1;
-		
+
 		Text.Add("and are about to set off on your way when [name] speaks up.", parse);
 		Text.NL();
 		Text.Add("<i>“I hope you do not take that story seriously, [playername]!”</i> [name] exclaims. <i>“It is surely just something the humans made up. They probably enchanted the dress, forgot they did it, and then made up this story to explain the whole thing,”</i> the elf declares, sounding contemptuous.", parse);
@@ -320,7 +320,7 @@ Scenes.Rigard.Plaza.StatueInfo = function() {
 		Text.NL();
 		Text.Add("<i>“W-well...”</i> [name] looks slightly embarrassed. <i>“That part is true enough. I was never told what happened, for it was not in the lore scrolls of my village, but I do know she manifested in this world around the time of the kingdom's founding. The rest is surely made up, however!”</i> [heshe] hastily adds.", parse);
 		Text.Flush();
-		
+
 		//[Accept][Tease][Investigate]
 		var options = new Array();
 		options.push({ nameStr : "Accept",
@@ -381,26 +381,26 @@ Scenes.Rigard.Plaza.LetterDelivery = function() {
 	var residencies = ["a massive ornate building", "a three-story palatial structure", "a posh-looking house", "an out-of-place hovel of a building", "an old derelict mansion", "a fresco-covered house", "an odd [color] building"];
 	var nobles      = ["a richly dressed noble[manwoman]", "a noble[manwoman] dressed in all [color]", "a haggard-looking noble[manwoman]", "an aged noble[manwoman]", "an excited young noble[manwoman]", "a foppish young noble[manwoman]", "a shady noble[manwoman]"];
 	var recips      = ["an elderly noble[manwoman]", "a busy-looking [mp]atriarch", "a dusty librarian", "a badly underdressed [manwoman]", "a serious-looking [race]-morph", "a stern watch[manwoman]", "a priest[ess] of Aria"];
-	
+
 	var coin  = 5  + Rand(10);
 	var coin2 = 10 + Rand(10);
-	
+
 	var parse = {
 		name    : kiakai.name,
 		heshe   : kiakai.heshe(),
 		hisher  : kiakai.hisher(),
 		BoyGirl : player.Femininity() > 0 ? "Girl" : "Boy",
 		letter  : function() { return letters.charAt(Math.floor(Math.random() * letters.length)); },
-	    animal  : function() { return animals[Math.floor(Math.random() * animals.length)]; },
-	    color   : function() { return colors[Math.floor(Math.random() * colors.length)]; },
-	    race    : function() { return races[Math.floor(Math.random() * races.length)]; },
-	    playerReaction : function() { return reactions[Math.floor(Math.random() * reactions.length)]; },
-	    residenceDesc : function() { return Text.Parse(residencies[Math.floor(Math.random() * residencies.length)], parse); },
-	    lordLady : function() {return Math.random() < 0.5 ? "lord" : "lady"; },
-	    coin     : Text.NumToText(coin),
-	    coin2    : Text.NumToText(coin2)
+		animal  : function() { return animals[Math.floor(Math.random() * animals.length)]; },
+		color   : function() { return colors[Math.floor(Math.random() * colors.length)]; },
+		race    : function() { return races[Math.floor(Math.random() * races.length)]; },
+		playerReaction : function() { return reactions[Math.floor(Math.random() * reactions.length)]; },
+		residenceDesc : function() { return Text.Parse(residencies[Math.floor(Math.random() * residencies.length)], parse); },
+		lordLady : function() {return Math.random() < 0.5 ? "lord" : "lady"; },
+		coin     : Text.NumToText(coin),
+		coin2    : Text.NumToText(coin2)
 	};
-	
+
 	// Sender
 	if(Math.random() < 0.5) { // MALE
 		parse["manwoman"]    = "man";
@@ -421,7 +421,7 @@ Scenes.Rigard.Plaza.LetterDelivery = function() {
 		parse["sCockPussy"]  = Math.random() < 0.2 ? "cock" : "pussy"; // cause
 	}
 	parse["nobleDesc"] = Text.Parse(nobles[Math.floor(Math.random() * nobles.length)], parse);
-	
+
 	// Recipient
 	if(Math.random() < 0.5) { // MALE
 		parse["SirMadam"]    = "Sir";
@@ -444,7 +444,7 @@ Scenes.Rigard.Plaza.LetterDelivery = function() {
 		parse["mp"]          = "m";
 	}
 	parse["recipient"] = Text.Parse(recips[Math.floor(Math.random() * recips.length)], parse);
-	
+
 	Text.Clear();
 	Text.Add("You walk around the plaza district, looking around at the many grand residences competing for space around the wide streets. As you're about to walk past [residenceDesc], [nobleDesc] shouts at you from the entrance, waving a small envelope in [shisher] hand.", parse);
 	Text.NL();
@@ -454,12 +454,12 @@ Scenes.Rigard.Plaza.LetterDelivery = function() {
 	Text.NL();
 	Text.Add("<i>“Good,”</i> [sheshe] tells you, <i>“here's some coin for you trouble.”</i> [sHeShe] gives you [coin] coins, and tells you the message's destination. <i>“Now, off you go!”</i> [sHeShe] waves at you dismissively.", parse);
 	Text.NL();
-	
+
 	party.coin += coin;
-	
+
 	Text.Add("As you walk away from [shimher], you wonder if you should really bother with the job. After all, you didn't actually agree to anything. The crazy noble just assumed everything [shimher]self.", parse);
 	Text.Flush();
-	
+
 	//[Deliver][Open]
 	var options = new Array();
 	options.push({ nameStr : "Deliver",
@@ -468,9 +468,9 @@ Scenes.Rigard.Plaza.LetterDelivery = function() {
 			Text.Add("The task is a little demeaning, but you decide it's worth a small effort to get a few more coins. Occasionally asking for directions, you quickly reach your destination, and hand over the note to the recipient, [recipient].", parse);
 			Text.NL();
 			Text.Add("[rHeShe] gives you [coin2] coins for your trouble, and you go on your way.", parse);
-			
+
 			party.coin += coin2;
-			
+
 			world.TimeStep({minute: 30});
 			Text.Flush();
 			Gui.NextPrompt();
@@ -482,11 +482,11 @@ Scenes.Rigard.Plaza.LetterDelivery = function() {
 			Text.Clear();
 			Text.Add("You decide people shouldn't assume others will do what they demand without consulting them. You break the plain wax seal, tossing it to the side of the road, and have a look at the note.", parse);
 			Text.NL();
-			
+
 			var sexy = false;
-			
+
 			// RANDOM SCENE (USING ENCOUNTER TABLE)
-		 
+
 			var scenes = new EncounterTable();
 			scenes.AddEnc(function() {
 				Text.Add("<i>“Dear [SirMadam],", parse);
@@ -604,7 +604,7 @@ Scenes.Rigard.Plaza.LetterDelivery = function() {
 			}, 1.0, function() { return true; });
 
 			scenes.Get();
-			
+
 			Text.NL();
 			if(party.InParty(kiakai) && sexy) {
 				Text.Add("[name] leans over and reads the note along with you, curiously. As [hisher] eyes scan the lines, you see a deep crimson spread through [hisher] cheeks. <i>“O-oh!”</i> [heshe] exclaims, and turns away, biting [hisher] lower lip.", parse);
@@ -613,9 +613,9 @@ Scenes.Rigard.Plaza.LetterDelivery = function() {
 			Text.Add("You [playerReaction], and pocket the letter.", parse);
 			Text.NL();
 			Text.Add("<b>You received a letter.</b>");
-			
+
 			party.Inv().AddItem(Items.Letter);
-			
+
 			world.TimeStep({minute: 15});
 			Text.Flush();
 			Gui.NextPrompt();
@@ -623,5 +623,5 @@ Scenes.Rigard.Plaza.LetterDelivery = function() {
 		tooltip : "Have a look at the note and throw it away."
 	});
 	Gui.SetButtonsFromList(options);
-	
+
 }

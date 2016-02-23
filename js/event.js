@@ -320,7 +320,7 @@ function EncounterTable() {
  Example code for adding encounters:
 
  encs.AddEnc(function() {
- 	var enemy = new Party();
+	var enemy = new Party();
 	enemy.AddMember(new IntroDemon());
 	enemy.AddMember(new Imp());
 	enemy.AddMember(new Imp());
@@ -331,7 +331,7 @@ function EncounterTable() {
 	enc.onLoss = ...
 	enc.onVictory = ...
 	enc.VictoryCondition = ...
-	
+
 	return enc;
  }, 1.0);
 

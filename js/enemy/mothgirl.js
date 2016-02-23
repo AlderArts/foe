@@ -1,7 +1,7 @@
 /*
- * 
+ *
  * Mothgirl, lvl 4-6
- * 
+ *
  */
 
 Scenes.Mothgirl = {};
@@ -9,16 +9,16 @@ Scenes.Mothgirl = {};
 function Mothgirl() {
 	Entity.call(this);
 	this.ID = "lusina";
-	
+
 	this.avatar.combat     = Images.mothgirl;
 	this.name              = "Mothgirl";
 	this.monsterName       = "the mothgirl";
 	this.MonsterName       = "The mothgirl";
 	this.body.DefFemale();
-	
+
 	this.FirstVag().virgin = false;
 	this.Butt().virgin     = false;
-	
+
 	this.maxHp.base        = 120;
 	this.maxSp.base        = 40;
 	this.maxLust.base      = 45;
@@ -30,22 +30,22 @@ function Mothgirl() {
 	this.spirit.base       = 13;
 	this.libido.base       = 20;
 	this.charisma.base     = 20;
-	
+
 	this.elementDef.dmg[Element.mEarth]   =  0.5;
 	this.elementDef.dmg[Element.mFire]    = -0.5;
 	this.elementDef.dmg[Element.mThunder] = -0.5;
 	this.elementDef.dmg[Element.mWind]    =  0.5;
-	
+
 	this.level             = 4 + Math.floor(Math.random() * 4);
 	this.sexlevel          = 3;
-	
+
 	this.combatExp         = 5 + this.level;
 	this.coinDrop          = 2 + this.level * 4;
-	
+
 	this.body.SetBodyColor(Color.white);
-	
+
 	this.body.SetEyeColor(Color.red);
-	
+
 	TF.SetAppendage(this.Back(), AppendageType.wing, Race.Moth, Color.purple);
 	TF.SetAppendage(this.Appendages(), AppendageType.antenna, Race.Moth, Color.purple);
 
@@ -75,21 +75,21 @@ Mothgirl.prototype.DropTable = function() {
 	if(Math.random() < 0.5)  drops.push({ it: Items.MDust });
 	if(Math.random() < 0.5)  drops.push({ it: Items.FruitSeed });
 	if(Math.random() < 0.5)  drops.push({ it: Items.MFluff });
-	
+
 	if(Math.random() < 0.1)  drops.push({ it: Items.Hummus });
 	if(Math.random() < 0.1)  drops.push({ it: Items.SpringWater });
 	if(Math.random() < 0.1)  drops.push({ it: Items.Letter });
 	if(Math.random() < 0.1)  drops.push({ it: Items.FreshGrass });
 	if(Math.random() < 0.1)  drops.push({ it: Items.RawHoney });
 	if(Math.random() < 0.1)  drops.push({ it: Items.BeeChitin });
-	
+
 	if(Math.random() < 0.05) drops.push({ it: Items.FoxBerries });
 	if(Math.random() < 0.05) drops.push({ it: Items.Foxglove });
 	if(Math.random() < 0.05) drops.push({ it: Items.Wolfsbane });
 	if(Math.random() < 0.05) drops.push({ it: Items.Trinket });
 	if(Math.random() < 0.05) drops.push({ it: Items.FlowerPetal });
 	if(Math.random() < 0.05) drops.push({ it: Items.Lettuce });
-	
+
 	if(Math.random() < 0.01) drops.push({ it: Items.Avia });
 	if(Math.random() < 0.02) drops.push({ it: Items.HoneyBrew });
 	return drops;
@@ -99,7 +99,7 @@ Mothgirl.prototype.Act = function(encounter, activeChar) {
 	// TODO: Very TEMP
 	Text.Add(this.name + " acts! Bounce bounce!");
 	Text.NL();
-	
+
 	// Pick a random target
 	var t = this.GetSingleTarget(encounter, activeChar);
 
@@ -121,14 +121,14 @@ Mothgirl.prototype.Act = function(encounter, activeChar) {
 }
 
 Scenes.Mothgirl.LoneEnc = function() {
- 	var enemy = new Party();
- 	var moth = new Mothgirl();
+	var enemy = new Party();
+	var moth = new Mothgirl();
 	enemy.AddMember(moth);
 	var enc = new Encounter(enemy);
 	enc.moth = moth;
-	
+
 	enc.coin = Math.max(Math.floor(party.coin * 0.1), 100);
-	
+
 	var parse = {
 		legs   : function() { return player.LegsDesc(); },
 		weapon : function() { return player.WeaponDesc(); },
@@ -138,7 +138,7 @@ Scenes.Mothgirl.LoneEnc = function() {
 		breasts : function() { return player.FirstBreastRow().Short(); },
 		cocks  : function() { return player.MultiCockDesc(); }
 	};
-	
+
 	enc.onEncounter = function() {
 		Text.Clear();
 		if(!Mothgirl.Met()) {
@@ -160,19 +160,19 @@ Scenes.Mothgirl.LoneEnc = function() {
 			Text.Add("As you make your way through the overgrown forest, you start to hear a faint… buzzing. You clutch your [weapon] as the moth-girl thief wings down from the treetops, brandishing her long blade. She stops a few paces from you, hovering just off the ground with breasts swaying hypnotically, wings beating blindingly fast. <i>“Back again, [fem]? Tsk. Well, you know this song and dance; toss your coins on over, if you please! Or maybe you've got something... else... worth my time?”</i>", parse);
 		}
 		Text.Flush();
-		
+
 		gameCache.flags["Moth"] |= Mothgirl.Flags.Met;
-		
+
 		//[Fight] [Give Money] [Trade Sex]
 		var options = new Array();
 		options.push({ nameStr : "Fight Her",
 			func : function() {
 				enc.coin = Math.min(party.coin, enc.coin);
-				
+
 				Text.Clear();
 				Text.Add("You ready yourself for combat! The moth-girl sighs and swings her claymore into a defensive stance, saying: <i>“Tsk, you just have to do it the hard way, don't you? Oh, well… on guard!”</i>", parse);
 				Text.Flush();
-				
+
 				// Start combat
 				Gui.NextPrompt(function() {
 					enc.PrepCombat();
@@ -191,7 +191,7 @@ Scenes.Mothgirl.LoneEnc = function() {
 					Text.NL();
 					Text.Add("[HeShe] sighs. <i>”Whatever... you’re the boss,”</i> [heshe] shrugs.", parse);
 					Text.NL();
-					
+
 					terry.relation.DecreaseStat(30, -1);
 				}
 				Text.Add("<i>“Sure, whatever. Take it!”</i> you say, taking one of your coin pouches and tossing [coin] coins her way. She nimbly catches her ill-gotten gains, hooking the pouch onto her golden belt with a self-satisfied smile.", parse);
@@ -204,11 +204,11 @@ Scenes.Mothgirl.LoneEnc = function() {
 				Text.NL();
 				Text.Add("<b>The mothgirl stole [coin] coins from you.</b>", parse);
 				Text.Flush();
-				
+
 				party.coin -= enc.coin;
-				
+
 				world.TimeStep({minute: 30});
-				
+
 				Gui.NextPrompt();
 			}, enabled : party.coin >= enc.coin,
 			tooltip : Text.Parse("No need for violence… just take my money! Give her [coin] coins.", parse)
@@ -216,10 +216,10 @@ Scenes.Mothgirl.LoneEnc = function() {
 		options.push({ nameStr : "Trade Sex",
 			func : function() {
 				Text.Clear();
-				
+
 				parse["admitLie"] = party.coin < enc.coin ? "admit" : "lie";
 				parse["flaccidBurgeoning"] = party.coin < enc.coin ? "flaccid" : "burgeoning";
-				
+
 				Text.Add("<i>“I don't have any money on me!”</i> you [admitLie], lowering your [weapon] to draw her eye from your [flaccidBurgeoning] coin purse. You twist your lips into a sly grin, dropping your [weapon] and your [armor] in one swift stroke. <i>“Perhaps we can still make a deal…”</i>", parse);
 				Text.NL();
 				var gen = "";
@@ -234,19 +234,19 @@ Scenes.Mothgirl.LoneEnc = function() {
 				parse["gen"] = Text.Parse(gen, parse);
 				Text.Add("The moth-girl thief considers your offer for a moment, eyes hungrily scouring your bared body, lingering on [gen]. By the way her big, pink nipples start to stiffen, she obviously likes what she sees. The moth-girl sheathes her blade, licking her lips as you approach. <i>“Well, aren't you the eager one? Tsk, well, if I can't get any coin out of you... I might as well get a good fuck out of it.”</i>", parse);
 				Text.NL();
-				
+
 				world.TimeStep({minute: 10});
-				
+
 				Scenes.Mothgirl.Loss(enc, true);
 			}, enabled : true,
 			tooltip : "You're not willing to give her your money, but by the way she's eyeing you, you bet she's got other things on her mind, too."
 		});
 		Gui.SetButtonsFromList(options, false, null);
 	}
-	
+
 	enc.onLoss = function() {
 		SetGameState(GameState.Event);
-		
+
 		Gui.Callstack.push(function() {
 			Text.Clear();
 			Text.Add("<i>“Gah!”</i> you cry, falling onto your ass. The moth-girl clicks her tongue in disappointment while grabbing your hands and disarming you.", parse);
@@ -255,14 +255,14 @@ Scenes.Mothgirl.LoneEnc = function() {
 			parse["lust"] = player.LustLevel() > 0.7 ? "you're practically begging for it" : "It's only fun when we both enjoy it";
 			Text.Add("<i>“See? We could have saved all this trouble, but now, I'll just </i>take<i> what I wanted… and maybe a little something else besides. I'd hate to let a pretty piece of ass like you slip by, after all. Oh, don't look so put out… [lust],”</i> she grins, reaching down to grab your [gen], wholly aroused at seeing her huge, bare breasts so close you that could kiss them… if you weren't about to be subjected to the moth-girl's baser intentions.", parse);
 			Text.NL();
-	
+
 			Scenes.Mothgirl.Loss(enc);
 		});
-		
+
 		Encounter.prototype.onLoss.call(enc);
 	}
 	enc.onVictory = Scenes.Mothgirl.WinPrompt;
-	
+
 	return enc;
 }
 
@@ -270,23 +270,23 @@ Scenes.Mothgirl.WinPrompt = function() {
 	var enc = this;
 	var moth = enc.moth;
 	SetGameState(GameState.Event);
-	
+
 	var cocksInAss = player.CocksThatFit(moth.Butt(), null, 5);
 	var p1cock = player.BiggestCock(cocksInAss);
 	var strapon = p1cock ? p1cock.isStrapon : false;
-	
+
 	var parse = {
 		acocks : function() { return player.MultiCockDesc(cocksInAss); }
 	};
 	if(strapon) parse["acocks"] = "strapon";
-	
+
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
-	
+
 	Gui.Callstack.push(function() {
 		Text.Clear();
 		Text.Add("With a cry, the moth-girl tumbles to the ground, finally beaten. She tries to scramble away from you, but you easily take hold of the downy fuzz around her neck, hefting her to her feet as you decide what to do with this bold little slut…", parse);
 		Text.Flush();
-		
+
 		var options = new Array();
 		if(player.FirstCock()) {
 			options.push({ nameStr : "Titfuck",
@@ -320,7 +320,7 @@ Scenes.Mothgirl.WinPrompt = function() {
 Scenes.Mothgirl.WinTitfuck = function(enc) {
 	var p1cock = player.BiggestCock();
 	var hugecock = p1cock.Len() > 20;
-	
+
 	var parse = {
 		breasts : function() { return player.FirstBreastRow().Short(); },
 		tongue  : function() { return player.TongueDesc(); },
@@ -330,9 +330,9 @@ Scenes.Mothgirl.WinTitfuck = function(enc) {
 		hips    : function() { return player.HipsDesc(); },
 		balls   : function() { return player.BallsDesc(); }
 	};
-	
+
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
-	
+
 	Text.Clear();
 	Text.Add("As you consider what to do with the brazen moth, your eyes are constantly drawn down to the full swells of her hefty F-cups, heaving with her quickening breath. Her pink teats are nice and stiff already, and she shivers excitedly as the prominent tips brush against your clothes. You grab the moth-girl's slender shoulder, pulling her tight against you, feeling her soft tits press against your [breasts]. She gives a little gasp of surprise, trying to pull back, but you hold her firmly in place, cupping one of those succulent orbs and bringing its nub to your mouth.", parse);
 	Text.NL();
@@ -361,16 +361,16 @@ Scenes.Mothgirl.WinTitfuck = function(enc) {
 	Text.NL();
 	Text.Add("The desperate, greedy look she gives you over her bouncing breasts is the last straw. You grit your teeth, trying not to cry out as you feel your [cock] swelling with seed, surging toward the slutty bug. She gives a little scream of surprise as the first hot, salty load shoots her straight in the face, splattering over her writhing tongue and agape lips. She coughs and tries to turn aside, but her tongue is trapped between her tits, pinning her face in the perfect angle for a full-bore facial. You slap her boobs together as hard as you can as you give your final, climactic thrusts through the crack of her cleavage, chest heaving with exertion and ecstasy as you glaze the moth-girl's face and melons with cum.", parse);
 	Text.NL();
-	
+
 	var cum = player.OrgasmCum();
-	
+
 	Text.Add("<i>“Oh, goddess,”</i> the moth-girl breathes as your last hot, sticky squirt of semen plasters on her chin.", parse);
 	Text.NL();
 	Text.Add("<i>“You really know how to go right for a girl's weak spot, huh?”</i> she giggles. You cock an eyebrow at the thief, seeing her grinning dumbly as her long tongue laps your spunk off the tops of her breasts, happily swallowing your load. For someone who just lost a fight, she's sure happy about it. For your part, you give the cum-hungry bug a moment to spit-shine your rod again before grabbing your gear and staggering off, leaving her to enjoy her cum-soaked afterglow.", parse);
 	Text.Flush();
-	
+
 	player.AddSexExp(2);
-	
+
 	Gui.NextPrompt();
 }
 
@@ -379,7 +379,7 @@ Scenes.Mothgirl.WinAnal = function(enc, cocksInAss) {
 	var p1cock = player.BiggestCock(cocksInAss);
 	var strapon = p1cock.isStrapon;
 	var hugecock = p1cock.Len() > 50;
-	
+
 	var parse = {
 		armor : function() { return player.ArmorDesc(); },
 		cocks : function() { return player.MultiCockDesc(cocksInAss); },
@@ -387,10 +387,10 @@ Scenes.Mothgirl.WinAnal = function(enc, cocksInAss) {
 		knees : function() { return player.KneesDesc(); },
 		hips  : function() { return player.HipsDesc(); }
 	};
-	
+
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
-	
+
 	Text.Clear();
 	Text.Add("A wicked thought crosses your mind as you survey the curvaceous little moth. She blinks at you, still stunned, until she realizes where your gaze is going. Though held firmly in your hand, she manages to shift ever so slightly to emphasize the hefty swells of her breasts and the big cherry-pink nipples almost pressing into your [armor]. You give her a teasing smile and grab one of them, running the puffy pink areola between your fingers until her inverted teat starts to peek out. The moth blushes and chews her lip, trying to hold back a gasp of pleasure as you molest her boob.", parse);
 	Text.NL();
@@ -426,17 +426,17 @@ Scenes.Mothgirl.WinAnal = function(enc, cocksInAss) {
 	Text.NL();
 	Text.Add("You suppose that's fair. You give the moth a verbal warning this time, just before rocking your [hips] forward and pushing into her waiting hole. She cries out again, this time more in pleasure than alarm, and her whole body rocks forward with the onslaught of your [cock]. Digging your hands into the moth's behind, you grit your teeth and push yourself deep into her tight anal passage. You try to not let the overwhelming sensation get the better of you - but it's so hard not to cum right then and there, milked to completion by the thief's writhing muscles. You have to take it slow for now, easing yourself into her inch by inch.", parse);
 	Text.NL();
-	
+
 	Sex.Anal(player, moth);
 	moth.FuckAnal(moth.Butt(), p1cock, 3);
 	player.Fuck(p1cock, 3);
-	
+
 	Text.Add("Beneath you, the moth-girl grunts and groans, digging her fingers into the forest dirt. Her big breasts press into the ground, seeming to bear more of her weight than her arms on their lush curves, and her wings flick and flutter unconsciously in response to your anal invasion. A few slow thrusts later, she manages to relax herself, finally getting used to the feeling of your [cock] in her butt. The more she relaxes, the faster you move, picking up the pace until you're slamming your [hips] in the moth's plush behind, making her ass bounce to the beat of you fucking her.", parse);
 	Text.NL();
 	Text.Add("It isn't long before the moth-girl's grunts of discomfort give way to loud cries of pleasure. Her fingers work furiously between her legs, alternating between teasing her clit and plunging into her drooling cunt. ", parse);
 	if(cocksInAss.length > 1) {
 		Text.Add("You decide to have a little mercy on her, and grab[oneof2] your other cock[s2], angling it toward her gash. She makes a delighted little squeal when you slam your second member in, and her whole body goes limp with overwhelming pleasure. ", parse);
-		
+
 		Sex.Vaginal(player, moth);
 		moth.FuckVag(moth.FirstVag(), p1cock, 2);
 		player.Fuck(p1cock, 2);
@@ -451,9 +451,9 @@ Scenes.Mothgirl.WinAnal = function(enc, cocksInAss) {
 	parse["c"] = strapon ? "" : " and milk out the first squirts of seed";
 	Text.Add(". She clenches down hard around you, enough to push you over the edge[c].", parse);
 	Text.NL();
-	
+
 	var cum = player.OrgasmCum();
-	
+
 	if(strapon)
 		Text.Add("You grit your teeth and continue thrusting as you bring yourself to orgasm at the moth's expense, hammering your strapon deep into her one last time.", parse);
 	else if(cocksInAss.length > 1)
@@ -468,13 +468,13 @@ Scenes.Mothgirl.WinAnal = function(enc, cocksInAss) {
 	Text.NL();
 	Text.Add("You laugh and pat her thigh before grabbing your gear and staggering off, leaving her to enjoy her cum-soaked afterglow.", parse);
 	Text.Flush();
-	
+
 	Gui.NextPrompt();
 }
 
 Scenes.Mothgirl.WinCunn = function(enc) {
 	var moth = enc.moth;
-	
+
 	var parse = {
 		cocks : function() { return player.MultiCockDesc(); },
 		cunt  : function() { return player.FirstVag().Short(); },
@@ -485,20 +485,20 @@ Scenes.Mothgirl.WinCunn = function(enc) {
 		hips  : function() { return player.HipsDesc(); },
 		legs  : function() { return player.LegsDesc(); }
 	};
-	
+
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
-	
+
 	Text.Clear();
 	parse["lust"] = moth.LustLevel() > 0.5 ? "lust-addled herself" : "exhausted by combat";
 	Text.Add("As you consider the beaten moth's fate, your eyes are drawn inexorably toward her pink lips and the long, prehensile appendage sheathed within. The thought of a long, lashing tongue writhing inside you sends a shiver of anticipation through your body and a hot rush of excitement through your sex. Seeing the lust in your eyes, the thief tries to struggle in your grasp, but she's too [lust] to put up anything more than a token resistance; you soon have her on her knees, face just inches from your [cunt].", parse);
 	Text.NL();
 	Text.Add("You slowly remove your [armor], giving the moth a good look at your slavering cunt. She makes a show of trying to pull away, but as soon as you grab her head and push it between your legs, her passions stir from rebellion to eager submission. Your body quakes with pleasure as her long, thick tongue rolls out of her mouth, teasing up along the lips of your slit. Her big, red eyes look up at you, holding your gaze as the tip of her tongue flicks across your [clit], sending an electric shock of pleasure through you. Her simplest motions make you shudder with excitement, and you push her face further into your muff, smearing your lust across her nose.", parse);
 	Text.NL();
-	
+
 	Sex.Cunnilingus(moth, player);
 	moth.Fuck(null, 2);
 	player.Fuck(null, 2);
-	
+
 	Text.Add("The moth-girl sputters as she's submerged in your juices, lips locking with your pussy's as her tongue is pushed through the tight-clenched slit of your [cunt]. The way she moves her tongue, it's like a wet, writhing tentacle spreading your vaginal walls wide, wriggling its way through the chasm of your womanhood. Biting your lip, you spread yourself out with your fingers, easing the moth's intrusion; she takes the opportunity to push in hard and fast, wrapping her tongue through to the lips of your womb, grabbing your [butt] to pull you in on her. You gasp as the moth pulls just a little too hard. Unsteady as you are, a little force is all it takes to send you toppling down atop her, rolling with the bug through the grass until the two of you come to a standstill, straddling her big hips. She stares up at you expectantly, lips pursed over the tip of her long tongue, awaiting your pleasure.", parse);
 	Text.NL();
 	Text.Add("A tempting thought crosses your mind. Reaching down, you plant a hand overtop both of the moth-girl's breasts, squeezing her cherry-pink nipples between thumb and forefinger until she gives a pathetic little cry, writhing underneath you. A few tender caresses have her inverted points rising to meet you, peeking out of their hiding holes eager for you to pinch and pull them. Seeing where this is going, the moth-girl puts aside her wanton lust just long enough to shimmy out of her pants, hiking them down around her knees and leaving the slick slit of her sex bare to you, eager for your ministration.", parse);
@@ -518,14 +518,14 @@ Scenes.Mothgirl.WinCunn = function(enc) {
 	Text.NL();
 	Text.Add("Her tongue slips back from one set of lips and down to the other, making you squirm with a shuddering delight as the shaft of her tongue slithers past your spread pussylips and into the deep channel of your sex. You bite your lip and hold on for the ride, bucking your hips back as her tongue worms in like a thick, wet tentacle, ceaselessly rubbing and caressing your most sensitive spots. Unconsciously, you feel your hands slipping back down to the moth's ample bust, cupping the full swells of her breasts and giving them a playful squeeze. Her back arches as your twist her teats, squeezing and kneading them until a bright red flush spreads through her body, her chest heaving as pleasure takes hold of her. You're not far behind her, hips bucking back against her tongue as you use it like a thick, writhing cock to get yourself off on - liberally drenching the moth's face and chest with your flowing juices as you do so.", parse);
 	Text.NL();
-	
+
 	var cum = player.OrgasmCum();
-	
+
 	Text.Add("<i>“Ooooohhhhhhh,”</i> the moth-girl coos, squirming in your relentless grasp, crying out as you molest her expansive bust. As her pleasure mounts, it's as if she loses control of her tongue; the muscle goes wild inside you, thrashing about like a fire hose, fucking its way so deep inside you can feel its tip kissing the entrance of your womb. You throw your head back, thrusting your hips down hard in return and letting your body take control, mind fading in response to the pleasure of your lovemaking. The moth joins you in orgasm - or rather, boobgasm - screaming around her extended tongue as she cums, tongue ramming so far into your [cunt] that you could swear you can feel your stomach bulging in its wake.", parse);
 	Text.NL();
 	Text.Add("When you come to your senses, you find yourself rolled on your back beside the moth-girl, panting hard. She grins at you, <i>“You really know how to go right for a girl's weak spot, huh?”</i> she giggles. You cock an eyebrow at the thief, seeing her grinning dumbly as her long tongue laps your fem-spunk off the tops of her breasts, happily sucking up your juices. For someone who just lost a fight, she's sure happy about it. For your part, you grab your gear before staggering off, leaving her to enjoy her cum-soaked afterglow.", parse);
 	Text.Flush();
-	
+
 	Gui.NextPrompt();
 }
 
@@ -533,7 +533,7 @@ Scenes.Mothgirl.Loss = function(enc, traded) {
 	var moth = enc.moth;
 	var p1cock = player.BiggestCock();
 	traded = traded || enc.coin <= 0;
-	
+
 	var parse = {
 		coin    : Text.NumToText(enc.coin),
 		armor   : function() { return player.ArmorDesc(); },
@@ -554,9 +554,9 @@ Scenes.Mothgirl.Loss = function(enc, traded) {
 		nipples : function() { return player.FirstBreastRow().NipsShort(); },
 		tongue  : function() { return player.TongueDesc(); }
 	};
-	
+
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
-	
+
 	var scenes = new EncounterTable();
 	scenes.AddEnc(function() { // PC eats her out
 		Text.Add("The moth-girl clicks her tongue as your wandering eyes drink in the soft mounds of her bare breasts; the secretive slits of her inverted pink nipples as they shift under your lustful gaze. She grins, planting her hands on her big hips and puffing her chest out a bit for you. <i>“Like what you see? I have to say, they're <b>definitely</b> my best assets, don't you think?”</i>", parse);
@@ -591,11 +591,11 @@ Scenes.Mothgirl.Loss = function(enc, traded) {
 		if(p1cock) {
 			Text.Add("<i>“Ah... alright, alright, just... stick it in, already...”</i> the moth-girl moans, her domineering facade fading to quivering, eager sex as you bring her closer and closer to her breaking point. With a muted little gasp, the moth shifts her hips to give your throbbing member easy access to her waiting womanhood; you plunge in without hesitation, trading the wringing grasp of her fluffy fingers to the clinging, wet tightness of the thief's sodden sex.", parse);
 			Text.NL();
-			
+
 			Sex.Vaginal(player, moth);
 			moth.FuckVag(moth.FirstVag(), player.FirstCock(), 2);
 			player.Fuck(player.FirstCock(), 2);
-			
+
 			Text.Add("Her back arches as you slide into her, biting her lower lip and fluttering her slender pink wing with every inch of cock you feed her eager pussy. Your hands let go of her well-stretched cunt and grab her ass, fingers digging into the soft, pliant flesh of her backside and pulling her down on your dick, until the moth's downy white crotch-fuzz is resting against your own slime-soaked groin, your [cock] fully buried inside her.", parse);
 			Text.NL();
 		}
@@ -618,7 +618,7 @@ Scenes.Mothgirl.Loss = function(enc, traded) {
 		Text.NL();
 		parse["trade"] = traded ? "" : ", waving her bag of coins in front of you triumphantly";
 		Text.Add("<i>“Thanks for the fun, cutey!”</i> she giggles[trade] before flying off, blowing a kiss over her shoulder as she leaves.", parse);
-		
+
 		player.AddSexExp(2);
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
@@ -642,9 +642,9 @@ Scenes.Mothgirl.Loss = function(enc, traded) {
 		Text.NL();
 		Text.Add("With a cry of pleasure, you find yourself cumming. Your [cock] throbs between the moth's tits, making her gasp and giggle as you squirt your load out between her huge mounds. The moth grins up at you and keeps pumping, rocking her shoulders back and forth to roll your cock between her breasts until you've blown the last of your wad, completely slathering the gorge of her breasts with your seed.", parse);
 		Text.NL();
-		
+
 		var cum = player.OrgasmCum();
-		
+
 		Text.Add("<i>“I just knew you were a boobs [guygirl],”</i> the thief teases, drawing her tongue off from around your shaft - and very deliberately back through the valley of her cleavage, letting it get smeared with your cum before she swallows it up, making a delightfully lewd moan as she gets a taste of you. She shifts back up to her knees, wiping her lips with the back of her hand and looking more than satisfied with her work.", parse);
 		Text.NL();
 		Text.Add("Thinking her done, you start to slip away, scrambling out from under the cum-basted moth - only to find her hands gripping your shoulders and shoving you against a nearby tree trunk, hard. <i>“Don't even think about it,”</i> she warns, straddling your [hips]. <i>“You're not getting off that easy!”</i>", parse);
@@ -661,11 +661,11 @@ Scenes.Mothgirl.Loss = function(enc, traded) {
 		Text.NL();
 		Text.Add("<i>“Think you can go again?”</i> the moth asks with a wink, though clearly it's less of a question and more of an enticement. Still, you put on a brave face and nod - her smile grows wider, and her hips shift back to plant the lips of her sex on the crown of your cock. The lusty moth wraps her arms around your neck, steadying herself against you and pressing her pert nips against your [breasts] as she starts to slide down your shaft.", parse);
 		Text.NL();
-		
+
 		Sex.Vaginal(player, moth);
 		moth.FuckVag(moth.FirstVag(), p1cock, 3);
 		player.Fuck(p1cock, 3);
-		
+
 		Text.Add("For someone so enthusiastic about fucking you, she takes it nice and slow at first, easing herself into taking your [cock] ", parse);
 		if(p1cock.Len() < 18)
 			Text.Add("from tip to base", parse);
@@ -684,9 +684,9 @@ Scenes.Mothgirl.Loss = function(enc, traded) {
 		parse["c"] = p1cock.Len() < 30 ? "to the hilt" : "as deep as your mammoth dick can go";
 		Text.Add("The moth gives a little gasp as the first shot of seed spills into her but keeps on moving. The second spurt of cum you send splattering across the writhing walls of her pussy sends her over the edge too, breaking the kiss as she throws her head back with an exultant cry. You pull her down on your [cock], ramming yourself in [c], shooting the rest of your load deep into her. She's more than happy to take it if the way she moans and gasps is any indication!", parse);
 		Text.NL();
-		
+
 		var cum = player.OrgasmCum();
-		
+
 		Text.Add("You collapse against the tree trunk, chest heaving with exertion as the moth slumps forward, head resting against your [breasts]. Her wings flitter weakly behind her, arms wrapping around your neck to hold you tight. Pinned underneath a heap of warm, fuzzy moth-girl, you don't have many options but to lock your arms around her waist and return the favor, closing your eyes in momentary contentment.", parse);
 		Text.NL();
 		Text.Add("It's only an hour later that you wake up from you unexpected nap, rubbing the sleep out of your eyes as you stagger to your [feet], just in time to see the moth-girl standing at the edge of the clearing, getting ready to take flight. Hearing you move, she flashes a cute grin over her shoulder, wings lifting her a few inches off the ground.", parse);
@@ -694,14 +694,14 @@ Scenes.Mothgirl.Loss = function(enc, traded) {
 		parse["traded"] = traded ? "" : ", waving her bag of coins in front of you triumphantly";
 		Text.Add("<i>“Thanks for the fun, cutey!”</i> she giggles[traded] before flying off, blowing a kiss over her shoulder as she leaves. ", parse);
 	}, 1.0, function() { return player.FirstCock(); });
-	
+
 	scenes.Get();
-	
+
 	world.TimeStep({minute: 30});
 	if(!traded) {
 		Text.NL();
 		Text.Add("<b>The mothgirl stole [coin] coins from you.</b>", parse);
-		
+
 		party.coin -= enc.coin;
 	}
 	Text.Flush();

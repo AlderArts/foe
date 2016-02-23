@@ -265,7 +265,7 @@ CacheToGame = function() {
 					player.acc1Slot     = Items.Accessories.IronBangle;
 					player.jobs["Fighter"].mult = 0.5;
 					player.Equip();
-			    	PrintDefaultOptions();
+					PrintDefaultOptions();
 				}, enabled : true,
 				tooltip : "Focused on martial abilities and strength, strives to excel in physical combat."
 			});
@@ -286,7 +286,7 @@ CacheToGame = function() {
 					player.jobs["Scholar"].mult = 0.5;
 					player.jobs["Fighter"].mult = 1;
 					player.Equip();
-			    	PrintDefaultOptions();
+					PrintDefaultOptions();
 				}, enabled : true,
 				tooltip : "Takes a more intellectual approach to problems, and dabbles slightly in the mystical. Starts out with several support abilities."
 			});

@@ -1,20 +1,20 @@
 /*
- * 
+ *
  * Drake lvl 60-70
- * 
+ *
  */
 Scenes.Drake = {};
 
 function Drake() {
 	Entity.call(this);
 	this.ID = "drake";
-	
+
 	this.avatar.combat     = Images.drake;
 	this.name              = "Drake";
 	this.monsterName       = "the drake";
 	this.MonsterName       = "The drake";
 	this.body.DefMale();
-	
+
 	this.maxHp.base        = 50000;
 	this.maxSp.base        = 10000;
 	this.maxLust.base      = 6000;
@@ -26,22 +26,22 @@ function Drake() {
 	this.spirit.base       = 320;
 	this.libido.base       = 200;
 	this.charisma.base     = 240;
-	
+
 	this.elementDef.dmg[Element.pSlash]   = 0.5;
 	this.elementDef.dmg[Element.mFire]    = 0.5;
 	this.elementDef.dmg[Element.mThunder] = 0.5;
 	this.elementDef.dmg[Element.mIce]     = 0.5;
-	
+
 	this.level             = 60 + Math.floor(Math.random() * 10);
 	this.sexlevel          = 30;
-	
+
 	this.combatExp         = 6000 + this.level * 60;
 	this.coinDrop          = 4000 + this.level * 40;
-	
+
 	this.body.SetBodyColor(Color.green);
-	
+
 	this.body.SetEyeColor(Color.white);
-	
+
 	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Dragon, Color.green);
 
 	// Set hp and mana to full
@@ -70,15 +70,15 @@ Drake.prototype.DropTable = function() {
 	if(Math.random() < 0.1)  drops.push({ it: Items.Taurico });
 	if(Math.random() < 0.1)  drops.push({ it: Items.Nagazm });
 	if(Math.random() < 0.1) drops.push({ it: Items.Gestarium });
-	
+
 	if(Math.random() < 0.1)  drops.push({ it: Items.BlackGem });
 	if(Math.random() < 0.1)  drops.push({ it: Items.DemonSeed });
 	if(Math.random() < 0.1)  drops.push({ it: Items.SnakeFang });
 	if(Math.random() < 0.1)  drops.push({ it: Items.SnakeOil });
 	if(Math.random() < 0.3)  drops.push({ it: Items.LizardEgg });
 	if(Math.random() < 0.3)  drops.push({ it: Items.LizardScale });
-	
-	
+
+
 	return drops;
 }
 
@@ -86,7 +86,7 @@ Drake.prototype.Act = function(encounter, activeChar) {
 	// TODO: Very TEMP
 	Text.Add(this.name + " acts! ROOOAR!");
 	Text.NL();
-	
+
 	// Pick a random target
 	var targets = this.GetPartyTarget(encounter, activeChar);
 	var t = this.GetSingleTarget(encounter, activeChar);
@@ -111,10 +111,10 @@ Drake.prototype.Act = function(encounter, activeChar) {
 }
 
 Scenes.Drake.DrakeEnc = function() {
- 	var enemy    = new Party();
+	var enemy    = new Party();
 	enemy.AddMember(new Drake());
 	var enc      = new Encounter(enemy);
-	
+
 	/*
 	enc.canRun = false;
 	enc.onEncounter = ...

@@ -5,7 +5,7 @@ Text.toolbars = $('<div></div>');
 
 Text.InsertImage = function(imgSrc, align) {
 	if(!RENDER_PICTURES) return "";
-	
+
 	align = align || 'left';
 	return "<img src='" + imgSrc + "' align='" + align + "' alt='MISSING IMAGE: '" + imgSrc + "' style='margin: 1px 8px;'/>";
 }
@@ -14,7 +14,7 @@ Text.Say = function(imgSrc, text, align) {
 	var textbox = document.getElementById("mainTextArea");
 	align = align || 'left';
 	text = text || "";
-	
+
 	if(RENDER_PICTURES)
 		textbox.innerHTML += "<img src='" + imgSrc + "' align='" + align + "' alt='MISSING IMAGE: '" + imgSrc + "' style='margin: 1px 8px;'>" + text + "</img>";
 	else
@@ -35,7 +35,7 @@ Text.Parse = function(text, parseStrings) {
 			var stop = text.indexOf("]", start);
 			while(start != -1 && stop != -1) {
 				var code = text.slice(start+1,stop);
-				
+
 				var replaceStr;
 				if(parseStrings[code] != null) {
 					replaceStr = parseStrings[code];
@@ -47,14 +47,14 @@ Text.Parse = function(text, parseStrings) {
 				else {
 					replaceStr = "<b>['" + code + "' couldn't be parsed]</b>";
 				}
-				
+
 				text = text.slice(0, start) + replaceStr + text.slice(stop+1);
-				
+
 				var start = text.indexOf("[", start + replaceStr.length);
 				var stop = text.indexOf("]", start);
 			}
 		}
-		
+
 		return text;
 	}
 	catch(e) {
@@ -72,19 +72,19 @@ Text.Clear = function() {
 
 /*
  * New, buffered approach
- * 
+ *
 
 	Text.Clear();
-	
+
 	Text.Add("Text", parse);
 	Text.NL();
 	Text.Add("Text", parse);
 	Text.NL();
 	Text.Add(Text.InsertImage("image", 'right'));
-	
+
 	Text.Flush();
 
- * 
+ *
  */
 //TODO Would be wise to refactor/rename this to "AddSpan".
 //Adds text wrapped in a span.
@@ -184,9 +184,9 @@ Text.NumToText = function(num) {
 		var ones = num % 10;
 		var tens = Math.floor(num / 10) % 10;
 		var hundreds = Math.floor(num / 100) % 10;
-		
+
 		var str = "";
-		
+
 		if(hundreds != 0)
 			str += Text.DigitToText(hundreds) + " hundred";
 		if(tens != 0) {
@@ -215,7 +215,7 @@ Text.NumToText = function(num) {
 		}
 		return str;
 	}
-	
+
 	// Default
 	return num;
 }
@@ -228,19 +228,19 @@ Text.Quantify = function(num) {
 	switch(num) {
 		case 0: return "lack";
 		case 1: r = Rand(4);
-		if     (r == 0) return "lone";
-		else if(r == 1) return "solitary";
-		else if(r == 2) return "individual";
-		else            return "single";
+			if     (r == 0) return "lone";
+			else if(r == 1) return "solitary";
+			else if(r == 2) return "individual";
+			else            return "single";
 		case 2: r = Rand(2);
-		if(r == 0) return "duo";
-		else       return "pair";
+			if(r == 0) return "duo";
+			else       return "pair";
 		case 3: r = Rand(2);
-		if(r == 0) return "trio";
-		else       return "triad";
+			if(r == 0) return "trio";
+			else       return "triad";
 		case 4: r = Rand(2);
-		if(r == 0) return "quad";
-		else       return "quartette";
+			if(r == 0) return "quad";
+			else       return "quartette";
 		case 5: return "quintet";
 		case 6: return "sextet";
 		case 7: return "septet";
@@ -277,19 +277,19 @@ Text.ParserPlural = function(parse, condition, prefix, postfix) {
 	parse[prefix + "es" + postfix]     = condition ? "es" : "";
 	parse[prefix + "notEs" + postfix]  = condition ? "" : "es";
 	parse[prefix + "yIes" + postfix]   = condition ? "ies" : "y";
-	
+
 	parse[prefix + "isAre" + postfix]   = condition ? "are" : "is";
 	parse[prefix + "hasHave" + postfix] = condition ? "have" : "has";
 	parse[prefix + "wasWere" + postfix] = condition ? "were" : "was";
-	
+
 	parse[prefix + "oneof" + postfix]  = condition ? " one of" : "";
 	parse[prefix + "someof" + postfix] = condition ? " some of" : "";
 	parse[prefix + "eachof" + postfix] = condition ? " each of" : "";
 	parse[prefix + "allof" + postfix]  = condition ? " all of" : "";
-	
+
 	parse[prefix + "ItThey" + postfix]    = condition ? "They" : "It";
 	parse[prefix + "ItsTheyre" + postfix] = condition ? "They’re" : "It’s";
-	
+
 	parse[prefix + "itThey" + postfix]    = condition ? "they" : "it";
 	parse[prefix + "itThem" + postfix]    = condition ? "them" : "it";
 	parse[prefix + "itsTheir" + postfix]  = condition ? "their" : "its";
@@ -297,12 +297,12 @@ Text.ParserPlural = function(parse, condition, prefix, postfix) {
 	parse[prefix + "itsTheyve" + postfix] = condition ? "they’ve" : "it’s";
 	parse[prefix + "thisThese" + postfix] = condition ? "these" : "this";
 	parse[prefix + "thatThose" + postfix] = condition ? "those" : "that";
-	
+
 	return parse;
 }
 /*Generates an input for a given input type
  * For each 'type', the accepted paramters are listed below
- * 	button   ::: (nameStr = button text), (func = on click func), (obj = will be passed to func), (classes = classes that will be added to the input)
+ *   button   ::: (nameStr = button text), (func = on click func), (obj = will be passed to func), (classes = classes that will be added to the input)
  *   select  ::: TODO
  *   checkbox::: TODO
  *   radio   ::: TODO
@@ -360,17 +360,17 @@ var createInput = function(inputOptions, cssClasses){
 /*
 	// REGULAR TEXT (NEW METHOD)
 	var parse = {
-		
+
 	};
-	
+
 	Text.Clear();
 	Text.Add("", parse);
 	Text.NL();
 	Text.Flush();
-	
+
 
 	// CHOICE
-	
+
 	//[Sure][Nah]
 	var options = new Array();
 	options.push({ nameStr : "Sure",
@@ -392,12 +392,12 @@ var createInput = function(inputOptions, cssClasses){
 		tooltip : ""
 	});
 	Gui.SetButtonsFromList(options);
-	
-	
+
+
 	// SCENE ROTATION
-	
+
 	var scenes = [];
-	
+
 	// Long
 	scenes.push(function() {
 		Text.Add("", parse);
@@ -416,18 +416,18 @@ var createInput = function(inputOptions, cssClasses){
 		Text.NL();
 		Gui.NextPrompt(Scenes.Kiakai.TalkElves);
 	});
-	
+
 	var sceneId = kiakai.flags["RotElfChild"];
 	if(sceneId >= scenes.length) sceneId = 0;
-	
+
 	kiakai.flags["RotElfChild"] = sceneId + 1;
-	
+
 	// Play scene
 	scenes[sceneId]();
-	
+
 	Text.Flush();
-	
-	
+
+
 	// RANDOM SCENE (USING ENCOUNTER TABLE)
 
 	var scenes = new EncounterTable();
@@ -443,9 +443,9 @@ var createInput = function(inputOptions, cssClasses){
 		Text.Add("", parse);
 		Text.NL();
 	}, 1.0, function() { return true; });
-	
+
 	scenes.Get();
-	
+
 	Text.Flush();
 */
 

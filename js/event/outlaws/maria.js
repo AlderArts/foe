@@ -310,7 +310,7 @@ Scenes.Maria.ForestConfront = function() {
 				Text.Add("With surprising strength, the archer shoves you to the side. You jump back, narrowly avoiding a swift kick to the shins, and prepare to fight!", parse);
 			Text.Flush();
 
-		 	var enemy = new Party();
+			var enemy = new Party();
 			enemy.AddMember(maria);
 			var enc = new Encounter(enemy);
 

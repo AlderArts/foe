@@ -46,9 +46,9 @@ function Item(id, name, type) {
 	this.Use        = null;
 
 
-	/* 
+	/*
 	 * effect = {
-	 * 	 maxHp
+	 *   maxHp
 	 *   maxSp
 	 *   maxLust
 	 *   strength
@@ -58,13 +58,13 @@ function Item(id, name, type) {
 	 *   spirit
 	 *   libido
 	 *   charisma
-	 * 
+	 *
 	 *   atkMod
 	 *   defMod
 	 * }
 	 */
 	this.effect = {};
-	
+
 	if(!id) {
 		console.log("Item '" + name + "' has no id.");
 	}
@@ -79,19 +79,19 @@ Item.prototype.Equip = function(target) {
 	if(this.effect.maxHp)        target.maxHp.bonus         += this.effect.maxHp;
 	if(this.effect.maxSp)        target.maxSp.bonus         += this.effect.maxSp;
 	if(this.effect.maxLust)      target.maxLust.bonus       += this.effect.maxLust;
-	
+
 	if(this.effect.strength)     target.strength.bonus      += this.effect.strength;
 	if(this.effect.stamina)      target.stamina.bonus       += this.effect.stamina;
 	if(this.effect.dexterity)    target.dexterity.bonus     += this.effect.dexterity;
 	if(this.effect.intelligence) target.intelligence.bonus  += this.effect.intelligence;
 	if(this.effect.spirit)       target.spirit.bonus        += this.effect.spirit;
-	
+
 	if(this.effect.libido)       target.libido.bonus        += this.effect.libido;
 	if(this.effect.charisma)     target.charisma.bonus      += this.effect.charisma;
-	
+
 	if(this.effect.atkMod)       target.atkMod += this.effect.atkMod;
 	if(this.effect.defMod)       target.defMod += this.effect.defMod;
-	
+
 	// Elemental attack
 	target.elementAtk.Add(new DamageType({
 		pSlash   : this.effect.apSlash,
@@ -109,7 +109,7 @@ Item.prototype.Equip = function(target) {
 		mNature  : this.effect.amNature,
 		lust     : this.effect.alust
 	}));
-	
+
 	// Elemental defense
 	target.elementDef.Add(new DamageType({
 		pSlash   : this.effect.dpSlash,
@@ -134,7 +134,7 @@ Item.prototype.ShowEquipStats = function() {
 	Text.AddDiv(this.Short(), null, "itemSubtypeHeader");
 	if(this.effect.atkMod) Text.AddDiv("Atk: " + this.effect.atkMod, null, "itemName");
 	if(this.effect.defMod) Text.AddDiv("Def: " + this.effect.defMod, null, "itemName");
-	
+
 	if(this.effect.apSlash)   Text.AddDiv("Slash.Atk: "   + this.effect.apSlash,   null, "itemName");
 	if(this.effect.apBlunt)   Text.AddDiv("Blunt.Atk: "   + this.effect.apBlunt,   null, "itemName");
 	if(this.effect.apPierce)  Text.AddDiv("Pierce.Atk: "  + this.effect.apPierce,  null, "itemName");
@@ -149,7 +149,7 @@ Item.prototype.ShowEquipStats = function() {
 	if(this.effect.amDark)    Text.AddDiv("Dark.Atk: "    + this.effect.amDark,    null, "itemName");
 	if(this.effect.amNature)  Text.AddDiv("Nature.Atk: "  + this.effect.amNature,  null, "itemName");
 	if(this.effect.alust)     Text.AddDiv("Lust.Atk: "    + this.effect.alust,     null, "itemName");
-	
+
 	if(this.effect.dpSlash)   Text.AddDiv("Slash.Def: "   + this.effect.dpSlash,   null, "itemName");
 	if(this.effect.dpBlunt)   Text.AddDiv("Blunt.Def: "   + this.effect.dpBlunt,   null, "itemName");
 	if(this.effect.dpPierce)  Text.AddDiv("Pierce.Def: "  + this.effect.dpPierce,  null, "itemName");
@@ -164,7 +164,7 @@ Item.prototype.ShowEquipStats = function() {
 	if(this.effect.dmDark)    Text.AddDiv("Dark.Def: "    + this.effect.dmDark,    null, "itemName");
 	if(this.effect.dmNature)  Text.AddDiv("Nature.Def: "  + this.effect.dmNature,  null, "itemName");
 	if(this.effect.dlust)     Text.AddDiv("Lust.Def: "    + this.effect.dlust,     null, "itemName");
-	
+
 	if(this.effect.maxHp)        Text.AddDiv("HP: "  + this.effect.maxHp,        null, "itemName");
 	if(this.effect.maxSp)        Text.AddDiv("SP: "  + this.effect.maxSp,        null, "itemName");
 	if(this.effect.maxLust)      Text.AddDiv("LP: "  + this.effect.maxLust,      null, "itemName");

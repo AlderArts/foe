@@ -49,12 +49,12 @@ world.loc.Plains.Nomads.Fireplace.events.push(new Link(
 		Text.NL();
 		Text.Add(Text.BoldColor("END PLACEHOLDER TEXT"));
 		Text.NL();
-		
+
 		var players = [player, rosalin, cale];
 		var g = new Cavalcade(players, {bet: 5});
 		g.PrepGame();
 		*/
-		
+
 		Text.Clear();
 		Text.Add("You round up the mismatched trio and ask them if they are up for a game of Cavalcade.");
 		Text.NL();
@@ -70,7 +70,7 @@ Scenes.NomadsCavalcade.RegularGame = function() {
 		playername : player.name,
 		hisher     : rosalin.hisher()
 	};
-	
+
 	if(estevan.flags["cav"] == 0) {
 		estevan.flags["cav"] = 1;
 		Text.Add("<i>“Alright, I’m gonna assume this is the first time you are playing this game, [playername],”</i> Estevan says as he pulls out a deck of old cards. He expertly shuffles and flares the deck, showing you the cards. <i>“There are fifteen cards split up into three different suits; Light, Darkness and Shadow.”</i>", parse);
@@ -103,12 +103,12 @@ Scenes.NomadsCavalcade.RegularGame = function() {
 		Text.Add("<i>“Sure, I’m up for it!”</i> Cale rubs his hands together eagerly. Rosalin nods, settling down beside you on the log. Estevan pulls out the deck, shuffling it a few times.", parse);
 	}
 	Text.NL();
-	
+
 	// TODO: Other triggers?
 	if(estevan.flags["Cheat"] >= Estevan.Cheat.Talked) {
 		Text.Add("<i>“So, what are the stakes?”</i> the satyr asks innocently.", parse);
 		Text.Flush();
-		
+
 		//[Coin game][Sexy game]
 		var options = new Array();
 		options.push({ nameStr : "Coin game",
@@ -130,7 +130,7 @@ Scenes.NomadsCavalcade.RegularGame = function() {
 	else {
 		Text.Add("<i>“Here we go then!”</i> the satyr says as he starts dealing out cards.", parse);
 		Text.Flush();
-		
+
 		Gui.NextPrompt(function() {
 			Text.Clear();
 			Scenes.NomadsCavalcade.PrepCoinGame();
@@ -143,16 +143,16 @@ Scenes.NomadsCavalcade.PrepCoinGame = function() {
 		var parse = {
 			playername : player.name
 		};
-		
+
 		SetGameState(GameState.Event);
-		
+
 		world.TimeStep({minute: 5});
-		
+
 		Text.NL();
 		if(Scenes.NomadsCavalcade.Enabled()) {
 			Text.Add("<i>“Do you want to go for another game, [playername]?”</i> the satyr asks, shuffling the deck.", parse);
 			Text.Flush();
-			
+
 			//[Sure][Nah]
 			var options = new Array();
 			options.push({ nameStr : "Sure",
@@ -167,7 +167,7 @@ Scenes.NomadsCavalcade.PrepCoinGame = function() {
 					Text.Clear();
 					Text.Add("<i>“Alright, see you around!”</i> Your group disperses, each person going about their own business.", parse);
 					Text.Flush();
-					
+
 					Gui.NextPrompt();
 				}, enabled : true,
 				tooltip : "Nah, this is enough Cavalcade for now."
@@ -177,16 +177,16 @@ Scenes.NomadsCavalcade.PrepCoinGame = function() {
 		else {
 			Text.Add("<i>“It’s getting late, I need to get some sleep if I’m gonna be on time to check my traps tomorrow morning,”</i> Estevan yawns, gathering up the cards. <i>“If you want another game later, just holler.”</i>", parse);
 			Text.Flush();
-			
+
 			Gui.NextPrompt();
 		}
 	}
-	
+
 	player.purse  = party;
 	estevan.purse = { coin: 100 };
 	cale.purse    = { coin: 100 };
 	rosalin.purse = { coin: 100 };
-	
+
 	var players = [player, estevan, rosalin, cale];
 	var g = new Cavalcade(players, {bet    : Scenes.NomadsCavalcade.Bet(),
 		                            onPost : onEnd});
@@ -204,30 +204,30 @@ Scenes.NomadsCavalcade.PlayersLeft = function(players) {
 
 Scenes.NomadsCavalcade.PrepSexyGame = function() {
 	var token = 50;
-	
+
 	var parse = {
 		playername : player.name,
 		coin : Text.NumToText(token)
 	};
-	
+
 	player.purse  = { coin: token };
 	estevan.purse = { coin: token };
 	cale.purse    = { coin: token };
 	rosalin.purse = { coin: token };
-	
+
 	var players = [player, estevan, rosalin, cale];
-	
+
 	var onEnd = function() {
 		Text.NL();
 		world.TimeStep({minute: 5});
-		
+
 		var onLoss = function() {
 			if(Scenes.NomadsCavalcade.PlayersLeft(players) <= 1)
 				onEnd();
 			else {
 				Text.Add("The satyr starts dealing out cards to the remaining players.", parse);
 				Text.NL();
-				
+
 				var name;
 				var scenes = new EncounterTable();
 				scenes.AddEnc(function() {
@@ -246,19 +246,19 @@ Scenes.NomadsCavalcade.PrepSexyGame = function() {
 					rosalin.out = true;
 				}, cale.purse.coin, function() { return !cale.out; });
 				scenes.Get();
-				
+
 				parse["name"] = name;
 				world.TimeStep({minute: 15});
 				Text.Add("The game goes on for a while longer, eventually ending up with [name] as the winner.", parse);
-				
+
 				onEnd();
 			}
 		}
-		
+
 		for(var i = 0; i < players.length; i++) {
 			var p = players[i];
 			if(p.out) continue;
-			
+
 			// Remove bankrupt players
 			if(p.purse.coin <= 0) {
 				if(p == player) {
@@ -283,7 +283,7 @@ Scenes.NomadsCavalcade.PrepSexyGame = function() {
 				Text.NL();
 			}
 		}
-		
+
 		if(Scenes.NomadsCavalcade.PlayersLeft(players) <= 1) {
 			var next = null;
 			if     (!player.out)  next = Scenes.NomadsCavalcade.SexyPlayerWin;
@@ -293,7 +293,7 @@ Scenes.NomadsCavalcade.PrepSexyGame = function() {
 			else {
 				Text.Add("THIS IS A BUG. WINNER IS BROKEN.", parse);
 			}
-			
+
 			Text.Flush();
 			Gui.NextPrompt(function() {
 				next(false); // TODO CHEAT
@@ -310,7 +310,7 @@ Scenes.NomadsCavalcade.PrepSexyGame = function() {
 				Text.Clear();
 				var bet = Scenes.NomadsCavalcade.Bet() * (5 - Scenes.NomadsCavalcade.PlayersLeft(players));
 				var g = new Cavalcade(players, {bet    : bet,
-					                            token  : "token",
+				                                token  : "token",
 				                                onPost : onEnd});
 				g.PrepGame(true);
 				g.NextRound();
@@ -325,12 +325,12 @@ Scenes.NomadsCavalcade.PrepSexyGame = function() {
 				Text.Clear();
 				Text.Add("<i>“Had enough?”</i> Estevan quips. <i>“That counts as an automatic loss, by the way.”</i>", parse);
 				Text.NL();
-				
+
 				onLoss();
 			}, true);
 		}
 	}
-	
+
 	if(estevan.flags["cav"] < 2) {
 		Text.Add("<i>“I sure am!”</i> Cale rubs his hands together, eagerly.", parse);
 		Text.NL();
@@ -342,10 +342,10 @@ Scenes.NomadsCavalcade.PrepSexyGame = function() {
 	}
 	Text.Add("<i>“Okay. Well play a set of games using these tokens,”</i> Estevan says, handing out the fake coins, [coin] each. <i>“The starting bet goes up each time someone drops out. Last one standing is the winner, and they get to do whatever they want with any one of the losers.”</i>", parse);
 	Text.Flush();
-	
+
 	Gui.NextPrompt(function() {
 		Text.Clear();
-		
+
 		var g = new Cavalcade(players, {bet    : Scenes.NomadsCavalcade.Bet(),
 			                            token  : "token",
 		                                onPost : onEnd});
@@ -357,22 +357,22 @@ Scenes.NomadsCavalcade.PrepSexyGame = function() {
 Scenes.NomadsCavalcade.CheatGame = function() {
 	var cocksInAss = player.CocksThatFit(cale.Butt());
 	var p1cock = player.BiggestCock(cocksInAss);
-	
+
 	var racescore = new RaceScore(rosalin.body);
 	var compScore = rosalin.origRaceScore.Compare(racescore);
-		
+
 	var parse = {
 		playername : player.name,
 		racedesc   : function() { return rosalin.raceDesc(compScore); },
 		cockDesc   : function() { return p1cock.Short(); },
 		cockTip    : function() { return p1cock.TipShort(); }
 	};
-	
+
 	estevan.flags["Cheat"] = Estevan.Cheat.Triggered;
 	var virgin = cale.Butt().virgin;
-	
+
 	world.TimeStep({hour: 1});
-	
+
 	Text.Add("<i>“I sure am!”</i> Cale rubs his hands together, eagerly.", parse);
 	Text.NL();
 	Text.Add("<i>“Actually, I’ll sit this one out,”</i> Estevan replies, winking at you. <i>“I can deal though.”</i>", parse);
@@ -380,7 +380,7 @@ Scenes.NomadsCavalcade.CheatGame = function() {
 	Text.Add("<i>“Scared of being robbed blind, goat-boy?”</i> the wolf mocks the satyr.", parse);
 	Text.NL();
 	Text.Add("Actually, that won’t be a problem in this game, you hop in. ", parse);
-	
+
 	if(estevan.flags["cav"] == 1) {
 		Text.Add("Cale raises his eyebrows as you explain the premise of the faux game. <i>“So the winner gets to ask a favor of one of the losers? Sounds interesting.”</i> That’s not all of it. You continue to explain the sexual nature of the favors you had in mind. A slow grin spreads across the wolf’s face.", parse);
 		Text.NL();
@@ -394,7 +394,7 @@ Scenes.NomadsCavalcade.CheatGame = function() {
 	Text.NL();
 	Text.Add("<i>“I’m sure you’ll do just fine without me,”</i> the satyr glibly replies, carefully shuffling the deck. <i>“Let’s go then, shall we?”</i> He hands out a set of tokens to each player, followed by your starting hand.", parse);
 	Text.Flush();
-	
+
 	Gui.NextPrompt(function() {
 		Text.Clear();
 		Text.Add("You are pretty impressed by the way that Estevan handles the game. He doesn’t deal any obvious cheats, and at times you aren’t even dealt a good enough hand to go on with, forcing you to fold. Still, after a while the trend of the game is clear; Rosalin is losing, with Cale having a slight lead over you. The wolf looks very excited, unaware of Estevan’s mocking grin. For a while, you have a creeping feeling that the satyr is making a joke on <i>you</i> instead, but that changes soon enough.", parse);
@@ -405,12 +405,12 @@ Scenes.NomadsCavalcade.CheatGame = function() {
 		Text.NL();
 		Text.Add("Smiling, you drop your cards, revealing the Priestess of Light and the Stud of Light, trumping him with a true full Cavalcade. <i>“God DAMNIT!”</i> Cale yells, throwing his hands in the air in frustration. <i>“Fine, you win, you win! And here I thought I would get some quality time with Rosie. Fine, she’s yours.”</i>", parse);
 		Text.Flush();
-		
+
 		Gui.NextPrompt(function() {
 			Text.Clear();
 			Text.Add("Not so fast. You thoroughly enjoy the wolf’s expression slowly change as you explain exactly what you had in mind. You don’t want Rosalin, you want Cale. And you’ll be the one fucking him. In the butt.", parse);
 			Text.NL();
-			
+
 			if(virgin) {
 				Text.Add("<i>“Wait- WHAT?!”</i> Cale looks around him bewildered. <i>“B-but...”</i> No buts. Just his butt.", parse);
 				if(player.Gender() == Gender.female || cocksInAss.length == 0) {
@@ -498,12 +498,12 @@ Scenes.NomadsCavalcade.CheatGame = function() {
 				Text.NL();
 				Text.Add("<i>“No one can resist the Cale, you know it goat-boy!”</i> Cale quips mockingly over his shoulder, shaking his ass at you enticingly.", parse);
 			}
-			
+
 			Text.NL();
 			parse["uncertainly"] = cale.Slut() >= 60 ? "eagerly" : "uncertainly";
 			Text.Add("Not wasting any time, you pull down his pants, baring his round butt and tight rosebud. The wolf raises his tail [uncertainly], allowing you full access.", parse);
 			Text.NL();
-			
+
 			Scenes.Cale.SexFuckHim(true, {cavalcade: true, cheat: true});
 		});
 	});
@@ -514,9 +514,9 @@ Scenes.NomadsCavalcade.SexyPlayerWin = function(cheat) {
 	var parse = {
 		playername : player.name
 	};
-	
+
 	SetGameState(GameState.Event);
-	
+
 	Text.Clear();
 	Text.Add("<i>“Well played, [playername]!”</i> Estevan congratulates you.", parse);
 	Text.NL();
@@ -524,9 +524,9 @@ Scenes.NomadsCavalcade.SexyPlayerWin = function(cheat) {
 	Text.NL();
 	Text.Add("<i>“So, what are you going to do for your reward?”</i> Rosalin asks curiously.", parse);
 	Text.Flush();
-	
+
 	var caleCockInAss = player.CocksThatFit(cale.Butt());
-	
+
 	//[Fuck Cale][Nothing]
 	var options = new Array();
 	/* TODO
@@ -544,9 +544,9 @@ Scenes.NomadsCavalcade.SexyPlayerWin = function(cheat) {
 		options.push({ nameStr : "Fuck Cale",
 			func : function() {
 				var virgin = cale.Butt().virgin;
-				
+
 				cale.flags["cLoss"]++;
-				
+
 				Text.Clear();
 				if(virgin) {
 					Text.Add("<i>“Wait- WHAT?!”</i> Cale looks around him bewildered. <i>“B-but...”</i> No buts. Just his butt.", parse);
@@ -578,7 +578,7 @@ Scenes.NomadsCavalcade.SexyPlayerWin = function(cheat) {
 				parse["uncertainly"] = cale.Slut() >= 30 ? "eagerly" : "uncertainly";
 				Text.Add("Not wasting any time, you pull down his pants, baring his round butt and [tight] rosebud. The wolf raises his tail [uncertainly], allowing you full access.", parse);
 				Text.NL();
-				
+
 				Scenes.Cale.SexFuckHim(true, {cavalcade : true, cheat: cheat})
 			}, enabled : true,
 			tooltip : "Bend the wolf over and make him your bitch."
@@ -598,7 +598,7 @@ Scenes.NomadsCavalcade.SexyPlayerWin = function(cheat) {
 			Text.NL();
 			Text.Add("Your group disperses, each person going about their own business.", parse);
 			Text.Flush();
-			
+
 			Gui.NextPrompt();
 		}, enabled : true,
 		tooltip : "You are feeling generous for now, let them off the hook."
@@ -609,9 +609,9 @@ Scenes.NomadsCavalcade.SexyPlayerWin = function(cheat) {
 //TODO
 Scenes.NomadsCavalcade.SexyEstevanWin = function(cheat) {
 	var parse = {
-		
+
 	};
-	
+
 	Text.Clear();
 	Text.Add("PLACEHOLDER", parse);
 	Text.NL();
@@ -624,9 +624,9 @@ Scenes.NomadsCavalcade.SexyEstevanWin = function(cheat) {
 //TODO
 Scenes.NomadsCavalcade.SexyCaleWin = function(cheat) {
 	var parse = {
-		
+
 	};
-	
+
 	Text.Clear();
 	Text.Add("PLACEHOLDER", parse);
 	Text.NL();
@@ -639,9 +639,9 @@ Scenes.NomadsCavalcade.SexyCaleWin = function(cheat) {
 //TODO
 Scenes.NomadsCavalcade.SexyRosalinWin = function(cheat) {
 	var parse = {
-		
+
 	};
-	
+
 	Text.Clear();
 	Text.Add("PLACEHOLDER", parse);
 	Text.NL();

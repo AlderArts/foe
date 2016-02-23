@@ -1,7 +1,7 @@
 /*
- * 
+ *
  * Define Lei
- * 
+ *
  */
 // TODO: FIX STATS
 function Lei(storage) {
@@ -9,9 +9,9 @@ function Lei(storage) {
 	this.ID = "lei";
 	// Character stats
 	this.name = "Lei";
-	
+
 	this.avatar.combat     = Images.lei;
-	
+
 	this.maxHp.base        = 460;
 	this.maxSp.base        = 200;
 	this.maxLust.base      = 220;
@@ -23,10 +23,10 @@ function Lei(storage) {
 	this.spirit.base       = 30;
 	this.libido.base       = 19;
 	this.charisma.base     = 35;
-	
+
 	this.level    = 15;
 	this.sexlevel = 5;
-	
+
 	this.body.DefMale();
 	this.body.height.base      = 181;
 	this.body.weigth.base      = 80;
@@ -34,28 +34,28 @@ function Lei(storage) {
 	this.body.head.hair.length.base = 20;
 	this.body.head.hair.style  = HairStyle.ponytail;
 	this.body.head.eyes.color  = Color.black;
-	
+
 	this.Butt().virgin = true;
-	
+
 	this.SetLevelBonus();
 	this.RestFull();
-	
+
 	this.flags["Met"] = Lei.Met.NotMet;
 	this.flags["ToldOrvin"] = 0;
 	this.flags["HeardOf"] = 0;
 	this.flags["Fought"] = Lei.Fight.No;
 	this.flags["Talk"] = 0; //Bitmask
 	this.flags["SexOpen"] = 0; //Toggle
-	
+
 	this.flags["T1"] = 0; //Bitmask, job 1
-	
+
 	this.annoyance = new Stat(0);
 	this.pastRotation = 0;
-	
+
 	this.timeout = new Time();
 	this.taskTimer = new Time();
 	this.sparTimer = new Time();
-	
+
 	if(storage) this.FromStorage(storage);
 }
 Lei.prototype = new Entity();
@@ -106,7 +106,7 @@ Lei.prototype.SexOpen = function() {
 
 Lei.prototype.Update = function(step) {
 	Entity.prototype.Update.call(this, step);
-	
+
 	this.timeout.Dec(step);
 	this.taskTimer.Dec(step);
 	this.sparTimer.Dec(step);
@@ -115,27 +115,27 @@ Lei.prototype.Update = function(step) {
 Lei.prototype.FromStorage = function(storage) {
 	this.LoadPersonalityStats(storage);
 	this.annoyance.base = parseInt(storage.ann)  || this.annoyance.base;
-	
+
 	this.timeout.FromStorage(storage.timeout);
 	this.taskTimer.FromStorage(storage.tt);
 	this.sparTimer.FromStorage(storage.st);
-	
+
 	// Load flags
 	this.LoadFlags(storage);
 }
 
 Lei.prototype.ToStorage = function() {
 	var storage = {};
-	
+
 	this.SavePersonalityStats(storage);
 	if(this.annoyance.base != 0) storage.ann = this.annoyance.base.toFixed();
-	
+
 	this.SaveFlags(storage);
-	
+
 	storage.timeout = this.timeout.ToStorage();
 	storage.tt = this.taskTimer.ToStorage();
 	storage.st = this.sparTimer.ToStorage();
-	
+
 	return storage;
 }
 
@@ -145,9 +145,9 @@ Lei.Spar = function(levelbonus) {
 	Entity.call(this);
 	// Character stats
 	this.name = "Lei";
-	
+
 	this.avatar.combat     = Images.lei;
-	
+
 	this.maxHp.base        = 460;
 	this.maxSp.base        = 200;
 	this.maxLust.base      = 220;
@@ -159,12 +159,12 @@ Lei.Spar = function(levelbonus) {
 	this.spirit.base       = 30;
 	this.libido.base       = 19;
 	this.charisma.base     = 35;
-	
+
 	this.level    = 15 + levelbonus;
 	this.sexlevel = 5;
-	
+
 	this.combatExp         = this.level + 5;
-	
+
 	this.body.DefMale();
 	this.body.height.base      = 181;
 	this.body.weigth.base      = 80;
@@ -172,9 +172,9 @@ Lei.Spar = function(levelbonus) {
 	this.body.head.hair.length.base = 20;
 	this.body.head.hair.style  = HairStyle.ponytail;
 	this.body.head.eyes.color  = Color.black;
-	
+
 	this.Butt().virgin = true;
-	
+
 	this.SetLevelBonus();
 	this.RestFull();
 }
@@ -185,7 +185,7 @@ Lei.Spar.prototype.Act = function(encounter, activeChar) {
 	// TODO: Very TEMP
 	Text.Add(this.name + " acts! Chop chop!");
 	Text.NL();
-	
+
 	// Pick a random target
 	var targets = this.GetPartyTarget(encounter, activeChar);
 	var t = this.GetSingleTarget(encounter, activeChar);
@@ -220,8 +220,8 @@ Lei.prototype.IsAtLocation = function(location) {
 Lei.prototype.Interact = function() {
 	Text.Clear();
 	Text.Add("Rawr Imma stabbitystab.");
-	
-	
+
+
 	if(DEBUG) {
 		Text.NL();
 		Text.Add(Text.BoldColor("DEBUG: relation: " + lei.relation.Get()));
@@ -231,7 +231,7 @@ Lei.prototype.Interact = function() {
 		Text.Add(Text.BoldColor("DEBUG: slut: " + lei.slut.Get()));
 		Text.NL();
 	}
-	
+
 	Text.Flush();
 	Gui.NextPrompt(function() {
 		PartyInteraction();
@@ -240,9 +240,9 @@ Lei.prototype.Interact = function() {
 
 Scenes.Lei.InnApproach = function() {
 	var parse = {
-		
+
 	};
-	
+
 	if(lei.flags["Met"] == Lei.Met.EscortFinished)
 		Scenes.Lei.Tasks.Escort.Debrief();
 	//TODO More job debriefs
@@ -253,7 +253,7 @@ Scenes.Lei.InnApproach = function() {
 			parse["comp"] = ", motioning for your companions to take seats nearby";
 		else
 			parse["comp"] = "";
-			
+
 		Text.Clear();
 		Text.Add("You walk over to Lei’s table, and pull up a chair[comp]. He ", parse);
 		if(lei.Relation() < Lei.Rel.L2)
@@ -263,29 +263,29 @@ Scenes.Lei.InnApproach = function() {
 		else
 			Text.Add("greets you with a smile, evidently pleased to see you.", parse);
 		Text.Flush();
-		
+
 		Scenes.Lei.InnPrompt();
 	}
 }
 
 Scenes.Lei.InnPrompt = function() {
 	var parse = {
-		
+
 	};
-	
+
 	var options = new Array();
 	//PRE KRAWITZ
 	if(rigard.Krawitz["Q"] >= Rigard.KrawitzQ.Started && rigard.Krawitz["Q"] < Rigard.KrawitzQ.HeistDone) {
 		options.push({ nameStr : "Krawitz",
 			func : function() {
 				Text.Clear();
-				
+
 				//rigard.Krawitz["Duel"] = 0; // 0 = no, 1 = superwin, 2 = win, 3 = loss
 				var duel  = rigard.Krawitz["Duel"];
 				var hired = rigard.Krawitz["Work"] == 1;
-				
+
 				parse["progress"] = ((duel != 0) || hired) ? ", telling him about your progress so far" : "";
-				
+
 				Text.Add("You ask Lei if he has any ideas for dealing with Krawitz[progress].", parse);
 				Text.NL();
 				if(duel > 0) {
@@ -353,7 +353,7 @@ Scenes.Lei.InnPrompt = function() {
 				Text.Clear();
 				Text.Add("<i>“Ask away, though I make no promises of answering.”</i>", parse);
 				Text.Flush();
-				
+
 				Scenes.Lei.TalkPrompt();
 			}, enabled : true,
 			tooltip : "You want to ask him some things."
@@ -375,7 +375,7 @@ Scenes.Lei.InnPrompt = function() {
 					Text.NL();
 					Text.Add("<i>“What would you like to do today?”</i>", parse);
 					Text.Flush();
-					
+
 					Scenes.Lei.SparPrompt();
 				}, enabled : true,
 				tooltip : "Ask him to help you improve your skills."
@@ -391,7 +391,7 @@ Scenes.Lei.InnPrompt = function() {
 					Text.Clear();
 					Text.Add("<i>“Do go on.”</i> Lei studies you with an unreadable expression.", parse);
 					Text.Flush();
-					
+
 					Scenes.Lei.SexPrompt();
 				}, enabled : true,
 				tooltip : "Ask the mercenary about matters carnal."
@@ -414,19 +414,19 @@ Scenes.Lei.InnPrompt = function() {
 
 Scenes.Lei.InnPromptFirst = function() {
 	var parse = {
-		
+
 	};
-	
+
 	if(party.Two())
 		parse["comp"] = " and " + party.Get(1).name;
 	else if(!party.Alone())
 		parse["comp"] = " and your companions";
 	else
 		parse["comp"] = "";
-	
+
 	Text.Clear();
 	var first = false;
-	
+
 	if(lei.flags["Met"] < Lei.Met.KnowName) {
 		world.TimeStep({minute: 5});
 		Text.Add("You approach the stranger. He definitely looks like the man you saw following the pair of hooded nobles earlier. His cloak is the same dusky shade, and he has the hood drawn up, casting his face into shadow, raising your suspicions. Up close, you notice that underneath he’s wearing some sort of black form-fitting armor, nicely emphasizing his well-muscled body. When you reach his table, he looks up at you, running his eyes over you methodically.", parse);
@@ -445,7 +445,7 @@ Scenes.Lei.InnPromptFirst = function() {
 				strongestMember = party.members[i];
 			}
 		}
-		
+
 		if(playerLevel < Lei.PartyStrength.LEVEL_WEAK && strongestLevel >= Lei.PartyStrength.LEVEL_STRONG) {
 			parse["heshe"] = strongestMember.heshe();
 			parse["name"] = strongestMember.name;
@@ -492,20 +492,20 @@ Scenes.Lei.InnPromptFirst = function() {
 		Text.NL();
 		Text.Add("Lei’s eloquence is apparently exhausted, so maybe it’s a good time to ask him the things you wanted.", parse);
 		Text.Flush();
-		
+
 		lei.flags["Met"] = Lei.Met.KnowName;
 		first = true;
 	}
 	else { // lei.flags["Met"] == Lei.Met.KnowName;
 		Text.Add("Lei’s back to his old seat. Now might be a good time to figure out why he was following the couple from the royal district, or see if you can get a lead to actually finding them.", parse);
- 		Text.Flush();
- 	}
- 	
+		Text.Flush();
+	}
+
 	var options = new Array();
 	options.push({ nameStr : "Confront",
 		func : function() {
 			Text.Clear();
-			
+
 			if(party.Two())
 				parse["comp"] = party.Get(1).name + " a reassuring presence behind you, ";
 			else if(!party.Alone())
@@ -538,11 +538,11 @@ Scenes.Lei.InnPromptFirst = function() {
 				Text.NL();
 				Text.Add("<i>“No.”</i> You look at him incredulously. You demand if that's all he's going to say for himself. <i>“It is,”</i> he tells you. <i>“Now, unless you intend to force me, please stop blocking my view.”</i>", parse);
 			}
-			
+
 			Text.Add(" He raises one eyebrow quizzically.", parse);
 			lei.relation.DecreaseStat(-15, 1);
 			Text.Flush();
-			
+
 			//[Fight][Bribe][Observe]
 			var FightPrompt = function() {
 				var options = new Array();
@@ -554,7 +554,7 @@ Scenes.Lei.InnPromptFirst = function() {
 						if(player.level < Lei.PartyStrength.LEVEL_WEAK) {
 							Text.Add("<i>“Very well, let's get this over with.”</i> Lei looks bored, like your challenge has just made him sleepier. <i>“I warn you, <b>you will lose</b>.”</i> The last words ring oddly as he speaks them, making the air tremble as if they had the force of an avalanche, instead of being spoken softly as they had been to your ears.", parse);
 							Text.Flush();
-							
+
 							//[Fight][Observe]
 							var options = new Array();
 							options.push({ nameStr : "Fight",
@@ -562,7 +562,7 @@ Scenes.Lei.InnPromptFirst = function() {
 									Text.NL();
 									Text.Add("You decide it doesn't matter how menacing he makes himself sound. You'll take him on and make him tell you what you want to know.", parse);
 									Text.NL();
-									
+
 									Scenes.Lei.BarFight();
 								}, enabled : true,
 								tooltip : "His confidence only serves to anger you further, and you resolve to fight."
@@ -576,7 +576,7 @@ Scenes.Lei.InnPromptFirst = function() {
 									Text.NL();
 									Text.Add("You stalk off from him, trying to contain your embarrassment and your fury, and decide that you'll watch him for now and ferret out whatever his secret might be that way.", parse);
 									Text.NL();
-									
+
 									Scenes.Lei.ObserveMain();
 								}, enabled : true,
 								tooltip : "You decide that watching him might be better than trying to fight."
@@ -603,7 +603,7 @@ Scenes.Lei.InnPromptFirst = function() {
 						Text.NL();
 						Text.Add("<i>“How unexpected,”</i> he remarks. <i>“Very well, I will accept four hundred coins in exchange for an explanation that will resolve your concerns regarding the couple one way or the other.”</i>", parse);
 						Text.Flush();
-						
+
 						//[Pay][Nevermind][Observe]
 						var options = new Array();
 						options.push({ nameStr : "Pay",
@@ -666,7 +666,7 @@ Scenes.Lei.InnPromptFirst = function() {
 			Text.Clear();
 			Text.Add("On second thought, you decide, it's probably not worth bothering with him just now. The issue of him and the couple can wait until later.", parse);
 			Text.Flush();
-			
+
 			Gui.NextPrompt();
 		}, enabled : true,
 		tooltip : "You don’t feel quite ready to deal with his stalking yet. Perhaps you’ll come back to it another time."
@@ -676,11 +676,11 @@ Scenes.Lei.InnPromptFirst = function() {
 
 Scenes.Lei.ExplanationMain = function() {
 	var parse = {
-		
+
 	};
-	
+
 	Text.Clear();
-	
+
 	Text.Add("<i>“Ask what you will,”</i> Lei tells you.", parse);
 	Text.NL();
 	Text.Add("Deciding to get right to the point, you ask him why he was following the couple when they left the inner district.", parse);
@@ -716,7 +716,7 @@ Scenes.Lei.ExplanationMain = function() {
 	Text.NL();
 	Text.Add("You also can’t help but wonder who they are to merit such a guardian.", parse);
 	Text.Flush();
-	
+
 	//[Wait][Nah]
 	var options = new Array();
 	options.push({ nameStr : "Wait",
@@ -735,9 +735,9 @@ Scenes.Lei.ExplanationMain = function() {
 			parse["paid"] = (lei.flags["Fought"] == Lei.Fight.No) ? "bribed" : "fought";
 			Text.Add("Ahead of you, the couple turns down a narrow alleyway and you follow after them along with Lei. They look at him in question and he explains that you wanted to meet them, and how you had [paid] him for an explanation. To your surprise, he even provides a short summary of what you told him about yourself, and why you wanted to see them.", parse);
 			Text.NL();
-			
+
 			// TODO: Twins relationship ++
-			
+
 			Text.Add("<i>“Oh, I see, I see!”</i> the man exclaims, his voice light and melodious. <i>“So now you're really curious who would have someone like Lei for a guard.”</i> He pauses for a few moments, thinking, tapping his finger against his lips cutely. Now probably wouldn’t be the best time to say that you actually just wanted to see if they could get you into the castle grounds. <i>“Well, I can't very well just tell you when Lei got <b>his</b> price from you.”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“Tell you what, prove that you're worthy of trust, and we'll tell you who we are. And maybe we'll have a few small jobs for you afterward, and, of course, we are always happy to recompense someone who helps us... whether with money, or-”</i> he gives his companion's rump a playful squeeze, and she lets out a squeal, <i>“-favors.”</i>", parse);
@@ -758,7 +758,7 @@ Scenes.Lei.ExplanationMain = function() {
 			Text.Clear();
 			Text.Add("You decide that with at least the small mystery of what Lei was doing resolved, you can return to your other affairs for now. Trying to get into the castle can wait a bit.", parse);
 			Text.Flush();
-			
+
 			Gui.NextPrompt();
 		}, enabled : false, //TODO TEMP
 		tooltip : "The couple is safe, and you have other things to do. Maybe you'll meet them another time."
@@ -771,7 +771,7 @@ Scenes.Lei.ObserveMain = function(first) {
 	var parse = {
 		drink : party.Alone() ? "a drink" : "some drinks"
 	};
-	
+
 	if(party.Two()) {
 		parse["comp"]  = " with " + party.Get(1).name;
 		parse["comp2"] = ", while chatting idly with " + party.Get(1).name;
@@ -784,7 +784,7 @@ Scenes.Lei.ObserveMain = function(first) {
 		parse["comp"]  = "";
 		parse["comp2"] = "";
 	}
-	
+
 	if(first) {
 		Text.Add("Somehow, after talking to the man, you don’t feel like asking him after all. He probably wouldn’t answer anyway - it’ll be easier to find out for yourself.", parse);
 		Text.NL();
@@ -795,7 +795,7 @@ Scenes.Lei.ObserveMain = function(first) {
 	else {
 		Text.Add("Taking a seat, you settle in to wait for Lei to make a move, and", parse);
 	}
-	
+
 	Text.Add(" order [drink]. Some time passes, while you keep watch of his general vicinity to make sure he hasn't moved[comp2]. You aren't quite sure if he's noticed you observing him or not, as his eyes keep drifting generally over the crowd in an unchanged pattern.", parse);
 	Text.NL();
 
@@ -805,7 +805,7 @@ Scenes.Lei.ObserveMain = function(first) {
 	Text.NL();
 	Text.Add("To your surprise, you find that the young man and woman are wearing modest clothes - gray woolens better suited to poor commoners rather than the rich garments you expected to see. Despite that, their proud bearing and the unusual blazing red of their hair somehow makes you feel like they’re more than their dress suggests.", parse);
 	Text.NL();
-	
+
 	if(party.Two())
 		parse["comp"] = "and your companion ";
 	else if(!party.Alone())
@@ -813,7 +813,7 @@ Scenes.Lei.ObserveMain = function(first) {
 	else
 		parse["comp"] = "";
 	//{and your companions }
-	
+
 	Text.Add("As they pass by Lei, he again follows. By the time you remember you were supposed to talk to them and perhaps warn them about their stalker, they are most of the way to the door, and you hurry to catch up, pushing through the crowded common room.", parse);
 	Text.NL();
 	Text.Add("You make it through the door a little after Lei, and, spotting him walking down the street toward the lower sections of the city, hurry after him. You consider rushing past him toward the pair, but feel a tinge of worry at the idea. He would probably try to stop you, and you’re not sure you want to cross him without a good reason. Better to watch for now.", parse);
@@ -840,17 +840,17 @@ Scenes.Lei.ObserveMain = function(first) {
 	Text.NL();
 	Text.Add("Well, it’s not quite a promise, but it seems like a good lead. Besides, you can’t help but feel curious as to who these two are. You ask what he wants you to do for this trial errand.", parse);
 	Text.Flush();
-	
+
 	Gui.NextPrompt(Scenes.Lei.RequestMain);
 }
 
 Scenes.Lei.RequestMain = function() {
 	Text.Clear();
-	
+
 	var parse = {
-		
+
 	};
-	
+
 	Text.Add("<i>“Well, we have this fencing tutor, you see. Lord Krawitz is his name, and he's always been a pompous old goat, but lately he's become simply intolerable. Just the other day my... ah, lover,”</i> he says, correcting himself at the last moment, <i>“asked him what the proper response to a Metrind parry was, and he launched into a half hour rant about how the proper response to everything was focus. That fencing is an art of the mind, not simple patterns of the body.”</i> He waves his hands in disgust and dismissal.", parse);
 	Text.NL();
 	Text.Add("<i>“Unfortunately, we can't tell the stuck-up jackass what we think of him to his face, so, I'd like you to get us a little payback for all the annoyance he's caused us over the years. Nothing drastic mind you, but I want him to suffer.”</i> The man's grin looks a little scary as he says this. <i>“To be humiliated publicly, shamed, have his reputation destroyed, that sort of thing.”</i> At his side, his companion seems to smile shyly and give a slight nod at the idea.", parse);
@@ -859,11 +859,11 @@ Scenes.Lei.RequestMain = function() {
 	Text.NL();
 	Text.Add("He inclines his head slightly, accepting that, and asks if there's anything you'd like to know about Lord Krawitz.", parse);
 	Text.Flush();
-	
+
 	var talkedPersonality = false;
 	var talkedStatus = false;
 	var TalkPrompt = function() {
-		
+
 		//[Personality][Status][Nothing else]
 		var options = new Array();
 		if(!talkedPersonality) {
@@ -880,7 +880,7 @@ Scenes.Lei.RequestMain = function() {
 					Text.NL();
 					Text.Add("You nod at the explanation and wonder if that could be used to your advantage somehow.", parse);
 					Text.Flush();
-					
+
 					talkedPersonality = true;
 					TalkPrompt();
 				}, enabled : true,
@@ -897,7 +897,7 @@ Scenes.Lei.RequestMain = function() {
 					Text.NL();
 					Text.Add("You wonder who the pair is that they are so well acquainted with the ways of the upper classes, but decide to focus on your task for now.", parse);
 					Text.Flush();
-					
+
 					talkedStatus = true;
 					TalkPrompt();
 				}, enabled : true,
@@ -920,7 +920,7 @@ Scenes.Lei.RequestMain = function() {
 				// Start KrawitzQ
 				rigard.Krawitz["Q"] = Rigard.KrawitzQ.Started;
 				party.location = world.loc.Rigard.Plaza;
-				
+
 				Gui.NextPrompt();
 			}, enabled : true,
 			tooltip : "You know enough for now."
@@ -933,18 +933,18 @@ Scenes.Lei.RequestMain = function() {
 /* TODO Unused?
 Scenes.Lei.InnFirstPrompt = function() {
 	var parse = {
-		
+
 	};
-	
+
 	world.TimeStep({minute: 5});
-	
+
 	if(party.Two())
 		parse["comp"] = " and " + party.Get(1).name;
 	else if(!party.Alone())
 		parse["comp"] = " and your companions";
 	else
 		parse["comp"] = "";
-	
+
 	var options = new Array();
 	if(Scenes.Lei.InnFirstTalkedCastle == 0) {
 		options.push({ nameStr : "Castle",
@@ -968,7 +968,7 @@ Scenes.Lei.InnFirstPrompt = function() {
 			func : function() {
 				Text.Clear();
 				Text.Add("He seems quite strong, and although you don't know much about him, it wouldn't hurt to test the waters. You ask him if he'll accompany you on your travels.", parse);
-				
+
 				if(player.level >= Lei.PartyStrength.LEVEL_STRONG)
 					Text.Add("He looks at you with apparent interest. <i>“Perhaps... There is a chance that I may be interested in traveling with you. Unfortunately, just now I am preoccupied with other duties,”</i> he tells you, sounding genuinely regretful. <i>“Come and ask me again some time, and we will discuss it if you like.”</i>", parse);
 				else
@@ -1061,25 +1061,25 @@ Scenes.Lei.BarFight = function() {
 	else
 		Text.Add("<i>“Now, all of you come at me together!”</i>", parse);
 	Text.Flush();
-	
- 	var enemy = new Party();
+
+	var enemy = new Party();
 	enemy.AddMember(lei);
 	var enc = new Encounter(enemy);
-	
+
 	lei.RestFull();
-	
+
 	enc.canRun = false;
 	enc.onLoss = function() {
 		lei.RestFull();
 		party.RestFull();
 		SetGameState(GameState.Event);
-		
+
 		var downed = true;
 		for(var i = 0; i < party.members.length; i++) {
 			var e = party.members[i];
 			if(e.Incapacitated() == false) downed = false;
 		}
-		
+
 		Text.Clear();
 		if(downed) {
 			Text.Add("<i>“You challenge me and then you give up? Pathetic.”</i> Throwing the word at you like a verdict, Lei stalks off, returning to the tavern.", parse);
@@ -1092,14 +1092,14 @@ Scenes.Lei.BarFight = function() {
 			lei.flags["Fought"] = Lei.Fight.Loss;
 			parse["anyof"] = party.Alone() ? "" : "any of ";
 			parse["s"]     = party.Alone() ? "" : "s";
-			parse["comp"]  = party.Two()    ? " and " + party.Get(1).name : 
+			parse["comp"]  = party.Two()    ? " and " + party.Get(1).name :
 			                 !party.Alone() ? " and your companions" :
 			                 "";
 			Text.Add("Lei steps back from you and raises his hand. <i>“That is enough - I have no wish to kill [anyof]you. You have lost.”</i>", parse);
 			Text.NL();
 			Text.Add("As you[comp] are catching your breath[s], he turns to leave without saying anything further. You feel a bitter taste in your mouth, and it is not the blood from the blows he dealt you. Starting after him, you resolve that you <i>will</i> find out what the man is up to.", parse);
 			Text.Flush();
-			
+
 			var observe = { nameStr : "Observe",
 				func : function() {
 					Text.Clear();
@@ -1110,7 +1110,7 @@ Scenes.Lei.BarFight = function() {
 				}, enabled : true,
 				tooltip : "Go back to the tavern and watch him to see what he does."
 			}
-			
+
 			//[Attack][Observe] strike 1
 			var options = new Array();
 			options.push({ nameStr : "Attack",
@@ -1122,9 +1122,9 @@ Scenes.Lei.BarFight = function() {
 					Text.NL();
 					Text.Add("You glare at him, anger boiling up at the man.", parse);
 					Text.Flush();
-					
+
 					lei.relation.DecreaseStat(-100, 2);
-					
+
 					//[Attack][Observe] strike 2
 					var options = new Array();
 					options.push({ nameStr : "Attack",
@@ -1136,9 +1136,9 @@ Scenes.Lei.BarFight = function() {
 							Text.NL();
 							Text.Add("<i>“I say to you twice,”</i> he intones, <i>“the fight is over. <b>If your persist, you will die.</b>”</i> His words ring oddly hollow in the air, sending cold running through your veins.", parse);
 							Text.Flush();
-							
+
 							lei.relation.DecreaseStat(-100, 2);
-							
+
 							//[Attack][Observe] strike 3
 							var options = new Array();
 							options.push({ nameStr : "Attack",
@@ -1156,7 +1156,7 @@ Scenes.Lei.BarFight = function() {
 									Text.NL();
 									Text.Add("<i>“I say to you thrice,”</i> Lei speaks, sounding a little sad, <i>“the fight is over.”</i> He steps past your body, and walks back toward the tavern.", parse);
 									Text.NL();
-									
+
 									if(party.Two())
 										Text.Add("[p1name] stands over you, looking down in mute horror", parse);
 									else if(!party.Alone())
@@ -1169,7 +1169,7 @@ Scenes.Lei.BarFight = function() {
 									Text.NL();
 									Text.Add("<b>You have perished.</b>", parse);
 									Text.Flush();
-									
+
 									SetGameOverButton();
 								}, enabled : true,
 								tooltip : "You don't care what he threatens, attacking this man is the only thing that matters."
@@ -1195,12 +1195,12 @@ Scenes.Lei.BarFight = function() {
 		lei.RestFull();
 		party.RestFull();
 		SetGameState(GameState.Event);
-		
+
 		lei.flags["Fought"] = Lei.Fight.Win;
 		lei.relation.IncreaseStat(100, 2);
-		
+
 		parse["talk"] = player.level < Lei.PartyStrength.LEVEL_STRONG ? "I did not think you had it in you, to be honest. I am impressed," : "You are as strong as I had hoped... maybe stronger,";
-		
+
 		Text.Clear();
 		Text.Add("<i>“Mm... that's good enough for now. Wonderful,”</i> Lei almost purrs, smiling widely at you. <i>“[talk]”</i> he says, clearly pleased. <i>“Some day, we must fight in earnest.”</i>", parse);
 		Text.NL();
@@ -1208,7 +1208,7 @@ Scenes.Lei.BarFight = function() {
 		Text.Flush();
 		Gui.NextPrompt(Scenes.Lei.ExplanationMain);
 	}
-	
+
 	Gui.NextPrompt(function() {
 		enc.Start();
 	});
@@ -1219,7 +1219,7 @@ Scenes.Lei.TalkPrompt = function() {
 	var parse = {
 		playername : player.name
 	};
-	
+
 	var options = new Array();
 	if(!(lei.flags["Talk"] & Lei.Talk.Skills)) {
 		options.push({ nameStr : "Skills",
@@ -1240,12 +1240,12 @@ Scenes.Lei.TalkPrompt = function() {
 				Text.NL();
 				Text.Add("Lei grins widely in response, his eyes twinkling with amusement. <i>“Yes... yes, I think I could come up with something.”</i> The look on his face briefly makes you wonder if asking him was such a good idea. <i>“Give me a little while to think of the best approach to take, and we shall see if I can make you stronger.”</i>", parse);
 				Text.Flush();
-				
+
 				lei.flags["Talk"] |= Lei.Talk.Skills;
-				
+
 				//TODO
 				//#one-off, unlocks [Training]
-				
+
 				Scenes.Lei.TalkPrompt();
 			}, enabled : true
 		});
@@ -1275,16 +1275,16 @@ Scenes.Lei.TalkPrompt = function() {
 				Text.Add("He pauses for a moment, looking a bit guarded, before responding. ", parse);
 			Text.Add("<i>“Of course. What specifically would you like to know, [playername]?”</i>", parse);
 			Text.Flush();
-			
+
 			Scenes.Lei.TalkPastPrompt();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Bodyguarding",
 		tooltip : "Ask what kind of special tasks the royal twins assign him.",
 		func : function() {
-			
+
 			var first = !(lei.flags["Talk"] & Lei.Talk.Sex);
-			
+
 			Text.Clear();
 			Text.Add("So, Rumi mentioned that Lei performed some additional duties for the twins. What kind of things do they have him do, exactly?", parse);
 			Text.NL();
@@ -1304,23 +1304,23 @@ Scenes.Lei.TalkPrompt = function() {
 			Text.NL();
 			Text.Add("Well. Now that you consider it, that’s not very surprising, knowing those two, but you can’t help but feel a little curious about Lei’s attitude…", parse);
 			Text.Flush();
-			
+
 			if(first) {
 				var leaveIt = function() {
 					Text.Clear();
 					Text.Add("You decide you’ve learned all you wanted to know about that line of questioning for now. If you become interested in Lei’s sexual proclivities, you can always come back to the topic later.", parse);
 					Text.Flush();
-					
+
 					Scenes.Lei.TalkPrompt();
 				}
-				
+
 				//[Ask][Leave]#1
 				var options = new Array();
 				options.push({ nameStr : "Ask",
 					tooltip : "Ask Lei what he thinks about the twins’ acquisitions.",
 					func : function() {
 						lei.flags["Talk"] |= Lei.Talk.Sex;
-						
+
 						Text.Clear();
 						Text.Add("You awkwardly inquire if dildos and whips and ‘those sorts of things’ are so commonplace to Lei that they aren’t even worth remarking on.", parse);
 						Text.NL();
@@ -1330,7 +1330,7 @@ Scenes.Lei.TalkPrompt = function() {
 						Text.NL();
 						Text.Add("<i>“Not so many. I do not like to associate with those who are beneath me, so there are not many I would even consider.”</i> His voice is level, delivering what he sees as a statement of simple fact. <i>“And with those, there still needs to be clear mutual interest - perhaps even passion,”</i> he says, a note of skepticism creeping into his voice at the last word. <i>“When all of that is present, the encounters have been very enjoyable.”</i>", parse);
 						Text.Flush();
-						
+
 						if(lei.flags["SexOpen"] == 0) {
 							//[Offer][Leave]#2
 							var options = new Array();
@@ -1339,7 +1339,7 @@ Scenes.Lei.TalkPrompt = function() {
 								func : function() {
 									//TODO #set lei_sex_toggle = 1
 									lei.flags["SexOpen"] = 1;
-									
+
 									Text.Clear();
 									Text.Add("With a smile, you remark that you’re interested in him, so the two of you are at least halfway there.", parse);
 									Text.NL();
@@ -1359,7 +1359,7 @@ Scenes.Lei.TalkPrompt = function() {
 										Text.Add("You blush slightly. You suspected, certainly, but that was a bolder declaration than you had guessed. Perhaps you missed out on some fun before, but there is certainly time to make up for that.", parse);
 									}
 									Text.Flush();
-									
+
 									Scenes.Lei.TalkPrompt();
 								}, enabled : true
 							});
@@ -1382,12 +1382,12 @@ Scenes.Lei.TalkPrompt = function() {
 			}
 		}, enabled : true
 	});
-	
+
 	Gui.SetButtonsFromList(options, true, function() {
 		Text.Clear();
 		Text.Add("<i>“Very well, let us turn to other matters.”</i>", parse);
 		Text.Flush();
-		
+
 		Scenes.Lei.InnPrompt();
 	});
 }
@@ -1396,7 +1396,7 @@ Scenes.Lei.TalkPastPrompt = function() {
 	var parse = {
 		playername : player.name
 	};
-	
+
 	//[name]
 	var options = new Array();
 	//TODO
@@ -1404,9 +1404,9 @@ Scenes.Lei.TalkPastPrompt = function() {
 		tooltip : "Ask Lei what he’s been doing around the island, what he thinks of it.",
 		func : function() {
 			Text.Clear();
-			
+
 			var scenes = [];
-			
+
 			// Long
 			scenes.push(function() {
 				Text.Add("You ask Lei what sorts of things he’s been been doing in the kingdom and beyond.", parse);
@@ -1442,15 +1442,15 @@ Scenes.Lei.TalkPastPrompt = function() {
 					Text.Add("You stare at him in shock, as a grin slowly spreads across his face, and he gives a short sonorous laugh. So, he was joking after all... probably.", parse);
 				});
 			}
-			
+
 			var sceneId = lei.pastRotation;
 			if(sceneId >= scenes.length) sceneId = 0;
-			
+
 			lei.pastRotation = sceneId + 1;
-			
+
 			// Play scene
 			scenes[sceneId]();
-			
+
 			Text.Flush();
 		}, enabled : true
 	});
@@ -1458,16 +1458,16 @@ Scenes.Lei.TalkPastPrompt = function() {
 		Text.Clear();
 		Text.Add("<i>“Let’s dwell on the past no more. Did you want to talk about anything else?”</i>", parse);
 		Text.Flush();
-		
+
 		Scenes.Lei.TalkPrompt();
 	});
 }
 
 Scenes.Lei.SexPrompt = function() {
 	var parse = {
-		
+
 	};
-	
+
 	//[name]
 	var options = new Array();
 	if(lei.flags["SexOpen"] == 0) {
@@ -1489,9 +1489,9 @@ Scenes.Lei.SexPrompt = function() {
 				Text.NL();
 				Text.Add("You nod in acquiescence. Perhaps doing well in sparring or succeeding at a job would do the trick.", parse);
 				Text.Flush();
-				
+
 				lei.flags["SexOpen"] = 1;
-				
+
 				Scenes.Lei.SexPrompt();
 			}, enabled : true
 		});
@@ -1509,9 +1509,9 @@ Scenes.Lei.SexPrompt = function() {
 				Text.NL();
 				Text.Add("Having him beg you to reconsider was probably ever only going to happen in daydreams, though.", parse);
 				Text.Flush();
-				
+
 				lei.flags["SexOpen"] = 0;
-				
+
 				Scenes.Lei.SexPrompt();
 			}, enabled : true
 		});
@@ -1532,16 +1532,16 @@ Scenes.Lei.SexPrompt = function() {
 		Text.Clear();
 		Text.Add("<i>“Something else on your mind?”</i>", parse);
 		Text.Flush();
-		
+
 		Scenes.Lei.InnPrompt();
 	});
 }
 
 Scenes.Lei.SparPrompt = function() {
 	var parse = {
-		
+
 	};
-	
+
 	var options = new Array();
 	options.push({ nameStr : "Spar",
 		tooltip : "Ask Lei to spar with you.",
@@ -1551,21 +1551,21 @@ Scenes.Lei.SparPrompt = function() {
 			Text.NL();
 			if(lei.sparTimer.Expired()) { //If haven't sparred today
 				lei.sparTimer = new Time(0,0,0,20,0);
-				
+
 				Text.Add("Lei nods. <i>“Of course. It’s important to keep up with practice.”</i> He motions for you to follow, and leads you to the stables behind the inn. In front of the stalls is a sizable enclosure for outfitting horses and unloading wagons. <i>“It’s a little cramped, but it will serve.”</i>", parse);
 				Text.NL();
 				Text.Add("Lei does a few stretches before turning to face you.", parse);
 				Text.NL();
-				
+
 				party.SaveActiveParty();
-				
+
 				var levelbonus = 0;
-				
+
 				if(player.level > 15) {
 					Text.Add("<i>“Come. You are powerful enough that it will be good practice for us to fight one on one.”</i>", parse);
-					
+
 					levelbonus = 8;
-					
+
 					party.ClearActiveParty();
 					party.SwitchIn(player);
 				}
@@ -1586,7 +1586,7 @@ Scenes.Lei.SparPrompt = function() {
 						levelbonus = 3;
 				}
 				Text.Flush();
-				
+
 				Gui.NextPrompt(function() {
 					var enemy = new Party();
 					var l = new Lei.Spar(levelbonus);
@@ -1596,7 +1596,7 @@ Scenes.Lei.SparPrompt = function() {
 					enc.canRun = false;
 					enc.onLoss = Scenes.Lei.SparLoss;
 					enc.onVictory = Scenes.Lei.SparWin;
-					
+
 					enc.Start();
 				});
 			}
@@ -1612,30 +1612,30 @@ Scenes.Lei.SparPrompt = function() {
 		Text.Clear();
 		Text.Add("<i>“Never stop improving.”</i>", parse);
 		Text.Flush();
-		
+
 		Scenes.Lei.InnPrompt();
 	});
 }
 
 Scenes.Lei.SparWin = function() {
 	var enc = this;
-	
+
 	SetGameState(GameState.Event);
 	enc.Cleanup();
 	Text.Clear();
-	
+
 	var parse = {
-		
+
 	};
-	
+
 	for(var i = 0; i < party.Num(); ++i) {
 		party.Get(i).AddExp(enc.lei.combatExp);
 	}
-	
+
 	world.TimeStep({hour: 1});
-	
+
 	party.LoadActiveParty();
-	
+
 	if(lei.Annoyance() > 0) {
 		Text.Add("Lei regards you with a serious expression. <i>“It seems you can be reliable at times after all.”</i>", parse);
 		Text.NL();
@@ -1645,9 +1645,9 @@ Scenes.Lei.SparWin = function() {
 		else
 			Text.Add("your mistakes on the last job.", parse);
 		Text.Flush();
-		
+
 		lei.annoyance.DecreaseStat(0, 1);
-		
+
 		Scenes.Lei.InnPrompt();
 	}
 	else {
@@ -1660,19 +1660,19 @@ Scenes.Lei.SparWin = function() {
 			if(lei.flags["Met"] >= Lei.Met.CompletedTaskEscort) {
 				Text.Add("<i>“Did you want a reward for your performance?”</i> he asks.", parse);
 				Text.Flush();
-				
+
 				//[name]
 				var options = new Array();
-				
+
 				Scenes.Lei.Sex.Prompt(options);
-				
+
 				Gui.SetButtonsFromList(options, true, function() {
 					Text.NL();
 					Text.Add("You look up at Lei with a smile of your own, and tell him that you’re happy to beat him for free any time.", parse);
 					Text.NL();
 					Text.Add("Lei bursts out laughing, releasing your chin. <i>“I like that spirit about you. Very well, another time then.”</i>", parse);
 					Text.Flush();
-					
+
 					Scenes.Lei.InnPrompt();
 				});
 			}
@@ -1681,14 +1681,14 @@ Scenes.Lei.SparWin = function() {
 				Text.NL();
 				Text.Add("It seems you’ll have to prove yourself at a larger job before he’ll take this any further.", parse);
 				Text.Flush();
-				
+
 				Scenes.Lei.InnPrompt();
 			}
 		}
 		else {
 			Text.Add("You suppose that counts as high praise coming from him, and he certainly seems happy with you.", parse);
 			Text.Flush();
-			
+
 			Scenes.Lei.InnPrompt();
 		}
 	}
@@ -1696,18 +1696,18 @@ Scenes.Lei.SparWin = function() {
 
 Scenes.Lei.SparLoss = function() {
 	var enc = this;
-	
+
 	SetGameState(GameState.Event);
 	enc.Cleanup();
 	Text.Clear();
-	
+
 	var parse = {
-		
+
 	};
-	
+
 	for(var i = 0; i < party.Num(); ++i)
 		party.Get(i).AddExp(5);
-	
+
 	if(enc.lei.HPLevel() >= 0.5) {
 		Text.Add("Lei regards you calmly. <i>“I hope you have learned from that. You will need to improve to make this useful for me.”</i>", parse);
 		Text.NL();
@@ -1722,11 +1722,11 @@ Scenes.Lei.SparLoss = function() {
 		lei.annoyance.DecreaseStat(0, 0.5);
 	}
 	Text.Flush();
-	
+
 	world.TimeStep({hour: 1});
-	
+
 	party.LoadActiveParty();
-	
+
 	Scenes.Lei.InnPrompt();
 }
 
@@ -1741,11 +1741,11 @@ Scenes.Lei.GuardStalking = function() {
 		playername : player.name,
 		name : kiakai.name
 	};
-	
+
 	var nv = player.HasNightvision();
-	
+
 	lei.flags["Talk"] |= Lei.Talk.GuardBeating;
-	
+
 	Text.Clear();
 	Text.Add("The road shambles forward before you, ", parse);
 	if(nv)
@@ -1767,9 +1767,9 @@ Scenes.Lei.GuardStalking = function() {
 	Text.NL();
 	Text.Add("You see the guard’s shoulders rise and fall as he takes a steady breath, and then he draws his sword in one fluid motion, raising the tip to the cloaked man’s throat. You don’t see the movement that follows, but there is the ring of metal on metal, and the cloaked man holds a shortsword, pressing inside his opponent’s guard.", parse);
 	Text.NL();
-	
+
 	var fLevel = player.jobs["Fighter"].level + player.jobs["Rogue"].level + player.jobs["Bruiser"].level;
-	
+
 	parse["nv"] = nv ? "" : " in the dark";
 	Text.Add("To the guard’s credit, he responds remarkably well to what you can only assume was a major surprise. He hops back out of reach, trying to reestablish a suitable range for his longer weapon. Blades clash again and again[nv], ", parse);
 	if(fLevel >= 10) {
@@ -1783,7 +1783,7 @@ Scenes.Lei.GuardStalking = function() {
 	}
 	Text.Add(" Unable to catch himself, the guard tumbles backward, his helmeted head banging forcefully against a loose cobble.", parse);
 	Text.Flush();
-	
+
 	//[Observe][Assist]
 	var options = new Array();
 	options.push({ nameStr : "Observe",
@@ -1797,9 +1797,9 @@ Scenes.Lei.GuardStalking = function() {
 				Text.NL();
 				Text.Add("Sighing, you run after her. The situation involves you now.", parse);
 				Text.NL();
-				
+
 				miranda.relation.DecreaseStat(-100, 5);
-				
+
 				Scenes.Lei.GuardStalkingEntry(parse, nv);
 			}
 			else {
@@ -1814,7 +1814,7 @@ Scenes.Lei.GuardStalking = function() {
 				}
 				Text.Add("You hesitate for a long moment. Following an aggressive, ill-mannered stranger into a dark alley certainly does not seem like the greatest of ideas… but he seemed somehow different at the end there. Almost familiar. Finally, your curiosity gets the better of you, and you follow his steps into the deeper shadows.", parse);
 				Text.NL();
-				
+
 				Scenes.Lei.GuardStalkingConverge(parse, nv);
 			}
 		}, enabled : true
@@ -1829,10 +1829,10 @@ Scenes.Lei.GuardStalking = function() {
 			if(party.InParty(miranda)) {
 				Text.Add("<i>“I knew I could count on you,”</i> Miranda says, easily keeping up with you. <i>“We can’t let that bastard do as he pleases!”</i>", parse);
 				Text.NL();
-				
+
 				miranda.relation.IncreaseStat(100, 5);
 			}
-			
+
 			Scenes.Lei.GuardStalkingEntry(parse, nv);
 		}, enabled : true
 	});
@@ -1856,23 +1856,23 @@ Scenes.Lei.GuardStalkingEntry = function(parse, nv) {
 		Text.Add("<i>“You must be careful if you follow him, [playername],”</i> [name] says. <i>“I cannot accompany you, for my duty lies here. I must assist the guard, to ensure that he does not suffer lasting injury from this encounter.”</i>", parse);
 		Text.NL();
 	}
-	
+
 	var comps = party.CloneParty();
 	comps = _.without(comps, miranda, kiakai, player);
 	//#if non-Kiai/non-Miranda companions are present
 	if(comps.length > 0) {
 		parse["nv"] = nv ? "deep shadows" : "blank darkness";
 		parse["nv2"] = nv ? " There is so little light that despite your night vision, you can barely make out what’s inside." : ""
-		
+
 		var c1 = comps[0];
 		var km = party.InParty(miranda) || party.InParty(kiakai);
-		
+
 		parse["o"] = km ? " other" : "";
 		parse["c"] = comps.length > 1 ? Text.Parse("your[o] companions", parse) : c1.name;
 		parse["km"] = km ? "help with" : "watch over";
 		parse["heshe"] = comps.length > 1 ? "they" : c1.heshe();
 		parse["himher"] = comps.length > 1 ? "them" : c1.himher();
-		
+
 		Text.Add("You stare into the [nv] of the narrow alleyway.[nv2] Even if you brought [c] with you, [heshe] would be as likely to stumble over you as to be of any help. You tell [himher] to [km] the injured guard while you investigate.", parse);
 		Text.NL();
 	}
@@ -1913,7 +1913,7 @@ Scenes.Lei.GuardStalkingConverge = function(parse, nv) {
 	Text.NL();
 	Text.Add("Hi, Lei. Fancy meeting you here.", parse);
 	Text.Flush();
-	
+
 	Gui.NextPrompt(function() {
 		Text.Clear();
 		parse["nv"] = nv ? "the relief of being out of danger" : "relief at being alive";
@@ -1928,7 +1928,7 @@ Scenes.Lei.GuardStalkingConverge = function(parse, nv) {
 		parse["nv"] = nv ? "Lei nods." : "The orange eyes tilt down for a moment in what you suspect is a nod.";
 		Text.Add("[nv] <i>“One who has nightmares does not stagnate. He either struggles to overcome his fears and grows stronger, or lets them break him.”</i>", parse);
 		Text.Flush();
-		
+
 		//[Approve][Indifferent][Chastise]
 		var options = new Array();
 		options.push({ nameStr : "Approve",
@@ -1954,9 +1954,9 @@ Scenes.Lei.GuardStalkingConverge = function(parse, nv) {
 			tooltip : "The fact that Lei is harming others just because he feels like it is quite horrible, and you’re going to tell him as much.",
 			func : function() {
 				Text.Clear();
-				
+
 				lei.relation.DecreaseStat(0, 2);
-				
+
 				Text.Add("And what if the fears do break him? Or if there are long-term effects from the concussion he received? Why is it Lei who get to choose that the guard needs this to become stronger?", parse);
 				Text.NL();
 				parse["nv"] = nv ? "Lei closes his eyes" : "The orange eyes disappear";
@@ -1968,7 +1968,7 @@ Scenes.Lei.GuardStalkingConverge = function(parse, nv) {
 				Text.NL();
 				Text.Add("<i>“I do not decide what <b>he</b> needs. I only do,”</i> Lei says, his voice colder than usual. <i>“If he wished to stop me, he needed only to be stronger. That is the only way one obtains the right to choose.”</i> He takes several steps toward you, drawing close enough that you feel the heat of his body in front of yours in the cool night air. <i>“If you wish to stop me, you need only become stronger as well. I will no longer need to cultivate all these little sprouts if you grow high enough to touch the sky.”</i>", parse);
 				Text.Flush();
-				
+
 				//[Flirt][Move on][Confront]
 				var options = new Array();
 				options.push({ nameStr : "Flirt",
@@ -2024,9 +2024,9 @@ Scenes.Lei.GuardStalkingConverge = function(parse, nv) {
 Scenes.Lei.GuardStalkingApprove = function(parse, nv) {
 	Text.Add("<i>“I but water a young sprout. If it becomes strong, perhaps I can use it to grow myself.”</i> He pauses, and his next words are quieter. <i>“This one is not as promising as some I wish to cultivate, but one cannot rely overmuch on a single crop.”</i>", parse);
 	Text.Flush();
-	
+
 	lei.relation.IncreaseStat(100, 2);
-	
+
 	//[Flirt][Move on]
 	var options = new Array();
 	options.push({ nameStr : "Flirt",
@@ -2124,8 +2124,8 @@ Scenes.Lei.GuardStalkingOutro = function(parse, nv) {
 	}
 	Text.Add("After a few minutes walking, you hear raised angry voices in the distance, signaling the arrival of the patrol.", parse);
 	Text.Flush();
-	
+
 	world.TimeStep({hour: 1});
-	
+
 	Gui.NextPrompt();
 }

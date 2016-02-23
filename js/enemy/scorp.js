@@ -1,7 +1,7 @@
 /*
- * 
+ *
  * Scorpion girl, lvl 5-8
- * 
+ *
  */
 
 Scenes.Scorpion = {};
@@ -9,7 +9,7 @@ Scenes.Scorpion = {};
 function Scorpion() {
 	Entity.call(this);
 	this.ID = "scorpion";
-	
+
 	this.avatar.combat     = Images.scorp;
 	this.name              = "Scorpion";
 	this.monsterName       = "the scorpion";
@@ -19,7 +19,7 @@ function Scorpion() {
 	if(Math.random() < 0.9)
 		this.FirstVag().virgin = false;
 		*/
-	
+
 	this.maxHp.base        = 140;
 	this.maxSp.base        = 60;
 	this.maxLust.base      = 60;
@@ -31,24 +31,24 @@ function Scorpion() {
 	this.spirit.base       = 19;
 	this.libido.base       = 19;
 	this.charisma.base     = 23;
-	
+
 	this.elementAtk.dmg[Element.pPierce] =  0.5;
 	this.elementAtk.dmg[Element.mNature] =  0.5;
 	this.elementDef.dmg[Element.mNature] =  0.5;
 	this.elementDef.dmg[Element.mFire]   =  0.5;
 	this.elementDef.dmg[Element.mIce]    =   -1;
 	this.elementDef.dmg[Element.mWater]  = -0.5;
-	
+
 	this.level             = 5 + Math.floor(Math.random() * 4);
 	this.sexlevel          = 3;
-	
+
 	this.combatExp         = 6 + this.level;
 	this.coinDrop          = 4 + this.level * 4;
-	
+
 	this.body.SetBodyColor(Color.white);
-	
+
 	this.body.SetEyeColor(Color.yellow);
-	
+
 	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Scorpion, Color.black);
 
 	// Set hp and mana to full
@@ -78,7 +78,7 @@ Scorpion.prototype.DropTable = function() {
 	if(Math.random() < 0.1)  drops.push({ it: Items.LizardEgg });
 	if(Math.random() < 0.1)  drops.push({ it: Items.RawHoney });
 	if(Math.random() < 0.1)  drops.push({ it: Items.BeeChitin });
-	
+
 	if(Math.random() < 0.01) drops.push({ it: Items.Lacertium });
 	if(Math.random() < 0.01) drops.push({ it: Items.Nagazm });
 	return drops;
@@ -88,7 +88,7 @@ Scorpion.prototype.Act = function(encounter, activeChar) {
 	// TODO: Very TEMP
 	Text.Add(this.name + " acts! Stab stab hiss!");
 	Text.NL();
-	
+
 	// Pick a random target
 	var t = this.GetSingleTarget(encounter, activeChar);
 
@@ -111,10 +111,10 @@ Scorpion.prototype.Act = function(encounter, activeChar) {
 
 // FEMALE ENCOUNTER
 Scenes.Scorpion.LoneEnc = function() {
- 	var enemy    = new Party();
+	var enemy    = new Party();
 	enemy.AddMember(new Scorpion());
 	var enc      = new Encounter(enemy);
-	
+
 	/*
 	enc.canRun = false;
 	enc.onEncounter = ...

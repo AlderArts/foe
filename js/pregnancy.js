@@ -17,7 +17,7 @@ function Womb() {
 	this.father = null;
 	this.mother = null;
 	this.race = Race.Human;
-	
+
 	this.pregnant   = false;
 	this.progress     = 0;
 	this.hoursToBirth = 0;
@@ -41,7 +41,7 @@ Womb.prototype.FromStorage = function(storage) {
 	this.pregnant     = true;
 	this.hoursToBirth = parseFloat(storage.hour) || this.hoursToBirth;
 	this.progress     = parseFloat(storage.prog) || this.progress;
-	
+
 	if(storage.m)  this.mother = storage.m;
 	if(storage.f)  this.father = storage.f;
 	this.race = (storage.r === undefined) ? this.race : RaceDesc.IdToRace[parseInt(storage.r)];
@@ -62,22 +62,22 @@ Womb.prototype.Short = function() {
 	return "womb";
 }
 Womb.prototype.Desc = function() {
-	
+
 }
 Womb.prototype.Size = function() {
 	var geneSize = this.race.GeneSize();
-	
+
 	return this.progress * geneSize * Math.sqrt(this.litterSize);
 }
 
 
 function PregnancyHandler(entity, storage) {
 	this.entity = entity;
-	
+
 	this.gestationRate = new Stat(1);
 	this.fertility     = new Stat(0.3);
 	this.mpreg         = false;
-	
+
 	if(storage) this.FromStorage(storage);
 }
 
@@ -93,9 +93,9 @@ PregnancyHandler.prototype.ToStorage = function() {
 	};
 	if(this.mpreg)
 		storage.mpreg = "on";
-	
+
 	var womb = [];
-	
+
 	var vags = this.entity.AllVags();
 	for(var i = 0; i < vags.length; ++i) {
 		var w = vags[i].womb;
@@ -111,10 +111,10 @@ PregnancyHandler.prototype.ToStorage = function() {
 		s.slot = PregnancyHandler.Slot.Butt;
 		womb.push(s);
 	}
-	
+
 	if(womb.length > 0)
 		storage.womb = womb;
-	
+
 	return storage;
 }
 
@@ -123,10 +123,10 @@ PregnancyHandler.prototype.FromStorage = function(storage) {
 	if(storage.gr) this.gestationRate.base = parseFloat(storage.gr);
 	if(storage.f)  this.fertility.base     = parseFloat(storage.f);
 	if(storage.mpreg) this.mpreg = true;
-	
+
 	if(storage.womb) {
 		var vags = this.entity.AllVags();
-		
+
 		for(var i = 0; i < storage.womb.length; ++i) {
 			var w    = storage.womb[i];
 			var slot = parseInt(w.slot);
@@ -139,7 +139,7 @@ PregnancyHandler.prototype.FromStorage = function(storage) {
 			}
 			else if(slot == PregnancyHandler.Slot.Butt)
 				wPtr = this.entity.Butt().womb;
-			
+
 			if(wPtr) {
 				wPtr.FromStorage(w);
 			}
@@ -149,7 +149,7 @@ PregnancyHandler.prototype.FromStorage = function(storage) {
 
 /*
  * opts:
- * 	slot   := PregnancyHandler.Slot
+ *  slot   := PregnancyHandler.Slot
  */
 PregnancyHandler.prototype.Womb = function(opts) {
 	opts = opts || {};
@@ -161,7 +161,7 @@ PregnancyHandler.prototype.Womb = function(opts) {
 			womb = vag.womb;
 	}
 	else if(slot == PregnancyHandler.Slot.Butt) womb = this.entity.Butt().womb;
-	
+
 	if(womb == null)  return false;
 
 	return womb;
@@ -172,9 +172,9 @@ PregnancyHandler.prototype.Womb = function(opts) {
  */
 PregnancyHandler.prototype.PregnantWombs = function() {
 	var ret = [];
-	
+
 	var ent = this.entity;
-	
+
 	_.each(ent.AllVags(), function(vag) {
 		var womb = vag.womb;
 		if(womb.pregnant)
@@ -183,13 +183,13 @@ PregnancyHandler.prototype.PregnantWombs = function() {
 	var womb = ent.Butt().womb;
 	if(womb.pregnant)
 		ret.push(womb);
-	
+
 	return ret;
 }
 
 /*
  * opts:
- * 	slot   := PregnancyHandler.Slot
+ *  slot   := PregnancyHandler.Slot
  */
 PregnancyHandler.prototype.IsPregnant = function(opts) {
 	opts = opts || {};
@@ -200,7 +200,7 @@ PregnancyHandler.prototype.IsPregnant = function(opts) {
 	else {
 		var preg = false;
 		var ent = this.entity;
-		
+
 		var vags = ent.AllVags();
 		for(var i = 0; i < vags.length; ++i) {
 			var womb = vags[i].womb;
@@ -208,7 +208,7 @@ PregnancyHandler.prototype.IsPregnant = function(opts) {
 		}
 		var womb = ent.Butt().womb;
 		preg = preg || womb.pregnant;
-		
+
 		return preg;
 	}
 }
@@ -220,12 +220,12 @@ PregnancyHandler.prototype.MPregEnabled = function() {
 
 /*
  * opts:
- * 	slot   := PregnancyHandler.Slot
- * 	mother := Entity
- * 	father := Entity
+ *  slot   := PregnancyHandler.Slot
+ *  mother := Entity
+ *  father := Entity
  *  race   := RaceDesc
- * 	num    := 1,2,3...
- * 	time   := time to birth in hours
+ *  num    := 1,2,3...
+ *  time   := time to birth in hours
  *  force  := [optional], bypass fertility
  *  load   := [optional], multiply chances of preg
  */
@@ -234,7 +234,7 @@ PregnancyHandler.prototype.Impregnate = function(opts) {
 	var mother = opts.mother || this.entity;
 	var father = opts.father; //TODO Potential fallback needed
 	var race = opts.race || Race.Human;
-	
+
 	var slot = opts.slot || PregnancyHandler.Slot.Vag;
 	var womb = null;
 	if     (slot <  PregnancyHandler.Slot.Butt) {
@@ -243,13 +243,13 @@ PregnancyHandler.prototype.Impregnate = function(opts) {
 			womb = vag.womb;
 	}
 	else if(slot == PregnancyHandler.Slot.Butt) womb = mother.Butt().womb;
-	
+
 	if(womb == null)  return false;
 	if(womb.pregnant) return false;
 	if(slot == PregnancyHandler.Slot.Butt && !this.MPregEnabled()) return false;
-	
+
 	// TODO: Check for sterility, herbs etc
-	
+
 	var fertility = (this.fertility.Get() * father.Virility() * Math.sqrt(opts.load || 1));
 	// Perks etc for mother
 	if(mother.HasPerk(Perks.Fertility))
@@ -265,7 +265,7 @@ PregnancyHandler.prototype.Impregnate = function(opts) {
 	if(limp) fertility *= limp.fer;
 	var aroused = father.combatStatus.stats[StatusEffect.Aroused];
 	if(aroused) fertility *= aroused.fer;
-	
+
 	var chance = Math.random();
 	var parse = {
 		mother : mother.name,
@@ -273,25 +273,25 @@ PregnancyHandler.prototype.Impregnate = function(opts) {
 		odds   : fertility,
 		chance : chance
 	};
-	
+
 	if(opts.force || (chance < fertility)) {
-		
+
 		// Adjust litterSize
 		var litterSize = opts.num || 1;
-		
+
 		if(mother.HasPerk(Perks.Breeder) && Math.random() < 0.3)
 			litterSize *= 2;
 		if(father.HasPerk(Perks.Breeder) && Math.random() < 0.3)
 			litterSize *= 2;
-		
+
 		litterSize = Math.floor(litterSize);
 		litterSize = Math.max(litterSize, 1);
 
 		var gestationPeriod = opts.time || 24; //TODO TEMP
-		
-		
+
+
 		Sex.Preg(father, mother, litterSize);
-		
+
 		// TODO: start pregnancy
 		womb.pregnant     = true;
 		womb.triggered    = false;
@@ -301,17 +301,17 @@ PregnancyHandler.prototype.Impregnate = function(opts) {
 		if(father) womb.father = father.ID;
 		womb.mother = mother.ID;
 		womb.race = opts.race;
-		
+
 		parse["size"] = litterSize;
 		parse["type"] = race.name;
 		parse["time"] = gestationPeriod;
-		
+
 		if(DEBUG) {
 			Text.NL();
 			Text.Add("<b>[father] impregnated [mother], (odds: [chance] < [odds]). Litter size: [size]. Type: [type]. Time: [time] hours.</b>", parse);
 			Text.NL();
 		}
-		
+
 		return true;
 	}
 	else {
@@ -328,9 +328,9 @@ PregnancyHandler.prototype.Impregnate = function(opts) {
 PregnancyHandler.prototype.Update = function(hours) {
 	hours = hours || 0;
 	hours *= this.gestationRate.Get();
-	
+
 	var ent = this.entity;
-	
+
 	var vags = ent.AllVags();
 	for(var i = 0; i < vags.length; ++i) {
 		var womb = vags[i].womb;
@@ -367,7 +367,7 @@ PregnancyHandler.prototype.Update = function(hours) {
 
 PregnancyHandler.prototype.BellySize = function() {
 	var size = 0;
-	
+
 	var vags = this.entity.AllVags();
 	for(var i = 0; i < vags.length; ++i) {
 		var womb = vags[i].womb;
@@ -379,6 +379,6 @@ PregnancyHandler.prototype.BellySize = function() {
 	if(womb.pregnant) {
 		size += womb.Size();
 	}
-	
+
 	return size;
 }

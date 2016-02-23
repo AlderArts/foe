@@ -1,7 +1,7 @@
 /*
- * 
+ *
  * Combat ability template
- * 
+ *
  */
 
 TargetMode = {
@@ -41,7 +41,7 @@ Element = {
 	mDark    : 11,
 	mNature  : 12,
 	lust     : 13,
-	
+
 	numElements : 14
 }
 
@@ -86,21 +86,21 @@ Ability = function(name) {
 	this.name = name || "ABILITY";
 	//TODO: Tooltip?
 	this.cost = { hp: null, sp: null, lp: null};
-	
+
 	this.castTime = 0;
 	this.cancellable = true; // can be a function(ability, encounter, caster, target, result)
 	this.cooldown = 0; //nr of rounds cooldown
-	
+
 	// Preparation nodes
 	this.onCast   = [];
 	// Actual cast nodes
 	this.castTree = [];
-	
+
 	// Note, if CastInternalOOC is defined, ability will be usable out of combat
 	//this.CastInternalOOC = function(caster, target) {
 	//	Gui.NextPrompt(ShowAbilities);
 	//}
-	
+
 }
 
 Ability.prototype.Short = function() {
@@ -119,7 +119,7 @@ Ability.prototype.CastInternal = function(encounter, caster, target) {
 	_.each(this.castTree, function(node) {
 		node(this, encounter, caster, target);
 	});
-	
+
 	caster.FinishCastInternal(this, encounter, caster, target);
 }
 
@@ -127,14 +127,14 @@ Ability.prototype.CastInternal = function(encounter, caster, target) {
 Ability.prototype.OnSelect = function(encounter, caster, backPrompt, ext) {
 	var ability = this;
 	// TODO: Buttons (use portraits for target?)
-	
+
 	var target = [];
-	
+
 	switch(ability.targetMode) {
 		case TargetMode.Self:
 			ability.Use(encounter, caster, null, ext);
 			break;
-		
+
 		case TargetMode.Ally:
 		case TargetMode.AllyNotSelf:
 		case TargetMode.AllyFallen:
@@ -145,39 +145,39 @@ Ability.prototype.OnSelect = function(encounter, caster, backPrompt, ext) {
 				var incap = t.Incapacitated();
 				if(ability.targetMode == TargetMode.AllyFallen && !t.incap()) return;
 				else if(incap) return;
-				
+
 				target.push({
-				  	nameStr : t.name,
-				  	func    : function(t) {
-				  		ability.Use(encounter, caster, t, ext);
-				  	},
-				  	enabled : ability.enabledTargetCondition(encounter, caster, t),
-				  	obj     : t
+					nameStr : t.name,
+					func    : function(t) {
+						ability.Use(encounter, caster, t, ext);
+					},
+					enabled : ability.enabledTargetCondition(encounter, caster, t),
+					obj     : t
 				});
 			});
-			
+
 			Gui.SetButtonsFromList(target, true, backPrompt);
 			return true;
-		
+
 		case TargetMode.Enemy:
 			_.each(encounter.enemy.members, function(t) {
 				// Don't add incapacitated
 				var incap = t.Incapacitated();
 				if(incap) return;
-				
+
 				target.push({
-				  	nameStr : t.uniqueName || t.name,
-				  	func    : function(t) {
-				  		ability.Use(encounter, caster, t, ext);
-				  	},
-				  	enabled : ability.enabledTargetCondition(encounter, caster, t),
-				  	obj     : t
+					nameStr : t.uniqueName || t.name,
+					func    : function(t) {
+						ability.Use(encounter, caster, t, ext);
+					},
+					enabled : ability.enabledTargetCondition(encounter, caster, t),
+					obj     : t
 				});
 			});
-			
+
 			Gui.SetButtonsFromList(target, true, backPrompt);
 			return true;
-		
+
 		case TargetMode.Party:
 			ability.Use(encounter, caster, party, ext);
 			break;
@@ -209,9 +209,9 @@ Ability.ApplyCost = function(ab, caster) {
 Ability.prototype.Use = function(encounter, caster, target) {
 	Ability.ApplyCost(this, caster);
 	this.StartCast(encounter, caster, target);
-	
+
 	var entry = caster.GetCombatEntry(encounter);
-	
+
 	// Set cooldown
 	if(this.cooldown) {
 		entry.cooldown = entry.cooldown || [];
@@ -220,14 +220,14 @@ Ability.prototype.Use = function(encounter, caster, target) {
 			ability: this
 		});
 	}
-	
+
 	if(this.castTime > 0) {
 		entry.initiative = 100 - this.castTime; //TODO: not really good to have the fixed 100 here...
 		entry.casting = {
 			ability : this,
 			target  : target
 		};
-		
+
 		Text.Flush();
 		Gui.NextPrompt(function() {
 			encounter.CombatTick();
@@ -246,7 +246,7 @@ Ability.prototype.UseOutOfCombat = function(caster, target) {
 
 Ability.prototype.enabledCondition = function(encounter, caster) {
 	var onCooldown = encounter ? this.OnCooldown(caster.GetCombatEntry(encounter)) : false;
-	
+
 	return Ability.EnabledCost(this, caster) && !onCooldown;
 }
 
@@ -257,7 +257,7 @@ Ability.prototype.OnCooldown = function(casterEntry) {
 		if(ability == c.ability) {
 			onCooldown = c.cooldown;
 			return false;
-		}	
+		}
 	});
 	return onCooldown;
 }
@@ -275,7 +275,7 @@ Ability.prototype.CostStr = function() {
 	}
 	else
 		return "free";
-	
+
 	return str;
 }
 
@@ -292,20 +292,20 @@ Ability.Damage = function(atk, def, casterLvl, targetLvl) {
 	// Safeguard
 	casterLvl = casterLvl || 1;
 	targetLvl = targetLvl || 1;
-	
+
 	var maxDefense = (2+Stat.growthPerPoint*Stat.growthPointsPerLevel*(targetLvl-1)) * (targetLvl+9)*2 + 100;
 	var modRatio = Math.pow(maxDefense/def, 1.3);
 	var logistics = 1/(1+Math.exp(-1*modRatio));
 	var defFactor = 2*logistics-1;
-	
+
 	var levelFactor = 1.8 - 16/(5*Math.PI) * Math.atan((targetLvl+10)/(casterLvl+10));
-	
+
 	return defFactor * atk * levelFactor;
 }
 
 AbilityCollection = function(name) {
 	this.name = name;
-	
+
 	this.AbilitySet = [];
 	//TODO: Tooltip
 }
@@ -345,12 +345,12 @@ AbilityCollection.prototype.OnSelect = function(encounter, caster, backPrompt) {
 		});
 		Text.Flush();
 	};
-	
+
 	var ret = function() {
 		collection.OnSelect(encounter, caster, backPrompt);
 		prompt();
 	}
-	
+
 	prompt();
 	Gui.SetButtonsFromCollection(encounter, caster, this.AbilitySet, ret, backPrompt);
 }

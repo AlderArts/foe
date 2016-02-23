@@ -1,8 +1,8 @@
 /*
- * 
+ *
  * Container class that handles party members
  * Used for combat
- * 
+ *
  */
 function Party(storage) {
 	this.members = [];
@@ -12,7 +12,7 @@ function Party(storage) {
 	this.coin = 0;
 	this.location = null;
 	this.inventory = new Inventory();
-	
+
 	if(storage) this.FromStorage(storage);
 }
 
@@ -30,7 +30,7 @@ Party.prototype.ToStorage = function() {
 	storage["reserve"] = [];
 	storage["saved"]   = [];
 	storage["temp"]    = [];
-	
+
 	this.SaveMember(storage, player);
 	this.SaveMember(storage, kiakai);
 	this.SaveMember(storage, miranda);
@@ -39,11 +39,11 @@ Party.prototype.ToStorage = function() {
 	this.SaveMember(storage, lei);
 	this.SaveMember(storage, cveta);
 	this.SaveMember(storage, gwendy);
-	
+
 	storage["coin"] = this.coin;
 	storage["loc"]  = this.location.SaveSpot;
 	storage["inv"]  = this.inventory.ToStorage();
-	
+
 	return storage;
 }
 
@@ -61,7 +61,7 @@ Party.prototype.FromStorage = function(storage) {
 	storage["reserve"] = storage["reserve"] || [];
 	storage["saved"]   = storage["saved"]   || [];
 	storage["temp"]    = storage["temp"]    || [];
-	
+
 	this.LoadMember(storage, player);
 	this.LoadMember(storage, kiakai);
 	this.LoadMember(storage, miranda);
@@ -70,8 +70,8 @@ Party.prototype.FromStorage = function(storage) {
 	this.LoadMember(storage, lei);
 	this.LoadMember(storage, cveta);
 	this.LoadMember(storage, gwendy);
-	
-	
+
+
 	this.coin = parseInt(storage["coin"]) || this.coin;
 	this.location = world.SaveSpots[storage["loc"]];
 	this.inventory.FromStorage(storage["inv"] || []);
@@ -100,7 +100,7 @@ Party.prototype.Two = function() {
 Party.prototype.InParty = function(member, reserve) {
 	var idx = this.members.indexOf(member); // Find the index
 	if(idx!=-1) return true;
-	
+
 	if(reserve) {
 		idx = this.reserve.indexOf(member);
 		return (idx!=-1);
@@ -177,7 +177,7 @@ Party.prototype.GetRandom = function(incReserve, includePlayer) {
 	num = Math.floor(num);
 	// Assume player is always first pos
 	if(!includePlayer) num++;
-	
+
 	return this.Get(num);
 }
 
@@ -231,7 +231,7 @@ Party.prototype.SwitchPrompt = function(member) {
 	Text.Clear();
 	Text.Add("Switch [name] with who?", parse);
 	Text.Flush();
-	
+
 	if(active) {
 		var options = [];
 		options.push({ nameStr : "---",
@@ -320,15 +320,15 @@ Party.prototype.Sleep = function() {
 
 Party.prototype.Interact = function(preventClear, switchSpot, back) {
 	var parse = {
-		
+
 	};
-	
+
 	if(!preventClear)
 		Text.Clear();
-	
+
 	SetGameState(GameState.Game);
 	var list = new Array();
-	
+
 	// Interacting with self opens options for masturbation etc
 	Text.Add("<table class='party' style='width:[w]%'>", {w: this.members.length > 1 ? "100" : "50"});
 	Text.Add("<tr>");
@@ -352,7 +352,7 @@ Party.prototype.Interact = function(preventClear, switchSpot, back) {
 						lvl        : jd.level,
 						maxlvl     : jd.job.levels.length + 1
 					};
-					
+
 					// Check for maxed out job
 					var master   = jd.job.Master(member);
 					var toLevel;
@@ -360,7 +360,7 @@ Party.prototype.Interact = function(preventClear, switchSpot, back) {
 						var newLevel = jd.job.levels[jd.level-1];
 						toLevel      = newLevel.expToLevel * jd.mult;
 					}
-					
+
 					Text.Add("<tr><td><b>Job:</b></td><td>");
 					if(master)
 						Text.Add("<b>(MASTER) [job]</b></td></tr>", parse);
@@ -379,7 +379,7 @@ Party.prototype.Interact = function(preventClear, switchSpot, back) {
 		Text.Add("</td>");
 		if(i == 1)
 			Text.Add("</tr><tr>");
-		
+
 		list.push({
 			nameStr: member.name,
 			func: member.Interact,
@@ -404,36 +404,36 @@ Party.prototype.Interact = function(preventClear, switchSpot, back) {
 	}
 	// Don't sort, use same order as in menu
 	//list.sort( function(a, b) { return a.nameStr > b.nameStr; } );
-	
+
 	Gui.SetButtonsFromList(list, back, false, GameState.Event);
-	
+
 	Text.Flush();
 }
 
 Party.prototype.ShowAbilities = function() {
 	var list = [];
 	var that = this;
-	
+
 	var ents = [];
 	for(var i = 0; i < this.members.length; i++)
 		ents.push(this.members[i]);
-	
+
 	// Go through each member, add available abilities to list
 	for(var i = 0; i < ents.length; i++) {
 		var entity = ents[i];
 		var abilities = entity.abilities;
-		
+
 		var pushAbilities = function(coll, jobAbilities) {
 			for(var ab = 0; ab < coll.AbilitySet.length; ab++) {
 				var ability = coll.AbilitySet[ab];
 				if(jobAbilities && jobAbilities.HasAbility(ability)) continue;
-		
+
 				if(ability.OOC) {
 					var en = ability.enabledCondition(null, entity);
-					
+
 					Text.Add("[name] can use [ability] for [cost]: [desc]<br>",
 						{name: Text.BoldColor(entity.name), ability: ability.name, cost: ability.CostStr(), desc: ability.Short()});
-					
+
 					list.push({
 						nameStr : ability.name,
 						enabled : en,
@@ -444,20 +444,20 @@ Party.prototype.ShowAbilities = function() {
 								{name: obj.caster.name, ability: obj.skill.name});
 							Text.NL();
 							Text.Flush();
-							
+
 							var target = new Array();
 							for(var i=0,j=that.members.length; i<j; i++){
 								var t = that.members[i];
 								target.push({
-								  	nameStr : t.name,
-								  	func    : function(t) {
-								  		obj.skill.UseOutOfCombat(obj.caster, t);
-								  	},
-								  	enabled : true,
-								  	obj     : t
+									nameStr : t.name,
+									func    : function(t) {
+										obj.skill.UseOutOfCombat(obj.caster, t);
+									},
+									enabled : true,
+									obj     : t
 								});
 							};
-							
+
 							Gui.SetButtonsFromList(target, true, ShowAbilities);
 						}
 					});
@@ -471,6 +471,6 @@ Party.prototype.ShowAbilities = function() {
 			pushAbilities(abilities[coll], jobAbilities);
 	}
 	Text.Flush();
-	
+
 	Gui.SetButtonsFromList(list);
 }

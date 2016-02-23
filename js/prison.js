@@ -1,16 +1,16 @@
 /*
- * 
+ *
  * "Prison" minigame. Used for Pit and Miranda dungeon.
- * 
+ *
  */
 
 /*
  * opts {
- * 	party : [player, kiakai...],  - only used for setup
+ *  party : [player, kiakai...],  - only used for setup
  *  enemy : Party(),
  *  TODO options
  * }
- * 
+ *
  */
 function PrisonMinigame(opts) {
 	opts = opts || {};
@@ -24,7 +24,7 @@ PrisonMinigame.prototype.Prep = function() {
 	party.ClearActiveParty();
 	for(var i = 0; i < this.party.length; i++)
 		party.SwitchIn(this.party[i]);
-	
+
 	//TODO maybe use a new one, check rendering
 	SetGameState(GameState.Combat);
 }
@@ -41,23 +41,23 @@ PrisonMinigame.prototype.Cleanup = function() {
 		e.ClearCombatBonuses();
 		e.combatStatus.EndOfCombat();
 	}
-	
+
 	party.LoadActiveParty();
-	
+
 	SetGameState(GameState.Event);
 }
 
 //TODO
 PrisonMinigame.prototype.Tick = function() {
 	var parse = {
-		
+
 	};
-	
+
 	Text.Clear();
 	Text.Add("", parse);
 	Text.NL();
 	Text.Flush();
-	
+
 	//TODO Set up choices
 	Gui.ClearButtons();
 }

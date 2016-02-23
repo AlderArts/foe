@@ -2,10 +2,10 @@
 
 /*
  * opts: {
- * 	buyPromptFunc : func(item, cost, bought)
+ *  buyPromptFunc : func(item, cost, bought)
  *  buySuccessFunc : func(item, cost, num)
  *  buyFailFunc : func(item, cost, sold)
- * 	sellPromptFunc : func(item, cost, sold)
+ *  sellPromptFunc : func(item, cost, sold)
  *  sellSuccessFunc : func(item, cost, num)
  *  sellFailFunc : func(item, cost, sold)
  * }
@@ -19,10 +19,10 @@ function Shop(opts) {
 	// price: 1 = regular price, 0.5 = half price, 2 = double price
 	// How to save sold limited stock?
 	this.inventory = [];
-	
+
 	this.totalBought = 0;
 	this.totalSold = 0;
-	
+
 	opts = opts || {};
 	this.sellPrice       = opts.sellPrice || 1;
 	this.buyPromptFunc   = opts.buyPromptFunc;
@@ -59,26 +59,26 @@ Shop.prototype.AddItem = function(item, price, enabled, func, num) {
 Shop.prototype.Buy = function(back, preventClear) {
 	var shop = this;
 	back = back || PrintDefaultOptions;
-	
+
 	if(!preventClear)
 		Text.Clear();
 	else
 		Text.NL();
-		
+
 	var buyFunc = function(obj, bought) {
 		if(obj.func) {
 			var res = obj.func();
 			if(res) return;
 		}
-		
+
 		var cost = obj.cost;
 		var num  = party.Inv().QueryNum(obj.it) || 0;
-		
+
 		if(shop.buyPromptFunc) shop.buyPromptFunc(obj.it, cost, bought);
 		else Text.Clear();
 		Text.Add("Buy " + obj.it.name + " for " + cost + " coin? You are carrying " + num + ".");
 		Text.Flush();
-		
+
 		//[name]
 		var options = new Array();
 		options.push({ nameStr : "Buy 1",
@@ -124,10 +124,10 @@ Shop.prototype.Buy = function(back, preventClear) {
 			shop.Buy(back, true);
 		});
 	};
-	
+
 	var itemsByType = {};
 	Inventory.ItemByBothTypes(this.inventory, itemsByType);
-	
+
 	var options = [];
 	for(var typeKey in itemsByType) {
 		//Add main types
@@ -168,22 +168,22 @@ Shop.prototype.Buy = function(back, preventClear) {
 Shop.prototype.Sell = function(back, preventClear, customSellFunc) {
 	var shop = this;
 	back = back || PrintDefaultOptions;
-	
+
 	if(!preventClear)
 		Text.Clear();
 	else
 		Text.NL();
-	
+
 	if(party.inventory.items.length == 0) {
 		Text.Add("You have nothing to sell.");
 	}
-	
+
 	var sellFunc = function(obj, havesold) {
 		if(obj.func) {
 			var res = obj.func();
 			if(res) return;
 		}
-		
+
 		var num = obj.num;
 		var cost = Math.floor(shop.sellPrice * obj.it.price);
 
@@ -191,7 +191,7 @@ Shop.prototype.Sell = function(back, preventClear, customSellFunc) {
 		else Text.Clear();
 		Text.Add("Sell " + obj.it.name + " for " + cost + " coin? You are carrying " + num + ".");
 		Text.Flush();
-		
+
 		var options = new Array();
 		options.push({ nameStr : "Sell 1",
 			func : function() {
@@ -201,9 +201,9 @@ Shop.prototype.Sell = function(back, preventClear, customSellFunc) {
 				shop.totalSold += cost;
 				// Remove item from inv
 				party.inventory.RemoveItem(obj.it);
-				
+
 				if(customSellFunc) customSellFunc(obj.it, 1);
-				
+
 				num -= 1;
 				if(num <= 0) {
 					// Recreate the menu
@@ -223,9 +223,9 @@ Shop.prototype.Sell = function(back, preventClear, customSellFunc) {
 				shop.totalSold += cost * sold;
 				// Remove item from inv
 				party.inventory.RemoveItem(obj.it, sold);
-				
+
 				if(customSellFunc) customSellFunc(obj.it, 5);
-				
+
 				num -= sold;
 				if(num <= 0) {
 					// Recreate the menu
@@ -244,28 +244,28 @@ Shop.prototype.Sell = function(back, preventClear, customSellFunc) {
 				shop.totalSold += cost * num;
 				// Remove item from inv
 				party.inventory.RemoveItem(obj.it, num);
-				
+
 				if(customSellFunc) customSellFunc(obj.it, num);
-				
+
 				// Recreate the menu
 				// TODO: Keep page!
 				shop.Sell(back, true, customSellFunc);
 			}, enabled : true,
 			tooltip : ""
 		});
-		Gui.SetButtonsFromList(options, true, function() {			
+		Gui.SetButtonsFromList(options, true, function() {
 			if(shop.sellFailFunc) shop.sellFailFunc(obj.it, cost, havesold);
 			// Recreate the menu
 			// TODO: Keep page!
 			shop.Sell(back, true);
 		});
 	};
-	
-	
+
+
 	var itemsByType = {};
 	Inventory.ItemByBothTypes(party.Inv().items, itemsByType);
-	
-	
+
+
 	var options = [];
 	for(var typeKey in itemsByType) {
 		//Add main types, exclude quest items (can't sell quest items at shop)

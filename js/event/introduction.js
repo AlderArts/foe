@@ -508,9 +508,9 @@ Intro.DemonFight = function() {
 			if(numImps >= 2) {
 				impPlural = (numImps == 2) ? "the other imp" : "another of the imps";
 				Text.Add("Meanwhile, " + impPlural
-				 + " has moved behind you and grabs hold of your [butt] and pushes his "
-				 + imps[2].FirstCock().Short()
-				 + " against your tight back door. The going is pretty rough, but soon, he is pistoning all his length inside you, setting your poor colon on fire.", parse);
+				+ " has moved behind you and grabs hold of your [butt] and pushes his "
+				+ imps[2].FirstCock().Short()
+				+ " against your tight back door. The going is pretty rough, but soon, he is pistoning all his length inside you, setting your poor colon on fire.", parse);
 				Text.NL();
 
 				player.FuckAnal(player.Butt(), imps[2].FirstCock(), 2);
