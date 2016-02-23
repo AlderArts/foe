@@ -249,7 +249,6 @@ gulp.task('build:app', () => {
 		.pipe(jsFilter.restore)
 		.pipe(concat('bundle.js'))
 		.pipe(gulp.dest('./build/js'));
->>>>>>> Implemented new build process
 });
 
 gulp.task('build:css', () => {
