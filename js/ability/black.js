@@ -519,3 +519,29 @@ Abilities.Black.DrainingTouch.castTree.push(AbilityNode.Template.Magical({
 	}],
 	onAbsorb: [Abilities.Black._onAbsorb]
 }));
+
+
+Abilities.Black.Hailstorm = new Ability("Hailstorm");
+Abilities.Black.Hailstorm.Short = function() { return "Ice magic, targets all enemies. Low chance of freezing targets."; }
+Abilities.Black.Hailstorm.cost = { hp: null, sp: 50, lp: null};
+Abilities.Black.Hailstorm.targetMode = TargetMode.Enemies;
+Abilities.Black.Hailstorm.castTime = 100;
+Abilities.Black.Hailstorm.castTree.push(AbilityNode.Template.Magical({
+	atkMod: 2.2,
+	damageType: {mIce: 1},
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster);
+		Text.Add("[Name] conjure[notS] up a cone of icy wind and pointed hailstones, directing it towards the enemy party!", parse);
+		Text.NL();
+	}],
+	onMiss: [Abilities.Black._onMiss],
+	onDamage: [Abilities.Black._onDamage],
+	onAbsorb: [Abilities.Black._onAbsorb],
+	onHit: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		if(Status.Freeze(target, { hit : 0.2, turns : 3, turnsR : 2, proc : 0.5, str : 1.2 })) {
+			Text.NL();
+			Text.Add("[tName] [thas] been afflicted with freeze!", parse);
+		}
+	}],
+}));
