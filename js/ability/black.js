@@ -564,3 +564,22 @@ Abilities.Black.Quake.castTree.push(AbilityNode.Template.Magical({
 	onDamage: [Abilities.Black._onDamage],
 	onAbsorb: [Abilities.Black._onAbsorb]
 }));
+
+
+Abilities.Black.PrismaticBurst = new Ability("Prism Burst");
+Abilities.Black.PrismaticBurst.Short = function() { return "A powerful shower of multi-elemental energy. Not likely to be wholly effective, but also not likely to be wholly ineffective, either."; }
+Abilities.Black.PrismaticBurst.cost = { hp: null, sp: 70, lp: null};
+Abilities.Black.PrismaticBurst.targetMode = TargetMode.Enemies;
+Abilities.Black.PrismaticBurst.castTime = 130;
+Abilities.Black.PrismaticBurst.castTree.push(AbilityNode.Template.Magical({
+	atkMod: 1.5,
+	damageType: {mEarth: 0.5, mFire: 0.5, mIce: 0.5, mThunder: 0.5},
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster);
+		Text.Add("[Name] weave[notS] [hisher] [hand]s about, summoning streamers of colored light that dart towards the enemy party!", parse);
+		Text.NL();
+	}],
+	onMiss: [Abilities.Black._onMiss],
+	onDamage: [Abilities.Black._onDamage],
+	onAbsorb: [Abilities.Black._onAbsorb]
+}));
