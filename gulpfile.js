@@ -258,7 +258,7 @@ gulp.task('build:css', () => {
 });
 
 gulp.task('build:html', () => {
-	return gulp.src('index.html')
+	return gulp.src('foe.html')
 		.pipe(htmlreplace({
 			css: 'assets/css/bundle.css',
 			js: 'js/bundle.js'
