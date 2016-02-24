@@ -35,8 +35,15 @@ Saver.SavePrompt = function(backFunc) {
 	Gui.SetButtonsFromList(options, true, backFunc);
 
 	Text.NL();
-	if(Saver.HasSaves())
-		Text.Add("DEBUG: localStorage usage: " + JSON.stringify(localStorage).length / 2636625);
+	if (Saver.HasSaves()) {
+		var storageLength = 0;
+		for (var key in localStorage) {
+			if (localStorage.hasOwnProperty(key) && localStorage[key].length) {
+				storageLength += localStorage[key].length;
+			}
+		}
+		Text.Add("localStorage usage: " + ((storageLength * 16) / (8 * 1024)).toFixed(2) + 'kB');
+	}
 	Text.Flush();
 }
 
@@ -126,8 +133,15 @@ Saver.LoadPrompt = function(backFunc) {
 	Gui.SetButtonsFromList(options, true, backFunc);
 
 	Text.NL();
-	if(Saver.HasSaves())
-		Text.Add("DEBUG: localStorage usage: " + JSON.stringify(localStorage).length / 2636625);
+	if (Saver.HasSaves()) {
+		var storageLength = 0;
+		for (var key in localStorage) {
+			if (localStorage.hasOwnProperty(key) && localStorage[key].length) {
+				storageLength += localStorage[key].length;
+			}
+		}
+		Text.Add("localStorage usage: " + ((storageLength * 16) / (8 * 1024)).toFixed(2) + 'kB');
+	}
 	Text.Flush();
 }
 
