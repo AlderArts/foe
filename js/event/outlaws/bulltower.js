@@ -105,8 +105,7 @@ Outlaws.BullTower = {
 	SafeLooted       : 32,
 	BlueRoses        : 64,
 	ContrabandStolen : 128,
-	SafeLooted       : 256,
-	PerfectScore     : 512
+	PerfectScore     : 256
 };
 
 // Quest state
