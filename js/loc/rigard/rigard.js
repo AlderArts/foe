@@ -242,20 +242,20 @@ Scenes.Rigard.CityHistory = function() {
 
 	if(party.location == world.loc.Rigard.Plaza) {
 		parse.person = "a well-dressed youngster";
-		parse.finish = "after ruffling her hair,";
+		parse.finish = "After ruffling her hair,";
 	}
 	else if(party.location == world.loc.Rigard.ShopStreet.street) {
-		parse.person = "a cleanly-dressed young cat-girl";
-		parse.finish = "after scratching behind her ears,";
+		parse.person = "a cleanly-dressed young catgirl";
+		parse.finish = "After scratching behind her ears,";
 	}
 	else if(party.location == world.loc.Rigard.Residental.street ||
 	        party.location == world.loc.Rigard.Slums.gate) {
-		parse.person = "a shabbily-dressed young dog-girl";
-		parse.finish = "after scratching behind her ears,";
+		parse.person = "a shabbily-dressed young doggirl";
+		parse.finish = "After scratching behind her ears,";
 	}
 	else if(party.location == world.loc.Rigard.Gate) {
 		parse.person = "a straight-backed youngster";
-		parse.finish = "after ruffling her hair,";
+		parse.finish = "After ruffling her hair,";
 	}
 
 	// Disable the scene from proccing more times
@@ -283,7 +283,7 @@ Scenes.Rigard.CityHistory = function() {
 	Text.NL();
 	Text.Add("<i>“Well, that was centuries and centuries ago, and the city's just been growing since then. The most recent outer walls were finished back in my grandparents' time, and you must've seen how more and more houses are spilling out past them when you came in,”</i> she finishes her story.", parse);
 	Text.NL();
-	Text.Add("You smile warmly at her, and thank her for telling you the story, and, [finish] you part ways.", parse);
+	Text.Add("You smile warmly at her, and thank her for telling you the story. [finish] you part ways.", parse);
 	Text.Flush();
 
 	world.TimeStep({minute: 20});
@@ -568,7 +568,7 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 				Text.Add("The [NPC1] shakes [hisher1] head. <i>“They’d rather conjure up stories of oppression than take a long, hard look at their own failings.”</i>", parse);
 			}, 1.0, function() { return posh; });
 			scenes.AddEnc(function() {
-				Text.Add("<i>“I’ve heard talk that the Royal Guard have been disappearing people the nobles find troublesome,”</i> the [NPC1] says.", parse);
+				Text.Add("<i>“I’ve heard talk that the Royal Guard have been 'disappearing' people the nobles find troublesome,”</i> the [NPC1] says.", parse);
 				Text.NL();
 				Text.Add("<i>“What?! You can’t be serious! I mean, I can see them shaking down someone or just beating them up, but killing them?”</i>", parse);
 				Text.NL();
@@ -612,7 +612,7 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 		scenes.AddEnc(function() {
 			Text.Add("<i>“I’ve heard that people are disappearing on the King’s Road now. First, it was the outlying caravan trails, now it’s the King’s Road.”</i> The [NPC1] looks a little worried. <i>“Soon, there won’t be anywhere that’s safe. It won’t be good for business if the Free Cities are cut off from Rigard.”</i>", parse);
 			Text.NL();
-			Text.Add("<i>“Yeah, but look at it this way. At least it’s better to die by bandits than just vanish into the unknown. Leastways there’s a body, right?”</i>", parse);
+			Text.Add("<i>“Yeah, but look at it this way - at least it’s better to die by bandits than just vanish into the unknown. Leastways there’s a body, right?”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“You’re asking if it’s better to die from being run through or burned alive, you dolt. Dead either way, you know?”</i> The [NPC1] sighs. <i>“The old king should never have decommissioned Bull Tower.”</i>", parse);
 			Text.NL();
@@ -625,7 +625,7 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 			Text.NL();
 			Text.Add("<i>“Oh? I didn’t listen to Preston’s public proclamation. Wasn’t it the usual nonsense on how he’s going to eradicate vice and crime in the city? He’s given the same speech a thousand times. Sometimes, he doesn’t even change the words.”</i>", parse);
 			Text.NL();
-			Text.Add("<i>“No, it was something else. How he’s taking personal charge of the move against those forest folk, since the regular guard is being completely and utterly worthless when it comes to stopping them.”</i>", parse);
+			Text.Add("<i>“No, it was something else - about how he’s taking personal charge of the move against those forest folk, since the regular guard is being completely and utterly worthless when it comes to stopping them.”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“I don’t know about that - I haven’t seen a single outlaw in the city…”</i>", parse);
 		}, 1.0, function() { return true; });
@@ -833,9 +833,9 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.NL();
 		Text.Add("The [NPC2] grimaces. <i>“No, I somehow have to work every time there’s any public appearance.”</i>", parse);
 		Text.NL();
-		Text.Add("<i>“You’re really missing out. They have such beautiful shoulder-length red hair, and such poise, and somehow every time I see them, I can’t help but imagine what they’d be like as a couple.”</i> The [NPC1] stops, apparently realizing what [heshe1] just said.", parse);
+		Text.Add("<i>“You’re really missing out. They have such beautiful shoulder-length red hair, and such poise. Somehow, every time I see them, I can’t help but imagine what they’d be like as a couple.”</i> The [NPC1] stops, apparently realizing what [heshe1] just said.", parse);
 		Text.NL();
-		Text.Add("<i>“...you’re quite the pervert aren’t you.”</i>", parse);
+		Text.Add("<i>“...you’re quite the pervert, aren’t you.”</i>", parse);
 		Text.NL();
 		// Outro text
 		Scenes.Rigard.ChatterOutro(parse);
@@ -863,7 +863,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.NL();
 		Text.Add("<i>“You hear about Krawitz’ wife and daughter getting it on with the servants?”</i> the [NPC1] asks.", parse);
 		Text.NL();
-		Text.Add("<i>“Ha, yeah, those lucky bastards! I’ve seen the pair of them in the street, and, even clothed, their bodies were stunning.”</i>", parse);
+		Text.Add("<i>“Ha, yeah, those lucky bastards! I’ve seen the pair of them in the street and, even clothed, their bodies were stunning.”</i>", parse);
 		Text.NL();
 		Text.Add("<i>“I bet Krawitz is jealous of them too. No doubt in my mind that old goat was angling to sleep with both of ‘em himself.”</i>", parse);
 		Text.NL();
@@ -871,7 +871,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Scenes.Rigard.ChatterOutro(parse);
 	}, 1.0, function() { return rigard.Krawitz["F"] & Scenes.Krawitz.Flags.Orgy; });
 	scenes.AddEnc(function() {
-		Text.Add("Walking along, your eyes are drawn to a man in front of you. He reaches up, to pull the hood of his cloak further down over his face, even though only a hint of his features is visible as it is.", parse);
+		Text.Add("Walking along, your eyes are drawn to a man in front of you. He reaches up to pull the hood of his cloak further down over his face, even though only a hint of his features is visible as it is.", parse);
 		Text.NL();
 		Text.Add("Hold on… now that you look, isn’t that Krawitz? The same paunch to his stomach, the same height, the same ratty eyes. There’s a new slump to his shoulders, however, as he hunches down beneath his hood and hurries along somewhere.", parse);
 		Text.NL();
@@ -887,7 +887,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.NL();
 		Text.Add("<i>“What, really? How in the world do you rob a noble and get away with it?”</i> the [NPC2] asks, then clears [hisher1] throat. <i>“Hypothetically speaking, that is.”</i>", parse);
 		Text.NL();
-		Text.Add("<i>“Dunno, people are saying there were orders from up above. Sounds like Krawitz pissed off someone real powerful, and they sent the thief to get him. Almost makes you feel sorry for the bastard.”</i>", parse);
+		Text.Add("<i>“Dunno. People are saying there were orders from up above. Sounds like Krawitz pissed off someone real powerful, and they sent the thief to get him. Almost makes you feel sorry for the bastard.”</i>", parse);
 		Text.NL();
 		Text.Add("The [NPC2] nods, then smiles. <i>“Almost.”</i>", parse);
 		Text.NL();
@@ -919,7 +919,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.NL();
 		Text.Add("<i>“...noble idea to uphold morals, but Preston doesn’t understand that debauchery was always here, and it will always be here,”</i> the [NPC1] says. <i>“It is not the place of the Royal Guard to somehow try to change that.”</i>", parse);
 		Text.NL();
-		Text.Add("The [NPC2] nods. <i>“Heh, I heard before his father became a minister, he managed a cabaret with burlesque, special entertainment in the back, the whole package.”</i>", parse);
+		Text.Add("The [NPC2] nods. <i>“Heh, I heard before his father became a minister, he managed a cabaret with burlesque, special entertainment in the back - the whole package.”</i>", parse);
 		Text.NL();
 		Text.Add("<i>“It’s a pity his son did not take more after him.”</i> The [NPC1] grins. <i>“We could use a few more places like that.”</i>", parse);
 		Text.NL();
@@ -967,11 +967,11 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.NL();
 		Text.Add("<i>“When are you finally going to go?”</i> the [NPC1] asks.", parse);
 		Text.NL();
-		Text.Add("<i>“This week. I swear,”</i> the [NPC2] says. After an uncomfortable moment, [heshe2] continues, <i>“Yes, yes, I know. I have said that before, but damn it, Rewyn is scary.”</i>", parse);
+		Text.Add("<i>“This week. I swear,”</i> the [NPC2] says. After an uncomfortable moment, [heshe2] continues, <i>“Yes, yes, I know. I have said that before, but damn it Rewyn is scary.”</i>", parse);
 		Text.NL();
 		Text.Add("<i>“Scary? He’s the king…”</i>", parse);
 		Text.NL();
-		Text.Add("<i>“Sure, but have you seen him?”</i> The [NPC2] shivers. <i>“One time, I was in the crowd watching him deliver a speech from the balcony, and his eyes looked like he was wondering if it was better if all of us were alive or dead. I can’t help but think that if I submit my petition, he’ll be as like to throw me in the dungeon for temerity as to help me.”</i>", parse);
+		Text.Add("<i>“Sure, but have you seen him?”</i> The [NPC2] shivers. <i>“One time, I was in the crowd watching him deliver a speech from the balcony, and his eyes looked like he was wondering if it was better if all of us were alive or dead. I can’t help but think that if I submit my petition, he’ll be likely to throw me in the dungeon for temerity as to help me.”</i>", parse);
 		Text.NL();
 		Text.Add("The [NPC1] laughs. <i>“Oh come on, you know he doesn’t do that,”</i> [heshe1] says, though the lilt in [hisher1] voices suggests [heshe1] isn’t entirely certain.", parse);
 		Text.NL();
@@ -1070,9 +1070,9 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.NL();
 		Text.Add("<i>“I simply love those berry pastries you make,”</i> the [NPC1] remarks. <i>“I bet if you sold them, the whole quarter would be all over them.”</i>", parse);
 		Text.NL();
-		Text.Add("<i>“Aye, I’ve had the same thought, truth be told. But I’m afraid the baker’s guild would be all over my me instead,”</i> the [NPC2] replies.", parse);
+		Text.Add("<i>“Aye, I’ve had the same thought, truth be told. But I’m afraid the baker’s guild would be all over me instead,”</i> the [NPC2] replies.", parse);
 		Text.NL();
-		Text.Add("<i>“They <b>can</b> be pretty brutal sometimes. I know this [rguygirl] in the administration office there, though, maybe if you did [rhimher] a favor [rheshe]’d help you out.”</i>", parse);
+		Text.Add("<i>“They <b>can</b> be pretty brutal sometimes. I know this [rguygirl] in the administration office there, though. Maybe if you did [rhimher] a favor, [rheshe]’d help you out.”</i>", parse);
 		Text.NL();
 		Text.Add("<i>“What kinda favor?”</i>", parse);
 		Text.NL();
@@ -1120,7 +1120,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.NL();
 		Text.Add("<i>“It’s hard to save up enough leave a good amount for all my children,”</i> the [NPC1] says. <i>“I wanted them to be comfortable, but it seems like they’ll have to make their own way.”</i>", parse);
 		Text.NL();
-		Text.Add("<i>“Tell me about it,”</i> the [NPC2] replies. <i>“I think I’m going to send my second daughter to the shrine of Aria. Getting in isn’t cheap, but it sure is cheaper than getting enough together to set her up on her own.”</i>", parse);
+		Text.Add("<i>“Tell me about it,”</i> the [NPC2] replies. <i>“I think I’m going to send my second daughter to the Shrine of Aria. Getting in isn’t cheap, but it sure is cheaper than getting enough together to set her up on her own.”</i>", parse);
 		Text.NL();
 		Text.Add("<i>“Ha, not a bad idea! Those priests do pretty well for themselves.”</i>", parse);
 		Text.NL();
@@ -1130,7 +1130,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 	scenes.AddEnc(function() {
 		Text.Add("As you’re walking along, you overhear a conversation between two well-dressed middle-aged men.", parse);
 		Text.NL();
-		Text.Add("<i>“She’s such a pretty young thing. And she loves it when my hand brushes her butt and I ‘accidentally’ give it a squeeze. Especially in public.”</i> The balding man emphasizes this last remark with a deep belly laugh.", parse);
+		Text.Add("<i>“She’s such a pretty young thing. And she loves it when my hand brushes her butt and I ‘accidentally’ give it a squeeze - especially in public.”</i> The balding man emphasizes this last remark with a deep belly laugh.", parse);
 		Text.NL();
 		Text.Add("<i>“Isn’t she from a poor family, though?”</i> his companion asks.", parse);
 		Text.NL();
@@ -1176,11 +1176,11 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.NL();
 		Text.Add("<i>“It’s simply the most dreadful case of you-know-what,”</i> the [NPC1] says, wincing theatrically.", parse);
 		Text.NL();
-		Text.Add("<i>“Have you considered a potion? Surely in our day and age, such things should be easy to cure.”</i>", parse);
+		Text.Add("<i>“Have you considered a potion? Surely, in our day and age, such things should be easy to cure.”</i>", parse);
 		Text.NL();
 		Text.Add("<i>“Ha! A potion? From whence? None of these alchemongers are to be trusted.”</i>", parse);
 		Text.NL();
-		Text.Add("The [NPC2] looks thoughtful. <i>“It is true, I must concede. A decade ago, I would’ve suggested that elf, Jeanne, but she turned out to be as bad the rest.”</i>", parse);
+		Text.Add("The [NPC2] looks thoughtful. <i>“It is true, I must concede. A decade ago, I would’ve suggested that elf Jeanne, but she turned out to be as bad the rest.”</i>", parse);
 		Text.NL();
 		// Outro text
 		Scenes.Rigard.ChatterOutro(parse);
@@ -1197,7 +1197,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.NL();
 		Text.Add("<i>“I had an audience scheduled with the chancellor, and was on my way to meet him, when I ran into Majid in the hall…”</i>", parse);
 		Text.NL();
-		Text.Add("<i>“Oh, that really is the worst. One time I spoke to him for half a minute, and I swear I still felt an oily film clinging to my skin after I took three baths.”</i>", parse);
+		Text.Add("<i>“Oh, that really is the worst. One time, I spoke to him for half a minute, and I swear I still felt an oily film clinging to my skin after I took three baths.”</i>", parse);
 		Text.NL();
 		Text.Add("The [NPC1] nods emphatically. <i>“Disgusting. I don’t know how the king stands him.”</i>", parse);
 		Text.NL();
@@ -1259,7 +1259,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		// Introductory text
 		Scenes.Rigard.ChatterIntro(parse, enteringArea);
 		Text.NL();
-		Text.Add("<i>“So, the other day, the new girl was sweeping the floors, and you know, she has the most delicious butt,”</i> the [NPC1] says. <i>“So, of course, walking by I grabbed it, and just gave it a nice firm squeeze before moving on. And can you imagine? She raised her voice and complained!”</i>", parse);
+		Text.Add("<i>“So, the other day, the new girl was sweeping the floors, and you know, she has the most delicious butt,”</i> the [NPC1] says. <i>“Of course, walking by, I grabbed it and just gave it a nice, firm squeeze before moving on. And can you imagine? She raised her voice and complained!”</i>", parse);
 		Text.NL();
 		Text.Add("<i>“No!”</i> the [NPC2] exclaims, aghast.", parse);
 		Text.NL();
@@ -1286,7 +1286,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 	scenes.AddEnc(function() {
 		Text.Add("Standing at the mouth of an alleyway, a short bulky man is chatting with a taller, broad-shouldered man. Their clothes hang a little loose on them, and are spotted with unpatched holes. The mention of rather impressive sexual acts catches your attention.", parse);
 		Text.NL();
-		Text.Add("<i>“So then she took it and plunged it all the way in in a single motion,”</i> the shorter man continues.", parse);
+		Text.Add("<i>“So then, she took it and plunged it all the way in with a single motion,”</i> the shorter man continues.", parse);
 		Text.NL();
 		Text.Add("<i>“Ha, that sounds just like Raka! You really like her, huh?”</i>", parse);
 		Text.NL();
@@ -1346,7 +1346,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 				party.location = world.loc.Rigard.Residental.street;
 				Text.Add("Your face flushes slightly at his accusations, though it’s hard to say whether from embarrassment or anger. You curse at the little man, but tell him that if he wants you so desperately, you’ll come with him, if only he’ll stop shouting about your imagined sex life to the whole street.", parse);
 				Text.NL();
-				Text.Add("With your agreement secured, he grins widely, and leads on, speaking little, to your surprise. After a while he remarks in a normal voice that there’s not much farther to go. Somehow, him holding up the agreement to be quiet so well just makes you feel all the more like you’ve been tricked.", parse);
+				Text.Add("With your agreement secured, he grins widely, and leads on, speaking little, to your surprise. After a while, he remarks in a normal voice that there’s not much farther to go. Somehow, him holding up the agreement to be quiet so well just makes you feel all the more like you’ve been tricked.", parse);
 				Text.NL();
 				Text.Add("In front of you, you spot a plain sign reading ‘The Shadow Lady’ in elegant script. While approaching the large building, you see several men and women glance furtively around before darting inside, while several others exit, trying to look nonchalant. Looks like the brothel is doing a busy trade.", parse);
 				Text.NL();
