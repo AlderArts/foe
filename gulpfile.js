@@ -14,6 +14,7 @@ const appJs = [
 	'js/vendor/jquery-2.2.0.min.js',
 	'js/vendor/raphael-min.js',
 	'js/vendor/pre-loader.min.js',
+	'js/vendor/lz-string-1.4.4.min.js',
 	'js/vendor/kimberley_bl_900.min.font.js',
 
 	'app.js',
