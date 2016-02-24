@@ -289,22 +289,22 @@ Scenes.Roaming.BanditsGen = function(capt, levelbonus) {
 				if(!bandit.Incapacitated()) {
 					enemy.SwitchOut(entity);
 					enemy.SwitchIn(bandit);
-					
+
+					var ent = {
+						entity     : bandit,
+						isEnemy    : true,
+						initiative : 0,
+						aggro      : []};
+
+					enc.combatOrder.push(ent);
+					ent.entity.GetSingleTarget(enc, ent);
+
 					enc.Callstack.push(function() {
 						var parse = {};
 						Text.Clear();
 						parse["hisher"] = entity.hisher();
 						Text.Add("Another bandit pushes through the interior door, replacing [hisher] fallen comrade.", parse);
 						Text.Flush();
-						
-						var ent = {
-							entity     : bandit,
-							isEnemy    : true,
-							initiative : 0,
-							aggro      : []};
-						
-						enc.combatOrder.push(ent);
-						ent.entity.GetSingleTarget(enc, ent);
 						
 						Gui.NextPrompt(function() {
 							enc.CombatTick();

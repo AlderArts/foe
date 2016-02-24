@@ -448,7 +448,6 @@ Jobs["Elementalist"].Long = function(entity) {
 Jobs["Elementalist"].preqs.push({job : Jobs["Mage"], lvl : 3});
 Jobs["Elementalist"].abilities.AddAbility(Abilities.Black.Hailstorm);
 Jobs["Elementalist"].abilities.AddAbility(Abilities.Black.Quake);
-Jobs["Elementalist"].abilities.AddAbility(Abilities.Black.PrismaticBurst);
 Jobs["Elementalist"].abilities.AddAbility(Abilities.Black.ThunderStorm);
 Jobs["Elementalist"].abilities.AddAbility(Abilities.Black.Eruption);
 Jobs["Elementalist"].levels.push(new JobLevel(40,   [{ab: Abilities.Black.Eruption, set: "Spells"}], {"int" : 0.2, "spi": 0.2}));
