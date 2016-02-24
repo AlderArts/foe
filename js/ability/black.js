@@ -589,6 +589,7 @@ Abilities.Black.Lifetap = new Ability("Lifetap");
 Abilities.Black.Lifetap.Short = function() { return "Convert one fifth of your max HP to SP. While it cannot reduce your HP below 1, be careful!"; }
 Abilities.Black.Lifetap.cost = { hp: null, sp: null, lp: null};
 Abilities.Black.Lifetap.targetMode = TargetMode.Self;
+Abilities.Black.Lifetap.cooldown = 2;
 Abilities.Black.Lifetap.castTree.push(function(ability, encounter, caster, target) {
 	var parse = AbilityNode.DefaultParser(caster);
 	
