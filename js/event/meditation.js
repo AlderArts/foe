@@ -119,7 +119,7 @@ Scenes.Meditation.Entry = function() {
 			Text.NL();
 			Text.Add("Uh-oh. [Kiai] looks crossly at you and folds [hisher] arms under that huge rack of [hishers], pushing them up even further and making them look all the more inviting…", parse);
 			Text.NL();
-			Text.Add("<i>“While I can understand that you did not start this exercise in an ideal state of mind, I must ask that you at least <b>try</b> and refrain from… uh… inappropriate thoughts about me while we’re trying to be serious about this! Terrible things can happen to you if your mind starts to wander when you’re meditating!”</i>", parse);
+			Text.Add("<i>“While I can understand that you did not start this exercise in an ideal state of mind, I must ask that you at least <b>try</b> and refrain from… uh… inappropriate thoughts about me while we are trying to be serious about this! Terrible things can happen to you if your mind starts to wander when you’re meditating!”</i>", parse);
 			Text.NL();
 			Text.Add("Yes, yes, you understand. Look, you have a suggestion here - perhaps [heshe] shouldn’t be facing you when going about this, okay? It would help matters on your end.", parse);
 			Text.NL();
