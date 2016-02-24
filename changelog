@@ -11,6 +11,9 @@ Version 0.4s
 * Made an adjustment to the run formula, which should work as intended now
 * Meditation scenes added for the player, allowing you to drain lust
 * Added the elementalist job (learned from Jeanne)
+* A bunch of web-programming issues were looked at by someone with far more experience than me. Thanks VioletVolatile!
+ - Some GUI issues were adressed
+ - There's a new build system, based on Node.js and Gulp. This won't affect 99% of players
 
 --------------------------------------------
              PREVIOUS VERSIONS
