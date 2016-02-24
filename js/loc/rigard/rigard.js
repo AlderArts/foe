@@ -1397,7 +1397,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.NL();
 		Text.Add("<i>“I-is that… you don’t…”</i>", parse);
 		Text.NL();
-		Text.Add("<i>“Come, I know a place nearby, where I can explain things to you in more detail.”</i>", parse);
+		Text.Add("<i>“Come, I know a place nearby where I can explain things to you in more detail.”</i>", parse);
 		Text.NL();
 		Text.Add("They rise together, and you see them walk off into the crowd, holding hands. Well, they hold hands briefly, before their hands become otherwise occupied.", parse);
 	}, middleArea, function() { return true; });
@@ -1410,9 +1410,9 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.NL();
 		Text.Add("<i>“Ha! Is that why you’ve let yourself grow fat? It’s been years since you’ve practiced your weapons! What happened to the bow you were so famous for? Why, even the prince and princess have mastered fencing, and I am certain they are far better protected than you.”</i>", parse);
 		Text.NL();
-		Text.Add("<i>“Hmph, fencing. More a game than a fighting style. Why doesn’t king Rewyn do something useful for them instead, such as appointing one of them heir. Even without the war, who knows when he could die, and then what would we do? There would be chaos.”</i>", parse);
+		Text.Add("<i>“Hmph, fencing. More a game than a fighting style. Why doesn’t King Rewyn do something useful for them instead, such as appointing one of them heir. Even without the war, who knows when he could die, and then what would we do? There would be chaos.”</i>", parse);
 		Text.NL();
-		Text.Add("<i>“Chaos?”</i> Ajax asks. <i>“Though I admit that their highnesses Rumi and Rani can be a touch peculiar, none would deny that they are united. I would not fancy their rule, but the succession is not a great concern, as I am sure they would rule as one.”</i>", parse);
+		Text.Add("<i>“Chaos?”</i> Ajax asks. <i>“Though I admit that their highnesses Rumi and Rani can be a touch peculiar, none would deny that they are united. I would not fancy their rule, but the succession is not a great concern as I am sure they would rule as one.”</i>", parse);
 		Text.NL();
 		Text.Add("<i>“And you are so sure their wishes would determine all…”</i>", parse);
 		Text.NL();
@@ -1449,37 +1449,35 @@ Scenes.Rigard.Lockdown = function() {
 	var parse = {
 		playername : player.name,
 		merchantsCitizens : (party.location == world.loc.Rigard.Gate) ? "merchants" : "citizens",
-		earDesc : function() { return player.EarDesc(); },
-		buttDesc : function() { return player.Butt().Short(); },
 		assCunt : player.FirstVag() ? "cunt" : "ass",
-		tongueDesc : function() { return player.TongueDesc(); },
-		armorDesc : function() { return player.ArmorDesc(); }
+		
 	};
-
+	
+	parse = player.ParserTags(parse);
 	rigard.Krawitz["Q"] = Rigard.KrawitzQ.HuntingTerry;
 
 	var dom = miranda.SubDom() - player.SubDom();
 
 	Text.Clear();
-	Text.Add("As you approach the gates you’re surprised to see them closed. There appears to be some commotion over a few [merchantsCitizens] wanting to leave. One of the guards nearby spots you and moves to talk to you, but a familiar dog-morph butts in and greets you first.", parse);
+	Text.Add("As you approach the gates, you’re surprised to see them closed. There appears to be some commotion over a few [merchantsCitizens] wanting to leave. One of the guards nearby spots you and moves to talk to you, but a familiar dog-morph butts in and greets you first.", parse);
 	Text.NL();
-	Text.Add("<i>“Hello there [playername]. Don’t suppose you know anything about a break-in into the mansion of a Lord Krawitz, do you?”</i> Miranda questions you, tapping her chin.", parse);
+	Text.Add("<i>“Hello there, [playername]. Don’t suppose you know anything about a break in into the mansion of a Lord Krawitz, do you?”</i> Miranda questions you, tapping her chin.", parse);
 	Text.NL();
-	Text.Add("In times like these it’s best to feign ignorance. You tell her you don’t know anything about any break in. What exactly happened?", parse);
+	Text.Add("In times like these, it’s best to feign ignorance. You tell her you don’t know anything about any break in. What exactly happened?", parse);
 	Text.NL();
 	Text.Add("She frowns at your question. <i>“Some stupid thief broke in, stole a bunch of his possessions and left this,”</i> she presents a card. <i>“Personally, Krawitz had it coming. Pretty sure no one really cares if he’s been robbed blind. Not like the old fool didn’t do anything worse in his time, but the stupid thief just <b>had</b> to leave a calling card. Now the high-ups are all foaming and want the perp caught,”</i> she finishes with a sigh. <i>“And you wanna hear the cherry on top?”</i>", parse);
 	Text.NL();
 	Text.Add("You examine the card. Both sides have the logo of a fox throwing a raspberry, the edge reads ‘Masked Fox’.", parse);
 	Text.NL();
 	parse["nice"] = miranda.Attitude() >= Miranda.Attitude.Neutral ? " some comforting," : "";
-	Text.Add("<i>“That pompous bastard of a captain put <b>me</b> on the job. Said to use my nose. That damn bastard takes me for what? A common dog!?”</i> she exclaims, infuriated. After a few moments,[nice] and a deep breath Miranda seems to visibly calm down. She examines you and grins. ", parse);
+	Text.Add("<i>“That pompous bastard of a captain put <b>me</b> on the job - said to use my nose. That damn bastard takes me for what? A common dog!?”</i> she exclaims, infuriated. After a few moments,[nice] and a deep breath, Miranda seems to visibly calm down. She examines you and grins. ", parse);
 	if(miranda.Attitude() >= Miranda.Attitude.Neutral) {
 		Text.Add("<i>“Say, how about you help me catch this perp? I'm sure nobody will mind it if we duck out to a few places to do some 'investigating', if you catch my drift.”</i>", parse);
 		Text.NL();
 		Text.Add("If this isn't a golden opportunity to throw off any suspicion on you, you don't know what it is. No better way to help cover your own tracks than to agree to help her chase down some other thief who robbed the same place. Actually, who in the world could have done that? Dismissing the matter as unimportant, you quickly convey to Miranda that you're willing to help her find the culprit.", parse);
 	}
 	else {
-		Text.Add("<i>“You're going to help me catch this perp. Otherwise I'm taking you in for questioning. Now, I don't expect you had anything to do with this, but the guard can be very thorough during questioning. And I could do with having some fun.”</i>", parse);
+		Text.Add("<i>“You're going to help me catch this perp. Otherwise, I'm taking you in for questioning. Now, I don't expect you had anything to do with this, but the guard can be very thorough during questioning. And I could do with having some fun.”</i>", parse);
 		Text.NL();
 		Text.Add("Any surprise or curiosity you might have felt at her request for your help - after all, you're <b>not</b> her favorite person in the world and you know it - is swept aside by the knowledge that she means what she says.", parse);
 		Text.NL();
@@ -1487,15 +1485,15 @@ Scenes.Rigard.Lockdown = function() {
 			Text.Add("You'd sooner swallow live spiders in butter than help her, but you <b>don't</b> need this sort of hassle. Certainly not when you actually <b>are</b> a criminal who raided the Krawitz manor, even if you're not the one they're actually looking for. Swallowing back your resentment, you tell Miranda that you understand what she's saying; you'll help.", parse);
 		}
 		else {
-			Text.Add("Unconsciously, your eyes drift toward her legs, when you know her prodigious cock lies, and you lick your lips involuntarily. The... offer? threat? in her statement is <b>so</b> very tempting... still, you mightn't be the precise criminal they're after, but you still are a criminal. You can't afford to be taken in, even by accident. You quickly assure Miranda that you'll help her.", parse);
+			Text.Add("Unconsciously, your eyes drift toward her legs, when you know her prodigious cock lies, and you lick your lips involuntarily. The... offer? Threat? in her statement is <b>so</b> very tempting... still, you mightn't be the precise criminal they're after, but you still are a criminal. You can't afford to be taken in, even by accident. You quickly assure Miranda that you'll help her.", parse);
 		}
 	}
 	Text.NL();
-	Text.Add("<i>“Knew I could count on you!</i> Miranda exclaims with a grin. <i>“Now let’s get out of here and get started on our investigation.</i>”", parse);
+	Text.Add("<i>“Knew I could count on you!</i> Miranda exclaims with a grin. <i>“Now, let’s get out of here and get started on our investigation.</i>”", parse);
 	Text.NL();
 	if(party.Num() > 1) {
 		parse["comp"] = party.Num() == 2 ? party.Get(1).name : "your companions";
-		Text.Add("You tell [comp] to wait for you at the Lady’s Blessing, looks like this is going to take some time.", parse);
+		Text.Add("You tell [comp] to wait for you at the Lady’s Blessing. It looks like this is going to take some time.", parse);
 		Text.NL();
 	}
 
@@ -1506,15 +1504,15 @@ Scenes.Rigard.Lockdown = function() {
 
 	if(miranda.Sexed()) {
 		if(miranda.SubDom() > 25) {
-			Text.Add("As you make your way past the gates, the dog-morph pulls you close by the shoulders to whisper into your [earDesc], <i>“Bet you can’t wait for us to have a duck down a dark corner.</i>", parse);
+			Text.Add("As you make your way past the gates, the dog-morph pulls you close by the shoulders to whisper into your [ear], <i>“Bet you can’t wait for us to have a duck down a dark corner.</i>", parse);
 			Text.NL();
 			if(player.SubDom() > 0)
-				Text.Add("With your cockiest grin in place, you deliberately rub your [buttDesc] back against her pelvis as best you can, quipping back that you're sure you can handle the wait better than she can. With a jaunty flick of your shoulders, you wriggle out of her grip and step out of her reach.", parse);
+				Text.Add("With your cockiest grin in place, you deliberately rub your [butt] back against her pelvis as best you can, quipping back that you're sure you can handle the wait better than she can. With a jaunty flick of your shoulders, you wriggle out of her grip and step out of her reach.", parse);
 			else
-				Text.Add("Your visibly shudder in anticipation, eyes closing as you just picture the horny dober-herm pinning you up against a wall and penetrating your [assCunt] with her long, throbbing mastiff-meat. Your reaction doesn't go unnoticed, Miranda grinning and reaching down to squeeze your [buttDesc] possessively before letting you go.", parse);
+				Text.Add("You visibly shudder in anticipation, eyes closing as you just picture the horny doberherm pinning you up against a wall and penetrating your [assCunt] with her long, throbbing mastiff-meat. Your reaction doesn't go unnoticed as Miranda grins and reaches down to squeeze your [butt] possessively before letting you go.", parse);
 		}
 		else {
-			Text.Add("As you make your way from the gates, the dog-morph leans over to whisper into your [earDesc], <i>“Hey, you’re not thinking of taking advantage of me if we have to duck down a dark corner, are you?”</i>", parse);
+			Text.Add("As you make your way from the gates, the dog-morph leans over to whisper into your [ear], <i>“Hey, you’re not thinking of taking advantage of me if we have to duck down a dark corner, are you?”</i>", parse);
 			Text.NL();
 			if(player.SubDom() > 0)
 				Text.Add("Like she doesn't want you to do that, you smirk back, fingers trailing teasingly over the toned curves of her buttocks before giving her a short squeeze of admiration.", parse);
@@ -1530,7 +1528,7 @@ Scenes.Rigard.Lockdown = function() {
 	}
 	Text.Add("Adjusting yourself to your impromptu drafting, you ask the dog-morph if she has a plan as to where to begin.", parse);
 	Text.NL();
-	Text.Add("<i>“We should discuss a few details before we get started. So, let’s go to the Maiden’s Bane and plan our moves,”</i> she says, leading you toward her favorite watering hole.", parse);
+	Text.Add("<i>“We should discuss a few details before we get started, so let’s go to the Maiden’s Bane and plan our moves,”</i> she says, leading you toward her favorite watering hole.", parse);
 	Text.Flush();
 
 	party.location = world.loc.Rigard.Tavern.common;
