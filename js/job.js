@@ -441,25 +441,27 @@ Jobs["Singer"].Unlocked = function(entity) {
 ////////////
 
 Jobs["Elementalist"] = new Job("Elementalist");
-//TODO
 Jobs["Elementalist"].Long = function(entity) {
 	var parse = {hisher: entity.hisher(), HisHer: entity.HisHer(), name: entity.nameDesc()};
-	return Text.Parse("", parse);
+	return Text.Parse("The elementalist is a specialist magician, being able to call on the full fury of the elements to rain down on [hisher] foes. Very effective against large groups of enemies.", parse);
 }
 Jobs["Elementalist"].preqs.push({job : Jobs["Mage"], lvl : 3});
-//TODO
-Jobs["Elementalist"].abilities.AddAbility(Abilities.White.Heal);
-Jobs["Elementalist"].levels.push(new JobLevel(40,   null, {"str" : 0.2}));
-Jobs["Elementalist"].levels.push(new JobLevel(80,   null, {"str" : 0.2}));
-//TODO
-Jobs["Elementalist"].levels.push(new JobLevel(160,  [{ab: Abilities.White.Heal, set: "Support"}], {"int" : 0.1, "dex" : 0.1}));
-Jobs["Elementalist"].levels.push(new JobLevel(320,  null, {"str" : 0.2}));
-Jobs["Elementalist"].levels.push(new JobLevel(640,  null, {"str" : 0.2}));
-Jobs["Elementalist"].levels.push(new JobLevel(1280, null, {"str" : 0.2}));
-Jobs["Elementalist"].levels.push(new JobLevel(2560, null, {"str" : 0.2}));
+Jobs["Elementalist"].abilities.AddAbility(Abilities.Black.Hailstorm);
+Jobs["Elementalist"].abilities.AddAbility(Abilities.Black.Quake);
+Jobs["Elementalist"].abilities.AddAbility(Abilities.Black.PrismaticBurst);
+Jobs["Elementalist"].abilities.AddAbility(Abilities.Black.ThunderStorm);
+Jobs["Elementalist"].abilities.AddAbility(Abilities.Black.Eruption);
+Jobs["Elementalist"].levels.push(new JobLevel(40,   [{ab: Abilities.Black.Eruption, set: "Spells"}], {"int" : 0.2, "spi": 0.2}));
+Jobs["Elementalist"].levels.push(new JobLevel(80,   null, {"int" : 0.3, "sta": 0.1}));
+Jobs["Elementalist"].levels.push(new JobLevel(160,  [{ab: Abilities.Black.ThunderStorm, set: "Spells"}], {"int" : 0.1, "spi" : 0.3}));
+Jobs["Elementalist"].levels.push(new JobLevel(320,  null, {"spi" : 0.2, "sta" : 0.2}));
+Jobs["Elementalist"].levels.push(new JobLevel(640,  [{ab: Abilities.Black.Hailstorm, set: "Spells"}], {"int" : 0.4}));
+Jobs["Elementalist"].levels.push(new JobLevel(1280, null, {"dex" : 0.1, "sta" : 0.1, "spi" : 0.2}));
+Jobs["Elementalist"].levels.push(new JobLevel(2560, [{ab: Abilities.Black.Quake, set: "Spells"}, {ab: Abilities.Black.PrismaticBurst, set: "Spells"}], {"int" : 0.5, "spi" : 0.2, "sp" : 5}));
 Jobs["Elementalist"].Unlocked = function(entity) {
 	return Scenes.Global.MagicStage2();
 }
+
 
 Jobs["Warlock"] = new Job("Warlock");
 //TODO
@@ -473,7 +475,7 @@ Jobs["Warlock"].abilities.AddAbility(Abilities.White.Heal);
 Jobs["Warlock"].levels.push(new JobLevel(40,   null, {"str" : 0.2}));
 Jobs["Warlock"].levels.push(new JobLevel(80,   null, {"str" : 0.2}));
 //TODO
-Jobs["Warlock"].levels.push(new JobLevel(160,  [{ab: Abilities.White.Heal, set: "Support"}], {"int" : 0.1, "dex" : 0.1}));
+Jobs["Warlock"].levels.push(new JobLevel(160,  [{ab: Abilities.White.Heal, set: "Spells"}], {"int" : 0.1, "dex" : 0.1}));
 Jobs["Warlock"].levels.push(new JobLevel(320,  null, {"str" : 0.2}));
 Jobs["Warlock"].levels.push(new JobLevel(640,  null, {"str" : 0.2}));
 Jobs["Warlock"].levels.push(new JobLevel(1280, null, {"str" : 0.2}));
