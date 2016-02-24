@@ -39,7 +39,8 @@ function Button(rect, text, func, enabled, image, disabledImage, glow) {
 			"-khtml-user-select": "none",
 			"-moz-user-select": "none",
 			"-ms-user-select": "none",
-			"user-select": "none"
+			"user-select": "none",
+			"pointer-events": "none"
 		});
 		this.set.push(this.text);
 	}
@@ -49,7 +50,8 @@ function Button(rect, text, func, enabled, image, disabledImage, glow) {
 		"-khtml-user-select": "none",
 		"-moz-user-select": "none",
 		"-ms-user-select": "none",
-		"user-select": "none"
+		"user-select": "none",
+		"pointer-events": "none"
 	});
 	this.set.push(this.text2);
 	if(glow) {
