@@ -1,7 +1,7 @@
 /*
- * 
+ *
  * Button class, includes input handling
- * 
+ *
  */
 function Button(rect, text, func, enabled, image, disabledImage, glow) {
 	var that = this;
@@ -21,6 +21,9 @@ function Button(rect, text, func, enabled, image, disabledImage, glow) {
 	
 	this.set     = Gui.canvas.set();
 	this.image   = Gui.canvas.image(this.enabledImage, rect.x, rect.y, rect.w, rect.h);
+	this.image.node.ondragstart = function() {
+		return false;
+	}
 	if(Button.Shadow) {
 		this.text    = Gui.canvas.text((rect.x + rect.w/2)+2, (rect.y + rect.h/2)+2, text).attr(
 			{fill:"#FFF", /*stroke:"#000",*/ font: BUTTON_FONT});

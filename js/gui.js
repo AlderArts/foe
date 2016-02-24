@@ -35,6 +35,9 @@ Gui.Init = function() {
 	Gui.canvas.setViewBox(0,0,Gui.w,Gui.h,true);
 	Gui.canvas.setSize('100%', '100%');
 	Gui.bg = Gui.canvas.image(Images.bg, 0, 0, Gui.w, Gui.h);
+	Gui.bg.node.ondragstart = function() {
+		return false;
+	}
 	var svg = document.querySelector("svg");
 	svg.removeAttribute("width");
 	svg.removeAttribute("height");
@@ -213,6 +216,9 @@ Gui.SetupPortrait = function(xoffset, yoffset, set, obj, isParty, index) {
 	var charSet   = Gui.canvas.set();
 	var statusSet = Gui.canvas.set();
 	var portrait  = Gui.canvas.image(Images.pc_male, xoffset, yoffset, 100, 100);
+	portrait.node.ondragstart = function() {
+		return false;
+	}
 	var local = {
 		xoffset : xoffset,
 		yoffset : yoffset,
