@@ -17,7 +17,7 @@ Scenes.Miranda.BarSexOptions = function(options) {
 	}
 	options.push({ nameStr : "Sex",
 		func : Scenes.Miranda.TavernSexPublicPrompt, enabled : true,
-		tooltip : "Ask her if she's up for some sexy times, right here, right now."
+		tooltip : "Ask her if she's up for some sexy times - right here, right now."
 	});
 	options.push({ nameStr : "Backroom",
 		func : Scenes.Miranda.TavernSexBackroomPrompt, enabled : true,
@@ -70,7 +70,7 @@ Scenes.Miranda.HomeDescFloor1 = function() {
 
 	};
 	Text.NL();
-	Text.Add("What you can see of Miranda’s home is spartan, simple furniture and only sparsely decorated. The stove that you glimpse in the kitchen looks barely used. You assume that she usually eats her food either at the barracks or at the pub. Straight ahead, there is a small living room with several couches arranged in front of a stone hearth. On the wooden floor, there is a large pelt from some huge animal, like a bear. Various weapons are littering around the room, the most conspicuous being the huge two-handed sword hanging over the fireplace.", parse);
+	Text.Add("What you can see of Miranda’s home is spartan: simple furniture and only sparsely decorated. The stove that you glimpse in the kitchen looks barely used. You assume that she usually eats her food either at the barracks or at the pub. Straight ahead, there is a small living room with several couches arranged in front of a stone hearth. On the wooden floor, there is a large pelt from some huge animal, like a bear. Various weapons are littered around the room, the most conspicuous being the huge two-handed sword hanging over the fireplace.", parse);
 	Text.NL();
 	Text.Add("Directly on your left inside the hall, there is a locked door, presumably leading down to a cellar. Curiously, there is a heavy bar placed across the door, preventing anything or anyone from opening the door from inside.", parse);
 	Text.NL();
@@ -84,7 +84,7 @@ Scenes.Miranda.HomeDescFloor2 = function() {
 
 	};
 	Text.NL();
-	Text.Add("You take a moment to survey Miranda’s bedroom. The room looks like it takes up most of the second floor of the building, barring a tiny study. It feels like you’re walking into a warzone. The floor is littered with discarded clothes - some of some of which don’t seem to belong to Miranda - and a generous selection of sex toys.", parse);
+	Text.Add("You take a moment to survey Miranda’s bedroom. The room looks like it takes up most of the second floor of the building, barring a tiny study. It feels like you’re walking into a warzone. The floor is littered with discarded clothes - some of which don’t seem to belong to Miranda - and a generous selection of sex toys.", parse);
 	Text.NL();
 	Text.Add("<i>“See anything that catches your fancy? A girl gotta keep herself entertained, you know.”</i> The guardswoman picks up a particularly girthy dildo, over two inches thick and covered in tiny nubs. <i>“The Shop of Oddities has quite a selection.”</i>", parse);
 	Text.NL();
@@ -142,7 +142,7 @@ Scenes.Miranda.HomeDommySexLeavingFuckedHer = function() {
 		});
 
 		if(miranda.Attitude() >= Miranda.Attitude.Neutral && (world.time.hour > 20 || world.time.hour < 4)) {
-			Text.Add("<i>“Ya know? It’s kinda late. Why don’t you stay over? I wouldn’t mind sharing my bed with you. Maybe we can squeeze in a quickie before I have to leave in the morning?”</i> she grins.", parse);
+			Text.Add("<i>“Ya know, it’s kinda late. Why don’t you stay over? I wouldn’t mind sharing my bed with you. Maybe we can squeeze in a quickie before I have to leave in the morning?”</i> she grins.", parse);
 			Text.Flush();
 
 			//[Stay][Don’t]
@@ -150,7 +150,7 @@ Scenes.Miranda.HomeDommySexLeavingFuckedHer = function() {
 			options.push({ nameStr : "Stay",
 				func : function() {
 					Text.Clear();
-					Text.Add("Miranda scoots over and pats a relatively clean spot beside her. You strip down and join her, using her arm as a pillow. With a grin, she draws you close, resting your head against her breast as her breathing levels out. Soon enough you join her in a restful slumber.", parse);
+					Text.Add("Miranda scoots over and pats a relatively clean spot beside her. You strip down and join her, using her arm as a pillow. With a grin, she draws you close, resting your head against her breast as her breathing levels out. Soon enough, you join her in a restful slumber.", parse);
 					Text.NL();
 					Text.Add("You sleep until morning.");
 					Text.Flush();
@@ -178,12 +178,12 @@ Scenes.Miranda.HomeDommySexLeavingFuckedHer = function() {
 					Text.Add("<i>“Pity, I guess I’ll see you around then,”</i> she says, turning to take a nap.", parse);
 					PrintDefaultOptions();
 				}, enabled : true,
-				tooltip : "Unfortunately the day isn’t over for you. You’ll have to decline."
+				tooltip : "Unfortunately, the day isn’t over for you. You’ll have to decline."
 			});
 			Gui.SetButtonsFromList(options);
 		}
 		else {
-			Text.Add("<i>“I’m going to rest for a while, you can see yourself out right?”</i> she asks, turning to settle herself in for a more comfortable nap.", parse);
+			Text.Add("<i>“I’m going to rest for a while; you can see yourself out, right?”</i> she asks, turning to settle herself in for a more comfortable nap.", parse);
 			PrintDefaultOptions();
 		}
 	}
@@ -191,13 +191,14 @@ Scenes.Miranda.HomeDommySexLeavingFuckedHer = function() {
 
 Scenes.Miranda.HomeDommySex = function() {
 	var parse = {
-		buttDesc : function() { return player.Butt().Short(); }
+		
 	};
 
+	parse = player.ParserTags(parse);
 	party.location = world.loc.Rigard.Residental.miranda;
 
 	Text.NL();
-	Text.Add("You are standing in the murky hallway just inside Miranda’s house, the doggie herself huffing and panting in your arms. She is really starting to get into it, kissing your neck and caressing your back and [buttDesc] with her hands.", parse);
+	Text.Add("You are standing in the murky hallway just inside Miranda’s house, the doggie herself huffing and panting in your arms. She is really starting to get into it, kissing your neck and caressing your back and [butt] with her hands.", parse);
 	if(miranda.flags["Floor"] == 0) {
 		Scenes.Miranda.HomeDescFloor1();
 	}
