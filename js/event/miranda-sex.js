@@ -525,24 +525,23 @@ Scenes.Miranda.HomeDommySexRideDobieCockVagFuck = function(stickymiranda, came) 
 
 Scenes.Miranda.HomeDommySexRideDobieCockVagSubmit = function(submit) {
 	var parse = {
-		breasts : function() { return player.FirstBreastRow().Short(); },
-		skin : function() { return player.SkinDesc(); },
-		vag : function() { return player.FirstVag().Short(); }
+		
 	};
-
-	Text.Add("Once she’s gotten started, there’s only one thing that’s gonna stop her: pouring a gallon of hot cum into your womb. Each time she drives into you, you can feel her heavy balls slap against your [skin]; a potent promise of future stickiness if ever there was one.", parse);
+	parse = player.ParserTags(parse);
+	
+	Text.Add("Once she’s gotten started, there’s only one thing that’s gonna stop her: pouring a gallon of hot cum into your womb. Each time she drives into you, you can feel her heavy balls slap against you; a potent promise of future stickiness if ever there was one.", parse);
 	Text.NL();
 	parse["b"] = player.FirstBreastRow().Size() > 3 ? Text.Parse(" and a quick grope on your [breasts]", parse) : "";
 	parse["l"] = player.HasLegs() ? " on all fours" : "";
 	parse["s"] = submit ? "to hear you scream for more until your body can’t take it any longer" : "your defiance gradually turning to begging adoration";
-	Text.Add("<i>“It goes against my instincts to fuck you like this,”</i> the herm grunts, leaning in closer for a kiss[b]. <i>“They tell me to turn you over[l] and fuck you senseless, breed you and seal the deal with my knot. I bet you’d love that, wouldn’t you?”</i> she grins. <i>“But… it’s also fun to see your face as I fuck you, [s].”</i>", parse);
+	Text.Add("<i>“It goes against my instincts to fuck you like this,”</i> the herm grunts, leaning in closer for a kiss[b]. <i>“They tell me to turn you over[l] and pound you senseless, breed you and seal the deal with my knot. I bet you’d love that, wouldn’t you?”</i> she grins. <i>“But… it’s also fun to see your face as I fuck you, [s].”</i>", parse);
 	Text.NL();
 	Text.Add("Your reply catches in your throat as she dives in for another kiss, wrestling your tongue into submission. All the while, her hips are a blur, ruthlessly pistoning in and out of your aching pussy. True to her word, the dommy dobie traps your head between her arms as she leans down over you, her taut nipples brushing against your [breasts]. There’s no escaping her eyes, burning with lust as they bore into you; locking you with her gaze, the hermaphrodite passionately asserts her dominance over you.", parse);
 	Text.NL();
 
 	var cum = player.OrgasmCum();
 
-	Text.Add("<i>“You know what’s coming next, don’t you?”</i> she barks, her breath coming in short bursts. With her massive shaft throbbing erratically deep in your loins, it’s hard not to. Both of you groan when she pushes her swelling knot past the last remnants of your ravaged defenses, sealing her inside you even as you feel the first hot cascade of her potent load erupt in your [vag]. You aren’t far behind her, your vaginal walls clamping down as best as they can around the girthy rod and the even thicker knot.", parse);
+	Text.Add("<i>“You know what’s coming next, don’t you?”</i> she barks, her breathing coming in short bursts. With her massive shaft throbbing erratically deep in your loins, it’s hard not to. Both of you groan when she pushes her swelling knot past the last remnants of your ravaged defenses, sealing her inside you even as you feel the first hot cascade of her potent load erupt in your [vag]. You aren’t far behind her, your vaginal walls clamping down as best as they can around the girthy rod and the even thicker knot.", parse);
 	if(player.FirstCock()) {
 		parse["cum"] = cum > 6 ? "outshining even Miranda’s in volume" :
 		               cum > 3 ? "comparable to Miranda’s" : "pathetic in comparison to Miranda’s";
@@ -566,23 +565,12 @@ Scenes.Miranda.HomeDommySexFuckDobieAss = function(cocks) {
 
 	var parse = {
 		playername    : player.name,
-		hairDesc      : function() { return player.Hair().Short(); },
 		boyGirl       : player.mfTrue("boy", "girl"),
-		buttDesc      : function() { return player.Butt().Short(); },
-		hipsDesc      : function() { return player.HipsDesc(); },
-		ballsDesc     : function() { return player.BallsDesc(); },
-		breastDesc    : function() { return player.FirstBreastRow().Short(); },
-		multiCockDesc : function() { return player.MultiCockDesc(); },
-		cockDesc      : function() { return pCock.Short(); },
-		cockTip       : function() { return pCock.TipShort(); },
-		s             : player.NumCocks() > 1 ? "s" : "",
-		notS          : player.NumCocks() > 1 ? "" : "s",
-		oneof         : player.NumCocks() > 1 ? " one of" : "",
-		itsTheir      : player.NumCocks() > 1 ? "their" : "its",
-		mvagDesc      : function() { return miranda.FirstVag().Short(); },
-		mstomachDesc  : function() { return miranda.StomachDesc(); }
+				
 	};
-
+	parse = player.ParserTags(parse);
+	parse = miranda.ParserTags(parse, "m");
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	var dom = miranda.SubDom() - player.SubDom();
 
 	if(pCock.isStrapon)
@@ -590,7 +578,7 @@ Scenes.Miranda.HomeDommySexFuckDobieAss = function(cocks) {
 
 	Text.Clear();
 	if(dom < -10)
-		Text.Add("You twirl her around and grope her fuckable ass, whispering into her ear that you have a very special plan for her. Giving her a slap on the butt, you send her off in the direction of the stairs. Walking right behind her, you get a perfect view of your target as you make your way up to the bedroom.", parse);
+		Text.Add("You twirl her around and grope her fuckable ass, whispering into her ear that you have a very special plan for her. Giving her a slap on the butt, you send her off in the direction of the stairs. Following right behind her, you get a perfect view of your target as you make your way up to the bedroom.", parse);
 	else
 		Text.Add("Smiling coyly, you tease that you have something special in mind for the dommy herm. <i>“And what would that be?”</i> Miranda grins, making a grab for you. You deftly take a step back, luring her after you. Pulling her behind you and barely avoiding her caress, you make your way up the stairs and into her bedroom.", parse);
 	if(miranda.flags["Floor"] < 2) {
@@ -598,10 +586,10 @@ Scenes.Miranda.HomeDommySexFuckDobieAss = function(cocks) {
 		Scenes.Miranda.HomeDescFloor2();
 	}
 	else {
-		Text.Add(" The room is in as big of a mess as usual, with scattered toys and articles of clothing spread on and around the unmade bed.", parse);
+		Text.Add(" The room is in as big of a mess as usual with scattered toys and articles of clothing spread on and around the unmade bed.", parse);
 	}
 	Text.NL();
-	Text.Add("<i>“A bit messy, I know,”</i> Miranda says apologetically, gesturing at the disarray. <i>“Just the way I like it!”</i> She pulls you in for a kiss, fondling your [buttDesc] possessively.", parse);
+	Text.Add("<i>“A bit messy, I know,”</i> Miranda says apologetically, gesturing at the disarray. <i>“Just the way I like it!”</i> She pulls you in for a kiss, fondling your [butt] possessively.", parse);
 	if(dom > 0) {
 		Text.Add(" <i>“So what’s your special plan, hotness? Your lips wrapped around my cock?”</i>", parse);
 		Text.NL();
@@ -612,29 +600,29 @@ Scenes.Miranda.HomeDommySexFuckDobieAss = function(cocks) {
 		Text.NL();
 		Text.Add("She’s right on the money on this one.", parse);
 	}
-	Text.Add(" Pushing Miranda down onto the bed, you flip her over on all fours. In the blink of an eye, you’ve ripped off the dobie’s britches and panties, baring her well-shaped and gropable butt. Between her rounded cheeks rests your target, her tight little rosebud. May as well introduce yourself.", parse);
+	Text.Add(" Pushing Miranda down onto the bed, you flip her over on all fours. In the blink of an eye, you’ve ripped off the dobie’s britches and panties, baring her well-shaped and gropable butt. Between her rounded cheeks rests your target: her tight little rosebud. May as well introduce yourself.", parse);
 	Text.NL();
 	Text.Add("<i>“O-oh!”</i> the guardswoman yelps as you press your thumb against her anus, announcing your intentions. ", parse);
 	if(miranda.sex.rAnal < 5)
 		Text.Add("<i>“Hng… I like anal, but I’m not usually on the receiving end,”</i> she pants.", parse);
 	else
-		Text.Add("<i>“You know how I like it, [playername],”</i> she pants, wiggling her butt enticingly, as she helps you work your finger in.", parse);
+		Text.Add("<i>“You know how I like it, [playername],”</i> she pants, wiggling her butt enticingly as she helps you work your way in.", parse);
 	Text.NL();
 	if(!pCock.isStrapon)
-		Text.Add("Whipping out your [multiCockDesc],", parse);
+		Text.Add("Whipping out your [cocks],", parse);
 	else
-		Text.Add("Securing the straps on your [cockDesc],", parse);
-	parse["yourbiggest"] = player.NumCocks() > 1 ? " your biggest" : "";
-	Text.Add(" you grind[yourbiggest] shaft between Miranda’s buttcheeks, a promise of what is to come. The herm squirms and whimpers as you hotdog her, your hands gripping her ass tightly.", parse);
+		Text.Add("Securing the straps on your [cock],", parse);
+	parse["biggest"] = player.NumCocks() > 1 ? " biggest" : "";
+	Text.Add(" you grind your[biggest] shaft between Miranda’s butt cheeks - a promise of what is to come. The herm squirms and whimpers as you hotdog her, your [hand]s gripping her ass tightly.", parse);
 	Text.NL();
 	Text.Add("<i>“L-lube,”</i> she pants, fumbling with a bottle. ", parse);
 	if(dom < 0 && Math.random() < 0.5)
-		Text.Add("You swat it away, ignoring her growling complaints as you apply a generous amount of saliva to your [cockDesc], preparing Miranda for penetration with your own natural lubricant. Her eyes show a hint of hesitation, but she grits her teeth and accepts it.", parse);
+		Text.Add("You swat it away, ignoring her growling complaints as you apply a generous amount of saliva to your [cock], preparing Miranda for penetration with your own natural lubricant. Her eyes show a hint of hesitation, but she grits her teeth and accepts it.", parse);
 	else
-		Text.Add("You quickly swipe the bottle, pouring nearly all of its contents on your [cockDesc] and down Miranda’s crack. A bit more grinding has her ass ready for action, puckered and eager.", parse);
+		Text.Add("You quickly swipe the bottle, pouring nearly all of its contents on your [cock] and down Miranda’s crack. A bit more grinding has her ass ready for action, puckered and eager.", parse);
 	Text.NL();
 	parse["stud"] = dom < -25 ? player.mfTrue("master", "mistress") : "stud";
-	Text.Add("<i>“Well, what are you waiting for, [stud]?”</i> she pants, peeking over her shoulder at you. Whether she’s ready or not, you don’t hesitate as you ram the [cockTip] of your [cockDesc] into her tight anus, quickly breaching her sphincter and thrusting inside. The dommy doberman lets out a squeal as you rub against her prostate on your way into her depths, her own cock twitching between her legs.", parse);
+	Text.Add("<i>“Well, what are you waiting for, [stud]?”</i> she pants, peeking over her shoulder at you. Whether she’s ready or not, you don’t hesitate as you ram the [cockTip] of your [cock] into her tight anus, quickly breaching her sphincter and thrusting inside. The dommy doberman lets out a squeal as you rub against her prostate on your way into her depths, her own cock twitching between her legs.", parse);
 	Text.NL();
 
 	Sex.Anal(player, miranda);
@@ -646,8 +634,8 @@ Scenes.Miranda.HomeDommySexFuckDobieAss = function(cocks) {
 		Text.Add("<i>“Mmm… claim me, you bad [boyGirl],”</i> the guardswoman moans. <i>“Fuck that ass like it belongs to you!”</i> Her wish is your command.", parse);
 	else
 		Text.Add("<i>“Don’t… get too cocky, [playername],”</i> the guardswoman moans. <i>“Next time, it’s your turn to be the - hngh! - bottom.”</i> We’ll see about that.", parse);
-	Text.Add(" You ignore her muffled yips and groans as you plunge your [cockDesc] deeper into her, gritting your teeth as her colon clamps down on your shaft. ", parse);
-	parse["balls"] = player.HasBalls() ? Text.Parse(" as your [ballsDesc] slap against hers", parse) : "";
+	Text.Add(" You ignore her muffled yips and groans as you plunge your [cock] deeper into her, gritting your teeth as her colon clamps down on your shaft. ", parse);
+	parse["balls"] = player.HasBalls() ? Text.Parse(" as your [balls] slap against hers", parse) : "";
 	if(pCock.length.Get() < 20)
 		Text.Add("Before long, your hips bump against her rear, and you sigh contentedly[balls].", parse);
 	else if(pCock.length.Get() < 35)
@@ -661,11 +649,11 @@ Scenes.Miranda.HomeDommySexFuckDobieAss = function(cocks) {
 	parse["dom"] = dom > 25 ? ", even if she won’t admit it" : "";
 	Text.Add(" The guardswoman braces herself on her elbows, pushing back against you. Despite her usual attitude, she wants this - needs this. Now that you have scratched her itch, it’s not going to go away until she’s gotten a good railing, and she knows it[dom].", parse);
 	Text.NL();
-	Text.Add("Not one to keep a lady waiting, you increase your pace, rocking your [hipsDesc] as you rail the horny dog. She is gripping the sheets tightly, biting down on a cumstained pillow. There is no question about her liking her rough ride though, as her tail is wagging uncontrollably just above her impaled back door, silently urging you to continue, to fuck her until she cries out in ecstasy.", parse);
+	Text.Add("Not one to keep a lady waiting, you increase your pace, rocking your [hips] as you rail the horny dog. She is gripping the sheets tightly, biting down on a cum-stained pillow. There is no question about her liking her rough ride though as her tail is wagging uncontrollably just above her impaled back door, silently urging you to continue, to fuck her until she cries out in ecstasy.", parse);
 	if(!pCock.isStrapon)
-		Text.Add(" You grunt as you deposit a generous load of precum into Miranda’s tight hole, slightly easing your passing. It’s going to be needed in the hours to come.", parse);
+		Text.Add(" You grunt as you deposit a generous load of pre-cum into Miranda’s tight hole, slightly easing your passing. It’s going to be needed in the hours to come.", parse);
 	Text.NL();
-	Text.Add("Miranda is hardly a passive lover, and you have to constantly wrestle with her for control. After railing her from behind for ten minutes or so, she manages to twist around on her back, facing you. The herm’s monster cock is standing up like a mast, trickling precum. Her hands shaking slightly, the guardswoman tears off her top, unleashing her large tits.", parse);
+	Text.Add("Miranda is hardly a passive lover, and you have to constantly wrestle with her for control. After railing her from behind for ten minutes or so, she manages to twist around on her back, facing you. The herm’s monster cock is standing up like a mast, trickling pre-cum. Her hands shaking slightly, the guardswoman tears off her top, unleashing her large tits.", parse);
 	Text.NL();
 	Text.Add("You know just the thing to keep her occupied.", parse);
 	Text.Flush();
@@ -691,7 +679,7 @@ Scenes.Miranda.HomeDommySexFuckDobieAss = function(cocks) {
 	options.push({ nameStr : "Cunt",
 		func : function() {
 			Text.Clear();
-			Text.Add("The herm got another hole that is unoccupied, no wonder she is being fiesty. Grinning, you play with her cunt, thrusting your fingers into her folds and teasing her clit. Her other, significantly bigger ‘clit’ twitches appreciatively.", parse);
+			Text.Add("The herm's got another hole that is unoccupied - no wonder she is being fiesty. Grinning, you play with her cunt, thrusting your fingers into her folds and teasing her clit. Her other, significantly bigger ‘clit’ twitches appreciatively.", parse);
 			target = Target.cunt;
 			PrintDefaultOptions();
 		}, enabled : true,
@@ -711,11 +699,11 @@ Scenes.Miranda.HomeDommySexFuckDobieAss = function(cocks) {
 	Gui.Callstack.push(function() {
 		Text.NL();
 		if(dom < -25) {
-			Text.Add("The doberherm looks to be in absolute bliss, her tongue is lolling out while she pants, eyes rolling to the back of her head. <i>“Having fun?”</i> you ask her.", parse);
+			Text.Add("The doberherm looks to be in absolute bliss; her tongue is lolling out while she pants, and her eyes roll to the back of her head. <i>“Having fun?”</i> you ask her.", parse);
 			Text.NL();
 			Text.Add("<i>“You have no idea, [playername]. Oh! I love getting buggered by you.”</i>", parse);
 			Text.NL();
-			Text.Add("Spoken like a true bitch. Not that you expected any different at this point.", parse);
+			Text.Add("Spoken like a true bitch - not that you expected any different at this point.", parse);
 			Text.NL();
 			Text.Add("<i>“Hey now, do me good. If I can still walk after this, it’s not a good fuck,”</i> she teases you with a grin. <i>“You made me your bitch, so I hope you’re ready to deal with the responsibility. Give it to me ha-ah!”</i> You silence her with a powerful thrust. That’s enough talking, you got the message already. She wants to get a limp? You’ll give it to her!", parse);
 		}
@@ -731,12 +719,12 @@ Scenes.Miranda.HomeDommySexFuckDobieAss = function(cocks) {
 		else {
 			Text.Add("Miranda tries to hide her pleasure, but her displeased mask cracks slightly each time you drive into her, plowing her prostate.", parse);
 			Text.NL();
-			Text.Add("<i>“T-think you are so good? I’ve - hngh! - had better,”</i> she pants, squirming and clenching around your [cockDesc]. <i>“If you don’t want to walk out of here bowlegged, you’d better do a thorough job of fucking me!”</i>", parse);
+			Text.Add("<i>“T-think you are so good? I’ve - hngh! - had better,”</i> she pants, squirming and clenching around your [cock]. <i>“If you don’t want to walk out of here bowlegged, you’d better do a thorough job of fucking me!”</i>", parse);
 			Text.NL();
 			Text.Add("Defiant to the end. No matter, you know how to turn her to putty in your hands. To the tune of her mocking, sometimes cursing commentary, you increase your pace.", parse);
 		}
 		Text.NL();
-		Text.Add("The longer you keep going, the rougher you get, feeling your pleasure building steadily as you ram the herm for all you’re worth. You both lose track of time as you relish in the carnal, animalistic rapture of sex, your [cockDesc] in her ravaged anus all that matters anymore.", parse);
+		Text.Add("The longer you keep going, the rougher you get, feeling your pleasure building steadily as you ram the herm for all you’re worth. You both lose track of time as you relish in the carnal, animalistic rapture of sex, your [cock] in her ravaged anus all that matters anymore.", parse);
 		Text.NL();
 
 		var knotted = (pCock.knot != 0);
@@ -746,13 +734,13 @@ Scenes.Miranda.HomeDommySexFuckDobieAss = function(cocks) {
 		parse["dom"] = dom >= 25 ? " drops her tough girl facade and" : "";
 		parse["balls"] = player.HasBalls() ? "balls churning" :
 		                 player.FirstCock() ? "prostate going into overdrive" : "climax rising";
-		Text.Add("You pump into her as fast as you can,[knot] sure that she not only can take it, but that she’s enjoying every second of it. You won’t last long at this pace, but you do take note of her groans and barks of pleasure. At some point, she[dom] starts deliriously begging for more. You can feel your [balls] as your [cockDesc] throbs inside her. All you need is One. Last. Thrust.", parse);
+		Text.Add("You pump into her as fast as you can,[knot] sure that she not only can take it, but that she’s enjoying every second of it. You won’t last long at this pace, but you do take note of her groans and barks of pleasure. At some point, she[dom] starts deliriously begging for more. You can feel your [balls] as your [cock] throbs inside her. All you need is One. Last. Thrust.", parse);
 		Text.NL();
 
 		if(knotted) {
 			parse["size"] = pCock.length.Get() > 30 ? " despite your size" : "";
 			parse["real"] = !pCock.isStrapon ? " as it begins to swell" : "";
-			Text.Add("You push yourself to the hilt[size], your significantly thicker knot popping inside her rectum and tying you to the horny dobie[real]. No longer able to hold back you let yourself go as you achieve your long-delayed climax.", parse);
+			Text.Add("You push yourself to the hilt[size], your significantly thicker knot popping inside her rectum and tying you to the horny dobie[real]. No longer able to hold back, you let yourself go as you achieve your long-delayed climax.", parse);
 			Text.NL();
 			if(!pCock.isStrapon) {
 				load = player.OrgasmCum();
