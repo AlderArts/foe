@@ -3190,9 +3190,9 @@ Scenes.Miranda.TavernSexDommyBJ = function() {
 	if(miranda.Attitude() >= Miranda.Attitude.Neutral)
 		Text.Add("<i>“Alright, [playername]. You know what to do, so open up,”</i> she says, brandishing her hardening prick and nestling it against your lips.", parse);
 	else
-		Text.Add("<i>“Okay, slut. Your best friend is ready for some action, so be a good bitch and roll that carpet out, cuz I’m going in,”</i> Miranda says, slapping your face with her cock before forcefully shoving her pointed tip against your lips.", parse);
+		Text.Add("<i>“Okay, slut. Your best friend is ready for some action, so be a good bitch and roll that carpet out because I’m going in,”</i> Miranda says, slapping your face with her cock before forcefully shoving her pointed tip against your lips.", parse);
 	Text.NL();
-	Text.Add("You open your mouth to grant the dobie-dick access, extending your [tongueDesc] and gently lapping at the underside of Miranda's cock as you envelop it in your mouth. Closing your lips around the intruder, the taste of salty-sweet precum and flesh washing over your senses, you start to suckle, caressing her with your lips and tongue, bobbing your head slightly as you swallow further inches of girl-cock into your mouth.", parse);
+	Text.Add("You open your jaws to grant the dobie-dick access, extending your [tongue] and gently lapping at the underside of Miranda's dick as you envelop it in your maw. Closing your mouth around the intruder, the taste of salty-sweet pre-cum and flesh washing over your senses, you start to suckle, caressing her with your lips and tongue, bobbing your head slightly as you swallow further inches of girl-cock into your mouth.", parse);
 	Text.NL();
 
 	Sex.Blowjob(player, miranda);
@@ -3201,21 +3201,21 @@ Scenes.Miranda.TavernSexDommyBJ = function() {
 
 	if(player.SubDom() > 0) {
 		parse["nasty"] = miranda.Attitude() < Miranda.Attitude.Neutral ? ", and your expectations of Miranda's wrath," : "";
-		Text.Add("Despite any feelings of reluctance you have about this, your pride[nasty] demands you do your best. You take Miranda's foot-long as far into your mouth as you can bear, then pull your head back before sliding back down again, washing the sensitive prickmeat with tongue and cheeks and lips as you go. You can't be called the most enthusiastic cock-sucker, but you do your best to be a good one, taking what pride you can in the grunts and growls of approval echoing down from above your head.", parse);
+		Text.Add("Despite any feelings of reluctance you have about this, your pride[nasty] demands you do your best. You take Miranda's foot-long as far into your mouth as you can bear, then pull your head back before sliding down again, washing the sensitive prickmeat with tongue and cheeks and lips as you go. You can't be called the most enthusiastic cock-sucker, but you do your best to be a good one, taking what respect you can in the grunts and growls of approval echoing down from above you.", parse);
 	}
 	else {
 		parse["Y"] = miranda.Attitude() < Miranda.Attitude.Neutral ? "Regardless of her opinion of you, y" : "Y";
-		Text.Add("Eagerly you suck and swallow at Miranda's impressive piece of girldick, eyes closed in rapture as you savor the flavor of her washing over your tongue, her musk filling your nostrils. [Y]ou are determined to give her the best blowjob you can. Moaning in your aroused desire, you bob and lap and suckle for all you're worth, humming so as to better stir her dick with pleasure. You tease her by taking the first few inches of her shaft down your throat and then backing away, letting her crave the deepthroating you know she wants.", parse);
+		Text.Add("Eagerly, you suck and swallow at Miranda's impressive piece of girl-dick, eyes closed in rapture as you savor the flavor of her washing over your tongue, her musk filling your nostrils. [Y]ou are determined to give her the best blowjob you can. Moaning in your aroused desire, you bob and lap and suckle for all you're worth, humming so as to better stir her dick with pleasure. You tease her by taking the first few inches of her shaft down your throat and then backing away, letting her crave the deepthroating you know she wants.", parse);
 	}
 	Text.NL();
-	Text.Add("Suddenly, you feel a pair of paws grabbing the sides of your head. Darting your eyes up you see Miranda bearing an evil grin. ", parse);
+	Text.Add("Suddenly, you feel a pair of paws grabbing the sides of your head. Darting your eyes up, you see Miranda bearing an evil grin. ", parse);
 	parse["handsomeBeautiful"] = player.mfFem("handsome", "beautiful");
 	if(miranda.Attitude() >= Miranda.Attitude.Neutral)
-		Text.Add("<i>“Come on, [handsomeBeautiful]. I know you can do better.”</i>", parse);
+		Text.Add("<i>“Come on, [handsomeBeautiful], I know you can do better.”</i>", parse);
 	else
 		Text.Add("<i>“We both know you’re a cock hungry slut, so why not act the part and give me a proper blowjob.”</i>", parse);
 	Text.NL();
-	Text.Add("Before you can protest, the doberherm shoves all 11 inches of her knotted, canine pecker down your throat. You can feel your eyes tearing up as your lips come into contact with her sheath. You can feel the heat emanating from her balls as they slap your chin, the scent of Miranda’s musk threatens to overwhelm your senses as your gag reflex makes you choke on her dick. For a moment you feel like you might start suffocating, but Miranda soon withdraws. You inhale deeply, thankful for this momentary reprieve, but you don’t have long as Miranda’s hips lurch forward, impaling your throat back into her doggie-dong.", parse);
+	Text.Add("Before you can protest, the doberherm shoves all eleven inches of her knotted, canine pecker down your gullet. You can feel your eyes tearing up as your lips come into contact with her sheath. You can feel the heat emanating from her balls as they slap your chin, the scent of Miranda’s musk threatens to overwhelm your senses as your gag reflex makes you choke on her dick. For a moment, you feel like you might start suffocating, but Miranda soon withdraws. You inhale deeply, thankful for this momentary reprieve, but you don’t have long as Miranda’s hips lurch forward, impaling your throat back into her doggie-dong.", parse);
 	Text.NL();
 	Text.Add("<i>“Yeah, that’s how you do it,”</i> she comments, tongue lolling out as she becomes immersed in pleasure.", parse);
 	Text.NL();
@@ -3234,11 +3234,11 @@ Scenes.Miranda.TavernSexDommyBJ = function() {
 			choices = 3;
 		}
 		else if(player.SubDom() > 0) {
-			Text.Add("Looks like she's starting to get a bit too into this... maybe you should bring her back down to earth a little, it'd be easy to get her to start 69ing you if you wanted.", parse);
+			Text.Add("Looks like she's starting to get a bit too into this... maybe you should bring her back down to earth a little, it'd be easy to get her to start sixty-nining you if you wanted.", parse);
 			choices = 2;
 		}
 		else {
-			Text.Add("Your whole body quivers in excitement, anxious for this strong, virile she-stud bitch to claim you as her own. Your mouth waters, drooling avidly over her cock as you imagine her plunging it down your throat over and over again, fucking you like a living onahole... gods, why can't she get started for real already? You <b>want</b> this!", parse);
+			Text.Add("Your whole body quivers in excitement, anxious for this strong, virile she-stud bitch to claim you as her own. Your mouth waters, drooling avidly over her cock as you imagine her plunging it down your throat over and over again, fucking you like a living onahole... Gods, why can't she get started for real already? You <b>want</b> this!", parse);
 			choices = 1;
 		}
 	}
@@ -3257,46 +3257,46 @@ Scenes.Miranda.TavernSexDommyBJ = function() {
 			player.subDom.DecreaseStat(-60, 1);
 
 			if(miranda.Attitude() >= Miranda.Attitude.Neutral)
-				Text.Add("<i>“Damn, your mouth feels so good around my dick, [playername]. Better brace yourself, because I’m going all the way with you,”</i> the doberman says, tightening her grip on your head and thrusting with renewed vigor. Little by little she finds purchase, slipping her knotted doggie-dong inside your throat.", parse);
+				Text.Add("<i>“Damn, your mouth feels so good around my dick, [playername]. Better brace yourself because I’m going all the way with you,”</i> the doberman says, tightening her grip on your head and thrusting with renewed vigor. Little by little, she finds purchase, slipping her knotted doggie-dong inside your throat.", parse);
 			else
-				Text.Add("<i>“So, how do you like getting used like a fucktoy, slut? What is it? Not enough dick for you? Fine, I’ll make sure to shove all of my eleven inches down your tight cocksleeve,”</i> she teases, carelessly gripping your head and redoubling her efforts. Her cock rubs against the back of your throat, roughly bashing you until she finally slips inside your throat.", parse);
+				Text.Add("<i>“So, how do you like getting used like a fucktoy, slut? What is it? Not enough dick for you? Fine, I’ll make sure to shove all of my eleven inches down your tight cocksleeve,”</i> she teases, carelessly gripping your head and redoubling her efforts. Her cock rubs against the back of your throat, roughly bashing you until she finally slips inside your gullet.", parse);
 			Text.NL();
-			Text.Add("Helpless before the morph's onslaught, all you can do is try and relax your throat as she digs her dick deeper and deeper inside of you. Inch after inch of drooling prickflesh vanishes down your gullet, roughly grinding against your throat's inner walls, until her knot is bumping insistently against your lips.", parse);
+			Text.Add("Helpless before the morph's onslaught, all you can do is try and relax yourself as she digs her dick deeper and deeper inside of you. Inch after inch of drooling prickflesh vanishes down your gullet, roughly grinding against your throat's inner walls, until her knot is bumping insistently against your lips.", parse);
 			Text.NL();
 			Text.Add("You hold there for a few moments, unsure of her intent, but the forceful butting of the fleshy bulb prompts you to stretch your mouth the extra inches it needs to let her knot go inside. Miranda intends for you to take it all, come hell or high water, and you know better than to resist her.", parse);
 			Text.NL();
-			Text.Add("The swollen flesh grinds back and forth over your tongue as Miranda humps at your face, stretching your jaws but, thankfully, quiescent for now and thus easy enough to handle once you've adjusted to the mass of it. Almost as if in response to your thoughts, though, you can feel her knot starting to grow inside your mouth, pushing your tongue down and pinning it against the floor of your mouth. You are intimately aware of the back of the knot grinding against the interior of your lips with each thrust, but never popping free.", parse);
+			Text.Add("The swollen flesh grinds back and forth over your tongue as Miranda humps at your face, stretching your jaws but thankfully quiescent for now and thus easy enough to handle once you've adjusted to the mass of it. Almost as if in response to your thoughts, though, you can feel her knot starting to grow inside your maw, pushing your [tongue] down and pinning it against the floor of your mouth. You are intimately aware of the back of the knot grinding against the interior of your lips with each thrust, but never popping free.", parse);
 			Text.NL();
 			if(miranda.sex.rBlow == 1)
-				Text.Add("...Oh no. She wouldn't! She can't be serious! It looks like she's going to try and tie her dick to your mouth! Unconsciously you try and pull your head back, but the doberherm's grip simply pushes you back more firmly down on her shaft, grinding her shaft down your throat for emphasis. You're not going anywhere, it seems, and you have no choice but to try and relax your jaws as best you can for what you know is coming.", parse);
+				Text.Add("...Oh no. She wouldn't! She can't be serious! It looks like she's going to try and tie her dick to your mouth! Unconsciously, you try and pull your head back, but the doberherm's grip simply pushes you back more firmly down on her cock, grinding her shaft down your throat for emphasis. You're not going anywhere, it seems, and you have no choice but to try and relax your jaws as best you can for what you know is coming.", parse);
 			else if(miranda.sex.rBlow <= 5)
-				Text.Add("You have a sinking suspicion as to what she has in mind, and an experimental attempt to pull your head back from her knot confirms it. She wants to knot your mouth again. Sighing softly as best you can through your filled mouth, you relax your jaws as best you can.", parse);
+				Text.Add("You have a sinking suspicion as to what she has in mind, and an experimental attempt to pull your head back from her bulb confirms it. She wants to knot your mouth again. Sighing softly as best you can through your filled mouth, you relax your jaws as best you can.", parse);
 			else {
 				Text.Add("What is this thing that she has with knotting herself to your mouth? ", parse);
 				if(miranda.Attitude() >= Miranda.Attitude.Neutral)
 					Text.Add("Does she love your cocksucking skills that much? ", parse);
 				else
-					Text.Add("Does she get off on having you forced to suck her even after she comes so badly? ", parse);
+					Text.Add("Does she get off on having you forced to suck her even after she cums so badly? ", parse);
 				Text.Add("Whatever the case, you're certainly practiced enough to know just how to relax your jaws, though you know you'll be feeling a little numb-mouthed by the time she's done.", parse);
 			}
 			Text.NL();
-			Text.Add("By the time she releases your head her knot is way too big to pull out, and you can do nothing but sit there as she drags your head with each powerful thrust of her hips. Her shaft throbs ominously inside your throat, you can tell she won’t last long like this. <i>“Hang in there, you’ll be getting your treat anytime,”</i> she says, stifling a grunt as she pats your head.", parse);
+			Text.Add("By the time she releases your head, her knot is way too big to pull out, and you can do nothing but sit there as she drags your head with each powerful thrust of her hips. Her shaft throbs ominously inside your throat - you can tell she won’t last long like this. <i>“Hang in there, you’ll be getting your treat anytime,”</i> she says, stifling a grunt as she pats your head.", parse);
 			Text.NL();
-			Text.Add("A few moments later, she finally grabs you, shoving herself as deep inside your throat as she can. A loud groan of pleasure emanates from the doberherm as she floods your insides with her spunk. A ceaseless tsunami of white that batters your stomach until it’s full and beyond.", parse);
+			Text.Add("A few moments later, she finally grabs you, shoving herself as deep inside your throat as she can. A loud groan of pleasure emanates from the doberherm as she floods your insides with her spunk. A ceaseless tsunami of white batters your stomach until it’s full and beyond.", parse);
 			Text.NL();
 
 			var cum = miranda.OrgasmCum();
 
 			if(player.SubDom() > 0) {
 				if(miranda.Attitude() >= Miranda.Attitude.Neutral)
-					Text.Add("Your guts roil and churn as the steaming cascade of salty she-spunk pours down your throat. You want to stop this, but with her knot, it's impossible; all you can do is open your throat and let her fill your protesting stomach. As your belly bloats out, hanging down heavily under its titanic liquid load, you repeat mentally to yourself that this is for Miranda; you want to make her happy... but she had better appreciate you doing this for her.", parse);
+					Text.Add("Your guts roil and churn as the steaming cascade of salty she-spunk pours down your gullet. You want to stop this, but with her knot it's impossible; all you can do is open your throat and let her fill your protesting stomach. As your belly bloats out, hanging down heavily under its titanic liquid load, you repeat mentally to yourself that this is for Miranda; you want to make her happy... but she had better appreciate you doing this for her.", parse);
 				else
-					Text.Add("Oh, you <b>hate</b> this bitch! Damnation, your stomach... you want to whimper as you feel yourself distending from the cascade of jism flooding your guts, the eerie sensations of being stretched so full sending strange mixed signals to your brain. Your mind reels with the need for revenge, but there's nothing you can do except swallow spooge and stew in your frustration.", parse);
+					Text.Add("Oh, you <b>hate</b> this bitch! Damnation, your stomach... you want to whimper as you feel yourself distending from the cascade of jism flooding your guts, the eerie sensations of being stretched so full sending strange, mixed signals to your brain. Your mind reels with the need for revenge, but there's nothing you can do except swallow spooge and stew in your frustration.", parse);
 			}
 			else {
-				Text.Add("You do your best to moan in muffled ecstasy, eyes closing to fully savor the feeling of a tidal wave of hot girlseed coursing into your stomach. You can feel Miranda's spooge burning all the way down, your belly bloating as she fires spurt after spurt of semen inside of you. Your hand moves unthinkingly to caress your stomach, brain afire with pleasure from the swelling and the touching. You feel so wonderful to be claimed like this, and you can't resist the mental chant for her to give you more, and more; you're her cumdumpster, you want her to fill you with everything she has! ", parse);
+				Text.Add("You do your best to moan in muffled ecstasy, eyes closing to fully savor the feeling of a tidal wave of hot girl-seed coursing into your stomach. You can feel Miranda's spooge burning all the way down, your belly bloating as she fires spurt after spurt of semen inside of you. Your hand moves unthinkingly to caress your [belly], brain afire with pleasure from the swelling and the touching. You feel so wonderful to be claimed like this, and you can't resist the mental chant for her to give you more, and more; you're her cumdumpster - you want her to fill you with everything she has! ", parse);
 				if(miranda.Attitude() >= Miranda.Attitude.Neutral)
-					Text.Add("By all the gods of this place, you love your strong, sexy she-stud bitch!", parse);
+					Text.Add("By all the gods of this place, you love your strong, sexy, she-stud bitch!", parse);
 				else
 					Text.Add("Your love of what Miranda does for you and your mutual hate for each other war in your brain, the conflux of guilt and confusion and shame only stoking your pleasure to new heights.", parse);
 			}
@@ -3304,31 +3304,31 @@ Scenes.Miranda.TavernSexDommyBJ = function() {
 			Text.Add("It takes the better part of a hour for Mirana to shrink down enough to pull out of your used throat, and when she does you immediately cough and sputter, gobs of doggie-spunk flying from your mouth. You gasp, inhaling as much oxygen as you can, glad to finally be free from her and able to breathe easy again.", parse);
 			Text.NL();
 			if(miranda.Attitude() >= Miranda.Attitude.Neutral) {
-				Text.Add("Miranda pats your back, helping you as you finally have a chance to catch your breath. <i>“There, there. Easy now, [playername]. You’re a real trooper y’know? If I tied anybody else I’d probably wind up cracking their jaws,”</i> she laughs. <i>“Just hang in there, I’ll go grab you a cup of water,”</i> she says.", parse);
+				Text.Add("Miranda pats your back, helping you as you finally have a chance to catch your breath. <i>“There, there. Easy now, [playername]. You’re a real trooper, ya know? If I tied anybody else, I’d probably wind up cracking their jaws,”</i> she laughs. <i>“Just hang in there, I’ll go grab you a cup of water,”</i> she says.", parse);
 				Text.NL();
-				Text.Add("That... that would be great, you absently reply to her. Gingerly you settle yourself down, careful of your tender, cum-stretched stomach. Overwhelmed by what you've gone through, you allow your eyes to sink closed and lose yourself in torpor.", parse);
+				Text.Add("That... that would be great, you absently reply to her. Gingerly, you settle yourself down, careful of your tender, cum-stretched stomach. Overwhelmed by what you've gone through, you allow your eyes to sink closed and lose yourself in torpor.", parse);
 				Text.Flush();
 
 				Gui.NextPrompt(function() {
 					Text.Clear();
-					Text.Add("The sensations of something warm and soft on your lips stirs you from your slumber, the feel of something wet and firm pressing gently between your lips fully rousing you as it tickles your own tongue. Your eyes open and you find yourself staring into the half-hooded eyes of Miranda as the dober-morph kisses you sweetly. Pleasantly surprised, you lay back and bask in the sensation of her unusually tender actions, allowing her to break it a few moments later, licking your lips unconsciously to chase the last lingering taste of her as she straightens up.", parse);
+					Text.Add("The sensations of something warm and soft on your lips stirs you from your slumber, the feel of something wet and firm pressing gently between your lips fully rousing you as it tickles your own tongue. Your eyes open and you find yourself staring into the half-hooded eyes of Miranda as the dober-morph kisses you sweetly. Pleasantly surprised, you lie back and bask in the sensation of her unusually tender actions, allowing her to break it a few moments later, licking your lips unconsciously to chase the last lingering taste of her as she straightens up.", parse);
 					Text.NL();
 					Text.Add("<i>“A kiss to wake up the sleeping beauty, just like in the fairy tales,”</i> she laughs. <i>“Here,”</i> she passes you a mug filled with a sweet-scented tea. <i>“Drink this, it’ll make you feel better.”</i>", parse);
 					Text.NL();
-					Text.Add("Thanking her for her thoughtfulness, you gingerly lift the rim of the cup to your lips and carefully sip it. It's as sweet as it smells, but not strong enough to be overpowering; a very calm and neutral sensation that brings with it a soothing feeling. As you slowly drink it, you feel your stomach settling slightly, and your rather raw throat feeling less painful. You resist the urge to gulp it down and instead drain it smoothly; by the time you finish, your throat feels much better, and you thank her for her kindness, voice still a little raspy.", parse);
+					Text.Add("Thanking her for her thoughtfulness, you gingerly lift the rim of the cup to your lips and carefully sip it. It's as sweet as it smells, but not strong enough to be overpowering; it has a very calm and neutral sensation that brings with it a soothing feeling. As you slowly drink it, you feel your stomach settling slightly, and your rather raw gullet feeling less painful. You resist the urge to gulp it down and instead drain it smoothly; by the time you finish, your throat feels much better, and you thank her for her kindness, voice still a little raspy.", parse);
 
 					PrintDefaultOptions();
 				});
 			}
 			else {
-				Text.Add("Miranda rolls her eyes as you try your best to catch your breath. <i>“Are you done yet? A slut like you should already be used to taking cock like that. So catch your breath and let’s get going.”</i>", parse);
+				Text.Add("Miranda rolls her eyes as you try your best to catch your breath. <i>“Are you done yet? A slut like you should already be used to taking cock like that, so catch your breath and let’s get going.”</i>", parse);
 				Text.NL();
-				Text.Add("Queasy as you are, you simply nod your head absently. You really don't feel too good, overwhelmed by the recent fucking you received. Slowly you sink onto your side, head pressed against the nearest pillow, and find yourself fading into darkness.", parse);
+				Text.Add("Queasy as you are, you simply nod your head absently. You really don't feel too good, overwhelmed by the recent fucking you received. Slowly, you sink onto your side, head pressed against the nearest pillow, and find yourself fading into darkness.", parse);
 				Text.Flush();
 
 				Gui.NextPrompt(function() {
 					Text.Clear();
-					Text.Add("Something cold and wet drenches across your face, bringing you back to consciousness with gasping splutters, shaking your head to clear off the worst of the water. You quickly realise the source of your rude awakening as a smirking Miranda stares down at you, one hand holding an upturned mug.", parse);
+					Text.Add("Something cold and wet drenches across your face, bringing you back to consciousness with gasping splutters, shaking your head to clear off the worst of the water. You quickly realize the source of your rude awakening: a smirking Miranda staring down at you, one hand holding an upturned mug.", parse);
 					Text.NL();
 					Text.Add("<i>“Woken up yet? Good. Drink this,”</i> she passes you a mug filled with a sweet-scented tea. <i>“This will help with your throat.”</i>", parse);
 					Text.NL();
@@ -3338,7 +3338,7 @@ Scenes.Miranda.TavernSexDommyBJ = function() {
 				});
 			}
 			Gui.Callstack.push(function() {
-				Text.Add("Though you still feel a little tired thanks to your efforts and impromptu awakening, you know that you have no time to lay around any further. Noting that Miranda is already fully dressed in her uniform, you slowly pull yourself to your feet and grab your [armorDesc], struggling to get your newly-bloated form dressed up again. It takes a little work, but soon enough, you are ready to go as well.", parse);
+				Text.Add("Though you still feel a little tired, thanks to your efforts and impromptu awakening, you know that you have no time to lie around any further. Noting that Miranda is already fully dressed in her uniform, you slowly pull yourself to upright and grab your [armor], struggling to get your newly bloated form dressed up again. It takes a little work, but soon enough you are ready to go as well.", parse);
 
 				PrintDefaultOptions();
 			});
