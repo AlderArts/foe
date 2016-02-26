@@ -1273,27 +1273,19 @@ Scenes.Miranda.HomeDommySexFuckDobieVag = function(cocks) {
 
 	var parse = {
 		playername    : player.name,
-		hairDesc      : function() { return player.Hair().Short(); },
 		boyGirl       : player.mfTrue("boy", "girl"),
-		buttDesc      : function() { return player.Butt().Short(); },
-		multiCockDesc : function() { return player.MultiCockDesc(); },
-		cockDesc      : function() { return pCock.Short(); },
-		cockTip       : function() { return pCock.TipShort(); },
-		s             : player.NumCocks() > 1 ? "s" : "",
-		notS          : player.NumCocks() > 1 ? "" : "s",
-		oneof         : player.NumCocks() > 1 ? " one of" : "",
-		itsTheir      : player.NumCocks() > 1 ? "their" : "its",
-		mvagDesc      : function() { return miranda.FirstVag().Short(); },
-		mstomachDesc  : function() { return miranda.StomachDesc(); }
+		
 	};
-
+	parse = player.ParserTags(parse);
+	parse = miranda.ParserTags(parse, "m");
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	var dom = miranda.SubDom() - player.SubDom();
 
 	if(pCock.isStrapon)
-		parse["multiCockDesc"] = function() { return pCock.Short(); };
+		parse["cocks"] = function() { return pCock.Short(); };
 
 	Text.Clear();
-	Text.Add("You eagerly reply you want her splayed across her bed and moaning as you ram her with your [multiCockDesc]. Twirling her around, you give the doggie a slap on her butt, sending her in the direction of the stairs. Before she takes her first step, you ask her to slowly undress as she ascends the stairs. The guardswoman gives you a nice show, swaying her hips side to side as she slowly climb the stairs. Under her short tail and between her toned thighs, you catch glimpses of your target; her wet and eager pussy. Just beyond it, her heavy sack sways back and forth.", parse);
+	Text.Add("You eagerly reply you want her splayed across her bed and moaning as you ram her with your [cocks]. Twirling her around, you give the doggie a slap on her butt, sending her in the direction of the stairway. Before she takes her first step, you ask her to slowly undress as she ascends the stairs. The guardswoman gives you a nice show, swaying her hips side to side as she slowly begins the climb. Under her short tail and between her toned thighs, you catch glimpses of your target: her wet and eager pussy. Just beyond it, her heavy sack sways back and forth.", parse);
 	Text.NL();
 
 	var scenes = new EncounterTable();
@@ -1314,10 +1306,10 @@ Scenes.Miranda.HomeDommySexFuckDobieVag = function(cocks) {
 		Scenes.Miranda.HomeDescFloor2();
 	else {
 		Text.NL();
-		Text.Add("Her room is in the same disarray as usual; clothes and toys of several varieties strewn all about.", parse);
+		Text.Add("Her room is in the same disarray as usual; clothes and toys of several varieties are strewn all about.", parse);
 	}
 	Text.NL();
-	Text.Add("The herm hops onto the bed, turning to face you with a sultry expression. <i>“Now what, bad [boyGirl]?”</i> she asks, parting her legs slightly. At this angle, all you can see of her crotch is her thick puppy-pecker - grown erect during her ascent - and her balls. This won’t do.", parse);
+	Text.Add("The herm hops onto the bed, turning to face you with a sultry expression. <i>“Now what, bad [boyGirl]?”</i> she asks, parting her legs slightly. At this angle, all you can see of her crotch is her thick puppy pecker - grown erect during her ascent - and her balls. This won’t do.", parse);
 	Text.NL();
 
 	var mode;
@@ -1335,7 +1327,7 @@ Scenes.Miranda.HomeDommySexFuckDobieVag = function(cocks) {
 	scenes.AddEnc(function() {
 		Text.Add("She’s a doggie, so there is only one way to go. On all fours, naughty doggie!", parse);
 		Text.NL();
-		Text.Add("<i>“Doggy-style, huh? How clever.”</i> Her words are mocking, but she doesn’t waste time in rolling over, wiggling her butt at you. Miranda plants her knees wide on the bed, giving you full access to her nethers. Her wet slit looks as ready as it’ll ever be.", parse);
+		Text.Add("<i>“Doggy style, huh? How clever.”</i> Her words are mocking, but she doesn’t waste time in rolling over, wiggling her butt at you. Miranda plants her knees wide on the bed, giving you full access to her nethers. Her wet slit looks as ready as it’ll ever be.", parse);
 
 		mode = Mode.doggy;
 	}, 1.0, function() { return true; });
@@ -1346,22 +1338,22 @@ Scenes.Miranda.HomeDommySexFuckDobieVag = function(cocks) {
 	Text.Add("You take your time stripping off your gear, taking every chance to tease the guardswoman. Here you are, the high and mighty Miranda begging for you to fuck her. Quite different from her usual dominating facade, isn’t it?", parse);
 	Text.NL();
 	if(dom > 25)
-		Text.Add("<i>“Hey, who’s begging?”</i> she growls, annoyed. <i>“Don’t leave me waiting, I’m getting bored here.”</i>", parse);
+		Text.Add("<i>“Hey, who’s begging?”</i> she growls, annoyed. <i>“Don’t leave me waiting - I’m getting bored here.”</i>", parse);
 	else if(dom > -25)
-		Text.Add("<i>“What I do in my bedroom is my own business,”</i> she retorts. <i>“We’ll, in this case, your business too, I guess.”</i>", parse);
+		Text.Add("<i>“What I do in my bedroom is my own business,”</i> she retorts. <i>“Well, in this case, your business too, I guess.”</i>", parse);
 	else
 		Text.Add("<i>“J-just fuck me already,”</i> she growls, blushing fiercely.", parse);
 	Text.NL();
 	if(!pCock.isStrapon) {
-		Text.Add("Freed from [itsTheir] confines, your [multiCockDesc] flop[notS] out, quickly becoming erect as you ravage the horny herm with your eyes. You can hardly wait to plunge inside her sopping wet pussy.", parse);
+		Text.Add("Freed from [itsTheir] confines, your [cocks] flop[notS] out, quickly becoming erect as you ravage the horny herm with your eyes. You can hardly wait to plunge inside her sopping wet pussy.", parse);
 	}
 	else {
-		Text.Add("You quickly equip your [cockDesc], securing it carefully. It’s going to see a lot of action in the coming hours.", parse);
+		Text.Add("You quickly equip your [cock], securing it carefully. It’s going to see a lot of action in the coming hours.", parse);
 	}
-	Text.Add(" Placing[oneof] your [multiCockDesc] at her entrance, you rub the tip in her juices. A shiver runs through the canid as you slowly push inside her, and she bites her lip, trying to suppress a moan.", parse);
+	Text.Add(" Placing[oneof] your [cocks] at her entrance, you rub the tip in her juices. A shiver runs through the canid as you slowly push inside her, and she bites her lip, trying to suppress a moan.", parse);
 	Text.NL();
 	if(miranda.sex.rVag < 5)
-		Text.Add("Miranda is deliciously tight, her seldom used pussy clamping down on your [cockDesc] like a warm, wet vice.", parse);
+		Text.Add("Miranda is deliciously tight, her seldom used pussy clamping down on your [cock] like a warm, wet vice.", parse);
 	else if(miranda.sex.rVag < 15)
 		Text.Add("Miranda opens up, welcoming an old customer into her wet folds. No matter how many times you do her, it’s always a great feeling to thrust inside the sexy herm.", parse);
 	else
@@ -1378,7 +1370,7 @@ Scenes.Miranda.HomeDommySexFuckDobieVag = function(cocks) {
 	else if(dom > -25)
 		Text.Add("<i>“I could - aah! - grow to like this,”</i> she moans. <i>“N-not too bad.”</i>", parse);
 	else {
-		Text.Add("<i>“Y-yes! You are way too good, [playername]!”</i> the slutty herm moans. <i>“Make me your bitch, fuck me senseless!”</i>", parse);
+		Text.Add("<i>“Y-yes! You are way too good, [playername]!”</i> the slutty herm moans. <i>“Make me your bitch - fuck me senseless!”</i>", parse);
 		miranda.subDom.DecreaseStat(-50, 1);
 	}
 	Text.NL();
@@ -1386,7 +1378,7 @@ Scenes.Miranda.HomeDommySexFuckDobieVag = function(cocks) {
 		Text.Add("As you pick up speed, you grab her by the ankles, spreading her legs wide. Miranda has thrown her head back, tongue lolling about. Her paws are busy between her thighs, feverishly jerking on her leaking cock. The guardswoman moans and squirms as you jackhammer her tight pussy and her heavy tits bounce in rhythm with your movements.", parse);
 	}
 	else if(mode == Mode.doggy) {
-		Text.Add("You adjust your hold on her hips, pulling her back onto your [cockDesc]. Soon, you’ve established a rhythm - rough and deep, just the way she likes it. The guardswoman is resting on her elbows, her tits bouncing back and forth each time you drive into her. Between her spread legs lie her pride and glory flopping about uselessly, staining the sheets with her pre.", parse);
+		Text.Add("You adjust your hold on her hips, pulling her back onto your [cock]. Soon, you’ve established a rhythm - rough and deep, just the way she likes it. The guardswoman is resting on her elbows, her tits bouncing back and forth each time you drive into her. Between her spread legs lie her pride and glory flopping about uselessly, staining the sheets with her pre.", parse);
 	}
 	Text.NL();
 	var cap = pCock.length.Get() - 30;
@@ -1395,9 +1387,9 @@ Scenes.Miranda.HomeDommySexFuckDobieVag = function(cocks) {
 		miranda.subDom.DecreaseStat(-75, 1);
 	}
 	else if(cap > -5)
-		Text.Add("You somehow manage to fit all of your [cockDesc] in her cunt, though it is pushing her limits. She’s a tough girl though, she can take it.", parse);
+		Text.Add("You somehow manage to fit all of your [cock] in her cunt, though it is pushing her limits. She’s a tough girl though, she can take it.", parse);
 	else
-		Text.Add("Each thrust slams your hips into her butt as you hilt your [cockDesc] in her accomodating vagina.", parse);
+		Text.Add("Each thrust slams your hips into her butt as you hilt your [cock] in her accomodating vagina.", parse);
 	Text.Add(" Beads of sweat - yours and hers - mat the doggie’s short, dark fur, giving her coat a glossy shine. Somehow, her hair had come undone and her pink ribbon discarded somewhere in the pile of clothes strewn across the rooms. Her long strands flow and pool onto the sheets, spreading out around the guardswoman.", parse);
 	Text.NL();
 
@@ -1409,7 +1401,7 @@ Scenes.Miranda.HomeDommySexFuckDobieVag = function(cocks) {
 
 		var scenes = new EncounterTable();
 		scenes.AddEnc(function() {
-			Text.Add("<i>“Hngh, think you’re so tough, I can take that easily!”</i> she grunts.", parse);
+			Text.Add("<i>“Hngh, think you’re so tough... I can take that easily!”</i> she grunts.", parse);
 		}, 1.0, function() { return miranda.sex.rAnal > 10; });
 		scenes.AddEnc(function() {
 			Text.Add("<i>“Hey, that’s my schtick,”</i> she complains. <i>“If you keep doing that, you’ll get it back tenfold!”</i>", parse);
@@ -1431,7 +1423,7 @@ Scenes.Miranda.HomeDommySexFuckDobieVag = function(cocks) {
 	}
 	Text.NL();
 	if(dom < -25) {
-		Text.Add("<i>“F-fuck, you are good, [playername]!”</i> Miranda moans. <i>“I need to come so bad, fuck me, hard and deep!”</i>", parse);
+		Text.Add("<i>“F-fuck, you are good, [playername]!”</i> Miranda moans. <i>“I need to cum so bad - fuck me, hard and deep!”</i>", parse);
 	}
 	else if(dom < 25) {
 		Text.Add("<i>“Just - haah - keep going like that, [playername],”</i> Miranda begs.", parse);
@@ -1441,10 +1433,10 @@ Scenes.Miranda.HomeDommySexFuckDobieVag = function(cocks) {
 		if(mode == Mode.back)
 			Text.Add("Keeping one hand busy on her cock, Miranda moves her other one to squeeze her boobs, sighing as she pinches her nipples.", parse);
 		else if(mode == Mode.doggy)
-			Text.Add("True to her word, the herm begins to rock her hips back against you, fucking herself on your [cockDesc].", parse);
+			Text.Add("True to her word, the herm begins to rock her hips back against you, fucking herself on your [cock].", parse);
 	}
 	parse["dommy"] = (dom >= 25) ? " - despite her words -" : "";
-	Text.Add(" Her [mvagDesc] is clenching down on your shaft with a powerful grip, and[dommy] you can sense that the guardswoman is almost at her limit.", parse);
+	Text.Add(" Her [mvag] is clenching down on your shaft with a powerful grip, and[dommy] you can sense that the guardswoman is almost at her limit.", parse);
 	Text.NL();
 
 	parse["artificial"] = pCock.isStrapon ? " artificial" : "";
@@ -1453,9 +1445,9 @@ Scenes.Miranda.HomeDommySexFuckDobieVag = function(cocks) {
 	var mCum = miranda.OrgasmCum();
 
 	scenes.AddEnc(function() {
-		Text.Add("Just where you want her. Grinning widely, you slow down a bit, retaining the depth of your thrusts but keeping the dog-morph just a hairs-breadth away from the orgasm she so desperately craves. When Miranda realizes what you are up to, she growls, cursing you. Her complaints gradually turn to whines and pleas and finally into full on begging as you break down her will with your pistoning [cockDesc].", parse);
+		Text.Add("Just where you want her. Grinning widely, you slow down a bit - retaining the depth of your thrusts - but keeping the dog-morph just a hair's breadth away from the orgasm she so desperately craves. When Miranda realizes what you are up to, she growls, cursing you. Her complaints gradually turn to whines and pleas and finally into full on begging as you break down her will with your pistoning [cock].", parse);
 		Text.NL();
-		Text.Add("After another ten minutes, she finally crack, her thighs twitching and pussy clamping down on your[artificial] shaft. The dog-morph throws back her head and howls, tongue lolling and eyes rolling back as she rides out her climax.", parse);
+		Text.Add("After another ten minutes, she finally cracks, her thighs twitching and pussy clamping down on your[artificial] shaft. The dog-morph throws back her head and howls, tongue lolling and eyes rolling back as she rides out her climax.", parse);
 		miranda.subDom.DecreaseStat(-75, 1);
 	}, 1.0, function() { return player.SubDom() > 0 && player.sexlevel > 3; });
 	scenes.AddEnc(function() {
