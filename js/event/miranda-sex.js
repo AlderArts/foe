@@ -2965,8 +2965,8 @@ Scenes.Miranda.TavernSexSubbyVag = function(cocks) {
 		}
 		if(player.FirstVag()) {
 			Text.NL();
-			parse["c"] = p1Cock.isStrapon ? "the vibrations as she clenches your fake cock for all she's worth" : Text.Parse("the feel of her wringing your [cockDesc]", parse);
-			Text.Add("Your [vagDesc] clenches in sympathy, the excitement overwhelming you. Though neither of you have touched it, the smell and sounds of Miranda's climax, combined with [c], is more than enough to set off your own feminine orgasm in turn. Ropes of female honey flood from your pussy, falling wetly down your [thighsDesc] and staining your [legsDesc] with your climax.", parse);
+			parse["c"] = p1Cock.isStrapon ? "the vibrations as she clenches your fake cock for all she's worth" : Text.Parse("the feel of her wringing your [cock]", parse);
+			Text.Add("Your [vag] clenches in sympathy, the excitement overwhelming you. Though neither of you have touched it, the smell and sounds of Miranda's climax, combined with [c], is more than enough to set off your own feminine orgasm in turn. Ropes of female honey flood from your pussy, falling wetly down your [thighs] and staining your [legs] with your climax.", parse);
 		}
 		Text.Flush();
 
@@ -2981,14 +2981,13 @@ Scenes.Miranda.TavernSexPublicBJ = function() {
 		boyGirl : player.mfTrue("boy", "girl"),
 		pheshe : player.mfTrue("he", "she"),
 		phimher : player.mfTrue("him", "her"),
-		tongueDesc : function() { return player.TongueDesc(); },
-		bellyDesc : function() { return player.StomachDesc(); },
-		earDesc : function() { return player.EarDesc(); }
+		
 	};
-
+	parse = player.ParserTags(parse);
 	var dom = player.SubDom() - miranda.SubDom();
 
-	Text.Add("You duck in under the table, kneeling between the guardswoman’s legs.", parse);
+	parse["kneel"] = player.HasLegs() ? "kneeling" : "positioning yourself"
+	Text.Add("You duck in under the table, [kneel] between the guardswoman’s legs.", parse);
 	Text.NL();
 
 	var setPublic = false;
@@ -3023,7 +3022,7 @@ Scenes.Miranda.TavernSexPublicBJ = function() {
 	scenes.Get();
 
 	Text.NL();
-	Text.Add("You give Miranda’s shaft a few tentative licks, enjoying the feeling of her member throbbing on your [tongueDesc] before you wrap your lips around it. Almost immediately, your mouth is filled with her musky taste.", parse);
+	Text.Add("You give Miranda’s shaft a few tentative licks, enjoying the feeling of her member throbbing on your [tongue] before you wrap your lips around it. Almost immediately, your mouth is filled with her musky taste.", parse);
 	Text.NL();
 
 	Sex.Blowjob(player, miranda);
@@ -3037,9 +3036,9 @@ Scenes.Miranda.TavernSexPublicBJ = function() {
 	Text.Add("<i>“Come on, [playername], you are going to bore me if you don’t get going soon,”</i> Miranda complains, tightening her leghold. At her urging, you increase your pace, the guardswoman’s pointed cockhead poking at the entrance of your throat each stroke. The dobie yawns theatrically, though you can sense through the minute movements of her body that she’s definitely feeling this.", parse);
 	Text.NL();
 	if(Math.random() < 0.5 && miranda.SubDom() > 25) {
-		Text.Add("<i>“Hey barkeep! Another drink over here!”</i> Miranda calls out across the room. She places one of her hands on the back of your head, keeping you firmly in place as she waits. ", parse);
+		Text.Add("<i>“Hey, barkeep! Another drink over here!”</i> Miranda calls out across the room. She places one of her hands on the back of your head, keeping you firmly in place as she waits. ", parse);
 		if(setPublic)
-			Text.Add("You quickly realise your compromised position, but you can’t really do anything about it right now, so you continue sucking, trying to get the she-bitch off as quickly as you can.", parse);
+			Text.Add("You quickly realize your compromised position, but you can’t really do anything about it right now, so you continue sucking, trying to get the she-bitch off as quickly as you can.", parse);
 		else
 			Text.Add("You should still be relatively safe under the cover of the table as long as you manage to keep quiet - something you are not sure Miranda will let you get away with.", parse);
 		parse["pub"] = setPublic ? "not that you think it will help much" : "though you wish that they had table cloths";
@@ -3080,7 +3079,7 @@ Scenes.Miranda.TavernSexPublicBJ = function() {
 
 		Text.Add("You hear soft footsteps walking over to you, and a glance to the side tells you that one of the felines is approaching.", parse);
 		Text.NL();
-		Text.Add("<i>“Hey there kitty,”</i> Miranda huffs, greeting them. <i>“Sorry, but I can’t give you any cream right now, little Miranda is occupied.”</i> ", parse);
+		Text.Add("<i>“Hey there, kitty,”</i> Miranda huffs, greeting them. <i>“Sorry, but I can’t give you any cream right now - little Miranda is occupied.”</i> ", parse);
 		if(setPublic) {
 			Text.Add("As if that wasn’t obvious enough. <i>“Perhaps [pheshe] wants to share?”</i> the cat asks hopefully, [hisher] voice identifying [himher] as the [malefemale].", parse);
 			Text.NL();
@@ -3094,7 +3093,7 @@ Scenes.Miranda.TavernSexPublicBJ = function() {
 		Text.Add("<i>“I’ll come back later, okay?”</i> The cat gives you a few glances over [hisher] shoulder as [heshe] returns to [hisher] own table.", parse);
 		Text.NL();
 	}
-	Text.Add("After a while, the dobie decides to take a more active part, grabbing hold of your head and not-so-gently guiding it. Deeper and deeper she pushes, until your lips are straining around her thick - if still deflated - knot. Somehow, you manage to keep pace with her, as she allows you the occasional chance to surface for air before forcing you back to the task at hand.", parse);
+	Text.Add("After a while, the dobie decides to take a more active part, grabbing hold of your head and not-so-gently guiding it. Deeper and deeper she pushes, until your lips are straining around her thick - if still deflated - knot. Somehow, you manage to keep pace with her as she allows you the occasional chance to surface for air before forcing you back to the task at hand.", parse);
 	Text.NL();
 	if(party.Num() > 1) {
 		var femcomp = [];
@@ -3112,15 +3111,15 @@ Scenes.Miranda.TavernSexPublicBJ = function() {
 			parse["heshe"] = comp.heshe();
 			parse["hisher"] = comp.hisher();
 			parse["himher"] = comp.himher();
-			Text.Add("She sounds like she’s making not so subtle innuendos to [them], asking if [heshe]’d be interested in giving it a try.", parse);
+			Text.Add("She sounds like she’s making not-so-subtle innuendos to [them], asking if [heshe]’d be interested in giving it a try.", parse);
 			Text.NL();
 			if(comp == kiakai) {
 				parse["name"] = kiakai.name;
-				Text.Add("<i>“I… ah, I am not sure if-”</i> [name] stammers, flustered. Miranda just laughs at the elf’s cute response.", parse);
+				Text.Add("<i>“I… ah, I'm not sure if-”</i> [name] stammers, flustered. Miranda just laughs at the elf’s cute response.", parse);
 			}
 			else if(comp == terry) {
 				parse["foxvixen"] = terry.mfPronoun("fox", "vixen");
-				Text.Add("<i>“In your dreams, watch-dog. I’d rather blow everyone on this bar rather than blow you!”</i> the [foxvixen] shoots back, perhaps a bit louder than [heshe] should…", parse);
+				Text.Add("<i>“In your dreams, watchdog. I’d rather blow everyone on this bar rather than blow you!”</i> the [foxvixen] shoots back, perhaps a bit louder than [heshe] should…", parse);
 				Text.NL();
 				Text.Add("<i>“Oh ho! That sounds like an offer if I’ve heard any. Anyone up for some!?”</i> Miranda yells at the crowd. There’s more than a few guys, and even some females, that show interest.", parse);
 				Text.NL();
@@ -3149,25 +3148,23 @@ Scenes.Miranda.TavernSexPublicBJ = function() {
 	else
 		Text.Add("The table provides only partial cover at best, and by the whispered remarks you hear, more than a few of the tavern’s patrons seem to have noticed you.", parse);
 	Text.NL();
-	Text.Add("By now, you have Miranda’s full attention, as she completely abandons her cocky, indifferent facade. Panting like a bitch in heat, she pull your head up and down her shaft, roughly and repeatedly impaling you on the thick stick of meat. You can feel her throb deep down your throat, stretching you to your limits. As she nears her peak, the guardswoman eggs you on with mocking and suggestive comments, making no particular effort to keep her voice lowered.", parse);
+	Text.Add("By now, you have Miranda’s full attention as she completely abandons her cocky, indifferent facade. Panting like a bitch in heat, she pull your head up and down her shaft, roughly and repeatedly impaling you on the thick stick of meat. You can feel her throb deep down your throat, stretching you to your limits. As she nears her peak, the guardswoman eggs you on with mocking and suggestive comments, making no particular effort to keep her voice lowered.", parse);
 	Text.NL();
 	if(player.FirstCock()) {
-		parse["mutliCockDesc"] = player.MultiCockDesc();
 		parse["isAre"] = player.NumCocks() > 1 ? "are" : "is";
-		Text.Add("Your [mutliCockDesc] [isAre] almost painfully hard, neglected and clamoring for attention.", parse);
+		Text.Add("Your [cocks] [isAre] almost painfully hard, neglected and clamoring for attention.", parse);
 		Text.NL();
 	}
 	if(player.FirstVag()) {
-		parse["vagDesc"] = player.FirstVag().Short();
-		Text.Add("A trickle of femjuice drips from your [vagDesc], your puffy nether lips aroused by Miranda’s impressive member.", parse);
+		Text.Add("A trickle of femjuice drips from your [vag], your puffy netherlips aroused by Miranda’s impressive member.", parse);
 		Text.NL();
 	}
 
 	miranda.OrgasmCum();
 
-	Text.Add("Miranda grunts loudly as she hilts herself in your throat, pouring her massive load down into your [bellyDesc]. Perhaps feeling merciful, the herm pulls out just as her knot starts to swell, saving you from being stuck on her cock. On the other hand, you gain a messy pearly necklace - more of a pearly ball gown, in truth - in exchange.", parse);
+	Text.Add("Miranda grunts loudly as she hilts herself in your throat, pouring her massive load down into your [belly]. Perhaps feeling merciful, the herm pulls out just as her knot starts to swell, saving you from being stuck on her cock. On the other hand, you gain a messy pearly necklace - more of a pearly ball gown, in truth - in exchange.", parse);
 	Text.NL();
-	Text.Add("Sated, the guardswoman pats you on the head, scratching you behind your [earDesc] while you clean her up.", parse);
+	Text.Add("Sated, the guardswoman pats you on the head, scratching you behind your [ears] while you clean her up.", parse);
 	Text.NL();
 	parse["lover"] = (miranda.Attitude() < Miranda.Attitude.Neutral) ? "bitch" : "lover";
 	Text.Add("<i>“Not bad, [lover],”</i> she sighs, waving for another drink as you hurriedly clean yourself up.", parse);
@@ -3185,17 +3182,9 @@ Scenes.Miranda.TavernSexDommyBJ = function() {
 	var parse = {
 		playername : player.name,
 		masterMistress : player.mfTrue("master", "mistress"),
-		tongueDesc : function() { return player.TongueDesc(); },
-		multiCockDesc : function() { return player.MultiCockDesc(); },
-		vagDesc : function() { return player.FirstVag().Short(); },
-		clitDesc : function() { return player.FirstVag().ClitShort(); },
-		buttDesc : function() { return player.Butt().Short(); },
-		anusDesc : function() { return player.Butt().AnalShort(); },
-		footDesc : function() { return player.FootDesc(); },
-		skinDesc : function() { return player.SkinDesc(); },
-		armorDesc : function() { return player.ArmorDesc(); }
+		
 	};
-
+	parse = player.ParserTags(parse);
 	var dom = player.SubDom() - miranda.SubDom();
 
 	if(miranda.Attitude() >= Miranda.Attitude.Neutral)
