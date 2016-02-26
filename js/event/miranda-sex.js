@@ -1744,19 +1744,19 @@ Scenes.Miranda.HomeSubbySex = function() {
 		location = Loc.Downstairs;
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
-		Text.Add("<i>“This way!”</i> she motions imperiously, pulling you along up the stairs to her bedroom. The steep stairway gives you quite the view of Miranda’s supple behind, though it’s still obscured by her tight-fitting clothes. The dobie curses as she fumbles a bit with the door, her tail wagging with excitement. When the guardswoman finally manages to get it open, she practically throws you through the door and into her bedroom.", parse);
+		Text.Add("<i>“This way!”</i> she motions imperiously, pulling you along up the stairs to her bedroom. The steep stairway gives you quite the view of Miranda’s supple behind, though it’s still obscured by her tight-fitting clothes. The dobie curses as she fumbles a bit with the door, her tail wagging with excitement. When the guardswoman finally manages to get it open, she practically throws you through the doorway and into her bedroom.", parse);
 
 		if(miranda.flags["Floor"] < 2) {
 			Text.NL();
 			Scenes.Miranda.HomeDescFloor2();
 		}
 		else {
-			Text.Add(" The room is a total mess; not that you expected any different by now.", parse);
+			Text.Add(" The room is a total mess - not that you expected any different by now.", parse);
 		}
 		Text.NL();
-		Text.Add("<i>“Try to find a dry pillow to bite down on, you’ll need it,”</i> comes Miranda’s mocking voice from behind you, accompanied by a rustling as she sheds her clothes. Turning to face her, you gulp as you are hit by her stunning beauty. The doberman’s toned body has curves in all the right places; from top to toe she’s built like an athlete. Not that you’d expect any less from a guardswoman.", parse);
+		Text.Add("<i>“Try to find a dry pillow to bite down on, you’ll need it,”</i> comes Miranda’s mocking voice from behind you, accompanied by a rustling as she sheds her clothes. Turning to face her, you gulp as you are hit by her stunning beauty. The doberman’s toned body has curves in all the right places; from top to toe, she’s built like an athlete. Not that you’d expect any less from a guardswoman.", parse);
 		Text.NL();
-		Text.Add("Taut muscle hiding just below her short, shiny fur. Flat stomach and broad hips that flare out enticingly, giving her an attractive hourglass figure. Her ass is deliciously rounded, just begging to be groped. Up above, her pillowy breasts heave with her breathing, the shiny black nipples capping each mound stiff with arousal. If you had to guess, you’d say she’s about a D-cup. Of course, it’s not like you can ignore the massive knotted shaft sticking out proudly between her legs either.", parse);
+		Text.Add("Taut muscles hide just below her short, shiny fur. She has a flat stomach, and broad hips that flare out enticingly, giving her an attractive hourglass figure. Her ass is deliciously rounded, just begging to be groped. Up above, her pillowy breasts heave with her breathing, the shiny, black nipples capping each mound are stiff with arousal. If you had to guess, you’d say she’s about a D-cup. Of course, it’s not like you can ignore the massive knotted shaft sticking out proudly between her legs either.", parse);
 		Text.NL();
 		Text.Add("<i>“Check out the goods all you like,”</i> Miranda quips sultrily, tossing her long hair over her shoulder. <i>“Don’t daydream for too long, though. As you can see, I’m getting kinda antsy.”</i>", parse);
 		Text.NL();
@@ -1777,7 +1777,7 @@ Scenes.Miranda.HomeSubbySex = function() {
 		func : function() {
 			Scenes.Miranda.HomeSubbySexTakeAnal(location, Loc);
 		}, enabled : true,
-		tooltip : "You need her, offer your ass to the horny herm."
+		tooltip : "You need her... offer your ass to the horny herm."
 	});
 	//TODO
 	if(player.FirstVag()) {
@@ -1785,7 +1785,7 @@ Scenes.Miranda.HomeSubbySex = function() {
 			func : function() {
 
 			}, enabled : false,
-			tooltip : "Beg Miranda to fuck your pussy, you want to feel her doggy dick dig deep into your wet folds."
+			tooltip : "Beg Miranda to fuck your pussy; you want to feel her doggy dick dig deep into your wet folds."
 		});
 	}
 
@@ -1811,15 +1811,10 @@ Scenes.Miranda.HomeSubbySexDommyRide = function(location, Loc) {
 
 	var parse = {
 		playername : player.name,
-		breasts : function() { return player.FirstBreastRow().Short(); },
-		vag     : function() { return player.FirstVag().Short(); },
-		clit    : function() { return player.FirstVag().ClitShort(); },
-		legs    : function() { return player.LegsDesc(); },
 		boygirl : player.mfFem("boy", "girl"),
-		hips    : function() { return player.HipsDesc(); },
-		hand    : function() { return player.HandDesc(); }
+		
 	};
-
+	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 2, null, "2");
 	parse["loc1"] = function() { return location == Loc.Upstairs ? "the bed" : "the rug" };
@@ -1859,16 +1854,16 @@ Scenes.Miranda.HomeSubbySexDommyRide = function(location, Loc) {
 
 	if(!player.FirstCock()) {
 		if(strapon) {
-			Text.Add("<i>“You came prepared for this?”</i> she sniffs, haughtily looking over your offered strapon. <i>“The nerve… but I suppose it’ll do. We just need to prepare it...”</i>", parse);
+			Text.Add("<i>“You came prepared for this?”</i> she sniffs, haughtily looking over your offered strap-on. <i>“The nerve… but I suppose it’ll do. We just need to prepare it...”</i>", parse);
 		}
 		else {
-			Text.Add("<i>“Now, which one should I use...”</i> the dobie muses, looking over her collection of toys. <i>“Something nice and thick… here!”</i> She triumphantly pulls out a bright red strapon with a thick knot at the base, almost as big as her own member. <i>“This one has seen a fair bit of use over the years,”</i> she murmurs fondly. <i>“Just need to get her prepared.”</i>", parse);
+			Text.Add("<i>“Now, which one should I use...”</i> the dobie muses, looking over her collection of toys. <i>“Something nice and thick… here!”</i> She triumphantly pulls out a bright red strap-on with a thick knot at the base, almost as big as her own member. <i>“This one has seen a fair bit of use over the years,”</i> she murmurs fondly. <i>“Just need to get her prepared.”</i>", parse);
 			strapon = true;
 			borrowed = true;
 			parse["cocks"] = function() { return p1cock.Short(); }
 		}
 		Text.NL();
-		Text.Add("Just when you start wondering what she means with ‘prepare’, you feel something prod at your [vag]. <i>“It’s only fair; if you want to fuck me, you provide the lube,”</i> Miranda grins over her shoulder as she pushes the [tip] into your nethers, probing your depths with the toy. She shuffles her hips back until she’s straddling your face, presenting you with her soaked pussy. <i>“Get to work, before I change my mind.”</i>", parse);
+		Text.Add("Just when you start wondering what she means with ‘prepare’, you feel something prod at your [vag]. <i>“It’s only fair; if you want to fuck me, you provide the lube,”</i> Miranda grins over her shoulder as she pushes the [tip] into your nethers, probing your depths with the toy. She shuffles her hips back until she’s straddling your face, presenting you with her soaked pussy. <i>“Get to work before I change my mind.”</i>", parse);
 	}
 	else {
 		Text.Add("<i>“Now, let’s see what you’re packing,”</i> she hums, coaxing your [cocks] to full mast. ", parse);
@@ -1881,7 +1876,7 @@ Scenes.Miranda.HomeSubbySexDommyRide = function(location, Loc) {
 		Text.NL();
 		Text.Add("You shiver as you feel Miranda clasp her fingers around[oneof] your cock[s], stroking [itThem] lightly. <i>“Think you can keep up?”</i> she taunts. <i>“The moment you hesitate, I’m turning the tables right around, and your ass is next in line.”</i> You gulp, knowing that she’s not joking.", parse);
 		Text.NL();
-		Text.Add("<i>“This one will do nicely,”</i> the dobie hums, shuffling back until she’s straddling your face. The powerful smells of her soaked pussy, her heavy balls and her stiff cock are almost overwhelming. <i>“Get to work,”</i> she commands imperiously, before she closes her lips around your [cock].", parse);
+		Text.Add("<i>“This one will do nicely,”</i> the dobie hums, shuffling back until she’s straddling your face. The powerful smells of her soaked pussy, her heavy balls and her stiff cock are almost overwhelming. <i>“Get to work,”</i> she commands imperiously before she closes her lips around your [cock].", parse);
 
 		Sex.Blowjob(miranda, player);
 		miranda.FuckOral(miranda.Mouth(), p1cock, 1);
@@ -1917,12 +1912,12 @@ Scenes.Miranda.HomeSubbySexDommyRide = function(location, Loc) {
 		scenes.Get();
 	}
 	else {
-		Text.Add("Her eagerness to get started shows; even as you start eating her out, the dobie shoves inch after inch of the strapon into your [vag], lubing it up in your own juices.", parse);
+		Text.Add("Her eagerness to get started shows; even as you start eating her out, the dobie shoves inch after inch of the strap-on into your [vag], lubing it up in your own juices.", parse);
 		Text.NL();
-		Text.Add("<i>“You’re taking it quite well, good [boygirl].”</i> You moan a muffled reply, wincing as you feel it probe deeper and deeper. Just as you feel the spark of your orgasm starting to grow she pulls out the toy, fumbling with its straps. In short order, she has you set up, the back of the artificial member rubbing you incessantly as it juts out proudly from your crotch.", parse);
+		Text.Add("<i>“You’re taking it quite well, good [boygirl].”</i> You moan a muffled reply, wincing as you feel it probe deeper and deeper. Just as you feel the spark of your orgasm starting to grow, she pulls out the toy, fumbling with its straps. In short order, she has you set up, the back of the artificial member rubbing you incessantly as it juts out proudly from your crotch.", parse);
 	}
 	Text.NL();
-	Text.Add("<i>“Ready or not, here I come!”</i> The guardswoman twirls around, facing you once more and grinding her pussy along the length of your [cock], pressing it against your stomach. Her thrusts rub the tip of her own dick against your chin, leaving a sloppy kiss of pre behind it. She holds you in place while she uses her free hand to guide your [cock] inside her wet slit, grunting as she lowers herself. The herm’s own shaft twitches as you impale her, shooting a splatter of pre that lands on your [breasts].", parse);
+	Text.Add("<i>“Ready or not, here I come!”</i> The guardswoman twirls around, facing you once more and grinding her pussy along the length of your [cock], pressing it against your stomach. Her thrusts rub the tip of her own dick against your chin, leaving a sloppy kiss of pre behind it. She holds you in place while she uses her free hand to guide your [cock] inside her wet slit, grunting as she lowers herself. The herm’s own shaft twitches as you impale her, shooting a splatter of pre-cum that lands on your [breasts].", parse);
 	Text.NL();
 
 	Sex.Vaginal(player, miranda);
@@ -1943,11 +1938,11 @@ Scenes.Miranda.HomeSubbySexDommyRide = function(location, Loc) {
 	}
 	else {
 		if(size == Size.huge)
-			Text.Add("<i>“How do you even carry this thing around?”</i> Miranda gasps, struggling to take your massive strapon. Too much for her to handle? <i>“Fuck no! What, you think I give but can’t take?”</i>", parse);
+			Text.Add("<i>“How do you even carry this thing around?”</i> Miranda gasps, struggling to take your massive strap-on. Too much for her to handle? <i>“Fuck no! What, you think I give but can’t take?”</i>", parse);
 		else if((size == Size.medium) || borrowed)
-			Text.Add("<i>“Fits like a glove,”</i> Miranda sighs as she sinks down on the huge strapon. <i>“Just how I like them!”</i>", parse);
+			Text.Add("<i>“Fits like a glove,”</i> Miranda sighs as she sinks down on the huge strap-on. <i>“Just how I like them!”</i>", parse);
 		else
-			Text.Add("<i>“You better bring me something bigger next time,”</i> Miranda grunts, easily taking the entire length of your strapon. <i>“Tiny things like this doesn’t really do it for me anymore… you’re going to have to work for it unless you want to choke on dick when this is over.”</i>", parse);
+			Text.Add("<i>“You better bring me something bigger next time,”</i> Miranda grunts, easily taking the entire length of your strap-on. <i>“Tiny things like this doesn’t really do it for me anymore… you’re going to have to work for it unless you want to choke on dick when this is over.”</i>", parse);
 		Text.Add(" She slams herself down on you, grinding the base of the toy against your crotch.", parse);
 	}
 	Text.NL();
@@ -1955,10 +1950,10 @@ Scenes.Miranda.HomeSubbySexDommyRide = function(location, Loc) {
 		Text.Add("You do your best to rock your [hips] in time with Miranda’s bounces, her harsh words fresh in mind. Making the dobie angry is <i>not</i> something you want to do… perhaps it’s best to let her have her way after this is over and done with. Until that time, you have to prove yourself, however.", parse);
 	else {
 		parse["c"] = size == Size.huge ? Text.Parse(", gasping as she gives her all to spear herself on your [cock]", parse) : "";
-		Text.Add("You just lie back and enjoy as the horny herm bounces up and down on you[c]. You mostly let her do the work - and she’s doing a mighty fine job of it - but after a while you start to get into it, slowly thrusting your [hips] in time with Miranda, meeting her halfway.", parse);
+		Text.Add("You just lie back and enjoy as the horny herm bounces up and down on you[c]. You mostly let her do the work - and she’s doing a mighty fine job of it - but after a while, you start to get into it, slowly thrusting your [hips] in time with Miranda, meeting her halfway.", parse);
 	}
 	Text.NL();
-	Text.Add("Your [hand] traces the curves of her body, caressing her short fur and feeling the taut muscle beneath. Her wide hips, worthy of a true breeder, her flat tummy, her voluptuous breasts. The morph is built like a statue praising ancient gods, every part of her chiseled to perfection.", parse);
+	Text.Add("Your [hand] traces the curves of her body, caressing her short fur and feeling the taut muscles beneath. Her wide hips - worthy of a true breeder - her flat tummy, her voluptuous breasts... the morph is built like a statue praising ancient gods, every part of her chiseled to perfection.", parse);
 	Text.NL();
 	Text.Add("The guardswoman moans appreciatively, her nails raking your chest - roughly, but thankfully not drawing blood. ", parse);
 	if(size == Size.huge)
