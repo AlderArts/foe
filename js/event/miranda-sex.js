@@ -2157,7 +2157,7 @@ Scenes.Miranda.HomeSubbySexTakeAnal = function(location, Loc) {
 			Text.NL();
 		}
 		Text.NL();
-		Text.Add("Before long, you find yourself arching your back as lightning races down your spine. Your entire body tingles as it wavers on the brink of orgasm, suspended on the thick, crimson cock impaling you. What finally pushes you over the edge is Miranda ramming her knot inside your rectum, locking almost a foot of doberman dick in your butt. The two of you cry out in unison as you cum, burst after burst of cockcream pouring into your bowels.", parse);
+		Text.Add("Before long, you find yourself arching your back as lightning races down your spine. Your entire body tingles as it wavers on the brink of orgasm, suspended on the thick, crimson cock impaling you. What finally pushes you over the edge is Miranda ramming her knot inside your rectum, locking almost a foot of doberman dick in your butt. The two of you cry out in unison as you cum, burst after burst of cock-cream pouring into your bowels.", parse);
 		Text.NL();
 
 		miranda.OrgasmCum(1.5);
@@ -2876,26 +2876,26 @@ Scenes.Miranda.TavernSexSubbyVag = function(cocks) {
 	if(player.NumCocks() > 1)
 		Text.Add(" Your other [cocks2] poking and sliding against her full balls.", parse);
 	else if(player.HasBalls())
-	Text.Add(" Your [ballsDesc] smacking right into Miranda’s own, sending both of your sacks jiggling.", parse);
+	Text.Add(" Your [balls] smacking right into Miranda’s own, sending both of your sacks jiggling.", parse);
 	Text.NL();
-	Text.Add("You give her a moment to adjust to the feeling of your girth stretching her out, and then get down to the matter at hand. Resting your own weight atop her for support, you draw your hips back as far as you can, making your [cockDesc] almost pop free of her cunt, and then slam it back home as far and as hard as you can, rocking her whole body with the impact.", parse);
+	Text.Add("You give her a moment to adjust to the feeling of your girth stretching her out, and then get down to the matter at hand. Resting your own weight atop her for support, you draw your hips back as far as you can, making your [cock] almost pop free of her cunt, and then slam it back home as far and as hard as you can, rocking her whole body with the impact.", parse);
 	Text.NL();
-	Text.Add("Your hands close around her tits, cupping and squeezing, pinching at her nipples even as your hips saw back and forth, plunging and thrusting as you fuck her as hard and as fast as you can. All Miranda can do is moan and bark in delight as you fuck her silly. Her tongue’s lolling out, drooling on the cushions below as you ram her unlike she’s ever been reamed. <i>“Yeah. Just like tha- Oh!”</i> she cries out as you hit her g-spot. <i>“Fuck! Right there! Don’t you dare stop [playername]!”</i>", parse);
+	Text.Add("Your hands close around her tits, cupping and squeezing, pinching at her nipples even as your hips saw back and forth, plunging and thrusting as you fuck her as hard and as fast as you can. All Miranda can do is moan and bark in delight as you fuck her silly. Her tongue’s lolling out, drooling on the cushions below as you ram her unlike she’s ever been reamed. <i>“Yeah. Just like tha- Oh!”</i> she cries out as you hit her g-spot. <i>“Fuck! Right there! Don’t you dare stop, [playername]!”</i>", parse);
 	Text.NL();
-	Text.Add("You have no intention of stopping, and do your best to pick up the pace as you ream her cunt for all you're worth. Struck by a mischievous impulse, your hands abandon her tits, sliding down her belly toward her jutting foot-long cock. Sure enough, it's drooling worse than her tongue is, and you soon find your cupped hands filled with thick, musky Miranda-precum. As quickly as you can, you transfer your dripping hands back to her tits, massaging her own sex-juices into the fur as a makeshift lotion, your hands sliding nicely over the slickened bosom.", parse);
+	Text.Add("You have no intention of stopping, and do your best to pick up the pace as you ream her cunt for all you're worth. Struck by a mischievous impulse, your [hand]s abandon her tits, sliding down her belly toward her jutting foot-long cock. Sure enough, it's drooling worse than her tongue is, and you soon find your palms filled with thick, musky Miranda pre-cum. As quickly as you can, you transfer your dripping hands back to her tits, massaging her own sex-juices into the fur as a makeshift lotion, your touch sliding nicely over the slickened bosom.", parse);
 	Text.NL();
 	var knotted = p1Cock.knot != 0;
 	if(knotted && !p1Cock.isStrapon) {
-		Text.Add("You can feel your [cockDesc] pulsing in need, the wave of approaching climax building to its crescendo inside of you. Emphatically you are aware of your knot bulging with blood, bloated and ready to plug a bitch's pussy as you fill her with your seed. The situation couldn't be more right. Acting on purest instinct, you jam your hips as hard against Miranda's as possible, gritting your teeth as you press the swelling knot against her tight cunny in an effort to force the bulging flesh inside.", parse);
+		Text.Add("You can feel your [cock] pulsating in need, the wave of approaching climax building to its crescendo inside of you. Emphatically, you are aware of your knot bulging with blood, bloated and ready to plug a bitch's pussy as you fill her with your seed. The situation couldn't be more right. Acting on purest instinct, you jam your hips as hard against Miranda's as possible, gritting your teeth as you press the swelling bulb against her tight cunny in an effort to force the engorged flesh inside.", parse);
 		Text.NL();
-		Text.Add("A literal bark of surprise echoes up from beneath you, but you barely register it, your entire being consumed on your need to cram your knot inside Miranda. With a hiss of exertion, you finally heave your way inside, the sensation of her cunt clamping down like a vice on your knot the last your crumbling will can stand. Throwing your head back, you cry out as the dam breaks and you flood her depths with your seed.", parse);
+		Text.Add("A literal bark of surprise echoes up from beneath you, but you barely register it, your entire being consumed on your need to cram your knot inside Miranda. With a hiss of exertion, you finally heave your way inside, the sensation of her cunt clamping down like a vice on your bulbous flesh the last your crumbling will can stand. Throwing your head back, you cry out as the dam breaks and you flood her depths with your seed.", parse);
 		Text.NL();
-		Text.Add("The doberman underneath you howls in ecstasy, pussy clamping down hard on your [cockDesc] as Miranda reaches her climax. ", parse);
+		Text.Add("The doberman underneath you howls in ecstasy, pussy clamping down hard on your [cock] as Miranda reaches her climax. ", parse);
 		if(allCocks.length > 0 || player.HasBalls()) {
 			parse["c"] = allCocks.length > 0 ? player.MultiCockDesc() : "";
 			parse["and"] = (allCocks.length > 0 && player.HasBalls()) ? " and " : "";
 			parse["balls"] = player.HasBalls() ? player.BallsDesc() : "";
-			Text.Add("You can feel her balls churning against your [c][and][balls], as j", parse);
+			Text.Add("You can feel her balls churning against your [c][and][balls] as j", parse);
 		}
 		else
 			Text.Add("J");
@@ -2907,24 +2907,24 @@ Scenes.Miranda.TavernSexSubbyVag = function(cocks) {
 		var cum = player.OrgasmCum();
 
 		if(cum > 6) {
-			Text.Add("A veritable tidal wave of semen crashes upon Miranda's defenseless womb, her stomach inflating like a balloon as you just keep on pouring spunk inside of her. Down and down it grows until it brushes the floor, the herm so jammed full of your semen that even your knot can't keep it all inside, rivulets of seed leaking down her thighs wherever they manage to force their way out.", parse);
+			Text.Add("A veritable tidal wave of semen crashes upon Miranda's defenseless womb, her stomach inflating like a balloon as you just keep on pouring spunk inside of her. Down and down it grows until it brushes the floor, the herm so jammed full of your sperm that even your knot can't keep it all inside, rivulets of cock-cream leaking down her thighs wherever they manage to force their way out.", parse);
 		}
 		else if(cum > 3) {
-			Text.Add("As your cum keeps on flowing and flowing, the dober-herm's gut begins to balloon from the amount of seed gushing into her womb. Out and out she grows, until a nicely pregnant-looking belly sways beneath her with every motion she makes. Thanks to the tightness of your knot-induced seal, not a single drop leaks out, ensuring she is well and truly bred.", parse);
+			Text.Add("As your cum keeps on flowing and flowing, the doberherm's gut begins to balloon from the amount of jism gushing into her womb. Out and out she grows, until a nicely pregnant-looking belly sways beneath her with every motion she makes. Thanks to the tightness of your knot-induced seal, not a single drop leaks out, ensuring she is well and truly bred.", parse);
 		}
 		else {
-			Text.Add("Miranda's stomach starts to swell slightly, visibly rounding out from the huge gush of seed you packed away inside of her. But the two of you are too busy to care.", parse);
+			Text.Add("Miranda's stomach starts to swell slightly, visibly rounding out from the huge gush of sperm you packed away inside of her. But the two of you are too busy to care.", parse);
 		}
 
 		return cum;
 	}
 	else {
-		Text.Add("As the dog-morph writhes and barks beneath you, your own excitement builds, a rising wave of anticipation and pleasure that you know will soon overwhelm you. Determined not to be the first to cum, you redouble your efforts, ramming away at watch-bitch's cunt as hard and as fast you can, grinding your [cockDesc] against any spot that seems to elicit a particular reaction from her. Unconsciously, one of your hands leaves her tits and reaches down to grasp the hot, slick, pulsing warmth of her shaft. You pump away at it busily, assaulting both sets of organs at the same time, knowing she'll just have to cum first this way.", parse);
+		Text.Add("As the dog-morph writhes and barks beneath you, your own excitement builds, a rising wave of anticipation and pleasure that you know will soon overwhelm you. Determined not to be the first to cum, you redouble your efforts, ramming away at watch-bitch's cunt as hard and as fast you can, grinding your [cock] against any spot that seems to elicit a particular reaction from her. Unconsciously, one of your hands leaves her tits and reaches down to grasp the hot, slick, pulsating warmth of her shaft. You pump away at it busily, assaulting both sets of organs at the same time, knowing she'll just have to climax first this way.", parse);
 		Text.NL();
 		if(dom > 25) {
-			Text.Add("As you stroke and hump, you tell Miranda that she belongs to you; she might be top dog among the guards, but to you, she's just your bitch. Now she's going to be a good little doggie and cum for you, nice and messy.", parse);
+			Text.Add("As you stroke and hump, you tell Miranda that she belongs to you; she might be top dog among the guards, but to you she's just your bitch. Now, she's going to be a good little doggie and cum for you, nice and messy.", parse);
 			Text.NL();
-			Text.Add("A growl of pleasure rumbles out of Miranda's throat, her back arching under you. <i>“Nnng... y-yes, yes [masterMistress]!”</i> she barks gleefully in response.", parse);
+			Text.Add("A growl of pleasure rumbles out of Miranda's throat, her back arching under you. <i>“Nnng... y-yes, yes, [masterMistress]!”</i> she barks gleefully in response.", parse);
 		}
 		else if(dom > -25) {
 			Text.Add("And to think, she always goes on about being top dog. Well, it looks like there's a new top dog in town, you comment, even as you continue your ministrations.", parse);
@@ -2936,15 +2936,15 @@ Scenes.Miranda.TavernSexSubbyVag = function(cocks) {
 		else {
 			Text.Add("As your fingers dance over her dick, you playfully plead with her to just let go already; you want her to cum, here and now, just for you. Won't she please cum for you?", parse);
 			Text.NL();
-			Text.Add("<i>“Nng… If you really want me to cum that bad, you’d best work those hips and your hands.”</i>", parse);
+			Text.Add("<i>“Nng… If you really want me to cum that bad, you’d best work those hips and your [hand]s.”</i>", parse);
 			Text.NL();
 			Text.Add("You need no further encouragement, doing your best to pump for all you're worth with hands and hips, fingers seeking out every sensitive spot on her cock that you can find.", parse);
 		}
 		Text.NL();
 		parse["prosthetic"] = p1Cock.isStrapon ? " prosthetic" : "";
-		Text.Add("Miranda howls in pleasure as her cock throbs in your hand, a powerful jet of doggy-jism spraying the cushions below as her cunt clamps down on your[prosthetic] cock. Each jet that she blows feels like riding a wave, and you take advantage of her contracting pussy to really work her entrance.", parse);
+		Text.Add("Miranda howls in pleasure as her [mcock] throbs in your hand, a powerful jet of doggy-jism spraying the cushions below as her cunt clamps down on your[prosthetic] dick. Each jet that she blows feels like riding a wave, and you take advantage of her contracting pussy to really work her entrance.", parse);
 		Text.NL();
-		Text.Add("The sound of her howling in pleasure and of her semen spattering across the cushions below, the scent of sex in your nostrils, the feel of her writhing beneath you... it's too much for you to hold back any more. Throwing your own head back, you cry out as your own climax washes through you.", parse);
+		Text.Add("The sound of her yowling in ecstasy and of her semen spattering across the cushions below, the scent of sex in your nostrils, the feel of her writhing beneath you... it's too much for you to hold back anymore. Throwing your own head back, you cry out as your own climax washes through you.", parse);
 
 		var mCum = miranda.OrgasmCum();
 
@@ -2955,13 +2955,13 @@ Scenes.Miranda.TavernSexSubbyVag = function(cocks) {
 			Text.NL();
 			parse["ballsCockDesc"] = player.HasBalls() ? player.BallsDesc() : p1Cock.Short();
 			parse["mc"] = player.NumCocks() > 1 ? " and all over her balls and thighs" : "";
-			Text.Add("You can feel the tingling in your [ballsCockDesc] as your load begins bubbling up from inside you. Your [cockDesc] throbs before spraying your seed into her waiting entrance[mc]. ", parse);
+			Text.Add("You can feel the tingling in your [ballsCockDesc] as your load begins bubbling up from inside you. Your [cock] throbs before spraying your seed into her waiting entrance[mc]. ", parse);
 			if(cum > 6)
-				Text.Add("An eruption of spunk floods inside of Miranda's waiting womb, packing her with a belly-stretching load as you continue to cascade inside of her. Even as it squirts and sprays back out from the sheer pressure inside of her, most of it continues to flood inside of her, leaving her looking veritably pregnant with semen. The floor beneath your joined hips is a mess with excess semen that has leaked from inside of her.", parse);
+				Text.Add("An eruption of spunk floods inside of Miranda's womb, packing her with a belly stretching load as you continue to cascade inside of her. Even as it squirts and sprays back out from the sheer pressure inside of her, most of it continues to surge inside of her, leaving her looking veritably pregnant with sperm. The floor beneath your joined hips is a mess with excess semen that has leaked from inside of her.", parse);
 			else if(cum > 3)
-				Text.Add("As your cum keeps on flowing and flowing, the dober-herm's gut begins to balloon from the amount of seed gushing into her womb. Much of it spills freely back out, running down your thighs, but enough makes it inside to leave her with a nicely crammed pot-belly.", parse);
+				Text.Add("As your cum keeps on flowing and flowing, the doberherm's gut begins to balloon from the amount of jizz gushing into her womb. Much of it spills freely back out, running down your [thighs], but enough makes it inside to leave her with a nicely crammed potbelly.", parse);
 			else
-				Text.Add("Thick ropes of seed slosh inside of her and squirt back out over your own dick-flesh, drooling around the imperfect seal of your cock in her cunt and leaking wetly onto the cushions below you.", parse);
+				Text.Add("Thick ropes of sperm slosh inside of her and squirt back out over your own dickflesh, drooling around the imperfect seal of your cock in her cunt and leaking wetly onto the cushions below you.", parse);
 		}
 		if(player.FirstVag()) {
 			Text.NL();
