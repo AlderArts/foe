@@ -3354,17 +3354,18 @@ Scenes.Miranda.TavernSexDommyBJ = function() {
 				miranda.subDom.DecreaseStat(-25, 1);
 				player.subDom.IncreaseStat(25, 1);
 
-				Text.Add("You strike upward and outward with the backs of your hands, knocking Miranda's paws away from their grip on the sides of your head before pulling your head back and wetly popping your mouth free of her cock. The doberherm reels in surprise, and you take this opportunity to give her a hard shove in the hips, pushing her pointedly back with such force she loses her balance and falls flat on her rear. Seizing your chance, you cross the distance between you and take her by the hips, firmly pushing the lust-addled morph over onto her back before draping yourself over her torso in an impromptu pinning hold.", parse);
+				Text.Add("You strike upward and outward with the backs of your hands, knocking Miranda's paws away from their grip on the sides of your head before pulling your head back and wetly popping your mouth free of her cock. The doberherm reels in surprise, and you take this opportunity to give her a hard shove in the hips, pushing her pointedly back with such force that she loses her balance and falls flat on her rear. Seizing your chance, you cross the distance between you and take her by the hips, firmly pushing the lust-addled morph over onto her back before draping yourself over her torso in an impromptu pinning hold.", parse);
 				Text.NL();
 				if(player.SubDom() > 50) {
-					Text.Add("You shuffle yourself around so that your head is pointing toward Miranda's straining erection, the canine cock an angry-looking red from her desire, and forcefully thrust your buttocks back toward the morph's face, wrapping her head in turn between your thighs. Bluntly you inform her that if she has so much energy she wants to facefuck you rather than being nice about it, then she had better start to return the favor if she wants you to keep sucking her off.", parse);
+					parse["l"] = player.HasLegs() ? ", wrapping her head in turn between your thighs" : ""
+					Text.Add("You shuffle yourself around so that your head is pointing toward Miranda's straining erection, the canine cock an angry-looking red from her desire, and forcefully thrust your buttocks back toward the morph's face[l]. Bluntly, you inform her that if she has so much energy that she wants to facefuck you rather than being nice about it, then she had better start to return the favor if she wants you to keep sucking her off.", parse);
 					Text.NL();
 					Text.Add("To emphasize your point, you bend your head back down and slowly lick her cock from knot to glans, running your tongue up and down in slow, tantalizing strokes but never actually engulfing it again.", parse);
 				}
 				else {
-					Text.Add("You can't resist coping a quick squeeze of Miranda's tits whilst you lay atop her, but do so in passing, already spinning yourself around on her stomach so that you are both pressed face to groin with each other, Miranda's girl-cock practically glowing against your face. Wriggling your hips enticingly in the doberherm's face, you coyly comment on how Miranda is so very full of energy. Perhaps, if she thinks you're doing such a good job, she can return the favor, hmm? She likes what you're doing down here, doesn't she?", parse);
+					Text.Add("You can't resist coping a quick squeeze of Miranda's tits whilst you lie atop her, but do so in passing, already spinning yourself around on her stomach so that you are both pressed face to groin with each other, Miranda's girl-cock practically glowing against your face. Wriggling your hips enticingly in the doberherm's face, you coyly comment on how Miranda is so very full of energy. Perhaps, if she thinks you're doing such a good job, she can return the favor, hmm? She likes what you're doing down here, doesn't she?", parse);
 					Text.NL();
-					Text.Add("For emphasis, you place a soft, tender kiss right on the swollen bulge of her knot, then trace a trail of featherlight kisses up to her glans before licking your way back down. With lips and tongue you tease her shaft, caressing the sensitive dickflesh but never deigning to start properly sucking it.", parse);
+					Text.Add("For emphasis, you place a soft, tender kiss right on the swollen bulge of her knot, then trace a trail of feather-light pecks up to her glans before licking your way back down. With lips and tongue, you tease her shaft, caressing the sensitive dickflesh but never deigning to start properly sucking it.", parse);
 				}
 				Text.NL();
 
@@ -3381,18 +3382,18 @@ Scenes.Miranda.TavernSexDommyBJ = function() {
 						parse["sup"]   = miranda.SubDom() > 0 ? "Much to your surprise, " : "";
 						parse["oneof"] = player.NumCocks() > 1 ? " one of" : "";
 						parse["s"]     = player.NumCocks() > 1 ? "s" : "";
-						Text.Add("[sup]Miranda doesn’t protest. Her hands move to your hips, adjusting your position until her nose touches your [multiCockDesc]. You can feel her hot breath caress you as she laps up a dollop of pre, then moves to engulf[oneof] your shaft[s]. ", parse);
+						Text.Add("[sup]Miranda doesn’t protest. Her hands move to your hips, adjusting your position until her nose touches your [cocks]. You can feel her hot breath caress you as she laps up a dollop of pre, then moves to engulf[oneof] your shaft[s]. ", parse);
 						target = Target.Blowjob;
 					}, 1.0, function() { return true; });
 				}
 				if(player.FirstVag()) {
 					scenes.AddEnc(function() {
-						Text.Add("Miranda moves to caress your [buttDesc], slowly she traces your behind until she arrives at your [vagDesc]. With her thumbs she spreads you open, shoving her snout inside you and inhaling deeply. She licks her lips and begins lapping at your labia. ", parse);
+						Text.Add("Miranda moves to caress your [butt]. Slowly, she traces your behind until she arrives at your [vag]. With her thumbs, she spreads you open, shoving her snout inside you and inhaling deeply. She licks her lips and begins lapping at your labia. ", parse);
 						target = Target.Cunn;
 					}, 1.0, function() { return true; });
 				}
 				scenes.AddEnc(function() {
-					Text.Add("Miranda grabs your buttcheeks, kneading them and spreading them open to reveal your [anusDesc]. It’s not long before you feel wetness lapping at your crack, tongue massaging your sphincter in hopes of being granted entrance. ", parse);
+					Text.Add("Miranda grabs your butt cheeks, kneading them and spreading them open to reveal your [anus]. It’s not long before you feel wetness lapping at your crack, tongue massaging your sphincter in hopes of being granted entrance. ", parse);
 					target = Target.Rim;
 				}, 1.0, function() { return true; });
 
@@ -3404,18 +3405,18 @@ Scenes.Miranda.TavernSexDommyBJ = function() {
 				parse["gen"] = target == Target.Blowjob ? function() { return player.MultiCockDesc(); } :
 				               target == Target.Cunn ? function() { return player.FirstVag().Short(); } :
 				               function() { return player.Butt().AnalShort(); };
-				Text.Add("Even despite your pleasure as Miranda plays with your [gen], you can see her knot starting to bloat, pleasure fattening it into a nice big juicy anchor of flesh. As it bulges into something like an apple-sized bulb of dickmeat, you can feel her cock throbbing in your mouth like mad, a veritable volcanic eruption of girl-semen building inside her apple-sized balls.", parse);
+				Text.Add("Even despite your pleasure as Miranda plays with your [gen], you can see her knot starting to bloat, pleasure fattening it into a nice, big, juicy anchor of flesh. As it bulges into something like an apple-sized bulb of dickmeat, you can feel her cock throbbing in your mouth like mad, a veritable volcanic eruption of girl-semen building inside her apple-sized balls.", parse);
 				Text.NL();
 				Text.Add("Well, no sense in delaying it...", parse);
 				Text.NL();
-				Text.Add("Your hands creep around between her legs, one stroking and caressing her bloated testes, the other moving to take her dick by the base of her knot and squeeze it nice and tight. Unclenching your throat, you plunge your mouth down her shaft, sinking it inside of you until your lips are just brushing her knot... and then you clamp your lips firmly and suck as hard as you can, even as you pull your head back up her long, thin prick until only her pointy glans remains locked inside your still-sucking lips.", parse);
+				Text.Add("Your hands creep around between her legs, one stroking and caressing her bloated testes, the other moving to take her dick by the base of her knot and squeeze it nice and tight. Unclenching your throat, you plunge your mouth down her shaft, sinking it inside of you until your lips are just brushing her knot... and then you clamp down firmly and suck as hard as you can, even as you pull your head back up her long, thin prick until only her pointy glans remains locked inside your still-sucking lips.", parse);
 				Text.NL();
-				Text.Add("Miranda’s moans are muffled as she diligently works on your [gen]. From your advantageous spot, you can see, and feel, as every muscle in her body tenses. A thick spurt of pre heralds the oncoming eruption of doggie-cum that fills your mouth with nary but a single jet. You quickly move to swallow her thick load, just as she delivers another.", parse);
+				Text.Add("Miranda’s moans are muffled as she diligently works on your [gen]. From your advantageous spot, you can see, and feel, every muscle in her body tensing. A thick spurt of pre heralds the oncoming eruption of doggie-cum that fills your mouth with nary but a single jet. You quickly move to swallow her thick load, just as she delivers another.", parse);
 				Text.NL();
 
 				var cum = miranda.OrgasmCum();  // the var 'cum' name is the same as the player (?)
 
-				Text.Add("As the semen-fountain masquerading as doberherm beneath you keeps on erupting into your mouth, you diligently swallow each load, at least for a time. Having had enough, you relax your mouth and release her, allowing her cum to spray unabashedly over her thighs as you use your hand to continue milking her. Finally her spurts grow weaker and weaker, until she lets out a final groan and issues what you suspect is her final jet of this orgasm. Quickly you move, mouth diving in to capture her last load and hold it inside your lips, letting the thick stickiness of it roll across your tongue.", parse);
+				Text.Add("As the semen fountain masquerading as doberherm beneath you keeps on erupting into your maw, you diligently swallow each load, at least for a time. Having had enough, you relax your jaws and release her, allowing her cum to spray unabashedly over her thighs as you use your hand to continue milking her. Finally, her spurts grow weaker and weaker until she lets out a final groan and issues what you suspect is her final jet of this orgasm. Quickly, you move, mouth diving in to capture her last load and hold it inside your lips, letting the thick stickiness of it roll across your tongue.", parse);
 				Text.NL();
 				if(target == Target.Blowjob) {
 					var cum = player.OrgasmCum();
@@ -3423,30 +3424,31 @@ Scenes.Miranda.TavernSexDommyBJ = function() {
 					if     (cum > 6) parse["cum"] = "cascade";
 					else if(cum > 3) parse["cum"] = "streamer";
 					else             parse["cum"] = "spurt";
-					Text.Add("Even through her own climax, Miranda keeps sucking your cock for all she's worth, her ecstatic moans rattling through the sensitive flesh and sending sparks of pleasure crackling beneath your skin. You feel the pressure building up inside of you, even as her own thick cum stirs your senses and enflames your lust. The lewd slurping from behind you as she suckles finally pushes you over the end and you reward her efforts with your own [cum] of spooge.", parse);
+					Text.Add("Even through her own climax, Miranda keeps sucking your cock for all she's worth, her ecstatic moans rattling through the sensitive flesh and sending sparks of pleasure crackling beneath your skin. You feel the pressure building up inside of you even as her own thick cum stirs your senses and enflames your lust. The lewd slurping from behind you as she suckles finally pushes you over the end and you reward her efforts with your own [cum] of spooge.", parse);
 				}
 				else if(target == Target.Cunn) {
-					Text.Add("Throughout her own climax, Miranda's tongue keeps slurping and squelching through your petals, lapping greedily for your feminine nectar, her fuzzy chin rubbing against your [clitDesc] seemingly by accident. Your hips twitch and sway, but she simply won't relent in her assault, and inevitably your womanhood releases its juices right into the morph's hungry jaws.", parse);
+					parse["vc"] = player.FirstVag().clitCock ? "" : Text.Parse(", her fuzzy chin rubbing against your [clit] seemingly by accident", parse);
+					Text.Add("Throughout her own climax, Miranda's tongue keeps slurping and squelching through your petals, lapping greedily for your feminine nectar[vc]. Your hips twitch and sway, but she simply won't relent in her assault, and inevitably your womanhood releases its juices right into the morph's hungry jaws.", parse);
 
 					var cum = player.OrgasmCum(); // ? why?
 				}
 				else {
-					Text.Add("Miranda lewdly slurps and laps at your back passage, making you shudder and wriggle even through her own climax. As her cock slides limply back into her sheath, she continues her assault, but evidently you've worn her out, as her licks grow slower and slower until she stops entirely. As she lays back and pants, you're left glowing pleasantly in arousal.", parse);
+					Text.Add("Miranda lewdly slurps and laps at your back passage, making you shudder and wriggle even through her own climax. As her cock slides limply back into her sheath, she continues her assault, but evidently you've worn her out as her licks grow slower and slower until she stops entirely. As she lies back and pants, you're left glowing pleasantly in arousal.", parse);
 					player.AddLustFraction(0.5);
 				}
 				Text.NL();
 				if(dom > 25) {
 					parse["masterMistress"] = player.mfTrue("master", "mistress");
-					Text.Add("<i>“Ah...”</i> Miranda sighs in relief. <i>“Thank you, [masterMistress]. I really needed that.”</i> She licks her lips, still panting in exertion as she releases you and lays splayed on the floor.", parse);
+					Text.Add("<i>“Ah...”</i> Miranda sighs in relief. <i>“Thank you, [masterMistress]. I really needed that.”</i> She licks her lips, still panting in exertion as she releases you and lies splayed on the floor.", parse);
 					Text.NL();
-					Text.Add("Leisurely, you shuffle yourself around atop her until you are face to face with the panting dobermorph. Smirking as best you can with your mouth full, you gently cup her chin and cheeks with your hands, subtly pinning her mouth open before opening your lips. A cascade of thick herm-seed leisurely flows from your mouth into Miranda's, the herm's eyes widening as it does so. You feed her every last drop that you saved earlier, and then swoop down to kiss her insistently on the lips.", parse);
+					Text.Add("Leisurely, you shuffle yourself around atop her until you are face to face with the panting dobermorph. Smirking as best you can with your mouth full, you gently cup her chin and cheeks with your hands, subtly pinning her muzzle open before opening your lips. A cascade of thick herm-seed leisurely flows from your maw into Miranda's, the herm's eyes widening as it does so. You feed her every last drop that you saved earlier, and then swoop down to kiss her insistently.", parse);
 					Text.NL();
-					Text.Add("The subby doberherm has no choice but to swallow, not that she’d deny it in the first place. But forcing her own cum down her gullet while you kiss her feels pretty nice. You break the kiss just in time to hear her moan, a look of satisfaction plastered on her face. Miranda is a good girl, you remark patting her head as she pants.", parse);
+					Text.Add("The subby doberherm has no choice but to swallow - not that she’d deny it in the first place - but forcing her own cum down her gullet while you kiss her feels pretty nice. You break the lip-lock just in time to hear her moan, a look of satisfaction plastered on her face. Miranda is a good girl, you remark patting her head as she pants.", parse);
 				}
 				else if(dom > -25) {
-					Text.Add("<i>“Not bad, [playername],”</i> Miranda remarks, still panting after your little session. <i>“Doing and getting done feels kinda nice. I wouldn’t mind going for another round sometime,”</i> she grins. <i>“But first I think I need to clean up after myself.”</i>", parse);
+					Text.Add("<i>“Not bad, [playername],”</i> Miranda remarks, still panting after your little session. <i>“Doing and getting done feels kinda nice. I wouldn’t mind going for another round sometime,”</i> she grins. <i>“But first, I think I need to clean up after myself.”</i>", parse);
 					Text.NL();
-					Text.Add("You have only a moment to consider what she’s said before she grabs you and spins you around to give you a forceful kiss, forcing some of her cum down your throat. She does, however, manage to steal some straight from your mouth. The two of you continue to kiss passionately for a few moments, before she withdraws with a grin, licking her lips.", parse);
+					Text.Add("You have only a moment to consider what she’s said before she grabs you and spins you around to give you a forceful kiss, forcing some of her cum down your throat. She does, however, manage to steal some straight from your mouth. The two of you continue to make out passionately for a few moments before she withdraws with a grin, licking her lips.", parse);
 					Text.NL();
 					Text.Add("Smiling, you quip that it looks like you weren't the only one who enjoys her special milk.", parse);
 					Text.NL();
@@ -3461,9 +3463,9 @@ Scenes.Miranda.TavernSexDommyBJ = function() {
 					Text.NL();
 					Text.Add("Twisting around so that you are sitting atop her, you look her in the eye.", parse);
 					if(player.SubDom() > 50)
-						Text.Add(" You cast her your sultriest look, rolling her last shot of dickcream around in your mouth, letting her see you saved some, then noisily gulp it down. Your [tongueDesc] snakes out to lap daintily at the corner of your mouth.", parse);
+						Text.Add(" You cast her your sultriest look, rolling her last shot of dickcream around in your mouth, letting her see you saved some, then noisily gulp it down. Your [tongue] snakes out to lap daintily at the corner of your mouth.", parse);
 					else
-						Text.Add(" Eyes hooded in lust, you make a show of tilting your head to emphasize the lines of your neck, slowly swallowing the mouthful of Miranda's seed you retain with an audible sound. Moaning in desire, you lasciviously lick at your lips, as if still searching for more of that taste.", parse);
+						Text.Add(" Eyes hooded in lust, you make a show of tilting your head to emphasize the lines of your neck, slowly swallowing the mouthful of Miranda's seed you retained with an audible sound. Moaning in desire, you lasciviously lick at your lips as if still searching for more of that taste.", parse);
 					Text.Add(" She certainly is a nice girl, you quip back. Nice and tasty, too.", parse);
 					Text.NL();
 					parse["hair"] = player.HasHair() ? "ruffling your hair" : "rubbing your head";
@@ -3473,7 +3475,7 @@ Scenes.Miranda.TavernSexDommyBJ = function() {
 
 				Gui.NextPrompt(function() {
 					Text.Clear();
-					Text.Add("You hasten to pull on the rest of your [armorDesc], the now-sated dobermorph having already clambered back into her own gear and now waiting for you by the door. Once dressed, you move to unbarricade the door and let her exit, following her as she goes.", parse);
+					Text.Add("You hasten to pull on the rest of your [armor], the now-sated dobermorph having already clambered back into her own gear and now waiting for you by the door. Once dressed, you move to unbarricade the door and let her exit, following her as she goes.", parse);
 					PrintDefaultOptions();
 				});
 			}, enabled : true,
