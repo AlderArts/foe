@@ -35,27 +35,42 @@ Saver.SavePrompt = function(backFunc) {
 	Gui.SetButtonsFromList(options, true, backFunc);
 
 	Text.NL();
-	if(Saver.HasSaves())
-		Text.Add("DEBUG: localStorage usage: " + JSON.stringify(localStorage).length / 2636625);
+	if (Saver.HasSaves()) {
+		var storageLength = 0;
+		for (var key in localStorage) {
+			if (localStorage.hasOwnProperty(key) && localStorage[key].length) {
+				storageLength += localStorage[key].length;
+			}
+		}
+		Text.Add("localStorage usage: " + ((storageLength * 16) / (8 * 1024)).toFixed(2) + 'kB');
+	}
 	Text.Flush();
 }
 
-Saver.SaveGame = function(nr, cmt) {
+Saver.SaveGame = function(slot, comment) {
 	GameToCache();
 	var seen = [];
-	localStorage["savedata" + nr] = JSON.stringify(gameCache, function(key, val) {
-		if (typeof val == "object") {
-			if (seen.indexOf(val) >= 0)
+	var saveData = JSON.stringify(gameCache, function(key, value) {
+		if (typeof value === "object" && value !== null) {
+			if (seen.indexOf(value) !== -1) {
+				console.error("Circular reference found in the gameCache!\n" + key + ":", value);
 				return;
-			seen.push(val);
+			}
+			seen.push(value);
 		}
-		return val;
+		return value;
 	});
+
 	var saveName = gameCache.name;
-	if(cmt)
-		saveName += " ::: Comment: " + cmt;
-	// TODO: Name, level, time
-	localStorage["save" + nr] = saveName;
+	if (comment) {
+		saveName += " :: Comment: " + comment;
+	}
+
+	localStorage["saveDataLZ" + slot] = LZString.compress(saveData);
+	localStorage["save" + slot] = saveName;
+	// Clear out legacy storage.
+	delete localStorage["savedata" + slot];
+
 	Saver.SavePrompt();
 }
 
@@ -118,13 +133,27 @@ Saver.LoadPrompt = function(backFunc) {
 	Gui.SetButtonsFromList(options, true, backFunc);
 
 	Text.NL();
-	if(Saver.HasSaves())
-		Text.Add("DEBUG: localStorage usage: " + JSON.stringify(localStorage).length / 2636625);
+	if (Saver.HasSaves()) {
+		var storageLength = 0;
+		for (var key in localStorage) {
+			if (localStorage.hasOwnProperty(key) && localStorage[key].length) {
+				storageLength += localStorage[key].length;
+			}
+		}
+		Text.Add("localStorage usage: " + ((storageLength * 16) / (8 * 1024)).toFixed(2) + 'kB');
+	}
 	Text.Flush();
 }
 
-Saver.LoadGame = function(nr) {
-	gameCache = JSON.parse(localStorage["savedata" + nr]);
+Saver.LoadGame = function(slot) {
+	if (localStorage["saveDataLZ" + slot]) {
+		var saveData = LZString.decompress(localStorage["saveDataLZ" + slot]);
+		gameCache = JSON.parse(saveData);
+	} else {
+		// Load from legacy storage.
+		gameCache = JSON.parse(localStorage["savedata" + slot]);
+	}
+
 	CacheToGame();
 	PrintDefaultOptions();
 }
