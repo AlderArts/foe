@@ -379,7 +379,7 @@ Scenes.Lagomorph.PlainsEncounter = function() {
 	var enc = this;
 	
 	var parse = {
-		earsDesc   : function() { return player.EarDesc(); },
+		earsDesc   : function() { return player.EarDesc(true); },
 		himherthem : party.Num() > 1 ? "them" : player.mfFem("him", "her")
 	};
 	

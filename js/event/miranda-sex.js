@@ -954,7 +954,7 @@ Scenes.Miranda.HomeDommySexRideDobieCockAnal = function() {
 		playername    : player.name,
 		masterMistress: player.mfTrue("master", "mistress"),
 		hairDesc      : function() { return player.Hair().Short(); },
-		earDesc       : function() { return player.EarDesc(); },
+		ears       : function() { return player.EarDesc(); },
 		boyGirl       : player.mfTrue("boy", "girl"),
 		armorDesc     : function() { return player.ArmorDesc(); },
 		vagDesc       : function() { return player.FirstVag().Short(); },
@@ -1168,7 +1168,7 @@ Scenes.Miranda.HomeDommySexRideDobieCockAnal = function() {
 			if(dom < -25) {
 				Text.Add("<i>“Please…”</i>", parse);
 				Text.NL();
-				Text.Add("Please, what, you reply back to her, cupping a hand around one of your [earDesc] for emphasis.", parse);
+				Text.Add("Please, what, you reply back to her, cupping a hand around one of your [ears] for emphasis.", parse);
 				Text.NL();
 				Text.Add("<i>“Please, [masterMistress]! Let me go back inside your tight, hot ass! I need it so bad!”</i> she whines.", parse);
 				Text.NL();
@@ -2644,7 +2644,7 @@ Scenes.Miranda.TavernSexBackroomPrompt = function() {
 	var parse = {
 		playername : player.name,
 		armorDesc  : function() { return player.ArmorDesc(); },
-		tongueDesc : function() { return player.TongueDesc(); }
+		tongue : function() { return player.TongueDesc(); }
 	};
 
 	var dom = player.SubDom() - miranda.SubDom();
@@ -2685,7 +2685,7 @@ Scenes.Miranda.TavernSexBackroomPrompt = function() {
 		options.push({ nameStr : "Take her",
 			func : function() {
 				Text.Clear();
-				Text.Add("With a hungry smile, you close the distance between the two of you and cup Miranda's chin, pulling her into a passionate kiss, feeding the eager morph your [tongueDesc]. Pleasantly your tongues wrestle for several moments as your arms pull the pair of you together, letting you feel her erection grinding against you.", parse);
+				Text.Add("With a hungry smile, you close the distance between the two of you and cup Miranda's chin, pulling her into a passionate kiss, feeding the eager morph your [tongue]. Pleasantly your tongues wrestle for several moments as your arms pull the pair of you together, letting you feel her erection grinding against you.", parse);
 				Text.NL();
 				Text.Add("After whetting your appetite, you break the kiss and reach down to cup her tent, fondling her drooling doggy-dick through her pants and telling her that you want her out of her clothes; you can't properly appreciate that pretty rump of hers while she's all dressed up.", parse);
 				Text.NL();
@@ -2843,7 +2843,6 @@ Scenes.Miranda.TavernSexSubbyVag = function(cocks) {
 		lordLady       : player.mfTrue("lord", "lady"),
 		masterMistress : player.mfTrue("master", "mistress"),
 		hairDesc       : function() { return player.Hair().Short(); },
-		earDesc        : function() { return player.EarDesc(); },
 		armorDesc      : function() { return player.ArmorDesc(); },
 		buttDesc       : function() { return player.Butt().Short(); },
 		anusDesc       : function() { return player.Butt().AnalShort(); },
@@ -3042,7 +3041,7 @@ Scenes.Miranda.TavernSexPublicBJ = function() {
 		boyGirl : player.mfTrue("boy", "girl"),
 		pheshe : player.mfTrue("he", "she"),
 		phimher : player.mfTrue("him", "her"),
-		tongueDesc : function() { return player.TongueDesc(); },
+		tongue : function() { return player.TongueDesc(); },
 		bellyDesc : function() { return player.StomachDesc(); },
 		earDesc : function() { return player.EarDesc(); }
 	};
@@ -3084,7 +3083,7 @@ Scenes.Miranda.TavernSexPublicBJ = function() {
 	scenes.Get();
 
 	Text.NL();
-	Text.Add("You give Miranda’s shaft a few tentative licks, enjoying the feeling of her member throbbing on your [tongueDesc] before you wrap your lips around it. Almost immediately, your mouth is filled with her musky taste.", parse);
+	Text.Add("You give Miranda’s shaft a few tentative licks, enjoying the feeling of her member throbbing on your [tongue] before you wrap your lips around it. Almost immediately, your mouth is filled with her musky taste.", parse);
 	Text.NL();
 
 	Sex.Blowjob(player, miranda);
@@ -3246,7 +3245,7 @@ Scenes.Miranda.TavernSexDommyBJ = function() {
 	var parse = {
 		playername : player.name,
 		masterMistress : player.mfTrue("master", "mistress"),
-		tongueDesc : function() { return player.TongueDesc(); },
+		tongue : function() { return player.TongueDesc(); },
 		multiCockDesc : function() { return player.MultiCockDesc(); },
 		vagDesc : function() { return player.FirstVag().Short(); },
 		clitDesc : function() { return player.FirstVag().ClitShort(); },
@@ -3264,7 +3263,7 @@ Scenes.Miranda.TavernSexDommyBJ = function() {
 	else
 		Text.Add("<i>“Okay, slut. Your best friend is ready for some action, so be a good bitch and roll that carpet out, cuz I’m going in,”</i> Miranda says, slapping your face with her cock before forcefully shoving her pointed tip against your lips.", parse);
 	Text.NL();
-	Text.Add("You open your mouth to grant the dobie-dick access, extending your [tongueDesc] and gently lapping at the underside of Miranda's cock as you envelop it in your mouth. Closing your lips around the intruder, the taste of salty-sweet precum and flesh washing over your senses, you start to suckle, caressing her with your lips and tongue, bobbing your head slightly as you swallow further inches of girl-cock into your mouth.", parse);
+	Text.Add("You open your mouth to grant the dobie-dick access, extending your [tongue] and gently lapping at the underside of Miranda's cock as you envelop it in your mouth. Closing your lips around the intruder, the taste of salty-sweet precum and flesh washing over your senses, you start to suckle, caressing her with your lips and tongue, bobbing your head slightly as you swallow further inches of girl-cock into your mouth.", parse);
 	Text.NL();
 
 	Sex.Blowjob(player, miranda);
@@ -3533,7 +3532,7 @@ Scenes.Miranda.TavernSexDommyBJ = function() {
 					Text.NL();
 					Text.Add("Twisting around so that you are sitting atop her, you look her in the eye.", parse);
 					if(player.SubDom() > 50)
-						Text.Add(" You cast her your sultriest look, rolling her last shot of dickcream around in your mouth, letting her see you saved some, then noisily gulp it down. Your [tongueDesc] snakes out to lap daintily at the corner of your mouth.", parse);
+						Text.Add(" You cast her your sultriest look, rolling her last shot of dickcream around in your mouth, letting her see you saved some, then noisily gulp it down. Your [tongue] snakes out to lap daintily at the corner of your mouth.", parse);
 					else
 						Text.Add(" Eyes hooded in lust, you make a show of tilting your head to emphasize the lines of your neck, slowly swallowing the mouthful of Miranda's seed you retain with an audible sound. Moaning in desire, you lasciviously lick at your lips, as if still searching for more of that taste.", parse);
 					Text.Add(" She certainly is a nice girl, you quip back. Nice and tasty, too.", parse);

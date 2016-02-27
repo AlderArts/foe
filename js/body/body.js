@@ -358,13 +358,17 @@ Body.prototype.EyeDesc = function() {
 	return eyes.qShort() + " eye";
 }
 
-Body.prototype.EarDesc = function() {
+Body.prototype.EarDesc = function(plural) {
+	var ret;
 	var ears = this.head.ears.race;
-	if(ears.isRace(Race.Reptile)) return "pointed, scaled ears";
-	if(ears.isRace(Race.Elf, Race.Dryad, Race.Demon)) return "pointed elfin ears";
-	if(ears.isRace(Race.Rabbit))  return "floppy rabbit ears";
-	if(ears.isRace(Race.Human))   return "ears";
-	return ears.qShort() + " ears";
+	if(ears.isRace(Race.Reptile)) ret = "pointed, scaled ear";
+	else if(ears.isRace(Race.Elf, Race.Dryad, Race.Demon)) ret = "pointed elfin ear";
+	else if(ears.isRace(Race.Rabbit))  ret = "floppy rabbit ear";
+	else if(ears.isRace(Race.Human))   ret = "ear";
+	else ret = ears.qShort() + " ear";
+	
+	if(plural) ret += "s";
+	return ret;
 }
 
 Body.prototype.HasFlexibleEars = function() {

@@ -1397,7 +1397,7 @@ Scenes.Farm.Market = function(haul, next) {
 	var parse = {
 		playername : player.name,
 		enemy      : haul.badenc,
-		earDesc    : function() { return player.EarDesc(); }
+		ear    : function() { return player.EarDesc(); }
 	};
 
 	var humanity = player.Humanity();
@@ -1454,7 +1454,7 @@ Scenes.Farm.Market = function(haul, next) {
 	else if(intcheck < 100) {
 		Text.Add("Your expertise at spotting a bargain or a bartering tell means you are able to outwit most of your customers and ensure they end up paying the price you ask, or close to it, at least. A very tidy profit is the end result of your sales. Whenever you glance in Gwendy's direction, she's smiling happily at the results of your sales pitching.", parse);
 		if(humanity < 0.95)
-			Text.Add(" The grumblings of angry bigots echo in your [earDesc]s as you repeatedly best them.", parse);
+			Text.Add(" The grumblings of angry bigots echo in your [ear]s as you repeatedly best them.", parse);
 		score += 2;
 	}
 	else {

@@ -4,10 +4,6 @@ Entity.prototype.PrintDescription = function() {
 	
 	var parse = {
 		name     : this.NameDesc(),
-		hisher   : this.hisher(),
-		HisHer   : this.HisHer(),
-		HeShe    : this.HeShe(),
-		heshe    : this.heshe(),
 		possesive: this.possessive(),
 		height   : Math.floor(this.body.height.Get()),
 		weigth   : Math.floor(this.body.weigth.Get()),
@@ -15,13 +11,9 @@ Entity.prototype.PrintDescription = function() {
 		gender   : this.body.GenderStr(),
 		skinDesc : this.body.SkinDesc(),
 		faceDesc : this.body.FaceDescLong(),
-		legs     : this.LegsDesc(),
-		feet     : this.FeetDesc(),
 		eyeCount : Text.NumToText(this.body.head.eyes.count.Get()),
 		eyeColor : Color.Desc(this.body.head.eyes.color),
-		eyeDesc  : this.body.EyeDesc(),
 		eyeS     : this.body.head.eyes.count.Get() == 1 ? "" : "s",
-		earDesc  : this.body.EarDesc(),
 		hairDesc : this.body.head.hair.Long(),
 		buttDesc : this.Butt().Long(),
 		hipsDesc : this.HipsDesc(),
@@ -29,10 +21,10 @@ Entity.prototype.PrintDescription = function() {
 		ballsDesc: this.Balls().Long(),
 		has      : this.has(),
 		is       : this.is(),
-		armor    : this.ArmorDescLong(),
-		larmor   : this.LowerArmorDescLong(),
-		weapon   : this.WeaponDescLong()
+		larmor   : this.LowerArmorDescLong()
 	};
+	parse = this.ParserTags(parse);
+	parse = this.ParserPronouns(parse);
 	
 	Text.Add("[name] [is] a [gender] [race], [height]cm tall and weighing around [weigth]kg. [HeShe] [has] [skinDesc]. ", parse);
 	Text.Add("[HeShe] [is] wearing [armor].", parse);
@@ -40,8 +32,8 @@ Entity.prototype.PrintDescription = function() {
 	if(this.Weapon()) Text.Add(" [HeShe] [is] wielding [weapon].", parse);
 	// TODO Body appearance, skin color
 	Text.NL();
-	Text.Add("[HeShe] [has] [faceDesc]. [HisHer] [eyeCount] [eyeColor] [eyeDesc][eyeS] observe the surroundings. ", parse);
-	Text.Add("A pair of [earDesc] sticks out from [possesive] [hairDesc]. ", parse);
+	Text.Add("[HeShe] [has] [faceDesc]. [HisHer] [eyeCount] [eyeColor] [eye][eyeS] observe the surroundings. ", parse);
+	Text.Add("A pair of [ears] sticks out from [possesive] [hairDesc]. ", parse);
 	
 	for(i = 0; i < this.body.head.appendages.length; i++) {
 		var a = this.body.head.appendages[i];

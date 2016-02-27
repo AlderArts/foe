@@ -137,8 +137,7 @@ Roa.prototype.Interact = function() {
 
 Scenes.Roa.BrothelApproach = function() {
 	var parse = {
-		playername : player.name,
-		legDesc : function() { return player.LegDesc(); }
+		playername : player.name
 	};
 	
 	if(roa.Met()) {
@@ -172,7 +171,7 @@ Scenes.Roa.BrothelApproach = function() {
 		else {
 			Text.Add("<i>“[playername]! My favorite customer!”</i> he exclaims jumping from his seat to hug you. <i>“Hi! What brings you to my little corner of the room? Want to plug my bum?”</i>", parse);
 			Text.NL();
-			Text.Add("With a smile and a chuckle, you hug the bunny-boy back, feeling his cock rubbing against your [legDesc]. He’s just never going to change, is he?", parse);
+			Text.Add("With a smile and a chuckle, you hug the bunny-boy back, feeling his cock rubbing against your [leg]. He’s just never going to change, is he?", parse);
 		}
 		Text.Flush();
 		
@@ -184,10 +183,9 @@ Scenes.Roa.BrothelApproach = function() {
 
 Scenes.Roa.BrothelPrompt = function() {
 	var parse = {
-		cost : Text.NumToText(roa.Cost()),
-		armorDesc : function() { return player.ArmorDesc(); },
-		cockDesc : function() { return player.BiggestCock().Short(); }
+		cost : Text.NumToText(roa.Cost())
 	};
+	parse = player.ParserTags(parse);
 	
 	//[name]
 	var options = new Array();
@@ -199,10 +197,10 @@ Scenes.Roa.BrothelPrompt = function() {
 			Text.Add("The lapin immediately sets about removing his clothes in a strip tease, showing off his butt and throbbing pink pucker right in the middle of his bubble butt. <i>“I’m all ready!”</i> he declares with a grin.", parse);
 			Text.NL();
 			if(player.Slut() >= 45) {
-				Text.Add("That’s great; now, how about he comes over here to give you a hand with your [armorDesc]? As you say this, you smirk knowingly, crooking a finger to entice the whore to attend you.", parse);
+				Text.Add("That’s great; now, how about he comes over here to give you a hand with your [armor]? As you say this, you smirk knowingly, crooking a finger to entice the whore to attend you.", parse);
 				Text.NL();
 				parse["fem"] = player.mfFem("sir", "ma’am");
-				Text.Add("<i>“Right away, [fem]!”</i> he replies excitedly as he hops over to you and begins to strip you out of your [armorDesc].", parse);
+				Text.Add("<i>“Right away, [fem]!”</i> he replies excitedly as he hops over to you and begins to strip you out of your [armor].", parse);
 				Text.NL();
 				Text.Add("You lick your lips appreciatively, twisting and turning to help Roa remove your gear, and to show off your increasingly visible assets to their best. When he gets close enough, you can’t resist sending your fingers dancing teasingly over his bobbing erection, feeling the soft, warm flesh under your fingertips.", parse);
 				Text.NL();
@@ -213,12 +211,12 @@ Scenes.Roa.BrothelPrompt = function() {
 				Text.Add("<i>“Oh! You’re so naughty!”</i> he giggles.", parse);
 			}
 			else {
-				Text.Add("You nod your head and quickly move to remove your own [armorDesc], placing it carefully aside once you’re also naked.", parse);
+				Text.Add("You nod your head and quickly move to remove your own [armor], placing it carefully aside once you’re also naked.", parse);
 			}
 			Text.NL();
 			Text.Add("With both of you now totally undressed, you consider what you want Roa to do to you.", parse);
 			if(player.FirstCock())
-				Text.Add(" Roa has already sunk to his knees, clearly expecting you to want him to put his mouth to work lubing up your [cockDesc] before you bury it into his willing ass.", parse);
+				Text.Add(" Roa has already sunk to his knees, clearly expecting you to want him to put his mouth to work lubing up your [cock] before you bury it into his willing ass.", parse);
 			Text.Flush();
 			
 			var options = new Array();
@@ -442,15 +440,9 @@ Scenes.Roa.First = function() {
 	var p1cock = player.BiggestCock();
 	
 	var parse = {
-		cost : Text.NumToText(cost),
-		hand : function() { return player.HandDesc(); },
-		feet : function() { return player.FeetDesc(); },
-		lowerArmorDesc : function() { return player.LowerArmorDesc(); },
-		tongueDesc     : function() { return player.TongueDesc(); },
-		multiCockDesc  : function() { return player.MultiCockDesc(); },
-		cockDesc       : function() { return p1cock.Short(); }
+		cost : Text.NumToText(cost)
 	};
-	
+	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	
 	roa.flags["Met"] = Roa.Met.Met;
@@ -514,9 +506,9 @@ Scenes.Roa.First = function() {
 			Text.NL();
 			Text.Add("The inside is not at all what you expected. It’s a small, neatly kept room, the bulk given over to a large bed underneath a shining-clean ceiling mirror. Another door on the opposite wall leads to what you presume is a bathroom. Lush carpeting lays under your [feet], and the walls are covered in tasteful wallpaper, embroidered with heart print pattern. A small bedside table sports a single colorful candle, the likely source of the faint herbal scent that permeates the room.", parse);
 			Text.NL();
-			Text.Add("The eager lapin wastes no time, undoing the binding of his clothing with practiced ease. In no time at all, he’s stark-naked and his fetish clothes are strewn about the room’s carpeted floor. <i>“Want me to help you undress?”</i> he offers tentatively, kneeling beside you to grip your [lowerArmorDesc].", parse);
+			Text.Add("The eager lapin wastes no time, undoing the binding of his clothing with practiced ease. In no time at all, he’s stark-naked and his fetish clothes are strewn about the room’s carpeted floor. <i>“Want me to help you undress?”</i> he offers tentatively, kneeling beside you to grip your [botarmor].", parse);
 			Text.NL();
-			Text.Add("Unthinkingly, you dab at your lips with your [tongueDesc]. Well, since he’s so eager, why not? You nod, and tell him that you would like that.", parse);
+			Text.Add("Unthinkingly, you dab at your lips with your [tongue]. Well, since he’s so eager, why not? You nod, and tell him that you would like that.", parse);
 			Text.NL();
 			Text.Add("Roa’s eyes practically glint at your reply. He begins stripping you, bit by bit, taking advantage of the situation and exploring your body with his eager handpaws. His cock bobs with his movement, throbbing in excitement. If you didn’t know better, you’d say he’s ready to blow from excitement alone…", parse);
 			Text.NL();
@@ -528,7 +520,7 @@ Scenes.Roa.First = function() {
 			
 			if(player.NumCocks() > 1) {
 				Text.NL();
-				Text.Add("The horny rabbit turns to face you, a giggle bubbling from his grinning lips. <i>“All that, for me? You shouldn’t have...”</i> he says, kneeling in front you, sniffing your [multiCockDesc]. <i>“May I?”</i> he asks, laying a hand on your [cockDesc].", parse);
+				Text.Add("The horny rabbit turns to face you, a giggle bubbling from his grinning lips. <i>“All that, for me? You shouldn’t have...”</i> he says, kneeling in front you, sniffing your [cocks]. <i>“May I?”</i> he asks, laying a hand on your [cock].", parse);
 				if(herm) {
 					options.push({ nameStr : "Fuck him",
 						func : Scenes.Roa.TSLPitchAnal, enabled : true,
@@ -546,7 +538,7 @@ Scenes.Roa.First = function() {
 			}
 			else if(player.FirstCock()) {
 				Text.NL();
-				Text.Add("The horny rabbit turns to face you, a giggle bubbling from his grinning lips. <i>“Now, let’s get to know that hard [cockDesc] of yours,”</i> he says, kneeling in front of you and sniffing your musk. <i>“So enticing… May I?”</i> he asks, laying a hand on your [cockDesc].", parse);
+				Text.Add("The horny rabbit turns to face you, a giggle bubbling from his grinning lips. <i>“Now, let’s get to know that hard [cock] of yours,”</i> he says, kneeling in front of you and sniffing your musk. <i>“So enticing… May I?”</i> he asks, laying a hand on your [cock].", parse);
 				
 				if(herm) {
 					options.push({ nameStr : "Fuck him",
@@ -606,20 +598,10 @@ Scenes.Roa.TSLPitchAnal = function() {
 	var p1cock = player.BiggestCock(null, true);
 	
 	var parse = {
-		playername : player.name,
-		multiCockDesc : function() { return player.MultiCockDesc(); },
-		cockDesc  : function() { return p1cock.Short(); },
-		cockTip   : function() { return p1cock.TipShort(); },
-		skinDesc  : function() { return player.SkinDesc(); },
-		earDesc   : function() { return player.EarDesc(); },
-		hipsDesc  : function() { return player.HipsDesc(); },
-		legsDesc  : function() { return player.LegsDesc(); },
-		ballsDesc : function() { return player.BallsDesc(); },
-		vagDesc   : function() { return player.FirstVag().Short(); },
-		clitDesc  : function() { return player.FirstVag().ClitShort(); },
-		hand      : function() { return player.HandDesc(); }
+		playername : player.name
 	};
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+	parse = player.ParserTags(parse);
 	
 	var mStrap  = false;
 	var strapon = p1cock ? p1cock.isStrapon    : false; //Regular
@@ -627,7 +609,7 @@ Scenes.Roa.TSLPitchAnal = function() {
 	
 	Text.Clear();
 	if(player.FirstCock()) {
-		Text.Add("Since Roa has so nicely gotten into the proper position, it would be a shame to waste it. Crossing the distance between you, your hand reaches out to possessively clutch at his head, guiding his mouth to[oneof] your bobbing [multiCockDesc] until his nose is rubbing along the sensitive flesh of your [cockDesc].", parse);
+		Text.Add("Since Roa has so nicely gotten into the proper position, it would be a shame to waste it. Crossing the distance between you, your hand reaches out to possessively clutch at his head, guiding his mouth to[oneof] your bobbing [cocks] until his nose is rubbing along the sensitive flesh of your [cock].", parse);
 		Text.NL();
 		if(p1cock.Thickness() >= 8)
 			Text.Add("<i>“Ooh...”</i> he shivers at the sight of your massive cock. <i>“I need you inside me!”</i>", parse);
@@ -635,13 +617,13 @@ Scenes.Roa.TSLPitchAnal = function() {
 			Text.Add("<i>“Mm… nice and juicy,”</i> he moans.", parse);
 		Text.Add(" The lapin whore needs no prompting to start sucking and licking your shaft with abandon. His technique is pretty good and his enthusiasm unabated. He blows you with a deep hunger that only serves to make the act more erotic.", parse);
 		Text.NL();
-		Text.Add("Sparks of pleasure crackle along your [skinDesc], and you can’t help but moan your satisfaction with the lagomorph’s oral skills. For a moment, you are sorely tempted to just give yourself over to the hungry wetness of his mouth, to let him suck and gulp and swallow until you have emptied yourself into his waiting belly. But the moment passes and, with a final shudder, you push him away, his mouth popping as it leaves your now-dripping dick.", parse);
+		Text.Add("Sparks of pleasure crackle along your [skin], and you can’t help but moan your satisfaction with the lagomorph’s oral skills. For a moment, you are sorely tempted to just give yourself over to the hungry wetness of his mouth, to let him suck and gulp and swallow until you have emptied yourself into his waiting belly. But the moment passes and, with a final shudder, you push him away, his mouth popping as it leaves your now-dripping dick.", parse);
 		Text.NL();
 		Text.Add("Inhaling deeply to keep yourself under control, shaft[s] dripping precum onto the carpet below, you instruct the lapin to get up on the bed and present himself, lest you simply take him right here on the floor...", parse);
 		Text.NL();
 		Text.Add("<i>“Hmm, that sounds like an enticing idea, but you’re the boss.”</i> He gets up and turns on his heels, hopping onto the bed and raising his butt high up into the air. The bunny then pops two fingers inside his pucker, stretching it out and holding it open for you.", parse);
 		Text.NL();
-		Text.Add("Eager little slut... Grinning at Roa’s antics, you quickly move to join him on the bed, springs squeaking slightly in protest at your added weight as you crawl up behind him, already bringing your [cockDesc] in line with his ass.", parse);
+		Text.Add("Eager little slut... Grinning at Roa’s antics, you quickly move to join him on the bed, springs squeaking slightly in protest at your added weight as you crawl up behind him, already bringing your [cock] in line with his ass.", parse);
 		Text.NL();
 		Text.Add("<i>“Come on! Jam it in!”</i> he begs, releasing his ass and bucking back against you.", parse);
 		Text.NL();
@@ -650,23 +632,23 @@ Scenes.Roa.TSLPitchAnal = function() {
 		Text.Add("The bunny’s butthole opens up to receive you as readily as his mouth did earlier, warm flesh wrapping around your intruding shaft in welcome. He’s a little loose, but mostly there’s just plenty of give to him; Roa’s got an ass just made for fucking, it seems, and it makes for an effortless penetration.", parse);
 	}
 	else if(player.Strapon()) {
-		Text.Add("Fishing amongst your belongings, you draw forth your [cockDesc] and strap it into its proper place about your loins. Double-checking that it’s properly assembled, you cast your best bedroom eyes at the lapin whore, instructing him to get on his knees and open his mouth.", parse);
+		Text.Add("Fishing amongst your belongings, you draw forth your [cock] and strap it into its proper place about your loins. Double-checking that it’s properly assembled, you cast your best bedroom eyes at the lapin whore, instructing him to get on his knees and open his mouth.", parse);
 		Text.NL();
 		Text.Add("Roa does what you say without hesitation, licking his lips before opening his mouth as wide as he can and closing his eyes, just waiting for his bounty.", parse);
 		Text.NL();
 		Text.Add("Since Roa has so nicely gotten into the proper position, it would be a shame to waste it. Crossing the distance between you, your hand reaches out to possessively clutch at his head, guiding his mouth to your [cockTip] and carefully sliding it through his lips.", parse);
 		Text.NL();
-		Text.Add("The rabbit needs no input before he starts licking and sucking on your [cockDesc]. He bobs his head as if your [cockDesc] was real, stopping only when he deems you sufficiently lubed.", parse);
+		Text.Add("The rabbit needs no input before he starts licking and sucking on your [cock]. He bobs his head as if your [cock] was real, stopping only when he deems you sufficiently lubed.", parse);
 		Text.NL();
 		Text.Add("<i>“There we go, now how about you put it in my bum?”</i> he suggests, turning on his heels and hopping onto the bed. He shakes his butt enticingly as he looks back at you, tail lifted up to provide easy access.", parse);
 		Text.NL();
-		Text.Add("Eager little slut... Grinning at Roa’s antics, you quickly move to join him on the bed, springs squeaking slightly in protest at your added weight as you crawl up behind him, already bringing your artificial [cockDesc] in line with his ass.", parse);
+		Text.Add("Eager little slut... Grinning at Roa’s antics, you quickly move to join him on the bed, springs squeaking slightly in protest at your added weight as you crawl up behind him, already bringing your artificial [cock] in line with his ass.", parse);
 		Text.NL();
 		Text.Add("<i>“Come on! Jam it in!”</i> he begs, bucking back against you.", parse);
 		Text.NL();
 		Text.Add("You scold him to wait for you like a good little bunny, eliciting a quiet grumble of protest from the rabbit-morph. Your hands reach out for his waist, circling his hips and taking hold as he moans anticipation. Seeing no reason to tease him further, you shuffle your hips forward and start to push your [cockTip] against his anus...", parse);
 		Text.NL();
-		Text.Add("A sighing moan of appreciation fills your [earDesc]s as you slide inside. With your artificial toy, you can’t feel what he’s like inside properly, but clearly there’s plenty of give to him; your [cockDesc] glides in smooth and steady, not the slightest effort needed to get yourself inside.", parse);
+		Text.Add("A sighing moan of appreciation fills your [ears] as you slide inside. With your artificial toy, you can’t feel what he’s like inside properly, but clearly there’s plenty of give to him; your [cock] glides in smooth and steady, not the slightest effort needed to get yourself inside.", parse);
 	}
 	else { //No strap-on
 		Text.Add("<i>“Alright, I’ll go fetch your strap-on. Don’t move an inch, beautiful!”</i> he finishes, dashing off the door, not caring that he’s completely naked.", parse);
@@ -686,7 +668,7 @@ Scenes.Roa.TSLPitchAnal = function() {
 			Text.NL();
 			Text.Add("Shrugging your shoulders, you ask Roa what happens now.", parse);
 			Text.NL();
-			Text.Add("<i>“Just relax and let me handle this,”</i> he grins, getting down on his knees and setting his hands on your [hipsDesc].", parse);
+			Text.Add("<i>“Just relax and let me handle this,”</i> he grins, getting down on his knees and setting his hands on your [hips].", parse);
 			Text.NL();
 			Text.Add("You stare at Roa in confusion, then let out a yelp of surprise as you feel something warm and wet slide ticklishly over something down there. Looking closer, you can see Roa opening his mouth to lick again at the dildo hanging at your waist, and you quiver as the warm wetness alerts you again. Pleasure tingles along your spine, and you realize that, somehow, you’re actually feeling what Roa is doing!", parse);
 			Text.NL();
@@ -718,7 +700,7 @@ Scenes.Roa.TSLPitchAnal = function() {
 		rigard.Brothel["MStrap"]++;
 		mStrap = true;
 		
-		parse["multiCockDesc"] = function() { return p1cock.Short(); }
+		parse["cocks"] = function() { return p1cock.Short(); }
 	}
 	Text.NL();
 	
@@ -760,10 +742,10 @@ Scenes.Roa.TSLPitchAnal = function() {
 	Text.Add("Roa grips the sheets below, thrusting into your [hand] and then bucking back into your own pumping hips. The smell of sex and wet slapping of flesh on flesh permeates the room; the lapin whore’s delighted moans joining your own grunts of pleasure. <i>“M-More!”</i> he pleads between gasps. <i>“Harder!”</i> he moans. <i>“Faster!”</i> he cries.", parse);
 	Text.NL();
 	if(player.FirstCock() || mStrap) {
-		Text.Add("You moan in desire, even as you do your best to fuck the lagomorph the way he’s begging you to. It’s not easy, even with how badly you want to; the little bunny-slut’s asshole is like a vice lined in hot velvet, almost audibly sucking your [cockDesc] in. Pleasure races up your spine, tingling underneath your skin, shivering through your body as Roa’s tailhole milks you greedily, determined to make you cum so badly it’s almost impossible to pull yourself free.", parse);
+		Text.Add("You moan in desire, even as you do your best to fuck the lagomorph the way he’s begging you to. It’s not easy, even with how badly you want to; the little bunny-slut’s asshole is like a vice lined in hot velvet, almost audibly sucking your [cock] in. Pleasure races up your spine, tingling underneath your skin, shivering through your body as Roa’s tailhole milks you greedily, determined to make you cum so badly it’s almost impossible to pull yourself free.", parse);
 	}
 	else {
-		Text.Add("You’d just love to comply, but it’s proving a little trickier than you’d expect. Roa’s butt is clenching your [cockDesc] so tightly that you have to struggle just to pull it out with each thrust. Determined to get your money’s worth, you grit your teeth and redouble your efforts, squelching and slurping as you rut Roa with all your might.", parse);
+		Text.Add("You’d just love to comply, but it’s proving a little trickier than you’d expect. Roa’s butt is clenching your [cock] so tightly that you have to struggle just to pull it out with each thrust. Determined to get your money’s worth, you grit your teeth and redouble your efforts, squelching and slurping as you rut Roa with all your might.", parse);
 	}
 	Text.NL();
 	Text.Add("Your efforts pay off beautifully, Roa’s moans of pleasure filling your ears like the sweetest of symphonies as he writhes in pure rapture beneath you. The lapin whore has abandoned any sense of restraint, just totally consumed in pleasure at your hands, a cock-worshipper who has found his own perverse nirvana.", parse);
@@ -807,7 +789,7 @@ Scenes.Roa.TSLPitchAnal = function() {
 		Text.NL();
 		Text.Add("Feeling the nervous trembling between your fingers, despite Roa’s desire to be a good boy, is all of the encouragement you needed. You ravage his ass mercilessly, crushing his prostate like an egg under a guardsman’s boot as you buck and thrust. You’re so close you can almost taste it...", parse);
 		Text.NL();
-		Text.Add("Finally, with a cry of pleasure, you slam yourself as deeply into Roa’s guts as you can and let fly, practically exploding in his ass as spurts of seed gush forth from your [cockDesc]. Your hand abandons Roa’s cock to hold him close, ensuring he can’t escape your efforts at flooding his stomach with seed.", parse);
+		Text.Add("Finally, with a cry of pleasure, you slam yourself as deeply into Roa’s guts as you can and let fly, practically exploding in his ass as spurts of seed gush forth from your [cock]. Your hand abandons Roa’s cock to hold him close, ensuring he can’t escape your efforts at flooding his stomach with seed.", parse);
 		Text.NL();
 		
 		var cum = player.OrgasmCum();
@@ -829,15 +811,15 @@ Scenes.Roa.TSLPitchAnal = function() {
 		Text.NL();
 		Text.Add("Well, you mightn’t go quite that far... but, he’s not exaggerating too much, you add, smirking back at him.", parse);
 		Text.NL();
-		Text.Add("<i>“Can I clean this up for you?”</i> he asks, turning on his back and pointing at your [cockDesc].", parse);
+		Text.Add("<i>“Can I clean this up for you?”</i> he asks, turning on his back and pointing at your [cock].", parse);
 		Text.NL();
 		Text.Add("You drum your fingers thoughtfully against your chest for a moment, making a show of thinking it over. As the lapin’s eyes widen in a pleading expression, you finally decide to show mercy, and tell him to get started. You think he did good enough that he deserves an extra treat.", parse);
 		Text.NL();
 		Text.Add("<i>“Thank you,”</i> he smiles, clambering up to crawl toward you.", parse);
 		Text.NL();
-		Text.Add("You roll over onto your side, laying on your back and making yourself comfortable, positioning yourself so the lagomorph has unrestricted access to your [multiCockDesc].", parse);
+		Text.Add("You roll over onto your side, laying on your back and making yourself comfortable, positioning yourself so the lagomorph has unrestricted access to your [cocks].", parse);
 		Text.NL();
-		Text.Add("Roa sniffs your crotch and licks his lips, then begins lapping your [cockDesc].", parse);
+		Text.Add("Roa sniffs your crotch and licks his lips, then begins lapping your [cock].", parse);
 		Text.NL();
 		Text.Add("You favor Roa’s efforts with an appreciative moan, verbally guiding him through his ministrations, praising him for his adeptness when you feel he warrants it.", parse);
 		Text.NL();
@@ -846,11 +828,11 @@ Scenes.Roa.TSLPitchAnal = function() {
 			Text.Add(" Your other cock[notS] receive the same treatment. He even goes back to the first one, alternating between each shaft with a happy smile.", parse);
 		Text.NL();
 		if(player.HasBalls()) {
-			Text.Add("Once he’s finished, Roa ducks lower to lick your [ballsDesc] next. Seems like the lapin wants to make sure he does a thorough job. You simply lay back and let him finish cleaning you up. You groan when he stops to massage your balls with his tongue. Looking down at him, all you see is a mischievous smile as he gives one of your nuts a kiss.", parse);
+			Text.Add("Once he’s finished, Roa ducks lower to lick your [balls] next. Seems like the lapin wants to make sure he does a thorough job. You simply lay back and let him finish cleaning you up. You groan when he stops to massage your balls with his tongue. Looking down at him, all you see is a mischievous smile as he gives one of your nuts a kiss.", parse);
 			Text.NL();
 		}
 		if(player.FirstVag()) {
-			Text.Add("A surprised yelp of pleasure escapes you as you feel a familiar tongue touch your [vagDesc]. Seems like not even your womanhood is safe from the lusty rabbit...", parse);
+			Text.Add("A surprised yelp of pleasure escapes you as you feel a familiar tongue touch your [vag]. Seems like not even your womanhood is safe from the lusty rabbit...", parse);
 			Text.NL();
 		}
 		Text.Add("<i>“There, I think I got everything. Though if you want me to be more thorough, I’d be happy to oblige,”</i> he says with a grin, falling back on his haunches and licking his finger.", parse);
@@ -860,7 +842,7 @@ Scenes.Roa.TSLPitchAnal = function() {
 	else if(strapon) {
 		var first = 
 		
-		Text.Add("Your hand abandons its place at the bunny’s cock to instead trail down lower. As your other hand toys with Roa’s nipples, you bend closer to his ear and whisper to him, telling him to cum, then. As you do so, you plunge your [cockDesc] ", parse);
+		Text.Add("Your hand abandons its place at the bunny’s cock to instead trail down lower. As your other hand toys with Roa’s nipples, you bend closer to his ear and whisper to him, telling him to cum, then. As you do so, you plunge your [cock] ", parse);
 		if(knot)
 			Text.Add("as far as it’ll go without knotting the lapin whore,", parse);
 		else
@@ -872,12 +854,12 @@ Scenes.Roa.TSLPitchAnal = function() {
 		
 		Text.Add("Roa cries out as his cock trembles, spewing forth a small jet of cum. The first jet is followed by more as he shoots rope after rope, matting the sheets below with his lapin spunk. Each new spurt brings forth a shaky moan from the subby bunny whore, tingles running up his spine.", parse);
 		Text.NL();
-		Text.Add("The scent of cum flooding your nostrils, you wriggle your hips a little, purposefully grinding your artificial [cockDesc] into the lapin’s prostate, twisting in order to alter the pitch of his moans and whimpers. Finally, Roa collapses limply into the puddle he has created on the sheets, panting heavily. Withdrawing your hands, you smirk as you pet his messy locks, asking if he thinks he’s done now.", parse);
+		Text.Add("The scent of cum flooding your nostrils, you wriggle your hips a little, purposefully grinding your artificial [cock] into the lapin’s prostate, twisting in order to alter the pitch of his moans and whimpers. Finally, Roa collapses limply into the puddle he has created on the sheets, panting heavily. Withdrawing your hands, you smirk as you pet his messy locks, asking if he thinks he’s done now.", parse);
 		Text.NL();
 		parse["fem"] = roa.Relation() >= 20 ? player.name : player.mfFem("sir", "ma’am");
 		Text.Add("<i>“Yeah, thank you,”</i> he replies with a happy smile. <i>“I hope you enjoyed yourself, [fem].”</i>", parse);
 		Text.NL();
-		Text.Add("Well... you tap your chin thoughtfully, letting the lagomorph sweat over your opinion. After a few moments, you smirk and proclaim that he was acceptably entertaining, writhing like a little slut on the end of your [cockDesc].", parse);
+		Text.Add("Well... you tap your chin thoughtfully, letting the lagomorph sweat over your opinion. After a few moments, you smirk and proclaim that he was acceptably entertaining, writhing like a little slut on the end of your [cock].", parse);
 		Text.NL();
 		Text.Add("The lapin chuckles softly. <i>“I’m happy you’re pleased,”</i> he says, turning on his back. <i>“But you haven’t cum yet, have you?”</i>", parse);
 		Text.NL();
@@ -891,11 +873,11 @@ Scenes.Roa.TSLPitchAnal = function() {
 		Text.NL();
 		Text.Add("Flattery, you playfully chide him, is when a person doesn’t deserve it. Your finger gently taps him on the nose to emphasize your point, and then you turn your attention to unfastening your strap-on from around your waist. Once the stained sex-toy has been tossed lightly aside, you push yourself over to straddle Roa’s prone form.", parse);
 		Text.NL();
-		Text.Add("Leisurely, you crawl your way over the lapin’s petite body, wrapping your [legsDesc] around his chest for balance, thrusting your muff boldly into his face. Now, it’s time he got to work on cleaning you up, you declare.", parse);
+		Text.Add("Leisurely, you crawl your way over the lapin’s petite body, wrapping your [legs] around his chest for balance, thrusting your muff boldly into his face. Now, it’s time he got to work on cleaning you up, you declare.", parse);
 		Text.NL();
-		Text.Add("Roa immediately sets to work, startinig on your [clitDesc] and licks along your slit. He hums in pleasure as he tastes your juices, tiny nose sniffing, drinking in your pheromones as he prepares to really start.", parse);
+		Text.Add("Roa immediately sets to work, startinig on your [clit] and licks along your slit. He hums in pleasure as he tastes your juices, tiny nose sniffing, drinking in your pheromones as he prepares to really start.", parse);
 		Text.NL();
-		Text.Add("You coo in pleasure as the bunny-boy’s tongue busies itself in your [vagDesc]. Quick and nimble, the supple length of silky-soft flesh works expertly through your folds, stroking your more sensitive spots with repeated dabblings and tantalizing flicks.", parse);
+		Text.Add("You coo in pleasure as the bunny-boy’s tongue busies itself in your [vag]. Quick and nimble, the supple length of silky-soft flesh works expertly through your folds, stroking your more sensitive spots with repeated dabblings and tantalizing flicks.", parse);
 		Text.NL();
 		Text.Add("As worked up as he got you before, writhing and moaning under you like the total slut he is, he doesn’t need to work too hard. Soon enough, you’re crying out in pleasure as orgasm rocks you in turn, fluids pouring from your feminine flower. You do your best to cover Roa’s face in your nectar, even as he tries to suckle it all.", parse);
 		Text.NL();
@@ -946,16 +928,9 @@ Scenes.Roa.TSLCatchVaginal = function() {
 	
 	var parse = {
 		playername : player.name,
-		hand       : function() { return player.HandDesc(); },
-		vagDesc    : function() { return player.FirstVag().Short(); },
-		clitDesc   : function() { return player.FirstVag().ClitShort(); },
-		legsDesc   : function() { return player.LegsDesc(); },
-		hipsDesc   : function() { return player.HipsDesc(); },
-		tongueDesc : function() { return player.TongueDesc(); },
-		skinDesc   : function() { return player.SkinDesc(); },
-		lipsDesc   : function() { return player.LipsDesc(); },
-		multiCockDesc : function() { return player.MultiCockDesc(); }
+		lipsDesc   : function() { return player.LipsDesc(); }
 	};
+	parse = player.ParserTags(parse);
 	
 	var first  = (roa.sex["gVag"]  == 0);
 	var noanal = (roa.sex["rAnal"] == 0);
@@ -993,7 +968,7 @@ Scenes.Roa.TSLCatchVaginal = function() {
 	Text.NL();
 	Text.Add("Still pinning him down, your gaze shifts to the jutting manhood you are fondling. Thick streams of precum are starting to well from its tip, rolling lazily down its length, and your fingers move to intercept. You smear his juices back and forth, coating every inch until it gleams wetly in the light. Roa tries to hold still, but your touches make him wriggle and moan, despite his efforts.", parse);
 	Text.NL();
-	Text.Add("When you are satisfied with your impromptu lubing, you shift your position to straddle his hips, raising yourself aloft to align your [vagDesc] with his cock. Your hand brushes itself tenderly against his cheek, a single stroke of comfort, and then you allow yourself to descend.", parse);
+	Text.Add("When you are satisfied with your impromptu lubing, you shift your position to straddle his hips, raising yourself aloft to align your [vag] with his cock. Your hand brushes itself tenderly against his cheek, a single stroke of comfort, and then you allow yourself to descend.", parse);
 	Text.NL();
 	var virgin = player.FirstVag().virgin;
 	if(virgin) {
@@ -1011,7 +986,7 @@ Scenes.Roa.TSLCatchVaginal = function() {
 		Text.Add("Gritting your teeth, you grunt that you’re fine. You just need a moment to get used to this. You inhale deeply, setting up a slow, steady your breathing as you try to master yourself. Once the painful tingling fades away down below, you declare yourself ready to begin.", parse);
 	}
 	else {
-		Text.Add("Pleasure crackles along your spine as Roa’s girth spreads your [vagDesc], and you drop down faster and faster, anxious to be filled as full as you possibly can. You don’t stop until you have taken the lapin’s manhood to the hilt, your hips meatily smacking into his own girlish curves.", parse);
+		Text.Add("Pleasure crackles along your spine as Roa’s girth spreads your [vag], and you drop down faster and faster, anxious to be filled as full as you possibly can. You don’t stop until you have taken the lapin’s manhood to the hilt, your hips meatily smacking into his own girlish curves.", parse);
 		Text.NL();
 		
 		Sex.Vaginal(roa, player);
@@ -1027,7 +1002,7 @@ Scenes.Roa.TSLCatchVaginal = function() {
 	Text.NL();
 	Text.Add("Squeezing with your netherlips as best you can, you start to rise from your position, dragging your hips with tantalizing slowness back up Roa’s shaft until only the very tip remains inside. You pause there, letting the cool breeze tingle on your partner’s exposed cock flesh, and then lower yourself again with the same slow, deliberate motions. Pussy wrinkling as you flex and release, you repeat the cycle, tormenting Roa with your almost leisurely pace, moaning in pleasure as his girth slides back and forth through your depths.", parse);
 	Text.NL();
-	Text.Add("The bunny-slut moans in desire, his eyes casting a pleading look from below you. You feel his hands gently settle on your [hipsDesc], careful, almost reverent. When he sees that you aren’t rebuking him, he begins to slowly move his own hips, pumping into you in tandem with your own motions. Roa is such a good boy...", parse);
+	Text.Add("The bunny-slut moans in desire, his eyes casting a pleading look from below you. You feel his hands gently settle on your [hips], careful, almost reverent. When he sees that you aren’t rebuking him, he begins to slowly move his own hips, pumping into you in tandem with your own motions. Roa is such a good boy...", parse);
 	Text.NL();
 	if(first) {
 		Text.Add("As you both continue to hump away, you slowly begin to increase your pace. Roa’s eyes flicker in desire as you start grinding him harder and faster. Though he tries his best to please you, you can tell that his heart really isn’t into it.", parse);
@@ -1041,7 +1016,7 @@ Scenes.Roa.TSLCatchVaginal = function() {
 		Text.Add("As expected, he doesn’t seem to be too into it yet. But thankfully you know how to fix that little problem...", parse);
 	}
 	Text.NL();
-	Text.Add("With a purposeful flourish, you raise your index and middle fingers where Roa can see them, then lift them to your mouth. Your [lipsDesc] wrap around the digits and you noisily begin to suckle, exaggeratedly moaning and slurping as you pump them back and forth, [tongueDesc] caressing the skin.", parse);
+	Text.Add("With a purposeful flourish, you raise your index and middle fingers where Roa can see them, then lift them to your mouth. Your [lipsDesc] wrap around the digits and you noisily begin to suckle, exaggeratedly moaning and slurping as you pump them back and forth, [tongue] caressing the skin.", parse);
 	Text.NL();
 	Text.Add("Roa eyes you with curiosity, too focused on the feeling of your velvety walls to make sense of your intentions.", parse);
 	Text.NL();
@@ -1072,7 +1047,7 @@ Scenes.Roa.TSLCatchVaginal = function() {
 			Text.Clear();
 			Text.Add("You thrust back against Roa, forcing him down so hard he gets mashed into the mattress, pinned under your weight as you grind his prostate for all you’re worth. The lapin lets out a high-pitched squeal of pleasure, fingers grabbing at you for dear life as he bucks one last time and explodes messily inside you. Liquid warmth floods your loins as he cums, surging up inside of you for several long, pleasant moments.", parse);
 			Text.NL();
-			Text.Add("By the time Roa shudders and sighs long and low in pleasure, you feel distinctly full, jampacked with thick sloppy bunny-cream. As he goes limp under you, you slowly pry your fingers free of his ass, which attempts to cling to them even despite his sated state. Once they are free, you slide your weight off of the panting lagomorph, letting his semen-stained shaft slide slowly from your well-used [vagDesc] before hopping off of the bed entirely.", parse);
+			Text.Add("By the time Roa shudders and sighs long and low in pleasure, you feel distinctly full, jampacked with thick sloppy bunny-cream. As he goes limp under you, you slowly pry your fingers free of his ass, which attempts to cling to them even despite his sated state. Once they are free, you slide your weight off of the panting lagomorph, letting his semen-stained shaft slide slowly from your well-used [vag] before hopping off of the bed entirely.", parse);
 			
 			var cum = roa.OrgasmCum();
 			//Impreg
@@ -1119,7 +1094,7 @@ Scenes.Roa.TSLCatchVaginal = function() {
 		options.push({ nameStr : "Help",
 			func : function() {
 				Text.Clear();
-				Text.Add("A smirk on your lips, you proclaim you’ll give Roa more than a ‘moment’. Your hand reaches out and closes around the trembling bunny-boy’s half-erect shaft, tenderly brushing it twice. Then, leaning over the bed, you open your mouth and extend your [tongueDesc], licking along its length, tasting the mixture of cum and sweat and your own sexual fluids coating the soft skin.", parse);
+				Text.Add("A smirk on your lips, you proclaim you’ll give Roa more than a ‘moment’. Your hand reaches out and closes around the trembling bunny-boy’s half-erect shaft, tenderly brushing it twice. Then, leaning over the bed, you open your mouth and extend your [tongue], licking along its length, tasting the mixture of cum and sweat and your own sexual fluids coating the soft skin.", parse);
 				Text.NL();
 				Text.Add("<i>“Ooh, yes...”</i> he says, trembling in pleasure at your ministrations.", parse);
 				Text.NL();
@@ -1176,20 +1151,20 @@ Scenes.Roa.TSLCatchVaginal = function() {
 			Text.NL();
 			Text.Add("Roa’s hands settled themselves back on your hips, gripping for support as he begins to move his hips.", parse);
 			Text.NL();
-			Text.Add("Although your lapin lover is enthusiastic, you both know what he’s really after. With a smirk, you brandish the dildo that Roa so helpfully brought you, lifting it to your mouth and starting to lap at it. Your [tongueDesc] glides across the purple rubber, lewdly slurping and sucking until it shines with the layer of lubrication you have provided. Roa groans in desire, picking up speed in eager anticipation of what you have in mind.", parse);
+			Text.Add("Although your lapin lover is enthusiastic, you both know what he’s really after. With a smirk, you brandish the dildo that Roa so helpfully brought you, lifting it to your mouth and starting to lap at it. Your [tongue] glides across the purple rubber, lewdly slurping and sucking until it shines with the layer of lubrication you have provided. Roa groans in desire, picking up speed in eager anticipation of what you have in mind.", parse);
 			Text.NL();
 			Text.Add("Once you judge your toy sufficiently wet, you twist around as best you can and lean over, doing your best to line the dildo up with Roa’s wiggling buttocks despite the pleasure already hazing your vision. One enthusiastic buck from the bunny causes you to jolt forward, rubbing the toy firmly against Roa’s own slapping balls, but you finally manage to line it up. Unceremoniously, you drive it home, even as Roa thrusts as deeply into you as he can, eliciting matching moans of pleasure at being filled so full from the pair of you.", parse);
 			Text.NL();
 			Text.Add("<i>“Ahn! Yeah!”</i> the bunny-slut moans. Inside, you can feel his cock throb, seemingly growing harder as he doubles his efforts to pump himself in and out of you.", parse);
 			Text.NL();
 			parse["cum"] = cameinside > 0 ? " his cum slurping and squelching perversely with each thrust he makes," : "";
-			Text.Add("Groaning in your own pleasures, you meet him thrust for thrust, alternating between focusing on the wonderful slapping of flesh on flesh and grinding Roa’s prostate with his favorite dildo. With the stimulation he gave you before already fresh in your mind,[cum] you don’t need much to get in the mood. You can feel the wall of pleasure building inside of you, like sparks crackling under your [skinDesc], dancing through your brain. Oh, yes, you’re close, you’re so close...", parse);
+			Text.Add("Groaning in your own pleasures, you meet him thrust for thrust, alternating between focusing on the wonderful slapping of flesh on flesh and grinding Roa’s prostate with his favorite dildo. With the stimulation he gave you before already fresh in your mind,[cum] you don’t need much to get in the mood. You can feel the wall of pleasure building inside of you, like sparks crackling under your [skin], dancing through your brain. Oh, yes, you’re close, you’re so close...", parse);
 			Text.NL();
 			Text.Add("Roa is oblivious to your oncoming orgasm, all he can focus on is the dildo filling his butt and the feeling of your moist folds wrapping around his own cock. His eyes are rolled back, tongue lolling out as his hips move on their own. Right now he’s nothing more but a toy himself, to be directed and used as you please.", parse);
 			Text.NL();
 			Text.Add("This realization is the final straw for you. With a cry of pleasure, you grind yourself as forcibly into Roa’s cock as you possibly can. You buck and heave as the dam in your mind breaks, orgasm washing through your body like a wave of liquid pleasure. Your fluids cascade onto Roa’s thighs, smearing over his belly as you arc above him, whole body writhing with the pleasure that you feel.", parse);
 			if(player.FirstCock())
-				Text.Add(" Your [multiCockDesc] throb[s], sending jet after jet of cum in sympathetic orgasm.", parse);
+				Text.Add(" Your [cocks] throb[s], sending jet after jet of cum in sympathetic orgasm.", parse);
 			Text.NL();
 			Text.Add("Your climax stretches on for what feels like a blissful eternity... then seeps away, leaving you panting with exertion atop of your lapin lover.", parse);
 			Text.NL();
@@ -1211,7 +1186,7 @@ Scenes.Roa.TSLCatchVaginal = function() {
 					cameinside++;
 					
 					Text.Clear();
-					Text.Add("You wrap your [legsDesc] around Roa pointedly, squeezing your hips to his own and forcing him to the mattress. The lagomorph lets out a surprisingly girlish cry of pleasure and then writhes as he explodes within your waiting pussy, thick ropes of bunny-seed spurting up inside of you.", parse);
+					Text.Add("You wrap your [legs] around Roa pointedly, squeezing your hips to his own and forcing him to the mattress. The lagomorph lets out a surprisingly girlish cry of pleasure and then writhes as he explodes within your waiting pussy, thick ropes of bunny-seed spurting up inside of you.", parse);
 					Text.NL();
 					Text.Add("After a few moments of adding molten heat to your cunt, Roa sighs and goes limp, clearly spent from his climax. Affectionately petting his head, you slowly lift yourself from his body. A thick stream of off-white flows from your loins as you pull out and slide out of the bed.", parse);
 					
@@ -1246,7 +1221,7 @@ Scenes.Roa.TSLCatchVaginal = function() {
 				if(player.LowerBodyType() != LowerBodyType.Single)
 					Text.Add("Your legs receive a similar treatment.", parse);
 				else
-					Text.Add("Your [legsDesc] take a bit more work to stretch out, but you do so all the same.", parse);
+					Text.Add("Your [legs] take a bit more work to stretch out, but you do so all the same.", parse);
 				Text.NL();
 				Text.Add("After you’re done you sigh in satisfaction. That was pretty good. Looking at Roa, you notice that he seems to have finally caught his breath. Walking over to his side, you ask if he’s alright now.", parse);
 				Text.NL();
@@ -1279,13 +1254,9 @@ Scenes.Roa.TSLCatchVaginal = function() {
 Scenes.Roa.TSLPostSexPrompt = function(mStrap) {
 	var parse = {
 		playername  : player.name,
-		skinDesc    : function() { return player.SkinDesc(); },
-		breastsDesc : function() { return player.FirstBreastRow().Short(); },
-		bellyDesc   : function() { return player.StomachDesc(); },
-		lipsDesc    : function() { return player.LipsDesc(); },
-		tongueDesc  : function() { return player.TongueDesc(); }
+		lipsDesc    : function() { return player.LipsDesc(); }
 	};
-	
+	parse = player.ParserTags(parse);
 	parse["fem"] = roa.Relation() >= 40 ? player.name : player.mfFem("sir", "ma’am");
 	
 	//[Snuggle] [Bathe] [Kiss] [Dismiss]
@@ -1309,7 +1280,7 @@ Scenes.Roa.TSLPostSexPrompt = function(mStrap) {
 				Text.NL();
 				Text.Add("Shrugging, he does as instructed. <i>“Alright, if that’ll bring you pleasure, [fem].”</i>", parse);
 				Text.NL();
-				Text.Add("You don’t answer him verbally, instead wrapping your arms possessively around him and pulling this pillow-to-be bunny close, locking your grip to keep your catch right where you want him. You smile in satisfaction and rub your cheek gently against his own, basking in the feel of warm, soft, fluffy fur in your arms, rubbing against your[own] [skinDesc].", parse);
+				Text.Add("You don’t answer him verbally, instead wrapping your arms possessively around him and pulling this pillow-to-be bunny close, locking your grip to keep your catch right where you want him. You smile in satisfaction and rub your cheek gently against his own, basking in the feel of warm, soft, fluffy fur in your arms, rubbing against your[own] [skin].", parse);
 			}
 			else {
 				Text.Add("The lapin whore smiles timidly and approaches you tentatively.", parse);
@@ -1319,7 +1290,7 @@ Scenes.Roa.TSLPostSexPrompt = function(mStrap) {
 				Text.Add("Roa lets out a sigh of relaxation, avidly wriggling as close to you as he can get. His little arms wrap around you the best he can, and you return the favor, savoring the feel of being so close.", parse);
 			}
 			Text.NL();
-			Text.Add("With the two of you curled front to front, it’s easy to fit the pair of you together. Roa’s petite body seems to be just made for tucking into your arms, silky-soft fur brushing lightly against your[own] [skinDesc]. Although he wriggles a little as his cock grows hard, poking insistently against your [bellyDesc], Roa himself is as content as you to just enjoy being together like this. Your breath stirs his hair, and his own breaths puff lightly over your [breastsDesc], tickling with each exhalation.", parse);
+			Text.Add("With the two of you curled front to front, it’s easy to fit the pair of you together. Roa’s petite body seems to be just made for tucking into your arms, silky-soft fur brushing lightly against your[own] [skin]. Although he wriggles a little as his cock grows hard, poking insistently against your [belly], Roa himself is as content as you to just enjoy being together like this. Your breath stirs his hair, and his own breaths puff lightly over your [breasts], tickling with each exhalation.", parse);
 			Text.NL();
 			Text.Add("The two of you lay there in each other’s arms, enjoying one another’s company in quiet contentment... All good things must come to an end, however, and eventually you are forced to let Roa go and tell him that you have to be off now.", parse);
 			Text.NL();
@@ -1357,7 +1328,7 @@ Scenes.Roa.TSLPostSexPrompt = function(mStrap) {
 	options.push({ nameStr : "Kiss",
 		func : function() {
 			Text.Clear();
-			Text.Add("The only warning you give the lapin is a predatory smile. Roa lets out a delicious little squeak of shock before you swoop down on him like the proverbial bird of prey. Your arms crush him against your [breastsDesc], folding tightly around velvety white fur and holding him fast as your [lipsDesc] devour his own. His softness envelops your senses, prickling across your skin, his taste enrapturing your [tongueDesc] as it washes across its surface.", parse);
+			Text.Add("The only warning you give the lapin is a predatory smile. Roa lets out a delicious little squeak of shock before you swoop down on him like the proverbial bird of prey. Your arms crush him against your [breasts], folding tightly around velvety white fur and holding him fast as your [lipsDesc] devour his own. His softness envelops your senses, prickling across your skin, his taste enrapturing your [tongue] as it washes across its surface.", parse);
 			Text.NL();
 			Text.Add("You squeeze Roa as if determined to never let him go, so tight you can feel his little heart racing inside his chest, beating a rapid-fire tattoo against your skin. Your kiss deepens as if you could drink the lagomorph’s very essence; only when the need for oxygen becomes inescapable do you finally break the kiss with a noisy gasp, letting the puffing bunny fall back onto the bed.", parse);
 			Text.NL();
@@ -1402,7 +1373,7 @@ Scenes.Roa.TSLPostSexPrompt = function(mStrap) {
 			else {
 				Text.Add("<i>“Aww. Not even a kiss?”</i> he asks with pleading eyes.", parse);
 				Text.NL();
-				Text.Add("Your hand shoots out and grab a particularly bushy puff of fur on his chest, hauling him in close to you. Your lips crash down like waves on a shore, your [tongueDesc] plunging shamelessly into Roa’s mouth. The lapin voices a muffled moan, sucking greedily as you feed him your tongue, before you break the kiss as sharply as you gave it.", parse);
+				Text.Add("Your hand shoots out and grab a particularly bushy puff of fur on his chest, hauling him in close to you. Your lips crash down like waves on a shore, your [tongue] plunging shamelessly into Roa’s mouth. The lapin voices a muffled moan, sucking greedily as you feed him your tongue, before you break the kiss as sharply as you gave it.", parse);
 				Text.NL();
 				Text.Add("Smirking, you ask him how he could have possibly thought you’d let your favorite bunny go without a kiss, even as you release him and playfully push him a step back for measure.", parse);
 				Text.NL();

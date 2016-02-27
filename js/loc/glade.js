@@ -208,7 +208,7 @@ Scenes.DryadGlade.FirstLoss = function() {
 	SetGameState(GameState.Event);
 	
 	var parse = {
-		armorDesc : function() { return player.ArmorDesc(); }
+		armor : function() { return player.ArmorDesc(); }
 	};
 	
 	if(party.Num() <= 1)
@@ -228,7 +228,7 @@ Scenes.DryadGlade.FirstLoss = function() {
 	Text.NL();
 	Text.Add("The corrupted dryad ignores her mother - by now reduced to nothing but a lust-drunk slut - and steps over to you, her hips swaying back and forth. Her tentacles hover above menacingly, their dripping, bulbous tips looking very much like cockheads.", parse);
 	Text.NL();
-	Text.Add("<i>“Mmm… so much more fun when they wriggle,”</i> she gloats, looking down on you with malice. <i>“Makes me want to play with them...”</i> Tentacles whip out, grabbing hold of your struggling form, and easily lift you into the air. She’s strong… so strong. With little to no effort, she all but rips away the remaining scraps of your [armorDesc], leaving you nude. You squirm desperately, trying to get away from the slimy tentacles wrapping around your limbs, but in the end you are powerless to stop her.", parse);
+	Text.Add("<i>“Mmm… so much more fun when they wriggle,”</i> she gloats, looking down on you with malice. <i>“Makes me want to play with them...”</i> Tentacles whip out, grabbing hold of your struggling form, and easily lift you into the air. She’s strong… so strong. With little to no effort, she all but rips away the remaining scraps of your [armor], leaving you nude. You squirm desperately, trying to get away from the slimy tentacles wrapping around your limbs, but in the end you are powerless to stop her.", parse);
 	Text.NL();
 	
 	if(party.Num() > 1) {
@@ -246,15 +246,11 @@ Scenes.DryadGlade.FirstLoss = function() {
 			var parse = {
 				name : kiakai.name,
 				possessive : kiakai.possessive(),
-				heshe  : kiakai.heshe(),
-				HeShe  : kiakai.HeShe(),
-				himher : kiakai.himher(),
-				hisher : kiakai.hisher(),
-				HisHer : kiakai.HisHer(),
 				boyGirl : kiakai.mfTrue("boy", "girl"),
 				legsDesc : function() { return kiakai.LegsDesc(); },
-				multiCockDesc : function() { return kiakai.MultiCockDesc(); }
+				cocks : function() { return kiakai.MultiCockDesc(); }
 			}
+			parse = kiakai.ParserPronouns(parse);
 			
 			Text.Add("<i>“Elves… I just found a few elves in the forest on my way here,”</i> the dryad says coyly as she wraps [name] in tentacles, raising up the elf beside you. <i>“Let’s find out if you squeal as much as they did!”</i>", parse);
 			Text.NL();
@@ -278,7 +274,7 @@ Scenes.DryadGlade.FirstLoss = function() {
 			orchid.Fuck(orchid.FirstCock(), 3);
 			
 			if(kiakai.FirstCock()) {
-				Text.Add("A set of thinner vines wrap themselves around [hisher] [multiCockDesc], trying to milk the elf from both directions.", parse);
+				Text.Add("A set of thinner vines wrap themselves around [hisher] [cocks], trying to milk the elf from both directions.", parse);
 				Text.NL();
 			}
 			Text.Add("Another tentacle forces itself down [possessive] throat, sealing [hisher] last remaining free orifice.", parse);
@@ -297,13 +293,9 @@ Scenes.DryadGlade.FirstLoss = function() {
 		if(party.InParty(terry)) {
 			var parse = {
 				playername : player.name,
-				heshe  : terry.heshe(),
-				HeShe  : terry.HeShe(),
-				himher : terry.himher(),
-				hisher : terry.hisher(),
-				HisHer : terry.HisHer(),
 				foxvixen : terry.mfPronoun("fox", "vixen")
 			};
+			parse = terry.ParserPronouns(parse);
 			
 			Text.Add("<i>“And what do we have here?”</i> the dryad quips, looking Terry up and down with interest. <i>“What a cute little vixen!”</i>", parse);
 			Text.NL();
@@ -463,19 +455,16 @@ Scenes.DryadGlade.FirstLoss = function() {
 	Text.NL();
 	
 	parse = {
-		playername : player.name,
-		multiCockDesc : function() { return player.MultiCockDesc(); },
-		earDesc  : function() { return player.EarDesc(); },
-		hipsDesc : function() { return player.HipsDesc(); },
-		buttDesc : function() { return player.Butt().Short(); },
-		anusDesc : function() { return player.Butt().AnalShort(); }
+		playername : player.name
 	};
+	parse = player.ParserTags(parse);
+	
 	if(player.FirstCock()) {
 		parse["thatThose"] = player.NumCocks() > 1 ? "those" : "that";
 		parse["s"]         = player.NumCocks() > 1 ? "s" : "";
-		Text.Add("<i>“Why not put [thatThose] to use?”</i> Orchid moans sultrily in your [earDesc], stroking your [multiCockDesc] from behind. <i>“Can’t you see Mother needs you to fuck her?”</i> The corrupted dryad lines you up against her mother’s gaping cunt, lubing up your tip[s] in her sticky seed.", parse);
+		Text.Add("<i>“Why not put [thatThose] to use?”</i> Orchid moans sultrily in your [ear], stroking your [cocks] from behind. <i>“Can’t you see Mother needs you to fuck her?”</i> The corrupted dryad lines you up against her mother’s gaping cunt, lubing up your tip[s] in her sticky seed.", parse);
 		Text.NL();
-		Text.Add("<i>“I… I… fuck… breed,”</i> Mother Tree moans as her daughter pushes your shaft[s] in to the hilt, filling up her recently vacated vagina. You are quickly losing the battle of willpower as your [hipsDesc] begin to buck on their own, thrusting into the chocolate milf with abandon. Whatever your original intent was, your rapidly fading memories of an important quest, right now you exist only to pollinate this beautiful flower.", parse);
+		Text.Add("<i>“I… I… fuck… breed,”</i> Mother Tree moans as her daughter pushes your shaft[s] in to the hilt, filling up her recently vacated vagina. You are quickly losing the battle of willpower as your [hips] begin to buck on their own, thrusting into the chocolate milf with abandon. Whatever your original intent was, your rapidly fading memories of an important quest, right now you exist only to pollinate this beautiful flower.", parse);
 		Text.NL();
 	}
 	else if(player.FirstVag()) {
@@ -488,7 +477,7 @@ Scenes.DryadGlade.FirstLoss = function() {
 		player.FuckVag(player.FirstVag(), orchid.FirstCock(), 3);
 		orchid.Fuck(orchid.FirstCock(), 3);
 	}
-	Text.Add("<i>“I know the two of you will be the best of friends!”</i> Orchid exclaims happily, caressing your shoulders, her lithe hands trailing down your back, feeling up your [hipsDesc] and [buttDesc]. You moan softly as you feel a number of thick tentacle cocks invading your [anusDesc], worming their way inside you rapidly.", parse);
+	Text.Add("<i>“I know the two of you will be the best of friends!”</i> Orchid exclaims happily, caressing your shoulders, her lithe hands trailing down your back, feeling up your [hips] and [butt]. You moan softly as you feel a number of thick tentacle cocks invading your [anus], worming their way inside you rapidly.", parse);
 	Text.NL();
 	
 	Sex.Anal(orchid, player);
@@ -551,13 +540,9 @@ Scenes.DryadGlade.FirstWin = function(enc) {
 	
 	var parse = {
 		playername : player.name,
-		name   : kiakai.name,
-		heshe  : kiakai.heshe(),
-		HeShe  : kiakai.HeShe(),
-		himher : kiakai.himher(),
-		hisher : kiakai.hisher(),
-		HisHer : kiakai.HisHer()
+		name       : kiakai.name
 	};
+	parse = kiakai.ParserPronouns(parse);
 	
 	Gui.Callstack.push(function() {
 		Text.Clear();

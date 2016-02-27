@@ -1802,7 +1802,7 @@ Scenes.Rigard.Lockdown = function() {
 
 				Gui.Callstack.push(function() {
 					Text.NL();
-					parse["legs3"] = player.HasLegs() ? " and obediently kneel there" : " obediently"
+					parse["legs3"] = player.HasLegs() ? " and obediently kneel there" : " obediently";
 					parse["reluctantlyEagerly"] = choice == Choice.Eager ? "eagerly" : "reluctantly";
 					Text.Add("Miranda's eyes never leave you, her lips curled into a smirk and her fingers brushing almost mockingly against the bulge in her trousers as she watches you finish undressing. As her gaze hungrily follows you, you [reluctantlyEagerly] head for the cushioned corner of the room[legs3], just waiting for her to claim you.", parse);
 					Text.Flush();

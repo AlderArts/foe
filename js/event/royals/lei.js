@@ -2046,7 +2046,7 @@ Scenes.Lei.GuardStalkingApprove = function(parse, nv) {
 			}
 			else if(lei.SexOpen() && lei.Relation() > Lei.Rel.L1) {
 				var bald = player.Hair().Bald() ? "taking care to scratch behind your [ears]" : "gently running his fingers through your [hair]";
-				parse["bald"] = Text.Parse(bald, {ears: player.EarDesc(), hair: player.Hair().Short()});
+				parse["bald"] = Text.Parse(bald, {ears: player.EarDesc(true), hair: player.Hair().Short()});
 				Text.Add("Lei closes the rest of the distance to you, his steps confident in the darkness. You feel his hand rest on your head, and he begins to stroke it, [bald]. <i>“And I see I have found a crop that is quite eager for the harvest.”</i>", parse);
 				Text.NL();
 				Text.Add("This metaphor is feeling stranger by the minute. What kind of plant does he imagine you are anyway?", parse);

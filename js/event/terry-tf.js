@@ -46,7 +46,7 @@ Terry.prototype.ItemUse = function(item, backPrompt) {
 Scenes.Terry.RosalinTF = function() {
 	var parse = {
 		playername : player.name,
-		rearsDesc  : function() { return rosalin.EarDesc(); },
+		rearsDesc  : function() { return rosalin.EarDesc(true); },
 		foxvixen   : terry.mfPronoun("fox", "vixen")
 	};
 	parse = terry.ParserPronouns(parse);

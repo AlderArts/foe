@@ -2185,7 +2185,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 		if(rosalin.flags["Vulpinix"] == 0) {
 			Text.Add("<i>“Hmm, a bunch of berries and plants huh? Wonder what I can do with this...”</i> Rosalin muses, absently reaching for some additional herbs from [hisher] collection. <i>“Perhaps a vegetable stew?”</i>", parse);
 			Text.NL();
-			parse["rearsDesc"] = rosalin.EarDesc();
+			parse["rearsDesc"] = rosalin.EarDesc(true);
 			Text.Add("As the ingredients start to bubble in [hisher] pot the concoction takes on a reddish hue. The alchemist sniffs the brew suspiciously, adding a few more herbs at random. [HisHer] [rearsDesc] twitch erratically as [heshe] tastes [hisher] creation.", parse);
 			rosalin.flags["Vulpinix"] = 1;
 		}
