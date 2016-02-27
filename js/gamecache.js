@@ -1,5 +1,5 @@
 
-var gameCache = {}
+var gameCache = {};
 
 InitCache = function() {
 	// Reset exploration

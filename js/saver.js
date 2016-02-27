@@ -66,7 +66,7 @@ Saver.SaveGame = function(slot, comment) {
 		saveName += " :: Comment: " + comment;
 	}
 
-	localStorage["saveDataLZ" + slot] = LZString.compress(saveData);
+	localStorage["saveDataLZ" + slot] = LZString.compressToUTF16(saveData);
 	localStorage["save" + slot] = saveName;
 	// Clear out legacy storage.
 	delete localStorage["savedata" + slot];
@@ -147,7 +147,7 @@ Saver.LoadPrompt = function(backFunc) {
 
 Saver.LoadGame = function(slot) {
 	if (localStorage["saveDataLZ" + slot]) {
-		var saveData = LZString.decompress(localStorage["saveDataLZ" + slot]);
+		var saveData = LZString.decompressFromUTF16(localStorage["saveDataLZ" + slot]);
 		gameCache = JSON.parse(saveData);
 	} else {
 		// Load from legacy storage.
