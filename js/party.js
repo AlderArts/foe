@@ -467,7 +467,7 @@ Party.prototype.ShowAbilities = function() {
 		var jobAbilities = entity.currentJob ? entity.currentJob.abilities : null;
 		if(jobAbilities)
 			pushAbilities(jobAbilities);
-		for(coll in abilities)
+		for(var coll in abilities)
 			pushAbilities(abilities[coll], jobAbilities);
 	}
 	Text.Flush();

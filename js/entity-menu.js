@@ -92,7 +92,7 @@ Entity.prototype.LevelUpPrompt = function(backFunc) {
 		Text.Add("<br>");
 	}
 	Text.Add(Text.BoldColor("Known abilities:<br>"));
-	for(set in this.abilities) {
+	for(var set in this.abilities) {
 		var abSet = this.abilities[set];
 
 		for(var i = 0; i < abSet.AbilitySet.length; i++) {
