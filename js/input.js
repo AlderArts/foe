@@ -204,17 +204,17 @@ Input.Keydown = function(event) {
 	var i;
 	switch(gameState) {
 		case GameState.Game:
-			for(i = 0; i < Input.menuButtons.length; i++)
+			for(var i = 0; i < Input.menuButtons.length; i++)
 				Input.menuButtons[i].HandleKeydown(event.keyCode);
-			for(i = 0; i < Input.exploreButtons.length; i++)
+			for(var i = 0; i < Input.exploreButtons.length; i++)
 				Input.exploreButtons[i].HandleKeydown(event.keyCode);
 		case GameState.Event:
 		case GameState.Credits:
 		case GameState.Combat:
 		case GameState.Cavalcade:
-			for(i = 0; i < Input.buttons.length; i++)
+			for(var i = 0; i < Input.buttons.length; i++)
 				Input.buttons[i].HandleKeydown(event.keyCode);
-			for(i = 0; i < Input.navButtons.length; i++)
+			for(var i = 0; i < Input.navButtons.length; i++)
 				Input.navButtons[i].HandleKeydown(event.keyCode);
 		break;
 	}

@@ -495,9 +495,7 @@ Gui.NextPrompt = function(func, text, tooltip) {
 
 Gui.SetButtonPage = function(list, page, state) {
 	Gui.ClearChoiceButtons();
-	var i,j;
-
-	for(i=0, j=page*Input.buttons.length; i<Input.buttons.length && j<list.length; i++, j++) {
+	for(var i=0, j=page*Input.buttons.length; i<Input.buttons.length && j<list.length; i++, j++) {
 		var name = list[j].nameStr || "NULL";
 		var func = list[j].func;
 		var en = list[j].enabled || false;
@@ -546,8 +544,7 @@ Gui.SetButtonsFromList = function(list, backEnabled, backFunc, state, backState)
 
 Gui.SetButtonCollectionPage = function(encounter, caster, list, ret, page) {
 	Gui.ClearChoiceButtons();
-	var i,j;
-	for(i=0, j=page*Input.buttons.length; i<Input.buttons.length && j<list.length; i++, j++) {
+	for(var i=0, j=page*Input.buttons.length; i<Input.buttons.length && j<list.length; i++, j++) {
 		Input.buttons[i].SetFromAbility(encounter, caster, list[j], ret);
 	}
 }

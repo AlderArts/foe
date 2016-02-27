@@ -237,7 +237,7 @@ Entity.prototype.LoadRecipes = function(storage) {
 
 Entity.prototype.LoadJobs = function(storage) {
 	if(storage.jobs) {
-		for(job in this.jobs) {
+		for(var job in this.jobs) {
 			var jd = this.jobs[job];
 			jd.FromStorage(storage.jobs[jd.job.name]);
 		}
@@ -310,7 +310,7 @@ Entity.prototype.FromStorage = function(storage) {
 }
 
 Entity.prototype.RecallAbilities = function() {
-	for(job in this.jobs) {
+	for(var job in this.jobs) {
 		var jd = this.jobs[job];
 		for(var i = 0; i < jd.level - 1; i++) {
 			if(i >= jd.job.levels.length) break;

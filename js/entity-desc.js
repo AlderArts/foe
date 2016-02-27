@@ -35,7 +35,7 @@ Entity.prototype.PrintDescription = function() {
 	Text.Add("[HeShe] [has] [faceDesc]. [HisHer] [eyeCount] [eyeColor] [eye][eyeS] observe the surroundings. ", parse);
 	Text.Add("A pair of [ears] sticks out from [possesive] [hairDesc]. ", parse);
 	
-	for(i = 0; i < this.body.head.appendages.length; i++) {
+	for(var i = 0; i < this.body.head.appendages.length; i++) {
 		var a = this.body.head.appendages[i];
 		parse.appDesc = a.Long();
 		Text.Add("On [hisher] head, [heshe] [has] a [appDesc]. ", parse);
@@ -44,7 +44,7 @@ Entity.prototype.PrintDescription = function() {
 	Text.NL();
 	var bs = false;
 	// Back slots
-	for(i = 0; i < this.body.backSlots.length; i++) {
+	for(var i = 0; i < this.body.backSlots.length; i++) {
 		var b = this.body.backSlots[i];
 		parse.appDesc = b.Long();
 		Text.Add("On [hisher] back, [heshe] [has] a [appDesc]. ", parse);
@@ -83,7 +83,7 @@ Entity.prototype.PrintDescription = function() {
 		parse.breastDesc = breasts[0].Short();
 		parse.breastSize = breastDesc.size;
 		Text.Add("Multiple rows of " + breast.nounPlural() + " sprout from [hisher] chest. [HisHer] first pair of [breastDesc] are [breastSize] in circumference.", parse);
-		for(i = 1; i < breasts.length; i++) {
+		for(var i = 1; i < breasts.length; i++) {
 			Text.Add("<br>Another two breasts.");
 		}
 	}
@@ -108,7 +108,7 @@ Entity.prototype.PrintDescription = function() {
 		parse.cockDesc = cock.aLong();
 		parse.numCocks = Text.NumToText(cocks.length);
 		Text.Add("[name] [has] a brace of [numCocks] " + cock.nounPlural() + ".", parse);
-		for(i = 0; i < cocks.length; i++) {
+		for(var i = 0; i < cocks.length; i++) {
 			var cock = cocks[i];
 			parse.cockDesc = cock.aLong();
 			Text.NL();
@@ -145,7 +145,7 @@ Entity.prototype.PrintDescription = function() {
 	else if(vags.length > 1) {
 		var vag = vags[0];
 		Text.Add("[name] [has] multiple " + vag.nounPlural() + ". [HisHer] first " + vag.noun() + " is slutty.<br>", parse);
-		for(i = 1; i < vags.length; i++) {
+		for(var i = 1; i < vags.length; i++) {
 			Text.Add("<br>Another of [hisher] " + vag.nounPlural() + " is slutty.", parse);
 		}
 	}
