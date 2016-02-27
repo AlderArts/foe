@@ -14,6 +14,7 @@ Version 0.4s
 * A bunch of web-programming issues were looked at by someone with far more experience than me. Thanks VioletVolatile!
  - Some GUI issues were adressed
  - There's a new build system, based on Node.js and Gulp. This won't affect 99% of players
+ - Save compression is now used for the "online" saves (localStorage), significantly reducing the size of saves. This will not affect save editing, since the SaveToFile and SaveToText functionality are unchanged
 
 --------------------------------------------
              PREVIOUS VERSIONS
