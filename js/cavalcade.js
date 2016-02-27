@@ -321,7 +321,7 @@ Cavalcade.prototype.CoinGameRound = function() {
 		
 		Text.Add("The house hand is: ", parse);
 		var i;
-		for(var i = 0; i < that.round; i++) {
+		for(i = 0; i < that.round; i++) {
 			var card = that.house[i];
 			Text.Add(card.name);
 			if(i < 2) Text.Add(", ");
