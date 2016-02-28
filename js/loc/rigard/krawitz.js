@@ -1652,8 +1652,7 @@ Scenes.Krawitz.StealingClothes = function() {
 Scenes.Krawitz.Bathhouse = function() {
 	var parse = {
 		cock2     	  : function() { return player.AllCocks()[1].Short(); },
-		cockTip2      : function() { return player.AllCocks()[1].TipShort(); },
-		
+		cockTip2      : function() { return player.AllCocks()[1].TipShort(); },		
 	};
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
@@ -1874,7 +1873,7 @@ Scenes.Krawitz.Bathhouse = function() {
 								
 								Text.Add("Well, time to move on to the main course.", parse);
 								if(player.FirstCock()) {
-									Text.Add("The ladies have been kind enough to prepare your [cocks] for penetration, lathering your length[s] generously with their hungry tongues.", parse);
+									Text.Add(" The ladies have been kind enough to prepare your [cocks] for penetration, lathering your length[s] generously with their hungry tongues.", parse);
 								}
 								else {
 									parse["cock"] = function() { return playerCock.Short(); };
@@ -1889,7 +1888,7 @@ Scenes.Krawitz.Bathhouse = function() {
 									}
 								}
 								if(playerCock.Size() > 150)
-									Text.Add("You are a bit worried that you’ll hurt them with the sheer size of your equipment, but the horny women don’t seem to have a care in the world.", parse);
+									Text.Add(" You are a bit worried that you’ll hurt them with the sheer size of your equipment, but the horny women don’t seem to have a care in the world.", parse);
 								Text.NL();
 								parse["towering"] = (playerCock.Size() > 150) ? " towering" : "";
 								Text.Add("Gina and Marlene pull you down on your back, rubbing their wet crotches against your stiff [cocks], each eager to be the first one taken. The younger of the two eventually wins out, her tongue lolling as she eases herself down on[oneof] your[towering] pillar[s].", parse);
@@ -1906,7 +1905,7 @@ Scenes.Krawitz.Bathhouse = function() {
 									Text.Add("Krawitz’ wife throws her a jealous glare, letting out a moaning complaint at her stepdaughter’s greed. The raven-haired girl is oblivious to them, however, too busy enjoying your [cock] to take notice. Sweat drips from her trembling body as she rides your cock, pushing it into her depths.", parse);
 									Text.NL();
 									if(player.HasBalls()) {
-										Text.Add("Marlene doesn’t let her defeat last long though, as she bows down below the root of your [cock], worshipping your [balls] with her tongue while Gina bounces up and down on your slick length.", parse);
+										Text.Add("Marlene doesn’t let her defeat last long though as she bows down below the root of your [cock], worshipping your [balls] with her tongue while Gina bounces up and down on your slick length.", parse);
 									}
 									else {
 										Text.Add("Marlene has to be sated waiting for her turn, glowering sullenly while her younger companion enjoys herself. With a spiteful grin on her lust-filled face, she slips in behind Gina and roughly pinches her nipples, drawing ragged moans from the girl.", parse);
@@ -1926,10 +1925,10 @@ Scenes.Krawitz.Bathhouse = function() {
 										Text.Add("Perhaps they simply didn’t notice it, with you meager cum output, or perhaps they are eager to drain all that they can out of you.", parse);
 								}
 								else {
-									Text.Add("Despite them doing all the work, you feel yourself caught up in their almost continuous body-wracking orgasms. Due to the artificial nature of your [cocks], you won’t tire from cumming, but you are still having to mount an effort to keep up with the ladies’ boundless energy. Finally, it becomes to much for you, and your body shudders in throes of bliss.", parse);
+									Text.Add("Despite them doing all the work, you feel yourself caught up in their almost continuous body-wracking orgasms. Due to the artificial nature of your [cocks], you won’t tire from cumming, but you are still having to mount an effort to keep up with the ladies’ boundless energy. Finally, it becomes too much for you, and your body shudders in throes of bliss.", parse);
 								}
 								Text.NL();
-								Text.Add("Eventually, you manage to disentangle yourself from the two horny young noblewomen, putting some distance between you. They are still breathing heavily, and they look a bit petulant as you retreat from them, finally coming to your senses. You were very close to forgetting your actual purpose here, but, if nothing else, you’ll definitely leave this place with some nice memories.", parse);
+								Text.Add("Eventually, you manage to disentangle yourself from the two horny, young noblewomen, putting some distance between you. They are still breathing heavily, and they look a bit petulant as you retreat from them, finally coming to your senses. You were very close to forgetting your actual purpose here, but if nothing else, you’ll definitely leave this place with some nice memories.", parse);
 								Text.NL();
 								Text.Add("Gina and Marlene are still under the spell of the drugged wine, though. They seem to have already forgotten about you, eyes and lips locked as they grind against each other.", parse);
 								Text.NL();
@@ -1975,20 +1974,20 @@ Scenes.Krawitz.OrgyEntrypoint = function() {
 	
 	Text.Add("Gina and Marlene whimper as they become aware of the encroaching servants, though they look expectant rather than frightened. Any inhibitions they might have had about being fucked by their entire staff - half of them morphs at that - disappeared about two glasses ago. You settle down, finding a good vantage point in the shadows. This should be fun to watch.", parse);
 	Text.NL();
-	Text.Add("Four particularly ballsy servants close in on the lady of the house, shrugging their way out of their clothes. Krawitz’ wife quickly gets presented with all the cock she can handle, and she eagerly dives into the task, using both hands and mouth. Gina, meanwhile, is looking wild-eyed at the two beasts heading her way. Even in her drugged state, the young girl still looks slightly worried as the two stable-boys uncover their large sheathed members, but her lust quickly overcomes her fear. The allure of the two horsecocks is too great for her to resist, and she reaches for them, trembling slightly as her lips lock around one of them, savouring the taste.", parse);
+	Text.Add("Four particularly ballsy servants close in on the lady of the house, shrugging their way out of their clothes. Krawitz’ wife quickly gets presented with all the cock she can handle, and she eagerly dives into the task, using both hands and mouth. Gina, meanwhile, is looking wild-eyed at the two beasts heading her way. Even in her drugged state, the young girl still looks slightly worried as the two stable-boys uncover their large sheathed members, but her lust quickly overcomes her fear. The allure of the two horsecocks is too great for her to resist, and she reaches for them, trembling slightly as her lips lock around one of them, savoring the taste.", parse);
 	Text.NL();
-	Text.Add("Things are progressing rather quickly, as neither party has any interest in foreplay. Marlene lets out a muffled moan of contentment as each of her orifices gets crammed full of dick, her pussy, ass, and mouth filled to the brim by throbbing erections. The servants move like men possessed, rutting desperately as they race toward the brief respite that orgasm grants them. The young noblewomen are more than willing receptacles for their seed, squirming as white spooge floods their used holes.", parse);
+	Text.Add("Things are progressing rather quickly as neither party has any interest in foreplay. Marlene lets out a muffled moan of contentment as each of her orifices gets crammed full of dick - her pussy, ass, and mouth are filled to the brim by throbbing erections. The servants move like men possessed, rutting desperately as they race toward the brief respite that orgasm grants them. The young noblewomen are more than willing receptacles for their seed, squirming as white spooge floods their used holes.", parse);
 	Text.NL();
 	Text.Add("Gina is in ecstasy as she is impaled back-and-front by the twin equine rods, each at least twenty inches in length. Her stomach bulges dangerously from the strain, distending unnaturally from the massive insertions. She doesn’t seem to be in any pain, however, as her strained passages wrap themselves around the horsecocks accomodatingly.", parse);
 	Text.NL();
 	Text.Add("As soon as one of the servants finishes inside or on one of the ladies, he is replaced by another of his peers. Soon, everyone has gotten a turn with both of the young noblewomen, spent seed dripping out of used holes, and trailing down heaving breasts.", parse);
 	Text.NL();
-	Text.Add("The participants of the orgy make no attempt to conceal the sounds of their copulation - by now, most of the neighbourhood is probably alerted to just what is going on within the walls of the estate. In this town, word is likely to travel quickly too...", parse);
+	Text.Add("The participants of the orgy make no attempt to conceal the sounds of their copulation - by now, most of the neighborhood is probably alerted to just what is going on within the walls of the estate. In this town, word is likely to travel quickly too...", parse);
 	Text.NL();
 	Text.Add("There seems to be some sort of commotion going on in the main building, a lot of shouting and clamoring. You withdraw further into the shadows, debating whether this is a good time to make yourself scarce.", parse);
 	Text.NL();
 	if(Scenes.Krawitz.stat.TFdKrawitz) {
-		Text.Add("<i>“D-dearest?! H-help me!”</i> The pitiful call for help comes from the lord of the mansion, who hobbles onto the scene unsteadily, clutching his hands over his head. Krawitz stares bleary-eyed at the orgy before him, his brain unable to process this new information. His arms fall limply to his sides, revealing a pair of feline ears spouting from the balding man’s head. You can hardly keep from laughing as you see a tail swaying from the xenophobic lord’s behind.", parse);
+		Text.Add("<i>“D-dearest?! H-help me!”</i> The pitiful call for help comes from the lord of the mansion who hobbles onto the scene unsteadily, clutching his hands over his head. Krawitz stares bleary-eyed at the orgy before him, his brain unable to process this new information. His arms fall limply to his sides, revealing a pair of feline ears spouting from the balding man’s head. You can hardly keep from laughing as you see a tail swaying from the xenophobic lord’s behind.", parse);
 		Text.NL();
 		Text.Add("<i>“Marlene? Gina?!”</i> Krawitz falls to his knees, trying to understand what he’s seeing. One of his hands, significantly more furred than it previously was, paws ineffectually at his belt, searching for a sword that isn’t there. The lord looks like he has no idea what to do next, overwhelmed by the events of this night. He limply follows along as two lusty maids pull him toward the orgy, caressing his cat-like ears.", parse);
 		Text.NL();
@@ -2003,7 +2002,7 @@ Scenes.Krawitz.OrgyEntrypoint = function() {
 	else {
 		Text.Add("<i>“W-what is going on here?!”</i> a ragged and enraged little man bursts onto the scene, sword in hand. Lord Krawitz’ eyes almost jump from their sockets as they take in the situation - his wife and daughter being gangbanged by his entire staff, and begging for more. The small balding man lunges forward, launching a flurry of blows with his rapier, scattering servants left and right, shouting <i>“Scum! Filth! Plebeians!”</i> Fortunately for the servants, in his rage, his aim is a bit off, and they all manage to retreat from the scene without major injuries.", parse);
 		Text.NL();
-		Text.Add("<i>“Off my estate, you are all fired! You will hang for this!”</i> the lord yowls, ranting and waving his sword in the air. At his feet, the ladies of his household lie panting, semen dripping from their well-used bodies. This seems like a good time to leave, so you take advantage of the confusion as the former staff scramble to escape the wrath of their master.", parse);
+		Text.Add("<i>“Off my estate - you are all fired! You will hang for this!”</i> the lord yowls, ranting and waving his sword in the air. At his feet, the ladies of his household lie panting, semen dripping from their well-used bodies. This seems like a good time to leave, so you take advantage of the confusion as the former staff scramble to escape the wrath of their master.", parse);
 		Text.NL();
 		Text.Add("You throw one last look of regret toward the mansion grounds as you vault over the fence and onto the street. There is no way you could avoid detection in the pandemonium inside. Before long, the City Watch will probably arrive as well, so you’d best leave the area while you still can.", parse);
 		Text.Flush();
@@ -2061,7 +2060,7 @@ Scenes.Krawitz.Aftermath = function() {
 		party.LoadActiveParty();
 		
 		Text.Clear();
-		Text.Add("You make your way back to the inn, snaking your way through alleyways to shake any possible pursuers. As you’re about to step inside the Lady’s Blessing, you’re surprised to bump into the vixen waitress you normally see cleaning tables.", parse);
+		Text.Add("You make your way back to the inn, snaking through alleyways to shake any possible pursuers. As you’re about to step inside the Lady’s Blessing, you’re surprised to bump into the vixen waitress you normally see cleaning tables.", parse);
 		Text.NL();
 		parse["sir"] = player.mfFem("sir", "ma’am");
 		Text.Add("<i>“Good evening, [sir],”</i> she greets you.", parse);
@@ -2128,7 +2127,7 @@ Scenes.Krawitz.Aftermath = function() {
 									Text.NL();
 									Text.Add("The first signs of morning have appeared before you step inside the Lady’s Blessing, which seems to be dormant at this time of day. Someone who never seems to be asleep, however, is Lei. He stares at the vixen with his sharp eyes as she makes her way inside, then immediately turn his gaze to you and motions for you to follow him upstairs.", parse);
 									Text.NL();
-									Text.Add("<i>“Thanks a lot for your help. I can take things from here,”</i> she glances at Lei, not wanting to keep you from your business. ", parse);
+									Text.Add("<i>“Thanks a lot for your help. I can take things from here.”</i> She glances at Lei, not wanting to keep you from your business. ", parse);
 									Text.NL();
 									Text.Add("You bid her farewell and trudge after him wordlessly, feeling the long night in your joints. Your eyebrows rise slightly as the two of you enter the landing to the fourth floor, and head toward the penthouse suite at the end of the hallway.", parse);
 									
@@ -2210,7 +2209,7 @@ Scenes.Krawitz.Aftermath = function() {
 			
 			Text.Add(" Renting this place must cost a fortune.", parse);
 			Text.NL();
-			parse["hotcold"] = world.time.season == Season.Winter ? "a cosy fire warming up the interior" : "though at the moment, it isn’t lit";
+			parse["hotcold"] = world.time.season == Season.Winter ? "a cozy fire warming up the interior" : "though at the moment it isn’t lit";
 			Text.Add("Even for the Lady’s Blessing, the interior of the room is lavish, well beyond the usual fare at the inn. There are several pieces of antique furniture that look to have been made in a florid old style, decorated with elaborate carved patterns. Richly embroidered carpets and hangings abundantly adorn the room, the crowning jewel being a large tapestry hanging on one wall. While it is very well made, the images depicted on it are decidedly vulgar, showing a series of couples involved in suggestive or outright sexual acts. The room has its own stone fireplace connected to the central chimney, [hotcold].", parse);
 			Text.NL();
 			Text.Add("Lei motions you inside, closing the door behind you and leaving you alone with the red-headed couple from before. You can spy the woman resting on the gigantic bed in the next room, while the man is lounging on a couch. He waves you over, eager to hear of your exploits. The woman puts on a robe and joins you on the couch, her hair in sleepy, scarlet tousles.", parse);
@@ -2219,7 +2218,7 @@ Scenes.Krawitz.Aftermath = function() {
 			Text.Add("You recount the events of the night, describing how you[duel] got inside the Krawitz estate, and what you did there.", parse);
 			Text.NL();
 			if(rigard.Krawitz["Duel"] == 1) {
-				Text.Add("<i>“No need to tell me, word has already spread across town,”</i> the young man replies as you tell him about your duel against Krawitz. <i>“I can hardly believe it - you wiped the floor with him! Even I have some trouble besting him!”</i> The two look at you admiringly.", parse);
+				Text.Add("<i>“No need to tell me - word has already spread across town,”</i> the young man replies as you tell him about your duel against Krawitz. <i>“I can hardly believe it - you wiped the floor with him! Even I have some trouble besting him!”</i> The two look at you admiringly.", parse);
 				Text.NL();
 			}
 			else if(rigard.Krawitz["Duel"] == 2) {
@@ -2238,7 +2237,7 @@ Scenes.Krawitz.Aftermath = function() {
 			if(Scenes.Krawitz.stat.HasBinder) {
 				Text.Add("You hand over the binder you found in Krawitz’ study. The man leafs through it idly as you speak, his eyes growing wider and wider. He whistles as he finds something particularly interesting.", parse);
 				Text.NL();
-				Text.Add("<i>“Do you know what this is? We always suspected the old fart was low on money, but this tells quite an interesting tale… according to his own book, the Krawitz estate is just about bankrupt.”</i> The red-haired man leans over to his companion showing a section to her. <i>“What is even more interesting is where he gets the money to fund his lifestyle. What kind of moron would put this stuff in ink… half of this stuff is borderline illegal.”</i>", parse);
+				Text.Add("<i>“Do you know what this is? We always suspected the old fart was low on money, but this tells quite an interesting tale… According to his own book, the Krawitz estate is just about bankrupt.”</i> The red-haired man leans over to his companion showing a section to her. <i>“What is even more interesting is where he gets the money to fund his lifestyle. What kind of moron would put this stuff in ink… half of this stuff is borderline illegal.”</i>", parse);
 				Text.NL();
 				Text.Add("<i>“And a quarter quite a bit more than borderline!”</i> the woman adds.", parse);
 				Text.NL();
@@ -2246,7 +2245,7 @@ Scenes.Krawitz.Aftermath = function() {
 				Text.NL();
 			}
 			if(Scenes.Krawitz.stat.HasSword) {
-				Text.Add("Grinning, you pull out Lord Krawitz’ blade and present it to the pair. <i>“How in… oh this is going to sting him something fierce!”</i> the man chuckles, admiring the sword. <i>“One almost feels a bit bad for him… this sword is just about the most valuable thing in his possession, an heirloom that has been in his family for generations. Until now, that is.”</i> He hands it back to you. <i>“You’ve earned it. Make good use of it - it is a fine blade.”</i>", parse);
+				Text.Add("Grinning, you pull out Lord Krawitz’ blade and present it to the pair. <i>“How in… oh, this is going to sting him something fierce!”</i> the man chuckles, admiring the sword. <i>“One almost feels a bit bad for him… This sword is just about the most valuable thing in his possession, an heirloom that has been in his family for generations. Until now, that is.”</i> He hands it back to you. <i>“You’ve earned it. Make good use of it - it is a fine blade.”</i>", parse);
 				Text.NL();
 				Text.Flush();
 				party.inventory.AddItem(Items.Weapons.KrawitzSword);
@@ -2268,7 +2267,7 @@ Scenes.Krawitz.Aftermath = function() {
 				Text.NL();
 			}
 			if(!Scenes.Krawitz.stat.AlarmRaised)
-				Text.Add("You finish by explaining how you slipped out without alerting anyone of your presence, a ghost in the night. The pair compliment you on your craftiness.", parse);
+				Text.Add("You finish by explaining how you slipped out without alerting anyone of your presence - a ghost in the night. The pair compliment you on your craftiness.", parse);
 			else
 				Text.Add("You finish by telling of your daring escape from the mansion, dodging pursuing guards through the streets of Rigard. This gains you a whooping round of applause.", parse);
 			Text.Flush();
@@ -2285,7 +2284,7 @@ Scenes.Krawitz.Aftermath = function() {
 				else {
 					Text.Add("After you have finished, the pair sits in stunned silence, gawking at your story. At last, the man clears his throat.", parse);
 					Text.NL();
-					Text.Add("<i>“Remind me to never get on your bad side, [playername],”</i> the man breathes, amazed, <i>“to have accomplished all this in a single night… you’ve all but ruined Krawitz reputation. Truly, you went above and beyond. You have earned our trust.”</i> The woman nods in agreement, looking at you slightly apprehensively.", parse);
+					Text.Add("<i>“Remind me to never get on your bad side, [playername],”</i> the man breathes, amazed. <i>“To have accomplished all this in a single night… you’ve all but ruined Krawitz reputation. Truly, you went above and beyond. You have earned our trust.”</i> The woman nods in agreement, looking at you slightly apprehensively.", parse);
 				}
 				Text.NL();
 				if(points > 0) {
@@ -2298,7 +2297,7 @@ Scenes.Krawitz.Aftermath = function() {
 					Text.Add("<b>You earned [coin] coins!</b>", {coin: coin});
 					if(points >= 6) {
 						Text.NL();
-						Text.Add("<i>“I think an additional reward is in order,”</i> the woman declares, pulling out an elaborate silver necklace, with a rose at its center.", parse);
+						Text.Add("<i>“I think an additional reward is in order,”</i> the woman declares, pulling out an elaborate silver necklace with a rose at its center.", parse);
 						Text.NL();
 						Text.Add("<b>Received woman’s favor!</b>", parse);
 						Text.NL();
@@ -2414,7 +2413,7 @@ Scenes.Krawitz.TwinsPrompt = function() {
 		options.push({ nameStr : "Krawitz",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>“Oh, don’t get us wrong, we don’t <b>hate</b> him per se,”</i> the princess assures you, <i>“he is our fencing instructor at court, though we can both best him at this point. He is a xenophobic old fart who is way too full of himself. We wanted to teach him a lesson, sort of.”</i>", parse);
+				Text.Add("<i>“Oh, don’t get us wrong, we don’t <b>hate</b> him, per se,”</i> the princess assures you. <i>“He is our fencing instructor at court, though we can both best him at this point. He is a xenophobic old fart who is way too full of himself. We wanted to teach him a lesson, sort of.”</i>", parse);
 				Text.NL();
 				Text.Add("<i>“Your services are much appreciated,”</i> Rani chimes in, showing a fierce edge behind his usually meek demeanor.", parse);
 				Text.Flush();
@@ -2428,7 +2427,7 @@ Scenes.Krawitz.TwinsPrompt = function() {
 		options.push({ nameStr : "Disguise",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>“It should seem rather obvious we’d want to keep our presence here in the city low-key,”</i> the princess looks a bit confused until she understands what it is that you are asking. <i>“Ah, you mean why do I dress and act as a man, while Rani poses as a woman?”</i>", parse);
+				Text.Add("<i>“It should seem rather obvious we’d want to keep our presence here in the city low-key,”</i> the princess looks a bit confused until she understands what it is that you are asking. <i>“Ah, you mean why do I dress and act as a man while Rani poses as a woman?”</i>", parse);
 				Text.NL();
 				Text.Add("Rumi leans over and caresses her brother’s cheek. <i>“Don’t you think he is prettier this way?”</i> The young prince shies away from her touch, throwing uncertain looks in your direction. The red-haired woman laughs, a pleasant sound, though there is more than a hint of mischief there.", parse);
 				Text.NL();
@@ -2444,7 +2443,7 @@ Scenes.Krawitz.TwinsPrompt = function() {
 		options.push({ nameStr : "Lei",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>“Lei is the best at his job, though unfortunately a bit too dedicated to it for our tastes.”</i> Rumi replies to your question. <i>“Mother figured out that we were sneaking into the city, and hired a bodyguard for us rather than telling father.”</i> She smiles wickedly. <i>“Mother’s plan might have backfired a bit though. Though Lei is known for completing his missions to the letter, a bit of persuasion and some cash convinced him to take on some additional duties, when he isn’t busy protecting us.”</i>", parse);
+				Text.Add("<i>“Lei is the best at his job, though unfortunately a bit too dedicated to it for our tastes.”</i> Rumi replies to your question. <i>“Mother figured out that we were sneaking into the city, and hired a bodyguard for us rather than telling father.”</i> She smiles wickedly. <i>“Mother’s plan might have backfired a bit though. Though Lei is known for completing his missions to the letter, a bit of persuasion and some cash convinced him to take on some additional duties when he isn’t busy protecting us.”</i>", parse);
 				Text.NL();
 				Text.Add("She doesn’t seem to want to tell you more about what those duties are, exactly. Perhaps you could ask Lei about it later.", parse);
 				Text.Flush();
@@ -2473,7 +2472,7 @@ Scenes.Krawitz.TwinsMoreTalk = function() {
 	Text.NL();
 	Text.Add("You ask them what kind of work you’d be doing, and why they want to put this trust in you.", parse);
 	Text.NL();
-	Text.Add("<i>“Lei likes you, and he has an eye for the strong,”</i> Rani pipes in. Likes you? The silent swordsman has a peculiar way of showing it, if so. <i>“You’ve shown your mettle by taking on Krawitz for us, this is enough to start. We are sure you won’t disappoint us in the future.”</i>", parse);
+	Text.Add("<i>“Lei likes you, and he has an eye for the strong,”</i> Rani pipes in. Likes you? The silent swordsman has a peculiar way of showing it, if so. <i>“You’ve shown your mettle by taking on Krawitz for us - this is enough to start. We are sure you won’t disappoint us in the future.”</i>", parse);
 	Text.NL();
 	Text.Add("<i>“As to what you would be asked to do… nothing bad, certainly. You’d pass messages along, bring us certain objects or people… stuff like that. We can talk about the details later.”</i> The princess waves off any further inquiries.", parse);
 	Text.NL();
@@ -2484,7 +2483,7 @@ Scenes.Krawitz.TwinsMoreTalk = function() {
 	rigard.flags["RoyalAccess"] = 1;
 	
 	Text.NL();
-	Text.Add("<i>“Now, if you don’t mind, we have a celebration to attend to, don’t we brother?”</i> The princess nudges her twin playfully, though there is a naughty look in her eyes. <i>“Leave us for now, [playername], talk to Lei if our offer is of interest to you.”</i>", parse);
+	Text.Add("<i>“Now, if you don’t mind, we have a celebration to attend to, don’t we, brother?”</i> The princess nudges her twin playfully, though there is a naughty look in her eyes. <i>“Leave us for now, [playername]. Talk to Lei if our offer is of interest to you.”</i>", parse);
 	Text.NL();
 	if(twins.flags["SexOpen"] == 1) {
 		Text.Add("<i>“Ah, and you would consider our… other offer too, yes?”</i> Rani blushes, and his sister giggles at him.", parse);
