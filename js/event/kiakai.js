@@ -131,13 +131,13 @@ Kiakai.prototype.JobDesc = function() {
 	return "acolyte";
 }
 
-// TODO TEMP
 Kiakai.prototype.ArmorDescLong = function() {
+	if(this.Armor()) return Entity.prototype.ArmorDescLong.call(this);
 	return "a light blue robe of soft cloth with short sleeves, ending just above the knees";
 }
 
-// TODO TEMP
 Kiakai.prototype.ArmorDesc = function() {
+	if(this.Armor()) return Entity.prototype.ArmorDesc.call(this);
 	return "light blue robe";
 }
 
@@ -261,7 +261,7 @@ Kiakai.prototype.TalkPrompt = function() {
 	// TALK ABOUT MAIN QUEST
 	options.push({ nameStr: "Quest",
 		func : Scenes.Kiakai.TalkQuest, enabled : true,
-		tooltip : "Ta	lk about your goals."
+		tooltip : "Talk about your goals."
 	});
 	// TALK ABOUT ARIA
 	options.push({ nameStr: "Aria",
