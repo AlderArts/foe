@@ -1718,7 +1718,7 @@ Scenes.Krawitz.Bathhouse = function() {
 		Text.Add("The ladies are still recovering, reclining in the pool cuddling up next to each other, though the effects of the drug you gave them still have a firm hold.", parse);
 		Text.Flush();
 		if(Scenes.Krawitz.stat.ServantOrgySetup) {
-			Text.Add(" They are about to receive all the company they can handle, as you hear the sounds of the drunken servants closing in on the bathhouse. Things are about to become very interesting. You settle down, deciding to enjoy the show for a bit.", parse);
+			Text.Add(" They are about to receive all the company they can handle as you hear the sounds of the drunken servants closing in on the bathhouse. Things are about to become very interesting. You settle down, deciding to enjoy the show for a bit.", parse);
 			Text.NL();
 			
 			Scenes.Krawitz.OrgyEntrypoint();
@@ -1743,7 +1743,7 @@ Scenes.Krawitz.Bathhouse = function() {
 		options.push({ nameStr : "Leave",
 			func : function() {
 				Text.Clear();
-				Text.Add("You quickly retreat, catching lady Krawitz’ command to <i>“fetch that wine, pronto!”</i>", parse);
+				Text.Add("You quickly retreat, catching Lady Krawitz’ command to <i>“Fetch that wine, pronto!”</i>", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
 					MoveToLocation(world.loc.Rigard.Krawitz.grounds, {minute: 10});
@@ -1786,7 +1786,7 @@ Scenes.Krawitz.Bathhouse = function() {
 					
 					var aftermath = function() {
 						if(!Scenes.Krawitz.stat.ServantOrgySetup) {
-							Text.Add("About half of the neighbourhood ought to be alerted to the semi-incestous coitus happening in Krawitz’ front yard. Better leg it before you attract undue attention.", parse);
+							Text.Add("About half of the neighborhood ought to be alerted to the semi-incestous coitus happening in Krawitz’ front yard. Better leg it before you attract undue attention.", parse);
 							Text.Flush();
 							Gui.NextPrompt(function() {
 								MoveToLocation(world.loc.Rigard.Krawitz.grounds, {minute: 20});
@@ -1794,7 +1794,7 @@ Scenes.Krawitz.Bathhouse = function() {
 							});
 						}
 						else {
-							Text.Add("From the sound of it, it seems like the young noblewomen will get exactly what they crave, as you hear a group of carousing servants heading toward the bathhouse. It sure took them a while to find their way across the yard… though this wine is potent stuff, perhaps they had to make a few stops on the way.", parse);
+							Text.Add("From the sound of it, it seems like the young noblewomen will get exactly what they crave as you hear a group of carousing servants heading toward the bathhouse. It sure took them a while to find their way across the yard… though this wine is potent stuff, perhaps they had to make a few stops on the way.", parse);
 							Text.NL();
 							
 							Scenes.Krawitz.OrgyEntrypoint();
@@ -1808,11 +1808,11 @@ Scenes.Krawitz.Bathhouse = function() {
 							Text.Clear();
 							Text.Add("You respectfully decline her offer. For a brief moment, Marlene looks disappointed, but she’s soon forgotten you were even there, focusing all of her attention on her companion, lavishing her body with kisses as a lusty haze clouds her mind.", parse);
 							Text.NL();
-							Text.Add("The two women are panting heavily, their bodies grinding against each other, dripping water and sweat. Gina has been pushed onto her back in the shallow end of the pool, legs spread invitingly as she lets the older woman take control, sighing languidly as fingers spread her nether lips, probing her depths.", parse);
+							Text.Add("The two women are panting heavily, their bodies grinding against each other, dripping water and sweat. Gina has been pushed onto her back in the shallow end of the pool, legs spread invitingly as she lets the older woman take control, sighing languidly as fingers spread her netherlips, probing her depths.", parse);
 							Text.NL();
 							Text.Add("Although you were about to leave, you give in to temptation and settle down to watch the show. The ladies don’t seem to mind either way - if they even notice. Wife and daughter are sinking deeper and deeper into the drug-induced fog of rampant lust, Marlene’s lips closing around one of Gina’s puffy nipples. The young woman’s mouth hangs open in rapture as her stepmother thrusts several digits into her sex, making her legs tremble with pleasure.", parse);
 							Text.NL();
-							Text.Add("The younger woman cries out in ecstasy as she cums, her legs clenching tightly around Marlene’s arm. Impatient to get her own pleasure, ‘Lene climbs on top of Gina, grinding her labia on the limp girl’s face. With no hesitation, the raven-haired girl stick out her tongue, burying it in her stepmother’s folds.", parse);
+							Text.Add("The younger woman cries out in ecstasy as she cums, her legs clenching tightly around Marlene’s arm. Impatient to get her own pleasure, ‘Lene climbs on top of Gina, grinding her labia on the limp girl’s face. With no hesitation, the raven-haired girl sticks out her tongue, burying it in her stepmother’s folds.", parse);
 							Text.NL();
 							Text.Add("<i>“Haaah… G-Ginny...”</i> A throaty moan seems to be all that Lady Krawitz can muster, her muddled mind no longer capable of forming rational thought. It isn’t long before the two of them collapse in each others arms, exhausted for the moment, but raring to have another go.", parse);
 							Text.NL();
@@ -1826,15 +1826,15 @@ Scenes.Krawitz.Bathhouse = function() {
 						func : function() {
 							Text.Clear();
 							Scenes.Krawitz.stat.SexedGirls = true;
-							Text.Add("Marlene’s clouded gaze is firmly fixed on you as you saunter over to the two inebriated women, hastily removing your gear. She pulls you down into a lusty kiss, and, as your lips lock, you taste a blend of her, Gina, and the alluring taste of the potent wine. This last hits you like a wall of hot air, making your heart skip a beat as it takes effect.", parse);
+							Text.Add("Marlene’s clouded gaze is firmly fixed on you as you saunter over to the two inebriated women, hastily removing your gear. She pulls you down into a lusty kiss, and as your lips lock, you taste a blend of her, Gina, and the alluring taste of the potent wine. This last hits you like a wall of hot air, making your heart skip a beat as it takes effect.", parse);
 							Text.NL();
-							Text.Add("At this point, neither of the Krawitz ladies seem to have a care in the world for who you are, whether you are a servant, a thief[human] or a noble. They both moan eagerly as you let your [hand]s trace their curves, grinding their bodies against each other urgently, pleading for you to join with them quickly. Not one to keep a lady waiting, you present them with your [genDesc], urging them to get to work.", parse);
+							Text.Add("At this point, neither of the Krawitz ladies seem to have a care in the world for who you are, whether you are a servant, a thief[human] or a noble. They both moan eagerly as you let your [hand]s trace their curves, grinding their bodies against each other urgently, pleading for you to join with them quickly. Not one to keep a lady waiting, you present them with your [gen], urging them to get to work.", parse);
 							Text.NL();
 							if(player.FirstCock()) {
 								Text.Add("Marlene coos in delight as she comes face to face with your [cocks], eyes full of need as she basks in the heat emanating from your erect meatstick[s]. Her hands trembling slightly, she leans forward to cradle[oneof] [itThem], eyes fixed on the bead of pre forming on the [cockTip] as if hypnotized.", parse);
 								Text.NL();
-								parse["balls"] = player.HasBalls() ? Text.Parse(" and joyfully fondling your [balls]", parse) : "";
-								Text.Add("You sigh languidly as the beautiful woman wraps her mouth around your throbbing [cock], her hands busy working the shaft[balls]. She looks like the happiest little slut in the world, eagerly trying to milk you of your seed, craving to have it pour down her throat. ", parse);
+								parse["b"] = player.HasBalls() ? Text.Parse(" and joyfully fondling your [balls]", parse) : "";
+								Text.Add("You sigh languidly as the beautiful woman wraps her mouth around your throbbing [cock], her hands busy working the shaft[b]. She looks like the happiest little slut in the world, eagerly trying to milk you of your seed, craving to have it pour down her throat. ", parse);
 								if(player.NumCocks() > 1)
 									Text.Add("Gina looks desperate to join in, and happily for her, you are well-equipped to handle the needy duo. The young woman eagerly grasps another of your [cocks], lathering the length in her saliva before greedily closing her lips around its [cockTip2].", parse);
 								else
@@ -1851,8 +1851,8 @@ Scenes.Krawitz.Bathhouse = function() {
 									Text.Add("With Marlene’s attention focused elsewhere, Gina is quick to monopolize your [cocks], using both her mouth and soft breasts to pleasure you.", parse);
 								}
 								else {
-									parse["skin"] = player.SkinType() != Race.Human ? Text.Parse(", marvelling at the unfamiliar feel of your [skin]", parse) : "";
-									Text.Add("Gina crawls up behind you, pressing her nude, dripping body against your bare back. Her stiff nipples grind against you insistently as her hands caress and explore your body[skin]. Slowly, she works her way down your body, falling to her knees as she kneads your [butt]. You gasp in surprise as you feel her fingers prying your cheeks apart, her tongue slipping insider your [anus], probing the sensitive passage.", parse);
+									parse["kn"] = player.SkinType() != Race.Human ? Text.Parse(", marveling at the unfamiliar feel of your [skin]", parse) : "";
+									Text.Add("Gina crawls up behind you, pressing her nude, dripping figure against your bare back. Her stiff nipples grind against you insistently as her hands caress and explore your body[kn]. Slowly, she works her way down your form, falling to her knees as she kneads your [butt]. You gasp in surprise as you feel her fingers prying your cheeks apart, her tongue slipping inside your [anus], probing the sensitive passage.", parse);
 								}
 								Text.NL();
 								
@@ -1861,11 +1861,12 @@ Scenes.Krawitz.Bathhouse = function() {
 							}
 							Text.Add("You sigh contentedly as both of the Krawitz ladies work your nethers, hands and tongues exploring every nook and cranny of your aroused body. You lean down and pat their heads, commending them for being such good sluts, telling them how pleased Lord Krawitz would be if he saw them now.", parse);
 							if(Scenes.Krawitz.stat.TFdKrawitz)
-								Text.Add(" Idly, you wonder what the Lord is up to, and if he’s enjoying his dinner.", parse);
+								Text.Add(" Idly, you wonder what the lord is up to, and if he’s enjoying his dinner.", parse);
 							Text.Flush();
 								
 							Gui.NextPrompt(function() {
 								var playerCock = player.FirstCock() || (player.strapOn ? player.strapOn.cock : Items.StrapOn.LargeStrapon.cock);
+								parse = player.ParserTags(parse, "", playerCock);
 								Text.Clear();
 								
 								player.Fuck(playerCock, 10);
@@ -1879,10 +1880,10 @@ Scenes.Krawitz.Bathhouse = function() {
 									parse["cock"] = function() { return playerCock.Short(); };
 									parse["cocks"] = parse["cock"];
 									if(player.strapOn) {
-										Text.Add("You’ve come well prepared, and the ladies give coos of delight as you equip your [cock], eyeing your artificial member with desire burning in their eyes.", parse);
+										Text.Add(" You’ve come well prepared, and the ladies give coos of delight as you equip your [cock], eyeing your artificial member with desire burning in their eyes.", parse);
 									}
 									else {
-										Text.Add("Wordlessly, Gina leaves the pool, staggering slightly as she moves over to a nearby chest, her hands shaking as she opens it. She fetches something from its depths, swaying unsteadily as she returns to your side. The young noblewoman’s eyes are clouded with lust as she presents you with her treasure; a fairly large strapon dildo.", parse);
+										Text.Add(" Wordlessly, Gina leaves the pool, staggering slightly as she moves over to a nearby chest, her hands shaking as she opens it. She fetches something from its depths, swaying unsteadily as she returns to your side. The young noblewoman’s eyes are clouded with lust as she presents you with her treasure; a fairly large strapon dildo.", parse);
 										Text.NL();
 										Text.Add("You grin and take her offering, praising her for being such a good, thoughtful girl as you secure the fastenings around your [hips]. You suspect this won’t be the first time this particular toy has been put to use.", parse);
 									}
