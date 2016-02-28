@@ -1654,29 +1654,15 @@ Scenes.Krawitz.StealingClothes = function() {
 
 Scenes.Krawitz.Bathhouse = function() {
 	var parse = {
-		hand          : function() { return player.HandDesc(); },
-		cock      	  : function() { return player.FirstCock().Short(); },
 		cock2     	  : function() { return player.AllCocks()[1].Short(); },
-		cocks 		  : function() { return player.cocks(); },
-		cockTip       : function() { return player.FirstCock().TipShort(); },
 		cockTip2      : function() { return player.AllCocks()[1].TipShort(); },
-		balls     	  : function() { return player.balls(); },
-		vag       	  : function() { return player.FirstVag().Short(); },
-		butt      	  : function() { return player.Butt().Short(); },
-		anus      	  : function() { return player.Butt().AnalShort(); },
-		skin      	  : function() { return player.skin(); },
-		hips      	  : function() { return player.hips(); }
+		
 	};
-	
-	parse["s"]        = player.NumCocks() > 1 ? "s" : "";
-	parse["notS"]     = player.NumCocks() > 1 ? "" : "s";
-	parse["oneof"]    = player.NumCocks() > 1 ? " one of" : "";
-	parse["itThem"]   = player.NumCocks() > 1 ? "them" : "it";
-	parse["itsTheir"] = player.NumCocks() > 1 ? "their" : "its";
-	
-	parse["s2"]     = player.NumCocks() > 2 ? "s" : "";
-	parse["oneof2"] = player.NumCocks() > 2 ? " one of" : "";
-	
+	parse = player.ParserTags(parse);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 2, null, "2");
+		
+		
 	var humanity = player.Humanity();
 	
 	parse["human"] = humanity < 0.9 ? ", a non-human" : "";
