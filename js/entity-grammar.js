@@ -138,6 +138,7 @@ Entity.prototype.ParserTags = function(parse, prefix, p1cock) {
 	parse[prefix + "eyes"]      = function() { return ent.EyeDesc() + "s"; }
 	parse[prefix + "hand"]      = function() { return ent.HandDesc(); }
 	parse[prefix + "palm"]      = function() { return ent.PalmDesc(); }
+	parse[prefix + "hip"]       = function() { return ent.HipDesc(); }
 	parse[prefix + "hips"]      = function() { return ent.HipsDesc(); }
 	parse[prefix + "thigh"]     = function() { return ent.ThighDesc(); }
 	parse[prefix + "thighs"]    = function() { return ent.ThighsDesc(); }
