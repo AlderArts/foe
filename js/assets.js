@@ -56,6 +56,7 @@ Images.drake        = "assets/img/drake.png";
 Images.gol          = "assets/img/gol.png";
 Images.catboy       = "assets/img/catboy.png";
 Images.centaur_mare = "assets/img/centaur_mare.png";
+Images.old_goat     = "assets/img/goat.png";
 
 Images.bandit_male1 = "assets/img/bandit_male1.png";
 Images.bandit_male2 = "assets/img/bandit_male2.png";
