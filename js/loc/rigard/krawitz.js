@@ -2506,11 +2506,11 @@ Scenes.Krawitz.Duel = function() {
 	Text.Clear();
 	Text.Add("As you’re walking through the plaza, the voice of a man shouting in anger catches your attention. It is shrill and nasal at once, oozing arrogance and presumption. Feeling morbidly curious, you cross the street to get a closer look at what’s going on.", parse);
 	Text.NL();
-	Text.Add("You see a richly dressed, if deeply unstylish, nobleman yelling at a morph servant who was apparently accompanying him. You can’t quite tell what exactly he has done to offend him, as the noble roundly curses him for being a total incompetent and a disgusting beast.", parse);
+	Text.Add("You see a richly dressed, if deeply unstylish, nobleman yelling at a morph servant who was apparently accompanying him. You can’t quite tell what exactly he has done to offend him as the noble roundly curses him for being a total incompetent and a disgusting beast.", parse);
 	Text.NL();
-	Text.Add("The noble is on the short side, and his stomach shows something of a paunch. He is visibly balding, his gray hair leaving a shiny spot at the top of his head. His velvet clothing looks like it was cut to fit him when he was a fitter man, but is still in good condition. Well, that is, unless its purple and orange coloration somehow developed with age. You fervently hope that the garish combination is just an eccentricity of the man, although it is conceivable that it may have simply gone out of style years ago. At his hip, hangs a long slender fencing blade, at odds with his portly stature.", parse);
+	Text.Add("The noble is on the short side, and his stomach shows something of a paunch. He is visibly balding, his gray hair leaving a shiny spot at the top of his head. His velvet clothing looks like it was cut to fit him when he was a fitter man, but is still in good condition. Well, that is, unless its purple and orange coloration somehow developed with age. You fervently hope that the garish combination is just an eccentricity of the man, although it is conceivable that it may have simply gone out of style years ago. At his hip hangs a long, slender fencing blade, at odds with his portly stature.", parse);
 	Text.NL();
-	Text.Add("As you examine him, you realize that his appearance matches what you were told of lord Krawitz. Luck seems to be on your side in finding the man. Perhaps you could use this opportunity to challenge him to a fencing match and humiliate him in front of the crowds passing by. You recall that you were told he was an excellent fencer, but, given his appearance, you can’t help but wonder if maybe the description was a little overblown...", parse);
+	Text.Add("As you examine him, you realize that his appearance matches what you were told of Lord Krawitz. Luck seems to be on your side in finding the man. Perhaps you could use this opportunity to challenge him to a fencing match and humiliate him in front of the crowds passing by. You recall that you were told he was an excellent fencer, but given his appearance you can’t help but wonder if maybe the description was a little overblown...", parse);
 	Text.NL();
 	Text.Add("Besides, you were quite fortunate to stumble upon him out and about. You get the feeling that if you leave now, it won’t happen again.", parse);
 	Text.Flush();
@@ -2534,7 +2534,7 @@ Scenes.Krawitz.Duel = function() {
 			Text.NL();
 			Text.Add("You wait awkwardly, half-turned away from Krawitz, for the servant to return. The man seems confident and has managed to regain his cool, and you can’t help but wonder if this was a good idea.", parse);
 			Text.NL();
-			Text.Add("Finally, the servant comes jogging back, carrying a plain fencing blade. It is unadorned, but seems sturdy enough, and, hefting it, you find that it has a good balance.", parse);
+			Text.Add("Finally, the servant comes jogging back, carrying a plain fencing blade. It is unadorned, but seems sturdy enough. Hefting it, you find that it has a good balance.", parse);
 			Text.NL();
 			Text.Add("<i>“Well then, it’s time to end this charade. You’ve got your weapon, now prepare to lose with it.”</i> Krawitz sounds like he’s eagerly anticipating the fight.", parse);
 			Text.NL();
@@ -2548,13 +2548,13 @@ Scenes.Krawitz.Duel = function() {
 			Text.Add("The servant Krawitz called Rufio does a countdown for you before raising his arm to indicate the start of the fight. ", parse);
 			
 			if(dex > 80) {
-				Text.Add("You bat Krawitz’ blade aside with a quick movement. Looking closely, it seems like he’s actually able to follow your motions, anticipate them, even, but you are so much faster than him it makes little difference.", parse);
+				Text.Add("You bat Krawitz’ blade aside with a quick movement. Looking closely, it seems like he’s actually able to follow your motions - anticipate them, even - but you are so much faster than him that it makes little difference.", parse);
 				Text.NL();
 				Text.Add("You could have won easily in the first instants of the duel, but you are here to humiliate him. That calls for something more... To gasps of shock from the crowd, you dance circles around Krawitz, your blade a continuous blur in the air. Its tip never quite touches Krawitz’ flesh, but you tear his clothing into strips, leaving his pale body peaking through the gaps.", parse);
 				Text.NL();
 				Text.Add("Finally, when his dress is reduced to an unrecognizable rag, you decide to finish the ‘duel’. You knock his foil out from his hand with one motion, and draw a wide, jagged line of red across his cheek with the next. That should make the event a little more memorable for him.", parse);
 				Text.NL();
-				Text.Add("You make a small bow to the crowd, and, handing the foil to Rufio, walk off. They seem to have no attention left for you, however, as they are busy jeering at Krawitz, whose clothes have come apart fully, leaving him quite exposed to the elements and their eyes.", parse);
+				Text.Add("You make a small bow to the crowd and, handing the foil to Rufio, walk off. They seem to have no attention left for you, however, as they are busy jeering at Krawitz, whose clothes have come apart fully, leaving him quite exposed to the elements and their eyes.", parse);
 				Text.NL();
 				Text.Add("That should cover his humiliation nicely. Still, you wonder if perhaps you shouldn’t play with him a bit more...", parse);
 				
@@ -2563,7 +2563,7 @@ Scenes.Krawitz.Duel = function() {
 			else if(dex > 60) {
 				Text.Add("You quickly gauge the balance of the weapon, and exchange a few experimental clashes with Krawitz. You’re definitely faster than him, but he seems to read your movements as you’re starting to make them, and return the perfect answer every time.", parse);
 				Text.NL();
-				Text.Add("You put on quite a show for the crowd. Your sheer speed is met with precise technique, as you hear gasps of amazement from around you. The people draw back and give you space as the fight turns to a contest of footwork as much as of swords.", parse);
+				Text.Add("You put on quite a show for the crowd. Your sheer speed is met with precise technique as you hear gasps of amazement from around you. The people draw back and give you space as the fight turns to a contest of footwork as much as of swords.", parse);
 				Text.NL();
 				Text.Add("After a couple of minutes of trading blows, you can feel yourself tiring. You’re being forced to make extra movements to counter Krawitz’ elegant motions, and it’s a drain on your stamina, but you can also feel yourself improving. At the start, you were keeping up with him only by sheer speed, but you slowly gain an edge as your motions grow more precise, and your understanding of the strategy in this combat improves.", parse);
 				Text.NL();
@@ -2585,7 +2585,7 @@ Scenes.Krawitz.Duel = function() {
 				Text.NL();
 				Text.Add("His blade darts around your guard to the left and comes at you from below. You barely manage to react in time, twisting your blade to deflect his, leaving only a tiny nick on your clothes.", parse);
 				Text.NL();
-				Text.Add("Krawitz, however, instantly recovers, seeming to start moving his foil away even before your blade makes contact. He takes a half step back as his blade snakes around yours and, before you can reverse your own foil to counter, he steps in, lunging at you. You desperately try to twist aside, but all you succeed in doing is minimizing the impact, as the point of his blade draws a long line of red across your ribs. Fortunately it fails to pierce into your flesh, and the wound is relatively minor.", parse);
+				Text.Add("Krawitz, however, instantly recovers, seeming to start moving his foil away even before your blade makes contact. He takes a half step back as his blade snakes around yours and, before you can reverse your own foil to counter, he steps in, lunging at you. You desperately try to twist aside, but all you succeed in doing is minimizing the impact, as the point of his blade draws a long line of red across your ribs. Fortunately, it fails to pierce into your flesh, and the wound is relatively minor.", parse);
 				rigard.Krawitz["Duel"] = 3;
 				player.AddHPFraction(-0.08);
 				if(player.curHp == 0) player.curHp = 1;
@@ -2595,7 +2595,7 @@ Scenes.Krawitz.Duel = function() {
 				Text.NL();
 				Text.Add("You bat at Krawitz’ blade to shove it aside, and immediately lunge for him, trying to end this in the first blow. Unfortunately, Krawitz seems to read your intentions perfectly and starts moving even before you do. He shifts to the side, and takes half a step back, bringing his blade back to nudge yours past him.", parse);
 				Text.NL();
-				Text.Add("Your momentum carries you forward before you can stop your motion, and you find yourself frozen in a fully extended lunge, your side completely exposed to your opponent. Krawitz smiles cruelly, as he extends his own arm, apparently aiming to push the blade cleanly through you. At the last moment, you barely manage to twist aside, so the blade only goes through muscle, avoiding internal organs.", parse);
+				Text.Add("Your momentum carries you forward before you can stop your motion, and you find yourself frozen in a fully extended lunge, your side completely exposed to your opponent. Krawitz smiles cruelly as he extends his own arm, apparently aiming to push the blade cleanly through you. At the last moment, you barely manage to twist aside, so the blade only goes through muscle, avoiding internal organs.", parse);
 				Text.NL();
 				Text.Add("You groan in pain, but it seems like you’ll be mostly alright.", parse);
 				rigard.Krawitz["Duel"] = 3;
