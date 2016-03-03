@@ -216,10 +216,10 @@ Scenes.Maria.ForestMeeting = function() {
 	Text.Clear();
 
 	var parse = {
-		weapon : function() { return player.weapon(); },
-		armor  : function() { return player.armor(); }
+		
 	};
-
+	parse = player.ParserTags(parse);
+	
 	if(!party.Alone()) {
 		var member = party.Get(1);
 		parse.p1name = member.name;
@@ -278,11 +278,11 @@ Scenes.Maria.ForestMeeting = function() {
 
 Scenes.Maria.ForestConfront = function() {
 	var parse = {
-		weapon : function() { return player.weapon(); },
-		armor  : function() { return player.armor(); }
+		
 	};
 	var p1 = party.Get(1);
-
+	parse = player.ParserTags(parse);
+	
 	Scenes.Maria.fight = 0; // 0 = no, 1 = won, 2 = won, sexed, 3 = lost
 
 	//[Follow][Fight][Trick]
@@ -387,15 +387,10 @@ Scenes.Maria.ForestConfront = function() {
 
 Scenes.Maria.ForestConfrontWin = function() {
 	var parse = {
-		weapon : function() { return player.weapon(); },
-		armor  : function() { return player.armor(); },
-		cock   : function() { return player.FirstCock().Short(); },
-		vag    : function() { return player.FirstVag().Short(); },
-		clit   : function() { return player.FirstVag().ClitShort(); },
-		legs   : function() { return player.legs(); },
-		breasts : function() { return player.FirstBreastRow().Short(); }
+		
 	};
-
+	parse = player.ParserTags(parse);
+	
 	Text.Clear();
 	Scenes.Maria.fight = 1; // Won, not sexed
 
@@ -494,10 +489,11 @@ Scenes.Maria.ForestConfrontWin = function() {
 }
 
 Scenes.Maria.ForestAftermath = function() {
-	parse = {
-		weapon : function() { return player.weapon(); }
+	var parse = {
+		
 	};
-
+	parse = player.ParserTags(parse);
+	
 	Text.Add("Reaching for her chest, Maria pulls something small from her prodigious cleavage. As she brings it up to her mouth, you realize what it is. You lunge forward, but you're too slow to stop her from blowing into the whistle. The sharp sound cuts through the murmur of the forest. All the normal wildlife sounds cease, and you hear rustling in the undergrowth around you.", parse);
 	Text.NL();
 	Text.Add("As you're momentarily paralyzed with indecision, a spear flies through the air, nearly impaling you. As it smashes into the ground just to your left, the thrower emerges from the bushes. A huge, jackal-headed warrior steps into the clearing, and stares you down. Behind him, a group of animal-morphs and a few humans brandish their weapons threateningly. As strong as you are, you don't think you can beat them in a fight just now.", parse);
