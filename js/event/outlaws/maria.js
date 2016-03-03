@@ -228,9 +228,9 @@ Scenes.Maria.ForestMeeting = function() {
 
 	if(maria.flags["Met"] == 0) {
 		maria.flags["Met"] = 1;
-		Text.Add("Off in the distance, the massive tree at the center of Eden overlooks the entire verdant area, casting long shadows and slightly eclipsing the sun. This far into the forest, the trees grow close together, and even the smallest is far too tall for you to climb. All around, the sounds of the forest pound against your ears. Up in the high branches, birds twitter at each other. Wind whistles through the limbs, brushing them against each other in a comforting melody. Dozens of unseen insects send mating songs through the air.", parse);
+		Text.Add("Off in the distance, the massive tree at the center of Eden overlooks the entire verdant area, casting long shadows and slightly eclipsing the sun. This far into the woodland, the trees grow close together, and even the smallest is far too tall for you to climb. All around, the sounds of the forest pound against your ears. Up in the high branches, birds twitter at each other. Wind whistles through the limbs, brushing them against one another in a comforting melody. Dozens of unseen insects send mating songs through the air.", parse);
 		Text.NL();
-		Text.Add("The pleasant buzz distracts you from the soreness settling in your limbs. After a few more minutes of walking, you decide to take a break, and sit down at the base of a tree. The rough bark rubs against you through your [armor]. Before long, you fall into a doze.", parse);
+		Text.Add("The pleasant buzz distracts you from the soreness settling in your limbs. After a few more minutes of traveling, you decide to take a break, and sit down at the base of a tree. The rough bark rubs against you through your [armor]. Before long, you fall into a doze.", parse);
 		Text.NL();
 		Text.Add("The sound of creaking wood wakes you from your slumber. Cracking open an eye, the sight of an arrow greets you. Your eyes snap open, and you focus on the glinting tip of the arrowhead. Sliding up the shaft, then lingering on the gray-striped feathers, you look up toward the woman holding the bow. Her hands and arms are absolutely still, even under the massive tension of holding a nocked arrow.", parse);
 		Text.NL();
@@ -256,19 +256,19 @@ Scenes.Maria.ForestMeeting = function() {
 		if(player.Weapon())
 			Text.Add(" Grabbing your weapon, she hefts it over one shoulder.", parse);
 		Text.NL();
-		Text.Add("Glaring at you suspiciously, she challenges you: <i>“What are you doing here?”</i> Her voice reminds you of honey and cream; soft and luxurious.", parse);
+		Text.Add("Glaring at you suspiciously, she challenges you: <i>“What are you doing here?”</i> Her voice reminds you of honey and cream, soft and luxurious.", parse);
 		Text.NL();
 		Text.Add("After you explain that you are simply exploring the forest, she glances at you sideways. For a while, she simply watches you, clearly debating what course of action to take. She turns the options over in her head for a few minutes before she seems to reach a decision. <i>“My name is Maria. Follow me, and I'll let Zenith decide what to do with you.”</i>", parse);
 	}
 	else {
-		Text.Add("As you walk through the forest, the soothing sounds of birdcalls dull your senses. A few clouds drift over a lazy, warm sun. After a while, a vague sense of deja vu overtakes you, and something sets off little alarms in your mind. Continuing through the thickly forested area, a sense of foreboding follows you.", parse);
+		Text.Add("As you walk through the forest, the soothing sounds of bird calls dull your senses. A few clouds drift over a lazy, warm sun. After a while, a vague sense of deja vu overtakes you, and something sets off little alarms in your mind. Continuing through the thickly forested area, a sense of foreboding follows you.", parse);
 		Text.NL();
 		if(player.Weapon())
-			Text.Add("Your hand is already hovering near the grip of your [weapon], when a sudden sharp crack grabs your attention.", parse);
+			Text.Add("Your hand is already hovering near the grip of your [weapon] when a sudden sharp crack grabs your attention.", parse);
 		else
 			Text.Add("Feeling on edge, you prepare for whatever may emerge from the forested growth. Muscles twitching and tense, the sudden cracking noise behind you nearly makes you jump.", parse);
 		Text.NL();
-		Text.Add("Turning on your heel, you see the archer-woman, Maria, her chocolate skin stark against her white clothing. Her bow is only half-raised, but the arrow nocked in it draws your attention. She might have tried to shoot you if you hadn't turned around.", parse);
+		Text.Add("Turning around, you see the archer woman Maria, her chocolate skin stark against her white clothing. Her bow is only half-raised, but the arrow nocked in it draws your attention. She might have tried to shoot you if you hadn't turned around.", parse);
 		Text.NL();
 		Text.Add("<i>“You again?”</i> she asks. <i>“Do you make a habit of getting lost this deep in the forest, or did you just want to see me again?”</i> Chuckling at her own joke, Maria raises her bow. <i>“Once may be an accident, but more than once can't be. You're coming with me.”</i>", parse);
 	}
@@ -304,10 +304,11 @@ Scenes.Maria.ForestConfront = function() {
 				Text.Add("You lunge forward, tackling the archer to the ground before she has the chance to respond.", parse);
 			}
 			Text.NL();
+			parse["lg"] = player.HasLegs() ? " to the shins" : ""
 			if(player.Weapon())
 				Text.Add("Wrenching your [weapon] from her hands, you jump back and prepare to fight!", parse);
 			else
-				Text.Add("With surprising strength, the archer shoves you to the side. You jump back, narrowly avoiding a swift kick to the shins, and prepare to fight!", parse);
+				Text.Add("With surprising strength, the archer shoves you to the side. You jump back, narrowly avoiding a swift kick[lg], and prepare to fight!", parse);
 			Text.Flush();
 
 			var enemy = new Party();
@@ -327,7 +328,7 @@ Scenes.Maria.ForestConfront = function() {
 				party.members = enc.oldParty;
 				Scenes.Maria.fight = 3;
 				Text.Clear();
-				Text.Add("You fall to the ground, utterly defeated. The archer kicks away your [weapon] and levels an arrow at you. Glaring at you, she orders you to stand. As you wobble to your feet, she comes up behind you, binding your hands fast with some rope. Cold shivers run up your spine as you feel the sharp point of a knife dig into the soft flesh between your shoulder blades.", parse);
+				Text.Add("You fall to the ground, utterly defeated. The archer kicks away your [weapon] and levels an arrow at you. Glaring at you, she orders you to stand. As you wobble to get up, she comes up behind you, binding your hands fast with some rope. Cold shivers run up your spine as you feel the sharp point of a knife dig into the soft flesh between your shoulder blades.", parse);
 				Text.NL();
 				if(maria.LustLevel() > 0.5) {
 					Text.Add("Throwing you to the ground, Maria roughly pins you to the leaf-strewn forest floor. Holding you there with a foot, she strips off her laughably tiny shorts and kneels down over you. Pressing her steaming cunt into your mouth, she orders you, <i>“Lick.”</i>", parse);
@@ -341,7 +342,7 @@ Scenes.Maria.ForestConfront = function() {
 					player.Fuck(null, 2);
 					maria.Fuck(null, 2);
 
-					Text.Add("Standing back up, she shakily replaces her shorts. Giving you a lecherous smile, she hauls you from the floor and pushes you forward. Bound as you are, you have no choice but to follow.", parse);
+					Text.Add("Standing back up, she shakily replaces her shorts. Giving you a lecherous smile, she hauls you from the ground and pushes you forward. Bound as you are, you have no choice but to follow.", parse);
 				}
 				else if(maria.LustLevel() > 0.25) {
 					Text.Add("As she twists the ropes one more time, tugging them to make sure they're secure and won't come loose, you notice her hands straying to other parts of your form. Turning to face her, you notice her face is flushed. Whatever you did must have had quite the effect on her. Not enough of one to save you, though.", parse);
@@ -368,7 +369,7 @@ Scenes.Maria.ForestConfront = function() {
 	options.push({ nameStr : "Trick",
 		func : function() {
 			Text.Clear();
-			Text.Add("Though you can't fight back, you don't want to find out where this bandit wants to take you. Tossing about a few ideas, you finally decide that the best course of action is to follow her for now. As soon as you have the chance, you will slip away. For a while, she seems dead-set on watching you, but eventually Maria's attention fades. Taking advantage of her lapse in vigilance, you easily dart the other way and escape.", parse);
+			Text.Add("Though you can't fight back, you don't want to find out where this bandit wants to take you. Tossing about a few ideas, you finally decide that the best course of action is to follow her for now. As soon as you have the chance, you will slip away. For a while, she seems dead set on watching you, but eventually Maria's attention fades. Taking advantage of her lapse in vigilance, you easily dart the other way and escape.", parse);
 			Text.NL();
 			if(!party.Alone()) {
 				parse.companions = party.Two() ? p1.name + " rejoins" : "your companions rejoin";
@@ -396,7 +397,7 @@ Scenes.Maria.ForestConfrontWin = function() {
 
 	Text.Add("Maria collapses, unable to fight any further.", parse);
 	if(maria.LustLevel() > 0.75)
-		Text.Add(" The bow woman's hands reach down and pull off her ass-hugging shorts. Two fingers dive into her honeypot and begin pumping fiercely.", parse);
+		Text.Add(" The archer's hands reach down and pull off her ass hugging shorts. Two fingers dive into her honeypot and begin pumping fiercely.", parse);
 	Text.Add(" Murder shines in her eyes, but she is unable to fight back against you.", parse);
 	Text.NL();
 
@@ -410,19 +411,20 @@ Scenes.Maria.ForestConfrontWin = function() {
 			func : function() {
 				Scenes.Maria.fight = 2; // Sexed
 				Text.Clear();
-				Text.Add("Already beaten, the archer can't rise from the ground. Quickly, you shuffle out of your [armor]. Kneeling over her, you press a knee into her stomach to keep her from moving. Reaching down, you shove two of your fingers into her mouth. Wriggling them around, you order Maria to slather them in spit. Her tongue deftly wraps around each digit and strokes up and down, jacking them off like miniature cocks.", parse);
+				parse["k"] = player.HasLegs() ? " Kneeling over her, you press a knee into her stomach" : Text.Parse(" Using your [foot], you press the weight of it on her stomach", parse);
+				Text.Add("Already beaten, the archer can't rise from the ground. Quickly, you shuffle out of your [armor].[k] to keep her from moving. Reaching down, you shove two of your fingers into her mouth. Wriggling them around, you order Maria to slather them in spit. Her tongue deftly wraps around each digit and strokes up and down, jacking them off like miniature cocks.", parse);
 				Text.NL();
 
 				if(player.FirstCock()) {
-					Text.Add("You think about how nice your cock would look between her lips instead. The thought makes your [cock] twitch and harden. Removing your fingers, you shove the head between her lips. Bracing yourself on the leafy ground, you thrust into her mouth, her lips parting readily to admit you. Her tongue wrestles with the member in her mouth, running the rougher side across the bottom of your shaft.", parse);
+					Text.Add("You think about how nice your dick would look between her lips instead. The thought makes your [cock] twitch and harden. Removing your fingers, you shove the head into her maw. Bracing yourself on the leafy ground, you thrust inside, her lips parting readily to admit you. Her tongue wrestles with the member in her mouth, running the rougher side across the bottom of your shaft.", parse);
 					Text.NL();
-					Text.Add("A few thrusts in, you pull out of her mouth and admire the sheen of her saliva slathered on your [cock]. Turning around, you force your cock back into Maria's waiting maw. Pushing her supple legs apart with one hand, you use your spit-moistened fingers to probe her depths. At the first contact, she shudders and gasps around your [cock] in her mouth.", parse);
+					Text.Add("A few thrusts in, you pull out and admire the sheen of her saliva slathered on your [cock]. Turning around, you force your cock back into Maria's waiting maw. Pushing her supple legs apart with one hand, you use your spit-moistened fingers to probe her depths. At the first contact, she shudders and gasps around your [cock] in her mouth.", parse);
 					Text.NL();
 					Text.Add("Dipping your fingers further into her tight cunny, you probe around for all her most sensitive spots. Stroking along her soft, inner walls, you end up nearly so focused that you forget the squishy sensation focused around your throbbing [cock]. When she suddenly moans around you, the vibrations snap you back to the present.", parse);
 					Text.NL();
 					Text.Add("Pulling your fingers from the archer's wanton hole, you notice her lift her legs, begging for more of the delicious friction. Tutting softly, you circle a finger around her clit. It pokes from its hood, red and engorged. She begins bucking underneath you, but you pull away before she can cum. Pulling your [cock] from her mouth, you turn around.", parse);
 					Text.NL();
-					Text.Add("As juiced up as she is, you have no problem pounding straight into her core. Thrashing away at her slick pussy, you lose yourself in a haze of lust and feel yourself getting closer to the edge you had been skirting after her earlier oral assault. Her walls ripple around you convulsively as she cums under the assault. Moments later you glaze her insides with your liquid lust.", parse);
+					Text.Add("As juiced up as she is, you have no problem pounding straight into her core. Thrashing away at her slick pussy, you lose yourself in a haze of lust and feel yourself getting closer to the edge you had been skirting after her earlier oral assault. Her walls ripple around you convulsively as she cums under the assault. Moments later, you glaze her insides with your liquid lust.", parse);
 
 					var cum = player.OrgasmCum();
 
@@ -431,7 +433,7 @@ Scenes.Maria.ForestConfrontWin = function() {
 					player.Fuck(player.FirstCock(), 3);
 
 					if(player.FirstVag()) {
-						Text.Add(" Your [vag] clenches in sympathy, and clear girlcum runs down your [legs].", parse);
+						Text.Add(" Your [vag] clenches in sympathy, and clear girl-cum runs down your [legs].", parse);
 					}
 					Text.NL();
 					Text.Add("Hot semen fills her tunnel, and a tiny bit sprays back out, trailing down her inner thighs. Pulling out of the exhausted and beaten archer, you clean yourself up and put your [armor] back on.", parse);
@@ -440,12 +442,12 @@ Scenes.Maria.ForestConfrontWin = function() {
 				else {
 					Text.Add("Pushing her supple legs apart with one hand, you use your spit-moistened fingers to probe her depths. At the first contact, she shudders and gasps loudly. Moaning into the still forest air, she writhes under your gentle pressure.", parse);
 					Text.NL();
-					Text.Add("Dipping your fingers further into her tight cunny, you probe around for all her most sensitive spots. Stroking along her soft, inner walls, you curl your fingers and press against the sides of her cunt. Scissoring your fingers open, you stretch her hole wide and lean down.", parse);
+					Text.Add("Dipping your fingers further into her tight cunny, you probe around for all her most sensitive spots. Stroking along her soft, inner walls, you curl your digits and press against the sides of her cunt. Scissoring your fingers open, you stretch her hole wide and lean down.", parse);
 					Text.NL();
-					Text.Add("Tutting softly, you circle a finger around her clit. It pokes from its hood, red and engorged. Curling your tongue around her clit, you flick your organ across the little pleasure nub, revelling in her frenzied moans. Pulling your fingers from the archer's wanton hole, you notice her lift her legs, begging for more of the delicious friction. She begins bucking underneath you, but you pull away before she can cum.", parse);
+					Text.Add("Tutting softly, you circle a finger around her clit. It pokes from its hood, red and engorged. Curling your tongue around her pleasure buzzer, you flick your flexible organ across the little nub, reveling in her frenzied moans. Pulling your fingers from the archer's wanton hole, you notice her lift her legs, begging for more of the delicious friction. She begins bucking underneath you, but you pull away before she can cum.", parse);
 					Text.NL();
 					if(player.FirstVag()) {
-						Text.Add("By now, your own cunt is sopping with need. Turning to face your conquest, you press your steaming honeypot into hers. Your lips slide together in just the right way, and you bump your clit against hers. The feeling shoots through you like lightning, and your mouth hangs open in an O shape.", parse);
+						Text.Add("By now, your own cunt is sopping with need. Turning to face your conquest, you press your steaming honeypot into hers. Your lips slide together in just the right way, and you bump your clit against hers. The feeling shoots through you like lightning, and your mouth hangs open in an 'O' shape.", parse);
 						Text.NL();
 						Text.Add("Smiling, you use one hand to hold yourself steady ", parse);
 						if(player.FirstBreastRow().size.Get() > 3)
@@ -459,7 +461,7 @@ Scenes.Maria.ForestConfrontWin = function() {
 						player.AddSexExp(3);
 						maria.AddSexExp(3);
 					}
-					Text.Add("Standing up you clean yourself up and put back on your [armor].", parse);
+					Text.Add("Standing up, you clean yourself up and put back on your [armor].", parse);
 				}
 				maria.relation.IncreaseStat(100, 5);
 
@@ -498,11 +500,12 @@ Scenes.Maria.ForestAftermath = function() {
 	Text.NL();
 	Text.Add("As you're momentarily paralyzed with indecision, a spear flies through the air, nearly impaling you. As it smashes into the ground just to your left, the thrower emerges from the bushes. A huge, jackal-headed warrior steps into the clearing, and stares you down. Behind him, a group of animal-morphs and a few humans brandish their weapons threateningly. As strong as you are, you don't think you can beat them in a fight just now.", parse);
 	Text.NL();
+	parse["f"] = player.HasLegs() ? " ties your feet to your hands" : " binds you well and good"
 	if(player.Weapon())
 		Text.Add("Dropping your [weapon], you ", parse);
 	else
 		Text.Add("You ");
-	Text.Add("step back and raise your hands non-threateningly. An orange cat-morph steps forward and ties your hands behind your back, then forces you down onto the ground and ties your feet to your hands. Shakily, the archer rises to her feet with the help of a red-armored, wolf-eared man. She takes the lead and heads... well, you don't know where she plans on taking you, but you're beginning to think it might not have been such a good idea to attack her.", parse);
+	Text.Add("step back and raise your hands non-threateningly. An orange cat-morph steps forward and ties your hands behind your back, then forces you down onto the ground and[f]. Shakily, the archer rises to her feet with the help of a red-armored, wolf-eared man. She takes the lead and heads... well, you don't know where she plans on taking you, but you're beginning to think it might not have been such a good idea to attack her.", parse);
 
 	Text.Flush();
 	Gui.NextPrompt(Scenes.Maria.ForestFollow);
