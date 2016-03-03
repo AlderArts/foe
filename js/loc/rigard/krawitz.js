@@ -1882,7 +1882,7 @@ Scenes.Krawitz.Bathhouse = function() {
 										Text.Add(" You’ve come well prepared, and the ladies give coos of delight as you equip your [cock], eyeing your artificial member with desire burning in their eyes.", parse);
 									}
 									else {
-										Text.Add(" Wordlessly, Gina leaves the pool, staggering slightly as she moves over to a nearby chest, her hands shaking as she opens it. She fetches something from its depths, swaying unsteadily as she returns to your side. The young noblewoman’s eyes are clouded with lust as she presents you with her treasure; a fairly large strapon dildo.", parse);
+										Text.Add(" Wordlessly, Gina leaves the pool, staggering slightly as she moves over to a nearby chest, her hands shaking as she opens it. She fetches something from its depths, swaying unsteadily as she returns to your side. The young noblewoman’s eyes are clouded with lust as she presents you with her treasure: a fairly large strap-on dildo.", parse);
 										Text.NL();
 										Text.Add("You grin and take her offering, praising her for being such a good, thoughtful girl as you secure the fastenings around your [hips]. You suspect this won’t be the first time this particular toy has been put to use.", parse);
 									}
@@ -1918,11 +1918,11 @@ Scenes.Krawitz.Bathhouse = function() {
 									//TODO CUM
 									Text.Add("You grunt as the two women milk you of your seed, not letting your [cocks] rest for more than a second before bearing down on you again. ", parse);
 									if(player.CumOutput() > 6)
-										Text.Add("If the ladies are surprised at your unnatural output, they don’t show it - if anything, they seem delighted, moaning excitedly as you pump your plentiful seed into their willing cunts. Excess semen drools from their overfilled orifices, dripping into the pool.", parse);
-									else if(player.CumOutput() > 6)
+										Text.Add("If the ladies are surprised at your unnatural output, they don’t show it - if anything, they seem delighted, moaning excitedly as you pump your plentiful sperm into their willing cunts. Excess semen drools from their overfilled orifices, dripping into the pool.", parse);
+									else if(player.CumOutput() > 3)
 										Text.Add("The Krawitz ladies moan as your throbbing member[s] unload[notS], pouring [itsTheir] contents into their eager cock-sheath[s].", parse);
 									else
-										Text.Add("Perhaps they simply didn’t notice it, with you meager cum output, or perhaps they are eager to drain all that they can out of you.", parse);
+										Text.Add("Perhaps they simply didn’t notice it, with your meager cum output, or perhaps they are eager to drain all that they can out of you.", parse);
 								}
 								else {
 									Text.Add("Despite them doing all the work, you feel yourself caught up in their almost continuous body-wracking orgasms. Due to the artificial nature of your [cocks], you won’t tire from cumming, but you are still having to mount an effort to keep up with the ladies’ boundless energy. Finally, it becomes too much for you, and your body shudders in throes of bliss.", parse);
@@ -1958,7 +1958,7 @@ Scenes.Krawitz.BathhouseWine = function() {
 	Text.NL();
 	Text.Add("You get a good look at the woman as she pours wine into two large cups, dripping water from her well-shaped body. She looks to be in her early twenties, with auburn hair cascading in pretty curls, framing her beautiful face. You feel a bit sorry for her, having to be holed up with someone like Krawitz. A political marriage, perhaps? She leans down as she hands a cup to her younger companion, curving her back and leaving nothing to your imagination.", parse);
 	Text.NL();
-	Text.Add("<i>“Marlene, you are indecent!”</i> the daughter exclaims, giggling. She takes a sip of the rich wine and sighs in pleasure. Slightly younger than the wife, she is also quite the beauty, with straight raven hair reaching down her back. Both the women have soft C-cup breasts, crowned by pert nipples.", parse);
+	Text.Add("<i>“Marlene, you are indecent!”</i> the daughter exclaims, giggling. She takes a sip of the rich wine and sighs in pleasure. Slightly younger than the wife, she is also quite the beauty, with straight, raven hair reaching down her back. Both the women have soft C-cup breasts, crowned by pert nipples.", parse);
 	Text.NL();
 	Text.Add("<i>“Oh, I’ll show you indecent, Gina,”</i> the older woman purrs, downing a cup of wine in a single draft before pouring herself a new one. Swaying slightly, she glides into the water, curling up next to the black-haired girl. She put an arm around the younger woman, still carefully holding the wine cup in her hand, while her other arm dips beneath the waters, reaching between her companion’s legs.", parse);
 	Text.NL();
@@ -1974,11 +1974,11 @@ Scenes.Krawitz.OrgyEntrypoint = function() {
 	
 	Text.Add("Gina and Marlene whimper as they become aware of the encroaching servants, though they look expectant rather than frightened. Any inhibitions they might have had about being fucked by their entire staff - half of them morphs at that - disappeared about two glasses ago. You settle down, finding a good vantage point in the shadows. This should be fun to watch.", parse);
 	Text.NL();
-	Text.Add("Four particularly ballsy servants close in on the lady of the house, shrugging their way out of their clothes. Krawitz’ wife quickly gets presented with all the cock she can handle, and she eagerly dives into the task, using both hands and mouth. Gina, meanwhile, is looking wild-eyed at the two beasts heading her way. Even in her drugged state, the young girl still looks slightly worried as the two stable-boys uncover their large sheathed members, but her lust quickly overcomes her fear. The allure of the two horsecocks is too great for her to resist, and she reaches for them, trembling slightly as her lips lock around one of them, savoring the taste.", parse);
+	Text.Add("Four particularly ballsy servants close in on the lady of the house, shrugging their way out of their clothes. Krawitz’ wife quickly gets presented with all the cock she can handle, and she eagerly dives into the task, using both hands and mouth. Gina, meanwhile, is looking wild-eyed at the two beasts heading her way. Even in her drugged state, the young girl still looks slightly worried as the two stable-boys uncover their large, sheathed members, but her lust quickly overcomes her fear. The allure of the two horsecocks is too great for her to resist, and she reaches for them, trembling slightly as her lips lock around one of them, savoring the taste.", parse);
 	Text.NL();
-	Text.Add("Things are progressing rather quickly as neither party has any interest in foreplay. Marlene lets out a muffled moan of contentment as each of her orifices gets crammed full of dick - her pussy, ass, and mouth are filled to the brim by throbbing erections. The servants move like men possessed, rutting desperately as they race toward the brief respite that orgasm grants them. The young noblewomen are more than willing receptacles for their seed, squirming as white spooge floods their used holes.", parse);
+	Text.Add("Things are progressing rather quickly as neither party has any interest in foreplay. Marlene lets out a muffled moan of contentment as each of her orifices gets crammed full of dick, her pussy, ass, and mouth filled to the brim by throbbing erections. The servants move like men possessed, rutting desperately as they race toward the brief respite that orgasm grants them. The young noblewomen are more than willing receptacles for their seed, squirming as white spooge floods their used holes.", parse);
 	Text.NL();
-	Text.Add("Gina is in ecstasy as she is impaled back-and-front by the twin equine rods, each at least twenty inches in length. Her stomach bulges dangerously from the strain, distending unnaturally from the massive insertions. She doesn’t seem to be in any pain, however, as her strained passages wrap themselves around the horsecocks accomodatingly.", parse);
+	Text.Add("Gina is in ecstasy as she is impaled back-and-front by the twin equine rods, each at least twenty inches in length. Her stomach bulges dangerously from the strain, distending unnaturally from the massive insertions. She doesn’t seem to be in any pain, however, as her stretched passages wrap themselves around the horsecocks accomodatingly.", parse);
 	Text.NL();
 	Text.Add("As soon as one of the servants finishes inside or on one of the ladies, he is replaced by another of his peers. Soon, everyone has gotten a turn with both of the young noblewomen, spent seed dripping out of used holes, and trailing down heaving breasts.", parse);
 	Text.NL();
@@ -2000,7 +2000,7 @@ Scenes.Krawitz.OrgyEntrypoint = function() {
 		});
 	}
 	else {
-		Text.Add("<i>“W-what is going on here?!”</i> a ragged and enraged little man bursts onto the scene, sword in hand. Lord Krawitz’ eyes almost jump from their sockets as they take in the situation - his wife and daughter being gangbanged by his entire staff, and begging for more. The small balding man lunges forward, launching a flurry of blows with his rapier, scattering servants left and right, shouting <i>“Scum! Filth! Plebeians!”</i> Fortunately for the servants, in his rage, his aim is a bit off, and they all manage to retreat from the scene without major injuries.", parse);
+		Text.Add("<i>“W-what is going on here?!”</i> A ragged and enraged little man bursts onto the scene, sword in hand. Lord Krawitz’ eyes almost jump from their sockets as they take in the situation - his wife and daughter being gangbanged by his entire staff, and begging for more. The small, balding man lunges forward, launching a flurry of blows with his rapier. He scatters the servants left and right while shouting, <i>“Scum! Filth! Plebeians!”</i> Fortunately for the servants, in his rage, his aim is a bit off, and they all manage to retreat from the scene without major injuries.", parse);
 		Text.NL();
 		Text.Add("<i>“Off my estate - you are all fired! You will hang for this!”</i> the lord yowls, ranting and waving his sword in the air. At his feet, the ladies of his household lie panting, semen dripping from their well-used bodies. This seems like a good time to leave, so you take advantage of the confusion as the former staff scramble to escape the wrath of their master.", parse);
 		Text.NL();
