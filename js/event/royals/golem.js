@@ -239,15 +239,15 @@ Scenes.Golem.OnWin = function() {
 Scenes.Golem.OnLoss = function() {
 	var parse = {
 		name          : function() { return party.Get(1).name; },
-		skinDesc      : function() { return player.SkinDesc(); },
-		stomachDesc   : function() { return player.StomachDesc(); },
-		hipsDesc      : function() { return player.HipsDesc(); },
-		breastDesc    : function() { return player.FirstBreastRow().Short(); },
-		nipsDesc      : function() { return player.FirstBreastRow().NipsShort(); },
-		multiCockDesc : function() { return player.MultiCockDesc(); },
-		buttDesc      : function() { return player.Butt().Short(); },
-		anusDesc      : function() { return player.Butt().AnalShort(); },
-		vagDesc       : function() { return player.FirstVag().Short(); }
+		skin      : function() { return player.skin(); },
+		belly   : function() { return player.belly(); },
+		hips      : function() { return player.hips(); },
+		breasts    : function() { return player.FirstBreastRow().Short(); },
+		nips      : function() { return player.FirstBreastRow().NipsShort(); },
+		cocks : function() { return player.cocks(); },
+		butt      : function() { return player.Butt().Short(); },
+		anus      : function() { return player.Butt().AnalShort(); },
+		vag       : function() { return player.FirstVag().Short(); }
 	};
 	
 	this.Cleanup();
@@ -274,18 +274,18 @@ Scenes.Golem.OnLoss = function() {
 		Text.Add("The golem shifts slightly, breaking the illusion of being a statue. There is a red gleam emanating from the thin seams connecting the sleek layers of compressed rock, allowing it to move freely. The golem’s perfect face, a masterful piece of art surrounded by a solid mass of rigid curls so meticulously crafted that you can see each hair, is devoid of any emotions as it closes in on you, its joints moving with mechanical precision.", parse);
 	}
 	Text.NL();
-	Text.Add("You gulp as the golem looms above you, smaller but still imposing. Straddling you, she leans down and licks your [skinDesc], her tongue deceptively smooth. She seems to be secreting some sort of scented oil that she generously lathers you with. The smell is intoxicating, and every place the slick substance touches on your body tingles.", parse);
+	Text.Add("You gulp as the golem looms above you, smaller but still imposing. Straddling you, she leans down and licks your [skin], her tongue deceptively smooth. She seems to be secreting some sort of scented oil that she generously lathers you with. The smell is intoxicating, and every place the slick substance touches on your body tingles.", parse);
 	Text.NL();
 	if(player.FirstBreastRow().Size() > 3)
-		Text.Add("The golem kneads your [breastDesc], suckling your [nipsDesc] and lathering them with her oil. Before she continues down to your [stomachDesc], you are breathing heavily, your nipples stiff with arousal.", parse);
+		Text.Add("The golem kneads your [breasts], suckling your [nips] and lathering them with her oil. Before she continues down to your [belly], you are breathing heavily, your nipples stiff with arousal.", parse);
 	else
-		Text.Add("The golem looks a bit surprised - as much as that is possible for a creature lacking any form of emotion - when her probing tongue reaches your flat chest. She prods at it a little, pulling on your [nipsDesc] as if expecting full breasts to suddenly sprout. When nothing happens, the automaton mechanically kneads her oil onto your chest anyway before continuing her journey down your body.", parse);
+		Text.Add("The golem looks a bit surprised - as much as that is possible for a creature lacking any form of emotion - when her probing tongue reaches your flat chest. She prods at it a little, pulling on your [nips] as if expecting full breasts to suddenly sprout. When nothing happens, the automaton mechanically kneads her oil onto your chest anyway before continuing her journey down your body.", parse);
 	Text.NL();
 	parse["oneof"] = player.NumCocks() > 1 ? " one of" : "";
 	if(player.FirstCock()) {
 		parse["s"]      = player.NumCocks() > 1 ? "s" : "";
 		parse["itThem"] = player.NumCocks() > 1 ? "them" : "it";
-		Text.Add("Your tender but expressionless lover looks a bit puzzled at your [multiCockDesc], as if not expecting it to be there. After giving [itThem] a brief examination, she promptly ignores the unfamiliar element[s]. ", parse);
+		Text.Add("Your tender but expressionless lover looks a bit puzzled at your [cocks], as if not expecting it to be there. After giving [itThem] a brief examination, she promptly ignores the unfamiliar element[s]. ", parse);
 	}
 	var tail = player.HasTail();
 	if(tail) {
@@ -303,18 +303,18 @@ Scenes.Golem.OnLoss = function() {
 	}
 	Text.NL();
 	parse["continuing"] = player.LowerBodyType() == LowerBodyType.Single ? "circling around" : "continuing";
-	Text.Add("While tender yet immovable hands hold you in place, the golem explores your [buttDesc], massaging your cheeks with her lubricating oil. Her tongue travels downward, giving your [anusDesc] a lick before [continuing] toward your crotch.", parse);
+	Text.Add("While tender yet immovable hands hold you in place, the golem explores your [butt], massaging your cheeks with her lubricating oil. Her tongue travels downward, giving your [anus] a lick before [continuing] toward your crotch.", parse);
 	Text.NL();
 	var target = BodyPartType.ass;
-	parse["targetDesc"] = parse["anusDesc"];
+	parse["targetDesc"] = parse["anus"];
 	if(player.FirstVag()) {
 		target = BodyPartType.vagina;
-		parse["targetDesc"] = parse["vagDesc"];
-		Text.Add("Finally finding her target, the animated stone statue plunges her oily tongue into your [vagDesc], gently probing your insides.", parse);
+		parse["targetDesc"] = parse["vag"];
+		Text.Add("Finally finding her target, the animated stone statue plunges her oily tongue into your [vag], gently probing your insides.", parse);
 	}
 	else {
 		parse["tightLoose"] = player.Butt().Tightness() > Orifice.Tightness.loose ? "loose" : "tight";
-		Text.Add("Pausing for a bit, as if her limited intelligence is unable to process the concept of you not having a pussy, the golem apparently comes to a decision and returns her attention to your [anusDesc], thrusting her tongue into the [tightLoose] hole.", parse);
+		Text.Add("Pausing for a bit, as if her limited intelligence is unable to process the concept of you not having a pussy, the golem apparently comes to a decision and returns her attention to your [anus], thrusting her tongue into the [tightLoose] hole.", parse);
 	}
 	Text.Add(" There is a low creaking, and you gasp as her tongue changes form, growing in length in order to reach even deeper inside you. Every square inch of the inside of your [targetDesc] is soon coated in the tingly oil, making it very difficult for you to form coherent thoughts. You moan despite yourself, unable to deny the pleasure you are getting from this any longer.", parse);
 	Text.NL();
@@ -334,13 +334,13 @@ Scenes.Golem.OnLoss = function() {
 	if(player.FirstCock()) {
 		parse["s"]     = player.NumCocks() > 1 ? "s" : "";
 		parse["isAre"] = player.NumCocks() > 1 ? "are" : "is";
-		Text.Add("Unbidden, your [multiCockDesc] [isAre] at full mast, neglected by the automaton. At this pace, it’s not going to be long before you have a messy accident. ", parse);
+		Text.Add("Unbidden, your [cocks] [isAre] at full mast, neglected by the automaton. At this pace, it’s not going to be long before you have a messy accident. ", parse);
 		if(target == BodyPartType.ass)
 			Text.Add("Each thrust rubs her cockhead against your prostate, making your member[s] throb, aching with need. ", parse);
 	}
 	Text.Add("The golem keeps a slow but constant rhythm, her precise mechanical movements indicating that she could keep this up for days if need be. Through the shroud of lust and pleasure clouding your thoughts, you briefly wonder if it is even possible for the creature to tire.", parse);
 	Text.NL();
-	Text.Add("Just when you’ve grown accustomed to the steady tide of withdraw and thrust - resigned to the fact that the golem is much stronger than you and is going to have its way no matter what your opinions on the matter are - your lover abruptly changes her rhythm. Adjusting her stance, she plants her feet along your sides, grabbing hold of your [buttDesc] with her iron grip. With new fervor, she starts relentlessly pounding your [targetDesc], her cock a blur as it pistons your insides.", parse);
+	Text.Add("Just when you’ve grown accustomed to the steady tide of withdraw and thrust - resigned to the fact that the golem is much stronger than you and is going to have its way no matter what your opinions on the matter are - your lover abruptly changes her rhythm. Adjusting her stance, she plants her feet along your sides, grabbing hold of your [butt] with her iron grip. With new fervor, she starts relentlessly pounding your [targetDesc], her cock a blur as it pistons your insides.", parse);
 	Text.NL();
 	parse["again"] = golem.flags["Met"] == Scenes.Golem.State.Lost ? " again" : "";
 	Text.Add("No longer capable of rational thought, you gasp for breath, moaning incoherently as the automaton fucks you. Why did you even come here[again]?", parse);
@@ -350,9 +350,9 @@ Scenes.Golem.OnLoss = function() {
 	Text.NL();
 	parse["legs"] = player.LowerBodyType() == LowerBodyType.Single ? "tail" : "legs";
 	if(player.FirstVag())
-		Text.Add("Spots dance across your vision as the golem repeatedly bumps your g-spot, her oil-soaked cock plowing your [vagDesc] like a pillar of molten fire. Your entire body tingles electrically, almost numb from the overwhelming pleasure. With a loud moan, you convulse, your [hipsDesc] twitching as you ride out your orgasm. ", parse);
+		Text.Add("Spots dance across your vision as the golem repeatedly bumps your g-spot, her oil-soaked cock plowing your [vag] like a pillar of molten fire. Your entire body tingles electrically, almost numb from the overwhelming pleasure. With a loud moan, you convulse, your [hips] twitching as you ride out your orgasm. ", parse);
 	if(player.FirstCock())
-		Text.Add("You seed splatters on the ground, jetting out from your [multiCockDesc] in thick wads. ", parse);
+		Text.Add("You seed splatters on the ground, jetting out from your [cocks] in thick wads. ", parse);
 	parse["cock"] = player.FirstCock() ? ", and you collapse in the growing pool of your own sperm" : "";
 	Text.Add("Seemingly indifferent to your climax, the golem doesn’t alter her pace even slightly, riding you with undiminished speed and strength throughout your high. Your [legs] give out under you, unable to support you any longer[cock].", parse);
 	Text.NL();
