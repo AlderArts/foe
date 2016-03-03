@@ -505,7 +505,7 @@ Scenes.Maria.ForestAftermath = function() {
 		Text.Add("Dropping your [weapon], you ", parse);
 	else
 		Text.Add("You ");
-	Text.Add("step back and raise your hands non-threateningly. An orange cat-morph steps forward and ties your hands behind your back, then forces you down onto the ground and[f]. Shakily, the archer rises to her feet with the help of a red-armored, wolf-eared man. She takes the lead and heads... well, you don't know where she plans on taking you, but you're beginning to think it might not have been such a good idea to attack her.", parse);
+	Text.Add("step back and raise your hands non-threateningly. An orange cat-morph steps forward and ties your arms behind your back, then forces you down onto the ground and[f]. Shakily, the archer rises to her feet with the help of a red-armored, wolf-eared man. She takes the lead and heads... well, you don't know where she plans on taking you, but you're beginning to think it might not have been such a good idea to attack her.", parse);
 
 	Text.Flush();
 	Gui.NextPrompt(Scenes.Maria.ForestFollow);
@@ -517,9 +517,9 @@ Scenes.Maria.ForestFollow = function() {
 	Text.Clear();
 	Text.Add("You decide the best course of action is to follow Maria.", parse);
 	Text.NL();
-	Text.Add("Turning on her heel, Maria guides you through the massive oak trees, clambering over roots and around massive, tangled thickets with ease. She leads you through a labyrinthine assortment of vegetation, constantly switching back and forth between trails, seemingly at random. The ground under your feet begins turning softer, and the footing becomes harder to keep the longer you follow the bowwoman.", parse);
+	Text.Add("Turning on her heel, Maria guides you through the massive oak trees, clambering over roots and around massive, tangled thickets with ease. She leads you through a labyrinthine assortment of vegetation, constantly switching back and forth between trails, seemingly at random. The ground under you begins turning softer, and the footing becomes harder to keep the longer you follow the bowwoman.", parse);
 	Text.NL();
-	Text.Add("As you watch her climb up and around the huge tree roots, you are treated to the lovely sight of her generous ass swaying back and forth. Her wide hips fill out the shorts she wears very tightly, accentuating each curve of her body. Thinking it through, you realize that all her clothing is cut to accentuate her form, and draw your eyes to the more delectable parts of her body.", parse);
+	Text.Add("As you watch her climb up and around the huge tree roots, you are treated to the lovely sight of her generous ass swaying back and forth. Her wide hips fill out the shorts she wears very tightly, emphasizing each curve of her body. Thinking it through, you realize that all her clothing is cut to accentuate her form, and draw your eyes to the more delectable parts of her body.", parse);
 	Text.Flush();
 
 	//[Silent][Talk][Flirt]
@@ -536,7 +536,7 @@ Scenes.Maria.ForestFollow = function() {
 	options.push({ nameStr : "Talk",
 		func : function() {
 			Text.Clear();
-			Text.Add("At first, you stay silent, wary of the archer's wrath, but, eventually, you decide that, since you can do little else, you might as well ask her some questions. When you first speak, she jumps a little, as if she didn't expect you to speak along the way. Most of your questions she either outright ignores, or answers vaguely at best. Until, that is, you ask her about precisely where she comes from.", parse);
+			Text.Add("At first, you stay silent, wary of the archer's wrath, but eventually you decide that since you can do little else, you might as well ask her some questions. When you first speak, she jumps a little as if she didn't expect you to speak along the way. Most of your questions she either outright ignores, or answers vaguely at best until, that is, you ask her about precisely where she comes from.", parse);
 			Text.NL();
 			Text.Add("<i>“I'm part of the outlaws out here. We're forced to live in this forest because those xenophobic assholes up at the City don't want us around. Well, that and more than one of us have broken their laws. Either we choose to live by <b>their</b> rules, or we make do with our own codes out in the forest. Some of our band were actually evicted from the city for crimes, others simply for not being pure human.”</i>", parse);
 			Text.NL();
@@ -551,7 +551,7 @@ Scenes.Maria.ForestFollow = function() {
 	options.push({ nameStr : "Flirt",
 		func : function() {
 			Text.Clear();
-			Text.Add("Watching her move her body enticingly, you strike up a conversation with the buxom bandit. First the topic stays on innocuous things. Before long, you begin talking about Maria, and you compliment her on her generous cleavage.", parse);
+			Text.Add("Watching her move her body enticingly, you strike up a conversation with the buxom bandit. First, the topic stays on innocuous things. Before long, you begin talking about Maria, and you compliment her on her generous cleavage.", parse);
 			Text.NL();
 
 			if(Scenes.Maria.fight == 2) {
@@ -594,23 +594,23 @@ Scenes.Maria.ForestCamp = function() {
 		Text.NL();
 		Text.Add("Once Maria finally comes back, she's followed closely by a large fox-morph wielding a greatsword. It's slung across his shoulder, resting there easily. The muscles in his arms bulge as he adjusts the way it sits on him. His russet fur ruffles in the soft wind, and you can see his muscles rippling as he moves. His yellow eyes regard you suspiciously, and his hands shift across the hilt. Maria gestures for you to follow her again, and the three of you head up over the rooty embankment. Laying eyes on the 'camp', you gasp in surprise. When you had heard a few outlaws had taken up residence in the forest, you never imagined something like this.", parse);
 		Text.NL();
-		Text.Add("Trees larger than most others, even this deep in the forest, block out most of the sunlight. Shafts of light scatter down through the leaves, leaving everything in a constantly shifting twilight. In front of you, a trench at least five feet wide drops straight into the ground for a ways, and the bottom holds an uncountable number of sharpened stakes. Falling down there would certainly mean death for anyone. But more impressive than any of that, is the wall.", parse);
+		Text.Add("Trees larger than most others, even this deep in the forest, block out most of the sunlight. Shafts of light scatter down through the leaves, leaving everything in a constantly shifting twilight. In front of you, a trench at least five feet wide drops straight into the ground for a ways, and the bottom holds an uncountable number of sharpened stakes. Falling down there would certainly mean death for anyone. But more impressive than any of that is the wall.", parse);
 		Text.NL();
-		Text.Add("A massive wall surrounds the entire camp. It is made of whole tree trunks, wider than you are tall. Gnarled bark and huge knots cover the huge fortification. The tops of every beam are sharpened, much like those in the pit. A gap in the wall is covered by an iron grate, guarded on the outward side by a fox-morph very similar to the one glaring daggers at your back. From this far away, you can't tell what he's saying, but he shouts something to someone on the other side of the wall.", parse);
+		Text.Add("A massive wall surrounds the entire camp. It is made of whole tree trunks, wider than you are tall. Gnarled bark and huge knots cover the huge fortification. The tops of every beam are sharpened, much like those in the pit. A gap in the structure is covered by an iron grate, guarded on the outward side by a fox-morph very similar to the one glaring daggers at your back. From this far away, you can't tell what he's saying, but he shouts something to someone on the other side of the wall.", parse);
 		Text.NL();
-		Text.Add("Shortly after, the iron gate grinds upward, lifting just enough to let a person through. The guard by the gate and his new companion grab a large, wooden construct. A bridge. They place it over the spiked trench, and the [num] of you cross into the gateway. ", parse);
+		Text.Add("Shortly after, the iron gate grinds upward, lifting just enough to let a person through. The guard by the gate and his new companion grab a large, wooden construct: a bridge. They place it over the spiked trench, and the [num] of you cross into the gateway. ", parse);
 		Text.NL();
 		Text.Add("The guards pick up the bridge and take it back through the gate. Inside, Maria hurries you through the camp. All around, all manner of morphs and non-morphs go about their business. The sheer number of different types astounds you. From lizard-morphs to wolf-morphs and everything between, it seems a representative of every race inhabits this bandit fort.", parse);
 		Text.NL();
 		Text.Add("Tents cover the ground everywhere you look. A small stream flows through the camp, and some small willow trees grow by its banks. You don't get a chance to look around further as the ebony beauty elbows you into one of the only two buildings in the camp.", parse);
 		Text.NL();
-		Text.Add("Inside, a large round table dominates the room. Immediately, the map lying on it grabs your attention. Different figurines stand in seemingly random places. Paper is scattered across the map table and the floor, filled by an illegible scrawl. It almost looks like another language. A door to your left opens, and out walks a very peculiar looking badger-morph.", parse);
+		Text.Add("Inside, a large, round table dominates the room. Immediately, the map lying on it grabs your attention. Different figurines stand in seemingly random places. Paper is scattered across the map table and the floor, filled by an illegible scrawl. It almost looks like another language. A door to your left opens, and out walks a very peculiar looking badger-morph.", parse);
 		Text.NL();
-		Text.Add("It seems that at some point his body tried to figure out which parts of him should be badger and which should be human and simply gave up. His face is mostly human, save for his nose, but small, round furry ears sit atop his head, nestled in a shock of dark black hair. The latter is divided by a single silvery-white stripe, much like that of a badger. A day’s worth of stubble covers his square jaw, and you follow the scar that starts from his chin up to his eyes, pale grey irises that fix themselves upon you distrustfully.", parse);
+		Text.Add("It seems that at some point his body tried to figure out which parts of him should be badger and which should be human and simply gave up. His face is mostly human, save for his nose, but small, round, furry ears sit atop his head, nestled in a shock of dark black hair. The latter is divided by a single, silvery-white stripe, much like that of a badger. A day’s worth of stubble covers his square jaw, and you follow the scar that starts from his chin up to his eyes, pale grey irises that fix themselves upon you distrustfully.", parse);
 		Text.NL();
-		Text.Add("He wears what appears to be a weird mishmash of armor types, part of a leather hauberk here, cloth padding over there, a few straps and scraps of improvised plating sewn on and holding it all together. A long scar runs down the entirety of his right arm, bare of fur. Both the ring and pinky finger of that hand are missing, leaving the hand looking lopsided, especially with the sharp claws that protrude from his fingertips. A scabbard is affixed to his belt, bearing a sturdy short sword within.", parse);
+		Text.Add("He wears what appears to be a weird mishmash of armor types: part of a leather hauberk here, cloth padding over there, a few straps and scraps of improvised plating sewn on and holding it all together. A long scar runs down the entirety of his right arm, bare of fur. Both the ring and pinky finger of that hand are missing, leaving the hand looking lopsided, especially with the sharp claws that protrude from his fingertips. A scabbard is affixed to his belt, bearing a sturdy short sword within.", parse);
 		Text.NL();
-		Text.Add("A deep, sonorous bass rumbles from his chest, bringing to mind storm clouds. <i>“Maria. I see you brought a stranger to our camp.”</i> His gaze pinions your feet to the floor and you unconsciously start thinking of excuses for why you entered his territory. Before you can speak, the archer begins explaining her actions.", parse);
+		Text.Add("A deep, sonorous bass rumbles from his chest, bringing to mind storm clouds. <i>“Maria. I see you brought a stranger to our camp.”</i> His gaze pinions you to the floor and you unconsciously start thinking of excuses for why you entered his territory. Before you can speak, the archer begins explaining her actions.", parse);
 		Text.Flush();
 
 		//[Listen][Interrupt]
