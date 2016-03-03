@@ -422,15 +422,16 @@ Scenes.Maria.ForestConfrontWin = function() {
 					Text.NL();
 					Text.Add("Dipping your fingers further into her tight cunny, you probe around for all her most sensitive spots. Stroking along her soft, inner walls, you end up nearly so focused that you forget the squishy sensation focused around your throbbing [cock]. When she suddenly moans around you, the vibrations snap you back to the present.", parse);
 					Text.NL();
-					Text.Add("Pulling your fingers from the archer's wanton hole, you notice her lift her legs, begging for more of the delicious friction. Tutting softly, you circle a finger around her clit. It pokes from its hood, red and engorged. She begins bucking underneath you, but you pull away before she can cum. Pulling your [cock] from her mouth, you turn around.", parse);
-					Text.NL();
+					Text.Add("Pulling your digits from the archer's wanton hole, you notice her lift her legs, begging for more of the delicious friction. Tutting softly, you circle a finger around her clit. It pokes from its hood, red and engorged. She begins bucking underneath you, but you pull away before she can cum. Pulling your [cock] from her mouth, you turn around.", parse);
+					Text.NL();					
+					
+					Sex.Vaginal(player, maria);
+					maria.FuckVag(maria.FirstVag(), player.FirstCock(), 3);
+					player.Fuck(player.FirstCock(), 3);					
+					
 					Text.Add("As juiced up as she is, you have no problem pounding straight into her core. Thrashing away at her slick pussy, you lose yourself in a haze of lust and feel yourself getting closer to the edge you had been skirting after her earlier oral assault. Her walls ripple around you convulsively as she cums under the assault. Moments later, you glaze her insides with your liquid lust.", parse);
 
 					var cum = player.OrgasmCum();
-
-					Sex.Vaginal(player, maria);
-					maria.FuckVag(maria.FirstVag(), player.FirstCock(), 3);
-					player.Fuck(player.FirstCock(), 3);
 
 					if(player.FirstVag()) {
 						Text.Add(" Your [vag] clenches in sympathy, and clear girl-cum runs down your [legs].", parse);
