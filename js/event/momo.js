@@ -543,12 +543,10 @@ Scenes.Momo.CookPrompt = function() {
 Scenes.Momo.TalkPrompt = function() {
 	var parse = {
 		playername : player.name,
-		legsDesc   : function() { return player.LegsDesc(); },
-		earDesc    : function() { return player.EarDesc(); },
 		girlMorph  : momo.Ascended() ? "morph" : "girl",
 		dragonette : momo.Ascended() ? "dragon" : "dragonette"
 	};
-	
+	parse = player.ParserTags(parse);
 	//[Chat] [Herself] [Family] [Cooking] [Skills]
 	var options = new Array();
 	options.push({ nameStr : "Chat",
@@ -695,7 +693,7 @@ Scenes.Momo.TalkPrompt = function() {
 						if(momo.IsFollower()) {
 							Text.Add("Momo's eyes widen at your innuendo, before her lips curl into a grin, the dragon-[girlMorph] strutting toward you. A hint of the old shyness shows through in the redness dusting her cheeks, but the smile curving her face is pure predator, eyes hooded in her sultriest expression.", parse);
 							Text.NL();
-							Text.Add("<i>“That sounds like an invitation I just <b>have</b> to accept,“</i> she purrs, gently folding her arms around you, long tongue flicking out to slurp playfully over your cheek in a quick motion, tail curling around your [legsDesc]. Leaning her head in to bring it closer to your [earDesc], she stage whispers <i>“step into my parlor,“</i> and then releases you, swaying enticingly as she vanishes into her tent, tail flicking toward you in a “come hither“ gesture before it's gone.", parse);
+							Text.Add("<i>“That sounds like an invitation I just <b>have</b> to accept,“</i> she purrs, gently folding her arms around you, long tongue flicking out to slurp playfully over your cheek in a quick motion, tail curling around your [legs]. Leaning her head in to bring it closer to your [ear], she stage whispers <i>“step into my parlor,“</i> and then releases you, swaying enticingly as she vanishes into her tent, tail flicking toward you in a “come hither“ gesture before it's gone.", parse);
 							Text.Flush();
 							
 							//TODO Momo Sex
