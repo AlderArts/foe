@@ -39,7 +39,7 @@ function Maria(storage) {
 	this.SetLevelBonus();
 	this.RestFull();
 
-	this.flags["Met"] = 0;
+	this.flags["Met"] = 0; //Initial meeting. Bitmask
 	this.flags["DD"] = 0; //Dead drops. Bitmask
 
 	this.DDtimer = new Time();
@@ -48,6 +48,13 @@ function Maria(storage) {
 }
 Maria.prototype = new Entity();
 Maria.prototype.constructor = Maria;
+
+Maria.Met = {
+	ForestMeeting : 1,
+	Fight         : 2,
+	FightSexed    : 4,
+	FightLost     : 8
+};
 
 Maria.DeadDrops = {
 	Alert     : 1,
@@ -160,10 +167,75 @@ Scenes.Maria.CampInteract = function() {
 		Scenes.Maria.DeadDrops.Initiation();
 	}
 	else {
-		Text.Clear(); //TODO
-		Text.Add("PLACEHOLDER. Rawr Imma archer.");
-
-
+		var parse = {
+			playername : player.name
+		};
+		
+		Text.Clear();
+		Text.Add("Maria suddenly coming to mind, you decide to go over and say hello to the ebony beauty. Problem is that even when she’s in camp, she’s never to be found in the same spot twice, and it takes you a little searching before you eventually find her.", parse);
+		Text.NL();
+		
+		var scenes = new EncounterTable();
+		
+		if(world.time.hour >= 12) {
+			scenes.AddEnc(function() {
+				Text.Add("As it turns out, she’s currently doing a bit of fletching - tipping the arrow shafts with flint heads and making sure the feathers go on just right. It seems rather simple to you, but Maria’s brow is furrowed in an expression of furious concentration. There’s probably more to this fletching business than meets the eye… and it’s only natural that Maria pays great attention to it, since her life depends on her armaments.", parse);
+				Text.NL();
+				Text.Add("At length, though, she does set aside her materials and cocks her head at you. <i>“Come on, [playername]. If you’ve got something to say, spit it out already; there’s no need to be polite. We don’t have all day.”</i>", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("Maria’s preparing for her next foray into the forest, sharpening a flat-bladed dagger against an oiled whetstone. The monotonous scraping does get on the nerves after a minute or so of it, but you’ve come at a good time - she’s just finishing up, and after wiping off the last of the swarf, sets her kit aside and motions for you to sit on the ground beside her.", parse);
+				Text.NL();
+				Text.Add("<i>“So, you wanted to talk?”</i>", parse);
+				Text.NL();
+				Text.Add("Yeah. Does she have a bit of time?", parse);
+				Text.NL();
+				Text.Add("<i>“Shoot. I’m all ears.”</i>", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("She’s dozing under the branches of one of the large riverside willow trees, getting a bit of shut-eye before heading out into the forest. True, she’s supposed to be one of the better outlaws… but she’s human too, and it’s not as if she’s sleeping on the job. Stopping a few feet from her, you clear your throat to announce your presence.", parse);
+				Text.NL();
+				Text.Add("One of her eyes rolls open lazily, but you aren’t fooled - you can see how fast the muscles tense under her skin. <i>“Oh. It’s you.”</i>", parse);
+				Text.NL();
+				Text.Add("Yeah, it’s you. Does she have a moment?", parse);
+				Text.NL();
+				Text.Add("Maria laughs. <i>“Does it look like I’m busy right now?”</i> With a soft grunt of effort, she pulls herself into a sitting position. <i>“Go on, I’ve never been more available. You wanted something?”</i>", parse);
+			}, 1.0, function() { return true; });
+		}
+		else {
+			scenes.AddEnc(function() {
+				Text.Add("She’s at the river, or more precisely, down by where it meets the wall of palings and eventually flows out of camp. There’s a huge tub by Maria’s side, and on closer inspection - yes, there’s the washboard, the soap, and a huge pile of clothes. Most of them are Maria’s, but you do spot an article of Zenith’s here and there; they’re clearly far too large and of the wrong fitting for Maria herself.", parse);
+				Text.NL();
+				Text.Add("As you watch, Maria pounds away at the laundry, suds rising and covering her hands even as she starts sweating bullets from her brow. Slowly, she half-turns to you, still scrubbing away for dear life. <i>“Nothing surprising about this,”</i> she snaps. <i>“It’s a great workout for the forearms.”</i>", parse);
+				Text.NL();
+				Text.Add("Hey, you were just standing here without saying a single word.", parse);
+				Text.NL();
+				Text.Add("<i>“Except that I could feel your eyes burning into the small of my neck. If you think I’m an idiot-”</i> Maria slaps a shirt down on the board, rinses her hands in the river and sighs. <i>“Look, I didn’t come here to argue with you, and I don’t think you came down here to ogle at me. What did you want?”</i>", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("She’s got a handful of pelts stretched out on racks in front of her, the results of last night’s hunt. Some of them do look eerily similar to a number of the camp’s inhabitants… but then again, it’s just looks, right?", parse);
+				Text.NL();
+				Text.Add("As you look on, Maria carefully works away with a flensing knife, separating the last scraps of flesh from the hides and flicking them away into a reeking wooden bucket. It’s a grim job - there’re bloodstains up all the way to her wrists - but it’s probably better than the curing that awaits them…", parse);
+				Text.NL();
+				Text.Add("At length, Maria stands, rinses her hands in a small tub of water and turns to you, flicking the water off her fingers and onto the grassy ground. <i>“Thanks for waiting; guess I can take a break now. You were looking for me for something?”</i>", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("Eventually, you do find Maria. The ebony beauty is slumped against one of the riverside willows, an unmarked bottle of clear liquid in her hands. You can smell the alcohol even from where you stand, and every now and then she raises the bottle to her lips and takes a swig.", parse);
+				Text.NL();
+				Text.Add("<i>“Hey, [playername],”</i> she says, waving you over. With how strong the stuff she’s imbibing must be, it’s a wonder she’s still coherent. <i>“Come over and have a chat. You’re not getting any of my ‘shine, though. It’s all mine. I earned it.”</i>", parse);
+				Text.NL();
+				Text.Add("You won’t question her on that. Stuff going out in the forest?", parse);
+				Text.NL();
+				Text.Add("Maria nods. <i>“I… I’m getting bad vibes these days. That shouldn’t be the case - supposed to know much of it like the back of my hand. But I’m noticing things wrong… too silent, too dark… that kinda thing… and while I’m not going to say I’m too chicken to head back out every night, maybe a nip of liquid courage can’t hurt, right?”</i>", parse);
+				Text.NL();
+				Text.Add("That’s more than a nip she’s having there.", parse);
+				Text.NL();
+				parse["mommydaddy"] = player.mfFem("daddy", "mommy");
+				Text.Add("Maria snorts. <i>“Hey, I didn’t ask you to come and sit down with me so you could play [mommydaddy], all right? You had something on your mind before you started nagging?”</i>", parse);
+			}, 1.0, function() { return true; });
+		}
+		scenes.Get();
+		
 		if(DEBUG) {
 			Text.NL();
 			Text.Add(Text.BoldColor("DEBUG: relation: " + maria.relation.Get()));
@@ -186,6 +258,35 @@ Scenes.Maria.CampPrompt = function() {
 
 	//[name]
 	var options = new Array();
+	options.push({nameStr : "Talk",
+		tooltip : Text.Parse("You have some things you want to talk with her about.", parse),
+		enabled : true,
+		func : function() {
+			Text.Clear();
+			
+			var scenes = new EncounterTable();
+			
+			scenes.AddEnc(function() {
+				Text.Add("<i>“Guess a little lip-flapping couldn’t hurt. At the very least, it’ll help take my mind off things that’ve been happening of late. I know that Zenith has a lid on it, but still, can’t help but want to help…”</i> Maria shakes her head, and then her gaze snaps back to you. <i>“Sorry about that. Yeah, you had something to say?”</i>", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("<i>“You want to talk?”</i> Maria squints at you. <i>“I guess… although I’ve never been a very good gossip. Having Zenith around all the time when I was growing up did that to me, I guess.”</i>", parse);
+				Text.NL();
+				Text.Add("Gossip? Oh no, perish the thought. You just wanted a bit of pleasant conversation, that’s all.", parse);
+				Text.NL();
+				Text.Add("Maria shrugs. <i>“Sure, if you wanna put it that way. What’s on your mind?”</i>", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("Maria perks up at the suggestion. <i>“Sure, why not? It’s always great to stop and have a chat with you. Time flies while you’re having fun, as they say, and I’ve got a bit of it left over. You got something in mind?”</i>", parse);
+			}, 1.0, function() { return maria.Relation() >= 50; });
+			
+			scenes.Get();
+			
+			Text.Flush();
+			
+			Scenes.Maria.TalkPrompt();
+		}
+	});
 	if(cveta.flags["Met"] == Cveta.Met.MariaTalk) {
 		options.push({ nameStr : "Princess",
 			func : function() {
@@ -211,6 +312,282 @@ Scenes.Maria.CampPrompt = function() {
 	Gui.SetButtonsFromList(options, true);
 }
 
+Scenes.Maria.TalkPrompt = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	var options = [];
+	//[Chat][Forest][Outlaws][Zenith][Family][Ranger]
+	options.push({nameStr : "Chat",
+		tooltip : Text.Parse("Just chat for a bit.", parse),
+		enabled : true,
+		func : function() {
+			Text.Clear();
+			Text.Add("You break out into a bit of small talk, chatting about this and that without any real direction to the conversation.", parse);
+			Text.NL();
+			var scenes = new EncounterTable();
+			scenes.AddEnc(function() {
+				Text.Add("Eventually, though, the topic turns to the time the two of you first met.", parse);
+				Text.NL();
+				Text.Add("<i>“To be honest,”</i> Maria begins, <i>“it’s a good thing that I was the one to catch you napping like that. Some of the other locals wouldn’t have bothered with the trouble. That mothgirl, for example - she’d just have robbed you blind while you were sleeping and left it at that.”</i>", parse);
+				Text.NL();
+				Text.Add("Well, she <i>does</i> make sense in a roundabout sort of way, but couldn’t she have just tapped you on the shoulder or coughed or something? An arrowhead mere inches away from the eye isn’t the sort of thing that puts people in an amicable mood; waking up is hard enough to deal with as it is.", parse);
+				Text.NL();
+				Text.Add("<i>“About that…”</i> Maria looks a little pensive. The ebony beauty surely isn’t about to up and say that she was in the wrong, but neither is she probably going to flat-out claim to be squeaky clean, either. <i>“Better safe than sorry. Didn’t know how you’d react.”</i>", parse);
+				Text.NL();
+				if(maria.flags["Met"] & Maria.Met.Fight) {
+					Text.Add("Hmph. Judging by the way you reacted, you’d have been in more of a mood to simply talk if she hadn’t outright threatened you to begin with.", parse);
+					Text.NL();
+					Text.Add("<i>“It’s harsh, but it’s also the truth that I haven’t lived this long as an outlaw by assuming the best of strangers,”</i> Maria replies matter-of-factly. <i>“It is what it is; we’ve all had to live with it. For what it’s worth, I’ll say I’m sorry.”</i>", parse);
+					Text.NL();
+					Text.Add("You reacted badly too, you admit. It’s just one of those things which really could’ve been cleared up with a civil talk. She <i>did</i> have all her men in the trees as backup - that should’ve been enough to at least warrant some civility, yet have a fallback should things go sour.", parse);
+				}
+				else {
+					Text.Add("Either way, it’s a good thing that you’d better control over your instincts and impulses, or there might’ve been a scuffle.", parse);
+					Text.NL();
+					Text.Add("<i>“Oh?”</i> Maria raises an eyebrow at you. <i>“And here I was thinking that you were quaking in your boots and going along so you didn’t get turned into a pincushion.”</i>", parse);
+					Text.NL();
+					Text.Add("Hey! You’re about to protest this clear disparagement of your character, but Maria laughs and waves off your complaints before you can even voice them. <i>“I was just needling you, no need to get mad. Seriously, though… thanks for taking a blow to your pride and making things easier on the both of us.”</i>", parse);
+					Text.NL();
+					Text.Add("Huh, guess that’s one way to deliver a compliment.", parse);
+				}
+				Text.NL();
+				Text.Add("<i>“That’s all behind us now, anyway.”</i> Maria sighs, and shrugs. <i>“Water under the bridge. Come on, let’s not dwell on this stuff and talk about something cheerier.”</i>", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("Come to think of it, is there anything she likes to eat in particular?", parse);
+				Text.NL();
+				Text.Add("Maria huffs. <i>“What sort of question is that?”</i>", parse);
+				Text.NL();
+				Text.Add("Apparently, the kind of question you’d ask. Come on. Surely, she has one.", parse);
+				Text.NL();
+				Text.Add("<i>“You can’t afford to be picky about what you eat out here. No space for favorites - anything that Raine can serve up on your plate, you put in your stomach or go hungry.”</i>", parse);
+				Text.NL();
+				Text.Add("Aw, come on. Now you’re sure she’s evading the question - having favorites in no way necessarily means being a picky eater. Surely, she’s got -", parse);
+				Text.NL();
+				if(maria.Relation() >= 50) {
+					Text.Add("<i>“I’ve always been a bit partial to wild honey, I suppose. The way you get subtle changes in flavor depending on where it comes from, the fact that you have to be smart enough to get it safely, and of course, the fact that it goes well with many things.”</i>", parse);
+					Text.NL();
+					Text.Add("See? That’s a perfectly normal and nice thing to like. When you can’t get chocolate, something else that’s sweet will suffice.", parse);
+					Text.NL();
+					Text.Add("Maria huffs. <i>“I like it best on its own, though. That way, you don’t get the taste of whatever it’s paired with creeping up on the palate.”</i>", parse);
+				}
+				else {
+					Text.Add("<i>“I’m not letting you badger me into giving anything away, and that’s that.”</i>", parse);
+					Text.NL();
+					Text.Add("Aww… why so touchy about it, though?", parse);
+					Text.NL();
+					Text.Add("Maria reaches out with a finger and jabs you squarely on the chest. <i>“For me to know and for you to find out, buster. Maybe you should try getting in good with me, if you’d really like to know.”</i> ", parse);
+				}
+			}, 1.0, function() { return true; });
+			scenes.Get();
+			Text.Flush();
+		}
+	});
+	options.push({nameStr : "Forest",
+		tooltip : Text.Parse("How’ve things been out there in the woods?", parse),
+		enabled : true,
+		func : function() {
+			Text.Clear();
+			// TODO #If Vaughn task 4 completed
+			if(false) {
+				Text.Add("Maria looks down at her hands, then back up at you. <i>“A little more peaceful. Just a little more, but I’m grateful for it - and to you for helping out as well.”</i>", parse);
+				Text.NL();
+				Text.Add("Hey, it’s a job, and you did it. Nothing more, nothing less. Besides, she had her people backing you up against the bane, didn’t she?", parse);
+				Text.NL();
+				Text.Add("<i>“That’s true, but I’d still rather you accept the credit where it’s due. It’s not very often that I actually compliment anyone - folk around camp will tell you as much.”</i>", parse);
+				Text.NL();
+				Text.Add("So, you should feel all nice and special that she’s deigned to confer her approval on you? Does this call for a celebration?", parse);
+				Text.NL();
+				Text.Add("<i>“Don’t push your luck, buster.”</i> She punches you lightly on the shoulder. <i>“But yeah. You and I know that the bane wasn’t the end of our troubles, and I get the feeling that whatever it is that’s out there, it’s going to be way out of my league. Yours, though… that’s something else altogether. If there’s anything I can do to help - within reason, of course - just ask away, and I’ll see what I can do. I owe you as much; we all do.”</i>", parse);
+			}
+			else {
+				Text.Add("<i>“Have you spoken with Vaughn and asked him what he thinks? If you haven’t, you should. I’m in agreement with him that something’s off about the forest.”</i>", parse);
+				Text.NL();
+				Text.Add("Off? What does she mean by that?", parse);
+				Text.NL();
+				Text.Add("Maria shakes her head. <i>“Just a general feeling of something being amiss. I can’t quite explain it, [playername]. The woods have always been treacherous to the unwary - especially the portion of that which lies in the shade of the Great Tree - but, well, to put it one way, I know in my gut that something’s wrong.”</i>", parse);
+				Text.NL();
+				Text.Add("You motion for her to go on.", parse);
+				Text.NL();
+				Text.Add("<i>“I’ve been walking these woods since I was a child, and in the last couple of years they’ve changed. Not outwardly, but more inwardly - the shadows seem longer, the trees huddle together as if for protection. It wasn’t obvious at first, but the changes have been coming faster and faster, more noticeable - I don’t doubt that it’s only a matter of time before whatever’s growing in the heart of the woods breaks out to encompass us as well.”</i>", parse);
+				Text.NL();
+				Text.Add("She does sound quite grim about this.", parse);
+				Text.NL();
+				Text.Add("<i>“Trust me, I’m grim because I’m being dead serious. And yet, neither Vaughn nor I have anything concrete to show Zenith on this - it’s fucking annoying, pardon my language. I can’t put everyone on alert just because I have a hunch I can’t prove.”</i>", parse);
+				Text.NL();
+				Text.Add("All right, you get the point. How about changing the topic to something a little more cheery to take her mind off it?", parse);
+				Text.NL();
+				Text.Add("She shrugs. <i>“Suits me.”</i>", parse);
+			}
+			Text.Flush();
+		}
+	});
+	options.push({nameStr : "Outlaws",
+		tooltip : Text.Parse("How’s the situation in camp?", parse),
+		enabled : true,
+		func : function() {
+			Text.Clear();
+			
+			var scenes = new EncounterTable();
+			
+			scenes.AddEnc(function() {
+				Text.Add("<i>“So- so. We just got another handful of people filtering in from the plains. Poor bastards didn’t see how they were going to pay the land taxes next year.”</i>", parse);
+				Text.NL();
+				Text.Add("Why, were the rates that bad?", parse);
+				Text.NL();
+				Text.Add("<i>“Oh, no, no. Rewyn might be a bastard, but he’s not stupid. <b>Completely</b> stupid, at any rate. He knows where his food comes from, and likes eating too much to see that spigot dry up. No, the problem is with the roads.”</i>", parse);
+				Text.NL();
+				Text.Add("You don’t quite follow.", parse);
+				Text.NL();
+				Text.Add("Maria sighs and leans against a nearby tree, motioning for you to join her in its shade. <i>“It’s a long story, [playername]. Long ago, the ruling monarchs of Rigard allowed the common people to pay their taxes in a share of what was produced on the land. That was simple, it was direct, and most people felt it was fair, so that remained the case for generations on end. Then Rewyn comes along and decides that the existing arrangement isn’t good enough, that the only way taxes are to be paid is in coin.</i>", parse);
+				Text.NL();
+				Text.Add("<i>“Now, I can see why he would do such a thing - coin doesn’t spoil, it has a much more stable value, and it’s easy to count and store, amongst other issues. Understanding someone’s motives, though, doesn’t necessarily mean agreeing with them, because this pigheaded move meant that people needed to go into town to sell their crops in order to pay their taxes. And if you don’t keep the roads safe…”</i>", parse);
+				Text.NL();
+				Text.Add("Ah. ", parse);
+				if(gwendy.flags["Market"] >= Gwendy.Market.GoneToMarket) {
+					Text.Add("You think back to your little trip with Gwendy, and instantly understand Maria’s point.", parse);
+				}
+				else {
+					Text.Add("You see where this is going, and tell Maria as much.", parse);
+				}
+				Text.NL();
+				Text.Add("<i>“Of course, it wouldn’t be peachy keen even if Rewyn managed to keep the roads perfectly safe,”</i> Maria continues. <i>“There’s always how much the harvest can be sold for depending on the season, the extra expense involved in getting a huge load there and back, and the problem of money… at the end of the day, there’re a lot more people off their land now, and some of them make their way here.</i>", parse);
+				Text.NL();
+				Text.Add("<i>“Which, naturally, translates to more mouths to feed. If the forest soil weren’t so naturally poor, we’d try expanding one of the clearings and growing something ourselves, but I know that isn’t going to work out. Something’s got to give eventually, though. It always does.”</i>", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("<i>“Nothing very much.”</i>", parse);
+				Text.NL();
+				Text.Add("Nothing?", parse);
+				Text.NL();
+				Text.Add("Maria shrugs and tosses her hair. <i>“Why, do you think our lives are filled with weeks upon weeks of constant exploits and derring-do? I’m not surprised, because that’s how a lot of new faces think things are going to be. Some of them leave when they hear we’re not going to take up arms and ride upon Rigard the next day. As much as I’d like that to happen, doing so would be suicide.”</i>", parse);
+				Text.NL();
+				Text.Add("Well, you didn’t mean that, but it’s still slightly surprising to hear her admit so readily that there’s nothing going on at the moment.", parse);
+				Text.NL();
+				Text.Add("<i>“Zenith has been here for more than a decade, [playername]. He plays the long game because there is none other. Rigard was not built in a day, and it won’t be taken in a day, either.</i>", parse);
+				Text.NL();
+				Text.Add("<i>“So, for now, we bide our time and try and create opportunities to make inroads.”</i>", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				parse["fem"] = player.Femininity() >= 0.5 ? " I’m sure you understand, don’t you?" : "";
+				Text.Add("<i>“I’m going out to look for a bit of game in a few hours. Personal thing on my own time - a lady needs some me time.[fem]”</i>", parse);
+				Text.NL();
+				Text.Add("How’s the hunting been of late?", parse);
+				Text.NL();
+				Text.Add("<i>“Not as good as I’d have liked. We don’t waste a single eatable bit of anything we bring in, but it’s still not enough. To make things worse, the local animals have smartened up and are staying away from this area, so we’re having to go deeper and deeper into the forest if we want to bring back anything substantial for the pot. It’s getting such that we’re skirting the really dangerous areas now, and I’ve expressly forbidden anything from going too deep in. I don’t want anyone being a hero here, especially not over so much meat.”</i>", parse);
+				Text.NL();
+				Text.Add("That sounds bad.", parse);
+				Text.NL();
+				Text.Add("<i>“It is. Raine does what she can to stretch out our rations, but days of nothing but watery broth and gruel drain morale faster than water in the desert. There’s no easy solution - we’ve tried a few things, but people are understandably cautious of having dealings with us.”</i>", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("<i>“Looking pretty good. Next batch of moonshine’s coming up quite nicely. It’s one of the small luxuries we have here, booze that isn’t taxed by the Crown - and it tastes a lot better, if I dare say so.”</i>", parse);
+				Text.NL();
+				Text.Add("Out of curiosity, what’s it made out of?", parse);
+				Text.NL();
+				Text.Add("<i>“Berries. Well, <b>mostly</b> berries. Wild fruit, when it’s in season. Oh, and a bit of sugar, too.”</i>", parse);
+				Text.NL();
+				Text.Add("You get the impression that there’s a lot more in that “mostly”, but the gleam in Maria’s eye suggests that she’s not going to elaborate any further - not without a great deal of coaxing and cajoling, at any rate.", parse);
+				Text.NL();
+				Text.Add("Living out here in the woods with so many things close by, drink must be the only thing standing between the Outlaws and sanity, eh?", parse);
+				Text.NL();
+				Text.Add("A laugh. <i>“I’m not denying it. It’s easier to have something to help forget on the darker nights. ‘Nags and bumps and ghouls in the eaves, shadow and spit and demons about the leaves,’ as the old song goes. Those old children’s tales, they aren’t completely wrong, you know. ", parse);
+				if(false) { //TODO #if Vaughn task 4 completed - same line
+					Text.Add("Guess we were proved right.”</i>", parse);
+					Text.NL();
+					Text.Add("The bane wasn’t a creature of the woods proper, you remind Maria. It was an outsider, summoned into a place not of its element.", parse);
+					Text.NL();
+					Text.Add("<i>“Doesn’t matter. Was still there. I know several of the lads who came with us needed several stiff drinks after we returned just to regain their composure, and those were folks who were no strangers to spilled blood.”</i>", parse);
+					Text.NL();
+					Text.Add("You feel perfectly fine.", parse);
+					Text.NL();
+					Text.Add("<i>“Yeah, but you’re special, aren’t you?”</i> Maria says with a scowl. <i>“The one who came through a portal and all that. Spirits know what kind of horrible things you see out there on other planes - something like a bane is probably nothing compared to them.”</i>", parse);
+					Text.NL();
+					Text.Add("Gee, there’s no need to take it that personally.", parse);
+					Text.NL();
+					Text.Add("<i>“Pfff.”</i> Maria makes a show of closing her eyes and rubbing her temples. <i>“Right, maybe I was a bit forceful there, but you could at least put your words through that head of yours before letting them out to your mouth.”</i>", parse);
+				}
+				else {
+					Text.Add("I’ve never come across anything truly terrible out there amongst the trees, but there are signs.”</i>", parse);
+					Text.NL();
+					Text.Add("You’ll take her word for it.", parse);
+					Text.NL();
+					Text.Add("<i>“I’m just glad that if anything in this camp is working, it’s the stills. Let’s just leave it at that, okay?”</i>", parse);
+				}
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("<i>“We just had to turn away a small group of people the other day.”</i>", parse);
+				Text.NL();
+				Text.Add("Interesting. Was there any particular reason?", parse);
+				Text.NL();
+				Text.Add("<i>“Oh, no, nothing special,”</i> Maria replies. <i>“They just couldn’t really contribute anything that we didn’t have in spades already, and it’s getting rather crowded in here. No one likes to have to do the turning away, but I dropped them a small bag of stuff and sent them back into the forest.”</i>", parse);
+				Text.NL();
+				Text.Add("Huh. Yeah, you can see how it would be hard to shoo away people down on their luck.", parse);
+				Text.NL();
+				Text.Add("A sigh. <i>“Most who manage to find this camp usually prove themselves resourceful enough in the doing, but those five folks just decided to wander around in the woods until they stumbled across us. Younglings from Rigard’s slums who decided they wanted to be merry thieves hiding out in the woods, and wore themselves out just coming here. If not for sheer luck, they’d be corpses in the underbrush by now.”</i>", parse);
+				Text.NL();
+				Text.Add("Grim.", parse);
+				Text.NL();
+				Text.Add("<i>“Grim, but true. We can’t have dead wood lounging around in camp. If they know what’s good for them, they’ll go back where they came from and try and make something of themselves <b>before</b> showing up again.”</i> ", parse);
+			}, 1.0, function() { return true; });
+			
+			scenes.Get();
+			
+			Text.NL();
+			Text.Add("You see.", parse);
+			Text.NL();
+			Text.Add("<i>“And that’s about that. News about these parts isn’t often very good, I’m afraid. Is there anything else you wanted to bring up?”</i>", parse);
+			Text.Flush();
+		}
+	});
+	options.push({nameStr : "Zenith",
+		tooltip : Text.Parse("So, what does she think about the Outlaws’ leader?", parse),
+		enabled : true,
+		func : function() {
+			Text.Clear();
+			Text.Add("Maria looks at you oddly. <i>“Hey, [playername]. You know how it’s not polite to gossip about someone behind his or her back? Especially when it comes to someone you respect?”</i>", parse);
+			Text.NL();
+			Text.Add("Hey, hey, you weren’t asking Maria to snitch on Zenith behind his back. All you wanted to know was what she thought of him. Although come to think of it, her reaction to the question does tell you a lot in that regard.", parse);
+			Text.NL();
+			Text.Add("<i>“Well then, you’ve got your answer, don’t you? I mean, it’s hard to speak ill of the man who’s practically been your brother for years now.”</i>", parse);
+			Text.NL();
+			Text.Add("Yeah…", parse);
+			Text.NL();
+			Text.Add("<i>“Like I said, I respect Zenith enough to not talk about him when he’s not here, so draw what conclusions you will. Let’s talk about something else, shall we?”</i>", parse);
+			Text.Flush();
+		}
+	});
+	if(outlaws.flags["Met"] >= Outlaws.Met.Bouqet) {
+		options.push({nameStr : "Family",
+			tooltip : Text.Parse("Does she miss them?", parse),
+			enabled : true,
+			func : function() {
+				Text.Clear();
+				Text.Add("Maria sighs. <i>“Can’t get teary-eyed over when I don’t remember, [playername]. So no, I don’t miss them.”</i>", parse);
+				Text.NL();
+				Text.Add("That’s a rather blunt way of putting it.", parse);
+				Text.NL();
+				Text.Add("<i>“But it’s true, isn’t it? At least to some degree? All those things I said back there amidst the flowers… sure, [playername], it’s not to say I don’t feel for them, but I don’t <b>miss</b> them. Besides, Zenith, Vaughn, Raine, Aquilius, the lads, they’re my family now. That’s all I’ve got to say on the issue. I’m sure you’ll forgive me if I don’t want to dwell on the issue, because everything I’ve wanted to say on the matter I brought up that day.”</i>", parse);
+				Text.NL();
+				Text.Add("All right, then. You won’t press any further on the issue.", parse);
+				Text.NL();
+				Text.Add("<i>“Thank you. Now, is there anything you’d like to bring up? To take our minds off this?”</i>", parse);
+				Text.Flush();
+			}
+		});
+	}
+	
+	Gui.SetButtonsFromList(options, true, function() {
+		Text.Clear();
+		Text.Add("<i>“Anything else on your mind?”</i>", parse);
+		Text.Flush();
+		
+		Scenes.Maria.CampPrompt();
+	});
+}
+
 Scenes.Maria.ForestMeeting = function() {
 	Text.Clear();
 
@@ -226,7 +603,7 @@ Scenes.Maria.ForestMeeting = function() {
 	}
 
 	if(maria.flags["Met"] == 0) {
-		maria.flags["Met"] = 1;
+		maria.flags["Met"] |= Maria.Met.ForestMeeting;
 		Text.Add("Off in the distance, the massive tree at the center of Eden overlooks the entire verdant area, casting long shadows and slightly eclipsing the sun. This far into the woodland, the trees grow close together, and even the smallest is far too tall for you to climb. All around, the sounds of the forest pound against your ears. Up in the high branches, birds twitter at each other. Wind whistles through the limbs, brushing them against one another in a comforting melody. Dozens of unseen insects send mating songs through the air.", parse);
 		Text.NL();
 		Text.Add("The pleasant buzz distracts you from the soreness settling in your limbs. After a few more minutes of traveling, you decide to take a break, and sit down at the base of a tree. The rough bark rubs against you through your [armor]. Before long, you fall into a doze.", parse);
@@ -281,8 +658,6 @@ Scenes.Maria.ForestConfront = function() {
 	};
 	var p1 = party.Get(1);
 	parse = player.ParserTags(parse);
-	
-	Scenes.Maria.fight = 0; // 0 = no, 1 = won, 2 = won, sexed, 3 = lost
 
 	//[Follow][Fight][Trick]
 	var options = new Array();
@@ -325,7 +700,9 @@ Scenes.Maria.ForestConfront = function() {
 			enc.onLoss = function() {
 				SetGameState(GameState.Event);
 				party.members = enc.oldParty;
-				Scenes.Maria.fight = 3;
+				
+				maria.flags["Met"] |= Maria.Met.FightLost;
+				
 				Text.Clear();
 				Text.Add("You fall to the ground, utterly defeated. The archer kicks away your [weapon] and levels an arrow at you. Glaring at you, she orders you to stand. As you wobble to get up, she comes up behind you, binding your hands fast with some rope. Cold shivers run up your spine as you feel the sharp point of a knife dig into the soft flesh between your shoulder blades.", parse);
 				Text.NL();
@@ -392,8 +769,8 @@ Scenes.Maria.ForestConfrontWin = function() {
 	parse = player.ParserTags(parse);
 	
 	Text.Clear();
-	Scenes.Maria.fight = 1; // Won, not sexed
-
+	maria.flags["Met"] |= Maria.Met.Fight;
+	
 	Text.Add("Maria collapses, unable to fight any further.", parse);
 	if(maria.LustLevel() > 0.75)
 		Text.Add(" The archer's hands reach down and pull off her ass hugging shorts. Two fingers dive into her honeypot and begin pumping fiercely.", parse);
@@ -408,7 +785,8 @@ Scenes.Maria.ForestConfrontWin = function() {
 		var options = new Array();
 		options.push({ nameStr : "Yes",
 			func : function() {
-				Scenes.Maria.fight = 2; // Sexed
+				maria.flags["Met"] |= Maria.Met.FightSexed;
+				
 				Text.Clear();
 				parse["k"] = player.HasLegs() ? " Kneeling over her, you press a knee into her stomach" : Text.Parse(" Using your [foot], you press the weight of it on her stomach", parse);
 				Text.Add("Already beaten, the archer can't rise from the ground. Quickly, you shuffle out of your [armor].[k] to keep her from moving. Reaching down, you shove two of your fingers into her mouth. Wriggling them around, you order Maria to slather them in spit. Her tongue deftly wraps around each digit and strokes up and down, jacking them off like miniature cocks.", parse);
@@ -554,7 +932,7 @@ Scenes.Maria.ForestFollow = function() {
 			Text.Add("Watching her move her body enticingly, you strike up a conversation with the buxom bandit. First, the topic stays on innocuous things. Before long, you begin talking about Maria, and you compliment her on her generous cleavage.", parse);
 			Text.NL();
 
-			if(Scenes.Maria.fight == 2) {
+			if(maria.flags["Met"] & Maria.Met.FightSexed) {
 				Text.Add("Scowling at you, the archer slaps you. Stinging pain explodes across your face, and you wince, blinking back tears at the unexpected force. Ordering you to stay silent, Maria refuses to even acknowledge your existence from that point forward. You do notice, however, that her cheeks became quite flushed at your comment. You resolve to try and win her affections later, when you've made up for your offense.", parse);
 				maria.relation.IncreaseStat(100, 2);
 			}
@@ -624,15 +1002,15 @@ Scenes.Maria.ForestCamp = function() {
 
 				// 0 = no, 1 = won, 2 = won, sexed, 3 = lost
 				// IF SEXED
-				if(Scenes.Maria.fight == 2) {
+				if(maria.flags["Met"] & Maria.Met.FightSexed) {
 					Text.Add("<i>“Turns out I was wrong. [HeShe] hits pretty damn hard. After that ass-kicking, I couldn't just let [himher] go.”</i> Maria turns and glares pointedly at you. After a moment, a slight, dark flush works its way into her cheeks and she averts her eyes. <i>“What happens now is your business, Zenith.”</i>", parse);
 				}
 				// WON
-				else if(Scenes.Maria.fight == 1) {
+				else if(maria.flags["Met"] & Maria.Met.Fight) {
 					Text.Add("<i>“[HeShe] actually fought better than I expected.”</i> Maria gives Zenith a pointed stare and he nods back. <i>“I'm going to need to see Aquilius after a bout like that.”</i> She seems to genuinely admire your fighting prowess, and a part of you feels proud that you managed to gain a complete stranger's respect through combat. She even ambushed you, and you still managed to fight her off.", parse);
 				}
 				// LOST
-				else if(Scenes.Maria.fight == 3) {
+				else if(maria.flags["Met"] & Maria.Met.FightLost) {
 					Text.Add("<i>“And I was right. [HeShe] went down like a sack of potatoes. I admire [hisher] spirit, though. That's part of why I brought [himher] back to camp.”</i>", parse);
 				}
 				else {
@@ -654,9 +1032,9 @@ Scenes.Maria.ForestCamp = function() {
 				Text.Add("He turns to Maria, fixing her with his intense gaze. <i>“I don’t. This is an unusual case.”</i> Shrinking back, the archer looks at the floor. The badger-morph turns back to you. <i>“As for you in particular? Well... I will let you leave this time.”</i>", parse);
 				Text.NL();
 
-				if(Scenes.Maria.fight == 1 || Scenes.Maria.fight == 2)
+				if(maria.flags["Met"] & Maria.Met.Fight)
 					Text.Add("<i>“You beat one of my best scouts. Not something every person can say, hm? You're not part of any law enforcement, are you?”</i> Shaking your head, you let Zenith continue. <i>“Come back later then. I'll have some things to discuss with you. For now, you should head back to wherever you call home.”</i>", parse);
-				else if(Scenes.Maria.fight == 3)
+				else if(maria.flags["Met"] & Maria.Met.FightLost)
 					Text.Add("<i>“Seems there was a bit of a misunderstanding. We bear you no ill will, unless you decide to go against us.”</i> Shaking your head, you let Zenith continue. <i>“Come back later then. I'll have some things to discuss with you. For now, you should head back to wherever you call home.”</i>", parse);
 				else
 					Text.Add("<i>“Since you showed no violence towards myself or my people, you are free to return if you wish.”</i> As if that settles the entire matter, he shoos you from the room and shuts the door behind you and Maria.", parse);
