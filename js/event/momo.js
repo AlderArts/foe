@@ -141,19 +141,19 @@ Scenes.Momo.FindingMomo = function() {
 	                party.location == world.loc.Lake.Shore       ? "lake" : "plains";
 	
 	Text.Clear();
-	Text.Add("As you explore the [area] you come upon a curious sight. There appears to be a woman sitting down on the ground, she’s slumped over and hugging her knees. You can’t make out much detail at this time, but you do note that she seems to bear a reptilian tail and horns. You decide to approach.", parse);
+	Text.Add("As you explore the [area], you come upon a curious sight. There appears to be a woman sitting down on the ground; she’s slumped over and hugging her knees. You can’t make out much detail at this time, but you do note that she seems to bear a reptilian tail and horns. You decide to approach.", parse);
 	Text.NL();
 	Text.Add("The feminine figure stirs as you come closer - evidently having heard you - lifting her head and partially turning to reveal attractively female, human-like features. Two sapphire blue eyes blink as she takes in your form, unconsciously lifting a hand to brush aside a lock of wavy blonde hair that's fallen over her face.", parse);
 	Text.NL();
-	Text.Add("<i>“Oh! Ah - Hello? Are you from around these parts?“</i> she asks politely, a faint but friendly smile on her lips. <i>“I'm terribly sorry to bother you, I've just gotten myself a little lost...“</i> A deep sonorous rumble emanates from her midriff, making her pale cheeks flush pink in embarrassment, a hand going to her belly. <i>“Sorry, I'm hungry,“</i> she adds unnecessarily.", parse);
+	Text.Add("<i>“Oh! Ah - Hello? Are you from around these parts?“</i> she asks politely, a faint but friendly smile on her lips. <i>“I'm terribly sorry to bother you, I've just gotten myself a little lost...“</i> A deep, sonorous rumble emanates from her midriff, making her pale cheeks flush pink in embarrassment, a hand going to her belly. <i>“Sorry, I'm hungry,“</i> she adds unnecessarily.", parse);
 	Text.NL();
 	Text.Add("You do your best to stifle your laughter; if she’s just feigning being harmless, she’s a pretty damn good actor. Curious, you ask her what she’s doing out all alone in a place like this.", parse);
 	Text.NL();
 	Text.Add("Smiling pleasantly, the strange tailed woman rolls forward slightly, pushing herself up off the ground and taking to her feet. Standing about five and three quarters feet tall, she's a pretty tall girl. This close to her, you can see another oddity on her body besides the tail and the horns and the scaly patches - small, dragon-like wings poke through slits in the back of her shirt. They're tiny things, maybe about a handspan in length and width, but perfectly formed. All in all, she looks like some strange melding of human girl and dragon.", parse);
 	Text.NL();
-	Text.Add("If the stranger notices you studying her body, she doesn’t mention it. <i>“I've been out traveling for a while - not heading anywhere in particular, just traveling for the sake of traveling, you know? I set my supplies down a while ago to go hunting - spotted a nice juicy rabbit that I wanted to catch for dinner.”</i>", parse);
+	Text.Add("If the stranger notices you studying her body, she doesn’t mention it. <i>“I've been out traveling for a while - not heading anywhere in particular, just traveling for the sake of traveling, you know? I set my supplies down a while ago to go hunting - spotted a nice, juicy rabbit that I wanted to catch for dinner.”</i>", parse);
 	Text.NL();
-	Text.Add("She sighs and shakes her head, looking embarrassed as she confesses, <i>“But he got away from me, and by the time I gave up, I couldn't remember where I'd come from. So I've been wandering around ever since.”</i> she shrugs haplessly at the admission. <i>“First couple of hours, I was trying to find my things. After that, I was looking for someone who could help me. You're the first person I've seen in the last day.“</i>", parse);
+	Text.Add("She sighs and shakes her head, looking embarrassed as she confesses, <i>“But he got away from me, and by the time I gave up, I couldn't remember where I'd come from. So I've been wandering around ever since.”</i> She shrugs haplessly at the admission. <i>“First couple of hours, I was trying to find my things. After that, I was looking for someone who could help me. You're the first person I've seen in the last day.“</i>", parse);
 	Text.NL();
 	Text.Add("<i>“So... I don't suppose you know some place where a girl can get some food around here, do you? I don't have a lot of money, but I'd be happy to offer my services in exchange,“</i> she adds, looking you over with a hopeful expression.", parse);
 	Text.NL();
@@ -171,7 +171,7 @@ Scenes.Momo.FindingMomo = function() {
 			Text.Clear();
 			Text.Add("Seeing no reason not to aid her, you decide to show her to the Nomads’ camp. While you can’t really help her yourself, you’re pretty sure someone there will be able to.", parse);
 			Text.NL();
-			Text.Add("<i>“That would be perfect! Thank you so much!“</i> she says enthusiastically. <i>“Maybe they need a new camp cook!“</i> she suggests excitedly. <i>“They might even have new recipes for me to learn. Come on, let's - oh!“</i> She stops suddenly, slapping her forehead with her palm as an expression of realisation dawns on her face. <i>“Silly thing, I got so worked up that I went and forgot my manners - my mother would have spanked me for that back home,“</i> she giggles sheepishly. <i>“My name's Monareth Kindling - but my friends call me Momo. What's your name?“</i> she asks, extending a hand for you to shake.", parse);
+			Text.Add("<i>“That would be perfect! Thank you so much!“</i> she says enthusiastically. <i>“Maybe they need a new camp cook!“</i> she suggests excitedly. <i>“They might even have new recipes for me to learn. Come on, let's - oh!“</i> She stops suddenly, slapping her forehead with her palm as an expression of realization dawns on her face. <i>“Silly thing, I got so worked up that I went and forgot my manners - my mother would have spanked me for that back home,“</i> she giggles sheepishly. <i>“My name's Monareth Kindling - but my friends call me Momo. What's your name?“</i> she asks, extending a hand for you to shake.", parse);
 			Text.NL();
 			Text.Add("You take her hand and offer her your name.", parse);
 			Text.NL();
@@ -195,17 +195,17 @@ Scenes.Momo.FindingMomo = function() {
 	options.push({ nameStr : "Leave her",
 		func : function() {
 			Text.Clear();
-			Text.Add("With a shake of your head, you tell her that she can forget it;  she’s probably just trying to lead you into an ambush.", parse);
+			Text.Add("With a shake of your head, you tell her that she can forget it; she’s probably just trying to lead you into an ambush.", parse);
 			Text.NL();
 			Text.Add("<i>“B-but I’m not!”</i> she protests feebly, eyes wide in shock, mouth actually hanging open in her surprise at the accusation.", parse);
 			Text.NL();
-			Text.Add("You cut her off, saying it doesn’t matter; either she’s trying to lull you into a false sense of security, or else she’s an idiot; either way, you don’t want anything to do with her.", parse);
+			Text.Add("You cut her off, saying it doesn’t matter. Either she’s trying to lull you into a false sense of security, or else she’s an idiot; in any case, you don’t want anything to do with her.", parse);
 			Text.NL();
 			Text.Add("The dragon-girl’s face flushes red, brows furrowing in rage, lips pressing together into thin lines, fingers curling into fists that quiver with her emotion. <i>“You... well, you’re a... a big <b>jerk</b>! Fine, who needs you! I’ll find someone else to help me!”</i>", parse);
 			Text.NL();
-			Text.Add("With an indignant “hmph!” noise she sticks her nose up in the air, a poor imitation of a regal mannerism, and spins forcefully on her heel. You narrowly avoid her tail slapping you across the face as it 'coincidentally' whips through the air behind her, whereupon she storms off into the wilderness.", parse);
+			Text.Add("With an indignant “hmph!” noise, she sticks her nose up in the air, a poor imitation of a regal mannerism, and spins forcefully on her heel. You narrowly avoid her tail slapping you across the face as it 'coincidentally' whips through the air behind her, whereupon she storms off into the wilderness.", parse);
 			Text.NL();
-			Text.Add("Shaking your head, you turn around and head back to the nomads’ camp. You run into all kinds of lunatics out on the roads, it looks like.", parse);
+			Text.Add("Shaking your head, you turn around and head back to the Nomads’ camp. You run into all kinds of lunatics out on the roads it looks like.", parse);
 			Text.Flush();
 			
 			momo.flags["Met"] = Momo.Met.Wandering;
@@ -227,7 +227,7 @@ Scenes.Momo.WanderingMomo = function() {
 	};
 	
 	Text.Clear();
-	Text.Add("Off in the distance you spot a familiar blur. Upon closer inspection you realize that it’s that dragon girl you met a while ago. Seems like she’s still lost…", parse);
+	Text.Add("Off in the distance, you spot a familiar blur. Upon closer inspection, you realize that it’s that dragon girl you met a while ago. Seems like she’s still lost…", parse);
 	Text.Flush();
 	
 	//[HelpHer][Leave]
@@ -241,7 +241,7 @@ Scenes.Momo.WanderingMomo = function() {
 			Text.NL();
 			Text.Add("You simply tell her that you’ve decided to help her.", parse);
 			Text.NL();
-			Text.Add("She blinks in surprise; that’s clearly not what she expected to hear from you. <i>“I...um, okay. Thanks, I guess?”</i> Her tone is tentative, as if she’s not really sure what to say. She shakes her head as if clearing her mind of whatever mental fog has befallen it and looks at you, this time with sincere hope in her eyes. <i>“Sorry, that was rude of me - you really want to help? Please, I’d be most grateful!”</i>", parse);
+			Text.Add("She blinks in surprise; that’s clearly not what she expected to hear from you. <i>“I...um, okay. Thanks, I guess?”</i> Her tone is tentative as if she’s not really sure what to say. She shakes her head as if clearing her mind of whatever mental fog has befallen it and looks at you, this time with sincere hope in her eyes. <i>“Sorry, that was rude of me - you really want to help? Please, I’d be most grateful!”</i>", parse);
 			Text.NL();
 			Text.Add("Of course, that’s what you said, wasn’t it?", parse);
 			Text.NL();
@@ -303,13 +303,13 @@ Scenes.Momo.Interact = function() {
 		Text.NL();
 		Text.Add("<i>“What? You don’t believe me?”</i> There’s a playful smile on the dragon-girl’s face as she says this. <i>“I’ll have you know I trained at the Golden Belly chef’s guild, under Master Aleegro himself! I learned patissiere from the esteemed Munchausen, sauceries from the famed Lionel, and vegetable preparation from Madame Gwendolyn.”</i>", parse);
 		Text.NL();
-		Text.Add("You just listen as Momo throws a string of names you’ve never heard of before and boasts proudly of her training as a chef. Eventually she tires of her boasting and regards you with a smile. Before you can so much as utter a single syllable she’s already started again.", parse);
+		Text.Add("You just listen as Momo throws a string of names you’ve never heard of before and boasts proudly of her training as a chef. Eventually, she tires of her boasting and regards you with a smile. Before you can so much as utter a single syllable, she’s already started again.", parse);
 		Text.NL();
 		Text.Add("<i>“But of course, I need to show you what I’m capable of! I mean, any idiot can just run their mouth off; the proof is in the pudding, as we said back at the guild.”</i>", parse);
 		Text.NL();
 		Text.Add("With a cheerful smile, Momo starts to grab her utensils, barely pausing to lay the book she was so desperate to find earlier aside where it won’t get in the way. The first thing she grabs is a large pot, which she fills with water from a nearby bucket. A metal grill on legs is placed over the fire, some extra logs added to stoke it up, and then she places the water-filled pot atop it.", parse);
 		Text.NL();
-		Text.Add("<i>“Always handy to boil the water first,”</i> she quips to you in idle explanation, before snapping her attention back to the task she has at hand.", parse);
+		Text.Add("<i>“Always handy to boil the water first,”</i> she quips to you in idle explanation before snapping her attention back to the task she has at hand.", parse);
 		Text.NL();
 		Text.Add("<i>“Let’s see... pasta, pasta, pasta, where did I put it? I didn’t throw it all out because of weevils, did I...? Ah! There we are! Now, meat, butter, garlic, onions, capsicum, carrot, celery... mushrooms? Eh, why not? Can’t do any harm, can they? Tomatoes... oh, ew!”</i>", parse);
 		Text.NL();
@@ -321,15 +321,15 @@ Scenes.Momo.Interact = function() {
 		Text.NL();
 		Text.Add("<i>“Well, since I come with knives built in...”</i>", parse);
 		Text.NL();
-		Text.Add("She rinses her hands off in another bucket of water and then approaches the vegetables. True to her words, they slice into the vegetables almost effortlessly, nimbly stripping away leaves, peels, stems and other inedible pieces of the food. Pushing her scraps aside, she starts to scratch and claw, peeling off thin, fine strips of everything with each nimble flick of her claws.", parse);
+		Text.Add("She rinses her hands off in another bucket of water and then approaches the vegetables. True to her words, they slice into the vegetables almost effortlessly, nimbly stripping away leaves, peels, stems and other inedible pieces of the food. Pushing her scraps aside, she starts to scratch and claw, peeling off thin, fine strips of everything with each nimble flick of her nails.", parse);
 		Text.NL();
 		Text.Add("<i>“Vegetables ready, now where’d I - whoops!”</i> She casts a guilty glance at a kettle she just knocked over with her tail. <i>“Still do that, after all these years... ooh! There’s my frying pan!”</i>", parse);
 		Text.NL();
-		Text.Add("Cheerfully she snatches up the deep-dished skillet and starts to rub the bottom with butter before she places it over the fire. As the butter starts to bubble, she brings over the cutting board and starts pushing the vegetables inside of it, until the last scraps have tumbled in and are sizzling away.", parse);
+		Text.Add("Cheerfully, she snatches up the deep-dished skillet and starts to rub the bottom with butter before she places it over the fire. As the butter starts to bubble, she brings over the cutting board and starts pushing the vegetables inside of it until the last scraps have tumbled in and are sizzling away.", parse);
 		Text.NL();
-		Text.Add("<i>“There we are... but, why do I feel I’m missing something?”</i> Her fingers flex, as if she is stopping herself from tapping her chin in thought. Her eyes flick across the disorganised mess of her kitchen, then light up. <i>“Garlic!”</i>", parse);
+		Text.Add("<i>“There we are... but why do I feel I’m missing something?”</i> Her fingers flex as if she is stopping herself from tapping her chin in thought. Her eyes flick across the disorganized mess of her kitchen, then light up. <i>“Garlic!”</i>", parse);
 		Text.NL();
-		Text.Add("She snatches what looks like a quarter of a bulb and strips off its peel, then hesitates for a moment. <i>“...Do I need this much? ...Ah, what s the worst that could happen?”</i> With that, she dances nimbly back over to the pan and crushes the garlic, kneading it between her fingers so that juice and pulped vegetable falls into the frying mix.", parse);
+		Text.Add("She snatches what looks like a quarter of a bulb and strips off its peel, then hesitates for a moment. <i>“...Do I need this much? ...Ah, what's the worst that could happen?”</i> With that, she dances nimbly back over to the pan and crushes the garlic, kneading it between her fingers so that juice and pulped vegetable falls into the frying mix.", parse);
 		Text.NL();
 		Text.Add("Humming in satisfaction, she grabs a wooden spoon and starts to stir with smooth, even strokes, nimbly turning and shifting the vegetables so that they cook evenly.", parse);
 		Text.NL();
@@ -339,11 +339,11 @@ Scenes.Momo.Interact = function() {
 		Text.NL();
 		Text.Add("Next go the tomatoes, which she painstakingly skins - biting back a few profanities that you can just make out - before gleefully crushing them into the sauce with her bare hands, eyes wide with childish glee and giggling as they squish between her fingers.", parse);
 		Text.NL();
-		Text.Add("<i>“Okey-dokey! Now we just simmer that and pop the pasta in to boil,”</i> she notes, already tipping the dried pasta into the bubbling pot of water. <i>“Thank you for waiting so patiently, [playername]; my siblings would be bugging me all the time about when dinner will be ready. Just a little longer and it’ll be all ready for you, I promise.”</i>", parse);
+		Text.Add("<i>“Okey-dokey! Now we just simmer that and pop the pasta in to boil,”</i> she notes, already tipping the dried noodles into the bubbling pot of water. <i>“Thank you for waiting so patiently, [playername]; my siblings would be bugging me all the time about when dinner will be ready. Just a little longer and it’ll be all ready for you, I promise.”</i>", parse);
 		Text.NL();
 		Text.Add("True to her words, soon after she is proudly passing you a plate of spaghetti noodles in her quite literally handmade bolognaise sauce, offering you a spork and a knife with an expectant look.", parse);
 		Text.NL();
-		Text.Add("You eye the dish she’s just served you. It looks fine, but you’re not sure you trust her culinary skills just yet… well, they say you only live once, right? Steeling yourself, you stab the pasta and roll up a few strands them pop them into your mouth.", parse);
+		Text.Add("You eye the dish she’s just served you. It looks fine, but you’re not sure you trust her culinary skills just yet… well, they say you only live once, right? Steeling yourself, you stab the pasta and roll up a few strands then pop them into your mouth.", parse);
 		Text.NL();
 		Text.Add("Hmm… hmm! Not bad! You eagerly grab another sporkful and eat it with gusto.", parse);
 		Text.NL();
@@ -367,7 +367,7 @@ Scenes.Momo.Interact = function() {
 			Text.Add("Momo is busy with something near the burnt-down coals of the campfire. As you get closer, you can see that she is sweeping the ashes and coals aside with her bare hands, the tough scales clearly unbothered by the heat. She digs out a camping oven and pulls it aside, opening the lid - whatever's in there smells good. Placing it down to cool, she stands up and nonchalantly dusts off her hands, smiling at you.", parse);
 		}, 1.0, function() { return world.time.hour < 19; });
 		scenes.AddEnc(function() {
-			Text.Add("Momo is leisurely stirring some kind of stew in a pot hung low over the fire. It's evidently merely simmering, as she doesn't hesitate to place the spoon aside and move to join you.", parse);
+			Text.Add("Momo is leisurely stirring some kind of stew in a pot hung low over the fire. It's evidently merely simmering, considering that she doesn't hesitate to place the spoon aside and move to join you.", parse);
 		}, 1.0, function() { return true; });
 		scenes.AddEnc(function() {
 			if(Math.random() < 0.5) {
