@@ -145,7 +145,7 @@ Scenes.Momo.FindingMomo = function() {
 	Text.NL();
 	Text.Add("The feminine figure stirs as you come closer - evidently having heard you - lifting her head and partially turning to reveal attractively female, human-like features. Two sapphire blue eyes blink as she takes in your form, unconsciously lifting a hand to brush aside a lock of wavy blonde hair that's fallen over her face.", parse);
 	Text.NL();
-	Text.Add("<i>“Oh! Ah - Hello? Are you from around these parts?“</i> she asks politely, a faint but friendly smile on her lips. <i>“I'm terribly sorry to bother you, I've just gotten myself a little lost...“</i> A deep, sonorous rumble emanates from her midriff, making her pale cheeks flush pink in embarrassment, a hand going to her belly. <i>“Sorry, I'm hungry,“</i> she adds unnecessarily.", parse);
+	Text.Add("<i>“Oh! Ah - Hello? Are you from around these parts?”</i> she asks politely, a faint but friendly smile on her lips. <i>“I'm terribly sorry to bother you, I've just gotten myself a little lost...”</i> A deep, sonorous rumble emanates from her midriff, making her pale cheeks flush pink in embarrassment, a hand going to her belly. <i>“Sorry, I'm hungry,”</i> she adds unnecessarily.", parse);
 	Text.NL();
 	Text.Add("You do your best to stifle your laughter; if she’s just feigning being harmless, she’s a pretty damn good actor. Curious, you ask her what she’s doing out all alone in a place like this.", parse);
 	Text.NL();
@@ -153,9 +153,9 @@ Scenes.Momo.FindingMomo = function() {
 	Text.NL();
 	Text.Add("If the stranger notices you studying her body, she doesn’t mention it. <i>“I've been out traveling for a while - not heading anywhere in particular, just traveling for the sake of traveling, you know? I set my supplies down a while ago to go hunting - spotted a nice, juicy rabbit that I wanted to catch for dinner.”</i>", parse);
 	Text.NL();
-	Text.Add("She sighs and shakes her head, looking embarrassed as she confesses, <i>“But he got away from me, and by the time I gave up, I couldn't remember where I'd come from. So I've been wandering around ever since.”</i> She shrugs haplessly at the admission. <i>“First couple of hours, I was trying to find my things. After that, I was looking for someone who could help me. You're the first person I've seen in the last day.“</i>", parse);
+	Text.Add("She sighs and shakes her head, looking embarrassed as she confesses, <i>“But he got away from me, and by the time I gave up, I couldn't remember where I'd come from. So I've been wandering around ever since.”</i> She shrugs haplessly at the admission. <i>“First couple of hours, I was trying to find my things. After that, I was looking for someone who could help me. You're the first person I've seen in the last day.”</i>", parse);
 	Text.NL();
-	Text.Add("<i>“So... I don't suppose you know some place where a girl can get some food around here, do you? I don't have a lot of money, but I'd be happy to offer my services in exchange,“</i> she adds, looking you over with a hopeful expression.", parse);
+	Text.Add("<i>“So... I don't suppose you know some place where a girl can get some food around here, do you? I don't have a lot of money, but I'd be happy to offer my services in exchange,”</i> she adds, looking you over with a hopeful expression.", parse);
 	Text.NL();
 	Text.Add("Services?", parse);
 	Text.NL();
@@ -171,11 +171,11 @@ Scenes.Momo.FindingMomo = function() {
 			Text.Clear();
 			Text.Add("Seeing no reason not to aid her, you decide to show her to the Nomads’ camp. While you can’t really help her yourself, you’re pretty sure someone there will be able to.", parse);
 			Text.NL();
-			Text.Add("<i>“That would be perfect! Thank you so much!“</i> she says enthusiastically. <i>“Maybe they need a new camp cook!“</i> she suggests excitedly. <i>“They might even have new recipes for me to learn. Come on, let's - oh!“</i> She stops suddenly, slapping her forehead with her palm as an expression of realization dawns on her face. <i>“Silly thing, I got so worked up that I went and forgot my manners - my mother would have spanked me for that back home,“</i> she giggles sheepishly. <i>“My name's Monareth Kindling - but my friends call me Momo. What's your name?“</i> she asks, extending a hand for you to shake.", parse);
+			Text.Add("<i>“That would be perfect! Thank you so much!”</i> she says enthusiastically. <i>“Maybe they need a new camp cook!”</i> she suggests excitedly. <i>“They might even have new recipes for me to learn. Come on, let's - oh!”</i> She stops suddenly, slapping her forehead with her palm as an expression of realization dawns on her face. <i>“Silly thing, I got so worked up that I went and forgot my manners - my mother would have spanked me for that back home,”</i> she giggles sheepishly. <i>“My name's Monareth Kindling - but my friends call me Momo. What's your name?”</i> she asks, extending a hand for you to shake.", parse);
 			Text.NL();
 			Text.Add("You take her hand and offer her your name.", parse);
 			Text.NL();
-			Text.Add("<i>“Nice to meet you, [playername],“</i> she cheerfully declares, giving your hand a firm squeeze and a few pumps before letting you go. <i>“So, where's this camp you were telling me about?“</i>", parse);
+			Text.Add("<i>“Nice to meet you, [playername],”</i> she cheerfully declares, giving your hand a firm squeeze and a few pumps before letting you go. <i>“So, where's this camp you were telling me about?”</i>", parse);
 			Text.NL();
 			Text.Add("You assure her that it isn’t too far from here; if she’ll follow you, the both of you will be there soon.", parse);
 			Text.NL();
@@ -384,13 +384,13 @@ Scenes.Momo.Interact = function() {
 			Text.Add("Momo is seated by the fire, a great, tattered-looking journal open on her knees as she pours industriously over its contents. As you approach, she closes it and carefully puts it aside before standing up, a welcoming smile on her face.", parse);
 		}, 1.0, function() { return true; });
 		scenes.AddEnc(function() {
-			Text.Add("Momo has a huge, tattered-looking journal draped carefully over her knees and is busily scribbling through it. She glances aside at you, but doesn't stop what she's doing. <i>“Just a moment, please,“</i> she begs you, and you wait patiently as she finishes jotting down whatever she is writing, marks her place, and sets the book aside before standing up.", parse);
+			Text.Add("Momo has a huge, tattered-looking journal draped carefully over her knees and is busily scribbling through it. She glances aside at you, but doesn't stop what she's doing. <i>“Just a moment, please,”</i> she begs you, and you wait patiently as she finishes jotting down whatever she is writing, marks her place, and sets the book aside before standing up.", parse);
 		}, 1.0, function() { return true; });
 		
 		scenes.Get();
 		
 		Text.NL();
-		Text.Add("<i>“Well, hello there, [playername]! What can I do for you?“</i> she asks happily, a bright smile on her face.", parse);
+		Text.Add("<i>“Well, hello there, [playername]! What can I do for you?”</i> she asks happily, a bright smile on her face.", parse);
 		Text.Flush();
 		
 		Scenes.Momo.Prompt();
@@ -422,7 +422,7 @@ Scenes.Momo.Prompt = function() {
 	options.push({ nameStr : "Talk",
 		func : function() {
 			Text.Clear();
-			Text.Add(" <i>“You'd like to talk?“</i> Momo repeats, furrowing her brow curiously at the notion. When you nod your head, she beams in delight.  <i>“Why, certainly! I'd love to talk, [playername] - what's on your mind?“</i>", parse);
+			Text.Add(" <i>“You'd like to talk?”</i> Momo repeats, furrowing her brow curiously at the notion. When you nod your head, she beams in delight.  <i>“Why, certainly! I'd love to talk, [playername] - what's on your mind?”</i>", parse);
 			Text.Flush();
 			
 			Scenes.Momo.TalkPrompt();
@@ -432,7 +432,7 @@ Scenes.Momo.Prompt = function() {
 	options.push({ nameStr : "Cook",
 		func : function() {
 			Text.Clear();
-			Text.Add("<i>“You want me to cook you something? Why, sure! Be happy to!“</i> she smiles proudly. <i>“Anything in particular you wanted to eat? Something nice and tasty, to give you a recharge? Or perhaps you want me to do a little gastronomic magic?“</i> she suggests with a mischievous grin.", parse);
+			Text.Add("<i>“You want me to cook you something? Why, sure! Be happy to!”</i> she smiles proudly. <i>“Anything in particular you wanted to eat? Something nice and tasty, to give you a recharge? Or perhaps you want me to do a little gastronomic magic?”</i> she suggests with a mischievous grin.", parse);
 			Text.Flush();
 			
 			Scenes.Momo.CookPrompt();
@@ -494,7 +494,7 @@ Scenes.Momo.CookPrompt = function() {
 			Text.Add("You[comp] follow her lead, settling down as you watch the [dragonette] move about setting up a small fire to cook. She ensures that the flames won’t spread and promptly ignites it with a small puff of fire. She smiles as the fire gets going and begins cooking, the delicious scent of cooked food wafting around you within instants.", parse);
 			Text.NL();
 			if(world.time.hour >= 6 && world.time.hour < 11)
-				Text.Add("When she’s ready, Momo approaches you with a beaming smile, bearing [partynumber] bowl[s] from which steam is gently wafting, placing them before you[comp] along with serving spoons. <i>“Oatmeal, just like we used to have it back on the farm; plenty of mixed dried fruit, a good dollop of honey, and a little milk to make it extra creamy,”</i> she brags. <i>“Just the sort of thing to give you the energy for a hard day.”</i>", parse);
+				Text.Add("When she’s ready, Momo approaches you with a beaming smile, bearing [partynumber] bowl[s] from which steam is gently wafting, placing them before you[comp] along with serving spoons. <i>“Oatmeal, just like we used to have it back on the farm; plenty of mixed, dried fruit, a good dollop of honey, and a little milk to make it extra creamy,”</i> she brags. <i>“Just the sort of thing to give you the energy for a hard day.”</i>", parse);
 			else if(world.time.hour >= 11 && world.time.hour < 19)
 				Text.Add("Momo returns to your side bearing a massive platter piled with sandwiches of all kinds, which she places where you[comp] can easily reach it. <i>“A little variety makes even the simple things more fun,”</i> she notes happily. <i>“Bon appetit.”</i>", parse);
 			else {
@@ -502,13 +502,13 @@ Scenes.Momo.CookPrompt = function() {
 					parse["comp2"] = Text.Parse(" She wastes no time in doling up a serving for [comp] as well.", {comp: tempParty.length == num ? tempParty[1].name : "your companions"});
 				else
 					parse["comp2"] = "";
-				Text.Add("At last, Momo approaches you[all], carrying a huge iron pot with her. She places a serving bowl and a spoon and fork before you, then starts ladling out the contents; a hearty stew-like meal of fried beans, bacon, mushrooms, jerky strips, onions, carrots, potatoes and other assorted pieces, all bubbling in thick gravy.[comp2] <i>“Dad’s own special potluck recipe,”</i> she notes proudly, a wistful smile on her lips. <i>“Go on, dig in before it gets cold,”</i> she encourages you.", parse);
+				Text.Add("At last, Momo approaches you[all], carrying a huge, iron pot with her. She places a serving bowl and a spoon and fork before you, then starts ladling out the contents: a hearty stew-like meal of fried beans, bacon, mushrooms, jerky strips, onions, carrots, potatoes and other assorted pieces, all bubbling in thick gravy.[comp2] <i>“Dad’s own special potluck recipe,”</i> she notes proudly, a wistful smile on her lips. <i>“Go on, dig in before it gets cold,”</i> she encourages you.", parse);
 			}
 			Text.Add(" You quickly wolf down the offered meal, praising Momo’s culinary skills.", parse);
 			Text.NL();
 			Text.Add("The [dragonette] beams proudly, chest puffed out unconsciously and tail wagging in her delight at your appreciation of her efforts. <i>“Why, thank you kindly, [playername],”</i> she giggles with delight.", parse);
 			Text.NL();
-			Text.Add("By the time you’re done there’s not even a crumb left over. You pat your full belly and sigh. That sure hit the spot, you feel revitalized. With a smile, you thank Momo for the great meal.", parse);
+			Text.Add("By the time you’re done, there’s not even a crumb left over. You pat your full belly and sigh. That sure hit the spot - you feel revitalized. With a smile, you thank Momo for the great meal.", parse);
 			Text.NL();
 			Text.Add("<i>“It was my pleasure, sugar; I love a [guyGal] who can appreciate good cooking,”</i> Momo replies, tail flicking to and fro in her pleasure, a satisfied grin on her face. <i>“Now, don’t worry about the mess, I’ll take care of that myself. But if you’re ever hungry, please, drop on by - my kitchen’s always open, especially for you,”</i> she assures you, already moving to collect her utensils.", parse);
 			Text.Flush();
@@ -554,32 +554,32 @@ Scenes.Momo.TalkPrompt = function() {
 			Text.Clear();
 			var scenes = new EncounterTable();
 			scenes.AddEnc(function() {
-				Text.Add("<i>“The oddest thing I encountered on my travels? Hmm...“</i> Momo trails off, looking thoughtful as she rubs under her chin with one hand.  <i>“Well, a lot of places I went to recently had these great big signs scattered all over the place. They all looked important, but they all said the same thing. In big block-print letters, they all said 'Placeholder'... now, whyever would someone be running around sticking up signs like that? What's supposed to be there? “</i> Momo wonders, giving you a quizzical expression as if hoping you might know the answer.", parse);
+				Text.Add("<i>“The oddest thing I encountered on my travels? Hmm...”</i> Momo trails off, looking thoughtful as she rubs under her chin with one hand.  <i>“Well, a lot of places I went to recently had these great big signs scattered all over the place. They all looked important, but they all said the same thing. In big block-print letters, they all said 'Placeholder'... now, whyever would someone be running around sticking up signs like that? What's supposed to be there? ”</i> Momo wonders, giving you a quizzical expression as if hoping you might know the answer.", parse);
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
-				Text.Add("<i>“Is there something I particularly like to cook?“</i> Momo repeats. Without hesitation, she grins broadly and states,  <i>“Anything that's got peaches in it. Especially if it's got pastry, sugar or cream, mm-hmm,“</i> she licks her lips with a rather inhuman-looking tongue, lost in memories of meals long-eaten.  <i>“My family had this huge peach orchard on the farm, and every year, I used to harvest the biggest, sweetest, juiciest peaches there... oh, I just <b>loved</b> it! I would eat and eat until my belly felt like it was going to burst,“</i> she pats her stomach with both hands as if in emphasis.", parse);
+				Text.Add("<i>“Is there something I particularly like to cook?”</i> Momo repeats. Without hesitation, she grins broadly and states,  <i>“Anything that's got peaches in it - especially if it's a pastry, or has sugar or cream, mm-hmm,”</i> she licks her lips with a rather inhuman-looking tongue, lost in memories of meals long-eaten. <i>“My family had this huge peach orchard on the farm, and every year I used to harvest the biggest, sweetest, juiciest peaches there... oh, I just <b>loved</b> it! I would eat and eat until my belly felt like it was going to burst,”</i> she pats her stomach with both hands as if in emphasis.", parse);
 				Text.NL()
-				Text.Add("<i>“Peaches and cream, peach pie, peach cobbler, peach crumble, peach cake, peach syrup, peach wine...“</i> She suddenly trails off in thought.  <i>“You know, I don't remember if I ever really did tried fried peach blossom salad, or if that was just a dream,“</i> she comments idly.", parse);
+				Text.Add("<i>“Peaches and cream, peach pie, peach cobbler, peach crumble, peach cake, peach syrup, peach wine...”</i> She suddenly trails off in thought. <i>“You know, I don't remember if I ever really did tried fried peach blossom salad, or if that was just a dream,”</i> she comments idly.", parse);
 				Text.NL()
 				Text.Add("You briefly consider interrupting her peach-induced reverie, but you doubt she’s even aware of your presence...", parse);
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
-				Text.Add("<i>“Do I enjoy traveling? Oh, yes, I certainly do!“</i> she gushes, nodding her head for emphasis.  <i>“There's so many fascinating places to go, foods to eat, and people to talk to - that's what I really love about traveling, actually; the food and the people.”</i>", parse);
+				Text.Add("<i>“Do I enjoy traveling? Oh, yes, I certainly do!”</i> she gushes, nodding her head for emphasis. <i>“There's so many fascinating places to go, foods to eat, and people to talk to - that's what I really love about traveling, actually: the food and the people.”</i>", parse);
 				Text.NL()
-				Text.Add("<i>“Oh, some people might be nasty and horrible - like those savages who wanted to chop off my tail and fry it because they thought it'd be some kind of delicacy,“</i> she indignantly curls her tail around her hip for protection at the thought,  <i>“Or those suspicious people who ran me out of town when I asked about their cake recipe - but for the most part, the people I meet are just lovely to talk to. Like you!“</i> she giggles, grinning you a beaming smile.", parse);
+				Text.Add("<i>“Oh, some people might be nasty and horrible - like those savages who wanted to chop off my tail and fry it because they thought it'd be some kind of delicacy,”</i> she indignantly curls her prehensile appendage around her hip for protection at the thought, <i>“Or those suspicious people who ran me out of town when I asked about their cake recipe - but for the most part, the people I meet are just lovely to talk to. Like you!”</i> she giggles, grinning you a beaming smile.", parse);
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
-				Text.Add("<i>“What foods don't I like? That's easy; seafood,“</i> she replies, gagging at the thought. <i>“I mean fish, crabs, shellfish - I hate the smell, I hate the feel, and I certainly can't stand the taste,“</i> she shudders.", parse);
+				Text.Add("<i>“What foods don't I like? That's easy - seafood,”</i> she replies, gagging at the thought. <i>“I mean fish, crabs, shellfish - I hate the smell, I hate the feel, and I certainly can't stand the taste,”</i> she shudders.", parse);
 				Text.NL()
-				Text.Add("<i>“Nothing, absolutely nothing, makes me sicker than actually eating fish - I can prepare it, if I absolutely have to, but the thought of actually eating it...“</i> she chokes and slaps a hand over her mouth, pointedly looking away from you until she manages to suppress her gag reflex.", parse);
+				Text.Add("<i>“Nothing, absolutely nothing, makes me sicker than actually eating fish - I can prepare it, if I absolutely have to, but the thought of actually eating it...”</i> she chokes and slaps a hand over her mouth, pointedly looking away from you until she manages to suppress her gag reflex.", parse);
 				Text.NL()
-				Text.Add("<i>“Yeah, I don't like fish. Other than that...? Probably boiled cabbage. It's not so bad fried up with bacon and onions and sausage and cheese, like dad used to make, but boiled cabbage is just... bleugh. Maybe it's because of the smell...“</i> she wonders, tapping her chin contemplatively.", parse);
+				Text.Add("<i>“Yeah, I don't like fish. Other than that...? Probably boiled cabbage. It's not so bad fried up with bacon, onions, sausage, and cheese, like Dad used to make, but boiled cabbage is just... bleugh. Maybe it's because of the smell...”</i> she wonders, tapping her chin contemplatively.", parse);
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
-				Text.Add("<i>“Do I hunt and forage often? Oh, yes, whenever I have the time!“</i> she replies with a smile.  <i>“Only thing better than home-grown ingredients are things you took from nature. Nothing like running down a deer or snaring yourself a rabbit to add that bit of extra spice to the meat, I think, and wild-picked fruits, herbs, vegetables, they all just taste so much nicer than the market-bought ones. Maybe it's because you know that you got them yourself, I don't know. I always go out and get my own ingredients when I can - used to love slipping away to join my brothers or mother hunting back on the farm.“</i>", parse);
+				Text.Add("<i>“Do I hunt and forage often? Oh, yes, whenever I have the time!”</i> she replies with a smile. <i>“Only thing better than homegrown ingredients are things you took from nature. Nothing like running down a deer or snaring yourself a rabbit to add that bit of extra spice to the meat, I think, and wild picked fruits, herbs, vegetables, they all just taste so much nicer than the market bought ones. Maybe it's because you know that you got them yourself, I don't know. I always go out and get my own ingredients when I can - used to love slipping away to join my brothers or mother hunting back on the farm.”</i>", parse);
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
-				Text.Add("<i>“Meat or veg? Well...“</i> she trails off contemplatively. <i>“I know that veggies are supposed to be better for you, and I certainly know enough recipes to know they can be tasty, but honestly? I'm a carnivore at heart. I <b>love</b> eating meat. I swear, I'd go crazy if you tried to put me on a low-meat diet,“</i> she shakes her head at the thought.", parse);
+				Text.Add("<i>“Meat or veg? Well...”</i> she trails off contemplatively. <i>“I know that veggies are supposed to be better for you, and I certainly know enough recipes to know they can be tasty, but honestly? I'm a carnivore at heart. I <b>love</b> eating meat. I swear, I'd go crazy if you tried to put me on a low-meat diet,”</i> she shakes her head at the thought.", parse);
 			}, 1.0, function() { return true; });
 			
 			scenes.Get();
@@ -596,29 +596,29 @@ Scenes.Momo.TalkPrompt = function() {
 	options.push({ nameStr : "Herself",
 		func : function() {
 			Text.Clear();
-			Text.Add("<i>“You wanna know about little old me?“</i> Momo asks, fingers pressed against her ample chest, an exaggerated look of surprise on her features. <i>“Well, aren't you just the charmer?“</i> she playfully notes. <i>“Okay, it's not really anything exciting, but... I'm Monareth Kindling, or Momo to my friends. I'm twenty-five years old, and I come from the... was it northwestern parts of the country? I don't recall, “</i> she confesses, looking a little sheepish as she admits that.", parse);
+			Text.Add("<i>“You wanna know about little old me?”</i> Momo asks, fingers pressed against her ample chest, an exaggerated look of surprise on her features. <i>“Well, aren't you just the charmer?”</i> she playfully notes. <i>“Okay, it's not really anything exciting, but... I'm Monareth Kindling, or Momo to my friends. I'm twenty-five years old, and I come from the... was it northwestern parts of the country? I don't recall,”</i> she confesses, looking a little sheepish as she admits that.", parse);
 			Text.NL();
-			Text.Add("Shaking the matter off with a glib smile, she continues, <i>“The name is something of a giveaway, but I'm part of the Kindling family, an old farming family from out that way. It's a family business, and business is booming... then again, so's the family,“</i> she giggles. <i>“I'm the third of thirteen kids - I have six sisters and six brothers... or was it seven sister and five brothers?“</i> she muses, looking a little upset that she can't seem to recall the precise details.", parse);
+			Text.Add("Shaking the matter off with a glib smile, she continues, <i>“The name is something of a giveaway, but I'm part of the Kindling family, an old farming family from out that way. It's a family business, and business is booming... then again, so's the family,”</i> she giggles. <i>“I'm the third of thirteen kids - I have six sisters and six brothers... or was it seven sisters and five brothers?”</i> she muses, looking a little upset that she can't seem to recall the precise details.", parse);
 			Text.NL();
 			Text.Add("...She can’t even recall basic details about her own family? Just how airheaded <b>is</b> she? Still you resolve not to say anything and motion for her to keep going. She’s from a farm, so what exactly are they known for? You admit that you aren’t exactly from around <i>here</i> so you’re unfamiliar with the name.", parse);
 			Text.NL();
-			Text.Add("<i>“Well, we're known for a lot of things, really - we harvest livestock, sell wool and milk and meat and eggs, and fruits and vegetables... we do a lot of different kinds of farming,“</i> Momo explains, chest puffed out with pride as she does so. She then looks thoughtful, rubbing her chin. <i>“Of course, I guess what we're most famous for is our dragon blood...“</i> she slowly admits.", parse);
+			Text.Add("<i>“Well, we're known for a lot of things, really - we harvest livestock, sell wool and milk and meat and eggs, and fruits and vegetables... we do a lot of different kinds of farming,”</i> Momo explains, chest puffed out with pride as she does so. She then looks thoughtful, rubbing her chin. <i>“Of course, I guess what we're most famous for is our dragon blood...”</i> she slowly admits.", parse);
 			Text.NL();
 			Text.Add("Dragon blood? You ask her to elaborate on that. Sure, she looks dragony enough, but she means to say it’s an entire farm run by half-dragons like herself?", parse);
 			Text.NL();
-			Text.Add("<i>“Not exactly like me,“</i> she quickly corrects you. <i>“I'm the first of us to be born looking like this in about four generations - it's been a <b>long</b> time since great-great-something-or-other grandma's day,“</i> she notes. <i>“Fact of the matter is, you pretty much never see anyone who looks like me these days - dragons have been gone for a <b>long</b> time,“</i> she confesses.", parse);
+			Text.Add("<i>“Not exactly like me,”</i> she quickly corrects you. <i>“I'm the first of us to be born looking like this in about four generations - it's been a <b>long</b> time since great-great-something-or-other grandma's day,”</i> she notes. <i>“Fact of the matter is, you pretty much never see anyone who looks like me these days - dragons have been gone for a <b>long</b> time,”</i> she confesses.", parse);
 			Text.NL();
 			Text.Add("You nod as you digest this information. Well, then her dragon-bits are all-natural rather than some form of magic or alchemy?", parse);
 			Text.NL();
-			Text.Add("<i>“That's right,“</i> she chirps. <i>“I'm 100% all natural, from the tips of my pretty little horns to the tip of my long curly tail. Scales and skin and hair, claws and teeth and... well, pretty much everything,“</i> she giggles. She then makes a show out of groping her bustline and feeling at her butt, then pouts. <i>“Despite what people keep asking, these are all natural too. It's really not fair, everyone looks at them and thinks I got them out of a bottle. I wouldn't do something like that!“</i> she huffs, stamping her foot indignantly.", parse);
+			Text.Add("<i>“That's right,”</i> she chirps. <i>“I'm 100% all natural, from the tips of my pretty little horns to the tip of my long curly tail. Scales and skin and hair, claws and teeth and... well, pretty much everything,”</i> she giggles. She then makes a show out of groping her bustline and feeling at her butt, then pouts. <i>“Despite what people keep asking, these are all natural too. It's really not fair, everyone looks at them and thinks I got them out of a bottle. I wouldn't do something like that!”</i> she huffs, stamping her foot indignantly.", parse);
 			Text.NL();
-			Text.Add("<i>“...Actually, I couldn't get them out of a bottle even if I wanted to,“</i> she notes absently, looking thoughtful. <i>“It's the oddest thing, but transformatives? They basically don't work on me. Like, at all. It's really weird - none of the rest of my family are like that. Poor Uncle Ernie,“</i> she notes.", parse);
+			Text.Add("<i>“...Actually, I couldn't get them out of a bottle even if I wanted to,”</i> she notes absently, looking thoughtful. <i>“It's the oddest thing, but transformatives? They basically don't work on me. Like, at all. It's really weird - none of the rest of my family are like that. Poor Uncle Ernie,”</i> she notes.", parse);
 			Text.NL();
-			Text.Add("Shaking her head, she gives you a winning smile. <i>“So, anyway, yeah! I'm completely all-natural, the one and only Momo - accept no substitutes!“</i> She giggles at her own cheesiness.", parse);
+			Text.Add("Shaking her head, she gives you a winning smile. <i>“So, anyway, yeah! I'm completely all-natural, the one and only Momo - accept no substitutes!”</i> She giggles at her own cheesiness.", parse);
 			Text.NL();
-			Text.Add("<i>“Anywho, I left the farm when I was... ooh, about eighteen, nineteen years old? I went off to the big city and got into one of the chefs’ guilds there. Got my official member’s license and everything!“</i> she brags gleefully. <i>“Ever since then, I've been on a journey, looking for new and unusual recipes and ingredients, traveling all over to hone my skills and be the best chef I can be!“</i>", parse);
+			Text.Add("<i>“Anywho, I left the farm when I was... ooh, about eighteen, nineteen years old? I went off to the big city and got into one of the chefs’ guilds there. Got my official member’s license and everything!”</i> she brags gleefully. <i>“Ever since then, I've been on a journey, looking for new and unusual recipes and ingredients, traveling all over to hone my skills and be the best chef I can be!”</i>", parse);
 			Text.NL();
-			Text.Add("<i>“Well, that's all I can think of when it comes to talking about little old me,“</i> Momo giggles. <i>“Drop on by anytime, [playername].“</i>", parse);
+			Text.Add("<i>“Well, that's all I can think of when it comes to talking about little old me,”</i> Momo giggles. <i>“Drop on by anytime, [playername].”</i>", parse);
 			Text.Flush();
 			
 			world.TimeStep({minute: 30});
