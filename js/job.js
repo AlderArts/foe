@@ -290,8 +290,8 @@ Jobs["Rogue"].Long = function(entity) {
 }
 Jobs["Rogue"].Unlocked = function(entity) {
 	if(entity == terry) return true;
-	return (cale.flags["Rogue"]  == Cale.Rogue.Taught) ||
-	       (terry.flags["Rogue"] == Terry.Rogue.Taught);
+	return (cale.flags["Rogue"]  >= Cale.Rogue.Taught) ||
+	       (terry.flags["Rogue"] >= Terry.Rogue.Taught);
 }
 Jobs["Rogue"].preqs.push({job : Jobs["Fighter"], lvl : 3});
 Jobs["Rogue"].abilities.AddAbility(Abilities.Physical.DirtyBlow);
@@ -312,7 +312,9 @@ Jobs["Ranger"].Long = function(entity) {
 	return Text.Parse("As a ranger, [name] [is] a skilled hunter, well versed in ways to ensnare and distract [hisher] prey.", parse);
 }
 Jobs["Ranger"].Unlocked = function(entity) {
-	return (estevan.flags["Ranger"] >= Estevan.Ranger.Taught); //TODO Maria?
+	if(estevan.flags["Ranger"] >= Estevan.Ranger.Taught) return true;
+	if(maria.flags["Ranger"]   >= Maria.Ranger.Taught) return true;
+	return false;
 }
 Jobs["Ranger"].preqs.push({job : Jobs["Fighter"], lvl : 3});
 Jobs["Ranger"].abilities.AddAbility(Abilities.Physical.Ensnare);

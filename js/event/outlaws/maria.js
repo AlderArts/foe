@@ -41,6 +41,7 @@ function Maria(storage) {
 
 	this.flags["Met"] = 0; //Initial meeting. Bitmask
 	this.flags["DD"] = 0; //Dead drops. Bitmask
+	this.flags["Ranger"] = 0;
 
 	this.DDtimer = new Time();
 
@@ -54,6 +55,11 @@ Maria.Met = {
 	Fight         : 2,
 	FightSexed    : 4,
 	FightLost     : 8
+};
+
+Maria.Ranger = {
+	NotTaught : 0,
+	Taught    : 1
 };
 
 Maria.DeadDrops = {
@@ -240,10 +246,6 @@ Scenes.Maria.CampInteract = function() {
 			Text.NL();
 			Text.Add(Text.BoldColor("DEBUG: relation: " + maria.relation.Get()));
 			Text.NL();
-			Text.Add(Text.BoldColor("DEBUG: subDom: " + maria.subDom.Get()));
-			Text.NL();
-			Text.Add(Text.BoldColor("DEBUG: slut: " + maria.slut.Get()));
-			Text.NL();
 		}
 		Text.Flush();
 
@@ -308,8 +310,147 @@ Scenes.Maria.CampPrompt = function() {
 			}, enabled : maria.DDtimer.Expired()
 		});
 	}
+	
+	options.push({nameStr : "Ranger",
+		tooltip : Text.Parse("Perhaps she could teach you something about forestry?", parse),
+		enabled : true,
+		func : function() {
+			Scenes.Maria.RangerTraining();
+		}
+	});
 
 	Gui.SetButtonsFromList(options, true);
+}
+
+Scenes.Maria.RangerTraining = function() {
+	var parse = {
+		
+	};
+	parse["comp"] = party.Num() == 2 ? party.Get(1).name : "your companions";
+	
+	var unlocked = Jobs.Ranger.Unlocked();
+	var student = null;
+	for(var i = 0; i < party.Num(); i++) {
+		var c = party.Get(i);
+		if(c.jobs["Fighter"].level >= 3) {
+			student = c;
+			break;
+		}
+	}
+	
+	Text.Clear();
+	if(unlocked) {
+		Text.Add("Maria frowns before looking you ", parse);
+		if(party.Num() > 1) {
+			Text.Add("and [comp] ", parse);
+		}
+		Text.Add("up and down. <i>“It’s true that you still have much to learn before you’re on my level, but there’s not much more I can impart to you by teaching. I can go through the basics with you again if you really wanted to, but I’ve got the lingering suspicion that it would be a waste of our time. There’s really only one way to improve from here on out, and that’s through experience, actually being out there and putting your knowledge to practice - knowing this, do you still want a rundown of the basics?”</i>", parse);
+		Text.Flush();
+		
+		var options = [];
+		//[Yes][No]
+		options.push({nameStr : "Yes",
+			tooltip : Text.Parse("Even experts must go over the fundamentals sometime.", parse),
+			enabled : true,
+			func : function() {
+				Text.Clear();
+				Text.Add("You let Maria know that you’d like to have a little refresher course anyways. There’s no sense in getting overconfident - that’s how it gets you in the end, isn’t it? Overconfidence and thinking that you’re above the little basic things. Wasn’t there a saying about this? For want of a nail, or something?", parse);
+				Text.NL();
+				Text.Add("Maria raises an eyebrow at this, but thinks for a moment and shrugs. <i>“Guess I could use a bit of a break from the grind for the next hour or two. Let’s see what we can do about you, then…”</i>", parse);
+				Text.NL();
+				Text.Add("She leads you ", parse);
+				if(party.Num() > 1) {
+					Text.Add("and [comp] ", parse);
+				}
+				Text.Add("to a quiet spot near the palisade, and begins a quick refresher on wilderness survival, trap construction out of tools at hand, and keeping one’s equipment in good working order with easily harvestable resources from the forest.", parse);
+				Text.NL();
+				Text.Add("<i>“A lot of this knowledge is very specific to the land at hand,”</i> she admits. <i>“Stick me in the desert, and while I wouldn’t be completely helpless, I’d also be lost on a lot of things. On the other hand, the desert caravaners wouldn’t have an easy time walking amongst the trees, either.”</i>", parse);
+				Text.NL();
+				Text.Add("End of the day, though, a bow is a bow, right?", parse);
+				Text.NL();
+				Text.Add("<i>“True, but I’d imagine that a bowstring wouldn’t last as long near the coast or in the desert as it does here. As I said, it’s the lay of the land. Now… I think we’re just about done here; I’m running a bit short on time. Shall we wrap this up?”</i>", parse);
+				Text.NL();
+				Text.Add("All right, then. Maria quickly cleans up the area, then gives you a wave and small smile before vanishing into the camp, leaving you to ponder your next move.", parse);
+				Text.Flush();
+				
+				maria.relation.IncreaseStat(100, 3);
+				world.TimeStep({hour: 2});
+				
+				if(maria.flags["Ranger"] < Maria.Ranger.Taught)
+					maria.flags["Ranger"] = Maria.Ranger.Taught;
+
+				Gui.NextPrompt();
+			}
+		});
+		options.push({nameStr : "No",
+			tooltip : Text.Parse("Let’s not waste anyone’s time here.", parse),
+			enabled : true,
+			func : function() {
+				Text.Clear();
+				Text.Add("You tell Maria that you’ll be fine, in that case. No point in going over ground well-trodden.", parse);
+				Text.NL();
+				Text.Add("She nods. <i>“Well then. Anything else you want to bring up?”</i>", parse);
+				Text.Flush();
+				
+				Scenes.Maria.CampPrompt();
+			}
+		});
+		Gui.SetButtonsFromList(options, false, null);
+	}
+	else if(student) {
+		parse["student"] = student.nameDesc();
+		parse["Student"] = student.NameDesc();
+		parse = student.ParserPronouns(parse);
+		parse = Text.ParserPlural(parse, student.plural());
+		
+		Text.Add("Maria looks [student] up and down, then a small smile plays on her lips. <i>“I think I can work with this. You’re not exactly star pupil material, but I won’t be wasting my time. Come along, then - I’ll see how much I can teach in the few hours I’ve got to spare.”</i>", parse);
+		Text.NL();
+		Text.Add("She takes [student] aside to a quiet spot by the palisade, then starts the lesson by emptying out her pockets and pouches, carefully explaining the use of each implement and its use. This is followed by some general advice in wilderness survival, especially out in the forest that surrounds the outlaws’ camp, after which [student] [isAre] quizzed on what [heshe] [hasHave] learned. Maria isn’t satisfied the first few times, but eventually [student] get[notS] it - or at least, well enough to placate her.", parse);
+		Text.NL();
+		Text.Add("This is followed up by a hands-on session of some simple campcraft - constructing shelters and other simple structures out of materials easily at hand in the forest. Traps, too - small ones for animals for the pot, and for people if need be.", parse);
+		Text.NL();
+		Text.Add("Finally, she finishes up with a quick lesson on tracking animals and people alike, and moving silently in the underbrush, painstakingly showing [student] how to push aside thorns and vines with without making noise. She goes through the motions herself, then shepherds [student] through them until she makes a whistling noise through her teeth.", parse);
+		Text.NL();
+		Text.Add("<i>“I’m still not completely satisfied, but it’ll do for you, I guess. My time’s running out, and I’ve got to see to the evening roll calls, make sure the lads are ready for patrol. Keep on practicing - you’ve got the fundamentals, but they all need a coat of polish and a lot more shine. Okay?”</i>", parse);
+		Text.NL();
+		Text.Add("[Student] assure[notS] Maria that [heshe]’ll keep at it, and she gives [himher] a nod before stepping away in the direction of the gates.", parse);
+		Text.NL();
+		Text.Add("<b>Ranger job unlocked!</b>", parse);
+		Text.Flush();
+		
+		world.TimeStep({hour: 5});
+		
+		maria.relation.IncreaseStat(100, 7);
+		
+		if(maria.flags["Ranger"] < Maria.Ranger.Taught)
+			maria.flags["Ranger"] = Maria.Ranger.Taught;
+		
+		Gui.NextPrompt();
+	}
+	else { //requirements not met
+		Text.Add("Maria looks contemplative as she turns her gaze to you", parse);
+		if(party.Num() > 1) {
+			Text.Add(", then to [comp]", parse);
+		}
+		Text.Add(". She’s clearly thinking hard, then at last clears her throat and shakes her head.", parse);
+		Text.NL();
+		Text.Add("<i>“Sorry, can’t be done. I could try to explain it to you, but I get the feeling that it’d just be lost on you and we’d both be wasting our time.”</i>", parse);
+		Text.NL();
+		Text.Add("Harsh.", parse);
+		Text.NL();
+		Text.Add("<i>“I don’t have the time to coddle anyone with sweet words here; sometimes, it’s the only way to get things across without people cleverly reinterpreting what you have to say to hear what they want. I guess you can be taught, sure, but you need to go out there and get some experience of this world before coming back to me, okay? It’s not that I don’t want to, it’s that I can’t.”</i>", parse);
+		Text.NL();
+		Text.Add("Very well. You’ll be back.", parse);
+		Text.NL();
+		Text.Add("Maria folds her arms under her breasts. <i>“I expect you to be. Now, is there anything else I can help you with?”</i>", parse);
+		Text.NL();
+		Text.Add("<b>(You need Fighter level 3 on at least one of your current party members to be able to unlock the Ranger job)</b>", parse);
+		Text.Flush();
+		
+		world.TimeStep({minute: 15});
+		
+		Scenes.Maria.CampPrompt();
+	}
 }
 
 Scenes.Maria.TalkPrompt = function() {
@@ -383,6 +524,10 @@ Scenes.Maria.TalkPrompt = function() {
 			}, 1.0, function() { return true; });
 			scenes.Get();
 			Text.Flush();
+			
+			world.TimeStep({minute: 15});
+			maria.relation.IncreaseStat(100, 1);
+			Scenes.Maria.TalkPrompt();
 		}
 	});
 	options.push({nameStr : "Forest",
@@ -422,6 +567,10 @@ Scenes.Maria.TalkPrompt = function() {
 				Text.Add("She shrugs. <i>“Suits me.”</i>", parse);
 			}
 			Text.Flush();
+			
+			world.TimeStep({minute: 15});
+			maria.relation.IncreaseStat(100, 1);
+			Scenes.Maria.TalkPrompt();
 		}
 	});
 	options.push({nameStr : "Outlaws",
@@ -433,7 +582,7 @@ Scenes.Maria.TalkPrompt = function() {
 			var scenes = new EncounterTable();
 			
 			scenes.AddEnc(function() {
-				Text.Add("<i>“So- so. We just got another handful of people filtering in from the plains. Poor bastards didn’t see how they were going to pay the land taxes next year.”</i>", parse);
+				Text.Add("<i>“So-so. We just got another handful of people filtering in from the plains. Poor bastards didn’t see how they were going to pay the land taxes next year.”</i>", parse);
 				Text.NL();
 				Text.Add("Why, were the rates that bad?", parse);
 				Text.NL();
@@ -540,6 +689,10 @@ Scenes.Maria.TalkPrompt = function() {
 			Text.NL();
 			Text.Add("<i>“And that’s about that. News about these parts isn’t often very good, I’m afraid. Is there anything else you wanted to bring up?”</i>", parse);
 			Text.Flush();
+			
+			world.TimeStep({minute: 15});
+			maria.relation.IncreaseStat(100, 1);
+			Scenes.Maria.TalkPrompt();
 		}
 	});
 	options.push({nameStr : "Zenith",
@@ -557,6 +710,10 @@ Scenes.Maria.TalkPrompt = function() {
 			Text.NL();
 			Text.Add("<i>“Like I said, I respect Zenith enough to not talk about him when he’s not here, so draw what conclusions you will. Let’s talk about something else, shall we?”</i>", parse);
 			Text.Flush();
+			
+			world.TimeStep({minute: 15});
+			maria.relation.IncreaseStat(100, 1);
+			Scenes.Maria.TalkPrompt();
 		}
 	});
 	if(outlaws.flags["Met"] >= Outlaws.Met.Bouqet) {
@@ -575,6 +732,10 @@ Scenes.Maria.TalkPrompt = function() {
 				Text.NL();
 				Text.Add("<i>“Thank you. Now, is there anything you’d like to bring up? To take our minds off this?”</i>", parse);
 				Text.Flush();
+				
+				world.TimeStep({minute: 15});
+				maria.relation.IncreaseStat(100, 1);
+				Scenes.Maria.TalkPrompt();
 			}
 		});
 	}
