@@ -29,6 +29,7 @@ function Maria(storage) {
 	this.SetExpToLevel();
 
 	this.body.DefFemale();
+	this.FirstVag().virgin = false;
 	this.FirstBreastRow().size.base = 12.5;
 	this.Butt().buttSize.base = 5;
 	this.SetSkinColor(Color.brown);
@@ -73,7 +74,6 @@ world.loc.Forest.Outskirts.enc.AddEnc(
 
 
 Maria.prototype.FromStorage = function(storage) {
-	this.FirstVag().virgin   = parseInt(storage.virgin) == 1;
 	this.Butt().virgin       = parseInt(storage.avirgin) == 1;
 
 	this.LoadPersonalityStats(storage);
@@ -86,7 +86,6 @@ Maria.prototype.FromStorage = function(storage) {
 
 Maria.prototype.ToStorage = function() {
 	var storage = {
-		virgin  : this.FirstVag().virgin ? 1 : 0,
 		avirgin : this.Butt().virgin ? 1 : 0
 	};
 
