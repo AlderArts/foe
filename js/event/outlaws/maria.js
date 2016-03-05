@@ -425,11 +425,11 @@ Scenes.Maria.ForestConfrontWin = function() {
 					Text.Add("Pulling your digits from the archer's wanton hole, you notice her lift her legs, begging for more of the delicious friction. Tutting softly, you circle a finger around her clit. It pokes from its hood, red and engorged. She begins bucking underneath you, but you pull away before she can cum. Pulling your [cock] from her mouth, you turn around.", parse);
 					Text.NL();					
 					
+					Text.Add("As juiced up as she is, you have no problem pounding straight into her core. Thrashing away at her slick pussy, you lose yourself in a haze of lust and feel yourself getting closer to the edge you had been skirting after her earlier oral assault. Her walls ripple around you convulsively as she cums under the assault. Moments later, you glaze her insides with your liquid lust.", parse);
+					
 					Sex.Vaginal(player, maria);
 					maria.FuckVag(maria.FirstVag(), player.FirstCock(), 3);
-					player.Fuck(player.FirstCock(), 3);					
-					
-					Text.Add("As juiced up as she is, you have no problem pounding straight into her core. Thrashing away at her slick pussy, you lose yourself in a haze of lust and feel yourself getting closer to the edge you had been skirting after her earlier oral assault. Her walls ripple around you convulsively as she cums under the assault. Moments later, you glaze her insides with your liquid lust.", parse);
+					player.Fuck(player.FirstCock(), 3);
 
 					var cum = player.OrgasmCum();
 
