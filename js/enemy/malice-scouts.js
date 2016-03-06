@@ -5,6 +5,7 @@ Tier 1 Malice scouts and outriders
 Scenes.MaliceScouts = {};
 Scenes.MaliceScouts.Catboy = {};
 Scenes.MaliceScouts.Mare = {};
+Scenes.MaliceScouts.Goat = {};
 
 /*
  *
@@ -317,6 +318,167 @@ CentaurMare.prototype.Act = function(encounter, activeChar) {
 }
 
 
+
+/*
+ *
+ * Goat Alchemist, lvl 9-13
+ *
+ */
+function GoatAlchemist(levelbonus) {
+	Entity.call(this);
+	this.ID = "goatalchemist";
+
+	this.avatar.combat     = Images.old_goat;
+	this.name              = "Goat alchemist";
+	this.monsterName       = "the goat alchemist";
+	this.MonsterName       = "The goat alchemist";
+	this.body.DefMale();
+	//TODO
+	this.FirstCock().thickness.base = 4;
+	this.FirstCock().length.base = 19;
+	this.Balls().size.base = 2;
+	//TODO
+	this.maxHp.base        = 500;
+	this.maxSp.base        = 800;
+	this.maxLust.base      = 50;
+	// Main stats
+	this.strength.base     = 20;
+	this.stamina.base      = 25;
+	this.dexterity.base    = 30;
+	this.intelligence.base = 50;
+	this.spirit.base       = 45;
+	this.libido.base       = 20;
+	this.charisma.base     = 15;
+
+	//TODO
+	this.elementDef.dmg[Element.mWater]  = -0.5;
+
+	var level = 0;
+
+	var scenes = new EncounterTable();
+	scenes.AddEnc(function() {
+		level = 9;
+	}, 4.0, function() { return true; });
+	scenes.AddEnc(function() {
+		level = 10;
+	}, 5.0, function() { return true; });
+	scenes.AddEnc(function() {
+		level = 11;
+	}, 3.0, function() { return true; });
+	scenes.AddEnc(function() {
+		level = 12;
+	}, 2.0, function() { return true; });
+	scenes.AddEnc(function() {
+		level = 13;
+	}, 1.0, function() { return true; });
+	scenes.Get();
+
+	this.level             = level + (levelbonus || 0);
+	this.sexlevel          = 0;
+
+	this.combatExp         = this.level * 2;
+	this.coinDrop          = this.level * 5;
+
+	this.body.SetRace(Race.Goat);
+
+	this.body.SetBodyColor(Color.white);
+
+	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Goat, Color.white);
+
+	this.body.SetEyeColor(Color.gray);
+	//TODO
+	this.weaponSlot   = Items.Weapons.MageStaff;
+	this.topArmorSlot = Items.Armor.MageRobes;
+
+	this.Equip();
+
+	// Set hp and mana to full
+	this.SetLevelBonus();
+	this.RestFull();
+}
+GoatAlchemist.prototype = new Entity();
+GoatAlchemist.prototype.constructor = GoatAlchemist;
+
+GoatAlchemist.prototype.DropTable = function() {
+	var drops = [];
+	//TODO
+	if(Math.random() < 0.1)  drops.push({ it: Items.Felinix });
+	if(Math.random() < 0.02) drops.push({ it: Items.Tigris });
+	if(Math.random() < 0.5)  drops.push({ it: Items.Whiskers });
+	if(Math.random() < 0.5)  drops.push({ it: Items.HairBall });
+	if(Math.random() < 0.5)  drops.push({ it: Items.CatClaw });
+
+	if(Math.random() < 0.01) drops.push({ it: Items.Bovia });
+	if(Math.random() < 0.1)  drops.push({ it: Items.GoatMilk });
+	if(Math.random() < 0.1)  drops.push({ it: Items.SheepMilk });
+	if(Math.random() < 0.1)  drops.push({ it: Items.CowMilk });
+	if(Math.random() < 0.05) drops.push({ it: Items.LizardEgg });
+	if(Math.random() < 0.05) drops.push({ it: Items.MFluff });
+
+	if(Math.random() < 0.3)  drops.push({ it: Items.FreshGrass });
+	if(Math.random() < 0.3)  drops.push({ it: Items.SpringWater });
+	if(Math.random() < 0.1)  drops.push({ it: Items.Foxglove });
+	if(Math.random() < 0.1)  drops.push({ it: Items.TreeBark });
+	if(Math.random() < 0.1)  drops.push({ it: Items.RawHoney });
+
+	if(Math.random() < 0.05) drops.push({ it: Items.Wolfsbane });
+	if(Math.random() < 0.05) drops.push({ it: Items.Ramshorn });
+
+	if(Math.random() < 0.01) drops.push({ it: Items.BlackGem });
+	if(Math.random() < 0.01) drops.push({ it: Items.CorruptPlant });
+	if(Math.random() < 0.01) drops.push({ it: Items.CorruptSeed });
+	if(Math.random() < 0.01) drops.push({ it: Items.DemonSeed });
+
+	return drops;
+}
+
+//TODO
+GoatAlchemist.prototype.Act = function(encounter, activeChar) {
+	// TODO: Very TEMP
+	Text.Add(this.name + " acts! Harrumph!");
+	Text.NL();
+	Text.Flush();
+
+	// Pick a random target
+	var targets = this.GetPartyTarget(encounter, activeChar);
+	var t = this.GetSingleTarget(encounter, activeChar);
+
+	this.turnCounter = this.turnCounter || 0;
+
+	var first = (this.turnCounter == 0);
+	this.turnCounter++;
+
+	if(first) {
+		Items.Combat.DecoyStick.combat.Use(encounter, this);
+		return;
+	}
+
+	var that = this;
+
+	var scenes = new EncounterTable();
+	scenes.AddEnc(function() {
+		Abilities.Attack.Use(encounter, that, t);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Items.Combat.DecoyStick.combat.Use(encounter, that);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Items.Combat.HPotion.combat.Use(encounter, that);
+	}, 1.0, function() { return that.HPLevel() < 0.5; });
+	scenes.AddEnc(function() {
+		Abilities.Black.Bolt.Use(encounter, that, t);
+	}, 3.0, function() { return Abilities.Black.Bolt.enabledCondition(encounter, that); });
+	scenes.AddEnc(function() {
+		Abilities.Black.Eruption.Use(encounter, that, targets);
+	}, 4.0, function() { return Abilities.Black.Eruption.enabledCondition(encounter, that); });
+	scenes.AddEnc(function() {
+		Abilities.Black.ThunderStorm.Use(encounter, that, targets);
+	}, 3.0, function() { return Abilities.Black.ThunderStorm.enabledCondition(encounter, that); });
+	scenes.Get();
+}
+
+
+
 // CATBOY SCENES
 Scenes.MaliceScouts.Catboy.LoneEncounter = function(levelbonus) {
 	var enemy    = new Party();
@@ -499,7 +661,7 @@ Scenes.MaliceScouts.Catboy.PityFuck = function(enc, win) {
 		Text.NL();
 		Text.Add("That’s better, although still pretty far off the mark. What else has he got to prove how much of a pathetic wimp he is?", parse);
 		Text.NL();
-		Text.Add("<i>“Hmm… let me think... “</i> He gasps all of a sudden. <i>“I know! I know! I secretly collect life-size cushions with erotic art on them! Things like nude catgirls in seductive and suggestive poses! I’ve given them all names… don’t tell the alchemist, though. He’d be mad.”</i>", parse);
+		Text.Add("<i>“Hmm… let me think...“</i> He gasps all of a sudden. <i>“I know! I know! I secretly collect life-size cushions with erotic art on them! Things like nude catgirls in seductive and suggestive poses! I’ve given them all names… don’t tell the alchemist, though. He’d be mad.”</i>", parse);
 		Text.NL();
 		Text.Add("All right, that <i>is</i> pretty pathetic - just listening to that was enough to make your stomach turn and a creepy feeling crawl all over your body. He’ll have to do just a bit better, though…", parse);
 		Text.NL();
@@ -1141,7 +1303,7 @@ Scenes.MaliceScouts.Catboy.GetMilked = function(enc) {
 	Text.NL();
 	Text.Add("Oh. The exertion of the battle <i>has</i> squished your [breasts] about a bit, causing them to leak into your [armor], creating two damp blotches, wet and still spreading. A gentle, sweet smell rises from your chest, and it’s this that the adorable little kitty cat has traced back to its origins, his small, pink tongue running over his lips as the full realization of what he’s seeing hits home.", parse);
 	Text.NL();
-	Text.Add("<i>“Whoa, you’ve got milk!”</i> The catboy mage’s eyes practically bulge at the sight of your leaky, milk-laden [breasts], and he makes a pathetic little sound in the back of his throat. <i>“Hnnnn… I’ve got to have a sip… but then, I’m supposed to be out here learning to be a man... “</i>", parse);
+	Text.Add("<i>“Whoa, you’ve got milk!”</i> The catboy mage’s eyes practically bulge at the sight of your leaky, milk-laden [breasts], and he makes a pathetic little sound in the back of his throat. <i>“Hnnnn… I’ve got to have a sip… but then, I’m supposed to be out here learning to be a man...“</i>", parse);
 	Text.NL();
 	Text.Add("You’d have shaken your head in disbelief at the sight of a full-grown man literally drooling over the thought of breast milk, but calling this guy a man is probably stretching it.", parse);
 	Text.NL();
@@ -1944,3 +2106,732 @@ Scenes.MaliceScouts.Mare.LossFacesit = function(enc) {
 
 	Gui.NextPrompt();
 }
+
+
+
+// GOAT ALCHEMIST SCENES
+
+
+Scenes.MaliceScouts.Goat.LoneEncounter = function(levelbonus) {
+	var enemy    = new Party();
+	var goat     = new GoatAlchemist(levelbonus);
+	enemy.AddMember(goat);
+	var enc      = new Encounter(enemy);
+	enc.goat     = goat;
+
+	enc.onEncounter = function() {
+		var parse = {
+
+		};
+		parse = player.ParserTags(parse);
+
+		Text.Clear();
+		Text.Add("The Highlands aren’t all rolling hills and rocky mountains. Dips, valleys and ravines are all part of the landscape, gouged out of the rock by wind, snow and ice, and although rarer than the former they’re no less treacherous in nature. It’s in one of these that you find yourself, treading through the thin scrub and gravelly soil that lines its bottom. Hard going, perhaps, but much less so than attempting to go over the mountains proper.", parse);
+		Text.NL();
+		Text.Add("<i>“Bombs away!”</i>", parse);
+		Text.NL();
+		Text.Add("You have barely enough time to look up and see two dark, spherical objects fall from the top of the ravine towards you before your instincts kick in and take control of your movement, sending you into a dive for the nearest boulder", parse);
+		if(party.Num() > 1) {
+			parse["comp"] = party.Num() == 2 ? party.Get(1).name : "your companions";
+			Text.Add(" with [comp] following suit", parse);
+		}
+		Text.NL();
+		Text.Add(". There’s a split second of dreadful silence, followed by a deafening roar as an eruption of heat and flame spreads outwards from where you’d been standing mere moments ago. Even from behind your cover, you feel the wave of scorching air wash outwards and over your [skin] as it passes, and only after you’re sure it’s passed do you carefully emerge, [weapon] at the ready, prepared to face your ambusher.", parse);
+		Text.NL();
+		Text.Add("<i>“I really shouldn’t give them any warning,”</i> a voice bleats from the ravine walls above you. <i>“But it’s so much <b>fun</b> watching them scurry and run like that - gives one  whole sense of satisfaction, if you know what I mean?”</i>", parse);
+		Text.NL();
+		Text.Add("No, actually, you don’t know what the bastard means. Looking up, you see a goat-morph perched precariously on the rocky ravine wall, completely unperturbed by how high up he is and probably very insecure footing. Two large ram’s horns curve back from his disheveled-looking hair and mane, his teeth look like they’ve got a mouthful of bad breath to accompany them, and he’s clad in what looks like a white smock - or at least, the tattered remains of what used to be one, damaged far beyond any reasonable repair by repeated spills, reactions and explosions.", parse);
+		Text.NL();
+		Text.Add("Most important of all, though, is the heavy belt he wears at his waist. Flasks and vials of all sorts have been stuffed in every conceivable nook and cranny and then some, along with a small bag stuffed with more bombs of the like which had been spent spiraling down at you. You can only wonder just what the vials hold - some of the liquids held within look very much disconcerting - but the most eye-catching bits are a pair of rod-like metallic implements that look vaguely like wands, but you can’t be certain that they’re so…", parse);
+		Text.NL();
+		Text.Add("Seeing you studying him, he gives you a cheery little wave and smile that’s anything but friendly. <i>“Hello there! I don’t suppose I could persuade you to take part in a couple of my experiments? You, of course, <b>won’t</b> be compensated for your time - well, not unless you’re into that kind of stuff, I guess. Yes? No? No? Oh well, guess I’ll just have to persuade you to go along, then. It’s for the sake of… well, discovery! Discovery, inquiry, and learning! What could be better than measuring the average circumference at which someone’s ass can gape?”</i>", parse);
+		Text.NL();
+		Text.Add("But… you haven’t answered yes or no to his question. Maybe you really <i>are</i> into that sort of thing. Who knows?", parse);
+		Text.NL();
+		Text.Add("The goat alchemist looks slightly puzzled at your reply, then brightens, hopping down from rocky foothold to rocky foothold without so much as missing a beat. <i>“Well, I <b>will</b> give you that it’s a technical possibility that you might be into being unethically experimented on, but hey, it’s so much more <b>fun</b> to blow prospective test subjects up into submission.”</i> He brandishes a couple of bombs. <i>“Don’t you agree?”</i>", parse);
+		Text.NL();
+		Text.Add("No.", parse);
+		Text.NL();
+		Text.Add("He shrugs and grins a mouth full of crooked, yellow teeth. <i>“Oh well, more’s the pity. I’m sure I can coax you into coming around to my way of thinking.”</i>", parse);
+		Text.NL();
+		Text.Add("<b>It’s a fight!</b>", parse);
+		Text.Flush();
+		
+		Gui.NextPrompt(function() {
+			enc.PrepCombat();
+		});
+	};
+
+	/*
+	enc.canRun = false;
+	enc.VictoryCondition = ...
+	*/
+	enc.onLoss    = Scenes.MaliceScouts.Goat.LossPrompt;
+	enc.onVictory = Scenes.MaliceScouts.Goat.WinPrompt;
+
+	return enc;
+}
+
+Scenes.MaliceScouts.Goat.WinPrompt = function() {
+	var enc  = this;
+	SetGameState(GameState.Event);
+
+	var parse = {
+
+	};
+
+	Gui.Callstack.push(function() {
+		Text.Clear();
+		Text.Add("The goat-morph alchemist lets out a plaintive bleat as you deal him a solid last blow, knocking him off his feet and onto the ground. He tumbles into a roll to try and avoid breaking any of his precious substances, which by some miracle all of which manage to survive the fall intact.", parse);
+		Text.NL();
+		Text.Add("…Screw this crazy guy. He was more than willing to blow you up to - well, who knows what goes on in the crazed, twisted mind of this rancid old has-been? Whatever “experiments” he had in store for you, they can’t have been anything good for you.", parse);
+		Text.NL();
+		Text.Add("So, what now?", parse);
+		Text.Flush();
+		
+		//
+		var options = [];
+		options.push({nameStr : "Turn Tables",
+			tooltip : Text.Parse("So, he was planning to experiment on you? Turnabout is fair play.", parse),
+			enabled : true,
+			func : function() {
+				Scenes.MaliceScouts.Goat.WinTurnTables(enc);
+			}
+		});
+
+		/* TODO
+		options.push({nameStr : "",
+			tooltip : Text.Parse("", parse),
+			enabled : true,
+			func : function() {
+				Text.Clear();
+				Text.Add("", parse);
+				Text.NL();
+				Text.Add("", parse);
+				Text.Flush();
+			}
+		});
+		*/
+
+		Gui.SetButtonsFromList(options, true, function() {
+			Text.Clear();
+			Text.Add("You definitely have better things to do than to deal with crazy old has-beens. If a solid beating hasn’t shaken loose some of the cobwebs from that mind of his, you doubt that anything else you might have the mind to do is going to change that. Besides, it’s not as if you can turn him in to the law, since out here in the highlands there really isn’t <i>any</i> law - and you’re not going to kill him, so that’s out of the question. It doesn’t feel <i>right</i> to be just leaving him like that, but no immediately better solution presents itself.", parse);
+			Text.NL();
+			Text.Add("Pausing to kick some sand onto the prone goat-morph and receiving a very satisfying bleat in reply, you turn and make your way through the remainder of the ravine without further incident.", parse);
+			Text.Flush();
+
+			Gui.NextPrompt();
+		});
+	});
+	Encounter.prototype.onVictory.call(enc);
+}
+
+Scenes.MaliceScouts.Goat.WinTurnTables = function(enc) {
+	var goat = enc.goat;
+	var parse = {
+		
+	};
+	parse = player.ParserTags(parse);
+	
+	Text.Clear();
+	Text.Add("Snorting, you step forward towards the randy, unkempt old goat and give the bastard a kick in his side just to make sure he stays down and tries no funny tricks. So, he was planning to use you as a guinea pig for whatever crazed experiments he had in mind, didn’t he? Has he ever come across the saying, “physician, heal thyself”?", parse);
+	Text.NL();
+	Text.Add("<i>“Don’t you touch that, you young whippersnapper!”</i> the old fart bleats as you reach down for his belt, but he’s powerless to prevent you from unbuckling it and sliding it off his waist. The contents already looked to be of questionable character, and a closer inspection of the various liquids and powders within the thick glass vials does nothing to alleviate your concerns about their integrity or legality.", parse);
+	Text.NL();
+	Text.Add("Taking a deep breath, you reach into one of the belt’s many pockets and pull out the first thing your fingers close down upon, which just so happens to be ", parse);
+	
+	//Pick one random option from the below, and follow on from there:
+	var scenes = new EncounterTable();
+	//Grow-it-big cream
+	scenes.AddEnc(function() {
+		Text.Add("a large, solid ceramic tub sealed with plenty of wax. It takes a little bit of tugging for you to finally get the seal open - it’s <i>almost</i> as bad as a pickle jar. Not exactly as bad, but pretty darn close - and it parts with a pop. The heavy scent of cherries rises from the tub’s contents - a light, rosy-pink salve that looks as light and fluffy as whipped cream.", parse);
+		Text.NL();
+		Text.Add("<i>“No, you fool!”</i> the goat alchemist bleats. <i>“You know not what you’re dealing with! There are forces at work here that are beyond the grasp of your simple mind to comprehend!”</i>", parse);
+		Text.NL();
+		Text.Add("You laugh. Of course you know what you’re dealing with - he wrote the contents himself on the side, didn’t he? Look - you point right at the alchemist’s spidery handwriting on the tub’s side - “grow-it-big cream”, and judging by the look of it, this stuff isn’t for growing plants, tentacles, or plant tentacles. Oh look, there’re a bunch of additional notes on the side, too - “needs testing to determine correct dosage”.", parse);
+		Text.NL();
+		Text.Add("<i>“Oh.”</i> A few seconds’ silence. <i>“Shit.”</i>", parse);
+		Text.NL();
+		parse["l"] = player.IsNaga() ? "your tail" : player.HasLegs() ? "a foot" : Text.Parse("your [legs]", parse);
+		Text.Add("Now that you’ve called his bluff, the poor bastard tries to scramble away in earnest, but you pin him to the ground with [l] and grin.", parse);
+		Text.NL();
+		Text.Add("<i>“Seriously! You don’t want to touch that stuff! Not with your bare skin, that is. It’s… it’s… caustic.”</i>", parse);
+		Text.NL();
+		Text.Add("Which is why you’ve found this handy-dandy pair of gloves in one of the belt pouches as well. He really thinks of everything, doesn’t he? To be honest, you find it a little irksome that he’s more than willing to inflict upon others experiments that he wouldn’t submit to himself… but that’s karma, isn’t it? Without further ado, you slip on the cured-hide gloves, scoop two fingers in the cream and gather up a large lump - now, where’s the nearest spot on the old goat’s body? Ah, there’s a nice large gash in the front of his smock - not thinking twice of it, you reach down and splatter the cream all over the goat-morph’s hair and skin, rubbing it in by drawing large, slow circles with your fingertips.", parse);
+		Text.NL();
+		Text.Add("<i>“Damn you! Damn youu - oohhh…”</i>", parse);
+		Text.NL();
+		Text.Add("As the alchemist’s cries of protest turn into moans of reluctant pleasure, you notice a marked change begin where you smeared the cream. Slowly, gentle bumps begin to form on his chest, mass gathering under his skin and pushing outwards against the remains of his tattered smock as they pulse gently with growth. The goat alchemist moans and grabs his chest, almost as if trying to squeeze the developing mounds back into their original form, but his efforts are in vain; getting rounder and fuller with each tiny growth spurt, his chest rises like leavened dough until he’s sporting a nice pair of B-cup breasts. They still aren’t large enough for his nipples to thrust through his thick goat hair, but you can definitely see the latter’s outline marked on the new curvature of his freshly ballooned jugs.", parse);
+		Text.NL();
+		Text.Add("<i>“Curses! So much from so little? I - I must’ve forgotten to dilute the mixture again -”</i> Another wave of pleasure washes through the alchemist’s body, and he moans, fondling at his newly-grown breasts. <i>“Fuck you!”</i>", parse);
+		Text.NL();
+		Text.Add("Heh. With him as stinky and unkempt as he is, he’s probably got all sorts of nasty diseases on him anyway. Peering down, you take a moment to study the alchemist’s new feminine assets - they most certainly look rather incongruous on the goat; fresh and perky boobs without so much as the slightest spot of sag, attached to a rancid old has-been’s body. The goat alchemist looks mortified as you study the tub of cream in your hands, and wonder just what else it can do to him… or to you, for that matter.", parse);
+		Text.NL();
+		Text.Add("Still, you’ve got to keep him occupied and pliable while you think. Reaching down with a gloved hand, you proceed to sink your fingers into the alchemist’s freshly-grown boobs, smirking at the desperate bleats and gasps you extract from him as you squeeze and fondle away. He certainly isn’t used to sporting a pair of lady lumps, is he?", parse);
+		Text.NL();
+		Text.Add("But back to the point; it seems like you could use this cream to “enhance” one of your body parts, if you so desired. Alternatively, you could have some fun forcing the alchemist to suffer his little concoction, or you could just chuck this thing and be on your way.", parse);
+		Text.NL();
+		Text.Add("What will you do?", parse);
+		Text.Flush();
+		
+		
+		//Structure this as such: random opening for each of the four body parts, followed by body-part specific portion. Alchemist and leave have their own blocks altogether.
+		
+		var intro = function() {
+			var scenes = new EncounterTable();
+			scenes.AddEnc(function() {
+				Text.Add("An idea begins forming in your mind, but your better sense grabs hold of you and shakes your consciousness silly until it’s sure you’re paying attention. Do you really want to do this? Apply to yourself the completely unverified and unvouched-for product of an old, nasty-smelling ruminant who in all probability hasn’t bathed for days?", parse);
+				Text.NL();
+				Text.Add("Of all the things you could be doing to yourself, is applying to yourself the concoctions of a very possibly deranged alchemist the wisest decision that you could be making at this juncture?", parse);
+				Text.NL();
+				Text.Add("Pfffft, why not? No matter what’s gone into this cream you’re holding in your hands now, it certainly can’t be crazier than some of the stuff that you’ve <i>seen</i> going into the so-called <i>reliable</i> potions. At this point, nothing can surprise you any more, can it? At least it’s topical and you’re not going to be expected to shove it down your throat like some disaffected hobo who eats everything he or she can get his or her hands on.", parse);
+				Text.NL();
+				Text.Add("With that thought in mind, you stick your fingers into the tub again and scoop up a large lump of cream. This had better be good…", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("You look at the tub in your hand. It doesn’t have eyes, but you get the feeling that it’s staring back at you - or at the very least, there’s a distinct burning gaze on your [skin], although that might be the alchemist.", parse);
+				Text.NL();
+				Text.Add("That’s beyond the point, though. <i>Use me!</i> the tub of cream seems to say to you. <i>What’s the worst that could happen?</i>", parse);
+				Text.NL();
+				Text.Add("Indeed, what’s the worst that could happen? Considering all the crazy things which alchemy can do these days - a potion for everything, as the saying goes - there are indeed a lot of terrible things this little tub of cream could conceivably do to you, but none of them have happened to the randy old goat at your [feet], at any rate.", parse);
+				Text.NL();
+				Text.Add("If nothing terrible happened to him, it shouldn’t to you, right? Right? It’s just a matter of figuring out the proper dosage, right? Nevertheless, you catch your breath as you dip your fingers into the tub once more and scoop out a dollop of grow-it-big cream.", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("You turn the tub over in your hands once more and give its fine contents a hard look. Completely innocuous, isn’t it? And yet you’ve got a randy old goat lying on the ground sporting a fresh, perky pair of tits that any growing girl would be proud to have. Only this isn’t a growing girl, this is an old, smelly has-been, and he rolls a rheumy, bloodshot eye up at you as you handle the jar with the thick gloves you found.", parse);
+				Text.NL();
+				Text.Add("<i>“Careful with that thing,”</i> he groans, coughing a bit. <i>“The stuff in that tub’s probably more precious than everything you have on you combined.”</i>", parse);
+				Text.NL();
+				Text.Add("Oh, <i>really</i>.", parse);
+				Text.NL();
+				Text.Add("<i>“Yes, really, you young whippersnapper. Haven’t you noticed that there’s <b>cream</b> in the tub?”</i>", parse);
+				Text.NL();
+				Text.Add("So?", parse);
+				Text.NL();
+				Text.Add("<i>“It’s <b>cream</b>. You put it on your skin instead of drinking it and hoping for the best, like you do with almost everything else. It’s hard to imagine that in the whole history of the damned plane, I’m the only one who thought up the idea of having something that sticks to the skin in order to produce a much more localized effect, but there we have it. Guess people like putting things in their mouths too much to give it up.”</i>", parse);
+				Text.NL();
+				Text.Add("Huh. Come to think of it, <i>have</i> you actually come across something alchemical that wasn’t a potion? You’re pondering this train of thought when the goat alchemist pipes up again.", parse);
+				Text.NL();
+				Text.Add("<i>“What do you think? Eh? Eh? Pret-ty sm-art of me, I should say. Don’t you think? Don’t you think that’s the most awesome thing you ever heard of? A transformative you can put in a cream that you can actually apply on-point and in a controlled dose, instead of just swigging it down and hoping for the best? Eh? What? Eh?”</i>", parse);
+				Text.NL();
+				Text.Add("Goodness. You’ve just given this guy boobs, and all he can think of is bragging. Er, very good.", parse);
+				Text.NL();
+				Text.Add("<i>“Isn’t it?”</i> the goat alchemist continues to bleat, caught up in the moment of bragging to someone who actually appears to care, no matter how fleetingly. <i>“Isn’t it, though? Makes me all <b>excited</b>, I don’t mind telling you, just thinking about it. It’s a <b>cream</b>, you see.”</i>", parse);
+				Text.NL();
+				Text.Add("Yes. You, er, see. The goat alchemist blabbers on for a little while longer - talk about oblivious - but you go ahead and tune him out before scooping out another bunch of cream from the tub.", parse);
+			}, 1.0, function() { return true; });
+			scenes.Get();
+			Text.NL();
+		};
+		
+		//[Cock][Balls][Breasts][Vag][Alchemist][Leave]
+		var options = [];
+		if(player.FirstCock()) {
+			options.push({nameStr : "Cock",
+				tooltip : Text.Parse("Do you really have to think twice about this? Swab a batch on your [cocks].", parse),
+				enabled : true,
+				func : function() {
+					Text.Clear();
+					intro();
+					if(player.NumCocks() > 1) {
+						parse["all"] = player.NumCocks() > 2 ? "all" : "both";
+						Text.Add("Although you’ve decided on what you want to do, you can’t help but heave a sigh when you look down at your [cocks]. Which one to start with, then? Unable to decide on which of your manhoods to treat first, you eventually settle for working the stuff in your hands to a slick and slippery lather, then grabbing [all] of them in your cream-slick palms and pumping them up and down, as if you were trying to jerk off a bundle of sticks. Up and down, back and forth - to be completely honest, the cream isn’t <i>too</i> different in texture from your average lube, and while it’s still a bit of a struggle to try and evenly coat each one of your shafts all over with a layer of sweet-smelling cream, it’s also easier than you expected.", parse);
+						Text.NL();
+						Text.Add("Of course, it also helps that the cream feels considerably pleasurable as it seeps into your [cocks], a sensation of warm fullness permeating in and suffusing your shafts to their very core. Between this and your zealous rubbing, it doesn’t take long for you to bring all of your man-meat to bear, full and ready for action.", parse);
+						Text.NL();
+						Text.Add("And then it begins. Pulsing and throbbing ever so slightly, veins sticking out on their surfaces like spiderwebs, you see your manhoods begin to grow before your very eyes, the shiny layer of alchemical cream rapidly absorbed into flesh as it fuels the uncanny growth spurt your malenesses are going through. Try as you might, you can’t help but utter a little cry as sensations of contentment wash out from the base of your [cocks], a myriad of lovers’ caresses stroking outwards from your groin and seeping into your lower belly. Before you know it, your [cocks] are twitching of their own accord - and you’ve upended a healthy dose of spunk all over the alchemist lying at your [feet], head thrown back and teeth clenched as each and every one of your shafts blasts away on rapid fire at the stinking old creep.", parse);
+					}
+					else {
+						Text.Add("Yeah, you could do with a bit of enhancement down there. Size does matter, as the saying goes, and you’re not quite done with growing this little puppy yet. Taking the dollop of grow-it-big cream that you’ve gathered on your fingers, you swiftly apply it to the length and girth of your manhood, taking care to ensure that an even coating is applied to all exposed skin from base to tip. The stuff is surprisingly slick and slippery - come to think of it, it’s not too unlike lube - and before you know it, you’ve slipped into a steady back-and-forth motion in applying the stuff as if you were jerking yourself off.", parse);
+						Text.NL();
+						Text.Add("Which, let’s face it, is what you’re doing right now. It’s not just your fingers, it’s the cream as well, and a pleasurable tingling starts up in your [cock] as the alchemical cream settles in, the sensation moving in from the outsides and seeping deep into your flesh. You can’t help it - a groan escapes your lips unbidden as the entirety of your [cock] is transformed into an intensely sensitive pleasure-shaft, twitching furiously in the air as pre quickly gathers and oozes from its tip.", parse);
+						Text.NL();
+						Text.Add("Before long, it begins. The already visible veins on your stiff member seem to thicken and spread even further as your maleness develops in a matter of moments, the shiny sheen of magical cream on its surface absorbed into the skin to fuel the unnatural growth that’s taking place. It’s all you can do to grit your teeth, ride this one out, and hope you don’t scream your pleasure to the heavens even as you shudder and unleash your load straight onto the rancid old goat.", parse);
+					}
+					Text.NL();
+
+					var cum = player.OrgasmCum();
+
+					Text.Add("The alchemist moans weakly and tries to shield his face with his hands, but that’s pretty much all that he can do in his current state besides sputter and cough. Rope upon rope of steaming spunk splatters down upon him, getting in his tattered smock, in his hair, and even in his freshly formed cleavage.", parse);
+					Text.NL();
+					Text.Add("What’s more important, though, are the ongoing changes; with each burst of cum you expel from your [cockTip] and onto the alchemist, you can both see and feel your [cock] growing longer and girthier, as if this bout of exercise is causing it to swell like a well-trained muscle.", parse);
+					Text.NL();
+					if(cum > 5) {
+						Text.Add("With the sheer size of the load that you’re currently dumping onto the alchemist, you’re probably going to end up with quite the swinger when all this is over. Already, the old goat’s entire body is covered with thick gobs of your sperm, having plastered him from head to toe; it slowly runs off his matted hair and collects in a puddle beneath him - which is becoming deeper by the second.", parse);
+						Text.NL();
+						Text.Add("Does he like his bath? He really hasn’t had one for a long, long time; he should really be thankful that you stopped by and gave him one. He’ll be all clean and green when he gets himself sorted out, you’re sure of that.", parse);
+						Text.NL();
+						Text.Add("<i>“Fuck… you…”</i>", parse);
+						Text.NL();
+						Text.Add("Oh no no, you get the distinct impression that as big as it is, you’re going to need your entire load for this, so there won’t be any left over for fucking afterwards.", parse);
+					}
+					else {
+						Text.Add("String upon string of hot sperm splashes on the alchemist, and he bleats in his growing distress. You don’t quite have enough in you to give him an actual cumbath, but there’re still sufficient reserves in store to confer upon him a facial, a pearl necklace, and a lovely sheen of spunk on his freshly-grown lady lumps to go with his newfound femininity.", parse);
+						Text.NL();
+						Text.Add("It may not be much, but it’s more of a bath than he’s probably taken for a good, long while. He should be grateful to you that you’re blessing him with a pearly shower like this.", parse);
+						Text.NL();
+						Text.Add("<i>“Fuck… you…”</i>", parse);
+						Text.NL();
+						Text.Add("Hmm, try as you might, knowing what he was intending to do to you had you lost… you can’t quite seem to work up very much sympathy for this rancid old goat despite his current predicament. Whistling a merry tune, you simply stand back and relax as the last of the cream works its magic on your [cock], sending out a few more blasts of sticky seed straight onto the alchemist’s face.", parse);
+					}
+					Text.NL();
+					if(player.FirstVag()) {
+						Text.Add("The alchemist was as good to his word, though - this grow-it-big cream stuff is truly localized in its effect. Despite all that’s happened to your [cock] and the accompanying pleasurable sensations that flooded your body, your [vag] is hardly even so much as damp.", parse);
+						Text.NL();
+						Text.Add("Hmm, he may be crazy, but he seems to have done good work. Too bad he has to be such a rancid old bastard in the bargain.", parse);
+						Text.NL();
+					}
+					Text.Add("At last, the final burst of seed strikes the goat’s face, and the flow finally stops - you’ve drained yourself as dry as a bone. Nevertheless, your insides keep on clenching for a few moments longer, unwilling or perhaps unable to figure out that the flow has abated at last. Looking down at your [cocks], you’re somewhat relieved that you didn’t just go the whole hog and splurge - that tiny bit of cream has added almost two inches and half an inch to your length and girth respectively.", parse);
+					Text.NL();
+					Text.Add("<i>“H-hey, what are you doing?”</i> the alchemist bleats as you toss the remainder of the tub over your shoulder and onto a nearby rock. The tub shatters, spilling its contents all over the grass, and the rancid old goat lets out a loud groan of dismay.", parse);
+					Text.NL();
+					Text.Add("<i>“Whippersnapper! Wastrel! Have you any idea how much that cost to make?”</i>", parse);
+					Text.NL();
+					Text.Add("You have a very good idea, which is exactly why you did that. Giving the cum-covered goat a big smile, you apply a swift kick to his side and trot away, leaving him to think about what he’s done - if such a thing is applicable to an old has-been like him.", parse);
+					Text.Flush();
+					
+					world.TimeStep({hour: 1});
+					
+					var cocks = player.AllCocks();
+					for(var i = 0; i < cocks.length; i++) {
+						cocks[i].length.IncreaseStat(80, 2);
+						cocks[i].thickness.IncreaseStat(15, 0.5);
+					}
+					
+					Gui.NextPrompt();
+				}
+			});
+		}
+		if(player.HasBalls()) {
+			options.push({nameStr : "Balls",
+				tooltip : Text.Parse("Because everyone knows that the pair makes the man.", parse),
+				enabled : true,
+				func : function() {
+					Text.Clear();
+					intro();
+					Text.Add("Right, no turning back now. Pulling down your [botarmor], you reach down and apply the cream you’ve gathered to your [balls]. ", parse);
+					if(player.Balls().Size() >= 12) {
+						Text.Add("With how large and weighty they already are, you have to use both hands to apply it with any reasonable speed and make sure that you get a more or less even coating of the sweet-smelling cream on your nuts. It’s not <i>difficult</i>, but it is tedious, and you’re sort of privately relieved when the job is done - especially with all the looks of barely restrained jealousy that the alchemist is shooting you. You’ve had to use a bit more than the original amount you scooped out from the tub in order to get everything slathered nicely, but there’s still plenty left over if it comes to that.", parse);
+					}
+					else if(player.Balls().Size() >= 8) {
+						Text.Add("It’s not unpleasant, the sensation of the sweet-smelling alchemical stuff against your [balls] as you work in an even coating all over your nutsack. To be completely honest, the slightly greasy and oily feel to it distinctly reminds you of lube… and looking down at the rancid old bastard who concocted it, there’s a more than average chance that he intended just that.", parse);
+					}
+					else {
+						Text.Add("Cupping your [balls] in your cream-filled hand, you roll them around in your palm, feeling the alchemical concoction cool and comforting against your sensitive nutsack as you work an even shine of the stuff around your seed factories. Slightly greasy and oily to the touch, there’s a distinct lube-like quality to it; given the sexual nature of the enhancing cream, you don’t doubt that this was completely intentional.", parse);
+					}
+					Text.NL();
+					Text.Add("Gradually, the comforting coolness of the cream is replaced by an invigorating warmth that seeps into your [balls] from the outside, sharp enough for you to suck in a sudden breath as the first pulse of amorous sensation strikes you. When you look down, you notice that the thin sheen of cream on your [balls] is gone, absorbed right into the flesh to… well, do what it’s supposed to do, you figure.", parse);
+					Text.NL();
+					Text.Add("And it does. Once the heat fills the entirety of your groin, you feel your [balls] begin to swell, growing not just weightier, but denser as well - there isn’t <i>that</i> much increase in size, but you certainly feel more of a drag as you - hey, is the rancid old goat actually <i>staring</i> at your nuts as they grow? Why yes, he is - and despite his beaten and battered state, you can’t help but notice that he’s tenting his pants quite considerably, if you might say.", parse);
+					Text.NL();
+					Text.Add("Why, is he jealous? He shouldn’t be, really - after all, he can just head back and cook up some for himself. Or have there been… complications?", parse);
+					Text.NL();
+					Text.Add("The alchemist just harrumphs loudly and refuses to look you in the eye. Well, that’s his loss. Or maybe he’s not just plain jealous… well, not to worry, you won’t tell anyone about his secret turn-on, mostly because you don’t know anyone he knows.", parse);
+					Text.NL();
+					Text.Add("Another snort. Hah.", parse);
+					Text.NL();
+					Text.Add("Slowly, the growth begins to abate somewhat, and you go ahead and test your newly improved jewels. Yep, much better - it’s a good thing you didn’t use more than you did, though, considering the amount of growth that you got for that much cream.", parse);
+					Text.NL();
+					Text.Add("Welp, that’s that. Looking down at the rest of the cream, you shrug and toss it over your shoulder, eliciting a cry of dismay from the alchemist.", parse);
+					Text.NL();
+					Text.Add("<i>“Whippersnapper! Do you know how much that cost me to make?”</i>", parse);
+					Text.NL();
+					Text.Add("Yes, you had an idea, which is exactly why you did just that. You’d smash up the rest of his toolbelt as well, but you really don’t have the time to spare on tormenting an old has-been like him any further.", parse);
+					Text.NL();
+					Text.Add("The alchemist scowls furiously, but is unable to stop you as you turn and walk away, whistling a cheery tune as you do so. Maybe he’ll learn something from that… maybe not. You sure got something out of this encounter, though… assuming there aren’t any side effects from this stuff.", parse);
+					Text.NL();
+					Text.Add("Are there?", parse);
+					Text.Flush();
+					
+					world.TimeStep({hour: 1});
+					
+					player.Balls().size.IncreaseStat(20, 1);
+					player.RestoreCum(10);
+					
+					Gui.NextPrompt();
+				}
+			});
+		}
+		options.push({nameStr : "Breasts",
+			tooltip : Text.Parse("Your rack could do with a little enhancement…", parse),
+			enabled : true,
+			func : function() {
+				Text.Clear();
+				intro();
+				if(player.FirstBreastRow().Size() > 10) {
+					Text.Add("Hmm. You consider your [breasts] for a moment - sure, they’re large and weighty, but hell, you could do with even bigger ones. Looking down at the nice perky pair of Bs you’ve given the bleating bastard lying at your [feet/tail], you’re pretty sure that even though you have a pretty good thing already going, it can still be improved further with a healthy application of some cream from this little tub.", parse);
+				}
+				else {
+					Text.Add("Hmm. Well, considering the nice pair of lady lumps that the cream has produced on the goat alchemist’s chest, you can only wonder what it can do for you. You <i>do</i> suppose that you could do with some additional heft - and if the results before your eyes are any indication of the final result, then you won’t just be getting a boost in quantity, but quality as well. What’s not to love?", parse);
+				}
+				Text.NL();
+				Text.Add("Before you can second-guess yourself again, you quickly pull aside your [armor] from the neckline down, your [breasts] easily pushing their way out of their confines with their release, presenting themselves for your attentions. Grimacing, you push your cream-laden fingers against the firm, springy flesh of your lady lumps, kneading away with considerable vigor as you try to get an even coating of the cream on every bit of exposed skin.", parse);
+				Text.NL();
+				Text.Add("It doesn’t take long for the first changes to set in. The cream is silken smooth to the touch and slightly warm to boot, a warmth that quickly seeps in through your [skin] and collects just above the breastbone beneath. The heated tenderness is more than a little pleasurable, and soon enough you begin groping yourself in earnest, little moans escaping your lips as your [breasts] grow increasingly sensitive. Even though you haven’t paid that much attention to them yet, your [nips] are full and standing at attention, faint, ghostly tingles from them signaling their receptiveness for affection.", parse);
+				Text.NL();
+				Text.Add("Despite all this, though, your [breasts] haven’t actually changed any - up to the point where a sudden rush of heat fills your chest and sends your milk makers rushing outwards by about a full cup size. Unlike the slow swell that happened to the alchemist, the changes are over in a matter of seconds, leaving you hot under the collar and gasping for breath.", parse);
+				Text.NL();
+				Text.Add("Not that the alchemist himself hasn’t been busy, either. The randy old goat has pulled down his pants and whipped out his cock, jerking himself off furiously while his eyes are trained on your ballooning bust.", parse);
+				Text.NL();
+				Text.Add("So, huh, he likes it when boobs grow in his face, eh? The only answer you get to that is a plaintive bleat from the stinking old goat as he writhes in place and a measly load plops out the head of his dick.", parse);
+				Text.NL();
+				Text.Add("Well, guess that answers your question well enough, doesn’t it? With the alchemist out of commission and lying in a panting heap on the ground, you toss down the tub and gloves by his side and test your newly-improved tits with a finger. Yep, they’re not just bigger - there’s a definite increase in fullness and perkiness too, punctuated by a pleasant tingling.", parse);
+				Text.NL();
+				Text.Add("Huh. Looks like it actually worked - and that was quite the change for the small amount you used. Doesn’t seem like there’re any side effects, either, save for the nagging desire at the back of your mind to go ahead and give someone, <i>anyone</i> a boobjob, but even that is fading as you push your [breasts] back into your [armor] and prepare to be on your way.", parse);
+				Text.Flush();
+				
+				world.TimeStep({hour: 1});
+				
+				_.each(player.AllBreastRows(), function(breasts) {
+					breasts.size.IncreaseStat(50, 1);
+				});
+				player.AddLustFraction(0.4);
+				
+				Gui.NextPrompt();
+			}
+		});
+		if(player.FirstVag()) {
+			options.push({nameStr : "Vag",
+				tooltip : Text.Parse("Not the first thing that comes to mind, but it should work.", parse),
+				enabled : true,
+				func : function() {
+					Text.Clear();
+					Text.Add("Hand halfway to your groin, you pause for a second and consider what you’re about to do. Sure, this isn’t the sort of thing that usually comes to mind when one thinks of growing things bigger, but technically it should work, right?", parse);
+					Text.NL();
+					Text.Add("Right?", parse);
+					Text.NL();
+					Text.Add("You throw a glance at the alchemist, but the rancid old goat seems overly obsessed with the new pair of tits that he’s sporting; besides, even if you had his attention, you get the feeling that he wouldn’t give you a straight answer anyway.", parse);
+					Text.NL();
+					Text.Add("Fine. Instead of rolling the cream in your palm, you slam your other fist into it and grease - yes, there’s a distinctly oily and slippery feel to the cream that reminds you of lube - and rub it all over the outsides of your fingers, grinding your knuckles into your hands to ensure you’ve got an even coating of the stuff on the glove.", parse);
+					Text.NL();
+					Text.Add("Now comes the hard part - actually applying the stuff where it’s needed. Taking a deep breath, you mentally go through the steps of what you need to do next, then go ahead and bend over. ", parse);
+					Text.NL();
+					//TODO GROWTHRATE RANK
+					var dexrank = player.dexterity.GrowthRank();
+					if(player.IsFlexible() || dexrank >= 15) {
+						Text.Add("Fortunately for you, you’re the fairly limber kind of person, so going through the contortions needed in order to get into position to fist yourself is no problem. As your gloved hands come into contact with your pussy lips, you feel a tingle of warmth emanate from them, worming its way up into your lower belly and sending shivers down your spine.", parse);
+						Text.NL();
+						Text.Add("No time to be hesitant now. Your cunt parts as you gather your strength and push against them, and before you know it, you’re in.", parse);
+					}
+					else if(dexrank >= 10) {
+						Text.Add("You might not be the clumsiest of people, but even so, the dexterity required for you to be able to fist yourself to the extent you desire is no small feat. You have to widen your stance a little more than you expected in order for you to get your hand in position, and as you do you can’t help but “accidentally” grind your knuckles against the lips of your womanly flower, smearing just a tiny bit of the cream onto their sensitive folds.", parse);
+						Text.NL();
+						Text.Add("The rush of heat and throbbing blood that funnels into your pussy lips takes you by surprise and leaves you stunned for a moment, quickly followed by a gnawing urge for more. Well, since you were going to be about that anyway, you waste no time in cramming your cream-coated fist into your warm, wet depths, eager to see what happens next.", parse);
+					}
+					else {
+						Text.Add("It’s true that you’re not the most limber of people about, but when there’s a will, there’s a way. Bracing yourself against a nearby boulder, you slowly ease yourself into a position more suited for well and truly fisting yourself as deeply as possible. Your muscles complain in a low, achy tone as you make the necessary contortions, but eventually give way as you position your cream-coated fist at the mouth of your love-tunnel, almost-but-not-quite-touching as you gather your strength for the final insertion.", parse);
+						Text.NL();
+						Text.Add("Knowing what you’re about to do to yourself, your pussy has started to grow just a little damper in response, and you can’t help but finger the petals of your womanly flower tenderly, daubing a bit of the alchemical cream onto the moist folds. The moment that happens, a surge of erotic heat ripples outwards from your cunt lips, traveling up the length of your love-tunnel and sending back a slick coating of juices in response.", parse);
+						Text.NL();
+						Text.Add("Yes, there’s little point in putting this off any longer - your body is as ready as it’ll ever get. Letting out a quiet murmur of pleasure, you literally punch your way through your cunt and into your depths, your insides greedily swallowing your gloved fist, cream and all.", parse);
+					}
+					Text.NL();
+					Text.Add("Out of the corner of your eye, you notice the alchemist watching you intently, his narrow black eyes not leaving the action as you begin to pump your hand in and out of yourself. He probably hasn’t noticed it himself, but the look on his face, coupled with the fact that his freshly acquired breasts look slightly bigger and firmer… and ah, yes, he’s also tenting his pants.", parse);
+					Text.NL();
+					Text.Add("Hey, does he like watching you that much? Maybe you could see if there’s something in his belt that could grow a cunt on him, so that he can join you as well…", parse);
+					Text.NL();
+					Text.Add("<i>“No, thanks,”</i> comes the hasty reply. <i>“Actually, I don’t have anything like that on me, I’m absolutely and utterly completely sure of that.”</i>", parse);
+					Text.NL();
+					Text.Add("That’s a very convincing reply - not. You’d pursue the matter further, if not for the distracting fact that you’ve got a lubed-up, gloved hand stuck in your cooch. That, and you’re starting to <i>really</i> feel the cream starting to do its work, tiny electric tingles working their way into your inner walls and traveling outwards into your hips.", parse);
+					Text.NL();
+
+					var cap = player.FirstVag().Capacity();
+
+					if(cap >= Capacity.gaping) {
+						Text.Add("The transformative takes hold almost immediately after, spreading outwards to fill the entirety of your stretchy womanhood. You’re unable to hold back a lewd moan as your cunt becomes ever more prominent and defined, the petals of your womanly flower swelling and thickening, glistening with arousal and need. They’re so plump and thick, they’re beginning to look almost kissable… you hold that thought in mind for a little longer, then lose it as yet more orgasmic sensations crash into you. Flowing ever further into your flesh, you can’t help but start feeling quite literally hollow as your mound protrudes ever further, growing more and more prominent as it struggles to hide all the excess vaginal flesh that you’re gaining.", parse);
+						Text.NL();
+						Text.Add("Last but not least are your hips - as the cream’s magical effects seep deeper into your body, you feel a strange yet calming and pleasant tingling sensation as your [hips] widen some more, helping to accentuate and enhance your figure but also more importantly, give you some much-needed space to take advantage of your increased stretchiness and fit even larger things within you.", parse);
+					}
+					else if(cap >= Capacity.loose) {
+						Text.Add("The moment the changes hit, you go cross-eyed and bite your lips as a wave of orgasmic pleasure washes over you bottom up, sending clear girl-cum oozing out from between your wrist and cunt lips as you come dangerously close to losing it there and then. Nevertheless, you manage to hang on and keep standing as your inner walls greedily absorb the magical cream to fuel their development.", parse);
+						Text.NL();
+						Text.Add("Even as your [vag] clamps down on your fist in a vice-like grip, you can see your cleft slowly swelling, growing more pronounced and defined by the moment. That’s just on the outside, of course - inside, you can definitely feel yourself deepening, flesh parting as it grows more muscular and elastic.", parse);
+						Text.NL();
+						Text.Add("The final area of change is, surprisingly, in your hips - as the tingles from earlier reach your hip bone, you can feel it reform and widen, shifting your stance slightly. This confuses you for a bit until you realize that there’s no point in having a massive womanhood if your hips aren’t wide enough to make use of that added girth in order to fit bigger things in you more comfortably.", parse);
+					}
+					else {
+						Text.Add("With a sudden shudder and outpouring of clear girl-cum, you feel a little more hollow as your sex starts to deepen, inner walls spasming and clenching at your fist and forearm as they swiftly react to the cream’s special properties. You were quite tight before - perhaps overly so - but the cream seems to have changed that, at the very least. Although there’s no obvious change save perhaps a slight swelling of your mound as it accommodates the extra vaginal flesh, a little probing and prodding leaves little doubt that you’re definitely more able to stretch, and a little deeper to boot.", parse);
+					}
+					
+					player.FirstVag().capacity.IncreaseStat(15, 0.5);
+					if(cap >= Capacity.loose) {
+						player.body.torso.hipSize.IncreaseStat(HipSize.VeryWide, 0.5);
+					}
+					
+					Text.NL();
+					Text.Add("Caught up in the frenzy of sensation, your body works on automatic, mindlessly pistoning your fist in and out of your cunt as all the alchemical cream smeared on the outside of the glove is greedily consumed to fuel your cunt’s rapid growth. Clear, slick fluids flow freely down your wrist and across your [thighs], your womanly flower overflowing with nectar and staining your [skin] with slippery, glistening fluid - this feels <i>so</i> much better than it usually does, and you have little doubt it’s all thanks to the cream.", parse);
+					Text.NL();
+					if(player.FirstCock()) {
+						parse["w"] = player.NumCocks() > 1 ? "worms" : "a worm";
+						Text.Add("The alchemist wasn’t kidding about the selectiveness of his cream’s effects, either. Despite your entire body being enraptured by feminine needs and urges, your [cocks] remain[notS] as limp and flaccid as [w] on a hot day. With all the additional effects which come with so many potions, something as targeted as this could really make a pretty coin or two on the market - if the rancid old goat could ever convince anyone to buy his wares. Oh well.", parse);
+						Text.NL();
+					}
+					Text.Add("On his part, the alchemist continues to have his eyes glued on you, and he’s now openly stroking himself off to the sight of you applying the cream to your cunt, his hand pumping furiously with a meaty - if not big - shaft firmly in his grip. Well, since he was so kind to provide the cream for you, there’s no reason you can’t be just a <i>bit</i> merciful and let him have a smidgen of fun; making sure he’s watching well, you begin to gyrate your hips even as you impale yourself on your forearm over and over again. Wet, sucking noises sound in the air as your glistening pussy lips suck and slurp at your skin, and it’s so <i>good</i>, especially since they’re thicker and plumper than before.", parse);
+					Text.NL();
+					Text.Add("It’s too much for the rancid old goat to bear. With a plaintive bleat that echoes through the ravine, his eyes roll back into his head and his whole body spasms as a steaming stream of sticky, stinking spunk lets loose from his much-scarred cock, arcing through the air and landing on the ground in a disgusting mess. Eww, he should really consider using his own products, make himself at least look a little better.", parse);
+					Text.NL();
+					Text.Add("Finally, though, the last of the shocks and tingles fade, and you’re left panting and exhausted, standing in a puddle of your own sexual fluids. For what it’s worth, there’s little doubt that you’re noticeably stretchier than before, and the trip there wasn’t all that bad, either. Smiling dreamily to yourself, you toss the remainder of the cream over your shoulder and hear a very satisfying crash as the ceramic tub shatters into a million pieces.", parse);
+					Text.NL();
+					Text.Add("<i>“No, you fool! Do you know how much that cost me to make, both in reagent costs and time?”</i>", parse);
+					Text.NL();
+					Text.Add("Of course, that’s why you did it. If he treasures his little concoctions so much, maybe he could consider actually finding volunteers for his experiments instead of lying in wait in the wilderness to make “volunteers” out of unsuspecting travelers. Reaching down, you give his softening dick a good hard slap, making him bleat in pain, then turn your back on the old has-been and are on your way.", parse);
+					Text.Flush();
+					
+					world.TimeStep({hour: 1});
+					
+					Gui.NextPrompt();
+				}
+			});
+		}
+		// Alchemist
+		options.push({nameStr : "Alchemist",
+			tooltip : Text.Parse("Yeah, you’re not using this stuff on yourself. Him, though…", parse),
+			enabled : true,
+			func : function() {
+				Text.Clear();
+				Text.Add("Yeeeah. Seeing what just a small handful of this stuff has done to the alchemist, you look down at the rest of the tub in your hands and a wry smile comes to your lips. There’s no way you’re going to be using any of this stuff on yourself, not after that - but the alchemist himself, though, he looks like he could use some more enhancement - quite a lot of it, in fact.", parse);
+				Text.NL();
+				Text.Add("Maybe it’s your attitude, maybe it’s the nasty gleam in your eye, but one way or the other the rancid old goat senses that you’ve got a bad time in store for him and tries to crawl away hand over foot. That, however, is easily stopped when you simply cross over and place yourself in his path, putting ", parse);
+				if(player.HasLegs())
+					Text.Add("a foot", parse);
+				else if(player.IsNaga())
+					Text.Add("your tail", parse);
+				else
+					Text.Add("yourself", parse);
+				Text.Add(" directly in his path.", parse);
+				Text.NL();
+				Text.Add("Going somewhere?", parse);
+				Text.NL();
+				Text.Add("<i>“Away from you, creep.”</i>", parse);
+				Text.NL();
+				Text.Add("Oh, you don’t know. He was the one planning to bomb random travelers into submission to force-test his alchemical concoctions on them, and <i>you’re</i> the creep? So, he thinks you’re a creep? Oh, too bad he had the misfortune to come across you today. Normally, you try to tone down your creepiness, but you’ll make an exception just for him and show him just how creepy you can be!", parse);
+				Text.NL();
+				Text.Add("Carefully, you set the tub of grow-it-big cream down on a rock out of the alchemist’s reach, and bend over such that you’re looming ominously over the old bastard, your shadow falling on him like a wave of darkness over the land. After taking a second or two to ensure that he’s watching, you curl your fingers and make what can only be described as grabby hands, wiggling your fingers as you reach for his newly-shaped breasts. He’s unable to put up much of a resistance as you sink your fingertips into his newly blossomed boobies and start to knead and grope away, sending him into a writhing, rutting frenzy.", parse);
+				Text.NL();
+				Text.Add("Mm, he likes that, doesn’t he? With someone like him, you’re sure he’s done his share of gropings before, but has he ever been on the receiving end?", parse);
+				Text.NL();
+				Text.Add("He doesn’t say anything, but his widening eyes and increasingly impassioned cries and grunts tell you all you need to know. Well then, time to truly break him into the wonderful world of gropings. You turn it up to eleven, kneading and pounding away like some kind of possessed freak, and the alchemist bleats even louder in ecstasy, his eyes rolling into his head.", parse);
+				Text.NL();
+				Text.Add("Yes, yes, he likes it so much, you bet he wouldn’t mind if he had <i>more</i> of his bosom to better receive pleasure, wouldn’t he? Reaching around with your [foot], you kick the tub of grow-it-big cream right back within reach, and pause your shameless molestation for a moment to grab a large handful of the sweet-smelling stuff.", parse);
+				Text.NL();
+				Text.Add("Heh. Does he know what this is?", parse);
+				Text.NL();
+				Text.Add("<i>“No! Yes! No!”</i>", parse);
+				Text.NL();
+				Text.Add("After you’re done with him, he’ll be the perkiest, most tantalizing trap for miles around. To make it all the better, you’ll do this to him with no mercy whatsoever - because he sure as hell wasn’t about to show you any, was he?", parse);
+				Text.NL();
+				Text.Add("<i>“No! No! I was totally about to show you mercy and -”</i>", parse);
+				Text.NL();
+				Text.Add("He’s a terrible liar, does he know that? Next time, perhaps he should consider the context of the situation before spouting nonsense; it would really help him. Without further ado, you dip your fingers into the tub of cream, scoop out a huge dollop of the strawberry-scented stuff and splatter a good portion of it onto the alchemist’s freshly-blossomed bosom, watching it jiggle enticingly as you give it a solid slap for good luck. If only you weren’t wearing gloves… but you’d rather not risk any of the stuff getting where it shouldn’t.", parse);
+				Text.NL();
+				Text.Add("Closing his eyes and shuddering from head to toe, the old goat unthinkingly arches his back and pushes his chest out and forward, presenting his breasts to you and inadvertently making them seem larger than they are. You grin as you realize he’s quickly settling into a more slutty role - although whether this is some repressed part of his psyche brought forward by the presence of boobs, or some side effect of the cream, you don’t know?", parse);
+				Text.NL();
+				Text.Add("Who cares? By the looks of him, the alchemist sure doesn’t. The old goat pants heavy and hard, his breasts rising and falling with each heaving breath he draws. Rising and falling, rising and falling, swelling bigger and fuller with passing moment, the shapely and undeniably feminine curves of a bosom becoming more pronounced and defined…", parse);
+				Text.NL();
+				Text.Add("Another plaintive bleat, and you notice a spreading stain on the goat alchemist’s tented pants. Seems like he’s gone ahead and “wet” himself, so to speak - and you aren’t even halfway done yet. As his newly-formed breasts have grown, their rate of development has slowed somewhat - he’s now just under a C - but it’s still going strong.", parse);
+				Text.NL();
+				Text.Add("Seems like you should help things along, then. You make grabby hands, reach for the alchemist’s firm bosom, and proceed to utterly and thoroughly molest him once more. It actually <i>does</i> seem to work as you can actually <i>feel</i> those milk-makers swelling and growing under your fingers, stretching skin and hair alike as they continue to rise from his chest.", parse);
+				Text.NL();
+				Text.Add("At last, the inevitable happens: the old goat’s chest hair parts, and a pair of nipples rise from beneath, pink and perky nubs that would be the pride of any young woman. You grin and give each of them a flick in turn, eliciting another exhausted groan from the alchemist.", parse);
+				Text.NL();
+				Text.Add("<i>“No… I’m sorry… I don’t know how much more I can take…”</i>", parse);
+				Text.NL();
+				Text.Add("Well, he should have thought of that <i>before</i> he went ambushing people in ravines, shouldn’t he! This is science of the sort he was all too willing to embrace - he should be glad you’ve volunteered his body to further the progress of the alchemical sciences!", parse);
+				Text.NL();
+				Text.Add("Kneading and pounding, kneading and pounding, you work the alchemist’s breasts like bread dough, with much the same effect. Eventually, when all of the cream you’ve put on has been absorbed, the poor bastard is sporting a pair of heavy Ds - just under DDs, to be precise. With so much mass accumulated therein, they can’t help but wobble and jiggle a little every time he moves.", parse);
+				Text.NL();
+				Text.Add("There, that should do it. Just for good measure, you rub each nipple between thumb and forefinger again, eliciting another pained bleat from the alchemist as the stain on his pants grows ever-bigger.", parse);
+				Text.NL();
+				Text.Add("<i>“What am I going to do now? Everyone’s going to laugh at me when I get back!”</i>", parse);
+				Text.NL();
+				Text.Add("Why should you care? He’s an alchemist, he can fix himself up. And let’s face it - he looks a <i>lot</i> better with a big, perky pair of tits than without, wondrous hemispherical humps that bounce and jiggle and entice. And just for good measure…", parse);
+				Text.NL();
+				Text.Add("Grabbing hold of the waistband of the alchemist’s pants, you rip them off with a flourish, trying to not look too closely at the massive goat boner that pops out at you. Emptying the rest of the tub in hand, you slather all of it onto the the alchemist’s hips. He kicks feebly at you with his hooved feet, but you eventually manage to get all of it onto him in a more or less even coating.", parse);
+				Text.NL();
+				Text.Add("This change is far swifter than the last - barely a minute’s passed before he’s sporting a pair of hips that most women would kill for.", parse);
+				Text.NL();
+				Text.Add("There, a perfect trap! Now if he’s lucky, he’ll be able to make it back to wherever it is he calls home before something or someone else takes an interest in him.", parse);
+				Text.NL();
+				Text.Add("The alchemist tries to say something, opening and closing his mouth a few times, but eventually settles for a lusty moan and wriggles on the ground.", parse);
+				Text.NL();
+				Text.Add("There, there. He should really try to keep still and quiet, or else something might come to see what all the fuss is about. The last thing he wants to have happen to him is to be subjected to public use, yes?", parse);
+				Text.NL();
+				Text.Add("Not waiting for a reply, you toss the empty tub over your shoulder, pull off the borrowed gloves, and are well on your way through the ravine without so much as a second thought.", parse);
+				Text.Flush();
+
+				world.TimeStep({hour: 1});
+
+				Gui.NextPrompt();
+			}
+		});
+
+		Gui.SetButtonsFromList(options, true, function() {
+			Text.Clear();
+			Text.Add("Huh, you think you’ve taught the old bastard a good enough lesson. Oh, there’s little doubt he can brew something to fix himself up, being an alchemist and all, but you have the distinct feeling that he’ll be turning some eyes - and inciting some laughter - before he manages that.", parse);
+			Text.NL();
+			Text.Add("Still, you can’t help but toss the tub over your shoulder, letting the contents spill onto the ground, then give the goat alchemist’s brand-new breasts a few more gropes, rolling the warm weight about in your palm until he breaks and moans like a cheap alley whore. Hell, he even looks the part, so it’s really quite fitting, and it’s keeping his mind occupied while you pilfer the remaining contents of his belt for anything that’s recognizably useful.", parse);
+			Text.NL();
+			Text.Add("Maybe now he’ll think twice about waylaying people for his “experiments”, you think to yourself as you stop away. And if not, maybe the pain will suffice to keep him from more shenanigans.", parse);
+			Text.Flush();
+			
+			Gui.NextPrompt();
+		});
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("a sizeable cylindrical object that looks like - oh why yes, it <i>is</i> a dildo. By the looks of the tapered tip and addition of a knot near the base, it’s a rather canine one in design. On the surface, it doesn’t <i>look</i> any different from your average dog-inspired sex toy, but there’s a certain something or the other about it that drives you to inspect it further.", parse);
+		Text.NL();
+		Text.Add("<i>“What are you doing?”</i> the alchemist bleats. You kick some dirt onto the old bastard to shut him up, and continue your investigations.", parse);
+		Text.NL();
+		Text.Add("Hmm, interesting. A number of small metal buttons have been set into the base just below the knot, and you inspect them further. All of them are labeled, with some of them being self-explanatory, such as “tie”, but others are more esoteric. Whatever “extendo grip” and “drill mode” mean, you’re not quite sure you want to find out by being subjected to them…", parse);
+		Text.NL();
+		Text.Add("…On the other hand, there <i>is</i> someone here whom you could use to sate your curiosity - and you get the feeling that he’d have used this on you without any compunctions, so it’s not going to be any problem if you turned his own contraptions on him.", parse);
+		Text.NL();
+		Text.Add("What do you do now?", parse);
+		Text.Flush();
+		
+		var options = [];
+		//[Use][Don’t Use]
+		options.push({nameStr : "Use on him",
+			tooltip : Text.Parse("You really DO want to know just how this works…", parse),
+			enabled : true,
+			func : function() {
+				Text.Clear();
+				Text.Add("Riiight. The dildo looks so interesting - and with so many buttons to boot - that you can’t help but want to see just how it works. Besides, you’ve got a helpless subject here who you can freely experiment on without any moral qualms whatsoever, so why the hell not?", parse);
+				Text.NL();
+				Text.Add("At the very least, you’d like to give the alchemist a taste of his own medicine, so to speak.", parse);
+				Text.NL();
+				Text.Add("Right then, chop chop. There’s only one hole on this guy in which this’ll fit, so time to get at it - actually coming into contact with the smelly old bastard isn’t the best of plans, because to say that he’s unpleasant to the touch would be a great understatement - but the thought of what you’re about to do keeps you going and determined. Besides, the stupid bleat the old goat lets out when you rip down the seat of his pants and expose his quivering ass for all to see is rather satisfying, if you might say so.", parse);
+				Text.NL();
+				Text.Add("He knows what’s coming, doesn’t he? So much so that you’re pretty certain this was amongst the things that he was planning to do to you, yes?", parse);
+				Text.NL();
+				Text.Add("<i>“You’ve no way of proving that!”</i>", parse);
+				Text.NL();
+				Text.Add("Hah. Perhaps, but he pretty much admitted it with those words, didn’t he? The alchemist wriggles and kicks with all his might as you hold him in position - face down on his knees with his exposed ass high in the air and presented neatly to you - but when it comes down to it, all his might isn’t quite enough to throw you off. You give his butt cheeks a few pokes with the doggy dildo’s tip as a warm-up of sorts, then look closer at the array of buttons on the dildo’s base.", parse);
+				Text.NL();
+				Text.Add("Oooh. What does <i>this</i> button do? You hover your finger over a small button labeled in tiny, spidery lettering: “red rocket rotator”. It calls out to you, beckoning, tempting… “push me!”, it seems to say. Frankly, it’s taking you a Herculean force of will to not just give in and press the button over and over and over again just to see what it does.", parse);
+				Text.NL();
+				Text.Add("<i>“Is that what I think it is?”</i> the old has-been bleats, a note of desperate fear entering his voice. <i>“Because if it is, you really, really shouldn’t touch it -”</i>", parse);
+				Text.NL();
+				Text.Add("Well, that was all the encouragement you needed to grasp the dildo’s handle firmly in your fingers and jam down hard on the button with your thumb.", parse);
+				Text.NL();
+				Text.Add("Oopsie! Butterfingers, honest!", parse);
+				Text.NL();
+				Text.Add("<i>“No! Fool! Do not push that butto-”</i>", parse);
+				Text.NL();
+				Text.Add("With an ominous whirr from deep within, the dildo’s head begins to rotate on its shaft - slowly at first, but rapidly spinning faster and faster as it begins to pick up speed. A thin coating of lube - no doubt from a reservoir within the handle - begins oozing from its tip, running down its sides and getting it all wonderfully slick and shiny.", parse);
+				Text.NL();
+				Text.Add("Faced with such a wonder of alchemical tinkering, you can’t hold back any longer - it’s just like a particularly gripping novel; you’ve got to see just what’s going to happen next. Taking aim at the old goat’s exposed pucker, you thrust your arm forward and jam the dildo’s revolving head straight into your target.", parse);
+				Text.NL();
+				Text.Add("The moment the two meet, the old goat lets out a massive, pained bleat that echoes down the entirety of the ravine; he wriggles desperately as the doggy dildo’s tapered end violates his back door, whirring all the while. Flecks of lube are thrown into the air as the old bastard’s sphincter is stretched wider and wider by the dildo’s girth - for a moment, you think that this isn’t going to work, that things are going to get stuck, but the lube does its job well enough and by and large you manage to get most of the tapered head in even as it’s revolving. The alchemist squeals like a pig in a poke, futilely shaking his ass in a bid to get free of the torturous implement, but your hold is firm and the revolving dildo stays in.", parse);
+				Text.NL();
+				Text.Add("He’s an ass virgin, isn’t he? With how tight he is, you don’t doubt it one bit - well, he’ll get used to it soon enough. You do have to wonder, though - just what was going through his mind when he actually <i>made</i> this thing? Yeah, sure, he might be a bit crazed, but you’re pre-tty sure that no one’s <i>that</i> crazed in order to go ahead and do something like… this. Not without help, anyway.", parse);
+				Text.NL();
+				Text.Add("<i>“...Commission…”</i>", parse);
+				Text.NL();
+				Text.Add("Oh, a commission, was it? And what was he paid in? Party powder? No, don’t tell. Hmm, it looks like he’s gotten pretty used to the revolving tapered tip by now - maybe it might be a good time to up the ante, then. Let’s see what you can do with another button…", parse);
+				Text.NL();
+				Text.Add("<i>“Fuck you… chafing…”</i> the old goat groans.", parse);
+				Text.NL();
+				Text.Add("Chafing? Oh well, maybe he should have added a better lube, then. They always say that the first time hurts, don’t they? Or maybe he should’ve thought of that <i>before</i> he went out ambushing random people in ravines to be unwilling test subjects? Never thought that one might turn the tables on him, did he? Now, about that button…", parse);
+				Text.NL();
+				Text.Add("He groans, and it’s not in pleasure.", parse);
+				Text.NL();
+				Text.Add("…Perhaps you’ll try this one, then. Your thumb finds another button, and the dildo begins to vibrate back and forth in your hand - and his ass. If the old goat’s squealing was bad before, the sounds he’s now making are beyond belief, wailing and wiggling about as his breadth of experience and asshole alike are similarly expanded. You can only wonder if this thing here has a “thrust” function - maybe it does, but it’s no fun having all the work done for you. Grinning madly, you begin pumping your arm back and forth, pistoning the dildo up and down the length of his back door. Alas, the knot is simply too large for it to fit inside no matter how much you cram it against the old goat’s sphincter, so you just leave it at that and merrily proceed apace.", parse);
+				Text.NL();
+				Text.Add("With such vigorous stimulation applied to the old goat’s insides, you aren’t surprised when his body begins acting of its own accord, humping and grinding against the vibrating doggy dildo in a lustful frenzy. Hairy and bony his ass may be, but he nevertheless rocks back and forth against the toy’s thick length, making bleating noises that sound alternately as if he’s in both pleasure and pain at the same time.", parse);
+				Text.NL();
+				Text.Add("And then it happens. Unable to withstand the furious milking any longer, the alchemist prostate gives way, and the old goat cries out as a stinking, steaming pool rapidly forms under him, soaking his pants all the way and leaving him kneeling in a pool of his own cum. He has barely enough time to recover when a second orgasm grips him, causing his puddle of release to grow ever larger.", parse);
+				Text.NL();
+				Text.Add("Huh, you didn’t know that he had that much in him. Appearances can be deceiving - maybe he has more left in there? You’re tempted to leave the dildo in there for a bit longer, see just how much cum can be wrung out of him…", parse);
+				Text.NL();
+				Text.Add("<i>“N-no! Please! N-no more!”</i>", parse);
+				Text.NL();
+				Text.Add("He’ll have to speak up, you can’t quite hear him straight. Was that something about him wanting more?", parse);
+				Text.NL();
+				Text.Add("He tries to give a reply, but manages little more than a handful of moans and mumbles before giving up and slumping in the puddle of his own cum.", parse);
+				Text.NL();
+				Text.Add("Oh well. Your arm’s getting quite tired holding the dildo in place, anyway - with such an enthusiastic display on his part, your wrist is already starting to ache a little. Best to stop before you get a full-blown wrist ache… and yet he looks like he hasn’t had enough yet, judging by the way he’s wiggling his butt at you.", parse);
+				Text.NL();
+				Text.Add("Hmm, what a conundrum. You think a moment, and then your eyes fall back upon the old goat’s toolbelt. Could it… why yes, it looks to be just about the right size for that. Straining to keep the dildo in with one hand while reaching out with the other, you barely manage to hook a couple of fingers about the toolbelt and draw it close. Yeah, there’s the buckle, and those are the straps… with a little jury-rigging, you manage to tie the toolbelt about the alchemist’s hands, looping them in place while using the rest of the material to wrap about his butt and hold the vibrating, rotating dildo in place. It’s not very secure - to be honest - but with the dildo keeping the alchemist’s gaping butthole occupied, you doubt he’ll be able to muster the will to free himself from his predicament.", parse);
+				Text.NL();
+				Text.Add("Bet he feels fine now, doesn’t he?", parse);
+				Text.NL();
+				Text.Add("The rancid old bastard moans, his mind mostly lost in pleasure now. You smile and give him a rub on his horns, then stand up and turn to leave. He’ll have to remain like this until either the doggy dildo’s power runs out, or someone finds him down here in this ravine and sets him free from his misery… although by the looks of him, he’s finally come around to the quiet glories of being pegged.", parse);
+				Text.NL();
+				Text.Add("Chuckling to yourself, you gather up your things and prepare to leave. The faint buzz of the toy still lodged on the alchemist’s ass follows you all the way out, and while you’d love to stay and see what happens next, you’ve got other things to do and places to go.", parse);
+				Text.Flush();
+				
+				player.AddSexExp(2);
+				
+				world.TimeStep({hour: 1});
+				
+				Gui.NextPrompt();
+			}
+		});
+		
+		options.push({nameStr : "Don’t Use",
+			tooltip : Text.Parse("You have a bad feeling about this. Just drop the doggy dildo and walk away.", parse),
+			enabled : true,
+			func : function() {
+				Text.Clear();
+				Text.Add("Hmm. As much as you’d like to see what exactly <i>this</i> is capable of, you just plain don’t feel like a little scientific experimentation today. Mercy… yeah, it’s a fun thing, maybe you’ll show a little.", parse);
+				Text.NL();
+				Text.Add("Taking the intricately crafted doggy dildo in hand, you toss it to the ground and stomp on it a few times, then a few more for good measure. It’s surprisingly fragile, its thin wooden casing coming apart easily to reveal springs, gears, and other mechanisms within - just what sort of daredevil would actually <i>want</i> all this inside him or her?", parse);
+				Text.NL();
+				Text.Add("Well, that question won’t be coming into play now. The alchemist lets out a cry of dismay as you smash the dildo to bits, which you guess is punishment enough if you’re not going to be using it.", parse);
+				Text.NL();
+				Text.Add("<i>“Have you any idea what you’ve done?”</i>", parse);
+				Text.NL();
+				Text.Add("Destroyed something which took a long time to build and likely highly valuable, thus pissing him off to no end? Why yes, you have an idea of what you’ve done, and he should be thankful you weren’t in a particularly creative or vindictive mood today. With that, you kick some more dirt on the old goat, then spin on your proverbial heel and leave him in your wake.", parse);
+				Text.Flush();
+				
+				Gui.NextPrompt();
+			}
+		});
+		Gui.SetButtonsFromList(options, false, null);
+	}, 1.0, function() { return true; });
+	
+	
+	/* TODO
+	scenes.AddEnc(function() {
+		Text.Add("", parse);
+		Text.NL();
+		Text.Add("", parse);
+	}, 1.0, function() { return true; });
+	*/
+	scenes.Get();
+}
+ 
+Scenes.MaliceScouts.Goat.LossPrompt = function() {
+	SetGameState(GameState.Event);
+	Text.Clear();
+
+	// this = encounter
+	enc = this;
+
+	var parse = {
+
+	};
+	parse = player.ParserTags(parse);
+
+	Gui.Callstack.push(function() {
+		Text.Clear();
+		Text.NL();
+		Scenes.MaliceScouts.Goat.LossEntry(enc);
+	});
+	Encounter.prototype.onLoss.call(enc);
+}
+
+Scenes.MaliceScouts.Goat.LossEntry = function(enc) {
+	//TODO More Loss Scenes
+	var scenes = new EncounterTable();
+
+	/* TODO
+	scenes.AddEnc(function() {
+
+	}, 1.0, function() { return true; });
+	*/
+	scenes.Get();
+}
+
+
