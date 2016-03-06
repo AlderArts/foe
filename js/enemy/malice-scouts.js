@@ -3171,7 +3171,7 @@ Scenes.MaliceScouts.Goat.LossEntry = function(enc) {
 		world.TimeStep({hour: 2});
 		
 		Gui.NextPrompt();
-	}, 1.0, function() { return player.IsHumanoid(); });
+	}, 1.0, function() { return player.Humanoid(); });
 	
 	/* TODO
 	scenes.AddEnc(function() {
