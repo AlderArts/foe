@@ -2412,10 +2412,10 @@ Scenes.MaliceScouts.Goat.WinTurnTables = function(enc) {
 					Text.Clear();
 					intro();
 					Text.Add("Right, no turning back now. Pulling down your [botarmor], you reach down and apply the cream you’ve gathered to your [balls]. ", parse);
-					if(player.BallSize().Size() >= 12) {
+					if(player.Balls().BallSize().Size() >= 12) {
 						Text.Add("With how large and weighty they already are, you have to use both hands to apply it with any reasonable speed and make sure that you get a more or less even coating of the sweet-smelling cream on your nuts. It’s not <i>difficult</i>, but it is tedious, and you’re sort of privately relieved when the job is done - especially with all the looks of barely restrained jealousy that the alchemist is shooting you. You’ve had to use a bit more than the original amount you scooped out from the tub in order to get everything slathered nicely, but there’s still plenty left over if it comes to that.", parse);
 					}
-					else if(player.BallSize().Size() >= 8) {
+					else if(player.Balls().BallSize().Size() >= 8) {
 						Text.Add("It’s not unpleasant, the sensation of the sweet-smelling alchemical stuff against your [balls] as you work in an even coating all over your nutsack. To be completely honest, the slightly greasy and oily feel to it distinctly reminds you of lube… and looking down at the rancid old bastard who concocted it, there’s a more than average chance that he intended just that.", parse);
 					}
 					else {
@@ -3172,6 +3172,106 @@ Scenes.MaliceScouts.Goat.LossEntry = function(enc) {
 		
 		Gui.NextPrompt();
 	}, 1.0, function() { return player.Humanoid(); });
+	
+	scenes.AddEnc(function() {
+		Text.Add("small bound book in black-dyed leather, about the size and thickness of a small notebook. <i>“Interesting reading material Malice gets these days, wonder where he’s getting all these from. Never struck me as a reading man, too. Now, where was it?”</i>", parse);
+		Text.NL();
+		Text.Add("You watch sullenly as the rickety old goat flips through a few pages, mumbling to himself. <i>“Right, right, let’s try this one - he wanted the results posthaste. Ahem - greater lactic rush… mm-hm, hm…”</i>", parse);
+		Text.NL();
+		Text.Add("He waggles a hand in the air and gestures at your chest. <i>“Evals klim ym emoceb llahs uoy.”</i>", parse);
+		Text.NL();
+		Text.Add("Have you heard that incantation before? It sounds distinctly familiar, a lingering recollection on the edge of your memory… your train of thought of halted in the middle of the line, though, by a distinct tingling sensation in your [breasts], followed by a steadily mounting pressure from within that begins to push outwards without regard for your [armor]. ", parse);
+		
+		var breastsize = player.FirstBreastRow().Size();
+		
+		if(breastsize < 2) {
+			Text.Add("Groaning, you throw your head back and stare up stupidly at the sky as firm flesh gathers on your chest, warm pressure causing two gently raised points to bud outwards before the sensation turns upon itself and washes back into the rest of your body. Rubbing the afflicted area only seems to amplify the pleasure further, and that’s what you end up doing - just unthinkingly rubbing away like a trained monkey while the perverted old goat takes notes.", parse);
+			Text.NL();
+			Text.Add("Well, he’s doing that with one hand, to be precise. He’s dropped his pants with the other and is busily stroking himself off, fingers firmly wrapped about seven stinking inches of goat-cock as the spell proceeds apace.", parse);
+			Text.NL();
+			Text.Add("A renewed surge of warm pressure runs through your chest, and you whimper and moan as the tiny breast-buds rapidly mature and grow, small pointy bumps ballooning outwards into deliciously rounded teardrop shapes, not that large but certainly <i>feeling</i> very weighty for what they’re worth. Your [armor] now feels considerably stretched - not a surprise given how much more volume it’s accommodating at the moment - and the alchemist is kind enough to help out by stopping his masturbation for a moment to yank it off with a slick, glistening hand, taking care to give you an grope in the bargain. It feels so good that you don’t care - even the weight of your [armor] is enough to to send erotic shivers down from your hypersensitive nipples.", parse);
+			Text.NL();
+			Text.Add("<i>“Instant results,”</i> he mutters not-quite under his breath before pausing to leer at you. <i>“Increase in volume of dense tissue of… hmm… Yes. Very nice.”</i>", parse);
+		}
+		else if(breastsize < 7.5) {
+			Text.Add("Coupled with the sheer sensitivity that’s been instilled in your [breasts], the feeling of having your lady lumps grow in this fashion is exquisitely delicious. It’s all you can do to gaze down stupidly at your chest as your [breasts] tremble and jiggle of their own accord, possessed by some invisible force that pushes them against each other as they swell from within.", parse);
+			Text.NL();
+			Text.Add("The perverted old goat hasn’t been idle, either. He’s got a pencil in one hand, scribbling down notes madly, while the other… well, he’s pulled down his pants and is busy beating himself off to the tune of seven inches of rock-solid goat-cock. How he manages to keep his concentration while clearly aroused like this is anyone’s guess, but you suppose that he’s no stranger to keeping work and pleasure separate, considering the nature of his profession.", parse);
+			Text.NL();
+			Text.Add("Pulsing and pushing, wobbling and jiggling like a pair of precarious jellies, your lady lumps eventually stop their growth at a firm C, a slight teardrop shape to them. The pressure keeps on for a little while longer, though - you feel it seeping into your [nips] before finally fading away, leaving you with a pair of stiff, swollen teats and an achingly sensitive chest. Moaning like a street whore, you push your hands together and rub at your breasts vigorously, but no matter how much you massage your now-jiggly tits the sensations simply won’t leave you.", parse);
+			Text.NL();
+			Text.Add("<i>“Very swift reaction,”</i> the alchemist bleats, his breath coming in gasps as he trails the numerous throbbing veins on his shaft with a finger. <i>“Extremely pleasurable for the subject, too… initial hostile intent practically evaporated within moments. Very satisfactory.”</i>", parse);
+		}
+		else {
+			Text.Add("You groan and roll your eyes back as the pressure builds up within your [breasts], sending them to throbbing and pulsing, growing outwards ever so slightly before shrinking back to their old size again. More and more pressure continues to mount, but it simply doesn’t seem to have a valid outlet to express itself, eventually fading away in a burst of tingles.", parse);
+			Text.NL();
+			Text.Add("Despite there being no outward change, that hasn’t stopped the alchemist from pulling down his pants and masturbating to the sight of your ample tits, one of his hands a blur as it moves back and forth across seven inches of goat-cock, the other scribbling away furiously as he takes notes with a stub of pencil.", parse);
+			Text.NL();
+			Text.Add("<i>“No additional volume added to the subject in question… the spell must realize when a sufficient size has been reached for optimum efficiency. Quite remarkable… one has to wonder where Malice gets his hands on things like these. Still, quite pleasurable for the subject, so not a complete loss.”</i>", parse);
+		}
+		Text.NL();
+		
+		_.each(player.AllBreastRows(), function(breasts) {
+			breasts.size.IncreaseStat(7.5, 10);
+		});
+		player.AddLustFraction(0.4);
+		
+		Text.Add("You’re just starting to recover from the rush of euphoric pleasure when another one hits, signaling the second phase of the spell. Blood practically rushes to your chest, creating an intense warmth in the surrounding [skin] as your [breasts] begin to throb in unison, areolae swollen and raised, [nips] diamond-hard and reaching up for the sky. Like it or not, your boobflesh just feels so <i>firm</i> and <i>turgid</i>, sending palpable waves of contentment into the rest of your body. Something about this just feels… <i>right</i>, and you’re somehow dissuaded to think too deeply or indeed be overly concerned about your current predicament.", parse);
+		Text.NL();
+		Text.Add("Then it begins. ", parse);
+		if(player.Lactation()) {
+			Text.Add("You were already milky before, but the alchemist’s spell has turned your previous production up to eleven. With a cry of pleasure, you clutch your tits and squeeze them for dear life as twin jets of milky goodness erupt from your [nips], geysering in the air before falling back down on you in a creamy white shower. The sensations emanating from your lady lumps are absolutely divine, washing over you from head to toe and making you feel just like ", parse);
+			if(player.Gender() == Gender.female)
+				Text.Add("the woman that you are", parse);
+			else
+				Text.Add("a woman", parse);
+			Text.Add(". You groan aloud, pushing and squeezing, but the flow seems to have absolutely no intention of abating anytime soon. If anything, it grows ever stronger, adding even more to the sweet-scented puddle of white you’re now lying in.", parse);
+		}
+		else {
+			Text.Add("Unable to withstand the build-up inside them, your [breasts] give way and spurt their load high into the air - twin streams of rich white cream that ribbon outwards before arcing back downwards and falling down onto you in a light, sweet shower. You might not have been lactating before, but whatever else the spell might have done to you, there’s little doubt that you are now.", parse);
+			Text.NL();
+			Text.Add("Naturally, accompanying this is an overwhelming sense of pleasure and satisfaction that radiates outwards from your tits - you never knew that being so milky, so <i>full</i> could feel this good. The only thing better than being full is being milked, and with a start, you realize that you’ve been doing just that for a good while now, groping and squeezing at your bountiful boobs in a frenzied burst of lusty pleasure.", parse);
+		}
+		Text.NL();
+		Text.Add("It’s in this manner that you hose down the gravelly soil with thick streams of your milk, seemingly more than the entire mass of your body; at any rate, the spell is clearly keeping you from ending up dehydrated from the sheer mass of fluid that’s pouring out from you. The constant gushing from your [nips] caresses the insides of your lady lumps, silken hands stroking away beneath your skin, and you grit your teeth as your pleasure approaches its peak.", parse);
+		Text.NL();
+		Text.Add("<i>“Marvelous! Marvelous! Far more than I could have ever hoped for!”</i> the randy old goat bleats, rushing forward to stand over you. Smacking your hands away, he personally sees to the milking of your overproductive tits, a big grin plastered over his face as his long, bony fingers dig into your milky mammaries. Perhaps you should care, but it just feels so <i>good</i> to be milked like this, and to be fair your arms were getting a bit tired anyway, so having someone else take over for you is just fine.", parse);
+		Text.NL();
+		Text.Add("Nevertheless, if he’s going to be a dear and service you like this, it’s only fair for you to reciprocate the favor. The alchemist’s still-erect shaft bobs up and down in front of you, all seven inches of man-meat flicking drops of pre to mix in with your milky bounty - it’s a simple matter for you to reach up and take it in hand, then start stroking it like he was doing, pistoning your palm up and down its knobby, veined length. He clearly wasn’t expecting you to do that, stumbling a little and shifting his weight to compensate even as he doubly redoubles his efforts to grope you into oblivion.", parse);
+		Text.NL();
+		Text.Add("<i>“Little slut,”</i> he bleats, <i>“spell or no spell, I’m going to milk you as dry as a bone.”</i>", parse);
+		Text.NL();
+		Text.Add("Hah, you’d like to see him try.", parse);
+		Text.NL();
+		Text.Add("<i>“Challenge accepted.”</i> With that, the alchemist squeezes down hard with his bony fingers, painfully constricting your [breasts] in his grasp. You yelp and push your chest forward, ramming your milk-makers into his hands and causing your milk to blast out even faster. The entirety of the randy old goat’s smock is utterly soaked with sweet lactate, and his hair is awash with the same stuff; you’re vaguely aware of the fact that this might be the first bath the rancid old has-been has taken in some time.", parse);
+		Text.NL();
+		Text.Add("You’re not one to give up without a fight, though! By now, plenty of milk has wormed its way in between your palm and his shaft, acting as plentiful lubricant - or at least, better than what was there before. You do your best to match blow for blow, pumping away like a possessed madman at his shaft, determined not to lose a second time.", parse);
+		Text.NL();
+		Text.Add("Your grit pays off. The alchemist is the first one to crack, letting out a loud, dolorous bleat as his cock twitches once, twice, then lets loose a stream of spunk almost as torrential as the milk erupting from your aching nipples. It’s thick, it’s heavy, and it stinks to high heaven, a fact that’s thankfully abated somewhat as it mixes in with your sweet offering.", parse);
+		Text.NL();
+		Text.Add("<i>“Harder! FASTER!”</i> the alchemist bleats at the top of his lungs, clearly unwilling to give up either. Nevertheless, you note that he’s starting to weaken - he’s clearly been pent-up for a long time, and that release took its toll on him. Your suspicions are confirmed when he groans, shudders, and lets out another heavy blast of spunk onto you, the ponderous orbs hanging between his legs shrinking slightly with this second emptying.", parse);
+		Text.NL();
+		Text.Add("And just in time, too, as whatever magic the alchemist wove upon you begins to unravel, having run its course. You start squeezing your breasts as their flow diminishes, anxious to continue the pleasure, but eventually all good things come to an end and you have to admit that the bulk of the spell’s effects have finally worn off - although something in your [breasts] feels fuller and riper, eager and ready to give forth a greater bounty the next time you drain your lady lumps.", parse);
+		Text.NL();
+		
+		player.lactHandler.lactationRate.IdealStat(10, 1);
+		player.lactHandler.milkProduction.IncreaseStat(5, 1);
+		
+		Text.Add("Nevertheless, considering how strangely erotic the constant lactation was, you can’t help but continue pulling at your fattened nipples for a good minute or two even after the milk has completely stopped, secretly hoping that doing so might prolong the spell just a little longer.", parse);
+		Text.NL();
+		Text.Add("It doesn’t.", parse);
+		Text.NL();
+		Text.Add("<i>“Ugh,”</i> the alchemist groans woozily, tottering on his feet. Spent and sated, his member is quickly going limp and flaccid, and as you watch, the old goat slips in a puddle of milk and lands on the ground with a large splash face-up. He wiggles about a bit in the mess, trying to get comfortable, but doesn’t bother to get up.", parse);
+		Text.NL();
+		Text.Add("Well, here’s your chance to get away before this crazy old bastard comes up with something even more deranged - even if pleasurable - to inflict upon you. Taking one last look back at the mess you’ve created and shaking your head and the enormous milk puddles slowly draining into the rocky dirt - lactic rush indeed - you scrounge together the remainder of your strength and drag yourself away hand over foot, collapsing into a small cubbyhole in the side of the ravine.", parse);
+		Text.NL();
+		Text.Add("Right, right. You can be on your way… once you’ve rested a bit, cleaned yourself up and gotten everything in order. Then there’s the matter of your newly enhanced mammaries… giving the firm boobflesh a poke and shuddering at the erotic tingles the touch generates, you sigh and shake your head. That’s going to have to be dealt with sooner or later…", parse);
+		Text.Flush();
+		
+		world.TimeStep({hour: 1});
+		
+		Gui.NextPrompt();
+	}, 1.0, function() { return true; });
 	
 	/* TODO
 	scenes.AddEnc(function() {
