@@ -388,7 +388,7 @@ function GoatAlchemist(levelbonus) {
 	this.body.SetEyeColor(Color.gray);
 	//TODO
 	this.weaponSlot   = Items.Weapons.MageStaff;
-	this.topArmorSlot = Items.Armor.MageRobes;
+	this.topArmorSlot = Items.Armor.SimpleRobes;
 
 	this.Equip();
 
@@ -2412,10 +2412,10 @@ Scenes.MaliceScouts.Goat.WinTurnTables = function(enc) {
 					Text.Clear();
 					intro();
 					Text.Add("Right, no turning back now. Pulling down your [botarmor], you reach down and apply the cream you’ve gathered to your [balls]. ", parse);
-					if(player.Balls().BallSize().Size() >= 12) {
+					if(player.Balls().BallSize() >= 12) {
 						Text.Add("With how large and weighty they already are, you have to use both hands to apply it with any reasonable speed and make sure that you get a more or less even coating of the sweet-smelling cream on your nuts. It’s not <i>difficult</i>, but it is tedious, and you’re sort of privately relieved when the job is done - especially with all the looks of barely restrained jealousy that the alchemist is shooting you. You’ve had to use a bit more than the original amount you scooped out from the tub in order to get everything slathered nicely, but there’s still plenty left over if it comes to that.", parse);
 					}
-					else if(player.Balls().BallSize().Size() >= 8) {
+					else if(player.Balls().BallSize() >= 8) {
 						Text.Add("It’s not unpleasant, the sensation of the sweet-smelling alchemical stuff against your [balls] as you work in an even coating all over your nutsack. To be completely honest, the slightly greasy and oily feel to it distinctly reminds you of lube… and looking down at the rancid old bastard who concocted it, there’s a more than average chance that he intended just that.", parse);
 					}
 					else {
