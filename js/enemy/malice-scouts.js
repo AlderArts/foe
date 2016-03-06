@@ -2232,6 +2232,7 @@ Scenes.MaliceScouts.Goat.WinTurnTables = function(enc) {
 		
 	};
 	parse = player.ParserTags(parse);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	
 	Text.Clear();
 	Text.Add("Snorting, you step forward towards the randy, unkempt old goat and give the bastard a kick in his side just to make sure he stays down and tries no funny tricks. So, he was planning to use you as a guinea pig for whatever crazed experiments he had in mind, didn’t he? Has he ever come across the saying, “physician, heal thyself”?", parse);
@@ -2274,6 +2275,7 @@ Scenes.MaliceScouts.Goat.WinTurnTables = function(enc) {
 		Text.Add("What will you do?", parse);
 		Text.Flush();
 		
+		world.TimeStep({hour: 1});
 		
 		//Structure this as such: random opening for each of the four body parts, followed by body-part specific portion. Alchemist and leave have their own blocks altogether.
 		
@@ -2410,10 +2412,10 @@ Scenes.MaliceScouts.Goat.WinTurnTables = function(enc) {
 					Text.Clear();
 					intro();
 					Text.Add("Right, no turning back now. Pulling down your [botarmor], you reach down and apply the cream you’ve gathered to your [balls]. ", parse);
-					if(player.Balls().Size() >= 12) {
+					if(player.BallSize().Size() >= 12) {
 						Text.Add("With how large and weighty they already are, you have to use both hands to apply it with any reasonable speed and make sure that you get a more or less even coating of the sweet-smelling cream on your nuts. It’s not <i>difficult</i>, but it is tedious, and you’re sort of privately relieved when the job is done - especially with all the looks of barely restrained jealousy that the alchemist is shooting you. You’ve had to use a bit more than the original amount you scooped out from the tub in order to get everything slathered nicely, but there’s still plenty left over if it comes to that.", parse);
 					}
-					else if(player.Balls().Size() >= 8) {
+					else if(player.BallSize().Size() >= 8) {
 						Text.Add("It’s not unpleasant, the sensation of the sweet-smelling alchemical stuff against your [balls] as you work in an even coating all over your nutsack. To be completely honest, the slightly greasy and oily feel to it distinctly reminds you of lube… and looking down at the rancid old bastard who concocted it, there’s a more than average chance that he intended just that.", parse);
 					}
 					else {
@@ -2459,7 +2461,7 @@ Scenes.MaliceScouts.Goat.WinTurnTables = function(enc) {
 				Text.Clear();
 				intro();
 				if(player.FirstBreastRow().Size() > 10) {
-					Text.Add("Hmm. You consider your [breasts] for a moment - sure, they’re large and weighty, but hell, you could do with even bigger ones. Looking down at the nice perky pair of Bs you’ve given the bleating bastard lying at your [feet/tail], you’re pretty sure that even though you have a pretty good thing already going, it can still be improved further with a healthy application of some cream from this little tub.", parse);
+					Text.Add("Hmm. You consider your [breasts] for a moment - sure, they’re large and weighty, but hell, you could do with even bigger ones. Looking down at the nice perky pair of Bs you’ve given the bleating bastard lying before you, you’re pretty sure that even though you have a pretty good thing already going, it can still be improved further with a healthy application of some cream from this little tub.", parse);
 				}
 				else {
 					Text.Add("Hmm. Well, considering the nice pair of lady lumps that the cream has produced on the goat alchemist’s chest, you can only wonder what it can do for you. You <i>do</i> suppose that you could do with some additional heft - and if the results before your eyes are any indication of the final result, then you won’t just be getting a boost in quantity, but quality as well. What’s not to love?", parse);
@@ -2792,13 +2794,14 @@ Scenes.MaliceScouts.Goat.WinTurnTables = function(enc) {
 	}, 1.0, function() { return true; });
 	
 	
-	/* TODO
+	/* TODO other items
 	scenes.AddEnc(function() {
 		Text.Add("", parse);
 		Text.NL();
 		Text.Add("", parse);
 	}, 1.0, function() { return true; });
 	*/
+	
 	scenes.Get();
 }
  
@@ -2816,19 +2819,366 @@ Scenes.MaliceScouts.Goat.LossPrompt = function() {
 
 	Gui.Callstack.push(function() {
 		Text.Clear();
+		Text.Add("Triumphant, the alchemist looms over you, fingering his toolbelt with barely restrained anticipation and glee. <i>“Now, I could say that this was an exercise in tedium, but to be honest I’m glad you got your blood flowing and body all limbered up. Cuts down on the time spent waiting around for results to show up.”</i>", parse);
 		Text.NL();
+		Text.Add("Now that the old goat is so close, you really can’t escape his rancid stink anymore. It distinctly reminds you of something of a cross between old cheese and rotting fish, and you have to wonder just exactly how long it is since this idiot last bathed.", parse);
+		Text.NL();
+		Text.Add("<i>“Don’t worry,”</i> he continues. <i>“I’d like to think that I’m a very ethical experimenter - there’s little point in making irreversible changes or permanently impairing potential test subjects, it makes acquiring the next one all that more difficult. Now, let’s see what I wanted to take a look at here…”</i>", parse);
+		Text.NL();
+		Text.Add("The alchemist pats at his toolbelt, chewing at his lip with his buckteeth until he flips open a small pouch and his hands close in upon a ", parse);
 		Scenes.MaliceScouts.Goat.LossEntry(enc);
 	});
 	Encounter.prototype.onLoss.call(enc);
 }
 
 Scenes.MaliceScouts.Goat.LossEntry = function(enc) {
+	var parse = {
+		
+	};
+	parse = player.ParserTags(parse);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+	
 	//TODO More Loss Scenes
 	var scenes = new EncounterTable();
 
+	// Tentacle Pet
+	scenes.AddEnc(function() {
+		
+		var tentacock = new Cock();
+		tentacock.type = CockType.tentacle;
+		tentacock.length.base = 50;
+		tentacock.thickness.base = 8;
+		
+		Text.Add("small box about the size of two clenched fists laid side by side. Small, greyish and metallic, and completely nondescript, its exterior bearing no hint of what might be inside.", parse);
+		Text.NL();
+		Text.Add("<i>“I managed to make a little friend by the lake the other day. It’s got some rather strange appetites, and I think you might want to meet it.”</i> He sniggers in a most unpleasant way. <i>“It likes making new friends. It has potential, but I’d like to study its habits in a little more detail.”</i>", parse);
+		Text.NL();
+		Text.Add("With that, he flips open the box’s lid, and it opens with a creak before he sets it down on the ground. Nothing happens for a little while longer, and then you hear something… something <i>sloshing</i> about in the depths of the box. For something that fits into so small a container, it sure is making a lot of noise…", parse);
+		Text.NL();
+		Text.Add("<i>“I’m sure it’d like to get to know you better. It sure did a handful of the mares back at camp.”</i>", parse);
+		Text.NL();
+		Text.Add("The sloshing sounds continue to grow louder and louder, until at the last something oozes its way out of the box’s lid, hanging loosely over the edge - the tip of a single tentacle. This is rapidly followed by the rest of it, followed by another, and another, and another, until you’ve got a total of eight tentacles protruding from the box, waving about in the air and testing their surroundings.", parse);
+		Text.NL();
+		Text.Add("You gulp.", parse);
+		Text.NL();
+		Text.Add("It seems impossible that all <i>that</i> could have come from within the tiny box, but if anything could, then this would be it - the goo-tentacles look like they could be distinctly squishy and pliable when need be - as opposed to their current firm and turgid forms…", parse);
+		Text.NL();
+		Text.Add("<i>“Quite the marvel, isn’t it? Everyone knows that goo-girls live in the lake, but this is something else altogether! Maybe it’s why those goos stick around the lake instead of migrating upstream? It even grows from cuttings, like a plant! Oh well, I’ll just sit back and leave the both of you to it! If you need me, I’ll just be way back over there, taking… notes! That’s right, taking notes!”</i>", parse);
+		Text.NL();
+		Text.Add("The goo tentacles dart closer, flowing even further out from their box, and you’re able to get a better look at your impending violation. Each of them is a clear, transparent blue, perhaps one and a half-times as girthy as your arm but far, far more dexterous. The shapes of their ends vary - most of them have smooth, tapered tips, but two of them sport phallic heads, and a third is ribbed with bands of gelatinous material, undulating and pulsing rhythmically as beads of moisture drip off its length - or at least, you can only assume it’s moisture and not something else altogether. Their smooth surfaces ripple and shift as they surge and slither towards you, quickly closing the distance over the thin, gravelly soil.", parse);
+		Text.NL();
+		Text.Add("In the blink of an eye, it’s got you trussed up in its cool and unpleasantly pliant appendages. One tentacle whips out, coiling its length about your ankles and binding them tight; the other does the same with your wrists, effectively immobilizing you.", parse);
+		Text.NL();
+		Text.Add("<i>“This little guy appears to feed on fluids,”</i> the alchemist remarks as he makes himself comfortable on a nearby boulder and brings out a sketchpad. <i>“I’ve tried a number of things… milk, alcohol, even plain water, but he seems to enjoy sexual fluids the most.</i>", parse);
+		Text.NL();
+		Text.Add("<i>“And with my experiments as they are, I usually don’t even have to go out of my way to feed it - one way or the other, it keeps on coming across the yummiest, tastiest food. No wonder the little guy likes sticking by me. I’ve never considered myself much of a naturalist, but I’ve been reconsidering that of late. I may be getting on in years, but it isn’t too late to go dabbling into another field, yes?”</i>", parse);
+		Text.NL();
+		Text.Add("As he speaks, two more of the tapered-tip tentacles took themselves about your ", parse);
+		if(player.Armor() || !player.LowerArmor())
+			Text.Add("[armor]", parse);
+		if(player.Armor() && player.LowerArmor())
+			Text.Add(" followed by your ", parse);
+		if(player.LowerArmor())
+			Text.Add("[botarmor]", parse);
+		Text.Add(" with practiced ease - either the goo tentacles instinctively know how to go about divesting people of their clothing, or it’s had a <i>lot</i> of practice doing such. The cool tips brush against your [skin] gently, their touch cold at first, but quickly blossoming into a supremely erotic warmth that quickens your pulse and leaves you gasping for breath.", parse);
+		Text.NL();
+		Text.Add("<i>“Oh, I almost forgot to mention,”</i> the alchemist quips as the tentacle beast rips your [armor] off and flings it away. <i>“My little pet here also secretes a rather nasty contact venom. Not the most potent, that’s for sure, but it does what it’s meant to very well, for an aphrodisiac.”</i>", parse);
+		Text.NL();
+		Text.Add("An… oh. OH. By now, the tentacles about your ankles have worked their way up your legs and are very securely coiled about your thighs, spreading more of that slick venom on your body. It’s getting hard to think straight… or of anything but lying back in surrender and allowing yourself to be utterly violated over and over by this magnificently phallic beast. Panting and groaning in anticipation of what’s to come, you’re unable to resist as the tentacles wrench your thighs apart, held as securely as if you were locked in a pair of spreader bars.", parse);
+		Text.NL();
+		Text.Add("With that, it begins.", parse);
+		Text.NL();
+		if(player.FirstCock()) {
+			Text.Add("Already achingly stiff from the aphrodisiac’s effects, your [cocks] ", parse);
+			if(player.NumCocks() > 1) {
+				Text.Add("are already obscenely aroused and swollen from the goo tentacles’ venom, a powerful desire to unload your seed already welling up in your groin, growing by the second. The beast seems surprised to find such a brace of malenesses in one place - perhaps it thinks it’s found another of its kind? - and proceeds cautiously, sending a single probing tentacle to wrap about each of your shafts one by one, testing their [cockTip]s before moving onto the next one.", parse);
+				Text.NL();
+				Text.Add("The tentative tickling only serves to turn you on even more, and before long you’re straining at the clear tentacles, your [cocks] throbbing and bobbing in their restraints even as you mindlessly hump away, your lusts amplified by the copious amounts of aphrodisiac venom being directly applied to your manhoods.", parse);
+				Text.NL();
+				Text.Add("At last, the beast seems to make up its mind as to what it wants to do. Though your cloudy vision, you see yet another tapered tentacle quiver and quake, its end splitting apart into a stretchy, worm-like orifice. This it rapidly attaches to the nearest of your shafts, latching onto the tip with a pop and suckling away with a powerful suction.", parse);
+			}
+			else {
+				Text.Add("twitches and throbs in time with your heartbeat as the aphrodisiac venom directly applied to it takes effect, increasing your burgeoning desire to empty your seed onto - well, you really don’t care where it ends up, so long as it’s out from you.", parse);
+				Text.NL();
+				Text.Add("The goo tentacles take their time in growing your arousal, gently caressing and rubbing with those stretchy, slimy appendages.", parse);
+			}
+			Text.NL();
+			Text.Add("You can’t take any more, and howl out loud in pure bliss. The goo tentacles have you right where they want you - controlling you like a poppet through your rod - and know just what to do for you to go along obediently with their plan. The open tentacle suckles hard on the [cockTip] it’s attached to, greedily slurping up every last drop of pre-cum you produce, an appetizer in anticipation of the main course yet to come.", parse);
+			Text.NL();
+			Text.Add("Despite your urgent arousal, you’re denied your release just yet. Oh no, that would probably be too easy… and you get the feeling that this goo beast is saving the best for last.", parse);
+			Text.NL();
+			player.AddSexExp(1);
+		}
+		//mouth block
+		Text.Add("Without you noticing, one of the moist, slimy tentacles has worked its way to mouth, taking advantage of your distraction in resisting your bindings to creep up on you. Before you know it, one of the thick, phallic tentacles has forced its way between your lips and pushed aside your tongue, quickly numbing your gag reflex and slipping down your throat.", parse);
+		Text.NL();
+		Text.Add("For some reason… it tastes like mint. Well, mint isn’t so bad - for a mysterious, slime-coated tentacle, it could have had a much worse flavor. Strawberries, perhaps.", parse);
+		Text.NL();
+		Text.Add("Leaving you just enough room to breathe, the phallic tentacle begins facefucking you, sliding up and down your throat - up all the way until its bulbous tentacle-head is just inside your mouth, what possibly passes for its urethra ticking the roof of your palate, then diving in deep. More than a little confused, you bite down on the goo tentacle more than once, but the pliant jelly flows seamlessly about your teeth and inflates itself, forcing your jaws apart again.", parse);
+		Text.NL();
+		Text.Add("It’s just so big, so thick… and the aphrodisiac minty slime that moistens its surface is making you ever hornier and hornier, especially since it’s being applied directly to the insides of your throat. Throwing a glance at the alchemist, the crazed old goat has gleefully dropped his pants and is shamelessly beating himself off to the sight of you being trussed up and violated like this. Hell, he isn’t even pretending to take notes anymore, instead rocking back and forth on the boulder he’s sitting on, pumping his hand up and down, only stopping occasionally to add more lotion from a small flask from his belt.", parse);
+		Text.NL();
+		Text.Add("By now, even more clear blue tentacles have emerged from the box, writhing and pumping in the air in fits of excitement as they slither towards you, eager to join their fellows. Seems like you’re in for yet more fun…", parse);
+		Text.NL();
+		player.AddSexExp(1);
+		//breast block
+		if(player.FirstBreastRow().Size() > 7.5) { //D
+			var womb = player.PregHandler().Womb();
+			var preg = womb && womb.pregnant;
+			
+			Text.Add("Indeed, you steadily become aware of yet another cool slickness wrapping itself about your ", parse);
+			if(preg && womb.progress >= 0.4) {
+				Text.Add("pregnant, bulging", parse);
+			}
+			else {
+				Text.Add("slender", parse);
+			}
+			Text.Add(" waist, coiling itself about you securely before the phallic tip slides along your ribs and nudges the underside of your ample cleavage. Electrifying tingles run through your [breasts] as it pushes again and again, applying a little more force each time, daubing a little more aphrodisiac slime onto the bottom of your lady lumps with each pass.", parse);
+			Text.NL();
+			Text.Add("N-no… try as you might, you can distinctly feel heat building in your face as the underside of your [breasts] finally parts, allowing the turgid tentacle to delve into your cleavage from the bottom. You can feel it working its way upwards, pushing aside your lady lumps as it pulses and undulates accordingly, and then the tentacle’s phallic tip bursts out from the top of your cleavage, bumping against your chin as it worms about and tastes the air.", parse);
+			Text.NL();
+			Text.Add("Caught in the tentacles’ slimy embrace, you feel your half-lidded eyes begin to droop further as your breasts jiggle and shake, wobbling about from the tentacle’s fervent thrusting. You can <i>feel</i> the blood rushing to your chest, feel your mammaries and nipples swell ever so slightly with the hot flush of excitement, and the anticipation brought on by your body clearly preparing itself for <i>something</i> is maddeningly arousing.", parse);
+			Text.NL();
+			if(player.Lactation()) {
+				Text.Add("Having aroused you sufficiently, the tentacle caressing your [breasts] bends in upon itself with inhuman flexibility, more of its length surging up until there’s enough length for its head to be level with your [nips]. You suck in a sharp breath and slowly let it out around the tentacle in your mouth as the tentacle’s phallic head parts, opening up like the petals of a flower to reveal a hungry, maw-like orifice that wastes no time attaching itself to the nearest swollen nipple, engulfing the pleasurable little nub of flesh and swallowing it whole along with the surrounding raised areola.", parse);
+				Text.NL();
+				Text.Add("Tears spring to your eyes, but they’re not ones of pain; your body takes on a life of its own and thrashes against its slippery bindings as you make muffled noises of ecstasy in the back of your throat. Accompanying the rhythmic suckling of the tentacle tip is yet more of the constant back and forth of its length in your cleavage, your ample jugs trailing its movements and making you fully aware of just how weighty they are upon your chest.", parse);
+				Text.NL();
+				if(preg && womb.progress >= 0.4) {
+					Text.Add("With how delicate your pregnancy has made your [breasts], you can’t even begin to try resisting the tentacle as it slurps and suckles away, stealing the enriched milk that’s intended for your unborn progeny. Sure, you’ll just make more <i>and</i> it feels so <i>good</i> to be milked like this, but still…", parse);
+					Text.NL();
+					Text.Add("The pumping on your nipples grows more intense, your breastflesh seeming to grow warm as you feel your milk let down in earnest, and the last of the reservations is swept from your mind as convulsions wrack your body in a beautiful, blissful boobgasm.", parse);
+					Text.NL();
+					Text.Add("Spirits above, you want this so badly. Mindlessly, you thrust your ample chest out at the tentacle, catching the creature by surprise and causing it to double take; it nevertheless swiftly recovers and reciprocates the gesture as eagerly. You want to be milked, to be suckled dry, not just here and now by this goo-tentacle-beast, but also when you finally birth the fruit of your womb. You just want to be a literal milk-maid, giving suck to an endless legion of feeders, your ever-full mammaries instilling orgasm after orgasm for all eternity.", parse);
+					Text.NL();
+					Text.Add("Is this just the aphrodisiac venom talking, or is it you? Who cares? More and more rich white cream flows outwards from your fat, engorged nipples, traveling down the goo’s translucent tentacles before finally disappearing into its main body, and the mere sight gives you a rush of excitement and fulfillment that leaves you groaning and sighing like the milk slut that you’re becoming.", parse);
+					
+					player.slut.IncreaseStat(75, 2);
+				}
+				else {
+					Text.Add("With you all trussed up like this, you couldn’t resist even if you wanted to; your limbs feel as if they’ve been turned to jelly, with all the strength having left them. Slurping and suckling, the tentacle drinks every last drop of fluid it can wrangle from your milk jugs - you can actually <i>see</i> the stuff traveling down its translucent insides back into the box - before moving onto the next and doing the same.", parse);
+				}
+				Text.NL();
+				
+				player.MilkDrain(25);
+				
+				Text.Add("It seems like forever before the tentacle has drained you dry, but it eventually manages the task and detaches from your nipple, its “mouth” closing back together into its old phallic shape with a wet slurp. As far as you can tell, it looks quite pleased with the meal it’s just had - but still hungry for more.", parse);
+			}
+			else {
+				Text.Add("Having aroused you to breaking, the tentacle gently prods at your nipples and areolae, caressing the diamond-hard nubs and making you ache with desire. It seems to be probing, questing for something, yet it can’t have found what it was looking for, since it withdraws at length, looking almost disappointed.", parse);
+				Text.NL();
+				Text.Add("Nevertheless, it tries a few more times, rubbing its head against your sensitive and heated breastflesh until it’s sure that whatever it was looking for isn’t there and retreats.", parse);
+				Text.NL();
+				Text.Add("Either way, being deprived of one thing isn’t stopping the goo beast any. You do, after all, have so many other soft, fleshy parts to be toyed with, and the tentacles get to exploring them with swift efficiency, perhaps to make up for time lost in this momentary diversion.", parse);
+			}
+			Text.NL();
+			player.AddSexExp(1);
+		}
+		// vag block
+		if(player.FirstVag()) {
+			Text.Add("At last, it’s time for the ribbed tentacle to make its move. For some reason, there’s only one of these, and as you look on in your aphrodisiac-fueled stupor, you quickly realize why. The tentacle is actually <i>growing</i> before your eyes, gaining in girth even as the ribs along its length stand out even further from its main body, slick and rigid, just waiting to be used.", parse);
+			Text.NL();
+			Text.Add("Without further ado, the tentacles spread you even further apart, a cool brush of Highlands air greeting your dripping cunt as it’s fully exposed for all to see. All the stimulation up to this point leaves little doubt as to the nature of your aroused state, and without further ado, the gigantic ribbed tentacle slithers its way up your inner thigh and pauses just outside your pussy. You wonder if it’s going to tease you for a bit - no, clearly it thinks you’re wet enough already, for it rams itself into your waiting cooch.", parse);
+			Text.NL();
+			
+			if(player.FirstVag().Tightness() < Orifice.Tightness.gaping)
+				player.FirstVag().stretch.base = Orifice.Tightness.gaping;
+			
+			Sex.Vaginal(null, player);
+			player.FuckVag(player.FirstVag(), tentacock, 1);
+			
+			Text.Add("You squeal in a mixture of equal parts pain and pleasure as you strain to accommodate the massive ribbed tentacle in your cunt. No matter how stretchy you are - or not - the tentacle can simply add more mass to make the fit painfully tight, which it does with gusto. The tentacles on your thighs reaffirm their hold on you, spreading more venom on your [skin], then begin bouncing you up and down on the massive, ribbed tentacle.", parse);
+			Text.NL();
+			Text.Add("If you weren’t gaping before, you are now. With how wet you are - considerably wetter than you remember yourself being under any normal circumstances - the passage of the tentacle into your love-tunnel is easier than it otherwise might have been, but it’s still by no means easy. Somewhere in the back of your mind, in a place that’s not completely occupied with how <i>good</i> the tentacle feels as it squirms and undulates in you, you realize that the goo beast’s venom must be causing the extra wetness in your cunt. After all, it’s feeding off your fluids, and the more pleasure it gives you, the more food it receives…", parse);
+			Text.NL();
+			Text.Add("Your thoughts are cut short by a powerful pounding between your legs - it seems like in addition to being impaled, the tentacle has begun thrusting, too. The goo may be normally pliant, but the thing inside you is gloriously strong and hard as it rams into you again and again, filling every bit of space you have available in you as it bottoms out against your womb. It doesn’t try to go any further, but that’s more than enough for you to see your mound bulge dangerously as it’s stuffed full up, your now-hypersensitive inner walls keenly feeling the ribs on the tentacle each and every time it slides along your slick cunt.", parse);
+			Text.NL();
+		}
+		//ass block
+		Text.Add("Last but not least, there’s still your ass which needs dealing with - and the slime tentacles aren’t about to leave an empty orifice unexplored, no. A particularly bulbous phallic tentacle crawls out from the box, a massive knob on the tip of an exceptionally girthy goo appendage. It pauses in front of you for a moment, almost as if to make sure you’re watching, then dives around behind you and out of sight. You can’t see where it’s going, but you can definitely <i>feel</i> the tentacle as its massive head forces its way into your [anus], violating you in every way imaginable - and then some.", parse);
+		Text.NL();
+		
+		Sex.Anal(null, player);
+		player.FuckAnal(player.Butt(), tentacock, 1);
+		
+		if(player.Butt().Tightness() >= Orifice.Tightness.loose) {
+			Text.Add("Good thing that you did all that anal training, for it finally paid off today! There’s a little - well, admittedly a lot of - discomfort as the tentacle worms its way into you; it’s a very tight fit, but your sphincter is strong and brave, stretching wide to admit the tentacle’s head without running the risk of tearing. Even the goo itself seems surprised at this, twisting to and fro like a corkscrew as it explores the insides of your butt, but calms down once it realizes you’re the one with the problem, not it.", parse);
+			Text.NL();
+			Text.Add("Eventually, the two of you come to some sort of compromise: the tentacle pumps more fluid into its tip until it’s snug inside you - but not overfull - and you don’t resist too much.", parse);
+		}
+		else {
+			Text.Add("Twisting and turning like a giant corkscrew, the bulbous tentacle takes a perverse pleasure in forcing its way into you, prying apart your poor asshole and causing you to stretch torturously in order to accommodate its massive girth. You feel like you’re being torn asunder as more and more goo pulses and flows into your back door, several whole sessions of anal training compressed into the short space of a mere few moments.", parse);
+			Text.NL();
+			Text.Add("It’s not over, though. Once the bulk of the tentacle is firmly sequestered in your rectum, you feel it begin to swell even further, filling you up and stretching you out until you’re groaning and gasping at the sheer sensation of being stuffed to the absolute brim.", parse);
+			Text.NL();
+			Text.Add("Yeah… if you weren’t gaping before, then you’re now. Either way, there’s no doubt that you’re going to be walking funny for the next few days…", parse);
+		}
+		if(player.Butt().Tightness() < Orifice.Tightness.gaping)
+			player.Butt().stretch.base = Orifice.Tightness.gaping;
+		
+		Text.NL();
+		Text.Add("Surprisingly, though, the tentacle doesn’t seek to push itself any further into your back door - or move very much at all, for that matter. All it does is just sit in your behind and occupy every single last jot of space that you have to spare, pulsating gently every few moments.", parse);
+		Text.NL();
+		Text.Add("The movements may be slight and subtle compared to what’s just happened to you, but it’s nevertheless strangely arousing. Besides, there’s little doubt that your bowels have already been given a thick coating of the beast’s aphrodisiac venom, which is certainly helping things along…", parse);
+		Text.NL();
+		//orgasm block
+		Text.Add("With you being stuffed from both ends and in every available orifice, it’s a small miracle that you haven’t effected a release already. Instead, the tentacles’ pounding and caressing keeps you constantly on the brink, teetering on the edge but unable to fall over or get secure footing.", parse);
+		Text.NL();
+		Text.Add("To say it’s frustrating would be the understatement of a lifetime. You wiggle about in the crushing goo coils, trying to find that last brush, that last touch that’ll finally grant you sweet, sweet release, but it maddenly eludes you despite your best efforts. Seems like you’ll only get to get off when the goo beast allows you to, and not one moment earlier.", parse);
+		Text.NL();
+		if(player.FirstCock()) {
+			Text.Add("You can feel your [cock] twitching rapidly within the tentacles’ coils", parse);
+			if(player.HasBalls())
+				Text.Add(", your [balls] tightening and drawing together as they prepare to send their cargo up and out", parse);
+			Text.Add(", desperate for the release that’s swaying just out of your reach.", parse);
+			Text.NL();
+		}
+		Text.Add("The alchemist on his part, can’t take it anymore. Letting out a loud bleat, he jerks his hips forward even as his balls contract, ready to unload their contents in your general direction.", parse);
+		Text.NL();
+		Text.Add("<i>“Oh yes!”</i> he groans, his eyes squeezed shut as his hand pumps up and down his erect member in a blur. <i>“Fucking yes!”</i>", parse);
+		Text.NL();
+		Text.Add("Another bleat, and the rancid old goat lets loose a torrential stream of stinking, steaming spunk arcing into the air. Thankfully, it doesn’t have the power to actually reach you, but most of the vile stuff lands on the tentacles, which quickly absorb it. That which lands on the ground is quickly mopped up by yet more tentacles, leaving nothing behind but a very sated old goat. One of the tentacles wanders over to his exposed prick, perhaps seeking more food, but he pushes it away with a hand and sighs in satisfaction. The tentacle doesn’t persist in its attentions, instead more than happy to just sink down onto the gravel and suck up the seed from the ground.", parse);
+		Text.NL();
+		Text.Add("<i>“Best show I’ve had in a while now,”</i> he says, panting. <i>“Props to the both of you - you’ve furthered my research quite a bit today. Credit’s where credit’s due, after all, and I’m not <b>completely</b> heartless.”</i>", parse);
+		Text.NL();
+		Text.Add("That’s a nice thought, isn’t it?", parse);
+		Text.NL();
+		if(player.FirstVag()) {
+			Text.Add("<i>“Perhaps,”</i> the old goat continues, <i>“my only regret is that I’m not the one pounding that cunt of yours, but I guess I’ll just have to vicariously experience it through my little pet here. Not the best, perhaps, but it’ll do. It’ll do.”</i>", parse);
+			Text.NL();
+		}
+		Text.Add("Every bit as cool and slick as the moment they first grabbed you, the tentacles slither across your [skin], and you feel… <i>something</i> shift within their depths. All of a sudden, all that pent up need and hunger come rushing to the fore, swamping your brain with a mind-blowing blast of orgiastic pleasure. Spots swim before your eyes as white-hot flashes erupt in their sockets, and you feel faint and dizzy as your body is gripped by automatic instinct to fulfil its primal desires.", parse);
+		Text.NL();
+		
+		var cum = player.OrgasmCum(2);
+		
+		if(player.FirstCock()) {
+			Text.Add("The first part of you to give way is your [cock]. Painfully erect and unyielding, it ", parse);
+			if(player.HasBalls())
+				Text.Add("works in tandem with your balls, the former throbbing and pulsating as the latter grows ever tighter, clenching and unclenching as all the spooge it’s held up in reserve to this point is brought to the fore.", parse);
+			else
+				Text.Add("twitches and trembles ominously, liquid fire surging upwards from its base as you prepare to finally unload everything you’ve got.", parse);
+			Text.Add(" No more pre - this is the real deal, and the tentacles know it. Sensing that more food is near, ", parse);
+			if(player.NumCocks() > 1)
+				Text.Add("more and more gelatinous tentacles attach themselves to your remaining shafts, desperately suckling away in a bid to not waste so much as a single drop of your seed.", parse);
+			else
+				Text.Add("the goo tentacle attached to your manhood sucks away all the more, encouraging you to make your consequent load a big, big one.", parse);
+			Text.NL();
+			Text.Add("It’s like you’ve been offered a small slice of heaven itself. How you never noticed it before, you’re not quite sure - from your point of view, everything that’s happened in the last hour or two has melded into a fluffy pink haze - but the inside of the goo is so warm and divine. It’s almost like - no, <i>better</i> than an actual pussy, and with such encouragement and the go-ahead from the goo-beast, you finally get to blow your load with a muffled cry.", parse);
+			Text.NL();
+			if(cum >= 9) {
+				Text.Add("Even the tentacle beast is taken aback by how, ah - <i>productive</i> you are. Faced with the torrent of spunk that blasts forth from your [cocks], the tentacle[s] [hasHave] trouble channeling all of your sperm back into the beast’s main body hidden in the box. Rope after rope of thick white splooge shoots out in a non-stop barrage, threatening to overwhelm the tentacle[s] - you can see huge bulges of sticky white stuff traveling along the clear, flexible appendage[s], the difference in girth plain for all to see. The layer of goo that separates the tentacles’ insides from their outsides grows dangerously thin - if it’s possible for something as pliant as a goo beast to overstuff itself, well, this is it.", parse);
+				Text.NL();
+				Text.Add("Unfortunately - or perhaps fortunately - for you, the goo beast knows better than to bite off more than it can chew, allowing for some of your seed to overflow and spill onto the rocky ground, only for more tentacles to swarm over and mop up the mess before it can seep into the earth. The sheer determined efficiency with which the thing is feeding is a sight to behold, especially in the face of such overwhelming odds.", parse);
+				Text.NL();
+				Text.Add("Well, if it wants a reprieve, it’ll have to work for it - especially when this is the only way in which you can fight back. Clenching and squeezing, you close your eyes, bite down hard, and concentrate on your groin, pumping every last drop of sperm that you’re worth into the tentacles attached to your [cocks].", parse);
+				if(player.HasBalls()) {
+					Text.Add(" It gets so that you can actually <i>feel</i> your [balls] deflating by the moment, and you desperately hope that you still have enough reserves in you to keep up this deluge for a little while more yet.", parse);
+				}
+				Text.NL();
+				Text.Add("It works. It’s beyond all hope and belief, but it works. Overwhelmed by the sheer rate at which you’re pumping out cum, the goo tentacle[s] hurriedly pop[notS] free of your manhood[s] and beat[notS] a quick retreat lest [itThey] split[s] from the obscene amount of spunk you’re sending down [itThem]. Victorious, you let out a muffled yell about the tentacle in your mouth and thrust your hips forward, allowing the last of your sperm to freely jet through the air like water from a fire hose, glistening globules of white arcing upwards and landing on the stony ground with a splat.", parse);
+			}
+			else if(cum >= 6) {
+				Text.Add("Letting loose a long, lurid groan, you empty ", parse);
+				if(player.HasBalls())
+					Text.Add("your balls", parse);
+				else
+					Text.Add("yourself", parse);
+				Text.Add(" straight into the tentacle[s] busily slurping away at you. It looks like the goo beast hasn’t had a meal this filling in a long, long time, and is particularly ravenous. Then again, that’s not really surprising considering that the old goat of an alchemist doesn’t look like the most conscientious of pet owners - the bastard probably forgets to feed it on a regular basis.", parse);
+				Text.NL();
+				Text.Add("Well then, seems like it’s up to you to take responsibility for someone else’s pet. Caught in the cool, fluid embrace of the goo beast, your [cocks] twitch[notEs] and pound[notS], each thump of blood in your extremities sending tingles of numbing pleasure racing down your shaft[s] and into your body. You can actually <i>see</i> ", parse);
+				if(player.NumCocks() > 1)
+					Text.Add("thin lines of white running down each of the tentacles, passing through them like a bunch of bendy straws", parse);
+				else
+					Text.Add("a thin line of white running down the tentacle, passing through it like a bendy straw", parse);
+				Text.Add(", and the simple sight gives you an overwhelming sense of satisfaction.", parse);
+				Text.NL();
+				Text.Add("Despite the copious amount of spunk that you’re producing, the creature seems to have no trouble at all in containing the lot, and you’ve definitely shot off enough seed to fill that small box a handful of times over. Just how big is it on the inside, anyway? You lie back and relax, pondering that question along with the other mysteries of the universe as the goo ripples and undulates, milking the last drops of cum from your [cocks] until it’s sure that you’ve nothing left to give.", parse);
+			}
+			else {
+				Text.Add("With a muffled cry, your body convulses and spasms before loosing forth the load that you’ve built up. It certainly <i>feels</i> like a lot, for you’re absolutely drained at this point, but the goo beast seems to disagree with you. Despite all the stroking and caressing, despite all the anticipation that’s built up in you, there doesn’t seem to be enough spooge in you to satisfy the creature’s hunger.", parse);
+				Text.NL();
+				Text.Add("The tentacle[s] attached to your [cocks] pump away furiously, increasing their suction as far as they dare without hurting you, but the most they manage is a pale white stream, looking fairly diluted as it travels down the goo’s clear blue length before disappearing into the main body somewhere in the box. The tentacles that remain unoccupied swerve down towards you, waggling their tips in your direction in what you can only assume to be a reproachful manner - but giving an apology is sort of hard, especially with one of their number stuffed in your mouth.", parse);
+				Text.NL();
+				Text.Add("Still, some food is better than no food, and the goo beast must agree with you. It’s a long while before it finally deigns to consider you milked as dry as a bone, and you’re utterly and completely exhausted at the end of it all, having shot off your load multiple times in the process.", parse);
+			}
+			Text.NL();
+			Text.Add("Eventually, though, the goo beast must’ve decided it’s gotten all that it’s going to get from your manhood[s]. A wet, slurping sound rings in the air as ", parse);
+			if(player.NumCocks() > 1)
+				Text.Add("all of the tentacles withdraw from you at once", parse);
+			else
+				Text.Add("the tentacle pops free of your [cock]", parse);
+			Text.Add(", allowing you to finally go limp with a sigh of relief. With you having utterly spent your load, the tentacles are free to turn their attention to other matters - and your ordeal is far from over.", parse);
+			Text.NL();
+		}
+		if(player.FirstVag()) {
+			Text.Add("The tentacles which had been bouncing you up and down on the giant ribbed goo-cock had been maintaining a steady rhythm, but now they pick up speed, clearly working you towards a fabulous finish. Despite the tentacle stuffed in your mouth, you gasp and groan as best as you can, fingers digging into the tentacles’ cool, pliant surface and sinking in deep.", parse);
+			Text.NL();
+			Text.Add("Thanks to all the venom that by now’s been spread all over the insides of your love-tunnel, you keenly feel each and every thrust of the gargantuan tentacle you’re impaled on  The ribs, ever more intense than you remember them being, rub up and down your slick inner walls, drinking your feminine juices with great relish even as the vigorous stimulation urges you to produce yet more lubrication.", parse);
+			Text.NL();
+			if(preg && womb.progress >= 0.4) {
+				Text.Add("With you stuffed so thoroughly - filled up with your unborn progeny on one side of your cervix, and with the goo tentacle on the other - you can’t help but feel intensely aroused. Aphrodisiac, hormones and being pounded by a great big tentacle come together in the perfect storm to send you spiraling to new heights of pleasure.", parse);
+				Text.NL();
+				Text.Add("Spirits above, you just feel so <i>full</i> with your swollen midriff and bulging groin; the latter twitches about impatiently as the the goo tentacle writhes about in you, coaxing more and more girl-cum from your insides.", parse);
+			}
+			else {
+				Text.Add("With you stuffed so thoroughly, you can distinctly <i>see</i> the bulge of the tentacle moving about inside you, prominent on your lower belly, and whimper as it piledrives into you yet again.", parse);
+				Text.NL();
+				Text.Add("It’s all you can do to hold on and not pass out from the pleasure as every last slick drop of girl-cum is sucked out of you, leaving you panting and wanting more.", parse);
+			}
+			Text.NL();
+			if(player.FirstCock()) {
+				Text.Add("Sure, it may not be as large an amount of sperm as that you fed the goo beast earlier on, but you suppose that girl-cum has its own unique flavor, texture, or whatnot. Or hey, maybe it just really wants dessert after the main course!", parse);
+				Text.NL();
+			}
+			Text.Add("The tentacle stops its pounding for a moment, giving you pause - what’s up? Your question’s answered when you feel something building inside you, a sense of restrained strength and tension - and then the tentacle’s bulging tip begins to violently abuse - well, more violently, anyway - your poor cunt, causing your bones to rattle with each furious pounding.", parse);
+			Text.NL();
+			Text.Add("While you may be exhausted, your insides still have a spark of energy left, and just as a candle burns brightest just before it goes out, so do you mount an attack of your own. Clenching down hard on the invading goo tentacle, your pussy squeezes the firm, slippery goo in a vice-like grip as if it were a real manhood. The ribbing allows your love-tunnel to get a handle on the slimy appendage within you, and the two of you begin something akin to a perverse tug of war, the tentacle trying to pull away even as you do your best to prevent it from leaving you. Amplified by the aphrodisiac venom, the intense friction of the tentacle’s surface against your tender cunt is more than enough for white-hot spots of pleasure to swim in your vision, and you let out a desperate, muffled scream as a pure blissgasm overtakes you.", parse);
+			Text.NL();
+			parse["gen"] = player.mfTrue("boy", "girl");
+			Text.Add("You don’t remember much of what happens next, up till the point where you dimly realize that you’ve now got two hands full of gelatinous slime, having literally ripped out part of the tentacles binding you in your ecstasy. It doesn’t seem to have done the goo beast any harm as more slime quickly flows back in place to make up for what you took, but a tentacle nevertheless worms over and gives you a reproachful smack on the ass for being such a naughty [gen].", parse);
+			Text.NL();
+			Text.Add("Over and over again, the tentacle pounds itself into you, over and over again, you orgasm until the inside of your head feels like jelly. When the tentacles are finally sated on your fluids and turn their attentions elsewhere, you’re blabbering incoherently around the tentacle gag in your mouth.", parse);
+			Text.NL();
+		}
+		//Ass block. Since everyone will have an asshole, this will be the default string that everyone will be able to see.
+		Text.Add("At about this time, the goo tentacles decide that it’s finally time for it to finish up in your ass. Stretching you beyond what you thought yourself ever capable of, the tentacle up in your butthole is more than content to simply fill you up to bursting, with the occasional wiggle to remind you that it’s there. Slow and subtle, it tickles you from the inside out, insidious little tendrils of pleasure that salaciously sneak in through the back door and send you to shivering.", parse);
+		Text.NL();
+		if(player.PregHandler().MPregEnabled()) {
+			Text.Add("At last, the anusol’s effect finally kick in on a level that you can actually distinguish it from the slick aphrodisiac venom that the goo’s been smearing all over your insides, manifesting itself as an outpouring of lubricating fluids from your back door.", parse);
+			Text.NL();
+			Text.Add("The goo tentacle pauses for a moment, clearly uncertain at this unnatural outpouring of fluids where they should not be, but must have clearly decided that food is food anyway, and continues with an enthusiasm that surprises even you.", parse);
+		}
+		else {
+			Text.Add("There’s not much in the way of fluids here for the goo beast to feed on, but it nevertheless seems to be enjoying itself quite thoroughly. Too much for it to be pulling out of you just yet, at any rate.", parse);
+		}
+		Text.Add(" At least the tentacle’s gentler than it was upon its entry, giving you a little time to recover. Even so, you can’t help but wonder why it’s just content to remain like this, much like a snake coiled up on someone’s midriff - does it like the heat in your rear or something?", parse);
+		Text.NL();
+		Text.Add("Either way, guess you won’t have to ponder that question anymore - by and large, the tentacle appears to be satisfied with what it’s done and slowly deflates before retreating from your various orifices, leaving you feeling more than just a little hollow inside. The void within your bowels, cool and gaping, nags at your mind, and maybe it’s just the venom speaking, but you already miss its filling presence…", parse);
+		Text.NL();
+		//end of ass block.
+		Text.Add("At long last, it looks like the goo beast has had its fill. You notice that the girth of its clear tentacles is now distinctly fatter - not by a lot, but enough to be readily noticeable, and by and large the slimy appendages see fit to release you, letting you slump to the rocky ground in a quivering lump of drained jelly. The last you see of the creature is its tentacles withdrawing into the tiny box, which the alchemist shuts and stows away carefully.", parse);
+		Text.NL();
+		Text.Add("<i>“Well!”</i> he says, pulling up his pants. <i>“That was most certainly a very educational experience. I learned a lot from that - did you?”</i>", parse);
+		Text.NL();
+		Text.Add("You’d have replied, but the numb feeling that the tentacle left in your throat leaves you wanting for words. The rancid old goat looks at you askance, then shrugs.", parse);
+		Text.NL();
+		Text.Add("<i>“Well? Nothing to say? Dismissed, then. Maybe I’ll see you around when it’s time for the next session.”</i> He chuckles to himself, then kicks a bit of gravel onto your face before leaving.", parse);
+		Text.NL();
+		Text.Add("Ugh… you’ll remember this… and really, he ought to take better care of his pet, or at least feed the poor thing more often.", parse);
+		Text.Flush();
+		
+		world.TimeStep({hour: 2});
+		
+		Gui.NextPrompt();
+	}, 1.0, function() { return player.IsHumanoid(); });
+	
 	/* TODO
 	scenes.AddEnc(function() {
-
+		Text.Add("", parse);
+		Text.NL();
+		Text.Add("", parse);
+		Text.Flush();
 	}, 1.0, function() { return true; });
 	*/
 	scenes.Get();
