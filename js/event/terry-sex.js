@@ -15,13 +15,13 @@ Scenes.Terry.Impregnate = function(mother, father, cum, slot) {
 // TODO
 Scenes.Terry.SexPrompt = function(backPrompt) {
 	var parse = {
-		foxvixen : terry.mfPronoun("fox", "vixen"),
-		tarmor : function() { return terry.ArmorDesc(); },
+		foxvixen : terry.mfPronoun("fox", "vixen"),		
 		master : player.mfTrue("master", "mistress"),
 		playername : player.name
 	};
 	parse = player.ParserTags(parse);
 	parse = terry.ParserPronouns(parse);
+	parse = terry.ParserTags(parse, "t");
 	
 	Gui.Callstack.push(function() {
 		Text.Add("Done appreciating your vulpine pet’s naked form, you step around so that you are in front of [himher], rubbing your chin idly as you consider how you want to fuck the [foxvixen] this time...", parse);
@@ -922,14 +922,14 @@ Scenes.Terry.SexPitchAnal = function(cocksInAss) {
 	
 	var parse = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
-		boygirl : terry.mfPronoun("boy", "girl"),
-		tcock : function() { return terry.FirstCock().Short(); },
+		boygirl : terry.mfPronoun("boy", "girl"),		
 		master  : player.mfTrue("master", "mistress"),
 		MasterMistress : player.mfTrue("Master", "Mistress"),
 		playername : player.name
 	};
 	parse = player.ParserTags(parse);
 	parse = terry.ParserPronouns(parse);
+	parse = terry.ParserTags(parse, "t");
 	
 	var virgin = terry.Butt().virgin;
 	var promise;
@@ -1508,15 +1508,14 @@ Scenes.Terry.SexFuckButtEntrypoint = function(p1Cock, promise, retFunc) {
 
 	var parse = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
-		boygirl  : terry.mfPronoun("boy", "girl"),
-		tcock : function() { return terry.FirstCock().Short(); },
-		tbreasts : function() { return terry.FirstBreastRow().Short(); },
+		boygirl  : terry.mfPronoun("boy", "girl"),		
 		master  : player.mfTrue("master", "mistress"),
 		mistermiss : player.mfTrue("mister", "miss"),
 		playername : player.name
 	};
 	parse = player.ParserTags(parse);
 	parse = terry.ParserPronouns(parse);
+	parse = terry.ParserTags(parse, "t");
 	
 	Text.Add("You spare a quick thought for how you should take Terry’s tailhole; gently, or roughly?", parse);
 	if(promise)
@@ -1773,17 +1772,15 @@ Scenes.Terry.SexWorship = function() {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
 		boygirl    : terry.mfPronoun("boy", "girl"),
-		guygirl    : terry.mfPronoun("guy", "girl"),
-		tbreasts : function() { return terry.FirstBreastRow().Short(); }
+		guygirl    : terry.mfPronoun("guy", "girl"),		
 	};
 	parse = player.ParserTags(parse);
 	parse = terry.ParserPronouns(parse);
+	parse = terry.ParserTags(parse, "t");
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
 	
-	parse["stuttername"] = player.name[0] + "-" + player.name;
-	
-	parse["s"]    = player.NumCocks() > 1 ? "s" : "";
-	parse["notS"] = player.NumCocks() > 1 ? "" : "s";
-	parse["oneof"] = player.NumCocks() > 1 ? " one of" : "";
+	parse["stuttername"] = player.name[0] + "-" + player.name;	
 	
 	Text.Clear();
 	Text.Add("Your gaze falls upon the long length of mottled-brown horseflesh bobbing between your [foxvixen]’s legs, and a smirk curls your lips. Your hand reaches forward and possessively twines its fingers around the turgid flesh, tightening just enough to hold it firm against your palm.", parse);
@@ -2322,17 +2319,13 @@ Scenes.Terry.SexWorship = function() {
 Scenes.Terry.PCCleansTerry = function(func, opts) {
 	var parse = {
 		playername : player.name,
-		foxvixen   : terry.mfPronoun("fox", "vixen"),
-		tarmor : function() { return terry.ArmorDesc(); },
-		tbelly : function() { return terry.StomachDesc(); },
-		tbreastdesc : function() { return terry.FirstBreastRow().Short(); }
+		foxvixen   : terry.mfPronoun("fox", "vixen"),		
 	};
 	parse = player.ParserTags(parse);
 	parse = terry.ParserPronouns(parse);
-	
-	parse["s"]    = player.NumCocks() > 1 ? "s" : "";
-	parse["notS"] = player.NumCocks() > 1 ? "" : "s";
-	parse["oneof"] = player.NumCocks() > 1 ? " one of" : "";
+	parse = terry.ParserTags(parse, "t");
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");	
 					
 	opts = opts || {};
 	func = func || function(opts) {
@@ -2483,15 +2476,13 @@ Scenes.Terry.PCCleansTerry = function(func, opts) {
 Scenes.Terry.TerryCleansPC = function(func, opts) {
 	var parse = {
 		playername : player.name,
-		foxvixen   : terry.mfPronoun("fox", "vixen"),
-		tarmor : function() { return terry.ArmorDesc(); }
+		foxvixen   : terry.mfPronoun("fox", "vixen"),		
 	};
 	parse = player.ParserTags(parse);
 	parse = terry.ParserPronouns(parse);
-	
-	parse["s"]    = player.NumCocks() > 1 ? "s" : "";
-	parse["notS"] = player.NumCocks() > 1 ? "" : "s";
-	parse["oneof"] = player.NumCocks() > 1 ? " one of" : "";
+	parse = terry.ParserTags(parse, "t");
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");	
 					
 	opts = opts || {};
 	func = func || function(opts) {
@@ -2920,15 +2911,11 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 		playername  : player.name,
 		master      : player.mfTrue("master", "mistress"),
 		foxvixen    : terry.mfPronoun("fox", "vixen"),
-		fox         : terry.HorseCock() ? "horse" : "fox",
-		tcock   : function() { return terry.FirstCock().Short(); },
-		tcockTip    : function() { return terry.FirstCock().TipShort(); },
-		tvag    : function() { return terry.FirstVag().Short(); },
-		tanus   : function() { return terry.Butt().AnalShort(); },
-		tbreasts : function() { return terry.FirstBreastRow().Short(); },
+		fox         : terry.HorseCock() ? "horse" : "fox",		
 		boygirl     : player.mfTrue("boy", "girl")
 	};
 	parse = player.ParserTags(parse);
+	parse = terry.ParserTags(parse, "t");
 	
 	var p2cock;
 	if(player.NumCocks() > 1) {
@@ -3581,9 +3568,8 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 		Text.NL();
 		Text.Add("<i>“Mmmmnf!”</i> Terry moans into the kiss. [HisHer] own arms moving to embrace you, handpaws scratching your back a little as [heshe] grips your shoulders momentarily.", parse);
 		var wings = player.HasWings();
-		if(wings) {
-			parse["wingsDesc"] = wings.Short();
-			Text.Add(" You instinctively adjust your [wingsDesc] to allow the [foxvixen] to properly caress your back.", parse);
+		if(wings) {			
+			Text.Add(" You instinctively adjust your [wings] to allow the [foxvixen] to properly caress your back.", parse);
 		}
 		Text.NL();
 		Text.Add("You can’t help but wriggle a little deeper into Terry’s arms, savoring [hisher] embrace. Your hands reach down to cup the perky bubbles that make [hisher] butt, squishing the flesh between your fingers. You caress the beautiful heart-shaped patch of fur that adorns Terry’s rump like a natural tramp stamp with one hand, the other moving to stroke luxuriantly through [hisher] silky brush tail.", parse);
@@ -4202,13 +4188,13 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 						
 						var tail = player.IsNaga() || player.HasPrehensileTail();
 						if(tail) {
-							parse["tailDesc"] = player.IsNaga() ? function() { return player.LegsDesc(); } : player.HasTail().Short();
+							parse["ti"] = player.IsNaga() ? function() { return player.LegsDesc(); } : player.HasTail().Short();
 							parse["tailSkinDesc"] = player.IsNaga() ? player.body.SkinDesc(player.Legs()) : player.body.SkinDesc(player.HasTail());
 						}
 						
 						if(terry.FirstCock()) {
 							if(tail) {
-								Text.Add("Your [tailDesc] wriggles speculatively behind you, and you smile to yourself. Yes, that should do just nicely. Even as Terry laps away at your [cockTip] and your fingers grope and caress [hisher] ample bosom, smothering your shaft in furry boobage, your tail works its way back toward Terry’s nethers.", parse);
+								Text.Add("Your [ti] wriggles speculatively behind you, and you smile to yourself. Yes, that should do just nicely. Even as Terry laps away at your [cockTip] and your fingers grope and caress [hisher] ample bosom, smothering your shaft in furry boobage, your tail works its way back toward Terry’s nethers.", parse);
 								Text.NL();
 								Text.Add("Feeling for Terry’s [tcock], you brush your tail-tip gently up its throbbing length, feeling the turgid flesh pulsing with [hisher] arousal, intimately aware of pre-cum oozing sluggishly over its [tailSkinDesc]. Convinced what to do, your tail begin to curl itself around Terry’s shaft, slowly pumping back and forth along its length.", parse);
 								Text.NL();
@@ -4226,7 +4212,7 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 						}
 						else {
 							if(tail) {
-								Text.Add("Hmm... well, it might be a little odd, but you’re sure Terry will approve of it in the end. Grinning mischievously to yourself, your [tailDesc] undulates in anticipation before starting to crawl its way back down Terry’s body, over the [foxvixen]’s belly before reaching for [hisher] just-used cunt.", parse);
+								Text.Add("Hmm... well, it might be a little odd, but you’re sure Terry will approve of it in the end. Grinning mischievously to yourself, your [tail] undulates in anticipation before starting to crawl its way back down Terry’s body, over the [foxvixen]’s belly before reaching for [hisher] just-used cunt.", parse);
 								Text.NL();
 								Text.Add("<i>“Ah!”</i> Terry cries out in surprise as you penetrate [himher]. For a moment, [heshe] loses [hisher] composure and just pants in lust, but [heshe] quickly recovers and goes back to licking and suckling on your [cockTip].", parse);
 								Text.NL();
@@ -4270,9 +4256,9 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 							else
 								Text.Add("Your probing fingers continue to stroke and caress and pump as best they can. Soon enough, you feel Terry’s netherlips fluttering, trying to wrap around your fingers and squeeze them like a makeshift cock.", parse);
 							Text.NL();
-							parse["tail"]  = tail ? "tail" : "fingers";
-							parse["tail2"] = tail ? parse["tailDesc"] : "digits";
-							Text.Add("<i>“Hiyaaa!”</i> the [foxvixen] cries out in pleasure. [HisHer] pussy squirting a jet of femcum all over your [tail], most of it escaping around your [tail2] to create a messy pool on the ground below.", parse);
+							parse["t"]  = tail ? "appendage" : "fingers";
+							parse["t2"] = tail ? Text.Parse("[tail]", parse) : "digits";
+							Text.Add("<i>“Hiyaaa!”</i> the [foxvixen] cries out in pleasure. [HisHer] pussy squirting a jet of femcum all over your [t], most of it escaping around your [t2] to create a messy pool on the ground below.", parse);
 						}
 						Text.NL();
 						
@@ -4431,24 +4417,21 @@ Scenes.Terry.SexCatchAnal = function() {
 	var parse = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
-		fox        : terry.HorseCock() ? "stallion" : "fox",
-		tcock      : function() { return terry.FirstCock().Short(); },
-		tcockTip   : function() { return terry.FirstCock().TipShort(); },
-		tbreasts   : function() { return terry.FirstBreastRow().Short(); },
+		fox        : terry.HorseCock() ? "stallion" : "fox",		
 		boygirl    : player.mfFem("boy", "girl")
 	};
 	parse = player.ParserTags(parse);
+	parse = terry.ParserTags(parse, "t");
 	
 	var first = terry.flags["caFirst"] == 0;
 	terry.flags["caFirst"]++;
 	
 	parse = terry.ParserPronouns(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
 	
 	var tail = player.HasTail();
-	var wing = player.HasWings();
-	parse["tailDesc"] = tail ? tail.Short() : "";
-	parse["wingsDesc"] = wing ? wing.Short() : "";
+	var wing = player.HasWings();	
 	
 	Text.Clear();
 	Text.Add("Grinning smugly to yourself, your gaze drifts toward Terry’s crotch and the delightful toy hanging there, already protruding from its protective sheath. With a lick of your lips, you step closer to Terry, cooing that this is going to be [hisher] lucky day.", parse);
@@ -4533,8 +4516,8 @@ Scenes.Terry.SexCatchAnal = function() {
 				else
 					Text.Add("<i>“Great idea!”</i> the [foxvixen] exclaims. <i>“Alright then, I’ll give you a taste of my [fox]hood. Get down on the floor and raise that tush for me!”</i>", parse);
 				Text.NL();
-				parse["tail"] = tail ? Text.Parse(" and curl your [tailDesc] out of the way", parse) : "";
-				Text.Add("You smirk to yourself and nod, already moving into position as you were instructed. Belly nearly flat on the ground, supporting yourself on your hands and elbows, you raise your [anus] up into the air[tail], giving it a seductive shake.", parse);
+				parse["tl"] = tail ? Text.Parse(" and curl your [tail] out of the way", parse) : "";
+				Text.Add("You smirk to yourself and nod, already moving into position as you were instructed. Belly nearly flat on the ground, supporting yourself on your hands and elbows, you raise your [anus] up into the air[tl], giving it a seductive shake.", parse);
 				Text.NL();
 				Text.Add("Terry starts off by gently massaging your [vag], slowly teasing your labia and prodding your [clit] with a padded finger. <i>“You were not lying about the wet part,”</i> Terry comments, bringing [hisher] moist digits to [hisher] mouth and giving them a lick.", parse);
 				Text.NL();
@@ -4766,13 +4749,13 @@ Scenes.Terry.SexCatchAnal = function() {
 			Text.NL();
 			var tw = "";
 			if(tail)
-				tw += ", curling your [tailDesc] out of the way";
+				tw += ", curling your [tail] out of the way";
 			if(tail && wing)
 				tw += " and ";
 			else if(wing)
 				tw += ", ";
 			if(wing)
-				tw += "shifting your [wingsDesc] so that he won’t be laying atop [himher]";
+				tw += "shifting your [wings] so that he won’t be laying atop [himher]";
 			parse["tw"] = Text.Parse(tw, parse);
 			Text.Add("After a few pleasurable minutes, you feel a pressure growing over your [hips], creeping along your spine. You straighten your limbs to support the increase in weight as Terry leans over you[tw].", parse);
 			Text.NL();
@@ -4783,7 +4766,7 @@ Scenes.Terry.SexCatchAnal = function() {
 			else
 				Text.Add("[HisHer] other hand roams your [hips] looking for a good position to support [himher]self as [heshe] prepares to redouble [hisher] assault on your [butt].", parse);
 			Text.NL();
-			parse["t"] = player.HasPrehensileTail() ? " coil your [tailDesc] around [hisher] legs as best as you can and" : "";
+			parse["t"] = player.HasPrehensileTail() ? " coil your [tail] around [hisher] legs as best as you can and" : "";
 			Text.Add("As Terry plays you like an instrument, you moan in appreciation, You[t] thrust your ass back into Terry’s, grinding deliberately as your [anus] does its best to milk [hisher] [tcock] dry. With a lilting purr, you praise Terry for having such skilled fingers - but then, that’s part of the prize of having a thief for a lover.", parse);
 			Text.NL();
 			Text.Add("<i>“T-Thanks,”</i> [heshe] says shakily. <i>“Hng! If you keep clenching like that I won’t last long. Getting close already!”</i>", parse);
@@ -4844,12 +4827,12 @@ Scenes.Terry.SexCatchAnal = function() {
 			Text.Add("As Terry picks up [hisher] pace, you’re treated the feeling of [hisher] padded hand-paws roaming your back.", parse);
 			if(tail) {
 				parse["pt"] = player.HasPrehensileTail() ? " and try to curl it around his arm" : "";
-				Text.Add(" [HeShe] moves to stroke your [tailDesc], gently teasing the base. Eliciting a thrill of pleasure from you. Whenever [heshe] tickles your base, you wag your [tailDesc] softly [pt].", parse);
+				Text.Add(" [HeShe] moves to stroke your [tail], gently teasing the base. Eliciting a thrill of pleasure from you. Whenever [heshe] tickles your base, you wag your [tail] softly [pt].", parse);
 			}
 			Text.NL();
 			Text.Add("You rotate your shoulders, shuffling your weight from arm to arm as you croon your appreciation. ", parse);
 			if(wing)
-				Text.Add("Your [wingsDesc] spread themselves in invitation, rewarded with Terry’s soft touch as the [foxvixen] kneads the muscles at their base before tenderly stroking out along their lengths and then returning. ", parse);
+				Text.Add("Your [wings] spread themselves in invitation, rewarded with Terry’s soft touch as the [foxvixen] kneads the muscles at their base before tenderly stroking out along their lengths and then returning. ", parse);
 			Text.Add("Terry’s hands busily massage your neck and shoulders, loosening the tension in your muscles. You arch your back to better draw [hisher] attentions, making the [foxvixen] chuckle. Terry’s [tbreasts] touch your back as [heshe] bends over, leaning [himher]self across your torso.", parse);
 			Text.NL();
 			Text.Add("[HeShe] nuzzles you softly, the new position helping [himher] go deeper inside you. You can feel [hisher] knot batting your [butt], as if asking to be allowed in. Yet Terry makes no effort to push past your barrier. <i>“How does this feel?”</i> [heshe] asks, hugging you from behind.", parse);
@@ -4860,7 +4843,7 @@ Scenes.Terry.SexCatchAnal = function() {
 			Text.NL();
 			Text.Add("You chuckle softly; is that what [heshe] really wants? Or is [heshe] simply scared that [heshe] can’t take it any faster than this? You’re a big [boygirl], you know you can handle whatever your pretty little [foxvixen] throws your way.", parse);
 			if(player.HasPrehensileTail())
-				Text.Add(" Your [tailDesc] twists through the air, landing a mocking swat on Terry’s own jiggly heart-shaped ass for emphasis.", parse);
+				Text.Add(" Your [tail] twists through the air, landing a mocking swat on Terry’s own jiggly heart-shaped ass for emphasis.", parse);
 			Text.NL();
 			Text.Add("<i>“And what about you? Acting all cocky just because you can’t get enough of my cock,”</i> [heshe] teases right back.", parse);
 			Text.NL();
@@ -4950,7 +4933,7 @@ Scenes.Terry.SexCatchAnal = function() {
 			Text.NL();
 			Text.Add("<i>“Pretty please?”</i> ", parse);
 			if(tail)
-				Text.Add("Terry says, bending over to nuzzle your [tailDesc]. Taking it in hand and gently biting the tip.", parse);
+				Text.Add("Terry says, bending over to nuzzle your [tail]. Taking it in hand and gently biting the tip.", parse);
 			else
 				Text.Add("Terry says, bending over to nuzzle your back.", parse);
 			Text.NL();
