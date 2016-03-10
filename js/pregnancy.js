@@ -95,7 +95,6 @@ PregnancyHandler.prototype.ToStorage = function() {
 		storage.mpreg = "on";
 
 	var womb = [];
-
 	var vags = this.entity.AllVags();
 	for(var i = 0; i < vags.length; ++i) {
 		var w = vags[i].womb;
@@ -175,12 +174,13 @@ PregnancyHandler.prototype.PregnantWombs = function() {
 
 	var ent = this.entity;
 
+	var womb = null;
 	_.each(ent.AllVags(), function(vag) {
-		var womb = vag.womb;
+		womb = vag.womb;
 		if(womb.pregnant)
 			ret.push(womb);
 	});
-	var womb = ent.Butt().womb;
+	womb = ent.Butt().womb;
 	if(womb.pregnant)
 		ret.push(womb);
 
@@ -198,18 +198,7 @@ PregnancyHandler.prototype.IsPregnant = function(opts) {
 		return this.Womb(slot).pregnant;
 	}
 	else {
-		var preg = false;
-		var ent = this.entity;
-
-		var vags = ent.AllVags();
-		for(var i = 0; i < vags.length; ++i) {
-			var womb = vags[i].womb;
-			preg = preg || womb.pregnant;
-		}
-		var womb = ent.Butt().womb;
-		preg = preg || womb.pregnant;
-
-		return preg;
+		return this.PregnantWombs().length > 1;
 	}
 }
 
@@ -324,61 +313,40 @@ PregnancyHandler.prototype.Impregnate = function(opts) {
 	}
 }
 
-//TODO Redo this clusterfuck
 PregnancyHandler.prototype.Update = function(hours) {
 	hours = hours || 0;
 	hours *= this.gestationRate.Get();
-
+	
 	var ent = this.entity;
-
-	var vags = ent.AllVags();
-	for(var i = 0; i < vags.length; ++i) {
-		var womb = vags[i].womb;
+	
+	var wombs = this.PregnantWombs();
+	_.each(wombs, function(womb) {
+		var slot = ent.Butt().womb == womb ? PregnancyHandler.Slot.Butt : PregnancyHandler.Slot.Vag;
+		
 		var oldProgress = womb.progress;
-		if(womb.pregnant && !womb.triggered) {
+		if(!womb.triggered) {
 			womb.progress     += (1-womb.progress) * hours / womb.hoursToBirth;
 			womb.hoursToBirth -= hours;
 			// Check for completion
 			// Added the clause that you need to be in a safe spot
 			if(womb.hoursToBirth <= 0 && ent.CanGiveBirth()) {
 				womb.triggered = true;
-				ent.PregnancyTrigger(womb, PregnancyHandler.Slot.Vag);
+				ent.PregnancyTrigger(womb, slot);
 			}
 			else {
-				ent.PregnancyProgess(womb, PregnancyHandler.Slot.Vag, oldProgress, womb.progress);
+				ent.PregnancyProgess(womb, slot, oldProgress, womb.progress);
 			}
 		}
-	}
-	var womb = ent.Butt().womb;
-	if(womb.pregnant && !womb.triggered) {
-		womb.progress     += (1-womb.progress) * hours / womb.hoursToBirth;
-		womb.hoursToBirth -= hours;
-		// Check for completion
-		// Added the clause that you need to be in a safe spot
-		if(womb.hoursToBirth <= 0 && party.location.safe()) {
-			womb.triggered = true;
-			ent.PregnancyTrigger(womb, PregnancyHandler.Slot.Butt);
-		}
-		else {
-			ent.PregnancyProgess(womb, PregnancyHandler.Slot.Butt, oldProgress, womb.progress);
-		}
-	}
+	});
 }
 
 PregnancyHandler.prototype.BellySize = function() {
 	var size = 0;
-
-	var vags = this.entity.AllVags();
-	for(var i = 0; i < vags.length; ++i) {
-		var womb = vags[i].womb;
-		if(womb.pregnant) {
-			size += womb.Size();
-		}
-	}
-	var womb = this.entity.Butt().womb;
-	if(womb.pregnant) {
+	var wombs = this.PregnantWombs();
+	
+	_.each(wombs, function(womb) {
 		size += womb.Size();
-	}
+	});
 
 	return size;
 }
