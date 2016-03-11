@@ -3396,14 +3396,14 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 	});
 	
 	var dildoScene = function(toy) {
-		parse["toyDesc"]     = toy.sDesc();
-		parse["toyHeadDesc"] = toy.cock.TipShort();
+		parse["toy"]     = toy.sDesc();
+		parse["toyHead"] = toy.cock.TipShort();
 		
 		Text.Clear();
-		Text.Add("You ask Terry to just give you a moment to get something first. At the [foxvixen]’s nod, you quickly begin rooting through your belongs, smiling to yourself as you pull out your [toyDesc]. With a grin, you turn back to Terry and start to close the distance between you, holding up your toy for [hisher] inspection.", parse);
+		Text.Add("You ask Terry to just give you a moment to get something first. At the [foxvixen]’s nod, you quickly begin rooting through your belongs, smiling to yourself as you pull out your [toy]. With a grin, you turn back to Terry and start to close the distance between you, holding up your toy for [hisher] inspection.", parse);
 		Text.NL();
 		if(terry.Slut() < 30) {
-			Text.Add("Terry raises a brow as [heshe] notices the [toyDesc] but other doesn’t say anything.", parse);
+			Text.Add("Terry raises a brow as [heshe] notices the [toy] but other doesn’t say anything.", parse);
 		}
 		else if(terry.Slut() < 60) {
 			Text.Add("Terry simply smiles knowingly.", parse);
@@ -3417,11 +3417,11 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 		Text.Add("Closing the remaining distance between you, you reach out with the dildo toward Terry’s mouth, holding it invitingly there as you instruct [himher] to lick it.", parse);
 		Text.NL();
 		if(terry.Slut() < 60)
-			Text.Add("<i>“O-Okay...”</i> the [foxvixen] replies, opening [hisher] mouth and letting [hisher] tongue loll out to lick at the [toyHeadDesc].", parse);
+			Text.Add("<i>“O-Okay...”</i> the [foxvixen] replies, opening [hisher] mouth and letting [hisher] tongue loll out to lick at the [toyHead].", parse);
 		else
-			Text.Add("<i>“Personally, I’d prefer some real meat between my lips, but I’ll humor you,”</i> [heshe] replies, opening [hisher] mouth and letting [hisher] tongue loll out to lick at the [toyHeadDesc]", parse);
+			Text.Add("<i>“Personally, I’d prefer some real meat between my lips, but I’ll humor you,”</i> [heshe] replies, opening [hisher] mouth and letting [hisher] tongue loll out to lick at the [toyHead]", parse);
 		Text.NL();
-		Text.Add("Terry starts with slow licks along the glans of the [toyDesc], then starts moving up and down along the shaft. You tilt the toy slightly to give [himher] a better angle and [heshe] begins taking the [toyHeadDesc] in [hisher] mouth, suckling lightly.", parse);
+		Text.Add("Terry starts with slow licks along the glans of the [toy], then starts moving up and down along the shaft. You tilt the toy slightly to give [himher] a better angle and [heshe] begins taking the [toyHead] in [hisher] mouth, suckling lightly.", parse);
 		Text.NL();
 		Text.Add("That’s a good [foxvixen], you quip, twisting your wrist to push another inch or two past Terry’s willing lips.", parse);
 		Text.NL();
@@ -3430,42 +3430,42 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 		parse["slut"] = terry.Slut() >= 60 ? Text.Parse(" Struggling a little to get it out as Terry playfully insists on keeping [hisher] lips closed.", parse) : "";
 		Text.Add("Judging the toy suitably wet, you gently but insistently pry it from Terry’s mouth.[slut] Brandishing it with a flourish of your wrist, you place it against the nape of [hisher] neck and slowly trail it down [hisher] body.", parse);
 		Text.NL();
-		Text.Add("The [foxvixen] shudders as the tip of the [toyDesc] tickles [hisher] fur.", parse);
+		Text.Add("The [foxvixen] shudders as the tip of the [toy] tickles [hisher] fur.", parse);
 		Text.NL();
 		if(terry.Cup() < Terry.Breasts.Acup) {
-			Text.Add("Despite Terry’s lack of boobflesh, you can still have some fun. Bringing the spit-slick toy to rest against one of [hisher] nipples, you start to stroke it back and forth, rubbing the [toyHeadDesc] against the [foxvixen]’s nub and trailing it in circles across the flesh.", parse);
+			Text.Add("Despite Terry’s lack of boobflesh, you can still have some fun. Bringing the spit-slick toy to rest against one of [hisher] nipples, you start to stroke it back and forth, rubbing the [toyHead] against the [foxvixen]’s nub and trailing it in circles across the flesh.", parse);
 			Text.NL();
 			Text.Add("<i>“Ahn! That tickles!”</i> the [foxvixen] exclaims, tho [heshe] doesn’t recoil.", parse);
 			Text.NL();
 			Text.Add("Well, if that’s the case... your free hand reaches out for Terry’s other nipple, pinching it gently between forefinger and thumb, twiddling it with just the right amount of force that [heshe] can feel it without it hurting.", parse);
 		}
 		else if(terry.Cup() < Terry.Breasts.Ccup) {
-			Text.Add("The [foxvixen]’s small, perky breasts are just begging for a bit of attention. The flesh gives way just a little as you press the [toyHeadDesc] against it, grinding it softly against [hisher] nipple before you start to stroke and rub, tracing patterns around and over [hisher] tit.", parse);
+			Text.Add("The [foxvixen]’s small, perky breasts are just begging for a bit of attention. The flesh gives way just a little as you press the [toyHead] against it, grinding it softly against [hisher] nipple before you start to stroke and rub, tracing patterns around and over [hisher] tit.", parse);
 			Text.NL();
-			Text.Add("Terry moans as you stimulate [hisher] breasts with the [toyDesc]. <i>“H-Hey, watch it. That tickles!”</i>", parse);
+			Text.Add("Terry moans as you stimulate [hisher] breasts with the [toy]. <i>“H-Hey, watch it. That tickles!”</i>", parse);
 			Text.NL();
-			Text.Add("Tickles, huh? Maybe you need a little more than that. With your other hand, you reach out and cup the remaining breast, feeling it squish just a little beneath your groping fingers before you start to rub and stroke. You knead the flesh with dextrous flexes of your fingers, brushing against Terry’s other nipple in time with the rubbing and stroking of your [toyDesc].", parse);
+			Text.Add("Tickles, huh? Maybe you need a little more than that. With your other hand, you reach out and cup the remaining breast, feeling it squish just a little beneath your groping fingers before you start to rub and stroke. You knead the flesh with dextrous flexes of your fingers, brushing against Terry’s other nipple in time with the rubbing and stroking of your [toy].", parse);
 		}
 		else {
-			Text.Add("Those big juicy tits are practically singing out for you. Boobflesh squishes enticingly as you press your [toyDesc] to one, jiggling gently as you start to grind the [toyHeadDesc] into the nipple. Lightly thrusting back and forth, you stroke and caress Terry’s nipple with your [toyDesc], making [hisher] breast bounce with each flex of your wrist.", parse);
+			Text.Add("Those big juicy tits are practically singing out for you. Boobflesh squishes enticingly as you press your [toy] to one, jiggling gently as you start to grind the [toyHead] into the nipple. Lightly thrusting back and forth, you stroke and caress Terry’s nipple with your [toy], making [hisher] breast bounce with each flex of your wrist.", parse);
 			Text.NL();
 			Text.Add("<i>“Ah! Hey, be careful! - Ahn! - They’re sensitive,”</i> Terry cries out in pleasure.", parse);
 			Text.NL();
-			Text.Add("Sensitive, hmm? Grinning mischievously, your other hand reaches out to cup and fondle the breast you aren’t currently molesting with a [toyDesc], groping away shamelessly, delighting in the feel of boobage squishing and jiggling between your fingers.", parse);
+			Text.Add("Sensitive, hmm? Grinning mischievously, your other hand reaches out to cup and fondle the breast you aren’t currently molesting with a [toy], groping away shamelessly, delighting in the feel of boobage squishing and jiggling between your fingers.", parse);
 		}
 		Text.NL();
 		Text.Add("Terry pants as you continue to tease [himher]. [HeShe] cries out whenever you pinch [hisher] nipples, moaning whorishly soon after. You’ve no doubt [heshe]’s already sopping wet by now.", parse);
 		Text.NL();
-		Text.Add("Though your hand remains pressed against [hisher] breast, you move the [toyDesc] away from the other nipple. ", parse);
+		Text.Add("Though your hand remains pressed against [hisher] breast, you move the [toy] away from the other nipple. ", parse);
 		var belly = terry.PregHandler().BellySize();
 		if(belly < 0.2)
-			Text.Add("Down over Terry’s stomach it sinks, though you can’t resist stopping at [hisher] bellybutton, playfully rubbing the [toyHeadDesc] back and forth inside of it, trailing a circle before dropping lower.", parse);
+			Text.Add("Down over Terry’s stomach it sinks, though you can’t resist stopping at [hisher] bellybutton, playfully rubbing the [toyHead] back and forth inside of it, trailing a circle before dropping lower.", parse);
 		else if(belly < 0.6)
-			Text.Add("With Terry’s bulging belly, you can’t resist playing a little, you trace patterns of loops and curls over the swollen, fur-covered orb with the [toyHeadDesc], rubbing gently against the protruding navel before continuing your descent.", parse);
+			Text.Add("With Terry’s bulging belly, you can’t resist playing a little, you trace patterns of loops and curls over the swollen, fur-covered orb with the [toyHead], rubbing gently against the protruding navel before continuing your descent.", parse);
 		else {
-			Text.Add("The roundness of Terry’s stomach compels you to get a little playful. You gently grind your [toyHeadDesc] against the pregnant [foxvixen]’s protruding navel, then start to rub it in circles around [hisher] lower belly. As you do, [hisher] skin visibly distends, a small lump suddenly rising sharply against the toy pushed against [hisher] skin, making you stop in shock. Was that...?", parse);
+			Text.Add("The roundness of Terry’s stomach compels you to get a little playful. You gently grind your [toyHead] against the pregnant [foxvixen]’s protruding navel, then start to rub it in circles around [hisher] lower belly. As you do, [hisher] skin visibly distends, a small lump suddenly rising sharply against the toy pushed against [hisher] skin, making you stop in shock. Was that...?", parse);
 			Text.NL();
-			Text.Add("<i>“Hey! Don’t poke my belly with that [toyDesc],”</i> Terry says with a frown. <i>“You’re disturbing our baby!”</i>", parse);
+			Text.Add("<i>“Hey! Don’t poke my belly with that [toy],”</i> Terry says with a frown. <i>“You’re disturbing our baby!”</i>", parse);
 			Text.NL();
 			Text.Add("You can’t help a smile, but you manage to apologise, promising Terry you’ll stop poking [hisher] belly.", parse);
 			Text.NL();
@@ -3475,14 +3475,14 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 		}
 		Text.NL();
 		if(terry.FirstCock()) {
-			Text.Add("Terry’s [tcock] is half-erect already and visibly jutting from its sheath. You can’t resist playfully running your [toyDesc] along the smooth, sensitive sides of the exposed flesh. Terry visibly quakes in pleasure, but this isn’t what you’re here for and so you keep dropping.", parse);
+			Text.Add("Terry’s [tcock] is half-erect already and visibly jutting from its sheath. You can’t resist playfully running your [toy] along the smooth, sensitive sides of the exposed flesh. Terry visibly quakes in pleasure, but this isn’t what you’re here for and so you keep dropping.", parse);
 			Text.NL();
 		}
-		Text.Add("Guiding your [toyDesc] between Terry’s legs, you reach it up against Terry’s petals, rubbing the [toyHeadDesc] with careful pressure squarely against [hisher] clitoris. You can feel warm wetness dripping onto your fingers; [heshe]’s really turned on right now!", parse);
+		Text.Add("Guiding your [toy] between Terry’s legs, you reach it up against Terry’s petals, rubbing the [toyHead] with careful pressure squarely against [hisher] clitoris. You can feel warm wetness dripping onto your fingers; [heshe]’s really turned on right now!", parse);
 		Text.NL();
 		Text.Add("<i>“Hng! Don’t you think it’s about time you stopped teasing me and gave it to me? I… I want you!”</i> [heshe] says pleadingly.", parse);
 		Text.NL();
-		Text.Add("You make a show of looking thoughtful... Well… You give Terry a moment or two to sweat, then smile and promise you’ll give it to [himher] alright. Taking your hand off, you give [hisher] cunt one last brush with your [toyDesc] before you pull the slick piece away.", parse);
+		Text.Add("You make a show of looking thoughtful... Well… You give Terry a moment or two to sweat, then smile and promise you’ll give it to [himher] alright. Taking your hand off, you give [hisher] cunt one last brush with your [toy] before you pull the slick piece away.", parse);
 		Text.NL();
 		Text.Add("Taking a step or two back, you sit down, curling your [legs] to expose your [cocks] and make a seat out of your lap. Smiling, you invite Terry to sit down, so you can give [himher] what [heshe]’s craving.", parse);
 		Text.NL();
