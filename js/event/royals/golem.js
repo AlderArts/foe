@@ -169,7 +169,7 @@ Scenes.Golem.FightPrompt = function() {
 		func : function() {
 			MoveToLocation(world.loc.Rigard.Castle.Grounds);
 		}, enabled : true,
-		tooltip : "Retreat for now, it doesn’t look like it will follow you."
+		tooltip : "Retreat for now - it doesn’t look like it will follow you."
 	});
 	Gui.SetButtonsFromList(options);
 }
@@ -258,17 +258,17 @@ Scenes.Golem.OnLoss = function() {
 	Text.Clear();
 	Text.Add("Unable to fight back any longer, you[comp] fall to the ground, defeated by the hulking golem. ", parse);
 	if(golem.flags["Met"] == Scenes.Golem.State.Lost) {
-		Text.Add("Having seen the process before doesn’t make it any less strange, as the giant transforms into a perfect ebony goddess, her body striped with pulsing red veins. Without a word or hint of an expression, the stunning animated statue closes in on you.", parse);
+		Text.Add("Having seen the process before doesn’t make it any less strange as the giant transforms into a perfect ebony goddess, her body striped with pulsing red veins. Without a word or hint of an expression, the stunning animated statue closes in on you.", parse);
 	}
 	else {
-		Text.Add("Fearfully you wait for the last blow to fall, but the golem seems to have stopped in its tracks. The automaton has an unreadable expression in its soulless eyes, but your submission seems to have triggered something. With a loud crackling noise, the stone begins to reshape itself, compressing into a much smaller, sleeker form.", parse);
+		Text.Add("Fearfully, you wait for the last blow to fall, but the golem seems to have stopped in its tracks. The automaton has an unreadable expression in its soulless eyes, but your submission seems to have triggered something. With a loud crackling noise, the stone begins to reshape itself, compressing into a much smaller, sleeker form.", parse);
 		Text.NL();
-		Text.Add("Your eyebrows rise in surprise as the hulking, genderless mass of rock transforms into a quite shapely statue of black obsidian, and a decidedly female one at that. The golem is just under six feet tall, the shining rock exquisitely carved into the beautiful curves of a perfect hourglass figure. Whatever spellcaster that crafted it paid minute attention to detail, as the creature is complete with nipples, belly button and vagina.", parse);
+		Text.Add("Your eyebrows rise in surprise as the hulking, genderless mass of rock transforms into a quite shapely statue of black obsidian, and a decidedly female one at that. The golem is just under six feet tall, the shining rock exquisitely carved into the beautiful curves of a perfect hourglass figure. Whatever spellcaster that crafted it paid minute attention to detail, considering the creature is complete with nipples, belly button and vagina.", parse);
 		Text.NL();
-		Text.Add("The golem shifts slightly, breaking the illusion of being a statue. There is a red gleam emanating from the thin seams connecting the sleek layers of compressed rock, allowing it to move freely. The golem’s perfect face, a masterful piece of art surrounded by a solid mass of rigid curls so meticulously crafted that you can see each hair, is devoid of any emotions as it closes in on you, its joints moving with mechanical precision.", parse);
+		Text.Add("The golem shifts slightly, breaking the illusion of being a statue. There is a red gleam emanating from the thin seams connecting the sleek layers of compressed rock, allowing it to move freely. The golem’s perfect face - a masterful piece of art surrounded by a solid mass of rigid curls so meticulously crafted that you can see each hair - is devoid of any emotions as it closes in on you, its joints moving with mechanical precision.", parse);
 	}
 	Text.NL();
-	Text.Add("You gulp as the golem looms above you, smaller but still imposing. Straddling you, she leans down and licks your [skin], her tongue deceptively smooth. She seems to be secreting some sort of scented oil that she generously lathers you with. The smell is intoxicating, and every place the slick substance touches on your body tingles.", parse);
+	Text.Add("You gulp as the golem looms above you, smaller but still imposing. Straddling you, she leans down and licks your body, her tongue deceptively smooth. She seems to be secreting some sort of scented oil that she generously lathers you with. The smell is intoxicating, and every place the slick substance touches on your form tingles.", parse);
 	Text.NL();
 	if(player.FirstBreastRow().Size() > 3)
 		Text.Add("The golem kneads your [breasts], suckling your [nips] and lathering them with her oil. Before she continues down to your [belly], you are breathing heavily, your nipples stiff with arousal.", parse);
@@ -276,7 +276,7 @@ Scenes.Golem.OnLoss = function() {
 		Text.Add("The golem looks a bit surprised - as much as that is possible for a creature lacking any form of emotion - when her probing tongue reaches your flat chest. She prods at it a little, pulling on your [nips] as if expecting full breasts to suddenly sprout. When nothing happens, the automaton mechanically kneads her oil onto your chest anyway before continuing her journey down your body.", parse);
 	Text.NL();
 	if(player.FirstCock()) {
-		Text.Add("Your tender but expressionless lover looks a bit puzzled at your [cocks], as if not expecting it to be there. After giving [itThem] a brief examination, she promptly ignores the unfamiliar element[s]. ", parse);
+		Text.Add("Your tender but expressionless lover looks a bit puzzled at your [cocks] as if not expecting [itThem] to be there. After giving [itThem] a brief examination, she promptly ignores the unfamiliar element[s]. ", parse);
 	}
 	var tail = player.HasTail();
 	if(tail) {
@@ -335,15 +335,15 @@ Scenes.Golem.OnLoss = function() {
 	Text.Add("No longer capable of rational thought, you gasp for breath, moaning incoherently as the automaton fucks you. Why did you even come here[again]?", parse);
 	if(golem.flags["Met"] == Scenes.Golem.State.Lost)
 		Text.Add(" Did you just return in order for her to dominate you? Are you really that much of a slut?", parse);
-	Text.Add(" Though her movements remain mechanical, she is adjusting her angle according to your response, shifting slightly until each thrust is a blinding shock of pleasure surging up your spine. You know you can’t last like this for long, you are so close to cumming...", parse);
+	Text.Add(" Though her movements remain mechanical, she is adjusting her angle according to your response, shifting slightly until each thrust is a blinding shock of pleasure surging up your spine. You know you can’t last like this for long - you are so close to cumming...", parse);
 	Text.NL();
-	parse["l"] = player.LowerBodyType() == LowerBodyType.Single ? "tail" : "legs";
+	parse["l"] = player.LowerBodyType() == LowerBodyType.Single ? " tail gives" : " legs give";
 	if(player.FirstVag())
 		Text.Add("Spots dance across your vision as the golem repeatedly bumps your g-spot, her oil-soaked cock plowing your [vag] like a pillar of molten fire. Your entire body tingles electrically, almost numb from the overwhelming pleasure. With a loud moan, you convulse, your [hips] twitching as you ride out your orgasm. ", parse);
 	if(player.FirstCock())
-		Text.Add("You seed splatters on the ground, jetting out from your [cocks] in thick wads. ", parse);
+		Text.Add("Your seed splatters on the ground, jetting out from your [cocks] in thick wads. ", parse);
 	parse["c"] = player.FirstCock() ? ", and you collapse in the growing pool of your own sperm" : "";
-	Text.Add("Seemingly indifferent to your climax, the golem doesn’t alter her pace even slightly, riding you with undiminished speed and strength throughout your high. Your [l] give out under you, unable to support you any longer[c].", parse);
+	Text.Add("Seemingly indifferent to your climax, the golem doesn’t alter her pace even slightly, riding you with undiminished speed and strength throughout your high. Your[l] out under you, unable to support you any longer[c].", parse);
 	Text.NL();
 	Text.Add("Gradually, you come down from the blissful heaven of sexual ecstasy. In your weakened state, you are unable to do anything but lie there and take it, grunting as the golem continues to ride you. Suddenly, the creature flips you over on your back, allowing you to see your adversary. The beautiful obsidian statue still has the same blank, expressionless face, though in your mind a small triumphant smirk is playing on her lips.", parse);
 	Text.NL();
