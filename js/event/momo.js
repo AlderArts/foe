@@ -502,7 +502,7 @@ Scenes.Momo.CookPrompt = function() {
 					parse["comp2"] = Text.Parse(" She wastes no time in doling up a serving for [comp] as well.", {comp: tempParty.length == num ? tempParty[1].name : "your companions"});
 				else
 					parse["comp2"] = "";
-				Text.Add("At last, Momo approaches you[all], carrying a huge, iron pot with her. She places a serving bowl and a spoon and fork before you, then starts ladling out the contents: a hearty stew-like meal of fried beans, bacon, mushrooms, jerky strips, onions, carrots, potatoes and other assorted pieces, all bubbling in thick gravy.[comp2] <i>“Dad’s own special potluck recipe,”</i> she notes proudly, a wistful smile on her lips. <i>“Go on, dig in before it gets cold,”</i> she encourages you.", parse);
+				Text.Add("At last, Momo approaches you[all], carrying a huge iron pot with her. She places a serving bowl and a spoon and fork before you, then starts ladling out the contents: a hearty stew-like meal of fried beans, bacon, mushrooms, jerky strips, onions, carrots, potatoes and other assorted pieces, all bubbling in thick gravy.[comp2] <i>“Dad’s own special potluck recipe,”</i> she notes proudly, a wistful smile on her lips. <i>“Go on, dig in before it gets cold,”</i> she encourages you.", parse);
 			}
 			Text.Add(" You quickly wolf down the offered meal, praising Momo’s culinary skills.", parse);
 			Text.NL();
@@ -573,7 +573,7 @@ Scenes.Momo.TalkPrompt = function() {
 				Text.NL()
 				Text.Add("<i>“Nothing, absolutely nothing, makes me sicker than actually eating fish - I can prepare it, if I absolutely have to, but the thought of actually eating it...”</i> she chokes and slaps a hand over her mouth, pointedly looking away from you until she manages to suppress her gag reflex.", parse);
 				Text.NL()
-				Text.Add("<i>“Yeah, I don't like fish. Other than that...? Probably boiled cabbage. It's not so bad fried up with bacon, onions, sausage, and cheese, like Dad used to make, but boiled cabbage is just... bleugh. Maybe it's because of the smell...”</i> she wonders, tapping her chin contemplatively.", parse);
+				Text.Add("<i>“Yeah, I don't like fish. Other than that...? Probably boiled cabbage. It's not so bad fried up with bacon, onions, sausage, and cheese - like Dad used to make - but boiled cabbage is just... bleugh. Maybe it's because of the smell...”</i> she wonders, tapping her chin contemplatively.", parse);
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
 				Text.Add("<i>“Do I hunt and forage often? Oh, yes, whenever I have the time!”</i> she replies with a smile. <i>“Only thing better than homegrown ingredients are things you took from nature. Nothing like running down a deer or snaring yourself a rabbit to add that bit of extra spice to the meat, I think, and wild picked fruits, herbs, vegetables, they all just taste so much nicer than the market bought ones. Maybe it's because you know that you got them yourself, I don't know. I always go out and get my own ingredients when I can - used to love slipping away to join my brothers or mother hunting back on the farm.”</i>", parse);
@@ -667,7 +667,7 @@ Scenes.Momo.TalkPrompt = function() {
 				Text.NL();
 				Text.Add("<i>“Well, Grandma decides it's better to take the food than let him find the axe, so the two of them have a nice meal together - and he's all flirting and grins and Grandma, well, she starts to think that maybe he's not so bad...”</i> Momo grins knowingly, still looking a little flushed.", parse);
 				Text.NL();
-				Text.Add("<i>“He's the first boy who's ever treated her so nice, so, once breakfast is over, she offers him another round before she leaves. And he takes it. So, she comes back again next month, the day before he usually comes around to steal something from the farm, and she just so happens to have some more ale...“</i> Momo giggles wickedly. <i>“Started out once a month, then it's twice a month, then a weekly thing, and then, next thing Lily knows, she's waddling up to the cave with a great, big belly hanging off of her; she demands to know what he's going to do about it, and he just whips out this huge diamond-studded ring and asks her to marry him!“</i> she cheerfully squeals, bursting out laughing at the thought, slapping her stomach to try and contain her mirth.", parse);
+				Text.Add("<i>“He's the first boy who's ever treated her so nice, so, once breakfast is over, she offers him another round before she leaves. And he takes it. So, she comes back again next month, the day before he usually comes around to steal something from the farm, and she just so happens to have some more ale...“</i> Momo giggles wickedly. <i>“Started out once a month, then it's twice a month, then a weekly thing, and then, next thing Lily knows, she's waddling up to the cave with a great big belly hanging off of her; she demands to know what he's going to do about it, and he just whips out this huge diamond-studded ring and asks her to marry him!“</i> she cheerfully squeals, bursting out laughing at the thought, slapping her stomach to try and contain her mirth.", parse);
 				Text.NL();
 				Text.Add("So, if you get this straight, her grandma set out to slay a dragon but wound up laying it?", parse);
 				Text.NL();
@@ -812,7 +812,7 @@ Scenes.Momo.TalkPrompt = function() {
 						
 						PrintDefaultOptions();
 					}, enabled : true,
-					tooltip : "Your family was a lot like hers, big and noisy."
+					tooltip : "Your family was a lot like hers: big and noisy."
 				});
 				options.push({ nameStr : "Small family",
 					func : function() {
