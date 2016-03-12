@@ -6,6 +6,7 @@ Scenes.MaliceScouts = {};
 Scenes.MaliceScouts.Catboy = {};
 Scenes.MaliceScouts.Mare = {};
 Scenes.MaliceScouts.Goat = {};
+Scenes.MaliceScouts.Group = {};
 
 /*
  *
@@ -161,7 +162,7 @@ CatboyMage.prototype.Act = function(encounter, activeChar) {
 	scenes.Get();
 }
 
-Scenes.MaliceScouts.Catboy.Impregnate = function(mother, father, slot) {
+Scenes.MaliceScouts.Catboy.Impregnate = function(mother, father, slot, load) {
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother : mother,
@@ -169,7 +170,7 @@ Scenes.MaliceScouts.Catboy.Impregnate = function(mother, father, slot) {
 		race   : Race.Feline,
 		num    : 1,
 		time   : 30 * 24,
-		load   : 2
+		load   : load || 2
 	});
 }
 
@@ -3278,3 +3279,409 @@ Scenes.MaliceScouts.Goat.LossEntry = function(enc) {
 }
 
 
+// GROUP ENCOUNTER
+
+Scenes.MaliceScouts.Group.Encounter = function(levelbonus) {
+	var enemy    = new Party();
+	var catboy   = new CatboyMage(levelbonus);
+	var goat     = new GoatAlchemist(levelbonus);
+	var mare     = new CentaurMare(levelbonus);
+	enemy.AddMember(catboy);
+	enemy.AddMember(goat);
+	enemy.AddMember(mare);
+	var enc      = new Encounter(enemy);
+	enc.catboy   = catboy;
+	enc.goat     = goat;
+	enc.mare     = mare;
+
+	enc.onEncounter = function() {
+		var parse = {
+			himher : player.mfFem("him", "her")
+		};
+
+		Text.Clear();
+		Text.Add("Making your way through the Highlands is rough work - the sharp, stony ground wears at you, and the constant ups and downs of the rugged foothills and grand vistas are an ever-present drain on your energy. However, the sights that you take in are quite unlike anything else on Eden - the vastness of it all, coupled with the sense of antiquity and mysticism that you get from just being here…", parse);
+		Text.NL();
+		Text.Add("This is a place where the lore, rather than the law, rules. Little wonder that the Kingdom is loathe to try and extend its reach to these peaks.", parse);
+		Text.NL();
+		Text.Add("Your path takes you by a circle of standing stones, one of the many which dot the Highlands. Some of them are big, spanning whole plateaus, others are simple stubs of stone which look at home in a small garden. This one is fairly expansive - perhaps the size of a city plaza - and has runes of indeterminate origin etched into worn granite. They’ve clearly been here a long time, judging by the amount of moss that’s crept upwards along their sides; if they aren’t magical, they damn well look the part at the very least.", parse);
+		Text.NL();
+		Text.Add("Tempted to go forward and investigate a little further, you’re about to make for the stone circle when a voice snaps in the cool air, even as an arrow whizzes past you and buries itself in the ground not too far from you- a warning shot.", parse);
+		Text.NL();
+		Text.Add("<i>“Hah! Travelers! Submit and we won’t be forced to hurt you.”</i>", parse);
+		Text.NL();
+		Text.Add("You whirl around to view your assailants - a trio of figures stepping out from behind the standing stones to confront you. The obvious leader of the lot is an imposing centaur mare, perhaps seven feet tall from hoof to head, fingering a longbow in her hands. Lazily, she nocks another arrow and grins, this time taking aim for you.", parse);
+		Text.NL();
+		Text.Add("<i>“I don’t know. This one looks like we might have to hurt [himher] anyway.”</i>", parse);
+		Text.NL();
+		Text.Add("The second speaker - a goat-morph with an assortment of potions and bombs at his belt - steps forward, cutting off any easy avenue of escape. Whistling, he pulls out a fragile-looking  flask from his belt and looks around, scowling.", parse);
+		Text.NL();
+		Text.Add("<i>“Hey! Where are you? Get on out or -”</i>", parse);
+		Text.NL();
+		Text.Add("The final member of the trio, a diminutive catboy mage dressed in baggy robes and pants, waves his hands. <i>“I-I’m here. I’ve been here for a while.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Oh, right. You’re so unnoticable, I simply forgot you were there.”</i> The goat-morph alchemist sniffs, then turns to you. <i>“Well, then. I’m afraid to say that we appear to have gotten the drop on you", parse);
+		if(party.Num() > 1) {
+			parse["s"] = party.Num() > 2 ? "s" : "";
+			Text.Add(" and your friend[s]", parse);
+		}
+		Text.Add(", wouldn’t you say?”</i>", parse);
+		Text.NL();
+		Text.Add("Indeed. And what do they intend?", parse);
+		Text.NL();
+		Text.Add("The centaur mare cocks her head. <i>“Oh, I don’t know. A bit of fun, and maybe some of your coin, perhaps.”</i>", parse);
+		Text.NL();
+		Text.Add("Shouldn’t that be the other way around?", parse);
+		Text.NL();
+		Text.Add("A snicker. <i>“We’re paid well enough, so money’s not what we’re after. But a fine piece of ass like yours, that’s something that doesn’t wander by every day. Prepare to surrender it!”</i>", parse);
+		Text.NL();
+		Text.Add("With that, the trio advance upon you. <b>It’s a fight!</b>", parse);
+		Text.Flush();
+		
+		// Start combat
+		Gui.NextPrompt(function() {
+			enc.PrepCombat();
+		});
+	};
+
+	/*
+	enc.canRun = false;
+	enc.VictoryCondition = ...
+	*/
+	enc.onLoss    = Scenes.MaliceScouts.Group.LossPrompt;
+	enc.onVictory = Scenes.MaliceScouts.Group.WinPrompt;
+
+	return enc;
+}
+
+Scenes.MaliceScouts.Group.WinPrompt = function() {
+	var enc  = this;
+	SetGameState(GameState.Event);
+
+	var parse = {
+
+	};
+	parse = player.ParserTags(parse);
+
+	Gui.Callstack.push(function() {
+		Text.Clear();
+		Text.Add("Defeated, the trio lie groaning on the grass - the catboy and goat-morph are flat on their backs, while the centaur mare has toppled over on her side during the fight, unable or unwilling to get up. Heaving a sigh of relief, you put away your [weapon] and step forward to inspect your assailants more closely. They certainly look like mercenaries, being too well-dressed and equipped for simple bandits. Which company they’re from is a mystery, though; they certainly bear no markings indicating such.", parse);
+		Text.NL();
+		Text.Add("You shake your head. They certainly don’t seem to be in any shape to be answering questions, but you could let them have their bit of fun, if you were in the mood… alternatively, you could just skedaddle and be on your way before any of their friends come looking for them.", parse);
+		Text.NL();
+		Text.Add("What do you do?", parse);
+		Text.Flush();
+
+		var options = [];
+		/* TODO
+		options.push({nameStr : "",
+			tooltip : Text.Parse("", parse),
+			enabled : true,
+			func : function() {
+				Text.Clear();
+				Text.Add("", parse);
+				Text.NL();
+				Text.Add("", parse);
+				Text.Flush();
+			}
+		});
+		*/
+		
+		if(options.length > 0) {
+			Gui.SetButtonsFromList(options, false, null);
+		}
+		else { //NULL OPTION
+			Gui.NextPrompt(function() {
+				Text.Clear();
+				Text.Add("You rack your brains, trying to think of what to do next. Either you can’t think of anything appropriately kinky that would involve all three of your assailants, or you simply don’t want to have anything to do with them, for the next thing you know, you’re heading out and away from this mess before someone else comes up and… well, inconvenient questions would be the least of the things that could happen. Yeah, sure, you could stay and try and think of increasingly implausible sex acts that would probably involve quite a bit of contortion to accommodate all three of them, but seriously, you’ve got better things to do with your time, don’t you?", parse);
+				Text.NL();
+				Text.Add("Turning away, you double-time it out of the stone circle and make a beeline for the nearest road, or at least what passes for roads in the Highlands before considering your next move.", parse);
+				Text.Flush();
+				
+				Gui.NextPrompt();
+			});
+		}
+	});
+	Encounter.prototype.onVictory.call(enc);
+}
+
+
+Scenes.MaliceScouts.Group.LossPrompt = function() {
+	SetGameState(GameState.Event);
+	Text.Clear();
+
+	// this = encounter
+	var enc = this;
+
+	var parse = {
+
+	};
+
+	Gui.Callstack.push(function() {
+		Text.Clear();
+		Text.Add("Ouch! A savage kick from the centaur mare’s hooves sends your head spinning, and this is quickly followed by streams of translucent mist that issue from the catboy mage’s hands and solidify about your limbs, holding you in place. ", parse);
+		if(party.Num() > 1) {
+			if(party.Num() > 2) {
+				parse["comp"]    = "Your companions";
+				parse["isAre"]   = "are";
+				parse["himher"]  = "they";
+			}
+			else {
+				var p1 = party.Get(1);
+				parse["comp"]    = p1.name;
+				parse["isAre"]   = "is";
+				parse["himher"]  = p1.himher();
+			}
+			Text.Add("[comp] [isAre] too dazed to help you break free of the magical bindings, what with [himher] being wounded and pretty much out of the fight. ", parse);
+		}
+		Text.Add("You struggle a bit against the magical bonds, but it soon becomes clear that the fight is pretty much over - and you’re not the victor here. As one, the trio lower their weapons and close in on you, their gazes running up and down your form with varying levels of apprehension and hunger.", parse);
+		Text.NL();
+		Text.Add("<i>“So,”</i> the centaur mare begins, <i>“what do we do with this one?”</i>", parse);
+		Text.NL();
+		Text.Add("The goat-morph alchemist grins. <i>“Well, I was thinking…”</i>", parse);
+		Text.NL();
+		
+		//#randomly go to one of the below options 
+
+		var scenes = new EncounterTable();
+		scenes.AddEnc(function() {
+			Scenes.MaliceScouts.Group.LossCatboyForcedTF(enc);
+		}, 1.0, function() { return true; });
+		/* TODO
+		scenes.AddEnc(function() {
+			Text.Add("", parse);
+			Text.NL();
+			Text.Add("", parse);
+		}, 1.0, function() { return true; });
+		*/
+		scenes.Get();
+	});
+	Encounter.prototype.onLoss.call(enc);
+}
+
+
+Scenes.MaliceScouts.Group.LossCatboyForcedTF = function(enc) {
+	var catboy = enc.catboy;
+	
+	var parse = {
+		
+	};
+	parse = player.ParserTags(parse);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+	
+	Text.Add("<i>“…I do have a concoction that I’ve been meaning to test for a while, and one of the things we’ve come out all this way for is to teach this fellow here -”</i> he points at the catboy - <i>“just how to be a man.”</i>", parse);
+	Text.NL();
+	Text.Add("The catboy’s eyes widen, and he holds his hands out as he begins to back away slowly. <i>“Hey, h-hey. I don’t remember you saying anything about testing potions…I didn’t sign up for this.”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“Oh, don’t be such a pansy,”</i> the centaur mare replies, cantering over with a snort. Reaching down with equine strength, she easily rips down the catboy’s pants, revealing a thin bottom fitting of his lithe frame. <i>“It’s not as if he’d do anything to harm you. Intentionally, anyway.”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“S-stop that!”</i> the catboy yowls, his tail thrashing about in protest. <i>“I’m not -”</i> his words are cut off abruptly as the the alchemist sallies forth, jabs a gigantic dildo-shaped syringe into his asshole, and depresses the plunger before wrenching it out. You can’t help but feel a <i>tiny</i> bit sorry for the poor catboy as his eyes practically bulge from his head, whatever suppository that was in the alchemist’s syringe rushing up his ass and into the rest of his body.", parse);
+	Text.NL();
+	Text.Add("The effects are instantaneous. Within moments, the catboy’s muscles begin to swell, rapidly filling out his once-baggy robes and stretching them to their limits. His pants don’t get that much dignity - they rip apart as his legs lengthen and thighs bulk up, practically rippling with power.", parse);
+	Text.NL();
+	Text.Add("Naturally, those aren’t the only parts of his body that’re growing. Your eyes are drawn to the catboy’s shaft in a mixture of horror and wonder - at nine inches, the mage’s man-meat is already surprisingly large for his diminutive form, but it just keeps on getting bigger and <i>bigger</i>. Bit by bit, length and girth alike are added to the catboy’s cock, veins rising to its surface as it strains against its earthly confines, stretching them beyond belief. Ramrod straight, it’s already past one whole foot and still growing as the potion’s effects course through the catboy’s - well, it’s hard to think of the thing he’s becoming as a <i>boy</i> - veins.", parse);
+	Text.NL();
+	Text.Add("Of course, with his cock growing, his balls follow suit. Scrotal flesh grows taut as the catboy’s nuts swell with rapidly increasing virility, soon the size of eggs, then plums, then apples, then grapefruits… spirits, how ridiculous are they going to become? Even worse is the churning, squelching noise that rises from them as they swell with seed, practically pulsing with the need for release.", parse);
+	Text.NL();
+	Text.Add("When the changes are finally over, standing before you in the remains of his clothes is an eight foot musclebound brute, slightly hunched over as he adjusts to his new proportions. Although he’s kept his large, fluffy ears - which admittedly detract from any intimidation value he might have - the transformed catboy’s hair has spread down the sides of his face and down his chin in a pair of sick sideburns, cumulating in a large, silver mane worthy of a pride’s leader. Tusks jut downwards from his upper jaw, long and savagely sharp, eager to pierce and rend.", parse);
+	Text.NL();
+	Text.Add("What is most noteworthy, though, is his cock and balls. The former’s almost two feet long, at least as girthy as your arm, and continually twitches up and down even as it dribbles pre onto the ground, carrying with it the scent of raw maleness. The latter are equally impressive and ponderous, massive orbs that dangle between his legs, stretched tight and pulsing lightly with a fresh load of sperm. The soft, cartilaginous pleasure-nubs have swollen and extended themselves outwards from the main thrust of his shaft into something that look more like actual barbs, although they thankfully don’t actually look <i>hard</i> or anything…", parse);
+	Text.NL();
+	Text.Add("Yep, gone is the shy, simpering catboy, and in his place is this furious, growling, white-furred beast - or maybe he’s less angry and more desperate to mate. Either way, it doesn’t bode well for you or your ass.", parse);
+	Text.NL();
+	Text.Add("While the centaur mare is a little taken aback at the catboy’s sudden transformation, the alchemist is practically dancing with glee as he takes in the effects his potion is having on the catboy. <i>“Ha ha! I said I’d be able to make a man out of someone as pathetic as you, and I did! Look! Look! Can you deny that he’s anything but a man now? Can you? Can you?”</i>", parse);
+	Text.NL();
+	Text.Add("The former catboy rips off the remainder of his clothing, hurls the tattered fabric over his shoulder, and lets out a bestial roar. His green, slitted eyes narrow as he surveys you, then begins stomping over in your direction - but not before grabbing the centaur by her torso and dragging her along with him.", parse);
+	Text.NL();
+	Text.Add("<i>“Hey!”</i> the mare shouts as the transformed catboy’s thick, meaty arm wraps about her waist. <i>“Not me, you doofus!”</i> She looks about for the alchemist, but he’s long since vanished, perhaps headed for a safe vantage point from which to view the fruits of his work. <i>“Come back and tell this brute to let go of me! You didn’t say that he would -”</i>", parse);
+	Text.NL();
+	
+	var armor = "";
+	if(player.Armor() || !player.LowerArmor()) armor += "[armor]";
+	if(player.Armor() && player.LowerArmor()) armor += " and ";
+	if(player.LowerArmor()) armor += "[botarmor]";
+	parse["arm"] = Text.Parse(armor, parse);
+	
+	Text.Add("Another roar, angrier this time, and this is enough to shut the centaur up; reaching for you with his free hand, the former catboy almost literally tears off your [arm], leaving you stark naked. You wiggle about a bit, fear driving you to attempt one final desperate foray at escape, but the magical bindings are just as strong as they were when they were forged. Before you know it, his hand is on you as well, the bulging muscles of his arm forcing you upright; that same unnatural strength lifts you into the air even as he sits down on one of the standing stones and plops you straight into his lap and onto his barbed member.", parse);
+	Text.NL();
+	
+	// Set to 2ft arm thick cock
+	catboy.FirstCock().length.base    = 55;
+	catboy.FirstCock().thickness.base = 10;
+	
+	player.AddLustFraction(0.5);
+	
+	if(player.FirstVag()) {
+		if(player.FirstVag().Fits(catboy.FirstCock(), -5)) {
+			Text.Add("Seems like all that stretchiness training’s finally paid off today. Your breath catches in your throat as the cum-slick tip of the former catboy’s cock brushes against the petals of your womanly flower, then erupts in a scream of pain and pleasure alike as he impales you upon his shaft, simply loosening his grip on you and letting your weight drag you down upon him.", parse);
+			Text.NL();
+			
+			Sex.Vaginal(catboy, player);
+			player.FuckVag(player.FirstVag(), catboy.FirstCock(), 4);
+			catboy.Fuck(catboy.FirstCock(), 4);
+			
+			Text.Add("It’s hard to put to words the intense sensation of <i>stretching</i> that’s forced upon you as your [vag] continues to gape wider and wider in order to accommodate the former catboy’s virile rod - thin and tense, your inner walls keenly feel every twitch and bob of that gargantuan manhood in you, shivering and convulsing at the sensations each and every soft cock-barb is producing as it pricks at your insides. The manly musk that rises from him isn’t helping matters, either - like it or not, your face is growing hot, and your thoughts can’t help but start to be consumed by the utterly perverse and painful sex you’re having right now.", parse);
+			Text.NL();
+			Text.Add("Even with your considerable girth, there’re limits to just how much a torso can hold, though. The ex-catboy’s massive shaft has no problem forcing your cervix apart and entering your womb, bumps rising on your lower belly as you <i>feel</i> that steely hardness thrust about inside your warm confines. No matter how much he tries, though, he can’t get any more than about half of his entire length inside you, and eventually gives up with a grunt.", parse);
+			Text.NL();
+			Text.Add("<i>“You,”</i> he growls, jabbing a finger in the centaur mare’s direction. <i>“Come lick rest.”</i>", parse);
+			Text.NL();
+			Text.Add("The centaur flicks her eyes this way and that, and then trots over and starts licking the exposed remainder of the ex-catboy’s meaty boner. Guess she figured that a little tonguework isn’t much compared to what you’re going through; on his part, the catboy jams the fist that was restraining the mare straight into her hindquarters, sinking up to the forearm. The centaur sputters and whinnies in surprise as she ends up being vigorously fisted through and through, but manages to stay the course. Stifling her lusty moans, she manages to stay focused on the catboy’s shaft, lapping away like a filly faced with a salt lick.", parse);
+			Text.NL();
+			Text.Add("In and out, in and out, the barbs rubbing up against your slick inner walls with each movement and leaving behind trails of exhilarant pleasure laced with just a smidgen of pain. You bite your lip and try to hold on just a little longer as the former catboy picks up his pace, but the sheer sensation of the <i>thing</i> moving about inside you, squashing your innards even as it ravages your womb - it’s too much for a mere earthly body to bear. You orgasm for the first of what’s soon to be many times, ", parse);
+			if(player.FirstCock()) {
+				Text.Add("sperm blasting from your own shaft[s] and arching through the air, ", parse);
+			}
+			Text.Add("clear girl-cum running down and out to coat the catboy’s massive, meaty member. Somewhere beneath you, the centaur mare whinnies as an extra flavor is added to the medley of tastes currently flooding her mouth.", parse);
+			Text.NL();
+			Text.Add("Bounced up and down on the ex-catboy’s lap, you’re quickly brought to climax again and again in quick succession, rapidly reducing you to a quivering, mindless pile of pleasure-wracked flesh. The alchemist’s concoction has given him as much staying power as it did strength, and he seems to show no indication of slowing - in fact, he picks up the pace each time you succumb to your pleasures, his powerful chest heaving as he breathes heavily through sharp teeth.", parse);
+			Text.NL();
+			Text.Add("Time passes in a blur as your head swims and vision dims, your senses overwhelmed by the catboy’s forceful fucking. At last, though, an ominous twitching deep within your body jerks you back to groggy awareness just in time for the catboy to unleash the contents of his balls straight into your womb. Throwing his head back, the feline lets out a bestial roar not too unlike that of a lion’s, and then a torrential surge of spunk flows straight into you.", parse);
+			Text.NL();
+			
+			
+			var womb = player.PregHandler().Womb();
+			var preg = womb && womb.pregnant;
+			
+			if(preg && womb.progress >= 0.2) {
+				Text.Add("Being already knocked up, you can’t get any <i>more</i> pregnant than you already are - that sort of thing’s reserved for broody birds - but neither the catboy nor his cum care one whit for what you or your body wants. Another roar rends the air about the standing stones, and you can only groan and hang limply as your already swollen womb grows ever bigger as it’s pumped full of seed.", parse);
+				Text.NL();
+				Text.Add("Bigger and bigger, rounder and rounder - you can <i>feel</i> your unborn progeny being bathed in the catboy’s thick spunk, and the roaring deluge only serves to make you even more aroused. Unable to retain its shape with cock, child and cum all weighing down upon it, your glistening, stretched belly distends and drops, producing a delightful oblong shape.", parse);
+			}
+			else {
+				Text.Add("Unable to withstand the deluge of baby batter racing into it, your still-relatively-flat belly rapidly swells and distends as if the catboy’s seed had already taken root and was quickening into a batch of kittens at an inhuman rate. You can practically <i>feel</i> muscles stretching and organs giving way to make room for the growing reservoir of spunk within you - first looking to be four months along, then nine, then heavily overdue… and you’re still growing.", parse);
+				Text.NL();
+				Text.Add("Gazing down at your bulging belly, the catboy lets out a triumphant roar just as you feel your belly button surrender to the pressure within your womb and turn itself into an outie. Of course, it doesn’t stop there, protruding further and further as your “pregnancy” continues to grow weightier and weightier…", parse);
+				Text.NL();
+				Text.Add("<i>“Me big cat man!”</i> the catboy shouts, running his fingers across your [hair]. <i>“You good female. You grow many kittens for me, yes?”</i>", parse);
+				Text.NL();
+				Text.Add("You don’t have the presence of mind to whip up a witty response to that, so you settle for keeping your mouth shut and pretending that didn’t even dignify a response.", parse);
+			}
+			Text.NL();
+			
+			Scenes.MaliceScouts.Catboy.Impregnate(player, catboy, PregnancyHandler.Slot.Vag, 6);
+			
+			Text.Add("Try as it might, though, there’s a limit to how much your insides can hold, and before too long the river of spunk backflows out your cunt and oozes down the remainder of the catboy’s shaft, painting it white as it flows along. Yet another flavor is added to the delectable meat lollipop that the centaur mare’s been going at for the last few moments; coupled with the heady and arousing scent of sex, it’s enough to set the mare off.", parse);
+			Text.NL();
+			Text.Add("As you watch, the centaur’s eyes roll back into her head, her body shaking as she rears back onto her hind legs and takes the catboy’s fist into herself all the way up to her elbow. Twisting her equine half this way and that so as to get the most out of being skewered on the catboy’s arm, she yelps and moans as slick streams of her own juices run from her pussy and out onto her hind legs.", parse);
+			Text.NL();
+			Text.Add("On his part, the catboy throws the poor mare a bone and flexes his muscles once, twice - you can see the bulge in the mare’s underbelly where it’s clearly straining to keep the limb contained as it flexes. It’s no barbed cat-cock, but it gets the job done well enough.", parse);
+		}
+		else { //dont fit
+			Text.Add("Try as he might, there’s no way that the transformed catboy is getting that massive, meaty member in you - it’s simply too large to effect any sort of entrance. Well, the tip might fit, but it’s going to be nowhere near satisfactory for this monster well in rut.", parse);
+			Text.NL();
+			Text.Add("Clearly, the former catboy agrees with you, for he sets you down on the grass with an angry grumble and turns his attentions to the centaur mare. Now <i>there’s</i> a cocksleeve more suited for his massive member - sensing his intentions, the mare looks about frantically, but is as powerless as you to resist as he grabs her hindquarters in both hands and grinds his barbed cat-cock between her legs. She whinnies, first in shock, then in orgiastic pleasure as the former catboy rams his rod into her with a loud squelch and begins a steady rhythm. Hips thrusting, balls slapping against the mare’s pert butt, he moves with slow, rolling motions that speak of carefully restrained power, power that could have ravaged the poor mare at any point.", parse);
+			Text.NL();
+			Text.Add("Of course, as deep as the mare is, even she can’t take the entirety of the former catboy’s humongous dick into herself. Girth is one thing, length is another - and there’s just under half of his massive member still left dry and untouched by the mare’s puffy, heat-swollen pussy. Eyeing you, he jabs a finger in your direction, then at the exposed section of his manhood.", parse);
+			Text.NL();
+			Text.Add("<i>“You, come stroke,”</i> he growls. <i>“Work together.”</i>", parse);
+			Text.NL();
+			Text.Add("Somehow, you get the idea that claiming to have a headache at this juncture would be a very, very bad idea. Stroking him off isn’t so bad compared to what the centaur mare’s going through, and the yelps and squeals as the barbs on his shaft ravage her cunt are more than enough to make you glad you’re not on the receiving end of those attentions.", parse);
+			Text.NL();
+			Text.Add("Still, there’s a lot of man-meat for you to cover, and it’s clear that your initial, cautious laps aren’t doing it for him. It’s hard to go any faster, especially with the overpoweringly arousing scent of his crotch so close to your face; it’s difficult to concentrate on pleasing him and not yourself.", parse);
+			Text.NL();
+			parse["l"] = player.HasLegs() ? "between your legs" : "to your needy pussy";
+			Text.Add("You don’t know exactly when it happened, but one of your hands has found its way [l]. Dipping and weaving, stroking and caressing, you’re keenly aware of just how inadequate your fingers are compared to the mighty cat-cock that the centaur mare’s currently speared on, and a small voice in the back of your mind points out that it’d be so much <i>more</i> fun if you were the one of the end of that man-meat instead.", parse);
+			Text.NL();
+			Text.Add("<i>“Bitch!”</i> the cat-boy growls, tapping you on the head. Well, to him it might be just a tap, but to <i>you</i>, it’s a good, solid blow. Sure, he didn’t mean it - the brute doesn’t know his own strength - but it still smarts. <i>“Lick good!”</i>", parse);
+			Text.NL();
+			Text.Add("Clearly, drastic times call for drastic measures. Instead of actually bothering to lick, you simply open your mouth wide and press your lips against the ponderous cylinder of man-meat, stifling a moan of ecstasy as that hard, heady scent fills your nose and mouth with impatient need. The centaur’s girl-juices only make things worse - or if you look at it from another angle, better - as they run down the length of your meat lollipop and add yet another flavor to it.", parse);
+			Text.NL();
+			Text.Add("It’s thus that you do your best to satiate the former catboy, flexing and undulating your lips as the main thrust of your attack while your tongue backs you up. Gradually, you work your way back and forth across the circumference of his shaft, pausing at each pleasure-nub to suck and lick at it for all you’re worth.", parse);
+			Text.NL();
+			Text.Add("It seems to satiate him, at the very least. Through the sensitive skin of your lips, you can feel the throbbing of the feline prick you’re worshipping, pulsating with a steady virility; you can sense him tense ever so slightly every time you lavish your attentions on each flexible barb. At last, you’re getting through to him; all you need to do is keep this up until -", parse);
+			Text.NL();
+			Text.Add("- With a bestial roar, the catboy’s shaft clenches, and you feel a hot rush pass beneath your lips for the briefest of moments before he unleashes his load into the centaur mare. The poor equine groans limply as her underbelly begins bloating with thick cat-spunk, her womb swelling up nice and round until it simply can’t accommodate any more sperm and the continued deluge simply backflows around the edges of her already supremely stretched pussy, emerging as a thick white spray.", parse);
+			Text.NL();
+			Text.Add("Caught up as you are, you have barely enough time to turn shield yourself with your arms before the backflow hits. Much good it does you against the torrent of sperm that blasts back from the centaur’s abused womb - mere seconds pass before you’re completely soaked with cat cum, and twice as long as that before you’ve been completely painted and plastered over, making you resemble a particularly dribbly candle more than anything else. Of course,  you’re not the only thing that ends up coated with spunk; the blowback is so strong that his thighs and groin end up splattered with a nice layer of white as well.", parse);
+			
+			player.AddSexExp(2);
+		}
+	}
+	else { //anal
+		if(player.Butt().Fits(catboy.FirstCock(), -5)) {
+			Text.Add("As hard to believe as it is, the bestial catboy manages to effect entry into your [anus] after a fashion. Despite his monstrous girth, the firm grip he has about your waist pushes you down steadily atop his barbed shaft, wiggling and worming away…", parse);
+			Text.NL();
+			
+			Sex.Anal(catboy, player);
+			player.FuckAnal(player.Butt(), catboy.FirstCock(), 4);
+			catboy.Fuck(catboy.FirstCock(), 4);
+			
+			Text.Add("You catch sight of the centaur mare staring at you, mouth agape; straddled as you are atop the catboy’s gargantuan cock-head, there’s no way you’re seeing what’s going on underneath you. Feeling it, though, is another matter as your already well-trained asshole is stretched to its limits just trying to accommodate the huge head. At last, the very tip of his cock does manage to pass your sphincter - and you already feel fit to bust. The fact that there’s no lube save for the pre drooling steadily from his tip only makes things worse, but it’s all you can do to grit your teeth and hopefully ride it out.", parse);
+			Text.NL();
+			Text.Add("The bestial catboy growls and shakes his head. <i>“Hole not big enough. Me make hole bigger for next time!”</i> Tossing the centaur mare away like an old toy, he plants both hands about your waist and jams you down <i>hard</i> on his rock-solid prick.", parse);
+			Text.NL();
+			Text.Add("You can’t believe that this is happening to you, but it is. With all his strength focused on piston-pumping away at your [anus], you’re methodically, completely and utterly ruined into an incontinent, gaping mess. None of the barbs manage to make it in, but you nevertheless sense them pricking at your ass cheeks and shudder as what they might have done had they invaded your colon.", parse);
+			Text.NL();
+			Text.Add("<i>“No good!”</i> the transformed, bestial catboy roars, hammering you against his shaft in frustration. Spread wide and bruised, your ass cheeks feel like they’re going to be torn asunder. More and more steaming pre is rammed up your backside, working tendrils of heat up your colon; for a moment there, you pass out thanks to the intense stretchy pain coursing up your spine.", parse);
+			Text.NL();
+			Text.Add("<i>“Grrroooaaarrr!”</i> The earth-shattering roar that the catboy lets out reverberates amongst the standing stones jerks you back to wakefulness just in time for you to realize he’s tossing you to the ground. Your head still spinning, you try to crawl away from the perverse scene - only to find that you can’t feel your battered and abused ass any more save for the occasional twinge of pain.", parse);
+			Text.NL();
+			Text.Add("Overhead, a veritable stream of spunk blasts forth from the catboy’s barbed shaft like water from a fire hose, whipping and twisting through the air in a high-angled arc before falling upon both you and the centaur mare in a sticky, steaming shower. Grimacing, you plant your elbows in the ground and do your best to drag yourself forward and out of the shower of cum, but are surprised when a hand finds you amidst the slippery, sticky mess.", parse);
+			Text.NL();
+			Text.Add("It’s the centaur mare. <i>“Shit,”</i> she mumbles. <i>“Sorry about this. I didn’t know what he was up to, or what the concoction would do…”</i>", parse);
+			Text.NL();
+			Text.Add("It’s all right, you try to say, but the words won’t come out - and even if they would, the perversely deliciously salty taste of cat spunk stops your tongue cold. No need for words, though - you gratefully grasp the centaur’s hand as she drags you out and away from the worst of it. You can’t help but look back, though - while the catboy’s balls are ever so slightly smaller, he’s still going strong, his blasts of seed painting the standing stones a cheery clear white.", parse);
+		}
+		else { //dont fit
+			Text.Add("<i>“Fit!”</i> the transformed catboy growls as he rams you down upon the head of his member, causing your [anus] to scream out in pain and terror as it’s stretched beyond what mere mortals are supposed to be capable of. <i>“Me make you fit!”</i>", parse);
+			Text.NL();
+			Text.Add("Despite the catboy’s exhortations, even a brute like him can’t defy the laws of nature. No matter how he twists, wiggles and worms your abused asshole upon the head of his manhood, you simply don’t possess the physical wherewithal to allow even the very tip into you, let alone the barbs that dot the head of his shaft. It doesn’t stop him from trying his very best, though, and it would almost be commendable if he wasn’t trying to split you in two, starting with your ass cheeks.", parse);
+			Text.NL();
+			Text.Add("Eventually, though, even he with his thick skull has to admit that he’s not going to ram his meaty, throbbing rod into you, and pauses for a moment to contemplate the situation.", parse);
+			Text.NL();
+			Text.Add("<i>“You no big enough to fit? Me no use back door then. Me use other end!”</i> the catboy growls, effortlessly flipping you around so that your face is directly in line with his head. With brutal determination, he begins mashing your face against his urethra - at least <i>that</i> you manage to take into your mouth, along with a little bit of the surrounding tip. It’s clearly far from satisfactory, but at least the catboy appears to be jerking himself in earnest now.", parse);
+			Text.NL();
+			
+			Sex.Blowjob(player, catboy);
+			player.FuckOral(player.Mouth(), catboy.FirstCock(), 2);
+			catboy.Fuck(catboy.FirstCock(), 2);
+			
+			Text.Add("The brutal facefucking goes on for what seems like forever, the potent scent of masculine sex flooding your nose and mouth and turning you dizzy. Dollops of spunk splatter onto your face, rendering you practically blind, and it’s all you can do to struggle to get air in the face of being ravaged this way.", parse);
+			Text.NL();
+			Text.Add("<i>“Me want satisfaction!”</i> Deep and sonorous, the catboy’s voice is thunder in your ears, reverberating through your frail, fuckable flesh. <i>“Give satisfaction now!”</i>", parse);
+			Text.NL();
+			Text.Add("You’re doing all you can - which admittedly is not very much given the circumstances, but it’s still something! The sooner he finally gets off, the sooner this nightmare can end!", parse);
+			Text.NL();
+			Text.Add("Another bellow from the catboy’s barrel-chest, and he flings you away like an unloved rag-doll, sending you skidding along the soft grass, leaving a trail of slimy seed in your wake. Is it over? Is it over?", parse);
+			Text.NL();
+			Text.Add("Apparently not, for you feebly wipe the cum away from your eyes just in time to see the catboy blow his load, his balls clenching and pulsing as gargantuan spurts and ropes of kitten-batter erupt from his shaft, glistening as it flies through the air and rains down straight upon you. You don’t even have the strength to try and shield yourself from being painted a lovely creamy shade of white - and to be fair, even if you had the strength, there’s not much that you could’ve done against that deluge anyways.", parse);
+			Text.NL();
+			Text.Add("<i>“Hurry, get up!”</i> A hand reaches down for yours, and tries to hoist you upright. <i>“He’s not going to be distracted forever!”</i>", parse);
+			Text.NL();
+			Text.Add("You look up at your unlikely savior - the centaur mare - and let her pull you upright. No, you can’t <i>walk</i>, but you can kind of stand, and that’s just about enough for the centaur to half-lead, half-drag you out and away from the hail of jism raining down upon the two of you.", parse);
+			Text.NL();
+			Text.Add("Once you’re safely out of the blast radius, you promptly collapse back onto the ground, and the centaur mare follows suit. Like you, she’s completely covered in thick, goopy sperm, and heaves a sigh of relief as she tumbles down on her side not too far away from you.", parse);
+			Text.NL();
+			Text.Add("You thank her for rescuing you from… from your fate.", parse);
+			Text.NL();
+			Text.Add("<i>“Oh, don’t worry about it,”</i> she manages to gasp between pants. <i>“I wasn’t quite expecting this to happen. It was just supposed to be a bit of fun to break away from the stifling monotony of camp all day long…”</i>", parse);
+			Text.NL();
+			Text.Add("Right, right. Weakly, you turn your eyes away from the centaur and back to the catboy. He certainly seems to be enjoying himself, even though you aren’t sucking him off anymore - does what you did even count as sucking him off? Either way, at least the torrential rain of spunk appears to be dying down, the catboy’s balls having shrunk from the size of melons to being simply ponderous as they empty themselves into the middle of the stone circle.", parse);
+		}
+	}
+	Text.NL();
+	Text.Add("By and large, though, the flood dies down to a dribble, and the flow of cum finally comes to a halt. Spent and sated, the catboy lets loose a deep, throaty purr and flops onto his back, eyes staring up at the cloudy sky as he mumbles incoherently to himself. Doesn’t look like he’s a threat anymore, then - but where’s the last of the trio?", parse);
+	Text.NL();
+	Text.Add("At last, you spy just where the goat-morph alchemist went - he’s sitting up atop one of the larger monoliths, his pants hanging over the side, leaving his hindquarters buck naked. Watching the entire scene from his safe vantage point, the alchemist masturbates furiously, jerking himself off so quickly that his arm’s practically a blur. With a plaintive bleat, he shoots off a small stream of cum into the air, then collapses backwards onto the stone, panting while his prick slowly begins to soften.", parse);
+	Text.NL();
+	Text.Add("Both you and the centaur mare share a knowing, grumpy look.", parse);
+	Text.NL();
+	Text.Add("<i>“Don’t worry,”</i> she mutters. <i>“I’ll sort <b>him</b> out before we return to camp.”</i>", parse);
+	Text.NL();
+	Text.Add("Looks like the suppository’s effects have begun to fade, too. Behind you, the catboy is quickly reverting to his old, spineless self, one last heavy blast of sperm spurting forth from his prick as his balls return to their former size along with the rest of his body.", parse);
+	Text.NL();
+	Text.Add("Yeah, you have to admit you like him a <i>lot</i> better this way.", parse);
+	Text.NL();
+	Text.Add("It takes quite a bit of effort, but eventually you’re able to pull yourself upright, albeit unsteadily, and totter off before something worse can happen. Like it or not, you’re going to be walking funny for the next few days…", parse);
+	Text.Flush();
+	
+	world.TimeStep({hour: 2});
+	
+	Gui.NextPrompt();
+}
+
+/*
+
+
+*/
