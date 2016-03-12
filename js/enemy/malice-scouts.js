@@ -3447,6 +3447,9 @@ Scenes.MaliceScouts.Group.LossPrompt = function() {
 		scenes.AddEnc(function() {
 			Scenes.MaliceScouts.Group.LossCatboyForcedTF(enc);
 		}, 1.0, function() { return true; });
+		scenes.AddEnc(function() {
+			Scenes.MaliceScouts.Group.LossMagicalBondage(enc);
+		}, 1.0, function() { return true; });
 		/* TODO
 		scenes.AddEnc(function() {
 			Text.Add("", parse);
@@ -3458,7 +3461,6 @@ Scenes.MaliceScouts.Group.LossPrompt = function() {
 	});
 	Encounter.prototype.onLoss.call(enc);
 }
-
 
 Scenes.MaliceScouts.Group.LossCatboyForcedTF = function(enc) {
 	var catboy = enc.catboy;
@@ -3538,7 +3540,6 @@ Scenes.MaliceScouts.Group.LossCatboyForcedTF = function(enc) {
 			Text.NL();
 			Text.Add("Time passes in a blur as your head swims and vision dims, your senses overwhelmed by the catboy’s forceful fucking. At last, though, an ominous twitching deep within your body jerks you back to groggy awareness just in time for the catboy to unleash the contents of his balls straight into your womb. Throwing his head back, the feline lets out a bestial roar not too unlike that of a lion’s, and then a torrential surge of spunk flows straight into you.", parse);
 			Text.NL();
-			
 			
 			var womb = player.PregHandler().Womb();
 			var preg = womb && womb.pregnant;
@@ -3684,7 +3685,326 @@ Scenes.MaliceScouts.Group.LossCatboyForcedTF = function(enc) {
 	Gui.NextPrompt();
 }
 
-/*
+Scenes.MaliceScouts.Group.LossMagicalBondage = function(enc) {
+	//TODO
+	//var catboy = enc.catboy;
+	
+	var parse = {
+		hisher : player.mfTrue("his", "her"),
+		himher : player.mfTrue("him", "her")
+	};
+	parse = player.ParserTags(parse);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+	
+	player.AddLustFraction(0.7);
+	
+	Text.Add("<i>“You can do that spell, can’t you?”</i>", parse);
+	Text.NL();
+	Text.Add("The catboy looks a little uncertain and takes a step back. <i>“W-what spell?”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“<b>That</b> spell!”</i> the alchemist snaps. <i>“You know, the one which you get asked to do all the time when we need to tie someone up and don’t have rope? Yes, that’s the one!”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“B-but why do we need it?”</i> the catboy stammers. <i>“These ones look pretty beat up as it is; they can’t even stand. We don’t need to restrain them any -”</i>", parse);
+	Text.NL();
+	Text.Add("Grinning - although there’s absolutely no humor in it - the rancid old goat shushes his colleague by planting a finger on his lips. <i>“You see, when I ask you to do something, you do it. You don’t get ahead by questioning your betters, boy, and especially not when you can’t even figure out that I’m not about to tie this one up to restrain [himher], but for something else altogether, you fucking nitwit.</i>", parse);
+	Text.NL();
+	Text.Add("<i>“Now, are you doing to do it or not?”</i>", parse);
+	Text.NL();
+	Text.Add("The catboy cringes a bit, looking to the centaur mare for help but receiving none. His large ears folded back against his fuzzy head, the catboy proceeds to weave his fingers in the air, mumbling words that you can’t make out properly. By and large, tendrils of white mist curl from his outstretched fingers, wafting towards you.", parse);
+	Text.NL();
+	Text.Add("<i>“Yes, correct.”</i> The old goat snorts and spits on the ground. <i>“I want that one.”</i>", parse);
+	Text.NL();
+	if(party.Num() > 2) {
+		Text.Add("<i>“And the others?”</i> the catboy asks, still cringing. <i>“What do you want to do with them?”</i>", parse);
+		Text.NL();
+	}
+	else if(party.Num() > 1) {
+		Text.Add("<i>“And the other one?”</i> the catboy asks fearfully. <i>“What do you intend?”</i>", parse);
+		Text.NL();
+	}
+	Text.Add("The goat just rolls his shoulders and coughs as he fumbles about in the massive toolbelt at his waist. <i>“Not interesting. Don’t care. This one, though - a new specimen of a type that I haven’t quite had the opportunity to experiment on yet. Don’t look so cowed, kid - you’re going to have a front-row seat to <b>science</b> being performed.”</i>", parse);
+	Text.NL();
+	Text.Add("With that, a heavy silence falls over the circle as the catboy finishes his spell. The mist might appear incorporeal, but it’s solid enough as a tendril each wraps about your wrists, pulling them sharply behind your back as if jerked by rope. Once you’re firmly bound, the tendrils meld into one before breaking off, resulting in a pair of cuffs locking your arms together uselessly. The remainder of the bindings wrap about your forearms, encasing you from fingertip to elbow in the shimmering magical stuff.", parse);
+	Text.NL();
+	Text.Add("You know instinctively that this isn’t going to be something you’ll be able to break by struggling, even if you hadn’t had the stuffing just beaten out of you. ", parse);
+	if(player.SubDom() >= 30) {
+		Text.Add("Though it’s hard to accept your fate being bound and tied up like this, there isn’t much you can do at this juncture. If you’d wanted to change things, maybe you should have done so a little earlier, or at least before losing to this trio of ne’er-do-wells of dubious origin.", parse);
+	}
+	else if(player.SubDom() >= -30) {
+		Text.Add("Well, there doesn’t seem to be anything you can do about this, so it seems that you might as well lie back and think of Eden. If you’re lucky, you might actually get some pleasure out of this… although with the grin that the alchemist’s wearing on his face, you kind of doubt it.", parse);
+	}
+	else {
+		Text.Add("You know that this isn’t quite the right time for this, but there’s something in the back of your mind that’s just made so helplessly aroused to be tied up like this, to be rendered completely at someone’s mercy.", parse);
+		Text.NL();
+		Text.Add("You can’t help it - the more you struggle ineffectually at the magical bonds tying your arms together, the more turned on you become, and before long you feel a surge of heat pass through your breast on its way to your loins, where it blossoms into a cloud of shivering, delectable anticipation.", parse);
+	}
+	Text.NL();
+	Text.Add("<i>“Hmph. Passable. Now don’t you ever <b>dare</b> question me again, or -”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“Or…?”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“Or I’ll have you join in on the experiments, too,”</i> the alchemist finishes with a sneer. <i>“Finish up with [hisher] [feet], and we can get started.”</i>", parse);
+	Text.NL();
+	Text.Add("Trembling, the catboy waggles his fingers again, and more mist flows from his fingers to wind about you, steadily tightening about them until there’s no chance that you’d be able to run away even if you had the strength to. Unlike the bindings on you arms, though, the catboy doesn’t wrap them in magic, content with just the coils about your person.", parse);
+	Text.NL();
+	Text.Add("<i>“Great job,”</i> the alchemist says, still rummaging about in his toolbelt. <i>“Now, get [himher] into position and hold [himher] there until I manage to find the paddle, will you? There’s a good kitty.”</i>", parse);
+	Text.NL();
+	Text.Add("Driven by something approaching sheer, unadulterated terror, the catboy mutters a few more incantations and gestures with his hands. With a sharp yank, you’re dragged upwards and into the air as your magical bindings levitate, stopping at perhaps a meter off the ground. You’re starting to feel more than a little like a pig on a poke - and with your limbs high in the air and midsection sagging towards the ground, that’s not an entirely inaccurate description of your current predicament.", parse);
+	Text.NL();
+	Text.Add("At length, the alchemist fishes out what he was looking for: a small bronze and wood box perhaps the size of a coconut. As you watch, he disassembles and unfurls it into some kind of contraption, complete with a tripod stand that places its top level with you. It seems incredulous to you that an entire person-sized device could fold into something small enough to fit into a belt pouch, but if anyone can manage it, it’s this unhinged old bastard.", parse);
+	Text.NL();
+	Text.Add("You don’t know what this is - you’ve never seen the likes of it before - but the number of gears and shafts, as well as the wheel of rotating wooden paddles, suggests quite clearly its intended purpose.", parse);
+	Text.NL();
+	Text.Add("<i>“This,”</i> the alchemist says proudly, sweeping a gnarled hand in a flourish, <i>“is one of my newer inventions, the automated spanker. No more getting your joints all sore having to raise and bring down the paddle over and over again - no, now you can enjoy the luxuries of a good spanking without getting the spanker all tired out. With this, you can deliver all the spankings you want, as quickly as you want them! Isn’t that wonderful?”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“Of course, there’re a few snags and kinks to be worked out before it’s ready for public use, but that’s where you come in; it was so nice of you to volunteer for testing. And of course, credit is due to my lovely assistants, too.”</i>", parse);
+	Text.NL();
+	Text.Add("You throw a glance at the catboy and centaur mare, both of whom which look as if they’d really, <i>really</i> be somewhere else other than helping to get the rancid old goat’s contraption in place behind you, aimed directly at your [butt]. Unfortunately, your momentary distraction has allowed the alchemist to sneak up on you undetected, and before you know it he’s in front of you and jamming a large leather bit into your mouth, securing it in place with a pair of straps which he fastens about your head.", parse);
+	Text.NL();
+	Text.Add("<i>“Now then, I’m sure you’ll want this,”</i> he whispers, giving you an affectionate pat on the head. <i>“Wouldn’t want you to bite your tongue off, would we? That would be messy, and I don’t want to have to account for that extra variable.”</i>", parse);
+	Text.NL();
+	if(player.SubDom() >= 30) {
+		Text.Add("You’d have told him to go and get dunked, but all you manage is a series of muffled grunts and snarls thanks to the bit in your mouth. The alchemist catches your death glare as he looks straight at you, then bursts into nasty laughter and gives you another patronizing pat on the head.", parse);
+		Text.NL();
+	}
+	else if(player.SubDom() < -30) {
+		Text.Add("No, no you wouldn’t - in fact, you’re very glad that he was thoughtful like this, for you’re practically wiggling in your bindings now. Can he get started already? Please? Please? The waiting is killing you.", parse);
+		Text.NL();
+		Text.Add("Of course, you can’t <i>say</i> all of this thanks to the bit in your mouth, but you’re so enthusiastic about all this that the alchemist seems to sense it for himself and quickens his footsteps as he moves into position.", parse);
+		Text.NL();
+	}
+	Text.Add("Clearly taking far too much pleasure in this, old goat rubs his wrinkled hands together. <i>“All right, everything’s in place now.</i>", parse);
+	Text.NL();
+	Text.Add("<i>“Let’s do some science! Get cranking!”</i>", parse);
+	Text.NL();
+	Text.Add("Obediently, the centauress starts working the crank on the device, and you feel the first resounding smack of its paddle on your butt.", parse);
+	Text.NL();
+	if(player.Butt().Size() >= 9) {
+		Text.Add("At first, you feel nothing, and then the sting of the paddle against your [skin] hits you, accompanied by a resounding smack that resonates through the circle of stones. With how expansive your booty is, the blow is cushioned somewhat, but when it finally sinks in you gasp as blood rushes to the mark the paddle made across your butt cheeks.", parse);
+		Text.NL();
+		Text.Add("Smack! Another hit, and this one lands squarely on the luscious fullness of your butt cheeks, sending them jiggling to and fro vigorously as tears spring to your eyes.", parse);
+		Text.NL();
+		Text.Add("Smack! A hit for the third time, and ", parse);
+		if(player.SubDom() >= 30)
+			Text.Add("try as you might to resist it, you can’t help but feel a thrill of lustful pleasure as your body betrays you, trying to make the best of a bad situation. The spirit is strong but the flesh is weak, as the saying goes, and a muffled moan inadvertently escapes your throat, working its way about the leather bit in your mouth.", parse);
+		else if(player.SubDom() >= -30)
+			Text.Add("you bite down hard on the bit in your mouth as your ample tush takes more and more abuse. Whether you feel that way is anyone’s guess, but your body is actively getting increasingly aroused by being subjected to the machine’s furious spanking.", parse);
+		else
+			Text.Add("you feel yourself begin to give way wholly to the perversely pleasurable abuse, reveling in being paddled faster than any creature could reasonably do to you. Being tied up like this and spanked over and over again is so much fun, you can’t help but feel like a slut for taking so much enjoyment in being so submissive…", parse);
+		Text.NL();
+		Text.Add("The machine’s paddles come and go; your bodacious booty jiggles to and fro. Quivering and wobbling like a pair of firm jellies on a plate, they manage to cushion some of the brunt from the blows rapidly landing on your tush, turning your thoughts from pain to arousal.", parse);
+	}
+	else if(player.Butt().Size() >= 4) {
+		Text.Add("With a butt so thin and slight as yours, you feel every bit of the blow as the paddle cracks firmly on your behind, leaving a sharp stinging across both slight mounts of your rear. This is quickly followed by a prickling rush of blood to the afflicted area - which in turn quickly gives way to another firm smack.", parse);
+		Text.NL();
+		Text.Add("You yelp, tears threatening to come into your eyes. With how thin your rear is, you could have sworn you felt that one all the way to the bone!", parse);
+		Text.NL();
+		Text.Add("<i>“Disappointing,”</i> the alchemist mutters to himself as he takes notes on a tattered sketchpad. <i>“We’ll have to design different paddles to be more ergonomic for leaner spankees…”</i>", parse);
+		Text.NL();
+		if(player.SubDom() >= 30) {
+			Text.Add("Spankee? You’re not built to be a spankee! You’re not <i>made</i> to be a spankee - in fact, you should be the spanker, and you don’t need some stupid machine to do the job for you! Sure, it might be more efficient in terms of raw spanking power, but it doesn’t have that personal touch only a firm hand can provide, that deep connection that only a wielded paddle or whip can provide.", parse);
+			Text.NL();
+			Text.Add("You should know, yes.", parse);
+			Text.NL();
+			Text.Add("The alchemist catches the fury in your eye, and simply shrugs and grins. <i>“Heh, don’t worry. I’m sure you’ll come to like it a little by the time we’re done with you.”</i>", parse);
+			Text.NL();
+			Text.Add("The worst thing is, he’s right. Your mind may be pulling in one direction, but your traitorous body has decided to go in the exact opposite direction, and as the blows continue to land on your slender, bony butt, you can’t help but feel just the tiniest bit aroused, your loins stirring despite your best attempts at shutting out those treacherous thoughts.", parse);
+		}
+		else if(player.SubDom() >= -30) {
+			Text.Add("You have no good answer for the alchemist, instead deciding to hold on as long as possible and hope that the alchemist’s perverted research will be done before your strength finally gives out.", parse);
+			Text.NL();
+			var gen = "";
+			if(player.FirstCock()) gen += "[cocks]";
+			if(player.FirstCock() && player.FirstVag()) gen += " and ";
+			if(player.FirstVag()) gen += "[vag]";
+			parse["gen"] = Text.Parse(gen, parse);
+			Text.Add("Smack after smack lands on your slight rump, and perhaps out of desperation or a bid to get <i>something</i> useful out of this, your body starts to feel a bit horny despite the constant stinging pain from the machine’s repeated smackings. The heat of arousal blossoms in your loins, briefly creeping into your lower belly before concentrating in your [gen]. Running on automatic, you moan softly into the bit in your mouth and squirm against the magical bonds keeping you trussed up in the air, trying to work off the lust your traitorous body is accumulating.", parse);
+		}
+		else {
+			var gen = "";
+			if(player.FirstCock()) gen += "your manhood[s] to stiffening, rapidly swelling with arousal and beads of pre gathering on your [cockTip][s]";
+			if(player.FirstCock() && player.FirstVag()) gen += " even as your lustful thoughts get the better of you. You moan as tingles run from your manhood[s] into your femininity, turning ";
+			if(player.FirstVag()) gen += "your honeypot into a sweltering heat, and you squirm about in your magical bonds as the sudden flush of desire that makes you need to be filled";
+			parse["gen"] = Text.Parse(gen, parse);
+			Text.Add("Design? More ergonomic? Whyever would he want a <i>spanking</i> to be more comfortable? Doesn’t he know it’s better the more it hurts? The way the paddle is landing firmly on your slender rump, the shock of the impact sinking deep into your bones to be savored like a vintage wine… oh, just daydreaming about being swatted over and over again sends [gen].", parse);
+			Text.NL();
+			Text.Add("<i>“Hey,”</i> the alchemist notes, a nasty grin on his face as he scribbles furiously on a sketchpad. <i>“Seems like this one really, really likes it. Although I must say, the experimental results are probably skewed a bit from the subject’s personality, but nevertheless I think this is going to be an important data point.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Does that mean I can stop cranking now? Is the experiment over?”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“No!”</i> the alchemist snaps. <i>“Keep on cranking it, or else I won’t let you play with it when it’s not in use!”</i>", parse);
+		}
+	}
+	else {
+		Text.Add("With a butt as well-proportioned as yours - not too big, not too small, but just right, as they say - each smack of the wooden paddles upon your posterior sends both mounds to quivering and trembling. They don’t actually have the mass required to <i>jiggle</i>, but you can feel the ripples spreading out on your skin from where you’re being spanked, carrying with them the angry heat of pain into your lower back.", parse);
+		Text.NL();
+		Text.Add("<i>“Faster! Faster!”</i> the alchemist yells, reaching up into the air and clenching his fingers as if milking a giant cow. <i>“I want to see some pain here; something to show that all those sleepless nights were worth the time!”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“It’s already going as fast as it can!”</i> the centauress mutters grumpily, but puts her back into the cranking.", parse);
+		Text.NL();
+		Text.Add("Crack! Crack! Crack! More blows of the paddle arrive swift and sharp on your increasingly sore posterior, no doubt flushing a shade of angry red under your [skin] by now. ", parse);
+		if(player.SubDom() >= 30) {
+			Text.Add("You grit your teeth and swear that once you’re out of this thing, you’re going to hunt down this snide little alchemist and show him what a <i>real</i> spanking is all about, and without the use of a stupid contraption, too!", parse);
+			Text.NL();
+			Text.Add("The alchemist just looks down at you, and catching your expression, points and lets out an annoying, bleat of laughter.", parse);
+			Text.NL();
+			Text.Add("<i>“Ha-HA! Why, are you mad?”</i>", parse);
+			Text.NL();
+			Text.Add("Yeah, you’re mad indeed. Mad at this bastard and his cronies for trussing you up like this and “volunteering” you for his little science experiment, but also mad at yourself for not pushing his face into the dirt when you had the chance.", parse);
+			Text.NL();
+			Text.Add("<i>“Oh, I guess you sure look mad, but the rest of you isn’t. Look at it, eh? Pretty turned on, I’d say.”</i>", parse);
+			Text.NL();
+			var gen = "";
+			if(player.FirstCock()) gen += "your [cocks] start[notS] to twitch and throb";
+			if(player.FirstCock() && player.FirstVag()) gen += " and ";
+			if(player.FirstVag()) gen += "your gash grows slick";
+			parse["gen"] = Text.Parse(gen, parse);
+			Text.Add("With a start, you notice that the rancid old goat is right - your traitorous body has not only let you down in the fight beforehand, but it’s actually enjoying the spanking that’s being applied to your vulnerable booty. Like it or not, the heat of arousal is welling up in your loins, growing with each firm smack of the paddle that’s applied to you. You bite back a moan as [gen], cursing the weakness of your body.", parse);
+		}
+		else if(player.SubDom() >= -30) {
+			Text.Add("It’s all you can do to bite back your squeals and moans of pain as the rotating paddles go back and forth in circles, turning your [butt] increasingly red and raw. The blows aren’t strong or sharp enough to draw blood, but the stinging is distinctly uncomfortable - and arousing - as the automated spanking proceeds apace.", parse);
+			Text.NL();
+			Text.Add("You butt cheeks aren’t the only cheeks that’re flushed - heat is creeping into your face and blossoming in your breast, and you wiggle with increased agitation against the magical bonds keeping you suspended in the air. Not that you would be doing much even if you managed to break free, of course, not with the alchemist and his cronies but a few feet away. Like it or not, you’re utterly helpless and at their mercy… and it’s more than a little arousing.", parse);
+		}
+		else {
+			Text.Add("Reveling in the luxurious glow of being beaten and punished, you let out a low, muffled moan, practically purring in delight ", parse);
+			if(player.Race().isRace(Race.Feline))
+				Text.Add("like the cat you are ", parse);
+			Text.Add("even as tears of pain and pleasure spring to your eyes from the firm paddling you’re receiving.", parse);
+			Text.NL();
+			Text.Add("Feeling a desperate need well up in your breast, you wiggle about in your magical bonds, desperately seeking something to hump and grind against in order to assuage your urges. Unfortunately, not only do you not find anything suited to that purpose, the bindings restraining you only serve to turn you on even more to the point where you feel like you’re about to blow.", parse);
+			Text.NL();
+			Text.Add("<i>“Hmm,”</i> the alchemist notes, eyeing you carefully as he jots something down on a sketchpad. <i>“This one’s reacting in a rather unorthodox manner. Takes a little <b>too</b> much pleasure in it, I’d say…”</i>", parse);
+			Text.NL();
+			if(player.FirstCock()) {
+				Text.Add("You have no response to that as a shudder wracks your body all over, eventually running through your [cocks]. When it finally passes, a long, thin strand of pre dangles precipitously from your [cockTip][s] towards the ground, beading before finally snapping free.", parse);
+				Text.NL();
+			}
+			Text.Add("Too much pleasure? Not enough, you’d say! This machine of his can deliver a spanking that’s more thorough than any flesh-and-blood creature can manage - what’s not to love about it?", parse);
+		}
+	}
+	Text.NL();
+	Text.Add("Before long, you can’t deny it any longer. Not when your body twists and writhes of its own accord in its bindings, ", parse);
+	if(player.FirstCock()) {
+		Text.Add("your [cocks] pulsating with release as you finally blow your load in a river of orgasmic ecstasy, emptying ", parse);
+		if(player.HasBalls())
+			Text.Add("your balls", parse);
+		else
+			Text.Add("yourself", parse);
+		Text.Add(" out on the gravel beneath you, leaving you utterly drained and exhausted. Seeing you flagging, the centaur mare must’ve decided to take pity on you, slowing the rate of spanking just a bit to give you time to recover between each blow of the paddles.", parse);
+		Text.NL();
+		Text.Add("Tied up like this, gagged and bound, watching the large puddle of salty seed you produced slowly seep into the ground - you feel", parse);
+		if(player.SubDom() >= 30)
+			Text.Add(", much to your chagrin,", parse);
+		else if(player.SubDom() < -30)
+			Text.Add("wonderfully and gloriously", parse);
+		Text.Add(" relieved at what you’ve done.", parse);
+		Text.NL();
+	}
+	if(player.FirstCock() && player.FirstVag()) {
+		Text.Add("But it’s not over yet. Not when a different surge of pained lust sends tingles and shudders sweeping through you, ", parse);
+	}
+	if(player.FirstVag()) {
+		Text.Add("your [vag] squelching audibly as your inner walls clench furiously, sending rivulets of feminine honey streaming down your ", parse);
+		if(player.IsNaga())
+			Text.Add("tail", parse);
+		else
+			Text.Add("[thighs]", parse);
+		Text.Add(" in a thick, free-flowing waterfall. Even with the sudden initial outflow of fluids somewhat abated, your [vag] continues to weep steadily, that glistening honeypot desperately advertising its desire and readiness to be stuffed - a desire that sadly remains unrequited.", parse);
+		Text.NL();
+		Text.Add("Spank. Spank. Spank. The vibrations from each swat of the paddles courses through your lower body, knocking loose a spray of femcum from your honeypot to splash on the ground. You try to pant and whine, your lungs heaving, but the bit in your mouth prevents you from making any kind of meaningful sound.", parse);
+		Text.NL();
+	}
 
+	var cum = player.OrgasmCum();
 
-*/
+	Text.Add("Another glance at your captors. The centauress is decidedly not looking at you, while the catboy is doing the same, only with a bright blush on his face. Yeah, you’re not going to get anything out of them.", parse);
+	Text.NL();
+	
+	//Breasts block
+	//Use if breast size >= 7.5
+	
+	if(player.FirstBreastRow().Size() >= 7.5) {
+		Text.Add("<i>“Oh, look. What do we have here?”</i>", parse);
+		Text.NL();
+		Text.Add("The alchemist’s voice groggily brings you back to some semblance of coherency, and you quickly wish that you hadn’t. The rancid old goat has set down his sketchbook and pencil, and is eyeing your [breasts] with considerable interest. Given their weight and the position that you’re in, they hang down towards the ground, a pair of pendulous orbs which are most definitely feeling their heft.", parse);
+		Text.NL();
+		Text.Add("To make things worse, each time the spanking machine lands another blow on your [butt], the vibrations that race through your body send the girls to jiggling and wobbling all over the place, and the only real question is why this old pervert didn’t pay attention to them sooner.", parse);
+		Text.NL();
+		Text.Add("<i>“Why, this is a very important set of variables that I’d almost forgotten to account for,”</i> the alchemist continues, his rheumy eyes fixed on your rack. <i>“Could’ve thrown off all the data points if I didn’t control for them, indeed. Well, better late than never; I can take a fresh set of readings while I’m about it.”</i>", parse);
+		Text.NL();
+		Text.Add("Grinning nastily, the rancid old goat reaches out with gnarled, bony fingers and cups one of your lady lumps, taking great care to scrape the rough skin of his palm across your nipple. Back and forth, back and forth he goes until the plump little nub of flesh is hard from all the stimulation, even though you’re still weak from your earlier release.", parse);
+		Text.NL();
+		Text.Add("He sneers again, and sinks his fingertips deep into firm breastflesh, shamelessly groping you while you strain against your bindings helplessly. Against all appearances, his fingers are deft and nimble, and you get the lingering suspicion that this isn’t the first time he’s pawed at a good pair of boobs…", parse);
+		Text.NL();
+		Text.Add("<i>“Ah, it’s been too long since I’ve had such an exceedingly suitable test subject to play around with,”</i> the alchemist tells you, a triumphant, nasty sneer plastered on his lips. <i>“It was so nice of you to come along and allow yourself to be volunteered; we all appreciate your kindness in doing so.”</i>", parse);
+		Text.NL();
+		if(player.SubDom() >= 30) {
+			Text.Add("You let out an angry retort, muffled as it is, in which you express several hopes of misfortune personally directed at the rancid old goat’s manhood, along with a handful of colorful expletives pertaining to its attributes. Of course, it comes out about the leather bit as one indistinct mess of noise, but hey, it’s the thought which counts.", parse);
+			Text.NL();
+			Text.Add("The alchemist laughs at your frustration, reaching down to jab you squarely on the nose. <i>“That’s it, that’s it. Rage impotently at me some more.”</i>", parse);
+			Text.NL();
+			Text.Add("Impotent. That word’s going to describe something else very soon, if only you could just somehow get yourself free…", parse);
+			Text.NL();
+			Text.Add("<i>“But by all means, fume away.”</i> He reaches down to his pants, the stained fabric plainly tented by something massive underneath. Thrusting it in your face, he makes a show of rubbing the bulge, his fingers drawing large, smooth circles across its tip. <i>“It just turns me on even more.”</i>", parse);
+		}
+		else if(player.SubDom() >= -30) {
+			Text.Add("You try and think up some kind of witty and clever response to that, but one keeps eluding you - perhaps the burning pain from the constant paddling applied to your rear end has something to do with that.", parse);
+			Text.NL();
+			Text.Add("<i>“Not one for talking, are you? Guess you’re not that different from the other test subjects in that regard. Oh well…”</i>", parse);
+		}
+		else {
+			Text.Add("Oh, it wasn’t really any problem. You have to admit, this is feeling kind of good; it’s been a long time since you’ve had as good a mauling as this one. Not necessarily the most intense, but still good nonetheless.", parse);
+			Text.NL();
+			Text.Add("The alchemist looks at you askance for a moment, perhaps just a tiny bit incredulously, then clearly must have decided to go with the flow, for he harrumphs and takes a step back to consider you.", parse);
+			Text.NL();
+			Text.Add("<i>“And it doesn’t hurt that much?”</i>", parse);
+			Text.NL();
+			Text.Add("Oh, it hurts. Quite a lot, you’d imagine, but that’s what makes it so good. Now, could he just go back to shamelessly groping you like the submissive slut that you are?", parse);
+			Text.NL();
+			Text.Add("He looks even more taken aback at that, and frowns. <i>“Are you sure you’re not trying to use reverse psychology on me to try and get me to stop?”</i>", parse);
+			Text.NL();
+			Text.Add("Now, whyever would you do that when you’re clearly having so much fun? Can he just get back to it already?", parse);
+		}
+		Text.NL();
+		Text.Add("Kneeling such that his shoulders are level with your body, the dirty old goat lays his fingers across the curve of your sumptuous lady lumps and and begins bouncing them up and down, pushing them up into your chest and then letting go, allowing gravity to pull them downwards again.", parse);
+		Text.NL();
+		Text.Add("Boing. Boing. In perfect time with the rhythmic spanking, too. Your eyes roll up into your head and your chest heaves as he picks up the pace, sending your [breasts] jiggling and swaying as he bounces them in his cupped palms like an expert juggler. Little explosions of bliss and splendor burst into existence behind your eyelids, and you make increasingly urgent noises in the back of your throat as the weight of your full breasts becomes almost too much to bear.", parse);
+		Text.NL();
+		if(player.FirstVag()) {
+			Text.Add("You were already drooling before, but this is something else altogether. With boobs and cunt working together to fill every fiber of your body with mind-numbing pleasure, you cringe a moment before screaming into the leather bit as you orgasm for the second time. You can <i>feel</i> your love-tunnel throb and pulse, and then another outpouring of clear, sticky sexual fluids graces your ", parse);
+			if(player.IsNaga())
+				Text.Add("tail", parse);
+			else
+				Text.Add("[thighs]", parse);
+			Text.Add(", staining yourself with your own feminine nectar as the high begins to die down and be replaced with heaving exhaustion.", parse);
+			Text.NL();
+		}
+		Text.Add("Still, the alchemist hasn’t finished having his fun yet. Humming a little tune to himself, he presses his fingers <i>hard</i> into your mammaries, sinking in deep and going for the gold.", parse);
+		Text.NL();
+		if(player.Lactation()) {
+			Text.Add("Such pressure - the outcome was never really in doubt, was it? Twin streams of rich cream burst from your [nips], their flow encouraged by the alchemist’s cruel grasp. Practically giddy with delight, he begins to milk you openly, draining your tender breasts of their load. The gravelly ground beneath you is more than eager to drink it all up, too, leaving but a thin, wet sheen remaining.", parse);
+			Text.NL();
+			player.MilkDrain(15);
+		}
+		Text.Add("It’s too much for one body to bear. Combined with the continuous spanking that’s being applied to you and the pain of having your lady lumps squeezed like this, your body begins to give out, darkness closing in over your consciousness like a thick haze, veiling your eyes.", parse);
+		Text.NL();
+		Text.Add("The last thing you’re aware of are white-hot lances of pain jabbing into your body from all directions - agonizing, true, but amazingly kinky at the same time.", parse);
+	}
+	else {
+		Text.Add("Unfortunately for you, the spanking is rapidly becoming more than what your frail meat shell can handle. Still, the centauress keeps on turning the handle, and as the paddle lands on your rear for the umpteenth time, you can’t help but feel consciousness gradually slipping away from you, a thick dark haze veiling your eyes…", parse);
+	}
+	Text.NL();
+	Text.Add("You come to some time later, lying belly-down on the ground with your red and raw posterior high in the air. It feels distinctly cool, but burns like a bitch when you so much as try to move your [legs].", parse);
+	Text.NL();
+	Text.Add("At least there’s a silver lining to this cloud - at least they didn’t leave you in the puddle of sexual fluids you’d created, that would have been just mean.", parse);
+	Text.NL();
+	Text.Add("You try to move again, and your butt complains. Well, tough beans; if you lie here all day, something worse than the alchemist’s little gang is going to come across you, and then you don’t want to be found in a compromising position like this. By and large, you manage to struggle to your feet over the course of a half-hour, then lean against the nearest standing stone to catch your breath.", parse);
+	Text.NL();
+	Text.Add("Ugh, you’re going to be walking funny for the next few days, aren’t you?", parse);
+	Text.Flush();
+	
+	world.TimeStep({hour: 2});
+	
+	Gui.NextPrompt();
+}
