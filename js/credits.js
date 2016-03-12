@@ -20,6 +20,7 @@ CreditsScreen = function() {
 	Text.Add("Cveta: The Observer<br>");
 	Text.Add("Highlands catboy: The Observer<br>");
 	Text.Add("Highlands centauress: The Observer<br>");
+	Text.Add("Highlands goat: The Observer<br>");
 	Text.Add("Desert caravan: Del<br>");
 	Text.Add("Donovan Twopenny: The Observer<br>");
 	Text.Add("Dreams & ravens: About half of them, Del<br>");
