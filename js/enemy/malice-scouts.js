@@ -3549,7 +3549,10 @@ Scenes.MaliceScouts.Group.LossCatboyForcedTF = function(enc) {
 				Text.Add("Bigger and bigger, rounder and rounder - you can <i>feel</i> your unborn progeny being bathed in the catboy’s thick spunk, and the roaring deluge only serves to make you even more aroused. Unable to retain its shape with cock, child and cum all weighing down upon it, your glistening, stretched belly distends and drops, producing a delightful oblong shape.", parse);
 			}
 			else {
-				Text.Add("Unable to withstand the deluge of baby batter racing into it, your still-relatively-flat belly rapidly swells and distends as if the catboy’s seed had already taken root and was quickening into a batch of kittens at an inhuman rate. You can practically <i>feel</i> muscles stretching and organs giving way to make room for the growing reservoir of spunk within you - first looking to be four months along, then nine, then heavily overdue… and you’re still growing.", parse);
+				var womb = player.PregHandler().Womb({slot: PregnancyHandler.Slot.Butt});
+				var preg = womb && womb.pregnant;
+				parse["swollen"] = (preg && womb.progress >= 0.4) ? "already-swollen" : "still-relatively-flat";
+				Text.Add("Unable to withstand the deluge of baby batter racing into it, your [swollen] belly rapidly swells and distends as if the catboy’s seed had already taken root and was quickening into a batch of kittens at an inhuman rate. You can practically <i>feel</i> muscles stretching and organs giving way to make room for the growing reservoir of spunk within you - first looking to be four months along, then nine, then heavily overdue… and you’re still growing.", parse);
 				Text.NL();
 				Text.Add("Gazing down at your bulging belly, the catboy lets out a triumphant roar just as you feel your belly button surrender to the pressure within your womb and turn itself into an outie. Of course, it doesn’t stop there, protruding further and further as your “pregnancy” continues to grow weightier and weightier…", parse);
 				Text.NL();
