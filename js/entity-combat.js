@@ -66,10 +66,12 @@ GetAggroEntry = function(activeChar, entity) {
 	return found;
 }
 
-Entity.prototype.GetPartyTarget = function(encounter, activeChar) {
+Entity.prototype.GetPartyTarget = function(encounter, activeChar, ally) {
 	var isEnemy = activeChar.isEnemy;
 	var confuse = activeChar.entity.combatStatus.stats[StatusEffect.Confuse];
 	if(confuse)
+		isEnemy = !isEnemy;
+	if(ally)
 		isEnemy = !isEnemy;
 	
 	if(isEnemy)
@@ -78,10 +80,12 @@ Entity.prototype.GetPartyTarget = function(encounter, activeChar) {
 		return encounter.enemy;
 }
 
-Entity.prototype.GetSingleTarget = function(encounter, activeChar, strategy) {
+Entity.prototype.GetSingleTarget = function(encounter, activeChar, strategy, ally) {
 	var isEnemy = activeChar.isEnemy;
 	var confuse = activeChar.entity.combatStatus.stats[StatusEffect.Confuse];
 	if(confuse)
+		isEnemy = !isEnemy;
+	if(ally)
 		isEnemy = !isEnemy;
 	
 	// Fetch all potential targets
@@ -93,19 +97,37 @@ Entity.prototype.GetSingleTarget = function(encounter, activeChar, strategy) {
 	
 	strategy = strategy || TargetStrategy.None;
 	
-	// cleanup
-	activeChar.aggro = _.reject(activeChar.aggro, function(it) {
-		return it.entity.Incapacitated();
-	});
-	
-	// adding new aggro targets
-	_.each(targets, function(t) {
-		if(!GetAggroEntry(activeChar, t))
-			activeChar.aggro.push({entity: t, aggro: 1});
-	});
+	var aggro;
+	if(ally) {
+		// cleanup
+		activeChar.aggroAllies = _.reject(activeChar.aggroAllies, function(it) {
+			return it.entity.Incapacitated();
+		});
 
-	// make a temporary aggro array
-	var aggro = _.clone(activeChar.aggro);
+		// adding new aggro targets
+		_.each(targets, function(t) {
+			if(!GetAggroEntry(activeChar, t))
+				activeChar.aggroAllies.push({entity: t, aggro: 1});
+		});
+
+		// make a temporary aggro array
+		aggro = _.clone(activeChar.aggroAllies);
+	}
+	else {
+		// cleanup
+		activeChar.aggro = _.reject(activeChar.aggro, function(it) {
+			return it.entity.Incapacitated();
+		});
+
+		// adding new aggro targets
+		_.each(targets, function(t) {
+			if(!GetAggroEntry(activeChar, t))
+				activeChar.aggro.push({entity: t, aggro: 1});
+		});
+
+		// make a temporary aggro array
+		aggro = _.clone(activeChar.aggro);
+	}
 	
 	// Strategies
 	if(strategy & TargetStrategy.NearDeath) {

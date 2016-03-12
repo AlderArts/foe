@@ -35,7 +35,7 @@ function CatboyMage(levelbonus) {
 	this.intelligence.base = 50;
 	this.spirit.base       = 45;
 	this.libido.base       = 20;
-	this.charisma.base     = 15;
+	this.charisma.base     = 18;
 
 	this.elementDef.dmg[Element.mWater]  = -0.5;
 
@@ -329,29 +329,29 @@ function GoatAlchemist(levelbonus) {
 	this.ID = "goatalchemist";
 
 	this.avatar.combat     = Images.old_goat;
-	this.name              = "Goat alchemist";
+	this.name              = "Alchemist";
 	this.monsterName       = "the goat alchemist";
 	this.MonsterName       = "The goat alchemist";
+	
 	this.body.DefMale();
-	//TODO
-	this.FirstCock().thickness.base = 4;
-	this.FirstCock().length.base = 19;
-	this.Balls().size.base = 2;
-	//TODO
-	this.maxHp.base        = 500;
-	this.maxSp.base        = 800;
-	this.maxLust.base      = 50;
-	// Main stats
-	this.strength.base     = 20;
-	this.stamina.base      = 25;
-	this.dexterity.base    = 30;
-	this.intelligence.base = 50;
-	this.spirit.base       = 45;
-	this.libido.base       = 20;
-	this.charisma.base     = 15;
+	this.FirstCock().thickness.base = 5;
+	this.FirstCock().length.base = 22;
+	this.Balls().size.base = 3;
 
-	//TODO
-	this.elementDef.dmg[Element.mWater]  = -0.5;
+	this.maxHp.base        = 700;
+	this.maxSp.base        = 500;
+	this.maxLust.base      = 500;
+	// Main stats
+	this.strength.base     = 22;
+	this.stamina.base      = 45;
+	this.dexterity.base    = 34;
+	this.intelligence.base = 40;
+	this.spirit.base       = 40;
+	this.libido.base       = 35;
+	this.charisma.base     = 13;
+
+	this.elementDef.dmg[Element.mIce]  =  0.5;
+	this.elementDef.dmg[Element.mFire] = -0.5;
 
 	var level = 0;
 
@@ -386,8 +386,7 @@ function GoatAlchemist(levelbonus) {
 	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Goat, Color.white);
 
 	this.body.SetEyeColor(Color.gray);
-	//TODO
-	this.weaponSlot   = Items.Weapons.MageStaff;
+
 	this.topArmorSlot = Items.Armor.SimpleRobes;
 
 	this.Equip();
@@ -401,38 +400,33 @@ GoatAlchemist.prototype.constructor = GoatAlchemist;
 
 GoatAlchemist.prototype.DropTable = function() {
 	var drops = [];
-	//TODO
-	if(Math.random() < 0.1)  drops.push({ it: Items.Felinix });
-	if(Math.random() < 0.02) drops.push({ it: Items.Tigris });
-	if(Math.random() < 0.5)  drops.push({ it: Items.Whiskers });
-	if(Math.random() < 0.5)  drops.push({ it: Items.HairBall });
-	if(Math.random() < 0.5)  drops.push({ it: Items.CatClaw });
-
-	if(Math.random() < 0.01) drops.push({ it: Items.Bovia });
-	if(Math.random() < 0.1)  drops.push({ it: Items.GoatMilk });
-	if(Math.random() < 0.1)  drops.push({ it: Items.SheepMilk });
-	if(Math.random() < 0.1)  drops.push({ it: Items.CowMilk });
-	if(Math.random() < 0.05) drops.push({ it: Items.LizardEgg });
-	if(Math.random() < 0.05) drops.push({ it: Items.MFluff });
-
+	if(Math.random() < 0.5)  drops.push({ it: Items.Ramshorn });
+	if(Math.random() < 0.5)  drops.push({ it: Items.GoatMilk });
+	if(Math.random() < 0.5)  drops.push({ it: Items.GoatFleece });
+	if(Math.random() < 0.1)  drops.push({ it: Items.Caprinium });
+	
 	if(Math.random() < 0.3)  drops.push({ it: Items.FreshGrass });
 	if(Math.random() < 0.3)  drops.push({ it: Items.SpringWater });
 	if(Math.random() < 0.1)  drops.push({ it: Items.Foxglove });
+	if(Math.random() < 0.1)  drops.push({ it: Items.FlowerPetal });
+	if(Math.random() < 0.1)  drops.push({ it: Items.FoxBerries });
 	if(Math.random() < 0.1)  drops.push({ it: Items.TreeBark });
+	if(Math.random() < 0.1)  drops.push({ it: Items.AntlerChip });
+	if(Math.random() < 0.1)  drops.push({ it: Items.SVenom });
+	if(Math.random() < 0.1)  drops.push({ it: Items.MDust });
 	if(Math.random() < 0.1)  drops.push({ it: Items.RawHoney });
+	if(Math.random() < 0.1)  drops.push({ it: Items.BeeChitin });
 
-	if(Math.random() < 0.05) drops.push({ it: Items.Wolfsbane });
-	if(Math.random() < 0.05) drops.push({ it: Items.Ramshorn });
+	if(Math.random() < 0.3) drops.push({ it: Items.Wolfsbane });
 
-	if(Math.random() < 0.01) drops.push({ it: Items.BlackGem });
-	if(Math.random() < 0.01) drops.push({ it: Items.CorruptPlant });
-	if(Math.random() < 0.01) drops.push({ it: Items.CorruptSeed });
-	if(Math.random() < 0.01) drops.push({ it: Items.DemonSeed });
+	if(Math.random() < 0.02) drops.push({ it: Items.BlackGem });
+	if(Math.random() < 0.02) drops.push({ it: Items.CorruptPlant });
+	if(Math.random() < 0.02) drops.push({ it: Items.CorruptSeed });
+	if(Math.random() < 0.02) drops.push({ it: Items.DemonSeed });
 
 	return drops;
 }
 
-//TODO
 GoatAlchemist.prototype.Act = function(encounter, activeChar) {
 	// TODO: Very TEMP
 	Text.Add(this.name + " acts! Harrumph!");
@@ -442,38 +436,37 @@ GoatAlchemist.prototype.Act = function(encounter, activeChar) {
 	// Pick a random target
 	var targets = this.GetPartyTarget(encounter, activeChar);
 	var t = this.GetSingleTarget(encounter, activeChar);
-
-	this.turnCounter = this.turnCounter || 0;
-
-	var first = (this.turnCounter == 0);
-	this.turnCounter++;
-
-	if(first) {
-		Items.Combat.DecoyStick.combat.Use(encounter, this);
-		return;
-	}
+	
+	var allies = this.GetPartyTarget(encounter, activeChar, true);
+	var ally = this.GetSingleTarget(encounter, activeChar, TargetStrategy.LowHp, true);
 
 	var that = this;
 
 	var scenes = new EncounterTable();
+	//Offensive
 	scenes.AddEnc(function() {
 		Abilities.Attack.Use(encounter, that, t);
+	}, 2.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Abilities.Black.Shimmer.Use(encounter, that, t);
+	}, 3.0, function() { return Abilities.Black.Shimmer.enabledCondition(encounter, that); });
+	scenes.AddEnc(function() {
+		Abilities.White.Tirade.Use(encounter, that, t);
+	}, 1.0, function() { return Abilities.White.Tirade.enabledCondition(encounter, that); });
+	//Buffing/Healing
+	scenes.AddEnc(function() {
+		Items.Combat.SpeedPotion.combat.Use(encounter, that);
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
-		Items.Combat.DecoyStick.combat.Use(encounter, that);
-	}, 1.0, function() { return true; });
+		Abilities.White.Heal.Use(encounter, that, ally);
+	}, 1.0, function() { return Abilities.White.Heal.enabledCondition(encounter, that) && ally.HPLevel() < 0.9; });
 	scenes.AddEnc(function() {
-		Items.Combat.HPotion.combat.Use(encounter, that);
-	}, 1.0, function() { return that.HPLevel() < 0.5; });
+		Abilities.White.Cheer.Use(encounter, that, allies);
+	}, 1.0, function() { return Abilities.White.Cheer.enabledCondition(encounter, that); });
 	scenes.AddEnc(function() {
-		Abilities.Black.Bolt.Use(encounter, that, t);
-	}, 3.0, function() { return Abilities.Black.Bolt.enabledCondition(encounter, that); });
-	scenes.AddEnc(function() {
-		Abilities.Black.Eruption.Use(encounter, that, targets);
-	}, 4.0, function() { return Abilities.Black.Eruption.enabledCondition(encounter, that); });
-	scenes.AddEnc(function() {
-		Abilities.Black.ThunderStorm.Use(encounter, that, targets);
-	}, 3.0, function() { return Abilities.Black.ThunderStorm.enabledCondition(encounter, that); });
+		Abilities.White.Empower.Use(encounter, that, ally);
+	}, 1.0, function() { return Abilities.White.Empower.enabledCondition(encounter, that); });
+
 	scenes.Get();
 }
 

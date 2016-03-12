@@ -172,14 +172,10 @@ Abilities.White.Pinpoint.cost = { hp: null, sp: 10, lp: null};
 Abilities.White.Pinpoint.CastInternal = function(encounter, caster, target) {
 	target.dexterity.temp = Math.max(target.dexterity.temp, caster.MAttack() / 5);
 	
-	var parse = {
-		name : caster.name,
-		tName : target.name,
-		s : caster.plural() ? "" : "s"
-	}
+	var parse = AbilityNode.DefaultParser(caster, target);
 
 	// TODO: Make more flavor text
-	Text.Add("[name] cast[s] pinpoint on [tName], making them more limber!", parse);
+	Text.Add("[Name] cast[notS] pinpoint on [tname], making [thimher] more limber!", parse);
 	Text.Flush();
 	
 	Gui.NextPrompt(function() {
@@ -200,14 +196,10 @@ Abilities.White.Toughen.cost = { hp: null, sp: 10, lp: null};
 Abilities.White.Toughen.CastInternal = function(encounter, caster, target) {
 	target.stamina.temp = Math.max(target.stamina.temp, caster.MAttack() / 5);
 	
-	var parse = {
-		name : caster.name,
-		tName : target.name,
-		s : caster.plural() ? "" : "s"
-	}
+	var parse = AbilityNode.DefaultParser(caster, target);
 
 	// TODO: Make more flavor text
-	Text.Add("[name] cast[s] toughen on [tName], protecting them from harm!", parse);
+	Text.Add("[Name] cast[notS] toughen on [tname], protecting [thimher] from harm!", parse);
 	Text.Flush();
 	
 	Gui.NextPrompt(function() {
@@ -228,14 +220,10 @@ Abilities.White.Empower.cost = { hp: null, sp: 10, lp: null};
 Abilities.White.Empower.CastInternal = function(encounter, caster, target) {
 	target.strength.temp = Math.max(target.strength.temp, caster.MAttack() / 5);
 	
-	var parse = {
-		name : caster.name,
-		tName : target.name,
-		s : caster.plural() ? "" : "s"
-	}
+	var parse = AbilityNode.DefaultParser(caster, target);
 
 	// TODO: Make more flavor text
-	Text.Add("[name] cast[s] empower on [tName], filling them with strength!", parse);
+	Text.Add("[Name] cast[notS] empower on [tname], filling [thimher] with strength!", parse);
 	Text.Flush();
 	
 	Gui.NextPrompt(function() {
