@@ -4283,7 +4283,7 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 						
 						Text.Add("<i>“Haah, haah, that was… pretty good,”</i> Terry says, collapsing on the ground.", parse);
 						Text.NL();
-						Text.Add("You nod and make a wordless hum of agreement. [HeShe] was really something, alright. You wriggle gently, carefully sliding your way off of Terry to lay on your back on the ground beside [himher].", parse);
+						Text.Add("You nod and make a wordless hum of agreement. [HeShe] was really something, alright. You wriggle gently, carefully sliding your way off of Terry to lie on your back on the ground beside [himher].", parse);
 						Text.NL();
 						Text.Add("<i>“Hey, [playername]? How about a nap? I’m feeling mighty tired right now...”</i>", parse);
 						Text.NL();
@@ -4308,29 +4308,29 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 			Text.NL();
 			Text.Add("<i>“Huh? Why did you pull out? I was so close!”</i> [heshe] protests.", parse);
 			Text.NL();
-			Text.Add("Ignoring the [foxvixen], you turn your attentions to the mechanisms holding your artificial cock in place. A few deft motions, and you have it removed, and you waste little time in bending back down and manually feeding it back into Terry’s cunt.", parse);
+			Text.Add("Ignoring the [foxvixen], you turn your attention to the mechanisms holding your artificial cock in place. A few deft motions, and you have it removed, and you waste little time in bending back down and manually feeding it back into Terry’s cunt.", parse);
 			Text.NL();
 			Text.Add("<i>“Ah! Yesss...”</i> Terry trails off, happy to have something to fill [hisher] quivering cunt once more.", parse);
 			Text.NL();
-			Text.Add("Smiling in satisfaction, you push the dildo what you judge to be a satisfactory distance into the [foxvixen]’s squirming cunt, then stand up. Circling the [foxvixen], you straddle [himher], swiftly moving up [hisher] torso until you reach [hisher] face, then turn around so you are facing back down [hisher] torso. Squatting over your vulpine lover’s face, you lower yourself down until your [vag] is all but rubbing in [hisher] face.", parse);
+			Text.Add("Smiling in satisfaction, you push the dildo what you judge to be a satisfactory distance into the [foxvixen]’s squirming cunt, then stand up. Circling the [foxvixen], you straddle [himher], swiftly moving up [hisher] torso until you reach [hisher] face, then turn around so you are facing back down [hisher] torso. Squatting over your vulpine lover’s head, you lower yourself down until your [vag] is all but rubbing in [hisher] face.", parse);
 			Text.NL();
 			Text.Add("Terry immediately catches on to what you’re wanting, and dives into [hisher] task without delay or protest. [HisHer] broad vulpine tongue begins lapping your moist folds, teasing your [clit] every few laps.", parse);
 			Text.NL();
-			Text.Add("You moan appreciatively, cooing a complement to your bedmate. To reward [himher] for being so compliant, you lean forward and reach down, grasping the base of the dildo you left penetrating [himher] and start to pump it back and forth. Slowly, at first, to get your old rhythm back.", parse);
+			Text.Add("You moan appreciatively, cooing a complement to your bedmate. To reward [himher] for being so compliant, you lean forward and reach down, grasping the base of the dildo you left penetrating [himher] and start to pump it back and forth - slowly at first in order to get your old rhythm back.", parse);
 			Text.NL();
 			Text.Add("The [foxvixen] moans appreciatively moments before [heshe] buries [hisher] muzzle into your muff. [HeShe] begins truly licking your insides now, cooing at the taste of your sweet juices.", parse);
 			Text.NL();
-			Text.Add("Now this is more like it. You eagerly begin to speed up the rhythm of your dildo-thrusting, rewarding Terry’s enthusiasm in kind, matching your efforts to [hisher] own.", parse);
+			Text.Add("Now this is more like it. You eagerly begin to speed up the rhythm of your dildo thrusting, rewarding Terry’s enthusiasm in kind, matching your efforts to [hisher] own.", parse);
 			Text.NL();
 			if(terry.FirstCock()) {
 				Text.Add("Seeing Terry’s [tcock] waving back and forth over [hisher] belly, you determine that you should give it some attention as well.", parse);
 				Text.NL();
 				if(player.Slut() >= 40) {
-					Text.Add("You lay yourself down atop Terry, shamelessly mashing your womanhood into [hisher] face as you eagerly reach for [hisher] [tcock]. Opening your mouth, you gulp down the pre-drooling dick, lewdly slurping and slobbering in your eagerness, one hand playing with Terry’s balls and the other still pumping away with the dildo.", parse);
+					Text.Add("You lay yourself down atop Terry, shamelessly mashing your womanhood into [hisher] face as you eagerly reach for [hisher] [tcock]. Opening your mouth, you gulp down the pre drooling dick, lewdly slurping and slobbering in your eagerness, one hand playing with Terry’s balls and the other still pumping away with the dildo.", parse);
 					blowjob = TerryBlowjob.Yes;
 				}
 				else
-					Text.Add("Laying down further, you reach out with your free hand to caress Terry’s jutting [tcock], alternatively stroking the throbbing shaft and fondling the seed-bloated balls beneath. As you do that, your other hand busily plunges the dildo back and forth, refusing to slacken it.", parse);
+					Text.Add("Lying down further, you reach out with your free hand to caress Terry’s jutting [tcock], alternatively stroking the throbbing shaft and fondling the seed bloated balls beneath. As you do that, your other hand busily plunges the dildo back and forth, refusing to slacken it.", parse);
 			}
 			Text.NL();
 			Text.Add("Your vulpine lover moans and groans, sending delightful vibration through your cunny. After a few more licks, [heshe] pushes you away to take a breath. <i>“I-I’m close!”</i> [heshe] warns you.", parse);
@@ -4344,26 +4344,26 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 			Text.NL();
 			if(terry.HorseCock()) {
 				if(blowjob >= TerryBlowjob.Yes) {
-					Text.Add("You feel the [foxvixen]’s stallionhood throb within your maw, [hisher] balls visibly churning and knot fully inflating as the flared tip expands. Immediately you brace yourself for the oncoming onslaught of jism.", parse);
+					Text.Add("You feel the [foxvixen]’s stallionhood throb within your maw, [hisher] balls visibly churning and knot fully inflating as the flared tip expands. Immediately, you brace yourself for the oncoming onslaught of jism.", parse);
 					Text.NL();
 					if(player.sexlevel >= 5)
-						Text.Add("Luckily this is not your first rodeo, and you manage to catch the first eruption without spilling a single drop. Despite Terry’s attempts to drown you with fox-cream, you’re good enough to maintain a steady rhythm of gulping it down and breathing. You don’t stop until the last gob of cum has been spilled, leaving you with a rounded out belly and completely satisfied after your hot drink.", parse);
+						Text.Add("Luckily, this is not your first rodeo, and you manage to catch the first eruption without spilling a single drop. Despite Terry’s attempts to drown you with fox-cream, you’re good enough to maintain a steady rhythm of gulping it down and breathing. You don’t stop until the last gob of cum has been spilled, leaving you with a rounded out belly and completely satisfied after your hot drink.", parse);
 					else {
 						Text.Add("Despite your preparation, Terry’s load is just too much for you. You gag and release [hisher] shaft to try and catch your breath, getting plastered with a veritable eruption of fox-jism as Terry continue to cum. By the time [heshe]’s done, you’re an absolute mess!", parse);
 						cumbath = true;
 					}
 				}
 				else {
-					Text.Add("You feel the [foxvixen]’s stallionhood throb within your grasp, and all you have is a moment to brace yourself before the first of many of Terry’s jets of cum exits it’s hiding place within [hisher] stallionhood and hits you with the force of a punch. All you can do is keep your eyes shut as Terry bathes you in a cascade of hot jism, leaving you a creamy mess.", parse);
+					Text.Add("You feel the [foxvixen]’s stallionhood throb within your grasp, and all you have is a moment to brace yourself before the first of many of Terry’s jets of cum exits it’s hiding place within [hisher] horsecock and hits you with the force of a punch. All you can do is keep your eyes shut as Terry bathes you in a cascade of hot jism, leaving you a creamy mess.", parse);
 					cumbath = true;
 				}
 				Text.NL();
 			}
 			else if(terry.FirstCock()) {
 				if(blowjob >= TerryBlowjob.Yes)
-					Text.Add("You feel Terry’s shaft throb within your maw, [hisher] balls churning with effort as [hisher] knot inflates to its full size. The first jet of fox-cum touches your [tongue] and you instinctively drink it down, savouring the flavor of your vulpine lover as [heshe] tries to [hisher] best to cope with your demand for more cream. It’s almost disappointing when [heshe] stops cumming, leaving you slightly full, but still wanting more.", parse);
+					Text.Add("You feel Terry’s shaft throb within your maw, [hisher] balls churning with effort as [hisher] knot inflates to its full size. The first jet of fox-cum touches your [tongue] and you instinctively drink it down, savoring the flavor of your vulpine lover as [heshe] tries to [hisher] best to cope with your demand for more cream. It’s almost disappointing when [heshe] stops cumming, leaving you slightly full, but still wanting more.", parse);
 				else {
-					Text.Add("You feel Terry’s canine shaft throb within your grasp and smile as the first rope shoots out of [hisher] crimson shaft with enough force to clear your head and fall across your forehead. The following ropes fly about chaotically, some hitting you in your chin, others hitting you on your [breasts], a few plastering your [thighs]. By the time Terry’s done, [heshe]’s only capable of shooting blanks. You pat [hisher] cute balls, overworked after this powerful climax, and giggles as they manage to send one more dollop out to drool onto your hand.", parse);
+					Text.Add("You feel Terry’s canine shaft throb within your grasp, and smile as the first rope shoots out of [hisher] crimson cock with enough force to clear your head and fall across your forehead. The following ropes fly about chaotically, some hitting you in your chin, others hitting you on your [breasts], a few plastering your [thighs]. By the time Terry’s done, [heshe]’s only capable of shooting blanks. You pat [hisher] cute balls, overworked after this powerful climax, and giggle as they manage to send one more dollop out to drool onto your hand.", parse);
 					cumbath = true;
 				}
 				Text.NL();
@@ -4384,7 +4384,7 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 				if(terry.Relation() < 30)
 					Text.Add("<i>“So… if we’re done here, can I go now? I could really use a bath.”</i>", parse);
 				else if(terry.Relation() < 60)
-					Text.Add("<i>“Hey, before I go. Want some help cleaning up?”</i>", parse);
+					Text.Add("<i>“Hey, before I go, want some help cleaning up?”</i>", parse);
 				else
 					Text.Add("<i>“Love, you look absolutely gorgeous covered in my seed. Plus I love the fact that I marked you as mine,”</i> [heshe] chuckles at [hisher] own teasing. <i>“But I know dry cum can be a bitch to clean up, so do you want me to help you?”</i>", parse);
 				Text.Flush();
@@ -4396,7 +4396,7 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 				Text.NL();
 				Text.Add("Well, maybe [heshe] shouldn't do so good a job of eating you out next time, you quip back, teasingly sticking your tongue out at [himher].", parse);
 				Text.NL();
-				Text.Add("The [foxvixen] chuckles at your comeback, but otherwise doesn’t say anything. Eventually Terry gets back on [hisher] feet and offers you a helping hand.", parse);
+				Text.Add("The [foxvixen] chuckles at your comeback, but otherwise doesn’t say anything. Eventually, Terry gets back on [hisher] feet and offers you a helping hand.", parse);
 				Text.NL();
 				Text.Add("You eagerly reach out for it and allow the [foxvixen] to help you back upright again. Stretching a few kinks out of your joints, you smirk and playfully ask if Terry wouldn’t mind giving you back your [cock].", parse);
 				Text.NL();
@@ -4408,13 +4408,13 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 					Text.Add("Terry just grins back and collects [hisher] gear.", parse);
 				}
 				else {
-					Text.Add("<i>“Aww. and here I was hoping you’d let me keep it as a souvenir,”</i> the [foxvixen] teasingly replies.", parse);
+					Text.Add("<i>“Aww... and here I was hoping you’d let me keep it as a souvenir,”</i> the [foxvixen] teasingly replies.", parse);
 					Text.NL();
 					Text.Add("Tempting, but... no, you’re going to need that in the future. So, your lewd little [foxvixen] can just give it back now, thank you.", parse);
 					Text.NL();
 					Text.Add("<i>“You put it there, you take it out,”</i> [heshe] replies with a wink, spreading [hisher] legs to give you access.", parse);
 					Text.NL();
-					Text.Add("You chuckle, but step forward, hand reaching out to grab your [cock] by its base and slowly pull it free. You hold it up, pointedly watching it drip a bead of Terry’s female cum, and smirk knowingly at your vulpine lover before lowering it again.", parse);
+					Text.Add("You chuckle, but step forward, hand reaching out to grab your [cock] by its base and slowly pull it free. You hold it up, pointedly watching it drip a bead of Terry’s femcum, and smirk knowingly at your vulpine lover before lowering it again.", parse);
 					Text.NL();
 					Text.Add("Terry playfully shows you [hisher] tongue, moving to fetch [hisher] gear.", parse);
 				}
@@ -4434,7 +4434,7 @@ Scenes.Terry.SexCatchAnal = function() {
 	var parse = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
-		fox        : terry.HorseCock() ? "stallion" : "fox",		
+		fox        : terry.HorseCock() ? "stallion" : "fox-",		
 		boygirl    : player.mfFem("boy", "girl")
 	};
 	parse = player.ParserTags(parse);
@@ -4475,9 +4475,9 @@ Scenes.Terry.SexCatchAnal = function() {
 	Text.NL();
 	Text.Add("You purse your lips thoughtfully. Well... you let Terry stew for a few moments, rubbing the tip of [hisher] cock with your fingertips, then grin broadly and nod. Whyever not? This time, Terry can be in charge; you’ll let [himher] do as [heshe] likes.", parse);
 	Text.NL();
-	Text.Add("<i>“Music to my ears… Now how about you stop holding out on me and show me the goods?”</i> [heshe] asks, placing a hand on your [hip].", parse);
+	Text.Add("<i>“Music to my ears… Now, how about you stop holding out on me and show me the goods?”</i> [heshe] asks, placing a hand on your [hip].", parse);
 	Text.NL();
-	Text.Add("[HeShe] only had to ask, you quip back, giving [himher] a quick affectionate squeeze with your fingertips before stepping back. With purposeful movements you divest yourself of your [armor], casting it casually aside before turning around and bending over, thrusting out your [butt] for the [foxvixen]’s approval.", parse);
+	Text.Add("[HeShe] only had to ask, you quip back, giving [himher] a quick affectionate squeeze with your fingertips before stepping back. With purposeful movements, you divest yourself of your [armor], casting it casually aside before turning around and bending over, thrusting out your [butt] for the [foxvixen]’s approval.", parse);
 	Text.NL();
 	Text.Add("Terry starts by appraising your [butt] moving [hisher] handpaws over your [skin]. <i>“Nice,”</i> [heshe] says, giving you an appreciative pat.", parse);
 	Text.NL();
@@ -4490,15 +4490,15 @@ Scenes.Terry.SexCatchAnal = function() {
 	options.push({ nameStr : "Suck",
 		func : function() {
 			Text.Clear();
-			Text.Add("The [foxvixen] guides you to the ground, then circles around to present you [hisher] erect [tcock]. <i>“Here’s my cock, be a good [boygirl] and give me a good cockshine.”</i>", parse);
+			Text.Add("The [foxvixen] guides you to the ground, then circles around to present you [hisher] erect [tcock]. <i>“Here’s my cock - be a good [boygirl] and give me a good cockshine.”</i>", parse);
 			Text.NL();
 			Text.Add("Smiling happily, you reach out with one hand for the erection bobbing before you.", parse);
 			Text.NL();
 			if(terry.HorseCock()) {
-				Text.Add("It’s not at full extension yet, but there’s at least nine or ten inches of semi-turgid horsemeat waving before you. Plenty to wrap your fingers around and then pull closer, letting the [tongueTip] of your tongue glide teasingly over its surface. You lick the [foxvixen]’s stallionhood like an icecream, getting it nicely shiny before you pop it inside. The salty-sweet taste of pre-cum washes over your senses and your eyes close to concentrate on it better. You bob your head back and forth, audibly humming your delight as you work it around inside your mouth, drooling unabashedly upon the proud erection.", parse);
+				Text.Add("It’s not at full extension yet, but there’s at least nine or ten inches of semi-turgid horsemeat waving before you. There's plenty to wrap your fingers around, and then you pull it closer, letting the [tongueTip] of your tongue glide teasingly over its surface. You lick the [foxvixen]’s stallionhood like if it was ice cream, getting it nice and shiny before you pop it inside. The salty-sweet taste of pre-cum washes over your senses and your eyes close to concentrate on it better. You bob your head back and forth, audibly humming your delight as you work it around inside your mouth, drooling unabashedly upon the proud erection.", parse);
 			}
 			else {
-				Text.Add("Terry’s dainty little piece is so cute, really. [HeShe]’s really going to need to work it hard, but you just know [heshe] can pull it off. Your lips close around the tip in a mock-nip, then you noisily slurp it inside, burying your nose up against Terry’s belly. You lavish loving licks upon the pre-dripping piece of meat between your lips, tasting salty-sweet washing over your taste buds and crooning with pleasure as you do.", parse);
+				Text.Add("Terry’s dainty little piece is so cute, really. [HeShe]’s really going to need to work it hard, but you just know [heshe] can pull it off. Your mouth closes around the tip in a mock-nip, then you noisily slurp it inside, burying your nose up against Terry’s belly. You lavish loving licks upon the pre-dripping piece of meat between your lips, tasting salty-sweet washing over your taste buds and crooning with pleasure as you do.", parse);
 			}
 			Text.NL();
 			
@@ -4508,11 +4508,11 @@ Scenes.Terry.SexCatchAnal = function() {
 			
 			Text.Add("<i>“Ah, yes. That feels great,”</i> you hear [himher] whisper. [HisHer] hands move to your head, holding you gently by the sides as [heshe] guides you to [hisher] most sensitive spots. <i>“Work a bit harder here.”</i>", parse);
 			Text.NL();
-			Text.Add("You voice a muffled moan of desire, increasing the suction as best you can and stroking all the harder with your tongue. You lavish your attention on Terry’s [tcock], worshipping it with lips and tongue until the pre-cum is flowing steadily down your throat, then slowly pop yourself free. Strings of saliva link the bobbing dick to your parted lips, and it glistens before you as Terry shifts [hisher] stance. Your eyes look up toward the [foxvixen] and you give [himher] your sexiest smoulder, lustfully breathing that [heshe] looks good and lubed now.", parse);
+			Text.Add("You voice a muffled moan of desire, increasing the suction as best you can and stroking all the harder with your [tongue]. You lavish your attentions on Terry’s [tcock], worshipping it with lips and tongue until the pre-cum is flowing steadily down your throat, then slowly pop yourself free. Strings of saliva link the bobbing dick to your parted lips, and it glistens before you as Terry shifts [hisher] stance. Your eyes look up toward the [foxvixen] and you give [himher] your sexiest smolder, lustfully breathing that [heshe] looks good and lubed now.", parse);
 			Text.NL();
 			Text.Add("<i>“Ah! Here, let me help!”</i> the [foxvixen] says with glee, grasping your head by the sides and beginning to hump you.", parse);
 			Text.NL();
-			Text.Add("Caught off-guard, the [tcock] plunges back between your lips, thrusting vigorously into your mouth again before you manage to raise your hands and pointedly shove Terry away. Wiping a smear of pre-cum and saliva from your cheek, you ask if [heshe] really loves your mouth so much that [heshe]’s going to just turn down a chance to have your ass.", parse);
+			Text.Add("Caught off-guard, the [tcock] plunges back between your lips, thrusting vigorously into your maw again before you manage to raise your hands and pointedly shove Terry away. Wiping a smear of pre-cum and saliva from your cheek, you ask if [heshe] really loves your mouth so much that [heshe]’s going to just turn down a chance to have your ass.", parse);
 			Text.NL();
 			Text.Add("<i>“Of course not. I’m just making sure you got it lubed enough. Wouldn’t want to hurt that pretty ass of yours would we?”</i> [heshe] replies with a smirk.", parse);
 			Text.NL();
@@ -4536,21 +4536,22 @@ Scenes.Terry.SexCatchAnal = function() {
 				parse["tl"] = tail ? Text.Parse(" and curl your [tail] out of the way", parse) : "";
 				Text.Add("You smirk to yourself and nod, already moving into position as you were instructed. Belly nearly flat on the ground, supporting yourself on your hands and elbows, you raise your [anus] up into the air[tl], giving it a seductive shake.", parse);
 				Text.NL();
-				Text.Add("Terry starts off by gently massaging your [vag], slowly teasing your labia and prodding your [clit] with a padded finger. <i>“You were not lying about the wet part,”</i> Terry comments, bringing [hisher] moist digits to [hisher] mouth and giving them a lick.", parse);
+				parse["cl"] = player.FirstVag().clitCock ? "" : Text.Parse(" and prodding your [clit] with a padded finger", parse);
+				Text.Add("Terry starts off by gently massaging your [vag], slowly teasing your labia[cl]. <i>“You were not lying about the wet part,”</i> Terry comments, bringing [hisher] moist digits to [hisher] mouth and giving them a lick.", parse);
 				Text.NL();
 				Text.Add("You moan huskily and arch your back, curling your [feet] in pleasure at Terry’s touch, then chuckling softly. Does Terry not like the idea [heshe] can get you so hot and bothered this easily? Imagine what you’ll be like when you’re actually wrapped around [hisher] hot, throbbing cock...", parse);
 				Text.NL();
 				if(terry.Relation() < 30) {
-					Text.Add("<i>“Well, I’m just surprised you feel that way about me. Never thought a girl would get wet for me without money being involved.”</i>", parse);
+					Text.Add("<i>“Well, I’m just surprised you feel that way about me. Never thought a [boygirl] would get wet for me without money being involved.”</i>", parse);
 					Text.NL();
-					Text.Add("You shake your head and click your tongue. Any girl who wasn’t willing to give your sweet little [foxvixen] a shot was a fool. But their loss is your gain; and you don’t intend to let [himher] go any time soon...", parse);
+					Text.Add("You shake your head and click your tongue. Any [boygirl] who wasn’t willing to give your sweet little [foxvixen] a shot was a fool. But their loss is your gain, and you don’t intend to let [himher] go any time soon...", parse);
 					Text.NL();
 					Text.Add("<i>“I see, thanks,”</i> [heshe] says with a smile. <i>“So… get started?”</i>", parse);
 					Text.NL();
 					Text.Add("Please, let’s.", parse);
 				}
 				else if(terry.Relation() < 60) {
-					Text.Add("<i>“Of course I like it, but nothing wrong with working you up to the high, right? If you’re already like that then it kinda takes the fun out of it,”</i> [heshe] replies teasingly.", parse);
+					Text.Add("<i>“Of course I like it, but nothing wrong with working you up to the high, right? If you’re already like that, then it kinda takes the fun out of it,”</i> [heshe] replies teasingly.", parse);
 					Text.NL();
 					Text.Add("Oh, poor baby; are you spoiling [hisher] fun? You’ll just have to make it up to [himher] when the real fun begins...", parse);
 					Text.NL();
@@ -4559,7 +4560,8 @@ Scenes.Terry.SexCatchAnal = function() {
 					Text.Add("Somebody else is in a hurry too, hmm? Well, you’re ready when [heshe] is.", parse);
 				}
 				else {
-					Text.Add("<i>“Ha! Any other fox would ask themselves why you said you wanted to be buggered if you’re here pining to get my fat cock up your [vag]. But since it’s me, and I know what a huge perv you are…”</i> [heshe] trails off with a grin.", parse);
+					parse["fat"] = terry.HorseCock() ? " fat" : "";
+					Text.Add("<i>“Ha! Any other [foxvixen] would ask themselves why you said you wanted to be buggered if you’re here pining to get my[fat] cock up your [vag]. But since it’s me, and I know what a huge perv you are…”</i> [heshe] trails off with a grin.", parse);
 					Text.NL();
 					Text.Add("As if that isn’t part of the reason [heshe] loves you so much, you immediately quip back.", parse);
 					Text.NL();
