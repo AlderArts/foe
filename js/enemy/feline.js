@@ -2836,7 +2836,7 @@ Scenes.Felines.LossDoubleTeam = function(cat, cat2, group, enc) {
 			else
 				Text.Add("ass crack.", parse);
 			Text.Add(" [Name]’s ministrations cause you to arch your back in ", parse);
-			if(player.Race().isRace(Race.Feline))
+			if(player.RaceCompare(Race.Feline) >= 0.4)
 				Text.Add("that familiar cat-like way", parse);
 			else
 				Text.Add("in a cat-like fashion", parse);

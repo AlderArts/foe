@@ -76,7 +76,7 @@ Scenes.Lei.Sex.Petting = function(repeat) {
 	Text.NL();
 	Text.Add("<i>“Then purr for me,”</i> he instructs.", parse);
 	
-	var catty = player.Ears().race.isRace(Race.Feline) || player.Race().isRace(Race.Feline);
+	var catty = player.Ears().race.isRace(Race.Feline) || player.RaceCompare(Race.Feline) >= 0.3;
 	if(!catty) {
 		Text.NL();
 		Text.Add("Purr? But you're not a cat...", parse);

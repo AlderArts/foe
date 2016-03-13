@@ -299,7 +299,7 @@ Scenes.Brothel.Bastet.Birth = function() {
 	};
 	
 	Text.Add("For a moment, you are overcome with a sense of vertigo, as if you were free-falling. Just as quickly as it happened, it passes, and you open your eyes. Before you lies the image of a cat-morph.", parse);
-	if(player.Race().isRace(Race.Feline))
+	if(player.RaceCompare(Race.Feline) >= 0.4)
 		Text.Add(" Not a surprising development since you already were a cat-morph to begin with. But you do note a few differences here and there.", parse);
 	Text.NL();
 	Text.Add("You are a male cat-morph, with sandy-beige fur and brown short hair covering your head. Emerald slitted eyes look back at you through the reflection in the mirror. You’re fairly well-built, with muscles showing on your naked pecs, a trim belly, and strong-looking legs. Your padded hands end in claw-tipped fingers, flexing them will expose the claws, while relaxing will cause them to retract inside your finger. Your cat-like feet are the same. Behind you sways a thin cat-tail, it sways to and fro as you look at yourself with curiosity.", parse);

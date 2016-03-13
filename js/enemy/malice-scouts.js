@@ -3441,7 +3441,10 @@ Scenes.MaliceScouts.Group.LossPrompt = function() {
 		Text.Add("The goat-morph alchemist grins. <i>“Well, I was thinking…”</i>", parse);
 		Text.NL();
 		
-		//#randomly go to one of the below options 
+		//#randomly go to one of the below options
+		
+		
+		var catlike = player.RaceCompare(Race.Feline);
 
 		var scenes = new EncounterTable();
 		scenes.AddEnc(function() {
@@ -3450,6 +3453,10 @@ Scenes.MaliceScouts.Group.LossPrompt = function() {
 		scenes.AddEnc(function() {
 			Scenes.MaliceScouts.Group.LossMagicalBondage(enc);
 		}, 1.0, function() { return true; });
+		scenes.AddEnc(function() {
+			Scenes.MaliceScouts.Group.LossCatRape(enc);
+		}, 1.0, function() { return player.FirstVag() && catlike >= 0.4; });
+		
 		/* TODO
 		scenes.AddEnc(function() {
 			Text.Add("", parse);
@@ -3686,9 +3693,6 @@ Scenes.MaliceScouts.Group.LossCatboyForcedTF = function(enc) {
 }
 
 Scenes.MaliceScouts.Group.LossMagicalBondage = function(enc) {
-	//TODO
-	//var catboy = enc.catboy;
-	
 	var parse = {
 		hisher : player.mfTrue("his", "her"),
 		himher : player.mfTrue("him", "her")
@@ -3794,7 +3798,7 @@ Scenes.MaliceScouts.Group.LossMagicalBondage = function(enc) {
 		Text.NL();
 		Text.Add("The machine’s paddles come and go; your bodacious booty jiggles to and fro. Quivering and wobbling like a pair of firm jellies on a plate, they manage to cushion some of the brunt from the blows rapidly landing on your tush, turning your thoughts from pain to arousal.", parse);
 	}
-	else if(player.Butt().Size() >= 4) {
+	else if(player.Butt().Size() < 4) {
 		Text.Add("With a butt so thin and slight as yours, you feel every bit of the blow as the paddle cracks firmly on your behind, leaving a sharp stinging across both slight mounts of your rear. This is quickly followed by a prickling rush of blood to the afflicted area - which in turn quickly gives way to another firm smack.", parse);
 		Text.NL();
 		Text.Add("You yelp, tears threatening to come into your eyes. With how thin your rear is, you could have sworn you felt that one all the way to the bone!", parse);
@@ -3867,8 +3871,10 @@ Scenes.MaliceScouts.Group.LossMagicalBondage = function(enc) {
 			Text.Add("You butt cheeks aren’t the only cheeks that’re flushed - heat is creeping into your face and blossoming in your breast, and you wiggle with increased agitation against the magical bonds keeping you suspended in the air. Not that you would be doing much even if you managed to break free, of course, not with the alchemist and his cronies but a few feet away. Like it or not, you’re utterly helpless and at their mercy… and it’s more than a little arousing.", parse);
 		}
 		else {
+			var catlike = player.RaceCompare(Race.Feline);
+			
 			Text.Add("Reveling in the luxurious glow of being beaten and punished, you let out a low, muffled moan, practically purring in delight ", parse);
-			if(player.Race().isRace(Race.Feline))
+			if(catlike >= 0.4)
 				Text.Add("like the cat you are ", parse);
 			Text.Add("even as tears of pain and pleasure spring to your eyes from the firm paddling you’re receiving.", parse);
 			Text.NL();
@@ -3897,7 +3903,7 @@ Scenes.MaliceScouts.Group.LossMagicalBondage = function(enc) {
 		if(player.SubDom() >= 30)
 			Text.Add(", much to your chagrin,", parse);
 		else if(player.SubDom() < -30)
-			Text.Add("wonderfully and gloriously", parse);
+			Text.Add(" wonderfully and gloriously", parse);
 		Text.Add(" relieved at what you’ve done.", parse);
 		Text.NL();
 	}
@@ -4004,6 +4010,202 @@ Scenes.MaliceScouts.Group.LossMagicalBondage = function(enc) {
 	Text.Add("Ugh, you’re going to be walking funny for the next few days, aren’t you?", parse);
 	Text.Flush();
 	
+	world.TimeStep({hour: 2});
+	
+	player.AddSexExp(3);
+	
+	Gui.NextPrompt();
+}
+
+
+Scenes.MaliceScouts.Group.LossCatRape = function(enc) {
+	var catboy = enc.catboy;
+	
+	var parse = {
+		
+	};
+	parse = player.ParserTags(parse);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+	
+	var virgin = player.FirstVag().virgin;
+	
+	Text.Add("<i>“Yes?”</i>", parse);
+	Text.NL();
+	Text.Add("The goat alchemist glances at the centauress, and the latter sidles surreptitiously over to place herself directly behind the catboy, cutting off his escape with her bulk. While this is happening, the alchemist strides over to you, fumbling about in his toolbelt.", parse);
+	Text.NL();
+	Text.Add("<i>“Where did I leave it, where did I leave it… ah, there!”</i> He draws out a large, phallic syringe and brandishes it aloft. There’s a viscous pink fluid roiling in its depths, and he grins as he steps towards you. <i>“Truth be told, I’ve been wanting to conduct this particular experiment for some time now, but the availability of a suitable test subject has always eluded me - there <i>are</i> a number of very specific conditions which must be met. But wonder of wonders! Who should come along today but a feline friend who meets all my requirements!</i>", parse);
+	Text.NL();
+	Text.Add("<i>“Now just lie there a little while longer; I promise this won’t hurt one bit.”</i>", parse);
+	Text.NL();
+	Text.Add("Looking at the way he’s holding the syringe with a wide, crazed grin spread on his face, you’re thoroughly disinclined to believe him. ", parse);
+	if(virgin) {
+		Text.Add("And as it turns out, he <i>was</i> lying - but it still doesn’t hurt as much as the old goat pulls down your [botarmor] with an overdramatic flourish. You’re in no shape to protest any further - whatever fight you had has long since been knocked out of you - and with an alacrity that defies his age, the alchemist swoops down and shoves the syringe straight into your cooch. There’s a brief flare of pain as you realize you’re no longer a virgin, followed by a strange, warm tingling about your inner walls as he depresses the plunger, injecting the fluid into you.", parse);
+	}
+	else {
+		Text.Add("Surprisingly, though, he was telling the truth - it doesn’t hurt one bit as the old goat gleefully rips off your [botarmor], exposing your [vag]. With a peal of diabolical laughter, the old goat reaches down with surprising swiftness and jams the phallus-shaped syringe straight into your cooter.", parse);
+		Text.NL();
+		Text.Add("Whoa, whoa. You -", parse);
+		Text.NL();
+		Text.Add("- You feel a strange, warm tingling fan outwards inside you, the feeling of the pink goop coating your inner walls more than a little arousing. Being no stranger to having long, hard objects inserted into you, your cunt reflexively clenches about the dildo-shaped syringe, evenly spreading out the pink, slimy goop along the inside of your pussy.", parse);
+	}
+	Text.NL();
+	Text.Add("Just what was <i>that</i> stuff?", parse);
+	Text.NL();
+	Text.Add("The alchemist looks down at you, then gives the syringe a firm yank. A small moan escapes your lips as it emerges with a wet popping sound, and you’re suddenly very, <i>very</i> aware that your other set of lips needs a good stuffing now that there’s nothing in them…", parse);
+	Text.NL();
+	Text.Add("Hey, come to think of it, was it always this warm? The Highlands are supposed to be a generally cool place, but now you’re practically sweating under your collar, your face flushed and cheeks burning. Gee, it’s really too warm in here - you need to cool off any way you can…", parse);
+	Text.NL();
+	Text.Add("Before your brain’s had a chance to interject, your instincts have taken control of your body and pulled off your [armor]. Phew, now that’s a <i>lot</i> better, although it’s still too damned warm for your comfort! The heat isn’t just in your face and shoulders now, it’s crept to every part of your middle, making you feel good and tingly all over. Must have been something to do with the… the… your mind tries to come up with a suitably descriptive word to name the thing which the creepy goat guy stuck in you, and fails. Oh well, it probably wasn’t that important anyway. Or maybe it was; you kinda miss having something stuffed in you. Maybe you ought to get something else to stuff you, that should be fun!", parse);
+	Text.NL();
+	Text.Add("Come to think of it, something smells really nice and yummy, and it’s not too far away to boot. You follow your feline nose, letting it guide you until you’re face to face with a nine-inch cat-cock, complete with barbs. It’s not quite completely stiff at the moment, but you can fix that in a jiffy. The person it’s attached to, though… well, he could use a little improvement, but any meal’s going to taste good when you’re hungry.", parse);
+	Text.NL();
+	Text.Add("<i>“Would you just hold still? I wouldn’t have to be so rough in restraining you if you didn’t keep on wriggling like that!”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“N-no!”</i> the catboy wails. <i>“You never told me it would be like this! I don’t want to have my precious bodily fluids stolen!”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“Really.”</i> The centauress looks down at the poor effeminate white kitten. <i>“Even if it feels really, really good?”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“Yes!”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“You said you wanted to be a man.”</i>The alchemist jabs a finger into the catboy’s little pink nose, making the latter wince in pain. <i>“Well, we’re going to make you one, like you wanted.”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“I didn’t know that it would involve me having my precious bodily fluids taken from me!”</i>", parse);
+	Text.NL();
+	Text.Add("The centaur mare sighs, oblivious to the catboy’s flailing and struggling. <i>“Oh, don’t be such a big baby. This is for your own good. You’ll like it once she’s gotten started.”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“Every time anyone’s said that to me, it’s never been pleasant!”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“Well, too bad. You asked for it; I spent hours making the perfect concoction, dragged you out for days on end just looking for a suitable subject, and now that we’ve got the perfect setup for the experiment, you want to back out? Perish the thought!”</i>", parse);
+	Text.NL();
+	Text.Add("Gee, those silly three sure seem to be angry about something. It’s a little hard to follow them - they speak so quickly, and sometimes use words that you aren’t really sure of. Oh well, so long as you’ve got a nice playmate to have fun with. Another flush of heat courses through your body, far more urgent than the others, and you squirm in place for a second or two, feeling the insides of your thighs grow wet and slick before the fluids seep into your fur, creating damp, matted patches.", parse);
+	Text.NL();
+	Text.Add("Mrowl. You’re so hungry, you could eat this guy all up.", parse);
+	Text.NL();
+	Text.Add("Padding forward on all fours, you close the distance to your little morsel, and give his white, fluffy fur a good, long nuzzle, making sure to let your sensitive whiskers brush against his inner thighs for good measure. The scent of this little morsel’s desperate arousal - seasoned with a dash of fear is making you even hungrier, but you’ve got to claim him properly first, mark him as yours. You let out a deep, throaty purr, then giggle a bit as his eyes widen while you slip your paws into what little remaining clothing he has on left and tear it away.", parse);
+	Text.NL();
+	Text.Add("<i>“N-no…”</i>", parse);
+	Text.NL();
+	Text.Add("He may be protesting, but his growing erection betrays what he’s <i>really</i> thinking. Another purr escapes your throat as you bend your head down and give his stiffening shaft an experimental lick, savoring the sensation of your rough tongue sliding across it from head to base and back again. Mm, slightly salty, but it would really taste so much better between your other set of lips…", parse);
+	Text.NL();
+	Text.Add("…Ooh, that’s a nice set of family jewels he’s got there. Two big and nice pearls, each one the size of a small plum and perfectly suited for a lady like you. You finish up with his man-meat, licking your lips to relish the unique flavor that it had, then turn your attention to those tender orbs dangling in front of you. Gently cupping them in the palm of one hand, you jiggle them up and down, bouncing those precious jewels about until your delicious little feline morsel whines with increasing desperation.", parse);
+	Text.NL();
+	Text.Add("<i>“No… I <b>like</b> my precious bodily fluids in me, thank you very much… please don’t do this to me…”</i>", parse);
+	Text.NL();
+	Text.Add("Somehow, the sight of your little boytoy begging desperately just serves to turn you on even more.", parse);
+	Text.NL();
+	if(player.SubDom() < 30 || player.Slut() < 30) {
+		Text.Add("You aren’t entirely sure that you’re yourself - you know that whatever the alchemist injected into you must’ve done something to the way your head is working - but you can’t seem to hold onto any thought that isn’t about filling that horrible, horrible emptiness within you. ", parse);
+	}
+	Text.Add("Ah… you just feel so warm and good inside; it would be a shame if no one else could share in this delightful glow that suffuses your entire body. All you want to do is to invite a small portion of your delicious little boytoy into yourself so he can share in your pleasure.", parse);
+	Text.NL();
+	Text.Add("Is that too much to ask? Is it?", parse);
+	Text.NL();
+	Text.Add("Hee hee. It just feels so <i>good</i>, pushing your face into your little morsel’s crotch, feeling your cheeks push against his thighs, making a beeline for his balls. He gasps as you take his balls into your warm, wet mouth one at a time, but soon calms down when you take each rounded orb between your teeth - a gentle bite, not too hard, but with the implicit promise of greatly increased pressure if he dares resist any further.", parse);
+	Text.NL();
+	Text.Add("What are you doing? Why are you doing this? A tiny voice in the back of your mind speaks up in protest, but is quickly silenced by yet another flush of heat, this time practically overwhelming. Your entire body stiffens, your eyes cross, and you let out a hungry, desperate yowl as clear juices burst forth to stain your already soaked thighs.", parse);
+	Text.NL();
+	Text.Add("That’s it! No more waiting! Your legs tense, ready to spring, and you don’t hesitate as you straighten up and greedily pounce the little white-furred morsel in front of you, catching him in a flying tackle and sending the both of you tumbling to the ground. Someone or something was holding him up before, but whatever it is, it’s gone now - the world has narrowed down to just you and the sumptuous, tender meal that lies just under your paws, and it’s time to feast. He’s still struggling a little, but you quickly put a stop to that nonsense with a firm bat of your paw to his head and pin him on his back.", parse);
+	Text.NL();
+	Text.Add("<i>“Oww…”</i>", parse);
+	Text.NL();
+	Text.Add("Hmm. He’s big, but still not as big as he could be. Oh well, who cares? He’ll get big enough inside you, you’ll make sure of that. Grinning down at your little morsel like some kind of feral beast, you stretch with feline grace, pushing your hips down and grinding your cunt against the little catboy’s shaft, getting your slick, glistening juices all over him. He mewls pathetically and stops resisting, finally submitting to his proper role as your boytoy.", parse);
+	Text.NL();
+	Text.Add("Hey, now there’s a good stiffy; you especially liked the part where the barbs on his cockhead brushed the petals of your womanly flower. Heck, you liked it so much that you want to do it again - and you do, pressing your cunt lips against the barbed tip of your little morsel’s manhood and grinding back and forth, yowling in satisfaction as you become very keenly aware of the tiny little spikes jabbing into your soft flesh. The more you bump and grind and spill your feminine juices on them, the bigger and harder they become, giving you even more pleasure to the point you feel like your head will explode from it all.", parse);
+	Text.NL();
+	Text.Add("Hee hee. Wouldn’t that be funny, yes? Well, you’ll be the one making his head explode - right into you, if you’re going to have any say in the matter. Leaning your weight back onto your knees, you purr lazily as you finally guide your morsel of a boytoy into you; your wet, hungry lips are only too eager to devour his cock, gleefully stuffing itself with as much of that meaty goodness as it can get, eagerly savoring the wonderful texture and sensation of being filled like this. With all the attention you’ve lavished on him up to this point, your delicious little kitty boytoy is all lubed up and ready to go, slipping into you without any problems.", parse);
+	Text.NL();
+	
+	Sex.Vaginal(catboy, player);
+	player.FuckVag(player.FirstVag(), catboy.FirstCock(), 3);
+	catboy.Fuck(catboy.FirstCock(), 3);
+	
+	Text.Add("Your morsel of a boytoy whimpers and paws at you, but there’s no fight in it; his breathing is coming short and rapid, that small pink tongue of his hanging out of his mouth as he begins to truly give himself over to the pleasure you’re giving him. Those firm, sensitive nubs on the tip and sides of his manhood - they bump and rub against your inner walls even as you let yourself rise and fall, rise and fall. You can feel them rubbing - no, scraping against your insides, and the twinges of pain only serve to excite you even further, feeding the sweltering fire growing deep within your belly.", parse);
+	Text.NL();
+	Text.Add("He’s so juicy, isn’t he? Your delicious boytoy throbs in time with the clenching of your cunt, the two quickly settling into a steady, pounding rhythm that rapidly grows more intense as you start riding him. Spirits above, that tastes good, so sumptuous to the cock-hungry monster that you are. Oh sure, it could be better, but every meal’s a feast when you’re starving.", parse);
+	Text.NL();
+	Text.Add("And speaking of starving, it’s not enough. You’re still desperately hungry, and need <i>more</i>; he needs to go deeper! With a furious surge of frenzied heat, you steady yourself by grabbing your boytoy’s shoulders and bash your hips against his, demanding that the remaining length that he’s so shamefully and selfishly keeping to himself should go inside you. He whimpers, but does his best to comply, moving in tandem with you to feed your hunger.", parse);
+	Text.NL();
+	Text.Add("And it works. Sweat beads on your forehead as you exhaust yourself, but by and large you feel your cervix begin to give way, stretching wide open to allow those last inches of man-meat between your inner lips and into your gaping maw. You can <i>feel</i> him inside you, a pressure on the inside of your lower belly, and purr deeply.", parse);
+	Text.NL();
+	Text.Add("Mrrrr! Mrrrrr! Good boy. See, that wasn’t that hard, was it? Not being selfish?", parse);
+	Text.NL();
+	Text.Add("Just having him all the way inside your heated baby-oven makes you feel incredibly good, a crushing sense of satisfaction that leaves you practically panting and dizzy with euphoria. It’s still not enough, though - you need to be stuffed even further, even more! Thinking about being filled to the brim with a bellyful of mewling kittens… it’s like your biggest dream ever! Just an armful of little white mewling fluffballs like your delicious little boytoy over here, all nice and obedient. A bit naughty at times, but a firm smack usually nips such problems in the bud, yes?", parse);
+	Text.NL();
+	Text.Add("Looking down at your delicious little morsel, he seems to be quite into it, too. His face has melted into an expression of exhausted delight, his gaze unfocused, and you can’t help but reach up and give his large, triangular ears a good scritching. As you suspected, that does the trick - the moment your paws come in contact with your boytoy’s large, fluffy ears, he pretty much goes limp with pleasure, his body running on automatic as his eyes glaze over in a fit of adorable purring.", parse);
+	Text.NL();
+	Text.Add("Good kitty. Good, delicious kitty. Just lie there like the subby boytoy that he is, and let his body do the necessary work without reservations. Effeminate in appearance though he may be, he nevertheless still knows how to do what comes naturally to him, and you purr and luxuriate in the glory of his full-mast member pushing in and out of you.", parse);
+	Text.NL();
+	Text.Add("Time to give him a little more pleasure of his own, then - you are a magnanimous mistress, if nothing else. ", parse);
+	if(player.Lactation()) {
+		Text.Add("Pushing yourself off him with your knees, you slowly and laboriously pull yourself off his shaft, feeling the emptiness of withdrawal until only his barbed tip remains in you. Looming over your boytoy, you lean forward and shove one of your [breasts] into his face, ", parse);
+		if(player.FirstBreastRow().Size() >= 7.5) {
+			Text.Add("the pillowy mound pressing softly against his mouth and nose, threatening to smother him with its sheer expansiveness. He lets out a few muffled meows, and you graciously ease your weight of him a little to let him breathe easier. There, now you’re all in position for the next step.", parse);
+		}
+		else {
+			Text.Add("causing him to wriggle a little in surprise. Still, he doesn’t protest too much, which is good for you. Considering what you have in mind for him, it’d be a bit of a problem if he got squirmy all over.", parse);
+		}
+		Text.NL();
+		Text.Add("If he’s going to complain about you stealing his precious bodily fluids, well, you’ve got to pay him back in kind, don’t you? Grinning, you thrust your fat little nipple into his mouth and press down hard on your boobflesh, causing a small stream of delicious cream to burst forth and land squarely in his mouth. Your little morsel’s eyes grow wide with surprise, then he purrs and begins suckling hungrily like an eager little kitten.", parse);
+		Text.NL();
+		Text.Add("Aww. Too bad for him, though, you aren’t about to let him get <i>all</i> of it in one go. Shifting your weight back, you return to your old position, your breast freeing itself from your boytoy’s mouth with a loud pop - followed by a wet squelch as his swollen, throbbing cock enters you once more, making you tremble in barely restrained pleasure as the barbs tickle your insides on their entry.", parse);
+		Text.NL();
+		Text.Add("It’s in this fashion that you allow your yummy little boytoy to have a good taste of you, relieving your aching mammaries of their lactic load. He certainly seems a lot happier for having had the milk - there’s a smile on his face, and his eyes are screwed shut in pure bliss.", parse);
+		Text.NL();
+		Text.Add("Aww, did he miss his mommy? Did he? Did he? Well, so long as he remains an obedient little boytoy, he can have all of your yummy milk to the last drop. There’s no need to be shy about sharing your bodily fluids, after all.", parse);
+	}
+	else {
+		Text.Add("Digging into your delicious little boytoy’s fur, you slide your paws up to his chest and find his yummy little nipples. They’re not as wonderfully sensitive as yours, of course, but they’re still fun to play with, especially on such a cute and shy little morsel like he is.", parse);
+		Text.NL();
+		Text.Add("He realizes what you’re doing, but it’s too late, too late - not that he could have stopped you even if he’d adequate warning of your intentions. Small, whimpering noises escape his mouth as you tease each warm nipple, feeling them respond to your gentle, loving touch. His face trembles, and you can see sweat dampening his fur.", parse);
+		Text.NL();
+		Text.Add("Aww, that’s so cute. He’s actually getting <i>embarrassed</i>. You press your thumb down hard on a nipple, and he responds by groaning and sending a surge of blood into his dick, so strong that you actually <i>felt</i> it inside you.", parse);
+		Text.NL();
+		Text.Add("Hee hee. That’s adorable. The next few moments are filled with so much fun as you play with your tender little kitten boytoy, rolling your palms across his nipples, teasing and tweaking the rock-hard little buds of flesh, and generally making him a very happy little morsel indeed.", parse);
+	}
+	Text.NL();
+	Text.Add("With such a focused effort on giving your boytoy such pleasure, it’s no surprise that he’s but moments from giving out himself. It’s clear from the pained, strangled noises coming from the back of his throat that he can’t hold back much longer. For a split second, your delicious little morsel of a boytoy squeezes his large eyes shut, and then yowls as all nine inches of his barbed feline manhood erupt in a sticky shower of spunk inside you. You can feel it painting the inside of your baby factory, all thick and gooey, finally giving you some small measure of the satiation that you’ve so desired.", parse);
+	Text.NL();
+	Text.Add("Yes, yes, you’re robbing this poor little kitty of every last drop of his precious bodily fluids, your heated cunt milking and wringing him for all that he’s worth, clearly intending to give no quarter and take no prisoners.", parse);
+	Text.NL();
+	Text.Add("Hee. For such an effeminate-looking boytoy, he’s quite the virile stud, isn’t he? Barely a few moments have passed, and already your belly is bulging ever so slightly with the sperm that he’s pouring into you. You pet him a few more times on his ears, praising him for being such a good little morsel and encouraging him to drain every single last drop of seed out from his balls and into you. Mrrrr… with such a vigorous seeding, you’d be surprised if your womanly flower weren’t set to bear fruit in a little bit.", parse);
+	Text.NL();
+	
+	Scenes.MaliceScouts.Catboy.Impregnate(player, catboy);
+	
+	var cum = player.OrgasmCum();
+	
+	Text.Add("He yowls again and thrusts again furiously, those cartilaginous pleasure-barbs rubbing against your insides and sending your body to quaking. ", parse);
+	if(player.FirstCock()) {
+		Text.Add("It’s now that your [cocks] decide[notS] to loose [itsTheir] load, erupting in a geyser of spunk that splatters all over your yummy little boytoy’s front. Most of it gets onto his torso and shoulders, sticking to his fluffy fur, but he also gets several cumshots to the face, making him mewl in surprise. Giggling, you lean forward and lick off some of the stuff off his face - it’s delicious! He should really have some himself, but if he doesn’t want to then that’s his loss.", parse);
+		Text.NL();
+		Text.Add("You pant wildly as you cum again and again, your ecstatic release sending spurt after spurt of seed to coat your little morsel of a boytoy in a nice, sticky layer of spunk. He’s long given up trying to shield himself, instead concentrating on just breathing, and after you’ve finally exhausted yourself he’s been turned into ", parse);
+		if(cum >= 4) {
+			Text.Add("a matted mess", parse);
+		}
+		else {
+			Text.Add("a splattered mess", parse);
+		}
+		Text.Add(" from your precious gift.", parse);
+		Text.NL();
+		Text.Add("But that’s not all. ", parse);
+	}
+	Text.Add("With a yowl of your own, you send a veritable waterfall of girl-juices flooding down and out onto your boytoy’s crotch, your fingers and cunt alike clenched in a vice-like grip about him until the orgasm finally begins to pass, leaving you gloriously relieved.", parse);
+	Text.NL();
+	Text.Add("Yes… yes, you’re definitely not that hungry any more. Sure, you still have something of an appetite, but with a load of seed safely sequestered in your kitten-making machine you’re no longer starving, and you can feel the heat wafting from your body as it slowly leaves you. You let your boytoy remain in you a little while longer, then pull yourself free of his softening manhood with a very wet and satisfying pop.", parse);
+	Text.NL();
+	Text.Add("There, that wasn’t so bad, was it?", parse);
+	Text.NL();
+	Text.Add("He doesn’t reply, eyes staring up at the sky, face frozen in a mask of pure bliss; only the slightest rise and fall of his soft, furry chest gives you any indication that he’s still alive. Mmm… you pad around to his side and sniff him - yes, he smells wonderfully strongly of sex and spent seed. You purr softly, rubbing your face against his, and he manages to respond with a quiet mewl.", parse);
+	Text.NL();
+	Text.Add("There, there. There’s a good boytoy - he’s performed his stud duties admirably, and provided a delicious, sumptuous meal for your pleasure. You pat your lower tummy once more, and let out a contented sigh at the sheer sensation of being filled at last. Yes, this was a good meal, a very good meal indeed, and now you’re starting to feel more than a little drowsy. Must be a food coma…", parse);
+	Text.NL();
+	Text.Add("You come to some time later - you’re not sure exactly how long - your head and loins pounding. What… what just happened there? You’re not entirely sure, but there’s something about you that makes you feel all warm and good, a tingling sensation all over your skin and fur that makes you want to hug yourself.", parse);
+	Text.NL();
+	Text.Add("Hmm… you feel weird all over. Maybe it’s your imagination - it’s probably just the cold, it does get quite chilly up here, and you <i>are</i> lying about in your birthday suit.", parse);
+	Text.NL();
+	Text.Add("Well, at least there’s no sign of the trio that accosted you - all that remains in this circle of stones are a few wet splotches of fluids best not looked at too closely. Pulling yourself to your feet, you gather up your stuff from the ground and make to leave.", parse);
+	Text.Flush();
+
 	world.TimeStep({hour: 2});
 	
 	Gui.NextPrompt();

@@ -654,7 +654,7 @@ Scenes.Masturbation.AnalFinger = function(parse) {
 	
 	if(player.FirstVag()) {
 		Text.Add("At the same time, your [vag] goes into overdrive, oozing and clenching away, desperate for something to suckle on and finally settling for squirting a small stream of girl-cum to splatter on yourself and stain your crotch as your climax approaches its zenith. Caught up in a whirlwind of exquisite sensations, you howl like ", parse);
-		if(player.Race().isRace(Race.Canine))
+		if(player.RaceCompare(Race.Canine) >= 0.4)
 			Text.Add("the bitch that you are", parse);
 		else
 			Text.Add("a bitch in heat", parse);
@@ -827,7 +827,7 @@ Scenes.Masturbation.VagFinger = function(parse) {
 	Text.Add("Not that you could stop even if you wanted to, or even hold back for much longer. Back and forth your [fist] go[fes], your body moving of its own accord in a desperate attempt to slake the lusts you’ve ignited in your impassioned body. Burning with heat, your eyes rolled back and jaws slack as little moans and whimpers escape your mouth, you take the last few steps required to bring yourself to an earth-shattering climax.", parse);
 	Text.NL();
 	Text.Add("And it happens. Yowling like ", parse);
-	if(player.Race().isRace(Race.Feline))
+	if(player.RaceCompare(Race.Feline) >= 0.4)
 		Text.Add("the cat in heat that you are,", parse);
 	else
 		Text.Add("a cat in heat,", parse);
@@ -871,7 +871,7 @@ Scenes.Masturbation.VagToy = function(parse, toy) {
 	Text.Add(" even as your arm becomes a furious blur, determined to wring as much pleasure out of this activity as possible. Each second becomes a full orgy of blissplosions radiating outwards from your nethers and into the rest of your body as your love tunnel squeezes down hard on your [toy], as desperate and needy as if it were the real thing currently fucking you senseless.", parse);
 	Text.NL();
 	Text.Add("Head thrown back, tongue hanging out of your mouth, you pant ", parse);
-	if(player.Race().isRace(Race.Canine))
+	if(player.RaceCompare(Race.Canine) >= 0.4)
 		Text.Add("like the heat-driven bitch that you are", parse);
 	else
 		Text.Add("like a bitch in heat", parse);

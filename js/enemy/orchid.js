@@ -698,7 +698,7 @@ Scenes.Orchid.FirstTalkPrompt = function(opts) {
 				Text.NL();
 				Text.Add("<i>“Umm… well he was a lizard, like I said. I’ve never seen anyone like him, I guess.”</i>", parse);
 				Text.NL();
-				if(player.Race().isRace(Race.Lizard)) {
+				if(player.RaceCompare(Race.Reptile) >= 0.4) {
 					Text.Add("<i>“To be honest, you kinda remind me of him, no offense.”</i>", parse);
 					Text.NL();
 					Text.Add("None taken.", parse);

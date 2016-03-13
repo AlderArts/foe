@@ -8,6 +8,10 @@ function RaceDesc(name, id, opts, superclass) {
 	opts = opts || {};
 	this.name = name || 'RACE';
 	this.superclass = superclass;
+	this.children = [];
+	if(superclass) {
+		superclass.children.push(this);
+	}
 	
 	this.desc           = opts.desc           || [];
 	this.descMale       = opts.descMale       || [];
@@ -158,6 +162,21 @@ RaceScore.prototype.Compare = function(racescore) {
 	};
 	// Euclidian dot product
 	return dot / (this.len * racescore.len);
+}
+
+RaceScore.prototype.SumRace = function(race) {
+	var that = this;
+	var sum = that.score[race.id];
+	_.each(race.children, function(r) {
+		sum += that.SumRace(r);
+	});
+	return sum;
+}
+
+// Produces a value between 0 and 1 for how close to a certain race the racescore is. Checks for children
+RaceScore.prototype.SumScore = function(race) {
+	// Euclidian dot product
+	return this.SumRace(race) / this.len;
 }
 
 RaceScore.prototype.Sorted = function() {

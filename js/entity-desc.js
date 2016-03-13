@@ -236,6 +236,10 @@ Entity.prototype.Humanity = function() {
 	humanScore.score[Race.Human.id] = 1;
 	return racescore.Compare(humanScore);
 }
+Entity.prototype.RaceCompare = function(race) {
+	var racescore = new RaceScore(this.body);
+	return racescore.SumScore(race);
+}
 Entity.prototype.Femininity = function() {
 	return this.body.femininity.Get();
 }

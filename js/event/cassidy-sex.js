@@ -309,7 +309,7 @@ Scenes.Cassidy.Sex.Tailpeg = function() {
 	else
 		Text.Add("you", parse);
 	Text.Add(" mercilessly, quickly thrusting her tail in and out of your [anus] while you gasp and moan like ", parse);
-	if(player.Race().isRace(Race.Canine))
+	if(player.RaceCompare(Race.Canine) >= 0.4)
 		Text.Add("the bitch in heat that you are", parse);
 	else
 		Text.Add("a shameless whore", parse);
@@ -917,7 +917,7 @@ Scenes.Cassidy.SparSex.Win = function() {
 					enabled : true,
 					func : function() {
 						Text.Clear();
-						if(!player.Race().isRace(Race.Salamander))
+						if(player.RaceCompare(Race.Salamander) < 0.3)
 							Text.Add("You may not be a salamander, but you’ll be damned if your blood isn’t as heated as Cassidy’s is from all that fighting. ", parse);
 						Text.Add("You can’t strip off your gear fast enough and throw it to the side even as Cassidy tosses her warhammer safely out of reach in the heat of the moment.", parse);
 						Text.NL();
