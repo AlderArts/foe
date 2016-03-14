@@ -806,7 +806,8 @@ Scenes.Gwendy.ChallengeSexVag = function(fuck, hangout) {
 		parse["c"] = gwendy.FirstCock() ? ", nested just below her heavy scrotum" : "";
 		Text.Add("Pulling back, you work Gwendy onto the table, having her lie on her back with her legs spread. It’s hard to do anything but admire her glistening netherlips[c]. After planting a soft kiss on her tiny clit, you wrap her in your arms, whispering to her to just relax and be yours. Gwendy blushes, letting out a submissive moan in response.", parse);
 		Text.NL();
-		Text.Add("You mount her, your [vag] pressing against hers, and begin grinding on her lap. You rut against her, aiming your clit at Gwendy’s, striking true as the two of begin panting and moaning in pleasure. You make sure she knows who’s in control, you doing most of the work, letting Gwendy writhe desperately under you.", parse);
+		parse["cl"] = player.FirstVag().clitCock ? "" : Text.Parse(", aiming your [clit] at Gwendy's", parse);
+		Text.Add("You mount her, your [vag] pressing against hers, and begin grinding on her lap. You rut against her[cl], striking true as the two of begin panting and moaning in pleasure. You make sure she knows who’s in control, you doing most of the work, letting Gwendy writhe desperately under you.", parse);
 		Text.NL();
 		Text.Add("You close in for a kiss, unable to resist the cute, demure blush Gwendy has on her face, completely at odds with the desperate moans she exhales into your mouth. Your bodies press together eagerly, rocking and grinding in languid motions.", parse)
 		if(player.FirstCock()) {
