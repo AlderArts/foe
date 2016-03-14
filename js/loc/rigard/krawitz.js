@@ -923,7 +923,7 @@ Scenes.Krawitz.Scouting = function() {
 				else {
 					Text.Add("<i>“Well, we are short on people,”</i> he mutters, <i>“you’ll do as good as any, I suppose.”</i> He goes on to question you about your skills and previous experience. Apparently satisfied with what he hears, he gives you a curt nod.", parse);
 					Text.NL();
-					Text.Add("<i>“Come by tonight at eight o'clock; I’ll let you in the back entrance and show you around while the house sleeps.”</i> The other servants briefly introduce themselves before moving on to their tasks, and their break finished. <i>“You get two meals a day, a bunk to sleep in and some coin to spend. Stay on for a week without messing up and I’ll put you on the payroll.”</i>", parse);
+					Text.Add("<i>“Come by tonight at eight o'clock; I’ll let you in the back entrance and show you around while the house sleeps.”</i> The other servants briefly introduce themselves before moving on to their tasks, their break finished. <i>“You get two meals a day, a bunk to sleep in and some coin to spend. Stay on for a week without messing up and I’ll put you on the payroll.”</i>", parse);
 					Text.NL();
 					Text.Add("His short briefing concluded, the old man heads back inside the estate. <i>“Remember, meet me here at eight o’clock tonight. I’ll be up until midnight, but you don’t want to be late for your first day on the job, eh?”</i>", parse);
 					Text.NL();
@@ -1226,8 +1226,7 @@ Scenes.Krawitz.ServantConvinced = function(gender) {
 Scenes.Krawitz.FoundOut = function(entity, num, gender) {
 	var parse = {
 		entity : entity == Scenes.Krawitz.EncType.Guard ? "the guard" : "the servant",
-		bodyBodies : num > 1 ? "bodies" : "body",
-		spiked     : Scenes.Krawitz.stat.LustPotion && Scenes.Krawitz.stat.HasWine ? "spiked " : ""
+		spiked : Scenes.Krawitz.stat.LustPotion && Scenes.Krawitz.stat.HasWine ? "spiked " : ""
 	};
 	parse = Text.ParserPlural(parse, num > 1);
 	gender = gender || Math.random() > 0.5 ? Gender.male : Gender.female;
@@ -1305,7 +1304,7 @@ Scenes.Krawitz.FoundOut = function(entity, num, gender) {
 			}
 			
 			Text.NL();
-			Text.Add("You quickly hide the unconscious [bodyBodies] before anyone has a chance to find you.", parse);
+			Text.Add("You quickly hide the unconscious bod[yIes] before anyone has a chance to find you.", parse);
 			
 			Text.Flush();
 			
@@ -1652,7 +1651,7 @@ Scenes.Krawitz.StealingClothes = function() {
 Scenes.Krawitz.Bathhouse = function() {
 	var parse = {
 		cock2     	  : function() { return player.AllCocks()[1].Short(); },
-		cockTip2      : function() { return player.AllCocks()[1].TipShort(); },		
+		cockTip2      : function() { return player.AllCocks()[1].TipShort(); }
 	};
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
@@ -1742,7 +1741,7 @@ Scenes.Krawitz.Bathhouse = function() {
 		options.push({ nameStr : "Leave",
 			func : function() {
 				Text.Clear();
-				Text.Add("You quickly retreat, catching Lady Krawitz’ command to <i>“Fetch that wine, pronto!”</i>", parse);
+				Text.Add("You quickly retreat, catching Lady Krawitz’ command: <i>“Fetch that wine, pronto!”</i>", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
 					MoveToLocation(world.loc.Rigard.Krawitz.grounds, {minute: 10});
@@ -1871,18 +1870,18 @@ Scenes.Krawitz.Bathhouse = function() {
 								player.Fuck(playerCock, 10);
 								Sex.Vaginal(player, null);
 								
-								Text.Add("Well, time to move on to the main course.", parse);
+								Text.Add("Well, time to move on to the main course. ", parse);
 								if(player.FirstCock()) {
-									Text.Add(" The ladies have been kind enough to prepare your [cocks] for penetration, lathering your length[s] generously with their hungry tongues.", parse);
+									Text.Add("The ladies have been kind enough to prepare your [cocks] for penetration, lathering your length[s] generously with their hungry tongues.", parse);
 								}
 								else {
 									parse["cock"] = function() { return playerCock.Short(); };
 									parse["cocks"] = parse["cock"];
 									if(player.strapOn) {
-										Text.Add(" You’ve come well prepared, and the ladies give coos of delight as you equip your [cock], eyeing your artificial member with desire burning in their eyes.", parse);
+										Text.Add("You’ve come well prepared, and the ladies give coos of delight as you equip your [cock], eyeing your artificial member with desire burning in their eyes.", parse);
 									}
 									else {
-										Text.Add(" Wordlessly, Gina leaves the pool, staggering slightly as she moves over to a nearby chest, her hands shaking as she opens it. She fetches something from its depths, swaying unsteadily as she returns to your side. The young noblewoman’s eyes are clouded with lust as she presents you with her treasure: a fairly large strap-on dildo.", parse);
+										Text.Add("Wordlessly, Gina leaves the pool, staggering slightly as she moves over to a nearby chest, her hands shaking as she opens it. She fetches something from its depths, swaying unsteadily as she returns to your side. The young noblewoman’s eyes are clouded with lust as she presents you with her treasure: a fairly large strap-on dildo.", parse);
 										Text.NL();
 										Text.Add("You grin and take her offering, praising her for being such a good, thoughtful girl as you secure the fastenings around your [hips]. You suspect this won’t be the first time this particular toy has been put to use.", parse);
 									}
@@ -1914,12 +1913,14 @@ Scenes.Krawitz.Bathhouse = function() {
 								Text.NL();
 								Text.Add("The air is thick with the smell of your copulation. Even if you haven’t ingested any of the aphrodisiac yourself, you can still feel its effects. It is almost possible to taste it in the air, as if the young noblewomen are secreting it from their pores, transformed into living, breathing incarnations of lust. You can no longer reach through to them, so far gone are the ladies, only capable of understanding simple commands from you. Left to their own devices, they merely rut against you mindlessly, desperate to relieve their insatiable desire.", parse);
 								Text.NL();
+								
+								var cum = player.OrgasmCum();
+								
 								if(player.FirstCock()) {
-									//TODO CUM
 									Text.Add("You grunt as the two women milk you of your seed, not letting your [cocks] rest for more than a second before bearing down on you again. ", parse);
-									if(player.CumOutput() > 6)
+									if(cum > 6)
 										Text.Add("If the ladies are surprised at your unnatural output, they don’t show it - if anything, they seem delighted, moaning excitedly as you pump your plentiful sperm into their willing cunts. Excess semen drools from their overfilled orifices, dripping into the pool.", parse);
-									else if(player.CumOutput() > 3)
+									else if(cum > 3)
 										Text.Add("The Krawitz ladies moan as your throbbing member[s] unload[notS], pouring [itsTheir] contents into their eager cock-sheath[s].", parse);
 									else
 										Text.Add("Perhaps they simply didn’t notice it, with your meager cum output, or perhaps they are eager to drain all that they can out of you.", parse);
@@ -1932,7 +1933,6 @@ Scenes.Krawitz.Bathhouse = function() {
 								Text.NL();
 								Text.Add("Gina and Marlene are still under the spell of the drugged wine, though. They seem to have already forgotten about you, eyes and lips locked as they grind against each other.", parse);
 								Text.NL();
-								player.AddLustFraction(-1);
 								
 								aftermath();
 							});
