@@ -241,7 +241,7 @@ Scenes.Momo.WanderingMomo = function() {
 			Text.NL();
 			Text.Add("You simply tell her that you’ve decided to help her.", parse);
 			Text.NL();
-			Text.Add("She blinks in surprise; that’s clearly not what she expected to hear from you. <i>“I...um, okay. Thanks, I guess?”</i> Her tone is tentative as if she’s not really sure what to say. She shakes her head as if clearing her mind of whatever mental fog has befallen it and looks at you, this time with sincere hope in her eyes. <i>“Sorry, that was rude of me - you really want to help? Please, I’d be most grateful!”</i>", parse);
+			Text.Add("She blinks in surprise; that’s clearly not what she expected to hear from you. <i>“I... um, okay. Thanks, I guess?”</i> Her tone is tentative as if she’s not really sure what to say. She shakes her head as if clearing her mind of whatever mental fog has befallen it and looks at you, this time with sincere hope in her eyes. <i>“Sorry, that was rude of me - you really want to help? Please, I’d be most grateful!”</i>", parse);
 			Text.NL();
 			Text.Add("Of course, that’s what you said, wasn’t it?", parse);
 			Text.NL();
@@ -667,7 +667,7 @@ Scenes.Momo.TalkPrompt = function() {
 				Text.NL();
 				Text.Add("<i>“Well, Grandma decides it's better to take the food than let him find the axe, so the two of them have a nice meal together - and he's all flirting and grins and Grandma, well, she starts to think that maybe he's not so bad...”</i> Momo grins knowingly, still looking a little flushed.", parse);
 				Text.NL();
-				Text.Add("<i>“He's the first boy who's ever treated her so nice, so, once breakfast is over, she offers him another round before she leaves. And he takes it. So, she comes back again next month, the day before he usually comes around to steal something from the farm, and she just so happens to have some more ale...“</i> Momo giggles wickedly. <i>“Started out once a month, then it's twice a month, then a weekly thing, and then, next thing Lily knows, she's waddling up to the cave with a great big belly hanging off of her; she demands to know what he's going to do about it, and he just whips out this huge diamond-studded ring and asks her to marry him!“</i> she cheerfully squeals, bursting out laughing at the thought, slapping her stomach to try and contain her mirth.", parse);
+				Text.Add("<i>“He's the first boy who's ever treated her so nice, so, once breakfast is over, she offers him another round before she leaves. And he takes it. So, she comes back again next month, the day before he usually comes around to steal something from the farm, and she just so happens to have some more ale...”</i> Momo giggles wickedly. <i>“Started out once a month, then it's twice a month, then a weekly thing, and then, next thing Lily knows, she's waddling up to the cave with a great big belly hanging off of her; she demands to know what he's going to do about it, and he just whips out this huge diamond-studded ring and asks her to marry him!”</i> she cheerfully squeals, bursting out laughing at the thought, slapping her stomach to try and contain her mirth.", parse);
 				Text.NL();
 				Text.Add("So, if you get this straight, her grandma set out to slay a dragon but wound up laying it?", parse);
 				Text.NL();
