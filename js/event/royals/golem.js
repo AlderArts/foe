@@ -238,7 +238,7 @@ Scenes.Golem.OnWin = function() {
 
 Scenes.Golem.OnLoss = function() {
 	var parse = {
-		name          : function() { return party.Get(1).name; },		
+		name          : function() { return party.Get(1).name; }
 	};
 	
 	parse = player.ParserTags(parse);
