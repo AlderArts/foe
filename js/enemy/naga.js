@@ -322,7 +322,8 @@ Scenes.Naga.DesertLossGetDPd = function(enc) {
 
 	Text.Add("Still wrapped tightly within the naga’s coils, you feel your body being turned upside-down. Her upper shaft brushes against the side of your face, and instinctively your lips part and you wrap your hands around the thick erection presented to you, guiding the head into your welcoming mouth. You do your best to coat it in saliva, knowing that your only task is to prepare it for the main course.", parse);
 	Text.NL();
-	Text.Add("Your serpentine mistress takes hold of your legs with her hands, spreading them as she lifts your [vag] to her lips. She takes a few exploratory licks inside, using some of her tongue’s excess length to prod your [clit] for good measure. You moan as her slim, flexible muscle pleasures and tickles at your vaginal walls, managing to find all of your most sensitive places.", parse);
+	parse["cl2"] = player.FirstVag().clitCock ? "" : Text.Parse(", using some of her tongue's excess length to prod your [clit] for good measure", parse);
+	Text.Add("Your serpentine mistress takes hold of your legs with her hands, spreading them as she lifts your [vag] to her lips. She takes a few exploratory licks inside[cl2]. You moan as her slim, flexible muscle pleasures and tickles at your vaginal walls, managing to find all of your most sensitive places.", parse);
 	Text.NL();
 	Text.Add("Satisfied that your [vag] is soaked with your own secretions, she pulls away, simultaneously drawing her hips away and presenting you with her lower member. You greedily welcome her second cock into your empty maw, slathering it in as much saliva as you can manage.", parse);
 	Text.NL();
@@ -1007,7 +1008,8 @@ Scenes.Naga.DesertWinGetFuckedVag = function(enc, hypno) {
 	Text.Add("Lifting your face from the naga’s crotch, you leave her cock drenched in a mixture of pre-cum and your spit. Satisfied with the wet sheen coating her girthy erection, you raise your hips off of her face, hearing her inhale deeply, finally given a clear breath. Smiling down at her [hypno1] eyes and face covered in your juices, you stride over to her crotch[c].", parse);
 	Text.NL();
 	parse["hypno1"] = hypno ? ", hypnotized" : "";
-	Text.Add("Lowering yourself once more toward your scaly[hypno1] lover, you crouch down until the tip of the cock you fellated grinds against the soaked entrance to your [vag]. Both of your voices rise in a shared exaltation of pleasure as you push your hips further down, spearing yourself on the naga’s huge member. As more of her length passes into your love tunnel, you reach down to your [clit] and begin rubbing it slowly. Your voice full of passion, you cry out, feeling the rush of a minor vaginal orgasm from the thickness of the invader inside you.", parse);
+	parse["cl"] = player.FirstVag().clitCock ? "" : Text.Parse(". As more of her length passes into your love tunnel, you reach down to your [clit] and begin rubbing it slowy", parse);
+	Text.Add("Lowering yourself once more toward your scaly[hypno1] lover, you crouch down until the tip of the cock you fellated grinds against the soaked entrance to your [vag]. Both of your voices rise in a shared exaltation of pleasure as you push your hips further down, spearing yourself on the naga’s huge member[cl]. Your voice full of passion, you cry out, feeling the rush of a minor vaginal orgasm from the thickness of the invader inside you.", parse);
 	Text.NL();
 
 	Sex.Vaginal(naga, player);
