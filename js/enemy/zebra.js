@@ -512,7 +512,8 @@ Scenes.ZebraShaman.OnWinVaginal = function(enc) {
 		if(!player.LowerArmor())
 			Text.Add(" To make things easier for him, you help him pull off your [botArmor], giving him full access to your naughty bits.", parse);
 		Text.NL();
-		Text.Add("In an instant, his hands dart straight for your tush, groping and rubbing your nethers with a firm grip. His fingers dig into your flesh, kneeding your [butt] like dough and occasionally flicking your [clit]", parse);
+		parse["cl"] = player.FirstVag().clitCock ? "" : Text.Parse(" and occasionally flicking your [clit]", parse);
+		Text.Add("In an instant, his hands dart straight for your tush, groping and rubbing your nethers with a firm grip. His fingers dig into your flesh, kneeding your [butt] like dough[cl]", parse);
 		if(player.HasBalls())
 			Text.Add(" and caressing your [balls]", parse);
 		Text.Add(". He even gives you a few good spanks just to watch the ripples course through your rump. Thanks to the meaty horsecock currently lodged in your throat, you can do nothing but grunt in appreciation at his ministrations.", parse);
