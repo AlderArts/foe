@@ -2454,9 +2454,7 @@ Scenes.Lizards.LossFemale = function() {
 	}, 1.0, function() { return player.FirstCock(); });
 	scenes.AddEnc(function() { //TAILFUCK
 		var lusty = player.LustLevel() >= 0.7;
-		var parse = {
-			boygirl : player.mfTrue("boy", "girl")
-		};
+		parse["boygirl"] = player.mfTrue("boy", "girl");
 		parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 		parse = Text.ParserPlural(parse, third, null, "2");
 
