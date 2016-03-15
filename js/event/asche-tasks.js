@@ -929,7 +929,7 @@ Scenes.Asche.Tasks.Nightshade.Complete = function() {
 				Text.Add("Her touch is as sensual as it is deft, the dancing of her fingertips against man-meat producing bright sparks of pleasure, which pass running through your groin and into the rest of your body.", parse);
 			}
 			else {
-				Text.Add("[vag], her nimble fingers teasing the petals of your womanly flower. Her touch only intensifies as your nether-lips begin to grow flush with damp heat, encouraging the jackaless to toy with your [clit].", parse);
+				Text.Add("[vag], her nimble fingers teasing the petals of your womanly flower. Her touch only intensifies as your netherlips begin to grow flush with damp heat, encouraging the jackaless to toy with your [clit].", parse);
 			}
 			Text.Add(" Although Asche weighs hardly anything, you find yourself sinking back onto the mattress at her insistence, the jackaless leaning her weight on you until your back is firmly pressed against the fabulously smooth sheets. Kneeling above you, straddling you with ease, Asche runs her hands along her curvaceous sides, licking her muzzle as she looks down at you. Carefully, she produces a small pot of golden ointment seemingly from thin air, then makes a show of unscrewing the lid and dipping a finger into the warm mixture.", parse);
 			Text.NL();
