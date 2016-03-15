@@ -501,19 +501,17 @@ Scenes.ZebraShaman.OnWinVaginal = function(enc) {
 		player.FuckOral(player.Mouth(), zebra.FirstCock(), 1);
 		zebra.Fuck(zebra.FirstCock(), 1);
 
-		parse["botArmor"] = function() { return player.LowerArmorDesc(); };
-
 		Text.Add("All the while, the shaman has taken an interest in your [butt], which you’ve so kindly presented him. ", parse);
 		if(player.LowerArmor())
-			Text.Add("Since you elected not to strip yourself, he resorts to trying to tear a hole in your [botArmor].", parse);
+			Text.Add("Since you elected not to strip yourself, he resorts to trying to tear a hole in your [botarmor].", parse);
 		else
 			Text.Add("Rather than taking the time to remove your underwear properly, he tears them off with one hand and tosses them to the side, giving himself more access to play with your naughty bits.", parse);
 		Text.Add(" You’re somewhat startled by his animalistic behavior, but since it’s your fault he’s acting so aggressively, you might as well let him have what he wants.", parse);
 		if(!player.LowerArmor())
-			Text.Add(" To make things easier for him, you help him pull off your [botArmor], giving him full access to your naughty bits.", parse);
+			Text.Add(" To make things easier for him, you help him pull off your [botarmor], giving him full access to your naughty bits.", parse);
 		Text.NL();
-		parse["cl"] = player.FirstVag().clitCock ? "" : Text.Parse(" and occasionally flicking your [clit]", parse);
-		Text.Add("In an instant, his hands dart straight for your tush, groping and rubbing your nethers with a firm grip. His fingers dig into your flesh, kneeding your [butt] like dough[cl]", parse);
+		parse["cl"] = player.FirstVag().clitCock ? Text.Parse("stroking your stiff [cock]", parse) : Text.Parse("flicking your [clit]", parse);
+		Text.Add("In an instant, his hands dart straight for your tush, groping and rubbing your nethers with a firm grip. His fingers dig into your flesh, kneeding your [butt] like dough, occasionally [cl]", parse);
 		if(player.HasBalls())
 			Text.Add(" and caressing your [balls]", parse);
 		Text.Add(". He even gives you a few good spanks just to watch the ripples course through your rump. Thanks to the meaty horsecock currently lodged in your throat, you can do nothing but grunt in appreciation at his ministrations.", parse);
@@ -524,6 +522,9 @@ Scenes.ZebraShaman.OnWinVaginal = function(enc) {
 		Text.NL();
 		Text.Add("Just as you thought, the first of several waves of his orgasm hits you. Literally. The force of his ejaculation is enough to push your mouth off his member and send you into a coughing fit while still coating your face and [breasts] in zebra spunk. You manage to calm yourself enough to catch a few of the last spurts in your mouth. By the time it's over, you look more like a glazed donut than an adventurer.", parse);
 		Text.NL();
+		
+		var cum = player.OrgasmCum();
+		
 		Text.Add("The shaman hasn't slowed down on his end, however. Thanks to his unrelenting tongue fuck, you cry out in ecstasy as your own orgasm hits. Your inner walls clench down on the shaman's tongue, fruitlessly trying to wring it for semen; at the same time, your [vag] sprays its juices all over his face and into his mouth, and he makes sure to lap up every drop.", parse);
 		if(player.FirstCock())
 			Text.Add(" Even your [cock] joins in on the fun, spurting globs of cum on his chiseled pecs beneath you.", parse);

@@ -763,8 +763,7 @@ Scenes.Felines.WinCatchVag = function(mainCat, enemy) {
 	if(player.FirstCock())
 		Text.Add(" Up above, your [cocks] stand[notS] fully erect in arousal, though the [cat] pays [itThem] no mind.", parse);
 	Text.NL();
-	parse["cl"] = player.FirstVag().clitCock ? Text.Parse(" spreading your juices on [hisher] snout", parse) : Text.Parse(" nosing your [clit] as you mat [hisher] snout with a smidge of your juices", parse);
-	Text.Add("The feline pussy-licker takes the opportunity to nuzzle your [vag],[cl], which the [cat] is all too happy to lap off. As ready as you are, you still lose your balance when [heshe] finally slips inside of your folds, gently stroking your sensitive walls with [hisher] rough tongue.", parse);
+	Text.Add("The feline pussy-licker takes the opportunity to nuzzle your [vag], nosing your [clit] as you mat [hisher] snout with a smidge of your juices, which the [cat] is all too happy to lap off. As ready as you are, you still lose your balance when [heshe] finally slips inside of your folds, gently stroking your sensitive walls with [hisher] rough tongue.", parse);
 	Text.NL();
 	Text.Add("You wind up having to hold onto [hisher] head for support, but it seems [heshe] doesn’t mind as [heshe] continues drilling your [vag] and tasting you. [HisHer] purring sends vibrations coursing through your walls, stimulating the production of even more juices; for a moment, you think he might finish you off then and there, but since you have different plans, you push [himher] away, forcing the feline to begrudgingly stop.", parse);
 	Text.NL();
@@ -817,8 +816,7 @@ Scenes.Felines.WinCatchVag = function(mainCat, enemy) {
 
 			player.OrgasmCum();
 			
-			parse["cl2"] = player.FirstVag().clitCock ? "" : Text.Parse(" as [hisher] barbs prickle your [clit]", parse);
-			Text.Add("[HeShe] yowls loudly as [heshe] reaches [hisher] climax, spraying your front with kitty-jism. The feeling of [hisher] dick rubbing against your nethers[cl2] is enough to trigger your own orgasm, and you cry out as your femcum splashes onto the [cat]’s lap below.", parse);
+			Text.Add("[HeShe] yowls loudly as [heshe] reaches [hisher] climax, spraying your front with kitty-jism. The feeling of [hisher] dick rubbing against your nethers as [hisher] barbs prickle your [clit] is enough to trigger your own orgasm, and you cry out as your femcum splashes onto the [cat]’s lap below.", parse);
 			PrintDefaultOptions();
 		}, enabled : true
 	});
