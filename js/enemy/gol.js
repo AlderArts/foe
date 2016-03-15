@@ -875,7 +875,8 @@ Scenes.Gol.CombatWinCunn = function(enc) {
 	
 	if(player.FirstCock()) {
 		parse["ItThey"] = player.NumCocks() > 1 ? "They" : "It";
-		Text.Add("Your forgotten dick[s] lurch[notEs] on spreading cascades of pleasure, centered on your [clit], jutting high and proud above the Gol's mane. [ItThey] pulse[notS] fitfully before the muscles behind [itThem] find their rhythm, expelling", parse);
+		parse["cl"] = player.FirstVag().clitCock ? "" : Text.Parse(", centered on your [clit]", parse);
+		Text.Add("Your forgotten dick[s] lurch[notEs] on spreading cascades of pleasure[cl], jutting high and proud above the Gol's mane. [ItThey] pulse[notS] fitfully before the muscles behind [itThem] find their rhythm, expelling", parse);
 		Text.NL();
 		if(cum > 6) {
 			Text.Add("gooey eruptions of jizz all over your former foe's crown. A head-obscuring wave rolls down her, masking her features behind a veneer of ivory, and the blasts that follow wreathe her torso in a robe of pure pearlescence. She could almost pass as a pope of pussy pleasing if fresh waves of jism weren't constantly falling down her, ruining the illusion. It would be a worthier title than any the scepter could bestow.", parse);
