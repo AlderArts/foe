@@ -148,11 +148,11 @@ Scenes.Estevan.Interact = function() {
 	
 	if(DEBUG) {
 		Text.NL();
-		Text.Add(Text.BoldColor("DEBUG: relation: " + estevan.relation.Get()));
+		Text.Add("DEBUG: relation: " + estevan.relation.Get(), null, 'bold');
 		Text.NL();
-		Text.Add(Text.BoldColor("DEBUG: subDom: " + estevan.subDom.Get()));
+		Text.Add("DEBUG: subDom: " + estevan.subDom.Get(), null, 'bold');
 		Text.NL();
-		Text.Add(Text.BoldColor("DEBUG: slut: " + estevan.slut.Get()));
+		Text.Add("DEBUG: slut: " + estevan.slut.Get(), null, 'bold');
 		Text.NL();
 	}
 	Text.Flush();

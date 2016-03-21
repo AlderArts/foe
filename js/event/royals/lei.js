@@ -224,11 +224,11 @@ Lei.prototype.Interact = function() {
 
 	if(DEBUG) {
 		Text.NL();
-		Text.Add(Text.BoldColor("DEBUG: relation: " + lei.relation.Get()));
+		Text.Add("DEBUG: relation: " + lei.relation.Get(), null, 'bold');
 		Text.NL();
-		Text.Add(Text.BoldColor("DEBUG: subDom: " + lei.subDom.Get()));
+		Text.Add("DEBUG: subDom: " + lei.subDom.Get(), null, 'bold');
 		Text.NL();
-		Text.Add(Text.BoldColor("DEBUG: slut: " + lei.slut.Get()));
+		Text.Add("DEBUG: slut: " + lei.slut.Get(), null, 'bold');
 		Text.NL();
 	}
 

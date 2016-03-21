@@ -29,7 +29,7 @@ world.loc.Plains.Nomads.Fireplace.events.push(new Link(
 	},
 	function() {
 		/* Old explanation
-		Text.Add(Text.BoldColor("PLACEHOLDER TEXT"));
+		Text.Add("PLACEHOLDER TEXT");
 		Text.NL();
 		Text.Add("You start up a game of Cavalcade with Rosalin and Wolfie.");
 		Text.NL();
@@ -47,7 +47,7 @@ world.loc.Plains.Nomads.Fireplace.events.push(new Link(
 		Text.NL();
 		Text.Add("The game can currently be abused for cash, since debug mode allows you to see the down-face cards as well.");
 		Text.NL();
-		Text.Add(Text.BoldColor("END PLACEHOLDER TEXT"));
+		Text.Add("END PLACEHOLDER TEXT");
 		Text.NL();
 
 		var players = [player, rosalin, cale];

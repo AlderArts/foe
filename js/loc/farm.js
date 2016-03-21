@@ -100,7 +100,7 @@ world.loc.Farm.Fields.enc.AddEnc(function() {
 
 		Text.Add("Not having much else to do, you wander the fields for a few minutes. You pick up a particularly fresh bundle of grass. Who knows, could be useful for something.");
 		Text.NL();
-		Text.Add(Text.BoldColor("You pick up some fresh grass."));
+		Text.Add("You pick up some fresh grass.", null, 'bold');
 		party.inventory.AddItem(Items.FreshGrass);
 
 		world.TimeStep({minute: 15});
@@ -119,7 +119,7 @@ world.loc.Farm.Fields.enc.AddEnc(function() {
 
 		Text.Add("Not having much else to do, you wander the fields for a few minutes. You pick up a pretty flower. Who knows, could be useful for something.");
 		Text.NL();
-		Text.Add(Text.BoldColor("You pick up a Foxglove."));
+		Text.Add("You pick up a Foxglove.", null, 'bold');
 		party.inventory.AddItem(Items.Foxglove);
 
 		world.TimeStep({minute: 15});

@@ -85,7 +85,7 @@ Cavalcade.prototype.Finish = function() {
 			if(key > 0)
 				Text.Add(", ");
 			if(h == cav.stag)
-				Text.Add(h.name + Text.BoldColor(" (*)"));
+				Text.Add(h.name + " (*)", null, 'bold');
 			else
 				Text.Add(h.name);
 		});
@@ -276,7 +276,7 @@ Cavalcade.prototype.CoinGameRound = function() {
 			Text.Add("You put [bet] [token]s in the pot. The dealer gives you two cards.", parse);
 			Text.NL();
 		}
-		Text.Add(Text.BoldColor("There are [pot] [token]s in the pot."), parse);
+		Text.Add("There are [pot] [token]s in the pot.", parse, 'bold');
 		Text.NL();
 	case 1:
 	case 2:
@@ -291,13 +291,13 @@ Cavalcade.prototype.CoinGameRound = function() {
 			Text.Add("Your cards are ", parse);
 			var card = player.hand[0];
 			if(card == that.stag)
-				Text.Add(card.name + Text.BoldColor(" (*)"));
+				Text.Add(card.name + " (*)", 'bold');
 			else
 				Text.Add(card.name);
 			Text.Add(", ");
 			card = player.hand[1];
 			if(card == that.stag)
-				Text.Add(card.name + Text.BoldColor(" (*)"));
+				Text.Add(card.name + " (*)", null, 'bold');
 			else
 				Text.Add(card.name);
 			Text.Add(".");
@@ -336,7 +336,7 @@ Cavalcade.prototype.CoinGameRound = function() {
 		Text.Add(".");
 		
 		Text.NL();
-		Text.Add(Text.BoldColor("There are [pot] [token]s in the pot."), parse);
+		Text.Add("There are [pot] [token]s in the pot.", parse, 'bold');
 		
 		if(player.folded) {
 			Input.buttons[0].Setup("Next", function() {

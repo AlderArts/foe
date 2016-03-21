@@ -96,11 +96,11 @@ Scenes.Jeanne.Interact = function() {
 	
 	if(DEBUG) {
 		Text.NL();
-		Text.Add(Text.BoldColor("DEBUG: relation: " + jeanne.relation.Get()));
+		Text.Add("DEBUG: relation: " + jeanne.relation.Get(), null, 'bold');
 		Text.NL();
-		Text.Add(Text.BoldColor("DEBUG: subDom: " + jeanne.subDom.Get()));
+		Text.Add("DEBUG: subDom: " + jeanne.subDom.Get(), null, 'bold');
 		Text.NL();
-		Text.Add(Text.BoldColor("DEBUG: slut: " + jeanne.slut.Get()));
+		Text.Add("DEBUG: slut: " + jeanne.slut.Get(), null, 'bold');
 		Text.NL();
 	}
 	

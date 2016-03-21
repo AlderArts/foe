@@ -244,7 +244,7 @@ Scenes.Maria.CampInteract = function() {
 		
 		if(DEBUG) {
 			Text.NL();
-			Text.Add(Text.BoldColor("DEBUG: relation: " + maria.relation.Get()));
+			Text.Add("DEBUG: relation: " + maria.relation.Get(), null, 'bold');
 			Text.NL();
 		}
 		Text.Flush();

@@ -69,7 +69,7 @@ Job.prototype.AddExp = function(entity, exp, reserve) {
 			has  : entity.has()
 		};
 		Text.NL();
-		Text.Add(Text.BoldColor("[name] [is] now a level [lvl] [job]!<br>"), parse);
+		Text.Add("[name] [is] now a level [lvl] [job]!<br>", parse, 'bold');
 		// Teach new skills
 		if(skills) {
 			// [ { ab: Ablities.Black.Fireball, set: "Spells" }, ... ]
@@ -80,8 +80,9 @@ Job.prototype.AddExp = function(entity, exp, reserve) {
 				
 				parse["ability"] = ability.name;
 				
-				if(!entity.abilities[set].HasAbility(ability))
-					Text.Add(Text.BoldColor("[name] [has] mastered [ability]!<br>"), parse);
+				if(!entity.abilities[set].HasAbility(ability)) {
+					Text.Add("[name] [has] mastered [ability]!<br>", parse, 'bold');
+				}
 				entity.abilities[set].AddAbility(ability);
 			}
 		}
@@ -107,7 +108,7 @@ Job.prototype.AddExp = function(entity, exp, reserve) {
 		toLevel = newLevel.expToLevel;
 		if(toLevel == null) {
 			jd.experience = 0;
-			Text.Add(Text.BoldColor("[name] [is] now a master [job]!"), parse);
+			Text.Add("[name] [is] now a master [job]!", parse, 'bold');
 			Text.NL();
 			break;
 		}

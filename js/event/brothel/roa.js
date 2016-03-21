@@ -121,11 +121,11 @@ Roa.prototype.Interact = function() {
 	
 	if(DEBUG) {
 		Text.NL();
-		Text.Add(Text.BoldColor("DEBUG: relation: " + roa.relation.Get()));
+		Text.Add("DEBUG: relation: " + roa.relation.Get(), null, 'bold');
 		Text.NL();
-		Text.Add(Text.BoldColor("DEBUG: subDom: " + roa.subDom.Get()));
+		Text.Add("DEBUG: subDom: " + roa.subDom.Get(), null, 'bold');
 		Text.NL();
-		Text.Add(Text.BoldColor("DEBUG: slut: " + roa.slut.Get()));
+		Text.Add("DEBUG: slut: " + roa.slut.Get(), null, 'bold');
 		Text.NL();
 	}
 	

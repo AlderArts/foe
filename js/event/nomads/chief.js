@@ -108,7 +108,7 @@ Scenes.Chief.Interact = function() {
 		
 		if(DEBUG) {
 			Text.NL();
-			Text.Add(Text.BoldColor("DEBUG: rep: " + chief.relation.Get()));
+			Text.Add("DEBUG: rep: " + chief.relation.Get(), null, 'bold');
 			Text.NL();
 		}
 		Text.Flush();

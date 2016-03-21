@@ -41,7 +41,7 @@ Inventory.prototype.AddItem = function(item, num) {
 
 	if(DEBUG) {
 		Text.NL();
-		Text.Add(Text.BoldColor("DEBUG: Added " + num + " " + item.name + " (ID: " + item.id + ")"));
+		Text.Add("DEBUG: Added [num] [name] (ID: [id])", {num: num, name: item.name, id: item.id}, 'bold');
 		Text.NL();
 		Text.Flush();
 	}
@@ -63,7 +63,7 @@ Inventory.prototype.RemoveItem = function(item, num) {
 
 	if(DEBUG) {
 		Text.NL();
-		Text.Add(Text.BoldColor("DEBUG: Removed " + num + " " + item.name + " (ID: " + item.id + ")"));
+		Text.Add("DEBUG: Removed [num] [name] (ID: [id])", {num: num, name: item.name, id: item.id}, 'bold');
 		Text.NL();
 		Text.Flush();
 	}
