@@ -442,8 +442,8 @@ Encounter.prototype.CombatTick = function() {
 			Text.Clear();
 			// TODO: DEBUG ?
 			var entityName = currentActiveChar.uniqueName ? currentActiveChar.uniqueName : currentActiveChar.name;
-			Text.Add(Text.BoldColor("Turn order:<br>"));
-			Text.Add(Text.BoldColor(entityName + "<br>"));
+			Text.Add("Turn order:<br>", null, 'bold');
+			Text.Add(entityName + "<br>", null, 'bold');
 			
 			var tempParty = [];
 			_.each(enc.combatOrder, function(c) {

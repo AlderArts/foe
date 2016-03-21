@@ -204,11 +204,11 @@ Scenes.Patchwork.Interact = function() {
 		
 		if(DEBUG) {
 			Text.NL();
-			Text.Add(Text.BoldColor("DEBUG: relation: " + patchwork.relation.Get()));
+			Text.Add("DEBUG: relation: " + patchwork.relation.Get(), null, 'bold');
 			Text.NL();
-			Text.Add(Text.BoldColor("DEBUG: subDom: " + patchwork.subDom.Get()));
+			Text.Add("DEBUG: subDom: " + patchwork.subDom.Get(), null, 'bold');
 			Text.NL();
-			Text.Add(Text.BoldColor("DEBUG: slut: " + patchwork.slut.Get()));
+			Text.Add("DEBUG: slut: " + patchwork.slut.Get(), null, 'bold');
 		}
 		
 		Text.Flush();

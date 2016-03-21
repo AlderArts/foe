@@ -389,9 +389,9 @@ Terry.prototype.Interact = function(switchSpot) {
 	
 	if(DEBUG) {
 		Text.NL();
-		Text.Add(Text.BoldColor("DEBUG: relation: " + terry.Relation()));
+		Text.Add("DEBUG: relation: " + terry.Relation(), null, 'bold');
 		Text.NL();
-		Text.Add(Text.BoldColor("DEBUG: slut: " + terry.Slut()));
+		Text.Add("DEBUG: slut: " + terry.Slut(), null, 'bold');
 	}
 	Text.Flush();
 	

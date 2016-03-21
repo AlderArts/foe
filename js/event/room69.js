@@ -76,11 +76,11 @@ Scenes.Room69.Interact = function() {
 	
 	if(DEBUG) {
 		Text.NL();
-		Text.Add(Text.BoldColor("DEBUG: relation: " + room69.relation.Get()));
+		Text.Add("DEBUG: relation: " + room69.relation.Get(), null, 'bold');
 		Text.NL();
-		Text.Add(Text.BoldColor("DEBUG: subDom: " + room69.subDom.Get()));
+		Text.Add("DEBUG: subDom: " + room69.subDom.Get(), null, 'bold');
 		Text.NL();
-		Text.Add(Text.BoldColor("DEBUG: slut: " + room69.slut.Get()));
+		Text.Add("DEBUG: slut: " + room69.slut.Get(), null, 'bold');
 		Text.NL();
 	}
 	Text.Flush();

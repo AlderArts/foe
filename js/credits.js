@@ -8,7 +8,7 @@ CreditsScreen = function() {
 	Text.Add("Thanks to CalmKhaos, MrKrampus, Del, Johnathan Roberts, Ryous, Spiegelmeister and Snarbolax for editing for me!");
 	Text.NL();
 	
-	Text.Add(Text.BoldColor("Writing:"));
+	Text.Add("Writing:", null, 'bold');
 	Text.NL();
 	Text.Add("Asche: The Observer<br>");
 	Text.Add("Aquilius: The Observer<br>");
@@ -57,17 +57,17 @@ CreditsScreen = function() {
 	
 	Text.NL();
 	
-	Text.Add(Text.BoldColor("Code snippets:"));
+	Text.Add("Code snippets:", null, 'bold');
 	Text.NL();
 	Text.Add("Image pre-loader: https://github.com/DimitarChristoff/pre-loader<br>");
 	
 	Text.NL();
 	
-	Text.Add(Text.BoldColor("Art:"));
+	Text.Add("Art:", null, 'bold');
 	Text.NL();
 	Text.Add("Cavalcade cards: Jass Befrold (colors by Alder)<br>");
 	Text.NL();
-	Text.Add(Text.BoldColor("Loyal patreons:"));
+	Text.Add("Loyal patreons:", null, 'bold');
 	Text.NL();
 	Text.Add("StarcraftJunkie, Dane, Mark, Marco Zijlmans, Xcuphra, Eric Borrowman, Matthew Sellers, Xxeryon, Lasse, Sagara Saito, Sindri Myr, Timothy Rice, Mark Hawker, Dana Reitz, Minty Shine, Sean, Daniel Mittelbrun, Twenix, The Dark Wanderer, Fusiontech, Nosna, Kyle Tikala, Rakesh, Jayson Love, Pakuska, Christopher Hewitt, Bra1nz, Vann Collins, patrick dorman, Draxial Drax, Christopher Joseph Vargas, Artem, Nenad Ganilovic, Chris Meincke, Ditz Kholik, David Camper, bojaa90, Malte Nüchter, Syrth Nightstar, Lee, Noir, Stanley Davis, davis, DiffSquared, Glen Quagmire, Reagan Bedggood, Barbara Jacobson, Kevin saoud, Greg Schimmel, Wayne Chattillon");
 	Text.NL();

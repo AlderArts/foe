@@ -181,11 +181,11 @@ Entity.prototype.PrintDescription = function() {
 	
 	if(DEBUG) {
 		Text.NL();
-		Text.Add(Text.BoldColor("DEBUG: relation: " + this.relation.Get()));
+		Text.Add("DEBUG: relation: " + this.relation.Get(), null, 'bold');
 		Text.NL();
-		Text.Add(Text.BoldColor("DEBUG: subDom: " + this.subDom.Get()));
+		Text.Add("DEBUG: subDom: " + this.subDom.Get(), null, 'bold');
 		Text.NL();
-		Text.Add(Text.BoldColor("DEBUG: slut: " + this.slut.Get()));
+		Text.Add("DEBUG: slut: " + this.slut.Get(), null, 'bold');
 		Text.NL();
 	}
 	

@@ -77,11 +77,11 @@ Adrian.prototype.Interact = function() {
 
 	if(DEBUG) {
 		Text.NL();
-		Text.Add(Text.BoldColor("DEBUG: relation: " + adrian.relation.Get()));
+		Text.Add("DEBUG: relation: " + adrian.relation.Get(), null, 'bold');
 		Text.NL();
-		Text.Add(Text.BoldColor("DEBUG: subDom: " + adrian.subDom.Get()));
+		Text.Add("DEBUG: subDom: " + adrian.subDom.Get(), null, 'bold');
 		Text.NL();
-		Text.Add(Text.BoldColor("DEBUG: slut: " + adrian.slut.Get()));
+		Text.Add("DEBUG: slut: " + adrian.slut.Get(), null, 'bold');
 		Text.NL();
 	}
 

@@ -73,11 +73,11 @@ Sylistraxia.prototype.Interact = function() {
 	
 	if(DEBUG) {
 		Text.NL();
-		Text.Add(Text.BoldColor("DEBUG: relation: " + sylistraxia.relation.Get()));
+		Text.Add("DEBUG: relation: " + sylistraxia.relation.Get(), null, 'bold');
 		Text.NL();
-		Text.Add(Text.BoldColor("DEBUG: subDom: " + sylistraxia.subDom.Get()));
+		Text.Add("DEBUG: subDom: " + sylistraxia.subDom.Get(), null, 'bold');
 		Text.NL();
-		Text.Add(Text.BoldColor("DEBUG: slut: " + sylistraxia.slut.Get()));
+		Text.Add("DEBUG: slut: " + sylistraxia.slut.Get(), null, 'bold');
 		Text.NL();
 	}
 	

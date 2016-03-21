@@ -3016,7 +3016,7 @@ Scenes.Rosalin.SexPrompt = function(state) {
 					Text.NL();
 
 					// TODO: Finish dommy scenes
-					Text.Add(Text.BoldColor("PLACEHOLDER: unfinished scene (dom)."), parse);
+					Text.Add("PLACEHOLDER: unfinished scene (dom).", parse, 'bold');
 					Text.Flush();
 					Gui.NextPrompt();
 				}

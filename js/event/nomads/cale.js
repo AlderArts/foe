@@ -227,9 +227,9 @@ Scenes.Cale.Interact = function() {
 	
 	if(DEBUG) {
 		Text.NL();
-		Text.Add(Text.BoldColor("DEBUG: relation: " + cale.relation.Get()));
+		Text.Add("DEBUG: relation: " + cale.relation.Get(), null, 'bold');
 		Text.NL();
-		Text.Add(Text.BoldColor("DEBUG: slut: " + cale.slut.Get()));
+		Text.Add("DEBUG: slut: " + cale.slut.Get(), null, 'bold');
 		Text.NL();
 	}
 	Text.Flush();

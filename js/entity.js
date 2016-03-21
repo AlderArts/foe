@@ -242,7 +242,7 @@ Entity.prototype.AddExp = function(exp, reserve) {
 	
 	if(DEBUG) {
 		Text.NL();
-		Text.Add(Text.BoldColor("[reserve][name] gains [x] xp."), {reserve: reserve ? "RESERVE: " : "", name: this.name, x: exp});
+		Text.Add("[reserve][name] gains [x] xp.", {reserve: reserve ? "RESERVE: " : "", name: this.name, x: exp}, 'bold');
 		Text.NL();
 		Text.Flush();
 	}
@@ -263,7 +263,7 @@ Entity.prototype.AddExp = function(exp, reserve) {
 		
 		if(DEBUG) {
 			Text.NL();
-			Text.Add(Text.BoldColor("[reserve][name] gains a level! Now at [x]."), {reserve: reserve ? "RESERVE: " : "", name: this.name, x: this.level});
+			Text.Add("[reserve][name] gains a level! Now at [x].", {reserve: reserve ? "RESERVE: " : "", name: this.name, x: this.level}, 'bold');
 			Text.NL();
 			Text.Flush();
 		}
@@ -273,7 +273,7 @@ Entity.prototype.AddExp = function(exp, reserve) {
 Entity.prototype.AddSexExp = function(sexp) {
 	if(DEBUG) {
 		Text.NL();
-		Text.Add(Text.BoldColor("[name] gains [x] sex exp."), {name: this.name, x: sexp});
+		Text.Add("[name] gains [x] sex exp.", {name: this.name, x: sexp}, 'bold');
 		Text.NL();
 		Text.Flush();
 	}
@@ -288,7 +288,7 @@ Entity.prototype.AddSexExp = function(sexp) {
 		
 		if(DEBUG) {
 			Text.NL();
-			Text.Add(Text.BoldColor("[name] gains a sex level! Now at [x]."), {name: this.name, x: this.sexlevel});
+			Text.Add("[name] gains a sex level! Now at [x].", {name: this.name, x: this.sexlevel}, 'bold');
 			Text.NL();
 			Text.Flush();
 		}

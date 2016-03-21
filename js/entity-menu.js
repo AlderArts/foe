@@ -81,7 +81,7 @@ Entity.prototype.LevelUpPrompt = function(backFunc) {
 	Text.NL();
 
 	if(this.currentJob) {
-		Text.Add(Text.BoldColor("Job abilities:<br>"));
+		Text.Add("Job abilities:<br>", null, 'bold');
 		var abSet = this.currentJob.abilities;
 
 		for(var i = 0; i < abSet.AbilitySet.length; i++) {
@@ -91,7 +91,7 @@ Entity.prototype.LevelUpPrompt = function(backFunc) {
 		}
 		Text.Add("<br>");
 	}
-	Text.Add(Text.BoldColor("Known abilities:<br>"));
+	Text.Add("Known abilities:<br>", null, 'bold');
 	for(var set in this.abilities) {
 		var abSet = this.abilities[set];
 

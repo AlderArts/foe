@@ -82,11 +82,11 @@ Danie.prototype.Interact = function() {
 	
 	if(DEBUG) {
 		Text.NL();
-		Text.Add(Text.BoldColor("DEBUG: relation: " + danie.relation.Get()));
+		Text.Add("DEBUG: relation: " + danie.relation.Get(), null, 'bold');
 		Text.NL();
-		Text.Add(Text.BoldColor("DEBUG: subDom: " + danie.subDom.Get()));
+		Text.Add("DEBUG: subDom: " + danie.subDom.Get(), null, 'bold');
 		Text.NL();
-		Text.Add(Text.BoldColor("DEBUG: slut: " + danie.slut.Get()));
+		Text.Add("DEBUG: slut: " + danie.slut.Get(), null, 'bold');
 		Text.NL();
 	}
 	Text.Flush();

@@ -117,7 +117,7 @@ Scenes.Magnus.Interact = function() {
 	else {
 		if(DEBUG) {
 			Text.NL();
-			Text.Add(Text.BoldColor("DEBUG: relation: " + magnus.relation.Get()));
+			Text.Add("DEBUG: relation: " + magnus.relation.Get(), null, 'bold');
 			Text.NL();
 		}
 		
