@@ -49,10 +49,6 @@ function IntroDemon() {
 IntroDemon.prototype = new BossEntity();
 IntroDemon.prototype.constructor = IntroDemon;
 
-IntroDemon.prototype.PoisonResist = function() {
-	return 0.8;
-}
-
 IntroDemon.prototype.Act = function(encounter, activeChar) {
 	// TODO: More actions (rand 'em)
 	

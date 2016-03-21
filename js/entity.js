@@ -96,6 +96,8 @@ function Entity() {
 	this.elementDef   = new DamageType();
 	
 	this.combatStatus = new StatusList();
+	this.statusDef    = [];
+	this.statusWear   = [];
 	
 	// Body representation
 	this.body         = new Body(this);

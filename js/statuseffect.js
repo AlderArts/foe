@@ -190,10 +190,12 @@ Status.Venom = function(target, opts) {
 	opts = opts || {};
 
 	// Check for poison resist
-	var odds = (opts.hit || 1) * (1 - target.PoisonResist());
+	var odds = (opts.hit || 1) * (1 - target.Resistance(StatusEffect.Venom));
 	if(Math.random() > odds) {
+		target.AddResistanceWear(StatusEffect.Venom, opts.hit);
 		return false;
 	}
+	target.statusWear[StatusEffect.Venom] = 0;
 	// Number of turns effect lasts (static + random factor)
 	var turns = opts.turns || 0;
 	turns += Math.random() * (opts.turnsR || 0);
@@ -230,10 +232,12 @@ Status.Burn = function(target, opts) {
 	opts = opts || {};
 
 	// Check for burn resist
-	var odds = (opts.hit || 1) * (1 - target.BurnResist());
+	var odds = (opts.hit || 1) * (1 - target.Resistance(StatusEffect.Burn));
 	if(Math.random() > odds) {
+		target.AddResistanceWear(StatusEffect.Burn, opts.hit);
 		return false;
 	}
+	target.statusWear[StatusEffect.Burn] = 0;
 	// Number of turns effect lasts (static + random factor)
 	var turns = opts.turns || 0;
 	turns += Math.random() * (opts.turnsR || 0);
@@ -270,10 +274,12 @@ Status.Freeze = function(target, opts) {
 	opts = opts || {};
 
 	// Check for freeze resist
-	var odds = (opts.hit || 1) * (1 - target.FreezeResist());
+	var odds = (opts.hit || 1) * (1 - target.Resistance(StatusEffect.Freeze));
 	if(Math.random() > odds) {
+		target.AddResistanceWear(StatusEffect.Freeze, opts.hit);
 		return false;
 	}
+	target.statusWear[StatusEffect.Freeze] = 0;
 	// Number of turns effect lasts (static + random factor)
 	var turns = opts.turns || 0;
 	turns += Math.random() * (opts.turnsR || 0);
@@ -301,10 +307,12 @@ Status.Numb = function(target, opts) {
 	opts = opts || {};
 
 	// Check for numb resist
-	var odds = (opts.hit || 1) * (1 - target.NumbResist());
+	var odds = (opts.hit || 1) * (1 - target.Resistance(StatusEffect.Numb));
 	if(Math.random() > odds) {
+		target.AddResistanceWear(StatusEffect.Numb, opts.hit);
 		return false;
 	}
+	target.statusWear[StatusEffect.Numb] = 0;
 	// Number of turns effect lasts (static + random factor)
 	var turns = opts.turns || 0;
 	turns += Math.random() * (opts.turnsR || 0);
@@ -331,10 +339,12 @@ Status.Blind = function(target, opts) {
 	opts = opts || {};
 
 	// Check for blind resist
-	var odds = (opts.hit || 1) * (1 - target.BlindResist());
+	var odds = (opts.hit || 1) * (1 - target.Resistance(StatusEffect.Blind));
 	if(Math.random() > odds) {
+		target.AddResistanceWear(StatusEffect.Blind, opts.hit);
 		return false;
 	}
+	target.statusWear[StatusEffect.Blind] = 0;
 	// Number of turns effect lasts (static + random factor)
 	var turns = opts.turns || 0;
 	turns += Math.random() * (opts.turnsR || 0);
@@ -362,10 +372,12 @@ Status.Siphon = function(target, opts) {
 	opts = opts || {};
 
 	// Check for siphon resist
-	var odds = (opts.hit || 1) * (1 - target.SiphonResist());
+	var odds = (opts.hit || 1) * (1 - target.Resistance(StatusEffect.Siphon));
 	if(Math.random() > odds) {
+		target.AddResistanceWear(StatusEffect.Siphon, opts.hit);
 		return false;
 	}
+	target.statusWear[StatusEffect.Siphon] = 0;
 	// Number of turns effect lasts (static + random factor)
 	var turns = opts.turns || 0;
 	turns += Math.random() * (opts.turnsR || 0);
@@ -404,10 +416,12 @@ Status.Sleep = function(target, opts) {
 	opts = opts || {};
 
 	// Check for sleep resist
-	var odds = (opts.hit || 1) * (1 - target.SleepResist());
+	var odds = (opts.hit || 1) * (1 - target.Resistance(StatusEffect.Sleep));
 	if(Math.random() > odds) {
+		target.AddResistanceWear(StatusEffect.Sleep, opts.hit);
 		return false;
 	}
+	target.statusWear[StatusEffect.Sleep] = 0;
 	// Number of turns effect lasts (static + random factor)
 	var turns = opts.turns || 0;
 	turns += Math.random() * (opts.turnsR || 0);
@@ -433,10 +447,12 @@ Status.Bleed = function(target, opts) {
 	opts = opts || {};
 
 	// Check for poison resist
-	var odds = (opts.hit || 1) * (1 - target.BleedResist());
+	var odds = (opts.hit || 1) * (1 - target.Resistance(StatusEffect.Bleed));
 	if(Math.random() > odds) {
+		target.AddResistanceWear(StatusEffect.Bleed, opts.hit);
 		return false;
 	}
+	target.statusWear[StatusEffect.Bleed] = 0;
 	// Number of turns effect lasts (static + random factor)
 	var turns = opts.turns || 0;
 	turns += Math.random() * (opts.turnsR || 0);
@@ -498,10 +514,12 @@ Status.Slow = function(target, opts) {
 	opts = opts || {};
 
 	// Check for slow resist
-	var odds = (opts.hit || 1) * (1 - target.SlowResist());
+	var odds = (opts.hit || 1) * (1 - target.Resistance(StatusEffect.Slow));
 	if(Math.random() > odds) {
+		target.AddResistanceWear(StatusEffect.Slow, opts.hit);
 		return false;
 	}
+	target.statusWear[StatusEffect.Slow] = 0;
 
 	// Number of turns effect lasts (static + random factor)
 	var turns = opts.turns || 0;
@@ -530,10 +548,12 @@ Status.Horny = function(target, opts) {
 	opts = opts || {};
 
 	// Check for horny resist
-	var odds = (opts.hit || 1) * (1 - target.HornyResist());
+	var odds = (opts.hit || 1) * (1 - target.Resistance(StatusEffect.Horny));
 	if(Math.random() > odds) {
+		target.AddResistanceWear(StatusEffect.Horny, opts.hit);
 		return false;
 	}
+	target.statusWear[StatusEffect.Horny] = 0;
 	// Number of turns effect lasts (static + random factor)
 	var turns = opts.turns || 0;
 	turns += Math.random() * (opts.turnsR || 0);
@@ -768,10 +788,12 @@ Status.Confuse = function(target, opts) {
 	opts = opts || {};
 
 	// Check for confuse resist
-	var odds = (opts.hit || 1) * (1 - target.ConfuseResist());
+	var odds = (opts.hit || 1) * (1 - target.Resistance(StatusEffect.Confuse));
 	if(Math.random() > odds) {
+		target.AddResistanceWear(StatusEffect.Confuse, opts.hit);
 		return false;
 	}
+	target.statusWear[StatusEffect.Confuse] = 0;
 
 	var turns = opts.turns || 0;
 	turns += Math.random() * (opts.turnsR || 0);
@@ -819,10 +841,12 @@ Status.Weakness = function(target, opts) {
 	opts = opts || {};
 
 	// Check for horny resist
-	var odds = (opts.hit || 1) * (1 - target.WeaknessResist());
+	var odds = (opts.hit || 1) * (1 - target.Resistance(StatusEffect.Weakness));
 	if(Math.random() > odds) {
+		target.AddResistanceWear(StatusEffect.Weakness, opts.hit);
 		return false;
 	}
+	target.statusWear[StatusEffect.Weakness] = 0;
 
 	var turns = opts.turns || 0;
 	turns += Math.random() * (opts.turnsR || 0);

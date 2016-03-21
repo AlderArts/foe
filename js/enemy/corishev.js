@@ -30,6 +30,8 @@ function Corishev() {
 	
 	this.elementDef.dmg[Element.lust] = -1;
 	
+	this.statusDef[StatusEffect.Weakness] = 0;
+	
 	this.body              = new Body(this);
 	
 	this.body.DefMale();
@@ -42,10 +44,6 @@ function Corishev() {
 }
 Corishev.prototype = new BossEntity();
 Corishev.prototype.constructor = Corishev;
-
-Corishev.prototype.WeaknessResist = function() {
-	return 0;
-}
 
 Corishev.prototype.DropTable = function() {
 	var drops = [];

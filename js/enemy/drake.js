@@ -31,6 +31,9 @@ function Drake() {
 	this.elementDef.dmg[Element.mFire]    = 0.5;
 	this.elementDef.dmg[Element.mThunder] = 0.5;
 	this.elementDef.dmg[Element.mIce]     = 0.5;
+	
+	this.statusDef[StatusEffect.Venom]    = 1;
+	this.statusDef[StatusEffect.Burn]     = 1;
 
 	this.level             = 60 + Math.floor(Math.random() * 10);
 	this.sexlevel          = 30;
@@ -50,13 +53,6 @@ function Drake() {
 }
 Drake.prototype = new Entity();
 Drake.prototype.constructor = Drake;
-
-Drake.prototype.PoisonResist = function() {
-	return 1;
-}
-Drake.prototype.BurnResist = function() {
-	return 1;
-}
 
 Drake.prototype.DropTable = function() {
 	var drops = [];

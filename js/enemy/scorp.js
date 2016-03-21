@@ -38,6 +38,8 @@ function Scorpion() {
 	this.elementDef.dmg[Element.mFire]   =  0.5;
 	this.elementDef.dmg[Element.mIce]    =   -1;
 	this.elementDef.dmg[Element.mWater]  = -0.5;
+	
+	this.statusDef[StatusEffect.Venom]   = 1;
 
 	this.level             = 5 + Math.floor(Math.random() * 4);
 	this.sexlevel          = 3;
@@ -57,10 +59,6 @@ function Scorpion() {
 }
 Scorpion.prototype = new Entity();
 Scorpion.prototype.constructor = Scorpion;
-
-Scorpion.prototype.PoisonResist = function() {
-	return 0.8;
-}
 
 Scorpion.prototype.DropTable = function() {
 	var drops = [];

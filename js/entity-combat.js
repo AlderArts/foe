@@ -467,6 +467,8 @@ Entity.prototype.ClearCombatBonuses = function() {
 	this.charisma.temp     = 0;
 	
 	this.BalanceStats();
+	
+	this.statusWear = [];
 }
 
 // Balance mana, lust and hp
@@ -647,40 +649,22 @@ Entity.prototype.LEvade = function(attack) {
 	return evadeStat;
 }
 
-// TODO: How to handle resistances?
-Entity.prototype.PoisonResist = function() {
-	return 0;
+
+
+
+Entity.prototype.Resistance = function(type) {
+	var res = this.statusDef[type] || 0;
+	var wear = this.statusWear[type] || 0;
+	//TODO other factors
+	return res - wear;
 }
-Entity.prototype.BurnResist = function() {
-	return 0;
-}
-Entity.prototype.FreezeResist = function() {
-	return 0;
-}
-Entity.prototype.NumbResist = function() {
-	return 0;
-}
-Entity.prototype.BlindResist = function() {
-	return 0;
-}
-Entity.prototype.SiphonResist = function() {
-	return 0;
-}
-Entity.prototype.SleepResist = function() {
-	return 0;
-}
-Entity.prototype.BleedResist = function() {
-	return 0;
-}
-Entity.prototype.HornyResist = function() {
-	return 0;
-}
-Entity.prototype.SlowResist = function() {
-	return 0;
-}
-Entity.prototype.ConfuseResist = function() {
-	return 0;
-}
-Entity.prototype.WeaknessResist = function() {
-	return 0;
+
+Entity.prototype.AddResistanceWear = function(type, wear) {
+	wear = wear || 0;
+	if(this.statusWear[type]) {
+		this.statusWear[type] += wear;
+	}
+	else {
+		this.statusWear[type] = wear;
+	}
 }
