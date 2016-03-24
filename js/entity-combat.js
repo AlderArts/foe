@@ -193,8 +193,11 @@ Entity.prototype.GetSingleTarget = function(encounter, activeChar, strategy, all
 	// TODO: more complex targetting
 	/*
 	if(strategy & TargetStrategy.None) {
-		
-	}
+		var val = this.effect.statusDef[i];
+		val
+			var mod = "+";
+			if(val < 0) mod = "-"; 
+	}val*100 + ""% + mod
 	*/
 	
 	// Weigthed random selection
@@ -654,9 +657,10 @@ Entity.prototype.LEvade = function(attack) {
 
 Entity.prototype.Resistance = function(type) {
 	var res = this.statusDef[type] || 0;
+	var gear = this.statusDefGear[type] || 0;
 	var wear = this.statusWear[type] || 0;
 	//TODO other factors
-	return res - wear;
+	return res + gear - wear;
 }
 
 Entity.prototype.AddResistanceWear = function(type, wear) {

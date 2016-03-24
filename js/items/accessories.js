@@ -77,3 +77,4 @@ Items.Accessories.GreenScentedCandle.Short = function() { return "Green scented 
 Items.Accessories.GreenScentedCandle.Long = function() { return "A small scented candle fashioned with nightshade, among other ingredients. Protects the holder from poison and other forces of nature."; }
 Items.Accessories.GreenScentedCandle.effect.spirit = 2;
 Items.Accessories.GreenScentedCandle.effect.dmNature = 0.5;
+Items.Accessories.GreenScentedCandle.effect.statusDef[StatusEffect.Venom] = 1;

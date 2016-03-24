@@ -35,6 +35,8 @@ StatusEffect = {
 	LAST     : 26
 };
 
+Status.Keys = Object.keys(StatusEffect);
+
 LoadStatusImages = function(imageArray) {
 	Images.status = [];
 	for(var i = 0; i < StatusEffect.LAST; i++) {

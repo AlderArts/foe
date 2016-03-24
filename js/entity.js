@@ -97,6 +97,7 @@ function Entity() {
 	
 	this.combatStatus = new StatusList();
 	this.statusDef    = [];
+	this.statusDefGear = [];
 	this.statusWear   = [];
 	
 	// Body representation
@@ -199,6 +200,8 @@ Entity.prototype.Equip = function() {
 	this.elementAtk = new DamageType();
 	if(!this.weaponSlot) this.elementAtk.dmg[Element.pBlunt] = 1;
 	this.elementDef = new DamageType();
+	
+	this.statusDefGear = [];
 	
 	if(this.weaponSlot   && this.weaponSlot.Equip)   this.weaponSlot.Equip(this);
 	if(this.topArmorSlot && this.topArmorSlot.Equip) this.topArmorSlot.Equip(this);

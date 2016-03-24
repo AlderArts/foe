@@ -9,6 +9,10 @@ Version 0.4t
 ------------
 * Another fuckton of typos and tweaks in old content
 * Fixed parser error in Lizard tail fuck scene
+* The status effects system has gone over a bit of a revamp.
+ - Status effect spells such as Venom now work on a "wear-em-down" principle. Bosses will still be more resistant, but throwing the same spell a few times will consistently hit. Each time you miss, the enemy becomes more vulnerable to being hit with that status.
+ - Status effects have been split up into four different categories: physical (red outline), magical (blue outline), lust (pink outline) and other (green outline).
+ - Items can now provide status effect resistance. Green scented candle gives you poison resistance.
 
 --------------------------------------------
              PREVIOUS VERSIONS

@@ -61,9 +61,11 @@ function Item(id, name, type) {
 	 *
 	 *   atkMod
 	 *   defMod
+	 *   statusDef
 	 * }
 	 */
 	this.effect = {};
+	this.effect.statusDef = [];
 
 	if(!id) {
 		console.log("Item '" + name + "' has no id.");
@@ -127,6 +129,20 @@ Item.prototype.Equip = function(target) {
 		mNature  : this.effect.dmNature,
 		lust     : this.effect.dlust
 	}));
+	
+	if(this.effect.statusDef.length > 0) {
+		for(var i = 0; i < StatusEffect.LAST; i++) {
+			var inc = this.effect.statusDef[i];
+			if(inc) {
+				if(target.statusDefGear[i]) {
+					target.statusDefGear[i] += inc;
+				}
+				else {
+					target.statusDefGear[i] = inc;
+				}
+			}
+		}
+	}
 }
 
 Item.prototype.ShowEquipStats = function() {
@@ -175,6 +191,12 @@ Item.prototype.ShowEquipStats = function() {
 	if(this.effect.spirit)       Text.AddDiv("Spi: " + this.effect.spirit,       null, "itemName");
 	if(this.effect.libido)       Text.AddDiv("Lib: " + this.effect.libido,       null, "itemName");
 	if(this.effect.charisma)     Text.AddDiv("Cha: " + this.effect.charisma,     null, "itemName");
+	
+	for(var i = 0; i < StatusEffect.LAST; i++) {
+		if(this.effect.statusDef[i]) {
+			Text.AddDiv(Status.Keys[i] + ".Def: " + this.effect.statusDef[i], null, "itemName");
+		}
+	}
 }
 
 Item.prototype.sDesc = function() { return this.name; }
