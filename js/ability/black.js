@@ -191,7 +191,7 @@ Abilities.Black.Shimmer.castTree.push(AbilityNode.Template.Magical({
 
 
 Abilities.Black.Shade = new Ability("Shade");
-Abilities.Black.Shade.Short = function() { return "Dark, constricting magic, single target."; }
+Abilities.Black.Shade.Short = function() { return "Dark shadow magic, single target."; }
 Abilities.Black.Shade.cost = { hp: null, sp: 15, lp: null};
 Abilities.Black.Shade.castTime = 85;
 Abilities.Black.Shade.castTree.push(AbilityNode.Template.Magical({
@@ -206,15 +206,16 @@ Abilities.Black.Shade.castTree.push(AbilityNode.Template.Magical({
 	onAbsorb: [Abilities.Black._onAbsorb],
 	onHit: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
-		if(Status.Slow(target, { hit : 0.6, factor : 2, turns : 3, turnsR : 3 })) {
-			Text.Add("[tName] get[tnotS] tangled by the tendrils, slowing [thimher]!", parse);
+		if(Status.Weakness(target, { hit : 0.2, turns : 2, turnsR : 2, str: 0.15 })) {
+			Text.NL();
+			Text.Add("[tName] [thas] been weakened!", parse);
 		}
 	}]
 }));
 
 
 Abilities.Black.Thorn = new Ability("Thorn");
-Abilities.Black.Thorn.Short = function() { return "Nature magic, single target."; }
+Abilities.Black.Thorn.Short = function() { return "Constricting nature magic, single target."; }
 Abilities.Black.Thorn.cost = { hp: null, sp: 15, lp: null};
 Abilities.Black.Thorn.castTime = 75;
 Abilities.Black.Thorn.castTree.push(AbilityNode.Template.Magical({
@@ -227,7 +228,13 @@ Abilities.Black.Thorn.castTree.push(AbilityNode.Template.Magical({
 	}],
 	onMiss: [Abilities.Black._onMiss],
 	onDamage: [Abilities.Black._onDamage],
-	onAbsorb: [Abilities.Black._onAbsorb]
+	onAbsorb: [Abilities.Black._onAbsorb],
+	onHit: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		if(Status.Slow(target, { hit : 0.6, factor : 2, turns : 3, turnsR : 3 })) {
+			Text.Add("[tName] get[tnotS] tangled by the vines, slowing [thimher]!", parse);
+		}
+	}]
 }));
 
 
