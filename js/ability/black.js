@@ -601,3 +601,24 @@ Abilities.Black.Lifetap.castTree.push(function(ability, encounter, caster, targe
 	Text.Add("[Name] focus[notEs] inwards, drawing upon [hisher] own life force to power [hisher] abilities! [Name] gain[notS] " + Text.BoldColor(hp, "#000080") + " SP!", parse);
 	Text.NL();
 });
+
+
+Abilities.Black.EntropicFortune = new Ability("E.Fortune");
+Abilities.Black.EntropicFortune.Short = function() { return "Curse a target with bad luck, causing debuffs to land more easily."; }
+Abilities.Black.EntropicFortune.cost = { hp: null, sp: 35, lp: null};
+Abilities.Black.EntropicFortune.cooldown = 2;
+Abilities.Black.EntropicFortune.castTree.push(AbilityNode.Template.Magical({
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("Gathering thoughts of malice and ill-will, [name] begin[notS] to weave a hex directed at [tname]!", parse);
+		Text.NL();
+	}],
+	onMiss: [Abilities.Black._onMiss],
+	onHit: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		if(Status.Curse(target, { hit : 1.0, str : 0.5, turns : 15, turnsR : 5 })) {
+			Text.Add("[tName] [tis] gripped by the curse, rendering [thimher] far more susceptible to misfortune!", parse);
+		}
+	}],
+	toDamage: null
+}));

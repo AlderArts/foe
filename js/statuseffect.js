@@ -31,8 +31,9 @@ StatusEffect = {
 	Full     : 23, //OK
 	Weakness : 24, //OK
 	Buff     : 25, //OK
+	Curse    : 26, 
 
-	LAST     : 26
+	LAST     : 27
 };
 
 Status.Keys = Object.keys(StatusEffect);
@@ -63,6 +64,7 @@ LoadStatusImages = function(imageArray) {
 	Images.status[StatusEffect.Confuse]  = "assets/img/status/confuse.png";
 	Images.status[StatusEffect.Weakness] = "assets/img/status/weakness.png";
 	Images.status[StatusEffect.Buff]     = "assets/img/status/buff.png";
+	Images.status[StatusEffect.Curse]    = "assets/img/status/curse.png";
 	
 	for(var i = 0; i < StatusEffect.LAST; i++) {
 		if(Images.status[i] == "") continue;
@@ -185,6 +187,7 @@ StatusList.prototype.EndOfCombat = function() {
 	this.stats[StatusEffect.Confuse] = null;
 	this.stats[StatusEffect.Weakness] = null;
 	//this.stats[StatusEffect.Buff]    = null;
+	this.stats[StatusEffect.Curse]   = null;
 }
 
 Status.Venom = function(target, opts) {
@@ -939,3 +942,37 @@ Status.Buff.FromStorage = function(storage) {
 
 	return obj;
 }
+
+
+Status.Curse = function(target, opts) {
+	if(!target) return;
+	opts = opts || {};
+
+	// Check for curse resist
+	var odds = (opts.hit || 1) * (1 - target.Resistance(StatusEffect.Curse));
+	if(Math.random() > odds) {
+		target.AddResistanceWear(StatusEffect.Curse, opts.hit);
+		return false;
+	}
+	target.statusWear[StatusEffect.Curse] = 0;
+	// Number of turns effect lasts (static + random factor)
+	var turns = opts.turns || 0;
+	turns += Math.random() * (opts.turnsR || 0);
+	// Apply effect
+	target.combatStatus.stats[StatusEffect.Curse] = {
+		turns   : turns,
+		str     : opts.str || 1,
+		Tick    : Status.Curse.Tick
+	};
+
+	return true;
+}
+Status.Curse.Tick = function(target) {
+	this.turns--;
+	// Remove curse effect
+	if(this.turns <= 0) {
+		target.combatStatus.stats[StatusEffect.Curse] = null;
+	}
+}
+
+

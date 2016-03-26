@@ -656,11 +656,16 @@ Entity.prototype.LEvade = function(attack) {
 
 
 Entity.prototype.Resistance = function(type) {
-	var res = this.statusDef[type] || 0;
-	var gear = this.statusDefGear[type] || 0;
-	var wear = this.statusWear[type] || 0;
+	var res   = this.statusDef[type]     || 0;
+	var gear  = this.statusDefGear[type] || 0;
+	var wear  = this.statusWear[type]    || 0;
+	var curse = this.combatStatus.stats[StatusEffect.Curse];
+	var total = res + gear - wear;
+	if(curse) {
+		total -= curse.str;
+	}
 	//TODO other factors
-	return res + gear - wear;
+	return total;
 }
 
 Entity.prototype.AddResistanceWear = function(type, wear) {

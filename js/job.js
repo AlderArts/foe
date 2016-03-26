@@ -473,7 +473,10 @@ Jobs["Warlock"].Long = function(entity) {
 }
 Jobs["Warlock"].preqs.push({job : Jobs["Mage"], lvl : 3});
 //TODO
-Jobs["Warlock"].abilities.AddAbility(Abilities.White.Heal);
+Jobs["Warlock"].abilities.AddAbility(Abilities.Black.Shade);
+Jobs["Warlock"].abilities.AddAbility(Abilities.Black.Lifetap);
+Jobs["Warlock"].abilities.AddAbility(Abilities.Black.DrainingTouch);
+Jobs["Warlock"].abilities.AddAbility(Abilities.Black.EntropicFortune); //TODO MASTERED
 Jobs["Warlock"].levels.push(new JobLevel(40,   null, {"str" : 0.2}));
 Jobs["Warlock"].levels.push(new JobLevel(80,   null, {"str" : 0.2}));
 //TODO
