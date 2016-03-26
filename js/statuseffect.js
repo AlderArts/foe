@@ -215,6 +215,7 @@ Status.Venom = function(target, opts) {
 
 	return true;
 }
+//TODO fix formula
 Status.Venom.Tick = function(target) {
 	var damageType = new DamageType({mNature : this.str});
 	var atkRand = 0.2 * (Math.random() - 0.5) + 1;
@@ -257,6 +258,7 @@ Status.Burn = function(target, opts) {
 
 	return true;
 }
+//TODO fix formula
 Status.Burn.Tick = function(target) {
 	var damageType = new DamageType({mFire : this.str});
 	var atkRand = 0.2 * (Math.random() - 0.5) + 1;
@@ -471,6 +473,7 @@ Status.Bleed = function(target, opts) {
 
 	return true;
 }
+//TODO fix formula
 Status.Bleed.Tick = function(target) {
 	var atkRand = 0.2 * (Math.random() - 0.5) + 1;
 	var dmg = this.dmg * atkRand * target.HP();
@@ -573,6 +576,7 @@ Status.Horny = function(target, opts) {
 
 	return true;
 }
+//TODO fix formula?
 Status.Horny.Tick = function(target) {
 	var damageType = new DamageType({lust : this.str});
 	var atkRand = 0.2 * (Math.random() - 0.5) + 1;
