@@ -11,7 +11,8 @@ TargetMode = {
 	Party       : 4,
 	Enemies     : 5,
 	AllyNotSelf : 6,
-	AllyFallen  : 7
+	AllyFallen  : 7,
+	All         : 8
 }
 
 TargetMode.ToString = function(mode) {
@@ -23,6 +24,7 @@ TargetMode.ToString = function(mode) {
 		case TargetMode.Enemies:     return "enemies";
 		case TargetMode.AllyNotSelf: return "ally";
 		case TargetMode.AllyFallen:  return "fallen";
+		case TargetMode.All:         return "all";
 	}
 }
 
@@ -131,6 +133,39 @@ Ability.prototype.OnSelect = function(encounter, caster, backPrompt, ext) {
 	var target = [];
 
 	switch(ability.targetMode) {
+		case TargetMode.All:
+			_.each(party.members, function(t) {
+				// Don't add incapacitated
+				var incap = t.Incapacitated();
+				if(incap) return;
+
+				target.push({
+					nameStr : t.name,
+					func    : function(t) {
+						ability.Use(encounter, caster, t, ext);
+					},
+					enabled : ability.enabledTargetCondition(encounter, caster, t),
+					obj     : t
+				});
+			});
+			_.each(encounter.enemy.members, function(t) {
+				// Don't add incapacitated
+				var incap = t.Incapacitated();
+				if(incap) return;
+
+				target.push({
+					nameStr : t.uniqueName || t.name,
+					func    : function(t) {
+						ability.Use(encounter, caster, t, ext);
+					},
+					enabled : ability.enabledTargetCondition(encounter, caster, t),
+					obj     : t
+				});
+			});
+
+			Gui.SetButtonsFromList(target, true, backPrompt);
+			return true;
+
 		case TargetMode.Self:
 			ability.Use(encounter, caster, null, ext);
 			break;

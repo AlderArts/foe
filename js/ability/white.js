@@ -31,75 +31,6 @@ Abilities.White.FirstAid.castTree.push(AbilityNode.Template.Heal({
 }));
 
 
-Abilities.White.Detox = new Ability("Detox");
-Abilities.White.Detox.Short = function() { return "Heals minor venom, single target."; }
-Abilities.White.Detox.targetMode = TargetMode.Ally;
-Abilities.White.Detox.cost = { hp: null, sp: 10, lp: null};
-Abilities.White.Detox.castTree.push(function(ability, encounter, caster, target) {
-	var parse = AbilityNode.DefaultParser(caster, target);
-	
-	var venom = target.combatStatus.stats[StatusEffect.Venom];
-	if(venom) {
-		Text.Add("[Name] prepare[notS] a purifying spell, purging the venom from [tposs] body.", parse);
-		venom.str -= 1;
-		if(venom.str <= 0) {
-			Text.NL();
-			Text.Add("[tPoss] venom has been completely purged!", parse);
-			target.combatStatus.stats[StatusEffect.Venom] = null;
-		}
-	}
-	else {
-		Text.Add("[Poss] purifying spell has no effect on [tname].", parse);
-	}
-});
-
-
-Abilities.White.Cool = new Ability("Cool");
-Abilities.White.Cool.Short = function() { return "Heals minor burn, single target."; }
-Abilities.White.Cool.targetMode = TargetMode.Ally;
-Abilities.White.Cool.cost = { hp: null, sp: 10, lp: null};
-Abilities.White.Cool.castTree.push(function(ability, encounter, caster, target) {
-	var parse = AbilityNode.DefaultParser(caster, target);
-	
-	var burn = target.combatStatus.stats[StatusEffect.Burn];
-	if(burn) {
-		Text.Add("[Name] prepare[notS] a soothing spell, easing the burning sensation from [tposs] body.", parse);
-		burn.str -= 1;
-		if(burn.str <= 0) {
-			Text.NL();
-			Text.Add("[tPoss] burn has been completely cooled!", parse);
-			target.combatStatus.stats[StatusEffect.Burn] = null;
-		}
-	}
-	else {
-		Text.Add("[Poss] cooling spell has no effect on [tname].", parse);
-	}
-});
-
-
-Abilities.White.Warm = new Ability("Warm");
-Abilities.White.Warm.Short = function() { return "Heals minor freeze, single target."; }
-Abilities.White.Warm.targetMode = TargetMode.Ally;
-Abilities.White.Warm.cost = { hp: null, sp: 10, lp: null};
-Abilities.White.Warm.castTree.push(function(ability, encounter, caster, target) {
-	var parse = AbilityNode.DefaultParser(caster, target);
-	
-	var freeze = target.combatStatus.stats[StatusEffect.Freeze];
-	if(freeze) {
-		Text.Add("[Name] prepare[notS] a warming spell, heating up [tposs] frozen body.", parse);
-		freeze.str -= 1;
-		if(freeze.str <= 0) {
-			Text.NL();
-			Text.Add("[tPoss] freeze has been completely removed!", parse);
-			target.combatStatus.stats[StatusEffect.Freeze] = null;
-		}
-	}
-	else {
-		Text.Add("[Poss] warming spell has no effect on [tname].", parse);
-	}
-});
-
-
 Abilities.White.Heal = new Ability("Heal");
 Abilities.White.Heal.Short = function() { return "Heals some damage, single target."; }
 Abilities.White.Heal.targetMode = TargetMode.Ally;
@@ -312,3 +243,134 @@ Abilities.White.Sermon.castTree.push(AbilityNode.Template.Magical({
 	onAbsorb: [Abilities.White.Preach._onMiss],
 	onMiss: [Abilities.White.Preach._onMiss]
 }));
+
+
+Abilities.White.Cleanse = new Ability();
+Abilities.White.Cleanse.name = "Cleanse";
+Abilities.White.Cleanse.Short = function() { return "Remove a negative physical status effect from an ally or a positive physical status effect from an enemy."; }
+Abilities.White.Cleanse.targetMode = TargetMode.All;
+Abilities.White.Cleanse.cost = { hp: null, sp: 20, lp: null};
+Abilities.White.Cleanse.cooldown = 2;
+Abilities.White.Cleanse.casttime = 25;
+Abilities.White.Cleanse.CastInternal = function(encounter, caster, target) {
+	var parse = AbilityNode.DefaultParser(caster, target);
+	
+	var ally = true;
+	
+	var casterentry = caster.GetCombatEntry(encounter);
+	var targetentry = target.GetCombatEntry(encounter);
+	if(casterentry && targetentry) {
+		ally = (casterentry.isEnemy == targetentry.isEnemy);
+	}
+	var confuse = caster.combatStatus.stats[StatusEffect.Confuse];
+	if(confuse)
+		ally = !ally;
+	
+	Text.Add("[Name] prepare[notS] a wave of cleansing magic. ", parse);
+	//TODO
+	if(ally) {
+		Text.Add("[tName] [tis] healed of any physically debilitating effects!", parse);
+		target.combatStatus.stats[StatusEffect.Burn]   = null;
+		target.combatStatus.stats[StatusEffect.Freeze] = null;
+		target.combatStatus.stats[StatusEffect.Numb]   = null;
+		target.combatStatus.stats[StatusEffect.Venom]  = null;
+		target.combatStatus.stats[StatusEffect.Blind]  = null;
+		target.combatStatus.stats[StatusEffect.Sleep]  = null;
+		target.combatStatus.stats[StatusEffect.Bleed]  = null;
+	}
+	else {
+		Text.Add("[tName] [tis] stripped of any physically strengthening effects!", parse);
+	}
+	Text.Flush();
+	
+	Gui.NextPrompt(function() {
+		encounter.CombatTick();
+	});
+}
+
+
+Abilities.White.Dispel = new Ability();
+Abilities.White.Dispel.name = "Dispel";
+Abilities.White.Dispel.Short = function() { return "Remove a negative magical status effect from an ally or a positive magical status effect from an enemy."; }
+Abilities.White.Dispel.targetMode = TargetMode.All;
+Abilities.White.Dispel.cost = { hp: null, sp: 20, lp: null};
+Abilities.White.Dispel.cooldown = 2;
+Abilities.White.Dispel.casttime = 25;
+Abilities.White.Dispel.CastInternal = function(encounter, caster, target) {
+	var parse = AbilityNode.DefaultParser(caster, target);
+	
+	var ally = true;
+	
+	var casterentry = caster.GetCombatEntry(encounter);
+	var targetentry = target.GetCombatEntry(encounter);
+	if(casterentry && targetentry) {
+		ally = (casterentry.isEnemy == targetentry.isEnemy);
+	}
+	var confuse = caster.combatStatus.stats[StatusEffect.Confuse];
+	if(confuse)
+		ally = !ally;
+	
+	Text.Add("[Name] start[notS] casting a counter magic spell. ", parse);
+	//TODO
+	if(ally) {
+		Text.Add("[tName] [tis] healed of any magical debilitating effects!", parse);
+		target.combatStatus.stats[StatusEffect.Curse]    = null;
+		target.combatStatus.stats[StatusEffect.Slow]     = null;
+		target.combatStatus.stats[StatusEffect.Siphon]   = null;
+		target.combatStatus.stats[StatusEffect.Weakness] = null;
+		target.combatStatus.stats[StatusEffect.Petrify]  = null;
+		target.combatStatus.stats[StatusEffect.Seal]     = null;
+	}
+	else {
+		Text.Add("[tName] [tis] stripped of any magical bolstering effects!", parse);
+		target.combatStatus.stats[StatusEffect.Decoy] = null;
+		target.combatStatus.stats[StatusEffect.Haste] = null;
+		target.combatStatus.stats[StatusEffect.Regen] = null;
+		target.combatStatus.stats[StatusEffect.Boon]  = null;
+	}
+	Text.Flush();
+	
+	Gui.NextPrompt(function() {
+		encounter.CombatTick();
+	});
+}
+
+
+Abilities.White.Purify = new Ability();
+Abilities.White.Purify.name = "Purify";
+Abilities.White.Purify.Short = function() { return "Remove a negative lust-based status effect from an ally or a positive lust-based status effect from an enemy."; }
+Abilities.White.Purify.targetMode = TargetMode.All;
+Abilities.White.Purify.cost = { hp: null, sp: 20, lp: null};
+Abilities.White.Purify.cooldown = 2;
+Abilities.White.Purify.casttime = 25;
+Abilities.White.Purify.CastInternal = function(encounter, caster, target) {
+	var parse = AbilityNode.DefaultParser(caster, target);
+	
+	var ally = true;
+	
+	var casterentry = caster.GetCombatEntry(encounter);
+	var targetentry = target.GetCombatEntry(encounter);
+	if(casterentry && targetentry) {
+		ally = (casterentry.isEnemy == targetentry.isEnemy);
+	}
+	var confuse = caster.combatStatus.stats[StatusEffect.Confuse];
+	if(confuse)
+		ally = !ally;
+	
+	Text.Add("[Name] cast[notS] a purifying spell. ", parse);
+	//TODO
+	if(ally) {
+		Text.Add("[tName] [tis] healed of any lust-based debilitating effects!", parse);
+		target.combatStatus.stats[StatusEffect.Horny]   = null;
+		target.combatStatus.stats[StatusEffect.Limp]    = null;
+		target.combatStatus.stats[StatusEffect.Confuse] = null;
+	}
+	else {
+		Text.Add("[tName] [tis] stripped of any lust-based enhancing effects!", parse);
+	}
+	Text.Flush();
+	
+	Gui.NextPrompt(function() {
+		encounter.CombatTick();
+	});
+}
