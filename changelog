@@ -14,6 +14,7 @@ Version 0.4t
  - Status effects have been split up into four different categories: physical (red outline), magical (blue outline), lust (pink outline) and other (green outline).
  - Items can now provide status effect resistance. Green scented candle gives you poison resistance.
  - There are now a total of three status healing spells, all learned from level 2 magic jobs (Healer, Mystic, Mage).
+ - Some status effects are going to be a bit overpowered for a while, until a more complete combat revamp can be enacted.
 * Warlock job added. Learn from Jeanne.
 
 --------------------------------------------
