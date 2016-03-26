@@ -29,7 +29,8 @@ function Layla(storage) {
 	this.jobs["Healer"]    = new JobDesc(Jobs.Healer); this.jobs["Healer"].mult = 1.2;
 	
 	this.jobs["Elementalist"] = new JobDesc(Jobs.Elementalist); this.jobs["Elementalist"].mult = 1.2;
-	this.jobs["Hypnotist"] = new JobDesc(Jobs.Hypnotist); this.jobs["Hypnotist"].mult = 1.2;
+	this.jobs["Warlock"]      = new JobDesc(Jobs.Warlock);      this.jobs["Warlock"].mult = 1.2;
+	this.jobs["Hypnotist"]    = new JobDesc(Jobs.Hypnotist);    this.jobs["Hypnotist"].mult = 1.2;
 	
 	this.maxHp.base        = 100;
 	this.maxSp.base        = 60;

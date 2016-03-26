@@ -466,25 +466,22 @@ Jobs["Elementalist"].Unlocked = function(entity) {
 
 
 Jobs["Warlock"] = new Job("Warlock");
-//TODO
 Jobs["Warlock"].Long = function(entity) {
 	var parse = {hisher: entity.hisher(), HisHer: entity.HisHer(), name: entity.nameDesc()};
-	return Text.Parse("", parse);
+	return Text.Parse("The warlock utilizes the power of darkness to weaken and drain [hisher] enemies. The warlock's curse makes [hisher] foes more susceptible to debilitating effects.", parse);
 }
 Jobs["Warlock"].preqs.push({job : Jobs["Mage"], lvl : 3});
-//TODO
 Jobs["Warlock"].abilities.AddAbility(Abilities.Black.Shade);
 Jobs["Warlock"].abilities.AddAbility(Abilities.Black.Lifetap);
 Jobs["Warlock"].abilities.AddAbility(Abilities.Black.DrainingTouch);
-Jobs["Warlock"].abilities.AddAbility(Abilities.Black.EntropicFortune); //TODO MASTERED
-Jobs["Warlock"].levels.push(new JobLevel(40,   null, {"str" : 0.2}));
-Jobs["Warlock"].levels.push(new JobLevel(80,   null, {"str" : 0.2}));
-//TODO
-Jobs["Warlock"].levels.push(new JobLevel(160,  [{ab: Abilities.White.Heal, set: "Spells"}], {"int" : 0.1, "dex" : 0.1}));
-Jobs["Warlock"].levels.push(new JobLevel(320,  null, {"str" : 0.2}));
-Jobs["Warlock"].levels.push(new JobLevel(640,  null, {"str" : 0.2}));
-Jobs["Warlock"].levels.push(new JobLevel(1280, null, {"str" : 0.2}));
-Jobs["Warlock"].levels.push(new JobLevel(2560, null, {"str" : 0.2}));
+Jobs["Warlock"].abilities.AddAbility(Abilities.Black.EntropicFortune);
+Jobs["Warlock"].levels.push(new JobLevel(40,   [{ab: Abilities.Black.Shade, set: "Spells"}], {"sta" : 0.2, "spi" : 0.2}));
+Jobs["Warlock"].levels.push(new JobLevel(80,   null, {"int" : 0.3, "lib" : 0.1}));
+Jobs["Warlock"].levels.push(new JobLevel(160,  [{ab: Abilities.Black.Lifetap, set: "Spells"}], {"sta" : 0.2, "int" : 0.2}));
+Jobs["Warlock"].levels.push(new JobLevel(320,  null, {"lib" : 0.2, "sta" : 0.2}));
+Jobs["Warlock"].levels.push(new JobLevel(640,  [{ab: Abilities.Black.DrainingTouch, set: "Spells"}], {"int" : 0.3, "str" : 0.1}));
+Jobs["Warlock"].levels.push(new JobLevel(1280, null, {"spi" : 0.3, "sta" : 0.1}));
+Jobs["Warlock"].levels.push(new JobLevel(2560, [{ab: Abilities.Black.EntropicFortune, set: "Spells"}, {ab: Abilities.Black.TaintedVitality, set: "Spells"}], {"int" : 0.3, "sta" : 0.3, "spi" : 0.1, "sp" : 5}));
 Jobs["Warlock"].Unlocked = function(entity) {
 	return Scenes.Global.MagicStage2();
 }

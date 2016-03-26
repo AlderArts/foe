@@ -845,7 +845,7 @@ Status.Weakness = function(target, opts) {
 	if(!target) return;
 	opts = opts || {};
 
-	// Check for horny resist
+	// Check for weakness resist
 	var odds = (opts.hit || 1) * (1 - target.Resistance(StatusEffect.Weakness));
 	if(Math.random() > odds) {
 		target.AddResistanceWear(StatusEffect.Weakness, opts.hit);
@@ -866,7 +866,7 @@ Status.Weakness = function(target, opts) {
 }
 Status.Weakness.Tick = function(target) {
 	this.turns--;
-	// Remove counter effect
+	// Remove weakness effect
 	if(this.turns <= 0) {
 		target.combatStatus.stats[StatusEffect.Weakness] = null;
 	}
@@ -878,7 +878,7 @@ Status.Buff = function(target, opts) {
 	opts = opts || {};
 
 	var hours = opts.hours || 0;
-	// Apply weakness
+	// Apply buff
 	target.combatStatus.stats[StatusEffect.Buff] = {
 		hours     : hours,
 

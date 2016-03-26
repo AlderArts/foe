@@ -24,6 +24,7 @@ function Player(storage) {
 	this.jobs["Healer"]    = new JobDesc(Jobs.Healer);
 	
 	this.jobs["Elementalist"] = new JobDesc(Jobs.Elementalist);
+	this.jobs["Warlock"]      = new JobDesc(Jobs.Warlock);
 	this.jobs["Hypnotist"]    = new JobDesc(Jobs.Hypnotist);
 	
 	this.maxHp.base        = 100;

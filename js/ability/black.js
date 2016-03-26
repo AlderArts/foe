@@ -629,3 +629,42 @@ Abilities.Black.EntropicFortune.castTree.push(AbilityNode.Template.Magical({
 	}],
 	toDamage: null
 }));
+
+
+Abilities.Black.TaintedVitality = new Ability("T.Vitality");
+Abilities.Black.TaintedVitality.Short = function() { return "Twist a foe’s vitality, reducing their defense and inflicting a strong poison."; }
+Abilities.Black.TaintedVitality.cost = { hp: null, sp: 35, lp: null};
+Abilities.Black.TaintedVitality.cooldown = 3;
+Abilities.Black.TaintedVitality.castTree.push(AbilityNode.Template.Magical({
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("Focusing dark power, [name] direct[notS] a stream of twisted, malicious energy at [tname]!", parse);
+		Text.NL();
+	}],
+	onMiss: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[tName] shrug[tnotS] off the malicious influence.", parse);
+	}],
+	onHit: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		var sick, weak;
+		if(Status.Venom(target, { hit : 0.6, turns : 1, str : 1, dmg : 0.35 })) {
+			sick = true;
+		}
+		if(Status.Weakness(target, { hit : 0.75, turns : 3, turnsR : 3, str: 0.2 })) {
+			weak = true;
+		}
+		if(sick || weak) {
+			var w = "";
+			if(sick) w += "sicker";
+			if(sick && weak) w += " and ";
+			if(weak) w += "weaker";
+			parse["w"] = w;
+			Text.Add("[tName] [tis] struck by the energy and looks distinctly <b>[w]</b>!", parse);
+		}
+		else {
+			Text.Add("[tName] shrug[tnotS] off the malicious influence.", parse);
+		}
+	}],
+	toDamage: null
+}));

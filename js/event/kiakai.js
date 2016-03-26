@@ -25,6 +25,7 @@ function Kiakai(storage) {
 	this.jobs["Healer"]    = new JobDesc(Jobs.Healer);
 	
 	this.jobs["Elementalist"] = new JobDesc(Jobs.Elementalist);
+	//Kiai can't be Warlock
 	this.jobs["Hypnotist"] = new JobDesc(Jobs.Hypnotist);
 	
 	this.weaponSlot   = Items.Weapons.WoodenStaff;

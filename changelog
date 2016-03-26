@@ -13,6 +13,7 @@ Version 0.4t
  - Status effect spells such as Venom now work on a "wear-em-down" principle. Bosses will still be more resistant, but throwing the same spell a few times will consistently hit. Each time you miss, the enemy becomes more vulnerable to being hit with that status.
  - Status effects have been split up into four different categories: physical (red outline), magical (blue outline), lust (pink outline) and other (green outline).
  - Items can now provide status effect resistance. Green scented candle gives you poison resistance.
+* Warlock job added. Learn from Jeanne.
 
 --------------------------------------------
              PREVIOUS VERSIONS
