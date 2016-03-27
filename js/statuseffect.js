@@ -218,7 +218,7 @@ Status.Venom = function(target, opts) {
 //TODO fix formula
 Status.Venom.Tick = function(target) {
 	var damageType = new DamageType({mNature : this.str});
-	var atkRand = 0.2 * (Math.random() - 0.5) + 1;
+	var atkRand = 0.05 * (Math.random() - 0.5) + 1;
 	var dmg = this.dmg * atkRand * target.HP();
 	dmg = damageType.ApplyDmgType(target.elementDef, dmg);
 	dmg = Math.floor(dmg);
@@ -261,7 +261,7 @@ Status.Burn = function(target, opts) {
 //TODO fix formula
 Status.Burn.Tick = function(target) {
 	var damageType = new DamageType({mFire : this.str});
-	var atkRand = 0.2 * (Math.random() - 0.5) + 1;
+	var atkRand = 0.05 * (Math.random() - 0.5) + 1;
 	var dmg = this.dmg * atkRand * target.HP();
 	dmg = damageType.ApplyDmgType(target.elementDef, dmg);
 	dmg = Math.floor(dmg);
@@ -269,7 +269,7 @@ Status.Burn.Tick = function(target) {
 	target.AddHPAbs(-dmg);
 
 	this.turns--;
-	// Remove venom effect
+	// Remove burn effect
 	if(this.turns <= 0 || target.curHp <= 0) {
 		target.combatStatus.stats[StatusEffect.Burn] = null;
 	}
@@ -475,7 +475,7 @@ Status.Bleed = function(target, opts) {
 }
 //TODO fix formula
 Status.Bleed.Tick = function(target) {
-	var atkRand = 0.2 * (Math.random() - 0.5) + 1;
+	var atkRand = 0.05 * (Math.random() - 0.5) + 1;
 	var dmg = this.dmg * atkRand * target.HP();
 	dmg = Math.floor(dmg);
 
@@ -579,7 +579,7 @@ Status.Horny = function(target, opts) {
 //TODO fix formula?
 Status.Horny.Tick = function(target) {
 	var damageType = new DamageType({lust : this.str});
-	var atkRand = 0.2 * (Math.random() - 0.5) + 1;
+	var atkRand = 0.05 * (Math.random() - 0.5) + 1;
 	var dmg = this.dmg * atkRand * target.Lust();
 	dmg = damageType.ApplyDmgType(target.elementDef, dmg);
 	dmg = Math.floor(dmg);
