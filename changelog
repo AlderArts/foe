@@ -16,6 +16,7 @@ Version 0.4t
  - There are now a total of three status healing spells, all learned from level 2 magic jobs (Healer, Mystic, Mage).
  - Some status effects are going to be a bit overpowered for a while, until a more complete combat revamp can be enacted.
 * Warlock job added. Learn from Jeanne.
+* Swift should no longer be listed twice in the list of abilities if you have mastered it from both Rogue and Ranger.
 
 --------------------------------------------
              PREVIOUS VERSIONS
