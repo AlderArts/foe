@@ -150,6 +150,7 @@ const appJs = [
 	'js/event/sylistraxia.js',
 	'js/event/kiakai.js',
 	'js/event/kiakai-sex.js',
+	'js/event/zina.js',
 	'js/event/brothel/roa.js',
 	'js/event/brothel/ches.js',
 	'js/event/brothel/lucille.js',
