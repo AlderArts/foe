@@ -46,7 +46,6 @@ function Zina(storage) {
 	
 	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Hyena, Color.brown);
 	
-	this.FirstVag().virgin = false;
 	this.Butt().virgin = false;
 	
 	this.SetLevelBonus();
