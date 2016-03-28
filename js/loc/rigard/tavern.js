@@ -772,7 +772,7 @@ Scenes.Barnaby.ChatPrompt = function() {
 	}
 	Gui.SetButtonsFromList(options, true, function() {
 		Text.Clear();
-		Text.Add("On second thoughts, you don’t have any questions.", parse);
+		Text.Add("On second thought, you don’t have any questions.", parse);
 		Text.NL();
 		Text.Add("He rolls his eyes when he hears that, but otherwise shows no reaction.", parse);
 		Text.Flush();
@@ -1160,7 +1160,7 @@ Scenes.Barnaby.BlowjobEntrypoint = function(func) {
 	scenes.Get();
 	
 	Text.NL();
-	Text.Add("With that little...distraction... out of the way, you pick up where you left off. With the stallion’s cock still pouring pre-cum down your throat like a leaky faucet, you bob your head back and forth, working his shaft as best you can with your mouth alone.", parse);
+	Text.Add("With that little... distraction... out of the way, you pick up where you left off. With the stallion’s cock still pouring pre-cum down your throat like a leaky faucet, you bob your head back and forth, working his shaft as best you can with your mouth alone.", parse);
 	Text.NL();
 	Text.Add("You don’t dare to touch his balls. Not just because he hasn’t said you can, but because you don’t want to risk him blowing up in your face, given just how pent-up he seems to be.", parse);
 	Text.NL();
