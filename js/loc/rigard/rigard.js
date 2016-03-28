@@ -129,6 +129,8 @@ function Rigard(storage) {
 	this.cwrel = new Stat(0);
 
 	this.alianaRel = new Stat(0);
+	
+	this.flags["Barnaby"] = 0;
 
 	if(storage) this.FromStorage(storage);
 }
@@ -147,6 +149,11 @@ Rigard.KrawitzQ = {
 	HeistDone    : 2,
 	HuntingTerry : 3,
 	CaughtTerry  : 4
+};
+Rigard.Barnaby = { //Bitmask
+	Met     : 1,
+	Blowjob : 2,
+	PassedOut : 4
 };
 
 Rigard.prototype.ToStorage = function() {
@@ -233,7 +240,14 @@ Rigard.prototype.GatesOpen = function() {
 }
 
 Rigard.prototype.UnderLockdown = function() {
-	return rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry;
+	return this.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry;
+}
+
+Rigard.prototype.MetBarnaby = function() {
+	return this.flags["Barnaby"] & Rigard.Barnaby.Met;
+}
+Rigard.prototype.BlownBarnaby = function() {
+	return this.flags["Barnaby"] & Rigard.Barnaby.Blowjob;
 }
 
 Scenes.Rigard.CityHistory = function() {

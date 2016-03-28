@@ -58,6 +58,12 @@ function Zina(storage) {
 Zina.prototype = new Entity();
 Zina.prototype.constructor = Zina;
 
+Zina.Met = { //Bitmask
+	Met  : 1,
+	BJ   : 2,
+	Cunn : 4
+};
+
 //TODO save/load combat stats/preg/etc
 Zina.prototype.FromStorage = function(storage) {
 	this.LoadPersonalityStats(storage);
@@ -77,6 +83,13 @@ Zina.prototype.ToStorage = function() {
 }
 
 // Flags
+Zina.prototype.Met = function() {
+	return this.flags["Met"] & Zina.Met.Met;
+}
+
+Zina.prototype.Recruited = function() {
+	return false; //TODO
+}
 
 // Schedule
 Zina.prototype.IsAtLocation = function(location) {

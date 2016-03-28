@@ -151,6 +151,7 @@ Entity.prototype.ParserTags = function(parse, prefix, p1cock) {
 	parse[prefix + "belly"]     = function() { return ent.StomachDesc(); }
 	parse[prefix + "tail"]      = function() { var tail = ent.HasTail(); return tail ? tail.Short() : ""; }
 	parse[prefix + "wings"]     = function() { var wings = ent.HasWings(); return wings ? wings.Short() : ""; }
+	parse[prefix + "horns"]     = function() { var horns = ent.HasHorns(); return horns ? horns.Short() : ""; }
 	
 	parse[prefix + "weapon"]    = function() { return ent.WeaponDesc(); }
 	parse[prefix + "armor"]     = function() { return ent.ArmorDesc(); }
