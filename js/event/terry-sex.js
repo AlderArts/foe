@@ -98,7 +98,7 @@ Scenes.Terry.SexPrompt = function(backPrompt) {
 				Text.Add("<i>“But it’s embarrassing!”</i> [heshe] protests. ", parse);
 				if(terry.Gender() == Gender.male)
 					Text.Add("<i>“I’m a boy dammit! But I have that girly tramp stamp permanently tattooed on my butt!”</i> [heshe] exclaims. ", parse);
-				Text.Add("<i>“Can you imagine what’s like growing up on the streets? With that thing on my butt? I was bullied left and right because of it!”</i>", parse);
+				Text.Add("<i>“Can you imagine what it was like growing up on the streets? With that thing on my butt? I was bullied left and right because of it!”</i>", parse);
 				Text.NL();
 				Text.Add("Moving closer, you gently draw the [foxvixen] into your arms, folding them around [himher] in a soft, comforting embrace. Leaning closer to [hisher] vulpine ear, you tell [himher] that [heshe] has nothing to be ashamed of. [HeShe] is beautiful, and this - your hand moves to cover the vulpine morph’s birthmark, tenderly stroking the gold-on-white fur - this is just part of [hisher] beauty. They were idiots, teasing [himher] for what they didn’t understand. In fact, they were probably just jealous...", parse);
 				Text.NL();
@@ -798,13 +798,13 @@ Scenes.Terry.SexGetOralCockCont = function(parse, p1cock) {
 			
 			var cum = player.OrgasmCum();
 			
-			if(cum > 3) {
+			if(cum < 3) {
 				if(player.NumCocks() > 1)
 					Text.Add("Your [cocks] work in unison, launching a volley of semen shots on the helpless [foxvixen]. Thick globs of cream spatter across [hisher] defenseless form; they cake [hisher] hair and smear on [hisher] lips. The lewd gobbets burst on [hisher] [tbreasts] and [tbelly], even going so far as to splash against [hisher] own loins.", parse);
 				else
 					Text.Add("Glistening ropes of semen fling themselves about Terry’s face with merry abandon, veiling [himher] in a perverse web of sparkling strands. It streaks over [hisher] hair, paints across [hisher] cheeks and spatters upon [hisher] nose, dripping down [hisher] neck.", parse);
 			}
-			else if(cum > 6) {
+			else if(cum < 6) {
 				parse["bothAll"] = player.NumCocks() == 2 ? "both" : "all";
 				if(player.NumCocks() > 1)
 					Text.Add("With [bothAll] your [cocks] firing in unison, Terry gets a true soaking. In [hisher] hair, on [hisher] face, over [hisher] belly, across [hisher] arms... your cream goes absolutely <b>everywhere</b>. By the time that you finally stop, Terry is a cummy white shade from head to tail with little drops of love-goo dripping onto the ground beneath [himher].", parse);
