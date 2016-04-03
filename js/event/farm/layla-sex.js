@@ -2181,7 +2181,7 @@ Scenes.Layla.SexPitchVaginalCont3 = function(opts, p1cock, parse) {
 				if(opts.LCock)
 					Text.Add(" When your enflamed [vag] brushes against the chimera’s still half-erect cock, a flare of temptation flickers inside of you, but you have other plans, and so you continue on.", parse);
 				Text.NL();
-				Text.Add("You don’t stop until you have slithered your way to Layla’s torso, allowing you to thrust your pussy right into her face and give her a single, simple command: <i>”Lick me”</i>.", parse);
+				Text.Add("You don’t stop until you have slithered your way to Layla’s torso, allowing you to thrust your pussy right into her face and give her one simple command: <i>”Lick me”</i>.", parse);
 				Text.NL();
 				Text.Add("Layla responds without hesitation, licking your [vag] from the base to the very tip of your [clit]. You moan with abandon at the touch of her warm, wet, dexterous tongue.", parse);
 				Text.NL();
@@ -2347,7 +2347,7 @@ Scenes.Layla.SexPitchVaginalVariable = function(opts, p1cock, parse) {
 	}
 	if(opts.TailPeg) {
 		Text.NL();
-		Text.Add("The quivering sensation between your clenching buttocks is the only warning you get before Layla’s tail drives itself home in a single, sharp thrust, shooting forward so powerfully that she buries all of her cock and even a few inches of tail-meat inside of you.", parse);
+		Text.Add("The quivering sensation between your clenching buttocks is the only warning you get before Layla’s tail drives itself home in a single sharp thrust, shooting forward so powerfully that she buries all of her cock and even a few inches of tail-meat inside of you.", parse);
 		Text.NL();
 
 		var cum = layla.OrgasmCum();
