@@ -3108,7 +3108,7 @@ Scenes.Miranda.TavernSexPublicBJ = function() {
 				Text.Add("<i>“Oh ho! That sounds like an offer if I’ve heard any. Anyone up for some!?”</i> Miranda yells at the crowd. There’s more than a few guys, and even some females, that show interest.", parse);
 				Text.NL();
 				if(terry.Slut() >= 60)
-					Text.Add("Smirking, Terry licks [hisher] lips. <i>“Sorry boys and girls. I meant what I said, but I’m not allowed to disobey my [mastermistress],”</i> [heshe] points at the collar around [hisher] neck. <i>“As much as I’d love to service you to prove my point to this dirty dog,”</i> [heshe] points at Miranda, who scowls in response. <i>“Can’t do anything unless my boss says so. Sorry to disappoint, but I’m claimed.”</i>", parse);
+					Text.Add("Smirking, Terry licks [hisher] lips. <i>“Sorry, boys and girls. I meant what I said, but I’m not allowed to disobey my [mastermistress],”</i> [heshe] points at the collar around [hisher] neck. <i>“As much as I’d love to service you to prove my point to this dirty dog,”</i> [heshe] points at Miranda, who scowls in response. <i>“Can’t do anything unless my boss says so. Sorry to disappoint, but I’m claimed.”</i>", parse);
 				else
 					Text.Add("<i>“I-I don’t… I...”</i> Terry tries to stammer out a reply, but ultimately falls silent as the approaching crowd surrounds [himher]. You can hear Miranda laughing above, and while you’d love to see Terry get out of this one, right now you have your <i>own</i> problem to deal with.", parse);
 			}
