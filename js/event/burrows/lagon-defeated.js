@@ -327,7 +327,7 @@ Scenes.Lagon.Defeated.PitchAnal = function() {
 	else if(timesFucked < 20) {
 		Text.Add("Lagon scowls up at you, defiantly clenching his asshole as tight as he can. He manages to deny your initial probing, but you won't be stopped by a feeble trick like that.", parse);
 		Text.NL();
-		Text.Add("In a single, powerful thrust, you force yourself through. In anyone else, this might hurt, but Lagon's ass opens to receive you, allowing you to drag him almost completely down your length in one smooth motion.", parse);
+		Text.Add("In a single powerful thrust, you force yourself through. In anyone else, this might hurt, but Lagon's ass opens to receive you, allowing you to drag him almost completely down your length in one smooth motion.", parse);
 		Text.NL();
 		Text.Add("Despite his best efforts, Lagon moans like a slut as you finish burying yourself inside of him. He glares up at you, a mortified blush painting his cheeks red even through his fur, and tries to resist.", parse);
 		Text.NL();
@@ -370,7 +370,7 @@ Scenes.Lagon.Defeated.PitchAnal = function() {
 	Text.NL();
 	Text.Add("With a little effort, you manage to find yourself a nice position - one that's comfortable for you, and which lets you have the room you need to start fucking, but which also allows you to pin Lagon's hips in place. Don't want your little boytoy getting any funny ideas about trying to escape whilst you're busy, after all.", parse);
 	Text.NL();
-	Text.Add("Squeezing Lagon's hips for luck, you slowly pull back, drawing yourself free until only your [cockTip] lingers inside. And then you thrust home, sheathing yourself again in a single, fierce motion.", parse);
+	Text.Add("Squeezing Lagon's hips for luck, you slowly pull back, drawing yourself free until only your [cockTip] lingers inside. And then you thrust home, sheathing yourself again in a single fierce motion.", parse);
 	Text.NL();
 	Text.Add("Your expertly-aimed dick grinds right into Lagon's prostate as it goes, making his cock visibly bulge before it spurts pre into the air to splatter onto his already-sodden chest.", parse);
 	Text.NL();
@@ -943,7 +943,7 @@ Scenes.Lagon.Defeated.ScepterPitchAnal = function() {
 		Text.NL();
 		Text.Add("No sooner has your [cockTip] breached the warm, welcoming ring of Lagon’s anus than his tunnel starts to ripple. Muscles flex and twitch, striving to draw you deeper inside and sate his carnal hunger. Loosening your grip on his hips, you grin and let Lagon do all the work, the bunny’s ravenous boypussy sucking your shaft as he eagerly thrusts back.", parse);
 		Text.NL();
-		Text.Add("In a single, powerful flex of his hips, he’s taken you as deep as ", parse);
+		Text.Add("In a single powerful flex of his hips, he’s taken you as deep as ", parse);
 		if(p1cock.Knot())
 			Text.Add("your knot allows,", parse);
 		else
@@ -1497,7 +1497,7 @@ Scenes.Lagon.Defeated.PunishmentPC = function() {
 	
 	Text.Add("Even with her mouth occupied, you can hear Vena’s moan of pleasure; this is truly what she lives for, and you’re happy to oblige. Squeezing her generous curves for leverage, you start to draw back, almost audibly squelching as you pull against the suction of her rapacious cunt.", parse);
 	Text.NL();
-	Text.Add("Only when the very tip of your dick remains inside, teasing the lusty lapin with its presence, do you thrust home again, a single, swift push that sees you smacking into her rump as you bottom out again.", parse);
+	Text.Add("Only when the very tip of your dick remains inside, teasing the lusty lapin with its presence, do you thrust home again, a single swift push that sees you smacking into her rump as you bottom out again.", parse);
 	Text.NL();
 	Text.Add("A shiver of pleasure visibly ripples along Vena’s spine, her wooly tail twitching happily, and you gladly start the cycle over again. Pull out, thrust, and pull out again; you slam yourself home without hesitating. Vena takes it all like a champ, her slavering pussy slurping obscenely as you stir her folds. Even as your hips pound away on pure autopilot, your gaze sweeps across the room.", parse);
 	Text.NL();
