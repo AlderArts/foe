@@ -700,7 +700,7 @@ Scenes.Roa.TSLPitchAnal = function() {
 		rigard.Brothel["MStrap"]++;
 		mStrap = true;
 		
-		parse["cocks"] = function() { return p1cock.Short(); }
+		parse["cock"] = function() { return p1cock.Short(); }
 	}
 	Text.NL();
 	
