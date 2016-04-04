@@ -817,7 +817,7 @@ Scenes.Roa.TSLPitchAnal = function() {
 		Text.NL();
 		Text.Add("<i>“Thank you,”</i> he smiles, clambering up to crawl toward you.", parse);
 		Text.NL();
-		Text.Add("You roll over onto your side, laying on your back and making yourself comfortable, positioning yourself so the lagomorph has unrestricted access to your [cocks].", parse);
+		Text.Add("You roll over onto your side, laying on your back and making yourself comfortable, positioning yourself so the lagomorph has unrestricted access to your [cock].", parse);
 		Text.NL();
 		Text.Add("Roa sniffs your crotch and licks his lips, then begins lapping your [cock].", parse);
 		Text.NL();
