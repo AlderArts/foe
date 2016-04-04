@@ -214,6 +214,7 @@ PregnancyHandler.prototype.MPregEnabled = function() {
  *  father := Entity
  *  race   := RaceDesc
  *  num    := 1,2,3...
+ *  numCap := 1,2,3... Maximum number of kids allowed
  *  time   := time to birth in hours
  *  force  := [optional], bypass fertility
  *  load   := [optional], multiply chances of preg
@@ -267,6 +268,7 @@ PregnancyHandler.prototype.Impregnate = function(opts) {
 
 		// Adjust litterSize
 		var litterSize = opts.num || 1;
+		var litterCap = opts.numCap || 0;
 
 		if(mother.HasPerk(Perks.Breeder) && Math.random() < 0.3)
 			litterSize *= 2;
@@ -275,6 +277,9 @@ PregnancyHandler.prototype.Impregnate = function(opts) {
 
 		litterSize = Math.floor(litterSize);
 		litterSize = Math.max(litterSize, 1);
+		// Limit number of kids possible
+		if(_.isNumber(litterCap) && litterCap > 0 )
+			litterSize = Math.max(litterSize, litterCap);
 
 		var gestationPeriod = opts.time || 24; //TODO TEMP
 
