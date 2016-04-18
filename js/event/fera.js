@@ -624,15 +624,16 @@ Scenes.Fera.SexPrompt = function() {
 		options.push({ nameStr : "Give oral",
 			func : function() {
 				Text.Clear();
-				Text.Add("You instruct Fera to sit on the small bench, spread her legs and lift up her dress. She does as you command, the dress' pink ruffles bunched around her waist, and you kneel on the floor in front of her. Pushing aside her white silk panties, you reveal her [fvag]. Pulling in close, you begin to lick it gently, tasting her sweet folds with your [tongue].", parse);
+				parse["l"] = player.HasLegs() ? "kneel" : "lower yourself";
+				Text.Add("You instruct Fera to sit on the small bench, spread her legs and lift up her dress. She does as you command, the dress' pink ruffles bunched around her waist, and you [l] on the floor in front of her. Pushing aside her white silk panties, you reveal her [fvag]. Pulling in close, you begin to lick it gently, tasting her sweet folds with your [tongue].", parse);
 				Text.NL();
-				Text.Add("Her juices are already flowing freely from her opening, coating her lower lips in a salty, but not unpleasant moisture. She begins to moan softly as you gently play with her [fclit], which only encourages you more.  Licking harder, you push your tongue against her slit, running it all the way up and down her [fvag].", parse);
+				Text.Add("Her juices are already flowing freely from her opening, coating her lower lips in a salty but not unpleasant moisture. She begins to moan softly as you gently play with her [fclit], which only encourages you more.  Licking harder, you push your tongue against her slit, running it all the way up and down her [fvag].", parse);
 				Text.NL();
 				Text.Add("Barely getting started, you spread her [fvag] with your fingers. A thin strand of her juices connects the sides of her enticing opening. You push your [tongue] inside, the firm walls pressing in around you. Fera begins panting lustfully, clearly enjoying your efforts.", parse);
 				Text.NL();
 				Text.Add("Wanting more, she puts a hand on your head, gently pushing you in closer, your nose pressing against her cute clit. Obliging, you respond by sticking your [tongue] inside her as far as it will go, tasting her deepest parts. <i>“Please...”</i> she moans.", parse);
 				Text.NL();
-				Text.Add("Understanding her desire, you continue your pleasurable assault. She begins to purr with each lick of your [tongue], encouraging you to lick faster. After a few minutes, she pushes you down hard, shoving your face into her nethers. You feel her body tense, a shudder running through her. Reaching her climax, the catgirl mewls softly as she rides out her orgasm.", parse);
+				Text.Add("Understanding her desire, you continue your pleasurable assault. She begins to purr with each lap of your [tongue], encouraging you to lick faster. After a few minutes, she pushes you down hard, shoving your face into her nethers. You feel her body tense, a shudder running through her. Reaching her climax, the catgirl mewls softly as she rides out her orgasm.", parse);
 				Text.NL();
 				Text.Add("<i>“Thanks, [playername]. That felt really good...”</i> she says as she fixes her dress. You kiss and head back into the store.", parse);
 				Text.Flush();
@@ -664,16 +665,16 @@ Scenes.Fera.SexPrompt = function() {
 					
 					Text.Add("Obediently, Fera kneels in front of you and takes[oneof] your [cocks] in her hands, beginning to stroke it gently. She licks the salty pre off the head of your [cock] with her rough, catlike tongue.", parse);
 					Text.NL();
-					Text.Add("The sensation is incredible and you shudder as she begins to lick up and down the entire length of[oneof] your [cocks]. She puts as much as she can of your [cock] into her warm mouth and begins to suck, while her tongue laps up and down the bottom of your shaft. Looking up at you to see how she is faring, she seems pleased with the look of ecstasy on your face.", parse);
+					Text.Add("The sensation is incredible and you shudder as she begins to lick up and down the entire length of[oneof] your [cocks]. She puts as much as she can of your [cock] into her warm mouth, and begins to suck while her tongue laps up and down the bottom of your shaft. Looking up at you to see how she is faring, she seems pleased with the look of ecstasy on your face.", parse);
 					Text.NL();
 					if(player.NumCocks() == 2) {
-						Text.Add("You feel her hand on your other [cockDesc2], jerking it roughly as she continues to lick your [cock] lovingly. She proceeds to switch cocks and puts the second of your [cocks] into her mouth while she strokes the first. The cute catgirl goes back and forth between your [cocks], paying each equal attention.", parse);
+						Text.Add("You feel her hand on your other [cockDesc2], jerking it roughly as she continues to lick your [cock] lovingly. She proceeds to switch dicks and puts the second of your [cocks] into her mouth while she strokes the first. The cute catgirl goes back and forth between your members, paying each equal attention.", parse);
 						Text.NL();
 					}
 					
 					var scenes = new EncounterTable();
 					scenes.AddEnc(function() {
-						Text.Add("Realizing she's been neglecting your other parts, she takes your [balls] into her hand and begins to massage them firmly. She continues to lovingly suck your [cock], using her tongue to stimulate the [cockTip]. Squeezing your [balls] tightly, Fera makes you shudder from the combined stimulation.", parse);
+						Text.Add("Realizing she's been neglecting your other parts, she takes your [balls] into her hand and begins to massage them firmly. She continues to lovingly suck your [cock], using her tongue to stimulate the [cockTip]. Squeezing your balls tightly, Fera makes you shudder from the combined stimulation.", parse);
 						Text.NL();
 					}, 1.0, function() { return player.HasBalls(); });
 					scenes.AddEnc(function() {
@@ -684,7 +685,7 @@ Scenes.Fera.SexPrompt = function() {
 					scenes.Get();
 					
 					if(fera.flags["Blowjob"] > 3) {
-						Text.Add("Her experience with your [cocks] shows, as you are just barely able to restrain yourself. She has clearly learned what you like, and has become adept at pleasing you. The cute catgirl loves sucking your [cocks], and loves the taste of your cum even more. She takes your [cock] as far into her throat as she can, trying to speed up the delivery of her favorite salty treat.", parse);
+						Text.Add("Her experience with your [cocks] show[notS] as you are just barely able to restrain yourself. She has clearly learned what you like, and has become adept at pleasing you. The cute catgirl loves sucking your [cocks], and loves the taste of your cum even more. She takes your [cock] as far into her throat as she can, trying to speed up the delivery of her favorite salty treat.", parse);
 					}
 					else {
 						Text.Add("Despite her inexperience, she is surprisingly good at this, perhaps in part due to her catgirl nature. She is trying very hard to please you, and you have to admire her dedication. Placing a hand on her head, you gently stroke her hair. She closes her eyes as she continues sucking your [cock] and purrs softly.", parse);
@@ -701,25 +702,26 @@ Scenes.Fera.SexPrompt = function() {
 						}
 						Text.Add(" She licks up as much as she can off your [cocks][ballsD], completely entranced.", parse);
 						Text.NL();
-						Text.Add("She grabs a large rag from a pile under the bench and quickly wipes the floor more-or-less clean. <i>“Was it good for you?”</i> she anxiously asks, as she finishes cleaning up, a worried look in her large eyes. You nod empathetically, putting your [botarmor] back on, and follow her out of the dressing room.", parse);
+						Text.Add("She grabs a large rag from a pile under the bench and quickly wipes the floor more-or-less clean. <i>“Was it good for you?”</i> she anxiously asks as she finishes cleaning up, a worried look in her large eyes. You nod empathetically, putting your [botarmor] back on, and follow her out of the dressing room.", parse);
 					}
 					else {
-						Text.Add("You soon reach your limit under her passionate service, cumming hard. She swallows your load greedily, gently licking your [cocks][ballsD] clean. <i>“Your cum tastes so good, [playername]...”</i> she murmurs, licking her lips. Gently patting her head, you promise to give her more later. She purrs happily, handing you your [botarmor]. Putting it back on, you leave the dressing room together.", parse);
+						Text.Add("You soon reach your limit under her passionate service, cumming hard. She swallows your load greedily, gently lapping your [cocks][ballsD] clean. <i>“Your cum tastes so good, [playername]...”</i> she murmurs, licking her lips. Gently patting her head, you promise to give her more later. She purrs happily, handing you your [botarmor]. Putting it back on, you leave the dressing room together.", parse);
 					}
 					
 					fera.flags["Blowjob"]++;
 				}
 				else { // Vag
-					Text.Add("You sit down on the small bench and remove your [botarmor], spreading your legs to reveal your [vag]. Fera gets on her knees and begins to lick it tenderly with her rough, catlike tongue. It feels incredible, and you cannot help but moan at the intense pleasure running up your spine.", parse);
+					parse["l2"] = player.HasLegs() ? "spreading your legs" : "presenting your crotch";
+					Text.Add("You sit down on the small bench and remove your [botarmor], [l2] to reveal your [vag]. Fera gets on her knees and begins to lick it tenderly with her rough, catlike tongue. It feels incredible, and you cannot help but moan at the intense pleasure running up your spine.", parse);
 					Text.NL();
 					Text.Add("The cute catgirl seems to be enjoying herself as well, and you can see her blue eyes looking up at you as she licks your [vag] enthusiastically. Her fingers shift to play with your [clit], pinching it while she continues licking. Fera's tongue reaches deeper inside your [vag], its roughness pleasant against your walls.", parse);
 					Text.NL();
 					if(player.FirstBreastRow().size.Get() > 3) {
 						parse["toparmor"] = player.Armor() ? " through your " + player.ArmorDesc() : "";
-						Text.Add("You grab hold of your [breasts], and begin to fondle them roughly[toparmor]. Using your fingers to twist and stimulate your [nips], you enjoy the catgirl's tongue as it licks your inner walls. Moaning softly, you squeeze your [breasts] harder with each lick. The sensations of your body are so intense that you can't take much more.", parse);
+						Text.Add("You grab hold of your [breasts], and begin to fondle them roughly[toparmor]. Using your fingers to twist and stimulate your [nips], you enjoy the catgirl's tongue as it laps at your inner walls. Moaning softly, you squeeze your [breasts] harder with each lick. The sensations of your body are so intense that you can't take much more.", parse);
 						Text.NL();
 					}
-					Text.Add("She pulls open the folds of your [vag] and sticks her tongue into your depths. You feel her cute nose rub against your [clit] as she licks as deeply as she possibly can. The sensations from her tongue in your depths send you over the edge. Your body tenses as you reach orgasm, and you cum hard. Fera smiles and looks very pleased as she licks your juices off her lips. She helps you get dressed and you give her a big kiss before walking back out to the shop.", parse);
+					Text.Add("She pulls open the folds of your [vag] and sticks her tongue into your depths. You feel her cute nose rub against your [clit] as she licks as deeply as she possibly can. The sensations from her rough, flexible muscle in your depths send you over the edge. Your body tenses as you reach orgasm, and you cum hard. Fera smiles and looks very pleased as she licks your juices off her lips. She helps you get dressed and you give her a big kiss before walking back out to the shop.", parse);
 				}
 				Text.Flush();
 				player.AddSexExp(1);
