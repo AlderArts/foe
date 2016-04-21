@@ -801,10 +801,10 @@ Scenes.Fera.SexPrompt = function() {
 				
 				Text.Add("You reassure her that it will get better, and she'll feel good soon, and she nods shyly for you to continue, biting her lower lip.", parse);
 				Text.NL();
-				parse["c"] = player.strapOn ? "" : " very warm and ";
+				parse["c"] = player.strapOn ? "" : " very warm and";
 				Text.Add("Her entrance is[c] tight, and the feeling on your [cock] is fantastic. Soon, you are as deep as you can go, and start making short, gentle thrusts. As you lean over to kiss her, she reaches up toward you and puts her arms around you. You hug her back without stopping your thrusts. With your caresses, she quickly starts to relax and it gets easier to move inside her, letting you accelerate your pace.", parse);
 				Text.NL();
-				parse["c2"] = player.strapOn ? "" : " warm ";
+				parse["c2"] = player.strapOn ? "" : " warm";
 				Text.Add("A quiet moan escapes her, and she squeezes you tighter. The moan is followed by more, and they grow louder, as she clamps down on you with her legs. You figure it is finally starting to feel good for her and pound harder into her[c2] depths.", parse);
 				Text.NL();
 				
@@ -865,8 +865,8 @@ Scenes.Fera.SexPrompt = function() {
 				
 				player.Fuck(p1Cock, 3);
 				
-				parse["c3"] = player.strapOn ? " tight, and strongly grip " : " warm and tight, and feel amazing ";
-				Text.Add("Unable to hold back any longer, you piston into her as she grabs one of her [fbreasts] and begins to squeeze it, eager for more pleasure. Her insides are[c3] around your [cock].", parse);
+				parse["c3"] = player.strapOn ? "tight, and strongly grip" : "warm and tight, and feel amazing";
+				Text.Add("Unable to hold back any longer, you piston into her as she grabs one of her [fbreasts] and begins to squeeze it, eager for more pleasure. Her insides are [c3] around your [cock].", parse);
 				Text.NL();
 				
 				if(fera.flags["Standing"] >= 3) {
@@ -1006,7 +1006,7 @@ Scenes.Fera.SexPrompt = function() {
 						Text.NL();
 						Text.Add("You stick in one of your fingers slowly, probing her [fanus]. As you stick in another one, she tightens up and squeezes. You move your digits in and out a few times, spreading her [fanus] wide with them. She lets out a quiet moan as you pull them out, readying your [cock].", parse);
 						Text.NL();
-						parse["an"] = player.strapOn ? "" : " warm and ";
+						parse["an"] = player.strapOn ? "" : " warm and";
 						parse["an2"] =  player.strapOn ? "" : " and warmth";
 						Text.Add("You press the tip against her anus, and push in firmly. She gasps quietly, and you can hear her breathing heavily. Her [fanus] is[an] very tight, almost too much so, as you struggle to move inside her. You tell her to relax, but it does little good. You do the best you can and make short thrusts, the tightness[an2] giving you most of the pleasure.", parse);
 						Text.NL();
@@ -1085,7 +1085,7 @@ Scenes.Fera.SexPrompt = function() {
 					Text.NL();
 					Text.Add("Watching her toy with herself is quite arousing and you begin to feel heat coursing through your body. Feeling your restraint eroding, you tell her that she's done enough, and that as a reward for being so good, she gets to put it in herself. Fera's big blue eyes light up as she pulls down the top of her dress, exposing her [fbreasts]. She stands up and hurries over to you, hurriedly exposing her lower body.", parse);
 					Text.NL();
-					parse["c4"] = player.strapOn ? " radiating heat to your groin " : ""
+					parse["c4"] = player.strapOn ? " radiating heat to your groin" : "";
 					Text.Add("Fera jumps into your lap, kissing you roughly while rubbing your [cocks] with her [fvag]. You can feel her warm, wet lips[c4] through her soaked panties as she rubs back and forth against you. The catgirl's juices have completely stained her white silk panties and are running down both of her legs. Her soft [fbreasts] press against your [breasts], and you feel her stiff [fnips] pushing against you.", parse);
 					Text.NL();
 					parse["c5"] = player.strapOn ? " dripping on your crotch" : Text.Parse(" thoroughly coating your [cocks]", parse);
@@ -1097,7 +1097,7 @@ Scenes.Fera.SexPrompt = function() {
 					
 					player.Fuck(p1Cock, 3);
 					
-					parse["c6"] = player.strapOn ? "" : " warmer and "
+					parse["c6"] = player.strapOn ? "" : " warmer and";
 					Text.Add("The initial sensation is intense, and her snatch feels[c6] wetter than usual. She looks into your [eyes], kissing you deeply as she begins to bounce in your lap.", parse);
 					Text.NL();
 					if(p1Cock.length.Get() >= 18) {
