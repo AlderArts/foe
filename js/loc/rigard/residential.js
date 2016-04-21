@@ -5,7 +5,7 @@
 //
 // Residential area
 //
-world.loc.Rigard.Residental.street.description = function() {
+world.loc.Rigard.Residential.street.description = function() {
 	Text.Add("The common residential area is clearly a shadier part of the town. The closely spaced buildings here are shabbier than you would see elsewhere, hardly letting you see the sky for all the laundry hanging out on display for all to see.");
 	Text.NL();
 	
@@ -17,13 +17,13 @@ world.loc.Rigard.Residental.street.description = function() {
 	}
 }
 
-world.loc.Rigard.Residental.street.enc = new EncounterTable();
-world.loc.Rigard.Residental.street.enc.AddEnc(function() { return Scenes.Rigard.Chatter;});
-world.loc.Rigard.Residental.street.enc.AddEnc(function() { return Scenes.Rigard.Chatter2;});
-world.loc.Rigard.Residental.street.enc.AddEnc(function() { return Scenes.Rigard.CityHistory;}, 1.0, function() { return rigard.flags["CityHistory"] == 0; });
-world.loc.Rigard.Residental.street.enc.AddEnc(function() { return Scenes.Terry.ExploreResidential; }, 1000000.0, function() { return rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry; });
-world.loc.Rigard.Residental.street.enc.AddEnc(function() { return Scenes.Lei.GuardStalking; }, 3.0, function() { return Scenes.Lei.GuardStalkingApplicable(); });
-world.loc.Rigard.Residental.street.onEntry = function() {
+world.loc.Rigard.Residential.street.enc = new EncounterTable();
+world.loc.Rigard.Residential.street.enc.AddEnc(function() { return Scenes.Rigard.Chatter;});
+world.loc.Rigard.Residential.street.enc.AddEnc(function() { return Scenes.Rigard.Chatter2;});
+world.loc.Rigard.Residential.street.enc.AddEnc(function() { return Scenes.Rigard.CityHistory;}, 1.0, function() { return rigard.flags["CityHistory"] == 0; });
+world.loc.Rigard.Residential.street.enc.AddEnc(function() { return Scenes.Terry.ExploreResidential; }, 1000000.0, function() { return rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry; });
+world.loc.Rigard.Residential.street.enc.AddEnc(function() { return Scenes.Lei.GuardStalking; }, 3.0, function() { return Scenes.Lei.GuardStalkingApplicable(); });
+world.loc.Rigard.Residential.street.onEntry = function() {
 	
 	// TODO
 	// During nighttime, sometimes groups of bandits will try to attack!
@@ -53,24 +53,24 @@ world.loc.Rigard.Residental.street.onEntry = function() {
 		PrintDefaultOptions();
 }
 
-world.loc.Rigard.Residental.street.links.push(new Link(
+world.loc.Rigard.Residential.street.links.push(new Link(
 	"Gate", true, true,
 	null,
 	function() {
 		MoveToLocation(world.loc.Rigard.Gate, {minute: 10});
 	}
 ));
-world.loc.Rigard.Residental.street.links.push(new Link(
+world.loc.Rigard.Residential.street.links.push(new Link(
 	"Residential", true, false
 ));
-world.loc.Rigard.Residental.street.links.push(new Link(
+world.loc.Rigard.Residential.street.links.push(new Link(
 	"Merchants", true, true,
 	null,
 	function() {
 		MoveToLocation(world.loc.Rigard.ShopStreet.street, {minute: 20});
 	}
 ));
-world.loc.Rigard.Residental.street.links.push(new Link(
+world.loc.Rigard.Residential.street.links.push(new Link(
 	"Plaza", true, true,
 	null,
 	function() {
@@ -78,7 +78,7 @@ world.loc.Rigard.Residental.street.links.push(new Link(
 	}
 ));
 
-world.loc.Rigard.Residental.street.links.push(new Link(
+world.loc.Rigard.Residential.street.links.push(new Link(
 	"Slums", true, function() { return !rigard.UnderLockdown(); },
 	null,
 	function() {
@@ -88,7 +88,7 @@ world.loc.Rigard.Residental.street.links.push(new Link(
 			MoveToLocation(world.loc.Rigard.Slums.gate, {minute: 10});
 	}
 ));
-world.loc.Rigard.Residental.street.links.push(new Link(
+world.loc.Rigard.Residential.street.links.push(new Link(
 	"Brothel", true, function() { return Scenes.Brothel.IsOpen(); },
 	function() {
 		Text.Add("A rather discreet sign on a large nearby building invites you to the brothel ‘The Shadow Lady’. The facade is richer than the regular houses of the district, and the establishment is bustling with activity.");
@@ -98,10 +98,10 @@ world.loc.Rigard.Residental.street.links.push(new Link(
 		MoveToLocation(world.loc.Rigard.Brothel.brothel, {minute: 5});
 	}
 ));
-world.loc.Rigard.Residental.street.links.push(new Link(
+world.loc.Rigard.Residential.street.links.push(new Link(
 	"Miranda's", true, function() { return party.InParty(miranda); },
 	null,
 	function() {
-		MoveToLocation(world.loc.Rigard.Residental.miranda);
+		MoveToLocation(world.loc.Rigard.Residential.miranda);
 	}
 ));

@@ -62,7 +62,7 @@ world.loc.Rigard.Slums.gate.links.push(new Link(
 				Text.Add("The guards lazily check your papers before letting you through the gates into the city. They apparently found no issue, or simply didn’t want to bother with searching you, as the process is quick and painless.");
 				Text.Flush();
 				Gui.NextPrompt(function() {
-					MoveToLocation(world.loc.Rigard.Residental.street, {minute: 5});
+					MoveToLocation(world.loc.Rigard.Residential.street, {minute: 5});
 				});
 				return;
 			}

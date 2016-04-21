@@ -232,7 +232,7 @@ Miranda.prototype.IsAtLocation = function(location) {
 	else if(world.time.hour >= 19 || world.time.hour < 2)
 		return (location == world.loc.Rigard.Tavern.common);
 	else
-		return (location == world.loc.Rigard.Residental.miranda);
+		return (location == world.loc.Rigard.Residential.miranda);
 }
 
 Miranda.prototype.OnPatrol = function() {
@@ -808,7 +808,7 @@ Scenes.Miranda.RigardSlumGatesEnter = function() {
 			Text.Flush();
 			
 			Gui.NextPrompt(function() {
-				MoveToLocation(world.loc.Rigard.Gate, {minute: 5});
+				MoveToLocation(world.loc.Rigard.Residential.street, {minute: 5});
 			});
 		}
 		else { // neutral
@@ -817,7 +817,7 @@ Scenes.Miranda.RigardSlumGatesEnter = function() {
 				Text.NL();
 				
 				Gui.NextPrompt(function() {
-					MoveToLocation(world.loc.Rigard.Gate, {minute: 5});
+					MoveToLocation(world.loc.Rigard.Residential.street, {minute: 5});
 				});
 			}
 			else {
@@ -927,7 +927,7 @@ Scenes.Miranda.RigardGatesBribe = function() {
 				}
 				
 				Gui.NextPrompt(function() {
-					MoveToLocation(world.loc.Rigard.Residental.street, {hour: 1});
+					MoveToLocation(world.loc.Rigard.Residential.street, {hour: 1});
 				});
 			}
 			else { // Repeat blowjob
@@ -967,7 +967,7 @@ Scenes.Miranda.RigardGatesBribe = function() {
 						Text.Add("Wiping the remaining droplets of the dog-herm’s cum from your lips, you enter the city of Rigard.", parse);
 						
 						Gui.NextPrompt(function() {
-							MoveToLocation(world.loc.Rigard.Residental.street, {minute: 5});
+							MoveToLocation(world.loc.Rigard.Residential.street, {minute: 5});
 						});
 					}
 					else {
@@ -1200,7 +1200,7 @@ Scenes.Miranda.RigardGatesBribe = function() {
 						Text.Flush();
 						
 						Gui.NextPrompt(function() {
-							MoveToLocation(world.loc.Rigard.Residental.street, {minute : 10});
+							MoveToLocation(world.loc.Rigard.Residential.street, {minute : 10});
 						});
 					}
 					else {
@@ -1440,7 +1440,7 @@ Scenes.Miranda.CatchThatThief = function() {
 
 // Add catch thief as explorable event
 world.loc.Rigard.Slums.gate.enc.AddEnc(function() { return Scenes.Miranda.CatchThatThief; }, 1.0, function() { return miranda.flags["Thief"] == 0 && miranda.OnPatrol(); });
-world.loc.Rigard.Residental.street.enc.AddEnc(function() { return Scenes.Miranda.CatchThatThief; }, 1.0, function() { return miranda.flags["Thief"] == 0 && miranda.OnPatrol(); });
+world.loc.Rigard.Residential.street.enc.AddEnc(function() { return Scenes.Miranda.CatchThatThief; }, 1.0, function() { return miranda.flags["Thief"] == 0 && miranda.OnPatrol(); });
 world.loc.Rigard.Gate.enc.AddEnc(function() { return Scenes.Miranda.CatchThatThief; }, 1.0, function() { return miranda.flags["Thief"] == 0 && miranda.OnPatrol(); });
 world.loc.Rigard.ShopStreet.street.enc.AddEnc(function() { return Scenes.Miranda.CatchThatThief; }, 1.0, function() { return miranda.flags["Thief"] == 0 && miranda.OnPatrol(); });
 
@@ -2690,7 +2690,7 @@ Scenes.Miranda.TerryChaseHome = function() {
 				Text.Flush();
 				
 				Gui.NextPrompt(function() {
-					MoveToLocation(world.loc.Rigard.Residental.street, {minute: 5});
+					MoveToLocation(world.loc.Rigard.Residential.street, {minute: 5});
 				});
 			}, enabled : true,
 			tooltip : "Point out that you should perhaps look for the thief instead."
@@ -2735,7 +2735,7 @@ Scenes.Miranda.TerryChaseHome = function() {
 				Text.Flush();
 				
 				Gui.NextPrompt(function() {
-					MoveToLocation(world.loc.Rigard.Residental.street, {minute: 5});
+					MoveToLocation(world.loc.Rigard.Residential.street, {minute: 5});
 				});
 			}, enabled : true,
 			tooltip : "You should focus on catching the thief instead."
@@ -2744,10 +2744,10 @@ Scenes.Miranda.TerryChaseHome = function() {
 	}
 }
 
-world.loc.Rigard.Residental.miranda.description = function() {
+world.loc.Rigard.Residential.miranda.description = function() {
 	
 }
-world.loc.Rigard.Residental.miranda.onEntry = function() {
+world.loc.Rigard.Residential.miranda.onEntry = function() {
 	if(rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry)
 		Scenes.Miranda.TerryChaseHome();
 	else

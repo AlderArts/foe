@@ -53,7 +53,7 @@ world.loc.Rigard.Gate.links.push(new Link(
 	"Residential", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Rigard.Residental.street, {minute: 10});
+		MoveToLocation(world.loc.Rigard.Residential.street, {minute: 10});
 	}
 ));
 world.loc.Rigard.Gate.links.push(new Link(

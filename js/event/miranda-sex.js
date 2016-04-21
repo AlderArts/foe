@@ -103,7 +103,7 @@ Scenes.Miranda.HomeDommySexLeavingFuckedHer = function() {
 		Text.Flush();
 
 		Gui.NextPrompt(function() {
-			MoveToLocation(world.loc.Rigard.Residental.street, {minute : 5});
+			MoveToLocation(world.loc.Rigard.Residential.street, {minute : 5});
 		});
 	}
 	else if(party.InParty(miranda)) {
@@ -136,7 +136,7 @@ Scenes.Miranda.HomeDommySexLeavingFuckedHer = function() {
 			else {
 				Text.Flush();
 				Gui.NextPrompt(function() {
-					MoveToLocation(world.loc.Rigard.Residental.street, {minute: 5});
+					MoveToLocation(world.loc.Rigard.Residential.street, {minute: 5});
 				});
 			}
 		});
@@ -195,7 +195,7 @@ Scenes.Miranda.HomeDommySex = function() {
 	};
 
 	parse = player.ParserTags(parse);
-	party.location = world.loc.Rigard.Residental.miranda;
+	party.location = world.loc.Rigard.Residential.miranda;
 
 	Text.NL();
 	Text.Add("You are standing in the murky hallway just inside Miranda’s house, the doggie herself huffing and panting in your arms. She is really starting to get into it, kissing your neck and caressing your back and [butt] with her hands.", parse);
@@ -1618,7 +1618,7 @@ Scenes.Miranda.HomeSubbySexLeavingFuckedHer = function() {
 		Text.Flush();
 
 		Gui.NextPrompt(function() {
-			MoveToLocation(world.loc.Rigard.Residental.street, {minute : 5});
+			MoveToLocation(world.loc.Rigard.Residential.street, {minute : 5});
 		});
 	}
 	else if(party.InParty(miranda)) {
@@ -1644,7 +1644,7 @@ Scenes.Miranda.HomeSubbySexLeavingFuckedHer = function() {
 			else {
 				Text.Flush();
 				Gui.NextPrompt(function() {
-					MoveToLocation(world.loc.Rigard.Residental.street, {minute: 5});
+					MoveToLocation(world.loc.Rigard.Residential.street, {minute: 5});
 				});
 			}
 		});
@@ -1706,7 +1706,7 @@ Scenes.Miranda.HomeSubbySex = function() {
 	};
 
 	parse = player.ParserTags(parse);
-	party.location = world.loc.Rigard.Residental.miranda;
+	party.location = world.loc.Rigard.Residential.miranda;
 
 	Text.NL();
 	Text.Add("Miranda is breathing heavily as she paws at you, dragging and clawing at your gear. There is a fierce fire in her eyes, indicating that at least one of you is in for a <i>really</i> good time. How well this bodes for you, you are not sure.", parse);
@@ -2218,10 +2218,10 @@ Scenes.Miranda.HomeSubbySexTakeAnal = function(location, Loc) {
 			});
 
 			Text.Clear();
-			Text.Add("It takes a few more minutes until Miranda’s knot finally deflates, though she’s still hard inside you. <i>“Mm… not bad for round one,”</i> she sighs, stretching luxuriously. As she shifts her hips, her knot plops out, the pointed tip of her dick rummaging around your sticky innards. <i>“How about we continue, [lover]?”</i>", parse);
+			Text.Add("It takes a few more minutes before Miranda’s knot finally deflates, though she’s still hard inside you. <i>“Mm… not bad for round one,”</i> she sighs, stretching luxuriously. As she shifts her hips, her knot plops out, the pointed tip of her dick rummaging around your sticky innards. <i>“How about we continue, [lover]?”</i>", parse);
 			Text.NL();
 			if(player.sexlevel < 3) {
-				Text.Add("You’ve still barely recovered from the last bout, but the guardswoman isn’t about to let up for your comfort. She takes you through just about every sex position you can name, and quite a few that you can’t, though you are always on the receiving end.", parse);
+				Text.Add("You’ve still barely recovered from the last bout, but the guardswoman isn’t about to let up for your comfort. She takes you through just about every sex position you can name, and quite a few that you can’t, though your ass is always on the receiving end.", parse);
 				Text.NL();
 				Text.Add("As you mate with Miranda, your senses gradually blur, dulled by near constant pleasure. Though she claimed that she’s only out to sate her own lusts, in the process of doing so the dommy dobie is showing you heights of ecstasy previously unknown to you… and beyond the capacity of your body.", parse);
 				Text.NL();
@@ -2504,7 +2504,7 @@ Scenes.Miranda.HomeDommyDungeonFirst = function() {
 
 	};
 
-	party.location = world.loc.Rigard.Residental.mDungeon;
+	party.location = world.loc.Rigard.Residential.mDungeon;
 
 	Text.NL();
 	Text.Add("PLACEHOLDER", parse);
@@ -2525,7 +2525,7 @@ Scenes.Miranda.HomeDommyDungeon = function() {
 
 	};
 
-	party.location = world.loc.Rigard.Residental.mDungeon;
+	party.location = world.loc.Rigard.Residential.mDungeon;
 
 	Text.NL();
 	Text.Add("PLACEHOLDER", parse);
@@ -2546,7 +2546,7 @@ Scenes.Miranda.HomeSubbyDungeon = function() {
 
 	};
 
-	party.location = world.loc.Rigard.Residental.mDungeon;
+	party.location = world.loc.Rigard.Residential.mDungeon;
 
 	Text.NL();
 	Text.Add("PLACEHOLDER", parse);

@@ -66,7 +66,7 @@ world.loc.Rigard.ShopStreet.street.links.push(new Link(
 	"Residential", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Rigard.Residental.street, {minute: 20});
+		MoveToLocation(world.loc.Rigard.Residential.street, {minute: 20});
 	}
 ));
 world.loc.Rigard.ShopStreet.street.links.push(new Link(

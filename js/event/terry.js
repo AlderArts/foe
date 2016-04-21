@@ -715,7 +715,7 @@ Scenes.Terry.ExploreResidential = function() {
 	
 	if(terry.flags["Met"] >= Terry.Met.Found) {
 		Text.Add("You decide to look around and ask a few people. Someone might’ve seen her. ", parse);
-		if(terry.hidingSpot == world.loc.Rigard.Residental.street) {
+		if(terry.hidingSpot == world.loc.Rigard.Residential.street) {
 			Text.Add("After a long string of complaints, annoyed comments and plain rudeness, one of the residents finally provides a lead.<i>“A vixen? You mean that one?”</i> They point toward an alleyway, where you see a distinct vulpine running off.", parse);
 			Text.NL();
 			Text.Add("Without missing a beat, you call for Miranda and make a mad dash after the thief. You chase after her for a while, until Miranda manages to corner her at a dead end. She draws her blade and prepares for battle!", parse);
@@ -890,8 +890,8 @@ Scenes.Terry.CombatVsMiranda = function() {
 			terry.hidingSpot = world.loc.Rigard.Gate;
 		}, 1.0, function() { return terry.hidingSpot != world.loc.Rigard.Gate; });
 		scenes.AddEnc(function() {
-			terry.hidingSpot = world.loc.Rigard.Residental.street;
-		}, 1.0, function() { return terry.hidingSpot != world.loc.Rigard.Residental.street; });
+			terry.hidingSpot = world.loc.Rigard.Residential.street;
+		}, 1.0, function() { return terry.hidingSpot != world.loc.Rigard.Residential.street; });
 		scenes.AddEnc(function() {
 			terry.hidingSpot = world.loc.Rigard.ShopStreet.street;
 		}, 1.0, function() { return terry.hidingSpot != world.loc.Rigard.ShopStreet.street; });
@@ -925,8 +925,8 @@ Scenes.Terry.CombatVsMiranda = function() {
 			terry.hidingSpot = world.loc.Rigard.Gate;
 		}, 1.0, function() { return terry.hidingSpot != world.loc.Rigard.Gate; });
 		scenes.AddEnc(function() {
-			terry.hidingSpot = world.loc.Rigard.Residental.street;
-		}, 1.0, function() { return terry.hidingSpot != world.loc.Rigard.Residental.street; });
+			terry.hidingSpot = world.loc.Rigard.Residential.street;
+		}, 1.0, function() { return terry.hidingSpot != world.loc.Rigard.Residential.street; });
 		scenes.AddEnc(function() {
 			terry.hidingSpot = world.loc.Rigard.ShopStreet.street;
 		}, 1.0, function() { return terry.hidingSpot != world.loc.Rigard.ShopStreet.street; });

@@ -1069,7 +1069,7 @@ Scenes.Miranda.DatingFirstCity = function() {
 		breastDesc : function() { return player.FirstBreastRow().Short(); }
 	};
 	
-	party.location = world.loc.Rigard.Residental.street;
+	party.location = world.loc.Rigard.Residential.street;
 	world.TimeStep({minute: 20});
 	
 	Text.Add("<i>“Seen enough of the slums to last you for tonight?”</i> The two of you are nearing the outer walls of Rigard, close to the peasants’ gate. ", parse);
