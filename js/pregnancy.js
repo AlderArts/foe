@@ -194,11 +194,11 @@ PregnancyHandler.prototype.PregnantWombs = function() {
 PregnancyHandler.prototype.IsPregnant = function(opts) {
 	opts = opts || {};
 	var slot = opts.slot;
-	if(slot) {
+	if(_.isNumber(slot)) {
 		return this.Womb(slot).pregnant;
 	}
 	else {
-		return this.PregnantWombs().length > 1;
+		return (this.PregnantWombs().length > 0);
 	}
 }
 
