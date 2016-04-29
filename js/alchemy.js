@@ -15,43 +15,48 @@ Alchemy.AlchemyPrompt = function(alchemist, inventory, backPrompt, callback, pre
 	Text.Add("[name] can transmute the following items:", {name: alchemist.NameDesc()});
 	
 	list = [];
-	for(var i = 0; i < alchemist.recipes.length; i++) {
-		var item = alchemist.recipes[i];
+
+	alchemist.recipes.forEach(function(item) {
 		var enabled = true;
+		var knownRecipe = false;
 		var str = Text.BoldColor(item.name) + ": ";
-		for(var j = 0; j < item.recipe.length; j++) {
-			var component = item.recipe[j];
-			var comps = inventory.QueryNum(component.it) || 0;
-			var en = (comps >= (component.num || 1));
-			if(j > 0) str += ", ";
-			if(!en) str += "<b>";
-			str     += (component.num || 1) + "/" + comps + "x " + component.it.name;
-			if(!en) str += "</b>";
-			enabled &= en;
+		item.recipe.forEach(function(component, idx) {
+			var available = inventory.QueryNum(component.it) || 0;
+			var enough = (available >= (component.num || 1));
+			if(idx > 0) str += ", ";
+			if(!enough) str += "<b>";
+			str += (component.num || 1) + "/" + available + "x " + component.it.name;
+			if(!enough) str += "</b>";
+			enabled &= enough;
+		});
+
+		if(alchemist == player) {
+			knownRecipe = true;
+		} else if (_.includes(player.recipes, item)) {
+			knownRecipe = true;
 		}
-		
+
 		list.push({
 			_recipeStr: str,
 			nameStr: item.name,
 			enabled: enabled,
 			tooltip: item.Long(),
 			obj:     item,
+			image:   knownRecipe ? Images.imgButtonEnabled : Images.imgButtonEnabled2,
 			func: function(it) {
 				Text.Clear();
 				Text.Add("[name] mix[es] the ingredients, preparing 1x [item].", {name: alchemist.NameDesc(), es: alchemist.plural() ? "" : "es", item: it.name});
 				Text.Flush();
-				
-				for(var j = 0; j < it.recipe.length; j++) {
-					var ingredient = it.recipe[j];
-					inventory.RemoveItem(ingredient.it, ingredient.num);
-				}
-				
+
+				item.recipe.forEach(function(component) {
+					inventory.RemoveItem(component.it, component.num);
+				});
+
 				if(callback) {
 					callback(it);
-				}
-				else {
+				} else {
 					inventory.AddItem(it);
-				
+
 					Gui.NextPrompt(function() {
 						if(backPrompt)
 							Alchemy.AlchemyPrompt(alchemist, inventory, backPrompt);
@@ -61,7 +66,7 @@ Alchemy.AlchemyPrompt = function(alchemist, inventory, backPrompt, callback, pre
 				}
 			}
 		});
-	}
+	});
 	
 	list = _.sortBy(list, 'nameStr');
 	
