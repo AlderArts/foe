@@ -9,6 +9,7 @@ Version 0.4u
 ------------
 * More typos fixed (Fera). Thanks CK!
 * Fixed a bug in the pregnancy code, making pregnancies not be correctly detected
+* A real clever piece of code added by ElAcechador on Github, that allows you to see what alchemical recipes you can learn when talking to an alchemy NPC like Rosalin. Unknown recipes will be lined out in green, known recipes will be in blue
 
 --------------------------------------------
              PREVIOUS VERSIONS
