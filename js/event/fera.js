@@ -922,7 +922,7 @@ Scenes.Fera.SexPrompt = function() {
 				Text.Add("She purrs and pulls down her dress, presenting her [fbreasts] to you. Knowing what she wants, you grab her breasts and firmly squeeze them. The cute catgirl begins to squeeze her thighs together, increasing the stimulation on your [cocks]. Her juices coat your [cocks] as you thrust between her legs[ballsD].", parse);
 				Text.NL();
 				if(p1Cock.length.Get() >= 18)
-					Text.Add("<i>“Your cock[s] [isAre] so big, [playername]...I can't wait anymore...”</i> Fera moans needily. ", parse);
+					Text.Add("<i>“Your cock[s] [isAre] so big, [playername]... I can't wait anymore...”</i> Fera moans needily. ", parse);
 				Text.Add("You kiss Fera deeply and pull your [cocks] out from between her thighs. Turning her around, you tell her to lean against the wall and spread her legs.", parse);
 				Text.NL();
 				if(fera.flags["Behind"] >= 3) {
