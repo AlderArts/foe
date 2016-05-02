@@ -675,18 +675,19 @@ Scenes.Masturbation.AnalToy = function(parse, toy) {
 	var br = player.FirstBreastRow().Size();
 	
 	parse["toy"] = toy.sDesc();
+	parse["toyTip"] = toy.cock.TipShort();
 	
 	Text.Add("Reaching for your [toy], you giddily bring its length around behind you, sliding it between your ass cheeks, feeling that hardness grind against your [anus] as you bring it into position. No time like the present, then - taking a deep breath and preparing yourself, you push downwards firmly on the [toy], easing it inside you.", parse);
 	Text.NL();
 	if(cap > 10)
-		Text.Add("Your pliant, stretchy sphincter is extremely well-trained - tight and yet elastic, it easily swallows up your [toy]’s [cockTip] without a hitch. Encouraged by this early success, you push downwards a bit more insistently, and are rewarded with your ass eagerly taking in all it can. You’ve sure turned into a happy buttslut, haven’t you?", parse);
+		Text.Add("Your pliant, stretchy sphincter is extremely well-trained - tight and yet elastic, it easily swallows up your [toy]’s [toyTip] without a hitch. Encouraged by this early success, you push downwards a bit more insistently, and are rewarded with your ass eagerly taking in all it can. You’ve sure turned into a happy buttslut, haven’t you?", parse);
 	else {
-		Text.Add("There <i>is</i> a little difficulty, a little unease - a toy is much thicker than your average finger, after all, and it seems like you’re not as well-trained as you’d like to be. Nevertheless, you manage to wiggle it past your [anus]’s instinctive resistance, stretching the ring of muscle wide enough for you to slide the toy’s [cockTip] past and into your warm depths.", parse);
+		Text.Add("There <i>is</i> a little difficulty, a little unease - a toy is much thicker than your average finger, after all, and it seems like you’re not as well-trained as you’d like to be. Nevertheless, you manage to wiggle it past your [anus]’s instinctive resistance, stretching the ring of muscle wide enough for you to slide the toy’s [toyTip] past and into your warm depths.", parse);
 		Text.NL();
 		Text.Add("From there, it’s just a matter of steeling yourself and being insistent, and soon enough you’re rewarded with a jolt of pleasure as your [toy] sinks further into you.", parse);
 	}
 	Text.NL();
-	Text.Add("Instead of pumping the [toy]’s length up and down like you might have for a cunt, you instead begin to grind it in small circles, your [anus] shifting and twisting with the motions even as you feel the [cockTip] rub against your insides, your breathing coming quick and short even as your hands’ movements grow ever more anxious and jerky.", parse);
+	Text.Add("Instead of pumping the [toy]’s length up and down like you might have for a cunt, you instead begin to grind it in small circles, your [anus] shifting and twisting with the motions even as you feel the [toyTip] rub against your insides, your breathing coming quick and short even as your hands’ movements grow ever more anxious and jerky.", parse);
 	if(player.FirstCock()) {
 		Text.Add(" Thus simulated, tendrils of exquisite pleasure begin to reach outward from your prostate and up along your spine. Unbidden, a loud, languid moan escapes your lips as your jaw goes slack, and you almost - <i>almost</i> lose control of your toy, letting it slip out of your hands for a moment. Thankfully, you quickly right yourself, eager for more of that delicious yet fleeting pleasure, and shove your [toy] deeper into your [anus], this time with <i>feeling</i>.", parse);
 		Text.NL();
