@@ -16,6 +16,10 @@ Alchemy.AlchemyPrompt = function(alchemist, inventory, backPrompt, callback, pre
 	
 	list = [];
 
+	var Brew = function(it) {
+		Alchemy.MakeItem(it, 1, alchemist, inventory, backPrompt, callback);
+	}
+
 	alchemist.recipes.forEach(function(item) {
 		var enabled = true;
 		var knownRecipe = false;
@@ -43,28 +47,7 @@ Alchemy.AlchemyPrompt = function(alchemist, inventory, backPrompt, callback, pre
 			tooltip: item.Long(),
 			obj:     item,
 			image:   knownRecipe ? Images.imgButtonEnabled : Images.imgButtonEnabled2,
-			func: function(it) {
-				Text.Clear();
-				Text.Add("[name] mix[es] the ingredients, preparing 1x [item].", {name: alchemist.NameDesc(), es: alchemist.plural() ? "" : "es", item: it.name});
-				Text.Flush();
-
-				item.recipe.forEach(function(component) {
-					inventory.RemoveItem(component.it, component.num);
-				});
-
-				if(callback) {
-					callback(it);
-				} else {
-					inventory.AddItem(it);
-
-					Gui.NextPrompt(function() {
-						if(backPrompt)
-							Alchemy.AlchemyPrompt(alchemist, inventory, backPrompt);
-						else
-							ShowAlchemy();
-					});
-				}
-			}
+			func:    Brew,
 		});
 	});
 	
@@ -77,4 +60,27 @@ Alchemy.AlchemyPrompt = function(alchemist, inventory, backPrompt, callback, pre
 	
 	Gui.SetButtonsFromList(list, backPrompt, backPrompt);
 	Text.Flush();
+}
+
+Alchemy.MakeItem = function(it, qty, alchemist, inventory, backPrompt, callback){
+	Text.Clear();
+	Text.Add("[name] mix[es] the ingredients, preparing [qty]x [item].", {name: alchemist.NameDesc(), es: alchemist.plural() ? "" : "es", item: it.name, qty: qty});
+	Text.Flush();
+
+	it.recipe.forEach(function(component) {
+		inventory.RemoveItem(component.it, component.num);
+	});
+
+	if(callback) {
+		callback(it);
+	} else {
+		inventory.AddItem(it);
+
+		Gui.NextPrompt(function() {
+			if(backPrompt)
+				Alchemy.AlchemyPrompt(alchemist, inventory, backPrompt);
+			else
+				ShowAlchemy();
+		});
+	}
 }
