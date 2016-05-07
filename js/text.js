@@ -300,6 +300,22 @@ Text.ParserPlural = function(parse, condition, prefix, postfix) {
 
 	return parse;
 }
+
+Text.Enumerate = function(list, conjunction) {
+	var output = "";
+	list.reverse(); // We're assuming that the order matters
+	list.forEach(function(elem, idx) {
+		if (idx == 0) {
+			output = elem + output;
+		} else if (idx == 1) {
+			output = elem + " " + conjunction + " " + output;
+		} else {
+			output = elem + ", " + output;
+		}
+	});
+	return output;
+}
+
 /*Generates an input for a given input type
  * For each 'type', the accepted paramters are listed below
  *   button   ::: (nameStr = button text), (func = on click func), (obj = will be passed to func), (classes = classes that will be added to the input)
