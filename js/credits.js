@@ -70,7 +70,7 @@ CreditsScreen = function() {
 	Text.NL();
 	Text.Add("Loyal patreons:", null, 'bold');
 	Text.NL();
-	Text.Add("StarcraftJunkie, Dane, Mark, Marco Zijlmans, Xcuphra, Eric Borrowman, Matthew Sellers, Xxeryon, Lasse, Sagara Saito, Sindri Myr, Timothy Rice, Mark Hawker, Dana Reitz, Minty Shine, Sean, Daniel Mittelbrun, Twenix, The Dark Wanderer, Fusiontech, Nosna, Kyle Tikala, Rakesh, Jayson Love, Pakuska, Christopher Hewitt, Bra1nz, Vann Collins, patrick dorman, Draxial Drax, Christopher Joseph Vargas, Artem, Nenad Ganilovic, Chris Meincke, Ditz Kholik, David Camper, bojaa90, Malte Nüchter, Syrth Nightstar, Lee, Noir, Stanley Davis, davis, DiffSquared, Glen Quagmire, Reagan Bedggood, Barbara Jacobson, Kevin saoud, Greg Schimmel, Wayne Chattillon, Killdark Gamer, Lokiallen");
+	Text.Add("StarcraftJunkie, Dane, Mark, Marco Zijlmans, Xcuphra, Eric Borrowman, Matthew Sellers, Xxeryon, Lasse, Sagara Saito, Sindri Myr, Timothy Rice, Mark Hawker, Dana Reitz, Minty Shine, Sean, Daniel Mittelbrun, Twenix, The Dark Wanderer, Fusiontech, Nosna, Kyle Tikala, Rakesh, Jayson Love, Pakuska, Christopher Hewitt, Bra1nz, Vann Collins, patrick dorman, Draxial Drax, Christopher Joseph Vargas, Artem, Nenad Ganilovic, Chris Meincke, Ditz Kholik, David Camper, bojaa90, Malte Nüchter, Syrth Nightstar, Lee, Noir, Stanley Davis, davis, DiffSquared, Glen Quagmire, Reagan Bedggood, Barbara Jacobson, Kevin saoud, Greg Schimmel, Wayne Chattillon, Killdark Gamer, Lokiallen, trevor tripp");
 	Text.NL();
 	Text.Add("...and all the rest of you!");
 	Text.Flush();
