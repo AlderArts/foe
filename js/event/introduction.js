@@ -1850,7 +1850,7 @@ world.loc.LightAspect.Garden.links.push(new Link(
 
 			Text.Add("There is no doubt in your mind that she is indeed a goddess; the heartachingly beautiful woman before you stands by a fountain, a worried expression on her perfect face. She is clad in a long white dress that seems to almost float above the ground, as if it were underwater. The skin on her smooth limbs is fair and unblemished, and an expanse of golden locks falls to her waist in a mass of curls. She carries herself with regal composure and is well over six feet tall.");
 			Text.NL();
-			Text.Add("Her dress - while tastefully chaste - exposes part of her generous bosom. Realizing that you are ogling her, your eyes rise to study her face instead. Her eyes, rather than having regular pupils, are pools of shining light, partly obscured under thick lashes. As she speaks to you once more, her full red lips do not move.");
+			Text.Add("Her dress — while tastefully chaste — exposes part of her generous bosom. Realizing that you are ogling her, your eyes rise to study her face instead. Her eyes, rather than having regular pupils, are pools of shining light, partly obscured under thick lashes. As she speaks to you once more, her full red lips do not move.");
 			Text.NL();
 			Text.Add("<i>Welcome, young one.</i>");
 			Text.NL();
@@ -1958,7 +1958,7 @@ Intro.AriaQnA = function() {
 
 				Text.Add("<i>“That demon... who was she?”</i> As you ask, you realize that you want to know more about the tempting yet fickle hermaphrodite, but you cannot quite pinpoint the reason. Are you just interested because of the threat she represents, or do you have some other, darker motive?");
 				Text.NL();
-				Text.Add("<i>Uru,</i> the goddess frowns, looking disconcerted. <i>Beware of that one, she is very, very dangerous. Unpredictable, chaotic and - as I am sure you noticed - very powerful. The plane she inhabits... that place was once a vibrant world, full of life. All reduced to ashes, by her hand and by those who serve her.</i>");
+				Text.Add("<i>Uru,</i> the goddess frowns, looking disconcerted. <i>Beware of that one, she is very, very dangerous. Unpredictable, chaotic and — as I am sure you noticed — very powerful. The plane she inhabits... that place was once a vibrant world, full of life. All reduced to ashes, by her hand and by those who serve her.</i>");
 				Text.NL();
 				Text.Add("<i>Thankfully, she is unable to make portals herself, leaving her effectively sealed in that place. Who knows what harm she could do, were she to break free...</i>");
 				Text.NL();
