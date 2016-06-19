@@ -1813,7 +1813,7 @@ world.loc.LightAspect.Garden.events.push(new Link(
 	function() {
 		Text.Clear();
 
-		Text.Add("You examine the strange bird wading in a nearby shallow pond. Looking closer at it you realize that it is of a species you have never seen before; a ball of fluffy blue feathers on long graceful legs, the head on its long, thin neck topped by a bright orange plume. In height, it's just about reaches your knees.");
+		Text.Add("You examine the strange bird wading in a nearby shallow pond. Looking closer at it you realize that it is of a species you have never seen before; a ball of fluffy blue feathers on long graceful legs, the head on its long, thin neck topped by a bright orange plume. In height, it just about reaches your knees.");
 		Text.NL();
 		Text.Add("You skeptically eye the creature, attracting its attention. For a while the two of you silently observe each other. Feeling slightly awkward, you quip: <i>“I don't suppose it was you who spoke just now?”</i>");
 		Text.NL();
