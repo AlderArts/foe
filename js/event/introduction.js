@@ -1836,7 +1836,7 @@ world.loc.LightAspect.Garden.links.push(new Link(
 	function() {
 		Text.Clear();
 
-		Text.Add("With nowhere else to go, you head down the path leading to the temple-like structure on the hill. As you get closer, you realize that the temple seems to be in surprisingly good shape. Under the overgrowth that has claimed it, the marble is smooth and untouched. In fact, as you get closer to the building, it dawns on you that the vegetation is - rather than being an effect of long disuse - actually a part of the temple itself. Blossoming vines twine artfully around marble pillars, seemingly springing from the stone.");
+		Text.Add("With nowhere else to go, you head down the path leading to the temple-like structure on the hill. As you get closer, you realize that the temple seems to be in surprisingly good shape. Under the overgrowth that has claimed it, the marble is smooth and untouched. In fact, as you get closer to the building, it dawns on you that the vegetation is — rather than being an effect of long disuse — actually a part of the temple itself. Blossoming vines twine artfully around marble pillars, seemingly springing from the stone.");
 		Text.NL();
 		Text.Add("<i>Please, come inside, we have much to talk about.</i>");
 		Text.NL();
