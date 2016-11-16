@@ -183,7 +183,7 @@ Body.prototype.SetRace = function(race) {
 	// Genetalia
 	for(var i=0,j=this.cock.length; i<j; i++) {
 		if(race.isRace(Race.Canine))
-			this.cock[i].knot = true;
+			this.cock[i].knot = 1;
 		this.cock[i].race = race;
 	}
 	this.balls.race = race;
