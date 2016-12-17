@@ -6,6 +6,7 @@ const htmlreplace = require('gulp-html-replace');
 const uglify = require('gulp-uglify');
 const tar = require('gulp-tar');
 const zip = require('gulp-zip');
+const gzip = require('gulp-gzip');
 const del = require('del');
 const runSequence = require('run-sequence');
 const fs = require('fs');
@@ -238,7 +239,13 @@ const appJs = [
 // a release archive.
 function getArtifactFiles()
 {
-	var artifactFilter = filter(['*', '**/*', '!*.tar', '!*.zip']);
+	var artifactFilter = filter([
+		'*',
+		'**/*',
+		'!*.tar',
+		'!*tar.gz',
+		'!*.zip'
+	]);
 	return gulp.src(['./build/**/*'], {base: './build'})
 		.pipe(artifactFilter);
 }
@@ -248,7 +255,7 @@ gulp.task('build', (callback) => {
 		'build:app',
 		'build:css',
 		'build:html',
-		'build:misc',
+		'build:misc'
 	], callback);
 });
 
@@ -310,6 +317,7 @@ gulp.task('pack:zip', () => {
 gulp.task('pack:tar', () => {
 	return getArtifactFiles()
 		.pipe(tar(artifactName + '.tar'))
+		.pipe(gzip())
 		.pipe(gulp.dest('./build'));
 });
 
