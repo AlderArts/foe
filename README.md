@@ -15,3 +15,9 @@ You are now ready to build the game by running the following commands at the roo
 	$ gulp build
 
 _Note: The build process only reduces file sizes, it is not required to run the game._
+
+If you want the output in archive form, you can instead run:
+
+	$ gulp pack
+
+This generates a set of files containing the build output in different archive formats. Feel free to choose the format that best suits your needs.
