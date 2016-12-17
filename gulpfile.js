@@ -4,13 +4,15 @@ const concat = require('gulp-concat');
 const filter = require('gulp-filter');
 const htmlreplace = require('gulp-html-replace');
 const uglify = require('gulp-uglify');
-const tar = require('gulp-tar')
+const tar = require('gulp-tar');
+const zip = require('gulp-zip');
 const del = require('del');
 const runSequence = require('run-sequence');
-const fs = require('fs')
+const fs = require('fs');
 
 // Can't use 'require' here because of caching issues
-const package_info = JSON.parse(fs.readFileSync('./package.json'))
+const packageInfo = JSON.parse(fs.readFileSync('./package.json'));
+const artifactName = packageInfo.name + '-' + packageInfo.version;
 
 // Include js files individually because the
 // load order is important.
@@ -232,6 +234,15 @@ const appJs = [
 	'js/cheats.js'
 ];
 
+// Returns the collection of output files needed to properly pack
+// a release archive.
+function getArtifactFiles()
+{
+	var artifactFilter = filter(['*', '**/*', '!*.tar', '!*.zip']);
+	return gulp.src(['./build/**/*'], {base: './build'})
+		.pipe(artifactFilter);
+}
+
 gulp.task('build', (callback) => {
 	runSequence('build:clean', [
 		'build:app',
@@ -262,7 +273,7 @@ gulp.task('build:app', () => {
 gulp.task('build:css', () => {
 	return gulp.src('assets/css/**/*.css')
 		.pipe(concat('bundle.css'))
-		.pipe(gulp.dest('./build/assets/css'))
+		.pipe(gulp.dest('./build/assets/css'));
 });
 
 gulp.task('build:html', () => {
@@ -283,13 +294,23 @@ gulp.task('build:misc', () => {
 	.pipe(gulp.dest('./build'));
 });
 
-gulp.task('pack', ['build'], () => {
-	var name = package_info.name + '-' + package_info.version + '.tar';
-	var artifactFilter = filter(['*', '**/*', '!*.tar']);
-	return gulp.src(['./build/**/*',], {base: './build'})
-		.pipe(artifactFilter)
-		.pipe(tar(name))
-		.pipe(gulp.dest('./build'))
+gulp.task('pack', ['build'], (callback) => {
+	runSequence([
+		'pack:zip',
+		'pack:tar'
+	], callback);
 });
 
-gulp.task('default', ['build', 'pack']);
+gulp.task('pack:zip', () => {
+	return getArtifactFiles()
+		.pipe(zip(artifactName + '.zip'))
+		.pipe(gulp.dest('./build'));
+});
+
+gulp.task('pack:tar', () => {
+	return getArtifactFiles()
+		.pipe(tar(artifactName + '.tar'))
+		.pipe(gulp.dest('./build'));
+});
+
+gulp.task('default', ['build']);
