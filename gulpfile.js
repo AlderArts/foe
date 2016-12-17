@@ -4,8 +4,13 @@ const concat = require('gulp-concat');
 const filter = require('gulp-filter');
 const htmlreplace = require('gulp-html-replace');
 const uglify = require('gulp-uglify');
+const tar = require('gulp-tar')
 const del = require('del');
 const runSequence = require('run-sequence');
+const fs = require('fs')
+
+// Can't use 'require' here because of caching issues
+const package_info = JSON.parse(fs.readFileSync('./package.json'))
 
 // Include js files individually because the
 // load order is important.
@@ -232,7 +237,7 @@ gulp.task('build', (callback) => {
 		'build:app',
 		'build:css',
 		'build:html',
-		'build:misc'
+		'build:misc',
 	], callback);
 });
 
@@ -278,4 +283,13 @@ gulp.task('build:misc', () => {
 	.pipe(gulp.dest('./build'));
 });
 
-gulp.task('default', ['build']);
+gulp.task('pack', ['build'], () => {
+	var name = package_info.name + '-' + package_info.version + '.tar';
+	var artifactFilter = filter(['*', '**/*', '!*.tar']);
+	return gulp.src(['./build/**/*',], {base: './build'})
+		.pipe(artifactFilter)
+		.pipe(tar(name))
+		.pipe(gulp.dest('./build'))
+});
+
+gulp.task('default', ['build', 'pack']);
