@@ -13,7 +13,7 @@ const fs = require('fs');
 
 // Can't use 'require' here because of caching issues
 const packageInfo = JSON.parse(fs.readFileSync('./package.json'));
-const artifactName = packageInfo.name + '-' + packageInfo.version;
+const artifactName = packageInfo.name + '_' + packageInfo.version;
 
 // Include js files individually because the
 // load order is important.
