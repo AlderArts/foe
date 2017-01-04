@@ -1463,8 +1463,7 @@ Scenes.Rigard.Lockdown = function() {
 	var parse = {
 		playername : player.name,
 		merchantsCitizens : (party.location == world.loc.Rigard.Gate) ? "merchants" : "citizens",
-		assCunt : player.FirstVag() ? "cunt" : "ass",
-		
+		assCunt : player.FirstVag() ? "cunt" : "ass"
 	};
 	
 	parse = player.ParserTags(parse);
@@ -1731,7 +1730,7 @@ Scenes.Rigard.Lockdown = function() {
 				options.push({ nameStr : "Submit",
 					func : function() {
 						Text.Clear();
-						parse["legs"] = player.HasLegs() ? " on your knees" : ""
+						parse["legs"] = player.HasLegs() ? " on your knees" : "";
 						Text.Add("The dog-herm wastes no time in hopping on her feet, stripping off her armor as she approaches you to help you take off your [armor]. Though she fumbles with both your outfits she has you naked in record time. Without so much as a word, she takes you by the arm and sets you down[legs] atop the cushions in the corner of the room.", parse);
 						Text.Flush();
 
