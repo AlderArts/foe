@@ -91,11 +91,9 @@ Alchemy.MakeItem = function(it, qty, alchemist, inventory, backPrompt, callback)
 
 Alchemy.ItemDetails = function(it, inventory) {
 	var batchFormats = [1, 5, 10, 25];
-	var BrewBatch = function(batchSize) {
-		Alchemy.MakeItem(it, batchSize, player, inventory);
-	}
 	var list = [];
-	var brewable = Alchemy.CountBrewable(it.recipe, inventory);
+	var brewable = Alchemy.CountBrewable(it, inventory);
+	var BrewBatch = brewable.brewFn;
 	var inInventory = inventory.QueryNum(it);
 
 	var parser = {
@@ -134,7 +132,8 @@ Alchemy.ItemDetails = function(it, inventory) {
 	Text.Flush();
 }
 
-Alchemy.CountBrewable = function(recipe, inventory) {
+Alchemy.CountBrewable = function(it, inventory) {
+	var recipe = it.recipe;
 	var recipeDict = {};
 	var limitingQuota = Infinity;
 	var limiters = [];
@@ -156,5 +155,11 @@ Alchemy.CountBrewable = function(recipe, inventory) {
 		}
 	});
 
-	return {qty: limitingQuota, limiters: limiters};
+	return {
+		qty: limitingQuota,
+		limiters: limiters,
+		brewFn: function(batchSize){
+			Alchemy.MakeItem(it, batchSize, player, inventory);
+		}
+	};
 }
