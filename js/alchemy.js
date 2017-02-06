@@ -132,17 +132,23 @@ Alchemy.ItemDetails = function(it, inventory) {
 	Text.Flush();
 }
 
-Alchemy.CountBrewable = function(it, inventory) {
+Alchemy.GetRecipeDict = function(it) {
 	var recipe = it.recipe;
 	var recipeDict = {};
-	var limitingQuota = Infinity;
-	var limiters = [];
-	var invDict = _.keyBy(inventory.ToStorage(), function(elem){return elem.it});
 
 	// There's always the possibility of some items being required more than once
 	recipe.forEach(function(ingredient) {
 		recipeDict[ingredient.it.id] = recipeDict[ingredient.it.id] + 1 || 1;
 	});
+
+	return recipeDict;
+}
+
+Alchemy.CountBrewable = function(it, inventory) {
+	var recipeDict = Alchemy.GetRecipeDict(it);
+	var limitingQuota = Infinity;
+	var limiters = [];
+	var invDict = _.keyBy(inventory.ToStorage(), function(elem){return elem.it});
 
 	Object.keys(recipeDict).forEach(function(ingredient) {
 		var available = invDict[ingredient].num;
