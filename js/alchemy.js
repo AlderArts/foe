@@ -148,22 +148,29 @@ Alchemy.CountBrewable = function(it, inventory) {
 	var recipeDict = Alchemy.GetRecipeDict(it);
 	var limitingQuota = Infinity;
 	var limiters = [];
-	var invDict = _.keyBy(inventory.ToStorage(), function(elem){return elem.it});
+	var invDict = _.chain(inventory.ToStorage()).keyBy('it').mapValues('num').value();
+	var productionSteps = []; // [{qty: 5, recipe: [...]}]
 
-	Object.keys(recipeDict).forEach(function(ingredient) {
-		var available = invDict[ingredient].num;
-		var quota = Math.floor(available/recipeDict[ingredient]);
+	while(!_.isEmpty(recipeDict)) {
+		Object.keys(recipeDict).forEach(function(ingredient) {
+			var available = invDict[ingredient];
+			var quota = Math.floor(available/recipeDict[ingredient]);
 
-		if(quota < limitingQuota) limitingQuota = quota;
-	});
+			if(quota < limitingQuota) limitingQuota = quota;
+		});
 
-	Object.keys(recipeDict).forEach(function(ingredient) {
-		invDict[ingredient].num -= recipeDict[ingredient] * limitingQuota;
-
-		if(invDict[ingredient].num < recipeDict[ingredient]) {
-			limiters.push(ItemIds[ingredient]);
+		for (var ingredient of Object.keys(recipeDict)){
+			invDict[ingredient]-= recipeDict[ingredient] * limitingQuota;
 		}
-    });
+
+		productionSteps.push({
+			recipe: recipeDict,
+			qty: limitingQuota,
+		});
+
+		// invDict might get modified, recipeDict uses a clone
+		recipeDict = Alchemy.AdaptRecipe(recipeDict, invDict);
+	}
 
 	return {
 		qty: limitingQuota,
@@ -172,4 +179,46 @@ Alchemy.CountBrewable = function(it, inventory) {
 			Alchemy.MakeItem(it, batchSize, player, inventory);
 		}
 	};
+}
+
+Alchemy.AdaptRecipe = function(recipeDict, invDict) {
+	var origRecipeDict = recipeDict;
+	recipeDict = Object.assign({}, recipeDict);
+
+	for (var ingredient of Object.keys(recipeDict)){
+		if(recipeDict[ingredient] == 0) continue;
+
+		var ingredientObj = ItemIds[ingredient];
+
+		if(invDict[ingredient] >= recipeDict[ingredient]) {
+			// All is well, do nothing
+		} else if (_.includes(player.recipes, ingredientObj)) {
+			var ingredientRecipe = Alchemy.GetRecipeDict(ingredientObj);
+
+			// For the sake of simplicity, if there's not enough of an item to do the recipe once,
+			// the leftovers are considered to be equivalent amounts of their components.
+			Object.keys(ingredientRecipe).forEach(function(ingredientComponent) {
+				if (invDict[ingredient] !== 0) {
+					if (!invDict[ingredientComponent]) invDict[ingredientComponent] = 0;
+
+					invDict[ingredientComponent] += ingredientRecipe[ingredientComponent];
+				}
+
+				recipeDict[ingredientComponent] =
+					(recipeDict[ingredientComponent] || 0) + ingredientRecipe[ingredientComponent];
+			});
+
+			recipeDict[ingredient] = 0;
+		} else {
+			// Can't craft this, no need to look any further
+			return {};
+		}
+	}
+
+	// And just to make sure the recipe still holds up, we recurse until the recipe comes back
+	// unchanged or not at all
+	if (_.isEqual(recipeDict, origRecipeDict)) return recipeDict;
+
+	var checkedRecipe = Alchemy.AdaptRecipe(recipeDict, invDict);
+	return checkedRecipe;
 }
