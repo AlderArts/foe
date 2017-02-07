@@ -216,8 +216,9 @@ Alchemy.AdaptRecipe = function(recipeDict, invDict) {
 					invDict[ingredientComponent] += ingredientRecipe[ingredientComponent];
 				}
 
-				recipeDict[ingredientComponent] =
-					(recipeDict[ingredientComponent] || 0) + ingredientRecipe[ingredientComponent];
+				if(!recipeDict[ingredientComponent]) recipeDict[ingredientComponent] = 0;
+				// If item X is needed 3 times for a recipe, all of its ingredients are also needed 3 times.
+				recipeDict[ingredientComponent] += ingredientRecipe[ingredientComponent]*recipeDict[ingredient];
 			});
 
 			recipeDict[ingredient] = 0;
