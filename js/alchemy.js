@@ -135,7 +135,8 @@ Alchemy.GetRecipeDict = function(it) {
 
 	// There's always the possibility of some items being required more than once
 	recipe.forEach(function(ingredient) {
-		recipeDict[ingredient.it.id] = recipeDict[ingredient.it.id] + 1 || 1;
+		if(!recipeDict[ingredient.it.id]) recipeDict[ingredient.it.id] = 0;
+		recipeDict[ingredient.it.id] =+ (ingredient.num || 1);
 	});
 
 	return recipeDict;
