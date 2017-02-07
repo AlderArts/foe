@@ -66,14 +66,16 @@ Alchemy.AlchemyPrompt = function(alchemist, inventory, backPrompt, callback, pre
 	Text.Flush();
 }
 
-Alchemy.MakeItem = function(it, qty, alchemist, inventory, backPrompt, callback){
+Alchemy.MakeItem = function(it, qty, alchemist, inventory, backPrompt, callback, mockRemove){
 	Text.Clear();
 	Text.Add("[name] mix[es] the ingredients, preparing [qty]x [item].", {name: alchemist.NameDesc(), es: alchemist.plural() ? "" : "es", item: it.name, qty: qty});
 	Text.Flush();
 
-	it.recipe.forEach(function(component) {
-		inventory.RemoveItem(component.it, qty);
-	});
+	if(!mockRemove) {
+		it.recipe.forEach(function(component) {
+			inventory.RemoveItem(component.it, qty);
+		});
+	}
 
 	if(callback) {
 		callback(it);
@@ -87,7 +89,7 @@ Alchemy.MakeItem = function(it, qty, alchemist, inventory, backPrompt, callback)
 				ShowAlchemy();
 		});
 	}
-}
+};
 
 Alchemy.ItemDetails = function(it, inventory) {
 	var batchFormats = [1, 5, 10, 25];
@@ -101,31 +103,26 @@ Alchemy.ItemDetails = function(it, inventory) {
 		maxQty: brewable.qty,
 		upTo: (brewable.qty > 1) ? "up to" : "",
 		inInv: inInventory,
-		limiters: Text.Enumerate(_.map(brewable.limiters, "name"), "or"),
 	}
 
 	Text.Clear();
-	if (brewable.qty < 1) {
-		Text.Add("With the ingredients you have on hand, there's not enough [limiters] for you to make any [item].", parser);
-		Text.NL();
-	} else {
-		Text.Add("With the ingredients you have on hand, you could make [upTo] [maxQty]x [item].", parser);
-		Text.NL();
-		Text.Add("How much [item] do you want to make? ", parser);
-		if (inInventory) Text.Add("You are already carrying [inInv].", parser);
-		Text.NL();
 
-		for(var i = 0; i < batchFormats.length; i++) {
-			var format = batchFormats[i];
-			var enabled = format <= brewable.qty;
-			var btnTxt = "x" + format;
-			list.push({
-				nameStr: btnTxt,
-				enabled: enabled,
-				obj:     format,
-				func:    BrewBatch,
-			});
-		}
+	Text.Add("With the ingredients you have on hand, you could make [upTo] [maxQty]x [item].", parser);
+	Text.NL();
+	Text.Add("How much [item] do you want to make? ", parser);
+	if (inInventory) Text.Add("You are already carrying [inInv].", parser);
+	Text.NL();
+
+	for(var i = 0; i < batchFormats.length; i++) {
+		var format = batchFormats[i];
+		var enabled = format <= brewable.qty;
+		var btnTxt = "x" + format;
+		list.push({
+			nameStr: btnTxt,
+			enabled: enabled,
+			obj:     format,
+			func:    BrewBatch,
+		});
 	}
 
 	Gui.SetButtonsFromList(list, true);
@@ -147,7 +144,6 @@ Alchemy.GetRecipeDict = function(it) {
 Alchemy.CountBrewable = function(it, inventory) {
 	var recipeDict = Alchemy.GetRecipeDict(it);
 	var limitingQuota = Infinity;
-	var limiters = [];
 	var invDict = _.chain(inventory.ToStorage()).keyBy('it').mapValues('num').value();
 	var productionSteps = []; // [{qty: 5, recipe: [...]}]
 
@@ -173,11 +169,24 @@ Alchemy.CountBrewable = function(it, inventory) {
 	}
 
 	return {
-		qty: limitingQuota,
-		limiters: limiters,
+		qty: _.map(productionSteps, 'qty').reduce(function(sum, qty) {
+			return sum += qty;
+		}, 0),
 		brewFn: function(batchSize){
-			Alchemy.MakeItem(it, batchSize, player, inventory);
-		}
+			var amountProduced = 0;
+			for(var step of productionSteps) {
+				var qty = Math.min(batchSize - amountProduced, step.qty);
+
+				Object.keys(step.recipe).forEach(function(componentId) {
+					inventory.RemoveItem(ItemIds[componentId], step.recipe[componentId] * qty);
+				});
+
+				amountProduced += qty;
+				if (amountProduced >= batchSize) break;
+			}
+
+			Alchemy.MakeItem(it, amountProduced, player, inventory, undefined, undefined, true);
+		},
 	};
 }
 
