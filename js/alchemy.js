@@ -144,13 +144,24 @@ Alchemy.GetRecipeDict = function(it) {
 
 Alchemy.CountBrewable = function(it, inventory) {
 	var recipeDict = Alchemy.GetRecipeDict(it);
-	var limitingQuota = Infinity;
 	var invDict = _.chain(inventory.ToStorage()).keyBy('it').mapValues('num').value();
 	var productionSteps = []; // [{qty: 5, recipe: [...]}]
 
 	while(!_.isEmpty(recipeDict)) {
+		var limitingQuota = Infinity;
+
+		Object.keys(recipeDict).forEach(function(ingredient) {
+			// Might cause divisions by zero otherwise.
+			if(recipeDict[ingredient] === 0) delete recipeDict[ingredient];
+		});
+
 		Object.keys(recipeDict).forEach(function(ingredient) {
 			var available = invDict[ingredient];
+			// FIXME : Unavailable items may be listed as "NaN" when building the dict, workaround
+			if (!_.isFinite(available)) {
+				available = 0;
+				invDict[ingredient] = 0;
+			}
 			var quota = Math.floor(available/recipeDict[ingredient]);
 
 			if(quota < limitingQuota) limitingQuota = quota;
@@ -173,6 +184,7 @@ Alchemy.CountBrewable = function(it, inventory) {
 		qty: _.map(productionSteps, 'qty').reduce(function(sum, qty) {
 			return sum += qty;
 		}, 0),
+		steps: productionSteps, // Should this be there?
 		brewFn: function(batchSize){
 			var amountProduced = 0;
 			productionSteps.some(function(step) {
