@@ -129,6 +129,13 @@ Alchemy.ItemDetails = function(it, inventory) {
 			func:    BrewBatch,
 		});
 	}
+	// Add a "brew all", for the maximum number of brews
+	list.push({
+		nameStr: "All (x" + brewable.qty + ")",
+		enabled: true,
+		obj:     brewable.qty,
+		func:    BrewBatch,
+	});
 
 	Gui.SetButtonsFromList(list, true);
 	Text.Flush();
