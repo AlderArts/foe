@@ -25,9 +25,16 @@ Alchemy.AlchemyPrompt = function(alchemist, inventory, backPrompt, callback, pre
 	}
 
 	alchemist.recipes.forEach(function(item) {
-		var enabled = true;
 		var knownRecipe = false;
-		var str = Text.BoldColor(item.name) + ": ";
+
+		var brewable = Alchemy.CountBrewable(item, inventory);
+		// FIXME: If the initial step is unavailable, weird stuff may happen.
+		var shallowQty = brewable.steps[0].qty;
+		var deepExtra = brewable.qty - shallowQty;
+		var enabled  = !(!brewable.qty);
+
+		var str = Text.BoldColor(item.name);
+		str += " ("+ shallowQty + ((deepExtra) ? " + " + deepExtra : "") +")"  + ": ";
 		item.recipe.forEach(function(component, idx) {
 			var available = inventory.QueryNum(component.it) || 0;
 			var enough = (available >= (component.num || 1));
@@ -35,7 +42,6 @@ Alchemy.AlchemyPrompt = function(alchemist, inventory, backPrompt, callback, pre
 			if(!enough) str += "<b>";
 			str += (component.num || 1) + "/" + available + "x " + component.it.name;
 			if(!enough) str += "</b>";
-			enabled &= enough;
 		});
 
 		if(alchemist == player) {
