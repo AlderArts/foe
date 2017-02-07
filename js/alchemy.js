@@ -155,10 +155,10 @@ Alchemy.CountBrewable = function(it, inventory) {
 			if(quota < limitingQuota) limitingQuota = quota;
 		});
 
-		for (var ingredient of Object.keys(recipeDict)){
-			invDict[ingredient]-= recipeDict[ingredient] * limitingQuota;
-		}
-
+		Object.keys(recipeDict).forEach(function(ingredient) {
+			invDict[ingredient] -= recipeDict[ingredient] * limitingQuota;
+		});
+		
 		productionSteps.push({
 			recipe: recipeDict,
 			qty: limitingQuota,
@@ -174,7 +174,7 @@ Alchemy.CountBrewable = function(it, inventory) {
 		}, 0),
 		brewFn: function(batchSize){
 			var amountProduced = 0;
-			for(var step of productionSteps) {
+			productionSteps.some(function(step) {
 				var qty = Math.min(batchSize - amountProduced, step.qty);
 
 				Object.keys(step.recipe).forEach(function(componentId) {
@@ -182,8 +182,8 @@ Alchemy.CountBrewable = function(it, inventory) {
 				});
 
 				amountProduced += qty;
-				if (amountProduced >= batchSize) break;
-			}
+				return (amountProduced >= batchSize);
+			});
 
 			Alchemy.MakeItem(it, amountProduced, player, inventory, undefined, undefined, true);
 		},
@@ -194,7 +194,9 @@ Alchemy.AdaptRecipe = function(recipeDict, invDict) {
 	var origRecipeDict = recipeDict;
 	recipeDict = Object.assign({}, recipeDict);
 
-	for (var ingredient of Object.keys(recipeDict)){
+	var keys = Object.keys(recipeDict);
+	for(var i = 0; i < keys.length; i++) {
+		var ingredient = keys[i];
 		if(recipeDict[ingredient] == 0) continue;
 
 		var ingredientObj = ItemIds[ingredient];
