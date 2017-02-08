@@ -225,21 +225,18 @@ Alchemy.AdaptRecipe = function(recipeDict, invDict) {
 		} else if (_.includes(player.recipes, ingredientObj)) {
 			var ingredientRecipe = Alchemy.GetRecipeDict(ingredientObj);
 
-			// For the sake of simplicity, if there's not enough of an item to do the recipe once,
-			// the leftovers are considered to be equivalent amounts of their components.
+			// Set the amount for that ingredient to however many we have left
+			var missingAmount = recipeDict[ingredient] - invDict[ingredient];
+			recipeDict[ingredient] = invDict[ingredient]; // Most likely 0
+
 			Object.keys(ingredientRecipe).forEach(function(ingredientComponent) {
-				if (invDict[ingredient] !== 0) {
-					if (!invDict[ingredientComponent]) invDict[ingredientComponent] = 0;
-
-					invDict[ingredientComponent] += ingredientRecipe[ingredientComponent];
-				}
-
 				if(!recipeDict[ingredientComponent]) recipeDict[ingredientComponent] = 0;
-				// If item X is needed 3 times for a recipe, all of its ingredients are also needed 3 times.
-				recipeDict[ingredientComponent] += ingredientRecipe[ingredientComponent]*recipeDict[ingredient];
-			});
 
-			recipeDict[ingredient] = 0;
+				// If item X is needed 3 times for a recipe, all of its ingredients are also needed 3 times.
+				// If we need it 3 times but missingAmount is 1, only add the ingredients 1 time.
+				// The extra 2 times are for the next iteration
+				recipeDict[ingredientComponent] += ingredientRecipe[ingredientComponent]*missingAmount;
+			});
 		} else {
 			// Can't craft this, no need to look any further
 			return {};
