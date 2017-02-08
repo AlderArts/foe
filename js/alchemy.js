@@ -28,7 +28,6 @@ Alchemy.AlchemyPrompt = function(alchemist, inventory, backPrompt, callback, pre
 		var knownRecipe = false;
 
 		var brewable = Alchemy.CountBrewable(item, inventory);
-		// FIXME: If the initial step is unavailable, weird stuff may happen.
 		var shallowQty = brewable.steps[0].qty;
 		var deepExtra = brewable.qty - shallowQty;
 		var enabled  = !(!brewable.qty);
@@ -190,7 +189,7 @@ Alchemy.CountBrewable = function(it, inventory) {
 		qty: _.map(productionSteps, 'qty').reduce(function(sum, qty) {
 			return sum += qty;
 		}, 0),
-		steps: productionSteps, // Should this be there?
+		steps: productionSteps,
 		brewFn: function(batchSize){
 			var amountProduced = 0;
 			productionSteps.some(function(step) {
