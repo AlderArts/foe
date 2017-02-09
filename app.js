@@ -6,8 +6,8 @@ windowHeight = 700;
 APP_NAME = "Fall of Eden";
 VERSION_MAJOR = 0;
 VERSION_MINOR = 4;
-VERSION_SUBSCRIPT = "t";
-VERSION_NAME = "Barnaby & status effects";
+VERSION_SUBSCRIPT = "u";
+VERSION_NAME = "Alchemy hijinxs";
 
 SAVE_VERSION = 29;
 // Save version 1: Initial
