@@ -480,139 +480,29 @@ world.loc.Plains.Nomads.Tent.events.push(new Link(
 		
 		DEBUG = false;
 		
-		party.inventory.AddItem(Items.HorseHair);
-		party.inventory.AddItem(Items.HorseShoe);
-		party.inventory.AddItem(Items.HorseCum);
-		party.inventory.AddItem(Items.Equinium);
-		
-		party.inventory.AddItem(Items.EquiniumPlus);
-		
-		party.inventory.AddItem(Items.RabbitFoot);
-		party.inventory.AddItem(Items.CarrotJuice);
-		party.inventory.AddItem(Items.Lettuce);
-		party.inventory.AddItem(Items.Leporine);
-		
-		party.inventory.AddItem(Items.Whiskers);
-		party.inventory.AddItem(Items.HairBall);
-		party.inventory.AddItem(Items.CatClaw);
-		party.inventory.AddItem(Items.Felinix);
-		
-		party.inventory.AddItem(Items.Tigris);
-		
-		party.inventory.AddItem(Items.SnakeOil);
-		party.inventory.AddItem(Items.LizardScale);
-		party.inventory.AddItem(Items.LizardEgg);
-		party.inventory.AddItem(Items.SnakeFang);
-		party.inventory.AddItem(Items.SnakeSkin);
-		party.inventory.AddItem(Items.Lacertium);
-		
-		party.inventory.AddItem(Items.Nagazm);
-		party.inventory.AddItem(Items.Taurico);
-		
-		party.inventory.AddItem(Items.GoatMilk);
-		party.inventory.AddItem(Items.GoatFleece);
-		party.inventory.AddItem(Items.Caprinium);
-		
-		party.inventory.AddItem(Items.SheepMilk);
-		party.inventory.AddItem(Items.Ramshorn);
-		party.inventory.AddItem(Items.FreshGrass);
-		party.inventory.AddItem(Items.Ovis);
-		
-		party.inventory.AddItem(Items.CowMilk);
-		party.inventory.AddItem(Items.CowBell);
-		party.inventory.AddItem(Items.FreshGrass);
-		party.inventory.AddItem(Items.Bovia);
-		
-		party.inventory.AddItem(Items.CanisRoot);
-		party.inventory.AddItem(Items.DogBone);
-		party.inventory.AddItem(Items.DogBiscuit);
-		party.inventory.AddItem(Items.Canis);
-		
-		party.inventory.AddItem(Items.WolfFang);
-		party.inventory.AddItem(Items.Wolfsbane);
-		party.inventory.AddItem(Items.Lobos);
-		
-		party.inventory.AddItem(Items.FoxBerries);
-		party.inventory.AddItem(Items.Foxglove);
-		party.inventory.AddItem(Items.Vulpinix);
-		
-		party.inventory.AddItem(Items.CorruptPlant);
-		party.inventory.AddItem(Items.BlackGem);
-		party.inventory.AddItem(Items.CorruptSeed);
-		party.inventory.AddItem(Items.Infernum);
-		
-		party.inventory.AddItem(Items.InfernumPlus);
-		
-		party.inventory.AddItem(Items.Hummus);
-		party.inventory.AddItem(Items.Letter);
-		party.inventory.AddItem(Items.SpringWater);
-		party.inventory.AddItem(Items.Homos);
-		
-		party.inventory.AddItem(Items.Feather);
-		party.inventory.AddItem(Items.Trinket);
-		party.inventory.AddItem(Items.FruitSeed);
-		party.inventory.AddItem(Items.Avia);
-		
-		party.inventory.AddItem(Items.MFluff);
-		party.inventory.AddItem(Items.MDust);
-		party.inventory.AddItem(Items.FruitSeed);
-		party.inventory.AddItem(Items.Lepida);
-		
-		party.inventory.AddItem(Items.Stinger);
-		party.inventory.AddItem(Items.SVenom);
-		party.inventory.AddItem(Items.SClaw);
-		party.inventory.AddItem(Items.Scorpius);
-		
-		party.inventory.AddItem(Items.TreeBark);
-		party.inventory.AddItem(Items.AntlerChip);
-		party.inventory.AddItem(Items.Cerventine);
-		
-		party.inventory.AddItem(Items.FlowerPetal);
-		
-		party.inventory.AddItem(Items.RawHoney);
-		party.inventory.AddItem(Items.BeeChitin);
-		party.inventory.AddItem(Items.HoneyBrew);
-		
-		party.inventory.AddItem(Items.Virilium);
-		party.inventory.AddItem(Items.Testos);
-		party.inventory.AddItem(Items.Estros);
-		party.inventory.AddItem(Items.Androgyn);
-		party.inventory.AddItem(Items.Gestarium);
-		party.inventory.AddItem(Items.GestariumPlus);
-		party.inventory.AddItem(Items.Anusol);
-		party.inventory.AddItem(Items.AnusolPlus);
-		
-		party.inventory.AddItem(Items.Fertilium);
-		party.inventory.AddItem(Items.FertiliumPlus);
-		party.inventory.AddItem(Items.Infertilium);
-		party.inventory.AddItem(Items.InfertiliumPlus);
-		
-		party.inventory.AddItem(Items.Toys.SmallDildo);
-		party.inventory.AddItem(Items.Toys.MediumDildo);
-		party.inventory.AddItem(Items.Toys.LargeDildo);
-		party.inventory.AddItem(Items.Toys.ThinDildo);
-		party.inventory.AddItem(Items.Toys.ButtPlug);
-		party.inventory.AddItem(Items.Toys.LargeButtPlug);
-		party.inventory.AddItem(Items.Toys.AnalBeads);
-		party.inventory.AddItem(Items.Toys.LargeAnalBeads);
-		party.inventory.AddItem(Items.Toys.EquineDildo);
-		party.inventory.AddItem(Items.Toys.CanidDildo);
-		party.inventory.AddItem(Items.Toys.ChimeraDildo);
-		
-		party.inventory.AddItem(Items.StrapOn.PlainStrapon);
-		party.inventory.AddItem(Items.StrapOn.LargeStrapon);
-		party.inventory.AddItem(Items.StrapOn.EquineStrapon);
-		party.inventory.AddItem(Items.StrapOn.CanidStrapon);
-		party.inventory.AddItem(Items.StrapOn.ChimeraStrapon);
-		
-		party.inventory.AddItem(Items.Combat.DecoyStick);
-		party.inventory.AddItem(Items.Combat.HPotion);
-		party.inventory.AddItem(Items.Combat.EPotion);
-		party.inventory.AddItem(Items.Combat.SpeedPotion);
-		party.inventory.AddItem(Items.Combat.LustDart);
-		party.inventory.AddItem(Items.Combat.PoisonDart);
-		party.inventory.AddItem(Items.Combat.SmokeBomb);
-		party.inventory.AddItem(Items.Combat.GlassSword);
+		_(Items).pickBy(function(item) {
+			return item instanceof Item
+		}).forOwn(function(item) {
+			party.inventory.AddItem(item);
+		});
+
+		_(Items.Toys).pickBy(function(item) {
+			return item instanceof Item
+		}).forOwn(function(item) {
+			party.inventory.AddItem(item);
+		});
+
+		_(Items.StrapOn).pickBy(function(item) {
+			return item instanceof Item
+		}).forOwn(function(item) {
+			party.inventory.AddItem(item);
+		});
+
+		_(Items.Combat).pickBy(function(item) {
+			return item instanceof Item
+		}).forOwn(function(item) {
+			party.inventory.AddItem(item);
+		});
 		
 		DEBUG = true;
 		
