@@ -16,18 +16,18 @@ Alchemy.AlchemyPrompt = function(alchemist, inventory, backPrompt, callback, pre
 	
 	list = [];
 
-	var Brew = function(it) {
+	var Brew = function(brewable) {
 		if (alchemist == player) {
-			Alchemy.ItemDetails(it, inventory);
+			Alchemy.ItemDetails(brewable, inventory);
 		} else {
-			Alchemy.MakeItem(it, 1, alchemist, inventory, backPrompt, callback);
+			brewable.brewFn(1, backPrompt, callback);
 		}
 	}
 
 	alchemist.recipes.forEach(function(item) {
 		var knownRecipe = false;
 
-		var brewable = Alchemy.CountBrewable(item, inventory);
+		var brewable = Alchemy.CountBrewable(item, inventory, alchemist);
 		var shallowQty = brewable.steps[0].qty;
 		var deepExtra = brewable.qty - shallowQty;
 		var enabled  = !(!brewable.qty);
@@ -54,7 +54,7 @@ Alchemy.AlchemyPrompt = function(alchemist, inventory, backPrompt, callback, pre
 			nameStr: item.name,
 			enabled: enabled,
 			tooltip: item.Long(),
-			obj:     item,
+			obj:     brewable,
 			image:   knownRecipe ? Images.imgButtonEnabled : Images.imgButtonEnabled2,
 			func:    Brew,
 		});
@@ -71,12 +71,12 @@ Alchemy.AlchemyPrompt = function(alchemist, inventory, backPrompt, callback, pre
 	Text.Flush();
 }
 
-Alchemy.MakeItem = function(it, qty, alchemist, inventory, backPrompt, callback, mockRemove){
+Alchemy.MakeItem = function(it, qty, alchemist, inventory, backPrompt, callback, remove) {
 	Text.Clear();
 	Text.Add("[name] mix[es] the ingredients, preparing [qty]x [item].", {name: alchemist.NameDesc(), es: alchemist.plural() ? "" : "es", item: it.name, qty: qty});
 	Text.Flush();
 
-	if(!mockRemove) {
+	if(remove) {
 		it.recipe.forEach(function(component) {
 			inventory.RemoveItem(component.it, qty);
 		});
@@ -96,15 +96,14 @@ Alchemy.MakeItem = function(it, qty, alchemist, inventory, backPrompt, callback,
 	}
 };
 
-Alchemy.ItemDetails = function(it, inventory) {
+Alchemy.ItemDetails = function(brewable, inventory) {
 	var batchFormats = [1, 5, 10, 25];
 	var list = [];
-	var brewable = Alchemy.CountBrewable(it, inventory);
 	var BrewBatch = brewable.brewFn;
-	var inInventory = inventory.QueryNum(it);
+	var inInventory = inventory.QueryNum(brewable.it);
 
 	var parser = {
-		item: it.name,
+		item: brewable.it.name,
 		maxQty: brewable.qty,
 		upTo: (brewable.qty > 1) ? "up to" : "",
 		inInv: inInventory,
@@ -154,7 +153,7 @@ Alchemy.GetRecipeDict = function(it) {
 	return recipeDict;
 }
 
-Alchemy.CountBrewable = function(it, inventory) {
+Alchemy.CountBrewable = function(it, inventory, alchemist) {
 	var recipeDict = Alchemy.GetRecipeDict(it);
 	var invDict = _.chain(inventory.ToStorage()).keyBy('it').mapValues('num').value();
 	var productionSteps = []; // [{qty: 5, recipe: [...]}]
@@ -189,15 +188,16 @@ Alchemy.CountBrewable = function(it, inventory) {
 		});
 
 		// invDict might get modified, recipeDict uses a clone
-		recipeDict = Alchemy.AdaptRecipe(recipeDict, invDict);
+		recipeDict = Alchemy.AdaptRecipe(recipeDict, invDict, alchemist);
 	}
 
 	return {
+		it: it,
 		qty: _.map(productionSteps, 'qty').reduce(function(sum, qty) {
 			return sum += qty;
 		}, 0),
 		steps: productionSteps,
-		brewFn: function(batchSize){
+		brewFn: function(batchSize, backPrompt, callback, mockRemove){
 			var amountProduced = 0;
 			productionSteps.some(function(step) {
 				var qty = Math.min(batchSize - amountProduced, step.qty);
@@ -210,12 +210,12 @@ Alchemy.CountBrewable = function(it, inventory) {
 				return (amountProduced >= batchSize);
 			});
 
-			Alchemy.MakeItem(it, amountProduced, player, inventory, undefined, undefined, true);
+			Alchemy.MakeItem(it, amountProduced, alchemist, inventory, backPrompt, callback, !mockRemove);
 		},
 	};
 }
 
-Alchemy.AdaptRecipe = function(recipeDict, invDict) {
+Alchemy.AdaptRecipe = function(recipeDict, invDict, alchemist) {
 	var origRecipeDict = recipeDict;
 	recipeDict = Object.assign({}, recipeDict);
 
@@ -228,7 +228,7 @@ Alchemy.AdaptRecipe = function(recipeDict, invDict) {
 
 		if(invDict[ingredient] >= recipeDict[ingredient]) {
 			// All is well, do nothing
-		} else if (_.includes(player.recipes, ingredientObj)) {
+		} else if (_.includes(alchemist.recipes, ingredientObj)) {
 			var ingredientRecipe = Alchemy.GetRecipeDict(ingredientObj);
 
 			// Set the amount for that ingredient to however many we have left
@@ -253,6 +253,6 @@ Alchemy.AdaptRecipe = function(recipeDict, invDict) {
 	// unchanged or not at all
 	if (_.isEqual(recipeDict, origRecipeDict)) return recipeDict;
 
-	var checkedRecipe = Alchemy.AdaptRecipe(recipeDict, invDict);
+	var checkedRecipe = Alchemy.AdaptRecipe(recipeDict, invDict, alchemist);
 	return checkedRecipe;
 }
