@@ -13,6 +13,7 @@ Version 0.4u
 * Fixed a bug in the pregnancy code, making pregnancies not be correctly detected
 * A real clever piece of code added by ElAcechador on Github, that allows you to see what alchemical recipes you can learn when talking to an alchemy NPC like Rosalin. Unknown recipes will be lined out in green, known recipes will be in blue
 * Also by ElAcechador: You can now batch brew alchemy items. You can only do so once you've learned them (NPCs such as Rosalin and Jeanne will still brew single potions)
+* Also by ElAcechador: You can now brew alchemy items that requires several steps in one single click. Example: Testos. This item requires several other brewable items (Equinium, Homos, Canis). You can now brew the item provided you have the base ingredients to brew the components, even if you don't have the components themselves.
 * Fixed a bug in anal toy masturbation
 * Updated the scorpion girls picture to a newly drawn one
 * Fixed an issue that would prevent saving in a certain circumstance (knot value set incorrectly)
