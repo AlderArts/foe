@@ -8,6 +8,7 @@ CHANGELOG for Fall of Eden
 Version 0.4v
 ------------
 * Added a polyfill that fixes an issue with alchemy on Internet Explorer
+* Setting the Pics: On/Off in the data menu now affects the combat portraits of party/enemies
 
 --------------------------------------------
              PREVIOUS VERSIONS

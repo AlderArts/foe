@@ -617,6 +617,13 @@ Gui.RenderEntity = function(entity, set, obj) {
 
 	if(entity.avatar.combat)
 		obj.portrait.attr({src: entity.avatar.combat, opacity: entity.Incapacitated() ? .5 : 1});
+	
+	if(RENDER_PICTURES) {
+		obj.portrait.show();
+	}
+	else {
+		obj.portrait.hide();
+	}
 
 	Gui.PrintGlow(set, obj.name, obj.xoffset-5, obj.yoffset, entity.uniqueName || entity.name, Gui.fonts.Kimberley, 30, "start", {opacity: 1});
 
