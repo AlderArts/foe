@@ -246,7 +246,7 @@ world.loc.Rigard.Plaza.events.push(new Link(
 		Text.NL();
 		Text.Add("You tentatively approach the counter and ask the owner if he can make you gold hinges. Gilded ones, that is.");
 		Text.NL();
-		Text.Add("<i>“Gilded? We don’t stoop to that here. This establishment handles only the pure metal,”</i> he tells you, frowning, <i>“and its alloys of course. Now if you wanted solid gold... But you would need a light door, or the hinges would not hold it. Perhaps silver wrought over a thin frysan frame...?”</i>");
+		Text.Add("<i>“Gilded? We don’t stoop to that here. This establishment handles only the pure metal,”</i> he tells you, frowning, <i>“and its alloys of course. Now if you wanted solid gold... But you would need a light door, or the hinges would not hold it. Perhaps silver wrought over a thin Fryslan frame...?”</i>");
 		Text.NL();
 		Text.Add("He glances over you, remembering himself. <i>“But you would not be able to afford it. Go visit that oaf Martello in the merchant district. He should be more appropriate to your level.”</i>");
 		Text.NL();
