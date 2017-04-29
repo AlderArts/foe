@@ -1658,7 +1658,7 @@ Scenes.Kiakai.HealingAssertive = function() {
 				if(kiakai.flags["Sexed"] < 20)
 					Text.Add("[name] is doing a relatively good job, but [heshe] is going a bit too slow, [hisher] inexperience obvious in the hesitant motions. It seems you have to train [himher] a bit more for [himher] to lose [hisher] inhibitions.", parse);
 				else
-					Text.Add("[name] is putting [hisher] skills to good use, probing your depths eagerly. Your diligent training of the elf is paying off, [heshe] is still a bit flustered, but hardly seems inhibited anymore.", parse);
+					Text.Add("[name] is putting [hisher] skills to good use, probing your depths eagerly. Your diligent training of the elf is paying off; [heshe] is still a bit flustered, but hardly seems inhibited anymore.", parse);
 				Text.NL();
 				Text.Add("No... you need more than this.", parse);
 				Text.NL();
@@ -1670,7 +1670,7 @@ Scenes.Kiakai.HealingAssertive = function() {
 					
 					var scenes = new EncounterTable();
 					scenes.AddEnc(function() {
-						Text.Add("<i>“Mm... not bad, but perhaps you still need some guidance...”</i>", parse);
+						Text.Add("<i>“Mmm... not bad, but perhaps you still need some guidance...”</i>", parse);
 					}, 1.0, function() { return true; });
 					scenes.AddEnc(function() {
 						Text.Add("<i>“You do it like this!”</i>", parse);
@@ -1813,7 +1813,7 @@ Scenes.Kiakai.HealingAssertive = function() {
 			Text.Add("Deciding that it is time to put your own private parts on display, you flip [l] over the elf, straddling [hisher] face, getting a good view of [himher].", parse);
 			Text.NL();
 			if(player.HasBalls() && player.Balls().size.Get() > 8) {
-				Text.Add("[name] has a hard time seeing anything, as you plant your [balls] on [hisher] forehead, the plentiful sack partly obscuring [hisher] vision as you drag it over [hisher] face.", parse);
+				Text.Add("[name] has a hard time seeing anything as you plant your [balls] on [hisher] forehead, the plentiful sack partly obscuring [hisher] vision as you drag it over [hisher] face.", parse);
 				Text.NL();
 			}
 			if(player.FirstVag()) {
@@ -1892,7 +1892,7 @@ Scenes.Kiakai.HealingAssertive = function() {
 							}
 						}
 						Text.NL();
-						Text.Add("You grasp the [kcock] firmly at its base, trapping the blood in the engorged member. With your free hand you prod and tease the rigid shaft, interspersing your pokes with light tantalizing kisses. As you brush the elf's [kcockTip] with your lips, your [tongue] darts out, playing along [hisher] cumslit.", parse);
+						Text.Add("You grasp the [kcock] firmly at its base, trapping the blood in the engorged member. With your free hand, you prod and tease the rigid shaft, interspersing your pokes with light tantalizing kisses. As you brush the elf's [kcockTip] with your lips, your [tongue] darts out, playing along [hisher] cumslit.", parse);
 						Text.NL();
 						Text.Add("Retaining your clenching grip of the base of [hisher] dick, you start stroking [himher] with your other hand. Deprived of a normal flow of blood, the veins are starting to stand out, bulging under your deft fingers.", parse);
 						Text.NL();
@@ -1902,7 +1902,7 @@ Scenes.Kiakai.HealingAssertive = function() {
 						Text.NL();
 						Text.Add("With long, slow strokes, you push the elf closer and closer to the edge, stopping just short of orgasm. For a while, you keep [name] poised on the edge with nothing more than your hot breath on [hisher] quivering [kcockTip]. [HeShe] whines piteously, but focuses on [hisher] own task. Just when [name]'s [kcock] shows signs of softening, you reinvigorate it with a few quick licks, keeping [himher] just on the verge of cumming.", parse);
 						Text.NL();
-						Text.Add("In a sudden move, you take [hisher] [kcock] into your mouth, sucking and blowing it for all you are worth. [name] cries out into your crotch, [hisher] legs trembling from intense pleasure. Your vice-like grip on [hisher] shaft prevents the poor elf from orgasming, leaving [himher] with no recourse but to attempt to thrust into your mouth. You are amused by [hisher] desperate twitches, but don't relinquish your tight embrace.", parse);
+						Text.Add("In a sudden move, you take [hisher] [kcock] into your mouth, sucking and blowing it for all you are worth. [name] cries out into your crotch, [hisher] legs trembling from intense pleasure. Your vice-like grip on [hisher] shaft prevents the poor elf from orgasming, leaving [himher] with no recourse but to attempt to thrust into your maw. You are amused by [hisher] desperate twitches, but don't relinquish your tight embrace.", parse);
 						Text.NL();
 						
 						var cum = kiakai.OrgasmCum();
@@ -1963,7 +1963,7 @@ Scenes.Kiakai.HealingAssertive = function() {
 								Text.NL();
 								Text.Add("<i>“Beg for it.”</i>", parse);
 								Text.NL();
-								Text.Add("<i>“Please [playername], I beg of you!”</i> [name] pleads with you, jerking [hisher] hips futilely in an attempt to dislodge your grip. Your only response is to tighten it further.", parse);
+								Text.Add("<i>“Please, [playername], I beg of you!”</i> [name] pleads with you, jerking [hisher] hips futilely in an attempt to dislodge your grip. Your only response is to tighten it further.", parse);
 								Text.NL();
 								Text.Add("<i>“You'll cum when I allow you to, not before,”</i> you counter, letting your [tongue] play along the tip of the elf's cock. Powerless to resist, [name] falls back, letting you do as you please.", parse);
 								Text.NL();
@@ -2003,7 +2003,7 @@ Scenes.Kiakai.HealingAssertive = function() {
 						player.Fuck(null, 1);
 						kiakai.Fuck(null, 1);
 						
-						Text.Add("With your fingers, you spread the elf's labia, revealing the glistening pink flesh within. You confidently dig in, tasting your companion's most private parts. Your [tongue] circles the outer lips several times before moving on to your main course, [name]'s inviting cleft. Reaching in deeply, you jam your [tongue] inside [himher], lapping up [hisher] fluids gleefully.", parse);
+						Text.Add("With your fingers, you spread the elf's labia, revealing the glistening pink flesh within. You confidently dig in, tasting your companion's most private parts. Your [tongue] circles the outer lips several times before moving on to your main course: [name]'s inviting cleft. Reaching in deeply, you jam your flexible organ inside [himher], lapping up [hisher] fluids gleefully.", parse);
 						Text.NL();
 						parse["cockCuntTaint"] = player.FirstCock() ? "cock" : player.FirstVag() ? "cunt" : "taint";
 						Text.Add("[name] definitely appreciates your fervor, moaning against your [cockCuntTaint] as you eat [himher] out. A single strand of saliva mixed with [hisher] juices connects the tip of your tongue with [hisher] tunnel as you briefly surface for air, dripping over [hisher] crotch.", parse);
@@ -2033,7 +2033,7 @@ Scenes.Kiakai.HealingAssertive = function() {
 							Text.Add("After preparing the elf with kisses, licks, and nibs, you envelop [hisher] [kclit] completely, taking it into your mouth. Ever so carefully, you gently bite at the sensitive nub, sending sparks of electricity racing straight up the surprised elf's spine. Overwhelmed by the pleasure, [heshe] cries out, [hisher] back arching, pressing [himher] against your [breasts].", parse);
 						}
 						Text.NL();
-						Text.Add("Really, [name] needs to be trained better than this, <i>[heshe]</i> should be the one pleasuring you, not the other way around. Climaxing or not, you're going to make [himher] work for it. You slowly gyrate your hips, reasoning that if the elf can't keep up, you'll make a concerted effort on your own.", parse);
+						Text.Add("Really, [name] needs to be trained better than this; <i>[heshe]</i> should be the one pleasuring you, not the other way around. Climaxing or not, you're going to make [himher] work for it. You slowly gyrate your hips, reasoning that if the elf can't keep up, you'll make a concerted effort on your own.", parse);
 						Text.NL();
 						
 						var cum = kiakai.OrgasmCum();
@@ -2268,7 +2268,7 @@ Scenes.Kiakai.HealingAssertive = function() {
 				Text.Add("Suddenly getting a very naughty idea, you reach down and touch the elf's forehead, mock concern in your voice. <i>“[name]! Your skin is burning, are you ok?”</i>", parse);
 				Text.NL();
 				parse["leg"] = player.LegDesc();
-				Text.Add("Mumbling, [name] assures you that [heshe] is fine, avoiding your gaze, but you'll have none of it. <i>“Can't have the healer getting a fever, can we?”</i> You instruct your companion to lay down across your lap, face down. A bit doubtful, the elf complies to your wishes. [HeShe] shudders slightly as [hisher] [kgen] accidentally brush against your [leg]. Apologetically, [heshe] shifts around, raising [hisher] butt to break the contact. Coincidentally, this suits your intentions perfectly.", parse);
+				Text.Add("Mumbling, [name] assures you that [heshe] is fine, avoiding your gaze, but you'll have none of it. <i>“Can't have the healer getting a fever, can we?”</i> You instruct your companion to lie down across your lap, face down. A bit doubtful, the elf complies to your wishes. [HeShe] shudders slightly as [hisher] [kgen] accidentally brush against your [leg]. Apologetically, [heshe] shifts around, raising [hisher] butt to break the contact. Coincidentally, this suits your intentions perfectly.", parse);
 				Text.NL();
 				Text.Add("<i>“I'm going to take your temperature,”</i> you announce, licking two of your fingers in preparation. <i>“It might sting a bit at first, but don't worry, you tended to me and now I will tend to you.”</i>", parse);
 				Text.NL();
@@ -2352,7 +2352,7 @@ Scenes.Kiakai.HealingAssertive = function() {
 					if(numFingers > 2) {
 						Text.Add(" You keep it up until all your [numFingers] digits are prodding at [hisher] insides.", parse);
 						if(numFingers >= 5) {
-							Text.Add(" Even as flexible as [name] has become, you are a bit doubtful about pushing your whole hand in there, can [heshe] really take it?", parse);
+							Text.Add(" Even as flexible as [name] has become, you are a bit doubtful about pushing your whole hand in there; can [heshe] really take it?", parse);
 						}
 					}
 				}
@@ -2379,7 +2379,7 @@ Scenes.Kiakai.HealingAssertive = function() {
 					Text.NL();
 					Text.Add("Almost surprised yourself, you chuckle as you allow the elf some time to relax before exploring the extent of your newfound reach. You can push a fair bit of your arm up [hisher] [kanus] before encountering resistance.", parse);
 					Text.NL();
-					Text.Add("<i>“Mm, seems I have trained you well, [name],”</i> you tease the elf as your fist wreaks havoc on [hisher] insides.", parse);
+					Text.Add("<i>“Mmm, seems I have trained you well, [name],”</i> you tease the elf as your fist wreaks havoc on [hisher] insides.", parse);
 					Text.NL();
 					parse["thighs"] = player.ThighsDesc();
 					
@@ -2565,7 +2565,7 @@ Scenes.Kiakai.Sex = function() {
 				Text.NL();
 				Text.Add("<i>“Come now,”</i> you tease as you begin to remove your gear, <i>“don't you remember when we first met? You seemed to have the right idea at the time.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>“T-that was something I had to do!”</i> the elf exclaims, flustered, <i>“had I not cared for you...”</i> [HeShe] trails off, as [heshe] realizes that you are just messing with [himher]. [name] gathers [hisher] courage, blushing as memories of your many sexual encounters wash over [himher]. By accounts of all the things you have done together, this shouldn't really bother the elf, yet [heshe] is fidgeting, dragging out the process of removing [hisher] clothes.", parse);
+				Text.Add("<i>“T-that was something I had to do!”</i> the elf exclaims, flustered, <i>“had I not cared for you...”</i> [HeShe] trails off as [heshe] realizes that you are just messing with [himher]. [name] gathers [hisher] courage, blushing as memories of your many sexual encounters wash over [himher]. By accounts of all the things you have done together, this shouldn't really bother the elf, yet [heshe] is fidgeting, dragging out the process of removing [hisher] clothes.", parse);
 				Text.NL();
 				Text.Add("<i>“Well, won't you tell me what to do?”</i> you murmur provocatively, twirling around in a circle to show off yourself. <i>“You should have a few ideas after our little talk.”</i>", parse);
 				Text.NL();
@@ -2763,7 +2763,7 @@ Scenes.Kiakai.SexPrompt = function(attitude) {
 						Text.Add("<i>“You've yet to convince me of that, and I rather doubt I'll be more inclined to believe you after I'm finished,”</i> you retort, grinning as [heshe] shivers under your predatory glare. <i>“Besides, did you really think that would stop me?”</i>", parse);
 					}
 					Text.NL();
-					Text.Add("<i>“Now... lie down and spread your legs, elf,”</i> you command, <i>“put on a show for me, prepare yourself.”</i> [name] hurriedly complies, presenting you with [hisher] bum.", parse);
+					Text.Add("<i>“Now... lie down and spread your legs, elf,”</i> you command, <i>“put on a show for me, and prepare yourself.”</i> [name] hurriedly complies, presenting you with [hisher] bum.", parse);
 					Text.NL();
 					Text.Add("<i>“Ungh... like this?”</i> [heshe] asks uncertainly, inserting one of [hisher] slender fingers into [hisher] [kanus].", parse);
 					Text.NL();
@@ -2771,7 +2771,7 @@ Scenes.Kiakai.SexPrompt = function(attitude) {
 					if(kiakai.flags["AnalExp"] > 15)
 						Text.Add(" <i>“Though I suppose this isn't the first thing I've shoved in there,”</i> you muse.", parse);
 					Text.NL();
-					Text.Add("Not trusting [himher]self to speak anymore, the elf merely whimpers as [heshe] adds another two fingers. You enjoy the display for a while, before announcing that you are moving on to the main course. Without waiting for a reply, you flip [name] over on all fours, nudging [hisher] legs apart, exposing [hisher] [kanus] to your eager [cock].", parse);
+					Text.Add("Not trusting [himher]self to speak anymore, the elf merely whimpers as [heshe] adds another two fingers. You enjoy the display for a while before announcing that you are moving on to the main course. Without waiting for a reply, you flip [name] over on all fours, nudging [hisher] legs apart, exposing [hisher] [kanus] to your eager [cock].", parse);
 				}
 			}
 			// Repeats
@@ -2834,7 +2834,7 @@ Scenes.Kiakai.SexPrompt = function(attitude) {
 				else if(len < 22) {
 					Text.Add("<i>“Halfway there!”</i> you announce happily, continuing to push your [cock] forward, burying it bit by bit inside the elf.", parse);
 					Text.NL();
-					Text.Add("<i>“T-there is more?!”</i> [name] gasps, <i>“It will not fit!”</i>", parse);
+					Text.Add("<i>“T-there is more?!”</i> [name] gasps. <i>“It will not fit!”</i>", parse);
 					Text.NL();
 					Text.Add("You beg to differ, and set out to prove [himher] wrong. Although there are some noises of protest, soon enough your [hips] connect with [hisher] [kbutt], your [cock] hilted inside of [name]'s [kanus].", parse);
 				}
@@ -2951,7 +2951,7 @@ Scenes.Kiakai.SexPrompt = function(attitude) {
 					else
 						Text.Add("<i>“D-do me harder, I can take it!”</i> [heshe] begs. <i>“Ravage me, fuck me, stuff my ass full of your [cockType]!”</i>", parse);
 					Text.NL();
-					Text.Add("You are more than happy to oblige, and proceed to give the elf exactly what [heshe] wants, in large, sloppy amounts.", parse);
+					Text.Add("You are more than happy to oblige, and proceed to give the elf exactly what [heshe] wants in large sloppy amounts.", parse);
 					if(kiakai.LustLevel() >= 0.75) {
 						parse["cumJuices"] = kiakai.FirstCock() ? "cum" : "juices";
 						Text.NL();
@@ -3019,14 +3019,14 @@ Scenes.Kiakai.SexPrompt = function(attitude) {
 					Text.Clear();
 					Text.Add("<i>“I'll fuck you good,”</i> you announce, accentuating your words with a rough shove of your hips, driving your [cock] deep inside the elf. [name] cries out in surprise at the motion, but there is a fair bit of poorly disguised delight in there too. As you build up a rhythm, your suspicions are confirmed as [heshe] starts moaning, wordlessly begging you to keep going.", parse);
 					Text.NL();
-					Text.Add("You take a firm hold of the elf's [khips], holding [himher] upright as you start reaming [himher] in earnest. In and out you piston your endowment, keeping a rapid pace. [name]'s velvet passage fits you like a glove, each tight ring intimately caressing you as you force it open. [name] is definitely enjoying your merciless pounding, [hisher] breathing coming in ragged gasps as you use [hisher] [kanus] like a cocksleeve.", parse);
+					Text.Add("You take a firm hold of the elf's [khips], holding [himher] upright as you start reaming [himher] in earnest. In and out, you piston your endowment, keeping a rapid pace. [name]'s velvet passage fits you like a glove, each tight ring intimately caressing you as you force it open. [name] is definitely enjoying your merciless pounding, [hisher] breathing coming in ragged gasps as you use [hisher] [kanus] like a cocksleeve.", parse);
 					Text.NL();
 					if(kiakai.FirstCock() && Math.random() < 0.5) {
 						Text.Add("Deciding to tease your companion a bit, you pull back out completely, leaving [hisher] pucker gaping slightly, as if begging you to return. Changing your position a little, you hunch over [himher], driving your [cock] back in at a downward angle. This has the desired effect of ramming right into [hisher] prostate, as confirmed by a loud yelp from the elf.", parse);
 						Text.NL();
-						Text.Add("Each of your rapid thrusts mashes the sensitive organ, as if trying to forcefully milk it of its contents. A likely outcome if you keep it up for long as each time you grind against it, [name] lets out a whorish moan, crying out for more.", parse);
+						Text.Add("Each of your rapid thrusts mashes the sensitive organ as if trying to forcefully milk it of its contents. A likely outcome if you keep it up for long as each time you grind against it, [name] lets out a whorish moan, crying out for more.", parse);
 						Text.NL();
-						Text.Add("It's not long before the elf's prostate has had enough, and its load explodes from [hisher] [kcocks], some of it splattering against [name]'s chest, before slowly forming a pool on the ground beneath [himher].", parse);
+						Text.Add("It's not long before the elf's prostate has had enough, and its load explodes from [hisher] [kcocks], some of it splattering against [name]'s chest before slowly forming a pool on the ground beneath [himher].", parse);
 						Text.NL();
 					}
 					Text.Add("You switch gears, pushing inside the elf with long, firm strokes. [HisHer] tight tunnel caresses every inch of your lube-covered [cock], though it is loosening up noticeably under your insistent buggering.", parse);
