@@ -370,7 +370,7 @@ Scenes.Kiakai.TalkQuest = function() {
 		
 		Text.NL();
 		if(rigard.Access()) {
-			Text.Add("<i>“Question is: how do we get in?”</i>", parse);
+			Text.Add("<i>“Question is, how do we get in?”</i>", parse);
 			
 			Text.NL();
 			Text.Add("<i>“Perhaps we could try to have one of the farmers sneak us in. They must pass inside regularly to sell their produce. We will have to make sure they are friendly enough to let us tag along, however.”</i>", parse);
@@ -529,7 +529,7 @@ Scenes.Kiakai.TalkUru = function() {
 			if(kiakai.flags["TalkedUruDA"] == 0) {
 				
 				if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral)
-					Text.Add("[name] looks at you pleadingly, fear visible in [hisher] eyes, <i>“Y-you saw what it was like there,[playername]. She <b>cannot</b> be allowed to enter Eden!”</i>", parse);
+					Text.Add("[name] looks at you pleadingly, fear visible in [hisher] eyes, <i>“Y-you saw what it was like there, [playername]. She <b>cannot</b> be allowed to enter Eden!”</i>", parse);
 				else
 					Text.Add("[name] grabs your hand, fear visible in [hisher] eyes, <i>“Y-you saw what it was like there, [playername]. She <b>cannot</b> be allowed to enter Eden!”</i>", parse);
 				Text.Flush();
