@@ -153,7 +153,7 @@ Scenes.Equine.PairEnc = function(levelbonus) {
 	enc.onEncounter = function() {
 		var parse = {
 			party         : !party.Alone() ? " and your party" : "",
-			breastDescCup : enc.mare.FirstBreastRow().ShortCup()
+			breastCup : enc.mare.FirstBreastRow().ShortCup()
 		};
 
 		Text.Clear();
@@ -163,7 +163,7 @@ Scenes.Equine.PairEnc = function(levelbonus) {
 		Text.NL();
 		Text.Add("The stallion has a piece of crude leather tied around his waist covering most of his genitals; bits of his black orbs are clearly visible. Despite being covered, the outline of his knob forms around the cloth. His brown coat contrasts against his hair in a strange way.", parse);
 		Text.NL();
-		Text.Add("A muscular, peach-furred female stands next to her partner. A pair of [breastDescCup] perk naturally at her chest, covered by a sparse amount of leather tied around her back. Her lower set of lips are covered in a similar fashion, a brown leather thong barely covering her features. Despite her obviously feminine traits, she looks strong and firm. Her long hair flows naturally down her neck, eyes sparkling with a green shine.", parse);
+		Text.Add("A muscular, peach-furred female stands next to her partner. A pair of [breastCup] perk naturally at her chest, covered by a sparse amount of leather tied around her back. Her lower set of lips are covered in a similar fashion, a brown leather thong barely covering her features. Despite her obviously feminine traits, she looks strong and firm. Her long hair flows naturally down her neck, eyes sparkling with a green shine.", parse);
 		Text.NL();
 		Text.Add("The two hunch down into an attacking stance. They intend to fight you!", parse);
 		Text.Flush();
@@ -316,11 +316,11 @@ Scenes.Equine.LossPrompt = function() {
 }
 
 Scenes.Equine.FuckFemale = function(enc) {
-	var parse = {
-		cock : function() { return player.FirstCock().Short(); },
-		pants    : player.ArmorDesc(),
+	var parse = {		
 		mobVag : function() { return enc.mare.FirstVag().Short(); }
 	};
+	
+	parse = player.ParserTags(parse);
 
 	Text.Clear();
 	Text.Add("You greedily drink in the female's assets, eyes traveling down to her poorly-covered groin. You swear you can see drops of moisture travel down her long, slender peach legs.", parse);
@@ -420,17 +420,11 @@ Scenes.Equine.FuckFemale = function(enc) {
 }
 
 Scenes.Equine.GetFucked = function(enc) {
-	var parse = {
-		cock   : function() { return player.FirstCock().Short(); },
-		vag    : function() { return player.FirstVag().Short(); },
-		clit   : function() { return player.FirstVag().ClitShort(); },
-		butt   : function() { return player.Butt().Short(); },
-		breasts : function() { return player.BiggestBreasts().Short(); },
-		nips   : function() { return player.BiggestBreasts().NipsShort(); },
-		face   : function() { return player.FaceDesc(); },
-		pants      : player.ArmorDesc(),
+	var parse = {		
 		ifArmor    : player.Armor() ? "strips you down to full nudity" : "runs his hands down your naked body"
 	};
+	
+	parse = player.ParserTags(parse);
 
 	Text.Clear();
 
@@ -488,13 +482,12 @@ Scenes.Equine.GetFucked = function(enc) {
 
 // SCENE FOR MALES/HERMS
 Scenes.Equine.Threesome1 = function(enc) {
-	var parse = {
-		cock : function() { return player.FirstCock().Short(); },
-		mobVag : function() { return enc.mare.FirstVag().Short(); },
-		pants    : player.ArmorDesc(),
-		armor : player.ArmorDesc(),
+	var parse = {		
+		mobVag : function() { return enc.mare.FirstVag().Short(); },		
 		ifBalls  : function() { return player.HasBalls() ? "r balls" : ""; }
 	};
+	
+	parse = player.ParserTags(parse);
 
 	Text.Clear();
 
@@ -561,17 +554,11 @@ Scenes.Equine.Threesome1 = function(enc) {
 }
 
 Scenes.Equine.Threesome2 = function(enc) {
-	var parse = {
-		cock   : function() { return player.FirstCock().Short(); },
-		vag    : function() { return player.FirstVag().Short(); },
-		clit   : function() { return player.FirstVag().ClitShort(); },
-		butt   : function() { return player.Butt().Short(); },
-		breasts : function() { return player.BiggestBreasts().Short(); },
-		nips   : function() { return player.BiggestBreasts().NipsShort(); },
-		pants      : player.ArmorDesc(),
-		armor  : player.ArmorDesc(),
+	var parse = {		
 		mobVag : function() { return enc.mare.FirstVag().Short(); }
 	};
+	
+	parse = player.ParserTags(parse);
 
 	Text.Clear();
 
@@ -693,8 +680,7 @@ Scenes.Equine.WinFuckHim = function(enc) {
 		}
 	}
 
-	var parse = {
-		armor : function() { return player.ArmorDesc(); },
+	var parse = {		
 		cocks2 : function() { return player.MultiCockDesc(allCocks); }
 	};
 
@@ -1088,13 +1074,10 @@ Scenes.Equine.WinFuckHer = function(enc) {
 	var stallion = enc.stallion;
 
 	var parse = {
-		cocks : function() { return player.MultiCockDesc(); },
-		balls     : function() { return player.BallsDesc(); },
-		eye       : function() { return player.EyeDesc(); },
-		face      : function() { return player.FaceDesc(); },
-		armor         : function() { return player.ArmorDesc(); }
+		
 	};
 
+	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
 
@@ -1219,16 +1202,10 @@ Scenes.Equine.WinRideHimVag = function(enc) {
 	var stallion = enc.stallion;
 
 	var parse = {
-		cocks : function() { return player.MultiCockDesc(); },
-		balls     : function() { return player.BallsDesc(); },
-		vag       : function() { return player.FirstVag().Short(); },
-		clit      : function() { return player.FirstVag().ClitShort(); },
-		breasts    : function() { return player.FirstBreastRow().Short(); },
-		nips      : function() { return player.FirstBreastRow().NipsShort(); },
-		eye       : function() { return player.EyeDesc(); },
-		face      : function() { return player.FaceDesc(); },
-		armor         : function() { return player.ArmorDesc(); }
+		
 	};
+	
+	parse = player.ParserTags(parse);
 
 	Text.Clear();
 	Text.Add("No matter how hard you try, you simply cannot tear your eyes away from the stallion's sizable prick as it dangles from the revealing shreds of his destroyed loincloth. You feel your nethers grow hotter at the sight, your ", parse);
