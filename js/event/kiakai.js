@@ -199,6 +199,9 @@ Kiakai.prototype.Interact = function(switchSpot) {
 	
 	options.push({ nameStr: "Talk",
 		func : function() {
+			Text.Clear();
+			Text.Add("What do you want to talk with [name] about?", parse);
+			Text.Flush();
 			that.TalkPrompt();
 		}, enabled : true
 	});
@@ -254,10 +257,6 @@ Kiakai.prototype.TalkPrompt = function() {
 	};
 	parse = kiakai.ParserPronouns(parse);
 	
-	Text.Clear();
-	Text.Add("What do you want to talk with [name] about?", parse);
-	Text.Flush();
-	
 	var options = [];
 	// TALK ABOUT MAIN QUEST
 	options.push({ nameStr: "Quest",
@@ -266,27 +265,42 @@ Kiakai.prototype.TalkPrompt = function() {
 	});
 	// TALK ABOUT ARIA
 	options.push({ nameStr: "Aria",
-		func : Scenes.Kiakai.TalkAria, enabled : true,
+		func : function() {
+			Text.Clear();
+			Scenes.Kiakai.TalkAria();
+		}, enabled : true,
 		tooltip : "Ask about Aria."
 	});
 	// TALK ABOUT URU
 	options.push({ nameStr: "Uru",
-		func : Scenes.Kiakai.TalkUru, enabled : true,
+		func : function() {
+			Text.Clear();
+			Scenes.Kiakai.TalkUru();
+		}, enabled : true,
 		tooltip : "Ask about Uru."
 	});
 	// TALK ABOUT EDEN
 	options.push({ nameStr: "Eden",
-		func : Scenes.Kiakai.TalkEden, enabled : true,
+		func : function() {
+			Text.Clear();
+			Scenes.Kiakai.TalkEden();
+		}, enabled : true,
 		tooltip : "Ask about the land of Eden and its people."
 	});
 	// TALK ABOUT ELVES
 	options.push({ nameStr: "Elves",
-		func : Scenes.Kiakai.TalkElves, enabled : true,
+		func : function() {
+			Text.Clear();
+			Scenes.Kiakai.TalkElves();
+		}, enabled : true,
 		tooltip : Text.Parse("Ask [name] about [hisher] childhood with the elves.", parse)
 	});
 	// TALK ABOUT PRIESTHOOD
 	options.push({ nameStr: "Priesthood",
-		func : Scenes.Kiakai.TalkPriest, enabled : true,
+		func : function() {
+			Text.Clear();
+			Scenes.Kiakai.TalkPriest();
+		}, enabled : true,
 		tooltip : "Ask about the priests of Aria."
 	});
 	// TALK RAVENS
@@ -296,7 +310,7 @@ Kiakai.prototype.TalkPrompt = function() {
 		options.push({ nameStr : "Ravens",
 			func : function() {
 				Scenes.Kiakai.RavenDreams();
-				Gui.NextPrompt(kiakai.TalkPrompt);
+				kiakai.TalkPrompt();
 			}, enabled : true,
 			tooltip : Text.Parse("Ask [name] if [heshe] knows anything about the ravens that have been appearing in your dreams.", parse)
 		});
@@ -387,7 +401,7 @@ Scenes.Kiakai.TalkQuest = function() {
 	}
 	
 	Text.Flush();
-	Gui.NextPrompt(kiakai.TalkPrompt);
+	kiakai.TalkPrompt();
 }
 
 Scenes.Kiakai.TalkAria = function() {
@@ -398,7 +412,6 @@ Scenes.Kiakai.TalkAria = function() {
 	};
 	parse = kiakai.ParserPronouns(parse);
 	
-	Text.Clear();
 	// First time
 	if(kiakai.flags["TalkedAria"] == 0) {
 		
@@ -451,13 +464,19 @@ Scenes.Kiakai.TalkAria = function() {
 				Text.Add("[name], looking affronted, replies curtly, <i>“For the safety of those who follow and worship her, of course!”</i> You calm the elf down, explaining that you meant no offense. Still a bit huffy, [heshe] continues, <i>“It is not for me to know exactly what the Lady's plans are, but I do know that you are instrumental for them.”</i>", parse);
 			Text.NL();
 			Text.Add("When you ask exactly what [heshe] means by that, [name] only responds that something about you, or perhaps the gem you carry, could greatly change the future of Eden. [HeShe] seems unwilling or unable to explain more details at this point.", parse);
-			Text.Flush();
+			Text.NL();
+			Text.NL();
 			
-			Gui.NextPrompt(Scenes.Kiakai.TalkAria);
+			Scenes.Kiakai.TalkAria();
 		}, enabled : true,
 		tooltip : "Ask about what Aria's goals are."
 	});
-	Gui.SetButtonsFromList(options, true, kiakai.TalkPrompt);
+	Gui.SetButtonsFromList(options, true, function() {
+		Text.Clear();
+		Text.Add("<i>“If you would know more of the Lady, you need but ask.”</i>", parse);
+		Text.Flush();
+		kiakai.TalkPrompt();
+	});
 	
 }
 
@@ -468,8 +487,6 @@ Scenes.Kiakai.TalkUru = function() {
 		name   : kiakai.name
 	};
 	parse = kiakai.ParserPronouns(parse);
-	
-	Text.Clear();
 	
 	if(kiakai.flags["TalkedUru"] == 0) {
 		Text.Add("<i>“I would rather not dwell on the dark one longer than I have to, [playername],”</i> [name] tells you in a pained voice, <i>“but one must know their enemy to stand against it in battle.”</i>", parse);
@@ -512,9 +529,10 @@ Scenes.Kiakai.TalkUru = function() {
 			Text.Add("In power, would [name] say they are evenly matched?", parse);
 			Text.NL();
 			Text.Add("<i>“No! Of course not!”</i> the elf exclaims. <i>“No mere demon could ever match the Lady!”</i>", parse);
-			Text.Flush();
+			Text.NL();
+			Text.NL();
 			
-			Gui.NextPrompt(Scenes.Kiakai.TalkUru);
+			Scenes.Kiakai.TalkUru();
 		}, enabled : true,
 		tooltip : "Ask about the conflict between Uru and Aria."
 	});
@@ -555,8 +573,9 @@ Scenes.Kiakai.TalkUru = function() {
 						
 						kiakai.relation.IncreaseStat(100, 5);
 						
-						Text.Flush();
-						Gui.NextPrompt(Scenes.Kiakai.TalkUru);
+						Text.NL();
+						Text.NL();
+						Scenes.Kiakai.TalkUru();
 					}, enabled : true,
 					tooltip : Text.Parse("Try to comfort [himher].", parse)
 				});
@@ -571,8 +590,10 @@ Scenes.Kiakai.TalkUru = function() {
 						Text.NL();
 						
 						Text.Add("[name] looks at you doubtfully, but with a desperate spark of hope in [hisher] purple eyes, <i>“R-really?”</i> You nod affirmatively, though deep down you still have some nagging doubts about your own words.", parse);
-						Text.Flush();
-						Gui.NextPrompt(Scenes.Kiakai.TalkUru);
+						
+						Text.NL();
+						Text.NL();
+						Scenes.Kiakai.TalkUru();
 					}, enabled : true,
 					tooltip : "Boast about your own power."
 				});
@@ -592,8 +613,9 @@ Scenes.Kiakai.TalkUru = function() {
 						Text.NL();
 						Text.Add("You tell [himher] that you'll think about it, but your own world is still the one most important to you.",parse);
 						
-						Text.Flush();
-						Gui.NextPrompt(Scenes.Kiakai.TalkUru);
+						Text.NL();
+						Text.NL();
+						Scenes.Kiakai.TalkUru();
 					}, enabled : true,
 					tooltip : "Eden isn't your problem, and you're not sure Uru is either..."
 				});
@@ -608,8 +630,10 @@ Scenes.Kiakai.TalkUru = function() {
 					Text.NL();
 					Text.Add("<i>“Please, help us to prevent her coming.”</i>", parse);
 				}
-				Text.Flush();
-				Gui.NextPrompt(Scenes.Kiakai.TalkUru);
+				
+				Text.NL();
+				Text.NL();
+				Scenes.Kiakai.TalkUru();
 			}
 		}, enabled : true,
 		tooltip : "Ask about why and how Uru was sealed in the realm where you met her."
@@ -625,12 +649,19 @@ Scenes.Kiakai.TalkUru = function() {
 				Text.Add("<i>“Uru's very presence is enough to corrupt those around her. I hope your stay was brief enough that you were not significantly affected,”</i> the elf concludes, sounding a little suspicious.", parse);
 			else
 				Text.Add("<i>“Uru's very presence is enough to corrupt those around her, given time,”</i> the elf concludes.", parse);
-			Text.Flush();
-			Gui.NextPrompt(Scenes.Kiakai.TalkUru);
+			
+			Text.NL();
+			Text.NL();
+			Scenes.Kiakai.TalkUru();
 		}, enabled : true,
 		tooltip : "Ask about Uru's previous conquests."
 	});
-	Gui.SetButtonsFromList(options, true, kiakai.TalkPrompt);
+	Gui.SetButtonsFromList(options, true, function() {
+		Text.Clear();
+		Text.Add("<i>“...Let us speak of something else, shall we?”</i>");
+		Text.Flush();
+		kiakai.TalkPrompt();
+	});
 	
 }
 
@@ -643,7 +674,6 @@ Scenes.Kiakai.TalkEden = function() {
 	};
 	parse = kiakai.ParserPronouns(parse);
 	
-	Text.Clear();
 	Text.Add("<i>“What would you like to know about Eden, [playername]?”</i>", parse);
 	Text.Flush();
 	
@@ -717,8 +747,9 @@ Scenes.Kiakai.TalkEden = function() {
 			// Play scene
 			scenes[sceneId]();
 
-			Text.Flush();
-			Gui.NextPrompt(Scenes.Kiakai.TalkEden);
+			Text.NL();
+			Text.NL();
+			Scenes.Kiakai.TalkEden();
 		}, enabled : true,
 		tooltip : "Ask about the geography of Eden."
 	});
@@ -804,8 +835,9 @@ Scenes.Kiakai.TalkEden = function() {
 			// Play scene
 			scenes[sceneId]();
 
-			Text.Flush();
-			Gui.NextPrompt(Scenes.Kiakai.TalkEden);
+			Text.NL();
+			Text.NL();
+			Scenes.Kiakai.TalkEden();
 		}, enabled : true,
 		tooltip : "Ask about the people and creatures that inhabit Eden."
 	});
@@ -825,12 +857,18 @@ Scenes.Kiakai.TalkEden = function() {
 			Text.NL();
 			Text.Add("<i>“Something happened long ago that changed that, though, yet I know not what. The last portal I know of before your arrival here was several years ago, and that one was only open for a short time.”</i>", parse);
 
-			Text.Flush();
-			Gui.NextPrompt(Scenes.Kiakai.TalkEden);
+			Text.NL();
+			Text.NL();
+			Scenes.Kiakai.TalkEden();
 		}, enabled : true,
 		tooltip : "Ask about Eden's function as a hubworld, and portals to other realms."
 	});
-	Gui.SetButtonsFromList(options, true, kiakai.TalkPrompt);
+	Gui.SetButtonsFromList(options, true, function() {
+		Text.Clear();
+		Text.Add("<i>“Do you wish to speak of something else, [playername]?”</i>", parse);
+		Text.Flush();
+		kiakai.TalkPrompt();
+	});
 	
 }
 
@@ -902,8 +940,9 @@ Scenes.Kiakai.TalkFactions = function() {
 	// Play scene
 	scenes[sceneId]();
 	
-	Text.Flush();
-	Gui.NextPrompt(Scenes.Kiakai.TalkEden);
+	Text.NL();
+	Text.NL();
+	Scenes.Kiakai.TalkEden();
 }
 
 
@@ -915,8 +954,6 @@ Scenes.Kiakai.TalkElves = function() {
 		name   : kiakai.name
 	};
 	parse = kiakai.ParserPronouns(parse);
-	
-	Text.Clear();
 	
 	if(kiakai.flags["TalkedElves"] == 0) {
 		Text.Add("You ask [name] to tell you a little about the elves.", parse);
@@ -988,8 +1025,9 @@ Scenes.Kiakai.TalkElves = function() {
 			// Play scene
 			scenes[sceneId]();
 
-			Text.Flush();
-			Gui.NextPrompt(Scenes.Kiakai.TalkElves);
+			Text.NL();
+			Text.NL();
+			Scenes.Kiakai.TalkElves();
 		}, enabled : true,
 		tooltip : Text.Parse("Ask [name] more about elvish culture.", parse)
 	});
@@ -1030,8 +1068,9 @@ Scenes.Kiakai.TalkElves = function() {
 			// Play scene
 			scenes[sceneId]();
 
-			Text.Flush();
-			Gui.NextPrompt(Scenes.Kiakai.TalkElves);
+			Text.NL();
+			Text.NL();
+			Scenes.Kiakai.TalkElves();
 		}, enabled : true,
 		tooltip : Text.Parse("Ask [name] more about [hisher] parents.", parse)
 	});
@@ -1048,8 +1087,9 @@ Scenes.Kiakai.TalkElves = function() {
 				Text.Add("Is it really alright to let children run wild like that?", parse);
 				Text.NL();
 				Text.Add("<i>“Of course,”</i> [name] tells you. <i>“It gives them a chance to learn the beauty of nature first hand, and my people know children have time to learn the necessities of life as they grow older.”</i>", parse);
-				Text.Flush();
-				Gui.NextPrompt(Scenes.Kiakai.TalkElves);
+				Text.NL();
+				Text.NL();
+				Scenes.Kiakai.TalkElves();
 			});
 			// Freedom2 TODO
 			if(kiakai.relation.Get() > 40) {
@@ -1080,8 +1120,9 @@ Scenes.Kiakai.TalkElves = function() {
 									Text.NL();
 									Text.Add("[name] smiles up at you warmly, pressing [hisher] head slightly into your hand. <i>“Thank you, [playername].”</i>", parse);
 								}
-								Text.Flush();
-								Gui.NextPrompt(Scenes.Kiakai.TalkElves);
+								Text.NL();
+								Text.NL();
+								Scenes.Kiakai.TalkElves();
 							}, enabled : true,
 							tooltip : Text.Parse("Tell the elf that [heshe] is not alone anymore.", parse)
 						});
@@ -1090,8 +1131,9 @@ Scenes.Kiakai.TalkElves = function() {
 								Text.Add("You tell the elf not to worry. You have felt lonely yourself sometimes, and you know it is tempting to look for friends wherever you can find them.", parse);
 								Text.NL();
 								Text.Add("<i>“Thanks, [playername],”</i> [name] tells you with a wry smile. <i>“It is good to know I am not the only one going crazy!”</i>", parse);
-								Text.Flush();
-								Gui.NextPrompt(Scenes.Kiakai.TalkElves);
+								Text.NL();
+								Text.NL();
+								Scenes.Kiakai.TalkElves();
 							}, enabled : true,
 							tooltip : "Explain to the elf that's what loneliness does."
 						});
@@ -1112,8 +1154,9 @@ Scenes.Kiakai.TalkElves = function() {
 					else {
 						
 						Text.Add("<i>“As a result, I spent much time by myself, exploring the sea and the forest near our village, meeting animals and fish, corals and trees. In some ways, they were my closest friends.”</i>", parse);
-						Text.Flush();
-						Gui.NextPrompt(Scenes.Kiakai.TalkElves);
+						Text.NL();
+						Text.NL();
+						Scenes.Kiakai.TalkElves();
 					}
 				});
 			}
@@ -1122,8 +1165,10 @@ Scenes.Kiakai.TalkElves = function() {
 				Text.Add("<i>“My village was devoted to caring for me, and I did not shun their devotion. The loremaster taught me to read when I was still very young, and before I learned, he read to me from the scrolls when he had time. Sometimes, one of the other adults would also take me to gather fruits and berries with them, or to go fishing, and taught me how to pick out the ripe plants, the abundant fish.”</i> [HeShe] smiles fondly.", parse);
 				Text.NL();
 				Text.Add("<i>“The older children also tried to include me in their games, although often I felt like a burden to them. Still, I made a friend or two among them, and they seemed to actually enjoy my endless questions.”</i>", parse);
-				Text.Flush();
-				Gui.NextPrompt(Scenes.Kiakai.TalkElves);
+				
+				Text.NL();
+				Text.NL();
+				Scenes.Kiakai.TalkElves();
 			});
 			
 			var sceneId = kiakai.flags["RotElfChild"];
@@ -1152,8 +1197,9 @@ Scenes.Kiakai.TalkElves = function() {
 				Text.NL();
 				if(kiakai.flags["Attitude"] > Kiakai.Attitude.Neutral) {
 					Text.Add("You see pain in the elf's eyes and sense that there's much [heshe]'s not telling you, but you decide not to press the issue. [HeShe] will tell you when [heshe] is ready.", parse);
-					Text.Flush();
-					Gui.NextPrompt(Scenes.Kiakai.TalkElves);
+					Text.NL();
+					Text.NL();
+					Scenes.Kiakai.TalkElves();
 				}
 				else {
 					
@@ -1182,8 +1228,9 @@ Scenes.Kiakai.TalkElves = function() {
 							func : function() {
 								Text.Clear();
 								Text.Add("You decide that whatever [name] is concealing, it's probably not important anyway. Maybe [heshe]'ll tell you later if [heshe] wants.", parse);
-								Text.Flush();
-								Gui.NextPrompt(Scenes.Kiakai.TalkElves);
+								Text.NL();
+								Text.NL();
+								Scenes.Kiakai.TalkElves();
 							}, enabled : true,
 							tooltip : "It's probably not important anyway..."
 						});
@@ -1191,8 +1238,9 @@ Scenes.Kiakai.TalkElves = function() {
 					}
 					else {
 						Text.Add("You see pain in the elf's eyes and sense that there's much [heshe]'s not telling you. Perhaps [heshe] will tell you when [heshe]'s ready.", parse);
-						Text.Flush();
-						Gui.NextPrompt(Scenes.Kiakai.TalkElves);
+						Text.NL();
+						Text.NL();
+						Scenes.Kiakai.TalkElves();
 					}
 				}
 			}
@@ -1203,7 +1251,12 @@ Scenes.Kiakai.TalkElves = function() {
 		}, enabled : true,
 		tooltip : Text.Parse("Ask [name] why [heshe] left the elves.", parse)
 	});
-	Gui.SetButtonsFromList(options, true, kiakai.TalkPrompt);
+	Gui.SetButtonsFromList(options, true, function() {
+		Text.Clear();
+		Text.Add("<i>“Do you wish to speak of something else, [playername]?”</i>", parse);
+		Text.Flush();
+		kiakai.TalkPrompt();
+	});
 	
 }
 
@@ -1269,8 +1322,9 @@ Scenes.Kiakai.TalkDimensionalViolation = function() {
 			func : function() {
 				Text.Clear();
 				Text.Add("Seeing [name] so distressed, you tell [himher] that [heshe] can finish the story later.", parse);
-				Text.Flush();
-				Gui.NextPrompt(Scenes.Kiakai.TalkElves);
+				Text.NL();
+				Text.NL();
+				Scenes.Kiakai.TalkElves();
 			}, enabled : true,
 			tooltip : Text.Parse("Tell the elf it's alright - [heshe] can finish the story later.", parse)
 		});
@@ -1374,8 +1428,9 @@ Scenes.Kiakai.TalkDimensionalViolationCont = function() {
 	}
 	else {
 		Text.Add("You thank [name] for telling you the story again.", parse);
-		Text.Flush();
-		Gui.NextPrompt(Scenes.Kiakai.TalkElves);
+		Text.NL();
+		Text.NL();
+		Scenes.Kiakai.TalkElves();
 	}
 }
 
@@ -1387,8 +1442,6 @@ Scenes.Kiakai.TalkPriest = function() {
 		name   : kiakai.name
 	};
 	parse = kiakai.ParserPronouns(parse);
-	
-	Text.Clear();
 	
 	if(kiakai.flags["TalkedPriest"] == 0) {
 		if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral) {
@@ -1443,7 +1496,12 @@ Scenes.Kiakai.TalkPriest = function() {
 		func : Scenes.Kiakai.TalkPriestMeeting, enabled : true,
 		tooltip : Text.Parse("Ask about [name] leaving to come meet you.", parse)
 	});
-	Gui.SetButtonsFromList(options, true, kiakai.TalkPrompt);
+	Gui.SetButtonsFromList(options, true, function() {
+		Text.Clear();
+		Text.Add("<i>“Do you wish to speak of something else, [playername]?”</i>", parse);
+		Text.Flush();
+		kiakai.TalkPrompt();
+	});
 }
 
 Scenes.Kiakai.TalkPriestHierarchy = function() {
@@ -1494,8 +1552,9 @@ Scenes.Kiakai.TalkPriestHierarchy = function() {
 	// Play scene
 	scenes[sceneId]();
 	
-	Text.Flush();
-	Gui.NextPrompt(Scenes.Kiakai.TalkPriest);
+	Text.NL();
+	Text.NL();
+	Scenes.Kiakai.TalkPriest();
 }
 
 
@@ -1531,8 +1590,9 @@ Scenes.Kiakai.TalkPriestDisciplines = function() {
 						Text.Add("<i>“Oh, no!”</i> [name] answers, blushing furiously. <i>“Those certainly don't count. After all, m-my [virg],”</i> [heshe] explains, looking at the ground, [hisher] entire face turning beet red. <i>“A-and besides, Aria wouldn't forbid something th-that feels so good.”</i>", parse);
 						Text.NL();
 						Text.Add("You feel that if you keep asking about it, [name] will pass out from embarrassment.", parse);
-						Text.Flush();
-						Gui.NextPrompt(Scenes.Kiakai.TalkPriest);
+						Text.NL();
+						Text.NL();
+						Scenes.Kiakai.TalkPriest();
 					}, enabled : true,
 					tooltip : "But... you know, you and I..."
 				});
@@ -1540,8 +1600,9 @@ Scenes.Kiakai.TalkPriestDisciplines = function() {
 					func : function() {
 						Text.NL();
 						Text.Add("You decide it's best not to mention to the elf that what the two of you have done constitutes as sex.", parse);
-						Text.Flush();
-						Gui.NextPrompt(Scenes.Kiakai.TalkPriest);
+						Text.NL();
+						Text.NL();
+						Scenes.Kiakai.TalkPriest();
 					}, enabled : true,
 					tooltip : "Don't mention it."
 				});
@@ -1619,8 +1680,9 @@ Scenes.Kiakai.TalkPriestDisciplines = function() {
 			Text.NL();
 			if(kiakai.flags["Sexed"] != 0)
 				Text.Add("You're not sure how to respond, considering the noises you've heard [name] make.", parse);
-			Text.Flush();
-			Gui.NextPrompt(Scenes.Kiakai.TalkPriest);
+			Text.NL();
+			Text.NL();
+			Scenes.Kiakai.TalkPriest();
 		});
 	}
 	// Other
@@ -1630,8 +1692,9 @@ Scenes.Kiakai.TalkPriestDisciplines = function() {
 		Text.Add("<i>“We must always show compassion and generosity to those in need - whether it be through healing, physical aid or advice, and we must protect those in danger. We also strive to attain spiritual purity to best understand the wishes of our Lady Aria, and to serve as a suitable conduit for her power to better the world.”</i>", parse);
 		Text.NL();
 		Text.Add("<i>“Above all, we must oppose evil wherever we see it, and help to protect the integrity of all worlds as much as we are able.”</i> The elf seems almost to puff up at this recitation of [hisher] calling, clearly determined to do [hisher] utmost to fulfill these goals.", parse);
-		Text.Flush();
-		Gui.NextPrompt(Scenes.Kiakai.TalkPriest);
+		Text.NL();
+		Text.NL();
+		Scenes.Kiakai.TalkPriest();
 	});
 	
 	var sceneId = kiakai.flags["RotPrDisc"];
@@ -1726,8 +1789,9 @@ Scenes.Kiakai.TalkPriestActivities = function() {
 	// Play scene
 	scenes[sceneId]();
 	
-	Text.Flush();
-	Gui.NextPrompt(Scenes.Kiakai.TalkPriest);
+	Text.NL();
+	Text.NL();
+	Scenes.Kiakai.TalkPriest();
 }
 
 
@@ -1789,8 +1853,9 @@ Scenes.Kiakai.TalkPriestYrissa = function() {
 	// Play scene
 	scenes[sceneId]();
 	
-	Text.Flush();
-	Gui.NextPrompt(Scenes.Kiakai.TalkPriest);
+	Text.NL();
+	Text.NL();
+	Scenes.Kiakai.TalkPriest();
 }
 
 
@@ -1830,8 +1895,9 @@ Scenes.Kiakai.TalkPriestAria = function() {
 	// Play scene
 	scenes[sceneId]();
 	
-	Text.Flush();
-	Gui.NextPrompt(Scenes.Kiakai.TalkPriest);
+	Text.NL();
+	Text.NL();
+	Scenes.Kiakai.TalkPriest();
 }
 
 Scenes.Kiakai.TalkPriestMeeting = function() {
@@ -1886,8 +1952,9 @@ Scenes.Kiakai.TalkPriestMeeting = function() {
 	// Play scene
 	scenes[sceneId]();
 	
-	Text.Flush();
-	Gui.NextPrompt(Scenes.Kiakai.TalkPriest);
+	Text.NL();
+	Text.NL();
+	Scenes.Kiakai.TalkPriest();
 }
 
 
