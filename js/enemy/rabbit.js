@@ -1101,7 +1101,7 @@ Scenes.Lagomorph.GroupWinOnPlainsFuckBrute = function(enc) {
 	Text.Add("Watching him go, you wonder if he’ll be a bit more receptive of the males trying to get on his back. Or maybe he’ll just forget all about your recent encounter and skewer the first thing he finds that happens to have a hole…", parse);
 	Text.NL();
 	parse["name"] = party.Num() == 2 ? party.Get(1).name : "your companions";
-	parse["comp"] = party.Num() > 1 ? Text.Parse(", signalling to [name] that you’re leaving", parse) : "";
+	parse["comp"] = party.Num() > 1 ? Text.Parse(", signaling to [name] that you’re leaving", parse) : "";
 	Text.Add("Either way, it’s not your problem. Feeling satisfied, you gather your [armor] and dress up[comp].", parse);
 	Text.Flush();
 	
@@ -1169,8 +1169,7 @@ Scenes.Lagomorph.GroupWinOnPlainsFuckM = function(enc, group) {
 			Text.Add("<i>“You not into girls?”</i> the herm looks puzzled. Not that you are sure she qualifies, considering the meatstick poking out between her legs. <i>“’s okay, I fetch!”</i> Seeking to sate her own itch, the bunny returns to the pile, sending a group of eager - though perhaps misguided - males your way.", parse);
 		}
 		else { //females
-			parse["s"]    = group.females > 1 ? "s" : "";
-			parse["notS"] = group.females > 1 ? "" : "s";
+			parse = Text.ParserPlural(parse, group.females > 1);
 			parse["yIes"] = group.females > 1 ? "y" : "ies";
 			Text.Add(" The female[s] look[notS] a bit disappointed, but scurr[yIes] to do your bidding, bodily pulling out a few males from the larger fuck-pile.", parse);
 		}
@@ -1214,7 +1213,7 @@ Scenes.Lagomorph.GroupWinOnPlainsFuckM = function(enc, group) {
 		male.FuckAnal(male.Butt(), p1cock, 3);
 		player.Fuck(p1cock, 3);
 		
-		Text.Add("The others are slowly gathering around you, shivering with excitement as they watch their brother get fucked. One of the bolder ones hops forward and stuffs your rabbit’s mouth with his cock, spitroasting the poor thing. Smiling, you tell the brave lagomorph that he’s next in line. He bites his lip, pummeling his brother’s throat rapidly, determined to get the most of it. In no time at all, he grinds to a halt, dick hilted in the other lagomorph’s mouth. He arches his back as he unloads his seed down your willing sextoy’s gullet, giving his place to another one of the hovering males. Having gotten his blowjob, the bunny hobbles down onto all fours, presenting himself to you hopefully.", parse);
+		Text.Add("The others are slowly gathering around you, shivering with excitement as they watch their brother get fucked. One of the bolder ones hops forward and stuffs your rabbit’s mouth with his cock, spit roasting the poor thing. Smiling, you tell the brave lagomorph that he’s next in line. He bites his lip, pummeling his brother’s throat rapidly, determined to get the most of it. In no time at all, he grinds to a halt, dick hilted in the other lagomorph’s mouth. He arches his back as he unloads his seed down your willing sextoy’s gullet, giving his place to another one of the hovering males. Having gotten his blowjob, the bunny hobbles down onto all fours, presenting himself to you hopefully.", parse);
 		Text.NL();
 		Text.Add("Deciding to have a bit of fun, you tell him to lie down on his back instead. In short order, you have your current fucktoy straddle the other rabbit, their cocks and balls pressing against each other. ", parse);
 		if(player.NumCocks() > 1)
@@ -1223,7 +1222,7 @@ Scenes.Lagomorph.GroupWinOnPlainsFuckM = function(enc, group) {
 			Text.Add("Pressing down on them, you alternate between their holes, giving both bunnies an equal share of your [cock].", parse);
 	}
 	else if(player.FirstVag()) {
-		Text.Add("You roughly shove the jack giving you oral pleasure over on his back, lowering yourself on his jutting cock. Hardly believing his luck, the rabbit bucks his hips, meeting your descent. You press down firmly, making certain that he understands that <i>you</i> set the pace here; he’s just your willing sex toy.", parse);
+		Text.Add("You roughly shove the jack giving you oral pleasure over on his back, lowering yourself on his jutting cock. Hardly believing his luck, the rabbit bucks his hips, meeting your descent. You press down firmly, making certain that he understands that <i>you</i> set the pace here, and he’s just your willing sex toy.", parse);
 		Text.NL();
 		
 		Sex.Vaginal(male, player);
@@ -1234,7 +1233,7 @@ Scenes.Lagomorph.GroupWinOnPlainsFuckM = function(enc, group) {
 		
 		Text.Add("Smiling to yourself, you wave one of the others over, instructing him to get down on all fours in front of you, dick poised over his brother’s maw. You give the offered bunny-butt a familiar squeeze, caressing his soft fur as your [hand] creeps its way closer to his loosened rosebud.", parse);
 		Text.NL();
-		Text.Add("The male spread his buttcheeks, gasping as you plunge three fingers into his offered fuckhole. Bucking his hips as you probe deeper, he stuffs his siblings mouth with his throbbing shaft. Before long the jack is reduced to a quivering, cum-spewing mess as you pummel his prostate, the salty taste of his seed only making the cock inside you grow harder.", parse);
+		Text.Add("The male spread his butt cheeks, gasping as you plunge three fingers into his offered fuckhole. Bucking his hips as you probe deeper, he stuffs his siblings mouth with his throbbing shaft. Before long, the jack is reduced to a quivering, cum-spewing mess as you pummel his prostate, the salty taste of his seed only making the cock inside you grow harder.", parse);
 	}
 	Text.NL();
 	Text.Add("The others, loath to wait around, have already started busying themselves, pairing up in groups of twos or threes - you can swear that more of the rabbits have separated from the larger pile in order to join you. The horny lagomorphs seem content with fucking whatever hole is presented to them, just as long as they get off.", parse);
@@ -1286,7 +1285,7 @@ Scenes.Lagomorph.GroupWinOnPlainsFuckM = function(enc, group) {
 					Text.NL();
 					
 					if(kiakai.GiveAnalAllowed()) {
-						Text.Add("<i>“Ah, uhm, if you are okay with it, [playername],”</i> the elf gulps, eyeing one of the rabbits nervously. Seeing [hisher] interest, the hopper rolls onto his back, raising his legs and spreading his fluffy buttcheeks for the embarrassed elf. [name] gives you one last uncertain look before [heshe] digs in, sighing in pleasure as [heshe] sinks[oneof] [hisher] [kcocks] into the eager bunny.", parse);
+						Text.Add("<i>“Ah, uhm, if you are okay with it, [playername],”</i> the elf gulps, eyeing one of the rabbits nervously. Seeing [hisher] interest, the hopper rolls onto his back, raising his legs and spreading his fluffy butt cheeks for the embarrassed elf. [name] gives you one last uncertain look before [heshe] digs in, sighing in pleasure as [heshe] sinks[oneof] [hisher] [kcocks] into the eager bunny.", parse);
 						Text.NL();
 						
 						Sex.Anal(kiakai, male);
@@ -1332,7 +1331,7 @@ Scenes.Lagomorph.GroupWinOnPlainsFuckM = function(enc, group) {
 							Text.Add("the prone bunny who’s cock you are riding.", parse);
 						Text.Add(" Rolling your eyes at [hisher] shyness, you put your hand around [name]’s waist and pull [himher] in for a kiss. The acolyte practically melts in your arms, any semblance of resistance evaporating into nothing.", parse);
 						Text.NL();
-						Text.Add("<i>“Well, I guess it would not be the first time,”</i> [name] murmurs under [hisher] breath. You smile, slowing down the rocking of your [hips] to allow your cute elven lover to get in position. [HeShe] gives you a hug from behind, [hisher] [kcocks] sliding in between your buttcheeks.", parse);
+						Text.Add("<i>“Well, I guess it would not be the first time,”</i> [name] murmurs under [hisher] breath. You smile, slowing down the rocking of your [hips] to allow your cute elven lover to get in position. [HeShe] gives you a hug from behind, [hisher] [kcocks] sliding in between your butt cheeks.", parse);
 						Text.NL();
 						parse["forward"] = p1cock ? "forward" : "down";
 						parse["c"] = p1cock ? "thrusting into one of the subby bunnies" : "impaling yourself on the subby bunny";
@@ -1477,11 +1476,11 @@ Scenes.Lagomorph.GroupWinOnPlainsFuckM = function(enc, group) {
 							Text.Add("<i>“Aye-aye, Cap’n!”</i>", parse);
 						}
 						Text.NL();
-						Text.Add("As soon as [heshe]’s undressed, a couple of rabbits approach [himher], looking up curiously at the [foxvixen]. Their shafts already hard and dribbling pre in expectation. You watch as one makes a move and tries to grab Terry, only to be stopped short by a handpaw.", parse);
+						Text.Add("As soon as [heshe]’s undressed, a couple of rabbits approach [himher], looking up curiously at the [foxvixen]. Their shafts are already hard and dribbling pre in expectation. You watch as one makes a move and tries to grab Terry, only to be stopped short by a handpaw.", parse);
 						Text.NL();
-						Text.Add("<i>“Afraid not bunny-bums.”</i>", parse);
+						Text.Add("<i>“Afraid not, bunny-bums.”</i>", parse);
 						Text.NL();
-						Text.Add("The lapins halt, looking at the [foxvixen] with confused expression. One, bolder than his brother, dares to ask, “we no fuck foxy?” even as he hungrily eyes the naked expanse of Terry’s body.", parse);
+						Text.Add("The lapins halt, looking at the [foxvixen] with confused expression. One, bolder than his brother, dares to ask: <i>“We no fuck foxy?”</i> even as he hungrily eyes the naked expanse of Terry’s body.", parse);
 						if(terry.Cup() >= Terry.Breasts.Bcup)
 							Text.Add(" Like a magnet, the two’s gaze is drawn to the bouncing tits upon the [foxvixen]’s chest.", parse);
 						Text.NL();
@@ -1498,17 +1497,17 @@ Scenes.Lagomorph.GroupWinOnPlainsFuckM = function(enc, group) {
 						if(terry.HorseCock()) {
 							Text.Add("Terry drapes [hisher] equine shaft over one of the bunny-sluts’ butt, letting the lapin feel the heat as [heshe] teases, <i>“Come on, slut. I wanna hear you beg for it.”</i>", parse);
 							Text.NL();
-							Text.Add("The lucky lagomorph moans plaintively, eyes screwed shut in anticipation and desire. Anxiously, he thrusts his hips back, wriggling them from side to side to try and catch the half-erect stallionhood in his buttock-cleavage, grinding along Terry’s shaft as best he can. Words evidently fail him in his desire for that big, meaty [foxvixen] dick.", parse);
+							Text.Add("The lucky lagomorph moans plaintively, eyes screwed shut in anticipation and desire. Anxiously, he thrusts his hips back, wriggling them from side to side to try and catch the half-erect stallionhood in his buttock cleavage, grinding along Terry’s shaft as best he can. Words evidently fail him in his desire for that big, meaty [foxvixen] dick.", parse);
 							Text.NL();
 							Text.Add("His unchosen brother isn’t quite so overcome, but still twists around in order to look plaintively at Terry’s dick, whimpering softly at his not being chosen. His eyes drink in the sight of the half-flaccid horse-cock, and he licks his lips hungrily, clearly wishing Terry would use it on him.", parse);
 							Text.NL();
-							Text.Add("<i>“Alright boys, if you want it, you’re going to have to work for it,”</i> Terry starts, circling the lagomorphs. [HeShe] takes the other one by the ears and shoves [hisher] cock against the rabbit’s cheek. <i>“Suck.”</i>", parse);
+							Text.Add("<i>“Alright, boys, if you want it, you’re going to have to work for it,”</i> Terry starts, circling the lagomorphs. [HeShe] takes the other one by the ears and shoves [hisher] cock against the rabbit’s cheek. <i>“Suck.”</i>", parse);
 							Text.NL();
-							Text.Add("The chosen bunny needs no further prompting. His hands immediately latch onto Terry’s lower shaft for extra security, his head twisting as his mouth opens to envelop the [foxvixen]’s blunt, equine glans. His pink eyes sink shut in rapture as he wraps his lips around Terry’s dick, noisily sucking like a babe at a teat.", parse);
+							Text.Add("The chosen bunny needs no further prompting. His hands immediately latch onto Terry’s lower shaft for extra security, his head twisting as his mouth opens to envelop the [foxvixen]’s blunt equine glans. His pink eyes sink shut in rapture as he wraps his lips around Terry’s dick, noisily sucking like a babe at a teat.", parse);
 							Text.NL();
 							Text.Add("A squeak of protest bubbles from the other rabbit’s throat at being left out and he scrambles to his sibling’s side, shoving his brother hard to get closer. Since his brother has what seems to be a deathgrip on Terry’s glans, he settles for wetly kissing along the untouched portions of Terry’s shaft, noisily lapping at [hisher] cock with his tongue and trying to suck tiny mouthfuls of shaft when he can.", parse);
 							Text.NL();
-							Text.Add("Placing [hisher] hands over each bunny’s head, Terry moans in obvious pleasure. <i>“That’s it, sluts. Pleasure the mighty fox’s cock.”</i>", parse);
+							Text.Add("Placing [hisher] hands over each bunny’s head, Terry moans in obvious pleasure. <i>“That’s it, sluts. Pleasure the mighty [foxvixen]’s cock.”</i>", parse);
 							Text.NL();
 							Text.Add("As the lagomorphs lavish their considerable affection upon Terry’s dick, it rewards them by starting to grow to its true majesty. Inch after inch of mottled-brown horse sausage slides smoothly from [hisher] leathery sheath, its sides bloating to its full hole-plugging majesty. The bunny-boys are in heaven, the one sucking abandoning Terry’s glans to join his brother in licking back and forth as the full figure of the [foxvixen]’s footlong fuckmeat rises proudly before them.", parse);
 							Text.NL();
@@ -1518,11 +1517,11 @@ Scenes.Lagomorph.GroupWinOnPlainsFuckM = function(enc, group) {
 							Text.NL();
 							Text.Add("Moaning in a mixture of disappointment and wanton lust, the unlucky rabbit steps back to avoid getting in Terry’s way. Like an iron filing to a magnet, his hand is drawn to his dick, starting to pump away with the expertise of someone well practiced in masturbation, making him groan in pleasure.", parse);
 							Text.NL();
-							Text.Add("Terry rolls [hisher] eyes at the masturbating bunny, but for the moment decides to focus [hisher] attention on the one laying down before [himher]. <i>“Good boy,”</i> [heshe] praises, lifting the rabbit’s legs up and aligning [hisher] member with the lagomorph’s rosebud.", parse);
+							Text.Add("Terry rolls [hisher] eyes at the masturbating bunny, but for the moment decides to focus [hisher] attention on the one lying down before [himher]. <i>“Good boy,”</i> [heshe] praises, lifting the rabbit’s legs up and aligning [hisher] member with the lagomorph’s rosebud.", parse);
 							Text.NL();
-							Text.Add("As you’d expect, the little bunslut is not an anal virgin; Terry’s cock pops its head in at the very first thrust, and [heshe] finds it harder to keep from sliding all the way home in one or two pumps than [heshe] does to push it in. Still, even as the wriggling lapin moans his slutty pleasure at being filled so full, Terry manages to keep [hisher] pace smooth and steady. Inch by inch the [foxvixen]’s horse-prick glides inside, stopping only when [hisher] knot is butting up against the mewling whorebun’s stretched asshole.", parse);
+							Text.Add("As you’d expect, the little bunslut is not an anal virgin; Terry’s cock pops its head in at the very first thrust, and [heshe] finds it harder to keep from sliding all the way home in one or two pumps than [heshe] does to push it in. Still, even as the wriggling lapin moans his slutty pleasure at being filled so full, Terry manages to keep [hisher] pace smooth and steady. Inch by inch, the [foxvixen]’s horse-prick glides inside, stopping only when [hisher] knot is butting up against the mewling whorebun’s stretched asshole.", parse);
 							Text.NL();
-							Text.Add("If there’s anything that surprises you about this, it’s how readily Terry managed to make [himher]self fit, given how much larger [heshe] is compared to the bunnyboys themselves. They must really be sluts to get <b>that</b> stretched out...", parse);
+							Text.Add("If there’s anything that surprises you about this, it’s how readily Terry managed to make [himher]self fit, given how much larger [heshe] is compared to the bunny-boys themselves. They must really be sluts to get <b>that</b> stretched out...", parse);
 							Text.NL();
 							if(enc.brute) {
 								Text.Add("Then again, there is that big bruiser they were taking it from. He’s definitely built to put even Terry to shame...", parse);
@@ -1535,12 +1534,12 @@ Scenes.Lagomorph.GroupWinOnPlainsFuckM = function(enc, group) {
 							Text.Add("Terry moans in delight, pounding the lapin’s brother with renewed vigor. <i>“That’s it. Good boy.”</i>", parse);
 							Text.NL();
 							if(terry.FirstVag()) {
-								Text.Add("You can see his nose crinkling as the scent of the [foxvixen]’s feminine arousal floods his nostrils, eyes fixated on the pussylips hovering right in front of his face. You could cut the desire for it with a knife, but he obediently keeps his head in its proper place.", parse);
+								Text.Add("You can see his nose crinkling as the scent of the [foxvixen]’s feminine arousal floods his nostrils, eyes fixated on the pussy lips hovering right in front of his face. You could cut the desire for it with a knife, but he obediently keeps his head in its proper place.", parse);
 								Text.NL();
 							}
-							Text.Add("Avidly, the lapin licks and sucks at Terry’s swaying cum-factories as best he can, trying to move his head with the thrusting of her hips to keep them from escaping his suckling. The result is perversely comical as the [foxvixen]’s balls sway like a pendulum, the bunny chasing them back and forth. And all the while, Terry’s thrusting has [hisher] first bunslut moaning like the whore he is.", parse);
+							Text.Add("Avidly, the lapin licks and sucks at Terry’s swaying cum-factories as best he can, trying to move his head with the thrusting of [hisher] hips to keep them from escaping his suckling. The result is perversely comical as the [foxvixen]’s balls sway like a pendulum, the bunny chasing them back and forth. And all the while, Terry’s thrusting has [hisher] first bunslut moaning like the whore he is.", parse);
 							Text.NL();
-							Text.Add("Terry stops pumping [himher]self and pulls out of the first lagomorph, backing off and letting [hisher] shaft plop free. Some drops of [hisher] creamy pre falling onto the snout of the bunny that was sucking his balls. <i>“Good job, slut. Now I think it’s time for your reward.”</i>", parse);
+							Text.Add("Terry stops pumping [himher]self and pulls out of the first lagomorph, backing off and letting [hisher] shaft plop free. Some drops of [hisher] creamy pre fall onto the snout of the bunny that was sucking his balls. <i>“Good job, slut. Now, I think it’s time for your reward.”</i>", parse);
 							Text.NL();
 							Text.Add("The rabbit moans greedily, tongue slurping wetly over his snout to catch Terry’s pre.", parse);
 							Text.NL();
@@ -1566,9 +1565,9 @@ Scenes.Lagomorph.GroupWinOnPlainsFuckM = function(enc, group) {
 							
 							var cum = terry.OrgasmCum();
 							
-							Text.Add("By the time Terry finishes, the lower bunny is totally soaked in spunk, laying on his back in a great puddle of  [foxvixen] seed, whilst his upper brother is dripping from the face from his efforts at drinking. Despite this, both bunny-sluts are grinning happily.", parse);
+							Text.Add("By the time Terry finishes, the lower bunny is totally soaked in spunk, lying on his back in a great puddle of [foxvixen] seed, whilst his upper brother is dripping from the face from his efforts at drinking. Despite this, both bunny-sluts are grinning happily.", parse);
 							Text.NL();
-							Text.Add("You watch from your vantage point as Terry pulls out from between the lapins with a broad smile on [hisher] face.  <i>“Good job, sluts. Now here’s what I want you to do next,”</i> [heshe] says, already formulating the plans for the next taking. Seems like Terry’s enjoying [himher]self.", parse);
+							Text.Add("You watch from your vantage point as Terry pulls out from between the lapins with a broad smile on [hisher] face. <i>“Good job, sluts. Now, here’s what I want you to do next,”</i> [heshe] says, already formulating the plans for the next taking. Seems like Terry’s enjoying [himher]self.", parse);
 							Text.NL();
 							PrintDefaultOptions();
 						}
@@ -1586,21 +1585,21 @@ Scenes.Lagomorph.GroupWinOnPlainsFuckM = function(enc, group) {
 							Text.NL();
 							Text.Add("The rabbit does his best to milk Terry’s cock, his own neglected erection smacking wetly against his belly with each powerful thrust and hump into his ass. Grunts and groans of efforts echo from his throat as he happily gives himself over to Terry’s lust.", parse);
 							Text.NL();
-							Text.Add("<i>“Get ready, because here it comes bunny-bums,”</i> Terry cries out, redoubling [hisher] pace.", parse);
+							Text.Add("<i>“Get ready because here it comes, bunny-bums,”</i> Terry cries out, redoubling [hisher] pace.", parse);
 							Text.NL();
 							Text.Add("The lapin slut squeals in pleasure, humping back with all his might as the [foxvixen] pounds his ass. The slapping of flesh on flesh echoes, and you have a feeling Terry’s going to be sporting some pretty impressive bruises when [heshe]’s done.", parse);
 							Text.NL();
-							Text.Add("With one last, mighty thrust, the [foxvixen] buries [himher]self all the way to the hilt, tieing the rabbit as [heshe] lets [hisher] fox-jism spill into the lagomorph’s willing butt. <i>“Yes, take it all like a good slut!”</i> Terry exclaims as [heshe] finishes painting the lapin’s insides with [hisher] seed.", parse);
+							Text.Add("With one last mighty thrust, the [foxvixen] buries [himher]self all the way to the hilt, tying the rabbit as [heshe] lets [hisher] [foxvixen]-jism spill into the lagomorph’s willing butt. <i>“Yes, take it all like a good slut!”</i> Terry exclaims as [heshe] finishes painting the lapin’s insides with [hisher] seed.", parse);
 							Text.NL();
 							Text.Add("The other bunny decides to join the fray and presents his throbbing cock to his brother, whom gladly begins fellating him.", parse);
 							Text.NL();
-							Text.Add("The rocking motions of the enthusiastic rabbits shakes the [foxvixen]. Terry has no choice but to follow the lagomorphs’ lead, since [heshe]’s still tied. Eventually annoyance wins over, and [heshe] decides to try and pull out. Maybe [heshe] could get the rabbits to stop for a moment and let [himher] recover in peace.", parse);
+							Text.Add("The rocking motions of the enthusiastic rabbits shakes the [foxvixen]. Terry has no choice but to follow the lagomorphs’ lead, since [heshe]’s still tied. Eventually, annoyance wins over, and [heshe] decides to try and pull out. Maybe [heshe] could get the rabbits to stop for a moment and let [himher] recover in peace.", parse);
 							Text.NL();
-							Text.Add("The lapin below groans as Terry keeps pulling on his ass, and he definitely fights to stay in place. However during a particularly strong thrust, Terry recoils farther than usual and pops out of the rabbit’s ass, crashing on [hisher] butt. <i>“Ow! Watch out, you perverted sluts.”</i>", parse);
+							Text.Add("The lapin below groans as Terry keeps pulling on his ass, and he definitely fights to stay in place. However, during a particularly strong thrust, Terry recoils farther than usual and pops out of the rabbit’s ass, crashing on [hisher] butt. <i>“Ow! Watch out, you perverted sluts.”</i>", parse);
 							Text.NL();
-							Text.Add("The two bunnies simply continue to fuck leisurely, not even reacting to Terry’s words. In fact it seems they haven’t even realised Terry’s out.", parse);
+							Text.Add("The two bunnies simply continue to fuck leisurely, not even reacting to Terry’s words. In fact, it seems they haven’t even realized Terry’s out.", parse);
 							Text.NL();
-							Text.Add("<i>“Damn lagomorphs, I oughta show then...”</i> the [foxvixen] mumbles, rubbing [hisher] butt. [HeShe] elects to sit down and recover for a bit, simply watching as the fellating rabbit catches his brother’s load straight down his throat. Then rises to his feet so his brother can return the favor and suck his own cock.", parse);
+							Text.Add("<i>“Damn lagomorphs, I oughta show then...”</i> the [foxvixen] mumbles, rubbing [hisher] butt. [HeShe] elects to sit down and recover for a bit, simply watching as the fellating rabbit catches his brother’s load straight down his throat. He then rises to his feet so his brother can return the favor and suck his own cock.", parse);
 							Text.NL();
 							Text.Add("A mischievous glint sets on Terry’s eyes, as [heshe] decides [heshe]’s had enough rest. Without so much as a word, [heshe] approaches the bunny giving the blowjob and coaxes him into raising his butt.", parse);
 							Text.NL();
@@ -1667,7 +1666,7 @@ Scenes.Lagomorph.GroupWinOnPlainsFuckM = function(enc, group) {
 					parse["comp"]  = "";
 					parse["comp2"] = "";
 				}
-				Text.Add("Some time later, you[comp] are finally finished with the rabbit mob. Feeling a bit drained, you gather up [comp2]your gear, wobbling a bit unsteadily as you re-equip yourself. In the end, you are not sure who got the most out of that engagement, you or the rabbits.", parse);
+				Text.Add("Some time later, you[comp] are finally finished with the rabbit mob. Feeling a bit drained, you gather up [comp2]your gear, wobbling a bit unsteadily as you re-equip yourself. In the end, you are not sure who got the most out of that engagement: you or the rabbits.", parse);
 				Text.Flush();
 				
 				world.TimeStep({hour: 1});
@@ -1709,8 +1708,7 @@ Scenes.Lagomorph.GroupWinOnPlainsGetFuckedM = function(enc, group) {
 			Text.Add("<i>“I have cock,”</i> the herm protests, arms crossed sullenly. <i>“Me fuck you!”</i> She pouts a bit, but you manage to convince her to do as you say. Seeking to sate her own itch, the bunny returns to the pile, sending a group of eager males your way.", parse);
 		}
 		else { //females
-			parse["s"]    = group.females > 1 ? "s" : "";
-			parse["notS"] = group.females > 1 ? "" : "s";
+			parse = Text.ParserPlural(parse, group.females > 1);
 			parse["yIes"] = group.females > 1 ? "y" : "ies";
 			Text.Add(" The female[s] look[notS] a bit disappointed, but scurr[yIes] to do your bidding, bodily pulling out a few males from the larger fuck-pile.", parse);
 		}
@@ -1761,7 +1759,7 @@ Scenes.Lagomorph.GroupWinOnPlainsGetFuckedM = function(enc, group) {
 	}, 1.0, function() { return true; });
 	scenes.Get();
 	
-	Text.Add("The air is thick with the lagomorphs’ musk, the taste of their pre on your [tongue] intoxicating. With your attention thus occupied, it comes as a bit of a surprise when another bunny jumps you from behind, pressing his cock between your buttcheeks and rutting against you. It doesn’t take long for him to find your [target], and once inside you, he fucks like a natural.", parse);
+	Text.Add("The air is thick with the lagomorphs’ musk, the taste of their pre on your [tongue] intoxicating. With your attention thus occupied, it comes as a bit of a surprise when another bunny jumps you from behind, pressing his cock between your butt cheeks and rutting against you. It doesn’t take long for him to find your [target], and once inside you, he fucks like a natural.", parse);
 	Text.NL();
 	
 	if(target == BodyPartType.vagina) {
@@ -1915,7 +1913,7 @@ Scenes.Lagomorph.GroupWinOnPlainsGetFuckedM = function(enc, group) {
 			parse["comp"] = " your companions and";
 		else
 			parse["comp"] = "";
-		Text.Add("You gather up[comp] your gear, wobbling a bit unsteadily as you re-equip yourself. In the end, you are not sure who got the most out of that engagement, you or the rabbits.", parse);
+		Text.Add("You gather up[comp] your gear, wobbling a bit unsteadily as you re-equip yourself. In the end, you are not sure who got the most out of that engagement: you or the rabbits.", parse);
 		Text.Flush();
 		
 		world.TimeStep({hour: 1});
@@ -2053,7 +2051,8 @@ Scenes.Lagomorph.GroupWinInterrorigate = function(enc) {
 			options.push({ nameStr : "Ditch",
 				func : function() {
 					Text.Clear();
-					Text.Add("Rather than follow the alpha into the gathering, you pull [m1himher] off to the side, getting down on your knees in front of the short bunny-morph. The alpha moans expectantly, [m1hisher] hips twitching of their own accord in anticipation.", parse);
+					parse["down"] = player.HasLegs() ? " getting down on your knees" : " lowering yourself";
+					Text.Add("Rather than follow the alpha into the gathering, you pull [m1himher] off to the side,[down] in front of the short bunny-morph. The alpha moans expectantly, [m1hisher] hips twitching of their own accord in anticipation.", parse);
 					Text.NL();
 					if(alpha.FirstCock()) {
 						Text.Add("The lagomorph is stiff as a rod and leaking pre from waiting so long, and all but erupts the second [m1heshe] feels your lips close around [m1hisher] [m1cock]. Thinking that this is going to be even easier than you imagined, you lick [m1hisher] [m1cockTip] encouragingly, coaxing forth [m1hisher] seed.", parse);
