@@ -1879,6 +1879,7 @@ Scenes.Lagomorph.GroupWinOnPlainsGetFuckedM = function(enc, group) {
 	if(party.InParty(terry)) {
 		parse = terry.ParserPronouns(parse);
 		parse["foxvixen"] = terry.mfTrue("fox", "vixen");
+		parse["tarmor"] = terry.ArmorDesc();
 		
 		Text.Add("A small group of rabbits approach the [foxvixen] thief and immediately set about removing [hisher] [tarmor].", parse);
 		Text.NL();
