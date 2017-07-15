@@ -459,10 +459,10 @@ Scenes.Lagomorph.PlainsEncounter = function() {
 
 Scenes.Lagomorph.GroupLossOnPlains = function() {
 	SetGameState(GameState.Event);
-	Text.Clear();
 	
 	var enc = this;
 	Gui.Callstack.push(function() {
+		Text.Clear();
 		var scenes = new EncounterTable();
 	
 		// TODO: Add alternate loss scene that 
@@ -475,9 +475,13 @@ Scenes.Lagomorph.GroupLossOnPlains = function() {
 				Scenes.Lagomorph.GroupLossOnPlainsBrainy(enc);
 			}, 1.0, function() { return true; });
 		}
-		else {
+		// TODO Fallback
+		else if(scenes.encounters.length == 1) {
 			scenes.AddEnc(function() {
-				PrintDefaultOptions();
+				Text.Add("TODO PLACEHOLDER");
+				Text.Flush();
+
+				Gui.NextPrompt();
 			}, 1.0, function() { return true; });
 		}
 		/*

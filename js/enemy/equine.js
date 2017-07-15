@@ -186,8 +186,7 @@ Scenes.Equine.PairEnc = function(levelbonus) {
 
 Scenes.Equine.LossPrompt = function() {
 	SetGameState(GameState.Event);
-	Text.Clear();
-
+	
 	// this = encounter
 	var enc = this;
 
@@ -208,6 +207,8 @@ Scenes.Equine.LossPrompt = function() {
 	var lustBonus = enc.mare.LustLevel() + enc.stallion.LustLevel();
 
 	Gui.Callstack.push(function() {
+		Text.Clear();
+		
 		var scenes = new EncounterTable();
 		scenes.AddEnc(function() {
 			Text.Add("You[party] collapse, unable to dispute the equine couple's victory. The two approach you, the stallion eyeing your crumpled figure with desire.", parse);
