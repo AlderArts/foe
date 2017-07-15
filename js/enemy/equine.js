@@ -204,6 +204,8 @@ Scenes.Equine.LossPrompt = function() {
 		nip2      : enc.mare.FirstBreastRow().NipsShort()
 	};
 	enc.parse = parse;
+	
+	var lustBonus = enc.mare.LustLevel() + enc.stallion.LustLevel();
 
 	Gui.Callstack.push(function() {
 		var scenes = new EncounterTable();
@@ -303,12 +305,13 @@ Scenes.Equine.LossPrompt = function() {
 						Text.Add("The mare turns to you and asks. <i>“You sure?”</i> You nod your head with certainty and turn the two away. You quickly get a hold of yourself[party] before heading out, thankful that you managed to leave with some dignity. ", parse);
 					else
 						Text.Add("The stallion turns away from you and scoffs. <i>“You're missing the ride of your life.”</i> You furrow your eyebrows with anger and turn away from the two. You quickly get a hold of yourself[party] before heading out, thankful that you managed to leave with some dignity.", parse);
+					Text.Flush();
 					Gui.NextPrompt();
 				}, enabled : player.LustLevel() < 0.8,
 				tooltip : "Refuse their offer."
 			});
 			Gui.SetButtonsFromList(options);
-		}, 1.0);
+		}, 1.0 + lustBonus); // Sex more likely on high lust enemies
 
 		scenes.Get();
 
