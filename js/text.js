@@ -7,7 +7,7 @@ Text.InsertImage = function(imgSrc, align) {
 	if(!RENDER_PICTURES) return "";
 
 	align = align || 'left';
-	return "<img src='" + imgSrc + "' align='" + align + "' alt='MISSING IMAGE: '" + imgSrc + "' style='margin: 1px 8px;'/>";
+	return "<img src='" + imgSrc + "' align='" + align + "' alt='MISSING IMAGE: " + imgSrc + "' style='margin: 1px 8px;'/>";
 }
 
 Text.Say = function(imgSrc, text, align) {
@@ -16,7 +16,7 @@ Text.Say = function(imgSrc, text, align) {
 	text = text || "";
 
 	if(RENDER_PICTURES)
-		textbox.innerHTML += "<img src='" + imgSrc + "' align='" + align + "' alt='MISSING IMAGE: '" + imgSrc + "' style='margin: 1px 8px;'>" + text + "</img>";
+		textbox.innerHTML += "<img src='" + imgSrc + "' align='" + align + "' alt='MISSING IMAGE: " + imgSrc + "' style='margin: 1px 8px;'>" + text + "</img>";
 	else
 		textbox.innerHTML += text;
 }

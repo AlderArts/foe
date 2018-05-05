@@ -44,7 +44,7 @@ Rand = function(max) {
 
 Unit.CmToInch   = function(cm) { return cm / 2.54; }
 Unit.InchToFoot = function(inch) { return inch / 12; }
-Unit.MToFoot    = function(cm) { return m * 3.28; }
+Unit.MToFoot    = function(m) { return m * 3.28; }
 Unit.KgToPound  = function(kg) { return kg * 2.2; }
 
 // Array Remove - By John Resig (MIT Licensed)

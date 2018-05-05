@@ -238,16 +238,6 @@ Body.prototype.FromStorage = function(storage) {
 	}
 }
 
-Body.prototype.SetRace = function(race) {
-	this.head.SetRace(race);
-	this.torso.race = race;
-	for(var i = 0; i < this.cock.length; i++)
-		this.cock[i].race = race;
-	this.balls.race = race;
-	this.arms.race  = race;
-	this.legs.race  = race;
-}
-
 Body.prototype.NumAttributes = function(race) {
 	var sum = 0;
 	sum += this.head.NumAttributes(race);

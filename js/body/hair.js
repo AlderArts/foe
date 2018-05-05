@@ -45,11 +45,12 @@ Hair.prototype.IsLongerThan = function(x) {
 	return this.length.Get() >= x;
 }
 Hair.prototype.Short = function() {
-	if(this.length == 0) return "bald scalp";
+	if(this.length.Get() == 0) return "bald scalp";
 	else return Color.Desc(this.color) + " hair";
 }
 Hair.prototype.Long = function() {
-	if(this.length == 0) return "bald scalp";
+	var len = this.length.Get();
+	if(len == 0) return "bald scalp";
 	else {
 		var color = Color.Desc(this.color);
 		var style;
@@ -62,8 +63,6 @@ Hair.prototype.Long = function() {
 			case HairStyle.braid:    style = color + " hair, which is kept in a braid"; break;
 			default:                 style = "unkempt hair"; break;
 		}
-		
-		var len = this.length.Get();
 		
 		if     (len < 1)
 			return color + " stubble";

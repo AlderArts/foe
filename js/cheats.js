@@ -225,7 +225,7 @@ world.loc.Plains.Nomads.Tent.events.push(new Link(
 		Text.Clear();
 		Text.Add("<i>“Need your elf recalibrated?”</i>");
 		Text.NL();
-		Text.Add(Text.BoldColor("DEBUG: This is a cheat-shop, where you can modify [name].", parse));
+		Text.Add(Text.BoldColor("DEBUG: This is a cheat-shop, where you can modify [name]."), parse);
 		Text.NL();
 		
 		var ElfSmith = function() {
