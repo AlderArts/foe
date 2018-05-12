@@ -652,7 +652,7 @@ Scenes.Terry.JeanneTFShrinkBoobs = function() {
 		terry.flags["breasts"] = Terry.Breasts.Acup;
 		terry.SetBreasts();
 	}
-	else if(terry.Cup() == Terry.Breasts.Bcup) {
+	else if(terry.Cup() == Terry.Breasts.Acup) {
 		Text.Add("With a single moan, Terry’s bustline rapidly shrinks away, within seconds leaving [himher] with [hisher] original daintily flat chest.", parse);
 		Text.NL();
 		Text.Add("<i>“Guess I won’t have to worry so much about protecting my chest now, at least not more than usual,”</i> the [foxvixen] states.", parse);
