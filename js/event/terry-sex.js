@@ -5912,7 +5912,7 @@ Scenes.Terry.SexCatchAnal = function() {
 			Text.Add("As soon as Terry’s knot pops in, the [foxvixen] lets out a howl of pleasure. [HeShe] grits [hisher] teeth in an attempt to stave off [hisher] oncoming climax. <i>“G-gonna!”</i> [heshe] declares, looking you over.", parse);
 			Text.NL();
 			if(player.FirstCock()) {
-				Text.Add("[HisHer] eyes home in on your [cocks], and in one fell swoop [heshe] takes[oneof] your cock[notS] into [hisher] mouth, sucking on the [cockTip] in an effort to grant you that last spike you need to orgasm yourself.", parse);
+				Text.Add("[HisHer] eyes home in on your [cocks], and in one fell swoop [heshe] takes[oneof] your cock[s] into [hisher] mouth, sucking on the [cockTip] in an effort to grant you that last spike you need to orgasm yourself.", parse);
 				Text.NL();
 				
 				var cum = terry.OrgasmCum();
@@ -5927,7 +5927,7 @@ Scenes.Terry.SexCatchAnal = function() {
 				Text.NL();
 				Text.Add("Like a perverse oroboros, you remain locked together, cock to mouth and cock to ass, each feeding the other with semen until you both run dry at last.", parse);
 				Text.NL();
-				parse["c"] = player.NumCocks() > 1 ? Text.Parse(", not caring about the mess your other cock[notS] made in the least", parse) : "";
+				parse["c"] = player.NumCocks() > 1 ? Text.Parse(", not caring about the mess your other cock[s2] made in the least", parse) : "";
 				Text.Add("Terry releases your cock[c]. <i>“Hmm, tasty,”</i> [heshe] declares, slumping over your prone form.", parse);
 				Text.NL();
 				Text.Add("You’re certainly glad that [heshe] approves. As you say this, you pet [hisher] head affectionately.", parse);
