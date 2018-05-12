@@ -686,6 +686,7 @@ Scenes.Lei.Tasks.Escort.Debrief = function() {
 		Text.Add("You mention that Ventor’s daughter flirted with you, but you stayed professional, and Lei nods in approval.", parse);
 		lei.relation.IncreaseStat(100, 1);
 	}
+	Text.NL();
 	Text.Add("You summarize the trip and talk about the stops at each of the stores. Lei presses you for details of what you saw, and seems disappointed when you cannot recall too much.", parse);
 	Text.NL();
 	Text.Add("<i>“The time you wait is for observation and planning, not chatter,”</i> he explains. <i>“They must have had someone watching you, and had you been more attentive, you may have known about them before you ran head first into an ambush.”</i>", parse);
