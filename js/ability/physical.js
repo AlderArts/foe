@@ -8,7 +8,7 @@ Abilities.Physical = {};
 // Default messages
 Abilities.Physical._onDamage = function(ability, encounter, caster, target, dmg) {
 	var parse = AbilityNode.DefaultParser(caster, target);
-	Text.Add("The attack hits [tname] for " + Text.BoldColor(-dmg, "#800000") + " damage!", parse);
+	Text.Add("The attack hits [tname] for " + Text.Damage(-dmg) + " damage!", parse);
 	Text.NL();
 }
 Abilities.Physical._onMiss = function(ability, encounter, caster, target) {
@@ -18,7 +18,7 @@ Abilities.Physical._onMiss = function(ability, encounter, caster, target) {
 }
 Abilities.Physical._onAbsorb = function(ability, encounter, caster, target, dmg) {
 	var parse = AbilityNode.DefaultParser(caster, target);
-	Text.Add("[tName] absorb[tnotS] the attack, gaining " + Text.BoldColor(dmg, "#008000") + " health!", parse);
+	Text.Add("[tName] absorb[tnotS] the attack, gaining " + Text.Heal(dmg) + " health!", parse);
 	Text.NL();
 }
 
@@ -46,7 +46,7 @@ Abilities.Physical.Bash.castTree.push(AbilityNode.Template.Physical({
 		
 		var parse = AbilityNode.DefaultParser(caster, target);
 		
-		Text.Add("[Name] bash[notEs] [tname] for " + Text.BoldColor(-dmg, "#800000") + " damage, staggering [thimher]!", parse);
+		Text.Add("[Name] bash[notEs] [tname] for " + Text.Damage(-dmg) + " damage, staggering [thimher]!", parse);
 		Text.NL();
 	}, AbilityNode.Template.Cancel()],
 	onAbsorb: [Abilities.Physical._onAbsorb]
@@ -77,7 +77,7 @@ Abilities.Physical.GrandSlam.castTree.push(AbilityNode.Template.Physical({
 		
 		var parse = AbilityNode.DefaultParser(caster, target);
 		
-		Text.Add("[Name] slam[notS] [tname] for " + Text.BoldColor(-dmg, "#800000") + " damage, staggering [thimher]!", parse);
+		Text.Add("[Name] slam[notS] [tname] for " + Text.Damage(-dmg) + " damage, staggering [thimher]!", parse);
 		Text.NL();
 	}, AbilityNode.Template.Cancel()],
 	onAbsorb: [Abilities.Physical._onAbsorb]
@@ -382,7 +382,7 @@ Abilities.Physical.CrushingStrike.castTree.push(AbilityNode.Template.Physical({
 	onMiss: [Abilities.Physical._onMiss],
 	onDamage: [function(ability, encounter, caster, target, dmg) {
 		var parse = AbilityNode.DefaultParser(caster, target);
-		Text.Add("[Name] deliver[notS] a crushing blow to [tname] for " + Text.BoldColor(-dmg, "#800000") + " damage, staggering [thimher]!", parse);
+		Text.Add("[Name] deliver[notS] a crushing blow to [tname] for " + Text.Damage(-dmg) + " damage, staggering [thimher]!", parse);
 	}],
 	onHit: [function(ability, encounter, caster, target) {
 		if(Math.random() < 0.8) {

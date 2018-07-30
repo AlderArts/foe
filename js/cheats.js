@@ -3,7 +3,7 @@
 world.loc.Plains.Nomads.Tent.events.push(new Link(
 	"TESTBUTTON", function() { return DEBUG; }, true,
 	function() {
-		Text.Add(Text.BoldColor("DEBUG: " + "Time"));
+		Text.Add(Text.Bold("DEBUG: " + "Time"));
 		Text.NL();
 		Text.Flush();
 	},
@@ -19,7 +19,7 @@ world.loc.Plains.Nomads.Tent.events.push(new Link(
 	function() {
 		if(DEBUG) {
 			Text.NL();
-			Text.Add(Text.BoldColor("Mr. Johnson, the cocksmith, is sitting inconspicuously in a corner."));
+			Text.Add(Text.Bold("Mr. Johnson, the cocksmith, is sitting inconspicuously in a corner."));
 			Text.NL();
 		}
 	},
@@ -27,7 +27,7 @@ world.loc.Plains.Nomads.Tent.events.push(new Link(
 		Text.Clear();
 		Text.Add("Jolly good to see you chap, what can I do for you?");
 		Text.NL();
-		Text.Add(Text.BoldColor("DEBUG: This is a cheat-shop, where you can change your characters body."));
+		Text.Add(Text.Bold("DEBUG: This is a cheat-shop, where you can change your characters body."));
 		Text.NL();
 		
 		var CockSmith = function() {
@@ -211,7 +211,7 @@ world.loc.Plains.Nomads.Tent.events.push(new Link(
 	function() {
 		if(DEBUG) {
 			Text.NL();
-			Text.Add(Text.BoldColor("Inra, the elf calibrator, is sitting in a corner."));
+			Text.Add(Text.Bold("Inra, the elf calibrator, is sitting in a corner."));
 			Text.NL();
 		}
 	},
@@ -225,7 +225,7 @@ world.loc.Plains.Nomads.Tent.events.push(new Link(
 		Text.Clear();
 		Text.Add("<i>“Need your elf recalibrated?”</i>");
 		Text.NL();
-		Text.Add(Text.BoldColor("DEBUG: This is a cheat-shop, where you can modify [name]."), parse);
+		Text.Add("DEBUG: This is a cheat-shop, where you can modify [name].", parse, "bold");
 		Text.NL();
 		
 		var ElfSmith = function() {
@@ -463,7 +463,7 @@ world.loc.Plains.Nomads.Tent.events.push(new Link(
 	function() {
 		if(DEBUG) {
 			Text.NL();
-			Text.Add(Text.BoldColor("A box of cheaty items."));
+			Text.Add(Text.Bold("A box of cheaty items."));
 			Text.NL();
 		}
 	},

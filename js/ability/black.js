@@ -8,12 +8,12 @@ Abilities.Black = {};
 // Default messages
 Abilities.Black._onDamage = function(ability, encounter, caster, target, dmg) {
 	var parse = AbilityNode.DefaultParser(caster, target);
-	Text.Add("It hits [tname] for " + Text.BoldColor(-dmg, "#800000") + " damage!", parse);
+	Text.Add("It hits [tname] for " + Text.Damage(-dmg) + " damage!", parse);
 	Text.NL();
 }
 Abilities.Black._onAbsorb = function(ability, encounter, caster, target, dmg) {
 	var parse = AbilityNode.DefaultParser(caster, target);
-	Text.Add("[tName] absorb[tnotS] the spell, gaining " + Text.BoldColor(dmg, "#008000") + " health!", parse);
+	Text.Add("[tName] absorb[tnotS] the spell, gaining " + Text.Heal(dmg) + " health!", parse);
 	Text.NL();
 }
 Abilities.Black._onMiss = function(ability, encounter, caster, target) {
@@ -53,7 +53,7 @@ Abilities.Black.Fireball.castTree.push(AbilityNode.Template.Magical({
 	onDamage: [Abilities.Black._onDamage],
 	onAbsorb: [function(ability, encounter, caster, target, dmg) {
 		var parse = AbilityNode.DefaultParser(caster, target);
-		Text.Add("[tName] absorb[tnotS] the flames, gaining " + Text.BoldColor(dmg, "#008000") + " health!", parse);
+		Text.Add("[tName] absorb[tnotS] the flames, gaining " + Text.Heal(dmg) + " health!", parse);
 	}],
 	onHit: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
@@ -104,7 +104,7 @@ Abilities.Black.Bolt.castTree.push(AbilityNode.Template.Magical({
 	onDamage: [Abilities.Black._onDamage],
 	onAbsorb: [function(ability, encounter, caster, target, dmg) {
 		var parse = AbilityNode.DefaultParser(caster, target);
-		Text.Add("[tName] absorb[tnotS] the shock, gaining " + Text.BoldColor(dmg, "#008000") + " health!", parse);
+		Text.Add("[tName] absorb[tnotS] the shock, gaining " + Text.Heal(dmg) + " health!", parse);
 	}],
 	onHit: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
@@ -347,7 +347,7 @@ Abilities.Black.Shock.castTree.push(AbilityNode.Template.Magical({
 	onDamage: [Abilities.Black._onDamage],
 	onAbsorb: [function(ability, encounter, caster, target, dmg) {
 		var parse = AbilityNode.DefaultParser(caster, target);
-		Text.Add("[tName] absorb[tnotS] the shock, gaining " + Text.BoldColor(dmg, "#008000") + " health!", parse);
+		Text.Add("[tName] absorb[tnotS] the shock, gaining " + Text.Heal(dmg) + " health!", parse);
 	}],
 	onHit: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
@@ -377,7 +377,7 @@ Abilities.Black.ThunderStorm.castTree.push(AbilityNode.Template.Magical({
 	onDamage: [Abilities.Black._onDamage],
 	onAbsorb: [function(ability, encounter, caster, target, dmg) {
 		var parse = AbilityNode.DefaultParser(caster, target);
-		Text.Add("[tName] absorb[tnotS] the shock, gaining " + Text.BoldColor(dmg, "#008000") + " health!", parse);
+		Text.Add("[tName] absorb[tnotS] the shock, gaining " + Text.Heal(dmg) + " health!", parse);
 		Text.NL();
 	}],
 	onHit: [function(ability, encounter, caster, target) {
@@ -467,7 +467,7 @@ Abilities.Black.Scream.castTree.push(AbilityNode.Template.Magical({
 	}],
 	onDamage: [function(ability, encounter, caster, target, dmg) {
 		var parse = AbilityNode.DefaultParser(caster, target);
-		Text.Add("[tName] [tis] severely buffeted by the sudden burst of sound, taking " + Text.BoldColor(-dmg, "#800000") + " damage!", parse);
+		Text.Add("[tName] [tis] severely buffeted by the sudden burst of sound, taking " + Text.Damage(-dmg) + " damage!", parse);
 		Text.NL();
 	}],
 	onAbsorb: [Abilities.Black._onAbsorb],
@@ -520,7 +520,7 @@ Abilities.Black.DrainingTouch.castTree.push(AbilityNode.Template.Magical({
 	onMiss: [Abilities.Black._onMiss],
 	onDamage: [function(ability, encounter, caster, target, dmg) {
 		var parse = AbilityNode.DefaultParser(caster, target);
-		Text.Add("The tendrils wrap themselves about [tname], leeching " + Text.BoldColor(-dmg, "#800000") + " health from [thimher]!", parse);
+		Text.Add("The tendrils wrap themselves about [tname], leeching " + Text.Damage(-dmg) + " health from [thimher]!", parse);
 		Text.NL();
 		caster.AddHPAbs(-dmg);
 	}],
@@ -605,7 +605,7 @@ Abilities.Black.Lifetap.castTree.push(function(ability, encounter, caster, targe
 	caster.AddHPAbs(-hp);
 	caster.AddSPAbs(hp);
 	
-	Text.Add("[Name] focus[notEs] inwards, drawing upon [hisher] own life force to power [hisher] abilities! [Name] gain[notS] " + Text.BoldColor(hp, "#000080") + " SP!", parse);
+	Text.Add("[Name] focus[notEs] inwards, drawing upon [hisher] own life force to power [hisher] abilities! [Name] gain[notS] " + Text.Mana(hp) + " SP!", parse);
 	Text.NL();
 });
 

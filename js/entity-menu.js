@@ -31,7 +31,7 @@ Entity.prototype.LevelUpPrompt = function(backFunc) {
 	Text.Clear();
 
 	Text.Add("[name] has [points] stat points pending.",
-		{name: this.name, points: this.pendingStatPoints != 0 ? Text.BoldColor(this.pendingStatPoints) : "no"});
+		{name: this.name, points: this.pendingStatPoints != 0 ? Text.Bold(this.pendingStatPoints) : "no"});
 
 	Text.NL();
 

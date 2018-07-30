@@ -31,11 +31,11 @@ Stat.prototype.IdealStat = function(ideal, maxChange, fraction) {
 	if(DEBUG && this.debug) {
 		Text.NL();
 		if(diff > 0)
-			Text.Add(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (ideal: " + ideal + ")", "blue"));
+			Text.Add("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (ideal: " + ideal + ")", null, "blue bold");
 		else if(diff == 0)
-			Text.Add(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " capped (ideal: " + ideal + ")", "black"));
+			Text.Add("DEBUG: " + this.debug() + " " + old + " capped (ideal: " + ideal + ")", null, "bold");
 		else
-			Text.Add(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (ideal: " + ideal + ")", "red"));
+			Text.Add("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (ideal: " + ideal + ")", null, "red bold");
 		Text.NL();
 		Text.Flush();
 	}
@@ -59,9 +59,9 @@ Stat.prototype.IncreaseStat = function(ideal, maxChange, fraction) {
 	if(DEBUG && this.debug) {
 		Text.NL();
 		if(diff == 0)
-			Text.Add(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " capped (ideal: " + ideal + ")", "black"));
+			Text.Add("DEBUG: " + this.debug() + " " + old + " capped (ideal: " + ideal + ")", null, "black bold");
 		else
-			Text.Add(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (max: " + ideal + ")", "blue"));
+			Text.Add("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (max: " + ideal + ")", null, "blue bold");
 		Text.NL();
 		Text.Flush();
 	}
@@ -85,9 +85,9 @@ Stat.prototype.DecreaseStat = function(ideal, maxChange, fraction) {
 	if(DEBUG && this.debug) {
 		Text.NL();
 		if(diff == 0)
-			Text.Add(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " capped (ideal: " + ideal + ")", "black"));
+			Text.Add("DEBUG: " + this.debug() + " " + old + " capped (ideal: " + ideal + ")", null, "black bold");
 		else
-			Text.Add(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (min: " + ideal + ")", "red"));
+			Text.Add("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (min: " + ideal + ")", null, "red bold");
 		Text.NL();
 		Text.Flush();
 	}

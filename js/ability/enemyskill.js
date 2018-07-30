@@ -17,7 +17,7 @@ Abilities.EnemySkill.Sting.castTree.push(AbilityNode.Template.Physical({
 	onMiss: [Abilities.Physical._onMiss],
 	onDamage: [function(ability, encounter, caster, target, dmg) {
 		var parse = AbilityNode.DefaultParser(caster, target);
-		Text.Add("[Name] sting[notS] [tname] for " + Text.BoldColor(-dmg, "#800000") + " damage!", parse);
+		Text.Add("[Name] sting[notS] [tname] for " + Text.Damage(-dmg) + " damage!", parse);
 		Text.NL();
 	}],
 	onAbsorb: [Abilities.Physical._onAbsorb],
@@ -135,7 +135,7 @@ Abilities.EnemySkill.TRavage.castTree.push(AbilityNode.Template.Physical({
 		Text.NL();
 		Text.Add("[tName] only barely manage[tnotS] to break [poss] hold on [thimher], but not before the tentacles have gotten real close and personal.", parse);
 		Text.NL();
-		Text.Add("[tName] take[tnotS] " + Text.BoldColor(-dmg, "#800000") + " damage!", parse);
+		Text.Add("[tName] take[tnotS] " + Text.Damage(-dmg) + " damage!", parse);
 		target.AddLustFraction(0.3);
 	}],
 	onAbsorb: [Abilities.Physical._onAbsorb]
@@ -157,7 +157,7 @@ Abilities.EnemySkill.TWhip.castTree.push(AbilityNode.Template.Physical({
 	}],
 	onDamage: [function(ability, encounter, caster, target, dmg) {
 		var parse = AbilityNode.DefaultParser(caster, target);
-		Text.Add("[tName] [tis] unable to avoid the blow, and stagger[tnotS] back as it hits, dealing " + Text.BoldColor(-dmg, "#800000") + " damage!", parse);
+		Text.Add("[tName] [tis] unable to avoid the blow, and stagger[tnotS] back as it hits, dealing " + Text.Damage(-dmg) + " damage!", parse);
 		Text.NL();
 		target.AddLustFraction(0.3);
 	}],
@@ -225,7 +225,7 @@ Abilities.EnemySkill.TViolate.castTree.push(AbilityNode.Template.Physical({
 		var dmg = Math.floor(target.curLust);
 		target.AddHPAbs(-dmg);
 		
-		Text.Add("[tName] take[tnotS] " + Text.BoldColor(dmg, "#800000") + " damage!", parse);
+		Text.Add("[tName] take[tnotS] " + Text.Damage(dmg) + " damage!", parse);
 		
 		var cum = target.OrgasmCum();
 	}]
@@ -280,7 +280,7 @@ Abilities.EnemySkill.GolCuntDash.castTree.push(AbilityNode.Template.Physical({
 		parse["feet"] = target.FeetDesc();
 		Text.Add("[tName] react[tnotS] a little too late to dive out the way, but [theshe] manage[tnotS] to duck low in an attempt to slip under her scythes… just not low enough. Her oncoming crotch and abdomen smack into [tname], and her fragrant pussy drags across [tposs] face and slimes it with a thick coat of her vaginal juices. The chitin of her underbelly is quite soft on [tposs] cheek, almost like a pleasant caress.", parse);
 		Text.NL();
-		Text.Add("The Gol queen bashes [tname] for " + Text.BoldColor(-dmg, "#800000") + " damage, staggering [thimher]!", parse);
+		Text.Add("The Gol queen bashes [tname] for " + Text.Damage(-dmg) + " damage, staggering [thimher]!", parse);
 		Text.NL();
 		Text.Add("When she finishes charging past, [tname] blink[tnotS] in a daze and stagger back on [thisher] [feet], uncomfortably warm in all the wrong places.", parse);
 		target.AddLustFraction(0.3);
@@ -371,7 +371,7 @@ Abilities.EnemySkill.Corishev.Lashing.castTree.push(AbilityNode.Template.Physica
 	onDamage: [function(ability, encounter, caster, target, dmg) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		parse["skin"] = target.SkinDesc();
-		Text.Add("The barbed tip of the poisoned whip slashes across [tposs] [skin], dealing " + Text.BoldColor(-dmg, "#800000") + " damage! ", parse);
+		Text.Add("The barbed tip of the poisoned whip slashes across [tposs] [skin], dealing " + Text.Damage(-dmg) + " damage! ", parse);
 	}],
 	onAbsorb: [Abilities.Physical._onAbsorb]
 }));
@@ -396,7 +396,7 @@ Abilities.EnemySkill.Corishev.WideStrike.castTree.push(AbilityNode.Template.Phys
 	}],
 	onDamage: [function(ability, encounter, caster, target, dmg) {
 		var parse = AbilityNode.DefaultParser(caster, target);
-		Text.Add("Poisoned barbs sink into [tposs] flesh, causing [thimher] to take " + Text.BoldColor(-dmg, "#800000") + " damage!", parse);
+		Text.Add("Poisoned barbs sink into [tposs] flesh, causing [thimher] to take " + Text.Damage(-dmg) + " damage!", parse);
 		Text.NL();
 	}],
 	onAbsorb: [Abilities.Physical._onAbsorb]
@@ -437,7 +437,7 @@ Abilities.EnemySkill.Corishev.Punish.castTree.push(AbilityNode.Template.Physical
 	}],
 	onDamage: [function(ability, encounter, caster, target, dmg) {
 		var parse = AbilityNode.DefaultParser(caster, target);
-		Text.Add("Caught by surprise - or perhaps distracted by [thisher] pounding heart - [tname] [tis] unable to dodge the flurry of blows raining down on [thimher]. [tHeShe] cr[ty] out in pain as the whip lacerates [thisher] flesh time and time again, dealing " + Text.BoldColor(-dmg, "#800000") + " damage!", parse);
+		Text.Add("Caught by surprise - or perhaps distracted by [thisher] pounding heart - [tname] [tis] unable to dodge the flurry of blows raining down on [thimher]. [tHeShe] cr[ty] out in pain as the whip lacerates [thisher] flesh time and time again, dealing " + Text.Damage(-dmg) + " damage!", parse);
 		Text.NL();
 	}],
 	onAbsorb: [Abilities.Physical._onAbsorb],
@@ -475,7 +475,7 @@ Abilities.EnemySkill.Cassidy.TailSlap.castTree.push(AbilityNode.Template.Physica
 	}],
 	onDamage: [function(ability, encounter, caster, target, dmg) {
 		var parse = AbilityNode.DefaultParser(caster, target);
-		Text.Add("The weight of Cassidy’s flaming tail smacks you silly! You take " + Text.BoldColor(-dmg, "#800000") + " damage!", parse);
+		Text.Add("The weight of Cassidy’s flaming tail smacks you silly! You take " + Text.Damage(-dmg) + " damage!", parse);
 		Text.NL();
 	}, AbilityNode.Template.Cancel()],
 	onAbsorb: [Abilities.Physical._onAbsorb],
@@ -508,7 +508,7 @@ Abilities.EnemySkill.Cassidy.Smoke.castTree.push(AbilityNode.Template.Physical({
 	}],
 	onDamage: [function(ability, encounter, caster, target, dmg) {
 		var parse = AbilityNode.DefaultParser(caster, target);
-		Text.Add("The cinders burn you! You take " + Text.BoldColor(-dmg, "#800000") + " damage!", parse);
+		Text.Add("The cinders burn you! You take " + Text.Damage(-dmg) + " damage!", parse);
 		Text.NL();
 	}, AbilityNode.Template.Cancel()],
 	onAbsorb: [Abilities.Physical._onAbsorb],
@@ -564,7 +564,7 @@ Abilities.EnemySkill.Cassidy.Impact.castTree.push(AbilityNode.Template.Physical(
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("<i>“Heh. Here goes nothing!”</i> Cass roars as she brings her war hammer down, its head wreathed in flame. <i>“I pity you, ace - you’re gonna have a bad time!”</i>", parse);
 		Text.NL();
-		Text.Add("Gah! You reel as Cass’ hammer connects with the impact of a fiery meteor, shaking you to the bone and burning you badly! You take " + Text.BoldColor(-dmg, "#800000") + " damage!", parse);
+		Text.Add("Gah! You reel as Cass’ hammer connects with the impact of a fiery meteor, shaking you to the bone and burning you badly! You take " + Text.Damage(-dmg) + " damage!", parse);
 		Text.NL();
 	}, AbilityNode.Template.Cancel()],
 	onAbsorb: [Abilities.Physical._onAbsorb],

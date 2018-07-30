@@ -90,7 +90,7 @@ Quests.Print = function() {
 	if(numQs > 0)
 		Text.Add("<hr>");
 	else {
-		Text.Add(Text.BoldColor("No active quests."));
+		Text.Add("No active quests.", null, "bold");
 	}
 	Text.Flush();
 	

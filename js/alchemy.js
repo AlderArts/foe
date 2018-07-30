@@ -32,7 +32,7 @@ Alchemy.AlchemyPrompt = function(alchemist, inventory, backPrompt, callback, pre
 		var deepExtra = brewable.qty - shallowQty;
 		var enabled  = !(!brewable.qty);
 
-		var str = Text.BoldColor(item.name);
+		var str = Text.Bold(item.name);
 		str += " ("+ shallowQty + ((deepExtra) ? " + " + deepExtra : "") +")"  + ": ";
 		item.recipe.forEach(function(component, idx) {
 			var available = inventory.QueryNum(component.it) || 0;

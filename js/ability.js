@@ -304,12 +304,12 @@ Ability.prototype.enabledTargetCondition = function(encounter, caster, target) {
 Ability.prototype.CostStr = function() {
 	var str = "";
 	if(this.cost.hp || this.cost.sp || this.cost.lp) {
-		if(this.cost.hp) str += Text.BoldColor(this.cost.hp + "HP ", "red");
-		if(this.cost.sp) str += Text.BoldColor(this.cost.sp + "SP ", "blue");
-		if(this.cost.lp) str += Text.BoldColor(this.cost.lp + "LP ", "pink");
+		if(this.cost.hp) str += Text.Damage(this.cost.hp + "HP ");
+		if(this.cost.sp) str += Text.Mana(this.cost.sp + "SP ");
+		if(this.cost.lp) str += Text.Lust(this.cost.lp + "LP ");
 	}
 	else
-		return "free";
+		return Text.Bold("Free");
 
 	return str;
 }

@@ -42,10 +42,9 @@ Text.Parse = function(text, parseStrings) {
 					if(isFunction(replaceStr))
 						replaceStr = replaceStr();
 					if(_.isUndefined(replaceStr))
-						replaceStr = "<b>['" + code + "' is undefined]</b>";
-				}
-				else {
-					replaceStr = "<b>['" + code + "' couldn't be parsed]</b>";
+						replaceStr = Text.ApplyStyle("['" + code + "' is undefined]", "error");
+				} else {
+					replaceStr = Text.ApplyStyle("['" + code + "' couldn't be parsed]", "error");
 				}
 
 				text = text.slice(0, start) + replaceStr + text.slice(stop+1);
@@ -59,7 +58,7 @@ Text.Parse = function(text, parseStrings) {
 	}
 	catch(e) {
 		alert(e.message + "........." + e.stack);
-		return Text.BoldColor("PARSE ERROR: { " + text + " }", "red");
+		return Text.ApplyStyle("PARSE ERROR: { " + text + " }", "error");
 	}
 }
 
@@ -86,19 +85,37 @@ Text.Clear = function() {
 
  *
  */
-//TODO Would be wise to refactor/rename this to "AddSpan".
-//Adds text wrapped in a span.
-Text.Add = function(text, parse, cssClasses) {
-	var classesStr = (cssClasses) ? cssClasses : "";
-	if(cssClasses)
-		Text.buffer += "<span class=\""+classesStr+"\">"+Text.Parse(text, parse) + "</span>";
-	else
-		Text.buffer += Text.Parse(text, parse);
+
+// Generic function to apply text to the buffer
+// It always uses Text.Parse, and chooses whether to apply styling if needed
+// This is primarily meant to be used for dialogue and scenes,
+// but AddSpan and AddDiv both call it, since this would make
+// testing easier in the future, as only this needs unit testing
+Text.Add = function(text, parse, cssClasses, tag = "span"){
+	var parsed = Text.Parse(text, parse)
+	if (cssClasses) {
+		Text.buffer += Text.ApplyStyle(parsed, cssClasses, tag)
+	} else {
+		Text.buffer += parsed
+	}
 }
+
+//Utility function to apply css styling to text
+//This is used internally by Add and the helper methods below.
+//This should be used for styling any text that should 
+//not be passed through Text.Parse
+Text.ApplyStyle = function(text, cssClasses, tag = "span") {
+	return "<" + tag + ((cssClasses) ? " class =\"" + cssClasses + "\">" : ">") + text + "</" + tag + ">";
+}
+
+//Adds text wrapped in a span.
+Text.AddSpan = function(text, parse, cssClasses) {
+	Text.Add(text, parse, cssClasses, "span")
+}
+
 //Adds text wrapped in a div.
 Text.AddDiv = function(text, parse, cssClasses) {
-	var classesStr = (cssClasses) ? cssClasses : "";
-	Text.buffer += "<div class=\""+classesStr+"\">"+Text.Parse(text, parse) + "</div>";
+	Text.Add(text, parse, cssClasses, "div")
 }
 
 /*
@@ -129,7 +146,7 @@ Text.ResetToolbars = function(){
 }
 
 Text.NL = function() {
-	Text.buffer += "<br><br>";
+	Text.buffer += "<br/><br/>";
 }
 
 Text.Flush = function(textCssClasses, toolbarCssClasses) {
@@ -140,7 +157,7 @@ Text.Flush = function(textCssClasses, toolbarCssClasses) {
 	//textbox.innerHTML += "<div class=\""+toolbarClasses+"\">"+Text.toolbar+"</div>";
 	if(Text.toolbars)
 		textBox.append(Text.toolbars);
-	textBox.append("<span class=\""+textClasses+"\">"+Text.buffer + "</span>");
+	textBox.append(Text.ApplyStyle(Text.buffer, textClasses));
 
 	Text.buffer = "";
 	Text.toolbars = $('<div></div>');
@@ -465,14 +482,33 @@ var createInput = function(inputOptions, cssClasses){
 	Text.Flush();
 */
 
-/*
-*
-* ANYTHING BELOW THIS POINT SHOULDN'T BE USED ANYMORE! IF SOMEONE IS FEELING BRAVE THEY SHOULD REFACTOR THEM OUT!
-* GOD BLESS THE SOUL THAT ATTEMPTS THIS!
- */
+// Replaces Text.BoldColor when no color specified
+// Inherits the default color from parent style
+Text.Bold = function(text) {
+	return Text.ApplyStyle(text, "bold");
+}
 
-//TODO Refactor this out. Should use a CSS class
-Text.BoldColor = function(text, color) {
-	color = color || "black";
-	return "<b><font color =\"" + color + "\">" + text + "</font></b>";
+// Apply a standard life damage style
+Text.Damage = function(text) {
+	return Text.ApplyStyle(text, "life bold");
+}
+
+// Apply a standard life heal style
+Text.Heal = function(text) {
+	return Text.ApplyStyle(text, "heal bold");
+}
+
+// Apply a standard lust 'damage' style
+Text.Lust = function(text) {
+	return Text.ApplyStyle(text, "pink bold");
+}
+
+// Apply a standard lust 'heal' style
+Text.Soothe = function(text) {
+	return Text.ApplyStyle(text, "soothe bold");
+}
+
+// Apply a standard mana / SP  style
+Text.Mana = function(text) {
+	return Text.ApplyStyle(text, "mana bold");
 }

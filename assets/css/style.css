@@ -91,3 +91,58 @@ table.party td {
 	border-color: black;
 	-moz-border-radius: ;
 }
+
+/* Used in Text.Parse for any parser errors */
+span.error {
+	color: red;
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+/* Used to replace Text.BoldColor */
+.bold {
+	font-weight: bold;
+}
+
+/* Prep, so this can be handled by css class instead of <i> tags */
+.spoken {
+	font-style: italic;
+}
+
+/* These are the 'stat' colors for the UI */
+.life {
+	color: red;
+}
+.mana {
+	color: blue;
+}
+.lust {
+	color: pink;
+}
+.heal {
+	color: #008000;
+}
+/*
+I think this is a better choice for soothe,
+since it's far enough from SP/mana to be obvious
+.soothe {
+	color: #005f5f; 
+}
+*/
+.soothe {
+	color: #000060;
+}
+
+/* These should be safe to replace with the above now */
+.pink {
+	color: #ff8080;
+}
+.green {
+	color: #008000;
+}
+.red {
+	color: #800000;
+}
+.blue {
+	color: #000080;
+}

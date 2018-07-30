@@ -27,7 +27,7 @@ CombatItem.prototype.constructor = CombatItem;
 // Default messages
 CombatItem._onDamage = function(ability, encounter, caster, target, dmg) {
 	var parse = { tName : target.nameDesc() };
-	Text.Add("The attack hits [tName] for " + Text.BoldColor(dmg, "#800000") + " damage!", parse);
+	Text.Add("The attack hits [tName] for " + Text.Damage(dmg) + " damage!", parse);
 	Text.NL();
 }
 CombatItem._onMiss = function(ability, encounter, caster, target) {
@@ -37,7 +37,7 @@ CombatItem._onMiss = function(ability, encounter, caster, target) {
 }
 CombatItem._onAbsorb = function(ability, encounter, caster, target, dmg) {
 	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s" };
-	Text.Add("[tName] absorb[s] the attack, gaining " + Text.BoldColor(dmg, "#008000") + " health!", parse);
+	Text.Add("[tName] absorb[s] the attack, gaining " + Text.Heal(dmg) + " health!", parse);
 	Text.NL();
 }
 
@@ -55,7 +55,7 @@ Items.Combat.HPotion.combat.castTree.push(function(ability, encounter, caster, t
 	var parse = AbilityNode.DefaultParser(caster, target);
 	Text.Add("[Name] use[notS] a potion.", parse);
 	Text.NL();
-	Text.Add("It heals [tname] for " + Text.BoldColor(100, "#008000") + "!", parse);
+	Text.Add("It heals [tname] for " + Text.Heal(100) + "!", parse);
 	
 	target.AddHPAbs(100);
 });
@@ -71,7 +71,7 @@ Items.Combat.EPotion.combat.castTree.push(function(ability, encounter, caster, t
 	var parse = AbilityNode.DefaultParser(caster, target);
 	Text.Add("[Name] use[notS] an energy potion.", parse);
 	Text.NL();
-	Text.Add("A brief surge of energy runs through [tname], restoring " + Text.BoldColor(100, "#000080") + " points of energy!", parse);
+	Text.Add("A brief surge of energy runs through [tname], restoring " + Text.Mana(100) + " points of energy!", parse);
 	
 	target.AddSPAbs(100);
 });

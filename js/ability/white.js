@@ -9,7 +9,7 @@ Abilities.White = {};
 Abilities.White._onHeal = function(ability, encounter, caster, target, dmg) {
 	if(dmg <= 0) return;
 	var parse = AbilityNode.DefaultParser(caster, target);
-	Text.Add("It heals [tname] for " + Text.BoldColor(dmg, "#008000") + " damage!", parse);
+	Text.Add("It heals [tname] for " + Text.Heal(dmg) + " damage!", parse);
 	Text.NL();
 }
 
@@ -184,7 +184,7 @@ Abilities.White.Tirade.castTree.push(AbilityNode.Template.Magical({
 	}],
 	onDamage: [function(ability, encounter, caster, target, dmg) {
 		var parse = AbilityNode.DefaultParser(caster, target);
-		Text.Add(" in an attempt to distract [tname]. It seems to be working, [theshe] look[tnotS] slightly annoyed! [Name] drain[notS] " + Text.BoldColor(-dmg, "#000080") + " SP from [tname]!", parse);
+		Text.Add(" in an attempt to distract [tname]. It seems to be working, [theshe] look[tnotS] slightly annoyed! [Name] drain[notS] " + Text.Mana(-dmg) + " SP from [tname]!", parse);
 	}],
 	onAbsorb: [Abilities.White.Tirade._onMiss],
 	onMiss: [Abilities.White.Tirade._onMiss]
@@ -212,7 +212,7 @@ Abilities.White.Preach.castTree.push(AbilityNode.Template.Magical({
 	}],
 	onDamage: [function(ability, encounter, caster, target, dmg) {
 		var parse = AbilityNode.DefaultParser(caster, target);
-		Text.Add("It seems to be working, [tname] look[tnotS] slightly annoyed! [Name] drain[notS] " + Text.BoldColor(-dmg, "#000080") + " SP from [tname]!", parse);
+		Text.Add("It seems to be working, [tname] look[tnotS] slightly annoyed! [Name] drain[notS] " + Text.Mana(-dmg) + " SP from [tname]!", parse);
 		Text.NL();
 	}],
 	onAbsorb: [Abilities.White.Preach._onMiss],
@@ -237,7 +237,7 @@ Abilities.White.Sermon.castTree.push(AbilityNode.Template.Magical({
 	}],
 	onDamage: [function(ability, encounter, caster, target, dmg) {
 		var parse = AbilityNode.DefaultParser(caster, target);
-		Text.Add("It seems to be working, [tname] look[tnotS] slightly annoyed! [Name] drain[notS] " + Text.BoldColor(-dmg, "#000080") + " SP from [tname]!", parse);
+		Text.Add("It seems to be working, [tname] look[tnotS] slightly annoyed! [Name] drain[notS] " + Text.Mana(-dmg) + " SP from [tname]!", parse);
 		Text.NL();
 	}],
 	onAbsorb: [Abilities.White.Preach._onMiss],

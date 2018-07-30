@@ -73,7 +73,7 @@ Abilities.Seduction.Distract.castTree.push(AbilityNode.Template.Lust({
 	onDamage: [function(ability, encounter, caster, target, dmg) {
 		target.GetCombatEntry(encounter).initiative -= 25;
 		var parse = AbilityNode.DefaultParser(caster, target);
-	Text.Add("[tName] become[tnotS] aroused, gaining " + Text.BoldColor(-dmg, "#FF8080") + " lust! [tHeShe] become[tnotS] distracted.", parse);
+	Text.Add("[tName] become[tnotS] aroused, gaining " + Text.Lust(-dmg) + " lust! [tHeShe] become[tnotS] distracted.", parse);
 	}],
 	onAbsorb: [Abilities.Seduction._onAbsorb]
 }));
@@ -99,7 +99,7 @@ Abilities.Seduction.Charm.castTree.push(AbilityNode.Template.Lust({
 			if(aggroEntry.aggro < 0) aggroEntry.aggro = 0;
 		}	
 		var parse = AbilityNode.DefaultParser(caster, target);
-	Text.Add("[tName] become[tnotS] charmed, gaining " + Text.BoldColor(-dmg, "#FF8080") + " lust! [tHeShe] become[tnotS] less aggressive toward [name].", parse);
+	Text.Add("[tName] become[tnotS] charmed, gaining " + Text.Lust(-dmg) + " lust! [tHeShe] become[tnotS] less aggressive toward [name].", parse);
 	}],
 	onAbsorb: [Abilities.Seduction._onAbsorb]
 }));
@@ -124,7 +124,7 @@ Abilities.Seduction.Allure.castTree.push(AbilityNode.Template.Lust({
 			if(aggroEntry.aggro < 0) aggroEntry.aggro = 0;
 		}	
 		var parse = AbilityNode.DefaultParser(caster, target);
-	Text.Add("[tName] become[tnotS] charmed, gaining " + Text.BoldColor(-dmg, "#FF8080") + " lust! [tHeShe] become[tnotS] less aggressive toward [name].", parse);
+	Text.Add("[tName] become[tnotS] charmed, gaining " + Text.Lust(-dmg) + " lust! [tHeShe] become[tnotS] less aggressive toward [name].", parse);
 	}],
 	onAbsorb: [Abilities.Seduction._onAbsorb]
 }));
@@ -143,7 +143,7 @@ Abilities.Seduction.Inflame.castTree.push(AbilityNode.Template.Lust({
 	onMiss: [Abilities.Seduction._onMiss],
 	onDamage: [function(ability, encounter, caster, target, dmg) {
 		var parse = AbilityNode.DefaultParser(caster, target);
-		Text.Add("[tName] squirm[tnotS] at the subtle undertones of the song, becoming greatly aroused. [tName] gain[tnotS] " + Text.BoldColor(-dmg, "#FF8080") + " lust!", parse);
+		Text.Add("[tName] squirm[tnotS] at the subtle undertones of the song, becoming greatly aroused. [tName] gain[tnotS] " + Text.Lust(-dmg) + " lust!", parse);
 	}],
 	onAbsorb: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
