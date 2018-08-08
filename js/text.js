@@ -86,36 +86,37 @@ Text.Clear = function() {
  *
  */
 
+//Utility function to apply css styling to text
+//This is used internally by Add and the helper methods below.
+//This should be used for styling any text that should 
+//not be passed through Text.Parse
+Text.ApplyStyle = function(text, cssClasses, tag) {
+	tag = tag || "span";
+	return '<' + tag + (cssClasses ? (' class ="' + cssClasses + '">') : '>') + text + '</' + tag + '>';
+}
+
 // Generic function to apply text to the buffer
 // It always uses Text.Parse, and chooses whether to apply styling if needed
 // This is primarily meant to be used for dialogue and scenes,
 // but AddSpan and AddDiv both call it, since this would make
 // testing easier in the future, as only this needs unit testing
-Text.Add = function(text, parse, cssClasses, tag = "span"){
-	var parsed = Text.Parse(text, parse)
+Text.Add = function(text, parse, cssClasses, tag) {
+	var parsed = Text.Parse(text, parse);
 	if (cssClasses) {
-		Text.buffer += Text.ApplyStyle(parsed, cssClasses, tag)
+		Text.buffer += Text.ApplyStyle(parsed, cssClasses, tag);
 	} else {
-		Text.buffer += parsed
+		Text.buffer += parsed;
 	}
-}
-
-//Utility function to apply css styling to text
-//This is used internally by Add and the helper methods below.
-//This should be used for styling any text that should 
-//not be passed through Text.Parse
-Text.ApplyStyle = function(text, cssClasses, tag = "span") {
-	return "<" + tag + ((cssClasses) ? " class =\"" + cssClasses + "\">" : ">") + text + "</" + tag + ">";
 }
 
 //Adds text wrapped in a span.
 Text.AddSpan = function(text, parse, cssClasses) {
-	Text.Add(text, parse, cssClasses, "span")
+	Text.Add(text, parse, cssClasses, "span");
 }
 
 //Adds text wrapped in a div.
 Text.AddDiv = function(text, parse, cssClasses) {
-	Text.Add(text, parse, cssClasses, "div")
+	Text.Add(text, parse, cssClasses, "div");
 }
 
 /*
@@ -124,8 +125,8 @@ Text.AddDiv = function(text, parse, cssClasses) {
 * ToolbarLabel: A text label that will be put at the very start of the toolbar. Default is no label.
 * cssClasses : A string of css classes that will be added to every input in the 'list' parameter.
  */
-Text.AddToolbar = function(list, toolbarLabel, cssClasses){
-	var toolbar = $("<div>")
+Text.AddToolbar = function(list, toolbarLabel, cssClasses) {
+	var toolbar = $("<div>");
 	//Add toolbar label if specified
 	if(toolbarLabel){
 		var label= $('<span>', {
@@ -135,13 +136,13 @@ Text.AddToolbar = function(list, toolbarLabel, cssClasses){
 		toolbar.append(label);
 	}
 	//Add inputs to new toolbar
-	for(var i=0; i < list.length; i++){
+	for(var i=0; i < list.length; i++) {
 		toolbar.append(createInput(list[i], cssClasses));
 	}
 	Text.toolbars.append(toolbar);
 }
 //Clears the toolbars buffer
-Text.ResetToolbars = function(){
+Text.ResetToolbars = function() {
 	Text.toolbars = $('<div></div>');
 }
 
@@ -152,11 +153,12 @@ Text.NL = function() {
 Text.Flush = function(textCssClasses, toolbarCssClasses) {
 	//var textbox = document.getElementById("mainTextArea");
 	var textBox = $("#mainTextArea");
-	var textClasses = (textCssClasses)? textCssClasses : "";
-	var toolbarClasses = (toolbarCssClasses)? toolbarCssClasses : "";
+	var textClasses = (textCssClasses) ? textCssClasses : "";
+	var toolbarClasses = (toolbarCssClasses) ? toolbarCssClasses : "";
 	//textbox.innerHTML += "<div class=\""+toolbarClasses+"\">"+Text.toolbar+"</div>";
-	if(Text.toolbars)
+	if(Text.toolbars) {
 		textBox.append(Text.toolbars);
+	}
 	textBox.append(Text.ApplyStyle(Text.buffer, textClasses));
 
 	Text.buffer = "";
@@ -340,11 +342,11 @@ Text.Enumerate = function(list, conjunction) {
  *   checkbox::: TODO
  *   radio   ::: TODO
  */
-var createInput = function(inputOptions, cssClasses){
+var createInput = function(inputOptions, cssClasses) {
 	var input;
 	var type = inputOptions.type || 'button';
 	var classesStr = (cssClasses || "") +" "+ (inputOptions.classes || "");
-	if(type.toLowerCase() == 'button'){
+	if(type.toLowerCase() == 'button') {
 		var btnName = inputOptions.nameStr;
 		var onclick = inputOptions.func;
 		var clickParam = inputOptions.param;
@@ -364,7 +366,7 @@ var createInput = function(inputOptions, cssClasses){
 		$(input).data("param", inputOptions.obj); //TODO
 		$(input).data("func", onclick);
 
-	}else if(type.toLowerCase() == 'select'){
+	} else if(type.toLowerCase() == 'select') {
 		//TODO Will finish when I need it later
 		/*var onSelect = inputOptions.func;
 		 var selectParam = inputOptions.param;
@@ -382,10 +384,9 @@ var createInput = function(inputOptions, cssClasses){
 		 //Add function and parameter data to input
 		 $(input).data("param", inputOptions.obj); //TODO
 		 $(input).data("func", onclick);*/
-	}else if(type.toLowerCase() == 'checkbox'){
+	} else if(type.toLowerCase() == 'checkbox') {
 		//TODO
-	}
-	else if(type.toLowerCase() == 'rado'){
+	} else if(type.toLowerCase() == 'rado') {
 		//TODO
 	}
 	return input;

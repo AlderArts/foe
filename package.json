@@ -1,6 +1,6 @@
 {
   "name": "FoE",
-  "version": "04u",
+  "version": "0.4.21",
   "description": "",
   "private": true,
   "scripts": {
@@ -11,6 +11,7 @@
   "dependencies": {
     "del": "^2.2.0",
     "gulp": "^3.9.1",
+    "gulp-util": "^3.0.8",
     "gulp-concat": "^2.6.0",
     "gulp-filter": "^3.0.1",
     "gulp-html-replace": "^1.5.5",

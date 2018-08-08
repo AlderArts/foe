@@ -1,5 +1,6 @@
 'use strict';
 const gulp = require('gulp');
+const gulpUtil = require('gulp-util');
 const concat = require('gulp-concat');
 const filter = require('gulp-filter');
 const htmlreplace = require('gulp-html-replace');
@@ -271,7 +272,7 @@ gulp.task('build:app', () => {
 	return gulp.src(appJs, {base: '.'})
 		.pipe(jsFilter)
 		.pipe(concat('app.js'))
-		.pipe(uglify())
+		.pipe(uglify().on('error', gulpUtil.log))
 		.pipe(jsFilter.restore)
 		.pipe(concat('bundle.js'))
 		.pipe(gulp.dest('./build/js'));

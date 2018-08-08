@@ -80,7 +80,7 @@ Images.imgWaitDisabled      = "assets/img/gui/wait_disabled.png";
 Images.imgSleepEnabled      = "assets/img/gui/sleep_enabled.png";
 Images.imgSleepDisabled     = "assets/img/gui/sleep_disabled.png";
 
-function LoadImages() {
+LoadImages = function() {
 	//Fill image array
 	var imageArray = [];
 	for(var image in Images)
@@ -132,7 +132,7 @@ function LoadImages() {
 	});
 }
 
-function assetsOverlay() {
+assetsOverlay = function() {
 	var el = document.getElementById("overlay_assets");
 	el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
 }

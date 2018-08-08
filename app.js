@@ -1,15 +1,15 @@
 // Universal constants
-frametime = 0.050; // Used for time updates
-windowWidth  = 1260;
-windowHeight = 700;
+const frametime = 0.050; // Used for time updates
+const windowWidth  = 1260;
+const windowHeight = 700;
 
-APP_NAME = "Fall of Eden";
-VERSION_MAJOR = 0;
-VERSION_MINOR = 4;
-VERSION_SUBSCRIPT = "u";
-VERSION_NAME = "Alchemy hijinxs";
+const APP_NAME = "Fall of Eden";
+const VERSION_MAJOR = 0;
+const VERSION_MINOR = 4;
+const VERSION_SUBSCRIPT = "u";
+const VERSION_NAME = "Alchemy hijinxs";
 
-SAVE_VERSION = 29;
+const SAVE_VERSION = 29;
 // Save version 1: Initial
 // Save version 2: Added inventory
 // Save version 3: Fixed clitcock restoration + height, weigth
@@ -40,15 +40,15 @@ SAVE_VERSION = 29;
 // Save version 28: Lei flags fix
 // Save version 29: Cleared some unused flags from Lagon
 
-VERSION_STRING = APP_NAME + " " + VERSION_MAJOR + "." + VERSION_MINOR + VERSION_SUBSCRIPT + ": " + VERSION_NAME;
+const VERSION_STRING = APP_NAME + " " + VERSION_MAJOR + "." + VERSION_MINOR + VERSION_SUBSCRIPT + ": " + VERSION_NAME;
 
-HEADER_FONT  = "bold 30pt Calibri";
-BUTTON_FONT  = "bold 14pt Tahoma, 'Droid Sans', sans-serif";
-SMALL_FONT   = "16pt Calibri";
-DEFAULT_FONT = "20pt Calibri";
-LARGE_FONT   = "26pt Calibri";
+const HEADER_FONT  = "bold 30pt Calibri";
+const BUTTON_FONT  = "bold 14pt Tahoma, 'Droid Sans', sans-serif";
+const SMALL_FONT   = "16pt Calibri";
+const DEFAULT_FONT = "20pt Calibri";
+const LARGE_FONT   = "26pt Calibri";
 
-Unit = {
+const Unit = {
 	metric   : 0,
 	american : 1
 }
