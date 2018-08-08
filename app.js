@@ -6,8 +6,8 @@ const windowHeight = 700;
 const APP_NAME = "Fall of Eden";
 const VERSION_MAJOR = 0;
 const VERSION_MINOR = 4;
-const VERSION_SUBSCRIPT = "u";
-const VERSION_NAME = "Alchemy hijinxs";
+const VERSION_SUBSCRIPT = 22;
+const VERSION_NAME = "Minor cleanup";
 
 const SAVE_VERSION = 29;
 // Save version 1: Initial
@@ -40,7 +40,7 @@ const SAVE_VERSION = 29;
 // Save version 28: Lei flags fix
 // Save version 29: Cleared some unused flags from Lagon
 
-const VERSION_STRING = APP_NAME + " " + VERSION_MAJOR + "." + VERSION_MINOR + VERSION_SUBSCRIPT + ": " + VERSION_NAME;
+const VERSION_STRING = APP_NAME + " " + VERSION_MAJOR + "." + VERSION_MINOR + "." + VERSION_SUBSCRIPT + ": " + VERSION_NAME;
 
 const HEADER_FONT  = "bold 30pt Calibri";
 const BUTTON_FONT  = "bold 14pt Tahoma, 'Droid Sans', sans-serif";
