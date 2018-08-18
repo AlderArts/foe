@@ -5,6 +5,14 @@ CHANGELOG for Fall of Eden
                   CURRENT
 --------------------------------------------
 
+Version 0.4.23
+--------------
+* Fixed a bug that would occur on trying to question the lagomorphs after winning to them.
+
+--------------------------------------------
+             PREVIOUS VERSIONS
+--------------------------------------------
+
 Version 0.4.22
 --------------
 * Changed version numbering (v is the 22nd letter, so .22)
@@ -12,10 +20,6 @@ Version 0.4.22
 * Setting the Pics: On/Off in the data menu now affects the combat portraits of party/enemies
 * More code cleanup and typo fixes, courtesy of CalmKhaos
 * CSS style cleanup, courtesy of hindmanj on github
-
---------------------------------------------
-             PREVIOUS VERSIONS
---------------------------------------------
 
 Version 0.4u
 ------------

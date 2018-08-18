@@ -6,7 +6,7 @@ const windowHeight = 700;
 const APP_NAME = "Fall of Eden";
 const VERSION_MAJOR = 0;
 const VERSION_MINOR = 4;
-const VERSION_SUBSCRIPT = 22;
+const VERSION_SUBSCRIPT = 23;
 const VERSION_NAME = "Minor cleanup";
 
 const SAVE_VERSION = 29;
