@@ -259,11 +259,16 @@ Player.prototype.LactationProgress = function(oldMilk, newMilk, lactationRate) {
 }
 
 Player.prototype.LactationDesc = function(parse) {
+	if(!this.lactHandler.CanLactate()) {
+		return;
+	}
+	
 	parse["nips"] = this.FirstBreastRow().NipsShort();
 	parse["breasts"] = this.FirstBreastRow().Short();
+	var rate = this.lactHandler.Rate();
+	
 	if(this.Lactation()) {
 		parse["toparmor"] = this.ArmorDesc();
-		var rate = this.lactHandler.lactationRate.Get();
 		if(rate > 3) {
 			parse["ua"] = this.Armor() ? Text.Parse(" under your [toparmor]", parse) : "";
 			Text.Add(" Milk practically gushes from your [nips], soaking your clothing and leaving a faintly sweet smell in its wake. There’s no way you’re going to be hiding this at all - or the contours of your [breasts] as the wet fabric clings to you[ua], leaving little to the imagination.", parse);
@@ -276,7 +281,7 @@ Player.prototype.LactationDesc = function(parse) {
 			Text.Add(" Beads of fresh, white cream well up on your [nips] intermittently. Forced out from the pressure within your [breasts], they cling on for as long as they can before rolling off and seeping into your clothing. While it takes a little time for the wetness to build up, you get there just fine in the end.", parse);
 		}
 	}
-	else if(this.lactHandler.lactationRate.Get() > 0) {
+	else if(rate > 0) {
 		var level = this.lactHandler.MilkLevel();
 		if(level >= 0.9)
 			Text.Add(" Your [breasts] are fat and full, a distinct sensation of pressure behind your [nips] as they approach their capacity. Distinctly tender from their engorged state, they jiggle slightly with each step you take, a side-effect of holding all that weight.", parse);

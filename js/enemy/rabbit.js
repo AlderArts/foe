@@ -1931,8 +1931,8 @@ Scenes.Lagomorph.GroupWinInterrorigate = function(enc) {
 		p1name     : function() { return party.members[1].name; }
 	};
 	
-	parse = alpha.ParserPronouns(parse, m1);
-	parse = alpha.ParserTags(parse, m1);
+	parse = alpha.ParserPronouns(parse, "m1");
+	parse = alpha.ParserTags(parse, "m1");
 	parse = player.ParserTags(parse);
 	
 	if(party.Two())
