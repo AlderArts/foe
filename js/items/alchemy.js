@@ -610,7 +610,8 @@ Items.Testos.Short = function() { return "A bottle of Testos"; }
 Items.Testos.Long = function() { return "A bottle of pure masculinity labled Testos."; }
 Items.Testos.recipe = [{it: Items.Equinium}, {it: Items.Homos}, {it: Items.Canis}];
 Items.Testos.PushEffect(TF.ItemEffects.IncTone, {odds: 0.3, ideal: .7, max: .1});
-Items.Testos.PushEffect(TF.ItemEffects.DecFem, {odds: 0.3, ideal: -1, max: .1});
+Items.Testos.PushEffect(TF.ItemEffects.DecFem, {odds: 0.4, ideal: -1, max: .1});
+Items.Testos.PushEffect(TF.ItemEffects.DecBreastSize, {odds: 0.7, ideal: 0, max: 6 });
 Items.Testos.PushEffect(function(target) {
 	var parse = {
 		Name: target.NameDesc(),
@@ -712,6 +713,7 @@ Items.Estros.Long = function() { return "A bottle of pure femininity labled Estr
 Items.Estros.recipe = [{it: Items.Vulpinix}, {it: Items.Homos}, {it: Items.Bovia}];
 Items.Estros.PushEffect(TF.ItemEffects.DecTone, {odds: 0.2, ideal: 0, max: .1});
 Items.Estros.PushEffect(TF.ItemEffects.IncFem, {odds: 0.8, ideal: 1, max: .1});
+Items.Estros.PushEffect(TF.ItemEffects.IncBreastSize, {odds: 0.4, ideal: 20, max: 3 });
 Items.Estros.PushEffect(function(target) {
 	var parse = {
 		Poss: target.Possessive(),

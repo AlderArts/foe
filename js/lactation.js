@@ -41,14 +41,17 @@ LactationHandler.prototype.FromStorage = function(storage) {
 	this.milkCap.base        = parseFloat(storage.milkC) || this.milkCap.base;
 }
 
-LactationHandler.prototype.Lactation = function() {
+LactationHandler.prototype.CanLactate = function() {
 	var body = this.entity.body;
 	if(body.breasts.length == 0)
 		return false;
 	else if(body.breasts[0].Size() < 2)
 		return false;
 	else
-		return this.lactating;
+		return true;
+}
+LactationHandler.prototype.Lactation = function() {
+	return this.CanLactate() && this.lactating;
 }
 LactationHandler.prototype.Rate = function() {
 	return this.lactationRate.Get();
@@ -99,7 +102,7 @@ LactationHandler.prototype.Update = function(hours) {
 			this.entity.MilkDrained();
 	}
 	
-	this.entity.LactationProgress(oldMilk, newMilk, this.lactationRate.Get());
+	this.entity.LactationProgress(oldMilk, newMilk, this.Rate());
 }
 
 LactationHandler.prototype.MilkDrain = function(drain) {
