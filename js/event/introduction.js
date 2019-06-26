@@ -1288,11 +1288,12 @@ Intro.UruSexFuckAnal2 = function() {
 
 	Text.Clear();
 	Text.Add("Later...");
-	Text.NL();
+	Text.Flush();
 
 	Gui.NextPrompt(function() {
 		player.AddSexExp(5);
 
+		Text.NL();
 		Text.Add("How many times has she made you climax, pumping her full of hot seed? You have completely lost count, riding on the brink of exhaustion from one orgasm to the next. ");
 		if(player.Gender() == Gender.male)
 			Text.Add("Your balls feel completely both numb and drained, though another load seems to be building.");
