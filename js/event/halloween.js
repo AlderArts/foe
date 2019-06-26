@@ -2100,7 +2100,7 @@ Scenes.Halloween.NadirMa = function() {
 		else {
 			Text.Add("Foreplay...? Does she <i>really</i> need it? You’re ready to get straight to the good stuff!", parse);
 			Text.NL();
-			Text.Add("<i>“Patience, mortal. You’re about to lay with a goddess. That’s not a chance most mortals get. Plus, I’ve been waiting for over a thousand years; surely you can wait a little longer?”</i>", parse);
+			Text.Add("<i>“Patience, mortal. You’re about to lay with a Goddess. That’s not a chance most mortals get. Plus, I’ve been waiting for over a thousand years; surely you can wait a little longer?”</i>", parse);
 			Text.NL();
 			Text.Add("There is something to be said for savoring the moment. You’ll follow her lead, in that case.", parse);
 		}
@@ -2285,7 +2285,7 @@ Scenes.Halloween.NadirMaCont = function(parse) {
 	Text.NL();
 	Text.Add("You watch, understanding swiftly dawning as the near-naked dobermorph imperiously raises one of her paw-like feet. It arcs delicately through the air, settling against the base of your shaft with just enough pressure that you can feel it. With a slow, deliberate motion, she starts to stroke the underside of your cock with the tip of her toe.", parse);
 	Text.NL();
-	Text.Add("<i>“You should feel honored. It’s not every day that a goddess rewards a servant by letting their shaft touch her feet.”</i>", parse);
+	Text.Add("<i>“You should feel honored. It’s not every day that a Goddess rewards a servant by letting their shaft touch her feet.”</i>", parse);
 	Text.NL();
 	Text.Add("Grunting softly, you absently assure her that you do feel honored. It’s a little hard to focus on her words; she surprisingly good at this! She keeps up a steady, measured pace; not so fast that you can’t savor the feel of her dainty digit gliding across your soft, tender skin, but not so slow that you can’t get excited by it. Her toenails are cut short, but just long enough that the drag of it adds to the pleasure she’s bringing you.", parse);
 	Text.NL();
@@ -2322,7 +2322,7 @@ Scenes.Halloween.NadirMaCont = function(parse) {
 	
 	var prompt = function() {
 		Text.Clear();
-		Text.Add("Nadir-Ma grins at you. <i>“Good answer, cutie. Come now and clean your mistress’ feet. It’s not everyday that a mere mortal like you gets to clean a goddess’ foot!”</i>", parse);
+		Text.Add("Nadir-Ma grins at you. <i>“Good answer, cutie. Come now and clean your mistress’ feet. It’s not everyday that a mere mortal like you gets to clean a Goddess’ foot!”</i>", parse);
 		Text.NL();
 		if(player.SubDom() < 35) {
 			Text.Add("Smiling softly to yourself, you meekly extend your hands and carefully take one beautiful, pre-cum smeared paw between them. Holding it as if it were a precious flower, you tenderly draw it closer before lowering your face to it.", parse);
@@ -2343,7 +2343,7 @@ Scenes.Halloween.NadirMaCont = function(parse) {
 		Text.NL();
 		Text.Add("You nod absently, putting down the fairly clean paw you were just bent over and reaching for the second.", parse);
 		Text.NL();
-		Text.Add("She grins. <i>“Since you’re down there, and doing such a good job, how about a massage too? Actually, how about you just worship my feet? It’s been such a long time since I had a servant worship me like the goddess I am...”</i>", parse);
+		Text.Add("She grins. <i>“Since you’re down there, and doing such a good job, how about a massage too? Actually, how about you just worship my feet? It’s been such a long time since I had a servant worship me like the Goddess I am...”</i>", parse);
 		Text.NL();
 		if(player.SubDom() < 35)
 			Text.Add("Oh, but of course! Smiling happily, you eagerly turn to your task.", parse);
@@ -2406,7 +2406,7 @@ Scenes.Halloween.NadirMaCont = function(parse) {
 		Text.Add("You manage a dull groan of happiness at her appraisal.", parse);
 		Text.NL();
 		if(player.HasBalls()) {
-			Text.Add("<i>“That was a nice load, cutie, but you could stand to be more productive. Can’t keep a goddess hungry, can you?”</i>", parse);
+			Text.Add("<i>“That was a nice load, cutie, but you could stand to be more productive. Can’t keep a Goddess hungry, can you?”</i>", parse);
 			Text.NL();
 			Text.Add("...Probably not. Bemused, you lift your head and manage to weakly ask her what she intends to do about it.", parse);
 			Text.NL();
@@ -2599,7 +2599,7 @@ Scenes.Halloween.NadirMaCont2 = function(parse) {
 		Text.Add("You slump to the floor, panting for breath, feeling more frustrated than relieved; you’re so close that it’s almost painful, even the slow ebbing of lust as it bleeds away a near-torturous experience.", parse);
 		Text.NL();
 		parse["k"] = p1cock.Knot() ? ", knot included" : "";
-		Text.Add("<i>“Now, about your reward...”</i> Nadir-Ma suddenly hoists you up as if you weighed nothing and lays you down on the table. In one smooth move, she climbs on the table and aligns[oneof] your [cocks] with her juice-dripping pussy. <i>“You’ll get to fuck a goddess.”</i> And with that, she lets gravity take its course, impaling herself on your shaft all the way to hilt[k].", parse);
+		Text.Add("<i>“Now, about your reward...”</i> Nadir-Ma suddenly hoists you up as if you weighed nothing and lays you down on the table. In one smooth move, she climbs on the table and aligns[oneof] your [cocks] with her juice-dripping pussy. <i>“You’ll get to fuck a Goddess.”</i> And with that, she lets gravity take its course, impaling herself on your shaft all the way to hilt[k].", parse);
 		Text.NL();
 		Text.Add("You cry out in pleasure, a strangled gasp of pure lust at being so directly enveloped within her. The heat of her drooling cunt swallows your senses, and for a moment, it’s as if there’s nothing but her cooch greedily devouring your cock, slurping back and forth along your length as she bounces atop you.", parse);
 		Text.NL();
@@ -2625,11 +2625,11 @@ Scenes.Halloween.NadirMaCont2 = function(parse) {
 		Text.NL();
 		Text.Add("<i>“No, cutie. Thank you,”</i> she says, crawling over to you and pulling you into a hot, passionate kiss.", parse);
 		Text.NL();
-		Text.Add("You happily melt into the liplock, cautiously wrapping your arms around the happy self-proclaimed goddess as she thrusts her tongue into your mouth. It was quite a trip getting here, but for now, you’re content to just lie here in her bountiful, pleasantly fluffy embrace.", parse);
+		Text.Add("You happily melt into the liplock, cautiously wrapping your arms around the happy self-proclaimed Goddess as she thrusts her tongue into your mouth. It was quite a trip getting here, but for now, you’re content to just lie here in her bountiful, pleasantly fluffy embrace.", parse);
 		Text.NL();
 		Text.Add("You don’t know how long it takes until Nadir-Ma breaks the kiss, but you gently part your arms and let her sit up, happy to watch her bountiful breasts jiggling as she rears above you.", parse);
 		Text.NL();
-		Text.Add("<i>“You did a really good job packing me full of semen. I don’t think there’s any room left in my womb.”</i> She giggles. <i>“If I was any ordinary girl, I’d be pregnant for sure. However, that’s not the case with goddesses.”</i> She grins, winking at you.", parse);
+		Text.Add("<i>“You did a really good job packing me full of semen. I don’t think there’s any room left in my womb.”</i> She giggles. <i>“If I was any ordinary girl, I’d be pregnant for sure. However, that’s not the case with Goddesses.”</i> She grins, winking at you.", parse);
 		Text.NL();
 		Text.Add("Grinning tiredly, you assure her that you’re happy to have helped her.", parse);
 		Text.NL();
@@ -2660,7 +2660,7 @@ Scenes.Halloween.NadirMaCont2 = function(parse) {
 		Text.NL();
 		Text.Add("<i>“That’s it, cutie. Drink deep and you’ll become even cuter!”</i> She grins, holding you against her bosom as her other hand travels lower to caress[oneof] your [cocks].", parse);
 		Text.NL();
-		Text.Add("More than willing to comply, you drink deeply of the dobermorph’s bounty, feeling the intoxicating warmth blossoming in your belly and spreading through your body. You feel so safe and content here, just lying in her arms, happy to drink until your goddess deigns to stop you.", parse);
+		Text.Add("More than willing to comply, you drink deeply of the dobermorph’s bounty, feeling the intoxicating warmth blossoming in your belly and spreading through your body. You feel so safe and content here, just lying in her arms, happy to drink until your Goddess deigns to stop you.", parse);
 		Text.NL();
 		if(werewolf) {
 			if(player.FirstBreastRow().Size() < 12.5) {
@@ -2721,7 +2721,7 @@ Scenes.Halloween.NadirMaCont2 = function(parse) {
 			parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 			parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
 			
-			Text.Add("Looking at your loins, you can’t help but agree with the canine goddess. Really, what do you need more than one cock for? Better to take one hole at a time and do it well than to waste half your seed or more just spewing it over the ground! Eagerly, you watch as your over-abundant nethers reshape themselves into something more elegant.", parse);
+			Text.Add("Looking at your loins, you can’t help but agree with the canine Goddess. Really, what do you need more than one cock for? Better to take one hole at a time and do it well than to waste half your seed or more just spewing it over the ground! Eagerly, you watch as your over-abundant nethers reshape themselves into something more elegant.", parse);
 			Text.NL();
 			if(p1cock.Len() < 38 || p1cock.Thickness() < 7) {
 				Text.Add("Moments later, your [cock] stands alone at your crotch once the other[s2] [hasHave2] disappeared - though not without leaving a parting gift. Your cock swells and grows, getting bigger and fatter, until a proud fifteen inches long shaft pulsates in your lap, its two and a half inch girth aching to stretch some lucky soul around its broad width and make them scream in pleasure.", parse);
@@ -2740,7 +2740,7 @@ Scenes.Halloween.NadirMaCont2 = function(parse) {
 			Text.Add("Moaning around the dobermorph’s nipple, you thrust fervently into her palm, eager to comply. Oh, yes, you want to grow for her!", parse);
 			Text.NL();
 			parse["l"] = player.HasLegs() ? " between your thighs" : "";
-			Text.Add("Dimly, you can feel yourself stretching and swelling, your cock getting bigger and fatter as the canine goddess carefully guides its growth. When the tightness fades, a mighty [cock] juts[l], fifteen inches long and two and a half inches thick.", parse);
+			Text.Add("Dimly, you can feel yourself stretching and swelling, your cock getting bigger and fatter as the canine Goddess carefully guides its growth. When the tightness fades, a mighty [cock] juts[l], fifteen inches long and two and a half inches thick.", parse);
 			Text.NL();
 			Text.Add("From the smile on her face, Nadir-Ma is quite satisfied with your new tool. She strokes it one last time and then lets it go.", parse);
 			Text.NL();
@@ -2760,7 +2760,7 @@ Scenes.Halloween.NadirMaCont2 = function(parse) {
 			Text.NL();
 			Text.Add("<i>“Brace yourself, this is going to hurt a little.”</i>", parse);
 			Text.NL();
-			Text.Add("Without further ado, the goddess slips her fingers inside, deliberately pressing against an unfamiliar barrier. You can feel it tearing as she steadily pushes her way inside, making you mewl in pain and instinctively clench down.", parse);
+			Text.Add("Without further ado, the Goddess slips her fingers inside, deliberately pressing against an unfamiliar barrier. You can feel it tearing as she steadily pushes her way inside, making you mewl in pain and instinctively clench down.", parse);
 			Text.NL();
 			
 			var vag = new Vagina();
@@ -2778,11 +2778,11 @@ Scenes.Halloween.NadirMaCont2 = function(parse) {
 			Text.Add("Contentment fills you as Nadir-Ma’s wonderful fingers stretch and twirl your depths, making sure everything is in working order inside you before she pulls them out. You watch her lazily lick herself clean, savoring the juices smeared across her digits.", parse);
 			Text.NL();
 		}
-		Text.Add("Seized by a sudden incredible thirst, you start to suck as if your very life depends on it. Your goddess’ moans and sighs barely register, falling on deaf ears as you greedily guzzle and gorge at her tit.", parse);
+		Text.Add("Seized by a sudden incredible thirst, you start to suck as if your very life depends on it. Your Goddess’ moans and sighs barely register, falling on deaf ears as you greedily guzzle and gorge at her tit.", parse);
 		Text.NL();
-		Text.Add("Nadir-Ma giggles. <i>“Oh, you servants are all the same. Once you get a taste, you never want to let go… normally, I’d be stopping you here, but I think you deserve to go all the way. It’s been a long time, and you did do everything I asked of you; good servants like you are hard to come by. Go ahead then, cutie, drink your fill. Your goddess’ body is nothing if not bountiful, and I’ll be damned if I can’t at least feed my best girl.”</i>", parse);
+		Text.Add("Nadir-Ma giggles. <i>“Oh, you servants are all the same. Once you get a taste, you never want to let go… normally, I’d be stopping you here, but I think you deserve to go all the way. It’s been a long time, and you did do everything I asked of you; good servants like you are hard to come by. Go ahead then, cutie, drink your fill. Your Goddess’ body is nothing if not bountiful, and I’ll be damned if I can’t at least feed my best girl.”</i>", parse);
 		Text.NL();
-		Text.Add("Enthralled by your goddess’ generosity, you eagerly suckle harder, anxious to draw as much of the rich, life-giving nectar from her bosom as she will deign to give you.", parse);
+		Text.Add("Enthralled by your Goddess’ generosity, you eagerly suckle harder, anxious to draw as much of the rich, life-giving nectar from her bosom as she will deign to give you.", parse);
 		Text.NL();
 		parse["h"] = player.HasHair() ? "through your hair" : "over your shaven scalp";
 		parse["h2"] = player.HasHair() ? " Her digits playfully intertwine with your locks, sweeping down through them." : "";
@@ -2792,28 +2792,28 @@ Scenes.Halloween.NadirMaCont2 = function(parse) {
 		parse["w"] = wings ? Text.Parse(", between your [wings]", parse) : "";
 		Text.Add("Dimly, you can see her smiling down at you as she reaches out and clasps your cheeks, running her fingers over your face as much as she can. Her hands curl across your cheekbones, sweeping up your temples and then start to run [h].[h2] You can feel her digits dragging down[h3] and down, from the top of your skull down over your shoulders[w], across the small of your back, not stopping until you feel them playfully brush your ass.", parse);
 		Text.NL();
-		Text.Add("You smile proudly around the dobermorph’s nipple as she starts to openly grope your butt. Rich and full, perky and firm, it’s a beautiful little eye-catcher. Naturally, her hands sweep further in, encompassing the strong, wide bones of your child-bearing hips; you have a body made for birthing beautiful, healthy children, and from somewhere deep inside, the alien lament that your goddess lacks a cock with which to bless you with some pups of her own surfaces.", parse);
+		Text.Add("You smile proudly around the dobermorph’s nipple as she starts to openly grope your butt. Rich and full, perky and firm, it’s a beautiful little eye-catcher. Naturally, her hands sweep further in, encompassing the strong, wide bones of your child-bearing hips; you have a body made for birthing beautiful, healthy children, and from somewhere deep inside, the alien lament that your Goddess lacks a cock with which to bless you with some pups of her own surfaces.", parse);
 		Text.NL();
 		if(player.HasTail())
 			Text.Add("Your [tail] wags happily, swaying over your ass, and Nadir-Ma smiles at the sight. It only swishes faster when she reaches around to play with it, scratching its base before creeping down between your plump, squeezable buttocks.", parse);
 		else
-			Text.Add("Nadir-Ma caresses your hips, visibly savoring their curves as she feels the strength and potential in them. But your hips cannot hold the attention of a goddess like her for long, and inevitably she drifts back to your ass, her delicate fingers creeping down the crevasse of your buttock cleavage.", parse);
+			Text.Add("Nadir-Ma caresses your hips, visibly savoring their curves as she feels the strength and potential in them. But your hips cannot hold the attention of a Goddess like her for long, and inevitably she drifts back to your ass, her delicate fingers creeping down the crevasse of your buttock cleavage.", parse);
 		Text.NL();
-		Text.Add("The goddess’ long, slender digit begins to poke at your asshole, slowly rubbing circles around the puckered orifice, letting it feel her pressure before she starts to press on it for real. With the inexorable might of a true queen, she drives on; even were you of a mind to resist, you would be unable to keep her from spreading you open as she pushes herself in to the very knuckle.", parse);
+		Text.Add("The Goddess’ long, slender digit begins to poke at your asshole, slowly rubbing circles around the puckered orifice, letting it feel her pressure before she starts to press on it for real. With the inexorable might of a true queen, she drives on; even were you of a mind to resist, you would be unable to keep her from spreading you open as she pushes herself in to the very knuckle.", parse);
 		Text.NL();
 		Text.Add("A brief flicker of confusion crosses your mind; why are you so <b>tight</b>? Didn’t you just have her favorite toy buried to the hilt in your ass a few minutes ago?", parse);
 		Text.NL();
 		Text.Add("Nadir-Ma’s finger twitches, brushing feather-softly against your prostate, and the confusion vanishes into ether. What does it matter, when it feels this good?", parse);
 		Text.NL();
-		Text.Add("The goddess just smiles knowingly, continuing to twist her wrist and tickle your innards with her finger; it feels so good, but you want more, you <b>need</b> more!", parse);
+		Text.Add("The Goddess just smiles knowingly, continuing to twist her wrist and tickle your innards with her finger; it feels so good, but you want more, you <b>need</b> more!", parse);
 		Text.NL();
 		Text.Add("Nadir-Ma’s eyes glitter like dark stars above you, her smile wrapped across her pretty face as she delicately draws her finger from your anus. You don’t have more than a moment to lament being empty before she drives back in again - two digits, this time.", parse);
 		Text.NL();
-		Text.Add("You expect your body to betray you and resist your goddess, but, to your awe, it does no such thing. Nadir-Ma’s two fingers slide inside of you without the slightest resistance, easily spreading you open with each twitch and flex of her wrist. You can feel her stretching you  wider than ever, and yet you know you can fit more - that you <b>want</b> more...", parse);
+		Text.Add("You expect your body to betray you and resist your Goddess, but, to your awe, it does no such thing. Nadir-Ma’s two fingers slide inside of you without the slightest resistance, easily spreading you open with each twitch and flex of her wrist. You can feel her stretching you  wider than ever, and yet you know you can fit more - that you <b>want</b> more...", parse);
 		Text.NL();
 		Text.Add("<i>“Gotta make sure you’re able to have fun back here too. What kind of servant would you be if you couldn’t do anal during an orgy?”</i>", parse);
 		Text.NL();
-		Text.Add("If you didn’t have a mouth filled with the most delicious tit you’ve ever sucked, you’d heartily agree with your goddess’ assessment. As it is, you settle for just nodding proudly, already imagining the fun you and your new butt can get up to after this.", parse);
+		Text.Add("If you didn’t have a mouth filled with the most delicious tit you’ve ever sucked, you’d heartily agree with your Goddess’ assessment. As it is, you settle for just nodding proudly, already imagining the fun you and your new butt can get up to after this.", parse);
 		Text.NL();
 		Text.Add("Nadir-Ma smiles, and demurely draws her digits from your asshole. Patiently, she runs her hands down over your [legs], her soft palms soothing on your delicate [skin] as she feels the dainty contours of your lower limbs. She doesn’t stop until she reaches your [feet], playfully brushing them with ticklish passes of her fingers.", parse);
 		Text.NL();
@@ -2843,16 +2843,16 @@ Scenes.Halloween.NadirMaCont2 = function(parse) {
 		Text.NL();
 		Text.Add("You simply smile stupidly and nod your agreement, still fixated on your reflection. You only look away when you feel the dobermorph’s warm, delicate hand insistently brushing away your hand. As you look down, her dainty fingers wrap around your cock, even that simple contact enough to make you moan with pleasure.", parse);
 		Text.NL();
-		Text.Add("<i>“Now, I wouldn’t be much of a goddess if I wasn’t willing to give my best girl a hand, would I?”</i>", parse);
+		Text.Add("<i>“Now, I wouldn’t be much of a Goddess if I wasn’t willing to give my best girl a hand, would I?”</i>", parse);
 		Text.NL();
 		Text.Add("Well, you wouldn’t say that -", parse);
 		Text.NL();
-		Text.Add("<i>“It’ll just be a quick handjob though. I got places to be, things to see, people to fuck.”</i> She giggles. <i>“And I’m willing to bet you do too, but for now enjoy your goddess’ touch.”</i>", parse);
+		Text.Add("<i>“It’ll just be a quick handjob though. I got places to be, things to see, people to fuck.”</i> She giggles. <i>“And I’m willing to bet you do too, but for now enjoy your Goddess’ touch.”</i>", parse);
 		Text.NL();
 		Text.Add("Before you can think of a response to that, she starts to stroke your shaft. With the ease of a true expert, her fingers glide back and forth along your skin, caressing every special spot without fail. Each digit unerringly seeks out a particular crease, ridge or crinkle, reducing your brain to a warm puddle of fuck. You can’t possibly hold out much longer...", parse);
 		Text.NL();
 		parse["proverbial"] = player.HasLegs() ? "" : " proverbial";
-		Text.Add("And then, all of a sudden, your goddess releases you. Your plaintive whine dies on your lips as she fiercely spins you around on your[proverbial] heel and pulls you into a deep kiss. The heat of her floods your mind, the taste of her washing over your tongue, and you don’t have a chance in hell of stopping what happens next.", parse);
+		Text.Add("And then, all of a sudden, your Goddess releases you. Your plaintive whine dies on your lips as she fiercely spins you around on your[proverbial] heel and pulls you into a deep kiss. The heat of her floods your mind, the taste of her washing over your tongue, and you don’t have a chance in hell of stopping what happens next.", parse);
 		Text.NL();
 		Text.Add("Your overheated cock explodes like a poorly-capped geyser, your [balls] spewing their frothing, churning contents over the dobermorph’s belly. Gush after gut-clenching gush pours from you, surging over Nadir-Ma’s stomach, spattering against the underside of her tits and washing over her thighs, yet she keeps kissing you until you finally run dry. Your cock belches one last gobbet of seed over the dobie’s now-white torso and goes limp; only then does she let you go.", parse);
 		Text.NL();
@@ -2918,7 +2918,7 @@ Scenes.Halloween.NadirMaNoEntry = function(parse, func) {
 		Text.NL();
 		Text.Add("What is she, deaf? You take a breath and prepare to repeat yourself.", parse);
 		Text.NL();
-		Text.Add("<i>“Before you wind up saying anything you might regret, I should warn you that I <b>hate</b> it when people say no to me. And it’s not a very bright idea to deny a goddess when she’s been stuck in a jar for very long. I might get angry, you know?”</i> She smiles.", parse);
+		Text.Add("<i>“Before you wind up saying anything you might regret, I should warn you that I <b>hate</b> it when people say no to me. And it’s not a very bright idea to deny a Goddess when she’s been stuck in a jar for very long. I might get angry, you know?”</i> She smiles.", parse);
 		Text.NL();
 		Text.Add("You’d have to be a complete and total idiot to not notice the hint of fang in her grin, or the menace underlying her words. Whoever she is - and whatever, you can’t forget that whole manifestation business - she really doesn’t like to be told ‘no’. Maybe going along with her wishes might be the smart choice here...", parse);
 		Text.Flush();
@@ -2957,7 +2957,7 @@ Her previously discarded bandages immediately wrap themselves around her body as
 		Text.NL();
 		Text.Add("The urge to take a step back flashes through your mind, before you discard it. Folding your arms across your [breasts], you chastise the angry dobermorph that you said no. Who does she think she is, to be a throwing a tantrum like this?", parse);
 		Text.NL();
-		Text.Add("<i>“I am a goddess!”</i> she exclaims. Wind booms around the room, snuffing out the torches and slamming the door behind you. The darkness lasts only an instant, before an eerie green flame lights up each torch.", parse);
+		Text.Add("<i>“I am a Goddess!”</i> she exclaims. Wind booms around the room, snuffing out the torches and slamming the door behind you. The darkness lasts only an instant, before an eerie green flame lights up each torch.", parse);
 		Text.NL();
 		Text.Add("You have a sinking feeling about all this...", parse);
 		Text.NL();
@@ -3012,7 +3012,7 @@ Scenes.Halloween.NadirMaBadend = function() {
 	parse["gen"] = Text.Parse(gen, parse);
 	Text.Add("Despite everything else about the situation, you can’t help yourself but respond to the doberherm’s treatment. You can feel [gen].", parse);
 	Text.NL();
-	Text.Add("Nadir-Ma laughs out loud when she feels the telltale signs of your arousal. <i>“I knew it! A goddess always knows! You’re enjoying this!”</i> she accuses.", parse);
+	Text.Add("Nadir-Ma laughs out loud when she feels the telltale signs of your arousal. <i>“I knew it! A Goddess always knows! You’re enjoying this!”</i> she accuses.", parse);
 	Text.NL();
 	if(player.SubDom() > 0) {
 		Text.Add("You go to shout that it’s not true, that you hate this, but with your gag in place, all that comes out are muffled grunts and rumbles. Instead, you try to convey your message by shaking your head.", parse);
@@ -3121,7 +3121,7 @@ Scenes.Halloween.NadirMaBadend = function() {
 	else
 		Text.Add("You need no further instruction, already opening your mouth and drawing her tasty treat inside, happy for a chance to really taste her dick.", parse);
 	Text.NL();
-	Text.Add("<i>“And if I feel teeth, you’d better be ready for some <b>hard</b> punishment, the likes only a goddess could give.”</i>", parse);
+	Text.Add("<i>“And if I feel teeth, you’d better be ready for some <b>hard</b> punishment, the likes only a Goddess could give.”</i>", parse);
 	Text.NL();
 	parse["boygirl"] = player.mfTrue("boy", "girl");
 	if(player.SubDom() > 0)
@@ -3203,12 +3203,12 @@ Scenes.Halloween.NadirMaBadend = function() {
 	Text.NL();
 	Text.Add("Chills run down your spine, beads of sweat pouring from your body. You saw her shapeshifting, yes, but that’s not possible! Is it?!", parse);
 	Text.NL();
-	Text.Add("<i>“Rejoice, bitch. It’s not everyday a lowly mortal is invited to join with a goddess.”</i> Nadir-Ma motions for her bandages to release you from the table, and she hoists you into the air and onto her lap, sitting down on the table that held you not moments ago.", parse);
+	Text.Add("<i>“Rejoice, bitch. It’s not everyday a lowly mortal is invited to join with a Goddess.”</i> Nadir-Ma motions for her bandages to release you from the table, and she hoists you into the air and onto her lap, sitting down on the table that held you not moments ago.", parse);
 	Text.NL();
 	if(player.SubDom() > 0)
 		Text.Add("She hasn’t broken your spirit so badly that you’re just going to sit here and take this! You try to make a move, to break free somehow, but disoriented, exhausted and weighed down by cum, you haven’t a chance of getting out of her arms.", parse);
 	else
-		Text.Add("You croon in bliss, happily snuggling into your goddess’s lap. You’ve always wanted someone stronger to take care of you, and what greater care and comfort could there be than to be of one flesh with your master forever?", parse);
+		Text.Add("You croon in bliss, happily snuggling into your Goddess’s lap. You’ve always wanted someone stronger to take care of you, and what greater care and comfort could there be than to be of one flesh with your master forever?", parse);
 	Text.NL();
 	parse["own"] = player.HasLegs() ? "own" : parse["legs"];
 	Text.Add("She hugs you from behind, grabbing your hands in hers and willing her bandages to wrap around your arms, binding them with hers. Her legs do the same to your [own], and the bindings covering her chest repeat the motion over your [breasts]. In no time, you’re tied to her, fully aware of the heat emanating from her body as she presses her [breasts] to your back.", parse);
@@ -3268,7 +3268,7 @@ Scenes.Halloween.NadirMaBadend = function() {
 			Text.NL();
 			Text.Add("...Do you really have a choice?", parse);
 			Text.NL();
-			Text.Add("<i>“No, you don’t. But that’s why you’re the bitch and I’m the goddess. Now, let’s have a look at what’s new on our body...”</i>", parse);
+			Text.Add("<i>“No, you don’t. But that’s why you’re the bitch and I’m the Goddess. Now, let’s have a look at what’s new on our body...”</i>", parse);
 		}
 		else {
 			Text.Add("You try to purr your approval, to thank her for making you into something so beautiful, but you can’t seem to get your voice to work, to your dismay.", parse);
@@ -5886,7 +5886,7 @@ Scenes.Halloween.Lenka = function() {
 	Text.NL();
 	Text.Add("<i>“Don’t bother, silly,”</i> Lenka chides. <i>“It’s been like that since forever; I’ve never been able to set it straight. Now, come here and let Mama Lenka give you a very special hug.”</i>", parse);
 	Text.NL();
-	Text.Add("Yes, yes… you want this. Anything that magical voice commands of you. The avian demoness shoves you back into the mattress, then pounces on you, nuzzling you aggressively with her beak. Her scent - practically indistinguishable from that of the roses - fills the world, and her soft, teardrop-shaped breasts push against your body, warm with promise, her nipples stiff and erect. You can <i>feel</i> her heat-filled breeding hole grind against your stomach, leaving a trail of slick moistness, wet feathers spreading her girl-cum like a paintbrush. Butterflies erupt in your stomach, and in this moment, you want nothing more than to have the honor of servicing this fertility goddess kneeling on the mattress in front of you.", parse);
+	Text.Add("Yes, yes… you want this. Anything that magical voice commands of you. The avian demoness shoves you back into the mattress, then pounces on you, nuzzling you aggressively with her beak. Her scent - practically indistinguishable from that of the roses - fills the world, and her soft, teardrop-shaped breasts push against your body, warm with promise, her nipples stiff and erect. You can <i>feel</i> her heat-filled breeding hole grind against your stomach, leaving a trail of slick moistness, wet feathers spreading her girl-cum like a paintbrush. Butterflies erupt in your stomach, and in this moment, you want nothing more than to have the honor of servicing this fertility Goddess kneeling on the mattress in front of you.", parse);
 	Text.NL();
 	Text.Add("Lenka giggles, then her deep emerald eyes gleam with predatory hunger. Before you know it, she’s atop you, pinning you on your back to the mattress while your throbbing, engorged cock pokes up between her perfectly shaped thighs. With deliberate slowness and no small restraint on her part, the avian demoness grinds the thick, prominent lips of her pussy against your glans. You can’t help but cry out as pre-cum oozes from your [cockTip], triggered by the hot moistness of her baby-making hole.", parse);
 	Text.NL();
@@ -5998,7 +5998,7 @@ Scenes.Halloween.Lenka = function() {
 			Text.NL();
 			Text.Add("The laying is an easy affair, but not surprising considering Lenka’s broodmother-worthy hips; it happens almost as soon as she sets her mind to it. First, her belly visibly drops as her young prepare to enter the world, their weight settling on her hips even as her usually tight cervix begins to give way. Gradually, the contents of her womb shift lower and lower with each contraction, accompanied by her lustful moans and pants; her netherlips bulge and part with the egg rapidly crowning, then slipping out of her as she orgasms, leaving a sticky mess on the sheets.", parse);
 			Text.NL();
-			Text.Add("Wow. Looking at the sheer size of that womb-straining egg… and she’s got more of those in her? You can’t help but feel elated that you were part of this process, that this incredible fertility goddess picked you, out of all who could have stumbled upon this place, to father her firstborn spawn.", parse);
+			Text.Add("Wow. Looking at the sheer size of that womb-straining egg… and she’s got more of those in her? You can’t help but feel elated that you were part of this process, that this incredible fertility Goddess picked you, out of all who could have stumbled upon this place, to father her firstborn spawn.", parse);
 			Text.NL();
 			Text.Add("Two more orgasms later, an equal number of huge matte-black eggs are resting beside their sibling, smelling faintly of that same, sickly, cloying sweet scent that pervades the room. Chirping tenderly, Lenka pats the eggs as they begin to hatch, cracks running along their surface until the shells break open and small, dark vaguely bird-like shapes spill out from within, still damp with egg fluids. Mother of Shadows indeed…", parse);
 			Text.NL();
@@ -6008,7 +6008,7 @@ Scenes.Halloween.Lenka = function() {
 			Text.NL();
 			Text.Add("<i>“Go,”</i> Lenka whispers to her trio of firstborn, the seething masses of vaguely bird-shaped shadow now fully grown. Already, the remnants of her pregnant belly are fading away, her midriff rapidly returning to its old slender shape, her womb preparing itself to be seeded again. <i>“You’ll soon have many brothers and sisters to join you.”</i>", parse);
 			Text.NL();
-			Text.Add("A soft flutter of wings, and they are gone, melding seamlessly into the darkness. Humming to herself, Lenka takes her time cleaning up; removing both eggshell fragments and messy fluids with a snap of her gloved fingers, making sure to move her goddess-worthy body just so to inflame your addled desires. At long last, though, she’s done, and the avian demoness settles back on the bed, eyes gleaming predatorily as she turns her gaze on you.", parse);
+			Text.Add("A soft flutter of wings, and they are gone, melding seamlessly into the darkness. Humming to herself, Lenka takes her time cleaning up; removing both eggshell fragments and messy fluids with a snap of her gloved fingers, making sure to move her Goddess-worthy body just so to inflame your addled desires. At long last, though, she’s done, and the avian demoness settles back on the bed, eyes gleaming predatorily as she turns her gaze on you.", parse);
 			Text.NL();
 			Text.Add("<i>“Giddy up, cum-pump. We’ve still got lots of work to do.”</i>", parse);
 			Text.NL();

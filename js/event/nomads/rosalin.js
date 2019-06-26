@@ -2078,7 +2078,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 	}
 	else if(item == Items.Lobos) {
 		if(rosalin.flags["Lobos"] == 0) {
-			Text.Add("<i>“Did you get this from wolfie?”</i> Rosalin asks guardedly as [heshe] eyes the wolf pelt you present [himher] with. <i>“If you did, I’ll have to make a potion to make it grow out again.”</i>", parse);
+			Text.Add("<i>“Did you get this from Wolfie?”</i> Rosalin asks guardedly as [heshe] eyes the wolf pelt you present [himher] with. <i>“If you did, I’ll have to make a potion to make it grow out again.”</i>", parse);
 			Text.NL();
 			parse["Cale"] = cale.flags["Met2"] >= Cale.Met2.Talked ? "Cale" : "the wolf";
 			Text.Add("You hurriedly assure [himher] that you wouldn’t hurt [Cale]; you got this from somewhere else. The alchemist nods to [himher]self, the question already forgotten as [heshe] starts mixing ingredients together.", parse);

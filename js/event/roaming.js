@@ -108,7 +108,7 @@ Scenes.Roaming.KingdomPatrol = function(entering) {
 				Text.Clear();
 				Text.Add("You tell the sergeant that you are adventurers, and you’re here as part of your quest. Okay, it might not be an <i>essential</i> part of your quest, but there’s no reason to tell [rhimher] that.", parse);
 				Text.NL();
-				Text.Add("The sergeant’s lips curl into a frown. <i>“Really? I know your kind. Think you’re on some goddess-sent mission to restore ancient powers and save the world, I bet.”</i>", parse);
+				Text.Add("The sergeant’s lips curl into a frown. <i>“Really? I know your kind. Think you’re on some Goddess-sent mission to restore ancient powers and save the world, I bet.”</i>", parse);
 				Text.NL();
 				Text.Add("Well… yes, that’s about it, actually.", parse);
 				Text.NL();

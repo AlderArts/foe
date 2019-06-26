@@ -75,7 +75,7 @@ Scenes.NomadsCavalcade.RegularGame = function() {
 		estevan.flags["cav"] = 1;
 		Text.Add("<i>“Alright, I’m gonna assume this is the first time you are playing this game, [playername],”</i> Estevan says as he pulls out a deck of old cards. He expertly shuffles and flares the deck, showing you the cards. <i>“There are fifteen cards split up into three different suits; Light, Darkness and Shadow.”</i>", parse);
 		Text.NL();
-		Text.Add("You see that each card has a small picture on it, and a color that indicates its suit. In the corner, you see a number on each card, and you ask the satyr what it means. <i>“Just in case you are like wolfie and have a hard time keeping track of all the cards and how many points your hand is worth, you can use these numbers,”</i> he explains. <i>“The best card of each suit is number one, going down to number five in decreasing value.”</i> Cale growls at the cheap jab, but lets the satyr continue his explanation of the game.", parse);
+		Text.Add("You see that each card has a small picture on it, and a color that indicates its suit. In the corner, you see a number on each card, and you ask the satyr what it means. <i>“Just in case you are like Wolfie and have a hard time keeping track of all the cards and how many points your hand is worth, you can use these numbers,”</i> he explains. <i>“The best card of each suit is number one, going down to number five in decreasing value.”</i> Cale growls at the cheap jab, but lets the satyr continue his explanation of the game.", parse);
 		Text.NL();
 		Text.Add("<i>“You get two cards in your hand. I then place three cards face down, like this,”</i> he explains, handing out two cards to you, Rosalin and Cale each, and placing another three in front of him. <i>“You each place your bets - we usually play for small coins, more for the enjoyment of the game really - and you either call, raise or fold. Each turn of betting, I reveal another card of the house hand.”</i> Saying so, he flips the hidden cards one by one.", parse);
 		Text.NL();
@@ -440,7 +440,7 @@ Scenes.NomadsCavalcade.CheatGame = function() {
 				Text.NL();
 				Text.Add("Cale swirls back and forth between each one of you, but you’re not going to have him wiggle his way out of this one. Especially since you have to keep his attention away from your last hand…", parse);
 				Text.NL();
-				Text.Add("Finally, a defeated wolfie lowers his head, muttering something about the world not being fair. Tough luck. Well, not exactly luck, but still.", parse);
+				Text.Add("Finally, a defeated Wolfie lowers his head, muttering something about the world not being fair. Tough luck. Well, not exactly luck, but still.", parse);
 				Text.NL();
 				Text.Add("<i>“Fine, let’s get this over with,”</i> he sighs. Grinning, you tell him to turn around and bend over the log. <i>“What, here?”</i> he protests, but lowers his head as you sternly remind him about the rules again. <i>“Okay, okay, just be gentle- WILL YOU STOP LAUGHING?”</i> the wolf exclaims, his raw nerves chafing at Estevan’s roaring laughter. It takes a bit of further coaxing, but you finally have Cale propped up over the log, butt sticking up in the air.", parse);
 			}
@@ -494,7 +494,7 @@ Scenes.NomadsCavalcade.CheatGame = function() {
 					Text.Add("Grinning, you fasten the straps of the artificial cock, securing them for the rough fucking you are about to dish out.", parse);
 				}
 				Text.NL();
-				Text.Add("<i>“And here I was wanting to take wolfie down a peg or two, only to find he’s already a total slut,”</i> Estevan mutters, throwing his hands in the air.", parse);
+				Text.Add("<i>“And here I was wanting to take Wolfie down a peg or two, only to find he’s already a total slut,”</i> Estevan mutters, throwing his hands in the air.", parse);
 				Text.NL();
 				Text.Add("<i>“No one can resist the Cale, you know it goat-boy!”</i> Cale quips mockingly over his shoulder, shaking his ass at you enticingly.", parse);
 			}
@@ -557,7 +557,7 @@ Scenes.NomadsCavalcade.SexyPlayerWin = function(cheat) {
 					Text.NL();
 					Text.Add("<i>“We <b>did</b> decide that the winner could do anything they wanted to the loser, so you don’t really have a say in it, do you?”</i> Rosalin adds.", parse);
 					Text.NL();
-					Text.Add("Cale swirls back and forth between each one of you, but you’re not going to have him wiggle his way out of this one. Finally, a defeated wolfie lowers his head, muttering something about the world not being fair. Tough luck.", parse);
+					Text.Add("Cale swirls back and forth between each one of you, but you’re not going to have him wiggle his way out of this one. Finally, a defeated Wolfie lowers his head, muttering something about the world not being fair. Tough luck.", parse);
 					Text.NL();
 					Text.Add("<i>“Fine, let’s get this over with,”</i> he sighs. Grinning, you tell him to turn around and bend over the log. <i>“What, here?”</i> he protests, but lowers his head as you sternly remind him about the rules again. <i>“Okay, okay, just be gentle- WILL YOU STOP LAUGHING?”</i> the wolf exclaims, his raw nerves chafing at Estevan’s roaring laughter. It takes a bit of further coaxing, but you finally have Cale propped up over the log, butt sticking up in the air.", parse);
 				}

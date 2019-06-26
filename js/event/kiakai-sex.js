@@ -2808,7 +2808,7 @@ Scenes.Kiakai.SexPrompt = function(attitude) {
 				
 				Text.Add("Which leaves you only one way to go.", parse);
 				Text.NL();
-				Text.Add("<i>“B-by Aria!”</i> The elf pants, amusing you by calling on [hisher] goddess in [hisher] current state. As you begin your slow but inexorable penetration of your moaning companion, [heshe] weakly protests: <i>“Y-you promised, only the - nngh - tip!”</i>", parse);
+				Text.Add("<i>“B-by Aria!”</i> The elf pants, amusing you by calling on [hisher] Goddess in [hisher] current state. As you begin your slow but inexorable penetration of your moaning companion, [heshe] weakly protests: <i>“Y-you promised, only the - nngh - tip!”</i>", parse);
 				Text.NL();
 				Text.Add("<i>“Don't be such a baby. See? There goes another inch!”</i> you tell [himher] encouragingly, pushing another fraction of your length into [himher] to match your words.", parse);
 				Text.NL();

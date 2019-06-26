@@ -841,7 +841,7 @@ Scenes.Cale.SexGetEatenEntrypoint = function(outside) {
 		Text.NL();
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
-		Text.Add("<i>“Sure you don’t want a blowjob too? I don’t mind, and your little wolfie wants some meat~”</i> Cale coos, eyeing your equipment longingly. Relenting, you let him give your shaft[s] a few long licks, sating his craving for cock before he goes back to his original target.", parse);
+		Text.Add("<i>“Sure you don’t want a blowjob too? I don’t mind, and your little Wolfie wants some meat~”</i> Cale coos, eyeing your equipment longingly. Relenting, you let him give your shaft[s] a few long licks, sating his craving for cock before he goes back to his original target.", parse);
 		Text.NL();
 		
 		player.AddLustFraction(0.3);
@@ -1747,7 +1747,7 @@ Scenes.Cale.SexCatchVagEntrypoint = function(outside, fromAnal, customIntro) {
 				Text.NL();
 			}
 			parse["sh"] = player.Genitalia().Sheath() ? "your sheath" : "the base of your cock";
-			Text.Add("Cale nuzzles your [cock] amorously, kissing [sh] in the process. Under such treatment, it doesn’t take long for your erection to become as hard as it can get, throbbing and ready for some wolfie ass. <i>“Now ain’t that a sight for sore eyes?”</i> Cale chuckles.", parse);
+			Text.Add("Cale nuzzles your [cock] amorously, kissing [sh] in the process. Under such treatment, it doesn’t take long for your erection to become as hard as it can get, throbbing and ready for some Wolfie ass. <i>“Now ain’t that a sight for sore eyes?”</i> Cale chuckles.", parse);
 			Text.NL();
 			Text.Add("You simply grin back, happy to let Cale make his bad jokes when you know what’s coming to you. Besides, you have to agree with him a little anyway.", parse);
 			Text.NL();
@@ -2322,7 +2322,7 @@ Scenes.Cale.SexFuckingHimOutsideComments = function(cock, opts) {
 		Text.NL();
 		Text.Add("<i>“Should I prepare something to improve his stamina?”</i> Rosalin asks, a strange light shining in [hisher] eyes. Grinning wickedly, you shake your head and assure the [racedesc] that you know <i>just</i> how to really get him going...", parse);
 		Text.NL();
-		Text.Add("<i>“What a slut you are, wolfie,”</i> the satyr hunter teases, unable to resist the opportunity to take Cale down a peg or two.", parse);
+		Text.Add("<i>“What a slut you are, Wolfie,”</i> the satyr hunter teases, unable to resist the opportunity to take Cale down a peg or two.", parse);
 		Text.NL();
 		if(cale.Slut() >= 60)
 			Text.Add("<i>“Bet you’re just jealous you’re not getting any - ngh - action, goat-boy. Butt, cock or muzzle. Everyone wants a - haah - piece of Cale, while you’re stuck using your hands. Betcha those calluses y’got aren’t from using a bow.”</i>", parse);
@@ -2331,7 +2331,7 @@ Scenes.Cale.SexFuckingHimOutsideComments = function(cock, opts) {
 		else
 			Text.Add("<i>“Better gloat while - ack! - y’can, goat-boy. We all know you can’t play for shit. And at least I’m man - ooh! - enough to honor my bets,”</i> Cale quips back indignantly.", parse);
 		Text.NL();
-		Text.Add("<i>“Watch that tongue, wolfie,”</i> Estevan responds, unperturbed. <i>“Wag that mouth of yours too much and I might be tempted to fill it with something.”</i>", parse);
+		Text.Add("<i>“Watch that tongue, Wolfie,”</i> Estevan responds, unperturbed. <i>“Wag that mouth of yours too much and I might be tempted to fill it with something.”</i>", parse);
 		Text.NL();
 		if(cale.Slut() >= 60)
 			Text.Add("<i>“Bring it, goat-boy. I’ll take pity on you and let you get some action!”</i> Cale sputters back with a smirk.", parse);
@@ -2396,9 +2396,9 @@ Scenes.Cale.SexFuckingHimOutsideComments = function(cock, opts) {
 				Text.Add("When he’s finally done, the satyr pulls out his sloppy cock, still draped in thick strands of goat cream. To add further insult to insult, he takes his time wiping his member in the wolf’s fur, soaking the coughing canine.", parse);
 				Text.NL();
 				if(first)
-					Text.Add("<i>“Thanks for the ride, [playername]!”</i> Estevan thanks you, still eyeing his rival mockingly. <i>“Who knew, there <b>is</b> something that you’re good at, wolfie!”</i>", parse);
+					Text.Add("<i>“Thanks for the ride, [playername]!”</i> Estevan thanks you, still eyeing his rival mockingly. <i>“Who knew, there <b>is</b> something that you’re good at, Wolfie!”</i>", parse);
 				else
-					Text.Add("<i>“Thanks for another go at the camp slut, [playername]!”</i> Estevan thanks you, scratching the wolf behind his ears. <i>“I don’t know, wolfie, you seemed more into it than last time. Are you maybe starting to like me? Well, my cock, that is.”</i>", parse);
+					Text.Add("<i>“Thanks for another go at the camp slut, [playername]!”</i> Estevan thanks you, scratching the wolf behind his ears. <i>“I don’t know, Wolfie, you seemed more into it than last time. Are you maybe starting to like me? Well, my cock, that is.”</i>", parse);
 				Text.Add(" With that, he leaves you alone with a Cale stuffed full of spunk. Well, you’ve still got business to take care of with the wolf...", parse);
 				Text.NL();
 				

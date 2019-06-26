@@ -258,7 +258,7 @@ Scenes.Golem.OnLoss = function() {
 	Text.Clear();
 	Text.Add("Unable to fight back any longer, you[comp] fall to the ground, defeated by the hulking golem. ", parse);
 	if(golem.flags["Met"] == Scenes.Golem.State.Lost) {
-		Text.Add("Having seen the process before doesn’t make it any less strange as the giant transforms into a perfect ebony goddess, her body striped with pulsing red veins. Without a word or hint of an expression, the stunning animated statue closes in on you.", parse);
+		Text.Add("Having seen the process before doesn’t make it any less strange as the giant transforms into a perfect ebony Goddess, her body striped with pulsing red veins. Without a word or hint of an expression, the stunning animated statue closes in on you.", parse);
 	}
 	else {
 		Text.Add("Fearfully, you wait for the last blow to fall, but the golem seems to have stopped in its tracks. The automaton has an unreadable expression in its soulless eyes, but your submission seems to have triggered something. With a loud crackling noise, the stone begins to reshape itself, compressing into a much smaller, sleeker form.", parse);
@@ -290,7 +290,7 @@ Scenes.Golem.OnLoss = function() {
 		Text.Add("Knowing what comes next, and that struggling against it is futile, you resign yourself to the obsidian golem’s wishes. Last time wasn’t too bad, you tell yourself.", parse);
 	}
 	else {
-		Text.Add("You try to move, but find yourself unable to budge the automaton even a fraction of an inch. Despite her slender stature, the obsidian goddess must weigh well over a ton, and her strength has not diminished the least. Finding that struggling is futile, you resign yourself to whatever the golem has in store for you. At least she hasn’t harmed you since she changed her form.", parse);
+		Text.Add("You try to move, but find yourself unable to budge the automaton even a fraction of an inch. Despite her slender stature, the obsidian Goddess must weigh well over a ton, and her strength has not diminished the least. Finding that struggling is futile, you resign yourself to whatever the golem has in store for you. At least she hasn’t harmed you since she changed her form.", parse);
 	}
 	Text.NL();
 	parse["continuing"] = player.LowerBodyType() == LowerBodyType.Single ? "circling around" : "continuing";
@@ -347,7 +347,7 @@ Scenes.Golem.OnLoss = function() {
 	Text.NL();
 	Text.Add("Gradually, you come down from the blissful heaven of sexual ecstasy. In your weakened state, you are unable to do anything but lie there and take it, grunting as the golem continues to ride you. Suddenly, the creature flips you over on your back, allowing you to see your adversary. The beautiful obsidian statue still has the same blank, expressionless face, though in your mind a small triumphant smirk is playing on her lips.", parse);
 	Text.NL();
-	Text.Add("There is a thin coating of oil covering her entire body, making her sleek artificial muscle and perfectly proportioned breasts shine. The perfect statue of a goddess… with some additional parts. As if reading your mind, the golem slowly pulls out of you, her rigid shaft popping into view. With growing concern, you watch as it swells up, creaking and rumbling as it gains a few more inches in length and a fair amount of girth. With a sinking heart, you realize that she could probably at least double in size without effort. Without uttering a word, she plunges back inside you.", parse);
+	Text.Add("There is a thin coating of oil covering her entire body, making her sleek artificial muscle and perfectly proportioned breasts shine. The perfect statue of a Goddess… with some additional parts. As if reading your mind, the golem slowly pulls out of you, her rigid shaft popping into view. With growing concern, you watch as it swells up, creaking and rumbling as it gains a few more inches in length and a fair amount of girth. With a sinking heart, you realize that she could probably at least double in size without effort. Without uttering a word, she plunges back inside you.", parse);
 	Text.NL();
 	Text.Add("With her newly extended cock, it is a whole new experience. You moan helplessly as your [target] is pounded into oblivion by the thick obsidian pillar, now reaching farther inside you than ever. You don’t know how long you spend like that, [legs] in the air and tongue lolling, any measure of time shattered by the ceaseless thrusting of the golem’s shaft. As another orgasm hits, you almost lose consciousness, limbs limp from your rough fucking.", parse);
 	Text.Flush();

@@ -426,7 +426,7 @@ Scenes.Kiakai.TalkAria = function() {
 		Text.NL();
 		
 		if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral) {
-			Text.Add("<i>“It is good that you take interest in her.”</i> The elf seems a little relieved that you're interested in [hisher] goddess. ", parse);
+			Text.Add("<i>“It is good that you take interest in her.”</i> The elf seems a little relieved that you're interested in [hisher] Goddess. ", parse);
 		}
 		else {
 			Text.Add("<i>“Certainly!”</i> The elf looks happy that you brought up this particular topic. It seems that [heshe] definitely is a devout follower. ", parse);
@@ -1618,7 +1618,7 @@ Scenes.Kiakai.TalkPriestDisciplines = function() {
 							Text.NL();
 							Text.Add("<i>“I do not claim to know the reason for this, but I cannot disobey the High Priestess on this matter.”</i> [name] looks torn, [hisher] emotions pulling [himher] one way, while [hisher] duty holds [himher] back.", parse);
 							Text.NL();
-							Text.Add("Frustrated, you tell the elf that [heshe] should move according to [hisher] own heart, not to what others decree for [himher]. You think that this teaching is wrong, and you doubt that it is a belief that is really held by Aria. After all, why would such a benevolent goddess withhold the highest forms of pleasure from her followers?", parse);
+							Text.Add("Frustrated, you tell the elf that [heshe] should move according to [hisher] own heart, not to what others decree for [himher]. You think that this teaching is wrong, and you doubt that it is a belief that is really held by Aria. After all, why would such a benevolent Goddess withhold the highest forms of pleasure from her followers?", parse);
 							Text.NL();
 							Text.Add("<i>“You... have a point,”</i> [name] grudgingly admits. <i>“I have never thought too deeply on the subject, but now that you mention it, it does sound strange.”</i> The elf looks thoughtful for a moment. <i>“In all honesty, I am not sure that the rule is followed very diligently by the other priests. Alas, that is not the only reason I have,”</i> [heshe] says in a small voice, looking sad.", parse);
 							Text.NL();

@@ -364,7 +364,7 @@ Scenes.Mothgirl.WinTitfuck = function(enc) {
 
 	var cum = player.OrgasmCum();
 
-	Text.Add("<i>“Oh, goddess,”</i> the moth-girl breathes as your last hot, sticky squirt of semen plasters on her chin.", parse);
+	Text.Add("<i>“Oh, Goddess,”</i> the moth-girl breathes as your last hot, sticky squirt of semen plasters on her chin.", parse);
 	Text.NL();
 	Text.Add("<i>“You really know how to go right for a girl's weak spot, huh?”</i> she giggles. You cock an eyebrow at the thief, seeing her grinning dumbly as her long tongue laps your spunk off the tops of her breasts, happily swallowing your load. For someone who just lost a fight, she's sure happy about it. For your part, you give the cum-hungry bug a moment to spit-shine your rod again before grabbing your gear and staggering off, leaving her to enjoy her cum-soaked afterglow.", parse);
 	Text.Flush();

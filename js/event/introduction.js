@@ -311,7 +311,7 @@ Intro.Mirror3 = function() {
 	Text.NL();
 	Text.Add("<b>Acquired purple gemstone!</b>");
 	Text.NL();
-	Text.Add("Your eyes are drawn upward by a reddish glow. Gasping in genuine shock, you stumble back a few steps. The surface of the mirror has completely transformed. While you can still see your own reflection, the room behind you has vanished. In its place is a hellish landscape of fire and smoke. Panicking, you whip your head around, relieved to find that you are, indeed, still in the old dusty attic. Perhaps the mirror is a portal to another world? If so, it doesn't look like it leads to a place you want to visit.");
+	Text.Add("Your eyes are drawn upward by a reddish glow. Gasping in genuine shock, you stumble back a few steps. The surface of the mirror has completely transformed. While you can still see your own reflection, the room behind you has vanished. In its place is a hellish landscape of fire and smoke. Panicking, you whip your head around, relieved to find that you are, indeed, still in the old dusty attic. Perhaps the mirror is a portal to another world? If so, it doesn't look like it leads to any place you want to visit.");
 	Text.Flush();
 
 	Gui.NextPrompt(Intro.Mirror4);
@@ -388,7 +388,7 @@ world.loc.DarkAspect.Barrens.links.push(new Link(
 		Text.NL();
 		Text.Add("As if summoned, a deafening crash behind you shatters your train of thought. Twirling around, you gape in disbelief as the earth shakes violently, huge cracks appearing. With a final roar, the ground shudders and collapses in on itself, opening a huge fiery chasm.");
 		Text.NL();
-		Text.Add("From the abyss rises the demon from before, but it is different this time. Limbs ablaze with a red sooty flame, the thing must be at least a hundred feet tall. It tilts its slightly triangular head as it notices you, a far-too-wide grin spreading across its face, baring hundreds of razor sharp teeth.");
+		Text.Add("From the abyss rises the demon from before, but it is different this time. Limbs ablaze with a red sooty flame, the thing must be at least a hundred feet tall. It tilts its triangular head as it notices you, a far-too-wide grin spreading across its face, baring hundreds of razor sharp teeth.");
 		Text.NL();
 		Text.Add("<b>FOUND YOU!</b> The voice echoes triumphantly across the blazing plains. The demon starts to climb out of the chasm, the ground catching fire where the creature plants its claws. You shake yourself and turn around to run. This is <b>NOT</b> a good place to be in.");
 		Text.Flush();
@@ -1718,14 +1718,14 @@ Intro.UruSexAftermath = function() {
 	Text.NL();
 	Text.Add("Snapping back to reality, you flinch as the omnibus looms over you, but her attention is not directed at you. The growth of your tail apparently dislodged the purple gem you were carrying from your shredded clothes. The stone now lies on the ground, emanating a dull glow.");
 	Text.NL();
-	Text.Add("With a curious look on her face, Uru bends down and picks up the jewel. For a moment, a look of wonder crosses her face, illuminated by the glowing stone, though quickly replaced by one of triumph. Forgotten, you drop to the ground as the forces suspending you dissipate. <i>“R-really? It can be done <b>that</b> way, too?”</i> the demon wonders out loud, her thoughts far away and her eyes lost in the swirling mist deep inside the gem.");
+	Text.Add("With a curious look on her face, Uru bends down and picks up the jewel. For a moment, a look of wonderment crosses her face, illuminated by the glowing stone, though it's quickly replaced by one of triumph. Forgotten, you drop to the ground as the forces suspending you dissipate. <i>“R-really? It can be done <b>that</b> way, too?”</i> the demon wonders out loud, her thoughts far away and her eyes lost in the swirling mist deep inside the gem.");
 	Text.NL();
 	Text.Add("Before you have a chance to escape - not that there is anywhere to escape <i>to</i> - the omnibus rounds on you with a happy grin on her face. <i>“Do you know what this is?”</i> she asks, hopping around in a little excited dance, <i>“This is my key out of here!”</i>");
 	Text.NL();
 	parse["Int"] = (player.intelligence.growth > 1) ? ", your newfound smarts notwithstanding" : "";
 	Text.Add("She goes on to excitedly explain, at length, how manipulating the ethereal winds <i>just so</i>, combined with the right place and time, would enable gates to other realms to be opened. <i>“And it was all hidden in this key right here!”</i> she exults. <i>“Whoever made this was a genius!”</i> Bewildered, you are once again forced to re-evaluate the fickle demon. She acts like an airhead, unable to keep her thoughts on any one thing for an extended period of time, but you could hardly follow anything of what she just said[Int].", parse);
 	Text.NL();
-	Text.Add("<i>“You know... maybe I should reward you for this,”</i> she muses to herself. You instinctively jerk back, not sure if you want any more 'gifts' from the demon. <i>“Oh tut, don't be like that,”</i> she chides. <i>“With some work, you could be someone with power. You've got good foundation; you've survived here this long, after all.”</i> Bewildered as to what she is talking about, you consider her offer.");
+	Text.Add("<i>“You know... maybe I should reward you for this,”</i> she muses to herself. You instinctively jerk back, not sure if you want any more 'gifts' from the demon. <i>“Oh tut, don't be like that,”</i> she chides. <i>“With some work, you could be someone with power. You've got good foundation; you've survived here this long, after all.”</i> Confused as to what she is talking about, you consider her offer.");
 	Text.NL();
 	Text.Add("<i>“And what if I refuse?”</i> you guardedly answer.");
 	Text.NL();
@@ -1737,7 +1737,7 @@ Intro.UruSexAftermath = function() {
 		Text.NL();
 		Text.Add("<i>Quickly! Grab the key!</i> a feminine voice rings inside your head, and suddenly your limbs fill with strength.");
 		Text.NL();
-		Text.Add("Unthinking, you throw yourself forward, snatching up the blazing jewel and coming up in a crouch. Whatever hurt the demon seemingly has no effect on you. The enraged omnibus moves as if to pounce on you, but she hesitates. Apparently, she is unable or unwilling to enter the radiant pillar of light surrounding you. <i>“That bitch! So that is how it's going to be...”</i> she states, her voice sounding muted, as if she is speaking from a great distance, <i>“No matter, it's only a question of time before I can freely leave this place, thanks to you.”</i> Her features are a combination of malice and triumph, <i>“My offer to join me still stands... and so does my threat, should you fail to take it.”</i>");
+		Text.Add("Unthinking, you throw yourself forward, snatching up the blazing jewel and coming up in a crouch. Whatever hurt the demon seemingly has no effect on you. The enraged omnibus moves as if to pounce on you, but she hesitates. Apparently, she is unable or unwilling to enter the radiant pillar of light surrounding you. <i>“That bitch! So that is how it's going to be...”</i> she states, her voice sounding muted, as if she is speaking from a great distance, <i>“No matter, it's only a question of time before I can finally leave this place, all thanks to you.”</i> Her features are a combination of malice and triumph, <i>“My offer to join me still stands... and so does my threat, should you fail to take it.”</i>");
 		Text.NL();
 		Text.Add("Sight and sound abandon you as you are enveloped in a blinding light. You get one last glimpse of the landscape wreathed in fire and smoke, and the smoldering orange eyes of the smiling demon, before everything fades away.");
 		Text.NL();
@@ -1939,7 +1939,7 @@ Intro.AriaQnA = function() {
 
 				Text.Add("<i>“You... I guess you saved me back there. How? Why? Who <b>are</b> you, exactly... are you a goddess?”</i> you ask, feeling self-conscious.");
 				Text.NL();
-				Text.Add("<i>I am Aria. I am who I am.</i> The radiant woman gazes off into the distance. <i>Before, it was simpler... fewer worlds to care for, fewer people to protect. After seeing the widespread destruction, calamity after calamity sweeping across the planes... I had to act.</i> Aria sighs. <i>I am the one who protects against the taint, and tries to abate the tides of darkness through the ages, but it grows hard, so hard. Sometimes, I feel old and powerless, as I watch another world fall...</i>");
+				Text.Add("<i>I am Aria. I am who I am.</i> The radiant woman gazes off into the distance. <i>Before, it was simpler... fewer worlds to care for, fewer people to protect. After seeing the widespread destruction, calamity after calamity sweeping across the planes... I had to act.</i> Aria sighs. <i>I am the one who protects against the taint, and tries to abate the tides of Darkness through the ages, but it grows hard, so hard. Sometimes, I feel old and powerless, as I watch another world fall...</i>");
 				Text.NL();
 				Text.Add("She falls silent. <i>“Old?”</i> you protest, surely she could not be older than twenty-five! She gives you a weak smile, suddenly looking vulnerable, perhaps even tired.");
 				Text.NL();
@@ -2118,7 +2118,7 @@ Intro.KiaQnA = function() {
 			func : function() {
 				Text.Clear();
 
-				Text.Add("<i>“The Lady informed me of your arrival, and told me to assist you,”</i> [name] tells you. <i>“She is the light that wards against the dark, and a great darkness is approaching. You have been granted a great task by her, the outcome of which may decide the fate of this entire realm.”</i>", parse);
+				Text.Add("<i>“The Lady informed me of your arrival, and told me to assist you,”</i> [name] tells you. <i>“She is the Light that wards against the Dark, and a great darkness is approaching. You have been granted a great task by her, the outcome of which may decide the fate of this entire realm.”</i>", parse);
 				Text.NL();
 				Text.Add("What is this [boygirl] talking about? <i>“As I understand it, you have already met the dark one,”</i> [name] states with a shudder. <i>“It is a blessing you survived that encounter.”</i> [HisHer] expression is grim as [heshe] looks at you.", parse);
 				Text.NL();
@@ -2163,7 +2163,7 @@ Intro.KiaQnA = function() {
 				Text.NL();
 				Text.Add("Hold on. Thirty years? The slender elf hardly looks more than eighteen.");
 				Text.NL();
-				Text.Add("<i>“As you can see, I am of elfin descent,”</i> [name] concedes, touching one of [hisher] pointed ears, <i>“we tend to age slower than is usual. Even though I look hardly more than a child to you, I am almost fifty years old, as they count it in these lands.”</i>", parse);
+				Text.Add("<i>“As you can see, I am of elfin descent,”</i> [name] concedes, touching one of [hisher] pointed ears. <i>“We tend to age slower than humans do. Even though I may not look that old to you, I have experienced just short of fifty winters.”</i>", parse);
 				Text.NL();
 				Text.Add("<i>“My Lady instructed me to help you out in your quest in any way I could,”</i> [name] assures you. <i>“Let us get along as fellow servants of our Lady!”</i> You look at the sincere [title] dubiously. It seems like [heshe] has already decided on how this relationship is going to work out.", parse);
 

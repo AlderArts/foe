@@ -13,7 +13,7 @@ Scenes.Asche.Tasks.Default = function() {
 	Text.NL();
 	Text.Add("<i>“Ah, so adventuring spirit is surging in good customer? Asking shopkeepers and people in bars is time-honored way of receiving important tasks of saving world and such things.”</i>", parse);
 	Text.NL();
-	Text.Add("That, and being bequeathed tasks by mysterious goddesses whom you just met moments before.", parse);
+	Text.Add("That, and being bequeathed tasks by mysterious Goddesses whom you just met moments before.", parse);
 	Text.NL();
 	Text.Add("<i>“Well, that is being not so common. But still happens, so customer has point.”</i> Asche looks thoughtful for a moment. <i>“Still, Asche is not having anything for you at the moment - she is not wanting other people to be helping with things she can be doing herself, and she is to be avoiding debts if she can help it. Asche is hating being in debt - is possibly one of worst things in world. Maybe to be asking later, yes?”</i>", parse);
 	Text.Flush();

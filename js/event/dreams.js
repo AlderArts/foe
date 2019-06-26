@@ -447,7 +447,7 @@ Scenes.Dreams.UruChoice = function(ravenTrigger) {
 			parse["somehow"] = player.FirstCock().length.Get() > 25 ? " somehow" : "";
 			Text.Add("In one motion, she[somehow] drives all the way down, her bountiful butt smothering your groin, while her own enormous erection bounces awkwardly around your face. The sensation of being inside her is overwhelming, as much pain at her incredible tightness as pleasure.", parse);
 			Text.NL();
-			Text.Add("The demonic goddess has no mercy for you, however, as she begins bouncing up and down, while her insides pulsate and massage, tearing against your self control. Within minutes, you find yourself plunging over the edge, your [multiCockDesc] exploding inside her, coating her soaking wet insides in an extra layer of fluids.", parse);
+			Text.Add("The demonic Goddess has no mercy for you, however, as she begins bouncing up and down, while her insides pulsate and massage, tearing against your self control. Within minutes, you find yourself plunging over the edge, your [multiCockDesc] exploding inside her, coating her soaking wet insides in an extra layer of fluids.", parse);
 			Text.NL();
 			Text.Add("A cruel smile graces Uru’s full lips above you. <i>“Now, now, that won’t do, little slut.”</i> You feel a wave of magic pressing into you, and your flagging erection returns to full mast, as a thicker fog of lust clouds your mind.", parse);
 		}
@@ -455,7 +455,7 @@ Scenes.Dreams.UruChoice = function(ravenTrigger) {
 			parse["vag"] = player.FirstVag() ? Text.Parse(", and your [vagDesc] grows soaking wet in return", parse) : "";
 			Text.Add("forces you to service her enormous member. With every touch, every contact of lips or tongue with her pulsating penis, you feel lust fill your mind[vag].", parse);
 			Text.NL();
-			Text.Add("Apparently satisfied, the demon goddess pulls away momentarily, before plunging deep inside you in a single thrust. No amount of lust prepared you for that, and you scream out much more in pain than pleasure as you feel your [vagDesc] stretched far beyond its normal limits.", parse);
+			Text.Add("Apparently satisfied, the demon Goddess pulls away momentarily, before plunging deep inside you in a single thrust. No amount of lust prepared you for that, and you scream out much more in pain than pleasure as you feel your [vagDesc] stretched far beyond its normal limits.", parse);
 			Text.NL();
 			Text.Add("However, even this pain is eventually subsumed beneath the need you feel from simple contact with Uru. Soon, you find yourself moaning in pleasure, almost against your will, and your nethers shudder around the massive intruder, as your body rocks with a massive orgasm.", parse);
 			Text.NL();
@@ -509,7 +509,7 @@ Scenes.Dreams.AriaTemple = function(ravenTrigger) {
 		multiCockDesc : function() { return player.MultiCockDesc(); }
 	};
 	
-	Text.Add("You awaken slowly in the familiar marble temple of the goddess of light, Lady Aria. You are resting on a soft bed of white, light blue and pink flower petals. The air is thick with their pleasant fragrance, and for once in your travels you feel completely safe - as if nothing could harm you.", parse);
+	Text.Add("You awaken slowly in the familiar marble temple of the Goddess of light, Lady Aria. You are resting on a soft bed of white, light blue and pink flower petals. The air is thick with their pleasant fragrance, and for once in your travels you feel completely safe - as if nothing could harm you.", parse);
 	Text.NL();
 	if(ravenTrigger) {
 		var raven1 = "Oddly, a little ways off, a pitch black raven sits at the edge of a pool. It preens its feathers with a graceful nonchalance that says it belongs here, however, so you pay it no mind.";
@@ -540,7 +540,7 @@ Scenes.Dreams.AriaTemple = function(ravenTrigger) {
 			
 			scenes.Get();
 			Text.NL();
-			Text.Add("Gradually, the goddess’ beautiful visage fades, leaving only the dreary world of reality. You wake up feeling enlightened, but the happiness quickly fades as you realize how useless her advice was.", parse);
+			Text.Add("Gradually, the Goddess’ beautiful visage fades, leaving only the dreary world of reality. You wake up feeling enlightened, but the happiness quickly fades as you realize how useless her advice was.", parse);
 			Text.Flush();
 			
 			PrintDefaultOptions();
@@ -554,13 +554,13 @@ Scenes.Dreams.AriaTemple = function(ravenTrigger) {
 			Text.NL();
 			Text.Add("<i>Very well. I shall soothe thy desires, my champion.</i>", parse);
 			Text.NL();
-			Text.Add("With a gesture, the goddess’ elegant white robes evaporate into a thin mist, revealing her naked, unblemished body. She is unnaturally fair, even for this dream realm, and seeing her in her full glory makes the surroundings fade away into a dull gray. Her plentiful breasts jiggle tantalizingly as she steps closer, getting down on her knees.", parse);
+			Text.Add("With a gesture, the Goddess’ elegant white robes evaporate into a thin mist, revealing her naked, unblemished body. She is unnaturally fair, even for this dream realm, and seeing her in her full glory makes the surroundings fade away into a dull gray. Her plentiful breasts jiggle tantalizingly as she steps closer, getting down on her knees.", parse);
 			Text.NL();
 			Text.Add("It is pure bliss when those full, red lips shower you with kisses - the nape of your neck, your [stomachDesc], your own lips. If this is the dream, you wonder what the reality would be like...", parse);
 			
 			var scenes = new EncounterTable();
 			scenes.AddEnc(function() {
-				Text.Add("Come to think of it, you have some previous experience with laying down Goddesses… though the last one was decidedly more demonic in appearance. As if reading your mind, Lady Aria smiles wickedly, her luminescent eyes taking on an odd scarlet hue. Her serpentine tongue trails across your body, her saliva hot to the touch. You reach up with one [hand], combing the goddess’ flaxen hair, tracing the curve of her horns.", parse);
+				Text.Add("Come to think of it, you have some previous experience with laying down Goddesses… though the last one was decidedly more demonic in appearance. As if reading your mind, Lady Aria smiles wickedly, her luminescent eyes taking on an odd scarlet hue. Her serpentine tongue trails across your body, her saliva hot to the touch. You reach up with one [hand], combing the Goddess’ flaxen hair, tracing the curve of her horns.", parse);
 				Text.NL();
 				Text.Add("<i>Your thirst shall be sated, my hero.</i>", parse);
 				Text.NL();
@@ -578,7 +578,7 @@ Scenes.Dreams.AriaTemple = function(ravenTrigger) {
 			scenes.AddEnc(function() {
 				parse["oneof"] = player.NumCocks() > 1 ? " one of" : "";
 				parse["s"] = player.NumCocks() > 1 ? "s" : "";
-				Text.Add("The goddess’ lips finally find your [multiCockDesc], eagerly wrapping themselves around[oneof] your shaft[s]. The world around you is wavering, growing diffuse and fuzzy. With your pre dripping from her tongue, Lady Aria arches her back as she straddles you, positioning your cock[s] at her entrance[s]. In a single, smooth motion, she slams her hips down, burying your [multiCockDesc] to the hilt inside her tight, divine hole[s].", parse);
+				Text.Add("The Goddess’ lips finally find your [multiCockDesc], eagerly wrapping themselves around[oneof] your shaft[s]. The world around you is wavering, growing diffuse and fuzzy. With your pre dripping from her tongue, Lady Aria arches her back as she straddles you, positioning your cock[s] at her entrance[s]. In a single, smooth motion, she slams her hips down, burying your [multiCockDesc] to the hilt inside her tight, divine hole[s].", parse);
 				Text.NL();
 				Text.Add("You can do naught but moan in delirious pleasure as she rides you; your already uncertain perception of time all but shattering from sensory overload. It’s like nothing you’ve ever felt before, like pure bliss surging through your body. You could give up everything you have just to experience another moment of this paradise in human form.", parse);
 				Text.NL();
@@ -587,7 +587,7 @@ Scenes.Dreams.AriaTemple = function(ravenTrigger) {
 				player.AddLustFraction(0.7);
 			}, 1.0, function() { return player.FirstCock(); });
 			scenes.AddEnc(function() {
-				Text.Add("Suddenly, the goddess withdraws her touch, looking a bit grumpy. You look up at her in wordless complaint, aching for her to pleasure you.", parse);
+				Text.Add("Suddenly, the Goddess withdraws her touch, looking a bit grumpy. You look up at her in wordless complaint, aching for her to pleasure you.", parse);
 				Text.NL();
 				Text.Add("<i>Not before you have cleaned up here. You always make a mess!</i>", parse);
 				Text.NL();
@@ -608,7 +608,7 @@ Scenes.Dreams.AriaTemple = function(ravenTrigger) {
 			
 			PrintDefaultOptions();
 		}, enabled : true,
-		tooltip : "If none of this is real, it can’t hurt to ask the goddess to have sex with you."
+		tooltip : "If none of this is real, it can’t hurt to ask the Goddess to have sex with you."
 	});
 	Gui.SetButtonsFromList(options);
 	

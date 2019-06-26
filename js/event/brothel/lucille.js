@@ -100,7 +100,7 @@ Scenes.Lucille.Themerooms = function() {
 	
 	//#room choice TODO
 	
-	Text.Add("<i><b>The Cat Dynasty:</b> Experience life through the eyes of a young feline chosen by the fates to saddle the mantle of godhood. As the goddess of love, Lady Bastet, how will your judgement change the lives of your adoring worshippers?</i>", parse);
+	Text.Add("<i><b>The Cat Dynasty:</b> Experience life through the eyes of a young feline chosen by the fates to saddle the mantle of godhood. As the Goddess of love, Lady Bastet, how will your judgement change the lives of your adoring worshippers?</i>", parse);
 	Text.NL();
 	Text.Add("The poster shows a sultry, dark-skinned cat-morph reclining on a dias, fanned by her priestesses. Bastet seems to be a hermaphrodite with quite... impressive assets. The poster notes that each use is [coin] coins.", {coin: bastet.Cost()});
 	
@@ -168,7 +168,7 @@ Scenes.Lucille.Themerooms = function() {
 	
 	var options = new Array();
 	options.push({ nameStr : "Cat Dynasty",
-		tooltip : "Choose the Cat Dynasty and enter the role of Bastet, the hermaphrodite feline goddess.",
+		tooltip : "Choose the Cat Dynasty and enter the role of Bastet, the hermaphrodite feline Goddess.",
 		func : function() {
 			selection(Scenes.Brothel.Bastet.IntroEntryPoint);
 		}, enabled : true

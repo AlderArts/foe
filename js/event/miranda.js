@@ -1311,7 +1311,7 @@ Scenes.Miranda.WelcomeToRigardQnA = function() {
 	var parse = {
 		playername : player.name,
 		name       : kiakai.name,
-		guygirl    : player.body.femininity.Get() > 0 ? "girl" : "guy"
+		guygirl    : player.mfTrue("guy", "girl")
 	};
 	parse = kiakai.ParserPronouns(parse);
 	

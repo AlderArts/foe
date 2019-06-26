@@ -143,7 +143,7 @@ Scenes.Estevan.Interact = function() {
 	Text.Add("<i>“Hey there, [playername]!”</i> Estevan greets you as you approach. <i>“What can I do for you?”</i>", parse);
 	if(cale.flags["Met2"] == Cale.Met2.NotMet) {
 		Text.NL();
-		Text.Add("<i>“Did you speak with Rosie and wolfie yet? I wouldn’t mind another hand at cards, spice things up a bit.”</i>", parse);
+		Text.Add("<i>“Did you speak with Rosie and Wolfie yet? I wouldn’t mind another hand at cards, spice things up a bit.”</i>", parse);
 	}
 	
 	if(DEBUG) {
@@ -181,7 +181,7 @@ Scenes.Estevan.Prompt = function() {
 	options.push({ nameStr : "Ranger",
 		func : function() {
 			Text.Clear();
-			Text.Add("<i>“Sure, as long as you don’t spread my secrets to wolfie, I can teach you a few tricks,”</i> the satyr agrees.", parse);
+			Text.Add("<i>“Sure, as long as you don’t spread my secrets to Wolfie, I can teach you a few tricks,”</i> the satyr agrees.", parse);
 			if(estevan.flags["Ranger"] == Estevan.Ranger.NotTalked) {
 				Text.Add(" <i>“He figures himself to be something of an aspiring hunter. I’ll tell you, it’s rather fun to watch a city kid blundering about in the forest without a clue of what he’s doing.”</i>", parse);
 				Text.NL();
@@ -283,7 +283,7 @@ Scenes.Estevan.Prompt = function() {
 					setupFunc();
 				}
 				else { // Triggered
-					Text.Add("<i>“As fun as it was the first time, I don’t think wolfie’s gonna fall for that one again. I dunno, perhaps if you just happened to find some matching cards and swap them yourself during the game, who’d be the wiser?”</i> He grins mischievously.", parse);
+					Text.Add("<i>“As fun as it was the first time, I don’t think Wolfie’s gonna fall for that one again. I dunno, perhaps if you just happened to find some matching cards and swap them yourself during the game, who’d be the wiser?”</i> He grins mischievously.", parse);
 					Text.Flush();
 					
 					world.TimeStep({minute: 15});
