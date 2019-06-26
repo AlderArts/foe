@@ -288,10 +288,10 @@ Cavalcade.prototype.CoinGameRound = function() {
 			Text.Add("You have folded.");
 		}
 		else {
-			Text.Add("Your cards are ", parse);
+			Text.Add("Your cards are ");
 			var card = player.hand[0];
 			if(card == that.stag)
-				Text.Add(card.name + " (*)", 'bold');
+				Text.Add(card.name + " (*)", null, 'bold');
 			else
 				Text.Add(card.name);
 			Text.Add(", ");
@@ -303,8 +303,10 @@ Cavalcade.prototype.CoinGameRound = function() {
 			Text.Add(".");
 		}
 		Text.NL();
-		Text.Add("The dealer reveals a house card.", parse);
-		Text.NL();
+		if(that.round > 0) {
+			Text.Add("The dealer reveals a house card.");
+			Text.NL();
+		}
 		
 		if(that.house[that.round - 1] == that.stag) {
 			Text.Add("The revealed card is [stag]!", {stag: that.stag.name});
@@ -319,7 +321,7 @@ Cavalcade.prototype.CoinGameRound = function() {
 			return;
 		}
 		
-		Text.Add("The house hand is: ", parse);
+		Text.Add("The house hand is: ");
 		var i;
 		for(i = 0; i < that.round; i++) {
 			var card = that.house[i];
