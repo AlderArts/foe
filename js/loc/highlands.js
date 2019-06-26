@@ -151,7 +151,7 @@ world.loc.Highlands.Spring.description = function() {
 	parse["dt"] = world.time.LightStr("clear, cloudless sky", "starry night sky");
 	Text.Add("The air is crisp and clear this high up, and you’re afforded a great view of the [dt] and surrounding lands - if you squint just right, you think you can see Rigard from here.", parse);
 	Text.NL();
-	Text.Add("The hot spring itself is a large pool, perhaps twenty meters in diameter and a little over one and a half deep at its middle, to one at its edges. A faint veil of steam constantly rises from the lightly bubbling surface, and it certainly looks inviting, even if not explicitly magical.");
+	Text.Add("The hot spring itself is a large pool, perhaps twenty yards in diameter and a little over one and a half deep at its middle, to one at its edges. A faint veil of steam constantly rises from the lightly bubbling surface, and it certainly looks inviting, even if not explicitly magical.");
 	Text.NL();
 	Text.Add("While you can’t see Isla, you can definitely sense her presence. And rightly so, after all - she’s the spring’s guardian, so it’s not as if she’d leave the place for very long.");
 	Text.NL();

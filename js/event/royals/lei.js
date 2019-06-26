@@ -876,7 +876,7 @@ Scenes.Lei.RequestMain = function() {
 					Text.NL();
 					Text.Add("You ask what he means by human purist.", parse);
 					Text.NL();
-					Text.Add("<i>“He hates morphs. Thinks they shouldn't be allowed within five meters of standard humans, and sometimes goes on rants on how they should be thrown out of the city outright. Oh, don't think that stops him from having a full staff of morph servants, though. He's too much of a cheapskate to actually pay for pure humans, no matter what he claims his beliefs are.”</i>", parse);
+					Text.Add("<i>“He hates morphs. Thinks they shouldn't be allowed within five yards of standard humans, and sometimes goes on rants on how they should be thrown out of the city outright. Oh, don't think that stops him from having a full staff of morph servants, though. He's too much of a cheapskate to actually pay for pure humans, no matter what he claims his beliefs are.”</i>", parse);
 					Text.NL();
 					Text.Add("You nod at the explanation and wonder if that could be used to your advantage somehow.", parse);
 					Text.Flush();

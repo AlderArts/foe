@@ -425,7 +425,7 @@ world.loc.DarkAspect.Mountains.links.push(new Link(
 	},
 	function() {
 		Text.Clear();
-		Text.Add("With no time to lose, you attempt to climb the cliff, somehow finding purchase for your fingers and toes in the ragged rock face. With difficulty, you manage to climb up a crevice, reaching a small platform. The area is about ten by ten meters large, surrounded by jagged outcroppings as sharp as swords.");
+		Text.Add("With no time to lose, you attempt to climb the cliff, somehow finding purchase for your fingers and toes in the ragged rock face. With difficulty, you manage to climb up a crevice, reaching a small platform. The area is about ten by ten yards large, surrounded by jagged outcroppings as sharp as swords.");
 		Text.NL();
 		Text.Add("The short climb has left you winded. This isn't going to work, you conclude. Looking back to where you came from, the demon seems to have reached the foothills below and has started climbing the crevice. It will reach this place in mere moments. Scrambling to find a hiding place, you duck in behind a rock, scratching yourself and drawing blood.");
 		Text.NL();
@@ -614,11 +614,11 @@ world.loc.DarkAspect.Cliff.links.push(new Link(
 	function() {
 		Text.Clear();
 
-		Text.Add("Keeping a careful eye on the hulking demon, you move closer to the cliff face, trying to search for purchase. When you have climbed a few meters up and glance back, you see that the demon is watching you out of the corner of his eye. The bastard is pretending not to notice you!");
+		Text.Add("Keeping a careful eye on the hulking demon, you move closer to the cliff face, trying to search for purchase. When you have climbed a few yards up and glance back, you see that the demon is watching you out of the corner of his eye. The bastard is pretending not to notice you!");
 		Text.NL();
 		Text.Add("Well, you did it once before, so perhaps it will work again... closing your eyes, you wish yourself away from this place, to the peak of the mountain, <i>anywhere</i> but here. To your surprise, it actually seems to work! The burning heat that emanates from the demon is suddenly replaced by a chill wind. Opening your eyes in wonder, you survey your surroundings.");
 		Text.NL();
-		Text.Add("You are at the very peak of the mountain, on a flat circular plateau no more than twenty meters across. Around and above, the sky is a calm meld of red and pink, and you realize that you are far above the rioting storm clouds. In the middle of the plateau stands a throne of stone.");
+		Text.Add("You are at the very peak of the mountain, on a flat circular plateau no more than twenty yards across. Around and above, the sky is a calm meld of red and pink, and you realize that you are far above the rioting storm clouds. In the middle of the plateau stands a throne of stone.");
 		Text.NL();
 		Text.Add("An angry roar from below reminds you that this is no time to enjoy the scenery, as it probably won't take too long for the demon to climb its way up here...");
 		Text.Flush();
@@ -696,7 +696,7 @@ Intro.UruSeduce = function() {
 
 
 world.loc.DarkAspect.Peak.description = function() {
-	Text.Add("You are at the very peak of the mountain, on a flat, circular plateau no more than twenty meters across. Around and above, the sky is a calm meld of red and pink. In the middle of the plateau stands a throne of stone.");
+	Text.Add("You are at the very peak of the mountain, on a flat, circular plateau no more than twenty yards across. Around and above, the sky is a calm meld of red and pink. In the middle of the plateau stands a throne of stone.");
 	Text.NL();
 }
 world.loc.DarkAspect.Peak.links.push(new Link(

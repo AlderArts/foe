@@ -244,7 +244,7 @@ Scenes.Rigard.Noble.MeetingMajid = function() {
 	Text.NL();
 	Text.Add("Even as the dust kicked up by the guards begins to settle, a curious sight greets your eyes: a large, ornate sedan chair follows in its wake, held aloft by a quartet of bare-chested morphs. You’re not the only one whose attention has been drawn by the spectacle - everyone around you, young and old, noble and servant, man and woman alike stares at the strange vehicle as it passes them by. Some with fear at the vehicle itself, others with desire at the half-naked carriers, but for a moment all activity comes to a halt as someone who’s clearly an important personage passes them by.", parse);
 	Text.NL();
-	Text.Add("Deep in your pocket, the gem trembles, and you look up to find the sedan chair barely a meter away from you. Through the window of gauzy paper framed in stiffened reed, you catch sight of a figure within - his clothing is voluminous and face is veiled such that you can’t make out any concrete details, but at the very least he doesn’t seem to be very tall -", parse);
+	Text.Add("Deep in your pocket, the gem trembles, and you look up to find the sedan chair barely a yard away from you. Through the window of gauzy paper framed in stiffened reed, you catch sight of a figure within - his clothing is voluminous and face is veiled such that you can’t make out any concrete details, but at the very least he doesn’t seem to be very tall -", parse);
 	Text.NL();
 	Text.Add("- It’s then that you realize he’s looking directly at you.", parse);
 	Text.NL();

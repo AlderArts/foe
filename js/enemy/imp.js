@@ -690,7 +690,7 @@ Intro.DemonGift = function() {
 				player.FirstCock().thickness.base++;
 				player.FirstCock().length.base += 5;
 				
-				Text.Add("You have hardly uttered the words before you feel your cock swell, gaining a good number of centimeters. Even though you just got off, your new [cockLen] long cock is stiff and aches for release.", parse);
+				Text.Add("You have hardly uttered the words before you feel your cock swell, gaining a solid two inches. Even though you just got off, your new [cockLen] long cock is stiff and aches for release.", parse);
 				
 				Intro.timesTakenDemonGift++;
 				

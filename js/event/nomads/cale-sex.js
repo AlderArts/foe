@@ -2103,7 +2103,7 @@ Scenes.Cale.SexCatchAnalEntrypoint = function(outside, fromVag) {
 		options.push({ nameStr : "Yes",
 			func : function() {
 				Text.Clear();
-				Text.Add("Rather than waste time with words, you let your body do the talking, grinding back against Cale’s hips as best you can from your present position. You will your clenching asshole to open further, stretching yourself out with each centimeter you force yourself back over Cale’s bulging knot. Gritting your teeth from the effort, you strain with all your might, crying out in triumph as you finally force him inside of you to the hilt, anchoring him within your ass.", parse);
+				Text.Add("Rather than waste time with words, you let your body do the talking, grinding back against Cale’s hips as best you can from your present position. You will your clenching asshole to open further, stretching yourself out with each inch you force yourself back over Cale’s bulging knot. Gritting your teeth from the effort, you strain with all your might, crying out in triumph as you finally force him inside of you to the hilt, anchoring him within your ass.", parse);
 				Text.NL();
 				Text.Add("<i>“Knew you had it in you,”</i> he chuckles, switching from his long thrusts to smaller one as his knot stirs your insides. It doesn’t take long before he tightens his grip on your flanks and howls. The distinct warmth of Cale’s hot seed floods your insides as the wolf orgasms.", parse);
 				Text.NL();

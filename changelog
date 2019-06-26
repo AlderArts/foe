@@ -9,6 +9,7 @@ Version 0.4.25
 --------------
 * Fixed numerous typos.
 * Fixed a few Cavalcade parser errors.
+* Changed common measurment unit in most scenes to imperial (inches, feet, yards) for consistency.
 
 --------------------------------------------
              PREVIOUS VERSIONS
