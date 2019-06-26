@@ -6,8 +6,8 @@ const windowHeight = 700;
 const APP_NAME = "Fall of Eden";
 const VERSION_MAJOR = 0;
 const VERSION_MINOR = 4;
-const VERSION_SUBSCRIPT = 24;
-const VERSION_NAME = "Lactation bugfix";
+const VERSION_SUBSCRIPT = 25;
+const VERSION_NAME = "QoL update";
 
 const SAVE_VERSION = 29;
 // Save version 1: Initial

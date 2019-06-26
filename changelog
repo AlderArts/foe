@@ -5,15 +5,19 @@ CHANGELOG for Fall of Eden
                   CURRENT
 --------------------------------------------
 
+Version 0.4.25
+--------------
+* 
+
+--------------------------------------------
+             PREVIOUS VERSIONS
+--------------------------------------------
+
 Version 0.4.24
 --------------
 * Fixed a bug that didn't correctly remove lactation when breasts are flat.
 * Changed Androgyn and Testos items so that they both reduce breast size to flat level.
 * Changed Estros item so that it will increase breast size (though not as much as Bovia).
-
---------------------------------------------
-             PREVIOUS VERSIONS
---------------------------------------------
 
 Version 0.4.23
 --------------
