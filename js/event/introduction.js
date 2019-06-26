@@ -22,7 +22,7 @@ Intro.Start = function() {
 	Text.NL();
 	Text.Add("You take a deep breath, taking in the musty smell of the room, and immediately regret it. As your fit of coughing subsides, you notice something that is different from the last time you were here. There, right in the circle of light, is a footprint.");
 	Text.NL();
-	Text.Add("An involuntary shiver runs down your spine. The house has been abandoned for at least a decade, when the owner last left on one of his travels. Faint memories of an eccentric old man come back to you; weathered, leathery skin, a short reddish beard slashed with gray streaks, and a rugged leather hat on his head. It was so long ago that the old recluse left, people even forgot his name.");
+	Text.Add("An involuntary shiver runs down your spine. The house has been abandoned for at least a decade, when the owner last left on one of his travels. Faint memories of an eccentric old man come back to you; weathered, leathery skin, a short dark beard slashed with gray, and a rugged leather hat on his head. It was so long ago that the old recluse left, people even forgot his name.");
 	Text.NL();
 	Text.Add("As far as you know, no one but you has visited the decaying house on the hilltop since he last left it. As far as you <i>knew</i>, you correct yourself, the evidence right in front of you. Someone was here... and recently.");
 	Text.NL();
