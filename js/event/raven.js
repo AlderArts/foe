@@ -459,7 +459,7 @@ Scenes.RavenMother.TheHuntQuestions = function(back) {
 			Text.NL();
 			Text.Add("<i>“Do not be mistaken. I do not give birth to them,”</i> she says, smiling at you, her mouth full of small pointed teeth. <i>“Ravens existed long before I found them. Some tell me stories older than I am.”</i>", parse);
 			Text.NL();
-			Text.Add("<i>“But they did not exist on the tree island. Some of them wanted to move, and I moved them here.”</i>", parse);
+			Text.Add("<i>“But they did not exist in the realm of the World Tree. Some of them wanted to move, and I moved them here.”</i>", parse);
 			Text.NL();
 			Text.Add("Moved them how?", parse);
 			Text.NL();

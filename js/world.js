@@ -72,5 +72,5 @@ world.Render = function() {
 
 //TODO
 world.TreeFarDesc = function() {
-	return "As always, you can see the immense tree at the center of the island towering in the distance, though you are so far away that the great canopy isn't obscuring the sky above.";
+	return "As always, you can see the immense tree at the center of Eden towering in the distance, though you are so far away that the great canopy isn't obscuring the sky above.";
 }

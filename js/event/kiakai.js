@@ -686,7 +686,7 @@ Scenes.Kiakai.TalkEden = function() {
 			var scenes = [];
 			// TREE
 			scenes.push(function() {
-				Text.Add("You ask about the most prominent aspect of the entire island: the giant tree rising thousands of feet into the air, covering large parts of Eden in the shadow its foliage.", parse);
+				Text.Add("You ask about the most prominent aspect of the realm: the giant tree rising thousands of feet into the air, covering large parts of Eden in the shadow its foliage.", parse);
 				Text.NL();
 				Text.Add("<i>“The tree stands at the center, its roots delve deep,”</i> [name] intones in a reverent voice. <i>“As far as I know, it has always been here. Only the dragons - the oldest beings that live on Eden - have any idea from whence it came and how it came to grow so big. The tree is a symbol of life and the power of nature, and many on Eden worship it, calling it 'The Mother of All'.”</i>", parse);
 				Text.NL();

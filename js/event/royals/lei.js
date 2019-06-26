@@ -1401,7 +1401,7 @@ Scenes.Lei.TalkPastPrompt = function() {
 	var options = new Array();
 	//TODO
 	options.push({ nameStr : "Eden",
-		tooltip : "Ask Lei what he’s been doing around the island, what he thinks of it.",
+		tooltip : "Ask Lei what he’s been doing around Eden; what he thinks of it.",
 		func : function() {
 			Text.Clear();
 
@@ -1429,7 +1429,7 @@ Scenes.Lei.TalkPastPrompt = function() {
 			});
 			if(lei.Relation() >= 35) {
 				scenes.push(function() {
-					Text.Add("You ask Lei what he thinks of the island.", parse);
+					Text.Add("You ask Lei what he thinks of the realm of Eden.", parse);
 					Text.NL();
 					Text.Add("<i>“What a strange question,”</i> he says, taking a good look at you. <i>“It is the place we are in. On it, there are certain locations, plants, animals, factions…”</i> He trails off, waiting for you to clarify your question.", parse);
 					Text.NL();

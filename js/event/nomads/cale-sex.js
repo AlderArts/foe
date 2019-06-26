@@ -2024,7 +2024,7 @@ Scenes.Cale.SexCatchAnal = function(outside) {
 	Text.NL();
 	Text.Add("Putting an end to your scrutiny, Cale moves to work on your [botarmor] himself. You don’t wait to get started on your top, shrugging out of your clothes in record speed. Cale loops an arm around your lower back and motions to the [log]. His intentions clear, you bend over and await the wolf’s next move.", parse);
 	Text.NL();
-	Text.Add("<i>“Let’s prep you first. I dunno 'bout you, but I’m not a fan of painful intrusions.”</i> He moves to his discarded top, fumbling about with a pouch to draw a small tube containing what look to be a clear gel.", parse);
+	Text.Add("<i>“Let’s prep you first. I dunno 'bout you, but I’m not a fan of painful intrusions.”</i> He moves to his discarded top, fumbling about with a pouch to draw a small vial containing what look to be a clear gel.", parse);
 	Text.NL();
 	Text.Add("You shiver unconsciously as the cool gel oozes over your flesh, tingling against the skin as he applies it. Once he judges the amount sufficient, an expert digit moves to massage the lube into your [anus], slow and deliberate motions stirring it around and around. Once he judges your ring has been sufficiently coated, he starts to work his way inside your pucker with a fingertip, thrusting in and out with the same tantalizing purposefulness. Slowly, he adds a second finger, pumping them deeper inside of you as he does. Blissfully, he adds a third, painstakingly reaming your ass with all three.", parse);
 	Text.NL();

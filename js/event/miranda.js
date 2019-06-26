@@ -1243,7 +1243,7 @@ Scenes.Miranda.WelcomeToRigard = function() {
 	Text.Add("Though you see stone walls surrounding Rigard, you notice that there is a large number of residencies beyond their limits, especially toward the waterfront, where a sprawling slum stretches along the river.", parse);
 	Text.NL();
 	if(party.InParty(kiakai)) {
-		Text.Add("As you continue on your way, [name] brings you up to date on the city. Rigard is the largest city on Eden, and the capital of the kingdom holding sway over a large part of the island.", parse);
+		Text.Add("As you continue on your way, [name] brings you up to date on the city. Rigard is the largest city on Eden, and the capital of the kingdom holding sway over a large part of the realm.", parse);
 		Text.NL();
 		Text.Add("<i>“I have heard that there is some difficulty entering the city,”</i> the elf informs you, <i>“but since I am a servant of Lady Aria, there should be no problem getting in. The rulers of the kingdom have always been good friends of the order.”</i>", parse);
 	}

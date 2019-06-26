@@ -1840,7 +1840,7 @@ world.loc.LightAspect.Garden.links.push(new Link(
 		Text.NL();
 		Text.Add("<i>Please, come inside, we have much to talk about.</i>");
 		Text.NL();
-		Text.Add("Steeling yourself for whatever awaits, you step inside the temple into an open courtyard. You have little time to survey your surroundings before your eyes fall on the source of the voice, a woman who could only be described as a goddess.");
+		Text.Add("Steeling yourself for whatever awaits, you step inside the temple into an open courtyard. You have little time to survey your surroundings before your eyes fall on the source of the voice, a woman who could only be described as a Goddess.");
 
 		party.location = world.loc.LightAspect.Temple;
 		Text.Flush();
@@ -1848,7 +1848,7 @@ world.loc.LightAspect.Garden.links.push(new Link(
 			Text.Clear();
 			Text.Say("assets/img/aria.png", "", "left");
 
-			Text.Add("There is no doubt in your mind that she is indeed a goddess; the heartachingly beautiful woman before you stands by a fountain, a worried expression on her perfect face. She is clad in a long white dress that seems to almost float above the ground, as if it were underwater. The skin on her smooth limbs is fair and unblemished, and an expanse of golden locks falls to her waist in a mass of curls. She carries herself with regal composure and is well over six feet tall.");
+			Text.Add("There is no doubt in your mind that she is indeed a Goddess; the heartachingly beautiful woman before you stands by a fountain, a worried expression on her perfect face. She is clad in a long white dress that seems to almost float above the ground, as if it were underwater. The skin on her smooth limbs is fair and unblemished, and an expanse of golden locks falls to her waist in a mass of curls. She carries herself with regal composure and is well over six feet tall.");
 			Text.NL();
 			Text.Add("Her dress - while tastefully chaste - exposes part of her generous bosom. Realizing that you are ogling her, your eyes rise to study her face instead. Her eyes, rather than having regular pupils, are pools of shining light, partly obscured under thick lashes. As she speaks to you once more, her full red lips do not move.");
 			Text.NL();
@@ -1884,7 +1884,7 @@ Intro.AriaPurification = function() {
 		var options = new Array();
 		options.push({ nameStr : "Remove",
 			func : function() {
-				Text.Add("After a brief moment of hesitation, you nod. Her cheeks flushed, the goddess trails her finger down the cleft between your breasts, before uncertainly giving your clit an experimental prod. Barely stifling a moan from the touch, a twinge of regret flits through you as the appendage is enveloped in a soft glow, shrinking down to its original size.");
+				Text.Add("After a brief moment of hesitation, you nod. Her cheeks flushed, the Goddess trails her finger down the cleft between your breasts, before uncertainly giving your clit an experimental prod. Barely stifling a moan from the touch, a twinge of regret flits through you as the appendage is enveloped in a soft glow, shrinking down to its original size.");
 				Text.NL();
 				Text.Add("Aria gives her head a quick shake, clearing her thoughts.");
 				var cocks = player.AllCocks();
@@ -1897,7 +1897,7 @@ Intro.AriaPurification = function() {
 		});
 		options.push({ nameStr : "Keep",
 			func : function() {
-				Text.Add("You thoughtfully bite your lower lip, studying your erect girl-cock. Deciding that you rather like it the way it is, you shake your head at the goddess, causing her to raise an eyebrow at you but letting it pass.");
+				Text.Add("You thoughtfully bite your lower lip, studying your erect girl-cock. Deciding that you rather like it the way it is, you shake your head at the Goddess, causing her to raise an eyebrow at you but letting it pass.");
 				Text.NL();
 				Text.Add("Aria gives her head a quick shake, clearing her thoughts.");
 				Text.Flush();
@@ -1919,7 +1919,7 @@ Intro.AriaTalk = function() {
 
 	Text.Add("The whole purification process was unexpectedly tiring, leaving you weak at the knees.");
 	Text.NL();
-	Text.Add("<i>Now then,</i> she gestures to a marble bench nearby. <i>Please allow me to answer your questions.</i> The two of you get seated. What do you want to ask the goddess?");
+	Text.Add("<i>Now then,</i> she gestures to a marble bench nearby. <i>Please allow me to answer your questions.</i> The two of you get seated. What do you want to ask the Goddess?");
 
 	Intro.AriaTalkedAboutAria = false;
 	Intro.AriaTalkedAboutUru = false;
@@ -1937,7 +1937,7 @@ Intro.AriaQnA = function() {
 			func : function() {
 				Text.Clear();
 
-				Text.Add("<i>“You... I guess you saved me back there. How? Why? Who <b>are</b> you, exactly... are you a goddess?”</i> you ask, feeling self-conscious.");
+				Text.Add("<i>“You... I guess you saved me back there. How? Why? Who <b>are</b> you, exactly... are you a Goddess?”</i> you ask, feeling self-conscious.");
 				Text.NL();
 				Text.Add("<i>I am Aria. I am who I am.</i> The radiant woman gazes off into the distance. <i>Before, it was simpler... fewer worlds to care for, fewer people to protect. After seeing the widespread destruction, calamity after calamity sweeping across the planes... I had to act.</i> Aria sighs. <i>I am the one who protects against the taint, and tries to abate the tides of Darkness through the ages, but it grows hard, so hard. Sometimes, I feel old and powerless, as I watch another world fall...</i>");
 				Text.NL();
@@ -1958,7 +1958,7 @@ Intro.AriaQnA = function() {
 
 				Text.Add("<i>“That demon... who was she?”</i> As you ask, you realize that you want to know more about the tempting yet fickle hermaphrodite, but you cannot quite pinpoint the reason. Are you just interested because of the threat she represents, or do you have some other, darker motive?");
 				Text.NL();
-				Text.Add("<i>Uru,</i> the goddess frowns, looking disconcerted. <i>Beware of that one, she is very, very dangerous. Unpredictable, chaotic and - as I am sure you noticed - very powerful. The plane she inhabits... that place was once a vibrant world, full of life. All reduced to ashes, by her hand and by those who serve her.</i>");
+				Text.Add("<i>Uru,</i> the Goddess frowns, looking disconcerted. <i>Beware of that one, she is very, very dangerous. Unpredictable, chaotic and - as I am sure you noticed - very powerful. The plane she inhabits... that place was once a vibrant world, full of life. All reduced to ashes, by her hand and by those who serve her.</i>");
 				Text.NL();
 				Text.Add("<i>Thankfully, she is unable to make portals herself, leaving her effectively sealed in that place. Who knows what harm she could do, were she to break free...</i>");
 				Text.NL();
@@ -1978,7 +1978,7 @@ Intro.AriaQnA = function() {
 
 				Text.Add("<i>“How did I get to that place? Last thing I remember is the old attic...”</i>");
 				Text.NL();
-				Text.Add("<i>Travel between the realms of existence, while not unheard of, is usually restricted to those very powerful. You, while having a surprising innate ability for it, had a bit of help, though.</i> She gestures to the jewel in your hand.");
+				Text.Add("<i>Opening new portals for travel between the realms of existence, while not unheard of, is usually restricted to those very powerful. You, while having a surprising innate ability for it, had a bit of help, though.</i> She gestures to the jewel in your hand.");
 				Text.NL();
 				Text.Add("<i>“What is it exactly?”</i> you ask.");
 				Text.NL();
@@ -2018,11 +2018,11 @@ Intro.AriaQnA = function() {
 Intro.AriaEnd = function() {
 	Text.Clear();
 
-	Text.Add("Putting two and two together, you recall Uru's last words to you. Worried, you explain that she may, indeed, have found a way to enter other realms, possibly through the power of the gem in your hand. For a moment, the goddess falters. <i>In that case, time is even shorter than I thought. I must act quickly.</i>");
+	Text.Add("Putting two and two together, you recall Uru's last words to you. Worried, you explain that she may, indeed, have found a way to enter other realms, possibly through the power of the gem in your hand. For a moment, the Goddess falters. <i>In that case, time is even shorter than I thought. I must act quickly.</i>");
 	Text.NL();
-	Text.Add("Deep in thought, the goddess strides back and forth. You attempt to get up from the bench, but find yourself too tired. Seems that the recent physical and mental hardships have finally caught up with you.");
+	Text.Add("Deep in thought, the Goddess strides back and forth. You attempt to get up from the bench, but find yourself too tired. Seems that the recent physical and mental hardships have finally caught up with you.");
 	Text.NL();
-	Text.Add("<i>Even if Uru is loose, there is really only one place that she can go without proper tools. To the center realm, the island of Eden.</i> She gazes at your exhausted form thoughtfully, weighing your worth. <i>Very soon, you will find yourself tested, and I find myself wondering what choices you will make.</i>");
+	Text.Add("<i>Even if Uru is loose, there is really only one place that she can go without proper tools. To the center realm... to Eden.</i> She gazes at your exhausted form thoughtfully, weighing your worth. <i>Very soon, you will find yourself tested, and I find myself wondering what choices you will make.</i>");
 	Text.NL();
 	Text.Add("You struggle to reply, but something seems to have caught in your throat, a sharp pain spreading across your chest. Worried, Aria hurries over to you. <i>You cannot stay here much longer. Quickly, the gem.</i> Grabbing a hold of your wrist, she gently presses the purple jewel against your chest. <i>I have done all I can for you, but now you must return to the mortal realm. You are at your limit, staying here any longer will put your life in danger.</i>");
 	Text.NL();
@@ -2030,9 +2030,9 @@ Intro.AriaEnd = function() {
 	Text.NL();
 	Text.Add("You float, suspended in limbo. Slowly, the emptiness around you takes on color, the deep blue of an endless summer sky.");
 	Text.NL();
-	Text.Add("Far below you, the light takes on a slightly different hue, a fluffy mass of white. Surprised, you realize that you are looking at a bed of clouds. A tiny dark speck appears, growing larger as you come closer. You are moving incredibly fast, although, you do not feel any wind. Below you is a small island with a single tree on it, floating in the middle of a white sea.");
+	Text.Add("Far below you, the light takes on a slightly different hue, a fluffy mass of white. Surprised, you realize that you are looking at a bed of clouds. A tiny dark speck appears, growing larger as you come closer. You are moving incredibly fast, although, you do not feel any wind. Below you is a small patch of land with a single tree on it, floating in the middle of a white sea.");
 	Text.NL();
-	Text.Add("As you get closer, your sense of scale skews as miniature mountains, lakes, cities, and forests become visible. No, wait, not miniature - the island itself is actually huge, the great tree at its center gargantuan, its crown thousands of feet above the ground.");
+	Text.Add("As you get closer, your sense of scale skews as miniature mountains, lakes, cities, and forests become visible. No, wait, not miniature - the landmass is actually huge, the great tree at its center gargantuan, its crown thousands of feet above the ground.");
 	Text.NL();
 	Text.Add("<i>Do not be afraid,</i> Aria whispers faintly. <i>Welcome to Eden.</i>");
 	Text.NL();
@@ -2143,7 +2143,7 @@ Intro.KiaQnA = function() {
 				Text.NL();
 				Text.Add("<i>“My Lady Aria then brought you into her own realm. Ah, it was long since I saw the sacred gardens last, too long...”</i> [name] seems to space out for a bit, focusing when you urge [himher] to continue. <i>“You might have noticed that you were losing strength the longer you spent in either of those realms. They are too... spiritual, I guess the word is. Ordinary humans seem to have a hard time surviving there for so long.”</i> [HeShe] thoughtfully considers you. <i>“That you were able to do so for such a long time indicates an unusually strong affinity for traversing the planes. I believe this was why the Lady chose you.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>“To answer your question, you are on the island of Eden, suspended in an endless sea of clouds. The barriers between the planes of existence are quite thin here, so you could see it as something of a hub, where it is possible for portals to other realms to be opened. Usually, the ability to open such a portal is reserved to beings of great power, unless...”</i> [HeShe] pauses and tentatively takes your hand, guiding it to rest on the gemstone in your pocket.", parse);
+				Text.Add("<i>“To answer your question, you are in the realm of Eden, suspended in an endless sea of clouds. The barriers between the planes of existence are quite thin here, so you could see it as something of a hub, where it is possible for portals to other realms to be opened. Usually, the ability to open such a portal is reserved to beings of great power, unless...”</i> [HeShe] pauses and tentatively takes your hand, guiding it to rest on the gemstone in your pocket.", parse);
 				Text.NL();
 				Text.Add("<i>“Unless they have access to a key.”</i>");
 
@@ -2235,7 +2235,7 @@ Intro.KiaDecideOutset = function() {
 
 	Text.Clear();
 
-	Text.Add("The time has come to consider your stance in this. Are you really going to go off on some save-the-world quest in the service of some goddess you only met briefly? Still, finding out how the gemstone works would probably be a good idea. If you could open another one of these portals, you might be able to return home and leave all of this behind.");
+	Text.Add("The time has come to consider your stance in this. Are you really going to go off on some save-the-world quest in the service of some Goddess you only met briefly? Still, finding out how the gemstone works would probably be a good idea. If you could open another one of these portals, you might be able to return home and leave all of this behind.");
 	Text.NL();
 	Text.Add("Or... you could open a portal to somewhere else, maybe teach Uru a lesson once you have achieved some measure of power of your own.");
 	Text.NL();
