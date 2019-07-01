@@ -954,7 +954,7 @@ Intro.UruGiveClitcock = function() {
 
 	// Gain clit cock
 	var cc = player.FirstVag().CreateClitcock();
-	cc.length.base = 10;
+	cc.length.base = 14;
 	player.body.cock.push(cc);
 
 	var options = new Array();
