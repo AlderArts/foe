@@ -580,7 +580,6 @@ Scenes.Miranda.HomeDommySexFuckDobieAss = function(cocks) {
 	else
 		Text.Add("Smiling coyly, you tease that you have something special in mind for the dommy herm. <i>“And what would that be?”</i> Miranda grins, making a grab for you. You deftly take a step back, luring her after you. Pulling her behind you and barely avoiding her caress, you make your way up the stairs and into her bedroom.", parse);
 	if(miranda.flags["Floor"] < 2) {
-		Text.NL();
 		Scenes.Miranda.HomeDescFloor2();
 	}
 	else {
@@ -916,10 +915,10 @@ Scenes.Miranda.HomeDommySexRideDobieCockShared = function() {
 		Text.Add("With a coy smile, you close the distance between you, staring into Miranda's eyes as you tenderly stroke the prominent bulge between her legs, asking her if she doesn't think she's a little overdressed for things. If she were to slip into something more comfortable and join you upstairs, you promise her she'll enjoy what you have in mind. You give her cock a tender squeeze through her pants for emphasis, then turn and head for the stairs yourself. You smile as you hear the horny herm stripping herself off as fast as she can behind you and giving hot pursuit.", parse);
 	else
 		Text.Add("Without hesitation, you close the distance between you and begin peeling off Miranda's armor, hoisting her top up over her head and casting it aside carelessly before pulling down her pants. The morph happily complies with your actions, lifting her arms to facilitate the removal of her top, then almost daintily stepping out of her pants once they're on the floor, cock bobbing in the air before her as she does so. Straightening back up, you lecherously stroke her member before ordering her up to her room, using her dick like a handle to draw her eagerly along as you head for the stairs.", parse);
-	Text.NL();
 	if(miranda.flags["Floor"] < 2)
 		Scenes.Miranda.HomeDescFloor2();
 	else {
+		Text.NL();
 		Text.Add("Messy… not that you expected any different by now.", parse);
 	}
 	Text.NL();
@@ -1710,11 +1709,10 @@ Scenes.Miranda.HomeSubbySex = function() {
 
 	Text.NL();
 	Text.Add("Miranda is breathing heavily as she paws at you, dragging and clawing at your gear. There is a fierce fire in her eyes, indicating that at least one of you is in for a <i>really</i> good time. How well this bodes for you, you are not sure.", parse);
-	Text.NL();
 	if(miranda.flags["Floor"] == 0) {
 		Scenes.Miranda.HomeDescFloor1();
-		Text.NL();
 	}
+	Text.NL();
 	if(nasty)
 		Text.Add("<i>“Don’t make me wait, slut,”</i> the horny herm growls. <i>“Naked, <b>now.</b>”</i> In her eagerness, she practically rips your [armor] apart, leaving you as nude as the day you were born. <i>“Naked suits you so much better. Only thing I think I’ll add is a pearly necklace.”</i>", parse);
 	else
@@ -1744,7 +1742,6 @@ Scenes.Miranda.HomeSubbySex = function() {
 		Text.Add("<i>“This way!”</i> she motions imperiously, pulling you along up the stairs to her bedroom. The steep stairway gives you quite the view of Miranda’s supple behind, though it’s still obscured by her tight-fitting clothes. The dobie curses as she fumbles a bit with the door, her tail wagging with excitement. When the guardswoman finally manages to get it open, she practically throws you through the doorway and into her bedroom.", parse);
 
 		if(miranda.flags["Floor"] < 2) {
-			Text.NL();
 			Scenes.Miranda.HomeDescFloor2();
 		}
 		else {
@@ -2145,7 +2142,6 @@ Scenes.Miranda.HomeSubbySexTakeAnal = function(location, Loc) {
 				Text.Add("<i>“We’ll have to see to this later; can’t have you hobbling around my city smelling like a bitch in heat.”</i>", parse);
 			Text.NL();
 		}
-		Text.NL();
 		Text.Add("Before long, you find yourself arching your back as lightning races down your spine. Your entire body tingles as it wavers on the brink of orgasm, suspended on the thick, crimson cock impaling you. What finally pushes you over the edge is Miranda ramming her knot inside your rectum, locking almost a foot of doberman dick in your butt. The two of you cry out in unison as you cum, burst after burst of cock-cream pouring into your bowels.", parse);
 		Text.NL();
 
@@ -2181,7 +2177,6 @@ Scenes.Miranda.HomeSubbySexTakeAnal = function(location, Loc) {
 			Text.Add("<i>“I’m far from done with you,”</i> she murmurs in your ear, nipping you playfully. Once in her bedroom, she closes the door behind her, still carrying you around.", parse);
 
 			if(miranda.flags["Floor"] < 2) {
-				Text.NL();
 				Scenes.Miranda.HomeDescFloor2();
 			}
 			else {
