@@ -2137,7 +2137,7 @@ Scenes.Cveta.DreamBrood = function(ravenTrigger) {
 	Text.NL();
 	Text.Add("You groan and roll over in the grass, the warmth of gentle spring sunlight on your [skinDesc] and against your lidded eyes. A breeze blows, bringing with it the scent of wildflowers and unripe fruit.", parse);
 	Text.NL();
-	Text.Add("<i>“Please, wake up.”</i> The voice drips so much honey, it’s practically impossible to disobey. Slowly, you open your eyes to find Cveta kneeling over you, wearing absolutely nothing but her gloves. Gone is the thin, waifish creature that you first met in the outlaws’ camp, now replaced by this curvy, full-bodied goddess and her equally alluring voice. As her brood has swelled, so have her breasts and hips to better provide for her many chicks; the feathers upon her chest can no longer hide the rise of her nipples, small bumps beneath her glorious, vibrant feathers, just waiting to be uncovered and teased.", parse);
+	Text.Add("<i>“Please, wake up.”</i> The voice drips so much honey, it’s practically impossible to disobey. Slowly, you open your eyes to find Cveta kneeling over you, wearing absolutely nothing but her gloves. Gone is the thin, waifish creature that you first met in the outlaws’ camp, now replaced by this curvy, full-bodied Goddess and her equally alluring voice. As her brood has swelled, so have her breasts and hips to better provide for her many chicks; the feathers upon her chest can no longer hide the rise of her nipples, small bumps beneath her glorious, vibrant feathers, just waiting to be uncovered and teased.", parse);
 	Text.NL();
 	Text.Add("Not quite gone is the prudish demeanor, but it’s nice to know that she can be an absolute slut just for you. To be honest, it makes it feel a bit special.", parse);
 	Text.NL();
