@@ -128,18 +128,18 @@ Cock.prototype.nounPlural = function() {
 Cock.prototype.Desc = function() {
 	var ret;
 	var cockArea = this.thickness.Get() * this.length.Get();
-	if     (cockArea <= 10 ) ret = {a:"a", adj: "tiny"};
-	else if(cockArea <= 20 ) ret = {a:"a", adj: "small"};
-	else if(cockArea <= 30 ) ret = {a:"a", adj: "below average"};
-	else if(cockArea <= 40 ) ret = {a:"a", adj: "well-proportioned"};
-	else if(cockArea <= 50 ) ret = {a:"a", adj: "strapping"};
-	else if(cockArea <= 70 ) ret = {a:"a", adj: "big"};
-	else if(cockArea <= 90 ) ret = {a:"a", adj: "large"};
-	else if(cockArea <= 120) ret = {a:"a", adj: "huge"};
-	else if(cockArea <= 200) ret = {a:"an", adj: "enormous"};
-	else if(cockArea <= 400) ret = {a:"an", adj: "immense"};
-	else if(cockArea <= 800) ret = {a:"a", adj: "gargantuan"};
-	else                     ret = {a:"a", adj: "titanic"};
+	if     (cockArea <= 10 ) ret = _.sample([{a:"a", adj: "tiny"}, {a:"a", adj: "pathetic"}, {a:"a", adj: "micro"}, {a:"an", adj: "undersized"}]);
+	else if(cockArea <= 20 ) ret = _.sample([{a:"a", adj: "small"}, {a:"a", adj: "petite"}]);
+	else if(cockArea <= 30 ) ret = _.sample([{a:"a", adj: "below average"}, {a:"a", adj: "modest"}]);
+	else if(cockArea <= 40 ) ret = _.sample([{a:"a", adj: "well-proportioned"}, {a:"an", adj: "average"}]);
+	else if(cockArea <= 50 ) ret = _.sample([{a:"a", adj: "strapping"}, {a:"a", adj: "respectable"}, {a:"an", adj: "ample"}]);
+	else if(cockArea <= 70 ) ret = _.sample([{a:"a", adj: "big"}]);
+	else if(cockArea <= 90 ) ret = _.sample([{a:"a", adj: "large"}, {a:"a", adj: "sizable"}]);
+	else if(cockArea <= 120) ret = _.sample([{a:"a", adj: "huge"}, {a:"a", adj: "hefty"}]);
+	else if(cockArea <= 200) ret = _.sample([{a:"an", adj: "enormous"}, {a:"a", adj: "massive"}, {a:"a", adj: "humongous"}]);
+	else if(cockArea <= 400) ret = _.sample([{a:"an", adj: "immense"}, {a:"a", adj: "colossal"}, {a:"a", adj: "mammoth"}]);
+	else if(cockArea <= 800) ret = _.sample([{a:"a", adj: "gargantuan"}, {a:"a", adj: "gigantic"}, {a:"a", adj: "monster sized"}]);
+	else                     ret = _.sample([{a:"a", adj: "titanic"}, {a:"a", adj: "vast"}]);
 	
 	ret.len = this.length.Get() / 2 + " inches";
 	ret.thickness = this.thickness.Get() / 2 + " inches";
