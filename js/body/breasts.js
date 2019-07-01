@@ -176,9 +176,7 @@ Breasts.prototype.Desc = function() {
 	else if(size <= 130  ) cup = "ZZ-cup";
 	else                   cup = "ZZZ-cup";
 	
-	var sizeStr = (MEASUREUNIT == Unit.american) ?
-		Unit.CmToInch(size) + " inches" :
-		size + " cms";
+	var sizeStr = size / 2 + " inches";
 	
 	return {a:"a pair of", adj: adj, cup: cup, size: sizeStr};
 }
@@ -194,12 +192,8 @@ Breasts.prototype.nipDesc = function() {
 	// TODO
 	var adj = "perky";
 	
-	var nipLen = (MEASUREUNIT == Unit.american) ?
-		Unit.CmToInch(this.nippleLength.Get()) + " inches" :
-		this.nippleLength.Get() + " cms";
-	var nipThickness = (MEASUREUNIT == Unit.american) ?
-		Unit.CmToInch(this.nippleThickness.Get()) + " inches" :
-		this.nippleThickness.Get() + " cms";
+	var nipLen = this.nippleLength.Get() / 2 + " inches";
+	var nipThickness = this.nippleThickness.Get() / 2 + " inches";
 	
 	return {a: "a", adj: adj, len: nipLen, thickness: nipThickness};
 }

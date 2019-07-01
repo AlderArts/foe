@@ -141,12 +141,8 @@ Cock.prototype.Desc = function() {
 	else if(cockArea <= 800) ret = {a:"a", adj: "gargantuan"};
 	else                     ret = {a:"a", adj: "titanic"};
 	
-	ret.len = (MEASUREUNIT == Unit.american) ?
-		Unit.CmToInch(this.length.Get()) + " inches" :
-		this.length.Get() + " cms";
-	ret.thickness = (MEASUREUNIT == Unit.american) ?
-		Unit.CmToInch(this.thickness.Get()) + " inches" :
-		this.thickness.Get() + " cms";
+	ret.len = this.length.Get() / 2 + " inches";
+	ret.thickness = this.thickness.Get() / 2 + " inches";
 	
 	return ret;
 }

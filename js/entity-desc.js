@@ -5,8 +5,7 @@ Entity.prototype.PrintDescription = function() {
 	var parse = {
 		name     : this.NameDesc(),
 		possesive: this.possessive(),
-		height   : Math.floor(this.body.height.Get()),
-		weigth   : Math.floor(this.body.weigth.Get()),
+		weigth   : Math.floor(this.body.weigth.Get() * 2),
 		race     : this.body.RaceStr(),
 		gender   : this.body.GenderStr(),
 		skinDesc : this.body.SkinDesc(),
@@ -25,8 +24,18 @@ Entity.prototype.PrintDescription = function() {
 	};
 	parse = this.ParserTags(parse);
 	parse = this.ParserPronouns(parse);
+	var height = Math.floor(Unit.CmToInch(this.body.height.Get()));
+	var height_feet = Math.floor(height / 12);
+	var height_inches = Math.floor(height % 12);
+	parse["height"] = height_feet + " feet";
+	if(height_inches > 0) {
+		parse["height"] += " and " + height_inches + " inch";
+		if(height_inches > 1) {
+			parse["height"] += "es";
+		}
+	}
 	
-	Text.Add("[name] [is] a [gender] [race], [height]cm tall and weighing around [weigth]kg. [HeShe] [has] [skinDesc]. ", parse);
+	Text.Add("[name] [is] a [gender] [race], [height] tall and weighing around [weigth]lb. [HeShe] [has] [skinDesc]. ", parse);
 	Text.Add("[HeShe] [is] wearing [armor].", parse);
 	if(this.LowerArmor()) Text.Add(" [HeShe] [is] wearing [larmor].", parse);
 	if(this.Weapon()) Text.Add(" [HeShe] [is] wielding [weapon].", parse);
