@@ -9,7 +9,7 @@ CockType = {
 function Cock(race, color) {
 	BodyPart.call(this, race, color);
 	this.thickness = new Stat(3);
-	this.length    = new Stat(15);
+	this.length    = new Stat(12);
 	this.type      = CockType.ordinary;
 	this.vag       = null; // For clitcock
 	this.knot      = 0;

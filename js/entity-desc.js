@@ -1,6 +1,6 @@
 
 
-Entity.prototype.PrintDescription = function() {
+Entity.prototype.PrintDescription = function(partial) {
 	
 	var parse = {
 		name     : this.NameDesc(),
@@ -160,6 +160,10 @@ Entity.prototype.PrintDescription = function() {
 	}
 	if(vags[0])
 		Text.NL();
+	
+	if(partial) {
+		return;
+	}
 	
 	// TODO TEMP
 	var balls = this.Balls();

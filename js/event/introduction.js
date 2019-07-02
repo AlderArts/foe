@@ -59,7 +59,7 @@ Intro.Gender = function() {
 	Text.Clear();
 	Gui.ClearButtons();
 
-	Text.Add("What do you see?");
+	Text.Add("You look at yourself in the mirror... what do you see?");
 	Text.Flush();
 
 	Input.buttons[0].Setup("A man", function() {
@@ -198,27 +198,45 @@ Intro.EyeColor = function() {
 
 	Input.buttons[0].Setup("Black", function() {
 		player.SetEyeColor(Color.black);
-		Intro.JobSelect();
+		Intro.Review();
 	}, true);
 	Input.buttons[1].Setup("Brown", function() {
 		player.SetEyeColor(Color.brown);
-		Intro.JobSelect();
+		Intro.Review();
 	}, true);
 	Input.buttons[2].Setup("Blue", function() {
 		player.SetEyeColor(Color.blue);
-		Intro.JobSelect();
+		Intro.Review();
 	}, true);
 	Input.buttons[3].Setup("Gray", function() {
 		player.SetEyeColor(Color.gray);
-		Intro.JobSelect();
+		Intro.Review();
 	}, true);
 	Input.buttons[4].Setup("Green", function() {
 		player.SetEyeColor(Color.green);
-		Intro.JobSelect();
+		Intro.Review();
 	}, true);
 	Input.buttons[5].Setup("Purple", function() {
 		player.SetEyeColor(Color.purple);
+		Intro.Review();
+	}, true);
+}
+
+Intro.Review = function() {
+	Text.Clear();
+	Gui.ClearButtons();
+
+	player.PrintDescription(true);
+	
+	Text.Add("Is this correct?");
+	Text.Flush();
+
+	Input.buttons[0].Setup("Yes", function() {
 		Intro.JobSelect();
+	}, true);
+	Input.buttons[1].Setup("No", function() {
+		player.body = new Body(this);
+		Intro.Gender();
 	}, true);
 }
 
