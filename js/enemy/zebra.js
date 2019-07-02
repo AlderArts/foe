@@ -16,7 +16,7 @@ function ZebraShaman(levelbonus) {
 	this.MonsterName       = "The zebra shaman";
 	this.body.DefMale();
 	this.FirstCock().thickness.base = 7;
-	this.FirstCock().length.base = 35;
+	this.FirstCock().length.base = 30;
 	this.Balls().size.base = 6;
 
 	this.maxHp.base        = 250;

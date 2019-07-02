@@ -12,8 +12,8 @@ function Magnus(storage) {
 	this.body.DefMale();
 	this.body.SetRace(Race.Human);
 	this.SetSkinColor(Color.white);
-	this.FirstCock().length.base    = 100;
-	this.FirstCock().thickness.base = 8;
+	this.FirstCock().length.base    = 80;
+	this.FirstCock().thickness.base = 6;
 	this.FirstCock().race           = Race.Demon;
 	this.body.cock.push(this.FirstCock().Clone());
 	this.body.cock.push(this.FirstCock().Clone());

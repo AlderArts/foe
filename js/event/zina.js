@@ -36,8 +36,8 @@ function Zina(storage) {
 	this.body.DefHerm(true);
 	this.FirstBreastRow().size.base = 5;
 	this.Butt().buttSize.base = 5;
-	this.FirstCock().thickness.base = 5;
-	this.FirstCock().length.base    = 23;
+	this.FirstCock().thickness.base = 4;
+	this.FirstCock().length.base    = 18;
 	this.Balls().size.base = 2;
 	this.Balls().cumProduction.base = 2;
 	this.body.SetRace(Race.Hyena);

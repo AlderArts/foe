@@ -14,8 +14,8 @@ function Equine(gender, levelbonus) {
 		this.monsterName       = "the stallion";
 		this.MonsterName       = "The stallion";
 		this.body.DefMale();
-		this.FirstCock().thickness.base = 7;
-		this.FirstCock().length.base = 35;
+		this.FirstCock().thickness.base = 6;
+		this.FirstCock().length.base = 32;
 		this.Balls().size.base = 6;
 	}
 	else if(gender == Gender.female) {
@@ -35,6 +35,8 @@ function Equine(gender, levelbonus) {
 		this.monsterName       = "the herm equine";
 		this.MonsterName       = "The herm equine";
 		this.body.DefHerm(true);
+		this.FirstCock().thickness.base = 6;
+		this.FirstCock().length.base = 32;
 		this.FirstBreastRow().size.base = 20;
 		this.Butt().buttSize.base = 7;
 		if(Math.random() < 0.8)

@@ -37,7 +37,7 @@ function Miranda(storage) {
 	this.FirstBreastRow().size.base = 12.5;
 	this.Butt().buttSize.base = 7;
 	this.FirstCock().length.base = 28;
-	this.FirstCock().thickness.base = 7;
+	this.FirstCock().thickness.base = 6;
 	this.FirstVag().virgin = false;
 	this.Butt().virgin = false;
 	this.Balls().size.base = 6;

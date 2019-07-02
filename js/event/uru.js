@@ -31,8 +31,8 @@ function Uru(storage) {
 	this.body.DefHerm(false);
 	this.FirstBreastRow().size.base = 16;
 	this.Butt().buttSize.base = 9;
-	this.FirstCock().thickness.base = 8;
-	this.FirstCock().length.base    = 40;
+	this.FirstCock().thickness.base = 6;
+	this.FirstCock().length.base    = 32;
 	this.body.SetRace(Race.Demon);
 	this.body.SetBodyColor(Color.red);
 	this.body.SetHairColor(Color.black);

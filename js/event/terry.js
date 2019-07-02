@@ -275,7 +275,7 @@ Terry.prototype.SetCock = function() {
 	this.body.cock = [];
 	if(this.flags["cock"] == Terry.Cock.Regular) {
 		this.body.cock.push(new Cock());
-		this.FirstCock().length.base = 11;
+		this.FirstCock().length.base = 8;
 		this.FirstCock().thickness.base = 2;
 		this.FirstCock().race = Race.Fox;
 		this.FirstCock().knot = 1;
@@ -285,7 +285,7 @@ Terry.prototype.SetCock = function() {
 	}
 	else if(this.flags["cock"] == Terry.Cock.Horse) {
 		this.body.cock.push(new Cock());
-		this.FirstCock().length.base = 33;
+		this.FirstCock().length.base = 28;
 		this.FirstCock().thickness.base = 6;
 		this.FirstCock().race = Race.Horse;
 		this.FirstCock().knot = 1;

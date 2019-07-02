@@ -16,8 +16,8 @@ function Cale(storage) {
 	this.body.SetRace(Race.Wolf);
 	this.SetSkinColor(Color.gray);
 	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Wolf, Color.gray);
-	this.FirstCock().length.base = 23;
-	this.FirstCock().thickness.base = 5;
+	this.FirstCock().length.base = 20;
+	this.FirstCock().thickness.base = 4;
 	
 	this.flags["Met"]      = Cale.Met.NotMet;
 	this.flags["Met2"]     = 0;

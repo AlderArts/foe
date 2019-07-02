@@ -150,7 +150,7 @@ Kiakai.prototype.IsAtLocation = function(location) {
 Kiakai.prototype.InitCharacter = function(gender) {
 	if(gender == Gender.male) {
 		this.body.DefMale();
-		this.body.cock[0].length.base = 12;
+		this.body.cock[0].length.base = 8;
 		
 		this.name = "Kai";
 		this.body.femininity.base = -0.2;

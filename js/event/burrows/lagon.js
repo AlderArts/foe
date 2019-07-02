@@ -20,7 +20,7 @@ function Lagon(storage) {
 	this.body.DefMale();
 	
 	this.FirstCock().thickness.base = 7;
-	this.FirstCock().length.base = 38;
+	this.FirstCock().length.base = 34;
 	this.Balls().size.base = 6;
 	
 	this.Butt().buttSize.base = 2;
