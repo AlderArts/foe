@@ -811,424 +811,440 @@ Scenes.Barnaby.BlowjobEntrypoint = function(func) {
 	Text.Add("That you most certainly did. As if you needed more proof of how pent up the bartender is, his dick is already drooling, a thick streamer of off-white fluid, not quite cum, starting to flow from his blunt cock-tip.", parse);
 	Text.NL();
 	Text.Add("<i>“Well, you know what comes next, but before you start pass me the green bottle to your left.”</i>", parse);
-	Text.NL();
-	Text.Add("Hardly a standard request during a blowjob, but what the hell. You grab the indicated beverage and pass it to Barnaby, the stallion placing it down atop the counter with the dull clunk of glass on wood.", parse);
-	Text.NL();
-	Text.Add("<i>“Thanks, now get back to work.”</i>", parse);
-	Text.NL();
-	Text.Add("Ungrateful... you force yourself to ignore what he said and just do as you are told. Still holding the base of Barnaby’s cock, you shuffle a little closer and extend your [tongue], daintily licking at the flow of sexual fluids seeping from his glans.", parse);
-	Text.NL();
-	if(player.sex.gBlow < 5) {
-		Text.Add("The thick, salty, musky flavor is almost overpowering you, drawing an instinctive shudder. For a moment, you consider backing out, but you’ve come too far. Unable to properly stomach the taste of Barnaby’s juices, you simply dab at him with your tongue, meager flicks of your [tongueTip] to help you acclimatize yourself before you open your mouth and gingerly envelop his dick.", parse);
-	}
-	else if(player.sex.gBlow < 25) {
-		Text.Add("Mmm... a little stronger than you’re used to, but not bad. Coaxed on by Barnaby’s intriguing flavor, you happily run your tongue along his shaft. You try to be playful when you can, doing your best to tease the more sensitive ridges and creases, but in the end you settle mostly for sheer enthusiasm. You greedily polish him to a gleaming sheen before hungrily opening your mouth and gulping down his cock.", parse);
-	}
-	else {
-		Text.Add("Ah, delicious. Thick and rich and strong, just perfect. Your tongue darts like a lecherous serpent, deftly flicking all of the most sensitive spots you have discovered through your copious practice. If Barnaby wasn’t already rock-hard before, he will be now, the tasty streamer of man-goo growing ever thicker in response to your ministrations. You could probably get him to blow with just your tongue alone... but you want a real taste of him, and so you deftly gobble up his dick, eager to get to the real fun.", parse);
-	}
-	Text.NL();
-	
-	var cock = new Cock(Race.Horse);
-	cock.length.base = 30;
-	cock.thickness.base = 5;
-	
-	Sex.Blowjob(player, null);
-	player.FuckOral(player.Mouth(), cock, 2);
-	
-	Text.Add("With the stallion’s cock now firmly placed in your mouth, you start to bob your head up and down along its length. You slowly savor it at first, giving yourself a chance to get a feel for the sizable piece of meat in your mouth. While Barnaby probably only counts as average by the standards of his own kind, that’s still at least a foot of inch and a half-thick sausage you are attempting to inhale.", parse);
-	Text.NL();
-	if(player.sex.gBlow < 5) {
-		Text.Add("You can’t help but choke when his fat, blunt glans hits the back of your throat. Untrained as you are, your gag reflex protests the attempt to invade your gullet directly with something so big, forcing you to take it slower. Without any other recourse, you settle for working with lips and cheeks as best you can, noisily slobbering over Barnaby’s cock as you suckle like an infant.", parse);
-		Text.NL();
-		Text.Add("A dull grunt from above suggests that Barnaby is less than impressed with your skills, but evidently you’re not doing so badly that he’s going to kick you off his dick.", parse);
-	}
-	else if(player.sex.gBlow < 25) {
-		Text.Add("Though your gag reflex protests a little at the invasion, it’s far too well-trained to be a major obstacle. With a little insistent pressure on your part, Barnaby’s cock slips down your gullet, letting you grip and squeeze him with each rippling flutter of your throat muscles. You need to concentrate on that, but still, it gives him plenty of friction to work again.", parse);
-		Text.NL();
-		Text.Add("Barnaby makes no sound of appreciation at your efforts, but nor does he make any sort of complaint, either, which is pretty telling of itself.", parse);
-	}
-	else {
-		Text.Add("A big horsie he may be, but that’s no problem for you. Your gullet opens in invitation, allowing him to slide straight in with such ease he actually stumbles a little, clearly not expecting you to just gulp him down in one go like that. Your [tongue] deftly flicks and twirls along the underside of his shaft, caressing delicious dick-meat even as your throat clenches and squeezes, working to tease that yummy man-milk out of his balls and into where it belongs.", parse);
-		Text.NL();
-		Text.Add("A quiet moan, quickly strangled off, escapes Barnaby’s lips, and you’d smirk triumphantly if you didn’t have better things to be doing with your mouth.", parse);
-	}
-	Text.NL();
-	Text.Add("As you busily work your mouth, you inquisitively reach out and gently take hold of the stallion’s bloated balls. As you tenderly roll them between your fingers, you can literally feel them churning in your grasp, pulsing as the seed roils inside of them.", parse);
-	Text.NL();
-	Text.Add("Before you can consider doing anything else with them, a hand roughly ", parse);
-	if(player.HasHorns()) {
-		Text.Add("grabs you by the [horns], tugging you firmly onto Barnaby’s cock.", parse);
-	}
-	else {
-		Text.Add("pushes against the back of your head, making it impossible for you to try and back off.", parse);
-	}
-	Text.NL();
-	Text.Add("<i>“Better drink up everything. I don’t want a mess behind my bar.”</i>", parse);
-	Text.NL();
-	Text.Add("What - already?! Anything you might have to say is muffled by the stallionhood so firmly jammed between your lips.", parse);
-	Text.NL();
-	Text.Add("<i>“Here’s your milk, [boygirl]!”</i> he says through gritted teeth.", parse);
-	Text.NL();
-	if(player.sex.gBlow < 5) {
-		Text.Add("You don’t know how you manage it, but somehow you are able to drink up most of Barnaby’s load. And what a load it is; at one point, you started wondering if he would drown you in cum.", parse);
-		Text.NL();
-		Text.Add("Saying that the horse-morph was pent up would be the understatement of the century. Despite drinking up most of it, you’re still incapable of dealing with his volume. Seed escapes the corner of your mouth, and you’re forced to withdraw to catch your breath. The last of Barnaby’s cum winds up plastered on your face; a result of a complementary jet when you were forced to let go.", parse);
-	}
-	else if(player.sex.gBlow < 25) {
-		Text.Add("You consider yourself to be at least somewhat skilled when it comes to blowjobs. Still, the horse cums so much that you can’t hope to swallow up the veritable tidal wave of equine spunk he shoots down your throat.", parse);
-		Text.NL();
-		Text.Add("Even as you suck it down and swallow around his shaft as best as you can, some of it winds up inevitably escaping the seal of your mouth and running down your chin.", parse);
-	}
-	else {
-		Text.Add("You’re pretty darn skilled, but the horse-morph is so pent up that even you can’t hope to cope with his explosive climax.", parse);
-		Text.NL();
-		Text.Add("Seed blasts down your throat as you use every technique in your repertoire to chug it all down, but despite that some still manages to escape the seal of your mouth and run down your chin. Talk about being blue-balled; Barnaby was so pent up, you’re surprised his balls didn’t just explode with the pressure.", parse);
-	}
-	Text.NL();
-	Text.Add("As you catch your breath beneath the counter, a large rag is unceremoniously tossed into your face. Quite literally at that. The thick, well-used cloth drapes itself over your head, forcing you to pull it off so that you can see again.", parse);
-	Text.NL();
-	Text.Add("<i>“Clean up any mess you left down there and prepare for next round.”</i>", parse);
-	Text.NL();
-	Text.Add("You wipe your face clean of any stray ropes of horse-jism, taking a moment to recompose yourself before his words sink in. Wait, next round?", parse);
-	Text.NL();
-	Text.Add("<i>“Yeah, you didn’t think I’d be satisfied with just one shot, right? Look at these babies.”</i> He gropes his balls, showing you just how full they still are.", parse);
-	Text.NL();
-	Text.Add("You can’t avoid noticing that despite just cumming enough to fill one of his own ale mugs, at the least, he’s still rock-hard, and even starts to dribble a thick mix of pre and cum again just from touching himself.", parse);
-	Text.NL();
-	Text.Add("<i>“Heh, looks like I’m already leaking again. You know the drill - wrap those pretty lips around my man-meat and swallow it all. Like I said before, don’t want a mess behind my bar.”</i>", parse);
-	Text.NL();
-	if(player.sexlevel < 3) {
-		Text.Add("...Just what kind of trouble did you get yourself into this time?", parse);
-		Text.NL();
-		Text.Add("Even as you consider that in mild shock, the horse-morph’s stallionhood points at you like an accusing finger, and you’re jolted out of your musing when you feel that flat tip of his smear pre across your cheek.", parse);
-		Text.NL();
-		Text.Add("<i>“Well? You gonna open up or what?”</i>", parse);
-		Text.NL();
-		Text.Add("Barnaby’s musk, the scent of sex and thick throbbing shaft of his fills your head with a cloud of lust, and you find yourself opening up despite any reservations you might have. The horse-morph <i>needs</i> his release, and since you offered, might as well as do the best job that you can.", parse);
-	}
-	else if(player.sexlevel < 5) {
-		Text.Add("This is kind of ridiculous; how does he put up with being this backed up? Most folk would’ve at least masturbated by now.", parse);
-		Text.NL();
-		Text.Add("<i>“My bar is open around the clock.”</i>", parse);
-		Text.NL();
-		Text.Add("...So he doesn’t even sleep?", parse);
-		Text.NL();
-		Text.Add("<i>“Nope.”</i>", parse);
-		Text.NL();
-		Text.Add("Well, no wonder he’s grumpy all the time, but how does he manage that?", parse);
-		Text.NL();
-		Text.Add("<i>“Secret of the trade. Now, are you going to use those lips for what they were made for, or keep asking these pointless questions?”</i>", parse);
-		Text.NL();
-		Text.Add("Alright, alright, no need to get pushy! You protest, leaning forward to tend to his flat tip.", parse);
-	}
-	else {
-		Text.Add("Wow, if he’s already dripping even after having cum not moments ago, he must be <i>really</i> pent up!", parse);
-		Text.NL();
-		Text.Add("<i>“Yes, I am. And do you know what I <b>really</b> would like right now?”</i>", parse);
-		Text.NL();
-		Text.Add("Okay, you’re getting to it, just need to catch your breath a little.", parse);
-		Text.NL();
-		Text.Add("Barnaby leans forward, pressing the flat tip of his cock to your nose and smearing some of his pre across your lips. <i>“You’ll have time to breathe after I blow my next load - now get to it!”</i>", parse);
-		Text.NL();
-		Text.Add("Alright dammit! Gee, no need to be so douchey about it!", parse);
-		Text.NL();
-		Text.Add("You open your mouth and begin tending to his blunt tip.", parse);
-	}
-	Text.NL();
-	
-	Sex.Blowjob(player, null);
-	player.FuckOral(player.Mouth(), cock, 1);
-	
-	var scenes = new EncounterTable();
-	
-	scenes.AddEnc(function() {
-		Text.Add("<i>“Hey, bartender! Can I get some ale over here?”</i>", parse);
-		Text.NL();
-		Text.Add("The voice is unfamiliar to you: masculine, from the timbre of it, but not someone you can place. Probably just a random customer.", parse);
-		Text.NL();
-		Text.Add("<i>“Can I get some coin over here?”</i> You hear Barnaby reply.", parse);
-		Text.NL();
-		Text.Add("A clatter of metallic ringings echoes above you as coins bounce onto the wooden counter. Without further adieu, the stallion reaches down and grabs", parse);
-		if(player.HasHorns()) {
-			parse["oneof"] = player.HasHorns().count > 1 ? " one of" : "";
-			Text.Add("[oneof] your [horns], using it as a convenient lever to bodily drag you across the floor as he walks away from the counter.", parse);
-		}
-		else {
-			Text.Add(" the back of your head, digging his fingers roughly into your scalp in order to force you to stay there as he hauls you across the floor with him.", parse);
-		}
-		Text.NL();
-		Text.Add("Trapped like this, you scrabble along on the floor, half-crawling and half-dragging yourself to keep up with Barnaby as the barkeep taps one of his kegs. The thick scent of ale fills your nose, cutting through the musk of sex as he expertly fills his mug to a nice, frothy head and then turns back to the counter.", parse);
-		Text.NL();
-		Text.Add("You quickly scramble back under the counter, but you’re not sure that you escaped notice... In fact, you’re pretty sure that the customer saw you.", parse);
-		Text.NL();
-		Text.Add("<i>“Hey, is someone down there?”</i> the customer asks.", parse);
-		Text.NL();
-		Text.Add("<i>“None of your darn business,”</i> Barnaby replies.", parse);
-		Text.NL();
-		Text.Add("<i>“Ha! I knew it! Even you need to have some fun sometimes, eh?”</i>", parse);
-		Text.NL();
-		Text.Add("You wince at the loud *clonk* of wood on wood as Barnaby gruffly slams the patron’s drink down in front of him.", parse);
-		Text.NL();
-		Text.Add("<i>“Take the mug and go get drunk,”</i> the horse-morph says dismissively.", parse);
-		Text.NL();
-		Text.Add("<i>“Ha! Will take me more than a few! Be back for more later,”</i> the unknown patron replies, stepping away.", parse);
-		Text.NL();
-		if(player.Slut() < 15) {
-			Text.Add("You press yourself as deeply into the shadows of the counter as you physically can, your whole body feeling afire with embarrassment. Maybe you should have thought twice about doing this...", parse);
-		}
-		else if(player.Slut() < 30) {
-			Text.Add("You swallow nervously, shame coiling like a snake in your belly... but at the same time, you can’t quite deny the flare of arousal that tingles in your loins at your close call.", parse);
-		}
-		else {
-			Text.Add("You would smirk proudly if your mouth wasn’t so busy. You wriggle a little closer to Barnaby, wondering if anyone else might catch a glimpse of you; the idea sounds so... <i>thrilling</i>.", parse);
-		}
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
-		Text.Add("<i>“Barkeep? I’d like some spirits.”</i>", parse);
-		Text.NL();
-		Text.Add("You listen closely, but other than the faint metallic ring of coins clinking onto the counter, there’s no further word from this new customer. You don’t think that they’re anyone that you know, though.", parse);
-		Text.NL();
-		Text.Add("Barnaby leans over the counter and reaches down, unintentionally, or so you think, driving his cock down your throat rather forcefully.", parse);
-		Text.NL();
-		Text.Add("You can’t help but grunt at this rough treatment, even despite your impromptu gag.", parse);
-		Text.NL();
-		Text.Add("<i>“Hmm? What was that? Someone down there behind the bar?”</i> the female patron asks.", parse);
-		Text.NL();
-		Text.Add("<i>“Yeah, care to join them?”</i> Barnaby asks; you don’t even need to see his face to know he’s sporting a lecherous grin.", parse);
-		Text.NL();
-		Text.Add("<i>“I’ll pass, just make sure you don’t get anything on my spirits,”</i> she replies.", parse);
-		Text.NL();
-		Text.Add("<i>“Don’t worry about it; if they spill any, I’ll cockslap them until they pass out.”</i> Barnaby chuckles.", parse);
-		Text.NL();
-		Text.Add("<i>“Yes, yes, my spirits?”</i>", parse);
-		Text.NL();
-		Text.Add("Barnaby’s hand promptly thrusts it into view, trying to grope around you in order to reach one of the bottles stashed beneath the counter. Trying to be helpful, you snatch a green one that he seems to have been feeling for and press it into his palm, watching as he lifts it back above the counter.", parse);
-		Text.NL();
-		Text.Add("The horse-morph looks at the bottle, then shakes his head. <i>“Not this one, the brown one.”</i> He points in the general direction of the bottle.", parse);
-		Text.NL();
-		Text.Add("This time, you pass him the right bottle. From above, you can hear the barkeeper uncorking it and gently tipping its contents into a mug. The faint sound of glass on wood precedes the sounds of steps fading into the distance, the customer clearly satisfied with her purchase.", parse);
-		Text.NL();
-		Text.Add("Barnaby pulls away so he can look down at you, with your lips still wrapped around his flat tip. <i>“Well, aren’t you lucky? Guess you get to keep me all for yourself.”</i> He grins.", parse);
-		Text.NL();
-		Text.Add("You roll your eyes drolly at the stallion’s words. Yes, you’re <b>such</b> a lucky [guygal], now aren’t you?", parse);
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
-		Text.Add("The distinctive sound of heavy boots, the sort favored by guards and adventurers, reaches your ears as someone plods over to the counter. A chorus of clinking echoes down to you as this latest customer carelessly spills coins down for a purchase.", parse);
-		Text.NL();
-		Text.Add("<i>“Ale, please.”</i>", parse);
-		Text.NL();
-		Text.Add("The voice has that tightness to it suggesting tiredness, but still sounds quite feminine. Sounds like she’s had a hard day, whoever she is... actually, now that you think about it, she sounds kind of familiar...", parse);
-		Text.NL();
-		Text.Add("<i>“Hey there, long day?”</i> Barnaby asks.", parse);
-		Text.NL();
-		Text.Add("<i>“Yeah, as usual,”</i> she replies.", parse);
-		Text.NL();
-		Text.Add("<i>“Well, just sit tight and I’ll have your drink in a moment.”</i>", parse);
-		Text.NL();
-		Text.Add("Barnaby’s so eager to serve this customer that he doesn’t even try to hold your head to keep you from slipping off before he starts walking over to the kegs. You have to scramble over in a mad dashing crawl to keep his cock fixed inside your mouth where he wants it.", parse);
-		Text.NL();
-		Text.Add("<i>“Hey, why you shuffling like that?”</i> the female patron asks.", parse);
-		Text.NL();
-		Text.Add("<i>“Let’s just say that you caught me in the middle of something.”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“Ha! Having some fun back there, are you? Thought you didn’t goof around while on the job?”</i> She asks teasingly.", parse);
-		Text.NL();
-		Text.Add("<i>“Oh well, like you are one to talk...”</i> The horse-morph replies.", parse);
-		Text.NL();
-		Text.Add("<i>“True enough. Is it anyone I know?”</i>", parse);
-		Text.NL();
-		Text.Add("That voice, that way of talking - that enthusiasm about sex. There’s only one person it could possibly be on the business side of the counter there: none other than Miranda the literal watchdog.", parse);
-		Text.NL();
-		Text.Add("As if you needed the confirmation, the counter creaks as the anthro doberman half-climbs onto it, eagerly leaning over so that she can see for herself. Barnaby, of course, makes no effort to hide you, leaving you openly exposed so that she can see exactly who’s down there sucking his cock. You can only stare back up at her with wide eyes as her face comes into view.", parse);
-		Text.NL();
-		if(miranda.Nasty()) {
-			Text.Add("She sneers at you, her usual harsh glare fixed in place. <i>“Well, well; I should have known you’d be down there, bitch. What’s wrong? Didn’t have any coin to pay him back? Or are you just such a cum-junkie that you had to bother a hard-working fellow like Barnaby here for your next fix?”</i>", parse);
-			Text.NL();
-			Text.Add("<i>“Or maybe [pheshe] just wanted a taste of fat stallion prick for a change,”</i> Barnaby adds.", parse);
-			Text.NL();
-			Text.Add("<i>“Wouldn’t surprise me in the slightest. Such a greedy little bitch [pheshe] is - and [pheshe] likes to act so high and mighty, too. Maybe I should bring some of my buddies from the Watch around, see if they’d like to try this little slut for themselves.”</i>", parse);
-			Text.NL();
-			Text.Add("<i>“That would be an interesting show, and it would bring me more business, so I don’t have a problem with that idea as long as you can keep it contained in one of the back rooms,”</i> Barnaby replies.", parse);
-			Text.NL();
-			if(player.Slut() < 50) {
-				Text.Add("You let out a muffled squawk of protest - you didn’t sign up for any gangbanging, certainly not one under Miranda’s watch!", parse);
-			}
-			else {
-				Text.Add("You can’t hold back an intrigued noise behind the gag of stallion cock. Whatever you may think of Miranda, that little scenario sounds... exciting.", parse);
-			}
-			Text.NL();
-			Text.Add("<i>“I see I’ll have to think about it,”</i> Miranda smirks. <i>“But not until you’re done with [phimher], of course. First come, first served, right?”</i>", parse);
-			Text.NL();
-			Text.Add("<i>“Fair is fair. Now how about I get you that drink?”</i> he asks.", parse);
-			Text.NL();
-			Text.Add("<i>“Sounds good to me, I’m parched!”</i>", parse);
-			Text.NL();
-			Text.Add("<i>“Here you go.”</i> The horse-morph sets the mug down before Miranda.", parse);
-			Text.NL();
-			Text.Add("You can hear the doberherm snatch it up and guzzle at least a third of it on one go right there at the counter. <i>“Ah, good stuff! I’m going to savor the rest of this - after all, I’ll be needing my strength soon...”</i> She sneers back at you over the counter, and then heads back to her table.", parse);
-			Text.NL();
-			Text.Add("Why did it have to be Miranda? You press yourself more firmly into the counter’s shadow in hope of avoiding another such incident.", parse);
-		}
-		else {
-			Text.Add("The canine morph’s face splits into an amused grin at the sight of you. <i>“Well, hello down there! How’d you wind up like that? If you were that hard up for money, you could have come and seen me - I’d have been happy to give you a loan... in exchange for some ‘compensation’.”</i> She grins.", parse);
-			Text.NL();
-			if(player.Slut() < 15) {
-				Text.Add("Your cheeks flush at her words, being quite aware of just how Miranda would have probably asked you to ‘compensate her’.", parse);
-			}
-			else {
-				Text.Add("You can’t smile with a mouthful of cock, so you just give her a sheepish shrug in response.", parse);
-			}
-			Text.NL();
-			Text.Add("<i>“Don’t think money is the problem. Maybe [pheshe] just likes the taste of fat stallion cock. Not like things are expensive here.”</i>", parse);
-			Text.NL();
-			Text.Add("<i>“Yeah, I know, it’s one of your good points,”</i> she quips back, smiling playfully to lessen any sting in her words.", parse);
-			Text.NL();
-			Text.Add("<i>“Calling me cheap now, are you?”</i> he asks in mock indignation.", parse);
-			Text.NL();
-			Text.Add("<i>“Of course not! You’re very fair priced for the drinks you sell,”</i> Miranda replies.", parse);
-			Text.NL();
-			Text.Add("<i>“Thought so, and speaking of drinks, here’s yours.”</i> He sets the mugful of ale down in front of Miranda.", parse);
-			Text.NL();
-			Text.Add("<i>“Thank you very much,”</i> she cheerfully replies, snatching it up before the liquor even has time to settle.", parse);
-			Text.NL();
-			Text.Add("<i>“Now if you’ll excuse me, I have another ‘drink’ to serve to a very thirsty patron, hehe.”</i> He bucks slightly into your lips.", parse);
-			Text.NL();
-			Text.Add("<i>“Don’t wear [phimher] out <b>too</b> badly, Barnaby. I was kind of hoping [pheshe] might want to hang out with me after [pheshe]’s done,”</i> the doberherm chuckles, before her footsteps slowly pad away in the direction of her favorite seat.", parse);
-			Text.NL();
-			Text.Add("You tuck yourself back into the shadows under the counter. Well, there are certainly worse people you could have been seen by than Miranda, right?", parse);
-		}
-	}, 1.0, function() { return miranda.IsAtLocation() && miranda.flags["Met"] >= Miranda.Met.TavernAftermath; });
-	scenes.AddEnc(function() {
-		Text.Add("Before you can really start to get going on your second round, something changes in Barnaby’s body language. He seems... excited, maybe? Or perhaps amused would be better?", parse);
-		Text.NL();
-		Text.Add("Your curiosity is piqued when you make out the sounds of footsteps coming closer to the bar. Obviously, he’s got a customer, but still, why is he acting like this? When you sneak a peek up at him and he smirks back down, your concern only grows.", parse);
-		Text.NL();
-		Text.Add("<i>“Hey there, back for another drink?”</i> he asks teasingly.", parse);
-		Text.NL();
-		Text.Add("<i>“Yeah, I’ll have another,”</i> replies a familiar feminine voice.", parse);
-		Text.NL();
-		Text.Add("<i>“’Nother mug of milk coming up!”</i> he declares before looking down at you. <i>“Pass me the jug on your right.”</i> He grins.", parse);
-		Text.NL();
-		Text.Add("Asshole! He’s not even trying to hide your presence. But caught between the metaphorical rock and a hard place, you grab for the jug of milk he indicates and pass it on to him. Strange order for a bar like this... wait; you <b>know</b> who’s up there now.", parse);
-		Text.NL();
-		Text.Add("<i>“Huh? Barnaby, you got someone down there?”</i> Zina asks.", parse);
-		Text.NL();
-		Text.Add("<i>“Yeah, you’re not the only one who enjoys some man-milk once in awhile.”</i> Barnaby chuckles.", parse);
-		Text.NL();
-		Text.Add("Obviously intrigued by his words, it’s no surprise that the upside-down face of Zina pokes into view as the hyena leans over the counter to look at you.", parse);
-		Text.NL();
-		Text.Add("<i>“Oh, hey there, [playername]!</i>", parse);
-		Text.NL();
-		parse["mouth"] = player.HasMuzzle() ? "muzzle" : "mouth";
-		Text.Add("With your [mouth] rather pre-occupied, the best you can do is give her a friendly wave in reply.", parse);
-		Text.NL();
-		Text.Add("<i>“Thought you’d get a drink straight from the tap, huh?”</i> She grins knowingly.", parse);
-		Text.NL();
-		if(player.Slut() < 15) {
-			Text.Add("You flush, unable to meet her eyes, even though you know she isn’t trying to taunt you.", parse);
-		}
-		else {
-			Text.Add("It’s a little tricky with your [mouth] so full, but you manage to nod in recognition; much to Barnaby’s benefit, seeing as it helps you bob along his shaft.", parse);
-		}
-		Text.NL();
-		Text.Add("<i>“Ah, no need to strain your lips even more to reply. I know the feeling, it <b>is</b> an acquired taste, ain’t it?”</i> She grins.", parse);
-		Text.NL();
-		Text.Add("She can certainly say that again.", parse);
-		Text.NL();
-		Text.Add("<i>“High five!”</i> She extends her hand towards you.", parse);
-		Text.NL();
-		Text.Add("Unable to resist chuckling at her light-heartedness, you humor her by reaching up and slapping her palm with your own.", parse);
-		Text.NL();
-		Text.Add("<i>“Okay, cool. I’ll let you get back to your drink.”</i> She disappears back on the other side of the counter.", parse);
-		Text.NL();
-		Text.Add("<i>“If you want, you can get down there after [pheshe]’s done. I got plenty of drinks to go around,”</i> Barnaby interjects.", parse);
-		Text.NL();
-		Text.Add("<i>“Maybe, if I feel like it,”</i> Zina replies.", parse);
-		Text.NL();
-		Text.Add("<i>“I hope you do, you’re really good at this. Be seeing you.”</i> Barnaby waves as Zina steps away to return to her seat.", parse);
-		Text.NL();
-		Text.Add("...That may well be the nicest thing you’ve ever heard him say about anybody. As you settle back down in your little niche, you thank your luck that you were found by Zina. Nobody else would be so blasé about something like this.", parse);
-	}, 1.0, function() { return zina.IsAtLocation() && zina.Met(); });
-	/* TODO more scenes
-	scenes.AddEnc(function() {
-		Text.Add("", parse);
-		Text.NL();
-		Text.Add("", parse);
-	}, 1.0, function() { return true; });
-	*/
-	scenes.Get();
-	
-	Text.NL();
-	Text.Add("With that little... distraction... out of the way, you pick up where you left off. With the stallion’s cock still pouring pre-cum down your throat like a leaky faucet, you bob your head back and forth, working his shaft as best you can with your mouth alone.", parse);
-	Text.NL();
-	Text.Add("You don’t dare to touch his balls. Not just because he hasn’t said you can, but because you don’t want to risk him blowing up in your face, given just how pent-up he seems to be.", parse);
-	Text.NL();
-	Text.Add("Even with only your mouth and tongue, you seem to be doing a decent job. Barnaby keeps the juice coming, lubing your throat up with a nice, sloppy layer of pre-cum. A good thing, too, when he suddenly bucks against you, thrusting his cock roughly down your gullet.", parse);
-	Text.NL();
-	Text.Add("You grunt in surprise, caught off-guard, and glance upwards. The stallion-morph has abandoned his usual glass and is now holding onto the counter for support, bucking his hips as he changes this from a mere blowjob into a full-on facefucking.", parse);
-	Text.NL();
-	Text.Add("<i>“Yeah, keep going like this and you’re going to get another shot soon,”</i> Barnaby says, beginning to pant.", parse);
-	Text.NL();
-	Text.Add("With little choice otherwise, you do your best to keep up with his pounding cock, noisily sucking and slobbering as you lap, gulp and bob the throbbing, drooling organ in your mouth.", parse);
-	Text.NL();
-	Text.Add("<i>“Don’t forget to swallow it all!”</i> he says, bucking a bit more enthusiastically.", parse);
-	Text.NL();
-	Text.Add("Oh, like you really have a choice...", parse);
-	Text.NL();
-	if(player.sex.gBlow < 5) {
-		Text.Add("You could say that this is a little easier than the last time - at least this time, you’re expecting the enormous gush of cum that comes rocketing down your gullet. You close your eyes, hold your breath and try not to choke as his aching balls pour spurt after slippery spurt of seed into your mouth.", parse);
-		Text.NL();
-		Text.Add("Although you hardly get away unscathed, especially when your need to breathe forces you to spit out the stallion’s cock, getting a final complimentary blast right in the face, most of Barnaby’s climax miraculously manages to make its way into your stomach.", parse);
-		Text.NL();
-		Text.Add("Amazingly, this load was at <b>least</b> as big as the one before. In fact, a tiny, treacherous voice in the back of your mind whimpers that it might have been just a little bit <b>bigger</b>.", parse);
-	}
-	if(player.sex.gBlow < 25) {
-		Text.Add("Practice may make perfect, but it can’t work miracles, and certainly not instantaneous ones. In the face of a second tidal wave of cum, this one easily as big as the first, your skills just aren’t enough to keep you clean. As fast as you guzzle it, a stream of backwash escapes the seal of your lips, leading to trickles running down your cheeks and chin, smearing over your face.", parse);
-	}
-	else {
-		Text.Add("You're a skilled cum-guzzler, but Barnaby's over-stuffed balls are just a little beyond your league. You just can't seem to gulp, slurp and swallow fast enough to prevent a few trace trickles of semen seeping out of your lips and painting the lower half of your face in their meandering path.", parse);
-	}
-	Text.NL();
-	Text.Add("With Barnaby finally having popped his cork for the second time, you reach for the rag and wipe your face down again, adding more cum to the smears from the first time.", parse);
-	Text.NL();
-	Text.Add("However, when you take it away, you can only note that his cock is <b>still</b> erect and dripping...", parse);
-	Text.NL();
-	Text.Add("<i>“Ah yeah… That was nice, now why don’t you get ready for another load. My balls feel a little lighter, but you still got a long way to go, [boygirl].”</i>", parse);
-	Text.NL();
-	if(player.Slut() < 30) {
-		Text.Add("Oh, no...", parse);
-	}
-	else {
-		Text.Add("This is sounding like a challenge... Yum.", parse);
-	}
-	Text.NL();
-	Text.Add("<i>“Come on, no beating around the bush, you know you wanna,”</i> he says, rubbing his shaft against your cheek as it begins leaking pre once more.", parse);
-	Text.NL();
-	Text.Add("Without any further choice in the matter, you obediently open your mouth and let him guide it right back on inside.", parse);
 	Text.Flush();
-	player.AddLustFraction(0.3);
 	
 	Gui.NextPrompt(function() {
 		Text.Clear();
-		Text.Add("<i>“Ah. Yeah. Feels good to finally have some slack in my balls, hehe.”</i>", parse);
+		Text.Add("Hardly a standard request during a blowjob, but what the hell. You grab the indicated beverage and pass it to Barnaby, the stallion placing it down atop the counter with the dull clunk of glass on wood.", parse);
 		Text.NL();
-		Text.Add("You finish mopping the last of the cum from your face as best you can; the rag that Barnaby provided at the start of this little encounter is now sopping wet, soaked through from the sheer amount of times you've had to use it.", parse);
+		Text.Add("<i>“Thanks, now get back to work.”</i>", parse);
 		Text.NL();
-		Text.Add("You hold it between forefinger and thumb, and then let it drop to the floor with a wet splat before turning to face Barnaby. ", parse);
-		if(player.Slut() < 50) {
-			Text.Add("Dryly, you tell him that you're happy that you gave him some much needed release. Then you gingerly rub your belly, listening to it gurgle as it struggles to digest your titanic semen repast.", parse);
+		Text.Add("Ungrateful... you force yourself to ignore what he said and just do as you are told. Still holding the base of Barnaby’s cock, you shuffle a little closer and extend your [tongue], daintily licking at the flow of sexual fluids seeping from his glans.", parse);
+		Text.NL();
+		if(player.sex.gBlow < 5) {
+			Text.Add("The thick, salty, musky flavor is almost overpowering you, drawing an instinctive shudder. For a moment, you consider backing out, but you’ve come too far. Unable to properly stomach the taste of Barnaby’s juices, you simply dab at him with your tongue, meager flicks of your [tongueTip] to help you acclimatize yourself before you open your mouth and gingerly envelop his dick.", parse);
+		}
+		else if(player.sex.gBlow < 25) {
+			Text.Add("Mmm... a little stronger than you’re used to, but not bad. Coaxed on by Barnaby’s intriguing flavor, you happily run your tongue along his shaft. You try to be playful when you can, doing your best to tease the more sensitive ridges and creases, but in the end you settle mostly for sheer enthusiasm. You greedily polish him to a gleaming sheen before hungrily opening your mouth and gulping down his cock.", parse);
 		}
 		else {
-			Text.Add("Cheerfully, you assure him that it was your pleasure, demurely covering your mouth as your gurgling stomach churns up a tiny burp.", parse);
+			Text.Add("Ah, delicious. Thick and rich and strong, just perfect. Your tongue darts like a lecherous serpent, deftly flicking all of the most sensitive spots you have discovered through your copious practice. If Barnaby wasn’t already rock-hard before, he will be now, the tasty streamer of man-goo growing ever thicker in response to your ministrations. You could probably get him to blow with just your tongue alone... but you want a real taste of him, and so you deftly gobble up his dick, eager to get to the real fun.", parse);
 		}
 		Text.NL();
-		Text.Add("<i>“Yeah, sure. Mind handing me my pants?”</i> He points at the discarded garment.", parse);
+
+		var cock = new Cock(Race.Horse);
+		cock.length.base = 30;
+		cock.thickness.base = 5;
+
+		Sex.Blowjob(player, null);
+		player.FuckOral(player.Mouth(), cock, 2);
+
+		Text.Add("With the stallion’s cock now firmly placed in your mouth, you start to bob your head up and down along its length. You slowly savor it at first, giving yourself a chance to get a feel for the sizable piece of meat in your mouth. While Barnaby probably only counts as average by the standards of his own kind, that’s still at least a foot of inch and a half-thick sausage you are attempting to inhale.", parse);
 		Text.NL();
-		Text.Add("You helpfully grab them and pass them over.", parse);
+		if(player.sex.gBlow < 5) {
+			Text.Add("You can’t help but choke when his fat, blunt glans hits the back of your throat. Untrained as you are, your gag reflex protests the attempt to invade your gullet directly with something so big, forcing you to take it slower. Without any other recourse, you settle for working with lips and cheeks as best you can, noisily slobbering over Barnaby’s cock as you suckle like an infant.", parse);
+			Text.NL();
+			Text.Add("A dull grunt from above suggests that Barnaby is less than impressed with your skills, but evidently you’re not doing so badly that he’s going to kick you off his dick.", parse);
+		}
+		else if(player.sex.gBlow < 25) {
+			Text.Add("Though your gag reflex protests a little at the invasion, it’s far too well-trained to be a major obstacle. With a little insistent pressure on your part, Barnaby’s cock slips down your gullet, letting you grip and squeeze him with each rippling flutter of your throat muscles. You need to concentrate on that, but still, it gives him plenty of friction to work again.", parse);
+			Text.NL();
+			Text.Add("Barnaby makes no sound of appreciation at your efforts, but nor does he make any sort of complaint, either, which is pretty telling of itself.", parse);
+		}
+		else {
+			Text.Add("A big horsie he may be, but that’s no problem for you. Your gullet opens in invitation, allowing him to slide straight in with such ease he actually stumbles a little, clearly not expecting you to just gulp him down in one go like that. Your [tongue] deftly flicks and twirls along the underside of his shaft, caressing delicious dick-meat even as your throat clenches and squeezes, working to tease that yummy man-milk out of his balls and into where it belongs.", parse);
+			Text.NL();
+			Text.Add("A quiet moan, quickly strangled off, escapes Barnaby’s lips, and you’d smirk triumphantly if you didn’t have better things to be doing with your mouth.", parse);
+		}
 		Text.NL();
-		Text.Add("<i>“Thanks.”</i> Barnaby unceremoniously puts it on, tucking his junk back inside nice and comfy before turning to look at you.", parse);
+		Text.Add("As you busily work your mouth, you inquisitively reach out and gently take hold of the stallion’s bloated balls. As you tenderly roll them between your fingers, you can literally feel them churning in your grasp, pulsing as the seed roils inside of them.", parse);
 		Text.NL();
-		func();
+		Text.Add("Before you can consider doing anything else with them, a hand roughly ", parse);
+		if(player.HasHorns()) {
+			Text.Add("grabs you by the [horns], tugging you firmly onto Barnaby’s cock.", parse);
+		}
+		else {
+			Text.Add("pushes against the back of your head, making it impossible for you to try and back off.", parse);
+		}
+		Text.NL();
+		Text.Add("<i>“Better drink up everything. I don’t want a mess behind my bar.”</i>", parse);
+		Text.NL();
+		Text.Add("What - already?! Anything you might have to say is muffled by the stallionhood so firmly jammed between your lips.", parse);
+		Text.NL();
+		Text.Add("<i>“Here’s your milk, [boygirl]!”</i> he says through gritted teeth.", parse);
+		Text.Flush();
+		
+		Gui.NextPrompt(function() {
+			Text.Clear();
+			if(player.sex.gBlow < 5) {
+				Text.Add("You don’t know how you manage it, but somehow you are able to drink up most of Barnaby’s load. And what a load it is; at one point, you started wondering if he would drown you in cum.", parse);
+				Text.NL();
+				Text.Add("Saying that the horse-morph was pent up would be the understatement of the century. Despite drinking up most of it, you’re still incapable of dealing with his volume. Seed escapes the corner of your mouth, and you’re forced to withdraw to catch your breath. The last of Barnaby’s cum winds up plastered on your face; a result of a complementary jet when you were forced to let go.", parse);
+			}
+			else if(player.sex.gBlow < 25) {
+				Text.Add("You consider yourself to be at least somewhat skilled when it comes to blowjobs. Still, the horse cums so much that you can’t hope to swallow up the veritable tidal wave of equine spunk he shoots down your throat.", parse);
+				Text.NL();
+				Text.Add("Even as you suck it down and swallow around his shaft as best as you can, some of it winds up inevitably escaping the seal of your mouth and running down your chin.", parse);
+			}
+			else {
+				Text.Add("You’re pretty darn skilled, but the horse-morph is so pent up that even you can’t hope to cope with his explosive climax.", parse);
+				Text.NL();
+				Text.Add("Seed blasts down your throat as you use every technique in your repertoire to chug it all down, but despite that some still manages to escape the seal of your mouth and run down your chin. Talk about being blue-balled; Barnaby was so pent up, you’re surprised his balls didn’t just explode with the pressure.", parse);
+			}
+			Text.NL();
+			Text.Add("As you catch your breath beneath the counter, a large rag is unceremoniously tossed into your face. Quite literally at that. The thick, well-used cloth drapes itself over your head, forcing you to pull it off so that you can see again.", parse);
+			Text.NL();
+			Text.Add("<i>“Clean up any mess you left down there and prepare for next round.”</i>", parse);
+			Text.NL();
+			Text.Add("You wipe your face clean of any stray ropes of horse-jism, taking a moment to recompose yourself before his words sink in. Wait, next round?", parse);
+			Text.NL();
+			Text.Add("<i>“Yeah, you didn’t think I’d be satisfied with just one shot, right? Look at these babies.”</i> He gropes his balls, showing you just how full they still are.", parse);
+			Text.NL();
+			Text.Add("You can’t avoid noticing that despite just cumming enough to fill one of his own ale mugs, at the least, he’s still rock-hard, and even starts to dribble a thick mix of pre and cum again just from touching himself.", parse);
+			Text.NL();
+			Text.Add("<i>“Heh, looks like I’m already leaking again. You know the drill - wrap those pretty lips around my man-meat and swallow it all. Like I said before, don’t want a mess behind my bar.”</i>", parse);
+			Text.NL();
+			if(player.sexlevel < 3) {
+				Text.Add("...Just what kind of trouble did you get yourself into this time?", parse);
+				Text.NL();
+				Text.Add("Even as you consider that in mild shock, the horse-morph’s stallionhood points at you like an accusing finger, and you’re jolted out of your musing when you feel that flat tip of his smear pre across your cheek.", parse);
+				Text.NL();
+				Text.Add("<i>“Well? You gonna open up or what?”</i>", parse);
+				Text.NL();
+				Text.Add("Barnaby’s musk, the scent of sex and thick throbbing shaft of his fills your head with a cloud of lust, and you find yourself opening up despite any reservations you might have. The horse-morph <i>needs</i> his release, and since you offered, might as well as do the best job that you can.", parse);
+			}
+			else if(player.sexlevel < 5) {
+				Text.Add("This is kind of ridiculous; how does he put up with being this backed up? Most folk would’ve at least masturbated by now.", parse);
+				Text.NL();
+				Text.Add("<i>“My bar is open around the clock.”</i>", parse);
+				Text.NL();
+				Text.Add("...So he doesn’t even sleep?", parse);
+				Text.NL();
+				Text.Add("<i>“Nope.”</i>", parse);
+				Text.NL();
+				Text.Add("Well, no wonder he’s grumpy all the time, but how does he manage that?", parse);
+				Text.NL();
+				Text.Add("<i>“Secret of the trade. Now, are you going to use those lips for what they were made for, or keep asking these pointless questions?”</i>", parse);
+				Text.NL();
+				Text.Add("Alright, alright, no need to get pushy! You protest, leaning forward to tend to his flat tip.", parse);
+			}
+			else {
+				Text.Add("Wow, if he’s already dripping even after having cum not moments ago, he must be <i>really</i> pent up!", parse);
+				Text.NL();
+				Text.Add("<i>“Yes, I am. And do you know what I <b>really</b> would like right now?”</i>", parse);
+				Text.NL();
+				Text.Add("Okay, you’re getting to it, just need to catch your breath a little.", parse);
+				Text.NL();
+				Text.Add("Barnaby leans forward, pressing the flat tip of his cock to your nose and smearing some of his pre across your lips. <i>“You’ll have time to breathe after I blow my next load - now get to it!”</i>", parse);
+				Text.NL();
+				Text.Add("Alright dammit! Gee, no need to be so douchey about it!", parse);
+				Text.NL();
+				Text.Add("You open your mouth and begin tending to his blunt tip.", parse);
+			}
+			Text.NL();
+
+			Sex.Blowjob(player, null);
+			player.FuckOral(player.Mouth(), cock, 1);
+			
+			Text.Flush();
+
+			var scenes = new EncounterTable();
+
+			scenes.AddEnc(function() {
+				Text.Add("<i>“Hey, bartender! Can I get some ale over here?”</i>", parse);
+				Text.NL();
+				Text.Add("The voice is unfamiliar to you: masculine, from the timbre of it, but not someone you can place. Probably just a random customer.", parse);
+				Text.NL();
+				Text.Add("<i>“Can I get some coin over here?”</i> You hear Barnaby reply.", parse);
+				Text.NL();
+				Text.Add("A clatter of metallic ringings echoes above you as coins bounce onto the wooden counter. Without further adieu, the stallion reaches down and grabs", parse);
+				if(player.HasHorns()) {
+					parse["oneof"] = player.HasHorns().count > 1 ? " one of" : "";
+					Text.Add("[oneof] your [horns], using it as a convenient lever to bodily drag you across the floor as he walks away from the counter.", parse);
+				}
+				else {
+					Text.Add(" the back of your head, digging his fingers roughly into your scalp in order to force you to stay there as he hauls you across the floor with him.", parse);
+				}
+				Text.NL();
+				Text.Add("Trapped like this, you scrabble along on the floor, half-crawling and half-dragging yourself to keep up with Barnaby as the barkeep taps one of his kegs. The thick scent of ale fills your nose, cutting through the musk of sex as he expertly fills his mug to a nice, frothy head and then turns back to the counter.", parse);
+				Text.NL();
+				Text.Add("You quickly scramble back under the counter, but you’re not sure that you escaped notice... In fact, you’re pretty sure that the customer saw you.", parse);
+				Text.NL();
+				Text.Add("<i>“Hey, is someone down there?”</i> the customer asks.", parse);
+				Text.NL();
+				Text.Add("<i>“None of your darn business,”</i> Barnaby replies.", parse);
+				Text.NL();
+				Text.Add("<i>“Ha! I knew it! Even you need to have some fun sometimes, eh?”</i>", parse);
+				Text.NL();
+				Text.Add("You wince at the loud *clonk* of wood on wood as Barnaby gruffly slams the patron’s drink down in front of him.", parse);
+				Text.NL();
+				Text.Add("<i>“Take the mug and go get drunk,”</i> the horse-morph says dismissively.", parse);
+				Text.NL();
+				Text.Add("<i>“Ha! Will take me more than a few! Be back for more later,”</i> the unknown patron replies, stepping away.", parse);
+				Text.NL();
+				if(player.Slut() < 15) {
+					Text.Add("You press yourself as deeply into the shadows of the counter as you physically can, your whole body feeling afire with embarrassment. Maybe you should have thought twice about doing this...", parse);
+				}
+				else if(player.Slut() < 30) {
+					Text.Add("You swallow nervously, shame coiling like a snake in your belly... but at the same time, you can’t quite deny the flare of arousal that tingles in your loins at your close call.", parse);
+				}
+				else {
+					Text.Add("You would smirk proudly if your mouth wasn’t so busy. You wriggle a little closer to Barnaby, wondering if anyone else might catch a glimpse of you; the idea sounds so... <i>thrilling</i>.", parse);
+				}
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("<i>“Barkeep? I’d like some spirits.”</i>", parse);
+				Text.NL();
+				Text.Add("You listen closely, but other than the faint metallic ring of coins clinking onto the counter, there’s no further word from this new customer. You don’t think that they’re anyone that you know, though.", parse);
+				Text.NL();
+				Text.Add("Barnaby leans over the counter and reaches down, unintentionally, or so you think, driving his cock down your throat rather forcefully.", parse);
+				Text.NL();
+				Text.Add("You can’t help but grunt at this rough treatment, even despite your impromptu gag.", parse);
+				Text.NL();
+				Text.Add("<i>“Hmm? What was that? Someone down there behind the bar?”</i> the female patron asks.", parse);
+				Text.NL();
+				Text.Add("<i>“Yeah, care to join them?”</i> Barnaby asks; you don’t even need to see his face to know he’s sporting a lecherous grin.", parse);
+				Text.NL();
+				Text.Add("<i>“I’ll pass, just make sure you don’t get anything on my spirits,”</i> she replies.", parse);
+				Text.NL();
+				Text.Add("<i>“Don’t worry about it; if they spill any, I’ll cockslap them until they pass out.”</i> Barnaby chuckles.", parse);
+				Text.NL();
+				Text.Add("<i>“Yes, yes, my spirits?”</i>", parse);
+				Text.NL();
+				Text.Add("Barnaby’s hand promptly thrusts it into view, trying to grope around you in order to reach one of the bottles stashed beneath the counter. Trying to be helpful, you snatch a green one that he seems to have been feeling for and press it into his palm, watching as he lifts it back above the counter.", parse);
+				Text.NL();
+				Text.Add("The horse-morph looks at the bottle, then shakes his head. <i>“Not this one, the brown one.”</i> He points in the general direction of the bottle.", parse);
+				Text.NL();
+				Text.Add("This time, you pass him the right bottle. From above, you can hear the barkeeper uncorking it and gently tipping its contents into a mug. The faint sound of glass on wood precedes the sounds of steps fading into the distance, the customer clearly satisfied with her purchase.", parse);
+				Text.NL();
+				Text.Add("Barnaby pulls away so he can look down at you, with your lips still wrapped around his flat tip. <i>“Well, aren’t you lucky? Guess you get to keep me all for yourself.”</i> He grins.", parse);
+				Text.NL();
+				Text.Add("You roll your eyes drolly at the stallion’s words. Yes, you’re <b>such</b> a lucky [guygal], now aren’t you?", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("The distinctive sound of heavy boots, the sort favored by guards and adventurers, reaches your ears as someone plods over to the counter. A chorus of clinking echoes down to you as this latest customer carelessly spills coins down for a purchase.", parse);
+				Text.NL();
+				Text.Add("<i>“Ale, please.”</i>", parse);
+				Text.NL();
+				Text.Add("The voice has that tightness to it suggesting tiredness, but still sounds quite feminine. Sounds like she’s had a hard day, whoever she is... actually, now that you think about it, she sounds kind of familiar...", parse);
+				Text.NL();
+				Text.Add("<i>“Hey there, long day?”</i> Barnaby asks.", parse);
+				Text.NL();
+				Text.Add("<i>“Yeah, as usual,”</i> she replies.", parse);
+				Text.NL();
+				Text.Add("<i>“Well, just sit tight and I’ll have your drink in a moment.”</i>", parse);
+				Text.NL();
+				Text.Add("Barnaby’s so eager to serve this customer that he doesn’t even try to hold your head to keep you from slipping off before he starts walking over to the kegs. You have to scramble over in a mad dashing crawl to keep his cock fixed inside your mouth where he wants it.", parse);
+				Text.NL();
+				Text.Add("<i>“Hey, why you shuffling like that?”</i> the female patron asks.", parse);
+				Text.NL();
+				Text.Add("<i>“Let’s just say that you caught me in the middle of something.”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“Ha! Having some fun back there, are you? Thought you didn’t goof around while on the job?”</i> She asks teasingly.", parse);
+				Text.NL();
+				Text.Add("<i>“Oh well, like you are one to talk...”</i> The horse-morph replies.", parse);
+				Text.NL();
+				Text.Add("<i>“True enough. Is it anyone I know?”</i>", parse);
+				Text.NL();
+				Text.Add("That voice, that way of talking - that enthusiasm about sex. There’s only one person it could possibly be on the business side of the counter there: none other than Miranda the literal watchdog.", parse);
+				Text.NL();
+				Text.Add("As if you needed the confirmation, the counter creaks as the anthro doberman half-climbs onto it, eagerly leaning over so that she can see for herself. Barnaby, of course, makes no effort to hide you, leaving you openly exposed so that she can see exactly who’s down there sucking his cock. You can only stare back up at her with wide eyes as her face comes into view.", parse);
+				Text.NL();
+				if(miranda.Nasty()) {
+					Text.Add("She sneers at you, her usual harsh glare fixed in place. <i>“Well, well; I should have known you’d be down there, bitch. What’s wrong? Didn’t have any coin to pay him back? Or are you just such a cum-junkie that you had to bother a hard-working fellow like Barnaby here for your next fix?”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“Or maybe [pheshe] just wanted a taste of fat stallion prick for a change,”</i> Barnaby adds.", parse);
+					Text.NL();
+					Text.Add("<i>“Wouldn’t surprise me in the slightest. Such a greedy little bitch [pheshe] is - and [pheshe] likes to act so high and mighty, too. Maybe I should bring some of my buddies from the Watch around, see if they’d like to try this little slut for themselves.”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“That would be an interesting show, and it would bring me more business, so I don’t have a problem with that idea as long as you can keep it contained in one of the back rooms,”</i> Barnaby replies.", parse);
+					Text.NL();
+					if(player.Slut() < 50) {
+						Text.Add("You let out a muffled squawk of protest - you didn’t sign up for any gangbanging, certainly not one under Miranda’s watch!", parse);
+					}
+					else {
+						Text.Add("You can’t hold back an intrigued noise behind the gag of stallion cock. Whatever you may think of Miranda, that little scenario sounds... exciting.", parse);
+					}
+					Text.NL();
+					Text.Add("<i>“I see I’ll have to think about it,”</i> Miranda smirks. <i>“But not until you’re done with [phimher], of course. First come, first served, right?”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“Fair is fair. Now how about I get you that drink?”</i> he asks.", parse);
+					Text.NL();
+					Text.Add("<i>“Sounds good to me, I’m parched!”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“Here you go.”</i> The horse-morph sets the mug down before Miranda.", parse);
+					Text.NL();
+					Text.Add("You can hear the doberherm snatch it up and guzzle at least a third of it on one go right there at the counter. <i>“Ah, good stuff! I’m going to savor the rest of this - after all, I’ll be needing my strength soon...”</i> She sneers back at you over the counter, and then heads back to her table.", parse);
+					Text.NL();
+					Text.Add("Why did it have to be Miranda? You press yourself more firmly into the counter’s shadow in hope of avoiding another such incident.", parse);
+				}
+				else {
+					Text.Add("The canine morph’s face splits into an amused grin at the sight of you. <i>“Well, hello down there! How’d you wind up like that? If you were that hard up for money, you could have come and seen me - I’d have been happy to give you a loan... in exchange for some ‘compensation’.”</i> She grins.", parse);
+					Text.NL();
+					if(player.Slut() < 15) {
+						Text.Add("Your cheeks flush at her words, being quite aware of just how Miranda would have probably asked you to ‘compensate her’.", parse);
+					}
+					else {
+						Text.Add("You can’t smile with a mouthful of cock, so you just give her a sheepish shrug in response.", parse);
+					}
+					Text.NL();
+					Text.Add("<i>“Don’t think money is the problem. Maybe [pheshe] just likes the taste of fat stallion cock. Not like things are expensive here.”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“Yeah, I know, it’s one of your good points,”</i> she quips back, smiling playfully to lessen any sting in her words.", parse);
+					Text.NL();
+					Text.Add("<i>“Calling me cheap now, are you?”</i> he asks in mock indignation.", parse);
+					Text.NL();
+					Text.Add("<i>“Of course not! You’re very fair priced for the drinks you sell,”</i> Miranda replies.", parse);
+					Text.NL();
+					Text.Add("<i>“Thought so, and speaking of drinks, here’s yours.”</i> He sets the mugful of ale down in front of Miranda.", parse);
+					Text.NL();
+					Text.Add("<i>“Thank you very much,”</i> she cheerfully replies, snatching it up before the liquor even has time to settle.", parse);
+					Text.NL();
+					Text.Add("<i>“Now if you’ll excuse me, I have another ‘drink’ to serve to a very thirsty patron, hehe.”</i> He bucks slightly into your lips.", parse);
+					Text.NL();
+					Text.Add("<i>“Don’t wear [phimher] out <b>too</b> badly, Barnaby. I was kind of hoping [pheshe] might want to hang out with me after [pheshe]’s done,”</i> the doberherm chuckles, before her footsteps slowly pad away in the direction of her favorite seat.", parse);
+					Text.NL();
+					Text.Add("You tuck yourself back into the shadows under the counter. Well, there are certainly worse people you could have been seen by than Miranda, right?", parse);
+				}
+			}, 1.0, function() { return miranda.IsAtLocation() && miranda.flags["Met"] >= Miranda.Met.TavernAftermath; });
+			scenes.AddEnc(function() {
+				Text.Add("Before you can really start to get going on your second round, something changes in Barnaby’s body language. He seems... excited, maybe? Or perhaps amused would be better?", parse);
+				Text.NL();
+				Text.Add("Your curiosity is piqued when you make out the sounds of footsteps coming closer to the bar. Obviously, he’s got a customer, but still, why is he acting like this? When you sneak a peek up at him and he smirks back down, your concern only grows.", parse);
+				Text.NL();
+				Text.Add("<i>“Hey there, back for another drink?”</i> he asks teasingly.", parse);
+				Text.NL();
+				Text.Add("<i>“Yeah, I’ll have another,”</i> replies a familiar feminine voice.", parse);
+				Text.NL();
+				Text.Add("<i>“’Nother mug of milk coming up!”</i> he declares before looking down at you. <i>“Pass me the jug on your right.”</i> He grins.", parse);
+				Text.NL();
+				Text.Add("Asshole! He’s not even trying to hide your presence. But caught between the metaphorical rock and a hard place, you grab for the jug of milk he indicates and pass it on to him. Strange order for a bar like this... wait; you <b>know</b> who’s up there now.", parse);
+				Text.NL();
+				Text.Add("<i>“Huh? Barnaby, you got someone down there?”</i> Zina asks.", parse);
+				Text.NL();
+				Text.Add("<i>“Yeah, you’re not the only one who enjoys some man-milk once in awhile.”</i> Barnaby chuckles.", parse);
+				Text.NL();
+				Text.Add("Obviously intrigued by his words, it’s no surprise that the upside-down face of Zina pokes into view as the hyena leans over the counter to look at you.", parse);
+				Text.NL();
+				Text.Add("<i>“Oh, hey there, [playername]!</i>", parse);
+				Text.NL();
+				parse["mouth"] = player.HasMuzzle() ? "muzzle" : "mouth";
+				Text.Add("With your [mouth] rather pre-occupied, the best you can do is give her a friendly wave in reply.", parse);
+				Text.NL();
+				Text.Add("<i>“Thought you’d get a drink straight from the tap, huh?”</i> She grins knowingly.", parse);
+				Text.NL();
+				if(player.Slut() < 15) {
+					Text.Add("You flush, unable to meet her eyes, even though you know she isn’t trying to taunt you.", parse);
+				}
+				else {
+					Text.Add("It’s a little tricky with your [mouth] so full, but you manage to nod in recognition; much to Barnaby’s benefit, seeing as it helps you bob along his shaft.", parse);
+				}
+				Text.NL();
+				Text.Add("<i>“Ah, no need to strain your lips even more to reply. I know the feeling, it <b>is</b> an acquired taste, ain’t it?”</i> She grins.", parse);
+				Text.NL();
+				Text.Add("She can certainly say that again.", parse);
+				Text.NL();
+				Text.Add("<i>“High five!”</i> She extends her hand towards you.", parse);
+				Text.NL();
+				Text.Add("Unable to resist chuckling at her light-heartedness, you humor her by reaching up and slapping her palm with your own.", parse);
+				Text.NL();
+				Text.Add("<i>“Okay, cool. I’ll let you get back to your drink.”</i> She disappears back on the other side of the counter.", parse);
+				Text.NL();
+				Text.Add("<i>“If you want, you can get down there after [pheshe]’s done. I got plenty of drinks to go around,”</i> Barnaby interjects.", parse);
+				Text.NL();
+				Text.Add("<i>“Maybe, if I feel like it,”</i> Zina replies.", parse);
+				Text.NL();
+				Text.Add("<i>“I hope you do, you’re really good at this. Be seeing you.”</i> Barnaby waves as Zina steps away to return to her seat.", parse);
+				Text.NL();
+				Text.Add("...That may well be the nicest thing you’ve ever heard him say about anybody. As you settle back down in your little niche, you thank your luck that you were found by Zina. Nobody else would be so blasé about something like this.", parse);
+			}, 1.0, function() { return zina.IsAtLocation() && zina.Met(); });
+			/* TODO more scenes
+			scenes.AddEnc(function() {
+				Text.Add("", parse);
+				Text.NL();
+				Text.Add("", parse);
+			}, 1.0, function() { return true; });
+			*/
+			
+			Gui.NextPrompt(function() {
+				Text.Clear();
+				scenes.Get();
+
+				Text.NL();
+				Text.Add("With that little... distraction... out of the way, you pick up where you left off. With the stallion’s cock still pouring pre-cum down your throat like a leaky faucet, you bob your head back and forth, working his shaft as best you can with your mouth alone.", parse);
+				Text.NL();
+				Text.Add("You don’t dare to touch his balls. Not just because he hasn’t said you can, but because you don’t want to risk him blowing up in your face, given just how pent-up he seems to be.", parse);
+				Text.NL();
+				Text.Add("Even with only your mouth and tongue, you seem to be doing a decent job. Barnaby keeps the juice coming, lubing your throat up with a nice, sloppy layer of pre-cum. A good thing, too, when he suddenly bucks against you, thrusting his cock roughly down your gullet.", parse);
+				Text.NL();
+				Text.Add("You grunt in surprise, caught off-guard, and glance upwards. The stallion-morph has abandoned his usual glass and is now holding onto the counter for support, bucking his hips as he changes this from a mere blowjob into a full-on facefucking.", parse);
+				Text.NL();
+				Text.Add("<i>“Yeah, keep going like this and you’re going to get another shot soon,”</i> Barnaby says, beginning to pant.", parse);
+				Text.NL();
+				Text.Add("With little choice otherwise, you do your best to keep up with his pounding cock, noisily sucking and slobbering as you lap, gulp and bob the throbbing, drooling organ in your mouth.", parse);
+				Text.NL();
+				Text.Add("<i>“Don’t forget to swallow it all!”</i> he says, bucking a bit more enthusiastically.", parse);
+				Text.NL();
+				Text.Add("Oh, like you really have a choice...", parse);
+				Text.NL();
+				if(player.sex.gBlow < 5) {
+					Text.Add("You could say that this is a little easier than the last time - at least this time, you’re expecting the enormous gush of cum that comes rocketing down your gullet. You close your eyes, hold your breath and try not to choke as his aching balls pour spurt after slippery spurt of seed into your mouth.", parse);
+					Text.NL();
+					Text.Add("Although you hardly get away unscathed, especially when your need to breathe forces you to spit out the stallion’s cock, getting a final complimentary blast right in the face, most of Barnaby’s climax miraculously manages to make its way into your stomach.", parse);
+					Text.NL();
+					Text.Add("Amazingly, this load was at <b>least</b> as big as the one before. In fact, a tiny, treacherous voice in the back of your mind whimpers that it might have been just a little bit <b>bigger</b>.", parse);
+				}
+				if(player.sex.gBlow < 25) {
+					Text.Add("Practice may make perfect, but it can’t work miracles, and certainly not instantaneous ones. In the face of a second tidal wave of cum, this one easily as big as the first, your skills just aren’t enough to keep you clean. As fast as you guzzle it, a stream of backwash escapes the seal of your lips, leading to trickles running down your cheeks and chin, smearing over your face.", parse);
+				}
+				else {
+					Text.Add("You're a skilled cum-guzzler, but Barnaby's over-stuffed balls are just a little beyond your league. You just can't seem to gulp, slurp and swallow fast enough to prevent a few trace trickles of semen seeping out of your lips and painting the lower half of your face in their meandering path.", parse);
+				}
+				Text.NL();
+				Text.Add("With Barnaby finally having popped his cork for the second time, you reach for the rag and wipe your face down again, adding more cum to the smears from the first time.", parse);
+				Text.NL();
+				Text.Add("However, when you take it away, you can only note that his cock is <b>still</b> erect and dripping...", parse);
+				Text.NL();
+				Text.Add("<i>“Ah yeah… That was nice, now why don’t you get ready for another load. My balls feel a little lighter, but you still got a long way to go, [boygirl].”</i>", parse);
+				Text.NL();
+				if(player.Slut() < 30) {
+					Text.Add("Oh, no...", parse);
+				}
+				else {
+					Text.Add("This is sounding like a challenge... Yum.", parse);
+				}
+				Text.NL();
+				Text.Add("<i>“Come on, no beating around the bush, you know you wanna,”</i> he says, rubbing his shaft against your cheek as it begins leaking pre once more.", parse);
+				Text.NL();
+				Text.Add("Without any further choice in the matter, you obediently open your mouth and let him guide it right back on inside.", parse);
+				Text.Flush();
+				player.AddLustFraction(0.3);
+
+				Gui.NextPrompt(function() {
+					Text.Clear();
+					Text.Add("<i>“Ah. Yeah. Feels good to finally have some slack in my balls, hehe.”</i>", parse);
+					Text.NL();
+					Text.Add("You finish mopping the last of the cum from your face as best you can; the rag that Barnaby provided at the start of this little encounter is now sopping wet, soaked through from the sheer amount of times you've had to use it.", parse);
+					Text.NL();
+					Text.Add("You hold it between forefinger and thumb, and then let it drop to the floor with a wet splat before turning to face Barnaby. ", parse);
+					if(player.Slut() < 50) {
+						Text.Add("Dryly, you tell him that you're happy that you gave him some much needed release. Then you gingerly rub your belly, listening to it gurgle as it struggles to digest your titanic semen repast.", parse);
+					}
+					else {
+						Text.Add("Cheerfully, you assure him that it was your pleasure, demurely covering your mouth as your gurgling stomach churns up a tiny burp.", parse);
+					}
+					Text.NL();
+					Text.Add("<i>“Yeah, sure. Mind handing me my pants?”</i> He points at the discarded garment.", parse);
+					Text.NL();
+					Text.Add("You helpfully grab them and pass them over.", parse);
+					Text.NL();
+					Text.Add("<i>“Thanks.”</i> Barnaby unceremoniously puts it on, tucking his junk back inside nice and comfy before turning to look at you.", parse);
+					Text.NL();
+					func();
+				});
+			});
+			
+		});
+		
 	});
 }
