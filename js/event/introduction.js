@@ -95,8 +95,8 @@ Intro.BodyTypeMale = function() {
 		player.body.DefMale(BodyTypeMale.Girly);
 		Intro.SkinColor();
 	}, true);
-	Input.buttons[4].Setup("FemmeBoy", function() {
-		player.body.DefMale(BodyTypeMale.FemmeBoy);
+	Input.buttons[4].Setup("Trap", function() {
+		player.body.DefMale(BodyTypeMale.Trap);
 		Intro.SkinColor();
 	}, true);
 }
@@ -120,11 +120,15 @@ Intro.BodyTypeFemale = function() {
 		player.body.DefFemale(BodyTypeFemale.Curvy);
 		Intro.SkinColor();
 	}, true);
-	Input.buttons[3].Setup("Tomboy", function() {
+	Input.buttons[3].Setup("Voluptous", function() {
+		player.body.DefFemale(BodyTypeFemale.Voluptous);
+		Intro.SkinColor();
+	}, true);
+	Input.buttons[4].Setup("Tomboy", function() {
 		player.body.DefFemale(BodyTypeFemale.Tomboy);
 		Intro.SkinColor();
 	}, true);
-	Input.buttons[4].Setup("Cuntboy", function() {
+	Input.buttons[5].Setup("Cuntboy", function() {
 		player.body.DefFemale(BodyTypeFemale.Cuntboy);
 		Intro.SkinColor();
 	}, true);
@@ -750,41 +754,46 @@ world.loc.DarkAspect.Peak.events.push(new Link(
 		Text.NL();
 		Text.Add("<i>“You don't belong here!”</i> she announces, proud of her discovery. <i>“What are you and how did you get here?”</i>");
 		Text.Flush();
+		
+		var options = new Array();
+		options.push({ nameStr: "Demon",
+			func : function() {
+				Text.Clear();
+				Text.Add("You explain about the demon that brought you to this realm - the demon that she just slaughtered. This doesn't seem to be the right thing to say, though, as her mood darkens noticeably. <i>“You are lying! As if that pathetic worm could bridge the gate between dimensions! Not even I...”</i> she trails off thoughtfully. <i>“There must have been something else... what was it?”</i>");
+				Text.NL();
+				Text.Add("Do you tell her about the mirror or not? She did kind of save your life back there.");
+				Text.Flush();
 
-		Gui.NextPrompt(function() {
-			Text.Clear();
-			Text.Add("You explain about the demon that brought you to this realm - the demon that she just slaughtered. This doesn't seem to be the right thing to say, though, as her mood darkens noticeably. <i>“You are lying! As if that pathetic worm could bridge the gate between dimensions! Not even I...”</i> she trails off thoughtfully. <i>“There must have been something else... what was it?”</i>");
-			Text.NL();
-			Text.Add("Do you tell her about the mirror or not? She did kind of save your life back there.");
-			Text.Flush();
+				var options = new Array();
+				options.push({ nameStr: "Mirror",
+					func : function() {
+						Text.Clear();
+						Text.Add("Thinking back, the thing that sticks to your mind is the mirror you found in the attic. When you mention it, Uru perks up again. <i>“Yeah, that sounds kind of plausible, a magical artifact, no doubt. Maybe even that runt could have managed it, in that case.”</i> She purses her lips. <i>“Actually, it sounds kind of familiar... but enough about that for now, though, I want to know more about you!”</i>");
+						Text.Flush();
 
-			var options = new Array();
-			options.push({ nameStr: "Mirror",
-				func : function() {
-					Text.Clear();
-					Text.Add("Thinking back, the thing that sticks to your mind is the mirror you found in the attic. When you mention it, Uru perks up again. <i>“Yeah, that sounds kind of plausible, a magical artifact, no doubt. Maybe even that runt could have managed it, in that case.”</i> She purses her lips. <i>“Actually, it sounds kind of familiar... but enough about that for now, though, I want to know more about you!”</i>");
-					Text.Flush();
+						uru.flags["Intro"] |= Uru.IntroFlags.ToldUruAboutMirror;
 
-					uru.flags["Intro"] |= Uru.IntroFlags.ToldUruAboutMirror;
+						Gui.NextPrompt(Intro.UruGift);
+					}, enabled : true,
+					tooltip : "Why not tell her the truth about the mirror? What harm could it do?"
+				});
+				options.push({ nameStr: "Lie",
+					func : function() {
+						Text.Clear();
+						Text.Add("You are not sure why, but you don't think it would be a good idea to tell her about the mirror or the gem, even if she did save you. Not trusting everyone you come across is probably a healthy attitude when you have been transported to Hell. <i>“Nothing I can think of,”</i> you shrug. <i>“That big demon just appeared out of nowhere and pulled me here.”</i> She doesn't seem particularly happy about your evasive answer.");
+						Text.NL();
+						Text.Add("<i>“You better not be lying, it's impolite to lie!”</i> Angrily lashing her tail about her, she fumes a bit before announcing that she wants to know more about you, instead.");
+						Text.Flush();
 
-					Gui.NextPrompt(Intro.UruGift);
-				}, enabled : true,
-				tooltip : "Why not tell her the truth about the mirror? What harm could it do?"
-			});
-			options.push({ nameStr: "Lie",
-				func : function() {
-					Text.Clear();
-					Text.Add("You are not sure why, but you don't think it would be a good idea to tell her about the mirror or the gem, even if she did save you. Not trusting everyone you come across is probably a healthy attitude when you have been transported to Hell. <i>“Nothing I can think of,”</i> you shrug. <i>“That big demon just appeared out of nowhere and pulled me here.”</i> She doesn't seem particularly happy about your evasive answer.");
-					Text.NL();
-					Text.Add("<i>“You better not be lying, it's impolite to lie!”</i> Angrily lashing her tail about her, she fumes a bit before announcing that she wants to know more about you, instead.");
-					Text.Flush();
-
-					Gui.NextPrompt(Intro.UruGift);
-				}, enabled : true,
-				tooltip : "A good lie has some truth in it, telling her that the demon brought you here could probably work."
-			});
-			Gui.SetButtonsFromList(options);
-		}, "Demon");
+						Gui.NextPrompt(Intro.UruGift);
+					}, enabled : true,
+					tooltip : "A good lie has some truth in it, telling her that the demon brought you here could probably work."
+				});
+				Gui.SetButtonsFromList(options);
+			}, enabled : true,
+			tooltip : "Explain how the demon captured and hunted you."
+		});
+		Gui.SetButtonsFromList(options);
 	}
 ));
 

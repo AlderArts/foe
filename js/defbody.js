@@ -9,7 +9,8 @@ BodyTypeFemale = {
 	Slim     : 1,
 	Curvy    : 2,
 	Tomboy   : 3,
-	Cuntboy  : 4
+	Cuntboy  : 4,
+	Voluptous : 5,
 };
 
 Body.prototype.DefFemale = function(bodytype) {
@@ -26,17 +27,27 @@ Body.prototype.DefFemale = function(bodytype) {
 		this.ass.buttSize.base = 3;
 		this.torso.hipSize.base = 1;
 		break;
-		
+
 	case BodyTypeFemale.Curvy:
 		this.femininity.base = 0.8;
 		this.weigth.base = 68;
 		this.height.base = 175;
-		this.muscleTone.base = 0.1;
+		this.muscleTone.base = -0.3;
 		this.breasts[0].size.base = 13;
 		this.ass.buttSize.base = 8;
 		this.torso.hipSize.base = 8;
 		break;
-		
+
+	case BodyTypeFemale.Voluptous:
+		this.femininity.base = 1.0;
+		this.weigth.base = 70;
+		this.height.base = 178;
+		this.muscleTone.base = -0.5;
+		this.breasts[0].size.base = 25;
+		this.ass.buttSize.base = 15;
+		this.torso.hipSize.base = 15;
+		break;
+
 	case BodyTypeFemale.Tomboy:
 		this.femininity.base = 0;
 		this.weigth.base = 55;
@@ -46,7 +57,7 @@ Body.prototype.DefFemale = function(bodytype) {
 		this.ass.buttSize.base = 3;
 		this.torso.hipSize.base = 3;
 		break;
-		
+
 	case BodyTypeFemale.Cuntboy:
 		this.femininity.base = -0.3;
 		this.weigth.base = 65;
@@ -56,7 +67,7 @@ Body.prototype.DefFemale = function(bodytype) {
 		this.ass.buttSize.base = 2;
 		this.torso.hipSize.base = 2;
 		break;
-		
+
 	case BodyTypeFemale.Average:
 	default:
 		this.femininity.base = 0.6;
@@ -68,7 +79,7 @@ Body.prototype.DefFemale = function(bodytype) {
 		this.torso.hipSize.base = 4;
 		break;
 	}
-	
+
 	this.vagina.push(new Vagina());
 }
 
@@ -77,7 +88,7 @@ BodyTypeMale = {
 	Thin     : 1,
 	Muscular : 2,
 	Girly    : 3,
-	FemmeBoy : 4,
+	Trap     : 4,
 	Shemale  : 5
 };
 
@@ -95,7 +106,7 @@ Body.prototype.DefMale = function(bodytype) {
 		this.ass.buttSize.base = 1;
 		this.torso.hipSize.base = 1;
 		break;
-		
+
 	case BodyTypeMale.Muscular:
 		this.femininity.base = -0.8;
 		this.weigth.base = 80;
@@ -105,29 +116,29 @@ Body.prototype.DefMale = function(bodytype) {
 		this.ass.buttSize.base = 1;
 		this.torso.hipSize.base = 2;
 		break;
-		
+
 	case BodyTypeMale.Girly:
 		this.femininity.base = 0;
 		this.weigth.base = 60;
 		this.height.base = 170;
 		this.muscleTone.base = -0.3;
-		this.breasts[0].size.base = 3;
+		this.breasts[0].size.base = 2;
 		this.ass.buttSize.base = 3;
 		this.torso.hipSize.base = 5;
 		break;
-		
-	case BodyTypeMale.FemmeBoy:
-		this.femininity.base = 0.3;
+
+	case BodyTypeMale.Trap:
+		this.femininity.base = 0.4;
 		this.weigth.base = 60;
 		this.height.base = 170;
 		this.muscleTone.base = -0.5;
-		this.breasts[0].size.base = 4;
+		this.breasts[0].size.base = 2;
 		this.ass.buttSize.base = 5;
 		this.torso.hipSize.base = 7;
 		break;
-		
+
 	case BodyTypeMale.Shemale:
-		this.femininity.base = 0.5;
+		this.femininity.base = 0.7;
 		this.weigth.base = 65;
 		this.height.base = 175;
 		this.muscleTone.base = -0.1;
@@ -135,7 +146,7 @@ Body.prototype.DefMale = function(bodytype) {
 		this.ass.buttSize.base = 7;
 		this.torso.hipSize.base = 9;
 		break;
-		
+
 	case BodyTypeMale.Average:
 	default:
 		
@@ -148,7 +159,7 @@ Body.prototype.DefMale = function(bodytype) {
 		this.torso.hipSize.base = 2;
 		break;
 	}
-	
+
 	this.cock.push(new Cock());
 	this.balls.count.base = 2;
 }
