@@ -143,7 +143,7 @@ Scenes.Momo.FindingMomo = function() {
 	Text.Clear();
 	Text.Add("As you explore the [area], you come upon a curious sight. There appears to be a woman sitting down on the ground; she’s slumped over and hugging her knees. You can’t make out much detail at this time, but you do note that she seems to bear a reptilian tail and horns. You decide to approach.", parse);
 	Text.NL();
-	Text.Add("The feminine figure stirs as you come closer - evidently having heard you - lifting her head and partially turning to reveal attractively female, human-like features. Two sapphire blue eyes blink as she takes in your form, unconsciously lifting a hand to brush aside a lock of wavy blonde hair that's fallen over her face.", parse);
+	Text.Add("The feminine figure stirs as you come closer - evidently having heard you - lifting her head and partially turning to reveal attractive female, human-like features. Two sapphire blue eyes blink as she takes in your form, unconsciously lifting a hand to brush aside a lock of wavy blonde hair that's fallen over her face.", parse);
 	Text.NL();
 	Text.Add("<i>“Oh! Ah - Hello? Are you from around these parts?”</i> she asks politely, a faint but friendly smile on her lips. <i>“I'm terribly sorry to bother you, I've just gotten myself a little lost...”</i> A deep, sonorous rumble emanates from her midriff, making her pale cheeks flush pink in embarrassment, a hand going to her belly. <i>“Sorry, I'm hungry,”</i> she adds unnecessarily.", parse);
 	Text.NL();
@@ -201,9 +201,9 @@ Scenes.Momo.FindingMomo = function() {
 			Text.NL();
 			Text.Add("You cut her off, saying it doesn’t matter. Either she’s trying to lull you into a false sense of security, or else she’s an idiot; in any case, you don’t want anything to do with her.", parse);
 			Text.NL();
-			Text.Add("The dragon-girl’s face flushes red, brows furrowing in rage, lips pressing together into thin lines, fingers curling into fists that quiver with her emotion. <i>“You... well, you’re a... a big <b>jerk</b>! Fine, who needs you! I’ll find someone else to help me!”</i>", parse);
+			Text.Add("The dragon-girl’s face flushes red, brows furrowing in rage, lips pressing together into thin lines, fingers curling into fists that quiver with her emotion. <i>”You are a jerk!”</i> she proclaims angrily. <i>”You don’t want to help me? Fine! I’ll find someone who does!”</i>", parse);
 			Text.NL();
-			Text.Add("With an indignant “hmph!” noise, she sticks her nose up in the air, a poor imitation of a regal mannerism, and spins forcefully on her heel. You narrowly avoid her tail slapping you across the face as it 'coincidentally' whips through the air behind her, whereupon she storms off into the wilderness.", parse);
+			Text.Add("With an indignant “hmph!”, she sticks her nose up in the air, a poor imitation of a regal mannerism, and spins forcefully on her heel. You narrowly avoid her tail slapping you across the face as it 'coincidentally' whips through the air behind her, whereupon she storms off into the wilderness.", parse);
 			Text.NL();
 			Text.Add("Shaking your head, you turn around and head back to the Nomads’ camp. You run into all kinds of lunatics out on the roads it looks like.", parse);
 			Text.Flush();
