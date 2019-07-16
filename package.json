@@ -4,21 +4,27 @@
   "description": "",
   "private": true,
   "scripts": {
-    "build": "gulp build"
+    "build": "webpack",
+    "start": "webpack-dev-server"
   },
   "author": "aldergames",
   "repository": "https://github.com/AlderArts/foe",
-  "dependencies": {
-    "del": "^2.2.0",
-    "gulp": "^3.9.1",
-    "gulp-util": "^3.0.8",
-    "gulp-concat": "^2.6.0",
-    "gulp-filter": "^3.0.1",
-    "gulp-html-replace": "^1.5.5",
-    "gulp-uglify": "^1.5.2",
-    "gulp-tar": "^1.9.0",
-    "gulp-gzip": "^1.4.0",
-    "gulp-zip": "^3.2.0",
-    "run-sequence": "^1.1.5"
+  "devDependencies": {
+    "@types/lodash": "^4.14.136",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^5.0.3",
+    "css-loader": "^3.0.0",
+    "file-loader": "^4.0.0",
+    "jquery": "^3.4.1",
+    "lodash": "^4.17.14",
+    "mini-css-extract-plugin": "^0.7.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "raphael": "^2.2.8",
+    "style-loader": "^0.23.1",
+    "ts-loader": "^6.0.4",
+    "typescript": "^3.5.3",
+    "webpack": "^4.35.3",
+    "webpack-cli": "^3.3.6",
+    "webpack-dev-server": "^3.7.2"
   }
 }
