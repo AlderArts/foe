@@ -1,9 +1,10 @@
 import * as _ from 'lodash';
 import * as $ from 'jquery';
-import * as raphael from 'raphael';
+import * as Raphael from 'raphael';
+import * as lzstring from 'lz-string';
 
 // Assets
-//import './assets/img/gui/background.jpg';
+import './js/vendor/kimberley_bl_900.min.font.js';
 
 // Javascript
 import './app.js';
