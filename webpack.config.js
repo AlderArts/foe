@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const ZipPlugin = require('zip-webpack-plugin');
 
 module.exports = {
   entry: './index.ts',
@@ -15,7 +16,8 @@ module.exports = {
       filename: "[name].css",
       chunkFilename: "[id].css"
     }),
-    new CleanWebpackPlugin()
+    new CleanWebpackPlugin(),
+    new ZipPlugin()
   ],
   module: {
     rules: [
