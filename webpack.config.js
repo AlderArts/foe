@@ -9,9 +9,11 @@ const ZipPlugin = require('zip-webpack-plugin');
 
 module.exports = {
   entry: './index.ts',
-  devtool: 'inline-source-map',
   plugins: [
-    new CopyWebpackPlugin(['./foe.html']),
+    new CopyWebpackPlugin([
+        './foe.html',
+        {from:'assets',to:'assets'}
+    ]),
     new MiniCssExtractPlugin({
       filename: "[name].css",
       chunkFilename: "[id].css"
