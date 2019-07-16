@@ -7,7 +7,7 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
-  entry: './index.js',
+  entry: './index.ts',
   devtool: 'inline-source-map',
   plugins: [
     new CopyWebpackPlugin(['./foe.html']),
