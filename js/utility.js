@@ -42,10 +42,12 @@ Rand = function(max) {
 	return (r < max) ? r : max - 1;
 }
 
-Unit.CmToInch   = function(cm) { return cm / 2.54; }
-Unit.InchToFoot = function(inch) { return inch / 12; }
-Unit.MToFoot    = function(m) { return m * 3.28; }
-Unit.KgToPound  = function(kg) { return kg * 2.2; }
+const Unit = {
+	CmToInch   : function(cm) { return cm / 2.54; },
+	InchToFoot : function(inch) { return inch / 12; },
+	MToFoot    : function(m) { return m * 3.28; },
+	KgToPound  : function(kg) { return kg * 2.2; },
+}
 
 // Array Remove - By John Resig (MIT Licensed)
 Array.prototype.remove = function(from, to) {

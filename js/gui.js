@@ -1,5 +1,6 @@
+import * as Raphael from 'raphael';
 
-Gui = {}
+var Gui = {}
 Gui.w = 1280;
 Gui.h = 720;
 
@@ -301,7 +302,7 @@ Gui.SetupCavalcadeHand = function(xoffset, yoffset, set, obj) {
 	obj.push(local);
 }
 
-GuiResize = function() {
+var GuiResize = function() {
 	var w = $(window).width();
 	var h = $(window).height();
 	var ratioW = w/Gui.w;

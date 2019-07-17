@@ -48,14 +48,6 @@ const SMALL_FONT   = "16pt Calibri";
 const DEFAULT_FONT = "20pt Calibri";
 const LARGE_FONT   = "26pt Calibri";
 
-const Unit = {
-	metric   : 0,
-	american : 1
-}
-
-var MEASUREUNIT = Unit.metric;
-//var MEASUREUNIT = Unit.american; TODO
-
 var DEBUG = false;
 
 var RENDER_PICTURES = true;

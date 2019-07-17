@@ -1,3 +1,4 @@
+import * as $ from 'jquery';
 
 Text.buffer = "";
 //A div that contains 'groups' of inputs. Each group is on a new line (so you can basically have multiple toolbars).
