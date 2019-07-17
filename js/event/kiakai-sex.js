@@ -5,6 +5,8 @@
  * 
  */
 import { Scenes } from '../event';
+import { Kiakai } from './kiakai';
+import { world } from '../world';
 
 Scenes.Kiakai.Healing = function() {
 	var parse = {

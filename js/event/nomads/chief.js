@@ -3,6 +3,10 @@
  * Define Nomad chief
  * 
  */
+import { Link, Scenes } from '../../event';
+import { Entity } from '../../entity';
+import { world } from '../../world';
+
 function Chief(storage) {
 	Entity.call(this);
 	this.ID = "chief";

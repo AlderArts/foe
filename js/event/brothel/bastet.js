@@ -1,4 +1,6 @@
 
+import { Scenes } from '../../event';
+import { Entity } from '../../entity';
 
 function Bastet(storage) {
 	Entity.call(this);

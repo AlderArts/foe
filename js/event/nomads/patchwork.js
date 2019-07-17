@@ -3,6 +3,10 @@
  * Define Patchwork
  * 
  */
+import { Link, Scenes } from '../../event';
+import { Entity } from '../../entity';
+import { world } from '../../world';
+
 function Patchwork(storage) {
 	Entity.call(this);
 	this.ID = "patchwork";

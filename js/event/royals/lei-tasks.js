@@ -1,4 +1,7 @@
 
+import { Scenes } from '../../event';
+import { Lei } from './lei';
+
 Scenes.Lei.Tasks = {};
 
 Scenes.Lei.Tasks.OnTask = function() { //TODO add tasks

@@ -3,6 +3,8 @@
  * Define Danie
  * 
  */
+import { Scenes } from '../../event';
+import { Entity } from '../../entity';
 
 function Danie(storage) {
 	Entity.call(this);

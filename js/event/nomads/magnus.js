@@ -3,6 +3,9 @@
  * Define Magnus
  * 
  */
+import { Scenes } from '../../event';
+import { Entity } from '../../entity';
+
 function Magnus(storage) {
 	Entity.call(this);
 	this.ID = "magnus";

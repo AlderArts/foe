@@ -3,6 +3,9 @@
  * Define Cveta
  * 
  */
+import { Scenes } from '../../event';
+import { Entity } from '../../entity';
+
 function Cveta(storage) {
 	Entity.call(this);
 	this.ID = "cveta";
@@ -2584,3 +2587,4 @@ Scenes.Cveta.IntimateGrope = function() {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
+export { Cveta };

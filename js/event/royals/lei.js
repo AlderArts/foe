@@ -3,6 +3,10 @@
  * Define Lei
  *
  */
+import { Link, Scenes } from '../../event';
+import { Entity } from '../../entity';
+import { world } from '../../world';
+
 // TODO: FIX STATS
 function Lei(storage) {
 	Entity.call(this);
@@ -2129,3 +2133,5 @@ Scenes.Lei.GuardStalkingOutro = function(parse, nv) {
 
 	Gui.NextPrompt();
 }
+
+export { Lei };

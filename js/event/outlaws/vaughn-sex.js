@@ -1,3 +1,5 @@
+import { Scenes } from '../../event';
+import { Vaughn } from './vaughn';
 
 Vaughn.prototype.SexTime = function() {
 	return world.time.hour < 12;

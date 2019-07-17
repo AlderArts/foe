@@ -1,3 +1,4 @@
+import { Scenes } from '../../event';
 
 //
 //Dead drops

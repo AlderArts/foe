@@ -1,4 +1,5 @@
 
+import { Scenes } from '../../event';
 
 Scenes.Layla.Impregnate = function(mother, father, load, slot) {
 	mother.PregHandler().Impregnate({

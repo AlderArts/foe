@@ -4,6 +4,10 @@
  * 
  */
 
+import { Scenes } from '../../event';
+import { Entity } from '../../entity';
+import { BossEntity } from '../../enemy/boss';
+
 Scenes.Ophelia = {};
 
 function Ophelia(storage) {

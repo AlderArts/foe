@@ -4,6 +4,7 @@
  * 
  */
 import { Scenes } from '../event';
+import { Entity } from '../entity';
 
 function Room69(storage) {
 	Entity.call(this);

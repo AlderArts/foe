@@ -1,3 +1,6 @@
+
+import { Scenes } from '../../event';
+
 Scenes.Gwendy.ChallengeSex = function(skillcheck, lose) {
 	var parse = {
 

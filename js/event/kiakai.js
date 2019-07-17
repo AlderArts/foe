@@ -1960,4 +1960,4 @@ Scenes.Kiakai.TalkPriestMeeting = function() {
 	Scenes.Kiakai.TalkPriest();
 }
 
-
+export { Kiakai };

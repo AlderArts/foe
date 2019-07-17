@@ -1,4 +1,5 @@
 
+import { Scenes } from '../../event';
 
 Scenes.Cale.Impregnate = function(mother, slot, cum) {
 	mother.PregHandler().Impregnate({

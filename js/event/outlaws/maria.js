@@ -3,6 +3,9 @@
  * Define Maria
  *
  */
+import { Scenes } from '../../event';
+import { Entity } from '../../entity';
+
 function Maria(storage) {
 	Entity.call(this);
 	this.ID = "maria";

@@ -4,6 +4,9 @@
  * 
  */
 
+import { Scenes } from '../../event';
+import { Entity } from '../../entity';
+
 Scenes.Vena = {};
 
 function Vena(storage) {

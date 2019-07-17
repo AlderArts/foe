@@ -1,4 +1,6 @@
 
+import { Scenes } from '../../event';
+import { Entity } from '../../entity';
 
 function Gryphons(storage) {
 	Entity.call(this);

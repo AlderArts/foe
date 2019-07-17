@@ -4,6 +4,9 @@
  * 
  */
 
+import { Scenes } from '../../event';
+import { BossEntity } from '../../enemy/boss';
+
 Scenes.Golem = {};
 Scenes.Golem.State = {
 	NotMet       : 0,

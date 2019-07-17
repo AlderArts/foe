@@ -3,6 +3,9 @@
  * Define Twins (fighting entity)
  * 
  */
+import { Scenes } from '../../event';
+import { Entity } from '../../entity';
+
 function Twins(storage) {
 	this.rumi = new Rumi();
 	this.rani = new Rani();

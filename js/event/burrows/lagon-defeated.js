@@ -1,4 +1,6 @@
 
+import { Scenes } from '../../event';
+
 Scenes.Lagon.Defeated = {};
 
 Scenes.Lagon.Defeated.RoomApproach = function() {

@@ -3,6 +3,10 @@
  * Define Gwendy
  * 
  */
+import { Link, Scenes } from '../../event';
+import { Entity } from '../../entity';
+import { world } from '../../world';
+
 // TODO: FIX STATS
 function Gwendy(storage) {
 	Entity.call(this);

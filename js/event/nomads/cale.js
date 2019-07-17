@@ -3,6 +3,9 @@
  * Define Cale
  * 
  */
+import { Scenes } from '../../event';
+import { Entity } from '../../entity';
+
 function Cale(storage) {
 	Entity.call(this);
 	this.ID = "cale";

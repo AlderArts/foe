@@ -1,6 +1,9 @@
 /*
  * Aquilius, Outlaw Avian healer
  */
+import { Scenes } from '../../event';
+import { Entity } from '../../entity';
+
 Scenes.Aquilius = {};
 
 function Aquilius(storage) {

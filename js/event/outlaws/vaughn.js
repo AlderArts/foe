@@ -3,6 +3,9 @@
  * Define Vaughn
  * 
  */
+import { Scenes } from '../../event';
+import { Entity } from '../../entity';
+
 function Vaughn(storage) {
 	Entity.call(this);
 	this.ID = "vaughn";
@@ -771,3 +774,5 @@ Scenes.Vaughn.TalkWar = function() {
 		Scenes.Vaughn.TalkPrompt();
 	});
 }
+
+export { Vaughn };

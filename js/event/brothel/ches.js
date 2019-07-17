@@ -3,6 +3,9 @@
  * Define Ches
  * 
  */
+import { Scenes } from '../../event';
+import { Entity } from '../../entity';
+
 function Ches(storage) {
 	Entity.call(this);
 	this.ID = "ches";

@@ -1,4 +1,6 @@
 
+import { Scenes } from '../../event';
+
 Scenes.Vena.Restored = {};
 
 Scenes.Vena.Restored.Approach = function() {

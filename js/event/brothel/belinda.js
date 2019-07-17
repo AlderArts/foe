@@ -3,6 +3,9 @@
  * Define Belinda
  * 
  */
+import { Scenes } from '../../event';
+import { Entity } from '../../entity';
+
 function Belinda(storage) {
 	Entity.call(this);
 	this.ID = "belinda";

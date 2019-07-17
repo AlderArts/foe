@@ -2,6 +2,8 @@
  * Outlaws flags
  */
 
+import { Scenes } from '../../event';
+
 Scenes.Outlaws = {};
 
 // Class to handle global flags and logic for outlaws

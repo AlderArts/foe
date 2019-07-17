@@ -3,6 +3,10 @@
  * Define Rosalin
  *
  */
+import { Link, Scenes } from '../../event';
+import { Entity } from '../../entity';
+import { world } from '../../world';
+
 function Rosalin(storage) {
 	Entity.call(this);
 	this.ID = "rosalin";

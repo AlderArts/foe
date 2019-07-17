@@ -3,6 +3,9 @@
  * Define Jeanne
  * 
  */
+import { Scenes } from '../../event';
+import { Entity } from '../../entity';
+
 Scenes.Jeanne = {};
 
 function Jeanne(storage) {
