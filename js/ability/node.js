@@ -1,5 +1,7 @@
+import * as _ from 'lodash';
+import { DamageType } from '../ability';
 
-AbilityNode = {};
+let AbilityNode = {};
 
 AbilityNode.DefaultParser = function(caster, target) {
 	var parse = {};
@@ -510,3 +512,4 @@ AbilityNode.Run = function(ability, encounter, caster, target, result) {
 	});
 }
 
+export { AbilityNode };

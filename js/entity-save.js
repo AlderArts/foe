@@ -1,3 +1,4 @@
+import { Entity } from './entity';
 
 Entity.prototype.SaveSexFlags = function(storage) {
 	var sex = {};

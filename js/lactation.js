@@ -2,6 +2,8 @@
  * Lactation handler
  */
 
+import { Stat } from './stat';
+
 function LactationHandler(entity, storage) {
 	this.entity = entity;
 	
@@ -122,3 +124,5 @@ LactationHandler.prototype.MilkDrained = function() {
 LactationHandler.prototype.MilkFull = function() {
 	this.lactating = true;
 }
+
+export { LactationHandler };

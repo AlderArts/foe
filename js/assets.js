@@ -1,4 +1,4 @@
-
+import * as Preloader from 'preloader';
 
 var Images = {};
 
@@ -80,7 +80,7 @@ Images.imgWaitDisabled      = "assets/img/gui/wait_disabled.png";
 Images.imgSleepEnabled      = "assets/img/gui/sleep_enabled.png";
 Images.imgSleepDisabled     = "assets/img/gui/sleep_disabled.png";
 
-LoadImages = function() {
+var LoadImages = function() {
 	//Fill image array
 	var imageArray = [];
 	for(var image in Images)
@@ -99,7 +99,7 @@ LoadImages = function() {
 	assetsOverlay();
 
 	// instantiate the pre-loader with an onProgress and onComplete handler
-	new preLoader(imageArray, {
+	new Preloader(imageArray, {
 		onProgress: function(img, imageEl, index) {
 			// fires every time an image is done or errors.
 			// imageEl will be falsy if error
@@ -132,7 +132,7 @@ LoadImages = function() {
 	});
 }
 
-assetsOverlay = function() {
+var assetsOverlay = function() {
 	var el = document.getElementById("overlay_assets");
 	el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
 }

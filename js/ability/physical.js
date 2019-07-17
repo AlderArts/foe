@@ -3,6 +3,9 @@
  * Physical attacks
  * 
  */
+import { AbilityNode } from './node';
+import { Ability, Abilities, TargetMode } from '../ability';
+
 Abilities.Physical = {};
 
 // Default messages

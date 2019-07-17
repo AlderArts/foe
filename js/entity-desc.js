@@ -1,4 +1,4 @@
-
+import { Entity } from './entity';
 
 Entity.prototype.PrintDescription = function(partial) {
 	
@@ -325,7 +325,7 @@ Entity.prototype.MultiArm = function() {
 Entity.prototype.Legs = function() {
 	return this.body.legs;
 }
-LowerBodyType = {
+let LowerBodyType = {
 	Single   : 0,
 	Humanoid : 1,
 	Taur     : 2
@@ -514,3 +514,5 @@ Entity.prototype.ArmorDescLong = function() {
 Entity.prototype.Accessories = function() {
 	return [this.acc1Slot, this.acc2Slot];
 }
+
+export { LowerBodyType };

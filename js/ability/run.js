@@ -3,6 +3,10 @@
  * Flee
  * 
  */
+
+import { Ability, Abilities, TargetMode } from '../ability';
+import { Gui } from '../gui';
+
 Abilities.Run = new Ability();
 Abilities.Run.name = "Run";
 Abilities.Run.Short = function() { return "Run away."; }

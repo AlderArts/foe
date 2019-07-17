@@ -1,4 +1,5 @@
-
+import { Entity } from './entity';
+import { StatusEffect } from './statuseffect';
 
 Entity.prototype.Act = function(encounter, activeChar) {
 	// TODO: Very TEMP
@@ -31,7 +32,7 @@ Entity.prototype.CanBeInterrupted = function(ability, encounter, caster, result)
 }
 
 //Note: bitmask in order to stack multiple
-TargetStrategy = {
+let TargetStrategy = {
 	None      : 0, //Not used
 	NearDeath : 1,
 	LowHp     : 2,
@@ -55,7 +56,7 @@ Entity.prototype.GetCombatEntry = function(encounter) {
 	return found;
 }
 
-GetAggroEntry = function(activeChar, entity) {
+function GetAggroEntry(activeChar, entity) {
 	var found;
 	_.each(activeChar.aggro, function(it) {
 		if(it.entity == entity) {
@@ -677,3 +678,5 @@ Entity.prototype.AddResistanceWear = function(type, wear) {
 		this.statusWear[type] = wear;
 	}
 }
+
+export { TargetStrategy };

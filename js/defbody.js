@@ -4,7 +4,9 @@
  * 
  */
 
-BodyTypeFemale = {
+import { Body } from './body/body';
+
+let BodyTypeFemale = {
 	Average  : 0,
 	Slim     : 1,
 	Curvy    : 2,
@@ -83,7 +85,7 @@ Body.prototype.DefFemale = function(bodytype) {
 	this.vagina.push(new Vagina());
 }
 
-BodyTypeMale = {
+let BodyTypeMale = {
 	Average  : 0,
 	Thin     : 1,
 	Muscular : 2,
@@ -245,3 +247,5 @@ Body.prototype.SetEyeColor = function(color) {
 	color = color || Color.white;
 	this.head.eyes.color = color;
 }
+
+export { BodyTypeMale, BodyTypeFemale };

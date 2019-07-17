@@ -2,6 +2,9 @@
  * Set up boss stats
  */
 
+import { Entity } from '../entity';
+import { StatusEffect } from '../statuseffect';
+
 function BossEntity() {
 	Entity.call(this);
 	
@@ -12,3 +15,5 @@ function BossEntity() {
 }
 BossEntity.prototype = new Entity();
 BossEntity.prototype.constructor = BossEntity;
+
+export { BossEntity };

@@ -2,6 +2,13 @@
 // Basic game entity
 // Enemies and player inherit from Entity
 
+import { Stat } from './stat';
+import { StatusList } from './statuseffect';
+import { Body } from './body/body';
+import { PregnancyHandler } from './pregnancy';
+import { LactationHandler } from './lactation';
+import { AbilityCollection, DamageType } from './ability';
+
 // TODO: Should have shared features, such as combat stats. Body representation
 function Entity() {
 	// Names and grammar
@@ -404,7 +411,7 @@ Entity.prototype.CanGiveBirth = function() {
 	return true;
 }
 
-DrunkLevel = {
+let DrunkLevel = {
 	Sober   : 0.25,
 	Tipsy   : 0.50,
 	Sloshed : 0.75,
@@ -483,3 +490,4 @@ Entity.prototype.DebugMode = function(debug) {
 		this.RestFull();
 }
 
+export { Entity, DrunkLevel };

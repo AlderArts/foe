@@ -1,5 +1,8 @@
 
-NippleType = {
+import { BodyPart } from './bodypart';
+import { Stat } from '../stat';
+
+var NippleType = {
 	ordinary : 0,
 	inverted : 1,
 	lipple   : 2,
@@ -218,3 +221,5 @@ Breasts.prototype.Long = function() {
 	var desc = this.Desc();
 	return desc.a + " " + desc.adj + " " + this.nounPlural();
 }
+
+export {Breasts, NippleType};

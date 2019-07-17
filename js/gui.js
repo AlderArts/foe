@@ -1,6 +1,6 @@
 import * as Raphael from 'raphael';
 
-var Gui = {}
+let Gui = {}
 Gui.w = 1280;
 Gui.h = 720;
 
@@ -859,3 +859,5 @@ Gui.RenderStatsScreen = function(context) {
 
 	context.restore();
 }
+
+export { Gui };

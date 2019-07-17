@@ -96,3 +96,5 @@ Stat.prototype.DecreaseStat = function(ideal, maxChange, fraction) {
 	else
 		return Math.floor(this.base) - Math.floor(old);
 }
+
+export {Stat};

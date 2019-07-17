@@ -2,6 +2,14 @@
  * Body
  */
 
+import { BodyPart } from './bodypart';
+import { Stat } from '../stat';
+import { Head } from './head';
+import { Genitalia } from './genitalia';
+import { Balls } from './balls';
+import { Butt } from './butt';
+import { Breasts } from './breasts';
+
 // Describe a standard humanoid-ish body
 function Body(ent) {
 	this.entity = ent;
@@ -580,7 +588,7 @@ Body.prototype.LongTongue = function() {
 	return false;
 }
 
-HipSize = {
+let HipSize = {
 	Thin     :  2,
 	Medium   :  5,
 	Wide     : 10,
@@ -715,3 +723,4 @@ Body.prototype.StomachDesc = function(bellysize) {
 	return noun;
 }
 
+export { Body, HipSize };

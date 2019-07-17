@@ -1,4 +1,7 @@
 
+import { Orifice } from './orifice';
+import { Stat } from '../stat';
+
 function Vagina() {
 	Orifice.call(this);
 	this.clit          = new Stat(0.5);
@@ -87,3 +90,5 @@ Vagina.prototype.ClitShort = function() {
 Vagina.prototype.holeDesc = function() {
 	return this.noun();
 }
+
+export { Vagina };

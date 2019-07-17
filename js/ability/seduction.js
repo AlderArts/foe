@@ -3,6 +3,9 @@
  * Lust attacks
  * 
  */
+import { AbilityNode } from './node';
+import { Ability, Abilities, TargetMode } from '../ability';
+
 Abilities.Seduction = {};
 
 // Default messages

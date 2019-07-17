@@ -1,3 +1,4 @@
+import { Entity } from './entity';
 
 Entity.prototype.Genitalia = function() {
 	return this.body.gen;
@@ -306,7 +307,7 @@ Entity.prototype.FuckVag = function(vag, cock, expMult) {
 /*
  * New Sex functions
  */
-Sex = {};
+let Sex = {};
 
 Sex.Cunnilingus = function(giver, reciever) {
 	if(giver)    giver.sex.gCunn++;
@@ -374,3 +375,5 @@ Entity.prototype.OrgasmCum = function(mult) {
 	}
 	return cumQ;
 }
+
+export { Sex };

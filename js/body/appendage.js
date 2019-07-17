@@ -1,5 +1,7 @@
 
-AppendageType = {
+import { BodyPart } from './bodypart';
+
+var AppendageType = {
 	horn    : 0,
 	antenna : 1,
 	tail    : 2,

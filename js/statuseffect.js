@@ -2,9 +2,9 @@
  * @author alder
  */
 
-var Status = {};
+let Status = {};
 
-StatusEffect = {
+let StatusEffect = {
 	Burn     : 0, //OK
 	Freeze   : 1, //OK
 	Numb     : 2, //OK
@@ -38,7 +38,7 @@ StatusEffect = {
 
 Status.Keys = Object.keys(StatusEffect);
 
-LoadStatusImages = function(imageArray) {
+function LoadStatusImages(imageArray) {
 	Images.status = [];
 	for(var i = 0; i < StatusEffect.LAST; i++) {
 		Images.status[i]  = "";
@@ -979,4 +979,4 @@ Status.Curse.Tick = function(target) {
 	}
 }
 
-
+export { Status, StatusList, StatusEffect };

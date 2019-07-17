@@ -26,10 +26,12 @@ BodyPart.HasSkin = function(race) {
 		Race.Dryad);
 }
 
-BodyPartType = {
+let BodyPartType = {
 	cock   : 0,
 	vagina : 1,
 	ass    : 2,
 	nipple : 3,
 	mouth  : 4
-}
+};
+
+export {BodyPart, BodyPartType};

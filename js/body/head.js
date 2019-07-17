@@ -1,4 +1,8 @@
 
+import { Hair } from './hair';
+import { BodyPart } from './bodypart';
+import { Stat } from '../stat';
+
 function Head() {
 	BodyPart.call(this);
 	
@@ -97,3 +101,5 @@ Head.prototype.NumAttributes = function(race) {
 		if(this.appendages[i].race == race) sum++;
 	return sum;
 }
+
+export { Head };

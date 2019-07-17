@@ -3,6 +3,9 @@
  * Define the player object (based on entity)
  * 
  */
+
+import { Entity } from '../entity';
+
 function Player(storage) {
 	Entity.call(this);
 	this.ID = "player";
@@ -707,3 +710,4 @@ Player.prototype.Interact = function(switchSpot) {
 	Gui.SetButtonsFromList(options, true, PartyInteraction);
 }
 
+export { Player };

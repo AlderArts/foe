@@ -3,6 +3,10 @@
  * Basic attack
  * 
  */
+
+import { AbilityNode } from './node';
+import { Ability, Abilities } from '../ability';
+
 Abilities.Attack = new Ability("Attack");
 Abilities.Attack.Short = function() { return "Perform a physical attack."; }
 Abilities.Attack.castTree.push(AbilityNode.Template.Physical({

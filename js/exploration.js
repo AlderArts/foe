@@ -5,9 +5,11 @@
 //                                                   //
 //***************************************************//
 
-LastSubmenu = null;
+import { Gui } from './gui';
 
-PrintDefaultOptions = function(preventClear) {
+let LastSubmenu = null;
+
+function PrintDefaultOptions(preventClear) {
 	var e = Gui.Callstack.pop();
 	if(e) {
 		e();
@@ -33,7 +35,7 @@ PrintDefaultOptions = function(preventClear) {
 		Explore();
 }
 
-ExploreButtonIndex = {
+let ExploreButtonIndex = {
 	Explore : 0,
 	Party   : 1,
 	Items   : 2,
@@ -47,7 +49,7 @@ ExploreButtonIndex = {
 	Look    : 10
 };
 
-SetExploreButtons = function() {
+function SetExploreButtons() {
 	var waitLocation = party.location.wait();
 	// At safe locations you can sleep and save
 	var safeLocation = party.location.safe();
@@ -95,7 +97,7 @@ Gui.SavePromptText = function() {
 	Text.Flush();
 }
 
-LimitedDataPrompt = function(backFunc) {
+function LimitedDataPrompt(backFunc) {
 	SetGameState(GameState.Event);
 
 	Gui.ClearButtons();
@@ -133,7 +135,7 @@ LimitedDataPrompt = function(backFunc) {
 	Input.buttons[11].Setup("Back", backFunc, true);
 }
 
-DataPrompt = function() {
+function DataPrompt() {
 	SetGameState(GameState.Event);
 	// At safe locations you can sleep and save
 	var safeLocation = party.location.safe();
@@ -214,7 +216,7 @@ DataPrompt = function() {
 //                                                   //
 //***************************************************//
 
-Explore = function(preventClear) {
+function Explore(preventClear) {
 	if(!preventClear)
 		Text.Clear();
 
@@ -231,14 +233,14 @@ Explore = function(preventClear) {
 	SetExploreButtons();
 }
 
-PartyInteraction = function(preventClear) {
+function PartyInteraction(preventClear) {
 	party.Interact(preventClear, party.location.switchSpot());
 	LastSubmenu = Input.exploreButtons[ExploreButtonIndex.Party];
 
 	SetExploreButtons();
 }
 
-Fight = function(preventClear) {
+function Fight(preventClear) {
 	if(!preventClear)
 		Text.Clear();
 	if(party.location == null) {
@@ -262,7 +264,7 @@ Fight = function(preventClear) {
 	}
 }
 
-ShowInventory = function(preventClear) {
+function ShowInventory(preventClear) {
 	if(!preventClear)
 		Text.Clear();
 	if(party.inventory == null) {
@@ -278,7 +280,7 @@ ShowInventory = function(preventClear) {
 	SetExploreButtons();
 }
 
-ShowAbilities = function(preventClear) {
+function ShowAbilities(preventClear) {
 	if(!preventClear)
 		Text.Clear();
 	Gui.ClearButtons();
@@ -289,7 +291,7 @@ ShowAbilities = function(preventClear) {
 	SetExploreButtons();
 }
 
-ShowAlchemy = function(preventClear) {
+function ShowAlchemy(preventClear) {
 	if(!preventClear)
 		Text.Clear();
 	Gui.ClearButtons();
@@ -300,7 +302,7 @@ ShowAlchemy = function(preventClear) {
 	SetExploreButtons();
 }
 
-ShowQuests = function(preventClear) {
+function ShowQuests(preventClear) {
 	if(!preventClear)
 		Text.Clear();
 	Gui.ClearButtons();
@@ -311,7 +313,7 @@ ShowQuests = function(preventClear) {
 	SetExploreButtons();
 }
 
-ShowHunting = function(preventClear) {
+function ShowHunting(preventClear) {
 	if(!preventClear)
 		Text.Clear();
 	Gui.ClearButtons();
@@ -323,3 +325,5 @@ ShowHunting = function(preventClear) {
 
 	SetExploreButtons();
 }
+
+export { PrintDefaultOptions };

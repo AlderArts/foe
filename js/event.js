@@ -8,7 +8,9 @@
  *
  */
 
-var Scenes = {};
+import { PrintDefaultOptions } from './exploration';
+
+let Scenes = {};
 
 function Event(nameFunc, opts) {
 	opts = opts || {};
@@ -69,7 +71,7 @@ Event.prototype.switchSpot = function() {
 	return false;
 }
 
-MoveToLocation = function(location, timestep, preventClear) {
+function MoveToLocation(location, timestep, preventClear) {
 	var oldLocation = party.location;
 	party.location = location;
 
@@ -381,3 +383,5 @@ EncounterTable.prototype.Get = function() {
 	// No encounters will default to null
 	return null;
 }
+
+export { Event, EncounterTable, MoveToLocation };

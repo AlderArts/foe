@@ -67,3 +67,5 @@ Genitalia.prototype.SetCover = function(cover) {
 }
 
 //TODO functions for clitcock growth
+
+export { Genitalia };

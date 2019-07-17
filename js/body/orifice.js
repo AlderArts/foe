@@ -1,5 +1,8 @@
 
-Capacity = {
+import { Stat } from '../stat';
+import { Womb } from '../pregnancy';
+
+var Capacity = {
 	tight  : 2,
 	loose  : 5,
 	gaping : 10
@@ -98,3 +101,5 @@ Orifice.prototype.StretchOrifice = function(entity, cock, silent) {
 Orifice.prototype.holeDesc = function() {
 	return "ORIFICE";
 }
+
+export {Orifice, Capacity};

@@ -3,6 +3,8 @@
  * Wait
  * 
  */
+import { Ability, Abilities, TargetMode } from '../ability';
+
 Abilities.Wait = new Ability();
 Abilities.Wait.name = "Wait";
 Abilities.Wait.Short = function() { return "Wait a while."; }

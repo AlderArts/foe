@@ -1,4 +1,7 @@
 
+import { AbilityNode } from './node';
+import { Ability, Abilities, TargetMode } from '../ability';
+
 Abilities.EnemySkill = {};
 
 Abilities.EnemySkill.Sting = new Ability("Sting");

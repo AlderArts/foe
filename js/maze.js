@@ -2,6 +2,8 @@
  * Describes a maze location. A maze consists of multiple maze rooms
  */
 
+import { Event } from './event';
+
 function Maze(opts) {
 	opts = opts || {};
 	
@@ -93,3 +95,5 @@ Maze.Room.prototype.PrintDesc = function() {
 		this.maze.Print(this);
 	}
 }
+
+export { Maze };

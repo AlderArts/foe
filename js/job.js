@@ -1,7 +1,9 @@
 
-Jobs = {};
+import { Abilities, AbilityCollection } from './ability';
 
-Job = function(name) {
+let Jobs = {};
+
+let Job = function(name) {
 	this.name   = name;
 	this.levels = []; // JobLevel elements
 	this.preqs  = []; // Pairs of {job : Jobs["Fighter"], lvl : 3} etc
@@ -14,7 +16,7 @@ Job.prototype.Unlocked = function(entity) {
 	return true;
 }
 
-JobDesc = function(job) {
+let JobDesc = function(job) {
 	this.job        = job;
 	this.level      = 1;
 	this.experience = 0;
@@ -147,7 +149,7 @@ Job.prototype.Available = function(entity) {
 	return true;
 }
 
-JobLevel = function(expToLevel, skills, bonus, func) {
+let JobLevel = function(expToLevel, skills, bonus, func) {
 	this.expToLevel = expToLevel;
 	this.skills     = skills; // [ { ab: Ablities.Black.Fireball, set: "Spells" }, ... ]
 	this.bonus      = bonus;  // { str: 0.1, int: 0.2 ...}
@@ -156,7 +158,7 @@ JobLevel = function(expToLevel, skills, bonus, func) {
 
 
 
-JobEnum = {
+let JobEnum = {
 	Fighter   : 0,
 	Scholar   : 1,
 	Courtesan : 2
@@ -590,4 +592,4 @@ Jobs["Bard"].Unlocked = function(entity) {
 // TIER 6 //
 ////////////
 
-
+export { Job, JobDesc, JobEnum, JobLevel, Jobs };

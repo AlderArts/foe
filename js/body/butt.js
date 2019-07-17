@@ -1,4 +1,7 @@
 
+import { Orifice } from './orifice.js';
+import { Stat } from '../stat';
+
 function Butt() {
 	Orifice.call(this);
 	this.buttSize   = new Stat(1);
@@ -121,3 +124,5 @@ Butt.prototype.AnalLong = function() {
 Butt.prototype.holeDesc = function() {
 	return this.analNoun();
 }
+
+export {Butt};

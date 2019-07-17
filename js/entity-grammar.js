@@ -1,3 +1,4 @@
+import { Entity } from './entity';
 
 // Grammar
 Entity.prototype.nameDesc = function() {

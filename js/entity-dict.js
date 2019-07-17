@@ -1,3 +1,4 @@
+import { Entity } from './entity';
 
 Entity.prototype.UniqueId = function() {
 	return this.ID;

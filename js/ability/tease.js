@@ -5,6 +5,9 @@
  * Basic tease
  * 
  */
+import { AbilityNode } from './node';
+import { Ability, Abilities, TargetMode } from '../ability';
+
 Abilities.Seduction.Tease = new Ability("Tease");
 Abilities.Seduction.Tease.Short = function() { return "Raises the lust of target."; }
 Abilities.Seduction.Tease.castTree.push(AbilityNode.Template.Lust({

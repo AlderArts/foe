@@ -1,5 +1,8 @@
 
-CockType = {
+import { BodyPart } from './bodypart';
+import { Stat } from '../stat';
+
+let CockType = {
 	ordinary : 0,
 //	clitcock : 1,
 	tentacle : 2,
@@ -206,3 +209,5 @@ Cock.prototype.Long = function() {
 	var sheath  = this.Sheath() ? ", sheathed" : "";
 	return desc.adj + knotted + sheath + " " + this.race.Short(Gender.male) + " " + this.noun() + ", " + desc.len + " long and " + desc.thickness + " thick";
 }
+
+export { Cock, CockType };

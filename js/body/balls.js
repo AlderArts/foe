@@ -1,4 +1,7 @@
 
+import { BodyPart } from './bodypart';
+import { Stat } from '../stat';
+
 function Balls(race, color) {
 	BodyPart.call(this, race, color);
 	this.count         = new Stat(0);
@@ -167,3 +170,5 @@ Balls.prototype.Long = function() {
 	
 	return str;
 }
+
+export {Balls};

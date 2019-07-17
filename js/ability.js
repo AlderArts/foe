@@ -4,7 +4,7 @@
  *
  */
 
-TargetMode = {
+let TargetMode = {
 	Self        : 1,
 	Ally        : 2,
 	Enemy       : 3,
@@ -28,7 +28,7 @@ TargetMode.ToString = function(mode) {
 	}
 }
 
-Element = {
+let Element = {
 	pSlash   : 0,
 	pBlunt   : 1,
 	pPierce  : 2,
@@ -47,7 +47,7 @@ Element = {
 	numElements : 14
 }
 
-DamageType = function(type) {
+function DamageType(type) {
 	type = type || {};
 	this.dmg = [];
 	this.dmg[Element.pSlash]   = type.pSlash   || 0;
@@ -81,9 +81,9 @@ DamageType.prototype.ApplyDmgType = function(def, atkDmg) {
 	return ret;
 }
 
-Abilities = {};
+let Abilities = {};
 
-Ability = function(name) {
+function Ability(name) {
 	this.targetMode = TargetMode.Enemy;
 	this.name = name || "ABILITY";
 	//TODO: Tooltip?
@@ -338,7 +338,7 @@ Ability.Damage = function(atk, def, casterLvl, targetLvl) {
 	return defFactor * atk * levelFactor;
 }
 
-AbilityCollection = function(name) {
+function AbilityCollection(name) {
 	this.name = name;
 
 	this.AbilitySet = [];
@@ -389,3 +389,5 @@ AbilityCollection.prototype.OnSelect = function(encounter, caster, backPrompt) {
 	prompt();
 	Gui.SetButtonsFromCollection(encounter, caster, this.AbilitySet, ret, backPrompt);
 }
+
+export { Ability, Abilities, AbilityCollection, DamageType, Element, TargetMode };

@@ -1,5 +1,8 @@
 
-HairStyle = {
+import { BodyPart } from './bodypart';
+import { Stat } from '../stat';
+
+let HairStyle = {
 	straight : 0,
 	wavy     : 1,
 	ponytail : 2,
@@ -86,3 +89,5 @@ Hair.prototype.Long = function() {
 			return "ground-dragging, " + style;
 	}
 }
+
+export { Hair, HairStyle };

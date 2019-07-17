@@ -4,6 +4,8 @@
  * 
  */
 
+import { AbilityNode } from './node';
+import { Ability, Abilities, TargetMode } from '../ability';
 
 Abilities.White = {};
 Abilities.White._onHeal = function(ability, encounter, caster, target, dmg) {

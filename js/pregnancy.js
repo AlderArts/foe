@@ -2,8 +2,10 @@
  * Pregnancy handler
  */
 
+import { Stat } from './stat';
+
 // Progress
-PregnancyLevel = {
+let PregnancyLevel = {
 	Level1 : 0.1,
 	Level2 : 0.4,
 	Level3 : 0.5,
@@ -355,3 +357,5 @@ PregnancyHandler.prototype.BellySize = function() {
 
 	return size;
 }
+
+export {Womb, PregnancyHandler, PregnancyLevel};

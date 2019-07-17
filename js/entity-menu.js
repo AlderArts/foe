@@ -1,3 +1,4 @@
+import { Entity } from './entity';
 
 Entity.prototype.InteractDefault = function(options, switchSpot, enableEquip, enableStats, enableJob, enableSwitch) {
 	var that = this;

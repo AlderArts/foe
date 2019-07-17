@@ -3,6 +3,9 @@
  * Attack magic
  * 
  */
+import { AbilityNode } from './node';
+import { Ability, Abilities, TargetMode } from '../ability';
+
 Abilities.Black = {};
 
 // Default messages
