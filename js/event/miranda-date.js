@@ -1,4 +1,6 @@
 
+import { Scenes } from '../event';
+
 Scenes.Miranda.DatingEntry = function() {
 	var parse = {
 		playername : player.name

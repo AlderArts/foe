@@ -1,6 +1,6 @@
 
 // Borrowed from Underscore.js
-isFunction = function(obj) {
+let isFunction = function(obj) {
 	return !!(obj && obj.constructor && obj.call && obj.apply);
 };
 
@@ -37,7 +37,7 @@ if (typeof Object.assign != 'function') {
   };
 }
 
-Rand = function(max) {
+let Rand = function(max) {
 	var r = Math.floor(Math.random() * max);
 	return (r < max) ? r : max - 1;
 }
@@ -64,7 +64,7 @@ Array.prototype.remove = function(from, to) {
 	});
  */
 // Download script, used for save to file. Calls download.php
-GenerateFile = function(options) {
+let GenerateFile = function(options) {
 	options = options || {};
 	options.script = options.script || "download.php";
 

@@ -3,6 +3,9 @@
 // Shop of oddities
 //
 
+import { world } from '../../world';
+import { Link, Scenes } from '../../event';
+
 Scenes.Rigard.OddShop = {};
 Scenes.Rigard.OddShop.IsOpen = function() {
 	return (world.time.hour >= 9 && world.time.hour < 18) && !rigard.UnderLockdown();

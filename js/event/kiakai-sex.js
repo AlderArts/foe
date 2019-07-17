@@ -4,6 +4,8 @@
  * HEALING SCENES
  * 
  */
+import { Scenes } from '../event';
+
 Scenes.Kiakai.Healing = function() {
 	var parse = {
 		playername : player.name,

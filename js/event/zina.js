@@ -3,6 +3,7 @@
  * Define Zina
  * 
  */
+import { Entity } from '../entity';
 
 Scenes.Zina = {};
 

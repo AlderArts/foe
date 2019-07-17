@@ -1,4 +1,7 @@
 
+import { world } from '../../world';
+import { Event, Link, Scenes, EncounterTable } from '../../event';
+
 
 Scenes.Rigard.ShopStreet = {}
 

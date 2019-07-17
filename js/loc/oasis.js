@@ -1,9 +1,11 @@
 
 
+import { world } from '../world';
+import { EncounterTable, Scenes } from '../event';
 
 Scenes.Oasis = {};
 
-Oasis = function(storage) {
+let Oasis = function(storage) {
 	this.flags = {};
 	
 	// Caravan Shop

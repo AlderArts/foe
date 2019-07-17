@@ -1,4 +1,7 @@
 
+import { world } from '../../world';
+import { Event, Link, Scenes, EncounterTable } from '../../event';
+
 
 world.loc.Rigard.Castle = {
 	Grounds   : new Event("Royal grounds"),

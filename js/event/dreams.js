@@ -1,4 +1,6 @@
 
+import { EncounterTable, Scenes } from '../event';
+
 Scenes.Dreams = {}
 
 Scenes.Dreams.Entry = function(func) {

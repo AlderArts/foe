@@ -1,4 +1,8 @@
 
+import { world } from '../../world';
+import { Link, Scenes } from '../../event';
+import { Rigard } from './rigard';
+
 Scenes.Rigard.LB = {};
 
 Rigard.LB = {};

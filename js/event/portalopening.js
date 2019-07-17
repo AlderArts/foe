@@ -1,3 +1,6 @@
+
+import { Scenes } from '../event';
+
 Scenes.PortalOpening = {};
 
 Scenes.PortalOpening.Intro = function() {

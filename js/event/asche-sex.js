@@ -1,4 +1,6 @@
 
+import { Scenes } from '../event';
+
 Scenes.Asche.Sex = {};
 
 Scenes.Asche.Sex.Prompt = function() {

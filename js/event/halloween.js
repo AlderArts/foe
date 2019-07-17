@@ -1,4 +1,7 @@
 
+import { Scenes } from '../event';
+import { Inventory } from '../inventory';
+
 //Will be used for temporary variable storage.
 function Halloween() {
 	// Save player/party

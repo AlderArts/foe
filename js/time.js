@@ -1,5 +1,5 @@
 
-Season = {
+let Season = {
 	Spring: 0,
 	Summer: 1,
 	Autumn: 2,
@@ -241,3 +241,5 @@ Time.prototype.ToMinutes = function() {
 	minute += this.year * Season.LAST * 30 * 24 * 60;
 	return minute;
 }
+
+export { Season, Time };

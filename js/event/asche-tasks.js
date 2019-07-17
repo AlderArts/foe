@@ -2,6 +2,8 @@
 /*
  * TASKS
  */
+import { Scenes } from '../event';
+
 Scenes.Asche.Tasks = {};
 
 Scenes.Asche.Tasks.Default = function() {

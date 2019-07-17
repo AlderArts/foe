@@ -1,4 +1,6 @@
 
+import { Scenes } from '../event';
+
 Scenes.Terry.SexHaveADrink = function(back) {
 	var parse = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),

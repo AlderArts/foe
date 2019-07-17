@@ -1,4 +1,6 @@
 
+import { Scenes } from '../event';
+
 function Nursery(storage) {
 	this.kids = [];
 	this.flags = {};
@@ -341,3 +343,5 @@ Scenes.Nursery.Nomads = function() {
 }
 
 // TODO Post gemstead
+
+export { Nursery };

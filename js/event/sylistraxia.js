@@ -3,6 +3,8 @@
  * Define Sylistraxia
  * 
  */
+import { Entity } from '../entity';
+
 function Sylistraxia(storage) {
 	Entity.call(this);
 	this.ID = "sylistraxia";

@@ -4,6 +4,9 @@
  * 
  */
 
+import { Entity } from '../entity';
+import { Scenes } from '../event';
+
 Scenes.Terry = {};
 
 function Terry(storage) {
@@ -3158,3 +3161,5 @@ Scenes.Terry.CheckFluids = function() {
 	
 	Scenes.Terry.Prompt();
 }
+
+export { Terry };

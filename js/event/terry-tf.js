@@ -1,5 +1,7 @@
 
 
+import { Scenes } from '../event';
+import { Terry } from './terry';
 // TODO ITEMS
 
 Terry.prototype.ItemUsable = function(item) {

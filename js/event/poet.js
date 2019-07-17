@@ -1,4 +1,6 @@
 
+import { Scenes, EncounterTable } from '../event';
+
 Scenes.Poet = {};
 
 Scenes.Poet.Entry = function() {

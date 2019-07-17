@@ -1,4 +1,5 @@
 
+import { Scenes, EncounterTable } from '../event';
 
 Scenes.Terry.Impregnate = function(mother, father, cum, slot) {
 	mother.PregHandler().Impregnate({

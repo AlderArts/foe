@@ -3,6 +3,11 @@
  * Define Miranda
  * 
  */
+import { Scenes } from '../event';
+import { Entity } from '../entity';
+import { world } from '../world';
+import { Link } from '../event';
+
 function Miranda(storage) {
 	Entity.call(this);
 	this.ID = "miranda";

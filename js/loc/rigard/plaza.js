@@ -1,6 +1,9 @@
 
 
 
+import { world } from '../../world';
+import { Link, Scenes, EncounterTable } from '../../event';
+
 
 
 Scenes.Rigard.Plaza = {}

@@ -1,4 +1,4 @@
-import { Item, Items, ItemType } from '../item';
+import { Item, Items, ItemType, ItemSubtype } from '../item';
 
 Items.Armor = {};
 

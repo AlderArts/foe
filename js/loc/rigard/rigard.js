@@ -4,6 +4,9 @@
  *
  */
 
+import { world } from '../../world';
+import { Event, Scenes, EncounterTable } from '../../event';
+
 // Create namespace
 world.loc.Rigard = {
 	Gate         : new Event("Main Gate"),
@@ -1832,3 +1835,5 @@ Scenes.Rigard.Lockdown = function() {
 		});
 	});
 }
+
+export { Rigard };

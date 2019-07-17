@@ -1,4 +1,5 @@
 
+import { Scenes } from '../event';
 
 
 Scenes.Miranda.BarSexOptions = function(options) {

@@ -4,7 +4,10 @@
  *
  */
 
-Intro = {};
+import { Event, Link } from '../event';
+import { world } from '../world';
+
+let Intro = {};
 
 /*
  * Introductory scene (start of game). Entry into the attic

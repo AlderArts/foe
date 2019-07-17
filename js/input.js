@@ -1,5 +1,5 @@
 
-Input = {
+let Input = {
 
 	//TODO: Raphael sets?
 	buttons        : new Array(),
@@ -105,47 +105,47 @@ Input.RenderExploreButtonGlow = function() {
 }
 
 // TODO this is actually wrong
-KEY_CONSOLE = 0;
+let KEY_CONSOLE = 0;
 
-KEY_1 = 49;
-KEY_2 = 50;
-KEY_3 = 51;
-KEY_4 = 52;
-KEY_5 = 53;
-KEY_6 = 54;
-KEY_7 = 55;
-KEY_8 = 56;
-KEY_9 = 57;
-KEY_0 = 48;
+let KEY_1 = 49;
+let KEY_2 = 50;
+let KEY_3 = 51;
+let KEY_4 = 52;
+let KEY_5 = 53;
+let KEY_6 = 54;
+let KEY_7 = 55;
+let KEY_8 = 56;
+let KEY_9 = 57;
+let KEY_0 = 48;
 
-KEY_Q = 81;
-KEY_W = 87;
-KEY_E = 69;
-KEY_R = 82;
-KEY_T = 84;
-KEY_Y = 89;
-KEY_U = 85;
-KEY_I = 73;
-KEY_O = 79;
-KEY_P = 80;
-KEY_A = 65;
-KEY_S = 83;
-KEY_D = 68;
-KEY_F = 70;
-KEY_G = 71;
-KEY_H = 72;
-KEY_J = 74;
-KEY_K = 75;
-KEY_L = 76;
-KEY_Z = 90;
-KEY_X = 88;
-KEY_C = 67;
-KEY_V = 86;
-KEY_B = 66;
-KEY_N = 78;
-KEY_M = 77;
+let KEY_Q = 81;
+let KEY_W = 87;
+let KEY_E = 69;
+let KEY_R = 82;
+let KEY_T = 84;
+let KEY_Y = 89;
+let KEY_U = 85;
+let KEY_I = 73;
+let KEY_O = 79;
+let KEY_P = 80;
+let KEY_A = 65;
+let KEY_S = 83;
+let KEY_D = 68;
+let KEY_F = 70;
+let KEY_G = 71;
+let KEY_H = 72;
+let KEY_J = 74;
+let KEY_K = 75;
+let KEY_L = 76;
+let KEY_Z = 90;
+let KEY_X = 88;
+let KEY_C = 67;
+let KEY_V = 86;
+let KEY_B = 66;
+let KEY_N = 78;
+let KEY_M = 77;
 
-KeyToText = {};
+let KeyToText = {};
 KeyToText[KEY_CONSOLE] = "§";
 
 KeyToText[KEY_1] = "1";
@@ -187,10 +187,10 @@ KeyToText[KEY_N] = "N";
 KeyToText[KEY_M] = "M";
 
 // Internal logical representations
-LEFT_ARROW  = 0;
-RIGHT_ARROW = 1;
-UP_ARROW    = 2;
-DOWN_ARROW  = 3;
+let LEFT_ARROW  = 0;
+let RIGHT_ARROW = 1;
+let UP_ARROW    = 2;
+let DOWN_ARROW  = 3;
 
 // Catches keypresses
 Input.Keydown = function(event) {
@@ -242,3 +242,5 @@ Input.Keyup = function(event) {
 }
 
 Input.tooltip = false;
+
+export { Input };

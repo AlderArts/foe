@@ -302,3 +302,5 @@ Shop.prototype.Sell = function(back, preventClear, customSellFunc) {
 	Text.Flush();
 	Gui.SetButtonsFromList(options, true, back);
 }
+
+export { Shop };

@@ -4,6 +4,10 @@
  * 
  */
 
+import { Entity } from '../entity';
+import { Link, Scenes, EncounterTable } from '../event';
+import { world } from '../world';
+
 Scenes.Momo = {};
 
 function Momo(storage) {

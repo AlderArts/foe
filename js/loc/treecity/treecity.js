@@ -4,6 +4,9 @@
  * 
  */
 
+import { world } from '../../world';
+import { Scenes } from '../../event';
+
 // Create namespace
 world.loc.TreeCity = {
 }

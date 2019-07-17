@@ -3,6 +3,8 @@
  * Define Aria
  * 
  */
+import { Entity } from '../entity';
+
 function Aria(storage) {
 	Entity.call(this);
 	this.ID = "aria";

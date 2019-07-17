@@ -4,6 +4,8 @@
  *
  */
 
+import { Party } from './party';
+
 /*
  * opts {
  *  party : [player, kiakai...],  - only used for setup
@@ -61,3 +63,5 @@ PrisonMinigame.prototype.Tick = function() {
 	//TODO Set up choices
 	Gui.ClearButtons();
 }
+
+export { PrisonMinigame };

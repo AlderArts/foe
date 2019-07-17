@@ -3,6 +3,9 @@
  * Define Kia/Kai
  * 
  */
+import { Scenes } from '../event';
+import { Entity } from '../entity';
+
 function Kiakai(storage) {
 	Entity.call(this);
 	this.ID = "kiakai";

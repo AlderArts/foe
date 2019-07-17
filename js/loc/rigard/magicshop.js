@@ -3,6 +3,11 @@
 // Asche's
 //
 
+import { world } from '../../world';
+import { Link, Scenes, EncounterTable } from '../../event';
+import { Shop } from '../../shop';
+import { Items } from '../../item';
+
 Scenes.Rigard.MagicShop = {}
 Scenes.Rigard.MagicShop.IsOpen = function() {
 	return (world.time.hour >= 10) && !rigard.UnderLockdown();

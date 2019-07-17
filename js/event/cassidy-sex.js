@@ -1,4 +1,6 @@
 
+import { Scenes } from '../event';
+
 Scenes.Cassidy.Sex = {};
 Scenes.Cassidy.SparSex = {};
 

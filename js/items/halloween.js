@@ -1,4 +1,5 @@
-import { Item, Items, ItemType } from '../item';
+import { Item, Items, ItemType, ItemSubtype } from '../item';
+import { Cock } from '../body/cock';
 
 Items.Halloween = {};
 

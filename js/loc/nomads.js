@@ -1,4 +1,7 @@
 
+import { world } from '../world';
+import { Link, Scenes } from '../event';
+import { Maze } from '../maze';
 
 //
 // Nomads

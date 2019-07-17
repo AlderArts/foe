@@ -1,7 +1,7 @@
 
-var gameCache = {};
+let gameCache = {};
 
-InitCache = function() {
+let InitCache = function() {
 	// Reset exploration
 	LastSubmenu = null;
 	Intro.active = false;

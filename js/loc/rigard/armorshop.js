@@ -3,6 +3,11 @@
 // Armor Shop
 //
 
+import { world } from '../../world';
+import { Link, Scenes, EncounterTable } from '../../event';
+import { Shop } from '../../shop';
+import { Items } from '../../item';
+
 Scenes.Rigard.ArmorShop = {};
 Scenes.Rigard.ArmorShop.IsOpen = function() {
 	return (world.time.hour >= 9 && world.time.hour < 20) && !rigard.UnderLockdown();

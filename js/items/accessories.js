@@ -1,4 +1,5 @@
 import { Item, Items, ItemType } from '../item';
+import { StatusEffect } from '../statuseffect';
 
 Items.Accessories = {};
 

@@ -3,6 +3,9 @@
 // Weapon Shop
 //
 
+import { world } from '../../world';
+import { Link, Scenes } from '../../event';
+
 Scenes.Rigard.WeaponShop = {};
 Scenes.Rigard.WeaponShop.IsOpen = function() {
 	return (world.time.hour >= 8 && world.time.hour < 17) && !rigard.UnderLockdown();

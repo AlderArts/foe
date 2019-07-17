@@ -2,6 +2,7 @@
 /*
  * Meditation scenes for the PC
  */
+import { Scenes } from '../event';
 
 Scenes.Meditation = {};
 

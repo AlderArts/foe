@@ -4,6 +4,8 @@
  * 
  */
 
+import { Scenes } from '../event';
+
 Scenes.RavenMother = {};
 
 function RavenMother(storage) {

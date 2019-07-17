@@ -1,4 +1,6 @@
 import { Item, Items } from '../item';
+import { Ability, Abilities, TargetMode } from '../ability';
+import { AbilityNode } from '../ability/node';
 
 function CombatItemAbility(item) {
 	Ability.call(this);

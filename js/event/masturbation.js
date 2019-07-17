@@ -2,6 +2,8 @@
  * Masturbation scenes for the PC
  */
 
+import { Scenes } from '../event';
+
 Scenes.Masturbation = {};
 
 // TODO: Stretch/Cap change for toy training

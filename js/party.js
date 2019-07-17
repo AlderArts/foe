@@ -4,6 +4,9 @@
  * Used for combat
  *
  */
+
+import { Inventory } from './inventory';
+
 function Party(storage) {
 	this.members = [];
 	this.reserve = [];
@@ -474,3 +477,5 @@ Party.prototype.ShowAbilities = function() {
 
 	Gui.SetButtonsFromList(list);
 }
+
+export { Party };

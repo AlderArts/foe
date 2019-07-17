@@ -5,6 +5,8 @@
  */
 
 
+import { world } from '../world';
+import { Event, Link, EncounterTable, Scenes } from '../event';
 
 // Create namespace
 world.loc.Burrows = {

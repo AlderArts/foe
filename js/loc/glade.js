@@ -4,6 +4,9 @@
  * 
  */
 
+import { world } from '../world';
+import { Event, Link, Scenes } from '../event';
+
 function DryadGlade(storage) {
 	this.flags = {};
 	

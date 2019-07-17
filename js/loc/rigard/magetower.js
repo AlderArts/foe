@@ -1,5 +1,8 @@
 
 
+import { world } from '../../world';
+import { Link, Scenes } from '../../event';
+
 //
 // Castle: Mage tower
 //

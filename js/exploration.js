@@ -326,4 +326,4 @@ function ShowHunting(preventClear) {
 	SetExploreButtons();
 }
 
-export { PrintDefaultOptions };
+export { PrintDefaultOptions, DataPrompt, LimitedDataPrompt };

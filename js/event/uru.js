@@ -3,6 +3,8 @@
  * Define Uru
  * 
  */
+import { Entity } from '../entity';
+
 function Uru(storage) {
 	Entity.call(this);
 	this.ID = "uru";

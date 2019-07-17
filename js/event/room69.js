@@ -3,6 +3,8 @@
  * Define SixtyNine
  * 
  */
+import { Scenes } from '../event';
+
 function Room69(storage) {
 	Entity.call(this);
 	this.ID = "room69";

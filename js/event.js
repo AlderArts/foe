@@ -384,4 +384,4 @@ EncounterTable.prototype.Get = function() {
 	return null;
 }
 
-export { Event, EncounterTable, MoveToLocation };
+export { Event, EncounterTable, Link, MoveToLocation, Scenes };

@@ -528,3 +528,5 @@ Encounter.prototype.CombatTick = function() {
 		}
 	}
 }
+
+export { Encounter };

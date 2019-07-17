@@ -1,4 +1,6 @@
 
+import { Scenes } from '../event';
+
 Scenes.Global = {};
 
 Scenes.Global.VisitedRigardGates = function() {

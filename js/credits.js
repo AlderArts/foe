@@ -1,6 +1,6 @@
 
 
-CreditsScreen = function() {
+let CreditsScreen = function() {
 	SetGameState(GameState.Credits);
 	Text.Clear();
 	Gui.ClearButtons();

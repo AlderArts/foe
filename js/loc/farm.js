@@ -4,6 +4,9 @@
  *
  */
 
+import { world } from '../world';
+import { Event, Link, EncounterTable, Scenes } from '../event';
+
 /*
  * Structure to hold farm management minigame
  */

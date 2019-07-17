@@ -1,4 +1,6 @@
 
+import { Scenes } from '../event';
+
 Scenes.Roaming = {};
 
 Scenes.Roaming.FlowerPetal = function() {

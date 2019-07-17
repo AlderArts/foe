@@ -478,3 +478,5 @@ Inventory.prototype.ShowEquippable = function(entity, type, backPrompt) {
 	Text.Flush();
 	Gui.SetButtonsFromList(list, true, backPrompt);
 }
+
+export { Inventory };

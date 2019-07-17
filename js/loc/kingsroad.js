@@ -4,6 +4,9 @@
  * 
  */
 
+import { world } from '../world';
+import { Event, Link, EncounterTable, Scenes } from '../event';
+
 // Create namespace
 world.loc.KingsRoad = {
 	Road         : new Event("King's road")

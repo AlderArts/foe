@@ -4,6 +4,9 @@
  * 
  */
 
+import { world } from '../../world';
+import { Event, Link, Scenes, EncounterTable } from '../../event';
+
 world.loc.Rigard.Krawitz =
 {
 	street    : new Event("Krawitz's Estate"),
