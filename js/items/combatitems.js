@@ -1,3 +1,4 @@
+import { Item, Items } from '../item';
 
 function CombatItemAbility(item) {
 	Ability.call(this);
@@ -207,3 +208,5 @@ Items.Combat.GlassSword.combat.castTree.push(AbilityNode.Template.Physical({
 	onDamage: [Abilities.Physical._onDamage],
 	onAbsorb: [Abilities.Physical._onAbsorb]
 }));
+
+export { CombatItem, CombatItemAbility };

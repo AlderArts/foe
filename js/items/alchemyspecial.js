@@ -1,3 +1,8 @@
+import { Items } from '../item';
+import { TF, TFItem } from '../tf';
+import { Genitalia } from '../body/genitalia';
+import { HipSize } from '../body/body';
+
 Items.EquiniumPlus = new TFItem("equin+", "Equinium+");
 Items.EquiniumPlus.price = 100;
 Items.EquiniumPlus.lDesc = function() { return "a bottle of Equinium+"; }

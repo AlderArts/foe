@@ -1,6 +1,7 @@
 /*
  * Cavalcade card suits
  */
+import { Item, Items, ItemType } from '../item';
 
 Items.Cards = {};
 Items.Cards.Light = [];

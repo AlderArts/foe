@@ -1,3 +1,5 @@
+import { Item, Items, ItemType } from '../item';
+
 Items.Armor = {};
 
 Items.Armor.LeatherChest = new Item("chest0", "L.Chest", ItemType.Armor);

@@ -1,3 +1,5 @@
+import { Item, Items, ItemType } from '../item';
+
 Items.Accessories = {};
 
 Items.Accessories.CrudeBook = new Item("book0", "C.Book", ItemType.Accessory);

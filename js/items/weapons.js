@@ -1,3 +1,5 @@
+import { Item, Items, ItemType } from '../item';
+
 Items.Weapons = {};
 
 Items.Weapons.Dagger = new Item("dag0", "Dagger", ItemType.Weapon);

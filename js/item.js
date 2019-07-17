@@ -1,10 +1,10 @@
 
 
 // Namespace that item prototypes are kept in
-Items = {};
-ItemIds = {};
+let Items = {};
+let ItemIds = {};
 //Represents the overall category an item falls under.
-ItemType = {
+let ItemType = {
 	Weapon     : "Weapons",
 	Armor      : "Armors",
 	Accessory  : "Accessories",
@@ -17,7 +17,7 @@ ItemType = {
 };
 //Represents a second level of categorization for items.
 //FIXME Attempt to remove Acc1/Acc2 from here. They can exist on entity, but shouldn't exist as a type in items.
-ItemSubtype = {
+let ItemSubtype = {
 	FullArmor : "Full Armors",
 	TopArmor  : "Top Armors",
 	BotArmor  : "Bottom Armors",
@@ -210,3 +210,5 @@ function compareItemByProp(p){
 		return (a.it[p] > b.it[p]) ? 1 : (a.it[p] < b.it[p]) ? -1 : 0;
 	}
 }
+
+export { Item, Items, ItemType, ItemSubtype, ItemIds, compareItemByProp };

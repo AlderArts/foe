@@ -4,7 +4,9 @@
  * 
  */
 
-TF = {};
+import { Item, ItemType } from './item';
+
+let TF = {};
 
 TF.Effect = {
 	Unchanged : 0,
@@ -1201,3 +1203,5 @@ TF.ItemEffects.DecCha = function(target, opts) {
 	}
 	Text.Flush();
 }
+
+export { TF, TFItem };

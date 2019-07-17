@@ -1,4 +1,7 @@
-
+import { Item, Items, ItemType } from '../item';
+import { TF, TFItem } from '../tf';
+import { Genitalia } from '../body/genitalia';
+import { HipSize } from '../body/body';
 
 Items.Equinium = new TFItem("equin0", "Equinium");
 Items.Equinium.price = 7;

@@ -1,3 +1,6 @@
+import { Item, Items, ItemType, ItemSubtype } from '../item';
+import { Cock } from '../body/cock';
+
 Items.Toys = {};
 
 Items.Toys.SmallDildo = new Item("dildo0", "Small dildo", ItemType.Toy);

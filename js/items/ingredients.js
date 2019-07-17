@@ -1,3 +1,4 @@
+import { Item, Items, ItemType } from '../item';
 
 Items.HorseHair = new Item("equin1", "Horse hair", ItemType.Ingredient);
 Items.HorseHair.price = 1;

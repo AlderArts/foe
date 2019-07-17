@@ -1,3 +1,4 @@
+import { Item, Items, ItemType } from '../item';
 
 Items.Halloween = {};
 

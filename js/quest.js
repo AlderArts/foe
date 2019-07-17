@@ -1,5 +1,7 @@
 
-Quests = {};
+import { Items } from './item';
+
+let Quests = {};
 Quests.Type = {
 	NotStarted : 0,
 	Visible    : 1,
@@ -8,7 +10,7 @@ Quests.Type = {
 	Failed     : 4
 };
 
-Quest = function(opts) {
+let Quest = function(opts) {
 	opts = opts || {};
 	this.name   = opts.name   || "FAIL";
 	this.desc   = opts.desc   || "NO DESC";
@@ -36,7 +38,7 @@ Quest.prototype.Active = function() {
 	return this.active(this) & Quests.curType;
 }
 
-QuestItem = function(opts) {
+let QuestItem = function(opts) {
 	opts = opts || {};
 	this.desc   = opts.desc   || "NO DESC";
 	this.active = opts.active;
@@ -1095,3 +1097,5 @@ Quests.quests.push(new Quest({
 }));
 
  */
+
+export { Quest, QuestItem, Quests };

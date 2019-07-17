@@ -1,4 +1,6 @@
 
+import { Item, Items, ItemType } from '../item';
+
 Items.Quest = {};
 
 Items.Quest.Cactoid = new Item("quest0", "Cactoid", ItemType.Quest);
