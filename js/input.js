@@ -1,3 +1,6 @@
+import { Gui } from './gui';
+import { Button } from './button';
+import { Images } from './assets';
 
 let Input = {
 

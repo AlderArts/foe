@@ -38,40 +38,6 @@ let StatusEffect = {
 
 Status.Keys = Object.keys(StatusEffect);
 
-function LoadStatusImages(imageArray) {
-	Images.status = [];
-	for(var i = 0; i < StatusEffect.LAST; i++) {
-		Images.status[i]  = "";
-	}
-
-	// Status effects
-	Images.status[StatusEffect.Burn]     = "assets/img/status/burn.png";
-	Images.status[StatusEffect.Freeze]   = "assets/img/status/freeze.png";
-	Images.status[StatusEffect.Numb]     = "assets/img/status/numb.png";
-	Images.status[StatusEffect.Venom]    = "assets/img/status/venom.png";
-	Images.status[StatusEffect.Blind]    = "assets/img/status/blind.png";
-	Images.status[StatusEffect.Siphon]   = "assets/img/status/siphon.png";
-	Images.status[StatusEffect.Sleep]    = "assets/img/status/sleep.png";
-	Images.status[StatusEffect.Bleed]    = "assets/img/status/bleed.png";
-	Images.status[StatusEffect.Haste]    = "assets/img/status/haste.png";
-	Images.status[StatusEffect.Slow]     = "assets/img/status/slow.png";
-	Images.status[StatusEffect.Horny]    = "assets/img/status/horny.png";
-	Images.status[StatusEffect.Aroused]  = "assets/img/status/aroused.png";
-	Images.status[StatusEffect.Limp]     = "assets/img/status/limp.png";
-	Images.status[StatusEffect.Decoy]    = "assets/img/status/decoy.png";
-	Images.status[StatusEffect.Counter]  = "assets/img/status/counter.png";
-	Images.status[StatusEffect.Full]     = "assets/img/status/full.png";
-	Images.status[StatusEffect.Confuse]  = "assets/img/status/confuse.png";
-	Images.status[StatusEffect.Weakness] = "assets/img/status/weakness.png";
-	Images.status[StatusEffect.Buff]     = "assets/img/status/buff.png";
-	Images.status[StatusEffect.Curse]    = "assets/img/status/curse.png";
-	
-	for(var i = 0; i < StatusEffect.LAST; i++) {
-		if(Images.status[i] == "") continue;
-		imageArray.push(Images.status[i]);
-	}
-}
-
 function StatusList() {
 	// Index contains null if status effect is inactive
 	// Data in index can contain a degree/timer relevant to the effect

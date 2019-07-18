@@ -1,7 +1,7 @@
 
 import { BodyPart } from './bodypart';
 
-var AppendageType = {
+let AppendageType = {
 	horn    : 0,
 	antenna : 1,
 	tail    : 2,
@@ -102,3 +102,5 @@ Appendage.prototype.Long = function() {
 	}
 	else return "strange growth";
 }
+
+export { Appendage, AppendageType };

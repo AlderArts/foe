@@ -8,6 +8,7 @@ import { Entity } from '../entity';
 import { Scenes } from '../event';
 import { Images } from '../assets';
 import { TF } from '../tf';
+import { AppendageType } from '../body/appendage';
 
 // TODO: Make base stats depend on Burrows flags (perhaps make a factory function?)
 

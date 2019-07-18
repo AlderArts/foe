@@ -5,6 +5,7 @@
  */
 
 import { Item, ItemType } from './item';
+import { Appendage, AppendageType } from './body/appendage';
 
 let TF = {};
 

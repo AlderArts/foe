@@ -1,4 +1,10 @@
 
+import { world } from './world';
+import { Link } from './event';
+import { Cock } from './body/cock';
+import { Vagina } from './body/vagina';
+import { Item } from './item';
+
 /*
 world.loc.Plains.Nomads.Tent.events.push(new Link(
 	"TESTBUTTON", function() { return DEBUG; }, true,

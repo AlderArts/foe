@@ -180,7 +180,7 @@ let InitCache = function() {
 	if(burrows.flags["Access"] >= Burrows.AccessFlags.Stage5) rigard.flags["Scepter"] = 0;
 }
 
-CacheToGame = function() {
+let CacheToGame = function() {
 	InitCache();
 
 	// Load flags
@@ -415,7 +415,7 @@ CacheToGame = function() {
 	}
 }
 
-GameToCache = function() {
+let GameToCache = function() {
 	gameCache.version  = SAVE_VERSION;
 	// For debugging
 	gameCache.build    = VERSION_STRING;

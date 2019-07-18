@@ -6,8 +6,12 @@
 
 import { Entity } from '../entity';
 import { Scenes } from '../event';
+import { Images } from '../assets';
+import { TF } from '../tf';
+import { AppendageType } from '../body/appendage';
+import { Items } from '../item';
 
-Feline = {};
+let Feline = {};
 
 Feline.DropTable = function() {
 	var drops = [];

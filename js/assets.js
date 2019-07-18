@@ -1,4 +1,6 @@
 import * as Preloader from 'preloader';
+import { StatusEffect } from './statuseffect';
+import { Items } from './item';
 
 var Images = {};
 
@@ -137,4 +139,80 @@ var assetsOverlay = function() {
 	el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
 }
 
-export { Images };
+let LoadCardImages = function(imageArray) {
+	Items.Cards.Light[0].Img    = "assets/img/cards/L1.png";
+	Items.Cards.Light[1].Img    = "assets/img/cards/L2.png";
+	Items.Cards.Light[2].Img    = "assets/img/cards/L3.png";
+	Items.Cards.Light[3].Img    = "assets/img/cards/L4.png";
+	Items.Cards.Light[4].Img    = "assets/img/cards/L5.png";
+	Items.Cards.Darkness[0].Img = "assets/img/cards/D1.png";
+	Items.Cards.Darkness[1].Img = "assets/img/cards/D2.png";
+	Items.Cards.Darkness[2].Img = "assets/img/cards/D3.png";
+	Items.Cards.Darkness[3].Img = "assets/img/cards/D4.png";
+	Items.Cards.Darkness[4].Img = "assets/img/cards/D5.png";
+	Items.Cards.Shadow[0].Img   = "assets/img/cards/S1.png";
+	Items.Cards.Shadow[1].Img   = "assets/img/cards/S2.png";
+	Items.Cards.Shadow[2].Img   = "assets/img/cards/S3.png";
+	Items.Cards.Shadow[3].Img   = "assets/img/cards/S4.png";
+	Items.Cards.Shadow[4].Img   = "assets/img/cards/S5.png";
+
+	Images.card_back            = "assets/img/cards/back.png";
+
+	var cards = [
+		Items.Cards.Light[0].Img,
+		Items.Cards.Light[1].Img,
+		Items.Cards.Light[2].Img,
+		Items.Cards.Light[3].Img,
+		Items.Cards.Light[4].Img,
+		Items.Cards.Darkness[0].Img,
+		Items.Cards.Darkness[1].Img,
+		Items.Cards.Darkness[2].Img,
+		Items.Cards.Darkness[3].Img,
+		Items.Cards.Darkness[4].Img,
+		Items.Cards.Shadow[0].Img,
+		Items.Cards.Shadow[1].Img,
+		Items.Cards.Shadow[2].Img,
+		Items.Cards.Shadow[3].Img,
+		Items.Cards.Shadow[4].Img,
+		Images.card_back
+	];
+
+	for(var i = 0; i < cards.length; i++)
+		imageArray.push(cards[i]);
+}
+
+function LoadStatusImages(imageArray) {
+	Images.status = [];
+	for(var i = 0; i < StatusEffect.LAST; i++) {
+		Images.status[i]  = "";
+	}
+
+	// Status effects
+	Images.status[StatusEffect.Burn]     = "assets/img/status/burn.png";
+	Images.status[StatusEffect.Freeze]   = "assets/img/status/freeze.png";
+	Images.status[StatusEffect.Numb]     = "assets/img/status/numb.png";
+	Images.status[StatusEffect.Venom]    = "assets/img/status/venom.png";
+	Images.status[StatusEffect.Blind]    = "assets/img/status/blind.png";
+	Images.status[StatusEffect.Siphon]   = "assets/img/status/siphon.png";
+	Images.status[StatusEffect.Sleep]    = "assets/img/status/sleep.png";
+	Images.status[StatusEffect.Bleed]    = "assets/img/status/bleed.png";
+	Images.status[StatusEffect.Haste]    = "assets/img/status/haste.png";
+	Images.status[StatusEffect.Slow]     = "assets/img/status/slow.png";
+	Images.status[StatusEffect.Horny]    = "assets/img/status/horny.png";
+	Images.status[StatusEffect.Aroused]  = "assets/img/status/aroused.png";
+	Images.status[StatusEffect.Limp]     = "assets/img/status/limp.png";
+	Images.status[StatusEffect.Decoy]    = "assets/img/status/decoy.png";
+	Images.status[StatusEffect.Counter]  = "assets/img/status/counter.png";
+	Images.status[StatusEffect.Full]     = "assets/img/status/full.png";
+	Images.status[StatusEffect.Confuse]  = "assets/img/status/confuse.png";
+	Images.status[StatusEffect.Weakness] = "assets/img/status/weakness.png";
+	Images.status[StatusEffect.Buff]     = "assets/img/status/buff.png";
+	Images.status[StatusEffect.Curse]    = "assets/img/status/curse.png";
+	
+	for(var i = 0; i < StatusEffect.LAST; i++) {
+		if(Images.status[i] == "") continue;
+		imageArray.push(Images.status[i]);
+	}
+}
+
+export { Images, LoadImages };

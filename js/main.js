@@ -1,3 +1,7 @@
+import * as $ from 'jquery';
+import { Images, LoadImages } from './assets';
+import { world } from './world';
+import { Gui } from './gui';
 
 // Prevent selection
 $(function() {
@@ -21,7 +25,7 @@ function EntryPoint() {
 window.onload = EntryPoint;
 
 // Gamestate
-GameState = {
+let GameState = {
 	Credits   : 0,
 	Game      : 1,
 	Combat    : 2,
@@ -31,26 +35,26 @@ GameState = {
 	Hunting   : 6
 }
 
-var gameState = GameState.Credits;
+let gameState = GameState.Credits;
 
-SetGameState = function(state) {
+let SetGameState = function(state) {
 	gameState = state;
 	Gui.SetGameState(state);
 }
 
-SetGameOverButton = function(text) {
+let SetGameOverButton = function(text) {
 	text = text || "This is where your journey comes to an end.";
 	Gui.ClearButtons();
 	Input.buttons[0].Setup("Game Over", GameOver, true, null, text);
 }
 
 // TODO: Stats, newgame+ etc
-GameOver = function() {
+let GameOver = function() {
 	Gui.Callstack = [];
 	SplashScreen();
 }
 
-SplashScreen = function() {
+let SplashScreen = function() {
 	SetGameState(GameState.Credits);
 	Text.Clear();
 	Gui.ClearButtons();
