@@ -5,6 +5,8 @@ import { Images } from './assets';
 import { SMALL_FONT, DEFAULT_FONT } from '../app';
 import { StatusEffect, StatusList } from './statuseffect';
 import { Input } from './input';
+import { online } from './main';
+import { DataPrompt } from './exploration';
 
 let Gui = {}
 Gui.w = 1280;

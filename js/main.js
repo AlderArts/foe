@@ -8,6 +8,8 @@ $(function() {
 	$('canvas').mousedown(function(event) { event.preventDefault() });
 });
 
+let online = false;
+
 // Set the main entrypoint of the application
 function EntryPoint() {
 	try {
@@ -145,3 +147,5 @@ function Setup() {
 
 	Render();
 }
+
+export { online };
