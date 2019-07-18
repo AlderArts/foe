@@ -148,4 +148,4 @@ function Setup() {
 	Render();
 }
 
-export { online };
+export { online, GameState, gameState, SetGameState, Render };

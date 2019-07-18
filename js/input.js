@@ -1,6 +1,7 @@
 import { Gui } from './gui';
 import { Button } from './button';
 import { Images } from './assets';
+import { gameState, GameState } from './main';
 
 let Input = {
 
@@ -108,86 +109,88 @@ Input.RenderExploreButtonGlow = function() {
 }
 
 // TODO this is actually wrong
-let KEY_CONSOLE = 0;
+let Keys = {
+	KEY_CONSOLE : 0,
 
-let KEY_1 = 49;
-let KEY_2 = 50;
-let KEY_3 = 51;
-let KEY_4 = 52;
-let KEY_5 = 53;
-let KEY_6 = 54;
-let KEY_7 = 55;
-let KEY_8 = 56;
-let KEY_9 = 57;
-let KEY_0 = 48;
+	KEY_1 : 49,
+	KEY_2 : 50,
+	KEY_3 : 51,
+	KEY_4 : 52,
+	KEY_5 : 53,
+	KEY_6 : 54,
+	KEY_7 : 55,
+	KEY_8 : 56,
+	KEY_9 : 57,
+	KEY_0 : 48,
 
-let KEY_Q = 81;
-let KEY_W = 87;
-let KEY_E = 69;
-let KEY_R = 82;
-let KEY_T = 84;
-let KEY_Y = 89;
-let KEY_U = 85;
-let KEY_I = 73;
-let KEY_O = 79;
-let KEY_P = 80;
-let KEY_A = 65;
-let KEY_S = 83;
-let KEY_D = 68;
-let KEY_F = 70;
-let KEY_G = 71;
-let KEY_H = 72;
-let KEY_J = 74;
-let KEY_K = 75;
-let KEY_L = 76;
-let KEY_Z = 90;
-let KEY_X = 88;
-let KEY_C = 67;
-let KEY_V = 86;
-let KEY_B = 66;
-let KEY_N = 78;
-let KEY_M = 77;
+	KEY_Q : 81,
+	KEY_W : 87,
+	KEY_E : 69,
+	KEY_R : 82,
+	KEY_T : 84,
+	KEY_Y : 89,
+	KEY_U : 85,
+	KEY_I : 73,
+	KEY_O : 79,
+	KEY_P : 80,
+	KEY_A : 65,
+	KEY_S : 83,
+	KEY_D : 68,
+	KEY_F : 70,
+	KEY_G : 71,
+	KEY_H : 72,
+	KEY_J : 74,
+	KEY_K : 75,
+	KEY_L : 76,
+	KEY_Z : 90,
+	KEY_X : 88,
+	KEY_C : 67,
+	KEY_V : 86,
+	KEY_B : 66,
+	KEY_N : 78,
+	KEY_M : 77,
+}
 
 let KeyToText = {};
-KeyToText[KEY_CONSOLE] = "§";
+KeyToText[Keys.KEY_CONSOLE] = "§";
 
-KeyToText[KEY_1] = "1";
-KeyToText[KEY_2] = "2";
-KeyToText[KEY_3] = "3";
-KeyToText[KEY_4] = "4";
-KeyToText[KEY_5] = "5";
-KeyToText[KEY_6] = "6";
-KeyToText[KEY_7] = "7";
-KeyToText[KEY_8] = "8";
-KeyToText[KEY_9] = "9";
-KeyToText[KEY_0] = "0";
+KeyToText[Keys.KEY_1] = "1";
+KeyToText[Keys.KEY_2] = "2";
+KeyToText[Keys.KEY_3] = "3";
+KeyToText[Keys.KEY_4] = "4";
+KeyToText[Keys.KEY_5] = "5";
+KeyToText[Keys.KEY_6] = "6";
+KeyToText[Keys.KEY_7] = "7";
+KeyToText[Keys.KEY_8] = "8";
+KeyToText[Keys.KEY_9] = "9";
+KeyToText[Keys.KEY_0] = "0";
 
-KeyToText[KEY_Q] = "Q";
-KeyToText[KEY_W] = "W";
-KeyToText[KEY_E] = "E";
-KeyToText[KEY_R] = "R";
-KeyToText[KEY_T] = "T";
-KeyToText[KEY_Y] = "Y";
-KeyToText[KEY_U] = "U";
-KeyToText[KEY_I] = "I";
-KeyToText[KEY_O] = "O";
-KeyToText[KEY_P] = "P";
-KeyToText[KEY_A] = "A";
-KeyToText[KEY_S] = "S";
-KeyToText[KEY_D] = "D";
-KeyToText[KEY_F] = "F";
-KeyToText[KEY_G] = "G";
-KeyToText[KEY_H] = "H";
-KeyToText[KEY_J] = "J";
-KeyToText[KEY_K] = "K";
-KeyToText[KEY_L] = "L";
-KeyToText[KEY_Z] = "Z";
-KeyToText[KEY_X] = "X";
-KeyToText[KEY_C] = "C";
-KeyToText[KEY_V] = "V";
-KeyToText[KEY_B] = "B";
-KeyToText[KEY_N] = "N";
-KeyToText[KEY_M] = "M";
+KeyToText[Keys.KEY_Q] = "Q";
+KeyToText[Keys.KEY_W] = "W";
+KeyToText[Keys.KEY_E] = "E";
+KeyToText[Keys.KEY_R] = "R";
+KeyToText[Keys.KEY_T] = "T";
+KeyToText[Keys.KEY_Y] = "Y";
+KeyToText[Keys.KEY_U] = "U";
+KeyToText[Keys.KEY_I] = "I";
+KeyToText[Keys.KEY_O] = "O";
+KeyToText[Keys.KEY_P] = "P";
+KeyToText[Keys.KEY_A] = "A";
+KeyToText[Keys.KEY_S] = "S";
+KeyToText[Keys.KEY_D] = "D";
+KeyToText[Keys.KEY_F] = "F";
+KeyToText[Keys.KEY_G] = "G";
+KeyToText[Keys.KEY_H] = "H";
+KeyToText[Keys.KEY_J] = "J";
+KeyToText[Keys.KEY_K] = "K";
+KeyToText[Keys.KEY_L] = "L";
+KeyToText[Keys.KEY_Z] = "Z";
+KeyToText[Keys.KEY_X] = "X";
+KeyToText[Keys.KEY_C] = "C";
+KeyToText[Keys.KEY_V] = "V";
+KeyToText[Keys.KEY_B] = "B";
+KeyToText[Keys.KEY_N] = "N";
+KeyToText[Keys.KEY_M] = "M";
 
 // Internal logical representations
 let LEFT_ARROW  = 0;
@@ -224,10 +227,10 @@ Input.Keydown = function(event) {
 
 	/* TODO Not really used atm
 	switch(event.keyCode) {
-		case KEY_A: Input.keyinput[LEFT_ARROW]  = true; break;
-		case KEY_D: Input.keyinput[RIGHT_ARROW] = true; break;
-		case KEY_W: Input.keyinput[UP_ARROW]    = true; break;
-		case KEY_S: Input.keyinput[DOWN_ARROW]  = true; break;
+		case Keys.KEY_A: Input.keyinput[LEFT_ARROW]  = true; break;
+		case Keys.KEY_D: Input.keyinput[RIGHT_ARROW] = true; break;
+		case Keys.KEY_W: Input.keyinput[UP_ARROW]    = true; break;
+		case Keys.KEY_S: Input.keyinput[DOWN_ARROW]  = true; break;
 	} */
 	return true;
 }
@@ -236,14 +239,14 @@ Input.Keydown = function(event) {
 Input.Keyup = function(event) {
 	/* TODO Not really used atm
 	switch(event.keyCode) {
-		case KEY_A: Input.keyinput[LEFT_ARROW]  = false; break;
-		case KEY_D: Input.keyinput[RIGHT_ARROW] = false; break;
-		case KEY_W: Input.keyinput[UP_ARROW]    = false; break;
-		case KEY_S: Input.keyinput[DOWN_ARROW]  = false; break;
+		case Keys.KEY_A: Input.keyinput[LEFT_ARROW]  = false; break;
+		case Keys.KEY_D: Input.keyinput[RIGHT_ARROW] = false; break;
+		case Keys.KEY_W: Input.keyinput[UP_ARROW]    = false; break;
+		case Keys.KEY_S: Input.keyinput[DOWN_ARROW]  = false; break;
 	} */
 	return true;
 }
 
 Input.tooltip = false;
 
-export { Input };
+export { Input, Keys };

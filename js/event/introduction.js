@@ -6,6 +6,7 @@
 
 import { Event, Link } from '../event';
 import { world } from '../world';
+import { GameState } from '../main';
 
 let Intro = {};
 

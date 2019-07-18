@@ -6,6 +6,7 @@
 import * as $ from 'jquery';
 import { Gui } from './gui';
 import { BUTTON_FONT } from '../app';
+import { gameState, GameState, Render } from './main';
 
 function Button(rect, text, func, enabled, image, disabledImage, glow) {
 	var that = this;

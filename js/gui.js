@@ -1,14 +1,15 @@
 import * as Raphael from 'raphael';
 import * as $ from 'jquery';
 
+let Gui = {}
+
 import { Images } from './assets';
 import { SMALL_FONT, DEFAULT_FONT } from '../app';
 import { StatusEffect, StatusList } from './statuseffect';
-import { Input } from './input';
-import { online } from './main';
-import { DataPrompt } from './exploration';
+import { Input, Keys } from './input';
+import { online, gameState, GameState } from './main';
+import { DataPrompt, ExploreButtonIndex } from './exploration';
 
-let Gui = {}
 Gui.w = 1280;
 Gui.h = 720;
 
@@ -140,38 +141,38 @@ Gui.Init = function() {
 
 	// Setup keyboard shortcuts
 	// Row 1
-	Input.buttons[0].SetKey(KEY_1);
-	Input.buttons[1].SetKey(KEY_2);
-	Input.buttons[2].SetKey(KEY_3);
-	Input.buttons[3].SetKey(KEY_4);
-	Input.navButtons[0].SetKey(KEY_5);
+	Input.buttons[0].SetKey(Keys.KEY_1);
+	Input.buttons[1].SetKey(Keys.KEY_2);
+	Input.buttons[2].SetKey(Keys.KEY_3);
+	Input.buttons[3].SetKey(Keys.KEY_4);
+	Input.navButtons[0].SetKey(Keys.KEY_5);
 	// Row 2
-	Input.buttons[4].SetKey(KEY_Q);
-	Input.buttons[5].SetKey(KEY_W);
-	Input.buttons[6].SetKey(KEY_E);
-	Input.buttons[7].SetKey(KEY_R);
-	Input.navButtons[1].SetKey(KEY_T);
+	Input.buttons[4].SetKey(Keys.KEY_Q);
+	Input.buttons[5].SetKey(Keys.KEY_W);
+	Input.buttons[6].SetKey(Keys.KEY_E);
+	Input.buttons[7].SetKey(Keys.KEY_R);
+	Input.navButtons[1].SetKey(Keys.KEY_T);
 	// Row 3
-	Input.buttons[8].SetKey(KEY_A);
-	Input.buttons[9].SetKey(KEY_S);
-	Input.buttons[10].SetKey(KEY_D);
-	Input.buttons[11].SetKey(KEY_F);
-	Input.navButtons[2].SetKey(KEY_G);
+	Input.buttons[8].SetKey(Keys.KEY_A);
+	Input.buttons[9].SetKey(Keys.KEY_S);
+	Input.buttons[10].SetKey(Keys.KEY_D);
+	Input.buttons[11].SetKey(Keys.KEY_F);
+	Input.navButtons[2].SetKey(Keys.KEY_G);
 
 	// Explore buttons
-	Input.exploreButtons[ExploreButtonIndex.Wait].SetKey(KEY_Z);
-	Input.exploreButtons[ExploreButtonIndex.Sleep].SetKey(KEY_Z);
-	Input.exploreButtons[ExploreButtonIndex.Look].SetKey(KEY_X);
+	Input.exploreButtons[ExploreButtonIndex.Wait].SetKey(Keys.KEY_Z);
+	Input.exploreButtons[ExploreButtonIndex.Sleep].SetKey(Keys.KEY_Z);
+	Input.exploreButtons[ExploreButtonIndex.Look].SetKey(Keys.KEY_X);
 
-	Input.exploreButtons[ExploreButtonIndex.Explore].SetKey(KEY_6);
-	Input.exploreButtons[ExploreButtonIndex.Party].SetKey(KEY_7);
-	Input.exploreButtons[ExploreButtonIndex.Items].SetKey(KEY_8);
-	Input.exploreButtons[ExploreButtonIndex.Ability].SetKey(KEY_9);
-	Input.exploreButtons[ExploreButtonIndex.Alchemy].SetKey(KEY_0);
-	Input.exploreButtons[ExploreButtonIndex.Quests].SetKey(KEY_U);
+	Input.exploreButtons[ExploreButtonIndex.Explore].SetKey(Keys.KEY_6);
+	Input.exploreButtons[ExploreButtonIndex.Party].SetKey(Keys.KEY_7);
+	Input.exploreButtons[ExploreButtonIndex.Items].SetKey(Keys.KEY_8);
+	Input.exploreButtons[ExploreButtonIndex.Ability].SetKey(Keys.KEY_9);
+	Input.exploreButtons[ExploreButtonIndex.Alchemy].SetKey(Keys.KEY_0);
+	Input.exploreButtons[ExploreButtonIndex.Quests].SetKey(Keys.KEY_U);
 
 
-	Input.menuButtons[0].SetKey(KEY_CONSOLE);
+	Input.menuButtons[0].SetKey(Keys.KEY_CONSOLE);
 
 	Gui.ClearButtons();
 }
@@ -866,6 +867,18 @@ Gui.RenderStatsScreen = function(context) {
 	context.textAlign = 'start';
 
 	context.restore();
+}
+
+Gui.SavePromptText = function() {
+	Text.Clear();
+	Text.Add("Fall of Eden saves using JavaScript localStorage (also known as Web Storage). Exactly how and where this will put your save is up to browser implementation, but the standard ensures at least 5MB of storage space, more than enough for 12 full save slots.");
+	Text.NL();
+	Text.Add("IMPORTANT: Saves are kept by your browser, for the specific domain you are playing in atm. If you clear browsing history or the domain changes, you may lose saves. See these saves as temporary, ALWAYS use Save to File to backup if you want to ensure not losing your progress!", null, 'bold');
+	Text.NL();
+	Text.Add("You can only save at 'safe' locations in the world (the same places you can sleep), but you can load/start a new game from anywhere.");
+	Text.NL();
+	Text.Add("<b>NEW:</b> Use the save to text if you are having problems using save to file. Copy the text that appears into a text file, and save it. You will be able to use it with load from file.");
+	Text.Flush();
 }
 
 export { Gui };
