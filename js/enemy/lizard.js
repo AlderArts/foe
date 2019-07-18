@@ -4,6 +4,10 @@
  *
  */
 
+import { Entity } from '../entity';
+import { Scenes } from '../event';
+import { Cock } from '../body/cock';
+
 function Lizard(gender) {
 	Entity.call(this);
 	this.ID = "lizard";

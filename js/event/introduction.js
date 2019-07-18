@@ -2767,3 +2767,5 @@ Intro.Finalizing = function() {
 
 	Gui.NextPrompt(PrintDefaultOptions);
 }
+
+export { Intro };

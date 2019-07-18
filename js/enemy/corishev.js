@@ -2,6 +2,8 @@
  * Lt Corishev
  */
 
+import { BossEntity } from './boss';
+
 function Corishev() {
 	BossEntity.call(this);
 	this.ID = "corishev";

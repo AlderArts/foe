@@ -4,6 +4,11 @@
  * 
  */
 
+import { Entity } from '../entity';
+import { Link } from '../event';
+import { world } from '../world';
+import { Intro } from '../event/introduction';
+
 function Imp() {
 	Entity.call(this);
 	this.ID = "imp";

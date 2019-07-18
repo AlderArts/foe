@@ -6,6 +6,7 @@
 import { Link, Scenes } from '../../event';
 import { Entity } from '../../entity';
 import { world } from '../../world';
+import { Shop } from '../../shop';
 
 function Patchwork(storage) {
 	Entity.call(this);

@@ -4,6 +4,8 @@
  * 
  */
 
+import { Entity } from '../entity';
+
 function Footman(levelbonus) {
 	Entity.call(this);
 	this.ID = "footman";

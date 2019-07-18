@@ -1,6 +1,7 @@
 
-import { Scenes } from '../event';
+import { Event, Link, Scenes } from '../event';
 import { Inventory } from '../inventory';
+import { world } from '../world';
 
 //Will be used for temporary variable storage.
 function Halloween() {

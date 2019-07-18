@@ -4,6 +4,9 @@
  * 
  */
 
+import { BossEntity } from './boss';
+import { Scenes } from '../event';
+
 Scenes.Gol = {};
 
 function GolQueen() {

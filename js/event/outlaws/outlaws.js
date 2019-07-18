@@ -1282,3 +1282,5 @@ Scenes.Outlaws.Exploration.DailyLife = function() {
 	
 	Gui.NextPrompt();
 }
+
+export { Outlaws };

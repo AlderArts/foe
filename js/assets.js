@@ -136,3 +136,5 @@ var assetsOverlay = function() {
 	var el = document.getElementById("overlay_assets");
 	el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
 }
+
+export { Images };

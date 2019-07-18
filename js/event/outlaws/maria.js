@@ -5,6 +5,7 @@
  */
 import { Scenes } from '../../event';
 import { Entity } from '../../entity';
+import { world } from '../../world';
 
 function Maria(storage) {
 	Entity.call(this);

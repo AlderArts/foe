@@ -3,8 +3,9 @@
  * Define Magnus
  * 
  */
-import { Scenes } from '../../event';
+import { Link, Scenes } from '../../event';
 import { Entity } from '../../entity';
+import { world } from '../../world';
 
 function Magnus(storage) {
 	Entity.call(this);

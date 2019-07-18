@@ -4,6 +4,8 @@
  * 
  */
 
+import { Entity } from '../entity';
+
 function StreetUrchin() {
 	Entity.call(this);
 	this.ID = "urchin";

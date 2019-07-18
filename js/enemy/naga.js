@@ -4,6 +4,9 @@
  *
  */
 
+import { Entity } from '../entity';
+import { Scenes } from '../event';
+
 function Naga() {
 	Entity.call(this);
 	this.ID = "naga";

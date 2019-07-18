@@ -4,7 +4,9 @@
  * Flags in outlaws
  * stats in outlaws.BT
  */
-import { Scenes } from '../../event';
+import { Event, Link, EncounterTable, Scenes } from '../../event';
+import { Outlaws } from './outlaws';
+import { world } from '../../world';
 
 function BullTowerStats() {
 	this.suspicion       = new Stat(0);

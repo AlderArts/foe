@@ -1,4 +1,5 @@
 import { Scenes } from '../../event';
+import { Vaughn } from './vaughn';
 
 Scenes.Vaughn.Tasks = {};
 

@@ -1,3 +1,8 @@
+
+import { Entity } from '../entity';
+import { EncounterTable, Scenes } from '../event';
+import { Party } from '../party';
+
 /*
 Tier 1 Malice scouts and outriders
 */

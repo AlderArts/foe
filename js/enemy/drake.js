@@ -3,6 +3,11 @@
  * Drake lvl 60-70
  *
  */
+
+import { Entity } from '../entity';
+import { Scenes } from '../event';
+import { Encounter } from '../combat';
+
 Scenes.Drake = {};
 
 function Drake() {

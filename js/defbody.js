@@ -5,6 +5,8 @@
  */
 
 import { Body } from './body/body';
+import { Vagina } from './body/vagina';
+import { Cock } from './body/cock';
 
 let BodyTypeFemale = {
 	Average  : 0,

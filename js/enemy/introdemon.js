@@ -4,6 +4,8 @@
  * 
  */
 
+import { BossEntity } from './boss';
+
 function IntroDemon() {
 	BossEntity.call(this);
 	

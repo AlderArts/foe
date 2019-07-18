@@ -3,8 +3,10 @@
  * Define Cale
  * 
  */
-import { Scenes } from '../../event';
+import { Link, Scenes } from '../../event';
 import { Entity } from '../../entity';
+import { world } from '../../world';
+import { Shop } from '../../shop';
 
 function Cale(storage) {
 	Entity.call(this);

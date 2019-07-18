@@ -4,6 +4,9 @@
  *
  */
 
+import { Entity } from '../entity';
+import { Scenes } from '../event';
+
 Feline = {};
 
 Feline.DropTable = function() {

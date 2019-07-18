@@ -1,7 +1,8 @@
 /*
  * Specifics for Cavalcade game with Rosalin, Estevan and Cale
  */
-import { Scenes } from '../../event';
+import { Link, Scenes } from '../../event';
+import { world } from '../../world';
 
 Scenes.NomadsCavalcade = {};
 

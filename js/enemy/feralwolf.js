@@ -4,6 +4,9 @@
  *
  */
 
+import { Entity } from '../entity';
+import { Scenes } from '../event';
+
 Scenes.FeralWolf = {};
 
 function FeralWolf(levelbonus) {

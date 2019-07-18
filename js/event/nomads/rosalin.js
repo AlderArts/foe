@@ -2734,7 +2734,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 	}
 }
 
-RosalinSexState = {
+let RosalinSexState = {
 	Regular : 0,
 	Heat    : 1,
 	Rut     : 2

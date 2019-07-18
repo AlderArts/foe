@@ -4,6 +4,9 @@
  *
  */
 
+import { Entity } from '../entity';
+import { Scenes } from '../event';
+
 function Equine(gender, levelbonus) {
 	Entity.call(this);
 	this.ID = "equine";
