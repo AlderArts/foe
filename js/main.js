@@ -57,6 +57,7 @@ let GameOver = function() {
 }
 
 let SplashScreen = function() {
+	console.log("SPLASH");
 	SetGameState(GameState.Credits);
 	Text.Clear();
 	Gui.ClearButtons();

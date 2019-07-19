@@ -100,6 +100,8 @@ var LoadImages = function() {
 	// Show progress element
 	assetsOverlay();
 
+	console.log("STARTING PRELOADER");
+
 	// instantiate the pre-loader with an onProgress and onComplete handler
 	new Preloader(imageArray, {
 		onProgress: function(img, imageEl, index) {

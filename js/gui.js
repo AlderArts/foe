@@ -9,6 +9,7 @@ import { StatusEffect, StatusList } from './statuseffect';
 import { Input, Keys } from './input';
 import { online, gameState, GameState } from './main';
 import { DataPrompt, ExploreButtonIndex } from './exploration';
+import { GAME } from './gamecache';
 
 Gui.w = 1280;
 Gui.h = 720;
@@ -58,7 +59,7 @@ Gui.Init = function() {
 
 	Gui.canvas.rect(Gui.textArea.x, Gui.textArea.y, Gui.textArea.w, Gui.textArea.h).attr({"stroke-width": Gui.textArea.inset});
 	Gui.debug = Gui.canvas.text(1230, 700, "Debug").attr({stroke: "#F00", fill:"#F00", font: SMALL_FONT}).hide();
-	GuiResize();
+	Gui.Resize();
 
 	Gui.party = Gui.canvas.set();
 	Gui.partyObj = [];
@@ -278,10 +279,10 @@ Gui.SetupPortrait = function(xoffset, yoffset, set, obj, isParty, index) {
 Gui.HandlePortraitClick = function(index, isParty) {
 	if(gameState == GameState.Game && !Intro.active) {
 		if(isParty) {
-			var character = party.Get(index);
+			var character = GAME.party.Get(index);
 			if(character) {
 				LastSubmenu = Input.exploreButtons[ExploreButtonIndex.Party];
-				character.Interact(party.location.switchSpot());
+				character.Interact(GAME.party.location.switchSpot());
 			}
 		}
 	}
@@ -311,7 +312,7 @@ Gui.SetupCavalcadeHand = function(xoffset, yoffset, set, obj) {
 	obj.push(local);
 }
 
-var GuiResize = function() {
+Gui.Resize = function() {
 	var w = $(window).width();
 	var h = $(window).height();
 	var ratioW = w/Gui.w;
@@ -343,6 +344,9 @@ var GuiResize = function() {
 	tooltip.style.width  =        ratio * Gui.tooltipArea.w +"px";
 	tooltip.style.height =        ratio * Gui.tooltipArea.h +"px";
 }
+
+// Set window resize
+document.body.onresize = Gui.Resize;
 
 Gui.Callstack = new Array();
 
@@ -669,7 +673,7 @@ Gui.RenderEntity = function(entity, set, obj) {
 }
 
 Gui.RenderLocation = function() {
-	var name = party.location.nameFunc;
+	var name = GAME.party.location.nameFunc;
 	var nameStr;
 	if(isFunction(name))
 		nameStr = name();
@@ -682,7 +686,7 @@ Gui.RenderLocation = function() {
 }
 
 Gui.RenderTime = function() {
-	var coinStr = party.coin;
+	var coinStr = GAME.party.coin;
 	Gui.PrintGlow(Gui.overlay, Gui.coin, 250, 690, coinStr, Gui.fonts.Kimberley, 20, "end", {opacity: 1});
 
 	var dateStr = world.time.DateString();
@@ -753,7 +757,7 @@ Gui.Render = function() {
 				Gui.enemy.hide();
 			}
 			// TODO: !RENDER_PICTURES
-			Gui.RenderParty(party, Gui.party, Gui.partyObj);
+			Gui.RenderParty(GAME.party, Gui.party, Gui.partyObj);
 
 			// TODO: Time
 			Gui.RenderTime();
