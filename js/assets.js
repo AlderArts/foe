@@ -1,6 +1,8 @@
-import * as Preloader from 'preloader';
+let preloader = require('preloader');
+
 import { StatusEffect } from './statuseffect';
 import { Items } from './item';
+import { SplashScreen, Render } from './main';
 
 var Images = {};
 
@@ -83,6 +85,10 @@ Images.imgSleepEnabled      = "assets/img/gui/sleep_enabled.png";
 Images.imgSleepDisabled     = "assets/img/gui/sleep_disabled.png";
 
 var LoadImages = function() {
+	let loader = preloader({
+		xhrImages: false
+	});
+
 	//Fill image array
 	var imageArray = [];
 	for(var image in Images)
@@ -91,49 +97,29 @@ var LoadImages = function() {
 	LoadStatusImages(imageArray);
 
 	// fetch HTML5 progress element
-	var progress = document.getElementById('progressDiv');
-	progress.setAttribute('max', imageArray.length);
-	progress.setAttribute('value', 0);
-
 	var legend = document.getElementById('progressLabel');
 
 	// Show progress element
 	assetsOverlay();
 
-	console.log("STARTING PRELOADER");
-
-	// instantiate the pre-loader with an onProgress and onComplete handler
-	new Preloader(imageArray, {
-		onProgress: function(img, imageEl, index) {
-			// fires every time an image is done or errors.
-			// imageEl will be falsy if error
-			//console.log('just ' +  (!imageEl ? 'failed: ' : 'loaded: ') + img);
-
-			var percent = Math.floor((100 / this.queue.length) * this.completed.length);
-
-			// update the progress element
-			legend.innerHTML = '<span>' + index + ' / ' + this.queue.length + ' ('+percent+'%)</span>';
-			progress.value = index;
-
-			// can access any propery of this
-			//console.log(this.completed.length + this.errors.length + ' / ' + this.queue.length + ' done');
-		},
-		onComplete: function(loaded, errors) {
-			// fires when whole list is done. cache is primed.
-			//console.log('done', loaded);
-
-			assetsOverlay();
-
-			// Go to credits screen
-			SplashScreen();
-			// Render first frame
-			setTimeout(Render, 100);
-
-			if(errors) {
-				console.log('the following failed', errors);
-			}
-		}
+	loader.on('progress', function(progress) {
+		// update the progress element
+		legend.innerHTML = '<span>Loading assets... ' + progress * 100 + '%</span>';
 	});
+	loader.on('complete', function() {
+		assetsOverlay();
+
+		// Go to credits screen
+		SplashScreen();
+		// Render first frame
+		setTimeout(Render, 100);
+	});
+
+	for(var image of imageArray) {
+		loader.add(image);
+	}
+
+	loader.load();
 }
 
 var assetsOverlay = function() {

@@ -1,4 +1,6 @@
-Saver = {}
+import { online } from './main';
+
+let Saver = {}
 
 Saver.slots = 12;
 
@@ -213,3 +215,5 @@ Saver.LoadFromFile = function(file) {
 
 	reader.readAsText(file);
 }
+
+export { Saver };

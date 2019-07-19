@@ -2,6 +2,11 @@ import * as $ from 'jquery';
 import { Images, LoadImages } from './assets';
 import { world } from './world';
 import { Gui } from './gui';
+import { VERSION_STRING, RENDER_PICTURES } from '../app';
+import { Input } from './input';
+import { Saver } from './saver';
+import { CreditsScreen } from './credits';
+import { gameCache } from './gamecache';
 
 // Prevent selection
 $(function() {
@@ -57,7 +62,6 @@ let GameOver = function() {
 }
 
 let SplashScreen = function() {
-	console.log("SPLASH");
 	SetGameState(GameState.Credits);
 	Text.Clear();
 	Gui.ClearButtons();
@@ -149,4 +153,4 @@ function Setup() {
 	Render();
 }
 
-export { online, GameState, gameState, SetGameState, Render };
+export { online, GameState, gameState, SetGameState, SetGameOverButton, SplashScreen, Render };

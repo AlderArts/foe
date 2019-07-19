@@ -509,4 +509,4 @@ let GameToCache = function() {
 	gameCache.name = Text.Parse("[name]([gender]), Lvl [lvl]/[slvl], [date]", parse);
 }
 
-export { GAME };
+export { GAME, gameCache };

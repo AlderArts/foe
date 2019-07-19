@@ -1,5 +1,7 @@
 import * as $ from 'jquery';
 
+import { RENDER_PICTURES } from '../app';
+
 Text.buffer = "";
 //A div that contains 'groups' of inputs. Each group is on a new line (so you can basically have multiple toolbars).
 Text.toolbars = $('<div></div>');

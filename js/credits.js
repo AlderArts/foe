@@ -1,4 +1,6 @@
-
+import { SetGameState, GameState, SplashScreen } from './main';
+import { Gui } from './gui';
+import { Input } from './input';
 
 let CreditsScreen = function() {
 	SetGameState(GameState.Credits);
@@ -78,3 +80,4 @@ let CreditsScreen = function() {
 	Input.buttons[0].Setup("Back", SplashScreen, true);
 }
 
+export { CreditsScreen };
