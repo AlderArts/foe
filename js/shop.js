@@ -1,3 +1,4 @@
+import { GetDEBUG } from "../app";
 
 
 /*
@@ -144,7 +145,7 @@ Shop.prototype.Buy = function(back, preventClear) {
 					var it       = items[i].it;
 					var num      = items[i].num;
 					var enabled  = items[i].enabled ? items[i].enabled() : true;
-					var cost     = DEBUG ? 0 : Math.floor(items[i].price * it.price);
+					var cost     = GetDEBUG() ? 0 : Math.floor(items[i].price * it.price);
 					var func     = items[i].func;
 
 					enabled = enabled && (party.coin >= cost);

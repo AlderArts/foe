@@ -1,5 +1,6 @@
 
 import { Scenes } from '../event';
+import { GetDEBUG } from '../../app';
 
 Scenes.Miranda.DatingEntry = function() {
 	var parse = {
@@ -1093,7 +1094,7 @@ Scenes.Miranda.DatingFirstCity = function() {
 	Text.NL();
 	Text.Add("<i>“It ain’t easy to get a posh job in a town like this as a morph, but I happen to be very good at what I do. And what I do is take out the trash.”</i> She flashes an evil grin full of sharp, pointy teeth. <i>“’Course, someone like me could never get work as an officer. Not that I’d want to sit at a desk pushing papers all day anyways.”</i>", parse);
 	Text.NL();
-	if(DEBUG) {
+	if(GetDEBUG()) {
 		Text.Add("<b>TOTAL SCORE: [x]</b>", {x: Scenes.Miranda.DatingScore});
 		Text.NL();
 	}

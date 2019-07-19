@@ -1,4 +1,5 @@
 import { Entity } from './entity';
+import { GetDEBUG } from '../app';
 
 Entity.prototype.PrintDescription = function(partial) {
 	
@@ -192,7 +193,7 @@ Entity.prototype.PrintDescription = function(partial) {
 	// TODO: Ass
 	Text.Add("[name] [has] [anusDesc].", parse);
 	
-	if(DEBUG) {
+	if(GetDEBUG()) {
 		Text.NL();
 		Text.Add("DEBUG: relation: " + this.relation.Get(), null, 'bold');
 		Text.NL();

@@ -6,6 +6,7 @@
 
 import { world } from '../../world';
 import { Event, Link, Scenes, EncounterTable } from '../../event';
+import { GetDEBUG } from '../../../app';
 
 world.loc.Rigard.Krawitz =
 {
@@ -1344,7 +1345,7 @@ Scenes.Krawitz.AddSuspicion = function(num, surpressNext) {
 	if(Scenes.Krawitz.stat.Suspicion > 100) Scenes.Krawitz.stat.Suspicion = 100;
 	if(Scenes.Krawitz.stat.Suspicion < 0) Scenes.Krawitz.stat.Suspicion = 0;
 	
-	if(DEBUG) {
+	if(GetDEBUG()) {
 		Text.NL();
 		Text.Add("<b>Suspicion + " + num + ": " + Scenes.Krawitz.stat.Suspicion + "/100</b>");
 		Text.NL();
@@ -2544,7 +2545,7 @@ Scenes.Krawitz.Duel = function() {
 			Text.Add("A space has cleared around the two of you with a densely packed crowd of onlookers marking its limits. You face each other, and Krawitz takes two steps away from you and you do the same. The two of you turn around and face each other, the tips of your foils just barely crossing. He assumes an en garde stance, one foot facing toward you, the other perpendicular, and you awkwardly mimic his posture, deciding he probably knows what he’s doing.", parse);
 			Text.NL();
 			var dex = Math.floor(player.Dex() + Math.random() * 20);
-			if(DEBUG) {
+			if(GetDEBUG()) {
 				Text.Add("<b>Dex([pcdex]) + rand(20) = [dex] (vs 80/60)</b>", {pcdex : player.Dex(), dex : dex});
 				Text.NL();
 			}

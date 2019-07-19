@@ -5,6 +5,7 @@
  */
 
 import { Entity } from '../entity';
+import { GetDEBUG } from '../../app';
 
 function Player(storage) {
 	Entity.call(this);
@@ -543,7 +544,7 @@ Player.prototype.PregnancyTrigger = function(womb, slot) {
 		parse["type"] = race.name;
 		parse["newborn"] = egg ? "egg" : "newborn";
 		
-		if(DEBUG) {
+		if(GetDEBUG()) {
 			Text.Add("<b>Preg-debug:<br>", parse);
 			Text.Add("Num: [num]<br>", parse);
 			Text.Add("Type: [type]</b>", parse);

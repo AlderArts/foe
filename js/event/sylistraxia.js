@@ -4,6 +4,7 @@
  * 
  */
 import { Entity } from '../entity';
+import { GetDEBUG } from '../../app';
 
 function Sylistraxia(storage) {
 	Entity.call(this);
@@ -73,7 +74,7 @@ Sylistraxia.prototype.Interact = function() {
 	Text.Add("Rawr Imma dragon.");
 	
 	
-	if(DEBUG) {
+	if(GetDEBUG()) {
 		Text.NL();
 		Text.Add("DEBUG: relation: " + sylistraxia.relation.Get(), null, 'bold');
 		Text.NL();

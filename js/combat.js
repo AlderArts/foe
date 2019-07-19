@@ -1,3 +1,4 @@
+import { GetDEBUG } from "../app";
 
 // Create encounter with a Party() containing enemies
 function Encounter(enemy)
@@ -180,7 +181,7 @@ Encounter.prototype.SetButtons = function(activeChar, combatScreen) {
 		}, true);		
 		Input.buttons[11].SetFromAbility(encounter, entity, Abilities.Run, BasePrompt);
 		
-		if(DEBUG) {
+		if(GetDEBUG()) {
 			Input.navButtons[2].Setup("Cheat", function() {
 				encounter.onVictory();
 			}, true);

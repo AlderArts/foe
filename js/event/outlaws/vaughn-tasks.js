@@ -1,5 +1,6 @@
 import { Scenes } from '../../event';
 import { Vaughn } from './vaughn';
+import { GetDEBUG } from '../../../app';
 
 Scenes.Vaughn.Tasks = {};
 
@@ -752,7 +753,7 @@ Scenes.Vaughn.Tasks.Snitch.PlantEvidence = function() {
 			
 			var check = 60;
 			
-			if(DEBUG) {
+			if(GetDEBUG()) {
 				Text.Add("Dex check: [dex][r] vs [check]", {dex:dex, check:check, r:rogue?" (bonus for Rogue)":""}, 'bold');
 				Text.NL();
 			}
@@ -804,7 +805,7 @@ Scenes.Vaughn.Tasks.Snitch.PlantEvidence = function() {
 
 				var check = 50;
 				
-				if(DEBUG) {
+				if(GetDEBUG()) {
 					Text.Add("Int check: [mag][m] vs [check]", {mag:mag, check:check, m:magStage2?" (bonus for tier 2 magic)":""}, 'bold');
 					Text.NL();
 				}
@@ -1680,7 +1681,7 @@ Scenes.Vaughn.Tasks.Poisoning.KitchenYourself = function() {
 	var check = (player.Dex() + player.Int()) / 2 + Math.random() * 20;
 	var goal = 50;
 	
-	if(DEBUG) {
+	if(GetDEBUG()) {
 		Text.Add("Dex+Int check: [val] vs [goal]", {val: check, goal: goal}, 'bold');
 		Text.NL();
 	}

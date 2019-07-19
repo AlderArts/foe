@@ -1,5 +1,6 @@
 
 import { Items } from './item';
+import { GetDEBUG } from '../app';
 
 let Quests = {};
 Quests.Type = {
@@ -45,7 +46,7 @@ let QuestItem = function(opts) {
 };
 QuestItem.prototype.Print = function() {
 	var active = this.Active();
-	if((active & Quests.Type.Visible) || DEBUG) {
+	if((active & Quests.Type.Visible) || GetDEBUG()) {
 		Text.Add("<li>");
 		if(active & Quests.Type.Completed)
 			Text.Add("<del>");
@@ -77,7 +78,7 @@ Quests.Print = function() {
 	for(var i=0, j=Quests.quests.length; i<j; ++i) {
 		var q = Quests.quests[i];
 		var active = q.Active();
-		if(active || DEBUG) {
+		if(active || GetDEBUG()) {
 			numQs++;
 			Text.Add("<hr>");
 			if(!active)

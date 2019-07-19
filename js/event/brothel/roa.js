@@ -6,6 +6,7 @@
 
 import { Scenes } from '../../event';
 import { Entity } from '../../entity';
+import { GetDEBUG } from '../../../app';
 
 Scenes.Roa = {};
 
@@ -122,7 +123,7 @@ Roa.prototype.Interact = function() {
 	Text.Add("Rawr Imma bunny.");
 	
 	
-	if(DEBUG) {
+	if(GetDEBUG()) {
 		Text.NL();
 		Text.Add("DEBUG: relation: " + roa.relation.Get(), null, 'bold');
 		Text.NL();

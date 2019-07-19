@@ -1,3 +1,5 @@
+import { GetDEBUG } from "../app";
+
 // Inventory
 function Inventory() {
 	this.items = []; // {it : Item, num : 1} pair
@@ -39,7 +41,7 @@ Inventory.prototype.AddItem = function(item, num) {
 	// Default to 1
 	num = num || 1;
 
-	if(DEBUG) {
+	if(GetDEBUG()) {
 		Text.NL();
 		Text.Add("DEBUG: Added [num] [name] (ID: [id])", {num: num, name: item.name, id: item.id}, 'bold');
 		Text.NL();
@@ -61,7 +63,7 @@ Inventory.prototype.RemoveItem = function(item, num) {
 	// Default to 1
 	num = num || 1;
 
-	if(DEBUG) {
+	if(GetDEBUG()) {
 		Text.NL();
 		Text.Add("DEBUG: Removed [num] [name] (ID: [id])", {num: num, name: item.name, id: item.id}, 'bold');
 		Text.NL();

@@ -154,3 +154,5 @@ GenerateFile.canSaveOffline = false;
 	}
 	window.GenerateFile.canSaveOffline = true;
 })();
+
+export { isFunction, Unit, GenerateFile, Rand };

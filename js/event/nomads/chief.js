@@ -6,6 +6,7 @@
 import { Link, Scenes } from '../../event';
 import { Entity } from '../../entity';
 import { world } from '../../world';
+import { GetDEBUG } from '../../../app';
 
 function Chief(storage) {
 	Entity.call(this);
@@ -110,7 +111,7 @@ Scenes.Chief.Interact = function() {
 	{
 		Text.Add("<i>“Ah, our wayward adventurer,”</i> the chief grunts as you approach. <i>“Gotten that rock to work proper, yet?”</i>", parse);
 		
-		if(DEBUG) {
+		if(GetDEBUG()) {
 			Text.NL();
 			Text.Add("DEBUG: rep: " + chief.relation.Get(), null, 'bold');
 			Text.NL();

@@ -3,6 +3,7 @@
  */
 
 import { Event } from './event';
+import { GetDEBUG } from '../app';
 
 function Maze(opts) {
 	opts = opts || {};
@@ -91,7 +92,7 @@ Maze.Room.prototype.SetButtons = function(links) {
 Maze.Room.prototype.PrintDesc = function() {
 	Event.prototype.PrintDesc.call(this);
 	
-	if(DEBUG) {
+	if(GetDEBUG()) {
 		this.maze.Print(this);
 	}
 }

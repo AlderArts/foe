@@ -1,5 +1,6 @@
 
 import { Scenes } from '../../event';
+import { GetDEBUG } from '../../../app';
 
 Scenes.Lagon.Defeated = {};
 
@@ -543,7 +544,7 @@ Scenes.Lagon.Defeated.ScepterEntry = function() {
 		Text.NL();
 		var dex = player.Dex();
 		var goal = 40;
-		if(DEBUG) {
+		if(GetDEBUG()) {
 			Text.Add("Dex check: [dex] (vs [goal])", {dex:dex, goal:goal}, 'bold');
 			Text.NL();
 		}

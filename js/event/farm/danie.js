@@ -5,6 +5,7 @@
  */
 import { Scenes } from '../../event';
 import { Entity } from '../../entity';
+import { GetDEBUG } from '../../../app';
 
 function Danie(storage) {
 	Entity.call(this);
@@ -82,7 +83,7 @@ Danie.prototype.Interact = function() {
 	Text.Add("Baah Imma sheep.");
 	
 	
-	if(DEBUG) {
+	if(GetDEBUG()) {
 		Text.NL();
 		Text.Add("DEBUG: relation: " + danie.relation.Get(), null, 'bold');
 		Text.NL();

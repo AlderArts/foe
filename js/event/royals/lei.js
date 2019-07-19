@@ -6,6 +6,7 @@
 import { Link, Scenes } from '../../event';
 import { Entity } from '../../entity';
 import { world } from '../../world';
+import { GetDEBUG } from '../../../app';
 
 // TODO: FIX STATS
 function Lei(storage) {
@@ -226,7 +227,7 @@ Lei.prototype.Interact = function() {
 	Text.Add("Rawr Imma stabbitystab.");
 
 
-	if(DEBUG) {
+	if(GetDEBUG()) {
 		Text.NL();
 		Text.Add("DEBUG: relation: " + lei.relation.Get(), null, 'bold');
 		Text.NL();

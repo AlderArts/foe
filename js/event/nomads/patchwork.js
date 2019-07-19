@@ -7,6 +7,7 @@ import { Link, Scenes } from '../../event';
 import { Entity } from '../../entity';
 import { world } from '../../world';
 import { Shop } from '../../shop';
+import { GetDEBUG } from '../../../app';
 
 function Patchwork(storage) {
 	Entity.call(this);
@@ -207,7 +208,7 @@ Scenes.Patchwork.Interact = function() {
 		Text.NL();
 		Text.Add("<i>“Close enough, what’s your business stranger?”</i>", parse);
 		
-		if(DEBUG) {
+		if(GetDEBUG()) {
 			Text.NL();
 			Text.Add("DEBUG: relation: " + patchwork.relation.Get(), null, 'bold');
 			Text.NL();

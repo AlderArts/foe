@@ -6,6 +6,7 @@
 
 import { Scenes } from '../event';
 import { Entity } from '../entity';
+import { GetDEBUG } from '../../app';
 
 Scenes.Cassidy = {};
 
@@ -2315,7 +2316,7 @@ Scenes.Cassidy.ManagingShop6 = function(score) {
 		Text.NL();
 		Text.Add("Easily done. You recount to Cass the events which transpired since [hisher] departure, and [heshe] listens intently as [heshe] goes over the books. At last, you’re done, and [heshe] slams the ledger shut before looking straight at you.", parse);
 		Text.NL();
-		if(DEBUG) {
+		if(GetDEBUG()) {
 			Text.Add("Score: " + score + "/5", parse, 'bold');
 			Text.NL();
 		}

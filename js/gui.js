@@ -4,11 +4,11 @@ import * as $ from 'jquery';
 let Gui = {}
 
 import { Images } from './assets';
-import { SMALL_FONT, DEFAULT_FONT } from '../app';
+import { SMALL_FONT, DEFAULT_FONT, GetRenderPictures } from '../app';
 import { StatusEffect, StatusList } from './statuseffect';
 import { Input, Keys } from './input';
 import { online, gameState, GameState } from './main';
-import { DataPrompt, ExploreButtonIndex } from './exploration';
+import { DataPrompt, ExploreButtonIndex, SetLastSubmenu } from './exploration';
 import { GAME } from './gamecache';
 
 Gui.w = 1280;
@@ -281,7 +281,7 @@ Gui.HandlePortraitClick = function(index, isParty) {
 		if(isParty) {
 			var character = GAME.party.Get(index);
 			if(character) {
-				LastSubmenu = Input.exploreButtons[ExploreButtonIndex.Party];
+				SetLastSubmenu(Input.exploreButtons[ExploreButtonIndex.Party]);
 				character.Interact(GAME.party.location.switchSpot());
 			}
 		}
@@ -632,7 +632,7 @@ Gui.RenderEntity = function(entity, set, obj) {
 	if(entity.avatar.combat)
 		obj.portrait.attr({src: entity.avatar.combat, opacity: entity.Incapacitated() ? .5 : 1});
 	
-	if(RENDER_PICTURES) {
+	if(GetRenderPictures()) {
 		obj.portrait.show();
 	}
 	else {
@@ -756,7 +756,7 @@ Gui.Render = function() {
 			if(gameState == GameState.Game || gameState == GameState.Event) {
 				Gui.enemy.hide();
 			}
-			// TODO: !RENDER_PICTURES
+			// TODO: !GetRenderPictures()
 			Gui.RenderParty(GAME.party, Gui.party, Gui.partyObj);
 
 			// TODO: Time

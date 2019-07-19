@@ -2,6 +2,7 @@
 import { Event, Link, Scenes } from '../event';
 import { Inventory } from '../inventory';
 import { world } from '../world';
+import { GetDEBUG } from '../../app';
 
 //Will be used for temporary variable storage.
 function Halloween() {
@@ -70,7 +71,7 @@ Halloween.PW = function() {
 //Note: checks real time date
 Halloween.IsSeason = function() {
 	// Always allow debug
-	if(DEBUG) return true;
+	if(GetDEBUG()) return true;
 	
 	// Halloween season is 14 oct - 14 nov
 	var date  = new Date(); //Get current datetime

@@ -1,13 +1,13 @@
 import * as $ from 'jquery';
 
-import { RENDER_PICTURES } from '../app';
+import { GetRenderPictures } from '../app';
 
 Text.buffer = "";
 //A div that contains 'groups' of inputs. Each group is on a new line (so you can basically have multiple toolbars).
 Text.toolbars = $('<div></div>');
 
 Text.InsertImage = function(imgSrc, align) {
-	if(!RENDER_PICTURES) return "";
+	if(!GetRenderPictures()) return "";
 
 	align = align || 'left';
 	return "<img src='" + imgSrc + "' align='" + align + "' alt='MISSING IMAGE: " + imgSrc + "' style='margin: 1px 8px;'/>";
@@ -18,7 +18,7 @@ Text.Say = function(imgSrc, text, align) {
 	align = align || 'left';
 	text = text || "";
 
-	if(RENDER_PICTURES)
+	if(GetRenderPictures())
 		textbox.innerHTML += "<img src='" + imgSrc + "' align='" + align + "' alt='MISSING IMAGE: " + imgSrc + "' style='margin: 1px 8px;'>" + text + "</img>";
 	else
 		textbox.innerHTML += text;

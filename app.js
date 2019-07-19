@@ -48,8 +48,26 @@ const SMALL_FONT   = "16pt Calibri";
 const DEFAULT_FONT = "20pt Calibri";
 const LARGE_FONT   = "26pt Calibri";
 
-var DEBUG = false;
+let DEBUG = false;
+function SetDEBUG(val) {
+	DEBUG = val;
+}
+function GetDEBUG() {
+	return DEBUG;
+}
 
-var RENDER_PICTURES = true;
+let RENDER_PICTURES = true;
+function SetRenderPictures(val) {
+	RENDER_PICTURES = val;
+}
+function GetRenderPictures() {
+	return RENDER_PICTURES;
+}
 
-export { SAVE_VERSION, HEADER_FONT, BUTTON_FONT, SMALL_FONT, DEFAULT_FONT, LARGE_FONT, DEBUG, RENDER_PICTURES, VERSION_STRING };
+export {
+	SAVE_VERSION,
+	HEADER_FONT, BUTTON_FONT, SMALL_FONT, DEFAULT_FONT, LARGE_FONT,
+	SetDEBUG, GetDEBUG,
+	SetRenderPictures, GetRenderPictures,
+	VERSION_STRING
+};

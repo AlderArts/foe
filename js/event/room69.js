@@ -5,6 +5,7 @@
  */
 import { Scenes } from '../event';
 import { Entity } from '../entity';
+import { GetDEBUG } from '../../app';
 
 function Room69(storage) {
 	Entity.call(this);
@@ -77,7 +78,7 @@ Scenes.Room69.Interact = function() {
 	Text.Add("Rawr Imma room.");
 	
 	
-	if(DEBUG) {
+	if(GetDEBUG()) {
 		Text.NL();
 		Text.Add("DEBUG: relation: " + room69.relation.Get(), null, 'bold');
 		Text.NL();

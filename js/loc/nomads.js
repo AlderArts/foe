@@ -2,6 +2,7 @@
 import { world } from '../world';
 import { Link, Scenes } from '../event';
 import { Maze } from '../maze';
+import { GetDEBUG } from '../../app';
 
 //
 // Nomads
@@ -62,7 +63,7 @@ Scenes.MazeTest.AddRoom(1,1);
 
 //TODO TEST
 world.loc.Plains.Nomads.Tent.links.push(new Link(
-	"Maze", function() { return DEBUG; }, true,
+	"Maze", function() { return GetDEBUG(); }, true,
 	null,
 	function() {
 		MoveToLocation(Scenes.MazeTest.GetRoom(3,3));
@@ -74,7 +75,7 @@ world.loc.Plains.Nomads.Tent.links.push(new Link(
 //Trigger this on stepping into the Nomads’ for the first time when season is active.
 world.loc.Plains.Nomads.Fireplace.onEntry = function() {
 	if(!(gameCache.flags["HW"] & Halloween.State.Intro) &&
-		(DEBUG || Halloween.IsSeason()) &&
+		(GetDEBUG() || Halloween.IsSeason()) &&
 		(world.time.hour >= 8) &&
 		(world.time.hour < 22))
 		Scenes.Halloween.PieIntro();

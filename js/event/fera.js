@@ -5,6 +5,7 @@
  */
 import { Scenes } from '../event';
 import { Entity } from '../entity';
+import { GetDEBUG } from '../../app';
 
 function Fera(storage) {
 	Entity.call(this);
@@ -351,7 +352,7 @@ Scenes.Fera.Interact = function() {
 	});
 	Gui.SetButtonsFromList(options, true);
 	
-	if(DEBUG) {
+	if(GetDEBUG()) {
 		Text.NL();
 		Text.Add("DEBUG: relation: " + fera.relation.Get(), null, 'bold');
 		Text.NL();

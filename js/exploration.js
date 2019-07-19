@@ -8,8 +8,15 @@
 import { Gui } from './gui';
 import { SetGameState, GameState } from './main';
 import { GAME } from './gamecache';
+import { GetRenderPictures, SetRenderPictures, GetDEBUG, SetDEBUG } from '../app';
 
 let LastSubmenu = null;
+function SetLastSubmenu(menu) {
+	LastSubmenu = menu;
+}
+function GetLastSubmenu() {
+	return LastSubmenu;
+}
 
 function PrintDefaultOptions(preventClear) {
 	var e = Gui.Callstack.pop();
@@ -69,7 +76,7 @@ function SetExploreButtons() {
 		if(player.alchemyLevel > 0)
 			Input.exploreButtons[ExploreButtonIndex.Alchemy].Setup("Alchemy", ShowAlchemy, true);
 		Input.exploreButtons[ExploreButtonIndex.Quests].Setup("Quests", ShowQuests, true);
-		if(DEBUG) // TODO
+		if(GetDEBUG()) // TODO
 			Input.exploreButtons[ExploreButtonIndex.Hunt].Setup("Hunt", ShowHunting, true);
 
 		if(safeLocation) { // SLEEP
@@ -149,10 +156,10 @@ function DataPrompt() {
 	}, true);
 
 	Input.buttons[4].Setup("Toggle debug", function() {
-		DEBUG = !DEBUG;
-		if(DEBUG) Gui.debug.show(); else Gui.debug.hide();
+		SetDEBUG(!GetDEBUG());
+		if(GetDEBUG()) Gui.debug.show(); else Gui.debug.hide();
 		for(var i = 0; i < GAME.party.members.length; i++) {
-			GAME.party.members[i].DebugMode(DEBUG);
+			GAME.party.members[i].DebugMode(GetDEBUG());
 		}
 	}, true);
 
@@ -191,8 +198,8 @@ function DataPrompt() {
 		Gui.FontPicker(DataPrompt);
 	}, true);
 
-	Input.buttons[10].Setup(RENDER_PICTURES ? "Pics: On" : "Pics: Off", function() {
-		RENDER_PICTURES = !RENDER_PICTURES;
+	Input.buttons[10].Setup(GetRenderPictures() ? "Pics: On" : "Pics: Off", function() {
+		SetRenderPictures(!GetRenderPictures());
 
 		DataPrompt();
 	}, true);
@@ -316,4 +323,4 @@ function ShowHunting(preventClear) {
 	SetExploreButtons();
 }
 
-export { PrintDefaultOptions, DataPrompt, LimitedDataPrompt, ExploreButtonIndex };
+export { PrintDefaultOptions, DataPrompt, LimitedDataPrompt, ExploreButtonIndex, GetLastSubmenu, SetLastSubmenu };

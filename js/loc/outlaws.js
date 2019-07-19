@@ -20,7 +20,7 @@ world.loc.Outlaws.Camp.safe = function() { return true; };
 world.loc.Outlaws.Camp.description = function() {
 	Text.Add("You are in the outlaws' camp.<br>");
 	
-	if(DEBUG) {
+	if(GetDEBUG()) {
 		Text.NL();
 		Text.Add("DEBUG: Outlaws rep: " + outlaws.Rep(), null, 'bold');
 		Text.NL();

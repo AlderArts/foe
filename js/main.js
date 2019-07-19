@@ -2,11 +2,11 @@ import * as $ from 'jquery';
 import { Images, LoadImages } from './assets';
 import { world } from './world';
 import { Gui } from './gui';
-import { VERSION_STRING, RENDER_PICTURES } from '../app';
+import { VERSION_STRING, GetRenderPictures, SetRenderPictures, GetDEBUG, SetDEBUG } from '../app';
 import { Input } from './input';
 import { Saver } from './saver';
 import { CreditsScreen } from './credits';
-import { gameCache } from './gamecache';
+import { ClearCache, CacheToGame } from './gamecache';
 
 // Prevent selection
 $(function() {
@@ -82,7 +82,7 @@ let SplashScreen = function() {
 
 	Input.buttons[0].Setup("New game", function() {
 		// Init game
-		gameCache = {}
+		ClearCache();
 		CacheToGame();
 		Intro.Start();
 	}, true);
@@ -98,8 +98,8 @@ let SplashScreen = function() {
 	Input.buttons[3].Setup("Credits", CreditsScreen, true);
 
 	Input.buttons[4].Setup("Toggle debug", function() {
-		DEBUG = !DEBUG;
-		if(DEBUG) Gui.debug.show(); else Gui.debug.hide();
+		SetDEBUG(!GetDEBUG());
+		if(GetDEBUG()) Gui.debug.show(); else Gui.debug.hide();
 	}, true);
 
 
@@ -118,8 +118,8 @@ let SplashScreen = function() {
 		Gui.FontPicker(SplashScreen);
 	}, true);
 
-	Input.buttons[10].Setup(RENDER_PICTURES ? "Pics: On" : "Pics: Off", function() {
-		RENDER_PICTURES = !RENDER_PICTURES;
+	Input.buttons[10].Setup(GetRenderPictures() ? "Pics: On" : "Pics: Off", function() {
+		SetRenderPictures(!GetRenderPictures());
 		SplashScreen();
 	}, true);
 

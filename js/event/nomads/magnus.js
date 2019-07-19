@@ -6,6 +6,7 @@
 import { Link, Scenes } from '../../event';
 import { Entity } from '../../entity';
 import { world } from '../../world';
+import { GetDEBUG } from '../../../app';
 
 function Magnus(storage) {
 	Entity.call(this);
@@ -119,7 +120,7 @@ Scenes.Magnus.Interact = function() {
 		Gui.NextPrompt();
 	}
 	else {
-		if(DEBUG) {
+		if(GetDEBUG()) {
 			Text.NL();
 			Text.Add("DEBUG: relation: " + magnus.relation.Get(), null, 'bold');
 			Text.NL();

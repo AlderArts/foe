@@ -5,6 +5,7 @@
  */
 import { Scenes } from '../../event';
 import { Entity } from '../../entity';
+import { GetDEBUG } from '../../../app';
 
 Scenes.Jeanne = {};
 
@@ -97,7 +98,7 @@ Scenes.Jeanne.Interact = function() {
 	Text.NL();
 	Text.Add("She is of average height, but quite curvaceous, her wide hips and very generous breasts further accentuating her beautiful female form. The elf is dressed in a tight-fitting silken robe which rustles slightly every time she moves.", parse);
 	
-	if(DEBUG) {
+	if(GetDEBUG()) {
 		Text.NL();
 		Text.Add("DEBUG: relation: " + jeanne.relation.Get(), null, 'bold');
 		Text.NL();

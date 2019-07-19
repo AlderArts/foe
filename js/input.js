@@ -2,6 +2,7 @@ import { Gui } from './gui';
 import { Button } from './button';
 import { Images } from './assets';
 import { gameState, GameState } from './main';
+import { GetLastSubmenu } from './exploration';
 
 let Input = {
 
@@ -101,7 +102,7 @@ Input.RenderExploreButtonGlow = function() {
 	for(var i = 0; i < Input.exploreButtons.length; i++) {
 		if(!Input.exploreButtons[i].image.is_visible()) continue;
 		if(!Input.exploreButtons[i].glow) continue;
-		if(Input.exploreButtons[i] == LastSubmenu)
+		if(Input.exploreButtons[i] == GetLastSubmenu())
 			Input.exploreButtons[i].glow.show();
 		else
 			Input.exploreButtons[i].glow.hide();

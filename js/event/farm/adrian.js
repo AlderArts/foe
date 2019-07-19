@@ -5,6 +5,7 @@
  */
 import { Scenes } from '../../event';
 import { Entity } from '../../entity';
+import { GetDEBUG } from '../../../app';
 
 function Adrian(storage) {
 	Entity.call(this);
@@ -78,7 +79,7 @@ Adrian.prototype.Interact = function() {
 	Text.Add("Rawr Imma horse.");
 
 
-	if(DEBUG) {
+	if(GetDEBUG()) {
 		Text.NL();
 		Text.Add("DEBUG: relation: " + adrian.relation.Get(), null, 'bold');
 		Text.NL();

@@ -1,10 +1,11 @@
+import { SetLastSubmenu } from "./exploration";
 
 let gameCache = {};
 let GAME = {};
 
 let InitCache = function() {
 	// Reset exploration
-	LastSubmenu = null;
+	SetLastSubmenu(null);
 	Intro.active = false;
 
 	// SAVE VERSION
@@ -509,4 +510,8 @@ let GameToCache = function() {
 	gameCache.name = Text.Parse("[name]([gender]), Lvl [lvl]/[slvl], [date]", parse);
 }
 
-export { GAME, gameCache };
+function ClearCache() {
+	gameCache = {};
+}
+
+export { GAME, gameCache, InitCache, CacheToGame, GameToCache, ClearCache };

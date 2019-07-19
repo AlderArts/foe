@@ -6,6 +6,7 @@
 import { Scenes } from '../../event';
 import { Entity } from '../../entity';
 import { world } from '../../world';
+import { GetDEBUG } from '../../../app';
 
 function Maria(storage) {
 	Entity.call(this);
@@ -246,7 +247,7 @@ Scenes.Maria.CampInteract = function() {
 		}
 		scenes.Get();
 		
-		if(DEBUG) {
+		if(GetDEBUG()) {
 			Text.NL();
 			Text.Add("DEBUG: relation: " + maria.relation.Get(), null, 'bold');
 			Text.NL();

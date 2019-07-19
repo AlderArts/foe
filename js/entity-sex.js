@@ -1,4 +1,5 @@
 import { Entity } from './entity';
+import { GetDEBUG } from '../app';
 
 Entity.prototype.Genitalia = function() {
 	return this.body.gen;
@@ -367,7 +368,7 @@ Entity.prototype.OrgasmCum = function(mult) {
 	this.AddLustFraction(-1);
 	
 	balls.cum.DecreaseStat(0, cumQ);
-	if(DEBUG) {
+	if(GetDEBUG()) {
 		Text.NL();
 		Text.Add("<b>[name] came ([cum]).</b>", {name: this.NameDesc(), cum: cumQ.toFixed(2)});
 		Text.NL();

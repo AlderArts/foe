@@ -3,6 +3,7 @@
  */
 
 import { Stat } from './stat';
+import { GetDEBUG } from '../app';
 
 // Progress
 let PregnancyLevel = {
@@ -302,7 +303,7 @@ PregnancyHandler.prototype.Impregnate = function(opts) {
 		parse["type"] = race.name;
 		parse["time"] = gestationPeriod;
 
-		if(DEBUG) {
+		if(GetDEBUG()) {
 			Text.NL();
 			Text.Add("<b>[father] impregnated [mother], (odds: [chance] < [odds]). Litter size: [size]. Type: [type]. Time: [time] hours.</b>", parse);
 			Text.NL();
@@ -311,7 +312,7 @@ PregnancyHandler.prototype.Impregnate = function(opts) {
 		return true;
 	}
 	else {
-		if(DEBUG) {
+		if(GetDEBUG()) {
 			Text.NL();
 			Text.Add("<b>[father] did not impregnate [mother], (odds: [chance] >= [odds]).</b>", parse);
 			Text.NL();

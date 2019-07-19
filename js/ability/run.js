@@ -6,6 +6,7 @@
 
 import { Ability, Abilities, TargetMode } from '../ability';
 import { Gui } from '../gui';
+import { GetDEBUG } from '../../app';
 
 Abilities.Run = new Ability();
 Abilities.Run.name = "Run";
@@ -30,7 +31,7 @@ Abilities.Run.CastInternal = function(encounter, caster) {
 		var goal = caster.level / (caster.level + runlevel);
 		if(caster.HasPerk(Perks.Fleetfoot)) goal *= 1.5;
 		
-		if((Math.random() < goal) || DEBUG) {
+		if((Math.random() < goal) || GetDEBUG()) {
 			encounter.onRun();
 		}
 		else {

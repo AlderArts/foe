@@ -6,6 +6,7 @@
 import { Link, Scenes } from '../../event';
 import { Entity } from '../../entity';
 import { world } from '../../world';
+import { GetDEBUG } from '../../../app';
 
 function Estevan(storage) {
 	Entity.call(this);
@@ -150,7 +151,7 @@ Scenes.Estevan.Interact = function() {
 		Text.Add("<i>“Did you speak with Rosie and Wolfie yet? I wouldn’t mind another hand at cards, spice things up a bit.”</i>", parse);
 	}
 	
-	if(DEBUG) {
+	if(GetDEBUG()) {
 		Text.NL();
 		Text.Add("DEBUG: relation: " + estevan.relation.Get(), null, 'bold');
 		Text.NL();

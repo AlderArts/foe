@@ -1,3 +1,5 @@
+import { GetDEBUG } from "../app";
+
 /*
  * The card game Cavalcade
  */
@@ -330,7 +332,7 @@ Cavalcade.prototype.CoinGameRound = function() {
 		}
 		for(; i < 3; i++) {
 			var card = that.house[i];
-			if(DEBUG)
+			if(GetDEBUG())
 				Text.Add(card.name);
 			Text.Add("(hidden)");
 			if(i < 2) Text.Add(", ");

@@ -7,6 +7,7 @@ import { Link, Scenes } from '../../event';
 import { Entity } from '../../entity';
 import { world } from '../../world';
 import { Shop } from '../../shop';
+import { GetDEBUG } from '../../../app';
 
 function Cale(storage) {
 	Entity.call(this);
@@ -230,7 +231,7 @@ Scenes.Cale.Interact = function() {
 	else
 		Text.Add("He glances at you with a smile on his wolfish muzzle. <i>“What’s up? Here for business or pleasure?”</i>", parse);
 	
-	if(DEBUG) {
+	if(GetDEBUG()) {
 		Text.NL();
 		Text.Add("DEBUG: relation: " + cale.relation.Get(), null, 'bold');
 		Text.NL();

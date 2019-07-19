@@ -6,6 +6,7 @@
  */
 
 import { Inventory } from './inventory';
+import { GetDEBUG } from '../app';
 
 function Party(storage) {
 	this.members = [];
@@ -205,14 +206,14 @@ Party.prototype.AddMember = function(member, temporary) {
 		else
 			this.members.push(member); // Only add if not already added
 	}
-	if(this == party) member.DebugMode(DEBUG);
+	if(this == party) member.DebugMode(GetDEBUG());
 	if(temporary) this.temp.push(member);
 }
 
 Party.prototype.AddReserve = function(member) {
 	var idx = this.reserve.indexOf(member); // Find the index
 	if(idx==-1) this.reserve.push(member); // Only add if not already added
-	if(this == party) member.DebugMode(DEBUG);
+	if(this == party) member.DebugMode(GetDEBUG());
 }
 
 Party.prototype.RemoveMember = function(member) {

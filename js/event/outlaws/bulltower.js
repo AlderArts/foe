@@ -7,6 +7,7 @@
 import { Event, Link, EncounterTable, Scenes } from '../../event';
 import { Outlaws } from './outlaws';
 import { world } from '../../world';
+import { GetDEBUG } from '../../../app';
 
 function BullTowerStats() {
 	this.suspicion       = new Stat(0);
@@ -1730,7 +1731,7 @@ Scenes.BullTower.SafePrompt = function() {
 				var check = (player.Int() + player.Dex())/2 + Math.random() * 20;
 				check += player.jobs['Rogue'].level * 5;
 				
-				if(DEBUG) {
+				if(GetDEBUG()) {
 					Text.Add("Int/Dex check (with bonuses for Rogue levels): [check] vs 80", {check: check}, 'bold');
 					Text.NL();
 				}
@@ -1775,7 +1776,7 @@ Scenes.BullTower.SafePrompt = function() {
 				var check = player.Dex() + Math.random() * 20;
 				check += player.jobs['Rogue'].level * 5;
 				
-				if(DEBUG) {
+				if(GetDEBUG()) {
 					Text.Add("Dex check (with bonuses for Rogue levels): [check] vs 90", {check: check}, 'bold');
 					Text.NL();
 				}
@@ -1989,7 +1990,7 @@ world.loc.BullTower.Building.Watchtower.events.push(new Link(
 				
 				var check = player.Dex() + Math.random() * 20;
 				
-				if(DEBUG) {
+				if(GetDEBUG()) {
 					Text.Add("Dex check, [check] vs 60", {check: check}, 'bold');
 					Text.NL();
 				}

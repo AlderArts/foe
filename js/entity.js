@@ -8,6 +8,7 @@ import { Body } from './body/body';
 import { PregnancyHandler } from './pregnancy';
 import { LactationHandler } from './lactation';
 import { AbilityCollection, DamageType } from './ability';
+import { GetDEBUG } from '../app';
 
 // TODO: Should have shared features, such as combat stats. Body representation
 function Entity() {
@@ -250,7 +251,7 @@ Entity.prototype.AddExp = function(exp, reserve) {
 		exp = Math.ceil(buff.exp * exp);
 	}
 	
-	if(DEBUG) {
+	if(GetDEBUG()) {
 		Text.NL();
 		Text.Add("[reserve][name] gains [x] xp.", {reserve: reserve ? "RESERVE: " : "", name: this.name, x: exp}, 'bold');
 		Text.NL();
@@ -271,7 +272,7 @@ Entity.prototype.AddExp = function(exp, reserve) {
 		
 		this.SetLevelBonus();
 		
-		if(DEBUG) {
+		if(GetDEBUG()) {
 			Text.NL();
 			Text.Add("[reserve][name] gains a level! Now at [x].", {reserve: reserve ? "RESERVE: " : "", name: this.name, x: this.level}, 'bold');
 			Text.NL();
@@ -281,7 +282,7 @@ Entity.prototype.AddExp = function(exp, reserve) {
 }
 
 Entity.prototype.AddSexExp = function(sexp) {
-	if(DEBUG) {
+	if(GetDEBUG()) {
 		Text.NL();
 		Text.Add("[name] gains [x] sex exp.", {name: this.name, x: sexp}, 'bold');
 		Text.NL();
@@ -296,7 +297,7 @@ Entity.prototype.AddSexExp = function(sexp) {
 		this.sexlevel++;
 		//this.pendingStatPoints += 5;
 		
-		if(DEBUG) {
+		if(GetDEBUG()) {
 			Text.NL();
 			Text.Add("[name] gains a sex level! Now at [x].", {name: this.name, x: this.sexlevel}, 'bold');
 			Text.NL();
@@ -393,7 +394,7 @@ Entity.prototype.PregnancyTrigger = function(womb, slot) {
 	Gui.Callstack.unshift(function() {
 		womb.pregnant = false;
 		
-		if(DEBUG) {
+		if(GetDEBUG()) {
 			var parse = {
 				name : this.name
 			};

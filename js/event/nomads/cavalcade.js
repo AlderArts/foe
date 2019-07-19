@@ -3,6 +3,7 @@
  */
 import { Link, Scenes } from '../../event';
 import { world } from '../../world';
+import { GetDEBUG } from '../../../app';
 
 Scenes.NomadsCavalcade = {};
 
@@ -317,7 +318,7 @@ Scenes.NomadsCavalcade.PrepSexyGame = function() {
 				g.PrepGame(true);
 				g.NextRound();
 			}, true);
-			if(DEBUG) {
+			if(GetDEBUG()) {
 				Input.buttons[4].Setup("CHEAT", function() {
 					Scenes.NomadsCavalcade.SexyPlayerWin(false);
 				}, true);

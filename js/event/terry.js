@@ -6,6 +6,7 @@
 
 import { Entity } from '../entity';
 import { Scenes } from '../event';
+import { GetDEBUG } from '../../app';
 
 Scenes.Terry = {};
 
@@ -390,7 +391,7 @@ Terry.prototype.Interact = function(switchSpot) {
 	else
 		Text.Add("[HeShe]’s grown quite close to you as you spent time together, and you gotta admit, the [foxvixen] is not so bad once you get to know [himher]. You’ve found [himher] to be quite amorous when [heshe] wants to, and even a bit clingy at times… but nevertheless, you’re glad to have the company of the pretty [foxvixen]. When your eyes meet, [heshe] smiles warmly at you.", parse);
 	
-	if(DEBUG) {
+	if(GetDEBUG()) {
 		Text.NL();
 		Text.Add("DEBUG: relation: " + terry.Relation(), null, 'bold');
 		Text.NL();

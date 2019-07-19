@@ -3,6 +3,7 @@
  */
 
 import { Scenes } from '../../event';
+import { GetDEBUG } from '../../../app';
 
 Scenes.Outlaws = {};
 
@@ -852,7 +853,7 @@ Scenes.Outlaws.Exploration.Archery = function() {
 				Text.NL();
 				Text.Add("Holding your breath, you take aim, and loose the arrows at your target in turn, watching them arc as they whistle through the air. At length, Maria and Vaughn take their turns at the line, loosing their arrows much like you have, and after it’s all over the latter ambles down the range to count the number of hits everyone’s landed.", parse);
 				Text.NL();
-				if(DEBUG) {
+				if(GetDEBUG()) {
 					Text.Add("DEBUG: dex+str [dex] (vs [goal], [goal2])", {dex: dex, goal: goal, goal2: goal2}, 'bold');
 					Text.NL();
 				}

@@ -1,4 +1,5 @@
 import { Scenes } from '../../event';
+import { GetDEBUG } from '../../../app';
 
 //
 //Dead drops
@@ -891,7 +892,7 @@ Scenes.Maria.DeadDrops.Docks.GuardInspection = function() {
 			var goal = 50;
 			var dex = (player.Dex()+player.Int())/2 + Math.random() * 20;
 			
-			if(DEBUG) {
+			if(GetDEBUG()) {
 				Text.Add("DEBUG: (dex+int)/2 check [dex] (vs [goal])", {dex: dex, goal: goal}, 'bold');
 				Text.NL();
 			}

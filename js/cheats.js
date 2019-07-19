@@ -4,10 +4,11 @@ import { Link } from './event';
 import { Cock } from './body/cock';
 import { Vagina } from './body/vagina';
 import { Item } from './item';
+import { GetDEBUG, SetDEBUG } from '../app';
 
 /*
 world.loc.Plains.Nomads.Tent.events.push(new Link(
-	"TESTBUTTON", function() { return DEBUG; }, true,
+	"TESTBUTTON", function() { return GetDEBUG(); }, true,
 	function() {
 		Text.Add(Text.Bold("DEBUG: " + "Time"));
 		Text.NL();
@@ -21,9 +22,9 @@ world.loc.Plains.Nomads.Tent.events.push(new Link(
 */
 
 world.loc.Plains.Nomads.Tent.events.push(new Link(
-	"CockSmith", function() { return DEBUG; }, true,
+	"CockSmith", function() { return GetDEBUG(); }, true,
 	function() {
-		if(DEBUG) {
+		if(GetDEBUG()) {
 			Text.NL();
 			Text.Add(Text.Bold("Mr. Johnson, the cocksmith, is sitting inconspicuously in a corner."));
 			Text.NL();
@@ -213,9 +214,9 @@ world.loc.Plains.Nomads.Tent.events.push(new Link(
 
 
 world.loc.Plains.Nomads.Tent.events.push(new Link(
-	"ElfCalib", function() { return DEBUG; }, true,
+	"ElfCalib", function() { return GetDEBUG(); }, true,
 	function() {
-		if(DEBUG) {
+		if(GetDEBUG()) {
 			Text.NL();
 			Text.Add(Text.Bold("Inra, the elf calibrator, is sitting in a corner."));
 			Text.NL();
@@ -465,9 +466,9 @@ world.loc.Plains.Nomads.Tent.events.push(new Link(
 
 
 world.loc.Plains.Nomads.Tent.events.push(new Link(
-	"ITEM", function() { return DEBUG; }, true,
+	"ITEM", function() { return GetDEBUG(); }, true,
 	function() {
-		if(DEBUG) {
+		if(GetDEBUG()) {
 			Text.NL();
 			Text.Add(Text.Bold("A box of cheaty items."));
 			Text.NL();
@@ -484,7 +485,7 @@ world.loc.Plains.Nomads.Tent.events.push(new Link(
 		Text.NL();
 		Text.Add("<b>Got a fuckton of items</b>");
 		
-		DEBUG = false;
+		SetDEBUG(false);
 		
 		_(Items).pickBy(function(item) {
 			return item instanceof Item
@@ -510,7 +511,7 @@ world.loc.Plains.Nomads.Tent.events.push(new Link(
 			party.inventory.AddItem(item);
 		});
 		
-		DEBUG = true;
+		SetDEBUG(true);
 		
 		Text.Flush();
 		Gui.NextPrompt();

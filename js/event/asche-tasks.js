@@ -3,6 +3,7 @@
  * TASKS
  */
 import { Scenes } from '../event';
+import { GetDEBUG } from '../../app';
 
 Scenes.Asche.Tasks = {};
 
@@ -192,7 +193,7 @@ Scenes.Asche.Tasks.Ginseng.Highlands = function() {
 			
 			var goal = 40;
 			
-			if(DEBUG) {
+			if(GetDEBUG()) {
 				Text.Add("Dex check: [dex] (vs [goal])", {dex: dex, goal: goal}, 'bold');
 				Text.NL();
 			}
@@ -795,7 +796,7 @@ Scenes.Asche.Tasks.Nightshade.HerbComplications = function() {
 		
 		var check = Math.floor((player.Dex() + player.Sta() + player.Int()) / 3.0 + Math.random() * 20);
 		
-		if(DEBUG) {
+		if(GetDEBUG()) {
 			Text.Add("(Dex+Sta+Int)/3 test: [val] (vs [goal])", {val: check, goal: goal}, 'bold');
 			Text.NL();
 		}

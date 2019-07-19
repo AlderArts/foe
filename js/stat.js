@@ -1,3 +1,4 @@
+import { GetDEBUG } from "../app";
 
 function Stat(base, growth, growthStep) {
 	this.base   = base || 0; // Base stat, increased by levelling and TFs
@@ -28,7 +29,7 @@ Stat.prototype.IdealStat = function(ideal, maxChange, fraction) {
 	
 	var old = this.base;
 	this.base += diff;
-	if(DEBUG && this.debug) {
+	if(GetDEBUG() && this.debug) {
 		Text.NL();
 		if(diff > 0)
 			Text.Add("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (ideal: " + ideal + ")", null, "blue bold");
@@ -56,7 +57,7 @@ Stat.prototype.IncreaseStat = function(ideal, maxChange, fraction) {
 	
 	var old = this.base;
 	this.base += diff;
-	if(DEBUG && this.debug) {
+	if(GetDEBUG() && this.debug) {
 		Text.NL();
 		if(diff == 0)
 			Text.Add("DEBUG: " + this.debug() + " " + old + " capped (ideal: " + ideal + ")", null, "black bold");
@@ -82,7 +83,7 @@ Stat.prototype.DecreaseStat = function(ideal, maxChange, fraction) {
 	
 	var old = this.base;
 	this.base -= diff;
-	if(DEBUG && this.debug) {
+	if(GetDEBUG() && this.debug) {
 		Text.NL();
 		if(diff == 0)
 			Text.Add("DEBUG: " + this.debug() + " " + old + " capped (ideal: " + ideal + ")", null, "black bold");
