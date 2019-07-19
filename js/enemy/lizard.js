@@ -2703,3 +2703,5 @@ Scenes.Lizards.LossFemale = function() {
 	}, 1.0, function() { return true; });
 	scenes.Get();
 }
+
+export { Lizard };

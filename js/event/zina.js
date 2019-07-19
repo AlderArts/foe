@@ -98,3 +98,5 @@ Zina.prototype.IsAtLocation = function(location) {
 	location = location || party.location;
 	return true;
 }
+
+export { Zina };

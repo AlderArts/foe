@@ -6824,3 +6824,4 @@ Scenes.Halloween.WakingUp = function(badend) {
 	Gui.NextPrompt();
 }
 
+export { Halloween };

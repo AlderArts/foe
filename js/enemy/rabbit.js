@@ -2094,3 +2094,5 @@ Scenes.Lagomorph.GroupWinInterrorigate = function(enc) {
 	});
 	Gui.SetButtonsFromList(options);
 }
+
+export { Lagomorph, LagomorphAlpha, LagomorphElite, LagomorphBrute, LagomorphWizard };

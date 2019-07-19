@@ -220,4 +220,4 @@ Bandit.Act = function(encounter, activeChar) {
 		Abilities.Attack.CastInternal(encounter, this, t);
 }
 
-
+export { StreetUrchin, Bandit };

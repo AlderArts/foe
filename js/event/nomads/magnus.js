@@ -927,3 +927,5 @@ world.loc.Plains.Nomads.Fireplace.events.push(new Link(
 	},
 	Scenes.Magnus.Interact
 ));
+
+export { Magnus };

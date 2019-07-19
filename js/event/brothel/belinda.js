@@ -71,3 +71,5 @@ Belinda.prototype.IsAtLocation = function(location) {
 		return (world.time.hour >= 18 || world.time.hour < 6);
 	return false;
 }
+
+export { Belinda };

@@ -2759,3 +2759,4 @@ world.loc.Rigard.Residential.miranda.onEntry = function() {
 		PrintDefaultOptions();
 }
 
+export { Miranda };

@@ -2542,3 +2542,5 @@ Scenes.Ophelia.RewardChoices = function() {
 }
 
 
+
+export { Ophelia };

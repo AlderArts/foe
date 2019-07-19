@@ -87,3 +87,5 @@ Uru.prototype.ToStorage = function() {
 Uru.prototype.IsAtLocation = function(location) {
 	return true;
 }
+
+export { Uru };

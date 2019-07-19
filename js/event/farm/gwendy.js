@@ -780,3 +780,4 @@ world.loc.Farm.Fields.events.push(new Link(
 	Scenes.Gwendy.FieldsPrompt
 ));
 
+export { Gwendy };

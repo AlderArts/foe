@@ -966,3 +966,5 @@ Scenes.Gol.CombatAftermath = function(enc) {
 	
 	Gui.NextPrompt();
 }
+
+export { GolQueen };

@@ -6,6 +6,8 @@
 import { Scenes } from '../../event';
 import { Entity } from '../../entity';
 
+Scenes.Ches = {};
+
 function Ches(storage) {
 	Entity.call(this);
 	this.ID = "ches";
@@ -53,3 +55,5 @@ Ches.prototype.ToStorage = function() {
 Ches.prototype.IsAtLocation = function(location) {
 	return true;
 }
+
+export { Ches };

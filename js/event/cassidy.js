@@ -3345,3 +3345,4 @@ Scenes.Cassidy.Spar = function() {
 	});
 }
 
+export { Cassidy };

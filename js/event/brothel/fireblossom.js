@@ -1078,3 +1078,5 @@ Scenes.Brothel.Fireblossom.S1GrexPens = function(opts) {
 		Gui.NextPrompt(Scenes.Brothel.Fireblossom.Outro);
 	});
 }
+
+export { Fireblossom };

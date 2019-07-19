@@ -89,3 +89,5 @@ Sylistraxia.prototype.Interact = function() {
 		PartyInteraction();
 	});
 }
+
+export { Sylistraxia };

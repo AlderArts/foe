@@ -549,3 +549,4 @@ Scenes.RavenMother.RavenPrompt = function(back) {
 	Gui.SetButtonsFromList(options, true, back);
 }
 
+export { RavenMother };

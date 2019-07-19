@@ -1175,3 +1175,5 @@ Scenes.Asche.MagicBoxRepeat = function() {
 	});
 	Gui.SetButtonsFromList(options, false, null);
 }
+
+export { Asche };

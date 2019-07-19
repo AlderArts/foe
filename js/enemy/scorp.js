@@ -125,3 +125,5 @@ Scenes.Scorpion.LoneEnc = function() {
 	*/
 	return enc;
 }
+
+export { Scorpion };

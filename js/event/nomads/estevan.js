@@ -767,3 +767,4 @@ Scenes.Estevan.SexGay = function() {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
+export { Estevan };

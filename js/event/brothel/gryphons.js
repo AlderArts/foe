@@ -2153,3 +2153,5 @@ Scenes.Brothel.Gryphons.NewLifeHugEnding = function() {
 		Scenes.Brothel.Gryphons.Outro(Gender.female, 0);
 	});
 }
+
+export { Gryphons };

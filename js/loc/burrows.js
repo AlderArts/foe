@@ -864,3 +864,4 @@ Burrows.prototype.GenerateLagomorphAlpha = function(gender) {
 	return new LagomorphAlpha(gender);
 }
 
+export { Burrows };

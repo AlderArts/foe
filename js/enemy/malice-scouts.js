@@ -4215,3 +4215,5 @@ Scenes.MaliceScouts.Group.LossCatRape = function(enc) {
 	
 	Gui.NextPrompt();
 }
+
+export { CatboyMage, CentaurMare, GoatAlchemist };

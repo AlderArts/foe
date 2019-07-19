@@ -97,3 +97,5 @@ Danie.prototype.Interact = function() {
 		PartyInteraction();
 	});
 }
+
+export { Danie };

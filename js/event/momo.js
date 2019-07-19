@@ -951,3 +951,5 @@ Scenes.Momo.FindingMomo = function() {
 	Text.Flush();
 }
 */
+
+export { Momo };

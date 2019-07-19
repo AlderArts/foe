@@ -1,4 +1,73 @@
-import { SetLastSubmenu } from "./exploration";
+import { SetLastSubmenu } from './exploration';
+import { SAVE_VERSION } from '../app';
+import { Season } from './time';
+
+import { Intro } from './event/introduction';
+
+import { Rigard } from './loc/rigard/rigard';
+import { Farm } from './loc/farm';
+import { Burrows } from './loc/burrows';
+import { DryadGlade } from './loc/glade';
+import { TreeCity } from './loc/treecity/treecity';
+import { Oasis } from './loc/oasis';
+import { Nursery } from './event/nursery';
+
+import { Player } from './event/player';
+import { Kiakai } from './event/kiakai';
+import { Miranda } from './event/miranda';
+import { Terry } from './event/terry';
+import { Zina } from './event/zina';
+import { Momo } from './event/momo';
+import { Lei } from './event/royals/lei';
+import { Twins } from './event/royals/twins';
+import { Room69 } from './event/room69';
+
+import { Chief } from './event/nomads/chief';
+import { Rosalin } from './event/nomads/rosalin';
+import { Cale } from './event/nomads/cale';
+import { Estevan } from './event/nomads/estevan';
+import { Magnus } from './event/nomads/magnus';
+import { Patchwork } from './event/nomads/patchwork';
+
+import { Lagon } from './event/burrows/lagon';
+import { Ophelia } from './event/burrows/ophelia';
+import { Vena } from './event/burrows/vena';
+import { Roa } from './event/brothel/roa';
+
+import { Gwendy } from './event/farm/gwendy';
+import { Danie } from './event/farm/danie';
+import { Adrian } from './event/farm/adrian';
+import { Layla } from './event/farm/layla';
+
+import { Isla } from './event/highlands/isla';
+
+import { Outlaws } from './event/outlaws/outlaws';
+import { Aquilius } from './event/outlaws/aquilius';
+import { Maria } from './event/outlaws/maria';
+import { Cveta } from './event/outlaws/cveta';
+import { Vaughn } from './event/outlaws/vaughn';
+
+import { Fera } from './event/fera';
+import { Asche } from './event/asche';
+import { Cassidy } from './event/cassidy';
+
+import { Jeanne } from './event/royals/jeanne';
+import { GolemBoss } from './event/royals/golem';
+
+import { OrchidBoss } from './enemy/orchid';
+
+import { RavenMother } from './event/raven';
+import { Uru } from './event/uru';
+
+import { Lucille } from './event/brothel/lucille';
+import { Belinda } from './event/brothel/belinda';
+import { Bastet } from './event/brothel/bastet';
+import { Gryphons } from './event/brothel/gryphons';
+import { Fireblossom } from './event/brothel/fireblossom';
+
+import { Aria } from './event/aria';
+import { Sylistraxia } from './event/sylistraxia';
+import { Ches } from './event/brothel/ches';
 
 let gameCache = {};
 let GAME = {};

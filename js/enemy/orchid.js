@@ -841,3 +841,5 @@ Scenes.Orchid.FirstTalkPrompt = function(opts) {
 		Gui.SetButtonsFromList(options, false, null);
 	}
 }
+
+export { OrchidBoss };

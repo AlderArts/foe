@@ -2609,3 +2609,5 @@ Scenes.BullTower.AftermathZenith = function() {
 	
 	Gui.NextPrompt();
 }
+
+export { BullTowerStats };

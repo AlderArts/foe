@@ -1057,3 +1057,5 @@ Scenes.Brothel.Bastet.Birth3 = function() {
 	
 	Gui.SetButtonsFromList(options, false, null);
 }
+
+export { Bastet };

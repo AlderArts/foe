@@ -329,3 +329,5 @@ Scenes.Lucille.WhoreAftermath = function(name, cost) {
 		Gui.SetButtonsFromList(options, false, null);
 	}
 }
+
+export { Lucille };

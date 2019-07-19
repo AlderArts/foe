@@ -49,3 +49,5 @@ Aria.prototype.constructor = Aria;
 Aria.prototype.IsAtLocation = function(location) {
 	return true;
 }
+
+export { Aria };

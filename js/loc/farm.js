@@ -1609,3 +1609,5 @@ Scenes.Farm.GoToMarketFirstFinale = function() {
 	});
 	Gui.SetButtonsFromList(options);
 }
+
+export { Farm };

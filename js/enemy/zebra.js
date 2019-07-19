@@ -579,3 +579,5 @@ Scenes.ZebraShaman.OnWinVaginal = function(enc) {
 		Gui.NextPrompt();
 	});
 }
+
+export { ZebraBrave, ZebraShaman };

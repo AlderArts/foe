@@ -1200,3 +1200,5 @@ Scenes.Aquilius.AlchemyHelp = function() {
 	
 	Gui.NextPrompt();
 }
+
+export { Aquilius };

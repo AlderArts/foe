@@ -94,3 +94,5 @@ Adrian.prototype.Interact = function() {
 		PartyInteraction();
 	});
 }
+
+export { Adrian };

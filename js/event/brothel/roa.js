@@ -1400,3 +1400,5 @@ Scenes.Roa.TSLPostSexPrompt = function(mStrap) {
 		Gui.Callstack.push(Scenes.Brothel.MStrap);
 	}
 }
+
+export { Roa };

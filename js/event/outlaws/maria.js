@@ -1233,3 +1233,5 @@ Scenes.Maria.ForestEnd = function() {
 	world.TimeStep({hour: 3});
 	Gui.NextPrompt();
 }
+
+export { Maria };

@@ -1289,3 +1289,5 @@ Scenes.Cale.RogueTeach = function() {
 	
 	Scenes.Cale.Prompt();
 }
+
+export { Cale };

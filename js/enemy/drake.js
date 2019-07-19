@@ -125,3 +125,5 @@ Scenes.Drake.DrakeEnc = function() {
 	*/
 	return enc;
 }
+
+export { Drake };

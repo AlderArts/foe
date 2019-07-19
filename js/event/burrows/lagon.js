@@ -2625,3 +2625,5 @@ Scenes.Lagon.WinToOphelia = function() {
 	
 	Encounter.prototype.onVictory.call(enc);
 }
+
+export { Lagon };

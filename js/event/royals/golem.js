@@ -375,3 +375,5 @@ Scenes.Golem.OnLoss = function() {
 		});
 	});
 }
+
+export { GolemBoss };

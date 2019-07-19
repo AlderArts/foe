@@ -118,3 +118,5 @@ Corishev.prototype.Act = function(encounter, activeChar) {
 	else
 		Abilities.EnemySkill.Corishev.Whip.Use(encounter, this, t);
 }
+
+export { Corishev };

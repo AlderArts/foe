@@ -441,3 +441,4 @@ Scenes.Oasis.DesertCaravanEncounter = function() {
 	prompt();
 }
 
+export { Oasis };

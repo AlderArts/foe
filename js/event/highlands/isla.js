@@ -2335,3 +2335,5 @@ Scenes.Isla.BatheTF = function(parse, level) {
 	Text.Flush();
 	Gui.NextPrompt();
 }
+
+export { Isla };

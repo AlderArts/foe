@@ -766,3 +766,4 @@ Scenes.DryadGlade.MotherTreeTalk = function() {
 	Gui.SetButtonsFromList(options, true, Scenes.DryadGlade.MotherTreePrompt);
 }
 
+export { DryadGlade };

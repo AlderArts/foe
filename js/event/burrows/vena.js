@@ -376,3 +376,5 @@ Scenes.Vena.RestoreEntrypoint = function(fight) {
 		Gui.NextPrompt();
 	});
 }
+
+export { Vena };

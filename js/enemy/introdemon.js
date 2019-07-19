@@ -111,3 +111,5 @@ IntroDemon.prototype.Act = function(encounter, activeChar) {
 		encounter.CombatTick();
 	});
 }
+
+export { IntroDemon };

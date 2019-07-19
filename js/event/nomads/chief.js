@@ -297,3 +297,5 @@ world.loc.Plains.Nomads.Fireplace.events.push(new Link(
 	},
 	Scenes.Chief.Interact
 ));
+
+export { Chief };

@@ -1249,3 +1249,5 @@ Scenes.Layla.LaylaLeavesGwendy = function() {
 		MoveToLocation(world.loc.Plains.Crossroads, {minute: 30});
 	});
 }
+
+export { Layla };

@@ -1411,3 +1411,5 @@ Scenes.Equine.WinRideHimVag = function(enc) {
 		
 	});
 }
+
+export { Equine };

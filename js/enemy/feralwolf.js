@@ -114,3 +114,5 @@ Scenes.FeralWolf.LoneEnc = function() {
 	*/
 	return enc;
 }
+
+export { FeralWolf };

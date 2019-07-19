@@ -115,4 +115,4 @@ Footman.Act = function(encounter, activeChar) {
 		Abilities.Attack.CastInternal(encounter, this, t);
 }
 
-
+export { Footman };

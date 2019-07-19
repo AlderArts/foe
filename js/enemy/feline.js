@@ -3014,3 +3014,5 @@ Scenes.Felines.LossDoubleTeam = function(cat, cat2, group, enc) {
 
 	return true;
 }
+
+export { Feline };

@@ -1281,3 +1281,5 @@ Scenes.Naga.DesertNagaMating = function(naga) {
 
 	scenes.Get();
 }
+
+export { Naga };

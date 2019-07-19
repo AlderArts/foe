@@ -3588,3 +3588,5 @@ Scenes.Rosalin.FuckCaleWatchEntryPoint = function() {
 
 	Gui.NextPrompt();
 }
+
+export { Rosalin };

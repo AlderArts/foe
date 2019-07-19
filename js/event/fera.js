@@ -1164,3 +1164,4 @@ Scenes.Fera.SexPrompt = function() {
 		Gui.SetButtonsFromList(options);
 }
 
+export { Fera };

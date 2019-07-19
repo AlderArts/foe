@@ -710,3 +710,5 @@ Scenes.Mothgirl.Loss = function(enc, traded) {
 	Text.Flush();
 	Gui.NextPrompt();
 }
+
+export { Mothgirl };

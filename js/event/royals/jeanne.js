@@ -609,3 +609,5 @@ Scenes.Jeanne.FirstCont = function() {
 	world.TimeStep({minute: 30});
 	Gui.NextPrompt();
 }
+
+export { Jeanne };

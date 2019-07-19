@@ -215,3 +215,5 @@ Scenes.Twins.TalkPrompt = function() {
 	}
 	Gui.SetButtonsFromList(options, true, Scenes.Twins.Interact);
 }
+
+export { Twins };

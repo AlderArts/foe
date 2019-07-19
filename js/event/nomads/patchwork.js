@@ -319,3 +319,5 @@ world.loc.Plains.Nomads.Fireplace.events.push(new Link(
 	},
 	Scenes.Patchwork.Interact
 ));
+
+export { Patchwork };

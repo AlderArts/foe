@@ -36,3 +36,5 @@ TreeCity.prototype.FromStorage = function(storage) {
 	for(var flag in storage.flags)
 		this.flags[flag] = parseInt(storage.flags[flag]);
 }
+
+export { TreeCity };

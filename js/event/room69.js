@@ -957,3 +957,5 @@ Scenes.Room69.Discovering69 = function() {
 	Text.Flush();
 }
 */
+
+export { Room69 };
