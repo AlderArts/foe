@@ -1,3 +1,5 @@
+import { Race } from "./race";
+import { Color } from "./color";
 
 function BodyPart(race, color) {
 	this.race  = race || Race.Human;

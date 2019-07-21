@@ -7,6 +7,8 @@ import { Scenes } from '../event';
 import { Entity } from '../entity';
 import { GetDEBUG } from '../../app';
 
+let Room69Scenes = {};
+
 function Room69(storage) {
 	Entity.call(this);
 	this.ID = "room69";
@@ -65,15 +67,13 @@ Room69.prototype.ToStorage = function() {
 	return storage;
 }
 
-Scenes.Room69 = {};
-
 // Schedule (IS a location. Heh)
 Room69.prototype.IsAtLocation = function(location) {
 	return location == world.loc.Rigard.Inn.room69;
 }
 
 // Party interaction
-Scenes.Room69.Interact = function() {
+Room69Scenes.Interact = function() {
 	Text.Clear();
 	Text.Add("Rawr Imma room.");
 	
@@ -90,7 +90,7 @@ Scenes.Room69.Interact = function() {
 	Text.Flush();
 }
 
-Scenes.Room69.Discovering69 = function() {
+Room69Scenes.Discovering69 = function() {
 	var parse = {
 	};
 	
@@ -115,19 +115,19 @@ Scenes.Room69.Discovering69 = function() {
 	Text.Add("<i>“Do not let my seeming immobility fool you,”</i> the room says, <i>“for all the important bits move just fine.”</i> As if to punctuate the claim, one of the bed’s pillows crawls toward you in apparent invitation.", parse);
 	Text.Flush();
 	
-	Scenes.Room69.introTalkedSentience = false;
-	Scenes.Room69.introTriedToLeave    = false;
+	Room69Scenes.introTalkedSentience = false;
+	Room69Scenes.introTriedToLeave    = false;
 	
-	Scenes.Room69.Discovering69Prompt();
+	Room69Scenes.Discovering69Prompt();
 }
 
-Scenes.Room69.Discovering69Prompt = function() {
+Room69Scenes.Discovering69Prompt = function() {
 	var parse = {
 	};
 	
 	//[Sentience][What now][Leave]
 	var options = new Array();
-	if(Scenes.Room69.introTalkedSentience == false) {
+	if(Room69Scenes.introTalkedSentience == false) {
 		options.push({ nameStr : "Sentience",
 			func : function() {
 				Text.Clear();
@@ -138,13 +138,13 @@ Scenes.Room69.Discovering69Prompt = function() {
 				Text.Add("As you start thinking of what to do next, Sixtynine adds quietly, <i>“Besides, from where I-we stand, that is entirely the wrong question to ask.”</i>", parse);
 				Text.Flush();
 				
-				Scenes.Room69.introTalkedSentience = true;
-				Scenes.Room69.Discovering69Prompt();
+				Room69Scenes.introTalkedSentience = true;
+				Room69Scenes.Discovering69Prompt();
 			}, enabled : true,
 			tooltip : "Ask why the room can talk and move."
 		});
 	}
-	if(Scenes.Room69.introTriedToLeave == false) {
+	if(Room69Scenes.introTriedToLeave == false) {
 		options.push({ nameStr : "Leave",
 			func : function() {
 				Text.Clear();
@@ -166,8 +166,8 @@ Scenes.Room69.Discovering69Prompt = function() {
 				}
 				Text.Flush();
 				
-				Scenes.Room69.introTriedToLeave = true;
-				Scenes.Room69.Discovering69Prompt();
+				Room69Scenes.introTriedToLeave = true;
+				Room69Scenes.Discovering69Prompt();
 			}, enabled : true,
 			tooltip : "You need to get out of here. Now."
 		});
@@ -182,16 +182,16 @@ Scenes.Room69.Discovering69Prompt = function() {
 			Text.Add("Given the epithets the room gave itself, you can imagine what it has it mind.", parse);
 			Text.Flush();
 			
-			Scenes.Room69.introTriedForce = false;
-			Scenes.Room69.introTriedArgue = false;
-			Scenes.Room69.Discovering69WhatNow();
+			Room69Scenes.introTriedForce = false;
+			Room69Scenes.introTriedArgue = false;
+			Room69Scenes.Discovering69WhatNow();
 		}, enabled : true,
-		tooltip : Scenes.Room69.introTalkedSentience ? "You need to know what it wants from you." : "It doesn’t matter why it can talk, you just need to know what it wants."
+		tooltip : Room69Scenes.introTalkedSentience ? "You need to know what it wants from you." : "It doesn’t matter why it can talk, you just need to know what it wants."
 	});
 	Gui.SetButtonsFromList(options);
 }
 
-Scenes.Room69.Discovering69WhatNow = function() {
+Room69Scenes.Discovering69WhatNow = function() {
 	var parse = {
 		
 	};
@@ -199,10 +199,10 @@ Scenes.Room69.Discovering69WhatNow = function() {
 	//[Agree][Argue][Force]
 	var options = new Array();
 	options.push({ nameStr : "Agree",
-		func : Scenes.Room69.Discovering69Sex, enabled : true,
+		func : Room69Scenes.Discovering69Sex, enabled : true,
 		tooltip : "Maybe having some fun with Sixtynine won’t be so bad."
 	});
-	if(Scenes.Room69.introTriedArgue == false) {
+	if(Room69Scenes.introTriedArgue == false) {
 		options.push({ nameStr : "Argue",
 			func : function() {
 				Text.Clear();
@@ -214,8 +214,8 @@ Scenes.Room69.Discovering69WhatNow = function() {
 				Text.Add("You explain again that that is just not what you want right now, but the message does not seem to be getting across to the room. You get the feeling you’ll need to take a harsher tone and really get into a fight with Sixtynine to have any chance of getting somewhere.", parse);
 				Text.Flush();
 				
-				Scenes.Room69.introTriedArgue = true;
-				Scenes.Room69.Discovering69WhatNow();
+				Room69Scenes.introTriedArgue = true;
+				Room69Scenes.Discovering69WhatNow();
 			}, enabled : true,
 			tooltip : "You are not quite sure if the room can be reasoned with, but you’re willing to try."
 		});
@@ -249,7 +249,7 @@ Scenes.Room69.Discovering69WhatNow = function() {
 				Gui.NextPrompt(function() {
 					party.location = world.loc.Rigard.Inn.common;
 					Text.Clear();
-					Scenes.Room69.Discovering69OrvinRant();
+					Room69Scenes.Discovering69OrvinRant();
 					Text.Add(" At his skeptical look, you explain that you managed to talk it into letting you leave, though it was quite unpleasant.", parse);
 					Text.NL();
 					Text.Add("<i>“Well, yes, I have to admit, Sixtynine can be a little persistent at times. Still, I hope you weren’t too rough on it - it has a good heart.”</i> You wonder if the heart is hidden under the floorboards, since all you saw above them was the libido. <i>“It’s very kind, you know, and always willing to forgive. I recommend you give it another chance, and maybe you’ll become fast friends.”</i>", parse);
@@ -266,7 +266,7 @@ Scenes.Room69.Discovering69WhatNow = function() {
 			tooltip : "Maybe a shouting match with the room will convince it to let you out, although Sixtynine probably wouldn’t be happy about it."
 		});
 	}
-	if(Scenes.Room69.introTriedForce == false) {
+	if(Room69Scenes.introTriedForce == false) {
 		options.push({ nameStr : "Force",
 			func : function() {
 				Text.Clear();
@@ -285,8 +285,8 @@ Scenes.Room69.Discovering69WhatNow = function() {
 					Text.Add("Looks like you’ll need to try another approach.", parse);
 					Text.Flush();
 					
-					Scenes.Room69.introTriedForce = true;
-					Scenes.Room69.Discovering69WhatNow();
+					Room69Scenes.introTriedForce = true;
+					Room69Scenes.Discovering69WhatNow();
 				}
 				else if(player.PAttack() < 150 && player.MAttack() < 150) {
 					if(player.MAttack() > player.PAttack()) {
@@ -302,7 +302,7 @@ Scenes.Room69.Discovering69WhatNow = function() {
 					}
 					Text.Flush();
 					
-					Scenes.Room69.Discovering69ForceOutro();
+					Room69Scenes.Discovering69ForceOutro();
 				}
 				else {
 					if(player.MAttack() > player.PAttack()) {
@@ -316,7 +316,7 @@ Scenes.Room69.Discovering69WhatNow = function() {
 					Text.Add("You hope no one was standing out there.", parse);
 					Text.Flush();
 					
-					Scenes.Room69.Discovering69ForceOutro();
+					Room69Scenes.Discovering69ForceOutro();
 				}
 			}, enabled : true,
 			tooltip : "Try to break down the door."
@@ -325,7 +325,7 @@ Scenes.Room69.Discovering69WhatNow = function() {
 	Gui.SetButtonsFromList(options);
 }
 
-Scenes.Room69.Discovering69OrvinRant = function() {
+Room69Scenes.Discovering69OrvinRant = function() {
 	var parse = {
 		
 	};
@@ -351,7 +351,7 @@ Scenes.Room69.Discovering69OrvinRant = function() {
 	Text.Add("You are taken momentarily aback by his vehemence, and point out that it was not allowing you to leave. Clearly unacceptable, especially in an inn of all places.", parse);
 }
 
-Scenes.Room69.Discovering69ForceOutro = function() {
+Room69Scenes.Discovering69ForceOutro = function() {
 	var parse = {
 		
 	};
@@ -382,7 +382,7 @@ Scenes.Room69.Discovering69ForceOutro = function() {
 		party.location = world.loc.Rigard.Inn.common;
 		Text.Clear();
 		
-		Scenes.Room69.Discovering69OrvinRant();
+		Room69Scenes.Discovering69OrvinRant();
 		
 		Text.Add(" At his skeptical look, you explain that you were forced to break the door down to get out.", parse);
 		Text.NL();
@@ -400,7 +400,7 @@ Scenes.Room69.Discovering69ForceOutro = function() {
 }
 
 // Lets get to the sex already!
-Scenes.Room69.Discovering69Sex = function() {
+Room69Scenes.Discovering69Sex = function() {
 	var parse = {
 		playername      : function() { return player.name; },
 		topArmorDesc    : function() { return player.ArmorDesc(); },
@@ -726,7 +726,7 @@ Scenes.Room69.Discovering69Sex = function() {
 	});
 }
 
-Scenes.Room69.ApologizeTo69ForBreakingDoor = function() {
+Room69Scenes.ApologizeTo69ForBreakingDoor = function() {
 	var parse = {
 		
 	};
@@ -809,7 +809,7 @@ Scenes.Room69.ApologizeTo69ForBreakingDoor = function() {
 	}
 }
 
-Scenes.Room69.ApologizeTo69ForBeingMean = function() {
+Room69Scenes.ApologizeTo69ForBeingMean = function() {
 	var parse = {
 		hisher : player.mfTrue("his", "her")
 	};
@@ -921,7 +921,7 @@ Scenes.Room69.ApologizeTo69ForBeingMean = function() {
 }
 
 // TODO: PLACEHOLDER
-Scenes.Room69.Normal69 = function() {
+Room69Scenes.Normal69 = function() {
 	var parse = {
 		
 	};
@@ -946,7 +946,7 @@ Scenes.Room69.Normal69 = function() {
 }
 
 /*
-Scenes.Room69.Discovering69 = function() {
+Room69Scenes.Discovering69 = function() {
 	var parse = {
 		
 	};
@@ -958,4 +958,4 @@ Scenes.Room69.Discovering69 = function() {
 }
 */
 
-export { Room69 };
+export { Room69, Room69Scenes };

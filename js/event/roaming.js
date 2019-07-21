@@ -1,9 +1,11 @@
+import { EncounterTable } from "../event";
+import { Party } from "../party";
+import { Encounter } from "../combat";
+import { GameState } from "../main";
 
-import { Scenes } from '../event';
+let RoamingScenes = {};
 
-Scenes.Roaming = {};
-
-Scenes.Roaming.FlowerPetal = function() {
+RoamingScenes.FlowerPetal = function() {
 	var parse = {
 		
 	};
@@ -20,7 +22,7 @@ Scenes.Roaming.FlowerPetal = function() {
 	Gui.NextPrompt();
 };
 
-Scenes.Roaming.FindSomeCoins = function() {
+RoamingScenes.FindSomeCoins = function() {
 	var coin = Math.floor(5 + Math.random() * 20);
 	
 	var parse = {
@@ -52,7 +54,7 @@ Scenes.Roaming.FindSomeCoins = function() {
 	Gui.NextPrompt();
 }
 
-Scenes.Roaming.KingdomPatrol = function(entering) {
+RoamingScenes.KingdomPatrol = function(entering) {
 	var parse = {
 		playername : player.name
 	};
@@ -80,7 +82,7 @@ Scenes.Roaming.KingdomPatrol = function(entering) {
 	var scenes = new EncounterTable();
 	
 	scenes.AddEnc(function() {
-		rigard.bandits = Scenes.Roaming.BanditsGen(capt, bonus ? 3 : 0);
+		rigard.bandits = RoamingScenes.BanditsGen(capt, bonus ? 3 : 0);
 		parse["rbanditsdesc"] = rigard.bandits.desc;
 		
 		Text.Add("The [rmanwoman] at the front of the group waves for [rhisher] companions to wait, and rides up to you on [rhisher] own. [rHeShe] is a young, pure human [rmanwoman] and is wearing new looking armor, though dirt staining the tabard points to heavier recent use.", parse);
@@ -207,7 +209,7 @@ Scenes.Roaming.KingdomPatrol = function(entering) {
 	scenes.Get();
 }
 
-Scenes.Roaming.BanditsGen = function(capt, levelbonus) {
+RoamingScenes.BanditsGen = function(capt, levelbonus) {
 	var CreateBandit = function() {
 		var rand = Math.random();
 		var gender = rand < 0.5 ? Gender.male :
@@ -263,9 +265,9 @@ Scenes.Roaming.BanditsGen = function(capt, levelbonus) {
 	
 	var enc = new Encounter(enemy);
 	enc.canRun      = false;
-	enc.onEncounter = Scenes.Roaming.BanditsOnEncounter;
-	enc.onLoss      = Scenes.Roaming.BanditsLoss;
-	enc.onVictory   = Scenes.Roaming.BanditsWin;
+	enc.onEncounter = RoamingScenes.BanditsOnEncounter;
+	enc.onLoss      = RoamingScenes.BanditsLoss;
+	enc.onVictory   = RoamingScenes.BanditsWin;
 	
 	enc.leader = enemy.Get(0);
 	enc.desc = Text.Parse("a small group, certainly not more than half a dozen. Apparently, they all wear [rclothing] and " + desc, {rclothing : rclothing});
@@ -321,7 +323,7 @@ Scenes.Roaming.BanditsGen = function(capt, levelbonus) {
 	return enc;
 }
 
-Scenes.Roaming.Bandits = function() {
+RoamingScenes.Bandits = function() {
 	var bandits = rigard.bandits;
 	var parse = {
 		rclothing : bandits.rclothing
@@ -479,7 +481,7 @@ Scenes.Roaming.Bandits = function() {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Roaming.BanditsOnEncounter = function() {
+RoamingScenes.BanditsOnEncounter = function() {
 	var enc = this;
 	var parse = {};
 	
@@ -507,7 +509,7 @@ Scenes.Roaming.BanditsOnEncounter = function() {
 	}
 }
 
-Scenes.Roaming.BanditsLoss = function() {
+RoamingScenes.BanditsLoss = function() {
 	SetGameState(GameState.Event);
 	
 	var enc = this;
@@ -582,7 +584,7 @@ Scenes.Roaming.BanditsLoss = function() {
 	Encounter.prototype.onLoss.call(enc);
 }
 
-Scenes.Roaming.BanditsWin = function() {
+RoamingScenes.BanditsWin = function() {
 	SetGameState(GameState.Event);
 	
 	var enc = this;
@@ -721,3 +723,5 @@ Scenes.Roaming.BanditsWin = function() {
 	
 	Encounter.prototype.onVictory.call(enc);
 }
+
+export { RoamingScenes };

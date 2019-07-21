@@ -6,6 +6,8 @@
 import { Entity } from '../entity';
 import { GetDEBUG } from '../../app';
 
+let SylistraxiaScenes = {};
+
 function Sylistraxia(storage) {
 	Entity.call(this);
 	this.ID = "sylistraxia";
@@ -90,4 +92,4 @@ Sylistraxia.prototype.Interact = function() {
 	});
 }
 
-export { Sylistraxia };
+export { Sylistraxia, SylistraxiaScenes };

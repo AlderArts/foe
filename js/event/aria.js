@@ -5,6 +5,8 @@
  */
 import { Entity } from '../entity';
 
+let AriaScenes = {};
+
 function Aria(storage) {
 	Entity.call(this);
 	this.ID = "aria";
@@ -50,4 +52,4 @@ Aria.prototype.IsAtLocation = function(location) {
 	return true;
 }
 
-export { Aria };
+export { Aria, AriaScenes };

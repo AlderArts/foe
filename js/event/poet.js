@@ -1,15 +1,15 @@
 
-import { Scenes, EncounterTable } from '../event';
+import { EncounterTable } from '../event';
 
-Scenes.Poet = {};
+let PoetScenes = {};
 
-Scenes.Poet.Entry = function() {
+PoetScenes.Entry = function() {
 	var parse = {
 		
 	};
 	
 	var scenes = new EncounterTable();
-	scenes.AddEnc(Scenes.Poet.ToDragonOrLizard, 1.0, function() { return true; });
+	scenes.AddEnc(PoetScenes.ToDragonOrLizard, 1.0, function() { return true; });
 	
 	Text.Clear();
 	Text.Add("Walking along the beaten path, you come across a scrawled note left on the ground. Curious, you bend down and pick it up.<i>", parse);
@@ -26,7 +26,7 @@ Scenes.Poet.Entry = function() {
 	Gui.NextPrompt();
 }
 
-Scenes.Poet.ToDragonOrLizard = function() {
+PoetScenes.ToDragonOrLizard = function() {
 	var parse = {};
 	
 	Text.Add("To be dragon or lizard, that is the question–<br>", parse);
@@ -43,3 +43,5 @@ Scenes.Poet.ToDragonOrLizard = function() {
 	Text.Add("When we have turned part lizard, part dragon,<br>", parse);
 	Text.Add("Must give us pause.", parse);
 }
+
+export { PoetScenes };

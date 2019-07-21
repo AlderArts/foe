@@ -476,7 +476,7 @@ Entity.prototype.ClearCombatBonuses = function() {
 }
 
 // Balance mana, lust and hp
-Entity.prototype.BalanceStats = function() {
+let BalanceStats = function() {
 	if(this.curHp < 0)
 		this.curHp = 0;
 	else if(this.curHp > this.HP())
@@ -679,4 +679,4 @@ Entity.prototype.AddResistanceWear = function(type, wear) {
 	}
 }
 
-export { TargetStrategy };
+export { TargetStrategy, BalanceStats };

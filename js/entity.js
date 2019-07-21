@@ -9,6 +9,7 @@ import { PregnancyHandler } from './pregnancy';
 import { LactationHandler } from './lactation';
 import { AbilityCollection, DamageType } from './ability';
 import { GetDEBUG } from '../app';
+import { BalanceStats } from './entity-combat';
 
 // TODO: Should have shared features, such as combat stats. Body representation
 function Entity() {
@@ -490,5 +491,8 @@ Entity.prototype.DebugMode = function(debug) {
 	if(debug)
 		this.RestFull();
 }
+
+// Importing
+Entity.prototype.BalanceStats = BalanceStats;
 
 export { Entity, DrunkLevel };

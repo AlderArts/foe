@@ -4,6 +4,7 @@
 
 import { Stat } from './stat';
 import { GetDEBUG } from '../app';
+import { Race } from './body/race';
 
 // Progress
 let PregnancyLevel = {

@@ -1,4 +1,20 @@
 
+import { PrintDefaultOptions } from "./exploration";
+
+import { MasturbationScenes } from "./event/masturbation";
+import { ZinaScenes } from "./event/zina";
+import { UruScenes } from "./event/uru";
+import { SylistraxiaScenes } from "./event/sylistraxia";
+import { Room69Scenes } from "./event/room69";
+import { RoamingScenes } from "./event/roaming";
+import { RavenMotherScenes } from "./event/raven";
+import { PortalOpeningScenes } from "./event/portalopening";
+import { PoetScenes } from "./event/poet";
+import { MomoScenes } from "./event/momo";
+import { MeditationScenes } from "./event/meditation";
+import { AriaScenes } from "./event/aria";
+import { DreamsScenes } from "./event/dreams";
+
 /*
  *
  * Event/Location. Is used as a template to set up
@@ -8,9 +24,24 @@
  *
  */
 
-import { PrintDefaultOptions } from './exploration';
+let Scenes = {
+	Masturbation : MasturbationScenes,
+	Meditation : MeditationScenes,
+	Dreams : DreamsScenes,
+	Roaming : RoamingScenes,
+	Poet : PoetScenes,
+	PortalOpening : PortalOpeningScenes,
 
-let Scenes = {};
+	Momo : MomoScenes,
+
+	Aria : AriaScenes,
+	Uru : UruScenes,
+	Room69 : Room69Scenes,
+	RavenMother : RavenMotherScenes,
+	
+	Zina : ZinaScenes,
+	Sylistraxia : SylistraxiaScenes,
+};
 
 function Event(nameFunc, opts) {
 	opts = opts || {};

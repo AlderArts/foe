@@ -1,7 +1,4 @@
 
+let CityWatchScenes = {};
 
-import { Scenes } from '../event';
-
-Scenes.CityWatch = {};
-
-
+export { CityWatchScenes };

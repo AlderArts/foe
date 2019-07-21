@@ -5,6 +5,8 @@
  */
 import { Entity } from '../entity';
 
+let UruScenes = {};
+
 function Uru(storage) {
 	Entity.call(this);
 	this.ID = "uru";
@@ -88,4 +90,4 @@ Uru.prototype.IsAtLocation = function(location) {
 	return true;
 }
 
-export { Uru };
+export { Uru, UruScenes };

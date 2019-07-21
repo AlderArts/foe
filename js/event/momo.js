@@ -8,7 +8,7 @@ import { Entity } from '../entity';
 import { Link, Scenes, EncounterTable } from '../event';
 import { world } from '../world';
 
-Scenes.Momo = {};
+let MomoScenes = {};
 
 function Momo(storage) {
 	Entity.call(this);
@@ -127,14 +127,14 @@ Momo.prototype.IsAtLocation = function(location) {
 	return false;
 }
 
-Scenes.Momo.MomoEnc = function() {
+MomoScenes.MomoEnc = function() {
 	if(momo.flags["Met"] == Momo.Met.NotMet)
-		Scenes.Momo.FindingMomo();
+		MomoScenes.FindingMomo();
 	else
-		Scenes.Momo.WanderingMomo();
+		MomoScenes.WanderingMomo();
 }
 
-Scenes.Momo.FindingMomo = function() {
+MomoScenes.FindingMomo = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -225,7 +225,7 @@ Scenes.Momo.FindingMomo = function() {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Momo.WanderingMomo = function() {
+MomoScenes.WanderingMomo = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -287,7 +287,7 @@ Scenes.Momo.WanderingMomo = function() {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Momo.Interact = function() {
+MomoScenes.Interact = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -397,12 +397,12 @@ Scenes.Momo.Interact = function() {
 		Text.Add("<i>“Well, hello there, [playername]! What can I do for you?”</i> she asks happily, a bright smile on her face.", parse);
 		Text.Flush();
 		
-		Scenes.Momo.Prompt();
+		MomoScenes.Prompt();
 	}
 }
 
 //TODO
-Scenes.Momo.Prompt = function() {
+MomoScenes.Prompt = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -415,7 +415,7 @@ Scenes.Momo.Prompt = function() {
 			Text.Add(" <i>“You'd like to talk?”</i> Momo repeats, furrowing her brow curiously at the notion. When you nod your head, she beams in delight.  <i>“Why, certainly! I'd love to talk, [playername] - what's on your mind?”</i>", parse);
 			Text.Flush();
 			
-			Scenes.Momo.TalkPrompt();
+			MomoScenes.TalkPrompt();
 		}, enabled : true,
 		tooltip : "Why not talk with Momo for a while?"
 	});
@@ -425,7 +425,7 @@ Scenes.Momo.Prompt = function() {
 			Text.Add("<i>“You want me to cook you something? Why, sure! Be happy to!”</i> she smiles proudly. <i>“Anything in particular you wanted to eat? Something nice and tasty, to give you a recharge? Or perhaps you want me to do a little gastronomic magic?”</i> she suggests with a mischievous grin.", parse);
 			Text.Flush();
 			
-			Scenes.Momo.CookPrompt();
+			MomoScenes.CookPrompt();
 		}, enabled : true,
 		tooltip : "Ask Momo to cook you something."
 	});
@@ -443,7 +443,7 @@ Scenes.Momo.Prompt = function() {
 	Gui.SetButtonsFromList(options, true, PrintDefaultOptions);
 }
 
-Scenes.Momo.CookPrompt = function() {
+MomoScenes.CookPrompt = function() {
 	var parse = {
 		playername : player.name,
 		girlMorph  : momo.Ascended() ? "morph" : "girl",
@@ -512,7 +512,7 @@ Scenes.Momo.CookPrompt = function() {
 				Status.Full(c, {hours: 8, exp: 1.1});
 			}
 			
-			Scenes.Momo.Prompt();
+			MomoScenes.Prompt();
 		}, enabled : true,
 		tooltip : "Momo will prepare a delicious meal to replenish your energies and restore your vitality."
 	});
@@ -527,10 +527,10 @@ Scenes.Momo.CookPrompt = function() {
 		tooltip : ""
 	});
 	*/
-	Gui.SetButtonsFromList(options, true, Scenes.Momo.Prompt);
+	Gui.SetButtonsFromList(options, true, MomoScenes.Prompt);
 }
 
-Scenes.Momo.TalkPrompt = function() {
+MomoScenes.TalkPrompt = function() {
 	var parse = {
 		playername : player.name,
 		girlMorph  : momo.Ascended() ? "morph" : "girl",
@@ -579,7 +579,7 @@ Scenes.Momo.TalkPrompt = function() {
 			
 			momo.relation.IncreaseStat(25, 2);
 			
-			Scenes.Momo.TalkPrompt();
+			MomoScenes.TalkPrompt();
 		}, enabled : true,
 		tooltip : "Just have a nice chat with the pretty dragon-girl."
 	});
@@ -617,7 +617,7 @@ Scenes.Momo.TalkPrompt = function() {
 			
 			momo.flags["tSelf"] = 1;
 	
-			Scenes.Momo.TalkPrompt();
+			MomoScenes.TalkPrompt();
 		}, enabled : true,
 		tooltip : "Learn more about Momo."
 	});
@@ -687,7 +687,7 @@ Scenes.Momo.TalkPrompt = function() {
 							Text.Flush();
 							
 							//TODO Momo Sex
-							Scenes.Momo.TalkPrompt();
+							MomoScenes.TalkPrompt();
 						}
 						else if(momo.Relation() < 20) {
 							Text.Add("A lighthearted laugh bubbles from the dragon-girl’s lips. <i>“Oh! Stop, you’re making me blush,”</i> she says, clapping her hands over her cheeks for emphasis, a giddy smile on her lips all the same.", parse);
@@ -709,7 +709,7 @@ Scenes.Momo.TalkPrompt = function() {
 							
 							momo.relation.IncreaseStat(20, 3);
 							
-							Scenes.Momo.TalkPrompt();
+							MomoScenes.TalkPrompt();
 						}
 						else { //#Med RL (Momo.RL >=20)
 							Text.Add("<i>“Well...”</i> Momo slowly starts, openly checking you out, cheeks reddened but clearly liking what she's seeing. <i>“I think you just might be my type... but I'd like a little wining and dining first; a girl likes to feel special,”</i> she grins. <i>“How about it, [playername]? Up for a little dinner date before we think about the... 'dessert', hmm?”</i>", parse);
@@ -719,7 +719,7 @@ Scenes.Momo.TalkPrompt = function() {
 							Text.Flush();
 							
 							// TODO Flirt
-							Scenes.Momo.TalkPrompt();
+							MomoScenes.TalkPrompt();
 						}
 					}, enabled : true,
 					tooltip : "She did just regale you with a rather raunchy tale, why not take advantage of it and see if you can take this somewhere?"
@@ -739,7 +739,7 @@ Scenes.Momo.TalkPrompt = function() {
 							Text.Add(" <i>“And I was certainly right to think so,”</i> she notes, grinning rather smugly as she does.", parse);
 						Text.Flush();
 						
-						Scenes.Momo.TalkPrompt();
+						MomoScenes.TalkPrompt();
 					}, enabled : true,
 					tooltip : Text.Parse("Nah, this is a stupid idea. Now is not the time to be flirting with the dragon-[girlMorph].", parse)
 				});
@@ -774,7 +774,7 @@ Scenes.Momo.TalkPrompt = function() {
 				
 				world.TimeStep({minute: 20});
 				
-				Scenes.Momo.TalkPrompt();
+				MomoScenes.TalkPrompt();
 			});
 			
 			
@@ -903,7 +903,7 @@ Scenes.Momo.TalkPrompt = function() {
 				
 				world.TimeStep({minute: 10});
 				
-				Scenes.Momo.TalkPrompt();
+				MomoScenes.TalkPrompt();
 			}, enabled : true,
 			tooltip : "Ask about Momo's talents and abilities when it comes to being a chef."
 		});
@@ -918,15 +918,15 @@ Scenes.Momo.TalkPrompt = function() {
 			
 			momo.relation.IncreaseStat(20, 2);
 			
-			Scenes.Momo.TalkPrompt();
+			MomoScenes.TalkPrompt();
 		}, enabled : true,
 		tooltip : ""
 	});
 	*/
-	Gui.SetButtonsFromList(options, true, Scenes.Momo.Prompt);
+	Gui.SetButtonsFromList(options, true, MomoScenes.Prompt);
 }
 /*
-Scenes.Momo.FindingMomo = function() {
+MomoScenes.FindingMomo = function() {
 	var parse = {
 		
 	};
@@ -938,4 +938,4 @@ Scenes.Momo.FindingMomo = function() {
 }
 */
 
-export { Momo };
+export { Momo, MomoScenes };

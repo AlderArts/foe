@@ -1,6 +1,6 @@
 
 // Contains references to descriptors
-Race = {};
+let Race = {};
 
 // TODO Need to fix numbering to something automatic, or at least ordered
 
@@ -416,3 +416,5 @@ Race.Hyena = new RaceDesc("hyena", 44, {
 	desc: [{a:"a", noun:"hyena"}],
 	quantify: [{a:"a", noun:"hyenalike"}]
 });
+
+export { Race, RaceDesc, RaceScore };

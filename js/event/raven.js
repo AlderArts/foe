@@ -7,7 +7,7 @@
 import { Scenes } from '../event';
 import { Entity } from '../entity';
 
-Scenes.RavenMother = {};
+let RavenMotherScenes = {};
 
 function RavenMother(storage) {
 	Entity.call(this);
@@ -95,10 +95,10 @@ RavenMother.prototype.ToStorage = function() {
 	return storage;
 }
 
-Scenes.RavenMother.TheHunt = function(func) {
+RavenMotherScenes.TheHunt = function(func) {
 	var parse = {};
 	
-	Scenes.RavenMother.theHuntWakeup = func;
+	RavenMotherScenes.theHuntWakeup = func;
 	
 	if(party.NumTotal() <= 1) {
 		parse["person"] = "your darling";
@@ -166,7 +166,7 @@ Scenes.RavenMother.TheHunt = function(func) {
 					Text.Add("You will your body through the corner. The dreamscape stretches, pushing back harder as you try to get through, but as you call for the gem to assist you, the weak fabric of the dream proves no match for you...", parse);
 					Text.Flush();
 					
-					Gui.NextPrompt(Scenes.RavenMother.TheHuntWolf);
+					Gui.NextPrompt(RavenMotherScenes.TheHuntWolf);
 				}, enabled : true,
 				tooltip : "Examine the spot the raven disappeared."
 			});
@@ -178,7 +178,7 @@ Scenes.RavenMother.TheHunt = function(func) {
 }
 
 
-Scenes.RavenMother.TheHuntWolf = function() {
+RavenMotherScenes.TheHuntWolf = function() {
 	var parse = {};
 	
 	Text.Clear();
@@ -219,12 +219,12 @@ Scenes.RavenMother.TheHuntWolf = function() {
 			Text.Add("The beat of wings still pursues you, and you hear loud croaks from birds who have apparently spotted you, calling the rest of the conspiracy after you. You look around you, watching for black shapes flying at you as you run, so you are caught completely off-guard when you dart past a line of thick gnarled trees and find yourself in the middle of a shadowed glade.", parse);
 			Text.Flush();
 			
-			Gui.NextPrompt(Scenes.RavenMother.TheHuntGlade);
+			Gui.NextPrompt(RavenMotherScenes.TheHuntGlade);
 		});
 	});
 }
 
-Scenes.RavenMother.TheHuntGlade = function() {
+RavenMotherScenes.TheHuntGlade = function() {
 	var parse = {
 		
 	};
@@ -253,7 +253,7 @@ Scenes.RavenMother.TheHuntGlade = function() {
 			Text.NL();
 			Text.Add("There are a few moments of silence as it becomes increasingly clear that she doesn’t intend to say anything more. You venture forward a little, and take a seat at the foot of the great stump. ", parse);
 			
-			Scenes.RavenMother.TheHuntGladeCont();
+			RavenMotherScenes.TheHuntGladeCont();
 		}, enabled : true,
 		tooltip : "Release the raven."
 	});
@@ -268,14 +268,14 @@ Scenes.RavenMother.TheHuntGlade = function() {
 			
 			ravenmother.flags["KeptRaven"] = 1;
 			
-			Scenes.RavenMother.TheHuntGladeCont();
+			RavenMotherScenes.TheHuntGladeCont();
 		}, enabled : true,
 		tooltip : "Hold on to the raven. Maybe it could be useful as a hostage."
 	});
 	Gui.SetButtonsFromList(options);
 }
 
-Scenes.RavenMother.TheHuntGladeCont = function() {
+RavenMotherScenes.TheHuntGladeCont = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -340,7 +340,7 @@ Scenes.RavenMother.TheHuntGladeCont = function() {
 			Text.NL();
 			Text.Add("Will she help you, then?", parse);
 			
-			Scenes.RavenMother.TheHuntTalk();
+			RavenMotherScenes.TheHuntTalk();
 		}, enabled : player.Int() + player.Cha() > 50,
 		tooltip : "Actually, now that you think about, there’s a better way to ask her."
 	});
@@ -367,14 +367,14 @@ Scenes.RavenMother.TheHuntGladeCont = function() {
 			Text.NL();
 			Text.Add("You ask if she’s going to help you.", parse);
 			
-			Scenes.RavenMother.TheHuntTalk();
+			RavenMotherScenes.TheHuntTalk();
 		}, enabled : true,
 		tooltip : "It might take a while, but you’ll get to the bottom of this eventually."
 	});
 	Gui.SetButtonsFromList(options);
 }
 
-Scenes.RavenMother.TheHuntTalk = function() {
+RavenMotherScenes.TheHuntTalk = function() {
 	var parse = {
 		
 	};
@@ -390,13 +390,13 @@ Scenes.RavenMother.TheHuntTalk = function() {
 		var options = new Array();
 		options.push({ nameStr : "Questions",
 			func : function() {
-				Scenes.RavenMother.TheHuntQuestions(prompt);
+				RavenMotherScenes.TheHuntQuestions(prompt);
 			}, enabled : true,
 			tooltip : "There are a few things you want to ask her..."
 		});
 		options.push({ nameStr : "Ravens",
 			func : function() {
-				Scenes.RavenMother.RavenPrompt(prompt);
+				RavenMotherScenes.RavenPrompt(prompt);
 			}, enabled : true,
 			tooltip : "Ask her to do something about the ravens."
 		});
@@ -421,7 +421,7 @@ Scenes.RavenMother.TheHuntTalk = function() {
 				
 				Gui.NextPrompt(function() {
 					Text.Clear();
-					Scenes.RavenMother.theHuntWakeup(true);
+					RavenMotherScenes.theHuntWakeup(true);
 				});
 			}, enabled : true,
 			tooltip : "It’s time to say your goodbyes and wake up."
@@ -432,7 +432,7 @@ Scenes.RavenMother.TheHuntTalk = function() {
 	prompt();
 }
 
-Scenes.RavenMother.TheHuntQuestions = function(back) {
+RavenMotherScenes.TheHuntQuestions = function(back) {
 	var parse = {
 		
 	};
@@ -451,7 +451,7 @@ Scenes.RavenMother.TheHuntQuestions = function(back) {
 			Text.Add("<i>“I’m a little like the ravens, I think.”</i> She looks up at the conspiracy observing you from the trees, her eyes lingering on their high perches. <i>“But there are more things different than the same even with them.”</i>", parse);
 			Text.Flush();
 			
-			Scenes.RavenMother.TheHuntQuestions(back);
+			RavenMotherScenes.TheHuntQuestions(back);
 		}, enabled : true,
 		tooltip : "Just what is she exactly?"
 	});
@@ -473,7 +473,7 @@ Scenes.RavenMother.TheHuntQuestions = function(back) {
 			Text.Add("That was probably the most understated explanation you’ve heard in some time, but you think you get the gist of it.", parse);
 			Text.Flush();
 			
-			Scenes.RavenMother.TheHuntQuestions(back);
+			RavenMotherScenes.TheHuntQuestions(back);
 		}, enabled : true,
 		tooltip : "What's her connection to the ravens?"
 	});
@@ -494,14 +494,14 @@ Scenes.RavenMother.TheHuntQuestions = function(back) {
 			Text.Add("<i>“Sleeping?”</i> She waves the word aside. <i>“I am always here, but I am always on the hard side too. Right now, I’m eating a rabbit. Its warm flesh is delicious.”</i> She smiles a predatory smile, and you swear for a moment you see blood on her teeth.", parse);
 			Text.Flush();
 			
-			Scenes.RavenMother.TheHuntQuestions(back);
+			RavenMotherScenes.TheHuntQuestions(back);
 		}, enabled : true,
 		tooltip : "Does she have some special connection to dreams?"
 	});
 	Gui.SetButtonsFromList(options, true, back);
 }
 
-Scenes.RavenMother.RavenPrompt = function(back) {
+RavenMotherScenes.RavenPrompt = function(back) {
 	var parse = {};
 	
 	Text.Clear();
@@ -525,7 +525,7 @@ Scenes.RavenMother.RavenPrompt = function(back) {
 			Text.Flush();
 			ravenmother.flags["RBlock"] = 1;
 			Gui.NextPrompt(function() {
-				Scenes.RavenMother.RavenPrompt(back);
+				RavenMotherScenes.RavenPrompt(back);
 			});
 		}, enabled : ravenmother.flags["RBlock"] == 0,
 		tooltip : "Ask her to stop sending ravens to watch your dreams."
@@ -541,7 +541,7 @@ Scenes.RavenMother.RavenPrompt = function(back) {
 			Text.Flush();
 			ravenmother.flags["RBlock"] = 0;
 			Gui.NextPrompt(function() {
-				Scenes.RavenMother.RavenPrompt(back);
+				RavenMotherScenes.RavenPrompt(back);
 			});
 		}, enabled : ravenmother.flags["RBlock"] != 0,
 		tooltip : "Ask her to send ravens to your dreams again."
@@ -549,4 +549,4 @@ Scenes.RavenMother.RavenPrompt = function(back) {
 	Gui.SetButtonsFromList(options, true, back);
 }
 
-export { RavenMother };
+export { RavenMother, RavenMotherScenes };

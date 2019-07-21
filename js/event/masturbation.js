@@ -2,13 +2,11 @@
  * Masturbation scenes for the PC
  */
 
-import { Scenes } from '../event';
-
-Scenes.Masturbation = {};
+let MasturbationScenes = {};
 
 // TODO: Stretch/Cap change for toy training
 
-Scenes.Masturbation.Entry = function() {
+MasturbationScenes.Entry = function() {
 	var parse = {
 		
 	};
@@ -43,7 +41,7 @@ Scenes.Masturbation.Entry = function() {
 			optsTc.push({ nameStr : c.race.qCShort(),
 				tooltip : c.aLong(),
 				func : function(obj) {
-					Scenes.Masturbation.CockOpening(obj);
+					MasturbationScenes.CockOpening(obj);
 				}, enabled : true,
 				obj : c
 			});
@@ -66,7 +64,7 @@ Scenes.Masturbation.Entry = function() {
 		options.push({ nameStr : "Vag - finger",
 			tooltip : "",
 			func : function() {
-				Scenes.Masturbation.VagOpening(Scenes.Masturbation.VagFinger);
+				MasturbationScenes.VagOpening(MasturbationScenes.VagFinger);
 			}, enabled : !taur
 		});
 		
@@ -79,7 +77,7 @@ Scenes.Masturbation.Entry = function() {
 				optsTv.push({ nameStr : toy.name,
 					tooltip : toy.Long(),
 					func : function(obj) {
-						Scenes.Masturbation.VagOpening(Scenes.Masturbation.VagToy, obj);
+						MasturbationScenes.VagOpening(MasturbationScenes.VagToy, obj);
 					}, enabled : enabled,
 					obj : toy
 				});
@@ -113,7 +111,7 @@ Scenes.Masturbation.Entry = function() {
 			options.push({ nameStr : "Vag - tail",
 				tooltip : "",
 				func : function() {
-					Scenes.Masturbation.VagOpening(Scenes.Masturbation.VagTailfuck);
+					MasturbationScenes.VagOpening(MasturbationScenes.VagTailfuck);
 				}, enabled : !taur
 			});
 		}
@@ -122,7 +120,7 @@ Scenes.Masturbation.Entry = function() {
 	options.push({ nameStr : "Ass - finger",
 		tooltip : "",
 		func : function() {
-			Scenes.Masturbation.AnalOpening(Scenes.Masturbation.AnalFinger);
+			MasturbationScenes.AnalOpening(MasturbationScenes.AnalFinger);
 		}, enabled : !taur
 	});
 	
@@ -135,7 +133,7 @@ Scenes.Masturbation.Entry = function() {
 			optsTa.push({ nameStr : toy.name,
 				tooltip : toy.Long(),
 				func : function(obj) {
-					Scenes.Masturbation.AnalOpening(Scenes.Masturbation.AnalToy, obj);
+					MasturbationScenes.AnalOpening(MasturbationScenes.AnalToy, obj);
 				}, enabled : enabled,
 				obj : toy
 			});
@@ -166,7 +164,7 @@ Scenes.Masturbation.Entry = function() {
 	
 	options.push({ nameStr : "Breasts",
 		tooltip : "",
-		func : Scenes.Masturbation.Breasts, enabled : br
+		func : MasturbationScenes.Breasts, enabled : br
 	});
 	
 	Gui.SetButtonsFromList(options, true, function() {
@@ -180,7 +178,7 @@ Scenes.Masturbation.Entry = function() {
 	});
 }
 
-Scenes.Masturbation.CockOpening = function(p1cock) {
+MasturbationScenes.CockOpening = function(p1cock) {
 	var allCocks = player.AllCocksCopy();
 	for(var i = 0; i < allCocks.length; i++) {
 		if(allCocks[i] == p1cock) {
@@ -262,7 +260,7 @@ Scenes.Masturbation.CockOpening = function(p1cock) {
 			Text.Add(" The knot forming at the base of your shaft might give it a weird look. It’s not exactly something you’d expect to see on a cat’s dong, but you’re pretty sure any partner of yours would appreciate the surprise. Scrape them with the barbs, then tie them down for the finale...", parse);
 		Text.NL();
 		
-		Scenes.Masturbation.CockSize(parse, p1cock);
+		MasturbationScenes.CockSize(parse, p1cock);
 		
 		Text.Add("Looking is nice and all, but it’s time you got down to business. Smiling to yourself, you close a hand around your length, milking it up and down at a gentle pace. The little barbs lining your tip tickle you every time you move your hand up, and you find yourself gently teasing them before collecting the dollop of pre that’s formed and spread it along your shaft to make your job easier.", parse);
 		Text.NL();
@@ -278,7 +276,7 @@ Scenes.Masturbation.CockOpening = function(p1cock) {
 			Text.Add("Curiously, you lack the knot most canines are famous for. Whether this makes you more exotic or simply weird you don’t know… nor care. You don’t need a knot to feel good...", parse);
 		Text.NL();
 		
-		Scenes.Masturbation.CockSize(parse, p1cock);
+		MasturbationScenes.CockSize(parse, p1cock);
 		
 		Text.Add("That’s enough looking, now it’s time for action! You close your hands around your doggy-dick at the base, then begin pumping up and down.", parse);
 		Text.NL();
@@ -306,7 +304,7 @@ Scenes.Masturbation.CockOpening = function(p1cock) {
 			Text.Add(" You don’t know if the knot bulging at the base of your [cock] would make your partner even hornier or if it would scare them away. An equine-prick like yours is a member of might, and the idea of having something like that locked inside them? It gives you goosebumps just imagining it...", parse);
 		Text.NL();
 		
-		Scenes.Masturbation.CockSize(parse, p1cock);
+		MasturbationScenes.CockSize(parse, p1cock);
 		
 		Text.Add("Enough looking, it’s time for some workout! You grab your shaft and squeeze it tightly, then begin pumping away. The powerful muscles ripple under your touch as you trace the veins leading up to the flattened tip. Sparing a finger, you gently trace the broad contours of your cumvein, gathering some of your pre-cum to spread it along as much of your length as you can.", parse);
 		Text.NL();
@@ -324,7 +322,7 @@ Scenes.Masturbation.CockOpening = function(p1cock) {
 		Text.Add("You watch your dragon-dick throb in front of you. It’s somewhat similar to a reptilian pecker, but instead of having only the underside lined with ridges, this one has ridges along the entirety of its length. The glans are spear-shaped, with the crown being lined with rounded nubs; shaped as it is, the tip would allow you to penetrate <i>any</i> hole, no matter how small it is and the small protrusions along the crown would make it extra-pleasurable as they scraped along the tight walls holding your dick on your way out. At the base, you have a mighty knot; it’s still not completely inflated, but you know that given the proper <i>motivation</i>, it can grow into a big bulb capable of locking anyone in place while you pump your cum inside...", parse);
 		Text.NL();
 		
-		Scenes.Masturbation.CockSize(parse, p1cock);
+		MasturbationScenes.CockSize(parse, p1cock);
 		
 		Text.Add("That’s enough looking though. A mighty tool like this was meant to be touched. The cock feels like a veritable sword as you grasp its length, the sensitive ridges sets your nerves alight with pleasure; as you stroke your way up, you’re forced to let go of your shaft and move your hand to tease your tip, spreading the dollop of pre gathered there along the rest of your spearheaded glans. It doesn’t take long before you set into a comfortable pace and you find yourself letting your mind wander...", parse);
 		Text.NL();
@@ -349,7 +347,7 @@ Scenes.Masturbation.CockOpening = function(p1cock) {
 		Text.Add("The tip is resembles a spear-head. Perhaps a bit more mushroom-shaped, but it tapers slightly towards the end; this would make it extra-easy if you wanted to fuck a particularly tight hole.", parse);
 		Text.NL();
 		
-		Scenes.Masturbation.CockSize(parse, p1cock);
+		MasturbationScenes.CockSize(parse, p1cock);
 		
 		Text.Add("You’ve looked enough, now it’s time to get your hands dirty! You start at the tip, making a tight ring with your hand and pushing it against your shaft. The tapered shape of your glans makes it easier for you to spear through, and the dollop of pre on the tip acts like lube, making your descent smooth.", parse);
 		Text.NL();
@@ -369,7 +367,7 @@ Scenes.Masturbation.CockOpening = function(p1cock) {
 		Text.Add("It takes a bit of practice - it was a bit weird at first, but now that you’ve grown used to it, you can move your cock however you wish. Experimentally, you try stretching it taut, and while the muscles resist a bit due to your aroused state, the vine-like prick does obey your commands. Then you try to wiggle it side-to-side, and it does so without issue. Your whole member is stretchy enough that such erratic movements barely bother you. In fact, you were thinking that it might feel amazing to just let your floral dick go wild when you penetrate someone...", parse);
 		Text.NL();
 		
-		Scenes.Masturbation.CockSize(parse, p1cock);
+		MasturbationScenes.CockSize(parse, p1cock);
 		
 		Text.Add("That’s enough looking! Without further ado, you grab your wiggling floral pecker and stroke it upward, flexing your muscles to make it stay taut. You squeeze your [cock], milking more pre so you can spread it along your length and mushroom-shaped bulbous tip. The feeling is wonderful, and you sometimes wind up losing control over your cock, letting it spasm wildly as electrical shocks of pleasure travel through your nerves. As you settle in a decent rhythm, you feel your mind wander…", parse);
 		Text.NL();
@@ -390,7 +388,7 @@ Scenes.Masturbation.CockOpening = function(p1cock) {
 		Text.Add("Overall, this cock is a true tool of pleasure. Say what you will about demons, they really know how to fuck.", parse);
 		Text.NL();
 		
-		Scenes.Masturbation.CockSize(parse, p1cock);
+		MasturbationScenes.CockSize(parse, p1cock);
 		
 		Text.Add("Well, enough looking. It’s time to take your demon-dick for a spin. You start off by gently rubbing the dollop of pre along your [cockTip], biting your lip when you reach the nubs lining the crown. Sparks fly as the sensitive nubs set your nerves ablaze and you’re flooded with unbelievable pleasure. More pre seeps out of your [cockTip] and you eagerly get more to spread along your shaft.", parse);
 		Text.NL();
@@ -417,15 +415,15 @@ Scenes.Masturbation.CockOpening = function(p1cock) {
 		Text.Add("Now that it’s fully erect, you can finally appreciate your [cock] in its full glory.", parse);
 		Text.NL();
 		
-		Scenes.Masturbation.CockSize(parse, p1cock);
+		MasturbationScenes.CockSize(parse, p1cock);
 		
 		Text.Add("Looking is nice and all, but it won’t get the job done, so you grab that dollop of pre and begin spreading it across your shaft as you settle into a brisk pace. As you pump your shaft, you also buck your hips, doing your best to be elevate your own pleasure. More pre gathers on the tip, and you make sure you spread it all over your length, each dollop only makes it easier for you to fap, which in turn produces even more pre. With a rhythm like this, it doesn’t take long until you are leaking pre-cum like a faucet.", parse);
 	}
 	Text.NL();
 	
-	Scenes.Masturbation.CockSlut(parse, p1cock);
+	MasturbationScenes.CockSlut(parse, p1cock);
 	
-	Scenes.Masturbation.CockKnot(parse, p1cock);
+	MasturbationScenes.CockKnot(parse, p1cock);
 	
 	Text.Add("You can feel it coming, ", parse);
 	if(player.HasBalls())
@@ -504,7 +502,7 @@ Scenes.Masturbation.CockOpening = function(p1cock) {
 	Gui.NextPrompt();
 }
 
-Scenes.Masturbation.CockSize = function(parse, p1cock) {
+MasturbationScenes.CockSize = function(parse, p1cock) {
 	var len = p1cock.Len();
 	var girth = p1cock.Thickness();
 	
@@ -524,7 +522,7 @@ Scenes.Masturbation.CockSize = function(parse, p1cock) {
 	Text.NL();
 }
 
-Scenes.Masturbation.CockSlut = function(parse, p1cock) {
+MasturbationScenes.CockSlut = function(parse, p1cock) {
 	if(player.Slut() >= 30) {
 		Text.Add("In a bid to further increase your enjoyment, you gather some of your pre-ejaculate and take the musky liquid to your mouth, where you lap it all off your hand. Damn, you taste great!", parse);
 		if(player.Slut() >= 50 && (p1cock.Len() >= 25 || player.IsFlexible()))
@@ -533,7 +531,7 @@ Scenes.Masturbation.CockSlut = function(parse, p1cock) {
 	}
 }
 
-Scenes.Masturbation.CockKnot = function(parse, p1cock) {
+MasturbationScenes.CockKnot = function(parse, p1cock) {
 	if(p1cock.Knot()) {
 		Text.Add("Your mounting excitement causes your knot to bloat up like a balloon, and you adapt by sparing a hand to squeeze it. It feels great! Each squeeze makes a small rope of pre to spew from your [cockTip] and makes your knot grow ever larger. When you tire of that, you move your hand just behind the bulbous mass to hold tightly to the base of your dick. Doing this, it’s almost like you’d tied someone!", parse);
 		Text.NL();
@@ -544,7 +542,7 @@ Scenes.Masturbation.CockKnot = function(parse, p1cock) {
 
  */
 
-Scenes.Masturbation.AnalOpening = function(func, obj) {
+MasturbationScenes.AnalOpening = function(func, obj) {
 	var parse = {
 		toparmordesc : player.ArmorDesc(),
 		bottomarmordesc : player.LowerArmorDesc()
@@ -591,7 +589,7 @@ Scenes.Masturbation.AnalOpening = function(func, obj) {
 	func(parse, obj);
 }
 
-Scenes.Masturbation.AnalFingerCockblock = function(parse, cum) {
+MasturbationScenes.AnalFingerCockblock = function(parse, cum) {
 	if(player.FirstCock()) {
 		Text.Add("Unable to take the pounding at your prostate any longer, your [cocks] choose[notS] this moment to shoot off [itsTheir] load, string after string of hot, sticky seed arcing into the air and landing on the ground a good distance away. All the anticipation and stimulation seems to have done you good - your current load of semen looks much thicker and richer than normal, speaking well of your prostate-milking skills.", parse);
 		if(cum > 9)
@@ -602,7 +600,7 @@ Scenes.Masturbation.AnalFingerCockblock = function(parse, cum) {
 	}
 }
 
-Scenes.Masturbation.AnalFinger = function(parse) {
+MasturbationScenes.AnalFinger = function(parse) {
 	var cap = player.Butt().Cap();
 	var br = player.FirstBreastRow().Size();
 	
@@ -652,7 +650,7 @@ Scenes.Masturbation.AnalFinger = function(parse) {
 	
 	var cum = player.OrgasmCum(2);
 	
-	Scenes.Masturbation.AnalFingerCockblock(parse, cum);
+	MasturbationScenes.AnalFingerCockblock(parse, cum);
 	
 	if(player.FirstVag()) {
 		Text.Add("At the same time, your [vag] goes into overdrive, oozing and clenching away, desperate for something to suckle on and finally settling for squirting a small stream of girl-cum to splatter on yourself and stain your crotch as your climax approaches its zenith. Caught up in a whirlwind of exquisite sensations, you howl like ", parse);
@@ -672,7 +670,7 @@ Scenes.Masturbation.AnalFinger = function(parse) {
 	Gui.NextPrompt();
 }
 
-Scenes.Masturbation.AnalToy = function(parse, toy) {
+MasturbationScenes.AnalToy = function(parse, toy) {
 	var cap = player.Butt().Cap();
 	var br = player.FirstBreastRow().Size();
 	
@@ -732,7 +730,7 @@ Scenes.Masturbation.AnalToy = function(parse, toy) {
 	
 	var cum = player.OrgasmCum(2);
 	
-	Scenes.Masturbation.AnalFingerCockblock(parse, cum);
+	MasturbationScenes.AnalFingerCockblock(parse, cum);
 	
 	if(player.FirstVag()) {
 		Text.Add("Sharing in the pleasures of your entire body, your [vag] clenches greedily, practically dripping with girl-cum as if the [toy] were pounding away at it and not in your [anus]. You can’t help but squeeze your eyes shut and grit your teeth as your [vag] pulses with heat, the inner walls of your love tunnel practically undulating as they seek something, <i>anything</i> to take into them and sate the desperate hunger of your womb.", parse);
@@ -749,7 +747,7 @@ Scenes.Masturbation.AnalToy = function(parse, toy) {
 }
 
 // Generic opening scene. Sets up all parser stuff and calls the scene proper
-Scenes.Masturbation.VagOpening = function(func, obj) {
+MasturbationScenes.VagOpening = function(func, obj) {
 	var parse = {
 		toparmordesc : player.ArmorDesc(),
 		bottomarmordesc : player.LowerArmorDesc()
@@ -781,7 +779,7 @@ Scenes.Masturbation.VagOpening = function(func, obj) {
 	func(parse, obj);
 }
 
-Scenes.Masturbation.VagFingerCockblock = function(parse, cum) {
+MasturbationScenes.VagFingerCockblock = function(parse, cum) {
 	if(player.FirstCock()) {
 		Text.Add("At the same time, your [cocks] choose[notS] this moment to shoot off [itsTheir] load, string after string of hot, sticky seed arcing into the air and landing on the ground a good distance away with a series of wet-sounding splats.", parse);
 		if(cum > 9)
@@ -792,7 +790,7 @@ Scenes.Masturbation.VagFingerCockblock = function(parse, cum) {
 	}
 }
 
-Scenes.Masturbation.VagFinger = function(parse) {
+MasturbationScenes.VagFinger = function(parse) {
 	//Fisting is triggered with wide hips wide cunt. Else, default to fingering.
 	var cap = (player.body.torso.hipSize.Get() / 10) * (player.FirstVag().Cap() / 5);
 	var fisting = cap >= 1;
@@ -843,7 +841,7 @@ Scenes.Masturbation.VagFinger = function(parse) {
 	
 	var cum = player.OrgasmCum(2);
 	
-	Scenes.Masturbation.VagFingerCockblock(parse, cum);
+	MasturbationScenes.VagFingerCockblock(parse, cum);
 	
 	Text.Add("Drained and exhausted, you slump onto your back, eyes staring upwards blankly and lungs heaving as the last vestiges of orgasm slowly begin to die away. Well, this was what you wanted, wasn’t it? You got it well and good, then - it’ll be a little while before you’ll be able to be on your way, but it was worth it.", parse);
 	Text.Flush();
@@ -853,7 +851,7 @@ Scenes.Masturbation.VagFinger = function(parse) {
 	Gui.NextPrompt();
 }
 
-Scenes.Masturbation.VagToy = function(parse, toy) {
+MasturbationScenes.VagToy = function(parse, toy) {
 	var preg = player.PregHandler().IsPregnant();
 	var bellySize = player.PregHandler().BellySize();
 	
@@ -885,7 +883,7 @@ Scenes.Masturbation.VagToy = function(parse, toy) {
 	
 	var cum = player.OrgasmCum(2);
 	
-	Scenes.Masturbation.VagFingerCockblock(parse, cum);
+	MasturbationScenes.VagFingerCockblock(parse, cum);
 	
 	Text.Add("At long last, it seems to be over. You’re not sure exactly how much time has passed with you lying insensate on the ground, but at last you manage to summon enough strength to pull your [toy] free of you. It parts from your [vag] with a wet slurp, and you shiver at the sensations the movement brings before rolling over with a groan. You’ll have to get up sometime, yes, but for now… maybe you’ll just lie here a little longer.", parse);
 	Text.Flush();
@@ -895,7 +893,7 @@ Scenes.Masturbation.VagToy = function(parse, toy) {
 	Gui.NextPrompt();
 }
 
-Scenes.Masturbation.VagTailfuck = function(parse) {
+MasturbationScenes.VagTailfuck = function(parse) {
 	var preg = player.PregHandler().IsPregnant();
 	var bellySize = player.PregHandler().BellySize();
 	
@@ -942,7 +940,7 @@ Scenes.Masturbation.VagTailfuck = function(parse) {
 	
 	var cum = player.OrgasmCum(2);
 	
-	Scenes.Masturbation.VagFingerCockblock(parse, cum);
+	MasturbationScenes.VagFingerCockblock(parse, cum);
 	
 	Text.Add("At last, the aftershocks of pleasure begin to die away, leaving you equally drained and exhilarated as you lie limply on the ground, chest heaving as great gouts of hot breath escape your mouth. Your head continues to spin a little, but by and large you manage to get a tenuous grip on yourself and clamber upright. A moment more, and you’re dressed once more and ready to be off.", parse);
 	Text.Flush();
@@ -952,7 +950,7 @@ Scenes.Masturbation.VagTailfuck = function(parse) {
 	Gui.NextPrompt();
 }
 
-Scenes.Masturbation.Breasts = function() {
+MasturbationScenes.Breasts = function() {
 	var parse = {
 		
 	};
@@ -1085,3 +1083,5 @@ Scenes.Masturbation.Breasts = function() {
 	world.TimeStep({minute: 30});
 	Gui.NextPrompt();
 }
+
+export { MasturbationScenes };

@@ -1,5 +1,5 @@
 // TODO: Palette instead?
-Color = {
+let Color = {
 	white    : 0,
 	olive    : 1,
 	black    : 2,
@@ -20,7 +20,6 @@ Color = {
 	purple   : 17,
 	pink     : 18,
 	teal     : 19,
-	
 	
 	numColors: 20
 }
@@ -50,3 +49,5 @@ Color.Desc = function(col) {
 	default:             return "colorless";
 	}
 }
+
+export { Color };

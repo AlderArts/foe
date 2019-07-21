@@ -4,9 +4,8 @@
  * 
  */
 import { Entity } from '../entity';
-import { Scenes } from '../event';
 
-Scenes.Zina = {};
+let ZinaScenes = {};
 
 function Zina(storage) {
 	Entity.call(this);
@@ -99,4 +98,4 @@ Zina.prototype.IsAtLocation = function(location) {
 	return true;
 }
 
-export { Zina };
+export { Zina, ZinaScenes };

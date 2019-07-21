@@ -8,8 +8,8 @@ import { SMALL_FONT, DEFAULT_FONT, GetRenderPictures } from '../app';
 import { StatusEffect, StatusList } from './statuseffect';
 import { Input, Keys } from './input';
 import { online, gameState, GameState } from './main';
-import { DataPrompt, ExploreButtonIndex, SetLastSubmenu } from './exploration';
 import { GAME } from './gamecache';
+import { DataPrompt, ExploreButtonIndex, SetLastSubmenu } from './exploration';
 
 Gui.w = 1280;
 Gui.h = 720;

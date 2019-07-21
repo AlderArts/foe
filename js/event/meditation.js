@@ -2,11 +2,10 @@
 /*
  * Meditation scenes for the PC
  */
-import { Scenes } from '../event';
 
-Scenes.Meditation = {};
+let MeditationScenes = {};
 
-Scenes.Meditation.Entry = function() {
+MeditationScenes.Entry = function() {
 	var parse = {
 		playername : player.name,
 		Kiai : kiakai.name
@@ -283,3 +282,5 @@ Scenes.Meditation.Entry = function() {
 	
 	Gui.NextPrompt();
 }
+
+export { MeditationScenes };

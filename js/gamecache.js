@@ -1,4 +1,4 @@
-import { SetLastSubmenu } from './exploration';
+import { SetLastSubmenu, PrintDefaultOptions } from './exploration';
 import { SAVE_VERSION } from '../app';
 import { Season } from './time';
 

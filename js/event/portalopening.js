@@ -1,9 +1,6 @@
+let PortalOpeningScenes = {};
 
-import { Scenes } from '../event';
-
-Scenes.PortalOpening = {};
-
-Scenes.PortalOpening.Intro = function() {
+PortalOpeningScenes.Intro = function() {
 	var parse = {
 		
 	};
@@ -15,3 +12,5 @@ Scenes.PortalOpening.Intro = function() {
 	
 	Gui.NextPrompt();
 }
+
+export { PortalOpeningScenes };
