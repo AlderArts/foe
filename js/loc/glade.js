@@ -43,10 +43,12 @@ DryadGlade.prototype.OrchidSlut = function() {
 
 Scenes.DryadGlade = {};
 
-world.SaveSpots["Dryads"] = world.loc.Forest.Glade;
-world.loc.Forest.Glade.SaveSpot = "Dryads";
-world.loc.Forest.Glade.safe = function() { return true; };
-world.loc.Forest.Glade.description = function() {
+let GladeLoc = new Event("Dryads' glade");
+
+world.SaveSpots["Dryads"] = GladeLoc;
+GladeLoc.SaveSpot = "Dryads";
+GladeLoc.safe = function() { return true; };
+GladeLoc.description = function() {
 	var parse = {
 		
 	};
@@ -62,21 +64,21 @@ world.loc.Forest.Glade.description = function() {
 	Text.Flush();
 }
 
-world.loc.Forest.Glade.links.push(new Link(
+GladeLoc.links.push(new Link(
 	"Leave", true, true,
 	null,
 	function() {
 		MoveToLocation(world.loc.Forest.Outskirts, {minute: 15});
 	}
 ));
-world.loc.Forest.Glade.events.push(new Link(
+GladeLoc.events.push(new Link(
 	"Mother tree", true, true,
 	null,
 	function() {
 		Scenes.DryadGlade.MotherTree();
 	}
 ));
-world.loc.Forest.Glade.events.push(new Link(
+GladeLoc.events.push(new Link(
 	"Orchid", true, true,
 	null,
 	function() {
@@ -84,7 +86,7 @@ world.loc.Forest.Glade.events.push(new Link(
 	}
 ));
 
-world.loc.Forest.Glade.onEntry = function() {
+GladeLoc.onEntry = function() {
 	if(glade.flags["Visit"] >= DryadGlade.Visit.DefeatedOrchid) {
 		PrintDefaultOptions();
 		return;
@@ -766,4 +768,4 @@ Scenes.DryadGlade.MotherTreeTalk = function() {
 	Gui.SetButtonsFromList(options, true, Scenes.DryadGlade.MotherTreePrompt);
 }
 
-export { DryadGlade };
+export { DryadGlade, GladeLoc };

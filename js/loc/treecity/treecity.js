@@ -4,11 +4,11 @@
  * 
  */
 
-import { world } from '../../world';
+//import { world } from '../../world';
 import { Scenes } from '../../event';
 
 // Create namespace
-world.loc.TreeCity = {
+let TreeCityLoc = {
 }
 
 Scenes.TreeCity = {};
@@ -37,4 +37,4 @@ TreeCity.prototype.FromStorage = function(storage) {
 		this.flags[flag] = parseInt(storage.flags[flag]);
 }
 
-export { TreeCity };
+export { TreeCity, TreeCityLoc };

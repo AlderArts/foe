@@ -58,46 +58,31 @@ Farm.prototype.Found = function() {
 
 
 // Create namespace
-world.loc.Farm = {
+let FarmLoc = {
 	Fields : new Event("Plains: Gwendy's farm"),
 	Barn   : new Event("The barn"),
 	Loft   : new Event("Gwendy's loft")
 }
 
-// Add initial event, only trigger 7-17
-world.loc.Plains.Crossroads.enc.AddEnc(function() {
-	return Scenes.FarmIntro.Start;
-}, 3.0, function() { return Scenes.Global.VisitedRigardGates() && !farm.Found() && (world.time.hour >= 7 && world.time.hour < 17); });
-
-world.loc.Plains.Crossroads.links.push(new Link(
-	"Farm",
-	function() { return farm.Found(); },
-	true,
-	null,
-	function() {
-		MoveToLocation(world.loc.Farm.Fields, {minute: 30});
-	}
-));
-
 
 //
 // Gwendy's farm, the fields
 //
-world.loc.Farm.Fields.description = function() {
+FarmLoc.Fields.description = function() {
 	Text.Add("Fields.");
 	Text.NL();
 }
 
 // Set up Layla events
-world.loc.Farm.Fields.onEntry = function(x, from) {
+FarmLoc.Fields.onEntry = function(x, from) {
 	if(from == world.loc.Plains.Crossroads) {
 		if(Scenes.Layla.FarmMeetingTrigger(true)) return;
 	}
 	PrintDefaultOptions();
 }
 
-world.loc.Farm.Fields.enc = new EncounterTable();
-world.loc.Farm.Fields.enc.AddEnc(function() {
+FarmLoc.Fields.enc = new EncounterTable();
+FarmLoc.Fields.enc.AddEnc(function() {
 	return function() {
 		Text.Clear();
 
@@ -112,11 +97,11 @@ world.loc.Farm.Fields.enc.AddEnc(function() {
 	};
 }, 1.0, function() { return world.time.season != Season.Winter; });
 
-world.loc.Farm.Fields.enc.AddEnc(function() {
+FarmLoc.Fields.enc.AddEnc(function() {
 	return Scenes.Roaming.FlowerPetal;
 }, 1.0, function() { return world.time.season != Season.Winter; });
 
-world.loc.Farm.Fields.enc.AddEnc(function() {
+FarmLoc.Fields.enc.AddEnc(function() {
 	return function() {
 		Text.Clear();
 
@@ -132,62 +117,62 @@ world.loc.Farm.Fields.enc.AddEnc(function() {
 	};
 }, 1.0, function() { return world.time.season != Season.Winter; });
 
-world.loc.Farm.Fields.links.push(new Link(
+FarmLoc.Fields.links.push(new Link(
 	"Crossroads", true, true,
 	null,
 	function() {
 		MoveToLocation(world.loc.Plains.Crossroads, {minute: 30});
 	}
 ));
-world.loc.Farm.Fields.links.push(new Link(
+FarmLoc.Fields.links.push(new Link(
 	"Barn", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Farm.Barn, {minute: 5});
+		MoveToLocation(FarmLoc.Barn, {minute: 5});
 	}
 ));
 
 //
 // Gwendy's barn
 //
-world.loc.Farm.Barn.description = function() {
+FarmLoc.Barn.description = function() {
 	Text.Add("Barn.");
 	Text.NL();
 }
-world.loc.Farm.Barn.links.push(new Link(
+FarmLoc.Barn.links.push(new Link(
 	"Fields", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Farm.Fields, {minute: 5});
+		MoveToLocation(FarmLoc.Fields, {minute: 5});
 	}
 ));
-world.loc.Farm.Barn.links.push(new Link(
+FarmLoc.Barn.links.push(new Link(
 	"Loft", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Farm.Loft, {minute: 5});
+		MoveToLocation(FarmLoc.Loft, {minute: 5});
 	}
 ));
 
 //
 // Gwendy's loft
 //
-world.SaveSpots["GwendysLoft"] = world.loc.Farm.Loft;
-world.loc.Farm.Loft.SaveSpot   = "GwendysLoft";
-world.loc.Farm.Loft.safe       = function() { return true; };
-world.loc.Farm.Loft.description = function() {
+world.SaveSpots["GwendysLoft"] = FarmLoc.Loft;
+FarmLoc.Loft.SaveSpot   = "GwendysLoft";
+FarmLoc.Loft.safe       = function() { return true; };
+FarmLoc.Loft.description = function() {
 	Text.Add("Gwendy's loft. ");
 	Text.NL();
 }
-world.loc.Farm.Loft.links.push(new Link(
+FarmLoc.Loft.links.push(new Link(
 	"Climb down", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Farm.Barn, {minute: 5});
+		MoveToLocation(FarmLoc.Barn, {minute: 5});
 	}
 ));
 
-world.loc.Farm.Loft.SleepFunc = function() {
+FarmLoc.Loft.SleepFunc = function() {
 	var parse = {
 
 	};
@@ -261,7 +246,7 @@ Scenes.FarmIntro.Start = function() {
 }
 
 Scenes.FarmIntro.Approach = function() {
-	party.location = world.loc.Farm.Fields;
+	party.location = FarmLoc.Fields;
 	world.TimeStep({minute: 15});
 	Text.Clear();
 
@@ -353,7 +338,7 @@ Scenes.FarmIntro.Approach = function() {
 }
 
 Scenes.FarmIntro.EnterBarn = function() {
-	party.location = world.loc.Farm.Barn;
+	party.location = FarmLoc.Barn;
 	world.TimeStep({minute: 10});
 
 	var parse = {};
@@ -377,7 +362,7 @@ Scenes.FarmIntro.EnterBarn = function() {
 }
 
 Scenes.FarmIntro.EnterLoft = function() {
-	party.location = world.loc.Farm.Loft;
+	party.location = FarmLoc.Loft;
 	world.TimeStep({minute: 5});
 	Text.Clear();
 
@@ -626,7 +611,7 @@ Scenes.FarmIntro.GwendyQuestions2 = function() {
 }
 
 Scenes.FarmIntro.HelpAdrian = function() {
-	party.location = world.loc.Farm.Barn;
+	party.location = FarmLoc.Barn;
 	world.TimeStep({minute: 10});
 	Text.Clear();
 
@@ -751,7 +736,7 @@ Scenes.FarmIntro.HelpAdrianFinished = function() {
 
 Scenes.FarmIntro.MeetDanie = function() {
 	Text.Clear();
-	party.location = world.loc.Farm.Fields;
+	party.location = FarmLoc.Fields;
 	world.TimeStep({minute: 5});
 
 	danie.flags["Met"] = 1;
@@ -1569,7 +1554,7 @@ Scenes.Farm.GoToMarketFirstFinale = function() {
 	Text.Flush();
 
 	party.LoadActiveParty();
-	party.location = world.loc.Farm.Fields;
+	party.location = FarmLoc.Fields;
 	world.TimeStep({hour: 2});
 
 	gwendy.relation.IncreaseStat(100, 5);
@@ -1584,7 +1569,7 @@ Scenes.Farm.GoToMarketFirstFinale = function() {
 			Text.Add("<i>“Well, we could just get some sleep. Or...”</i>", parse);
 			Text.Flush();
 
-			party.location = world.loc.Farm.Loft;
+			party.location = FarmLoc.Loft;
 
 			Scenes.Gwendy.LoftSexPrompt();
 		}, enabled : true,
@@ -1610,4 +1595,4 @@ Scenes.Farm.GoToMarketFirstFinale = function() {
 	Gui.SetButtonsFromList(options);
 }
 
-export { Farm };
+export { Farm, FarmLoc };

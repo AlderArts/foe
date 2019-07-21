@@ -4,9 +4,11 @@
 //
 
 import { world } from '../../world';
-import { Link, Scenes, EncounterTable } from '../../event';
+import { Event, Link, Scenes, EncounterTable } from '../../event';
 import { Shop } from '../../shop';
 import { Items } from '../../item';
+
+let MagicShopLoc = new Event("Asche's Fanciful Trinkets");
 
 Scenes.Rigard.MagicShop = {}
 Scenes.Rigard.MagicShop.IsOpen = function() {
@@ -214,7 +216,7 @@ Scenes.Rigard.MagicShop.CreateShop = function() {
 }
 Scenes.Rigard.MagicShop.CreateShop();
 
-world.loc.Rigard.ShopStreet.MagicShop.description = function() {
+MagicShopLoc.description = function() {
 	var parse = {
 		
 	};
@@ -261,7 +263,7 @@ world.loc.Rigard.ShopStreet.MagicShop.description = function() {
 	Text.Add("Sitting behind the counter, Asche lazily sways her tail from side to side as she surveys those in the store. A large warning sign is up by the door: “Shoplifters will be -”, the last word blurred and faded to illegibility with age. Somehow, the missing word just makes the penalty sound more ominous.", parse);
 }
 
-world.loc.Rigard.ShopStreet.MagicShop.events.push(new Link(
+MagicShopLoc.events.push(new Link(
 	"Asche", true, true, null,
 	function() {
 		var parse = {
@@ -276,14 +278,14 @@ world.loc.Rigard.ShopStreet.MagicShop.events.push(new Link(
 	}
 ));
 
-world.loc.Rigard.ShopStreet.MagicShop.events.push(new Link(
+MagicShopLoc.events.push(new Link(
 	"Leave", true, true, null,
 	function() {
 		MoveToLocation(world.loc.Rigard.ShopStreet.street, {minute: 5});
 	}
 ));
 
-world.loc.Rigard.ShopStreet.MagicShop.onEntry = function() {
+MagicShopLoc.onEntry = function() {
 	if(asche.flags["Met"] < Asche.Met.Met)
 		Scenes.Asche.FirstEntry();
 	//TODO LINK NEW STUFF
@@ -295,3 +297,5 @@ world.loc.Rigard.ShopStreet.MagicShop.onEntry = function() {
 	else
 		PrintDefaultOptions();
 }
+
+export { MagicShopLoc };

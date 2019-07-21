@@ -1,14 +1,15 @@
 
 import { world } from '../../world';
 import { Event, Link, Scenes, EncounterTable } from '../../event';
+import { MageTowerLoc } from './magetower';
 
 
-world.loc.Rigard.Castle = {
+let CastleLoc = {
 	Grounds   : new Event("Royal grounds"),
-	MageTower : new Event("Mage's tower"),
+	MageTower : MageTowerLoc,
 	Court     : new Event("Royal court"),
 	Dungeon   : new Event("Dungeons")
-}
+};
 
 Scenes.Rigard.Noble = {};
 
@@ -16,47 +17,47 @@ Scenes.Rigard.Noble = {};
 //
 // Castle: Grounds
 //
-world.loc.Rigard.Castle.Grounds.description = function() {
+CastleLoc.Grounds.description = function() {
 	Text.Add("You are standing inside the walls of the royal grounds, a lush garden dotted with fancy estates.");
 	Text.NL();
 }
 
 //Random events for royal grounds
-world.loc.Rigard.Castle.Grounds.enc = new EncounterTable();
-world.loc.Rigard.Castle.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Chatter2;});
-world.loc.Rigard.Castle.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.Parkland;});
-world.loc.Rigard.Castle.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.JeannesTower;}, 1.0, function() { return Scenes.Global.MetJeanne(); });
-world.loc.Rigard.Castle.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.TheDistrict;});
-world.loc.Rigard.Castle.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.MeetingMajid;}, 1.0, function() { return !Scenes.Global.PortalsOpen() && !(rigard.flags["Nobles"] & Rigard.Nobles.MetMajid); });
-world.loc.Rigard.Castle.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.GuardPatrol;}, 1.0, function() { return !world.time.IsDay(); });
-world.loc.Rigard.Castle.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.AlmsForThePoor;}, 1.0, function() { return !(rigard.flags["Nobles"] & Rigard.Nobles.Alms); });
-world.loc.Rigard.Castle.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.Elodie;}, 1.0, function() {
+CastleLoc.Grounds.enc = new EncounterTable();
+CastleLoc.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Chatter2;});
+CastleLoc.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.Parkland;});
+CastleLoc.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.JeannesTower;}, 1.0, function() { return Scenes.Global.MetJeanne(); });
+CastleLoc.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.TheDistrict;});
+CastleLoc.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.MeetingMajid;}, 1.0, function() { return !Scenes.Global.PortalsOpen() && !(rigard.flags["Nobles"] & Rigard.Nobles.MetMajid); });
+CastleLoc.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.GuardPatrol;}, 1.0, function() { return !world.time.IsDay(); });
+CastleLoc.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.AlmsForThePoor;}, 1.0, function() { return !(rigard.flags["Nobles"] & Rigard.Nobles.Alms); });
+CastleLoc.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.Elodie;}, 1.0, function() {
 	return !Scenes.Global.PortalsOpen() &&
 		!(rigard.flags["Nobles"] & Rigard.Nobles.Elodie) &&
 		Scenes.Global.VisitedOutlaws() &&
 		world.time.IsDay() &&
 		vaughn.flags["Met"] < Vaughn.Met.OnTaskLockpicks;
 });
-world.loc.Rigard.Castle.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.RoyalGetaway;});
-world.loc.Rigard.Castle.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.MagicalJackal;}, 1.0, function() {
+CastleLoc.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.RoyalGetaway;});
+CastleLoc.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.MagicalJackal;}, 1.0, function() {
 	return asche.flags["Met"] >= Asche.Met.Met &&
 		!world.time.IsDay();
 });
-world.loc.Rigard.Castle.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.PalaceParade;}, 2.0, function() {
+CastleLoc.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.PalaceParade;}, 2.0, function() {
 	return terry.Recruited() &&
 		!world.time.IsDay() &&
 		rigard.ParadeTimer.Expired();
 });
-world.loc.Rigard.Castle.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.Buns;}, 1.0, function() { return world.time.IsDay(); });
+CastleLoc.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.Buns;}, 1.0, function() { return world.time.IsDay(); });
 
-world.loc.Rigard.Castle.Grounds.onEntry = function() {
+CastleLoc.Grounds.onEntry = function() {
 	if(Math.random() < 0.2)
 		Scenes.Rigard.Chatter2(true);
 	else
 		PrintDefaultOptions();
 }
 
-world.loc.Rigard.Castle.Grounds.links.push(new Link(
+CastleLoc.Grounds.links.push(new Link(
 	"Plaza", true, true,
 	function() {
 		Text.Add("There is a small side entrance in the outer wall you can use to leave the royal grounds and return to the city plaza.");
@@ -66,27 +67,27 @@ world.loc.Rigard.Castle.Grounds.links.push(new Link(
 		MoveToLocation(world.loc.Rigard.Plaza);
 	}
 ));
-world.loc.Rigard.Castle.Grounds.links.push(new Link(
+CastleLoc.Grounds.links.push(new Link(
 	"Court", true, false, // TODO
 	function() {
 		Text.Add("On top of the steep hill in front of you stands the crowning jewel of Rigard, the royal castle. It commands the strongest tactical position for miles around, protected by steep hillside on three sides, and a sheer, impassable cliff facing the river separating the city far below.");
 		Text.NL();
 	},
 	function() {
-		MoveToLocation(world.loc.Rigard.Castle.Court);
+		MoveToLocation(CastleLoc.Court);
 	}
 ));
-world.loc.Rigard.Castle.Grounds.links.push(new Link(
+CastleLoc.Grounds.links.push(new Link(
 	"Tower", true, true,
 	function() {
 		Text.Add("Close to one of the walls surrounding the area, an old crumbling obelisk of rock rises, strangely out of place in the neatly organized landscape. An eerie glow emanates from windows in the upper levels of the tower, a flickering light constantly changing colors.");
 		Text.NL();
 	},
 	function() {
-		MoveToLocation(world.loc.Rigard.Castle.MageTower);
+		MoveToLocation(CastleLoc.MageTower);
 	}
 ));
-world.loc.Rigard.Castle.Grounds.links.push(new Link(
+CastleLoc.Grounds.links.push(new Link(
 	"Jail", function() { return terry.flags["Saved"] == Terry.Saved.TalkedTwins2; }, true,
 	null,
 	function() {
@@ -95,7 +96,7 @@ world.loc.Rigard.Castle.Grounds.links.push(new Link(
 ));
 
 
-world.loc.Rigard.Castle.Grounds.events.push(new Link(
+CastleLoc.Grounds.events.push(new Link(
 	"Elodie", function() { return vaughn.flags["Met"] == Vaughn.Met.OnTaskLockpicks; }, true,
 	function() {
 		if(vaughn.flags["Met"] == Vaughn.Met.OnTaskLockpicks) {
@@ -739,5 +740,4 @@ Scenes.Rigard.Noble.BunsChoice = function() {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-
-
+export { CastleLoc };

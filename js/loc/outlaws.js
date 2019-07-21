@@ -8,16 +8,16 @@ import { world } from '../world';
 import { Event, Link, EncounterTable, Scenes } from '../event';
 
 // Create namespace
-world.loc.Outlaws = {
+let OutlawsLoc = {
 	Camp : new Event("Outlaws' camp"),
 	Infirmary : new Event("Infirmary")
 }
 
-world.SaveSpots["Outlaws"] = world.loc.Outlaws.Camp;
-world.loc.Outlaws.Camp.SaveSpot = "Outlaws";
-world.loc.Outlaws.Camp.safe = function() { return true; };
+world.SaveSpots["Outlaws"] = OutlawsLoc.Camp;
+OutlawsLoc.Camp.SaveSpot = "Outlaws";
+OutlawsLoc.Camp.safe = function() { return true; };
 //TODO
-world.loc.Outlaws.Camp.description = function() {
+OutlawsLoc.Camp.description = function() {
 	Text.Add("You are in the outlaws' camp.<br>");
 	
 	if(GetDEBUG()) {
@@ -27,7 +27,7 @@ world.loc.Outlaws.Camp.description = function() {
 	}
 }
 
-world.loc.Outlaws.Camp.onEntry = function() {
+OutlawsLoc.Camp.onEntry = function() {
 	if(outlaws.Rep() >= 10 && outlaws.flags["Met"] == Outlaws.Met.Bouqet && outlaws.mainQuestTimer.Expired())
 		Scenes.Outlaws.PathIntoRigardInitiation();
 	else if(outlaws.Rep() >= 15 && rigard.Krawitz["Q"] >= Rigard.KrawitzQ.CaughtTerry && cveta.flags["Met"] < Cveta.Met.MariaTalk)
@@ -46,7 +46,7 @@ world.loc.Outlaws.Camp.onEntry = function() {
 		PrintDefaultOptions();
 }
 
-world.loc.Outlaws.Camp.links.push(new Link(
+OutlawsLoc.Camp.links.push(new Link(
 	"Forest", true, true,
 	null,
 	function() {
@@ -54,15 +54,15 @@ world.loc.Outlaws.Camp.links.push(new Link(
 	}
 ));
 
-world.loc.Outlaws.Camp.links.push(new Link(
+OutlawsLoc.Camp.links.push(new Link(
 	"Infirmary", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Outlaws.Infirmary, {minute: 5});
+		MoveToLocation(OutlawsLoc.Infirmary, {minute: 5});
 	}
 ));
 
-world.loc.Outlaws.Camp.links.push(new Link(
+OutlawsLoc.Camp.links.push(new Link(
 	"Tower", function() {
 		return outlaws.flags["BullTower"] == Outlaws.BullTowerQuest.Initiated;
 	}, true,
@@ -72,7 +72,7 @@ world.loc.Outlaws.Camp.links.push(new Link(
 	}
 ));
 
-world.loc.Outlaws.Camp.events.push(new Link(
+OutlawsLoc.Camp.events.push(new Link(
 	"Maria", function() {
 		var time = maria.IsAtLocation();
 		return time;
@@ -85,7 +85,7 @@ world.loc.Outlaws.Camp.events.push(new Link(
 	}
 ));
 
-world.loc.Outlaws.Camp.events.push(new Link(
+OutlawsLoc.Camp.events.push(new Link(
 	"Vaughn", function() {
 		var time = vaughn.IsAtLocation();
 		return time && vaughn.Met();
@@ -99,7 +99,7 @@ world.loc.Outlaws.Camp.events.push(new Link(
 	}
 ));
 
-world.loc.Outlaws.Camp.events.push(new Link(
+OutlawsLoc.Camp.events.push(new Link(
 	"Cveta", function() {
 		var met  = cveta.flags["Met"] >= Cveta.Met.Available;
 		var time = cveta.WakingTime();
@@ -114,7 +114,7 @@ world.loc.Outlaws.Camp.events.push(new Link(
 	}
 ));
 
-world.loc.Outlaws.Camp.events.push(new Link(
+OutlawsLoc.Camp.events.push(new Link(
 	"Performance", function() {
 		var met  = cveta.flags["Met"] >= Cveta.Met.FirstMeeting;
 		var time = cveta.PerformanceTime();
@@ -127,40 +127,40 @@ world.loc.Outlaws.Camp.events.push(new Link(
 ));
 
 
-world.loc.Outlaws.Camp.enc = new EncounterTable();
-world.loc.Outlaws.Camp.enc.AddEnc(function() {
+OutlawsLoc.Camp.enc = new EncounterTable();
+OutlawsLoc.Camp.enc.AddEnc(function() {
 	return Scenes.Outlaws.Exploration.ChowTime;
 }, 1.0, function() { return world.time.hour >= 5 && world.time.hour < 22; });
-world.loc.Outlaws.Camp.enc.AddEnc(function() {
+OutlawsLoc.Camp.enc.AddEnc(function() {
 	return Scenes.Outlaws.Exploration.Cavalcade;
 }, 1.0, function() { return Scenes.OutlawsCavalcade.Enabled(); });
-world.loc.Outlaws.Camp.enc.AddEnc(function() {
+OutlawsLoc.Camp.enc.AddEnc(function() {
 	return Scenes.Outlaws.Exploration.Archery;
 }, 1.0, function() { return outlaws.flags["Met"] >= Outlaws.Met.MetBelinda && world.time.IsDay(); });
-world.loc.Outlaws.Camp.enc.AddEnc(function() {
+OutlawsLoc.Camp.enc.AddEnc(function() {
 	return Scenes.Outlaws.Exploration.CampFollowers;
 }, 1.0, function() { return !world.time.IsDay(); });
-world.loc.Outlaws.Camp.enc.AddEnc(function() {
+OutlawsLoc.Camp.enc.AddEnc(function() {
 	return Scenes.Outlaws.Exploration.Feeding;
 }, 1.0, function() { return true; });
-world.loc.Outlaws.Camp.enc.AddEnc(function() {
+OutlawsLoc.Camp.enc.AddEnc(function() {
 	return Scenes.Outlaws.Exploration.Carpentry;
 }, 1.0, function() { return outlaws.flags["Met"] >= Outlaws.Met.MetBelinda; });
-world.loc.Outlaws.Camp.enc.AddEnc(function() {
+OutlawsLoc.Camp.enc.AddEnc(function() {
 	return Scenes.Outlaws.Exploration.FactFinding;
 }, 1.0, function() { return outlaws.factTimer.Expired(); });
-world.loc.Outlaws.Camp.enc.AddEnc(function() {
+OutlawsLoc.Camp.enc.AddEnc(function() {
 	return Scenes.Outlaws.Exploration.DailyLife;
 }, 1.0, function() { return true; });
 /* TODO
-world.loc.Outlaws.Camp.enc.AddEnc(function() {
+OutlawsLoc.Camp.enc.AddEnc(function() {
 	return function() {
 		
 	};
 }, 1.0, function() { return true; });
 */
 
-world.loc.Outlaws.Infirmary.description = function() {
+OutlawsLoc.Infirmary.description = function() {
 	var parse = {
 		
 	};
@@ -196,22 +196,22 @@ world.loc.Outlaws.Infirmary.description = function() {
 	Text.Add("Taking a moment to savor the peace the infirmary affords, you consider what you ought to do next.", parse);
 }
 
-world.loc.Outlaws.Infirmary.onEntry = function() {
+OutlawsLoc.Infirmary.onEntry = function() {
 	if(aquilius.flags["Met"] == 0)
 		Scenes.Aquilius.FirstMeeting();
 	else
 		PrintDefaultOptions();
 }
 
-world.loc.Outlaws.Infirmary.links.push(new Link(
+OutlawsLoc.Infirmary.links.push(new Link(
 	"Outside", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Outlaws.Camp, {minute: 5});
+		MoveToLocation(OutlawsLoc.Camp, {minute: 5});
 	}
 ));
 
-world.loc.Outlaws.Infirmary.events.push(new Link(
+OutlawsLoc.Infirmary.events.push(new Link(
 	"Aquilius", function() {
 		return aquilius.IsAtLocation();
 	}, true,
@@ -220,3 +220,5 @@ world.loc.Outlaws.Infirmary.events.push(new Link(
 		Scenes.Aquilius.Approach();
 	}
 ));
+
+export { OutlawsLoc };

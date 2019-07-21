@@ -1,8 +1,11 @@
 
 
 import { world } from '../../world';
-import { Link, Scenes, EncounterTable } from '../../event';
+import { Event, Link, Scenes, EncounterTable } from '../../event';
 
+let TavernLoc = {
+	common   : new Event("Maidens' Bane")
+};
 
 Scenes.Barnaby = {};
 //Barnaby variable kept in rigard.js
@@ -11,7 +14,7 @@ Scenes.Barnaby = {};
 //
 // Tavern
 //
-world.loc.Rigard.Tavern.common.description = function() {
+TavernLoc.common.description = function() {
 	Text.Add("You are in the tavern called the Maidens' Bane. The dim lighting makes it hard to make out details, and the heavy smell of hard alcohol mixed with bile stings your nostrils. Along the bar is a row of stools, a lot of them partly broken or mended - either missing a supporting peg, or the cushion is torn open with the material picked out, making the seat lumpy and hard.");
 	Text.NL();
 	Text.Add("In the main dining area, there are tables - most of them covered in the leftover dishes, foods and half-drunk mugs of other patrons. There are spills and stains on the tables that look as though they have been there for several weeks, with no hope of getting cleaned up anytime soon. On the wall opposite of the bar, there are booths, where it looks like couples could go for some public privacy. For true privacy, there are a few back rooms deeper inside the tavern.");
@@ -25,7 +28,7 @@ world.loc.Rigard.Tavern.common.description = function() {
 	Text.NL();
 }
 
-world.loc.Rigard.Tavern.common.events.push(new Link(
+TavernLoc.common.events.push(new Link(
 	function() { return rigard.MetBarnaby() ? "Barnaby" : "Bartender"; }, true, true,
 	null,
 	function() {
@@ -33,7 +36,7 @@ world.loc.Rigard.Tavern.common.events.push(new Link(
 	}
 ));
 
-world.loc.Rigard.Tavern.common.links.push(new Link(
+TavernLoc.common.links.push(new Link(
 	"Slums", true, true,
 	null,
 	function() {
@@ -42,7 +45,7 @@ world.loc.Rigard.Tavern.common.links.push(new Link(
 ));
 
 //TODO
-world.loc.Rigard.Tavern.common.DrunkHandler = function() {
+TavernLoc.common.DrunkHandler = function() {
 	var parse = {
 		phisher : player.mfTrue("his", "her")
 	};
@@ -1251,3 +1254,5 @@ Scenes.Barnaby.BlowjobEntrypoint = function(func) {
 		
 	});
 }
+
+export { TavernLoc };

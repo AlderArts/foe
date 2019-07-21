@@ -1,16 +1,23 @@
 
 import { world } from '../world';
-import { Link, Scenes } from '../event';
+import { Event, Link, Scenes } from '../event';
 import { Maze } from '../maze';
 import { GetDEBUG } from '../../app';
 
 //
 // Nomads
 //
-world.SaveSpots["NomadsTent"] = world.loc.Plains.Nomads.Tent;
-world.loc.Plains.Nomads.Tent.SaveSpot = "NomadsTent";
-world.loc.Plains.Nomads.Tent.safe = function() { return true; };
-world.loc.Plains.Nomads.Tent.description = function() {
+
+let Nomads = {
+	Tent       : new Event("Tent"), // Start area
+	Fireplace  : new Event("Nomads: Fireplace"),
+	Nursery    : new Event("Nomads: Nursery")
+};
+
+world.SaveSpots["NomadsTent"] = Nomads.Tent;
+Nomads.Tent.SaveSpot = "NomadsTent";
+Nomads.Tent.safe = function() { return true; };
+Nomads.Tent.description = function() {
 	var light;
 	if     (world.time.hour >= 6 && world.time.hour < 19) light = "sunlight";
 	else if(world.time.hour >= 19 || world.time.hour < 2) light = "firelight";
@@ -20,7 +27,7 @@ world.loc.Plains.Nomads.Tent.description = function() {
 	Text.NL();
 }
 
-world.loc.Plains.Nomads.Tent.links.push(new Link(
+Nomads.Tent.links.push(new Link(
 	"Outside", true, true,
 	function() {
 		var light;
@@ -31,7 +38,7 @@ world.loc.Plains.Nomads.Tent.links.push(new Link(
 		Text.Add("Outside, the [light] illuminates several other tents that are similar to the one you are in now. ", {light: light});
 	},
 	function() {
-		MoveToLocation(world.loc.Plains.Nomads.Fireplace, {minute: 5});
+		MoveToLocation(Nomads.Fireplace, {minute: 5});
 	}
 ));
 
@@ -56,13 +63,13 @@ Scenes.MazeTest.GetRoom(5,5).events.push(new Link(
 		Text.Add("Here's the exit.");
 	},
 	function() {
-		MoveToLocation(world.loc.Plains.Nomads.Tent);
+		MoveToLocation(Nomads.Tent);
 	}
 ));
 Scenes.MazeTest.AddRoom(1,1);
 
 //TODO TEST
-world.loc.Plains.Nomads.Tent.links.push(new Link(
+Nomads.Tent.links.push(new Link(
 	"Maze", function() { return GetDEBUG(); }, true,
 	null,
 	function() {
@@ -73,7 +80,7 @@ world.loc.Plains.Nomads.Tent.links.push(new Link(
 
 
 //Trigger this on stepping into the Nomads’ for the first time when season is active.
-world.loc.Plains.Nomads.Fireplace.onEntry = function() {
+Nomads.Fireplace.onEntry = function() {
 	if(!(gameCache.flags["HW"] & Halloween.State.Intro) &&
 		(GetDEBUG() || Halloween.IsSeason()) &&
 		(world.time.hour >= 8) &&
@@ -83,7 +90,7 @@ world.loc.Plains.Nomads.Fireplace.onEntry = function() {
 		PrintDefaultOptions();
 }
 
-world.loc.Plains.Nomads.Fireplace.description = function() {
+Nomads.Fireplace.description = function() {
 	Text.Add("The nomad camp is currently set up in the middle of a wide grassland spreading out in all directions. [TreeFar] In the middle of the gathering of disparate tents that make up the nomad camp - about twenty in total - is a large fire pit.", {TreeFar: world.TreeFarDesc()});
 	Text.NL();
 	if(world.time.hour >= 7 && world.time.hour < 19)
@@ -94,7 +101,7 @@ world.loc.Plains.Nomads.Fireplace.description = function() {
 		Text.Add("The smoldering ashes from last night's fire still glow faintly. Most of the camp is sleeping at the current hour.");
 	Text.NL();
 }
-world.loc.Plains.Nomads.Fireplace.links.push(new Link(
+Nomads.Fireplace.links.push(new Link(
 	"Crossroads", true, true,
 	function() {
 		Text.Add("A faint trail leads out across the plains toward a low outcropping where several larger paths cross. ");
@@ -103,17 +110,17 @@ world.loc.Plains.Nomads.Fireplace.links.push(new Link(
 		MoveToLocation(world.loc.Plains.Crossroads, {minute: 15});
 	}
 ));
-world.loc.Plains.Nomads.Fireplace.links.push(new Link(
+Nomads.Fireplace.links.push(new Link(
 	"Tent", true, true,
 	function() {
 		Text.Add("Your own tent is nearby, should you need rest.");
 		Text.NL();
 	},
 	function() {
-		MoveToLocation(world.loc.Plains.Nomads.Tent, {minute: 5});
+		MoveToLocation(Nomads.Tent, {minute: 5});
 	}
 ));
-world.loc.Plains.Nomads.Fireplace.links.push(new Link(
+Nomads.Fireplace.links.push(new Link(
 	"Nursery", function() {
 		if(Scenes.Global.PortalsOpen()) return false;
 		return nursery.TotalKids() > 0;
@@ -129,6 +136,8 @@ world.loc.Plains.Nomads.Fireplace.links.push(new Link(
 		Scenes.Nursery.Nomads();
 	}
 ));
-world.loc.Plains.Nomads.Fireplace.switchSpot = function() {
+Nomads.Fireplace.switchSpot = function() {
 	return !Scenes.Global.PortalsOpen();
 }
+
+export { Nomads };

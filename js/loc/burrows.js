@@ -9,7 +9,7 @@ import { world } from '../world';
 import { Event, Link, EncounterTable, Scenes } from '../event';
 
 // Create namespace
-world.loc.Burrows = {
+let BurrowsLoc = {
 	Entrance  : new Event("The Burrows"),
 	Tunnels   : new Event("Burrows: Tunnels"),
 	Pit       : new Event("Burrows: The Pit"),
@@ -115,7 +115,7 @@ Burrows.prototype.FromStorage = function(storage) {
 //
 // Burrows entrance
 //
-world.loc.Burrows.Entrance.description = function() {
+BurrowsLoc.Entrance.description = function() {
 	var parse = {
 		TreeFar : world.TreeFarDesc(),
 		l : burrows.LagonDefeated() ? "the lagomorph" : "Lagon’s"
@@ -154,14 +154,14 @@ world.loc.Burrows.Entrance.description = function() {
 	scenes.Get();
 }
 
-world.loc.Burrows.Entrance.links.push(new Link(
+BurrowsLoc.Entrance.links.push(new Link(
 	"Plains", true, true,
 	null,
 	function() {
 		MoveToLocation(world.loc.Plains.Crossroads, {minute: 30});
 	}
 ));
-world.loc.Burrows.Entrance.links.push(new Link(
+BurrowsLoc.Entrance.links.push(new Link(
 	"Inside", true, true,
 	null,
 	function() {
@@ -170,12 +170,12 @@ world.loc.Burrows.Entrance.links.push(new Link(
 		else if(!burrows.LagonDefeated() && burrows.flags["Access"] == Burrows.AccessFlags.Stage5)
 			Scenes.Lagon.ReturnToBurrowsAfterScepter();
 		else
-			MoveToLocation(world.loc.Burrows.Tunnels, {minute: 10});
+			MoveToLocation(BurrowsLoc.Tunnels, {minute: 10});
 	}
 ));
 
 
-world.loc.Burrows.Entrance.onEntry = function() {
+BurrowsLoc.Entrance.onEntry = function() {
 	if(burrows.flags["Access"] == Burrows.AccessFlags.KnownNotVisited) {
 		Scenes.Burrows.FirstApproach();
 	}
@@ -192,7 +192,7 @@ world.loc.Plains.Crossroads.links.push(new Link(
 		}
 	},
 	function() {
-		MoveToLocation(world.loc.Burrows.Entrance, {minute: 30});
+		MoveToLocation(BurrowsLoc.Entrance, {minute: 30});
 	}
 ));
 
@@ -200,51 +200,51 @@ world.loc.Plains.Crossroads.links.push(new Link(
 //
 // Tunnels
 //
-world.loc.Burrows.Tunnels.description = function() {
+BurrowsLoc.Tunnels.description = function() {
 	Text.Add("The burrows are a confusing maze of tunnels criss-crossing through the hillside. There is no real way to navigate in the faintly lit darkness of the lagomorph stronghold, so moving around is a bit of guesswork. Still, you think you could find your way around, given some time. Echoes of the giant orgy in the Pit can be heard even here; finding that place will at least be easy.");
 	Text.NL();
 }
 
-world.loc.Burrows.Tunnels.links.push(new Link(
+BurrowsLoc.Tunnels.links.push(new Link(
 	"Outside", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Burrows.Entrance, {minute: 10});
+		MoveToLocation(BurrowsLoc.Entrance, {minute: 10});
 	}
 ));
 
-world.loc.Burrows.Tunnels.links.push(new Link(
+BurrowsLoc.Tunnels.links.push(new Link(
 	"Throne", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Burrows.Throne, {minute: 10});
+		MoveToLocation(BurrowsLoc.Throne, {minute: 10});
 	}
 ));
 
-world.loc.Burrows.Tunnels.links.push(new Link(
+BurrowsLoc.Tunnels.links.push(new Link(
 	"The Pit", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Burrows.Pit, {minute: 10});
+		MoveToLocation(BurrowsLoc.Pit, {minute: 10});
 	}
 ));
 
-world.loc.Burrows.Tunnels.links.push(new Link(
+BurrowsLoc.Tunnels.links.push(new Link(
 	"Lab", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Burrows.Lab, {minute: 10});
+		MoveToLocation(BurrowsLoc.Lab, {minute: 10});
 	}
 ));
 
 
-world.loc.Burrows.Tunnels.enc = new EncounterTable();
+BurrowsLoc.Tunnels.enc = new EncounterTable();
 //TODO add encounters
 
 //
 // Burrows throne room
 //
-world.loc.Burrows.Throne.description = function() {
+BurrowsLoc.Throne.description = function() {
 	var parse = {
 		Lagon : burrows.VenaRestored() ? "Vena" : "Lagon"
 	};
@@ -266,15 +266,15 @@ world.loc.Burrows.Throne.description = function() {
 	}
 }
 
-world.loc.Burrows.Throne.links.push(new Link(
+BurrowsLoc.Throne.links.push(new Link(
 	"Tunnels", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Burrows.Tunnels, {minute: 10});
+		MoveToLocation(BurrowsLoc.Tunnels, {minute: 10});
 	}
 ));
 
-world.loc.Burrows.Throne.events.push(new Link(
+BurrowsLoc.Throne.events.push(new Link(
 	"Vena", function() {
 		return burrows.VenaRestored();
 	}, true,
@@ -284,7 +284,7 @@ world.loc.Burrows.Throne.events.push(new Link(
 	}
 ));
 
-world.loc.Burrows.Throne.events.push(new Link(
+BurrowsLoc.Throne.events.push(new Link(
 	"Lagon", function() {
 		return lagon.IsAtLocation();
 	}, true,
@@ -303,7 +303,7 @@ world.loc.Burrows.Throne.events.push(new Link(
 //
 // Burrows Pit
 //
-world.loc.Burrows.Pit.description = function() {
+BurrowsLoc.Pit.description = function() {
 	var parse = {
 		Lagon : burrows.VenaRestored() ? "Vena" : "Lagon"
 	};
@@ -330,15 +330,15 @@ world.loc.Burrows.Pit.description = function() {
 	Text.NL();
 }
 
-world.loc.Burrows.Pit.links.push(new Link(
+BurrowsLoc.Pit.links.push(new Link(
 	"Tunnels", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Burrows.Tunnels, {minute: 10});
+		MoveToLocation(BurrowsLoc.Tunnels, {minute: 10});
 	}
 ));
 
-world.loc.Burrows.Pit.events.push(new Link(
+BurrowsLoc.Pit.events.push(new Link(
 	"Vena", function() {
 		return !burrows.VenaRestored();
 	}, true,
@@ -351,23 +351,23 @@ world.loc.Burrows.Pit.events.push(new Link(
 //
 // Burrows Lab
 //
-world.loc.Burrows.Lab.description = function() {
+BurrowsLoc.Lab.description = function() {
 	Scenes.Ophelia.LabDesc();
 }
 
 
-world.SaveSpots["Burrows"] = world.loc.Burrows.Lab;
-world.loc.Burrows.Lab.SaveSpot = "Burrows";
-world.loc.Burrows.Lab.safe = function() { return true; };
-world.loc.Burrows.Lab.links.push(new Link(
+world.SaveSpots["Burrows"] = BurrowsLoc.Lab;
+BurrowsLoc.Lab.SaveSpot = "Burrows";
+BurrowsLoc.Lab.safe = function() { return true; };
+BurrowsLoc.Lab.links.push(new Link(
 	"Tunnels", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Burrows.Tunnels, {minute: 10});
+		MoveToLocation(BurrowsLoc.Tunnels, {minute: 10});
 	}
 ));
 
-world.loc.Burrows.Lab.events.push(new Link(
+BurrowsLoc.Lab.events.push(new Link(
 	"Ophelia", function() {
 		return ophelia.IsAtLocation();
 	}, true,
@@ -471,7 +471,7 @@ Scenes.Burrows.Arrival = function(alpha) {
 	else
 		parse["comp"] = "";
 	
-	party.location = world.loc.Burrows.Pit;
+	party.location = BurrowsLoc.Pit;
 	
 	burrows.flags["Access"] = Burrows.AccessFlags.Visited;
 	
@@ -518,7 +518,7 @@ Scenes.Burrows.Arrival = function(alpha) {
 		Text.Add("You are plagued with questions, but for now you are happy just to get away from this place. You[comp] walk in silence, following the rabbit intellectual. After passing through some more serpentine tunnels, you end up in a larger room, cluttered with various bottles, vials and alchemical instruments.", parse);
 		Text.Flush();
 		
-		party.location = world.loc.Burrows.Lab;
+		party.location = BurrowsLoc.Lab;
 		world.TimeStep({minute: 30});
 		
 		Gui.NextPrompt(Scenes.Burrows.ArrivalOphelia);
@@ -679,7 +679,7 @@ Scenes.Burrows.ArrivalOpheliaTalk = function() {
 					Text.Add("Ophelia maintains a cheerful air as you walk together, chatting with you and asking you about the outside world. The rest of your guard largely ignore you, though they look ready to pounce into action, should you show any signs of resistance.", parse);
 					Text.Flush();
 					
-					party.location = world.loc.Burrows.Throne;
+					party.location = BurrowsLoc.Throne;
 					world.TimeStep({hour: 1});
 					
 					Gui.NextPrompt(Scenes.Burrows.ArrivalLagon);
@@ -701,7 +701,7 @@ Scenes.Burrows.ArrivalOpheliaTalk = function() {
 					Text.NL();
 					Text.Flush();
 					
-					party.location = world.loc.Burrows.Throne;
+					party.location = BurrowsLoc.Throne;
 					world.TimeStep({hour: 1});
 					
 					Gui.NextPrompt(Scenes.Burrows.ArrivalLagon);
@@ -825,7 +825,7 @@ Scenes.Burrows.ArrivalLagonTalk = function() {
 			Text.Flush();
 			
 			Gui.NextPrompt(function() {
-				MoveToLocation(world.loc.Burrows.Entrance, {hour: 1});
+				MoveToLocation(BurrowsLoc.Entrance, {hour: 1});
 			});
 		}, enabled : true,
 		tooltip : "Ask him about the job he mentioned."
@@ -864,4 +864,4 @@ Burrows.prototype.GenerateLagomorphAlpha = function(gender) {
 	return new LagomorphAlpha(gender);
 }
 
-export { Burrows };
+export { Burrows, BurrowsLoc };

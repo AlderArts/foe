@@ -1,11 +1,42 @@
 // World template
+import { PlainsLoc } from './loc/plains';
+import { LightAspect, DarkAspect } from './event/introduction';
+import { KingsRoad } from './loc/kingsroad';
+import { Highlands } from './loc/highlands';
+import { LakeLoc } from './loc/lake';
+import { OutlawsLoc } from './loc/outlaws';
+import { ForestLoc } from './loc/forest';
+import { DragonDenLoc } from './loc/dragonden';
+import { FarmLoc } from './loc/farm';
+import { DesertLoc } from './loc/desert';
+import { BurrowsLoc } from './loc/burrows';
+import { TreeCityLoc } from './loc/treecity/treecity';
+import { RigardLoc } from './loc/rigard/rigard';
 
 let world = {
 	// Prototype initialization
-	loc           : {},
+	loc           : {
+		Plains : PlainsLoc,
+		Farm : FarmLoc,
+		Burrows : BurrowsLoc,
+		Forest : ForestLoc,
+		Desert : DesertLoc,
+		KingsRoad : KingsRoad,
+		Highlands : Highlands,
+		Lake : LakeLoc,
+		Outlaws : OutlawsLoc,
+		Rigard : RigardLoc,
+
+		DragonDen : DragonDenLoc,
+		TreeCity : TreeCityLoc,
+
+		DarkAspect : DarkAspect,
+		LightAspect : LightAspect,
+	},
 	EntityStorage : new Array(),
-	SaveSpots     : {}
+	SaveSpots     : {},
 }
+
 
 world.Locations = {
 	Plains    : 0,

@@ -6,51 +6,37 @@
 
 import { world } from '../../world';
 import { Event, Scenes, EncounterTable } from '../../event';
+import { BrothelLoc } from './brothel';
+import { InnLoc } from './inn';
+import { Shop } from '../../shop';
+import { ResidentialLoc } from './residential';
+import { SlumsLoc } from './slums';
+import { TavernLoc } from './tavern';
+import { GateLoc, BarracksLoc } from './guards';
+import { ShopStreetLoc } from './merchants';
+import { CastleLoc } from './castle';
+import { PlazaLoc } from './plaza';
+import { KrawitzLoc } from './krawitz';
 
 // Create namespace
-world.loc.Rigard = {
-	Gate         : new Event("Main Gate"),
-	Barracks     :
-	{
-		common   : new Event("Barracks commons"),
-		sparring : new Event("Sparring yard"),
-		captains : new Event("Captains quarters")
-	},
+let RigardLoc = {
+	Gate         : GateLoc,
+	Barracks     : BarracksLoc,
 
-	Residential   :
-	{
-		street   : new Event("Residential street"), // Will also contain gate to slums
-		tavern   : new Event("Maidens' bane"),
-		miranda  : new Event("Miranda's house"),
-		mDungeon : new Event("Miranda's dungeon")
-	},
+	Residential   : ResidentialLoc,
 
-	Brothel      :
-	{
-		brothel  : new Event("Brothel"),
-		cellar   : new Event("Brothel: Cellar")
-	},
+	Brothel      : BrothelLoc,
 
-	Plaza        : new Event("Plaza"),
-	Inn          :
-	{
-		common    : new Event("Lady's Blessing"),
-		backroom  : new Event("Back room"),
-		cellar    : new Event("Cellar"),
-		room      : new Event(function() { return "Room " + rigard.LB["RoomNr"]; }),
-		room69    : new Event("Room 369"),
-		penthouse : new Event("Penthouse")
-	},
+	Plaza        : PlazaLoc,
+	Inn          : InnLoc,
+	ShopStreet   : ShopStreetLoc,
 
-	Slums        :
-	{
-		gate     : new Event("Peasants' Gate"),
-		docks    : new Event("Docks")
-	},
-	Tavern       :
-	{
-		common   : new Event("Maidens' Bane")
-	}
+	Krawitz      : KrawitzLoc,
+
+	Castle       : CastleLoc,
+
+	Slums        : SlumsLoc,
+	Tavern       : TavernLoc,
 }
 
 Scenes.Rigard = {};
@@ -257,20 +243,20 @@ Scenes.Rigard.CityHistory = function() {
 	Text.Clear();
 	var parse = {};
 
-	if(party.location == world.loc.Rigard.Plaza) {
+	if(party.location == RigardLoc.Plaza) {
 		parse.person = "a well-dressed youngster";
 		parse.finish = "After ruffling her hair,";
 	}
-	else if(party.location == world.loc.Rigard.ShopStreet.street) {
+	else if(party.location == RigardLoc.ShopStreet.street) {
 		parse.person = "a cleanly-dressed young catgirl";
 		parse.finish = "After scratching behind her ears,";
 	}
-	else if(party.location == world.loc.Rigard.Residential.street ||
-	        party.location == world.loc.Rigard.Slums.gate) {
+	else if(party.location == RigardLoc.Residential.street ||
+	        party.location == RigardLoc.Slums.gate) {
 		parse.person = "a shabbily-dressed young doggirl";
 		parse.finish = "After scratching behind her ears,";
 	}
-	else if(party.location == world.loc.Rigard.Gate) {
+	else if(party.location == RigardLoc.Gate) {
 		parse.person = "a straight-backed youngster";
 		parse.finish = "After ruffling her hair,";
 	}
@@ -290,9 +276,9 @@ Scenes.Rigard.CityHistory = function() {
 	Text.NL();
 	Text.Add("<i>“Mm... well, I'm not much for that sort of thing,”</i> she tells you, <i>“but everyone knows the story of the founding! Wanna hear that?”</i> When you nod your agreement, she continues. <i>“A long long time ago, this land was only inhabited by scattered tribes of pure humans ", parse);
 	// If morph
-	if(party.location == world.loc.Rigard.ShopStreet.street ||
-	   party.location == world.loc.Rigard.Residential.street ||
-	   party.location == world.loc.Rigard.Slums.gate)
+	if(party.location == RigardLoc.ShopStreet.street ||
+	   party.location == RigardLoc.Residential.street ||
+	   party.location == RigardLoc.Slums.gate)
 		Text.Add("- although my parents tell me that's just something the humans made up - ", parse);
 	Text.Add("who sometimes fought with each other, and sometimes got along. But then, in one of the weaker tribes was born Riordain, along with his twin brother Riorbane.”</i>", parse);
 	Text.NL();
@@ -355,7 +341,7 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 	
 	var npcsA = [];
 	var npcsB = [];
-	if(party.location == world.loc.Rigard.Plaza) {
+	if(party.location == RigardLoc.Plaza) {
 		parse.areaname = "plaza";
 		posh = true;
 
@@ -375,7 +361,7 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 		npcsB.push({noun: "tired servant", a: "a", gender: Gender.male});
 		npcsB.push({noun: "tired maid", a: "a", gender: Gender.female});
 	}
-	else if(party.location == world.loc.Rigard.ShopStreet.street) {
+	else if(party.location == RigardLoc.ShopStreet.street) {
 		parse.areaname = "merchant's district";
 
 		npcsA.push({noun: "poor merchant", a: "a", gender: Math.random() > 0.5 ? Gender.male : Gender.female});
@@ -391,9 +377,9 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 		npcsB.push({noun: "well-dressed retainer", a: "a", gender: Gender.male});
 		npcsB.push({noun: "wealthy proprietor", a: "a", gender: Math.random() > 0.3 ? Gender.male : Gender.female});
 	}
-	else if(party.location == world.loc.Rigard.Residential.street ||
-		    party.location == world.loc.Rigard.Slums.gate) {
-		if(party.location == world.loc.Rigard.Residential.street)
+	else if(party.location == RigardLoc.Residential.street ||
+		    party.location == RigardLoc.Slums.gate) {
+		if(party.location == RigardLoc.Residential.street)
 			parse.areaname = "residential district";
 		else
 			parse.areaname = "slums";
@@ -413,7 +399,7 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 		npcsB.push({noun: "washerwoman", a: "a", gender: Gender.female});
 		npcsB.push({noun: "seamstress", a: "a", gender: Gender.female});
 	}
-	else if(party.location == world.loc.Rigard.Gate) {
+	else if(party.location == RigardLoc.Gate) {
 		parse.areaname = "gate district";
 
 		npcsA.push({noun: "rugged guard", a: "a", gender: Math.random() > 0.4 ? Gender.male : Gender.female});
@@ -436,7 +422,7 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 		var idx = Rand(npcsA.length);
 		npc1 = npcsA[idx]; npcsA.remove(idx);
 		npc2 = npcsA[Rand(npcsA.length)];
-		if(party.location == world.loc.Rigard.Plaza)
+		if(party.location == RigardLoc.Plaza)
 			poshList = true;
 	}
 	else {
@@ -522,7 +508,7 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 		Text.Add("<i>“They're there for good reason!”</i> The [NPC2] sounds offended. <i>“You don't want the outlaws to come and murder us in our sleep, do you?”</i>", parse);
 		Text.NL();
 		Text.Add("<i>“Bah, I bet it's just a small group, hiding in the woods and hunting game. How dangerous could they be?”</i>", parse);
-	}, 1.0, function() { return party.location != world.loc.Rigard.Slums.gate; });
+	}, 1.0, function() { return party.location != RigardLoc.Slums.gate; });
 	scenes.AddEnc(function() {
 		if(poshList) {
 			Text.Add("<i>“I had a chance to visit the Royal Guard the other day, you know,”</i> the [NPC1] remarks.", parse);
@@ -750,17 +736,17 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		return npc;
 	}
 
-	if(party.location == world.loc.Rigard.Plaza)
+	if(party.location == RigardLoc.Plaza)
 		parse.areaname = "plaza";
-	else if(party.location == world.loc.Rigard.ShopStreet.street)
+	else if(party.location == RigardLoc.ShopStreet.street)
 		parse.areaname = "merchant's district";
-	else if(party.location == world.loc.Rigard.Residential.street)
+	else if(party.location == RigardLoc.Residential.street)
 		parse.areaname = "residential district";
-	else if(party.location == world.loc.Rigard.Slums.gate)
+	else if(party.location == RigardLoc.Slums.gate)
 		parse.areaname = "slums";
-	else if(party.location == world.loc.Rigard.Gate)
+	else if(party.location == RigardLoc.Gate)
 		parse.areaname = "gate district";
-	else if(party.location == world.loc.Rigard.Castle.Grounds)
+	else if(party.location == RigardLoc.Castle.Grounds)
 		parse.areaname = "royal grounds";
 	else return; // Incorrect location
 
@@ -809,17 +795,17 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		}
 	}
 
-	var nobleArea  = party.location == world.loc.Rigard.Plaza ? 1 :
-	                 party.location == world.loc.Rigard.ShopStreet.street ? 1 :
-	                 party.location == world.loc.Rigard.Castle.Grounds ? 1 : 0;
-	var middleArea = party.location == world.loc.Rigard.Plaza ? 1 :
-	                 party.location == world.loc.Rigard.ShopStreet.street ? 2 :
-	                 party.location == world.loc.Rigard.Residential.street ? 1 :
-	                 party.location == world.loc.Rigard.Gate ? 1 : 0;
-	var lowerArea  = party.location == world.loc.Rigard.ShopStreet.street ? 1 :
-	                 party.location == world.loc.Rigard.Residential.street ? 1 :
-	                 party.location == world.loc.Rigard.Gate ? 1 :
-	                 party.location == world.loc.Rigard.Slums.gate ? 1 : 0;
+	var nobleArea  = party.location == RigardLoc.Plaza ? 1 :
+	                 party.location == RigardLoc.ShopStreet.street ? 1 :
+	                 party.location == RigardLoc.Castle.Grounds ? 1 : 0;
+	var middleArea = party.location == RigardLoc.Plaza ? 1 :
+	                 party.location == RigardLoc.ShopStreet.street ? 2 :
+	                 party.location == RigardLoc.Residential.street ? 1 :
+	                 party.location == RigardLoc.Gate ? 1 : 0;
+	var lowerArea  = party.location == RigardLoc.ShopStreet.street ? 1 :
+	                 party.location == RigardLoc.Residential.street ? 1 :
+	                 party.location == RigardLoc.Gate ? 1 :
+	                 party.location == RigardLoc.Slums.gate ? 1 : 0;
 
 	var CreateNPC = function(lower, mid1, mid2, noble) {
 		var scenes = new EncounterTable();
@@ -1360,7 +1346,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		options.push({ nameStr : "Accept",
 			func : function() {
 				Text.Clear();
-				party.location = world.loc.Rigard.Residential.street;
+				party.location = RigardLoc.Residential.street;
 				Text.Add("Your face flushes slightly at his accusations, though it’s hard to say whether from embarrassment or anger. You curse at the little man, but tell him that if he wants you so desperately, you’ll come with him, if only he’ll stop shouting about your imagined sex life to the whole street.", parse);
 				Text.NL();
 				Text.Add("With your agreement secured, he grins widely, and leads on, speaking little, to your surprise. After a while, he remarks in a normal voice that there’s not much farther to go. Somehow, him holding up the agreement to be quiet so well just makes you feel all the more like you’ve been tricked.", parse);
@@ -1450,7 +1436,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.Add("The servant girl bites her lip, before finally glancing around, and slipping around to the merchant’s side of the counter and then underneath it. Your last glimpse of her face shows her licking her lips, an eager look in her eyes. It seems she doesn’t mind the direction her errand has taken after all.", parse);
 		Text.NL();
 		Text.Add("Unfortunately, the stand is solidly made, and the boards press closely together. You curse the quality carpentry. After hesitating a few seconds longer, you conclude that you’re not going to see much by standing around, and decide to move on.", parse);
-	}, 1.0, function() { return party.location == world.loc.Rigard.ShopStreet.street; });
+	}, 1.0, function() { return party.location == RigardLoc.ShopStreet.street; });
 
 	if(!scenes.Get()) {
 		if(!enteringArea)
@@ -1465,7 +1451,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 Scenes.Rigard.Lockdown = function() {
 	var parse = {
 		playername : player.name,
-		merchantsCitizens : (party.location == world.loc.Rigard.Gate) ? "merchants" : "citizens",
+		merchantsCitizens : (party.location == RigardLoc.Gate) ? "merchants" : "citizens",
 		assCunt : player.FirstVag() ? "cunt" : "ass"
 	};
 	
@@ -1547,7 +1533,7 @@ Scenes.Rigard.Lockdown = function() {
 	Text.Add("<i>“We should discuss a few details before we get started, so let’s go to the Maiden’s Bane and plan our moves,”</i> she says, leading you toward her favorite watering hole.", parse);
 	Text.Flush();
 
-	party.location = world.loc.Rigard.Tavern.common;
+	party.location = RigardLoc.Tavern.common;
 	world.TimeStep({hour : 1});
 
 	Gui.NextPrompt(function() {
@@ -1830,10 +1816,10 @@ Scenes.Rigard.Lockdown = function() {
 
 		Gui.Callstack.push(function() {
 			Gui.NextPrompt(function() {
-				MoveToLocation(world.loc.Rigard.Residential.street, {hour: 1});
+				MoveToLocation(RigardLoc.Residential.street, {hour: 1});
 			});
 		});
 	});
 }
 
-export { Rigard };
+export { Rigard, RigardLoc };

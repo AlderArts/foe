@@ -2,16 +2,16 @@
 
 
 import { world } from '../../world';
-import { Link, Scenes, EncounterTable } from '../../event';
+import { Event, Link, Scenes, EncounterTable } from '../../event';
 
-
+let PlazaLoc = new Event("Plaza");
 
 Scenes.Rigard.Plaza = {}
 
 //
 // Plaza
 //
-world.loc.Rigard.Plaza.description = function() {
+PlazaLoc.description = function() {
 	Text.Add("You are in a large open square surrounded by posh houses.");
 	Text.NL();
 	Text.Add("In the middle of the plaza is a large fountain in white marble, full of clear water. In the middle of the fountain on a raised pedestal stands a stone statue of the Lady Aria, covered in robes of silk that sway in the wind.");
@@ -24,7 +24,7 @@ world.loc.Rigard.Plaza.description = function() {
 	}
 }
 
-world.loc.Rigard.Plaza.onEntry = function() {
+PlazaLoc.onEntry = function() {
 	if(Math.random() < 0.15)
 		Scenes.Rigard.Chatter(true);
 	else if(Math.random() < 0.3)
@@ -33,41 +33,41 @@ world.loc.Rigard.Plaza.onEntry = function() {
 		PrintDefaultOptions();
 }
 
-world.loc.Rigard.Plaza.enc = new EncounterTable();
-world.loc.Rigard.Plaza.enc.AddEnc(function() { return Scenes.Rigard.Chatter;});
-world.loc.Rigard.Plaza.enc.AddEnc(function() { return Scenes.Rigard.Chatter2;});
-world.loc.Rigard.Plaza.enc.AddEnc(function() { return Scenes.Rigard.CityHistory;}, 1.0, function() { return rigard.flags["CityHistory"] == 0; });
-world.loc.Rigard.Plaza.enc.AddEnc(function() { return Scenes.Rigard.Plaza.LetterDelivery; }, 1.0, function() { return (world.time.hour >= 6 && world.time.hour < 21); });
-world.loc.Rigard.Plaza.enc.AddEnc(function() { return Scenes.Rigard.Plaza.StatueInfo; }, 1.0, function() { return (world.time.hour >= 6 && world.time.hour < 21) && (rigard.flags["TalkedStatue"] == 0 || (party.InParty(kiakai) && kiakai.flags["TalkedStatue"] == 0)); });
-world.loc.Rigard.Plaza.enc.AddEnc(function() { return Scenes.Krawitz.Duel;}, 3.0, function() { return rigard.Krawitz["Q"] == 1 && rigard.Krawitz["Duel"] == 0 && (world.time.hour >= 10 && world.time.hour < 20);});
-world.loc.Rigard.Plaza.enc.AddEnc(function() { return Scenes.Terry.ExplorePlaza; }, 1000000.0, function() { return rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry; });
+PlazaLoc.enc = new EncounterTable();
+PlazaLoc.enc.AddEnc(function() { return Scenes.Rigard.Chatter;});
+PlazaLoc.enc.AddEnc(function() { return Scenes.Rigard.Chatter2;});
+PlazaLoc.enc.AddEnc(function() { return Scenes.Rigard.CityHistory;}, 1.0, function() { return rigard.flags["CityHistory"] == 0; });
+PlazaLoc.enc.AddEnc(function() { return Scenes.Rigard.Plaza.LetterDelivery; }, 1.0, function() { return (world.time.hour >= 6 && world.time.hour < 21); });
+PlazaLoc.enc.AddEnc(function() { return Scenes.Rigard.Plaza.StatueInfo; }, 1.0, function() { return (world.time.hour >= 6 && world.time.hour < 21) && (rigard.flags["TalkedStatue"] == 0 || (party.InParty(kiakai) && kiakai.flags["TalkedStatue"] == 0)); });
+PlazaLoc.enc.AddEnc(function() { return Scenes.Krawitz.Duel;}, 3.0, function() { return rigard.Krawitz["Q"] == 1 && rigard.Krawitz["Duel"] == 0 && (world.time.hour >= 10 && world.time.hour < 20);});
+PlazaLoc.enc.AddEnc(function() { return Scenes.Terry.ExplorePlaza; }, 1000000.0, function() { return rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry; });
 
-world.loc.Rigard.Plaza.links.push(new Link(
+PlazaLoc.links.push(new Link(
 	"Gate", true, true,
 	null,
 	function() {
 		MoveToLocation(world.loc.Rigard.Gate, {minute: 20});
 	}
 ));
-world.loc.Rigard.Plaza.links.push(new Link(
+PlazaLoc.links.push(new Link(
 	"Residential", true, true,
 	null,
 	function() {
 		MoveToLocation(world.loc.Rigard.Residential.street, {minute: 10});
 	}
 ));
-world.loc.Rigard.Plaza.links.push(new Link(
+PlazaLoc.links.push(new Link(
 	"Merchants", true, true,
 	null,
 	function() {
 		MoveToLocation(world.loc.Rigard.ShopStreet.street, {minute: 10});
 	}
 ));
-world.loc.Rigard.Plaza.links.push(new Link(
+PlazaLoc.links.push(new Link(
 	"Plaza", true, false
 ));
 
-world.loc.Rigard.Plaza.links.push(new Link(
+PlazaLoc.links.push(new Link(
 	"Inn", true, function() { return !rigard.UnderLockdown(); },
 	function() {
 		// TODO
@@ -77,7 +77,7 @@ world.loc.Rigard.Plaza.links.push(new Link(
 		MoveToLocation(world.loc.Rigard.Inn.common);
 	}
 ));
-world.loc.Rigard.Plaza.links.push(new Link(
+PlazaLoc.links.push(new Link(
 	"Castle", true, function() { return !rigard.UnderLockdown(); },
 	function() {
 		Text.Add("The outer walls of the royal grounds stand near, and the castle looms on the hill above. ");
@@ -200,7 +200,7 @@ world.loc.Rigard.Plaza.links.push(new Link(
 	}
 ));
 
-world.loc.Rigard.Plaza.links.push(new Link(
+PlazaLoc.links.push(new Link(
 	"Krawitz", function() { return rigard.Krawitz["Q"] == 1; }, true,
 	function() {
 		if(rigard.Krawitz["Q"] == 1) {
@@ -213,7 +213,7 @@ world.loc.Rigard.Plaza.links.push(new Link(
 	}
 ));
 
-world.loc.Rigard.Plaza.links.push(new Link(
+PlazaLoc.links.push(new Link(
 	"Orellos", function() {
 		return Scenes.Lei.Tasks.Escort.OnTask();
 	}, function() {
@@ -233,7 +233,7 @@ world.loc.Rigard.Plaza.links.push(new Link(
 	}
 ));
 
-world.loc.Rigard.Plaza.events.push(new Link(
+PlazaLoc.events.push(new Link(
 	"Goldsmith", function() { return room69.flags["Hinges"] == Room69.HingesFlags.Asked; }, function() { return world.time.hour >= 9 && world.time.hour < 18; },
 	function() {
 		if(room69.flags["Hinges"] == Room69.HingesFlags.Asked) {
@@ -626,5 +626,6 @@ Scenes.Rigard.Plaza.LetterDelivery = function() {
 		tooltip : "Have a look at the note and throw it away."
 	});
 	Gui.SetButtonsFromList(options);
-
 }
+
+export { PlazaLoc };

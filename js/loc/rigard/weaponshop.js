@@ -4,18 +4,20 @@
 //
 
 import { world } from '../../world';
-import { Link, Scenes } from '../../event';
+import { Event, Link, Scenes } from '../../event';
+
+let WeaponShopLoc = new Event("The Pale Flame");
 
 Scenes.Rigard.WeaponShop = {};
 Scenes.Rigard.WeaponShop.IsOpen = function() {
 	return (world.time.hour >= 8 && world.time.hour < 17) && !rigard.UnderLockdown();
 }
 
-world.loc.Rigard.ShopStreet.WeaponShop.description = function() {
+WeaponShopLoc.description = function() {
 	Scenes.Cassidy.ShopDesc();
 }
 
-world.loc.Rigard.ShopStreet.WeaponShop.onEntry = function() {
+WeaponShopLoc.onEntry = function() {
 	var first = cassidy.flags["Met"] < Cassidy.Met.Met;
 	if(first) {
 		Scenes.Cassidy.First();
@@ -39,14 +41,14 @@ world.loc.Rigard.ShopStreet.WeaponShop.onEntry = function() {
 
 //TODO
 
-world.loc.Rigard.ShopStreet.WeaponShop.events.push(new Link(
+WeaponShopLoc.events.push(new Link(
 	"Cassidy", true, true, null,
 	function() {
 		Scenes.Cassidy.Approach();
 	}
 ));
 
-world.loc.Rigard.ShopStreet.WeaponShop.events.push(new Link(
+WeaponShopLoc.events.push(new Link(
 	"Leave", true, true, null,
 	function() {
 		MoveToLocation(world.loc.Rigard.ShopStreet.street, {minute: 5});
@@ -78,3 +80,5 @@ Scenes.Rigard.WeaponShop.StreetDesc = function() {
 	}
 	Text.NL();
 }
+
+export { WeaponShopLoc };

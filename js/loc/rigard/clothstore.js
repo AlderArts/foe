@@ -1,18 +1,20 @@
 
 
 import { world } from '../../world';
-import { Link, Scenes } from '../../event';
+import { Event, Link, Scenes } from '../../event';
 
 //
 // Sliken Delights
 //
+
+let ClothShopLoc = new Event("Silken Delights");
 
 Scenes.Rigard.ClothShop = {};
 Scenes.Rigard.ClothShop.IsOpen = function() {
 	return (world.time.hour >= 9 && world.time.hour < 20) && !rigard.UnderLockdown();
 }
 
-world.loc.Rigard.ShopStreet.ClothShop.onEntry = function() {
+ClothShopLoc.onEntry = function() {
 	var parse = {};
 
 	if(party.Two())
@@ -49,7 +51,7 @@ world.loc.Rigard.ShopStreet.ClothShop.onEntry = function() {
 		PrintDefaultOptions();
 }
 
-world.loc.Rigard.ShopStreet.ClothShop.description = function() {
+ClothShopLoc.description = function() {
 	var parse = {};
 	Text.Add("The Silken Delights clothing shop is clearly a high-end establishment, with two private guards, red velvet curtains and expensive-looking paintings all over. The counter is straight ahead from the door, and draped with the same red velvet as the walls and windows. Long racks of clothes stretch down a hallway to the left where you can see large shelves of shoes and four large stalls along the back wall which you assume are fitting rooms for customers. The whole store is amazingly clean, with no dirt or dust anywhere. There are hat racks by the counter with all sorts of fancy looking hats.", parse);
 	Text.NL();
@@ -64,12 +66,12 @@ world.loc.Rigard.ShopStreet.ClothShop.description = function() {
 }
 
 /*
-world.loc.Rigard.ShopStreet.ClothShop.enc = new EncounterTable();
-world.loc.Rigard.ShopStreet.ClothShop.enc.AddEnc(function() { return Scenes.Rigard.Plaza.LetterDelivery; }, 1.0, function() { return (world.time.hour >= 6 && world.time.hour < 21); });
-world.loc.Rigard.ShopStreet.ClothShop.enc.AddEnc(function() { return Scenes.Rigard.Plaza.StatueInfo; }, 1.0, function() { return (world.time.hour >= 6 && world.time.hour < 21) && (rigard.flags["TalkedStatue"] == 0 || (party.InParty(kiakai) && kiakai.flags["TalkedStatue"] == 0)); });
+ClothShopLoc.enc = new EncounterTable();
+ClothShopLoc.enc.AddEnc(function() { return Scenes.Rigard.Plaza.LetterDelivery; }, 1.0, function() { return (world.time.hour >= 6 && world.time.hour < 21); });
+ClothShopLoc.enc.AddEnc(function() { return Scenes.Rigard.Plaza.StatueInfo; }, 1.0, function() { return (world.time.hour >= 6 && world.time.hour < 21) && (rigard.flags["TalkedStatue"] == 0 || (party.InParty(kiakai) && kiakai.flags["TalkedStatue"] == 0)); });
 */
 
-world.loc.Rigard.ShopStreet.ClothShop.events.push(new Link(
+ClothShopLoc.events.push(new Link(
 	"Nexelle", true, true,
 	function() {
 
@@ -222,7 +224,7 @@ world.loc.Rigard.ShopStreet.ClothShop.events.push(new Link(
 	}
 ));
 
-world.loc.Rigard.ShopStreet.ClothShop.events.push(new Link(
+ClothShopLoc.events.push(new Link(
 	"Fera", true, function() { return fera.timeout.Expired(); },
 	function() {
 		var parse = {};
@@ -247,14 +249,14 @@ world.loc.Rigard.ShopStreet.ClothShop.events.push(new Link(
 	function() { Scenes.Fera.Interact(); }
 ));
 
-world.loc.Rigard.ShopStreet.ClothShop.events.push(new Link(
+ClothShopLoc.events.push(new Link(
 	"Leave", true, true, null,
 	function() {
 		MoveToLocation(world.loc.Rigard.ShopStreet.street, {minute: 5});
 	}
 ));
 
-world.loc.Rigard.ShopStreet.ClothShop.endDescription = function() {
+ClothShopLoc.endDescription = function() {
 	var parse = {};
 
 	if(world.time.hour >= 9 && world.time.hour < 12)
@@ -274,3 +276,5 @@ world.loc.Rigard.ShopStreet.ClothShop.endDescription = function() {
 		Text.NL();
 	}
 }
+
+export { ClothShopLoc };

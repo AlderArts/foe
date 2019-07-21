@@ -4,9 +4,11 @@
 //
 
 import { world } from '../../world';
-import { Link, Scenes, EncounterTable } from '../../event';
+import { Event, Link, Scenes, EncounterTable } from '../../event';
 import { Shop } from '../../shop';
 import { Items } from '../../item';
+
+let ArmorShopLoc = new Event("Twopenny's");
 
 Scenes.Rigard.ArmorShop = {};
 Scenes.Rigard.ArmorShop.IsOpen = function() {
@@ -190,7 +192,7 @@ Scenes.Rigard.ArmorShop.CreateShop = function() {
 Scenes.Rigard.ArmorShop.CreateShop();
 
 
-world.loc.Rigard.ShopStreet.ArmorShop.description = function() {
+ArmorShopLoc.description = function() {
 	var parse = {};
 	
 	var scenes = new EncounterTable();
@@ -226,14 +228,14 @@ world.loc.Rigard.ShopStreet.ArmorShop.description = function() {
 	Text.Add("You weigh your options.", parse);
 }
 
-world.loc.Rigard.ShopStreet.ArmorShop.events.push(new Link(
+ArmorShopLoc.events.push(new Link(
 	"Donovan", true, true, null,
 	function() {
 		Scenes.Rigard.ArmorShop.Prompt();
 	}
 ));
 
-world.loc.Rigard.ShopStreet.ArmorShop.events.push(new Link(
+ArmorShopLoc.events.push(new Link(
 	"Leave", true, true, null,
 	function() {
 		MoveToLocation(world.loc.Rigard.ShopStreet.street, {minute: 5});
@@ -243,7 +245,7 @@ world.loc.Rigard.ShopStreet.ArmorShop.events.push(new Link(
 /*
 [Buy][Sell][Specialties][Donovan][Back]
  */
-world.loc.Rigard.ShopStreet.ArmorShop.onEntry = function() {
+ArmorShopLoc.onEntry = function() {
 	if(rigard.Twopenny["Met"] < 1)
 		Scenes.Rigard.ArmorShop.FirstEntry();
 	//TODO LINK NEW STUFF
@@ -540,3 +542,5 @@ Scenes.Rigard.ArmorShop.Talk = function(backFunc) {
 		backFunc();
 	});
 }
+
+export { ArmorShopLoc };

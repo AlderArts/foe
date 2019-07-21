@@ -1,7 +1,16 @@
 
 import { world } from '../../world';
-import { Link, Scenes } from '../../event';
+import { Event, Link, Scenes } from '../../event';
 import { Rigard } from './rigard';
+
+let InnLoc = {
+	common    : new Event("Lady's Blessing"),
+	backroom  : new Event("Back room"),
+	cellar    : new Event("Cellar"),
+	room      : new Event(function() { return "Room " + rigard.LB["RoomNr"]; }),
+	room69    : new Event("Room 369"),
+	penthouse : new Event("Penthouse")
+};
 
 Scenes.Rigard.LB = {};
 
@@ -40,13 +49,13 @@ Rigard.LB.HasRentedRoom = function() {
 //
 // Bar
 //
-world.loc.Rigard.Inn.common.description = function() {
+InnLoc.common.description = function() {
 	Text.Add("You are in the Lady's Blessing's main room.");
 	Text.NL();
 	Text.Flush();
 }
 
-world.loc.Rigard.Inn.common.links.push(new Link(
+InnLoc.common.links.push(new Link(
 	"Outside", true, true,
 	null,
 	function() {
@@ -54,31 +63,31 @@ world.loc.Rigard.Inn.common.links.push(new Link(
 	}
 ));
 
-world.loc.Rigard.Inn.common.links.push(new Link(
+InnLoc.common.links.push(new Link(
 	"Penthouse", function() { return twins.flags["Met"] >= Twins.Met.Access; }, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Rigard.Inn.penthouse, {minute: 5});
+		MoveToLocation(InnLoc.penthouse, {minute: 5});
 	}
 ));
 
 // Twins' room
-world.SaveSpots["LB2"] = world.loc.Rigard.Inn.penthouse;
-world.loc.Rigard.Inn.penthouse.SaveSpot = "LB2";
-world.loc.Rigard.Inn.penthouse.safe = function() { return true; };
-world.loc.Rigard.Inn.penthouse.description = function() {
+world.SaveSpots["LB2"] = InnLoc.penthouse;
+InnLoc.penthouse.SaveSpot = "LB2";
+InnLoc.penthouse.safe = function() { return true; };
+InnLoc.penthouse.description = function() {
 	Text.Add("You are in the Lady's Blessing's penthouse.");
 	Text.NL();
 	Text.Flush();
 }
-world.loc.Rigard.Inn.penthouse.links.push(new Link(
+InnLoc.penthouse.links.push(new Link(
 	"Downstairs", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Rigard.Inn.common, {minute: 5});
+		MoveToLocation(InnLoc.common, {minute: 5});
 	}
 ));
-world.loc.Rigard.Inn.penthouse.events.push(new Link(
+InnLoc.penthouse.events.push(new Link(
 	"Twins", true, true,
 	null,
 	function() {
@@ -90,27 +99,27 @@ world.loc.Rigard.Inn.penthouse.events.push(new Link(
 
 
 /* TODO: Keep?
-world.loc.Rigard.Inn.common.links.push(new Link(
+InnLoc.common.links.push(new Link(
 	"Backroom", true, false,
 	function() {
 		Text.Add("Go backroom?<br>");
 	},
 	function() {
-		MoveToLocation(world.loc.Rigard.Inn.backroom);
+		MoveToLocation(InnLoc.backroom);
 	}
 ));
-world.loc.Rigard.Inn.common.links.push(new Link(
+InnLoc.common.links.push(new Link(
 	"Cellar", true, false,
 	function() {
 		Text.Add("Go cellar?<br>");
 	},
 	function() {
-		MoveToLocation(world.loc.Rigard.Inn.cellar);
+		MoveToLocation(InnLoc.cellar);
 	}
 ));
 */
 
-world.loc.Rigard.Inn.common.endDescription = function() {
+InnLoc.common.endDescription = function() {
 	if(rigard.Krawitz["Q"] < Rigard.KrawitzQ.HeistDone) {
 		Text.Add("You see the daintily attractive vixen-morph hard at work cleaning up the various dishes and tankards left behind by previous customers. She scurries ceaselessly back and forth, gathering dirty kitchenware and conveying it to the kitchens, only to return for a fresh load.");
 		if(player.Int() > 30) {
@@ -126,7 +135,7 @@ world.loc.Rigard.Inn.common.endDescription = function() {
 }
 
 //TODO: Companion reactions?
-world.loc.Rigard.Inn.common.DrunkHandler = function() {
+InnLoc.common.DrunkHandler = function() {
 	var parse = {};
 	var busy = Rigard.LB.Busy();
 	parse["busy"] = busy == Rigard.LB.BusyState.busy ? "few places" : "spot";
@@ -138,7 +147,7 @@ world.loc.Rigard.Inn.common.DrunkHandler = function() {
 	Gui.NextPrompt();
 }
 
-world.loc.Rigard.Inn.common.onEntry = function(preventClear, oldLocation) {
+InnLoc.common.onEntry = function(preventClear, oldLocation) {
 	if(Scenes.Vaughn.Tasks.Poisoning.InnAvailable()) {
 		Scenes.Vaughn.Tasks.Poisoning.ArrivalAtInn(false, oldLocation);
 		return;
@@ -739,7 +748,7 @@ Scenes.Rigard.LB.OrvinTalkPrompt = function(innPrompt) {
 		});
 	}
 	
-	var leiPresent = lei.IsAtLocation(world.loc.Rigard.Inn.common);
+	var leiPresent = lei.IsAtLocation(InnLoc.common);
 	
 	if(lei.flags["Met"] < Lei.Met.KnowName) {
 		options.push({ nameStr : "Stranger",
@@ -1696,20 +1705,20 @@ Scenes.Rigard.LB.RandomRoom = function(companion) {
 }
 
 Scenes.Rigard.LB.RegularRoom = function(companion) {
-	var room = world.loc.Rigard.Inn.room;
+	var room = InnLoc.room;
 	rigard.LB["RoomComp"] = party.GetSlot(companion);
 	MoveToLocation(room, {minute : 5});
 }
 
-world.SaveSpots["LB"] = world.loc.Rigard.Inn.room;
-world.loc.Rigard.Inn.room.SaveSpot = "LB";
-world.loc.Rigard.Inn.room.safe = function() { return true; };
-world.loc.Rigard.Inn.room.description = function() {
+world.SaveSpots["LB"] = InnLoc.room;
+InnLoc.room.SaveSpot = "LB";
+InnLoc.room.safe = function() { return true; };
+InnLoc.room.description = function() {
 	Text.Add("A pair of large beds stand at opposite walls, with a small table, four chairs, and a cabinet between them. The room is spotless, not a single spec of dust anywhere, and the furniture is decorated with tasteful ironwork and carvings. Approaching a bed, you find that the sheets have a light lemony scent about them. You touch a pillow, and your finger sinks gently into its downy softness. Sleeping here would probably be incredibly refreshing and comfortable. Or you could also do something else.");
 	Text.NL();
 	Text.Flush();
 }
-world.loc.Rigard.Inn.room.events.push(new Link(
+InnLoc.room.events.push(new Link(
 	function() {
 		var companion = party.Get(rigard.LB["RoomComp"]);
 		if(companion) return companion.name;
@@ -1730,7 +1739,7 @@ world.loc.Rigard.Inn.room.events.push(new Link(
 			companion.InnPrompt();
 	}
 ));
-world.loc.Rigard.Inn.room.SleepFunc = function() {
+InnLoc.room.SleepFunc = function() {
 	var comp = party.Get(rigard.LB["RoomComp"]);
 	var parse = {
 		
@@ -1774,7 +1783,7 @@ world.loc.Rigard.Inn.room.SleepFunc = function() {
 			
 			Text.Add("You notice that it's rather late, and you were actually supposed to leave the room already. You decide that overstaying a little can't hurt much as you pack your things and head back downstairs. Entering the common room, you notice [ikname] frowning slightly in your direction.", parse);
 			Text.NL();
-			party.location = world.loc.Rigard.Inn.common;
+			party.location = InnLoc.common;
 		}
 		
 		Text.Flush();
@@ -1787,18 +1796,18 @@ world.loc.Rigard.Inn.room.SleepFunc = function() {
 	});
 }
 
-world.loc.Rigard.Inn.room.links.push(new Link(
+InnLoc.room.links.push(new Link(
 	"Leave", true, true,
 	function() {
 		Text.Add("You could head back downstairs. ");
 	},
 	function() {
-		MoveToLocation(world.loc.Rigard.Inn.common, {minute: 5});
+		MoveToLocation(InnLoc.common, {minute: 5});
 	}
 ));
 
 // SET UP EVENTS/LINKS
-world.loc.Rigard.Inn.common.events.push(new Link(
+InnLoc.common.events.push(new Link(
 	"Order food",
 	true, function() { return party.coin >= Rigard.LB.MealCost(); },
 	function() {
@@ -1818,7 +1827,7 @@ world.loc.Rigard.Inn.common.events.push(new Link(
 	Scenes.Rigard.LB.OrderFood
 ));
 
-world.loc.Rigard.Inn.common.events.push(new Link(
+InnLoc.common.events.push(new Link(
 	function() {
 		if(Rigard.LB.OrvinIsInnkeeper())
 			return !Rigard.LB.KnowsOrvin() ? "Innkeeper" : "Orvin";
@@ -1875,7 +1884,7 @@ world.loc.Rigard.Inn.common.events.push(new Link(
 ));
 
 
-world.loc.Rigard.Inn.common.events.push(new Link(
+InnLoc.common.events.push(new Link(
 	"Room", Rigard.LB.HasRentedRoom, true,
 	function() {
 		if(Rigard.LB.HasRentedRoom()) {
@@ -1887,7 +1896,7 @@ world.loc.Rigard.Inn.common.events.push(new Link(
 	Scenes.Rigard.LB.GotoRoom
 ));
 
-world.loc.Rigard.Inn.common.events.push(new Link(
+InnLoc.common.events.push(new Link(
 	"Room 369", function() { return room69.flags["Rel"] != Room69.RelFlags.NotMet; }, true,
 	function() {
 		if(room69.flags["Rel"] != Room69.RelFlags.NotMet) {
@@ -1905,3 +1914,5 @@ world.loc.Rigard.Inn.common.events.push(new Link(
 			Scenes.Room69.Normal69();
 	}
 ));
+
+export { InnLoc };

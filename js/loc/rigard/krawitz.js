@@ -8,8 +8,7 @@ import { world } from '../../world';
 import { Event, Link, Scenes, EncounterTable } from '../../event';
 import { GetDEBUG } from '../../../app';
 
-world.loc.Rigard.Krawitz =
-{
+let KrawitzLoc = {
 	street    : new Event("Krawitz's Estate"),
 	servants  : new Event("Servants' Quarters"),
 	grounds   : new Event("Grounds"),
@@ -121,25 +120,25 @@ Scenes.Krawitz.EntitySuspicion = function(entity) {
 //
 // Mansion
 //
-world.loc.Rigard.Krawitz.street.description = function() {
+KrawitzLoc.street.description = function() {
 	Text.Add("You are in front of Krawitz's estate.<br>");
 }
 
-world.SaveSpots["Krawitz"] = world.loc.Rigard.Krawitz.street;
-world.loc.Rigard.Krawitz.street.SaveSpot = "Krawitz";
+world.SaveSpots["Krawitz"] = KrawitzLoc.street;
+KrawitzLoc.street.SaveSpot = "Krawitz";
 
-world.loc.Rigard.Krawitz.street.onEntry = function() {
+KrawitzLoc.street.onEntry = function() {
 	Scenes.Krawitz.Scouting();
 }
 
-world.loc.Rigard.Krawitz.street.links.push(new Link(
+KrawitzLoc.street.links.push(new Link(
 	"Plaza", true, true,
 	null,
 	function() {
 		MoveToLocation(world.loc.Rigard.Plaza, {minute: 10});
 	}
 ));
-world.loc.Rigard.Krawitz.street.links.push(new Link(
+KrawitzLoc.street.links.push(new Link(
 	"Back street", function() { return rigard.Krawitz["Work"] == 1;}, true,
 	function() {
 		if(rigard.Krawitz["Work"] == 1) {
@@ -151,7 +150,7 @@ world.loc.Rigard.Krawitz.street.links.push(new Link(
 		Scenes.Krawitz.WorkWork();
 	}
 ));
-world.loc.Rigard.Krawitz.street.links.push(new Link(
+KrawitzLoc.street.links.push(new Link(
 	"Grounds", true, function() { return world.time.hour >= 20; },
 	function() {
 		Text.Add("Sneak into the main grounds? Better do this in the late hours of the day, though not too late. You suspect you'll need all the time you can get once inside.<br>");
@@ -164,11 +163,11 @@ world.loc.Rigard.Krawitz.street.links.push(new Link(
 //
 // Grounds
 //
-world.loc.Rigard.Krawitz.grounds.enc = new EncounterTable();
-world.loc.Rigard.Krawitz.grounds.enc.AddEnc(function() { return Scenes.Krawitz.PatrollingGuards;}, 1.0, function() { return !Scenes.Krawitz.stat.Orgy; });
-world.loc.Rigard.Krawitz.grounds.enc.AddEnc(function() { return Scenes.Krawitz.WanderingServants;}, 1.0, function() { return !Scenes.Krawitz.stat.ServantSpikedWine; });
+KrawitzLoc.grounds.enc = new EncounterTable();
+KrawitzLoc.grounds.enc.AddEnc(function() { return Scenes.Krawitz.PatrollingGuards;}, 1.0, function() { return !Scenes.Krawitz.stat.Orgy; });
+KrawitzLoc.grounds.enc.AddEnc(function() { return Scenes.Krawitz.WanderingServants;}, 1.0, function() { return !Scenes.Krawitz.stat.ServantSpikedWine; });
 
-world.loc.Rigard.Krawitz.grounds.description = function() {
+KrawitzLoc.grounds.description = function() {
 	Text.Add("There is a lush garden spreading out before you, providing many hiding spots, should you need to avoid patrolling guardsmen or servants. Three buildings line the side of the grounds; if your guesses are correct, the one to your left houses the servants and the one on the right is some sort of bathhouse. ");
 	if(!Scenes.Krawitz.stat.Orgy)
 		Text.Add("Sounds of decidedly feminine laughter echo between the stone pillars. Clearly, someone has a party going on.");
@@ -178,7 +177,7 @@ world.loc.Rigard.Krawitz.grounds.description = function() {
 	Text.Add("At the back of the estate stands the main building, a two story mansion.");
 }
 
-world.loc.Rigard.Krawitz.grounds.onEntry = function() {
+KrawitzLoc.grounds.onEntry = function() {
 	var enc = new EncounterTable();
 	enc.AddEnc(Scenes.Krawitz.PatrollingGuards,  1.0, function() { return !Scenes.Krawitz.stat.Orgy; });
 	enc.AddEnc(Scenes.Krawitz.WanderingServants, 1.0, function() { return !Scenes.Krawitz.stat.ServantSpikedWine; });
@@ -186,14 +185,14 @@ world.loc.Rigard.Krawitz.grounds.onEntry = function() {
 	enc.Get();
 }
 
-world.loc.Rigard.Krawitz.grounds.links.push(new Link(
+KrawitzLoc.grounds.links.push(new Link(
 	"Servants'", true, true,
 	null,
 	function() {
 		var parse = {
 			
 		};
-		party.location = world.loc.Rigard.Krawitz.servants;
+		party.location = KrawitzLoc.servants;
 		
 		var ServantPrompt = function() {
 			Text.Clear();
@@ -201,7 +200,7 @@ world.loc.Rigard.Krawitz.grounds.links.push(new Link(
 			var options = new Array();
 			options.push({ nameStr : "Grounds",
 				func : function() {
-					MoveToLocation(world.loc.Rigard.Krawitz.grounds);
+					MoveToLocation(KrawitzLoc.grounds);
 				}, enabled : true,
 				tooltip : "Move back to the grounds"
 			});
@@ -296,7 +295,7 @@ world.loc.Rigard.Krawitz.grounds.links.push(new Link(
 									Text.Flush();
 									
 									Gui.NextPrompt(function() {
-										MoveToLocation(world.loc.Rigard.Krawitz.grounds);
+										MoveToLocation(KrawitzLoc.grounds);
 									});
 								}, enabled : true,
 								tooltip : "Leave them to it; they likely won’t bother you for the rest of the night."
@@ -314,7 +313,7 @@ world.loc.Rigard.Krawitz.grounds.links.push(new Link(
 									Scenes.Krawitz.stat.ServantOrgySetup = true;
 									
 									Gui.NextPrompt(function() {
-										MoveToLocation(world.loc.Rigard.Krawitz.grounds);
+										MoveToLocation(KrawitzLoc.grounds);
 										Scenes.Krawitz.AddSuspicion(5, true);
 									});
 								}, enabled : true,
@@ -363,7 +362,7 @@ world.loc.Rigard.Krawitz.grounds.links.push(new Link(
 			ServantPrompt();
 	}
 ));
-world.loc.Rigard.Krawitz.grounds.links.push(new Link(
+KrawitzLoc.grounds.links.push(new Link(
 	"Mansion", true, true,
 	null,
 	function() {
@@ -381,16 +380,16 @@ world.loc.Rigard.Krawitz.grounds.links.push(new Link(
 		Text.Flush();
 		
 		Gui.NextPrompt(function() {
-			MoveToLocation(world.loc.Rigard.Krawitz.Mansion.hall, {minute: 10});
+			MoveToLocation(KrawitzLoc.Mansion.hall, {minute: 10});
 		});
 	}
 ));
-world.loc.Rigard.Krawitz.grounds.links.push(new Link(
+KrawitzLoc.grounds.links.push(new Link(
 	"Bathhouse", true, function() { return !Scenes.Krawitz.stat.Orgy; },
 	null,
 	function() { Scenes.Krawitz.Bathhouse(); }
 ));
-world.loc.Rigard.Krawitz.grounds.links.push(new Link(
+KrawitzLoc.grounds.links.push(new Link(
 	"Street", true, true,
 	function() {
 		Text.NL();
@@ -425,7 +424,7 @@ world.loc.Rigard.Krawitz.grounds.links.push(new Link(
 //
 // Mansion: Hall
 //
-world.loc.Rigard.Krawitz.Mansion.hall.description = function() {
+KrawitzLoc.Mansion.hall.description = function() {
 	if(Math.random() < 0.3) {
 		Text.Add("As you step inside the main building of the Krawitz estate, a shiver crawls up your spine and you have a distinct feeling that something is amiss. You quickly scan your surroundings and spot a shadow out of the corner of your eye. On pure reflex, you give chase! Upon turning toward the hallway from which the phantasm disappeared to, you’re baffled and somewhat relieved when you don’t find anything… was that just your imagination?");
 		Text.NL();
@@ -442,20 +441,20 @@ world.loc.Rigard.Krawitz.Mansion.hall.description = function() {
 	Text.Flush();
 }
 
-world.loc.Rigard.Krawitz.Mansion.hall.links.push(new Link(
+KrawitzLoc.Mansion.hall.links.push(new Link(
 	"Grounds", true, true,
 	function() {
 		Text.Add("Go outside?<br>");
 	},
 	function() {
-		MoveToLocation(world.loc.Rigard.Krawitz.grounds);
+		MoveToLocation(KrawitzLoc.grounds);
 	}
 ));
-world.loc.Rigard.Krawitz.Mansion.hall.links.push(new Link(
+KrawitzLoc.Mansion.hall.links.push(new Link(
 	"Kitchen", true, true,
 	null,
 	function() {
-		party.location = world.loc.Rigard.Krawitz.Mansion.kitchen;
+		party.location = KrawitzLoc.Mansion.kitchen;
 		Text.Clear();
 		Text.Add("The kitchen is relatively quiet during the dark hours, with only one cook being up and about, working on some leftover dishes. The rafters are bulging with delicious-looking foods, fresh spices hanging in rows along one wall, lending a pleasant aroma to the room.");
 		Text.NL();
@@ -502,28 +501,28 @@ world.loc.Rigard.Krawitz.Mansion.hall.links.push(new Link(
 		Text.Add("You excuse yourself and leave the bristling chef, before you arouse further suspicion.");
 		Text.Flush();
 		Gui.NextPrompt(function() {
-			MoveToLocation(world.loc.Rigard.Krawitz.Mansion.hall, {minute: 10});
+			MoveToLocation(KrawitzLoc.Mansion.hall, {minute: 10});
 			Scenes.Krawitz.AddSuspicion(3, true);
 		});
 	}
 ));
-world.loc.Rigard.Krawitz.Mansion.hall.links.push(new Link(
+KrawitzLoc.Mansion.hall.links.push(new Link(
 	"Storeroom", true, true,
 	function() {
 		Text.Add("Go to the storeroom?<br>");
 	},
 	function() {
-		MoveToLocation(world.loc.Rigard.Krawitz.Mansion.storeroom);
+		MoveToLocation(KrawitzLoc.Mansion.storeroom);
 	}
 ));
 
-world.loc.Rigard.Krawitz.Mansion.hall.links.push(new Link(
+KrawitzLoc.Mansion.hall.links.push(new Link(
 	"Study", true, function() { return Scenes.Krawitz.stat.Orgy || (!Scenes.Krawitz.stat.TFdKrawitz && Scenes.Krawitz.stat.KrawitzFood != 3); },
 	function() {
 		Text.Add("Go to Krawitz' study?<br>");
 	},
 	function() {
-		party.location = world.loc.Rigard.Krawitz.Mansion.study;
+		party.location = KrawitzLoc.Mansion.study;
 		var parse = {
 			
 		};
@@ -603,7 +602,7 @@ world.loc.Rigard.Krawitz.Mansion.hall.links.push(new Link(
 						Text.Flush();
 						
 						Gui.NextPrompt(function() {
-							MoveToLocation(world.loc.Rigard.Krawitz.Mansion.hall, {minute: 10});
+							MoveToLocation(KrawitzLoc.Mansion.hall, {minute: 10});
 							Scenes.Krawitz.AddSuspicion(1, true);
 						});
 					}, enabled : true,
@@ -627,7 +626,7 @@ world.loc.Rigard.Krawitz.Mansion.hall.links.push(new Link(
 							Scenes.Krawitz.stat.TFdKrawitz = true;
 							
 							Gui.NextPrompt(function() {
-								MoveToLocation(world.loc.Rigard.Krawitz.Mansion.hall, {minute: 10});
+								MoveToLocation(KrawitzLoc.Mansion.hall, {minute: 10});
 								Scenes.Krawitz.AddSuspicion(3, true);
 							});
 						}, enabled : true,
@@ -664,7 +663,7 @@ Scenes.Krawitz.KrawitzPrompt = function() {
 			Text.Flush();
 			
 			Gui.NextPrompt(function() {
-				MoveToLocation(world.loc.Rigard.Krawitz.Mansion.hall, {minute: 10});
+				MoveToLocation(KrawitzLoc.Mansion.hall, {minute: 10});
 				Scenes.Krawitz.AddSuspicion(1, true);
 			});
 		}, enabled : true,
@@ -771,7 +770,7 @@ Scenes.Krawitz.Flee = function(entryPoint) {
 //
 // Mansion: Storeroom
 //
-world.loc.Rigard.Krawitz.Mansion.storeroom.description = function() {
+KrawitzLoc.Mansion.storeroom.description = function() {
 	Text.Add("You are in a rather dusty storeroom, filled with boxes, crates and chests. A quick survey of the room reveals nothing of immediate value. A small glass cabinet filled with various flasks, partly obscured by a rolled up carpet, looks like it could be interesting.");
 	if(!Scenes.Krawitz.stat.TFItem) {
 		if(Scenes.Krawitz.stat.ChestLocKnown) {
@@ -786,15 +785,15 @@ world.loc.Rigard.Krawitz.Mansion.storeroom.description = function() {
 	Text.Flush();
 }
 
-world.loc.Rigard.Krawitz.Mansion.storeroom.links.push(new Link(
+KrawitzLoc.Mansion.storeroom.links.push(new Link(
 	"Hall", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Rigard.Krawitz.Mansion.hall);
+		MoveToLocation(KrawitzLoc.Mansion.hall);
 	}
 ));
 
-world.loc.Rigard.Krawitz.Mansion.storeroom.events.push(new Link(
+KrawitzLoc.Mansion.storeroom.events.push(new Link(
 	"Cabinet", function() { return !Scenes.Krawitz.stat.LustPotion; }, true,
 	null,
 	function() {
@@ -817,7 +816,7 @@ world.loc.Rigard.Krawitz.Mansion.storeroom.events.push(new Link(
 	}
 ));
 
-world.loc.Rigard.Krawitz.Mansion.storeroom.events.push(new Link(
+KrawitzLoc.Mansion.storeroom.events.push(new Link(
 	"Chest", function() { return !Scenes.Krawitz.stat.TFItem && (Scenes.Krawitz.stat.ChestLocKnown || player.Int() > 40); }, true,
 	null,
 	function() {
@@ -838,19 +837,19 @@ world.loc.Rigard.Krawitz.Mansion.storeroom.events.push(new Link(
 //
 // Mansion: Study
 //
-world.loc.Rigard.Krawitz.Mansion.study.description = function() {
+KrawitzLoc.Mansion.study.description = function() {
 	Text.Add("The room is empty, though the fireplace is still blazing merrily. On a nearby table, a half eaten meal is growing cold.");
 }
 
-world.loc.Rigard.Krawitz.Mansion.study.links.push(new Link(
+KrawitzLoc.Mansion.study.links.push(new Link(
 	"Hall", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Rigard.Krawitz.Mansion.hall, {minute: 10});
+		MoveToLocation(KrawitzLoc.Mansion.hall, {minute: 10});
 	}
 ));
 
-world.loc.Rigard.Krawitz.Mansion.study.events.push(new Link(
+KrawitzLoc.Mansion.study.events.push(new Link(
 	"Sword", function() { return !Scenes.Krawitz.stat.HasSword; }, true,
 	null,
 	function() {
@@ -861,7 +860,7 @@ world.loc.Rigard.Krawitz.Mansion.study.events.push(new Link(
 		Gui.NextPrompt();
 	}
 ));
-world.loc.Rigard.Krawitz.Mansion.study.events.push(new Link(
+KrawitzLoc.Mansion.study.events.push(new Link(
 	"Binder", function() { return !Scenes.Krawitz.stat.HasBinder; }, true,
 	null,
 	function() {
@@ -1064,7 +1063,7 @@ Scenes.Krawitz.EnteringTheWork = function() {
 	party.coin += 50;
 	
 	Gui.NextPrompt(function() {
-		MoveToLocation(world.loc.Rigard.Krawitz.grounds, {minute: 30});
+		MoveToLocation(KrawitzLoc.grounds, {minute: 30});
 	});
 }
 
@@ -1149,7 +1148,7 @@ Scenes.Krawitz.SneakingIn = function() {
 	
 	Text.Flush();
 	Gui.NextPrompt(function() {
-		MoveToLocation(world.loc.Rigard.Krawitz.grounds, {minute: 10});
+		MoveToLocation(KrawitzLoc.grounds, {minute: 10});
 	});
 }
 
@@ -1635,7 +1634,7 @@ Scenes.Krawitz.StealingClothes = function() {
 			
 			Scenes.Krawitz.stat.HasServantClothes = true;
 			
-			MoveToLocation(world.loc.Rigard.Krawitz.grounds, {minute: 10});
+			MoveToLocation(KrawitzLoc.grounds, {minute: 10});
 		}, enabled : true,
 		tooltip : "Perhaps you could find some servants’ garb in the storeroom, to better blend in?"
 	});
@@ -1645,7 +1644,7 @@ Scenes.Krawitz.StealingClothes = function() {
 			Text.Add("You carefully withdraw from the servants’ quarters, judging it too difficult to sneak in unnoticed.", parse);
 			Text.Flush();
 			
-			MoveToLocation(world.loc.Rigard.Krawitz.grounds, {minute: 10});
+			MoveToLocation(KrawitzLoc.grounds, {minute: 10});
 		}, enabled : true,
 		tooltip : "There is too much risk of getting caught."
 	});
@@ -1670,7 +1669,7 @@ Scenes.Krawitz.Bathhouse = function() {
 				player.FirstVag() ? function() { return player.FirstVag().Short(); } :
 				"featureless crotch";
 	
-	party.location = world.loc.Rigard.Krawitz.bathhouse;
+	party.location = KrawitzLoc.bathhouse;
 	
 	Text.Clear();
 	if(!Scenes.Krawitz.stat.BathhouseVisit) {
@@ -1693,7 +1692,7 @@ Scenes.Krawitz.Bathhouse = function() {
 			player.AddLustFraction(0.2);
 			
 			Gui.NextPrompt(function () {
-				MoveToLocation(world.loc.Rigard.Krawitz.grounds, {minute: 15});
+				MoveToLocation(KrawitzLoc.grounds, {minute: 15});
 				Scenes.Krawitz.AddSuspicion(3, true);
 			});
 		}
@@ -1713,7 +1712,7 @@ Scenes.Krawitz.Bathhouse = function() {
 		Text.Add("The big orgy is still going on. As much as you’d like to join in, the wiser move is to leave now and explore the mansion while you still have the chance.", parse);
 		Text.Flush();
 		Gui.NextPrompt(function() {
-			MoveToLocation(world.loc.Rigard.Krawitz.grounds, {minute: 10});
+			MoveToLocation(KrawitzLoc.grounds, {minute: 10});
 		});
 	}
 	else if(Scenes.Krawitz.stat.BathhouseSpiked) {
@@ -1726,14 +1725,14 @@ Scenes.Krawitz.Bathhouse = function() {
 			Scenes.Krawitz.OrgyEntrypoint();
 		}
 		Gui.NextPrompt(function() {
-			MoveToLocation(world.loc.Rigard.Krawitz.grounds, {minute: 10});
+			MoveToLocation(KrawitzLoc.grounds, {minute: 10});
 		});
 	}
 	else if(Scenes.Krawitz.stat.BathhouseWine) {
 		Text.Add("The ladies seems deeply engrossed in each other, cuddling in the big pool. You don’t think they’d appreciate the intrusion.", parse);
 		Text.Flush();
 		Gui.NextPrompt(function() {
-			MoveToLocation(world.loc.Rigard.Krawitz.grounds, {minute: 10});
+			MoveToLocation(KrawitzLoc.grounds, {minute: 10});
 		});
 	}
 	else {
@@ -1748,7 +1747,7 @@ Scenes.Krawitz.Bathhouse = function() {
 				Text.Add("You quickly retreat, catching Lady Krawitz’ command: <i>“Fetch that wine, pronto!”</i>", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
-					MoveToLocation(world.loc.Rigard.Krawitz.grounds, {minute: 10});
+					MoveToLocation(KrawitzLoc.grounds, {minute: 10});
 					Scenes.Krawitz.AddSuspicion(1, true);
 				});
 			}, enabled : true,
@@ -1767,7 +1766,7 @@ Scenes.Krawitz.Bathhouse = function() {
 					
 					player.AddLustFraction(0.2);
 					Gui.NextPrompt(function() {
-						MoveToLocation(world.loc.Rigard.Krawitz.grounds, {minute: 10});
+						MoveToLocation(KrawitzLoc.grounds, {minute: 10});
 						Scenes.Krawitz.AddSuspicion(1, true);
 					});
 				}, enabled : true,
@@ -1791,7 +1790,7 @@ Scenes.Krawitz.Bathhouse = function() {
 							Text.Add("About half of the neighborhood ought to be alerted to the semi-incestous coitus happening in Krawitz’ front yard. Better leg it before you attract undue attention.", parse);
 							Text.Flush();
 							Gui.NextPrompt(function() {
-								MoveToLocation(world.loc.Rigard.Krawitz.grounds, {minute: 20});
+								MoveToLocation(KrawitzLoc.grounds, {minute: 20});
 								Scenes.Krawitz.AddSuspicion(5, true);
 							});
 						}
@@ -1999,7 +1998,7 @@ Scenes.Krawitz.OrgyEntrypoint = function() {
 		Text.Flush();
 		
 		Gui.NextPrompt(function() {
-			MoveToLocation(world.loc.Rigard.Krawitz.grounds, {minute: 20});
+			MoveToLocation(KrawitzLoc.grounds, {minute: 20});
 			Scenes.Krawitz.AddSuspicion(5, true);
 		});
 	}
@@ -2021,7 +2020,7 @@ Scenes.Krawitz.Aftermath = function() {
 	};
 	
 	Scenes.Krawitz.stat = Scenes.Krawitz.stat || {};
-	party.location = world.loc.Rigard.Krawitz.street;
+	party.location = KrawitzLoc.street;
 	
 	var points = 0;
 	if     (rigard.Krawitz["Duel"] == 1)    points += 2;
@@ -2630,3 +2629,5 @@ Scenes.Krawitz.Duel = function() {
 	});
 	Gui.SetButtonsFromList(options);
 }
+
+export { KrawitzLoc };

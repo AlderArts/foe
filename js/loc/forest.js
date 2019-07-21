@@ -6,23 +6,24 @@
 
 import { world } from '../world';
 import { Event, Link, EncounterTable, Scenes } from '../event';
+import { GladeLoc } from './glade';
 
 // Create namespace
-world.loc.Forest = {
+let ForestLoc = {
 	Outskirts         : new Event("Forest outskirts"),
-	Glade             : new Event("Dryads' glade")
+	Glade             : GladeLoc,
 }
 
 //
 // Forest
 //
 
-world.loc.Forest.Outskirts.description = function() {
+ForestLoc.Outskirts.description = function() {
 	Text.Add("You are at the outskirts of a deep forest. With trees and stuff.<br>");
 }
 
-world.loc.Forest.Outskirts.enc = new EncounterTable();
-world.loc.Forest.Outskirts.enc.AddEnc(function() {
+ForestLoc.Outskirts.enc = new EncounterTable();
+ForestLoc.Outskirts.enc.AddEnc(function() {
 	return function() {
 		Text.Clear();
 
@@ -36,7 +37,7 @@ world.loc.Forest.Outskirts.enc.AddEnc(function() {
 		Gui.NextPrompt();
 	};
 }, 1.0, function() { return world.time.season != Season.Winter; });
-world.loc.Forest.Outskirts.enc.AddEnc(function() {
+ForestLoc.Outskirts.enc.AddEnc(function() {
 	return function() {
 		Text.Clear();
 
@@ -50,7 +51,7 @@ world.loc.Forest.Outskirts.enc.AddEnc(function() {
 		Gui.NextPrompt();
 	};
 }, 1.0, function() { return world.time.season != Season.Winter; });
-world.loc.Forest.Outskirts.enc.AddEnc(function() {
+ForestLoc.Outskirts.enc.AddEnc(function() {
 	return function() {
 		Text.Clear();
 
@@ -64,7 +65,7 @@ world.loc.Forest.Outskirts.enc.AddEnc(function() {
 		Gui.NextPrompt();
 	};
 }, 1.0, function() { return world.time.season != Season.Winter; });
-world.loc.Forest.Outskirts.enc.AddEnc(function() {
+ForestLoc.Outskirts.enc.AddEnc(function() {
 	return function() {
 		Text.Clear();
 
@@ -78,7 +79,7 @@ world.loc.Forest.Outskirts.enc.AddEnc(function() {
 		Gui.NextPrompt();
 	};
 }, 1.0, function() { return world.time.season != Season.Winter; });
-world.loc.Forest.Outskirts.enc.AddEnc(function() {
+ForestLoc.Outskirts.enc.AddEnc(function() {
 	return function() {
 		Text.Clear();
 
@@ -92,7 +93,7 @@ world.loc.Forest.Outskirts.enc.AddEnc(function() {
 		Gui.NextPrompt();
 	};
 }, 1.0, function() { return true; });
-world.loc.Forest.Outskirts.enc.AddEnc(function() {
+ForestLoc.Outskirts.enc.AddEnc(function() {
 	return function() {
 		var parse = {
 			
@@ -109,7 +110,7 @@ world.loc.Forest.Outskirts.enc.AddEnc(function() {
 		Gui.NextPrompt();
 	};
 }, 1.0, function() { return true; });
-world.loc.Forest.Outskirts.enc.AddEnc(function() {
+ForestLoc.Outskirts.enc.AddEnc(function() {
 	return function() {
 		var parse = {
 			
@@ -126,13 +127,13 @@ world.loc.Forest.Outskirts.enc.AddEnc(function() {
 		Gui.NextPrompt();
 	};
 }, 1.0, function() { return true; });
-world.loc.Forest.Outskirts.enc.AddEnc(function() {
+ForestLoc.Outskirts.enc.AddEnc(function() {
 	return Scenes.Roaming.FlowerPetal;
 }, 1.0, function() { return world.time.season != Season.Winter; });
 
 
 // Temp mothgirl enemy
-world.loc.Forest.Outskirts.AddEncounter({
+ForestLoc.Outskirts.AddEncounter({
 	nameStr : "Mothgirl",
 	func    : function() {
 		return Scenes.Mothgirl.LoneEnc();
@@ -140,7 +141,7 @@ world.loc.Forest.Outskirts.AddEncounter({
 	visible : true, enabled : true, hunt : true
 });
 
-world.loc.Forest.Outskirts.AddEncounter({
+ForestLoc.Outskirts.AddEncounter({
 	nameStr : "Wolf",
 	func    : function() {
 		return Scenes.FeralWolf.LoneEnc();
@@ -148,15 +149,15 @@ world.loc.Forest.Outskirts.AddEncounter({
 	visible : true, enabled : true, hunt : true
 });
 
-world.loc.Forest.Outskirts.enc.AddEnc(function() {
+ForestLoc.Outskirts.enc.AddEnc(function() {
 	return Scenes.Momo.MomoEnc;
 }, 1.0, function() { return momo.Wandering(); });
 
-world.loc.Forest.Outskirts.enc.AddEnc(function() {
+ForestLoc.Outskirts.enc.AddEnc(function() {
 	return Scenes.Roaming.FindSomeCoins;
 }, 0.5, function() { return true; });
 
-world.loc.Forest.Outskirts.enc.AddEnc(function() {
+ForestLoc.Outskirts.enc.AddEnc(function() {
 	return function() {
 		var parse = {
 			
@@ -186,7 +187,7 @@ world.loc.Forest.Outskirts.enc.AddEnc(function() {
 }, 4.0, function() { return burrows.Access() && burrows.flags["HermTrait"] == Burrows.TraitFlags.Inactive; });
 
 
-world.loc.Forest.Outskirts.links.push(new Link(
+ForestLoc.Outskirts.links.push(new Link(
 	"Crossroads", true, true,
 	function() {
 		Text.Add("Behind you is the way back to the crossroads.<br>");
@@ -195,29 +196,29 @@ world.loc.Forest.Outskirts.links.push(new Link(
 		MoveToLocation(world.loc.Plains.Crossroads, {hour: 2});
 	}
 ));
-world.loc.Forest.Outskirts.links.push(new Link(
+ForestLoc.Outskirts.links.push(new Link(
 	"Outlaws", function() { return Scenes.Global.VisitedOutlaws(); }, true,
 	null,
 	function() {
 		MoveToLocation(world.loc.Outlaws.Camp, {hour: 1});
 	}
 ));
-world.loc.Forest.Outskirts.links.push(new Link(
+ForestLoc.Outskirts.links.push(new Link(
 	"Glade", function() { return jeanne.flags["Met"] >= 1; }, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Forest.Glade, {minute: 15});
+		MoveToLocation(ForestLoc.Glade, {minute: 15});
 	}
 ));
 
-world.loc.Forest.Outskirts.events.push(new Link(
+ForestLoc.Outskirts.events.push(new Link(
 	"Herbs", function() { return aquilius.OnHerbsQuest() && !aquilius.OnHerbsQuestFinished(); }, true,
 	null,
 	function() {
 		Scenes.Aquilius.PickHerbs();
 	}
 ));
-world.loc.Forest.Outskirts.events.push(new Link(
+ForestLoc.Outskirts.events.push(new Link(
 	"Nightshade", function() { return Scenes.Asche.Tasks.Nightshade.IsOn() && !Scenes.Asche.Tasks.Nightshade.IsSuccess(); }, true,
 	null,
 	function() {
@@ -227,3 +228,5 @@ world.loc.Forest.Outskirts.events.push(new Link(
 			Scenes.Asche.Tasks.Nightshade.BlindStart();
 	}
 ));
+
+export { ForestLoc };

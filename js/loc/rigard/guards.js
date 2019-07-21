@@ -1,20 +1,18 @@
-
-
 import { world } from '../../world';
-import { Link, Scenes, EncounterTable } from '../../event';
+import { Event, Link, Scenes, EncounterTable } from '../../event';
 
+let GateLoc = new Event("Main Gate");
+let BarracksLoc = {
+	common   : new Event("Barracks commons"),
+	sparring : new Event("Sparring yard"),
+	captains : new Event("Captains quarters")
+};
 
-
-/*
- * 
-
-
- */
 
 //
 // Gate house
 //
-world.loc.Rigard.Gate.description = function() {
+GateLoc.description = function() {
 	Text.Add("The gate area is where most of the merchandise enters the city. It houses a stable for mounts and several checkpoints where you’re supposed to have your cargo inspected, though not everyone is ordered to head there. You wonder if there is an actual process for screening out shady sorts or if the watch simply chooses at random. Overall, this place seems well guarded, and you have a slight suspicion that the fact the Watch’s Barracks are located nearby might have something to do with it.");
 	Text.NL();
 	Text.Add("Ahead of you, the path splits into three. One path leads to the residential district, where most of the citizens live. Another path leads you to the merchant district, where most of the commerce is handled, and the merchant warehouses are located. The last path leads you toward Rigard’s richer areas - toward the Castle, which seems to be even more fortified than the front gates.");
@@ -35,12 +33,12 @@ world.loc.Rigard.Gate.description = function() {
 }
 
 
-world.loc.Rigard.Gate.enc = new EncounterTable();
-world.loc.Rigard.Gate.enc.AddEnc(function() { return Scenes.Rigard.Chatter;});
-world.loc.Rigard.Gate.enc.AddEnc(function() { return Scenes.Rigard.Chatter2;});
-world.loc.Rigard.Gate.enc.AddEnc(function() { return Scenes.Rigard.CityHistory;}, 1.0, function() { return rigard.flags["CityHistory"] == 0; });
-world.loc.Rigard.Gate.enc.AddEnc(function() { return Scenes.Terry.ExploreGates; }, 1000000.0, function() { return rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry; });
-world.loc.Rigard.Gate.onEntry = function() {
+GateLoc.enc = new EncounterTable();
+GateLoc.enc.AddEnc(function() { return Scenes.Rigard.Chatter;});
+GateLoc.enc.AddEnc(function() { return Scenes.Rigard.Chatter2;});
+GateLoc.enc.AddEnc(function() { return Scenes.Rigard.CityHistory;}, 1.0, function() { return rigard.flags["CityHistory"] == 0; });
+GateLoc.enc.AddEnc(function() { return Scenes.Terry.ExploreGates; }, 1000000.0, function() { return rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry; });
+GateLoc.onEntry = function() {
 	if(Math.random() < 0.15)
 		Scenes.Rigard.Chatter(true);
 	else if(Math.random() < 0.3)
@@ -49,31 +47,31 @@ world.loc.Rigard.Gate.onEntry = function() {
 		PrintDefaultOptions();
 }
 
-world.loc.Rigard.Gate.links.push(new Link(
+GateLoc.links.push(new Link(
 	"Gate", true, false
 ));
-world.loc.Rigard.Gate.links.push(new Link(
+GateLoc.links.push(new Link(
 	"Residential", true, true,
 	null,
 	function() {
 		MoveToLocation(world.loc.Rigard.Residential.street, {minute: 10});
 	}
 ));
-world.loc.Rigard.Gate.links.push(new Link(
+GateLoc.links.push(new Link(
 	"Merchants", true, true,
 	null,
 	function() {
 		MoveToLocation(world.loc.Rigard.ShopStreet.street, {minute: 10});
 	}
 ));
-world.loc.Rigard.Gate.links.push(new Link(
+GateLoc.links.push(new Link(
 	"Plaza", true, true,
 	null,
 	function() {
 		MoveToLocation(world.loc.Rigard.Plaza, {minute: 20});
 	}
 ));
-world.loc.Rigard.Gate.links.push(new Link(
+GateLoc.links.push(new Link(
 	"Leave", true, function() { return (world.time.hour >= 6 && world.time.hour < 22) && !rigard.UnderLockdown(); },
 	null,
 	function() {
@@ -83,11 +81,11 @@ world.loc.Rigard.Gate.links.push(new Link(
 			MoveToLocation(world.loc.Plains.Gate, {minute: 5});
 	}
 ));
-world.loc.Rigard.Gate.links.push(new Link(
+GateLoc.links.push(new Link(
 	"Barracks", true, function() { return !rigard.UnderLockdown(); },
 	null,
 	function() {
-		MoveToLocation(world.loc.Rigard.Barracks.common, {minute: 5});
+		MoveToLocation(BarracksLoc.common, {minute: 5});
 	}
 ));
 
@@ -98,34 +96,34 @@ world.loc.Rigard.Gate.links.push(new Link(
 //
 // Barracks
 //
-world.loc.Rigard.Barracks.common.description = function() {
+BarracksLoc.common.description = function() {
 	Text.Add("There’s always some people around in the dimly lit barracks; a few eating, playing cards or trying to catch a few minutes of shut-eye before returning to their shifts. From the broad variety on display, the city watch consists of both humans and morphs of many kinds.");
 	Text.NL();
 }
 
-world.loc.Rigard.Barracks.common.links.push(new Link(
+BarracksLoc.common.links.push(new Link(
 	"Gate", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Rigard.Gate, {minute: 5});
+		MoveToLocation(GateLoc, {minute: 5});
 	}
 ));
-world.loc.Rigard.Barracks.common.links.push(new Link(
+BarracksLoc.common.links.push(new Link(
 	"Yard", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Rigard.Barracks.sparring);
+		MoveToLocation(BarracksLoc.sparring);
 	}
 ));
-world.loc.Rigard.Barracks.common.links.push(new Link(
+BarracksLoc.common.links.push(new Link(
 	"Captains", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Rigard.Barracks.captains);
+		MoveToLocation(BarracksLoc.captains);
 	}
 ));
 
-world.loc.Rigard.Barracks.common.events.push(new Link(
+BarracksLoc.common.events.push(new Link(
 	"Miranda", function() { return miranda.IsAtLocation(); }, true,
 	function() {
 		if(miranda.IsAtLocation()) {
@@ -137,7 +135,7 @@ world.loc.Rigard.Barracks.common.events.push(new Link(
 		Scenes.Miranda.BarracksApproach();
 	}
 ));
-world.loc.Rigard.Barracks.common.events.push(new Link(
+BarracksLoc.common.events.push(new Link(
 	"Evidence", function() {
 		return Scenes.Vaughn.Tasks.Snitch.OnTask();
 	}, function() {
@@ -162,31 +160,32 @@ world.loc.Rigard.Barracks.common.events.push(new Link(
 
 
 
-world.loc.Rigard.Barracks.sparring.description = function() {
+BarracksLoc.sparring.description = function() {
 	Text.Add("The sparring yard is used by the city watch to do basic training and drills for new recruits. There are a few strawman targets and an archery range, as well as racks of wooden practice weapons of various kinds.");
 	Text.NL();
 }
 
-world.loc.Rigard.Barracks.sparring.links.push(new Link(
+BarracksLoc.sparring.links.push(new Link(
 	"Commons", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Rigard.Barracks.common);
+		MoveToLocation(BarracksLoc.common);
 	}
 ));
 
 
 //TODO
-world.loc.Rigard.Barracks.captains.description = function() {
+BarracksLoc.captains.description = function() {
 	Text.Add("PLACEHOLDER: Capt's quarters.");
 	Text.NL();
 }
 
-world.loc.Rigard.Barracks.captains.links.push(new Link(
+BarracksLoc.captains.links.push(new Link(
 	"Commons", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Rigard.Barracks.common);
+		MoveToLocation(BarracksLoc.common);
 	}
 ));
 
+export { GateLoc, BarracksLoc };

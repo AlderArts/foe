@@ -1,6 +1,11 @@
 
 import { world } from '../../world';
 import { Event, Link, Scenes, EncounterTable } from '../../event';
+import { OddShopLoc } from './sexstore';
+import { ArmorShopLoc } from './armorshop';
+import { MagicShopLoc } from './magicshop';
+import { ClothShopLoc } from './clothstore';
+import { WeaponShopLoc } from './weaponshop';
 
 
 Scenes.Rigard.ShopStreet = {}
@@ -8,15 +13,15 @@ Scenes.Rigard.ShopStreet = {}
 //
 // Merchants
 //
-world.loc.Rigard.ShopStreet =
+let ShopStreetLoc =
 {
 	street       : new Event("Merchant street"),
-	OddShop      : new Event("Odd shop"),
-	ClothShop    : new Event("Silken Delights"),
-	WeaponShop   : new Event("The Pale Flame"),
-	ArmorShop    : new Event("Twopenny's"),
+	OddShop      : OddShopLoc,
+	ClothShop    : ClothShopLoc,
+	WeaponShop   : WeaponShopLoc,
+	ArmorShop    : ArmorShopLoc,
 	AlchemyShop  : new Event("Alchemical Wonders"),
-	MagicShop    : new Event("Asche's Fanciful Trinkets"),
+	MagicShop    : MagicShopLoc,
 	
 	gate         : new Event("Merchants' Gate")
 }
@@ -25,7 +30,7 @@ world.loc.Rigard.ShopStreet =
 //
 // Shopping street
 //
-world.loc.Rigard.ShopStreet.street.description = function() {
+ShopStreetLoc.street.description = function() {
 	Text.Add("The streets in this area of the city are lined with small merchant stalls and shops of all kinds. ");
 	if(world.time.hour >= 6 && world.time.hour < 9)
 		Text.Add("A few early birds prowl the streets as the merchant district starts to wake up. A few street vendors selling fresh foods are just opening up, and the smells of baked bread and spices fill the morning air.");
@@ -43,13 +48,13 @@ world.loc.Rigard.ShopStreet.street.description = function() {
 	}
 }
 
-world.loc.Rigard.ShopStreet.street.enc = new EncounterTable();
-world.loc.Rigard.ShopStreet.street.enc.AddEnc(function() { return Scenes.Rigard.Chatter;});
-world.loc.Rigard.ShopStreet.street.enc.AddEnc(function() { return Scenes.Rigard.Chatter2;});
-world.loc.Rigard.ShopStreet.street.enc.AddEnc(function() { return Scenes.Rigard.ShopStreet.Speculate;}, 1.0, function() { return (world.time.hour >= 6 && world.time.hour < 18); });
-world.loc.Rigard.ShopStreet.street.enc.AddEnc(function() { return Scenes.Rigard.CityHistory;}, 1.0, function() { return rigard.flags["CityHistory"] == 0; });
-world.loc.Rigard.ShopStreet.street.enc.AddEnc(function() { return Scenes.Terry.ExploreMerchants; }, 1000000.0, function() { return rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry; });
-world.loc.Rigard.ShopStreet.street.onEntry = function() {
+ShopStreetLoc.street.enc = new EncounterTable();
+ShopStreetLoc.street.enc.AddEnc(function() { return Scenes.Rigard.Chatter;});
+ShopStreetLoc.street.enc.AddEnc(function() { return Scenes.Rigard.Chatter2;});
+ShopStreetLoc.street.enc.AddEnc(function() { return Scenes.Rigard.ShopStreet.Speculate;}, 1.0, function() { return (world.time.hour >= 6 && world.time.hour < 18); });
+ShopStreetLoc.street.enc.AddEnc(function() { return Scenes.Rigard.CityHistory;}, 1.0, function() { return rigard.flags["CityHistory"] == 0; });
+ShopStreetLoc.street.enc.AddEnc(function() { return Scenes.Terry.ExploreMerchants; }, 1000000.0, function() { return rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry; });
+ShopStreetLoc.street.onEntry = function() {
 	if(Math.random() < 0.15)
 		Scenes.Rigard.Chatter(true);
 	else if(Math.random() < 0.3)
@@ -58,24 +63,24 @@ world.loc.Rigard.ShopStreet.street.onEntry = function() {
 		PrintDefaultOptions();
 }
 
-world.loc.Rigard.ShopStreet.street.links.push(new Link(
+ShopStreetLoc.street.links.push(new Link(
 	"Gate", true, true,
 	null,
 	function() {
 		MoveToLocation(world.loc.Rigard.Gate, {minute: 10});
 	}
 ));
-world.loc.Rigard.ShopStreet.street.links.push(new Link(
+ShopStreetLoc.street.links.push(new Link(
 	"Residential", true, true,
 	null,
 	function() {
 		MoveToLocation(world.loc.Rigard.Residential.street, {minute: 20});
 	}
 ));
-world.loc.Rigard.ShopStreet.street.links.push(new Link(
+ShopStreetLoc.street.links.push(new Link(
 	"Merchants", true, false
 ));
-world.loc.Rigard.ShopStreet.street.links.push(new Link(
+ShopStreetLoc.street.links.push(new Link(
 	"Plaza", true, true,
 	null,
 	function() {
@@ -84,7 +89,7 @@ world.loc.Rigard.ShopStreet.street.links.push(new Link(
 ));
 
 
-world.loc.Rigard.ShopStreet.street.links.push(new Link(
+ShopStreetLoc.street.links.push(new Link(
 	"Armor", true, function() { return Scenes.Rigard.ArmorShop.IsOpen(); },
 	function() {
 		Text.Add("You catch sight of a ramshackle shop tucked away into a cul-de-sac. An old, weather-beaten sign swings over the entrance with “Twopenny's Used Protectives” printed on it in faded paint. ");
@@ -96,21 +101,21 @@ world.loc.Rigard.ShopStreet.street.links.push(new Link(
 		
 	},
 	function() {
-		MoveToLocation(world.loc.Rigard.ShopStreet.ArmorShop, {minute: 5});
+		MoveToLocation(ShopStreetLoc.ArmorShop, {minute: 5});
 	}
 ));
 
-world.loc.Rigard.ShopStreet.street.links.push(new Link(
+ShopStreetLoc.street.links.push(new Link(
 	"Weapons", true, function() { return Scenes.Rigard.WeaponShop.IsOpen(); },
 	function() {
 		Scenes.Rigard.WeaponShop.StreetDesc();
 	},
 	function() {
-		MoveToLocation(world.loc.Rigard.ShopStreet.WeaponShop, {minute: 5});
+		MoveToLocation(ShopStreetLoc.WeaponShop, {minute: 5});
 	}
 ));
 
-world.loc.Rigard.ShopStreet.street.links.push(new Link(
+ShopStreetLoc.street.links.push(new Link(
 	"Tailor", true, function() { return Scenes.Rigard.ClothShop.IsOpen() },
 	function() {
 		Text.Add("There is a large two floor shop in the center of the street, with two guards watching the large, well crafted doors. The fancy sign above the door reads <i>Silken Delights</i>, and there are many beautiful and intricately crafted articles of clothing on display in the windows. The clothing store seems large, and there are pretty decorations bordering the display windows. A decorated sign next to the door informs you that the shops business hours are from 9 to 20.");
@@ -119,11 +124,11 @@ world.loc.Rigard.ShopStreet.street.links.push(new Link(
 		Text.NL();
 	},
 	function() {
-		MoveToLocation(world.loc.Rigard.ShopStreet.ClothShop, {minute: 5});
+		MoveToLocation(ShopStreetLoc.ClothShop, {minute: 5});
 	}
 ));
 
-world.loc.Rigard.ShopStreet.street.links.push(new Link(
+ShopStreetLoc.street.links.push(new Link(
 	"Magic", true, function() { return Scenes.Rigard.MagicShop.IsOpen(); },
 	function() {
 		Text.Add("Off on a side street, a small, brightly lit building stands sandwiched between a barber shop and a bakery. The wide, glass-panelled shopfront has an impressive number of curios on display, and by the looks of it, there are many more on the shelves within. ");
@@ -134,11 +139,11 @@ world.loc.Rigard.ShopStreet.street.links.push(new Link(
 		Text.NL();
 	},
 	function() {
-		MoveToLocation(world.loc.Rigard.ShopStreet.MagicShop, {minute: 5});
+		MoveToLocation(ShopStreetLoc.MagicShop, {minute: 5});
 	}
 ));
 
-world.loc.Rigard.ShopStreet.street.links.push(new Link(
+ShopStreetLoc.street.links.push(new Link(
 	"Odd shop", true, function() { return Scenes.Rigard.OddShop.IsOpen(); },
 	function() {
 		Text.Add("One particular shop catch your eye. A garish sign hanging outside announce it the 'Shoppe of oddities', though from just the exterior, it is a bit unclear what is actually on sale.");
@@ -147,11 +152,11 @@ world.loc.Rigard.ShopStreet.street.links.push(new Link(
 		Text.Add("<br>");
 	},
 	function() {
-		MoveToLocation(world.loc.Rigard.ShopStreet.OddShop, {minute: 5});
+		MoveToLocation(ShopStreetLoc.OddShop, {minute: 5});
 	}
 ));
 
-world.loc.Rigard.ShopStreet.street.events.push(new Link(
+ShopStreetLoc.street.events.push(new Link(
 	"Scepter", function() { return rigard.flags["Scepter"] != 0 && burrows.flags["Access"] < Burrows.AccessFlags.Stage5; }, true,
 	null,
 	function() {
@@ -159,7 +164,7 @@ world.loc.Rigard.ShopStreet.street.events.push(new Link(
 	}
 ));
 
-world.loc.Rigard.ShopStreet.street.events.push(new Link(
+ShopStreetLoc.street.events.push(new Link(
 	"Violin", function() { return !rigard.UnderLockdown() && cveta.flags["Met"] == Cveta.Met.ViolinQ; }, function() { return party.coin >= 500; },
 	null,
 	function() {
@@ -253,7 +258,7 @@ world.loc.Rigard.ShopStreet.street.events.push(new Link(
 	}
 ));
 
-world.loc.Rigard.ShopStreet.street.events.push(new Link(
+ShopStreetLoc.street.events.push(new Link(
 	"Martello", function() { return room69.flags["Hinges"] == Room69.HingesFlags.TalkedToGoldsmith || room69.flags["Hinges"] == Room69.HingesFlags.TalkedToSmith; }, function() { return world.time.hour >= 9 && world.time.hour < 18; },
 	function() {
 		if(room69.flags["Hinges"] == Room69.HingesFlags.TalkedToGoldsmith) {
@@ -648,3 +653,4 @@ Scenes.Rigard.ShopStreet.Scepter = function() {
 	Gui.NextPrompt()
 }
 
+export { ShopStreetLoc };

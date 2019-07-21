@@ -7,6 +7,7 @@
 import { Event, Link } from '../event';
 import { world } from '../world';
 import { GameState } from '../main';
+import { PrintDefaultOptions } from '../exploration';
 
 let Intro = {};
 
@@ -374,7 +375,7 @@ Intro.DarkAspect = function() {
 	Text.Flush();
 
 	Gui.NextPrompt(function() {
-		party.location = world.loc.DarkAspect.Barrens;
+		party.location = DarkAspect.Barrens;
 		gameState       = GameState.Game;
 		PrintDefaultOptions();
 	});
@@ -382,7 +383,7 @@ Intro.DarkAspect = function() {
 
 
 // Create namespace
-world.loc.DarkAspect = {
+let DarkAspect = {
 	Barrens   : new Event("Barrens"),
 	Mountains : new Event("Mountains"),
 	Cliff     : new Event("Cliffside"),
@@ -393,11 +394,11 @@ world.loc.DarkAspect = {
 //
 // Dark aspect dimension
 //
-world.loc.DarkAspect.Barrens.description = function() {
+DarkAspect.Barrens.description = function() {
 	Text.Add("You are in an unfamiliar place, an endless plain of red cracked earth, interspersed with black thorn bushes. The sky looks like something from an insane painting, vivid red streaks clashing with dark brown, gray and black clouds. Occasionally, red lightning flashes across the sky, flooding the dim and dreary wasteland with sharp light.");
 	Text.NL();
 }
-world.loc.DarkAspect.Barrens.links.push(new Link(
+DarkAspect.Barrens.links.push(new Link(
 	"Mountains", true, true,
 	function() {
 		Text.Add("In the far, far distance, you can make out a large mountain range, the impossibly high peaks hidden in the clouds. There is no sign of life anywhere.");
@@ -433,17 +434,17 @@ world.loc.DarkAspect.Barrens.links.push(new Link(
 			player.curHp -= 5;
 
 			Gui.NextPrompt(function() {
-				MoveToLocation(world.loc.DarkAspect.Mountains, {minute: 5});
+				MoveToLocation(DarkAspect.Mountains, {minute: 5});
 			});
 		});
 	}
 ));
 
-world.loc.DarkAspect.Mountains.description = function() {
+DarkAspect.Mountains.description = function() {
 	Text.Add("You are at the base of a towering mountain range, rising like massive black pillars toward the chaotic sky. Below, on the wasteland, you can see the demon striding toward you in long steps. Behind it, fire is spreading out, the cracks from the demon's heavy footsteps opening up into an endless abyss.");
 	Text.NL();
 }
-world.loc.DarkAspect.Mountains.links.push(new Link(
+DarkAspect.Mountains.links.push(new Link(
 	"Peak", true, true,
 	function() {
 		Text.Add("The only way left to you is up, but you have no idea how to make the climb. Up close, the mountain is a sheer cliff, almost vertical.");
@@ -617,12 +618,12 @@ Intro.DemonAftermath = function() {
 
 	player.RestFull();
 	Gui.NextPrompt(function() {
-		MoveToLocation(world.loc.DarkAspect.Cliff, {minute: 20});
+		MoveToLocation(DarkAspect.Cliff, {minute: 20});
 	});
 }
 
 
-world.loc.DarkAspect.Cliff.description = function() {
+DarkAspect.Cliff.description = function() {
 	Text.Add("You are on a small outcropping on the sheer mountainside where you fought with the imps.");
 	Text.NL();
 	Text.Add("The huge demon is blocking the path back down, but it seems to be ignoring you for now, no doubt cooking up new ways to torture you.");
@@ -631,7 +632,7 @@ world.loc.DarkAspect.Cliff.description = function() {
 
 // SEE IMP.JS FOR MORE LINKS
 
-world.loc.DarkAspect.Cliff.links.push(new Link(
+DarkAspect.Cliff.links.push(new Link(
 	"Climb", true, true,
 	function() {
 		Text.Add("You could try to continue the climb up, though you doubt you could escape the demon's wrath for long. Still, not much choice, is there?");
@@ -716,16 +717,16 @@ Intro.UruSeduce = function() {
 	Text.Add("<i>“Ooh, such a pretty name,”</i> the omnibus coos, <i>“I am Uru, friendly neighborhood omnibus, at your service.”</i> She gives you a theatrical little bow, her manhood bobbing up and down in front of you. It is almost hypnotizing.");
 	Text.Flush();
 	Gui.NextPrompt(function() {
-		MoveToLocation(world.loc.DarkAspect.Peak, {minute: 5});
+		MoveToLocation(DarkAspect.Peak, {minute: 5});
 	});
 }
 
 
-world.loc.DarkAspect.Peak.description = function() {
+DarkAspect.Peak.description = function() {
 	Text.Add("You are at the very peak of the mountain, on a flat, circular plateau no more than twenty yards across. Around and above, the sky is a calm meld of red and pink. In the middle of the plateau stands a throne of stone.");
 	Text.NL();
 }
-world.loc.DarkAspect.Peak.links.push(new Link(
+DarkAspect.Peak.links.push(new Link(
 	"Throne", true, true,
 	function() {
 	},
@@ -743,7 +744,7 @@ world.loc.DarkAspect.Peak.links.push(new Link(
 		Gui.NextPrompt(PrintDefaultOptions);
 	}
 ));
-world.loc.DarkAspect.Peak.events.push(new Link(
+DarkAspect.Peak.events.push(new Link(
 	"Uru", true, true,
 	function() {
 		Text.Add("Beside the throne stands the omnibus who saved you from the demon. She follows your moves with interest; her eyes pinned on you like a cat focusing on a toy.");
@@ -1786,12 +1787,12 @@ Intro.UruSexAftermath = function() {
 	});
 }
 
-world.loc.LightAspect = {
+LightAspect = {
 	Garden : new Event("Garden")
 }
 
 Intro.LightAspectDesc = function() {
-	party.location = world.loc.LightAspect.Garden;
+	party.location = LightAspect.Garden;
 	Text.Clear();
 
 	Text.Add("Bit by bit, you return to your senses, roused by the sound of running water and... bird song? Drowsy and confused, you try to orient yourself. Gone is the smoldering, burning wasteland and its perpetually stormy skies, replaced by a calm garden filled with flowers. You are resting on a soft bed of grass, your bruised body cushioned by the fertile loam. High above, in the clear blue skies, peculiar birds fly around, chirping and tweeting their beautiful song.");
@@ -1807,7 +1808,7 @@ Intro.LightAspectDesc = function() {
 	Intro.TalkedToBird = false;
 	Text.Flush();
 	Gui.NextPrompt(function() {
-		MoveToLocation(world.loc.LightAspect.Garden);
+		MoveToLocation(LightAspect.Garden);
 	});
 }
 
@@ -1818,7 +1819,7 @@ Intro.LightAspectDesc = function() {
 
 
 // Create namespace
-world.loc.LightAspect = {
+let LightAspect = {
 	Garden   : new Event("Garden"),
 	Temple   : new Event("Temple")
 }
@@ -1826,17 +1827,17 @@ world.loc.LightAspect = {
 //
 // Light aspect dimension
 //
-world.SaveSpots["LightAspect"] = world.loc.LightAspect.Garden;
-world.loc.LightAspect.Garden.SaveSpot = "LightAspect";
-world.loc.LightAspect.Garden.safe = function() { return true; };
-world.loc.LightAspect.Garden.description = function() {
+world.SaveSpots["LightAspect"] = LightAspect.Garden;
+LightAspect.Garden.SaveSpot = "LightAspect";
+LightAspect.Garden.safe = function() { return true; };
+LightAspect.Garden.description = function() {
 	Text.Add("You are standing in a lush garden filled with flowers of all shapes and colors. A small stream runs nearby, its musical babbling accompanied by distant birdsong.");
 	Text.NL();
 
 	Intro.active = true;
 }
 
-world.loc.LightAspect.Garden.events.push(new Link(
+LightAspect.Garden.events.push(new Link(
 	"Bird", function() { return !Intro.TalkedToBird; }, true,
 	function() {
 		if(!Intro.TalkedToBird)
@@ -1859,7 +1860,7 @@ world.loc.LightAspect.Garden.events.push(new Link(
 	}
 ));
 
-world.loc.LightAspect.Garden.links.push(new Link(
+LightAspect.Garden.links.push(new Link(
 	"Temple", true, true,
 	function() {
 		Text.Add(" Atop a nearby hill stands some kind of large structure, constructed from blocks of white marble and overgrown with blossoming vegetation. It looks like it could be some kind of old temple, long since abandoned. A tidy pathway leads toward it, lined with bright, man-made lanterns.");
@@ -1874,7 +1875,7 @@ world.loc.LightAspect.Garden.links.push(new Link(
 		Text.NL();
 		Text.Add("Steeling yourself for whatever awaits, you step inside the temple into an open courtyard. You have little time to survey your surroundings before your eyes fall on the source of the voice, a woman who could only be described as a Goddess.");
 
-		party.location = world.loc.LightAspect.Temple;
+		party.location = LightAspect.Temple;
 		Text.Flush();
 		Gui.NextPrompt(function () {
 			Text.Clear();
@@ -2769,4 +2770,4 @@ Intro.Finalizing = function() {
 	Gui.NextPrompt(PrintDefaultOptions);
 }
 
-export { Intro };
+export { Intro, DarkAspect, LightAspect };

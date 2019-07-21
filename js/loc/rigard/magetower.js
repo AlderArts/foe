@@ -1,30 +1,32 @@
 
 
 import { world } from '../../world';
-import { Link, Scenes } from '../../event';
+import { Event, Link, Scenes } from '../../event';
 
 //
 // Castle: Mage tower
 //
-world.SaveSpots["Jeanne"] = world.loc.Rigard.Castle.MageTower;
-world.loc.Rigard.Castle.MageTower.SaveSpot = "Jeanne";
-world.loc.Rigard.Castle.MageTower.safe = function() { return true; };
-world.loc.Rigard.Castle.MageTower.description = function() {
+let MageTowerLoc = new Event("Mage's tower");
+
+world.SaveSpots["Jeanne"] = MageTowerLoc;
+MageTowerLoc.SaveSpot = "Jeanne";
+MageTowerLoc.safe = function() { return true; };
+MageTowerLoc.description = function() {
 	Text.Add("You are standing on the top floor of Jeanne’s tower, inside the court mage’s study.");
 	Text.NL();
 }
 
-world.loc.Rigard.Castle.MageTower.links.push(new Link(
+MageTowerLoc.links.push(new Link(
 	"Grounds", true, true,
 	null,
 	function() {
 		MoveToLocation(world.loc.Rigard.Castle.Grounds);
 	}
 ));
-world.loc.Rigard.Castle.MageTower.events.push(new Link(
-	"Jeanne", function() { return jeanne.IsAtLocation(world.loc.Rigard.Castle.MageTower); }, true,
+MageTowerLoc.events.push(new Link(
+	"Jeanne", function() { return jeanne.IsAtLocation(MageTowerLoc); }, true,
 	function() {
-		if(jeanne.IsAtLocation(world.loc.Rigard.Castle.MageTower)) {
+		if(jeanne.IsAtLocation(MageTowerLoc)) {
 			Text.Add("The sleepless magician is busy with some experiment or other, poring over some documents over by her workbench. The elf is stunning as always, her long pink hair flowing down her back in thick curls.");
 			Text.NL();
 		}
@@ -33,7 +35,7 @@ world.loc.Rigard.Castle.MageTower.events.push(new Link(
 		Scenes.Jeanne.Interact();
 	}
 ));
-world.loc.Rigard.Castle.MageTower.events.push(new Link(
+MageTowerLoc.events.push(new Link(
 	"Golem", function() { return golem.flags["Met"] >= Scenes.Golem.State.Rebuilt; }, true,
 	function() {
 		if(golem.flags["Met"] >= Scenes.Golem.State.Rebuilt) {
@@ -45,14 +47,14 @@ world.loc.Rigard.Castle.MageTower.events.push(new Link(
 		//TODO
 	}
 ));
-world.loc.Rigard.Castle.MageTower.endDescription = function() {
+MageTowerLoc.endDescription = function() {
 	Text.Add("Around the room, there are a lot of strange devices and alchemical tools strewn about, many of which you have no idea what their uses are.");
 	Text.NL();
 	Text.Add("The strange light that can be seen from outside the tower originates from a set of crystals mounted in an intricate lattice of metal, standing on one of the tables. The crystals glow with an inner ethereal light, pulsing irregularly, almost as if they are alive.");
 	Text.Flush();
 }
 
-world.loc.Rigard.Castle.MageTower.onEntry = function() {
+MageTowerLoc.onEntry = function() {
 	var golemState = golem.flags["Met"];
 	if(golemState == Scenes.Golem.State.NotMet)
 		Scenes.Golem.FirstApproach();
@@ -62,3 +64,4 @@ world.loc.Rigard.Castle.MageTower.onEntry = function() {
 		PrintDefaultOptions();
 }
 
+export { MageTowerLoc };

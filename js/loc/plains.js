@@ -6,33 +6,23 @@
 
 import { world } from '../world';
 import { Event, Link, EncounterTable, Scenes } from '../event';
+import { Nomads } from './nomads';
 
 // Create namespace
-world.loc.Plains = {
-	Nomads         :
-	{
-		Tent       : new Event("Tent"), // Start area
-		Fireplace  : new Event("Nomads: Fireplace"),
-		Nursery    : new Event("Nomads: Nursery")
-	},
+let PlainsLoc = {
+	Nomads         : Nomads,
 	Crossroads     : new Event("Plains: Crossroads"),
 	Portals        : new Event(function() {
 		return Scenes.Global.PortalsOpen() ? "Plains: Nexus" : "Plains: Mound";
 	}),
 	Gate           : new Event("Rigard gates"),
-	Burrows        :
-	{
-		Entrance   : new Event("Plains: Burrows entrance"),
-		Burrows    : new Event("Burrows"),
-		Pit        : new Event("Mating pit")
-	}
 }
 
 
 //
 // Crossroads
 //
-world.loc.Plains.Crossroads.description = function() {
+PlainsLoc.Crossroads.description = function() {
 	var parse = {
 		TreeFar : world.TreeFarDesc(),
 		Rigard : rigard.Visited() ? "Rigard" : "a big city in the distance"
@@ -51,9 +41,9 @@ world.loc.Plains.Crossroads.description = function() {
 	Text.Add("The Nomad camp where you first arrived on Eden lies on the horizon, one beacon of familiarity in this strange land.", parse);
 }
 
-world.loc.Plains.Crossroads.enc = new EncounterTable();
+PlainsLoc.Crossroads.enc = new EncounterTable();
 
-world.loc.Plains.Crossroads.AddEncounter({
+PlainsLoc.Crossroads.AddEncounter({
 	nameStr : "Wildcat",
 	func    : function() {
 		return Scenes.Felines.WildcatEnc();
@@ -61,7 +51,7 @@ world.loc.Plains.Crossroads.AddEncounter({
 	visible : true, enabled : true, hunt : true
 });
 
-world.loc.Plains.Crossroads.AddEncounter({
+PlainsLoc.Crossroads.AddEncounter({
 	nameStr : "Puma",
 	func    : function() {
 		return Scenes.Felines.PumaEnc();
@@ -69,7 +59,7 @@ world.loc.Plains.Crossroads.AddEncounter({
 	visible : true, enabled : true, hunt : true
 });
 
-world.loc.Plains.Crossroads.AddEncounter({
+PlainsLoc.Crossroads.AddEncounter({
 	nameStr : "Jaguar",
 	func    : function() {
 		return Scenes.Felines.JaguarEnc();
@@ -77,7 +67,7 @@ world.loc.Plains.Crossroads.AddEncounter({
 	visible : true, enabled : true, hunt : true
 });
 
-world.loc.Plains.Crossroads.AddEncounter({
+PlainsLoc.Crossroads.AddEncounter({
 	nameStr : "Lynx",
 	func    : function() {
 		return Scenes.Felines.LynxEnc();
@@ -85,7 +75,7 @@ world.loc.Plains.Crossroads.AddEncounter({
 	visible : true, enabled : true, hunt : true
 });
 
-world.loc.Plains.Crossroads.AddEncounter({
+PlainsLoc.Crossroads.AddEncounter({
 	nameStr : "Equines",
 	func    : function() {
 		return Scenes.Equine.PairEnc();
@@ -93,7 +83,7 @@ world.loc.Plains.Crossroads.AddEncounter({
 	visible : true, enabled : true, hunt : true
 });
 
-world.loc.Plains.Crossroads.AddEncounter({
+PlainsLoc.Crossroads.AddEncounter({
 	nameStr : "Bunnies",
 	func    : function() {
 		return Scenes.Lagomorph.GroupEnc();
@@ -101,30 +91,30 @@ world.loc.Plains.Crossroads.AddEncounter({
 	visible : true, enabled : true, hunt : true
 });
 
-world.loc.Plains.Crossroads.enc.AddEnc(function() {
+PlainsLoc.Crossroads.enc.AddEnc(function() {
 	return Scenes.Momo.MomoEnc;
 }, 1.0, function() { return momo.Wandering(); });
 
-world.loc.Plains.Crossroads.enc.AddEnc(function() {
+PlainsLoc.Crossroads.enc.AddEnc(function() {
 	return Scenes.Poet.Entry;
 }, 1.0, function() { return true; });
 
-world.loc.Plains.Crossroads.enc.AddEnc(function() {
+PlainsLoc.Crossroads.enc.AddEnc(function() {
 	return Scenes.Roaming.FindSomeCoins;
 }, 0.5, function() { return true; });
 
-world.loc.Plains.Crossroads.enc.AddEnc(function() {
+PlainsLoc.Crossroads.enc.AddEnc(function() {
 	return Scenes.Roaming.FlowerPetal;
 }, 1.0, function() { return world.time.season != Season.Winter; });
 
-world.loc.Plains.Crossroads.enc.AddEnc(function() {
+PlainsLoc.Crossroads.enc.AddEnc(function() {
 	return Scenes.Roaming.KingdomPatrol;
 }, 1.0, function() { return true; });
-world.loc.Plains.Crossroads.enc.AddEnc(function() {
+PlainsLoc.Crossroads.enc.AddEnc(function() {
 	return Scenes.Roaming.Bandits;
 }, 5.0, function() { return rigard.bandits; });
 
-world.loc.Plains.Crossroads.enc.AddEnc(function() {
+PlainsLoc.Crossroads.enc.AddEnc(function() {
 	return function() {
 		var parse = {
 			playername : player.name,
@@ -179,21 +169,21 @@ world.loc.Plains.Crossroads.enc.AddEnc(function() {
 	}
 }, 0.5, function() { return world.time.hour >= 5 && world.time.hour < 21; });
 
-world.loc.Plains.Crossroads.links.push(new Link(
+PlainsLoc.Crossroads.links.push(new Link(
 	"Nomads", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Plains.Nomads.Fireplace, {minute: 15});
+		MoveToLocation(PlainsLoc.Nomads.Fireplace, {minute: 15});
 	}
 ));
-world.loc.Plains.Crossroads.links.push(new Link(
+PlainsLoc.Crossroads.links.push(new Link(
 	function() { return Scenes.Global.PortalsOpen() ? "Nexus" : "Mound"; }, true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Plains.Portals, {minute: 10});
+		MoveToLocation(PlainsLoc.Portals, {minute: 10});
 	}
 ));
-world.loc.Plains.Crossroads.links.push(new Link(
+PlainsLoc.Crossroads.links.push(new Link(
 	"Rigard", true, true,
 	null,
 	function() {
@@ -217,28 +207,28 @@ world.loc.Plains.Crossroads.links.push(new Link(
 			Text.Flush();
 			
 			Gui.NextPrompt(function() {
-				MoveToLocation(world.loc.Plains.Gate, {minute: 30});
+				MoveToLocation(PlainsLoc.Gate, {minute: 30});
 			});
 		}
 		else
-			MoveToLocation(world.loc.Plains.Gate, {hour: 2});
+			MoveToLocation(PlainsLoc.Gate, {hour: 2});
 	}
 ));
-world.loc.Plains.Crossroads.links.push(new Link(
+PlainsLoc.Crossroads.links.push(new Link(
 	"Hills", true, true,
 	null,
 	function() {
 		MoveToLocation(world.loc.Highlands.Hills, {hour: 2});
 	}
 ));
-world.loc.Plains.Crossroads.links.push(new Link(
+PlainsLoc.Crossroads.links.push(new Link(
 	"Forest", true, true,
 	null,
 	function() {
 		MoveToLocation(world.loc.Forest.Outskirts, {hour: 2});
 	}
 ));
-world.loc.Plains.Crossroads.links.push(new Link(
+PlainsLoc.Crossroads.links.push(new Link(
 	"Desert", true, true,
 	null,
 	function() {
@@ -246,11 +236,26 @@ world.loc.Plains.Crossroads.links.push(new Link(
 	}
 ));
 
+// Add initial event, only trigger 7-17
+PlainsLoc.Crossroads.enc.AddEnc(function() {
+	return Scenes.FarmIntro.Start;
+}, 3.0, function() { return Scenes.Global.VisitedRigardGates() && !farm.Found() && (world.time.hour >= 7 && world.time.hour < 17); });
+
+PlainsLoc.Crossroads.links.push(new Link(
+	"Farm",
+	function() { return farm.Found(); },
+	true,
+	null,
+	function() {
+		MoveToLocation(world.loc.Farm.Fields, {minute: 30});
+	}
+));
+
 //
 // Mound
 //
 
-world.loc.Plains.Portals.description = function() {
+PlainsLoc.Portals.description = function() {
 	var parse = {};
 	
 	Text.Add("Located near the crossroads at the center of the great plains lies a lone hill, visible for miles around. ", parse);
@@ -268,15 +273,15 @@ world.loc.Plains.Portals.description = function() {
 			Text.Add("The area is deserted. Even though it’s so close to one of the major intersections on this vast plain, few travelers wish to linger near this place.", parse);
 	}
 }
-world.loc.Plains.Portals.links.push(new Link(
+PlainsLoc.Portals.links.push(new Link(
 	"Crossroads", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Plains.Crossroads, {minute: 10});
+		MoveToLocation(PlainsLoc.Crossroads, {minute: 10});
 	}
 ));
 
-world.loc.Plains.Portals.events.push(new Link(
+PlainsLoc.Portals.events.push(new Link(
 	"Jeanne", function() {
 		return !Scenes.Global.PortalsOpen() && glade.flags["Visit"] >= DryadGlade.Visit.DefeatedOrchid;
 	}, true,
@@ -290,13 +295,13 @@ world.loc.Plains.Portals.events.push(new Link(
 // Gate house
 //
 
-world.loc.Plains.Gate.onEntry = function() {
+PlainsLoc.Gate.onEntry = function() {
 	if(miranda.flags["Met"] == 0)
 		Scenes.Miranda.WelcomeToRigard();
 	else
 		PrintDefaultOptions();
 }
-world.loc.Plains.Gate.description = function() {
+PlainsLoc.Gate.description = function() {
 	Text.Add("You are standing on a split in the road leading from the great plains to the city of Rigard. Just up ahead you can see the gates of the great city, and the castle towering above a river flowing beside the town. ");
 	if(miranda.IsAtLocation())
 		Scenes.Miranda.RigardGatesDesc();
@@ -314,14 +319,14 @@ world.loc.Plains.Gate.description = function() {
 	Text.Add("The other path goes around the city, leading into the plains beyond, threading close to the vast forest. [TreeFar]", {TreeFar: world.TreeFarDesc()});
 	Text.NL();
 }
-world.loc.Plains.Gate.links.push(new Link(
+PlainsLoc.Gate.links.push(new Link(
 	"Crossroads", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Plains.Crossroads, {hour: 2});
+		MoveToLocation(PlainsLoc.Crossroads, {hour: 2});
 	}
 ));
-world.loc.Plains.Gate.links.push(new Link(
+PlainsLoc.Gate.links.push(new Link(
 	"Rigard", true, true,
 	null,
 	function() {
@@ -356,28 +361,28 @@ world.loc.Plains.Gate.links.push(new Link(
 		}
 	}
 ));
-world.loc.Plains.Gate.links.push(new Link(
+PlainsLoc.Gate.links.push(new Link(
 	"Slums", true, true,
 	null,
 	function() {
 		MoveToLocation(world.loc.Rigard.Slums.gate, {minute: 15});
 	}
 ));
-world.loc.Plains.Gate.links.push(new Link(
+PlainsLoc.Gate.links.push(new Link(
 	"King's road", true, true,
 	null,
 	function() {
 		MoveToLocation(world.loc.KingsRoad.Road, {hour: 1});
 	}
 ));
-world.loc.Plains.Gate.events.push(new Link(
+PlainsLoc.Gate.events.push(new Link(
 	"Miranda", function() { return miranda.IsAtLocation(); }, true,
 	null,
 	function() {
 		Scenes.Miranda.RigardGatesInteract();
 	}
 ));
-world.loc.Plains.Gate.events.push(new Link(
+PlainsLoc.Gate.events.push(new Link(
 	"Letter", function() {
 		return outlaws.flags["Met"] == Outlaws.Met.Letter;
 	}, function() {
@@ -394,3 +399,4 @@ world.loc.Plains.Gate.events.push(new Link(
 	}
 ));
 
+export { PlainsLoc };
