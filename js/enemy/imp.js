@@ -66,23 +66,6 @@ Imp.prototype.constructor = Imp;
 
 // Intro scenes
 
-world.loc.DarkAspect.Cliff.events.push(new Link(
-	"Imps", true, true,
-	function() {
-		if(uru.flags["Intro"] & Uru.IntroFlags.LostToImps)
-			Text.Add("The imps are still hanging around, sneering and hooting at you. Going near them is probably not going to end well for you. They would probably jump at a chance to have another go at you.");
-		else
-			Text.Add("The fallen imps are out cold on the ground, you guess you could check them for loot, or maybe - just maybe - get some release.");
-		Text.NL();
-	},
-	function() {
-		if(uru.flags["Intro"] & Uru.IntroFlags.LostToImps)
-			Intro.ImpsLossPrompt();
-		else
-			Intro.ImpsWinPrompt();
-	}
-));
-
 Intro.ImpsWinPrompt = function() {
 	Text.Clear();
 		

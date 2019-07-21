@@ -401,20 +401,6 @@ Scenes.Momo.Interact = function() {
 	}
 }
 
-world.loc.Plains.Nomads.Fireplace.events.push(new Link(
-	"Momo", 
-	function() { return momo.IsAtLocation(world.loc.Plains.Nomads.Fireplace); }, true,
-	function() {
-		if(momo.AtCamp()) {
-			Text.Add("A rather tatty tent has been set up close by the central cookfires for Momo, the dragon-girl.");
-			if(!momo.IsAtLocation())
-				Text.Add(" The tent's flaps are closed, its owner having retired for the night.");
-			Text.NL();
-		}
-	},
-	Scenes.Momo.Interact
-));
-
 //TODO
 Scenes.Momo.Prompt = function() {
 	var parse = {

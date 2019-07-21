@@ -300,24 +300,18 @@ Scenes.Patchwork.Prompt = function() {
 	});
 }
 
-world.loc.Plains.Nomads.Fireplace.events.push(new Link(
-	"Patchwork", function() { return (world.time.hour >= 8 && world.time.hour < 24); }, true,
-	function() {
-		if(!(world.time.hour >= 8 && world.time.hour < 24)) return;
-		
-		var parse = {
-			notS : patchwork.mfPronoun("", "s"),
-			dont : patchwork.mfPronoun("don’t", "doesn’t")
-		};
-		parse = patchwork.ParserPronouns(parse);
-		
-		if(!patchwork.Met())
-			Text.Add("A strange individual wearing a patchwork robe has set up shop close to the campfire. ");
-		else
-			Text.Add("Patchwork the peddler is standing by the campfire. You have the distinct feeling [heshe] know[notS] you’re here, even if [heshe] [dont] seem to be moving at the moment. ", parse);
-		Text.NL();
-	},
-	Scenes.Patchwork.Interact
-));
+Scenes.Patchwork.Desc = function() {
+	var parse = {
+		notS : patchwork.mfPronoun("", "s"),
+		dont : patchwork.mfPronoun("don’t", "doesn’t")
+	};
+	parse = patchwork.ParserPronouns(parse);
+	
+	if(!patchwork.Met())
+		Text.Add("A strange individual wearing a patchwork robe has set up shop close to the campfire. ");
+	else
+		Text.Add("Patchwork the peddler is standing by the campfire. You have the distinct feeling [heshe] know[notS] you’re here, even if [heshe] [dont] seem to be moving at the moment. ", parse);
+	Text.NL();
+}
 
 export { Patchwork };

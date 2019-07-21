@@ -3,6 +3,7 @@ import { world } from '../world';
 import { Event, Link, Scenes } from '../event';
 import { Maze } from '../maze';
 import { GetDEBUG } from '../../app';
+import { Halloween } from '../event/halloween';
 
 //
 // Nomads
@@ -136,6 +137,90 @@ Nomads.Fireplace.links.push(new Link(
 		Scenes.Nursery.Nomads();
 	}
 ));
+
+Nomads.Fireplace.events.push(new Link(
+	"Chief", function() { return (world.time.hour >= 8 && world.time.hour < 22); }, true,
+	function() {
+		if(!(world.time.hour >= 8 && world.time.hour < 22)) return;
+		Scenes.Chief.Desc();
+	},
+	Scenes.Chief.Interact
+));
+Nomads.Fireplace.events.push(new Link(
+	function() { return cale.name; }, 
+	function() { return cale.IsAtLocation(Nomads.Fireplace); }, true,
+	function() {
+		if(cale.IsAtLocation(Nomads.Fireplace))
+			Scenes.Cale.Desc();
+	},
+	Scenes.Cale.Interact
+));
+Nomads.Fireplace.events.push(new Link(
+	function() { return (estevan.flags["Met"] == 0) ? "Satyr" : "Estevan"; }, function() { return estevan.IsAtLocation(); }, true,
+	function() {
+		if(estevan.IsAtLocation())
+			Scenes.Estevan.Desc();
+	},
+	Scenes.Estevan.Interact
+));
+Nomads.Fireplace.events.push(new Link(
+	function() {
+		return magnus.flags["Met"] == 0 ? "Scholar" : "Magnus";
+	}, function() { return (world.time.hour >= 8 && world.time.hour < 22); }, true,
+	function() {
+		if(!(world.time.hour >= 8 && world.time.hour < 22)) return;
+		Scenes.Magnus.Desc();
+	},
+	Scenes.Magnus.Interact
+));
+Nomads.Fireplace.events.push(new Link(
+	function() { return rosalin.flags["Met"] == 0 ? "Alchemist" : "Rosalin"; },
+	function() { return rosalin.IsAtLocation(Nomads.Fireplace); }, true,
+	function() {
+		if(!rosalin.IsAtLocation(Nomads.Fireplace)) return;
+		Scenes.Rosalin.Desc();
+	},
+	Scenes.Rosalin.Interact
+	/*,
+	function() { return rosalin.flags["Met"] == 0 ? "Approach the catgirl alchemist." : "Talk with Rosalin the alchemist."; } */
+));
+Nomads.Fireplace.events.push(new Link(
+	"Patchwork", function() { return (world.time.hour >= 8 && world.time.hour < 24); }, true,
+	function() {
+		if(!(world.time.hour >= 8 && world.time.hour < 24)) return;
+		Scenes.Patchwork.Desc();
+	},
+	Scenes.Patchwork.Interact
+));
+
+Nomads.Fireplace.events.push(new Link(
+	"Momo", 
+	function() { return momo.IsAtLocation(Nomads.Fireplace); }, true,
+	function() {
+		if(momo.AtCamp()) {
+			Text.Add("A rather tatty tent has been set up close by the central cookfires for Momo, the dragon-girl.");
+			if(!momo.IsAtLocation())
+				Text.Add(" The tent's flaps are closed, its owner having retired for the night.");
+			Text.NL();
+		}
+	},
+	Scenes.Momo.Interact
+));
+//#add “pie” option to nomads’ camp from 17-22 pm when Halloween season/debug is active.
+Nomads.Fireplace.events.push(new Link(
+	"Pumpkin Pie", function() {
+		if(!(gameCache.flags["HW"] & Halloween.State.Intro)) return false;
+		// Correct time of day
+		if((world.time.hour < 17) || (world.time.hour >= 22)) return false;
+		
+		return Halloween.IsSeason();
+	}, true,
+	null,
+	function() {
+		Scenes.Halloween.PumpkinPie();
+	}
+));
+
 Nomads.Fireplace.switchSpot = function() {
 	return !Scenes.Global.PortalsOpen();
 }

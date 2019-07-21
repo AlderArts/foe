@@ -1883,6 +1883,14 @@ InnLoc.common.events.push(new Link(
 	}
 ));
 
+InnLoc.common.events.push(new Link(
+	function() {
+		return lei.flags["Met"] >= Lei.Met.KnowName ? "Lei" : "Stranger";
+	},
+	function() { return lei.IsAtLocation(InnLoc.common); }, function() { return rigard.flags["RoyalAccessTalk"] > 0; },
+	Scenes.Lei.Desc,
+	Scenes.Lei.Interact
+));
 
 InnLoc.common.events.push(new Link(
 	"Room", Rigard.LB.HasRentedRoom, true,

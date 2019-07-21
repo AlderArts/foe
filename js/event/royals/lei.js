@@ -1011,39 +1011,35 @@ Scenes.Lei.InnFirstPrompt = function() {
 }
 */
 
-world.loc.Rigard.Inn.common.events.push(new Link(
-	function() {
-		return lei.flags["Met"] >= Lei.Met.KnowName ? "Lei" : "Stranger";
-	}, function() { return lei.IsAtLocation(world.loc.Rigard.Inn.common); }, function() { return rigard.flags["RoyalAccessTalk"] > 0; },
-	function() {
-		if(lei.IsAtLocation(world.loc.Rigard.Inn.common)) {
-			if(lei.flags["Met"] < Lei.Met.SeenGates) {
-				Text.Add("You notice a man sitting in the corner of the room on his own, a hood covering his face. There are a few others alone, a few others concealing their faces, but what draws your eye the most is his stillness. Whereas all others in the tavern are in motion, he sits completely still, his only movements the occasional tilt of his head, as he seems to scan the room, and the movement of his hand as he nurses some drink in a dark glass. Everything about him works to pique your curiosity, but you can’t quite come up with a reason to approach him.");
-				lei.flags["Met"] = Lei.Met.SeenInn;
-			}
-			else if(lei.flags["Met"] == Lei.Met.SeenGates)
-				Text.Add("You notice a man sitting in the corner of the room on his own, a hood hiding his face. His clothes are the same dark shade as that of the man you saw following the couple earlier, and something about his still watchfulness makes you suspicious. Perhaps you should approach him and investigate.");
-			else if(lei.flags["Met"] == Lei.Met.KnowName)
-				Text.Add("You see Lei back at his table in the corner of the room. He seems to be scanning the room much as he was last time. Perhaps it’s time to make a concerted effort to find out what his connection is with that couple.");
-			else
-				Text.Add("You see Lei sitting in the corner of the room, nursing his habitual drink. He seems vigilant, as always, scanning the room slowly between sips.");
-			Text.NL();
-		}
-		else if(lei.flags["Met"] >= Lei.Met.KnowName) {
-			Text.Add("Lei is not in his usual spot.");
-			Text.NL();
-		}
-		Text.Flush();
-	},
-	function() {
-		if(rigard.Krawitz["Q"] < Rigard.KrawitzQ.Started) {
-			Scenes.Lei.InnPromptFirst();
-		}
-		else {
-			Scenes.Lei.InnApproach();
-		}
+Scenes.Lei.Interact = function() {
+	if(rigard.Krawitz["Q"] < Rigard.KrawitzQ.Started) {
+		Scenes.Lei.InnPromptFirst();
 	}
-));
+	else {
+		Scenes.Lei.InnApproach();
+	}
+}
+
+Scenes.Lei.Desc = function() {
+	if(lei.IsAtLocation(world.loc.Rigard.Inn.common)) {
+		if(lei.flags["Met"] < Lei.Met.SeenGates) {
+			Text.Add("You notice a man sitting in the corner of the room on his own, a hood covering his face. There are a few others alone, a few others concealing their faces, but what draws your eye the most is his stillness. Whereas all others in the tavern are in motion, he sits completely still, his only movements the occasional tilt of his head, as he seems to scan the room, and the movement of his hand as he nurses some drink in a dark glass. Everything about him works to pique your curiosity, but you can’t quite come up with a reason to approach him.");
+			lei.flags["Met"] = Lei.Met.SeenInn;
+		}
+		else if(lei.flags["Met"] == Lei.Met.SeenGates)
+			Text.Add("You notice a man sitting in the corner of the room on his own, a hood hiding his face. His clothes are the same dark shade as that of the man you saw following the couple earlier, and something about his still watchfulness makes you suspicious. Perhaps you should approach him and investigate.");
+		else if(lei.flags["Met"] == Lei.Met.KnowName)
+			Text.Add("You see Lei back at his table in the corner of the room. He seems to be scanning the room much as he was last time. Perhaps it’s time to make a concerted effort to find out what his connection is with that couple.");
+		else
+			Text.Add("You see Lei sitting in the corner of the room, nursing his habitual drink. He seems vigilant, as always, scanning the room slowly between sips.");
+		Text.NL();
+	}
+	else if(lei.flags["Met"] >= Lei.Met.KnowName) {
+		Text.Add("Lei is not in his usual spot.");
+		Text.NL();
+	}
+	Text.Flush();
+}
 
 Scenes.Lei.BarFight = function() {
 	var parse = {

@@ -310,19 +310,13 @@ Scenes.Estevan.Prompt = function() {
 	Gui.SetButtonsFromList(options, true, PrintDefaultOptions);
 }
 
-world.loc.Plains.Nomads.Fireplace.events.push(new Link(
-	function() { return (estevan.flags["Met"] == 0) ? "Satyr" : "Estevan"; }, function() { return estevan.IsAtLocation(); }, true,
-	function() {
-		if(!estevan.IsAtLocation()) return;
-		
-		if(estevan.flags["Met"] == 0)
-			Text.Add("You see a strange creature by the fire, a man half human, half goat. He seems to be working on a contraption of some sort, probably a hunting trap. ");
-		else
-			Text.Add("Estevan the satyr hunter is lounging by the campfire, working on something while taking occasional sips of wine. ");
-		Text.NL();
-	},
-	Scenes.Estevan.Interact
-));
+Scenes.Cale.Desc = function() {
+	if(estevan.flags["Met"] == 0)
+		Text.Add("You see a strange creature by the fire, a man half human, half goat. He seems to be working on a contraption of some sort, probably a hunting trap. ");
+	else
+		Text.Add("Estevan the satyr hunter is lounging by the campfire, working on something while taking occasional sips of wine. ");
+	Text.NL();
+}
 
 Scenes.Estevan.SexGay = function() {
 	var p1cock = player.BiggestCock();

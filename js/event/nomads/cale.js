@@ -261,19 +261,6 @@ Scenes.Cale.Desc = function() {
 	Text.NL();
 }
 
-
-
-
-world.loc.Plains.Nomads.Fireplace.events.push(new Link(
-	function() { return cale.name; }, 
-	function() { return cale.IsAtLocation(world.loc.Plains.Nomads.Fireplace); }, true,
-	function() {
-		if(cale.IsAtLocation(world.loc.Plains.Nomads.Fireplace))
-			Scenes.Cale.Desc();
-	},
-	Scenes.Cale.Interact
-));
-
 Scenes.Cale.FirstApproach = function() {
 	var parse = {
 		playername : player.name,

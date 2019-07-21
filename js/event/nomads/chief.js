@@ -281,21 +281,15 @@ Scenes.Chief.TalkPrompt = function() {
 	Gui.SetButtonsFromList(options, true);
 }
 
-world.loc.Plains.Nomads.Fireplace.events.push(new Link(
-	"Chief", function() { return (world.time.hour >= 8 && world.time.hour < 22); }, true,
-	function() {
-		if(!(world.time.hour >= 8 && world.time.hour < 22)) return;
+Scenes.Chief.Desc = function() {
+	if(chief.flags["Met"] == 0)
+		Text.Add("On a log by the fire pit sits an old man smoking a pipe. His sharp eyes quickly find you and he gives you an uninterested look before returning to the pipe.");
+	else if(chief.relation.Get() >= 50)
+		Text.Add("On a log by the fire pit sits the nomad chief, smoking his pipe. His attention quickly turns to you and you are given a wide grin, the chief acknowledging your presence before returning to the pipe.");
+	else
+		Text.Add("On a log by the fire pit sits the nomad chief, smoking his pipe. His sharp eyes quickly find you and he gives you a short nod before returning to the pipe.");
 		
-		if(chief.flags["Met"] == 0)
-			Text.Add("On a log by the fire pit sits an old man smoking a pipe. His sharp eyes quickly find you and he gives you an uninterested look before returning to the pipe.");
-		else if(chief.relation.Get() >= 50)
-			Text.Add("On a log by the fire pit sits the nomad chief, smoking his pipe. His attention quickly turns to you and you are given a wide grin, the chief acknowledging your presence before returning to the pipe.");
-		else
-			Text.Add("On a log by the fire pit sits the nomad chief, smoking his pipe. His sharp eyes quickly find you and he gives you a short nod before returning to the pipe.");
-			
-		Text.NL();
-	},
-	Scenes.Chief.Interact
-));
+	Text.NL();
+}
 
 export { Chief };

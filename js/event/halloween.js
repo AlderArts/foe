@@ -179,21 +179,6 @@ Scenes.Halloween.PieIntro = function() {
 	Gui.NextPrompt();
 }
 
-//#add “pie” option to nomads’ camp from 17-22 pm when Halloween season/debug is active.
-world.loc.Plains.Nomads.Fireplace.events.push(new Link(
-	"Pumpkin Pie", function() {
-		if(!(gameCache.flags["HW"] & Halloween.State.Intro)) return false;
-		// Correct time of day
-		if((world.time.hour < 17) || (world.time.hour >= 22)) return false;
-		
-		return Halloween.IsSeason();
-	}, true,
-	null,
-	function() {
-		Scenes.Halloween.PumpkinPie();
-	}
-));
-
 Scenes.Halloween.PumpkinPie = function() {
 	var parse = {
 		playername : player.name

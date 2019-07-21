@@ -269,33 +269,22 @@ Scenes.Rosalin.Interact = function() {
 	Gui.SetButtonsFromList(options, true, PrintDefaultOptions);
 }
 
+Scenes.Rosalin.Desc = function() {
+	var parse = {
+		extinguishedLit : (world.time.hour >= 19 || world.time.hour < 2) ? "lit" : "extinguished"
+	};
+	parse = rosalin.ParserPronouns(parse);
 
-world.loc.Plains.Nomads.Fireplace.events.push(new Link(
-	function() { return rosalin.flags["Met"] == 0 ? "Alchemist" : "Rosalin"; },
-	function() { return rosalin.IsAtLocation(world.loc.Plains.Nomads.Fireplace); }, true,
-	function() {
-		if(!rosalin.IsAtLocation(world.loc.Plains.Nomads.Fireplace)) return;
-
-		var parse = {
-			extinguishedLit : (world.time.hour >= 19 || world.time.hour < 2) ? "lit" : "extinguished"
-		};
-		parse = rosalin.ParserPronouns(parse);
-
-		if(rosalin.flags["Met"] == 0) {
-			Text.Add("Near the [extinguishedLit] fire pit, you see a strange young woman busying herself with a collection of strange flasks, mixing their contents into a larger beaker. She has prominent catlike features, brown-furred ears poking out of her teal hair, and a long sinuous tail swaying behind her generous bottom. Acrid fumes are rising from her concoction, making you wonder if approaching her is really a good idea.", parse);
-			Text.NL();
-		}
-		else {
-			Text.Add("Nearby, Rosalin is tending to [hisher] vials as usual, undoubtedly brewing something potentially lethal to [himher]self and those around [himher].", parse);
-			Text.NL();
-			// TODO: Plant description
-		}
-	},
-	function() {
-		Scenes.Rosalin.Interact();
-	} /*,
-	function() { return rosalin.flags["Met"] == 0 ? "Approach the catgirl alchemist." : "Talk with Rosalin the alchemist."; } */
-));
+	if(rosalin.flags["Met"] == 0) {
+		Text.Add("Near the [extinguishedLit] fire pit, you see a strange young woman busying herself with a collection of strange flasks, mixing their contents into a larger beaker. She has prominent catlike features, brown-furred ears poking out of her teal hair, and a long sinuous tail swaying behind her generous bottom. Acrid fumes are rising from her concoction, making you wonder if approaching her is really a good idea.", parse);
+		Text.NL();
+	}
+	else {
+		Text.Add("Nearby, Rosalin is tending to [hisher] vials as usual, undoubtedly brewing something potentially lethal to [himher]self and those around [himher].", parse);
+		Text.NL();
+		// TODO: Plant description
+	}
+}
 
 Scenes.Rosalin.TalkPrompt = function() {
 	Text.Clear();

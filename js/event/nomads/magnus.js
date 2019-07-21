@@ -906,26 +906,18 @@ Scenes.Magnus.LearnMagic = function() {
 	});
 }
 
-world.loc.Plains.Nomads.Fireplace.events.push(new Link(
-	function() {
-		return magnus.flags["Met"] == 0 ? "Scholar" : "Magnus";
-	}, function() { return (world.time.hour >= 8 && world.time.hour < 22); }, true,
-	function() {
-		if(!(world.time.hour >= 8 && world.time.hour < 22)) return;
-		
-		var parse = {
-			litExtinguished : world.time.hour >= 19 ? "lit" : "extinguished"
-		};
-		
-		if(magnus.flags["Met"] == 0) {
-			Text.Add("Near the [litExtinguished] campfire, you see a thin and nervous-looking young man. He is carrying slightly tattered robes and a pair of thick glasses, and seems to be embroiled in studying a heavy tome. The man hardly seems to register anything going on around him, so absorbed is he in the book.", parse);
-		}
-		else {
-			Text.Add("Magnus the apprentice mage is poring over some old book, probably trying to find some secret knowledge in the strange, squiggly symbols covering its pages. As usual, he is deeply focused on his studies, and you doubt even an attack on the camp would distract his reverie.", parse);
-		}
-		Text.NL();
-	},
-	Scenes.Magnus.Interact
-));
+Scenes.Magnus.Desc = function() {
+	var parse = {
+		litExtinguished : world.time.hour >= 19 ? "lit" : "extinguished"
+	};
+	
+	if(magnus.flags["Met"] == 0) {
+		Text.Add("Near the [litExtinguished] campfire, you see a thin and nervous-looking young man. He is carrying slightly tattered robes and a pair of thick glasses, and seems to be embroiled in studying a heavy tome. The man hardly seems to register anything going on around him, so absorbed is he in the book.", parse);
+	}
+	else {
+		Text.Add("Magnus the apprentice mage is poring over some old book, probably trying to find some secret knowledge in the strange, squiggly symbols covering its pages. As usual, he is deeply focused on his studies, and you doubt even an attack on the camp would distract his reverie.", parse);
+	}
+	Text.NL();
+}
 
 export { Magnus };
