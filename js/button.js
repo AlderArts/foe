@@ -5,11 +5,13 @@
  */
 import * as $ from 'jquery';
 import { BUTTON_FONT } from '../app';
-import { gameState, GameState, Render } from './main';
+import { gameState, GameState } from './gamestate';
 import { isFunction } from './utility';
 
 function Button(Gui, rect, text, func, enabled, image, disabledImage, glow) {
 	var that = this;
+
+	this.Gui = Gui;
 	
 	this.enabledImage  = image || Images.imgButtonEnabled;
 	this.disabledImage = disabledImage || Images.imgButtonDisabled;
@@ -99,7 +101,7 @@ Button.prototype.HandleClick = function() {
 			alert(e.message + "........." + e.stack);
 		}
 		finally {
-			Render();
+			this.Gui.Render();
 		}
 	}
 }
@@ -206,7 +208,7 @@ Button.prototype.HandleKeydown = function(key) {
 			alert(e.message + "........." + e.stack);
 		}
 		finally {
-			Render();
+			this.Gui.Render();
 		}
 	}
 }

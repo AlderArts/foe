@@ -1,6 +1,7 @@
-import { SetGameState, GameState, SplashScreen } from './main';
+import { SplashScreen } from './main';
 import { Gui } from './gui';
 import { Input } from './input';
+import { SetGameState, GameState } from './gamestate';
 
 let CreditsScreen = function() {
 	SetGameState(GameState.Credits);

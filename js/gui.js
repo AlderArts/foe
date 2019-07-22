@@ -7,9 +7,10 @@ import { Images } from './assets';
 import { SMALL_FONT, DEFAULT_FONT, GetRenderPictures } from '../app';
 import { StatusEffect, StatusList } from './statuseffect';
 import { Input, Keys } from './input';
-import { online, gameState, GameState } from './main';
+import { online } from './main';
 import { GAME } from './gamecache';
 import { DataPrompt, ExploreButtonIndex, Explore } from './exploration';
+import { gameState, GameState } from './gamestate';
 
 Gui.w = 1280;
 Gui.h = 720;
@@ -731,6 +732,7 @@ Gui.SetGameState = function(state) {
 		Input.navButtons[i].SetVisibility();
 }
 
+// Animation loop Rendering
 Gui.Render = function() {
 	Gui.cavalcade.hide();
 

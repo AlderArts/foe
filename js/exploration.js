@@ -6,7 +6,7 @@
 //***************************************************//
 
 import { Gui } from './gui';
-import { SetGameState, GameState } from './main';
+import { SetGameState, GameState } from './gamestate';
 import { GAME } from './gamecache';
 import { GetRenderPictures, SetRenderPictures, GetDEBUG, SetDEBUG } from '../app';
 

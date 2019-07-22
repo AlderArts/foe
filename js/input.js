@@ -1,6 +1,6 @@
 import { Button } from './button';
 import { Images } from './assets';
-import { gameState, GameState } from './main';
+import { gameState, GameState } from './gamestate';
 
 let Input = {
 

@@ -1,12 +1,12 @@
 import * as $ from 'jquery';
 import { Images, LoadImages } from './assets';
-import { world } from './world';
 import { Gui } from './gui';
 import { VERSION_STRING, GetRenderPictures, SetRenderPictures, GetDEBUG, SetDEBUG } from '../app';
 import { Input } from './input';
 import { Saver } from './saver';
 import { CreditsScreen } from './credits';
 import { ClearCache, CacheToGame } from './gamecache';
+import { GameState } from './gamestate';
 
 // Prevent selection
 $(function() {
@@ -30,24 +30,6 @@ function EntryPoint() {
 }
 // Make sure that this loads
 window.onload = EntryPoint;
-
-// Gamestate
-let GameState = {
-	Credits   : 0,
-	Game      : 1,
-	Combat    : 2,
-	Event     : 3,
-	Cavalcade : 4,
-	Alchemy   : 5,
-	Hunting   : 6
-}
-
-let gameState = GameState.Credits;
-
-let SetGameState = function(state) {
-	gameState = state;
-	Gui.SetGameState(state);
-}
 
 let SetGameOverButton = function(text) {
 	text = text || "This is where your journey comes to an end.";
@@ -136,13 +118,6 @@ let SplashScreen = function() {
 
 
 
-
-// Animation loop Rendering
-function Render() {
-	world.Render();
-	Gui.Render();
-}
-
 function Setup() {
 	// Load assets
 	LoadImages(function() {
@@ -151,13 +126,13 @@ function Setup() {
 		// Go to credits screen
 		SplashScreen();
 		// Render first frame
-		setTimeout(Render, 100);
+		setTimeout(Gui.Render, 100);
 	});
 
 	// Intialize GUI (set key shortcuts, buttons etc)
 	Gui.Init();
 
-	Render();
+	Gui.Render();
 }
 
-export { online, GameState, gameState, SetGameState, SetGameOverButton, SplashScreen, Render };
+export { online, SetGameOverButton, SplashScreen };

@@ -6,7 +6,7 @@
 
 import { Event, Link } from '../event';
 import { world } from '../world';
-import { GameState } from '../main';
+import { GameState } from '../gamestate';
 import { Gui } from '../gui';
 
 let Intro = {};

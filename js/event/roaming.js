@@ -1,7 +1,7 @@
 import { EncounterTable } from "../event";
 import { Party } from "../party";
 import { Encounter } from "../combat";
-import { GameState } from "../main";
+import { GameState } from "../gamestate";
 
 let RoamingScenes = {};
 

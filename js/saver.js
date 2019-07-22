@@ -1,4 +1,5 @@
 import { online } from './main';
+import { Gui } from './gui';
 
 let Saver = {}
 
@@ -210,7 +211,7 @@ Saver.LoadFromFile = function(file) {
 		gameCache = JSON.parse(e.target.result);
 		CacheToGame();
 		PrintDefaultOptions();
-		Render();
+		Gui.Render();
 	}
 
 	reader.readAsText(file);
