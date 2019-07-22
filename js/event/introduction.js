@@ -1802,10 +1802,6 @@ Intro.UruSexAftermath = function() {
 	});
 }
 
-LightAspect = {
-	Garden : new Event("Garden")
-}
-
 Intro.LightAspectDesc = function() {
 	party.location = LightAspect.Garden;
 	Text.Clear();
@@ -1836,7 +1832,7 @@ Intro.LightAspectDesc = function() {
 // Create namespace
 let LightAspect = {
 	Garden   : new Event("Garden"),
-	Temple   : new Event("Temple")
+	Temple   : new Event("Temple"),
 }
 
 //
