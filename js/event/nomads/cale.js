@@ -4,7 +4,6 @@
  * 
  */
 import { Entity } from '../../entity';
-import { world } from '../../world';
 import { Shop } from '../../shop';
 import { GetDEBUG } from '../../../app';
 

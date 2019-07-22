@@ -3,7 +3,6 @@
 // Weapon Shop
 //
 
-import { world } from '../../world';
 import { Event, Link } from '../../event';
 
 let WeaponShopLoc = new Event("The Pale Flame");

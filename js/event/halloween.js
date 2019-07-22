@@ -1,7 +1,6 @@
 
 import { Event, Link } from '../event';
 import { Inventory } from '../inventory';
-import { world } from '../world';
 import { GetDEBUG } from '../../app';
 
 let HalloweenScenes = {};

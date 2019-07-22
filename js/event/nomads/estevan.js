@@ -4,7 +4,6 @@
  * 
  */
 import { Entity } from '../../entity';
-import { world } from '../../world';
 import { GetDEBUG } from '../../../app';
 
 let EstevanScenes = {};

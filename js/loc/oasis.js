@@ -1,6 +1,4 @@
 
-
-import { world } from '../world';
 import { EncounterTable } from '../event';
 import { Shop } from '../shop';
 

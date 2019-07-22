@@ -5,7 +5,6 @@
  */
 
 import { Event, Link } from '../event';
-import { world } from '../world';
 import { GameState } from '../gamestate';
 import { Gui } from '../gui';
 

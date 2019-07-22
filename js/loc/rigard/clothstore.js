@@ -1,6 +1,4 @@
 
-
-import { world } from '../../world';
 import { Event, Link } from '../../event';
 
 //

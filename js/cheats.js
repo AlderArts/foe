@@ -1,5 +1,3 @@
-
-import { world } from './world';
 import { Link } from './event';
 import { Cock } from './body/cock';
 import { Vagina } from './body/vagina';

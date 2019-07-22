@@ -5,7 +5,6 @@
  */
 
 import { Entity } from '../../entity';
-import { world } from '../../world';
 
 let RosalinScenes = {};
 

@@ -1,7 +1,4 @@
 
-
-
-import { world } from '../../world';
 import { Event, Link, EncounterTable } from '../../event';
 
 let SlumsLoc = {

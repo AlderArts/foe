@@ -5,7 +5,6 @@
  */
 
 
-import { world } from '../world';
 import { Event, Link, EncounterTable } from '../event';
 import { VenaScenes } from '../event/burrows/vena';
 import { OpheliaScenes } from '../event/burrows/ophelia';

@@ -3,7 +3,6 @@
 // Asche's
 //
 
-import { world } from '../../world';
 import { Event, Link, EncounterTable } from '../../event';
 import { Shop } from '../../shop';
 import { Items } from '../../item';

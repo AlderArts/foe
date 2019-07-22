@@ -4,8 +4,6 @@
  * 
  */
 
-//import { world } from '../../world';
-
 // Create namespace
 let TreeCityLoc = {
 }

@@ -6,7 +6,6 @@
  */
 import { Event, Link, EncounterTable } from '../../event';
 import { Outlaws } from './outlaws';
-import { world } from '../../world';
 import { GetDEBUG } from '../../../app';
 import { Stat } from '../../stat';
 

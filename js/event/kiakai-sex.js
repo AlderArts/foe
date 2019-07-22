@@ -5,7 +5,6 @@
  * 
  */
 import { Kiakai } from './kiakai';
-import { world } from '../world';
 
 let KiakaiSex = {};
 

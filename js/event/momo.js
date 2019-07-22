@@ -5,8 +5,7 @@
  */
 
 import { Entity } from '../entity';
-import { Link, Scenes, EncounterTable } from '../event';
-import { world } from '../world';
+import { EncounterTable } from '../event';
 
 let MomoScenes = {};
 

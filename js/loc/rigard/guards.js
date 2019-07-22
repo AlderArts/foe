@@ -1,4 +1,4 @@
-import { world } from '../../world';
+
 import { Event, Link, EncounterTable } from '../../event';
 
 let GateLoc = new Event("Main Gate");

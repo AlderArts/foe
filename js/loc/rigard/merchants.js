@@ -1,5 +1,4 @@
 
-import { world } from '../../world';
 import { Event, Link, EncounterTable } from '../../event';
 import { OddShopLoc } from './sexstore';
 import { ArmorShopLoc } from './armorshop';

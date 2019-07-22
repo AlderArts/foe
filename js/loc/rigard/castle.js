@@ -1,5 +1,4 @@
 
-import { world } from '../../world';
 import { Event, Link, EncounterTable } from '../../event';
 import { MageTowerLoc } from './magetower';
 

@@ -1,5 +1,4 @@
 
-import { world } from '../world';
 import { Event, Link } from '../event';
 import { Maze } from '../maze';
 import { GetDEBUG } from '../../app';

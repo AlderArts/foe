@@ -3,7 +3,6 @@
 // Shop of oddities
 //
 
-import { world } from '../../world';
 import { Event, Link } from '../../event';
 
 let OddShopLoc = new Event("Odd shop");

@@ -2,7 +2,6 @@
  * Specifics for Cavalcade game with Rosalin, Estevan and Cale
  */
 import { Link } from '../../event';
-import { world } from '../../world';
 import { GetDEBUG } from '../../../app';
 
 let NCavalcadeScenes = {};

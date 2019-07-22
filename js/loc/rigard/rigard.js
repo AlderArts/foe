@@ -4,7 +4,6 @@
  *
  */
 
-import { world } from '../../world';
 import { EncounterTable } from '../../event';
 import { BrothelLoc } from './brothel';
 import { InnLoc, LBScenes } from './inn';

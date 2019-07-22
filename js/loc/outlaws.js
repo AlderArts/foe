@@ -4,7 +4,6 @@
  * 
  */
 
-import { world } from '../world';
 import { Event, Link, EncounterTable } from '../event';
 import { Scenes } from '../scenes';
 

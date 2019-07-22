@@ -5,7 +5,6 @@
  */
 import { Link } from '../../event';
 import { Entity } from '../../entity';
-import { world } from '../../world';
 
 let GwendyScenes = {};
 

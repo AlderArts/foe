@@ -1,5 +1,4 @@
 
-import { world } from '../../world';
 import { Event, Link } from '../../event';
 
 import { GryphonsScenes } from '../../event/brothel/gryphons';

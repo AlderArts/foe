@@ -5,7 +5,6 @@
  */
 
 import { Entity } from '../entity';
-import { world } from '../world';
 import { Intro } from '../event/introduction';
 
 function Imp() {
