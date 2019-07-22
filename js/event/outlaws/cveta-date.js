@@ -1,4 +1,3 @@
-import { Cveta } from './cveta';
 
 Cveta.Dates = { //Bitmask
 	Glade : 1,

@@ -4,7 +4,6 @@
  * HEALING SCENES
  * 
  */
-import { Kiakai } from './kiakai';
 
 let KiakaiSex = {};
 

@@ -1,9 +1,9 @@
-import { SplashScreen } from './main';
+
 import { Gui } from './gui';
 import { Input } from './input';
 import { SetGameState, GameState } from './gamestate';
 
-let CreditsScreen = function() {
+let CreditsScreen = function(SplashScreen) {
 	SetGameState(GameState.Credits, Gui);
 	Text.Clear();
 	Gui.ClearButtons();

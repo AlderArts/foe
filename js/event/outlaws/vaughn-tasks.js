@@ -1,4 +1,4 @@
-import { Vaughn } from './vaughn';
+
 import { GetDEBUG } from '../../../app';
 
 let TasksScenes = {};

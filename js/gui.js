@@ -6,10 +6,11 @@ import { SMALL_FONT, DEFAULT_FONT, GetRenderPictures } from '../app';
 import { StatusEffect, StatusList } from './statuseffect';
 import { Input, Keys } from './input';
 import { isOnline } from './gamestate';
-import { DataPrompt, ExploreButtonIndex, Explore } from './exploration';
+// import { Explore } from './exploration';
 import { gameState, GameState } from './gamestate';
+import { ExploreButtonIndex } from './explorestate';
 
-let Gui = {}
+let Gui = {};
 
 Gui.GAME = null;
 Gui.SetGAME = function(GAME) {
@@ -141,9 +142,6 @@ Gui.Init = function() {
 	Gui.FontSize = isOnline() && localStorage["fontSize"] ? localStorage["fontSize"] : "large";
 	document.getElementById("mainTextArea").style.fontSize = Gui.FontSize;
 	Gui.ShortcutsVisible = isOnline() ? parseInt(localStorage["ShortcutsVisible"]) == 1 : false;
-
-	// Basic menu
-	Input.menuButtons[0].Setup("Data", DataPrompt, true);
 
 	// Setup keyboard shortcuts
 	// Row 1

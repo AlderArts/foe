@@ -1,6 +1,5 @@
 
 import { Event, Link } from '../../event';
-import { Rigard } from './rigard';
 
 let InnLoc = {
 	common    : new Event("Lady's Blessing"),

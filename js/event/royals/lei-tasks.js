@@ -1,6 +1,4 @@
 
-import { Lei } from './lei';
-
 let TasksScenes = {};
 
 TasksScenes.OnTask = function() { //TODO add tasks

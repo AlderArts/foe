@@ -7,6 +7,7 @@ import { Saver } from './saver';
 import { CreditsScreen } from './credits';
 import { ClearCache, CacheToGame } from './gamecache';
 import { GameState, setOnline, isOnline } from './gamestate';
+import { DataPrompt } from './exploration';
 
 // Prevent selection
 $(function() {
@@ -75,7 +76,9 @@ let SplashScreen = function() {
 		loadfileOverlay();
 	}, true);
 
-	Input.buttons[3].Setup("Credits", CreditsScreen, true);
+	Input.buttons[3].Setup("Credits", function() {
+		CreditsScreen(SplashScreen);
+	}, true);
 
 	Input.buttons[4].Setup("Toggle debug", function() {
 		SetDEBUG(!GetDEBUG());
@@ -129,6 +132,9 @@ function Setup() {
 
 	// Intialize GUI (set key shortcuts, buttons etc)
 	Gui.Init();
+	// Basic menu
+	Input.menuButtons[0].Setup("Data", DataPrompt, true);
+
 
 	Gui.Render();
 }
