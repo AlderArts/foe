@@ -7,6 +7,8 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const ZipPlugin = require('zip-webpack-plugin');
 
+const CircularDependencyPlugin = require('circular-dependency-plugin');
+
 module.exports = {
   entry: './index.ts',
   plugins: [
@@ -19,7 +21,16 @@ module.exports = {
       chunkFilename: "[id].css"
     }),
     new CleanWebpackPlugin(),
-    new ZipPlugin()
+    new ZipPlugin(),
+    
+    new CircularDependencyPlugin({
+        // exclude detection of files based on a RegExp
+        exclude: /a\.js|node_modules/,
+        // add errors to webpack instead of warnings
+        failOnError: true,
+        // set the current working directory for displaying module paths
+        cwd: process.cwd(),
+    })
   ],
   module: {
     rules: [
