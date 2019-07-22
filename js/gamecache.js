@@ -68,6 +68,7 @@ import { Fireblossom } from './event/brothel/fireblossom';
 import { Aria } from './event/aria';
 import { Sylistraxia } from './event/sylistraxia';
 import { Ches } from './event/brothel/ches';
+import { ExplorationSetGAME } from './exploration';
 
 let gameCache = {};
 let GAME = {};
@@ -252,6 +253,9 @@ let InitCache = function() {
 	gameCache.flags["HW"] = gameCache.flags["HW"] || 0;
 
 	if(GAME.burrows.flags["Access"] >= Burrows.AccessFlags.Stage5) GAME.rigard.flags["Scepter"] = 0;
+
+	Gui.SetGAME(GAME);
+	ExplorationSetGAME(GAME);
 }
 
 let CacheToGame = function() {

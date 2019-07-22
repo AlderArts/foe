@@ -7,7 +7,6 @@
 
 import { Gui } from './gui';
 import { SetGameState, GameState, isOnline } from './gamestate';
-import { GAME } from './gamecache';
 import { GetRenderPictures, SetRenderPictures, GetDEBUG, SetDEBUG } from '../app';
 
 let ExploreButtonIndex = {
@@ -23,6 +22,12 @@ let ExploreButtonIndex = {
 	Sleep   : 9,
 	Look    : 10
 };
+
+let GAME = null;
+
+function ExplorationSetGAME(game) {
+	GAME = game;
+}
 
 function SetExploreButtons() {
 	var waitLocation = GAME.party.location.wait();
@@ -289,4 +294,4 @@ function ShowHunting(preventClear) {
 	SetExploreButtons();
 }
 
-export { DataPrompt, LimitedDataPrompt, ExploreButtonIndex, Explore };
+export { DataPrompt, LimitedDataPrompt, ExploreButtonIndex, Explore, ExplorationSetGAME };
