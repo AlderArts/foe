@@ -3,8 +3,9 @@
  * Define Twins (fighting entity)
  * 
  */
-import { Scenes } from '../../event';
 import { Entity } from '../../entity';
+
+let TwinsScenes = {};
 
 function Twins(storage) {
 	this.rumi = new Rumi();
@@ -54,8 +55,6 @@ Twins.prototype.ToStorage = function() {
 	
 	return storage;
 }
-
-Scenes.Twins = {};
 
 // Schedule
 Twins.prototype.IsAtLocation = function(location) {
@@ -121,7 +120,7 @@ Rani.prototype.ToStorage = function() {
 }
 
 // TODO
-Scenes.Twins.Interact = function() {
+TwinsScenes.Interact = function() {
 	var parse = {
 		
 	};
@@ -134,7 +133,7 @@ Scenes.Twins.Interact = function() {
 	//[Talk]
 	var options = new Array();
 	options.push({ nameStr : "Talk",
-		func : Scenes.Twins.TalkPrompt, enabled : true,
+		func : TwinsScenes.TalkPrompt, enabled : true,
 		tooltip : "Talkie talkie."
 	});
 	Gui.SetButtonsFromList(options, true, function() {
@@ -142,7 +141,7 @@ Scenes.Twins.Interact = function() {
 	});
 }
 
-Scenes.Twins.TalkPrompt = function() {
+TwinsScenes.TalkPrompt = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -213,7 +212,7 @@ Scenes.Twins.TalkPrompt = function() {
 			tooltip : Text.Parse("Ask them if they can intervene on behalf of the thief[death].", {death: terry.flags["Saved"] >= Terry.Saved.TalkedMiranda ? " on death row" : ""})
 		});
 	}
-	Gui.SetButtonsFromList(options, true, Scenes.Twins.Interact);
+	Gui.SetButtonsFromList(options, true, TwinsScenes.Interact);
 }
 
-export { Twins };
+export { Twins, TwinsScenes };

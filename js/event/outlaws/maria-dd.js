@@ -1,12 +1,11 @@
-import { Scenes } from '../../event';
 import { GetDEBUG } from '../../../app';
 
 //
-//Dead drops
+// Maria Dead drops
 //
-Scenes.Maria.DeadDrops = {};
+let DeadDropScenes = {};
 
-Scenes.Maria.DeadDrops.Alert = function() {
+DeadDropScenes.Alert = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -29,7 +28,7 @@ Scenes.Maria.DeadDrops.Alert = function() {
 }
 
 //Trigger this when the player approaches Maria after having witnessed the above scene.
-Scenes.Maria.DeadDrops.Initiation = function() {
+DeadDropScenes.Initiation = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -89,8 +88,8 @@ Scenes.Maria.DeadDrops.Initiation = function() {
 	});
 }
 
-Scenes.Maria.DeadDrops.First = {};
-Scenes.Maria.DeadDrops.First.Chat = function() {
+DeadDropScenes.First = {};
+DeadDropScenes.First.Chat = function() {
 	var parse = {};
 	
 	Text.Clear();
@@ -105,7 +104,7 @@ Scenes.Maria.DeadDrops.First.Chat = function() {
 	var options = new Array();
 	options.push({ nameStr : "Yes",
 		tooltip : "You’re about as ready as they come.",
-		func : Scenes.Maria.DeadDrops.First.Start, enabled : true
+		func : DeadDropScenes.First.Start, enabled : true
 	});
 	options.push({ nameStr : "No",
 		tooltip : "Not just yet.",
@@ -122,7 +121,7 @@ Scenes.Maria.DeadDrops.First.Chat = function() {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Maria.DeadDrops.First.Start = function() {
+DeadDropScenes.First.Start = function() {
 	var parse = {};
 	
 	// PARTY STUFF
@@ -333,7 +332,7 @@ Scenes.Maria.DeadDrops.First.Start = function() {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Maria.DeadDrops.Repeat = function() {
+DeadDropScenes.Repeat = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -385,7 +384,7 @@ Scenes.Maria.DeadDrops.Repeat = function() {
 			
 			var scenes = new EncounterTable();
 			scenes.AddEnc(function() {
-				Scenes.Maria.DeadDrops.Docks.Entry();
+				DeadDropScenes.Docks.Entry();
 			}, 1.0, function() { return true; });
 			/* TODO other scenes
 			scenes.AddEnc(function() {
@@ -412,8 +411,8 @@ Scenes.Maria.DeadDrops.Repeat = function() {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Maria.DeadDrops.Docks = {};
-Scenes.Maria.DeadDrops.Docks.Entry = function() {
+DeadDropScenes.Docks = {};
+DeadDropScenes.Docks.Entry = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -449,13 +448,13 @@ Scenes.Maria.DeadDrops.Docks.Entry = function() {
 			
 			world.TimeStep({hour: 4});
 			
-			Gui.NextPrompt(Scenes.Maria.DeadDrops.Docks.Ending);
+			Gui.NextPrompt(DeadDropScenes.Docks.Ending);
 		}, 1.0, function() { return true; });
 		scenes.AddEnc(function() {
-			Scenes.Maria.DeadDrops.Docks.Cavalcade();
+			DeadDropScenes.Docks.Cavalcade();
 		}, 2.0, function() { return true; });
 		scenes.AddEnc(function() {
-			Scenes.Maria.DeadDrops.Docks.GuardInspection();
+			DeadDropScenes.Docks.GuardInspection();
 		}, 2.0, function() { return true; });
 		/* TODO
 		scenes.AddEnc(function() {
@@ -467,7 +466,7 @@ Scenes.Maria.DeadDrops.Docks.Entry = function() {
 	});
 }
 
-Scenes.Maria.DeadDrops.Docks.Ending = function() {
+DeadDropScenes.Docks.Ending = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -507,7 +506,7 @@ Scenes.Maria.DeadDrops.Docks.Ending = function() {
 	Gui.NextPrompt();
 }
 
-Scenes.Maria.DeadDrops.Docks.Cavalcade = function() {
+DeadDropScenes.Docks.Cavalcade = function() {
 	var parse = {
 		
 	};
@@ -528,7 +527,7 @@ Scenes.Maria.DeadDrops.Docks.Cavalcade = function() {
 	Text.Add("<i>“Eh, it’s your fault if you can’t keep a straight face on a bad hand -”</i>", parse);
 	Text.NL();
 
-	var coin = Scenes.Maria.DeadDrops.Docks.CavalcadeCost();
+	var coin = DeadDropScenes.Docks.CavalcadeCost();
 
 	Text.Add("<i>“Shut up, you. Anyway,”</i> he says, turning back to you, <i>“how about it? Buy-in is [coin] coins.”</i>", {coin: Text.NumToText(coin)});
 	if(estevan.flags["Cheat"] >= Estevan.Cheat.Triggered) {
@@ -555,7 +554,7 @@ Scenes.Maria.DeadDrops.Docks.Cavalcade = function() {
 			
 			Gui.NextPrompt(function() {
 				Text.Clear();
-				Scenes.Maria.DeadDrops.Docks.CavalcadePrep();
+				DeadDropScenes.Docks.CavalcadePrep();
 			});
 		}, enabled : party.coin >= coin
 	});
@@ -566,21 +565,21 @@ Scenes.Maria.DeadDrops.Docks.Cavalcade = function() {
 			Text.Add("<i>“Well, it’s your call,”</i> comes the reply. <i>“I guess we don’t mind you watching, now that we know you’re not a snitch for the boss, or even worse, the watch. But fair warning - we’ll be a little while, so you might want to make yourself comfortable.”</i>", parse);
 			Text.Flush();
 			
-			Gui.NextPrompt(Scenes.Maria.DeadDrops.Docks.CavalcadeLoss);
+			Gui.NextPrompt(DeadDropScenes.Docks.CavalcadeLoss);
 		}, enabled : true
 	});
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Maria.DeadDrops.Docks.CavalcadeCost = function() {
+DeadDropScenes.Docks.CavalcadeCost = function() {
 	return 10; //TODO
 }
 
-Scenes.Maria.DeadDrops.Docks.CavalcadePrep = function() {
+DeadDropScenes.Docks.CavalcadePrep = function() {
 	player.purse  = party;
 	var players = [player];
 	
-	var coin = Scenes.Maria.DeadDrops.Docks.CavalcadeCost();
+	var coin = DeadDropScenes.Docks.CavalcadeCost();
 	
 	for(var i = 0; i < 3; i++) {
 		var dockworker = new Entity();
@@ -605,7 +604,7 @@ Scenes.Maria.DeadDrops.Docks.CavalcadePrep = function() {
 		
 		Text.NL();
 		if(that.winner == player) {
-			Scenes.Maria.DeadDrops.Docks.CavalcadeWin();
+			DeadDropScenes.Docks.CavalcadeWin();
 		}
 		else {
 			Text.Add("<i>“Want another try, stranger?”</i> the dealer asks, smiling invitingly.", parse);
@@ -616,7 +615,7 @@ Scenes.Maria.DeadDrops.Docks.CavalcadePrep = function() {
 			options.push({ nameStr : "Sure",
 				func : function() {
 					Text.NL();
-					Scenes.Maria.DeadDrops.Docks.CavalcadePrep();
+					DeadDropScenes.Docks.CavalcadePrep();
 				}, enabled : party.coin >= coin,
 				tooltip : "Deal another round!"
 			});
@@ -626,7 +625,7 @@ Scenes.Maria.DeadDrops.Docks.CavalcadePrep = function() {
 					Text.Add("<i>“Don’t worry about it too much,”</i> one of the dockhands tells you, clapping you on the shoulder. <i>“That last one was a pretty decent game. Why don’t you have a seat and wait for us to be done?”</i>", parse);
 					Text.Flush();
 					
-					Gui.NextPrompt(Scenes.Maria.DeadDrops.Docks.CavalcadeLoss);
+					Gui.NextPrompt(DeadDropScenes.Docks.CavalcadeLoss);
 				}, enabled : true,
 				tooltip : "Nah, you give."
 			});
@@ -640,7 +639,7 @@ Scenes.Maria.DeadDrops.Docks.CavalcadePrep = function() {
 	g.NextRound();
 }
 
-Scenes.Maria.DeadDrops.Docks.CavalcadeWin = function() {
+DeadDropScenes.Docks.CavalcadeWin = function() {
 	var parse = {
 		
 	};
@@ -668,10 +667,10 @@ Scenes.Maria.DeadDrops.Docks.CavalcadeWin = function() {
 	
 	world.TimeStep({hour: 4});
 	
-	Gui.NextPrompt(Scenes.Maria.DeadDrops.Docks.Ending);
+	Gui.NextPrompt(DeadDropScenes.Docks.Ending);
 }
 
-Scenes.Maria.DeadDrops.Docks.CavalcadeLoss = function() {
+DeadDropScenes.Docks.CavalcadeLoss = function() {
 	var parse = {
 		
 	};
@@ -698,10 +697,10 @@ Scenes.Maria.DeadDrops.Docks.CavalcadeLoss = function() {
 	
 	world.TimeStep({hour: 8});
 	
-	Gui.NextPrompt(Scenes.Maria.DeadDrops.Docks.Ending);
+	Gui.NextPrompt(DeadDropScenes.Docks.Ending);
 }
 
-Scenes.Maria.DeadDrops.Docks.GuardInspection = function() {
+DeadDropScenes.Docks.GuardInspection = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -759,7 +758,7 @@ Scenes.Maria.DeadDrops.Docks.GuardInspection = function() {
 			
 			player.AddHPFraction(-player.HPLevel() * 0.5);
 			
-			Gui.NextPrompt(Scenes.Maria.DeadDrops.Docks.Ending);
+			Gui.NextPrompt(DeadDropScenes.Docks.Ending);
 		}, enabled : true
 	});
 	options.push({ nameStr : "Walk Past",
@@ -799,7 +798,7 @@ Scenes.Maria.DeadDrops.Docks.GuardInspection = function() {
 				
 				world.TimeStep({hour: 5});
 				
-				Gui.NextPrompt(Scenes.Maria.DeadDrops.Docks.Ending);
+				Gui.NextPrompt(DeadDropScenes.Docks.Ending);
 			}
 			else {
 				Text.Add("Alas, you’re not so fortunate or inconspicuous as you hoped you’d be. While you do your best to remain inconspicuous, you feel a sudden weight on your shoulder just as you’re about to catch up with and slip into the crowd.", parse);
@@ -860,7 +859,7 @@ Scenes.Maria.DeadDrops.Docks.GuardInspection = function() {
 				Text.Add("On the other hand, there has to be some way of getting rid of them that doesn’t involve you being taken in for further questioning[b]. Any bright ideas?", parse);
 				Text.Flush();
 				
-				Scenes.Maria.DeadDrops.Docks.GuardPrompt();
+				DeadDropScenes.Docks.GuardPrompt();
 			}
 		}, enabled : true
 	});
@@ -916,7 +915,7 @@ Scenes.Maria.DeadDrops.Docks.GuardInspection = function() {
 				maria.relation.IncreaseStat(50, 3);
 				outlaws.relation.IncreaseStat(30, 2);
 				
-				Gui.NextPrompt(Scenes.Maria.DeadDrops.Docks.Ending);
+				Gui.NextPrompt(DeadDropScenes.Docks.Ending);
 			}
 			else {
 				Text.Add("Huddled in your hiding spot, you wait with bated breath, hoping that you won’t be uncovered. The guards’ footsteps pass close by more than once as they round up and shake down more than one unfortunate soul, and you think yourself almost safe when there’s a rustling just above you and light floods into your hiding spot.", parse);
@@ -935,14 +934,14 @@ Scenes.Maria.DeadDrops.Docks.GuardInspection = function() {
 				
 				world.TimeStep({hour: 1});
 				
-				Scenes.Maria.DeadDrops.Docks.GuardPrompt();
+				DeadDropScenes.Docks.GuardPrompt();
 			}
 		}, enabled : true
 	});
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Maria.DeadDrops.Docks.GuardPrompt = function() {
+DeadDropScenes.Docks.GuardPrompt = function() {
 	var parse = {
 		
 	};
@@ -979,7 +978,7 @@ Scenes.Maria.DeadDrops.Docks.GuardPrompt = function() {
 			maria.relation.IncreaseStat(50, 2);
 			outlaws.relation.IncreaseStat(30, 2);
 			
-			Gui.NextPrompt(Scenes.Maria.DeadDrops.Docks.Ending);
+			Gui.NextPrompt(DeadDropScenes.Docks.Ending);
 		}, enabled : party.coin >= 15
 	});
 	options.push({ nameStr : "Service",
@@ -1065,7 +1064,7 @@ Scenes.Maria.DeadDrops.Docks.GuardPrompt = function() {
 			
 			maria.flags["DD"] |= Maria.DeadDrops.SexedGuards;
 			
-			Gui.NextPrompt(Scenes.Maria.DeadDrops.Docks.Ending);
+			Gui.NextPrompt(DeadDropScenes.Docks.Ending);
 		}, enabled : true
 	});
 	if(rigard.Krawitz["Q"] >= Rigard.KrawitzQ.HeistDone) {
@@ -1112,9 +1111,11 @@ Scenes.Maria.DeadDrops.Docks.GuardPrompt = function() {
 			
 				maria.flags["DD"] |= Maria.DeadDrops.ShowedRoyal;
 				
-				Gui.NextPrompt(Scenes.Maria.DeadDrops.Docks.Ending);
+				Gui.NextPrompt(DeadDropScenes.Docks.Ending);
 			}, enabled : true
 		});
 	}
 	Gui.SetButtonsFromList(options, false, null);
 }
+
+export { DeadDropScenes };

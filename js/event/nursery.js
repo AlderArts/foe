@@ -1,5 +1,5 @@
 
-import { Scenes } from '../event';
+let NurseryScenes = {};
 
 function Nursery(storage) {
 	this.kids = [];
@@ -128,9 +128,7 @@ Nursery.Kid.prototype.SameType = function(kid) {
 	return true;
 }
 
-Scenes.Nursery = {};
-
-Scenes.Nursery.PrintPCbirthed = function() {
+NurseryScenes.PrintPCbirthed = function() {
 	var kids = nursery.BirthedBy(player.ID);
 	
 	var parse = {};
@@ -158,7 +156,7 @@ Scenes.Nursery.PrintPCbirthed = function() {
 	}
 }
 
-Scenes.Nursery.PrintPCfathered = function() {
+NurseryScenes.PrintPCfathered = function() {
 	var kids = nursery.FatheredBy(player.ID);
 	
 	var num = 0;
@@ -184,7 +182,7 @@ Scenes.Nursery.PrintPCfathered = function() {
 	}
 }
 
-Scenes.Nursery.CareBlock = function(womb) {
+NurseryScenes.CareBlock = function(womb) {
 	var parse = {
 		
 	};
@@ -299,7 +297,7 @@ Scenes.Nursery.CareBlock = function(womb) {
 }
 
 // Pre gemstead (only available if actually you have kids, and only in act 1)
-Scenes.Nursery.Nomads = function() {
+NurseryScenes.Nomads = function() {
 	var num = nursery.TotalKids();
 	var parse = {
 		ren   : num > 1 ? "ren" : "",
@@ -316,8 +314,8 @@ Scenes.Nursery.Nomads = function() {
 	Text.Add("At length, one of them shows you over to where your child[ren] [isAre], and you sigh, relax a little, and take stock of your offspring.", parse);
 	Text.NL();
 	
-	Scenes.Nursery.PrintPCbirthed();
-	Scenes.Nursery.PrintPCfathered();
+	NurseryScenes.PrintPCbirthed();
+	NurseryScenes.PrintPCfathered();
 	
 	Text.Add("What will you do now?", parse);
 	Text.Flush();
@@ -344,4 +342,4 @@ Scenes.Nursery.Nomads = function() {
 
 // TODO Post gemstead
 
-export { Nursery };
+export { Nursery, NurseryScenes };

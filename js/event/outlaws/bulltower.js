@@ -4,10 +4,13 @@
  * Flags in outlaws
  * stats in outlaws.BT
  */
-import { Event, Link, EncounterTable, Scenes } from '../../event';
+import { Event, Link, EncounterTable } from '../../event';
 import { Outlaws } from './outlaws';
 import { world } from '../../world';
 import { GetDEBUG } from '../../../app';
+import { Stat } from '../../stat';
+
+let BullTowerScenes = {};
 
 function BullTowerStats() {
 	this.suspicion       = new Stat(0);
@@ -53,7 +56,7 @@ BullTowerStats.prototype.IncSuspicion = function(max, inc) {
 			Text.Add("No time to lose, then. Torches burst into life on the ramparts as the [two] of you break into a run across the courtyard, doing your best to avoid the scrambling guards.", parse);
 			Text.NL();
 			
-			Scenes.BullTower.EndingFailure();
+			BullTowerScenes.EndingFailure();
 		});
 	}
 	else if(newSuspicion >= 75 && oldSuspicion < 75) {
@@ -156,39 +159,37 @@ world.loc.BullTower.Building.Watchtower.wait = function() { return false; };
 
 // Add onEntry, conversations to all locations (not Cell)
 world.loc.BullTower.Courtyard.Yard.onEntry = function() {
-	if(Math.random() < 0.7) Scenes.BullTower.Coversations(true);
+	if(Math.random() < 0.7) BullTowerScenes.Coversations(true);
 	else PrintDefaultOptions();
 }
 world.loc.BullTower.Courtyard.Pens.onEntry = function() {
-	if(Math.random() < 0.7) Scenes.BullTower.Coversations(true);
+	if(Math.random() < 0.7) BullTowerScenes.Coversations(true);
 	else PrintDefaultOptions();
 }
 world.loc.BullTower.Courtyard.Caravans.onEntry = function() {
-	if(Math.random() < 0.7) Scenes.BullTower.Coversations(true);
+	if(Math.random() < 0.7) BullTowerScenes.Coversations(true);
 	else PrintDefaultOptions();
 }
 world.loc.BullTower.Building.Hall.onEntry = function() {
-	if(Math.random() < 0.7) Scenes.BullTower.Coversations();
+	if(Math.random() < 0.7) BullTowerScenes.Coversations();
 	else PrintDefaultOptions();
 }
 world.loc.BullTower.Building.Office.onEntry = function() {
-	if(Math.random() < 0.7) Scenes.BullTower.Coversations();
+	if(Math.random() < 0.7) BullTowerScenes.Coversations();
 	else PrintDefaultOptions();
 }
 world.loc.BullTower.Building.Warehouse.onEntry = function() {
-	if(Math.random() < 0.7) Scenes.BullTower.Coversations();
+	if(Math.random() < 0.7) BullTowerScenes.Coversations();
 	else PrintDefaultOptions();
 }
 world.loc.BullTower.Building.Watchtower.onEntry = function() {
-	if(Math.random() < 0.7) Scenes.BullTower.Coversations();
+	if(Math.random() < 0.7) BullTowerScenes.Coversations();
 	else PrintDefaultOptions();
 }
 
-Scenes.BullTower = {};
 
 
-
-Scenes.BullTower.Initiation = function() {
+BullTowerScenes.Initiation = function() {
 	var parse = {
 		playername: player.name
 	};
@@ -301,12 +302,12 @@ Scenes.BullTower.Initiation = function() {
 			
 			world.TimeStep({ minute : 20 });
 			
-			Scenes.BullTower.InitiationQuestions();
+			BullTowerScenes.InitiationQuestions();
 		});
 	});
 }
 
-Scenes.BullTower.InitiationQuestions = function(opts) {
+BullTowerScenes.InitiationQuestions = function(opts) {
 	opts = opts || {};
 	
 	var parse = {
@@ -330,7 +331,7 @@ Scenes.BullTower.InitiationQuestions = function(opts) {
 				world.TimeStep({ minute : 5 });
 				
 				opts.presence = true;
-				Scenes.BullTower.InitiationQuestions(opts);
+				BullTowerScenes.InitiationQuestions(opts);
 			}, enabled : true,
 			tooltip : "Why is the Royal Guard out along the King’s Road, anyway?"
 		});
@@ -362,7 +363,7 @@ Scenes.BullTower.InitiationQuestions = function(opts) {
 				world.TimeStep({ minute : 5 });
 				
 				opts.plan = true;
-				Scenes.BullTower.InitiationQuestions(opts);
+				BullTowerScenes.InitiationQuestions(opts);
 			}, enabled : true,
 			tooltip : "So, what’s the plan? In detail, that is."
 		});
@@ -389,7 +390,7 @@ Scenes.BullTower.InitiationQuestions = function(opts) {
 				world.TimeStep({ minute : 5 });
 				
 				opts.obj = true;
-				Scenes.BullTower.InitiationQuestions(opts);
+				BullTowerScenes.InitiationQuestions(opts);
 			}, enabled : true,
 			tooltip : "If the Royal Guard have been lurking about for some time now, surely that means there’s more you can do…"
 		});
@@ -417,7 +418,7 @@ Scenes.BullTower.InitiationQuestions = function(opts) {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.BullTower.MovingOut = function() {
+BullTowerScenes.MovingOut = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -705,7 +706,7 @@ world.loc.BullTower.Courtyard.Yard.links.push(new Link(
 			var options = new Array();
 			options.push({ nameStr : "Yes",
 				func : function() {
-					Scenes.BullTower.EndingSlipOut();
+					BullTowerScenes.EndingSlipOut();
 				}, enabled : true,
 				tooltip : "Best leave while still ahead."
 			});
@@ -807,8 +808,8 @@ world.loc.BullTower.Courtyard.Caravans.events.push(new Link(
 				var enc = new Encounter(enemy);
 				
 				enc.canRun = false;
-				enc.onLoss = Scenes.BullTower.GuardsLoss;
-				enc.onVictory = Scenes.BullTower.GuardsWin;
+				enc.onLoss = BullTowerScenes.GuardsLoss;
+				enc.onVictory = BullTowerScenes.GuardsWin;
 				
 				Gui.NextPrompt(function() {
 					enc.Start();
@@ -859,8 +860,8 @@ world.loc.BullTower.Courtyard.Caravans.events.push(new Link(
 				var enc = new Encounter(enemy);
 				
 				enc.canRun = false;
-				enc.onLoss = Scenes.BullTower.GuardsLoss;
-				enc.onVictory = Scenes.BullTower.GuardsWin;
+				enc.onLoss = BullTowerScenes.GuardsLoss;
+				enc.onVictory = BullTowerScenes.GuardsWin;
 				
 				Gui.NextPrompt(function() {
 					enc.Start();
@@ -901,8 +902,8 @@ world.loc.BullTower.Courtyard.Caravans.events.push(new Link(
 				var enc = new Encounter(enemy);
 				
 				enc.canRun = false;
-				enc.onLoss = Scenes.BullTower.GuardsLoss;
-				enc.onVictory = Scenes.BullTower.GuardsWin;
+				enc.onLoss = BullTowerScenes.GuardsLoss;
+				enc.onVictory = BullTowerScenes.GuardsWin;
 				
 				Gui.NextPrompt(function() {
 					enc.Start();
@@ -920,7 +921,7 @@ world.loc.BullTower.Courtyard.Caravans.events.push(new Link(
 	}
 ));
 
-Scenes.BullTower.GuardsWin = function() {
+BullTowerScenes.GuardsWin = function() {
 	var enc  = this;
 	SetGameState(GameState.Event);
 	
@@ -943,7 +944,7 @@ Scenes.BullTower.GuardsWin = function() {
 	Encounter.prototype.onVictory.call(enc);
 }
 
-Scenes.BullTower.GuardsLoss = function() {
+BullTowerScenes.GuardsLoss = function() {
 	var enc  = this;
 	SetGameState(GameState.Event);
 	
@@ -955,7 +956,7 @@ Scenes.BullTower.GuardsLoss = function() {
 	Text.Add("Seems like this scuffle isn’t going as you planned. Deciding to disengage while you still can, you quickly signal to Cveta to beat a fighting retreat. The caravan guards break off pursuit after just a few more blows, and the reason for that soon becomes apparent: the two of you have barely crossed the courtyard when the loud clanging of a bell being rung echoes across the entirety of the ancient fortress - the alarm!", parse);
 	Text.NL();
 	
-	Scenes.BullTower.EndingFailure();
+	BullTowerScenes.EndingFailure();
 }
 
 world.loc.BullTower.Courtyard.Caravans.events.push(new Link(
@@ -1315,8 +1316,8 @@ world.loc.BullTower.Building.Cell.onEntry = function() {
 						enc.corishev = corishev;
 						
 						enc.canRun = false;
-						enc.onLoss = Scenes.BullTower.CorishevLoss;
-						enc.onVictory = Scenes.BullTower.CorishevWin;
+						enc.onLoss = BullTowerScenes.CorishevLoss;
+						enc.onVictory = BullTowerScenes.CorishevWin;
 						
 						enc.Start();
 					});
@@ -1328,7 +1329,7 @@ world.loc.BullTower.Building.Cell.onEntry = function() {
 	}
 }
 
-Scenes.BullTower.CorishevLoss = function() {
+BullTowerScenes.CorishevLoss = function() {
 	var enc  = this;
 	SetGameState(GameState.Event);
 	
@@ -1349,10 +1350,10 @@ Scenes.BullTower.CorishevLoss = function() {
 	Text.NL();
 	Text.Add("Trying your best to shut the sounds coming from behind you out of your mind, you throw open the door and fly up the stairs as quickly as your legs will carry you. The lieutenant doesn’t seem to be pursuing you - the reason for which soon becomes clear when the alarm sounds throughout the entirety of the ancient fortress. Seems like he’s leaving the chore of hunting you down to his underlings.", parse);
 	Text.NL();
-	Scenes.BullTower.EndingFailure();
+	BullTowerScenes.EndingFailure();
 }
 
-Scenes.BullTower.CorishevWin = function() {
+BullTowerScenes.CorishevWin = function() {
 	var enc  = this;
 	var corishev = enc.corishev;
 	SetGameState(GameState.Event);
@@ -1408,7 +1409,7 @@ Scenes.BullTower.CorishevWin = function() {
 				Text.Add("Come to think of it, what <i>did</i> you have in mind?", parse);
 				Text.Flush();
 				
-				Scenes.BullTower.CorishevFuck(corishev);
+				BullTowerScenes.CorishevFuck(corishev);
 			}, enabled : true,
 			tooltip : "The bastard lieutenant sure can dish it out; let’s see how well he can take it."
 		});
@@ -1429,7 +1430,7 @@ Scenes.BullTower.CorishevWin = function() {
 	Encounter.prototype.onVictory.call(enc);
 }
 
-Scenes.BullTower.CorishevImpregnate = function(mother, father, slot) {
+BullTowerScenes.CorishevImpregnate = function(mother, father, slot) {
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother : mother,
@@ -1441,7 +1442,7 @@ Scenes.BullTower.CorishevImpregnate = function(mother, father, slot) {
 	});
 }
 
-Scenes.BullTower.CorishevFuck = function(corishev) {
+BullTowerScenes.CorishevFuck = function(corishev) {
 	var p1cock = player.BiggestCock(null, true);
 	
 	var parse = {
@@ -1547,14 +1548,14 @@ Scenes.BullTower.CorishevFuck = function(corishev) {
 				player.FuckVag(player.FirstVag(), corishev.FirstCock(), 4);
 				corishev.Fuck(corishev.FirstCock(), 4);
 				
-				Scenes.BullTower.CorishevImpregnate(player, corishev, PregnancyHandler.Slot.Vag);
+				BullTowerScenes.CorishevImpregnate(player, corishev, PregnancyHandler.Slot.Vag);
 			}
 			else {
 				Sex.Anal(corishev, player);
 				player.FuckAnal(player.Butt(), corishev.FirstCock(), 4);
 				corishev.Fuck(corishev.FirstCock(), 4);
 				
-				Scenes.BullTower.CorishevImpregnate(player, corishev, PregnancyHandler.Slot.Butt);
+				BullTowerScenes.CorishevImpregnate(player, corishev, PregnancyHandler.Slot.Butt);
 			}
 			
 			parse["target"] = Text.Parse(pussy ? "[vag]" : "[anus]", parse);
@@ -1669,11 +1670,11 @@ world.loc.BullTower.Building.Office.events.push(new Link(
 		Text.Add("Gingerly, you step toward the wall safe, half-expecting a couple of guards to burst in through the entrance behind you, but thankfully nothing of the sort happens. Well, what will you do?", parse);
 		Text.Flush();
 		
-		Scenes.BullTower.SafePrompt();
+		BullTowerScenes.SafePrompt();
 	}
 ));
 
-Scenes.BullTower.SafePrompt = function() {
+BullTowerScenes.SafePrompt = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -1692,7 +1693,7 @@ Scenes.BullTower.SafePrompt = function() {
 			Text.Flush();
 			outlaws.BT.inspectedSafe = true;
 			
-			Scenes.BullTower.SafePrompt();
+			BullTowerScenes.SafePrompt();
 		}, enabled : true,
 		tooltip : "Inspect the safe in detail."
 	});
@@ -1707,7 +1708,7 @@ Scenes.BullTower.SafePrompt = function() {
 					Text.Flush();
 					outlaws.BT.unlockedSafe = true;
 					
-					Scenes.BullTower.SafePrompt();
+					BullTowerScenes.SafePrompt();
 				}, enabled : true,
 				tooltip : "Open the safe with the key you acquired from the lieutenant."
 			});
@@ -1746,13 +1747,13 @@ Scenes.BullTower.SafePrompt = function() {
 					Text.Add("Well, as the saying goes, there’s more than one way to skin a cat. Holding your breath and willing your fingers not to shake, you reach in with your knife and cut away at the springs. The catch looks solid, and so long as it isn’t released, you should be safe… you cut through the springs one at a time, setting them off with audible twangs until you’re sure you’re done and the trap is wholly disarmed.", parse);
 					Text.NL();
 					
-					Scenes.BullTower.SafeSuccess();
+					BullTowerScenes.SafeSuccess();
 				}
 				else {
 					Text.Add("Things don’t go quite as planned, though. You must’ve fumbled somewhere, made a mistake; there’s a glint of light, the faintest of swishing sounds, and sudden, terrible pain flares up on your shoulder and across your collarbone. Just a little higher, and the blade - now wet and glistening with your blood - would have removed your head from your shoulders.", parse);
 					Text.NL();
 					
-					Scenes.BullTower.SafeFailure();
+					BullTowerScenes.SafeFailure();
 				}
 			}, enabled : true,
 			tooltip : "Attempt to disarm the trap."
@@ -1791,13 +1792,13 @@ Scenes.BullTower.SafePrompt = function() {
 					Text.Add("<i>“Perhaps, but we should not be wasting time. With the amount of noise this has created and how well sound carries in this place, I am sure someone will be coming to investigate before long. Please, [playername], would you finish opening the safe with all due haste?”</i>", parse);
 					Text.NL();
 					
-					Scenes.BullTower.SafeSuccess();
+					BullTowerScenes.SafeSuccess();
 				}
 				else {
 					Text.Add("Things don’t go quite as planned, though. Weakened with years of neglect and dry rot, the chair and drawers don’t hold up as long as you’d hoped they would, nor are you as quick as you imagined you’d be. Tearing through the old wood in a shower of splinters, the blade flashes in the dim light as it sings through the air, sharp and serrated. Numbness comes first, then pain flares up on your outer thigh just under your hips. You’re vaguely aware through the sudden surge of dizziness that hits you that there’s now blood on the edge of the sprung blade - blood that used to be in your body.", parse);
 					Text.NL();
 					
-					Scenes.BullTower.SafeFailure();
+					BullTowerScenes.SafeFailure();
 				}
 			}, enabled : true,
 			tooltip : "Attempt to set off the trap safely."
@@ -1812,7 +1813,7 @@ Scenes.BullTower.SafePrompt = function() {
 	});
 }
 
-Scenes.BullTower.SafeSuccess = function() {
+BullTowerScenes.SafeSuccess = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -1835,7 +1836,7 @@ Scenes.BullTower.SafeSuccess = function() {
 	Gui.NextPrompt();
 }
 
-Scenes.BullTower.SafeFailure = function() {
+BullTowerScenes.SafeFailure = function() {
 	var parse = {
 		playername : player.name,
 		heshe : player.mfTrue("he", "she")
@@ -1861,7 +1862,7 @@ Scenes.BullTower.SafeFailure = function() {
 	Text.Flush();
 	
 	Gui.NextPrompt(function() {
-		Scenes.BullTower.EndingInjured();
+		BullTowerScenes.EndingInjured();
 	});
 }
 
@@ -2059,7 +2060,7 @@ world.loc.BullTower.Building.Watchtower.events.push(new Link(
 	}
 ));
 
-Scenes.BullTower.Coversations = function(outside) {
+BullTowerScenes.Coversations = function(outside) {
 	var parse = {
 		a : outlaws.flags["BT"] & Outlaws.BullTower.AlaricFreed ? " and Alaric" : ""
 	};
@@ -2190,7 +2191,7 @@ Scenes.BullTower.Coversations = function(outside) {
 	PrintDefaultOptions(true);
 }
 
-Scenes.BullTower.EndingSlipOut = function() {
+BullTowerScenes.EndingSlipOut = function() {
 	var parse = {
 		
 	};
@@ -2209,10 +2210,10 @@ Scenes.BullTower.EndingSlipOut = function() {
 	parse["stole"] = stole ? " who also unburden you of your purloined goods," : "";
 	Text.Add("As Alaric is led away by a couple of dog-morphs,[stole] you briefly recount the details of your little adventure, Cveta backing you up every so often with her version of events. Zenith listens intently to your story, then gives you a brisk nod when you’re done.", parse);
 	
-	Scenes.BullTower.EndingDebrief();
+	BullTowerScenes.EndingDebrief();
 }
 
-Scenes.BullTower.EndingFailure = function() {
+BullTowerScenes.EndingFailure = function() {
 	var freed = outlaws.flags["BT"] & Outlaws.BullTower.AlaricFreed;
 	var parse = {
 		two : freed ? "three" : "two",
@@ -2247,10 +2248,10 @@ Scenes.BullTower.EndingFailure = function() {
 	}
 	Text.Add(" briefly recount the details of your little adventure, Cveta backing you up every so often with her version of events. Zenith listens intently to your story, then gives you a brisk nod when you’re done.", parse);
 	
-	Scenes.BullTower.EndingDebrief();
+	BullTowerScenes.EndingDebrief();
 }
 
-Scenes.BullTower.EndingInjured = function() {
+BullTowerScenes.EndingInjured = function() {
 	var parse = {
 		playername : player.name,
 		name : kiakai.name
@@ -2292,10 +2293,10 @@ Scenes.BullTower.EndingInjured = function() {
 	Text.NL();
 	Text.Add("Although you find yourself getting quickly tired from talking, you do your best to recount the events as you remember them, careful to not leave out any details.", parse);
 	
-	Scenes.BullTower.EndingDebrief(true);
+	BullTowerScenes.EndingDebrief(true);
 }
 
-Scenes.BullTower.EndingDebrief = function(injured) {
+BullTowerScenes.EndingDebrief = function(injured) {
 	var parse = {
 		playername : player.name
 	};
@@ -2454,7 +2455,7 @@ Scenes.BullTower.EndingDebrief = function(injured) {
 
 
 //#This will trigger three days after the event if the player saved Alaric.
-Scenes.BullTower.AftermathAlaric = function() {
+BullTowerScenes.AftermathAlaric = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -2534,7 +2535,7 @@ Scenes.BullTower.AftermathAlaric = function() {
 
 
 //#Triggers one day after the Alaric scene if the player has at least stolen the goods and payoff.
-Scenes.BullTower.AftermathZenith = function() {
+BullTowerScenes.AftermathZenith = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -2610,4 +2611,4 @@ Scenes.BullTower.AftermathZenith = function() {
 	Gui.NextPrompt();
 }
 
-export { BullTowerStats };
+export { BullTowerStats, BullTowerScenes };

@@ -1,5 +1,5 @@
 import { world } from '../../world';
-import { Event, Link, Scenes, EncounterTable } from '../../event';
+import { Event, Link, EncounterTable } from '../../event';
 
 let GateLoc = new Event("Main Gate");
 let BarracksLoc = {

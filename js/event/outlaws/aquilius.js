@@ -1,10 +1,9 @@
 /*
  * Aquilius, Outlaw Avian healer
  */
-import { Scenes } from '../../event';
 import { Entity } from '../../entity';
 
-Scenes.Aquilius = {};
+let AquiliusScenes = {};
 
 function Aquilius(storage) {
 	Entity.call(this);
@@ -125,7 +124,7 @@ Aquilius.prototype.SetHerb = function(override) {
 	return item;
 }
 
-Scenes.Aquilius.FirstMeeting = function() {
+AquiliusScenes.FirstMeeting = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -179,7 +178,7 @@ Scenes.Aquilius.FirstMeeting = function() {
 	Gui.NextPrompt();
 }
 
-Scenes.Aquilius.Approach = function() {
+AquiliusScenes.Approach = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -236,7 +235,7 @@ Scenes.Aquilius.Approach = function() {
 					outlaws.relation.IncreaseStat(30, 1);
 					aquilius.relation.IncreaseStat(100, 1);
 					
-					Scenes.Aquilius.Prompt();
+					AquiliusScenes.Prompt();
 				}, enabled : true
 			});
 			options.push({ nameStr : "No",
@@ -246,13 +245,13 @@ Scenes.Aquilius.Approach = function() {
 					Text.Add("While Aquilius may be in need of it, you decide that you’d rather save the ingredient for your own ends.", parse);
 					Text.Flush();
 					
-					Scenes.Aquilius.Prompt();
+					AquiliusScenes.Prompt();
 				}, enabled : true
 			});
 			Gui.SetButtonsFromList(options, false, null);
 		}
 		else
-			Scenes.Aquilius.Prompt();
+			AquiliusScenes.Prompt();
 	}
 	//#Else If the player is on herbs quest, returns unfinished
 	else if(aquilius.OnHerbsQuest()) {
@@ -260,7 +259,7 @@ Scenes.Aquilius.Approach = function() {
 		Text.NL();
 		Text.Add("You assure him that you’ll get him his herbs soon enough.", parse);
 		Text.Flush();
-		Scenes.Aquilius.Prompt();
+		AquiliusScenes.Prompt();
 	}
 	else {
 		Text.Add("Pushing your way through the rows of cots and their occupants, you approach the surgeon. ", parse);
@@ -316,12 +315,12 @@ Scenes.Aquilius.Approach = function() {
 				Text.Add("<i>“Oh. [playername]. For a moment I thought it was…”</i> Aquilius is clearly suppressing a tic in his face. <i>“No, never mind. I don’t usually get visitors at this hour. Is there something you need?”</i>", parse);
 		}
 		Text.Flush();
-		Scenes.Aquilius.Prompt();
+		AquiliusScenes.Prompt();
 	}
 }
 
 //TODO
-Scenes.Aquilius.Prompt = function() {
+AquiliusScenes.Prompt = function() {
 	var parse = {
 		
 	};
@@ -330,7 +329,7 @@ Scenes.Aquilius.Prompt = function() {
 	var options = new Array();
 	options.push({ nameStr : "Appearance",
 		tooltip : "Give the good surgeon a look-over.",
-		func : Scenes.Aquilius.Appearance, enabled : true
+		func : AquiliusScenes.Appearance, enabled : true
 	});
 	if(Scenes.Asche.Tasks.Nightshade.IsOn() &&
 	   !Scenes.Asche.Tasks.Nightshade.IsSuccess() &&
@@ -345,7 +344,7 @@ Scenes.Aquilius.Prompt = function() {
 		//Player may only help out once a day. Ish.
 		options.push({ nameStr : "Help out",
 			tooltip : "Help out at the infirmary.",
-			func : Scenes.Aquilius.HelpOut, enabled : !aquilius.OnHerbsQuest()
+			func : AquiliusScenes.HelpOut, enabled : !aquilius.OnHerbsQuest()
 		});
 	}
 	// NIGHTTIME
@@ -357,12 +356,12 @@ Scenes.Aquilius.Prompt = function() {
 				Text.Add("<i>“Sure, I wouldn’t mind a little company. You want to open, or let me do it?”</i>", parse);
 				Text.Flush();
 				
-				Scenes.Aquilius.TalkPrompt();
+				AquiliusScenes.TalkPrompt();
 			}, enabled : true
 		});
 		options.push({ nameStr : "Smoke",
 			tooltip : "Light up with Aquilius and relax a bit.",
-			func : Scenes.Aquilius.Smoke, enabled : true
+			func : AquiliusScenes.Smoke, enabled : true
 		});
 		/* TODO
 		options.push({ nameStr : "Talk",
@@ -393,7 +392,7 @@ Scenes.Aquilius.Prompt = function() {
 	});
 }
 
-Scenes.Aquilius.TalkPrompt = function() {
+AquiliusScenes.TalkPrompt = function() {
 	var parse = {
 		
 	};
@@ -402,11 +401,11 @@ Scenes.Aquilius.TalkPrompt = function() {
 	var options = new Array();
 	options.push({ nameStr : "Self",
 		tooltip : "Ask Aquilius about himself.",
-		func : Scenes.Aquilius.TalkSelfPrompt, enabled : true
+		func : AquiliusScenes.TalkSelfPrompt, enabled : true
 	});
 	options.push({ nameStr : "Grind",
 		tooltip : "Make small talk about the daily grind.",
-		func : Scenes.Aquilius.TalkGrind, enabled : true
+		func : AquiliusScenes.TalkGrind, enabled : true
 	});
 	options.push({ nameStr : "War",
 		tooltip : "Ask Aquilius about the war between the Crown and the guilds.",
@@ -423,7 +422,7 @@ Scenes.Aquilius.TalkPrompt = function() {
 			}
 			Text.Flush();
 			
-			Scenes.Aquilius.TalkWarPrompt();
+			AquiliusScenes.TalkWarPrompt();
 		}, enabled : true
 	});
 	/* TODO
@@ -443,11 +442,11 @@ Scenes.Aquilius.TalkPrompt = function() {
 		Text.Clear();
 		Text.Add("<i>“Hm, sure. Let’s just take a moment to relax, then.”</i>", parse);
 		Text.Flush();
-		Scenes.Aquilius.Prompt();
+		AquiliusScenes.Prompt();
 	});
 }
 
-Scenes.Aquilius.TalkSelfPrompt = function() {
+AquiliusScenes.TalkSelfPrompt = function() {
 	var parse = {
 		playername : player.name,
 		boygirl : kiakai.mfTrue("boy", "girl"),
@@ -578,10 +577,10 @@ Scenes.Aquilius.TalkSelfPrompt = function() {
 			}, enabled : !party.InParty(kiakai)
 		});
 	}
-	Gui.SetButtonsFromList(options, true, Scenes.Aquilius.TalkPrompt);
+	Gui.SetButtonsFromList(options, true, AquiliusScenes.TalkPrompt);
 }
 
-Scenes.Aquilius.TalkGrind = function() {
+AquiliusScenes.TalkGrind = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -661,7 +660,7 @@ Scenes.Aquilius.TalkGrind = function() {
 	world.TimeStep({minute: 30});
 }
 
-Scenes.Aquilius.TalkWarPrompt = function() {
+AquiliusScenes.TalkWarPrompt = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -759,11 +758,11 @@ Scenes.Aquilius.TalkWarPrompt = function() {
 		Text.Add("Aquilius shrugs. He doesn’t say anything, but it’s clear he’s glad to be free of the weighty subject. <i>“Anything else you’d like to discuss, [playername]?”</i>", parse);
 		Text.Flush();
 		
-		Scenes.Aquilius.TalkPrompt();
+		AquiliusScenes.TalkPrompt();
 	});
 }
 
-Scenes.Aquilius.Smoke = function() {
+AquiliusScenes.Smoke = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -853,7 +852,7 @@ Scenes.Aquilius.Smoke = function() {
 	Gui.NextPrompt();
 }
 
-Scenes.Aquilius.Appearance = function() {
+AquiliusScenes.Appearance = function() {
 	var parse = {};
 	
 	Text.Clear();
@@ -875,7 +874,7 @@ Scenes.Aquilius.Appearance = function() {
 	Text.Flush();
 }
 
-Scenes.Aquilius.HelpOut = function() {
+AquiliusScenes.HelpOut = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -889,7 +888,7 @@ Scenes.Aquilius.HelpOut = function() {
 		else
 			Text.Add("<i>“There’s always work to be done here; I’ll gladly accept any help you’re willing to offer. What did you have in mind, [playername]?”</i>", parse);
 		Text.Flush();
-		Scenes.Aquilius.HelpOutPrompt();
+		AquiliusScenes.HelpOutPrompt();
 	}
 	else if(aquilius.QualifiesForAnyJob(player)) {
 		Text.Add("<i>“Your thoughtfulness and enthusiasm are appreciated, but I’d rather not get into the habit of relying on others to do my work for me,”</i> Aquilius tells you. <i>“Come back later if you’d like to continue helping out.”</i>", parse);
@@ -902,7 +901,7 @@ Scenes.Aquilius.HelpOut = function() {
 }
 
 //TODO
-Scenes.Aquilius.HelpOutPrompt = function() {
+AquiliusScenes.HelpOutPrompt = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -947,11 +946,11 @@ Scenes.Aquilius.HelpOutPrompt = function() {
 	});
 	options.push({ nameStr : "Tend to sick",
 		tooltip : "Offer to help out in the infirmary.",
-		func : Scenes.Aquilius.TendToSick, enabled : aquilius.QualifiesForHealing(player)
+		func : AquiliusScenes.TendToSick, enabled : aquilius.QualifiesForHealing(player)
 	});
 	options.push({ nameStr : "Alchemy",
 		tooltip : "Ask to help with the brewing.",
-		func : Scenes.Aquilius.AlchemyHelp, enabled : aquilius.QualifiesForAlchemy(player)
+		func : AquiliusScenes.AlchemyHelp, enabled : aquilius.QualifiesForAlchemy(player)
 	});
 	/* TODO
 	options.push({ nameStr : "name",
@@ -972,12 +971,12 @@ Scenes.Aquilius.HelpOutPrompt = function() {
 		Text.Add("<i>“Hrmp, getting my hopes up,”</i> Aquilius grunts surlily.", parse);
 		Text.Flush();
 		
-		Scenes.Aquilius.Prompt();
+		AquiliusScenes.Prompt();
 	});
 }
 
 // [Herbs] - Go flower picking like Aquilius asked you to.
-Scenes.Aquilius.PickHerbs = function() {
+AquiliusScenes.PickHerbs = function() {
 	var parse = {
 		
 	};
@@ -1009,7 +1008,7 @@ Scenes.Aquilius.PickHerbs = function() {
 }
 
 // Tend to sick (requires healer job available)
-Scenes.Aquilius.TendToSick = function() {
+AquiliusScenes.TendToSick = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -1120,7 +1119,7 @@ Scenes.Aquilius.TendToSick = function() {
 	Gui.NextPrompt();
 }
 
-Scenes.Aquilius.AlchemyHelp = function() {
+AquiliusScenes.AlchemyHelp = function() {
 	var parse = {
 		
 	};
@@ -1201,4 +1200,4 @@ Scenes.Aquilius.AlchemyHelp = function() {
 	Gui.NextPrompt();
 }
 
-export { Aquilius };
+export { Aquilius, AquiliusScenes };

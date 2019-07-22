@@ -2,10 +2,12 @@
  * Outlaws flags
  */
 
-import { Scenes } from '../../event';
 import { GetDEBUG } from '../../../app';
+import { OCavalcadeScenes } from './cavalcade';
 
-Scenes.Outlaws = {};
+let OutlawsScenes = {
+	Cavalcade : OCavalcadeScenes,
+};
 
 // Class to handle global flags and logic for outlaws
 function Outlaws(storage) {
@@ -114,7 +116,7 @@ Outlaws.prototype.MariasBouqetAvailable = function() {
 	return outlaws.Rep() >= 0;
 }
 
-Scenes.Outlaws.MariasBouquet = function() {
+OutlawsScenes.MariasBouquet = function() {
 	var parse = {
 		playername : player.name,
 		afternoonevening : world.time.hour >= 16 ? "evening" : "afternoon"
@@ -213,13 +215,13 @@ Scenes.Outlaws.MariasBouquet = function() {
 		Text.Add("You feel like you should say something at this point, but what?", parse);
 		Text.Flush();
 		
-		Scenes.Outlaws.MariasBouquetPrompt({});
+		OutlawsScenes.MariasBouquetPrompt({});
 	});
 	
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Outlaws.MariasBouquetPrompt = function(opts) {
+OutlawsScenes.MariasBouquetPrompt = function(opts) {
 	var parse = {
 		playername : player.name
 	};
@@ -246,7 +248,7 @@ Scenes.Outlaws.MariasBouquetPrompt = function(opts) {
 				
 				opts.Respects = true;
 				
-				Scenes.Outlaws.MariasBouquetPrompt(opts);
+				OutlawsScenes.MariasBouquetPrompt(opts);
 			}, enabled : true
 		});
 	}
@@ -268,7 +270,7 @@ Scenes.Outlaws.MariasBouquetPrompt = function(opts) {
 				
 				opts.Monument = true;
 				
-				Scenes.Outlaws.MariasBouquetPrompt(opts);
+				OutlawsScenes.MariasBouquetPrompt(opts);
 			}, enabled : true
 		});
 	}
@@ -288,7 +290,7 @@ Scenes.Outlaws.MariasBouquetPrompt = function(opts) {
 				
 				opts.Bouquets = true;
 				
-				Scenes.Outlaws.MariasBouquetPrompt(opts);
+				OutlawsScenes.MariasBouquetPrompt(opts);
 			}, enabled : true
 		});
 	}
@@ -325,7 +327,7 @@ Scenes.Outlaws.MariasBouquetPrompt = function(opts) {
 	}
 }
 
-Scenes.Outlaws.PathIntoRigardInitiation = function() {
+OutlawsScenes.PathIntoRigardInitiation = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -402,7 +404,7 @@ Scenes.Outlaws.PathIntoRigardInitiation = function() {
 	});
 }
 
-Scenes.Outlaws.PathIntoRigardBelinda = function() {
+OutlawsScenes.PathIntoRigardBelinda = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -632,15 +634,15 @@ Scenes.Outlaws.PathIntoRigardBelinda = function() {
 // RANDOM EVENTS
 //
 
-Scenes.Outlaws.Exploration = {};
+OutlawsScenes.Exploration = {};
 
-Scenes.Outlaws.Exploration.RandName = function() {
+OutlawsScenes.Exploration.RandName = function() {
 	var text = ["a lanky young man", "a mangy bear-morph", "a well-armed sentry", "a haggard-looking hunter", "an overworked young woman", "a well-maned wolf-morph", "a scarred ruffian", "a bearded, elderly morph", "a one-eyed woman", "a rough-looking outlaw"];
 	return _.sample(text);
 }
 
 
-Scenes.Outlaws.Exploration.ChowTime = function() {
+OutlawsScenes.Exploration.ChowTime = function() {
 	var parse = {
 		lad : player.mfFem("laddie", "lassie")
 	};
@@ -713,7 +715,7 @@ Scenes.Outlaws.Exploration.ChowTime = function() {
 	Gui.NextPrompt();
 }
 
-Scenes.Outlaws.Exploration.Cavalcade = function() {
+OutlawsScenes.Exploration.Cavalcade = function() {
 	var parse = {
 		
 	};
@@ -745,8 +747,8 @@ Scenes.Outlaws.Exploration.Cavalcade = function() {
 			Text.Clear();
 			Text.Add("Yeah, sure. You shrug your shoulders, push through the small crowd and step forward to take the lizan’s place, settling in with a minimum of fuss. One of the other players deals out the hand, and the game begins.", parse);
 			Text.NL();
-			Scenes.OutlawsCavalcade.PrepRandomCoinGame();
-		}, enabled : party.coin >= Scenes.OutlawsCavalcade.Bet()
+			OutlawsScenesCavalcade.PrepRandomCoinGame();
+		}, enabled : party.coin >= OutlawsScenesCavalcade.Bet()
 	});
 	options.push({ nameStr : "No",
 		tooltip : "Nah, not now.",
@@ -765,7 +767,7 @@ Scenes.Outlaws.Exploration.Cavalcade = function() {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Outlaws.Exploration.Archery = function() {
+OutlawsScenes.Exploration.Archery = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -953,7 +955,7 @@ Scenes.Outlaws.Exploration.Archery = function() {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Outlaws.Exploration.CampFollowers = function() {
+OutlawsScenes.Exploration.CampFollowers = function() {
 	var parse = {
 		s : player.sexlevel >= 4 ? "familiar" : "odd"
 	};
@@ -971,10 +973,10 @@ Scenes.Outlaws.Exploration.CampFollowers = function() {
 	Gui.NextPrompt();
 }
 
-Scenes.Outlaws.Exploration.Feeding = function() {
+OutlawsScenes.Exploration.Feeding = function() {
 	var parse = {
-		outlaw1 : Scenes.Outlaws.Exploration.RandName(),
-		outlaw2 : Scenes.Outlaws.Exploration.RandName()
+		outlaw1 : OutlawsScenes.Exploration.RandName(),
+		outlaw2 : OutlawsScenes.Exploration.RandName()
 	};
 	
 	Text.Clear();
@@ -1031,7 +1033,7 @@ Scenes.Outlaws.Exploration.Feeding = function() {
 	Gui.NextPrompt();
 }
 
-Scenes.Outlaws.Exploration.Carpentry = function() {
+OutlawsScenes.Exploration.Carpentry = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -1112,7 +1114,7 @@ Scenes.Outlaws.Exploration.Carpentry = function() {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Outlaws.Exploration.FactFinding = function() {
+OutlawsScenes.Exploration.FactFinding = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -1240,7 +1242,7 @@ Scenes.Outlaws.Exploration.FactFinding = function() {
 	Gui.NextPrompt();
 }
 
-Scenes.Outlaws.Exploration.DailyLife = function() {
+OutlawsScenes.Exploration.DailyLife = function() {
 	var parse = {
 		
 	};
@@ -1284,4 +1286,4 @@ Scenes.Outlaws.Exploration.DailyLife = function() {
 	Gui.NextPrompt();
 }
 
-export { Outlaws };
+export { Outlaws, OutlawsScenes };

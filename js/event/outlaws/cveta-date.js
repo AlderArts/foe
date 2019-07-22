@@ -1,4 +1,3 @@
-import { Scenes } from '../../event';
 import { Cveta } from './cveta';
 
 Cveta.Dates = { //Bitmask
@@ -6,9 +5,9 @@ Cveta.Dates = { //Bitmask
 	Spring : 2
 };
 
-Scenes.Cveta.Dates = {};
+let DateScenes = {};
 
-Scenes.Cveta.Dates.Prompt = function() {
+DateScenes.Prompt = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -43,7 +42,7 @@ Scenes.Cveta.Dates.Prompt = function() {
 				tooltip : "Why not take her out to the dryads’ glade?",
 				func : function() {
 					Text.Clear();
-					Scenes.Cveta.Dates.DryadGlade();
+					DateScenes.DryadGlade();
 				}, enabled : true
 			});
 		}
@@ -51,7 +50,7 @@ Scenes.Cveta.Dates.Prompt = function() {
 			tooltip : "Take her to this forest spring you know…",
 			func : function() {
 				Text.Clear();
-				Scenes.Cveta.Dates.Spring();
+				DateScenes.Spring();
 			}, enabled : true
 		});
 		/* TODO
@@ -59,7 +58,7 @@ Scenes.Cveta.Dates.Prompt = function() {
 			tooltip : "",
 			func : function() {
 				Text.Clear();
-				Scenes.Cveta.Dates.DryadGlade();
+				DateScenes.DryadGlade();
 			}, enabled : true
 		});
 		 */
@@ -75,8 +74,8 @@ Scenes.Cveta.Dates.Prompt = function() {
 					
 					var arr = [];
 					
-					if(cveta.flags["Date"] & Cveta.Dates.Glade) arr.push(Scenes.Cveta.Dates.DryadGlade);
-					if(cveta.flags["Date"] & Cveta.Dates.Spring) arr.push(Scenes.Cveta.Dates.Spring);
+					if(cveta.flags["Date"] & Cveta.Dates.Glade) arr.push(DateScenes.DryadGlade);
+					if(cveta.flags["Date"] & Cveta.Dates.Spring) arr.push(DateScenes.Spring);
 					
 					//TODO add
 					
@@ -97,7 +96,7 @@ Scenes.Cveta.Dates.Prompt = function() {
 	}
 }
 
-Scenes.Cveta.Dates.PartySetup = function() {
+DateScenes.PartySetup = function() {
 	cveta.RestFull();
 	
 	party.SaveActiveParty();
@@ -112,12 +111,12 @@ Scenes.Cveta.Dates.PartySetup = function() {
 	});
 }
 
-Scenes.Cveta.Dates.DryadGlade = function() {
+DateScenes.DryadGlade = function() {
 	var parse = {
 		playername : player.name
 	};
 	
-	Scenes.Cveta.Dates.PartySetup();
+	DateScenes.PartySetup();
 	
 	var first = !(cveta.flags["Date"] & Cveta.Dates.Glade);
 	cveta.flags["Date"] |= Cveta.Dates.Glade;
@@ -286,12 +285,12 @@ Scenes.Cveta.Dates.DryadGlade = function() {
 	Gui.NextPrompt();
 }
 
-Scenes.Cveta.Dates.Spring = function() {
+DateScenes.Spring = function() {
 	var parse = {
 		playername : player.name
 	};
 	
-	Scenes.Cveta.Dates.PartySetup();
+	DateScenes.PartySetup();
 	
 	cveta.flags["Date"] |= Cveta.Dates.Spring;
 	
@@ -514,3 +513,5 @@ Scenes.Cveta.Dates.Spring = function() {
 /* TODO
 
  */
+
+export { DateScenes };

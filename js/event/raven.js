@@ -4,7 +4,6 @@
  * 
  */
 
-import { Scenes } from '../event';
 import { Entity } from '../entity';
 
 let RavenMotherScenes = {};

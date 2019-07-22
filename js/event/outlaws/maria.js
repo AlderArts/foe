@@ -3,10 +3,14 @@
  * Define Maria
  *
  */
-import { Scenes } from '../../event';
 import { Entity } from '../../entity';
 import { world } from '../../world';
 import { GetDEBUG } from '../../../app';
+import { DeadDropScenes } from './maria-dd';
+
+let MariaScenes = {
+	DeadDrops : DeadDropScenes,
+};
 
 function Maria(storage) {
 	Entity.call(this);
@@ -77,12 +81,10 @@ Maria.DeadDrops = {
 	//TODO flag for repeat, specific things
 };
 
-Scenes.Maria = {};
-
 // Add initial event, only trigger 6-20
 world.loc.Forest.Outskirts.enc.AddEnc(
 	function() {
-		return Scenes.Maria.ForestMeeting;
+		return MariaScenes.ForestMeeting;
 	}, 3.0, function() {
 		return Scenes.Global.VisitedRigardGates() &&
 		       !Scenes.Global.VisitedOutlaws() &&
@@ -169,13 +171,13 @@ Maria.prototype.Act = function(encounter, activeChar) {
 
 
 // Camp interaction
-Scenes.Maria.CampInteract = function() {
+MariaScenes.CampInteract = function() {
 	if(outlaws.MariasBouqetAvailable()) {
 		Scenes.Outlaws.MariasBouquet();
 	}
 	else if(maria.flags["DD"] & Maria.DeadDrops.Alert &&
 	      !(maria.flags["DD"] & Maria.DeadDrops.Talked)) {
-		Scenes.Maria.DeadDrops.Initiation();
+		MariaScenes.DeadDrops.Initiation();
 	}
 	else {
 		var parse = {
@@ -254,11 +256,11 @@ Scenes.Maria.CampInteract = function() {
 		}
 		Text.Flush();
 
-		Scenes.Maria.CampPrompt();
+		MariaScenes.CampPrompt();
 	}
 }
 
-Scenes.Maria.CampPrompt = function() {
+MariaScenes.CampPrompt = function() {
 	var parse = {
 
 	};
@@ -291,7 +293,7 @@ Scenes.Maria.CampPrompt = function() {
 			
 			Text.Flush();
 			
-			Scenes.Maria.TalkPrompt();
+			MariaScenes.TalkPrompt();
 		}
 	});
 	if(cveta.flags["Met"] == Cveta.Met.MariaTalk) {
@@ -309,9 +311,9 @@ Scenes.Maria.CampPrompt = function() {
 			tooltip : "So, does she want to go on a little pick-up errand?",
 			func : function() {
 				if(maria.flags["DD"] & Maria.DeadDrops.Completed)
-					Scenes.Maria.DeadDrops.Repeat();
+					MariaScenes.DeadDrops.Repeat();
 				else
-					Scenes.Maria.DeadDrops.First.Chat();
+					MariaScenes.DeadDrops.First.Chat();
 			}, enabled : maria.DDtimer.Expired()
 		});
 	}
@@ -320,14 +322,14 @@ Scenes.Maria.CampPrompt = function() {
 		tooltip : Text.Parse("Perhaps she could teach you something about forestry?", parse),
 		enabled : true,
 		func : function() {
-			Scenes.Maria.RangerTraining();
+			MariaScenes.RangerTraining();
 		}
 	});
 
 	Gui.SetButtonsFromList(options, true);
 }
 
-Scenes.Maria.RangerTraining = function() {
+MariaScenes.RangerTraining = function() {
 	var parse = {
 		
 	};
@@ -397,7 +399,7 @@ Scenes.Maria.RangerTraining = function() {
 				Text.Add("She nods. <i>“Well then. Anything else you want to bring up?”</i>", parse);
 				Text.Flush();
 				
-				Scenes.Maria.CampPrompt();
+				MariaScenes.CampPrompt();
 			}
 		});
 		Gui.SetButtonsFromList(options, false, null);
@@ -454,11 +456,11 @@ Scenes.Maria.RangerTraining = function() {
 		
 		world.TimeStep({minute: 15});
 		
-		Scenes.Maria.CampPrompt();
+		MariaScenes.CampPrompt();
 	}
 }
 
-Scenes.Maria.TalkPrompt = function() {
+MariaScenes.TalkPrompt = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -532,7 +534,7 @@ Scenes.Maria.TalkPrompt = function() {
 			
 			world.TimeStep({minute: 15});
 			maria.relation.IncreaseStat(100, 1);
-			Scenes.Maria.TalkPrompt();
+			MariaScenes.TalkPrompt();
 		}
 	});
 	options.push({nameStr : "Forest",
@@ -575,7 +577,7 @@ Scenes.Maria.TalkPrompt = function() {
 			
 			world.TimeStep({minute: 15});
 			maria.relation.IncreaseStat(100, 1);
-			Scenes.Maria.TalkPrompt();
+			MariaScenes.TalkPrompt();
 		}
 	});
 	options.push({nameStr : "Outlaws",
@@ -697,7 +699,7 @@ Scenes.Maria.TalkPrompt = function() {
 			
 			world.TimeStep({minute: 15});
 			maria.relation.IncreaseStat(100, 1);
-			Scenes.Maria.TalkPrompt();
+			MariaScenes.TalkPrompt();
 		}
 	});
 	options.push({nameStr : "Zenith",
@@ -718,7 +720,7 @@ Scenes.Maria.TalkPrompt = function() {
 			
 			world.TimeStep({minute: 15});
 			maria.relation.IncreaseStat(100, 1);
-			Scenes.Maria.TalkPrompt();
+			MariaScenes.TalkPrompt();
 		}
 	});
 	if(outlaws.flags["Met"] >= Outlaws.Met.Bouqet) {
@@ -740,7 +742,7 @@ Scenes.Maria.TalkPrompt = function() {
 				
 				world.TimeStep({minute: 15});
 				maria.relation.IncreaseStat(100, 1);
-				Scenes.Maria.TalkPrompt();
+				MariaScenes.TalkPrompt();
 			}
 		});
 	}
@@ -750,11 +752,11 @@ Scenes.Maria.TalkPrompt = function() {
 		Text.Add("<i>“Anything else on your mind?”</i>", parse);
 		Text.Flush();
 		
-		Scenes.Maria.CampPrompt();
+		MariaScenes.CampPrompt();
 	});
 }
 
-Scenes.Maria.ForestMeeting = function() {
+MariaScenes.ForestMeeting = function() {
 	Text.Clear();
 
 	var parse = {
@@ -815,10 +817,10 @@ Scenes.Maria.ForestMeeting = function() {
 		Text.Add("<i>“You again?”</i> she asks. <i>“Do you make a habit of getting lost this deep in the forest, or did you just want to see me again?”</i> Chuckling at her own joke, Maria raises her bow. <i>“Once may be an accident, but more than once can't be. You're coming with me.”</i>", parse);
 	}
 	Text.Flush();
-	Scenes.Maria.ForestConfront();
+	MariaScenes.ForestConfront();
 }
 
-Scenes.Maria.ForestConfront = function() {
+MariaScenes.ForestConfront = function() {
 	var parse = {
 		
 	};
@@ -828,7 +830,7 @@ Scenes.Maria.ForestConfront = function() {
 	//[Follow][Fight][Trick]
 	var options = new Array();
 	options.push({ nameStr : "Follow",
-		func : Scenes.Maria.ForestFollow, enabled : true,
+		func : MariaScenes.ForestFollow, enabled : true,
 		tooltip : "Follow her."
 	});
 	options.push({ nameStr : "Fight",
@@ -894,12 +896,12 @@ Scenes.Maria.ForestConfront = function() {
 				}
 
 				Text.Flush();
-				Gui.NextPrompt(Scenes.Maria.ForestFollow);
+				Gui.NextPrompt(MariaScenes.ForestFollow);
 			};
 			enc.onVictory = function() {
 				SetGameState(GameState.Event);
 				party.members = enc.oldParty;
-				Scenes.Maria.ForestConfrontWin();
+				MariaScenes.ForestConfrontWin();
 			}
 
 			Gui.NextPrompt(function() {
@@ -928,7 +930,7 @@ Scenes.Maria.ForestConfront = function() {
 	Gui.SetButtonsFromList(options);
 }
 
-Scenes.Maria.ForestConfrontWin = function() {
+MariaScenes.ForestConfrontWin = function() {
 	var parse = {
 		
 	};
@@ -1012,7 +1014,7 @@ Scenes.Maria.ForestConfrontWin = function() {
 				Text.Flush();
 				Gui.NextPrompt(function() {
 					Text.Clear();
-					Scenes.Maria.ForestAftermath();
+					MariaScenes.ForestAftermath();
 				});
 			}, enabled : true,
 			tooltip : "Heck yeah! This bitch has it coming!"
@@ -1022,7 +1024,7 @@ Scenes.Maria.ForestConfrontWin = function() {
 				Text.NL();
 				Text.Add("You decide that now, in the middle of the forest, is perhaps not the best time for this.", parse);
 				Text.NL();
-				Gui.NextPrompt(Scenes.Maria.ForestAftermath);
+				Gui.NextPrompt(MariaScenes.ForestAftermath);
 			}, enabled : true,
 			tooltip : "This isn't the time nor place."
 		});
@@ -1030,11 +1032,11 @@ Scenes.Maria.ForestConfrontWin = function() {
 	}
 	else {
 		Text.NL();
-		Scenes.Maria.ForestAftermath();
+		MariaScenes.ForestAftermath();
 	}
 }
 
-Scenes.Maria.ForestAftermath = function() {
+MariaScenes.ForestAftermath = function() {
 	var parse = {
 		
 	};
@@ -1052,10 +1054,10 @@ Scenes.Maria.ForestAftermath = function() {
 	Text.Add("step back and raise your hands non-threateningly. An orange cat-morph steps forward and ties your arms behind your back, then forces you down onto the ground and[f]. Shakily, the archer rises to her feet with the help of a red-armored, wolf-eared man. She takes the lead and heads... well, you don't know where she plans on taking you, but you're beginning to think it might not have been such a good idea to attack her.", parse);
 
 	Text.Flush();
-	Gui.NextPrompt(Scenes.Maria.ForestFollow);
+	Gui.NextPrompt(MariaScenes.ForestFollow);
 }
 
-Scenes.Maria.ForestFollow = function() {
+MariaScenes.ForestFollow = function() {
 	var parse = {};
 
 	Text.Clear();
@@ -1073,7 +1075,7 @@ Scenes.Maria.ForestFollow = function() {
 			Text.Clear();
 			Text.Add("Having nothing in particular to say to the archer, you simply follow her quietly. Instead of wasting your breath talking, you try to watch the path she follows in an attempt to memorize the way she's taking you. Even so, within twenty minutes you are hopelessly lost.", parse);
 
-			Scenes.Maria.ForestCamp();
+			MariaScenes.ForestCamp();
 		}, enabled : true,
 		tooltip : "Follow her silently."
 	});
@@ -1088,7 +1090,7 @@ Scenes.Maria.ForestFollow = function() {
 
 			maria.relation.IncreaseStat(100, 3);
 
-			Scenes.Maria.ForestCamp();
+			MariaScenes.ForestCamp();
 		}, enabled : true,
 		tooltip : "Ask her some questions as you walk."
 	});
@@ -1107,14 +1109,14 @@ Scenes.Maria.ForestFollow = function() {
 				maria.relation.IncreaseStat(100, 5);
 			}
 
-			Scenes.Maria.ForestCamp();
+			MariaScenes.ForestCamp();
 		}, enabled : true,
 		tooltip : "You decide to flirt with the busty woman."
 	});
 	Gui.SetButtonsFromList(options);
 }
 
-Scenes.Maria.ForestCamp = function() {
+MariaScenes.ForestCamp = function() {
 	parse = {
 		num        : Text.NumToText(party.Num() + 2),
 		playername : player.name,
@@ -1186,7 +1188,7 @@ Scenes.Maria.ForestCamp = function() {
 				Text.Add("Zenith, for his part, says nothing for a while. A hand kneads the pommel of his sword in thought. When he finally speaks, the words surprise you a bit. <i>“You can return when you like. For now, you should leave. Too much adventure in one day can be bad for you.”</i> To punctuate the point, he holds up his ravaged hand.  The edge of his mouth briefly twitches into a smile before he shoos you out the door.", parse);
 				Text.Flush();
 
-				Gui.NextPrompt(Scenes.Maria.ForestEnd);
+				Gui.NextPrompt(MariaScenes.ForestEnd);
 			}, enabled : true,
 			tooltip : "Let Maria do the explaining."
 		});
@@ -1208,7 +1210,7 @@ Scenes.Maria.ForestCamp = function() {
 				maria.relation.DecreaseStat(-100, 5);
 				Text.Flush();
 
-				Gui.NextPrompt(Scenes.Maria.ForestEnd);
+				Gui.NextPrompt(MariaScenes.ForestEnd);
 			}, enabled : true,
 			tooltip : "Demand an explanation for your capture."
 		});
@@ -1216,7 +1218,7 @@ Scenes.Maria.ForestCamp = function() {
 	});
 }
 
-Scenes.Maria.ForestEnd = function() {
+MariaScenes.ForestEnd = function() {
 	maria.RestFull();
 	party.RestFull();
 
@@ -1234,4 +1236,4 @@ Scenes.Maria.ForestEnd = function() {
 	Gui.NextPrompt();
 }
 
-export { Maria };
+export { Maria, MariaScenes };

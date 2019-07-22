@@ -1,5 +1,5 @@
 
-import { EncounterTable, Scenes } from '../event';
+import { EncounterTable } from '../event';
 
 let DreamsScenes = {}
 

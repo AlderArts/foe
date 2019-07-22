@@ -6,7 +6,7 @@
  */
 
 import { world } from '../world';
-import { Event, Link, EncounterTable, Scenes } from '../event';
+import { Event, Link, EncounterTable } from '../event';
 
 // Create namespace
 let Highlands = {

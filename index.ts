@@ -187,11 +187,9 @@ import './js/event/burrows/vena.js';
 import './js/event/burrows/vena-restored.js';
 
 import './js/event/farm/gwendy.js';
-import './js/event/farm/gwendy-sex.js';
 import './js/event/farm/adrian.js';
 import './js/event/farm/danie.js';
 import './js/event/farm/layla.js';
-import './js/event/farm/layla-sex.js';
 
 import './js/event/highlands/isla.js';
 
@@ -213,7 +211,6 @@ import './js/event/nomads/patchwork.js';
 import './js/event/nomads/rosalin.js';
 import './js/event/nomads/estevan.js';
 import './js/event/nomads/cale.js';
-import './js/event/nomads/cale-sex.js';
 import './js/event/nomads/magnus.js';
 import './js/event/nomads/cavalcade.js';
 
@@ -224,7 +221,6 @@ import './js/event/outlaws/maria-dd.js';
 import './js/event/outlaws/cveta.js';
 import './js/event/outlaws/cveta-date.js';
 import './js/event/outlaws/vaughn.js';
-import './js/event/outlaws/vaughn-sex.js';
 import './js/event/outlaws/vaughn-tasks.js';
 import './js/event/outlaws/bulltower.js';
 import './js/event/outlaws/cavalcade.js';

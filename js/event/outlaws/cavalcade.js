@@ -1,15 +1,13 @@
-import { Scenes } from '../../event';
+let OCavalcadeScenes = {};
 
-Scenes.OutlawsCavalcade = {};
-
-Scenes.OutlawsCavalcade.Bet = function() {
+OCavalcadeScenes.Bet = function() {
 	return 10; //TODO
 }
-Scenes.OutlawsCavalcade.Enabled = function() {
+OCavalcadeScenes.Enabled = function() {
 	return world.time.hour < 4 || world.time.hour >= 14;
 }
 
-Scenes.OutlawsCavalcade.PrepRandomCoinGame = function() {
+OCavalcadeScenes.PrepRandomCoinGame = function() {
 	var onEnd = function() {
 		var parse = {
 			playername : player.name
@@ -20,7 +18,7 @@ Scenes.OutlawsCavalcade.PrepRandomCoinGame = function() {
 		world.TimeStep({minute: 5});
 		
 		Text.NL();
-		if(Scenes.OutlawsCavalcade.Enabled()) {
+		if(OCavalcadeScenes.Enabled()) {
 			Text.Add("<i>“Do you want to go for another game, [playername]?”</i>", parse);
 			Text.Flush();
 			
@@ -29,8 +27,8 @@ Scenes.OutlawsCavalcade.PrepRandomCoinGame = function() {
 			options.push({ nameStr : "Sure",
 				func : function() {
 					Text.NL();
-					Scenes.OutlawsCavalcade.PrepRandomCoinGame();
-				}, enabled : party.coin >= Scenes.OutlawsCavalcade.Bet(),
+					OCavalcadeScenes.PrepRandomCoinGame();
+				}, enabled : party.coin >= OCavalcadeScenes.Bet(),
 				tooltip : "Deal another round!"
 			});
 			options.push({ nameStr : "Nah",
@@ -69,8 +67,10 @@ Scenes.OutlawsCavalcade.PrepRandomCoinGame = function() {
 		players.push(ent);
 	}
 	
-	var g = new Cavalcade(players, {bet    : Scenes.OutlawsCavalcade.Bet(),
+	var g = new Cavalcade(players, {bet    : OCavalcadeScenes.Bet(),
 		                            onPost : onEnd});
 	g.PrepGame();
 	g.NextRound();
 }
+
+export { OCavalcadeScenes };

@@ -17,7 +17,7 @@ let PlainsLoc = {
 		return Scenes.Global.PortalsOpen() ? "Plains: Nexus" : "Plains: Mound";
 	}),
 	Gate           : new Event("Rigard gates"),
-}
+};
 
 
 //

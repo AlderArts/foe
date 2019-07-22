@@ -1,17 +1,17 @@
 /*
  * Specifics for Cavalcade game with Rosalin, Estevan and Cale
  */
-import { Link, Scenes } from '../../event';
+import { Link } from '../../event';
 import { world } from '../../world';
 import { GetDEBUG } from '../../../app';
 
-Scenes.NomadsCavalcade = {};
+let NCavalcadeScenes = {};
 
-Scenes.NomadsCavalcade.Bet = function() {
+NCavalcadeScenes.Bet = function() {
 	return 5;
 }
 
-Scenes.NomadsCavalcade.Enabled = function() {
+NCavalcadeScenes.Enabled = function() {
 	return cale.IsAtLocation() &&
 	       estevan.flags["Met"] != 0 &&
 	       estevan.IsAtLocation() &&
@@ -20,9 +20,9 @@ Scenes.NomadsCavalcade.Enabled = function() {
 
 // TODO TEMP CAVALCADE
 world.loc.Plains.Nomads.Fireplace.events.push(new Link(
-	"Cavalcade", function() { return Scenes.NomadsCavalcade.Enabled(); }, function() { return party.coin >= Scenes.NomadsCavalcade.Bet(); },
+	"Cavalcade", function() { return NCavalcadeScenes.Enabled(); }, function() { return party.coin >= NCavalcadeScenes.Bet(); },
 	function() {
-		if(Scenes.NomadsCavalcade.Enabled()) {
+		if(NCavalcadeScenes.Enabled()) {
 			Text.Add("Both Rosalin, Cale and Estevan seem to be around. Perhaps they are up for a game of Cavalcade?");
 			if(estevan.flags["Cheat"] == Estevan.Cheat.Setup)
 				Text.Add(" You remind yourself that you’ve rigged this coming game together with Estevan in order to play a prank on Cale.");
@@ -62,13 +62,13 @@ world.loc.Plains.Nomads.Fireplace.events.push(new Link(
 		Text.Add("You round up the mismatched trio and ask them if they are up for a game of Cavalcade.");
 		Text.NL();
 		if(estevan.flags["Cheat"] == Estevan.Cheat.Setup)
-			Scenes.NomadsCavalcade.CheatGame();
+			NCavalcadeScenes.CheatGame();
 		else
-			Scenes.NomadsCavalcade.RegularGame();
+			NCavalcadeScenes.RegularGame();
 	}
 ));
 
-Scenes.NomadsCavalcade.RegularGame = function() {
+NCavalcadeScenes.RegularGame = function() {
 	var parse = {
 		playername : player.name,
 		hisher     : rosalin.hisher()
@@ -117,14 +117,14 @@ Scenes.NomadsCavalcade.RegularGame = function() {
 		options.push({ nameStr : "Coin game",
 			func : function() {
 				Text.Clear();
-				Scenes.NomadsCavalcade.PrepCoinGame();
-			}, enabled : party.coin >= Scenes.NomadsCavalcade.Bet(),
+				NCavalcadeScenes.PrepCoinGame();
+			}, enabled : party.coin >= NCavalcadeScenes.Bet(),
 			tooltip : "Play for coins."
 		});
 		options.push({ nameStr : "Sexy game",
 			func : function() {
 				Text.Clear();
-				Scenes.NomadsCavalcade.PrepSexyGame();
+				NCavalcadeScenes.PrepSexyGame();
 			}, enabled : true,
 			tooltip : "Play for sex."
 		});
@@ -136,12 +136,12 @@ Scenes.NomadsCavalcade.RegularGame = function() {
 
 		Gui.NextPrompt(function() {
 			Text.Clear();
-			Scenes.NomadsCavalcade.PrepCoinGame();
+			NCavalcadeScenes.PrepCoinGame();
 		});
 	}
 }
 
-Scenes.NomadsCavalcade.PrepCoinGame = function() {
+NCavalcadeScenes.PrepCoinGame = function() {
 	var onEnd = function() {
 		var parse = {
 			playername : player.name
@@ -152,7 +152,7 @@ Scenes.NomadsCavalcade.PrepCoinGame = function() {
 		world.TimeStep({minute: 5});
 
 		Text.NL();
-		if(Scenes.NomadsCavalcade.Enabled()) {
+		if(NCavalcadeScenes.Enabled()) {
 			Text.Add("<i>“Do you want to go for another game, [playername]?”</i> the satyr asks, shuffling the deck.", parse);
 			Text.Flush();
 
@@ -161,8 +161,8 @@ Scenes.NomadsCavalcade.PrepCoinGame = function() {
 			options.push({ nameStr : "Sure",
 				func : function() {
 					Text.NL();
-					Scenes.NomadsCavalcade.PrepCoinGame();
-				}, enabled : party.coin >= Scenes.NomadsCavalcade.Bet(),
+					NCavalcadeScenes.PrepCoinGame();
+				}, enabled : party.coin >= NCavalcadeScenes.Bet(),
 				tooltip : "Deal another round!"
 			});
 			options.push({ nameStr : "Nah",
@@ -191,13 +191,13 @@ Scenes.NomadsCavalcade.PrepCoinGame = function() {
 	rosalin.purse = { coin: 100 };
 
 	var players = [player, estevan, rosalin, cale];
-	var g = new Cavalcade(players, {bet    : Scenes.NomadsCavalcade.Bet(),
+	var g = new Cavalcade(players, {bet    : NCavalcadeScenes.Bet(),
 		                            onPost : onEnd});
 	g.PrepGame();
 	g.NextRound();
 }
 
-Scenes.NomadsCavalcade.PlayersLeft = function(players) {
+NCavalcadeScenes.PlayersLeft = function(players) {
 	var num = 0;
 	for(var i = 0; i < players.length; i++)
 		if(!players[i].out)
@@ -205,7 +205,7 @@ Scenes.NomadsCavalcade.PlayersLeft = function(players) {
 	return num;
 }
 
-Scenes.NomadsCavalcade.PrepSexyGame = function() {
+NCavalcadeScenes.PrepSexyGame = function() {
 	var token = 50;
 
 	var parse = {
@@ -225,7 +225,7 @@ Scenes.NomadsCavalcade.PrepSexyGame = function() {
 		world.TimeStep({minute: 5});
 
 		var onLoss = function() {
-			if(Scenes.NomadsCavalcade.PlayersLeft(players) <= 1)
+			if(NCavalcadeScenes.PlayersLeft(players) <= 1)
 				onEnd();
 			else {
 				Text.Add("The satyr starts dealing out cards to the remaining players.", parse);
@@ -287,12 +287,12 @@ Scenes.NomadsCavalcade.PrepSexyGame = function() {
 			}
 		}
 
-		if(Scenes.NomadsCavalcade.PlayersLeft(players) <= 1) {
+		if(NCavalcadeScenes.PlayersLeft(players) <= 1) {
 			var next = null;
-			if     (!player.out)  next = Scenes.NomadsCavalcade.SexyPlayerWin;
-			else if(!estevan.out) next = Scenes.NomadsCavalcade.SexyEstevanWin;
-			else if(!rosalin.out) next = Scenes.NomadsCavalcade.SexyRosalinWin;
-			else if(!cale.out)    next = Scenes.NomadsCavalcade.SexyCaleWin;
+			if     (!player.out)  next = NCavalcadeScenes.SexyPlayerWin;
+			else if(!estevan.out) next = NCavalcadeScenes.SexyEstevanWin;
+			else if(!rosalin.out) next = NCavalcadeScenes.SexyRosalinWin;
+			else if(!cale.out)    next = NCavalcadeScenes.SexyCaleWin;
 			else {
 				Text.Add("THIS IS A BUG. WINNER IS BROKEN.", parse);
 			}
@@ -311,7 +311,7 @@ Scenes.NomadsCavalcade.PrepSexyGame = function() {
 			Gui.ClearButtons();
 			Input.buttons[0].Setup("Next", function() {
 				Text.Clear();
-				var bet = Scenes.NomadsCavalcade.Bet() * (5 - Scenes.NomadsCavalcade.PlayersLeft(players));
+				var bet = NCavalcadeScenes.Bet() * (5 - NCavalcadeScenes.PlayersLeft(players));
 				var g = new Cavalcade(players, {bet    : bet,
 				                                token  : "token",
 				                                onPost : onEnd});
@@ -320,7 +320,7 @@ Scenes.NomadsCavalcade.PrepSexyGame = function() {
 			}, true);
 			if(GetDEBUG()) {
 				Input.buttons[4].Setup("CHEAT", function() {
-					Scenes.NomadsCavalcade.SexyPlayerWin(false);
+					NCavalcadeScenes.SexyPlayerWin(false);
 				}, true);
 			}
 			Input.buttons[8].Setup("Give up", function() {
@@ -349,7 +349,7 @@ Scenes.NomadsCavalcade.PrepSexyGame = function() {
 	Gui.NextPrompt(function() {
 		Text.Clear();
 
-		var g = new Cavalcade(players, {bet    : Scenes.NomadsCavalcade.Bet(),
+		var g = new Cavalcade(players, {bet    : NCavalcadeScenes.Bet(),
 			                            token  : "token",
 		                                onPost : onEnd});
 		g.PrepGame();
@@ -357,7 +357,7 @@ Scenes.NomadsCavalcade.PrepSexyGame = function() {
 	});
 }
 
-Scenes.NomadsCavalcade.CheatGame = function() {
+NCavalcadeScenes.CheatGame = function() {
 	var cocksInAss = player.CocksThatFit(cale.Butt());
 	var p1cock = player.BiggestCock(cocksInAss);
 
@@ -513,7 +513,7 @@ Scenes.NomadsCavalcade.CheatGame = function() {
 }
 
 
-Scenes.NomadsCavalcade.SexyPlayerWin = function(cheat) {
+NCavalcadeScenes.SexyPlayerWin = function(cheat) {
 	var parse = {
 		playername : player.name
 	};
@@ -610,7 +610,7 @@ Scenes.NomadsCavalcade.SexyPlayerWin = function(cheat) {
 }
 
 //TODO
-Scenes.NomadsCavalcade.SexyEstevanWin = function(cheat) {
+NCavalcadeScenes.SexyEstevanWin = function(cheat) {
 	var parse = {
 
 	};
@@ -625,7 +625,7 @@ Scenes.NomadsCavalcade.SexyEstevanWin = function(cheat) {
 }
 
 //TODO
-Scenes.NomadsCavalcade.SexyCaleWin = function(cheat) {
+NCavalcadeScenes.SexyCaleWin = function(cheat) {
 	var parse = {
 
 	};
@@ -640,7 +640,7 @@ Scenes.NomadsCavalcade.SexyCaleWin = function(cheat) {
 }
 
 //TODO
-Scenes.NomadsCavalcade.SexyRosalinWin = function(cheat) {
+NCavalcadeScenes.SexyRosalinWin = function(cheat) {
 	var parse = {
 
 	};
@@ -653,3 +653,5 @@ Scenes.NomadsCavalcade.SexyRosalinWin = function(cheat) {
 	Text.Flush();
 	Gui.NextPrompt();
 }
+
+export { NCavalcadeScenes };

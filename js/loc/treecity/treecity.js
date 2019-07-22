@@ -5,13 +5,12 @@
  */
 
 //import { world } from '../../world';
-import { Scenes } from '../../event';
 
 // Create namespace
 let TreeCityLoc = {
 }
 
-Scenes.TreeCity = {};
+let TreeCityScenes = {};
 
 // Class to handle global flags and logic for town
 function TreeCity(storage) {
@@ -37,4 +36,4 @@ TreeCity.prototype.FromStorage = function(storage) {
 		this.flags[flag] = parseInt(storage.flags[flag]);
 }
 
-export { TreeCity, TreeCityLoc };
+export { TreeCity, TreeCityLoc, TreeCityScenes };

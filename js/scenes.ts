@@ -53,6 +53,19 @@ import { LaylaScenes } from "./event/farm/layla";
 import { GwendyScenes } from "./event/farm/gwendy";
 import { RoaScenes } from "./event/brothel/roa";
 import { LucilleScenes } from "./event/brothel/lucille";
+import { BullTowerScenes } from "./event/outlaws/bulltower";
+import { OutlawsScenes } from "./event/outlaws/outlaws";
+import { CvetaScenes } from "./event/outlaws/cveta";
+import { MariaScenes } from "./event/outlaws/maria";
+import { VaughnScenes } from "./event/outlaws/vaughn";
+import { NCavalcadeScenes } from "./event/nomads/cavalcade";
+import { GolemScenes } from "./event/royals/golem";
+import { JeanneScenes } from "./event/royals/jeanne";
+import { LeiScenes } from "./event/royals/lei";
+import { TwinsScenes } from "./event/royals/twins";
+import { AquiliusScenes } from "./event/outlaws/aquilius";
+import { TreeCityScenes } from "./loc/treecity/treecity";
+import { NurseryScenes } from "./event/nursery";
 
 let Scenes = {
 	Masturbation  : MasturbationScenes,
@@ -63,6 +76,8 @@ let Scenes = {
     PortalOpening : PortalOpeningScenes,
     Global        : GlobalScenes,
     Halloween     : HalloweenScenes,
+    BullTower     : BullTowerScenes,
+    Nursery       : NurseryScenes,
 
     Kiakai        : KiakaiScenes,
     Terry         : TerryScenes,
@@ -70,6 +85,7 @@ let Scenes = {
     Gwendy        : GwendyScenes,
     Layla         : LaylaScenes,
     Roa           : RoaScenes,
+    Cveta         : CvetaScenes,
 
 	Aria          : AriaScenes,
 	Uru           : UruScenes,
@@ -83,12 +99,21 @@ let Scenes = {
     Magnus        : MagnusScenes,
     Estevan       : EstevanScenes,
     Momo          : MomoScenes,
+    NomadsCavalcade : NCavalcadeScenes,
 
+    Outlaws       : OutlawsScenes,
+    Aquilius      : AquiliusScenes,
+    Maria         : MariaScenes,
+    Vaughn        : VaughnScenes,
 
     Asche         : AscheScenes,
     Cassidy       : CassidyScenes,
     Fera          : FeraScenes,
     Barnaby       : BarnabyScenes,
+
+    Twins         : TwinsScenes,
+    Jeanne        : JeanneScenes,
+    Lei           : LeiScenes,
 
 	Zina          : ZinaScenes,
     Sylistraxia   : SylistraxiaScenes,
@@ -100,7 +125,8 @@ let Scenes = {
     DryadGlade    : DryadGladeScenes,
     Krawitz       : KrawitzScenes,
     Rigard        : RigardScenes,
-    
+    TreeCity      : TreeCityScenes,
+
     Brothel       : BrothelScenes,
 
     Equine        : EquineScenes,
@@ -118,6 +144,7 @@ let Scenes = {
     Orchid        : OrchidScenes,
     Gol           : GolScenes,
     Lucille       : LucilleScenes,
+    Golem         : GolemScenes,
 };
 
 export { Scenes };

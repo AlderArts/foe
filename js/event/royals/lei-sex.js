@@ -1,17 +1,15 @@
-import { Scenes } from '../../event';
+let SexScenes = {};
 
-Scenes.Lei.Sex = {};
-
-Scenes.Lei.Sex.Prompt = function(options) {
+SexScenes.Prompt = function(options) {
 	var parse = {
 		
 	};
 	
-	if(Scenes.Lei.Sex.PettingUnlocked()) {
+	if(SexScenes.PettingUnlocked()) {
 		options.push({ nameStr : "Petting",
 			tooltip : "Ask him to pet you.",
 			func : function() {
-				Scenes.Lei.Sex.Petting(true);
+				SexScenes.Petting(true);
 			}, enabled : true
 		});
 	}
@@ -29,10 +27,10 @@ Scenes.Lei.Sex.Prompt = function(options) {
 	*/
 }
 
-Scenes.Lei.Sex.PettingUnlocked = function() {
+SexScenes.PettingUnlocked = function() {
 	return lei.flags["Met"] >= Lei.Met.CompletedTaskEscort;
 }
-Scenes.Lei.Sex.Petting = function(repeat) {
+SexScenes.Petting = function(repeat) {
 	var parse = {
 		boygirl : player.mfFem("boy", "girl"),
 		hair : function() { return player.Hair().Short(); },
@@ -159,3 +157,5 @@ Scenes.Lei.Sex.Petting = function(repeat) {
 	
 	Gui.SetButtonsFromList(options, false, null);
 }
+
+export { SexScenes };

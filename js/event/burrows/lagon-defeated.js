@@ -1,7 +1,7 @@
 
 import { GetDEBUG } from '../../../app';
 
-LagonDScenes = {};
+let LagonDScenes = {};
 
 LagonDScenes.RoomApproach = function() {
 	var parse = {

@@ -1,37 +1,36 @@
-import { Scenes } from '../../event';
 import { Vaughn } from './vaughn';
 import { GetDEBUG } from '../../../app';
 
-Scenes.Vaughn.Tasks = {};
+let TasksScenes = {};
 
-Scenes.Vaughn.Tasks.OnTask = function() { //TODO add tasks
-	return Scenes.Vaughn.Tasks.Lockpicks.OnTask() ||
-		Scenes.Vaughn.Tasks.Snitch.OnTask() ||
-		Scenes.Vaughn.Tasks.Poisoning.OnTask();
+TasksScenes.OnTask = function() { //TODO add tasks
+	return TasksScenes.Lockpicks.OnTask() ||
+		TasksScenes.Snitch.OnTask() ||
+		TasksScenes.Poisoning.OnTask();
 }
 
-Scenes.Vaughn.Tasks.AnyTaskAvailable = function() { //TODO add tasks
-	return Scenes.Vaughn.Tasks.Lockpicks.Available() ||
-		Scenes.Vaughn.Tasks.Snitch.Available() ||
-		Scenes.Vaughn.Tasks.Poisoning.Available();
+TasksScenes.AnyTaskAvailable = function() { //TODO add tasks
+	return TasksScenes.Lockpicks.Available() ||
+		TasksScenes.Snitch.Available() ||
+		TasksScenes.Poisoning.Available();
 }
 
-Scenes.Vaughn.Tasks.StartTask = function() { //TODO add tasks
-	if(Scenes.Vaughn.Tasks.Lockpicks.Available())
-		Scenes.Vaughn.Tasks.Lockpicks.Start();
-	else if(Scenes.Vaughn.Tasks.Snitch.Available())
-		Scenes.Vaughn.Tasks.Snitch.Start();
-	else if(Scenes.Vaughn.Tasks.Poisoning.Available())
-		Scenes.Vaughn.Tasks.Poisoning.Start();
+TasksScenes.StartTask = function() { //TODO add tasks
+	if(TasksScenes.Lockpicks.Available())
+		TasksScenes.Lockpicks.Start();
+	else if(TasksScenes.Snitch.Available())
+		TasksScenes.Snitch.Start();
+	else if(TasksScenes.Poisoning.Available())
+		TasksScenes.Poisoning.Start();
 }
 
-Scenes.Vaughn.Tasks.TaskPrompt = function() {
+TasksScenes.TaskPrompt = function() {
 	var parse = {
 		
 	};
 	
 	Text.Clear();
-	if(Scenes.Vaughn.Tasks.AnyTaskAvailable()) {
+	if(TasksScenes.AnyTaskAvailable()) {
 		Text.Add("<i>“So, you’re interested in seeing some action? Young people, full of drive and fire… well, I’m not about to stop you from doing what an operative’s supposed to do.”</i> Vaughn thinks a moment, then smiles. <i>“Just so it happens, there’s something that came up which needs handling, and it has to be done the next day. You interested? Remember, you’ll be on the clock if I hand the assignment to you, so don’t accept responsibility for anything that you’re not willing to see through. You’re still thinking of going out there?”</i>", parse);
 		Text.Flush();
 		
@@ -44,7 +43,7 @@ Scenes.Vaughn.Tasks.TaskPrompt = function() {
 				Text.Add("<i>“All right, then. Let’s see what the boss-man wants me to hand down to you today…”</i>", parse);
 				Text.Flush();
 				
-				Gui.NextPrompt(Scenes.Vaughn.Tasks.StartTask);
+				Gui.NextPrompt(TasksScenes.StartTask);
 			}, enabled : true
 		});
 		options.push({ nameStr : "No",
@@ -76,15 +75,15 @@ Scenes.Vaughn.Tasks.TaskPrompt = function() {
 }
 
 
-Scenes.Vaughn.Tasks.Lockpicks = {};
-Scenes.Vaughn.Tasks.Lockpicks.Available = function() {
+TasksScenes.Lockpicks = {};
+TasksScenes.Lockpicks.Available = function() {
 	if(vaughn.flags["Met"] >= Vaughn.Met.OnTaskLockpicks) return false;
 	return true;
 }
-Scenes.Vaughn.Tasks.Lockpicks.OnTask = function() {
+TasksScenes.Lockpicks.OnTask = function() {
 	return vaughn.flags["Met"] == Vaughn.Met.OnTaskLockpicks;
 }
-Scenes.Vaughn.Tasks.Lockpicks.Completed = function() {
+TasksScenes.Lockpicks.Completed = function() {
 	return vaughn.flags["Met"] >= Vaughn.Met.CompletedLockpicks;
 }
 
@@ -92,7 +91,7 @@ Scenes.Vaughn.Tasks.Lockpicks.Completed = function() {
 //Note to Alder: refer to castle grounds docs. Create flag to see if player has inadvertently met Elodie via castle grounds exploration for use in this.
 //Block that exploration scene if this scene has been viewed.
 //TODO Note for far future: Do not enable this if/when Majid has been run out of Rigard.
-Scenes.Vaughn.Tasks.Lockpicks.Start = function() {
+TasksScenes.Lockpicks.Start = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -162,19 +161,19 @@ Scenes.Vaughn.Tasks.Lockpicks.Start = function() {
 	//#add “Tools” option to castle grounds.
 }
 
-Scenes.Vaughn.Tasks.Lockpicks.ElodieAvailable = function() {
+TasksScenes.Lockpicks.ElodieAvailable = function() {
 	return world.time.hour >= 16 && world.time.hour < 21;
 }
 
 //Triggered in castle grounds
-Scenes.Vaughn.Tasks.Lockpicks.MeetingElodie = function() {
+TasksScenes.Lockpicks.MeetingElodie = function() {
 	var parse = {
 		playername : player.name
 	};
 	
 	Text.Clear();
 	//Correct time
-	if(!Scenes.Vaughn.Tasks.Lockpicks.ElodieAvailable()) {
+	if(!TasksScenes.Lockpicks.ElodieAvailable()) {
 		Text.Add("You arrive at the park and spy the bench by the pond, but there’s currently no one sitting on it at the moment, let alone someone who could be your contact. What was the meeting time again? Sometime in the evening? Maybe you should come back then.", parse);
 		Text.Flush();
 		
@@ -266,7 +265,7 @@ Scenes.Vaughn.Tasks.Lockpicks.MeetingElodie = function() {
 }
 
 //Automatically triggers when approaching Vaughn after completing the task.
-Scenes.Vaughn.Tasks.Lockpicks.Debrief = function() {
+TasksScenes.Lockpicks.Debrief = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -312,20 +311,20 @@ Scenes.Vaughn.Tasks.Lockpicks.Debrief = function() {
 }
 
 
-Scenes.Vaughn.Tasks.Snitch = {};
-Scenes.Vaughn.Tasks.Snitch.Available = function() {
+TasksScenes.Snitch = {};
+TasksScenes.Snitch.Available = function() {
 	if(vaughn.flags["Met"] >= Vaughn.Met.CompletedSnitch) return false;
 	return true;
 }
-Scenes.Vaughn.Tasks.Snitch.OnTask = function() {
+TasksScenes.Snitch.OnTask = function() {
 	return vaughn.flags["Met"] == Vaughn.Met.OnTaskSnitch;
 }
-Scenes.Vaughn.Tasks.Snitch.Completed = function() {
+TasksScenes.Snitch.Completed = function() {
 	return vaughn.flags["Met"] >= Vaughn.Met.CompletedSnitch;
 }
 
 //Disable this and jump ahead to task 3 if Miranda has been permanently recruited.
-Scenes.Vaughn.Tasks.Snitch.Start = function() {
+TasksScenes.Snitch.Start = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -388,19 +387,19 @@ Scenes.Vaughn.Tasks.Snitch.Start = function() {
 	Gui.NextPrompt();
 }
 
-Scenes.Vaughn.Tasks.Snitch.MirandaTalk = function(options, onDuty) {
+TasksScenes.Snitch.MirandaTalk = function(options, onDuty) {
 	if(vaughn.taskTimer.Expired()) return;
 	if(vaughn.flags["Met"] == Vaughn.Met.OnTaskSnitch && miranda.flags["Snitch"] == 0) {
 		options.push({ nameStr : "Snitch",
 			tooltip : "Present your evidence against Terrell to Miranda and ask the dobie if anything can be done.",
 			func : function() {
-				Scenes.Vaughn.Tasks.Snitch.Miranda(onDuty);
+				TasksScenes.Snitch.Miranda(onDuty);
 			}, enabled : true
 		});
 	}
 }
 
-Scenes.Vaughn.Tasks.Snitch.Miranda = function(onDuty) {
+TasksScenes.Snitch.Miranda = function(onDuty) {
 	var parse = {
 		playername : player.name
 	};
@@ -702,7 +701,7 @@ Scenes.Vaughn.Tasks.Snitch.Miranda = function(onDuty) {
 }
 
 //Triggered via [Evidence] - Break into the watchmens’ lockers and plant the evidence. while in the City Watch area.
-Scenes.Vaughn.Tasks.Snitch.PlantEvidence = function() {
+TasksScenes.Snitch.PlantEvidence = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -887,12 +886,12 @@ Scenes.Vaughn.Tasks.Snitch.PlantEvidence = function() {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Vaughn.Tasks.Snitch.DebriefAvailable = function() {
+TasksScenes.Snitch.DebriefAvailable = function() {
 	return vaughn.flags["Met"] > Vaughn.Met.OnTaskSnitch &&
 		vaughn.flags["Met"] < Vaughn.Met.CompletedSnitch;
 }
 
-Scenes.Vaughn.Tasks.Snitch.Debrief = function() {
+TasksScenes.Snitch.Debrief = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -913,7 +912,7 @@ Scenes.Vaughn.Tasks.Snitch.Debrief = function() {
 		Text.NL();
 		Text.Add("<i>“Indeed. Watchmen who don’t take bullshit were never that many to begin with, and they’re practically a dying breed nowadays.</i>", parse);
 		
-		Scenes.Vaughn.Tasks.Snitch.DebriefSuccess(parse);
+		TasksScenes.Snitch.DebriefSuccess(parse);
 	}
 	//Use this if the player opted to go to the watch headquarters and succeeded in planting the evidence.
 	else if(vaughn.flags["Met"] == Vaughn.Met.SnitchWatchhousSuccess) {
@@ -923,7 +922,7 @@ Scenes.Vaughn.Tasks.Snitch.Debrief = function() {
 		Text.NL();
 		Text.Add("<i>“And so it was. We gave instructions to our people on the street to keep our dear friend busy for the day, up to the point where he was almost late for the inspection. Good times, good times. By all accounts, the reaction was quite… intense on both sides. No one likes a snitch, and that goes double for watchmen. Our people didn’t manage to find out what happened afterwards, but one can only assume he’s going to be off the streets for a little while yet, or at least until the investigation’s concluded.</i>", parse);
 		
-		Scenes.Vaughn.Tasks.Snitch.DebriefSuccess(parse);
+		TasksScenes.Snitch.DebriefSuccess(parse);
 	}
 	//Failure (Caught at Watch HQ)
 	else {
@@ -945,15 +944,15 @@ Scenes.Vaughn.Tasks.Snitch.Debrief = function() {
 		Text.NL();
 		Text.Add("<i>“We find another way to use this damning evidence. Either that, or if it takes too long… as I said, corrupt bastards like Terrell will take all that they think they can grab, and he’s not the kind who’s smart enough to cover his tracks consistently. I have a feeling that he’ll slip up again before long.</i>", parse);
 		
-		Scenes.Vaughn.Tasks.Snitch.DebriefFailure(parse);
+		TasksScenes.Snitch.DebriefFailure(parse);
 	}
 }
 
-Scenes.Vaughn.Tasks.Snitch.OutOfTime = function() {
-	return Scenes.Vaughn.Tasks.Snitch.OnTask() && vaughn.taskTimer.Expired();
+TasksScenes.Snitch.OutOfTime = function() {
+	return TasksScenes.Snitch.OnTask() && vaughn.taskTimer.Expired();
 }
 
-Scenes.Vaughn.Tasks.Snitch.DebriefOutOfTime = function() {
+TasksScenes.Snitch.DebriefOutOfTime = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -979,10 +978,10 @@ Scenes.Vaughn.Tasks.Snitch.DebriefOutOfTime = function() {
 	
 	outlaws.relation.DecreaseStat(0, -4);
 	
-	Scenes.Vaughn.Tasks.Snitch.DebriefFailure(parse);
+	TasksScenes.Snitch.DebriefFailure(parse);
 }
 
-Scenes.Vaughn.Tasks.Snitch.DebriefSuccess = function(parse) {
+TasksScenes.Snitch.DebriefSuccess = function(parse) {
 	Text.NL();
 	Text.Add("<i>“Well, that seems like that’s that,”</i> Vaughn says. <i>“Your help’s much appreciated, and with any luck, Terrell’s going to find himself in quite a bit of hot soup for the foreseeable future. Justice is served, righteousness prevails, and all that other stuff I’m supposed to say but I was never really very good at.”</i>", parse);
 	Text.NL();
@@ -1011,7 +1010,7 @@ Scenes.Vaughn.Tasks.Snitch.DebriefSuccess = function(parse) {
 	Gui.NextPrompt();
 }
 
-Scenes.Vaughn.Tasks.Snitch.DebriefFailure = function(parse) {
+TasksScenes.Snitch.DebriefFailure = function(parse) {
 	Text.NL();
 	Text.Add("<i>“One more thing. You still have the evidence, don’t you?”</i>", parse);
 	Text.NL();
@@ -1045,19 +1044,19 @@ Vaughn.Poisoning = {
 	LeftItToLei : 128
 }
 
-Scenes.Vaughn.Tasks.Poisoning = {};
-Scenes.Vaughn.Tasks.Poisoning.Available = function() {
+TasksScenes.Poisoning = {};
+TasksScenes.Poisoning.Available = function() {
 	if(vaughn.flags["Met"] >= Vaughn.Met.CompletedPoisoning) return false;
 	return true;
 }
-Scenes.Vaughn.Tasks.Poisoning.OnTask = function() {
+TasksScenes.Poisoning.OnTask = function() {
 	return vaughn.flags["Met"] == Vaughn.Met.OnTaskPoisoning;
 }
-Scenes.Vaughn.Tasks.Poisoning.Completed = function() {
+TasksScenes.Poisoning.Completed = function() {
 	return vaughn.flags["Met"] >= Vaughn.Met.CompletedPoisoning;
 }
 
-Scenes.Vaughn.Tasks.Poisoning.Start = function() {
+TasksScenes.Poisoning.Start = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -1165,15 +1164,15 @@ Scenes.Vaughn.Tasks.Poisoning.Start = function() {
 }
 
 
-Scenes.Vaughn.Tasks.Poisoning.InnAvailable = function() {
+TasksScenes.Poisoning.InnAvailable = function() {
 	//Trigger this upon stepping into the Lady’s Blessing with this task active (Allotted time, 17-24 the next day, ie timer not expired, and <= 7 hours).
-	if(!Scenes.Vaughn.Tasks.Poisoning.OnTask()) return false;
+	if(!TasksScenes.Poisoning.OnTask()) return false;
 	if(vaughn.taskTimer.Expired()) return false;
 	if(vaughn.taskTimer.ToHours() > 7) return false;
 	return true;
 }
 
-Scenes.Vaughn.Tasks.Poisoning.ArrivalAtInn = function(onWait, oldLocation) {
+TasksScenes.Poisoning.ArrivalAtInn = function(onWait, oldLocation) {
 	var parse = {
 		Orvin : Rigard.LB.KnowsOrvin() ? "Orvin" : "the innkeeper"
 	};
@@ -1198,10 +1197,10 @@ Scenes.Vaughn.Tasks.Poisoning.ArrivalAtInn = function(onWait, oldLocation) {
 	Text.Add("Now, how will you go about doing this?", parse);
 	Text.Flush();
 	
-	Scenes.Vaughn.Tasks.Poisoning.InnPrompt({});
+	TasksScenes.Poisoning.InnPrompt({});
 }
 
-Scenes.Vaughn.Tasks.Poisoning.InnPrompt = function(opts) {
+TasksScenes.Poisoning.InnPrompt = function(opts) {
 	var parse = {
 		Orvin : Rigard.LB.KnowsOrvin() ? "Orvin" : "the innkeeper",
 		playername : player.name
@@ -1235,14 +1234,14 @@ Scenes.Vaughn.Tasks.Poisoning.InnPrompt = function(opts) {
 				
 				opts.Orvin = true;
 				
-				Scenes.Vaughn.Tasks.Poisoning.InnPrompt(opts);
+				TasksScenes.Poisoning.InnPrompt(opts);
 			}, enabled : true
 		});
 	}
 	options.push({ nameStr : "Kitchen",
 		tooltip : "Sneak into the kitchen and get up to some mischief.",
 		func : function() {
-			Scenes.Vaughn.Tasks.Poisoning.Kitchen(opts);
+			TasksScenes.Poisoning.Kitchen(opts);
 		}, enabled : true
 	});
 	if(!opts.Waiters) {
@@ -1262,7 +1261,7 @@ Scenes.Vaughn.Tasks.Poisoning.InnPrompt = function(opts) {
 				
 				opts.Waiters = true;
 				
-				Scenes.Vaughn.Tasks.Poisoning.InnPrompt(opts);
+				TasksScenes.Poisoning.InnPrompt(opts);
 			}, enabled : true
 		});
 	}
@@ -1350,7 +1349,7 @@ Scenes.Vaughn.Tasks.Poisoning.InnPrompt = function(opts) {
 									world.TimeStep({hour: 1});
 									
 									if(vaughn.flags["T3"] & Vaughn.Poisoning.Aphrodisiac)
-										Gui.NextPrompt(Scenes.Vaughn.Tasks.Poisoning.AphrodisiacEntry);
+										Gui.NextPrompt(TasksScenes.Poisoning.AphrodisiacEntry);
 									else
 										Gui.NextPrompt(function() {
 											MoveToLocation(world.loc.Rigard.Plaza);
@@ -1368,7 +1367,7 @@ Scenes.Vaughn.Tasks.Poisoning.InnPrompt = function(opts) {
 									Text.Add("You push out your chair, stand, and survey the room as you consider your remaining options. What now? The clock’s a-ticking if you want to have any chance at success here.", parse);
 									Text.Flush();
 									
-									Scenes.Vaughn.Tasks.Poisoning.InnPrompt(opts);
+									TasksScenes.Poisoning.InnPrompt(opts);
 								}, enabled : true
 							});
 							Gui.SetButtonsFromList(options, false, null);
@@ -1385,7 +1384,7 @@ Scenes.Vaughn.Tasks.Poisoning.InnPrompt = function(opts) {
 							Text.Add("You nod, and rise from the seat. Seems like enlisting Lei’s help didn’t work out - you’ll have to find another avenue to achieve your goals here.", parse);
 							Text.Flush();
 							
-							Scenes.Vaughn.Tasks.Poisoning.InnPrompt(opts);
+							TasksScenes.Poisoning.InnPrompt(opts);
 						}
 					}, enabled : true
 				});
@@ -1410,7 +1409,7 @@ Scenes.Vaughn.Tasks.Poisoning.InnPrompt = function(opts) {
 						Text.Add("Lei’s voice distinctly implies that this isn’t open to negotiation, and you decide that it’s probably best not to pester him any further, lest he take it as provocation. You rise from your seat, nod, and start weighing your remaining options.", parse);
 						Text.Flush();
 						
-						Scenes.Vaughn.Tasks.Poisoning.InnPrompt(opts);
+						TasksScenes.Poisoning.InnPrompt(opts);
 					}, enabled : true
 				});
 				Gui.SetButtonsFromList(options, false, null);
@@ -1527,7 +1526,7 @@ Scenes.Vaughn.Tasks.Poisoning.InnPrompt = function(opts) {
 					world.TimeStep({hour: 1});
 					
 					if(vaughn.flags["T3"] & Vaughn.Poisoning.Aphrodisiac)
-						Gui.NextPrompt(Scenes.Vaughn.Tasks.Poisoning.AphrodisiacEntry);
+						Gui.NextPrompt(TasksScenes.Poisoning.AphrodisiacEntry);
 					else
 						Gui.NextPrompt(function() {
 							MoveToLocation(world.loc.Rigard.Plaza);
@@ -1544,7 +1543,7 @@ Scenes.Vaughn.Tasks.Poisoning.InnPrompt = function(opts) {
 					Text.Add("Aah, that’s all right. It’s perfectly understandable - you’ll just have to find a way to deal with Lady Heydrich on your own, and they did say that they’d help you fight her during court if you fail here. Bidding farewell to the twins, you leave their penthouse and wind up back in the common room of the Lady’s Blessing.", parse);
 					Text.Flush();
 					
-					Scenes.Vaughn.Tasks.Poisoning.InnPrompt(opts);
+					TasksScenes.Poisoning.InnPrompt(opts);
 				}
 			}, enabled : true
 		});
@@ -1552,7 +1551,7 @@ Scenes.Vaughn.Tasks.Poisoning.InnPrompt = function(opts) {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Vaughn.Tasks.Poisoning.Kitchen = function() {
+TasksScenes.Poisoning.Kitchen = function() {
 	var parse = {
 		playername: player.name
 	};
@@ -1639,7 +1638,7 @@ Scenes.Vaughn.Tasks.Poisoning.Kitchen = function() {
 				world.TimeStep({hour: 1});
 				
 				if(vaughn.flags["T3"] & Vaughn.Poisoning.Aphrodisiac)
-					Gui.NextPrompt(Scenes.Vaughn.Tasks.Poisoning.AphrodisiacEntry);
+					Gui.NextPrompt(TasksScenes.Poisoning.AphrodisiacEntry);
 				else
 					Gui.NextPrompt(function() {
 						MoveToLocation(world.loc.Rigard.Plaza);
@@ -1650,17 +1649,17 @@ Scenes.Vaughn.Tasks.Poisoning.Kitchen = function() {
 			tooltip : "If you want something done properly, you’ll have to do it yourself.",
 			func : function() {
 				Text.Clear();
-				Scenes.Vaughn.Tasks.Poisoning.KitchenYourself();
+				TasksScenes.Poisoning.KitchenYourself();
 			}, enabled : true
 		});
 		Gui.SetButtonsFromList(options, false, null);
 	}
 	else {
-		Scenes.Vaughn.Tasks.Poisoning.KitchenYourself();
+		TasksScenes.Poisoning.KitchenYourself();
 	}
 }
 
-Scenes.Vaughn.Tasks.Poisoning.KitchenYourself = function() {
+TasksScenes.Poisoning.KitchenYourself = function() {
 	var parse = {
 		Orvin : Rigard.LB.KnowsOrvin() ? "Orvin" : "the innkeeper"
 	};
@@ -1706,7 +1705,7 @@ Scenes.Vaughn.Tasks.Poisoning.KitchenYourself = function() {
 		world.TimeStep({hour: 1});
 		
 		if(vaughn.flags["T3"] & Vaughn.Poisoning.Aphrodisiac)
-			Gui.NextPrompt(Scenes.Vaughn.Tasks.Poisoning.AphrodisiacEntry);
+			Gui.NextPrompt(TasksScenes.Poisoning.AphrodisiacEntry);
 		else
 			Gui.NextPrompt(function() {
 				MoveToLocation(world.loc.Rigard.Plaza);
@@ -1741,7 +1740,7 @@ Scenes.Vaughn.Tasks.Poisoning.KitchenYourself = function() {
 	}
 }
 
-Scenes.Vaughn.Tasks.Poisoning.AphrodisiacEntry = function() {
+TasksScenes.Poisoning.AphrodisiacEntry = function() {
 	var parse = {
 		Orvin : Rigard.LB.KnowsOrvin() ? "Orvin" : "the innkeeper"
 	};
@@ -1757,19 +1756,19 @@ Scenes.Vaughn.Tasks.Poisoning.AphrodisiacEntry = function() {
 	options.push({ nameStr : "Peek",
 		tooltip : "Face it, you just want to know what’s going on inside.",
 		func : function() {
-			Scenes.Vaughn.Tasks.Poisoning.AphrodisiacPeek();
+			TasksScenes.Poisoning.AphrodisiacPeek();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Leave",
 		tooltip : "You don’t want to linger here any more than necessary.",
 		func : function() {
-			Scenes.Vaughn.Tasks.Poisoning.AphrodisiacLeave();
+			TasksScenes.Poisoning.AphrodisiacLeave();
 		}, enabled : true
 	});
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Vaughn.Tasks.Poisoning.AphrodisiacLeave = function() {
+TasksScenes.Poisoning.AphrodisiacLeave = function() {
 	var parse = {};
 	
 	Text.Clear();
@@ -1779,7 +1778,7 @@ Scenes.Vaughn.Tasks.Poisoning.AphrodisiacLeave = function() {
 	Gui.NextPrompt();
 }
 
-Scenes.Vaughn.Tasks.Poisoning.AphrodisiacPeek = function() {
+TasksScenes.Poisoning.AphrodisiacPeek = function() {
 	var parse = {
 		Orvin : Rigard.LB.KnowsOrvin() ? "Orvin" : "the innkeeper"
 	};
@@ -1890,17 +1889,17 @@ Scenes.Vaughn.Tasks.Poisoning.AphrodisiacPeek = function() {
 	options.push({ nameStr : "Leave",
 		tooltip : "All right, you know the the job is done. Get out!",
 		func : function() {
-			Scenes.Vaughn.Tasks.Poisoning.AphrodisiacLeave();
+			TasksScenes.Poisoning.AphrodisiacLeave();
 		}, enabled : true
 	});
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Vaughn.Tasks.Poisoning.OutOfTime = function() {
-	return Scenes.Vaughn.Tasks.Poisoning.OnTask() && vaughn.taskTimer.Expired();
+TasksScenes.Poisoning.OutOfTime = function() {
+	return TasksScenes.Poisoning.OnTask() && vaughn.taskTimer.Expired();
 }
 
-Scenes.Vaughn.Tasks.Poisoning.DebriefSuccess = function() {
+TasksScenes.Poisoning.DebriefSuccess = function() {
 	var parse = {
 		Orvin : Rigard.LB.KnowsOrvin() ? "Orvin" : "the innkeeper",
 		playername : player.name
@@ -1972,7 +1971,7 @@ Scenes.Vaughn.Tasks.Poisoning.DebriefSuccess = function() {
 	Gui.NextPrompt();
 }
 
-Scenes.Vaughn.Tasks.Poisoning.DebriefFailure = function() {
+TasksScenes.Poisoning.DebriefFailure = function() {
 	var parse = {
 		Orvin : Rigard.LB.KnowsOrvin() ? "Orvin" : "the innkeeper",
 		playername : player.name
@@ -2009,7 +2008,7 @@ Scenes.Vaughn.Tasks.Poisoning.DebriefFailure = function() {
 	Gui.NextPrompt();
 }
 
-Scenes.Vaughn.Tasks.Poisoning.DebriefOutOfTime = function() {
+TasksScenes.Poisoning.DebriefOutOfTime = function() {
 	var parse = {
 		
 	};
@@ -2037,3 +2036,5 @@ Scenes.Vaughn.Tasks.Poisoning.DebriefOutOfTime = function() {
 	
 	Gui.NextPrompt();
 }
+
+export { TasksScenes };

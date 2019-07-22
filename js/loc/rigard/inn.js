@@ -1,6 +1,6 @@
 
 import { world } from '../../world';
-import { Event, Link, Scenes } from '../../event';
+import { Event, Link } from '../../event';
 import { Rigard } from './rigard';
 
 let InnLoc = {

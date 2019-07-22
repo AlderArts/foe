@@ -1,23 +1,22 @@
 
-import { Scenes } from '../../event';
 import { Lei } from './lei';
 
-Scenes.Lei.Tasks = {};
+let TasksScenes = {};
 
-Scenes.Lei.Tasks.OnTask = function() { //TODO add tasks
-	return Scenes.Lei.Tasks.Escort.OnTask();
+TasksScenes.OnTask = function() { //TODO add tasks
+	return TasksScenes.Escort.OnTask();
 }
 
-Scenes.Lei.Tasks.AnyTaskAvailable = function() { //TODO add tasks
-	return Scenes.Lei.Tasks.Escort.Available();
+TasksScenes.AnyTaskAvailable = function() { //TODO add tasks
+	return TasksScenes.Escort.Available();
 }
 
-Scenes.Lei.Tasks.StartTask = function() { //TODO add tasks
-	if(Scenes.Lei.Tasks.Escort.Available())
-		Scenes.Lei.Tasks.Escort.Start();
+TasksScenes.StartTask = function() { //TODO add tasks
+	if(TasksScenes.Escort.Available())
+		TasksScenes.Escort.Start();
 }
 
-Scenes.Lei.Tasks.TaskPrompt = function() {
+TasksScenes.TaskPrompt = function() {
 	var parse = {
 		
 	};
@@ -25,8 +24,8 @@ Scenes.Lei.Tasks.TaskPrompt = function() {
 	Text.Clear();
 	Text.Add("You ask Lei if he has any contracts for you.", parse);
 	Text.NL();
-	if(Scenes.Lei.Tasks.Escort.OnTask()) {
-		Scenes.Lei.Tasks.Escort.OnTaskText();
+	if(TasksScenes.Escort.OnTask()) {
+		TasksScenes.Escort.OnTaskText();
 	}
 	//TODO add tasks
 	else if(lei.Annoyance() > 0) {
@@ -34,8 +33,8 @@ Scenes.Lei.Tasks.TaskPrompt = function() {
 		Text.NL();
 		Text.Add("Perhaps you could prove that your abilities are worthy of his trust by winning one or two spars against him.", parse);
 	}
-	else if(Scenes.Lei.Tasks.AnyTaskAvailable()) {
-		Scenes.Lei.Tasks.StartTask();
+	else if(TasksScenes.AnyTaskAvailable()) {
+		TasksScenes.StartTask();
 	}
 	else {
 		Text.Add("<i>“I have nothing for you right now,”</i> Lei says. <i>“Perhaps if you check back at a later time.”</i>", parse);
@@ -49,18 +48,18 @@ Lei.EscortTask = {
 	WonCombat : 4
 };
 
-Scenes.Lei.Tasks.Escort = {};
-Scenes.Lei.Tasks.Escort.Available = function() {
+TasksScenes.Escort = {};
+TasksScenes.Escort.Available = function() {
 	if(lei.flags["Met"] >= Lei.Met.OnTaskEscort) return false;
 	return true;
 }
-Scenes.Lei.Tasks.Escort.Eligable = function() {
+TasksScenes.Escort.Eligable = function() {
 	return player.level >= 6;
 }
-Scenes.Lei.Tasks.Escort.OnTask = function() {
+TasksScenes.Escort.OnTask = function() {
 	return lei.flags["Met"] == Lei.Met.OnTaskEscort;
 }
-Scenes.Lei.Tasks.Escort.OnTaskText = function() {
+TasksScenes.Escort.OnTaskText = function() {
 	var parse = {
 		
 	};
@@ -84,21 +83,21 @@ Scenes.Lei.Tasks.Escort.OnTaskText = function() {
 	Scenes.Lei.InnPrompt();
 }
 
-Scenes.Lei.Tasks.Escort.Completed = function() {
+TasksScenes.Escort.Completed = function() {
 	return lei.flags["Met"] >= Lei.Met.CompletedTaskEscort;
 }
 
-Scenes.Lei.Tasks.Escort.Coin = function() {
+TasksScenes.Escort.Coin = function() {
 	//TODO
 	return 150;
 }
 
-Scenes.Lei.Tasks.Escort.Start = function() {
+TasksScenes.Escort.Start = function() {
 	var parse = {
-		coin : Text.NumToText(Scenes.Lei.Tasks.Escort.Coin())
+		coin : Text.NumToText(TasksScenes.Escort.Coin())
 	};
 	
-	if(Scenes.Lei.Tasks.Escort.Eligable()) {
+	if(TasksScenes.Escort.Eligable()) {
 		Text.Add("<i>“In fact, I do. A contact brought a small task for me. I could not take it on, but I informed her that I had someone in mind for it. It’s suitable for a first job.”</i>", parse);
 		Text.NL();
 		Text.Add("You idly ask if you’re going to have to kill rats in someone’s basement.", parse);
@@ -137,7 +136,7 @@ Scenes.Lei.Tasks.Escort.Start = function() {
 	Scenes.Lei.InnPrompt();
 }
 
-Scenes.Lei.Tasks.Escort.Estate = function() {
+TasksScenes.Escort.Estate = function() {
 	var parse = {
 		sirmadam : player.mfFem("sir", "madam"),
 		playername : player.name
@@ -371,8 +370,8 @@ disable submit/run option?
 				enc.prof = prof;
 				
 				enc.canRun = false;
-				enc.onLoss = Scenes.Lei.Tasks.Escort.CombatLoss;
-				enc.onVictory = Scenes.Lei.Tasks.Escort.CombatWin;
+				enc.onLoss = TasksScenes.Escort.CombatLoss;
+				enc.onVictory = TasksScenes.Escort.CombatWin;
 				
 				Gui.NextPrompt(function() {
 					enc.Start();
@@ -412,7 +411,7 @@ disable submit/run option?
 	});
 }
 
-Scenes.Lei.Tasks.Escort.CombatLoss = function() {
+TasksScenes.Escort.CombatLoss = function() {
 	SetGameState(GameState.Event);
 	Text.Clear();
 	
@@ -433,13 +432,13 @@ Scenes.Lei.Tasks.Escort.CombatLoss = function() {
 		Text.Add("Apparently, your employers ran into them and asked them to assist you. You take a helping hand up and thank the woman, though you’re sure you would’ve managed somehow with a last moment burst of strength even if they had not come.", parse);
 		Text.NL();
 		Text.Add("You tell her the details of the ambush, and she assures you they’ll do their best to catch the men. She releases you to go on your way, as she sets off to catch up with her companions. Accepting her word, you head back toward the mansion, where, from the guard’s", parse);
-		Scenes.Lei.Tasks.Escort.PostCombat(enc);
+		TasksScenes.Escort.PostCombat(enc);
 	});
 	
 	Encounter.prototype.onLoss.call(enc);
 }
 
-Scenes.Lei.Tasks.Escort.CombatWin = function() {
+TasksScenes.Escort.CombatWin = function() {
 	SetGameState(GameState.Event);
 	Text.Clear();
 	
@@ -462,13 +461,13 @@ Scenes.Lei.Tasks.Escort.CombatWin = function() {
 		Text.Add("Apparently, your employer ran into them and asked them to assist you. You tell the guards that for opponents of this caliber[comp] you were quite enough, though they are welcome to apprehend the attackers. Ventor would probably appreciate knowing how they knew to set the ambush here.", parse);
 		Text.NL();
 		Text.Add("The guards roll their eyes at your bravado, but set to work securing their incapacitated captives. You leave them to it and set out back toward the mansion, where, from the guards’", parse);
-		Scenes.Lei.Tasks.Escort.PostCombat(enc, true);
+		TasksScenes.Escort.PostCombat(enc, true);
 	});
 	
 	Encounter.prototype.onVictory.call(enc);
 }
 
-Scenes.Lei.Tasks.Escort.PostCombat = function(enc, won) {
+TasksScenes.Escort.PostCombat = function(enc, won) {
 	var parse = {
 		armor : player.ArmorDesc()
 	};
@@ -585,7 +584,7 @@ Scenes.Lei.Tasks.Escort.PostCombat = function(enc, won) {
 							Text.Add("Naturally, this merits additional pay.”</i>", parse);
 					}
 					
-					var pay = Scenes.Lei.Tasks.Escort.Coin() + 50;
+					var pay = TasksScenes.Escort.Coin() + 50;
 					pay += enc.prof * 50;
 					if(late)
 						pay /= 2;
@@ -635,7 +634,7 @@ Scenes.Lei.Tasks.Escort.PostCombat = function(enc, won) {
 	});
 }
 
-Scenes.Lei.Tasks.Escort.Debrief = function() {
+TasksScenes.Escort.Debrief = function() {
 	var parse = {
 		
 	};
@@ -773,18 +772,18 @@ Scenes.Lei.Tasks.Escort.Debrief = function() {
 }
 
 /*
-Scenes.Lei.Tasks.Escort = {};
-Scenes.Lei.Tasks.Escort.Available = function() {
+TasksScenes.Escort = {};
+TasksScenes.Escort.Available = function() {
 	if(lei.flags["Met"] >= Lei.Met.OnTaskEscort) return false;
 	return true;
 }
-Scenes.Lei.Tasks.Escort.Eligable = function() {
+TasksScenes.Escort.Eligable = function() {
 	return player.level >= 6;
 }
-Scenes.Lei.Tasks.Escort.OnTask = function() {
+TasksScenes.Escort.OnTask = function() {
 	return lei.flags["Met"] == Lei.Met.OnTaskEscort;
 }
-Scenes.Lei.Tasks.Escort.OnTaskText = function() {
+TasksScenes.Escort.OnTaskText = function() {
 	var parse = {
 		
 	};
@@ -794,16 +793,16 @@ Scenes.Lei.Tasks.Escort.OnTaskText = function() {
 	Text.Add("", parse);
 	Text.Flush();
 }
-Scenes.Lei.Tasks.Escort.Completed = function() {
+TasksScenes.Escort.Completed = function() {
 	return lei.flags["Met"] >= Lei.Met.CompletedTaskEscort;
 }
 
-Scenes.Lei.Tasks.Escort.Start = function() {
+TasksScenes.Escort.Start = function() {
 	var parse = {
 		
 	};
 	
-	if(Scenes.Lei.Tasks.Escort.Eligable()) {
+	if(TasksScenes.Escort.Eligable()) {
 		Text.Add("", parse);
 		Text.NL();
 		Text.Add("", parse);
@@ -819,3 +818,5 @@ Scenes.Lei.Tasks.Escort.Start = function() {
 	Gui.NextPrompt();
 }
  */
+
+export { TasksScenes };

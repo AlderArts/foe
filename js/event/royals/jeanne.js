@@ -3,11 +3,10 @@
  * Define Jeanne
  * 
  */
-import { Scenes } from '../../event';
 import { Entity } from '../../entity';
 import { GetDEBUG } from '../../../app';
 
-Scenes.Jeanne = {};
+let JeanneScenes = {};
 
 function Jeanne(storage) {
 	Entity.call(this);
@@ -91,7 +90,7 @@ Jeanne.prototype.IsAtLocation = function(location) {
 }
 
 // Interaction
-Scenes.Jeanne.Interact = function() {
+JeanneScenes.Interact = function() {
 	var parse = {};
 	Text.Clear();
 	Text.Add("Jeanne greets you as you approach her, politely inquiring what’s on your mind. The gorgeous elven magician flicks her long, pink hair over her shoulder, smiling seductively.", parse);
@@ -109,15 +108,15 @@ Scenes.Jeanne.Interact = function() {
 	}
 	
 	Text.Flush();
-	Scenes.Jeanne.InteractPrompt();
+	JeanneScenes.InteractPrompt();
 }
 
-Scenes.Jeanne.InteractPrompt = function() {
+JeanneScenes.InteractPrompt = function() {
 	var parse = {};
 	//[Talk][Golem][Sex]
 	var options = new Array();
 	options.push({ nameStr : "Talk",
-		func : Scenes.Jeanne.Talk, enabled : true,
+		func : JeanneScenes.Talk, enabled : true,
 		tooltip : "Seek the magician's advice."
 	});
 	options.push({ nameStr : "Alchemy",
@@ -130,7 +129,7 @@ Scenes.Jeanne.InteractPrompt = function() {
 			}
 			Text.NL();
 			
-			Alchemy.AlchemyPrompt(jeanne, party.inventory, Scenes.Jeanne.AlchemyBack, Scenes.Jeanne.AlchemyCallback, true);
+			Alchemy.AlchemyPrompt(jeanne, party.inventory, JeanneScenes.AlchemyBack, JeanneScenes.AlchemyCallback, true);
 		}, enabled : true,
 		tooltip : "Ask to make use of Jeanne’s services as an alchemist."
 	});
@@ -159,7 +158,7 @@ Scenes.Jeanne.InteractPrompt = function() {
 	Gui.SetButtonsFromList(options, true);
 }
 
-Scenes.Jeanne.AlchemyCallback = function(item) {
+JeanneScenes.AlchemyCallback = function(item) {
 	var parse = {};
 	
 	Text.Clear();
@@ -179,20 +178,20 @@ Scenes.Jeanne.AlchemyCallback = function(item) {
 	
 	party.Inv().AddItem(item);
 	
-	Alchemy.AlchemyPrompt(jeanne, party.inventory, Scenes.Jeanne.AlchemyBack, Scenes.Jeanne.AlchemyCallback, true);
+	Alchemy.AlchemyPrompt(jeanne, party.inventory, JeanneScenes.AlchemyBack, JeanneScenes.AlchemyCallback, true);
 }
 
-Scenes.Jeanne.AlchemyBack = function() {
+JeanneScenes.AlchemyBack = function() {
 	var parse = {};
 	
 	Text.Clear();
 	Text.Add("<i>“Do come back if there is anything else I can help you with.”</i>", parse);
 	Text.Flush();
 	
-	Scenes.Jeanne.InteractPrompt();
+	JeanneScenes.InteractPrompt();
 }
 
-Scenes.Jeanne.Talk = function() {
+JeanneScenes.Talk = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -222,7 +221,7 @@ Scenes.Jeanne.Talk = function() {
 			}
 			Text.Flush();
 			
-			Scenes.Jeanne.Talk();
+			JeanneScenes.Talk();
 		}, enabled : true,
 		tooltip : "Discuss the gemstone with Jeanne."
 	});
@@ -323,7 +322,7 @@ Scenes.Jeanne.Talk = function() {
 			}
 			Text.Flush();
 			
-			Scenes.Jeanne.Talk();
+			JeanneScenes.Talk();
 		}, enabled : gameCache.flags["LearnedMagic"] < 3,
 		tooltip : "Jeanne is a magic teacher, isn’t she? Could she teach you about magic?"
 	});
@@ -335,7 +334,7 @@ Scenes.Jeanne.Talk = function() {
 			Text.NL();
 			Text.Flush();
 			
-			Scenes.Jeanne.Talk();
+			JeanneScenes.Talk();
 		}, enabled : true,
 		tooltip : ""
 	});
@@ -354,7 +353,7 @@ Scenes.Jeanne.Talk = function() {
 			Text.Add("It doesn’t look like she wants to talk more about it, so you drop the subject.", parse);
 			Text.Flush();
 			
-			Scenes.Jeanne.Talk();
+			JeanneScenes.Talk();
 		}, enabled : true,
 		tooltip : "Ask Jeanne if she has any dealings with the elves anymore. How was it growing up among them?"
 	});
@@ -384,7 +383,7 @@ Scenes.Jeanne.Talk = function() {
 			Text.Add("<i>“There is another reason that I remain here,”</i> she continues, looking troubled. <i>“There is some strange magic brewing beneath this town, and I have been unable to discern what it is. Something powerful, something buried deep… It is not good, whatever it is. I have led expeditions into the catacombs below the castle, but it goes deeper yet.”</i>", parse);
 			Text.Flush();
 			
-			Scenes.Jeanne.Talk();
+			JeanneScenes.Talk();
 		}, enabled : true,
 		tooltip : "Ask Jeanne for her story."
 	});
@@ -404,7 +403,7 @@ Scenes.Jeanne.Talk = function() {
 			Text.Flush();
 			
 			
-			Scenes.Jeanne.Talk();
+			JeanneScenes.Talk();
 		}, enabled : true,
 		tooltip : ""
 	});
@@ -430,7 +429,7 @@ Scenes.Jeanne.Talk = function() {
 				Text.Add("About that...", parse);
 				Text.Flush();
 				
-				Scenes.Jeanne.Talk();
+				JeanneScenes.Talk();
 			}, enabled : true,
 			tooltip : "Ask the court mage about her former pupil."
 		});
@@ -468,16 +467,16 @@ Scenes.Jeanne.Talk = function() {
 					Text.Add("Nodding to show you understand, you thank her. So, Anusol and Gestarium for an enhanced Anusol potion? You’ll need to remember that.", parse);
 					Text.Flush();
 					
-					Scenes.Jeanne.Talk();
+					JeanneScenes.Talk();
 				}, enabled : true
 			});
 		}
 	}
 	
-	Gui.SetButtonsFromList(options, true, Scenes.Jeanne.InteractPrompt);
+	Gui.SetButtonsFromList(options, true, JeanneScenes.InteractPrompt);
 }
 
-Scenes.Jeanne.First = function() {
+JeanneScenes.First = function() {
 	var parse = {
 		playername : player.name,
 		name       : function() { return kiakai.name; },
@@ -502,18 +501,18 @@ Scenes.Jeanne.First = function() {
 	}
 	Text.Flush();
 	
-	Scenes.Jeanne.talkedGolem  = false;
-	Scenes.Jeanne.talkedJeanne = false;
-	Scenes.Jeanne.talkedGem    = false;
+	JeanneScenes.talkedGolem  = false;
+	JeanneScenes.talkedJeanne = false;
+	JeanneScenes.talkedGem    = false;
 	
-	Scenes.Jeanne.FirstPrompt();
+	JeanneScenes.FirstPrompt();
 }
 
-Scenes.Jeanne.FirstPrompt = function() {
+JeanneScenes.FirstPrompt = function() {
 	var parse = {};
 	//[Golem][Jeanne][Gem]
 	var options = new Array();
-	if(Scenes.Jeanne.talkedGolem == false) {
+	if(JeanneScenes.talkedGolem == false) {
 		options.push({ nameStr : "Golem",
 			func : function() {
 				Text.Clear();
@@ -535,13 +534,13 @@ Scenes.Jeanne.FirstPrompt = function() {
 				Text.Add("<i>“If you wish, we can speak more about her later.”</i>", parse);
 				Text.Flush();
 				
-				Scenes.Jeanne.talkedGolem = true;
-				Scenes.Jeanne.FirstPrompt();
+				JeanneScenes.talkedGolem = true;
+				JeanneScenes.FirstPrompt();
 			}, enabled : true,
 			tooltip : "Ask Jeanne about the golem guarding the tower."
 		});
 	}
-	if(Scenes.Jeanne.talkedJeanne == false) {
+	if(JeanneScenes.talkedJeanne == false) {
 		options.push({ nameStr : "Jeanne",
 			func : function() {
 				Text.Clear();
@@ -552,13 +551,13 @@ Scenes.Jeanne.FirstPrompt = function() {
 				Text.Add("<i>“My research spans many fields, but I mainly study the properties of magic and alchemy.”</i>", parse);
 				Text.Flush();
 				
-				Scenes.Jeanne.talkedJeanne = true;
-				Scenes.Jeanne.FirstPrompt();
+				JeanneScenes.talkedJeanne = true;
+				JeanneScenes.FirstPrompt();
 			}, enabled : true,
 			tooltip : "Ask why an elf is serving the king of Rigard."
 		});
 	}
-	if(Scenes.Jeanne.talkedGem == false) {
+	if(JeanneScenes.talkedGem == false) {
 		options.push({ nameStr : "Gem",
 			func : function() {
 				Text.Clear();
@@ -581,8 +580,8 @@ Scenes.Jeanne.FirstPrompt = function() {
 				Text.Add("Hmm. Perhaps you should stop just showing this thing to everyone you meet.", parse);
 				Text.Flush();
 				
-				Scenes.Jeanne.talkedGem = true;
-				Scenes.Jeanne.FirstPrompt();
+				JeanneScenes.talkedGem = true;
+				JeanneScenes.FirstPrompt();
 			}, enabled : true,
 			tooltip : "Ask the magician about the gemstone you carry."
 		});
@@ -590,10 +589,10 @@ Scenes.Jeanne.FirstPrompt = function() {
 	if(options.length > 0)
 		Gui.SetButtonsFromList(options);
 	else
-		Gui.NextPrompt(Scenes.Jeanne.FirstCont);
+		Gui.NextPrompt(JeanneScenes.FirstCont);
 }
 
-Scenes.Jeanne.FirstCont = function() {
+JeanneScenes.FirstCont = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -610,4 +609,4 @@ Scenes.Jeanne.FirstCont = function() {
 	Gui.NextPrompt();
 }
 
-export { Jeanne };
+export { Jeanne, JeanneScenes };

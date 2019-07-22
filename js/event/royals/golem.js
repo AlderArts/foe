@@ -4,11 +4,10 @@
  * 
  */
 
-import { Scenes } from '../../event';
 import { BossEntity } from '../../enemy/boss';
 
-Scenes.Golem = {};
-Scenes.Golem.State = {
+let GolemScenes = {};
+GolemScenes.State = {
 	NotMet       : 0,
 	Met_ran      : 1,
 	Lost         : 2,
@@ -61,7 +60,7 @@ function GolemBoss(storage) {
 	
 	this.body.SetEyeColor(Color.red);
 	
-	this.flags["Met"] = Scenes.Golem.State.NotMet;
+	this.flags["Met"] = GolemScenes.State.NotMet;
 
 	// Set hp and mana to full
 	this.SetLevelBonus();
@@ -115,12 +114,12 @@ GolemBoss.prototype.Act = function(encounter, activeChar) {
 }
 
 
-Scenes.Golem.FirstApproach = function() {
+GolemScenes.FirstApproach = function() {
 	var parse = {
 		s : party.Num() > 1 ? "s" : ""
 	};
 	
-	golem.flags["Met"] = Scenes.Golem.State.Met_ran;
+	golem.flags["Met"] = GolemScenes.State.Met_ran;
 	
 	Text.Clear();
 	Text.Add("You apprehensively approach the ancient tower, a structure that appears to have stood in this spot for ages. From the crumbling stone, you’d guess it is much older than the walls surrounding the royal grounds, and perhaps older than the castle itself. It is somewhat surprising that it has been allowed to fall into such disrepair, considering the neat appearance of the surrounding area.", parse);
@@ -139,10 +138,10 @@ Scenes.Golem.FirstApproach = function() {
 	Text.Add("Right in front of your eyes, the stone reforms itself, piling higher and higher into a towering, vaguely humanoid shape. Behind the massive golem, the inside of the tower is wrought in impenetrable darkness. The hulking shape squares its blocky shoulders, its glowing eyes peering down at the intruder[s] in front of it. Moving sluggishly, it takes a defensive stance, blocking your way into the tower. Seems like you’ll have to fight your way through here.", parse);
 	Text.Flush();
 	
-	Scenes.Golem.FightPrompt();
+	GolemScenes.FightPrompt();
 }
 
-Scenes.Golem.FightPrompt = function() {
+GolemScenes.FightPrompt = function() {
 	var parse = {};
 	//[Fight!][Leave]
 	var options = new Array();
@@ -162,8 +161,8 @@ Scenes.Golem.FightPrompt = function() {
 					MoveToLocation(world.loc.Rigard.Castle.Grounds);
 				});
 			};
-			enc.onLoss    = Scenes.Golem.OnLoss;
-			enc.onVictory = Scenes.Golem.OnWin;
+			enc.onLoss    = GolemScenes.OnLoss;
+			enc.onVictory = GolemScenes.OnWin;
 			enc.Start();
 		}, enabled : true,
 		tooltip : "Try to defeat the tower guardian in order to gain entry!"
@@ -177,15 +176,15 @@ Scenes.Golem.FightPrompt = function() {
 	Gui.SetButtonsFromList(options);
 }
 
-Scenes.Golem.RepeatApproach = function() {
+GolemScenes.RepeatApproach = function() {
 	Text.Clear();
 	Text.Add("You approach the ancient old tower again, wary of its guardian. Once you are close enough, the wall gives a shudder and the hulking golem forms itself again. You’ll have to fight it if you want to get past it.");
 	Text.Flush();
 	
-	Scenes.Golem.FightPrompt();
+	GolemScenes.FightPrompt();
 }
 
-Scenes.Golem.OnWin = function() {
+GolemScenes.OnWin = function() {
 	var parse = {
 		name       : function() { return kiakai.name; },
 		hisher     : function() { return kiakai.hisher(); },
@@ -198,7 +197,7 @@ Scenes.Golem.OnWin = function() {
 		
 		Text.Clear();
 		Text.Add("With a final shudder, the golem staggers back, unable to withstand any more punishment. As the magic that holds it together dissipates, the automaton cracks apart, crumbling into a pile of rubble.", parse);
-		if(golem.flags["Met"] == Scenes.Golem.State.Lost)
+		if(golem.flags["Met"] == GolemScenes.State.Lost)
 			Text.Add(" You are slightly disappointed that the golem didn’t assume its other form, robbing you of the opportunity to return the favor.", parse);
 		Text.Add(" Behind it, the dense darkness filling the interior of the tower lifts, revealing a number of strange devices and a narrow staircase leading to the upper floors.", parse);
 		Text.NL();
@@ -229,17 +228,17 @@ Scenes.Golem.OnWin = function() {
 		
 		world.TimeStep({minute: 30});
 		
-		if(golem.flags["Met"] == Scenes.Golem.State.Lost)
-			golem.flags["Met"] = Scenes.Golem.State.Won_prevLoss;
+		if(golem.flags["Met"] == GolemScenes.State.Lost)
+			golem.flags["Met"] = GolemScenes.State.Won_prevLoss;
 		else
-			golem.flags["Met"] = Scenes.Golem.State.Won_noLoss;
+			golem.flags["Met"] = GolemScenes.State.Won_noLoss;
 		
 		Gui.NextPrompt(Scenes.Jeanne.First);
 	});
 	Encounter.prototype.onVictory.call(this);
 }
 
-Scenes.Golem.OnLoss = function() {
+GolemScenes.OnLoss = function() {
 	var parse = {
 		name          : function() { return party.Get(1).name; }
 	};
@@ -260,7 +259,7 @@ Scenes.Golem.OnLoss = function() {
 	
 	Text.Clear();
 	Text.Add("Unable to fight back any longer, you[comp] fall to the ground, defeated by the hulking golem. ", parse);
-	if(golem.flags["Met"] == Scenes.Golem.State.Lost) {
+	if(golem.flags["Met"] == GolemScenes.State.Lost) {
 		Text.Add("Having seen the process before doesn’t make it any less strange as the giant transforms into a perfect ebony Goddess, her body striped with pulsing red veins. Without a word or hint of an expression, the stunning animated statue closes in on you.", parse);
 	}
 	else {
@@ -289,7 +288,7 @@ Scenes.Golem.OnLoss = function() {
 	parse["tail"] = tail ? Text.Parse(", her tongue playing along[oneof] your tail[s]") : "";
 	Text.Add("Satisfied with her treatment of your front, the golem rolls you over on your stomach, her slick fingers trailing down your back[tail].", parse);
 	Text.NL();
-	if(golem.flags["Met"] == Scenes.Golem.State.Lost) {
+	if(golem.flags["Met"] == GolemScenes.State.Lost) {
 		Text.Add("Knowing what comes next, and that struggling against it is futile, you resign yourself to the obsidian golem’s wishes. Last time wasn’t too bad, you tell yourself.", parse);
 	}
 	else {
@@ -334,9 +333,9 @@ Scenes.Golem.OnLoss = function() {
 	Text.NL();
 	Text.Add("Just when you’ve grown accustomed to the steady tide of withdraw and thrust - resigned to the fact that the golem is much stronger than you and is going to have its way no matter what your opinions on the matter are - your lover abruptly changes her rhythm. Adjusting her stance, she plants her feet along your sides, grabbing hold of your [butt] with her iron grip. With new fervor, she starts relentlessly pounding your [target], her cock a blur as it pistons your insides.", parse);
 	Text.NL();
-	parse["again"] = golem.flags["Met"] == Scenes.Golem.State.Lost ? " again" : "";
+	parse["again"] = golem.flags["Met"] == GolemScenes.State.Lost ? " again" : "";
 	Text.Add("No longer capable of rational thought, you gasp for breath, moaning incoherently as the automaton fucks you. Why did you even come here[again]?", parse);
-	if(golem.flags["Met"] == Scenes.Golem.State.Lost)
+	if(golem.flags["Met"] == GolemScenes.State.Lost)
 		Text.Add(" Did you just return in order for her to dominate you? Are you really that much of a slut?", parse);
 	Text.Add(" Though her movements remain mechanical, she is adjusting her angle according to your response, shifting slightly until each thrust is a blinding shock of pleasure surging up your spine. You know you can’t last like this for long - you are so close to cumming...", parse);
 	Text.NL();
@@ -368,7 +367,7 @@ Scenes.Golem.OnLoss = function() {
 		Text.Add("Still feeling shaky, you gather up your things, making a futile attempt to clean yourself up before continuing your travels.", parse);
 		Text.Flush();
 		
-		golem.flags["Met"] = Scenes.Golem.State.Lost;
+		golem.flags["Met"] = GolemScenes.State.Lost;
 		
 		Gui.NextPrompt(function() {
 			MoveToLocation(world.loc.Rigard.Castle.Grounds);
@@ -376,4 +375,4 @@ Scenes.Golem.OnLoss = function() {
 	});
 }
 
-export { GolemBoss };
+export { GolemBoss, GolemScenes };
