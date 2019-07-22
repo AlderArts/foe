@@ -7,8 +7,11 @@
 import { Event, Link } from '../event';
 import { GameState } from '../gamestate';
 import { Gui } from '../gui';
+import { getWorld } from '../worldobj';
 
 let Intro = {};
+
+let world = getWorld();
 
 /*
  * Introductory scene (start of game). Entry into the attic
