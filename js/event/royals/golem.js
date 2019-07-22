@@ -193,7 +193,7 @@ GolemScenes.OnWin = function() {
 	
 	
 	Gui.Callstack.push(function() {
-		SetGameState(GameState.Event);
+		SetGameState(GameState.Event, Gui);
 		
 		Text.Clear();
 		Text.Add("With a final shudder, the golem staggers back, unable to withstand any more punishment. As the magic that holds it together dissipates, the automaton cracks apart, crumbling into a pile of rubble.", parse);
@@ -247,7 +247,7 @@ GolemScenes.OnLoss = function() {
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
 	this.Cleanup();
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	
 	if(party.Num() > 2)
 		parse["comp"] = " and your companions";

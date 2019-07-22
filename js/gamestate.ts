@@ -1,21 +1,28 @@
-import { Gui } from "./gui";
-
 // Gamestate
-let GameState = {
-	Credits   : 0,
-	Game      : 1,
-	Combat    : 2,
-	Event     : 3,
-	Cavalcade : 4,
-	Alchemy   : 5,
-	Hunting   : 6
-}
+enum GameState {
+	Credits,
+	Game,
+	Combat,
+	Event,
+	Cavalcade,
+	Alchemy,
+	Hunting,
+};
 
 let gameState = GameState.Credits;
 
-let SetGameState = function(state) {
+let SetGameState = function(state : GameState, Gui : any) {
 	gameState = state;
 	Gui.SetGameState(state);
+}
+
+let online : boolean = false;
+
+export function isOnline() {
+    return online;
+}
+export function setOnline(val : boolean) {
+    online = val;
 }
 
 export { GameState, gameState, SetGameState };

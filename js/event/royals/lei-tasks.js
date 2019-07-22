@@ -412,7 +412,7 @@ disable submit/run option?
 }
 
 TasksScenes.Escort.CombatLoss = function() {
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	Text.Clear();
 	
 	var enc = this;
@@ -439,7 +439,7 @@ TasksScenes.Escort.CombatLoss = function() {
 }
 
 TasksScenes.Escort.CombatWin = function() {
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	Text.Clear();
 	
 	var enc = this;

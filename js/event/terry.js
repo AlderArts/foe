@@ -874,7 +874,7 @@ TerryScenes.CombatVsMiranda = function() {
 			
 		};
 		
-		SetGameState(GameState.Event);
+		SetGameState(GameState.Event, Gui);
 		Text.Clear();
 		Text.Add("Smirking, the vixen jumps over you and dashes away. You rub your sore spots and with some effort manage to get back up. Miranda looks like she’s going to pop a vein…", parse);
 		Text.NL();
@@ -912,7 +912,7 @@ TerryScenes.CombatVsMiranda = function() {
 			
 		};
 		terry.sbombs--;
-		SetGameState(GameState.Event);
+		SetGameState(GameState.Event, Gui);
 		Text.Clear();
 		Text.Add("When the smoke clears, the vixen is nowhere to be seen. Miranda looks like she’s going to pop a vein…", parse);
 		Text.NL();
@@ -958,7 +958,7 @@ TerryScenes.CaughtTheThief = function() {
 		masterMistress : player.mfTrue("master", "mistress")
 	};
 	
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	rigard.Krawitz["Q"] = Rigard.KrawitzQ.CaughtTerry;
 	
 	terry.flags["PrefGender"] = Gender.male;

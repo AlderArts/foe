@@ -540,7 +540,7 @@ MaliceScoutsScenes.Catboy.LoneEncounter = function(levelbonus) {
 
 MaliceScoutsScenes.Catboy.WinPrompt = function() {
 	var enc  = this;
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 
 	var parse = {
 
@@ -1216,7 +1216,7 @@ MaliceScoutsScenes.Catboy.Petting = function(enc) {
 }
 
 MaliceScoutsScenes.Catboy.LossPrompt = function() {
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	Text.Clear();
 
 	// this = encounter
@@ -1485,7 +1485,7 @@ MaliceScoutsScenes.Mare.LoneEncounter = function(levelbonus) {
 
 MaliceScoutsScenes.Mare.WinPrompt = function() {
 	var enc  = this;
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 
 	var parse = {
 
@@ -1979,7 +1979,7 @@ MaliceScoutsScenes.Mare.WinFist = function(enc) {
 }
 
 MaliceScoutsScenes.Mare.LossPrompt = function() {
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	Text.Clear();
 
 	// this = encounter
@@ -2173,7 +2173,7 @@ MaliceScoutsScenes.Goat.LoneEncounter = function(levelbonus) {
 
 MaliceScoutsScenes.Goat.WinPrompt = function() {
 	var enc  = this;
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 
 	var parse = {
 
@@ -2805,7 +2805,7 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc) {
 }
  
 MaliceScoutsScenes.Goat.LossPrompt = function() {
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	Text.Clear();
 
 	// this = encounter
@@ -3361,7 +3361,7 @@ MaliceScoutsScenes.Group.Encounter = function(levelbonus) {
 
 MaliceScoutsScenes.Group.WinPrompt = function() {
 	var enc  = this;
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 
 	var parse = {
 
@@ -3412,7 +3412,7 @@ MaliceScoutsScenes.Group.WinPrompt = function() {
 
 
 MaliceScoutsScenes.Group.LossPrompt = function() {
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	Text.Clear();
 
 	// this = encounter

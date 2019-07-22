@@ -354,7 +354,7 @@ MirandaScenes.BarracksPrompt = function() {
 }
 
 MirandaScenes.SparLoss = function() {
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	var enc = this;
 	enc.Cleanup();
 	
@@ -378,7 +378,7 @@ MirandaScenes.SparLoss = function() {
 }
 
 MirandaScenes.SparWin = function() {
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	var enc = this;
 	enc.Cleanup();
 	

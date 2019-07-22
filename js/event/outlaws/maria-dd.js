@@ -598,7 +598,7 @@ DeadDropScenes.Docks.CavalcadePrep = function() {
 			playername : player.name
 		};
 		
-		SetGameState(GameState.Event);
+		SetGameState(GameState.Event, Gui);
 		
 		world.TimeStep({minute: 5});
 		

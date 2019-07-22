@@ -177,7 +177,7 @@ FarmLoc.Loft.SleepFunc = function() {
 
 	};
 
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 
 	Text.Clear();
 
@@ -1213,7 +1213,7 @@ FarmScenes.GoToMarketFirst = function(backfunc) {
 		var enc = new Encounter(enemy);
 
 		enc.onVictory   = function() {
-			SetGameState(GameState.Event);
+			SetGameState(GameState.Event, Gui);
 			Text.Clear();
 			Text.Add("You round up the defeated bandits, tying them up with some rope from the cart. They look surly, but not overly dismayed by their situation. Gwendy steps forward, taking charge of questioning them.", parse);
 			Text.NL();
@@ -1247,7 +1247,7 @@ FarmScenes.GoToMarketFirst = function(backfunc) {
 			});
 		};
 		enc.onLoss      = function() {
-			SetGameState(GameState.Event);
+			SetGameState(GameState.Event, Gui);
 			Text.Clear();
 			Text.Add("The bandits have defeated you, despite of the fight you put up. The sole female pins you down, putting a dagger to your throat. The leader has sauntered over to Gwendy, who is kneeling on all fours, gritting her teeth in rage.", parse);
 			Text.NL();

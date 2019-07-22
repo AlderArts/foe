@@ -6,22 +6,20 @@ import { Input } from './input';
 import { Saver } from './saver';
 import { CreditsScreen } from './credits';
 import { ClearCache, CacheToGame } from './gamecache';
-import { GameState } from './gamestate';
+import { GameState, setOnline, isOnline } from './gamestate';
 
 // Prevent selection
 $(function() {
 	$('canvas').mousedown(function(event) { event.preventDefault() });
 });
 
-let online = false;
-
 // Set the main entrypoint of the application
 function EntryPoint() {
 	try {
-		online = localStorage ? true : false;
+		setOnline(localStorage ? true : false);
 	}
 	catch(ex) {
-		online = false;
+		setOnline(false);
 	}
 	finally {
 		// Setup the application
@@ -44,7 +42,7 @@ let GameOver = function() {
 }
 
 let SplashScreen = function() {
-	SetGameState(GameState.Credits);
+	SetGameState(GameState.Credits, Gui);
 	Text.Clear();
 	Gui.ClearButtons();
 
@@ -87,7 +85,7 @@ let SplashScreen = function() {
 
 	Input.buttons[7].Setup(Gui.ShortcutsVisible ? "Keys: On" : "Keys: Off", function() {
 		Gui.ShortcutsVisible = !Gui.ShortcutsVisible;
-		if(online)
+		if(isOnline())
 			localStorage["ShortcutsVisible"] = Gui.ShortcutsVisible ? 1 : 0;
 		SplashScreen();
 	}, true);
@@ -108,10 +106,10 @@ let SplashScreen = function() {
 	Input.buttons[11].Setup("Clear saves", function() {
 		Saver.Clear();
 		SplashScreen();
-	}, online, null, "Warning! This will clear up old saves by removing the save0-11 and savedata0-11 localstorage slots.");
+	}, isOnline(), null, "Warning! This will clear up old saves by removing the save0-11 and savedata0-11 localstorage slots.");
 
 	Text.NL();
-	if(online && Saver.HasSaves())
+	if(isOnline() && Saver.HasSaves())
 		Text.Add("DEBUG: localStorage usage: " + JSON.stringify(localStorage).length / 2636625);
 	Text.Flush();
 }
@@ -135,4 +133,4 @@ function Setup() {
 	Gui.Render();
 }
 
-export { online, SetGameOverButton, SplashScreen };
+export { SetGameOverButton, SplashScreen };

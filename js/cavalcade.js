@@ -50,7 +50,7 @@ Cavalcade.prototype.PullCard = function() {
 }
 
 Cavalcade.prototype.PrepGame = function(keepOut) {
-	SetGameState(GameState.Cavalcade);
+	SetGameState(GameState.Cavalcade, Gui);
 	cavalcade = this;
 	
 	_.each(this.players, function(p) {

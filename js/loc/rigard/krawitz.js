@@ -2501,7 +2501,7 @@ KrawitzScenes.TwinsMoreTalk = function() {
 }
 
 KrawitzScenes.Duel = function() {
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	var parse = {
 		
 	};

@@ -215,7 +215,7 @@ ZebraShamanScenes.LoneEnc = function(levelbonus) {
 ZebraShamanScenes.OnLoss = function() {
 	var enc = this;
 	var zebra = enc.zebra;
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 
 	var parse = {
 
@@ -288,7 +288,7 @@ ZebraShamanScenes.Encounter = function() {
 ZebraShamanScenes.OnWin = function() {
 	var enc = this;
 	var zebra = enc.zebra;
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 
 	var parse = {
 		weapon : player.WeaponDesc()

@@ -1,5 +1,5 @@
-import { online } from './main';
 import { Gui } from './gui';
+import { isOnline } from './gamestate';
 
 let Saver = {}
 
@@ -108,7 +108,7 @@ Saver.SaveToFile = function() {
 
 // Returns true if there are any saves
 Saver.HasSaves = function() {
-	if(!online) return false;
+	if(!isOnline()) return false;
 	for(var i=0; i<Saver.slots; i++)
 		if(Saver.SaveHeader(i)) return true;
 	return false;

@@ -1077,7 +1077,7 @@ LeiScenes.BarFight = function() {
 	enc.onLoss = function() {
 		lei.RestFull();
 		party.RestFull();
-		SetGameState(GameState.Event);
+		SetGameState(GameState.Event, Gui);
 
 		var downed = true;
 		for(var i = 0; i < party.members.length; i++) {
@@ -1199,7 +1199,7 @@ LeiScenes.BarFight = function() {
 	enc.onVictory = function() {
 		lei.RestFull();
 		party.RestFull();
-		SetGameState(GameState.Event);
+		SetGameState(GameState.Event, Gui);
 
 		lei.flags["Fought"] = Lei.Fight.Win;
 		lei.relation.IncreaseStat(100, 2);
@@ -1625,7 +1625,7 @@ LeiScenes.SparPrompt = function() {
 LeiScenes.SparWin = function() {
 	var enc = this;
 
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	enc.Cleanup();
 	Text.Clear();
 
@@ -1702,7 +1702,7 @@ LeiScenes.SparWin = function() {
 LeiScenes.SparLoss = function() {
 	var enc = this;
 
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	enc.Cleanup();
 	Text.Clear();
 

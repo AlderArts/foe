@@ -865,7 +865,7 @@ SPARRING SEX
 SparSexScenes.Win = function() {
 	var enc  = this;
 	enc.Cleanup();
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	
 	party.LoadActiveParty();
 	
@@ -1500,7 +1500,7 @@ SparSexScenes.Outro = function() {
 SparSexScenes.Loss = function() {
 	var enc  = this;
 	enc.Cleanup();
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	
 	party.LoadActiveParty();
 	

@@ -330,7 +330,7 @@ Party.prototype.Interact = function(preventClear, switchSpot, back) {
 	if(!preventClear)
 		Text.Clear();
 
-	SetGameState(GameState.Game);
+	SetGameState(GameState.Game, Gui);
 	var list = new Array();
 
 	// Interacting with self opens options for masturbation etc

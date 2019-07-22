@@ -7,7 +7,7 @@ import { Images } from './assets';
 import { SMALL_FONT, DEFAULT_FONT, GetRenderPictures } from '../app';
 import { StatusEffect, StatusList } from './statuseffect';
 import { Input, Keys } from './input';
-import { online } from './main';
+import { isOnline } from './gamestate';
 import { GAME } from './gamecache';
 import { DataPrompt, ExploreButtonIndex, Explore } from './exploration';
 import { gameState, GameState } from './gamestate';
@@ -130,13 +130,13 @@ Gui.Init = function() {
 	Input.Init(Gui);
 
 	// Set bg
-	Gui.BgColor = online && localStorage["bgcolor"] ? localStorage["bgcolor"] : "rgba(255, 255, 255, 0.2)";
+	Gui.BgColor = isOnline() && localStorage["bgcolor"] ? localStorage["bgcolor"] : "rgba(255, 255, 255, 0.2)";
 	document.getElementById("mainTextArea").style.backgroundColor = Gui.BgColor;
-	Gui.FontFamily = online && localStorage["fontFamily"] ? localStorage["fontFamily"] : "Georgia, sans-serif, \"Arial\", \"Helvetica\"";
+	Gui.FontFamily = isOnline() && localStorage["fontFamily"] ? localStorage["fontFamily"] : "Georgia, sans-serif, \"Arial\", \"Helvetica\"";
 	document.getElementById("mainTextArea").style.fontFamily = Gui.FontFamily;
-	Gui.FontSize = online && localStorage["fontSize"] ? localStorage["fontSize"] : "large";
+	Gui.FontSize = isOnline() && localStorage["fontSize"] ? localStorage["fontSize"] : "large";
 	document.getElementById("mainTextArea").style.fontSize = Gui.FontSize;
-	Gui.ShortcutsVisible = online ? parseInt(localStorage["ShortcutsVisible"]) == 1 : false;
+	Gui.ShortcutsVisible = isOnline() ? parseInt(localStorage["ShortcutsVisible"]) == 1 : false;
 
 	// Basic menu
 	Input.menuButtons[0].Setup("Data", DataPrompt, true);
@@ -368,7 +368,7 @@ Gui.FontPicker = function(back) {
 			document.getElementById("mainTextArea").style.fontFamily = Gui.FontFamily;
 			Gui.FontSize = "large";
 			document.getElementById("mainTextArea").style.fontSize = Gui.FontSize;
-			if(online) {
+			if(isOnline()) {
 				localStorage["fontFamily"] = Gui.FontFamily;
 				localStorage["fontSize"]   = Gui.FontSize;
 			}
@@ -379,7 +379,7 @@ Gui.FontPicker = function(back) {
 			var font = prompt("Please enter fonts (css: font-families) to use, in order of priority.", Gui.FontFamily || "sans-serif, Georgia")
 			if(font != null && font != "") {
 				Gui.FontFamily = font;
-				if(online)
+				if(isOnline())
 					localStorage["fontFamily"] = Gui.FontFamily;
 				document.getElementById("mainTextArea").style.fontFamily = Gui.FontFamily;
 			}
@@ -390,7 +390,7 @@ Gui.FontPicker = function(back) {
 			var size = prompt("Please enter desired font size (css: font-size). For example: small, medium, large.", Gui.FontSize || "large")
 			if(size != null && size != "") {
 				Gui.FontSize = size;
-				if(online)
+				if(isOnline())
 					localStorage["fontSize"] = Gui.FontSize;
 				document.getElementById("mainTextArea").style.fontSize = Gui.FontSize;
 			}
@@ -410,7 +410,7 @@ Gui.BgColorPicker = function(back) {
 	options.push({ nameStr : "Light",
 		func : function() {
 			Gui.BgColor = "rgba(255, 255, 255, 0.2)";
-			if(online)
+			if(isOnline())
 				localStorage["bgcolor"] = Gui.BgColor;
 			document.getElementById("mainTextArea").style.backgroundColor = Gui.BgColor;
 		}, enabled : true
@@ -418,7 +418,7 @@ Gui.BgColorPicker = function(back) {
 	options.push({ nameStr : "Pink",
 		func : function() {
 			Gui.BgColor = "rgba(240, 48, 192, 0.6)";
-			if(online)
+			if(isOnline())
 				localStorage["bgcolor"] = Gui.BgColor;
 			document.getElementById("mainTextArea").style.backgroundColor = Gui.BgColor;
 		}, enabled : true
@@ -426,7 +426,7 @@ Gui.BgColorPicker = function(back) {
 	options.push({ nameStr : "Yellow",
 		func : function() {
 			Gui.BgColor = "rgba(240, 192, 48, 0.6)";
-			if(online)
+			if(isOnline())
 				localStorage["bgcolor"] = Gui.BgColor;
 			document.getElementById("mainTextArea").style.backgroundColor = Gui.BgColor;
 		}, enabled : true
@@ -434,7 +434,7 @@ Gui.BgColorPicker = function(back) {
 	options.push({ nameStr : "Cyan",
 		func : function() {
 			Gui.BgColor = "rgba(48, 240, 192, 0.6)";
-			if(online)
+			if(isOnline())
 				localStorage["bgcolor"] = Gui.BgColor;
 			document.getElementById("mainTextArea").style.backgroundColor = Gui.BgColor;
 		}, enabled : true
@@ -442,7 +442,7 @@ Gui.BgColorPicker = function(back) {
 	options.push({ nameStr : "Blue",
 		func : function() {
 			Gui.BgColor = "rgba(48, 192, 240, 0.6)";
-			if(online)
+			if(isOnline())
 				localStorage["bgcolor"] = Gui.BgColor;
 			document.getElementById("mainTextArea").style.backgroundColor = Gui.BgColor;
 		}, enabled : true
@@ -450,7 +450,7 @@ Gui.BgColorPicker = function(back) {
 	options.push({ nameStr : "Green",
 		func : function() {
 			Gui.BgColor = "rgba(120, 240, 48, 0.6)";
-			if(online)
+			if(isOnline())
 				localStorage["bgcolor"] = Gui.BgColor;
 			document.getElementById("mainTextArea").style.backgroundColor = Gui.BgColor;
 		}, enabled : true
@@ -458,7 +458,7 @@ Gui.BgColorPicker = function(back) {
 	options.push({ nameStr : "Purple",
 		func : function() {
 			Gui.BgColor = "rgba(192, 48, 240, 0.6)";
-			if(online)
+			if(isOnline())
 				localStorage["bgcolor"] = Gui.BgColor;
 			document.getElementById("mainTextArea").style.backgroundColor = Gui.BgColor;
 		}, enabled : true
@@ -466,7 +466,7 @@ Gui.BgColorPicker = function(back) {
 	options.push({ nameStr : "None",
 		func : function() {
 			Gui.BgColor = "rgba(0, 0, 0, 0.0)";
-			if(online)
+			if(isOnline())
 				localStorage["bgcolor"] = Gui.BgColor;
 			document.getElementById("mainTextArea").style.backgroundColor = Gui.BgColor;
 		}, enabled : true
@@ -476,7 +476,7 @@ Gui.BgColorPicker = function(back) {
 			var col = prompt("Please enter desired background color. Format is rgba(R,G,B,A). Colors are in the range 0-255. Opacity is in the range 0-1.", Gui.BgColor || "rgba(255,255,255,1.0)")
 			if(col != null && col != "") {
 				Gui.BgColor = col;
-				if(online)
+				if(isOnline())
 					localStorage["bgcolor"] = Gui.BgColor;
 				document.getElementById("mainTextArea").style.backgroundColor = Gui.BgColor;
 			}
@@ -912,7 +912,7 @@ Gui.PrintDefaultOptions = function(preventClear) {
 		return;
 	}
 
-	SetGameState(GameState.Game);
+	SetGameState(GameState.Game, Gui);
 
 	if(LastSubmenu)
 		LastSubmenu.func(preventClear);

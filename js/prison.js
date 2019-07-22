@@ -28,7 +28,7 @@ PrisonMinigame.prototype.Prep = function() {
 		party.SwitchIn(this.party[i]);
 
 	//TODO maybe use a new one, check rendering
-	SetGameState(GameState.Combat);
+	SetGameState(GameState.Combat, Gui);
 }
 
 
@@ -46,7 +46,7 @@ PrisonMinigame.prototype.Cleanup = function() {
 
 	party.LoadActiveParty();
 
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 }
 
 //TODO

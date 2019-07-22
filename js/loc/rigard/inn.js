@@ -1750,7 +1750,7 @@ InnLoc.room.SleepFunc = function() {
 		parse["heshe"]   = comp.heshe();
 		parse["hishers"] = comp.hishers();
 	}
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	Text.Clear();
 	if(player.Drunk() < 0.5) {
 		Text.Add("You undress and climb into bed,");

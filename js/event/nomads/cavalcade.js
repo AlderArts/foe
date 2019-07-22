@@ -147,7 +147,7 @@ NCavalcadeScenes.PrepCoinGame = function() {
 			playername : player.name
 		};
 
-		SetGameState(GameState.Event);
+		SetGameState(GameState.Event, Gui);
 
 		world.TimeStep({minute: 5});
 
@@ -518,7 +518,7 @@ NCavalcadeScenes.SexyPlayerWin = function(cheat) {
 		playername : player.name
 	};
 
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 
 	Text.Clear();
 	Text.Add("<i>“Well played, [playername]!”</i> Estevan congratulates you.", parse);

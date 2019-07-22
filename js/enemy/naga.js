@@ -235,7 +235,7 @@ NagaScenes.DesertEncounter = function() {
 NagaScenes.DesertLoss = function() {
 	var enc  = this;
 	var naga = enc.naga;
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 
 	var parse = {
 
@@ -306,7 +306,7 @@ NagaScenes.DesertLossScenes = function(enc) {
 
 NagaScenes.DesertLossGetDPd = function(enc) {
 	var naga = enc.naga;
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 
 	var parse = {
 
@@ -446,7 +446,7 @@ NagaScenes.DesertLossGetDPd = function(enc) {
 
 NagaScenes.DesertLossUseCock = function(enc) {
 	var naga = enc.naga;
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 
 	var p1cock = player.BiggestCock();
 	var allCocks = player.AllCocksCopy();
@@ -663,7 +663,7 @@ NagaScenes.DesertLossUseCock = function(enc) {
 NagaScenes.DesertWinPrompt = function() {
 	var enc  = this;
 	var naga = enc.naga;
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 
 	var parse = {
 		master : player.mfFem("master", "mistress")

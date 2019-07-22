@@ -463,7 +463,7 @@ LagomorphScenes.PlainsEncounter = function() {
 }
 
 LagomorphScenes.GroupLossOnPlains = function() {
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	
 	var enc = this;
 	Gui.Callstack.push(function() {
@@ -736,7 +736,7 @@ LagomorphScenes.GroupLossOnPlainsToBurrows = function(enc) {
 }
 
 LagomorphScenes.GroupWinOnPlainsPrompt = function() {
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	
 	var enc = this;
 	

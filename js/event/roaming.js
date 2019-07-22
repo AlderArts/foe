@@ -510,7 +510,7 @@ RoamingScenes.BanditsOnEncounter = function() {
 }
 
 RoamingScenes.BanditsLoss = function() {
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	
 	var enc = this;
 	
@@ -585,7 +585,7 @@ RoamingScenes.BanditsLoss = function() {
 }
 
 RoamingScenes.BanditsWin = function() {
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	
 	var enc = this;
 	

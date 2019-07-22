@@ -530,7 +530,7 @@ FelinesScenes.IntroStalking = function() {
 }
 
 FelinesScenes.WinPrompt = function() {
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 
 	var enc = this;
 	var enemy   = enc.enemy;
@@ -1647,7 +1647,7 @@ FelinesScenes.WinGroupService = function(enc, enemy) {
 }
 
 FelinesScenes.LossRegular = function() {
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 
 	var enc = this;
 	var enemy   = enc.enemy;

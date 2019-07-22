@@ -866,7 +866,7 @@ MariaScenes.ForestConfront = function() {
 
 			enc.canRun = false;
 			enc.onLoss = function() {
-				SetGameState(GameState.Event);
+				SetGameState(GameState.Event, Gui);
 				party.members = enc.oldParty;
 				
 				maria.flags["Met"] |= Maria.Met.FightLost;
@@ -899,7 +899,7 @@ MariaScenes.ForestConfront = function() {
 				Gui.NextPrompt(MariaScenes.ForestFollow);
 			};
 			enc.onVictory = function() {
-				SetGameState(GameState.Event);
+				SetGameState(GameState.Event, Gui);
 				party.members = enc.oldParty;
 				MariaScenes.ForestConfrontWin();
 			}

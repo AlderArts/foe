@@ -210,7 +210,7 @@ DryadGladeScenes.First = function() {
 }
 
 DryadGladeScenes.FirstLoss = function() {
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	
 	var parse = {
 		armor : function() { return player.ArmorDesc(); }
@@ -539,7 +539,7 @@ DryadGladeScenes.FirstLoss = function() {
 }
 
 DryadGladeScenes.FirstWin = function(enc) {
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	
 	var enc = this;
 	

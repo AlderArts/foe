@@ -923,7 +923,7 @@ world.loc.BullTower.Courtyard.Caravans.events.push(new Link(
 
 BullTowerScenes.GuardsWin = function() {
 	var enc  = this;
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	
 	var parse = {
 		
@@ -946,7 +946,7 @@ BullTowerScenes.GuardsWin = function() {
 
 BullTowerScenes.GuardsLoss = function() {
 	var enc  = this;
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	
 	var parse = {
 		
@@ -1331,7 +1331,7 @@ world.loc.BullTower.Building.Cell.onEntry = function() {
 
 BullTowerScenes.CorishevLoss = function() {
 	var enc  = this;
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	
 	var parse = {
 		
@@ -1356,7 +1356,7 @@ BullTowerScenes.CorishevLoss = function() {
 BullTowerScenes.CorishevWin = function() {
 	var enc  = this;
 	var corishev = enc.corishev;
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	
 	var parse = {
 		playername : player.name

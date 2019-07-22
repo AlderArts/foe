@@ -4,7 +4,7 @@ import { Input } from './input';
 import { SetGameState, GameState } from './gamestate';
 
 let CreditsScreen = function() {
-	SetGameState(GameState.Credits);
+	SetGameState(GameState.Credits, Gui);
 	Text.Clear();
 	Gui.ClearButtons();
 	

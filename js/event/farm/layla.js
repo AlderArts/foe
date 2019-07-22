@@ -865,7 +865,7 @@ LaylaScenes.FarmCombat = function() {
 
 LaylaScenes.FarmCombatLoss = function() {
 	var enc = this;
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	
 	if(party.InParty(gwendy))
 		party.LoadActiveParty();
@@ -907,7 +907,7 @@ LaylaScenes.FarmCombatLoss = function() {
 
 LaylaScenes.FarmCombatWin = function() {
 	var enc = this;
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	
 	if(party.InParty(gwendy))
 		party.LoadActiveParty();

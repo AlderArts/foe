@@ -6,7 +6,7 @@
 //***************************************************//
 
 import { Gui } from './gui';
-import { SetGameState, GameState } from './gamestate';
+import { SetGameState, GameState, isOnline } from './gamestate';
 import { GAME } from './gamecache';
 import { GetRenderPictures, SetRenderPictures, GetDEBUG, SetDEBUG } from '../app';
 
@@ -61,7 +61,7 @@ function SetExploreButtons() {
 }
 
 function LimitedDataPrompt(backFunc) {
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 
 	Gui.ClearButtons();
 
@@ -71,7 +71,7 @@ function LimitedDataPrompt(backFunc) {
 		Saver.SavePrompt(function() {
 			LimitedDataPrompt(backFunc);
 		});
-	}, online);
+	}, isOnline());
 
 	Input.buttons[2].Setup("Save file", Saver.SaveToFile, true);
 
@@ -99,7 +99,7 @@ function LimitedDataPrompt(backFunc) {
 }
 
 function DataPrompt() {
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	// At safe locations you can sleep and save
 	var safeLocation = GAME.party.location.safe();
 
@@ -109,7 +109,7 @@ function DataPrompt() {
 
 	Input.buttons[0].Setup("Save game", function() {
 		Saver.SavePrompt(DataPrompt);
-	}, online && safeLocation);
+	}, isOnline() && safeLocation);
 
 	Input.buttons[1].Setup("Load game", function() {
 		Saver.LoadPrompt(DataPrompt);
@@ -151,7 +151,7 @@ function DataPrompt() {
 
 	Input.buttons[7].Setup(Gui.ShortcutsVisible ? "Keys: On" : "Keys: Off", function() {
 		Gui.ShortcutsVisible = !Gui.ShortcutsVisible;
-		if(online)
+		if(isOnline())
 			localStorage["ShortcutsVisible"] = Gui.ShortcutsVisible ? 1 : 0;
 		DataPrompt();
 	}, true);
@@ -223,7 +223,7 @@ function Fight(preventClear) {
 	else {
 		Text.Add("You didn't find anything.");
 		Text.Flush();
-		SetGameState(GameState.Game);
+		SetGameState(GameState.Game, Gui);
 	}
 }
 

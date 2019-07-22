@@ -189,7 +189,7 @@ EquineScenes.PairEnc = function(levelbonus) {
 }
 
 EquineScenes.LossPrompt = function() {
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	
 	// this = encounter
 	var enc = this;
@@ -618,7 +618,7 @@ EquineScenes.Threesome2 = function(enc) {
 //TODO
 EquineScenes.WinPrompt = function() {
 	var enc  = this;
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 
 	var parse = {
 

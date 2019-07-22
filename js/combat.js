@@ -21,7 +21,7 @@ Encounter.prototype.RunLevel = function() {
 }
 
 Encounter.prototype.Start = function() {
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	
 	if(this.onEncounter)
 		this.onEncounter();
@@ -35,7 +35,7 @@ var currentActiveChar = null;
 
 // Set up the fight
 Encounter.prototype.PrepCombat = function() {
-	SetGameState(GameState.Combat);
+	SetGameState(GameState.Combat, Gui);
 	
 	curEncounter = this;
 	
@@ -216,7 +216,7 @@ Encounter.prototype.onRun = function() {
 	world.TimeStep({hour: 1});
 	
 	Gui.NextPrompt(function() {
-		SetGameState(GameState.Event);
+		SetGameState(GameState.Event, Gui);
 		PrintDefaultOptions();
 	});
 }
@@ -243,7 +243,7 @@ Encounter.prototype.onLoss = function() {
 	
 	Text.Flush();
 	Gui.NextPrompt(function() {
-		SetGameState(GameState.Event);
+		SetGameState(GameState.Event, Gui);
 		PrintDefaultOptions();
 	});
 }
@@ -303,7 +303,7 @@ Encounter.prototype.onVictory = function() {
 	
 	Text.Flush();
 	Gui.NextPrompt(function() {
-		SetGameState(GameState.Event);
+		SetGameState(GameState.Event, Gui);
 		PrintDefaultOptions();
 	});
 }

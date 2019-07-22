@@ -93,7 +93,7 @@ Button.prototype.HandleClick = function() {
 
 	if(this.func) {
 		if(this.state && gameState != GameState.Combat)
-			SetGameState(this.state);
+			SetGameState(this.state, this.Gui);
 		try {
 			this.func(this.obj);
 		}
@@ -199,7 +199,7 @@ Button.prototype.HandleKeydown = function(key) {
 	
 	if(this.func) {
 		if(this.state && gameState != GameState.Combat)
-			SetGameState(this.state);
+			SetGameState(this.state, this.Gui);
 		try {
 			this.func(this.obj);
 			this.HoverIn();

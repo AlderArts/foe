@@ -217,7 +217,7 @@ LizardsScenes.GroupEnc = function() {
 }
 
 LizardsScenes.WinPrompt = function() {
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 
 	var enc = this;
 
@@ -1515,7 +1515,7 @@ LizardsScenes.WinPowerbottomDeny = function(enc) {
 }
 
 LizardsScenes.LossPrompt = function() {
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 
 	var enc = this;
 

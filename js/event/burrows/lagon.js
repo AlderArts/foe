@@ -1828,7 +1828,7 @@ Pit loss (todo)
 }
 
 LagonScenes.PitDefianceWin = function() {
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	var enc = this;
 	var parse = {
 		
@@ -1870,7 +1870,7 @@ LagonScenes.PitDefianceWin = function() {
 }
 
 LagonScenes.PitDefianceLoss = function() {
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	var parse = {
 		face : function() { return player.FaceDesc(); },
 		tongue : function() { return player.TongueDesc(); },
@@ -1991,11 +1991,11 @@ LagonScenes.BadendPit = function() {
 
 
 LagonScenes.BadendBrute = function() {
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	
 	var scepter = party.Inv().QueryNum(Items.Quest.Scepter);
 
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	var parse = {
 		
 	};
@@ -2298,7 +2298,7 @@ LagonScenes.Usurp = function(toolate) {
 }
 
 LagonScenes.LossToRegularLagon = function() {
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	
 	var enc = this;
 	var toolate = enc.toolate;
@@ -2392,7 +2392,7 @@ LagonScenes.LossToRegularLagon = function() {
 }
 
 LagonScenes.WinToRegularLagon = function() {
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	
 	var enc = this;
 	var toolate = enc.toolate;
@@ -2436,7 +2436,7 @@ LagonScenes.WinToRegularLagon = function() {
 }
 
 LagonScenes.WinToBruteLagon = function() {
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	
 	var enc = this;
 	var toolate = enc.toolate;
@@ -2532,7 +2532,7 @@ LagonScenes.OpheliaFight = function() {
 }
 
 LagonScenes.LossToOphelia = function() {
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	var enc = this;
 	
 	var parse = {
@@ -2583,7 +2583,7 @@ LagonScenes.LossToOphelia = function() {
 }
 
 LagonScenes.WinToOphelia = function() {
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	var enc = this;
 	
 	var parse = {

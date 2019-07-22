@@ -444,7 +444,7 @@ TasksScenes.Ginseng.Whore = function() {
 
 TasksScenes.Ginseng.FightWin = function() {
 	var enc = this;
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	
 	var parse = {
 		
@@ -473,7 +473,7 @@ TasksScenes.Ginseng.FightWin = function() {
 
 TasksScenes.Ginseng.FightLoss = function() {
 	var enc = this;
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	
 	var parse = {
 		

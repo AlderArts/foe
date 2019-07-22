@@ -203,7 +203,7 @@ GolScenes.SearchForScepter = function() {
 GolScenes.CombatLoss = function() {
 	var enc = this;
 	var gol = enc.gol;
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	
 	var parse = {
 		foot : function() { return player.FootDesc(); }
@@ -516,7 +516,7 @@ GolScenes.CombatLossDrone = function(gol) {
 GolScenes.CombatWin = function() {
 	var enc = this;
 	var gol = enc.gol;
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	
 	var parse = {
 		feet : function() { return player.FeetDesc(); },

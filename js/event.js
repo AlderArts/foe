@@ -85,7 +85,7 @@ Event.prototype.MoveTo = function(timestep, preventClear) {
 }
 
 Event.prototype.SleepFunc = function() {
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	Text.NL();
 	Text.Add("You sleep for 8 hours.");
 	Text.Flush();
@@ -103,7 +103,7 @@ Event.prototype.SleepFunc = function() {
 }
 
 Event.prototype.WaitFunc = function() {
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 	Text.Clear();
 	Text.Add("How long do you want to wait?");
 	Text.Flush();

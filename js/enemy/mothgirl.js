@@ -247,7 +247,7 @@ MothgirlScenes.LoneEnc = function() {
 	}
 
 	enc.onLoss = function() {
-		SetGameState(GameState.Event);
+		SetGameState(GameState.Event, Gui);
 
 		Gui.Callstack.push(function() {
 			Text.Clear();
@@ -271,7 +271,7 @@ MothgirlScenes.LoneEnc = function() {
 MothgirlScenes.WinPrompt = function() {
 	var enc = this;
 	var moth = enc.moth;
-	SetGameState(GameState.Event);
+	SetGameState(GameState.Event, Gui);
 
 	var cocksInAss = player.CocksThatFit(moth.Butt(), null, 5);
 	var p1cock = player.BiggestCock(cocksInAss);
