@@ -2,12 +2,11 @@
 /*
  * TASKS
  */
-import { Scenes } from '../event';
 import { GetDEBUG } from '../../app';
 
-Scenes.Asche.Tasks = {};
+let TasksScenes = {};
 
-Scenes.Asche.Tasks.Default = function() {
+TasksScenes.Default = function() {
 	var parse = {};
 	
 	//Play this if the player isn’t eligible for a new task at the moment.
@@ -24,30 +23,30 @@ Scenes.Asche.Tasks.Default = function() {
 	Scenes.Asche.TalkPrompt();
 }
 
-Scenes.Asche.Tasks.Ginseng = {};
+TasksScenes.Ginseng = {};
 
-Scenes.Asche.Tasks.Ginseng.IsEligable = function() {
+TasksScenes.Ginseng.IsEligable = function() {
 	return asche.flags["Tasks"] < Asche.Tasks.Ginseng_Started &&
 	       rigard.MagicShop.totalBought >= 500 &&
 	       player.level >= 5;
 }
-Scenes.Asche.Tasks.Ginseng.IsOn = function() {
+TasksScenes.Ginseng.IsOn = function() {
 	return asche.flags["Tasks"] >= Asche.Tasks.Ginseng_Started &&
 	       asche.flags["Tasks"] < Asche.Tasks.Ginseng_Finished;
 }
-Scenes.Asche.Tasks.Ginseng.IsFail = function() {
+TasksScenes.Ginseng.IsFail = function() {
 	return asche.flags["Tasks"] & Asche.Tasks.Ginseng_Failed;
 }
-Scenes.Asche.Tasks.Ginseng.IsSuccess = function() {
+TasksScenes.Ginseng.IsSuccess = function() {
 	return asche.flags["Tasks"] & Asche.Tasks.Ginseng_Succeeded;
 }
-Scenes.Asche.Tasks.Ginseng.IsCompleted = function() {
+TasksScenes.Ginseng.IsCompleted = function() {
 	return asche.flags["Tasks"] >= Asche.Tasks.Ginseng_Finished;
 }
 
 //This should have a level requirement such that the PC has a chance at actually beating the enemies involved. Maybe add a money spent or items bought requirement?
 //Maybe a minimum level of 7, the encounter will be 8 or 9.
-Scenes.Asche.Tasks.Ginseng.Initiation = function() {
+TasksScenes.Ginseng.Initiation = function() {
 	var parse = {
 		heshe : player.mfFem("he", "she"),
 		handsomepretty : player.mfFem("handsome", "pretty")
@@ -92,7 +91,7 @@ Scenes.Asche.Tasks.Ginseng.Initiation = function() {
 	Gui.NextPrompt();
 }
 
-Scenes.Asche.Tasks.Ginseng.OnTask = function() {
+TasksScenes.Ginseng.OnTask = function() {
 	var parse = {
 		handsomepretty : player.mfFem("handsome", "pretty")
 	};
@@ -108,7 +107,7 @@ Scenes.Asche.Tasks.Ginseng.OnTask = function() {
 	Scenes.Asche.TalkPrompt();
 }
 
-Scenes.Asche.Tasks.Ginseng.Failed = function() {
+TasksScenes.Ginseng.Failed = function() {
 	var parse = {
 		himher : player.mfFem("him", "her")
 	};
@@ -122,7 +121,7 @@ Scenes.Asche.Tasks.Ginseng.Failed = function() {
 	asche.flags["Tasks"] |= Asche.Tasks.Ginseng_Finished;
 }
 
-Scenes.Asche.Tasks.Ginseng.Highlands = function() {
+TasksScenes.Ginseng.Highlands = function() {
 	var parse = {
 		
 	};
@@ -168,11 +167,11 @@ Scenes.Asche.Tasks.Ginseng.Highlands = function() {
 			var options = new Array();
 			options.push({ nameStr : "Bribe",
 				tooltip : "See if you can buy off the zebras.",
-				func : Scenes.Asche.Tasks.Ginseng.Bribe, enabled : true
+				func : TasksScenes.Ginseng.Bribe, enabled : true
 			});
 			options.push({ nameStr : "Whore",
 				tooltip : "A whole year of celibacy, huh… they must be pretty pent-up. Maybe you can whore yourself out for a favor.",
-				func : Scenes.Asche.Tasks.Ginseng.Whore, enabled : true
+				func : TasksScenes.Ginseng.Whore, enabled : true
 			});
 			Gui.SetButtonsFromList(options, false, null);
 		}, enabled : true
@@ -222,7 +221,7 @@ Scenes.Asche.Tasks.Ginseng.Highlands = function() {
 				Text.Add("So much for stealth! A shout comes up, directed at you - down below, the shaman and his companions are already on their feet, having seized their staff and spears. Scowling in frustration, you narrowly dodge a few beams of magic aimed your way, and slide down the ravine to do battle.", parse);
 				Text.Flush();
 				
-				Scenes.Asche.Tasks.Ginseng.Fight();
+				TasksScenes.Ginseng.Fight();
 			}
 		}, enabled : true
 	});
@@ -240,13 +239,13 @@ Scenes.Asche.Tasks.Ginseng.Highlands = function() {
 			Text.Add(" Best to press your advantage while you still have it.", parse);
 			Text.Flush();
 			
-			Scenes.Asche.Tasks.Ginseng.Fight();
+			TasksScenes.Ginseng.Fight();
 		}, enabled : true
 	});
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Asche.Tasks.Ginseng.Fight = function() {
+TasksScenes.Ginseng.Fight = function() {
 	var enemy = new Party();
 	enemy.AddMember(new ZebraShaman(2));
 	enemy.AddMember(new ZebraBrave(2));
@@ -254,15 +253,15 @@ Scenes.Asche.Tasks.Ginseng.Fight = function() {
 	var enc = new Encounter(enemy);
 	
 	enc.canRun = false;
-	enc.onLoss = Scenes.Asche.Tasks.Ginseng.FightLoss;
-	enc.onVictory = Scenes.Asche.Tasks.Ginseng.FightWin;
+	enc.onLoss = TasksScenes.Ginseng.FightLoss;
+	enc.onVictory = TasksScenes.Ginseng.FightWin;
 	
 	Gui.NextPrompt(function() {
 		enc.Start();
 	});
 }
 
-Scenes.Asche.Tasks.Ginseng.Bribe = function() {
+TasksScenes.Ginseng.Bribe = function() {
 	var parse = {
 		
 	};
@@ -317,7 +316,7 @@ Scenes.Asche.Tasks.Ginseng.Bribe = function() {
 	});
 	options.push({ nameStr : "Whore",
 		tooltip : "Hmm, maybe they’re willing to accept another price…",
-		func : Scenes.Asche.Tasks.Ginseng.Whore, enabled : true
+		func : TasksScenes.Ginseng.Whore, enabled : true
 	});
 	options.push({ nameStr : "Fight",
 		tooltip : "Screw this - enough talk! Have at them!",
@@ -328,14 +327,14 @@ Scenes.Asche.Tasks.Ginseng.Bribe = function() {
 			Text.Add("It’s a fight!", parse);
 			Text.Flush();
 			
-			Scenes.Asche.Tasks.Ginseng.Fight();
+			TasksScenes.Ginseng.Fight();
 		}, enabled : true
 	});
 	Gui.SetButtonsFromList(options, false, null);
 }
 
 
-Scenes.Asche.Tasks.Ginseng.Whore = function() {
+TasksScenes.Ginseng.Whore = function() {
 	var parse = {
 		
 	};
@@ -425,7 +424,7 @@ Scenes.Asche.Tasks.Ginseng.Whore = function() {
 		var options = new Array();
 		options.push({ nameStr : "Bribe",
 			tooltip : "If sex won’t sway them, maybe money will…",
-			func : Scenes.Asche.Tasks.Ginseng.Bribe, enabled : true
+			func : TasksScenes.Ginseng.Bribe, enabled : true
 		});
 		options.push({ nameStr : "Fight",
 			tooltip : "Screw this (well, not literally), enough talk! Have at them!",
@@ -436,14 +435,14 @@ Scenes.Asche.Tasks.Ginseng.Whore = function() {
 				Text.Add("It’s a fight!", parse);
 				Text.Flush();
 				
-				Scenes.Asche.Tasks.Ginseng.Fight();
+				TasksScenes.Ginseng.Fight();
 			}, enabled : true
 		});
 		Gui.SetButtonsFromList(options, false, null);
 	}
 }
 
-Scenes.Asche.Tasks.Ginseng.FightWin = function() {
+TasksScenes.Ginseng.FightWin = function() {
 	var enc = this;
 	SetGameState(GameState.Event);
 	
@@ -472,7 +471,7 @@ Scenes.Asche.Tasks.Ginseng.FightWin = function() {
 	Encounter.prototype.onVictory.call(enc);
 }
 
-Scenes.Asche.Tasks.Ginseng.FightLoss = function() {
+TasksScenes.Ginseng.FightLoss = function() {
 	var enc = this;
 	SetGameState(GameState.Event);
 	
@@ -495,7 +494,7 @@ Scenes.Asche.Tasks.Ginseng.FightLoss = function() {
 	Gui.NextPrompt();
 }
 
-Scenes.Asche.Tasks.Ginseng.Complete = function() {
+TasksScenes.Ginseng.Complete = function() {
 	var parse = {
 		himher : player.mfFem("him", "her"),
 		hisher : player.mfFem("his", "her"),
@@ -615,30 +614,30 @@ Scenes.Asche.Tasks.Ginseng.Complete = function() {
 //
 // Second Quest (Nightshade)
 //
-Scenes.Asche.Tasks.Nightshade = {};
+TasksScenes.Nightshade = {};
 
-Scenes.Asche.Tasks.Nightshade.IsEligable = function() {
+TasksScenes.Nightshade.IsEligable = function() {
 	return asche.flags["Tasks"] < Asche.Tasks.Nightshade_Started &&
 	       rigard.MagicShop.totalBought >= 1000 &&
 	       player.level >= 8;
 }
-Scenes.Asche.Tasks.Nightshade.IsOn = function() {
+TasksScenes.Nightshade.IsOn = function() {
 	return asche.flags["Tasks"] >= Asche.Tasks.Nightshade_Started &&
 	       asche.flags["Tasks"] < Asche.Tasks.Nightshade_Finished;
 }
-Scenes.Asche.Tasks.Nightshade.IsSuccess = function() {
+TasksScenes.Nightshade.IsSuccess = function() {
 	return asche.flags["Tasks"] & Asche.Tasks.Nightshade_Succeeded;
 }
-Scenes.Asche.Tasks.Nightshade.HasHelpFromAquilius = function() {
+TasksScenes.Nightshade.HasHelpFromAquilius = function() {
 	return asche.flags["Tasks"] & Asche.Tasks.Nightshade_Aquilius;
 }
-Scenes.Asche.Tasks.Nightshade.IsCompleted = function() {
+TasksScenes.Nightshade.IsCompleted = function() {
 	return asche.flags["Tasks"] >= Asche.Tasks.Nightshade_Finished;
 }
 
 
 //The player should have resolved the first quest, be at an appropriate level, and perhaps have spent x amount of money or bought so many items from Asche before this unlocks.
-Scenes.Asche.Tasks.Nightshade.Initiation = function() {
+TasksScenes.Nightshade.Initiation = function() {
 	var parse = {
 		heshe : player.mfFem("he", "she")
 	};
@@ -666,7 +665,7 @@ Scenes.Asche.Tasks.Nightshade.Initiation = function() {
 	Gui.NextPrompt();
 }
 
-Scenes.Asche.Tasks.Nightshade.OnTask = function() {
+TasksScenes.Nightshade.OnTask = function() {
 	var parse = {
 		hisher : player.mfFem("his", "her")
 	};
@@ -681,7 +680,7 @@ Scenes.Asche.Tasks.Nightshade.OnTask = function() {
 }
 
 //While on this quest, add a one-time “nightshade” button to Aquilius’ daytime talk menu.
-Scenes.Asche.Tasks.Nightshade.AskAquiliusForHelp = function() {
+TasksScenes.Nightshade.AskAquiliusForHelp = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -710,7 +709,7 @@ Scenes.Asche.Tasks.Nightshade.AskAquiliusForHelp = function() {
 //Maybe a success bonus if the player has ranger job mastered?
 
 //Only used if PC is wandering around blind (I.E, didn’t ask Aquilius)
-Scenes.Asche.Tasks.Nightshade.BlindStart = function() {
+TasksScenes.Nightshade.BlindStart = function() {
 	var parse = {
 		
 	};
@@ -744,14 +743,14 @@ Scenes.Asche.Tasks.Nightshade.BlindStart = function() {
 		
 		world.TimeStep({minute: 30});
 		
-		Scenes.Asche.Tasks.Nightshade.HerbComplications();
+		TasksScenes.Nightshade.HerbComplications();
 	}, 1 + rangerBonus, function() { return true; });
 	
 	scenes.Get();
 }
 
 //Use this if asked Aquilius for help
-Scenes.Asche.Tasks.Nightshade.FollowAquilius = function() {
+TasksScenes.Nightshade.FollowAquilius = function() {
 	var parse = {
 		
 	};
@@ -765,10 +764,10 @@ Scenes.Asche.Tasks.Nightshade.FollowAquilius = function() {
 	
 	world.TimeStep({minute: 30});
 	
-	Scenes.Asche.Tasks.Nightshade.HerbComplications();
+	TasksScenes.Nightshade.HerbComplications();
 }
 
-Scenes.Asche.Tasks.Nightshade.HerbComplications = function() {
+TasksScenes.Nightshade.HerbComplications = function() {
 	var parse = {
 		feet : player.FeetDesc()
 	};
@@ -829,7 +828,7 @@ Scenes.Asche.Tasks.Nightshade.HerbComplications = function() {
 	}
 }
 
-Scenes.Asche.Tasks.Nightshade.Complete = function() {
+TasksScenes.Nightshade.Complete = function() {
 	var parse = {
 		handsomepretty : player.mfFem("handsome", "pretty"),
 		himher : player.mfFem("him", "her"),
@@ -979,25 +978,25 @@ Scenes.Asche.Tasks.Nightshade.Complete = function() {
 
 
 
-Scenes.Asche.Tasks.Spring = {};
+TasksScenes.Spring = {};
 
-Scenes.Asche.Tasks.Spring.IsEligable = function() {
+TasksScenes.Spring.IsEligable = function() {
 	return asche.flags["Tasks"] < Asche.Tasks.Spring_Started &&
 	       rigard.MagicShop.totalBought >= 1500 &&
 	       player.level >= 8;
 }
-Scenes.Asche.Tasks.Spring.IsOn = function() {
+TasksScenes.Spring.IsOn = function() {
 	return asche.flags["Tasks"] >= Asche.Tasks.Spring_Started &&
 	       asche.flags["Tasks"] < Asche.Tasks.Spring_Finished;
 }
-Scenes.Asche.Tasks.Spring.IsSuccess = function() {
+TasksScenes.Spring.IsSuccess = function() {
 	return asche.flags["Tasks"] & Asche.Tasks.Spring_Visited;
 }
-Scenes.Asche.Tasks.Spring.IsCompleted = function() {
+TasksScenes.Spring.IsCompleted = function() {
 	return asche.flags["Tasks"] >= Asche.Tasks.Spring_Finished;
 }
 
-Scenes.Asche.Tasks.Spring.Initiation = function() {
+TasksScenes.Spring.Initiation = function() {
 	var parse = {
 		HandsomePretty: player.mfFem("Handsome", "Pretty"),
 		handsomepretty: player.mfFem("handsome", "pretty"),
@@ -1049,7 +1048,7 @@ Scenes.Asche.Tasks.Spring.Initiation = function() {
 }
 
 //Select “spring” from Highlands menu.
-Scenes.Asche.Tasks.Spring.Highlands = function() {
+TasksScenes.Spring.Highlands = function() {
 	var parse = {
 		feet : player.FeetDesc()
 	};
@@ -1151,7 +1150,7 @@ Scenes.Asche.Tasks.Spring.Highlands = function() {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Asche.Tasks.Spring.OnTask = function() {
+TasksScenes.Spring.OnTask = function() {
 	var parse = {
 		heshe  : player.mfFem("he","she"),
 		himher : player.mfFem("him","her")
@@ -1162,7 +1161,7 @@ Scenes.Asche.Tasks.Spring.OnTask = function() {
 	Text.Flush();
 }
 
-Scenes.Asche.Tasks.Spring.Complete = function() {
+TasksScenes.Spring.Complete = function() {
 	var parse = {
 		himher : player.mfFem("him", "her"),
 		hisher : player.mfFem("his", "her"),
@@ -1256,3 +1255,5 @@ Scenes.Asche.Tasks.Spring.Complete = function() {
 	});
 	Gui.SetButtonsFromList(options, false, null);
 }
+
+export { TasksScenes };

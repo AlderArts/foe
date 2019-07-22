@@ -5,9 +5,8 @@
  */
 
 import { BossEntity } from './boss';
-import { Scenes } from '../event';
 
-Scenes.Gol = {};
+let GolScenes = {};
 
 function GolQueen() {
 	BossEntity.call(this);
@@ -124,7 +123,7 @@ GolQueen.prototype.Act = function(encounter, activeChar) {
 		Abilities.Attack.Use(encounter, this, t);
 }
 
-Scenes.Gol.SearchForScepter = function() {
+GolScenes.SearchForScepter = function() {
 	var parse = {
 		
 	};
@@ -189,8 +188,8 @@ Scenes.Gol.SearchForScepter = function() {
 				enc.gol = gol;
 				
 				enc.canRun = false;
-				enc.onLoss = Scenes.Gol.CombatLoss;
-				enc.onVictory = Scenes.Gol.CombatWin;
+				enc.onLoss = GolScenes.CombatLoss;
+				enc.onVictory = GolScenes.CombatWin;
 
 				enc.Start();
 			});
@@ -201,7 +200,7 @@ Scenes.Gol.SearchForScepter = function() {
 }
 
 //TODO
-Scenes.Gol.CombatLoss = function() {
+GolScenes.CombatLoss = function() {
 	var enc = this;
 	var gol = enc.gol;
 	SetGameState(GameState.Event);
@@ -250,13 +249,13 @@ Scenes.Gol.CombatLoss = function() {
 	
 	Gui.NextPrompt(function() {
 		if(incubator)
-			Scenes.Gol.CombatLossIncubator(gol);
+			GolScenes.CombatLossIncubator(gol);
 		else
-			Scenes.Gol.CombatLossDrone(gol);
+			GolScenes.CombatLossDrone(gol);
 	});
 }
 
-Scenes.Gol.CombatLossIncubator = function(gol) {
+GolScenes.CombatLossIncubator = function(gol) {
 	var parse = {
 		skinDesc : function() { return player.SkinDesc(); },
 		armor : function() { return player.ArmorDesc(); },
@@ -291,10 +290,10 @@ Scenes.Gol.CombatLossIncubator = function(gol) {
 		Text.Add("Your [legs] is stretched out so that you can’t even flex or twist, anchored with web upon web until movement or concealment of your [vagina] is an impossibility. You wish you could curl back onto yourself, and maybe rub a little across your increasingly puffy entrance, but you can’t.", parse);
 	Text.Add(" You’re pinned and exposed, being dripped on and dripped from. Another splatter of goo smears your cheek, and you moan in anxious need.", parse);
 	Text.NL();
-	Scenes.Gol.CombatLossIncEntry(gol);
+	GolScenes.CombatLossIncEntry(gol);
 }
 
-Scenes.Gol.CombatLossIncEntry = function(gol) {
+GolScenes.CombatLossIncEntry = function(gol) {
 	var p1cock = player.BiggestCock();
 	
 	var parse = {
@@ -395,7 +394,7 @@ Scenes.Gol.CombatLossIncEntry = function(gol) {
 	});
 }
 
-Scenes.Gol.CombatLossDrone = function(gol) {
+GolScenes.CombatLossDrone = function(gol) {
 	var p1cock = player.BiggestCock();
 	
 	var parse = {
@@ -514,7 +513,7 @@ Scenes.Gol.CombatLossDrone = function(gol) {
 	});
 }
 
-Scenes.Gol.CombatWin = function() {
+GolScenes.CombatWin = function() {
 	var enc = this;
 	var gol = enc.gol;
 	SetGameState(GameState.Event);
@@ -553,13 +552,13 @@ Scenes.Gol.CombatWin = function() {
 			
 			options.push({ nameStr : "Hyper fuck",
 				func : function() {
-					Scenes.Gol.CombatWinHyperFuck(enc, p1cock);
+					GolScenes.CombatWinHyperFuck(enc, p1cock);
 				}, enabled : p1cock.Len() >= 61, // > 2'
 				tooltip : "It’s not often you find someone who can take a cock as big as yours… the opportunity is too good to pass up."
 			});
 			options.push({ nameStr : "Tailfuck",
 				func : function() {
-					Scenes.Gol.CombatWinTailfuck(enc, p2cock);
+					GolScenes.CombatWinTailfuck(enc, p2cock);
 				}, enabled : p2cock, // < 3'
 				tooltip : "Fuck that tailgina until it’s dripping and leaking eggs!"
 			});
@@ -567,7 +566,7 @@ Scenes.Gol.CombatWin = function() {
 		if(player.FirstVag()) {
 			options.push({ nameStr : "Cunnilingus",
 				func : function() {
-					Scenes.Gol.CombatWinCunn(enc);
+					GolScenes.CombatWinCunn(enc);
 				}, enabled : true,
 				tooltip : "Have her eat you out."
 			});
@@ -587,7 +586,7 @@ Scenes.Gol.CombatWin = function() {
 				world.TimeStep({minute: 30});
 				
 				Gui.NextPrompt(function() {
-					Scenes.Gol.CombatAftermath(enc);
+					GolScenes.CombatAftermath(enc);
 				});
 			}, enabled : true,
 			tooltip : "Just grab the scepter and go."
@@ -598,7 +597,7 @@ Scenes.Gol.CombatWin = function() {
 	Encounter.prototype.onVictory.call(enc);
 }
 
-Scenes.Gol.CombatWinHyperFuck = function(enc, p1cock) {
+GolScenes.CombatWinHyperFuck = function(enc, p1cock) {
 	var gol = enc.gol;
 	var lusty = gol.LustLevel() >= 0.5;
 	
@@ -699,11 +698,11 @@ Scenes.Gol.CombatWinHyperFuck = function(enc, p1cock) {
 	world.TimeStep({hour: 1});
 	
 	Gui.NextPrompt(function() {
-		Scenes.Gol.CombatAftermath(enc);
+		GolScenes.CombatAftermath(enc);
 	});
 }
 
-Scenes.Gol.CombatWinTailfuck = function(enc, p1cock) {
+GolScenes.CombatWinTailfuck = function(enc, p1cock) {
 	var gol = enc.gol;
 	var lusty = gol.LustLevel() >= 0.5;
 	
@@ -781,7 +780,7 @@ Scenes.Gol.CombatWinTailfuck = function(enc, p1cock) {
 			Text.Flush();
 			
 			Gui.NextPrompt(function() {
-				Scenes.Gol.CombatAftermath(enc);
+				GolScenes.CombatAftermath(enc);
 			});
 		}, enabled : true,
 		tooltip : "Pull out; she’s not worthy of your seed."
@@ -813,7 +812,7 @@ Scenes.Gol.CombatWinTailfuck = function(enc, p1cock) {
 			Text.Flush();
 			
 			Gui.NextPrompt(function() {
-				Scenes.Gol.CombatAftermath(enc);
+				GolScenes.CombatAftermath(enc);
 			});
 		}, enabled : true,
 		tooltip : "Cream her up good!"
@@ -822,7 +821,7 @@ Scenes.Gol.CombatWinTailfuck = function(enc, p1cock) {
 	
 }
 
-Scenes.Gol.CombatWinCunn = function(enc) {
+GolScenes.CombatWinCunn = function(enc) {
 	var gol = enc.gol;
 	var lusty = gol.LustLevel() >= 0.5;
 	var p1cock = player.BiggestCock();
@@ -919,7 +918,7 @@ Scenes.Gol.CombatWinCunn = function(enc) {
 			Text.Add("<i>”Worry not, little one,”</i> the mantis-woman drones in a singsong voice. <i>”I shall fulfill your desires… ease the aching in your loins.”</i> She hovers over you, her tantalizing ovipositor <i>just</i> outside your reach.", parse);
 			Text.NL();
 			
-			Scenes.Gol.CombatLossIncEntry(gol);
+			GolScenes.CombatLossIncEntry(gol);
 		}, enabled : true,
 		tooltip : "Yes… you want her to take you..."
 	});
@@ -931,7 +930,7 @@ Scenes.Gol.CombatWinCunn = function(enc) {
 			Text.Add("The Gol gives out a disappointed cry as you grab the scepter and back away from her, but she stays put, knowing better than to fight you.", parse);
 			Text.Flush();
 			Gui.NextPrompt(function() {
-				Scenes.Gol.CombatAftermath(enc);
+				GolScenes.CombatAftermath(enc);
 			});
 		}, enabled : true,
 		tooltip : "Grab the scepter and go, before you lose yourself."
@@ -939,7 +938,7 @@ Scenes.Gol.CombatWinCunn = function(enc) {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Gol.CombatAftermath = function(enc) {
+GolScenes.CombatAftermath = function(enc) {
 	var parse = {
 		
 	};
@@ -967,4 +966,4 @@ Scenes.Gol.CombatAftermath = function(enc) {
 	Gui.NextPrompt();
 }
 
-export { GolQueen };
+export { GolQueen, GolScenes };

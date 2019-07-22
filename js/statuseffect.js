@@ -2,6 +2,8 @@
  * @author alder
  */
 
+import { DamageType } from './ability';
+
 let Status = {};
 
 let StatusEffect = {

@@ -5,9 +5,8 @@
  */
 
 import { BossEntity } from './boss';
-import { Scenes } from '../event';
 
-Scenes.Orchid = {};
+let OrchidScenes = {};
 
 function OrchidBoss(storage) {
 	BossEntity.call(this);
@@ -104,7 +103,7 @@ OrchidBoss.Talk = {
 	First : 1
 };
 
-Scenes.Orchid.Impregnate = function(mother, slot) {
+OrchidScenes.Impregnate = function(mother, slot) {
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother : mother,
@@ -226,7 +225,7 @@ OrchidBoss.prototype.Act = function(encounter, activeChar) {
 		Abilities.EnemySkill.TWhip.Use(encounter, this, t);
 }
 
-Scenes.Orchid.Interact = function() {
+OrchidScenes.Interact = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -247,16 +246,16 @@ Scenes.Orchid.Interact = function() {
 	orchid.flags["Talk"] |= OrchidBoss.Talk.First;
 	
 	if(first) {
-		Scenes.Orchid.FirstTalk();
+		OrchidScenes.FirstTalk();
 	}
 	else {
 		Text.Flush();
 		
-		Scenes.Orchid.Prompt();
+		OrchidScenes.Prompt();
 	}
 }
 
-Scenes.Orchid.Prompt = function() {
+OrchidScenes.Prompt = function() {
 	var parse = {
 		
 	};
@@ -270,7 +269,7 @@ Scenes.Orchid.Prompt = function() {
 			Text.Add("<i>“Sure, I can always spare time to talk to my savior.”</i> She smiles.", parse);
 			Text.Flush();
 			
-			Scenes.Orchid.TalkPrompt();
+			OrchidScenes.TalkPrompt();
 		}, enabled : true
 	});
 	/* TODO
@@ -288,7 +287,7 @@ Scenes.Orchid.Prompt = function() {
 	Gui.SetButtonsFromList(options, true, PrintDefaultOptions);
 }
 
-Scenes.Orchid.TalkPrompt = function() {
+OrchidScenes.TalkPrompt = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -321,7 +320,7 @@ Scenes.Orchid.TalkPrompt = function() {
 			
 			world.TimeStep({minute: 5});
 			
-			Scenes.Orchid.TalkPrompt();
+			OrchidScenes.TalkPrompt();
 		}, enabled : true
 	});
 	options.push({ nameStr : "How is she?",
@@ -399,7 +398,7 @@ Scenes.Orchid.TalkPrompt = function() {
 			
 			world.TimeStep({minute: 5});
 			
-			Scenes.Orchid.TalkPrompt();
+			OrchidScenes.TalkPrompt();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Mother Tree",
@@ -445,7 +444,7 @@ Scenes.Orchid.TalkPrompt = function() {
 			
 			world.TimeStep({minute: 10});
 			
-			Scenes.Orchid.TalkPrompt();
+			OrchidScenes.TalkPrompt();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Her corruption",
@@ -486,7 +485,7 @@ Scenes.Orchid.TalkPrompt = function() {
 			
 			world.TimeStep({minute: 5});
 			
-			Scenes.Orchid.TalkPrompt();
+			OrchidScenes.TalkPrompt();
 		}, enabled : true
 	});
 	/* TODO
@@ -507,11 +506,11 @@ Scenes.Orchid.TalkPrompt = function() {
 		Text.Add("<i>“Oh? Okay, I guess. Want to do something else then?”</i>", parse);
 		Text.Flush();
 		
-		Scenes.Orchid.Prompt();
+		OrchidScenes.Prompt();
 	});
 }
 
-Scenes.Orchid.FirstTalk = function() {
+OrchidScenes.FirstTalk = function() {
 	var parse = {
 		
 	};
@@ -541,10 +540,10 @@ Scenes.Orchid.FirstTalk = function() {
 	Text.Add("<i>“I… okay, sure. I’d hate for this to happen to anyone else, especially my mother and my sisters.”</i>", parse);
 	Text.Flush();
 	
-	Scenes.Orchid.FirstTalkPrompt({});
+	OrchidScenes.FirstTalkPrompt({});
 }
 
-Scenes.Orchid.FirstTalkPrompt = function(opts) {
+OrchidScenes.FirstTalkPrompt = function(opts) {
 	var parse = {
 		playername : player.name,
 		name : kiakai.name
@@ -576,7 +575,7 @@ Scenes.Orchid.FirstTalkPrompt = function(opts) {
 				Text.NL();
 				Text.Add("It’s quite alright, you tell her. Okay, so you got the general picture. Now you gotta ask about the details...", parse);
 				Text.Flush();
-				Scenes.Orchid.FirstTalkPrompt(opts);
+				OrchidScenes.FirstTalkPrompt(opts);
 			}, enabled : true
 		});
 	}
@@ -607,7 +606,7 @@ Scenes.Orchid.FirstTalkPrompt = function(opts) {
 				}
 				Text.Add("You take a deep breath and pat her comfortingly on the arm. That seems to be about all you’re gonna get out of her.", parse);
 				Text.Flush();
-				Scenes.Orchid.FirstTalkPrompt(opts);
+				OrchidScenes.FirstTalkPrompt(opts);
 			}, enabled : true
 		});
 		if(!opts.spring)
@@ -678,7 +677,7 @@ Scenes.Orchid.FirstTalkPrompt = function(opts) {
 					}
 				}
 				Text.Flush();
-				Scenes.Orchid.FirstTalkPrompt(opts);
+				OrchidScenes.FirstTalkPrompt(opts);
 			}, enabled : true
 		});
 		if(!opts.lizard)
@@ -746,7 +745,7 @@ Scenes.Orchid.FirstTalkPrompt = function(opts) {
 				Text.NL();
 				Text.Add("Orchid smiles at hearing that. <i>“I’ll be rooting for you, [playername]!”</i>", parse);
 				Text.Flush();
-				Scenes.Orchid.FirstTalkPrompt(opts);
+				OrchidScenes.FirstTalkPrompt(opts);
 				
 				//TODO #Unlock “Strange Lizan” topic when talking to Sissy
 			}, enabled : true
@@ -842,4 +841,4 @@ Scenes.Orchid.FirstTalkPrompt = function(opts) {
 	}
 }
 
-export { OrchidBoss };
+export { OrchidBoss, OrchidScenes };

@@ -8,6 +8,8 @@ import { Entity } from '../entity';
 import { Scenes } from '../event';
 import { Cock } from '../body/cock';
 
+let LizardsScenes = {};
+
 function Lizard(gender) {
 	Entity.call(this);
 	this.ID = "lizard";
@@ -88,8 +90,6 @@ function Lizard(gender) {
 Lizard.prototype = new Entity();
 Lizard.prototype.constructor = Lizard;
 
-Scenes.Lizards = {};
-
 Lizard.prototype.DropTable = function() {
 	var drops = [];
 	if(Math.random() < 0.05) drops.push({ it: Items.Lacertium });
@@ -130,7 +130,7 @@ Lizard.prototype.Act = function(encounter, activeChar) {
 		Abilities.Seduction.Tease.Use(encounter, this, t);
 }
 
-Scenes.Lizards.Impregnate = function(mother, father, slot) {
+LizardsScenes.Impregnate = function(mother, father, slot) {
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother : mother,
@@ -141,7 +141,7 @@ Scenes.Lizards.Impregnate = function(mother, father, slot) {
 	});
 }
 
-Scenes.Lizards.GroupEnc = function() {
+LizardsScenes.GroupEnc = function() {
 	var enemy    = new Party();
 	var male     = new Lizard(Gender.male);
 	var female   = new Lizard(Gender.female);
@@ -210,13 +210,13 @@ Scenes.Lizards.GroupEnc = function() {
 		});
 	}
 
-	enc.onLoss    = Scenes.Lizards.LossPrompt;
-	enc.onVictory = Scenes.Lizards.WinPrompt;
+	enc.onLoss    = LizardsScenes.LossPrompt;
+	enc.onVictory = LizardsScenes.WinPrompt;
 
 	return enc;
 }
 
-Scenes.Lizards.WinPrompt = function() {
+LizardsScenes.WinPrompt = function() {
 	SetGameState(GameState.Event);
 
 	var enc = this;
@@ -233,14 +233,14 @@ Scenes.Lizards.WinPrompt = function() {
 
 		// Male
 		if(Math.random() < odds) {
-			scene = function() { Scenes.Lizards.WinMale(enc); };
+			scene = function() { LizardsScenes.WinMale(enc); };
 			parse["m1himher"]  = "him";
 			parse["m1hisher"]  = "his";
 			parse["m2hisher"]  = "her";
 		}
 		// Female
 		else {
-			scene = function() { Scenes.Lizards.WinFemale(enc); };
+			scene = function() { LizardsScenes.WinFemale(enc); };
 			parse["m1himher"]  = "her";
 			parse["m1hisher"]  = "her";
 			parse["m2hisher"]  = "his";
@@ -264,11 +264,11 @@ Scenes.Lizards.WinPrompt = function() {
 			//[Male][Female]
 			var options = new Array();
 			options.push({ nameStr : "Male",
-				func : function() { Scenes.Lizards.WinMale(enc); }, enabled : true,
+				func : function() { LizardsScenes.WinMale(enc); }, enabled : true,
 				tooltip : "Listen to his pleas and take out your victory on him instead."
 			});
 			options.push({ nameStr : "Female",
-				func : function() { Scenes.Lizards.WinFemale(enc); }, enabled : true,
+				func : function() { LizardsScenes.WinFemale(enc); }, enabled : true,
 				tooltip : "Ignore him and claim his female companion."
 			});
 			options.push({ nameStr : "Neither",
@@ -288,7 +288,7 @@ Scenes.Lizards.WinPrompt = function() {
 	Encounter.prototype.onVictory.call(enc);
 }
 
-Scenes.Lizards.WinMale = function(enc) {
+LizardsScenes.WinMale = function(enc) {
 	var parse = {
 		p1name        : function() { return party.members[1].NameDesc(); },
 		m1Name        : function() { return enc.male.NameDesc(); },
@@ -317,13 +317,13 @@ Scenes.Lizards.WinMale = function(enc) {
 	if(player.FirstCock()) {
 		options.push({ nameStr : "Anal",
 			func : function() {
-				Scenes.Lizards.WinClaimAss(enc, enc.male);
+				LizardsScenes.WinClaimAss(enc, enc.male);
 			}, enabled : true,
 			tooltip : "He's not going to put up much of a fight now, why not put his ass to good use?"
 		});
 		options.push({ nameStr : "Blowjob",
 			func : function() {
-				Scenes.Lizards.WinBlowjob(enc, enc.male);
+				LizardsScenes.WinBlowjob(enc, enc.male);
 			}, enabled : true,
 			tooltip : "With a muzzle that long, you bet he could take every inch..."
 		});
@@ -332,7 +332,7 @@ Scenes.Lizards.WinMale = function(enc) {
 	//[Powerbottom][Leave]
 	options.push({ nameStr : "Powerbottom",
 		func : function() {
-			Scenes.Lizards.WinPowerbottom(enc);
+			LizardsScenes.WinPowerbottom(enc);
 		}, enabled : true,
 		tooltip : "Who says the winner has to be on top? You like a good ride, when you're in charge."
 	});
@@ -349,7 +349,7 @@ Scenes.Lizards.WinMale = function(enc) {
 	Text.Flush();
 }
 
-Scenes.Lizards.WinFemale = function(enc) {
+LizardsScenes.WinFemale = function(enc) {
 	var parse = {
 		p1name        : function() { return party.members[1].NameDesc(); },
 		m1Name        : function() { return enc.female.NameDesc(); },
@@ -378,13 +378,13 @@ Scenes.Lizards.WinFemale = function(enc) {
 	if(player.FirstCock()) {
 		options.push({ nameStr : "Anal",
 			func : function() {
-				Scenes.Lizards.WinClaimAss(enc, enc.female);
+				LizardsScenes.WinClaimAss(enc, enc.female);
 			}, enabled : true,
 			tooltip : "She's not going to put up much of a fight now, why not put her ass to good use?"
 		});
 		options.push({ nameStr : "Blowjob",
 			func : function() {
-				Scenes.Lizards.WinBlowjob(enc, enc.female);
+				LizardsScenes.WinBlowjob(enc, enc.female);
 			}, enabled : true,
 			tooltip : "With a muzzle that long, you bet she could take every inch..."
 		});
@@ -392,7 +392,7 @@ Scenes.Lizards.WinFemale = function(enc) {
 	if(player.FirstCock() || player.Strapon()) {
 		options.push({ nameStr : "Fuck",
 			func : function() {
-				Scenes.Lizards.WinFuckVag(enc);
+				LizardsScenes.WinFuckVag(enc);
 			}, enabled : true,
 			tooltip : "Give her some dick."
 		});
@@ -402,7 +402,7 @@ Scenes.Lizards.WinFemale = function(enc) {
 	if(player.sexlevel > 2) {
 		options.push({ nameStr : "Tailpeg",
 			func : function() {
-				Scenes.Lizards.WinTailpeg(enc);
+				LizardsScenes.WinTailpeg(enc);
 			}, enabled : true,
 			tooltip : "Your experience points out a lovely idea. Perhaps her tail could be put to a wonderful use..."
 		});
@@ -420,7 +420,7 @@ Scenes.Lizards.WinFemale = function(enc) {
 	Text.Flush();
 }
 
-Scenes.Lizards.WinFuckVag = function(enc) {
+LizardsScenes.WinFuckVag = function(enc) {
 	var enemy = enc.female;
 	var third = enc.third;
 
@@ -522,7 +522,7 @@ Scenes.Lizards.WinFuckVag = function(enc) {
 	Gui.NextPrompt();
 }
 
-Scenes.Lizards.WinTailpeg = function(enc) {
+LizardsScenes.WinTailpeg = function(enc) {
 	var enemy = enc.female;
 
 	var parse = {
@@ -721,7 +721,7 @@ Scenes.Lizards.WinTailpeg = function(enc) {
 	});
 }
 
-Scenes.Lizards.WinClaimAss = function(enc, enemy) {
+LizardsScenes.WinClaimAss = function(enc, enemy) {
 	var parse = {
 		p1name        : function() { return party.members[1].NameDesc(); },
 		m1Name        : function() { return enemy.NameDesc(); },
@@ -839,7 +839,7 @@ Scenes.Lizards.WinClaimAss = function(enc, enemy) {
 	});
 }
 
-Scenes.Lizards.WinBlowjob = function(enc, enemy) {
+LizardsScenes.WinBlowjob = function(enc, enemy) {
 	var parse = {
 		p1name        : function() { return party.members[1].NameDesc(); },
 		m1cocks : function() { return enemy.MultiCockDesc(); },
@@ -904,7 +904,7 @@ Scenes.Lizards.WinBlowjob = function(enc, enemy) {
 	});
 }
 
-Scenes.Lizards.WinPowerbottom = function(enc) {
+LizardsScenes.WinPowerbottom = function(enc) {
 	var enemy = enc.male;
 
 	var parse = {
@@ -987,7 +987,7 @@ Scenes.Lizards.WinPowerbottom = function(enc) {
 							player.FuckVag(player.FirstVag(), enemy.FirstCock(), 4);
 							Sex.Vaginal(enemy, player);
 
-							Scenes.Lizards.Impregnate(player, enemy);
+							LizardsScenes.Impregnate(player, enemy);
 
 							player.AddLustFraction(-1);
 							Gui.NextPrompt();
@@ -999,7 +999,7 @@ Scenes.Lizards.WinPowerbottom = function(enc) {
 							Text.Clear();
 							Text.Add("The thought of having the lizard under you actually <i>breed</i> with you, though, is not an attractive one. He's not even close to your species. They rape enough, they can live without tainting your womb, too.", parse);
 							Text.NL();
-							Scenes.Lizards.WinPowerbottomDeny(enc);
+							LizardsScenes.WinPowerbottomDeny(enc);
 						}, enabled : true,
 						tooltip : "He seems handsome, but you don't want to <i>breed</i> with him..."
 					});
@@ -1009,7 +1009,7 @@ Scenes.Lizards.WinPowerbottom = function(enc) {
 					Text.Flush();
 					Gui.NextPrompt(function() {
 						Text.Clear();
-						Scenes.Lizards.WinPowerbottomDeny(enc);
+						LizardsScenes.WinPowerbottomDeny(enc);
 					});
 				}
 			}, enabled : true,
@@ -1276,7 +1276,7 @@ Scenes.Lizards.WinPowerbottom = function(enc) {
 								Text.Add("You feel his spurts grow less and less, until you can't feel his hot sperm flowing any longer. His hands fall away from you.", parse);
 								Text.NL();
 
-								Scenes.Lizards.Impregnate(player, enemy, PregnancyHandler.Slot.Butt);
+								LizardsScenes.Impregnate(player, enemy, PregnancyHandler.Slot.Butt);
 
 								Text.Add("In a moment, you can see that he's passed out.", parse);
 								Text.NL();
@@ -1304,7 +1304,7 @@ Scenes.Lizards.WinPowerbottom = function(enc) {
 					});
 					options.push({ nameStr : "Deny him",
 						func : function() {
-							Scenes.Lizards.WinPowerbottomAssert(enc);
+							LizardsScenes.WinPowerbottomAssert(enc);
 						}, enabled : true,
 						tooltip : "You don't like how rough he might go..."
 					});
@@ -1312,7 +1312,7 @@ Scenes.Lizards.WinPowerbottom = function(enc) {
 				}
 				// Lust < 75%
 				else {
-					Scenes.Lizards.WinPowerbottomAssert(enc);
+					LizardsScenes.WinPowerbottomAssert(enc);
 				}
 			});
 		}, enabled : true,
@@ -1326,7 +1326,7 @@ Scenes.Lizards.WinPowerbottom = function(enc) {
 	Text.Flush();
 }
 
-Scenes.Lizards.WinPowerbottomAssert = function(enc) {
+LizardsScenes.WinPowerbottomAssert = function(enc) {
 	var enemy = enc.male;
 
 	var parse = {
@@ -1438,7 +1438,7 @@ Scenes.Lizards.WinPowerbottomAssert = function(enc) {
 			Text.Add("tight, clenching hole. You feel his dicks stiffen, growing thicker right before a wet, sticky gush of reptilian sperm pumps into your body. As one dick fills you with his slimy essence, you feel warm spunk splattering between your cheeks, [m1name]’s second shaft coating you in his warmth.", parse);
 		Text.NL();
 
-		Scenes.Lizards.Impregnate(player, enemy, PregnancyHandler.Slot.Butt);
+		LizardsScenes.Impregnate(player, enemy, PregnancyHandler.Slot.Butt);
 
 		Text.Add("<i>“Y... yes,”</i> he hisses, pushing his hips up against you.", parse);
 		Text.NL();
@@ -1462,7 +1462,7 @@ Scenes.Lizards.WinPowerbottomAssert = function(enc) {
 	});
 }
 
-Scenes.Lizards.WinPowerbottomDeny = function(enc) {
+LizardsScenes.WinPowerbottomDeny = function(enc) {
 	var enemy = enc.male;
 
 	var parse = {
@@ -1506,7 +1506,7 @@ Scenes.Lizards.WinPowerbottomDeny = function(enc) {
 	player.FuckVag(player.FirstVag(), enemy.FirstCock(), 3);
 	Sex.Vaginal(enemy, player);
 
-	Scenes.Lizards.Impregnate(player, enemy);
+	LizardsScenes.Impregnate(player, enemy);
 
 	Text.Flush();
 
@@ -1514,7 +1514,7 @@ Scenes.Lizards.WinPowerbottomDeny = function(enc) {
 	Gui.NextPrompt();
 }
 
-Scenes.Lizards.LossPrompt = function() {
+LizardsScenes.LossPrompt = function() {
 	SetGameState(GameState.Event);
 
 	var enc = this;
@@ -1554,8 +1554,8 @@ Scenes.Lizards.LossPrompt = function() {
 		Gui.NextPrompt(function() {
 			var scenes = new EncounterTable();
 
-			scenes.AddEnc(function() { Scenes.Lizards.LossMale.call(enc);   });
-			scenes.AddEnc(function() { Scenes.Lizards.LossFemale.call(enc); });
+			scenes.AddEnc(function() { LizardsScenes.LossMale.call(enc);   });
+			scenes.AddEnc(function() { LizardsScenes.LossFemale.call(enc); });
 
 			scenes.Get();
 		});
@@ -1565,7 +1565,7 @@ Scenes.Lizards.LossPrompt = function() {
 	Encounter.prototype.onLoss.call(enc);
 }
 
-Scenes.Lizards.LossMale = function() {
+LizardsScenes.LossMale = function() {
 	var enc = this;
 
 	var member1 = party.members[1];
@@ -1670,7 +1670,7 @@ Scenes.Lizards.LossMale = function() {
 		Text.Flush();
 		// RANDOM SCENE
 		Gui.NextPrompt(function() {
-			Scenes.Lizards.LossMaleVagVariations.call(enc);
+			LizardsScenes.LossMaleVagVariations.call(enc);
 		});
 	}, 2.0, function() { return player.FirstVag(); });
 	// IF MALE OR HERM
@@ -1678,13 +1678,13 @@ Scenes.Lizards.LossMale = function() {
 		Text.Add("His eyes drift down between your legs, and his eyes narrow.", parse);
 		Text.NL();
 
-		Scenes.Lizards.LossMaleCockVariations.call(enc);
+		LizardsScenes.LossMaleCockVariations.call(enc);
 	}, 1.0, function() { return player.FirstCock(); });
 
 	scenes.Get();
 }
 
-Scenes.Lizards.LossMaleVagVariations = function() {
+LizardsScenes.LossMaleVagVariations = function() {
 	Text.Clear();
 
 	var enc = this;
@@ -1760,7 +1760,7 @@ Scenes.Lizards.LossMaleVagVariations = function() {
 			Text.Clear();
 			Text.Add("Finally, with a powerful thrust of his hips, his [m1cock] slams deep into your body. [m1Name] howls out, a bestial cry that makes a shudder run down your spine. He lets go of your hands, grabbing hold of your [butt], rocking his hips against you. You feel his shafts pulsing heavily, before thick, warm fluid starts to fill your [anus]. Thick gouts of it splatter over your back, making a mess of you both inside and out. Deeper and deeper his seed spills into your body, until he simply... pushes you off, jerking his first [m1cock] out from you and leaving you in the dirt. A few, last ropes splatter over your body as he picks up his weapon, before turning and walking away. Exhausted and quivering from your own cruelly teased arousal, you roll onto your back and consign yourself to rest.", parse);
 
-			Scenes.Lizards.Impregnate(player, enc.male, PregnancyHandler.Slot.Butt);
+			LizardsScenes.Impregnate(player, enc.male, PregnancyHandler.Slot.Butt);
 
 			if(player.body.Gender() == Gender.herm) {
 				Text.NL();
@@ -1835,7 +1835,7 @@ Scenes.Lizards.LossMaleVagVariations = function() {
 				Text.Add("Finally, the growing ache seems to build inside your[cl5], every ounce of your being focusing into a point. Your[cl6] feel[notS] like [itThey] grow[notS] so very hot, and spots burst in front of your eyes as his [m1cocks] pound you over the edge. You cry out up at him, his eyes boring into yours as you feel your [vag] convulse around his heavy, thick shafts. Your lips clench around him and you feel the pleasure swamp your vision as your legs give out from under you, leaving you propped up by his rock solid [m1cocks]. As your [vag] juices itself, he smirks, feeling your fluids make a mess of both your groins. He pulls out of your sloppy [vag], letting you slump to the ground. Picking up his weapon, he turns and walks away.", parse);
 				Text.NL();
 
-				Scenes.Lizards.Impregnate(player, enc.male, PregnancyHandler.Slot.Vag);
+				LizardsScenes.Impregnate(player, enc.male, PregnancyHandler.Slot.Vag);
 
 				player.AddLustFraction(-1);
 
@@ -1883,7 +1883,7 @@ Scenes.Lizards.LossMaleVagVariations = function() {
 	scenes.Get();
 }
 
-Scenes.Lizards.LossMaleCockVariations = function() {
+LizardsScenes.LossMaleCockVariations = function() {
 	var enc = this;
 
 	var member1 = party.members[1];
@@ -2141,7 +2141,7 @@ Scenes.Lizards.LossMaleCockVariations = function() {
 			Text.Add("Finally, with a powerful thrust of his hips, his [m1cock] slams deep into your body. [m1Name] howls out, a bestial cry that makes a shudder run down your spine. He roughly squeezes your [butt], rocking his hips against you. You feel his two shafts pulsing heavily, before thick, warm fluid starts to coat your back and fill your [anus]. Deeper and deeper his seed spills into your body, until he simply... pushes you off, jerking his [m1cock] out from you and leaving you in the dirt. A few, last ropes splatter over your body as he picks up his weapon, before turning and walking away. Exhausted and quivering from your cruelly teased arousal, you roll onto your back and consign yourself to rest.", parse);
 			Text.NL();
 
-			Scenes.Lizards.Impregnate(player, enc.male, PregnancyHandler.Slot.Butt);
+			LizardsScenes.Impregnate(player, enc.male, PregnancyHandler.Slot.Butt);
 
 			if(!party.Alone())
 				Text.Add("Dimly, you can hear the other reptile[s] finishing with [party], leaving [all] of you in a similar state...", { s: enc.third ? "s" : "", party: party.Two() ? member1.name : "your group", all: party.Two() ? "both" : "all" });
@@ -2154,7 +2154,7 @@ Scenes.Lizards.LossMaleCockVariations = function() {
 	scenes.Get();
 }
 
-Scenes.Lizards.LossFemale = function() {
+LizardsScenes.LossFemale = function() {
 	Text.Clear();
 
 	var enc = this;
@@ -2704,4 +2704,4 @@ Scenes.Lizards.LossFemale = function() {
 	scenes.Get();
 }
 
-export { Lizard };
+export { Lizard, LizardsScenes };

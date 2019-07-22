@@ -3,9 +3,10 @@
  * Define Fera
  * 
  */
-import { Scenes } from '../event';
 import { Entity } from '../entity';
 import { GetDEBUG } from '../../app';
+
+let FeraScenes = {};
 
 function Fera(storage) {
 	Entity.call(this);
@@ -83,15 +84,13 @@ Fera.prototype.ToStorage = function() {
 	return storage;
 }
 
-Scenes.Fera = {};
-
 // Schedule
 Fera.prototype.IsAtLocation = function(location) {
 	return true;
 }
 
 // Party interaction
-Scenes.Fera.Interact = function() {
+FeraScenes.Interact = function() {
 	Text.Clear();
 	
 	if(!Scenes.Rigard.ClothShop.IsOpen()) {
@@ -165,7 +164,7 @@ Scenes.Fera.Interact = function() {
 					Text.Add("You pat Fera on the head and tell her she does a good job and just needs to be more careful. Her face lights up in response to your praise.", parse);
 					Text.Flush();
 					fera.relation.IncreaseStat(100, 1);
-					Gui.NextPrompt(Scenes.Fera.Interact);
+					Gui.NextPrompt(FeraScenes.Interact);
 				}, enabled : true,
 				tooltip : "Reassure Fera about her work."
 			});
@@ -174,13 +173,13 @@ Scenes.Fera.Interact = function() {
 					Text.Add("You tell Fera she should be ashamed to say such things about her caretaker and that it is her fault for constantly messing up. She looks down and seems saddened by your words.", parse);
 					Text.Flush();
 					fera.relation.DecreaseStat(-100, 1);
-					Gui.NextPrompt(Scenes.Fera.Interact);
+					Gui.NextPrompt(FeraScenes.Interact);
 				}, enabled : true,
 				tooltip : "Scold her for badmouthing her beautiful employer."
 			});
 			options.push({ nameStr : "Ignore",
 				func : function() {
-					Scenes.Fera.Interact();
+					FeraScenes.Interact();
 				}, enabled : true,
 				tooltip : "Say nothing and move on."
 			});
@@ -199,7 +198,7 @@ Scenes.Fera.Interact = function() {
 			else
 				Text.Add("<i>“Me? Um... I like milk, cream, and soft things. I've worked here for as long as I can remember. I carried things when I was small, and I sewed when I got bigger. I sometimes do errands for Miss Nexelle, that's the only time I really get to go out...”</i> she says sadly.", parse);
 			Text.Flush();
-			Gui.NextPrompt(Scenes.Fera.Interact);
+			Gui.NextPrompt(FeraScenes.Interact);
 		}, enabled : true,
 		tooltip : "Ask Fera about herself."
 	});
@@ -223,7 +222,7 @@ Scenes.Fera.Interact = function() {
 						Text.Flush();
 						fera.relation.IncreaseStat(100,5);
 						fera.flags["Mom"] = 2;
-						Gui.NextPrompt(Scenes.Fera.Interact);
+						Gui.NextPrompt(FeraScenes.Interact);
 					}, enabled : true,
 					tooltip : "Hold the poor lonely catgirl."
 				});
@@ -233,7 +232,7 @@ Scenes.Fera.Interact = function() {
 						Text.Flush();
 						fera.relation.IncreaseStat(100,1);
 						fera.flags["Mom"] = 2;
-						Gui.NextPrompt(Scenes.Fera.Interact);
+						Gui.NextPrompt(FeraScenes.Interact);
 					}, enabled : true,
 					tooltip : "Apologize for bringing up her mother."
 				});
@@ -253,7 +252,7 @@ Scenes.Fera.Interact = function() {
 				options.push({ nameStr : "Ignore",
 					func : function() {
 						fera.flags["Mom"] = 3;
-						Scenes.Fera.Interact();
+						FeraScenes.Interact();
 					}, enabled : true,
 					tooltip : "Say nothing and move along."
 				});
@@ -276,7 +275,7 @@ Scenes.Fera.Interact = function() {
 					Text.Add("You smile and tell her that she could be that good if she works at it really hard. <i>“Really? You really think so, [playername]?”</i> She smiles and seems very happy that you believe in her.", parse);
 					Text.Flush();
 					fera.relation.IncreaseStat(100,1);
-					Gui.NextPrompt(Scenes.Fera.Interact);
+					Gui.NextPrompt(FeraScenes.Interact);
 				}, enabled : true,
 				tooltip : "Encourage Fera."
 			});
@@ -285,13 +284,13 @@ Scenes.Fera.Interact = function() {
 					Text.Add("You explain that Miss Nexelle has worked and practiced for years to be so good and that it is unlikely that she would get that good anytime soon. <i>“I know... I just wish I wasn't so clumsy...”</i> she says sadly.", parse);
 					Text.Flush();
 					fera.relation.DecreaseStat(-100,1);
-					Gui.NextPrompt(Scenes.Fera.Interact);
+					Gui.NextPrompt(FeraScenes.Interact);
 				}, enabled : true,
 				tooltip : "Tell her not to get her hopes up."
 			});
 			options.push({ nameStr : "Ignore",
 				func : function() {
-					Scenes.Fera.Interact();
+					FeraScenes.Interact();
 				}, enabled : true,
 				tooltip : "Say nothing and move on."
 			});
@@ -316,7 +315,7 @@ Scenes.Fera.Interact = function() {
 					Text.Add("You tell the cute catgirl that you agree with her that morphs should be treated better. <i>“I'm so glad you agree, [playername],”</i> she says with a smile.", parse);
 					Text.Flush();
 					fera.relation.IncreaseStat(100,1);
-					Gui.NextPrompt(Scenes.Fera.Interact);
+					Gui.NextPrompt(FeraScenes.Interact);
 				}, enabled : true,
 				tooltip : "Agree with her."
 			});
@@ -325,13 +324,13 @@ Scenes.Fera.Interact = function() {
 					Text.Add("Shaking your head, you tell her that you don't think it likely or possible for different creatures to be treated as well as humans. You explain that creatures who are different should be treated different. Unsurprisingly, she looks very angry at your words and hurries off, saying nothing.", parse);
 					Text.Flush();
 					fera.relation.DecreaseStat(-100,2);
-					Gui.NextPrompt(Scenes.Fera.Interact);
+					Gui.NextPrompt(FeraScenes.Interact);
 				}, enabled : true,
 				tooltip : "Disagree with her."
 			});
 			options.push({ nameStr : "Ignore",
 				func : function() {
-					Scenes.Fera.Interact();
+					FeraScenes.Interact();
 				}, enabled : true,
 				tooltip : "Say nothing."
 			});
@@ -343,11 +342,11 @@ Scenes.Fera.Interact = function() {
 		tooltip : "Ask the cute catgirl about Rigard."
 	});
 	options.push({ nameStr : "Touch",
-		func : Scenes.Fera.TouchPrompt, enabled : fera.fondleTimer.Expired(),
+		func : FeraScenes.TouchPrompt, enabled : fera.fondleTimer.Expired(),
 		tooltip : "Attempt to touch the cute catgirl."
 	});
 	options.push({ nameStr : "Assistance",
-		func : Scenes.Fera.SexPrompt, enabled : true,
+		func : FeraScenes.SexPrompt, enabled : true,
 		tooltip : "Ask Fera to 'assist' you in the dressing room."
 	});
 	Gui.SetButtonsFromList(options, true);
@@ -360,7 +359,7 @@ Scenes.Fera.Interact = function() {
 	}
 }
 
-Scenes.Fera.TouchPrompt = function() {
+FeraScenes.TouchPrompt = function() {
 	var parse = {
 		against        : (player.FirstBreastRow().size.Get() > 3) ? "between" : "against"
 	};
@@ -374,12 +373,12 @@ Scenes.Fera.TouchPrompt = function() {
 			Text.Clear();
 			if(fera.relation.Get() >= 5) {
 				Text.Add("Fera comes close and purrs as you pull her into your arms. She puts her arms around you and rubs her head [against] your [breasts] in return. Clearly, she appreciates someone being kind to her.", parse);
-				Gui.NextPrompt(Scenes.Fera.Interact);
+				Gui.NextPrompt(FeraScenes.Interact);
 				player.AddLustFraction(0.1);
 			}
 			else if(fera.relation.Get() >= 0) {
 				Text.Add("Fera looks up at you as you embrace her, looking very confused about why you're doing this. She doesn't seem to dislike it though.", parse);
-				Gui.NextPrompt(Scenes.Fera.Interact);
+				Gui.NextPrompt(FeraScenes.Interact);
 				player.AddLustFraction(0.1);
 			}
 			else { // Negative
@@ -423,7 +422,7 @@ Scenes.Fera.TouchPrompt = function() {
 
 				fera.relation.IncreaseStat(100,2);
 				player.AddLustFraction(0.3);
-				Gui.NextPrompt(Scenes.Fera.Interact);
+				Gui.NextPrompt(FeraScenes.Interact);
 			}
 			else if(fera.relation.Get() >= 0) {
 				Text.Add("You lead Fera behind one of the large clothing racks, hiding the two of you from view. The cute catgirl lets out a quiet gasp and she blushes when you grab hold of her [fbreasts] and start to play with them through her clothes. She looks up at you with tears in her big blue eyes and a frightened face. Feeling a little guilty, you let go of her breasts and Fera runs off without saying a word.", parse);
@@ -447,10 +446,10 @@ Scenes.Fera.TouchPrompt = function() {
 		tooltip : "Play with her breasts."
 	});
 	
-	Gui.SetButtonsFromList(options, true, Scenes.Fera.Interact);
+	Gui.SetButtonsFromList(options, true, FeraScenes.Interact);
 }
 
-Scenes.Fera.SexPrompt = function() {
+FeraScenes.SexPrompt = function() {
 	var cocksInVag = player.CocksThatFit(fera.FirstVag());
 	var cocksInAss = player.CocksThatFit(fera.Butt());
 	
@@ -619,7 +618,7 @@ Scenes.Fera.SexPrompt = function() {
 				fera.relation.IncreaseStat(20, 2);
 			}
 			Text.Flush();
-			Gui.NextPrompt(Scenes.Fera.Interact);
+			Gui.NextPrompt(FeraScenes.Interact);
 		}, enabled : true,
 		tooltip : "Have Fera help you try something on."
 	});
@@ -645,7 +644,7 @@ Scenes.Fera.SexPrompt = function() {
 				player.AddSexExp(1);
 				player.AddLustFraction(0.3);
 				fera.relation.IncreaseStat(30, 2);
-				Gui.NextPrompt(Scenes.Fera.Interact);
+				Gui.NextPrompt(FeraScenes.Interact);
 			}, enabled : true,
 			tooltip : "Eat out Fera."
 		});
@@ -731,7 +730,7 @@ Scenes.Fera.SexPrompt = function() {
 				world.TimeStep({minute: 30});
 				player.AddLustFraction(-1);
 				fera.relation.IncreaseStat(20, 2);
-				Gui.NextPrompt(Scenes.Fera.Interact);
+				Gui.NextPrompt(FeraScenes.Interact);
 			}, enabled : player.FirstVag() || player.FirstCock(),
 			tooltip : "Ask Fera to service you."
 		});
@@ -774,7 +773,7 @@ Scenes.Fera.SexPrompt = function() {
 				world.TimeStep({minute: 30});
 				player.AddLustFraction(-1);
 				fera.relation.IncreaseStat(20, 2);
-				Gui.NextPrompt(Scenes.Fera.Interact);
+				Gui.NextPrompt(FeraScenes.Interact);
 			}, enabled : player.FirstCock(),
 			tooltip : Text.Parse("Have Fera please you with her [fbreasts].", parse)
 		});
@@ -841,7 +840,7 @@ Scenes.Fera.SexPrompt = function() {
 				world.TimeStep({minute: 30});
 				player.AddLustFraction(-1);
 				fera.relation.IncreaseStat(100, 3);
-				Gui.NextPrompt(Scenes.Fera.Interact);
+				Gui.NextPrompt(FeraScenes.Interact);
 			}, enabled : cocksInVag.length >= 1,
 			tooltip : "Have sex with Fera."
 		});
@@ -913,7 +912,7 @@ Scenes.Fera.SexPrompt = function() {
 				world.TimeStep({minute: 30});
 				player.AddLustFraction(-1);
 				fera.relation.IncreaseStat(100, 2);
-				Gui.NextPrompt(Scenes.Fera.Interact);
+				Gui.NextPrompt(FeraScenes.Interact);
 			}, enabled : cocksInVag.length >= 1,
 			tooltip : "Do it while standing."
 		});
@@ -986,7 +985,7 @@ Scenes.Fera.SexPrompt = function() {
 				world.TimeStep({minute: 30});
 				player.AddLustFraction(-1);
 				fera.relation.IncreaseStat(100, 2);
-				Gui.NextPrompt(Scenes.Fera.Interact);
+				Gui.NextPrompt(FeraScenes.Interact);
 			}, enabled : cocksInVag.length >= 1,
 			tooltip : "Fuck her from behind."
 		});
@@ -1074,7 +1073,7 @@ Scenes.Fera.SexPrompt = function() {
 					world.TimeStep({minute: 30});
 					player.AddLustFraction(-1);
 					fera.relation.IncreaseStat(100, 2);
-					Gui.NextPrompt(Scenes.Fera.Interact);
+					Gui.NextPrompt(FeraScenes.Interact);
 				}, enabled : cocksInAss.length >= 1,
 				tooltip : "Fuck Fera's ass."
 			});
@@ -1152,7 +1151,7 @@ Scenes.Fera.SexPrompt = function() {
 					world.TimeStep({minute: 30});
 					player.AddLustFraction(-1);
 					fera.relation.IncreaseStat(100, 2);
-					Gui.NextPrompt(Scenes.Fera.Interact);
+					Gui.NextPrompt(FeraScenes.Interact);
 				}, enabled : cocksInVag.length >= 1,
 				tooltip : "Have Fera sit on your lap and ride you."
 			});
@@ -1164,4 +1163,4 @@ Scenes.Fera.SexPrompt = function() {
 		Gui.SetButtonsFromList(options);
 }
 
-export { Fera };
+export { Fera, FeraScenes };

@@ -10,12 +10,12 @@ import { Items } from '../../item';
 
 let ArmorShopLoc = new Event("Twopenny's");
 
-Scenes.Rigard.ArmorShop = {};
-Scenes.Rigard.ArmorShop.IsOpen = function() {
+let ArmorShopScenes = {};
+ArmorShopScenes.IsOpen = function() {
 	return (world.time.hour >= 9 && world.time.hour < 20) && !rigard.UnderLockdown();
 }
 
-Scenes.Rigard.ArmorShop.CreateShop = function() {
+ArmorShopScenes.CreateShop = function() {
 	var buySuccessFunc = function(item, cost, num) {
 		var parse = {
 			sirmadam : player.mfTrue("sir", "madam")
@@ -186,10 +186,10 @@ Scenes.Rigard.ArmorShop.CreateShop = function() {
 	shop.AddItem(Items.Accessories.IronBangle, 5);
 	shop.AddItem(Items.Accessories.IronBuckler, 5);
 	
-	Scenes.Rigard.ArmorShop.Shop = shop;
-	Scenes.Rigard.ArmorShop.SpecialShop = specialShop;
+	ArmorShopScenes.Shop = shop;
+	ArmorShopScenes.SpecialShop = specialShop;
 }
-Scenes.Rigard.ArmorShop.CreateShop();
+ArmorShopScenes.CreateShop();
 
 
 ArmorShopLoc.description = function() {
@@ -231,7 +231,7 @@ ArmorShopLoc.description = function() {
 ArmorShopLoc.events.push(new Link(
 	"Donovan", true, true, null,
 	function() {
-		Scenes.Rigard.ArmorShop.Prompt();
+		ArmorShopScenes.Prompt();
 	}
 ));
 
@@ -247,18 +247,18 @@ ArmorShopLoc.events.push(new Link(
  */
 ArmorShopLoc.onEntry = function() {
 	if(rigard.Twopenny["Met"] < 1)
-		Scenes.Rigard.ArmorShop.FirstEntry();
+		ArmorShopScenes.FirstEntry();
 	//TODO LINK NEW STUFF
 	/*
 	else if(X && rigard.Twopenny["Met"] < 2) {
-		Scenes.Rigard.ArmorShop.RegularEntry(true);
+		ArmorShopScenes.RegularEntry(true);
 	}
 	*/
 	else
-		Scenes.Rigard.ArmorShop.RegularEntry();
+		ArmorShopScenes.RegularEntry();
 }
 
-Scenes.Rigard.ArmorShop.FirstEntry = function() {
+ArmorShopScenes.FirstEntry = function() {
 	var parse = {
 		
 	};
@@ -316,7 +316,7 @@ Scenes.Rigard.ArmorShop.FirstEntry = function() {
 }
 
 
-Scenes.Rigard.ArmorShop.RegularEntry = function(newStock) {
+ArmorShopScenes.RegularEntry = function(newStock) {
 	var parse = {
 		
 	};
@@ -353,7 +353,7 @@ Scenes.Rigard.ArmorShop.RegularEntry = function(newStock) {
 	PrintDefaultOptions(true);
 }
 
-Scenes.Rigard.ArmorShop.Prompt = function() {
+ArmorShopScenes.Prompt = function() {
 	var parse = {
 		sirmadam : player.mfFem("sir", "madam"),
 		heshe : player.mfFem("he", "she")
@@ -432,7 +432,7 @@ Scenes.Rigard.ArmorShop.Prompt = function() {
 				Text.Add("Donovan scratches his head and looks at the small crowd in his establishment. <i>“Eh, well, since there’s no one wanting my attention right now… sure, why not? Just so you know, though, anyone else comes up while we’re talking, I gotta tend to them.”</i>", parse);
 				Text.Flush();
 				
-				Scenes.Rigard.ArmorShop.Talk(prompt);
+				ArmorShopScenes.Talk(prompt);
 			}, enabled : true
 		});
 		Gui.SetButtonsFromList(options, true);
@@ -440,7 +440,7 @@ Scenes.Rigard.ArmorShop.Prompt = function() {
 	prompt();
 }
 
-Scenes.Rigard.ArmorShop.Talk = function(backFunc) {
+ArmorShopScenes.Talk = function(backFunc) {
 	var parse = {
 		sirmadam : player.mfFem("sir", "madam")
 	};
@@ -471,7 +471,7 @@ Scenes.Rigard.ArmorShop.Talk = function(backFunc) {
 				if(rigard.Twopenny["TShop"] < 1)
 					rigard.Twopenny["TShop"] = 1;
 				
-				Scenes.Rigard.ArmorShop.Talk(backFunc);
+				ArmorShopScenes.Talk(backFunc);
 			});
 		}, enabled : true,
 		tooltip : "Oh, won’t he regale you with the story of his shop?"
@@ -543,4 +543,4 @@ Scenes.Rigard.ArmorShop.Talk = function(backFunc) {
 	});
 }
 
-export { ArmorShopLoc };
+export { ArmorShopLoc, ArmorShopScenes };

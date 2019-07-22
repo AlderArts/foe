@@ -5,10 +5,10 @@
  */
 
 import { Entity } from '../entity';
-import { Scenes } from '../event';
 import { Encounter } from '../combat';
+import { Party } from '../party';
 
-Scenes.Drake = {};
+let DrakeScenes = {};
 
 function Drake() {
 	Entity.call(this);
@@ -111,7 +111,7 @@ Drake.prototype.Act = function(encounter, activeChar) {
 		Abilities.Attack.Use(encounter, this, t);
 }
 
-Scenes.Drake.DrakeEnc = function() {
+DrakeScenes.DrakeEnc = function() {
 	var enemy    = new Party();
 	enemy.AddMember(new Drake());
 	var enc      = new Encounter(enemy);
@@ -126,4 +126,4 @@ Scenes.Drake.DrakeEnc = function() {
 	return enc;
 }
 
-export { Drake };
+export { Drake, DrakeScenes };

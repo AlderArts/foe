@@ -5,7 +5,9 @@
  */
 
 import { world } from '../world';
-import { Event, Link, Scenes } from '../event';
+import { Event, Link } from '../event';
+
+let DryadGladeScenes = {};
 
 function DryadGlade(storage) {
 	this.flags = {};
@@ -41,8 +43,6 @@ DryadGlade.prototype.OrchidSlut = function() {
 	return false;
 }
 
-Scenes.DryadGlade = {};
-
 let GladeLoc = new Event("Dryads' glade");
 
 world.SaveSpots["Dryads"] = GladeLoc;
@@ -75,7 +75,7 @@ GladeLoc.events.push(new Link(
 	"Mother tree", true, true,
 	null,
 	function() {
-		Scenes.DryadGlade.MotherTree();
+		DryadGladeScenes.MotherTree();
 	}
 ));
 GladeLoc.events.push(new Link(
@@ -115,7 +115,7 @@ GladeLoc.onEntry = function() {
 	//[Enter][Leave]
 	var options = new Array();
 	options.push({ nameStr : "Enter",
-		func : Scenes.DryadGlade.First, enabled : true,
+		func : DryadGladeScenes.First, enabled : true,
 		tooltip : "There is no time to lose. Go forth, steeling yourself against whatever danger awaits."
 	});
 	options.push({ nameStr : "Leave",
@@ -133,7 +133,7 @@ GladeLoc.onEntry = function() {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.DryadGlade.First = function() {
+DryadGladeScenes.First = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -200,8 +200,8 @@ Scenes.DryadGlade.First = function() {
 		
 		enc.canRun = false;
 		
-		enc.onLoss = Scenes.DryadGlade.FirstLoss;
-		enc.onVictory = Scenes.DryadGlade.FirstWin;
+		enc.onLoss = DryadGladeScenes.FirstLoss;
+		enc.onVictory = DryadGladeScenes.FirstWin;
 		
 		Gui.NextPrompt(function() {
 			enc.Start();
@@ -209,7 +209,7 @@ Scenes.DryadGlade.First = function() {
 	});
 }
 
-Scenes.DryadGlade.FirstLoss = function() {
+DryadGladeScenes.FirstLoss = function() {
 	SetGameState(GameState.Event);
 	
 	var parse = {
@@ -538,7 +538,7 @@ Scenes.DryadGlade.FirstLoss = function() {
 	});
 }
 
-Scenes.DryadGlade.FirstWin = function(enc) {
+DryadGladeScenes.FirstWin = function(enc) {
 	SetGameState(GameState.Event);
 	
 	var enc = this;
@@ -622,7 +622,7 @@ Scenes.DryadGlade.FirstWin = function(enc) {
 	Encounter.prototype.onVictory.call(enc);
 }
 
-Scenes.DryadGlade.MotherTree = function() {
+DryadGladeScenes.MotherTree = function() {
 	var parse = {
 		
 	};
@@ -635,10 +635,10 @@ Scenes.DryadGlade.MotherTree = function() {
 	Text.Add("<i>“Welcome, Lifegiver!”</i> she greets you. <i>“How may I aid you?”</i>", parse);
 	Text.Flush();
 	
-	Scenes.DryadGlade.MotherTreePrompt();
+	DryadGladeScenes.MotherTreePrompt();
 }
 
-Scenes.DryadGlade.MotherTreePrompt = function() {
+DryadGladeScenes.MotherTreePrompt = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -657,7 +657,7 @@ Scenes.DryadGlade.MotherTreePrompt = function() {
 			Text.Add("<i>“Ask, and I shall answer as well as I can.”</i>", parse);
 			Text.Flush();
 			
-			Scenes.DryadGlade.MotherTreeTalk();
+			DryadGladeScenes.MotherTreeTalk();
 		}, enabled : true,
 		tooltip : "You wish to ask the dryad some questions."
 	});
@@ -688,7 +688,7 @@ Scenes.DryadGlade.MotherTreePrompt = function() {
 	Gui.SetButtonsFromList(options, true, PrintDefaultOptions);
 }
 
-Scenes.DryadGlade.MotherTreeTalk = function() {
+DryadGladeScenes.MotherTreeTalk = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -702,7 +702,7 @@ Scenes.DryadGlade.MotherTreeTalk = function() {
 			Text.NL();
 			Text.Add("<i>“Once in a while, I would meet someone like Alliser or Jeanne, people whose flames - though their lives are much shorter than mine - shine brighter than any star.”</i> She sighs. <i>“Things would be so much simpler if it was only this,”</i> she concludes, caressing her tree fondly.", parse);
 			Text.Flush();
-			Scenes.DryadGlade.MotherTreeTalk();
+			DryadGladeScenes.MotherTreeTalk();
 		}, enabled : true,
 		tooltip : "Ask her for her story."
 	});
@@ -713,7 +713,7 @@ Scenes.DryadGlade.MotherTreeTalk = function() {
 			Text.NL();
 			Text.Add("<i>“I think that you visiting her helps a lot. She looks up to you; nay, I dare say she’s infatuated with you. You might be the only one that can help her through this.”</i> You nod thoughtfully.", parse);
 			Text.Flush();
-			Scenes.DryadGlade.MotherTreeTalk();
+			DryadGladeScenes.MotherTreeTalk();
 		}, enabled : true,
 		tooltip : "Ask her about her betentacled daughter."
 	});
@@ -731,7 +731,7 @@ Scenes.DryadGlade.MotherTreeTalk = function() {
 			Text.NL();
 			Text.Add("<i>“Either way, I miss her dearly, but a mother cannot always cling tightly to her little ones,”</i> the dryad concludes sorrowfully.", parse);
 			Text.Flush();
-			Scenes.DryadGlade.MotherTreeTalk();
+			DryadGladeScenes.MotherTreeTalk();
 		}, enabled : true,
 		tooltip : "Ask her about her younger daughter Spirit, who resides in your Gem."
 	});
@@ -752,7 +752,7 @@ Scenes.DryadGlade.MotherTreeTalk = function() {
 				Text.NL();
 				Text.Add("<i>“I’m sorry, [playername]. Is there anything else you’d like to talk about?”</i>", parse);
 				Text.Flush();
-				Scenes.DryadGlade.MotherTreeTalk();
+				DryadGladeScenes.MotherTreeTalk();
 			}, enabled : true
 		});
 	}
@@ -761,11 +761,11 @@ Scenes.DryadGlade.MotherTreeTalk = function() {
 			Text.Clear();
 			Text.Add("<i>“It is who you are and who you will be,”</i> she replies. <i>“All will be revealed in time, if you persevere. Much rests on you, according to the sage.”</i>", parse);
 			Text.Flush();
-			Scenes.DryadGlade.MotherTreeTalk();
+			DryadGladeScenes.MotherTreeTalk();
 		}, enabled : true,
 		tooltip : "Why does she insist on calling you by that name?"
 	});
-	Gui.SetButtonsFromList(options, true, Scenes.DryadGlade.MotherTreePrompt);
+	Gui.SetButtonsFromList(options, true, DryadGladeScenes.MotherTreePrompt);
 }
 
-export { DryadGlade, GladeLoc };
+export { DryadGlade, GladeLoc, DryadGladeScenes };

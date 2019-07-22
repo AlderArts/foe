@@ -4,10 +4,14 @@
  * 
  */
 
-import { Scenes } from '../event';
 import { Entity } from '../entity';
+import { TasksScenes } from './asche-tasks';
+import { SexScenes } from './asche-sex';
 
-Scenes.Asche = {};
+let AscheScenes = {
+	Tasks : TasksScenes,
+	Sex   : SexScenes,
+};
 
 function Asche(storage) {
 	Entity.call(this);
@@ -97,7 +101,7 @@ Asche.prototype.ToStorage = function() {
 	return storage;
 }
 
-Scenes.Asche.FirstEntry = function() {
+AscheScenes.FirstEntry = function() {
 	var parse = {
 		heshe : player.mfFem("he","she"),
 		handsomepretty : player.mfFem("handsome", "pretty")
@@ -131,7 +135,7 @@ Scenes.Asche.FirstEntry = function() {
 	Gui.NextPrompt();
 }
 
-Scenes.Asche.Prompt = function() {
+AscheScenes.Prompt = function() {
 	var parse = {
 		handsomepretty : player.mfFem("handsome", "pretty"),
 		heshe: player.mfFem("he", "she"),
@@ -142,7 +146,7 @@ Scenes.Asche.Prompt = function() {
 	var options = new Array();
 	options.push({ nameStr : "Appearance",
 		tooltip : "Study the jackal-morph.",
-		func : Scenes.Asche.Appearance,
+		func : AscheScenes.Appearance,
 		enabled : true
 	});
 	options.push({ nameStr : "Talk",
@@ -154,7 +158,7 @@ Scenes.Asche.Prompt = function() {
 			Text.Add("<i>“Well, it seems like Asche has a little time for making small talk with [handsomepretty] customer like you. Maybe call it customer relations? Maybe with enough luck, can be called customer service, too.”</i> She chuckles at her own joke. <i>“Well, what does good customer wish to gossip about?”</i>", parse);
 			Text.Flush();
 			
-			Scenes.Asche.TalkPrompt();
+			AscheScenes.TalkPrompt();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Buy",
@@ -179,7 +183,7 @@ Scenes.Asche.Prompt = function() {
 				scenes.Get();
 				
 				Text.Flush();
-				Scenes.Asche.Prompt();
+				AscheScenes.Prompt();
 			}, true);
 		}, enabled : true
 	});
@@ -193,7 +197,7 @@ Scenes.Asche.Prompt = function() {
 				Text.Clear();
 				Text.Add("<i>“Customer come back to Asche if [heshe] wants to sell things, yes?”</i>", parse);
 				Text.Flush();
-				Scenes.Asche.Prompt();
+				AscheScenes.Prompt();
 			}, true);
 		}, enabled : true
 	});
@@ -204,7 +208,7 @@ Scenes.Asche.Prompt = function() {
 			Text.Add("<i>“Ah, customer is interested in magic box?”</i> There’s a soft clink of metal as Asche shifts slightly in her seat. <i>“What is it that good customer desires? Fee is [coin] coins.”</i>", {coin: Text.NumToText(asche.MagicBoxCost()) });
 			Text.Flush();
 			
-			Scenes.Asche.MagicBoxPrompt();
+			AscheScenes.MagicBoxPrompt();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Fortune Telling",
@@ -215,7 +219,7 @@ Scenes.Asche.Prompt = function() {
 			Text.Add("<i>Ah, you are wanting Asche to be divining what future holds for you?”</i> the jackaless says with a smirk and wink. <i>“Can be done, for the price of [coin] coins.”</i>", parse);
 			Text.Flush();
 			
-			Scenes.Asche.FortuneTellingPrompt();
+			AscheScenes.FortuneTellingPrompt();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Sex",
@@ -255,7 +259,7 @@ Scenes.Asche.Prompt = function() {
 	});
 }
 
-Scenes.Asche.Appearance = function() {
+AscheScenes.Appearance = function() {
 	var parse = {
 		handsomepretty : player.mfFem("handsome", "pretty")
 	};
@@ -271,7 +275,7 @@ Scenes.Asche.Appearance = function() {
 	Text.Flush();
 }
 
-Scenes.Asche.TalkPrompt = function() {
+AscheScenes.TalkPrompt = function() {
 	var parse = {
 		handsomepretty : player.mfFem("handsome", "pretty"),
 		heshe: player.mfFem("he", "she"),
@@ -306,12 +310,12 @@ Scenes.Asche.TalkPrompt = function() {
 			
 			asche.flags["Talk"] |= Asche.Talk.Shop;
 			
-			Scenes.Asche.TalkPrompt();
+			AscheScenes.TalkPrompt();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Magic",
 		tooltip : "Discuss Asche’s particular brand of magic with her.",
-		func : Scenes.Asche.Lessons, enabled : true
+		func : AscheScenes.Lessons, enabled : true
 	});
 	options.push({ nameStr : "Herself",
 		tooltip : "Ask the jackaless about herself.",
@@ -340,7 +344,7 @@ Scenes.Asche.TalkPrompt = function() {
 			
 			asche.flags["Talk"] |= Asche.Talk.Herself;
 			
-			Scenes.Asche.TalkPrompt();
+			AscheScenes.TalkPrompt();
 		}, enabled : true
 	});
 	//Requires having asked about herself and shop
@@ -365,7 +369,7 @@ Scenes.Asche.TalkPrompt = function() {
 			
 			asche.flags["Talk"] |= Asche.Talk.Sister;
 			
-			Scenes.Asche.TalkPrompt();
+			AscheScenes.TalkPrompt();
 		}, enabled : (asche.flags["Talk"] & Asche.Talk.Shop) && (asche.flags["Talk"] & Asche.Talk.Herself)
 	});
 	options.push({ nameStr : "Stock",
@@ -383,41 +387,41 @@ Scenes.Asche.TalkPrompt = function() {
 			
 			asche.flags["Talk"] |= Asche.Talk.Stock;
 			
-			Scenes.Asche.TalkPrompt();
+			AscheScenes.TalkPrompt();
 		}, enabled : true
 	});
 	// TODO Default response:
 	options.push({ nameStr : "Tasks",
 		tooltip : "Does she perchance need the services of an adventurer?",
 		func : function() {
-			if(Scenes.Asche.Tasks.Ginseng.IsEligable())
-				Scenes.Asche.Tasks.Ginseng.Initiation();
-			else if(Scenes.Asche.Tasks.Ginseng.IsOn()) {
-				if(Scenes.Asche.Tasks.Ginseng.IsFail())
-					Scenes.Asche.Tasks.Ginseng.Failed();
-				else if(Scenes.Asche.Tasks.Ginseng.IsSuccess())
-					Scenes.Asche.Tasks.Ginseng.Complete();
+			if(AscheScenes.Tasks.Ginseng.IsEligable())
+				AscheScenes.Tasks.Ginseng.Initiation();
+			else if(AscheScenes.Tasks.Ginseng.IsOn()) {
+				if(AscheScenes.Tasks.Ginseng.IsFail())
+					AscheScenes.Tasks.Ginseng.Failed();
+				else if(AscheScenes.Tasks.Ginseng.IsSuccess())
+					AscheScenes.Tasks.Ginseng.Complete();
 				else
-					Scenes.Asche.Tasks.Ginseng.OnTask();
+					AscheScenes.Tasks.Ginseng.OnTask();
 			}
-			else if(Scenes.Asche.Tasks.Nightshade.IsEligable())
-				Scenes.Asche.Tasks.Nightshade.Initiation();
-			else if(Scenes.Asche.Tasks.Nightshade.IsOn()) {
-				if(Scenes.Asche.Tasks.Nightshade.IsSuccess())
-					Scenes.Asche.Tasks.Nightshade.Complete();
+			else if(AscheScenes.Tasks.Nightshade.IsEligable())
+				AscheScenes.Tasks.Nightshade.Initiation();
+			else if(AscheScenes.Tasks.Nightshade.IsOn()) {
+				if(AscheScenes.Tasks.Nightshade.IsSuccess())
+					AscheScenes.Tasks.Nightshade.Complete();
 				else
-					Scenes.Asche.Tasks.Nightshade.OnTask();
+					AscheScenes.Tasks.Nightshade.OnTask();
 			}
-			else if(Scenes.Asche.Tasks.Spring.IsEligable())
-				Scenes.Asche.Tasks.Spring.Initiation();
-			else if(Scenes.Asche.Tasks.Spring.IsOn()) {
-				if(Scenes.Asche.Tasks.Spring.IsSuccess())
-					Scenes.Asche.Tasks.Spring.Complete();
+			else if(AscheScenes.Tasks.Spring.IsEligable())
+				AscheScenes.Tasks.Spring.Initiation();
+			else if(AscheScenes.Tasks.Spring.IsOn()) {
+				if(AscheScenes.Tasks.Spring.IsSuccess())
+					AscheScenes.Tasks.Spring.Complete();
 				else
-					Scenes.Asche.Tasks.Spring.OnTask();
+					AscheScenes.Tasks.Spring.OnTask();
 			}
 			else
-				Scenes.Asche.Tasks.Default();
+				AscheScenes.Tasks.Default();
 		}, enabled : true
 	});
 	Gui.SetButtonsFromList(options, true, function() {
@@ -425,11 +429,11 @@ Scenes.Asche.TalkPrompt = function() {
 		Text.Add("<i>“Customer is having enough of chit-chat, maybe mouth is getting dry?”</i> Leaning forward on the counter, Asche grins at you playfully. <i>“Asche has many nice teas for long conversations, maybe customer can be purchasing some. But is there anything else customer wishes to have to do with Asche before this meeting is over?”</i>", parse);
 		Text.Flush();
 		
-		Scenes.Asche.Prompt();
+		AscheScenes.Prompt();
 	});
 }
 
-Scenes.Asche.Lessons = function() {
+AscheScenes.Lessons = function() {
 	var parse = {
 		handsomepretty : player.mfFem("handsome", "pretty"),
 		heshe: player.mfFem("he", "she"),
@@ -463,7 +467,7 @@ Scenes.Asche.Lessons = function() {
 		asche.flags["Magic"] = Asche.Magic.Components;
 		
 		Text.Flush();
-		Scenes.Asche.TalkPrompt();
+		AscheScenes.TalkPrompt();
 	}
 	// Lesson two - Ritual
 	else if((asche.flags["Magic"] < Asche.Magic.Rituals) && (asche.flags["Tasks"] >= Asche.Tasks.Ginseng_Finished)) {
@@ -501,7 +505,7 @@ Scenes.Asche.Lessons = function() {
 			asche.flags["Magic"] = Asche.Magic.Rituals;
 			
 			Text.Flush();
-			Scenes.Asche.TalkPrompt();
+			AscheScenes.TalkPrompt();
 		});
 	}
 	// Lesson three - Authority
@@ -534,7 +538,7 @@ Scenes.Asche.Lessons = function() {
 		asche.flags["Magic"] = Asche.Magic.Authority;
 		
 		Text.Flush();
-		Scenes.Asche.TalkPrompt();
+		AscheScenes.TalkPrompt();
 	}
 	// Lesson Four - Spirits
 	else if((asche.flags["Magic"] < Asche.Magic.Spirits) && (asche.flags["Tasks"] >= Asche.Tasks.Spring_Finished) && Scenes.Global.DefeatedOrchid()) {
@@ -575,7 +579,7 @@ Scenes.Asche.Lessons = function() {
 		asche.flags["Magic"] = Asche.Magic.Spirits;
 		
 		Text.Flush();
-		Scenes.Asche.TalkPrompt();
+		AscheScenes.TalkPrompt();
 	}
 	//TODO more lessons
 	else {
@@ -583,12 +587,12 @@ Scenes.Asche.Lessons = function() {
 		Text.NL();
 		Text.Add("<i>“Maybe it is being best for good customer if [heshe] is coming back after Asche is finding opportunity to be sending [himher] to experience it in field.”</i>", parse);
 		Text.Flush();
-		Scenes.Asche.TalkPrompt();
+		AscheScenes.TalkPrompt();
 	}
 	
 }
 
-Scenes.Asche.FortuneTellingPrompt = function() {
+AscheScenes.FortuneTellingPrompt = function() {
 	var parse = {
 		handsomepretty : player.mfFem("handsome", "pretty"),
 		HeShe: player.mfFem("He", "She"),
@@ -679,7 +683,7 @@ Scenes.Asche.FortuneTellingPrompt = function() {
 			party.coin -= cost;
 			rigard.MagicShop.totalBought += cost;
 			
-			Scenes.Asche.FortuneTellingPrompt();
+			AscheScenes.FortuneTellingPrompt();
 		}, enabled : party.coin >= cost
 	});
 	options.push({ nameStr : "Fate",
@@ -801,7 +805,7 @@ What? Why?
 			
 			Text.Flush();
 			
-			Scenes.Asche.FortuneTellingPrompt();
+			AscheScenes.FortuneTellingPrompt();
 		}, enabled : party.coin >= cost
 	});
 	options.push({ nameStr : "Explain",
@@ -821,7 +825,7 @@ What? Why?
 			Text.Add("<i>“That aside, Asche can tell customer [hisher] fate, or fortune. Latter is light and easy to do, maybe small prediction of what is going to be happening later when customer goes to bed, or whether customer is going to be lucky in love. Fate is…”</i> The jackaless grows more somber, her lips pulling into a thin, straight line. <i>“More important, for lack of better word to be describing it. Asche knows what she is saying just now, but fate is not so easily brushed off, is not something done for fun. If you are taking such things lightly or not believing what this jackaless is saying, please not to be asking Asche to read your fate.”</i>.", parse);
 			Text.Flush();
 			
-			Scenes.Asche.FortuneTellingPrompt();
+			AscheScenes.FortuneTellingPrompt();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Never Mind",
@@ -831,7 +835,7 @@ What? Why?
 			Text.Add("<i>“As customer is wishing.”</i> Is that a hint of sourness you hear in her voice? <i>“Is there any other business that [heshe] has with Asche?”</i>", parse);
 			Text.Flush();
 			
-			Scenes.Asche.Prompt();
+			AscheScenes.Prompt();
 		}, enabled : true
 	});
 	
@@ -839,7 +843,7 @@ What? Why?
 }
 
 
-Scenes.Asche.MagicBoxPrompt = function() {
+AscheScenes.MagicBoxPrompt = function() {
 	var parse = {
 		coin : Text.NumToText(asche.MagicBoxCost()),
 		heshe : player.mfFem("he", "she"),
@@ -852,7 +856,7 @@ Scenes.Asche.MagicBoxPrompt = function() {
 		options.push({ nameStr : "Grab",
 			tooltip : "Stick your hand into limbo and see what you can draw out.",
 			func : function() {
-				Scenes.Asche.MagicBoxGrab();
+				AscheScenes.MagicBoxGrab();
 			}, enabled : party.coin >= asche.MagicBoxCost()
 		});
 	}
@@ -869,7 +873,7 @@ Scenes.Asche.MagicBoxPrompt = function() {
 			
 			asche.flags["Talk"] |= Asche.Talk.Box;
 			
-			Scenes.Asche.MagicBoxPrompt();
+			AscheScenes.MagicBoxPrompt();
 		}, enabled : true
 	});
 	Gui.SetButtonsFromList(options, true, function() {
@@ -877,11 +881,11 @@ Scenes.Asche.MagicBoxPrompt = function() {
 		Text.Add("Seeing you reconsider, Asche puts away the box back underneath the counter. <i>“Not feeling lucky today? Is all right, Asche understands. Is there anything this jackaless can be helping good customer with?”</i>", parse);
 		Text.Flush();
 		
-		Scenes.Asche.Prompt();
+		AscheScenes.Prompt();
 	});
 }
 
-Scenes.Asche.MagicBoxGrab = function() {
+AscheScenes.MagicBoxGrab = function() {
 	var parse = {
 		
 	};
@@ -896,13 +900,13 @@ Scenes.Asche.MagicBoxGrab = function() {
 	Text.NL();
 	
 	var scenes = new EncounterTable();
-	scenes.AddEnc(Scenes.Asche.MagicBoxLoss, 1.0, function() { return true; });
-	scenes.AddEnc(Scenes.Asche.MagicBoxWin, 1.0, function() { return true; });
+	scenes.AddEnc(AscheScenes.MagicBoxLoss, 1.0, function() { return true; });
+	scenes.AddEnc(AscheScenes.MagicBoxWin, 1.0, function() { return true; });
 	
 	scenes.Get();
 }
 
-Scenes.Asche.MagicBoxWin = function() {
+AscheScenes.MagicBoxWin = function() {
 	var parse = {
 		himher : player.mfFem("him", "her"),
 		heshe : player.mfFem("he", "she")
@@ -919,7 +923,7 @@ Scenes.Asche.MagicBoxWin = function() {
 		
 		Text.Add("<b>Acquired [lDesc]!</b>", {lDesc : item.lDesc()});
 		
-		Scenes.Asche.MagicBoxRepeat();
+		AscheScenes.MagicBoxRepeat();
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
 		Text.Add("Your hand closes about an irregularly-shaped object, and you draw the item out of the box. Seems like it’s one of Asche’s sundry supplies...", parse);
@@ -935,7 +939,7 @@ Scenes.Asche.MagicBoxWin = function() {
 		
 		Text.Add("<b>Acquired [lDesc]!</b>", {lDesc : item.lDesc()});
 		
-		Scenes.Asche.MagicBoxRepeat();
+		AscheScenes.MagicBoxRepeat();
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
 		Text.Add("Feeling something smooth under your fingertips, you close in on the object and pull it out of the box’s indeterminate depths. It’s a small leather pouch, and you draw open the strings to reveal a handful of alchemical ingredients. Not the best value that your money could have brought you, but more reagents on hand are always welcome.", parse);
@@ -949,7 +953,7 @@ Scenes.Asche.MagicBoxWin = function() {
 			Text.Add("<br><b>Acquired [lDesc]!</b>", {lDesc : item.lDesc()});
 		});
 		
-		Scenes.Asche.MagicBoxRepeat();
+		AscheScenes.MagicBoxRepeat();
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
 		Text.Add("You find your hand meeting some kind of stuffed toy, its soft form almost seeming to jump into your grasp as you pull the strange thing out of the swirling darkness. Looking at what you’ve found, you blink as you find that you’re holding a miniature version of yourself, the little plush doll appearing to be an exact replica of you as you are now, right down to the smallest detail. Eyeing the unusual doll carefully, it seems almost alive, which is strangely disconcerting in a way…", parse);
@@ -970,7 +974,7 @@ Scenes.Asche.MagicBoxWin = function() {
 		
 		asche.flags["Talk"] |= Asche.Talk.BoxDoll;
 		
-		Scenes.Asche.MagicBoxRepeat();
+		AscheScenes.MagicBoxRepeat();
 	}, 1.0, function() { return !(asche.flags["Talk"] & Asche.Talk.BoxDoll); });
 	scenes.AddEnc(function() {
 		Text.Add("You dig around for a bit in the darkness, not really finding anything to your liking, but eventually, your fingers close about something cold and slender, and you pull it out. It’s a thin glass vial of bluish liquid labeled “Lewton’s Concentrate”, but the potion is clearly old and stale; who knows what might have happened to it after sitting around for so long. Best to decide what to do with it while there’s trained help on hand - do you drink it?", parse);
@@ -1011,7 +1015,7 @@ Scenes.Asche.MagicBoxWin = function() {
 				
 				scenes.Get();
 				
-				Scenes.Asche.MagicBoxRepeat();
+				AscheScenes.MagicBoxRepeat();
 			}, enabled : true
 		});
 		options.push({ nameStr : "No",
@@ -1019,7 +1023,7 @@ Scenes.Asche.MagicBoxWin = function() {
 			func : function() {
 				Text.Clear();
 				Text.Add("Shaking your head, you pass the expired elixir to Asche, who slides it beneath the counter. <i>“Is good thing you decided not to drink. Potions which sit too long can cause problems, ingredients get old, properties are changing…”</i> The jackaless shrugs and smiles. <i>“Asche will dispose of it properly, rather than just pour it out on ground. Most irresponsible way of dealing with old potions, is it not? Sad to say, though, Asche cannot refund your money for use of box.”</i>", parse);
-				Scenes.Asche.MagicBoxRepeat();
+				AscheScenes.MagicBoxRepeat();
 			}, enabled : true
 		});
 		Gui.SetButtonsFromList(options, false, null);
@@ -1045,7 +1049,7 @@ Scenes.Asche.MagicBoxWin = function() {
 				Text.Add("Books are books, wherever you find them. Asche coughs loudly when you elect to keep the salacious novel on you, but keeps any comments to herself as you pack it away. Maybe it’ll come in useful later on… or at the very least, keep you company on those cold, lonely nights.", parse);
 				party.Inv().AddItem(Items.Accessories.TrashyNovel);
 				
-				Scenes.Asche.MagicBoxRepeat();
+				AscheScenes.MagicBoxRepeat();
 			}, enabled : true
 		});
 		options.push({ nameStr : "Toss",
@@ -1054,7 +1058,7 @@ Scenes.Asche.MagicBoxWin = function() {
 				Text.Clear();
 				Text.Add("Shaking your head, you toss the novel back into the box. You certainly don’t need a piece of dead weight on you. The book plunges into the swirling depths of the box and vanishes without a trace. There’s already plenty of written pornography floating about - more of the same old trashy stuff isn’t going to do the world any favors, right?", parse);
 				
-				Scenes.Asche.MagicBoxRepeat();
+				AscheScenes.MagicBoxRepeat();
 			}, enabled : true
 		});
 		Gui.SetButtonsFromList(options, false, null);
@@ -1081,13 +1085,13 @@ Scenes.Asche.MagicBoxWin = function() {
 			
 			Text.Add("<b>Acquired a glass sword!</b>", parse);
 		}
-		Scenes.Asche.MagicBoxRepeat();
+		AscheScenes.MagicBoxRepeat();
 	}, 0.5, function() { return true; });
 	
 	scenes.Get();
 }
 
-Scenes.Asche.MagicBoxLoss = function() {
+AscheScenes.MagicBoxLoss = function() {
 	var parse = {
 		
 	};
@@ -1143,10 +1147,10 @@ Scenes.Asche.MagicBoxLoss = function() {
 	
 	scenes.Get();
 	
-	Scenes.Asche.MagicBoxRepeat();
+	AscheScenes.MagicBoxRepeat();
 }
 
-Scenes.Asche.MagicBoxRepeat = function() {
+AscheScenes.MagicBoxRepeat = function() {
 	var parse = {
 		coin : Text.NumToText(asche.MagicBoxCost())
 	};
@@ -1160,7 +1164,7 @@ Scenes.Asche.MagicBoxRepeat = function() {
 	options.push({ nameStr : "Yes",
 		tooltip : "Why not? Another go it is!",
 		func : function() {
-			Scenes.Asche.MagicBoxGrab();
+			AscheScenes.MagicBoxGrab();
 		}, enabled : party.coin >= asche.MagicBoxCost()
 	});
 	options.push({ nameStr : "No",
@@ -1170,10 +1174,10 @@ Scenes.Asche.MagicBoxRepeat = function() {
 			Text.Add("Deciding that you’ve played enough, you gesture for Asche to put away the box. Lady Luck gets tired having to carry one particular person for too long, and you feel you’ve exhausted your share of good fortune for now. Maybe later.", parse);
 			Text.Flush();
 			
-			Scenes.Asche.Prompt();
+			AscheScenes.Prompt();
 		}, enabled : true
 	});
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-export { Asche };
+export { Asche, AscheScenes };

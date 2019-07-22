@@ -4,18 +4,18 @@
 //
 
 import { world } from '../../world';
-import { Event, Link, Scenes, EncounterTable } from '../../event';
+import { Event, Link, EncounterTable } from '../../event';
 import { Shop } from '../../shop';
 import { Items } from '../../item';
 
 let MagicShopLoc = new Event("Asche's Fanciful Trinkets");
 
-Scenes.Rigard.MagicShop = {}
-Scenes.Rigard.MagicShop.IsOpen = function() {
+let MagicShopScenes = {}
+MagicShopScenes.IsOpen = function() {
 	return (world.time.hour >= 10) && !rigard.UnderLockdown();
 }
 
-Scenes.Rigard.MagicShop.CreateShop = function() {
+MagicShopScenes.CreateShop = function() {
 	var buySuccessFunc = function(item, cost, num) {
 		var parse = {};
 		
@@ -212,9 +212,9 @@ Scenes.Rigard.MagicShop.CreateShop = function() {
 	shop.AddItem(Items.Weapons.MageStaff, 5);
 	shop.AddItem(Items.Weapons.AmberStaff, 5);
 	
-	Scenes.Rigard.MagicShop.Shop = shop;
+	MagicShopScenes.Shop = shop;
 }
-Scenes.Rigard.MagicShop.CreateShop();
+MagicShopScenes.CreateShop();
 
 MagicShopLoc.description = function() {
 	var parse = {
@@ -298,4 +298,4 @@ MagicShopLoc.onEntry = function() {
 		PrintDefaultOptions();
 }
 
-export { MagicShopLoc };
+export { MagicShopLoc, MagicShopScenes };

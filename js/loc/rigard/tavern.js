@@ -7,7 +7,7 @@ let TavernLoc = {
 	common   : new Event("Maidens' Bane")
 };
 
-Scenes.Barnaby = {};
+let BarnabyScenes = {};
 //Barnaby variable kept in rigard.js
 
 
@@ -32,7 +32,7 @@ TavernLoc.common.events.push(new Link(
 	function() { return rigard.MetBarnaby() ? "Barnaby" : "Bartender"; }, true, true,
 	null,
 	function() {
-		Scenes.Barnaby.Approach();
+		BarnabyScenes.Approach();
 	}
 ));
 
@@ -196,7 +196,7 @@ TavernLoc.common.DrunkHandler = function() {
 			}
 			Text.NL();
 			
-			Scenes.Barnaby.BlowjobEntrypoint(function() {
+			BarnabyScenes.BlowjobEntrypoint(function() {
 				if(player.sex.gBlow < 5) {
 					Text.Add("<i>“I’ll be straight with you: this wasn’t such a spectacular job.”</i>", parse);
 					Text.NL();
@@ -249,7 +249,7 @@ TavernLoc.common.DrunkHandler = function() {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Barnaby.Approach = function() {
+BarnabyScenes.Approach = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -280,10 +280,10 @@ Scenes.Barnaby.Approach = function() {
 	}
 	Text.Flush();
 	
-	Scenes.Barnaby.Prompt(false);
+	BarnabyScenes.Prompt(false);
 }
 
-Scenes.Barnaby.Prompt = function(talkative) {
+BarnabyScenes.Prompt = function(talkative) {
 	var coin1 = 2;
 	var coin2 = 5;
 	var coin3 = 10;
@@ -317,7 +317,7 @@ Scenes.Barnaby.Prompt = function(talkative) {
 			world.TimeStep({minute: 10});
 			var drunk = player.Drink(0.8);
 			if(drunk) return;
-			Scenes.Barnaby.Prompt(true);
+			BarnabyScenes.Prompt(true);
 		}
 	});
 	options.push({nameStr : "Mead",
@@ -342,7 +342,7 @@ Scenes.Barnaby.Prompt = function(talkative) {
 			world.TimeStep({minute: 10});
 			var drunk = player.Drink(1);
 			if(drunk) return;
-			Scenes.Barnaby.Prompt(true);
+			BarnabyScenes.Prompt(true);
 		}
 	});
 	options.push({nameStr : "Spirits",
@@ -369,7 +369,7 @@ Scenes.Barnaby.Prompt = function(talkative) {
 			world.TimeStep({minute: 10});
 			var drunk = player.Drink(1.4);
 			if(drunk) return;
-			Scenes.Barnaby.Prompt(true);
+			BarnabyScenes.Prompt(true);
 		}
 	});
 	options.push({nameStr : "Rumors",
@@ -471,7 +471,7 @@ Scenes.Barnaby.Prompt = function(talkative) {
 			}
 			world.TimeStep({minute: 5});
 			Text.Flush();
-			Scenes.Barnaby.Prompt(talkative);
+			BarnabyScenes.Prompt(talkative);
 		}
 	});
 	options.push({nameStr : "Chat",
@@ -482,14 +482,14 @@ Scenes.Barnaby.Prompt = function(talkative) {
 			if(talkative) {
 				Text.Add("<i>“Tell you about what?”</i>", parse);
 				Text.Flush();
-				Scenes.Barnaby.ChatPrompt();
+				BarnabyScenes.ChatPrompt();
 			}
 			else {
 				Text.Add("<i>“Buy something first and I’ll consider talking to you, otherwise get out of my bar. I don’t have time to chit chat with everyone that passes by.”</i>", parse);
 				Text.NL();
 				Text.Add("Quite the unfriendly sort, but looking at him you can tell he won’t budge on this. If you want to coax him into talking to you, you better suck it up and buy some drinks.", parse);
 				Text.Flush();
-				Scenes.Barnaby.Prompt();
+				BarnabyScenes.Prompt();
 			}
 		}
 	});
@@ -545,7 +545,7 @@ Scenes.Barnaby.Prompt = function(talkative) {
 				Text.Add("You thought he would see reason. And you quickly make your way behind the counter, dropping into your now-expected spot under the bartop so that you can reach for his cock.", parse);
 			}
 			Text.NL();
-			Scenes.Barnaby.BlowjobEntrypoint(function() {
+			BarnabyScenes.BlowjobEntrypoint(function() {
 				if(player.sex.gBlow < 5) {
 					Text.Add("<i>“It was nice getting the weight off my balls, and you weren’t too bad at it.”</i>", parse);
 					Text.NL();
@@ -631,7 +631,7 @@ Scenes.Barnaby.Prompt = function(talkative) {
 	});
 }
 
-Scenes.Barnaby.ChatPrompt = function() {
+BarnabyScenes.ChatPrompt = function() {
 	var parse = {
 		
 	};
@@ -706,7 +706,7 @@ Scenes.Barnaby.ChatPrompt = function() {
 			
 			world.TimeStep({minute: 10});
 			
-			Scenes.Barnaby.ChatPrompt();
+			BarnabyScenes.ChatPrompt();
 		}
 	});
 	if(zina.Met() && !zina.Recruited()) {
@@ -772,7 +772,7 @@ Scenes.Barnaby.ChatPrompt = function() {
 				
 				world.TimeStep({minute: 10});
 
-				Scenes.Barnaby.ChatPrompt();
+				BarnabyScenes.ChatPrompt();
 			}
 		});
 	}
@@ -782,14 +782,14 @@ Scenes.Barnaby.ChatPrompt = function() {
 		Text.NL();
 		Text.Add("He rolls his eyes when he hears that, but otherwise shows no reaction.", parse);
 		Text.Flush();
-		Scenes.Barnaby.Prompt(true);
+		BarnabyScenes.Prompt(true);
 	});
 }
 
 
 
 
-Scenes.Barnaby.BlowjobEntrypoint = function(func) {
+BarnabyScenes.BlowjobEntrypoint = function(func) {
 	var parse = {
 		playername : player.name,
 		boygirl    : player.mfTrue("boy", "girl"),
@@ -1255,4 +1255,4 @@ Scenes.Barnaby.BlowjobEntrypoint = function(func) {
 	});
 }
 
-export { TavernLoc };
+export { TavernLoc, BarnabyScenes };

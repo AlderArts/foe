@@ -1,18 +1,18 @@
 
 import { world } from '../../world';
-import { Event, Link, Scenes } from '../../event';
+import { Event, Link } from '../../event';
 
 let BrothelLoc = {
 	brothel  : new Event("Brothel"),
 	cellar   : new Event("Brothel: Cellar")
 };
 
-Scenes.Brothel = {};
-Scenes.Brothel.IsOpen = function() {
+let BrothelScenes = {};
+BrothelScenes.IsOpen = function() {
 	return !rigard.UnderLockdown(); // No closed hours
 }
 
-Scenes.Brothel.NewMStrap = function() {
+BrothelScenes.NewMStrap = function() {
 	var cock = new Cock(Race.Human);
 	//#PC now has a 9” by 2” thick human cock.
 	cock.length.base = 23;
@@ -93,12 +93,12 @@ BrothelLoc.brothel.events.push(new Link(
 
 BrothelLoc.brothel.onEntry = function() {
 	if(rigard.Brothel["Visit"] == 0)
-		Scenes.Brothel.First();
+		BrothelScenes.First();
 	else
 		PrintDefaultOptions();
 }
 
-Scenes.Brothel.First = function() {
+BrothelScenes.First = function() {
 	var parse = {
 		handsomePretty : player.mfFem("handsome", "pretty"),
 		playername : player.name,
@@ -166,7 +166,7 @@ Scenes.Brothel.First = function() {
 	});
 }
 
-Scenes.Brothel.MStrap = function() {
+BrothelScenes.MStrap = function() {
 	var parse = {
 	};
 	parse = player.ParserTags(parse);
@@ -222,11 +222,11 @@ Scenes.Brothel.MStrap = function() {
 		Text.NL();
 		Text.Add("Unthinkingly, you check on her to be sure she’s alright, then slowly rise from the bed. Looks like your new appendage is the real deal, then. Carefully, you pull your [botarmor] back on, then slip quietly out of the room, leaving your partner to sleep the sleep of the soundly fucked behind you.", parse);
 		
-		player.body.cock.push(Scenes.Brothel.NewMStrap());
+		player.body.cock.push(BrothelScenes.NewMStrap());
 	}
 	Text.Flush();
 	
 	Gui.NextPrompt();
 }
 
-export { BrothelLoc };
+export { BrothelLoc, BrothelScenes };

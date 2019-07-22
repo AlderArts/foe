@@ -12,7 +12,7 @@ let InnLoc = {
 	penthouse : new Event("Penthouse")
 };
 
-Scenes.Rigard.LB = {};
+let LBScenes = {};
 
 Rigard.LB = {};
 Rigard.LB.BusyState = {
@@ -233,7 +233,7 @@ InnLoc.common.onEntry = function(preventClear, oldLocation) {
 }
 
 // SCENES
-Scenes.Rigard.LB.OrderFood = function() {
+LBScenes.OrderFood = function() {
 	var parse = {
 		sirmadam : player.mfFem("sir", "madam"),
 		dname : rigard.LB["Efri"] == 0 ? "the girl" : "Efri"
@@ -318,7 +318,7 @@ Scenes.Rigard.LB.OrderFood = function() {
 	Text.Add("<i>“What can I do for you today, [sirmadam]?”</i> [heshe] asks. [HeShe] mentions some of the dishes and drinks they are serving today, and you feel your mouth watering slightly at the delicious offerings.", parse);
 	Text.NL();
 	
-	Scenes.Rigard.LB.FoodGet();
+	LBScenes.FoodGet();
 	
 	Text.Add(" Still, you have other things to get back to. Reluctantly setting the dishes aside, you pay for your meal", parse);
 	if(party.Two())
@@ -341,7 +341,7 @@ Scenes.Rigard.LB.OrderFood = function() {
 	Gui.NextPrompt();
 }
 
-Scenes.Rigard.LB.FoodGet = function() {
+LBScenes.FoodGet = function() {
 	var parse = {};
 	if(party.Two()) {
 		var p1 = party.Get(1);
@@ -423,7 +423,7 @@ Scenes.Rigard.LB.FoodGet = function() {
 	Text.Add("When you are done, you find yourself both remarkably sated and wishing for more of the great cooking.");
 }
 
-Scenes.Rigard.LB.OrvinPrompt = function() {
+LBScenes.OrvinPrompt = function() {
 	var parse = {
 		sirmadam : player.mfFem("sir", "madam"),
 		roomPrice : Text.NumToText(Rigard.LB.RoomCost()),
@@ -469,7 +469,7 @@ Scenes.Rigard.LB.OrvinPrompt = function() {
 				}
 				Text.Flush();
 				
-				Scenes.Rigard.LB.OrvinTalkPrompt(innPrompt);
+				LBScenes.OrvinTalkPrompt(innPrompt);
 			}, enabled : true,
 			tooltip : "Chat with the innkeeper."
 		});
@@ -529,7 +529,7 @@ Scenes.Rigard.LB.OrvinPrompt = function() {
 							Text.NL();
 							Text.Add("You decide to eat the meal right away. ", parse);
 							
-							Scenes.Rigard.LB.FoodGet();
+							LBScenes.FoodGet();
 							
 							Text.Add(" You set the dishes aside reluctantly, and get ready to go on your way.", parse);
 							Text.NL();
@@ -572,7 +572,7 @@ Scenes.Rigard.LB.OrvinPrompt = function() {
 				Text.NL();
 				Text.Add("<i>“We have a lot in stock,”</i> he explains, <i>“but I try to only have a few things on tap at a time. Makes it neater. Let’s see, for today, it’s...”</i>", parse);
 				
-				Scenes.Rigard.LB.DrinksPrompt(innPrompt);
+				LBScenes.DrinksPrompt(innPrompt);
 				
 				Text.NL();
 				Text.Add("<i>“And that’s it. Anything to your taste?”</i>", parse);
@@ -598,7 +598,7 @@ Scenes.Rigard.LB.OrvinPrompt = function() {
 	innPrompt();
 }
 
-Scenes.Rigard.LB.OrvinTalkPrompt = function(innPrompt) {
+LBScenes.OrvinTalkPrompt = function(innPrompt) {
 	var parse = {
 		
 	};
@@ -669,7 +669,7 @@ Scenes.Rigard.LB.OrvinTalkPrompt = function(innPrompt) {
 			
 			Text.Flush();
 			
-			Scenes.Rigard.LB.OrvinTalkPrompt(innPrompt);
+			LBScenes.OrvinTalkPrompt(innPrompt);
 		}, enabled : true,
 		tooltip : "Ask him about the inn."
 	});
@@ -687,7 +687,7 @@ Scenes.Rigard.LB.OrvinTalkPrompt = function(innPrompt) {
 				Text.Flush();
 				
 				rigard.LB["CityTalk"] = 1;
-				Scenes.Rigard.LB.OrvinTalkPrompt(innPrompt);
+				LBScenes.OrvinTalkPrompt(innPrompt);
 			}, enabled : true,
 			tooltip : "Ask him about Rigard."
 		});
@@ -708,7 +708,7 @@ Scenes.Rigard.LB.OrvinTalkPrompt = function(innPrompt) {
 				Text.NL();
 				Text.Add("<i>“An annoying piece of business, whatever the cause may be. I really hope someone gets to the bottom of it sooner rather than later.”</i>", parse);
 				Text.Flush();
-				Scenes.Rigard.LB.OrvinTalkPrompt(innPrompt);
+				LBScenes.OrvinTalkPrompt(innPrompt);
 			}, enabled : true,
 			tooltip : "Ask him about the missing caravans."
 		});
@@ -723,7 +723,7 @@ Scenes.Rigard.LB.OrvinTalkPrompt = function(innPrompt) {
 				Text.NL();
 				Text.Add("<i>“What the reality of the situation is no one seems to know. But I expect we’ll find out soon enough,”</i> he concludes, looking grim.", parse);
 				Text.Flush();
-				Scenes.Rigard.LB.OrvinTalkPrompt(innPrompt);
+				LBScenes.OrvinTalkPrompt(innPrompt);
 			}, enabled : true,
 			tooltip : "Ask him about the outlaws."
 		});
@@ -742,7 +742,7 @@ Scenes.Rigard.LB.OrvinTalkPrompt = function(innPrompt) {
 				Text.NL();
 				Text.Add("<i>“It’s said some of them take money from nobles to beat up any commoner they’re asked to. Someone in the lower districts had both his arms broken and had to stay in bed for three months to recover. If this keeps up, someone’s bound to end up dead.”</i> He shakes his head in disappointment.", parse);
 				Text.Flush();
-				Scenes.Rigard.LB.OrvinTalkPrompt(innPrompt);
+				LBScenes.OrvinTalkPrompt(innPrompt);
 			}, enabled : true,
 			tooltip : "Ask him about the Royal Guards."
 		});
@@ -762,7 +762,7 @@ Scenes.Rigard.LB.OrvinTalkPrompt = function(innPrompt) {
 				Text.NL();
 				Text.Add("<i>“Other than that, I can’t tell you much. He gets a beer, and drinks it slowly. Always pays right away, and doesn’t bother the staff, so I take his money and don’t bother him.”</i> He frowns, thinking. <i>“I’m just afraid that one of these days he’ll do something. I can’t say why, but that’s the feeling I get from him.”</i>", parse);
 				Text.Flush();
-				Scenes.Rigard.LB.OrvinTalkPrompt(innPrompt);
+				LBScenes.OrvinTalkPrompt(innPrompt);
 			}, enabled : true,
 			tooltip : Text.Parse("Ask him about the stranger [saw]sitting by the wall.", { saw : leiPresent ? "" : "you saw "})
 		});
@@ -798,7 +798,7 @@ Scenes.Rigard.LB.OrvinTalkPrompt = function(innPrompt) {
 				Text.Add("Orvin looks rather worried, despite his words.", parse);
 				
 				Text.Flush();
-				Scenes.Rigard.LB.OrvinTalkPrompt(innPrompt);
+				LBScenes.OrvinTalkPrompt(innPrompt);
 			}, enabled : true,
 			tooltip : "Ask him if he knows anything about Lei."
 		});
@@ -847,7 +847,7 @@ Scenes.Rigard.LB.OrvinTalkPrompt = function(innPrompt) {
 						Text.Add(" <i>“So you can see why I was upset that you hurt her. Hurt it.”</i>", parse);
 				}
 				Text.Flush();
-				Scenes.Rigard.LB.OrvinTalkPrompt(innPrompt);
+				LBScenes.OrvinTalkPrompt(innPrompt);
 			}, enabled : true,
 			tooltip : "Ask about the apparently sentient room 369."
 		});
@@ -915,7 +915,7 @@ Scenes.Rigard.LB.OrvinTalkPrompt = function(innPrompt) {
 			scenes[sceneId]();
 			
 			Text.Flush();
-			Scenes.Rigard.LB.OrvinTalkPrompt(innPrompt);
+			LBScenes.OrvinTalkPrompt(innPrompt);
 		}, enabled : true,
 		tooltip : "Ask him if there are any interesting rumors going around."
 	});
@@ -964,7 +964,7 @@ Scenes.Rigard.LB.OrvinTalkPrompt = function(innPrompt) {
 			else
 				Text.Add("<i>“Her? She’s rather pretty, isn’t she? Her kind isn’t exactly my cup of tea, but I’ll give credit where credit is due. This place has been a bit more lively since she showed up,”</i> he explains. <i>“Apparently she’s here to take care of some family business. Poor girl had nowhere to stay and didn’t have any money when she got here, so I offered to let her stay as a waitress.”</i>", parse);
 			Text.Flush();
-			Scenes.Rigard.LB.OrvinTalkPrompt(innPrompt);
+			LBScenes.OrvinTalkPrompt(innPrompt);
 		}, enabled : true,
 		tooltip : Text.Parse("Ask him about the vixen who work[sed] at the inn.", {sed: rigard.Krawitz["Q"] < Rigard.KrawitzQ.CaughtTerry ? "s" : "ed"})
 	});
@@ -977,7 +977,7 @@ Scenes.Rigard.LB.OrvinTalkPrompt = function(innPrompt) {
 	});
 }
 
-Scenes.Rigard.LB.EfriPrompt = function() {
+LBScenes.EfriPrompt = function() {
 	var parse = {
 		
 	};
@@ -989,7 +989,7 @@ Scenes.Rigard.LB.EfriPrompt = function() {
 	Gui.NextPrompt();
 	return;
 	
-	var task = Scenes.Rigard.LB.efriaction;
+	var task = LBScenes.efriaction;
 	
 	Text.Clear();
 	Text.Add("", parse);
@@ -1020,7 +1020,7 @@ Scenes.Rigard.LB.EfriPrompt = function() {
 	Gui.SetButtonsFromList(options, true);
 }
 
-Scenes.Rigard.LB.DrinksPrompt = function(innPrompt) {
+LBScenes.DrinksPrompt = function(innPrompt) {
 	var parse = {
 		playername : player.name,
 		IkName   : !Rigard.LB.KnowsOrvin() ? "The innkeeper" : "Orvin",
@@ -1497,7 +1497,7 @@ Scenes.Rigard.LB.DrinksPrompt = function(innPrompt) {
 	});
 }
 
-Scenes.Rigard.LB.GotoRoom = function() {
+LBScenes.GotoRoom = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -1525,14 +1525,14 @@ Scenes.Rigard.LB.GotoRoom = function() {
 		if(party.Num() == 1) {
 			Text.Add(" and head inside.", parse);
 			Text.Flush();
-			Scenes.Rigard.LB.RegularRoom();
+			LBScenes.RegularRoom();
 		}
 		else if(party.Num() == 2) {
 			var p1 = party.Get(1);
 			parse["comp"] = p1.name;
 			Text.Add(" and lead [comp] inside.", parse);
 			Text.Flush();
-			Scenes.Rigard.LB.RegularRoom(p1);
+			LBScenes.RegularRoom(p1);
 		}
 		else { //Party > 2
 			parse["s"] = party.Num() > 3 ? "s" : "";
@@ -1549,7 +1549,7 @@ Scenes.Rigard.LB.GotoRoom = function() {
 						Text.NL();
 						Text.Add("You decide that [comp] can share your room, and lead [chimher] inside.", { comp : obj.name, chimher : obj.himher() });
 						Text.Flush();
-						Scenes.Rigard.LB.RegularRoom(obj);
+						LBScenes.RegularRoom(obj);
 					}, enabled : true,
 					obj : comp,
 					tooltip : Text.Parse("Have [comp] stay with you tonight.", parse)
@@ -1560,7 +1560,7 @@ Scenes.Rigard.LB.GotoRoom = function() {
 					Text.NL();
 					Text.Add("You decide you’ll just take this room for yourself, and head inside.", parse);
 					Text.Flush();
-					Scenes.Rigard.LB.RegularRoom();
+					LBScenes.RegularRoom();
 				}, enabled : true,
 				tooltip : "Have your companions share the other room."
 			});
@@ -1640,7 +1640,7 @@ Scenes.Rigard.LB.GotoRoom = function() {
 					Text.Add("With [comp]’s sure steps leading the way, you find your way to the room without incident.", parse);
 					Text.Flush();
 					
-					Scenes.Rigard.LB.RegularRoom(comp);
+					LBScenes.RegularRoom(comp);
 				}, enabled : true,
 				tooltip : Text.Parse("Accept [comp]’s help in getting to your room.", parse)
 			});
@@ -1652,7 +1652,7 @@ Scenes.Rigard.LB.GotoRoom = function() {
 					Text.Add("It takes you a while, but after wandering around the halls and going up and down stairs a few times, you finally reach a room that you’re sure is the one the innkeeper gave you.");
 					Text.Flush();
 					
-					Scenes.Rigard.LB.RandomRoom(comp);
+					LBScenes.RandomRoom(comp);
 				}, enabled : true,
 				tooltip : "You can find the way to your room on your own. Probably."
 			});
@@ -1662,7 +1662,7 @@ Scenes.Rigard.LB.GotoRoom = function() {
 			Text.Add("Pushing aside your uncertainty, you press onward. You’re sure you’ll find it somehow. ");
 			Text.Add("It takes you a while, but after wandering around the halls and going up and down stairs a few times, you finally reach a room that you’re sure is the one the innkeeper gave you.");
 			
-			Scenes.Rigard.LB.RandomRoom();
+			LBScenes.RandomRoom();
 		}
 		
 		Text.Flush();
@@ -1671,7 +1671,7 @@ Scenes.Rigard.LB.GotoRoom = function() {
 
 
 
-Scenes.Rigard.LB.RandomRoom = function(companion) {
+LBScenes.RandomRoom = function(companion) {
 	var parse = {
 		roomNr : rigard.LB["RoomNr"]
 	};
@@ -1680,7 +1680,7 @@ Scenes.Rigard.LB.RandomRoom = function(companion) {
 		parse["c"] = companion ? Text.Parse(", [comp] behind you", {comp: companion.name}) : "";
 		Text.Add("Room [roomNr] - perfect. You shuffle inside[c], happy with your accomplishment.", parse);
 		Text.Flush();
-		Scenes.Rigard.LB.RegularRoom(companion);
+		LBScenes.RegularRoom(companion);
 	}
 	else if(room69.flags["Rel"] == Room69.RelFlags.NotMet) {
 		// First time
@@ -1700,11 +1700,11 @@ Scenes.Rigard.LB.RandomRoom = function(companion) {
 		parse["c"] = companion ? Text.Parse(", [comp] behind you", {comp: companion.name}) : "";
 		Text.Add("Room [roomNr] - perfect. You shuffle inside[c], happy with your accomplishment.", parse);
 		Text.Flush();
-		Scenes.Rigard.LB.RegularRoom(companion);
+		LBScenes.RegularRoom(companion);
 	}
 }
 
-Scenes.Rigard.LB.RegularRoom = function(companion) {
+LBScenes.RegularRoom = function(companion) {
 	var room = InnLoc.room;
 	rigard.LB["RoomComp"] = party.GetSlot(companion);
 	MoveToLocation(room, {minute : 5});
@@ -1824,7 +1824,7 @@ InnLoc.common.events.push(new Link(
 		Text.NL();
 		Text.Flush();
 	},
-	Scenes.Rigard.LB.OrderFood
+	LBScenes.OrderFood
 ));
 
 InnLoc.common.events.push(new Link(
@@ -1867,8 +1867,8 @@ InnLoc.common.events.push(new Link(
 				"playing some sort of game with a string between her fingers",
 				"idly looking over the drinks on tap"
 				];
-				Scenes.Rigard.LB.efriaction = tasks[Math.floor(Math.random() * tasks.length)];
-				parse["task"] = Scenes.Rigard.LB.efriaction;
+				LBScenes.efriaction = tasks[Math.floor(Math.random() * tasks.length)];
+				parse["task"] = LBScenes.efriaction;
 				Text.Add("Efri is at her post, minding the inn. She’s [task], but glances up when she hears you come in.", parse);
 			}
 		}
@@ -1877,9 +1877,9 @@ InnLoc.common.events.push(new Link(
 	},
 	function() {
 		if(Rigard.LB.OrvinIsInnkeeper())
-			Scenes.Rigard.LB.OrvinPrompt();
+			LBScenes.OrvinPrompt();
 		else
-			Scenes.Rigard.LB.EfriPrompt();
+			LBScenes.EfriPrompt();
 	}
 ));
 
@@ -1901,7 +1901,7 @@ InnLoc.common.events.push(new Link(
 			Text.Flush();
 		}
 	},
-	Scenes.Rigard.LB.GotoRoom
+	LBScenes.GotoRoom
 ));
 
 InnLoc.common.events.push(new Link(
@@ -1923,4 +1923,4 @@ InnLoc.common.events.push(new Link(
 	}
 ));
 
-export { InnLoc };
+export { InnLoc, LBScenes };

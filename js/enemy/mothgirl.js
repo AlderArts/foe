@@ -5,9 +5,8 @@
  */
 
 import { Entity } from '../entity';
-import { Scenes } from '../event';
 
-Scenes.Mothgirl = {};
+let MothgirlScenes = {};
 
 function Mothgirl() {
 	Entity.call(this);
@@ -123,7 +122,7 @@ Mothgirl.prototype.Act = function(encounter, activeChar) {
 		Abilities.Seduction.Tease.Use(encounter, this, t);
 }
 
-Scenes.Mothgirl.LoneEnc = function() {
+MothgirlScenes.LoneEnc = function() {
 	var enemy = new Party();
 	var moth = new Mothgirl();
 	enemy.AddMember(moth);
@@ -240,7 +239,7 @@ Scenes.Mothgirl.LoneEnc = function() {
 
 				world.TimeStep({minute: 10});
 
-				Scenes.Mothgirl.Loss(enc, true);
+				MothgirlScenes.Loss(enc, true);
 			}, enabled : true,
 			tooltip : "You're not willing to give her your money, but by the way she's eyeing you, you bet she's got other things on her mind, too."
 		});
@@ -259,17 +258,17 @@ Scenes.Mothgirl.LoneEnc = function() {
 			Text.Add("<i>“See? We could have saved all this trouble, but now, I'll just </i>take<i> what I wanted… and maybe a little something else besides. I'd hate to let a pretty piece of ass like you slip by, after all. Oh, don't look so put out… [lust],”</i> she grins, reaching down to grab your [gen], wholly aroused at seeing her huge, bare breasts so close you that could kiss them… if you weren't about to be subjected to the moth-girl's baser intentions.", parse);
 			Text.NL();
 
-			Scenes.Mothgirl.Loss(enc);
+			MothgirlScenes.Loss(enc);
 		});
 
 		Encounter.prototype.onLoss.call(enc);
 	}
-	enc.onVictory = Scenes.Mothgirl.WinPrompt;
+	enc.onVictory = MothgirlScenes.WinPrompt;
 
 	return enc;
 }
 
-Scenes.Mothgirl.WinPrompt = function() {
+MothgirlScenes.WinPrompt = function() {
 	var enc = this;
 	var moth = enc.moth;
 	SetGameState(GameState.Event);
@@ -294,7 +293,7 @@ Scenes.Mothgirl.WinPrompt = function() {
 		if(player.FirstCock()) {
 			options.push({ nameStr : "Titfuck",
 				func : function() {
-					Scenes.Mothgirl.WinTitfuck(enc);
+					MothgirlScenes.WinTitfuck(enc);
 				}, enabled : true,
 				tooltip : Text.Parse("Shove[oneof] your cock[s] between those big, succulent breasts of hers!", parse)
 			});
@@ -302,7 +301,7 @@ Scenes.Mothgirl.WinPrompt = function() {
 		if(p1cock) {
 			options.push({ nameStr : "Anal",
 				func : function() {
-					Scenes.Mothgirl.WinAnal(enc, cocksInAss);
+					MothgirlScenes.WinAnal(enc, cocksInAss);
 				}, enabled : cocksInAss.length > 0,
 				tooltip : Text.Parse("Stick your [acocks] in her butt!", parse)
 			});
@@ -310,7 +309,7 @@ Scenes.Mothgirl.WinPrompt = function() {
 		if(player.FirstVag()) {
 			options.push({ nameStr : "Get Oral",
 				func : function() {
-					Scenes.Mothgirl.WinCunn(enc);
+					MothgirlScenes.WinCunn(enc);
 				}, enabled : true,
 				tooltip : Text.Parse("Play with the moth's tits and make her eat your pussy!", parse)
 			});
@@ -320,7 +319,7 @@ Scenes.Mothgirl.WinPrompt = function() {
 	Encounter.prototype.onVictory.call(enc);
 }
 
-Scenes.Mothgirl.WinTitfuck = function(enc) {
+MothgirlScenes.WinTitfuck = function(enc) {
 	var p1cock = player.BiggestCock();
 	var hugecock = p1cock.Len() > 20;
 
@@ -377,7 +376,7 @@ Scenes.Mothgirl.WinTitfuck = function(enc) {
 	Gui.NextPrompt();
 }
 
-Scenes.Mothgirl.WinAnal = function(enc, cocksInAss) {
+MothgirlScenes.WinAnal = function(enc, cocksInAss) {
 	var moth = enc.moth;
 	var p1cock = player.BiggestCock(cocksInAss);
 	var strapon = p1cock.isStrapon;
@@ -475,7 +474,7 @@ Scenes.Mothgirl.WinAnal = function(enc, cocksInAss) {
 	Gui.NextPrompt();
 }
 
-Scenes.Mothgirl.WinCunn = function(enc) {
+MothgirlScenes.WinCunn = function(enc) {
 	var moth = enc.moth;
 
 	var parse = {
@@ -532,7 +531,7 @@ Scenes.Mothgirl.WinCunn = function(enc) {
 	Gui.NextPrompt();
 }
 
-Scenes.Mothgirl.Loss = function(enc, traded) {
+MothgirlScenes.Loss = function(enc, traded) {
 	var moth = enc.moth;
 	var p1cock = player.BiggestCock();
 	traded = traded || enc.coin <= 0;
@@ -711,4 +710,4 @@ Scenes.Mothgirl.Loss = function(enc, traded) {
 	Gui.NextPrompt();
 }
 
-export { Mothgirl };
+export { Mothgirl, MothgirlScenes };

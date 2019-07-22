@@ -5,7 +5,6 @@
  */
 
 import { Entity } from '../entity';
-import { Link } from '../event';
 import { world } from '../world';
 import { Intro } from '../event/introduction';
 

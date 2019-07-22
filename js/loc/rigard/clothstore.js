@@ -9,8 +9,8 @@ import { Event, Link, Scenes } from '../../event';
 
 let ClothShopLoc = new Event("Silken Delights");
 
-Scenes.Rigard.ClothShop = {};
-Scenes.Rigard.ClothShop.IsOpen = function() {
+let ClothShopScenes = {};
+ClothShopScenes.IsOpen = function() {
 	return (world.time.hour >= 9 && world.time.hour < 20) && !rigard.UnderLockdown();
 }
 
@@ -102,7 +102,7 @@ ClothShopLoc.events.push(new Link(
 	},
 	function() {
 		var nexellePrompt = function() {
-			if(!Scenes.Rigard.ClothShop.IsOpen()) {
+			if(!ClothShopScenes.IsOpen()) {
 				Text.Add("The shop is closing, and you are asked to leave.");
 				Text.Flush();
 				Gui.NextPrompt(function() {
@@ -277,4 +277,4 @@ ClothShopLoc.endDescription = function() {
 	}
 }
 
-export { ClothShopLoc };
+export { ClothShopLoc, ClothShopScenes };

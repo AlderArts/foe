@@ -1,6 +1,6 @@
 
 import { world } from '../../world';
-import { Event, Link, Scenes, EncounterTable } from '../../event';
+import { Event, Link, EncounterTable } from '../../event';
 import { MageTowerLoc } from './magetower';
 
 
@@ -11,7 +11,7 @@ let CastleLoc = {
 	Dungeon   : new Event("Dungeons")
 };
 
-Scenes.Rigard.Noble = {};
+let NobleScenes = {};
 
 
 //
@@ -25,30 +25,30 @@ CastleLoc.Grounds.description = function() {
 //Random events for royal grounds
 CastleLoc.Grounds.enc = new EncounterTable();
 CastleLoc.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Chatter2;});
-CastleLoc.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.Parkland;});
-CastleLoc.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.JeannesTower;}, 1.0, function() { return Scenes.Global.MetJeanne(); });
-CastleLoc.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.TheDistrict;});
-CastleLoc.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.MeetingMajid;}, 1.0, function() { return !Scenes.Global.PortalsOpen() && !(rigard.flags["Nobles"] & Rigard.Nobles.MetMajid); });
-CastleLoc.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.GuardPatrol;}, 1.0, function() { return !world.time.IsDay(); });
-CastleLoc.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.AlmsForThePoor;}, 1.0, function() { return !(rigard.flags["Nobles"] & Rigard.Nobles.Alms); });
-CastleLoc.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.Elodie;}, 1.0, function() {
+CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.Parkland;});
+CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.JeannesTower;}, 1.0, function() { return Scenes.Global.MetJeanne(); });
+CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.TheDistrict;});
+CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.MeetingMajid;}, 1.0, function() { return !Scenes.Global.PortalsOpen() && !(rigard.flags["Nobles"] & Rigard.Nobles.MetMajid); });
+CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.GuardPatrol;}, 1.0, function() { return !world.time.IsDay(); });
+CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.AlmsForThePoor;}, 1.0, function() { return !(rigard.flags["Nobles"] & Rigard.Nobles.Alms); });
+CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.Elodie;}, 1.0, function() {
 	return !Scenes.Global.PortalsOpen() &&
 		!(rigard.flags["Nobles"] & Rigard.Nobles.Elodie) &&
 		Scenes.Global.VisitedOutlaws() &&
 		world.time.IsDay() &&
 		vaughn.flags["Met"] < Vaughn.Met.OnTaskLockpicks;
 });
-CastleLoc.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.RoyalGetaway;});
-CastleLoc.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.MagicalJackal;}, 1.0, function() {
+CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.RoyalGetaway;});
+CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.MagicalJackal;}, 1.0, function() {
 	return asche.flags["Met"] >= Asche.Met.Met &&
 		!world.time.IsDay();
 });
-CastleLoc.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.PalaceParade;}, 2.0, function() {
+CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.PalaceParade;}, 2.0, function() {
 	return terry.Recruited() &&
 		!world.time.IsDay() &&
 		rigard.ParadeTimer.Expired();
 });
-CastleLoc.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.Buns;}, 1.0, function() { return world.time.IsDay(); });
+CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.Buns;}, 1.0, function() { return world.time.IsDay(); });
 
 CastleLoc.Grounds.onEntry = function() {
 	if(Math.random() < 0.2)
@@ -110,7 +110,7 @@ CastleLoc.Grounds.events.push(new Link(
 ));
 
 
-Scenes.Rigard.Noble.Parkland = function() {
+NobleScenes.Parkland = function() {
 	var parse = {
 		
 	};
@@ -146,7 +146,7 @@ Scenes.Rigard.Noble.Parkland = function() {
 	Gui.NextPrompt();
 }
 
-Scenes.Rigard.Noble.JeannesTower = function() {
+NobleScenes.JeannesTower = function() {
 	var parse = {
 		
 	};
@@ -177,7 +177,7 @@ Scenes.Rigard.Noble.JeannesTower = function() {
 	Gui.NextPrompt();
 }
 
-Scenes.Rigard.Noble.TheDistrict = function() {
+NobleScenes.TheDistrict = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -232,7 +232,7 @@ Scenes.Rigard.Noble.TheDistrict = function() {
 	Gui.NextPrompt();
 }
 
-Scenes.Rigard.Noble.MeetingMajid = function() {
+NobleScenes.MeetingMajid = function() {
 	var parse = {
 		
 	};
@@ -262,7 +262,7 @@ Scenes.Rigard.Noble.MeetingMajid = function() {
 	Gui.NextPrompt();
 }
 
-Scenes.Rigard.Noble.GuardPatrol = function() {
+NobleScenes.GuardPatrol = function() {
 	var parse = {
 		
 	};
@@ -288,7 +288,7 @@ Scenes.Rigard.Noble.GuardPatrol = function() {
 	Gui.NextPrompt();
 }
 
-Scenes.Rigard.Noble.AlmsForThePoor = function() {
+NobleScenes.AlmsForThePoor = function() {
 	var parse = {
 		
 	};
@@ -391,7 +391,7 @@ Scenes.Rigard.Noble.AlmsForThePoor = function() {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Rigard.Noble.Elodie = function() {
+NobleScenes.Elodie = function() {
 	var parse = {
 		
 	};
@@ -450,7 +450,7 @@ Scenes.Rigard.Noble.Elodie = function() {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Rigard.Noble.RoyalGetaway = function() {
+NobleScenes.RoyalGetaway = function() {
 	var parse = {
 		
 	};
@@ -466,7 +466,7 @@ Scenes.Rigard.Noble.RoyalGetaway = function() {
 	Gui.NextPrompt();
 }
 
-Scenes.Rigard.Noble.MagicalJackal = function() {
+NobleScenes.MagicalJackal = function() {
 	var parse = {
 		heshe : player.mfFem("he", "she")
 	};
@@ -496,7 +496,7 @@ Scenes.Rigard.Noble.MagicalJackal = function() {
 	Gui.NextPrompt();
 }
 
-Scenes.Rigard.Noble.PalaceParade = function() {
+NobleScenes.PalaceParade = function() {
 	var parse = {
 		
 	};
@@ -540,7 +540,7 @@ Scenes.Rigard.Noble.PalaceParade = function() {
 	Gui.NextPrompt();
 }
 
-Scenes.Rigard.Noble.Buns = function() {
+NobleScenes.Buns = function() {
 	var parse = {
 		
 	};
@@ -583,10 +583,10 @@ Scenes.Rigard.Noble.Buns = function() {
 	
 	world.TimeStep({minute: 15});
 	
-	Scenes.Rigard.Noble.BunsChoice();
+	NobleScenes.BunsChoice();
 }
 
-Scenes.Rigard.Noble.BunsChoice = function() {
+NobleScenes.BunsChoice = function() {
 	var parse = {
 		
 	};
@@ -740,4 +740,4 @@ Scenes.Rigard.Noble.BunsChoice = function() {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-export { CastleLoc };
+export { CastleLoc, NobleScenes };

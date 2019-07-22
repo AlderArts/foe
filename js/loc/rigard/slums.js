@@ -2,7 +2,7 @@
 
 
 import { world } from '../../world';
-import { Event, Link, Scenes, EncounterTable } from '../../event';
+import { Event, Link, EncounterTable } from '../../event';
 
 let SlumsLoc = {
 	gate     : new Event("Peasants' Gate"),

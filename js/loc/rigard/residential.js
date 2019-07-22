@@ -1,7 +1,7 @@
 
 
 import { world } from '../../world';
-import { Event, Link, Scenes, EncounterTable } from '../../event';
+import { Event, Link, EncounterTable } from '../../event';
 
 let ResidentialLoc = {
 	street   : new Event("Residential street"), // Will also contain gate to slums

@@ -1,4 +1,4 @@
-import { SetLastSubmenu, PrintDefaultOptions } from './exploration';
+import { Gui } from './gui';
 import { SAVE_VERSION } from '../app';
 import { Season } from './time';
 
@@ -341,7 +341,7 @@ let CacheToGame = function() {
 					GAME.player.acc1Slot     = Items.Accessories.IronBangle;
 					GAME.player.jobs["Fighter"].mult = 0.5;
 					GAME.player.Equip();
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 				}, enabled : true,
 				tooltip : "Focused on martial abilities and strength, strives to excel in physical combat."
 			});
@@ -362,7 +362,7 @@ let CacheToGame = function() {
 					GAME.player.jobs["Scholar"].mult = 0.5;
 					GAME.player.jobs["Fighter"].mult = 1;
 					GAME.player.Equip();
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 				}, enabled : true,
 				tooltip : "Takes a more intellectual approach to problems, and dabbles slightly in the mystical. Starts out with several support abilities."
 			});
@@ -383,7 +383,7 @@ let CacheToGame = function() {
 					GAME.player.jobs["Courtesan"].mult = 0.5;
 					GAME.player.jobs["Fighter"].mult   = 1;
 					GAME.player.Equip();
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 				}, enabled : true,
 				tooltip : "Focused on sensual abilities and charming your foes into submission."
 			});

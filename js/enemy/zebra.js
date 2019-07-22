@@ -5,9 +5,8 @@
  */
 
 import { Entity } from '../entity';
-import { Scenes } from '../event';
 
-Scenes.ZebraShaman = {};
+let ZebraShamanScenes = {};
 
 function ZebraShaman(levelbonus) {
 	Entity.call(this);
@@ -187,7 +186,7 @@ ZebraBrave.prototype.Act = function(encounter, activeChar) {
 		Abilities.Attack.Use(encounter, this, t);
 }
 
-Scenes.ZebraShaman.Impregnate = function(mother, father, slot) {
+ZebraShamanScenes.Impregnate = function(mother, father, slot) {
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother : mother,
@@ -199,21 +198,21 @@ Scenes.ZebraShaman.Impregnate = function(mother, father, slot) {
 	});
 }
 
-Scenes.ZebraShaman.LoneEnc = function(levelbonus) {
+ZebraShamanScenes.LoneEnc = function(levelbonus) {
 	var enemy = new Party();
 	var zebra = new ZebraShaman(levelbonus);
 	enemy.AddMember(zebra);
 	var enc = new Encounter(enemy);
 	enc.zebra = zebra;
 
-	enc.onEncounter = Scenes.ZebraShaman.Encounter;
-	enc.onVictory   = Scenes.ZebraShaman.OnWin;
-	enc.onLoss      = Scenes.ZebraShaman.OnLoss;
+	enc.onEncounter = ZebraShamanScenes.Encounter;
+	enc.onVictory   = ZebraShamanScenes.OnWin;
+	enc.onLoss      = ZebraShamanScenes.OnLoss;
 
 	return enc;
 }
 
-Scenes.ZebraShaman.OnLoss = function() {
+ZebraShamanScenes.OnLoss = function() {
 	var enc = this;
 	var zebra = enc.zebra;
 	SetGameState(GameState.Event);
@@ -247,7 +246,7 @@ Scenes.ZebraShaman.OnLoss = function() {
 	Gui.NextPrompt();
 }
 
-Scenes.ZebraShaman.Encounter = function() {
+ZebraShamanScenes.Encounter = function() {
 	var enc = this;
 
 	var parse = {
@@ -286,7 +285,7 @@ Scenes.ZebraShaman.Encounter = function() {
 	});
 }
 
-Scenes.ZebraShaman.OnWin = function() {
+ZebraShamanScenes.OnWin = function() {
 	var enc = this;
 	var zebra = enc.zebra;
 	SetGameState(GameState.Event);
@@ -311,14 +310,14 @@ Scenes.ZebraShaman.OnWin = function() {
 		var options = new Array();
 		options.push({ nameStr : "Fuck him",
 			func : function() {
-				Scenes.ZebraShaman.OnWinFuckHim(enc);
+				ZebraShamanScenes.OnWinFuckHim(enc);
 			}, enabled : player.FirstCock(),
 			tooltip : "Perhaps you can convince him to have a bit of fun with you? After all, he did assault you… letting you fuck his ass is the least he can do."
 		});
 		if(player.FirstVag()) {
 			options.push({ nameStr : "Get Fucked",
 				func : function() {
-					Scenes.ZebraShaman.OnWinVaginal(enc);
+					ZebraShamanScenes.OnWinVaginal(enc);
 				}, enabled : true,
 				tooltip : "You consider it rather rude of him for attacking you and then waving it off as a simple mistake. It's only right that he should apologize to you properly, but words alone aren't going to cut it. You need him to make it up to you, and if the heat in your loins is anything to go by, you know exactly how he can do it."
 			});
@@ -344,7 +343,7 @@ Scenes.ZebraShaman.OnWin = function() {
 	Encounter.prototype.onVictory.call(enc);
 }
 
-Scenes.ZebraShaman.OnWinFuckHim = function(enc) {
+ZebraShamanScenes.OnWinFuckHim = function(enc) {
 	var zebra = enc.zebra;
 
 	var lusty = zebra.LustLevel() > 0.5;
@@ -449,7 +448,7 @@ Scenes.ZebraShaman.OnWinFuckHim = function(enc) {
 	});
 }
 
-Scenes.ZebraShaman.OnWinVaginal = function(enc) {
+ZebraShamanScenes.OnWinVaginal = function(enc) {
 	var zebra = enc.zebra;
 
 	var lusty = zebra.LustLevel() > 0.5;
@@ -558,7 +557,7 @@ Scenes.ZebraShaman.OnWinVaginal = function(enc) {
 		Text.Add("The shaman pulls away from the kiss and throws his head back, letting out a loud snort as the tip of his member flares up and sends wave after wave of potent seed flooding into your well-used hole. The amount of spunk he pours into you is far greater than what you can handle, and most of it ends up spraying back out. His orgasm sets off your own, sending your mind into a whirlwind of pleasure as your [vag] clamps down once more, this time making sure to get the spunk it needs.", parse);
 		Text.NL();
 
-		Scenes.ZebraShaman.Impregnate(player, zebra);
+		ZebraShamanScenes.Impregnate(player, zebra);
 
 		if(player.FirstCock()) {
 			Text.Add("Just when you thought it couldn't get any better, the shaman surprises you by grabbing[oneof] your [cocks] and starting to pump it furiously, making you shoot several strands of seed into the air which splatter across your [breasts] and face, mixing with the fluids he covered you in earlier.", parse);
@@ -580,4 +579,4 @@ Scenes.ZebraShaman.OnWinVaginal = function(enc) {
 	});
 }
 
-export { ZebraBrave, ZebraShaman };
+export { ZebraBrave, ZebraShaman, ZebraShamanScenes };

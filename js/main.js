@@ -145,7 +145,14 @@ function Render() {
 
 function Setup() {
 	// Load assets
-	LoadImages();
+	LoadImages(function() {
+		assetsOverlay();
+
+		// Go to credits screen
+		SplashScreen();
+		// Render first frame
+		setTimeout(Render, 100);
+	});
 
 	// Intialize GUI (set key shortcuts, buttons etc)
 	Gui.Init();

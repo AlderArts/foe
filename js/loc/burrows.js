@@ -6,7 +6,7 @@
 
 
 import { world } from '../world';
-import { Event, Link, EncounterTable, Scenes } from '../event';
+import { Event, Link, EncounterTable } from '../event';
 
 // Create namespace
 let BurrowsLoc = {
@@ -19,7 +19,7 @@ let BurrowsLoc = {
 }
 
 
-Scenes.Burrows = {};
+let BurrowsScenes = {};
 
 // Class to handle global flags and logic for dungeon
 function Burrows(storage) {
@@ -177,7 +177,7 @@ BurrowsLoc.Entrance.links.push(new Link(
 
 BurrowsLoc.Entrance.onEntry = function() {
 	if(burrows.flags["Access"] == Burrows.AccessFlags.KnownNotVisited) {
-		Scenes.Burrows.FirstApproach();
+		BurrowsScenes.FirstApproach();
 	}
 	else
 		PrintDefaultOptions();
@@ -378,7 +378,7 @@ BurrowsLoc.Lab.events.push(new Link(
 ));
 
 
-Scenes.Burrows.FirstApproach = function() {
+BurrowsScenes.FirstApproach = function() {
 	var parse = {};
 		
 	if(party.Two())
@@ -445,7 +445,7 @@ Scenes.Burrows.FirstApproach = function() {
 			
 			Gui.NextPrompt(function() {
 				Text.Clear();
-				Scenes.Burrows.Arrival(alpha);
+				BurrowsScenes.Arrival(alpha);
 			});
 		}, enabled : true,
 		tooltip : "Try to approach peacefully."
@@ -453,7 +453,7 @@ Scenes.Burrows.FirstApproach = function() {
 	Gui.SetButtonsFromList(options);
 }
 
-Scenes.Burrows.Arrival = function(alpha) {
+BurrowsScenes.Arrival = function(alpha) {
 	var parse = {
 		skinDesc   : function() { return player.SkinDesc(); },
 		p1name     : function() { return party.Get(1).name; },
@@ -475,7 +475,7 @@ Scenes.Burrows.Arrival = function(alpha) {
 	
 	burrows.flags["Access"] = Burrows.AccessFlags.Visited;
 	
-	Scenes.Burrows.ArrivalTime = world.time.hour;
+	BurrowsScenes.ArrivalTime = world.time.hour;
 	
 	Text.Add("You pass through a crowd of curious onlookers, though many are too distracted to notice you, caught up in a shameless impromptu orgy which seems to have suddenly formed. Lithe hands reach up, touching your body as you walk by, voices tittering and whispering to each other. There is a single phrase they chant, growing louder and louder, until your progress is heralded by a multitude of piping voices shouting: <i>“The Pit! The Pit!”</i>", parse);
 	Text.NL();
@@ -521,11 +521,11 @@ Scenes.Burrows.Arrival = function(alpha) {
 		party.location = BurrowsLoc.Lab;
 		world.TimeStep({minute: 30});
 		
-		Gui.NextPrompt(Scenes.Burrows.ArrivalOphelia);
+		Gui.NextPrompt(BurrowsScenes.ArrivalOphelia);
 	});
 }
 
-Scenes.Burrows.ArrivalOphelia = function() {
+BurrowsScenes.ArrivalOphelia = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -542,15 +542,15 @@ Scenes.Burrows.ArrivalOphelia = function() {
 	Text.Add("<i>“You must have questions of your own...”</i>", parse);
 	Text.Flush();
 	
-	Scenes.Burrows.OpheliaTalkBurrows = false;
-	Scenes.Burrows.OpheliaTalkOphelia = false;
-	Scenes.Burrows.OpheliaTalkVena    = false;
-	Scenes.Burrows.OpheliaTalkLab     = false;
+	BurrowsScenes.OpheliaTalkBurrows = false;
+	BurrowsScenes.OpheliaTalkOphelia = false;
+	BurrowsScenes.OpheliaTalkVena    = false;
+	BurrowsScenes.OpheliaTalkLab     = false;
 	
-	Scenes.Burrows.ArrivalOpheliaTalk();
+	BurrowsScenes.ArrivalOpheliaTalk();
 }
 
-Scenes.Burrows.ArrivalOpheliaTalk = function() {
+BurrowsScenes.ArrivalOpheliaTalk = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -564,7 +564,7 @@ Scenes.Burrows.ArrivalOpheliaTalk = function() {
 	
 	//[Burrows][Ophelia][Vena][Lab]
 	var options = new Array();
-	if(!Scenes.Burrows.OpheliaTalkBurrows) {
+	if(!BurrowsScenes.OpheliaTalkBurrows) {
 		options.push({ nameStr : "Burrows",
 			func : function() {
 				Text.Clear();
@@ -578,13 +578,13 @@ Scenes.Burrows.ArrivalOpheliaTalk = function() {
 				Text.NL();
 				Text.Add("<i>“I’ve been noticing a gradual change in my siblings too, a good sign that the trait is propagating.”</i>", parse);
 				Text.Flush();
-				Scenes.Burrows.OpheliaTalkBurrows = true;
-				Scenes.Burrows.ArrivalOpheliaTalk();
+				BurrowsScenes.OpheliaTalkBurrows = true;
+				BurrowsScenes.ArrivalOpheliaTalk();
 			}, enabled : true,
 			tooltip : "Ask about this place. Why are so many lagomorphs gathered in one place?"
 		});
 	}
-	if(!Scenes.Burrows.OpheliaTalkOphelia) {
+	if(!BurrowsScenes.OpheliaTalkOphelia) {
 		options.push({ nameStr : "Ophelia",
 			func : function() {
 				Text.Clear();
@@ -598,13 +598,13 @@ Scenes.Burrows.ArrivalOpheliaTalk = function() {
 				Text.NL();
 				Text.Add("You shake your head.", parse);
 				Text.Flush();
-				Scenes.Burrows.OpheliaTalkOphelia = true;
-				Scenes.Burrows.ArrivalOpheliaTalk();
+				BurrowsScenes.OpheliaTalkOphelia = true;
+				BurrowsScenes.ArrivalOpheliaTalk();
 			}, enabled : true,
 			tooltip : "Ask her about herself. Why is she so different from the rest of the rabbits?"
 		});
 	}
-	if(!Scenes.Burrows.OpheliaTalkVena) {
+	if(!BurrowsScenes.OpheliaTalkVena) {
 		options.push({ nameStr : "Vena",
 			func : function() {
 				Text.Clear();
@@ -622,13 +622,13 @@ Scenes.Burrows.ArrivalOpheliaTalk = function() {
 				Text.NL();
 				Text.Add("<i>“What about my father?”</i> she asks, confused. <i>“He mates with her at times, but there are many others vying for his attention. It is the highest of honors to be bred by him.”</i>", parse);
 				Text.Flush();
-				Scenes.Burrows.OpheliaTalkVena = true;
-				Scenes.Burrows.ArrivalOpheliaTalk();
+				BurrowsScenes.OpheliaTalkVena = true;
+				BurrowsScenes.ArrivalOpheliaTalk();
 			}, enabled : true,
 			tooltip : "Ask about Ophelia’s mother."
 		});
 	}
-	if(!Scenes.Burrows.OpheliaTalkLab) {
+	if(!BurrowsScenes.OpheliaTalkLab) {
 		options.push({ nameStr : "Lab",
 			func : function() {
 				Text.Clear();
@@ -644,8 +644,8 @@ Scenes.Burrows.ArrivalOpheliaTalk = function() {
 				Text.NL();
 				Text.Add("Live test subjects. Just what is being done here? And to what end?", parse);
 				Text.Flush();
-				Scenes.Burrows.OpheliaTalkLab = true;
-				Scenes.Burrows.ArrivalOpheliaTalk();
+				BurrowsScenes.OpheliaTalkLab = true;
+				BurrowsScenes.ArrivalOpheliaTalk();
 			}, enabled : true,
 			tooltip : "Ask about the lab you are in, and the slaves being kept there."
 		});
@@ -682,7 +682,7 @@ Scenes.Burrows.ArrivalOpheliaTalk = function() {
 					party.location = BurrowsLoc.Throne;
 					world.TimeStep({hour: 1});
 					
-					Gui.NextPrompt(Scenes.Burrows.ArrivalLagon);
+					Gui.NextPrompt(BurrowsScenes.ArrivalLagon);
 				}, enabled : true,
 				tooltip : "You are not in a good position to mount a resistance, surrounded as you are. You aren’t even sure that you could find your way out on your own."
 			});
@@ -704,7 +704,7 @@ Scenes.Burrows.ArrivalOpheliaTalk = function() {
 					party.location = BurrowsLoc.Throne;
 					world.TimeStep({hour: 1});
 					
-					Gui.NextPrompt(Scenes.Burrows.ArrivalLagon);
+					Gui.NextPrompt(BurrowsScenes.ArrivalLagon);
 				}, enabled : true,
 				tooltip : "Screw this! Try to fight your way out before it’s too late!"
 			});
@@ -713,7 +713,7 @@ Scenes.Burrows.ArrivalOpheliaTalk = function() {
 	}
 }
 
-Scenes.Burrows.ArrivalLagon = function() {
+BurrowsScenes.ArrivalLagon = function() {
 	var parse = {
 		playername : player.name,
 		heshe      : player.mfFem("he", "she")
@@ -751,12 +751,12 @@ Scenes.Burrows.ArrivalLagon = function() {
 	Text.Add("<i>“This puts you in a somewhat interesting position,”</i> Lagon continues. <i>“If you are who you claim, you should have little to no loyalty to the kingdom. If you are interested in taking on a job for me...”</i>", parse);
 	Text.Flush();
 	
-	Scenes.Burrows.ArrivalLagonTalkAssault = false;
+	BurrowsScenes.ArrivalLagonTalkAssault = false;
 
-	Scenes.Burrows.ArrivalLagonTalk();
+	BurrowsScenes.ArrivalLagonTalk();
 }
 
-Scenes.Burrows.ArrivalLagonTalk = function() {
+BurrowsScenes.ArrivalLagonTalk = function() {
 	var parse = {
 		
 	};
@@ -769,7 +769,7 @@ Scenes.Burrows.ArrivalLagonTalk = function() {
 	
 	//[Assault][Job]
 	var options = new Array();
-	if(!Scenes.Burrows.ArrivalLagonTalkAssault) {
+	if(!BurrowsScenes.ArrivalLagonTalkAssault) {
 		options.push({ nameStr : "Assault",
 			func : function() {
 				Text.Clear();
@@ -778,11 +778,11 @@ Scenes.Burrows.ArrivalLagonTalk = function() {
 				Text.Add("Catching his drift, you back down.", parse);
 				Text.Flush();
 				
-				Scenes.Burrows.ArrivalLagonTalkAssault = true;
+				BurrowsScenes.ArrivalLagonTalkAssault = true;
 				
 				lagon.relation.DecreaseStat(-100, 5);
 				
-				Scenes.Burrows.ArrivalLagonTalk();
+				BurrowsScenes.ArrivalLagonTalk();
 			}, enabled : true,
 			tooltip : "Complain about your rough handling."
 		});
@@ -817,7 +817,7 @@ Scenes.Burrows.ArrivalLagonTalk = function() {
 			if(world.time.hour >= 6 && world.time.hour < 19)
 				Text.Add("As you listen to her instructions, you finally notice that the illumination of the tunnel has been growing gradually brighter. Finally, she stops just short of the exit, the light from the surface stinging your eyes.", parse);
 			else {
-				parse["time"] = (Scenes.Burrows.ArrivalTime >= 6 && world.time.hour < 19) ? "completely failed to notice" : "almost forgotten";
+				parse["time"] = (BurrowsScenes.ArrivalTime >= 6 && world.time.hour < 19) ? "completely failed to notice" : "almost forgotten";
 				Text.Add("You walk along, listening to her instructions, and are somewhat surprised when she stops in front of a dark opening. Looking carefully, you realize that this must be the exit. It’s night outside - you had [time], with the faint but constant illumination in the Burrows.", parse);
 			}
 			Text.NL();
@@ -864,4 +864,4 @@ Burrows.prototype.GenerateLagomorphAlpha = function(gender) {
 	return new LagomorphAlpha(gender);
 }
 
-export { Burrows, BurrowsLoc };
+export { Burrows, BurrowsLoc, BurrowsScenes };

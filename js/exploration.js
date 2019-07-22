@@ -10,40 +10,6 @@ import { SetGameState, GameState } from './main';
 import { GAME } from './gamecache';
 import { GetRenderPictures, SetRenderPictures, GetDEBUG, SetDEBUG } from '../app';
 
-let LastSubmenu = null;
-function SetLastSubmenu(menu) {
-	LastSubmenu = menu;
-}
-function GetLastSubmenu() {
-	return LastSubmenu;
-}
-
-function PrintDefaultOptions(preventClear) {
-	var e = Gui.Callstack.pop();
-	if(e) {
-		e();
-		return;
-	}
-
-	Gui.ClearButtons();
-
-	if(!preventClear)
-		Text.Clear();
-
-	if(GAME.party.location == null) {
-		Text.Add("ERROR, LOCATION IS NULL");
-		Text.Flush();
-		return;
-	}
-
-	SetGameState(GameState.Game);
-
-	if(LastSubmenu)
-		LastSubmenu.func(preventClear);
-	else
-		Explore();
-}
-
 let ExploreButtonIndex = {
 	Explore : 0,
 	Party   : 1,
@@ -323,4 +289,4 @@ function ShowHunting(preventClear) {
 	SetExploreButtons();
 }
 
-export { PrintDefaultOptions, DataPrompt, LimitedDataPrompt, ExploreButtonIndex, GetLastSubmenu, SetLastSubmenu };
+export { DataPrompt, LimitedDataPrompt, ExploreButtonIndex, Explore };

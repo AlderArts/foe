@@ -5,7 +5,8 @@
  */
 
 import { Entity } from '../entity';
-import { Scenes } from '../event';
+
+let EquineScenes = {};
 
 function Equine(gender, levelbonus) {
 	Entity.call(this);
@@ -85,8 +86,6 @@ function Equine(gender, levelbonus) {
 Equine.prototype = new Entity();
 Equine.prototype.constructor = Equine;
 
-Scenes.Equine = {};
-
 Equine.prototype.DropTable = function() {
 	var drops = [];
 	if(Math.random() < 0.05) drops.push({ it: Items.Equinium });
@@ -133,7 +132,7 @@ Equine.prototype.Act = function(encounter, activeChar) {
 		Abilities.Seduction.Tease.Use(encounter, this, t);
 }
 
-Scenes.Equine.StallionImpregnate = function(mother, father, slot) {
+EquineScenes.StallionImpregnate = function(mother, father, slot) {
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother : mother,
@@ -145,7 +144,7 @@ Scenes.Equine.StallionImpregnate = function(mother, father, slot) {
 	});
 }
 
-Scenes.Equine.PairEnc = function(levelbonus) {
+EquineScenes.PairEnc = function(levelbonus) {
 	var enemy    = new Party();
 	var stallion = new Equine(Gender.male, levelbonus);
 	var mare     = new Equine(Gender.female, levelbonus);
@@ -183,13 +182,13 @@ Scenes.Equine.PairEnc = function(levelbonus) {
 	enc.canRun = false;
 	enc.VictoryCondition = ...
 	*/
-	enc.onLoss    = Scenes.Equine.LossPrompt;
-	enc.onVictory = Scenes.Equine.WinPrompt;
+	enc.onLoss    = EquineScenes.LossPrompt;
+	enc.onVictory = EquineScenes.WinPrompt;
 
 	return enc;
 }
 
-Scenes.Equine.LossPrompt = function() {
+EquineScenes.LossPrompt = function() {
 	SetGameState(GameState.Event);
 	
 	// this = encounter
@@ -270,7 +269,7 @@ Scenes.Equine.LossPrompt = function() {
 			if(player.NumCocks() > 0) {
 				options.push({ nameStr : "Fuck her",
 					func : function() {
-						Scenes.Equine.FuckFemale(enc);
+						EquineScenes.FuckFemale(enc);
 					}, enabled : true,
 					tooltip : "The female equine has caught your interest, and judging from her demeanor, she likely wouldn't object."
 				});
@@ -278,7 +277,7 @@ Scenes.Equine.LossPrompt = function() {
 			if(player.NumVags() > 0) {
 				options.push({ nameStr : "Get fucked",
 					func : function() {
-						Scenes.Equine.GetFucked(enc);
+						EquineScenes.GetFucked(enc);
 					}, enabled : true,
 					tooltip : "Taking on that thick horse cock looks like a challenge, but you can't let that stop you!"
 				});
@@ -287,7 +286,7 @@ Scenes.Equine.LossPrompt = function() {
 			if(player.NumCocks() > 0) {
 				options.push({ nameStr : "Threesome",
 					func : function() {
-						Scenes.Equine.Threesome1(enc);
+						EquineScenes.Threesome1(enc);
 					}, enabled : true,
 					tooltip : "Why not have both of them join in? The stallion looks like he is willing to share his partner... that, and they both have parts you could play with."
 				});
@@ -295,7 +294,7 @@ Scenes.Equine.LossPrompt = function() {
 			else if(player.NumVags() > 0) {
 				options.push({ nameStr : "Threesome",
 					func : function() {
-						Scenes.Equine.Threesome2(enc);
+						EquineScenes.Threesome2(enc);
 					}, enabled : true,
 					tooltip : "Why not have both of them join in? That cock looks like it could serve both you and the mare."
 				});
@@ -325,7 +324,7 @@ Scenes.Equine.LossPrompt = function() {
 	Encounter.prototype.onLoss.call(enc);
 }
 
-Scenes.Equine.FuckFemale = function(enc) {
+EquineScenes.FuckFemale = function(enc) {
 	var parse = {		
 		mobVag : function() { return enc.mare.FirstVag().Short(); }
 	};
@@ -432,7 +431,7 @@ Scenes.Equine.FuckFemale = function(enc) {
 	});
 }
 
-Scenes.Equine.GetFucked = function(enc) {
+EquineScenes.GetFucked = function(enc) {
 	var parse = {		
 		ifArmor    : player.Armor() ? "strips you down to full nudity" : "runs them down your naked body"
 	};
@@ -460,7 +459,7 @@ Scenes.Equine.GetFucked = function(enc) {
 	player.FuckVag(player.FirstVag(), enc.stallion.FirstCock(), 3);
 	enc.stallion.Fuck(enc.stallion.FirstCock(), 3);
 
-	Scenes.Equine.StallionImpregnate(player, enc.stallion);
+	EquineScenes.StallionImpregnate(player, enc.stallion);
 
 	Text.Add("The experience becomes amplified as your [hips] begin sliding up, riding the stallion for everything he's worth. He grunts every time you squeeze your insides around him, and you could probably make him cry out with just the manipulation of your hips if you weren't so distracted by your own pleasure. You continue to slide just a few inches off, then wetly slam back down to his balls.", parse);
 	Text.NL();
@@ -494,7 +493,7 @@ Scenes.Equine.GetFucked = function(enc) {
 }
 
 // SCENE FOR MALES/HERMS
-Scenes.Equine.Threesome1 = function(enc) {
+EquineScenes.Threesome1 = function(enc) {
 	var parse = {		
 		mobVag : function() { return enc.mare.FirstVag().Short(); },		
 		ifBalls  : function() { return player.HasBalls() ? "r balls" : ""; }
@@ -568,7 +567,7 @@ Scenes.Equine.Threesome1 = function(enc) {
 	});
 }
 
-Scenes.Equine.Threesome2 = function(enc) {
+EquineScenes.Threesome2 = function(enc) {
 	var parse = {		
 		mobVag : function() { return enc.mare.FirstVag().Short(); }
 	};
@@ -588,7 +587,7 @@ Scenes.Equine.Threesome2 = function(enc) {
 	player.FuckVag(player.FirstVag(), enc.stallion.FirstCock(), 3);
 	enc.stallion.Fuck(enc.stallion.FirstCock(), 3);
 
-	Scenes.Equine.StallionImpregnate(player, enc.stallion);
+	EquineScenes.StallionImpregnate(player, enc.stallion);
 
 	Text.Add("The mare greedily presses her slit against his cock, rubbing her wet lips into his shaft. He presses his hands on your hips, latching onto them. The horse hilts himself inside of your [vag], your lips breaking contact with the mare as you moan into her face.", parse);
 	Text.NL();
@@ -617,7 +616,7 @@ Scenes.Equine.Threesome2 = function(enc) {
 
 
 //TODO
-Scenes.Equine.WinPrompt = function() {
+EquineScenes.WinPrompt = function() {
 	var enc  = this;
 	SetGameState(GameState.Event);
 
@@ -642,13 +641,13 @@ Scenes.Equine.WinPrompt = function() {
 		if(player.FirstCock()) {
 			options.push({ nameStr : "Fuck her",
 				func : function() {
-					Scenes.Equine.WinFuckHer(enc);
+					EquineScenes.WinFuckHer(enc);
 				}, enabled : true,
 				tooltip : "This rowdy mare gave you a hard time - it’s only proper you return the favor..."
 			});
 			options.push({ nameStr : "Fuck him",
 				func : function() {
-					Scenes.Equine.WinFuckHim(enc);
+					EquineScenes.WinFuckHim(enc);
 				}, enabled : true,
 				tooltip : "You’re in the mood for a little role-reversal; this time, <b>he</b> gets to be the mare."
 			});
@@ -656,7 +655,7 @@ Scenes.Equine.WinPrompt = function() {
 		if(player.FirstVag()) {
 			options.push({ nameStr : "Ride him",
 				func : function() {
-					Scenes.Equine.WinRideHimVag(enc);
+					EquineScenes.WinRideHimVag(enc);
 				}, enabled : true,
 				tooltip : "Time for a little rodeo. Mount up!"
 			});
@@ -682,7 +681,7 @@ Scenes.Equine.WinPrompt = function() {
 }
 
 //TODO
-Scenes.Equine.WinFuckHim = function(enc) {
+EquineScenes.WinFuckHim = function(enc) {
 	var mare     = enc.mare;
 	var stallion = enc.stallion;
 
@@ -1116,7 +1115,7 @@ Scenes.Equine.WinFuckHim = function(enc) {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Equine.WinFuckHer = function(enc) {
+EquineScenes.WinFuckHer = function(enc) {
 	var mare     = enc.mare;
 	var stallion = enc.stallion;
 
@@ -1256,7 +1255,7 @@ Scenes.Equine.WinFuckHer = function(enc) {
 	});
 }
 
-Scenes.Equine.WinRideHimVag = function(enc) {
+EquineScenes.WinRideHimVag = function(enc) {
 	var mare     = enc.mare;
 	var stallion = enc.stallion;
 
@@ -1330,7 +1329,7 @@ Scenes.Equine.WinRideHimVag = function(enc) {
 			Text.Add("Before you can reach your peak, the equine cries out. His frame goes tense, his heavy balls contract, and he thrusts his hips upward as ecstasy overpowers his endurance like a tidal wave. A gasp escapes your lips as you suddenly feel a surge of liquid heat flowing into your lower half. Your gut becomes paunched as the thick seed floods your uterus beyond capacity, streams of off-white jizz spurting past the imperfect seal of your stretched labia and drooling down the underside of his scrotum.", parse);
 			Text.NL();
 
-			Scenes.Equine.StallionImpregnate(player, enc.stallion);
+			EquineScenes.StallionImpregnate(player, enc.stallion);
 
 			Text.Add("After a few more squirts, the stallion is spent. He is sprawled limply on the ground beneath you, his tongue lolling out and his eyes almost crossed from the intense pleasure. You can feel his cock shrinking inside you and it soon flops out to allow a cascade of spunk to pour from your [vag], coating his lower body white. You click your tongue in disappointment; you were quite close to your own release - and being deprived like that has left you a little edgy. There must be some way to...", parse);
 			Text.Flush();
@@ -1412,4 +1411,4 @@ Scenes.Equine.WinRideHimVag = function(enc) {
 	});
 }
 
-export { Equine };
+export { Equine, EquineScenes };

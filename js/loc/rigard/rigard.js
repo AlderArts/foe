@@ -5,18 +5,23 @@
  */
 
 import { world } from '../../world';
-import { Event, Scenes, EncounterTable } from '../../event';
+import { EncounterTable } from '../../event';
 import { BrothelLoc } from './brothel';
-import { InnLoc } from './inn';
+import { InnLoc, LBScenes } from './inn';
 import { Shop } from '../../shop';
 import { ResidentialLoc } from './residential';
 import { SlumsLoc } from './slums';
 import { TavernLoc } from './tavern';
 import { GateLoc, BarracksLoc } from './guards';
-import { ShopStreetLoc } from './merchants';
-import { CastleLoc } from './castle';
-import { PlazaLoc } from './plaza';
+import { ShopStreetLoc, ShopStreetScenes } from './merchants';
+import { CastleLoc, NobleScenes } from './castle';
+import { PlazaLoc, PlazaScenes } from './plaza';
 import { KrawitzLoc } from './krawitz';
+import { OddShopScenes } from './sexstore';
+import { WeaponShopScenes } from './weaponshop';
+import { MagicShopScenes } from './magicshop';
+import { ClothShopScenes } from './clothstore';
+import { ArmorShopScenes } from './armorshop';
 
 // Create namespace
 let RigardLoc = {
@@ -39,7 +44,17 @@ let RigardLoc = {
 	Tavern       : TavernLoc,
 }
 
-Scenes.Rigard = {};
+let RigardScenes = {
+	OddShop : OddShopScenes,
+	WeaponShop : WeaponShopScenes,
+	Plaza : PlazaScenes,
+	ShopStreet : ShopStreetScenes,
+	MagicShop : MagicShopScenes,
+	LB : LBScenes,
+	ClothShop : ClothShopScenes,
+	Noble : NobleScenes,
+	ArmorShop : ArmorShopScenes,
+};
 
 // Class to handle global flags and logic for town
 function Rigard(storage) {
@@ -50,8 +65,8 @@ function Rigard(storage) {
 	this.ClothShop.AddItem(Items.Armor.SimpleRobes, 5);
 	this.ClothShop.AddItem(Items.Armor.StylizedClothes, 5);
 
-	this.ArmorShop = Scenes.Rigard.ArmorShop.Shop;
-	this.ArmorShopSpecial = Scenes.Rigard.ArmorShop.SpecialShop;
+	this.ArmorShop = RigardScenes.ArmorShop.Shop;
+	this.ArmorShopSpecial = RigardScenes.ArmorShop.SpecialShop;
 
 	this.SexShop = new Shop();
 	this.SexShop.AddItem(Items.StrapOn.PlainStrapon, 5);
@@ -61,7 +76,7 @@ function Rigard(storage) {
 	this.SexShop.AddItem(Items.StrapOn.ChimeraStrapon, 5);
 	this.SexShop.AddItem(Items.Weapons.LWhip, 5);
 
-	this.MagicShop = Scenes.Rigard.MagicShop.Shop;
+	this.MagicShop = RigardScenes.MagicShop.Shop;
 
 	// Have accessed town (not necessarily free access)
 	this.flags["Visa"] = 0;
@@ -239,7 +254,7 @@ Rigard.prototype.BlownBarnaby = function() {
 	return this.flags["Barnaby"] & Rigard.Barnaby.Blowjob;
 }
 
-Scenes.Rigard.CityHistory = function() {
+RigardScenes.CityHistory = function() {
 	Text.Clear();
 	var parse = {};
 
@@ -293,7 +308,7 @@ Scenes.Rigard.CityHistory = function() {
 	Gui.NextPrompt();
 }
 
-Scenes.Rigard.ChatterIntro = function(parse, enteringArea) {
+RigardScenes.ChatterIntro = function(parse, enteringArea) {
 	var introText = new EncounterTable();
 	introText.AddEnc(function() {
 		Text.Add("As you are entering the area, you overhear [aAn1] [NPC1] and [aAn2] [NPC2] talking.", parse);
@@ -310,7 +325,7 @@ Scenes.Rigard.ChatterIntro = function(parse, enteringArea) {
 	introText.Get();
 }
 
-Scenes.Rigard.ChatterOutro = function(parse) {
+RigardScenes.ChatterOutro = function(parse) {
 	var outroText = new EncounterTable();
 	outroText.AddEnc(function() {
 		Text.Add("Their conversation fades behind you as you walk on.", parse);
@@ -333,7 +348,7 @@ Scenes.Rigard.ChatterOutro = function(parse) {
 	outroText.Get();
 }
 
-Scenes.Rigard.Chatter = function(enteringArea) {
+RigardScenes.Chatter = function(enteringArea) {
 	Text.Clear();
 	var parse = {};
 
@@ -466,7 +481,7 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 	}
 
 	// Introductory text
-	Scenes.Rigard.ChatterIntro(parse, enteringArea);
+	RigardScenes.ChatterIntro(parse, enteringArea);
 
 	Text.NL();
 
@@ -639,7 +654,7 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 
 	Text.NL();
 	// Outro text
-	Scenes.Rigard.ChatterOutro(parse);
+	RigardScenes.ChatterOutro(parse);
 
 	if(!enteringArea)
 		world.TimeStep({minute: 10});
@@ -650,7 +665,7 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 }
 
 //New Del stuff
-Scenes.Rigard.Chatter2 = function(enteringArea) {
+RigardScenes.Chatter2 = function(enteringArea) {
 	Text.Clear();
 	var parse = {
 		playername : player.name
@@ -830,7 +845,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		           CreateNPC(true, true, true, false));
 
 		// Introductory text
-		Scenes.Rigard.ChatterIntro(parse, enteringArea);
+		RigardScenes.ChatterIntro(parse, enteringArea);
 		Text.NL();
 		Text.Add("<i>“Have you seen the prince and princess?”</i> the [NPC1] asks.", parse);
 		Text.NL();
@@ -841,13 +856,13 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.Add("<i>“...you’re quite the pervert, aren’t you.”</i>", parse);
 		Text.NL();
 		// Outro text
-		Scenes.Rigard.ChatterOutro(parse);
+		RigardScenes.ChatterOutro(parse);
 	}, Math.max(lowerArea, middleArea), function() { return true; });
 	scenes.AddEnc(function() {
 		SetGenders(CreateNPC(true, false, false, false),
 		           CreateNPC(true, false, false, false));
 		// Introductory text
-		Scenes.Rigard.ChatterIntro(parse, enteringArea);
+		RigardScenes.ChatterIntro(parse, enteringArea);
 		Text.NL();
 		Text.Add("<i>“...you just gotta survive till the twins take over. They’ll raise the morphs up, make everyone’s lives better, make sure every family goes fed,”</i> the [NPC1] reassures the [NPC2].", parse);
 		Text.NL();
@@ -856,13 +871,13 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.Add("<i>“I swear ‘tis true! My cousin’s friend’s sister works in the palace, and he tells me she swears whenever she encounters Rumi or Rani, they treat her very well. Obviously, they can’t say anything in support of morphs in front of Rewyn, but…”</i>", parse);
 		Text.NL();
 		// Outro text
-		Scenes.Rigard.ChatterOutro(parse);
+		RigardScenes.ChatterOutro(parse);
 	}, lowerArea, function() { return true; });
 	scenes.AddEnc(function() {
 		SetGenders(CreateNPC(true, true, true, true),
 		           CreateNPC(true, true, true, true));
 		// Introductory text
-		Scenes.Rigard.ChatterIntro(parse, enteringArea);
+		RigardScenes.ChatterIntro(parse, enteringArea);
 		Text.NL();
 		Text.Add("<i>“You hear about Krawitz’ wife and daughter getting it on with the servants?”</i> the [NPC1] asks.", parse);
 		Text.NL();
@@ -871,7 +886,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.Add("<i>“I bet Krawitz is jealous of them too. No doubt in my mind that old goat was angling to sleep with both of ‘em himself.”</i>", parse);
 		Text.NL();
 		// Outro text
-		Scenes.Rigard.ChatterOutro(parse);
+		RigardScenes.ChatterOutro(parse);
 	}, 1.0, function() { return rigard.Krawitz["F"] & Scenes.Krawitz.Flags.Orgy; });
 	scenes.AddEnc(function() {
 		Text.Add("Walking along, your eyes are drawn to a man in front of you. He reaches up to pull the hood of his cloak further down over his face, even though only a hint of his features is visible as it is.", parse);
@@ -884,7 +899,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		SetGenders(CreateNPC(true, true, true, false),
 		           CreateNPC(true, true, true, false));
 		// Introductory text
-		Scenes.Rigard.ChatterIntro(parse, enteringArea);
+		RigardScenes.ChatterIntro(parse, enteringArea);
 		Text.NL();
 		Text.Add("<i>“...thief that robbed Krawitz got let out,”</i> the [NPC1] remarks.", parse);
 		Text.NL();
@@ -895,13 +910,13 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.Add("The [NPC2] nods, then smiles. <i>“Almost.”</i>", parse);
 		Text.NL();
 		// Outro text
-		Scenes.Rigard.ChatterOutro(parse);
+		RigardScenes.ChatterOutro(parse);
 	}, Math.max(lowerArea, middleArea), function() { return terry.flags["Saved"] >= Terry.Saved.Saved; });
 	scenes.AddEnc(function() {
 		SetGenders(CreateNPC(true, true, true, false),
 		           CreateNPC(true, true, true, false));
 		// Introductory text
-		Scenes.Rigard.ChatterIntro(parse, enteringArea);
+		RigardScenes.ChatterIntro(parse, enteringArea);
 		Text.NL();
 		Text.Add("<i>“Why do they call that Royal Guard captain Preston the Shining?”</i> the [NPC1] asks.", parse);
 		Text.NL();
@@ -912,13 +927,13 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.Add("<i>“Someday, I’d like him to walk by my window, so I can empty my chamber pot on him. Maybe we could call him Preston the Shithead then. It’d match his character better.”</i>", parse);
 		Text.NL();
 		// Outro text
-		Scenes.Rigard.ChatterOutro(parse);
+		RigardScenes.ChatterOutro(parse);
 	}, Math.max(lowerArea, middleArea), function() { return true; });
 	scenes.AddEnc(function() {
 		SetGenders(CreateNPC(false, true, true, true),
 		           CreateNPC(false, true, true, true));
 		// Introductory text
-		Scenes.Rigard.ChatterIntro(parse, enteringArea);
+		RigardScenes.ChatterIntro(parse, enteringArea);
 		Text.NL();
 		Text.Add("<i>“...noble idea to uphold morals, but Preston doesn’t understand that debauchery was always here, and it will always be here,”</i> the [NPC1] says. <i>“It is not the place of the Royal Guard to somehow try to change that.”</i>", parse);
 		Text.NL();
@@ -927,14 +942,14 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.Add("<i>“It’s a pity his son did not take more after him.”</i> The [NPC1] grins. <i>“We could use a few more places like that.”</i>", parse);
 		Text.NL();
 		// Outro text
-		Scenes.Rigard.ChatterOutro(parse);
+		RigardScenes.ChatterOutro(parse);
 	}, Math.max(nobleArea, middleArea), function() { return true; });
 	scenes.AddEnc(function() {
 		SetGenders(CreateNPC(false, true, true, true),
 		           CreateNPC(false, true, true, true));
 		SetRandomGender();
 		// Introductory text
-		Scenes.Rigard.ChatterIntro(parse, enteringArea);
+		RigardScenes.ChatterIntro(parse, enteringArea);
 		Text.NL();
 		Text.Add("<i>“Have you seen the teapot in Lady’s Blessing? I swear it looks like a monster out of legend,”</i> the [NPC1] says.", parse);
 		Text.NL();
@@ -945,13 +960,13 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.Add("<i>“Y’mean the grand[rfamo]ther that gambled half [rhisher] money away?”</i>", parse);
 		Text.NL();
 		// Outro text
-		Scenes.Rigard.ChatterOutro(parse);
+		RigardScenes.ChatterOutro(parse);
 	}, Math.max(nobleArea, middleArea), function() { return true; });
 	scenes.AddEnc(function() {
 		SetGenders(CreateNPC(false, true, true, true),
 		           CreateNPC(false, true, true, true));
 		// Introductory text
-		Scenes.Rigard.ChatterIntro(parse, enteringArea);
+		RigardScenes.ChatterIntro(parse, enteringArea);
 		Text.NL();
 		Text.Add("<i>“...should just hire some mercenaries when we need them. I don’t want to see an ever growing standing army that slowly takes over the state,”</i> the [NPC1] says.", parse);
 		Text.NL();
@@ -960,13 +975,13 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.Add("<i>“Well, there’s Lei. People say he’s never so much as deviated from a contract. We just need to get a bunch more like that from wherever it was he came from.”</i>", parse);
 		Text.NL();
 		// Outro text
-		Scenes.Rigard.ChatterOutro(parse);
+		RigardScenes.ChatterOutro(parse);
 	}, Math.max(nobleArea, middleArea), function() { return true; });
 	scenes.AddEnc(function() {
 		SetGenders(CreateNPC(true, true, true, true),
 		           CreateNPC(true, true, true, true));
 		// Introductory text
-		Scenes.Rigard.ChatterIntro(parse, enteringArea);
+		RigardScenes.ChatterIntro(parse, enteringArea);
 		Text.NL();
 		Text.Add("<i>“When are you finally going to go?”</i> the [NPC1] asks.", parse);
 		Text.NL();
@@ -979,13 +994,13 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.Add("The [NPC1] laughs. <i>“Oh come on, you know he doesn’t do that,”</i> [heshe1] says, though the lilt in [hisher1] voices suggests [heshe1] isn’t entirely certain.", parse);
 		Text.NL();
 		// Outro text
-		Scenes.Rigard.ChatterOutro(parse);
+		RigardScenes.ChatterOutro(parse);
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
 		SetGenders(CreateNPC(false, false, true, true),
 		           CreateNPC(false, false, true, true));
 		// Introductory text
-		Scenes.Rigard.ChatterIntro(parse, enteringArea);
+		RigardScenes.ChatterIntro(parse, enteringArea);
 		Text.NL();
 		Text.Add("<i>“With all due respect to her majesty,”</i> the [NPC1] says, <i>“however much that is, I wish Rewyn would just keep her away from Rumi and Rani.”</i>", parse);
 		Text.NL();
@@ -996,13 +1011,13 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.Add("<i>“Well, when you put it that way…”</i>", parse);
 		Text.NL();
 		// Outro text
-		Scenes.Rigard.ChatterOutro(parse);
+		RigardScenes.ChatterOutro(parse);
 	}, Math.max(nobleArea, middleArea), function() { return true; });
 	scenes.AddEnc(function() {
 		SetGenders(CreateNPC(false, false, false, true),
 		           CreateNPC(false, false, false, true));
 		// Introductory text
-		Scenes.Rigard.ChatterIntro(parse, enteringArea);
+		RigardScenes.ChatterIntro(parse, enteringArea);
 		Text.NL();
 		Text.Add("<i>“I never quite comprehend how our king got stuck with someone like Rhylla for a consort,”</i> the [NPC1] says. <i>“She has a nice enough rack, and I wouldn’t mind getting some of that butt, but really…”</i>", parse);
 		Text.NL();
@@ -1011,13 +1026,13 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.Add("<i>“But they grow wine! Wine, for the Lady’s sake! I bet she doesn’t even have a single drop of Riordain’s blood in her…”</i>", parse);
 		Text.NL();
 		// Outro text
-		Scenes.Rigard.ChatterOutro(parse);
+		RigardScenes.ChatterOutro(parse);
 	}, nobleArea, function() { return true; });
 	scenes.AddEnc(function() {
 		SetGenders(CreateNPC(true, true, true, true),
 		           CreateNPC(true, true, true, true));
 		// Introductory text
-		Scenes.Rigard.ChatterIntro(parse, enteringArea);
+		RigardScenes.ChatterIntro(parse, enteringArea);
 		parse["rboygirl"] = Math.random() > 0.5 ? "boy" : "girl";
 		Text.NL();
 		Text.Add("<i>“I heard Majid has a new pair of [rboygirl]s following him around again,”</i> the [NPC1] says. <i>“I don’t get why the king stands for it.”</i>", parse);
@@ -1029,14 +1044,14 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.Add("The [NPC2] shakes [hisher2] head, and shudders. <i>“Well, I hope that veil he wears at least prevents whatever it is he has from spreading to them. I don’t want a creepiness plague to burn through the city.”</i>", parse);
 		Text.NL();
 		// Outro text
-		Scenes.Rigard.ChatterOutro(parse);
+		RigardScenes.ChatterOutro(parse);
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
 		SetGenders(CreateNPC(true, false, false, false),
 		           CreateNPC(true, false, false, false));
 		SetRandomGender();
 		// Introductory text
-		Scenes.Rigard.ChatterIntro(parse, enteringArea);
+		RigardScenes.ChatterIntro(parse, enteringArea);
 		Text.NL();
 		Text.Add("The [NPC1] sighs. <i>“We might have to get on with just bread for a while. My cousin cut through an alleyway yesteday evening--”</i>", parse);
 		Text.NL();
@@ -1045,13 +1060,13 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.Add("<i>“Yeah, but you know how [rheshe] is. At least [rheshe] had sense enough to carry only a few coins, or we’d be on the edge of starving.”</i>", parse);
 		Text.NL();
 		// Outro text
-		Scenes.Rigard.ChatterOutro(parse);
+		RigardScenes.ChatterOutro(parse);
 	}, lowerArea, function() { return true; });
 	scenes.AddEnc(function() {
 		SetGenders(CreateNPC(true, false, false, false),
 		           CreateNPC(true, false, false, false));
 		// Introductory text
-		Scenes.Rigard.ChatterIntro(parse, enteringArea);
+		RigardScenes.ChatterIntro(parse, enteringArea);
 		Text.NL();
 		Text.Add("<i>“...finally gave my wife a raise. I think we can afford a nicer room now,”</i> the [NPC1] says.", parse);
 		Text.NL();
@@ -1062,14 +1077,14 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.Add("<i>“Well, ain’t that the way of the world.”</i>", parse);
 		Text.NL();
 		// Outro text
-		Scenes.Rigard.ChatterOutro(parse);
+		RigardScenes.ChatterOutro(parse);
 	}, lowerArea, function() { return true; });
 	scenes.AddEnc(function() {
 		SetGenders(CreateNPC(true, false, false, false),
 		           CreateNPC(true, false, false, false));
 		SetRandomGender();
 		// Introductory text
-		Scenes.Rigard.ChatterIntro(parse, enteringArea);
+		RigardScenes.ChatterIntro(parse, enteringArea);
 		Text.NL();
 		Text.Add("<i>“I simply love those berry pastries you make,”</i> the [NPC1] remarks. <i>“I bet if you sold them, the whole quarter would be all over them.”</i>", parse);
 		Text.NL();
@@ -1082,13 +1097,13 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.Add("<i>“Don’t worry, [rheshe]’s really cute. You’ll love it.”</i>", parse);
 		Text.NL();
 		// Outro text
-		Scenes.Rigard.ChatterOutro(parse);
+		RigardScenes.ChatterOutro(parse);
 	}, lowerArea, function() { return true; });
 	scenes.AddEnc(function() {
 		SetGenders(CreateNPC(true, false, false, false),
 		           CreateNPC(true, false, false, false));
 		// Introductory text
-		Scenes.Rigard.ChatterIntro(parse, enteringArea);
+		RigardScenes.ChatterIntro(parse, enteringArea);
 		Text.NL();
 		Text.Add("<i>“It’s days like these I almost hope those hobknockers hiding in the woods would pull their dicks out of the deer and take over the city already,”</i> the [NPC1] says, a light growl in [hisher1] voice.", parse);
 		Text.NL();
@@ -1097,14 +1112,14 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.Add("<i>“Ha! Wouldn’t that be the day?”</i>", parse);
 		Text.NL();
 		// Outro text
-		Scenes.Rigard.ChatterOutro(parse);
+		RigardScenes.ChatterOutro(parse);
 	}, lowerArea, function() { return true; });
 	scenes.AddEnc(function() {
 		SetGenders(CreateNPC(false, false, true, false),
 		           CreateNPC(false, false, true, false));
 		SetRandomGender();
 		// Introductory text
-		Scenes.Rigard.ChatterIntro(parse, enteringArea);
+		RigardScenes.ChatterIntro(parse, enteringArea);
 		Text.NL();
 		Text.Add("<i>“...so, [rheshe] just barged in when I was talking to the grocer, [rhisher] nose turned up to the sky, and demanded that [rheshe] be served first,”</i> the [NPC1] complains. <i>“Naturally, I protested that, noble or not, [rheshe] should wait in line, like anybody else.”</i>", parse);
 		Text.NL();
@@ -1113,13 +1128,13 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.Add("<i>“So then a royal guard came and just shoved me away. Shoved! ‘The dignity of the nobility must be upheld,’ he said. What dignity, I ask you? Half of them are poorer than us, and most of them haven’t done a useful thing in their entire lives. Doesn’t this high and mighty ‘dignity’ need to be earned?”</i>", parse);
 		Text.NL();
 		// Outro text
-		Scenes.Rigard.ChatterOutro(parse);
+		RigardScenes.ChatterOutro(parse);
 	}, middleArea, function() { return true; });
 	scenes.AddEnc(function() {
 		SetGenders(CreateNPC(false, false, true, false),
 		           CreateNPC(false, false, true, false));
 		// Introductory text
-		Scenes.Rigard.ChatterIntro(parse, enteringArea);
+		RigardScenes.ChatterIntro(parse, enteringArea);
 		Text.NL();
 		Text.Add("<i>“It’s hard to save up enough leave a good amount for all my children,”</i> the [NPC1] says. <i>“I wanted them to be comfortable, but it seems like they’ll have to make their own way.”</i>", parse);
 		Text.NL();
@@ -1128,7 +1143,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.Add("<i>“Ha, not a bad idea! Those priests do pretty well for themselves.”</i>", parse);
 		Text.NL();
 		// Outro text
-		Scenes.Rigard.ChatterOutro(parse);
+		RigardScenes.ChatterOutro(parse);
 	}, middleArea, function() { return true; });
 	scenes.AddEnc(function() {
 		Text.Add("As you’re walking along, you overhear a conversation between two well-dressed middle-aged men.", parse);
@@ -1143,7 +1158,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		SetGenders(CreateNPC(false, true, true, false),
 		           CreateNPC(false, true, true, false));
 		// Introductory text
-		Scenes.Rigard.ChatterIntro(parse, enteringArea);
+		RigardScenes.ChatterIntro(parse, enteringArea);
 		Text.NL();
 		Text.Add("The [NPC1] glances around secretively, and leans a little toward the [NPC2]. <i>“Last night was so much fun, you wouldn’t even believe it.”</i>", parse);
 		Text.NL();
@@ -1156,26 +1171,26 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.Add("<i>“Shh, not so loud! The things she can do with her tail…”</i>", parse);
 		Text.NL();
 		// Outro text
-		Scenes.Rigard.ChatterOutro(parse);
+		RigardScenes.ChatterOutro(parse);
 	}, middleArea, function() { return true; });
 	scenes.AddEnc(function() {
 		SetGenders(CreateNPC(false, true, true, false),
 		           CreateNPC(false, true, true, false));
 		// Introductory text
-		Scenes.Rigard.ChatterIntro(parse, enteringArea);
+		RigardScenes.ChatterIntro(parse, enteringArea);
 		Text.NL();
 		Text.Add("<i>“I’ve found this great butcher’s store that’s opened just off Reprun street by the Plaza,”</i> the [NPC1] says. <i>“Perfect fresh cuts, and very good prices.”</i>", parse);
 		Text.NL();
 		Text.Add("<i>“I have heard of that place,”</i> the [NPC2] replies, looking a little dejected, <i>“but don’t really want to go. Whenever I’m in that area, I get all these funny looks.”</i> [HeShe2] motions at [hisher2] dog ears by way of explanation.", parse);
 		Text.NL();
 		// Outro text
-		Scenes.Rigard.ChatterOutro(parse);
+		RigardScenes.ChatterOutro(parse);
 	}, middleArea, function() { return true; });
 	scenes.AddEnc(function() {
 		SetGenders(CreateNPC(false, false, false, true),
 		           CreateNPC(false, false, false, true));
 		// Introductory text
-		Scenes.Rigard.ChatterIntro(parse, enteringArea);
+		RigardScenes.ChatterIntro(parse, enteringArea);
 		Text.NL();
 		Text.Add("<i>“It’s simply the most dreadful case of you-know-what,”</i> the [NPC1] says, wincing theatrically.", parse);
 		Text.NL();
@@ -1186,13 +1201,13 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.Add("The [NPC2] looks thoughtful. <i>“It is true, I must concede. A decade ago, I would’ve suggested that elf Jeanne, but she turned out to be as bad the rest.”</i>", parse);
 		Text.NL();
 		// Outro text
-		Scenes.Rigard.ChatterOutro(parse);
+		RigardScenes.ChatterOutro(parse);
 	}, nobleArea, function() { return true; });
 	scenes.AddEnc(function() {
 		SetGenders(CreateNPC(false, false, false, true),
 		           CreateNPC(false, false, false, true));
 		// Introductory text
-		Scenes.Rigard.ChatterIntro(parse, enteringArea);
+		RigardScenes.ChatterIntro(parse, enteringArea);
 		Text.NL();
 		Text.Add("<i>“I had the worst experience today.”</i> The [NPC1] shudders.", parse);
 		Text.NL();
@@ -1205,13 +1220,13 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.Add("The [NPC1] nods emphatically. <i>“Disgusting. I don’t know how the king stands him.”</i>", parse);
 		Text.NL();
 		// Outro text
-		Scenes.Rigard.ChatterOutro(parse);
+		RigardScenes.ChatterOutro(parse);
 	}, nobleArea, function() { return true; });
 	scenes.AddEnc(function() {
 		SetGenders(CreateNPC(false, false, false, true),
 		           CreateNPC(false, false, false, true));
 		// Introductory text
-		Scenes.Rigard.ChatterIntro(parse, enteringArea);
+		RigardScenes.ChatterIntro(parse, enteringArea);
 		Text.NL();
 		Text.Add("<i>“...been looking, really I have, but how am I to find a match for him with his reputation?”</i> the [NPC1] demands, looking on the verge of tears. <i>“What family will trust their daughter to someone who no sooner proclaims his love for a woman than he starts cheating on her?”</i>", parse);
 		Text.NL();
@@ -1220,7 +1235,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.Add("<i>“What?! How could I trust my son to someone like that?”</i>", parse);
 		Text.NL();
 		// Outro text
-		Scenes.Rigard.ChatterOutro(parse);
+		RigardScenes.ChatterOutro(parse);
 	}, nobleArea, function() { return true; });
 	scenes.AddEnc(function() {
 		SetGenders(CreateNPC(false, false, false, true),
@@ -1243,7 +1258,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 			parse.xrhishers     = "hers";
 		}
 		// Introductory text
-		Scenes.Rigard.ChatterIntro(parse, enteringArea);
+		RigardScenes.ChatterIntro(parse, enteringArea);
 		Text.NL();
 		Text.Add("<i>“...my financial situation, you know. [rHeShe] offered me such a large dowry for my [xrsondaughter]’s hand,”</i> the [NPC1] says. <i>“It will take a stroke of fortune to makes ends meet if I refuse.”</i>", parse);
 		Text.NL();
@@ -1254,13 +1269,13 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.Add("The pair bursts into laughter at the remark.", parse);
 		Text.NL();
 		// Outro text
-		Scenes.Rigard.ChatterOutro(parse);
+		RigardScenes.ChatterOutro(parse);
 	}, nobleArea, function() { return true; });
 	scenes.AddEnc(function() {
 		SetGenders(CreateNPC(false, false, false, true),
 		           CreateNPC(false, false, false, true));
 		// Introductory text
-		Scenes.Rigard.ChatterIntro(parse, enteringArea);
+		RigardScenes.ChatterIntro(parse, enteringArea);
 		Text.NL();
 		Text.Add("<i>“So, the other day, the new girl was sweeping the floors, and you know, she has the most delicious butt,”</i> the [NPC1] says. <i>“Of course, walking by, I grabbed it and just gave it a nice, firm squeeze before moving on. And can you imagine? She raised her voice and complained!”</i>", parse);
 		Text.NL();
@@ -1269,13 +1284,13 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.Add("<i>“Yes. Said I should respect her, or some balderdash. Where’s her respect for me, I ask you? Servants just don’t know how to behave these days. Now in my pappy’s time…”</i>", parse);
 		Text.NL();
 		// Outro text
-		Scenes.Rigard.ChatterOutro(parse);
+		RigardScenes.ChatterOutro(parse);
 	}, nobleArea, function() { return true; });
 	scenes.AddEnc(function() {
 		SetGenders(CreateNPC(false, false, false, true),
 		           CreateNPC(false, false, false, true));
 		// Introductory text
-		Scenes.Rigard.ChatterIntro(parse, enteringArea);
+		RigardScenes.ChatterIntro(parse, enteringArea);
 		Text.NL();
 		Text.Add("<i>“So, why did Krawitz,”</i> the [NPC1] begins, before being interrupted with an involuntary churtle from the [NPC2]. <i>“No, hear me out. Why did Krawitz skip the ball the other night?”</i>", parse);
 		Text.NL();
@@ -1284,7 +1299,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.Add("<i>“Because he’s still working on his mew look.”</i> The [NPC1] makes ears motions with [hisher1] hands above [hisher1] head, and both nobles break out in giggles.", parse);
 		Text.NL();
 		// Outro text
-		Scenes.Rigard.ChatterOutro(parse);
+		RigardScenes.ChatterOutro(parse);
 	}, nobleArea, function() { return rigard.Krawitz["F"] & Scenes.Krawitz.Flags.TF; });
 	scenes.AddEnc(function() {
 		Text.Add("Standing at the mouth of an alleyway, a short bulky man is chatting with a taller, broad-shouldered man. Their clothes hang a little loose on them, and are spotted with unpatched holes. The mention of rather impressive sexual acts catches your attention.", parse);
@@ -1448,7 +1463,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 	}
 }
 
-Scenes.Rigard.Lockdown = function() {
+RigardScenes.Lockdown = function() {
 	var parse = {
 		playername : player.name,
 		merchantsCitizens : (party.location == RigardLoc.Gate) ? "merchants" : "citizens",
@@ -1822,4 +1837,4 @@ Scenes.Rigard.Lockdown = function() {
 	});
 }
 
-export { Rigard, RigardLoc };
+export { Rigard, RigardLoc, RigardScenes };

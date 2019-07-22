@@ -4,12 +4,12 @@
 //
 
 import { world } from '../../world';
-import { Event, Link, Scenes } from '../../event';
+import { Event, Link } from '../../event';
 
 let OddShopLoc = new Event("Odd shop");
 
-Scenes.Rigard.OddShop = {};
-Scenes.Rigard.OddShop.IsOpen = function() {
+let OddShopScenes = {};
+OddShopScenes.IsOpen = function() {
 	return (world.time.hour >= 9 && world.time.hour < 18) && !rigard.UnderLockdown();
 }
 
@@ -20,7 +20,7 @@ OddShopLoc.description = function() {
 OddShopLoc.events.push(new Link(
 	"Shopkeeper", true, true, null,
 	function() {
-		Scenes.Rigard.OddShop.Prompt();
+		OddShopScenes.Prompt();
 	}
 ));
 
@@ -31,7 +31,7 @@ OddShopLoc.events.push(new Link(
 	}
 ));
 
-Scenes.Rigard.OddShop.Prompt = function() {
+OddShopScenes.Prompt = function() {
 	var parse = {
 		
 	};
@@ -58,4 +58,4 @@ Scenes.Rigard.OddShop.Prompt = function() {
 	prompt();
 }
 
-export { OddShopLoc };
+export { OddShopLoc, OddShopScenes };

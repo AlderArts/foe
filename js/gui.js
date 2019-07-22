@@ -9,7 +9,7 @@ import { StatusEffect, StatusList } from './statuseffect';
 import { Input, Keys } from './input';
 import { online, gameState, GameState } from './main';
 import { GAME } from './gamecache';
-import { DataPrompt, ExploreButtonIndex, SetLastSubmenu } from './exploration';
+import { DataPrompt, ExploreButtonIndex, Explore } from './exploration';
 
 Gui.w = 1280;
 Gui.h = 720;
@@ -126,7 +126,7 @@ Gui.Init = function() {
 	Gui.overlay.push(Gui.clock.minute);
 
 	// Set up key listeners (input.js)
-	Input.Init();
+	Input.Init(Gui);
 
 	// Set bg
 	Gui.BgColor = online && localStorage["bgcolor"] ? localStorage["bgcolor"] : "rgba(255, 255, 255, 0.2)";
@@ -672,8 +672,7 @@ Gui.RenderEntity = function(entity, set, obj) {
 	entity.combatStatus.Render(obj.status);
 }
 
-Gui.RenderLocation = function() {
-	var name = GAME.party.location.nameFunc;
+Gui.RenderLocation = function(name) {
 	var nameStr;
 	if(isFunction(name))
 		nameStr = name();
@@ -761,7 +760,7 @@ Gui.Render = function() {
 
 			// TODO: Time
 			Gui.RenderTime();
-			Gui.RenderLocation();
+			Gui.RenderLocation(GAME.party.location.nameFunc);
 			Gui.overlay.show();
 
 			break;
@@ -821,7 +820,7 @@ Gui.Render = function() {
 
 			// TODO: Time
 			Gui.RenderTime();
-			Gui.RenderLocation();
+			Gui.RenderLocation(GAME.party.location.nameFunc);
 			Gui.overlay.show();
 			break;
 	}
@@ -884,5 +883,40 @@ Gui.SavePromptText = function() {
 	Text.Add("<b>NEW:</b> Use the save to text if you are having problems using save to file. Copy the text that appears into a text file, and save it. You will be able to use it with load from file.");
 	Text.Flush();
 }
+
+let LastSubmenu = null;
+Gui.SetLastSubmenu = function(menu) {
+	LastSubmenu = menu;
+}
+Gui.GetLastSubmenu = function() {
+	return LastSubmenu;
+}
+
+Gui.PrintDefaultOptions = function(preventClear) {
+	var e = Gui.Callstack.pop();
+	if(e) {
+		e();
+		return;
+	}
+
+	Gui.ClearButtons();
+
+	if(!preventClear)
+		Text.Clear();
+
+	if(GAME.party.location == null) {
+		Text.Add("ERROR, LOCATION IS NULL");
+		Text.Flush();
+		return;
+	}
+
+	SetGameState(GameState.Game);
+
+	if(LastSubmenu)
+		LastSubmenu.func(preventClear);
+	else
+		Explore();
+}
+
 
 export { Gui };

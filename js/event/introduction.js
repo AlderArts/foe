@@ -7,7 +7,7 @@
 import { Event, Link } from '../event';
 import { world } from '../world';
 import { GameState } from '../main';
-import { PrintDefaultOptions } from '../exploration';
+import { Gui } from '../gui';
 
 let Intro = {};
 
@@ -377,7 +377,7 @@ Intro.DarkAspect = function() {
 	Gui.NextPrompt(function() {
 		party.location = DarkAspect.Barrens;
 		gameState       = GameState.Game;
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 	});
 }
 
@@ -757,7 +757,7 @@ DarkAspect.Peak.links.push(new Link(
 		Text.NL();
 		Text.Add("Engraved in the stone are runes in a strange language, glowing faintly. You don't understand their meaning.");
 		Text.Flush();
-		Gui.NextPrompt(PrintDefaultOptions);
+		Gui.NextPrompt(Gui.PrintDefaultOptions);
 	}
 ));
 DarkAspect.Peak.events.push(new Link(
@@ -1872,7 +1872,7 @@ LightAspect.Garden.events.push(new Link(
 
 		Intro.TalkedToBird = true;
 		Text.Flush();
-		Gui.NextPrompt(PrintDefaultOptions);
+		Gui.NextPrompt(Gui.PrintDefaultOptions);
 	}
 ));
 
@@ -2524,7 +2524,7 @@ Intro.KiaNiceSex69 = function() {
 				player.Fuck(null, 1);
 				kiakai.Fuck(null, 1);
 				Text.Add("Deciding to return the favor, you carefully lift the hem of the elf's robe, exposing [hisher] white panties. Pulling them aside, you expose a tight pink slit, absolutely moist with female juices. Humming to yourself, you lean in to administer some 'healing' of your own. Judging from the muffled gasps down between your legs, the effort is much appreciated.", parse);
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true
 		});
 	}
@@ -2537,7 +2537,7 @@ Intro.KiaNiceSex69 = function() {
 				player.FuckOral(player.Mouth(), kiakai.FirstCock(), 1);
 				kiakai.Fuck(kiakai.FirstCock(), 1);
 				Text.Add("Deciding to return the favor, you carefully lift the hem of the elf's robe, exposing [hisher] white panties. Pulling them aside, you free the elf's [kcock], hard from the excitement. Humming to yourself, you lean in to administer some 'healing' of your own. Judging from the muffled gasps down between your legs, the effort is much appreciated.", parse);
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true
 		});
 	}
@@ -2552,7 +2552,7 @@ Intro.KiaNiceSex69 = function() {
 			Text.Add("Deciding to return the favor, you carefully lift the hem of the elf's robe, exposing [hisher] white panties. Licking your lips, you pull the panties down, ignoring [name]'s [gen] for now. Aiming your attention slightly higher up, you wet one of your fingers with saliva and plunge it into [hisher] tight rosebud. Judging from the muffled gasps down between your legs, the effort is much appreciated.", parse);
 			sucking = false;
 			fingering = true;
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Nope",
@@ -2561,7 +2561,7 @@ Intro.KiaNiceSex69 = function() {
 			Text.Clear();
 			Text.Add("You give [name] a few perfunctory caresses on [hisher] soft [kbutt], then lean back and enjoy your healing session. The light touches only serves to egg the elf on, redoubling [hisher] efforts.", parse);
 			sucking = false;
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	Gui.SetButtonsFromList(options);
@@ -2783,7 +2783,7 @@ Intro.Finalizing = function() {
 
 	Intro.active = false;
 
-	Gui.NextPrompt(PrintDefaultOptions);
+	Gui.NextPrompt(Gui.PrintDefaultOptions);
 }
 
 export { Intro, DarkAspect, LightAspect };

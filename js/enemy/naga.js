@@ -5,7 +5,8 @@
  */
 
 import { Entity } from '../entity';
-import { Scenes } from '../event';
+
+let NagaScenes = {};
 
 function Naga() {
 	Entity.call(this);
@@ -70,8 +71,6 @@ Naga.NagaMateUnlocked = function() {
 	return gameCache.flags["NagaMate"] != 0;
 }
 
-Scenes.Naga = {};
-
 Naga.prototype.DropTable = function() {
 	var drops = [];
 	if(Math.random() < 0.05) drops.push({ it: Items.Nagazm });
@@ -118,7 +117,7 @@ Naga.prototype.Act = function(encounter, activeChar) {
 		Abilities.Seduction.Tease.Use(encounter, this, t);
 }
 
-Scenes.Naga.Impregnate = function(mother, father, slot) {
+NagaScenes.Impregnate = function(mother, father, slot) {
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother : mother,
@@ -130,7 +129,7 @@ Scenes.Naga.Impregnate = function(mother, father, slot) {
 	});
 }
 
-Scenes.Naga.LoneEnc = function() {
+NagaScenes.LoneEnc = function() {
 	var enemy = new Party();
 	var enc = new Encounter(enemy);
 
@@ -138,14 +137,14 @@ Scenes.Naga.LoneEnc = function() {
 
 	enemy.AddMember(enc.naga);
 
-	enc.onEncounter = Scenes.Naga.DesertEncounter;
-	enc.onLoss      = Scenes.Naga.DesertLoss;
-	enc.onVictory   = Scenes.Naga.DesertWinPrompt;
+	enc.onEncounter = NagaScenes.DesertEncounter;
+	enc.onLoss      = NagaScenes.DesertLoss;
+	enc.onVictory   = NagaScenes.DesertWinPrompt;
 
 	return enc;
 }
 
-Scenes.Naga.DesertEncounter = function() {
+NagaScenes.DesertEncounter = function() {
 	var enc  = this;
 	var naga = enc.naga;
 	var parse = {
@@ -193,7 +192,7 @@ Scenes.Naga.DesertEncounter = function() {
 				Text.NL();
 				Text.Flush();
 
-				var ret = Scenes.Naga.DesertLossScenes(enc);
+				var ret = NagaScenes.DesertLossScenes(enc);
 
 				if(!ret) {
 					Text.Add("PLACEHOLDER...");
@@ -233,7 +232,7 @@ Scenes.Naga.DesertEncounter = function() {
 	}
 }
 
-Scenes.Naga.DesertLoss = function() {
+NagaScenes.DesertLoss = function() {
 	var enc  = this;
 	var naga = enc.naga;
 	SetGameState(GameState.Event);
@@ -268,7 +267,7 @@ Scenes.Naga.DesertLoss = function() {
 			Text.Add(" You feel your [vag] moisten as you stare into your captor’s eyes, lubricating you liberally for the impending penetration.", parse);
 		Text.NL();
 
-		var ret = Scenes.Naga.DesertLossScenes(enc);
+		var ret = NagaScenes.DesertLossScenes(enc);
 
 		if(!ret) {
 			Text.Add("PLACEHOLDER...");
@@ -279,18 +278,18 @@ Scenes.Naga.DesertLoss = function() {
 	Encounter.prototype.onLoss.call(enc);
 }
 
-Scenes.Naga.DesertLossScenes = function(enc) {
+NagaScenes.DesertLossScenes = function(enc) {
 	var scenes = new EncounterTable();
 	scenes.AddEnc(function() {
-		Scenes.Naga.DesertLossGetDPd(enc);
+		NagaScenes.DesertLossGetDPd(enc);
 		return true;
 	}, 1.0, function() { return player.FirstVag() && player.LowerBodyType() != LowerBodyType.Single; });
 	scenes.AddEnc(function() {
-		Scenes.Naga.DesertLossUseCock(enc);
+		NagaScenes.DesertLossUseCock(enc);
 		return true;
 	}, 1.0, function() { return player.FirstCock(); });
 	scenes.AddEnc(function() {
-		Scenes.Naga.DesertNagaMating(enc.naga);
+		NagaScenes.DesertNagaMating(enc.naga);
 		return true;
 	}, 1.0, function() { return player.IsNaga(); });
 	//TODO Redo into a proper scene structure
@@ -305,7 +304,7 @@ Scenes.Naga.DesertLossScenes = function(enc) {
 	return scenes.Get();
 }
 
-Scenes.Naga.DesertLossGetDPd = function(enc) {
+NagaScenes.DesertLossGetDPd = function(enc) {
 	var naga = enc.naga;
 	SetGameState(GameState.Event);
 
@@ -422,8 +421,8 @@ Scenes.Naga.DesertLossGetDPd = function(enc) {
 	Text.Add("As you begin to feel the warmth of her cum pumping into you, your already feverish orgasm doubles in intensity, and you let out another scream, muffled by the tail that’s been throat-fucking you. Unable to move or speak as you’re pumped full of sperm from both your [vag] and [anus], you lose yourself to the satisfaction. You can barely breathe around the snake’s flexible appendage, but somehow the sensation of your belly slightly inflating is comforting.", parse);
 	Text.NL();
 
-	Scenes.Naga.Impregnate(player, naga, PregnancyHandler.Slot.Vag);
-	Scenes.Naga.Impregnate(player, naga, PregnancyHandler.Slot.Butt);
+	NagaScenes.Impregnate(player, naga, PregnancyHandler.Slot.Vag);
+	NagaScenes.Impregnate(player, naga, PregnancyHandler.Slot.Butt);
 
 	if(player.FirstCock()) {
 		parse["cum"] = cum > 6 ? "torrents" :
@@ -445,7 +444,7 @@ Scenes.Naga.DesertLossGetDPd = function(enc) {
 }
 
 
-Scenes.Naga.DesertLossUseCock = function(enc) {
+NagaScenes.DesertLossUseCock = function(enc) {
 	var naga = enc.naga;
 	SetGameState(GameState.Event);
 
@@ -661,7 +660,7 @@ Scenes.Naga.DesertLossUseCock = function(enc) {
 }
 
 //TODO
-Scenes.Naga.DesertWinPrompt = function() {
+NagaScenes.DesertWinPrompt = function() {
 	var enc  = this;
 	var naga = enc.naga;
 	SetGameState(GameState.Event);
@@ -687,12 +686,12 @@ Scenes.Naga.DesertWinPrompt = function() {
 		Text.Add("<i>“Please forgive me, [master]. I had no idea you were this… powerful.”</i> Her surrender is delivered in a breathy, clearly aroused voice, and she licks her lips enticingly when she pauses. It’s blatantly obvious that the naga will let you do whatever you want to her.", parse);
 		Text.Flush();
 
-		Scenes.Naga.DesertWinPrompt2(enc, false);
+		NagaScenes.DesertWinPrompt2(enc, false);
 	});
 	Encounter.prototype.onVictory.call(enc);
 }
 
-Scenes.Naga.DesertWinPrompt2 = function(enc, hypno) {
+NagaScenes.DesertWinPrompt2 = function(enc, hypno) {
 	var naga = enc.naga;
 
 	var parse = {};
@@ -702,7 +701,7 @@ Scenes.Naga.DesertWinPrompt2 = function(enc, hypno) {
 	if(player.FirstCock()) {
 		options.push({ nameStr : "Fuck & Jerk",
 			func : function() {
-				Scenes.Naga.DesertWinFuckJerk(enc, hypno);
+				NagaScenes.DesertWinFuckJerk(enc, hypno);
 			}, enabled : true,
 			tooltip : "Pound the naga’s slit while giving her a double handjob."
 		});
@@ -710,7 +709,7 @@ Scenes.Naga.DesertWinPrompt2 = function(enc, hypno) {
 	if(player.FirstVag()) {
 		options.push({ nameStr : "Get fucked",
 			func : function() {
-				Scenes.Naga.DesertWinGetFuckedVag(enc, hypno);
+				NagaScenes.DesertWinGetFuckedVag(enc, hypno);
 			}, enabled : true,
 			tooltip : "Take one of the naga’s huge cocks vaginally."
 		});
@@ -726,7 +725,7 @@ Scenes.Naga.DesertWinPrompt2 = function(enc, hypno) {
 	if(Jobs.Hypnotist.Master(player)) {
 		options.push({ nameStr : "Hypnotize",
 			func : function() {
-				Scenes.Naga.DesertWinHypnotizeOwn(enc);
+				NagaScenes.DesertWinHypnotizeOwn(enc);
 			}, enabled : !hypno,
 			tooltip : "Several times during the battle, you’ve caught a familiar glint in the naga’s eyes. Wouldn’t it be fun to show this creature what a true hypnotist can do?"
 		});
@@ -734,7 +733,7 @@ Scenes.Naga.DesertWinPrompt2 = function(enc, hypno) {
 	else if(Naga.HypnoUnlocked()) {
 		options.push({ nameStr : "Hypnotize",
 			func : function() {
-				Scenes.Naga.DesertWinHypnotize(enc);
+				NagaScenes.DesertWinHypnotize(enc);
 			}, enabled : !hypno,
 			tooltip : "Having been on the receiving end of the naga’s hypnotic eyes before, you have a plan on how to turn her powers back on herself..."
 		});
@@ -777,7 +776,7 @@ Scenes.Naga.DesertWinPrompt2 = function(enc, hypno) {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Naga.DesertWinHypnotize = function(enc) {
+NagaScenes.DesertWinHypnotize = function(enc) {
 	var naga = enc.naga;
 
 	var parse = {};
@@ -798,10 +797,10 @@ Scenes.Naga.DesertWinHypnotize = function(enc) {
 
 	world.TimeStep({minute : 5});
 
-	Scenes.Naga.DesertWinPrompt2(enc, true);
+	NagaScenes.DesertWinPrompt2(enc, true);
 }
 
-Scenes.Naga.DesertWinHypnotizeOwn = function(enc) {
+NagaScenes.DesertWinHypnotizeOwn = function(enc) {
 	var naga = enc.naga;
 
 	var parse = {
@@ -823,10 +822,10 @@ Scenes.Naga.DesertWinHypnotizeOwn = function(enc) {
 
 	world.TimeStep({minute : 5});
 
-	Scenes.Naga.DesertWinPrompt2(enc, true);
+	NagaScenes.DesertWinPrompt2(enc, true);
 }
 
-Scenes.Naga.DesertWinFuckJerk = function(enc, hypno) {
+NagaScenes.DesertWinFuckJerk = function(enc, hypno) {
 	var naga = enc.naga;
 
 	var p1cock = player.BiggestCock();
@@ -956,7 +955,7 @@ Scenes.Naga.DesertWinFuckJerk = function(enc, hypno) {
 	Gui.NextPrompt();
 }
 
-Scenes.Naga.DesertWinGetFuckedVag = function(enc, hypno) {
+NagaScenes.DesertWinGetFuckedVag = function(enc, hypno) {
 	Text.Clear();
 
 	var naga = enc.naga;
@@ -1056,7 +1055,7 @@ Scenes.Naga.DesertWinGetFuckedVag = function(enc, hypno) {
 	Text.Add("It occurs to you in your lust for ever-greater pleasure that your lover has a long, prehensile appendage she isn’t making proper use of right now and you have an unfilled hole...", parse);
 	Text.Flush();
 
-	Scenes.Naga.DesertWinTailpeg({naga : naga, hypno : hypno,
+	NagaScenes.DesertWinTailpeg({naga : naga, hypno : hypno,
 		next : function(tailPeg) {
 			var sens = 0;
 			if(tailPeg) sens++;
@@ -1067,7 +1066,7 @@ Scenes.Naga.DesertWinGetFuckedVag = function(enc, hypno) {
 			Text.Add("Your intense tryst with the naga intensifies until you’re both nearly insensate with pleasure. The[sens] sensations bring you over the edge and you feel your pet’s cocks throb with impending release. Letting yourself go with an animalistic cry of passion, your vaginal muscles clench, squeezing the turgid, throbbing erection in you as if to milk it dry of its precious seed. For her part, the naga bucks her hips, hilting herself inside you as her pricks swell with her imminent ejaculation. You grab your lover’s supple, bountiful breasts and squeeze her nipples tightly as you lose yourself, cumming hard.", parse);
 			Text.NL();
 
-			Scenes.Naga.Impregnate(player, naga, PregnancyHandler.Slot.Vag);
+			NagaScenes.Impregnate(player, naga, PregnancyHandler.Slot.Vag);
 
 			Text.Add("Your [vag]’s orgasm wracks your form, and your upper body curves backward from your [hips] to your head, your spasming muscles locking you into a crescent shape. The naga screams in delight as your fingers, still locked around her [nnips], pull roughly on her [nbreasts], adding to her own overflowing pleasure. You feel long, intense surges of warmth travel through the cock lodged inside your cunt, the snake-slut pumping a huge amount of her cum straight into your welcoming tunnel.", parse);
 			Text.NL();
@@ -1101,7 +1100,7 @@ Scenes.Naga.DesertWinGetFuckedVag = function(enc, hypno) {
 	});
 }
 
-Scenes.Naga.DesertWinTailpeg = function(opts) {
+NagaScenes.DesertWinTailpeg = function(opts) {
 	var parse = {
 
 	};
@@ -1150,7 +1149,7 @@ Scenes.Naga.DesertWinTailpeg = function(opts) {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Naga.DesertNagaMating = function(naga) {
+NagaScenes.DesertNagaMating = function(naga) {
 	var p1cock = player.BiggestCock();
 
 	var parse = {
@@ -1202,7 +1201,7 @@ Scenes.Naga.DesertNagaMating = function(naga) {
 		Text.Add("The naga grunts and hilts herself a final time, her body pressed as closely as possible to you in every place she can. Your mate trembles and quivers as her cocks erupt, hot, sticky snake cum spraying into your [vag] and up onto your [breasts] and further, some even reaching the joining of your lips. Your inner walls are painted with rapid, repeated bursts of spunk, filling you and warming you from the core as your womb is filled with jizz. Meanwhile, the space between your chest and the snake’s is spattered, smeared, and lubricated with more of her spooge, letting your [skin] slide against her body with blissful smoothness and lewd, slippery noises.", parse);
 		Text.NL();
 
-		Scenes.Naga.Impregnate(player, naga, PregnancyHandler.Slot.Vag);
+		NagaScenes.Impregnate(player, naga, PregnancyHandler.Slot.Vag);
 
 		var cum = player.OrgasmCum();
 
@@ -1282,4 +1281,4 @@ Scenes.Naga.DesertNagaMating = function(naga) {
 	scenes.Get();
 }
 
-export { Naga };
+export { Naga, NagaScenes };

@@ -8,7 +8,7 @@ import { ClothShopLoc } from './clothstore';
 import { WeaponShopLoc } from './weaponshop';
 
 
-Scenes.Rigard.ShopStreet = {}
+let ShopStreetScenes = {}
 
 //
 // Merchants
@@ -51,7 +51,7 @@ ShopStreetLoc.street.description = function() {
 ShopStreetLoc.street.enc = new EncounterTable();
 ShopStreetLoc.street.enc.AddEnc(function() { return Scenes.Rigard.Chatter;});
 ShopStreetLoc.street.enc.AddEnc(function() { return Scenes.Rigard.Chatter2;});
-ShopStreetLoc.street.enc.AddEnc(function() { return Scenes.Rigard.ShopStreet.Speculate;}, 1.0, function() { return (world.time.hour >= 6 && world.time.hour < 18); });
+ShopStreetLoc.street.enc.AddEnc(function() { return ShopStreetScenes.Speculate;}, 1.0, function() { return (world.time.hour >= 6 && world.time.hour < 18); });
 ShopStreetLoc.street.enc.AddEnc(function() { return Scenes.Rigard.CityHistory;}, 1.0, function() { return rigard.flags["CityHistory"] == 0; });
 ShopStreetLoc.street.enc.AddEnc(function() { return Scenes.Terry.ExploreMerchants; }, 1000000.0, function() { return rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry; });
 ShopStreetLoc.street.onEntry = function() {
@@ -160,7 +160,7 @@ ShopStreetLoc.street.events.push(new Link(
 	"Scepter", function() { return rigard.flags["Scepter"] != 0 && burrows.flags["Access"] < Burrows.AccessFlags.Stage5; }, true,
 	null,
 	function() {
-		Scenes.Rigard.ShopStreet.Scepter();
+		ShopStreetScenes.Scepter();
 	}
 ));
 
@@ -329,7 +329,7 @@ ShopStreetLoc.street.events.push(new Link(
 	}
 ));
 
-Scenes.Rigard.ShopStreet.Speculate = function() {
+ShopStreetScenes.Speculate = function() {
 	
 	var stalls = ["stall", "booth", "stand"];
 	var Sdescs = ["shabby-looking", "colorful", "neatly-decorated", "well-kept", "well-used", "plain"];
@@ -633,7 +633,7 @@ Scenes.Rigard.ShopStreet.Speculate = function() {
 	Gui.SetButtonsFromList(options);
 }
 
-Scenes.Rigard.ShopStreet.Scepter = function() {
+ShopStreetScenes.Scepter = function() {
 	var parse = {
 		
 	};
@@ -653,4 +653,4 @@ Scenes.Rigard.ShopStreet.Scepter = function() {
 	Gui.NextPrompt()
 }
 
-export { ShopStreetLoc };
+export { ShopStreetLoc, ShopStreetScenes };

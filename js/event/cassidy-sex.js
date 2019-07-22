@@ -1,10 +1,8 @@
 
-import { Scenes } from '../event';
+let SexScenes = {};
+let SparSexScenes = {};
 
-Scenes.Cassidy.Sex = {};
-Scenes.Cassidy.SparSex = {};
-
-Scenes.Cassidy.Sex.Indoors = function() {
+SexScenes.Indoors = function() {
 	var parse = {
 		armor : function() { return player.ArmorDesc(); }
 	};
@@ -55,10 +53,10 @@ Scenes.Cassidy.Sex.Indoors = function() {
 	}
 	Text.Flush();
 	
-	Scenes.Cassidy.Sex.IndoorPrompt();
+	SexScenes.IndoorPrompt();
 }
 
-Scenes.Cassidy.Sex.IndoorPrompt = function(opts) {
+SexScenes.IndoorPrompt = function(opts) {
 	var parse = {
 		
 	};
@@ -73,39 +71,39 @@ Scenes.Cassidy.Sex.IndoorPrompt = function(opts) {
 		tooltip : Text.Parse("No need to rush things. You’ll look her over first.", parse),
 		enabled : !opts.savor,
 		func : function() {
-			Scenes.Cassidy.Sex.Savor(opts);
+			SexScenes.Savor(opts);
 		}
 	});
 	options.push({nameStr : "Tail",
 		tooltip : Text.Parse("She’s got a nice, long tail… it's not a cock, but Cass is resourceful.", parse),
 		enabled : true,
-		func : Scenes.Cassidy.Sex.Tail
+		func : SexScenes.Tail
 	});
 	if(player.BiggestCock(null, true)) {
 		options.push({nameStr : "Fuck her",
 			tooltip : Text.Parse("A traditional favorite.", parse),
 			enabled : cocksInVag.length > 0,
 			func : function() {
-				Scenes.Cassidy.Sex.FuckHer(cocksInVag);
+				SexScenes.FuckHer(cocksInVag);
 			}
 		});
 		options.push({nameStr : "Anal",
 			tooltip : Text.Parse("You feel like the greatest analmancer today, and are going to prove it.", parse),
 			enabled : cocksInAss.length > 0,
 			func : function() {
-				Scenes.Cassidy.Sex.Anal(cocksInAss);
+				SexScenes.Anal(cocksInAss);
 			}
 		});
 	}
 	options.push({nameStr : "Pet",
 		tooltip : Text.Parse("She must be sore after a long day at the forge… a “massage” might help.", parse),
 		enabled : true,
-		func : Scenes.Cassidy.Sex.Pet
+		func : SexScenes.Pet
 	});
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Cassidy.Sex.Savor = function(opts) {
+SexScenes.Savor = function(opts) {
 	opts.savor = true;
 	
 	var parse = {
@@ -159,10 +157,10 @@ Scenes.Cassidy.Sex.Savor = function(opts) {
 	player.AddLustFraction(0.3);
 	world.TimeStep({minute: 15});
 	
-	Scenes.Cassidy.Sex.IndoorPrompt(opts);
+	SexScenes.IndoorPrompt(opts);
 }
 
-Scenes.Cassidy.Sex.Tail = function() {
+SexScenes.Tail = function() {
 	var parse = {
 		
 	};
@@ -195,7 +193,7 @@ Scenes.Cassidy.Sex.Tail = function() {
 				Text.NL();
 				Text.Add("<i>“Not a bad choice,”</i> Cass replies, giving you a pat on the shoulder. <i>“I do get a little practice on myself from time to time, heh. All right, then - ready or not, here I come!”</i>", parse);
 				Text.NL();
-				Scenes.Cassidy.Sex.Tailfuck();
+				SexScenes.Tailfuck();
 			}
 		});
 		options.push({nameStr : "Peg",
@@ -210,7 +208,7 @@ Scenes.Cassidy.Sex.Tail = function() {
 				Text.NL();
 				Text.Add("<i>“Trembling already?”</i> Cass teases you. <i>“Come on, ace - I haven’t even gotten started yet!”</i>", parse);
 				Text.NL();
-				Scenes.Cassidy.Sex.Tailpeg();
+				SexScenes.Tailpeg();
 			}
 		});
 		options.push({nameStr : "Her choice",
@@ -224,9 +222,9 @@ Scenes.Cassidy.Sex.Tail = function() {
 				Text.NL();
 				
 				if(Math.random() < 0.5)
-					Scenes.Cassidy.Sex.Tailpeg();
+					SexScenes.Tailpeg();
 				else
-					Scenes.Cassidy.Sex.Tailfuck();
+					SexScenes.Tailfuck();
 			}
 		});
 		Gui.SetButtonsFromList(options, false, null);
@@ -238,11 +236,11 @@ Scenes.Cassidy.Sex.Tail = function() {
 		Text.NL();
 		Text.Add("Cass just laughs and prepares to mount you doggy-style, that tail of hers writhing as it probes its way between your cheeks.", parse);
 		Text.NL();
-		Scenes.Cassidy.Sex.Tailpeg();
+		SexScenes.Tailpeg();
 	}
 }
 
-Scenes.Cassidy.Sex.Tailfuck = function() {
+SexScenes.Tailfuck = function() {
 	var parse = {
 		
 	};
@@ -278,10 +276,10 @@ Scenes.Cassidy.Sex.Tailfuck = function() {
 	Text.NL();
 	Text.Add("Not tonight, not tonight!", parse);
 	Text.NL();
-	Scenes.Cassidy.Sex.Outro();
+	SexScenes.Outro();
 }
 
-Scenes.Cassidy.Sex.Tailpeg = function() {
+SexScenes.Tailpeg = function() {
 	var parse = {
 		
 	};
@@ -345,10 +343,10 @@ Scenes.Cassidy.Sex.Tailpeg = function() {
 	Text.NL();
 	Text.Add("Cass just laughs.", parse);
 	Text.NL();
-	Scenes.Cassidy.Sex.Outro();
+	SexScenes.Outro();
 }
 
-Scenes.Cassidy.Sex.FuckHer = function(cocksInVag) {
+SexScenes.FuckHer = function(cocksInVag) {
 	var p1cock = player.BiggestCock(cocksInVag);
 	var realcock = !p1cock.isStrapon;
 	
@@ -441,10 +439,10 @@ Scenes.Cassidy.Sex.FuckHer = function(cocksInVag) {
 	Text.Add("Eventually, though, the time to withdraw arrives, and once that’s achieved, the two of you flop onto opposite ends of the bed, utterly exhausted and sated all at once.", parse);
 	Text.NL();
 	
-	Scenes.Cassidy.Sex.Outro();
+	SexScenes.Outro();
 }
 
-Scenes.Cassidy.Sex.Pet = function() {
+SexScenes.Pet = function() {
 	var parse = {
 		
 	};
@@ -711,13 +709,13 @@ Scenes.Cassidy.Sex.Pet = function() {
 		
 		player.AddSexExp(1);
 		
-		Scenes.Cassidy.Sex.Outro();
+		SexScenes.Outro();
 	});
 	
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Cassidy.Sex.Anal = function(cocksInAss) {
+SexScenes.Anal = function(cocksInAss) {
 	var p1cock = player.BiggestCock(cocksInAss);
 	var realcock = !p1cock.isStrapon;
 	
@@ -835,10 +833,10 @@ Scenes.Cassidy.Sex.Anal = function(cocksInAss) {
 	}
 	Text.NL();
 	
-	Scenes.Cassidy.Sex.Outro();
+	SexScenes.Outro();
 }
 
-Scenes.Cassidy.Sex.Outro = function() {
+SexScenes.Outro = function() {
 	var parse = {
 		
 	};
@@ -864,7 +862,7 @@ Scenes.Cassidy.Sex.Outro = function() {
 SPARRING SEX
 */
 
-Scenes.Cassidy.SparSex.Win = function() {
+SparSexScenes.Win = function() {
 	var enc  = this;
 	enc.Cleanup();
 	SetGameState(GameState.Event);
@@ -934,7 +932,7 @@ Scenes.Cassidy.SparSex.Win = function() {
 						Text.Add("Either she’s read your mind or just gotten fed up and taken the initiative. As you look on, Cass drops her shorts, you help her with her panties, and then she practically leaps into your arms. Pressing her toasty, scaly body against you, Cassidy slobbers you with kisses as you return her embrace and try to decide just what you want to do with her tonight…", parse);
 						Text.Flush();
 
-						Scenes.Cassidy.SparSex.WinPrompt();
+						SparSexScenes.WinPrompt();
 					}
 				});
 				options.push({nameStr : "Inside",
@@ -951,7 +949,7 @@ Scenes.Cassidy.SparSex.Win = function() {
 						Text.Add("You waste no time in divesting yourself of your gear, then move to join Cass. Now, what are you up for this evening?", parse);
 						Text.Flush();
 
-						Scenes.Cassidy.Sex.IndoorPrompt();
+						SexScenes.IndoorPrompt();
 					}
 				});
 				Gui.SetButtonsFromList(options, false, null);
@@ -1003,7 +1001,7 @@ Scenes.Cassidy.SparSex.Win = function() {
 	}
 }
 
-Scenes.Cassidy.SparSex.WinPrompt = function() {
+SparSexScenes.WinPrompt = function() {
 	var parse = {
 		
 	};
@@ -1014,30 +1012,30 @@ Scenes.Cassidy.SparSex.WinPrompt = function() {
 		options.push({nameStr : "All fours",
 			tooltip : Text.Parse("Take Cassidy doggy-style in the back yard.", parse),
 			enabled : true,
-			func : Scenes.Cassidy.SparSex.AllFours
+			func : SparSexScenes.AllFours
 		});
 		options.push({nameStr : "Get blown",
 			tooltip : Text.Parse("Have Cassidy suck you off.", parse),
 			enabled : true,
-			func : Scenes.Cassidy.SparSex.GetBlown
+			func : SparSexScenes.GetBlown
 		});
 	}
 	if(player.FirstVag()) {
 		options.push({nameStr : "Get licked",
 			tooltip : Text.Parse("Let her eat you out.", parse),
 			enabled : true,
-			func : Scenes.Cassidy.SparSex.GetLicked
+			func : SparSexScenes.GetLicked
 		});
 	}
 	options.push({nameStr : "Spank",
 		tooltip : Text.Parse("Since she gets off on violence, you might as well indulge her.", parse),
 		enabled : true,
-		func : Scenes.Cassidy.SparSex.Spank
+		func : SparSexScenes.Spank
 	});
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Cassidy.SparSex.AllFours = function() {
+SparSexScenes.AllFours = function() {
 	var p1cock = player.BiggestCock();
 	
 	var parse = {
@@ -1256,13 +1254,13 @@ Scenes.Cassidy.SparSex.AllFours = function() {
 	
 	Gui.Callstack.push(function() {
 		Text.NL();
-		Scenes.Cassidy.SparSex.Outro();
+		SparSexScenes.Outro();
 	});
 	
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Cassidy.SparSex.GetBlown = function() {
+SparSexScenes.GetBlown = function() {
 	var p1cock = player.BiggestCock();
 	
 	var parse = {
@@ -1335,10 +1333,10 @@ Scenes.Cassidy.SparSex.GetBlown = function() {
 	Text.NL();
 	Text.Add("Ah…", parse);
 	Text.NL();
-	Scenes.Cassidy.SparSex.Outro();
+	SparSexScenes.Outro();
 }
 
-Scenes.Cassidy.SparSex.GetLicked = function() {
+SparSexScenes.GetLicked = function() {
 	var parse = {
 		
 	};
@@ -1411,10 +1409,10 @@ Scenes.Cassidy.SparSex.GetLicked = function() {
 	Text.NL();
 	Text.Add("Now that’s an idea you can get behind. The two of you spend a little more time just cuddling, basking in the warm afterglow of what you’ve just done.", parse);
 	Text.NL();
-	Scenes.Cassidy.SparSex.Outro();
+	SparSexScenes.Outro();
 }
 
-Scenes.Cassidy.SparSex.Spank = function() {
+SparSexScenes.Spank = function() {
 	var parse = {
 		
 	};
@@ -1471,10 +1469,10 @@ Scenes.Cassidy.SparSex.Spank = function() {
 	
 	player.AddSexExp(2);
 	
-	Scenes.Cassidy.SparSex.Outro();
+	SparSexScenes.Outro();
 }
 
-Scenes.Cassidy.SparSex.Outro = function() {
+SparSexScenes.Outro = function() {
 	var parse = {
 		
 	};
@@ -1499,7 +1497,7 @@ Scenes.Cassidy.SparSex.Outro = function() {
 	Gui.NextPrompt();
 }
 
-Scenes.Cassidy.SparSex.Loss = function() {
+SparSexScenes.Loss = function() {
 	var enc  = this;
 	enc.Cleanup();
 	SetGameState(GameState.Event);
@@ -1570,13 +1568,13 @@ Scenes.Cassidy.SparSex.Loss = function() {
 		Gui.NextPrompt(function() {
 			var scenes = new EncounterTable();
 			scenes.AddEnc(function() {
-				Scenes.Cassidy.SparSex.DomRide();
+				SparSexScenes.DomRide();
 			}, 1.0, function() { return player.FirstCock(); });
 			scenes.AddEnc(function() {
-				Scenes.Cassidy.SparSex.SuckOnBreasts();
+				SparSexScenes.SuckOnBreasts();
 			}, 1.0, function() { return cassidy.Feminized(); });
 			scenes.AddEnc(function() {
-				Scenes.Cassidy.SparSex.Tribbing();
+				SparSexScenes.Tribbing();
 			}, 1.0, function() { return player.FirstVag(); });
 			scenes.Get();
 		});
@@ -1605,7 +1603,7 @@ Scenes.Cassidy.SparSex.Loss = function() {
 	}
 }
 
-Scenes.Cassidy.SparSex.DomRide = function() {
+SparSexScenes.DomRide = function() {
 	var p1cock = player.BiggestCock();
 	
 	var parse = {
@@ -1737,10 +1735,10 @@ Scenes.Cassidy.SparSex.DomRide = function() {
 	Text.Add("“Quitting halfway” wasn’t exactly in your plans, but you don’t think you’ve the energy to argue with Cass any further - getting off her backyard sounds like a more important task.", parse);
 	Text.NL();
 	
-	Scenes.Cassidy.SparSex.LossOutro();
+	SparSexScenes.LossOutro();
 }
 
-Scenes.Cassidy.SparSex.SuckOnBreasts = function() {
+SparSexScenes.SuckOnBreasts = function() {
 	var parse = {
 		
 	};
@@ -1788,10 +1786,10 @@ Scenes.Cassidy.SparSex.SuckOnBreasts = function() {
 	Text.Add("You open your mouth to reply, but lose your train of thought and settle for just leaning your weight back in the grass with a soft thump. Cassidy follows suit, and soon the two of you are snuggled against each other in a messy heap.", parse);
 	Text.NL();
 	
-	Scenes.Cassidy.SparSex.LossOutro();
+	SparSexScenes.LossOutro();
 }
 
-Scenes.Cassidy.SparSex.Tribbing = function() {
+SparSexScenes.Tribbing = function() {
 	var parse = {
 		
 	};
@@ -1899,10 +1897,10 @@ Scenes.Cassidy.SparSex.Tribbing = function() {
 	Text.Add("<i>“And you just keep that in mind!”</i> Giving you a cheery smile, Cassidy pushes herself off you and stretches lazily, seemingly unperturbed by the sexual fluids sticking to her skin and scales. You, on the other hand, sink back into the earth’s welcome embrace, feeling the heat of your salamander lover’s passing rising from you as you slowly begin to cool off.", parse);
 	Text.NL();
 	
-	Scenes.Cassidy.SparSex.LossOutro();
+	SparSexScenes.LossOutro();
 }
 
-Scenes.Cassidy.SparSex.LossOutro = function() {
+SparSexScenes.LossOutro = function() {
 	var parse = {
 		
 	};
@@ -1929,3 +1927,5 @@ Scenes.Cassidy.SparSex.LossOutro = function() {
 	
 	Gui.NextPrompt();
 }
+
+export { SexScenes, SparSexScenes };

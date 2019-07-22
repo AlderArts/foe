@@ -1,8 +1,6 @@
-import { Gui } from './gui';
 import { Button } from './button';
 import { Images } from './assets';
 import { gameState, GameState } from './main';
-import { GetLastSubmenu } from './exploration';
 
 let Input = {
 
@@ -21,9 +19,11 @@ let Input = {
 	MousePos       : {x: 0, y: 0}
 }
 
+let Gui = null;
 
 // Initialize input callbacks
-Input.Init = function() {
+Input.Init = function(gui) {
+	Gui = gui;
 	var canvas = document.getElementById("canvas");
 
 	window.onkeydown   = Input.Keydown;
@@ -51,27 +51,27 @@ Input.InitButtons = function() {
 	var x, y, button;
 	for(y = 0; y < 3; y++) {
 		for(x = 0; x < 4; x++) {
-			button = new Button({x : offset.x + 162*x, y : offset.y + 40*y, w : 155, h : 35}, "Button" + (x + y*5), null, true, Images.imgButtonEnabled, Images.imgButtonDisabled);
+			button = new Button(Gui, {x : offset.x + 162*x, y : offset.y + 40*y, w : 155, h : 35}, "Button" + (x + y*5), null, true, Images.imgButtonEnabled, Images.imgButtonDisabled);
 			Input.buttons.push(button);
 			Input.buttonSet.push(button.set);
 		}
 
-		button = new Button({x : offset.x + 162*4, y : offset.y + 40*y, w : 75, h : 35}, "Nav" + y, null, true, Images.imgNavButtonEnabled, Images.imgNavButtonDisabled);
+		button = new Button(Gui, {x : offset.x + 162*4, y : offset.y + 40*y, w : 75, h : 35}, "Nav" + y, null, true, Images.imgNavButtonEnabled, Images.imgNavButtonDisabled);
 		Input.navButtons.push(button);
 		Input.navButtonSet.push(button.set);
 	}
 	for(y = 0; y < 8; y++) {
-		button = new Button({x : 1100, y : 375 + 40 * y, w : 155, h : 35}, "Exp"+y, null, true, Images.imgButtonEnabled, Images.imgButtonDisabled, true);
+		button = new Button(Gui, {x : 1100, y : 375 + 40 * y, w : 155, h : 35}, "Exp"+y, null, true, Images.imgButtonEnabled, Images.imgButtonDisabled, true);
 		Input.exploreButtons.push(button);
 		Input.exploreButtonSet.push(button.set);
 	}
-	button = new Button({x : 150, y : 590, w : 50, h : 50}, "", null, true, Images.imgWaitEnabled, Images.imgWaitDisabled);
+	button = new Button(Gui, {x : 150, y : 590, w : 50, h : 50}, "", null, true, Images.imgWaitEnabled, Images.imgWaitDisabled);
 	Input.exploreButtons.push(button);
 	Input.exploreButtonSet.push(button.set);
-	button = new Button({x : 150, y : 590, w : 50, h : 50}, "", null, true, Images.imgSleepEnabled, Images.imgSleepDisabled);
+	button = new Button(Gui, {x : 150, y : 590, w : 50, h : 50}, "", null, true, Images.imgSleepEnabled, Images.imgSleepDisabled);
 	Input.exploreButtons.push(button);
 	Input.exploreButtonSet.push(button.set);
-	button = new Button({x : 210, y : 590, w : 50, h : 50}, "", null, true, Images.imgSearchEnabled, Images.imgSearchDisabled);
+	button = new Button(Gui, {x : 210, y : 590, w : 50, h : 50}, "", null, true, Images.imgSearchEnabled, Images.imgSearchDisabled);
 	Input.exploreButtons.push(button);
 	Input.exploreButtonSet.push(button.set);
 }
@@ -80,7 +80,7 @@ Input.InitMenuButtons = function() {
 	var offset = {x: 15, y:620};
 
 	// TOP, Data menu
-	var button = new Button({x : 10, y : 10, w : 155, h : 35}, "DATA", null, true, Images.imgButtonEnabled, Images.imgButtonDisabled);
+	var button = new Button(Gui, {x : 10, y : 10, w : 155, h : 35}, "DATA", null, true, Images.imgButtonEnabled, Images.imgButtonDisabled);
 	Input.menuButtons.push(button);
 	Input.menuButtonSet.push(button.set);
 };
@@ -102,7 +102,7 @@ Input.RenderExploreButtonGlow = function() {
 	for(var i = 0; i < Input.exploreButtons.length; i++) {
 		if(!Input.exploreButtons[i].image.is_visible()) continue;
 		if(!Input.exploreButtons[i].glow) continue;
-		if(Input.exploreButtons[i] == GetLastSubmenu())
+		if(Input.exploreButtons[i] == Gui.GetLastSubmenu())
 			Input.exploreButtons[i].glow.show();
 		else
 			Input.exploreButtons[i].glow.hide();

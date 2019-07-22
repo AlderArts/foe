@@ -5,9 +5,8 @@
  */
 
 import { Entity } from '../entity';
-import { Scenes } from '../event';
 
-Scenes.Scorpion = {};
+let ScorpionScenes = {};
 
 function Scorpion() {
 	Entity.call(this);
@@ -111,7 +110,7 @@ Scorpion.prototype.Act = function(encounter, activeChar) {
 }
 
 // FEMALE ENCOUNTER
-Scenes.Scorpion.LoneEnc = function() {
+ScorpionScenes.LoneEnc = function() {
 	var enemy    = new Party();
 	enemy.AddMember(new Scorpion());
 	var enc      = new Encounter(enemy);
@@ -126,4 +125,4 @@ Scenes.Scorpion.LoneEnc = function() {
 	return enc;
 }
 
-export { Scorpion };
+export { Scorpion, ScorpionScenes };

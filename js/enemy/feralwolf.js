@@ -5,9 +5,8 @@
  */
 
 import { Entity } from '../entity';
-import { Scenes } from '../event';
 
-Scenes.FeralWolf = {};
+let FeralWolfScenes = {};
 
 function FeralWolf(levelbonus) {
 	Entity.call(this);
@@ -101,7 +100,7 @@ FeralWolf.prototype.Act = function(encounter, activeChar) {
 		Abilities.Seduction.Tease.Use(encounter, this, t);
 }
 
-Scenes.FeralWolf.LoneEnc = function() {
+FeralWolfScenes.LoneEnc = function() {
 	var enemy = new Party();
 	enemy.AddMember(new FeralWolf());
 	var enc = new Encounter(enemy);
@@ -115,4 +114,4 @@ Scenes.FeralWolf.LoneEnc = function() {
 	return enc;
 }
 
-export { FeralWolf };
+export { FeralWolf, FeralWolfScenes };

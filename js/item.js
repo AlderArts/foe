@@ -1,4 +1,4 @@
-
+import { DamageType } from './ability';
 
 // Namespace that item prototypes are kept in
 let Items = {};

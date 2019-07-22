@@ -4,12 +4,13 @@
 //
 
 import { world } from '../../world';
-import { Event, Link, Scenes } from '../../event';
+import { Event, Link } from '../../event';
 
 let WeaponShopLoc = new Event("The Pale Flame");
 
-Scenes.Rigard.WeaponShop = {};
-Scenes.Rigard.WeaponShop.IsOpen = function() {
+let WeaponShopScenes = {};
+
+WeaponShopScenes.IsOpen = function() {
 	return (world.time.hour >= 8 && world.time.hour < 17) && !rigard.UnderLockdown();
 }
 
@@ -55,11 +56,11 @@ WeaponShopLoc.events.push(new Link(
 	}
 ));
 
-Scenes.Rigard.WeaponShop.StreetDesc = function() {
+WeaponShopScenes.StreetDesc = function() {
 	var parse = {};
 	
 	var first = cassidy.flags["Met"] < Cassidy.Met.Met;
-	var open  = Scenes.Rigard.WeaponShop.IsOpen();
+	var open  = WeaponShopScenes.IsOpen();
 	var order = (cassidy.flags["Order"] != Cassidy.Order.None) && !cassidy.orderTimer.Expired();
 	
 	if(first) {
@@ -81,4 +82,4 @@ Scenes.Rigard.WeaponShop.StreetDesc = function() {
 	Text.NL();
 }
 
-export { WeaponShopLoc };
+export { WeaponShopLoc, WeaponShopScenes };

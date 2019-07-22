@@ -2,7 +2,6 @@ let preloader = require('preloader');
 
 import { StatusEffect } from './statuseffect';
 import { Items } from './item';
-import { SplashScreen, Render } from './main';
 
 var Images = {};
 
@@ -84,7 +83,7 @@ Images.imgWaitDisabled      = "assets/img/gui/wait_disabled.png";
 Images.imgSleepEnabled      = "assets/img/gui/sleep_enabled.png";
 Images.imgSleepDisabled     = "assets/img/gui/sleep_disabled.png";
 
-var LoadImages = function() {
+var LoadImages = function(onComplete) {
 	let loader = preloader({
 		xhrImages: false
 	});
@@ -106,14 +105,7 @@ var LoadImages = function() {
 		// update the progress element
 		legend.innerHTML = '<span>Loading assets... ' + progress * 100 + '%</span>';
 	});
-	loader.on('complete', function() {
-		assetsOverlay();
-
-		// Go to credits screen
-		SplashScreen();
-		// Render first frame
-		setTimeout(Render, 100);
-	});
+	loader.on('complete', onComplete);
 
 	for(var image of imageArray) {
 		loader.add(image);

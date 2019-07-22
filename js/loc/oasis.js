@@ -1,9 +1,10 @@
 
 
 import { world } from '../world';
-import { EncounterTable, Scenes } from '../event';
+import { EncounterTable } from '../event';
+import { Shop } from '../shop';
 
-Scenes.Oasis = {};
+let OasisScenes = {};
 
 let Oasis = function(storage) {
 	this.flags = {};
@@ -95,7 +96,7 @@ Oasis.prototype.SeenRakh = function() {
 }
 
 
-Scenes.Oasis.CaravanShop = function(back) {
+OasisScenes.CaravanShop = function(back) {
 	var parse = {
 		
 	};
@@ -144,7 +145,7 @@ Scenes.Oasis.CaravanShop = function(back) {
 }
 
 
-Scenes.Oasis.DesertCaravanEncounter = function() {
+OasisScenes.DesertCaravanEncounter = function() {
 	var parse = {
 		
 	};
@@ -270,7 +271,7 @@ Scenes.Oasis.DesertCaravanEncounter = function() {
 				Text.Add("<i>“Here, I'll show you what I have. My main cargo is already bought and paid for, but I have some oddments lying around.”</i>", parse);
 				Text.NL();
 				Text.Flush();
-				Scenes.Oasis.CaravanShop(prompt);
+				OasisScenes.CaravanShop(prompt);
 			}, enabled : true,
 			tooltip : Text.Parse("See what the caravan master has to offer.", parse)
 		});
@@ -441,4 +442,4 @@ Scenes.Oasis.DesertCaravanEncounter = function() {
 	prompt();
 }
 
-export { Oasis };
+export { Oasis, OasisScenes };

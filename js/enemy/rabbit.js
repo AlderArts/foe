@@ -5,10 +5,11 @@
  */
 
 import { Entity } from '../entity';
-import { Scenes } from '../event';
 import { Images } from '../assets';
 import { TF } from '../tf';
 import { AppendageType } from '../body/appendage';
+
+let LagomorphScenes = {};
 
 // TODO: Make base stats depend on Burrows flags (perhaps make a factory function?)
 
@@ -74,8 +75,6 @@ function Lagomorph(gender) {
 }
 Lagomorph.prototype = new Entity();
 Lagomorph.prototype.constructor = Lagomorph;
-
-Scenes.Lagomorph = {};
 
 Lagomorph.prototype.DropTable = function() {
 	var drops = [];
@@ -318,7 +317,7 @@ LagomorphWizard.prototype.Act = function(encounter, activeChar) {
 		Abilities.Seduction.Tease.Use(encounter, this, t);
 }
 
-Scenes.Lagomorph.Impregnate = function(mother, father, slot) {
+LagomorphScenes.Impregnate = function(mother, father, slot) {
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother : mother,
@@ -329,7 +328,7 @@ Scenes.Lagomorph.Impregnate = function(mother, father, slot) {
 	});
 }
 
-Scenes.Lagomorph.GroupEnc = function() {
+LagomorphScenes.GroupEnc = function() {
 	var enemy = new Party();
 	var enc = new Encounter(enemy);
 	
@@ -374,14 +373,14 @@ Scenes.Lagomorph.GroupEnc = function() {
 	enc.VictoryCondition = ...
 	*/
 	
-	enc.onEncounter = Scenes.Lagomorph.PlainsEncounter;
-	enc.onLoss      = Scenes.Lagomorph.GroupLossOnPlains;
-	enc.onVictory   = Scenes.Lagomorph.GroupWinOnPlainsPrompt;
+	enc.onEncounter = LagomorphScenes.PlainsEncounter;
+	enc.onLoss      = LagomorphScenes.GroupLossOnPlains;
+	enc.onVictory   = LagomorphScenes.GroupWinOnPlainsPrompt;
 	
 	return enc;
 }
 
-Scenes.Lagomorph.PlainsEncounter = function() {
+LagomorphScenes.PlainsEncounter = function() {
 	var enc = this;
 	
 	var parse = {
@@ -463,7 +462,7 @@ Scenes.Lagomorph.PlainsEncounter = function() {
 	});
 }
 
-Scenes.Lagomorph.GroupLossOnPlains = function() {
+LagomorphScenes.GroupLossOnPlains = function() {
 	SetGameState(GameState.Event);
 	
 	var enc = this;
@@ -473,12 +472,12 @@ Scenes.Lagomorph.GroupLossOnPlains = function() {
 	
 		// TODO: Add alternate loss scene that 
 		scenes.AddEnc(function() {
-			Scenes.Lagomorph.GroupLossOnPlainsToBurrows(enc);
+			LagomorphScenes.GroupLossOnPlainsToBurrows(enc);
 		}, 1.0, function() { return burrows.flags["Access"] == Burrows.AccessFlags.Unknown; });
 		
 		if(enc.brainy) {
 			scenes.AddEnc(function() {
-				Scenes.Lagomorph.GroupLossOnPlainsBrainy(enc);
+				LagomorphScenes.GroupLossOnPlainsBrainy(enc);
 			}, 1.0, function() { return true; });
 		}
 		// TODO Fallback
@@ -503,7 +502,7 @@ Scenes.Lagomorph.GroupLossOnPlains = function() {
 }
 
 
-Scenes.Lagomorph.GroupLossOnPlainsBrainy = function(enc) {
+LagomorphScenes.GroupLossOnPlainsBrainy = function(enc) {
 	var p1cock = player.BiggestCock();
 
 	var brainy = enc.brainy;
@@ -642,7 +641,7 @@ Scenes.Lagomorph.GroupLossOnPlainsBrainy = function(enc) {
 	Gui.NextPrompt();
 }
 
-Scenes.Lagomorph.GroupLossOnPlainsToBurrows = function(enc) {
+LagomorphScenes.GroupLossOnPlainsToBurrows = function(enc) {
 	var alpha = enc.alpha;
 	var parse = {
 		p1name     : function() { return party.members[1].name; },
@@ -736,7 +735,7 @@ Scenes.Lagomorph.GroupLossOnPlainsToBurrows = function(enc) {
 	});
 }
 
-Scenes.Lagomorph.GroupWinOnPlainsPrompt = function() {
+LagomorphScenes.GroupWinOnPlainsPrompt = function() {
 	SetGameState(GameState.Event);
 	
 	var enc = this;
@@ -774,7 +773,7 @@ Scenes.Lagomorph.GroupWinOnPlainsPrompt = function() {
 			
 			options.push({ nameStr : "Question",
 				func : function() {
-					Scenes.Lagomorph.GroupWinInterrorigate(enc);
+					LagomorphScenes.GroupWinInterrorigate(enc);
 				}, enabled : true,
 				tooltip : "Interrorigate the leader to find out more about the rabbits."
 			});
@@ -810,7 +809,7 @@ Scenes.Lagomorph.GroupWinOnPlainsPrompt = function() {
 			if(player.FirstCock() || player.Strapon()) {
 				options.push({ nameStr : "Fuck him",
 					func : function() {
-						Scenes.Lagomorph.GroupWinOnPlainsFuckBrute(enc);
+						LagomorphScenes.GroupWinOnPlainsFuckBrute(enc);
 					}, enabled : true,
 					tooltip : "You’re pretty sure this big guy’s butt is pretty much unused. So why not use his back door to relieve yourself?"
 				});
@@ -863,7 +862,7 @@ Scenes.Lagomorph.GroupWinOnPlainsPrompt = function() {
 		
 		options.push({ nameStr : "Get fucked (M)",
 			func : function() {
-				Scenes.Lagomorph.GroupWinOnPlainsGetFuckedM(enc, group);
+				LagomorphScenes.GroupWinOnPlainsGetFuckedM(enc, group);
 			}, enabled : true,
 			tooltip : Text.Parse(tooltip, parse)
 		});
@@ -874,7 +873,7 @@ Scenes.Lagomorph.GroupWinOnPlainsPrompt = function() {
 			tooltip += " Who knows, perhaps [comp] will join you as well.";
 		options.push({ nameStr : "Fuck (M)",
 			func : function() {
-				Scenes.Lagomorph.GroupWinOnPlainsFuckM(enc, group);
+				LagomorphScenes.GroupWinOnPlainsFuckM(enc, group);
 			}, enabled : true,
 			tooltip : Text.Parse(tooltip, parse)
 		});
@@ -903,7 +902,7 @@ Scenes.Lagomorph.GroupWinOnPlainsPrompt = function() {
 	Encounter.prototype.onVictory.call(enc);
 }
 
-Scenes.Lagomorph.GroupWinOnPlainsFuckBrute = function(enc) {
+LagomorphScenes.GroupWinOnPlainsFuckBrute = function(enc) {
 	var p1cock  = player.BiggestCock(null, true);
 	var strapon = p1cock ? p1cock.isStrapon : null;
 	
@@ -919,7 +918,7 @@ Scenes.Lagomorph.GroupWinOnPlainsFuckBrute = function(enc) {
 	
 	Text.Clear();
 	
-	Scenes.Lagomorph.GroupWinOnPlainsBruteIntro();
+	LagomorphScenes.GroupWinOnPlainsBruteIntro();
 	
 	Text.NL();
 	Text.Add("You easily slip out of your [armor] and ", parse);
@@ -1034,7 +1033,7 @@ Scenes.Lagomorph.GroupWinOnPlainsFuckBrute = function(enc) {
 		
 		Text.NL();
 		
-		Scenes.Lagomorph.GroupWinOnPlainsBruteCums();
+		LagomorphScenes.GroupWinOnPlainsBruteCums();
 		
 		Text.NL();
 		Text.Add("Pulling out of him with a pop, you sigh in relief. That was good. Looking down at his butt, you can see the results of your climax slowly pouring out of his outstretched asshole. His own orgasm seems to have made quite a mess of him too; it’s a nice look for the hulking brute.", parse);
@@ -1058,7 +1057,7 @@ Scenes.Lagomorph.GroupWinOnPlainsFuckBrute = function(enc) {
 		Text.Add("A goofy smile crosses the overgrown rabbit’s face and he nods dreamily before stumbling back in the direction of his fucking kindred.", parse);
 	}
 	else {
-		Scenes.Lagomorph.GroupWinOnPlainsBruteCums();
+		LagomorphScenes.GroupWinOnPlainsBruteCums();
 		
 		Text.NL();
 		Text.Add("Pulling out of his clenching butthole, you step back and watch the mess he’s made. He’s lucky his fur is white, otherwise the cum would be showing a lot more once it dried. Not that it’d be a bad thing, you think the look would suit this big bunny-slut.", parse);
@@ -1120,7 +1119,7 @@ Scenes.Lagomorph.GroupWinOnPlainsFuckBrute = function(enc) {
 	Gui.NextPrompt();
 }
 
-Scenes.Lagomorph.GroupWinOnPlainsBruteIntro = function() {
+LagomorphScenes.GroupWinOnPlainsBruteIntro = function() {
 	var parse = {};
 	
 	if(party.Num() > 1) {
@@ -1139,7 +1138,7 @@ Scenes.Lagomorph.GroupWinOnPlainsBruteIntro = function() {
 	Text.Add("Still flat on his rear, the overgrown buck stares up at you, lips pressed together and brow furrowed, but seeming more curious than defiant. <i>“You want me? What you want?”</i> he rumbles, far deeper than any of the other rabbits nearby.", parse);
 }
 
-Scenes.Lagomorph.GroupWinOnPlainsBruteCums = function() {
+LagomorphScenes.GroupWinOnPlainsBruteCums = function() {
 	var parse = {
 		
 	};
@@ -1151,7 +1150,7 @@ Scenes.Lagomorph.GroupWinOnPlainsBruteCums = function() {
 	Text.Add("When even his prodigious balls are tapped, he slumps forward, panting heavily, ears almost trailing down into the great puddle of jism centered on his hulking form, washing thick and sticky over his hands and swirling around his knees and lower legs.", parse);
 }
 
-Scenes.Lagomorph.GroupWinOnPlainsFuckM = function(enc, group) {
+LagomorphScenes.GroupWinOnPlainsFuckM = function(enc, group) {
 	var male = new Lagomorph(Gender.male);
 	
 	var p1cock  = player.BiggestCock();
@@ -1238,7 +1237,7 @@ Scenes.Lagomorph.GroupWinOnPlainsFuckM = function(enc, group) {
 		player.FuckVag(player.FirstVag(), male.FirstCock(), 3);
 		male.Fuck(male.FirstCock(), 3);
 		
-		Scenes.Lagomorph.Impregnate(player, male);
+		LagomorphScenes.Impregnate(player, male);
 		
 		Text.Add("Smiling to yourself, you wave one of the others over, instructing him to get down on all fours in front of you, dick poised over his brother’s maw. You give the offered bunny-butt a familiar squeeze, caressing his soft fur as your [hand] creeps its way closer to his loosened rosebud.", parse);
 		Text.NL();
@@ -1692,7 +1691,7 @@ Scenes.Lagomorph.GroupWinOnPlainsFuckM = function(enc, group) {
 	}
 }
 
-Scenes.Lagomorph.GroupWinOnPlainsGetFuckedM = function(enc, group) {
+LagomorphScenes.GroupWinOnPlainsGetFuckedM = function(enc, group) {
 	var parse = {
 		playername : player.name
 		
@@ -1773,7 +1772,7 @@ Scenes.Lagomorph.GroupWinOnPlainsGetFuckedM = function(enc, group) {
 		player.FuckVag(player.FirstVag(), male.FirstCock(), 3);
 		male.Fuck(male.FirstCock(), 3);
 		
-		Scenes.Lagomorph.Impregnate(player, male);
+		LagomorphScenes.Impregnate(player, male);
 		
 		Text.Add("The bunny bucks, pistoning his meat into your wet cleft at a blinding pace. His hips must look like a blur, judging by the speed that he’s fucking you. The lagomorph doesn’t only go for speed either, each thrust is deep enough to drive the breath from your lungs - if your airways weren’t already plugged with cock, that is. Overrun by his urge to breed, it feels like he’s trying to drill all the way into your womb.", parse);
 	}
@@ -1802,13 +1801,13 @@ Scenes.Lagomorph.GroupWinOnPlainsGetFuckedM = function(enc, group) {
 		player.FuckVag(player.FirstVag(), male.FirstCock(), 2);
 		male.Fuck(male.FirstCock(), 2);
 		
-		Scenes.Lagomorph.Impregnate(player, male);
+		LagomorphScenes.Impregnate(player, male);
 	}
 	Sex.Anal(male, player);
 	player.FuckAnal(player.Butt(), male.FirstCock(), 2);
 	male.Fuck(male.FirstCock(), 2);
 	
-	Scenes.Lagomorph.Impregnate(player, male, PregnancyHandler.Slot.Butt);
+	LagomorphScenes.Impregnate(player, male, PregnancyHandler.Slot.Butt);
 	
 	// COMPANION SECTION BEGIN
 	//TODO Miranda
@@ -1930,7 +1929,7 @@ Scenes.Lagomorph.GroupWinOnPlainsGetFuckedM = function(enc, group) {
 }
 
 
-Scenes.Lagomorph.GroupWinInterrorigate = function(enc) {
+LagomorphScenes.GroupWinInterrorigate = function(enc) {
 	var alpha = enc.alpha;
 	var parse = {
 		meUs       : party.Alone() ? "me" : "us",
@@ -2095,4 +2094,4 @@ Scenes.Lagomorph.GroupWinInterrorigate = function(enc) {
 	Gui.SetButtonsFromList(options);
 }
 
-export { Lagomorph, LagomorphAlpha, LagomorphElite, LagomorphBrute, LagomorphWizard };
+export { Lagomorph, LagomorphAlpha, LagomorphElite, LagomorphBrute, LagomorphWizard, LagomorphScenes };

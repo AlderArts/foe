@@ -2,11 +2,11 @@
 
 
 import { world } from '../../world';
-import { Event, Link, Scenes, EncounterTable } from '../../event';
+import { Event, Link, EncounterTable } from '../../event';
 
 let PlazaLoc = new Event("Plaza");
 
-Scenes.Rigard.Plaza = {}
+let PlazaScenes = {}
 
 //
 // Plaza
@@ -37,8 +37,8 @@ PlazaLoc.enc = new EncounterTable();
 PlazaLoc.enc.AddEnc(function() { return Scenes.Rigard.Chatter;});
 PlazaLoc.enc.AddEnc(function() { return Scenes.Rigard.Chatter2;});
 PlazaLoc.enc.AddEnc(function() { return Scenes.Rigard.CityHistory;}, 1.0, function() { return rigard.flags["CityHistory"] == 0; });
-PlazaLoc.enc.AddEnc(function() { return Scenes.Rigard.Plaza.LetterDelivery; }, 1.0, function() { return (world.time.hour >= 6 && world.time.hour < 21); });
-PlazaLoc.enc.AddEnc(function() { return Scenes.Rigard.Plaza.StatueInfo; }, 1.0, function() { return (world.time.hour >= 6 && world.time.hour < 21) && (rigard.flags["TalkedStatue"] == 0 || (party.InParty(kiakai) && kiakai.flags["TalkedStatue"] == 0)); });
+PlazaLoc.enc.AddEnc(function() { return PlazaScenes.LetterDelivery; }, 1.0, function() { return (world.time.hour >= 6 && world.time.hour < 21); });
+PlazaLoc.enc.AddEnc(function() { return PlazaScenes.StatueInfo; }, 1.0, function() { return (world.time.hour >= 6 && world.time.hour < 21) && (rigard.flags["TalkedStatue"] == 0 || (party.InParty(kiakai) && kiakai.flags["TalkedStatue"] == 0)); });
 PlazaLoc.enc.AddEnc(function() { return Scenes.Krawitz.Duel;}, 3.0, function() { return rigard.Krawitz["Q"] == 1 && rigard.Krawitz["Duel"] == 0 && (world.time.hour >= 10 && world.time.hour < 20);});
 PlazaLoc.enc.AddEnc(function() { return Scenes.Terry.ExplorePlaza; }, 1000000.0, function() { return rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry; });
 
@@ -263,7 +263,7 @@ PlazaLoc.events.push(new Link(
 	}
 ));
 
-Scenes.Rigard.Plaza.StatueInfo = function() {
+PlazaScenes.StatueInfo = function() {
 	var parse = {
 		playername : player.name,
 		name   : kiakai.name,
@@ -375,7 +375,7 @@ Scenes.Rigard.Plaza.StatueInfo = function() {
 	}
 }
 
-Scenes.Rigard.Plaza.LetterDelivery = function() {
+PlazaScenes.LetterDelivery = function() {
 	var letters     = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	var animals     = ["stallion", "dog", "eel", "python", "pony", "wildcat", "mare"];
 	var colors      = ["green", "red", "blue", "purple", "pink", "gray", "orange"];
@@ -628,4 +628,4 @@ Scenes.Rigard.Plaza.LetterDelivery = function() {
 	Gui.SetButtonsFromList(options);
 }
 
-export { PlazaLoc };
+export { PlazaLoc, PlazaScenes };
