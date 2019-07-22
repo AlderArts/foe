@@ -3,11 +3,12 @@
  * Define Cale
  * 
  */
-import { Link, Scenes } from '../../event';
 import { Entity } from '../../entity';
 import { world } from '../../world';
 import { Shop } from '../../shop';
 import { GetDEBUG } from '../../../app';
+
+let CaleScenes = {};
 
 function Cale(storage) {
 	Entity.call(this);
@@ -160,8 +161,6 @@ Cale.prototype.ToStorage = function() {
 	return storage;
 }
 
-Scenes.Cale = {};
-
 // Schedule
 Cale.prototype.IsAtLocation = function(location) {
 	location = location || party.location;
@@ -171,7 +170,7 @@ Cale.prototype.IsAtLocation = function(location) {
 }
 
 // interaction
-Scenes.Cale.Interact = function() {
+CaleScenes.Interact = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -179,12 +178,12 @@ Scenes.Cale.Interact = function() {
 	if(cale.flags["Met2"] == Cale.Met2.NotMet) {
 		cale.name = "Cale";
 		cale.flags["Met2"] = Cale.Met2.Talked;
-		Scenes.Cale.FirstApproach();
+		CaleScenes.FirstApproach();
 		return;
 	}
 	else if((cale.flags["Met2"] == Cale.Met2.Talked) && cale.Slut() >= 50) {
 		cale.flags["Met2"] = Cale.Met2.TalkedSlut;
-		Scenes.Cale.TalkSlut();
+		CaleScenes.TalkSlut();
 		return;
 	}
 	else if((rosalin.flags["Anusol"] >= Rosalin.Anusol.AskedForCalesHelp) &&
@@ -210,7 +209,7 @@ Scenes.Cale.Interact = function() {
 			Text.Add("<i>“Nice doing business, bud. Now, something else you want with me?”</i>", parse);
 		}
 		Text.Flush();
-		Scenes.Cale.Prompt();
+		CaleScenes.Prompt();
 		return;
 	}
 	
@@ -240,10 +239,10 @@ Scenes.Cale.Interact = function() {
 	}
 	Text.Flush();
 	
-	Scenes.Cale.Prompt();
+	CaleScenes.Prompt();
 }
 
-Scenes.Cale.Desc = function() {
+CaleScenes.Desc = function() {
 	var parse = {
 		
 	};
@@ -261,7 +260,7 @@ Scenes.Cale.Desc = function() {
 	Text.NL();
 }
 
-Scenes.Cale.FirstApproach = function() {
+CaleScenes.FirstApproach = function() {
 	var parse = {
 		playername : player.name,
 		guyGal     : player.mfTrue("guy", "gal")
@@ -323,7 +322,7 @@ Scenes.Cale.FirstApproach = function() {
 				
 				Gui.NextPrompt(function() {
 					Text.Clear();
-					Scenes.Cale.TentSex();
+					CaleScenes.TentSex();
 				});
 			}, enabled : true,
 			tooltip : "Looks like you definitely left the right sort of impression on him. Why not tease him a little?"
@@ -346,7 +345,7 @@ Scenes.Cale.FirstApproach = function() {
 				Text.Add("<i>“Great, so is there anything you’d like to talk about? Or is there anything I can do for you?”</i>", parse);
 				Text.Flush();
 				
-				Scenes.Cale.Prompt();
+				CaleScenes.Prompt();
 			}, enabled : true,
 			tooltip : "Let's just cut to the chase."
 		});
@@ -374,7 +373,7 @@ Scenes.Cale.FirstApproach = function() {
 				Text.Add("<i>“Now that we’ve been properly introduced, something I can do for you?”</i>", parse);
 				Text.Flush();
 				
-				Scenes.Cale.Prompt();
+				CaleScenes.Prompt();
 			}, enabled : true,
 			tooltip : "He's obviously uncertain about how he feels; why not be nice to him?"
 		});
@@ -414,7 +413,7 @@ Scenes.Cale.FirstApproach = function() {
 				Text.Add("<i>“So, now that we’ve met. What can I do ya for?”</i> he smirks.", parse);
 				Text.Flush();
 				
-				Scenes.Cale.Prompt();
+				CaleScenes.Prompt();
 			}, enabled : true,
 			tooltip : "Tell him to keep his paws to himself."
 		});
@@ -430,7 +429,7 @@ Scenes.Cale.FirstApproach = function() {
 				Text.Add("<i>“So, what brings you? Came to take me up on my offer or is there something else you want?”</i> he asks with a lopsided grin.", parse);
 				Text.Flush();
 				
-				Scenes.Cale.Prompt();
+				CaleScenes.Prompt();
 			}, enabled : true,
 			tooltip : "Eh, it's not hurting you, let him rub."
 		});
@@ -473,7 +472,7 @@ Scenes.Cale.FirstApproach = function() {
 						
 						Gui.NextPrompt(function() {
 							Text.Clear();
-							Scenes.Cale.TentSex();
+							CaleScenes.TentSex();
 						});
 					}, enabled : true,
 					tooltip : "Well, you were practically asking for it, why not go all the way?"
@@ -484,7 +483,7 @@ Scenes.Cale.FirstApproach = function() {
 						Text.Add("<i>“Too bad. But my offer stands. Come to me whenever you feel like you need some good wuffie lovin,”</i> he chuckles. Slowly, he releases you and gives you some distance. <i>“Now then, since you don’t want to visit my tent, what can I do for you?”</i>", parse);
 						Text.Flush();
 						
-						Scenes.Cale.Prompt();
+						CaleScenes.Prompt();
 					}, enabled : true,
 					tooltip : "This is getting a little too far, you didn't come here to fuck. Well, not just yet anyway."
 				});
@@ -506,7 +505,7 @@ Scenes.Cale.FirstApproach = function() {
 		Text.Add("<i>“So, what did you want to talk about?”</i>", parse);
 		Text.Flush();
 		
-		Scenes.Cale.Prompt();
+		CaleScenes.Prompt();
 	}
 	else { // You took Rosalin
 		Text.Add("You explain that you were wondering if he's alright with what happened back with Rosalin.", parse);
@@ -530,11 +529,11 @@ Scenes.Cale.FirstApproach = function() {
 		Text.Add("<i>“So, got any business with me?”</i>", parse);
 		Text.Flush();
 		
-		Scenes.Cale.Prompt();
+		CaleScenes.Prompt();
 	}
 }
 
-Scenes.Cale.TalkSlut = function() {
+CaleScenes.TalkSlut = function() {
 	var parse = {
 		
 	};
@@ -549,10 +548,10 @@ Scenes.Cale.TalkSlut = function() {
 	Text.Add("Perhaps you could ask Rosalin about it. Out loud, you tell him that you’ll find something. Cale nods, feeling reassured. <i>“So, what did you want?”</i>", parse);
 	Text.Flush();
 	
-	Scenes.Cale.Prompt();
+	CaleScenes.Prompt();
 }
 
-Scenes.Cale.Prompt = function() {
+CaleScenes.Prompt = function() {
 	var parse = {
 		
 	};
@@ -564,7 +563,7 @@ Scenes.Cale.Prompt = function() {
 			Text.Clear();
 			Text.Add("<i>“Just chat then? Sure, whatcha wanna talk about?”</i>", parse);
 			Text.Flush();
-			Scenes.Cale.TalkPrompt();
+			CaleScenes.TalkPrompt();
 		}, enabled : true,
 		tooltip : "Have a chat with Cale."
 	});
@@ -580,14 +579,14 @@ Scenes.Cale.Prompt = function() {
 			Text.NL();
 			Text.Flush();
 			
-			Scenes.Cale.TentSex();
+			CaleScenes.TentSex();
 		}, enabled : true,
 		tooltip : "Ask if he’s up for a quick skirmish in his tent."
 	});
 	options.push({ nameStr : "Sex",
 		func : function() {
 			Text.Clear();
-			Scenes.Cale.OutsideSex();
+			CaleScenes.OutsideSex();
 		}, enabled : true,
 		tooltip : "Ask the wolf if he's up for a fuck - right here, right now."
 	});
@@ -598,39 +597,39 @@ Scenes.Cale.Prompt = function() {
 			Text.NL();
 			Text.Flush();
 			
-			Scenes.Cale.Shop();
+			CaleScenes.Shop();
 		}, enabled : true,
 		tooltip : "See what alchemical ingredients Cale can offer you today."
 	});
 	if(cale.flags["Rogue"] > 0) {
 		options.push({ nameStr : "Rogue",
-			func : Scenes.Cale.Rogue, enabled : true,
+			func : CaleScenes.Rogue, enabled : true,
 			tooltip : "Ask him to teach you about the finer points of being a rogue."
 		});
 	}
 	Gui.SetButtonsFromList(options, true, PrintDefaultOptions);
 }
 
-Scenes.Cale.Shop = function() {
+CaleScenes.Shop = function() {
 	var parse = {
 		
 	};
 	
-	Scenes.Cale.Shopbought = false;
+	CaleScenes.Shopbought = false;
 	
 	var backPrompt = function() {
 		Text.Clear();
-		if(Scenes.Cale.Shopbought)
+		if(CaleScenes.Shopbought)
 			Text.Add("<i>“Knew I'd have something you wanted, thanks for buying!”</i> he quips, giving you a toothy grin of appreciation.", parse);
 		else
 			Text.Add("<i>“Nothing of interest right now? Alright, come back tomorrow. I should have some new things then,”</i> he assures you.", parse);
 		Text.Flush();
 		
-		Scenes.Cale.Prompt();
+		CaleScenes.Prompt();
 	}
 	
 	var buyFunc = function() {
-		Scenes.Cale.Shopbought = true;
+		CaleScenes.Shopbought = true;
 		return false;
 	}
 	
@@ -659,7 +658,7 @@ Scenes.Cale.Shop = function() {
 	cale.shop.Buy(backPrompt, true);
 }
 
-Scenes.Cale.TalkPrompt = function() {
+CaleScenes.TalkPrompt = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -711,12 +710,12 @@ Scenes.Cale.TalkPrompt = function() {
 			
 			cale.relation.IncreaseStat(100, 2);
 			world.TimeStep({minute : 15});
-			Scenes.Cale.TalkPrompt();
+			CaleScenes.TalkPrompt();
 		}, enabled : true,
 		tooltip : "Ask Cale to tell you a little about himself."
 	});
 	options.push({ nameStr : "His Past",
-		func : Scenes.Cale.TalkPast, enabled : true,
+		func : CaleScenes.TalkPast, enabled : true,
 		tooltip : "See if Cale will share something about his past with you."
 	});
 	options.push({ nameStr : "Goals",
@@ -744,7 +743,7 @@ Scenes.Cale.TalkPrompt = function() {
 			
 			cale.relation.IncreaseStat(100, 1);
 			world.TimeStep({minute : 5});
-			Scenes.Cale.TalkPrompt();
+			CaleScenes.TalkPrompt();
 		}, enabled : true,
 		tooltip : "What is he looking for in life?"
 	});
@@ -780,7 +779,7 @@ Scenes.Cale.TalkPrompt = function() {
 			Text.Flush();
 			cale.relation.IncreaseStat(100, 1);
 			world.TimeStep({minute : 5});
-			Scenes.Cale.TalkPrompt();
+			CaleScenes.TalkPrompt();
 		}, enabled : true,
 		tooltip : "So, what is the story between him and Rosalin?"
 	});
@@ -811,7 +810,7 @@ Scenes.Cale.TalkPrompt = function() {
 				Text.Flush();
 				cale.relation.IncreaseStat(100, 1);
 				world.TimeStep({minute : 5});
-				Scenes.Cale.TalkPrompt();
+				CaleScenes.TalkPrompt();
 			}, enabled : true,
 			tooltip : "Ask him about how it feels to be the one on the receiving end."
 		});
@@ -874,7 +873,7 @@ Scenes.Cale.TalkPrompt = function() {
 							
 							party.coin -= (coin - 50);
 							
-							Scenes.Cale.TentSex();
+							CaleScenes.TentSex();
 						}, enabled : (party.coin >= coin - 50) && player.BiggestCock(null, true)
 					});
 					options.push({ nameStr : "No sex",
@@ -894,7 +893,7 @@ Scenes.Cale.TalkPrompt = function() {
 							
 							party.coin -= coin;
 							
-							Scenes.Cale.Prompt();
+							CaleScenes.Prompt();
 						}, enabled : (party.coin >= coin)
 					});
 					options.push({ nameStr : "No deal",
@@ -906,7 +905,7 @@ Scenes.Cale.TalkPrompt = function() {
 							Text.Add("You nod in understanding; you’ll have to see about filling your pockets if you want Cale’s help in acquiring Rosalin’s ingredients.", parse);
 							Text.Flush();
 							
-							Scenes.Cale.Prompt();
+							CaleScenes.Prompt();
 						}, enabled : true
 					});
 				}
@@ -925,7 +924,7 @@ Scenes.Cale.TalkPrompt = function() {
 							
 							party.coin -= coin;
 							
-							Scenes.Cale.Prompt();
+							CaleScenes.Prompt();
 						}, enabled : party.coin >= coin
 					});
 					options.push({ nameStr : "No deal",
@@ -937,7 +936,7 @@ Scenes.Cale.TalkPrompt = function() {
 							Text.Add("You nod in understanding; you’ll have to see about filling your pockets if you want Cale’s help in acquiring Rosalin’s ingredients.", parse);
 							Text.Flush();
 							
-							Scenes.Cale.Prompt();
+							CaleScenes.Prompt();
 						}, enabled : true
 					});
 				}
@@ -945,10 +944,10 @@ Scenes.Cale.TalkPrompt = function() {
 			}, enabled : true
 		});
 	}
-	Gui.SetButtonsFromList(options, true, Scenes.Cale.Prompt);
+	Gui.SetButtonsFromList(options, true, CaleScenes.Prompt);
 }
 
-Scenes.Cale.TalkPast = function() {
+CaleScenes.TalkPast = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -1106,10 +1105,10 @@ Scenes.Cale.TalkPast = function() {
 	
 	world.TimeStep({minute : 30});
 	
-	Scenes.Cale.TalkPrompt();
+	CaleScenes.TalkPrompt();
 }
 
-Scenes.Cale.Rogue = function() {
+CaleScenes.Rogue = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -1150,7 +1149,7 @@ Scenes.Cale.Rogue = function() {
 						Text.NL();
 					}
 					Text.Add("<i>“Sorry about that, guess I really don’t have it in me to be a teacher,”</i> Cale groans as he gets back on his feet, rubbing his sore bum. ", parse);
-					Scenes.Cale.RogueTeach();
+					CaleScenes.RogueTeach();
 				}, enabled : true,
 				tooltip : "Have mercy on him."
 			});
@@ -1178,7 +1177,7 @@ Scenes.Cale.Rogue = function() {
 					
 					cale.slut.IncreaseStat(50, 5);
 					
-					Scenes.Cale.SexFuckHim(true);
+					CaleScenes.SexFuckHim(true);
 				}, enabled : (cocksInAss.length > 0),
 				tooltip : "All that matters is winning, wasn’t it?"
 			});
@@ -1204,7 +1203,7 @@ Scenes.Cale.Rogue = function() {
 					Text.Add("<i>“Good choice,”</i> he comments, releasing you. Relieved from your awkward hold, you take a moment to stretch out and work out the kinks in your muscles before you get back up. <i>“One of the most important rules is if you wanna live to see the next day is to know your limits. There’s always someone better than you out there. And surrendering might save your life or give you an opportunity to fight back.”</i> He grins.", parse);
 					Text.NL();
 					
-					Scenes.Cale.RogueTeach();
+					CaleScenes.RogueTeach();
 				}, enabled : true,
 				tooltip : "You give, you give."
 			});
@@ -1218,9 +1217,9 @@ Scenes.Cale.Rogue = function() {
 					Text.NL();
 					
 					if(player.FirstVag())
-						Scenes.Cale.SexCatchVagEntrypoint(true, false, true); // Use the customIntro flag to repress the usual initial dialogue
+						CaleScenes.SexCatchVagEntrypoint(true, false, true); // Use the customIntro flag to repress the usual initial dialogue
 					else
-						Scenes.Cale.SexCatchAnalEntrypoint(true);
+						CaleScenes.SexCatchAnalEntrypoint(true);
 				}, enabled : true,
 				tooltip : "It wouldn’t be a proper lesson if he stopped here, would it?"
 			});
@@ -1244,11 +1243,11 @@ Scenes.Cale.Rogue = function() {
 		
 		cale.flags["Rogue"] = Cale.Rogue.Taught;
 		
-		Scenes.Cale.Prompt();
+		CaleScenes.Prompt();
 	}
 }
 
-Scenes.Cale.RogueTeach = function() {
+CaleScenes.RogueTeach = function() {
 	var parse = {
 		
 	};
@@ -1274,7 +1273,7 @@ Scenes.Cale.RogueTeach = function() {
 	
 	cale.flags["Rogue"] = Cale.Rogue.Taught;
 	
-	Scenes.Cale.Prompt();
+	CaleScenes.Prompt();
 }
 
-export { Cale };
+export { Cale, CaleScenes };

@@ -3,10 +3,11 @@
  * Define Estevan
  * 
  */
-import { Link, Scenes } from '../../event';
 import { Entity } from '../../entity';
 import { world } from '../../world';
 import { GetDEBUG } from '../../../app';
+
+let EstevanScenes = {};
 
 function Estevan(storage) {
 	Entity.call(this);
@@ -74,9 +75,7 @@ Estevan.prototype.ToStorage = function() {
 	return storage;
 }
 
-Scenes.Estevan = {};
-
-Scenes.Estevan.Impregnate = function(mother, slot) {
+EstevanScenes.Impregnate = function(mother, slot) {
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother : mother,
@@ -100,7 +99,7 @@ Estevan.prototype.HadGaySex = function() {
 	return this.flags["Gay"] >= Estevan.GaySex.First;
 }
 
-Scenes.Estevan.Interact = function() {
+EstevanScenes.Interact = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -141,7 +140,7 @@ Scenes.Estevan.Interact = function() {
 		Text.Add("With that, Estevan returns to his contraption.", parse);
 		Text.Flush();
 		
-		Scenes.Estevan.Prompt();
+		EstevanScenes.Prompt();
 		return;
 	}
 	
@@ -162,10 +161,10 @@ Scenes.Estevan.Interact = function() {
 	}
 	Text.Flush();
 	
-	Scenes.Estevan.Prompt();
+	EstevanScenes.Prompt();
 }
 
-Scenes.Estevan.Prompt = function() {
+EstevanScenes.Prompt = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -214,7 +213,7 @@ Scenes.Estevan.Prompt = function() {
 			
 			world.TimeStep({hour: 1});
 			
-			Scenes.Estevan.Prompt();
+			EstevanScenes.Prompt();
 		}, enabled : true,
 		tooltip : "Ask him about his job, and how you’d go about hunting."
 	});
@@ -235,7 +234,7 @@ Scenes.Estevan.Prompt = function() {
 							estevan.flags["Cheat"] = Estevan.Cheat.Talked;
 							
 							world.TimeStep({minute: 15});
-							Scenes.Estevan.Prompt();
+							EstevanScenes.Prompt();
 						}, enabled : true,
 						tooltip : "On second thought… no."
 					});
@@ -248,7 +247,7 @@ Scenes.Estevan.Prompt = function() {
 							estevan.flags["Cheat"] = Estevan.Cheat.Setup;
 							
 							world.TimeStep({minute: 15});
-							Scenes.Estevan.Prompt();
+							EstevanScenes.Prompt();
 						}, enabled : true,
 						tooltip : "Heck yeah, this is going to be fun!"
 					});
@@ -292,7 +291,7 @@ Scenes.Estevan.Prompt = function() {
 					Text.Flush();
 					
 					world.TimeStep({minute: 15});
-					Scenes.Estevan.Prompt();
+					EstevanScenes.Prompt();
 				}
 			}, enabled : true,
 			tooltip : "Ask him if he’d like to help you play a prank on Cale, wrecking him in a rigged game of Cavalcade."
@@ -302,7 +301,7 @@ Scenes.Estevan.Prompt = function() {
 	if(player.Gender() == Gender.male) {
 		var tooltip = estevan.HadGaySex() ? "Split a few drinks with Estevan. Wine isn’t the only cork the satyr likes to pop when he’s drunk." : "The satyr seem to be a ladies man. Try to… convince him to make an exception.";
 		options.push({ nameStr : "Sex",
-			func : Scenes.Estevan.SexGay, enabled : true,
+			func : EstevanScenes.SexGay, enabled : true,
 			tooltip : tooltip
 		});
 	}
@@ -318,7 +317,7 @@ Scenes.Cale.Desc = function() {
 	Text.NL();
 }
 
-Scenes.Estevan.SexGay = function() {
+EstevanScenes.SexGay = function() {
 	var p1cock = player.BiggestCock();
 	
 	var parse = {
@@ -474,7 +473,7 @@ Scenes.Estevan.SexGay = function() {
 					Text.Add("You tell Estevan that you want that, too. You want to feel him filling you up again with his horny satyr juice. He scoots so close to you that you can feel his sweaty skin against yours and he gives you the length of his dick. Between his hand clamped hard on your shoulder and his shallow breathing, you guess that he’s about to cum and he proves you right by blowing another hot load inside you.", parse);
 					Text.NL();
 					
-					Scenes.Estevan.Impregnate(player, PregnancyHandler.Slot.Butt);
+					EstevanScenes.Impregnate(player, PregnancyHandler.Slot.Butt);
 					
 					Text.Add("One hot blast comes hard after another; his balls seem to have an infinite capacity, as this orgasm is much longer than his first. Estevan pumps so much seed into you that you feel it dribbling out of your loosened butt and onto his erection.", parse);
 					Text.NL();
@@ -504,7 +503,7 @@ Scenes.Estevan.SexGay = function() {
 					
 					world.TimeStep({minute: 30});
 					
-					Scenes.Estevan.Prompt();
+					EstevanScenes.Prompt();
 				}, enabled : true,
 				tooltip : "You’re committed to taking all Estevan has to offer."
 			});
@@ -581,7 +580,7 @@ Scenes.Estevan.SexGay = function() {
 					
 					world.TimeStep({minute: 15});
 					
-					Scenes.Estevan.Prompt();
+					EstevanScenes.Prompt();
 				}, enabled : true,
 				tooltip : "If you let the riled up satyr fuck you, you’ll be hobbling around camp for the next few days at least! Maybe you could convince him to accept a blowjob... though your jaw won’t be happy."
 			});
@@ -753,7 +752,7 @@ Scenes.Estevan.SexGay = function() {
 				
 				player.subDom.IncreaseStat(75, 1);
 				
-				Scenes.Estevan.Prompt();
+				EstevanScenes.Prompt();
 			});
 		}, enabled : true,
 		tooltip : "Convince the satyr that he ought to let you have a turn at his ass. After all, he drank all your wine."
@@ -761,4 +760,4 @@ Scenes.Estevan.SexGay = function() {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-export { Estevan };
+export { Estevan, EstevanScenes };

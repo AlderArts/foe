@@ -3,11 +3,11 @@
  * Define Patchwork
  * 
  */
-import { Link, Scenes } from '../../event';
 import { Entity } from '../../entity';
-import { world } from '../../world';
 import { Shop } from '../../shop';
 import { GetDEBUG } from '../../../app';
+
+let PatchworkScenes = {};
 
 function Patchwork(storage) {
 	Entity.call(this);
@@ -23,40 +23,40 @@ function Patchwork(storage) {
 	 */
 	this.Shop = new Shop();
 	
-	this.Shop.AddItem(Items.Combat.HPotion, 5, null, Scenes.Patchwork.BuyFunc);
+	this.Shop.AddItem(Items.Combat.HPotion, 5, null, PatchworkScenes.BuyFunc);
 	
-	this.Shop.AddItem(Items.Equinium, 5, null, Scenes.Patchwork.BuyFunc);
-	//this.Shop.AddItem(Items.HorseHair, 5, null, Scenes.Patchwork.BuyFunc);
-	this.Shop.AddItem(Items.HorseShoe, 5, null, Scenes.Patchwork.BuyFunc);
-	//this.Shop.AddItem(Items.HorseCum, 5, null, Scenes.Patchwork.BuyFunc);
+	this.Shop.AddItem(Items.Equinium, 5, null, PatchworkScenes.BuyFunc);
+	//this.Shop.AddItem(Items.HorseHair, 5, null, PatchworkScenes.BuyFunc);
+	this.Shop.AddItem(Items.HorseShoe, 5, null, PatchworkScenes.BuyFunc);
+	//this.Shop.AddItem(Items.HorseCum, 5, null, PatchworkScenes.BuyFunc);
 	
-	this.Shop.AddItem(Items.Leporine, 5, null, Scenes.Patchwork.BuyFunc);
-	this.Shop.AddItem(Items.RabbitFoot, 5, null, Scenes.Patchwork.BuyFunc);
-	//this.Shop.AddItem(Items.CarrotJuice, 5, null, Scenes.Patchwork.BuyFunc);
-	//this.Shop.AddItem(Items.Lettuce, 5, null, Scenes.Patchwork.BuyFunc);
+	this.Shop.AddItem(Items.Leporine, 5, null, PatchworkScenes.BuyFunc);
+	this.Shop.AddItem(Items.RabbitFoot, 5, null, PatchworkScenes.BuyFunc);
+	//this.Shop.AddItem(Items.CarrotJuice, 5, null, PatchworkScenes.BuyFunc);
+	//this.Shop.AddItem(Items.Lettuce, 5, null, PatchworkScenes.BuyFunc);
 	
-	this.Shop.AddItem(Items.Felinix, 5, null, Scenes.Patchwork.BuyFunc);
-	//this.Shop.AddItem(Items.Whiskers, 5, null, Scenes.Patchwork.BuyFunc);
-	this.Shop.AddItem(Items.HairBall, 5, null, Scenes.Patchwork.BuyFunc);
-	//this.Shop.AddItem(Items.CatClaw, 5, null, Scenes.Patchwork.BuyFunc);
+	this.Shop.AddItem(Items.Felinix, 5, null, PatchworkScenes.BuyFunc);
+	//this.Shop.AddItem(Items.Whiskers, 5, null, PatchworkScenes.BuyFunc);
+	this.Shop.AddItem(Items.HairBall, 5, null, PatchworkScenes.BuyFunc);
+	//this.Shop.AddItem(Items.CatClaw, 5, null, PatchworkScenes.BuyFunc);
 	
-	this.Shop.AddItem(Items.CowBell, 5, null, Scenes.Patchwork.BuyFunc);
+	this.Shop.AddItem(Items.CowBell, 5, null, PatchworkScenes.BuyFunc);
 	
-	this.Shop.AddItem(Items.DogBiscuit, 5, null, Scenes.Patchwork.BuyFunc);
+	this.Shop.AddItem(Items.DogBiscuit, 5, null, PatchworkScenes.BuyFunc);
 	
-	this.Shop.AddItem(Items.Trinket, 5, null, Scenes.Patchwork.BuyFunc);
-	this.Shop.AddItem(Items.Feather, 5, null, Scenes.Patchwork.BuyFunc);
-	this.Shop.AddItem(Items.FruitSeed, 5, null, Scenes.Patchwork.BuyFunc);
+	this.Shop.AddItem(Items.Trinket, 5, null, PatchworkScenes.BuyFunc);
+	this.Shop.AddItem(Items.Feather, 5, null, PatchworkScenes.BuyFunc);
+	this.Shop.AddItem(Items.FruitSeed, 5, null, PatchworkScenes.BuyFunc);
 	
-	this.Shop.AddItem(Items.Hummus, 5, null, Scenes.Patchwork.BuyFunc);
+	this.Shop.AddItem(Items.Hummus, 5, null, PatchworkScenes.BuyFunc);
 	
-	this.Shop.AddItem(Items.Fertilium, 5, null, Scenes.Patchwork.BuyFunc);
-	this.Shop.AddItem(Items.FertiliumPlus, 5, null, Scenes.Patchwork.BuyFunc);
+	this.Shop.AddItem(Items.Fertilium, 5, null, PatchworkScenes.BuyFunc);
+	this.Shop.AddItem(Items.FertiliumPlus, 5, null, PatchworkScenes.BuyFunc);
 	
-	this.Shop.AddItem(Items.Infertilium, 5, null, Scenes.Patchwork.BuyFunc);
-	this.Shop.AddItem(Items.InfertiliumPlus, 5, null, Scenes.Patchwork.BuyFunc);
+	this.Shop.AddItem(Items.Infertilium, 5, null, PatchworkScenes.BuyFunc);
+	this.Shop.AddItem(Items.InfertiliumPlus, 5, null, PatchworkScenes.BuyFunc);
 	
-	this.Shop.AddItem(Items.Toys.SmallDildo, 5, null, Scenes.Patchwork.BuyFunc);
+	this.Shop.AddItem(Items.Toys.SmallDildo, 5, null, PatchworkScenes.BuyFunc);
 	
 	this.flags = {};
 	this.flags["Met"] = Patchwork.Met.NotMet;
@@ -144,9 +144,7 @@ Patchwork.prototype.mfPronoun = function(male, female) {
 }
 
 
-Scenes.Patchwork = {};
-
-Scenes.Patchwork.Interact = function() {
+PatchworkScenes.Interact = function() {
 	var parse = {};
 	parse = patchwork.ParserPronouns(parse);
 	
@@ -166,7 +164,7 @@ Scenes.Patchwork.Interact = function() {
 		Text.NL();
 		Text.Add("The oddity of the merchant has you pausing for a moment, considering if you really want to do business with them after all.", parse);
 		Text.Flush();
-		Scenes.Patchwork.Prompt();
+		PatchworkScenes.Prompt();
 	}
 	else if(patchwork.flags["Met"] < Patchwork.Met.Met2) {
 		Text.Add("With a little trepidation, you approach the eccentric peddler in their patchworked robes again, asking if they are willing to do business with you.", parse);
@@ -182,7 +180,7 @@ Scenes.Patchwork.Interact = function() {
 			Text.NL();
 			Text.Add("You blink slowly; they went to the trouble of demanding a password, and now they don’t even care if it’s the right one or not? Oh well... what did you want to do, anyway?", parse);
 			Text.Flush();
-			Scenes.Patchwork.Prompt();
+			PatchworkScenes.Prompt();
 		}
 		
 		//[Umm…][Something like…][Err…]
@@ -218,11 +216,11 @@ Scenes.Patchwork.Interact = function() {
 		}
 		
 		Text.Flush();
-		Scenes.Patchwork.Prompt();
+		PatchworkScenes.Prompt();
 	}
 }
 
-Scenes.Patchwork.PW = function() {
+PatchworkScenes.PW = function() {
 	var words = [
 	"trinket", "bauble", "coin", "feather", "bird", "raven", "hemp", "pin", "yarn", "stone", "gem", "fish", "jelly", "goop", "key", "stitches", "clamp", "charm", "nymph", "blue", "red", "yellow", "green", "purple", "orange", "apple", "sauce", "gloom", "pockets", "gym", "scales", "shoe", "song", "groom", "bee", "wasp", "honey", "store", "laundry", "underwear", "cog", "long", "cat", "watch", "pineapple", "juice", "squawk", "fluffy tails", "dust", "hugs", "belly", "bomb", "pump", "grease"
 	];
@@ -237,12 +235,12 @@ Scenes.Patchwork.PW = function() {
 	return getWord() + " " + getWord() + " " + getWord();
 }
 
-Scenes.Patchwork.BuyFunc = function() {
+PatchworkScenes.BuyFunc = function() {
 	patchwork.relation.IncreaseStat(10, 1);
 	return false;
 }
 
-Scenes.Patchwork.Prompt = function() {
+PatchworkScenes.Prompt = function() {
 	var parse = {
 		notS : patchwork.mfPronoun("", "s")
 	};
@@ -261,7 +259,7 @@ Scenes.Patchwork.Prompt = function() {
 			Text.Clear();
 			Text.Add("<i>“What are ya buying?”</i> [heshe] ask[notS], opening [hisher] robes to show you the item-lined pockets.", parse);
 			Text.NL();
-			patchwork.Shop.Buy(Scenes.Patchwork.Prompt, true);
+			patchwork.Shop.Buy(PatchworkScenes.Prompt, true);
 		}, enabled : true
 	});
 	options.push({ nameStr : "Sell",
@@ -269,12 +267,12 @@ Scenes.Patchwork.Prompt = function() {
 			Text.Clear();
 			Text.Add("<i>“What are ya selling?”</i> [heshe] ask[notS], [hisher] telescopic monocle extending past [hisher] robes to examine your goods.", parse);
 			Text.NL();
-			patchwork.Shop.Sell(Scenes.Patchwork.Prompt, true);
+			patchwork.Shop.Sell(PatchworkScenes.Prompt, true);
 		}, enabled : true
 	});
 	
 	Gui.SetButtonsFromList(options, true, function() {
-		parse["pw"] = Scenes.Patchwork.PW();
+		parse["pw"] = PatchworkScenes.PW();
 		
 		Text.Clear();
 		if(patchwork.flags["Met"] < Patchwork.Met.Met) {
@@ -300,7 +298,7 @@ Scenes.Patchwork.Prompt = function() {
 	});
 }
 
-Scenes.Patchwork.Desc = function() {
+PatchworkScenes.Desc = function() {
 	var parse = {
 		notS : patchwork.mfPronoun("", "s"),
 		dont : patchwork.mfPronoun("don’t", "doesn’t")
@@ -314,4 +312,4 @@ Scenes.Patchwork.Desc = function() {
 	Text.NL();
 }
 
-export { Patchwork };
+export { Patchwork, PatchworkScenes };

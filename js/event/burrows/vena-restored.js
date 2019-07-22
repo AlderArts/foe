@@ -1,9 +1,6 @@
+let VenaRScenes = {};
 
-import { Scenes } from '../../event';
-
-Scenes.Vena.Restored = {};
-
-Scenes.Vena.Restored.Approach = function() {
+VenaRScenes.Approach = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -120,10 +117,10 @@ Scenes.Vena.Restored.Approach = function() {
 	
 	Text.Flush();
 	
-	Scenes.Vena.Restored.Prompt();
+	VenaRScenes.Prompt();
 }
 
-Scenes.Vena.Restored.Prompt = function() {
+VenaRScenes.Prompt = function() {
 	var parse = {
 		
 	};
@@ -156,7 +153,7 @@ Scenes.Vena.Restored.Prompt = function() {
 				
 				world.TimeStep({minute: 5});
 				
-				Scenes.Vena.Restored.LagonsFate({});
+				VenaRScenes.LagonsFate({});
 			}
 		});
 	}
@@ -186,7 +183,7 @@ Scenes.Vena.Restored.Prompt = function() {
 	});
 }
 
-Scenes.Vena.Restored.LagonsFate = function(opts) {
+VenaRScenes.LagonsFate = function(opts) {
 	var parse = {
 		playername : player.name
 	};
@@ -249,7 +246,7 @@ Scenes.Vena.Restored.LagonsFate = function(opts) {
 				
 				world.TimeStep({minute: 5});
 				
-				Scenes.Vena.Restored.LagonsFate(opts);
+				VenaRScenes.LagonsFate(opts);
 			}
 		});
 	}
@@ -273,7 +270,7 @@ Scenes.Vena.Restored.LagonsFate = function(opts) {
 				
 				world.TimeStep({minute: 5});
 				
-				Scenes.Vena.Restored.LagonsFate(opts);
+				VenaRScenes.LagonsFate(opts);
 			}
 		});
 	}
@@ -301,10 +298,12 @@ Scenes.Vena.Restored.LagonsFate = function(opts) {
 				
 				world.TimeStep({minute: 5});
 				
-				Scenes.Vena.Restored.LagonsFate(opts);
+				VenaRScenes.LagonsFate(opts);
 			}
 		});
 	}
 	
 	Gui.SetButtonsFromList(options, false, null);
 }
+
+export { VenaRScenes };

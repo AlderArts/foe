@@ -1,6 +1,7 @@
 
-import { Scenes } from '../../event';
 import { Entity } from '../../entity';
+
+let FireblossomScenes = {};
 
 function Fireblossom(storage) {
 	Entity.call(this);
@@ -77,9 +78,7 @@ Fireblossom.prototype.ToStorage = function() {
 	return storage;
 }
 
-Scenes.Brothel.Fireblossom = {};
-
-Scenes.Brothel.Fireblossom.IntroEntryPoint = function() {
+FireblossomScenes.IntroEntryPoint = function() {
 	var parse = {
 		armor : player.ArmorDesc(),
 		skin  : player.SkinDesc(),
@@ -110,7 +109,7 @@ Scenes.Brothel.Fireblossom.IntroEntryPoint = function() {
 		Text.Add("Taking a deep breath, you step through, entering not just the body but also the mind of the fair maiden Fireblossom...", parse);
 		Text.Flush();
 		
-		Gui.NextPrompt(Scenes.Brothel.Fireblossom.SceneSelect);
+		Gui.NextPrompt(FireblossomScenes.SceneSelect);
 	}
 	else {
 		Text.Add("You remove your [armor] and step into the magic circle, activating the spell that puts you inside the body of Fireblossom. She - you - is beautiful as always. Donning the white shift, you walk over to the mirror, its murky depths ready to take you into the lands of the dragon empire. The spell seems almost welcoming, recognizing someone who’s used it before and altering the world accordingly.", parse);
@@ -143,22 +142,22 @@ Scenes.Brothel.Fireblossom.IntroEntryPoint = function() {
 			Text.Add("You resolutely step through the mirror, entering the body and mind of Fireblossom. You wonder what you’ll experience, and shiver in anticipation...", parse);
 			Text.Flush();
 			
-			Gui.NextPrompt(Scenes.Brothel.Fireblossom.SceneSelect);
+			Gui.NextPrompt(FireblossomScenes.SceneSelect);
 		});
 		
 		Gui.SetButtonsFromList(options, false, null);
 	}
 }
 
-Scenes.Brothel.Fireblossom.SceneSelect = function() {
+FireblossomScenes.SceneSelect = function() {
 	switch(fireblossom.flags["State"]) {
 		default:
-		case Fireblossom.State.S1Journey: Scenes.Brothel.Fireblossom.S1TheJourney(); break;
+		case Fireblossom.State.S1Journey: FireblossomScenes.S1TheJourney(); break;
 		//TODO new scenes
 	}
 }
 
-Scenes.Brothel.Fireblossom.Outro = function() {
+FireblossomScenes.Outro = function() {
 	var parse = {
 		armor : player.ArmorDesc()
 	};
@@ -173,7 +172,7 @@ Scenes.Brothel.Fireblossom.Outro = function() {
 	});
 }
 
-Scenes.Brothel.Fireblossom.S1TheJourney = function() {
+FireblossomScenes.S1TheJourney = function() {
 	var parse = {
 		
 	};
@@ -403,7 +402,7 @@ Scenes.Brothel.Fireblossom.S1TheJourney = function() {
 					func : function() {
 						fireblossom.flags["Outset"] = Fireblossom.Outset.Draxen;
 						
-						Scenes.Brothel.Fireblossom.S1Draxen();
+						FireblossomScenes.S1Draxen();
 					}, enabled : true
 				});
 				options.push({ nameStr : "Scheme",
@@ -411,7 +410,7 @@ Scenes.Brothel.Fireblossom.S1TheJourney = function() {
 					func : function() {
 						fireblossom.flags["Outset"] = Fireblossom.Outset.Rakkat;
 						
-						Scenes.Brothel.Fireblossom.S1Rakkat();
+						FireblossomScenes.S1Rakkat();
 					}, enabled : true
 				});
 				options.push({ nameStr : "Protest",
@@ -419,7 +418,7 @@ Scenes.Brothel.Fireblossom.S1TheJourney = function() {
 					func : function() {
 						fireblossom.flags["Outset"] = Fireblossom.Outset.Grex;
 						
-						Scenes.Brothel.Fireblossom.S1Grex();
+						FireblossomScenes.S1Grex();
 					}, enabled : true
 				});
 				Gui.SetButtonsFromList(options, false, null);
@@ -430,7 +429,7 @@ Scenes.Brothel.Fireblossom.S1TheJourney = function() {
 	});
 }
 
-Scenes.Brothel.Fireblossom.S1Draxen = function() {
+FireblossomScenes.S1Draxen = function() {
 	var parse = {
 		
 	};
@@ -546,13 +545,13 @@ Scenes.Brothel.Fireblossom.S1Draxen = function() {
 				
 				fireblossom.flags["State"] = Fireblossom.State.S2DraxenPet;
 				
-				Gui.NextPrompt(Scenes.Brothel.Fireblossom.Outro);
+				Gui.NextPrompt(FireblossomScenes.Outro);
 			});
 		});
 	});
 }
 
-Scenes.Brothel.Fireblossom.S1Rakkat = function() {
+FireblossomScenes.S1Rakkat = function() {
 	var parse = {
 		
 	};
@@ -640,7 +639,7 @@ Scenes.Brothel.Fireblossom.S1Rakkat = function() {
 				player.subDom.DecreaseStat(-20, 1);
 				fireblossom.rakkatRel++;
 				
-				Gui.NextPrompt(Scenes.Brothel.Fireblossom.S1RakkatCont);
+				Gui.NextPrompt(FireblossomScenes.S1RakkatCont);
 			}, enabled : true
 		});
 		options.push({ nameStr : "Seduce",
@@ -696,7 +695,7 @@ Scenes.Brothel.Fireblossom.S1Rakkat = function() {
 				
 				fireblossom.flags["Rakkat"] |= Fireblossom.Rakkat.Seduced;
 				
-				Gui.NextPrompt(Scenes.Brothel.Fireblossom.S1RakkatCont);
+				Gui.NextPrompt(FireblossomScenes.S1RakkatCont);
 			}, enabled : true
 		});
 		options.push({ nameStr : "Kill him",
@@ -736,7 +735,7 @@ Scenes.Brothel.Fireblossom.S1Rakkat = function() {
 					Text.Clear();
 					Text.Add("Well, that didn’t work out as planned. ", parse);
 					
-					Scenes.Brothel.Fireblossom.S1GrexEntrypoint();
+					FireblossomScenes.S1GrexEntrypoint();
 				});
 			}, enabled : true
 		});
@@ -744,7 +743,7 @@ Scenes.Brothel.Fireblossom.S1Rakkat = function() {
 	});
 }
 
-Scenes.Brothel.Fireblossom.S1RakkatCont = function() {
+FireblossomScenes.S1RakkatCont = function() {
 	var parse = {
 		
 	};
@@ -821,11 +820,11 @@ Scenes.Brothel.Fireblossom.S1RakkatCont = function() {
 		
 		fireblossom.flags["State"] = Fireblossom.State.S2RakkatPet;
 		
-		Gui.NextPrompt(Scenes.Brothel.Fireblossom.Outro);
+		Gui.NextPrompt(FireblossomScenes.Outro);
 	});
 }
 
-Scenes.Brothel.Fireblossom.S1Grex = function() {
+FireblossomScenes.S1Grex = function() {
 	var parse = {
 		
 	};
@@ -857,11 +856,11 @@ Scenes.Brothel.Fireblossom.S1Grex = function() {
 	Gui.NextPrompt(function() {
 		Text.Clear();
 		Text.Add("You come to, waking up from a dream of misery into real misery. Struggling, you take note of your current predicament. ", parse);
-		Scenes.Brothel.Fireblossom.S1GrexEntrypoint();
+		FireblossomScenes.S1GrexEntrypoint();
 	});
 }
 
-Scenes.Brothel.Fireblossom.S1GrexEntrypoint = function() {
+FireblossomScenes.S1GrexEntrypoint = function() {
 	var parse = {
 		
 	};
@@ -901,10 +900,10 @@ Scenes.Brothel.Fireblossom.S1GrexEntrypoint = function() {
 	Text.Add("What’d you like to do?", parse);
 	Text.Flush();
 	
-	Scenes.Brothel.Fireblossom.S1GrexRoom({});
+	FireblossomScenes.S1GrexRoom({});
 }
 
-Scenes.Brothel.Fireblossom.S1GrexRoom = function(opts) {
+FireblossomScenes.S1GrexRoom = function(opts) {
 	var parse = {
 		
 	};
@@ -926,7 +925,7 @@ Scenes.Brothel.Fireblossom.S1GrexRoom = function(opts) {
 			
 			opts.survey = true;
 			
-			Scenes.Brothel.Fireblossom.S1GrexRoom(opts);
+			FireblossomScenes.S1GrexRoom(opts);
 		}, enabled : !opts.survey
 	});
 	options.push({ nameStr : "Explore",
@@ -954,7 +953,7 @@ Scenes.Brothel.Fireblossom.S1GrexRoom = function(opts) {
 			
 			opts.explore = true;
 			
-			Scenes.Brothel.Fireblossom.S1GrexPens(opts);
+			FireblossomScenes.S1GrexPens(opts);
 		}, enabled : true
 	});
 	options.push({ nameStr : "Wait",
@@ -968,13 +967,13 @@ Scenes.Brothel.Fireblossom.S1GrexRoom = function(opts) {
 			
 			player.subDom.DecreaseStat(-25, 1);
 			
-			Scenes.Brothel.Fireblossom.S1GrexPens(opts);
+			FireblossomScenes.S1GrexPens(opts);
 		}, enabled : true
 	});
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Brothel.Fireblossom.S1GrexPens = function(opts) {
+FireblossomScenes.S1GrexPens = function(opts) {
 	var parse = {
 		
 	};
@@ -1075,8 +1074,8 @@ Scenes.Brothel.Fireblossom.S1GrexPens = function(opts) {
 		
 		fireblossom.flags["State"] = Fireblossom.State.S2GrexPet;
 		
-		Gui.NextPrompt(Scenes.Brothel.Fireblossom.Outro);
+		Gui.NextPrompt(FireblossomScenes.Outro);
 	});
 }
 
-export { Fireblossom };
+export { Fireblossom, FireblossomScenes };

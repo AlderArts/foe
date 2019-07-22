@@ -4,11 +4,13 @@
  * 
  */
 
-import { Scenes } from '../../event';
 import { Entity } from '../../entity';
 import { BossEntity } from '../../enemy/boss';
+import { LagonDScenes } from './lagon-defeated';
 
-Scenes.Lagon = {};
+let LagonScenes = {
+	Defeated : LagonDScenes,
+};
 
 
 
@@ -108,7 +110,7 @@ Lagon.prototype.JailSexed = function() {
 	return this.flags["JSex"] != 0;
 }
 
-Scenes.Lagon.LagonImpregnate = function(mother, slot) {
+LagonScenes.LagonImpregnate = function(mother, slot) {
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother : mother,
@@ -403,7 +405,7 @@ LagonBrute.prototype.Act = function(encounter, activeChar) {
 		Abilities.Attack.Use(encounter, this, t);
 }
 
-Scenes.Lagon.InteractRuler = function() {
+LagonScenes.InteractRuler = function() {
 	var parse = {
 		
 	};
@@ -430,10 +432,10 @@ Scenes.Lagon.InteractRuler = function() {
 	}
 	Text.Flush();
 	
-	Scenes.Lagon.RulerPrompt();
+	LagonScenes.RulerPrompt();
 }
 
-Scenes.Lagon.RulerPrompt = function() {
+LagonScenes.RulerPrompt = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -452,7 +454,7 @@ Scenes.Lagon.RulerPrompt = function() {
 				Text.Add("<i>“And what thoughts have gone through your vapid little head?”</i> Lagon queries, scratching said head fondly.", parse);
 			Text.Flush();
 			
-			Scenes.Lagon.RulerTalkPrompt();
+			LagonScenes.RulerTalkPrompt();
 		}, enabled : true,
 		tooltip : "There’s something you want to ask the king."
 	});
@@ -484,7 +486,7 @@ Scenes.Lagon.RulerPrompt = function() {
 			Text.NL();
 			Text.Add("<i>“So, how do you wish to be taken?”</i> You gulp, your eyes straying to the king’s massive shaft; at about fifteen inches long and three inches thick, it looks absurdly big on his relatively small frame.", parse);
 			Text.Flush();
-			Scenes.Lagon.RulerSexPrompt();
+			LagonScenes.RulerSexPrompt();
 		}, enabled : true,
 		tooltip : "Proposition Lagon for sex."
 	});
@@ -527,7 +529,7 @@ Scenes.Lagon.RulerPrompt = function() {
 						Text.Flush();
 						
 						Gui.NextPrompt(function() {
-							Scenes.Lagon.Usurp();
+							LagonScenes.Usurp();
 						});
 					}, enabled : true,
 					tooltip : "You’re ready to take him on!"
@@ -537,7 +539,7 @@ Scenes.Lagon.RulerPrompt = function() {
 						Text.Clear();
 						Text.Add("You reconsider. Attacking right now would be foolhardy.", parse);
 						Text.Flush();
-						Scenes.Lagon.RulerPrompt();
+						LagonScenes.RulerPrompt();
 					}, enabled : true,
 					tooltip : "On second thought..."
 				});
@@ -550,7 +552,7 @@ Scenes.Lagon.RulerPrompt = function() {
 }
 
 //TODO
-Scenes.Lagon.RulerSexPrompt = function() {
+LagonScenes.RulerSexPrompt = function() {
 	var parse = {
 		
 	};
@@ -560,7 +562,7 @@ Scenes.Lagon.RulerSexPrompt = function() {
 	options.push({ nameStr : "Blowjob",
 		func : function() {
 			lagon.flags["Talk"] |= Lagon.Talk.RegularSex;
-			Scenes.Lagon.RulerBlowjob();
+			LagonScenes.RulerBlowjob();
 		}, enabled : true,
 		tooltip : "Ask the king for permission to suck his cock."
 	});
@@ -578,7 +580,7 @@ Scenes.Lagon.RulerSexPrompt = function() {
 				Text.Add("<i>“My children are getting jealous; you keep hogging me all to yourself,”</i> Lagon replies, grinning. Sure enough, the daughter that’s giving him a blowjob throws you a dark glare before she reluctantly hops off, in search for some other release. <i>“I’d be a bad host if I didn’t grant such an earnest request, however.”</i>", parse);
 			Text.Add(" You gulp, an excited shiver going through your body.", parse);
 			Text.NL();
-			Scenes.Lagon.RulerGetFuckedEntrypoint();
+			LagonScenes.RulerGetFuckedEntrypoint();
 		}, enabled : true,
 		tooltip : "Offer your body to the king, beg for him to use you like the bitch you are."
 	});
@@ -608,7 +610,7 @@ Scenes.Lagon.RulerSexPrompt = function() {
 	});
 }
 
-Scenes.Lagon.RulerBlowjob = function() {
+LagonScenes.RulerBlowjob = function() {
 	var parse = {
 		
 	};
@@ -654,10 +656,10 @@ Scenes.Lagon.RulerBlowjob = function() {
 		Text.Add("You eagerly scoot over so that you’re positioned between your king’s legs, kneeling at the altar of his fleshy obelisk as you prepare to worship it. Lagon rests his chin in his palm, looking down on you with a pleased smile playing on his lips as he waits for you to begin.", parse);
 	}
 	Text.NL();
-	Scenes.Lagon.RulerBlowjobEntrypoint();
+	LagonScenes.RulerBlowjobEntrypoint();
 }
 
-Scenes.Lagon.RulerBlowjobEntrypoint = function() {
+LagonScenes.RulerBlowjobEntrypoint = function() {
 	var p1cock = player.BiggestCock();
 	
 	var parse = {
@@ -743,7 +745,7 @@ Scenes.Lagon.RulerBlowjobEntrypoint = function() {
 		Text.NL();
 		Text.Add("<i>“Ngh- about to bust a nut down that tight throat of yours,”</i> Lagon grunts. <i>“Get ready for your filling, slut!”</i> Not like you have a choice. You resign yourself to your fate and wait patiently for his load, anxious for your training-session to be over.", parse);
 		Text.NL();
-		Scenes.Lagon.RulerBlowjobSwallowEntrypoint(opheliaPresent);
+		LagonScenes.RulerBlowjobSwallowEntrypoint(opheliaPresent);
 		return;
 	}
 	else if(player.sex.gBlow < 25) {
@@ -785,7 +787,7 @@ Scenes.Lagon.RulerBlowjobEntrypoint = function() {
 			Text.NL();
 			Text.Add("<i>“Gonna blast you so full that you’ll be tasting cum for weeks,”</i> the king groans, his rutting becoming quicker and more erratic. <i>“Gonna- ugh… FUCK!”</i> He roars triumphantly, his dominion over you complete.", parse);
 			Text.NL();
-			Scenes.Lagon.RulerBlowjobSwallowEntrypoint(opheliaPresent);
+			LagonScenes.RulerBlowjobSwallowEntrypoint(opheliaPresent);
 		}, enabled : true,
 		tooltip : "You don’t want to waste a single drop."
 	});
@@ -807,7 +809,7 @@ Scenes.Lagon.RulerBlowjobEntrypoint = function() {
 			Text.Add("<i>“Now, be off with you. I shall have need of you later.”</i>", parse);
 			Text.NL();
 			
-			Scenes.Lagon.RulerBlowjobAftermath(opheliaPresent);
+			LagonScenes.RulerBlowjobAftermath(opheliaPresent);
 		}, enabled : true,
 		tooltip : "Let the powerful male show you just how much cum he has backed up for you."
 	});
@@ -859,7 +861,7 @@ Scenes.Lagon.RulerBlowjobEntrypoint = function() {
 				
 				player.AddLustFraction(1);
 				
-				Scenes.Lagon.RulerGetFuckedEntrypoint2(true, BodyPartType.ass, opheliaPresent);
+				LagonScenes.RulerGetFuckedEntrypoint2(true, BodyPartType.ass, opheliaPresent);
 			}, enabled : true,
 			tooltip : tooltip
 		});
@@ -882,14 +884,14 @@ Scenes.Lagon.RulerBlowjobEntrypoint = function() {
 			
 			player.AddLustFraction(0.5);
 			
-			Scenes.Lagon.RulerGetFuckedEntrypoint(opheliaPresent);
+			LagonScenes.RulerGetFuckedEntrypoint(opheliaPresent);
 		}, enabled : true,
 		tooltip : "You want more than this! Beg for him to take you, to fuck you raw until you’re swollen from his cum!"
 	});
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Lagon.RulerBlowjobSwallowEntrypoint = function(opheliaPresent) {
+LagonScenes.RulerBlowjobSwallowEntrypoint = function(opheliaPresent) {
 	var parse = {
 		
 	};
@@ -901,11 +903,11 @@ Scenes.Lagon.RulerBlowjobSwallowEntrypoint = function(opheliaPresent) {
 	Text.Add("<i>“Good job, my little slut,”</i> he praises you. Lagon flops back onto his throne, allowing you to lick his softening member clean. <i>“You might be worth keeping around after you’ve finished your tasks for me.”</i>", parse);
 	Text.NL();
 	
-	Scenes.Lagon.RulerBlowjobAftermath(opheliaPresent);
+	LagonScenes.RulerBlowjobAftermath(opheliaPresent);
 }
 
 
-Scenes.Lagon.RulerBlowjobAftermath = function(opheliaPresent) {
+LagonScenes.RulerBlowjobAftermath = function(opheliaPresent) {
 	var parse = {
 		
 	};
@@ -927,7 +929,7 @@ Scenes.Lagon.RulerBlowjobAftermath = function(opheliaPresent) {
 
 
 //TODO
-Scenes.Lagon.RulerGetFuckedEntrypoint = function(opheliaPresent) {
+LagonScenes.RulerGetFuckedEntrypoint = function(opheliaPresent) {
 	var p1cock = player.BiggestCock();
 	var lagonSize = lagon.FirstCock().Size();
 	var parse = {
@@ -1080,11 +1082,11 @@ Scenes.Lagon.RulerGetFuckedEntrypoint = function(opheliaPresent) {
 	Text.Add("You shiver as you feel the lapin king press the head of his immense shaft against your [target], demanding entry and not taking no for an answer. Tightening your [hand]s into fists, you try to prepare yourself for your imminent violation.", parse);
 	Text.NL();
 	
-	Scenes.Lagon.RulerGetFuckedEntrypoint2(false, target, opheliaPresent);
+	LagonScenes.RulerGetFuckedEntrypoint2(false, target, opheliaPresent);
 }
 
 //TODO
-Scenes.Lagon.RulerGetFuckedEntrypoint2 = function(angry, target, opheliaPresent) {
+LagonScenes.RulerGetFuckedEntrypoint2 = function(angry, target, opheliaPresent) {
 	var parse = {
 		
 	};
@@ -1304,7 +1306,7 @@ Scenes.Lagon.RulerGetFuckedEntrypoint2 = function(angry, target, opheliaPresent)
 			Text.Add("<i>“As expected from you, slut,”</i> he grins, prodding at you playfully with his foot. <i>“Come back when you want another serving.”</i>", parse);
 		Text.NL();
 		
-		Scenes.Lagon.LagonImpregnate(player, pussy ? PregnancyHandler.Slot.Vag : PregnancyHandler.Slot.Butt);
+		LagonScenes.LagonImpregnate(player, pussy ? PregnancyHandler.Slot.Vag : PregnancyHandler.Slot.Butt);
 		
 		if(player.sexlevel >= 5) {
 			Text.Add("After you regain your breath, you get up and stretch, working out the kinks in your sore muscles. There are few men who can fuck like that, you grudgingly admit. Lagon seems quite impressed by the fact that you can even walk, and you blow him a taunting kiss. He was rough… but by the spirits that felt amazing. Who knows, perhaps you’ll ask him for another round later.", parse);
@@ -1344,7 +1346,7 @@ Scenes.Lagon.RulerGetFuckedEntrypoint2 = function(angry, target, opheliaPresent)
 }
 
 //TODO
-Scenes.Lagon.RulerPitEntrypoint = function() {
+LagonScenes.RulerPitEntrypoint = function() {
 	var parse = {
 		
 	};
@@ -1358,7 +1360,7 @@ Scenes.Lagon.RulerPitEntrypoint = function() {
 }
 
 
-Scenes.Lagon.AlliedFirst = function() {
+LagonScenes.AlliedFirst = function() {
 	var parse = {
 		
 	};
@@ -1383,7 +1385,7 @@ Scenes.Lagon.AlliedFirst = function() {
 			Text.Clear();
 			Text.Add("<i>“Is my loyal minion apprehensive? Or perhaps just hungry?”</i> Lagon grins, motioning for you to come closer. <i>“You have your king’s permission to suck his cock.”</i> He reclines, eyes intent on you as he waits for you to get started. Swallowing your doubts, you kneel down between his legs, licking your lips.", parse);
 			Text.NL();
-			Scenes.Lagon.RulerBlowjobEntrypoint();
+			LagonScenes.RulerBlowjobEntrypoint();
 		}, enabled : true,
 		tooltip : "Perhaps just start with what the girl was doing as you came in."
 	});
@@ -1392,7 +1394,7 @@ Scenes.Lagon.AlliedFirst = function() {
 			Text.Clear();
 			Text.Add("<i>“Very good,”</i> Lagon murmurs, motioning for you to approach. <i>“The king shall share his bounty with his loyal subject… with his slut.”</i> You gulp as your eyes meet his. There is a hunger in them, a raging fire that seeks to use and consume all that stands before it… and right now, you are in his sights. And Aria help you, you want to be there.", parse);
 			Text.NL();
-			Scenes.Lagon.RulerGetFuckedEntrypoint();
+			LagonScenes.RulerGetFuckedEntrypoint();
 		}, enabled : true,
 		tooltip : "Yes… you want this. Accept the king’s reward."
 	});
@@ -1406,7 +1408,7 @@ Scenes.Lagon.AlliedFirst = function() {
 			parse["step"] = player.HasLegs() ? "step" : "slither";
 			Text.Add("<i>“Then follow me, slut.”</i> The lagomorph king bounds to his feet, throwing a familiar arm around your shoulder as he marches you out of the throne room and into the tunnels. <i>“I’d give you a good fuck before we go, but I think it best to wait until we’re there… I think you’d have trouble walking for a while, and I’m sure you wouldn’t want to miss out on any action.”</i> With your heart in your throat, you keep pace with him, a skip in your [step].", parse);
 			Text.NL();
-			Scenes.Lagon.RulerPitEntrypoint();
+			LagonScenes.RulerPitEntrypoint();
 		}, enabled : true,
 		tooltip : "You wish for nothing more than to be fucked by him… by him and everyone of his men, by Vena, by the entire Pit."
 	});
@@ -1418,14 +1420,14 @@ Scenes.Lagon.AlliedFirst = function() {
 			Text.Add("<i>“Now, what did you want?”</i>", parse);
 			Text.Flush();
 			
-			Scenes.Lagon.RulerPrompt();
+			LagonScenes.RulerPrompt();
 		}, enabled : true,
 		tooltip : "You… ah, you really have to pass."
 	});
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Lagon.RulerTalkPrompt = function() {
+LagonScenes.RulerTalkPrompt = function() {
 	var parse = {
 		tongue : function() { return player.TongueDesc(); }
 	};
@@ -1439,7 +1441,7 @@ Scenes.Lagon.RulerTalkPrompt = function() {
 			if(lagon.Relation() < 25) {
 				Text.Add("<i>“I don’t find any reason to share my plans with an outsider,”</i> Lagon frowns. <i>“You are here because you are somewhat useful to me, and I pay you for being useful. Don’t think it’s anything more than that.”</i>", parse);
 				Text.Flush();
-				Scenes.Lagon.RulerTalkPrompt();
+				LagonScenes.RulerTalkPrompt();
 				return;
 			}
 			else if(lagon.Relation() < 50)
@@ -1465,7 +1467,7 @@ Scenes.Lagon.RulerTalkPrompt = function() {
 				Text.Add("The king smiles. <i>“You can do that for me, can’t you? You’ve proven yourself in the past to be an expert betrayer.”</i> The words sting, even though they are true.", parse);
 			}
 			Text.Flush();
-			Scenes.Lagon.RulerTalkPrompt();
+			LagonScenes.RulerTalkPrompt();
 		}, enabled : true,
 		tooltip : "This colony, this kingdom of his… what’s he planning to do with it?"
 	});
@@ -1476,7 +1478,7 @@ Scenes.Lagon.RulerTalkPrompt = function() {
 			if(lagon.Relation() < 0) {
 				Text.Add("<i>“I don’t think you’ve earned learning anything about my past, outsider,”</i> Lagon frowns, <i>“and asking about it is very presumptuous. Know that I am king and master here in the burrows. Anything else, you’ll have to work for.”</i>", parse);
 				Text.Flush();
-				Scenes.Lagon.RulerTalkPrompt();
+				LagonScenes.RulerTalkPrompt();
 				return;
 			}
 			else if(lagon.Relation() < 50) {
@@ -1531,7 +1533,7 @@ Scenes.Lagon.RulerTalkPrompt = function() {
 			}
 			else {
 				Text.Flush();
-				Scenes.Lagon.RulerTalkPrompt();
+				LagonScenes.RulerTalkPrompt();
 			}
 		}, enabled : true,
 		tooltip : "Ask him about himself."
@@ -1564,7 +1566,7 @@ Scenes.Lagon.RulerTalkPrompt = function() {
 					Text.NL();
 					Text.Add("You keep your thoughts to yourself.", parse);
 					Text.Flush();
-					Scenes.Lagon.RulerTalkPrompt();
+					LagonScenes.RulerTalkPrompt();
 				}, enabled : true,
 				tooltip : "Better not anger him."
 			});
@@ -1583,7 +1585,7 @@ Scenes.Lagon.RulerTalkPrompt = function() {
 					}
 					Text.Flush();
 					lagon.relation.IncreaseStat(10, 1);
-					Scenes.Lagon.RulerTalkPrompt();
+					LagonScenes.RulerTalkPrompt();
 				}, enabled : true,
 				tooltip : "Agree that it truly is a high honor. Anyone would be envious to be in Vena’s place."
 			});
@@ -1644,7 +1646,7 @@ Scenes.Lagon.RulerTalkPrompt = function() {
 				Text.Add("<i>“Her tricks have been quite useful to me so far, allowing me to take shortcuts to gain strength more rapidly.[rel]”</i>", parse);
 			}
 			Text.Flush();
-			Scenes.Lagon.RulerTalkPrompt();
+			LagonScenes.RulerTalkPrompt();
 		}, enabled : true,
 		tooltip : "Ask him about his daughter, Ophelia."
 	});
@@ -1662,7 +1664,7 @@ Scenes.Lagon.RulerTalkPrompt = function() {
 				Text.NL();
 				Text.Add("<b>A group of Lagon’s children have joined you. They aren’t going to be much use in combat as they are pretty weak, but they make up for it in their eagerness to please you.</b>", parse);
 				Text.Flush();
-				Scenes.Lagon.RulerTalkPrompt();
+				LagonScenes.RulerTalkPrompt();
 			}, enabled : true,
 			tooltip : "Ask him for a selection of his sons and daughters to join you."
 		});
@@ -1696,7 +1698,7 @@ Scenes.Lagon.RulerTalkPrompt = function() {
 							Text.Clear();
 							Text.Add("<i>“If there’s nothing else, I have better things to do,”</i> the kind dismisses you.", parse);
 							Text.Flush();
-							Scenes.Lagon.RulerTalkPrompt();
+							LagonScenes.RulerTalkPrompt();
 						}, enabled : true,
 						tooltip : "Say nothing."
 					});
@@ -1708,7 +1710,7 @@ Scenes.Lagon.RulerTalkPrompt = function() {
 								Text.NL();
 								Text.Add("You’re pretty sure you know in what way the king would like you to show your ‘loyalty’ to him.", parse);
 								Text.Flush();
-								Scenes.Lagon.RulerTalkPrompt();
+								LagonScenes.RulerTalkPrompt();
 								return;
 							}
 							else if(lagon.flags["Talk"] & Lagon.Talk.ScepterTalk == 0) {
@@ -1745,7 +1747,7 @@ Scenes.Lagon.RulerTalkPrompt = function() {
 									Text.Clear();
 									Text.Add("<i>“Your loss,”</i> Lagon shrugs.", parse);
 									Text.Flush();
-									Scenes.Lagon.RulerTalkPrompt();
+									LagonScenes.RulerTalkPrompt();
 								}, enabled : true,
 								tooltip : "Ah… no. You don’t really need it, come to think of it."
 							});
@@ -1771,7 +1773,7 @@ Pit win (todo)
 Pit loss (todo)
 									 */
 									//TODO parameters
-									Scenes.Lagon.RulerPitEntrypoint();
+									LagonScenes.RulerPitEntrypoint();
 								}, enabled : true,
 								tooltip : player.Slut() < 75 ? "You really want that scepter." : "Scepter or not, that proposal sounds really enticing..."
 							});
@@ -1811,7 +1813,7 @@ Pit loss (todo)
 					lagon.flags["Talk"] |= Lagon.Talk.RoaTalk;
 				}
 				Text.Flush();
-				Scenes.Lagon.RulerTalkPrompt();
+				LagonScenes.RulerTalkPrompt();
 			}, enabled : true,
 			tooltip : "Ask about Roa."
 		});
@@ -1821,11 +1823,11 @@ Pit loss (todo)
 		Text.Add("<i>“Very well. Anything else?”</i>", parse);
 		Text.Flush();
 		
-		Scenes.Lagon.RulerPrompt();
+		LagonScenes.RulerPrompt();
 	});
 }
 
-Scenes.Lagon.PitDefianceWin = function() {
+LagonScenes.PitDefianceWin = function() {
 	SetGameState(GameState.Event);
 	var enc = this;
 	var parse = {
@@ -1867,7 +1869,7 @@ Scenes.Lagon.PitDefianceWin = function() {
 	Encounter.prototype.onVictory.call(enc);
 }
 
-Scenes.Lagon.PitDefianceLoss = function() {
+LagonScenes.PitDefianceLoss = function() {
 	SetGameState(GameState.Event);
 	var parse = {
 		face : function() { return player.FaceDesc(); },
@@ -1912,7 +1914,7 @@ Scenes.Lagon.PitDefianceLoss = function() {
 		player.FuckAnal(player.Butt(), lagon.FirstCock(), 4);
 		lagon.Fuck(lagon.FirstCock(), 4);
 		
-		Scenes.Lagon.LagonImpregnate(player, PregnancyHandler.Slot.Butt);
+		LagonScenes.LagonImpregnate(player, PregnancyHandler.Slot.Butt);
 		
 		Text.Add("You bite down your response, trying to keep hold of your sanity while the rabbit king ravages your [anusDesc]. Visions of the brutes created by Ophelia’s alchemy swims into your mind. As big as Lagon’s cock is now - something you’re rather intimately familiar with now - how big would it be once he took something like that? Three feet? Four?", parse);
 		Text.NL();
@@ -1949,11 +1951,11 @@ Scenes.Lagon.PitDefianceLoss = function() {
 		
 		world.TimeStep({hour : 1});
 	
-		Gui.NextPrompt(Scenes.Lagon.BadendPit);
+		Gui.NextPrompt(LagonScenes.BadendPit);
 	});
 }
 
-Scenes.Lagon.BadendPit = function() {
+LagonScenes.BadendPit = function() {
 	var parse = {
 		
 	};
@@ -1988,7 +1990,7 @@ Scenes.Lagon.BadendPit = function() {
 }
 
 
-Scenes.Lagon.BadendBrute = function() {
+LagonScenes.BadendBrute = function() {
 	SetGameState(GameState.Event);
 	
 	var scepter = party.Inv().QueryNum(Items.Quest.Scepter);
@@ -2059,7 +2061,7 @@ Scenes.Lagon.BadendBrute = function() {
 	});
 }
 
-Scenes.Lagon.ReturnToBurrowsAfterFight = function() {
+LagonScenes.ReturnToBurrowsAfterFight = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -2134,7 +2136,7 @@ Scenes.Lagon.ReturnToBurrowsAfterFight = function() {
 			world.TimeStep({minute: 30});
 			
 			Gui.NextPrompt(function() {
-				Scenes.Lagon.Usurp(toolate);
+				LagonScenes.Usurp(toolate);
 			});
 		}, enabled : true,
 		tooltip : "The time has come to face off against this so called king."
@@ -2142,7 +2144,7 @@ Scenes.Lagon.ReturnToBurrowsAfterFight = function() {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Lagon.ReturnToBurrowsAfterScepter = function() {
+LagonScenes.ReturnToBurrowsAfterScepter = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -2227,7 +2229,7 @@ Scenes.Lagon.ReturnToBurrowsAfterScepter = function() {
 					Text.Add("It’s a fight!", parse);
 					Text.Flush();
 					
-					Gui.NextPrompt(Scenes.Lagon.Usurp);
+					Gui.NextPrompt(LagonScenes.Usurp);
 				}, enabled : true,
 				tooltip : "Fuck that. Lagon is a treacherous snake, you very much doubt that he’d keep such promises… not to mention his sinister agenda."
 			});
@@ -2259,7 +2261,7 @@ Scenes.Lagon.ReturnToBurrowsAfterScepter = function() {
 					
 					party.Inv().RemoveItem(Items.Quest.Scepter);
 					
-					Gui.NextPrompt(Scenes.Lagon.OpheliaFight);
+					Gui.NextPrompt(LagonScenes.OpheliaFight);
 				}, enabled : true,
 				tooltip : "This damn fetch-quest has gone on for too long… time you get a real reward. And if you can get it without even having to fight anyone… why not? Besides, taking Ophelia away from this place is probably the best she could ever hope for."
 			});
@@ -2270,7 +2272,7 @@ Scenes.Lagon.ReturnToBurrowsAfterScepter = function() {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Lagon.Usurp = function(toolate) {
+LagonScenes.Usurp = function(toolate) {
 	var parse = {
 		
 	};
@@ -2289,13 +2291,13 @@ Scenes.Lagon.Usurp = function(toolate) {
 		return lagonMob.Incapacitated();
 	}
 	
-	enc.onLoss    = Scenes.Lagon.LossToRegularLagon;
-	enc.onVictory = Scenes.Lagon.WinToRegularLagon;
+	enc.onLoss    = LagonScenes.LossToRegularLagon;
+	enc.onVictory = LagonScenes.WinToRegularLagon;
 	
 	enc.Start();
 }
 
-Scenes.Lagon.LossToRegularLagon = function() {
+LagonScenes.LossToRegularLagon = function() {
 	SetGameState(GameState.Event);
 	
 	var enc = this;
@@ -2386,10 +2388,10 @@ Scenes.Lagon.LossToRegularLagon = function() {
 	Text.Add("Time passes...", parse);
 	Text.Flush();
 	
-	Gui.NextPrompt(Scenes.Lagon.BadendPit);
+	Gui.NextPrompt(LagonScenes.BadendPit);
 }
 
-Scenes.Lagon.WinToRegularLagon = function() {
+LagonScenes.WinToRegularLagon = function() {
 	SetGameState(GameState.Event);
 	
 	var enc = this;
@@ -2424,8 +2426,8 @@ Scenes.Lagon.WinToRegularLagon = function() {
 			
 			enc.canRun = false;
 			
-			enc.onLoss    = Scenes.Lagon.BadendBrute;
-			enc.onVictory = Scenes.Lagon.WinToBruteLagon;
+			enc.onLoss    = LagonScenes.BadendBrute;
+			enc.onVictory = LagonScenes.WinToBruteLagon;
 			
 			enc.Start();
 		});
@@ -2433,7 +2435,7 @@ Scenes.Lagon.WinToRegularLagon = function() {
 	Encounter.prototype.onVictory.call(enc);
 }
 
-Scenes.Lagon.WinToBruteLagon = function() {
+LagonScenes.WinToBruteLagon = function() {
 	SetGameState(GameState.Event);
 	
 	var enc = this;
@@ -2516,20 +2518,20 @@ Scenes.Lagon.WinToBruteLagon = function() {
 	Encounter.prototype.onVictory.call(enc);
 }
 
-Scenes.Lagon.OpheliaFight = function() {
+LagonScenes.OpheliaFight = function() {
 	var enemy = new Party();
 	enemy.AddMember(new OpheliaBrute());
 	var enc = new Encounter(enemy);
 	
 	enc.canRun = false;
 	
-	enc.onLoss    = Scenes.Lagon.LossToOphelia;
-	enc.onVictory = Scenes.Lagon.WinToOphelia;
+	enc.onLoss    = LagonScenes.LossToOphelia;
+	enc.onVictory = LagonScenes.WinToOphelia;
 	
 	enc.Start();
 }
 
-Scenes.Lagon.LossToOphelia = function() {
+LagonScenes.LossToOphelia = function() {
 	SetGameState(GameState.Event);
 	var enc = this;
 	
@@ -2577,10 +2579,10 @@ Scenes.Lagon.LossToOphelia = function() {
 	Text.Add("Jealous, you watch as Lagon pounds into Ophelia. Crawling over, you massage your friend’s breasts, suckle on her nipples, kiss her passionately. How you hope that she too can be together with you forever...", parse);
 	Text.Flush();
 	
-	Gui.NextPrompt(Scenes.Lagon.BadendPit);
+	Gui.NextPrompt(LagonScenes.BadendPit);
 }
 
-Scenes.Lagon.WinToOphelia = function() {
+LagonScenes.WinToOphelia = function() {
 	SetGameState(GameState.Event);
 	var enc = this;
 	
@@ -2626,4 +2628,4 @@ Scenes.Lagon.WinToOphelia = function() {
 	Encounter.prototype.onVictory.call(enc);
 }
 
-export { Lagon };
+export { Lagon, LagonScenes };

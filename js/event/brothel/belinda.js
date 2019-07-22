@@ -3,8 +3,9 @@
  * Define Belinda
  * 
  */
-import { Scenes } from '../../event';
 import { Entity } from '../../entity';
+
+let BelindaScenes = {};
 
 function Belinda(storage) {
 	Entity.call(this);
@@ -41,8 +42,6 @@ Belinda.prototype.Met = function() {
 	return this.flags["Met"] >= Belinda.Met.Met;
 }
 
-Scenes.Belinda = {};
-
 Belinda.prototype.FromStorage = function(storage) {
 	
 	this.LoadPersonalityStats(storage);
@@ -72,4 +71,4 @@ Belinda.prototype.IsAtLocation = function(location) {
 	return false;
 }
 
-export { Belinda };
+export { Belinda, BelindaScenes };

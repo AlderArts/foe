@@ -4,10 +4,9 @@
  * 
  */
 
-import { Scenes } from '../../event';
 import { Entity } from '../../entity';
 
-Scenes.Lucille = {};
+let LucilleScenes = {};
 
 function Lucille(storage) {
 	Entity.call(this);
@@ -70,7 +69,7 @@ Lucille.prototype.IsAtLocation = function(location) {
 	return true;
 }
 
-Scenes.Lucille.Themerooms = function() {
+LucilleScenes.Themerooms = function() {
 	var parse = {
 		playername: player.name,
 		sirmadam: player.mfFem("sir", "madam")
@@ -204,7 +203,7 @@ Scenes.Lucille.Themerooms = function() {
 	});
 }
 
-Scenes.Lucille.WhoreAftermath = function(name, cost) {
+LucilleScenes.WhoreAftermath = function(name, cost) {
 	cost = cost || 0;
 	
 	var parse = {
@@ -330,4 +329,4 @@ Scenes.Lucille.WhoreAftermath = function(name, cost) {
 	}
 }
 
-export { Lucille };
+export { Lucille, LucilleScenes };

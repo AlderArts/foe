@@ -3,10 +3,9 @@
  * Define Ches
  * 
  */
-import { Scenes } from '../../event';
 import { Entity } from '../../entity';
 
-Scenes.Ches = {};
+let ChesScenes = {};
 
 function Ches(storage) {
 	Entity.call(this);
@@ -56,4 +55,4 @@ Ches.prototype.IsAtLocation = function(location) {
 	return true;
 }
 
-export { Ches };
+export { Ches, ChesScenes };

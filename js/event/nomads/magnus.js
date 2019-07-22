@@ -3,10 +3,11 @@
  * Define Magnus
  * 
  */
-import { Link, Scenes } from '../../event';
 import { Entity } from '../../entity';
 import { world } from '../../world';
 import { GetDEBUG } from '../../../app';
+
+let MagnusScenes = {};
 
 function Magnus(storage) {
 	Entity.call(this);
@@ -74,9 +75,7 @@ Magnus.prototype.ToStorage = function() {
 	return storage;
 }
 
-Scenes.Magnus = {};
-
-Scenes.Magnus.Impregnate = function(mother, slot) {
+MagnusScenes.Impregnate = function(mother, slot) {
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother : mother,
@@ -88,7 +87,7 @@ Scenes.Magnus.Impregnate = function(mother, slot) {
 	});
 }
 
-Scenes.Magnus.Interact = function() {
+MagnusScenes.Interact = function() {
 	Text.Clear();
 	
 	var parse = {
@@ -228,7 +227,7 @@ Scenes.Magnus.Interact = function() {
 								Text.Add("Somehow, you manage to somewhat follow what he is talking about, though you can feel your eyelids drooping dangerously.", parse);
 								Text.NL();
 								
-								Scenes.Magnus.LearnMagic();
+								MagnusScenes.LearnMagic();
 								return;
 							}
 							else {
@@ -247,7 +246,7 @@ Scenes.Magnus.Interact = function() {
 								Text.Add("You tell him that you are ready to accept his teachings. This time, you manage to hang on to his words, and somehow remain alert throughout the ordeal. The magician looks encouraged by your intense focus.", parse);
 								Text.NL();
 								
-								Scenes.Magnus.LearnMagic();
+								MagnusScenes.LearnMagic();
 								return;
 							}
 							else {
@@ -301,14 +300,14 @@ Scenes.Magnus.Interact = function() {
 						tooltip : "Ask Magnus about your gemstone."
 					});
 					options.push({ nameStr : "Meditate",
-						func : Scenes.Magnus.Meditation, enabled : true,
+						func : MagnusScenes.Meditation, enabled : true,
 						tooltip : "Meditate on the nature of the universe with Magnus."
 					});
 				}
 			}
 			if(magnus.flags["Sexed"] != 0 && magnus.flags["Confronted"] == 0) {
 				options.push({ nameStr : "Confront",
-					func : Scenes.Magnus.Confront, enabled : true,
+					func : MagnusScenes.Confront, enabled : true,
 					tooltip : "Tell him what happened to you while you were meditating."
 				});
 			}
@@ -320,7 +319,7 @@ Scenes.Magnus.Interact = function() {
 	}
 }
 
-Scenes.Magnus.Meditation = function() {
+MagnusScenes.Meditation = function() {
 	var parse = {
 		playername    : player.name
 	};
@@ -535,7 +534,7 @@ Scenes.Magnus.Meditation = function() {
 					Text.Add("Dimly, you notice that the cock in your mouth has deposited another load down your throat into your decidedly swelling belly, adding its foul seed to the first batch. It is quickly replaced by another one of the trio. With a sinking feeling, you realize that the demon could probably keep this up indefinitely. Its vigor certainly doesn’t seem to have anything to do with Magnus’ physical strength.", parse);
 					Text.NL();
 					if(player.FirstCock())
-						Scenes.Magnus.SexSounding();
+						MagnusScenes.SexSounding();
 						parse["s"] = player.FirstVag() ? "s" : "";
 						parse["womb"] = player.FirstVag() ? " and womb" : "";
 					Text.Add("You pass in and out of consciousness, not sure how long the ordeal lasts. Your swelling stomach tells you that not only the cocks being pumped down your throat are feeding you their demonic cum, the tentacles fucking your other hole[s] are also depositing a seemingly endless amounts of their thick syrup into your bowels[womb].", parse);
@@ -591,7 +590,7 @@ Scenes.Magnus.Meditation = function() {
 					Text.NL();
 					
 					if(player.FirstCock())
-						Scenes.Magnus.SexSounding();
+						MagnusScenes.SexSounding();
 					
 					if(player.FirstVag()) {
 						if(player.FirstVag().Pregnant())
@@ -645,7 +644,7 @@ Scenes.Magnus.Meditation = function() {
 					Text.NL();
 					
 					if(player.FirstCock())
-						Scenes.Magnus.SexSounding();
+						MagnusScenes.SexSounding();
 					
 					Text.Add("The demon is moving slowly inside you, its tentacles throbbing and pulsing. Dangling on the hovering mass of vines, impaled by it, you can’t even lift a finger as you are gradually hoisted through the air, twisting and turning until you are face to face with Magnus’ trio of dripping cocks.", parse);
 					Text.NL();
@@ -694,8 +693,8 @@ Scenes.Magnus.Meditation = function() {
 				Text.NL();
 				Text.Add("The raspy voice echoes, leaving you with an uneasy feeling as consciousness fades.", parse);
 				
-				Scenes.Magnus.Impregnate(player, PregnancyHandler.Slot.Vag);
-				Scenes.Magnus.Impregnate(player, PregnancyHandler.Slot.Butt);
+				MagnusScenes.Impregnate(player, PregnancyHandler.Slot.Vag);
+				MagnusScenes.Impregnate(player, PregnancyHandler.Slot.Butt);
 				
 				Text.Flush();
 				
@@ -723,7 +722,7 @@ Scenes.Magnus.Meditation = function() {
 						//[Confront][Say nothing]
 						var options = new Array();
 						options.push({ nameStr : "Confront",
-							func : Scenes.Magnus.Confront, enabled : true,
+							func : MagnusScenes.Confront, enabled : true,
 							tooltip : "Tell him what happened to you while you were meditating."
 						});
 						options.push({ nameStr : "Say nothing",
@@ -751,7 +750,7 @@ Scenes.Magnus.Meditation = function() {
 	Gui.SetButtonsFromList(options);
 }
 
-Scenes.Magnus.SexSounding = function() {
+MagnusScenes.SexSounding = function() {
 	var parse = {
 		setof : player.NumCocks() > 1 ? " set of" : ""
 	};
@@ -764,7 +763,7 @@ Scenes.Magnus.SexSounding = function() {
 	Text.NL();
 }
 
-Scenes.Magnus.Confront = function() {
+MagnusScenes.Confront = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -850,7 +849,7 @@ Scenes.Magnus.Confront = function() {
 	Gui.SetButtonsFromList(options);
 }
 
-Scenes.Magnus.LearnMagic = function() {
+MagnusScenes.LearnMagic = function() {
 	var parse = {
 		hand : function() { return player.HandDesc(); },
 		playername : player.name
@@ -906,7 +905,7 @@ Scenes.Magnus.LearnMagic = function() {
 	});
 }
 
-Scenes.Magnus.Desc = function() {
+MagnusScenes.Desc = function() {
 	var parse = {
 		litExtinguished : world.time.hour >= 19 ? "lit" : "extinguished"
 	};
@@ -920,4 +919,4 @@ Scenes.Magnus.Desc = function() {
 	Text.NL();
 }
 
-export { Magnus };
+export { Magnus, MagnusScenes };

@@ -4,10 +4,12 @@
  * 
  */
 
-import { Scenes } from '../../event';
 import { Entity } from '../../entity';
+import { VenaRScenes } from './vena-restored';
 
-Scenes.Vena = {};
+let VenaScenes = {
+	Restored : VenaRScenes,
+};
 
 function Vena(storage) {
 	Entity.call(this);
@@ -68,7 +70,7 @@ Vena.prototype.ToStorage = function() {
 	return storage;
 }
 
-Scenes.Vena.Impregnate = function(mother, father, slot) {
+VenaScenes.Impregnate = function(mother, father, slot) {
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother : mother,
@@ -80,7 +82,7 @@ Scenes.Vena.Impregnate = function(mother, father, slot) {
 	});
 }
 
-Scenes.Vena.PitApproach = function() {
+VenaScenes.PitApproach = function() {
 	var parse = {
 		
 	};
@@ -130,10 +132,10 @@ Scenes.Vena.PitApproach = function() {
 	Text.Flush();
 	world.TimeStep({minute: 5});
 	
-	Scenes.Vena.PitPrompt();
+	VenaScenes.PitPrompt();
 }
 
-Scenes.Vena.PitPrompt = function() {
+VenaScenes.PitPrompt = function() {
 	var parse = {
 		
 	};
@@ -149,13 +151,13 @@ Scenes.Vena.PitPrompt = function() {
 				Text.Add("<i>“What… talk about?”</i> she responds, cocking her head to the side.", parse);
 				Text.Flush();
 				
-				Scenes.Vena.PitTalkPrompt();
+				VenaScenes.PitTalkPrompt();
 			}
 			else {
 				Text.Add("<i>“Mm… talk… fuck?”</i> she pants quizzically. Some of her children take up on the call, and she’s quickly distracted with more pressing matters. You make another frustrated attempt to get her focused, but she’s too far gone.", parse);
 				Text.Flush();
 				
-				Scenes.Vena.PitPrompt();
+				VenaScenes.PitPrompt();
 			}
 		}, enabled : true,
 		tooltip : "You’re not sure how much good it’ll do, but trying to get her attention can’t hurt."
@@ -180,7 +182,7 @@ Scenes.Vena.PitPrompt = function() {
 	});
 }
 
-Scenes.Vena.PitTalkPrompt = function() {
+VenaScenes.PitTalkPrompt = function() {
 	var parse = {
 		
 	};
@@ -256,11 +258,11 @@ Scenes.Vena.PitTalkPrompt = function() {
 		Text.Add("<i>“...We fuck now?”</i> Vena looks at you hopefully.", parse);
 		Text.Flush();
 		
-		Scenes.Vena.PitPrompt();
+		VenaScenes.PitPrompt();
 	});
 }
 
-Scenes.Vena.RestoreEntrypoint = function(fight) {
+VenaScenes.RestoreEntrypoint = function(fight) {
 	var parse = {
 		playername : player.name
 	};
@@ -377,4 +379,4 @@ Scenes.Vena.RestoreEntrypoint = function(fight) {
 	});
 }
 
-export { Vena };
+export { Vena, VenaScenes };

@@ -4,11 +4,10 @@
  * 
  */
 
-import { Scenes } from '../../event';
 import { Entity } from '../../entity';
 import { BossEntity } from '../../enemy/boss';
 
-Scenes.Ophelia = {};
+let OpheliaScenes = {};
 
 function Ophelia(storage) {
 	Entity.call(this);
@@ -176,7 +175,7 @@ OpheliaBrute.prototype.Act = function(encounter, activeChar) {
 		Abilities.Attack.Use(encounter, this, t);
 }
 
-Scenes.Ophelia.LabDesc = function() {
+OpheliaScenes.LabDesc = function() {
 	var parse = {
 		old  : ophelia.flags["Met"] != 0 ? " old" : "",
 		camp : Scenes.Global.PortalsOpen() ? "the gemstead" : "camp"
@@ -220,7 +219,7 @@ Scenes.Ophelia.LabDesc = function() {
 	Text.NL();
 }
 
-Scenes.Ophelia.LabApproach = function() {
+OpheliaScenes.LabApproach = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -229,10 +228,10 @@ Scenes.Ophelia.LabApproach = function() {
 	Text.Add("<i>“So much to do.”</i> Ophelia fusses as she scurries about, snatching herbs and bottles from the overladen shelves. <i>“Did you have something for me, [playername]?”</i>", parse);
 	Text.Flush();
 	
-	Scenes.Ophelia.LabPrompt();
+	OpheliaScenes.LabPrompt();
 }
 
-Scenes.Ophelia.TraitPrompt = function(options) {
+OpheliaScenes.TraitPrompt = function(options) {
 	var parse = {
 		
 	};
@@ -245,14 +244,14 @@ Scenes.Ophelia.TraitPrompt = function(options) {
 				Text.NL();
 				Text.Add("<i>“I’m going to need three of them to complete my experiments.”</i>", parse);
 				Text.Flush();
-				Scenes.Ophelia.LabPrompt();
+				OpheliaScenes.LabPrompt();
 			}, enabled : true,
 			tooltip : "Ask Ophelia about the cactoids."
 		});
 	}
 	else if(burrows.flags["BruteTrait"] == Burrows.TraitFlags.Gathered) {
 		options.push({ nameStr : "Cactoid",
-			func : Scenes.Ophelia.DeliverCactoids, enabled : true,
+			func : OpheliaScenes.DeliverCactoids, enabled : true,
 			tooltip : "Deliver the cactoids."
 		});
 	}
@@ -264,7 +263,7 @@ Scenes.Ophelia.TraitPrompt = function(options) {
 				Text.NL();
 				Text.Add("<i>“The brutes have even less control of their natural urges than my other brothers and sisters… they are almost like feral beasts.”</i>", parse);
 				Text.Flush();
-				Scenes.Ophelia.LabPrompt();
+				OpheliaScenes.LabPrompt();
 			}, enabled : true,
 			tooltip : "Ask Ophelia about the brawny trait."
 		});
@@ -277,14 +276,14 @@ Scenes.Ophelia.TraitPrompt = function(options) {
 				Text.NL();
 				Text.Add("<i>“The Gol usually keep to the deep forest, but they occasionally stray near the outskirts. I’m going to need three pieces of husk in order to finish my experiments. Just make sure you take them from dead Gols, or find parts that have been shed in their growth process.”</i>", parse);
 				Text.Flush();
-				Scenes.Ophelia.LabPrompt();
+				OpheliaScenes.LabPrompt();
 			}, enabled : true,
 			tooltip : "Ask Ophelia about the Gol husks."
 		});
 	}
 	else if(burrows.flags["HermTrait"] == Burrows.TraitFlags.Gathered) {
 		options.push({ nameStr : "Gol husk",
-			func : Scenes.Ophelia.DeliverGolHusks, enabled : true,
+			func : OpheliaScenes.DeliverGolHusks, enabled : true,
 			tooltip : "Deliver the Gol husks."
 		});
 	}
@@ -296,7 +295,7 @@ Scenes.Ophelia.TraitPrompt = function(options) {
 				Text.NL();
 				Text.Add("You can’t seem to get anything more coherent out of her on the topic at the moment.", parse);
 				Text.Flush();
-				Scenes.Ophelia.LabPrompt();
+				OpheliaScenes.LabPrompt();
 			}, enabled : true,
 			tooltip : "Ask Ophelia about the herm trait."
 		});
@@ -309,14 +308,14 @@ Scenes.Ophelia.TraitPrompt = function(options) {
 				Text.NL();
 				Text.Add("<i>“I’ll need three samples.”</i>", parse);
 				Text.Flush();
-				Scenes.Ophelia.LabPrompt();
+				OpheliaScenes.LabPrompt();
 			}, enabled : true,
 			tooltip : "Ask Ophelia about the red algae."
 		});
 	}
 	else if(burrows.flags["BrainyTrait"] == Burrows.TraitFlags.Gathered) {
 		options.push({ nameStr : "Algae",
-			func : Scenes.Ophelia.DeliverAlgae, enabled : true,
+			func : OpheliaScenes.DeliverAlgae, enabled : true,
 			tooltip : "Deliver the red algae."
 		});
 	}
@@ -326,7 +325,7 @@ Scenes.Ophelia.TraitPrompt = function(options) {
 				Text.Clear();
 				Text.Add("<i>“I had hoped that this one would help mother, but it seems my alchemy wasn’t strong enough.”</i> Ophelia shrugs dejectedly. <i>“At the very least, I can have some slightly more stimulating conversations with my brothers and sisters now.”</i>", parse);
 				Text.Flush();
-				Scenes.Ophelia.LabPrompt();
+				OpheliaScenes.LabPrompt();
 			}, enabled : true,
 			tooltip : "Ask Ophelia about the brainy trait."
 		});
@@ -334,7 +333,7 @@ Scenes.Ophelia.TraitPrompt = function(options) {
 }
 
 //TODO
-Scenes.Ophelia.TalkPrompt = function() {
+OpheliaScenes.TalkPrompt = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -410,7 +409,7 @@ Scenes.Ophelia.TalkPrompt = function() {
 			
 			ophelia.flags["Talk"] |= Ophelia.Talk.Herself;
 			
-			Scenes.Ophelia.TalkPrompt();
+			OpheliaScenes.TalkPrompt();
 		}, enabled : true,
 		tooltip : "You’d like to know a little more about Ophelia."
 	});
@@ -446,7 +445,7 @@ Scenes.Ophelia.TalkPrompt = function() {
 			Text.Flush();
 			
 			ophelia.relation.IncreaseStat(20, 1);
-			Scenes.Ophelia.TalkPrompt();
+			OpheliaScenes.TalkPrompt();
 		}, enabled : true,
 		tooltip : "So, how did Ophelia start working with alchemy anyway?"
 	});
@@ -489,7 +488,7 @@ Scenes.Ophelia.TalkPrompt = function() {
 			}
 			Text.Flush();
 			
-			Scenes.Ophelia.SexEntryPoint();
+			OpheliaScenes.SexEntryPoint();
 		}, enabled : true,
 		tooltip : "Ophelia’s... different... to the other bunnies in the warren. What does she think of sex?"
 	});
@@ -499,7 +498,7 @@ Scenes.Ophelia.TalkPrompt = function() {
 			if(burrows.VenaRestored()) {
 				Text.Add("<i>“If you want to know more about her, you should consider asking her yourself. Mom is a lot more approachable than father.”</i> Ophelia reminds you, a slight grin on her face. <i>“But I have no problem talking to you about her. What exactly did you have in mind?”</i>", parse);
 				Text.NL();
-				Scenes.Ophelia.TalkVena();
+				OpheliaScenes.TalkVena();
 			}
 			else {
 				if(burrows.flags["Access"] >= Burrows.AccessFlags.Stage3) {
@@ -510,7 +509,7 @@ Scenes.Ophelia.TalkPrompt = function() {
 					var options = new Array();
 					options.push({ nameStr : "Yes",
 						func : function() {
-							Scenes.Ophelia.TurnInScepter();
+							OpheliaScenes.TurnInScepter();
 						}, enabled : party.Inv().QueryNum(Items.Quest.Scepter),
 						tooltip : "Show her the scepter."
 					});
@@ -519,7 +518,7 @@ Scenes.Ophelia.TalkPrompt = function() {
 							Text.Clear();
 							Text.Add("With a shake of your head, you inform her that you haven’t managed to find it yet. You do promise that you’ll let her know as soon as you do have it.", parse);
 							Text.NL();
-							Scenes.Ophelia.TalkVena();
+							OpheliaScenes.TalkVena();
 						}, enabled : true,
 						tooltip : "You don’t have the scepter yet."
 					});
@@ -528,7 +527,7 @@ Scenes.Ophelia.TalkPrompt = function() {
 				else {
 					Text.Add("<i>“I wish I knew of a way to restore her, then you could ask her yourself... but right now? At most, she’ll have the brains to ask for sex...”</i> Ophelia says with a sad face and drooping ears.", parse);
 					Text.NL();
-					Scenes.Ophelia.TalkVena();
+					OpheliaScenes.TalkVena();
 				}
 			}
 		}, enabled : true,
@@ -581,7 +580,7 @@ Scenes.Ophelia.TalkPrompt = function() {
 					Text.Flush();
 					
 					ophelia.relation.IncreaseStat(50, 1);
-					Scenes.Ophelia.TalkPrompt();
+					OpheliaScenes.TalkPrompt();
 				});
 				Gui.SetButtonsFromList(options, false, null);
 			}
@@ -613,7 +612,7 @@ Scenes.Ophelia.TalkPrompt = function() {
 						Text.Add("If she ever changes her mind, you’ll leave it open for her.", parse);
 						Text.Flush();
 						ophelia.relation.IncreaseStat(50, 2);
-						Scenes.Ophelia.TalkPrompt();
+						OpheliaScenes.TalkPrompt();
 					}, enabled : true,
 					tooltip : "Invite Ophelia to leave the burrows and join you in your travels."
 				});
@@ -625,7 +624,7 @@ Scenes.Ophelia.TalkPrompt = function() {
 						Text.Add("It was nothing, you assure her.", parse);
 						Text.Flush();
 						ophelia.relation.IncreaseStat(40, 1);
-						Scenes.Ophelia.TalkPrompt();
+						OpheliaScenes.TalkPrompt();
 					}, enabled : true,
 					tooltip : "Just keep your mouth shut and let Ophelia regain control."
 				});
@@ -655,15 +654,15 @@ Scenes.Ophelia.TalkPrompt = function() {
 	if(burrows.flags["Access"] >= Burrows.AccessFlags.Stage3) {
 		options.push({ nameStr : "Roa",
 			func : function() {
-				Scenes.Ophelia.TalkRoa();
+				OpheliaScenes.TalkRoa();
 			}, enabled : true,
 			tooltip : burrows.flags["Access"] >= Burrows.AccessFlags.Stage4 ? "Talk to Ophelia about Roa." : "Ask Ophelia for clues on Roa’s whereabouts."
 		});
 	}
-	Gui.SetButtonsFromList(options, true, Scenes.Ophelia.LabPrompt);
+	Gui.SetButtonsFromList(options, true, OpheliaScenes.LabPrompt);
 }
 
-Scenes.Ophelia.TalkRoa = function() {
+OpheliaScenes.TalkRoa = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -676,7 +675,7 @@ Scenes.Ophelia.TalkRoa = function() {
 		Text.NL();
 		Text.Add("Sounds like the most likely place to find the estranged rabbit would be a whorehouse. Or the belly of some monster.", parse);
 		Text.Flush();
-		Scenes.Ophelia.TalkPrompt();
+		OpheliaScenes.TalkPrompt();
 	}
 	else {
 		var first = !(ophelia.flags["Talk"] & Ophelia.Talk.Roa);
@@ -850,7 +849,7 @@ Scenes.Ophelia.TalkRoa = function() {
 				Text.NL();
 				Text.Add("You thank her for her story.", parse);
 				Text.Flush();
-				Scenes.Ophelia.TalkPrompt();
+				OpheliaScenes.TalkPrompt();
 			}, enabled : true,
 			tooltip : "Ask about the experiments that she performed on Roa."
 		});
@@ -939,7 +938,7 @@ Scenes.Ophelia.TalkRoa = function() {
 				scenes[sceneId]();
 				
 				Text.Flush();
-				Scenes.Ophelia.TalkPrompt();
+				OpheliaScenes.TalkPrompt();
 			}, enabled : true,
 			tooltip : "Ask about Roa’s attitude to sex, and his uncanny libido."
 		});
@@ -947,7 +946,7 @@ Scenes.Ophelia.TalkRoa = function() {
 	}
 }
 
-Scenes.Ophelia.TalkVena = function() {
+OpheliaScenes.TalkVena = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -1029,11 +1028,11 @@ Scenes.Ophelia.TalkVena = function() {
 		ophelia.flags["Talk"] |= Ophelia.Talk.Vena;
 	}
 	Text.Flush();
-	Scenes.Ophelia.TalkPrompt();
+	OpheliaScenes.TalkPrompt();
 }
 
 //TODO
-Scenes.Ophelia.SexEntryPoint = function() {
+OpheliaScenes.SexEntryPoint = function() {
 	var parse = {
 		
 	};
@@ -1044,7 +1043,7 @@ Scenes.Ophelia.SexEntryPoint = function() {
 		options.push({ nameStr : "Vaginal",
 			func : function() {
 				ophelia.flags["Talk"] |= Ophelia.Talk.Sex;
-				Scenes.Ophelia.SexVaginal();
+				OpheliaScenes.SexVaginal();
 			}, enabled : true,
 			tooltip : "Well, if she wants to research, the traditional way is always the best."
 		});
@@ -1065,11 +1064,11 @@ Scenes.Ophelia.SexEntryPoint = function() {
 		Text.Clear();
 		Text.Add("<i>“Suit yourself,”</i> she shrugs, looking disappointed.", parse);
 		Text.Flush();
-		Scenes.Ophelia.LabPrompt();
+		OpheliaScenes.LabPrompt();
 	});
 }
 
-Scenes.Ophelia.SexVaginal = function() {
+OpheliaScenes.SexVaginal = function() {
 	var p1cock = player.BiggestCock();
 	var knotted = p1cock ? p1cock.knot != 0 : false;
 	
@@ -1363,7 +1362,7 @@ Scenes.Ophelia.SexVaginal = function() {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Ophelia.LabPrompt = function() {
+OpheliaScenes.LabPrompt = function() {
 	var parse = {
 		
 	};
@@ -1382,12 +1381,12 @@ Scenes.Ophelia.LabPrompt = function() {
 				Text.Add("<i>“Okay, I can spare a few moments, but don’t take too long. I really need to get back to my research.”</i>", parse);
 			Text.Flush();
 			
-			Scenes.Ophelia.TalkPrompt();
+			OpheliaScenes.TalkPrompt();
 		}, enabled : true,
 		tooltip : "Have a chat with the bunny alchemist."
 	});
 	
-	Scenes.Ophelia.TraitPrompt(options);
+	OpheliaScenes.TraitPrompt(options);
 	
 	options.push({ nameStr : "Potions",
 		func : function() {
@@ -1397,7 +1396,7 @@ Scenes.Ophelia.LabPrompt = function() {
 			Text.Add("Do you offer any potions to Ophelia?", parse);
 			Text.Flush();
 			
-			Scenes.Ophelia.PotionsPrompt();
+			OpheliaScenes.PotionsPrompt();
 		}, enabled : true,
 		tooltip : "Donate some of your alchemical stock to Ophelia."
 	});
@@ -1423,14 +1422,14 @@ Scenes.Ophelia.LabPrompt = function() {
 				Text.Add("With a chuckle, you note that you doubted she would.", parse);
 			}
 			Text.Flush();
-			Scenes.Ophelia.SexEntryPoint();
+			OpheliaScenes.SexEntryPoint();
 		}, enabled : true,
 		tooltip : "Ask if Ophelia’s interested in have sex with you."
 	});
 	if(burrows.flags["Access"] < Burrows.AccessFlags.QuestlineComplete && party.Inv().QueryNum(Items.Quest.Scepter))
 	options.push({ nameStr : "Scepter",
 		func : function() {
-			Scenes.Ophelia.TurnInScepter();
+			OpheliaScenes.TurnInScepter();
 		}, enabled : true,
 		tooltip : "Give Ophelia the scepter."
 	});
@@ -1450,7 +1449,7 @@ Scenes.Ophelia.LabPrompt = function() {
 	Gui.SetButtonsFromList(options, true);
 }
 
-Scenes.Ophelia.TurnInScepter = function() {
+OpheliaScenes.TurnInScepter = function() {
 	var parse = {
 		
 	};
@@ -1467,7 +1466,7 @@ Scenes.Ophelia.TurnInScepter = function() {
 	Scenes.Vena.RestoreEntrypoint(false);
 }
 
-Scenes.Ophelia.PotionsPrompt = function() {
+OpheliaScenes.PotionsPrompt = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -1484,7 +1483,7 @@ Scenes.Ophelia.PotionsPrompt = function() {
 				
 				burrows.flags["Felinix"] = 1;
 				
-				Scenes.Ophelia.PotionsPrompt();
+				OpheliaScenes.PotionsPrompt();
 			}, enabled : party.Inv().QueryNum(Items.Felinix),
 			tooltip : "Introduce Felinix into the diet of the colony."
 		});
@@ -1516,7 +1515,7 @@ Scenes.Ophelia.PotionsPrompt = function() {
 				world.TimeStep({hour: 1});
 				burrows.flags["Lacertium"] = 1;
 				
-				Scenes.Ophelia.PotionsPrompt();
+				OpheliaScenes.PotionsPrompt();
 			}, enabled : party.Inv().QueryNum(Items.Lacertium),
 			tooltip : "Introduce Lacertium into the diet of the colony."
 		});
@@ -1567,17 +1566,17 @@ Scenes.Ophelia.PotionsPrompt = function() {
 					world.TimeStep({hour: 1});
 					burrows.flags["Equinium"] = 1;
 					
-					Scenes.Ophelia.PotionsPrompt();
+					OpheliaScenes.PotionsPrompt();
 				});
 			}, enabled : party.Inv().QueryNum(Items.Equinium),
 			tooltip : "Introduce Equinium into the diet of the colony."
 		});
 	}
 	
-	Gui.SetButtonsFromList(options, true, Scenes.Ophelia.LabPrompt);
+	Gui.SetButtonsFromList(options, true, OpheliaScenes.LabPrompt);
 }
 
-Scenes.Ophelia.DeliverCactoids = function() {
+OpheliaScenes.DeliverCactoids = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -1631,11 +1630,11 @@ Scenes.Ophelia.DeliverCactoids = function() {
 	burrows.flags["BruteTrait"] = Burrows.TraitFlags.Active;
 	
 	Gui.NextPrompt(function() {
-		Scenes.Ophelia.DeliverFollowup(Burrows.Traits.Brute);
+		OpheliaScenes.DeliverFollowup(Burrows.Traits.Brute);
 	});
 }
 
-Scenes.Ophelia.DeliverGolHusks = function() {
+OpheliaScenes.DeliverGolHusks = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -1679,11 +1678,11 @@ Scenes.Ophelia.DeliverGolHusks = function() {
 	burrows.flags["HermTrait"] = Burrows.TraitFlags.Active;
 	
 	Gui.NextPrompt(function() {
-		Scenes.Ophelia.DeliverFollowup(Burrows.Traits.Herm);
+		OpheliaScenes.DeliverFollowup(Burrows.Traits.Herm);
 	});
 }
 
-Scenes.Ophelia.DeliverAlgae = function() {
+OpheliaScenes.DeliverAlgae = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -1715,11 +1714,11 @@ Scenes.Ophelia.DeliverAlgae = function() {
 	burrows.flags["BrainyTrait"] = Burrows.TraitFlags.Active;
 	
 	Gui.NextPrompt(function() {
-		Scenes.Ophelia.DeliverFollowup(Burrows.Traits.Brainy);
+		OpheliaScenes.DeliverFollowup(Burrows.Traits.Brainy);
 	});
 }
 
-Scenes.Ophelia.DeliverFollowup = function(trait) {
+OpheliaScenes.DeliverFollowup = function(trait) {
 	var parse = {
 		playername : player.name,
 		himher : player.mfFem("him", "her")
@@ -1764,7 +1763,7 @@ Scenes.Ophelia.DeliverFollowup = function(trait) {
 		Text.NL();
 		Text.Add("<i>“Just drink up, girl,”</i> he murmurs, pouring the volatile substance down her throat. Vena has little choice but to swallow the potion, chugging down a dose at least three times the amount that Ophelia subjected her guinea pig to.", parse);
 		
-		Scenes.Ophelia.DeliverVena(trait);
+		OpheliaScenes.DeliverVena(trait);
 	}
 	else if(burrows.flags["Access"] < Burrows.AccessFlags.Stage2) {
 		burrows.flags["Access"] = Burrows.AccessFlags.Stage2;
@@ -1786,7 +1785,7 @@ Scenes.Ophelia.DeliverFollowup = function(trait) {
 		Text.Add("<i>“You don’t want to cross me, daughter.”</i>", parse);
 		Text.Flush();
 		
-		Scenes.Ophelia.WatchedOphelia = false;
+		OpheliaScenes.WatchedOphelia = false;
 		
 		//[Stop him][Divert][Watch]
 		var options = new Array();
@@ -1822,7 +1821,7 @@ Scenes.Ophelia.DeliverFollowup = function(trait) {
 		});
 		options.push({ nameStr : "Watch",
 			func : function() {
-				Scenes.Ophelia.WatchedOphelia = true;
+				OpheliaScenes.WatchedOphelia = true;
 				Text.Clear();
 				Text.Add("You watch in silence as father and daughter lock gazes. She holds out for a short while, but after a few moments, she sullenly looks down, admitting defeat.", parse);
 				Text.NL();
@@ -1851,7 +1850,7 @@ Scenes.Ophelia.DeliverFollowup = function(trait) {
 			Text.NL();
 			Text.Add("<i>“I have another treat for you, my dear,”</i> he grins maliciously, presenting the matriarch with the large flask. Lithely, he springs up on her chest, pouring the volatile fluids down Vena’s gaping maw.", parse);
 			
-			Scenes.Ophelia.DeliverVena(trait);
+			OpheliaScenes.DeliverVena(trait);
 		});
 	}
 	else if(burrows.flags["Access"] < Burrows.AccessFlags.Stage3) {
@@ -1871,7 +1870,7 @@ Scenes.Ophelia.DeliverFollowup = function(trait) {
 		Text.NL();
 		Text.Add("<i>“I thought I’d give you the honors,”</i> Lagon grasps her shoulder, handing her the bottle. He has one of his feet planted squarely on Vena’s chest, looming over the pair. Ophelia gulps, tears in her eyes as she feeds the final draft to her mother with trembling hands. <i>“Good girl, now wait over there.”</i> The alchemist hurriedly joins your side, watching anxiously as the effects begin to take hold.", parse);
 		
-		Scenes.Ophelia.DeliverVena(trait);
+		OpheliaScenes.DeliverVena(trait);
 	}
 	else {
 		Text.Add("THIS IS A BUG. Burrows flag: [flag].", {flag: burrows.flags["Access"]});
@@ -1880,7 +1879,7 @@ Scenes.Ophelia.DeliverFollowup = function(trait) {
 	}
 }
 
-Scenes.Ophelia.DeliverVena = function(trait) {
+OpheliaScenes.DeliverVena = function(trait) {
 	var parse = {
 		playername : player.name
 	};
@@ -1928,17 +1927,17 @@ Scenes.Ophelia.DeliverVena = function(trait) {
 	}
 	Text.Flush();
 	
-	Gui.NextPrompt(Scenes.Ophelia.Reward);
+	Gui.NextPrompt(OpheliaScenes.Reward);
 }
 
-Scenes.Ophelia.Reward = function() {
+OpheliaScenes.Reward = function() {
 	var parse = {
 		playername : player.name,
 		softToned : burrows.BruteActive() ? "toned" : "soft"
 	};
 	parse = player.ParserTags(parse);
 	
-	Scenes.Ophelia.rewardSexFlag = false;
+	OpheliaScenes.rewardSexFlag = false;
 	
 	Text.Clear();
 	if(burrows.flags["Access"] <= Burrows.AccessFlags.Stage1) {
@@ -1975,7 +1974,7 @@ Scenes.Ophelia.Reward = function() {
 			Gui.NextPrompt();
 		});
 		
-		Scenes.Ophelia.RewardChoices();
+		OpheliaScenes.RewardChoices();
 	}
 	else if(burrows.flags["Access"] <= Burrows.AccessFlags.Stage2) {
 		Text.Add("<i>“Very good, my girl,”</i> Lagon encourages Vena, scratching the panting matriarch behind her ear. <i>“Breed me many children, my dear, be a good slut for your master.”</i>", parse);
@@ -1997,7 +1996,7 @@ Scenes.Ophelia.Reward = function() {
 			Text.Add("<i>“Now is not the time to have second thoughts, Ophelia. You will keep making new potions, or you will face my wrath,”</i> Lagon states, dismissing the two of you. You leave together with Ophelia, walking beside her back to her lab. What do you tell her?", parse);
 			Text.Flush();
 			
-			Scenes.Ophelia.RewardAftermathStage2Prompt();
+			OpheliaScenes.RewardAftermathStage2Prompt();
 			
 			Gui.Callstack.push(function() {
 				Text.NL();
@@ -2012,7 +2011,7 @@ Scenes.Ophelia.Reward = function() {
 			});
 		});
 		
-		Scenes.Ophelia.RewardChoices();
+		OpheliaScenes.RewardChoices();
 	}
 	else {
 		Text.Add("<i>“Ah, you are so pretty, my perfect little breeding slut.”</i> Lagon strokes Vena’s cheek fondly. <i>“Come over here daughter, this is all your work after all. Vena is so grateful for all that you have done for her. In fact...”</i> As Ophelia edges closer uncertainly, Lagon moves his hand to the matriarch’s immense clit-cock. <i>“In fact… she is <b>very</b> grateful, and she would like to show you her appreciation...”</i>", parse);
@@ -2024,14 +2023,14 @@ Scenes.Ophelia.Reward = function() {
 		Text.Add("Behind her, Lagon stands with his arms crossed over his chest, grinning at the scene before him. The alchemist looks like she is about to fall prey to her mind-broken mother. What do you do?", parse);
 		Text.Flush();
 		
-		Scenes.Ophelia.fuckedByVena = false;
-		Scenes.Ophelia.stoppedVena  = false;
+		OpheliaScenes.fuckedByVena = false;
+		OpheliaScenes.stoppedVena  = false;
 		
 		//[Stop Vena][Watch][Offer][Attack]
 		var options = new Array();
 		options.push({ nameStr : "Stop Vena",
 			func : function() {
-				Scenes.Ophelia.stoppedVena = true;
+				OpheliaScenes.stoppedVena = true;
 				
 				Text.Clear();
 				Text.Add("With a determined look on your face, you spring toward the giant lagomorph, aiming to put yourself in her path. Before you have taken more than three steps, however, there is a blur of white fur, and a stunning pain as Lagon’s foot connects with your temple. You are hurled face-down to the ground, and swiftly immobilized by the rabbit king.", parse);
@@ -2043,7 +2042,7 @@ Scenes.Ophelia.Reward = function() {
 				player.AddHPFraction(-1);
 				player.AddHPAbs(1);
 				
-				Scenes.Ophelia.WatchVenaEntry();
+				OpheliaScenes.WatchVenaEntry();
 			}, enabled : true,
 			tooltip : "Stop Vena by force before she throws herself on Ophelia."
 		});
@@ -2055,7 +2054,7 @@ Scenes.Ophelia.Reward = function() {
 				Text.Add("<i>“Wise choice,”</i> he comments, chuckling as you fold your arms across your chest.", parse);
 				Text.NL();
 				
-				Scenes.Ophelia.WatchVenaEntry();
+				OpheliaScenes.WatchVenaEntry();
 			}, enabled : true,
 			tooltip : "Just watch by the sidelines, trying to keep an eye on Lagon."
 		});
@@ -2065,7 +2064,7 @@ Scenes.Ophelia.Reward = function() {
 		options.push({ nameStr : "Offer",
 			func : function() {
 				Text.Clear();
-				Scenes.Ophelia.fuckedByVena = true;
+				OpheliaScenes.fuckedByVena = true;
 				
 				vena.flags["Sex"] |= Vena.Sex.FuckedBy;
 				vena.flags["Sex"] |= Vena.Sex.Forced;
@@ -2255,7 +2254,7 @@ Scenes.Ophelia.Reward = function() {
 				
 				Gui.NextPrompt(function() {
 					Text.Clear();
-					if(Scenes.Ophelia.fuckedByVena)
+					if(OpheliaScenes.fuckedByVena)
 						Text.Add("Ophelia tries to aid you on the way back to her lab, supporting as much of your weight as she’s able. She looks very grateful, having narrowly avoided being broken by her own mother.", parse);
 					else
 						Text.Add("Ophelia is still shaking as you lead her from the room back toward her lab. The alchemist is barely able to stand after her fucking; her legs won’t support her.", parse);
@@ -2263,7 +2262,7 @@ Scenes.Ophelia.Reward = function() {
 					Text.Add("<i>“T-this time, he has gone too f-far,”</i> she mutters under her breath, clutching your arm wearily. <i>“He leaves me no choice...”</i> You eye your escort warily, but they don’t seem to have noticed Ophelia’s treasonous aspirations. Once you are back at the lab, she shuts the door behind you, collapsing on top of a pile of straw intended for her ‘volunteers’.", parse);
 					Text.NL();
 					
-					Scenes.Ophelia.ScepterRequest(false);
+					OpheliaScenes.ScepterRequest(false);
 					
 					Text.Flush();
 					
@@ -2273,12 +2272,12 @@ Scenes.Ophelia.Reward = function() {
 				});
 			});
 			
-			Scenes.Ophelia.RewardChoices();
+			OpheliaScenes.RewardChoices();
 		});
 	}
 }
 
-Scenes.Ophelia.ScepterRequest = function(fight) {
+OpheliaScenes.ScepterRequest = function(fight) {
 	var parse = {
 		playername : player.name,
 		again : fight ? " again" : "",
@@ -2310,7 +2309,7 @@ Scenes.Ophelia.ScepterRequest = function(fight) {
 	}
 }
 
-Scenes.Ophelia.WatchVenaEntry = function() {
+OpheliaScenes.WatchVenaEntry = function() {
 	var parse = {
 		
 	};
@@ -2323,7 +2322,7 @@ Scenes.Ophelia.WatchVenaEntry = function() {
 	Text.NL();
 	Text.Add("The alchemist moans weakly, smothered between the larger lagomorph’s breasts. Vena has placed her astride the convenient erect pole, sighing happily as Ophelia grinds her hips against the slippery appendage. Her entire body weight is balancing on her mother’s cock, her legs dangling down feebly - too short to reach the ground. The two share another kiss before Vena slowly lowers Ophelia to the ground, laying the bespectacled bunny down on her back.", parse);
 	Text.NL();
-	parse["stop"] = Scenes.Ophelia.stoppedVena ? ", especially with your face in the pool of cum" : "";
+	parse["stop"] = OpheliaScenes.stoppedVena ? ", especially with your face in the pool of cum" : "";
 	Text.Add("<i>“Looks like the fun is about to start,”</i> Lagon observes, eyes gleaming. It’s hard to keep your mind focused in the carnal environment of the Pit[stop], but you do your best to keep your eyes on the rabbit king. By this point, it’s clear that he doesn’t give two fucks about either you or Ophelia - daughter or no. He just wants to douse the flame of rebellion from her heart, and uses the most cruel measure possible to do so: her own mother. That it was through her own efforts - with some aid from you - that Vena is in her current state only serves to twist the knife further.", parse);
 	Text.NL();
 	Text.Add("Ophelia cries out in rapture as the matriarch slowly presses her thick, lubed-up shaft into the smaller bunny’s protesting folds. Her frame may be built for breeding, but she’s not accustomed to taking cocks of Vena’s size. The older lagomorph does her best to be gentle, but the sheer girth of her two-foot member is more than a bit intimidating for the gasping scientist.", parse);
@@ -2346,14 +2345,14 @@ Scenes.Ophelia.WatchVenaEntry = function() {
 	Gui.NextPrompt();
 }
 
-Scenes.Ophelia.RewardAftermathStage2Prompt = function() {
+OpheliaScenes.RewardAftermathStage2Prompt = function() {
 	var parse = {
 		
 	};
 	
 	//[Sorry][Encourage][Rebuke]
 	var options = new Array();
-	if(Scenes.Ophelia.WatchedOphelia) {
+	if(OpheliaScenes.WatchedOphelia) {
 		options.push({ nameStr : "Sorry",
 			func : function() {
 				Text.Clear();
@@ -2364,9 +2363,9 @@ Scenes.Ophelia.RewardAftermathStage2Prompt = function() {
 				
 				ophelia.relation.IncreaseStat(100, 5);
 				
-				Scenes.Ophelia.WatchedOphelia = false;
+				OpheliaScenes.WatchedOphelia = false;
 				
-				Scenes.Ophelia.RewardAftermathStage2Prompt();
+				OpheliaScenes.RewardAftermathStage2Prompt();
 			}, enabled : true,
 			tooltip : "Apologize for not standing up to her before."
 		});
@@ -2396,7 +2395,7 @@ Scenes.Ophelia.RewardAftermathStage2Prompt = function() {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Ophelia.RewardChoices = function() {
+OpheliaScenes.RewardChoices = function() {
 	var parse = {
 	};
 	parse = player.ParserTags(parse);
@@ -2490,7 +2489,7 @@ Scenes.Ophelia.RewardChoices = function() {
 		}, enabled : true,
 		tooltip : "Ask for treasures. Lagon is offering you 1500 coins for your services."
 	});
-	if(Scenes.Ophelia.rewardSexFlag == false) {
+	if(OpheliaScenes.rewardSexFlag == false) {
 		options.push({ nameStr : "Sex",
 			func : function() {
 				Text.Clear();
@@ -2506,7 +2505,7 @@ Scenes.Ophelia.RewardChoices = function() {
 				lagon.relation.IncreaseStat(100, 10);
 				player.subDom.DecreaseStat(-100, 5);
 				
-				Scenes.Ophelia.rewardSexFlag = true;
+				OpheliaScenes.rewardSexFlag = true;
 				
 				Gui.Callstack.push(function() {
 					Text.Clear();
@@ -2519,7 +2518,7 @@ Scenes.Ophelia.RewardChoices = function() {
 					PrintDefaultOptions();
 				});
 				
-				Scenes.Ophelia.RewardChoices();
+				OpheliaScenes.RewardChoices();
 			}, enabled : true,
 			tooltip : "The sight of his magnificent cock is such a distraction, you can hardly keep your thoughts straight. Perhaps just a quick fuck first…?"
 		});
@@ -2543,4 +2542,4 @@ Scenes.Ophelia.RewardChoices = function() {
 
 
 
-export { Ophelia };
+export { Ophelia, OpheliaScenes };

@@ -1,6 +1,6 @@
-
-import { Scenes } from '../../event';
 import { Entity } from '../../entity';
+
+let BastetScenes = {};
 
 function Bastet(storage) {
 	Entity.call(this);
@@ -42,9 +42,7 @@ Bastet.prototype.ToStorage = function() {
 	return storage;
 }
 
-Scenes.Brothel.Bastet = {};
-
-Scenes.Brothel.Bastet.IntroEntryPoint = function() {
+BastetScenes.IntroEntryPoint = function() {
 	var parse = {
 		armor : player.ArmorDesc()
 	};
@@ -63,7 +61,7 @@ Scenes.Brothel.Bastet.IntroEntryPoint = function() {
 		Text.Add("Without cause for delay, you begin removing your [armor], hanging it up out of the way on the hangers provided. Once you are totally naked, you move past the stool and enter the magical circle. Then you close your eyes, take a deep breath to steel yourself, and say, <i>'enter'</i> as instructed.", parse);
 		Text.NL();
 		
-		Scenes.Brothel.Bastet.SceneSelect(choice);
+		BastetScenes.SceneSelect(choice);
 	});
 	
 	Text.Clear();
@@ -92,7 +90,7 @@ Scenes.Brothel.Bastet.IntroEntryPoint = function() {
 	}
 }
 
-Scenes.Brothel.Bastet.SceneSelect = function(choice) {
+BastetScenes.SceneSelect = function(choice) {
 	
 	Gui.Callstack.push(function() {
 		if(bastet.flags["State"] < choice)
@@ -102,12 +100,12 @@ Scenes.Brothel.Bastet.SceneSelect = function(choice) {
 	
 	switch(choice) {
 		default:
-		case Bastet.State.S1Birth: Scenes.Brothel.Bastet.Birth(); break;
+		case Bastet.State.S1Birth: BastetScenes.Birth(); break;
 		//TODO new scenes
 	}
 }
 
-Scenes.Brothel.Bastet.TFBlock = function() {
+BastetScenes.TFBlock = function() {
 	var parse = {};
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
@@ -295,7 +293,7 @@ Scenes.Brothel.Bastet.TFBlock = function() {
 	Text.NL();
 }
 
-Scenes.Brothel.Bastet.Birth = function() {
+BastetScenes.Birth = function() {
 	var parse = {
 		
 	};
@@ -429,7 +427,7 @@ Scenes.Brothel.Bastet.Birth = function() {
 				Text.Add("<i>“That’s all I could ask for, Your Ladyship. Now please, follow me to the bathing pool,”</i> she says, tugging you along towards the end of the hallway.", parse);
 				Text.Flush();
 				
-				Gui.NextPrompt(Scenes.Brothel.Bastet.Birth2);
+				Gui.NextPrompt(BastetScenes.Birth2);
 			}, enabled : true
 		});
 		options.push({ nameStr : "Nevermind",
@@ -443,14 +441,14 @@ Scenes.Brothel.Bastet.Birth = function() {
 				Text.Add("You look around in wonder, admiring the lavish decor as she leads you away. Gradually, you begin to notice a scent. The scent of greenery and water. When you look ahead, you realize that she’s taken you to a large bathing pool.", parse);
 				Text.Flush();
 				
-				Gui.NextPrompt(Scenes.Brothel.Bastet.Birth2);
+				Gui.NextPrompt(BastetScenes.Birth2);
 			}, enabled : true
 		});
 		Gui.SetButtonsFromList(options, false, null);
 	});
 }
 
-Scenes.Brothel.Bastet.Birth2 = function() {
+BastetScenes.Birth2 = function() {
 	var parse = {
 		
 	};
@@ -786,19 +784,19 @@ Scenes.Brothel.Bastet.Birth2 = function() {
 			var options = new Array();
 			options.push({ nameStr : "Mischievous",
 				tooltip : "She’s the mischievous lover, of course. Flirtatious and playful, a good-hearted tease who wants your heart and as much fun as she can get.",
-				func : Scenes.Brothel.Bastet.Birth3, enabled : true
+				func : BastetScenes.Birth3, enabled : true
 			});
 			options.push({ nameStr : "Matron",
 				tooltip : "She’s the matron, naturally. She’s the warm heart who brings children into the world and soothes the troubled hearts of those in need. She is the heart of the family, and all are her children.",
-				func : Scenes.Brothel.Bastet.Birth3, enabled : true
+				func : BastetScenes.Birth3, enabled : true
 			});
 			options.push({ nameStr : "Protector",
 				tooltip : "Lady Bastet is the protector, she who prefers peace but whose hand will take up the spear and the shield when danger threatens. Someone must be strong when evil is near, and so it falls to her.",
-				func : Scenes.Brothel.Bastet.Birth3, enabled : true
+				func : BastetScenes.Birth3, enabled : true
 			});
 			options.push({ nameStr : "Lover",
 				tooltip : "The source of all that is comforting, the bringer of joy, the queen of happiness and the granter of desire. What else can be she be but the truest incarnation of the lover?",
-				func : Scenes.Brothel.Bastet.Birth3, enabled : true
+				func : BastetScenes.Birth3, enabled : true
 			});
 			Gui.SetButtonsFromList(options, false, null);
 		});
@@ -809,7 +807,7 @@ Scenes.Brothel.Bastet.Birth2 = function() {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Brothel.Bastet.Birth3 = function() {
+BastetScenes.Birth3 = function() {
 	var parse = {
 		
 	};
@@ -1043,7 +1041,7 @@ Scenes.Brothel.Bastet.Birth3 = function() {
 			Text.Add("And then, when you open your eyes, you are back in the Shadow Lady again, the experience being over.", parse);
 			Text.NL();
 			
-			Scenes.Brothel.Bastet.TFBlock();
+			BastetScenes.TFBlock();
 			
 			Text.Add("Once you feel ready to leave, you dress yourself and leave the room, heading for the main area.", parse);
 			Text.Flush();
@@ -1058,4 +1056,4 @@ Scenes.Brothel.Bastet.Birth3 = function() {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-export { Bastet };
+export { Bastet, BastetScenes };

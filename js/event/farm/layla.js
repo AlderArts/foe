@@ -4,10 +4,11 @@
  * 
  */
 
-import { Scenes } from '../../event';
 import { Entity } from '../../entity';
+import { JobDesc } from '../../job';
+import { Time } from '../../time';
 
-Scenes.Layla = {};
+let LaylaScenes = {};
 
 function Layla(storage) {
 	Entity.call(this);
@@ -214,10 +215,10 @@ LaylaMob.prototype.Act = function(encounter, activeChar) {
 
 // Party interaction
 Layla.prototype.Interact = function(switchSpot) {
-	Scenes.Layla.PartyRegular(switchSpot);
+	LaylaScenes.PartyRegular(switchSpot);
 }
 
-Scenes.Layla.Prompt = function(switchSpot) {
+LaylaScenes.Prompt = function(switchSpot) {
 	var parse = {
 		
 	};
@@ -231,7 +232,7 @@ Scenes.Layla.Prompt = function(switchSpot) {
 			Text.Clear();
 			Text.Add("Layla tilts her head to the side, looking at you inquisitively. Her long tail sways behind her as she waits to hear what you want to talk to her about.", parse);
 			Text.Flush();
-			Scenes.Layla.TalkPrompt(switchSpot);
+			LaylaScenes.TalkPrompt(switchSpot);
 		}, enabled : true,
 		tooltip : "You’d like to talk about some things with Layla, if she doesn’t mind."
 	});
@@ -241,7 +242,7 @@ Scenes.Layla.Prompt = function(switchSpot) {
 	options.push({ nameStr : "Sex",
 		func : function() {
 			if(layla.Virgin())
-				Scenes.Layla.SexFirstTime();
+				LaylaScenes.SexFirstTime();
 			else {
 				Text.Clear();
 				Text.Add("<i>“I’d love to!”</i> She exclaims, happily clinging onto you.", parse);
@@ -249,14 +250,14 @@ Scenes.Layla.Prompt = function(switchSpot) {
 				Text.Add("You stroke her back and chuckle, remarking that you thought she’d be happy. Now, as for what you want to do to her this time...", parse);
 				Text.Flush();
 
-				Scenes.Layla.SexPrompt(switchSpot);
+				LaylaScenes.SexPrompt(switchSpot);
 			}
 		}, enabled : enabled,
 		tooltip : tooltip
 	});
 	options.push({ nameStr : "Appearance",
 		func : function() {
-			Scenes.Layla.Appearance(switchSpot);
+			LaylaScenes.Appearance(switchSpot);
 		}, enabled : true,
 		tooltip : "You want to take a closer look at Layla’s body."
 	});
@@ -286,7 +287,7 @@ Scenes.Layla.Prompt = function(switchSpot) {
 
 
 //TODO
-Scenes.Layla.TalkPrompt = function(switchSpot) {
+LaylaScenes.TalkPrompt = function(switchSpot) {
 	var parse = {
 		playername : player.name
 	};
@@ -346,7 +347,7 @@ Scenes.Layla.TalkPrompt = function(switchSpot) {
 				Text.Add("Chuckling at the expression on her face, you promise her that it’ll be soon.", parse);
 			}
 			Text.Flush();
-			Scenes.Layla.TalkPrompt(switchSpot);
+			LaylaScenes.TalkPrompt(switchSpot);
 		}, enabled : true,
 		tooltip : tooltip
 	});
@@ -372,11 +373,11 @@ Scenes.Layla.TalkPrompt = function(switchSpot) {
 		Text.Add("The chimera twists her head in confusion, but she smiles all the same, replying with a timid, <i>“Okay.”</i>", parse);
 		Text.Flush();
 		
-		Scenes.Layla.Prompt(switchSpot);
+		LaylaScenes.Prompt(switchSpot);
 	});
 }
 
-Scenes.Layla.Appearance = function(switchSpot) {
+LaylaScenes.Appearance = function(switchSpot) {
 	var parse = {
 		name : kiakai.name,
 		playername : player.name
@@ -389,7 +390,7 @@ Scenes.Layla.Appearance = function(switchSpot) {
 		Text.Add("<i>“Is this good?”</i>", parse);
 		Text.NL();
 		
-		Scenes.Layla.FirstTimeSkinShift();
+		LaylaScenes.FirstTimeSkinShift();
 	}
 	else {
 		Text.Add("Layla isn’t wearing any real clothing, and the 'clothing' she appears to wear is nothing but her own skin, shifted to appear as such. She wills it back to her <i>naked</i> appearance, exposing her assets to you without shame or embarrassment.", parse);
@@ -526,10 +527,10 @@ Scenes.Layla.Appearance = function(switchSpot) {
 	Text.Add("<i>“Any time, [playername],”</i> she says, shifting her skin back into makeshift clothes.", parse);
 	Text.Flush();
 	
-	Scenes.Layla.Prompt(switchSpot);
+	LaylaScenes.Prompt(switchSpot);
 }
 
-Scenes.Layla.PartyRegular = function(switchSpot) {
+LaylaScenes.PartyRegular = function(switchSpot) {
 	var parse = {
 		playername : player.name
 	};
@@ -670,7 +671,7 @@ Scenes.Layla.PartyRegular = function(switchSpot) {
 	}
 	Text.Flush();
 	
-	Scenes.Layla.Prompt(switchSpot);
+	LaylaScenes.Prompt(switchSpot);
 }
 
 /*
@@ -682,18 +683,18 @@ Scenes.Layla.PartyRegular = function(switchSpot) {
  * 
  */
 
-Scenes.Layla.FarmMeetingTrigger = function(approach) {
+LaylaScenes.FarmMeetingTrigger = function(approach) {
 	if(glade.flags["Visit"] < DryadGlade.Visit.DefeatedOrchid) return false; //TODO: change to after portals open?
 	if(layla.flags["Met"] == Layla.Met.NotMet) {
 		if(approach) {
 			if(world.time.hour >= 8 && world.time.hour < 18) {
-				Scenes.Layla.FirstMeeting(true);
+				LaylaScenes.FirstMeeting(true);
 				return true;
 			}
 			else return false;
 		}
 		else {
-			Scenes.Layla.FirstMeeting(false);
+			LaylaScenes.FirstMeeting(false);
 			return true;
 		}
 	}
@@ -701,13 +702,13 @@ Scenes.Layla.FarmMeetingTrigger = function(approach) {
 		if(!layla.farmTimer.Expired()) return false;
 		if(approach) {
 			if(world.time.hour >= 8 && world.time.hour < 18) {
-				Scenes.Layla.RepeatMeeting(true);
+				LaylaScenes.RepeatMeeting(true);
 				return true;
 			}
 			else return false;
 		}
 		else {
-			Scenes.Layla.RepeatMeeting(false);
+			LaylaScenes.RepeatMeeting(false);
 			return true;
 		}
 	}
@@ -715,7 +716,7 @@ Scenes.Layla.FarmMeetingTrigger = function(approach) {
 		if(!layla.farmTimer.Expired()) return false;
 		if(approach) {
 			if(world.time.hour >= 4 && world.time.hour < 22) {
-				Scenes.Layla.SecondMeeting();
+				LaylaScenes.SecondMeeting();
 				return true;
 			}
 		}
@@ -724,7 +725,7 @@ Scenes.Layla.FarmMeetingTrigger = function(approach) {
 }
 
 //approaching/sleeping
-Scenes.Layla.FirstMeeting = function(approach) {
+LaylaScenes.FirstMeeting = function(approach) {
 	var parse = {
 		playername : player.name
 	};
@@ -786,13 +787,13 @@ Scenes.Layla.FirstMeeting = function(approach) {
 		Text.Add("The creature’s long tail whips restlessly from side to side, and her fingers curl into makeshift claws. Her body shifts, adopting a low-slung stance with legs primed to send her springing forward in a pounce. A bestial hiss slithers past her lips. It’s a fight!", parse);
 		Text.Flush();
 		
-		Gui.NextPrompt(Scenes.Layla.FarmCombat);
+		Gui.NextPrompt(LaylaScenes.FarmCombat);
 	});
 }
 
 
 //In case you let her get away. This happens 3 days after that. And continue repeating every 3 days till you win.
-Scenes.Layla.RepeatMeeting = function(approach) {
+LaylaScenes.RepeatMeeting = function(approach) {
 	var parse = {
 		playername : player.name
 	};
@@ -844,25 +845,25 @@ Scenes.Layla.RepeatMeeting = function(approach) {
 	
 	Text.Flush();
 	
-	Gui.NextPrompt(Scenes.Layla.FarmCombat);
+	Gui.NextPrompt(LaylaScenes.FarmCombat);
 }
 
-Scenes.Layla.FarmCombat = function() {
+LaylaScenes.FarmCombat = function() {
 	var enemy = new Party();
 	enemy.AddMember(new LaylaMob());
 	var enc = new Encounter(enemy);
 	
 	enc.canRun = false;
 	
-	enc.onLoss = Scenes.Layla.FarmCombatLoss;
-	enc.onVictory = Scenes.Layla.FarmCombatWin;
+	enc.onLoss = LaylaScenes.FarmCombatLoss;
+	enc.onVictory = LaylaScenes.FarmCombatWin;
 	/* TODO
 	enc.LossCondition = ...
 	*/
 	enc.Start();	
 }
 
-Scenes.Layla.FarmCombatLoss = function() {
+LaylaScenes.FarmCombatLoss = function() {
 	var enc = this;
 	SetGameState(GameState.Event);
 	
@@ -904,7 +905,7 @@ Scenes.Layla.FarmCombatLoss = function() {
 	Gui.NextPrompt();
 }
 
-Scenes.Layla.FarmCombatWin = function() {
+LaylaScenes.FarmCombatWin = function() {
 	var enc = this;
 	SetGameState(GameState.Event);
 	
@@ -1159,7 +1160,7 @@ Scenes.Layla.FarmCombatWin = function() {
 }
 
 //Automatically happens 3 days after you won against Layla. As soon as the PC steps on the field.
-Scenes.Layla.SecondMeeting = function() {
+LaylaScenes.SecondMeeting = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -1197,7 +1198,7 @@ Scenes.Layla.SecondMeeting = function() {
 		Text.Add("So, she’s made some friends here? Of course she can have some time to say goodbye; you can wait for her to do that.", parse);
 		Text.NL();
 		
-		Scenes.Layla.LaylaLeavesGwendy();
+		LaylaScenes.LaylaLeavesGwendy();
 	}
 	else {
 		Text.Add("Dismissing the thought, you ask Layla what she intends to do now that she’s free of her debt to Gwendy.", parse);
@@ -1215,7 +1216,7 @@ Scenes.Layla.SecondMeeting = function() {
 	world.TimeStep({minute: 30});
 }
 
-Scenes.Layla.LaylaLeavesGwendy = function() {
+LaylaScenes.LaylaLeavesGwendy = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -1250,4 +1251,4 @@ Scenes.Layla.LaylaLeavesGwendy = function() {
 	});
 }
 
-export { Layla };
+export { Layla, LaylaScenes };

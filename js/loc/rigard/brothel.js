@@ -2,12 +2,25 @@
 import { world } from '../../world';
 import { Event, Link } from '../../event';
 
+import { GryphonsScenes } from '../../event/brothel/gryphons';
+import { FireblossomScenes } from '../../event/brothel/fireblossom';
+import { ChesScenes } from '../../event/brothel/ches';
+import { BelindaScenes } from '../../event/brothel/belinda';
+import { BastetScenes } from '../../event/brothel/bastet';
+
 let BrothelLoc = {
 	brothel  : new Event("Brothel"),
 	cellar   : new Event("Brothel: Cellar")
 };
 
-let BrothelScenes = {};
+let BrothelScenes = {
+	Gryphons : GryphonsScenes,
+	Fireblossom : FireblossomScenes,
+	Bastet : BastetScenes,
+	Ches : ChesScenes,
+	Belinda : BelindaScenes,
+};
+
 BrothelScenes.IsOpen = function() {
 	return !rigard.UnderLockdown(); // No closed hours
 }

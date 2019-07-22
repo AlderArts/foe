@@ -1,6 +1,7 @@
 
-import { Scenes } from '../../event';
 import { Entity } from '../../entity';
+
+let GryphonsScenes = {};
 
 function Gryphons(storage) {
 	Entity.call(this);
@@ -41,9 +42,8 @@ Gryphons.prototype.ToStorage = function() {
 	return storage;
 }
 
-Scenes.Brothel.Gryphons = {};
 
-Scenes.Brothel.Gryphons.IntroEntryPoint = function() {
+GryphonsScenes.IntroEntryPoint = function() {
 	var parse = {
 		armor : player.ArmorDesc(),
 		skin : player.SkinDesc()
@@ -106,7 +106,7 @@ Not that it changes too much about you, since you were already one, but the fine
 		Text.Flush();
 		
 		Gui.NextPrompt(function() {
-			Scenes.Brothel.Gryphons.SceneSelect(choice);
+			GryphonsScenes.SceneSelect(choice);
 		});
 	});
 	
@@ -153,7 +153,7 @@ Not that it changes too much about you, since you were already one, but the fine
 	}
 }
 
-Scenes.Brothel.Gryphons.SceneSelect = function(choice) {
+GryphonsScenes.SceneSelect = function(choice) {
 	
 	Gui.Callstack.push(function() {
 		if(gryphons.flags["State"] < choice)
@@ -163,15 +163,15 @@ Scenes.Brothel.Gryphons.SceneSelect = function(choice) {
 	
 	switch(choice) {
 		default:
-		case Gryphons.State.S1WorldsEdge: Scenes.Brothel.Gryphons.WorldsEdge(); break;
-		case Gryphons.State.S2Pasts: Scenes.Brothel.Gryphons.Pasts(); break;
-		case Gryphons.State.S3Building: Scenes.Brothel.Gryphons.Building(); break;
-		case Gryphons.State.S4NewLife: Scenes.Brothel.Gryphons.NewLife(); break;
+		case Gryphons.State.S1WorldsEdge: GryphonsScenes.WorldsEdge(); break;
+		case Gryphons.State.S2Pasts: GryphonsScenes.Pasts(); break;
+		case Gryphons.State.S3Building: GryphonsScenes.Building(); break;
+		case Gryphons.State.S4NewLife: GryphonsScenes.NewLife(); break;
 		//TODO new scenes
 	}
 }
 
-Scenes.Brothel.Gryphons.Outro = function(gender, preg) {
+GryphonsScenes.Outro = function(gender, preg) {
 	var parse = {
 		
 	};
@@ -543,7 +543,7 @@ Scenes.Brothel.Gryphons.Outro = function(gender, preg) {
 }
 
 //Chapter one - World’s Edge
-Scenes.Brothel.Gryphons.WorldsEdge = function() {
+GryphonsScenes.WorldsEdge = function() {
 	var parse = {
 		
 	};
@@ -618,7 +618,7 @@ Scenes.Brothel.Gryphons.WorldsEdge = function() {
 					Text.NL();
 					Text.Add("She should have trusted her instincts. By the time she notices you, it is far too late - you have your hands on your prey’s shoulders and are pressing down on her with your weight.", parse);
 					Text.NL();
-					Scenes.Brothel.Gryphons.WorldsEdgeCaught();
+					GryphonsScenes.WorldsEdgeCaught();
 				}, enabled : true
 			});
 			options.push({ nameStr : "Waterfall",
@@ -635,7 +635,7 @@ Scenes.Brothel.Gryphons.WorldsEdge = function() {
 					Text.NL();
 					Text.Add("Droplets of water spatter against your body as you cross the stream, become one with the roar of froth and foam in your descent. She notices the sudden thinning of the water’s flow, looks up wide-eyed - but it is far too late for her to escape. Already, you’ve turned your landing into a roll, roughly hooking one arm about her waist and throwing her off-balance, pinning her down with weight and muscle alike.", parse);
 					Text.NL();
-					Scenes.Brothel.Gryphons.WorldsEdgeCaught();
+					GryphonsScenes.WorldsEdgeCaught();
 				}, enabled : true
 			});
 			options.push({ nameStr : "Sky",
@@ -664,7 +664,7 @@ Scenes.Brothel.Gryphons.WorldsEdge = function() {
 					Text.NL();
 					Text.Add("- Slowing just enough to catch her from under her arms and carry her aloft, letting your combined weight slow your landing. She shrieks in surprise and anger, a spray of cool water rising from the impact, the two of you skim the water’s surface before coming to an undignified stop amongst the lakeshore reeds. Before she can recover, you are upon her, pressing down upon her form with yours.", parse);
 					Text.NL();
-					Scenes.Brothel.Gryphons.WorldsEdgeCaught();
+					GryphonsScenes.WorldsEdgeCaught();
 				}, enabled : true
 			});
 			Gui.SetButtonsFromList(options, false, null);
@@ -672,7 +672,7 @@ Scenes.Brothel.Gryphons.WorldsEdge = function() {
 	});
 }
 
-Scenes.Brothel.Gryphons.WorldsEdgeCaught = function() {
+GryphonsScenes.WorldsEdgeCaught = function() {
 	var parse = {
 		
 	};
@@ -769,13 +769,13 @@ Scenes.Brothel.Gryphons.WorldsEdgeCaught = function() {
 				Text.Add("Well, time to try and introduce yourself properly…", parse);
 				Text.Flush();
 				
-				Scenes.Brothel.Gryphons.WorldsEdgeQuestions({});
+				GryphonsScenes.WorldsEdgeQuestions({});
 			});
 		});
 	});
 }
 
-Scenes.Brothel.Gryphons.WorldsEdgeQuestions = function(opts) {
+GryphonsScenes.WorldsEdgeQuestions = function(opts) {
 	var parse = {
 		
 	};
@@ -794,7 +794,7 @@ Scenes.Brothel.Gryphons.WorldsEdgeQuestions = function(opts) {
 				Text.Add("Does she have no name? That’s not right… does she even understand what a name is?", parse);
 				Text.Flush();
 				
-				Scenes.Brothel.Gryphons.WorldsEdgeQuestions(opts);
+				GryphonsScenes.WorldsEdgeQuestions(opts);
 			}, enabled : true
 		});
 	}
@@ -808,7 +808,7 @@ Scenes.Brothel.Gryphons.WorldsEdgeQuestions = function(opts) {
 				Text.Add("She furrows her brow at your question, then shakes her head. What’s that supposed to mean? That there aren’t any others of your kind here in the valley, or that she doesn’t understand your words?", parse);
 				Text.Flush();
 				
-				Scenes.Brothel.Gryphons.WorldsEdgeQuestions(opts);
+				GryphonsScenes.WorldsEdgeQuestions(opts);
 			}, enabled : true
 		});
 	}
@@ -822,18 +822,18 @@ Scenes.Brothel.Gryphons.WorldsEdgeQuestions = function(opts) {
 				Text.Add("This seems to spark some recognition in her at least. She nods, then spreads an arm towards the pool and trees before lowering the gesture and gazing at you curiously. It’s more than you expected, perhaps, but still awfully vague. Why the reluctance to say anything?", parse);
 				Text.Flush();
 				
-				Scenes.Brothel.Gryphons.WorldsEdgeQuestions(opts);
+				GryphonsScenes.WorldsEdgeQuestions(opts);
 			}, enabled : true
 		});
 	}
 	if(options.length > 0)
 		Gui.SetButtonsFromList(options, false, null);
 	else {
-		Gui.NextPrompt(Scenes.Brothel.Gryphons.WorldsEdgeSexytimes);
+		Gui.NextPrompt(GryphonsScenes.WorldsEdgeSexytimes);
 	}
 }
 
-Scenes.Brothel.Gryphons.WorldsEdgeSexytimes = function() {
+GryphonsScenes.WorldsEdgeSexytimes = function() {
 	var parse = {
 		
 	};
@@ -934,13 +934,13 @@ Scenes.Brothel.Gryphons.WorldsEdgeSexytimes = function() {
 		Text.Flush();
 		
 		Gui.NextPrompt(function() {
-			Scenes.Brothel.Gryphons.Outro(Gender.male);
+			GryphonsScenes.Outro(Gender.male);
 		});
 	});
 }
 
 // Chapter two - Pasts
-Scenes.Brothel.Gryphons.Pasts = function() {
+GryphonsScenes.Pasts = function() {
 	var parse = {
 		
 	};
@@ -1041,7 +1041,7 @@ Scenes.Brothel.Gryphons.Pasts = function() {
 					Text.NL();
 					Text.Add("He’s a blur of motion when he moves, droplets of water cascading through the air and glinting in the early morning light as he holds up his latest catch. He tosses it on the bank with a flick of his hand, then strides over to you with a few easy steps and hauls you still dripping out of the water.", parse);
 					Text.NL();
-					Scenes.Brothel.Gryphons.PastsWashed();
+					GryphonsScenes.PastsWashed();
 				}, enabled : true
 			});
 			options.push({ nameStr : "Help Out",
@@ -1058,7 +1058,7 @@ Scenes.Brothel.Gryphons.Pasts = function() {
 					Text.NL();
 					Text.Add("He calls out to you, and you see him approaching with his catch - three large trout, each about as long as your forearm. The nod of approval he gives you sets your heart racing, and you haul yourself out of the water to meet him.", parse);
 					Text.NL();
-					Scenes.Brothel.Gryphons.PastsWashed();
+					GryphonsScenes.PastsWashed();
 				}, enabled : true
 			});
 			Gui.SetButtonsFromList(options, false, null);
@@ -1066,7 +1066,7 @@ Scenes.Brothel.Gryphons.Pasts = function() {
 	});
 }
 
-Scenes.Brothel.Gryphons.PastsWashed = function() {
+GryphonsScenes.PastsWashed = function() {
 	var parse = {
 		
 	};
@@ -1213,7 +1213,7 @@ Scenes.Brothel.Gryphons.PastsWashed = function() {
 						Text.NL();
 						Text.Add("There’s nothing for it, you suppose, but to stand back and wait for him to be done.", parse);
 						Text.NL();
-						Scenes.Brothel.Gryphons.PastsRemembrance();
+						GryphonsScenes.PastsRemembrance();
 					}, enabled : true
 				});
 				options.push({ nameStr : "Watch",
@@ -1226,7 +1226,7 @@ Scenes.Brothel.Gryphons.PastsWashed = function() {
 						Text.NL();
 						Text.Add("His head is still down, his beak moving, and you follow suit, feeling an urge to join him. You feel a strange presence that sends tingles running across your fur and feathers - almost like when you’re the recipient of his attention…", parse);
 						Text.NL();
-						Scenes.Brothel.Gryphons.PastsRemembrance();
+						GryphonsScenes.PastsRemembrance();
 					}, enabled : true
 				});
 				Gui.SetButtonsFromList(options, false, null);
@@ -1235,7 +1235,7 @@ Scenes.Brothel.Gryphons.PastsWashed = function() {
 	});
 }
 
-Scenes.Brothel.Gryphons.PastsRemembrance = function() {
+GryphonsScenes.PastsRemembrance = function() {
 	var parse = {
 		
 	};
@@ -1306,7 +1306,7 @@ Scenes.Brothel.Gryphons.PastsRemembrance = function() {
 				Text.NL();
 				Text.Add("A soft moan escapes your beak, and you realize that the fingers that you were caressing your pregnant bump with have found their way into your snatch, pumping in and out as you fantasize about him seeding you over and over again, your belly growing round and ripe with each brood of gryphlets that take root in your womb. Quickly, you stop and hurriedly wipe your slick fingers on the grass before he notices.", parse);
 				Text.NL();
-				Scenes.Brothel.Gryphons.PastsSexytimes(2);
+				GryphonsScenes.PastsSexytimes(2);
 			}, enabled : true
 		});
 		options.push({ nameStr : "Content",
@@ -1317,7 +1317,7 @@ Scenes.Brothel.Gryphons.PastsRemembrance = function() {
 				Text.NL();
 				Text.Add("He’s here, and he’ll protect you and the brood of gryphlets that’s growing in your womb. That’s all you need to know.", parse);
 				Text.NL();
-				Scenes.Brothel.Gryphons.PastsSexytimes(1);
+				GryphonsScenes.PastsSexytimes(1);
 			}, enabled : true
 		});
 		options.push({ nameStr : "Worried",
@@ -1330,14 +1330,14 @@ Scenes.Brothel.Gryphons.PastsRemembrance = function() {
 				Text.NL();
 				Text.Add("No… he’s here. He’ll guide and teach you, like he has since his arrival. That, at least, is something that you don’t have to worry about, and you feel a little more comforted by the thought.", parse);
 				Text.NL();
-				Scenes.Brothel.Gryphons.PastsSexytimes(0);
+				GryphonsScenes.PastsSexytimes(0);
 			}, enabled : true
 		});
 		Gui.SetButtonsFromList(options, false, null);
 	});
 }
 
-Scenes.Brothel.Gryphons.PastsSexytimes = function(preg) {
+GryphonsScenes.PastsSexytimes = function(preg) {
 	var parse = {
 		
 	};
@@ -1425,7 +1425,7 @@ Scenes.Brothel.Gryphons.PastsSexytimes = function(preg) {
 			Text.NL();
 			Text.Add("Yes, this is what you were made for, to be a mate and mother, to be the fertile soil which will bear full, ripe fruit from his seed. He continues to rub, his hand moving closer and closer to your crotch like he did earlier on… hungrily, you push your wet pussy against his hand and half-growl, half-chirp. It doesn’t matter that you’ve already been bred; you want his cock inside you, his seed filling what remaining space in your womb that isn’t already occupied by your gryphlets. The thought of him thoroughly breeding you over and over again only makes the sensation of him teasing your folds all the more luxuriant, until you can’t take it any longer and release a squirt of girl-cum all over his fingers.", parse);
 			Text.NL();
-			Scenes.Brothel.Gryphons.PastsSexytimes2(preg);
+			GryphonsScenes.PastsSexytimes2(preg);
 		}, enabled : true
 	});
 	options.push({ nameStr : "Pleased",
@@ -1440,7 +1440,7 @@ Scenes.Brothel.Gryphons.PastsSexytimes = function(preg) {
 			Text.NL();
 			Text.Add("You sing in pleasure, and it’s only because of the tree you’re leaning against that your knees don’t give way and send you to the ground. Feeling trickles of your girl-cum ooze from your pussy lips and run down his fingers, it takes you a moment for you to be able to think straight again.", parse);
 			Text.NL();
-			Scenes.Brothel.Gryphons.PastsSexytimes2(preg);
+			GryphonsScenes.PastsSexytimes2(preg);
 		}, enabled : true
 	});
 	options.push({ nameStr : "Shy",
@@ -1461,13 +1461,13 @@ Scenes.Brothel.Gryphons.PastsSexytimes = function(preg) {
 			Text.NL();
 			Text.Add("You try to think of something to say, but your thoughts are cut short by his fingers diving into your snatch and coming out wet and glistening.", parse);
 			Text.NL();
-			Scenes.Brothel.Gryphons.PastsSexytimes2(preg);
+			GryphonsScenes.PastsSexytimes2(preg);
 		}, enabled : true
 	});
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Brothel.Gryphons.PastsSexytimes2 = function(preg) {
+GryphonsScenes.PastsSexytimes2 = function(preg) {
 	var parse = {
 		
 	};
@@ -1526,11 +1526,11 @@ Scenes.Brothel.Gryphons.PastsSexytimes2 = function(preg) {
 	Text.Flush();
 	
 	Gui.NextPrompt(function() {
-		Scenes.Brothel.Gryphons.Outro(Gender.female, preg);
+		GryphonsScenes.Outro(Gender.female, preg);
 	});
 }
 
-Scenes.Brothel.Gryphons.Building = function() {
+GryphonsScenes.Building = function() {
 	var parse = {
 		
 	};
@@ -1790,7 +1790,7 @@ Scenes.Brothel.Gryphons.Building = function() {
 				Text.Flush();
 				
 				Gui.NextPrompt(function() {
-					Scenes.Brothel.Gryphons.Outro(Gender.male);
+					GryphonsScenes.Outro(Gender.male);
 				});
 			});
 			
@@ -1801,7 +1801,7 @@ Scenes.Brothel.Gryphons.Building = function() {
 	});
 }
 
-Scenes.Brothel.Gryphons.NewLife = function() {
+GryphonsScenes.NewLife = function() {
 	var parse = {
 		
 	};
@@ -2072,7 +2072,7 @@ Scenes.Brothel.Gryphons.NewLife = function() {
 						player.slut.IncreaseStat(100, 2);
 						
 						Gui.NextPrompt(function() {
-							Scenes.Brothel.Gryphons.Outro(Gender.female, preg);
+							GryphonsScenes.Outro(Gender.female, preg);
 						});
 					}, enabled : true
 				});
@@ -2094,7 +2094,7 @@ Scenes.Brothel.Gryphons.NewLife = function() {
 						Text.NL();
 						Text.Add("Maybe one day you’ll even be able to read him as easily as he reads you.", parse);
 						
-						Scenes.Brothel.Gryphons.NewLifeHugEnding();
+						GryphonsScenes.NewLifeHugEnding();
 					}, enabled : true
 				});
 				options.push({ nameStr : "Watch",
@@ -2117,7 +2117,7 @@ Scenes.Brothel.Gryphons.NewLife = function() {
 						Text.NL();
 						Text.Add("<i>“I’ve tried at every point, every place I could make a difference, but it’s so hard…”</i> ", parse);
 						
-						Scenes.Brothel.Gryphons.NewLifeHugEnding();
+						GryphonsScenes.NewLifeHugEnding();
 					}, enabled : true
 				});
 				Gui.SetButtonsFromList(options, false, null);
@@ -2128,7 +2128,7 @@ Scenes.Brothel.Gryphons.NewLife = function() {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Brothel.Gryphons.NewLifeHugEnding = function() {
+GryphonsScenes.NewLifeHugEnding = function() {
 	var parse = {
 		
 	};
@@ -2150,8 +2150,8 @@ Scenes.Brothel.Gryphons.NewLifeHugEnding = function() {
 	Text.Flush();
 	
 	Gui.NextPrompt(function() {
-		Scenes.Brothel.Gryphons.Outro(Gender.female, 0);
+		GryphonsScenes.Outro(Gender.female, 0);
 	});
 }
 
-export { Gryphons };
+export { Gryphons, GryphonsScenes };

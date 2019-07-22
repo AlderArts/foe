@@ -3,9 +3,11 @@
  * Define Gwendy
  * 
  */
-import { Link, Scenes } from '../../event';
+import { Link } from '../../event';
 import { Entity } from '../../entity';
 import { world } from '../../world';
+
+let GwendyScenes = {};
 
 // TODO: FIX STATS
 function Gwendy(storage) {
@@ -108,8 +110,6 @@ Gwendy.prototype.ToStorage = function() {
 	return storage;
 }
 
-Scenes.Gwendy = {};
-
 // Schedule
 Gwendy.prototype.IsAtLocation = function(location) {
 	// Numbers/slacking/sleep
@@ -152,7 +152,7 @@ Gwendy.prototype.Interact = function(switchSpot) {
 
 
 
-Scenes.Gwendy.LoftPrompt = function() {
+GwendyScenes.LoftPrompt = function() {
 	Text.Clear();
 	
 	var parse = {
@@ -172,21 +172,21 @@ Scenes.Gwendy.LoftPrompt = function() {
 	//[Talk][Work]
 	var options = new Array();
 	options.push({ nameStr : "Talk",
-		func : Scenes.Gwendy.Talk, obj : Scenes.Gwendy.LoftPrompt, enabled : true,
+		func : GwendyScenes.Talk, obj : GwendyScenes.LoftPrompt, enabled : true,
 		tooltip : "Chat with Gwendy."
 	});
 	options.push({ nameStr : "Sex",
-		func : Scenes.Gwendy.LoftSexPrompt, obj : Scenes.Gwendy.LoftPrompt, enabled : gwendy.Sexed(),
+		func : GwendyScenes.LoftSexPrompt, obj : GwendyScenes.LoftPrompt, enabled : gwendy.Sexed(),
 		tooltip : "Proposition her for sex."
 	});
 	Gui.SetButtonsFromList(options, true);
 }
 
-Scenes.Gwendy.LoftSexPrompt = function(back, disableSleep) {
+GwendyScenes.LoftSexPrompt = function(back, disableSleep) {
 	var parse = {};
 	var options = new Array();
-	Scenes.Gwendy.ChallengeSexWonPrompt(true, options, disableSleep);
-	Scenes.Gwendy.ChallengeSexLostPrompt(true, options, disableSleep);
+	GwendyScenes.ChallengeSexWonPrompt(true, options, disableSleep);
+	GwendyScenes.ChallengeSexLostPrompt(true, options, disableSleep);
 	if(!disableSleep) {
 		options.push({ nameStr : "Sleep",
 			func : function() {
@@ -212,7 +212,7 @@ Scenes.Gwendy.LoftSexPrompt = function(back, disableSleep) {
 		Gui.SetButtonsFromList(options);
 }
 
-Scenes.Gwendy.BarnPrompt = function() {
+GwendyScenes.BarnPrompt = function() {
 	Text.Clear();
 	
 	var parse = {
@@ -233,17 +233,17 @@ Scenes.Gwendy.BarnPrompt = function() {
 	//[Talk][Work]
 	var options = new Array();
 	options.push({ nameStr : "Talk",
-		func : Scenes.Gwendy.Talk, obj : Scenes.Gwendy.BarnPrompt, enabled : true,
+		func : GwendyScenes.Talk, obj : GwendyScenes.BarnPrompt, enabled : true,
 		tooltip : "Chat with Gwendy."
 	});
 	options.push({ nameStr : "Work",
-		func : Scenes.Gwendy.Work, enabled : true,
+		func : GwendyScenes.Work, enabled : true,
 		tooltip : "Be a little productive, and lend an able hand."
 	});
 	Gui.SetButtonsFromList(options, true);
 }
 
-Scenes.Gwendy.FieldsPrompt = function() {
+GwendyScenes.FieldsPrompt = function() {
 	Text.Clear();
 	
 	var parse = {
@@ -262,17 +262,17 @@ Scenes.Gwendy.FieldsPrompt = function() {
 	//[Talk][Work]
 	var options = new Array();
 	options.push({ nameStr : "Talk",
-		func : Scenes.Gwendy.Talk, obj : Scenes.Gwendy.FieldsPrompt, enabled : true,
+		func : GwendyScenes.Talk, obj : GwendyScenes.FieldsPrompt, enabled : true,
 		tooltip : "Chat with Gwendy."
 	});
 	options.push({ nameStr : "Work",
-		func : Scenes.Gwendy.Work, enabled : true,
+		func : GwendyScenes.Work, enabled : true,
 		tooltip : "Be a little productive, and lend an able hand."
 	});
 	Gui.SetButtonsFromList(options, true);
 }
 
-Scenes.Gwendy.Talk = function(backfunc) {
+GwendyScenes.Talk = function(backfunc) {
 	var parse = {
 		playername : player.name
 	};
@@ -319,7 +319,7 @@ Scenes.Gwendy.Talk = function(backfunc) {
 			Text.Flush();
 			
 			Gui.NextPrompt(function() {
-				Scenes.Gwendy.Talk(backfunc);
+				GwendyScenes.Talk(backfunc);
 			});
 		}, enabled : true,
 		tooltip : "Talk about random things."
@@ -336,7 +336,7 @@ Scenes.Gwendy.Talk = function(backfunc) {
 				gwendy.flags["Market"] = Gwendy.Market.Asked;
 				
 				Gui.NextPrompt(function() {
-					Scenes.Gwendy.Talk(backfunc);
+					GwendyScenes.Talk(backfunc);
 				});
 			}, enabled : true,
 			tooltip : "Ask her for a way to get into the city of Rigard."
@@ -350,7 +350,7 @@ Scenes.Gwendy.Talk = function(backfunc) {
 					Text.Add("<i>“[playername], can we talk about this tomorrow morning? I’m busy right now, and just not in the mood to talk about the city, okay?”</i>", parse);
 					Text.Flush();
 					Gui.NextPrompt(function() {
-						Scenes.Gwendy.Talk(backfunc);
+						GwendyScenes.Talk(backfunc);
 					});
 					return;
 				}
@@ -363,7 +363,7 @@ Scenes.Gwendy.Talk = function(backfunc) {
 					Text.Flush();
 					
 					Gui.NextPrompt(function() {
-						Scenes.Gwendy.Talk(backfunc);
+						GwendyScenes.Talk(backfunc);
 					});
 					return;
 				}
@@ -395,7 +395,7 @@ Scenes.Gwendy.Talk = function(backfunc) {
 						Text.Flush();
 						
 						Gui.NextPrompt(function() {
-							Scenes.Gwendy.Talk(backfunc);
+							GwendyScenes.Talk(backfunc);
 						});
 					}, enabled : true,
 					tooltip : "On second thought, you’ve changed your mind."
@@ -420,7 +420,7 @@ Scenes.Gwendy.Talk = function(backfunc) {
 	Gui.SetButtonsFromList(options, true, backfunc);
 }
 
-Scenes.Gwendy.Work = function() {
+GwendyScenes.Work = function() {
 	Text.Clear();
 	
 	gwendy.relation.IncreaseStat(40, 1);
@@ -443,9 +443,9 @@ Scenes.Gwendy.Work = function() {
 	// Random scenes
 	var scenes = new EncounterTable();
 	// MILKING
-	scenes.AddEnc(Scenes.Gwendy.WorkMilking, 1.0, function() { return true; });
+	scenes.AddEnc(GwendyScenes.WorkMilking, 1.0, function() { return true; });
 	// FEEDING
-	scenes.AddEnc(Scenes.Gwendy.WorkFeedingDanie, 1.0, function() { return true; });
+	scenes.AddEnc(GwendyScenes.WorkFeedingDanie, 1.0, function() { return true; });
 	// TODO
 	/*
 	scenes.AddEnc(function() {
@@ -463,7 +463,7 @@ Scenes.Gwendy.Work = function() {
 	Text.Flush();
 }
 
-Scenes.Gwendy.WorkFeedingDanie = function() {
+GwendyScenes.WorkFeedingDanie = function() {
 	
 	var parse = {
 		playername : player.name
@@ -552,7 +552,7 @@ Scenes.Gwendy.WorkFeedingDanie = function() {
 	Gui.NextPrompt();
 }
 
-Scenes.Gwendy.WorkMilking = function() {
+GwendyScenes.WorkMilking = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -727,7 +727,7 @@ Scenes.Gwendy.WorkMilking = function() {
 		gwendy.flags["WorkMilked"]++;
 		
 		if(challenge) {
-			Scenes.Gwendy.ChallengeSex(skillcheck, lose);			
+			GwendyScenes.ChallengeSex(skillcheck, lose);			
 		}
 		else {
 			Text.Add("With that, the two of you part, her heading to the barnyard, and you going your own way.", parse);
@@ -753,7 +753,7 @@ world.loc.Farm.Loft.events.push(new Link(
 			Text.Add("Gwendy doesn't seem to be in at the moment.");			
 		Text.NL();
 	},
-	Scenes.Gwendy.LoftPrompt
+	GwendyScenes.LoftPrompt
 ));
 world.loc.Farm.Barn.events.push(new Link(
 	"Gwendy", function() { return gwendy.IsAtLocation(world.loc.Farm.Barn); }, true,
@@ -765,7 +765,7 @@ world.loc.Farm.Barn.events.push(new Link(
 			Text.Add("Gwendy doesn't seem to be here at the moment.");			
 		Text.NL();
 	},
-	Scenes.Gwendy.BarnPrompt
+	GwendyScenes.BarnPrompt
 ));
 world.loc.Farm.Fields.events.push(new Link(
 	"Gwendy", function() { return gwendy.IsAtLocation(world.loc.Farm.Fields); }, true,
@@ -777,7 +777,7 @@ world.loc.Farm.Fields.events.push(new Link(
 			Text.Add("Gwendy doesn't seem to be here at the moment.");			
 		Text.NL();
 	},
-	Scenes.Gwendy.FieldsPrompt
+	GwendyScenes.FieldsPrompt
 ));
 
-export { Gwendy };
+export { Gwendy, GwendyScenes };

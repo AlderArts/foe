@@ -7,6 +7,9 @@
 
 import { world } from '../world';
 import { Event, Link, EncounterTable } from '../event';
+import { VenaScenes } from '../event/burrows/vena';
+import { OpheliaScenes } from '../event/burrows/ophelia';
+import { LagonScenes } from '../event/burrows/lagon';
 
 // Create namespace
 let BurrowsLoc = {
@@ -19,7 +22,11 @@ let BurrowsLoc = {
 }
 
 
-let BurrowsScenes = {};
+let BurrowsScenes = {
+	Vena : VenaScenes,
+	Ophelia : OpheliaScenes,
+	Lagon : LagonScenes,
+};
 
 // Class to handle global flags and logic for dungeon
 function Burrows(storage) {

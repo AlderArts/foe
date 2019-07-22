@@ -1,10 +1,9 @@
 
-import { Scenes } from '../../event';
 import { GetDEBUG } from '../../../app';
 
-Scenes.Lagon.Defeated = {};
+LagonDScenes = {};
 
-Scenes.Lagon.Defeated.RoomApproach = function() {
+LagonDScenes.RoomApproach = function() {
 	var parse = {
 		
 	};
@@ -45,10 +44,10 @@ Scenes.Lagon.Defeated.RoomApproach = function() {
 	}
 	Text.Flush();
 	
-	Scenes.Lagon.Defeated.Prompt();
+	LagonDScenes.Prompt();
 }
 
-Scenes.Lagon.Defeated.Prompt = function() {
+LagonDScenes.Prompt = function() {
 	var parse = {
 		scepter : "scepter" //TODO
 	};
@@ -58,7 +57,7 @@ Scenes.Lagon.Defeated.Prompt = function() {
 		tooltip : Text.Parse("Put an end to Lagon's boredom and take him for a little romp in the hay.", parse),
 		enabled : true,
 		func : function() {
-			Scenes.Lagon.Defeated.SexPrompt();
+			LagonDScenes.SexPrompt();
 		}
 	});
 	var first = !(lagon.flags["Usurp"] & Lagon.Usurp.NiceFirst);
@@ -66,7 +65,7 @@ Scenes.Lagon.Defeated.Prompt = function() {
 		tooltip : Text.Parse(first ? "If this [scepter] can affect minds so much, maybe it can give Lagon a little attitude adjustment? It's worth a shot." : "Time to give Lagon a little time with his inner feelings.", parse),
 		enabled : true,
 		func : function() {
-			Scenes.Lagon.Defeated.ScepterEntry();
+			LagonDScenes.ScepterEntry();
 		}
 	});
 	//TODO
@@ -104,7 +103,7 @@ Scenes.Lagon.Defeated.Prompt = function() {
 }
 
 
-Scenes.Lagon.Defeated.SexPrompt = function() {
+LagonDScenes.SexPrompt = function() {
 	var parse = {
 		
 	};
@@ -164,7 +163,7 @@ Scenes.Lagon.Defeated.SexPrompt = function() {
 		tooltip : Text.Parse("He’s just begging for your [cock] up his tight little bunny-butt.", parse),
 		enabled : player.BiggestCock(null, true),
 		func : function() {
-			Scenes.Lagon.Defeated.PitchAnal();
+			LagonDScenes.PitchAnal();
 		}
 	});
 	/* TODO
@@ -196,11 +195,11 @@ Scenes.Lagon.Defeated.SexPrompt = function() {
 		Text.Add("He scowls at you, but remains otherwise silent.", parse);
 		Text.Flush();
 		
-		Scenes.Lagon.Defeated.Prompt();
+		LagonDScenes.Prompt();
 	});
 }
 
-Scenes.Lagon.Defeated.PitchAnal = function() {
+LagonDScenes.PitchAnal = function() {
 	var p1cock = player.BiggestCock(null, true);
 	var strapon = p1cock.isStrapon;
 	
@@ -521,7 +520,7 @@ Scenes.Lagon.Defeated.PitchAnal = function() {
 	});
 }
 
-Scenes.Lagon.Defeated.ScepterEntry = function() {
+LagonDScenes.ScepterEntry = function() {
 	var parse = {
 		playername : player.name,
 		scepter : "scepter" //TODO
@@ -616,10 +615,10 @@ Scenes.Lagon.Defeated.ScepterEntry = function() {
 	
 	world.TimeStep({minute: 15});
 	
-	Scenes.Lagon.Defeated.ScepterPrompt();
+	LagonDScenes.ScepterPrompt();
 }
 
-Scenes.Lagon.Defeated.ScepterPrompt = function() {
+LagonDScenes.ScepterPrompt = function() {
 	var parse = {
 		manwoman : player.mfTrue("man", "woman"),
 		playername : player.name
@@ -642,7 +641,7 @@ Scenes.Lagon.Defeated.ScepterPrompt = function() {
 			Text.Add("You better make your mind up quick, he doesn’t look like he can take waiting too long...", parse);
 			Text.Flush();
 
-			Scenes.Lagon.Defeated.ScepterSexPrompt();
+			LagonDScenes.ScepterSexPrompt();
 		}
 	});
 	/* TODO
@@ -694,7 +693,7 @@ Scenes.Lagon.Defeated.ScepterPrompt = function() {
 	});
 }
 
-Scenes.Lagon.Defeated.ScepterSexPrompt = function() {
+LagonDScenes.ScepterSexPrompt = function() {
 	var parse = {
 		
 	};
@@ -704,7 +703,7 @@ Scenes.Lagon.Defeated.ScepterSexPrompt = function() {
 		tooltip : Text.Parse("If he’s that eager to get his ass tapped, why not oblige him?", parse),
 		enabled : player.BiggestCock(null, true),
 		func : function() {
-			Scenes.Lagon.Defeated.ScepterPitchAnal();
+			LagonDScenes.ScepterPitchAnal();
 		}
 	});
 	/* TODO
@@ -724,11 +723,11 @@ Scenes.Lagon.Defeated.ScepterSexPrompt = function() {
 		Text.Clear();
 		Text.Add("<i>“Okay! You’re the guest, so we should do whatever you want.”</i> He smiles.", parse);
 		Text.Flush();
-		Scenes.Lagon.Defeated.ScepterPrompt();
+		LagonDScenes.ScepterPrompt();
 	});
 }
 
-Scenes.Lagon.Defeated.ScepterPitchAnal = function() {
+LagonDScenes.ScepterPitchAnal = function() {
 	var p1cock = player.BiggestCock(null, true);
 	var strapon = p1cock.isStrapon;
 	var parse = {
@@ -1248,7 +1247,7 @@ Scenes.Lagon.Defeated.ScepterPitchAnal = function() {
 	});
 }
 
-Scenes.Lagon.Defeated.Punishment = function() {
+LagonDScenes.Punishment = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -1382,7 +1381,7 @@ Scenes.Lagon.Defeated.Punishment = function() {
 				
 				player.subDom.IncreaseStat(100, 4);
 				
-				Scenes.Lagon.Defeated.PunishmentPC();
+				LagonDScenes.PunishmentPC();
 			}
 		});
 		options.push({nameStr : "Vena fuck",
@@ -1399,7 +1398,7 @@ Scenes.Lagon.Defeated.Punishment = function() {
 				Text.Add("<i>“Save it, honey. It’s time for you to pay for your crimes!”</i>", parse);
 				Text.NL();
 				
-				Scenes.Lagon.Defeated.PunishmentVena();
+				LagonDScenes.PunishmentVena();
 			}
 		});
 		Gui.SetButtonsFromList(options, false, null);
@@ -1414,11 +1413,11 @@ Scenes.Lagon.Defeated.Punishment = function() {
 		Text.Add("Vena giggles as she sashays towards him, gently grabbing his chin and moving his head to look up at her. <i>“What’s the problem, honey? Surely, you didn’t think you would be the one pitching?”</i>", parse);
 		Text.NL();
 		
-		Scenes.Lagon.Defeated.PunishmentVena();
+		LagonDScenes.PunishmentVena();
 	}
 }
 
-Scenes.Lagon.Defeated.PunishmentPC = function() {
+LagonDScenes.PunishmentPC = function() {
 	var p1cock = player.BiggestCock(null, true);
 	var strapon = p1cock.isStrapon;
 	
@@ -1548,7 +1547,7 @@ Scenes.Lagon.Defeated.PunishmentPC = function() {
 				Text.NL();
 				Text.Add("Once you have staggered upright, you can take in the sight of what you’ve done, and you smile proudly. A great puddle of mixed juices spreads under Vena’s soft belly, reaching up past her arms to where her husband has been pinned down throughout your efforts at making love to his wife. Her folds gape obscenely, temporarily molded into a perfect shape for your cock, and tiny streams of your seed ooze from between her quivering petals to drip down into the slick beneath her.", parse);
 				Text.NL();
-				Scenes.Lagon.Defeated.PunishmentPCCont(true);
+				LagonDScenes.PunishmentPCCont(true);
 			}
 		});
 		options.push({nameStr : "Save it",
@@ -1568,7 +1567,7 @@ Scenes.Lagon.Defeated.PunishmentPC = function() {
 				Text.NL();
 				Text.Add("You can see Vena’s guards glancing at her growing mess, nervously smacking their lips, but miraculously their obedience outweighs their lust and they keep a tight grip on their father. Vena lets out a final, unladylike grunt and spills one last jet of cum into the pool, then goes limp with the blissful sigh of the truly sated.", parse);
 				Text.NL();
-				Scenes.Lagon.Defeated.PunishmentPCCont(false);
+				LagonDScenes.PunishmentPCCont(false);
 			}
 		});
 		Gui.SetButtonsFromList(options, false, null);
@@ -1586,11 +1585,11 @@ Scenes.Lagon.Defeated.PunishmentPC = function() {
 		Text.NL();
 		Text.Add("Held fast by Vena’s cunt, you patiently sit and wait as she finishes emptying herself. Only when you feel the pressure slacken in her vice-like petals do you slowly pull yourself free and upright again. Even from here, you can see the massive pond of juices your efforts have produced, a thick swamp of cum that gently laps around Lagon’s feet, and you smile proudly at the result.", parse);
 		Text.NL();
-		Scenes.Lagon.Defeated.PunishmentPCCont(false);
+		LagonDScenes.PunishmentPCCont(false);
 	}
 }
 
-Scenes.Lagon.Defeated.PunishmentPCCont = function(came) {
+LagonDScenes.PunishmentPCCont = function(came) {
 	var p1cock = player.BiggestCock(null, true);
 	var strapon = p1cock.isStrapon;
 	
@@ -1899,7 +1898,7 @@ Scenes.Lagon.Defeated.PunishmentPCCont = function(came) {
 	});
 }
 
-Scenes.Lagon.Defeated.PunishmentVena = function() {
+LagonDScenes.PunishmentVena = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -2062,7 +2061,7 @@ Scenes.Lagon.Defeated.PunishmentVena = function() {
 			Text.NL();
 			Text.Add("Or at least until he learns his lesson and becomes a better bunny. Somehow, you don’t see that happening any time soon.", parse);
 			Text.NL();
-			Scenes.Lagon.Defeated.PunishmentVenaCont();
+			LagonDScenes.PunishmentVenaCont();
 		}
 	});
 	options.push({nameStr : "Cum bath",
@@ -2090,13 +2089,13 @@ Scenes.Lagon.Defeated.PunishmentVena = function() {
 			Text.NL();
 			Text.Add("The snickering bunnies give Vena their best salutes and advance on their father. He scowls, and tries to stand up, only to nearly slip over in the thick puddle of cum he is standing in; only their timely intervention keeps him from falling flat on his face. Still glowering at anyone and everyone who tries to meet his eyes, Lagon is led away into the dark tunnels and his indefinite confinement.", parse);
 			Text.NL();
-			Scenes.Lagon.Defeated.PunishmentVenaCont();
+			LagonDScenes.PunishmentVenaCont();
 		}
 	});
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Lagon.Defeated.PunishmentVenaCont = function() {
+LagonDScenes.PunishmentVenaCont = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -2134,3 +2133,5 @@ Scenes.Lagon.Defeated.PunishmentVenaCont = function() {
 		MoveToLocation(world.loc.Burrows.Throne, {minute: 15});
 	});
 }
+
+export { LagonDScenes };

@@ -3,7 +3,6 @@
  * Define Adrian
  *
  */
-import { Scenes } from '../../event';
 import { Entity } from '../../entity';
 import { GetDEBUG } from '../../../app';
 

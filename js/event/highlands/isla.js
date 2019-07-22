@@ -1,9 +1,6 @@
-
-import { Scenes } from '../../event';
 import { Entity } from '../../entity';
 
-Scenes.Isla = {};
-
+let IslaScenes = {};
 
 function Isla(storage) {
 	Entity.call(this);
@@ -109,7 +106,7 @@ Isla.prototype.PregnancyTrigger = function(womb, slot) {
 
 //SCENES
 
-Scenes.Isla.Impregnate = function(father, cum) {
+IslaScenes.Impregnate = function(father, cum) {
 	isla.PregHandler().Impregnate({
 		slot   : PregnancyHandler.Slot.Vag,
 		mother : isla,
@@ -121,7 +118,7 @@ Scenes.Isla.Impregnate = function(father, cum) {
 	});
 }
 
-Scenes.Isla.Introduction = function() {
+IslaScenes.Introduction = function() {
 	var parse = {
 		
 	};
@@ -276,7 +273,7 @@ Scenes.Isla.Introduction = function() {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Isla.Approach = function() {
+IslaScenes.Approach = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -319,10 +316,10 @@ Scenes.Isla.Approach = function() {
 	scenes.Get();
 	Text.Flush();
 	
-	Scenes.Isla.Prompt();
+	IslaScenes.Prompt();
 }
 
-Scenes.Isla.Prompt = function() {
+IslaScenes.Prompt = function() {
 	var parse = {
 		
 	};
@@ -330,7 +327,7 @@ Scenes.Isla.Prompt = function() {
 	var options = new Array();
 	options.push({ nameStr : "Appearance",
 		tooltip : "Take a once over of the sable-girl.",
-		func : Scenes.Isla.Appearance, enabled : true
+		func : IslaScenes.Appearance, enabled : true
 	});
 	
 	options.push({ nameStr : "Talk",
@@ -339,7 +336,7 @@ Scenes.Isla.Prompt = function() {
 			Text.Clear();
 			Text.Add("<i>“Aye?”</i>", parse);
 			Text.Flush();
-			Scenes.Isla.TalkPrompt();
+			IslaScenes.TalkPrompt();
 		}, enabled : true
 	});
 	
@@ -350,16 +347,16 @@ Scenes.Isla.Prompt = function() {
 	if(stage >= 0.4) {
 		options.push({ nameStr : "Tummy Rub",
 			tooltip : "Is that big tummy of hers weighing her down? Maybe you can help out with that.",
-			func : Scenes.Isla.TummyRub, enabled : true
+			func : IslaScenes.TummyRub, enabled : true
 		});
 	}
 	options.push({ nameStr : "Sex",
 		tooltip : "Proposition Isla for sex.",
 		func : function() {
 			if(isla.flags["Talk"] & Isla.Talk.Sex)
-				Scenes.Isla.Sex.Repeat();
+				IslaScenes.Sex.Repeat();
 			else
-				Scenes.Isla.Sex.First();
+				IslaScenes.Sex.First();
 		}, enabled : true
 	});
 	Gui.SetButtonsFromList(options, true, function() {
@@ -370,7 +367,7 @@ Scenes.Isla.Prompt = function() {
 	});
 }
 
-Scenes.Isla.Appearance = function() {
+IslaScenes.Appearance = function() {
 	var parse = {
 		
 	};
@@ -520,10 +517,10 @@ Scenes.Isla.Appearance = function() {
 	
 	world.TimeStep({minute: 15});
 	
-	Scenes.Isla.Prompt();
+	IslaScenes.Prompt();
 }
 
-Scenes.Isla.TalkPrompt = function() {
+IslaScenes.TalkPrompt = function() {
 	var parse = {
 		
 	};
@@ -562,7 +559,7 @@ Scenes.Isla.TalkPrompt = function() {
 			isla.relation.IncreaseStat(40, 2);
 			world.TimeStep({minute: 15});
 			
-			Scenes.Isla.TalkPrompt();
+			IslaScenes.TalkPrompt();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Spring",
@@ -617,7 +614,7 @@ Scenes.Isla.TalkPrompt = function() {
 			isla.relation.IncreaseStat(40, 2);
 			world.TimeStep({minute: 15});
 			
-			Scenes.Isla.TalkPrompt();
+			IslaScenes.TalkPrompt();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Guardian",
@@ -646,7 +643,7 @@ Scenes.Isla.TalkPrompt = function() {
 			isla.relation.IncreaseStat(40, 2);
 			world.TimeStep({minute: 15});
 			
-			Scenes.Isla.TalkPrompt();
+			IslaScenes.TalkPrompt();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Tribe",
@@ -681,7 +678,7 @@ Scenes.Isla.TalkPrompt = function() {
 			isla.relation.IncreaseStat(40, 2);
 			world.TimeStep({minute: 15});
 			
-			Scenes.Isla.TalkPrompt();
+			IslaScenes.TalkPrompt();
 		}, enabled : true
 	});
 	if(isla.flags["Talk"] & Isla.Talk.Spring &&
@@ -822,7 +819,7 @@ Scenes.Isla.TalkPrompt = function() {
 				}
 				Text.Flush();
 				
-				Scenes.Isla.TalkPrompt();
+				IslaScenes.TalkPrompt();
 			}, enabled : enabled
 		});
 	}
@@ -830,11 +827,11 @@ Scenes.Isla.TalkPrompt = function() {
 		Text.Clear();
 		Text.Add("<i>“Something else on your mind?”</i>", parse);
 		Text.Flush();
-		Scenes.Isla.Prompt();
+		IslaScenes.Prompt();
 	});
 }
 
-Scenes.Isla.TummyRub = function() {
+IslaScenes.TummyRub = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -1081,9 +1078,9 @@ Scenes.Isla.TummyRub = function() {
 	});
 }
 
-Scenes.Isla.Sex = {};
+IslaScenes.Sex = {};
 
-Scenes.Isla.Sex.First = function() {
+IslaScenes.Sex.First = function() {
 	var p1cock = player.BiggestCock(null, true);
 	var strapon = p1cock ? p1cock.isStrapon : null;
 	var knot = p1cock ? p1cock.Knot() : null;
@@ -1248,7 +1245,7 @@ Scenes.Isla.Sex.First = function() {
 			Text.NL();
 			
 			var cum = player.OrgasmCum();
-			Scenes.Isla.Impregnate(player, cum);
+			IslaScenes.Impregnate(player, cum);
 			
 			if(player.NumCocks() > 1) {
 				Text.Add("Your other shaft[s2] blast[notS2] away, too, jetting string after string of sperm down the back of her thighs to mix with her juices. It gets all over her legs and tail, marring that beautiful, dark fur of hers, but at least it’ll wash off well later. You hope.", parse);
@@ -1356,7 +1353,7 @@ Scenes.Isla.Sex.First = function() {
 	});
 }
 
-Scenes.Isla.Sex.Repeat = function() {
+IslaScenes.Sex.Repeat = function() {
 	var parse = {
 		
 	};
@@ -1389,7 +1386,7 @@ Scenes.Isla.Sex.Repeat = function() {
 		}
 		Text.Flush();
 		
-		Scenes.Isla.Prompt();
+		IslaScenes.Prompt();
 	}
 	else {
 		if(stage >= 0.75) {
@@ -1408,11 +1405,11 @@ Scenes.Isla.Sex.Repeat = function() {
 		}
 		Text.Flush();
 		
-		Scenes.Isla.Sex.Prompt();
+		IslaScenes.Sex.Prompt();
 	}
 }
 
-Scenes.Isla.Sex.Prompt = function() {
+IslaScenes.Sex.Prompt = function() {
 	var p1cock = player.BiggestCock(null, true);
 	
 	var parse = {
@@ -1423,18 +1420,18 @@ Scenes.Isla.Sex.Prompt = function() {
 	var options = new Array();
 	options.push({ nameStr : "Pitch Vaginal",
 		tooltip : "Pound her sensitive insides until she screams.",
-		func : Scenes.Isla.Sex.PitchVaginal, enabled : p1cock
+		func : IslaScenes.Sex.PitchVaginal, enabled : p1cock
 	});
 	Gui.SetButtonsFromList(options, true, function() {
 		Text.Clear();
 		Text.Add("<i>“Such a tease,”</i> she complains.", parse);
 		Text.Flush();
 		
-		Scenes.Isla.Prompt();
+		IslaScenes.Prompt();
 	});
 }
 
-Scenes.Isla.Sex.PitchVaginal = function() {
+IslaScenes.Sex.PitchVaginal = function() {
 	var p1cock = player.BiggestCock(null, true);
 	var strapon = p1cock ? p1cock.isStrapon : null;
 	var knot = p1cock ? p1cock.Knot() : null;
@@ -1534,7 +1531,7 @@ Scenes.Isla.Sex.PitchVaginal = function() {
 	
 	world.TimeStep({minute: 30});
 	
-	Scenes.Isla.Sex.PitchVaginalPrompt(parse, {
+	IslaScenes.Sex.PitchVaginalPrompt(parse, {
 		p1cock  : p1cock,
 		strapon : strapon,
 		knot    : knot,
@@ -1544,7 +1541,7 @@ Scenes.Isla.Sex.PitchVaginal = function() {
 	});
 }
 
-Scenes.Isla.Sex.PitchVaginalPrompt = function(parse, opts) {
+IslaScenes.Sex.PitchVaginalPrompt = function(parse, opts) {
 	//[Against Wall][Mount Her][Go Under]
 	var options = new Array();
 	options.push({ nameStr : "Against Wall",
@@ -1556,29 +1553,29 @@ Scenes.Isla.Sex.PitchVaginalPrompt = function(parse, opts) {
 				Text.Add("As much as you might want to try, there’s no way you’re going to have standing sex with Isla, not with her massive pregnancy low, heavy, and wedged between the two of you. Maybe you should hurry up and figure out something else before your momentum is broken…", parse);
 				Text.Flush();
 				
-				Scenes.Isla.Sex.PitchVaginalPrompt(parse, opts);
+				IslaScenes.Sex.PitchVaginalPrompt(parse, opts);
 			}
 			else {
-				Scenes.Isla.Sex.PitchVaginalWall(parse, opts);
+				IslaScenes.Sex.PitchVaginalWall(parse, opts);
 			}
 		}, enabled : !opts.nowall
 	});
 	options.push({ nameStr : "Mount Her",
 		tooltip : "Get that slinky sable on all fours and breed her like the animal she is.",
 		func : function() {
-			Scenes.Isla.Sex.PitchVaginalMount(parse, opts);
+			IslaScenes.Sex.PitchVaginalMount(parse, opts);
 		}, enabled : true
 	});
 	options.push({ nameStr : "Go Under",
 		tooltip : "Let her get on top and ride you.",
 		func : function() {
-			Scenes.Isla.Sex.PitchVaginalUnder(parse, opts);
+			IslaScenes.Sex.PitchVaginalUnder(parse, opts);
 		}, enabled : true
 	});
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Isla.Sex.PitchVaginalUnder = function(parse, opts) {
+IslaScenes.Sex.PitchVaginalUnder = function(parse, opts) {
 	Text.Clear();
 	Text.Add("You give Isla a wink and ease yourself to the ground, stretching languidly and making sure the sable-morph is taking in your every motion. The soft grass is cool against your [skin] with dew, and your [cocks] jut[notS] proudly into the night air.", parse);
 	Text.NL();
@@ -1692,7 +1689,7 @@ Scenes.Isla.Sex.PitchVaginalUnder = function(parse, opts) {
 		Text.NL();
 		
 		var cum = player.OrgasmCum();
-		Scenes.Isla.Impregnate(player, cum);
+		IslaScenes.Impregnate(player, cum);
 		
 		if(opts.preg) {
 			parse["knot"] = opts.knot ? "knot" : "shaft";
@@ -1726,10 +1723,10 @@ Scenes.Isla.Sex.PitchVaginalUnder = function(parse, opts) {
 	}
 	Text.NL();
 	
-	Scenes.Isla.Sex.PitchVaginalExit(parse, opts);
+	IslaScenes.Sex.PitchVaginalExit(parse, opts);
 }
 
-Scenes.Isla.Sex.PitchVaginalMount = function(parse, opts) {
+IslaScenes.Sex.PitchVaginalMount = function(parse, opts) {
 	var figure = opts.figure;
 	
 	Text.Clear();
@@ -1797,7 +1794,7 @@ Scenes.Isla.Sex.PitchVaginalMount = function(parse, opts) {
 		Text.NL();
 		
 		var cum = player.OrgasmCum();
-		Scenes.Isla.Impregnate(player, cum);
+		IslaScenes.Impregnate(player, cum);
 		
 		if(opts.preg) {
 			Text.Add("Since she’s already carrying your cubs, though, Isla’s cervix holds tight against the flood of spunk that’s battering against it. With nowhere else to go, it eventually creeps out of her cunt by way of seeping in between your rod and dripping onto the ground between her knees, forming a large, sticky puddle.", parse);
@@ -1827,10 +1824,10 @@ Scenes.Isla.Sex.PitchVaginalMount = function(parse, opts) {
 		Text.Add("You pull free of an exhausted Isla with a soft squelch, cum slowly oozing from her well-used hole. The sable-morph lets out a gentle sigh of satisfaction, and slumps onto her side on the grass.", parse);
 	Text.NL();
 	
-	Scenes.Isla.Sex.PitchVaginalExit(parse, opts);
+	IslaScenes.Sex.PitchVaginalExit(parse, opts);
 }
 
-Scenes.Isla.Sex.PitchVaginalWall = function(parse, opts) {
+IslaScenes.Sex.PitchVaginalWall = function(parse, opts) {
 	Text.Add("Grabbing Isla by the shoulders, you whirl her around, leading her to the nearest mountain face and pinning her against the cool, mossy rock.", parse);
 	if(opts.preg)
 		Text.Add(" The sable-morph’s small baby bump protrudes from her midriff, but it isn’t large enough yet to be too much of an impediment for what you’re intending to do to her. Having blatant proof of her fertility - or conversely, your virility - so close only serves to excite you more, and you lean in to plant another kiss on her muzzle.", parse);
@@ -1893,7 +1890,7 @@ Scenes.Isla.Sex.PitchVaginalWall = function(parse, opts) {
 		Text.Add("With a grunt of effort, you throw your head back, feeling your groin clench at the familiar sensation of cum welling up at the base of your cock. Before you know it, you’re blasting spurt after spurt of hot seed into Isla’s cunt, seeking to fill the sable-morph with delicious baby batter. ", parse);
 		
 		var cum = player.OrgasmCum();
-		Scenes.Isla.Impregnate(player, cum);
+		IslaScenes.Impregnate(player, cum);
 		
 		if(opts.preg) {
 			Text.Add("Considering that she’s stuffed with your cubs, though, it doesn’t look like any of your spunk’s forcing its way in, even considering the high pressure it’s under. Instead, your seed forces its way out of her cunt, her folds stretching just enough to let it seep out and drip onto the ground.", parse);
@@ -1925,10 +1922,10 @@ Scenes.Isla.Sex.PitchVaginalWall = function(parse, opts) {
 	}
 	Text.NL();
 	
-	Scenes.Isla.Sex.PitchVaginalExit(parse, opts);
+	IslaScenes.Sex.PitchVaginalExit(parse, opts);
 }
 
-Scenes.Isla.Sex.PitchVaginalExit = function(parse, opts) {
+IslaScenes.Sex.PitchVaginalExit = function(parse, opts) {
 	Text.Add("<i>“Oog… enough…”</i>", parse);
 	Text.NL();
 	Text.Add("Yeah, now that the rush is beginning to die down, you’re starting to feel more than a little spent, too. Isla displays no shame in sprawling out on the ground beside you, making little happy noises in the back of her throat as she catches her breath. You see no reason not to join her, running your hands through what little clean fur she has left, toying with the adornments tied therein.", parse);
@@ -1987,7 +1984,7 @@ Isla.Bathing = {
 	Long   : 2
 };
 
-Scenes.Isla.Bathe = function() {
+IslaScenes.Bathe = function() {
 	var parse = {
 		
 	};
@@ -2018,7 +2015,7 @@ Scenes.Isla.Bathe = function() {
 			
 			isla.springTimer = new Time(0,0,1,0,0);
 			
-			Scenes.Isla.BatheTF(parse, Isla.Bathing.Quick);
+			IslaScenes.BatheTF(parse, Isla.Bathing.Quick);
 		}, enabled : true
 	});
 	options.push({ nameStr : "Relax",
@@ -2035,7 +2032,7 @@ Scenes.Isla.Bathe = function() {
 			
 			isla.springTimer = new Time(0,0,1,0,0);
 			
-			Scenes.Isla.BatheTF(parse, Isla.Bathing.Medium);
+			IslaScenes.BatheTF(parse, Isla.Bathing.Medium);
 		}, enabled : true
 	});
 	options.push({ nameStr : "Long Soak",
@@ -2052,7 +2049,7 @@ Scenes.Isla.Bathe = function() {
 			
 			isla.springTimer = new Time(0,0,1,0,0);
 			
-			Scenes.Isla.BatheTF(parse, Isla.Bathing.Long);
+			IslaScenes.BatheTF(parse, Isla.Bathing.Long);
 		}, enabled : true
 	});
 	Gui.SetButtonsFromList(options, true, function() {
@@ -2064,7 +2061,7 @@ Scenes.Isla.Bathe = function() {
 	});
 }
 
-Scenes.Isla.BatheTF = function(parse, level) {
+IslaScenes.BatheTF = function(parse, level) {
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	
 	var scenes = new EncounterTable();
@@ -2336,4 +2333,4 @@ Scenes.Isla.BatheTF = function(parse, level) {
 	Gui.NextPrompt();
 }
 
-export { Isla };
+export { Isla, IslaScenes };

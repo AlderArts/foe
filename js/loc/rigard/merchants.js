@@ -1,6 +1,6 @@
 
 import { world } from '../../world';
-import { Event, Link, Scenes, EncounterTable } from '../../event';
+import { Event, Link, EncounterTable } from '../../event';
 import { OddShopLoc } from './sexstore';
 import { ArmorShopLoc } from './armorshop';
 import { MagicShopLoc } from './magicshop';

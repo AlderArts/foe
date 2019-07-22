@@ -42,6 +42,17 @@ import { KrawitzScenes } from "./loc/rigard/krawitz";
 import { RigardScenes } from "./loc/rigard/rigard";
 import { BarnabyScenes } from "./loc/rigard/tavern";
 import { BrothelScenes } from "./loc/rigard/brothel";
+import { PatchworkScenes } from "./event/nomads/patchwork";
+import { RosalinScenes } from "./event/nomads/rosalin";
+import { MagnusScenes } from "./event/nomads/magnus";
+import { EstevanScenes } from "./event/nomads/estevan";
+import { ChiefScenes } from "./event/nomads/chief";
+import { CaleScenes } from "./event/nomads/cale";
+import { IslaScenes } from "./event/highlands/isla";
+import { LaylaScenes } from "./event/farm/layla";
+import { GwendyScenes } from "./event/farm/gwendy";
+import { RoaScenes } from "./event/brothel/roa";
+import { LucilleScenes } from "./event/brothel/lucille";
 
 let Scenes = {
 	Masturbation  : MasturbationScenes,
@@ -56,13 +67,24 @@ let Scenes = {
     Kiakai        : KiakaiScenes,
     Terry         : TerryScenes,
     Miranda       : MirandaScenes,
-	Momo          : MomoScenes,
+    Gwendy        : GwendyScenes,
+    Layla         : LaylaScenes,
+    Roa           : RoaScenes,
 
 	Aria          : AriaScenes,
 	Uru           : UruScenes,
 	Room69        : Room69Scenes,
-	RavenMother   : RavenMotherScenes,
-    
+    RavenMother   : RavenMotherScenes,
+
+    Chief         : ChiefScenes,
+    Cale          : CaleScenes,
+    Patchwork     : PatchworkScenes,
+    Rosalin       : RosalinScenes,
+    Magnus        : MagnusScenes,
+    Estevan       : EstevanScenes,
+    Momo          : MomoScenes,
+
+
     Asche         : AscheScenes,
     Cassidy       : CassidyScenes,
     Fera          : FeraScenes,
@@ -70,6 +92,7 @@ let Scenes = {
 
 	Zina          : ZinaScenes,
     Sylistraxia   : SylistraxiaScenes,
+    Isla          : IslaScenes,
     
     Burrows       : BurrowsScenes,
     Oasis         : OasisScenes,
@@ -77,6 +100,7 @@ let Scenes = {
     DryadGlade    : DryadGladeScenes,
     Krawitz       : KrawitzScenes,
     Rigard        : RigardScenes,
+    
     Brothel       : BrothelScenes,
 
     Equine        : EquineScenes,
@@ -93,6 +117,7 @@ let Scenes = {
 
     Orchid        : OrchidScenes,
     Gol           : GolScenes,
+    Lucille       : LucilleScenes,
 };
 
 export { Scenes };

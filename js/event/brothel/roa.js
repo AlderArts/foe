@@ -4,11 +4,10 @@
  * 
  */
 
-import { Scenes } from '../../event';
 import { Entity } from '../../entity';
 import { GetDEBUG } from '../../../app';
 
-Scenes.Roa = {};
+let RoaScenes = {};
 
 function Roa(storage) {
 	Entity.call(this);
@@ -105,7 +104,7 @@ Roa.prototype.IsAtLocation = function(location) {
 	return true;
 }
 
-Scenes.Roa.Impregnate = function(mother, load, slot) {
+RoaScenes.Impregnate = function(mother, load, slot) {
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother : mother,
@@ -139,7 +138,7 @@ Roa.prototype.Interact = function() {
 	});
 }
 
-Scenes.Roa.BrothelApproach = function() {
+RoaScenes.BrothelApproach = function() {
 	var parse = {
 		playername : player.name
 	};
@@ -179,13 +178,13 @@ Scenes.Roa.BrothelApproach = function() {
 		}
 		Text.Flush();
 		
-		Scenes.Roa.BrothelPrompt();
+		RoaScenes.BrothelPrompt();
 	}
 	else
-		Scenes.Roa.First();
+		RoaScenes.First();
 }
 
-Scenes.Roa.BrothelPrompt = function() {
+RoaScenes.BrothelPrompt = function() {
 	var parse = {
 		cost : Text.NumToText(roa.Cost())
 	};
@@ -225,12 +224,12 @@ Scenes.Roa.BrothelPrompt = function() {
 			
 			var options = new Array();
 			options.push({ nameStr : "Fuck him",
-				func : Scenes.Roa.TSLPitchAnal, enabled : true,
+				func : RoaScenes.TSLPitchAnal, enabled : true,
 				tooltip : "Well he does have a nice-looking butt. So why not do as he wishes and plug it for him?"
 			});
 			if(player.FirstVag()) {
 				options.push({ nameStr : "Vaginal",
-					func : Scenes.Roa.TSLCatchVaginal, enabled : true,
+					func : RoaScenes.TSLCatchVaginal, enabled : true,
 					tooltip : "Give the bunny a shot at your pussy."
 				});
 			}
@@ -245,7 +244,7 @@ Scenes.Roa.BrothelPrompt = function() {
 			Text.NL();
 			Text.Flush();
 			
-			Scenes.Roa.TalkPrompt(Scenes.Roa.BrothelPrompt);
+			RoaScenes.TalkPrompt(RoaScenes.BrothelPrompt);
 		}, enabled : true,
 		tooltip : ""
 	});
@@ -267,7 +266,7 @@ Scenes.Roa.BrothelPrompt = function() {
 }
 
 //TODO
-Scenes.Roa.TalkPrompt = function(backPrompt) {
+RoaScenes.TalkPrompt = function(backPrompt) {
 	var parse = {
 		
 	};
@@ -299,7 +298,7 @@ Scenes.Roa.TalkPrompt = function(backPrompt) {
 				
 				roa.relation.DecreaseStat(-100, 50);
 				
-				Scenes.Roa.TalkPrompt(backPrompt);
+				RoaScenes.TalkPrompt(backPrompt);
 			}, enabled : true,
 			tooltip : "" //TODO
 		});
@@ -375,7 +374,7 @@ Scenes.Roa.TalkPrompt = function(backPrompt) {
 					}
 					Text.Flush();
 					
-					Scenes.Roa.TalkPrompt(backPrompt);
+					RoaScenes.TalkPrompt(backPrompt);
 				});
 			}, enabled : true,
 			tooltip : "Ask if he’s Ophelia’s brother; and if that’s so, what he’s done with Lagon scepter."
@@ -396,13 +395,13 @@ Scenes.Roa.TalkPrompt = function(backPrompt) {
 				roa.relation.IncreaseStat(50, 10);
 				
 				if(burrows.flags["Access"] >= Burrows.AccessFlags.QuestlineComplete)
-					Scenes.Roa.RestoredVenaTalk();
+					RoaScenes.RestoredVenaTalk();
 				else {
 					Text.Add("<i>“I cannot thank you enough.”</i> Roa bows his head humbly. <i>“You have freed my sister, and for that, you have my eternal gratitude.”</i>", parse);
 				}
 				Text.Flush();
 				
-				Scenes.Roa.TalkPrompt(backPrompt);
+				RoaScenes.TalkPrompt(backPrompt);
 			}, enabled : true,
 			tooltip : "Tell him about how you defeated Lagon."
 		});
@@ -411,10 +410,10 @@ Scenes.Roa.TalkPrompt = function(backPrompt) {
 		options.push({ nameStr : "Vena",
 			func : function() {
 				Text.Clear();
-				Scenes.Roa.RestoredVenaTalk();
+				RoaScenes.RestoredVenaTalk();
 				Text.Flush();
 				
-				Scenes.Roa.TalkPrompt(backPrompt);
+				RoaScenes.TalkPrompt(backPrompt);
 			}, enabled : true,
 			tooltip : "Tell him about how you restored Vena."
 		});
@@ -425,7 +424,7 @@ Scenes.Roa.TalkPrompt = function(backPrompt) {
 	});
 }
 
-Scenes.Roa.RestoredVenaTalk = function() {
+RoaScenes.RestoredVenaTalk = function() {
 	var parse = {
 		
 	};
@@ -439,7 +438,7 @@ Scenes.Roa.RestoredVenaTalk = function() {
 	roa.relation.IncreaseStat(50, 10);
 }
 
-Scenes.Roa.First = function() {
+RoaScenes.First = function() {
 	var cost   = roa.Cost();
 	var p1cock = player.BiggestCock();
 	
@@ -527,7 +526,7 @@ Scenes.Roa.First = function() {
 				Text.Add("The horny rabbit turns to face you, a giggle bubbling from his grinning lips. <i>“All that, for me? You shouldn’t have...”</i> he says, kneeling in front you, sniffing your [cocks]. <i>“May I?”</i> he asks, laying a hand on your [cock].", parse);
 				if(herm) {
 					options.push({ nameStr : "Fuck him",
-						func : Scenes.Roa.TSLPitchAnal, enabled : true,
+						func : RoaScenes.TSLPitchAnal, enabled : true,
 						tooltip : "Give the needy bunny a rough anal ride."
 					});
 				}
@@ -536,7 +535,7 @@ Scenes.Roa.First = function() {
 					Text.Add("Smirking, you can’t help but tell him to go right ahead.", parse);
 					Text.Flush();
 					
-					Gui.NextPrompt(Scenes.Roa.TSLPitchAnal);
+					Gui.NextPrompt(RoaScenes.TSLPitchAnal);
 					return;
 				}
 			}
@@ -546,7 +545,7 @@ Scenes.Roa.First = function() {
 				
 				if(herm) {
 					options.push({ nameStr : "Fuck him",
-						func : Scenes.Roa.TSLPitchAnal, enabled : true,
+						func : RoaScenes.TSLPitchAnal, enabled : true,
 						tooltip : "Give the needy bunny a rough anal ride."
 					});
 				}
@@ -555,7 +554,7 @@ Scenes.Roa.First = function() {
 					Text.Add("A grin of anticipation crosses your lips, and you nod your head, assuring him that he may.", parse);
 					Text.Flush();
 					
-					Gui.NextPrompt(Scenes.Roa.TSLPitchAnal);
+					Gui.NextPrompt(RoaScenes.TSLPitchAnal);
 					return;
 				}
 			}
@@ -568,7 +567,7 @@ Scenes.Roa.First = function() {
 				//[Peg]
 				var tooltip = player.Strapon() ? "He’s just begging to get pegged, and you have the proper equipment to give him what he wants. So why not give this bunny-boy a good butt-fucking?" : "Come on, he’s begging for it; have him call in a toy for you so you can ream his ass.";
 				options.push({ nameStr : "Peg",
-					func : Scenes.Roa.TSLPitchAnal, enabled : true,
+					func : RoaScenes.TSLPitchAnal, enabled : true,
 					tooltip : tooltip
 				});
 			}
@@ -577,7 +576,7 @@ Scenes.Roa.First = function() {
 			//Vaginal
 			options.push({ nameStr : "Vaginal",
 				func : function() {
-					Scenes.Roa.TSLCatchVaginal();
+					RoaScenes.TSLCatchVaginal();
 				}, enabled : true,
 				tooltip : "Nope, you’ve got an itch you need scratched, and he’s just the one to do it for you. Let’s see just how good he is with his dick instead of his ass."
 			});
@@ -595,7 +594,7 @@ Scenes.Roa.First = function() {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Roa.TSLPitchAnal = function() {
+RoaScenes.TSLPitchAnal = function() {
 	if(roa.flags["Met"] < Roa.Met.Sexed)
 		roa.flags["Met"] = Roa.Met.Sexed;
 	
@@ -923,10 +922,10 @@ Scenes.Roa.TSLPitchAnal = function() {
 	roa.relation.IncreaseStat(50, 1);
 	world.TimeStep({hour : 1});
 	
-	Scenes.Roa.TSLPostSexPrompt(mStrap);
+	RoaScenes.TSLPostSexPrompt(mStrap);
 }
 
-Scenes.Roa.TSLCatchVaginal = function() {
+RoaScenes.TSLCatchVaginal = function() {
 	if(roa.flags["Met"] < Roa.Met.Sexed)
 		roa.flags["Met"] = Roa.Met.Sexed;
 	
@@ -1055,7 +1054,7 @@ Scenes.Roa.TSLCatchVaginal = function() {
 			
 			var cum = roa.OrgasmCum();
 			//Impreg
-			Scenes.Roa.Impregnate(player, cameinside, PregnancyHandler.Slot.Vag);
+			RoaScenes.Impregnate(player, cameinside, PregnancyHandler.Slot.Vag);
 			
 			PrintDefaultOptions();
 		}, enabled : true,
@@ -1195,7 +1194,7 @@ Scenes.Roa.TSLCatchVaginal = function() {
 					Text.Add("After a few moments of adding molten heat to your cunt, Roa sighs and goes limp, clearly spent from his climax. Affectionately petting his head, you slowly lift yourself from his body. A thick stream of off-white flows from your loins as you pull out and slide out of the bed.", parse);
 					
 					var cum = roa.OrgasmCum();
-					Scenes.Roa.Impregnate(player, cameinside, PregnancyHandler.Slot.Vag);
+					RoaScenes.Impregnate(player, cameinside, PregnancyHandler.Slot.Vag);
 					
 					PrintDefaultOptions();
 				}, enabled : true,
@@ -1249,13 +1248,13 @@ Scenes.Roa.TSLCatchVaginal = function() {
 				roa.relation.IncreaseStat(25, 1);
 				world.TimeStep({hour : 1});
 				
-				Scenes.Roa.TSLPostSexPrompt();
+				RoaScenes.TSLPostSexPrompt();
 			});
 		});
 	});
 }
 
-Scenes.Roa.TSLPostSexPrompt = function(mStrap) {
+RoaScenes.TSLPostSexPrompt = function(mStrap) {
 	var parse = {
 		playername  : player.name,
 		lipsDesc    : function() { return player.LipsDesc(); }
@@ -1401,4 +1400,4 @@ Scenes.Roa.TSLPostSexPrompt = function(mStrap) {
 	}
 }
 
-export { Roa };
+export { Roa, RoaScenes };

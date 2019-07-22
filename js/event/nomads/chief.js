@@ -3,10 +3,11 @@
  * Define Nomad chief
  * 
  */
-import { Link, Scenes } from '../../event';
 import { Entity } from '../../entity';
 import { world } from '../../world';
 import { GetDEBUG } from '../../../app';
+
+let ChiefScenes = {};
 
 function Chief(storage) {
 	Entity.call(this);
@@ -40,10 +41,7 @@ Chief.prototype.ToStorage = function() {
 	return storage;
 }
 
-
-Scenes.Chief = {};
-
-Scenes.Chief.Interact = function() {
+ChiefScenes.Interact = function() {
 	parse = {
 		elfname   : kiakai.name,
 		elfhimher : kiakai.himher(),
@@ -118,11 +116,11 @@ Scenes.Chief.Interact = function() {
 		}
 		Text.Flush();
 		
-		Scenes.Chief.TalkPrompt();
+		ChiefScenes.TalkPrompt();
 	}
 }
 
-Scenes.Chief.TalkPrompt = function() {
+ChiefScenes.TalkPrompt = function() {
 	parse = {
 		elfname   : kiakai.name,
 		elfhimher : kiakai.himher(),
@@ -145,7 +143,7 @@ Scenes.Chief.TalkPrompt = function() {
 				Text.NL();
 				Text.Add("Huffing at his pipe, the old man adds thoughtfully, <i>“I have seen many things in my day, but never something like the inscriptions on that rock. Sometimes they glow red, like embers from a raging fire. I'm sure they're some kind of magic, but as to what, I have no clue.”</i>", parse);
 				Text.Flush();
-				Scenes.Chief.TalkPrompt();
+				ChiefScenes.TalkPrompt();
 			});
 			// OLD TIMES
 			scenes.push(function() {
@@ -155,7 +153,7 @@ Scenes.Chief.TalkPrompt = function() {
 				Text.NL();
 				Text.Add("After some time has passed, he continues, <i>“But the portals came fewer and fewer between, until they stopped entirely. Far as I know, you are the first off-worlder to show up in decades.”</i> When you question him why this changed, the old man only shrugs.", parse);
 				Text.Flush();
-				Scenes.Chief.TalkPrompt();
+				ChiefScenes.TalkPrompt();
 			});
 			// ORIGINS
 			if(chief.relation.Get() >= 50) {
@@ -168,7 +166,7 @@ Scenes.Chief.TalkPrompt = function() {
 					Text.NL();
 					Text.Add("You ask him what his home was like. <i>“Green meadows, low hills, the small village sitting on the side of a creek... I'm sorry, it was so long ago. I doubt I would even recognize the place now.”</i>", parse);
 					Text.Flush();
-					Scenes.Chief.TalkPrompt();
+					ChiefScenes.TalkPrompt();
 				});
 			}
 
@@ -207,7 +205,7 @@ Scenes.Chief.TalkPrompt = function() {
 				if(rChanged < 0.9)
 					Text.Add("<i>“Youngsters these days,”</i> the old man mutters. <i>“That silly [girlboy] needs to watch what [heshe] eats better.”</i>", parse);
 				Text.Flush();
-				Scenes.Chief.TalkPrompt();
+				ChiefScenes.TalkPrompt();
 			});
 			// ESTEVAN
 			scenes.push(function() {
@@ -222,7 +220,7 @@ Scenes.Chief.TalkPrompt = function() {
 					Text.Add("The chief looks around, <i>“Hm, I was sure I saw him just now...”</i> he mutters. <i>“Either he is sleeping, or out on a hunt. Check back later, I guess.”</i>", parse);
 				}
 				Text.Flush();
-				Scenes.Chief.TalkPrompt();
+				ChiefScenes.TalkPrompt();
 			});
 			// PATCHWORK
 			scenes.push(function() {
@@ -233,7 +231,7 @@ Scenes.Chief.TalkPrompt = function() {
 					Text.Add("Trying to not sound impolite, you ask the chief what Patchwork is exactly. Is it a woman, a man? The old man considers the immobile pile of cloth, puffing on his pipe. <i>“Trying to keep together this bunch for a few decades has had me seeing a lot weirder things than Patchwork,”</i> he finally grunts. <i>“If it matters so much to you, why don't you ask them?”</i>", parse);
 				}
 				Text.Flush();
-				Scenes.Chief.TalkPrompt();
+				ChiefScenes.TalkPrompt();
 			});
 			// CHIEF
 			if(chief.relation.Get() >= 50) {
@@ -250,7 +248,7 @@ Scenes.Chief.TalkPrompt = function() {
 					Text.NL();
 					Text.Add("<i>“I often wonder if there was another path I could have walked.”</i> The chief sighs. <i>“But now, I'm dedicated to my flock, and I plan to spend the rest of my time tending to them.”</i>", parse);
 					Text.Flush();
-					Scenes.Chief.TalkPrompt();
+					ChiefScenes.TalkPrompt();
 				});
 			}
 
@@ -273,7 +271,7 @@ Scenes.Chief.TalkPrompt = function() {
 			Text.NL();
 			Text.Add("With that, you leave the chief to his musings.", parse);
 			Text.Flush();
-			Scenes.Chief.TalkPrompt();
+			ChiefScenes.TalkPrompt();
 		}, enabled : true,
 		tooltip : "Ask the chief about various professions and how you can learn them (tutorial on job system)."
 	});
@@ -281,7 +279,7 @@ Scenes.Chief.TalkPrompt = function() {
 	Gui.SetButtonsFromList(options, true);
 }
 
-Scenes.Chief.Desc = function() {
+ChiefScenes.Desc = function() {
 	if(chief.flags["Met"] == 0)
 		Text.Add("On a log by the fire pit sits an old man smoking a pipe. His sharp eyes quickly find you and he gives you an uninterested look before returning to the pipe.");
 	else if(chief.relation.Get() >= 50)
@@ -292,4 +290,4 @@ Scenes.Chief.Desc = function() {
 	Text.NL();
 }
 
-export { Chief };
+export { Chief, ChiefScenes };
