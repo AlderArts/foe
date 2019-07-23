@@ -47,7 +47,7 @@ import { RosalinScenes } from "./event/nomads/rosalin";
 import { MagnusScenes } from "./event/nomads/magnus";
 import { EstevanScenes } from "./event/nomads/estevan";
 import { ChiefScenes } from "./event/nomads/chief";
-import { CaleScenes } from "./event/nomads/cale";
+import { CaleScenes } from "./event/nomads/cale-scenes";
 import { IslaScenes } from "./event/highlands/isla";
 import { LaylaScenes } from "./event/farm/layla";
 import { GwendyScenes } from "./event/farm/gwendy";
