@@ -80,17 +80,6 @@ Maria.DeadDrops = {
 	//TODO flag for repeat, specific things
 };
 
-// Add initial event, only trigger 6-20
-world.loc.Forest.Outskirts.enc.AddEnc(
-	function() {
-		return MariaScenes.ForestMeeting;
-	}, 3.0, function() {
-		return Scenes.Global.VisitedRigardGates() &&
-		       !Scenes.Global.VisitedOutlaws() &&
-		       (world.time.hour >= 6 && world.time.hour < 20);
-	}
-);
-
 
 Maria.prototype.FromStorage = function(storage) {
 	this.Butt().virgin       = parseInt(storage.avirgin) == 1;

@@ -1,8 +1,4 @@
-
-Cveta.Dates = { //Bitmask
-	Glade : 1,
-	Spring : 2
-};
+import { Cveta } from './cveta';
 
 let DateScenes = {};
 

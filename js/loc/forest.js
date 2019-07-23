@@ -6,6 +6,8 @@
 
 import { Event, Link, EncounterTable } from '../event';
 import { GladeLoc } from './glade';
+import { MariaScenes } from '../event/outlaws/maria';
+import { GlobalScenes } from '../event/global';
 
 // Create namespace
 let ForestLoc = {
@@ -131,6 +133,19 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 }, 1.0, function() { return world.time.season != Season.Winter; });
 
 
+// Add initial Maria event, only trigger 6-20
+ForestLoc.Outskirts.enc.AddEnc(
+	function() {
+		return MariaScenes.ForestMeeting;
+	}, 3.0, function() {
+		return GlobalScenes.VisitedRigardGates() &&
+		       !GlobalScenes.VisitedOutlaws() &&
+		       (world.time.hour >= 6 && world.time.hour < 20);
+	}
+);
+
+
+
 // Temp mothgirl enemy
 ForestLoc.Outskirts.AddEncounter({
 	nameStr : "Mothgirl",
@@ -196,7 +211,7 @@ ForestLoc.Outskirts.links.push(new Link(
 	}
 ));
 ForestLoc.Outskirts.links.push(new Link(
-	"Outlaws", function() { return Scenes.Global.VisitedOutlaws(); }, true,
+	"Outlaws", function() { return GlobalScenes.VisitedOutlaws(); }, true,
 	null,
 	function() {
 		MoveToLocation(world.loc.Outlaws.Camp, {hour: 1});
