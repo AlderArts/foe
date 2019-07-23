@@ -3,13 +3,15 @@
  * Wait
  * 
  */
-import { Ability, Abilities, TargetMode } from '../ability';
+import { Ability, TargetMode } from '../ability';
 
-Abilities.Wait = new Ability();
-Abilities.Wait.name = "Wait";
-Abilities.Wait.Short = function() { return "Wait a while."; }
-Abilities.Wait.targetMode = TargetMode.Self;
-Abilities.Wait.castTree.push(function(ability, encounter, caster) {
+let WaitAb = new Ability();
+WaitAb.name = "Wait";
+WaitAb.Short = function() { return "Wait a while."; }
+WaitAb.targetMode = TargetMode.Self;
+WaitAb.castTree.push(function(ability, encounter, caster) {
 	Text.Add("[name] does nothing!", {name: caster.name});
 	caster.GetCombatEntry(encounter).initiative += 50;
 });
+
+export { WaitAb };

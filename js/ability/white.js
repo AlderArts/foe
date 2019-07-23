@@ -5,10 +5,10 @@
  */
 
 import { AbilityNode } from './node';
-import { Ability, Abilities, TargetMode } from '../ability';
+import { Ability, TargetMode } from '../ability';
 
-Abilities.White = {};
-Abilities.White._onHeal = function(ability, encounter, caster, target, dmg) {
+let WhiteAb = {};
+WhiteAb._onHeal = function(ability, encounter, caster, target, dmg) {
 	if(dmg <= 0) return;
 	var parse = AbilityNode.DefaultParser(caster, target);
 	Text.Add("It heals [tname] for " + Text.Heal(dmg) + " damage!", parse);
@@ -16,12 +16,12 @@ Abilities.White._onHeal = function(ability, encounter, caster, target, dmg) {
 }
 
 
-Abilities.White.FirstAid = new Ability("First aid");
-Abilities.White.FirstAid.Short = function() { return "Heals minor damage, single target."; }
-Abilities.White.FirstAid.targetMode = TargetMode.Ally;
-Abilities.White.FirstAid.cost = { hp: null, sp: 5, lp: null};
-Abilities.White.FirstAid.OOC = true;
-Abilities.White.FirstAid.castTree.push(AbilityNode.Template.Heal({
+WhiteAb.FirstAid = new Ability("First aid");
+WhiteAb.FirstAid.Short = function() { return "Heals minor damage, single target."; }
+WhiteAb.FirstAid.targetMode = TargetMode.Ally;
+WhiteAb.FirstAid.cost = { hp: null, sp: 5, lp: null};
+WhiteAb.FirstAid.OOC = true;
+WhiteAb.FirstAid.castTree.push(AbilityNode.Template.Heal({
 	atkMod: 1,
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
@@ -29,51 +29,51 @@ Abilities.White.FirstAid.castTree.push(AbilityNode.Template.Heal({
 		Text.Add("[Name] prepare[notS] some soothing salves, gently applying it to [tposs] [skin] with [hisher] [hand]s.", parse);
 		Text.NL();
 	}],
-	onAbsorb: [Abilities.White._onHeal]
+	onAbsorb: [WhiteAb._onHeal]
 }));
 
 
-Abilities.White.Heal = new Ability("Heal");
-Abilities.White.Heal.Short = function() { return "Heals some damage, single target."; }
-Abilities.White.Heal.targetMode = TargetMode.Ally;
-Abilities.White.Heal.cost = { hp: null, sp: 10, lp: null};
-Abilities.White.Heal.OOC = true;
-Abilities.White.Heal.castTree.push(AbilityNode.Template.Heal({
+WhiteAb.Heal = new Ability("Heal");
+WhiteAb.Heal.Short = function() { return "Heals some damage, single target."; }
+WhiteAb.Heal.targetMode = TargetMode.Ally;
+WhiteAb.Heal.cost = { hp: null, sp: 10, lp: null};
+WhiteAb.Heal.OOC = true;
+WhiteAb.Heal.castTree.push(AbilityNode.Template.Heal({
 	atkMod: 1.5,
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] read[y] a healing spell, forming a sphere of soothing white magic between [hisher] [hand]s. [HeShe] cast[notS] the enchantment on [tname]", parse);
 		Text.NL();
 	}],
-	onAbsorb: [Abilities.White._onHeal]
+	onAbsorb: [WhiteAb._onHeal]
 }));
 
 
-Abilities.White.Recover = new Ability("Recover");
-Abilities.White.Recover.Short = function() { return "Heals moderate damage, single target."; }
-Abilities.White.Recover.targetMode = TargetMode.Ally;
-Abilities.White.Recover.cost = { hp: null, sp: 30, lp: null};
-Abilities.White.Recover.OOC = true;
-Abilities.White.Recover.castTree.push(AbilityNode.Template.Heal({
+WhiteAb.Recover = new Ability("Recover");
+WhiteAb.Recover.Short = function() { return "Heals moderate damage, single target."; }
+WhiteAb.Recover.targetMode = TargetMode.Ally;
+WhiteAb.Recover.cost = { hp: null, sp: 30, lp: null};
+WhiteAb.Recover.OOC = true;
+WhiteAb.Recover.castTree.push(AbilityNode.Template.Heal({
 	atkMod: 2,
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] read[y] a powerful healing spell, forming a glowing sphere of soothing white magic between [hisher] [hand]s. [HeShe] cast[notS] the enchantment on [tname]", parse);
 		Text.NL();
 	}],
-	onAbsorb: [Abilities.White._onHeal]
+	onAbsorb: [WhiteAb._onHeal]
 }));
 
 
 
 // TODO: Flavor text, status effects
 //TODO REPLACE
-Abilities.White.Cheer = new Ability();
-Abilities.White.Cheer.name = "Cheer";
-Abilities.White.Cheer.Short = function() { return "Boosts party morale, raising spirit and stamina slightly (doesn't stack)."; }
-Abilities.White.Cheer.targetMode = TargetMode.Party;
-Abilities.White.Cheer.cost = { hp: null, sp: 30, lp: null};
-Abilities.White.Cheer.CastInternal = function(encounter, caster, target) {
+WhiteAb.Cheer = new Ability();
+WhiteAb.Cheer.name = "Cheer";
+WhiteAb.Cheer.Short = function() { return "Boosts party morale, raising spirit and stamina slightly (doesn't stack)."; }
+WhiteAb.Cheer.targetMode = TargetMode.Party;
+WhiteAb.Cheer.cost = { hp: null, sp: 30, lp: null};
+WhiteAb.Cheer.CastInternal = function(encounter, caster, target) {
 	// TODO: Make more flavor text
 	var parse = {
 		name : caster.name,
@@ -97,12 +97,12 @@ Abilities.White.Cheer.CastInternal = function(encounter, caster, target) {
 
 // TODO: Flavor text, status effects
 //TODO REPLACE
-Abilities.White.Pinpoint = new Ability();
-Abilities.White.Pinpoint.name = "Pinpoint";
-Abilities.White.Pinpoint.Short = function() { return "Buffs accuracy of one target (doesn't stack)."; }
-Abilities.White.Pinpoint.targetMode = TargetMode.Ally;
-Abilities.White.Pinpoint.cost = { hp: null, sp: 10, lp: null};
-Abilities.White.Pinpoint.CastInternal = function(encounter, caster, target) {
+WhiteAb.Pinpoint = new Ability();
+WhiteAb.Pinpoint.name = "Pinpoint";
+WhiteAb.Pinpoint.Short = function() { return "Buffs accuracy of one target (doesn't stack)."; }
+WhiteAb.Pinpoint.targetMode = TargetMode.Ally;
+WhiteAb.Pinpoint.cost = { hp: null, sp: 10, lp: null};
+WhiteAb.Pinpoint.CastInternal = function(encounter, caster, target) {
 	target.dexterity.temp = Math.max(target.dexterity.temp, caster.MAttack() / 5);
 	
 	var parse = AbilityNode.DefaultParser(caster, target);
@@ -121,12 +121,12 @@ Abilities.White.Pinpoint.CastInternal = function(encounter, caster, target) {
  * TODO: Remake into a status effect?
  */
 //TODO REPLACE
-Abilities.White.Toughen = new Ability();
-Abilities.White.Toughen.name = "Toughen";
-Abilities.White.Toughen.Short = function() { return "Buffs stamina of one target (doesn't stack)."; }
-Abilities.White.Toughen.targetMode = TargetMode.Ally;
-Abilities.White.Toughen.cost = { hp: null, sp: 10, lp: null};
-Abilities.White.Toughen.CastInternal = function(encounter, caster, target) {
+WhiteAb.Toughen = new Ability();
+WhiteAb.Toughen.name = "Toughen";
+WhiteAb.Toughen.Short = function() { return "Buffs stamina of one target (doesn't stack)."; }
+WhiteAb.Toughen.targetMode = TargetMode.Ally;
+WhiteAb.Toughen.cost = { hp: null, sp: 10, lp: null};
+WhiteAb.Toughen.CastInternal = function(encounter, caster, target) {
 	target.stamina.temp = Math.max(target.stamina.temp, caster.MAttack() / 5);
 	
 	var parse = AbilityNode.DefaultParser(caster, target);
@@ -145,12 +145,12 @@ Abilities.White.Toughen.CastInternal = function(encounter, caster, target) {
  * TODO: Remake into a status effect?
  */
 //TODO REPLACE
-Abilities.White.Empower = new Ability();
-Abilities.White.Empower.name = "Empower";
-Abilities.White.Empower.Short = function() { return "Buffs strength of one target (doesn't stack)."; }
-Abilities.White.Empower.targetMode = TargetMode.Ally;
-Abilities.White.Empower.cost = { hp: null, sp: 10, lp: null};
-Abilities.White.Empower.CastInternal = function(encounter, caster, target) {
+WhiteAb.Empower = new Ability();
+WhiteAb.Empower.name = "Empower";
+WhiteAb.Empower.Short = function() { return "Buffs strength of one target (doesn't stack)."; }
+WhiteAb.Empower.targetMode = TargetMode.Ally;
+WhiteAb.Empower.cost = { hp: null, sp: 10, lp: null};
+WhiteAb.Empower.CastInternal = function(encounter, caster, target) {
 	target.strength.temp = Math.max(target.strength.temp, caster.MAttack() / 5);
 	
 	var parse = AbilityNode.DefaultParser(caster, target);
@@ -165,16 +165,16 @@ Abilities.White.Empower.CastInternal = function(encounter, caster, target) {
 }
 
 
-Abilities.White.Tirade = new Ability("Tirade");
-Abilities.White.Tirade.name = "Tirade";
-Abilities.White.Tirade.Short = function() { return "Attempt to bore the enemy with meaningless drivel. Drain enemy SP."; }
-Abilities.White.Tirade.cost = { hp: null, sp: 10, lp: null};
-Abilities.White.Tirade.cooldown = 1;
-Abilities.White.Tirade._onMiss = function(ability, encounter, caster, target) {
+WhiteAb.Tirade = new Ability("Tirade");
+WhiteAb.Tirade.name = "Tirade";
+WhiteAb.Tirade.Short = function() { return "Attempt to bore the enemy with meaningless drivel. Drain enemy SP."; }
+WhiteAb.Tirade.cost = { hp: null, sp: 10, lp: null};
+WhiteAb.Tirade.cooldown = 1;
+WhiteAb.Tirade._onMiss = function(ability, encounter, caster, target) {
 	var parse = AbilityNode.DefaultParser(null, target);
 	Text.Add(", but [tname] [tis]n't very impressed!", parse);
 }
-Abilities.White.Tirade.castTree.push(AbilityNode.Template.Magical({
+WhiteAb.Tirade.castTree.push(AbilityNode.Template.Magical({
 	hitMod: 0.7,
 	atkMod: 0.5,
 	damageFunc: AbilityNode.DamageFunc.Magical,
@@ -188,21 +188,21 @@ Abilities.White.Tirade.castTree.push(AbilityNode.Template.Magical({
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add(" in an attempt to distract [tname]. It seems to be working, [theshe] look[tnotS] slightly annoyed! [Name] drain[notS] " + Text.Mana(-dmg) + " SP from [tname]!", parse);
 	}],
-	onAbsorb: [Abilities.White.Tirade._onMiss],
-	onMiss: [Abilities.White.Tirade._onMiss]
+	onAbsorb: [WhiteAb.Tirade._onMiss],
+	onMiss: [WhiteAb.Tirade._onMiss]
 }));
 
 
-Abilities.White.Preach = new Ability("Preach");
-Abilities.White.Preach.Short = function() { return "Attempt to bore the enemy with pompous religious drivel. Drain enemy SP."; }
-Abilities.White.Preach.cost = { hp: null, sp: 20, lp: null};
-Abilities.White.Preach.cooldown = 2;
-Abilities.White.Preach._onMiss = function(ability, encounter, caster, target) {
+WhiteAb.Preach = new Ability("Preach");
+WhiteAb.Preach.Short = function() { return "Attempt to bore the enemy with pompous religious drivel. Drain enemy SP."; }
+WhiteAb.Preach.cost = { hp: null, sp: 20, lp: null};
+WhiteAb.Preach.cooldown = 2;
+WhiteAb.Preach._onMiss = function(ability, encounter, caster, target) {
 	var parse = AbilityNode.DefaultParser(null, target);
 	Text.Add("However, [tname] [tis]n't very impressed!", parse);
 	Text.NL();
 }
-Abilities.White.Preach.castTree.push(AbilityNode.Template.Magical({
+WhiteAb.Preach.castTree.push(AbilityNode.Template.Magical({
 	hitMod: 1,
 	damageFunc: AbilityNode.DamageFunc.Magical,
 	damageType: {mVoid: 1},
@@ -217,17 +217,17 @@ Abilities.White.Preach.castTree.push(AbilityNode.Template.Magical({
 		Text.Add("It seems to be working, [tname] look[tnotS] slightly annoyed! [Name] drain[notS] " + Text.Mana(-dmg) + " SP from [tname]!", parse);
 		Text.NL();
 	}],
-	onAbsorb: [Abilities.White.Preach._onMiss],
-	onMiss: [Abilities.White.Preach._onMiss]
+	onAbsorb: [WhiteAb.Preach._onMiss],
+	onMiss: [WhiteAb.Preach._onMiss]
 }));
 
 
-Abilities.White.Sermon = new Ability("Sermon");
-Abilities.White.Sermon.Short = function() { return "Attempt to bore the enemy party with religious proselytizing. Drain enemy SP."; }
-Abilities.White.Sermon.targetMode = TargetMode.Enemies;
-Abilities.White.Sermon.cost = { hp: null, sp: 50, lp: null};
-Abilities.White.Sermon.cooldown = 3;
-Abilities.White.Sermon.castTree.push(AbilityNode.Template.Magical({
+WhiteAb.Sermon = new Ability("Sermon");
+WhiteAb.Sermon.Short = function() { return "Attempt to bore the enemy party with religious proselytizing. Drain enemy SP."; }
+WhiteAb.Sermon.targetMode = TargetMode.Enemies;
+WhiteAb.Sermon.cost = { hp: null, sp: 50, lp: null};
+WhiteAb.Sermon.cooldown = 3;
+WhiteAb.Sermon.castTree.push(AbilityNode.Template.Magical({
 	hitMod: 1,
 	damageFunc: AbilityNode.DamageFunc.Magical,
 	damageType: {mVoid: 1},
@@ -242,19 +242,19 @@ Abilities.White.Sermon.castTree.push(AbilityNode.Template.Magical({
 		Text.Add("It seems to be working, [tname] look[tnotS] slightly annoyed! [Name] drain[notS] " + Text.Mana(-dmg) + " SP from [tname]!", parse);
 		Text.NL();
 	}],
-	onAbsorb: [Abilities.White.Preach._onMiss],
-	onMiss: [Abilities.White.Preach._onMiss]
+	onAbsorb: [WhiteAb.Preach._onMiss],
+	onMiss: [WhiteAb.Preach._onMiss]
 }));
 
 
-Abilities.White.Cleanse = new Ability();
-Abilities.White.Cleanse.name = "Cleanse";
-Abilities.White.Cleanse.Short = function() { return "Remove a negative physical status effect from an ally or a positive physical status effect from an enemy."; }
-Abilities.White.Cleanse.targetMode = TargetMode.All;
-Abilities.White.Cleanse.cost = { hp: null, sp: 20, lp: null};
-Abilities.White.Cleanse.cooldown = 2;
-Abilities.White.Cleanse.casttime = 25;
-Abilities.White.Cleanse.CastInternal = function(encounter, caster, target) {
+WhiteAb.Cleanse = new Ability();
+WhiteAb.Cleanse.name = "Cleanse";
+WhiteAb.Cleanse.Short = function() { return "Remove a negative physical status effect from an ally or a positive physical status effect from an enemy."; }
+WhiteAb.Cleanse.targetMode = TargetMode.All;
+WhiteAb.Cleanse.cost = { hp: null, sp: 20, lp: null};
+WhiteAb.Cleanse.cooldown = 2;
+WhiteAb.Cleanse.casttime = 25;
+WhiteAb.Cleanse.CastInternal = function(encounter, caster, target) {
 	var parse = AbilityNode.DefaultParser(caster, target);
 	
 	var ally = true;
@@ -291,14 +291,14 @@ Abilities.White.Cleanse.CastInternal = function(encounter, caster, target) {
 }
 
 
-Abilities.White.Dispel = new Ability();
-Abilities.White.Dispel.name = "Dispel";
-Abilities.White.Dispel.Short = function() { return "Remove a negative magical status effect from an ally or a positive magical status effect from an enemy."; }
-Abilities.White.Dispel.targetMode = TargetMode.All;
-Abilities.White.Dispel.cost = { hp: null, sp: 20, lp: null};
-Abilities.White.Dispel.cooldown = 2;
-Abilities.White.Dispel.casttime = 25;
-Abilities.White.Dispel.CastInternal = function(encounter, caster, target) {
+WhiteAb.Dispel = new Ability();
+WhiteAb.Dispel.name = "Dispel";
+WhiteAb.Dispel.Short = function() { return "Remove a negative magical status effect from an ally or a positive magical status effect from an enemy."; }
+WhiteAb.Dispel.targetMode = TargetMode.All;
+WhiteAb.Dispel.cost = { hp: null, sp: 20, lp: null};
+WhiteAb.Dispel.cooldown = 2;
+WhiteAb.Dispel.casttime = 25;
+WhiteAb.Dispel.CastInternal = function(encounter, caster, target) {
 	var parse = AbilityNode.DefaultParser(caster, target);
 	
 	var ally = true;
@@ -338,14 +338,14 @@ Abilities.White.Dispel.CastInternal = function(encounter, caster, target) {
 }
 
 
-Abilities.White.Purify = new Ability();
-Abilities.White.Purify.name = "Purify";
-Abilities.White.Purify.Short = function() { return "Remove a negative lust-based status effect from an ally or a positive lust-based status effect from an enemy."; }
-Abilities.White.Purify.targetMode = TargetMode.All;
-Abilities.White.Purify.cost = { hp: null, sp: 20, lp: null};
-Abilities.White.Purify.cooldown = 2;
-Abilities.White.Purify.casttime = 25;
-Abilities.White.Purify.CastInternal = function(encounter, caster, target) {
+WhiteAb.Purify = new Ability();
+WhiteAb.Purify.name = "Purify";
+WhiteAb.Purify.Short = function() { return "Remove a negative lust-based status effect from an ally or a positive lust-based status effect from an enemy."; }
+WhiteAb.Purify.targetMode = TargetMode.All;
+WhiteAb.Purify.cost = { hp: null, sp: 20, lp: null};
+WhiteAb.Purify.cooldown = 2;
+WhiteAb.Purify.casttime = 25;
+WhiteAb.Purify.CastInternal = function(encounter, caster, target) {
 	var parse = AbilityNode.DefaultParser(caster, target);
 	
 	var ally = true;
@@ -376,3 +376,5 @@ Abilities.White.Purify.CastInternal = function(encounter, caster, target) {
 		encounter.CombatTick();
 	});
 }
+
+export { WhiteAb };

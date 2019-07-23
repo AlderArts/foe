@@ -138,7 +138,7 @@ let LoadCardImages = function(imageArray) {
 
 	Images.card_back            = "assets/img/cards/back.png";
 
-	var cards = [
+	let cards = [
 		Items.Cards.Light[0].Img,
 		Items.Cards.Light[1].Img,
 		Items.Cards.Light[2].Img,

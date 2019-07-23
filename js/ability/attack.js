@@ -5,11 +5,11 @@
  */
 
 import { AbilityNode } from './node';
-import { Ability, Abilities } from '../ability';
+import { Ability } from '../ability';
 
-Abilities.Attack = new Ability("Attack");
-Abilities.Attack.Short = function() { return "Perform a physical attack."; }
-Abilities.Attack.castTree.push(AbilityNode.Template.Physical({
+let AttackAb = new Ability("Attack");
+AttackAb.Short = function() { return "Perform a physical attack."; }
+AttackAb.castTree.push(AbilityNode.Template.Physical({
 	onMiss: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] attack[notS] [tname], but the blow misses!", parse);
@@ -23,3 +23,5 @@ Abilities.Attack.castTree.push(AbilityNode.Template.Physical({
 		Text.Add("[Name] attack[notS] [tname], but [theshe] absorb[tnotS] the blow for " + Text.Heal(dmg) + " damage!");
 	}]
 }));
+
+export { AttackAb };

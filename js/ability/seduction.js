@@ -4,32 +4,33 @@
  * 
  */
 import { AbilityNode } from './node';
-import { Ability, Abilities, TargetMode } from '../ability';
+import { Ability, TargetMode } from '../ability';
+import { GetAggroEntry } from '../entity-combat';
 
-Abilities.Seduction = {};
+let SeductionAb = {};
 
 // Default messages
-Abilities.Seduction._onDamage = function(ability, encounter, caster, target, dmg) {
+SeductionAb._onDamage = function(ability, encounter, caster, target, dmg) {
 	var parse = AbilityNode.DefaultParser(caster, target);
 	Text.Add("[tName] become[tnotS] aroused, gaining " + Text.Lust(-dmg) + " lust!", parse);
 	Text.NL();
 }
-Abilities.Seduction._onAbsorb = function(ability, encounter, caster, target, dmg) {
+SeductionAb._onAbsorb = function(ability, encounter, caster, target, dmg) {
 	var parse = AbilityNode.DefaultParser(caster, target);
 	Text.Add("[tName] [tis] turned off, losing " + Text.Soothe(dmg) + " lust!", parse);
 	Text.NL();
 }
-Abilities.Seduction._onMiss = function(ability, encounter, caster, target) {
+SeductionAb._onMiss = function(ability, encounter, caster, target) {
 	var parse = AbilityNode.DefaultParser(caster, target);
 	Text.Add("[tName] manage[tnotS] to resist the temptation!", parse);
 	Text.NL();
 }
 
 
-Abilities.Seduction.Sleep = new Ability("Sleep");
-Abilities.Seduction.Sleep.Short = function() { return "Put one enemy to sleep for a short while with magical charms."; }
-Abilities.Seduction.Sleep.cost = { hp: null, sp: 20, lp: null};
-Abilities.Seduction.Sleep.castTree.push(function(ability, encounter, caster, target) {
+SeductionAb.Sleep = new Ability("Sleep");
+SeductionAb.Sleep.Short = function() { return "Put one enemy to sleep for a short while with magical charms."; }
+SeductionAb.Sleep.cost = { hp: null, sp: 20, lp: null};
+SeductionAb.Sleep.castTree.push(function(ability, encounter, caster, target) {
 	var parse = AbilityNode.DefaultParser(caster, target);
 	
 	Text.Add("[Name] weave[notS] [hisher] [hand]s in alluring patterns, winking seductively at [tname]. ", parse);
@@ -42,11 +43,11 @@ Abilities.Seduction.Sleep.castTree.push(function(ability, encounter, caster, tar
 });
 
 
-Abilities.Seduction.TIllusion = new Ability("T.Illusion");
-Abilities.Seduction.TIllusion.Short = function() { return "Terrifies your foes by creating frightening phantasms that soak up any attacks directed at you."; }
-Abilities.Seduction.TIllusion.cost = { hp: null, sp: 25, lp: 10};
-Abilities.Seduction.TIllusion.targetMode = TargetMode.Self;
-Abilities.Seduction.TIllusion.castTree.push(function(ability, encounter, caster) {
+SeductionAb.TIllusion = new Ability("T.Illusion");
+SeductionAb.TIllusion.Short = function() { return "Terrifies your foes by creating frightening phantasms that soak up any attacks directed at you."; }
+SeductionAb.TIllusion.cost = { hp: null, sp: 25, lp: 10};
+SeductionAb.TIllusion.targetMode = TargetMode.Self;
+SeductionAb.TIllusion.castTree.push(function(ability, encounter, caster) {
 	var parse = AbilityNode.DefaultParser(caster);
 	var num = 2;
 	num += Math.random() * 3;
@@ -81,11 +82,11 @@ Abilities.Seduction.TIllusion.castTree.push(function(ability, encounter, caster)
 });
 
 
-Abilities.Seduction.SIllusion = new Ability("S.Illusion");
-Abilities.Seduction.SIllusion.Short = function() { return "Arouses your foes by creating a harem of alluring mirages."; }
-Abilities.Seduction.SIllusion.cost = { hp: null, sp: 10, lp: 25};
-Abilities.Seduction.SIllusion.targetMode = TargetMode.Self;
-Abilities.Seduction.SIllusion.castTree.push(function(ability, encounter, caster) {
+SeductionAb.SIllusion = new Ability("S.Illusion");
+SeductionAb.SIllusion.Short = function() { return "Arouses your foes by creating a harem of alluring mirages."; }
+SeductionAb.SIllusion.cost = { hp: null, sp: 10, lp: 25};
+SeductionAb.SIllusion.targetMode = TargetMode.Self;
+SeductionAb.SIllusion.castTree.push(function(ability, encounter, caster) {
 	var parse = AbilityNode.DefaultParser(caster);
 	var num = 2;
 	num += Math.random() * 3;
@@ -121,10 +122,10 @@ Abilities.Seduction.SIllusion.castTree.push(function(ability, encounter, caster)
 });
 
 
-Abilities.Seduction.Confuse = new Ability("Confuse");
-Abilities.Seduction.Confuse.Short = function() { return "Fuck a single opponent’s mind, temporarily drawing them to your side."; }
-Abilities.Seduction.Confuse.cost = { hp: null, sp: 30, lp: 20};
-Abilities.Seduction.Confuse.castTree.push(function(ability, encounter, caster, target) {
+SeductionAb.Confuse = new Ability("Confuse");
+SeductionAb.Confuse.Short = function() { return "Fuck a single opponent’s mind, temporarily drawing them to your side."; }
+SeductionAb.Confuse.cost = { hp: null, sp: 30, lp: 20};
+SeductionAb.Confuse.castTree.push(function(ability, encounter, caster, target) {
 	var parse = AbilityNode.DefaultParser(caster, target);
 
 	Text.Add("[Name] perform[notS] a hypnotising dance, blending in [hisher] alluring magic and attempting to assume control of [tname]. ", parse);
@@ -138,10 +139,10 @@ Abilities.Seduction.Confuse.castTree.push(function(ability, encounter, caster, t
 });
 
 
-Abilities.Seduction.Rut = new Ability("Rut");
-Abilities.Seduction.Rut.Short = function() { return "Hump away at target, dealing damage."; }
-Abilities.Seduction.Rut.cost = { hp: null, sp: null, lp: 10};
-Abilities.Seduction.Rut.castTree.push(AbilityNode.Template.Lust({
+SeductionAb.Rut = new Ability("Rut");
+SeductionAb.Rut.Short = function() { return "Hump away at target, dealing damage."; }
+SeductionAb.Rut.cost = { hp: null, sp: null, lp: 10};
+SeductionAb.Rut.castTree.push(AbilityNode.Template.Lust({
 	damageFunc: AbilityNode.DamageFunc.Physical,
 	damagePool: [AbilityNode.DamagePool.Physical],
 	damageType: {pBlunt: 0.2, lust: 0.8},
@@ -155,10 +156,10 @@ Abilities.Seduction.Rut.castTree.push(AbilityNode.Template.Lust({
 
 
 //TODO Tweak
-Abilities.Seduction.Fantasize = new Ability("Fantasize");
-Abilities.Seduction.Fantasize.Short = function() { return "Raise own lust."; }
-Abilities.Seduction.Fantasize.targetMode = TargetMode.Self;
-Abilities.Seduction.Fantasize.castTree.push(function(ability, encounter, caster) {
+SeductionAb.Fantasize = new Ability("Fantasize");
+SeductionAb.Fantasize.Short = function() { return "Raise own lust."; }
+SeductionAb.Fantasize.targetMode = TargetMode.Self;
+SeductionAb.Fantasize.castTree.push(function(ability, encounter, caster) {
 	var dmg = 1 * caster.LAttack();
 	dmg = Math.floor(dmg);
 	
@@ -173,11 +174,11 @@ Abilities.Seduction.Fantasize.castTree.push(function(ability, encounter, caster)
 });
 
 
-Abilities.Seduction.Soothe = new Ability("Soothe");
-Abilities.Seduction.Soothe.cost = { hp: null, sp: 20, lp: null};
-Abilities.Seduction.Soothe.Short = function() { return "Calm the wayward thoughts of your allies with the gentle touch of your voice."; }
-Abilities.Seduction.Soothe.targetMode = TargetMode.Party;
-Abilities.Seduction.Soothe.castTree.push(function(ability, encounter, caster, target) {
+SeductionAb.Soothe = new Ability("Soothe");
+SeductionAb.Soothe.cost = { hp: null, sp: 20, lp: null};
+SeductionAb.Soothe.Short = function() { return "Calm the wayward thoughts of your allies with the gentle touch of your voice."; }
+SeductionAb.Soothe.targetMode = TargetMode.Party;
+SeductionAb.Soothe.castTree.push(function(ability, encounter, caster, target) {
 	var targets = target.members;
 	
 	var group = targets.length > 1;
@@ -203,14 +204,14 @@ Abilities.Seduction.Soothe.castTree.push(function(ability, encounter, caster, ta
 });
 
 
-Abilities.Seduction.Captivate = new Ability("Captivate");
-Abilities.Seduction.Captivate.cost = { hp: null, sp: null, lp: 40};
-Abilities.Seduction.Captivate.Short = function() { return "Attempt to immobilize and slow a foe with a captivating song. Success rate dependent on your charisma and the target’s lust. If it fails, the target is nevertheless slowed."; }
-Abilities.Seduction.Captivate._onMiss = function(ability, encounter, caster, target) {
+SeductionAb.Captivate = new Ability("Captivate");
+SeductionAb.Captivate.cost = { hp: null, sp: null, lp: 40};
+SeductionAb.Captivate.Short = function() { return "Attempt to immobilize and slow a foe with a captivating song. Success rate dependent on your charisma and the target’s lust. If it fails, the target is nevertheless slowed."; }
+SeductionAb.Captivate._onMiss = function(ability, encounter, caster, target) {
 	var parse = AbilityNode.DefaultParser(caster, target);
 	Text.Add("[tName] manage[tnotS] to resist the brunt of the mesmerizing melody, but still finds [thisher] movements slowed.", parse);
 }
-Abilities.Seduction.Captivate.castTree.push(AbilityNode.Template.Lust({
+SeductionAb.Captivate.castTree.push(AbilityNode.Template.Lust({
 	toDamage: null,
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
@@ -223,18 +224,18 @@ Abilities.Seduction.Captivate.castTree.push(AbilityNode.Template.Lust({
 			Text.Add("[tName] is utterly entranced by [poss] song and is slowed to a stop, completely immobilized.", parse);
 		}
 		else
-			Abilities.Seduction.Captivate._onMiss(ability, encounter, caster, target);
+			SeductionAb.Captivate._onMiss(ability, encounter, caster, target);
 	}],
-	onMiss: [Abilities.Seduction.Captivate._onMiss]
+	onMiss: [SeductionAb.Captivate._onMiss]
 }));
 
 
 
 //TODO Tweak
-Abilities.Seduction.Lull = new Ability("Lull");
-Abilities.Seduction.Lull.cost = { hp: null, sp: 10, lp: 10};
-Abilities.Seduction.Lull.Short = function() { return "Put the foe to sleep with a soothing song."; }
-Abilities.Seduction.Lull.castTree.push(function(ability, encounter, caster, target) {
+SeductionAb.Lull = new Ability("Lull");
+SeductionAb.Lull.cost = { hp: null, sp: 10, lp: 10};
+SeductionAb.Lull.Short = function() { return "Put the foe to sleep with a soothing song."; }
+SeductionAb.Lull.castTree.push(function(ability, encounter, caster, target) {
 	/*
 	var hit    = caster.LHit();
 	var evade  = target.LEvade();
@@ -252,3 +253,157 @@ Abilities.Seduction.Lull.castTree.push(function(ability, encounter, caster, targ
 });
 
 
+/*
+ * 
+ * Basic tease
+ * 
+ */
+
+SeductionAb.Tease = new Ability("Tease");
+SeductionAb.Tease.Short = function() { return "Raises the lust of target."; }
+SeductionAb.Tease.castTree.push(AbilityNode.Template.Lust({
+	atkMod: 0.5,
+	damageType: {lust: 1},
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		parse["hips"] = caster.HipsDesc();
+		Text.Add("[Name] tease[notS] [tname], shaking [hisher] [hips]! ", parse);
+	}],
+	onMiss: [SeductionAb._onMiss],
+	onDamage: [SeductionAb._onDamage],
+	onAbsorb: [SeductionAb._onAbsorb]
+}));
+
+
+SeductionAb.Seduce = new Ability("Seduce");
+SeductionAb.Seduce.Short = function() { return "Raises the lust of target."; }
+SeductionAb.Seduce.cost = { hp: null, sp: 10, lp: 10};
+SeductionAb.Seduce.castTree.push(AbilityNode.Template.Lust({
+	atkMod: 1,
+	damageType: {lust: 1},
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		parse["hips"] = caster.HipsDesc();
+		Text.Add("[Name] tease[notS] [tname], shaking [hisher] [hips]! ", parse);
+	}],
+	onMiss: [SeductionAb._onMiss],
+	onDamage: [SeductionAb._onDamage],
+	onAbsorb: [SeductionAb._onAbsorb]
+}));
+
+
+SeductionAb.StripTease = new Ability("StripTease");
+SeductionAb.StripTease.Short = function() { return "Raises the lust of enemy party."; }
+SeductionAb.StripTease.cost = { hp: null, sp: 40, lp: 40};
+SeductionAb.StripTease.cooldown = 2;
+SeductionAb.StripTease.targetMode = TargetMode.Enemies;
+SeductionAb.StripTease.castTree.push(AbilityNode.Template.Lust({
+	atkMod: 1.5,
+	damageType: {lust: 1},
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster);
+		parse["hips"] = caster.HipsDesc();
+		Text.Add("[Name] tease[notS] the enemy party, shaking [hisher] [hips]! ", parse);
+	}],
+	onMiss: [SeductionAb._onMiss],
+	onDamage: [SeductionAb._onDamage],
+	onAbsorb: [SeductionAb._onAbsorb]
+}));
+
+
+SeductionAb.Distract = new Ability("Distract");
+SeductionAb.Distract.Short = function() { return "Raise enemy lust and lower their initiative."; }
+SeductionAb.Distract.cost = { hp: null, sp: 10, lp: 20};
+SeductionAb.Distract.cooldown = 1;
+SeductionAb.Distract.castTree.push(AbilityNode.Template.Lust({
+	atkMod: 0.8,
+	damageType: {lust: 1},
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		parse["hips"] = caster.HipsDesc();
+		Text.Add("[Name] distract[notS] [tname], shaking [hisher] [hips]! ", parse);
+	}],
+	onMiss: [SeductionAb._onMiss],
+	onDamage: [function(ability, encounter, caster, target, dmg) {
+		target.GetCombatEntry(encounter).initiative -= 25;
+		var parse = AbilityNode.DefaultParser(caster, target);
+	Text.Add("[tName] become[tnotS] aroused, gaining " + Text.Lust(-dmg) + " lust! [tHeShe] become[tnotS] distracted.", parse);
+	}],
+	onAbsorb: [SeductionAb._onAbsorb]
+}));
+
+
+SeductionAb.Charm = new Ability("Charm");
+SeductionAb.Charm.Short = function() { return "Try to dissuade the enemy from attacking you."; }
+SeductionAb.Charm.cost = { hp: null, sp: 10, lp: 10};
+SeductionAb.Charm.cooldown = 1;
+SeductionAb.Charm.castTree.push(AbilityNode.Template.Lust({
+	atkMod: 0.3,
+	damageType: {lust: 1},
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		parse["hips"] = caster.HipsDesc();
+		Text.Add("[Name] charm[notS] [tname], shaking [hisher] [hips]! ", parse);
+	}],
+	onMiss: [SeductionAb._onMiss],
+	onDamage: [function(ability, encounter, caster, target, dmg) {
+		var aggroEntry = GetAggroEntry(target.GetCombatEntry(encounter), caster);
+		if(aggroEntry) {
+			aggroEntry.aggro -= 0.4;
+			if(aggroEntry.aggro < 0) aggroEntry.aggro = 0;
+		}	
+		var parse = AbilityNode.DefaultParser(caster, target);
+	Text.Add("[tName] become[tnotS] charmed, gaining " + Text.Lust(-dmg) + " lust! [tHeShe] become[tnotS] less aggressive toward [name].", parse);
+	}],
+	onAbsorb: [SeductionAb._onAbsorb]
+}));
+
+
+SeductionAb.Allure = new Ability("Allure");
+SeductionAb.Allure.Short = function() { return "Try to dissuade the enemy from attacking you."; }
+SeductionAb.Allure.cost = { hp: null, sp: 30, lp: 60};
+SeductionAb.Allure.cooldown = 2;
+SeductionAb.Allure.castTree.push(AbilityNode.Template.Lust({
+	damageType: {lust: 1},
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		parse["hips"] = caster.HipsDesc();
+		Text.Add("[Name] charm[notS] [tname], shaking [hisher] [hips]! ", parse);
+	}],
+	onMiss: [SeductionAb._onMiss],
+	onDamage: [function(ability, encounter, caster, target, dmg) {
+		var aggroEntry = GetAggroEntry(target.GetCombatEntry(encounter), caster);
+		if(aggroEntry) {
+			aggroEntry.aggro -= 0.8;
+			if(aggroEntry.aggro < 0) aggroEntry.aggro = 0;
+		}	
+		var parse = AbilityNode.DefaultParser(caster, target);
+	Text.Add("[tName] become[tnotS] charmed, gaining " + Text.Lust(-dmg) + " lust! [tHeShe] become[tnotS] less aggressive toward [name].", parse);
+	}],
+	onAbsorb: [SeductionAb._onAbsorb]
+}));
+
+
+SeductionAb.Inflame = new Ability("Inflame");
+SeductionAb.Inflame.Short = function() { return "Greatly arouse the passions of a single foe with the power of song."; }
+SeductionAb.Inflame.cost = { hp: null, sp: null, lp: 25};
+SeductionAb.Inflame.castTree.push(AbilityNode.Template.Lust({
+	atkMod: 2,
+	damageType: {lust: 1},
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[Name] slowly sing[notS] a few verses of a soft, sensual melody, projecting [hisher] rich voice at [tname]. ", parse);
+	}],
+	onMiss: [SeductionAb._onMiss],
+	onDamage: [function(ability, encounter, caster, target, dmg) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[tName] squirm[tnotS] at the subtle undertones of the song, becoming greatly aroused. [tName] gain[tnotS] " + Text.Lust(-dmg) + " lust!", parse);
+	}],
+	onAbsorb: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[tName] manage[tnotS] to shake off the desire-inducing effects of [poss] voice.", parse);
+	}]
+}));
+
+
+export { SeductionAb };

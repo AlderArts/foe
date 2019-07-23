@@ -1,5 +1,6 @@
 import { Item } from '../item';
-import { Ability, Abilities, TargetMode } from '../ability';
+import { Abilities } from '../abilities';
+import { Ability, TargetMode } from '../ability';
 import { AbilityNode } from '../ability/node';
 
 function CombatItemAbility(item) {

@@ -75,7 +75,6 @@ import './js/ability/node.js';
 import './js/ability/attack.js';
 import './js/ability/physical.js';
 import './js/ability/seduction.js';
-import './js/ability/tease.js';
 import './js/ability/wait.js';
 import './js/ability/run.js';
 import './js/ability/white.js';

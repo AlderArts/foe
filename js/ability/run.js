@@ -4,18 +4,18 @@
  * 
  */
 
-import { Ability, Abilities, TargetMode } from '../ability';
+import { Ability, TargetMode } from '../ability';
 import { Gui } from '../gui';
 import { GetDEBUG } from '../../app';
 
-Abilities.Run = new Ability();
-Abilities.Run.name = "Run";
-Abilities.Run.Short = function() { return "Run away."; }
-Abilities.Run.targetMode = TargetMode.Self;
-Abilities.Run.enabledCondition = function(encounter, caster) {
+let RunAb = new Ability();
+RunAb.name = "Run";
+RunAb.Short = function() { return "Run away."; }
+RunAb.targetMode = TargetMode.Self;
+RunAb.enabledCondition = function(encounter, caster) {
 	return encounter.canRun;
 }
-Abilities.Run.CastInternal = function(encounter, caster) {
+RunAb.CastInternal = function(encounter, caster) {
 	var parse = {
 		Name : caster.NameDesc(),
 		y : caster.plural() ? "y" : "ies",
@@ -48,3 +48,5 @@ Abilities.Run.CastInternal = function(encounter, caster) {
 		});
 	}
 }
+
+export { RunAb };

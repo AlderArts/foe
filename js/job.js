@@ -1,5 +1,6 @@
 
-import { Abilities, AbilityCollection } from './ability';
+import { AbilityCollection } from './ability';
+import { Abilities } from './abilities';
 
 let Jobs = {};
 
