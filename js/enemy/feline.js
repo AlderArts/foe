@@ -10,6 +10,10 @@ import { TF } from '../tf';
 import { AppendageType } from '../body/appendage';
 import { Items } from '../items';
 import { Gender } from '../body/gender';
+import { Abilities } from '../abilities';
+import { Element } from '../ability';
+import { Race } from '../body/race';
+import { Color } from '../body/color';
 
 let FelinesScenes = {};
 

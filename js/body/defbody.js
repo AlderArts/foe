@@ -6,6 +6,8 @@
 
 import { Vagina } from './vagina';
 import { Cock } from './cock';
+import { Race } from './race';
+import { Color } from './color';
 
 let BodyTypeFemale = {
 	Average  : 0,

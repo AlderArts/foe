@@ -9,6 +9,9 @@ import { Images } from '../assets';
 import { TF } from '../tf';
 import { AppendageType } from '../body/appendage';
 import { Gender } from '../body/gender';
+import { Color } from '../body/color';
+import { Race } from '../body/race';
+import { Element } from '../ability';
 
 let LagomorphScenes = {};
 
