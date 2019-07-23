@@ -5,13 +5,13 @@
  */
 
 import { Event, Link, EncounterTable } from '../event';
-import { Nomads } from './nomads';
+import { NomadsLoc } from './nomads';
 import { Scenes } from '../scenes';
 import { BurrowsLoc } from './burrows';
 
 // Create namespace
 let PlainsLoc = {
-	Nomads         : Nomads,
+	Nomads         : NomadsLoc,
 	Crossroads     : new Event("Plains: Crossroads"),
 	Portals        : new Event(function() {
 		return Scenes.Global.PortalsOpen() ? "Plains: Nexus" : "Plains: Mound";

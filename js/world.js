@@ -14,6 +14,7 @@ import { TreeCityLoc } from './loc/treecity/treecity';
 import { RigardLoc, InitRigard } from './loc/rigard/rigard';
 import { Scenes } from './scenes';
 import { InitGlade } from './loc/glade';
+import { InitNomads } from './loc/nomads';
 
 let world = {
 	// Prototype initialization
@@ -40,6 +41,7 @@ let world = {
 };
 
 IntroInit(world);
+InitNomads(world);
 InitRigard(world, Scenes);
 InitFarm(world);
 InitBurrows(world);
