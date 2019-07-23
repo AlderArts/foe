@@ -9,6 +9,7 @@ import { isOnline } from './gamestate';
 // import { Explore } from './exploration';
 import { gameState, GameState } from './gamestate';
 import { ExploreButtonIndex } from './explorestate';
+import { Text } from './text';
 
 let Gui = {};
 

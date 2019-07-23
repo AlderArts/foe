@@ -2,6 +2,7 @@
 import { Gui } from './gui';
 import { Input } from './input';
 import { SetGameState, GameState } from './gamestate';
+import { Text } from './text';
 
 let CreditsScreen = function(SplashScreen) {
 	SetGameState(GameState.Credits, Gui);
