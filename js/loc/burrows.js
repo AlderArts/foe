@@ -11,6 +11,13 @@ import { OpheliaScenes } from '../event/burrows/ophelia';
 import { LagonScenes } from '../event/burrows/lagon';
 import { Gender } from '../body/gender';
 
+let world = null;
+
+export function InitBurrows(w) {
+	world = w;
+	world.SaveSpots["Burrows"] = BurrowsLoc.Lab;
+};
+
 // Create namespace
 let BurrowsLoc = {
 	Entrance  : new Event("The Burrows"),
@@ -190,19 +197,6 @@ BurrowsLoc.Entrance.onEntry = function() {
 		PrintDefaultOptions();
 }
 
-world.loc.Plains.Crossroads.links.push(new Link(
-	"Burrows", function() { return burrows.flags["Access"] != Burrows.AccessFlags.Unknown; }, true,
-	function() {
-		if(burrows.flags["Access"] != Burrows.AccessFlags.Unknown) {
-			Text.NL();
-			Text.Add("You know how to find the Burrows, should you want to.");
-		}
-	},
-	function() {
-		MoveToLocation(BurrowsLoc.Entrance, {minute: 30});
-	}
-));
-
 
 //
 // Tunnels
@@ -363,7 +357,6 @@ BurrowsLoc.Lab.description = function() {
 }
 
 
-world.SaveSpots["Burrows"] = BurrowsLoc.Lab;
 BurrowsLoc.Lab.SaveSpot = "Burrows";
 BurrowsLoc.Lab.safe = function() { return true; };
 BurrowsLoc.Lab.links.push(new Link(

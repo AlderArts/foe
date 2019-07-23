@@ -1,6 +1,6 @@
 /*
  * 
- * Highlands area, connects to the mountains and to the dragons' den.
+ * HighlandsLoc area, connects to the mountains and to the dragons' den.
  * Good hunting grounds
  * 
  */
@@ -8,7 +8,7 @@
 import { Event, Link, EncounterTable } from '../event';
 
 // Create namespace
-let Highlands = {
+let HighlandsLoc = {
 	Hills         : new Event("Hills"),
 	Spring        : new Event("Spring")
 }
@@ -16,19 +16,19 @@ let Highlands = {
 //
 // Hills, main hunting grounds
 //
-Highlands.Hills.description = function() {
+HighlandsLoc.Hills.description = function() {
 	Text.Add("The highlands are a much rougher part of Eden than the rolling plains below. A multitude of small lakes and moors dot the landscape, which looks like it had at some point been crinkled up by a large earthquake. Sheer cliffs make the area difficult to traverse, and if you don’t know where you’re going, you can easily end up having to retrace your steps.");
 	Text.NL();
 }
 
-Highlands.Hills.links.push(new Link(
+HighlandsLoc.Hills.links.push(new Link(
 	"Crossroads", true, true,
 	null,
 	function() {
 		MoveToLocation(world.loc.Plains.Crossroads, {hour: 2});
 	}
 ));
-Highlands.Hills.links.push(new Link(
+HighlandsLoc.Hills.links.push(new Link(
 	"Den entrance", true, true,
 	null,
 	function() {
@@ -36,9 +36,9 @@ Highlands.Hills.links.push(new Link(
 	}
 ));
 
-Highlands.Hills.enc = new EncounterTable();
+HighlandsLoc.Hills.enc = new EncounterTable();
 
-Highlands.Hills.AddEncounter({
+HighlandsLoc.Hills.AddEncounter({
 	nameStr : "Puma",
 	func    : function() {
 		return Scenes.Felines.PumaEnc(2);
@@ -46,7 +46,7 @@ Highlands.Hills.AddEncounter({
 	visible : true, enabled : true, hunt : true
 });
 
-Highlands.Hills.AddEncounter({
+HighlandsLoc.Hills.AddEncounter({
 	nameStr : "Lynx",
 	func    : function() {
 		return Scenes.Felines.LynxEnc(2);
@@ -54,7 +54,7 @@ Highlands.Hills.AddEncounter({
 	visible : true, enabled : true, hunt : true
 });
 
-Highlands.Hills.AddEncounter({
+HighlandsLoc.Hills.AddEncounter({
 	nameStr : "Zebra",
 	func    : function() {
 		return Scenes.ZebraShaman.LoneEnc();
@@ -62,7 +62,7 @@ Highlands.Hills.AddEncounter({
 	visible : true, enabled : true, hunt : true
 });
 
-Highlands.Hills.AddEncounter({
+HighlandsLoc.Hills.AddEncounter({
 	nameStr : "Catboy",
 	func    : function() {
 		return Scenes.MaliceScouts.Catboy.LoneEncounter(1);
@@ -70,7 +70,7 @@ Highlands.Hills.AddEncounter({
 	visible : true, enabled : true, hunt : true
 });
 
-Highlands.Hills.AddEncounter({
+HighlandsLoc.Hills.AddEncounter({
 	nameStr : "Centauress",
 	func    : function() {
 		return Scenes.MaliceScouts.Mare.LoneEncounter(1);
@@ -78,7 +78,7 @@ Highlands.Hills.AddEncounter({
 	visible : true, enabled : true, hunt : true
 });
 
-Highlands.Hills.AddEncounter({
+HighlandsLoc.Hills.AddEncounter({
 	nameStr : "Goat alchemist",
 	func    : function() {
 		return Scenes.MaliceScouts.Goat.LoneEncounter(1);
@@ -86,7 +86,7 @@ Highlands.Hills.AddEncounter({
 	visible : true, enabled : true, hunt : true
 });
 
-Highlands.Hills.AddEncounter({
+HighlandsLoc.Hills.AddEncounter({
 	nameStr : "Scouts",
 	func    : function() {
 		return Scenes.MaliceScouts.Group.Encounter();
@@ -94,15 +94,15 @@ Highlands.Hills.AddEncounter({
 	visible : true, enabled : true, hunt : true
 });
 
-Highlands.Hills.enc.AddEnc(function() {
+HighlandsLoc.Hills.enc.AddEnc(function() {
 	return Scenes.Momo.MomoEnc;
 }, 1.0, function() { return momo.Wandering(); });
 
-Highlands.Hills.enc.AddEnc(function() {
+HighlandsLoc.Hills.enc.AddEnc(function() {
 	return Scenes.Roaming.FlowerPetal;
 }, 1.0, function() { return world.time.season != Season.Winter; });
 
-Highlands.Hills.events.push(new Link(
+HighlandsLoc.Hills.events.push(new Link(
 	"Ginseng", function() {
 		return asche.flags["Tasks"] == Asche.Tasks.Ginseng_Started;
 	}, true,
@@ -112,7 +112,7 @@ Highlands.Hills.events.push(new Link(
 	}
 ));
 
-Highlands.Hills.events.push(new Link(
+HighlandsLoc.Hills.events.push(new Link(
 	"Spring", function() {
 		//TODO Isla's string (put as loc rather than event)
 		return Scenes.Asche.Tasks.Spring.IsOn() && !Scenes.Asche.Tasks.Spring.IsSuccess();
@@ -123,24 +123,24 @@ Highlands.Hills.events.push(new Link(
 	}
 ));
 
-Highlands.Hills.links.push(new Link(
+HighlandsLoc.Hills.links.push(new Link(
 	"Spring", function() {
 		return Isla.Available();
 	}, true,
 	null,
 	function() {
-		MoveToLocation(Highlands.Spring, {minute: 10});
+		MoveToLocation(HighlandsLoc.Spring, {minute: 10});
 	}
 ));
 
 
-Highlands.Spring.onEntry = function() {
+HighlandsLoc.Spring.onEntry = function() {
 	if(isla.flags["Met"] < Isla.Met.Met)
 		Scenes.Isla.Introduction();
 	else
 		PrintDefaultOptions();
 }
-Highlands.Spring.description = function() {
+HighlandsLoc.Spring.description = function() {
 	var parse = {};
 	
 	Text.Add("You’re standing on the spring plateau. Nestled away against the mountainside with only an obscure, treacherous trail leading upwards from the foot, the place is usually empty save for the few signs of life which mark the fact that Isla’s made her home here, no matter how temporary.");
@@ -160,22 +160,22 @@ Highlands.Spring.description = function() {
 	Text.Add("Well, what now?");
 }
 
-Highlands.Spring.links.push(new Link(
+HighlandsLoc.Spring.links.push(new Link(
 	"Leave", true, true,
 	null,
 	function() {
-		MoveToLocation(Highlands.Hills, {minute: 10});
+		MoveToLocation(HighlandsLoc.Hills, {minute: 10});
 	}
 ));
 
-Highlands.Spring.events.push(new Link(
+HighlandsLoc.Spring.events.push(new Link(
 	"Isla", true, true,
 	null,
 	function() {
 		Scenes.Isla.Approach();
 	}
 ));
-Highlands.Spring.events.push(new Link(
+HighlandsLoc.Spring.events.push(new Link(
 	"Bathe", true, true,
 	null,
 	function() {
@@ -183,4 +183,4 @@ Highlands.Spring.events.push(new Link(
 	}
 ));
 
-export { Highlands };
+export { HighlandsLoc };

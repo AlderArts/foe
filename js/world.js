@@ -1,18 +1,19 @@
 // World template
 import { PlainsLoc } from './loc/plains';
 import { LightAspect, DarkAspect } from './event/introduction';
-import { KingsRoad } from './loc/kingsroad';
-import { Highlands } from './loc/highlands';
+import { KingsRoadLoc } from './loc/kingsroad';
+import { HighlandsLoc } from './loc/highlands';
 import { LakeLoc } from './loc/lake';
 import { OutlawsLoc } from './loc/outlaws';
 import { ForestLoc } from './loc/forest';
 import { DragonDenLoc } from './loc/dragonden';
 import { FarmLoc, InitFarm } from './loc/farm';
 import { DesertLoc } from './loc/desert';
-import { BurrowsLoc } from './loc/burrows';
+import { BurrowsLoc, InitBurrows } from './loc/burrows';
 import { TreeCityLoc } from './loc/treecity/treecity';
 import { RigardLoc, InitRigard } from './loc/rigard/rigard';
 import { Scenes } from './scenes';
+import { InitGlade } from './loc/glade';
 
 let world = {
 	// Prototype initialization
@@ -22,8 +23,8 @@ let world = {
 		Burrows : BurrowsLoc,
 		Forest : ForestLoc,
 		Desert : DesertLoc,
-		KingsRoad : KingsRoad,
-		Highlands : Highlands,
+		KingsRoad : KingsRoadLoc,
+		Highlands : HighlandsLoc,
 		Lake : LakeLoc,
 		Outlaws : OutlawsLoc,
 		Rigard : RigardLoc,
@@ -41,6 +42,8 @@ let world = {
 IntroInit(world);
 InitRigard(world, Scenes);
 InitFarm(world);
+InitBurrows(world);
+InitGlade(world);
 
 world.Locations = {
 	Plains    : 0,
@@ -53,15 +56,15 @@ world.Locations = {
 world.CurrentLocation = function(loc) {
 	loc = loc || party.location;
 	
-	if     (loc == world.loc.Plains.Crossroads)
+	if     (loc == PlainsLoc.Crossroads)
 		return world.Locations.Plains;
-	else if(loc == world.loc.Forest.Outskirts)
+	else if(loc == ForestLoc.Outskirts)
 		return world.Locations.Forest;
-	else if(loc == world.loc.Desert.Drylands)
+	else if(loc == DesertLoc.Drylands)
 		return world.Locations.Desert;
-	else if(loc == world.loc.Highlands.Hills)
+	else if(loc == HighlandsLoc.Hills)
 		return world.Locations.Highlands;
-	else if(loc == world.loc.Lake.Shore)
+	else if(loc == LakeLoc.Shore)
 		return world.Locations.Lake;
 	
 	return -1;

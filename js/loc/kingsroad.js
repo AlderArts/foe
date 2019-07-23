@@ -7,21 +7,21 @@
 import { Event, Link, EncounterTable } from '../event';
 
 // Create namespace
-let KingsRoad = {
+let KingsRoadLoc = {
 	Road         : new Event("King's road")
 }
 
 //
 // Hills, main hunting grounds
 //
-KingsRoad.Road.description = function() {
+KingsRoadLoc.Road.description = function() {
 	var parse = {
 		TreeFar : world.TreeFarDesc()
 	};
 	Text.Add("You are standing on the well-paved road leading from Rigard to the Free Cities, a major trading route on Eden. Estates and farm holds dot the landscape, which is a blend of flat plains on one side, and rougher country on the other as the gentle grasslands are swallowed by the great forest. [TreeFar]", parse);
 }
 
-KingsRoad.Road.links.push(new Link(
+KingsRoadLoc.Road.links.push(new Link(
 	"Rigard", true, true,
 	null,
 	function() {
@@ -29,7 +29,7 @@ KingsRoad.Road.links.push(new Link(
 	}
 ));
 
-KingsRoad.Road.events.push(new Link(
+KingsRoadLoc.Road.events.push(new Link(
 	"Scepter", function() { return burrows.flags["Access"] == Burrows.AccessFlags.Stage4; }, true,
 	null,
 	function() {
@@ -37,33 +37,33 @@ KingsRoad.Road.events.push(new Link(
 	}
 ));
 
-KingsRoad.Road.enc = new EncounterTable();
-KingsRoad.Road.enc.AddEnc(function() {
+KingsRoadLoc.Road.enc = new EncounterTable();
+KingsRoadLoc.Road.enc.AddEnc(function() {
 	return Scenes.Momo.MomoEnc;
 }, 1.0, function() { return momo.Wandering(); });
 
 
-KingsRoad.Road.enc.AddEnc(function() {
+KingsRoadLoc.Road.enc.AddEnc(function() {
 	return Scenes.Poet.Entry;
 }, 1.0, function() { return true; });
 
-KingsRoad.Road.enc.AddEnc(function() {
+KingsRoadLoc.Road.enc.AddEnc(function() {
 	return Scenes.Roaming.FindSomeCoins;
 }, 0.5, function() { return true; });
 
 
-KingsRoad.Road.enc.AddEnc(function() {
+KingsRoadLoc.Road.enc.AddEnc(function() {
 	return Scenes.Roaming.KingdomPatrol;
 }, 1.0, function() { return true; });
-KingsRoad.Road.enc.AddEnc(function() {
+KingsRoadLoc.Road.enc.AddEnc(function() {
 	return Scenes.Roaming.Bandits;
 }, 5.0, function() { return rigard.bandits; });
 
-KingsRoad.Road.enc.AddEnc(function() {
+KingsRoadLoc.Road.enc.AddEnc(function() {
 	return Scenes.Roaming.FlowerPetal;
 }, 1.0, function() { return world.time.season != Season.Winter; });
 
-KingsRoad.Road.AddEncounter({
+KingsRoadLoc.Road.AddEncounter({
 	nameStr : "Wildcat",
 	func    : function() {
 		return Scenes.Felines.WildcatEnc(2);
@@ -71,7 +71,7 @@ KingsRoad.Road.AddEncounter({
 	visible : true, enabled : true, hunt : true
 });
 
-KingsRoad.Road.AddEncounter({
+KingsRoadLoc.Road.AddEncounter({
 	nameStr : "Puma",
 	func    : function() {
 		return Scenes.Felines.PumaEnc(3);
@@ -79,7 +79,7 @@ KingsRoad.Road.AddEncounter({
 	visible : true, enabled : true, hunt : true
 });
 
-KingsRoad.Road.AddEncounter({
+KingsRoadLoc.Road.AddEncounter({
 	nameStr : "Jaguar",
 	func    : function() {
 		return Scenes.Felines.JaguarEnc(3);
@@ -87,7 +87,7 @@ KingsRoad.Road.AddEncounter({
 	visible : true, enabled : true, hunt : true
 });
 
-KingsRoad.Road.AddEncounter({
+KingsRoadLoc.Road.AddEncounter({
 	nameStr : "Lynx",
 	func    : function() {
 		return Scenes.Felines.LynxEnc(3);
@@ -95,7 +95,7 @@ KingsRoad.Road.AddEncounter({
 	visible : true, enabled : true, hunt : true
 });
 
-KingsRoad.Road.AddEncounter({
+KingsRoadLoc.Road.AddEncounter({
 	nameStr : "Equines",
 	func    : function() {
 		return Scenes.Equine.PairEnc(4);
@@ -103,4 +103,4 @@ KingsRoad.Road.AddEncounter({
 	visible : true, enabled : true, hunt : true
 });
 
-export { KingsRoad };
+export { KingsRoadLoc };

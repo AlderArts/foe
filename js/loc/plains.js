@@ -7,6 +7,7 @@
 import { Event, Link, EncounterTable } from '../event';
 import { Nomads } from './nomads';
 import { Scenes } from '../scenes';
+import { BurrowsLoc } from './burrows';
 
 // Create namespace
 let PlainsLoc = {
@@ -235,6 +236,19 @@ PlainsLoc.Crossroads.links.push(new Link(
 		MoveToLocation(world.loc.Desert.Drylands, {hour: 2});
 	}
 ));
+PlainsLoc.Crossroads.links.push(new Link(
+	"Burrows", function() { return burrows.flags["Access"] != Burrows.AccessFlags.Unknown; }, true,
+	function() {
+		if(burrows.flags["Access"] != Burrows.AccessFlags.Unknown) {
+			Text.NL();
+			Text.Add("You know how to find the Burrows, should you want to.");
+		}
+	},
+	function() {
+		MoveToLocation(BurrowsLoc.Entrance, {minute: 30});
+	}
+));
+
 
 // Add initial event, only trigger 7-17
 PlainsLoc.Crossroads.enc.AddEnc(function() {

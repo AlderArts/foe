@@ -6,6 +6,13 @@
 
 import { Event, Link } from '../event';
 
+let world = null;
+
+export function InitGlade(w) {
+	world = w;
+	world.SaveSpots["Dryads"] = GladeLoc;
+};
+
 let DryadGladeScenes = {};
 
 function DryadGlade(storage) {
@@ -44,7 +51,6 @@ DryadGlade.prototype.OrchidSlut = function() {
 
 let GladeLoc = new Event("Dryads' glade");
 
-world.SaveSpots["Dryads"] = GladeLoc;
 GladeLoc.SaveSpot = "Dryads";
 GladeLoc.safe = function() { return true; };
 GladeLoc.description = function() {

@@ -221,7 +221,7 @@ FarmLoc.Loft.SleepFunc = function() {
  * FARM INTRO SEGMENT
  * ----------------------
  */
-FarmScenesIntro = {};
+let FarmScenesIntro = {};
 
 
 FarmScenesIntro.Start = function() {
