@@ -19,7 +19,7 @@ import { FeraScenes } from "./event/fera";
 import { MirandaScenes } from "./event/miranda";
 import { GlobalScenes } from "./event/global";
 import { TerryScenes } from "./event/terry";
-import { KiakaiScenes } from "./event/kiakai";
+import { KiakaiScenes } from "./event/kiakai-scenes";
 import { HalloweenScenes } from "./event/halloween";
 import { FarmScenes } from "./loc/farm";
 import { DryadGladeScenes } from "./loc/glade";

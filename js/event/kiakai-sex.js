@@ -1,4 +1,5 @@
 import { Gender } from "../body/gender";
+import { Kiakai } from "./kiakai";
 
 /*
  * 

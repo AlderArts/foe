@@ -6,6 +6,8 @@
 import { Entity } from '../entity';
 import { Link } from '../event';
 import { Gender } from '../body/gender';
+import { JobDesc } from '../job';
+import { Time } from '../time';
 
 let MirandaScenes = {};
 
@@ -2658,12 +2660,13 @@ MirandaScenes.MaidensBaneNasty = function() {
 }
 
 world.loc.Rigard.Tavern.common.events.push(new Link("Miranda", function() { return miranda.IsAtLocation(); }, true,
-function() {
-	if(miranda.IsAtLocation())
-		Text.Add("Miranda is lounging at a table in the shady tavern. ");
-},
-MirandaScenes.MaidensBaneTalk,
-"Miranda is lounging at a table in the shady tavern."));
+	function() {
+		if(miranda.IsAtLocation())
+			Text.Add("Miranda is lounging at a table in the shady tavern. ");
+	},
+	MirandaScenes.MaidensBaneTalk,
+	"Miranda is lounging at a table in the shady tavern.")
+);
 
 MirandaScenes.TerryChaseHome = function() {
 	var parse = {
