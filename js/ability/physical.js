@@ -5,6 +5,7 @@
  */
 import { AbilityNode } from './node';
 import { Ability, Abilities, TargetMode } from '../ability';
+import { GetAggroEntry } from '../entity-combat';
 
 Abilities.Physical = {};
 

@@ -3,12 +3,11 @@ import { Event, Link } from '../event';
 import { Maze } from '../maze';
 import { GetDEBUG } from '../../app';
 import { Halloween } from '../event/halloween';
-import { getWorld } from '../worldobj';
 
 //
 // Nomads
 //
-let world = getWorld();
+let world = null;
 
 let Nomads = {
 	Tent       : new Event("Tent"), // Start area

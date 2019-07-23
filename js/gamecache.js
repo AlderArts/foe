@@ -2,8 +2,6 @@ import { Gui } from './gui';
 import { SAVE_VERSION } from '../app';
 import { Season } from './time';
 
-import { world } from './world';
-
 import { Intro } from './event/introduction';
 
 import { Rigard } from './loc/rigard/rigard';
@@ -71,9 +69,8 @@ import { Aria } from './event/aria';
 import { Sylistraxia } from './event/sylistraxia';
 import { Ches } from './event/brothel/ches';
 import { ExplorationSetGAME } from './exploration';
-import { setWorld } from './worldobj';
 
-setWorld(world);
+let world = null;
 
 let gameCache = {};
 let GAME = {};

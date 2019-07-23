@@ -7,11 +7,10 @@
 import { Event, Link } from '../event';
 import { GameState } from '../gamestate';
 import { Gui } from '../gui';
-import { getWorld } from '../worldobj';
 
 let Intro = {};
 
-let world = getWorld();
+let world = null;
 
 /*
  * Introductory scene (start of game). Entry into the attic
@@ -1841,7 +1840,10 @@ let LightAspect = {
 //
 // Light aspect dimension
 //
-world.SaveSpots["LightAspect"] = LightAspect.Garden;
+function IntroInit(w) {
+	world = w;
+	world.SaveSpots["LightAspect"] = LightAspect.Garden;
+}
 LightAspect.Garden.SaveSpot = "LightAspect";
 LightAspect.Garden.safe = function() { return true; };
 LightAspect.Garden.description = function() {
@@ -2784,4 +2786,4 @@ Intro.Finalizing = function() {
 	Gui.NextPrompt(Gui.PrintDefaultOptions);
 }
 
-export { Intro, DarkAspect, LightAspect };
+export { Intro, DarkAspect, LightAspect, IntroInit };

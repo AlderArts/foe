@@ -35,7 +35,9 @@ let world = {
 	},
 	EntityStorage : new Array(),
 	SaveSpots     : {},
-}
+};
+
+IntroInit(world);
 
 
 world.Locations = {

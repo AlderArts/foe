@@ -9,6 +9,13 @@ import { PregnancyHandler } from './pregnancy';
 import { LactationHandler } from './lactation';
 import { AbilityCollection, DamageType } from './ability';
 import { GetDEBUG } from '../app';
+import { EntityCombat } from './entity-combat';
+import { EntityMenu } from './entity-menu';
+import { EntitySave } from './entity-save';
+import { EntityDict } from './entity-dict';
+import { EntityDesc, LowerBodyType } from './entity-desc';
+import { EntityGrammar } from './entity-grammar';
+import { EntitySex } from './entity-sex';
 
 // TODO: Should have shared features, such as combat stats. Body representation
 function Entity() {
@@ -490,5 +497,465 @@ Entity.prototype.DebugMode = function(debug) {
 	if(debug)
 		this.RestFull();
 }
+
+/* COMBAT RELATED FUNTIONS */
+Entity.prototype.Act = EntityCombat.Act;
+Entity.prototype.FinishCastInternal = EntityCombat.FinishCastInternal;
+Entity.prototype.CanBeInterrupted = EntityCombat.CanBeInterrupted;
+Entity.prototype.GetCombatEntry = EntityCombat.GetCombatEntry;
+Entity.prototype.GetPartyTarget = EntityCombat.GetPartyTarget;
+Entity.prototype.GetSingleTarget = EntityCombat.GetSingleTarget;
+Entity.prototype.HP = EntityCombat.HP;
+Entity.prototype.SP = EntityCombat.SP;
+Entity.prototype.Lust = EntityCombat.Lust;
+Entity.prototype.MinLust = EntityCombat.MinLust;
+Entity.prototype.Str = EntityCombat.Str;
+Entity.prototype.Sta = EntityCombat.Sta;
+Entity.prototype.Dex = EntityCombat.Dex;
+Entity.prototype.Int = EntityCombat.Int;
+Entity.prototype.Spi = EntityCombat.Spi;
+Entity.prototype.Lib = EntityCombat.Lib;
+Entity.prototype.Cha = EntityCombat.Cha;
+Entity.prototype.Incapacitated = EntityCombat.Incapacitated;
+Entity.prototype.Inhibited = EntityCombat.Inhibited;
+Entity.prototype.AddHPFraction = EntityCombat.AddHPFraction;
+Entity.prototype.AddSPFraction = EntityCombat.AddSPFraction;
+Entity.prototype.AddLustFraction = EntityCombat.AddLustFraction;
+Entity.prototype.PhysDmgHP = EntityCombat.PhysDmgHP;
+Entity.prototype.AddHPAbs = EntityCombat.AddHPAbs;
+Entity.prototype.AddSPAbs = EntityCombat.AddSPAbs;
+Entity.prototype.AddLustAbs = EntityCombat.AddLustAbs;
+Entity.prototype.RestFull = EntityCombat.RestFull;
+Entity.prototype.Sleep = EntityCombat.Sleep;
+Entity.prototype.HPLevel = EntityCombat.HPLevel;
+Entity.prototype.SPLevel = EntityCombat.SPLevel;
+Entity.prototype.LustLevel = EntityCombat.LustLevel;
+Entity.prototype.ClearCombatBonuses = EntityCombat.ClearCombatBonuses;
+Entity.prototype.BalanceStats = EntityCombat.BalanceStats;
+Entity.prototype.AddLustOverTime = EntityCombat.AddLustOverTime;
+Entity.prototype.LustCombatEfficiencyLevel = EntityCombat.LustCombatEfficiencyLevel;
+Entity.prototype.LustCombatTurnLossChance = EntityCombat.LustCombatTurnLossChance;
+Entity.prototype.Initiative = EntityCombat.Initiative;
+Entity.prototype.PAttack = EntityCombat.PAttack;
+Entity.prototype.PDefense = EntityCombat.PDefense;
+Entity.prototype.PHit = EntityCombat.PHit;
+Entity.prototype.PEvade = EntityCombat.PEvade;
+Entity.prototype.MAttack = EntityCombat.MAttack;
+Entity.prototype.MDefense = EntityCombat.MDefense;
+Entity.prototype.MHit = EntityCombat.MHit;
+Entity.prototype.MEvade = EntityCombat.MEvade;
+Entity.prototype.LAttack = EntityCombat.LAttack;
+Entity.prototype.LDefense = EntityCombat.LDefense;
+Entity.prototype.LHit = EntityCombat.LHit;
+Entity.prototype.LEvade = EntityCombat.LEvade;
+Entity.prototype.Resistance = EntityCombat.Resistance;
+Entity.prototype.AddResistanceWear = EntityCombat.AddResistanceWear;
+
+/* ENTITY MENU */
+Entity.prototype.InteractDefault = EntityMenu.InteractDefault;
+Entity.prototype.LevelUpPrompt = EntityMenu.LevelUpPrompt;
+Entity.prototype.EquipPrompt = EntityMenu.EquipPrompt;
+Entity.prototype.JobPrompt = EntityMenu.JobPrompt;
+
+/* ENTITY SAVE */
+Entity.prototype.SaveSexFlags = EntitySave.SaveSexFlags;
+Entity.prototype.SaveCombatStats = EntitySave.SaveCombatStats;
+Entity.prototype.SaveStatusEffects = EntitySave.SaveStatusEffects;
+Entity.prototype.SavePersonalityStats = EntitySave.SavePersonalityStats;
+Entity.prototype.SaveFlags = EntitySave.SaveFlags;
+Entity.prototype.SavePerks = EntitySave.SavePerks;
+Entity.prototype.SaveRecipes = EntitySave.SaveRecipes;
+Entity.prototype.SaveJobs = EntitySave.SaveJobs;
+Entity.prototype.SaveEquipment = EntitySave.SaveEquipment;
+Entity.prototype.SavePregnancy = EntitySave.SavePregnancy;
+Entity.prototype.SaveLactation = EntitySave.SaveLactation;
+Entity.prototype.SaveBodyPartial = EntitySave.SaveBodyPartial;
+Entity.prototype.ToStorage = EntitySave.ToStorage;
+Entity.prototype.LoadCombatStats = EntitySave.LoadCombatStats;
+Entity.prototype.LoadStatusEffects = EntitySave.LoadStatusEffects;
+Entity.prototype.LoadPersonalityStats = EntitySave.LoadPersonalityStats;
+Entity.prototype.LoadRecipes = EntitySave.LoadRecipes;
+Entity.prototype.LoadJobs = EntitySave.LoadJobs;
+Entity.prototype.LoadEquipment = EntitySave.LoadEquipment;
+Entity.prototype.LoadFlags = EntitySave.LoadFlags;
+Entity.prototype.LoadSexFlags = EntitySave.LoadSexFlags;
+Entity.prototype.LoadPerks = EntitySave.LoadPerks;
+Entity.prototype.LoadPregnancy = EntitySave.LoadPregnancy;
+Entity.prototype.LoadLactation = EntitySave.LoadLactation;
+Entity.prototype.FromStorage = EntitySave.FromStorage;
+Entity.prototype.RecallAbilities = EntitySave.RecallAbilities;
+
+/* ENTITY DICT */
+Entity.prototype.UniqueId = EntityDict.UniqueId;
+Entity.IdToEntity = EntityDict.IdToEntity;
+
+/* ENTITY DESC */
+Entity.prototype.PrintDescription = EntityDesc.PrintDescription;
+
+// TODO: affect with lust/perks?
+Entity.prototype.SubDom = function() {
+	return this.subDom.Get();
+}
+Entity.prototype.Relation = function() {
+	return this.relation.Get();
+}
+Entity.prototype.Slut = function() {
+	return this.slut.Get();
+}
+
+Entity.prototype.Gender = function() {
+	return this.body.Gender();
+}
+Entity.prototype.Race = function() {
+	return this.body.torso.race;
+}
+
+Entity.prototype.MuscleTone = function() {
+	return this.body.muscleTone.Get();
+}
+Entity.prototype.BodyMass = function() {
+	return this.body.bodyMass.Get();
+}
+
+Entity.prototype.Height = function() {
+	return this.body.height.Get();
+}
+Entity.prototype.Weigth = function() {
+	return this.body.weigth.Get();
+}
+
+Entity.prototype.Humanity = function() {
+	var racescore = new RaceScore(this.body);
+	var humanScore = new RaceScore();
+	humanScore.score[Race.Human.id] = 1;
+	return racescore.Compare(humanScore);
+}
+Entity.prototype.RaceCompare = function(race) {
+	var racescore = new RaceScore(this.body);
+	return racescore.SumScore(race);
+}
+Entity.prototype.Femininity = function() {
+	return this.body.femininity.Get();
+}
+Entity.prototype.FaceDesc = function() {
+	return this.body.FaceDesc();
+}
+Entity.prototype.SkinDesc = function() {
+	return this.body.SkinDesc();
+}
+Entity.prototype.SkinType = function() {
+	return this.body.torso.race;
+}
+Entity.prototype.LipsDesc = function() {
+	return this.body.LipsDesc();
+}
+Entity.prototype.TongueDesc = function() {
+	return this.body.TongueDesc();
+}
+Entity.prototype.TongueTipDesc = function() {
+	return this.body.TongueTipDesc();
+}
+Entity.prototype.LongTongue = function() {
+	return this.body.LongTongue();
+}
+Entity.prototype.Hair = function() {
+	return this.body.head.hair;
+}
+Entity.prototype.HasHair = function() {
+	return this.body.head.hair.Bald() == false;
+}
+Entity.prototype.HasLongHair = function() {
+	return this.body.head.hair.Bald() == false; //TODO
+}
+Entity.prototype.Face = function() {
+	return this.body.head;
+}
+Entity.prototype.Mouth = function() {
+	return this.body.head.mouth;
+}
+Entity.prototype.Tongue = function() {
+	return this.body.head.mouth.tongue;
+}
+Entity.prototype.Eyes = function() {
+	return this.body.head.eyes;
+}
+Entity.prototype.EyeDesc = function() {
+	return this.body.EyeDesc();
+}
+Entity.prototype.Ears = function() {
+	return this.body.head.ears;
+}
+Entity.prototype.EarDesc = function() {
+	return this.body.EarDesc();
+}
+Entity.prototype.HasFlexibleEars = function() {
+	return this.body.HasFlexibleEars();
+}
+Entity.prototype.HasMuzzle = function() {
+	return this.body.HasMuzzle();
+}
+Entity.prototype.HasLongSnout = function() {
+	return this.body.HasLongSnout();
+}
+Entity.prototype.Arms = function() {
+	return this.body.arms;
+}
+Entity.prototype.MultiArm = function() {
+	return this.body.arms.count > 2;
+}
+Entity.prototype.Legs = function() {
+	return this.body.legs;
+}
+Entity.prototype.LowerBodyType = function() {
+	if     (this.body.legs.count <  2) return LowerBodyType.Single;
+	else if(this.body.legs.count == 2) return LowerBodyType.Humanoid;
+	else                               return LowerBodyType.Taur;
+}
+Entity.prototype.NumLegs = function() {
+	return this.body.legs.count;
+}
+Entity.prototype.Humanoid = function() {
+	return this.LowerBodyType() == LowerBodyType.Humanoid;
+}
+Entity.prototype.HasLegs = function() {
+	return (this.body.legs.count >= 2);
+}
+Entity.prototype.IsNaga = function() {
+	return (this.body.legs.count < 2) &&
+		(this.body.legs.race.isRace(Race.Snake));
+}
+Entity.prototype.IsTaur = function() {
+	return this.LowerBodyType() == LowerBodyType.Taur;
+}
+Entity.prototype.IsGoo = function() {
+	return (this.body.legs.race.isRace(Race.Goo));
+}
+Entity.prototype.IsFlexible = function() {
+	return this.body.IsFlexible(); //TODO Perks
+}
+Entity.prototype.Butt = function() {
+	return this.body.ass;
+}
+Entity.prototype.HasBalls = function() {
+	return this.Balls().count.Get() > 0;
+}
+Entity.prototype.Balls = function() {
+	return this.body.balls;
+}
+Entity.prototype.BallsDesc = function() {
+	return this.Balls().Short();
+}
+Entity.prototype.Virility = function() {
+	return this.body.balls.fertility.Get();
+}
+Entity.prototype.HasFur = function() {
+	return this.body.HasFur();
+}
+Entity.prototype.HasSkin = function() {
+	return this.body.HasSkin();
+}
+Entity.prototype.HasScales = function() {
+	return this.body.HasScales();
+}
+
+Entity.prototype.LactationDesc = function(parse) {
+	
+}
+Entity.prototype.StomachDesc = function() {
+	var bellysize = this.pregHandler.BellySize();
+	return this.body.StomachDesc(bellysize);
+}
+Entity.prototype.HipDesc = function() {
+	return this.body.HipsDesc();
+}
+Entity.prototype.HipsDesc = function() {
+	return this.body.HipsDesc(true);
+}
+Entity.prototype.HipSize = function() {
+	return this.body.HipSize();
+}
+// TODO
+Entity.prototype.ArmDesc = function() {
+	return this.body.ArmDesc();
+}
+Entity.prototype.HandDesc = function() {
+	return this.body.HandDesc();
+}
+Entity.prototype.PalmDesc = function() {
+	return this.body.PalmDesc();
+}
+Entity.prototype.LegDesc = function() {
+	return this.body.LegDesc();
+}
+Entity.prototype.LegsDesc = function() {
+	return this.body.LegsDesc();
+}
+Entity.prototype.ThighDesc = function() {
+	return this.body.ThighDesc();
+}
+Entity.prototype.ThighsDesc = function() {
+	return this.body.ThighsDesc();
+}
+Entity.prototype.KneeDesc = function() {
+	return this.body.KneesDesc();
+}
+Entity.prototype.KneesDesc = function() {
+	return this.body.KneesDesc(true);
+}
+Entity.prototype.FeetDesc = function() {
+	return this.body.FeetDesc();
+}
+Entity.prototype.FootDesc = function() {
+	return this.body.FootDesc();
+}
+Entity.prototype.Appendages = function() {
+	return this.body.head.appendages;
+}
+Entity.prototype.HasNightvision = function() {
+	return this.body.HasNightvision();
+}
+Entity.prototype.HasHorns = function() {
+	for(var i = 0; i < this.body.head.appendages.length; i++)
+		if(this.body.head.appendages[i].type == AppendageType.horn)
+			return this.body.head.appendages[i];
+	return null;
+}
+Entity.prototype.HasAntenna = function() {
+	for(var i = 0; i < this.body.head.appendages.length; i++)
+		if(this.body.head.appendages[i].type == AppendageType.antenna)
+			return this.body.head.appendages[i];
+	return null;
+}
+Entity.prototype.Back = function() {
+	return this.body.backSlots;
+}
+Entity.prototype.HasTail = function() {
+	for(var i = 0; i < this.body.backSlots.length; i++)
+		if(this.body.backSlots[i].type == AppendageType.tail)
+			return this.body.backSlots[i];
+	return null;
+}
+Entity.prototype.HasPrehensileTail = function() {
+	var found = false;
+	for(var i = 0; i < this.body.backSlots.length; i++)
+		if(this.body.backSlots[i].type == AppendageType.tail)
+			found = found || this.body.backSlots[i].Prehensile();
+	return found;
+}
+Entity.prototype.HasWings = function() {
+	for(var i = 0; i < this.body.backSlots.length; i++)
+		if(this.body.backSlots[i].type == AppendageType.wing)
+			return this.body.backSlots[i];
+	return null;
+}
+Entity.prototype.NumAttributes = function(race) {
+	return this.body.NumAttributes(race);
+}
+
+// TODO
+Entity.prototype.Weapon = function() {
+	return this.weaponSlot;
+}
+// TODO
+Entity.prototype.WeaponDesc = function() {
+	return this.weaponSlot ? this.weaponSlot.sDesc() : "stick";
+}
+// TODO
+Entity.prototype.WeaponDescLong = function() {
+	return this.weaponSlot ? this.weaponSlot.lDesc() : "a stick";
+}
+// TODO
+Entity.prototype.Armor = function() {
+	return this.topArmorSlot;
+}
+// TODO
+Entity.prototype.LowerArmor = function() {
+	return this.botArmorSlot;
+}
+// TODO
+Entity.prototype.LowerArmorDesc = function() {
+	return this.botArmorSlot ? this.botArmorSlot.sDesc() : this.ArmorDesc();
+}
+// TODO
+Entity.prototype.LowerArmorDescLong = function() {
+	return this.botArmorSlot ? this.botArmorSlot.lDesc() : this.ArmorDescLong();
+}
+// TODO
+Entity.prototype.ArmorDesc = function() {
+	return this.topArmorSlot ? this.topArmorSlot.sDesc() : "comfortable clothes";
+}
+Entity.prototype.ArmorDescLong = function() {
+	return this.topArmorSlot ? this.topArmorSlot.lDesc() : "a set of comfortable clothes";
+}
+Entity.prototype.Accessories = function() {
+	return [this.acc1Slot, this.acc2Slot];
+}
+
+/* ENTITY GRAMMAR */
+Entity.prototype.nameDesc = EntityGrammar.nameDesc;
+Entity.prototype.NameDesc = EntityGrammar.NameDesc;
+Entity.prototype.possessive = EntityGrammar.possessive;
+Entity.prototype.Possessive = EntityGrammar.Possessive;
+Entity.prototype.possessivePlural = EntityGrammar.possessivePlural;
+Entity.prototype.PossessivePlural = EntityGrammar.PossessivePlural;
+Entity.prototype.heshe = EntityGrammar.heshe;
+Entity.prototype.HeShe = EntityGrammar.HeShe;
+Entity.prototype.himher = EntityGrammar.himher;
+Entity.prototype.HimHer = EntityGrammar.HimHer;
+Entity.prototype.hisher = EntityGrammar.hisher;
+Entity.prototype.HisHer = EntityGrammar.HisHer;
+Entity.prototype.hishers = EntityGrammar.hishers;
+Entity.prototype.has = EntityGrammar.has;
+Entity.prototype.is = EntityGrammar.is;
+Entity.prototype.plural = EntityGrammar.plural;
+Entity.prototype.mfFem = EntityGrammar.mfFem;
+Entity.prototype.mfTrue = EntityGrammar.mfTrue;
+Entity.prototype.ParserPronouns = EntityGrammar.ParserPronouns;
+Entity.prototype.ParserTags = EntityGrammar.ParserTags;
+Entity.prototype.toString = EntityGrammar.toString;
+Entity.prototype.Appearance = EntityGrammar.Appearance;
+
+/* ENTITY SEX */
+Entity.prototype.Genitalia = EntitySex.Genitalia;
+Entity.prototype.VagCap = EntitySex.VagCap;
+Entity.prototype.OralCap = EntitySex.OralCap;
+Entity.prototype.AnalCap = EntitySex.AnalCap;
+Entity.prototype.ResetVirgin = EntitySex.ResetVirgin;
+Entity.prototype.NumCocks = EntitySex.NumCocks;
+Entity.prototype.FirstCock = EntitySex.FirstCock;
+Entity.prototype.FirstClitCockIdx = EntitySex.FirstClitCockIdx;
+Entity.prototype.BiggestCock = EntitySex.BiggestCock;
+Entity.prototype.CocksThatFit = EntitySex.CocksThatFit;
+Entity.prototype.AllCocksCopy = EntitySex.AllCocksCopy;
+Entity.prototype.AllCocks = EntitySex.AllCocks;
+Entity.prototype.MultiCockDesc = EntitySex.MultiCockDesc;
+Entity.prototype.NumVags = EntitySex.NumVags;
+Entity.prototype.FirstVag = EntitySex.FirstVag;
+Entity.prototype.VagsThatFit = EntitySex.VagsThatFit;
+Entity.prototype.AllVags = EntitySex.AllVags;
+Entity.prototype.UnfertilezedWomb = EntitySex.UnfertilezedWomb;
+Entity.prototype.NumBreastRows = EntitySex.NumBreastRows;
+Entity.prototype.FirstBreastRow = EntitySex.FirstBreastRow;
+Entity.prototype.AllBreastRows = EntitySex.AllBreastRows;
+Entity.prototype.BiggestBreasts = EntitySex.BiggestBreasts;
+Entity.prototype.SmallestBreasts = EntitySex.SmallestBreasts;
+Entity.prototype.BiggestNips = EntitySex.BiggestNips;
+Entity.prototype.SmallestNips = EntitySex.SmallestNips;
+Entity.prototype.NipplesThatFitLen = EntitySex.NipplesThatFitLen;
+Entity.prototype.AllOrfices = EntitySex.AllOrfices;
+Entity.prototype.AllPenetrators = EntitySex.AllPenetrators;
+Entity.prototype.Lactation = EntitySex.Lactation;
+Entity.prototype.Milk = EntitySex.Milk;
+Entity.prototype.MilkCap = EntitySex.MilkCap;
+Entity.prototype.LactationProgress = EntitySex.LactationProgress;
+Entity.prototype.Fuck = EntitySex.Fuck;
+Entity.prototype.FuckOral = EntitySex.FuckOral;
+Entity.prototype.FuckAnal = EntitySex.FuckAnal;
+Entity.prototype.FuckVag = EntitySex.FuckVag;
+Entity.prototype.Sexed = EntitySex.Sexed;
+Entity.prototype.RestoreCum = EntitySex.RestoreCum;
+Entity.prototype.Cum = EntitySex.Cum;
+Entity.prototype.CumOutput = EntitySex.CumOutput;
+Entity.prototype.OrgasmCum = EntitySex.OrgasmCum;
 
 export { Entity, DrunkLevel };

@@ -7,6 +7,7 @@
  */
 import { AbilityNode } from './node';
 import { Ability, Abilities, TargetMode } from '../ability';
+import { GetAggroEntry } from '../entity-combat';
 
 Abilities.Seduction.Tease = new Ability("Tease");
 Abilities.Seduction.Tease.Short = function() { return "Raises the lust of target."; }
