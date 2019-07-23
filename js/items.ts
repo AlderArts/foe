@@ -8,6 +8,9 @@ import { QuestItems } from './items/quest';
 import { StrapOnItems } from './items/strapon';
 import { ToysItems } from './items/toys';
 import { WeaponsItems } from './items/weapons';
+import { IngredientItems } from './items/ingredients';
+import { AlchemyItems } from './items/alchemy';
+import { AlchemySpecial } from './items/alchemyspecial';
 
 // Namespace that item prototypes are kept in
 let Items = {
@@ -19,6 +22,10 @@ let Items = {
     StrapOn : StrapOnItems,
     Toys : ToysItems,
     Weapons : WeaponsItems,
+
+    Ingredients : IngredientItems,
+    Alchemy : AlchemyItems,
+    AlchemySp : AlchemySpecial,
 
     Halloween : HalloweenItems,
 };

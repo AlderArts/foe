@@ -1,18 +1,27 @@
 import { TF, TFItem } from '../tf';
 import { Genitalia } from '../body/genitalia';
 import { HipSize } from '../body/body';
+import { AlchemyItems } from './alchemy';
+import { IngredientItems } from './ingredients';
+import { Race } from '../body/race';
+import { Color } from '../body/color';
+import { Cock } from '../body/cock';
+import { Vagina } from '../body/vagina';
+import { EncounterTable } from '../event';
 
-Items.EquiniumPlus = new TFItem("equin+", "Equinium+");
-Items.EquiniumPlus.price = 100;
-Items.EquiniumPlus.lDesc = function() { return "a bottle of Equinium+"; }
-Items.EquiniumPlus.Short = function() { return "A bottle of Equinium+"; }
-Items.EquiniumPlus.Long = function() { return "A bottle of Equinium, potent enough to significantly change your body. The fluid inside is creamy, smelling of male musk."; }
+let AlchemySpecial = {};
+
+AlchemySpecial.EquiniumPlus = new TFItem("equin+", "Equinium+");
+AlchemySpecial.EquiniumPlus.price = 100;
+AlchemySpecial.EquiniumPlus.lDesc = function() { return "a bottle of Equinium+"; }
+AlchemySpecial.EquiniumPlus.Short = function() { return "A bottle of Equinium+"; }
+AlchemySpecial.EquiniumPlus.Long = function() { return "A bottle of Equinium, potent enough to significantly change your body. The fluid inside is creamy, smelling of male musk."; }
 //TODO recipe
-Items.EquiniumPlus.recipe = [{it: Items.Equinium, num: 3}, {it: Items.HorseHair}, {it: Items.HorseCum}];
+AlchemySpecial.EquiniumPlus.recipe = [{it: AlchemyItems.Equinium, num: 3}, {it: IngredientItems.HorseHair}, {it: IngredientItems.HorseCum}];
 // Effects
-Items.EquiniumPlus.PushEffect(TF.ItemEffects.SetEars, {odds: 0.8, race: Race.Horse, str: "equine ears"});
-Items.EquiniumPlus.PushEffect(TF.ItemEffects.SetTail, {odds: 0.8, race: Race.Horse, color: Color.brown, str: "a brown, bushy horse tail"});
-Items.EquiniumPlus.PushEffect(function(target) {
+AlchemySpecial.EquiniumPlus.PushEffect(TF.ItemEffects.SetEars, {odds: 0.8, race: Race.Horse, str: "equine ears"});
+AlchemySpecial.EquiniumPlus.PushEffect(TF.ItemEffects.SetTail, {odds: 0.8, race: Race.Horse, color: Color.brown, str: "a brown, bushy horse tail"});
+AlchemySpecial.EquiniumPlus.PushEffect(function(target) {
 	var parse = {
 		name: target.NameDesc(),
 		s: target == player ? "" : "s",
@@ -64,45 +73,45 @@ Items.EquiniumPlus.PushEffect(function(target) {
 	}
 	Text.Flush();
 });
-Items.EquiniumPlus.PushEffect(TF.ItemEffects.SetCover, {odds: 0.8, value: Genitalia.Cover.Sheath});
-Items.EquiniumPlus.PushEffect(TF.ItemEffects.SetBalls, {ideal: 2, count: 2});
-Items.EquiniumPlus.PushEffect(TF.ItemEffects.IncStr, {odds: 0.4, ideal: 50, max: 3});
-Items.EquiniumPlus.PushEffect(TF.ItemEffects.IncSta, {odds: 0.4, ideal: 50, max: 3});
-Items.EquiniumPlus.PushEffect(TF.ItemEffects.DecInt, {odds: 0.2, ideal: 20, max: 1});
-Items.EquiniumPlus.PushEffect(TF.ItemEffects.DecDex, {odds: 0.2, ideal: 20, max: 1});
-Items.EquiniumPlus.PushEffect(TF.ItemEffects.SetBody, {odds: 0.4, race: Race.Horse, str: "an equine shape"});
-Items.EquiniumPlus.PushEffect(TF.ItemEffects.SetFace, {odds: 0.3, race: Race.Horse, str: "a horse-like face"});
-Items.EquiniumPlus.PushEffect(TF.ItemEffects.SetArms, {odds: 0.3, race: Race.Horse, str: "furred equine arms"});
-Items.EquiniumPlus.PushEffect(TF.ItemEffects.SetLegs, {odds: 0.3, race: Race.Horse, str: "furred equine legs, with hooves"});
-Items.EquiniumPlus.PushEffect(TF.ItemEffects.DecFem, {odds: 0.3, ideal: -1, max: .2, male: true});
-Items.EquiniumPlus.PushEffect(TF.ItemEffects.IncTone, {odds: 0.3, ideal: 1, max: .1 });
-Items.EquiniumPlus.PushEffect(TF.ItemEffects.DecHips, {odds: 0.2, ideal: HipSize.Medium, max: 1});
+AlchemySpecial.EquiniumPlus.PushEffect(TF.ItemEffects.SetCover, {odds: 0.8, value: Genitalia.Cover.Sheath});
+AlchemySpecial.EquiniumPlus.PushEffect(TF.ItemEffects.SetBalls, {ideal: 2, count: 2});
+AlchemySpecial.EquiniumPlus.PushEffect(TF.ItemEffects.IncStr, {odds: 0.4, ideal: 50, max: 3});
+AlchemySpecial.EquiniumPlus.PushEffect(TF.ItemEffects.IncSta, {odds: 0.4, ideal: 50, max: 3});
+AlchemySpecial.EquiniumPlus.PushEffect(TF.ItemEffects.DecInt, {odds: 0.2, ideal: 20, max: 1});
+AlchemySpecial.EquiniumPlus.PushEffect(TF.ItemEffects.DecDex, {odds: 0.2, ideal: 20, max: 1});
+AlchemySpecial.EquiniumPlus.PushEffect(TF.ItemEffects.SetBody, {odds: 0.4, race: Race.Horse, str: "an equine shape"});
+AlchemySpecial.EquiniumPlus.PushEffect(TF.ItemEffects.SetFace, {odds: 0.3, race: Race.Horse, str: "a horse-like face"});
+AlchemySpecial.EquiniumPlus.PushEffect(TF.ItemEffects.SetArms, {odds: 0.3, race: Race.Horse, str: "furred equine arms"});
+AlchemySpecial.EquiniumPlus.PushEffect(TF.ItemEffects.SetLegs, {odds: 0.3, race: Race.Horse, str: "furred equine legs, with hooves"});
+AlchemySpecial.EquiniumPlus.PushEffect(TF.ItemEffects.DecFem, {odds: 0.3, ideal: -1, max: .2, male: true});
+AlchemySpecial.EquiniumPlus.PushEffect(TF.ItemEffects.IncTone, {odds: 0.3, ideal: 1, max: .1 });
+AlchemySpecial.EquiniumPlus.PushEffect(TF.ItemEffects.DecHips, {odds: 0.2, ideal: HipSize.Medium, max: 1});
 
 
 
 //TODO
-Items.Tigris = new TFItem("felin+0", "Tigris");
-Items.Tigris.price = 100;
-Items.Tigris.lDesc = function() { return "a bottle of Tigris"; }
-Items.Tigris.Short = function() { return "A bottle of Tigris"; }
-Items.Tigris.Long = function() { return "A bottle labeled Tigris, with the picture of a large cat on it. The fluid within is a strange mixture of black and orange."; }
+AlchemySpecial.Tigris = new TFItem("felin+0", "Tigris");
+AlchemySpecial.Tigris.price = 100;
+AlchemySpecial.Tigris.lDesc = function() { return "a bottle of Tigris"; }
+AlchemySpecial.Tigris.Short = function() { return "A bottle of Tigris"; }
+AlchemySpecial.Tigris.Long = function() { return "A bottle labeled Tigris, with the picture of a large cat on it. The fluid within is a strange mixture of black and orange."; }
 //TODO ingredients
-Items.Tigris.recipe = [{it: Items.Felinix}, {it: Items.HairBall}, {it: Items.CatClaw}];
+AlchemySpecial.Tigris.recipe = [{it: AlchemyItems.Felinix}, {it: IngredientItems.HairBall}, {it: IngredientItems.CatClaw}];
 // Effects
-Items.Tigris.PushEffect(TF.ItemEffects.SetTongue, {odds: 0.4, race: Race.Feline, str: "rough, cat-like tongue"});
-Items.Tigris.PushEffect(TF.ItemEffects.SetBody, {odds: 0.4, race: Race.Tiger, str: "a feline shape, complete with fur"});
-Items.Tigris.PushEffect(TF.ItemEffects.SetFace, {odds: 0.3, race: Race.Tiger, str: "a cat-like face"});
-Items.Tigris.PushEffect(TF.ItemEffects.SetArms, {odds: 0.3, race: Race.Tiger, str: "furred cat arms, with soft paws"});
-Items.Tigris.PushEffect(TF.ItemEffects.SetLegs, {odds: 0.3, race: Race.Tiger, str: "furred cat legs, with soft paws"});
-Items.Tigris.PushEffect(TF.ItemEffects.SetCock, {odds: 0.6, race: Race.Tiger, str: "a feline cock"});
-Items.Tigris.PushEffect(TF.ItemEffects.SetEars, {odds: 0.6, race: Race.Tiger, str: "fluffy cat ears"});
-Items.Tigris.PushEffect(TF.ItemEffects.SetTail, {odds: 0.6, race: Race.Tiger, color: Color.orange, str: "a striped, flexible feline tail"});
-Items.Tigris.PushEffect(TF.ItemEffects.IncDex, {odds: 0.3, ideal: 35, max: 2});
-Items.Tigris.PushEffect(TF.ItemEffects.IncStr, {odds: 0.5, ideal: 45, max: 2});
-Items.Tigris.PushEffect(TF.ItemEffects.IncCha, {odds: 0.3, ideal: 25, max: 2});
-Items.Tigris.PushEffect(TF.ItemEffects.IncSta, {odds: 0.2, ideal: 40, max: 2});
-Items.Tigris.PushEffect(TF.ItemEffects.DecInt, {odds: 0.1, ideal: 25, max: 1});
-Items.Tigris.PushEffect(function(target) {
+AlchemySpecial.Tigris.PushEffect(TF.ItemEffects.SetTongue, {odds: 0.4, race: Race.Feline, str: "rough, cat-like tongue"});
+AlchemySpecial.Tigris.PushEffect(TF.ItemEffects.SetBody, {odds: 0.4, race: Race.Tiger, str: "a feline shape, complete with fur"});
+AlchemySpecial.Tigris.PushEffect(TF.ItemEffects.SetFace, {odds: 0.3, race: Race.Tiger, str: "a cat-like face"});
+AlchemySpecial.Tigris.PushEffect(TF.ItemEffects.SetArms, {odds: 0.3, race: Race.Tiger, str: "furred cat arms, with soft paws"});
+AlchemySpecial.Tigris.PushEffect(TF.ItemEffects.SetLegs, {odds: 0.3, race: Race.Tiger, str: "furred cat legs, with soft paws"});
+AlchemySpecial.Tigris.PushEffect(TF.ItemEffects.SetCock, {odds: 0.6, race: Race.Tiger, str: "a feline cock"});
+AlchemySpecial.Tigris.PushEffect(TF.ItemEffects.SetEars, {odds: 0.6, race: Race.Tiger, str: "fluffy cat ears"});
+AlchemySpecial.Tigris.PushEffect(TF.ItemEffects.SetTail, {odds: 0.6, race: Race.Tiger, color: Color.orange, str: "a striped, flexible feline tail"});
+AlchemySpecial.Tigris.PushEffect(TF.ItemEffects.IncDex, {odds: 0.3, ideal: 35, max: 2});
+AlchemySpecial.Tigris.PushEffect(TF.ItemEffects.IncStr, {odds: 0.5, ideal: 45, max: 2});
+AlchemySpecial.Tigris.PushEffect(TF.ItemEffects.IncCha, {odds: 0.3, ideal: 25, max: 2});
+AlchemySpecial.Tigris.PushEffect(TF.ItemEffects.IncSta, {odds: 0.2, ideal: 40, max: 2});
+AlchemySpecial.Tigris.PushEffect(TF.ItemEffects.DecInt, {odds: 0.1, ideal: 25, max: 1});
+AlchemySpecial.Tigris.PushEffect(function(target) {
 	var parse = {
 		name: target.NameDesc(),
 		s: target == player ? "" : "s",
@@ -122,21 +131,21 @@ Items.Tigris.PushEffect(function(target) {
 	*/
 	Text.Flush();
 });
-Items.Tigris.PushEffect(TF.ItemEffects.DecFem, {odds: 0.2, ideal: -.7, max: .1, male: true});
-Items.Tigris.PushEffect(TF.ItemEffects.IncTone, {odds: 0.2, ideal: .9, max: .1 });
-Items.Tigris.PushEffect(TF.ItemEffects.DecHips, {odds: 0.3, ideal: HipSize.Medium, max: 1});
-Items.Tigris.PushEffect(TF.ItemEffects.IncCockLen, {odds: 0.4, ideal: 25, max: 2 });
-Items.Tigris.PushEffect(TF.ItemEffects.IncCockThk, {odds: 0.4, ideal: 6, max: 1 });
+AlchemySpecial.Tigris.PushEffect(TF.ItemEffects.DecFem, {odds: 0.2, ideal: -.7, max: .1, male: true});
+AlchemySpecial.Tigris.PushEffect(TF.ItemEffects.IncTone, {odds: 0.2, ideal: .9, max: .1 });
+AlchemySpecial.Tigris.PushEffect(TF.ItemEffects.DecHips, {odds: 0.3, ideal: HipSize.Medium, max: 1});
+AlchemySpecial.Tigris.PushEffect(TF.ItemEffects.IncCockLen, {odds: 0.4, ideal: 25, max: 2 });
+AlchemySpecial.Tigris.PushEffect(TF.ItemEffects.IncCockThk, {odds: 0.4, ideal: 6, max: 1 });
 
 
-Items.InfernumPlus = new TFItem("demon+", "Infernum+");
-Items.InfernumPlus.price = 100;
-Items.InfernumPlus.lDesc = function() { return "a bottle of Infernum+"; }
-Items.InfernumPlus.Short = function() { return "A bottle of Infernum+"; }
-Items.InfernumPlus.Long = function() { return "A bottle of extra potent Infernum, with the picture of a large, decidedly male demon on it. The fluid within is a thick black sludge, reeking of corruption."; }
-Items.InfernumPlus.recipe = [{it: Items.Infernum}, {it: Items.BlackGem}, {it: Items.DemonSeed, num: 3}];
+AlchemySpecial.InfernumPlus = new TFItem("demon+", "Infernum+");
+AlchemySpecial.InfernumPlus.price = 100;
+AlchemySpecial.InfernumPlus.lDesc = function() { return "a bottle of Infernum+"; }
+AlchemySpecial.InfernumPlus.Short = function() { return "A bottle of Infernum+"; }
+AlchemySpecial.InfernumPlus.Long = function() { return "A bottle of extra potent Infernum, with the picture of a large, decidedly male demon on it. The fluid within is a thick black sludge, reeking of corruption."; }
+AlchemySpecial.InfernumPlus.recipe = [{it: AlchemyItems.Infernum}, {it: IngredientItems.BlackGem}, {it: IngredientItems.DemonSeed, num: 3}];
 // Effects
-Items.InfernumPlus.PushEffect(function(target) {
+AlchemySpecial.InfernumPlus.PushEffect(function(target) {
 	var parse = {
 		name: target.NameDesc(),
 		s: target == player ? "" : "s",
@@ -182,28 +191,28 @@ Items.InfernumPlus.PushEffect(function(target) {
 	}
 	Text.Flush();
 });
-Items.InfernumPlus.PushEffect(TF.ItemEffects.SetBody, {odds: 0.3, race: Race.Demon, color: Color.red, str: "a fully demonic form"});
-Items.InfernumPlus.PushEffect(TF.ItemEffects.SetLegs, {odds: 0.5, race: Race.Demon, color: Color.red, str: "plantigrade, demonic legs with clawed feet"});
-Items.InfernumPlus.PushEffect(TF.ItemEffects.SetArms, {odds: 0.5, race: Race.Demon, color: Color.red, str: "demonic arms with clawed hands"});
-Items.InfernumPlus.PushEffect(TF.ItemEffects.SetTail, {odds: 0.6, race: Race.Demon, color: Color.red, str: "a red, spaded demon tail"});
-Items.InfernumPlus.PushEffect(TF.ItemEffects.SetHorn, {odds: 0.6, race: Race.Demon, color: Color.red, count: 4, str: "a pair of demon horns" });
-Items.InfernumPlus.PushEffect(TF.ItemEffects.SetTongue, {odds: 0.6, race: Race.Demon, str: "long and flexible tongue"});
-Items.InfernumPlus.PushEffect(TF.ItemEffects.IncSta, {odds: 0.4, ideal: 35, max: 2});
-Items.InfernumPlus.PushEffect(TF.ItemEffects.IncDex, {odds: 0.4, ideal: 35, max: 2});
-Items.InfernumPlus.PushEffect(TF.ItemEffects.IncInt, {odds: 0.4, ideal: 40, max: 2});
-Items.InfernumPlus.PushEffect(TF.ItemEffects.IncLib, {odds: 0.8, ideal: 55, max: 2});
-Items.InfernumPlus.PushEffect(TF.ItemEffects.IncFem, {odds: 0.2, ideal: 1, max: .25, female: true});
-Items.InfernumPlus.PushEffect(TF.ItemEffects.DecFem, {odds: 0.2, ideal: -1, max: .25, male: true});
+AlchemySpecial.InfernumPlus.PushEffect(TF.ItemEffects.SetBody, {odds: 0.3, race: Race.Demon, color: Color.red, str: "a fully demonic form"});
+AlchemySpecial.InfernumPlus.PushEffect(TF.ItemEffects.SetLegs, {odds: 0.5, race: Race.Demon, color: Color.red, str: "plantigrade, demonic legs with clawed feet"});
+AlchemySpecial.InfernumPlus.PushEffect(TF.ItemEffects.SetArms, {odds: 0.5, race: Race.Demon, color: Color.red, str: "demonic arms with clawed hands"});
+AlchemySpecial.InfernumPlus.PushEffect(TF.ItemEffects.SetTail, {odds: 0.6, race: Race.Demon, color: Color.red, str: "a red, spaded demon tail"});
+AlchemySpecial.InfernumPlus.PushEffect(TF.ItemEffects.SetHorn, {odds: 0.6, race: Race.Demon, color: Color.red, count: 4, str: "a pair of demon horns" });
+AlchemySpecial.InfernumPlus.PushEffect(TF.ItemEffects.SetTongue, {odds: 0.6, race: Race.Demon, str: "long and flexible tongue"});
+AlchemySpecial.InfernumPlus.PushEffect(TF.ItemEffects.IncSta, {odds: 0.4, ideal: 35, max: 2});
+AlchemySpecial.InfernumPlus.PushEffect(TF.ItemEffects.IncDex, {odds: 0.4, ideal: 35, max: 2});
+AlchemySpecial.InfernumPlus.PushEffect(TF.ItemEffects.IncInt, {odds: 0.4, ideal: 40, max: 2});
+AlchemySpecial.InfernumPlus.PushEffect(TF.ItemEffects.IncLib, {odds: 0.8, ideal: 55, max: 2});
+AlchemySpecial.InfernumPlus.PushEffect(TF.ItemEffects.IncFem, {odds: 0.2, ideal: 1, max: .25, female: true});
+AlchemySpecial.InfernumPlus.PushEffect(TF.ItemEffects.DecFem, {odds: 0.2, ideal: -1, max: .25, male: true});
 
 
-Items.Nagazm = new TFItem("naga0", "Nagazm");
-Items.Nagazm.price = 7;
-Items.Nagazm.lDesc = function() { return "a bottle of Nagazm"; }
-Items.Nagazm.Short = function() { return "A bottle of Nagazm"; }
-Items.Nagazm.Long  = function() { return "A bottle with a pink, bubbly liquid, labeled Nagasm. It has the picture of a snake on it."; }
-Items.Nagazm.recipe = [{it: Items.SnakeOil}, {it: Items.SnakeFang}, {it: Items.SnakeSkin}];
+AlchemySpecial.Nagazm = new TFItem("naga0", "Nagazm");
+AlchemySpecial.Nagazm.price = 7;
+AlchemySpecial.Nagazm.lDesc = function() { return "a bottle of Nagazm"; }
+AlchemySpecial.Nagazm.Short = function() { return "A bottle of Nagazm"; }
+AlchemySpecial.Nagazm.Long  = function() { return "A bottle with a pink, bubbly liquid, labeled Nagasm. It has the picture of a snake on it."; }
+AlchemySpecial.Nagazm.recipe = [{it: IngredientItems.SnakeOil}, {it: IngredientItems.SnakeFang}, {it: IngredientItems.SnakeSkin}];
 // Effects
-Items.Nagazm.PushEffect(function(target) {
+AlchemySpecial.Nagazm.PushEffect(function(target) {
 	var parse = {
 		Poss : target.Possessive(),
 		legsDesc : function() { return target.LegsDesc(); },
@@ -223,8 +232,8 @@ Items.Nagazm.PushEffect(function(target) {
 	}
 	Text.Flush();
 });
-Items.Nagazm.PushEffect(TF.ItemEffects.RemBalls, {odds: 0.5, ideal: 0, count: 2});
-Items.Nagazm.PushEffect(function(target) {
+AlchemySpecial.Nagazm.PushEffect(TF.ItemEffects.RemBalls, {odds: 0.5, ideal: 0, count: 2});
+AlchemySpecial.Nagazm.PushEffect(function(target) {
 	var parse = { Name: target.NameDesc(), s: target.plural() ? "" : "s" };
 	
 	if (Math.random() < 0.5) {
@@ -245,7 +254,7 @@ Items.Nagazm.PushEffect(function(target) {
 	}
 	Text.Flush();
 });
-Items.Nagazm.PushEffect(function(target) {
+AlchemySpecial.Nagazm.PushEffect(function(target) {
 	// TODO: Race check like in Lacertium? What race are Naga penises?
 	// TODO: Other prerequisites? No testicles? Hermaphroditism?
 	var cocks = target.AllCocks();
@@ -259,30 +268,30 @@ Items.Nagazm.PushEffect(function(target) {
 });
 // TODO: Naga eyes? From descr in scenes: "faintly glowing" "vivid, angular magenta eyes"
 // TODO: Snake tongue? "a long, forked tongue"
-Items.Nagazm.PushEffect(TF.ItemEffects.SetTongue, {odds: 0.4, race: Race.Snake, str: "long, serpentine tongue"});
-Items.Nagazm.PushEffect(TF.ItemEffects.SetEars, {odds: 0.4, race: Race.Elf, str: "elongated, pointy ears"});
-Items.Nagazm.PushEffect(TF.ItemEffects.SetCover, {odds: 0.4, value: Genitalia.Cover.Slit});
-Items.Nagazm.PushEffect(TF.ItemEffects.IncLib, {odds: 0.5, ideal: 40, max: 1});
-Items.Nagazm.PushEffect(TF.ItemEffects.IncCha, {odds: 0.4, ideal: 40, max: 1});
-Items.Nagazm.PushEffect(TF.ItemEffects.IncDex, {odds: 0.4, ideal: 30, max: 1});
-Items.Nagazm.PushEffect(TF.ItemEffects.IncSpi, {odds: 0.4, ideal: 30, max: 1});
-Items.Nagazm.PushEffect(TF.ItemEffects.DecStr, {odds: 0.2, ideal: 20, max: 1});
-Items.Nagazm.PushEffect(TF.ItemEffects.DecSta, {odds: 0.2, ideal: 20, max: 1});
-Items.Nagazm.PushEffect(TF.ItemEffects.IncFem, {odds: 0.3, ideal: .9, max: .1});
-Items.Nagazm.PushEffect(TF.ItemEffects.IncHips, {odds: 0.3, ideal: HipSize.VeryWide, max: 2});
-Items.Nagazm.PushEffect(TF.ItemEffects.IncBreastSize, {odds: 0.6, ideal: 26, max: 2, female: true });
-Items.Nagazm.PushEffect(TF.ItemEffects.IncCockLen, {odds: 0.6, ideal: 30, max: 3 });
-Items.Nagazm.PushEffect(TF.ItemEffects.IncCockThk, {odds: 0.6, ideal: 8, max: 1 });
+AlchemySpecial.Nagazm.PushEffect(TF.ItemEffects.SetTongue, {odds: 0.4, race: Race.Snake, str: "long, serpentine tongue"});
+AlchemySpecial.Nagazm.PushEffect(TF.ItemEffects.SetEars, {odds: 0.4, race: Race.Elf, str: "elongated, pointy ears"});
+AlchemySpecial.Nagazm.PushEffect(TF.ItemEffects.SetCover, {odds: 0.4, value: Genitalia.Cover.Slit});
+AlchemySpecial.Nagazm.PushEffect(TF.ItemEffects.IncLib, {odds: 0.5, ideal: 40, max: 1});
+AlchemySpecial.Nagazm.PushEffect(TF.ItemEffects.IncCha, {odds: 0.4, ideal: 40, max: 1});
+AlchemySpecial.Nagazm.PushEffect(TF.ItemEffects.IncDex, {odds: 0.4, ideal: 30, max: 1});
+AlchemySpecial.Nagazm.PushEffect(TF.ItemEffects.IncSpi, {odds: 0.4, ideal: 30, max: 1});
+AlchemySpecial.Nagazm.PushEffect(TF.ItemEffects.DecStr, {odds: 0.2, ideal: 20, max: 1});
+AlchemySpecial.Nagazm.PushEffect(TF.ItemEffects.DecSta, {odds: 0.2, ideal: 20, max: 1});
+AlchemySpecial.Nagazm.PushEffect(TF.ItemEffects.IncFem, {odds: 0.3, ideal: .9, max: .1});
+AlchemySpecial.Nagazm.PushEffect(TF.ItemEffects.IncHips, {odds: 0.3, ideal: HipSize.VeryWide, max: 2});
+AlchemySpecial.Nagazm.PushEffect(TF.ItemEffects.IncBreastSize, {odds: 0.6, ideal: 26, max: 2, female: true });
+AlchemySpecial.Nagazm.PushEffect(TF.ItemEffects.IncCockLen, {odds: 0.6, ideal: 30, max: 3 });
+AlchemySpecial.Nagazm.PushEffect(TF.ItemEffects.IncCockThk, {odds: 0.6, ideal: 8, max: 1 });
 
 
-Items.Taurico = new TFItem("taur0", "Taurico");
-Items.Taurico.price = 7;
-Items.Taurico.lDesc = function() { return "a bottle of Taurico"; }
-Items.Taurico.Short = function() { return "A bottle of Taurico"; }
-Items.Taurico.Long  = function() { return "A bottle filled with a strange, jelly-like substance. It has a picture of a centaur on it."; }
-Items.Taurico.recipe = [{it: Items.HorseShoe}, {it: Items.CanisRoot}, {it: Items.Ramshorn}];
+AlchemySpecial.Taurico = new TFItem("taur0", "Taurico");
+AlchemySpecial.Taurico.price = 7;
+AlchemySpecial.Taurico.lDesc = function() { return "a bottle of Taurico"; }
+AlchemySpecial.Taurico.Short = function() { return "A bottle of Taurico"; }
+AlchemySpecial.Taurico.Long  = function() { return "A bottle filled with a strange, jelly-like substance. It has a picture of a centaur on it."; }
+AlchemySpecial.Taurico.recipe = [{it: IngredientItems.HorseShoe}, {it: IngredientItems.CanisRoot}, {it: IngredientItems.Ramshorn}];
 // Effects
-Items.Taurico.PushEffect(function(target) {
+AlchemySpecial.Taurico.PushEffect(function(target) {
 	var parse = {
 		Poss : target.Possessive(),
 		legsDesc : function() { return target.LegsDesc(); },
@@ -313,30 +322,30 @@ Items.Taurico.PushEffect(function(target) {
 });
 
 
-Items.Androgyn = new TFItem("trap0", "Androgyn");
-Items.Androgyn.price = 25;
-Items.Androgyn.lDesc = function() { return "a bottle of Androgyn"; }
-Items.Androgyn.Short = function() { return "A bottle of Androgyn"; }
-Items.Androgyn.Long  = function() { return "A bottle containing a sparkling pink fluid. It’s glowing slightly."; }
-Items.Androgyn.recipe = [{it: Items.Testos}, {it: Items.Estros}, {it: Items.SpringWater}];
+AlchemySpecial.Androgyn = new TFItem("trap0", "Androgyn");
+AlchemySpecial.Androgyn.price = 25;
+AlchemySpecial.Androgyn.lDesc = function() { return "a bottle of Androgyn"; }
+AlchemySpecial.Androgyn.Short = function() { return "A bottle of Androgyn"; }
+AlchemySpecial.Androgyn.Long  = function() { return "A bottle containing a sparkling pink fluid. It’s glowing slightly."; }
+AlchemySpecial.Androgyn.recipe = [{it: AlchemyItems.Testos}, {it: AlchemyItems.Estros}, {it: IngredientItems.SpringWater}];
 // Effects
-Items.Androgyn.PushEffect(TF.ItemEffects.IdealFem, {odds: 0.8, minRange: -.1, maxRange: .3, max: .3});
-Items.Androgyn.PushEffect(TF.ItemEffects.DecTone, {odds: 0.8, ideal: 0, max: .3 });
-Items.Androgyn.PushEffect(TF.ItemEffects.IdealHips, {odds: 0.2, ideal: HipSize.Medium-1, max: 3});
-Items.Androgyn.PushEffect(TF.ItemEffects.SetIdealBreastSize, {odds: 0.6, ideal: 1, max: 5});
-Items.Androgyn.PushEffect(TF.ItemEffects.DecCockLen, {odds: 0.8, ideal: 10, max: 4 });
-Items.Androgyn.PushEffect(TF.ItemEffects.DecCockThk, {odds: 0.8, ideal: 3, max: 2 });
-Items.Androgyn.PushEffect(TF.ItemEffects.DecBallSize, {odds: 0.8, ideal: 1, max: 4 });
+AlchemySpecial.Androgyn.PushEffect(TF.ItemEffects.IdealFem, {odds: 0.8, minRange: -.1, maxRange: .3, max: .3});
+AlchemySpecial.Androgyn.PushEffect(TF.ItemEffects.DecTone, {odds: 0.8, ideal: 0, max: .3 });
+AlchemySpecial.Androgyn.PushEffect(TF.ItemEffects.IdealHips, {odds: 0.2, ideal: HipSize.Medium-1, max: 3});
+AlchemySpecial.Androgyn.PushEffect(TF.ItemEffects.SetIdealBreastSize, {odds: 0.6, ideal: 1, max: 5});
+AlchemySpecial.Androgyn.PushEffect(TF.ItemEffects.DecCockLen, {odds: 0.8, ideal: 10, max: 4 });
+AlchemySpecial.Androgyn.PushEffect(TF.ItemEffects.DecCockThk, {odds: 0.8, ideal: 3, max: 2 });
+AlchemySpecial.Androgyn.PushEffect(TF.ItemEffects.DecBallSize, {odds: 0.8, ideal: 1, max: 4 });
 
 
-Items.Gestarium = new TFItem("preg0", "Gestarium");
-Items.Gestarium.price = 50;
-Items.Gestarium.lDesc = function() { return "a bottle of Gestarium"; }
-Items.Gestarium.Short = function() { return "A bottle of Gestarium"; }
-Items.Gestarium.Long  = function() { return "A small vial of thick, clear liquid. Drinking this while pregnant will cause the drinker’s pregnancy to advance somewhat."; }
-Items.Gestarium.recipe = [{it: Items.Fertilium}, {it: Items.Estros}, {it: Items.Bovia}];
+AlchemySpecial.Gestarium = new TFItem("preg0", "Gestarium");
+AlchemySpecial.Gestarium.price = 50;
+AlchemySpecial.Gestarium.lDesc = function() { return "a bottle of Gestarium"; }
+AlchemySpecial.Gestarium.Short = function() { return "A bottle of Gestarium"; }
+AlchemySpecial.Gestarium.Long  = function() { return "A small vial of thick, clear liquid. Drinking this while pregnant will cause the drinker’s pregnancy to advance somewhat."; }
+AlchemySpecial.Gestarium.recipe = [{it: AlchemyItems.Fertilium}, {it: AlchemyItems.Estros}, {it: AlchemyItems.Bovia}];
 // Effects
-Items.Gestarium.PushEffect(function(target) {
+AlchemySpecial.Gestarium.PushEffect(function(target) {
 	var parse = {
 		Name : target.NameDesc(),
 		name : target.nameDesc(),
@@ -358,7 +367,7 @@ Items.Gestarium.PushEffect(function(target) {
 			Text.Add("Nothing happens for a moment, and then [poss] hands fly to [hisher] [belly] as a comforting warmth takes root in its lower depths, slowly spreading outwards to fill [hisher] womb.", parse);
 			Text.NL();
 			
-			Items.Gestarium.BellyGrowth(target, wombs, parse);
+			AlchemySpecial.Gestarium.BellyGrowth(target, wombs, parse);
 		}
 		else {
 			parse["_is"] = target.plural() ? "'re" : " is";
@@ -371,7 +380,7 @@ Items.Gestarium.PushEffect(function(target) {
 	Text.NL();
 });
 
-Items.Gestarium.BellyGrowth = function(target, wombs, parse) {
+AlchemySpecial.Gestarium.BellyGrowth = function(target, wombs, parse) {
 	var size = target.pregHandler.BellySize();
 	
 	if(size < 0.1)
@@ -522,14 +531,14 @@ Items.Gestarium.BellyGrowth = function(target, wombs, parse) {
 }
 
 
-Items.Anusol = new TFItem("anal0", "Anusol");
-Items.Anusol.price = 25;
-Items.Anusol.lDesc = function() { return "a bottle of Anusol"; }
-Items.Anusol.Short = function() { return "A bottle of Anusol"; }
-Items.Anusol.Long  = function() { return "A bottle labeled Anusol, filled with an oily-looking dark green fluid. It increases anal sensitivity."; }
-Items.Anusol.recipe = [{it: Items.SnakeOil}, {it: Items.SpringWater}, {it: Items.FruitSeed}];
+AlchemySpecial.Anusol = new TFItem("anal0", "Anusol");
+AlchemySpecial.Anusol.price = 25;
+AlchemySpecial.Anusol.lDesc = function() { return "a bottle of Anusol"; }
+AlchemySpecial.Anusol.Short = function() { return "A bottle of Anusol"; }
+AlchemySpecial.Anusol.Long  = function() { return "A bottle labeled Anusol, filled with an oily-looking dark green fluid. It increases anal sensitivity."; }
+AlchemySpecial.Anusol.recipe = [{it: IngredientItems.SnakeOil}, {it: IngredientItems.SpringWater}, {it: IngredientItems.FruitSeed}];
 // Effects
-Items.Anusol.PushEffect(function(target) {
+AlchemySpecial.Anusol.PushEffect(function(target) {
 	var parse = {
 		botArmor : target.LowerArmorDesc(),
 		Poss : target.Possessive()
@@ -597,14 +606,14 @@ Items.Anusol.PushEffect(function(target) {
 
 
 
-Items.AnusolPlus = new TFItem("anal1", "Anusol+");
-Items.AnusolPlus.price = 25;
-Items.AnusolPlus.lDesc = function() { return "a bottle of Anusol+"; }
-Items.AnusolPlus.Short = function() { return "A bottle of Anusol+"; }
-Items.AnusolPlus.Long  = function() { return "A bottle labled Anusol+, filled with a thick and slimy-looking blue fluid. It’s supposed to make anal sex out of this world for the drinker."; }
-Items.AnusolPlus.recipe = [{it: Items.SnakeOil}, {it: Items.SpringWater}, {it: Items.Gestarium}];
+AlchemySpecial.AnusolPlus = new TFItem("anal1", "Anusol+");
+AlchemySpecial.AnusolPlus.price = 25;
+AlchemySpecial.AnusolPlus.lDesc = function() { return "a bottle of Anusol+"; }
+AlchemySpecial.AnusolPlus.Short = function() { return "A bottle of Anusol+"; }
+AlchemySpecial.AnusolPlus.Long  = function() { return "A bottle labled Anusol+, filled with a thick and slimy-looking blue fluid. It’s supposed to make anal sex out of this world for the drinker."; }
+AlchemySpecial.AnusolPlus.recipe = [{it: IngredientItems.SnakeOil}, {it: IngredientItems.SpringWater}, {it: AlchemySpecial.Gestarium}];
 // Effects
-Items.AnusolPlus.PushEffect(function(target) {
+AlchemySpecial.AnusolPlus.PushEffect(function(target) {
 	var parse = {
 		botArmor : target.LowerArmorDesc(),
 		Poss : target.Possessive()
@@ -668,3 +677,5 @@ Trigger heat (10%)
 		scenes.Get();
 	}
 });
+
+export { AlchemySpecial };

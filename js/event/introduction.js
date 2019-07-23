@@ -8,6 +8,8 @@ import { Event, Link } from '../event';
 import { GameState } from '../gamestate';
 import { Gui } from '../gui';
 import { Gender } from '../body/gender';
+import { Items } from '../items';
+import { JobEnum } from '../job';
 
 let Intro = {};
 
