@@ -114,8 +114,8 @@ var LoadImages = function(onComplete) {
 	loader.load();
 }
 
-var assetsOverlay = function() {
-	var el = document.getElementById("overlay_assets");
+let assetsOverlay = function() {
+	let el = document.getElementById("overlay_assets");
 	el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
 }
 
@@ -195,4 +195,4 @@ function LoadStatusImages(imageArray) {
 	}
 }
 
-export { Images, LoadImages };
+export { Images, LoadImages, assetsOverlay };

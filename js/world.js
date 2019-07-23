@@ -17,6 +17,7 @@ import { InitGlade } from './loc/glade';
 import { InitNomads } from './loc/nomads';
 import { InitMiranda } from './event/miranda-scenes';
 import { BullTowerLoc } from './event/outlaws/bulltower';
+import { InitCheats } from './cheats';
 
 let world = {
 	// Prototype initialization
@@ -42,16 +43,6 @@ let world = {
 	EntityStorage : new Array(),
 	SaveSpots     : {},
 };
-
-InitIntro(world);
-InitNomads(world);
-InitOutlaws(world);
-InitRigard(world, Scenes);
-InitFarm(world);
-InitBurrows(world);
-InitGlade(world);
-
-InitMiranda(world);
 
 world.Locations = {
 	Plains    : 0,
@@ -115,5 +106,17 @@ world.StepToHour = function(hour, minute) {
 world.TreeFarDesc = function() {
 	return "As always, you can see the immense tree at the center of Eden towering in the distance, though you are so far away that the great canopy isn't obscuring the sky above.";
 }
+
+InitIntro(world);
+InitNomads(world);
+InitOutlaws(world);
+InitRigard(world, Scenes);
+InitFarm(world);
+InitBurrows(world);
+InitGlade(world);
+
+InitMiranda(world);
+
+InitCheats(world);
 
 export { world };

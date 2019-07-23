@@ -1,13 +1,14 @@
 import * as $ from 'jquery';
-import { Images, LoadImages } from './assets';
+import { Images, LoadImages, assetsOverlay } from './assets';
 import { Gui } from './gui';
 import { VERSION_STRING, GetRenderPictures, SetRenderPictures, GetDEBUG, SetDEBUG } from '../app';
 import { Input } from './input';
 import { Saver } from './saver';
 import { CreditsScreen } from './credits';
 import { ClearCache, CacheToGame } from './gamecache';
-import { GameState, setOnline, isOnline } from './gamestate';
+import { GameState, setOnline, isOnline, SetGameState } from './gamestate';
 import { DataPrompt } from './exploration';
+import { Text } from './text';
 
 // Prevent selection
 $(function() {
