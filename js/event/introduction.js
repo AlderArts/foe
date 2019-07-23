@@ -12,6 +12,10 @@ import { Gender } from '../body/gender';
 let Intro = {};
 
 let world = null;
+function IntroInit(w) {
+	world = w;
+	world.SaveSpots["LightAspect"] = LightAspect.Garden;
+}
 
 /*
  * Introductory scene (start of game). Entry into the attic
@@ -1841,10 +1845,6 @@ let LightAspect = {
 //
 // Light aspect dimension
 //
-function IntroInit(w) {
-	world = w;
-	world.SaveSpots["LightAspect"] = LightAspect.Garden;
-}
 LightAspect.Garden.SaveSpot = "LightAspect";
 LightAspect.Garden.safe = function() { return true; };
 LightAspect.Garden.description = function() {

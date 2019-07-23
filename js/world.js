@@ -11,7 +11,7 @@ import { FarmLoc } from './loc/farm';
 import { DesertLoc } from './loc/desert';
 import { BurrowsLoc } from './loc/burrows';
 import { TreeCityLoc } from './loc/treecity/treecity';
-import { RigardLoc } from './loc/rigard/rigard';
+import { RigardLoc, InitRigard } from './loc/rigard/rigard';
 
 let world = {
 	// Prototype initialization
@@ -38,6 +38,7 @@ let world = {
 };
 
 IntroInit(world);
+InitRigard(world);
 
 
 world.Locations = {

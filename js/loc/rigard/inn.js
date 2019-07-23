@@ -1,6 +1,13 @@
 
 import { Event, Link } from '../../event';
 
+let world = null;
+export function InitLB(w) {
+	world = w;
+	world.SaveSpots["LB"] = InnLoc.room;
+	world.SaveSpots["LB2"] = InnLoc.penthouse;
+}
+
 let InnLoc = {
 	common    : new Event("Lady's Blessing"),
 	backroom  : new Event("Back room"),
@@ -12,35 +19,35 @@ let InnLoc = {
 
 let LBScenes = {};
 
-Rigard.LB = {};
-Rigard.LB.BusyState = {
+let RigardLB = {};
+RigardLB.BusyState = {
 	busy    : 0,
 	midbusy : 1,
 	notbusy : 2
 };
-Rigard.LB.MealCost = function() {
+RigardLB.MealCost = function() {
 	return 20;
 }
-Rigard.LB.RoomCost = function() {
+RigardLB.RoomCost = function() {
 	return 100;
 }
 
-Rigard.LB.Busy = function() {
-	if(world.time.hour >= 17) return Rigard.LB.BusyState.busy;
-	else if(world.time.hour >= 7 || world.time.hour < 1) return Rigard.LB.BusyState.midbusy;
-	else return Rigard.LB.BusyState.notbusy;
+RigardLB.Busy = function() {
+	if(world.time.hour >= 17) return RigardLB.BusyState.busy;
+	else if(world.time.hour >= 7 || world.time.hour < 1) return RigardLB.BusyState.midbusy;
+	else return RigardLB.BusyState.notbusy;
 }
 
-Rigard.LB.KnowsOrvin = function() {
+RigardLB.KnowsOrvin = function() {
 	return rigard.LB["Orvin"] != 0;
 }
 
-Rigard.LB.OrvinIsInnkeeper = function() {
+RigardLB.OrvinIsInnkeeper = function() {
 	if(world.time.hour >= 8) return true;
 	else return false;
 }
 
-Rigard.LB.HasRentedRoom = function() {
+RigardLB.HasRentedRoom = function() {
 	return !rigard.LBroomTimer.Expired();
 }
 
@@ -70,7 +77,6 @@ InnLoc.common.links.push(new Link(
 ));
 
 // Twins' room
-world.SaveSpots["LB2"] = InnLoc.penthouse;
 InnLoc.penthouse.SaveSpot = "LB2";
 InnLoc.penthouse.safe = function() { return true; };
 InnLoc.penthouse.description = function() {
@@ -135,8 +141,8 @@ InnLoc.common.endDescription = function() {
 //TODO: Companion reactions?
 InnLoc.common.DrunkHandler = function() {
 	var parse = {};
-	var busy = Rigard.LB.Busy();
-	parse["busy"] = busy == Rigard.LB.BusyState.busy ? "few places" : "spot";
+	var busy = RigardLB.Busy();
+	parse["busy"] = busy == RigardLB.BusyState.busy ? "few places" : "spot";
 	Text.Clear();
 	Text.Add("You open your eyes with some effort and find yourself in the Lady’s Blessing recovery room. The air smells of pine, and you see a [busy] where the floor looks to have been recently scrubbed. ‘Recovery Room’ written on one of the walls.", parse);
 	Text.NL();
@@ -152,7 +158,7 @@ InnLoc.common.onEntry = function(preventClear, oldLocation) {
 	}
 	
 	Text.Clear();
-	var busy = Rigard.LB.Busy();
+	var busy = RigardLB.Busy();
 	var first = rigard.LB["Visit"] == 0;
 	if(first) {
 		rigard.LB["Visit"] = 1;
@@ -168,9 +174,9 @@ InnLoc.common.onEntry = function(preventClear, oldLocation) {
 		
 	}
 	Text.Add("As you push open the door and enter, ");
-	if(busy == Rigard.LB.BusyState.busy)
+	if(busy == RigardLB.BusyState.busy)
 		Text.Add("you hear music and snatches of song coming from a group of minstrels playing in the corner, almost lost under the chatter of people in the busy bar. The large room is filled nearly to capacity with easily a hundred patrons sitting, eating, drinking, and playing.");
-	else if(busy == Rigard.LB.BusyState.midbusy)
+	else if(busy == RigardLB.BusyState.midbusy)
 		Text.Add("you see that the bar is not very busy right now. The large room seems almost empty with so few people, although there must still be at least a score of patrons eating, drinking, and chatting together.");
 	else
 		Text.Add("you see that the bar is nearly abandoned. Most of the candles are out, and there are only a few patrons scattered around the room eating cold food at this hour.");
@@ -193,12 +199,12 @@ InnLoc.common.onEntry = function(preventClear, oldLocation) {
 			parse["comp"] = " and your friend";
 		else
 			parse["comp"] = " and your friends";
-		if(busy == Rigard.LB.BusyState.busy) {
+		if(busy == RigardLB.BusyState.busy) {
 			Text.Add("<i>“We’re a bit crowded right now, but if you[comp] would accompany me, I’ll have you seated momentarily,”</i> she bows.", parse);
 			Text.NL();
 			Text.Add("You thank her for the hospitality and follow her as she leads you through a maze of tables and busy waiters, finally finding an empty table to sit you down. As you do so, she picks up a cloth, wiping the table clean of any lingering dirt from the previous patrons.", parse);
 		}
-		else if(busy == Rigard.LB.BusyState.midbusy) {
+		else if(busy == RigardLB.BusyState.midbusy) {
 			Text.Add("<i>“We have plenty tables to accommodate you[comp]. Please, follow me,”</i> she bows.", parse);
 			Text.NL();
 			Text.Add("You thank her for the hospitality and follow her as she leads you past a few tables and the occasional busy waiter. Once you’re seated, she picks up a cloth and wipes the table clean of any lingering dirt left by the previous patrons.", parse);
@@ -214,7 +220,7 @@ InnLoc.common.onEntry = function(preventClear, oldLocation) {
 	}
 	
 	Text.NL();
-	if(busy == Rigard.LB.BusyState.busy)
+	if(busy == RigardLB.BusyState.busy)
 		Text.Add("With some difficulty, you manage to find an empty table, and sit down");
 	else
 		Text.Add("You pick out a table by the bar, and sit down");
@@ -263,7 +269,7 @@ LBScenes.OrderFood = function() {
 		parse["heshe"] = "he";
 	}
 	
-	var busy = Rigard.LB.Busy();
+	var busy = RigardLB.Busy();
 	
 	var p1 = party.Get(1);
 	if(p1) {
@@ -274,7 +280,7 @@ LBScenes.OrderFood = function() {
 	Text.Clear();
 	
 	// Nighttime
-	if(busy == Rigard.LB.BusyState.notbusy) {
+	if(busy == RigardLB.BusyState.notbusy) {
 		Text.Add("You approach [dname] at the bar and ask if you can get some food.", parse);
 		Text.NL();
 		Text.Add("“The kitchen’s closed at this hour, so we can only offer you leftovers,” she explains. “They’re pretty delicious leftovers, though.”", parse);
@@ -299,13 +305,13 @@ LBScenes.OrderFood = function() {
 		
 		Text.Flush();
 		world.TimeStep({minute: 35});
-		party.coin -= Rigard.LB.MealCost();
+		party.coin -= RigardLB.MealCost();
 		Gui.NextPrompt();
 		return;
 	}
 	
 	
-	if(busy == Rigard.LB.BusyState.busy)
+	if(busy == RigardLB.BusyState.busy)
 		Text.Add("You catch the attention of one of the busy waiters as [heshe]’s passing by, and [heshe] approaches your table.", parse);
 	else
 		Text.Add("You wave at the idly chatting waiters, and one of them walks over to you.", parse);
@@ -334,7 +340,7 @@ LBScenes.OrderFood = function() {
 	
 	Text.Flush();
 	world.TimeStep({minute: 35});
-	party.coin -= Rigard.LB.MealCost();
+	party.coin -= RigardLB.MealCost();
 	
 	Gui.NextPrompt();
 }
@@ -424,15 +430,15 @@ LBScenes.FoodGet = function() {
 LBScenes.OrvinPrompt = function() {
 	var parse = {
 		sirmadam : player.mfFem("sir", "madam"),
-		roomPrice : Text.NumToText(Rigard.LB.RoomCost()),
-		IkName   : !Rigard.LB.KnowsOrvin() ? "The innkeeper" : "Orvin",
-		ikname   : !Rigard.LB.KnowsOrvin() ? "the innkeeper" : "Orvin"
+		roomPrice : Text.NumToText(RigardLB.RoomCost()),
+		IkName   : !RigardLB.KnowsOrvin() ? "The innkeeper" : "Orvin",
+		ikname   : !RigardLB.KnowsOrvin() ? "the innkeeper" : "Orvin"
 	};
 	
-	var busy = Rigard.LB.Busy();
+	var busy = RigardLB.Busy();
 	
 	Text.Clear();
-	if(busy == Rigard.LB.BusyState.busy) {
+	if(busy == RigardLB.BusyState.busy) {
 		Text.Add("[IkName] masterfully pours and mixes differently colored liquids, passing them to waiting staff, who deliver them around the room. Even with the inn filled to the brim with customers, he seems to be effortlessly keeping up with demand, and occasionally chats with customers while distributing drinks.", parse);
 		Text.NL();
 		Text.Add("You decide he probably wouldn’t mind if you went over and talked to him.", parse);
@@ -440,7 +446,7 @@ LBScenes.OrvinPrompt = function() {
 	else
 		Text.Add("[IkName] sits on a stool behind the counter, looking bored. You decide he might welcome the distraction if you went over and talked to him.", parse);
 	Text.NL();
-	parse["busyText"] = (busy == Rigard.LB.BusyState.busy) ? "the drinks dancing through his hands" : "handling the drinks he so often mixes";
+	parse["busyText"] = (busy == RigardLB.BusyState.busy) ? "the drinks dancing through his hands" : "handling the drinks he so often mixes";
 	Text.Add("You can’t quite tell the man’s age, but he seems to be well within his prime. There are a few streaks of gray in his dark brown hair, but his face is unlined, and his gaze attentive as he surveys the room. He’s wearing a black vest over a white shirt, which somehow remains spotless despite [busyText].", parse);
 	Text.NL();
 	Text.Add("<i>“What can I do for you, [sirmadam]?”</i> he asks, his voice low and gravelly, turning toward you at your approach.", parse);
@@ -451,7 +457,7 @@ LBScenes.OrvinPrompt = function() {
 		options.push({ nameStr : "Talk",
 			func : function() {
 				Text.Clear();
-				if(!Rigard.LB.KnowsOrvin()) {
+				if(!RigardLB.KnowsOrvin()) {
 					Text.Add("You tell him that you’d like to get to know a bit more about him and the inn.", parse);
 					Text.NL();
 					Text.Add("<i>“How polite of you,”</i> he remarks. <i>“I am Orvin, the proprietor of this inn, and there is not much more to tell. My great-grandmother built the original establishment, and it’s been in my family ever since, although we’ve remodelled the building a few times over the generations. I’ve been dealing with the management of the inn ever since I was little, so I know my way around.”</i>", parse);
@@ -541,11 +547,11 @@ LBScenes.OrvinPrompt = function() {
 							rigard.LBroomTimer = new Time();
 							rigard.LBroomTimer.Inc({hour: 24});
 							
-							party.coin -= Rigard.LB.RoomCost();
+							party.coin -= RigardLB.RoomCost();
 							Text.Flush();
 							Gui.NextPrompt();
-						}, enabled : party.coin >= Rigard.LB.RoomCost(),
-						tooltip : "Rent a room for " + Rigard.LB.RoomCost() + " coins."
+						}, enabled : party.coin >= RigardLB.RoomCost(),
+						tooltip : "Rent a room for " + RigardLB.RoomCost() + " coins."
 					});
 					options.push({ nameStr : "Don't",
 						func : function() {
@@ -601,7 +607,7 @@ LBScenes.OrvinTalkPrompt = function(innPrompt) {
 		
 	};
 	
-	var busy = Rigard.LB.Busy();
+	var busy = RigardLB.Busy();
 	
 	var options = new Array();
 	// Various info about the inn
@@ -1021,8 +1027,8 @@ LBScenes.EfriPrompt = function() {
 LBScenes.DrinksPrompt = function(innPrompt) {
 	var parse = {
 		playername : player.name,
-		IkName   : !Rigard.LB.KnowsOrvin() ? "The innkeeper" : "Orvin",
-		ikname   : !Rigard.LB.KnowsOrvin() ? "the innkeeper" : "Orvin"
+		IkName   : !RigardLB.KnowsOrvin() ? "The innkeeper" : "Orvin",
+		ikname   : !RigardLB.KnowsOrvin() ? "the innkeeper" : "Orvin"
 	};
 	
 	var options = [];
@@ -1500,9 +1506,9 @@ LBScenes.GotoRoom = function() {
 		playername : player.name
 	};
 	
-	if(Rigard.LB.OrvinIsInnkeeper()) {
-		parse["IkName"] = !Rigard.LB.KnowsOrvin() ? "The innkeeper" : "Orvin";
-		parse["ikname"] = !Rigard.LB.KnowsOrvin() ? "the innkeeper" : "Orvin";
+	if(RigardLB.OrvinIsInnkeeper()) {
+		parse["IkName"] = !RigardLB.KnowsOrvin() ? "The innkeeper" : "Orvin";
+		parse["ikname"] = !RigardLB.KnowsOrvin() ? "the innkeeper" : "Orvin";
 	}
 	else {
 		parse["IkName"] = rigard.LB["Efri"] == 0 ? "The girl" : "Efri";
@@ -1708,7 +1714,6 @@ LBScenes.RegularRoom = function(companion) {
 	MoveToLocation(room, {minute : 5});
 }
 
-world.SaveSpots["LB"] = InnLoc.room;
 InnLoc.room.SaveSpot = "LB";
 InnLoc.room.safe = function() { return true; };
 InnLoc.room.description = function() {
@@ -1772,8 +1777,8 @@ InnLoc.room.SleepFunc = function() {
 		Text.NL();
 		
 		if(rigard.LBroomTimer.Expired()) {
-			if(Rigard.LB.OrvinIsInnkeeper()) {
-				parse["ikname"] = !Rigard.LB.KnowsOrvin() ? "the innkeeper" : "Orvin";
+			if(RigardLB.OrvinIsInnkeeper()) {
+				parse["ikname"] = !RigardLB.KnowsOrvin() ? "the innkeeper" : "Orvin";
 			}
 			else {
 				parse["ikname"] = rigard.LB["Efri"] == 0 ? "the girl" : "Efri";
@@ -1807,13 +1812,13 @@ InnLoc.room.links.push(new Link(
 // SET UP EVENTS/LINKS
 InnLoc.common.events.push(new Link(
 	"Order food",
-	true, function() { return party.coin >= Rigard.LB.MealCost(); },
+	true, function() { return party.coin >= RigardLB.MealCost(); },
 	function() {
 		var parse = {
-			mealcost : Rigard.LB.MealCost()
+			mealcost : RigardLB.MealCost()
 		};
-		var busy = Rigard.LB.Busy();
-		if(busy == Rigard.LB.BusyState.busy) {
+		var busy = RigardLB.Busy();
+		if(busy == RigardLB.BusyState.busy) {
 			Text.Add("A large number of waiters and waitresses walk the floor, taking orders and delivering food and drinks from the back. They’re very busy, but the staff still look energetic and professional. You could wave one of them over and order a meal - you suspect it would cost around [mealcost] coins here.", parse);
 		}
 		else {
@@ -1827,25 +1832,25 @@ InnLoc.common.events.push(new Link(
 
 InnLoc.common.events.push(new Link(
 	function() {
-		if(Rigard.LB.OrvinIsInnkeeper())
-			return !Rigard.LB.KnowsOrvin() ? "Innkeeper" : "Orvin";
+		if(RigardLB.OrvinIsInnkeeper())
+			return !RigardLB.KnowsOrvin() ? "Innkeeper" : "Orvin";
 		else
 			return rigard.LB["Efri"] == 0 ? "Girl" : "Efri";
 	},
 	true, true,
 	function() {
 		var parse = {};
-		var busy = Rigard.LB.Busy();
+		var busy = RigardLB.Busy();
 		
-		if(Rigard.LB.OrvinIsInnkeeper()) {
-			if(!Rigard.LB.KnowsOrvin()) {
+		if(RigardLB.OrvinIsInnkeeper()) {
+			if(!RigardLB.KnowsOrvin()) {
 				Text.Add("At the bar stands a serious-looking man, dressed more like a wealthy merchant than a purveyor of alcoholic beverages.");
 			}
 			else  { //Know
 				Text.Add("Orvin stands at the bar, looking serious, as always. He’s dressed more like a wealthy merchant than a purveyor of alcoholic beverages.");
 			}
 			
-			if(busy == Rigard.LB.BusyState.busy) {
+			if(busy == RigardLB.BusyState.busy) {
 				Text.Add(" He listens to orders and dispenses drinks with remarkable agility, while also helping out the staff whenever they come to him for assistance.");
 			}
 			else {
@@ -1874,7 +1879,7 @@ InnLoc.common.events.push(new Link(
 		Text.Flush();
 	},
 	function() {
-		if(Rigard.LB.OrvinIsInnkeeper())
+		if(RigardLB.OrvinIsInnkeeper())
 			LBScenes.OrvinPrompt();
 		else
 			LBScenes.EfriPrompt();
@@ -1891,9 +1896,9 @@ InnLoc.common.events.push(new Link(
 ));
 
 InnLoc.common.events.push(new Link(
-	"Room", Rigard.LB.HasRentedRoom, true,
+	"Room", RigardLB.HasRentedRoom, true,
 	function() {
-		if(Rigard.LB.HasRentedRoom()) {
+		if(RigardLB.HasRentedRoom()) {
 			Text.Add("You’ve rented a room at the Lady’s Blessing until the next noon, so you can head up there if you want.");
 			Text.NL();
 			Text.Flush();
@@ -1921,4 +1926,4 @@ InnLoc.common.events.push(new Link(
 	}
 ));
 
-export { InnLoc, LBScenes };
+export { InnLoc, LBScenes, RigardLB };

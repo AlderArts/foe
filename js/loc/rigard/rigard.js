@@ -6,7 +6,7 @@
 
 import { EncounterTable } from '../../event';
 import { BrothelLoc } from './brothel';
-import { InnLoc, LBScenes } from './inn';
+import { InnLoc, LBScenes, RigardLB, InitLB } from './inn';
 import { Shop } from '../../shop';
 import { ResidentialLoc } from './residential';
 import { SlumsLoc } from './slums';
@@ -22,6 +22,12 @@ import { MagicShopScenes } from './magicshop';
 import { ClothShopScenes } from './clothstore';
 import { ArmorShopScenes } from './armorshop';
 import { Gender } from '../../body/gender';
+
+let world = null;
+export function InitRigard(w) {
+	world = w;
+	InitLB(world);
+};
 
 // Create namespace
 let RigardLoc = {
@@ -138,6 +144,8 @@ function Rigard(storage) {
 
 	if(storage) this.FromStorage(storage);
 }
+
+Rigard.LB = RigardLB;
 
 Rigard.Nobles = {
 	MetMajid : 1,
