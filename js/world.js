@@ -1,10 +1,10 @@
 // World template
 import { PlainsLoc } from './loc/plains';
-import { LightAspect, DarkAspect } from './event/introduction';
+import { InitIntro, LightAspect, DarkAspect } from './event/introduction';
 import { KingsRoadLoc } from './loc/kingsroad';
 import { HighlandsLoc } from './loc/highlands';
 import { LakeLoc } from './loc/lake';
-import { OutlawsLoc } from './loc/outlaws';
+import { OutlawsLoc, InitOutlaws } from './loc/outlaws';
 import { ForestLoc } from './loc/forest';
 import { DragonDenLoc } from './loc/dragonden';
 import { FarmLoc, InitFarm } from './loc/farm';
@@ -16,6 +16,7 @@ import { Scenes } from './scenes';
 import { InitGlade } from './loc/glade';
 import { InitNomads } from './loc/nomads';
 import { InitMiranda } from './event/miranda-scenes';
+import { BullTowerLoc } from './event/outlaws/bulltower';
 
 let world = {
 	// Prototype initialization
@@ -29,6 +30,7 @@ let world = {
 		Highlands : HighlandsLoc,
 		Lake : LakeLoc,
 		Outlaws : OutlawsLoc,
+		BullTower : BullTowerLoc,
 		Rigard : RigardLoc,
 
 		DragonDen : DragonDenLoc,
@@ -41,8 +43,9 @@ let world = {
 	SaveSpots     : {},
 };
 
-IntroInit(world);
+InitIntro(world);
 InitNomads(world);
+InitOutlaws(world);
 InitRigard(world, Scenes);
 InitFarm(world);
 InitBurrows(world);

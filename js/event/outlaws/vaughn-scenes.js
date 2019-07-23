@@ -1,4 +1,4 @@
-
+import { Vaughn } from './vaughn';
 import { TasksScenes } from './vaughn-tasks';
 
 let VaughnScenes = {

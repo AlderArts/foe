@@ -7,13 +7,19 @@
 import { Event, Link, EncounterTable } from '../event';
 import { Scenes } from '../scenes';
 
+let world = null;
+
+export function InitOutlaws(w) {
+	world = w;
+	world.SaveSpots["Outlaws"] = OutlawsLoc.Camp;
+};
+
 // Create namespace
 let OutlawsLoc = {
 	Camp : new Event("Outlaws' camp"),
 	Infirmary : new Event("Infirmary")
 }
 
-world.SaveSpots["Outlaws"] = OutlawsLoc.Camp;
 OutlawsLoc.Camp.SaveSpot = "Outlaws";
 OutlawsLoc.Camp.safe = function() { return true; };
 //TODO

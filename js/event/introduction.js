@@ -12,7 +12,7 @@ import { Gender } from '../body/gender';
 let Intro = {};
 
 let world = null;
-function IntroInit(w) {
+export function InitIntro(w) {
 	world = w;
 	world.SaveSpots["LightAspect"] = LightAspect.Garden;
 }
@@ -2787,4 +2787,4 @@ Intro.Finalizing = function() {
 	Gui.NextPrompt(Gui.PrintDefaultOptions);
 }
 
-export { Intro, DarkAspect, LightAspect, IntroInit };
+export { Intro, DarkAspect, LightAspect };

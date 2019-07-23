@@ -116,6 +116,28 @@ Outlaws.prototype.MariasBouqetAvailable = function() {
 	return outlaws.Rep() >= 0;
 }
 
+// Quest results
+Outlaws.BullTower = {
+	AlaricFreed      : 1,
+	StatueDestroyed  : 2,
+	CaravansIgnited  : 4,
+	CaravansSearched : 8,
+	AnimalsFreed     : 16,
+	SafeLooted       : 32,
+	BlueRoses        : 64,
+	ContrabandStolen : 128,
+	PerfectScore     : 256
+};
+
+// Quest state
+Outlaws.BullTowerQuest = {
+	NotStarted : 0,
+	Initiated  : 1,
+	Completed  : 2,
+	AlaricFollowup : 3,
+	ZenithFollowup : 4
+};
+
 OutlawsScenes.MariasBouquet = function() {
 	var parse = {
 		playername : player.name,

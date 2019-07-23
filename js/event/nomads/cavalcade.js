@@ -4,6 +4,8 @@
 import { Link } from '../../event';
 import { GetDEBUG } from '../../../app';
 import { Gender } from '../../body/gender';
+import { Estevan } from './estevan';
+import { NomadsLoc } from '../../loc/nomads';
 
 let NCavalcadeScenes = {};
 
@@ -19,7 +21,7 @@ NCavalcadeScenes.Enabled = function() {
 }
 
 // TODO TEMP CAVALCADE
-world.loc.Plains.Nomads.Fireplace.events.push(new Link(
+NomadsLoc.Fireplace.events.push(new Link(
 	"Cavalcade", function() { return NCavalcadeScenes.Enabled(); }, function() { return party.coin >= NCavalcadeScenes.Bet(); },
 	function() {
 		if(NCavalcadeScenes.Enabled()) {

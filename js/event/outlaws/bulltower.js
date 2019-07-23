@@ -101,28 +101,6 @@ BullTowerStats.prototype.DecSuspicion = function(min, dec) {
 	this.suspicion.DecreaseStat(min, dec);
 }
 
-// Quest results
-Outlaws.BullTower = {
-	AlaricFreed      : 1,
-	StatueDestroyed  : 2,
-	CaravansIgnited  : 4,
-	CaravansSearched : 8,
-	AnimalsFreed     : 16,
-	SafeLooted       : 32,
-	BlueRoses        : 64,
-	ContrabandStolen : 128,
-	PerfectScore     : 256
-};
-
-// Quest state
-Outlaws.BullTowerQuest = {
-	NotStarted : 0,
-	Initiated  : 1,
-	Completed  : 2,
-	AlaricFollowup : 3,
-	ZenithFollowup : 4
-};
-
 /*
  * 
  * Bull tower area
@@ -130,7 +108,7 @@ Outlaws.BullTowerQuest = {
  */
 
 // Create namespace
-world.loc.BullTower = {
+let BullTowerLoc = {
 	Courtyard : 
 	{
 		Yard : new Event("Courtyard"),
@@ -147,41 +125,41 @@ world.loc.BullTower = {
 };
 
 // Disable wait for all locations
-world.loc.BullTower.Courtyard.Yard.wait = function() { return false; };
-world.loc.BullTower.Courtyard.Pens.wait = function() { return false; };
-world.loc.BullTower.Courtyard.Caravans.wait = function() { return false; };
-world.loc.BullTower.Building.Hall.wait = function() { return false; };
-world.loc.BullTower.Building.Cell.wait = function() { return false; };
-world.loc.BullTower.Building.Office.wait = function() { return false; };
-world.loc.BullTower.Building.Warehouse.wait = function() { return false; };
-world.loc.BullTower.Building.Watchtower.wait = function() { return false; };
+BullTowerLoc.Courtyard.Yard.wait = function() { return false; };
+BullTowerLoc.Courtyard.Pens.wait = function() { return false; };
+BullTowerLoc.Courtyard.Caravans.wait = function() { return false; };
+BullTowerLoc.Building.Hall.wait = function() { return false; };
+BullTowerLoc.Building.Cell.wait = function() { return false; };
+BullTowerLoc.Building.Office.wait = function() { return false; };
+BullTowerLoc.Building.Warehouse.wait = function() { return false; };
+BullTowerLoc.Building.Watchtower.wait = function() { return false; };
 
 // Add onEntry, conversations to all locations (not Cell)
-world.loc.BullTower.Courtyard.Yard.onEntry = function() {
+BullTowerLoc.Courtyard.Yard.onEntry = function() {
 	if(Math.random() < 0.7) BullTowerScenes.Coversations(true);
 	else PrintDefaultOptions();
 }
-world.loc.BullTower.Courtyard.Pens.onEntry = function() {
+BullTowerLoc.Courtyard.Pens.onEntry = function() {
 	if(Math.random() < 0.7) BullTowerScenes.Coversations(true);
 	else PrintDefaultOptions();
 }
-world.loc.BullTower.Courtyard.Caravans.onEntry = function() {
+BullTowerLoc.Courtyard.Caravans.onEntry = function() {
 	if(Math.random() < 0.7) BullTowerScenes.Coversations(true);
 	else PrintDefaultOptions();
 }
-world.loc.BullTower.Building.Hall.onEntry = function() {
+BullTowerLoc.Building.Hall.onEntry = function() {
 	if(Math.random() < 0.7) BullTowerScenes.Coversations();
 	else PrintDefaultOptions();
 }
-world.loc.BullTower.Building.Office.onEntry = function() {
+BullTowerLoc.Building.Office.onEntry = function() {
 	if(Math.random() < 0.7) BullTowerScenes.Coversations();
 	else PrintDefaultOptions();
 }
-world.loc.BullTower.Building.Warehouse.onEntry = function() {
+BullTowerLoc.Building.Warehouse.onEntry = function() {
 	if(Math.random() < 0.7) BullTowerScenes.Coversations();
 	else PrintDefaultOptions();
 }
-world.loc.BullTower.Building.Watchtower.onEntry = function() {
+BullTowerLoc.Building.Watchtower.onEntry = function() {
 	if(Math.random() < 0.7) BullTowerScenes.Coversations();
 	else PrintDefaultOptions();
 }
@@ -543,7 +521,7 @@ BullTowerScenes.MovingOut = function() {
 				
 				outlaws.BT = new BullTowerStats();
 				
-				MoveToLocation(world.loc.BullTower.Courtyard.Yard, {hour: 3});
+				MoveToLocation(BullTowerLoc.Courtyard.Yard, {hour: 3});
 			});
 		}, enabled : true,
 		tooltip : "You’re as ready as you’ll ever be."
@@ -555,7 +533,7 @@ BullTowerScenes.MovingOut = function() {
 /*
  * Dungeon starts here
  */
-world.loc.BullTower.Courtyard.Yard.description = function() {
+BullTowerLoc.Courtyard.Yard.description = function() {
 	Text.Add("You are standing in the main courtyard of Bull Tower, flanked by high walls on three sides and the old watchtower to the north. The gates - the only way in or out of the old fortress - lie to the south, watched over by the two guards whom Cveta ‘persuaded’ to let you in. The effects of age and neglect are clearly visible in the appearance of the grounds  - the old training field is overgrown with weeds and wildflowers, and while the walls are still solid, bits of crumbling masonry lie at the base.");
 	Text.NL();
 	if(outlaws.flags["BT"] & Outlaws.BullTower.StatueDestroyed) {
@@ -578,32 +556,32 @@ world.loc.BullTower.Courtyard.Yard.description = function() {
 
 
 //[Animal Pens][Caravan][Enter][Statue][Slip Out]
-world.loc.BullTower.Courtyard.Yard.links.push(new Link(
+BullTowerLoc.Courtyard.Yard.links.push(new Link(
 	"Enter tower", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.BullTower.Building.Hall, {minute: 5});
+		MoveToLocation(BullTowerLoc.Building.Hall, {minute: 5});
 		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	}
 ));
-world.loc.BullTower.Courtyard.Yard.links.push(new Link(
+BullTowerLoc.Courtyard.Yard.links.push(new Link(
 	"Caravans", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.BullTower.Courtyard.Caravans, {minute: 5});
+		MoveToLocation(BullTowerLoc.Courtyard.Caravans, {minute: 5});
 		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	}
 ));
-world.loc.BullTower.Courtyard.Yard.links.push(new Link(
+BullTowerLoc.Courtyard.Yard.links.push(new Link(
 	"Animal Pens", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.BullTower.Courtyard.Pens, {minute: 5});
+		MoveToLocation(BullTowerLoc.Courtyard.Pens, {minute: 5});
 		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	}
 ));
 
-world.loc.BullTower.Courtyard.Yard.events.push(new Link(
+BullTowerLoc.Courtyard.Yard.events.push(new Link(
 	"Statue", function() {
 		return !(outlaws.flags["BT"] & Outlaws.BullTower.StatueDestroyed);
 	}, true,
@@ -686,7 +664,7 @@ world.loc.BullTower.Courtyard.Yard.events.push(new Link(
 	}
 ));
 
-world.loc.BullTower.Courtyard.Yard.links.push(new Link(
+BullTowerLoc.Courtyard.Yard.links.push(new Link(
 	"Slip out", true, true,
 	null,
 	function() {
@@ -732,7 +710,7 @@ world.loc.BullTower.Courtyard.Yard.links.push(new Link(
 
 
 
-world.loc.BullTower.Courtyard.Caravans.description = function() {
+BullTowerLoc.Courtyard.Caravans.description = function() {
 	Text.Add("Off to the east of the main tower building, this small courtyard is roofed, presumably to keep the wind and rain off carts, carriages and wagons parked in it. However, age has caused the roof to fall apart in places, allowing moonlight to shine through holes in the old masonry work.");
 	Text.NL();
 	if(outlaws.flags["BT"] & Outlaws.BullTower.CaravansIgnited) {
@@ -750,16 +728,16 @@ world.loc.BullTower.Courtyard.Caravans.description = function() {
 	}
 }
 
-world.loc.BullTower.Courtyard.Caravans.links.push(new Link(
+BullTowerLoc.Courtyard.Caravans.links.push(new Link(
 	"Courtyard", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.BullTower.Courtyard.Yard, {minute: 5});
+		MoveToLocation(BullTowerLoc.Courtyard.Yard, {minute: 5});
 		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	}
 ));
 
-world.loc.BullTower.Courtyard.Caravans.events.push(new Link(
+BullTowerLoc.Courtyard.Caravans.events.push(new Link(
 	"Guards", function() {
 		return !(outlaws.BT.guardsDown);
 	}, true,
@@ -958,7 +936,7 @@ BullTowerScenes.GuardsLoss = function() {
 	BullTowerScenes.EndingFailure();
 }
 
-world.loc.BullTower.Courtyard.Caravans.events.push(new Link(
+BullTowerLoc.Courtyard.Caravans.events.push(new Link(
 	"Search Caravans", function() {
 		return !(outlaws.flags["BT"] & Outlaws.BullTower.CaravansSearched) &&
 		       !(outlaws.flags["BT"] & Outlaws.BullTower.CaravansIgnited);
@@ -993,7 +971,7 @@ world.loc.BullTower.Courtyard.Caravans.events.push(new Link(
 ));
 
 
-world.loc.BullTower.Courtyard.Caravans.events.push(new Link(
+BullTowerLoc.Courtyard.Caravans.events.push(new Link(
 	"Burn Caravans", function() {
 		return outlaws.BT.guardsDown && !(outlaws.flags["BT"] & Outlaws.BullTower.CaravansIgnited);
 	}, true,
@@ -1057,7 +1035,7 @@ world.loc.BullTower.Courtyard.Caravans.events.push(new Link(
 	}
 ));
 
-world.loc.BullTower.Courtyard.Pens.description = function() {
+BullTowerLoc.Courtyard.Pens.description = function() {
 	Text.Add("These pens look like they used to be proper stables, but time and neglect have eaten away at the supporting timbers. A few serviceable stalls remain, but… well, it wouldn’t be right to call them stables without a single horse in it.");
 	Text.NL();
 	Text.Add("The prevailing smell in the air is one of mold and old dirt rather than that of animals; any feeding or water troughs have long since decayed into dust, with hooks for tack and other riding gear long rusted down to brown stubs. Even with the wealthy Royal Guard secretly occupying Bull Tower, the building is not getting much use - they must do most of their travel on foot.");
@@ -1072,16 +1050,16 @@ world.loc.BullTower.Courtyard.Pens.description = function() {
 	Text.Add("Well, what will you do?");
 }
 
-world.loc.BullTower.Courtyard.Pens.links.push(new Link(
+BullTowerLoc.Courtyard.Pens.links.push(new Link(
 	"Courtyard", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.BullTower.Courtyard.Yard, {minute: 5});
+		MoveToLocation(BullTowerLoc.Courtyard.Yard, {minute: 5});
 		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	}
 ));
 
-world.loc.BullTower.Courtyard.Pens.events.push(new Link(
+BullTowerLoc.Courtyard.Pens.events.push(new Link(
 	"Free Animals", function() {
 		return !(outlaws.flags["BT"] & Outlaws.BullTower.AnimalsFreed);
 	}, true,
@@ -1131,7 +1109,7 @@ world.loc.BullTower.Courtyard.Pens.events.push(new Link(
 ));
 
 
-world.loc.BullTower.Building.Hall.description = function() {
+BullTowerLoc.Building.Hall.description = function() {
 	Text.Add("The main hall of Bull Tower is just inside the archway of the main entrance. Walls where banners and tapestries once hung now lie bare, their only adornment dust gathering in the cracks between the stones. Built to accommodate the hundreds who were once garrisoned here, it now lies empty, its expansiveness causing even the lightest of your footsteps to echo in the darkness.");
 	Text.NL();
 	Text.Add("While most of the staircases are too precarious to navigate, you do note that there are footprints on two sets of steps: one spiraling upward into the darkness of the main watchtower, and one leading downward below ground level. Similarly, most of the doors have been boarded up and nailed shut, but there are a few which look like they’ve seen some use of late.");
@@ -1140,15 +1118,15 @@ world.loc.BullTower.Building.Hall.description = function() {
 }
 
 //[Warehouse][Office][Watchtower][Cell][Courtyard]
-world.loc.BullTower.Building.Hall.links.push(new Link(
+BullTowerLoc.Building.Hall.links.push(new Link(
 	"Courtyard", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.BullTower.Courtyard.Yard, {minute: 5});
+		MoveToLocation(BullTowerLoc.Courtyard.Yard, {minute: 5});
 		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	}
 ));
-world.loc.BullTower.Building.Hall.links.push(new Link(
+BullTowerLoc.Building.Hall.links.push(new Link(
 	"Warehouse", true, true,
 	null,
 	function() {
@@ -1166,7 +1144,7 @@ world.loc.BullTower.Building.Hall.links.push(new Link(
 				Text.Add("The key that you found on the caravan guards looks like it might fit the lock on the door, and indeed, it slips in easily, the tumblers moving without so much as a squeak. Seems like this door is used often enough for the guards to keep the lock in good condition.", parse);
 			}
 			Text.NL();
-			MoveToLocation(world.loc.BullTower.Building.Warehouse, {minute: 5}, true);
+			MoveToLocation(BullTowerLoc.Building.Warehouse, {minute: 5}, true);
 		}
 		else {
 			if(outlaws.flags["BT"] & Outlaws.BullTower.AlaricFreed)
@@ -1181,32 +1159,32 @@ world.loc.BullTower.Building.Hall.links.push(new Link(
 		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	}
 ));
-world.loc.BullTower.Building.Hall.links.push(new Link(
+BullTowerLoc.Building.Hall.links.push(new Link(
 	"Office", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.BullTower.Building.Office, {minute: 5});
+		MoveToLocation(BullTowerLoc.Building.Office, {minute: 5});
 		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	}
 ));
-world.loc.BullTower.Building.Hall.links.push(new Link(
+BullTowerLoc.Building.Hall.links.push(new Link(
 	"Cell", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.BullTower.Building.Cell, {minute: 5});
+		MoveToLocation(BullTowerLoc.Building.Cell, {minute: 5});
 		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	}
 ));
-world.loc.BullTower.Building.Hall.links.push(new Link(
+BullTowerLoc.Building.Hall.links.push(new Link(
 	"Tower", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.BullTower.Building.Watchtower, {minute: 5});
+		MoveToLocation(BullTowerLoc.Building.Watchtower, {minute: 5});
 		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	}
 ));
 
-world.loc.BullTower.Building.Cell.onEntry = function() {
+BullTowerLoc.Building.Cell.onEntry = function() {
 	var parse = {
 		playername : player.name,
 		weapon : function() { return player.WeaponDesc(); }
@@ -1220,7 +1198,7 @@ world.loc.BullTower.Building.Cell.onEntry = function() {
 		Text.Flush();
 		
 		Gui.NextPrompt(function() {
-			MoveToLocation(world.loc.BullTower.Building.Hall, {minute: 5});
+			MoveToLocation(BullTowerLoc.Building.Hall, {minute: 5});
 			outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 		});
 	}
@@ -1255,7 +1233,7 @@ world.loc.BullTower.Building.Cell.onEntry = function() {
 				Text.Flush();
 				
 				Gui.NextPrompt(function() {
-					MoveToLocation(world.loc.BullTower.Building.Hall, {minute: 5});
+					MoveToLocation(BullTowerLoc.Building.Hall, {minute: 5});
 					outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 				});
 			}, enabled : true,
@@ -1419,7 +1397,7 @@ BullTowerScenes.CorishevWin = function() {
 				Text.Flush();
 				
 				Gui.NextPrompt(function() {
-					MoveToLocation(world.loc.BullTower.Building.Hall, {minute: 5});
+					MoveToLocation(BullTowerLoc.Building.Hall, {minute: 5});
 				});
 			}, enabled : true,
 			tooltip : "Get out of here before things get any worse."
@@ -1521,7 +1499,7 @@ BullTowerScenes.CorishevFuck = function(corishev) {
 			Text.Flush();
 			
 			Gui.NextPrompt(function() {
-				MoveToLocation(world.loc.BullTower.Building.Hall, {minute: 20});
+				MoveToLocation(BullTowerLoc.Building.Hall, {minute: 20});
 			});
 		}, enabled : true,
 		tooltip : "Whip him. Whip him good."
@@ -1575,7 +1553,7 @@ BullTowerScenes.CorishevFuck = function(corishev) {
 			Text.Flush();
 			
 			Gui.NextPrompt(function() {
-				MoveToLocation(world.loc.BullTower.Building.Hall, {minute: 20});
+				MoveToLocation(BullTowerLoc.Building.Hall, {minute: 20});
 			});
 		}, enabled : true,
 		tooltip : Text.Parse("Ride Corishev’s Cock with your [gen] and show him who’s boss.", parse)
@@ -1608,7 +1586,7 @@ BullTowerScenes.CorishevFuck = function(corishev) {
 			Text.Flush();
 			
 			Gui.NextPrompt(function() {
-				MoveToLocation(world.loc.BullTower.Building.Hall, {minute: 20});
+				MoveToLocation(BullTowerLoc.Building.Hall, {minute: 20});
 			});
 		}, enabled : p1cock,
 		tooltip : Text.Parse("Fuck that ass of his with your [cocks].", parse)
@@ -1622,7 +1600,7 @@ BullTowerScenes.CorishevFuck = function(corishev) {
 			Text.Flush();
 			
 			Gui.NextPrompt(function() {
-				MoveToLocation(world.loc.BullTower.Building.Hall, {minute: 5});
+				MoveToLocation(BullTowerLoc.Building.Hall, {minute: 5});
 			});
 		}, enabled : true,
 		tooltip : "Nah, now’s not the time to be doing this."
@@ -1631,7 +1609,7 @@ BullTowerScenes.CorishevFuck = function(corishev) {
 }
 
 
-world.loc.BullTower.Building.Office.description = function() {
+BullTowerLoc.Building.Office.description = function() {
 	
 	var parse = {
 		t : terry.Recruited() ? ", perhaps so well that even Terry would find it quite the challenge" : ""
@@ -1646,16 +1624,16 @@ world.loc.BullTower.Building.Office.description = function() {
 		Text.Add("At first glance, the safe looks very well crafted[t]. You’ll have to get closer in order to inspect it in the dim light, though.", parse);
 }
 
-world.loc.BullTower.Building.Office.links.push(new Link(
+BullTowerLoc.Building.Office.links.push(new Link(
 	"Hall", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.BullTower.Building.Hall, {minute: 5});
+		MoveToLocation(BullTowerLoc.Building.Hall, {minute: 5});
 		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	}
 ));
 
-world.loc.BullTower.Building.Office.events.push(new Link(
+BullTowerLoc.Building.Office.events.push(new Link(
 	"Safe", function() {
 		return !(outlaws.flags["BT"] & Outlaws.BullTower.SafeLooted);
 	}, true,
@@ -1865,7 +1843,7 @@ BullTowerScenes.SafeFailure = function() {
 	});
 }
 
-world.loc.BullTower.Building.Warehouse.description = function() {
+BullTowerLoc.Building.Warehouse.description = function() {
 	Text.Add("This must be where the guards are keeping the contraband until it’s eventually passed on to the high society of Rigard. Stacked in whatever open space is available, the Royal Guard has turned what was once a mess or meeting hall into a makeshift warehouse that’s surprisingly neat and orderly. There’s far too much in the way of ill-gotten gains for it to have come in with a single caravan - this has clearly been going on for some time.");
 	Text.NL();
 	Text.Add("<i>“I would not be surprised if some of this originated as confiscated property.”</i> Cveta muses. <i>“It is not unknown for confiscated goods to resurface now and again.”</i>");
@@ -1877,16 +1855,16 @@ world.loc.BullTower.Building.Warehouse.description = function() {
 	}
 }
 
-world.loc.BullTower.Building.Warehouse.links.push(new Link(
+BullTowerLoc.Building.Warehouse.links.push(new Link(
 	"Hall", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.BullTower.Building.Hall, {minute: 5});
+		MoveToLocation(BullTowerLoc.Building.Hall, {minute: 5});
 		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	}
 ));
 
-world.loc.BullTower.Building.Warehouse.events.push(new Link(
+BullTowerLoc.Building.Warehouse.events.push(new Link(
 	"Contraband", function() {
 		return !(outlaws.flags["BT"] & Outlaws.BullTower.ContrabandStolen);
 	}, true,
@@ -1909,7 +1887,7 @@ world.loc.BullTower.Building.Warehouse.events.push(new Link(
 	}
 ));
 
-world.loc.BullTower.Building.Warehouse.events.push(new Link(
+BullTowerLoc.Building.Warehouse.events.push(new Link(
 	"Roses", function() {
 		return !(outlaws.flags["BT"] & Outlaws.BullTower.BlueRoses);
 	}, true,
@@ -1945,7 +1923,7 @@ world.loc.BullTower.Building.Warehouse.events.push(new Link(
 ));
 
 
-world.loc.BullTower.Building.Watchtower.description = function() {
+BullTowerLoc.Building.Watchtower.description = function() {
 	Text.Add("From the outside, the ancient watchtower of Bull Tower looks proud and strong in spite of its age. On the inside, it’s just dusty and claustrophobic. The long, spiral staircase up to the top is enough to take the wind out of anyone, and leads to a landing and a ladder that in turn leads up to the belfry. Flickering light filters down from above. A peek upward through the hatch reveals that ");
 	if(outlaws.BT.towerGuardDown)
 		Text.Add("the lookout you dealt with earlier is still out cold and unlikely to raise the alarm anytime soon.");
@@ -1955,16 +1933,16 @@ world.loc.BullTower.Building.Watchtower.description = function() {
 	Text.Add("The remainder of the watchtower’s nest is visible from below if you angle yourself properly; the room’s not very big. A few flickering lanterns, an old but comfortable chair, an ancient steel hook from which an enormous bell hangs, complete with striker and clapper. Strictly functional and utilitarian, as it should be.");
 }
 
-world.loc.BullTower.Building.Watchtower.links.push(new Link(
+BullTowerLoc.Building.Watchtower.links.push(new Link(
 	"Hall", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.BullTower.Building.Hall, {minute: 5});
+		MoveToLocation(BullTowerLoc.Building.Hall, {minute: 5});
 		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	}
 ));
 
-world.loc.BullTower.Building.Watchtower.events.push(new Link(
+BullTowerLoc.Building.Watchtower.events.push(new Link(
 	"Guard", function() {
 		return !outlaws.BT.towerGuardDown;
 	}, true,
@@ -2039,7 +2017,7 @@ world.loc.BullTower.Building.Watchtower.events.push(new Link(
 		});
 	}
 ));
-world.loc.BullTower.Building.Watchtower.events.push(new Link(
+BullTowerLoc.Building.Watchtower.events.push(new Link(
 	"Lantern", function() {
 		return outlaws.BT.towerGuardDown && !outlaws.BT.stoleLantern;
 	}, true,
@@ -2610,4 +2588,4 @@ BullTowerScenes.AftermathZenith = function() {
 	Gui.NextPrompt();
 }
 
-export { BullTowerStats, BullTowerScenes };
+export { BullTowerStats, BullTowerScenes, BullTowerLoc };
