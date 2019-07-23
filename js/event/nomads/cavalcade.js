@@ -3,6 +3,7 @@
  */
 import { Link } from '../../event';
 import { GetDEBUG } from '../../../app';
+import { Gender } from '../../body/gender';
 
 let NCavalcadeScenes = {};
 

@@ -1,6 +1,7 @@
 
 import { EncounterTable } from '../event';
 import { Shop } from '../shop';
+import { Gender } from '../body/gender';
 
 let OasisScenes = {};
 

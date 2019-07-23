@@ -6,6 +6,7 @@ import { FireblossomScenes } from '../../event/brothel/fireblossom';
 import { ChesScenes } from '../../event/brothel/ches';
 import { BelindaScenes } from '../../event/brothel/belinda';
 import { BastetScenes } from '../../event/brothel/bastet';
+import { Gender } from '../../body/gender';
 
 let BrothelLoc = {
 	brothel  : new Event("Brothel"),

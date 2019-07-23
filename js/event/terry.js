@@ -7,6 +7,7 @@
 import { Entity } from '../entity';
 import { GetDEBUG } from '../../app';
 import { JobDesc } from '../job';
+import { Gender } from '../body/gender';
 
 let TerryScenes = {};
 

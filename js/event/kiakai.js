@@ -6,6 +6,7 @@
 import { Entity } from '../entity';
 import { JobDesc } from '../job';
 import { KiakaiSex } from './kiakai-sex';
+import { Gender } from '../body/gender';
 
 let KiakaiScenes = {
 	Sex : KiakaiSex

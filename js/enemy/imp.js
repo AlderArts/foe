@@ -6,6 +6,7 @@
 
 import { Entity } from '../entity';
 import { Intro } from '../event/introduction';
+import { Gender } from '../body/gender';
 
 function Imp() {
 	Entity.call(this);

@@ -7,6 +7,7 @@
 import { Entity } from '../../entity';
 import { BossEntity } from '../../enemy/boss';
 import { LagonDScenes } from './lagon-defeated';
+import { Gender } from '../../body/gender';
 
 let LagonScenes = {
 	Defeated : LagonDScenes,

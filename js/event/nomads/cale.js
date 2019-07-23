@@ -6,6 +6,7 @@
 import { Entity } from '../../entity';
 import { Shop } from '../../shop';
 import { GetDEBUG } from '../../../app';
+import { Gender } from '../../body/gender';
 
 let CaleScenes = {};
 

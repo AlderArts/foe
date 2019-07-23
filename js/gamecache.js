@@ -69,6 +69,7 @@ import { Aria } from './event/aria';
 import { Sylistraxia } from './event/sylistraxia';
 import { Ches } from './event/brothel/ches';
 import { ExplorationSetGAME } from './exploration';
+import { Gender } from './body/gender';
 
 let world = null;
 

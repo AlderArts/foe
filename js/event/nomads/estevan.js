@@ -5,6 +5,7 @@
  */
 import { Entity } from '../../entity';
 import { GetDEBUG } from '../../../app';
+import { Gender } from '../../body/gender';
 
 let EstevanScenes = {};
 

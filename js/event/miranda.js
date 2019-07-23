@@ -5,6 +5,7 @@
  */
 import { Entity } from '../entity';
 import { Link } from '../event';
+import { Gender } from '../body/gender';
 
 let MirandaScenes = {};
 

@@ -1,5 +1,6 @@
 
 import { Event, Link } from '../../event';
+import { Gender } from '../../body/gender';
 
 //
 // Sliken Delights

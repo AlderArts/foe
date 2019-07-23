@@ -5,8 +5,8 @@
  */
 
 import { Entity } from '../entity';
-import { Scenes } from '../event';
 import { Cock } from '../body/cock';
+import { Gender } from '../body/gender';
 
 let LizardsScenes = {};
 

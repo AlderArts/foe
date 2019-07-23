@@ -21,6 +21,7 @@ import { WeaponShopScenes } from './weaponshop';
 import { MagicShopScenes } from './magicshop';
 import { ClothShopScenes } from './clothstore';
 import { ArmorShopScenes } from './armorshop';
+import { Gender } from '../../body/gender';
 
 // Create namespace
 let RigardLoc = {

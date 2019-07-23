@@ -1,3 +1,4 @@
+import { Gender } from "./gender";
 
 // Contains references to descriptors
 let Race = {};

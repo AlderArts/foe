@@ -2,6 +2,7 @@ import { EncounterTable } from "../event";
 import { Party } from "../party";
 import { Encounter } from "../combat";
 import { GameState } from "../gamestate";
+import { Gender } from "../body/gender";
 
 let RoamingScenes = {};
 

@@ -5,6 +5,7 @@
  */
 
 import { Entity } from '../entity';
+import { Gender } from '../body/gender';
 
 function StreetUrchin() {
 	Entity.call(this);

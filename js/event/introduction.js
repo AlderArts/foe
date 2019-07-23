@@ -7,6 +7,7 @@
 import { Event, Link } from '../event';
 import { GameState } from '../gamestate';
 import { Gui } from '../gui';
+import { Gender } from '../body/gender';
 
 let Intro = {};
 

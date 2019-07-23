@@ -3,6 +3,7 @@
  * TASKS
  */
 import { GetDEBUG } from '../../app';
+import { Gender } from '../body/gender';
 
 let TasksScenes = {};
 

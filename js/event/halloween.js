@@ -2,6 +2,7 @@
 import { Event, Link } from '../event';
 import { Inventory } from '../inventory';
 import { GetDEBUG } from '../../app';
+import { Gender } from '../body/gender';
 
 let HalloweenScenes = {};
 

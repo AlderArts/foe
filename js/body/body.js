@@ -10,6 +10,7 @@ import { Balls } from './balls';
 import { Butt } from './butt';
 import { Breasts } from './breasts';
 import { DefBody } from './defbody';
+import { Gender } from './gender';
 
 // Describe a standard humanoid-ish body
 function Body(ent) {

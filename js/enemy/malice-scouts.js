@@ -2,6 +2,7 @@
 import { Entity } from '../entity';
 import { EncounterTable } from '../event';
 import { Party } from '../party';
+import { Gender } from '../body/gender';
 
 /*
 Tier 1 Malice scouts and outriders

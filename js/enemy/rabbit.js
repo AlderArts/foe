@@ -8,6 +8,7 @@ import { Entity } from '../entity';
 import { Images } from '../assets';
 import { TF } from '../tf';
 import { AppendageType } from '../body/appendage';
+import { Gender } from '../body/gender';
 
 let LagomorphScenes = {};
 

@@ -6,6 +6,7 @@
 
 import { Entity } from '../entity';
 import { EncounterTable } from '../event';
+import { Gender } from '../body/gender';
 
 let MomoScenes = {};
 

@@ -6,6 +6,7 @@
 
 import { Entity } from '../entity';
 import { GetDEBUG } from '../../app';
+import { Gender } from '../body/gender';
 
 function Player(storage) {
 	Entity.call(this);

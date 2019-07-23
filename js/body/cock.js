@@ -1,6 +1,7 @@
 
 import { BodyPart } from './bodypart';
 import { Stat } from '../stat';
+import { Gender } from './gender';
 
 let CockType = {
 	ordinary : 0,

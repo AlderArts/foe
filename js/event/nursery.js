@@ -1,3 +1,4 @@
+import { Gender } from "../body/gender";
 
 let NurseryScenes = {};
 

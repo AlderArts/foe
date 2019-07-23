@@ -5,6 +5,7 @@
  */
 
 import { Event, Link, EncounterTable } from '../event';
+import { Gender } from '../body/gender';
 
 /*
  * Structure to hold farm management minigame

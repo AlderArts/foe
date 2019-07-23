@@ -9,6 +9,7 @@ import { Event, Link, EncounterTable } from '../event';
 import { VenaScenes } from '../event/burrows/vena';
 import { OpheliaScenes } from '../event/burrows/ophelia';
 import { LagonScenes } from '../event/burrows/lagon';
+import { Gender } from '../body/gender';
 
 // Create namespace
 let BurrowsLoc = {

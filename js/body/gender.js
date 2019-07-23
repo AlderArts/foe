@@ -1,5 +1,5 @@
 
-Gender = {
+let Gender = {
 	male   : 0,
 	female : 1,
 	herm   : 2,
@@ -54,3 +54,5 @@ Gender.Rand = function(odds) {
 	}
 	return Gender.none;
 }
+
+export { Gender };

@@ -9,6 +9,7 @@ import { Images } from '../assets';
 import { TF } from '../tf';
 import { AppendageType } from '../body/appendage';
 import { Items } from '../item';
+import { Gender } from '../body/gender';
 
 let FelinesScenes = {};
 
