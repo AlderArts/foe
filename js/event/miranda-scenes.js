@@ -4,6 +4,40 @@ import { Gender } from '../body/gender';
 
 let MirandaScenes = {};
 
+let world = null;
+
+export function InitMiranda(w) {
+	world = w;
+    // Add catch thief as explorable event
+    world.loc.Rigard.Slums.gate.enc.AddEnc(function() { return MirandaScenes.CatchThatThief; }, 1.0, function() { return miranda.flags["Thief"] == 0 && miranda.OnPatrol(); });
+    world.loc.Rigard.Residential.street.enc.AddEnc(function() { return MirandaScenes.CatchThatThief; }, 1.0, function() { return miranda.flags["Thief"] == 0 && miranda.OnPatrol(); });
+    world.loc.Rigard.Gate.enc.AddEnc(function() { return MirandaScenes.CatchThatThief; }, 1.0, function() { return miranda.flags["Thief"] == 0 && miranda.OnPatrol(); });
+    world.loc.Rigard.ShopStreet.street.enc.AddEnc(function() { return MirandaScenes.CatchThatThief; }, 1.0, function() { return miranda.flags["Thief"] == 0 && miranda.OnPatrol(); });
+
+    
+    world.loc.Rigard.Tavern.common.events.push(new Link("Miranda", function() { return miranda.IsAtLocation(); }, true,
+        function() {
+            if(miranda.IsAtLocation())
+                Text.Add("Miranda is lounging at a table in the shady tavern. ");
+        },
+        MirandaScenes.MaidensBaneTalk,
+        "Miranda is lounging at a table in the shady tavern.")
+    );
+
+    
+    /* TODO */
+    world.loc.Rigard.Residential.miranda.description = function() {
+        
+    }
+    world.loc.Rigard.Residential.miranda.onEntry = function() {
+        if(rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry)
+            MirandaScenes.TerryChaseHome();
+        else
+            PrintDefaultOptions();
+    }
+};
+
+
 // Events
 
 MirandaScenes.BarracksApproach = function() {
@@ -1189,11 +1223,6 @@ MirandaScenes.CatchThatThief = function() {
 	Gui.NextPrompt();
 }
 
-// Add catch thief as explorable event
-world.loc.Rigard.Slums.gate.enc.AddEnc(function() { return MirandaScenes.CatchThatThief; }, 1.0, function() { return miranda.flags["Thief"] == 0 && miranda.OnPatrol(); });
-world.loc.Rigard.Residential.street.enc.AddEnc(function() { return MirandaScenes.CatchThatThief; }, 1.0, function() { return miranda.flags["Thief"] == 0 && miranda.OnPatrol(); });
-world.loc.Rigard.Gate.enc.AddEnc(function() { return MirandaScenes.CatchThatThief; }, 1.0, function() { return miranda.flags["Thief"] == 0 && miranda.OnPatrol(); });
-world.loc.Rigard.ShopStreet.street.enc.AddEnc(function() { return MirandaScenes.CatchThatThief; }, 1.0, function() { return miranda.flags["Thief"] == 0 && miranda.OnPatrol(); });
 
 MirandaScenes.HeyThere = function() {
 	var parse = {
@@ -2402,15 +2431,6 @@ MirandaScenes.MaidensBaneNasty = function() {
 	
 	MirandaScenes.MaidensBanePrompt();		
 }
-
-world.loc.Rigard.Tavern.common.events.push(new Link("Miranda", function() { return miranda.IsAtLocation(); }, true,
-	function() {
-		if(miranda.IsAtLocation())
-			Text.Add("Miranda is lounging at a table in the shady tavern. ");
-	},
-	MirandaScenes.MaidensBaneTalk,
-	"Miranda is lounging at a table in the shady tavern.")
-);
 
 MirandaScenes.TerryChaseHome = function() {
 	var parse = {
@@ -7537,18 +7557,5 @@ MirandaScenes.DatingFirstHome = function() {
 	}
 }
 
-
-
-
-/* TODO */
-world.loc.Rigard.Residential.miranda.description = function() {
-	
-}
-world.loc.Rigard.Residential.miranda.onEntry = function() {
-	if(rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry)
-		MirandaScenes.TerryChaseHome();
-	else
-		PrintDefaultOptions();
-}
 
 export { MirandaScenes };

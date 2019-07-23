@@ -15,6 +15,7 @@ import { RigardLoc, InitRigard } from './loc/rigard/rigard';
 import { Scenes } from './scenes';
 import { InitGlade } from './loc/glade';
 import { InitNomads } from './loc/nomads';
+import { InitMiranda } from './event/miranda-scenes';
 
 let world = {
 	// Prototype initialization
@@ -46,6 +47,8 @@ InitRigard(world, Scenes);
 InitFarm(world);
 InitBurrows(world);
 InitGlade(world);
+
+InitMiranda(world);
 
 world.Locations = {
 	Plains    : 0,
