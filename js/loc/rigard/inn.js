@@ -1,14 +1,14 @@
 
 import { Event, Link } from '../../event';
+import { TwinsScenes } from '../../event/royals/twins';
+import { TasksScenes } from '../../event/outlaws/vaughn-tasks';
 
 let world = null;
-let Scenes = null;
 
-export function InitLB(w, scenes) {
+export function InitLB(w) {
 	world = w;
 	world.SaveSpots["LB"] = InnLoc.room;
 	world.SaveSpots["LB2"] = InnLoc.penthouse;
-	Scenes = scenes;
 };
 
 let InnLoc = {
@@ -98,7 +98,7 @@ InnLoc.penthouse.events.push(new Link(
 	"Twins", true, true,
 	null,
 	function() {
-		Scenes.Twins.Interact();
+		TwinsScenes.Interact();
 	}
 ));
 
@@ -136,8 +136,8 @@ InnLoc.common.endDescription = function() {
 	}
 	Text.Flush();
 	
-	if(Scenes.Vaughn.Tasks.Poisoning.InnAvailable()) {
-		Scenes.Vaughn.Tasks.Poisoning.ArrivalAtInn(true);
+	if(TasksScenes.Poisoning.InnAvailable()) {
+		TasksScenes.Poisoning.ArrivalAtInn(true);
 	}
 }
 
@@ -155,8 +155,8 @@ InnLoc.common.DrunkHandler = function() {
 }
 
 InnLoc.common.onEntry = function(preventClear, oldLocation) {
-	if(Scenes.Vaughn.Tasks.Poisoning.InnAvailable()) {
-		Scenes.Vaughn.Tasks.Poisoning.ArrivalAtInn(false, oldLocation);
+	if(TasksScenes.Poisoning.InnAvailable()) {
+		TasksScenes.Poisoning.ArrivalAtInn(false, oldLocation);
 		return;
 	}
 	

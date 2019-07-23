@@ -1,5 +1,6 @@
 import { Item, ItemType, ItemSubtype } from '../item';
 import { Cock } from '../body/cock';
+import { Race } from '../body/race';
 
 let StrapOnItems = {};
 

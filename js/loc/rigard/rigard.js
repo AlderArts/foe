@@ -15,13 +15,14 @@ import { GateLoc, BarracksLoc } from './guards';
 import { ShopStreetLoc, ShopStreetScenes } from './merchants';
 import { CastleLoc, NobleScenes } from './castle';
 import { PlazaLoc, PlazaScenes } from './plaza';
-import { KrawitzLoc } from './krawitz';
+import { KrawitzLoc, InitKrawitz } from './krawitz';
 import { OddShopScenes } from './sexstore';
 import { WeaponShopScenes } from './weaponshop';
 import { MagicShopScenes } from './magicshop';
 import { ClothShopScenes } from './clothstore';
 import { ArmorShopScenes } from './armorshop';
 import { Gender } from '../../body/gender';
+import { InitMageTower } from './magetower';
 
 let world = null;
 let Scenes = null;
@@ -29,6 +30,8 @@ export function InitRigard(w, scenes) {
 	world = w;
 	Scenes = scenes;
 	InitLB(world, scenes);
+	InitMageTower(world);
+	InitKrawitz(world);
 };
 
 // Create namespace

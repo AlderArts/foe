@@ -1,13 +1,21 @@
 
 
 import { Event, Link } from '../../event';
+import { JeanneScenes } from '../../event/royals/jeanne';
+import { GolemScenes } from '../../event/royals/golem';
+
+let world = null;
+
+export function InitMageTower(w) {
+	world = w;
+	world.SaveSpots["Jeanne"] = MageTowerLoc;
+};
 
 //
 // Castle: Mage tower
 //
 let MageTowerLoc = new Event("Mage's tower");
 
-world.SaveSpots["Jeanne"] = MageTowerLoc;
 MageTowerLoc.SaveSpot = "Jeanne";
 MageTowerLoc.safe = function() { return true; };
 MageTowerLoc.description = function() {
@@ -31,13 +39,13 @@ MageTowerLoc.events.push(new Link(
 		}
 	},
 	function() {
-		Scenes.Jeanne.Interact();
+		JeanneScenes.Interact();
 	}
 ));
 MageTowerLoc.events.push(new Link(
-	"Golem", function() { return golem.flags["Met"] >= Scenes.Golem.State.Rebuilt; }, true,
+	"Golem", function() { return golem.flags["Met"] >= GolemScenes.State.Rebuilt; }, true,
 	function() {
-		if(golem.flags["Met"] >= Scenes.Golem.State.Rebuilt) {
+		if(golem.flags["Met"] >= GolemScenes.State.Rebuilt) {
 			Text.Add("The obsidian golem is standing near the wall, silent and unmoving.");
 			Text.NL();
 		}
@@ -55,10 +63,10 @@ MageTowerLoc.endDescription = function() {
 
 MageTowerLoc.onEntry = function() {
 	var golemState = golem.flags["Met"];
-	if(golemState == Scenes.Golem.State.NotMet)
-		Scenes.Golem.FirstApproach();
-	else if(golemState < Scenes.Golem.State.Won_noLoss)
-		Scenes.Golem.RepeatApproach();
+	if(golemState == GolemScenes.State.NotMet)
+		GolemScenes.FirstApproach();
+	else if(golemState < GolemScenes.State.Won_noLoss)
+		GolemScenes.RepeatApproach();
 	else
 		PrintDefaultOptions();
 }

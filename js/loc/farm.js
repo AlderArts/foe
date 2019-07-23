@@ -7,6 +7,13 @@
 import { Event, Link, EncounterTable } from '../event';
 import { Gender } from '../body/gender';
 
+let world = null;
+
+export function InitFarm(w) {
+	world = w;
+	world.SaveSpots["GwendysLoft"] = FarmLoc.Loft;
+};
+
 /*
  * Structure to hold farm management minigame
  */
@@ -157,7 +164,6 @@ FarmLoc.Barn.links.push(new Link(
 //
 // Gwendy's loft
 //
-world.SaveSpots["GwendysLoft"] = FarmLoc.Loft;
 FarmLoc.Loft.SaveSpot   = "GwendysLoft";
 FarmLoc.Loft.safe       = function() { return true; };
 FarmLoc.Loft.description = function() {

@@ -7,7 +7,7 @@ import { LakeLoc } from './loc/lake';
 import { OutlawsLoc } from './loc/outlaws';
 import { ForestLoc } from './loc/forest';
 import { DragonDenLoc } from './loc/dragonden';
-import { FarmLoc } from './loc/farm';
+import { FarmLoc, InitFarm } from './loc/farm';
 import { DesertLoc } from './loc/desert';
 import { BurrowsLoc } from './loc/burrows';
 import { TreeCityLoc } from './loc/treecity/treecity';
@@ -40,7 +40,7 @@ let world = {
 
 IntroInit(world);
 InitRigard(world, Scenes);
-
+InitFarm(world);
 
 world.Locations = {
 	Plains    : 0,

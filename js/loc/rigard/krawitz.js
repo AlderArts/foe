@@ -8,6 +8,13 @@ import { Event, Link, EncounterTable } from '../../event';
 import { GetDEBUG } from '../../../app';
 import { Gender } from '../../body/gender';
 
+let world = null;
+
+export function InitKrawitz(w) {
+	world = w;
+	world.SaveSpots["Krawitz"] = KrawitzLoc.street;
+};
+
 let KrawitzLoc = {
 	street    : new Event("Krawitz's Estate"),
 	servants  : new Event("Servants' Quarters"),
@@ -124,7 +131,6 @@ KrawitzLoc.street.description = function() {
 	Text.Add("You are in front of Krawitz's estate.<br>");
 }
 
-world.SaveSpots["Krawitz"] = KrawitzLoc.street;
 KrawitzLoc.street.SaveSpot = "Krawitz";
 
 KrawitzLoc.street.onEntry = function() {

@@ -1,5 +1,6 @@
 
 import { GetDEBUG } from '../../../app';
+import { Vaughn } from './vaughn';
 
 let TasksScenes = {};
 
