@@ -1,7 +1,7 @@
 let preloader = require('preloader');
 
 import { StatusEffect } from './statuseffect';
-import { Items } from './items';
+import { CardItems } from './items/cards';
 
 var Images = {};
 
@@ -120,40 +120,40 @@ var assetsOverlay = function() {
 }
 
 let LoadCardImages = function(imageArray) {
-	Items.Cards.Light[0].Img    = "assets/img/cards/L1.png";
-	Items.Cards.Light[1].Img    = "assets/img/cards/L2.png";
-	Items.Cards.Light[2].Img    = "assets/img/cards/L3.png";
-	Items.Cards.Light[3].Img    = "assets/img/cards/L4.png";
-	Items.Cards.Light[4].Img    = "assets/img/cards/L5.png";
-	Items.Cards.Darkness[0].Img = "assets/img/cards/D1.png";
-	Items.Cards.Darkness[1].Img = "assets/img/cards/D2.png";
-	Items.Cards.Darkness[2].Img = "assets/img/cards/D3.png";
-	Items.Cards.Darkness[3].Img = "assets/img/cards/D4.png";
-	Items.Cards.Darkness[4].Img = "assets/img/cards/D5.png";
-	Items.Cards.Shadow[0].Img   = "assets/img/cards/S1.png";
-	Items.Cards.Shadow[1].Img   = "assets/img/cards/S2.png";
-	Items.Cards.Shadow[2].Img   = "assets/img/cards/S3.png";
-	Items.Cards.Shadow[3].Img   = "assets/img/cards/S4.png";
-	Items.Cards.Shadow[4].Img   = "assets/img/cards/S5.png";
+	CardItems.Light[0].Img    = "assets/img/cards/L1.png";
+	CardItems.Light[1].Img    = "assets/img/cards/L2.png";
+	CardItems.Light[2].Img    = "assets/img/cards/L3.png";
+	CardItems.Light[3].Img    = "assets/img/cards/L4.png";
+	CardItems.Light[4].Img    = "assets/img/cards/L5.png";
+	CardItems.Darkness[0].Img = "assets/img/cards/D1.png";
+	CardItems.Darkness[1].Img = "assets/img/cards/D2.png";
+	CardItems.Darkness[2].Img = "assets/img/cards/D3.png";
+	CardItems.Darkness[3].Img = "assets/img/cards/D4.png";
+	CardItems.Darkness[4].Img = "assets/img/cards/D5.png";
+	CardItems.Shadow[0].Img   = "assets/img/cards/S1.png";
+	CardItems.Shadow[1].Img   = "assets/img/cards/S2.png";
+	CardItems.Shadow[2].Img   = "assets/img/cards/S3.png";
+	CardItems.Shadow[3].Img   = "assets/img/cards/S4.png";
+	CardItems.Shadow[4].Img   = "assets/img/cards/S5.png";
 
 	Images.card_back            = "assets/img/cards/back.png";
 
 	let cards = [
-		Items.Cards.Light[0].Img,
-		Items.Cards.Light[1].Img,
-		Items.Cards.Light[2].Img,
-		Items.Cards.Light[3].Img,
-		Items.Cards.Light[4].Img,
-		Items.Cards.Darkness[0].Img,
-		Items.Cards.Darkness[1].Img,
-		Items.Cards.Darkness[2].Img,
-		Items.Cards.Darkness[3].Img,
-		Items.Cards.Darkness[4].Img,
-		Items.Cards.Shadow[0].Img,
-		Items.Cards.Shadow[1].Img,
-		Items.Cards.Shadow[2].Img,
-		Items.Cards.Shadow[3].Img,
-		Items.Cards.Shadow[4].Img,
+		CardItems.Light[0].Img,
+		CardItems.Light[1].Img,
+		CardItems.Light[2].Img,
+		CardItems.Light[3].Img,
+		CardItems.Light[4].Img,
+		CardItems.Darkness[0].Img,
+		CardItems.Darkness[1].Img,
+		CardItems.Darkness[2].Img,
+		CardItems.Darkness[3].Img,
+		CardItems.Darkness[4].Img,
+		CardItems.Shadow[0].Img,
+		CardItems.Shadow[1].Img,
+		CardItems.Shadow[2].Img,
+		CardItems.Shadow[3].Img,
+		CardItems.Shadow[4].Img,
 		Images.card_back
 	];
 
