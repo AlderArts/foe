@@ -595,43 +595,6 @@ GwendyScenes.WorkMilking = function() {
 	});
 }
 
-world.loc.Farm.Loft.events.push(new Link(
-	"Gwendy", function() { return gwendy.IsAtLocation(world.loc.Farm.Loft); }, true,
-	function() {
-		if(gwendy.IsAtLocation(world.loc.Farm.Loft)) {
-			Text.Add("Gwendy is here.");
-		}
-		else
-			Text.Add("Gwendy doesn't seem to be in at the moment.");			
-		Text.NL();
-	},
-	GwendyScenes.LoftPrompt
-));
-world.loc.Farm.Barn.events.push(new Link(
-	"Gwendy", function() { return gwendy.IsAtLocation(world.loc.Farm.Barn); }, true,
-	function() {
-		if(gwendy.IsAtLocation(world.loc.Farm.Barn)) {
-			Text.Add("Gwendy is here.");
-		}
-		else
-			Text.Add("Gwendy doesn't seem to be here at the moment.");			
-		Text.NL();
-	},
-	GwendyScenes.BarnPrompt
-));
-world.loc.Farm.Fields.events.push(new Link(
-	"Gwendy", function() { return gwendy.IsAtLocation(world.loc.Farm.Fields); }, true,
-	function() {
-		if(gwendy.IsAtLocation(world.loc.Farm.Fields)) {
-			Text.Add("Gwendy is here.");
-		}
-		else
-			Text.Add("Gwendy doesn't seem to be here at the moment.");			
-		Text.NL();
-	},
-	GwendyScenes.FieldsPrompt
-));
-
 
 
 /* GWENDY SEX SCENES */

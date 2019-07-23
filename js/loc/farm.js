@@ -6,6 +6,8 @@
 
 import { Event, Link, EncounterTable } from '../event';
 import { Gender } from '../body/gender';
+import { GwendyScenes } from '../event/farm/gwendy-scenes';
+import { LaylaScenes } from '../event/farm/layla-scenes';
 
 let world = null;
 
@@ -72,6 +74,44 @@ let FarmLoc = {
 }
 
 
+FarmLoc.Loft.events.push(new Link(
+	"Gwendy", function() { return gwendy.IsAtLocation(FarmLoc.Loft); }, true,
+	function() {
+		if(gwendy.IsAtLocation(FarmLoc.Loft)) {
+			Text.Add("Gwendy is here.");
+		}
+		else
+			Text.Add("Gwendy doesn't seem to be in at the moment.");			
+		Text.NL();
+	},
+	GwendyScenes.LoftPrompt
+));
+FarmLoc.Barn.events.push(new Link(
+	"Gwendy", function() { return gwendy.IsAtLocation(FarmLoc.Barn); }, true,
+	function() {
+		if(gwendy.IsAtLocation(FarmLoc.Barn)) {
+			Text.Add("Gwendy is here.");
+		}
+		else
+			Text.Add("Gwendy doesn't seem to be here at the moment.");			
+		Text.NL();
+	},
+	GwendyScenes.BarnPrompt
+));
+FarmLoc.Fields.events.push(new Link(
+	"Gwendy", function() { return gwendy.IsAtLocation(FarmLoc.Fields); }, true,
+	function() {
+		if(gwendy.IsAtLocation(FarmLoc.Fields)) {
+			Text.Add("Gwendy is here.");
+		}
+		else
+			Text.Add("Gwendy doesn't seem to be here at the moment.");			
+		Text.NL();
+	},
+	GwendyScenes.FieldsPrompt
+));
+
+
 //
 // Gwendy's farm, the fields
 //
@@ -83,7 +123,7 @@ FarmLoc.Fields.description = function() {
 // Set up Layla events
 FarmLoc.Fields.onEntry = function(x, from) {
 	if(from == world.loc.Plains.Crossroads) {
-		if(Scenes.Layla.FarmMeetingTrigger(true)) return;
+		if(LaylaScenes.FarmMeetingTrigger(true)) return;
 	}
 	PrintDefaultOptions();
 }
@@ -200,7 +240,7 @@ FarmLoc.Loft.SleepFunc = function() {
 		world.TimeStep({hour: 8});
 		party.Sleep();
 
-		if(Scenes.Layla.FarmMeetingTrigger()) return;
+		if(LaylaScenes.FarmMeetingTrigger()) return;
 
 		//TODO
 		Text.Add("You wake up, feeling rested and refreshed.", parse);
