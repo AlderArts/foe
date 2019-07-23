@@ -9,6 +9,7 @@ import { Genitalia } from './genitalia';
 import { Balls } from './balls';
 import { Butt } from './butt';
 import { Breasts } from './breasts';
+import { DefBody } from './defbody';
 
 // Describe a standard humanoid-ish body
 function Body(ent) {
@@ -722,5 +723,14 @@ Body.prototype.StomachDesc = function(bellysize) {
 	
 	return noun;
 }
+
+/* DEFBODY */
+Body.prototype.DefFemale = DefBody.DefFemale;
+Body.prototype.DefMale = DefBody.DefMale;
+Body.prototype.DefHerm = DefBody.DefHerm;
+Body.prototype.SetRace = DefBody.SetRace;
+Body.prototype.SetBodyColor = DefBody.SetBodyColor;
+Body.prototype.SetHairColor = DefBody.SetHairColor;
+Body.prototype.SetEyeColor = DefBody.SetEyeColor;
 
 export { Body, HipSize };

@@ -46,8 +46,6 @@ import './js/body/head.js';
 import './js/body/genitalia.js';
 import './js/body/body.js';
 
-import './js/defbody.js';
-
 import './js/entity.js';
 import './js/entity-combat.js';
 import './js/entity-desc.js';
