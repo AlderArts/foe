@@ -1,4 +1,4 @@
-import { Item, Items, ItemType } from '../item';
+import { Item, ItemType } from '../item';
 import { TF, TFItem } from '../tf';
 import { Genitalia } from '../body/genitalia';
 import { HipSize } from '../body/body';

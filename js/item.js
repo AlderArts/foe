@@ -1,7 +1,5 @@
 import { DamageType } from './ability';
 
-// Namespace that item prototypes are kept in
-let Items = {};
 let ItemIds = {};
 //Represents the overall category an item falls under.
 let ItemType = {
@@ -211,4 +209,4 @@ function compareItemByProp(p){
 	}
 }
 
-export { Item, Items, ItemType, ItemSubtype, ItemIds, compareItemByProp };
+export { Item, ItemType, ItemSubtype, ItemIds, compareItemByProp };

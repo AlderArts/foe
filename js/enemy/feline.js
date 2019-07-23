@@ -8,7 +8,7 @@ import { Entity } from '../entity';
 import { Images } from '../assets';
 import { TF } from '../tf';
 import { AppendageType } from '../body/appendage';
-import { Items } from '../item';
+import { Items } from '../items';
 import { Gender } from '../body/gender';
 
 let FelinesScenes = {};

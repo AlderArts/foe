@@ -2,11 +2,14 @@
 import { Event, Link } from '../../event';
 
 let world = null;
-export function InitLB(w) {
+let Scenes = null;
+
+export function InitLB(w, scenes) {
 	world = w;
 	world.SaveSpots["LB"] = InnLoc.room;
 	world.SaveSpots["LB2"] = InnLoc.penthouse;
-}
+	Scenes = scenes;
+};
 
 let InnLoc = {
 	common    : new Event("Lady's Blessing"),
@@ -1891,8 +1894,8 @@ InnLoc.common.events.push(new Link(
 		return lei.flags["Met"] >= Lei.Met.KnowName ? "Lei" : "Stranger";
 	},
 	function() { return lei.IsAtLocation(InnLoc.common); }, function() { return rigard.flags["RoyalAccessTalk"] > 0; },
-	Scenes.Lei.Desc,
-	Scenes.Lei.Interact
+	function() { Scenes.Lei.Desc(); },
+	function() { Scenes.Lei.Interact(); }
 ));
 
 InnLoc.common.events.push(new Link(

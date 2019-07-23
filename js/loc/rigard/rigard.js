@@ -24,9 +24,11 @@ import { ArmorShopScenes } from './armorshop';
 import { Gender } from '../../body/gender';
 
 let world = null;
-export function InitRigard(w) {
+let Scenes = null;
+export function InitRigard(w, scenes) {
 	world = w;
-	InitLB(world);
+	Scenes = scenes;
+	InitLB(world, scenes);
 };
 
 // Create namespace

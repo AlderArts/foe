@@ -1,4 +1,3 @@
-import { Items } from '../item';
 import { TF, TFItem } from '../tf';
 import { Genitalia } from '../body/genitalia';
 import { HipSize } from '../body/body';

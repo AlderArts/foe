@@ -81,8 +81,6 @@ DamageType.prototype.ApplyDmgType = function(def, atkDmg) {
 	return ret;
 }
 
-let Abilities = {};
-
 function Ability(name) {
 	this.targetMode = TargetMode.Enemy;
 	this.name = name || "ABILITY";
@@ -390,4 +388,4 @@ AbilityCollection.prototype.OnSelect = function(encounter, caster, backPrompt) {
 	Gui.SetButtonsFromCollection(encounter, caster, this.AbilitySet, ret, backPrompt);
 }
 
-export { Ability, Abilities, AbilityCollection, DamageType, Element, TargetMode };
+export { Ability, AbilityCollection, DamageType, Element, TargetMode };

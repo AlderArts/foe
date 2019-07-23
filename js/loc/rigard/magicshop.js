@@ -5,7 +5,7 @@
 
 import { Event, Link, EncounterTable } from '../../event';
 import { Shop } from '../../shop';
-import { Items } from '../../item';
+import { Items } from '../../items';
 
 let MagicShopLoc = new Event("Asche's Fanciful Trinkets");
 

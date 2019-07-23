@@ -1,5 +1,5 @@
 
-import { Items } from './item';
+import { Items } from './items';
 import { GetDEBUG } from '../app';
 
 let Quests = {};

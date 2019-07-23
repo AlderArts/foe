@@ -1,7 +1,7 @@
 let preloader = require('preloader');
 
 import { StatusEffect } from './statuseffect';
-import { Items } from './item';
+import { Items } from './items';
 
 var Images = {};
 
