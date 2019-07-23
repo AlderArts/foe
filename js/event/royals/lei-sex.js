@@ -1,3 +1,5 @@
+import { Lei } from './lei';
+
 let SexScenes = {};
 
 SexScenes.Prompt = function(options) {

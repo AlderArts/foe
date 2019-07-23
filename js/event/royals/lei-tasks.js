@@ -1,3 +1,4 @@
+import { Lei } from './lei';
 import { Gender } from "../../body/gender";
 
 let TasksScenes = {};
