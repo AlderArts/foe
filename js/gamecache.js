@@ -78,7 +78,7 @@ let GAME = {};
 
 let InitCache = function() {
 	// Reset exploration
-	SetLastSubmenu(null);
+	Gui.SetLastSubmenu(null);
 	Intro.active = false;
 
 	// SAVE VERSION
