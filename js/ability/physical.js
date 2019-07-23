@@ -6,25 +6,9 @@
 import { AbilityNode } from './node';
 import { Ability, TargetMode } from '../ability';
 import { GetAggroEntry } from '../entity-combat';
+import { Defaults } from './default';
 
 let PhysicalAb = {};
-
-// Default messages
-PhysicalAb._onDamage = function(ability, encounter, caster, target, dmg) {
-	var parse = AbilityNode.DefaultParser(caster, target);
-	Text.Add("The attack hits [tname] for " + Text.Damage(-dmg) + " damage!", parse);
-	Text.NL();
-}
-PhysicalAb._onMiss = function(ability, encounter, caster, target) {
-	var parse = AbilityNode.DefaultParser(caster, target);
-	Text.Add("The attack narrowly misses [tname], dealing no damage!", parse);
-	Text.NL();
-}
-PhysicalAb._onAbsorb = function(ability, encounter, caster, target, dmg) {
-	var parse = AbilityNode.DefaultParser(caster, target);
-	Text.Add("[tName] absorb[tnotS] the attack, gaining " + Text.Heal(dmg) + " health!", parse);
-	Text.NL();
-}
 
 
 PhysicalAb.Bash = new Ability("Bash");
@@ -39,7 +23,7 @@ PhysicalAb.Bash.castTree.push(AbilityNode.Template.Physical({
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] read[y] a powerful blow, aiming to stun [tname]! ", parse);
 	}],
-	onMiss: [PhysicalAb._onMiss],
+	onMiss: [Defaults.Physical._onMiss],
 	onDamage: [function(ability, encounter, caster, target, dmg) {
 		if(Math.random() < 0.5) {
 			var entry = target.GetCombatEntry(encounter);
@@ -53,7 +37,7 @@ PhysicalAb.Bash.castTree.push(AbilityNode.Template.Physical({
 		Text.Add("[Name] bash[notEs] [tname] for " + Text.Damage(-dmg) + " damage, staggering [thimher]!", parse);
 		Text.NL();
 	}, AbilityNode.Template.Cancel()],
-	onAbsorb: [PhysicalAb._onAbsorb]
+	onAbsorb: [Defaults.Physical._onAbsorb]
 }));
 
 
@@ -70,7 +54,7 @@ PhysicalAb.GrandSlam.castTree.push(AbilityNode.Template.Physical({
 		var parse = AbilityNode.DefaultParser(caster);
 		Text.Add("[Name] read[y] a powerful blow, aiming to stun any who stand in [hisher] way! ", parse);
 	}],
-	onMiss: [PhysicalAb._onMiss],
+	onMiss: [Defaults.Physical._onMiss],
 	onDamage: [function(ability, encounter, caster, target, dmg) {
 		if(Math.random() < 0.5) {
 			var entry = target.GetCombatEntry(encounter);
@@ -84,7 +68,7 @@ PhysicalAb.GrandSlam.castTree.push(AbilityNode.Template.Physical({
 		Text.Add("[Name] slam[notS] [tname] for " + Text.Damage(-dmg) + " damage, staggering [thimher]!", parse);
 		Text.NL();
 	}, AbilityNode.Template.Cancel()],
-	onAbsorb: [PhysicalAb._onAbsorb]
+	onAbsorb: [Defaults.Physical._onAbsorb]
 }));
 
 
@@ -98,9 +82,9 @@ PhysicalAb.Pierce.castTree.push(AbilityNode.Template.Physical({
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] aim[notS] [hisher] strike on a weak point in [tposs] guard! ", parse);
 	}],
-	onMiss: [PhysicalAb._onMiss],
-	onDamage: [PhysicalAb._onDamage],
-	onAbsorb: [PhysicalAb._onAbsorb]
+	onMiss: [Defaults.Physical._onMiss],
+	onDamage: [Defaults.Physical._onDamage],
+	onAbsorb: [Defaults.Physical._onAbsorb]
 }));
 
 
@@ -115,9 +99,9 @@ PhysicalAb.DirtyBlow.castTree.push(AbilityNode.Template.Physical({
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] throw[notS] a low blow, striking a weak point in [tposs] guard! ", parse);
 	}],
-	onMiss: [PhysicalAb._onMiss],
-	onDamage: [PhysicalAb._onDamage],
-	onAbsorb: [PhysicalAb._onAbsorb],
+	onMiss: [Defaults.Physical._onMiss],
+	onDamage: [Defaults.Physical._onDamage],
+	onAbsorb: [Defaults.Physical._onAbsorb],
 	onHit: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		if(Status.Numb(target, { hit : 0.2, turns : 3, turnsR : 3, proc : 0.25 })) {
@@ -139,9 +123,9 @@ PhysicalAb.Hamstring.castTree.push(AbilityNode.Template.Physical({
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] tr[y] to hit [tname] with a light attack, aiming to wound! ", parse);
 	}],
-	onMiss: [PhysicalAb._onMiss],
-	onDamage: [PhysicalAb._onDamage],
-	onAbsorb: [PhysicalAb._onAbsorb],
+	onMiss: [Defaults.Physical._onMiss],
+	onDamage: [Defaults.Physical._onDamage],
+	onAbsorb: [Defaults.Physical._onAbsorb],
 	onHit: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		if(Status.Bleed(target, { hit : 0.75, turns : 3, turnsR : 3, dmg : 0.15 })) {
@@ -167,7 +151,7 @@ PhysicalAb.Kicksand.castTree.push(AbilityNode.Template.Physical({
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[tName] easily avoid[tnotS] the attack.", parse);
 	}],
-	onDamage: [PhysicalAb._onDamage],
+	onDamage: [Defaults.Physical._onDamage],
 	onHit: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		if(Status.Blind(target, { hit : 0.8, str : 0.5, turns : 3, turnsR : 3 })) {
@@ -232,8 +216,8 @@ PhysicalAb.SpringTrap.castTree.push(AbilityNode.Template.Physical({
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[tHeShe] narrowly avoid[tnotS] taking damage! ", parse);
 	}],
-	onDamage: [PhysicalAb._onDamage],
-	onAbsorb: [PhysicalAb._onAbsorb]
+	onDamage: [Defaults.Physical._onDamage],
+	onAbsorb: [Defaults.Physical._onAbsorb]
 }));
 
 
@@ -249,9 +233,9 @@ PhysicalAb.Backstab.castTree.push(AbilityNode.Template.Physical({
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] dance[notS] around [tname], dealing a crippling backstab! ", parse);
 	}],
-	onMiss: [PhysicalAb._onMiss],
-	onDamage: [PhysicalAb._onDamage],
-	onAbsorb: [PhysicalAb._onAbsorb]
+	onMiss: [Defaults.Physical._onMiss],
+	onDamage: [Defaults.Physical._onDamage],
+	onAbsorb: [Defaults.Physical._onAbsorb]
 }));
 PhysicalAb.Backstab.enabledTargetCondition = function(encounter, caster, target) {
 	return target.Inhibited();
@@ -292,9 +276,9 @@ PhysicalAb.FocusStrike.castTree.push(AbilityNode.Template.Physical({
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] aim[notS] [hisher] strike on a weak point in [tposs] guard! ", parse);
 	}],
-	onMiss: [PhysicalAb._onMiss],
-	onDamage: [PhysicalAb._onDamage],
-	onAbsorb: [PhysicalAb._onAbsorb]
+	onMiss: [Defaults.Physical._onMiss],
+	onDamage: [Defaults.Physical._onDamage],
+	onAbsorb: [Defaults.Physical._onAbsorb]
 }));
 
 
@@ -309,9 +293,9 @@ PhysicalAb.DAttack.castTree.push(AbilityNode.Template.Physical({
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] perform[notS] two attacks against [tname] in rapid succession! ", parse);
 	}],
-	onMiss: [PhysicalAb._onMiss],
-	onDamage: [PhysicalAb._onDamage],
-	onAbsorb: [PhysicalAb._onAbsorb]
+	onMiss: [Defaults.Physical._onMiss],
+	onDamage: [Defaults.Physical._onDamage],
+	onAbsorb: [Defaults.Physical._onAbsorb]
 }));
 
 
@@ -326,9 +310,9 @@ PhysicalAb.TAttack.castTree.push(AbilityNode.Template.Physical({
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] perform[notS] three attacks against [tname] in rapid succession! ", parse);
 	}],
-	onMiss: [PhysicalAb._onMiss],
-	onDamage: [PhysicalAb._onDamage],
-	onAbsorb: [PhysicalAb._onAbsorb]
+	onMiss: [Defaults.Physical._onMiss],
+	onDamage: [Defaults.Physical._onDamage],
+	onAbsorb: [Defaults.Physical._onAbsorb]
 }));
 
 
@@ -343,9 +327,9 @@ PhysicalAb.QAttack.castTree.push(AbilityNode.Template.Physical({
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] perform[notS] four attacks against [tname] in rapid succession! ", parse);
 	}],
-	onMiss: [PhysicalAb._onMiss],
-	onDamage: [PhysicalAb._onDamage],
-	onAbsorb: [PhysicalAb._onAbsorb]
+	onMiss: [Defaults.Physical._onMiss],
+	onDamage: [Defaults.Physical._onDamage],
+	onAbsorb: [Defaults.Physical._onAbsorb]
 }));
 
 
@@ -366,9 +350,9 @@ PhysicalAb.Frenzy.castTree.push(AbilityNode.Template.Physical({
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] perform[notS] a frenzied assault, attacking [tname] with five rapid blows!", parse);
 	}],
-	onMiss: [PhysicalAb._onMiss],
-	onDamage: [PhysicalAb._onDamage],
-	onAbsorb: [PhysicalAb._onAbsorb]
+	onMiss: [Defaults.Physical._onMiss],
+	onDamage: [Defaults.Physical._onDamage],
+	onAbsorb: [Defaults.Physical._onAbsorb]
 }));
 
 
@@ -383,7 +367,7 @@ PhysicalAb.CrushingStrike.castTree.push(AbilityNode.Template.Physical({
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] perform[notS] a wild assault against [tname]! ", parse);
 	}],
-	onMiss: [PhysicalAb._onMiss],
+	onMiss: [Defaults.Physical._onMiss],
 	onDamage: [function(ability, encounter, caster, target, dmg) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] deliver[notS] a crushing blow to [tname] for " + Text.Damage(-dmg) + " damage, staggering [thimher]!", parse);
@@ -394,7 +378,7 @@ PhysicalAb.CrushingStrike.castTree.push(AbilityNode.Template.Physical({
 			if(entry) entry.initiative -= 75;
 		}
 	}],
-	onAbsorb: [PhysicalAb._onAbsorb]
+	onAbsorb: [Defaults.Physical._onAbsorb]
 }));
 
 
@@ -411,7 +395,7 @@ PhysicalAb.Provoke.castTree.push(AbilityNode.Template.Physical({
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[tName] doesn't look very impressed.", parse);
 	}],
-	onDamage: [PhysicalAb._onDamage],
+	onDamage: [Defaults.Physical._onDamage],
 	onHit: [function(ability, encounter, caster, target) {
 		var aggroEntry = GetAggroEntry(target.GetCombatEntry(encounter), caster);
 		if(aggroEntry)
@@ -436,7 +420,7 @@ PhysicalAb.Taunt.castTree.push(AbilityNode.Template.Physical({
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[tName] doesn't look very impressed.", parse);
 	}],
-	onDamage: [PhysicalAb._onDamage],
+	onDamage: [Defaults.Physical._onDamage],
 	onHit: [function(ability, encounter, caster, target) {
 		var aggroEntry = GetAggroEntry(target.GetCombatEntry(encounter), caster);
 		if(aggroEntry)

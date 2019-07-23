@@ -6,25 +6,9 @@
 import { AbilityNode } from './node';
 import { Ability, TargetMode } from '../ability';
 import { GetAggroEntry } from '../entity-combat';
+import { Defaults } from './default';
 
 let SeductionAb = {};
-
-// Default messages
-SeductionAb._onDamage = function(ability, encounter, caster, target, dmg) {
-	var parse = AbilityNode.DefaultParser(caster, target);
-	Text.Add("[tName] become[tnotS] aroused, gaining " + Text.Lust(-dmg) + " lust!", parse);
-	Text.NL();
-}
-SeductionAb._onAbsorb = function(ability, encounter, caster, target, dmg) {
-	var parse = AbilityNode.DefaultParser(caster, target);
-	Text.Add("[tName] [tis] turned off, losing " + Text.Soothe(dmg) + " lust!", parse);
-	Text.NL();
-}
-SeductionAb._onMiss = function(ability, encounter, caster, target) {
-	var parse = AbilityNode.DefaultParser(caster, target);
-	Text.Add("[tName] manage[tnotS] to resist the temptation!", parse);
-	Text.NL();
-}
 
 
 SeductionAb.Sleep = new Ability("Sleep");
@@ -269,9 +253,9 @@ SeductionAb.Tease.castTree.push(AbilityNode.Template.Lust({
 		parse["hips"] = caster.HipsDesc();
 		Text.Add("[Name] tease[notS] [tname], shaking [hisher] [hips]! ", parse);
 	}],
-	onMiss: [SeductionAb._onMiss],
-	onDamage: [SeductionAb._onDamage],
-	onAbsorb: [SeductionAb._onAbsorb]
+	onMiss: [Defaults.Seduction._onMiss],
+	onDamage: [Defaults.Seduction._onDamage],
+	onAbsorb: [Defaults.Seduction._onAbsorb]
 }));
 
 
@@ -286,9 +270,9 @@ SeductionAb.Seduce.castTree.push(AbilityNode.Template.Lust({
 		parse["hips"] = caster.HipsDesc();
 		Text.Add("[Name] tease[notS] [tname], shaking [hisher] [hips]! ", parse);
 	}],
-	onMiss: [SeductionAb._onMiss],
-	onDamage: [SeductionAb._onDamage],
-	onAbsorb: [SeductionAb._onAbsorb]
+	onMiss: [Defaults.Seduction._onMiss],
+	onDamage: [Defaults.Seduction._onDamage],
+	onAbsorb: [Defaults.Seduction._onAbsorb]
 }));
 
 
@@ -305,9 +289,9 @@ SeductionAb.StripTease.castTree.push(AbilityNode.Template.Lust({
 		parse["hips"] = caster.HipsDesc();
 		Text.Add("[Name] tease[notS] the enemy party, shaking [hisher] [hips]! ", parse);
 	}],
-	onMiss: [SeductionAb._onMiss],
-	onDamage: [SeductionAb._onDamage],
-	onAbsorb: [SeductionAb._onAbsorb]
+	onMiss: [Defaults.Seduction._onMiss],
+	onDamage: [Defaults.Seduction._onDamage],
+	onAbsorb: [Defaults.Seduction._onAbsorb]
 }));
 
 
@@ -323,13 +307,13 @@ SeductionAb.Distract.castTree.push(AbilityNode.Template.Lust({
 		parse["hips"] = caster.HipsDesc();
 		Text.Add("[Name] distract[notS] [tname], shaking [hisher] [hips]! ", parse);
 	}],
-	onMiss: [SeductionAb._onMiss],
+	onMiss: [Defaults.Seduction._onMiss],
 	onDamage: [function(ability, encounter, caster, target, dmg) {
 		target.GetCombatEntry(encounter).initiative -= 25;
 		var parse = AbilityNode.DefaultParser(caster, target);
 	Text.Add("[tName] become[tnotS] aroused, gaining " + Text.Lust(-dmg) + " lust! [tHeShe] become[tnotS] distracted.", parse);
 	}],
-	onAbsorb: [SeductionAb._onAbsorb]
+	onAbsorb: [Defaults.Seduction._onAbsorb]
 }));
 
 
@@ -345,7 +329,7 @@ SeductionAb.Charm.castTree.push(AbilityNode.Template.Lust({
 		parse["hips"] = caster.HipsDesc();
 		Text.Add("[Name] charm[notS] [tname], shaking [hisher] [hips]! ", parse);
 	}],
-	onMiss: [SeductionAb._onMiss],
+	onMiss: [Defaults.Seduction._onMiss],
 	onDamage: [function(ability, encounter, caster, target, dmg) {
 		var aggroEntry = GetAggroEntry(target.GetCombatEntry(encounter), caster);
 		if(aggroEntry) {
@@ -355,7 +339,7 @@ SeductionAb.Charm.castTree.push(AbilityNode.Template.Lust({
 		var parse = AbilityNode.DefaultParser(caster, target);
 	Text.Add("[tName] become[tnotS] charmed, gaining " + Text.Lust(-dmg) + " lust! [tHeShe] become[tnotS] less aggressive toward [name].", parse);
 	}],
-	onAbsorb: [SeductionAb._onAbsorb]
+	onAbsorb: [Defaults.Seduction._onAbsorb]
 }));
 
 
@@ -370,7 +354,7 @@ SeductionAb.Allure.castTree.push(AbilityNode.Template.Lust({
 		parse["hips"] = caster.HipsDesc();
 		Text.Add("[Name] charm[notS] [tname], shaking [hisher] [hips]! ", parse);
 	}],
-	onMiss: [SeductionAb._onMiss],
+	onMiss: [Defaults.Seduction._onMiss],
 	onDamage: [function(ability, encounter, caster, target, dmg) {
 		var aggroEntry = GetAggroEntry(target.GetCombatEntry(encounter), caster);
 		if(aggroEntry) {
@@ -380,7 +364,7 @@ SeductionAb.Allure.castTree.push(AbilityNode.Template.Lust({
 		var parse = AbilityNode.DefaultParser(caster, target);
 	Text.Add("[tName] become[tnotS] charmed, gaining " + Text.Lust(-dmg) + " lust! [tHeShe] become[tnotS] less aggressive toward [name].", parse);
 	}],
-	onAbsorb: [SeductionAb._onAbsorb]
+	onAbsorb: [Defaults.Seduction._onAbsorb]
 }));
 
 
@@ -394,7 +378,7 @@ SeductionAb.Inflame.castTree.push(AbilityNode.Template.Lust({
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] slowly sing[notS] a few verses of a soft, sensual melody, projecting [hisher] rich voice at [tname]. ", parse);
 	}],
-	onMiss: [SeductionAb._onMiss],
+	onMiss: [Defaults.Seduction._onMiss],
 	onDamage: [function(ability, encounter, caster, target, dmg) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[tName] squirm[tnotS] at the subtle undertones of the song, becoming greatly aroused. [tName] gain[tnotS] " + Text.Lust(-dmg) + " lust!", parse);

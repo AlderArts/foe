@@ -1,7 +1,7 @@
 import { Item } from '../item';
-import { Abilities } from '../abilities';
 import { Ability, TargetMode } from '../ability';
 import { AbilityNode } from '../ability/node';
+import { Defaults } from '../ability/default';
 
 function CombatItemAbility(item) {
 	Ability.call(this);
@@ -207,9 +207,9 @@ CombatItems.GlassSword.combat.castTree.push(AbilityNode.Template.Physical({
 		Text.Add("[Name] strike[notS] [tname] with a glass sword. The blade shatters!", parse);
 		Text.NL();
 	}],
-	onMiss: [Abilities.Physical._onMiss],
-	onDamage: [Abilities.Physical._onDamage],
-	onAbsorb: [Abilities.Physical._onAbsorb]
+	onMiss: [Defaults.Physical._onMiss],
+	onDamage: [Defaults.Physical._onDamage],
+	onAbsorb: [Defaults.Physical._onAbsorb]
 }));
 
 export { CombatItem, CombatItemAbility, CombatItems };

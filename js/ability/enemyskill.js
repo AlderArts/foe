@@ -1,6 +1,8 @@
 
 import { AbilityNode } from './node';
 import { Ability, TargetMode } from '../ability';
+import { Defaults } from './default';
+import { AttackAb } from './attack';
 
 let EnemySkillAb = {};
 
@@ -17,13 +19,13 @@ EnemySkillAb.Sting.castTree.push(AbilityNode.Template.Physical({
 		Text.Add("[Name] read[y] [hisher] stinger, aiming it at [tname]!", parse);
 		Text.NL();
 	}],
-	onMiss: [Abilities.Physical._onMiss],
+	onMiss: [Defaults.Physical._onMiss],
 	onDamage: [function(ability, encounter, caster, target, dmg) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] sting[notS] [tname] for " + Text.Damage(-dmg) + " damage!", parse);
 		Text.NL();
 	}],
-	onAbsorb: [Abilities.Physical._onAbsorb],
+	onAbsorb: [Defaults.Physical._onAbsorb],
 	onHit: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		if(Status.Venom(target, { hit : 0.6, turns : 3, turnsR : 3, str : 1, dmg : 0.15 })) {
@@ -49,8 +51,8 @@ EnemySkillAb.TSnare.castTree.push(AbilityNode.Template.Physical({
 		Text.Add("[tName] only narrowly avoid[tnotS] getting caught by the vines!", parse);
 		Text.NL();
 	}],
-	onDamage: [Abilities.Physical._onDamage],
-	onAbsorb: [Abilities.Physical._onAbsorb],
+	onDamage: [Defaults.Physical._onDamage],
+	onAbsorb: [Defaults.Physical._onAbsorb],
 	onHit: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		if(Status.Slow(target, { hit : 0.6, factor : 2, turns : 3, turnsR : 3 })) {
@@ -78,8 +80,8 @@ EnemySkillAb.TSpray.castTree.push(AbilityNode.Template.Physical({
 		Text.Add("[tName] manage[tnotS] to avoid getting hit by the blast!", parse);
 		Text.NL();
 	}],
-	onDamage: [Abilities.Physical._onDamage],
-	onAbsorb: [Abilities.Physical._onAbsorb],
+	onDamage: [Defaults.Physical._onDamage],
+	onAbsorb: [Defaults.Physical._onAbsorb],
 	onHit: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[tName] take[tnotS] the full brunt of the spray, gaining a thick coating of tentacle spunk!", parse);
@@ -109,7 +111,7 @@ EnemySkillAb.TVenom.castTree.push(AbilityNode.Template.Physical({
 		Text.Add("[tName] cough[tnotS] and sputter[tnotS] as [theshe] is hit by the poisonous liquid!", parse);
 		Text.NL();
 	}],
-	onAbsorb: [Abilities.Physical._onAbsorb],
+	onAbsorb: [Defaults.Physical._onAbsorb],
 	onHit: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		if(Status.Venom(target, { hit : 0.6, turns : 3, turnsR : 3, str : 1, dmg : 0.15 })) {
@@ -141,7 +143,7 @@ EnemySkillAb.TRavage.castTree.push(AbilityNode.Template.Physical({
 		Text.Add("[tName] take[tnotS] " + Text.Damage(-dmg) + " damage!", parse);
 		target.AddLustFraction(0.3);
 	}],
-	onAbsorb: [Abilities.Physical._onAbsorb]
+	onAbsorb: [Defaults.Physical._onAbsorb]
 }));
 
 
@@ -164,7 +166,7 @@ EnemySkillAb.TWhip.castTree.push(AbilityNode.Template.Physical({
 		Text.NL();
 		target.AddLustFraction(0.3);
 	}],
-	onAbsorb: [Abilities.Physical._onAbsorb]
+	onAbsorb: [Defaults.Physical._onAbsorb]
 }));
 
 
@@ -182,8 +184,8 @@ EnemySkillAb.TViolate.castTree.push(AbilityNode.Template.Physical({
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("Even though [tname] [tis] greatly aroused, [theshe] somehow manage[tnotS] to evade getting tangled up in the tentacles.", parse);
 	}],
-	onDamage: [Abilities.Physical._onDamage],
-	onAbsorb: [Abilities.Physical._onAbsorb],
+	onDamage: [Defaults.Physical._onDamage],
+	onAbsorb: [Defaults.Physical._onAbsorb],
 	onHit: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		parse["tarmor"] = target.ArmorDesc();
@@ -255,7 +257,7 @@ EnemySkillAb.GolLustyPheromones.castTree.push(AbilityNode.Template.Lust({
 		Text.Add("[tName] blush[tnotEs] as [thisher] head swims with thoughts of naked trysts under the stars, overwhelmed by the Gol’s pheromones.", parse);
 		target.AddLustFraction(0.3);
 	}],
-	onAbsorb: [Abilities.Seduction._onAbsorb],
+	onAbsorb: [Defaults.Seduction._onAbsorb],
 	damageFunc: AbilityNode.DamageFunc.Lust
 }));
 
@@ -288,7 +290,7 @@ EnemySkillAb.GolCuntDash.castTree.push(AbilityNode.Template.Physical({
 		Text.Add("When she finishes charging past, [tname] blink[tnotS] in a daze and stagger back on [thisher] [feet], uncomfortably warm in all the wrong places.", parse);
 		target.AddLustFraction(0.3);
 	}],
-	onAbsorb: [Abilities.Physical._onAbsorb]
+	onAbsorb: [Defaults.Physical._onAbsorb]
 }));
 
 
@@ -304,7 +306,7 @@ EnemySkillAb.GolPollen.castTree.push(AbilityNode.Template.Physical({
 		Text.Add("Sighing, the Gol runs her hands through her shimmering black hair in frustration. After her fingers' first pass, she repeats the action, then does it again. And again. Soon, the air around her seems slightly foggy, and your nose itches. A sneeze wracks your body as she continues the motion, filling the air with... something. You can't say what, but it's making you sneeze, and causing your nose to get itchy and irritable. The insectile beauty seems taller and more imposing after each involuntary spasm of your body. Her breasts appear larger, her pussy more inviting, and her face more charmingly human. For a monster, she wouldn't be a bad one to settle down with.", parse);
 		Text.NL();
 	}],
-	onMiss: [Abilities.Physical._onMiss],
+	onMiss: [Defaults.Physical._onMiss],
 	onHit: [function(ability, encounter, caster, target, dmg) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		target.AddLustFraction(0.2);
@@ -338,9 +340,9 @@ EnemySkillAb.Corishev.Whip.castTree.push(AbilityNode.Template.Physical({
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("The lieutenant raises his arm, sending his whip lashing toward [tname]. ", parse);
 	}],
-	onMiss: [Abilities.Physical._onMiss],
-	onDamage: [Abilities.Physical._onDamage],
-	onAbsorb: [Abilities.Physical._onAbsorb],
+	onMiss: [Defaults.Physical._onMiss],
+	onDamage: [Defaults.Physical._onDamage],
+	onAbsorb: [Defaults.Physical._onAbsorb],
 	onHit: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("The whip’s lust inducing poison quickly seeps into the wound, arousing [thimher]!", parse);
@@ -376,7 +378,7 @@ EnemySkillAb.Corishev.Lashing.castTree.push(AbilityNode.Template.Physical({
 		parse["skin"] = target.SkinDesc();
 		Text.Add("The barbed tip of the poisoned whip slashes across [tposs] [skin], dealing " + Text.Damage(-dmg) + " damage! ", parse);
 	}],
-	onAbsorb: [Abilities.Physical._onAbsorb]
+	onAbsorb: [Defaults.Physical._onAbsorb]
 }));
 
 
@@ -402,7 +404,7 @@ EnemySkillAb.Corishev.WideStrike.castTree.push(AbilityNode.Template.Physical({
 		Text.Add("Poisoned barbs sink into [tposs] flesh, causing [thimher] to take " + Text.Damage(-dmg) + " damage!", parse);
 		Text.NL();
 	}],
-	onAbsorb: [Abilities.Physical._onAbsorb]
+	onAbsorb: [Defaults.Physical._onAbsorb]
 }));
 
 
@@ -443,7 +445,7 @@ EnemySkillAb.Corishev.Punish.castTree.push(AbilityNode.Template.Physical({
 		Text.Add("Caught by surprise - or perhaps distracted by [thisher] pounding heart - [tname] [tis] unable to dodge the flurry of blows raining down on [thimher]. [tHeShe] cr[ty] out in pain as the whip lacerates [thisher] flesh time and time again, dealing " + Text.Damage(-dmg) + " damage!", parse);
 		Text.NL();
 	}],
-	onAbsorb: [Abilities.Physical._onAbsorb],
+	onAbsorb: [Defaults.Physical._onAbsorb],
 	onHit: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		if(Status.Horny(target, { hit : 0.6, str : 1, dmg : 0.1, turns : 1, turnsR : 3 })) {
@@ -481,7 +483,7 @@ EnemySkillAb.Cassidy.TailSlap.castTree.push(AbilityNode.Template.Physical({
 		Text.Add("The weight of Cassidy’s flaming tail smacks you silly! You take " + Text.Damage(-dmg) + " damage!", parse);
 		Text.NL();
 	}, AbilityNode.Template.Cancel()],
-	onAbsorb: [Abilities.Physical._onAbsorb],
+	onAbsorb: [Defaults.Physical._onAbsorb],
 	onHit: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		if(Status.Numb(target, { hit : 0.2, turns : 1, turnsR : 1, proc : 0.25 })) {
@@ -514,7 +516,7 @@ EnemySkillAb.Cassidy.Smoke.castTree.push(AbilityNode.Template.Physical({
 		Text.Add("The cinders burn you! You take " + Text.Damage(-dmg) + " damage!", parse);
 		Text.NL();
 	}, AbilityNode.Template.Cancel()],
-	onAbsorb: [Abilities.Physical._onAbsorb],
+	onAbsorb: [Defaults.Physical._onAbsorb],
 	onHit: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		if(Status.Blind(target, { hit : 0.5, str : 0.5, turns : 1, turnsR : 3 })) {
@@ -529,7 +531,7 @@ EnemySkillAb.Cassidy.Reflex.cost = { hp: null, sp: 30, lp: null};
 EnemySkillAb.Cassidy.Reflex.Short = function() { return "CassReflex"; }
 EnemySkillAb.Cassidy.Reflex.cooldown = 5;
 //Push a regular attack
-EnemySkillAb.Cassidy.Reflex.castTree.push(Abilities.Attack.castTree[0]);
+EnemySkillAb.Cassidy.Reflex.castTree.push(AttackAb.castTree[0]);
 EnemySkillAb.Cassidy.Reflex.castTree.push(function(ability, encounter, caster) {
 	caster.reflexFlag = true;
 });
@@ -570,7 +572,7 @@ EnemySkillAb.Cassidy.Impact.castTree.push(AbilityNode.Template.Physical({
 		Text.Add("Gah! You reel as Cass’ hammer connects with the impact of a fiery meteor, shaking you to the bone and burning you badly! You take " + Text.Damage(-dmg) + " damage!", parse);
 		Text.NL();
 	}, AbilityNode.Template.Cancel()],
-	onAbsorb: [Abilities.Physical._onAbsorb],
+	onAbsorb: [Defaults.Physical._onAbsorb],
 	onHit: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		if(Status.Burn(target, { hit : 1, turns : 3, turnsR : 5, str : 1, dmg : 0.3 })) {

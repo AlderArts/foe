@@ -2,6 +2,8 @@ import * as $ from 'jquery';
 
 import { GetRenderPictures } from '../app';
 
+let Text = {};
+
 Text.buffer = "";
 //A div that contains 'groups' of inputs. Each group is on a new line (so you can basically have multiple toolbars).
 Text.toolbars = $('<div></div>');
@@ -516,3 +518,5 @@ Text.Soothe = function(text) {
 Text.Mana = function(text) {
 	return Text.ApplyStyle(text, "mana bold");
 }
+
+export { Text };
