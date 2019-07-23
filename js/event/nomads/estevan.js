@@ -309,7 +309,7 @@ EstevanScenes.Prompt = function() {
 	Gui.SetButtonsFromList(options, true, PrintDefaultOptions);
 }
 
-Scenes.Cale.Desc = function() {
+EstevanScenes.Desc = function() {
 	if(estevan.flags["Met"] == 0)
 		Text.Add("You see a strange creature by the fire, a man half human, half goat. He seems to be working on a contraption of some sort, probably a hunting trap. ");
 	else
