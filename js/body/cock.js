@@ -2,6 +2,7 @@
 import { BodyPart } from './bodypart';
 import { Stat } from '../stat';
 import { Gender } from './gender';
+import { RaceDesc, Race } from './race';
 
 let CockType = {
 	ordinary : 0,

@@ -7,6 +7,10 @@
 
 import { Inventory } from './inventory';
 import { GetDEBUG } from '../app';
+import { Input } from './input';
+import { Text } from './text';
+import { Gui } from './gui';
+import { GAME } from './GAME';
 
 function Party(storage) {
 	this.members = [];
@@ -35,14 +39,14 @@ Party.prototype.ToStorage = function() {
 	storage["saved"]   = [];
 	storage["temp"]    = [];
 
-	this.SaveMember(storage, player);
-	this.SaveMember(storage, kiakai);
-	this.SaveMember(storage, miranda);
-	this.SaveMember(storage, terry);
-	this.SaveMember(storage, layla);
-	this.SaveMember(storage, lei);
-	this.SaveMember(storage, cveta);
-	this.SaveMember(storage, gwendy);
+	this.SaveMember(storage, GAME().player);
+	this.SaveMember(storage, GAME().kiakai);
+	this.SaveMember(storage, GAME().miranda);
+	this.SaveMember(storage, GAME().terry);
+	this.SaveMember(storage, GAME().layla);
+	this.SaveMember(storage, GAME().lei);
+	this.SaveMember(storage, GAME().cveta);
+	this.SaveMember(storage, GAME().gwendy);
 
 	storage["coin"] = this.coin;
 	storage["loc"]  = this.location.SaveSpot;
@@ -66,14 +70,14 @@ Party.prototype.FromStorage = function(storage) {
 	storage["saved"]   = storage["saved"]   || [];
 	storage["temp"]    = storage["temp"]    || [];
 
-	this.LoadMember(storage, player);
-	this.LoadMember(storage, kiakai);
-	this.LoadMember(storage, miranda);
-	this.LoadMember(storage, terry);
-	this.LoadMember(storage, layla);
-	this.LoadMember(storage, lei);
-	this.LoadMember(storage, cveta);
-	this.LoadMember(storage, gwendy);
+	this.LoadMember(storage, GAME().player);
+	this.LoadMember(storage, GAME().kiakai);
+	this.LoadMember(storage, GAME().miranda);
+	this.LoadMember(storage, GAME().terry);
+	this.LoadMember(storage, GAME().layla);
+	this.LoadMember(storage, GAME().lei);
+	this.LoadMember(storage, GAME().cveta);
+	this.LoadMember(storage, GAME().gwendy);
 
 
 	this.coin = parseInt(storage["coin"]) || this.coin;
@@ -206,14 +210,14 @@ Party.prototype.AddMember = function(member, temporary) {
 		else
 			this.members.push(member); // Only add if not already added
 	}
-	if(this == party) member.DebugMode(GetDEBUG());
+	if(this == GAME().party) member.DebugMode(GetDEBUG());
 	if(temporary) this.temp.push(member);
 }
 
 Party.prototype.AddReserve = function(member) {
 	var idx = this.reserve.indexOf(member); // Find the index
 	if(idx==-1) this.reserve.push(member); // Only add if not already added
-	if(this == party) member.DebugMode(GetDEBUG());
+	if(this == GAME().party) member.DebugMode(GetDEBUG());
 }
 
 Party.prototype.RemoveMember = function(member) {
@@ -221,7 +225,7 @@ Party.prototype.RemoveMember = function(member) {
 	if(idx!=-1) this.members.splice(idx, 1); // Remove it if really found!
 	var idx = this.reserve.indexOf(member);  // Find the index
 	if(idx!=-1) this.reserve.splice(idx, 1); // Remove it if really found!
-	if(this == party) member.DebugMode(false);
+	if(this == GAME().party) member.DebugMode(false);
 }
 
 Party.prototype.SwitchPrompt = function(member) {

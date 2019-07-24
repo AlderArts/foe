@@ -1,5 +1,6 @@
 
 import { BodyPart } from './bodypart';
+import { Race, RaceDesc } from './race';
 
 let AppendageType = {
 	horn    : 0,

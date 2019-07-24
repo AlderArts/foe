@@ -8,6 +8,14 @@ import { Entity } from '../entity';
 import { GetDEBUG } from '../../app';
 import { Gender } from '../body/gender';
 import { Jobs, JobDesc, JobEnum } from '../job';
+import { EncounterTable } from '../event';
+import { Gui } from '../gui';
+import { Text } from '../text';
+import { PregnancyLevel } from '../pregnancy';
+import { Perks } from '../perks';
+import { MasturbationScenes } from './masturbation';
+import { MeditationScenes } from './meditation';
+import { Images } from '../assets';
 
 function Player(storage) {
 	Entity.call(this);
@@ -519,7 +527,7 @@ Player.prototype.PregnancyProgess = function(womb, slot, oldProgress, progress) 
 }
 
 Player.prototype.CanGiveBirth = function() {
-	return party.location.safe();
+	return GAME().party.location.safe();
 }
 
 // Pregnancy TODO
@@ -531,12 +539,12 @@ Player.prototype.PregnancyTrigger = function(womb, slot) {
 		var parse = {
 			
 		};
-		parse = player.ParserTags(parse);
+		parse = GAME().player.ParserTags(parse);
 		
 		var num  = womb.litterSize;
 		var race = womb.race;
 		var egg  = womb.IsEgg();
-		var lact = player.FirstBreastRow().Size() >= 2;
+		var lact = GAME().player.FirstBreastRow().Size() >= 2;
 		
 		parse = Text.ParserPlural(parse, num > 1);
 		
@@ -571,7 +579,7 @@ Player.prototype.PregnancyTrigger = function(womb, slot) {
 		Text.NL();
 		Text.Add("Even as the first contractions grip your womb and you feel its contents descend ever lower, you hurriedly find a place to settle down and do the deed, clearing a spot for your progeny to safely enter the world.", parse);
 		
-		var partynum = party.location.switchSpot() ? party.NumTotal() : party.Num();
+		var partynum = GAME().party.location.switchSpot() ? party.NumTotal() : party.Num();
 		var comp = party.Get(1);
 		
 		if(partynum == 2 && comp) {
@@ -585,9 +593,9 @@ Player.prototype.PregnancyTrigger = function(womb, slot) {
 		Text.NL();
 		
 		// #Labour block (Birthsize comes into play here)
-		var birthsize = player.body.torso.hipSize.Get() / 4;
+		var birthsize = GAME().player.body.torso.hipSize.Get() / 4;
 		birthsize /= womb.geneSize || 1;
-		if(player.HasPerk(Perks.Breeder)) birthsize *= 1.5;
+		if(GAME().player.HasPerk(Perks.Breeder)) birthsize *= 1.5;
 		
 		Text.Add("It’s not long before labor begins in earnest. Even as you pant and puff, you can feel your contractions coming on more strongly and at quicker intervals, picking up the pace even as your cervix begins to dilate to allow new life to enter the world.", parse);
 		Text.NL();
@@ -639,7 +647,7 @@ Player.prototype.PregnancyTrigger = function(womb, slot) {
 		//#Nursing block - fallback
 		// else if TODO
 		if(!egg && lact) {
-			var milk = player.Milk();
+			var milk = GAME().player.Milk();
 			
 			parse["m"] = num > 1 ? " one at a time" : "";
 			parse["ren"] = num > 1 ? "ren" : "";
@@ -656,7 +664,7 @@ Player.prototype.PregnancyTrigger = function(womb, slot) {
 				Text.Add("With your [breasts] being as bountiful as they are, there’s no worry about you not being able to feed your new brood. No matter how much your nipples are squeezed, milked and suckled, there’s a seemingly inexhaustible supply of nourishment to be had, an overflowing font of rich cream. While your [breasts] are a little less tender now, you have a feeling they’ll probably fill right back up soon… ", parse);
 			}
 			
-			player.MilkDrain(15);
+			GAME().player.MilkDrain(15);
 			
 			Text.NL();
 			Text.Add("Hugging your newborn[s], you burp the little one[s] and turn your attention to what needs to be done next.", parse);
@@ -669,7 +677,7 @@ Player.prototype.PregnancyTrigger = function(womb, slot) {
 		world.TimeStep({hour: 4});
 		
 		//#Post-partum care block
-		Scenes.Nursery.CareBlock(womb);
+		NurseryScenes.CareBlock(womb);
 	});
 }
 
@@ -677,7 +685,7 @@ Player.prototype.PregnancyTrigger = function(womb, slot) {
 // Party interaction
 Player.prototype.Interact = function(switchSpot) {
 	Text.Clear();
-	var that = player;
+	var that = GAME().player;
 	
 	that.PrintDescription();
 	
@@ -697,13 +705,13 @@ Player.prototype.Interact = function(switchSpot) {
 	});
 	options.push({ nameStr: "Release",
 		func : function() {
-			Scenes.Masturbation.Entry();
+			MasturbationScenes.Entry();
 		}, enabled : true,
 		tooltip : "Pleasure yourself."
 	});
 	options.push({ nameStr: "Meditate",
 		func : function() {
-			Scenes.Meditation.Entry();
+			MeditationScenes.Entry();
 		}, enabled : true,
 		tooltip : "Calm yourself through meditation."
 	});

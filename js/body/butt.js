@@ -1,6 +1,7 @@
 
 import { Orifice } from './orifice.js';
 import { Stat } from '../stat';
+import { Text } from '../text.js';
 
 function Butt() {
 	Orifice.call(this);
@@ -90,6 +91,7 @@ Butt.prototype.analNoun = function() {
 	return _.sample(nouns);
 }
 Butt.prototype.AnalDesc = function() {
+	let ret = null;
 	var area = this.capacity.Get() * this.stretch.Get();
 	if     (area <= 2 ) ret = {a:"an", adj: "extremely tight"};
 	else if(area <= 3 ) ret = {a:"a", adj: "very tight"};
@@ -125,4 +127,4 @@ Butt.prototype.holeDesc = function() {
 	return this.analNoun();
 }
 
-export {Butt};
+export { Butt };

@@ -11,6 +11,9 @@ import { Butt } from './butt';
 import { Breasts } from './breasts';
 import { DefBody } from './defbody';
 import { Gender } from './gender';
+import { Appendage } from './appendage';
+import { RaceDesc, Race } from './race';
+import { Color } from './color';
 
 // Describe a standard humanoid-ish body
 function Body(ent) {

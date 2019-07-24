@@ -1,6 +1,8 @@
 import * as $ from 'jquery';
+import * as _ from 'lodash';
 
 import { GetRenderPictures } from '../app';
+import { isFunction, Rand } from './utility';
 
 let Text = {};
 

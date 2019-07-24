@@ -2,6 +2,8 @@
 import { Hair } from './hair';
 import { BodyPart } from './bodypart';
 import { Stat } from '../stat';
+import { RaceDesc } from './race';
+import { Appendage } from './appendage';
 
 function Head() {
 	BodyPart.call(this);

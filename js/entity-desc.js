@@ -1,4 +1,8 @@
 import { GetDEBUG } from '../app';
+import { Text } from './text';
+import { Color } from './body/color';
+import { Unit } from './utility';
+import { PregnancyHandler } from './pregnancy';
 
 let EntityDesc = {
 	PrintDescription : function(partial) {

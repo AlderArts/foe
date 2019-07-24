@@ -1,6 +1,8 @@
 
 import { BodyPart } from './bodypart';
 import { Stat } from '../stat';
+import { RaceDesc } from './race';
+import { Color } from './color';
 
 let HairStyle = {
 	straight : 0,

@@ -62,6 +62,7 @@ Vagina.prototype.nounPlural = function() {
 	return _.sample(nouns);
 }
 Vagina.prototype.Desc = function() {
+	let ret = null;
 	var vagArea = this.capacity.Get() * this.stretch.Get();
 	if     (vagArea <= 3 ) ret = {a:"an", adj: "extremely tight"};
 	else if(vagArea <= 4 ) ret = {a:"a", adj: "very tight"};

@@ -508,7 +508,7 @@ Gui.ClearButtons = function() {
 Gui.NextPrompt = function(func, text, tooltip) {
 	Gui.ClearButtons();
 	//text, func, enabled, obj, tooltip, state
-	Input.buttons[0].Setup(text || "Next", func || PrintDefaultOptions, true, null, tooltip);
+	Input.buttons[0].Setup(text || "Next", func || Gui.PrintDefaultOptions, true, null, tooltip);
 }
 
 Gui.SetButtonPage = function(list, page, state) {
@@ -525,7 +525,7 @@ Gui.SetButtonPage = function(list, page, state) {
 Gui.SetButtonsFromList = function(list, backEnabled, backFunc, state, backState) {
 	Gui.ClearButtons();
 	var currentPage = 0;
-	backFunc = backFunc || PrintDefaultOptions;
+	backFunc = backFunc || Gui.PrintDefaultOptions;
 
 	Gui.SetButtonPage(list, currentPage, state);
 

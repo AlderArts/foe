@@ -1,6 +1,7 @@
 
 import { BodyPart } from './bodypart';
 import { Stat } from '../stat';
+import { Rand } from '../utility';
 
 var NippleType = {
 	ordinary : 0,
@@ -222,4 +223,4 @@ Breasts.prototype.Long = function() {
 	return desc.a + " " + desc.adj + " " + this.nounPlural();
 }
 
-export {Breasts, NippleType};
+export { Breasts, NippleType };

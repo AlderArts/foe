@@ -36,4 +36,4 @@ let BodyPartType = {
 	mouth  : 4
 };
 
-export {BodyPart, BodyPartType};
+export { BodyPart, BodyPartType };
