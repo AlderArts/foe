@@ -5,13 +5,20 @@
 //                                                   //
 //***************************************************//
 
-import { Gui } from './gui';
 import { SetGameState, GameState, isOnline } from './gamestate';
 import { GetRenderPictures, SetRenderPictures, GetDEBUG, SetDEBUG } from '../app';
 
 import { ExploreButtonIndex } from './explorestate';
 import { GAME } from './GAME';
 import { Text } from './text';
+import { Input } from './input';
+
+let Gui = null;
+let Exploration = {
+	Init : function(gui) {
+		Gui = gui;
+	}
+};
 
 function SetExploreButtons() {
 	var waitLocation = GAME().party.location.wait();
@@ -20,7 +27,7 @@ function SetExploreButtons() {
 
 	Input.exploreButtons[ExploreButtonIndex.Explore].Setup("Explore", Explore, true);
 
-	if(!Intro.active) {
+	if(!GAME().IntroActive) {
 		Input.exploreButtons[ExploreButtonIndex.Party].enabledImage = (GAME().party.location.switchSpot()) ? Images.imgButtonEnabled2 : Images.imgButtonEnabled;
 		Input.exploreButtons[ExploreButtonIndex.Party].Setup("Party", PartyInteraction, true);
 		if(GAME().party.members.length == 0) Input.exploreButtons[ExploreButtonIndex.Party].SetEnabled(false);
@@ -278,4 +285,4 @@ function ShowHunting(preventClear) {
 	SetExploreButtons();
 }
 
-export { DataPrompt, LimitedDataPrompt, ExploreButtonIndex, Explore };
+export { DataPrompt, LimitedDataPrompt, Explore, Exploration };

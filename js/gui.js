@@ -11,7 +11,7 @@ import { gameState, GameState } from './gamestate';
 import { ExploreButtonIndex } from './explorestate';
 import { Text } from './text';
 import { GAME } from './GAME';
-import { Explore } from './exploration';
+import { Explore, Exploration } from './exploration';
 import { WorldTime } from './worldtime';
 
 
@@ -133,6 +133,7 @@ Gui.Init = function() {
 
 	// Set up key listeners (input.js)
 	Input.Init(Gui);
+	Exploration.Init(Gui);
 
 	// Set bg
 	Gui.BgColor = isOnline() && localStorage["bgcolor"] ? localStorage["bgcolor"] : "rgba(255, 255, 255, 0.2)";
@@ -280,7 +281,7 @@ Gui.SetupPortrait = function(xoffset, yoffset, set, obj, isParty, index) {
 }
 
 Gui.HandlePortraitClick = function(index, isParty) {
-	if(gameState == GameState.Game && !Intro.active) {
+	if(gameState == GameState.Game && !GAME().IntroActive) {
 		if(isParty) {
 			var character = GAME().party.Get(index);
 			if(character) {

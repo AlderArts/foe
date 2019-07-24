@@ -31,7 +31,7 @@ export function InitIntro(w) {
 Intro.Start = function() {
 	GAME().party.SwitchIn(GAME().player);
 
-	Intro.active = true;
+	GAME().IntroActive = true;
 
 	Text.Clear();
 
@@ -1859,7 +1859,7 @@ LightAspect.Garden.description = function() {
 	Text.Add("You are standing in a lush garden filled with flowers of all shapes and colors. A small stream runs nearby, its musical babbling accompanied by distant birdsong.");
 	Text.NL();
 
-	Intro.active = true;
+	GAME().IntroActive = true;
 }
 
 LightAspect.Garden.events.push(new Link(
@@ -2790,7 +2790,7 @@ Intro.Finalizing = function() {
 
 	Text.Flush();
 
-	Intro.active = false;
+	GAME().IntroActive = false;
 
 	Gui.NextPrompt(Gui.PrintDefaultOptions);
 }
