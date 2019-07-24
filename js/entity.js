@@ -3,7 +3,7 @@
 // Enemies and player inherit from Entity
 
 import { Stat } from './stat';
-import { StatusList } from './statuseffect';
+import { StatusList } from './statuslist';
 import { Body } from './body/body';
 import { PregnancyHandler } from './pregnancy';
 import { LactationHandler } from './lactation';

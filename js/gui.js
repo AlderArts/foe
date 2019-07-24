@@ -3,7 +3,7 @@ import * as $ from 'jquery';
 
 import { Images } from './assets';
 import { SMALL_FONT, DEFAULT_FONT, GetRenderPictures } from '../app';
-import { StatusEffect, StatusList } from './statuseffect';
+import { StatusEffect } from './statuseffect';
 import { Input, Keys } from './input';
 import { isOnline, SetGameState } from './gamestate';
 // import { Explore } from './exploration';
@@ -13,6 +13,7 @@ import { Text } from './text';
 import { GAME } from './GAME';
 import { Explore, Exploration } from './exploration';
 import { WorldTime } from './worldtime';
+import { StatusList } from './statuslist';
 
 
 let Gui = {};
