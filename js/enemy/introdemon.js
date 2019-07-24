@@ -5,6 +5,12 @@
  */
 
 import { BossEntity } from './boss';
+import { Images } from '../assets';
+import { Body } from '../body/body';
+import { Race } from '../body/race';
+import { Color } from '../body/color';
+import { Text } from '../text';
+import { Gui } from '../gui';
 
 function IntroDemon() {
 	BossEntity.call(this);

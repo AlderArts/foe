@@ -5,6 +5,20 @@
  */
 
 import { Entity } from '../entity';
+import { Images } from '../assets';
+import { Element } from '../ability';
+import { Color } from '../body/color';
+import { TF } from '../tf';
+import { AppendageType } from '../body/appendage';
+import { Race } from '../body/race';
+import { AlchemyItems } from '../items/alchemy';
+import { IngredientItems } from '../items/ingredients';
+import { Text } from '../text';
+import { Abilities } from '../abilities';
+import { Party } from '../party';
+import { Encounter } from '../combat';
+import { Gui } from '../gui';
+import { SetGameState, GameState } from '../gamestate';
 
 let MothgirlScenes = {};
 
@@ -73,27 +87,27 @@ Mothgirl.Sexed = function() {
 
 Mothgirl.prototype.DropTable = function() {
 	var drops = [];
-	if(Math.random() < 0.05) drops.push({ it: Items.Lepida });
-	if(Math.random() < 0.5)  drops.push({ it: Items.MDust });
-	if(Math.random() < 0.5)  drops.push({ it: Items.FruitSeed });
-	if(Math.random() < 0.5)  drops.push({ it: Items.MFluff });
+	if(Math.random() < 0.05) drops.push({ it: AlchemyItems.Lepida });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.MDust });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.FruitSeed });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.MFluff });
 
-	if(Math.random() < 0.1)  drops.push({ it: Items.Hummus });
-	if(Math.random() < 0.1)  drops.push({ it: Items.SpringWater });
-	if(Math.random() < 0.1)  drops.push({ it: Items.Letter });
-	if(Math.random() < 0.1)  drops.push({ it: Items.FreshGrass });
-	if(Math.random() < 0.1)  drops.push({ it: Items.RawHoney });
-	if(Math.random() < 0.1)  drops.push({ it: Items.BeeChitin });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.Hummus });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.SpringWater });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.Letter });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.FreshGrass });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.RawHoney });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.BeeChitin });
 
-	if(Math.random() < 0.05) drops.push({ it: Items.FoxBerries });
-	if(Math.random() < 0.05) drops.push({ it: Items.Foxglove });
-	if(Math.random() < 0.05) drops.push({ it: Items.Wolfsbane });
-	if(Math.random() < 0.05) drops.push({ it: Items.Trinket });
-	if(Math.random() < 0.05) drops.push({ it: Items.FlowerPetal });
-	if(Math.random() < 0.05) drops.push({ it: Items.Lettuce });
+	if(Math.random() < 0.05) drops.push({ it: IngredientItems.FoxBerries });
+	if(Math.random() < 0.05) drops.push({ it: IngredientItems.Foxglove });
+	if(Math.random() < 0.05) drops.push({ it: IngredientItems.Wolfsbane });
+	if(Math.random() < 0.05) drops.push({ it: IngredientItems.Trinket });
+	if(Math.random() < 0.05) drops.push({ it: IngredientItems.FlowerPetal });
+	if(Math.random() < 0.05) drops.push({ it: IngredientItems.Lettuce });
 
-	if(Math.random() < 0.01) drops.push({ it: Items.Avia });
-	if(Math.random() < 0.02) drops.push({ it: Items.HoneyBrew });
+	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Avia });
+	if(Math.random() < 0.02) drops.push({ it: IngredientItems.HoneyBrew });
 	return drops;
 }
 

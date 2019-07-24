@@ -11,6 +11,8 @@ import { Images } from '../assets';
 import { Time } from '../time';
 import { Race } from '../body/race';
 import { WorldTime } from '../worldtime';
+import { Text } from '../text';
+import { Gui } from '../gui';
 
 let MomoScenes = {};
 

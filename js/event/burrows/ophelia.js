@@ -12,6 +12,12 @@ import { AppendageType } from '../../body/appendage';
 import { Color } from '../../body/color';
 import { Time } from '../../time';
 import { WorldTime } from '../../worldtime';
+import { Images } from '../../assets';
+import { AlchemySpecial } from '../../items/alchemyspecial';
+import { AlchemyItems } from '../../items/alchemy';
+import { Abilities } from '../../abilities';
+import { Text } from '../../text';
+import { Gui } from '../../gui';
 
 let OpheliaScenes = {};
 
@@ -149,10 +155,10 @@ OpheliaBrute.prototype.constructor = OpheliaBrute;
 
 OpheliaBrute.prototype.DropTable = function() {
 	var drops = [];
-	drops.push({ it: Items.Leporine });
-	drops.push({ it: Items.EquiniumPlus });
-	drops.push({ it: Items.Estros });
-	drops.push({ it: Items.GestariumPlus });
+	drops.push({ it: AlchemyItems.Leporine });
+	drops.push({ it: AlchemySpecial.EquiniumPlus });
+	drops.push({ it: AlchemyItems.Estros });
+	drops.push({ it: AlchemyItems.GestariumPlus });
 	return drops;
 }
 

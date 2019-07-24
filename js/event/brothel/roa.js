@@ -8,6 +8,9 @@ import { Entity } from '../../entity';
 import { GetDEBUG } from '../../../app';
 import { Images } from '../../assets';
 import { Race } from '../../body/race';
+import { PregnancyHandler } from '../../pregnancy';
+import { Text } from '../../text';
+import { Gui } from '../../gui';
 
 let RoaScenes = {};
 

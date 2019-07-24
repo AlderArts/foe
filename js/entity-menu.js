@@ -1,3 +1,6 @@
+import { Images } from "./assets";
+import { Text } from "./text";
+import { Gui } from "./gui";
 
 let EntityMenu = {
 	InteractDefault : function(options, switchSpot, enableEquip, enableStats, enableJob, enableSwitch) {

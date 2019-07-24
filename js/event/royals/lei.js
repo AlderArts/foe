@@ -11,6 +11,9 @@ import { HairStyle } from '../../body/hair';
 import { Stat } from '../../stat';
 import { Time } from '../../time';
 import { WorldTime } from '../../worldtime';
+import { Abilities } from '../../abilities';
+import { Text } from '../../text';
+import { Gui } from '../../gui';
 
 // TODO: FIX STATS
 function Lei(storage) {

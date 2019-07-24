@@ -12,6 +12,7 @@ import { ExploreButtonIndex } from './explorestate';
 import { GAME } from './GAME';
 import { Text } from './text';
 import { Input } from './input';
+import { Images } from './assets';
 
 let Gui = null;
 let Exploration = {

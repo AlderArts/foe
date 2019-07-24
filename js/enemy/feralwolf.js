@@ -5,6 +5,16 @@
  */
 
 import { Entity } from '../entity';
+import { Images } from '../assets';
+import { Race } from '../body/race';
+import { Color } from '../body/color';
+import { TF } from '../tf';
+import { AppendageType } from '../body/appendage';
+import { Abilities } from '../abilities';
+import { Party } from '../party';
+import { Encounter } from '../combat';
+import { AlchemyItems } from '../items/alchemy';
+import { IngredientItems } from '../items/ingredients';
 
 let FeralWolfScenes = {};
 
@@ -57,20 +67,20 @@ FeralWolf.prototype.constructor = FeralWolf;
 
 FeralWolf.prototype.DropTable = function() {
 	var drops = [];
-	if(Math.random() < 0.05) drops.push({ it: Items.Lobos });
-	if(Math.random() < 0.5)  drops.push({ it: Items.WolfFang });
-	if(Math.random() < 0.5)  drops.push({ it: Items.Wolfsbane });
-	if(Math.random() < 0.5)  drops.push({ it: Items.CanisRoot });
+	if(Math.random() < 0.05) drops.push({ it: AlchemyItems.Lobos });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.WolfFang });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.Wolfsbane });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.CanisRoot });
 
-	if(Math.random() < 0.1)  drops.push({ it: Items.DogBiscuit });
-	if(Math.random() < 0.1)  drops.push({ it: Items.DogBone });
-	if(Math.random() < 0.1)  drops.push({ it: Items.FoxBerries });
-	if(Math.random() < 0.1)  drops.push({ it: Items.Foxglove });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.DogBiscuit });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.DogBone });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.FoxBerries });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.Foxglove });
 
-	if(Math.random() < 0.01) drops.push({ it: Items.Canis });
-	if(Math.random() < 0.01) drops.push({ it: Items.Vulpinix });
-	if(Math.random() < 0.01) drops.push({ it: Items.Testos });
-	if(Math.random() < 0.01) drops.push({ it: Items.Virilium });
+	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Canis });
+	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Vulpinix });
+	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Testos });
+	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Virilium });
 	return drops;
 }
 

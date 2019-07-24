@@ -6,6 +6,12 @@
 
 import { Entity } from '../entity';
 import { Gender } from '../body/gender';
+import { Images } from '../assets';
+import { Element } from '../ability';
+import { Race } from '../body/race';
+import { Color } from '../body/color';
+import { TF } from '../tf';
+import { AppendageType } from '../body/appendage';
 
 let EquineScenes = {};
 

@@ -13,6 +13,15 @@ import { AppendageType } from '../../body/appendage';
 import { Color } from '../../body/color';
 import { TF } from '../../tf';
 import { WorldTime } from '../../worldtime';
+import { PregnancyHandler } from '../../pregnancy';
+import { Images } from '../../assets';
+import { EncounterTable } from '../../event';
+import { Abilities } from '../../abilities';
+import { Lagomorph, LagomorphBrute, LagomorphWizard, LagomorphElite, LagomorphAlpha } from '../../enemy/rabbit';
+import { AccItems } from '../../items/accessories';
+import { QuestItems } from '../../items/quest';
+import { Text } from '../../text';
+import { Gui } from '../../gui';
 
 let LagonScenes = {
 	Defeated : LagonDScenes,
@@ -339,10 +348,10 @@ LagonBrute.prototype.constructor = LagonBrute;
 
 LagonBrute.prototype.DropTable = function() {
 	var drops = [];
-	drops.push({ it: Items.Leporine });
-	drops.push({ it: Items.Testos });
-	drops.push({ it: Items.Virilium });
-	drops.push({ it: Items.Accessories.LagonCrown });
+	drops.push({ it: AlchemyItems.Leporine });
+	drops.push({ it: AlchemyItems.Testos });
+	drops.push({ it: AlchemyItems.Virilium });
+	drops.push({ it: AccItems.LagonCrown });
 	return drops;
 }
 
@@ -358,7 +367,7 @@ LagonBrute.prototype.Act = function(encounter, activeChar) {
 
 	var first = this.turns == 0;
 	this.turns++;
-	var scepter = party.Inv().QueryNum(Items.Quest.Scepter);
+	var scepter = party.Inv().QueryNum(QuestItems.Scepter);
 	
 	if(scepter) {
 		if(first) {

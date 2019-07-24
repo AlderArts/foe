@@ -3,6 +3,7 @@
  */
 
 import { DamageType } from './ability';
+import { Images } from './assets';
 
 let Status = {};
 

@@ -6,6 +6,21 @@
 
 import { Entity } from '../entity';
 import { WorldTime } from '../worldtime';
+import { Images } from '../assets';
+import { Cock } from '../body/cock';
+import { Vagina } from '../body/vagina';
+import { Element } from '../ability';
+import { Race } from '../body/race';
+import { Color } from '../body/color';
+import { AlchemySpecial } from '../items/alchemyspecial';
+import { AlchemyItems } from '../items/alchemy';
+import { IngredientItems } from '../items/ingredients';
+import { Text } from '../text';
+import { Party } from '../party';
+import { Encounter } from '../combat';
+import { EncounterTable } from '../event';
+import { Gui } from '../gui';
+import { SetGameState, GameState } from '../gamestate';
 
 let NagaScenes = {};
 
@@ -74,20 +89,20 @@ Naga.NagaMateUnlocked = function() {
 
 Naga.prototype.DropTable = function() {
 	var drops = [];
-	if(Math.random() < 0.05) drops.push({ it: Items.Nagazm });
-	if(Math.random() < 0.05) drops.push({ it: Items.Lacertium });
-	if(Math.random() < 0.5)  drops.push({ it: Items.SnakeOil });
-	if(Math.random() < 0.5)  drops.push({ it: Items.SnakeFang });
-	if(Math.random() < 0.5)  drops.push({ it: Items.SnakeSkin });
+	if(Math.random() < 0.05) drops.push({ it: AlchemySpecial.Nagazm });
+	if(Math.random() < 0.05) drops.push({ it: AlchemyItems.Lacertium });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.SnakeOil });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.SnakeFang });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.SnakeSkin });
 
-	if(Math.random() < 0.1)  drops.push({ it: Items.LizardEgg });
-	if(Math.random() < 0.1)  drops.push({ it: Items.LizardScale });
-	if(Math.random() < 0.1)  drops.push({ it: Items.SpringWater });
-	if(Math.random() < 0.1)  drops.push({ it: Items.Trinket });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.LizardEgg });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.LizardScale });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.SpringWater });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.Trinket });
 
-	if(Math.random() < 0.01) drops.push({ it: Items.BlackGem });
-	if(Math.random() < 0.01) drops.push({ it: Items.Scorpius });
-	if(Math.random() < 0.01) drops.push({ it: Items.Gestarium });
+	if(Math.random() < 0.01) drops.push({ it: IngredientItems.BlackGem });
+	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Scorpius });
+	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Gestarium });
 	return drops;
 }
 

@@ -8,6 +8,7 @@ import { BUTTON_FONT } from '../app';
 import { gameState, GameState } from './gamestate';
 import { isFunction } from './utility';
 import { Text } from './text';
+import { Images } from './assets';
 
 function Button(Gui, rect, text, func, enabled, image, disabledImage, glow) {
 	var that = this;

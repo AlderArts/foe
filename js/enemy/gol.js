@@ -5,6 +5,16 @@
  */
 
 import { BossEntity } from './boss';
+import { Images } from '../assets';
+import { Element } from '../ability';
+import { Body } from '../body/body';
+import { Race } from '../body/race';
+import { Color } from '../body/color';
+import { CockType } from '../body/cock';
+import { AlchemyItems } from '../items/alchemy';
+import { IngredientItems } from '../items/ingredients';
+import { QuestItems } from '../items/quest';
+import { WeaponsItems } from '../items/weapons';
 
 let GolScenes = {};
 
@@ -71,23 +81,23 @@ GolQueen.prototype.constructor = GolQueen;
 
 GolQueen.prototype.DropTable = function() {
 	var drops = [];
-	drops.push({ it: Items.Quest.Scepter });
-	drops.push({ it: Items.Weapons.GolClaw });
-	drops.push({ it: Items.GestariumPlus });
+	drops.push({ it: QuestItems.Scepter });
+	drops.push({ it: WeaponsItems.GolClaw });
+	drops.push({ it: AlchemyItems.GestariumPlus });
 	
-	drops.push({ it: Items.Letter, num: 3 });
-	drops.push({ it: Items.Trinket, num: 3 });
-	drops.push({ it: Items.HorseShoe, num: 3 });
+	drops.push({ it: IngredientItems.Letter, num: 3 });
+	drops.push({ it: IngredientItems.Trinket, num: 3 });
+	drops.push({ it: IngredientItems.HorseShoe, num: 3 });
 	
-	if(Math.random() < 0.1) drops.push({ it: Items.RawHoney });
-	if(Math.random() < 0.1) drops.push({ it: Items.BeeChitin });
-	if(Math.random() < 0.1) drops.push({ it: Items.MFluff });
-	if(Math.random() < 0.1) drops.push({ it: Items.HorseCum });
-	if(Math.random() < 0.1) drops.push({ it: Items.BlackGem });
+	if(Math.random() < 0.1) drops.push({ it: IngredientItems.RawHoney });
+	if(Math.random() < 0.1) drops.push({ it: IngredientItems.BeeChitin });
+	if(Math.random() < 0.1) drops.push({ it: IngredientItems.MFluff });
+	if(Math.random() < 0.1) drops.push({ it: IngredientItems.HorseCum });
+	if(Math.random() < 0.1) drops.push({ it: IngredientItems.BlackGem });
 	
-	if(Math.random() < 0.2) drops.push({ it: Items.Estros });
-	if(Math.random() < 0.2) drops.push({ it: Items.Gestarium });
-	if(Math.random() < 0.2) drops.push({ it: Items.GestariumPlus });
+	if(Math.random() < 0.2) drops.push({ it: AlchemyItems.Estros });
+	if(Math.random() < 0.2) drops.push({ it: AlchemyItems.Gestarium });
+	if(Math.random() < 0.2) drops.push({ it: AlchemyItems.GestariumPlus });
 	
 	return drops;
 }

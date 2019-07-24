@@ -1,9 +1,16 @@
+import * as _ from 'lodash';
+
+import { Images } from "./assets";
+import { Inventory } from "./inventory";
+import { Text } from "./text";
+import { Gui } from "./gui";
+
 /*
  * 
  * Alchemy
  * 
  */
-Alchemy = {};
+let Alchemy = {};
 
 // callback in the form of function(item)
 Alchemy.AlchemyPrompt = function(alchemist, inventory, backPrompt, callback, preventClear) {
@@ -256,3 +263,5 @@ Alchemy.AdaptRecipe = function(recipeDict, invDict, alchemist) {
 	var checkedRecipe = Alchemy.AdaptRecipe(recipeDict, invDict, alchemist);
 	return checkedRecipe;
 }
+
+export { Alchemy };

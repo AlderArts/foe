@@ -11,6 +11,14 @@ import { Body } from '../body/body';
 import { Race } from '../body/race';
 import { CockType } from '../body/cock';
 import { Color } from '../body/color';
+import { WeaponsItems } from '../items/weapons';
+import { ArmorItems } from '../items/armor';
+import { IngredientItems } from '../items/ingredients';
+import { PregnancyHandler } from '../pregnancy';
+import { Text } from '../text';
+import { EncounterTable } from '../event';
+import { Abilities } from '../abilities';
+import { Gui } from '../gui';
 
 let OrchidScenes = {};
 
@@ -74,17 +82,17 @@ OrchidBoss.prototype.constructor = OrchidBoss;
 //TODO
 OrchidBoss.prototype.DropTable = function() {
 	var drops = [];
-	drops.push({ it: Items.Weapons.VineWhip });
-	drops.push({ it: Items.Armor.VinePanties });
-	drops.push({ it: Items.Armor.VineBra });
-	drops.push({ it: Items.Estros });
+	drops.push({ it: WeaponsItems.VineWhip });
+	drops.push({ it: ArmorItems.VinePanties });
+	drops.push({ it: ArmorItems.VineBra });
+	drops.push({ it: AlchemyItems.Estros });
 	
-	if(Math.random() < 0.3)  drops.push({ it: Items.Foxglove });
-	if(Math.random() < 0.3)  drops.push({ it: Items.Wolfsbane });
-	if(Math.random() < 0.5)  drops.push({ it: Items.FlowerPetal });
-	if(Math.random() < 0.2)  drops.push({ it: Items.TreeBark });
-	if(Math.random() < 0.2)  drops.push({ it: Items.SpringWater });
-	if(Math.random() < 0.2) drops.push({ it: Items.Gestarium });
+	if(Math.random() < 0.3) drops.push({ it: IngredientItems.Foxglove });
+	if(Math.random() < 0.3) drops.push({ it: IngredientItems.Wolfsbane });
+	if(Math.random() < 0.5) drops.push({ it: IngredientItems.FlowerPetal });
+	if(Math.random() < 0.2) drops.push({ it: IngredientItems.TreeBark });
+	if(Math.random() < 0.2) drops.push({ it: IngredientItems.SpringWater });
+	if(Math.random() < 0.2) drops.push({ it: AlchemyItems.Gestarium });
 	
 	return drops;
 }

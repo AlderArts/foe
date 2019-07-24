@@ -5,6 +5,20 @@
  */
 
 import { Entity } from '../entity';
+import { Images } from '../assets';
+import { Element } from '../ability';
+import { StatusEffect } from '../statuseffect';
+import { Color } from '../body/color';
+import { TF } from '../tf';
+import { AppendageType } from '../body/appendage';
+import { Race } from '../body/race';
+import { AlchemyItems } from '../items/alchemy';
+import { AlchemySpecial } from '../items/alchemyspecial';
+import { IngredientItems } from '../items/ingredients';
+import { Party } from '../party';
+import { Encounter } from '../combat';
+import { Text } from '../text';
+import { Abilities } from '../abilities';
 
 let ScorpionScenes = {};
 
@@ -64,23 +78,23 @@ Scorpion.prototype.constructor = Scorpion;
 
 Scorpion.prototype.DropTable = function() {
 	var drops = [];
-	if(Math.random() < 0.05) drops.push({ it: Items.Scorpius });
-	if(Math.random() < 0.5)  drops.push({ it: Items.Stinger });
-	if(Math.random() < 0.5)  drops.push({ it: Items.SVenom });
-	if(Math.random() < 0.5)  drops.push({ it: Items.SClaw });
+	if(Math.random() < 0.05) drops.push({ it: AlchemyItems.Scorpius });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.Stinger });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.SVenom });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.SClaw });
 	//Apparently a bone collector...
-	if(Math.random() < 0.1)  drops.push({ it: Items.DogBone });
-	if(Math.random() < 0.1)  drops.push({ it: Items.WolfFang });
-	if(Math.random() < 0.1)  drops.push({ it: Items.SnakeFang });
-	if(Math.random() < 0.1)  drops.push({ it: Items.AntlerChip });
-	if(Math.random() < 0.1)  drops.push({ it: Items.CatClaw });
-	if(Math.random() < 0.1)  drops.push({ it: Items.LizardScale });
-	if(Math.random() < 0.1)  drops.push({ it: Items.LizardEgg });
-	if(Math.random() < 0.1)  drops.push({ it: Items.RawHoney });
-	if(Math.random() < 0.1)  drops.push({ it: Items.BeeChitin });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.DogBone });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.WolfFang });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.SnakeFang });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.AntlerChip });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.CatClaw });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.LizardScale });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.LizardEgg });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.RawHoney });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.BeeChitin });
 
-	if(Math.random() < 0.01) drops.push({ it: Items.Lacertium });
-	if(Math.random() < 0.01) drops.push({ it: Items.Nagazm });
+	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Lacertium });
+	if(Math.random() < 0.01) drops.push({ it: AlchemySpecial.Nagazm });
 	return drops;
 }
 

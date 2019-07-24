@@ -3,7 +3,7 @@ let preloader = require('preloader');
 import { StatusEffect } from './statuseffect';
 import { CardItems } from './items/cards';
 
-var Images = {};
+let Images = {};
 
 Images.bg           = "assets/img/gui/background.jpg";
 
@@ -136,7 +136,7 @@ let LoadCardImages = function(imageArray) {
 	CardItems.Shadow[3].Img   = "assets/img/cards/S4.png";
 	CardItems.Shadow[4].Img   = "assets/img/cards/S5.png";
 
-	Images.card_back            = "assets/img/cards/back.png";
+	Images.card_back          = "assets/img/cards/back.png";
 
 	let cards = [
 		CardItems.Light[0].Img,

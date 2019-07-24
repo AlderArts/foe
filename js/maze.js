@@ -4,6 +4,8 @@
 
 import { Event } from './event';
 import { GetDEBUG } from '../app';
+import { Images } from './assets';
+import { Text } from './text';
 
 function Maze(opts) {
 	opts = opts || {};

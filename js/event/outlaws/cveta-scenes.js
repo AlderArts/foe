@@ -1,6 +1,8 @@
 import { Cveta } from './cveta';
 import { DateScenes } from './cveta-date';
 import { WorldTime } from '../../worldtime';
+import { Text } from '../../text';
+import { Gui } from '../../gui';
 
 let CvetaScenes = {
 	Dates : DateScenes,

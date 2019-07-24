@@ -4,6 +4,24 @@ import { EncounterTable } from '../event';
 import { Party } from '../party';
 import { Gender } from '../body/gender';
 import { WorldTime } from '../worldtime';
+import { Images } from '../assets';
+import { Element } from '../ability';
+import { Race } from '../body/race';
+import { Color } from '../body/color';
+import { TF } from '../tf';
+import { AppendageType } from '../body/appendage';
+import { WeaponsItems } from '../items/weapons';
+import { ArmorItems } from '../items/armor';
+import { AlchemySpecial } from '../items/alchemyspecial';
+import { IngredientItems } from '../items/ingredients';
+import { CombatItems } from '../items/combatitems';
+import { Text } from '../text';
+import { Abilities } from '../abilities';
+import { PregnancyHandler } from '../pregnancy';
+import { ToysItems } from '../items/toys';
+import { Encounter } from '../combat';
+import { Gui } from '../gui';
+import { SetGameState, GameState } from '../gamestate';
 
 /*
 Tier 1 Malice scouts and outriders
@@ -81,8 +99,8 @@ function CatboyMage(levelbonus) {
 
 	this.body.SetEyeColor(Color.green);
 
-	this.weaponSlot   = Items.Weapons.MageStaff;
-	this.topArmorSlot = Items.Armor.MageRobes;
+	this.weaponSlot   = WeaponsItems.MageStaff;
+	this.topArmorSlot = ArmorItems.MageRobes;
 
 	this.Equip();
 
@@ -95,32 +113,32 @@ CatboyMage.prototype.constructor = CatboyMage;
 
 CatboyMage.prototype.DropTable = function() {
 	var drops = [];
-	if(Math.random() < 0.1)  drops.push({ it: Items.Felinix });
-	if(Math.random() < 0.02) drops.push({ it: Items.Tigris });
-	if(Math.random() < 0.5)  drops.push({ it: Items.Whiskers });
-	if(Math.random() < 0.5)  drops.push({ it: Items.HairBall });
-	if(Math.random() < 0.5)  drops.push({ it: Items.CatClaw });
+	if(Math.random() < 0.1)  drops.push({ it: AlchemyItems.Felinix });
+	if(Math.random() < 0.02) drops.push({ it: AlchemySpecial.Tigris });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.Whiskers });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HairBall });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.CatClaw });
 
-	if(Math.random() < 0.01) drops.push({ it: Items.Bovia });
-	if(Math.random() < 0.1)  drops.push({ it: Items.GoatMilk });
-	if(Math.random() < 0.1)  drops.push({ it: Items.SheepMilk });
-	if(Math.random() < 0.1)  drops.push({ it: Items.CowMilk });
-	if(Math.random() < 0.05) drops.push({ it: Items.LizardEgg });
-	if(Math.random() < 0.05) drops.push({ it: Items.MFluff });
+	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Bovia });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.GoatMilk });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.SheepMilk });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.CowMilk });
+	if(Math.random() < 0.05) drops.push({ it: IngredientItems.LizardEgg });
+	if(Math.random() < 0.05) drops.push({ it: IngredientItems.MFluff });
 
-	if(Math.random() < 0.3)  drops.push({ it: Items.FreshGrass });
-	if(Math.random() < 0.3)  drops.push({ it: Items.SpringWater });
-	if(Math.random() < 0.1)  drops.push({ it: Items.Foxglove });
-	if(Math.random() < 0.1)  drops.push({ it: Items.TreeBark });
-	if(Math.random() < 0.1)  drops.push({ it: Items.RawHoney });
+	if(Math.random() < 0.3)  drops.push({ it: IngredientItems.FreshGrass });
+	if(Math.random() < 0.3)  drops.push({ it: IngredientItems.SpringWater });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.Foxglove });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.TreeBark });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.RawHoney });
 
-	if(Math.random() < 0.05) drops.push({ it: Items.Wolfsbane });
-	if(Math.random() < 0.05) drops.push({ it: Items.Ramshorn });
+	if(Math.random() < 0.05) drops.push({ it: IngredientItems.Wolfsbane });
+	if(Math.random() < 0.05) drops.push({ it: IngredientItems.Ramshorn });
 
-	if(Math.random() < 0.01) drops.push({ it: Items.BlackGem });
-	if(Math.random() < 0.01) drops.push({ it: Items.CorruptPlant });
-	if(Math.random() < 0.01) drops.push({ it: Items.CorruptSeed });
-	if(Math.random() < 0.01) drops.push({ it: Items.DemonSeed });
+	if(Math.random() < 0.01) drops.push({ it: IngredientItems.BlackGem });
+	if(Math.random() < 0.01) drops.push({ it: IngredientItems.CorruptPlant });
+	if(Math.random() < 0.01) drops.push({ it: IngredientItems.CorruptSeed });
+	if(Math.random() < 0.01) drops.push({ it: IngredientItems.DemonSeed });
 
 	return drops;
 }
@@ -141,7 +159,7 @@ CatboyMage.prototype.Act = function(encounter, activeChar) {
 	this.turnCounter++;
 
 	if(first) {
-		Items.Combat.DecoyStick.combat.Use(encounter, this);
+		CombatItems.DecoyStick.combat.Use(encounter, this);
 		return;
 	}
 
@@ -152,10 +170,10 @@ CatboyMage.prototype.Act = function(encounter, activeChar) {
 		Abilities.Attack.Use(encounter, that, t);
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
-		Items.Combat.DecoyStick.combat.Use(encounter, that);
+		CombatItems.DecoyStick.combat.Use(encounter, that);
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
-		Items.Combat.HPotion.combat.Use(encounter, that);
+		CombatItems.HPotion.combat.Use(encounter, that);
 	}, 1.0, function() { return that.HPLevel() < 0.5; });
 	scenes.AddEnc(function() {
 		Abilities.Black.Bolt.Use(encounter, that, t);
@@ -264,30 +282,30 @@ CentaurMare.prototype.constructor = CentaurMare;
 CentaurMare.prototype.DropTable = function() {
 	var drops = [];
 
-	if(Math.random() < 0.1)  drops.push({ it: Items.Equinium });
-	if(Math.random() < 0.05) drops.push({ it: Items.Taurico });
-	if(Math.random() < 0.01) drops.push({ it: Items.EquiniumPlus });
-	if(Math.random() < 0.5)  drops.push({ it: Items.HorseHair });
-	if(Math.random() < 0.5)  drops.push({ it: Items.HorseShoe });
-	if(Math.random() < 0.5)  drops.push({ it: Items.HorseCum });
+	if(Math.random() < 0.1)  drops.push({ it: AlchemyItems.Equinium });
+	if(Math.random() < 0.05) drops.push({ it: AlchemySpecial.Taurico });
+	if(Math.random() < 0.01) drops.push({ it: AlchemySpecial.EquiniumPlus });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HorseHair });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HorseShoe });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HorseCum });
 
-	if(Math.random() < 0.3)  drops.push({ it: Items.FruitSeed });
-	if(Math.random() < 0.2)  drops.push({ it: Items.Hummus });
-	if(Math.random() < 0.2)  drops.push({ it: Items.SpringWater });
-	if(Math.random() < 0.1)  drops.push({ it: Items.FlowerPetal });
-	if(Math.random() < 0.1)  drops.push({ it: Items.Wolfsbane });
+	if(Math.random() < 0.3)  drops.push({ it: IngredientItems.FruitSeed });
+	if(Math.random() < 0.2)  drops.push({ it: IngredientItems.Hummus });
+	if(Math.random() < 0.2)  drops.push({ it: IngredientItems.SpringWater });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.FlowerPetal });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.Wolfsbane });
 
-	if(Math.random() < 0.05) drops.push({ it: Items.Weapons.OakSpear });
-	if(Math.random() < 0.05) drops.push({ it: Items.Armor.BronzeChest });
-	if(Math.random() < 0.05) drops.push({ it: Items.Toys.EquineDildo });
-	if(Math.random() < 0.05) drops.push({ it: Items.Combat.HPotion });
-	if(Math.random() < 0.05) drops.push({ it: Items.Combat.LustDart });
+	if(Math.random() < 0.05) drops.push({ it: WeaponsItems.OakSpear });
+	if(Math.random() < 0.05) drops.push({ it: ArmorItems.BronzeChest });
+	if(Math.random() < 0.05) drops.push({ it: ToysItems.EquineDildo });
+	if(Math.random() < 0.05) drops.push({ it: CombatItems.HPotion });
+	if(Math.random() < 0.05) drops.push({ it: CombatItems.LustDart });
 
-	if(Math.random() < 0.01) drops.push({ it: Items.Caprinium });
-	if(Math.random() < 0.01) drops.push({ it: Items.Cerventine });
-	if(Math.random() < 0.01) drops.push({ it: Items.Estros });
-	if(Math.random() < 0.01) drops.push({ it: Items.Fertilium });
-	if(Math.random() < 0.01) drops.push({ it: Items.FertiliumPlus });
+	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Caprinium });
+	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Cerventine });
+	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Estros });
+	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Fertilium });
+	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.FertiliumPlus });
 
 	return drops;
 }
@@ -395,7 +413,7 @@ function GoatAlchemist(levelbonus) {
 
 	this.body.SetEyeColor(Color.gray);
 
-	this.topArmorSlot = Items.Armor.SimpleRobes;
+	this.topArmorSlot = ArmorItems.SimpleRobes;
 
 	this.Equip();
 
@@ -408,29 +426,29 @@ GoatAlchemist.prototype.constructor = GoatAlchemist;
 
 GoatAlchemist.prototype.DropTable = function() {
 	var drops = [];
-	if(Math.random() < 0.5)  drops.push({ it: Items.Ramshorn });
-	if(Math.random() < 0.5)  drops.push({ it: Items.GoatMilk });
-	if(Math.random() < 0.5)  drops.push({ it: Items.GoatFleece });
-	if(Math.random() < 0.1)  drops.push({ it: Items.Caprinium });
+	if(Math.random() < 0.1)  drops.push({ it: AlchemyItems.Caprinium });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.Ramshorn });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.GoatMilk });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.GoatFleece });
 	
-	if(Math.random() < 0.3)  drops.push({ it: Items.FreshGrass });
-	if(Math.random() < 0.3)  drops.push({ it: Items.SpringWater });
-	if(Math.random() < 0.1)  drops.push({ it: Items.Foxglove });
-	if(Math.random() < 0.1)  drops.push({ it: Items.FlowerPetal });
-	if(Math.random() < 0.1)  drops.push({ it: Items.FoxBerries });
-	if(Math.random() < 0.1)  drops.push({ it: Items.TreeBark });
-	if(Math.random() < 0.1)  drops.push({ it: Items.AntlerChip });
-	if(Math.random() < 0.1)  drops.push({ it: Items.SVenom });
-	if(Math.random() < 0.1)  drops.push({ it: Items.MDust });
-	if(Math.random() < 0.1)  drops.push({ it: Items.RawHoney });
-	if(Math.random() < 0.1)  drops.push({ it: Items.BeeChitin });
+	if(Math.random() < 0.3)  drops.push({ it: IngredientItems.FreshGrass });
+	if(Math.random() < 0.3)  drops.push({ it: IngredientItems.SpringWater });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.Foxglove });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.FlowerPetal });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.FoxBerries });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.TreeBark });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.AntlerChip });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.SVenom });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.MDust });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.RawHoney });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.BeeChitin });
 
-	if(Math.random() < 0.3) drops.push({ it: Items.Wolfsbane });
+	if(Math.random() < 0.3) drops.push({ it: IngredientItems.Wolfsbane });
 
-	if(Math.random() < 0.02) drops.push({ it: Items.BlackGem });
-	if(Math.random() < 0.02) drops.push({ it: Items.CorruptPlant });
-	if(Math.random() < 0.02) drops.push({ it: Items.CorruptSeed });
-	if(Math.random() < 0.02) drops.push({ it: Items.DemonSeed });
+	if(Math.random() < 0.02) drops.push({ it: IngredientItems.BlackGem });
+	if(Math.random() < 0.02) drops.push({ it: IngredientItems.CorruptPlant });
+	if(Math.random() < 0.02) drops.push({ it: IngredientItems.CorruptSeed });
+	if(Math.random() < 0.02) drops.push({ it: IngredientItems.DemonSeed });
 
 	return drops;
 }

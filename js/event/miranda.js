@@ -11,6 +11,8 @@ import { Items } from '../items';
 import { Color } from '../body/color';
 import { Race } from '../body/race';
 import { WorldTime } from '../worldtime';
+import { Text } from '../text';
+import { Gui } from '../gui';
 
 function Miranda(storage) {
 	Entity.call(this);

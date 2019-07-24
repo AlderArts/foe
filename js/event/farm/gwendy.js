@@ -8,6 +8,8 @@ import { Images } from '../../assets';
 import { Color } from '../../body/color';
 import { HairStyle } from '../../body/hair';
 import { WorldTime } from '../../worldtime';
+import { Text } from '../../text';
+import { Gui } from '../../gui';
 
 // TODO: FIX STATS
 function Gwendy(storage) {

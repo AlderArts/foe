@@ -1,4 +1,6 @@
 import { Entity } from '../../entity';
+import { Text } from '../../text';
+import { Gui } from '../../gui';
 
 let BastetScenes = {};
 

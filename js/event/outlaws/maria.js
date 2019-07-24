@@ -10,6 +10,11 @@ import { Images } from '../../assets';
 import { Color } from '../../body/color';
 import { Time } from '../../time';
 import { WorldTime } from '../../worldtime';
+import { Abilities } from '../../abilities';
+import { Text } from '../../text';
+import { EncounterTable } from '../../event';
+import { Gui } from '../../gui';
+import { Jobs } from '../../job';
 
 let MariaScenes = {
 	DeadDrops : DeadDropScenes,

@@ -10,6 +10,9 @@ import { Element } from '../../ability';
 import { Body } from '../../body/body';
 import { Race } from '../../body/race';
 import { Color } from '../../body/color';
+import { Text } from '../../text';
+import { Party } from '../../party';
+import { Encounter } from '../../combat';
 
 let GolemScenes = {};
 GolemScenes.State = {

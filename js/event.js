@@ -1,5 +1,9 @@
 
 import { Gui } from "./gui";
+import { Images } from "./assets";
+import { isFunction } from "./utility";
+import { GameState, SetGameState } from "./gamestate";
+import { GAME } from "./GAME";
 
 /*
  *
@@ -70,8 +74,8 @@ Event.prototype.switchSpot = function() {
 }
 
 function MoveToLocation(location, timestep, preventClear) {
-	var oldLocation = party.location;
-	party.location = location;
+	var oldLocation = GAME().party.location;
+	GAME().party.location = location;
 
 	// Step time
 	timestep = timestep || new Time();
@@ -93,9 +97,9 @@ Event.prototype.SleepFunc = function() {
 		Text.Clear();
 		var func = function() {
 			world.TimeStep({hour: 8});
-			party.Sleep();
+			GAME().party.Sleep();
 
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}
 
 		Scenes.Dreams.Entry(func);
@@ -113,94 +117,94 @@ Event.prototype.WaitFunc = function() {
 		tooltip : "Wait for half an hour.",
 		func : function() {
 			world.TimeStep({minute: 30});
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	options.push({ nameStr : "One hour",
 		tooltip : "Wait for one hour.",
 		func : function() {
 			world.TimeStep({hour: 1});
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Two hours",
 		tooltip : "Wait for two hours.",
 		func : function() {
 			world.TimeStep({hour: 2});
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Four hours",
 		tooltip : "Wait for four hours.",
 		func : function() {
 			world.TimeStep({hour: 4});
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Eight hours",
 		tooltip : "Wait for eight hours.",
 		func : function() {
 			world.TimeStep({hour: 8});
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	options.push({ nameStr : "A day",
 		tooltip : "Wait for a day.",
 		func : function() {
 			world.TimeStep({day: 1});
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Until 4:00",
 		tooltip : "Wait until early morning.",
 		func : function() {
 			world.StepToHour(4);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Until 8:00",
 		tooltip : "Wait until morning.",
 		func : function() {
 			world.StepToHour(8);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Until 12:00",
 		tooltip : "Wait until midday.",
 		func : function() {
 			world.StepToHour(12);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Until 16:00",
 		tooltip : "Wait until afternoon.",
 		func : function() {
 			world.StepToHour(16);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Until 20:00",
 		tooltip : "Wait until evening.",
 		func : function() {
 			world.StepToHour(20);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Until 00:00",
 		tooltip : "Wait until midnight.",
 		func : function() {
 			world.StepToHour(0);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	Gui.SetButtonsFromList(options, true, function() {
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 	});
 }
 
 Event.prototype.DrunkHandler = function() {
 	var parse = {};
-	var comp = party.GetRandom();
+	var comp = GAME().party.GetRandom();
 	Text.Clear();
 	if(comp) {
 		parse["name"]  = comp.name;
@@ -285,7 +289,7 @@ Event.prototype.PrintDesc = function() {
 	}
 
 	// At safe locations you can sleep and save
-	if(party.location.safe()) {
+	if(GAME().party.location.safe()) {
 		Text.NL();
 		Text.Add("<b>This is a safe location, you can sleep and save here.</b>");
 		Text.NL();

@@ -5,6 +5,19 @@
  */
 
 import { Entity } from '../entity';
+import { Images } from '../assets';
+import { Race } from '../body/race';
+import { Color } from '../body/color';
+import { TF } from '../tf';
+import { AppendageType } from '../body/appendage';
+import { IngredientItems } from '../items/ingredients';
+import { Text } from '../text';
+import { Abilities } from '../abilities';
+import { AlchemyItems } from '../items/alchemy';
+import { Gui } from '../gui';
+import { Party } from '../party';
+import { Encounter } from '../combat';
+import { SetGameState, GameState } from '../gamestate';
 
 let ZebraShamanScenes = {};
 
@@ -57,32 +70,32 @@ ZebraShaman.prototype.constructor = ZebraShaman;
 
 ZebraShaman.prototype.DropTable = function() {
 	var drops = [];
-	if(Math.random() < 0.05) drops.push({ it: Items.Equinium });
-	if(Math.random() < 0.5)  drops.push({ it: Items.HorseCum });
-	if(Math.random() < 0.5)  drops.push({ it: Items.HorseHair });
-	if(Math.random() < 0.5)  drops.push({ it: Items.HorseShoe });
+	if(Math.random() < 0.05) drops.push({ it: AlchemyItems.Equinium });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HorseCum });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HorseHair });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HorseShoe });
 
-	if(Math.random() < 0.3)  drops.push({ it: Items.FreshGrass });
-	if(Math.random() < 0.3)  drops.push({ it: Items.SpringWater });
-	if(Math.random() < 0.1)  drops.push({ it: Items.Foxglove });
-	if(Math.random() < 0.1)  drops.push({ it: Items.FlowerPetal });
-	if(Math.random() < 0.1)  drops.push({ it: Items.FoxBerries });
-	if(Math.random() < 0.1)  drops.push({ it: Items.TreeBark });
-	if(Math.random() < 0.1)  drops.push({ it: Items.AntlerChip });
-	if(Math.random() < 0.1)  drops.push({ it: Items.SVenom });
-	if(Math.random() < 0.1)  drops.push({ it: Items.MDust });
-	if(Math.random() < 0.1)  drops.push({ it: Items.RawHoney });
-	if(Math.random() < 0.1)  drops.push({ it: Items.BeeChitin });
+	if(Math.random() < 0.3)  drops.push({ it: IngredientItems.FreshGrass });
+	if(Math.random() < 0.3)  drops.push({ it: IngredientItems.SpringWater });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.Foxglove });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.FlowerPetal });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.FoxBerries });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.TreeBark });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.AntlerChip });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.SVenom });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.MDust });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.RawHoney });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.BeeChitin });
 
-	if(Math.random() < 0.05) drops.push({ it: Items.Wolfsbane });
-	if(Math.random() < 0.05) drops.push({ it: Items.Ramshorn });
+	if(Math.random() < 0.05) drops.push({ it: IngredientItems.Wolfsbane });
+	if(Math.random() < 0.05) drops.push({ it: IngredientItems.Ramshorn });
 
-	if(Math.random() < 0.01) drops.push({ it: Items.BlackGem });
-	if(Math.random() < 0.01) drops.push({ it: Items.CorruptPlant });
-	if(Math.random() < 0.01) drops.push({ it: Items.CorruptSeed });
-	if(Math.random() < 0.01) drops.push({ it: Items.DemonSeed });
+	if(Math.random() < 0.01) drops.push({ it: IngredientItems.BlackGem });
+	if(Math.random() < 0.01) drops.push({ it: IngredientItems.CorruptPlant });
+	if(Math.random() < 0.01) drops.push({ it: IngredientItems.CorruptSeed });
+	if(Math.random() < 0.01) drops.push({ it: IngredientItems.DemonSeed });
 
-	if(Math.random() < 0.01) drops.push({ it: Items.Gestarium });
+	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Gestarium });
 	return drops;
 }
 
@@ -156,13 +169,13 @@ ZebraBrave.prototype.constructor = ZebraBrave;
 
 ZebraBrave.prototype.DropTable = function() {
 	var drops = [];
-	if(Math.random() < 0.05) drops.push({ it: Items.Equinium });
-	if(Math.random() < 0.5)  drops.push({ it: Items.HorseCum });
-	if(Math.random() < 0.5)  drops.push({ it: Items.HorseHair });
-	if(Math.random() < 0.5)  drops.push({ it: Items.HorseShoe });
+	if(Math.random() < 0.05) drops.push({ it: AlchemyItems.Equinium });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HorseCum });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HorseHair });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HorseShoe });
 
-	if(Math.random() < 0.5)  drops.push({ it: Items.FreshGrass });
-	if(Math.random() < 0.4)  drops.push({ it: Items.SpringWater });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.FreshGrass });
+	if(Math.random() < 0.4)  drops.push({ it: IngredientItems.SpringWater });
 	return drops;
 }
 

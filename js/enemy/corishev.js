@@ -3,6 +3,14 @@
  */
 
 import { BossEntity } from './boss';
+import { Images } from '../assets';
+import { Body } from '../body/body';
+import { StatusEffect } from '../statuseffect';
+import { Element } from '../ability';
+import { Items } from '../items';
+import { EncounterTable } from '../event';
+import { Text } from '../text';
+import { Abilities } from '../abilities';
 
 function Corishev() {
 	BossEntity.call(this);

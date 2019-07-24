@@ -12,6 +12,16 @@ import { Gender } from '../body/gender';
 import { Color } from '../body/color';
 import { Race } from '../body/race';
 import { Element } from '../ability';
+import { AlchemyItems } from '../items/alchemy';
+import { IngredientItems } from '../items/ingredients';
+import { Abilities } from '../abilities';
+import { PregnancyHandler } from '../pregnancy';
+import { Party } from '../party';
+import { Encounter } from '../combat';
+import { EncounterTable } from '../event';
+import { Text } from '../text';
+import { Gui } from '../gui';
+import { SetGameState, GameState } from '../gamestate';
 
 let LagomorphScenes = {};
 
@@ -82,25 +92,25 @@ Lagomorph.prototype.constructor = Lagomorph;
 
 Lagomorph.prototype.DropTable = function() {
 	var drops = [];
-	if(Math.random() < 0.05) drops.push({ it: Items.Leporine });
-	if(Math.random() < 0.5)  drops.push({ it: Items.RabbitFoot });
-	if(Math.random() < 0.5)  drops.push({ it: Items.CarrotJuice });
-	if(Math.random() < 0.5)  drops.push({ it: Items.Lettuce });
+	if(Math.random() < 0.05) drops.push({ it: AlchemyItems.Leporine });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.RabbitFoot });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.CarrotJuice });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.Lettuce });
 	
 	
-	if(Math.random() < 0.1)  drops.push({ it: Items.Whiskers });
-	if(Math.random() < 0.1)  drops.push({ it: Items.HorseHair });
-	if(Math.random() < 0.1)  drops.push({ it: Items.HorseCum });
-	if(Math.random() < 0.1)  drops.push({ it: Items.FruitSeed });
-	if(Math.random() < 0.1)  drops.push({ it: Items.FreshGrass });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.Whiskers });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.HorseHair });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.HorseCum });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.FruitSeed });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.FreshGrass });
 	
-	if(Math.random() < 0.01) drops.push({ it: Items.CorruptSeed });
-	if(Math.random() < 0.01) drops.push({ it: Items.DemonSeed });
+	if(Math.random() < 0.01) drops.push({ it: IngredientItems.CorruptSeed });
+	if(Math.random() < 0.01) drops.push({ it: IngredientItems.DemonSeed });
 	
-	if(Math.random() < 0.01) drops.push({ it: Items.Felinix });
-	if(Math.random() < 0.01) drops.push({ it: Items.Equinium });
-	if(Math.random() < 0.01) drops.push({ it: Items.Lacertium });
-	if(Math.random() < 0.01) drops.push({ it: Items.Gestarium });
+	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Felinix });
+	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Equinium });
+	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Lacertium });
+	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Gestarium });
 	return drops;
 }
 

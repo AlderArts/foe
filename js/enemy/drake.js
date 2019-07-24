@@ -7,6 +7,13 @@
 import { Entity } from '../entity';
 import { Encounter } from '../combat';
 import { Party } from '../party';
+import { Images } from '../assets';
+import { Element } from '../ability';
+import { StatusEffect } from '../statuseffect';
+import { Color } from '../body/color';
+import { TF } from '../tf';
+import { AppendageType } from '../body/appendage';
+import { Race } from '../body/race';
 
 let DrakeScenes = {};
 

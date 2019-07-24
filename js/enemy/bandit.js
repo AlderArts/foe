@@ -6,6 +6,7 @@
 
 import { Entity } from '../entity';
 import { Gender } from '../body/gender';
+import { Images } from '../assets';
 
 function StreetUrchin() {
 	Entity.call(this);

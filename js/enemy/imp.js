@@ -7,6 +7,14 @@
 import { Entity } from '../entity';
 import { Intro } from '../event/introduction';
 import { Gender } from '../body/gender';
+import { Images } from '../assets';
+import { Element } from '../ability';
+import { Race } from '../body/race';
+import { TF } from '../tf';
+import { AppendageType } from '../body/appendage';
+import { Color } from '../body/color';
+import { Text } from '../text';
+import { Gui } from '../gui';
 
 function Imp() {
 	Entity.call(this);

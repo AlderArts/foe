@@ -15,6 +15,7 @@ import { Race } from '../body/race';
 import { RigardLoc } from '../loc/rigard/rigard';
 import { Cock } from '../body/cock';
 import { Vagina } from '../body/vagina';
+import { Text } from '../text';
 
 let TerryScenes = {};
 

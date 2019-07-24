@@ -11,6 +11,8 @@ import { Color } from '../body/color';
 import { Race } from '../body/race';
 import { Images } from '../assets';
 import { Items } from '../items';
+import { Text } from '../text';
+import { Gui } from '../gui';
 
 function Kiakai(storage) {
 	Entity.call(this);

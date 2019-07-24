@@ -10,6 +10,7 @@ import { Time } from '../../time';
 import { Images } from '../../assets';
 import { Color } from '../../body/color';
 import { WorldTime } from '../../worldtime';
+import { Text } from '../../text';
 
 function Layla(storage) {
 	Entity.call(this);

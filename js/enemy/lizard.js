@@ -8,6 +8,19 @@ import { Entity } from '../entity';
 import { Cock } from '../body/cock';
 import { Gender } from '../body/gender';
 import { WorldTime } from '../worldtime';
+import { Images } from '../assets';
+import { Element } from '../ability';
+import { TF } from '../tf';
+import { AppendageType } from '../body/appendage';
+import { Race } from '../body/race';
+import { Color } from '../body/color';
+import { AlchemyItems } from '../items/alchemy';
+import { AlchemySpecial } from '../items/alchemyspecial';
+import { Party } from '../party';
+import { Encounter } from '../combat';
+import { Text } from '../text';
+import { Gui } from '../gui';
+import { SetGameState } from '../gamestate';
 
 let LizardsScenes = {};
 
@@ -93,7 +106,7 @@ Lizard.prototype.constructor = Lizard;
 
 Lizard.prototype.DropTable = function() {
 	var drops = [];
-	if(Math.random() < 0.05) drops.push({ it: Items.Lacertium });
+	if(Math.random() < 0.05) drops.push({ it: AlchemyItems.Lacertium });
 	if(Math.random() < 0.5)  drops.push({ it: Items.SnakeOil });
 	if(Math.random() < 0.5)  drops.push({ it: Items.LizardScale });
 	if(Math.random() < 0.5)  drops.push({ it: Items.LizardEgg });
@@ -102,9 +115,9 @@ Lizard.prototype.DropTable = function() {
 	if(Math.random() < 0.1)  drops.push({ it: Items.SnakeSkin });
 	if(Math.random() < 0.1)  drops.push({ it: Items.SpringWater });
 
-	if(Math.random() < 0.01) drops.push({ it: Items.Scorpius });
-	if(Math.random() < 0.01) drops.push({ it: Items.Nagazm });
-	if(Math.random() < 0.01) drops.push({ it: Items.Gestarium });
+	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Scorpius });
+	if(Math.random() < 0.01) drops.push({ it: AlchemySpecial.Nagazm });
+	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Gestarium });
 	return drops;
 }
 
