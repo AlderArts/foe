@@ -1,8 +1,12 @@
+import * as _ from 'lodash';
+
 import { Link } from './event';
 import { Cock } from './body/cock';
 import { Vagina } from './body/vagina';
 import { Item } from './item';
 import { GetDEBUG, SetDEBUG } from '../app';
+import { Text } from './text';
+import { Gui } from './gui';
 
 export function InitCheats(world) {
 	/*
@@ -204,7 +208,7 @@ export function InitCheats(world) {
 					}, enabled : true
 				});
 				
-				Gui.SetButtonsFromList(options, true, PrintDefaultOptions);
+				Gui.SetButtonsFromList(options, true, Gui.PrintDefaultOptions);
 			}
 			
 			CockSmith();
@@ -457,7 +461,7 @@ export function InitCheats(world) {
 						ElfSmithBody();
 					}, enabled : true
 				});
-				Gui.SetButtonsFromList(options, true, PrintDefaultOptions);
+				Gui.SetButtonsFromList(options, true, Gui.PrintDefaultOptions);
 			}
 			ElfSmith();
 		}
@@ -485,29 +489,41 @@ export function InitCheats(world) {
 			Text.Add("<b>Got a fuckton of items</b>");
 			
 			SetDEBUG(false);
-			
-			_(Items).pickBy(function(item) {
+
+			_(Items.Ingredients).pickBy(function(item) {
 				return item instanceof Item
 			}).forOwn(function(item) {
-				party.inventory.AddItem(item);
+				party.inventory.AddItem(item, 10);
+			});
+
+			_(Items.Alchemy).pickBy(function(item) {
+				return item instanceof Item
+			}).forOwn(function(item) {
+				party.inventory.AddItem(item, 10);
+			});
+
+			_(Items.AlchemySp).pickBy(function(item) {
+				return item instanceof Item
+			}).forOwn(function(item) {
+				party.inventory.AddItem(item, 10);
 			});
 
 			_(Items.Toys).pickBy(function(item) {
 				return item instanceof Item
 			}).forOwn(function(item) {
-				party.inventory.AddItem(item);
+				party.inventory.AddItem(item, 10);
 			});
 
 			_(Items.StrapOn).pickBy(function(item) {
 				return item instanceof Item
 			}).forOwn(function(item) {
-				party.inventory.AddItem(item);
+				party.inventory.AddItem(item, 10);
 			});
 
 			_(Items.Combat).pickBy(function(item) {
 				return item instanceof Item
 			}).forOwn(function(item) {
-				party.inventory.AddItem(item);
+				party.inventory.AddItem(item, 10);
 			});
 			
 			SetDEBUG(true);
