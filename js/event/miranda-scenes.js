@@ -2,6 +2,11 @@ import { Miranda } from "./miranda";
 import { Link } from '../event';
 import { Gender } from '../body/gender';
 import { WorldTime } from "../worldtime";
+import { SetGameState, GameState } from "../gamestate";
+import { Gui } from "../gui";
+import { Text } from "../text";
+import { Party } from "../party";
+import { Encounter } from "../combat";
 
 let MirandaScenes = {};
 

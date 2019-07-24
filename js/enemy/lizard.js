@@ -20,7 +20,7 @@ import { Party } from '../party';
 import { Encounter } from '../combat';
 import { Text } from '../text';
 import { Gui } from '../gui';
-import { SetGameState } from '../gamestate';
+import { SetGameState, GameState } from '../gamestate';
 
 let LizardsScenes = {};
 

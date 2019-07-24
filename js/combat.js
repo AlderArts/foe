@@ -1,4 +1,7 @@
 import { GetDEBUG } from "../app";
+import { SetGameState, GameState } from "./gamestate";
+import { Gui } from "./gui";
+import { Input } from "./input";
 
 // Create encounter with a Party() containing enemies
 function Encounter(enemy)
@@ -75,7 +78,7 @@ Encounter.prototype.PrepCombat = function() {
 			// Ressurect fallen
 			if(e.curHp < 1) e.curHp = 1;
 		}
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 	});
 
 	// Start the combat
@@ -217,7 +220,7 @@ Encounter.prototype.onRun = function() {
 	
 	Gui.NextPrompt(function() {
 		SetGameState(GameState.Event, Gui);
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 	});
 }
 
@@ -244,7 +247,7 @@ Encounter.prototype.onLoss = function() {
 	Text.Flush();
 	Gui.NextPrompt(function() {
 		SetGameState(GameState.Event, Gui);
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 	});
 }
 
@@ -304,7 +307,7 @@ Encounter.prototype.onVictory = function() {
 	Text.Flush();
 	Gui.NextPrompt(function() {
 		SetGameState(GameState.Event, Gui);
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 	});
 }
 

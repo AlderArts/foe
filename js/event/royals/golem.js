@@ -13,6 +13,8 @@ import { Color } from '../../body/color';
 import { Text } from '../../text';
 import { Party } from '../../party';
 import { Encounter } from '../../combat';
+import { SetGameState, GameState } from '../../gamestate';
+import { Gui } from '../../gui';
 
 let GolemScenes = {};
 GolemScenes.State = {

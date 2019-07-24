@@ -11,6 +11,7 @@ import { Input } from './input';
 import { Text } from './text';
 import { Gui } from './gui';
 import { GAME } from './GAME';
+import { SetGameState, GameState } from './gamestate';
 
 function Party(storage) {
 	this.members = [];

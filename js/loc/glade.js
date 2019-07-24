@@ -7,6 +7,11 @@
 import { Event, Link } from '../event';
 import { WorldTime } from '../worldtime';
 import { Season } from '../time';
+import { SetGameState, GameState } from '../gamestate';
+import { Gui } from '../gui';
+import { Text } from '../text';
+import { Encounter } from '../combat';
+import { Party } from '../party';
 
 let world = null;
 

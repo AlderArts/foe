@@ -6,6 +6,9 @@ import { GetDEBUG } from '../../../app';
 import { Gender } from '../../body/gender';
 import { Estevan } from './estevan';
 import { NomadsLoc } from '../../loc/nomads';
+import { SetGameState, GameState } from '../../gamestate';
+import { Gui } from '../../gui';
+import { Text } from '../../text';
 
 let NCavalcadeScenes = {};
 

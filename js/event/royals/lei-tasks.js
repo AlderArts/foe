@@ -1,6 +1,10 @@
 import { Lei } from './lei';
 import { Gender } from "../../body/gender";
 import { WorldTime } from '../../worldtime';
+import { SetGameState, GameState } from '../../gamestate';
+import { Gui } from '../../gui';
+import { Text } from '../../text';
+import { Encounter } from '../../combat';
 
 let TasksScenes = {};
 
@@ -251,7 +255,7 @@ TasksScenes.Escort.Estate = function() {
 				rigard.alianaRel.IncreaseStat(100, 3);
 				lei.flags["T1"] |= Lei.EscortTask.Flirted;
 				
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true
 		});
 		options.push({ nameStr : "Don’t",
@@ -264,7 +268,7 @@ TasksScenes.Escort.Estate = function() {
 				
 				prof += 1;
 				
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true
 		});
 		
@@ -397,14 +401,14 @@ disable submit/run option?
 							party.SwitchIn(obj);
 							comp = obj;
 							
-							PrintDefaultOptions();
+							Gui.PrintDefaultOptions();
 						}, obj : p, enabled : true
 					});
 				}
 				Gui.SetButtonsFromList(options, false, null);
 			}
 			else {
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}
 		});
 		

@@ -9,6 +9,9 @@ import { Gender } from '../body/gender';
 import { GwendyScenes } from '../event/farm/gwendy-scenes';
 import { LaylaScenes } from '../event/farm/layla-scenes';
 import { WorldTime } from '../worldtime';
+import { SetGameState, GameState } from '../gamestate';
+import { Gui } from '../gui';
+import { Text } from '../text';
 
 let world = null;
 

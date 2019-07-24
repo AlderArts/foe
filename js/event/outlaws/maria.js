@@ -15,6 +15,9 @@ import { Text } from '../../text';
 import { EncounterTable } from '../../event';
 import { Gui } from '../../gui';
 import { Jobs } from '../../job';
+import { Party } from '../../party';
+import { Encounter } from '../../combat';
+import { SetGameState, GameState } from '../../gamestate';
 
 let MariaScenes = {
 	DeadDrops : DeadDropScenes,

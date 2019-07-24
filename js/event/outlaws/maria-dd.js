@@ -1,5 +1,9 @@
 import { GetDEBUG } from '../../../app';
 import { WorldTime } from '../../worldtime';
+import { Entity } from '../../entity';
+import { SetGameState, GameState } from '../../gamestate';
+import { Gui } from '../../gui';
+import { Text } from '../../text';
 
 //
 // Maria Dead drops

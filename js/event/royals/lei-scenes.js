@@ -3,6 +3,10 @@ import { TasksScenes } from './lei-tasks';
 import { SexScenes } from './lei-sex';
 import { Lei } from './lei';
 import { WorldTime } from '../../worldtime';
+import { SetGameState, GameState } from '../../gamestate';
+import { Party } from '../../party';
+import { Encounter } from '../../combat';
+import { Text } from '../../text';
 
 let LeiScenes = {
 	Tasks : TasksScenes,

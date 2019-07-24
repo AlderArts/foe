@@ -8,6 +8,8 @@ import { Event, Link, EncounterTable } from '../../event';
 import { GetDEBUG } from '../../../app';
 import { Gender } from '../../body/gender';
 import { WorldTime } from '../../worldtime';
+import { SetGameState, GameState } from '../../gamestate';
+import { Text } from '../../text';
 
 let world = null;
 

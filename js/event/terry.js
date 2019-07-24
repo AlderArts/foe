@@ -16,6 +16,11 @@ import { RigardLoc } from '../loc/rigard/rigard';
 import { Cock } from '../body/cock';
 import { Vagina } from '../body/vagina';
 import { Text } from '../text';
+import { SetGameState, GameState } from '../gamestate';
+import { Gui } from '../gui';
+import { EncounterTable } from '../event';
+import { Encounter } from '../combat';
+import { Party } from '../party';
 
 let TerryScenes = {};
 

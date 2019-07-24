@@ -5,7 +5,7 @@
  */
 import * as $ from 'jquery';
 import { BUTTON_FONT } from '../app';
-import { gameState, GameState } from './gamestate';
+import { gameState, GameState, SetGameState } from './gamestate';
 import { isFunction } from './utility';
 import { Text } from './text';
 import { Images } from './assets';

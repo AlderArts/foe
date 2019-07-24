@@ -13,6 +13,8 @@ import { GAME } from './GAME';
 import { Text } from './text';
 import { Input } from './input';
 import { Images } from './assets';
+//import { Alchemy } from './alchemy'; TODO Circular dep
+//import { Quest } from './quest'; TODO Circular dep
 
 let Gui = null;
 let Exploration = {
@@ -188,14 +190,14 @@ function Explore(preventClear) {
 
 	GAME().party.location.SetButtons();
 	GAME().party.location.PrintDesc();
-	LastSubmenu = Input.exploreButtons[ExploreButtonIndex.Explore];
+	Gui.SetLastSubmenu(Input.exploreButtons[ExploreButtonIndex.Explore]);
 
 	SetExploreButtons();
 }
 
 function PartyInteraction(preventClear) {
 	GAME().party.Interact(preventClear, GAME().party.location.switchSpot());
-	LastSubmenu = Input.exploreButtons[ExploreButtonIndex.Party];
+	Gui.SetLastSubmenu(Input.exploreButtons[ExploreButtonIndex.Party]);
 
 	SetExploreButtons();
 }
@@ -235,7 +237,7 @@ function ShowInventory(preventClear) {
 	Gui.ClearButtons();
 
 	GAME().party.inventory.ShowInventory(preventClear);
-	LastSubmenu = Input.exploreButtons[ExploreButtonIndex.Items];
+	Gui.SetLastSubmenu(Input.exploreButtons[ExploreButtonIndex.Items]);
 
 	SetExploreButtons();
 }
@@ -246,7 +248,7 @@ function ShowAbilities(preventClear) {
 	Gui.ClearButtons();
 
 	GAME().party.ShowAbilities();
-	LastSubmenu = Input.exploreButtons[ExploreButtonIndex.Ability];
+	Gui.SetLastSubmenu(Input.exploreButtons[ExploreButtonIndex.Ability]);
 
 	SetExploreButtons();
 }
@@ -257,7 +259,7 @@ function ShowAlchemy(preventClear) {
 	Gui.ClearButtons();
 
 	Alchemy.AlchemyPrompt(player, GAME().party.inventory);
-	LastSubmenu = Input.exploreButtons[ExploreButtonIndex.Alchemy];
+	Gui.SetLastSubmenu(Input.exploreButtons[ExploreButtonIndex.Alchemy]);
 
 	SetExploreButtons();
 }
@@ -268,7 +270,7 @@ function ShowQuests(preventClear) {
 	Gui.ClearButtons();
 
 	Quests.Print();
-	LastSubmenu = Input.exploreButtons[ExploreButtonIndex.Quests];
+	Gui.SetLastSubmenu(Input.exploreButtons[ExploreButtonIndex.Quests]);
 
 	SetExploreButtons();
 }
@@ -281,7 +283,7 @@ function ShowHunting(preventClear) {
 	GAME().party.location.SetButtons(GAME().party.location.hunt);
 	GAME().party.location.PrintDesc();
 
-	LastSubmenu = Input.exploreButtons[ExploreButtonIndex.Hunt];
+	Gui.SetLastSubmenu(Input.exploreButtons[ExploreButtonIndex.Hunt]);
 
 	SetExploreButtons();
 }

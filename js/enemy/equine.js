@@ -12,6 +12,9 @@ import { Race } from '../body/race';
 import { Color } from '../body/color';
 import { TF } from '../tf';
 import { AppendageType } from '../body/appendage';
+import { SetGameState, GameState } from '../gamestate';
+import { Gui } from '../gui';
+import { Text } from '../text';
 
 let EquineScenes = {};
 

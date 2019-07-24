@@ -2,6 +2,11 @@
 import { Layla } from './layla';
 import { Gender } from '../../body/gender';
 import { WorldTime } from '../../worldtime';
+import { Party } from '../../party';
+import { Encounter } from '../../combat';
+import { SetGameState, GameState } from '../../gamestate';
+import { Gui } from '../../gui';
+import { Text } from '../../text';
 
 let LaylaScenes = {};
 

@@ -15,6 +15,9 @@ import { Element } from '../ability';
 import { Race } from '../body/race';
 import { Color } from '../body/color';
 import { WorldTime } from '../worldtime';
+import { SetGameState, GameState } from '../gamestate';
+import { Gui } from '../gui';
+import { Text } from '../text';
 
 let FelinesScenes = {};
 

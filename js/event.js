@@ -4,6 +4,7 @@ import { Images } from "./assets";
 import { isFunction } from "./utility";
 import { GameState, SetGameState } from "./gamestate";
 import { GAME } from "./GAME";
+import { Text } from "./text";
 
 /*
  *

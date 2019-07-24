@@ -1,3 +1,6 @@
+import { SetGameState, GameState } from "../gamestate";
+import { Gui } from "../gui";
+import { Text } from "../text";
 
 let SexScenes = {};
 let SparSexScenes = {};

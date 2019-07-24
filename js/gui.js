@@ -14,6 +14,7 @@ import { GAME } from './GAME';
 import { Explore, Exploration } from './exploration';
 import { WorldTime } from './worldtime';
 import { StatusList } from './statuslist';
+import { isFunction } from './utility';
 
 
 let Gui = {};

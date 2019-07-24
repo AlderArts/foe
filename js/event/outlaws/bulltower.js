@@ -9,6 +9,10 @@ import { Outlaws } from './outlaws';
 import { GetDEBUG } from '../../../app';
 import { Stat } from '../../stat';
 import { WorldTime } from '../../worldtime';
+import { SetGameState, GameState } from '../../gamestate';
+import { Gui } from '../../gui';
+import { Text } from '../../text';
+import { Encounter } from '../../combat';
 
 let BullTowerScenes = {};
 

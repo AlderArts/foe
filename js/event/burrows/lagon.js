@@ -22,6 +22,8 @@ import { AccItems } from '../../items/accessories';
 import { QuestItems } from '../../items/quest';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
+import { SetGameState, GameState } from '../../gamestate';
+import { Time } from '../../time';
 
 let LagonScenes = {
 	Defeated : LagonDScenes,

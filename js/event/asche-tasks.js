@@ -5,6 +5,10 @@
 import { GetDEBUG } from '../../app';
 import { Gender } from '../body/gender';
 import { WorldTime } from '../worldtime';
+import { SetGameState, GameState } from '../gamestate';
+import { Gui } from '../gui';
+import { Text } from '../text';
+import { Items } from '../items';
 
 let TasksScenes = {};
 

@@ -1,4 +1,5 @@
 import { GetDEBUG } from "../app";
+import { SetGameState, GameState } from "./gamestate";
 
 /*
  * The card game Cavalcade

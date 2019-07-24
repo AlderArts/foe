@@ -5,6 +5,8 @@
  */
 
 import { Party } from './party';
+import { GameState, SetGameState } from './gamestate';
+import { Text } from './text';
 
 /*
  * opts {

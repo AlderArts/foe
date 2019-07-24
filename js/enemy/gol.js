@@ -15,6 +15,11 @@ import { AlchemyItems } from '../items/alchemy';
 import { IngredientItems } from '../items/ingredients';
 import { QuestItems } from '../items/quest';
 import { WeaponsItems } from '../items/weapons';
+import { SetGameState, GameState } from '../gamestate';
+import { Gui } from '../gui';
+import { Text } from '../text';
+import { Party } from '../party';
+import { Encounter } from '../combat';
 
 let GolScenes = {};
 
