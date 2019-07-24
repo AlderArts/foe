@@ -7,6 +7,7 @@
 import { Event, Link, EncounterTable } from '../../event';
 import { GetDEBUG } from '../../../app';
 import { Gender } from '../../body/gender';
+import { WorldTime } from '../../worldtime';
 
 let world = null;
 
@@ -157,7 +158,7 @@ KrawitzLoc.street.links.push(new Link(
 	}
 ));
 KrawitzLoc.street.links.push(new Link(
-	"Grounds", true, function() { return world.time.hour >= 20; },
+	"Grounds", true, function() { return WorldTime().hour >= 20; },
 	function() {
 		Text.Add("Sneak into the main grounds? Better do this in the late hours of the day, though not too late. You suspect you'll need all the time you can get once inside.<br>");
 	},
@@ -889,7 +890,7 @@ KrawitzScenes.Scouting = function() {
 	Text.NL();
 	Text.Add("On the opposite side of the garden, a low building of cheaper make covers one side of the garden, probably intended for servants. The grounds are surrounded by a stone wall on the sides and a metal fence in front, barring unauthorized entry. The gates seems to be locked, but you guess that the servants probably have a back entrance.", parse);
 	
-	if(rigard.Krawitz["Work"] == 0 && world.time.hour >= 6 && world.time.hour < 20) {
+	if(rigard.Krawitz["Work"] == 0 && WorldTime().hour >= 6 && WorldTime().hour < 20) {
 		Text.NL();
 		Text.Add("As you approach the estate, you become aware of a commotion down a side street. Curious, you peek down the alleyway that seems to lead to the servants’ entrance. There is a small gathering of people there, most of them morphs of various kinds, embroiled in an argument.", parse);
 		Text.NL();
@@ -941,7 +942,7 @@ KrawitzScenes.Scouting = function() {
 					Text.Add("<b>You should return to Krawitz’ mansion between 20-24 tonight.</b>", parse);
 					
 					rigard.Krawitz["Work"]       = 1;
-					rigard.KrawitzWorkDay        = world.time.Clone();
+					rigard.KrawitzWorkDay        = WorldTime().Clone();
 					rigard.KrawitzWorkDay.hour   = 0;
 					rigard.KrawitzWorkDay.minute = 0;
 					rigard.KrawitzWorkDay.Inc({day: 1});
@@ -980,12 +981,12 @@ KrawitzScenes.WorkWork = function() {
 	
 	Text.Clear();
 	
-	if(world.time.hour < 6) {
+	if(WorldTime().hour < 6) {
 		Text.Add("There doesn’t seem to be anyone at the back door at the moment, and it is locked shut.", parse);
 		Text.Flush();
 		Gui.NextPrompt();
 	}
-	else if(rigard.KrawitzWorkDay.Leq(world.time)) { // Late
+	else if(rigard.KrawitzWorkDay.Leq(WorldTime())) { // Late
 		rigard.KrawitzWorkDay = null;
 		Text.Add("<i>“And what do you think you are doing here?”</i> the old manservant greets you gruffly. <i>“I don’t have any use for people who can’t keep track of time.”</i> Before you can mouth an excuse, he curtly dismisses you, locking the door behind him as he returns inside the estate.", parse);
 		Text.NL();
@@ -996,7 +997,7 @@ KrawitzScenes.WorkWork = function() {
 		
 		Gui.NextPrompt();
 	}
-	else if(world.time.hour < 20) {
+	else if(WorldTime().hour < 20) {
 		Text.Add("It isn’t time to go to work yet. You decide to return later.", parse);
 		Text.NL();
 		Text.Add("<b>The old man said you should show up at the back entrance between 20 and 24 tonight.</b>", parse);
@@ -1079,7 +1080,7 @@ KrawitzScenes.ApproachGates = function() {
 	};
 	
 	Text.Clear();
-	if(world.time.hour >= 4 && world.time.hour < 20) {
+	if(WorldTime().hour >= 4 && WorldTime().hour < 20) {
 		Text.Add("The guards at the gate don’t look too friendly. You’d best wait until the cover of night if you want to covertly enter the estate.", parse);
 		Text.Flush();
 		Gui.NextPrompt();
@@ -2218,7 +2219,7 @@ KrawitzScenes.Aftermath = function() {
 			
 			Text.Add(" Renting this place must cost a fortune.", parse);
 			Text.NL();
-			parse["hotcold"] = world.time.season == Season.Winter ? "a cozy fire warming up the interior" : "though at the moment it isn’t lit";
+			parse["hotcold"] = WorldTime().season == Season.Winter ? "a cozy fire warming up the interior" : "though at the moment it isn’t lit";
 			Text.Add("Even for the Lady’s Blessing, the interior of the room is lavish, well beyond the usual fare at the inn. There are several pieces of antique furniture that look to have been made in a florid old style, decorated with elaborate carved patterns. Richly embroidered carpets and hangings abundantly adorn the room, the crowning jewel being a large tapestry hanging on one wall. While it is very well made, the images depicted on it are decidedly vulgar, showing a series of couples involved in suggestive or outright sexual acts. The room has its own stone fireplace connected to the central chimney, [hotcold].", parse);
 			Text.NL();
 			Text.Add("Lei motions you inside, closing the door behind you and leaving you alone with the red-headed couple from before. You can spy the woman resting on the gigantic bed in the next room, while the man is lounging on a couch. He waves you over, eager to hear of your exploits. The woman puts on a robe and joins you on the couch, her hair in sleepy, scarlet tousles.", parse);

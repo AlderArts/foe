@@ -3,6 +3,7 @@ import { EncounterTable } from '../event';
 import { Shop } from '../shop';
 import { Gender } from '../body/gender';
 import { IngredientItems } from '../items/ingredients';
+import { WorldTime } from '../worldtime';
 
 let OasisScenes = {};
 
@@ -119,7 +120,7 @@ OasisScenes.CaravanShop = function(back) {
 		return false;
 	}
 	
-	var timestamp = Math.floor(world.time.ToDays());
+	var timestamp = Math.floor(WorldTime().ToDays());
 	if(oasis.flags["shop"] < timestamp || oasis.shop.inventory.length == 0) {
 		// Randomize inventory
 		oasis.shop.inventory = [];
@@ -204,7 +205,7 @@ OasisScenes.DesertCaravanEncounter = function() {
 	};
 	var direction = Math.random() > 0.5 ? Direction.Kingdom : Direction.Oasis;
 	
-	var day = world.time.IsDay();
+	var day = WorldTime().IsDay();
 	Text.Clear();
 	
 	if(day) {

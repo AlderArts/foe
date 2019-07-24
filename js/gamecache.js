@@ -68,11 +68,11 @@ import { Fireblossom } from './event/brothel/fireblossom';
 import { Aria } from './event/aria';
 import { Sylistraxia } from './event/sylistraxia';
 import { Ches } from './event/brothel/ches';
-import { ExplorationSetGAME } from './exploration';
 import { Gender } from './body/gender';
 import { world } from './world';
 import { Party } from './party';
 import { GAME, InitGAME } from './GAME';
+import { InitWorldTime } from './worldtime';
 
 let gameCache = {};
 
@@ -256,9 +256,6 @@ let InitCache = function() {
 	gameCache.flags["HW"] = gameCache.flags["HW"] || 0;
 
 	if(GAME().burrows.flags["Access"] >= Burrows.AccessFlags.Stage5) GAME().rigard.flags["Scepter"] = 0;
-
-	Gui.SetGAME(GAME);
-	ExplorationSetGAME(GAME);
 }
 
 let CacheToGame = function() {
@@ -268,11 +265,14 @@ let CacheToGame = function() {
 	for(var flag in gameCache.flags)
 		gameCache.flags[flag] = parseInt(gameCache.flags[flag]);
 
-	world.time = new Time(parseInt(gameCache.time.year),
-	                      parseInt(gameCache.time.season),
-	                      parseInt(gameCache.time.day),
-	                      parseInt(gameCache.time.hour),
-	                      parseInt(gameCache.time.minute));
+	InitWorldTime(
+		new Time(
+			parseInt(gameCache.time.year),
+			parseInt(gameCache.time.season),
+			parseInt(gameCache.time.day),
+			parseInt(gameCache.time.hour),
+			parseInt(gameCache.time.minute))
+	);
 
 	// Adjust for old save formats
 	if(gameCache.version < 4) {
@@ -501,7 +501,7 @@ let GameToCache = function() {
 	// For debugging
 	gameCache.build    = VERSION_STRING;
 
-	gameCache.time     = world.time;
+	gameCache.time     = WorldTime();
 
 	gameCache.rigard   = GAME().rigard.ToStorage();
 	gameCache.farm     = GAME().farm.ToStorage();

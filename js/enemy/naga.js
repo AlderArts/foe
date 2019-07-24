@@ -5,6 +5,7 @@
  */
 
 import { Entity } from '../entity';
+import { WorldTime } from '../worldtime';
 
 let NagaScenes = {};
 
@@ -165,12 +166,12 @@ NagaScenes.DesertEncounter = function() {
 		Text.Add("You come across a small oasis surrounded by plant life, a rare sight in this area. Several wide slabs of sandstone are exposed among the vegetation, and from a distance you spot something lying on one of them. As you cautiously approach the rock, you see a thick, scaly tail resting on top of it - resembling a snake’s, but much larger. Your [foot] upsets a nearby stone, and the creature springs to attention, seeking the source of the sound.", parse);
 		Text.NL();
 		Text.Add("<i>“Oh, hello there, plaything! I suppose I won’t have to hunt tonight, now that my prey has come to me,”</i> a clearly female voice says excitedly. You realize what you’ve stumbled upon is definitely more than a snake.", parse);
-	}, 1.0, function() { return world.time.hour >= 6 && world.time.hour < 19; });
+	}, 1.0, function() { return WorldTime().hour >= 6 && WorldTime().hour < 19; });
 	scenes.AddEnc(function() {
 		Text.Add("While exploring the sands in the cool night air, you get the feeling you’re being watched. Looking around and seeing nothing, you continue more cautiously, sweeping the sand behind you to cover your tracks, hoping to lose would-be pursuers. A few minutes later, you hear hissing right behind you!", parse);
 		Text.NL();
 		Text.Add("<i>“Submit, prey!”</i> a domineering, feminine voice commands and you turn to face your would-be attacker.", parse);
-	}, 1.0, function() { return world.time.hour < 4 || world.time.hour >= 20; });
+	}, 1.0, function() { return WorldTime().hour < 4 || WorldTime().hour >= 20; });
 	scenes.AddEnc(function() {
 		Text.Add("You come upon a familiar cavern in your travels through the harsh desert. Within seconds of your arrival at the den of your naga mate, you hear her sultry, breathy voice inches from your ear.", parse);
 		Text.NL();

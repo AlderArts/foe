@@ -6,6 +6,8 @@
  */
 
 import { Event, Link, EncounterTable } from '../event';
+import { WorldTime } from '../worldtime';
+import { Season } from '../time';
 
 // Create namespace
 let HighlandsLoc = {
@@ -100,7 +102,7 @@ HighlandsLoc.Hills.enc.AddEnc(function() {
 
 HighlandsLoc.Hills.enc.AddEnc(function() {
 	return Scenes.Roaming.FlowerPetal;
-}, 1.0, function() { return world.time.season != Season.Winter; });
+}, 1.0, function() { return WorldTime().season != Season.Winter; });
 
 HighlandsLoc.Hills.events.push(new Link(
 	"Ginseng", function() {
@@ -145,12 +147,12 @@ HighlandsLoc.Spring.description = function() {
 	
 	Text.Add("You’re standing on the spring plateau. Nestled away against the mountainside with only an obscure, treacherous trail leading upwards from the foot, the place is usually empty save for the few signs of life which mark the fact that Isla’s made her home here, no matter how temporary.");
 	Text.NL();
-	if(world.time.season == Season.Winter)
+	if(WorldTime().season == Season.Winter)
 		Text.Add("Even in winter, the heat welling up from deep beneath the earth has warmed the soil to the point where the hot spring’s surrounded by a sizeable circle of green. Thickest at the spring’s rim, short blades of grass hold fast against the turning of the seasons, and clumps of tiny white wildflowers bloom from cracks in the rocky ground.");
 	else
 		Text.Add("Over the years, enough soil’s accumulated on the plateau to support some modicum of life - a thin carpet of grass, clumps of colorful mountain wildflowers, the occasional berry shrub. A flock of pigeons has gathered on the mossy stones that stand about the plateau’s rim, and flutter off at your approach.");
 	Text.NL();
-	parse["dt"] = world.time.LightStr("clear, cloudless sky", "starry night sky");
+	parse["dt"] = WorldTime().LightStr("clear, cloudless sky", "starry night sky");
 	Text.Add("The air is crisp and clear this high up, and you’re afforded a great view of the [dt] and surrounding lands - if you squint just right, you think you can see Rigard from here.", parse);
 	Text.NL();
 	Text.Add("The hot spring itself is a large pool, perhaps twenty yards in diameter and a little over one and a half deep at its middle, to one at its edges. A faint veil of steam constantly rises from the lightly bubbling surface, and it certainly looks inviting, even if not explicitly magical.");

@@ -1,5 +1,6 @@
 
 import { Event, Link, EncounterTable } from '../../event';
+import { WorldTime } from '../../worldtime';
 
 let GateLoc = new Event("Main Gate");
 let BarracksLoc = {
@@ -25,7 +26,7 @@ GateLoc.description = function() {
 	}
 	else {
 		Text.Add("Just outside the city walls are the expansive plains.");
-		if(!(world.time.hour >= 6 && world.time.hour < 22)) // Nighttime
+		if(!(WorldTime().hour >= 6 && WorldTime().hour < 22)) // Nighttime
 		{
 			Text.Add(" It looks like the gates are shut for the night, you can't leave the city until dawn.");
 		}
@@ -72,7 +73,7 @@ GateLoc.links.push(new Link(
 	}
 ));
 GateLoc.links.push(new Link(
-	"Leave", true, function() { return (world.time.hour >= 6 && world.time.hour < 22) && !rigard.UnderLockdown(); },
+	"Leave", true, function() { return (WorldTime().hour >= 6 && WorldTime().hour < 22) && !rigard.UnderLockdown(); },
 	null,
 	function() {
 		if(rigard.Krawitz["Q"] == Rigard.KrawitzQ.HeistDone)

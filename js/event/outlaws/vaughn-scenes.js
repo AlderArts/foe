@@ -1,5 +1,6 @@
 import { Vaughn } from './vaughn';
 import { TasksScenes } from './vaughn-tasks';
+import { WorldTime } from '../../worldtime';
 
 let VaughnScenes = {
 	Tasks : TasksScenes,
@@ -109,7 +110,7 @@ VaughnScenes.CampApproach = function() {
 		Text.NL();
 		Text.Add("<i>“Bit of weather we’ve been having of late,”</i> he mumbles.", parse);
 		Text.NL();
-		if(world.time.season == Season.Winter) {
+		if(WorldTime().season == Season.Winter) {
 			Text.Add("Seriously? He <i>does</i> know it’s the middle of winter, doesn’t he?", parse);
 			Text.NL();
 			Text.Add("<i>“Yes,”</i> Vaughn replies in all seriousness.", parse);
@@ -138,7 +139,7 @@ VaughnScenes.Prompt = function() {
 		tooltip : "Give the fox a once-over.",
 		func : function() {
 			Text.Clear();
-			parse["w"] = world.time.season == Season.Winter ? ", and he’s let his winter coat grow out a bit to better ward off the cold" : "";
+			parse["w"] = WorldTime().season == Season.Winter ? ", and he’s let his winter coat grow out a bit to better ward off the cold" : "";
 			Text.Add("Standing at about five foot seven, Vaughn is a fox-morph of middling stature and disposition. His russet coat of fur has seen better days, what with the whole war thing and all[w]. Had life been kinder to him - and if he could be bothered to care for it, of course - Vaughn might have had a sleek and glorious coat of fur, but as it is, he’s a lost cause. Not <i>dirty</i>, of course, just coarse and rough.", parse);
 			Text.NL();
 			Text.Add("His clothes are simple and utilitarian - a short, sleeveless vest, followed by a cotton undershirt and leggings cut from coarse fabric. Since he’s on the clock at the moment, the above has been supplemented with various odds and ends of protective gear: scraps of ringmail and leather, and of course, a pair of padded, open-fingered gloves over his hands and sturdy boots on his feet, covering the natural “socks” of deep black fur that cap his limbs.", parse);
@@ -661,7 +662,7 @@ VaughnScenes.TalkWar = function() {
 
 
 Vaughn.prototype.SexTime = function() {
-	return world.time.hour < 12;
+	return WorldTime().hour < 12;
 }
 
 Vaughn.prototype.HaveDoneTerryRoleplay = function() {

@@ -5,6 +5,7 @@
  */
 import { Entity } from '../../entity';
 import { Time } from '../../time';
+import { WorldTime } from '../../worldtime';
 
 let TwinsScenes = {};
 
@@ -164,7 +165,7 @@ TwinsScenes.TalkPrompt = function() {
 					Text.NL();
 					Text.Add("You thank them for their efforts and excuse yourself, heading back to the main room of the inn.", parse);
 					
-					twins.terryTimer = new Time(0, 0, 0, 24 - world.time.hour);
+					twins.terryTimer = new Time(0, 0, 0, 24 - WorldTime().hour);
 					
 					terry.flags["Saved"] = Terry.Saved.TalkedTwins1;
 				}

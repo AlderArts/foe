@@ -10,6 +10,7 @@ import { Images } from '../../assets';
 import { HairStyle } from '../../body/hair';
 import { Stat } from '../../stat';
 import { Time } from '../../time';
+import { WorldTime } from '../../worldtime';
 
 // TODO: FIX STATS
 function Lei(storage) {
@@ -218,7 +219,7 @@ Lei.Spar.prototype.Act = function(encounter, activeChar) {
 Lei.prototype.IsAtLocation = function(location) {
 	// Numbers/slacking/sleep
 	if(location == world.loc.Rigard.Inn.common && lei.timeout.Expired())
-		return (world.time.hour >= 14 && world.time.hour < 23);
+		return (WorldTime().hour >= 14 && WorldTime().hour < 23);
 	return false;
 }
 

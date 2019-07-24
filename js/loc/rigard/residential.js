@@ -1,5 +1,6 @@
 
 import { Event, Link, EncounterTable } from '../../event';
+import { WorldTime } from '../../worldtime';
 
 let ResidentialLoc = {
 	street   : new Event("Residential street"), // Will also contain gate to slums
@@ -34,7 +35,7 @@ ResidentialLoc.street.onEntry = function() {
 	// TODO
 	// During nighttime, sometimes groups of bandits will try to attack!
 	/*
-	if(!(world.time.hour >= 6 && world.time.hour < 22)) // Nighttime
+	if(!(WorldTime().hour >= 6 && WorldTime().hour < 22)) // Nighttime
 	{
 		if(Math.random() < 0.2) {
 			Text.Add("You come across a group of bandits!");

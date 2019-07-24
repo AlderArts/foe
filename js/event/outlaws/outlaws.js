@@ -6,6 +6,7 @@ import { GetDEBUG } from '../../../app';
 import { OCavalcadeScenes } from './cavalcade';
 import { Stat } from '../../stat';
 import { Time } from '../../time';
+import { WorldTime } from '../../worldtime';
 
 let OutlawsScenes = {
 	Cavalcade : OCavalcadeScenes,
@@ -143,7 +144,7 @@ Outlaws.BullTowerQuest = {
 OutlawsScenes.MariasBouquet = function() {
 	var parse = {
 		playername : player.name,
-		afternoonevening : world.time.hour >= 16 ? "evening" : "afternoon"
+		afternoonevening : WorldTime().hour >= 16 ? "evening" : "afternoon"
 	};
 	
 	Text.Clear();
@@ -184,7 +185,7 @@ OutlawsScenes.MariasBouquet = function() {
 	Text.Add("The trip through the outlaws’ camp and the forest is brisk and uneventful. Snapping to attention at the sight of Maria, the gate sentries lower the drawbridge to let the both of you through, and from there it’s a short walk along the forest trails, shafts of [afternoonevening] sunlight piercing the canopy and illuminating the way forward. This part of the forest isn’t familiar to you - now that you think about it, you left the major trails some time ago.", parse);
 	Text.NL();
 	Text.Add("Before long, though, the trail widens out into a small forest clearing, surrounded on all sides by evergreen trees; silence reigns all about you, enough for you to hear the soft crunch of pine needles underfoot as the two of you draw close to the rocky mound in the glade’s center.", parse);
-	if(world.time.season != Season.Winter)
+	if(WorldTime().season != Season.Winter)
 		Text.Add(" Small white wildflowers and tall poppies grow in clumps amidst tall blades of grass, letting loose a faint floral fragrance into the air.", parse);
 	Text.NL();
 	Text.Add("Maria strides up to the mound, her feet chewing up the distance in broad, easy steps, and as you draw closer you see that someone’s set a rectangular stone slab - no, <i>two</i> such stone slabs atop its crest. Rows upon rows of names have been neatly etched into the otherwise blank, smooth stone, running its entire length with nary a single jot of space wasted. The second slab is slightly smaller, but still similarly adorned with some room left over. There are bouquets, too, laid at the foot of the slabs - the flowers wilted and fabric decaying as they return to nature, making for a most poignant scene.", parse);
@@ -434,7 +435,7 @@ OutlawsScenes.PathIntoRigardBelinda = function() {
 	};
 	
 	Text.Clear();
-	parse["season"] = world.time.Season == Season.Winter ? "hot drinks to warm oneself up on a cold day" : "cool drinks to help one beat the noon heat";
+	parse["season"] = WorldTime().Season == Season.Winter ? "hot drinks to warm oneself up on a cold day" : "cool drinks to help one beat the noon heat";
 	Text.Add("Realizing it’s nearing noon and remembering the task Zenith sent you off on, you seek out the inn that Zenith mentioned. Close enough to the city but far enough from the gates that it’s not worth the watchmen’s time to go harass them, the road is lined with those seeking the crowds that the city draws, but are unable or unwilling to enter the city to get at the marketplaces proper. Makeshift stands have been set up by the wayside, peddling everything from homemade blankets and fresh fruit to [season], hoping to catch an impulse purchase from those coming to and from Rigard.", parse);
 	Text.NL();
 	Text.Add("What you’re more interested in, though, is this Spitting Lion Inn that Zenith mentioned. The buildings in sight of the road are well-spaced, mostly catering to travelers - these aren’t the slums, after all - and you scan the wayhouses and watering holes as you pass them by, hoping to find your point of contact with a minimum of fuss. Alas, that’s not to be - you’re practically in the shadow of the walls and up against them by the time it draws into view.", parse);
@@ -675,8 +676,8 @@ OutlawsScenes.Exploration.ChowTime = function() {
 	
 	outlaws.flags["events"] |= Outlaws.Events.ChowTime;
 	
-	parse["chow"] = world.time.hour < 10 ? "Breakfast" :
-	                world.time.hour < 15 ? "Lunch" : "Dinner";
+	parse["chow"] = WorldTime().hour < 10 ? "Breakfast" :
+	                WorldTime().hour < 15 ? "Lunch" : "Dinner";
 	
 	Text.Clear();
 	if(first) {
@@ -748,7 +749,7 @@ OutlawsScenes.Exploration.Cavalcade = function() {
 	Text.Add("<i>“Hey!”</i>", parse);
 	Text.NL();
 	Text.Add("Your stroll through the camp is interrupted by a sudden shout, clearly directed at you. Turning to face whoever’s addressing you, you find a small group gathered ", parse);
-	if(world.time.IsDay())
+	if(WorldTime().IsDay())
 		Text.Add("under the shade of a large willow tree", parse);
 	else
 		Text.Add("about a small fire under a large willow tree", parse);
@@ -1283,7 +1284,7 @@ OutlawsScenes.Exploration.DailyLife = function() {
 		Text.Add("You pass by a number of folk busy splitting firewood - green logs and branches, still fresh with moisture from the forest, have to be hacked up into regular, more manageable pieces and laid out to dry. It’s back-breaking labor, but someone has to do it, and with firewood it’s far better to get it chopped in advance than to do so when one actually needs the stuff.", parse);
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
-		parse["day"] = world.time.IsDay() ? "in the shade of the willow grove" : "by the light of several large torches";
+		parse["day"] = WorldTime().IsDay() ? "in the shade of the willow grove" : "by the light of several large torches";
 		Text.Add("On your trip by the river, you find a number of folk hanging about on the riverbank [day]. A small pond of sorts has been dug into the riverbank with a net stretched across its mouth, and it seems that several large catfish and freshwater prawns are being raised inside, fed scraps from the camp’s meals.", parse);
 		Text.NL();
 		Text.Add("That’s not the only thing going on about these parts, of course. Several fish traps of woven wicker have been set in the river’s fast-flowing current, and as you watch, several morphs go about the business of emptying them of their catch and setting new bait. A little further downstream, a small team of outlaws tends to one of the bridges that spans the stream, ripping out rotted planks and replacing them with fresh, pitch-soaked ones under Vaughn’s watchful eye.", parse);

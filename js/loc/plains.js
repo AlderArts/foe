@@ -8,6 +8,8 @@ import { Event, Link, EncounterTable } from '../event';
 import { NomadsLoc } from './nomads';
 import { Scenes } from '../scenes';
 import { BurrowsLoc } from './burrows';
+import { WorldTime } from '../worldtime';
+import { Season } from '../time';
 
 // Create namespace
 let PlainsLoc = {
@@ -106,7 +108,7 @@ PlainsLoc.Crossroads.enc.AddEnc(function() {
 
 PlainsLoc.Crossroads.enc.AddEnc(function() {
 	return Scenes.Roaming.FlowerPetal;
-}, 1.0, function() { return world.time.season != Season.Winter; });
+}, 1.0, function() { return WorldTime().season != Season.Winter; });
 
 PlainsLoc.Crossroads.enc.AddEnc(function() {
 	return Scenes.Roaming.KingdomPatrol;
@@ -168,7 +170,7 @@ PlainsLoc.Crossroads.enc.AddEnc(function() {
 		});
 		Gui.SetButtonsFromList(options, false, null);
 	}
-}, 0.5, function() { return world.time.hour >= 5 && world.time.hour < 21; });
+}, 0.5, function() { return WorldTime().hour >= 5 && WorldTime().hour < 21; });
 
 PlainsLoc.Crossroads.links.push(new Link(
 	"Nomads", true, true,
@@ -253,7 +255,7 @@ PlainsLoc.Crossroads.links.push(new Link(
 // Add initial event, only trigger 7-17
 PlainsLoc.Crossroads.enc.AddEnc(function() {
 	return Scenes.FarmIntro.Start;
-}, 3.0, function() { return Scenes.Global.VisitedRigardGates() && !farm.Found() && (world.time.hour >= 7 && world.time.hour < 17); });
+}, 3.0, function() { return Scenes.Global.VisitedRigardGates() && !farm.Found() && (WorldTime().hour >= 7 && WorldTime().hour < 17); });
 
 PlainsLoc.Crossroads.links.push(new Link(
 	"Farm",
@@ -280,7 +282,7 @@ PlainsLoc.Portals.description = function() {
 		Text.NL();
 		if(glade.flags["Visit"] >= DryadGlade.Visit.DefeatedOrchid) {
 			Text.Add("Not far from the strange stone pillars you can see Jeanne standing near a small tent, working on some form of magical device powered by a set of crystals.", parse);
-			if(!world.time.IsDay())
+			if(!WorldTime().IsDay())
 				Text.Add(" She’s set up some torches to light her way, and that together with the glowing runes gives you just enough illumination to see.", parse);
 		}
 		else
@@ -400,7 +402,7 @@ PlainsLoc.Gate.events.push(new Link(
 	"Letter", function() {
 		return outlaws.flags["Met"] == Outlaws.Met.Letter;
 	}, function() {
-		return world.time.hour >= 10 && world.time.hour < 14;
+		return WorldTime().hour >= 10 && WorldTime().hour < 14;
 	},
 	function() {
 		if(outlaws.flags["Met"] == Outlaws.Met.Letter) {

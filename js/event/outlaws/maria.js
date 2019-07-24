@@ -9,6 +9,7 @@ import { DeadDropScenes } from './maria-dd';
 import { Images } from '../../assets';
 import { Color } from '../../body/color';
 import { Time } from '../../time';
+import { WorldTime } from '../../worldtime';
 
 let MariaScenes = {
 	DeadDrops : DeadDropScenes,
@@ -119,7 +120,7 @@ Maria.prototype.Update = function(step) {
 Maria.prototype.IsAtLocation = function(location) {
 	location = location || party.location;
 	if(location == world.loc.Outlaws.Camp)
-		return (world.time.hour >= 7 && world.time.hour < 22);
+		return (WorldTime().hour >= 7 && WorldTime().hour < 22);
 	return false;
 }
 
@@ -181,7 +182,7 @@ MariaScenes.CampInteract = function() {
 		
 		var scenes = new EncounterTable();
 		
-		if(world.time.hour >= 12) {
+		if(WorldTime().hour >= 12) {
 			scenes.AddEnc(function() {
 				Text.Add("As it turns out, she’s currently doing a bit of fletching - tipping the arrow shafts with flint heads and making sure the feathers go on just right. It seems rather simple to you, but Maria’s brow is furrowed in an expression of furious concentration. There’s probably more to this fletching business than meets the eye… and it’s only natural that Maria pays great attention to it, since her life depends on her armaments.", parse);
 				Text.NL();

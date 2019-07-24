@@ -8,6 +8,7 @@ import { Event, Link, EncounterTable } from '../event';
 import { GladeLoc } from './glade';
 import { MariaScenes } from '../event/outlaws/maria';
 import { GlobalScenes } from '../event/global';
+import { WorldTime } from '../worldtime';
 
 // Create namespace
 let ForestLoc = {
@@ -37,7 +38,7 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 		world.TimeStep({minute: 15});
 		Gui.NextPrompt();
 	};
-}, 1.0, function() { return world.time.season != Season.Winter; });
+}, 1.0, function() { return WorldTime().season != Season.Winter; });
 ForestLoc.Outskirts.enc.AddEnc(function() {
 	return function() {
 		Text.Clear();
@@ -51,7 +52,7 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 		world.TimeStep({minute: 15});
 		Gui.NextPrompt();
 	};
-}, 1.0, function() { return world.time.season != Season.Winter; });
+}, 1.0, function() { return WorldTime().season != Season.Winter; });
 ForestLoc.Outskirts.enc.AddEnc(function() {
 	return function() {
 		Text.Clear();
@@ -65,7 +66,7 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 		world.TimeStep({minute: 15});
 		Gui.NextPrompt();
 	};
-}, 1.0, function() { return world.time.season != Season.Winter; });
+}, 1.0, function() { return WorldTime().season != Season.Winter; });
 ForestLoc.Outskirts.enc.AddEnc(function() {
 	return function() {
 		Text.Clear();
@@ -79,7 +80,7 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 		world.TimeStep({minute: 15});
 		Gui.NextPrompt();
 	};
-}, 1.0, function() { return world.time.season != Season.Winter; });
+}, 1.0, function() { return WorldTime().season != Season.Winter; });
 ForestLoc.Outskirts.enc.AddEnc(function() {
 	return function() {
 		Text.Clear();
@@ -130,7 +131,7 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 }, 1.0, function() { return true; });
 ForestLoc.Outskirts.enc.AddEnc(function() {
 	return Scenes.Roaming.FlowerPetal;
-}, 1.0, function() { return world.time.season != Season.Winter; });
+}, 1.0, function() { return WorldTime().season != Season.Winter; });
 
 
 // Add initial Maria event, only trigger 6-20
@@ -140,7 +141,7 @@ ForestLoc.Outskirts.enc.AddEnc(
 	}, 3.0, function() {
 		return GlobalScenes.VisitedRigardGates() &&
 		       !GlobalScenes.VisitedOutlaws() &&
-		       (world.time.hour >= 6 && world.time.hour < 20);
+		       (WorldTime().hour >= 6 && WorldTime().hour < 20);
 	}
 );
 

@@ -3,6 +3,7 @@ import { Entity } from '../entity';
 import { EncounterTable } from '../event';
 import { Party } from '../party';
 import { Gender } from '../body/gender';
+import { WorldTime } from '../worldtime';
 
 /*
 Tier 1 Malice scouts and outriders
@@ -489,7 +490,7 @@ MaliceScoutsScenes.Catboy.LoneEncounter = function(levelbonus) {
 
 	enc.onEncounter = function() {
 		var parse = {
-			day : world.time.LightStr("sun beats down warmly", "moon shines softly")
+			day : WorldTime().LightStr("sun beats down warmly", "moon shines softly")
 		};
 		parse = player.ParserTags(parse);
 

@@ -11,6 +11,7 @@ import { TF } from '../../tf';
 import { AppendageType } from '../../body/appendage';
 import { Color } from '../../body/color';
 import { Time } from '../../time';
+import { WorldTime } from '../../worldtime';
 
 let OpheliaScenes = {};
 
@@ -99,7 +100,7 @@ Ophelia.prototype.IsAtLocation = function(location) {
 	if(location == world.loc.Burrows.Lab) {
 		if(this.Recruited()) return false;
 		if(this.Broken())    return false;
-		return world.time.hour >= 8 && world.time.hour < 22;
+		return WorldTime().hour >= 8 && WorldTime().hour < 22;
 	}
 	return false;
 }

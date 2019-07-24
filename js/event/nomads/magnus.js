@@ -7,6 +7,7 @@ import { Entity } from '../../entity';
 import { GetDEBUG } from '../../../app';
 import { Race } from '../../body/race';
 import { Color } from '../../body/color';
+import { WorldTime } from '../../worldtime';
 
 let MagnusScenes = {};
 
@@ -908,7 +909,7 @@ MagnusScenes.LearnMagic = function() {
 
 MagnusScenes.Desc = function() {
 	var parse = {
-		litExtinguished : world.time.hour >= 19 ? "lit" : "extinguished"
+		litExtinguished : WorldTime().hour >= 19 ? "lit" : "extinguished"
 	};
 	
 	if(magnus.flags["Met"] == 0) {

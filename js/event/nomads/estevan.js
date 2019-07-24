@@ -10,6 +10,7 @@ import { TF } from '../../tf';
 import { AppendageType } from '../../body/appendage';
 import { Race } from '../../body/race';
 import { Color } from '../../body/color';
+import { WorldTime } from '../../worldtime';
 
 let EstevanScenes = {};
 
@@ -94,7 +95,7 @@ EstevanScenes.Impregnate = function(mother, slot) {
 Estevan.prototype.IsAtLocation = function(location) {
 	location = location || party.location;
 	if(location == world.loc.Plains.Nomads.Fireplace)
-		return (world.time.hour >= 15 || world.time.hour < 3);
+		return (WorldTime().hour >= 15 || WorldTime().hour < 3);
 	return false;
 }
 

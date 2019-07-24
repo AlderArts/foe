@@ -8,6 +8,7 @@ import { JobDesc, Jobs } from '../../job';
 import { Images } from '../../assets';
 import { Color } from '../../body/color';
 import { Time } from '../../time';
+import { WorldTime } from '../../worldtime';
 
 function Cveta(storage) {
 	Entity.call(this);
@@ -151,13 +152,13 @@ Cveta.prototype.Update = function(step) {
 }
 
 Cveta.prototype.PerformanceTime = function() {
-	return (world.time.hour >= 6 && world.time.hour < 9) || (world.time.hour >= 17 && world.time.hour < 20);
+	return (WorldTime().hour >= 6 && WorldTime().hour < 9) || (WorldTime().hour >= 17 && WorldTime().hour < 20);
 }
 Cveta.prototype.WakingTime = function() {
-	return (world.time.hour >= 6 && world.time.hour < 20);
+	return (WorldTime().hour >= 6 && WorldTime().hour < 20);
 }
 Cveta.prototype.InTent = function() {
-	return (world.time.hour >= 6 && world.time.hour < 10) || (world.time.hour >= 14 && world.time.hour < 20);
+	return (WorldTime().hour >= 6 && WorldTime().hour < 10) || (WorldTime().hour >= 14 && WorldTime().hour < 20);
 }
 Cveta.prototype.Violin = function() {
 	return this.flags["Met"] >= Cveta.Met.Available;

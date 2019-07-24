@@ -5,18 +5,17 @@ import { Images } from './assets';
 import { SMALL_FONT, DEFAULT_FONT, GetRenderPictures } from '../app';
 import { StatusEffect, StatusList } from './statuseffect';
 import { Input, Keys } from './input';
-import { isOnline } from './gamestate';
+import { isOnline, SetGameState } from './gamestate';
 // import { Explore } from './exploration';
 import { gameState, GameState } from './gamestate';
 import { ExploreButtonIndex } from './explorestate';
 import { Text } from './text';
+import { GAME } from './GAME';
+import { Explore } from './exploration';
+import { WorldTime } from './worldtime';
+
 
 let Gui = {};
-
-Gui.GAME = null;
-Gui.SetGAME = function(GAME) {
-	Gui.GAME = GAME;
-}
 
 Gui.w = 1280;
 Gui.h = 720;
@@ -283,10 +282,10 @@ Gui.SetupPortrait = function(xoffset, yoffset, set, obj, isParty, index) {
 Gui.HandlePortraitClick = function(index, isParty) {
 	if(gameState == GameState.Game && !Intro.active) {
 		if(isParty) {
-			var character = Gui.GAME.party.Get(index);
+			var character = GAME().party.Get(index);
 			if(character) {
 				Gui.SetLastSubmenu(Input.exploreButtons[ExploreButtonIndex.Party]);
-				character.Interact(Gui.GAME.party.location.switchSpot());
+				character.Interact(GAME().party.location.switchSpot());
 			}
 		}
 	}
@@ -689,17 +688,17 @@ Gui.RenderLocation = function(name) {
 }
 
 Gui.RenderTime = function() {
-	var coinStr = Gui.GAME.party.coin;
+	var coinStr = GAME().party.coin;
 	Gui.PrintGlow(Gui.overlay, Gui.coin, 250, 690, coinStr, Gui.fonts.Kimberley, 20, "end", {opacity: 1});
 
-	var dateStr = world.time.DateString();
+	var dateStr = WorldTime().DateString();
 	Gui.PrintGlow(Gui.overlay, Gui.date, 1245, 15, dateStr, Gui.fonts.Kimberley, 20, "end", {opacity: 1});
 
-	var timeStr = world.time.TimeString();
+	var timeStr = WorldTime().TimeString();
 	Gui.PrintGlow(Gui.overlay, Gui.time, 1245, 45, timeStr, Gui.fonts.Kimberley, 20, "end", {opacity: 1});
 
-	var hour   = world.time.ToHours();
-	var minute = world.time.ToMinutes();
+	var hour   = WorldTime().ToHours();
+	var minute = WorldTime().ToMinutes();
 
 	if(Gui.clock.hourNum) {
 		Gui.clock.hour.stop().animate({transform:"r"+(hour/12*360)+","+Gui.clock.x+","+Gui.clock.y}, 2000, "<>");
@@ -761,11 +760,11 @@ Gui.Render = function() {
 				Gui.enemy.hide();
 			}
 			// TODO: !GetRenderPictures()
-			Gui.RenderParty(Gui.GAME.party, Gui.party, Gui.partyObj);
+			Gui.RenderParty(GAME().party, Gui.party, Gui.partyObj);
 
 			// TODO: Time
 			Gui.RenderTime();
-			Gui.RenderLocation(Gui.GAME.party.location.nameFunc);
+			Gui.RenderLocation(GAME().party.location.nameFunc);
 			Gui.overlay.show();
 
 			break;
@@ -825,7 +824,7 @@ Gui.Render = function() {
 
 			// TODO: Time
 			Gui.RenderTime();
-			Gui.RenderLocation(Gui.GAME.party.location.nameFunc);
+			Gui.RenderLocation(GAME().party.location.nameFunc);
 			Gui.overlay.show();
 			break;
 	}
@@ -909,7 +908,7 @@ Gui.PrintDefaultOptions = function(preventClear) {
 	if(!preventClear)
 		Text.Clear();
 
-	if(Gui.GAME.party.location == null) {
+	if(GAME().party.location == null) {
 		Text.Add("ERROR, LOCATION IS NULL");
 		Text.Flush();
 		return;

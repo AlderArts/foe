@@ -7,6 +7,7 @@ import { Entity } from '../../entity';
 import { Images } from '../../assets';
 import { Color } from '../../body/color';
 import { HairStyle } from '../../body/hair';
+import { WorldTime } from '../../worldtime';
 
 // TODO: FIX STATS
 function Gwendy(storage) {
@@ -112,11 +113,11 @@ Gwendy.prototype.ToStorage = function() {
 // Schedule
 Gwendy.prototype.IsAtLocation = function(location) {
 	// Numbers/slacking/sleep
-	if     (location == world.loc.Farm.Loft)   return (world.time.hour >= 19 || world.time.hour < 5);
+	if     (location == world.loc.Farm.Loft)   return (WorldTime().hour >= 19 || WorldTime().hour < 5);
 	// Morning routine
-	else if(location == world.loc.Farm.Barn)   return (world.time.hour >= 5  && world.time.hour < 9);
+	else if(location == world.loc.Farm.Barn)   return (WorldTime().hour >= 5  && WorldTime().hour < 9);
 	// Workday
-	else if(location == world.loc.Farm.Fields) return (world.time.hour >= 9 && world.time.hour < 19); //TODO conditional?
+	else if(location == world.loc.Farm.Fields) return (WorldTime().hour >= 9 && WorldTime().hour < 19); //TODO conditional?
 	return false;
 }
 

@@ -1,6 +1,7 @@
 import { Miranda } from "./miranda";
 import { Link } from '../event';
 import { Gender } from '../body/gender';
+import { WorldTime } from "../worldtime";
 
 let MirandaScenes = {};
 
@@ -1040,7 +1041,7 @@ MirandaScenes.WelcomeToRigard = function() {
 		Text.Add("If you could get inside the city, there is a possibility you could get a hold of Rosalin's former teacher, a person who sounds like she could help you out with the gemstone.", parse);
 		Text.NL();
 	}
-	if(world.time.hour >= 22 || world.time.hour < 6)
+	if(WorldTime().hour >= 22 || WorldTime().hour < 6)
 		Text.Add("As you come closer, you are guided by the light of torches, illuminating a large gate in the wall surrounding the city. It is currently shut for the night. You spot torches drifting along the top of the walls, carried by patrolling guards, another two of whom are posted outside the gatehouse.", parse);
 	else // 6-22
 		Text.Add("As you come closer, you spot a short line of people, most of them farmers, waiting to be let into the city. There are a few guards posted on top of the walls, and another group guarding the gate. You patiently await your turn as the last wagon in front of you is inspected and allowed inside.", parse);
@@ -2643,7 +2644,7 @@ MirandaScenes.HomeDommySexLeavingFuckedHer = function() {
 
 		Gui.Callstack.push(function() {
 			Text.NL();
-			parse["night"] = world.time.DayTime();
+			parse["night"] = WorldTime().DayTime();
 			Text.Add("You bid Miranda farewell and step out into the [night].", parse);
 			if(party.Num() > 1) {
 				Text.NL();
@@ -2662,7 +2663,7 @@ MirandaScenes.HomeDommySexLeavingFuckedHer = function() {
 			}
 		});
 
-		if(miranda.Attitude() >= Miranda.Attitude.Neutral && (world.time.hour > 20 || world.time.hour < 4)) {
+		if(miranda.Attitude() >= Miranda.Attitude.Neutral && (WorldTime().hour > 20 || WorldTime().hour < 4)) {
 			Text.Add("<i>“Ya know, it’s kinda late. Why don’t you stay over? I wouldn’t mind sharing my bed with you. Maybe we can squeeze in a quickie before I have to leave in the morning?”</i> she grins.", parse);
 			Text.Flush();
 
@@ -4150,7 +4151,7 @@ MirandaScenes.HomeSubbySexLeavingFuckedHer = function() {
 	else {
 		Gui.Callstack.push(function() {
 			Text.NL();
-			parse["night"] = world.time.DayTime();
+			parse["night"] = WorldTime().DayTime();
 			Text.Add("You bid Miranda farewell and step out into the [night].", parse);
 			if(party.Num() > 1) {
 				Text.NL();
@@ -4169,7 +4170,7 @@ MirandaScenes.HomeSubbySexLeavingFuckedHer = function() {
 			}
 		});
 
-		if(miranda.Attitude() >= Miranda.Attitude.Neutral && (world.time.hour > 20 || world.time.hour < 4)) {
+		if(miranda.Attitude() >= Miranda.Attitude.Neutral && (WorldTime().hour > 20 || WorldTime().hour < 4)) {
 			Text.Add("<i>“Ya know, it’s kinda late. Why don’t you take that off and come back to bed? Maybe we can squeeze in a quickie before I have to leave in the morning?”</i> she grins.", parse);
 			Text.Flush();
 
@@ -4249,7 +4250,7 @@ MirandaScenes.HomeSubbySex = function() {
 	scenes.AddEnc(function() {
 		Text.Add("She heads into the main living room, hips swaying seductively.", parse);
 		Text.NL();
-		if(world.time.season >= Season.Autumn)
+		if(WorldTime().season >= Season.Autumn)
 			Text.Add("<i>“Let me start a fire, get the chill out of our bones,”</i> Miranda says as she pulls you along, throwing you on the fluffy pelt while she fumbles with flint and iron. In short order, the competent guardswoman has a merry fire going, quickly raising the temperature in the room.", parse);
 		else
 			Text.Add("<i>“Screw foreplay,”</i> Miranda growls, pulling you along and throwing you on top of the fluffy pelt next to the hearth. <i>“I’m just going to take you here and now!”</i>", parse);

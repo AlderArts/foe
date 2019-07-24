@@ -1,6 +1,7 @@
 
 import { GetDEBUG } from '../../../app';
 import { Vaughn } from './vaughn';
+import { WorldTime } from '../../worldtime';
 
 let TasksScenes = {};
 
@@ -163,7 +164,7 @@ TasksScenes.Lockpicks.Start = function() {
 }
 
 TasksScenes.Lockpicks.ElodieAvailable = function() {
-	return world.time.hour >= 16 && world.time.hour < 21;
+	return WorldTime().hour >= 16 && WorldTime().hour < 21;
 }
 
 //Triggered in castle grounds
@@ -351,7 +352,7 @@ TasksScenes.Snitch.Start = function() {
 	Text.NL();
 	Text.Add("<i>“Now you’re catching on. He sold out the watch, gave away the patrol route, and for what? A handful of coins? Frankly, we’re doing the watch a favor. If he’d kept to pushing around the poor and homeless, no one’d given a fuck. As it is, though… fellow’s overextended himself, and that makes it so much easier for us to take him down. As it stands, getting his bill of sale to the gambling dens was tricker than we’d expected, but we have him now.</i>", parse);
 	Text.NL();
-	parse["num"] = (world.time.hour < 12) ? "two" : "three";
+	parse["num"] = (WorldTime().hour < 12) ? "two" : "three";
 	Text.Add("<i>“There’s going to be a locker inspection at the City Watch headquarters at six in the evening [num] days from now. Now, we aren’t about to show our faces around the City Watch headquarters, but they don’t know you. Get in there before then, plant this evidence in his locker, and step back to watch the fireworks. Now, I don’t know how to find his locker or how you’ll get into his things, so you’ll be alone in that regard. Nevertheless, it’s the best way for his superiors to sniff him out in a natural fashion, and we’d prefer that by far.”</i>", parse);
 	Text.NL();
 	Text.Add("If the evidence is solid, then why shouldn’t you just walk into the commander’s office and slam it down on the desk? It should stand on its own merits, shouldn’t it?", parse);
@@ -376,8 +377,8 @@ TasksScenes.Snitch.Start = function() {
 	
 	vaughn.flags["Met"] = Vaughn.Met.OnTaskSnitch;
 	
-	var step = world.time.TimeToHour(18);
-	if(world.time.hour < 12)
+	var step = WorldTime().TimeToHour(18);
+	if(WorldTime().hour < 12)
 		vaughn.taskTimer = new Time(0, 0, 2, step.hour, step.minute);
 	else
 		vaughn.taskTimer = new Time(0, 0, 3, step.hour, step.minute);
@@ -1155,7 +1156,7 @@ TasksScenes.Poisoning.Start = function() {
 		
 		vaughn.flags["Met"] = Vaughn.Met.OnTaskPoisoning;
 		
-		var step = world.time.TimeToHour(0);
+		var step = WorldTime().TimeToHour(0);
 		vaughn.taskTimer = new Time(0, 0, 1, step.hour, step.minute);
 		
 		Gui.NextPrompt();

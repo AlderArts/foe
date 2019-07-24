@@ -1,6 +1,7 @@
 
 import { Event, Link } from '../../event';
 import { Gender } from '../../body/gender';
+import { WorldTime } from '../../worldtime';
 
 //
 // Sliken Delights
@@ -10,7 +11,7 @@ let ClothShopLoc = new Event("Silken Delights");
 
 let ClothShopScenes = {};
 ClothShopScenes.IsOpen = function() {
-	return (world.time.hour >= 9 && world.time.hour < 20) && !rigard.UnderLockdown();
+	return (WorldTime().hour >= 9 && WorldTime().hour < 20) && !rigard.UnderLockdown();
 }
 
 ClothShopLoc.onEntry = function() {
@@ -55,7 +56,7 @@ ClothShopLoc.description = function() {
 	Text.Add("The Silken Delights clothing shop is clearly a high-end establishment, with two private guards, red velvet curtains and expensive-looking paintings all over. The counter is straight ahead from the door, and draped with the same red velvet as the walls and windows. Long racks of clothes stretch down a hallway to the left where you can see large shelves of shoes and four large stalls along the back wall which you assume are fitting rooms for customers. The whole store is amazingly clean, with no dirt or dust anywhere. There are hat racks by the counter with all sorts of fancy looking hats.", parse);
 	Text.NL();
 	/*
-		if(world.time.hour >= 20 || world.time.hour < 9) {
+		if(WorldTime().hour >= 20 || WorldTime().hour < 9) {
 			Text.Add("The shop is currently closed, and you are asked to leave.", parse);
 			Gui.NextPrompt(function() {
 				MoveToLocation(world.loc.Rigard.ShopStreet.street, {minute: 5});
@@ -66,8 +67,8 @@ ClothShopLoc.description = function() {
 
 /*
 ClothShopLoc.enc = new EncounterTable();
-ClothShopLoc.enc.AddEnc(function() { return Scenes.Rigard.Plaza.LetterDelivery; }, 1.0, function() { return (world.time.hour >= 6 && world.time.hour < 21); });
-ClothShopLoc.enc.AddEnc(function() { return Scenes.Rigard.Plaza.StatueInfo; }, 1.0, function() { return (world.time.hour >= 6 && world.time.hour < 21) && (rigard.flags["TalkedStatue"] == 0 || (party.InParty(kiakai) && kiakai.flags["TalkedStatue"] == 0)); });
+ClothShopLoc.enc.AddEnc(function() { return Scenes.Rigard.Plaza.LetterDelivery; }, 1.0, function() { return (WorldTime().hour >= 6 && WorldTime().hour < 21); });
+ClothShopLoc.enc.AddEnc(function() { return Scenes.Rigard.Plaza.StatueInfo; }, 1.0, function() { return (WorldTime().hour >= 6 && WorldTime().hour < 21) && (rigard.flags["TalkedStatue"] == 0 || (party.InParty(kiakai) && kiakai.flags["TalkedStatue"] == 0)); });
 */
 
 ClothShopLoc.events.push(new Link(
@@ -258,11 +259,11 @@ ClothShopLoc.events.push(new Link(
 ClothShopLoc.endDescription = function() {
 	var parse = {};
 
-	if(world.time.hour >= 9 && world.time.hour < 12)
+	if(WorldTime().hour >= 9 && WorldTime().hour < 12)
 		Text.Add("It is still early but there are a few customers currently in the clothing store.", parse);
-	if(world.time.hour >= 12 && world.time.hour < 17)
+	if(WorldTime().hour >= 12 && WorldTime().hour < 17)
 		Text.Add("It is currently prime business hours, and the shop is filled with customers.", parse);
-	if(world.time.hour >= 17 && world.time.hour < 20)
+	if(WorldTime().hour >= 17 && WorldTime().hour < 20)
 		Text.Add("It is now fairly late and the shop is almost deserted.", parse);
 	Text.NL();
 

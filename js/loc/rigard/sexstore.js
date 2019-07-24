@@ -4,12 +4,13 @@
 //
 
 import { Event, Link } from '../../event';
+import { WorldTime } from '../../worldtime';
 
 let OddShopLoc = new Event("Odd shop");
 
 let OddShopScenes = {};
 OddShopScenes.IsOpen = function() {
-	return (world.time.hour >= 9 && world.time.hour < 18) && !rigard.UnderLockdown();
+	return (WorldTime().hour >= 9 && WorldTime().hour < 18) && !rigard.UnderLockdown();
 }
 
 OddShopLoc.description = function() {

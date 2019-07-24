@@ -6,12 +6,13 @@
 import { Event, Link, EncounterTable } from '../../event';
 import { Shop } from '../../shop';
 import { Items } from '../../items';
+import { WorldTime } from '../../worldtime';
 
 let MagicShopLoc = new Event("Asche's Fanciful Trinkets");
 
 let MagicShopScenes = {}
 MagicShopScenes.IsOpen = function() {
-	return (world.time.hour >= 10) && !rigard.UnderLockdown();
+	return (WorldTime().hour >= 10) && !rigard.UnderLockdown();
 }
 
 MagicShopScenes.CreateShop = function() {

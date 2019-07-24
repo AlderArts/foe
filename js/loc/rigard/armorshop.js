@@ -6,12 +6,13 @@
 import { Event, Link, EncounterTable } from '../../event';
 import { Shop } from '../../shop';
 import { Items } from '../../items';
+import { WorldTime } from '../../worldtime';
 
 let ArmorShopLoc = new Event("Twopenny's");
 
 let ArmorShopScenes = {};
 ArmorShopScenes.IsOpen = function() {
-	return (world.time.hour >= 9 && world.time.hour < 20) && !rigard.UnderLockdown();
+	return (WorldTime().hour >= 9 && WorldTime().hour < 20) && !rigard.UnderLockdown();
 }
 
 ArmorShopScenes.CreateShop = function() {
@@ -214,9 +215,9 @@ ArmorShopLoc.description = function() {
 	Text.Add("There doesn’t seem to be much in the way of organization - which is perhaps to be expected, given how the shop gets its stock - though there does at least seem to be a broad categorization of armor types and where on one’s body they’re supposed to go. Shelves groan under the weight of shields. Sabatons catering to all kinds of feet have been set out as if they were simple shoes, though not all of them come in pairs.", parse);
 	Text.NL();
 	Text.Add("The end result of the shop’s barely controlled chaos is a claustrophobic interior, with just enough space between displays to get around. In fact, the only place which <i>isn’t</i> occupied is a small counter by the door at which Donovan sits, watching his customers come and go. He rarely seems to move from that spot during opening hours, and must do his stock-taking and inventory only after the doors are closed. ", parse);
-	if(world.time.hour < 12)
+	if(WorldTime().hour < 12)
 		Text.Add("Although it’s early in the morning, a goodly number of customers have come in, hoping to find a good deal before they’re all snapped up. ", parse);
-	else if(world.time.hour < 16)
+	else if(WorldTime().hour < 16)
 		Text.Add("The afternoon rush has made the already cramped store even more so, leaving the aisles thoroughly blocked with people. ", parse);
 	else
 		Text.Add("While most of the customers have headed home, a few still linger in the aisles, taking advantage of the relative peace and quiet to browse to their hearts’ content. ", parse);

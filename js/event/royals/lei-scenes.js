@@ -2,6 +2,7 @@
 import { TasksScenes } from './lei-tasks';
 import { SexScenes } from './lei-sex';
 import { Lei } from './lei';
+import { WorldTime } from '../../worldtime';
 
 let LeiScenes = {
 	Tasks : TasksScenes,
@@ -808,12 +809,12 @@ LeiScenes.Desc = function() {
 
 LeiScenes.BarFight = function() {
 	var parse = {
-		time     : world.time.DayTime(),
+		time     : WorldTime().DayTime(),
 		feetDesc : function() { return player.FeetDesc(); },
 		p1name   : function() { return party.Get(1).name; }
 	};
-	parse["temperature"] = world.time.season == Season.Summer ? "warm" :
-		                   world.time.season == Season.Winter ? "cold" :
+	parse["temperature"] = WorldTime().season == Season.Summer ? "warm" :
+		                   WorldTime().season == Season.Winter ? "cold" :
 		                   "cool";
 
 	Text.Add("You follow him outside the tavern and step out into the [temperature] [time]. He walks on a little up the street away from the tavern's entrance and he turns around to face you.", parse);
@@ -1498,7 +1499,7 @@ LeiScenes.SparLoss = function() {
 
 // #random one-off explore event in Slums/Residential at night (say 10pm-5am or whatever)
 LeiScenes.GuardStalkingApplicable = function() {
-	return lei.flags["Met"] >= Lei.Met.KnowName && !(lei.flags["Talk"] & Lei.Talk.GuardBeating) && ((world.time.hour >= 22) || (world.time.hour < 5));
+	return lei.flags["Met"] >= Lei.Met.KnowName && !(lei.flags["Talk"] & Lei.Talk.GuardBeating) && ((WorldTime().hour >= 22) || (WorldTime().hour < 5));
 }
 
 LeiScenes.GuardStalking = function() {

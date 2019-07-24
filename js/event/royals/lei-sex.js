@@ -1,4 +1,5 @@
 import { Lei } from './lei';
+import { WorldTime } from '../../worldtime';
 
 let SexScenes = {};
 
@@ -140,7 +141,7 @@ SexScenes.Petting = function(repeat) {
 		Text.Add("You stir in his arms languidly, stopping just short of coming to a sitting position. It’s pleasant here - do you really have to get up already?", parse);
 		Text.NL();
 		Text.Add("Lei flicks your nose lightly, and your eyes shoot fully open. <i>“Don’t be a lazy kitty, now. It’s time to be up and about,”</i> he says, ", parse);
-		if(world.time.hour >= 22 && world.time.hour < 5)
+		if(WorldTime().hour >= 22 && WorldTime().hour < 5)
 			Text.Add("<i>“even if it is rather late.”</i>", parse);
 		else
 			Text.Add("<i>“the day is not over yet.”</i>", parse);

@@ -11,6 +11,7 @@ import { Race } from '../body/race';
 import { Time } from '../time';
 import { Items } from '../items';
 import { Shop } from '../shop';
+import { WorldTime } from '../worldtime';
 
 let CassidyScenes = {
 	Sex     : SexScenes,
@@ -226,9 +227,9 @@ CassidyScenes.ShopDesc = function() {
 	
 	Text.Add("You’re standing on the shop floor of The Pale Flame. Racks upon racks of implements of assorted death stand in lines and hang on the walls, each and every one of them dust-free and labeled with their name and make. Stabbing, impaling, bludgeoning, crushing, bleeding out, slashing - you name it, and it’s likely Cassidy that has it on display on the floor.", parse);
 	Text.NL();
-	if(world.time.hour < 11)
+	if(WorldTime().hour < 11)
 		Text.Add("At this hour in the morning, most of Cass’ customers are here on contracted orders rather than walk-in purchases. With how many runners are coming in and out the front door, it sure seems like the salamander’s doing a brisk business. You count amongst them a few members of the City Watch, but most of the standing orders appear to be for mercenary outfits you don’t quite recognize.", parse);
-	else if(world.time.hour < 15)
+	else if(WorldTime().hour < 15)
 		Text.Add("Now that the morning crowd has thinned a little, people have come in off the street to browse Cassidy’s wares. The bulk of the clientele meander about the racks near the door where the more utilitarian pieces are on display, but there are a few amongst Cass’ clientele who’re richly dressed. These hang around the back, where the more exquisite pieces are displayed in glass cases - weapons made for show, rather than function.", parse);
 	else
 		Text.Add("Business is beginning to wind down as the sunlight grows long and evening approaches, but there’re still a few prospective customers browsing the racks.", parse);
@@ -499,7 +500,7 @@ CassidyScenes.Prompt = function() {
 			tooltip : "So, does Cass want to stay in with you after closing shop?",
 			func : function() {
 				Text.Clear();
-				if(world.time.hour < 15) {
+				if(WorldTime().hour < 15) {
 					Text.Add("You were just about to pop the question, but catch yourself mid-sentence. Yeah, Cass <i>did</i> say to come an hour or two before closing time - this is probably too early for that. If you asked now, you’d just get a refusal and annoy Cassidy in the process. Best to wait this one out; patience is a virtue, after all.", parse);
 					Text.Flush();
 					CassidyScenes.Prompt();
@@ -761,7 +762,7 @@ CassidyScenes.ShopBuy = function() {
 		return false;
 	}
 	
-	var timestamp = Math.floor(world.time.ToDays());
+	var timestamp = Math.floor(WorldTime().ToDays());
 	if(cassidy.flags["shop"] < timestamp || cassidy.shop.inventory.length == 0) {
 		// Randomize inventory
 		cassidy.shop.inventory = [];
@@ -1104,7 +1105,7 @@ CassidyScenes.InsidePrompt = function() {
 			Text.Flush();
 			
 			CassidyScenes.InsideTalkPrompt();
-		}, enabled : world.time.hour < 20
+		}, enabled : WorldTime().hour < 20
 	});
 	options.push({ nameStr : "Meal",
 		tooltip : "Just sit back and have Cass cook up something for the two of you.",
@@ -1162,7 +1163,7 @@ CassidyScenes.InsidePrompt = function() {
 		Text.Flush();
 		
 		Gui.NextPrompt(function() {
-			if(world.time.hour < 17)
+			if(WorldTime().hour < 17)
 				world.StepToHour(17);
 			
 			MoveToLocation(world.loc.Rigard.ShopStreet.street);
@@ -1369,7 +1370,7 @@ CassidyScenes.InsideMeal = function() {
 	Text.Add("Yeah, you’ll do that all right, you think to yourself as you stumble out the door.", parse);
 	Text.Flush();
 	
-	if(world.time.hour < 17)
+	if(WorldTime().hour < 17)
 		world.StepToHour(17);
 	world.TimeStep({hour: 1});
 	
@@ -1389,7 +1390,7 @@ CassidyScenes.InsideTalkPrompt = function() {
 	parse = cassidy.ParserPronouns(parse);
 	
 	// Ensure that you can't go to the next day by talking all day
-	if(world.time.hour >= 20) {
+	if(WorldTime().hour >= 20) {
 		Gui.NextPrompt(function() {
 			Text.Clear();
 			parse["girl"] = cassidy.mfPronoun("guy", "girl");

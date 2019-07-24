@@ -18,6 +18,7 @@ import { InitNomads } from './loc/nomads';
 import { InitMiranda } from './event/miranda-scenes';
 import { BullTowerLoc } from './event/outlaws/bulltower';
 import { InitCheats } from './cheats';
+import { WorldTime } from './worldtime';
 
 let world = {
 	// Prototype initialization
@@ -87,7 +88,7 @@ world.Update = function(frametime) {
 
 // Update function (for internal game time)
 world.TimeStep = function(step) {
-	this.time.Inc(step);
+	WorldTime().Inc(step);
 	
 	for(var i = 0; i < this.EntityStorage.length; i++)
 		if(this.EntityStorage[i].Update) this.EntityStorage[i].Update(step);
@@ -95,7 +96,7 @@ world.TimeStep = function(step) {
 
 // Update function (for internal game time)
 world.StepToHour = function(hour, minute) {
-	var step = world.time.TimeToHour(hour, minute);
+	var step = WorldTime().TimeToHour(hour, minute);
 	
 	world.TimeStep(step);
 

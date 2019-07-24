@@ -10,6 +10,7 @@ import { Race } from '../../body/race';
 import { Color } from '../../body/color';
 import { AppendageType } from '../../body/appendage';
 import { TF } from '../../tf';
+import { WorldTime } from '../../worldtime';
 
 function Cale(storage) {
 	Entity.call(this);
@@ -166,7 +167,7 @@ Cale.prototype.ToStorage = function() {
 Cale.prototype.IsAtLocation = function(location) {
 	location = location || party.location;
 	if(location == world.loc.Plains.Nomads.Fireplace)
-		return cale.flags["Met"] != 0 && (world.time.hour >= 15 || world.time.hour < 3);
+		return cale.flags["Met"] != 0 && (WorldTime().hour >= 15 || WorldTime().hour < 3);
 	return false;
 }
 

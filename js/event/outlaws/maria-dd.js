@@ -1,4 +1,5 @@
 import { GetDEBUG } from '../../../app';
+import { WorldTime } from '../../worldtime';
 
 //
 // Maria Dead drops
@@ -188,7 +189,7 @@ DeadDropScenes.First.Start = function() {
 	Text.NL();
 	Text.Add("You hurry around the corner just as Maria breaks into a sprint, giving chase after a young mouse-morph who can’t be any older than nine or ten. The brat has a small wrapped package under his arm, and given Maria’s reaction, it has to be what you’re after today.", parse);
 	Text.NL();
-	parse["w"] = world.time.season == Season.Winter ? " and slush" : "";
+	parse["w"] = WorldTime().season == Season.Winter ? " and slush" : "";
 	Text.Add("Well, nothing for it. You take off after the brat as well, joining Maria in the chase through the muddy streets of the slums. The dirt[w] is slick underfoot, the alleyways narrow, and more than one poor passerby is bowled over by the sheer force of your chase as the two of you pursue the mouse-morph through the shacks and hovels. Dogs bark and chickens flap at the commotion, and though you duck and weave as well as you can, you can’t seem to gain on him - but at least you don’t lose him, either. The streets are long and narrow with few bends, and that helps.", parse);
 	Text.NL();
 	Text.Add("<i>“You don’t want that!”</i> Maria shouts at the fleeing street urchin. <i>“Do you even know what’s in it?”</i>", parse);
@@ -513,7 +514,7 @@ DeadDropScenes.Docks.Cavalcade = function() {
 	
 	Text.Add("Despite a half-hour’s worth of searching, you turn up empty-handed. You must’ve gone through the barge’s entire cargo at least twice, and the captain’s assured you that nothing’s been moved to the warehouses just yet, so where is that crate you’re looking for?", parse);
 	Text.NL();
-	parse["n"] = world.time.IsDay() ? "" : " by the light of a flickering lamp";
+	parse["n"] = WorldTime().IsDay() ? "" : " by the light of a flickering lamp";
 	Text.Add("As it turns out, it can be found in the middle of four dockhands playing Cavalcade[n]. They’re merrily using it as a table while they sit on burlap sacks and sip at foul-smelling liquor straight from the bottle. They look up warily as you approach, the presence of a strange newcomer in their game not exactly welcomed. But there it is - almost invisible, but there nevertheless - the small mark of a three-fingered paw printed on the crate’s corner.", parse);
 	Text.NL();
 	Text.Add("<i>“Oi,”</i> one of the dockhands grumbles, glaring up at you. <i>“Looking at something? I’ll have you know we’re on our break right now.”</i>", parse);

@@ -7,6 +7,7 @@ import { Entity } from '../../entity';
 import { Color } from '../../body/color';
 import { Race } from '../../body/race';
 import { Time } from '../../time';
+import { WorldTime } from '../../worldtime';
 
 function Vaughn(storage) {
 	Entity.call(this);
@@ -110,7 +111,7 @@ Vaughn.prototype.Update = function(step) {
 Vaughn.prototype.IsAtLocation = function(location) {
 	location = location || party.location;
 	if(location == world.loc.Outlaws.Camp)
-		return (world.time.hour >= 18 || world.time.hour < 6);
+		return (WorldTime().hour >= 18 || WorldTime().hour < 6);
 	return false;
 }
 

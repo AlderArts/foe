@@ -5,6 +5,8 @@
  */
 
 import { Event, Link, EncounterTable } from '../event';
+import { WorldTime } from '../worldtime';
+import { Season } from '../time';
 
 // Create namespace
 let KingsRoadLoc = {
@@ -61,7 +63,7 @@ KingsRoadLoc.Road.enc.AddEnc(function() {
 
 KingsRoadLoc.Road.enc.AddEnc(function() {
 	return Scenes.Roaming.FlowerPetal;
-}, 1.0, function() { return world.time.season != Season.Winter; });
+}, 1.0, function() { return WorldTime().season != Season.Winter; });
 
 KingsRoadLoc.Road.AddEncounter({
 	nameStr : "Wildcat",

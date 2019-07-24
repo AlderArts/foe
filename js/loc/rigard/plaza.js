@@ -1,5 +1,6 @@
 
 import { Event, Link, EncounterTable } from '../../event';
+import { WorldTime } from '../../worldtime';
 
 let PlazaLoc = new Event("Plaza");
 
@@ -34,9 +35,9 @@ PlazaLoc.enc = new EncounterTable();
 PlazaLoc.enc.AddEnc(function() { return Scenes.Rigard.Chatter;});
 PlazaLoc.enc.AddEnc(function() { return Scenes.Rigard.Chatter2;});
 PlazaLoc.enc.AddEnc(function() { return Scenes.Rigard.CityHistory;}, 1.0, function() { return rigard.flags["CityHistory"] == 0; });
-PlazaLoc.enc.AddEnc(function() { return PlazaScenes.LetterDelivery; }, 1.0, function() { return (world.time.hour >= 6 && world.time.hour < 21); });
-PlazaLoc.enc.AddEnc(function() { return PlazaScenes.StatueInfo; }, 1.0, function() { return (world.time.hour >= 6 && world.time.hour < 21) && (rigard.flags["TalkedStatue"] == 0 || (party.InParty(kiakai) && kiakai.flags["TalkedStatue"] == 0)); });
-PlazaLoc.enc.AddEnc(function() { return Scenes.Krawitz.Duel;}, 3.0, function() { return rigard.Krawitz["Q"] == 1 && rigard.Krawitz["Duel"] == 0 && (world.time.hour >= 10 && world.time.hour < 20);});
+PlazaLoc.enc.AddEnc(function() { return PlazaScenes.LetterDelivery; }, 1.0, function() { return (WorldTime().hour >= 6 && WorldTime().hour < 21); });
+PlazaLoc.enc.AddEnc(function() { return PlazaScenes.StatueInfo; }, 1.0, function() { return (WorldTime().hour >= 6 && WorldTime().hour < 21) && (rigard.flags["TalkedStatue"] == 0 || (party.InParty(kiakai) && kiakai.flags["TalkedStatue"] == 0)); });
+PlazaLoc.enc.AddEnc(function() { return Scenes.Krawitz.Duel;}, 3.0, function() { return rigard.Krawitz["Q"] == 1 && rigard.Krawitz["Duel"] == 0 && (WorldTime().hour >= 10 && WorldTime().hour < 20);});
 PlazaLoc.enc.AddEnc(function() { return Scenes.Terry.ExplorePlaza; }, 1000000.0, function() { return rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry; });
 
 PlazaLoc.links.push(new Link(
@@ -130,7 +131,7 @@ PlazaLoc.links.push(new Link(
 					Text.Add(" You realize that you’ve seen him before, in the common room of the Lady’s Blessing inn.", parse);
 				Text.NL();
 				Text.Add("You try to hurry, wondering if the two are being pursued, but unfortunately, before you are even half way, they follow the street past a corner and you lose sight of them, their tail disappearing soon after. By the time you reach the corner yourself, ", parse);
-				var hour = world.time.hour;
+				var hour = WorldTime().hour;
 				if(hour >= 10 && hour < 19)
 					Text.Add("you can’t spot them amidst the milling crowds.", parse);
 				else if(hour >= 6)
@@ -215,7 +216,7 @@ PlazaLoc.links.push(new Link(
 		return Scenes.Lei.Tasks.Escort.OnTask();
 	}, function() {
 		var t = true;
-		if(world.time.hour < 10 || world.time.hour >= 17) t = false;
+		if(WorldTime().hour < 10 || WorldTime().hour >= 17) t = false;
 		if(lei.taskTimer.ToHours() > 7) t = false;
 		return t;
 	},
@@ -231,7 +232,7 @@ PlazaLoc.links.push(new Link(
 ));
 
 PlazaLoc.events.push(new Link(
-	"Goldsmith", function() { return room69.flags["Hinges"] == Room69.HingesFlags.Asked; }, function() { return world.time.hour >= 9 && world.time.hour < 18; },
+	"Goldsmith", function() { return room69.flags["Hinges"] == Room69.HingesFlags.Asked; }, function() { return WorldTime().hour >= 9 && WorldTime().hour < 18; },
 	function() {
 		if(room69.flags["Hinges"] == Room69.HingesFlags.Asked) {
 			Text.Add("You see a rich establishment nearby, claiming to be the best goldsmith in town. Perhaps you could as the owner about making hinges for Sixtynine's door?");

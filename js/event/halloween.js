@@ -3,6 +3,7 @@ import { Event, Link } from '../event';
 import { Inventory } from '../inventory';
 import { GetDEBUG } from '../../app';
 import { Gender } from '../body/gender';
+import { WorldTime } from '../worldtime';
 
 let HalloweenScenes = {};
 
@@ -154,7 +155,7 @@ HalloweenScenes.PieIntro = function() {
 	};
 	
 	Text.Clear();
-	parse["day"] = world.time.LightStr("day", "evening");
+	parse["day"] = WorldTime().LightStr("day", "evening");
 	Text.Add("As you step into the nomads’ camp and pass by the fire pit, you spy the chief waving you over. The old man is surrounded by fragrant smoke, as always, but he appears unusually animated this [day] - for him, that is. You cross over to where he’s sitting, and he slaps a rough palm against an empty space on the log by his side, inviting you to take a seat.", parse);
 	Text.NL();
 	Text.Add("<i>“Shan’t take up much of your time,”</i> he begins. <i>“Just want you to know that we’re going to be having pumpkin pie after supper every night for the season.”</i>", parse);

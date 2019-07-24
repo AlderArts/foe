@@ -8,6 +8,7 @@ import { Event, Link, EncounterTable } from '../../event';
 import { Outlaws } from './outlaws';
 import { GetDEBUG } from '../../../app';
 import { Stat } from '../../stat';
+import { WorldTime } from '../../worldtime';
 
 let BullTowerScenes = {};
 
@@ -401,7 +402,7 @@ BullTowerScenes.MovingOut = function() {
 	};
 	
 	Text.Clear();
-	if(world.time.hour >= 21 || world.time.hour < 4)
+	if(WorldTime().hour >= 21 || WorldTime().hour < 4)
 		Text.Add("Although the flaps of Cveta’s tent are tightly drawn, you catch a glimpse of light at the seams. The songstress is still awake and presumably waiting for you so you can set off - would you like to do so?", parse);
 	else
 		Text.Add("You’ve arrived early, but you don’t think there are any more preparations you need to make. Maybe you could help Cveta or review the plan to make sure you’re in sync.", parse);
@@ -425,7 +426,7 @@ BullTowerScenes.MovingOut = function() {
 	options.push({ nameStr : "Move out",
 		func : function() {
 			Text.Clear();
-			if(world.time.hour >= 21 || world.time.hour < 4)
+			if(WorldTime().hour >= 21 || WorldTime().hour < 4)
 				Text.Add("There’s no need to wait any longer; time’s a-wasting. Stepping towards Cveta’s tent, you practically run into the songstress as she emerges from within.", parse);
 			else {
 				Text.Add("<i>“You are here early, [playername],”</i> Cveta says, greeting you with a nod as you approach her tent. <i>“There are still some hours left before our departure.”</i>", parse);

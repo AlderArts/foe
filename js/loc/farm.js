@@ -8,6 +8,7 @@ import { Event, Link, EncounterTable } from '../event';
 import { Gender } from '../body/gender';
 import { GwendyScenes } from '../event/farm/gwendy-scenes';
 import { LaylaScenes } from '../event/farm/layla-scenes';
+import { WorldTime } from '../worldtime';
 
 let world = null;
 
@@ -142,11 +143,11 @@ FarmLoc.Fields.enc.AddEnc(function() {
 		Text.Flush();
 		Gui.NextPrompt();
 	};
-}, 1.0, function() { return world.time.season != Season.Winter; });
+}, 1.0, function() { return WorldTime().season != Season.Winter; });
 
 FarmLoc.Fields.enc.AddEnc(function() {
 	return Scenes.Roaming.FlowerPetal;
-}, 1.0, function() { return world.time.season != Season.Winter; });
+}, 1.0, function() { return WorldTime().season != Season.Winter; });
 
 FarmLoc.Fields.enc.AddEnc(function() {
 	return function() {
@@ -162,7 +163,7 @@ FarmLoc.Fields.enc.AddEnc(function() {
 		Text.Flush();
 		Gui.NextPrompt();
 	};
-}, 1.0, function() { return world.time.season != Season.Winter; });
+}, 1.0, function() { return WorldTime().season != Season.Winter; });
 
 FarmLoc.Fields.links.push(new Link(
 	"Crossroads", true, true,

@@ -4,6 +4,7 @@
  */
 import { GetDEBUG } from '../../app';
 import { Gender } from '../body/gender';
+import { WorldTime } from '../worldtime';
 
 let TasksScenes = {};
 
@@ -135,7 +136,7 @@ TasksScenes.Ginseng.Highlands = function() {
 	parse["footsteps"] = player.HasLegs() ? "footsteps echo" : "passage echoes";
 	Text.Add("Cautiously, you enter the ravine, eyes peeled for any sign of the zebra-morphs whose territory this is. Your [footsteps] off the ravine’s towering walls - so high that a narrow slit is all that remains visible of the sky - sounding deafeningly loud to you, yet you attract no attention from anything larger than a few rodents and lizards. The reason for that becomes clear as you near the ravine’s other end: stationed by the entrance - or exit, depending on how you look at it - is a zebra-morph shaman and two savage-looking warriors - you believe you’ve heard such as them referred to as ‘braves’. The marked, hooded robes along with the staff propped up against a rock leave no doubt to the shaman’s identity. Likewise, the braves wear little more than loincloths and have accentuated their natural patterning with streaks and stripes of blue body-paint; the end result is certainly quite fearsome in appearance, especially when one considers their bronze-tipped spears.", parse);
 	Text.NL();
-	if(world.time.IsDay()) {
+	if(WorldTime().IsDay()) {
 		Text.Add("Seems like you’ve arrived just in time for food. All three zebras are gathered around a cast-iron pot hanging over a fire pit, one of the braves stirring the stew. Judging by the smell wafting over to you, it’s spiced gruel of some sort.", parse);
 		Text.NL();
 		Text.Add("Well, it’s probably for the best - while they’re busy cooking is probably the ideal time for getting the drop on them, if you are so inclined.", parse);
@@ -177,7 +178,7 @@ TasksScenes.Ginseng.Highlands = function() {
 			Gui.SetButtonsFromList(options, false, null);
 		}, enabled : true
 	});
-	var tooltip = Text.Parse("Try to slip past the zebras and enter the spring basin while they’re [day].", {day: world.time.IsDay() ? "distracted" : "out of it"});
+	var tooltip = Text.Parse("Try to slip past the zebras and enter the spring basin while they’re [day].", {day: WorldTime().IsDay() ? "distracted" : "out of it"});
 	options.push({ nameStr : "Sneak",
 		tooltip : tooltip,
 		func : function() {
@@ -198,7 +199,7 @@ TasksScenes.Ginseng.Highlands = function() {
 				Text.NL();
 			}
 			if(dex >= goal) {
-				var day = world.time.IsDay();
+				var day = WorldTime().IsDay();
 				parse["day1"] = day ? "the zebras are too focused on their fire to look up" : "the weary zebra shaman doesn’t lift his eyes from the path in front of his post";
 				parse["day2"] = day ? "" : ", thanks to the bright moon";
 				parse["day3"] = day ? "the shaman and his companions haven’t moved from their fire, and don’t even look up as you slip by them" : "the only thing you hear from the braves is their snores, and the shaman looks on the verge of joining them, letting you slip by easily";
@@ -230,7 +231,7 @@ TasksScenes.Ginseng.Highlands = function() {
 		tooltip : "Since you have the initiative, it’s probably best to get the jump on them while you can.",
 		func : function() {
 			Text.Clear();
-			var day = world.time.IsDay();
+			var day = WorldTime().IsDay();
 			Text.Add("You decide that force is probably going to be the easiest solution to this quandary, and prepare to do battle. It might cause problems for Asche to march in and start bashing skulls, but you’re a filthy, filthy outsider and you doing so probably won’t cause much of a stir.", parse);
 			Text.NL();
 			if(day)
@@ -452,7 +453,7 @@ TasksScenes.Ginseng.FightWin = function() {
 	};
 	
 	Gui.Callstack.push(function() {
-		var day = world.time.IsDay()
+		var day = WorldTime().IsDay()
 		
 		parse["day"] = day ? "" : " thanks to the bright moon";
 		Text.Clear();
@@ -1057,7 +1058,7 @@ TasksScenes.Spring.Highlands = function() {
 	party.location = world.loc.Highlands.Spring;
 	
 	Text.Clear();
-	parse["season"] = world.time.season == Season.Summer ? ", even for summer" : "";
+	parse["season"] = WorldTime().season == Season.Summer ? ", even for summer" : "";
 	Text.Add("Following Asche’s directions, you leave the beaten trail and head out into the rough, rocky terrain of Eden’s Highlands. The air is cool[season], the ground uneven with stony outcroppings thrusting through the mountain meadows, and small wildflowers poke through the grass, reaching for the sky. Barely half an hour into your hike, you’re already starting to feel the toll the off-trail journey is taking on you, but you forge on anyway - the open nature of your surroundings has you confident that you’ll be able to see any danger coming from far away.", parse);
 	Text.NL();
 	Text.Add("Sitting down on a nearby flat-topped boulder, you review Asche’s directions to the hot spring she mentioned. Considering how far you’ve already come, the spring she mentioned should be on that mountainside plateau over there to the east. It isn’t that far, but the climb up looks like a tough one and there’s no obvious trail leading to it. At least that explains why Asche, who claims to know much of the mystical mysteries of her homeland, wasn’t aware of the spring’s existence.", parse);
@@ -1066,7 +1067,7 @@ TasksScenes.Spring.Highlands = function() {
 	Text.Add("Well, nothing for it - time to earn your pay. You resolutely stand up and march off towards the mountainside at a brisk pace, doing your best to ignore the growing fatigue in your [feet]. Thankfully, when you get to the foot of the mountain, you discover there <i>is</i> a trail leading up to the plateau - albeit a steep, narrow one, but it’s better than having to climb hand over [foot] to your destination.", parse);
 	Text.NL();
 	Text.Add("At last, you make it and collapse to the ground in calf-high grass, exhausted by the climb. A perfect chance to take a breather and survey your surroundings - the plateau seems peaceful enough for you to let down your guard for a moment. Sheer drops surround it on three sides, and the wildflowers growing in small clumps of white and red only add to the sense of peace that blankets the plateau. In the middle, a large spring juts out from the earth, packed rocks and pebbles forming a lip of sorts around the water’s edge.", parse);
-	if(world.time.season == Season.Winter)
+	if(WorldTime().season == Season.Winter)
 		Text.Add(" Judging by the sheer amount of steam that’s pouring out from them, it’s evident that its heat is what’s allowed plants to grow so readily, even in the chill of highland winter.", parse);
 	Text.NL();
 	Text.Add("Hah, that was simple enough. Three vials, two pools - a simple enough matter for you to go and get some water and head back to Asche. Just as you’re about to stand and get to work, though, the pitter-patter of footsteps comes to you from the direction of the trail, enough to indicate that there’s more than one pair. Seems like someone else’s heading on their way here - you try and peer down the trail to catch a glimpse of who or what it might be, but the grasses and slant of the slope prevent you from seeing much that’s useful.", parse);

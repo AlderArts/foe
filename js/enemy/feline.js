@@ -14,6 +14,7 @@ import { Abilities } from '../abilities';
 import { Element } from '../ability';
 import { Race } from '../body/race';
 import { Color } from '../body/color';
+import { WorldTime } from '../worldtime';
 
 let FelinesScenes = {};
 
@@ -2675,7 +2676,7 @@ FelinesScenes.LossDoubleTeam = function(cat, cat2, group, enc) {
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
 
-	var season = world.time.season;
+	var season = WorldTime().season;
 	parse["season"] = season == Season.Winter ? "gust of chill wind blows across" :
 	                  season == Season.Spring ? "sudden breeze sends dandelion fuzz tickling across" :
 	                  season == Season.Summer ? "gust of wind cools" : "gust of wind tosses a few stray leaves at";

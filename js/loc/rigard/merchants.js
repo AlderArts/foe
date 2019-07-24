@@ -5,6 +5,7 @@ import { ArmorShopLoc } from './armorshop';
 import { MagicShopLoc } from './magicshop';
 import { ClothShopLoc } from './clothstore';
 import { WeaponShopLoc } from './weaponshop';
+import { WorldTime } from '../../worldtime';
 
 
 let ShopStreetScenes = {}
@@ -31,9 +32,9 @@ let ShopStreetLoc =
 //
 ShopStreetLoc.street.description = function() {
 	Text.Add("The streets in this area of the city are lined with small merchant stalls and shops of all kinds. ");
-	if(world.time.hour >= 6 && world.time.hour < 9)
+	if(WorldTime().hour >= 6 && WorldTime().hour < 9)
 		Text.Add("A few early birds prowl the streets as the merchant district starts to wake up. A few street vendors selling fresh foods are just opening up, and the smells of baked bread and spices fill the morning air.");
-	else if(world.time.hour >= 9 && world.time.hour < 18)
+	else if(WorldTime().hour >= 9 && WorldTime().hour < 18)
 		Text.Add("People of all shapes and sizes wander the streets, browsing the wares on display.");
 	else
 		Text.Add("Usually this place is bustling with people, but with all the shops closed for the night, no one is about.");
@@ -50,7 +51,7 @@ ShopStreetLoc.street.description = function() {
 ShopStreetLoc.street.enc = new EncounterTable();
 ShopStreetLoc.street.enc.AddEnc(function() { return Scenes.Rigard.Chatter;});
 ShopStreetLoc.street.enc.AddEnc(function() { return Scenes.Rigard.Chatter2;});
-ShopStreetLoc.street.enc.AddEnc(function() { return ShopStreetScenes.Speculate;}, 1.0, function() { return (world.time.hour >= 6 && world.time.hour < 18); });
+ShopStreetLoc.street.enc.AddEnc(function() { return ShopStreetScenes.Speculate;}, 1.0, function() { return (WorldTime().hour >= 6 && WorldTime().hour < 18); });
 ShopStreetLoc.street.enc.AddEnc(function() { return Scenes.Rigard.CityHistory;}, 1.0, function() { return rigard.flags["CityHistory"] == 0; });
 ShopStreetLoc.street.enc.AddEnc(function() { return Scenes.Terry.ExploreMerchants; }, 1000000.0, function() { return rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry; });
 ShopStreetLoc.street.onEntry = function() {
@@ -258,7 +259,7 @@ ShopStreetLoc.street.events.push(new Link(
 ));
 
 ShopStreetLoc.street.events.push(new Link(
-	"Martello", function() { return room69.flags["Hinges"] == Room69.HingesFlags.TalkedToGoldsmith || room69.flags["Hinges"] == Room69.HingesFlags.TalkedToSmith; }, function() { return world.time.hour >= 9 && world.time.hour < 18; },
+	"Martello", function() { return room69.flags["Hinges"] == Room69.HingesFlags.TalkedToGoldsmith || room69.flags["Hinges"] == Room69.HingesFlags.TalkedToSmith; }, function() { return WorldTime().hour >= 9 && WorldTime().hour < 18; },
 	function() {
 		if(room69.flags["Hinges"] == Room69.HingesFlags.TalkedToGoldsmith) {
 			Text.Add("You could ask the smith Martello to make gilded hinges for Sixtynine’s door.");

@@ -10,6 +10,7 @@ import { Gender } from '../body/gender';
 import { Images } from '../assets';
 import { Time } from '../time';
 import { Race } from '../body/race';
+import { WorldTime } from '../worldtime';
 
 let MomoScenes = {};
 
@@ -124,7 +125,7 @@ Momo.prototype.ToStorage = function() {
 // Schedule
 Momo.prototype.IsAtLocation = function(location) {
 	location = location || party.location;
-	if(location == world.loc.Plains.Nomads.Fireplace && this.AtCamp() && world.time.hour >= 4 && world.time.hour < 21) {
+	if(location == world.loc.Plains.Nomads.Fireplace && this.AtCamp() && WorldTime().hour >= 4 && WorldTime().hour < 21) {
 		return true;
 	}
 	return false;
@@ -372,7 +373,7 @@ MomoScenes.Interact = function() {
 		}, 1.0, function() { return true; });
 		scenes.AddEnc(function() {
 			Text.Add("Momo is busy with something near the burnt-down coals of the campfire. As you get closer, you can see that she is sweeping the ashes and coals aside with her bare hands, the tough scales clearly unbothered by the heat. She digs out a camping oven and pulls it aside, opening the lid - whatever's in there smells good. Placing it down to cool, she stands up and nonchalantly dusts off her hands, smiling at you.", parse);
-		}, 1.0, function() { return world.time.hour < 19; });
+		}, 1.0, function() { return WorldTime().hour < 19; });
 		scenes.AddEnc(function() {
 			Text.Add("Momo is leisurely stirring some kind of stew in a pot hung low over the fire. It's evidently merely simmering, considering that she doesn't hesitate to place the spoon aside and move to join you.", parse);
 		}, 1.0, function() { return true; });
@@ -486,9 +487,9 @@ MomoScenes.CookPrompt = function() {
 			
 			Text.Add("You[comp] follow her lead, settling down as you watch the [dragonette] move about setting up a small fire to cook. She ensures that the flames won’t spread and promptly ignites it with a small puff of fire. She smiles as the fire gets going and begins cooking, the delicious scent of cooked food wafting around you within instants.", parse);
 			Text.NL();
-			if(world.time.hour >= 6 && world.time.hour < 11)
+			if(WorldTime().hour >= 6 && WorldTime().hour < 11)
 				Text.Add("When she’s ready, Momo approaches you with a beaming smile, bearing [partynumber] bowl[s] from which steam is gently wafting, placing them before you[comp] along with serving spoons. <i>“Oatmeal, just like we used to have it back on the farm; plenty of mixed, dried fruit, a good dollop of honey, and a little milk to make it extra creamy,”</i> she brags. <i>“Just the sort of thing to give you the energy for a hard day.”</i>", parse);
-			else if(world.time.hour >= 11 && world.time.hour < 19)
+			else if(WorldTime().hour >= 11 && WorldTime().hour < 19)
 				Text.Add("Momo returns to your side bearing a massive platter piled with sandwiches of all kinds, which she places where you[comp] can easily reach it. <i>“A little variety makes even the simple things more fun,”</i> she notes happily. <i>“Bon appetit.”</i>", parse);
 			else {
 				if(tempParty.length >= num)

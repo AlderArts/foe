@@ -26,6 +26,7 @@ import { InitMageTower } from './magetower';
 import { Items } from '../../items';
 import { Time } from '../../time';
 import { Stat } from '../../stat';
+import { WorldTime } from '../../worldtime';
 
 let world = null;
 let Scenes = null;
@@ -256,7 +257,7 @@ Rigard.prototype.CastleAccess = function() {
 }
 
 Rigard.prototype.GatesOpen = function() {
-	return world.time.hour >= 8 && world.time.hour < 17;
+	return WorldTime().hour >= 8 && WorldTime().hour < 17;
 }
 
 Rigard.prototype.UnderLockdown = function() {
@@ -351,7 +352,7 @@ RigardScenes.ChatterOutro = function(parse) {
 	});
 	outroText.AddEnc(function() {
 		Text.Add("A sudden surge in the noise coming from the crowd makes the rest of the conversation impossible to hear.", parse);
-	}, 1.0, function() { return world.time.hour >= 8 && world.time.hour < 19; });
+	}, 1.0, function() { return WorldTime().hour >= 8 && WorldTime().hour < 19; });
 	outroText.AddEnc(function() {
 		Text.Add("You turn a corner, and the conversation grows inaudible behind you.", parse);
 	});
@@ -1359,7 +1360,7 @@ RigardScenes.Chatter2 = function(enteringArea) {
 
 		Text.NL();
 		Text.Add("You feel a little guilty for not catching on quickly enough to stop the thief. Perhaps you’ll do better another time.", parse);
-	}, 1.0, function() { return world.time.hour >= 6 && world.time.hour < 19; });
+	}, 1.0, function() { return WorldTime().hour >= 6 && WorldTime().hour < 19; });
 	scenes.AddEnc(function() {
 		Text.Add("A stout, flamboyantly dressed man is standing at the street corner in front of you, shouting in a boisterous voice. <i>“Have your needs been going unmet? Have you been having relationship troubles? Come visit the Shadow Lady! The finest establishment in the city! We won’t solve your problems, but you’ll sure feel better - that’s a guarantee!”</i>", parse);
 		Text.NL();
@@ -1419,7 +1420,7 @@ RigardScenes.Chatter2 = function(enteringArea) {
 		Gui.SetButtonsFromList(options, false, null);
 
 		return true;
-	}, 1.0, function() { return rigard.Access() && world.time.hour >= 6 && world.time.hour < 19; });
+	}, 1.0, function() { return rigard.Access() && WorldTime().hour >= 6 && WorldTime().hour < 19; });
 	scenes.AddEnc(function() {
 		Text.Add("A pair of elegantly dressed women are sitting together, sipping mulled wine. One of them looks to be in her early thirties, and leans forward, instructing her younger companion. <i>“I know it’s expensive, but it is of paramount importance that your children are well educated. Paramount.", parse);
 		Text.NL();

@@ -13,6 +13,7 @@ import { Color } from '../../body/color';
 import { Body } from '../../body/body';
 import { TF } from '../../tf';
 import { AppendageType } from '../../body/appendage';
+import { WorldTime } from '../../worldtime';
 
 let RosalinScenes = {};
 
@@ -199,7 +200,7 @@ RosalinScenes.Impregnate = function(mother, father, slot) {
 Rosalin.prototype.IsAtLocation = function(location) {
 	location = location || party.location;
 	if(location == world.loc.Plains.Nomads.Fireplace)
-		return (world.time.hour >= 12 || world.time.hour < 3);
+		return (WorldTime().hour >= 12 || WorldTime().hour < 3);
 	return false;
 }
 
@@ -278,7 +279,7 @@ RosalinScenes.Interact = function() {
 
 RosalinScenes.Desc = function() {
 	var parse = {
-		extinguishedLit : (world.time.hour >= 19 || world.time.hour < 2) ? "lit" : "extinguished"
+		extinguishedLit : (WorldTime().hour >= 19 || WorldTime().hour < 2) ? "lit" : "extinguished"
 	};
 	parse = rosalin.ParserPronouns(parse);
 

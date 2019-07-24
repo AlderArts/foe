@@ -10,24 +10,20 @@ import { SetGameState, GameState, isOnline } from './gamestate';
 import { GetRenderPictures, SetRenderPictures, GetDEBUG, SetDEBUG } from '../app';
 
 import { ExploreButtonIndex } from './explorestate';
-
-let GAME = null;
-
-function ExplorationSetGAME(game) {
-	GAME = game;
-}
+import { GAME } from './GAME';
+import { Text } from './text';
 
 function SetExploreButtons() {
-	var waitLocation = GAME.party.location.wait();
+	var waitLocation = GAME().party.location.wait();
 	// At safe locations you can sleep and save
-	var safeLocation = GAME.party.location.safe();
+	var safeLocation = GAME().party.location.safe();
 
 	Input.exploreButtons[ExploreButtonIndex.Explore].Setup("Explore", Explore, true);
 
 	if(!Intro.active) {
-		Input.exploreButtons[ExploreButtonIndex.Party].enabledImage = (GAME.party.location.switchSpot()) ? Images.imgButtonEnabled2 : Images.imgButtonEnabled;
+		Input.exploreButtons[ExploreButtonIndex.Party].enabledImage = (GAME().party.location.switchSpot()) ? Images.imgButtonEnabled2 : Images.imgButtonEnabled;
 		Input.exploreButtons[ExploreButtonIndex.Party].Setup("Party", PartyInteraction, true);
-		if(GAME.party.members.length == 0) Input.exploreButtons[ExploreButtonIndex.Party].SetEnabled(false);
+		if(GAME().party.members.length == 0) Input.exploreButtons[ExploreButtonIndex.Party].SetEnabled(false);
 
 		Input.exploreButtons[ExploreButtonIndex.Items].Setup("Items", ShowInventory, true);
 
@@ -39,16 +35,16 @@ function SetExploreButtons() {
 			Input.exploreButtons[ExploreButtonIndex.Hunt].Setup("Hunt", ShowHunting, true);
 
 		if(safeLocation) { // SLEEP
-			Input.exploreButtons[ExploreButtonIndex.Sleep].Setup("", GAME.party.location.SleepFunc, waitLocation, null,
+			Input.exploreButtons[ExploreButtonIndex.Sleep].Setup("", GAME().party.location.SleepFunc, waitLocation, null,
 				"Sleep until you are fully rested (restores HP/SP).");
 		}
 		else { // WAIT
-			Input.exploreButtons[ExploreButtonIndex.Wait].Setup("", GAME.party.location.WaitFunc, waitLocation, null,
+			Input.exploreButtons[ExploreButtonIndex.Wait].Setup("", GAME().party.location.WaitFunc, waitLocation, null,
 				"Wait for a while.");
 		}
 
 		// FIGHT/SEARCH
-		Input.exploreButtons[ExploreButtonIndex.Look].Setup("", Fight, GAME.party.location.enc != null, null,
+		Input.exploreButtons[ExploreButtonIndex.Look].Setup("", Fight, GAME().party.location.enc != null, null,
 			"Explore the immediate surroundings, possibly finding enemies, new locations or hidden treasures.", GameState.Event);
 	}
 }
@@ -94,7 +90,7 @@ function LimitedDataPrompt(backFunc) {
 function DataPrompt() {
 	SetGameState(GameState.Event, Gui);
 	// At safe locations you can sleep and save
-	var safeLocation = GAME.party.location.safe();
+	var safeLocation = GAME().party.location.safe();
 
 	Gui.ClearButtons();
 
@@ -117,8 +113,8 @@ function DataPrompt() {
 	Input.buttons[4].Setup("Toggle debug", function() {
 		SetDEBUG(!GetDEBUG());
 		if(GetDEBUG()) Gui.debug.show(); else Gui.debug.hide();
-		for(var i = 0; i < GAME.party.members.length; i++) {
-			GAME.party.members[i].DebugMode(GetDEBUG());
+		for(var i = 0; i < GAME().party.members.length; i++) {
+			GAME().party.members[i].DebugMode(GetDEBUG());
 		}
 	}, true);
 
@@ -176,21 +172,21 @@ function Explore(preventClear) {
 	if(!preventClear)
 		Text.Clear();
 
-	if(GAME.party.location == null) {
+	if(GAME().party.location == null) {
 		Text.Add("ERROR, LOCATION IS NULL");
 		Text.Flush();
 		return;
 	}
 
-	GAME.party.location.SetButtons();
-	GAME.party.location.PrintDesc();
+	GAME().party.location.SetButtons();
+	GAME().party.location.PrintDesc();
 	LastSubmenu = Input.exploreButtons[ExploreButtonIndex.Explore];
 
 	SetExploreButtons();
 }
 
 function PartyInteraction(preventClear) {
-	GAME.party.Interact(preventClear, GAME.party.location.switchSpot());
+	GAME().party.Interact(preventClear, GAME().party.location.switchSpot());
 	LastSubmenu = Input.exploreButtons[ExploreButtonIndex.Party];
 
 	SetExploreButtons();
@@ -199,13 +195,13 @@ function PartyInteraction(preventClear) {
 function Fight(preventClear) {
 	if(!preventClear)
 		Text.Clear();
-	if(GAME.party.location == null) {
+	if(GAME().party.location == null) {
 		Text.Add("ERROR, LOCATION IS NULL");
 		Text.Flush();
 		return;
 	}
 
-	var enc = GAME.party.location.enc.Get();
+	var enc = GAME().party.location.enc.Get();
 
 	if(enc) {
 		if(enc.Start)
@@ -223,14 +219,14 @@ function Fight(preventClear) {
 function ShowInventory(preventClear) {
 	if(!preventClear)
 		Text.Clear();
-	if(GAME.party.inventory == null) {
+	if(GAME().party.inventory == null) {
 		Text.Add("ERROR, INVENTORY IS NULL");
 		Text.Flush();
 		return;
 	}
 	Gui.ClearButtons();
 
-	GAME.party.inventory.ShowInventory(preventClear);
+	GAME().party.inventory.ShowInventory(preventClear);
 	LastSubmenu = Input.exploreButtons[ExploreButtonIndex.Items];
 
 	SetExploreButtons();
@@ -241,7 +237,7 @@ function ShowAbilities(preventClear) {
 		Text.Clear();
 	Gui.ClearButtons();
 
-	GAME.party.ShowAbilities();
+	GAME().party.ShowAbilities();
 	LastSubmenu = Input.exploreButtons[ExploreButtonIndex.Ability];
 
 	SetExploreButtons();
@@ -252,7 +248,7 @@ function ShowAlchemy(preventClear) {
 		Text.Clear();
 	Gui.ClearButtons();
 
-	Alchemy.AlchemyPrompt(player, GAME.party.inventory);
+	Alchemy.AlchemyPrompt(player, GAME().party.inventory);
 	LastSubmenu = Input.exploreButtons[ExploreButtonIndex.Alchemy];
 
 	SetExploreButtons();
@@ -274,12 +270,12 @@ function ShowHunting(preventClear) {
 		Text.Clear();
 	Gui.ClearButtons();
 
-	GAME.party.location.SetButtons(GAME.party.location.hunt);
-	GAME.party.location.PrintDesc();
+	GAME().party.location.SetButtons(GAME().party.location.hunt);
+	GAME().party.location.PrintDesc();
 
 	LastSubmenu = Input.exploreButtons[ExploreButtonIndex.Hunt];
 
 	SetExploreButtons();
 }
 
-export { DataPrompt, LimitedDataPrompt, ExploreButtonIndex, Explore, ExplorationSetGAME };
+export { DataPrompt, LimitedDataPrompt, ExploreButtonIndex, Explore };

@@ -6,6 +6,7 @@
 
 import { Event, Link, EncounterTable } from '../event';
 import { Scenes } from '../scenes';
+import { WorldTime } from '../worldtime';
 
 let world = null;
 
@@ -136,16 +137,16 @@ OutlawsLoc.Camp.events.push(new Link(
 OutlawsLoc.Camp.enc = new EncounterTable();
 OutlawsLoc.Camp.enc.AddEnc(function() {
 	return Scenes.Outlaws.Exploration.ChowTime;
-}, 1.0, function() { return world.time.hour >= 5 && world.time.hour < 22; });
+}, 1.0, function() { return WorldTime().hour >= 5 && WorldTime().hour < 22; });
 OutlawsLoc.Camp.enc.AddEnc(function() {
 	return Scenes.Outlaws.Exploration.Cavalcade;
 }, 1.0, function() { return Scenes.OutlawsCavalcade.Enabled(); });
 OutlawsLoc.Camp.enc.AddEnc(function() {
 	return Scenes.Outlaws.Exploration.Archery;
-}, 1.0, function() { return outlaws.flags["Met"] >= Outlaws.Met.MetBelinda && world.time.IsDay(); });
+}, 1.0, function() { return outlaws.flags["Met"] >= Outlaws.Met.MetBelinda && WorldTime().IsDay(); });
 OutlawsLoc.Camp.enc.AddEnc(function() {
 	return Scenes.Outlaws.Exploration.CampFollowers;
-}, 1.0, function() { return !world.time.IsDay(); });
+}, 1.0, function() { return !WorldTime().IsDay(); });
 OutlawsLoc.Camp.enc.AddEnc(function() {
 	return Scenes.Outlaws.Exploration.Feeding;
 }, 1.0, function() { return true; });
@@ -194,7 +195,7 @@ OutlawsLoc.Infirmary.description = function() {
 	Text.Add("Towards the back, obscured by the shelves and a large bookcase, are Aquilius’ quarters. Although you can’t see them from where you stand, you know they’re as sparse and functional as any of the other outlaws’. A couple of potted, leafy plants have been placed near a window, clearly herbs of some sort; there’s even a damp log on which mushrooms are sprouting in large yellow clumps.", parse);
 	Text.NL();
 	
-	if(world.time.hour >= 7 && world.time.hour < 17)
+	if(WorldTime().hour >= 7 && WorldTime().hour < 17)
 		Text.Add("Aquilius’ assistants perform the daily grind of seeing to the needs of the injured and bedridden, while the surgeon himself tends to the ignoble task of seeing to those coming in claiming illness or injury.", parse);
 	else
 		Text.Add("While the surgeon has retired for the night, one of his assistants is still on duty, watching over the infirm by the light of a small, hooded lantern. It’s little wonder that being surgeon for the outlaws is a job that doesn’t guarantee regular rest hours.", parse);

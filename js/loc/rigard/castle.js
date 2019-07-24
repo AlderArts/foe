@@ -1,6 +1,7 @@
 
 import { Event, Link, EncounterTable } from '../../event';
 import { MageTowerLoc } from './magetower';
+import { WorldTime } from '../../worldtime';
 
 
 let CastleLoc = {
@@ -28,26 +29,26 @@ CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.Parkland;});
 CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.JeannesTower;}, 1.0, function() { return Scenes.Global.MetJeanne(); });
 CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.TheDistrict;});
 CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.MeetingMajid;}, 1.0, function() { return !Scenes.Global.PortalsOpen() && !(rigard.flags["Nobles"] & Rigard.Nobles.MetMajid); });
-CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.GuardPatrol;}, 1.0, function() { return !world.time.IsDay(); });
+CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.GuardPatrol;}, 1.0, function() { return !WorldTime().IsDay(); });
 CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.AlmsForThePoor;}, 1.0, function() { return !(rigard.flags["Nobles"] & Rigard.Nobles.Alms); });
 CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.Elodie;}, 1.0, function() {
 	return !Scenes.Global.PortalsOpen() &&
 		!(rigard.flags["Nobles"] & Rigard.Nobles.Elodie) &&
 		Scenes.Global.VisitedOutlaws() &&
-		world.time.IsDay() &&
+		WorldTime().IsDay() &&
 		vaughn.flags["Met"] < Vaughn.Met.OnTaskLockpicks;
 });
 CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.RoyalGetaway;});
 CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.MagicalJackal;}, 1.0, function() {
 	return asche.flags["Met"] >= Asche.Met.Met &&
-		!world.time.IsDay();
+		!WorldTime().IsDay();
 });
 CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.PalaceParade;}, 2.0, function() {
 	return terry.Recruited() &&
-		!world.time.IsDay() &&
+		!WorldTime().IsDay() &&
 		rigard.ParadeTimer.Expired();
 });
-CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.Buns;}, 1.0, function() { return world.time.IsDay(); });
+CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.Buns;}, 1.0, function() { return WorldTime().IsDay(); });
 
 CastleLoc.Grounds.onEntry = function() {
 	if(Math.random() < 0.2)
@@ -117,8 +118,8 @@ NobleScenes.Parkland = function() {
 	Text.Clear();
 	Text.Add("While wandering through the castle grounds, you spot a small park and decide to take a seat on one of the benches and take a quick break. Pleasantly tranquil, you can’t help but reflect on how the castle grounds are so considerably different from the rest of Rigard - the fact that there’s enough open space for a park is one thing, but for the grass to be carefully trimmed, the flowerbeds well-tended and the small pond pristine is unbelievable considering the hubbub of the city proper, let alone the slums beyond the walls. Truly a world within a world, to use the old saying.", parse);
 	Text.NL();
-	if(world.time.IsDay()) {
-		if(world.time.season == Season.Winter) {
+	if(WorldTime().IsDay()) {
+		if(WorldTime().season == Season.Winter) {
 			Text.Add("You take a moment to savor the warm sun that’s come out on this winter day, and let your eyes wander as you relax on the bench. A light covering of snow dusts the ground, most of it having been swept up into a large pile, perfect for children to play in. Despite the cold, though, the pond hasn’t frozen over, and there are more ducks about than ever before - perhaps drawn by the prospect of being fed.", parse);
 			Text.NL();
 			Text.Add("There aren’t as many people out here today owing to the season, but that’s all the better for you, isn’t it?", parse);

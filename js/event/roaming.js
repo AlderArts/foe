@@ -3,6 +3,7 @@ import { Party } from "../party";
 import { Encounter } from "../combat";
 import { GameState } from "../gamestate";
 import { Gender } from "../body/gender";
+import { WorldTime } from "../worldtime";
 
 let RoamingScenes = {};
 
@@ -27,7 +28,7 @@ RoamingScenes.FindSomeCoins = function() {
 	var coin = Math.floor(5 + Math.random() * 20);
 	
 	var parse = {
-		year    : Math.floor(world.time.year - (40 + Math.random() * 20)),
+		year    : Math.floor(WorldTime().year - (40 + Math.random() * 20)),
 		rhisher : Math.random() < 0.5 ? "his" : "her",
 		coin    : coin
 	};
@@ -338,7 +339,7 @@ RoamingScenes.Bandits = function() {
 	Text.Add("You’re not sure why, but it seems that cultivation has been abandoned in this area. A little further, at the top of a small incline, you spot a derelict farmhouse, confirming your guess. Its roof is tilted at an odd angle, and where glass windows must have once been, empty holes gape onto its interior.", parse);
 	Text.NL();
 	Text.Add("To your surprise, ", parse);
-	if(world.time.hour >= 8 && world.time.hour < 20)
+	if(WorldTime().hour >= 8 && WorldTime().hour < 20)
 		Text.Add("you notice an orange flicker on the open window shutter.", parse);
 	else
 		Text.Add("a warm orange glow pours out the windows.", parse);
@@ -661,14 +662,14 @@ RoamingScenes.BanditsWin = function() {
 						Text.NL();
 						Text.Add("You carefully explore the house, but there’s nothing. You tap your knuckles along the walls, listening for hollows. Nothing. You walk around the farm outside, looking for freshly dug earth. Still nothing! Well, actually, a few sheep and hens, but is that really all they managed to steal? What a disappointment.", parse);
 						Text.NL();
-						if(world.time.hour < 6 || world.time.hour >= 20)
+						if(WorldTime().hour < 6 || WorldTime().hour >= 20)
 							Text.Add("You wonder if you’ve missed something in the dark, but no, the light should have been enough for your investigation. ", parse);
 						Text.Add("Frustrated, you curse out the bandits for incompetence and content yourself with gathering up your little pile of loot from the table. That much will have to do.", parse);
 					}, 1.0, function() { return true; });
 					scenes.AddEnc(function() {
 						Text.Add("You shake your captives, demanding information, but they insist they haven’t hidden anything. A quaver of uncertainty in the responses, and eyes impulsively darting toward a window tip you off to the deceit, however.", parse);
 						Text.NL();
-						if(world.time.hour < 6 || world.time.hour >= 20)
+						if(WorldTime().hour < 6 || WorldTime().hour >= 20)
 							Text.Add("Grabbing the bandits’ oil lantern and checking", parse);
 						else
 							Text.Add("Checking", parse);
@@ -699,7 +700,7 @@ RoamingScenes.BanditsWin = function() {
 					Text.Clear();
 					if(fucked || looted) {
 						Text.Add("Your main tasks complete, you check on the stolen livestock around the farm, making sure all the animals ", parse);
-						if(world.time.hour >= 8 && world.time.hour < 20)
+						if(WorldTime().hour >= 8 && WorldTime().hour < 20)
 							Text.Add("are free to roam and graze.", parse);
 						else
 							Text.Add("will be free to roam and graze in the morning.", parse);

@@ -4,6 +4,7 @@ import { TF } from '../../tf';
 import { AppendageType } from '../../body/appendage';
 import { Color } from '../../body/color';
 import { Time } from '../../time';
+import { WorldTime } from '../../worldtime';
 
 let IslaScenes = {};
 
@@ -135,7 +136,7 @@ IslaScenes.Introduction = function() {
 	Text.NL();
 	Text.Add("The mountain trail is as treacherous as you remember it being, but you manage to struggle up the steep slope with but a few minor scrapes from a thorny bush. At last, the ground levels out, and you’re greeted with the sight of the spring plateau once again. Yeah, it’s definitely more peaceful now that you’re not under pressure to get a job done or stay hidden… and neither is the husky trio anywhere to be seen.", parse);
 	Text.NL();
-	parse["dt"] = world.time.LightStr("warm sunlight", "cool moonlight");
+	parse["dt"] = WorldTime().LightStr("warm sunlight", "cool moonlight");
 	Text.Add("Seems like you have the whole place to yourself, then! Bathed in [dt], you take a good look around the spring plateau’s flat, wide expanse - there really aren’t many places for anything to hide, save the tall grass, and it really does lend a sense of safety to the place in that you’ll be able to see anything or anyone coming at you from quite some distance.", parse);
 	Text.NL();
 	Text.Add("Something near the west end of the plateau catches your eye, and you wander over to take a closer look. Surprisingly, there’re signs of life to be had - a simple shelter stands over a cave mouth, wood tied together with twine, a fire pit dug out in front, the ashes gathered at its bottom still not more than a couple of days old at most. Yeah, someone lives here, but it looks like he or she isn’t in at the moment…", parse);
@@ -776,7 +777,7 @@ IslaScenes.TalkPrompt = function() {
 					Text.NL();
 					Text.Add("<i>“Hah, don’t think I don’t know that you’ll be getting something out of this,”</i> Isla replies, wrinkling that tiny black button-nose of hers. <i>“Not that I mind, I suppose. Come along, then - should get started soon. Still remember how it felt the last time…”</i>.", parse);
 					Text.NL();
-					parse["day"] = world.time.LightStr("sunshine", "moonlight");
+					parse["day"] = WorldTime().LightStr("sunshine", "moonlight");
 					parse["skin"] = player.SkinDesc();
 					Text.Add("Ha, yeah. Together, the two of you step out into the [day] and make a beeline for the spring, its aura of warmth hitting your [skin] from quite the distance. Without hesitation, Isla sets aside her spear and quiver, setting them down on a nearby boulder, then makes a show of pulling off her loincloth. Flexible sable thumbs slide into the string waistband of her loincloth, and a gentle tug has her sliding the garment over her ample hips and down her legs. Isla doesn’t say anything, but makes sure you’re watching as she sends away her loincloth with a lazy kick and takes a step toward the spring. Although the body-paint patterns are identical to the ones she’d been wearing on her once-girlish figure, the way they interact with her now more ample physique are much more pleasing to the eye.", parse);
 					Text.NL();
@@ -1368,7 +1369,7 @@ IslaScenes.Sex.Repeat = function() {
 	var stage = preg ? womb.progress : 0;
 	
 	Text.Clear();
-	if(world.time.hour >= 8 && world.time.hour < 17) {
+	if(WorldTime().hour >= 8 && WorldTime().hour < 17) {
 		if(stage >= 0.75) {
 			Text.Add("Isla looks away, rubbing her pregnant midsection. <i>“You sure ‘bout this? Even with me looking as I am?”</i>", parse);
 			Text.NL();

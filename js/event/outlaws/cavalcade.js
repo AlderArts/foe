@@ -1,10 +1,12 @@
+import { WorldTime } from "../../worldtime";
+
 let OCavalcadeScenes = {};
 
 OCavalcadeScenes.Bet = function() {
 	return 10; //TODO
 }
 OCavalcadeScenes.Enabled = function() {
-	return world.time.hour < 4 || world.time.hour >= 14;
+	return WorldTime().hour < 4 || WorldTime().hour >= 14;
 }
 
 OCavalcadeScenes.PrepRandomCoinGame = function() {

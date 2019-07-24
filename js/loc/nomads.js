@@ -12,6 +12,7 @@ import { EstevanScenes } from '../event/nomads/estevan';
 import { MagnusScenes } from '../event/nomads/magnus';
 import { RosalinScenes } from '../event/nomads/rosalin';
 import { PatchworkScenes } from '../event/nomads/patchwork';
+import { WorldTime } from '../worldtime';
 
 //
 // Nomads
@@ -33,8 +34,8 @@ NomadsLoc.Tent.SaveSpot = "NomadsTent";
 NomadsLoc.Tent.safe = function() { return true; };
 NomadsLoc.Tent.description = function() {
 	var light;
-	if     (world.time.hour >= 6 && world.time.hour < 19) light = "sunlight";
-	else if(world.time.hour >= 19 || world.time.hour < 2) light = "firelight";
+	if     (WorldTime().hour >= 6 && WorldTime().hour < 19) light = "sunlight";
+	else if(WorldTime().hour >= 19 || WorldTime().hour < 2) light = "firelight";
 	else light = "moonlight";
 	
 	Text.Add("The interior of the tent is dim, with little of the [light] reaching inside. Various pots, pans and other cooking utensils are packed away in an open wooden chest, should you want to prepare some food. There is little actual furniture besides that; a few rugs rolled out to protect bare feet and a set of bed rolls are free for you to use.", {light: light});
@@ -45,8 +46,8 @@ NomadsLoc.Tent.links.push(new Link(
 	"Outside", true, true,
 	function() {
 		var light;
-		if     (world.time.hour >= 6 && world.time.hour < 19) light = "sunlight";
-		else if(world.time.hour >= 19 || world.time.hour < 2) light = "firelight";
+		if     (WorldTime().hour >= 6 && WorldTime().hour < 19) light = "sunlight";
+		else if(WorldTime().hour >= 19 || WorldTime().hour < 2) light = "firelight";
 		else light = "moonlight";
 		
 		Text.Add("Outside, the [light] illuminates several other tents that are similar to the one you are in now. ", {light: light});
@@ -98,8 +99,8 @@ NomadsLoc.Tent.links.push(new Link(
 NomadsLoc.Fireplace.onEntry = function() {
 	if(!(gameCache.flags["HW"] & Halloween.State.Intro) &&
 		(GetDEBUG() || Halloween.IsSeason()) &&
-		(world.time.hour >= 8) &&
-		(world.time.hour < 22))
+		(WorldTime().hour >= 8) &&
+		(WorldTime().hour < 22))
 		HalloweenScenes.PieIntro();
 	else
 		PrintDefaultOptions();
@@ -108,9 +109,9 @@ NomadsLoc.Fireplace.onEntry = function() {
 NomadsLoc.Fireplace.description = function() {
 	Text.Add("The nomad camp is currently set up in the middle of a wide grassland spreading out in all directions. [TreeFar] In the middle of the gathering of disparate tents that make up the nomad camp - about twenty in total - is a large fire pit.", {TreeFar: world.TreeFarDesc()});
 	Text.NL();
-	if(world.time.hour >= 7 && world.time.hour < 19)
+	if(WorldTime().hour >= 7 && WorldTime().hour < 19)
 		Text.Add("Currently it is unlit. Not many people are around, most likely seeing to their daily chores.");
-	else if(world.time.hour >= 19 || world.time.hour < 2)
+	else if(WorldTime().hour >= 19 || WorldTime().hour < 2)
 		Text.Add("A roaring fire reaches toward the dark skies, sparks swirling around in the breeze. Most of the adult population in the camp has gathered by the fireplace for the night's festivities.");
 	else
 		Text.Add("The smoldering ashes from last night's fire still glow faintly. Most of the camp is sleeping at the current hour.");
@@ -153,9 +154,9 @@ NomadsLoc.Fireplace.links.push(new Link(
 ));
 
 NomadsLoc.Fireplace.events.push(new Link(
-	"Chief", function() { return (world.time.hour >= 8 && world.time.hour < 22); }, true,
+	"Chief", function() { return (WorldTime().hour >= 8 && WorldTime().hour < 22); }, true,
 	function() {
-		if(!(world.time.hour >= 8 && world.time.hour < 22)) return;
+		if(!(WorldTime().hour >= 8 && WorldTime().hour < 22)) return;
 		ChiefScenes.Desc();
 	},
 	ChiefScenes.Interact
@@ -180,9 +181,9 @@ NomadsLoc.Fireplace.events.push(new Link(
 NomadsLoc.Fireplace.events.push(new Link(
 	function() {
 		return magnus.flags["Met"] == 0 ? "Scholar" : "Magnus";
-	}, function() { return (world.time.hour >= 8 && world.time.hour < 22); }, true,
+	}, function() { return (WorldTime().hour >= 8 && WorldTime().hour < 22); }, true,
 	function() {
-		if(!(world.time.hour >= 8 && world.time.hour < 22)) return;
+		if(!(WorldTime().hour >= 8 && WorldTime().hour < 22)) return;
 		MagnusScenes.Desc();
 	},
 	MagnusScenes.Interact
@@ -199,9 +200,9 @@ NomadsLoc.Fireplace.events.push(new Link(
 	function() { return rosalin.flags["Met"] == 0 ? "Approach the catgirl alchemist." : "Talk with Rosalin the alchemist."; } */
 ));
 NomadsLoc.Fireplace.events.push(new Link(
-	"Patchwork", function() { return (world.time.hour >= 8 && world.time.hour < 24); }, true,
+	"Patchwork", function() { return (WorldTime().hour >= 8 && WorldTime().hour < 24); }, true,
 	function() {
-		if(!(world.time.hour >= 8 && world.time.hour < 24)) return;
+		if(!(WorldTime().hour >= 8 && WorldTime().hour < 24)) return;
 		PatchworkScenes.Desc();
 	},
 	PatchworkScenes.Interact
@@ -225,7 +226,7 @@ NomadsLoc.Fireplace.events.push(new Link(
 	"Pumpkin Pie", function() {
 		if(!(gameCache.flags["HW"] & Halloween.State.Intro)) return false;
 		// Correct time of day
-		if((world.time.hour < 17) || (world.time.hour >= 22)) return false;
+		if((WorldTime().hour < 17) || (WorldTime().hour >= 22)) return false;
 		
 		return Halloween.IsSeason();
 	}, true,

@@ -12,6 +12,7 @@ import { Race } from '../../body/race';
 import { AppendageType } from '../../body/appendage';
 import { Color } from '../../body/color';
 import { TF } from '../../tf';
+import { WorldTime } from '../../worldtime';
 
 let LagonScenes = {
 	Defeated : LagonDScenes,
@@ -92,7 +93,7 @@ Lagon.prototype.IsAtLocation = function(location) {
 		else return false;
 	}
 	else
-	//if(world.time.hour >= 9 && world.time.hour < 20)
+	//if(WorldTime().hour >= 9 && WorldTime().hour < 20)
 		return (location == world.loc.Burrows.Throne);
 	/*else
 		return (location == world.loc.Burrows.Pit);*/

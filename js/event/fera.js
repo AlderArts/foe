@@ -11,6 +11,7 @@ import { TF } from '../tf';
 import { AppendageType } from '../body/appendage';
 import { Color } from '../body/color';
 import { Time } from '../time';
+import { WorldTime } from '../worldtime';
 
 let FeraScenes = {};
 
@@ -154,7 +155,7 @@ FeraScenes.Interact = function() {
 	options.push({ nameStr : "Nexelle",
 		func : function() {
 			// Set timer
-			fera.nexelleTimer = new Time(0, 0, 0, 24 - world.time.hour);
+			fera.nexelleTimer = new Time(0, 0, 0, 24 - WorldTime().hour);
 			
 			Text.Clear();
 			Text.Add("You ask the cute catgirl about her employer.", parse);
@@ -249,7 +250,7 @@ FeraScenes.Interact = function() {
 						fera.relation.DecreaseStat(-100,5);
 						fera.flags["Mom"] = 3;
 						// Set timer
-						fera.timeout = new Time(0, 0, 0, 24 - world.time.hour);
+						fera.timeout = new Time(0, 0, 0, 24 - WorldTime().hour);
 						
 						Gui.NextPrompt();
 					}, enabled : true,
@@ -303,7 +304,7 @@ FeraScenes.Interact = function() {
 			Gui.SetButtonsFromList(options);
 			
 			// Set timer
-			fera.shopTimer = new Time(0, 0, 0, 24 - world.time.hour);
+			fera.shopTimer = new Time(0, 0, 0, 24 - WorldTime().hour);
 		}, enabled : fera.shopTimer.Expired(),
 		tooltip : "Ask the cute catgirl about Silken Delights."
 	});
@@ -343,7 +344,7 @@ FeraScenes.Interact = function() {
 			Gui.SetButtonsFromList(options);
 			
 			// Set timer
-			fera.cityTimer = new Time(0, 0, 0, 24 - world.time.hour);
+			fera.cityTimer = new Time(0, 0, 0, 24 - WorldTime().hour);
 		}, enabled : fera.cityTimer.Expired(),
 		tooltip : "Ask the cute catgirl about Rigard."
 	});
@@ -391,7 +392,7 @@ FeraScenes.TouchPrompt = function() {
 				Text.Add("Fera quickly backs away as you try to hold her, staring at you angrily.", parse);
 				fera.relation.DecreaseStat(-100, 3);
 				// Set timer
-				fera.timeout = new Time(0, 0, 0, 24 - world.time.hour);
+				fera.timeout = new Time(0, 0, 0, 24 - WorldTime().hour);
 				Gui.NextPrompt();
 			}
 			Text.Flush();
@@ -407,7 +408,7 @@ FeraScenes.TouchPrompt = function() {
 				Text.Add("Taking Fera's hand, you lead her behind a large rack of clothes and have her turn around. Pulling down her dress, you pop out her [fbreasts]. You cup one of her mounds in each hand and proceed to massage them from behind. Fera purrs and moans as you squeeze her breasts. Shifting your [hand]s up a bit, you rub her [fnips] with your fingers.", parse);
 				Text.NL();
 				var noble = false;
-				if(Math.random() < 0.25 && (world.time.hour >= 13 && world.time.hour < 17)) {
+				if(Math.random() < 0.25 && (WorldTime().hour >= 13 && WorldTime().hour < 17)) {
 					noble = true;
 					Text.Add("A young noblewoman walks around the rack you are hiding behind and sees what you two are doing. She gasps quietly and quickly walks back the way she came. Before she gets very far, however, you hear her footsteps stop, and spot her head barely poking around the corner. Clearly, she wants to watch the rest and you have no intention of disappointing her.", parse);
 					Text.NL();
@@ -434,7 +435,7 @@ FeraScenes.TouchPrompt = function() {
 				Text.Add("You lead Fera behind one of the large clothing racks, hiding the two of you from view. The cute catgirl lets out a quiet gasp and she blushes when you grab hold of her [fbreasts] and start to play with them through her clothes. She looks up at you with tears in her big blue eyes and a frightened face. Feeling a little guilty, you let go of her breasts and Fera runs off without saying a word.", parse);
 				Text.Flush();
 				// Set timer
-				fera.fondleTimer = new Time(0, 0, 0, 24 - world.time.hour);
+				fera.fondleTimer = new Time(0, 0, 0, 24 - WorldTime().hour);
 				player.AddLustFraction(0.1);
 				Gui.NextPrompt();
 			}
@@ -443,7 +444,7 @@ FeraScenes.TouchPrompt = function() {
 				Text.Flush();
 				fera.relation.DecreaseStat(-100, 3);
 				// Set timer
-				fera.timeout = new Time(0, 0, 0, 24 - world.time.hour);
+				fera.timeout = new Time(0, 0, 0, 24 - WorldTime().hour);
 				Gui.NextPrompt();
 			}
 			world.TimeStep({minute: 10});

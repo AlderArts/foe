@@ -4,6 +4,7 @@
 import { Entity } from '../../entity';
 import { Time } from '../../time';
 import { IngredientItems } from '../../items/ingredients';
+import { WorldTime } from '../../worldtime';
 
 let AquiliusScenes = {};
 
@@ -93,7 +94,7 @@ Aquilius.prototype.Update = function(step) {
 Aquilius.prototype.IsAtLocation = function(location) {
 	location = location || party.location;
 	if(location == world.loc.Outlaws.Infirmary)
-		return (world.time.hour >= 7 && world.time.hour < 22);
+		return (WorldTime().hour >= 7 && WorldTime().hour < 22);
 	return false;
 }
 
@@ -267,7 +268,7 @@ AquiliusScenes.Approach = function() {
 		Text.Add("Pushing your way through the rows of cots and their occupants, you approach the surgeon. ", parse);
 		var scenes = new EncounterTable();
 		
-		var day = world.time.hour < 17;
+		var day = WorldTime().hour < 17;
 		
 		if(day) {
 			scenes.AddEnc(function() {
@@ -342,7 +343,7 @@ AquiliusScenes.Prompt = function() {
 		});
 	}
 	// DAYTIME
-	if(world.time.hour < 17) {
+	if(WorldTime().hour < 17) {
 		//Player may only help out once a day. Ish.
 		options.push({ nameStr : "Help out",
 			tooltip : "Help out at the infirmary.",
@@ -379,7 +380,7 @@ AquiliusScenes.Prompt = function() {
 		*/
 	}
 	Gui.SetButtonsFromList(options, true, function() {
-		if(world.time.hour < 17) {
+		if(WorldTime().hour < 17) {
 			PrintDefaultOptions();
 			return;
 		}
@@ -845,7 +846,7 @@ AquiliusScenes.Smoke = function() {
 	Text.Add("<i>“Oh, I’ll be turning in soon. Although knowing my luck, chances are that some fool will lop off his or her own arm in the middle of the night and come crying to me to have it sewn back on. Such are the vagaries of life, [playername] - I’ve grown used to them.”</i>", parse);
 	Text.Flush();
 	
-	if(world.time.hour < 22)
+	if(WorldTime().hour < 22)
 		world.StepToHour(22);
 	else
 		world.TimeStep({hour: 2});
@@ -865,7 +866,7 @@ AquiliusScenes.Appearance = function() {
 	Text.Add("Dressed in a thick vest of coarse cloth over a plain cotton shirt, he’s a man of simple tastes. Numerous other such vests lie stacked in a shelf near the back of the tent, which suggests that he doesn’t so much wash these as dispose of them when they get too stained. Even with the outlaws being squeezed for supplies most of the time, it stands to reason - he spends much of his time about the sick, after all. Tough cloth pants and leather boots complete the rest of his ensemble, well-worn and showing their age.", parse);
 	Text.NL();
 	Text.Add("Your eyes flicker over his, and he meets your gaze evenly, black pupils set in deep amber sclera. It’s a hard look, and he appears to be staring <i>through</i> you, giving you the impression that he’s not all quite there. With a shake of his head, he breaks the gaze and turns back to his duties. ", parse);
-	if(world.time.hour < 17)
+	if(WorldTime().hour < 17)
 		Text.Add("The ornate pipe so beloved to him is in its case and wedged in the breast pocket of his shirt, a bulge on his vest betraying its presence. Within easy reach should he need a quick smoke break, a faint scent of aromatic smoke lingers about it, discernable even through the case.", parse);
 	else
 		Text.Add("Aquilius’ precious pipe is firmly clenched in his beak, a thin wisp of aromatic smoke rising from the bowl as he takes drags from it, the eagle-morph sighing in satisfaction each time he inhales.", parse);
@@ -985,7 +986,7 @@ AquiliusScenes.PickHerbs = function() {
 	
 	Text.Clear();
 	Text.Add("You set off on your flower hunt, eyes peeled for anything that might interest Aquilius. Happily, your ranger’s training in the lay of the land and its environs serves you well, your sharp gaze roaming from stand to stand and patch to patch as you wander off the beaten trails of the forest in search of the herbs Aquilius needs. ", parse);
-	if(world.time.IsDay())
+	if(WorldTime().IsDay())
 		Text.Add("Shafts of sunlight pierce through the forest’s thick canopy, lighting your way as you pick your way over gnarled roots and thick undergrowth, wandering as deep as you dare without running the risk of getting lost.", parse);
 	else
 		Text.Add("Shaded during the day, the forest is pitch-black at night. There’s practically no natural light to be had, and even with your ranger’s training the fear of getting lost amidst the trees lurks in the back of your mind, ready to spring out at you at any moment.", parse);

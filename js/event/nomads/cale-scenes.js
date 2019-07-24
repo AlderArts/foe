@@ -3,6 +3,7 @@ import { GetDEBUG } from '../../../app';
 import { Gender } from '../../body/gender';
 import { CaleSexScenes } from './cale-sex';
 import { Cale } from './cale';
+import { WorldTime } from '../../worldtime';
 
 let CaleScenes = {
     Sex : CaleSexScenes,
@@ -472,7 +473,7 @@ CaleScenes.Shop = function() {
 		return false;
 	}
 	
-	var timestamp = Math.floor(world.time.ToDays());
+	var timestamp = Math.floor(WorldTime().ToDays());
 	if(cale.flags["shop"] < timestamp || cale.shop.inventory.length == 0) {
 		// Randomize inventory
 		cale.shop.inventory = [];

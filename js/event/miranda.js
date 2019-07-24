@@ -10,6 +10,7 @@ import { Images } from '../assets';
 import { Items } from '../items';
 import { Color } from '../body/color';
 import { Race } from '../body/race';
+import { WorldTime } from '../worldtime';
 
 function Miranda(storage) {
 	Entity.call(this);
@@ -228,16 +229,16 @@ Miranda.prototype.IsAtLocation = function(location) {
 	if(party.InParty(miranda)) return false;
 	if(!miranda.snitchTimer.Expired()) return false;
 	location = location || party.location;
-	if(world.time.hour >= 7 && world.time.hour < 19) {
+	if(WorldTime().hour >= 7 && WorldTime().hour < 19) {
 		//Work
-		if(world.time.day % 3 == 0)
+		if(WorldTime().day % 3 == 0)
 			return (location == world.loc.Rigard.Barracks.common);
-		else if(world.time.day % 3 == 1)
+		else if(WorldTime().day % 3 == 1)
 			return (location == world.loc.Plains.Gate) || (location == world.loc.Rigard.Gate);
 		else
 			return (location == world.loc.Rigard.Slums.gate);
 	}
-	else if(world.time.hour >= 19 || world.time.hour < 2)
+	else if(WorldTime().hour >= 19 || WorldTime().hour < 2)
 		return (location == world.loc.Rigard.Tavern.common);
 	else
 		return (location == world.loc.Rigard.Residential.miranda);
@@ -247,7 +248,7 @@ Miranda.prototype.OnPatrol = function() {
 	if(party.InParty(this))
 		return false;
 	else
-		return (world.time.hour >= 7 && world.time.hour < 17);
+		return (WorldTime().hour >= 7 && WorldTime().hour < 17);
 }
 
 Miranda.prototype.FuckedTerry = function() {

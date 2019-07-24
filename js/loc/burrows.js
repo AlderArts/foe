@@ -10,6 +10,7 @@ import { VenaScenes } from '../event/burrows/vena';
 import { OpheliaScenes } from '../event/burrows/ophelia';
 import { LagonScenes } from '../event/burrows/lagon';
 import { Gender } from '../body/gender';
+import { WorldTime } from '../worldtime';
 
 let world = null;
 
@@ -142,7 +143,7 @@ BurrowsLoc.Entrance.description = function() {
 	var scenes = new EncounterTable();
 	scenes.AddEnc(function() {
 		Text.Add("There is a curious group of rabbits gathered a short distance from the main tunnel. They are carrying what looks like makeshift farming tools, poking at a patch of ground haphazardly. It looks like they are trying to plant carrots.", parse);
-		if(world.time.season == Season.Winter) {
+		if(WorldTime().season == Season.Winter) {
 			Text.NL();
 			Text.Add("You consider telling them that the snow will probably complicate things, but they seem to be having fun.", parse);
 		}
@@ -312,7 +313,7 @@ BurrowsLoc.Pit.description = function() {
 	Text.Add("The Pit is probably the largest cavern in the lagomorph colony, a massive breeding chamber filled with the never-ending grunts and moans of the giant orgy. Several hundred rabbits have joined in the party, with those too tired to go on continually being replaced by new arrivals. The floor tilts toward the center of the chamber, the narrow open pathways sticky with cum.", parse);
 	Text.NL();
 	if(burrows.LagonPit()) {
-		if(world.time.hour >= 2 && world.time.hour < 6)
+		if(WorldTime().hour >= 2 && WorldTime().hour < 6)
 			Text.Add("At the bottom of the pit, the former king of the lagomorphs is sleeping deeply, exhausted from perpetual sex. A dozen or so of his children are curled up against him, sharing the heat of their bodies with their father.", parse);
 		else
 			Text.Add("At the very bottom of the pit, in a knee-deep pool of sexual fluids, Lagon the former rabbit king is getting pounded by several of his willing breeders, not unlike how Vena once was.", parse);
@@ -320,7 +321,7 @@ BurrowsLoc.Pit.description = function() {
 	else if(burrows.VenaRestored())
 		Text.Add("The orgy still continues in Vena’s absence, though it’s just not the same without her.", parse);
 	else {
-		if(world.time.hour >= 2 && world.time.hour < 6)
+		if(WorldTime().hour >= 2 && WorldTime().hour < 6)
 			Text.Add("At the bottom of the pit, Vena is sleeping deeply, heavy with child. A dozen or so of her children are curled up against her, sharing the heat of their bodies with her.", parse);
 		else
 			Text.Add("At the very bottom of the pit, in a knee-deep pool of sexual fluids, Vena the rabbit matriarch is getting pounded by several of her willing breeders.", parse);
@@ -475,7 +476,7 @@ BurrowsScenes.Arrival = function(alpha) {
 	
 	burrows.flags["Access"] = Burrows.AccessFlags.Visited;
 	
-	BurrowsScenes.ArrivalTime = world.time.hour;
+	BurrowsScenes.ArrivalTime = WorldTime().hour;
 	
 	Text.Add("You pass through a crowd of curious onlookers, though many are too distracted to notice you, caught up in a shameless impromptu orgy which seems to have suddenly formed. Lithe hands reach up, touching your body as you walk by, voices tittering and whispering to each other. There is a single phrase they chant, growing louder and louder, until your progress is heralded by a multitude of piping voices shouting: <i>“The Pit! The Pit!”</i>", parse);
 	Text.NL();
@@ -814,10 +815,10 @@ BurrowsScenes.ArrivalLagonTalk = function() {
 			Text.NL();
 			Text.Add("<i>“Finally, I need <b>three samples of a special red algae</b> from the lake, close to the city. This last one should be relatively easy.”</i>", parse);
 			Text.NL();
-			if(world.time.hour >= 6 && world.time.hour < 19)
+			if(WorldTime().hour >= 6 && WorldTime().hour < 19)
 				Text.Add("As you listen to her instructions, you finally notice that the illumination of the tunnel has been growing gradually brighter. Finally, she stops just short of the exit, the light from the surface stinging your eyes.", parse);
 			else {
-				parse["time"] = (BurrowsScenes.ArrivalTime >= 6 && world.time.hour < 19) ? "completely failed to notice" : "almost forgotten";
+				parse["time"] = (BurrowsScenes.ArrivalTime >= 6 && WorldTime().hour < 19) ? "completely failed to notice" : "almost forgotten";
 				Text.Add("You walk along, listening to her instructions, and are somewhat surprised when she stops in front of a dark opening. Looking carefully, you realize that this must be the exit. It’s night outside - you had [time], with the faint but constant illumination in the Burrows.", parse);
 			}
 			Text.NL();

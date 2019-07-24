@@ -2,6 +2,7 @@
 import { Event, Link } from '../../event';
 import { TwinsScenes } from '../../event/royals/twins';
 import { TasksScenes } from '../../event/outlaws/vaughn-tasks';
+import { WorldTime } from '../../worldtime';
 
 let world = null;
 
@@ -36,8 +37,8 @@ RigardLB.RoomCost = function() {
 }
 
 RigardLB.Busy = function() {
-	if(world.time.hour >= 17) return RigardLB.BusyState.busy;
-	else if(world.time.hour >= 7 || world.time.hour < 1) return RigardLB.BusyState.midbusy;
+	if(WorldTime().hour >= 17) return RigardLB.BusyState.busy;
+	else if(WorldTime().hour >= 7 || WorldTime().hour < 1) return RigardLB.BusyState.midbusy;
 	else return RigardLB.BusyState.notbusy;
 }
 
@@ -46,7 +47,7 @@ RigardLB.KnowsOrvin = function() {
 }
 
 RigardLB.OrvinIsInnkeeper = function() {
-	if(world.time.hour >= 8) return true;
+	if(WorldTime().hour >= 8) return true;
 	else return false;
 }
 
@@ -167,7 +168,7 @@ InnLoc.common.onEntry = function(preventClear, oldLocation) {
 		rigard.LB["Visit"] = 1;
 		
 		Text.Add("You head over to the Lady’s Blessing inn. It is a large, four-story building, with a clean, blue-and-orange facade, painted to suggest the rays of a setting sun over some body of water. Large windows of tinted blue glass face the street, ");
-		if(world.time.hour >= 6 && world.time.hour < 20)
+		if(WorldTime().hour >= 6 && WorldTime().hour < 20)
 			Text.Add("letting light flood in, lending the chamber a bright cheerful appearance.");
 		else
 			Text.Add("letting copious candlelight spill out into the dark street.");
@@ -493,7 +494,7 @@ LBScenes.OrvinPrompt = function() {
 				
 				Text.Add("You ask [ikname] what it would cost to stay here for a day.", parse);
 				Text.NL();
-				if(world.time.hour >= 9 && world.time.hour < 12)
+				if(WorldTime().hour >= 9 && WorldTime().hour < 12)
 					Text.Add("<i>“Sorry, our staff are cleaning the rooms right now. We start letting rooms at noon, and let them for the full day and night until noon of the following day.", parse);
 				else
 					Text.Add("<i>“We let rooms until noon of the following day.", parse);
@@ -508,7 +509,7 @@ LBScenes.OrvinPrompt = function() {
 				}
 				Text.Flush();
 				
-				if(world.time.hour >= 9 && world.time.hour < 12)
+				if(WorldTime().hour >= 9 && WorldTime().hour < 12)
 					Gui.NextPrompt();
 				else {
 					var options = new Array();
@@ -541,7 +542,7 @@ LBScenes.OrvinPrompt = function() {
 							Text.Add(" You set the dishes aside reluctantly, and get ready to go on your way.", parse);
 							Text.NL();
 							var date = new Time();
-							date.Inc(world.time);
+							date.Inc(WorldTime());
 							date.Inc({hour : 24});
 							parse["Date"] = date.DateStringShort();
 							parse["Time"] = date.hour + ":00";
@@ -574,7 +575,7 @@ LBScenes.OrvinPrompt = function() {
 		options.push({ nameStr : "Drink",
 			func : function() {
 				Text.Clear();
-				parse["todaytonight"] = world.time.hour >= 17 || world.time.hour < 4 ? "tonight" : "today";
+				parse["todaytonight"] = WorldTime().hour >= 17 || WorldTime().hour < 4 ? "tonight" : "today";
 				Text.Add("You ask [ikname] what drinks he has on offer [todaytonight].", parse);
 				Text.NL();
 				Text.Add("<i>“We have a lot in stock,”</i> he explains, <i>“but I try to only have a few things on tap at a time. Makes it neater. Let’s see, for today, it’s...”</i>", parse);
@@ -643,7 +644,7 @@ LBScenes.OrvinTalkPrompt = function(innPrompt) {
 			});
 			// Long
 			scenes.push(function() {
-				if(world.time.hour >= 17)
+				if(WorldTime().hour >= 17)
 					Text.Add("<i>“We’ve had music here ", parse);
 				else
 					Text.Add("<i>“We have music every day here in the evenings. Had it ", parse);
@@ -869,7 +870,7 @@ LBScenes.OrvinTalkPrompt = function(innPrompt) {
 			var scenes = [];
 			
 			// Long
-			if(world.time.season == Season.Spring) {
+			if(WorldTime().season == Season.Spring) {
 				scenes.push(function() {
 					Text.Add("<i>“The winds have always been strongest in the spring, but I heard that this year they are especially bad. The desert is crawling toward the plains, the dunes shifting, taking a little bit of ground every day.”</i>", parse);
 					Text.NL();
@@ -1474,11 +1475,11 @@ LBScenes.DrinksPrompt = function(innPrompt) {
 	});
 	*/
 	
-	var beer = beers[world.time.day % beers.length];
-	var wine = wines[world.time.day % wines.length];
-	var non  = nonalcoholic[world.time.day % nonalcoholic.length];
-	var ex1  = exotic[world.time.day % exotic.length];
-	var ex2  = exotic[(world.time.day+2) % exotic.length];
+	var beer = beers[WorldTime().day % beers.length];
+	var wine = wines[WorldTime().day % wines.length];
+	var non  = nonalcoholic[WorldTime().day % nonalcoholic.length];
+	var ex1  = exotic[WorldTime().day % exotic.length];
+	var ex2  = exotic[(WorldTime().day+2) % exotic.length];
 	
 	beer.text();
 	wine.text();
@@ -1765,7 +1766,7 @@ InnLoc.room.SleepFunc = function() {
 		Text.Add(" and let the softness envelop you. Feeling completely safe and comfortable in the wonderful bed, you quickly drift off to sleep.", parse);
 	}
 	else {
-		parse["light"] = world.time.LightStr("close the shutters", "blow out the candles");
+		parse["light"] = WorldTime().LightStr("close the shutters", "blow out the candles");
 		Text.Add("You clumsily strip off your clothes before collapsing onto the bed. Somehow, you manage to remember to down the glass of water on the nightstand before you pass out into a deep sleep, without even bothering to [light].", parse);
 	}
 	Text.Flush();

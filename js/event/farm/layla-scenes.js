@@ -1,6 +1,7 @@
 
 import { Layla } from './layla';
 import { Gender } from '../../body/gender';
+import { WorldTime } from '../../worldtime';
 
 let LaylaScenes = {};
 
@@ -473,7 +474,7 @@ LaylaScenes.FarmMeetingTrigger = function(approach) {
 	if(glade.flags["Visit"] < DryadGlade.Visit.DefeatedOrchid) return false; //TODO: change to after portals open?
 	if(layla.flags["Met"] == Layla.Met.NotMet) {
 		if(approach) {
-			if(world.time.hour >= 8 && world.time.hour < 18) {
+			if(WorldTime().hour >= 8 && WorldTime().hour < 18) {
 				LaylaScenes.FirstMeeting(true);
 				return true;
 			}
@@ -487,7 +488,7 @@ LaylaScenes.FarmMeetingTrigger = function(approach) {
 	else if(layla.flags["Met"] == Layla.Met.First) {
 		if(!layla.farmTimer.Expired()) return false;
 		if(approach) {
-			if(world.time.hour >= 8 && world.time.hour < 18) {
+			if(WorldTime().hour >= 8 && WorldTime().hour < 18) {
 				LaylaScenes.RepeatMeeting(true);
 				return true;
 			}
@@ -501,7 +502,7 @@ LaylaScenes.FarmMeetingTrigger = function(approach) {
 	else if(layla.flags["Met"] == Layla.Met.Won) {
 		if(!layla.farmTimer.Expired()) return false;
 		if(approach) {
-			if(world.time.hour >= 4 && world.time.hour < 22) {
+			if(WorldTime().hour >= 4 && WorldTime().hour < 22) {
 				LaylaScenes.SecondMeeting();
 				return true;
 			}

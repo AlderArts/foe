@@ -4,13 +4,14 @@
 //
 
 import { Event, Link } from '../../event';
+import { WorldTime } from '../../worldtime';
 
 let WeaponShopLoc = new Event("The Pale Flame");
 
 let WeaponShopScenes = {};
 
 WeaponShopScenes.IsOpen = function() {
-	return (world.time.hour >= 8 && world.time.hour < 17) && !rigard.UnderLockdown();
+	return (WorldTime().hour >= 8 && WorldTime().hour < 17) && !rigard.UnderLockdown();
 }
 
 WeaponShopLoc.description = function() {
@@ -22,7 +23,7 @@ WeaponShopLoc.onEntry = function() {
 	if(first) {
 		Scenes.Cassidy.First();
 	}
-	else if(!(cassidy.flags["Talk"] & Cassidy.Talk.MShop) && (cassidy.Relation() >= 10) && (world.time.hour < 12)) {
+	else if(!(cassidy.flags["Talk"] & Cassidy.Talk.MShop) && (cassidy.Relation() >= 10) && (WorldTime().hour < 12)) {
 		Scenes.Cassidy.ManagingShop();
 	}
 	else if((cassidy.flags["Met"] == Cassidy.Met.WentBack) && (cassidy.Relation() >= 30)) {

@@ -5,6 +5,8 @@
  */
 
 import { Event, Link } from '../event';
+import { WorldTime } from '../worldtime';
+import { Season } from '../time';
 
 let world = null;
 
@@ -152,7 +154,7 @@ DryadGladeScenes.First = function() {
 	
 	Text.Clear();
 	Text.Add("Quickening your step, you[comp] soldier on, making for the clearing. You enter a meadow filled with flowers of every shape and color, illuminated by an eerie glow. For a moment, your senses are almost overwhelmed as a thousand different smells enter your nostrils. ", parse);
-	if(world.time.season == Season.Winter)
+	if(WorldTime().season == Season.Winter)
 		Text.Add("It is somehow getting a lot warmer, and you can’t spy even a single flake of snow in the field of flowers. It’s as if supernatural forces watch over the glade, keeping it in a state of perpetual summer. ", parse);
 	Text.Add("At the center of the clearing - beyond a spring of clear water - there is a huge tree; easily the largest one you have ever seen - not counting the hulking giant above. The goal of your quest, the Mother Tree, awaits you.", parse);
 	Text.NL();

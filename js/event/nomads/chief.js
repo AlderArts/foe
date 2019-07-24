@@ -6,6 +6,7 @@
 import { Entity } from '../../entity';
 import { GetDEBUG } from '../../../app';
 import { Gender } from '../../body/gender';
+import { WorldTime } from '../../worldtime';
 
 let ChiefScenes = {};
 
@@ -211,7 +212,7 @@ ChiefScenes.TalkPrompt = function() {
 			scenes.push(function() {
 				Text.Add("<i>“Have you met our huntsman, Estevan?”</i>", parse);
 				Text.NL();
-				if(world.time.hour >= 14 || world.time.hour < 2) {
+				if(WorldTime().hour >= 14 || WorldTime().hour < 2) {
 					Text.Add("The old man points at a strange man tending to some equipment, sat near the fire pit. Estevan seems to be a satyr; curved goat horns peeking out from his curly black hair. His furred, digitigrade legs end in goat hooves, well suited for traversing rough terrain. The satyr has olive skin and some light facial hair.", parse);
 					Text.NL();
 					Text.Add("<i>“Estevan usually takes his hunt to the forest,”</i> the chief explains. <i>“You might run across him there. Just be careful to not get stuck in one of his traps. He is a pleasant enough fellow, but be wary of him when he's had too much drink.”</i>", parse);

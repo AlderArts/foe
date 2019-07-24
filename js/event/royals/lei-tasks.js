@@ -1,5 +1,6 @@
 import { Lei } from './lei';
 import { Gender } from "../../body/gender";
+import { WorldTime } from '../../worldtime';
 
 let TasksScenes = {};
 
@@ -120,7 +121,7 @@ TasksScenes.Escort.Start = function() {
 
 		lei.flags["Met"] = Lei.Met.OnTaskEscort;
 		
-		var step = world.time.TimeToHour(17);
+		var step = WorldTime().TimeToHour(17);
 		lei.taskTimer = new Time(0, 0, step.hour < 12 ? 1 : 0, step.hour, step.minute);
 	}
 	else {
@@ -151,7 +152,7 @@ TasksScenes.Escort.Estate = function() {
 	parse["comp"] = party.Num() == 2 ? party.Get(1).name : "your companions";
 	
 	Text.Clear();
-	parse["garden"] = world.time.season == Season.Winter ? "a garden, resting through the winter" : "a lush flower garden";
+	parse["garden"] = WorldTime().season == Season.Winter ? "a garden, resting through the winter" : "a lush flower garden";
 	Text.Add("You follow Lei’s directions and find yourself in front of a gated estate. Past the ornate entranceway lies [garden], and beyond that, a three-story building. Despite its relatively modest size, the building boasts lavish ornamentation, giving it an appearance of opulence that speaks of significant wealth.", parse);
 	Text.NL();
 	Text.Add("After a moment’s wait, a pure human footman approaches you from somewhere to the right of the gates. It seems there’s some watch post there you hadn’t noticed.", parse);
@@ -170,10 +171,10 @@ TasksScenes.Escort.Estate = function() {
 	}
 	Text.Add(" Please, follow me, and I will show you to the master.”</i> The man waits for your nod of acceptance before turning and leading you down the straight cobbled path to the house.", parse);
 	Text.NL();
-	if(world.time.season == Season.Spring || world.time.season == Season.Summer)
+	if(WorldTime().season == Season.Spring || WorldTime().season == Season.Summer)
 		Text.Add("On both sides, flowers bloom in a carpet of color, a few narrow walk paths snaking through the beds. Toward the sides of the compound, bushes of roses bloom pink and red. They must have a full-time gardener tending the plants.", parse);
 	else {
-		parse["season"] = world.time.season == Season.Winter ? "in the winter season" : "to the season of falling leaves";
+		parse["season"] = WorldTime().season == Season.Winter ? "in the winter season" : "to the season of falling leaves";
 		Text.Add("On both sides, a scattering of flowers still blooms, providing a sprinkling whites and violets [season]. You see some rose bushes toward the sides of the compound, but they stand merely green, the flowers resting, awaiting spring. To have flowers, even in this state, suggests the family likely retains a full time gardener to take care of the plants.", parse);
 	}
 	Text.NL();
@@ -663,7 +664,7 @@ TasksScenes.Escort.Debrief = function() {
 	Text.NL();
 	Text.Add("He inclines his head. <i>“I have received feedback from Ventor. Let’s talk somewhere more private.”</i> He stands, motioning for you to follow, and leads you up the flights of stairs to the Twins’ penthouse suite.", parse);
 	Text.NL();
-	parse["lt"] = world.time.LightStr("but well-lit room", "room, lighting several candles on the way in");
+	parse["lt"] = WorldTime().LightStr("but well-lit room", "room, lighting several candles on the way in");
 	Text.Add("Sounds of the royals having fun come from a room further along, but Lei instead takes a left from the entrance, leading you into a small [lt]. It seems like this was intended to be a small guest room - there’s a bed, a narrow desk with a single chair, and a wardrobe opposite it, but no other furniture.", parse);
 	if(party.Num() > 1)
 		Text.Add(" With you and Lei in, there’s not really any space for [comp], and [heshe] decide[notS] to wait in the lounge deeper in the suite.", parse);

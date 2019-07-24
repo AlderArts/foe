@@ -1,5 +1,6 @@
 import { Cveta } from './cveta';
 import { DateScenes } from './cveta-date';
+import { WorldTime } from '../../worldtime';
 
 let CvetaScenes = {
 	Dates : DateScenes,
@@ -1633,7 +1634,7 @@ CvetaScenes.FirstMeetingCont = function() {
 	var parse = {
 		
 	};
-	parse["SunlightMoonlight"] = world.time.LightStr("Sunlight", "Moonlight");
+	parse["SunlightMoonlight"] = WorldTime().LightStr("Sunlight", "Moonlight");
 	
 	Text.Add("<i>“And with that, I think this brings our introduction to an end. It has a pleasure, I assure you, despite the circumstances under which we have been acquainted,”</i> Cveta says, rising from the stool and making a sweeping gesture toward the tent flaps. <i>“Allow me to show you out.”</i>", parse);
 	Text.NL();
@@ -1661,7 +1662,7 @@ CvetaScenes.Performance = function() {
 		vagDesc : function() { return player.FirstVag().Short(); }
 	};
 	
-	var dawn = world.time.hour < 12;
+	var dawn = WorldTime().hour < 12;
 	
 	var scenes = new EncounterTable();
 	scenes.AddEnc(function() {

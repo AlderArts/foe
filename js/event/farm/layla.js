@@ -9,6 +9,7 @@ import { JobDesc, Jobs } from '../../job';
 import { Time } from '../../time';
 import { Images } from '../../assets';
 import { Color } from '../../body/color';
+import { WorldTime } from '../../worldtime';
 
 function Layla(storage) {
 	Entity.call(this);
@@ -138,7 +139,7 @@ Layla.prototype.Update = function(step) {
 Layla.prototype.IsAtLocation = function(location) {
 	location = location || party.location;
 	if(location == world.loc.Farm.Fields)
-		return (world.time.hour >= 7 && world.time.hour < 22);
+		return (WorldTime().hour >= 7 && WorldTime().hour < 22);
 	return false;
 }
 

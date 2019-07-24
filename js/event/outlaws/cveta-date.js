@@ -1,4 +1,5 @@
 import { Cveta } from './cveta';
+import { WorldTime } from '../../worldtime';
 
 let DateScenes = {};
 
@@ -14,7 +15,7 @@ DateScenes.Prompt = function() {
 		Text.Add(" You have some free time, and if it’s to be just the two of you, you could always ask [comp] to hang back for the rest of the day and wait for you in camp.", parse);
 	}
 	Text.NL();
-	if(world.time.hour >= 12) {
+	if(WorldTime().hour >= 12) {
 		Text.Add("<i>“Not an entirely unpleasant prospect, [playername], but you should have come to me sooner. It is getting a bit late for wandering around outside, and I do have my duties here in camp.”</i>", parse);
 		Text.NL();
 		Text.Add("When, then?", parse);

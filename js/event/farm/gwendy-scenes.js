@@ -1,6 +1,7 @@
 import { Gwendy } from './gwendy';
 import { Link } from '../../event';
 import { Gender } from '../../body/gender';
+import { WorldTime } from '../../worldtime';
 
 let GwendyScenes = {};
 
@@ -198,7 +199,7 @@ GwendyScenes.Talk = function(backfunc) {
 		options.push({ nameStr : "Market",
 			func : function() {
 				Text.Clear();
-				if(world.time.hour >= 7) {
+				if(WorldTime().hour >= 7) {
 					Text.Add("<i>“[playername], can we talk about this tomorrow morning? I’m busy right now, and just not in the mood to talk about the city, okay?”</i>", parse);
 					Text.Flush();
 					Gui.NextPrompt(function() {
@@ -1809,7 +1810,7 @@ GwendyScenes.ChallengeSexAnalToys = function(toy, hangout, first) {
 					world.TimeStep({hour: 1});
 				});
 
-			}, enabled : player.SubDom() >= 30 && (world.time.hour < 19 && world.time.hour >= 5),
+			}, enabled : player.SubDom() >= 30 && (WorldTime().hour < 19 && WorldTime().hour >= 5),
 			tooltip : "Have her work for a while like this."
 		});
 		options.push({ nameStr : "Take out",

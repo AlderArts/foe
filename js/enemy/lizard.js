@@ -7,6 +7,7 @@
 import { Entity } from '../entity';
 import { Cock } from '../body/cock';
 import { Gender } from '../body/gender';
+import { WorldTime } from '../worldtime';
 
 let LizardsScenes = {};
 
@@ -172,7 +173,7 @@ LizardsScenes.GroupEnc = function() {
 		};
 		parse = player.ParserTags(parse);
 
-		if(world.time.hour >= 6 && world.time.hour < 19) {
+		if(WorldTime().hour >= 6 && WorldTime().hour < 19) {
 			Text.Add("Walking through the broad expanse of the desert, the sun beating down on you from above, you pass through a series of immense dunes. They tower above you, almost creating a valley of sand that shields you from the harsh heat of day.", parse);
 		}
 		else {
@@ -186,7 +187,7 @@ LizardsScenes.GroupEnc = function() {
 			Text.Add(" You glance back to your party to make sure that no one is hurt or dehydrated. After checking that they're relatively okay, you all press on.", parse);
 		}
 		Text.NL();
-		if(world.time.hour >= 6 && world.time.hour < 19) {
+		if(WorldTime().hour >= 6 && WorldTime().hour < 19) {
 			Text.Add("As you near the end of the monolithic dunes, you see a [numQ] of shadows fall over you. Looking up toward the sun, you see [num] shapes. You shield your eyes with one hand to make them out...", parse);
 		}
 		else {

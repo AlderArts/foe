@@ -1,5 +1,6 @@
 
 import { Event, Link, EncounterTable } from '../../event';
+import { WorldTime } from '../../worldtime';
 
 let SlumsLoc = {
 	gate     : new Event("Peasants' Gate"),
@@ -12,7 +13,7 @@ let SlumsLoc = {
 SlumsLoc.gate.description = function() {
 	Text.Add("The slum of Rigard is a wretched cesspool of bustling activity at all times of the day. The sprawling ghetto spreads out along the riverfront, crawling along the walls of the city as if trying to get inside. Most houses you see are built of sturdy but cheap wood, intended to weather the cold winters but not designed for comfort or aesthetics.");
 	Text.NL();
-	Text.Add("The ‘streets’ are mostly mud[winter], battered every day by countless feet. The smell of the docks reach you even here, near the gates to the inner city.", {winter: world.time.season == Season.Winter ? ", a dirty slush at this time of year" : ""});
+	Text.Add("The ‘streets’ are mostly mud[winter], battered every day by countless feet. The smell of the docks reach you even here, near the gates to the inner city.", {winter: WorldTime().season == Season.Winter ? ", a dirty slush at this time of year" : ""});
 	Text.NL();
 	
 	if(miranda.IsAtLocation()) {
