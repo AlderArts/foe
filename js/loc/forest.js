@@ -4,7 +4,7 @@
  * 
  */
 
-import { Event, Link, EncounterTable } from '../event';
+import { Event, Link, EncounterTable, MoveToLocation } from '../event';
 import { GladeLoc } from './glade';
 import { MariaScenes } from '../event/outlaws/maria';
 import { GlobalScenes } from '../event/global';

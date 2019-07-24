@@ -12,6 +12,7 @@ import { AppendageType } from '../body/appendage';
 import { Color } from '../body/color';
 import { Time } from '../time';
 import { WorldTime } from '../worldtime';
+import { MoveToLocation } from '../event';
 
 let FeraScenes = {};
 

@@ -4,7 +4,7 @@
  * 
  */
 
-import { Event, Link } from '../event';
+import { Event, Link, MoveToLocation } from '../event';
 import { WorldTime } from '../worldtime';
 import { Season } from '../time';
 import { SetGameState, GameState } from '../gamestate';

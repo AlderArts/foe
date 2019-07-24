@@ -1,6 +1,8 @@
 
-import { Event, Link, EncounterTable } from '../../event';
+import { Event, Link, EncounterTable, MoveToLocation } from '../../event';
 import { WorldTime } from '../../worldtime';
+import { Text } from '../../text';
+import { Gui } from '../../gui';
 
 let SlumsLoc = {
 	gate     : new Event("Peasants' Gate"),
@@ -44,7 +46,7 @@ SlumsLoc.gate.onEntry = function() {
 	else if(Math.random() < 0.3)
 		Scenes.Rigard.Chatter2(true);
 	else
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 }
 
 SlumsLoc.gate.links.push(new Link(
@@ -73,7 +75,7 @@ SlumsLoc.gate.links.push(new Link(
 				Text.Add("One of the guards explains that you can’t get through if you don’t have a city issued visa. They don’t seem particularly interested in helping you getting one either.");
 			}
 			Text.Flush();
-			PrintDefaultOptions(true);
+			Gui.PrintDefaultOptions(true);
 		}
 	}
 ));

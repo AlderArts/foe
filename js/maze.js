@@ -2,7 +2,7 @@
  * Describes a maze location. A maze consists of multiple maze rooms
  */
 
-import { Event } from './event';
+import { Event, MoveToLocation } from './event';
 import { GetDEBUG } from '../app';
 import { Images } from './assets';
 import { Text } from './text';

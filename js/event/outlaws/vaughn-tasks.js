@@ -2,6 +2,7 @@
 import { GetDEBUG } from '../../../app';
 import { Vaughn } from './vaughn';
 import { WorldTime } from '../../worldtime';
+import { MoveToLocation } from '../../event';
 
 let TasksScenes = {};
 

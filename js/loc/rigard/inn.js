@@ -1,5 +1,5 @@
 
-import { Event, Link } from '../../event';
+import { Event, Link, MoveToLocation } from '../../event';
 import { TwinsScenes } from '../../event/royals/twins';
 import { TasksScenes } from '../../event/outlaws/vaughn-tasks';
 import { WorldTime } from '../../worldtime';

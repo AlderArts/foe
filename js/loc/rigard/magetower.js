@@ -1,6 +1,6 @@
 
 
-import { Event, Link } from '../../event';
+import { Event, Link, MoveToLocation } from '../../event';
 import { JeanneScenes } from '../../event/royals/jeanne';
 import { GolemScenes } from '../../event/royals/golem';
 

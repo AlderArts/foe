@@ -1,6 +1,7 @@
 
 import { GetDEBUG } from '../../../app';
 import { Gender } from '../../body/gender';
+import { MoveToLocation } from '../../event';
 
 let LagonDScenes = {};
 

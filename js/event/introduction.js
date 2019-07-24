@@ -4,7 +4,7 @@
  *
  */
 
-import { Event, Link } from '../event';
+import { Event, Link, MoveToLocation } from '../event';
 import { GameState, SetGameState } from '../gamestate';
 import { Gui } from '../gui';
 import { Gender } from '../body/gender';

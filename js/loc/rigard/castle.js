@@ -1,5 +1,5 @@
 
-import { Event, Link, EncounterTable } from '../../event';
+import { Event, Link, EncounterTable, MoveToLocation } from '../../event';
 import { MageTowerLoc } from './magetower';
 import { WorldTime } from '../../worldtime';
 

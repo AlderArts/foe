@@ -1,5 +1,7 @@
 
-import { Event, Link, EncounterTable } from '../../event';
+import { Event, Link, EncounterTable, MoveToLocation } from '../../event';
+import { Text } from '../../text';
+import { Gui } from '../../gui';
 
 let TavernLoc = {
 	common   : new Event("Maidens' Bane")

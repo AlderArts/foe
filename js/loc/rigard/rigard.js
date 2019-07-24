@@ -4,7 +4,7 @@
  *
  */
 
-import { EncounterTable } from '../../event';
+import { EncounterTable, MoveToLocation } from '../../event';
 import { BrothelLoc } from './brothel';
 import { InnLoc, LBScenes, RigardLB, InitLB } from './inn';
 import { Shop } from '../../shop';
@@ -27,6 +27,8 @@ import { Items } from '../../items';
 import { Time } from '../../time';
 import { Stat } from '../../stat';
 import { WorldTime } from '../../worldtime';
+import { Gui } from '../../gui';
+import { Text } from '../../text';
 
 let world = null;
 let Scenes = null;

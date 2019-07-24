@@ -4,7 +4,7 @@
  * 
  */
 
-import { Event, Link, EncounterTable } from '../event';
+import { Event, Link, EncounterTable, MoveToLocation } from '../event';
 import { Scenes } from '../scenes';
 import { WorldTime } from '../worldtime';
 

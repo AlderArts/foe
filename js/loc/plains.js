@@ -4,7 +4,7 @@
  * 
  */
 
-import { Event, Link, EncounterTable } from '../event';
+import { Event, Link, EncounterTable, MoveToLocation } from '../event';
 import { NomadsLoc } from './nomads';
 import { Scenes } from '../scenes';
 import { BurrowsLoc } from './burrows';

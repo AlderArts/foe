@@ -7,6 +7,7 @@ import { Encounter } from '../../combat';
 import { SetGameState, GameState } from '../../gamestate';
 import { Gui } from '../../gui';
 import { Text } from '../../text';
+import { MoveToLocation } from '../../event';
 
 let LaylaScenes = {};
 

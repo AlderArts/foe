@@ -1,5 +1,5 @@
 import { Miranda } from "./miranda";
-import { Link } from '../event';
+import { Link, MoveToLocation } from '../event';
 import { Gender } from '../body/gender';
 import { WorldTime } from "../worldtime";
 import { SetGameState, GameState } from "../gamestate";

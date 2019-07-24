@@ -1,5 +1,5 @@
 
-import { Event, Link, EncounterTable } from '../../event';
+import { Event, Link, EncounterTable, MoveToLocation } from '../../event';
 import { WorldTime } from '../../worldtime';
 
 let GateLoc = new Event("Main Gate");

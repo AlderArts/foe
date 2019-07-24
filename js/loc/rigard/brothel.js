@@ -1,5 +1,5 @@
 
-import { Event, Link } from '../../event';
+import { Event, Link, MoveToLocation } from '../../event';
 
 import { GryphonsScenes } from '../../event/brothel/gryphons';
 import { FireblossomScenes } from '../../event/brothel/fireblossom';

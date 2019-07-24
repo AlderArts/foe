@@ -4,7 +4,7 @@
  *
  */
 
-import { Event, Link, EncounterTable } from '../event';
+import { Event, Link, EncounterTable, MoveToLocation } from '../event';
 import { Gender } from '../body/gender';
 import { GwendyScenes } from '../event/farm/gwendy-scenes';
 import { LaylaScenes } from '../event/farm/layla-scenes';

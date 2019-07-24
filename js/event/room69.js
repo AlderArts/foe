@@ -5,6 +5,7 @@
  */
 import { Entity } from '../entity';
 import { GetDEBUG } from '../../app';
+import { MoveToLocation } from '../event';
 
 let Room69Scenes = {};
 

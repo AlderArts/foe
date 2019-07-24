@@ -1,11 +1,12 @@
 
-import { Event, Link, EncounterTable } from '../../event';
+import { Event, Link, EncounterTable, MoveToLocation } from '../../event';
 import { OddShopLoc } from './sexstore';
 import { ArmorShopLoc } from './armorshop';
 import { MagicShopLoc } from './magicshop';
 import { ClothShopLoc } from './clothstore';
 import { WeaponShopLoc } from './weaponshop';
 import { WorldTime } from '../../worldtime';
+import { Text } from '../../text';
 
 
 let ShopStreetScenes = {}

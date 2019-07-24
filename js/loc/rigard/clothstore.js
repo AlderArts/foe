@@ -1,5 +1,5 @@
 
-import { Event, Link } from '../../event';
+import { Event, Link, MoveToLocation } from '../../event';
 import { Gender } from '../../body/gender';
 import { WorldTime } from '../../worldtime';
 

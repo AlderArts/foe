@@ -15,6 +15,7 @@ import { Party } from '../../party';
 import { Encounter } from '../../combat';
 import { SetGameState, GameState } from '../../gamestate';
 import { Gui } from '../../gui';
+import { MoveToLocation } from '../../event';
 
 let GolemScenes = {};
 GolemScenes.State = {

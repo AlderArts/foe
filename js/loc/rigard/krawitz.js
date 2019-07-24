@@ -4,7 +4,7 @@
  * 
  */
 
-import { Event, Link, EncounterTable } from '../../event';
+import { Event, Link, EncounterTable, MoveToLocation } from '../../event';
 import { GetDEBUG } from '../../../app';
 import { Gender } from '../../body/gender';
 import { WorldTime } from '../../worldtime';

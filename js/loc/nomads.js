@@ -1,5 +1,5 @@
 
-import { Event, Link } from '../event';
+import { Event, Link, MoveToLocation } from '../event';
 import { Maze } from '../maze';
 import { GetDEBUG } from '../../app';
 import { Halloween, HalloweenScenes } from '../event/halloween';

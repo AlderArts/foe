@@ -3,8 +3,9 @@
 // Weapon Shop
 //
 
-import { Event, Link } from '../../event';
+import { Event, Link, MoveToLocation } from '../../event';
 import { WorldTime } from '../../worldtime';
+import { Text } from '../../text';
 
 let WeaponShopLoc = new Event("The Pale Flame");
 
