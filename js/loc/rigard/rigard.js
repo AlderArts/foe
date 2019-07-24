@@ -23,6 +23,9 @@ import { ClothShopScenes } from './clothstore';
 import { ArmorShopScenes } from './armorshop';
 import { Gender } from '../../body/gender';
 import { InitMageTower } from './magetower';
+import { Items } from '../../items';
+import { Time } from '../../time';
+import { Stat } from '../../stat';
 
 let world = null;
 let Scenes = null;

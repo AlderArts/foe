@@ -5,6 +5,8 @@
  */
 import { Entity } from '../../entity';
 import { GetDEBUG } from '../../../app';
+import { AlchemyItems } from '../../items/alchemy';
+import { Race } from '../../body/race';
 
 let JeanneScenes = {};
 
@@ -16,12 +18,12 @@ function Jeanne(storage) {
 	this.name = "Jeanne";
 	this.alchemyLevel = 10;
 	
-	this.recipes.push(Items.Homos);
-	this.recipes.push(Items.Estros);
-	this.recipes.push(Items.Testos);
-	this.recipes.push(Items.Gestarium);
-	this.recipes.push(Items.GestariumPlus);
-	this.recipes.push(Items.Virilium);
+	this.recipes.push(AlchemyItems.Homos);
+	this.recipes.push(AlchemyItems.Estros);
+	this.recipes.push(AlchemyItems.Testos);
+	this.recipes.push(AlchemyItems.Gestarium);
+	this.recipes.push(AlchemyItems.GestariumPlus);
+	this.recipes.push(AlchemyItems.Virilium);
 	
 	//this.avatar.combat = new Image();
 	

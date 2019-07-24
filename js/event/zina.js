@@ -4,6 +4,10 @@
  * 
  */
 import { Entity } from '../entity';
+import { AppendageType } from '../body/appendage';
+import { Race } from '../body/race';
+import { Color } from '../body/color';
+import { TF } from '../tf';
 
 let ZinaScenes = {};
 

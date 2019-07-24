@@ -4,6 +4,11 @@
  * 
  */
 import { Entity } from '../entity';
+import { Images } from '../assets';
+import { Race } from '../body/race';
+import { Color } from '../body/color';
+import { TF } from '../tf';
+import { AppendageType } from '../body/appendage';
 
 let UruScenes = {};
 

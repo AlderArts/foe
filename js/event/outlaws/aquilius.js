@@ -2,6 +2,8 @@
  * Aquilius, Outlaw Avian healer
  */
 import { Entity } from '../../entity';
+import { Time } from '../../time';
+import { IngredientItems } from '../../items/ingredients';
 
 let AquiliusScenes = {};
 
@@ -47,11 +49,11 @@ Aquilius.Herbs = {
 };
 Aquilius.ExtraHerbs = function() {
 	return [
-		Items.Lettuce,
-		Items.SnakeOil,
-		Items.FreshGrass,
-		Items.Foxglove,
-		Items.FruitSeed
+		IngredientItems.Lettuce,
+		IngredientItems.SnakeOil,
+		IngredientItems.FreshGrass,
+		IngredientItems.Foxglove,
+		IngredientItems.FruitSeed
 	];
 }
 

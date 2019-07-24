@@ -5,11 +5,14 @@
  */
 import { Entity } from '../../entity';
 import { GetDEBUG } from '../../../app';
+import { Race } from '../../body/race';
+import { TF } from '../../tf';
+import { AppendageType } from '../../body/appendage';
+import { Color } from '../../body/color';
 
 function Danie(storage) {
 	Entity.call(this);
 	this.ID = "danie";
-	
 	
 	// Character stats
 	this.name = "Danie";

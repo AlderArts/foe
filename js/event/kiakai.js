@@ -4,8 +4,13 @@
  * 
  */
 import { Entity } from '../entity';
-import { JobDesc } from '../job';
+import { JobDesc, Jobs } from '../job';
 import { Gender } from '../body/gender';
+import { Body } from '../body/body';
+import { Color } from '../body/color';
+import { Race } from '../body/race';
+import { Images } from '../assets';
+import { Items } from '../items';
 
 function Kiakai(storage) {
 	Entity.call(this);

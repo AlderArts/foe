@@ -6,6 +6,13 @@
 
 import { Entity } from '../../entity';
 import { Gender } from '../../body/gender';
+import { RaceScore, Race } from '../../body/race';
+import { AlchemyItems } from '../../items/alchemy';
+import { AlchemySpecial } from '../../items/alchemyspecial';
+import { Color } from '../../body/color';
+import { Body } from '../../body/body';
+import { TF } from '../../tf';
+import { AppendageType } from '../../body/appendage';
 
 let RosalinScenes = {};
 
@@ -19,19 +26,19 @@ function Rosalin(storage) {
 	this.name         = "Rosalin";
 	this.alchemyLevel = 3;
 
-	this.recipes.push(Items.Equinium);
-	this.recipes.push(Items.Leporine);
-	this.recipes.push(Items.Felinix);
-	this.recipes.push(Items.Lacertium);
-	this.recipes.push(Items.Nagazm);
-	this.recipes.push(Items.Bovia);
-	this.recipes.push(Items.Canis);
-	this.recipes.push(Items.Lobos);
-	this.recipes.push(Items.Vulpinix);
-	this.recipes.push(Items.Scorpius);
-	this.recipes.push(Items.Lepida);
-	this.recipes.push(Items.Avia);
-	this.recipes.push(Items.Ovis);
+	this.recipes.push(AlchemyItems.Equinium);
+	this.recipes.push(AlchemyItems.Leporine);
+	this.recipes.push(AlchemyItems.Felinix);
+	this.recipes.push(AlchemyItems.Lacertium);
+	this.recipes.push(AlchemySpecial.Nagazm);
+	this.recipes.push(AlchemyItems.Bovia);
+	this.recipes.push(AlchemyItems.Canis);
+	this.recipes.push(AlchemyItems.Lobos);
+	this.recipes.push(AlchemyItems.Vulpinix);
+	this.recipes.push(AlchemyItems.Scorpius);
+	this.recipes.push(AlchemyItems.Lepida);
+	this.recipes.push(AlchemyItems.Avia);
+	this.recipes.push(AlchemyItems.Ovis);
 
 	this.flags["PrefGender"]   = Gender.female;
 
@@ -95,7 +102,7 @@ Rosalin.prototype.FromStorage = function(storage) {
 	this.LoadPersonalityStats(storage);
 
 	if(this.flags["Anusol"] >= Rosalin.Anusol.Brewed)
-		this.AddAlchemy(Items.Anusol);
+		this.AddAlchemy(AlchemyItems.Anusol);
 }
 
 Rosalin.prototype.ToStorage = function() {

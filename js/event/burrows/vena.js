@@ -6,6 +6,10 @@
 
 import { Entity } from '../../entity';
 import { VenaRScenes } from './vena-restored';
+import { Race } from '../../body/race';
+import { TF } from '../../tf';
+import { AppendageType } from '../../body/appendage';
+import { Color } from '../../body/color';
 
 let VenaScenes = {
 	Restored : VenaRScenes,

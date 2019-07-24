@@ -7,6 +7,9 @@
 import { Entity } from '../entity';
 import { EncounterTable } from '../event';
 import { Gender } from '../body/gender';
+import { Images } from '../assets';
+import { Time } from '../time';
+import { Race } from '../body/race';
 
 let MomoScenes = {};
 

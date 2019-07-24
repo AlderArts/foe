@@ -7,6 +7,10 @@
 import { Entity } from '../entity';
 import { GetDEBUG } from '../../app';
 import { SexScenes, SparSexScenes } from './cassidy-sex';
+import { Race } from '../body/race';
+import { Time } from '../time';
+import { Items } from '../items';
+import { Shop } from '../shop';
 
 let CassidyScenes = {
 	Sex     : SexScenes,

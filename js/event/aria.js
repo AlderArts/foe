@@ -4,6 +4,7 @@
  * 
  */
 import { Entity } from '../entity';
+import { Color } from '../body/color';
 
 let AriaScenes = {};
 

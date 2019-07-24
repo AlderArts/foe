@@ -4,8 +4,12 @@
  * 
  */
 import { Entity } from '../entity';
-import { JobDesc } from '../job';
+import { JobDesc, Jobs } from '../job';
 import { Time } from '../time';
+import { Images } from '../assets';
+import { Items } from '../items';
+import { Color } from '../body/color';
+import { Race } from '../body/race';
 
 function Miranda(storage) {
 	Entity.call(this);

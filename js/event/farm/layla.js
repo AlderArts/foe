@@ -5,8 +5,10 @@
  */
 
 import { Entity } from '../../entity';
-import { JobDesc } from '../../job';
+import { JobDesc, Jobs } from '../../job';
 import { Time } from '../../time';
+import { Images } from '../../assets';
+import { Color } from '../../body/color';
 
 function Layla(storage) {
 	Entity.call(this);

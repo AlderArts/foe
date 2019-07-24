@@ -4,6 +4,9 @@
  * 
  */
 import { Entity } from '../../entity';
+import { Color } from '../../body/color';
+import { Race } from '../../body/race';
+import { Time } from '../../time';
 
 function Vaughn(storage) {
 	Entity.call(this);

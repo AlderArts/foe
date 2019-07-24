@@ -7,6 +7,7 @@
 import { Entity } from '../entity';
 import { GetDEBUG } from '../../app';
 import { Gender } from '../body/gender';
+import { Jobs, JobDesc, JobEnum } from '../job';
 
 function Player(storage) {
 	Entity.call(this);

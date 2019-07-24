@@ -4,6 +4,7 @@
  * 
  */
 import { Entity } from '../../entity';
+import { Time } from '../../time';
 
 let TwinsScenes = {};
 

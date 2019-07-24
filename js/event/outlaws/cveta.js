@@ -4,7 +4,10 @@
  * 
  */
 import { Entity } from '../../entity';
-import { JobDesc } from '../../job';
+import { JobDesc, Jobs } from '../../job';
+import { Images } from '../../assets';
+import { Color } from '../../body/color';
+import { Time } from '../../time';
 
 function Cveta(storage) {
 	Entity.call(this);

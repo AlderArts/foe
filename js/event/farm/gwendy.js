@@ -4,6 +4,9 @@
  * 
  */
 import { Entity } from '../../entity';
+import { Images } from '../../assets';
+import { Color } from '../../body/color';
+import { HairStyle } from '../../body/hair';
 
 // TODO: FIX STATS
 function Gwendy(storage) {

@@ -5,6 +5,11 @@
  */
 import { Entity } from '../../entity';
 import { GetDEBUG } from '../../../app';
+import { Color } from '../../body/color';
+import { Images } from '../../assets';
+import { HairStyle } from '../../body/hair';
+import { Stat } from '../../stat';
+import { Time } from '../../time';
 
 // TODO: FIX STATS
 function Lei(storage) {

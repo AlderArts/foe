@@ -4,6 +4,8 @@
 
 import { GetDEBUG } from '../../../app';
 import { OCavalcadeScenes } from './cavalcade';
+import { Stat } from '../../stat';
+import { Time } from '../../time';
 
 let OutlawsScenes = {
 	Cavalcade : OCavalcadeScenes,

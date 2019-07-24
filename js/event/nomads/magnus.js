@@ -5,6 +5,8 @@
  */
 import { Entity } from '../../entity';
 import { GetDEBUG } from '../../../app';
+import { Race } from '../../body/race';
+import { Color } from '../../body/color';
 
 let MagnusScenes = {};
 

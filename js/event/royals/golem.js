@@ -5,6 +5,11 @@
  */
 
 import { BossEntity } from '../../enemy/boss';
+import { Images } from '../../assets';
+import { Element } from '../../ability';
+import { Body } from '../../body/body';
+import { Race } from '../../body/race';
+import { Color } from '../../body/color';
 
 let GolemScenes = {};
 GolemScenes.State = {

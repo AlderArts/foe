@@ -6,6 +6,9 @@
 import { Entity } from '../../entity';
 import { GetDEBUG } from '../../../app';
 import { DeadDropScenes } from './maria-dd';
+import { Images } from '../../assets';
+import { Color } from '../../body/color';
+import { Time } from '../../time';
 
 let MariaScenes = {
 	DeadDrops : DeadDropScenes,

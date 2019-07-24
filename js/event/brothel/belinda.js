@@ -4,6 +4,8 @@
  * 
  */
 import { Entity } from '../../entity';
+import { Race } from '../../body/race';
+import { Color } from '../../body/color';
 
 let BelindaScenes = {};
 

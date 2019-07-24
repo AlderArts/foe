@@ -5,6 +5,10 @@
  */
 import { Entity } from '../../entity';
 import { GetDEBUG } from '../../../app';
+import { Race } from '../../body/race';
+import { TF } from '../../tf';
+import { AppendageType } from '../../body/appendage';
+import { Color } from '../../body/color';
 
 function Adrian(storage) {
 	Entity.call(this);

@@ -6,6 +6,11 @@
 import { Entity } from '../entity';
 import { GetDEBUG } from '../../app';
 import { Gender } from '../body/gender';
+import { Race } from '../body/race';
+import { TF } from '../tf';
+import { AppendageType } from '../body/appendage';
+import { Color } from '../body/color';
+import { Time } from '../time';
 
 let FeraScenes = {};
 

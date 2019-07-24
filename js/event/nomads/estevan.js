@@ -6,13 +6,16 @@
 import { Entity } from '../../entity';
 import { GetDEBUG } from '../../../app';
 import { Gender } from '../../body/gender';
+import { TF } from '../../tf';
+import { AppendageType } from '../../body/appendage';
+import { Race } from '../../body/race';
+import { Color } from '../../body/color';
 
 let EstevanScenes = {};
 
 function Estevan(storage) {
 	Entity.call(this);
 	this.ID = "estevan";
-	
 	
 	this.name         = "Estevan";
 	

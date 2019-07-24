@@ -5,6 +5,12 @@
  */
 
 import { BossEntity } from './boss';
+import { Images } from '../assets';
+import { Element } from '../ability';
+import { Body } from '../body/body';
+import { Race } from '../body/race';
+import { CockType } from '../body/cock';
+import { Color } from '../body/color';
 
 let OrchidScenes = {};
 

@@ -8,6 +8,10 @@ import { Entity } from '../../entity';
 import { BossEntity } from '../../enemy/boss';
 import { LagonDScenes } from './lagon-defeated';
 import { Gender } from '../../body/gender';
+import { Race } from '../../body/race';
+import { AppendageType } from '../../body/appendage';
+import { Color } from '../../body/color';
+import { TF } from '../../tf';
 
 let LagonScenes = {
 	Defeated : LagonDScenes,

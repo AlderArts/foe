@@ -6,8 +6,15 @@
 
 import { Entity } from '../entity';
 import { GetDEBUG } from '../../app';
-import { JobDesc } from '../job';
+import { JobDesc, Jobs } from '../job';
 import { Gender } from '../body/gender';
+import { Items } from '../items';
+import { Images } from '../assets';
+import { Color } from '../body/color';
+import { Race } from '../body/race';
+import { RigardLoc } from '../loc/rigard/rigard';
+import { Cock } from '../body/cock';
+import { Vagina } from '../body/vagina';
 
 let TerryScenes = {};
 
@@ -94,7 +101,7 @@ function Terry(storage) {
 	this.flags["cock"] = Terry.Cock.Regular;
 	
 	this.sbombs = 3;
-	this.hidingSpot = world.loc.Rigard.ShopStreet.street;
+	this.hidingSpot = RigardLoc.ShopStreet.street;
 	
 	if(storage) this.FromStorage(storage);
 	
