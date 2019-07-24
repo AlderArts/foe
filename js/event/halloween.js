@@ -4,6 +4,9 @@ import { Inventory } from '../inventory';
 import { GetDEBUG } from '../../app';
 import { Gender } from '../body/gender';
 import { WorldTime } from '../worldtime';
+import { Player } from './player';
+import { Party } from '../party';
+import { Items } from '../items';
 
 let HalloweenScenes = {};
 
@@ -32,21 +35,21 @@ function Halloween() {
 }
 
 Halloween.Flags = {
-	Elder     : 1,
-	Kiai      : 2,
-	Werewolf  : 4,
-	Graveyard : 8,
-	Chapel    : 16,
-	Lenka     : 32,
-	WitchHut  : 64,
-	Jenna     : 128,
-	Broomfuck : 256,
-	PatchesPW : 512,
-	Carepack  : 1024,
-	Laggoth   : 2048,
-	Mausoleum : 4096,
-	TRoom     : 8192,
-	NadirMa   : 16384
+	Elder     : (1 << 0),
+	Kiai      : (1 << 1),
+	Werewolf  : (1 << 2),
+	Graveyard : (1 << 3),
+	Chapel    : (1 << 4),
+	Lenka     : (1 << 5),
+	WitchHut  : (1 << 6),
+	Jenna     : (1 << 7),
+	Broomfuck : (1 << 8),
+	PatchesPW : (1 << 9),
+	Carepack  : (1 << 10),
+	Laggoth   : (1 << 11),
+	Mausoleum : (1 << 12),
+	TRoom     : (1 << 13),
+	NadirMa   : (1 << 14),
 };
 Halloween.Ronnie = {
 	NotMet  : 0,
@@ -55,16 +58,16 @@ Halloween.Ronnie = {
 	PCAlpha : 3
 };
 Halloween.Harthon = {
-	Met          : 1,
-	Thrall       : 2,
-	ThrallCalled : 4,
-	Feminized    : 8,
-	BJ           : 16
+	Met          : (1 << 0),
+	Thrall       : (1 << 1),
+	ThrallCalled : (1 << 2),
+	Feminized    : (1 << 3),
+	BJ           : (1 << 4),
 };
 Halloween.NadirMa = {
-	GaveCock  : 1,
-	GaveBalls : 2,
-	SaidNo    : 4
+	GaveCock  : (1 << 0),
+	GaveBalls : (1 << 1),
+	SaidNo    : (1 << 2),
 };
 
 Halloween.PW = function() {
