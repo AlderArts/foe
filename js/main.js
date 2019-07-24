@@ -9,6 +9,7 @@ import { ClearCache, CacheToGame } from './gamecache';
 import { GameState, setOnline, isOnline, SetGameState } from './gamestate';
 import { DataPrompt } from './exploration';
 import { Text } from './text';
+import { Intro } from './event/introduction';
 
 // Prevent selection
 $(function() {

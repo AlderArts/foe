@@ -1,6 +1,6 @@
 import { Gui } from './gui';
 import { SAVE_VERSION } from '../app';
-import { Season } from './time';
+import { Season, Time } from './time';
 
 import { Intro } from './event/introduction';
 
@@ -70,8 +70,8 @@ import { Sylistraxia } from './event/sylistraxia';
 import { Ches } from './event/brothel/ches';
 import { ExplorationSetGAME } from './exploration';
 import { Gender } from './body/gender';
-
-let world = null;
+import { world } from './world';
+import { Party } from './party';
 
 let gameCache = {};
 let GAME = {};
@@ -168,71 +168,71 @@ let InitCache = function() {
 	world.EntityStorage = new Array();
 
 	// Stuff that also has update methods
-	world.EntityStorage.push(rigard);
-	world.EntityStorage.push(farm);
-	world.EntityStorage.push(glade);
-	world.EntityStorage.push(oasis);
-	world.EntityStorage.push(outlaws);
-	world.EntityStorage.push(nursery);
+	world.EntityStorage.push(GAME.rigard);
+	world.EntityStorage.push(GAME.farm);
+	world.EntityStorage.push(GAME.glade);
+	world.EntityStorage.push(GAME.oasis);
+	world.EntityStorage.push(GAME.outlaws);
+	world.EntityStorage.push(GAME.nursery);
 
 	// Put entities in world storage
-	world.EntityStorage.push(player);
-	world.EntityStorage.push(kiakai);
-	world.EntityStorage.push(miranda);
-	world.EntityStorage.push(terry);
-	world.EntityStorage.push(zina);
-	world.EntityStorage.push(momo);
-	world.EntityStorage.push(lei);
-	world.EntityStorage.push(twins);
-	world.EntityStorage.push(twins.rumi);
-	world.EntityStorage.push(twins.rani);
-	world.EntityStorage.push(room69);
+	world.EntityStorage.push(GAME.player);
+	world.EntityStorage.push(GAME.kiakai);
+	world.EntityStorage.push(GAME.miranda);
+	world.EntityStorage.push(GAME.terry);
+	world.EntityStorage.push(GAME.zina);
+	world.EntityStorage.push(GAME.momo);
+	world.EntityStorage.push(GAME.lei);
+	world.EntityStorage.push(GAME.twins);
+	world.EntityStorage.push(GAME.twins.rumi);
+	world.EntityStorage.push(GAME.twins.rani);
+	world.EntityStorage.push(GAME.room69);
 
-	world.EntityStorage.push(chief);
-	world.EntityStorage.push(rosalin);
-	world.EntityStorage.push(cale);
-	world.EntityStorage.push(estevan);
-	world.EntityStorage.push(magnus);
-	world.EntityStorage.push(patchwork);
+	world.EntityStorage.push(GAME.chief);
+	world.EntityStorage.push(GAME.rosalin);
+	world.EntityStorage.push(GAME.cale);
+	world.EntityStorage.push(GAME.estevan);
+	world.EntityStorage.push(GAME.magnus);
+	world.EntityStorage.push(GAME.patchwork);
 
-	world.EntityStorage.push(lagon);
-	world.EntityStorage.push(ophelia);
-	world.EntityStorage.push(vena);
-	world.EntityStorage.push(roa);
+	world.EntityStorage.push(GAME.lagon);
+	world.EntityStorage.push(GAME.ophelia);
+	world.EntityStorage.push(GAME.vena);
+	world.EntityStorage.push(GAME.roa);
 
-	world.EntityStorage.push(gwendy);
-	world.EntityStorage.push(danie);
-	world.EntityStorage.push(adrian);
-	world.EntityStorage.push(layla);
+	world.EntityStorage.push(GAME.gwendy);
+	world.EntityStorage.push(GAME.danie);
+	world.EntityStorage.push(GAME.adrian);
+	world.EntityStorage.push(GAME.layla);
 
-	world.EntityStorage.push(isla);
+	world.EntityStorage.push(GAME.isla);
 
-	world.EntityStorage.push(aquilius);
-	world.EntityStorage.push(maria);
-	world.EntityStorage.push(cveta);
-	world.EntityStorage.push(vaughn);
+	world.EntityStorage.push(GAME.aquilius);
+	world.EntityStorage.push(GAME.maria);
+	world.EntityStorage.push(GAME.cveta);
+	world.EntityStorage.push(GAME.vaughn);
 
-	world.EntityStorage.push(fera);
-	world.EntityStorage.push(asche);
-	world.EntityStorage.push(cassidy);
+	world.EntityStorage.push(GAME.fera);
+	world.EntityStorage.push(GAME.asche);
+	world.EntityStorage.push(GAME.cassidy);
 
-	world.EntityStorage.push(jeanne);
-	world.EntityStorage.push(golem);
+	world.EntityStorage.push(GAME.jeanne);
+	world.EntityStorage.push(GAME.golem);
 
-	world.EntityStorage.push(orchid);
+	world.EntityStorage.push(GAME.orchid);
 
-	world.EntityStorage.push(ravenmother);
+	world.EntityStorage.push(GAME.ravenmother);
 
-	world.EntityStorage.push(aria);
-	world.EntityStorage.push(uru);
-	world.EntityStorage.push(sylistraxia);
+	world.EntityStorage.push(GAME.aria);
+	world.EntityStorage.push(GAME.uru);
+	world.EntityStorage.push(GAME.sylistraxia);
 
-	world.EntityStorage.push(ches);
-	world.EntityStorage.push(lucille);
-	world.EntityStorage.push(belinda);
-	world.EntityStorage.push(bastet);
-	world.EntityStorage.push(gryphons);
-	world.EntityStorage.push(Fireblossom);
+	world.EntityStorage.push(GAME.ches);
+	world.EntityStorage.push(GAME.lucille);
+	world.EntityStorage.push(GAME.belinda);
+	world.EntityStorage.push(GAME.bastet);
+	world.EntityStorage.push(GAME.gryphons);
+	world.EntityStorage.push(GAME.fireblossom);
 
 	// PARTY
 	GAME.party = new Party();

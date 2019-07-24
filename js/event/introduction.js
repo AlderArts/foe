@@ -23,7 +23,7 @@ export function InitIntro(w) {
  * Introductory scene (start of game). Entry into the attic
  */
 Intro.Start = function() {
-	party.SwitchIn(player);
+	GAME.party.SwitchIn(player);
 
 	Intro.active = true;
 
