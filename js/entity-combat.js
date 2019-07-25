@@ -1,4 +1,5 @@
 import { StatusEffect } from './statuseffect';
+import { CurEncounter } from './combat-data';
 
 //Note: bitmask in order to stack multiple
 let TargetStrategy = {
@@ -317,8 +318,8 @@ let EntityCombat = {
 		if(this.curHp > this.HP()) this.curHp = this.HP();
 		if(this.curHp < 0) {
 			this.curHp = 0;
-			if(curEncounter)
-				curEncounter.OnIncapacitate(this);
+			if(CurEncounter())
+				CurEncounter().OnIncapacitate(this);
 		}
 		
 		if(fraction > 0 && this.combatStatus.stats[StatusEffect.Bleed])
@@ -405,8 +406,8 @@ let EntityCombat = {
 		if(this.curHp > this.HP()) this.curHp = this.HP();
 		if(this.curHp < 0) {
 			this.curHp = 0;
-			if(curEncounter)
-				curEncounter.OnIncapacitate(this);
+			if(CurEncounter())
+				CurEncounter().OnIncapacitate(this);
 		}
 		
 		if(val > 0 && this.combatStatus.stats[StatusEffect.Bleed])

@@ -3,6 +3,7 @@
  */
 
 import { DamageType } from './ability';
+import { CurEncounter } from './combat-data';
 
 let Status = {};
 
@@ -665,8 +666,8 @@ Status.Confuse = function(target, opts) {
 	};
 
 	// cleanup
-	for(var i=0,j=curEncounter.combatOrder.length; i<j; i++){
-		var c = curEncounter.combatOrder[i];
+	for(var i=0,j=CurEncounter().combatOrder.length; i<j; i++){
+		var c = CurEncounter().combatOrder[i];
 		if(c.entity == target) {
 			c.aggro = [];
 			break;

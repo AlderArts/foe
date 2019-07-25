@@ -14,6 +14,7 @@ import { GAME, WorldTime } from './GAME';
 import { Explore, Exploration } from './exploration';
 import { StatusList } from './statuslist';
 import { isFunction } from './utility';
+import { EnemyParty, CurrentActiveChar } from './combat-data';
 
 
 let Gui = {};
@@ -610,7 +611,7 @@ Gui.RenderParty = function(p, set, obj, max) {
 		var c = p.Get(i);
 		set[i].show();
 		Gui.RenderEntity(c, set[i], obj[i]);
-		if(gameState != GameState.Combat || c != currentActiveChar)
+		if(gameState != GameState.Combat || c != CurrentActiveChar())
 			obj[i].glow.hide();
 	}
 	for(; i < 4 && i < max; ++i)
@@ -748,8 +749,8 @@ Gui.Render = function() {
 			break;
 
 		case GameState.Combat:
-			if(enemyParty)
-				Gui.RenderParty(enemyParty, Gui.enemy, Gui.enemyObj);
+			if(EnemyParty())
+				Gui.RenderParty(EnemyParty(), Gui.enemy, Gui.enemyObj);
 			else
 				Gui.enemy.hide();
 

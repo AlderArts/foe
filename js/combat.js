@@ -6,6 +6,7 @@ import { GAME } from "./GAME";
 import { StatusEffect } from "./statuseffect";
 import { Text } from "./text";
 import { Abilities } from "./abilities";
+import { SetCurEncounter, SetEnemyParty, EnemyParty, SetCurrentActiveChar, CurrentActiveChar } from "./combat-data";
 
 // Create encounter with a Party() containing enemies
 function Encounter(enemy)
@@ -36,15 +37,11 @@ Encounter.prototype.Start = function() {
 		this.PrepCombat();
 }
 
-var curEncounter      = null;
-var enemyParty        = null;
-var currentActiveChar = null;
-
 // Set up the fight
 Encounter.prototype.PrepCombat = function() {
 	SetGameState(GameState.Combat, Gui);
 	
-	curEncounter = this;
+	SetCurEncounter(this);
 	
 	if(GAME().party.members.length == 0)
 		throw "Errol: no members in party";
@@ -70,10 +67,10 @@ Encounter.prototype.PrepCombat = function() {
 		}
 	}
 
-	enemyParty = this.enemy;
+	SetEnemyParty(this.enemy);
 	//Add a unique name property to each enemy entity
-	for(var i=0; i < enemyParty.NumTotal(); i++) {
-		this.GenerateUniqueName(enemyParty.Get(i));
+	for(var i=0; i < EnemyParty().NumTotal(); i++) {
+		this.GenerateUniqueName(EnemyParty().Get(i));
 	}
 	
 	Gui.Callstack.push(function() {
@@ -206,7 +203,7 @@ Encounter.prototype.Cleanup = function() {
 		ent.combatStatus.EndOfCombat();
 		ent.uniqueName = null;
 	}
-	curEncounter = null;
+	SetCurEncounter(null);
 }
 
 Encounter.prototype.onRun = function() {
@@ -330,7 +327,7 @@ Encounter.prototype.CombatTick = function() {
 		return;
 	}
 	
-	currentActiveChar = null;
+	SetCurrentActiveChar(null);
 	
 	if(enc.onTick) {
 		enc.onTick();
@@ -379,7 +376,7 @@ Encounter.prototype.CombatTick = function() {
 		enc.combatOrder.sort(Encounter.InitiativeSorter);
 		var activeChar = enc.combatOrder[0];
 		
-		currentActiveChar = activeChar.entity;
+		SetCurrentActiveChar(activeChar.entity);
 		
 		var casting = activeChar.casting;
 		activeChar.casting = null;
@@ -387,7 +384,7 @@ Encounter.prototype.CombatTick = function() {
 		var ini = 100;
 		
 		// Freeze, slow down character
-		var freeze = currentActiveChar.combatStatus.stats[StatusEffect.Freeze];
+		var freeze = CurrentActiveChar().combatStatus.stats[StatusEffect.Freeze];
 		if(freeze) {
 			if(Math.random() < freeze.proc) {
 				ini *= freeze.str;
@@ -403,18 +400,18 @@ Encounter.prototype.CombatTick = function() {
 		});
 		
 		// Tick status effects
-		currentActiveChar.combatStatus.Tick(currentActiveChar);
-		if(currentActiveChar.Incapacitated()) {
+		CurrentActiveChar().combatStatus.Tick(CurrentActiveChar());
+		if(CurrentActiveChar().Incapacitated()) {
 			enc.CombatTick();
 			return;
 		}
 		
 		// Numb, stun character
-		var numb = currentActiveChar.combatStatus.stats[StatusEffect.Numb];
+		var numb = CurrentActiveChar().combatStatus.stats[StatusEffect.Numb];
 		if(numb) {
 			if(Math.random() < numb.proc) {
 				Text.Add("[name] [is] stunned and cannot move!",
-					{name: currentActiveChar.NameDesc(), is: currentActiveChar.is()});
+					{name: CurrentActiveChar().NameDesc(), is: CurrentActiveChar().is()});
 				Text.Flush();
 				Gui.NextPrompt(function() {
 					enc.CombatTick();
@@ -424,10 +421,10 @@ Encounter.prototype.CombatTick = function() {
 		}
 		
 		// Sleep
-		var sleep = currentActiveChar.combatStatus.stats[StatusEffect.Sleep];
+		var sleep = CurrentActiveChar().combatStatus.stats[StatusEffect.Sleep];
 		if(sleep) {
 			Text.Add("[name] [is] asleep and cannot act!",
-				{name: currentActiveChar.NameDesc(), is: currentActiveChar.is()});
+				{name: CurrentActiveChar().NameDesc(), is: CurrentActiveChar().is()});
 			Text.Flush();
 			Gui.NextPrompt(function() {
 				enc.CombatTick();
@@ -438,7 +435,7 @@ Encounter.prototype.CombatTick = function() {
 		var combatScreen = function() {
 			Text.Clear();
 			// TODO: DEBUG ?
-			var entityName = currentActiveChar.uniqueName ? currentActiveChar.uniqueName : currentActiveChar.name;
+			var entityName = CurrentActiveChar().uniqueName ? CurrentActiveChar().uniqueName : CurrentActiveChar().name;
 			Text.Add("Turn order:<br>", null, 'bold');
 			Text.Add(entityName + "<br>", null, 'bold');
 			
@@ -510,7 +507,7 @@ Encounter.prototype.CombatTick = function() {
 				}
 				else {
 					// Confuse
-					var confuse = currentActiveChar.combatStatus.stats[StatusEffect.Confuse];
+					var confuse = CurrentActiveChar().combatStatus.stats[StatusEffect.Confuse];
 					if(confuse) {
 						if(confuse.func)
 							confuse.func(enc, activeChar);
