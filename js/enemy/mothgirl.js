@@ -6,7 +6,7 @@
 
 import { Entity } from '../entity';
 import { Images } from '../assets';
-import { Element } from '../ability';
+import { Element } from '../damagetype';
 import { Color } from '../body/color';
 import { TF } from '../tf';
 import { AppendageType } from '../body/appendage';

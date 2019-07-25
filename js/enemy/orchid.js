@@ -6,7 +6,7 @@
 
 import { BossEntity } from './boss';
 import { Images } from '../assets';
-import { Element } from '../ability';
+import { Element } from '../damagetype';
 import { Body } from '../body/body';
 import { Race } from '../body/race';
 import { CockType } from '../body/cock';

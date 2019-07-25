@@ -1,4 +1,4 @@
-import { DamageType } from './ability';
+import { DamageType } from './damagetype';
 
 let ItemIds = {};
 //Represents the overall category an item falls under.

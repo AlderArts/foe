@@ -3,6 +3,7 @@ import { AbilityNode } from './node';
 import { Ability, TargetMode } from '../ability';
 import { Defaults } from './default';
 import { AttackAb } from './attack';
+import { Text } from '../text';
 
 let EnemySkillAb = {};
 

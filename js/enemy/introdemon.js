@@ -11,6 +11,9 @@ import { Race } from '../body/race';
 import { Color } from '../body/color';
 import { Text } from '../text';
 import { Gui } from '../gui';
+import { Rand } from '../utility';
+import { Imp } from './imp';
+import { GAME } from '../GAME';
 
 function IntroDemon() {
 	BossEntity.call(this);
@@ -105,7 +108,7 @@ IntroDemon.prototype.Act = function(encounter, activeChar) {
 		}
 		else if(r == 3 || r == 4) { // Lust attack
 			Text.Add("As you fight, the demon has been idly scratching the ground, forming an intricate design with its clawed finger. With a menacing grin, the demon flicks his finger in your direction, causing a stream of red magical energy to surge forward from the mark, hitting you squarely in the chest. You grunt as your body is filled with raging heat, greatly arousing you.");
-			player.AddLustAbs(20);
+			GAME().player.AddLustAbs(20);
 		}
 		else { // Banter
 			Text.Add("The demon chuckles evilly, amused by your resistance.");

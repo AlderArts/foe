@@ -2,7 +2,7 @@
  * @author alder
  */
 
-import { DamageType } from './ability';
+import { DamageType } from './damagetype';
 import { CurEncounter } from './combat-data';
 
 let Status = {};

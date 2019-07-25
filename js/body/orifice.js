@@ -1,6 +1,7 @@
 
 import { Stat } from '../stat';
 import { Womb } from '../pregnancy';
+import { Text } from '../text';
 
 var Capacity = {
 	tight  : 2,

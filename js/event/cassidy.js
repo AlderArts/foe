@@ -15,7 +15,7 @@ import { WorldTime } from '../GAME';
 import { Images } from '../assets';
 import { Gui } from '../gui';
 import { Text } from '../text';
-import { Element } from '../ability';
+import { Element } from '../damagetype';
 import { EncounterTable } from '../event';
 import { Abilities } from '../abilities';
 import { Encounter } from '../combat';

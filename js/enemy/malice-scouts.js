@@ -5,7 +5,7 @@ import { Party } from '../party';
 import { Gender } from '../body/gender';
 import { WorldTime } from '../GAME';
 import { Images } from '../assets';
-import { Element } from '../ability';
+import { Element } from '../damagetype';
 import { Race } from '../body/race';
 import { Color } from '../body/color';
 import { TF } from '../tf';
@@ -22,6 +22,7 @@ import { ToysItems } from '../items/toys';
 import { Encounter } from '../combat';
 import { Gui } from '../gui';
 import { SetGameState, GameState } from '../gamestate';
+import { TargetStrategy } from '../entity-combat';
 
 /*
 Tier 1 Malice scouts and outriders

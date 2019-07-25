@@ -5,8 +5,8 @@
  */
 import { AbilityNode } from './node';
 import { Ability, TargetMode } from '../ability';
-import { GetAggroEntry } from '../entity-combat';
-import { Defaults } from './default';
+import { Defaults, GetAggroEntry } from './default';
+import { Text } from '../text';
 
 let PhysicalAb = {};
 

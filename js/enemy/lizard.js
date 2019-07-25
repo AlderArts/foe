@@ -9,7 +9,7 @@ import { Cock } from '../body/cock';
 import { Gender } from '../body/gender';
 import { WorldTime } from '../GAME';
 import { Images } from '../assets';
-import { Element } from '../ability';
+import { Element } from '../damagetype';
 import { TF } from '../tf';
 import { AppendageType } from '../body/appendage';
 import { Race } from '../body/race';

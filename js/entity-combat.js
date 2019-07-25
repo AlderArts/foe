@@ -1,5 +1,11 @@
+import * as _ from 'lodash';
+
 import { StatusEffect } from './statuseffect';
 import { CurEncounter } from './combat-data';
+import { Text } from './text';
+import { Gui } from './gui';
+import { Abilities } from './abilities';
+import { GetAggroEntry } from './ability/default';
 
 //Note: bitmask in order to stack multiple
 let TargetStrategy = {
@@ -13,17 +19,6 @@ let TargetStrategy = {
 	SPHunt    : 64,
 	LPHunt    : 128
 };
-
-function GetAggroEntry(activeChar, entity) {
-	var found;
-	_.each(activeChar.aggro, function(it) {
-		if(it.entity == entity) {
-			found = it;
-			return false;
-		}
-	});
-	return found;
-}
 
 let EntityCombat = {
 	Act : function(encounter, activeChar) {
@@ -683,4 +678,4 @@ let EntityCombat = {
 	},
 }
 
-export { TargetStrategy, EntityCombat, GetAggroEntry };
+export { TargetStrategy, EntityCombat };

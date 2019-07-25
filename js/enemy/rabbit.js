@@ -11,7 +11,7 @@ import { AppendageType } from '../body/appendage';
 import { Gender } from '../body/gender';
 import { Color } from '../body/color';
 import { Race } from '../body/race';
-import { Element } from '../ability';
+import { Element } from '../damagetype';
 import { AlchemyItems } from '../items/alchemy';
 import { IngredientItems } from '../items/ingredients';
 import { Abilities } from '../abilities';

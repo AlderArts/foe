@@ -11,7 +11,7 @@ import { AppendageType } from '../body/appendage';
 import { Items } from '../items';
 import { Gender } from '../body/gender';
 import { Abilities } from '../abilities';
-import { Element } from '../ability';
+import { Element } from '../damagetype';
 import { Race } from '../body/race';
 import { Color } from '../body/color';
 import { WorldTime } from '../GAME';

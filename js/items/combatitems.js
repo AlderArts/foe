@@ -2,6 +2,7 @@ import { Item } from '../item';
 import { Ability, TargetMode } from '../ability';
 import { AbilityNode } from '../ability/node';
 import { Defaults } from '../ability/default';
+import { Text } from '../text';
 
 function CombatItemAbility(item) {
 	Ability.call(this);

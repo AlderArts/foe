@@ -6,6 +6,7 @@
 
 import { AbilityNode } from './node';
 import { Ability } from '../ability';
+import { Text } from '../text';
 
 let AttackAb = new Ability("Attack");
 AttackAb.Short = function() { return "Perform a physical attack."; }

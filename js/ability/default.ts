@@ -1,3 +1,5 @@
+import * as _ from 'lodash';
+
 import { AbilityNode } from "./node";
 import { Ability } from "../ability";
 import { Encounter } from "../combat";
@@ -59,4 +61,15 @@ let Defaults = {
     },
 };
 
-export { Defaults };
+function GetAggroEntry(activeChar : any, entity : Entity) {
+	var found;
+	_.each(activeChar.aggro, function(it) {
+		if(it.entity == entity) {
+			found = it;
+			return false;
+		}
+	});
+	return found;
+}
+
+export { Defaults, GetAggroEntry };

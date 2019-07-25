@@ -6,7 +6,7 @@ import { BossEntity } from './boss';
 import { Images } from '../assets';
 import { Body } from '../body/body';
 import { StatusEffect } from '../statuseffect';
-import { Element } from '../ability';
+import { Element } from '../damagetype';
 import { Items } from '../items';
 import { EncounterTable } from '../event';
 import { Text } from '../text';

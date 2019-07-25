@@ -9,7 +9,7 @@ import { WorldTime } from '../GAME';
 import { Images } from '../assets';
 import { Cock } from '../body/cock';
 import { Vagina } from '../body/vagina';
-import { Element } from '../ability';
+import { Element } from '../damagetype';
 import { Race } from '../body/race';
 import { Color } from '../body/color';
 import { AlchemySpecial } from '../items/alchemyspecial';

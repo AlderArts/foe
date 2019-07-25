@@ -10,7 +10,7 @@ import { Gui } from '../gui';
 import { Gender } from '../body/gender';
 import { Items } from '../items';
 import { JobEnum, Jobs } from '../job';
-import { GAME, MoveToLocation } from '../GAME';
+import { GAME, MoveToLocation, TimeStep } from '../GAME';
 import { Text } from '../text';
 import { Input } from '../input';
 import { BodyTypeMale, BodyTypeFemale } from '../body/defbody';
@@ -24,6 +24,7 @@ import { Uru } from './uru';
 import { TF } from '../tf';
 import { AppendageType } from '../body/appendage';
 import { Race } from '../body/race';
+import { Sex } from '../entity-sex';
 
 let Intro = {};
 
@@ -515,9 +516,9 @@ Intro.ImpsWinPrompt = function() {
 	
 	var imp = new Imp();
 	
-	var genDesc = (player.Gender() == Gender.male) ?
-		function() { return player.FirstCock().Short(); } :
-		function() { return player.FirstVag().Short(); };
+	var genDesc = (GAME().player.Gender() == Gender.male) ?
+		function() { return GAME().player.FirstCock().Short(); } :
+		function() { return GAME().player.FirstVag().Short(); };
 		
 	var parse = {genDesc: genDesc};
 	
@@ -534,7 +535,7 @@ Intro.ImpsWinPrompt = function() {
 	});
 	options.push({ nameStr : "Use",
 		func : function() {
-			if(player.Gender() == Gender.male)
+			if(GAME().player.Gender() == Gender.male)
 				Intro.ImpsWinUseMale();
 			else
 				Intro.ImpsWinUseFemale();
@@ -556,8 +557,8 @@ Intro.ImpsWinUseMale = function() {
 	var imp = new Imp();
 	
 	var parse = {
-		cockDesc : function() { return player.FirstCock().Short(); },
-		cockLen  : function() { return player.FirstCock().Desc().len; }
+		cockDesc : function() { return GAME().player.FirstCock().Short(); },
+		cockLen  : function() { return GAME().player.FirstCock().Desc().len; }
 	};
 	
 	Text.Clear();
@@ -584,9 +585,9 @@ Intro.ImpsWinUseMale = function() {
 			Text.NL();
 			Text.Add("You give the aroused imp a slight snicker, leaving him to his own devices.");
 			
-			Sex.Blowjob(imp, player);
-			imp.FuckOral(imp.Mouth(), player.FirstCock(), 1);
-			player.Fuck(player.FirstCock(), 1);
+			Sex.Blowjob(imp, GAME().player);
+			imp.FuckOral(imp.Mouth(), GAME().player.FirstCock(), 1);
+			GAME().player.Fuck(GAME().player.FirstCock(), 1);
 			
 			Text.Flush();
 			Gui.NextPrompt(Intro.DemonGift);
@@ -599,7 +600,7 @@ Intro.ImpsWinUseMale = function() {
 			Text.Add("...Who cares about imps, anyway? Ignoring the creature's increasingly desperate pleas, you resume your skull-fucking with undiminished vigor, only occasionally letting the imp draw air to keep it from passing out.");
 			Text.NL();
 			
-			if(player.FirstCock().length.Get() >= 15)
+			if(GAME().player.FirstCock().length.Get() >= 15)
 				Text.Add("Due to its length, your [cockDesc] is soon prodding at the entrance of the imp's throat and by applying a final push, you force the head inside the tight passage. The imp, not used to such treatment, involuntarily constricts his throat, trying to force out the invader. This only further entices you, milking a few drops of pre from your [cockDesc].", parse);
 			else
 				Text.Add("You are not quite big enough to stuff his throat, but if you push as far as you can, you can just manage to touch his uvula. Taking this as a challenge, you grab the imp's head and, roughly and repeatedly, feed him your length, mashing your hips against his face and bruising his nose in the process. Each time your [cockDesc] brushes against the back of his maw, you are rewarded with a shuddering moan and a twitching caress from his tongue. Slamming in as far as you can, you insistently rub against the roof of his mouth.", parse);
@@ -609,9 +610,9 @@ Intro.ImpsWinUseMale = function() {
 			Text.NL();
 			Text.Add("Spent, you pull out of your cumdump, only to find that the imp has passed out. Shrugging, you leave it where it is, wheezing and leaking cum.");
 			
-			Sex.Blowjob(imp, player);
-			imp.FuckOral(imp.Mouth(), player.FirstCock(), 2);
-			player.Fuck(player.FirstCock(), 2);
+			Sex.Blowjob(imp, GAME().player);
+			imp.FuckOral(imp.Mouth(), GAME().player.FirstCock(), 2);
+			GAME().player.Fuck(GAME().player.FirstCock(), 2);
 			
 			Text.Flush();
 			Gui.NextPrompt(Intro.DemonGift);
@@ -628,12 +629,12 @@ Intro.ImpsWinUseMale = function() {
 			Text.Add("With your other hand, you guide your [cockDesc] up against the struggling runt's taint, sighing with content as the dark red rosebud gives way. The imp yelps in a mix of pain and pleasure as you set your pace, plunging your stiff [cockDesc] deeper and deeper inside him.", parse);
 			Text.NL();
 			
-			Sex.Anal(player, imp);
-			imp.FuckAnal(imp.Butt(), player.FirstCock(), 3);
-			player.Fuck(player.FirstCock(), 3);
+			Sex.Anal(GAME().player, imp);
+			imp.FuckAnal(imp.Butt(), GAME().player.FirstCock(), 3);
+			GAME().player.Fuck(GAME().player.FirstCock(), 3);
 			
 			Text.Add("Before long, you bottom out");
-			if(player.FirstCock().length.Get() >= 15)
+			if(GAME().player.FirstCock().length.Get() >= 15)
 				Text.Add(", your increased length reaching previously untouched depths");
 			Text.Add(". The imp's anal muscles constrict wildly, trying to force the unfamiliar invader out of its body. You hardly have to move at all to bring yourself to your orgasm, but nonetheless you roughly buck against the imp's ass, painting his insides white with your seed.");
 			Text.NL();
@@ -661,10 +662,10 @@ Intro.ImpsWinUseFemale = function() {
 	var imp = new Imp();
 	
 	var parse = {
-		cuntDesc   : function() { return player.FirstVag().Short(); },
-		breastDesc : function() { return player.FirstBreastRow().Short(); },
-		clitDesc   : function() { return player.FirstVag().ClitShort(); },
-		anusDesc   : function() { return player.Butt().AnalShort(); },
+		cuntDesc   : function() { return GAME().player.FirstVag().Short(); },
+		breastDesc : function() { return GAME().player.FirstBreastRow().Short(); },
+		clitDesc   : function() { return GAME().player.FirstVag().ClitShort(); },
+		anusDesc   : function() { return GAME().player.Butt().AnalShort(); },
 		//Imp
 		impCockDesc   : function() { return imp.FirstCock().Short(); },
 		cockName   : function() { return imp.FirstCock().noun(); }
@@ -692,8 +693,8 @@ Intro.ImpsWinUseFemale = function() {
 			Text.NL();
 			Text.Add("Both of you cum simultaneously, salty semen lathering your tongue as you ride out your own trembling orgasm. When your legs have finished shaking, you get up, wiping the remains of the imp's ejaculate from your lips.", parse);
 			
-			Sex.Blowjob(player, imp);
-			player.FuckOral(player.Mouth(), imp.FirstCock(), 2);
+			Sex.Blowjob(GAME().player, imp);
+			GAME().player.FuckOral(GAME().player.Mouth(), imp.FirstCock(), 2);
 			imp.Fuck(imp.FirstCock(), 2);
 			
 			Text.Flush();
@@ -727,12 +728,12 @@ Intro.ImpsWinUseFemale = function() {
 			Text.Add("<i>“Th-the fuck do you think you are do-aah!”</i> your protest is rudely cut off by the head of the imp's cock forcing its way inside your rectum. <i>“S-sorry,”</i> the imp squeaks in an embarrassed apology. <i>“The boss won't let me use the front,”</i> he explains, shoving a few inches inside you.", parse);
 			Text.NL();
 			
-			Sex.Anal(imp, player);
-			player.FuckAnal(player.Butt(), imp.FirstCock(), 3);
+			Sex.Anal(imp, GAME().player);
+			GAME().player.FuckAnal(GAME().player.Butt(), imp.FirstCock(), 3);
 			imp.Fuck(imp.FirstCock(), 3);
 			
 			Text.Add("Being fucked by the imp is like having an erratic rabbit humping you, no finesse or care, just pure bestial rutting. He probably will not last long at this pace, and you wonder if you are even going to get off at this rate. Without any lubricant, your stretched ass is a flare of pain, ", parse);
-			if(player.Butt().capacity.Get() >= 6)
+			if(GAME().player.Butt().capacity.Get() >= 6)
 				Text.Add("though your increased capacity makes it much easier.");
 			else
 				Text.Add("forced open to the breaking point by the imp.");
@@ -758,11 +759,11 @@ Intro.ImpsWinRide = function() {
 	var imp = new Imp();
 	
 	var parse = {
-		cuntDesc    : function() { return player.FirstVag().Short(); },
-		breastDesc  : function() { return player.FirstBreastRow().Short(); },
-		clitDesc    : function() { return player.FirstVag().ClitShort(); },
-		anusDesc    : function() { return player.Butt().AnalShort(); },
-		cockDesc    : function() { return player.FirstCock().Short(); },
+		cuntDesc    : function() { return GAME().player.FirstVag().Short(); },
+		breastDesc  : function() { return GAME().player.FirstBreastRow().Short(); },
+		clitDesc    : function() { return GAME().player.FirstVag().ClitShort(); },
+		anusDesc    : function() { return GAME().player.Butt().AnalShort(); },
+		cockDesc    : function() { return GAME().player.FirstCock().Short(); },
 		//Imp
 		impCockDesc : function() { return imp.FirstCock().Short(); }
 	};
@@ -772,7 +773,7 @@ Intro.ImpsWinRide = function() {
 	Text.Add("You walk over to one of the prone imps and prod it into a wakeful state. <i>“On your back,”</i> you imperiously order it, <i>“I have need of your cock.”</i> The imp is quick to follow your command, its [impCockDesc] rising to attention as he looks up at you expectantly.", parse);
 	Text.NL();
 	
-	if(player.FirstVag()) {
+	if(GAME().player.FirstVag()) {
 		if(!Intro.cuntBlocked) {
 			Intro.ImpsCuntBlock(parse);
 		}
@@ -792,11 +793,11 @@ Intro.ImpsWinRideEntrypoint = function() {
 	var imp = new Imp();
 	
 	var parse = {
-		cuntDesc    : function() { return player.FirstVag().Short(); },
-		breastDesc  : function() { return player.FirstBreastRow().Short(); },
-		clitDesc    : function() { return player.FirstVag().ClitShort(); },
-		anusDesc    : function() { return player.Butt().AnalShort(); },
-		cockDesc    : function() { return player.FirstCock().Short(); },
+		cuntDesc    : function() { return GAME().player.FirstVag().Short(); },
+		breastDesc  : function() { return GAME().player.FirstBreastRow().Short(); },
+		clitDesc    : function() { return GAME().player.FirstVag().ClitShort(); },
+		anusDesc    : function() { return GAME().player.Butt().AnalShort(); },
+		cockDesc    : function() { return GAME().player.FirstCock().Short(); },
 		//Imp
 		impCockDesc : function() { return imp.FirstCock().Short(); }
 	};
@@ -804,20 +805,20 @@ Intro.ImpsWinRideEntrypoint = function() {
 	Text.Add("You slowly spear yourself on the imp's [impCockDesc], groaning as the thick member forces your anal tunnel open. Not wishing to make it needlessly painful, you take some time growing used to his girth before starting to move. That was your plan, anyway, but the imp immediately starts bucking his hips wildly, somehow managing to hilt himself inside you within moments.", parse);
 	Text.NL();
 	
-	Sex.Anal(imp, player);
-	player.FuckAnal(player.Butt(), imp.FirstCock(), 3);
+	Sex.Anal(imp, GAME().player);
+	GAME().player.FuckAnal(GAME().player.Butt(), imp.FirstCock(), 3);
 	imp.Fuck(imp.FirstCock(), 3);
 	
 	Text.Add("<i>“Why you little-”</i> you pull yourself off the panting imp, but something makes you lose your footing, causing you to fall on your butt. This, in turn, fills said butt with several inches of imp cock. Once you have regained your composure, you find that you are now comfortable taking his cock this way. Might as well make the best of it.", parse);
 	Text.NL();
 	Text.Add("Planting your hands on the ground behind you, you start to repeatedly drive the imp's cock into your butt, attempting to match your rhythm to your partners frenzied rutting.");
-	if(player.FirstCock())
+	if(GAME().player.FirstCock())
 		Text.Add(" Your [cockDesc] is bucking wildly, dripping pre all over the creature, and a tightening in your scrotum tells you that you are not far from your peak.", parse);
-	if(player.FirstVag())
+	if(GAME().player.FirstVag())
 		Text.Add(" Even untouched, your [cuntDesc] is flowing with feminine juices, itching for release.", parse);
 	Text.NL();
 	Text.Add("A slight twitch and a loud yelp is all the warning you get before your ass is flooded with hot imp-sperm. Shuddering, you collapse on top of your diminutive lover, ");
-	if(player.FirstCock())
+	if(GAME().player.FirstCock())
 		Text.Add("your own [cockDesc] unloading across his stomach.", parse);
 	else
 		Text.Add("squashing the imp's head with your [breastDesc].", parse);
@@ -832,15 +833,15 @@ Intro.ImpsWinGroup = function() {
 	var imp = new Imp();
 	
 	var parse = {
-		cuntDesc    : function() { return player.FirstVag().Short(); },
-		breastDesc  : function() { return player.FirstBreastRow().Short(); },
-		clitDesc    : function() { return player.FirstVag().ClitShort(); },
-		anusDesc    : function() { return player.Butt().AnalShort(); },
-		cockDesc    : function() { return player.FirstCock().Short(); },
+		cuntDesc    : function() { return GAME().player.FirstVag().Short(); },
+		breastDesc  : function() { return GAME().player.FirstBreastRow().Short(); },
+		clitDesc    : function() { return GAME().player.FirstVag().ClitShort(); },
+		anusDesc    : function() { return GAME().player.Butt().AnalShort(); },
+		cockDesc    : function() { return GAME().player.FirstCock().Short(); },
 		//Imp
 		impCockDesc : function() { return imp.FirstCock().Short(); },
 		
-		another     : (player.Gender() == Gender.male) ? "a" : "another"
+		another     : (GAME().player.Gender() == Gender.male) ? "a" : "another"
 	};
 	
 	Text.Clear();
@@ -848,7 +849,7 @@ Intro.ImpsWinGroup = function() {
 	Text.NL();
 	
 	// Male/female split
-	if(player.Gender() == Gender.male) {
+	if(GAME().player.Gender() == Gender.male) {
 		Text.Add("<i>“You, on all fours,”</i> you point to one of the imps, grinning widely. The chosen imp whimpers, but complies with your order, drawing amused snickers from the other imps. They quickly quiet down when you add, <i>“And you two, get my cock ready.”</i>", parse);
 		Text.NL();
 		Text.Add("The two reluctant imps take turns sucking your [cockDesc], coating it with saliva, preparing it for penetration. Enjoying your power over the defeated imps, you lick a few of your fingers and grab hold of the prone imp in front of you, shoving three fingers up to the knuckles in his butt.", parse);
@@ -860,9 +861,9 @@ Intro.ImpsWinGroup = function() {
 		Text.Add("Soon, your four-man contraption is rocking steadily, your twitching [cockDesc] buried deep inside the imp in front of you while the two imps sharing your ass alternate their thrusts.", parse);
 		Text.NL();
 		
-		Sex.Anal(player, imp);
-		imp.FuckAnal(imp.Butt(), player.FirstCock(), 2);
-		player.Fuck(player.FirstCock(), 2);
+		Sex.Anal(GAME().player, imp);
+		imp.FuckAnal(imp.Butt(), GAME().player.FirstCock(), 2);
+		GAME().player.Fuck(GAME().player.FirstCock(), 2);
 	}
 	else // female
 	{
@@ -874,15 +875,15 @@ Intro.ImpsWinGroup = function() {
 		Text.NL();
 	}
 	
-	Sex.Anal(imp, player);
-	player.FuckAnal(player.Butt(), imp.FirstCock(), 2);
+	Sex.Anal(imp, GAME().player);
+	GAME().player.FuckAnal(GAME().player.Butt(), imp.FirstCock(), 2);
 	imp.Fuck(imp.FirstCock(), 2);
 	
 	Text.Add("The writhing mass of flesh soon gets more additions, as you find additional imps closing in around you - surely they were not this many? - one taking position in front of you, presenting you with [another] cock to suck. Two more gather on your sides, and you grab their cocks, stroking them furiously.", parse);
 	Text.NL();
 	
 	// Male/female split
-	if(player.Gender() == Gender.male)
+	if(GAME().player.Gender() == Gender.male)
 		Text.Add("You can feel your release building up, as your [cockDesc] excitedly twitches, pumping the imp at the end of the butt-fuck train full of sticky spunk.", parse);
 	else // female
 		Text.Add("The multiple penetration finally becomes too much for you, and you buck your hips into the face of the imp buried in your crotch, dripping the juices from your release all over him.", parse);
@@ -948,11 +949,11 @@ Intro.ImpsLossOral = function() {
 	var imp = new Imp();
 	
 	var parse = {
-		cuntDesc    : function() { return player.FirstVag().Short(); },
-		breastDesc  : function() { return player.FirstBreastRow().Short(); },
-		clitDesc    : function() { return player.FirstVag().ClitShort(); },
-		anusDesc    : function() { return player.Butt().AnalShort(); },
-		cockDesc    : function() { return player.FirstCock().Short(); },
+		cuntDesc    : function() { return GAME().player.FirstVag().Short(); },
+		breastDesc  : function() { return GAME().player.FirstBreastRow().Short(); },
+		clitDesc    : function() { return GAME().player.FirstVag().ClitShort(); },
+		anusDesc    : function() { return GAME().player.Butt().AnalShort(); },
+		cockDesc    : function() { return GAME().player.FirstCock().Short(); },
 		//Imp
 		impCockDesc : function() { return imp.FirstCock().Short(); }
 	};
@@ -960,9 +961,9 @@ Intro.ImpsLossOral = function() {
 	Text.Clear();
 	
 	Text.Add("<i>“M-maybe just a little?”</i> you shuffle around uncomfortably, trying to not seem too eager but failing miserably.");
-	if(player.FirstCock())
+	if(GAME().player.FirstCock())
 		Text.Add(" Your erect [cockDesc] give your intentions away, even if you awkwardly try to hide it.", parse);
-	if(player.FirstVag())
+	if(GAME().player.FirstVag())
 		Text.Add(" Your wet [cuntDesc] gives your intentions away, even if you awkwardly try to hide it.", parse);
 	Text.NL();
 	Text.Add("<i>“Sure, why don't ya come over here and suck my dick?”</i> one of the imps taunts you, quite surprised when you shuffle over to comply. <i>“Hey, are you seeing this bitch?”</i> he chortles as you get down on your knees, planting a kiss on his hard [impCockDesc]. You go at your task with vigor, any previous embarrassment wiped away by the salty taste of imp pre-cum on your tongue.", parse);
@@ -975,8 +976,8 @@ Intro.ImpsLossOral = function() {
 	Text.NL();
 	Text.Add("<i>“You are pretty good for a slut!”</i> one of the imps praises you, <i>“Come back later and we'll fuck ya good!”</i> Wiping the sticky fluids from your skin and hair, you gather up your possessions.", parse);
 	
-	Sex.Blowjob(player, imp);
-	player.FuckOral(player.Mouth(), imp.FirstCock(), 2);
+	Sex.Blowjob(GAME().player, imp);
+	GAME().player.FuckOral(GAME().player.Mouth(), imp.FirstCock(), 2);
 	imp.Fuck(imp.FirstCock(), 2);
 	
 	Text.Flush();
@@ -987,11 +988,11 @@ Intro.ImpsLossFucked = function() {
 	var imp = new Imp();
 	
 	var parse = {
-		cuntDesc    : function() { return player.FirstVag().Short(); },
-		breastDesc  : function() { return player.FirstBreastRow().Short(); },
-		clitDesc    : function() { return player.FirstVag().ClitShort(); },
-		anusDesc    : function() { return player.Butt().AnalShort(); },
-		cockDesc    : function() { return player.FirstCock().Short(); },
+		cuntDesc    : function() { return GAME().player.FirstVag().Short(); },
+		breastDesc  : function() { return GAME().player.FirstBreastRow().Short(); },
+		clitDesc    : function() { return GAME().player.FirstVag().ClitShort(); },
+		anusDesc    : function() { return GAME().player.Butt().AnalShort(); },
+		cockDesc    : function() { return GAME().player.FirstCock().Short(); },
 		//Imp
 		impCockDesc : function() { return imp.FirstCock().Short(); }
 	};
@@ -1001,11 +1002,11 @@ Intro.ImpsLossFucked = function() {
 	Text.Add("<i>“I... I want you to fuck me!”</i> you can hardly believe that you uttered the words yourself, but the imps are more than happy to oblige. You are quickly pushed down on all fours, held down by two imps while a third on mounts you from behind. Your request is quickly filled as the imp roughly shoves his entire length inside your [anusDesc] and begins to rut wildly.", parse);
 	Text.NL();
 	
-	Sex.Anal(imp, player);
-	player.FuckAnal(player.Butt(), imp.FirstCock(), 2);
+	Sex.Anal(imp, GAME().player);
+	GAME().player.FuckAnal(GAME().player.Butt(), imp.FirstCock(), 2);
 	imp.Fuck(imp.FirstCock(), 2);
 	
-	if(player.FirstCock())
+	if(GAME().player.FirstCock())
 		Text.Add("<i>“Why ya have that pitiful little thing?”</i> the imp teases your [cockDesc] between his thrusts, <i>“Not like you ever gonna use it, here!”</i>", parse);
 	else
 		Text.Add("<i>“The boss won't let me use the other hole, so this one will have to do!”</i> the imp grunts.", parse);
@@ -1021,7 +1022,7 @@ Intro.ImpsLossFucked = function() {
 	Text.NL();
 	
 	Text.Add("The orgy continues, each imp now equipped with a fifteen-inch monster. ");
-	if(player.FirstCock())
+	if(GAME().player.FirstCock())
 		Text.Add("You have lost count of how many times you have spilled your own seed on the ground, orgasm after orgasm coaxed from your brutalized prostate.");
 	else
 		Text.Add("Feminine juices from countless orgasms drip down your legs, mixing with the leaking seminal fluids from your ravaged [anusDesc].", parse);
@@ -1031,8 +1032,8 @@ Intro.ImpsLossFucked = function() {
 	
 	imp.FirstCock().length.base = 40;
 	imp.FirstCock().thickness.base = 8;
-	Sex.Anal(imp, player);
-	player.FuckAnal(player.Butt(), imp.FirstCock(), 2);
+	Sex.Anal(imp, GAME().player);
+	GAME().player.FuckAnal(GAME().player.Butt(), imp.FirstCock(), 2);
 	imp.Fuck(imp.FirstCock(), 2);
 	
 	Text.Add("Finally, you can take no more and black out, still being fucked by the frenzied imps.", parse);
@@ -1050,17 +1051,17 @@ Intro.DemonGift = function() {
 	
 	// Only allow 3 times
 	if(Intro.timesTakenDemonGift >= 3) {
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 		return;
 	}
 	
 	var parse = {
-		msmr        : (player.Gender() == Gender.male) ? "MISTER" : "MISS",
-		hisher      : (player.Gender() == Gender.male) ? "HIS" : "HER",
-		cuntDesc    : function() { return player.FirstVag().Short(); },
-		cockDesc    : function() { return player.FirstCock().Short(); },
-		cockLen     : function() { return player.FirstCock().Desc().len; },
-		breastDesc  : function() { return player.FirstBreastRow().Short(); }
+		msmr        : (GAME().player.Gender() == Gender.male) ? "MISTER" : "MISS",
+		hisher      : (GAME().player.Gender() == Gender.male) ? "HIS" : "HER",
+		cuntDesc    : function() { return GAME().player.FirstVag().Short(); },
+		cockDesc    : function() { return GAME().player.FirstCock().Short(); },
+		cockLen     : function() { return GAME().player.FirstCock().Desc().len; },
+		breastDesc  : function() { return GAME().player.FirstBreastRow().Short(); }
 	};
 	
 	Text.Clear();
@@ -1081,12 +1082,12 @@ Intro.DemonGift = function() {
 		}, enabled : true,
 		tooltip : "No way you are letting that demon play around with your parts!"
 	});
-	if(player.Gender() == Gender.female) {
+	if(GAME().player.Gender() == Gender.female) {
 		options.push({ nameStr : "Vaginal cap",
 			func : function() {
 				Text.Add("You let out a shuddering gasp as you feel your insides shift around. You feel you could probably take a lot bigger cocks now...");
 				
-				player.FirstVag().capacity.base++;
+				GAME().player.FirstVag().capacity.base++;
 				
 				Intro.timesTakenDemonGift++;
 				
@@ -1096,14 +1097,14 @@ Intro.DemonGift = function() {
 			tooltip : "Increasing your capacity would allow you to take even bigger dicks..."
 		});
 	}
-	if(player.Gender() == Gender.male) {
+	if(GAME().player.Gender() == Gender.male) {
 		options.push({ nameStr : "Bigger load",
 			func : function() {
 				Text.Add("Before you even utter the words, you can feel your sack churning, growing larger and more virile. You are filled with an urge to deposit your seed in something, anything.");
 				
-				player.Balls().size.base++;
-				player.Balls().cumProduction.base++;
-				player.Balls().cumCap.base += 5;
+				GAME().player.Balls().size.base++;
+				GAME().player.Balls().cumProduction.base++;
+				GAME().player.Balls().cumCap.base += 5;
 				
 				Intro.timesTakenDemonGift++;
 				
@@ -1114,8 +1115,8 @@ Intro.DemonGift = function() {
 		});
 		options.push({ nameStr : "Larger cock",
 			func : function() {
-				player.FirstCock().thickness.base++;
-				player.FirstCock().length.base += 5;
+				GAME().player.FirstCock().thickness.base++;
+				GAME().player.FirstCock().length.base += 5;
 				
 				Text.Add("You have hardly uttered the words before you feel your cock swell, gaining a solid two inches. Even though you just got off, your new [cockLen] long cock is stiff and aches for release.", parse);
 				
@@ -1131,7 +1132,7 @@ Intro.DemonGift = function() {
 		func : function() {
 			Text.Add("Groaning, you feel your insides shift around, allowing for larger things to be put in your butt!");
 			
-			player.Butt().capacity.base++;
+			GAME().player.Butt().capacity.base++;
 			
 			Intro.timesTakenDemonGift++;
 			
@@ -1144,9 +1145,9 @@ Intro.DemonGift = function() {
 		func : function() {
 			Text.Add("You moan as your chest fills out, gaining at least a few cup sizes. You carefully touch your stiff nipples; apparently they grew a bit too.");
 			
-			player.FirstBreastRow().size.base += 5;
-			player.FirstBreastRow().nippleLength.base += 0.5;
-			player.FirstBreastRow().nippleThickness.base += 0.5;
+			GAME().player.FirstBreastRow().size.base += 5;
+			GAME().player.FirstBreastRow().nippleLength.base += 0.5;
+			GAME().player.FirstBreastRow().nippleThickness.base += 0.5;
 			
 			Intro.timesTakenDemonGift++;
 			

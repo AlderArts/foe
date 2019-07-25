@@ -6,6 +6,7 @@
 import { AbilityNode } from './node';
 import { Ability, TargetMode } from '../ability';
 import { Defaults } from './default';
+import { Text } from '../text';
 
 let BlackAb = {};
 

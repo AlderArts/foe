@@ -8,7 +8,7 @@ import { Entity } from '../entity';
 import { Encounter } from '../combat';
 import { Party } from '../party';
 import { Images } from '../assets';
-import { Element } from '../ability';
+import { Element } from '../damagetype';
 import { StatusEffect } from '../statuseffect';
 import { Color } from '../body/color';
 import { TF } from '../tf';

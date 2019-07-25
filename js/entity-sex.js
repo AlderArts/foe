@@ -1,5 +1,6 @@
 
 import { GetDEBUG } from '../app';
+import { Text } from './text';
 
 let EntitySex = {
 	Genitalia : function() {

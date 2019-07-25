@@ -7,7 +7,7 @@
 import { Entity } from '../entity';
 import { Gender } from '../body/gender';
 import { Images } from '../assets';
-import { Element } from '../ability';
+import { Element } from '../damagetype';
 import { Race } from '../body/race';
 import { Color } from '../body/color';
 import { TF } from '../tf';
