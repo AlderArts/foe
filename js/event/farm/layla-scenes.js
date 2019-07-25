@@ -1,13 +1,13 @@
 
 import { Layla } from './layla';
 import { Gender } from '../../body/gender';
-import { WorldTime } from '../../worldtime';
+import { WorldTime } from '../../GAME';
 import { Party } from '../../party';
 import { Encounter } from '../../combat';
 import { SetGameState, GameState } from '../../gamestate';
 import { Gui } from '../../gui';
 import { Text } from '../../text';
-import { MoveToLocation } from '../../event';
+import { MoveToLocation } from '../../GAME';
 
 let LaylaScenes = {};
 
@@ -60,7 +60,7 @@ LaylaScenes.Prompt = function(switchSpot) {
 			Text.Clear();
 			Text.Add("[Placeholder] Layla masturbates fiercely, cumming buckets.");
 			
-			world.TimeStep({minute : 10});
+			TimeStep({minute : 10});
 			
 			that.AddLustFraction(-1);
 			Text.Flush();
@@ -691,7 +691,7 @@ LaylaScenes.FarmCombatLoss = function() {
 	Text.Add("You thank Gwendy for her offer, and tell her you’ll consider it. For now, you should figure out what you want to do.", parse);
 	Text.Flush();
 	
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 	
 	layla.farmTimer = new Time(0,0,3,0,0);
 	
@@ -804,7 +804,7 @@ LaylaScenes.FarmCombatWin = function() {
 		Gui.Callstack.push(function() {
 			Text.Clear();
 			
-			world.TimeStep({hour: 2});
+			TimeStep({hour: 2});
 			
 			if(hadSex) {
 				Text.Add("Quite some time later, when both of you have become a bit more presentable again and are sipping on some refreshments, you’re interrupted by a cowgirl poking her head up from the ladder leading to the loft. There’s a slight flush on her cheeks when she perceives the mood, but she shakes herself back to reality.", parse);
@@ -942,7 +942,7 @@ LaylaScenes.FarmCombatWin = function() {
 				}
 				Text.Flush();
 				
-				world.TimeStep({hour: 1});
+				TimeStep({hour: 1});
 				
 				layla.farmTimer = new Time(0,0,3,0,0);
 				
@@ -1006,7 +1006,7 @@ LaylaScenes.SecondMeeting = function() {
 	
 		Gui.NextPrompt();
 	}
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 }
 
 LaylaScenes.LeavesGwendy = function() {
@@ -1368,7 +1368,7 @@ LaylaScenes.SexFirstTime = function() {
 	Text.Add("You embrace the chimera, holding her close and basking in your shared body warmth. Layla returns your hug, snuggling with you as she lets herself drift off to a light nap. You simply smile and stroke her hair as she rests for a bit.", parse);
 	Text.Flush();
 
-	world.TimeStep({minute: 45});
+	TimeStep({minute: 45});
 
 	Gui.NextPrompt(function() {
 		Text.Clear();
@@ -1690,7 +1690,7 @@ LaylaScenes.SexFirstTime = function() {
 					Text.Add("Looking at the hopeful, strangely innocent gleam in her eyes, you wonder what you should say to that...", parse);
 					Text.Flush();
 
-					world.TimeStep({minute: 30});
+					TimeStep({minute: 30});
 
 					//[Hell yeah!] [Sure] [Later]
 					var options = new Array();
@@ -2292,7 +2292,7 @@ LaylaScenes.SexCatchAnalCont2 = function(parse, kiss, tailcock) {
 					Text.Add("Since you can’t just conjure clothes on and off like that, it takes you a little longer before you are dressed and ready to set out again.", parse);
 					Text.Flush();
 
-					world.TimeStep({hour: 2});
+					TimeStep({hour: 2});
 
 					Gui.NextPrompt();
 				});
@@ -2356,7 +2356,7 @@ LaylaScenes.SexCatchAnalCont3 = function(parse) {
 	Text.Add("Slowly, you make your way upright, stretching out the kinks in your joints. As you grab your own gear and start getting dressed, you watch Layla shift back into her makeshift clothes.", parse);
 	Text.Flush();
 
-	world.TimeStep({hour: 1, minute: 30});
+	TimeStep({hour: 1, minute: 30});
 
 	Gui.NextPrompt();
 }
@@ -3098,7 +3098,7 @@ LaylaScenes.SexPitchVaginalCont3 = function(opts, p1cock, parse) {
 				Text.Add("The two of you contentedly lie where you are until you feel rested enough to head off once more. You pull your [armor] back on, Layla shapeshifts back into her mock-clothes, and you set off again.", parse);
 				Text.Flush();
 
-				world.TimeStep({hour: 2});
+				TimeStep({hour: 2});
 
 				Gui.NextPrompt();
 			}, enabled : true
@@ -3148,7 +3148,7 @@ LaylaScenes.SexPitchVaginalCont3 = function(opts, p1cock, parse) {
 				Text.Add("The two of you contentedly lie where you are until you feel rested enough to head off once more. You pull your [armor] back on, Layla shapeshifts back into her mock-clothes, and set off again.", parse);
 				Text.Flush();
 
-				world.TimeStep({hour: 2});
+				TimeStep({hour: 2});
 
 				Gui.NextPrompt();
 			}, enabled : true
@@ -3218,7 +3218,7 @@ LaylaScenes.SexPitchVaginalCont3 = function(opts, p1cock, parse) {
 				Text.Add("With a contented sigh, you nuzzle down into the impromptu pillow, gently twining your arms around her. This suits you just fine as a place to rest before you have to be on your way...", parse);
 				Text.Flush();
 
-				world.TimeStep({hour: 2});
+				TimeStep({hour: 2});
 
 				Gui.NextPrompt();
 			}, enabled : true
@@ -3255,7 +3255,7 @@ LaylaScenes.SexPitchVaginalCont3 = function(opts, p1cock, parse) {
 				Text.Add("That’s good. You yawn gently and allow your eyes to close. You think you’ll just take a little nap before you go anywhere, first.", parse);
 				Text.Flush();
 
-				world.TimeStep({hour: 2});
+				TimeStep({hour: 2});
 
 				Gui.NextPrompt();
 			}, enabled : true
@@ -3322,7 +3322,7 @@ LaylaScenes.SexPitchVaginalCont3 = function(opts, p1cock, parse) {
 				Text.Add("Despite yourself, an amused smile spreads across your face as you carefully lie down atop her. Getting a little shut-eye sounds good to you... and she makes a lovely little body pillow.", parse);
 				Text.Flush();
 
-				world.TimeStep({hour: 2});
+				TimeStep({hour: 2});
 
 				Gui.NextPrompt();
 			}, enabled : true
@@ -3377,7 +3377,7 @@ LaylaScenes.SexPitchVaginalCont3 = function(opts, p1cock, parse) {
 				Text.Add("You sigh softly, wrapping your own arms around her in turn, and allow yourself to drift off to sleep. Tired and sticky, you bathe in the warm afterglow of one <b>hell</b> of a fucking.", parse);
 				Text.Flush();
 
-				world.TimeStep({hour: 2});
+				TimeStep({hour: 2});
 
 				Gui.NextPrompt();
 			}, enabled : true

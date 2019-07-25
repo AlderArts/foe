@@ -223,7 +223,7 @@ MothgirlScenes.LoneEnc = function() {
 
 				party.coin -= enc.coin;
 
-				world.TimeStep({minute: 30});
+				TimeStep({minute: 30});
 
 				Gui.NextPrompt();
 			}, enabled : party.coin >= enc.coin,
@@ -251,7 +251,7 @@ MothgirlScenes.LoneEnc = function() {
 				Text.Add("The moth-girl thief considers your offer for a moment, eyes hungrily scouring your bared body, lingering on [gen]. By the way her big, pink nipples start to stiffen, she obviously likes what she sees. The moth-girl sheathes her blade, licking her lips as you approach. <i>“Well, aren't you the eager one? Tsk, well, if I can't get any coin out of you... I might as well get a good fuck out of it.”</i>", parse);
 				Text.NL();
 
-				world.TimeStep({minute: 10});
+				TimeStep({minute: 10});
 
 				MothgirlScenes.Loss(enc, true);
 			}, enabled : true,
@@ -713,7 +713,7 @@ MothgirlScenes.Loss = function(enc, traded) {
 
 	scenes.Get();
 
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 	if(!traded) {
 		Text.NL();
 		Text.Add("<b>The mothgirl stole [coin] coins from you.</b>", parse);

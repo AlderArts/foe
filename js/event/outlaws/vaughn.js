@@ -7,7 +7,7 @@ import { Entity } from '../../entity';
 import { Color } from '../../body/color';
 import { Race } from '../../body/race';
 import { Time } from '../../time';
-import { WorldTime } from '../../worldtime';
+import { WorldTime } from '../../GAME';
 
 function Vaughn(storage) {
 	Entity.call(this);

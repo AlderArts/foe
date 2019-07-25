@@ -7,7 +7,7 @@ import { Entity } from '../../entity';
 import { GetDEBUG } from '../../../app';
 import { Race } from '../../body/race';
 import { Color } from '../../body/color';
-import { WorldTime } from '../../worldtime';
+import { WorldTime } from '../../GAME';
 
 let MagnusScenes = {};
 
@@ -168,7 +168,7 @@ MagnusScenes.Interact = function() {
 					
 					magnus.flags["Talked"] = 1;
 					
-					world.TimeStep({hour: 1});
+					TimeStep({hour: 1});
 					
 					Gui.NextPrompt(TalkPrompt);
 				}, enabled : true,
@@ -240,7 +240,7 @@ MagnusScenes.Interact = function() {
 								Text.Add("<b>You will need to be at least a level 3 scholar to avoid falling asleep.</b>", parse);
 								Text.Flush();
 								magnus.flags["Teach"] = Magnus.Teaching.Wait;
-								world.TimeStep({hour: 1});
+								TimeStep({hour: 1});
 							}
 						}
 						else if(magnus.flags["Teach"] == Magnus.Teaching.Wait) {
@@ -358,7 +358,7 @@ MagnusScenes.Meditation = function() {
 			Text.Add("<i>“Did you find a revelation?”</i> he asks. You are not really sure if you figured out anything new, but you thank him for his time anyway.", parse);
 			Text.Flush();
 			
-			world.TimeStep({hour : 1});
+			TimeStep({hour : 1});
 			
 			Gui.NextPrompt();
 		}, enabled : true,
@@ -382,7 +382,7 @@ MagnusScenes.Meditation = function() {
 			Text.Flush();
 			
 			player.AddSPFraction(1);
-			world.TimeStep({hour : 1});
+			TimeStep({hour : 1});
 			
 			Gui.NextPrompt();
 		}, enabled : true,
@@ -716,7 +716,7 @@ MagnusScenes.Meditation = function() {
 					
 					magnus.flags["Sexed"]++;
 					
-					world.TimeStep({hour : 4});
+					TimeStep({hour : 4});
 					player.AddLustFraction(-1);
 					
 					if(first) {
@@ -897,7 +897,7 @@ MagnusScenes.LearnMagic = function() {
 		Text.Add("You thank him for his help, and set out on your journey, a new power at your beck and call.", parse);
 		Text.Flush();
 		
-		world.TimeStep({hour: 3});
+		TimeStep({hour: 3});
 		player.AddSPFraction(-1);
 		
 		gameCache.flags["LearnedMagic"] = 1;

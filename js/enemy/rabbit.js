@@ -715,7 +715,7 @@ LagomorphScenes.GroupLossOnPlainsToBurrows = function(enc) {
 		
 		Text.Flush();
 		
-		world.TimeStep({minute: 20});
+		TimeStep({minute: 20});
 		
 		party.inventory.AddItem(Items.Lettuce);
 		player.AddLustFraction(0.3);
@@ -731,7 +731,7 @@ LagomorphScenes.GroupLossOnPlainsToBurrows = function(enc) {
 	Text.Add("With the alpha in the lead, you set out, your convoy loping over the rolling plains at a rapid pace. You are passed between hands several times, as the horde shares the burden of your weight, as if carrying a platter of food, with you the main course.", parse);
 	Text.Flush();
 	
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 	
 	Gui.NextPrompt(function() {
 		Text.Clear();
@@ -1128,7 +1128,7 @@ LagomorphScenes.GroupWinOnPlainsFuckBrute = function(enc) {
 	Text.Add("Either way, it’s not your problem. Feeling satisfied, you gather your [armor] and dress up[comp].", parse);
 	Text.Flush();
 	
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 	
 	Gui.NextPrompt();
 }
@@ -1689,7 +1689,7 @@ LagomorphScenes.GroupWinOnPlainsFuckM = function(enc, group) {
 				Text.Add("Some time later, you[comp] are finally finished with the rabbit mob. Feeling a bit drained, you gather up [comp2]your gear, wobbling a bit unsteadily as you re-equip yourself. In the end, you are not sure who got the most out of that engagement: you or the rabbits.", parse);
 				Text.Flush();
 				
-				world.TimeStep({hour: 1});
+				TimeStep({hour: 1});
 				
 				Gui.NextPrompt();
 			});
@@ -1936,7 +1936,7 @@ LagomorphScenes.GroupWinOnPlainsGetFuckedM = function(enc, group) {
 		Text.Add("You gather up[comp] your gear, wobbling a bit unsteadily as you re-equip yourself. In the end, you are not sure who got the most out of that engagement: you or the rabbits.", parse);
 		Text.Flush();
 		
-		world.TimeStep({hour: 1});
+		TimeStep({hour: 1});
 		
 		Gui.NextPrompt();
 	});
@@ -2041,7 +2041,7 @@ LagomorphScenes.GroupWinInterrorigate = function(enc) {
 			Text.NL();
 			Text.Add("What should you do about your expectant companion? This close to so many of [m1hisher] kind, you probably won’t get away without putting out at least something.", parse);
 			
-			world.TimeStep({hour: 1});
+			TimeStep({hour: 1});
 			Text.Flush();
 			
 			//[Follow][Ditch]

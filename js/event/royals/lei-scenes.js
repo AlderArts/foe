@@ -2,7 +2,7 @@
 import { TasksScenes } from './lei-tasks';
 import { SexScenes } from './lei-sex';
 import { Lei } from './lei';
-import { WorldTime } from '../../worldtime';
+import { WorldTime } from '../../GAME';
 import { SetGameState, GameState } from '../../gamestate';
 import { Party } from '../../party';
 import { Encounter } from '../../combat';
@@ -203,7 +203,7 @@ LeiScenes.InnPromptFirst = function() {
 	var first = false;
 
 	if(lei.flags["Met"] < Lei.Met.KnowName) {
-		world.TimeStep({minute: 5});
+		TimeStep({minute: 5});
 		Text.Add("You approach the stranger. He definitely looks like the man you saw following the pair of hooded nobles earlier. His cloak is the same dusky shade, and he has the hood drawn up, casting his face into shadow, raising your suspicions. Up close, you notice that underneath he’s wearing some sort of black form-fitting armor, nicely emphasizing his well-muscled body. When you reach his table, he looks up at you, running his eyes over you methodically.", parse);
 		Text.NL();
 		Text.Add("Normally, if a man examined you so closely, eyes poring over every detail, you would think that he's checking you, but something in the stranger's eyes make this examination different... it feels like he's not examining you as a potential mate, so much as potential prey, assessing whether you're worth noticing.", parse);
@@ -711,7 +711,7 @@ LeiScenes.InnFirstPrompt = function() {
 
 	};
 
-	world.TimeStep({minute: 5});
+	TimeStep({minute: 5});
 
 	if(party.Two())
 		parse["comp"] = " and " + party.Get(1).name;
@@ -1403,7 +1403,7 @@ LeiScenes.SparWin = function() {
 		party.Get(i).AddExp(enc.lei.combatExp);
 	}
 
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 
 	party.LoadActiveParty();
 
@@ -1494,7 +1494,7 @@ LeiScenes.SparLoss = function() {
 	}
 	Text.Flush();
 
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 
 	party.LoadActiveParty();
 
@@ -1896,7 +1896,7 @@ LeiScenes.GuardStalkingOutro = function(parse, nv) {
 	Text.Add("After a few minutes walking, you hear raised angry voices in the distance, signaling the arrival of the patrol.", parse);
 	Text.Flush();
 
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 
 	Gui.NextPrompt();
 }

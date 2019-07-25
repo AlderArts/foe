@@ -1,4 +1,4 @@
-import { WorldTime } from "../../worldtime";
+import { WorldTime } from "../../GAME";
 import { SetGameState, GameState } from "../../gamestate";
 import { Gui } from "../../gui";
 import { Text } from "../../text";
@@ -21,7 +21,7 @@ OCavalcadeScenes.PrepRandomCoinGame = function() {
 		
 		SetGameState(GameState.Event, Gui);
 		
-		world.TimeStep({minute: 5});
+		TimeStep({minute: 5});
 		
 		Text.NL();
 		if(OCavalcadeScenes.Enabled()) {

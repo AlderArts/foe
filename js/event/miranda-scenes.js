@@ -1,7 +1,7 @@
 import { Miranda } from "./miranda";
-import { Link, MoveToLocation } from '../event';
+import { Link } from '../event';
 import { Gender } from '../body/gender';
-import { WorldTime } from "../worldtime";
+import { WorldTime, MoveToLocation } from "../GAME";
 import { SetGameState, GameState } from "../gamestate";
 import { Gui } from "../gui";
 import { Text } from "../text";
@@ -332,7 +332,7 @@ MirandaScenes.BruiserTrainingCont = function() {
 	};
 	
 	party.location = world.loc.Rigard.Barracks.sparring;
-	world.TimeStep({minute: 5});
+	TimeStep({minute: 5});
 	
 	Text.NL();
 	Text.Add("Relatively few people are active in the yard when you step out, so the two of you will have plenty of room. The dog-morph gestures for you to pick up a large wooden sword from a nearby rack - really closer to a plank than a sword. It’s surprisingly heavy too; there must be some form of lead core inside. Miranda has acquired a similar practice blade, twirling it around effortlessly.", parse);
@@ -342,7 +342,7 @@ MirandaScenes.BruiserTrainingCont = function() {
 	Text.Add("You take a few practice swings with your plank, trying to get the hang of it. Miranda shakes her head, frowning.", parse);
 	Text.NL();
 	
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 	player.AddSPFraction(-0.5);
 	
 	if(player.jobs["Fighter"].level < 4) {
@@ -363,7 +363,7 @@ MirandaScenes.BruiserTrainingCont = function() {
 			Text.Flush();
 			
 			party.location = world.loc.Rigard.Barracks.sparring;
-			world.TimeStep({minute: 5});
+			TimeStep({minute: 5});
 			
 			MirandaScenes.BarracksPrompt();
 		});
@@ -402,7 +402,7 @@ MirandaScenes.BruiserTrainingCont = function() {
 		Text.Flush();
 		
 		party.location = world.loc.Rigard.Barracks.sparring;
-		world.TimeStep({minute: 5});
+		TimeStep({minute: 5});
 		
 		MirandaScenes.BarracksPrompt();
 	});
@@ -745,7 +745,7 @@ MirandaScenes.RigardGatesBribe = function() {
 				miranda.subDom.IncreaseStat(50, 1);
 				player.subDom.DecreaseStat(-50, 1);
 				
-				world.TimeStep({minute: 30});
+				TimeStep({minute: 30});
 				
 				Text.Add("Once more, you’re rewarded with a stomach full of Miranda’s thick spunk, the excess slowly trickling down your chin, marking you for the slut you are.", parse);
 				Text.NL();
@@ -938,7 +938,7 @@ MirandaScenes.RigardGatesBribe = function() {
 				
 				scenes.Get();
 				
-				world.TimeStep({hour: 1});
+				TimeStep({hour: 1});
 
 				Text.NL();
 				Text.Add("The guardswoman is not quite done with you, further breaking down your anal defenses by repeatedly pulling her knot out of your [anus], followed by slamming it home again. Just like with the initial penetration, the pain soon gives way to pleasure so intense that you fear it will break your mind.", parse);
@@ -1195,7 +1195,7 @@ MirandaScenes.WelcomeToRigardEnd = function() {
 		Text.Add("Asking Zenith or Maria could perhaps give you a clue on how to proceed.", parse);
 	else
 		Text.Add("From what Miranda said, they are probably holed up somewhere in the forest... perhaps it's worth seeking them out.", parse);
-	world.TimeStep({hour : 1});
+	TimeStep({hour : 1});
 	Text.Flush();
 	Gui.NextPrompt();
 }
@@ -1224,7 +1224,7 @@ MirandaScenes.CatchThatThief = function() {
 	Text.Add("The group disappears around a corner, their continued conversation muffled by the sounds of the bustling city.", parse);
 	Text.Flush();
 	
-	world.TimeStep({minute : 30});
+	TimeStep({minute : 30});
 	Text.Flush();
 	Gui.NextPrompt();
 }
@@ -1361,7 +1361,7 @@ MirandaScenes.HeyThereCatPorn = function() {
 				miranda.relation.IncreaseStat(100, 5);
 				miranda.subDom.DecreaseStat(-100, 5);
 				
-				world.TimeStep({hour : 4});
+				TimeStep({hour : 4});
 				
 				Gui.NextPrompt();
 			}, enabled : true,
@@ -1395,7 +1395,7 @@ MirandaScenes.HeyThereCatPorn = function() {
 						
 						Text.Flush();
 						
-						world.TimeStep({hour : 4});
+						TimeStep({hour : 4});
 						
 						Gui.NextPrompt();
 					}, enabled : true,
@@ -1424,7 +1424,7 @@ MirandaScenes.HeyThereCatPorn = function() {
 						miranda.subDom.IncreaseStat(100, 10);
 						var mCum = miranda.OrgasmCum();
 						
-						world.TimeStep({hour : 5});
+						TimeStep({hour : 5});
 						
 						Gui.NextPrompt();
 					}, enabled : true,
@@ -1495,7 +1495,7 @@ MirandaScenes.HeyThereCatPorn = function() {
 						miranda.relation.IncreaseStat(100, 10);
 						miranda.subDom.IncreaseStat(100, 15);
 						
-						world.TimeStep({hour : 5});
+						TimeStep({hour : 5});
 						
 						Gui.NextPrompt();
 					}, enabled : true,
@@ -1868,7 +1868,7 @@ MirandaScenes.HeyThereChat = function() {
 	Text.Add("What do you want to chat with Miranda about?", parse);
 	Text.Flush();
 	
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 	
 	var options = new Array();
 	
@@ -1896,7 +1896,7 @@ MirandaScenes.TakeHome = function() {
 		Text.NL();
 		Text.Add("Once you’re at her doorstep, Miranda opens the door and hauls you inside, slamming it shut and locking it behind her. <i>“Alright then, let’s begin,”</i> she grins, licking her lips.", parse);
 		
-		world.TimeStep({hour: 1});
+		TimeStep({hour: 1});
 		
 		MirandaScenes.HomeSubbySex();
 	}
@@ -1930,7 +1930,7 @@ MirandaScenes.TakeHome = function() {
 		Text.Add("You reach her home in record time, where Miranda [dom] the door. Once she’s inside, she looks at you expectantly, holding the door for you.", parse);
 		Text.Flush();
 		
-		world.TimeStep({hour: 1});
+		TimeStep({hour: 1});
 		
 		//[Take Charge][Let Her Lead]
 		var options = new Array();
@@ -2701,7 +2701,7 @@ MirandaScenes.HomeDommySexLeavingFuckedHer = function() {
 				func : function() {
 					Text.Clear();
 					//TODO
-					world.TimeStep({hour: 2});
+					TimeStep({hour: 2});
 					Text.Add("<i>“Pity, I guess I’ll see you around then,”</i> she says, turning to take a nap.", parse);
 					PrintDefaultOptions();
 				}, enabled : true,
@@ -2888,7 +2888,7 @@ MirandaScenes.HomeDommySexRideDobieCockVag = function() {
 
 			player.subDom.IncreaseStat(75, 1);
 			miranda.subDom.DecreaseStat(-50, 1);
-			world.TimeStep({minute: 15});
+			TimeStep({minute: 15});
 
 			MirandaScenes.HomeDommySexRideDobieCockVagFuck(stickymiranda, true);
 		}, enabled : true,
@@ -3008,7 +3008,7 @@ MirandaScenes.HomeDommySexRideDobieCockVagFuck = function(stickymiranda, came) {
 				Text.Add("Well… either way, you’re stuck here for a while. You cuddle together until her knot finally deflates, allowing her to pull out with a loud, sloppy plop.", parse);
 			}
 			Text.Add(" A gush of cum pours out from your gaping gash, though you still have a visible bulge on your belly from her massive load; moving around is going to be a bit tough for a while.", parse);
-			world.TimeStep({hour: 1, minute: 30});
+			TimeStep({hour: 1, minute: 30});
 			PrintDefaultOptions();
 		}, enabled : true,
 		tooltip : "Just a little more... make her breed you!"
@@ -3032,7 +3032,7 @@ MirandaScenes.HomeDommySexRideDobieCockVagFuck = function(stickymiranda, came) {
 			Text.Add("<i>“Now, how about you help me clean up this mess?”</i> Miranda gestures to[m1] the bed,[m2] which [is] soaked in cum.", parse);
 			Text.NL();
 			Text.Add("Least you could do after that, you suppose.", parse);
-			world.TimeStep({hour: 1});
+			TimeStep({hour: 1});
 			PrintDefaultOptions();
 		}, enabled : true,
 		tooltip : "That thick bulge is too intimidating - leave it out!"
@@ -3080,7 +3080,7 @@ MirandaScenes.HomeDommySexRideDobieCockVagSubmit = function(submit) {
 
 	player.subDom.DecreaseStat(-75, 1);
 	miranda.subDom.IncreaseStat(75, 2);
-	world.TimeStep({hour: 1, minute: 30});
+	TimeStep({hour: 1, minute: 30});
 
 	MirandaScenes.HomeDommySexLeavingFuckedHer();
 }
@@ -3740,7 +3740,7 @@ MirandaScenes.HomeDommySexRideDobieCockAnal = function() {
 					Text.Add("<i>“Crap, I didn’t know getting used like that could feel this good. If this is your idea of domming, you can dom me anytime, [playername].”</i>", parse);
 				Text.Flush();
 
-				world.TimeStep({minute: 30});
+				TimeStep({minute: 30});
 				player.AddLustFraction(-1);
 				miranda.AddLustFraction(-1);
 
@@ -4208,7 +4208,7 @@ MirandaScenes.HomeSubbySexLeavingFuckedHer = function() {
 				func : function() {
 					Text.Clear();
 					//TODO
-					world.TimeStep({hour: 2});
+					TimeStep({hour: 2});
 					Text.Add("<i>“Pity, I guess I’ll see you around then,”</i> she says, turning to take a nap.", parse);
 					PrintDefaultOptions();
 				}, enabled : true,
@@ -4528,7 +4528,7 @@ MirandaScenes.HomeSubbySexDommyRide = function(location, Loc) {
 			Text.Add("Your knot swells, tying you with your lover[c]. ", parse);
 		}
 		Text.Add("The two of you collapse, hugging each other as you ride out your orgasmic high.", parse);
-		if(knotted) world.TimeStep({minute: 30});
+		if(knotted) TimeStep({minute: 30});
 	}
 	else {
 		Text.Add("Your own orgasm is triggered when the threshing herm grinds the base of the toy against your crotch, and it spreads like lightning through your body. Overcome with need, your pussy clenches, leaking girly juices while you ride out your orgasmic high. The two of you collapse in each other’s arms, panting from the exertion.", parse);
@@ -4537,7 +4537,7 @@ MirandaScenes.HomeSubbySexDommyRide = function(location, Loc) {
 	}
 	Text.Flush();
 
-	world.TimeStep({hour: 1, minute: 30});
+	TimeStep({hour: 1, minute: 30});
 
 	Gui.NextPrompt(function() {
 		Text.Clear();
@@ -4717,14 +4717,14 @@ MirandaScenes.HomeSubbySexTakeAnal = function(location, Loc) {
 			location = Loc.Upstairs;
 		}
 
-		world.TimeStep({hour : 1});
+		TimeStep({hour : 1});
 
 		Text.Flush();
 
 		Gui.NextPrompt(function() {
 			Gui.Callstack.push(function() {
 				miranda.relation.IncreaseStat(75, 1);
-				world.TimeStep({hour : 4});
+				TimeStep({hour : 4});
 
 				Text.Flush();
 				Gui.NextPrompt(function() {
@@ -5254,7 +5254,7 @@ MirandaScenes.TavernSexBackroomSubbyVag = function(cocks) {
 		Text.NL();
 		Text.Add("Well, if ever she decides she'd like to feel full again, you're certainly available to fill her up, you reply.", parse);
 
-		world.TimeStep({minute: 40});
+		TimeStep({minute: 40});
 	}
 	else {
 		Text.Add("Miranda sighs in pleasure as she lies down on the cushions below. <i>“You really know how to treat a lady, [playername],”</i> she grins.", parse);
@@ -5286,7 +5286,7 @@ MirandaScenes.TavernSexBackroomSubbyVag = function(cocks) {
 	Text.Add("Once the two of you are recovered from your recent exertions, you clean up the mess you made as best you can, then get back into your respective gear. Miranda casually unblocks the door and the two of you head back out into the bar. There, you[comp] say goodbye to the dober-morph before leaving her to resume her drinking.", parse);
 	Text.Flush();
 
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 
 	Gui.NextPrompt();
 }
@@ -5675,7 +5675,7 @@ MirandaScenes.TavernSexPublicBJ = function() {
 	parse["lover"] = (miranda.Attitude() < Miranda.Attitude.Neutral) ? "bitch" : "lover";
 	Text.Add("<i>“Not bad, [lover],”</i> she sighs, waving for another drink as you hurriedly clean yourself up.", parse);
 
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 
 	player.AddLustFraction(0.5);
 	miranda.subDom.IncreaseStat(40, 1);
@@ -5749,7 +5749,7 @@ MirandaScenes.TavernSexDommyBJ = function() {
 	}
 	Text.Flush();
 
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 
 	//[Take It][69][Footjob]
 	var options = new Array();
@@ -6242,7 +6242,7 @@ MirandaScenes.DatingEntry = function() {
 		Text.Add("<i>“So, what do you think, [playername]?”</i>", parse);
 		
 		party.location = world.loc.Rigard.Slums.gate;
-		world.TimeStep({minute: 20});
+		TimeStep({minute: 20});
 		
 		Text.Flush();
 		
@@ -6459,7 +6459,7 @@ MirandaScenes.DatingStage1 = function() {
 					var remaining = player.drunkLevel - 0.8;
 					var minutes   = Math.floor(remaining / player.DrunkRecoveryRate() * 60);
 					
-					world.TimeStep({minute: minutes});
+					TimeStep({minute: minutes});
 					
 					Gui.NextPrompt(function() {
 						Text.Clear();
@@ -6524,7 +6524,7 @@ MirandaScenes.DatingStage2 = function() {
 		
 	};
 	
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 	
 	Gui.Callstack.push(function() { //TODO
 		Text.Add("After some time, the two of you have made your way to Miranda’s house. The dobie turns to look at you expectantly.", parse);
@@ -6998,7 +6998,7 @@ MirandaScenes.DatingStage3 = function() {
 		stud : dom >= 50 ? player.mfTrue("master", "mistress") : player.mfTrue("stud", "beautiful")
 	};
 	
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 	
 	if(MirandaScenes.DatingScore > 1) {
 		Text.Add("<i>“Mm… I can’t wait to get my paws on you, sexy,”</i> Miranda purrs. <i>“Get inside, [stud]! This doggie’s got a bone for you to pick. Any way you want to roll, I’ll roll.”</i>", parse);
@@ -7161,7 +7161,7 @@ MirandaScenes.DatingFirstDocks = function() {
 	};
 	
 	party.location = world.loc.Rigard.Slums.docks;
-	world.TimeStep({minute: 20});
+	TimeStep({minute: 20});
 	
 	Text.Add("Leaving the small garden behind, the two of you head down a well-trodden road, not quite deserted, even at this hour. After a while, you begin to notice the smell of brine and fish, as your steps takes you closer to the dock area. There are large crates lining the sides of large warehouses, mostly empty but sure to be filled with a new catch the next morning. Along the riverside, a minor fleet of small fishing boats lie tied.", parse);
 	Text.NL();
@@ -7217,7 +7217,7 @@ MirandaScenes.DatingFirstMercs = function() {
 		
 	};
 	
-	world.TimeStep({minute: 20});
+	TimeStep({minute: 20});
 	
 	Text.Add("<i>“I mentioned escorts, didn’t I?”</i> Miranda murmurs thoughtfully. <i>“Which brings us to this place.”</i> You are standing before a large two-story building at the edge of the docks district, far enough away from it to alleviate the smell slightly, but close enough to have the local water holes within close distance. It looks to be in relatively good shape for the slums, though the thick wooden door is marred with what looks like sword slashes.", parse);
 	Text.NL();
@@ -7281,7 +7281,7 @@ MirandaScenes.DatingFirstCity = function() {
 	};
 	
 	party.location = world.loc.Rigard.Residential.street;
-	world.TimeStep({minute: 20});
+	TimeStep({minute: 20});
 	
 	Text.Add("<i>“Seen enough of the slums to last you for tonight?”</i> The two of you are nearing the outer walls of Rigard, close to the peasants’ gate. ", parse);
 	if(rigard.Visa()) {
@@ -7421,7 +7421,7 @@ MirandaScenes.DatingFirstHome = function() {
 		playername : player.name
 	};
 	
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 	
 	miranda.flags["Dates"]++;
 	

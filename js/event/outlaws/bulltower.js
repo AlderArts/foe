@@ -4,11 +4,11 @@
  * Flags in outlaws
  * stats in outlaws.BT
  */
-import { Event, Link, EncounterTable, MoveToLocation } from '../../event';
+import { Event, Link, EncounterTable } from '../../event';
 import { Outlaws } from './outlaws';
 import { GetDEBUG } from '../../../app';
 import { Stat } from '../../stat';
-import { WorldTime } from '../../worldtime';
+import { WorldTime, MoveToLocation } from '../../GAME';
 import { SetGameState, GameState } from '../../gamestate';
 import { Gui } from '../../gui';
 import { Text } from '../../text';
@@ -212,7 +212,7 @@ BullTowerScenes.Initiation = function() {
 	Text.Add("<i>“Yes, Lady Radigaz, you’re very well-informed,”</i> Zenith says coolly. <i>“But if we can avoid further interruptions? Maria?”</i>", parse);
 	Text.Flush();
 	
-	world.TimeStep({ minute : 30 });
+	TimeStep({ minute : 30 });
 	
 	Gui.NextPrompt(function() {
 		Text.Clear();
@@ -239,7 +239,7 @@ BullTowerScenes.Initiation = function() {
 		Text.Add("<i>“Yes, I know Bull Tower was built to be impregnable. However, we’ve come up with an idea that might work. If we can pull it off, we move another step toward the moral high ground, my friends. Amongst other things. That is all I wish of you today, my friends - to keep you informed. You may leave now.”</i>", parse);
 		Text.Flush();
 		
-		world.TimeStep({ minute : 10 });
+		TimeStep({ minute : 10 });
 		
 		Gui.NextPrompt(function() {
 			Text.Clear();
@@ -282,7 +282,7 @@ BullTowerScenes.Initiation = function() {
 			Text.Add("Zenith scratches his chin. <i>“Small. Thin. Balding. Maria will draw you a sketch before you leave; she will also provide precise directions to the tower. Are there any questions?”</i>", parse);
 			Text.Flush();
 			
-			world.TimeStep({ minute : 20 });
+			TimeStep({ minute : 20 });
 			
 			BullTowerScenes.InitiationQuestions();
 		});
@@ -310,7 +310,7 @@ BullTowerScenes.InitiationQuestions = function(opts) {
 				Text.Add("Zenith nods. <i>“Or those who claim to be under the protection of such. It does seem like an open-and-shut case of tax evasion. If Bull Tower is being used as a waystation, it would make sense for them to hold Alaric there until one of the smugglers turns up to take him away.”</i>", parse);
 				Text.Flush();
 				
-				world.TimeStep({ minute : 5 });
+				TimeStep({ minute : 5 });
 				
 				opts.presence = true;
 				BullTowerScenes.InitiationQuestions(opts);
@@ -342,7 +342,7 @@ BullTowerScenes.InitiationQuestions = function(opts) {
 				Text.Add("You think a moment, and agree that from the way this fortress sounds, Zenith’s information is probably the best you’ll be getting. It’s not much, but it sounds like only the Royal Guard would have more.", parse);
 				Text.Flush();
 				
-				world.TimeStep({ minute : 5 });
+				TimeStep({ minute : 5 });
 				
 				opts.plan = true;
 				BullTowerScenes.InitiationQuestions(opts);
@@ -369,7 +369,7 @@ BullTowerScenes.InitiationQuestions = function(opts) {
 				}
 				Text.Flush();
 				
-				world.TimeStep({ minute : 5 });
+				TimeStep({ minute : 5 });
 				
 				opts.obj = true;
 				BullTowerScenes.InitiationQuestions(opts);
@@ -391,7 +391,7 @@ BullTowerScenes.InitiationQuestions = function(opts) {
 			Text.Add("Well, it seems that you’re done here. Once you’re ready, you should see Cveta about setting off.", parse);
 			Text.Flush();
 			
-			world.TimeStep({ minute : 5 });
+			TimeStep({ minute : 5 });
 			
 			Gui.NextPrompt();
 		}, enabled : true,
@@ -421,7 +421,7 @@ BullTowerScenes.MovingOut = function() {
 			Text.Add("You’re going to have only one shot at this. While time is of the essence here, it won’t do to head into the great unknown without making all the preparations you can; with that in mind, you step back and return to the middle of camp. You’ll be back when everything’s been taken care of.", parse);
 			Text.NL();
 
-			world.TimeStep({minute: 5});
+			TimeStep({minute: 5});
 
 			PrintDefaultOptions();
 		}, enabled : true,
@@ -465,7 +465,7 @@ BullTowerScenes.MovingOut = function() {
 			Text.Add("With that, she turns, leading the way. She’s careful to never venture more than a half-step ahead, politely allowing you the illusion that you know where you’re going too. The lookouts on duty lower the drawbridge, and crossing the  trenches, you’re on your way.", parse);
 			Text.Flush();
 			
-			world.TimeStep({hour: 1});
+			TimeStep({hour: 1});
 			
 			Gui.NextPrompt(function() {
 				Text.Clear();
@@ -639,7 +639,7 @@ BullTowerLoc.Courtyard.Yard.events.push(new Link(
 				}
 				Text.Flush();
 				
-				world.TimeStep({minute: 20});
+				TimeStep({minute: 20});
 				outlaws.flags["BT"] |= Outlaws.BullTower.StatueDestroyed;
 				
 				Gui.NextPrompt();
@@ -658,7 +658,7 @@ BullTowerLoc.Courtyard.Yard.events.push(new Link(
 				}
 				Text.Flush();
 				
-				world.TimeStep({minute: 5});
+				TimeStep({minute: 5});
 				
 				Gui.NextPrompt();
 				outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
@@ -1106,7 +1106,7 @@ BullTowerLoc.Courtyard.Pens.events.push(new Link(
 		
 		outlaws.flags["BT"] |= Outlaws.BullTower.AnimalsFreed;
 		
-		world.TimeStep({ minute : 15 });
+		TimeStep({ minute : 15 });
 		
 		Gui.NextPrompt();
 		outlaws.BT.DecSuspicion(-100, 20);
@@ -2241,7 +2241,7 @@ BullTowerScenes.EndingInjured = function() {
 	
 	party.LoadActiveParty();
 	
-	world.TimeStep({hour: 6});
+	TimeStep({hour: 6});
 	
 	Text.Clear();
 	Text.Add("When you eventually come to, you find yourself lying on a stretcher - no, it’s a cot - and at length the familiar hustle and bustle of the bandit camp comes to your ears. Muffled curses, the sounds of wood being chopped, a child laughing while dogs bark away; ah, it’s good to be back, even if you’re rather unclear on the how.", parse);
@@ -2284,7 +2284,7 @@ BullTowerScenes.EndingDebrief = function(injured) {
 	};
 	
 	party.location = world.loc.Outlaws.Camp;
-	world.TimeStep({hour: 3});
+	TimeStep({hour: 3});
 	
 	Text.Flush();
 	
@@ -2464,7 +2464,7 @@ BullTowerScenes.AftermathAlaric = function() {
 	Text.Add("An honest accountant? Will wonders never cease? Next thing you know, an honest advocate will pop up in this neck of the woods.", parse);
 	Text.Flush();
 	
-	world.TimeStep({minute: 10});
+	TimeStep({minute: 10});
 	
 	Gui.NextPrompt(function() {
 		Text.Clear();
@@ -2505,7 +2505,7 @@ BullTowerScenes.AftermathAlaric = function() {
 		Text.Add("With that, the little bean-counter gives you a final wave and hobbles off. The camp guards hurry to lower the drawbridge so he can cross, and after a moment, he turns and is out of sight.", parse);
 		Text.Flush();
 		
-		world.TimeStep({minute: 20});
+		TimeStep({minute: 20});
 		
 		outlaws.mainQuestTimer = new Time(0,0,1,0,0);
 		
@@ -2586,7 +2586,7 @@ BullTowerScenes.AftermathZenith = function() {
 	Text.Add("You nod and stand, thanking the badger-morph once again. He simply shrugs, grins, and ushers you out with your new possessions, leaving you to take in the cool, fresh air of the outlaw camp.", parse);
 	Text.Flush();
 	
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 	
 	outlaws.flags["BullTower"] = Outlaws.BullTowerQuest.ZenithFollowup;
 	

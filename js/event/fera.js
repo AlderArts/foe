@@ -11,8 +11,7 @@ import { TF } from '../tf';
 import { AppendageType } from '../body/appendage';
 import { Color } from '../body/color';
 import { Time } from '../time';
-import { WorldTime } from '../worldtime';
-import { MoveToLocation } from '../event';
+import { WorldTime, MoveToLocation } from '../GAME';
 
 let FeraScenes = {};
 
@@ -397,7 +396,7 @@ FeraScenes.TouchPrompt = function() {
 				Gui.NextPrompt();
 			}
 			Text.Flush();
-			world.TimeStep({minute: 10});
+			TimeStep({minute: 10});
 		}, enabled : true,
 		tooltip : "Hold Fera."
 	});
@@ -448,7 +447,7 @@ FeraScenes.TouchPrompt = function() {
 				fera.timeout = new Time(0, 0, 0, 24 - WorldTime().hour);
 				Gui.NextPrompt();
 			}
-			world.TimeStep({minute: 10});
+			TimeStep({minute: 10});
 			
 		}, enabled : true,
 		tooltip : "Play with her breasts."
@@ -546,7 +545,7 @@ FeraScenes.SexPrompt = function() {
 				Text.Add("You thank Fera for helping you and say you will consider buying the [garment]. She nods happily and moves behind you again to help you take to [garment] off. You purposely press back against her as she lifts the [garment] for you, trying to feel her [fbreasts] as well as you can with your back. Once the [garment] is off, she excuses herself and leaves you to get your clothes back on.", parse);
 				fera.relation.IncreaseStat(15, 1);
 				player.AddLustFraction(0.1);
-				world.TimeStep({minute: 15});
+				TimeStep({minute: 15});
 			}
 			else if(fera.relation.Get() < 20) {
 				Text.Add("Fera nods excitedly and helps you remove your [arm].", parse);
@@ -574,7 +573,7 @@ FeraScenes.SexPrompt = function() {
 				
 				player.AddLustFraction(0.2);
 				fera.relation.IncreaseStat(20, 2);
-				world.TimeStep({minute: 15});
+				TimeStep({minute: 15});
 			}
 			else { // >= 20
 				Text.Add("Fera tilts her head at your shallow attempt at feigning decency and stares at you knowingly. She clearly knows what you really want. Realizing that there is no reason to pretend anymore, you sit on the bench and remove your [arm]. The cute catgirl stares at your body lustfully and pulls her dress down, revealing her [fbreasts].", parse);
@@ -620,7 +619,7 @@ FeraScenes.SexPrompt = function() {
 					Text.Add("Afterward, she helps you get dressed and leads you out.", parse);
 				}
 				
-				world.TimeStep({minute: 30});
+				TimeStep({minute: 30});
 				player.AddSexExp(1);
 				player.AddLustFraction(-1);
 				fera.relation.IncreaseStat(20, 2);
@@ -648,7 +647,7 @@ FeraScenes.SexPrompt = function() {
 				Text.NL();
 				Text.Add("<i>“Thanks, [playername]. That felt really good...”</i> she says as she fixes her dress. You kiss and head back into the store.", parse);
 				Text.Flush();
-				world.TimeStep({minute: 30});
+				TimeStep({minute: 30});
 				player.AddSexExp(1);
 				player.AddLustFraction(0.3);
 				fera.relation.IncreaseStat(30, 2);
@@ -735,7 +734,7 @@ FeraScenes.SexPrompt = function() {
 				Text.Flush();
 				player.AddSexExp(1);
 				
-				world.TimeStep({minute: 30});
+				TimeStep({minute: 30});
 				player.AddLustFraction(-1);
 				fera.relation.IncreaseStat(20, 2);
 				Gui.NextPrompt(FeraScenes.Interact);
@@ -778,7 +777,7 @@ FeraScenes.SexPrompt = function() {
 					Text.Add(". With small gulps, she slowly swallows it all, taking time to savor her favorite salty treat. After she's done, she licks the rest of your [cocks][ballsD] clean, and grabs one of the rags under the small bench to wipe off the walls. You get your [botarmor] back on, and give her a kiss. Together, you exit the dressing room.", parse);
 				}
 				Text.Flush();
-				world.TimeStep({minute: 30});
+				TimeStep({minute: 30});
 				player.AddLustFraction(-1);
 				fera.relation.IncreaseStat(20, 2);
 				Gui.NextPrompt(FeraScenes.Interact);
@@ -845,7 +844,7 @@ FeraScenes.SexPrompt = function() {
 					}
 				}
 				Text.Flush();
-				world.TimeStep({minute: 30});
+				TimeStep({minute: 30});
 				player.AddLustFraction(-1);
 				fera.relation.IncreaseStat(100, 3);
 				Gui.NextPrompt(FeraScenes.Interact);
@@ -917,7 +916,7 @@ FeraScenes.SexPrompt = function() {
 				}
 				Text.Flush();
 				fera.flags["Standing"]++;
-				world.TimeStep({minute: 30});
+				TimeStep({minute: 30});
 				player.AddLustFraction(-1);
 				fera.relation.IncreaseStat(100, 2);
 				Gui.NextPrompt(FeraScenes.Interact);
@@ -990,7 +989,7 @@ FeraScenes.SexPrompt = function() {
 				}
 				Text.Flush();
 				fera.flags["Behind"]++;
-				world.TimeStep({minute: 30});
+				TimeStep({minute: 30});
 				player.AddLustFraction(-1);
 				fera.relation.IncreaseStat(100, 2);
 				Gui.NextPrompt(FeraScenes.Interact);
@@ -1078,7 +1077,7 @@ FeraScenes.SexPrompt = function() {
 					}
 					Text.Flush();
 					fera.flags["Anal"]++;
-					world.TimeStep({minute: 30});
+					TimeStep({minute: 30});
 					player.AddLustFraction(-1);
 					fera.relation.IncreaseStat(100, 2);
 					Gui.NextPrompt(FeraScenes.Interact);
@@ -1156,7 +1155,7 @@ FeraScenes.SexPrompt = function() {
 						}
 					}
 					Text.Flush();
-					world.TimeStep({minute: 30});
+					TimeStep({minute: 30});
 					player.AddLustFraction(-1);
 					fera.relation.IncreaseStat(100, 2);
 					Gui.NextPrompt(FeraScenes.Interact);

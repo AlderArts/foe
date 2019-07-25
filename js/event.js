@@ -74,21 +74,6 @@ Event.prototype.switchSpot = function() {
 	return false;
 }
 
-function MoveToLocation(location, timestep, preventClear) {
-	var oldLocation = GAME().party.location;
-	GAME().party.location = location;
-
-	// Step time
-	timestep = timestep || new Time();
-	world.TimeStep(timestep);
-
-	location.onEntry(preventClear, oldLocation);
-}
-
-Event.prototype.MoveTo = function(timestep, preventClear) {
-	MoveToLocation(this, timestep, preventClear);
-}
-
 Event.prototype.SleepFunc = function() {
 	SetGameState(GameState.Event, Gui);
 	Text.NL();
@@ -97,7 +82,7 @@ Event.prototype.SleepFunc = function() {
 	Gui.NextPrompt(function() {
 		Text.Clear();
 		var func = function() {
-			world.TimeStep({hour: 8});
+			TimeStep({hour: 8});
 			GAME().party.Sleep();
 
 			Gui.PrintDefaultOptions();
@@ -117,42 +102,42 @@ Event.prototype.WaitFunc = function() {
 	options.push({ nameStr : "Half hour",
 		tooltip : "Wait for half an hour.",
 		func : function() {
-			world.TimeStep({minute: 30});
+			TimeStep({minute: 30});
 			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	options.push({ nameStr : "One hour",
 		tooltip : "Wait for one hour.",
 		func : function() {
-			world.TimeStep({hour: 1});
+			TimeStep({hour: 1});
 			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Two hours",
 		tooltip : "Wait for two hours.",
 		func : function() {
-			world.TimeStep({hour: 2});
+			TimeStep({hour: 2});
 			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Four hours",
 		tooltip : "Wait for four hours.",
 		func : function() {
-			world.TimeStep({hour: 4});
+			TimeStep({hour: 4});
 			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Eight hours",
 		tooltip : "Wait for eight hours.",
 		func : function() {
-			world.TimeStep({hour: 8});
+			TimeStep({hour: 8});
 			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	options.push({ nameStr : "A day",
 		tooltip : "Wait for a day.",
 		func : function() {
-			world.TimeStep({day: 1});
+			TimeStep({day: 1});
 			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
@@ -387,4 +372,4 @@ EncounterTable.prototype.Get = function() {
 	return null;
 }
 
-export { Event, EncounterTable, Link, MoveToLocation };
+export { Event, EncounterTable, Link };

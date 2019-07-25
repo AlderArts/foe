@@ -216,7 +216,7 @@ Encounter.prototype.onRun = function() {
 	this.Cleanup();
 	
 	// TEMP TODO
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 	
 	Gui.NextPrompt(function() {
 		SetGameState(GameState.Event, Gui);
@@ -242,7 +242,7 @@ Encounter.prototype.onLoss = function() {
 	this.Cleanup();
 	
 	// TEMP TODO
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 	
 	Text.Flush();
 	Gui.NextPrompt(function() {
@@ -302,7 +302,7 @@ Encounter.prototype.onVictory = function() {
 	this.Cleanup();
 	
 	// TEMP TODO
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 	
 	Text.Flush();
 	Gui.NextPrompt(function() {

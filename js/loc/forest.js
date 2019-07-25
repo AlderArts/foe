@@ -4,11 +4,11 @@
  * 
  */
 
-import { Event, Link, EncounterTable, MoveToLocation } from '../event';
+import { Event, Link, EncounterTable } from '../event';
 import { GladeLoc } from './glade';
 import { MariaScenes } from '../event/outlaws/maria';
 import { GlobalScenes } from '../event/global';
-import { WorldTime } from '../worldtime';
+import { WorldTime, MoveToLocation } from '../GAME';
 
 // Create namespace
 let ForestLoc = {
@@ -35,7 +35,7 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 		Text.Flush();
 		party.inventory.AddItem(Items.FreshGrass);
 		
-		world.TimeStep({minute: 15});
+		TimeStep({minute: 15});
 		Gui.NextPrompt();
 	};
 }, 1.0, function() { return WorldTime().season != Season.Winter; });
@@ -49,7 +49,7 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 		Text.Flush();
 		party.inventory.AddItem(Items.Foxglove);
 		
-		world.TimeStep({minute: 15});
+		TimeStep({minute: 15});
 		Gui.NextPrompt();
 	};
 }, 1.0, function() { return WorldTime().season != Season.Winter; });
@@ -63,7 +63,7 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 		Text.Flush();
 		party.inventory.AddItem(Items.FoxBerries);
 		
-		world.TimeStep({minute: 15});
+		TimeStep({minute: 15});
 		Gui.NextPrompt();
 	};
 }, 1.0, function() { return WorldTime().season != Season.Winter; });
@@ -77,7 +77,7 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 		Text.Flush();
 		party.inventory.AddItem(Items.CanisRoot);
 		
-		world.TimeStep({minute: 15});
+		TimeStep({minute: 15});
 		Gui.NextPrompt();
 	};
 }, 1.0, function() { return WorldTime().season != Season.Winter; });
@@ -91,7 +91,7 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 		Text.Flush();
 		party.inventory.AddItem(Items.SpringWater);
 		
-		world.TimeStep({minute: 15});
+		TimeStep({minute: 15});
 		Gui.NextPrompt();
 	};
 }, 1.0, function() { return true; });
@@ -108,7 +108,7 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 		
 		party.inventory.AddItem(Items.TreeBark);
 		
-		world.TimeStep({minute: 15});
+		TimeStep({minute: 15});
 		Gui.NextPrompt();
 	};
 }, 1.0, function() { return true; });
@@ -125,7 +125,7 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 		
 		party.inventory.AddItem(Items.AntlerChip);
 		
-		world.TimeStep({minute: 15});
+		TimeStep({minute: 15});
 		Gui.NextPrompt();
 	};
 }, 1.0, function() { return true; });
@@ -195,7 +195,7 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 		}
 		Text.Flush();
 		
-		world.TimeStep({minute: 15});
+		TimeStep({minute: 15});
 		
 		Gui.NextPrompt();
 	};

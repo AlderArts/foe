@@ -28,7 +28,7 @@ KiakaiSex.Healing = function() {
 	
 	Text.Clear();
 	
-	world.TimeStep({minute : 30});
+	TimeStep({minute : 30});
 	
 	if(player.HPLevel() < 0.25) { // REALLY LOW HEALTH 0-25%
 		player.AddHPFraction(1.0);
@@ -2978,7 +2978,7 @@ KiakaiSex.SexPrompt = function(attitude) {
 								Text.NL();
 								Text.Add("Time passes...", parse);
 								Text.NL();
-								world.TimeStep({minute: 30});
+								TimeStep({minute: 30});
 							}
 						}
 						
@@ -2999,7 +2999,7 @@ KiakaiSex.SexPrompt = function(attitude) {
 						
 						kiakai.Butt().stretch.IncreaseStat(Orifice.Tightness.loose, 0.5);
 						kiakai.subDom.DecreaseStat(0, 1);
-						world.TimeStep({hour: 1});
+						TimeStep({hour: 1});
 						player.AddLustFraction(-1);
 						kiakai.AddLustFraction(-1);
 						
@@ -3062,7 +3062,7 @@ KiakaiSex.SexPrompt = function(attitude) {
 								Text.NL();
 								Text.Add("Finally, you can feel your knot diminishing in size, allowing you to retract your member from its prison.", parse);
 								Text.NL();
-								world.TimeStep({minute: 30});
+								TimeStep({minute: 30});
 							}
 							else if(cum > 3) {
 								Text.Add("[name] is unable to contain all of your generous gift, and a steady stream seeps out past the tight seal of your [cock], dripping down to the ground.", parse);
@@ -3092,7 +3092,7 @@ KiakaiSex.SexPrompt = function(attitude) {
 						kiakai.Butt().stretch.IncreaseStat(Orifice.Tightness.loose, 0.5);
 						kiakai.subDom.DecreaseStat(-50, 2);
 						
-						world.TimeStep({hour: 1});
+						TimeStep({hour: 1});
 						player.AddLustFraction(-1);
 						kiakai.AddLustFraction(-1);
 						
@@ -3148,7 +3148,7 @@ KiakaiSex.SexPrompt = function(attitude) {
 									Text.NL();
 									
 									kiakai.Butt().capacity.IncreaseStat(thk, 1);
-									world.TimeStep({minute: 30});
+									TimeStep({minute: 30});
 								}
 								if(cum > 3) {
 									Text.Add("[name] moans appreciatively as your spunk fills [himher] up, the thick cream acting as a soothing salve for [hisher] distended innards.", parse);
@@ -3195,7 +3195,7 @@ KiakaiSex.SexPrompt = function(attitude) {
 							kiakai.subDom.DecreaseStat(-75, 10);
 							kiakai.Butt().capacity.IncreaseStat(len, 5);
 							
-							world.TimeStep({hour: 1});
+							TimeStep({hour: 1});
 							player.AddLustFraction(-1);
 							kiakai.AddLustFraction(-1);
 							
@@ -3863,7 +3863,7 @@ KiakaiSex.AnalCatchPrep = function(choice, assert) {
 				Text.Add("", parse);
 				Text.Flush();
 				
-				world.TimeStep({hour: 1});
+				TimeStep({hour: 1});
 				player.AddLustFraction(-1);
 				kiakai.AddLustFraction(-1);
 				kiakai.subDom.DecreaseStat(-75, 2);
@@ -3983,7 +3983,7 @@ KiakaiSex.AnalCatchPrep = function(choice, assert) {
 				Text.NL();
 				if(kiakai.FirstCock() && kiaiCock.knot == 1) {
 					Text.Add("It takes a while before the elf’s knot finally deflates, allowing you to disentangle yourself from each other.", parse);
-					world.TimeStep({minute : 15});
+					TimeStep({minute : 15});
 				}
 				else
 					Text.Add("After some time has passed, you disentangle yourself from the elf.", parse);
@@ -3999,7 +3999,7 @@ KiakaiSex.AnalCatchPrep = function(choice, assert) {
 				
 				Text.Flush();
 				
-				world.TimeStep({hour: 1});
+				TimeStep({hour: 1});
 				player.AddLustFraction(-1);
 				kiakai.AddLustFraction(-1);
 				kiakai.subDom.IncreaseStat(25, 1);
@@ -4232,7 +4232,7 @@ KiakaiSex.AnalCatchFinish = function() {
 	
 	Text.Flush();
 	
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 	player.AddLustFraction(-1);
 	kiakai.AddLustFraction(-1);
 	kiakai.subDom.IncreaseStat(50, 3);

@@ -4,11 +4,11 @@
  * 
  */
 
-import { Event, Link, EncounterTable, MoveToLocation } from '../event';
+import { Event, Link, EncounterTable } from '../event';
 import { NomadsLoc } from './nomads';
 import { Scenes } from '../scenes';
 import { BurrowsLoc } from './burrows';
-import { WorldTime } from '../worldtime';
+import { WorldTime, MoveToLocation } from '../GAME';
 import { Season } from '../time';
 
 // Create namespace
@@ -358,7 +358,7 @@ PlainsLoc.Gate.links.push(new Link(
 			else if(rigard.Visa()) {
 				if(Math.random() < 0.1) {
 					Text.Add("The guard holds you up for way longer than necessary, checking your papers and asking questions as to your purpose in the city. By the time you’re done, your head feels like mush from the continuous barrage of repetitive questioning. Finally, you are allowed inside the city.");
-					world.TimeStep({hour:2});
+					TimeStep({hour:2});
 				}
 				else
 					Text.Add("You show your visa to the guard, who nods and waves you through.");

@@ -4,7 +4,8 @@
  * 
  */
 
-import { Event, Link, EncounterTable, MoveToLocation } from '../event';
+import { Event, Link, EncounterTable } from '../event';
+import { MoveToLocation } from '../GAME';
 
 // Create namespace
 let DesertLoc = {
@@ -48,7 +49,7 @@ DesertLoc.Drylands.enc.AddEnc(function() {
 		}
 		Text.Flush();
 		
-		world.TimeStep({minute: 15});
+		TimeStep({minute: 15});
 		
 		Gui.NextPrompt();
 	};

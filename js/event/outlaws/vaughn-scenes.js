@@ -1,6 +1,6 @@
 import { Vaughn } from './vaughn';
 import { TasksScenes } from './vaughn-tasks';
-import { WorldTime } from '../../worldtime';
+import { WorldTime } from '../../GAME';
 
 let VaughnScenes = {
 	Tasks : TasksScenes,
@@ -35,7 +35,7 @@ VaughnScenes.Introduction = function() {
 	
 	vaughn.flags["Met"] = Vaughn.Met.Met;
 	
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 	
 	Gui.NextPrompt();
 }
@@ -248,7 +248,7 @@ VaughnScenes.TalkPrompt = function() {
 			Text.Add("<i>“Not completely,”</i> the fox-morph replies with a small sigh, <i>“but at least I’m not doomed to wander the plains any more. C’mon, [playername]. Anything else you want to ask before our little smoke break is up?”</i>", parse);
 			Text.Flush();
 			
-			world.TimeStep({minute: 10});
+			TimeStep({minute: 10});
 		}, enabled : true
 	});
 	Gui.SetButtonsFromList(options, true, function() {
@@ -294,7 +294,7 @@ VaughnScenes.TalkHimself = function() {
 			Text.Add("The two of you stare at each other in silence until it’s clear that he’s not going to say any more. Well, what now?", parse);
 			Text.Flush();
 			
-			world.TimeStep({minute: 10});
+			TimeStep({minute: 10});
 			
 			vaughn.flags["Talk"] |= Vaughn.Talk.Past;
 			
@@ -314,7 +314,7 @@ VaughnScenes.TalkHimself = function() {
 			Text.Add("Fine, fine. There’s not much point in discussing it with him if he’s going to get all defensive about it anyway. Perhaps you could find another topic to discuss… ", parse);
 			Text.Flush();
 			
-			world.TimeStep({minute: 10});
+			TimeStep({minute: 10});
 			
 			VaughnScenes.TalkHimself();
 		}, enabled : true
@@ -392,7 +392,7 @@ VaughnScenes.TalkHimself = function() {
 			
 			Text.Flush();
 			
-			world.TimeStep({minute: 10});
+			TimeStep({minute: 10});
 			
 			VaughnScenes.TalkHimself();
 		}, enabled : true
@@ -429,7 +429,7 @@ VaughnScenes.TalkHimself = function() {
 				Text.Add("<i>“Yeah, but it was one which no doubt played out plenty of times with many people during those years. There’re people in this camp with better tear-jerkers than mine, [playername]. May not be so free with their words, though.”</i> With that, Vaughn drags deeply on his smoke and exhales in a long sigh. <i>“It’s been years, [playername]. I’ve moved on since then. Sabrina’s probably long forgotten me, if she’s still alive, and the engagement ring I bought all those years ago gone - or more likely, she’s saying it was handed down from her grandma. Roll with the punches, [playername]; that’s all I have to say.”</i>", parse);
 				Text.Flush();
 				
-				world.TimeStep({minute: 10});
+				TimeStep({minute: 10});
 				
 				vaughn.flags["Talk"] |= Vaughn.Talk.Fiancee;
 				
@@ -475,7 +475,7 @@ VaughnScenes.TalkWar = function() {
 			Text.Add("<i>“Now, all of a sudden, there’s a civil war exploding out of nowhere, and Rewyn desperately needs warm bodies to fill the rank and file. The Royal Guard definitely isn’t going to be doing it, so what <b>else</b> was he supposed to do but pick folks off the streets, especially those from the slums who most likely wouldn’t be missed? Throw them a cheap spear and shield, then send them out to die for the Crown.</i>", parse);
 			Text.Flush();
 			
-			world.TimeStep({minute: 10});
+			TimeStep({minute: 10});
 			
 			Gui.NextPrompt(function() {
 				Text.Clear();
@@ -530,7 +530,7 @@ VaughnScenes.TalkWar = function() {
 					Text.Add("<i>“My pleasure,”</i> Vaughn replies, the fox-morph pulling his shoulders together with a sigh. <i>“Like I said, I’m my favorite subject to talk about. Anything else about the war you want to ask?”</i>", parse);
 					Text.Flush();
 					
-					world.TimeStep({minute: 10});
+					TimeStep({minute: 10});
 					
 					if(vaughn.flags["TWar"] < Vaughn.TalkWar.Beginnings)
 						vaughn.flags["TWar"] = Vaughn.TalkWar.Beginnings;
@@ -568,7 +568,7 @@ VaughnScenes.TalkWar = function() {
 				Text.Add("By now, Vaughn isn’t looking at you, his gaze trained on some distant point beyond your shoulder as the memories flow unimpeded, his mouth running on automatic.", parse);
 				Text.Flush();
 				
-				world.TimeStep({minute: 10});
+				TimeStep({minute: 10});
 				
 				Gui.NextPrompt(function() {
 					Text.Clear();
@@ -599,7 +599,7 @@ VaughnScenes.TalkWar = function() {
 					Text.Add("<i>“Aye, a long and bitter one,”</i> Vaughn agrees, <i>“but what else could I have done that’d have allowed me to live with myself? You want to change the topic? It’s not as if I’ve got anything else to say on the subject.”</i>", parse);
 					Text.Flush();
 					
-					world.TimeStep({minute: 10});
+					TimeStep({minute: 10});
 					
 					if(vaughn.flags["TWar"] < Vaughn.TalkWar.Wartime)
 						vaughn.flags["TWar"] = Vaughn.TalkWar.Wartime;
@@ -639,7 +639,7 @@ VaughnScenes.TalkWar = function() {
 				Text.Add("Right, right. You wait a while for Vaughn to continue, but it seems like he’s reached the end of his little tale. What else should you ask him?", parse);
 				Text.Flush();
 				
-				world.TimeStep({minute: 10});
+				TimeStep({minute: 10});
 				
 				if(vaughn.flags["TWar"] < Vaughn.TalkWar.Desertion)
 					vaughn.flags["TWar"] = Vaughn.TalkWar.Desertion;
@@ -719,7 +719,7 @@ VaughnScenes.Sex = function() {
 		parse["b"] = player.FirstBreastRow().Size() > 10 ? "" : " - I don’t care if you’ve to grow them yourself or what -";
 		Text.Add("<i>“Look, the less said about this, the better. If you’re really that desperate to throw yourself at a has-been like me, then by all means, do so. Bring along a good plush pair[b] and I’ll consider it deeply. Now, what were we talking about when this came out of nowhere?”</i>", parse);
 		
-		world.TimeStep({minute: 30});
+		TimeStep({minute: 30});
 		
 		VaughnScenes.Prompt();
 	}
@@ -786,7 +786,7 @@ VaughnScenes.SexTitfuck = function() {
 		Text.Add("<i>“Now, if we could turn our attention back to important matters?”</i>", parse);
 		Text.Flush();
 		
-		world.TimeStep({minute: 5});
+		TimeStep({minute: 5});
 		
 		VaughnScenes.Prompt();
 	}
@@ -940,7 +940,7 @@ VaughnScenes.SexTitfuckBigCont = function(parse) {
 	player.AddSexExp(2);
 	player.AddLustFraction(.5);
 	
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 	
 	Gui.NextPrompt();
 }
@@ -1074,7 +1074,7 @@ VaughnScenes.SexTitfuckAverage = function() {
 	player.AddSexExp(2);
 	player.AddLustFraction(.3);
 	
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 	
 	Gui.NextPrompt();
 }
@@ -1173,7 +1173,7 @@ VaughnScenes.ConfrontFollowup = function() {
 	
 	vaughn.flags["Talk"] |= Vaughn.Talk.ConfrontFollowup;
 	
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 	
 	VaughnScenes.Prompt();
 }

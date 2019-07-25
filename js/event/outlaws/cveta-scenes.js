@@ -1,6 +1,6 @@
 import { Cveta } from './cveta';
 import { DateScenes } from './cveta-date';
-import { WorldTime } from '../../worldtime';
+import { WorldTime } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
 
@@ -338,7 +338,7 @@ CvetaScenes.Teach = function() {
 		
 		outlaws.relation.IncreaseStat(100, 2);
 		
-		world.TimeStep({hour : 8});
+		TimeStep({hour : 8});
 		Gui.NextPrompt();
 	}
 	else if(bardAvailable && cveta.flags["Bard"] < Cveta.Bard.Taught) {
@@ -371,7 +371,7 @@ CvetaScenes.Teach = function() {
 		
 		outlaws.relation.IncreaseStat(100, 2);
 		
-		world.TimeStep({hour: 8});
+		TimeStep({hour: 8});
 		Gui.NextPrompt();
 	}
 	else {
@@ -390,7 +390,7 @@ CvetaScenes.Teach = function() {
 		Text.Add(" before Cveta can teach you more about music.</b>", parse);
 		Text.Flush();
 		
-		world.TimeStep({minute: 5});
+		TimeStep({minute: 5});
 		
 		CvetaScenes.Prompt();
 	}
@@ -529,7 +529,7 @@ CvetaScenes.Pet = function() {
 			Text.Flush();
 			
 			cveta.relation.IncreaseStat(70, 3);
-			world.TimeStep({hour: 2});
+			TimeStep({hour: 2});
 			Gui.NextPrompt();
 		}, enabled : true,
 		tooltip : "Give the fluffier bits of her body a good scratching. She needs to loosen up."
@@ -569,7 +569,7 @@ CvetaScenes.Pet = function() {
 			Text.Flush();
 			
 			cveta.relation.IncreaseStat(70, 3);
-			world.TimeStep({hour: 2});
+			TimeStep({hour: 2});
 			Gui.NextPrompt();
 		}, enabled : true,
 		tooltip : "Help Cveta make sure she’s always looking regal and proper."
@@ -660,7 +660,7 @@ CvetaScenes.Pet = function() {
 					Text.Add("<i>“Well,”</i> Cveta says cheerily, putting away her top in her trunk, <i>“That is that. Please, do show yourself out when you are ready, for I am feeling somewhat…“</i> she hesitates a moment, seeking the right words. <i>“Unlike myself. Perhaps I need to lie down for a little while…”</i>", parse);
 					Text.Flush();
 					
-					world.TimeStep({hour: 2});
+					TimeStep({hour: 2});
 					Gui.NextPrompt();
 				});
 			}
@@ -1133,7 +1133,7 @@ CvetaScenes.MusicPrompt = function() {
 			Text.Add("Ever the gracious hostess, Cveta tugs at your arm, guiding your path so you can shuffle your way out of her tent. <i>“I suggest that you do not undertake any strenuous activity for the next half-hour, please.”</i>", parse);
 			Text.Flush();
 			
-			world.TimeStep({hour: 2});
+			TimeStep({hour: 2});
 			cveta.relation.IncreaseStat(100, 2);
 			
 			Gui.NextPrompt();
@@ -1209,7 +1209,7 @@ CvetaScenes.MusicPrompt = function() {
 			Text.Add("<i>“Just so. Now, if you will please excuse me, I do have a few other matters to attend to. It may not be exceedingly gracious to ask you to leave right now, but would you not mind doing so anyway?”</i>", parse);
 			Text.Flush();
 			
-			world.TimeStep({hour: 2});
+			TimeStep({hour: 2});
 			cveta.relation.IncreaseStat(100, 2);
 			
 			Gui.NextPrompt();
@@ -1357,7 +1357,7 @@ CvetaScenes.MusicPrompt = function() {
 					Text.Add("<i>“Then drop by tomorrow, and I will see what I can do for you,”</i> is the genial reply. <i>“Good health to you, my friend, and fare well.”</i>", parse);
 					Text.Flush();
 					
-					world.TimeStep({hour: 2});
+					TimeStep({hour: 2});
 					cveta.relation.IncreaseStat(100, 2);
 					
 					Gui.NextPrompt();
@@ -1394,7 +1394,7 @@ CvetaScenes.MariaTalkFirst = function() {
 	Text.Add("It seems that Maria wants you to try and talk some sense into whoever this “princess” is and get her to drop her airs. Do you feel up to the task?", parse);
 	Text.Flush();
 	
-	world.TimeStep({minute: 15});
+	TimeStep({minute: 15});
 	
 	//[Yes][No]
 	var options = new Array();
@@ -1651,7 +1651,7 @@ CvetaScenes.FirstMeetingCont = function() {
 	
 	outlaws.relation.IncreaseStat(100, 1);
 	
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 	
 	Gui.NextPrompt();
 }
@@ -1939,7 +1939,7 @@ CvetaScenes.Performance = function() {
 	
 	cveta.relation.IncreaseStat(25, 2);
 	outlaws.relation.IncreaseStat(25, 1);
-	world.TimeStep({hour : 2});
+	TimeStep({hour : 2});
 	
 	if(cveta.flags["Met"] >= Cveta.Met.ViolinQ && cveta.flags["Met"] < Cveta.Met.Available)
 		Gui.NextPrompt(CvetaScenes.ViolinPrompt);
@@ -2168,7 +2168,7 @@ CvetaScenes.PostBullTowerPerformance = function() {
 		Text.Add("<b>You may proposition Cveta for more kinds of interactions from now on.</b>", parse);
 		Text.Flush();
 		
-		world.TimeStep({hour: 1});
+		TimeStep({hour: 1});
 		
 		cveta.flags["Intimate"] |= Cveta.Intimate.Introduced;
 		
@@ -2244,7 +2244,7 @@ CvetaScenes.IntimateNuzzle = function() {
 	Text.Add("<i>“Yes, you do. Even if you do not know it. That may have been pleasant, but duty calls, [playername]. Work before pleasure.”</i>", parse);
 	Text.Flush();
 	
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 	
 	CvetaScenes.Prompt();
 	
@@ -2298,7 +2298,7 @@ CvetaScenes.IntimateCuddle = function() {
 	Text.Add("After all, just like music, a simple touch can indeed speak so much more than mere words.", parse);
 	Text.Flush();
 	
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 	
 	CvetaScenes.Prompt();
 	
@@ -2383,7 +2383,7 @@ CvetaScenes.IntimateGrope = function() {
 	
 	cveta.relation.IncreaseStat(100, 3);
 	
-	world.TimeStep({minute: 45});
+	TimeStep({minute: 45});
 	
 	//[Yes][No]
 	var options = new Array();
@@ -2402,7 +2402,7 @@ CvetaScenes.IntimateGrope = function() {
 			Text.Add("If she’s acting like this, there’s probably some kind of hang-up she’s having. Maybe it’s just that she’s a prude, but that would be too easy… turning that question over in your mind, you excuse yourself. There’s got to be some way you can break whatever’s holding her back…", parse);
 			Text.Flush();
 			
-			world.TimeStep({minute: 15});
+			TimeStep({minute: 15});
 			
 			Gui.NextPrompt();
 		}, enabled : true
@@ -2422,7 +2422,7 @@ CvetaScenes.IntimateGrope = function() {
 			Text.Add("It doesn’t look like Cveta is actually pushing you away, but there’s clearly some kind of hang-up she’s having over this whole thing. There’s got to be some way you can break whatever’s holding her back… even if the opportunity may not be here just yet. Shrugging, you wipe yourself off with a nearby cloth and promise to be back later after she’s calmed herself.", parse);
 			Text.Flush();
 			
-			world.TimeStep({minute: 15});
+			TimeStep({minute: 15});
 			
 			Gui.NextPrompt();
 		}, enabled : true

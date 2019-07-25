@@ -3,7 +3,7 @@ import { GetDEBUG } from '../../../app';
 import { Gender } from '../../body/gender';
 import { CaleSexScenes } from './cale-sex';
 import { Cale } from './cale';
-import { WorldTime } from '../../worldtime';
+import { WorldTime } from '../../GAME';
 
 let CaleScenes = {
     Sex : CaleSexScenes,
@@ -109,7 +109,7 @@ CaleScenes.FirstApproach = function() {
 	
 	Text.Clear();
 	
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 	
 	Text.Add("You approach the wolf-morph, calling out a greeting to him as you join him at the fireside.", parse);
 	Text.NL();
@@ -549,7 +549,7 @@ CaleScenes.TalkPrompt = function() {
 			Text.Flush();
 			
 			cale.relation.IncreaseStat(100, 2);
-			world.TimeStep({minute : 15});
+			TimeStep({minute : 15});
 			CaleScenes.TalkPrompt();
 		}, enabled : true,
 		tooltip : "Ask Cale to tell you a little about himself."
@@ -582,7 +582,7 @@ CaleScenes.TalkPrompt = function() {
 			Text.Flush();
 			
 			cale.relation.IncreaseStat(100, 1);
-			world.TimeStep({minute : 5});
+			TimeStep({minute : 5});
 			CaleScenes.TalkPrompt();
 		}, enabled : true,
 		tooltip : "What is he looking for in life?"
@@ -618,7 +618,7 @@ CaleScenes.TalkPrompt = function() {
 			}
 			Text.Flush();
 			cale.relation.IncreaseStat(100, 1);
-			world.TimeStep({minute : 5});
+			TimeStep({minute : 5});
 			CaleScenes.TalkPrompt();
 		}, enabled : true,
 		tooltip : "So, what is the story between him and Rosalin?"
@@ -649,7 +649,7 @@ CaleScenes.TalkPrompt = function() {
 				}
 				Text.Flush();
 				cale.relation.IncreaseStat(100, 1);
-				world.TimeStep({minute : 5});
+				TimeStep({minute : 5});
 				CaleScenes.TalkPrompt();
 			}, enabled : true,
 			tooltip : "Ask him about how it feels to be the one on the receiving end."
@@ -943,7 +943,7 @@ CaleScenes.TalkPast = function() {
 	
 	Text.Flush();
 	
-	world.TimeStep({minute : 30});
+	TimeStep({minute : 30});
 	
 	CaleScenes.TalkPrompt();
 }
@@ -1079,7 +1079,7 @@ CaleScenes.Rogue = function() {
 		Text.Flush();
 		
 		cale.relation.IncreaseStat(100, 1);
-		world.TimeStep({hour : 1});
+		TimeStep({hour : 1});
 		
 		cale.flags["Rogue"] = Cale.Rogue.Taught;
 		
@@ -1109,7 +1109,7 @@ CaleScenes.RogueTeach = function() {
 	Text.Flush();
 	
 	cale.relation.IncreaseStat(100, 3);
-	world.TimeStep({hour : 1});
+	TimeStep({hour : 1});
 	
 	cale.flags["Rogue"] = Cale.Rogue.Taught;
 	

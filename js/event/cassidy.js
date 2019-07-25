@@ -11,15 +11,16 @@ import { Race } from '../body/race';
 import { Time } from '../time';
 import { Items } from '../items';
 import { Shop } from '../shop';
-import { WorldTime } from '../worldtime';
+import { WorldTime } from '../GAME';
 import { Images } from '../assets';
 import { Gui } from '../gui';
 import { Text } from '../text';
 import { Element } from '../ability';
-import { EncounterTable, MoveToLocation } from '../event';
+import { EncounterTable } from '../event';
 import { Abilities } from '../abilities';
 import { Encounter } from '../combat';
 import { Party } from '../party';
+import { MoveToLocation } from '../GAME';
 
 let CassidyScenes = {
 	Sex     : SexScenes,
@@ -497,7 +498,7 @@ CassidyScenes.Prompt = function() {
 				}
 				Text.Flush();
 				
-				world.TimeStep({minute: 15});
+				TimeStep({minute: 15});
 				
 				CassidyScenes.Prompt();
 			}, enabled : true
@@ -641,7 +642,7 @@ CassidyScenes.TalkPrompt = function() {
 			scenes.Get();
 			
 			cassidy.relation.IncreaseStat(10, 1);
-			world.TimeStep({minute: 10});
+			TimeStep({minute: 10});
 			
 			Text.Flush();
 			CassidyScenes.TalkPrompt();
@@ -669,7 +670,7 @@ CassidyScenes.TalkPrompt = function() {
 			Text.NL();
 			Text.Add("A smile. <i>“Not surprising, ace. Talent in the blood plus hard work in the soul? A winning combination, that’s what that is. The merchants’ guild agreed to loan Dad the sum needed to get started at very reasonable rates; their investment wasn’t poorly made, as he paid off the loan within two years. Wasn’t a small sum, either. In the end, he turned out to be more skilled than his old master was. There’s nothing better for a teacher than to see your student grow beyond you.”</i>", parse);
 			Text.Flush();
-			world.TimeStep({minute: 5});
+			TimeStep({minute: 5});
 			
 			Gui.NextPrompt(function() {
 				Text.Clear();
@@ -689,7 +690,7 @@ CassidyScenes.TalkPrompt = function() {
 				Text.Flush();
 				
 				cassidy.relation.IncreaseStat(10, 1);
-				world.TimeStep({minute: 5});
+				TimeStep({minute: 5});
 				
 				CassidyScenes.TalkPrompt();
 			});
@@ -1036,7 +1037,7 @@ CassidyScenes.HeadInside = function() {
 		Text.NL();
 		Text.Add("<i>“Anyways! Enough talking about the past, let’s get to business!</i>", parse);
 		
-		world.TimeStep({minute: 30});
+		TimeStep({minute: 30});
 	}
 	else {
 		Text.Add("You’ve been invited in; no need to hold back. Stepping past the threshold, you enter to meet the familiar sight of Cassidy’s dining room.", parse);
@@ -1081,7 +1082,7 @@ CassidyScenes.HeadInside = function() {
 	}
 	Text.Flush();
 	
-	world.TimeStep({minute: 15});
+	TimeStep({minute: 15});
 	
 	if(cassidy.KnowGender() && cassidy.Relation() >= 30 && !(cassidy.flags["Talk"] & Cassidy.Talk.Spar)) {
 		Gui.NextPrompt(function() {
@@ -1380,7 +1381,7 @@ CassidyScenes.InsideMeal = function() {
 	
 	if(WorldTime().hour < 17)
 		world.StepToHour(17);
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 	
 	cassidy.relation.IncreaseStat(30, 2);
 	
@@ -1432,7 +1433,7 @@ CassidyScenes.InsideTalkPrompt = function() {
 			
 			cassidy.relation.IncreaseStat(30, 1);
 			
-			world.TimeStep({minute: 5});
+			TimeStep({minute: 5});
 			
 			CassidyScenes.InsideTalkPrompt();
 		}, enabled : true
@@ -1479,7 +1480,7 @@ CassidyScenes.InsideTalkPrompt = function() {
 			Text.Add("<i>“I know, I did a double-take too when I first heard it. Grandma just said, ‘you’re standing here, aren’t you?’ At least she didn’t tell me that Great-grandma had given up fucking around - that’d have been too much for me to swallow.”</i>", parse);
 			Text.Flush();
 			
-			world.TimeStep({minute: 5});
+			TimeStep({minute: 5});
 			
 			Gui.NextPrompt(function() {
 				Text.Clear();
@@ -1502,7 +1503,7 @@ CassidyScenes.InsideTalkPrompt = function() {
 				Text.Add("<i>“Grandma finally figured out that Great-granddad was looking to bone her.”</i>", parse);
 				Text.Flush();
 				
-				world.TimeStep({minute: 5});
+				TimeStep({minute: 5});
 				
 				Gui.NextPrompt(function() {
 					Text.Clear();
@@ -1531,7 +1532,7 @@ CassidyScenes.InsideTalkPrompt = function() {
 					
 					cassidy.relation.IncreaseStat(30, 1);
 					
-					world.TimeStep({minute: 5});
+					TimeStep({minute: 5});
 					
 					CassidyScenes.InsideTalkPrompt();
 				});
@@ -1604,7 +1605,7 @@ CassidyScenes.InsideTalkPrompt = function() {
 			Text.Add("Hey, you’ll do your best. Now, what were you going to say…?", parse);
 			Text.Flush();
 			
-			world.TimeStep({minute: 15});
+			TimeStep({minute: 15});
 			
 			cassidy.relation.IncreaseStat(30, 1);
 			
@@ -1641,7 +1642,7 @@ CassidyScenes.InsideTalkPrompt = function() {
 			}
 			Text.Flush();
 			
-			world.TimeStep({minute: 10});
+			TimeStep({minute: 10});
 			
 			CassidyScenes.InsideTalkPrompt();
 		}, enabled : true
@@ -1679,7 +1680,7 @@ CassidyScenes.InsideTalkPrompt = function() {
 					Text.Add("Cass looks at you, biting her lip. You look back at her, and get the feeling what you say next is going to have a big impact…", parse);
 					Text.Flush();
 					
-					world.TimeStep({minute: 10});
+					TimeStep({minute: 10});
 
 					var options = new Array();
 					options.push({ nameStr : "Yes",
@@ -1748,7 +1749,7 @@ CassidyScenes.InsideTalkPrompt = function() {
 						Text.Add("Very well. Enough wasting time - you can sense when you’re not wanted, and there’s little reason to stay. With a simple hug dealt and done with, you head out.", parse);
 						Text.Flush();
 						
-						world.TimeStep({minute: 10});
+						TimeStep({minute: 10});
 						
 						Gui.NextPrompt(function() {
 							MoveToLocation(world.loc.Rigard.ShopStreet.street);
@@ -1773,7 +1774,7 @@ CassidyScenes.InsideTalkPrompt = function() {
 					Text.Add("<i>“Gotcha. If I have any bright ideas, I’ll bring ‘em up with you, too. Now, there anything else you wanna talk about ‘fore our time here runs out?”</i>", parse);
 					Text.Flush();
 					
-					world.TimeStep({minute: 10});
+					TimeStep({minute: 10});
 					
 					CassidyScenes.InsideTalkPrompt();
 				}
@@ -1825,7 +1826,7 @@ CassidyScenes.ManagingShop = function() {
 	Text.Add("Hmm…", parse);
 	Text.Flush();
 	
-	world.TimeStep({minute: 15});
+	TimeStep({minute: 15});
 	
 	var askprompt = function(asked) {
 		var options = new Array();
@@ -1848,7 +1849,7 @@ CassidyScenes.ManagingShop = function() {
 					Text.Add("<i>“Great! So, are you going to do it or not?”</i>", parse);
 					Text.Flush();
 					
-					world.TimeStep({minute: 5});
+					TimeStep({minute: 5});
 					
 					askprompt(true);
 				}, enabled : true
@@ -1879,7 +1880,7 @@ CassidyScenes.ManagingShop = function() {
 				Text.Add("With that, the salamander turns tail and sets off at a leisurely jog, claws clicking on the cobblestones. Time for you to be off, too.", parse);
 				Text.Flush();
 				
-				world.TimeStep({hour: 2});
+				TimeStep({hour: 2});
 				
 				Gui.NextPrompt(function() {
 					MoveToLocation(world.loc.Rigard.ShopStreet.street);
@@ -1926,7 +1927,7 @@ CassidyScenes.ManagingShopAccept = function() {
 	Text.Add("With that and a shake of [hisher] tail, [heshe]’s gone, leaving you to swim or sink.", parse);
 	Text.Flush();
 	
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 	
 	var score = 0;
 	
@@ -1950,7 +1951,7 @@ CassidyScenes.ManagingShop1 = function(score) {
 	Text.Add("<i>“Well, Dad thinks it’s about time I stopped poking around with wooden weapons and graduated to real steel. Only problem is, I’m still not very confident… so do you have anything for a beginner?”</i>", parse);
 	Text.Flush();
 	
-	world.TimeStep({minute: 15});
+	TimeStep({minute: 15});
 	
 	parse["mistermiss"] = player.mfFem("mister", "miss");
 	
@@ -2014,7 +2015,7 @@ CassidyScenes.ManagingShop2 = function(score) {
 	Text.Add("Right. How much <i>does</i> a rapier cost?", parse);
 	Text.Flush();
 	
-	world.TimeStep({minute: 15});
+	TimeStep({minute: 15});
 	
 	var wrong = function() {
 		Text.Clear();
@@ -2077,7 +2078,7 @@ CassidyScenes.ManagingShop3 = function(score) {
 	Text.Add("<i>“Uh, yeah,”</i> he replies in almost a whisper. <i>“Look, I kinda need something which’ll let me keep my distance, yet still has a bit of weight to it… and I need it quickly. You got anything like that?”</i>", parse);
 	Text.Flush();
 	
-	world.TimeStep({minute: 15});
+	TimeStep({minute: 15});
 	
 	var wrong = function() {
 		Text.Clear();
@@ -2126,7 +2127,7 @@ CassidyScenes.ManagingShop4 = function(score) {
 		
 	};
 	
-	world.TimeStep({minute: 15});
+	TimeStep({minute: 15});
 	
 	if(rigard.RoyalAccess() && !lei.Recruited()) {
 		Text.Clear();
@@ -2179,7 +2180,7 @@ CassidyScenes.ManagingShop5 = function(score) {
 	Text.Add("Ugh, cow breath - and straight in your face, too! Hurriedly, you scour Cassidy’s inventory for something that’ll appease this muscle-bound giant…", parse);
 	Text.Flush();
 	
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 	
 	var wrong = function() {
 		Text.Clear();
@@ -2266,7 +2267,7 @@ CassidyScenes.ManagingShop6 = function(score) {
 	Text.Add("She looks up at you hopefully. <i>“Can it be done? My estate can provide the materials, and I’ve a very good idea of what I want - I’ve even got it down in drawing. It would mean a lot to me…”</i>", parse);
 	Text.Flush();
 	
-	world.TimeStep({minute: 15});
+	TimeStep({minute: 15});
 	
 	//[Yes][No]
 	var options = new Array();
@@ -2385,7 +2386,7 @@ CassidyScenes.ManagingShop6 = function(score) {
 			Text.Add("Yeah, you will.", parse);
 			Text.Flush();
 			
-			world.TimeStep({hour: 1});
+			TimeStep({hour: 1});
 			
 			Gui.NextPrompt(function() {
 				MoveToLocation(world.loc.Rigard.ShopStreet.street);
@@ -2420,7 +2421,7 @@ CassidyScenes.ManagingShopCookies = function() {
 	Text.Add("Cassidy smiles, then breaks out into a small fit of laughter. <i>“My mom’s cookies. Love the damned things to bits - want any, ace? They’re really good, and I think you deserve a reward for helping me watch the shop.”</i>", parse);
 	Text.Flush();
 	
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 	
 	//[Yes][No]
 	var options = new Array();
@@ -2487,7 +2488,7 @@ CassidyScenes.BigReveal = function() {
 	Text.Add("If it’s any consolation, though, the flame on his tail-tip is blazing away merrily with plenty of heat and strong light. Seems like he had a good time, huh? Too bad that he didn’t remember to close up the shop before knocking himself out, but an explanation can wait. For now, you’ve got to make sure the place is secure and get this poor fellow somewhere more comfortable.", parse);
 	Text.Flush();
 	
-	world.TimeStep({minute: 10});
+	TimeStep({minute: 10});
 	
 	Gui.NextPrompt(function() {
 		Text.Clear();
@@ -2577,7 +2578,7 @@ CassidyScenes.BigReveal = function() {
 			Text.Flush();
 			
 			Gui.NextPrompt(function() {
-				world.TimeStep({hour: 2});
+				TimeStep({hour: 2});
 				
 				Text.Clear();
 				Text.Add("But yes?", parse);
@@ -3058,7 +3059,7 @@ CassidyScenes.FemTalk2 = function() {
 	Text.Add("What do you do now?", parse);
 	Text.Flush();
 	
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 	cassidy.femTimer = new Time(0,0,2,0,0);
 	
 	CassidyScenes.Prompt();
@@ -3127,7 +3128,7 @@ CassidyScenes.FemFinal = function() {
 	Text.Add("Cass winks at you. <i>“See you later, ace! You want to do business, just yell for me, okay?”</i>", parse);
 	Text.Flush();
 	
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 	
 	CassidyScenes.Prompt();
 }

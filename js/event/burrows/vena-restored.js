@@ -151,7 +151,7 @@ VenaRScenes.Prompt = function() {
 				Text.Add("You take a moment to remind yourself of all that Lagon has done. Drugging his wife, terrorizing and raping his own children, attacking travelers and innocents and being a stupendous jerk about all of it. With a feeling of righteous indignation, you bend your thoughts to considering the options. You aren’t sure just how well Vena will like your suggestion, but she did ask for your thoughts...", parse);
 				Text.Flush();
 				
-				world.TimeStep({minute: 5});
+				TimeStep({minute: 5});
 				
 				VenaRScenes.LagonsFate({});
 			}
@@ -177,7 +177,7 @@ VenaRScenes.Prompt = function() {
 		Text.Add("<i>“Do return soon, champion,”</i> Vena replies sincerely. She glances around at the growing gathering of her children around the throne. <i>“Meanwhile, it seems I have other ‘petitions’ to take care of...”</i> The lagomorph queen smiles apologetically.", parse);
 		Text.Flush();
 		
-		world.TimeStep({minute: 5});
+		TimeStep({minute: 5});
 		
 		Gui.NextPrompt();
 	});
@@ -219,7 +219,7 @@ VenaRScenes.LagonsFate = function(opts) {
 			Text.Add("You calmly reach out and clasp her hand, then allow her to lead the way from the throne room.", parse);
 			Text.Flush();
 			
-			world.TimeStep({minute: 15});
+			TimeStep({minute: 15});
 			
 			Gui.NextPrompt(function() {
 				Scenes.Lagon.Defeated.Punishment();
@@ -244,7 +244,7 @@ VenaRScenes.LagonsFate = function(opts) {
 				Text.Flush();
 				opts.kill = true;
 				
-				world.TimeStep({minute: 5});
+				TimeStep({minute: 5});
 				
 				VenaRScenes.LagonsFate(opts);
 			}
@@ -268,7 +268,7 @@ VenaRScenes.LagonsFate = function(opts) {
 				Text.Flush();
 				opts.exile = true;
 				
-				world.TimeStep({minute: 5});
+				TimeStep({minute: 5});
 				
 				VenaRScenes.LagonsFate(opts);
 			}
@@ -296,7 +296,7 @@ VenaRScenes.LagonsFate = function(opts) {
 				Text.Flush();
 				opts.drug = true;
 				
-				world.TimeStep({minute: 5});
+				TimeStep({minute: 5});
 				
 				VenaRScenes.LagonsFate(opts);
 			}

@@ -4,8 +4,7 @@ import { TF } from '../../tf';
 import { AppendageType } from '../../body/appendage';
 import { Color } from '../../body/color';
 import { Time } from '../../time';
-import { WorldTime } from '../../worldtime';
-import { MoveToLocation } from '../../event';
+import { WorldTime, MoveToLocation } from '../../GAME';
 
 let IslaScenes = {};
 
@@ -157,7 +156,7 @@ IslaScenes.Introduction = function() {
 	Text.Add("<i>“Well, it’s mine for now. Before me, it belonged to the last spring guardian, and the last one before that, and the last one… yeah, as I said, it’s mine for now. ‘Fore I forget, though… name’s Isla. Why’re you here, anyway?”</i>", parse);
 	Text.Flush();
 	
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 	
 	//[Lost][Curious][Spring]
 	var options = new Array();
@@ -269,7 +268,7 @@ IslaScenes.Introduction = function() {
 		Text.Add("You shrug. She’ll come around sooner or later, especially since she asked you to come back another time… for now, though, it’s probably best to make yourself scarce. Following Isla’s instructions, you head down the trail and push through the rocks, finding yourself on the road before too long.", parse);
 		Text.Flush();
 		
-		world.TimeStep({hour: 1});
+		TimeStep({hour: 1});
 		
 		Gui.NextPrompt(function() {
 			party.location = world.loc.Highlands.Hills;
@@ -522,7 +521,7 @@ IslaScenes.Appearance = function() {
 	
 	isla.relation.IncreaseStat(30, 1);
 	
-	world.TimeStep({minute: 15});
+	TimeStep({minute: 15});
 	
 	IslaScenes.Prompt();
 }
@@ -564,7 +563,7 @@ IslaScenes.TalkPrompt = function() {
 			Text.Flush();
 			
 			isla.relation.IncreaseStat(40, 2);
-			world.TimeStep({minute: 15});
+			TimeStep({minute: 15});
 			
 			IslaScenes.TalkPrompt();
 		}, enabled : true
@@ -619,7 +618,7 @@ IslaScenes.TalkPrompt = function() {
 			Text.Flush();
 			
 			isla.relation.IncreaseStat(40, 2);
-			world.TimeStep({minute: 15});
+			TimeStep({minute: 15});
 			
 			IslaScenes.TalkPrompt();
 		}, enabled : true
@@ -648,7 +647,7 @@ IslaScenes.TalkPrompt = function() {
 			Text.Flush();
 			
 			isla.relation.IncreaseStat(40, 2);
-			world.TimeStep({minute: 15});
+			TimeStep({minute: 15});
 			
 			IslaScenes.TalkPrompt();
 		}, enabled : true
@@ -683,7 +682,7 @@ IslaScenes.TalkPrompt = function() {
 			Text.Flush();
 			
 			isla.relation.IncreaseStat(40, 2);
-			world.TimeStep({minute: 15});
+			TimeStep({minute: 15});
 			
 			IslaScenes.TalkPrompt();
 		}, enabled : true
@@ -767,7 +766,7 @@ IslaScenes.TalkPrompt = function() {
 					Text.Add("No worries. If she ever feels the need to… ah, explore her improved figure, you’ll be more than happy to help.", parse);
 					
 					isla.relation.IncreaseStat(100, 10);
-					world.TimeStep({hour: 1});
+					TimeStep({hour: 1});
 				}
 				else if(figure == Isla.Figure.Womanly) {
 					isla.flags["Figure"] = Isla.Figure.Voluptuous;
@@ -813,7 +812,7 @@ IslaScenes.TalkPrompt = function() {
 					Text.Add("Isla’s muzzle splits into a grin. <i>“Yeah, yeah, I know. Don’t worry.”</i>", parse);
 					
 					isla.relation.IncreaseStat(100, 10);
-					world.TimeStep({hour: 1});
+					TimeStep({hour: 1});
 				}
 				else { //Curvies
 					Text.Add("<i>“Heh. Much as I’d like to be the best looker on the whole of Eden, the spring does have its limits, you know,”</i> Isla says with a chuckle and sultry grin. <i>“‘Sides, I’m already pretty smashing like this. Can’t improve on a figure of perfection, can ya? Being balanced and all that.”</i>", parse);
@@ -1076,7 +1075,7 @@ IslaScenes.TummyRub = function() {
 	Text.Add("Still, guess that leaves you to your own devices. You give Isla a pat on her brow, and after making sure that the plateau is safe, head on back down the trail. Best to give her a little alone time, yes?", parse);
 	Text.Flush();
 	
-	world.TimeStep({hour: 4});
+	TimeStep({hour: 4});
 	
 	isla.relation.IncreaseStat(100, 5);
 	
@@ -1353,7 +1352,7 @@ IslaScenes.Sex.First = function() {
 	
 	isla.relation.IncreaseStat(100, 10);
 	
-	world.TimeStep({hour: 4});
+	TimeStep({hour: 4});
 	
 	Gui.NextPrompt(function() {
 		MoveToLocation(world.loc.Highlands.Hills);
@@ -1536,7 +1535,7 @@ IslaScenes.Sex.PitchVaginal = function() {
 	Text.Add("Ah, right. Now that she’s all softened up and ready, how do you want to proceed?", parse);
 	Text.Flush();
 	
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 	
 	IslaScenes.Sex.PitchVaginalPrompt(parse, {
 		p1cock  : p1cock,
@@ -2018,7 +2017,7 @@ IslaScenes.Bathe = function() {
 			Text.Clear();
 			Text.Add("Deciding to take just a quick dip, you remove your [armor] and wade out into the hot spring. The waist-high water is delightfully warm, and it’s a pleasure to be able to wash off the dust and dirt of your journey - and of course, any other things which you might’ve picked up along the way. You dunk your head in a few times, making sure you’re thoroughly rinsed all over, and a strange warm tingling creeps into your [skin] as the spring’s transformative magic takes effect…", parse);
 			
-			world.TimeStep({minute: 10});
+			TimeStep({minute: 10});
 			
 			isla.springTimer = new Time(0,0,1,0,0);
 			
@@ -2035,7 +2034,7 @@ IslaScenes.Bathe = function() {
 			Text.NL();
 			Text.Add("Then you feel it - a pleasant buzz against your [skin] as the spring’s transformative magic begins, seeping through your limbs and into your bones…", parse);
 			
-			world.TimeStep({minute: 30});
+			TimeStep({minute: 30});
 			
 			isla.springTimer = new Time(0,0,1,0,0);
 			
@@ -2052,7 +2051,7 @@ IslaScenes.Bathe = function() {
 			Text.NL();
 			Text.Add("Of course, getting clean isn’t the only thing happening to you. With such a vigorous and enthusiastic scrubbing taking place, it isn’t long before you feel the transformative tingle of the spring’s magic at work…", parse);
 			
-			world.TimeStep({hour: 1});
+			TimeStep({hour: 1});
 			
 			isla.springTimer = new Time(0,0,1,0,0);
 			

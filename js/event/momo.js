@@ -5,12 +5,13 @@
  */
 
 import { Entity } from '../entity';
-import { EncounterTable, MoveToLocation } from '../event';
+import { EncounterTable } from '../event';
+import { MoveToLocation } from '../GAME';
 import { Gender } from '../body/gender';
 import { Images } from '../assets';
 import { Time } from '../time';
 import { Race } from '../body/race';
-import { WorldTime } from '../worldtime';
+import { WorldTime } from '../GAME';
 import { Text } from '../text';
 import { Gui } from '../gui';
 
@@ -220,7 +221,7 @@ MomoScenes.FindingMomo = function() {
 			
 			momo.flags["Met"] = Momo.Met.Wandering;
 			
-			world.TimeStep({hour: 1});
+			TimeStep({hour: 1});
 			
 			momo.wanderTimer = new Time(0, 0, 3, 0, 0);
 			
@@ -282,7 +283,7 @@ MomoScenes.WanderingMomo = function() {
 			Text.Add("She mustn’t have noticed you yet, perfect. You’d rather avoid contact with her, so you walk away, leaving her to her own devices.", parse);
 			Text.Flush();
 			
-			world.TimeStep({minute: 10});
+			TimeStep({minute: 10});
 			
 			momo.wanderTimer = new Time(0, 0, 3, 0, 0);
 			
@@ -364,7 +365,7 @@ MomoScenes.Interact = function() {
 		Text.Add("<i>“See you later, [playername]! Hmm... that smells pretty good; maybe I should have a bowl myself...”</i>", parse);
 		Text.Flush();
 		
-		world.TimeStep({hour: 1});
+		TimeStep({hour: 1});
 		
 		Gui.NextPrompt();
 	}
@@ -509,7 +510,7 @@ MomoScenes.CookPrompt = function() {
 			Text.Add("<i>“It was my pleasure, sugar; I love a [guyGal] who can appreciate good cooking,”</i> Momo replies, tail flicking to and fro in her pleasure, a satisfied grin on her face. <i>“Now, don’t worry about the mess, I’ll take care of that myself. But if you’re ever hungry, please, drop on by - my kitchen’s always open, especially for you,”</i> she assures you, already moving to collect her utensils.", parse);
 			Text.Flush();
 			
-			world.TimeStep({hour: 1});
+			TimeStep({hour: 1});
 			
 			for(var i = 0; i < tempParty.length; ++i) {
 				var c = tempParty[i];
@@ -581,7 +582,7 @@ MomoScenes.TalkPrompt = function() {
 			scenes.Get();
 			Text.Flush();
 			
-			world.TimeStep({minute: 15});
+			TimeStep({minute: 15});
 			
 			momo.relation.IncreaseStat(25, 2);
 			
@@ -617,7 +618,7 @@ MomoScenes.TalkPrompt = function() {
 			Text.Add("<i>“Well, that's all I can think of when it comes to talking about little old me,”</i> Momo giggles. <i>“Drop on by anytime, [playername].”</i>", parse);
 			Text.Flush();
 			
-			world.TimeStep({minute: 30});
+			TimeStep({minute: 30});
 			
 			momo.relation.IncreaseStat(25, 2);
 			
@@ -672,7 +673,7 @@ MomoScenes.TalkPrompt = function() {
 				Text.Add("That was a pretty interesting story. And a pretty naughty one too. Maybe you should take advantage of Momo’s giddy mood and see if you can take this somewhere?", parse);
 				Text.Flush();
 				
-				world.TimeStep({minute: 30});
+				TimeStep({minute: 30});
 				
 				if(momo.flags["tFamily"] == 0)
 					momo.flags["tFamily"] = 1;
@@ -711,7 +712,7 @@ MomoScenes.TalkPrompt = function() {
 							Text.Add("<i>“You really are a cheeky bastard, [playername],”</i> Momo declares. She actually sounds approving of the fact. <i>“But I have things I need to do now, so I really should be getting back to them,”</i> the dragon-girl notes, approaching the bevvy of cooking utensils and ingredients that she keeps around. <i>“It was lovely talking to you, though; drop by any time,”</i> she assures you, even as she wrestles out a cutting board and starts peeling some vegetables.", parse);
 							Text.Flush();
 							
-							world.TimeStep({minute: 5});
+							TimeStep({minute: 5});
 							
 							momo.relation.IncreaseStat(20, 3);
 							
@@ -778,7 +779,7 @@ MomoScenes.TalkPrompt = function() {
 				
 				momo.relation.IncreaseStat(25, 2);
 				
-				world.TimeStep({minute: 20});
+				TimeStep({minute: 20});
 				
 				MomoScenes.TalkPrompt();
 			});
@@ -907,7 +908,7 @@ MomoScenes.TalkPrompt = function() {
 				
 				momo.relation.IncreaseStat(25, 2);
 				
-				world.TimeStep({minute: 10});
+				TimeStep({minute: 10});
 				
 				MomoScenes.TalkPrompt();
 			}, enabled : true,

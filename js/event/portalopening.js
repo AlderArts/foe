@@ -1,3 +1,6 @@
+import { Text } from "../text";
+import { Gui } from "../gui";
+
 let PortalOpeningScenes = {};
 
 PortalOpeningScenes.Intro = function() {

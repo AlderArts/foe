@@ -12,7 +12,6 @@ import { Race } from '../../body/race';
 import { AppendageType } from '../../body/appendage';
 import { Color } from '../../body/color';
 import { TF } from '../../tf';
-import { WorldTime } from '../../worldtime';
 import { PregnancyHandler } from '../../pregnancy';
 import { Images } from '../../assets';
 import { EncounterTable } from '../../event';
@@ -939,7 +938,7 @@ LagonScenes.RulerBlowjobAftermath = function(opheliaPresent) {
 	player.subDom.DecreaseStat(-50, 1);
 	lagon.relation.IncreaseStat(0, 2);
 	lagon.relation.IncreaseStat(40, 2);
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 	
 	Gui.NextPrompt();
 }
@@ -1276,7 +1275,7 @@ LagonScenes.RulerGetFuckedEntrypoint2 = function(angry, target, opheliaPresent) 
 	Text.NL();
 	Text.Add("Time passes...", parse);
 	Text.Flush();
-	world.TimeStep({minute: 45});
+	TimeStep({minute: 45});
 	
 	Gui.NextPrompt(function() {
 		Text.Clear();
@@ -1332,12 +1331,12 @@ LagonScenes.RulerGetFuckedEntrypoint2 = function(angry, target, opheliaPresent) 
 		else if(player.sexlevel >= 3) {
 			Text.Add("You’re a little wobbly on your [feet] by the time you finally recover, exhausted from the rough ordeal. Still… the king sure knows how to make you cum, whether you want to or not. Seeing your stamina, Lagon nods appreciatively, and for a moment it looks like he’s considering taking you for another round, just to see if you’d break.", parse);
 			player.AddSPFraction(-0.25);
-			world.TimeStep({minute: 15});
+			TimeStep({minute: 15});
 		}
 		else {
 			Text.Add("It’s quite a long time before you can even move, so exhausted are you from the king’s rough fucking. You’re a complete mess, barely able to walk straight, and you’re going to need some time to recover after this ordeal. Seeing your distress, Lagon merely chuckles, suggesting that perhaps you can wobble your way down the Pit and rest there for a while.", parse);
 			player.AddSPFraction(-0.5);
-			world.TimeStep({minute: 30});
+			TimeStep({minute: 30});
 		}
 		Text.NL();
 		if(opheliaPresent) {
@@ -1356,7 +1355,7 @@ LagonScenes.RulerGetFuckedEntrypoint2 = function(angry, target, opheliaPresent) 
 		player.subDom.DecreaseStat(-75, 2);
 		lagon.relation.IncreaseStat(0, 4);
 		lagon.relation.IncreaseStat(80, 4);
-		world.TimeStep({minute: 45});
+		TimeStep({minute: 45});
 		
 		Gui.NextPrompt();
 	});
@@ -1454,7 +1453,7 @@ LagonScenes.RulerTalkPrompt = function() {
 	options.push({ nameStr : "Burrows",
 		func : function() {
 			Text.Clear();
-			world.TimeStep({minute: 10});
+			TimeStep({minute: 10});
 			if(lagon.Relation() < 25) {
 				Text.Add("<i>“I don’t find any reason to share my plans with an outsider,”</i> Lagon frowns. <i>“You are here because you are somewhat useful to me, and I pay you for being useful. Don’t think it’s anything more than that.”</i>", parse);
 				Text.Flush();
@@ -1491,7 +1490,7 @@ LagonScenes.RulerTalkPrompt = function() {
 	options.push({ nameStr : "Lagon",
 		func : function() {
 			Text.Clear();
-			world.TimeStep({minute: 10});
+			TimeStep({minute: 10});
 			if(lagon.Relation() < 0) {
 				Text.Add("<i>“I don’t think you’ve earned learning anything about my past, outsider,”</i> Lagon frowns, <i>“and asking about it is very presumptuous. Know that I am king and master here in the burrows. Anything else, you’ll have to work for.”</i>", parse);
 				Text.Flush();
@@ -1544,7 +1543,7 @@ LagonScenes.RulerTalkPrompt = function() {
 				Text.NL();
 				Text.Add("<i>“I hope you found our session educational,”</i> Lagon chuckles, flopping back onto his throne, letting his daughter clean up his leaking member. With a wave, he dismisses you from his presence.", parse);
 				Text.Flush();
-				world.TimeStep({minute: 10});
+				TimeStep({minute: 10});
 				player.AddLustFraction(0.3);
 				Gui.NextPrompt();
 			}
@@ -1558,7 +1557,7 @@ LagonScenes.RulerTalkPrompt = function() {
 	options.push({ nameStr : "Vena",
 		func : function() {
 			Text.Clear();
-			world.TimeStep({minute: 10});
+			TimeStep({minute: 10});
 			if(lagon.Relation() < 0)
 				Text.Add("<i>“Vena is a loyal and true wife. She willingly sacrifice herself for the greater good. That is all you need to know,”</i> Lagon replies.", parse);
 			else if(lagon.Relation() < 50)
@@ -1625,7 +1624,7 @@ LagonScenes.RulerTalkPrompt = function() {
 	options.push({ nameStr : "Ophelia",
 		func : function() {
 			Text.Clear();
-			world.TimeStep({minute: 10});
+			TimeStep({minute: 10});
 			if(burrows.LagonAlly()) {
 				Text.Add("The king’s expression darkens as you remind him of his rebellious daughter. <i>“That traitorous bitch got what was coming to her,”</i> he growls. <i>“Her potions may have proven useful, but I hold no value in pawns that go against my will. Not like you,”</i> he adds, <i>“you’ll continue being my loyal pet, won’t you?”</i>", parse);
 				Text.NL();
@@ -1673,7 +1672,7 @@ LagonScenes.RulerTalkPrompt = function() {
 		options.push({ nameStr : "Followers",
 			func : function() {
 				Text.Clear();
-				world.TimeStep({minute: 10});
+				TimeStep({minute: 10});
 				Text.Add("<i>“A fair request.”</i> The lagomorph king claps his hands sharply, summoning four young rabbits. <i>“As I said, I can’t offer you Ophelia, but this lot should do well enough.”</i> You take some time to examine your prizes. There are two males, slim and lithe, and two females with exquisite curved forms. All of them have coats of fine white fur, silky to the touch. <i>“Are these to your liking? You’ll have to excuse me for not remembering their names, they are simple enough creatures, call them whatever you like.”</i>", parse);
 				Text.NL();
 				parse["master"] = player.mfTrue("master", "mistress");
@@ -1692,7 +1691,7 @@ LagonScenes.RulerTalkPrompt = function() {
 			options.push({ nameStr : "Scepter",
 				func : function() {
 					Text.Clear();
-					world.TimeStep({minute: 10});
+					TimeStep({minute: 10});
 					Text.Add("<i>“A mere trinket acquired during my youth,”</i> Lagon dismisses it, <i>“though if it carries such power as Ophelia seemed to think, perhaps I should have guarded it more carefully. In either case, it’s of little use to me now.”</i>", parse);
 					Text.NL();
 					Text.Add("How did he lose it in the first place?", parse);
@@ -1806,7 +1805,7 @@ Pit loss (todo)
 		options.push({ nameStr : "Roa",
 			func : function() {
 				Text.Clear();
-				world.TimeStep({minute: 10});
+				TimeStep({minute: 10});
 				if(roa.Recruited()) {
 					//TODO Recruited Roa talk
 				}
@@ -1877,7 +1876,7 @@ LagonScenes.PitDefianceWin = function() {
 		
 		lagon.flags["Usurp"] |= Lagon.Usurp.FirstFight;
 		
-		world.TimeStep({minute: 30});
+		TimeStep({minute: 30});
 		party.location = world.loc.Burrows.Entrance;
 		
 		Gui.NextPrompt();
@@ -1918,7 +1917,7 @@ LagonScenes.PitDefianceLoss = function() {
 	
 	Text.Flush();
 	
-	world.TimeStep({hour : 1});
+	TimeStep({hour : 1});
 	
 	Gui.NextPrompt(function() {
 		Text.Clear();
@@ -1966,7 +1965,7 @@ LagonScenes.PitDefianceLoss = function() {
 		Text.Add("Time passes...", parse);
 		Text.Flush();
 		
-		world.TimeStep({hour : 1});
+		TimeStep({hour : 1});
 	
 		Gui.NextPrompt(LagonScenes.BadendPit);
 	});
@@ -1978,7 +1977,7 @@ LagonScenes.BadendPit = function() {
 	};
 	
 	party.location = world.loc.Plains.Burrows.Pit;
-	world.TimeStep({season: 1});
+	TimeStep({season: 1});
 	
 	Text.Clear();
 	Text.Add("Whoever you were before, both physically and mentally, it’s all washed away in the orgasmic wave of ecstasy that is your every waking moment. Everywhere around you, dark shapes writhe in carnal bliss as the endless orgy of the Pit grinds on, with you as one of its central pieces.", parse);
@@ -2063,7 +2062,7 @@ LagonScenes.BadendBrute = function() {
 	Text.Flush();
 	
 	Gui.NextPrompt(function() {
-		world.TimeStep({season : 1});
+		TimeStep({season : 1});
 		party.location = world.loc.Plains.Burrows.Pit;
 		
 		Text.Clear();
@@ -2099,7 +2098,7 @@ LagonScenes.ReturnToBurrowsAfterFight = function() {
 				Text.Add(" It’s been a rather long time though...", parse);
 			Text.Flush();
 			
-			world.TimeStep({minute: 5});
+			TimeStep({minute: 5});
 			Gui.NextPrompt();
 		}, enabled : true,
 		tooltip : "You’re not ready quite yet. Lagon isn’t going anywhere."
@@ -2150,7 +2149,7 @@ LagonScenes.ReturnToBurrowsAfterFight = function() {
 			Text.Add("It’s a fight!", parse);
 			Text.Flush();
 			
-			world.TimeStep({minute: 30});
+			TimeStep({minute: 30});
 			
 			Gui.NextPrompt(function() {
 				LagonScenes.Usurp(toolate);
@@ -2180,7 +2179,7 @@ LagonScenes.ReturnToBurrowsAfterScepter = function() {
 			Text.Add("You decide on postponing your visit for now.", parse);
 			Text.Flush();
 			
-			world.TimeStep({minute: 5});
+			TimeStep({minute: 5});
 			Gui.NextPrompt();
 		}, enabled : true,
 		tooltip : "You need some more time to prepare… Lagon isn’t going anywhere."
@@ -2526,7 +2525,7 @@ LagonScenes.WinToBruteLagon = function() {
 				Text.NL();
 				Text.Add("<i>“If you find the scepter, we would be forever grateful,”</i> she concludes, giving you a kiss on the cheek before hurrying off to see her mother. You should return to her once things have quietened down a bit.", parse);
 				Text.Flush();
-				world.TimeStep({hour: 1});
+				TimeStep({hour: 1});
 				Gui.NextPrompt();
 			});
 		}

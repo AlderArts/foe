@@ -4,13 +4,13 @@
  *
  */
 
-import { Event, Link, MoveToLocation } from '../event';
+import { Event, Link } from '../event';
 import { GameState, SetGameState } from '../gamestate';
 import { Gui } from '../gui';
 import { Gender } from '../body/gender';
 import { Items } from '../items';
 import { JobEnum, Jobs } from '../job';
-import { GAME } from '../GAME';
+import { GAME, MoveToLocation } from '../GAME';
 import { Text } from '../text';
 import { Input } from '../input';
 import { BodyTypeMale, BodyTypeFemale } from '../body/defbody';
@@ -2104,7 +2104,7 @@ Intro.NomadsWakingUp = function() {
 
 	GAME().player.RestFull();
 	GAME().party.location = world.loc.Plains.Nomads.Tent;
-	world.TimeStep({day: 1, hour: 3});
+	TimeStep({day: 1, hour: 3});
 
 	Text.Add("You groan as you wake up, hoping that this is not going to become a recurring theme in your life. You are lying on your back atop a pile of soft pelts, in what looks to be a circular tent made from tough animal hides. A small slanted opening near the top, obviously designed to let light in while keeping rain out, illuminates the dim interior.");
 	Text.NL();
@@ -2609,7 +2609,7 @@ Intro.KiaNiceSex69 = function() {
 
 		kiakai.slut.IncreaseStat(100, 5);
 		kiakai.relation.IncreaseStat(100, 5);
-		world.TimeStep({minute: 20});
+		TimeStep({minute: 20});
 		GAME().player.AddLustFraction(-1);
 
 		Text.Flush();
@@ -2664,7 +2664,7 @@ Intro.KiaNaughtySex = function() {
 				kiakai.subDom.DecreaseStat(-100, 5);
 				kiakai.slut.IncreaseStat(100, 5);
 				kiakai.relation.DecreaseStat(-100, 5);
-				world.TimeStep({minute: 20});
+				TimeStep({minute: 20});
 				GAME().player.AddLustFraction(-1);
 
 				Text.Flush();
@@ -2705,7 +2705,7 @@ Intro.KiaNaughtySex = function() {
 				kiakai.subDom.DecreaseStat(-100, 5);
 				kiakai.slut.IncreaseStat(100, 5);
 				kiakai.relation.DecreaseStat(-100, 5);
-				world.TimeStep({minute: 20});
+				TimeStep({minute: 20});
 				GAME().player.AddLustFraction(-1);
 
 				Text.Flush();

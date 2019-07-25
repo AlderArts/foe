@@ -5,12 +5,12 @@
  */
 
 
-import { Event, Link, EncounterTable, MoveToLocation } from '../event';
+import { Event, Link, EncounterTable } from '../event';
 import { VenaScenes } from '../event/burrows/vena';
 import { OpheliaScenes } from '../event/burrows/ophelia';
 import { LagonScenes } from '../event/burrows/lagon';
 import { Gender } from '../body/gender';
-import { WorldTime } from '../worldtime';
+import { WorldTime, MoveToLocation } from '../GAME';
 
 let world = null;
 
@@ -520,7 +520,7 @@ BurrowsScenes.Arrival = function(alpha) {
 		Text.Flush();
 		
 		party.location = BurrowsLoc.Lab;
-		world.TimeStep({minute: 30});
+		TimeStep({minute: 30});
 		
 		Gui.NextPrompt(BurrowsScenes.ArrivalOphelia);
 	});
@@ -681,7 +681,7 @@ BurrowsScenes.ArrivalOpheliaTalk = function() {
 					Text.Flush();
 					
 					party.location = BurrowsLoc.Throne;
-					world.TimeStep({hour: 1});
+					TimeStep({hour: 1});
 					
 					Gui.NextPrompt(BurrowsScenes.ArrivalLagon);
 				}, enabled : true,
@@ -703,7 +703,7 @@ BurrowsScenes.ArrivalOpheliaTalk = function() {
 					Text.Flush();
 					
 					party.location = BurrowsLoc.Throne;
-					world.TimeStep({hour: 1});
+					TimeStep({hour: 1});
 					
 					Gui.NextPrompt(BurrowsScenes.ArrivalLagon);
 				}, enabled : true,

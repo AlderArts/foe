@@ -1,6 +1,6 @@
 
-import { Event, Link, EncounterTable, MoveToLocation } from '../../event';
-import { WorldTime } from '../../worldtime';
+import { Event, Link, EncounterTable } from '../../event';
+import { WorldTime, MoveToLocation } from '../../GAME';
 
 let GateLoc = new Event("Main Gate");
 let BarracksLoc = {

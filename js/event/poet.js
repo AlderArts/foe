@@ -21,7 +21,7 @@ PoetScenes.Entry = function() {
 	Text.Add("</i>...What is this?", parse);
 	Text.Flush();
 	
-	world.TimeStep({minute: 10});
+	TimeStep({minute: 10});
 	
 	Gui.NextPrompt();
 }

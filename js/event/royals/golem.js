@@ -15,7 +15,7 @@ import { Party } from '../../party';
 import { Encounter } from '../../combat';
 import { SetGameState, GameState } from '../../gamestate';
 import { Gui } from '../../gui';
-import { MoveToLocation } from '../../event';
+import { MoveToLocation } from '../../GAME';
 
 let GolemScenes = {};
 GolemScenes.State = {
@@ -237,7 +237,7 @@ GolemScenes.OnWin = function() {
 		Text.Add("On a nightstand, there is a small pile of parchments with strange symbols scrawled on it, letters from no alphabet you recognize, elaborate arcane diagrams and charts. From the floor above, you hear a bustle of activity, and see the strange flickering light that you saw from the outside. Steeling yourself for whatever awaits you above, you continue up the final set of stairs[comp].", parse);
 		Text.Flush();
 		
-		world.TimeStep({minute: 30});
+		TimeStep({minute: 30});
 		
 		if(golem.flags["Met"] == GolemScenes.State.Lost)
 			golem.flags["Met"] = GolemScenes.State.Won_prevLoss;
@@ -365,7 +365,7 @@ GolemScenes.OnLoss = function() {
 	Text.Add("With her newly extended cock, it is a whole new experience. You moan helplessly as your [target] is pounded into oblivion by the thick obsidian pillar, now reaching farther inside you than ever. You don’t know how long you spend like that, [legs] in the air and tongue lolling, any measure of time shattered by the ceaseless thrusting of the golem’s shaft. As another orgasm hits, you almost lose consciousness, limbs limp from your rough fucking.", parse);
 	Text.Flush();
 	
-	world.TimeStep({hour: 4});
+	TimeStep({hour: 4});
 	player.AddLustFraction(-1);
 	player.AddHPFraction(-1);
 	player.AddHPAbs(1);

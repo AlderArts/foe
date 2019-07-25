@@ -4,7 +4,7 @@
  *
  */
 
-import { EncounterTable, MoveToLocation } from '../../event';
+import { EncounterTable } from '../../event';
 import { BrothelLoc } from './brothel';
 import { InnLoc, LBScenes, RigardLB, InitLB } from './inn';
 import { Shop } from '../../shop';
@@ -26,7 +26,7 @@ import { InitMageTower } from './magetower';
 import { Items } from '../../items';
 import { Time } from '../../time';
 import { Stat } from '../../stat';
-import { WorldTime } from '../../worldtime';
+import { WorldTime, MoveToLocation } from '../../GAME';
 import { Gui } from '../../gui';
 import { Text } from '../../text';
 
@@ -323,7 +323,7 @@ RigardScenes.CityHistory = function() {
 	Text.Add("You smile warmly at her, and thank her for telling you the story. [finish] you part ways.", parse);
 	Text.Flush();
 
-	world.TimeStep({minute: 20});
+	TimeStep({minute: 20});
 	Gui.NextPrompt();
 }
 
@@ -676,7 +676,7 @@ RigardScenes.Chatter = function(enteringArea) {
 	RigardScenes.ChatterOutro(parse);
 
 	if(!enteringArea)
-		world.TimeStep({minute: 10});
+		TimeStep({minute: 10});
 
 	Text.Flush();
 	// Next button
@@ -1390,7 +1390,7 @@ RigardScenes.Chatter2 = function(enteringArea) {
 				Text.Add("Your escort glances through the door and exchanges a few words with someone inside before motioning for you to step through, and walking away.", parse);
 				Text.Flush();
 
-				world.TimeStep({minute: 30});
+				TimeStep({minute: 30});
 				Gui.NextPrompt();
 			}, enabled : true,
 			tooltip : "Well, if he wants you so badly, you’ll come, if he’ll just be quiet."
@@ -1414,7 +1414,7 @@ RigardScenes.Chatter2 = function(enteringArea) {
 				Text.Add("Problem. Solved.", parse);
 				Text.Flush();
 
-				world.TimeStep({minute: 10});
+				TimeStep({minute: 10});
 				Gui.NextPrompt();
 			}, enabled : true,
 			tooltip : "Nope. You’re not having any of that. The best plan is to just get away from him."
@@ -1474,7 +1474,7 @@ RigardScenes.Chatter2 = function(enteringArea) {
 
 	if(!scenes.Get()) {
 		if(!enteringArea)
-			world.TimeStep({minute: 10});
+			TimeStep({minute: 10});
 
 		Text.Flush();
 		// Next button
@@ -1568,7 +1568,7 @@ RigardScenes.Lockdown = function() {
 	Text.Flush();
 
 	party.location = RigardLoc.Tavern.common;
-	world.TimeStep({hour : 1});
+	TimeStep({hour : 1});
 
 	Gui.NextPrompt(function() {
 		Text.Clear();

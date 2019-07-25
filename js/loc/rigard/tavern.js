@@ -1,7 +1,8 @@
 
-import { Event, Link, EncounterTable, MoveToLocation } from '../../event';
+import { Event, Link, EncounterTable } from '../../event';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
+import { MoveToLocation} from '../../GAME';
 
 let TavernLoc = {
 	common   : new Event("Maidens' Bane")
@@ -240,7 +241,7 @@ TavernLoc.common.DrunkHandler = function() {
 				Text.Add("Yeah... you probably should work on that...", parse);
 				Text.Flush();
 				
-				world.TimeStep({hour: 1, minute: 30});
+				TimeStep({hour: 1, minute: 30});
 				
 				Gui.NextPrompt();
 			});
@@ -314,7 +315,7 @@ BarnabyScenes.Prompt = function(talkative) {
 			Text.Flush();
 			
 			party.coin -= coin1;
-			world.TimeStep({minute: 10});
+			TimeStep({minute: 10});
 			var drunk = player.Drink(0.8);
 			if(drunk) return;
 			BarnabyScenes.Prompt(true);
@@ -339,7 +340,7 @@ BarnabyScenes.Prompt = function(talkative) {
 			Text.Flush();
 			
 			party.coin -= coin2;
-			world.TimeStep({minute: 10});
+			TimeStep({minute: 10});
 			var drunk = player.Drink(1);
 			if(drunk) return;
 			BarnabyScenes.Prompt(true);
@@ -366,7 +367,7 @@ BarnabyScenes.Prompt = function(talkative) {
 			Text.Flush();
 			
 			party.coin -= coin3;
-			world.TimeStep({minute: 10});
+			TimeStep({minute: 10});
 			var drunk = player.Drink(1.4);
 			if(drunk) return;
 			BarnabyScenes.Prompt(true);
@@ -469,7 +470,7 @@ BarnabyScenes.Prompt = function(talkative) {
 				
 				scenes.Get();
 			}
-			world.TimeStep({minute: 5});
+			TimeStep({minute: 5});
 			Text.Flush();
 			BarnabyScenes.Prompt(talkative);
 		}
@@ -597,7 +598,7 @@ BarnabyScenes.Prompt = function(talkative) {
 				}
 				Text.Flush();
 				
-				world.TimeStep({hour: 1, minute: 30});
+				TimeStep({hour: 1, minute: 30});
 				
 				Gui.NextPrompt();
 			});
@@ -704,7 +705,7 @@ BarnabyScenes.ChatPrompt = function() {
 			}
 			Text.Flush();
 			
-			world.TimeStep({minute: 10});
+			TimeStep({minute: 10});
 			
 			BarnabyScenes.ChatPrompt();
 		}
@@ -770,7 +771,7 @@ BarnabyScenes.ChatPrompt = function() {
 				}
 				Text.Flush();
 				
-				world.TimeStep({minute: 10});
+				TimeStep({minute: 10});
 
 				BarnabyScenes.ChatPrompt();
 			}

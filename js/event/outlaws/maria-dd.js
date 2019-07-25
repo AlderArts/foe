@@ -1,5 +1,5 @@
 import { GetDEBUG } from '../../../app';
-import { WorldTime } from '../../worldtime';
+import { WorldTime } from '../../GAME';
 import { Entity } from '../../entity';
 import { SetGameState, GameState } from '../../gamestate';
 import { Gui } from '../../gui';
@@ -27,7 +27,7 @@ DeadDropScenes.Alert = function() {
 	
 	maria.flags["DD"] |= Maria.DeadDrops.Alert;
 	
-	world.TimeStep({minute: 15});
+	TimeStep({minute: 15});
 	
 	Gui.NextPrompt();
 }
@@ -87,7 +87,7 @@ DeadDropScenes.Initiation = function() {
 		
 		maria.flags["DD"] |= Maria.DeadDrops.Talked;
 		
-		world.TimeStep({hour: 1});
+		TimeStep({hour: 1});
 		
 		Gui.NextPrompt();
 	});
@@ -203,7 +203,7 @@ DeadDropScenes.First.Start = function() {
 	Text.Add("Maria mutters something foul not quite under her breath, but the street urchin’s words give you an idea. If you’re really willing to pay for it… then you could end this right now, assuming you’ve the money to do so.", parse);
 	Text.Flush();
 	
-	world.TimeStep({hour: 4});
+	TimeStep({hour: 4});
 	
 	//[Yes][No]
 	var options = new Array();
@@ -329,7 +329,7 @@ DeadDropScenes.First.Start = function() {
 		maria.flags["DD"] |= Maria.DeadDrops.Completed;
 		outlaws.relation.IncreaseStat(100, 1);
 		
-		world.TimeStep({hour: 4});
+		TimeStep({hour: 4});
 		
 		Gui.NextPrompt();
 	});
@@ -440,7 +440,7 @@ DeadDropScenes.Docks.Entry = function() {
 		Text.Add("All right, then. Time to start looking.", parse);
 		Text.NL();
 		
-		world.TimeStep({hour: 4});
+		TimeStep({hour: 4});
 		
 		var scenes = new EncounterTable();
 		scenes.AddEnc(function() {
@@ -451,7 +451,7 @@ DeadDropScenes.Docks.Entry = function() {
 			Text.Add("Well, that’s your job done - time to head back.", parse);
 			Text.Flush();
 			
-			world.TimeStep({hour: 4});
+			TimeStep({hour: 4});
 			
 			Gui.NextPrompt(DeadDropScenes.Docks.Ending);
 		}, 1.0, function() { return true; });
@@ -605,7 +605,7 @@ DeadDropScenes.Docks.CavalcadePrep = function() {
 		
 		SetGameState(GameState.Event, Gui);
 		
-		world.TimeStep({minute: 5});
+		TimeStep({minute: 5});
 		
 		Text.NL();
 		if(that.winner == player) {
@@ -670,7 +670,7 @@ DeadDropScenes.Docks.CavalcadeWin = function() {
 	outlaws.relation.IncreaseStat(30, 2);
 	maria.relation.IncreaseStat(50, 2);
 	
-	world.TimeStep({hour: 4});
+	TimeStep({hour: 4});
 	
 	Gui.NextPrompt(DeadDropScenes.Docks.Ending);
 }
@@ -700,7 +700,7 @@ DeadDropScenes.Docks.CavalcadeLoss = function() {
 	Text.Add("You open your mouth to protest, but think better of it. Do you really want to explain to Maria that you had to wait for a quartet of dockhands to finish their game of cavalcade before picking up the drop-off? Knowing her, it’d just infuriate her even more.", parse);
 	Text.Flush();
 	
-	world.TimeStep({hour: 8});
+	TimeStep({hour: 8});
 	
 	Gui.NextPrompt(DeadDropScenes.Docks.Ending);
 }
@@ -756,7 +756,7 @@ DeadDropScenes.Docks.GuardInspection = function() {
 			Text.Add("<i>“Now let’s see what you’ve gotten yourself into that much trouble in order to get for us,”</i> Maria continues. <i>“Hopefully, it’s better than the last shipment that came over.”</i>", parse);
 			Text.Flush();
 			
-			world.TimeStep({hour: 5});
+			TimeStep({hour: 5});
 			
 			maria.relation.IncreaseStat(50, 2);
 			outlaws.relation.IncreaseStat(30, 2);
@@ -801,7 +801,7 @@ DeadDropScenes.Docks.GuardInspection = function() {
 				maria.relation.IncreaseStat(50, 2);
 				outlaws.relation.IncreaseStat(30, 2);
 				
-				world.TimeStep({hour: 5});
+				TimeStep({hour: 5});
 				
 				Gui.NextPrompt(DeadDropScenes.Docks.Ending);
 			}
@@ -915,7 +915,7 @@ DeadDropScenes.Docks.GuardInspection = function() {
 				Text.Add("You explain to Maria what went down today at the docks, and she shakes her head. <i>“Trawling for bribes as usual, the bastards. The Royal Guard was never much good, but it’s only gotten worse under Preston.”</i> A sigh. <i>“Well, let’s open this up and see what you brought back, then.”</i>", parse);
 				Text.Flush();
 				
-				world.TimeStep({hour: 5});
+				TimeStep({hour: 5});
 				
 				maria.relation.IncreaseStat(50, 3);
 				outlaws.relation.IncreaseStat(30, 2);
@@ -937,7 +937,7 @@ DeadDropScenes.Docks.GuardInspection = function() {
 				Text.Add("Which will no doubt go into the bastard’s pocket, but at least you’re reasonably sure he’ll let you go if you pay up.", parse);
 				Text.Flush();
 				
-				world.TimeStep({hour: 1});
+				TimeStep({hour: 1});
 				
 				DeadDropScenes.Docks.GuardPrompt();
 			}
@@ -978,7 +978,7 @@ DeadDropScenes.Docks.GuardPrompt = function() {
 			Text.Add("<i>“Well, it’s for the best that you’re back in one piece. Operatives are hard to come by. Now, let’s get this thing opened up and see what Rirvale decided to send us this time… hopefully it’s something more useful than sweets.”</i>", parse);
 			Text.Flush();
 			
-			world.TimeStep({hour: 4, minute: 30});
+			TimeStep({hour: 4, minute: 30});
 			
 			maria.relation.IncreaseStat(50, 2);
 			outlaws.relation.IncreaseStat(30, 2);
@@ -1062,7 +1062,7 @@ DeadDropScenes.Docks.GuardPrompt = function() {
 			Text.Add("Maria shrugs. <i>“If you say so. Well, at least you’re here with the goods. Let’s see what Rirvale sent this time.”</i>", parse);
 			Text.Flush();
 			
-			world.TimeStep({hour: 6});
+			TimeStep({hour: 6});
 			
 			maria.relation.IncreaseStat(50, 2);
 			outlaws.relation.IncreaseStat(30, 2);
@@ -1109,7 +1109,7 @@ DeadDropScenes.Docks.GuardPrompt = function() {
 				Text.Add("<i>“I’m sure they’re grateful, too.”</i> Maria looks thoughtful a moment, then glances at you. <i>“Come on, let’s open this thing up and see what Rirvale’s seen fit to send over this time.”</i>", parse);
 				Text.Flush();
 				
-				world.TimeStep({hour: 4});
+				TimeStep({hour: 4});
 				
 				maria.relation.IncreaseStat(50, 2);
 				outlaws.relation.IncreaseStat(30, 2);

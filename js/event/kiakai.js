@@ -221,7 +221,7 @@ Kiakai.prototype.Interact = function(switchSpot) {
 			Text.Clear();
 			Text.Add("[Placeholder] Kiai masturbates fiercely, cumming buckets.");
 			
-			world.TimeStep({minute : 10});
+			TimeStep({minute : 10});
 			
 			that.OrgasmCum();
 			
@@ -237,7 +237,7 @@ Kiakai.prototype.Interact = function(switchSpot) {
 			Text.Clear();
 			Text.Add("Placeholder: [name] sits down and attempts to calm [hisher] thoughts.", parse);
 			Text.Flush();
-			world.TimeStep({minute : 30});
+			TimeStep({minute : 30});
 			
 			that.AddLustFraction(-1);
 			

@@ -538,7 +538,7 @@ GryphonsScenes.Outro = function(gender, preg) {
 	Text.Flush();
 	
 	Gui.NextPrompt(function() {
-		world.TimeStep({hour: 3});
+		TimeStep({hour: 3});
 		Scenes.Lucille.WhoreAftermath(null, gryphons.Cost());
 	});
 }

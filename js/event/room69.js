@@ -5,7 +5,7 @@
  */
 import { Entity } from '../entity';
 import { GetDEBUG } from '../../app';
-import { MoveToLocation } from '../event';
+import { MoveToLocation } from '../GAME';
 
 let Room69Scenes = {};
 
@@ -646,7 +646,7 @@ Room69Scenes.Discovering69Sex = function() {
 			parse["comp"] = "It’s time to decide what you’re going to do next.";
 		Text.Add("You smile, thinking about what kind of ‘visit’ the room has in mind, and hurry outside, finally noticing how oddly clean you are. [comp] Maybe you could ask the innkeeper about the room...", parse);
 		Text.Flush();
-		world.TimeStep({hour : 3});
+		TimeStep({hour : 3});
 		player.AddLustFraction(-1);
 		room69.flags["Sexed"]++;
 		room69.flags["Rel"] = Room69.RelFlags.GoodTerms;
@@ -761,14 +761,14 @@ Room69Scenes.ApologizeTo69ForBreakingDoor = function() {
 				Text.Add("You nod and take your leave. Looks like you’ll have to find a smith to make those hinges if you want to get back in the room’s good graces. But at least you made an effort and said you’re sorry, so this will probably be enough to get the innkeeper to let you stay at the inn again.", parse);
 				Text.Flush();
 				room69.flags["Hinges"] = Room69.HingesFlags.Asked;
-				world.TimeStep({minute: 30});
+				TimeStep({minute: 30});
 				Gui.NextPrompt();
 			}, enabled : true,
 			tooltip : "You came here to apologize to the room."
 		});
 		options.push({ nameStr : "Leave",
 			func : function() {
-				world.TimeStep({minute: 10});
+				TimeStep({minute: 10});
 				PrintDefaultOptions();
 			}, enabled : true,
 			tooltip : "Fine, maybe you <i>will</i> go!"
@@ -785,7 +785,7 @@ Room69Scenes.ApologizeTo69ForBreakingDoor = function() {
 			Text.NL();
 			Text.Add("The room’s lone chair advances menacingly toward you, and you decide you might as well go to avoid making the relationship any worse.", parse);
 			Text.Flush();
-			world.TimeStep({minute: 10});
+			TimeStep({minute: 10});
 			Gui.NextPrompt();
 		}
 		else {
@@ -803,7 +803,7 @@ Room69Scenes.ApologizeTo69ForBreakingDoor = function() {
 			
 			room69.relation.IncreaseStat(100, 10); //-15
 			
-			world.TimeStep({minute: 30});
+			TimeStep({minute: 30});
 			Gui.NextPrompt();
 		}
 	}
@@ -864,7 +864,7 @@ Room69Scenes.ApologizeTo69ForBeingMean = function() {
 			room69.flags["Rel"] = Room69.RelFlags.GoodTerms;
 			room69.relation.IncreaseStat(100, 10); //0
 			
-			world.TimeStep({minute: 30});
+			TimeStep({minute: 30});
 			Gui.NextPrompt();
 		}, enabled : true,
 		tooltip : "Provocation or no, you probably went a little too far..."
@@ -905,14 +905,14 @@ Room69Scenes.ApologizeTo69ForBeingMean = function() {
 			
 			room69.flags["Rel"] = Room69.RelFlags.GoodTerms;
 			
-			world.TimeStep({minute: 30});
+			TimeStep({minute: 30});
 			Gui.NextPrompt();
 		}, enabled : true,
 		tooltip : "You are <i>not</i> letting it get away with that. If it wants to fight, you’re sure your wits are up to the challenge!"
 	});
 	options.push({ nameStr : "Leave",
 		func : function() {
-			world.TimeStep({minute: 10});
+			TimeStep({minute: 10});
 			PrintDefaultOptions();
 		}, enabled : true,
 		tooltip : "With a start like that, it shouldn’t be any worse if you just try another time."

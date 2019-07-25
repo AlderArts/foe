@@ -925,7 +925,7 @@ RoaScenes.TSLPitchAnal = function() {
 	Text.Flush();
 	
 	roa.relation.IncreaseStat(50, 1);
-	world.TimeStep({hour : 1});
+	TimeStep({hour : 1});
 	
 	RoaScenes.TSLPostSexPrompt(mStrap);
 }
@@ -1251,7 +1251,7 @@ RoaScenes.TSLCatchVaginal = function() {
 				Text.Flush();
 				
 				roa.relation.IncreaseStat(25, 1);
-				world.TimeStep({hour : 1});
+				TimeStep({hour : 1});
 				
 				RoaScenes.TSLPostSexPrompt();
 			});
@@ -1326,7 +1326,7 @@ RoaScenes.TSLPostSexPrompt = function(mStrap) {
 			Text.Flush();
 			
 			roa.relation.IncreaseStat(50, 1);
-			world.TimeStep({minute: 30});
+			TimeStep({minute: 30});
 			
 			Gui.NextPrompt();
 		}, enabled : true,
@@ -1364,7 +1364,7 @@ RoaScenes.TSLPostSexPrompt = function(mStrap) {
 			Text.Flush();
 			
 			roa.relation.IncreaseStat(50, 2);
-			world.TimeStep({minute: 30});
+			TimeStep({minute: 30});
 			
 			Gui.NextPrompt();
 		}, enabled : true,

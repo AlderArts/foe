@@ -11,7 +11,7 @@ import { TF } from '../../tf';
 import { AppendageType } from '../../body/appendage';
 import { Color } from '../../body/color';
 import { Time } from '../../time';
-import { WorldTime } from '../../worldtime';
+import { WorldTime } from '../../GAME';
 import { Images } from '../../assets';
 import { AlchemySpecial } from '../../items/alchemyspecial';
 import { AlchemyItems } from '../../items/alchemy';
@@ -1268,7 +1268,7 @@ OpheliaScenes.SexVaginal = function() {
 				Text.Flush();
 				
 				ophelia.relation.IncreaseStat(50, 1);
-				world.TimeStep({hour: 1});
+				TimeStep({hour: 1});
 				
 				Gui.NextPrompt();
 			});
@@ -1364,7 +1364,7 @@ OpheliaScenes.SexVaginal = function() {
 				Text.Flush();
 				
 				ophelia.relation.IncreaseStat(35, 1);
-				world.TimeStep({hour: 1});
+				TimeStep({hour: 1});
 				
 				Gui.NextPrompt();
 			});
@@ -1524,7 +1524,7 @@ OpheliaScenes.PotionsPrompt = function() {
 				Text.Flush();
 				
 				party.coin += 150;
-				world.TimeStep({hour: 1});
+				TimeStep({hour: 1});
 				burrows.flags["Lacertium"] = 1;
 				
 				OpheliaScenes.PotionsPrompt();
@@ -1575,7 +1575,7 @@ OpheliaScenes.PotionsPrompt = function() {
 					Text.Flush();
 					
 					party.coin += 250;
-					world.TimeStep({hour: 1});
+					TimeStep({hour: 1});
 					burrows.flags["Equinium"] = 1;
 					
 					OpheliaScenes.PotionsPrompt();
@@ -1637,7 +1637,7 @@ OpheliaScenes.DeliverCactoids = function() {
 	
 	party.Inv().RemoveItem(Items.Quest.Cactoid, 3);
 	
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 	
 	burrows.flags["BruteTrait"] = Burrows.TraitFlags.Active;
 	
@@ -1685,7 +1685,7 @@ OpheliaScenes.DeliverGolHusks = function() {
 	
 	party.Inv().RemoveItem(Items.Quest.GolHusk, 3);
 
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 	
 	burrows.flags["HermTrait"] = Burrows.TraitFlags.Active;
 	
@@ -1721,7 +1721,7 @@ OpheliaScenes.DeliverAlgae = function() {
 	
 	party.Inv().RemoveItem(Items.Quest.RedAlgae, 3);
 	
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 	
 	burrows.flags["BrainyTrait"] = Burrows.TraitFlags.Active;
 	
@@ -2165,7 +2165,7 @@ OpheliaScenes.Reward = function() {
 						Text.Add("<b>Thus, your journey comes to an end, in the breeding pit of the lagomorph king.</b>", parse);
 						Text.Flush();
 						
-						world.TimeStep({season: 1});
+						TimeStep({season: 1});
 						
 						SetGameOverButton();
 					});
@@ -2190,7 +2190,7 @@ OpheliaScenes.Reward = function() {
 						Text.Flush();
 						
 						ophelia.relation.IncreaseStat(100, 25);
-						world.TimeStep({hour: 8});
+						TimeStep({hour: 8});
 						
 						Gui.NextPrompt();
 					});
@@ -2352,7 +2352,7 @@ OpheliaScenes.WatchVenaEntry = function() {
 	Text.Add("The girl is silent on the way back, leaning unsteadily on your shoulder.", parse);
 	Text.Flush();
 	
-	world.TimeStep({hour: 2});
+	TimeStep({hour: 2});
 	
 	Gui.NextPrompt();
 }
@@ -2525,7 +2525,7 @@ OpheliaScenes.RewardChoices = function() {
 					Text.NL();
 					Text.Add("The large paw holding your head firmly in place leaves you little choice but to swallow his immense load, which pours down your throat like a raging torrent. Pleased with your treat, you clean up his cock, licking up as much of his cum as you can before you get back to your feet.", parse);
 					
-					world.TimeStep({minute: 10});
+					TimeStep({minute: 10});
 					
 					PrintDefaultOptions();
 				});

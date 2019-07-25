@@ -10,7 +10,7 @@ import { TF } from '../../tf';
 import { AppendageType } from '../../body/appendage';
 import { Race } from '../../body/race';
 import { Color } from '../../body/color';
-import { WorldTime } from '../../worldtime';
+import { WorldTime } from '../../GAME';
 
 let EstevanScenes = {};
 
@@ -215,7 +215,7 @@ EstevanScenes.Prompt = function() {
 			if(estevan.flags["Ranger"] == Estevan.Ranger.NotTalked)
 				estevan.flags["Ranger"] = Estevan.Ranger.Taught;
 			
-			world.TimeStep({hour: 1});
+			TimeStep({hour: 1});
 			
 			EstevanScenes.Prompt();
 		}, enabled : true,
@@ -237,7 +237,7 @@ EstevanScenes.Prompt = function() {
 							
 							estevan.flags["Cheat"] = Estevan.Cheat.Talked;
 							
-							world.TimeStep({minute: 15});
+							TimeStep({minute: 15});
 							EstevanScenes.Prompt();
 						}, enabled : true,
 						tooltip : "On second thought… no."
@@ -250,7 +250,7 @@ EstevanScenes.Prompt = function() {
 							
 							estevan.flags["Cheat"] = Estevan.Cheat.Setup;
 							
-							world.TimeStep({minute: 15});
+							TimeStep({minute: 15});
 							EstevanScenes.Prompt();
 						}, enabled : true,
 						tooltip : "Heck yeah, this is going to be fun!"
@@ -294,7 +294,7 @@ EstevanScenes.Prompt = function() {
 					Text.Add("<i>“As fun as it was the first time, I don’t think Wolfie’s gonna fall for that one again. I dunno, perhaps if you just happened to find some matching cards and swap them yourself during the game, who’d be the wiser?”</i> He grins mischievously.", parse);
 					Text.Flush();
 					
-					world.TimeStep({minute: 15});
+					TimeStep({minute: 15});
 					EstevanScenes.Prompt();
 				}
 			}, enabled : true,
@@ -388,7 +388,7 @@ EstevanScenes.SexGay = function() {
 	}
 	Text.Flush();
 	
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 	
 	//[Oblige Estevan][Taunt Estevan]
 	var options = new Array();
@@ -505,7 +505,7 @@ EstevanScenes.SexGay = function() {
 					
 					estevan.flags["Gay"] |= Estevan.GaySex.FuckedBy;
 					
-					world.TimeStep({minute: 30});
+					TimeStep({minute: 30});
 					
 					EstevanScenes.Prompt();
 				}, enabled : true,
@@ -582,7 +582,7 @@ EstevanScenes.SexGay = function() {
 					
 					estevan.flags["Gay"] |= Estevan.GaySex.Blowjob;
 					
-					world.TimeStep({minute: 15});
+					TimeStep({minute: 15});
 					
 					EstevanScenes.Prompt();
 				}, enabled : true,
@@ -674,7 +674,7 @@ EstevanScenes.SexGay = function() {
 			Text.Add(" You’re almost ready to blow your load, but where?", parse);
 			Text.Flush();
 			
-			world.TimeStep({minute: 30});
+			TimeStep({minute: 30});
 			
 			estevan.flags["Gay"] |= Estevan.GaySex.FuckedHim;
 			
@@ -752,7 +752,7 @@ EstevanScenes.SexGay = function() {
 				Text.Add("Not that it’s necessarily a bad thing.", parse);
 				Text.Flush();
 				
-				world.TimeStep({minute: 10});
+				TimeStep({minute: 10});
 				
 				player.subDom.IncreaseStat(75, 1);
 				

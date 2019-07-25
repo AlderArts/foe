@@ -13,7 +13,7 @@ import { Color } from '../../body/color';
 import { Body } from '../../body/body';
 import { TF } from '../../tf';
 import { AppendageType } from '../../body/appendage';
-import { WorldTime } from '../../worldtime';
+import { WorldTime } from '../../GAME';
 
 let RosalinScenes = {};
 
@@ -598,7 +598,7 @@ RosalinScenes.TalkPrompt = function() {
 				}
 				Text.Flush();
 
-				world.TimeStep({minute: 45});
+				TimeStep({minute: 45});
 
 				parse["canusDesc"] = function() { return cale.Butt().AnalShort(); }
 				parse["cocks"] = function() { return player.MultiCockDesc(); }
@@ -862,7 +862,7 @@ RosalinScenes.FirstFuck = function() {
 	cocks                = player.CocksThatFit(cale.Butt());
 	var p2Cock           = player.BiggestCock(cocks);
 
-	world.TimeStep({minute: 45});
+	TimeStep({minute: 45});
 
 	var options = new Array();
 	options.push({ nameStr : "Fuck her",
@@ -2958,7 +2958,7 @@ RosalinScenes.SexPrompt = function(state) {
 					if(player.FirstVag())
 						player.FuckVag(player.FirstVag(), rosalin.FirstCock(), 2);
 
-					world.TimeStep({hour: 3});
+					TimeStep({hour: 3});
 
 				}, 1.0, function() { return true; });
 
@@ -2972,7 +2972,7 @@ RosalinScenes.SexPrompt = function(state) {
 					Text.Add("<i>“Mmm... can't wait for the next round, lover,”</i> she whisper in your ear before passing out. You take a small nap of your own before getting ready to leave. The [raceDesc] alchemist is still sleeping when you leave [himher], curled up in a ball and purring contentedly.", parse);
 					Text.Flush();
 
-					world.TimeStep({hour: 1});
+					TimeStep({hour: 1});
 					player.AddLustFraction(-1);
 					Gui.NextPrompt();
 				});
@@ -3040,7 +3040,7 @@ RosalinScenes.SexPrompt = function(state) {
 							Text.Add("You hurry off, leaving the pair on the ground. Looks like [wName] is in for a rough ride. He lets out a pained yelp as Rosalin gets down to business, spearing the poor wolf-morph on [hisher] [rcock]. Better avoid this area for a while.", parse);
 
 							player.AddLustFraction(0.1);
-							world.TimeStep({hour: 1});
+							TimeStep({hour: 1});
 
 							Text.Flush();
 							Gui.NextPrompt();
@@ -3501,7 +3501,7 @@ RosalinScenes.CockWorship = function(sexState) {
 
 	Text.Flush();
 
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 
 	player.AddLustFraction(-1);
 
@@ -3536,7 +3536,7 @@ RosalinScenes.VagAftermath = function() {
 		if(cocks[i].knot) knots++;
 
 	if(knots) {
-		world.TimeStep({minute: 30});
+		TimeStep({minute: 30});
 		Text.Add("The two of you lie together, waiting for your [knotDesc] to shrink back to its usual size. While reclining, you playfully toy with the alchemist's body, coaxing small, tired moans from [himher].", parse);
 		Text.NL();
 	}
@@ -3567,7 +3567,7 @@ RosalinScenes.VagAftermath = function() {
 	Text.Add("You gather up your gear, getting ready to leave.", parse);
 	Text.Flush();
 
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 
 	player.AddLustFraction(-1);
 

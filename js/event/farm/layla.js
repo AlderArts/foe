@@ -9,7 +9,7 @@ import { JobDesc, Jobs } from '../../job';
 import { Time } from '../../time';
 import { Images } from '../../assets';
 import { Color } from '../../body/color';
-import { WorldTime } from '../../worldtime';
+import { WorldTime } from '../../GAME';
 import { Text } from '../../text';
 
 function Layla(storage) {

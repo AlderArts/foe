@@ -232,7 +232,7 @@ NurseryScenes.CareBlock = function(womb) {
 			else {
 				Text.Add("prepare to make the journey back to the nomads’ camp. Thankfully, it’s not too far away from where you are - a few hours’ travel at worst - and once there, you waste no time in looking for the nomad chief.", parse);
 				
-				world.TimeStep({hour: 4});
+				TimeStep({hour: 4});
 			}
 			Text.NL();
 			Text.Add("The wrinkled old man is in his usual spot by the fire, his long pipe smoking away, and looks up at you as you approach. His eyes widen a little as he takes in the newborn [infant][s] in your arms, but the mood soon passes and he settles back into his usual grumpy, taciturn self.", parse);

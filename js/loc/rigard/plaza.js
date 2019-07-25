@@ -1,6 +1,6 @@
 
-import { Event, Link, EncounterTable, MoveToLocation } from '../../event';
-import { WorldTime } from '../../worldtime';
+import { Event, Link, EncounterTable } from '../../event';
+import { WorldTime, MoveToLocation } from '../../GAME';
 import { Text } from '../../text';
 
 let PlazaLoc = new Event("Plaza");
@@ -160,7 +160,7 @@ PlazaLoc.links.push(new Link(
 				Text.Add("You briefly consider trying to approach the gates to the royal grounds again, but the guards look no friendlier than they did the last time.", parse);
 			}
 			Text.Flush();
-			world.TimeStep({minute: 10});
+			TimeStep({minute: 10});
 			Gui.NextPrompt();
 		}
 		else {
@@ -257,7 +257,7 @@ PlazaLoc.events.push(new Link(
 
 		room69.flags["Hinges"] = Room69.HingesFlags.TalkedToGoldsmith;
 
-		world.TimeStep({minute: 10});
+		TimeStep({minute: 10});
 		Gui.NextPrompt();
 	}
 ));
@@ -473,7 +473,7 @@ PlazaScenes.LetterDelivery = function() {
 
 			party.coin += coin2;
 
-			world.TimeStep({minute: 30});
+			TimeStep({minute: 30});
 			Text.Flush();
 			Gui.NextPrompt();
 		}, enabled : true,
@@ -618,7 +618,7 @@ PlazaScenes.LetterDelivery = function() {
 
 			party.Inv().AddItem(Items.Letter);
 
-			world.TimeStep({minute: 15});
+			TimeStep({minute: 15});
 			Text.Flush();
 			Gui.NextPrompt();
 		}, enabled : true,

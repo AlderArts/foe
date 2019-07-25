@@ -586,7 +586,7 @@ ZebraShamanScenes.OnWinVaginal = function(enc) {
 		Text.Add("You walk over to the nearby watering hole and wash yourself, making sure to clean off as much zebra spunk as you can before you make your way out of there.", parse);
 		Text.Flush();
 
-		world.TimeStep({hour: 1});
+		TimeStep({hour: 1});
 
 		Gui.NextPrompt();
 	});

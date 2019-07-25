@@ -457,7 +457,7 @@ SexScenes.Ending = function() {
 	
 	player.AddSexExp(25);
 	
-	world.TimeStep({hour: 2});
+	TimeStep({hour: 2});
 	
 	Gui.NextPrompt();
 }
@@ -571,7 +571,7 @@ SexScenes.MagicalThreesome = function() {
 	
 	player.AddSexExp(25);
 	
-	world.TimeStep({hour: 3});
+	TimeStep({hour: 3});
 	
 	Gui.NextPrompt();
 }

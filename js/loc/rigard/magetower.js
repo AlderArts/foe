@@ -1,8 +1,9 @@
 
 
-import { Event, Link, MoveToLocation } from '../../event';
+import { Event, Link } from '../../event';
 import { JeanneScenes } from '../../event/royals/jeanne';
 import { GolemScenes } from '../../event/royals/golem';
+import { MoveToLocation } from '../../GAME';
 
 let world = null;
 

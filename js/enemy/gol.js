@@ -151,7 +151,7 @@ GolScenes.SearchForScepter = function() {
 	Text.Add("You waver on the brink of the crevasse. This may be your only lead on finding Lagon’s scepter, but this doesn’t look like the work of ordinary bandits. Not only that, you have an uneasy feeling about this place.", parse);
 	Text.Flush();
 	
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 	
 	//[Leave][Explore]
 	var options = new Array();
@@ -401,7 +401,7 @@ GolScenes.CombatLossIncEntry = function(gol) {
 				Text.Add("The hive needs so many born to finish conquering the world, but you and your sisters are up to the task. You rub the shining dome of your gravid tummy. Oh yes, are you ever.", parse);
 				Text.Flush();
 				
-				world.TimeStep({season: 1});
+				TimeStep({season: 1});
 				
 				SetGameOverButton();
 			});
@@ -522,7 +522,7 @@ GolScenes.CombatLossDrone = function(gol) {
 		Text.Add("You're a good drone, and endless orgasms are your reward.", parse);
 		Text.Flush();
 		
-		world.TimeStep({season: 1});
+		TimeStep({season: 1});
 		
 		SetGameOverButton();
 	});
@@ -598,7 +598,7 @@ GolScenes.CombatWin = function() {
 				Text.Add("<i>”I was… as none of my race has been before. With this, I could take down even the mighty towers of your people!”</i> You look at the scepter in wonder. Apparently, it holds quite a lot of power… you should be careful to not let it fall in the wrong hands. It seemingly played a role in giving the Gol an intellect far surpassing her old, feral mind. It’s not a stretch to say that it probably did the same for Lagon and his brood.", parse);
 				Text.Flush();
 				
-				world.TimeStep({minute: 30});
+				TimeStep({minute: 30});
 				
 				Gui.NextPrompt(function() {
 					GolScenes.CombatAftermath(enc);
@@ -710,7 +710,7 @@ GolScenes.CombatWinHyperFuck = function(enc, p1cock) {
 	Text.Add("The scepter sits a short distance away. Gathering your equipment, you walk over to grab it, sparing a look at the well-fucked creature behind. She's a little drunk looking and blushing, wearing the kind of look that unequivocally commends you for a job well done.", parse);
 	Text.Flush();
 	
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 	
 	Gui.NextPrompt(function() {
 		GolScenes.CombatAftermath(enc);
@@ -766,7 +766,7 @@ GolScenes.CombatWinTailfuck = function(enc, p1cock) {
 	Text.Add("Do you cum inside or outside?", parse);
 	Text.Flush();
 	
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 	
 	//[Inside] [Outside]
 	var options = new Array();
@@ -919,7 +919,7 @@ GolScenes.CombatWinCunn = function(enc) {
 	Text.Add("<i>”I have… other things that could go inside your pussy,”</i> the Gol offers, her voice shaky but mesmerizing. <i>”Just lay back… I will fill you with my eggs, yes...”</i> Her tail twitches enticingly.", parse);
 	Text.Flush();
 	
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 	
 	player.AddLustFraction(1);
 	

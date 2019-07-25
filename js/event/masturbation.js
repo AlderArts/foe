@@ -497,7 +497,7 @@ MasturbationScenes.CockOpening = function(p1cock) {
 	Text.Add("That really hit the spot; maybe you should take a short half hour nap before heading off on your way. Yes… that would be great, you think to yourself as you yawn…", parse);
 	Text.Flush();
 	
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 	
 	Gui.NextPrompt();
 }
@@ -665,7 +665,7 @@ MasturbationScenes.AnalFinger = function(parse) {
 	Text.Add("By and large, though, the pleasure eventually fades, leaving you to extricate your finger from your [anus] in due course. Panting, your lungs heaving with the occasional moan, you just lie for a bit on the ground until you’re ready to be on your feet again, your lusts sated - for now, that is.", parse);
 	Text.Flush();
 	
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 	
 	Gui.NextPrompt();
 }
@@ -741,7 +741,7 @@ MasturbationScenes.AnalToy = function(parse, toy) {
 	Text.Add("It’s only when the climax passes that you relax and sag a little in its wake, although it still takes a little while before you work up the strength or presence of mind to remove the [toy] from your [anus], pulling it free with a wet, slurping sound. Yes… this certainly blew off all that steam you’d been building up.", parse);
 	Text.Flush();
 	
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 	
 	Gui.NextPrompt();
 }
@@ -846,7 +846,7 @@ MasturbationScenes.VagFinger = function(parse) {
 	Text.Add("Drained and exhausted, you slump onto your back, eyes staring upwards blankly and lungs heaving as the last vestiges of orgasm slowly begin to die away. Well, this was what you wanted, wasn’t it? You got it well and good, then - it’ll be a little while before you’ll be able to be on your way, but it was worth it.", parse);
 	Text.Flush();
 	
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 	
 	Gui.NextPrompt();
 }
@@ -888,7 +888,7 @@ MasturbationScenes.VagToy = function(parse, toy) {
 	Text.Add("At long last, it seems to be over. You’re not sure exactly how much time has passed with you lying insensate on the ground, but at last you manage to summon enough strength to pull your [toy] free of you. It parts from your [vag] with a wet slurp, and you shiver at the sensations the movement brings before rolling over with a groan. You’ll have to get up sometime, yes, but for now… maybe you’ll just lie here a little longer.", parse);
 	Text.Flush();
 	
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 	
 	Gui.NextPrompt();
 }
@@ -945,7 +945,7 @@ MasturbationScenes.VagTailfuck = function(parse) {
 	Text.Add("At last, the aftershocks of pleasure begin to die away, leaving you equally drained and exhilarated as you lie limply on the ground, chest heaving as great gouts of hot breath escape your mouth. Your head continues to spin a little, but by and large you manage to get a tenuous grip on yourself and clamber upright. A moment more, and you’re dressed once more and ready to be off.", parse);
 	Text.Flush();
 	
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 	
 	Gui.NextPrompt();
 }
@@ -1080,7 +1080,7 @@ MasturbationScenes.Breasts = function() {
 	
 	var cum = player.OrgasmCum();
 	
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 	Gui.NextPrompt();
 }
 

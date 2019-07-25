@@ -3,7 +3,7 @@ import { Entity } from '../entity';
 import { EncounterTable } from '../event';
 import { Party } from '../party';
 import { Gender } from '../body/gender';
-import { WorldTime } from '../worldtime';
+import { WorldTime } from '../GAME';
 import { Images } from '../assets';
 import { Element } from '../ability';
 import { Race } from '../body/race';
@@ -1464,7 +1464,7 @@ MaliceScoutsScenes.Mare.LoneEncounter = function(levelbonus) {
 				Text.Flush();
 
 				Gui.NextPrompt(function() {
-					world.TimeStep({hour: 1});
+					TimeStep({hour: 1});
 					Text.Clear();
 					MaliceScoutsScenes.Mare.LossEntry(enc);
 				});
@@ -1883,7 +1883,7 @@ MaliceScoutsScenes.Mare.WinFuck = function(enc) {
 	}
 	Text.Flush();
 
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 
 	Gui.NextPrompt();
 }
@@ -2294,7 +2294,7 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc) {
 		Text.Add("What will you do?", parse);
 		Text.Flush();
 		
-		world.TimeStep({hour: 1});
+		TimeStep({hour: 1});
 		
 		//Structure this as such: random opening for each of the four body parts, followed by body-part specific portion. Alchemist and leave have their own blocks altogether.
 		
@@ -2411,7 +2411,7 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc) {
 					Text.Add("You have a very good idea, which is exactly why you did that. Giving the cum-covered goat a big smile, you apply a swift kick to his side and trot away, leaving him to think about what he’s done - if such a thing is applicable to an old has-been like him.", parse);
 					Text.Flush();
 					
-					world.TimeStep({hour: 1});
+					TimeStep({hour: 1});
 					
 					var cocks = player.AllCocks();
 					for(var i = 0; i < cocks.length; i++) {
@@ -2464,7 +2464,7 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc) {
 					Text.Add("Are there?", parse);
 					Text.Flush();
 					
-					world.TimeStep({hour: 1});
+					TimeStep({hour: 1});
 					
 					player.Balls().size.IncreaseStat(20, 1);
 					player.RestoreCum(10);
@@ -2501,7 +2501,7 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc) {
 				Text.Add("Huh. Looks like it actually worked - and that was quite the change for the small amount you used. Doesn’t seem like there’re any side effects, either, save for the nagging desire at the back of your mind to go ahead and give someone, <i>anyone</i> a boobjob, but even that is fading as you push your [breasts] back into your [armor] and prepare to be on your way.", parse);
 				Text.Flush();
 				
-				world.TimeStep({hour: 1});
+				TimeStep({hour: 1});
 				
 				_.each(player.AllBreastRows(), function(breasts) {
 					breasts.size.IncreaseStat(50, 1);
@@ -2598,7 +2598,7 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc) {
 					Text.Add("Of course, that’s why you did it. If he treasures his little concoctions so much, maybe he could consider actually finding volunteers for his experiments instead of lying in wait in the wilderness to make “volunteers” out of unsuspecting travelers. Reaching down, you give his softening dick a good hard slap, making him bleat in pain, then turn your back on the old has-been and are on your way.", parse);
 					Text.Flush();
 					
-					world.TimeStep({hour: 1});
+					TimeStep({hour: 1});
 					
 					Gui.NextPrompt();
 				}
@@ -2680,7 +2680,7 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc) {
 				Text.Add("Not waiting for a reply, you toss the empty tub over your shoulder, pull off the borrowed gloves, and are well on your way through the ravine without so much as a second thought.", parse);
 				Text.Flush();
 
-				world.TimeStep({hour: 1});
+				TimeStep({hour: 1});
 
 				Gui.NextPrompt();
 			}
@@ -2784,7 +2784,7 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc) {
 				
 				player.AddSexExp(2);
 				
-				world.TimeStep({hour: 1});
+				TimeStep({hour: 1});
 				
 				Gui.NextPrompt();
 			}
@@ -3187,7 +3187,7 @@ MaliceScoutsScenes.Goat.LossEntry = function(enc) {
 		Text.Add("Ugh… you’ll remember this… and really, he ought to take better care of his pet, or at least feed the poor thing more often.", parse);
 		Text.Flush();
 		
-		world.TimeStep({hour: 2});
+		TimeStep({hour: 2});
 		
 		Gui.NextPrompt();
 	}, 1.0, function() { return player.Humanoid(); });
@@ -3287,7 +3287,7 @@ MaliceScoutsScenes.Goat.LossEntry = function(enc) {
 		Text.Add("Right, right. You can be on your way… once you’ve rested a bit, cleaned yourself up and gotten everything in order. Then there’s the matter of your newly enhanced mammaries… giving the firm boobflesh a poke and shuddering at the erotic tingles the touch generates, you sigh and shake your head. That’s going to have to be dealt with sooner or later…", parse);
 		Text.Flush();
 		
-		world.TimeStep({hour: 1});
+		TimeStep({hour: 1});
 		
 		Gui.NextPrompt();
 	}, 1.0, function() { return true; });
@@ -3712,7 +3712,7 @@ MaliceScoutsScenes.Group.LossCatboyForcedTF = function(enc) {
 	Text.Add("It takes quite a bit of effort, but eventually you’re able to pull yourself upright, albeit unsteadily, and totter off before something worse can happen. Like it or not, you’re going to be walking funny for the next few days…", parse);
 	Text.Flush();
 	
-	world.TimeStep({hour: 2});
+	TimeStep({hour: 2});
 	
 	Gui.NextPrompt();
 }
@@ -4035,7 +4035,7 @@ MaliceScoutsScenes.Group.LossMagicalBondage = function(enc) {
 	Text.Add("Ugh, you’re going to be walking funny for the next few days, aren’t you?", parse);
 	Text.Flush();
 	
-	world.TimeStep({hour: 2});
+	TimeStep({hour: 2});
 	
 	player.AddSexExp(3);
 	
@@ -4231,7 +4231,7 @@ MaliceScoutsScenes.Group.LossCatRape = function(enc) {
 	Text.Add("Well, at least there’s no sign of the trio that accosted you - all that remains in this circle of stones are a few wet splotches of fluids best not looked at too closely. Pulling yourself to your feet, you gather up your stuff from the ground and make to leave.", parse);
 	Text.Flush();
 
-	world.TimeStep({hour: 2});
+	TimeStep({hour: 2});
 	
 	Gui.NextPrompt();
 }

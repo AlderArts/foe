@@ -1329,7 +1329,7 @@ KiakaiScenes.TalkPriestDisciplines = function() {
 								
 								player.AddLustFraction(0.3);
 								kiakai.AddLustFraction(0.6);
-								world.TimeStep({hour: 3});
+								TimeStep({hour: 3});
 								
 								Gui.NextPrompt(KiakaiScenes.TalkPriest);
 								

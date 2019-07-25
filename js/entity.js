@@ -16,6 +16,7 @@ import { EntityDict } from './entity-dict';
 import { EntityDesc, LowerBodyType } from './entity-desc';
 import { EntityGrammar } from './entity-grammar';
 import { EntitySex } from './entity-sex';
+import { Time } from './time';
 
 // TODO: Should have shared features, such as combat stats. Body representation
 function Entity() {

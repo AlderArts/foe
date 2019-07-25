@@ -8,7 +8,7 @@ import { JobDesc, Jobs } from '../../job';
 import { Images } from '../../assets';
 import { Color } from '../../body/color';
 import { Time } from '../../time';
-import { WorldTime } from '../../worldtime';
+import { WorldTime } from '../../GAME';
 
 function Cveta(storage) {
 	Entity.call(this);

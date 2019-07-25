@@ -10,7 +10,7 @@ import { Images } from '../../assets';
 import { HairStyle } from '../../body/hair';
 import { Stat } from '../../stat';
 import { Time } from '../../time';
-import { WorldTime } from '../../worldtime';
+import { WorldTime } from '../../GAME';
 import { Abilities } from '../../abilities';
 import { Text } from '../../text';
 import { Gui } from '../../gui';

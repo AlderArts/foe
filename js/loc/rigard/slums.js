@@ -1,6 +1,6 @@
 
-import { Event, Link, EncounterTable, MoveToLocation } from '../../event';
-import { WorldTime } from '../../worldtime';
+import { Event, Link, EncounterTable } from '../../event';
+import { WorldTime, MoveToLocation } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
 

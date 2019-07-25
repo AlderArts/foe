@@ -1,7 +1,6 @@
 import { Gwendy } from './gwendy';
-import { Link } from '../../event';
 import { Gender } from '../../body/gender';
-import { WorldTime } from '../../worldtime';
+import { WorldTime } from '../../GAME';
 
 let GwendyScenes = {};
 
@@ -357,7 +356,7 @@ GwendyScenes.WorkFeedingDanie = function() {
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
 		Text.Add("You head over to the sheep paddock, where Danie briefly leaves you to frolic with her kin. Well, now it looks like you have to feed all of them yourself. Eventually, she comes back to you, apologizing for dallying.", parse);
-		world.TimeStep({minute:20});
+		TimeStep({minute:20});
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
 		Text.Add("While feeding a group of rowdy bovine-morphs, Danie manages to trip, waving her arms wildly as she falls. The clumsy sheep-girl also somehow manages to upend the bag of feed on top of herself. Without missing a beat, the friendly cow-girls and boys continue their meal, eating it straight off the flustered sheep. Before you’ve reached her, they have finished all the food, licking the scraps from her pale skin. Danie is a bit unsteady on her feet as you help her up, fidgeting a bit before cleaning herself off.", parse);
@@ -400,7 +399,7 @@ GwendyScenes.WorkFeedingDanie = function() {
 		
 	Text.Flush();
 	
-	world.TimeStep({hour: 4});
+	TimeStep({hour: 4});
 	
 	Gui.NextPrompt();
 }
@@ -576,7 +575,7 @@ GwendyScenes.WorkMilking = function() {
 		Text.NL();
 		
 		gwendy.relation.IncreaseStat(40, 3);
-		world.TimeStep({hour: numHours});
+		TimeStep({hour: numHours});
 		gwendy.flags["WorkMilked"]++;
 		
 		if(challenge) {
@@ -690,7 +689,7 @@ GwendyScenes.ChallengeSexWonPrompt = function(hangout, options, disableSleep) {
 			}
 
 			player.AddLustFraction(0.1);
-			world.TimeStep({minute: 5});
+			TimeStep({minute: 5});
 			Text.Flush();
 			Gui.NextPrompt();
 		}, enabled : true,
@@ -947,7 +946,7 @@ GwendyScenes.ChallengeSexHands = function(cock, hangout) {
 
 	Text.Flush();
 
-	world.TimeStep({minute: 20});
+	TimeStep({minute: 20});
 	player.AddLustFraction(-1);
 
 	Gui.NextPrompt();
@@ -1044,7 +1043,7 @@ GwendyScenes.ChallengeSexBody = function(titjob, hangout, disableSleep) {
 
 		Text.Flush();
 
-		world.TimeStep({minute: 30});
+		TimeStep({minute: 30});
 		player.AddLustFraction(-1);
 
 		Gui.NextPrompt();
@@ -1117,7 +1116,7 @@ GwendyScenes.ChallengeSexBody = function(titjob, hangout, disableSleep) {
 		Text.Add("But keeping to your internal promise, you only do this to tease her. After a few moments, you stop moving your fingers, but leave them in and settle on lightly spanking Gwendy. Based on the clenching felt around your digits, she's getting a bit too close to orgasm so you withdraw your hand altogether.", parse);
 		Text.NL();
 
-		world.TimeStep({minute: 30});
+		TimeStep({minute: 30});
 		player.AddLustFraction(0.5);
 
 		if(!hangout) {
@@ -1298,7 +1297,7 @@ GwendyScenes.ChallengeSexOral = function(blow, hangout) {
 
 	Text.Flush();
 
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 	player.AddLustFraction(-1);
 
 	Gui.NextPrompt();
@@ -1454,7 +1453,7 @@ GwendyScenes.ChallengeSexVag = function(fuck, hangout) {
 
 	Text.Flush();
 
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 	player.AddLustFraction(-1);
 
 	Gui.NextPrompt();
@@ -1657,7 +1656,7 @@ GwendyScenes.ChallengeSexAnal = function(toys, hangout) {
 
 		Text.Flush();
 
-		world.TimeStep({minute: 30});
+		TimeStep({minute: 30});
 		player.AddLustFraction(-1);
 
 		Gui.NextPrompt();
@@ -1695,7 +1694,7 @@ GwendyScenes.ChallengeSexAnalToys = function(toy, hangout, first) {
 
 		Text.Flush();
 
-		world.TimeStep({minute: 30});
+		TimeStep({minute: 30});
 		player.AddLustFraction(-1);
 
 		Gui.NextPrompt();
@@ -1707,7 +1706,7 @@ GwendyScenes.ChallengeSexAnalToys = function(toy, hangout, first) {
 
 		Text.Flush();
 
-		world.TimeStep({minute: 30});
+		TimeStep({minute: 30});
 		player.AddLustFraction(-1);
 
 		Gui.NextPrompt();
@@ -1807,7 +1806,7 @@ GwendyScenes.ChallengeSexAnalToys = function(toy, hangout, first) {
 
 					player.subDom.IncreaseStat(50, 1);
 					gwendy.subDom.DecreaseStat(-10, 1);
-					world.TimeStep({hour: 1});
+					TimeStep({hour: 1});
 				});
 
 			}, enabled : player.SubDom() >= 30 && (WorldTime().hour < 19 && WorldTime().hour >= 5),
@@ -1845,7 +1844,7 @@ GwendyScenes.ChallengeSexAnalToys = function(toy, hangout, first) {
 
 			Text.Flush();
 
-			world.TimeStep({minute: 30});
+			TimeStep({minute: 30});
 			player.AddLustFraction(0.2);
 
 			Gui.NextPrompt();
@@ -1935,7 +1934,7 @@ GwendyScenes.ChallengeSexAnalToys = function(toy, hangout, first) {
 
 		Text.Flush();
 
-		world.TimeStep({minute: 30});
+		TimeStep({minute: 30});
 		player.AddLustFraction(-1);
 
 		Gui.NextPrompt();
@@ -1967,7 +1966,7 @@ GwendyScenes.ChallengeSexLostPrompt = function(hangout, options, disableSleep) {
 			func : function() {
 				Text.Clear();
 
-				world.TimeStep({minute: 30});
+				TimeStep({minute: 30});
 				player.AddLustFraction(0.1);
 				if(hangout) {
 					Text.Add("Smiling delightfully, Gwendy leans in, pressing her lips against yours. You moan gently as her soft, full lips explore your own.", parse);
@@ -2038,7 +2037,7 @@ GwendyScenes.ChallengeSexLostPrompt = function(hangout, options, disableSleep) {
 					Text.NL();
 				}
 
-				world.TimeStep({minute: 30});
+				TimeStep({minute: 30});
 				player.AddLustFraction(0.5);
 
 				if(hangout) {
@@ -2168,7 +2167,7 @@ GwendyScenes.ChallengeSexLostPrompt = function(hangout, options, disableSleep) {
 
 				Text.Add("The voice is playful, but does little to mask the obvious threat she’s laid out. As best you can, you get dressed and leave in haste, not wanting to risk incurring her sexual wrath on you.", parse);
 
-				world.TimeStep({hour: 1});
+				TimeStep({hour: 1});
 				player.AddLustFraction(0.9);
 				Text.Flush();
 

@@ -614,7 +614,7 @@ Intro.ImpsLossFucked = function() {
 
 // Intro.timesTakenDemonGift
 Intro.DemonGift = function() {
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 	
 	// Only allow 3 times
 	if(Intro.timesTakenDemonGift >= 3) {

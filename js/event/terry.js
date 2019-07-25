@@ -636,7 +636,7 @@ TerryScenes.Prompt = function() {
 			Text.Clear();
 			Text.Add("[Placeholder] Terry masturbates fiercely, cumming buckets.");
 			Text.Flush();
-			world.TimeStep({minute : 10});
+			TimeStep({minute : 10});
 			
 			that.OrgasmCum();
 			
@@ -718,7 +718,7 @@ TerryScenes.ExploreGates = function() {
 		Text.Add("Despite your exhaustive efforts at searching, it all comes to naught - there isn't a single trace of a clue to be found here. Eventually, Miranda declares it's time to look somewhere else.", parse);
 	}
 	Text.Flush();
-	world.TimeStep({minute : 30});
+	TimeStep({minute : 30});
 	
 	Gui.NextPrompt();
 }
@@ -754,7 +754,7 @@ TerryScenes.ExploreResidential = function() {
 		Text.Add("You do your best to search, questioning people if they have seen anything strange and poking your nose into any likely looking corner, but in the end, you come up empty-handed. Looking toward Miranda, she shakes her head with a disgusted grimace; evidently her luck was no better than yours. It looks like your thief isn't here.", parse);
 	}
 	Text.Flush();
-	world.TimeStep({minute : 30});
+	TimeStep({minute : 30});
 	
 	Gui.NextPrompt();
 }
@@ -824,7 +824,7 @@ TerryScenes.ExploreMerchants = function() {
 	}
 	
 	Text.Flush();
-	world.TimeStep({minute : 30});
+	TimeStep({minute : 30});
 	
 	Gui.NextPrompt();
 }
@@ -867,7 +867,7 @@ TerryScenes.ExplorePlaza = function() {
 		}
 	}
 	Text.Flush();
-	world.TimeStep({minute : 30});
+	TimeStep({minute : 30});
 	
 	Gui.NextPrompt();
 }
@@ -898,7 +898,7 @@ TerryScenes.CombatVsMiranda = function() {
 		Text.Flush();
 		
 		party.location = world.loc.Rigard.Gate;
-		world.TimeStep({minute: 30});
+		TimeStep({minute: 30});
 		
 		party.RestFull();
 		
@@ -935,7 +935,7 @@ TerryScenes.CombatVsMiranda = function() {
 		Text.Add("You nod and follow after Miranda.", parse);
 		Text.Flush();
 		
-		world.TimeStep({minute: 30});
+		TimeStep({minute: 30});
 		
 		// Move Terry
 		var scenes = new EncounterTable();
@@ -996,7 +996,7 @@ TerryScenes.CaughtTheThief = function() {
 		Text.Add("<i>“I… I hid it in a warehouse in the merchant district!”</i> she squeaks, eyeing Miranda fearfully.", parse);
 	Text.Flush();
 	
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 	
 	Gui.NextPrompt(function() {
 		Text.Clear();Text.Add("Following the thief’s directions, you make your way into the appointed warehouse. The doors are locked, not that it makes any difference. Miranda shatters the lock, and latch, with a well placed kick, making both you and the thieving vixen cringe. ", parse);
@@ -1022,7 +1022,7 @@ TerryScenes.CaughtTheThief = function() {
 		Text.Add("You realize that Miranda's serious about this; she's in one of her moods again. What should you do?", parse);
 		Text.Flush();
 		
-		world.TimeStep({minute: 30});
+		TimeStep({minute: 30});
 		
 		//[LetHer][StopHer][TakeHim]
 		var options = new Array();
@@ -1199,7 +1199,7 @@ TerryScenes.CaughtTheThief = function() {
 			Gui.NextPrompt(function() {
 				Text.Clear();
 				party.location = world.loc.Rigard.Tavern.common;
-				world.TimeStep({hour: 1});
+				TimeStep({hour: 1});
 				Text.Add("After Miranda calms down enough, you two somehow find yourselves at the Maidens' Bane. Word that the Royal Guard had <i>caught</i> the thief has spread and the blockade has been lifted. Miranda looks absolutely dejected, drowning her sorrows in a mugful of ale.", parse);
 				Text.NL();
 				Text.Add("<i>“Damn that pompous ass, making fun of me and taking credit for <b>my</b> hard work.”</i> She drains the entire mug, and pours herself another mugful. <i>“You’ve just had the pleasure of meeting Preston the Shining, the commander of the Royal Guard. Yes, he’s always that much of an ass.”</i>", parse);
@@ -1243,7 +1243,7 @@ TerryScenes.CaughtTheThief = function() {
 						
 						party.LoadActiveParty();
 						party.location = world.loc.Rigard.Inn.common;
-						world.TimeStep({hour: 1});
+						TimeStep({hour: 1});
 						
 						if(party.Num() > 1) {
 							parse["comp"] = party.Num() > 2 ? "Your companions are" : party.Get(1).name + " is";
@@ -1267,7 +1267,7 @@ TerryScenes.CaughtTheThief = function() {
 						
 						party.LoadActiveParty();
 						party.location = world.loc.Rigard.Inn.common;
-						world.TimeStep({hour: 1});
+						TimeStep({hour: 1});
 						
 						
 						if(party.Num() > 1) {
@@ -1379,7 +1379,7 @@ TerryScenes.Release = function() {
 	Text.Add("Seeing the guard's angry expression, you tell your new... recruit... to follow you, before turning and heading for the jail's exit.", parse);
 	Text.Flush();
 	
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 	
 	Gui.NextPrompt(function() {
 		Text.Clear();
@@ -3250,7 +3250,7 @@ TerryScenes.RosalinTF = function() {
 	Text.Flush();
 	
 	terry.relation.DecreaseStat(-100, 3);
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 	terry.flags["TF"] |= Terry.TF.Rosalin;
 	
 	Gui.NextPrompt();
@@ -3292,7 +3292,7 @@ TerryScenes.JeanneTFFirst = function() {
 	Text.Add("You tell her that you'll keep that in mind.", parse);
 	Text.Flush();
 	
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 	terry.flags["TF"] |= Terry.TF.Jeanne;
 	
 	Scenes.Jeanne.Talk();
@@ -3333,7 +3333,7 @@ TerryScenes.JeanneTFPrompt = function() {
 					var options = new Array();
 					options.push({ nameStr : "Craft",
 						func : function() {
-							world.TimeStep({hour: 1});
+							TimeStep({hour: 1});
 							party.coin -= coin;
 							party.Inv().RemoveItem(item);
 							TerryScenes.JeanneTFCraft(obj.item, obj.scene, horseTF);
@@ -3400,7 +3400,7 @@ TerryScenes.JeanneTFCraft = function(item, scene, horseTF) {
 			Text.Add("Once it’s over, she closes the vial and utters something under her breath, making the vial glow and shrink. She tests the seal to make sure it’s solid, then presents it to you. <i>“Here you go.”</i> You accept it, turning it over in your hand. After the magic has done its work, the vial is only a fraction of its former size.", parse);
 		}
 		
-		world.TimeStep({hour : 1});
+		TimeStep({hour : 1});
 		
 		if(terry.flags["TF"] & Terry.TF.JeanneUsed)
 			Text.Add(" You take the capsule and look at Terry.", parse);
@@ -4295,7 +4295,7 @@ TerryScenes.JeanneTFGrowHorsecock = function() {
 	terry.flags["cock"] = Terry.Cock.Horse;
 	terry.SetCock();
 	
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 	var cum = terry.OrgasmCum();
 	
 	Scenes.Jeanne.InteractPrompt();
@@ -4749,7 +4749,7 @@ TerryScenes.SexGetOralPussy = function() {
 	
 	terry.AddLustFraction(0.4);
 	
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 	
 	if(relslut < 45)
 		terry.relation.DecreaseStat(0, 1);
@@ -5057,7 +5057,7 @@ TerryScenes.SexGetOralCockCont = function(parse, p1cock) {
 				terry.relation.IncreaseStat(45, 1);
 			Text.NL();
 			
-			world.TimeStep({hour: 1});
+			TimeStep({hour: 1});
 			
 			if(clean) {
 				Text.Flush();
@@ -5134,7 +5134,7 @@ TerryScenes.SexGetOralCockCont = function(parse, p1cock) {
 			}
 			Text.NL();
 			
-			world.TimeStep({hour: 1});
+			TimeStep({hour: 1});
 			
 			if(terry.Relation() < 30) {
 				Text.Add("Terry glares at you, clearly not pleased with how you chose to end this. <i>“Are we done here?”</i> [heshe] asks, voice practically dripping venom.", parse);
@@ -5325,7 +5325,7 @@ TerryScenes.SexPitchAnal = function(cocksInAss) {
 					Text.Flush();
 					
 					terry.slut.IncreaseStat(100, 4);
-					world.TimeStep({hour: 1});
+					TimeStep({hour: 1});
 					
 					Gui.NextPrompt();
 				}
@@ -5442,7 +5442,7 @@ TerryScenes.SexPitchAnal = function(cocksInAss) {
 								
 								terry.relation.IncreaseStat(50, 2);
 								terry.slut.IncreaseStat(100, 1);
-								world.TimeStep({hour: 1});
+								TimeStep({hour: 1});
 								
 								Gui.NextPrompt();
 							}, enabled : true,
@@ -5507,7 +5507,7 @@ TerryScenes.SexPitchAnal = function(cocksInAss) {
 									
 									terry.relation.IncreaseStat(50, 2);
 									terry.slut.IncreaseStat(100, 2);
-									world.TimeStep({hour: 2});
+									TimeStep({hour: 2});
 									
 									Gui.NextPrompt();
 								}, enabled : true,
@@ -5581,7 +5581,7 @@ TerryScenes.SexPitchAnal = function(cocksInAss) {
 							
 							terry.relation.IncreaseStat(50, 2);
 							terry.slut.IncreaseStat(100, 1);
-							world.TimeStep({hour: 1});
+							TimeStep({hour: 1});
 							
 							Gui.NextPrompt();
 						}, enabled : true,
@@ -6039,7 +6039,7 @@ TerryScenes.SexFuckButtEntrypoint = function(p1Cock, promise, retFunc) {
 						Text.Add("Thick, hot strands of semen pour into Terry’s colon, your knot ensuring that not a single drop escapes, leaving [himher] looking slightly bloated by the time that you finish.", parse);
 					}
 					
-					world.TimeStep({hour: 1});
+					TimeStep({hour: 1});
 				}
 			}
 			else { //no knot
@@ -6218,7 +6218,7 @@ TerryScenes.SexWorship = function() {
 	Text.Add("The only reply the [foxvixen] can manage is a moan as [hisher] cock throbs in warning. [HeShe] wasn’t lying when [heshe] said [heshe] was close. Looks like Terry is only hanging in there by a thin line, just about to break… question is, how to push [himher] over? You could give [himher] a nice pasting with [hisher] own juices; you know what a cum fountain this pillar makes [himher] into... on the other hand, you could give yourself a nice hot cumbath instead. Then again, why waste it? Why not let [himher] cum inside you; you’re pretty sure you could take [himher] balls deep before [heshe] blows...", parse);
 	Text.Flush();
 	
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 	
 	//[HoseTerry] [Bukkake] [AnalCatch]
 	var options = new Array();
@@ -6270,7 +6270,7 @@ TerryScenes.SexWorship = function() {
 			
 			terry.relation.IncreaseStat(35, 1);
 			
-			world.TimeStep({hour: 1});
+			TimeStep({hour: 1});
 			
 			TerryScenes.PCCleansTerry();
 		}, enabled : true,
@@ -6363,7 +6363,7 @@ TerryScenes.SexWorship = function() {
 			}
 			Text.Flush();
 			
-			world.TimeStep({hour: 1});
+			TimeStep({hour: 1});
 			
 			TerryScenes.TCleansPC();
 		}, enabled : true,
@@ -6567,7 +6567,7 @@ TerryScenes.SexWorship = function() {
 					Text.Add("With a cheerful grin and a light toss of your head, you hurry after the [foxvixen], racing to catch up.", parse);
 					Text.Flush();
 					
-					world.TimeStep({hour: 3});
+					TimeStep({hour: 3});
 					Gui.NextPrompt();
 					return;
 				}
@@ -6621,11 +6621,11 @@ TerryScenes.SexWorship = function() {
 					Text.Add("<i>“Yeah, that’s just who I am. Full of bright ideas. Good night,”</i> [heshe] says, giving your cheek a peck and closing [hisher] eyes for some much needed rest.", parse);
 				}
 				terry.relation.IncreaseStat(45, 2);
-				world.TimeStep({hour: 1});
+				TimeStep({hour: 1});
 			}
 			Text.Flush();
 			
-			world.TimeStep({hour: 1});
+			TimeStep({hour: 1});
 			
 			Gui.NextPrompt();
 		}, enabled : true,
@@ -8150,7 +8150,7 @@ TerryScenes.SexPitchVaginal = function(cocks) {
 							Text.NL();
 							Text.Add("Finally feeling your knot[s4] deflate, you wriggle your hips and pop yourself free. Now, that just leaves the question of how to clean Terry up...", parse);
 							
-							world.TimeStep({hour : 1});
+							TimeStep({hour : 1});
 						}
 						else {
 							Text.Add("You pout and ask if Terry really wants you out of [himher] already? [HeShe]’s so comfortable!", parse);
@@ -8161,7 +8161,7 @@ TerryScenes.SexPitchVaginal = function(cocks) {
 						}
 						Text.Flush();
 						
-						world.TimeStep({hour: 1});
+						TimeStep({hour: 1});
 						terry.slut.IncreaseStat(100, 1);
 						terry.relation.IncreaseStat(100, 1);
 					
@@ -8189,7 +8189,7 @@ TerryScenes.SexPitchVaginal = function(cocks) {
 								Text.NL();
 								Text.Add("<i>“A-alright, I supposed that’s one way...”</i> the [foxvixen] says, a bit uncomfortable with your closeness. But [heshe] settles down all the same.", parse);
 								
-								world.TimeStep({hour: 1});
+								TimeStep({hour: 1});
 							}
 							else {
 								Text.Add("If it really bothers [himher] so much, you suppose you can get out now.", parse);
@@ -8212,7 +8212,7 @@ TerryScenes.SexPitchVaginal = function(cocks) {
 								Text.NL();
 								Text.Add("<i>“Flatterer,”</i> [heshe] giggles. <i>“Alright, I guess we’ll just wait.”</i>", parse);
 								
-								world.TimeStep({hour: 1});
+								TimeStep({hour: 1});
 							}
 							else {
 								Text.Add("<i>“In any case, how much longer do you plan to stay inside me?”</i>", parse);
@@ -8244,7 +8244,7 @@ TerryScenes.SexPitchVaginal = function(cocks) {
 								Text.NL();
 								Text.Add("Oh, beat still my heart, you whisper, leaning back against your lover in a passionate embrace.", parse);
 								
-								world.TimeStep({hour: 1});
+								TimeStep({hour: 1});
 							}
 							else {
 								Text.Add("<i>“Not that I have a problem with it or anything, but how long do you intend to stay inside?”</i>", parse);
@@ -8286,7 +8286,7 @@ TerryScenes.SexPitchVaginal = function(cocks) {
 							Text.Add("After a few moments, you and Terry busy yourselves getting back into your respective gear. Once you’re both dressed, you set off again.", parse);
 							Text.Flush();
 							
-							world.TimeStep({hour: 1});
+							TimeStep({hour: 1});
 							terry.slut.IncreaseStat(100, 1);
 							terry.relation.IncreaseStat(100, 1);
 					
@@ -8347,7 +8347,7 @@ TerryScenes.SexPitchVaginal = function(cocks) {
 					
 					terry.slut.IncreaseStat(100, 2);
 					terry.relation.IncreaseStat(100, 1);
-					world.TimeStep({hour: 1});
+					TimeStep({hour: 1});
 					
 					TerryScenes.PCCleansTerry();
 				}, enabled : true,
@@ -8453,7 +8453,7 @@ TerryScenes.SexPitchVaginal = function(cocks) {
 					
 					terry.slut.IncreaseStat(100, 2);
 					
-					world.TimeStep({hour: 1});
+					TimeStep({hour: 1});
 					
 					Gui.NextPrompt();
 				}, enabled : (player.HasPerk(Perks.Breeder) || player.sexlevel >= 5) && terry.PregHandler().IsPregnant() == false,
@@ -8607,7 +8607,7 @@ TerryScenes.SexPitchVaginal = function(cocks) {
 						
 						terry.slut.IncreaseStat(100, 1);
 						terry.relation.IncreaseStat(100, 1);
-						world.TimeStep({hour: 1});
+						TimeStep({hour: 1});
 						
 						Gui.NextPrompt();
 					}, enabled : true,
@@ -8738,7 +8738,7 @@ TerryScenes.SexPitchVaginal = function(cocks) {
 			
 			terry.slut.IncreaseStat(100, 1);
 			terry.relation.IncreaseStat(100, 1);
-			world.TimeStep({hour: 1});
+			TimeStep({hour: 1});
 		}
 	});
 }
@@ -9348,7 +9348,7 @@ TerryScenes.SexCatchVaginalInsideHorseCock = function(parse) {
 		Text.Add("You simply smile knowingly at the [foxvixen], trying not to slip in [hisher] leavings as you pull yourself upright. Once the two of you are relatively clean and have your clothes back on, you set off again; Terry leads the way, as you’re going to be walking a little funny for a while after this.", parse);
 		
 		terry.relation.IncreaseStat(60, 1);
-		world.TimeStep({hour: 2});
+		TimeStep({hour: 2});
 		
 		Text.Flush();
 		
@@ -9423,7 +9423,7 @@ TerryScenes.SexCatchVaginalOutsideHorseCock = function(parse) {
 	}
 	
 	terry.relation.IncreaseStat(60, 1);
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 
 	Text.Flush();
 
@@ -9532,7 +9532,7 @@ TerryScenes.SexCatchVaginalInsideFoxCock = function(parse) {
 	Text.Add("Time passes, and when the two of you come to, Terry’s knot is small enough that [heshe] can pull out of you without any issue. Your mixed fluids drip from your used [vag] and you quickly clean yourself up, before dressing up and getting ready to depart once more.", parse);
 	
 	terry.relation.IncreaseStat(60, 1);
-	world.TimeStep({hour: 1, minute: 30});
+	TimeStep({hour: 1, minute: 30});
 
 	Text.Flush();
 	
@@ -9599,7 +9599,7 @@ TerryScenes.SexCatchVaginalOutsideFoxCock = function(parse) {
 		Text.Add("Your lover is caught off-guard by your sudden glomp, but quickly rallies and hugs you back. Lost in each other's arms, you nuzzle each other sleepily and allow sleep to claim you both.", parse);
 	
 	terry.relation.IncreaseStat(60, 1);
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 
 	Text.Flush();
 	
@@ -10281,7 +10281,7 @@ TerryScenes.SexCatchAnal = function() {
 		Text.Add("Your own progress is somewhat slower than it was before...your butt is really[h] aching. Damned if you don’t think it was worth it, though.", parse);
 			
 		terry.relation.IncreaseStat(80, 1);
-		world.TimeStep({hour: 1, minute: 30});
+		TimeStep({hour: 1, minute: 30});
 		
 		Text.Flush();
 		
@@ -10337,7 +10337,7 @@ TerryScenes.SexHaveADrink = function(back) {
 	Text.Add("With Terry’s agreement, you start eyeing over the [foxvixen]’s naked form as you consider what’ll you’ll do with your pet.", parse);
 	Text.Flush();
 	
-	world.TimeStep({minute: 10});
+	TimeStep({minute: 10});
 	
 	//[Breasts] [Pussy] [Cock]
 	var options = new Array();
@@ -10596,7 +10596,7 @@ TerryScenes.SexHaveADrinkPussy = function() {
 	Text.Add("You could just dive on in and drink to your heart’s content... but, maybe you should also keep playing with [himher] as you do? Nothing says you can’t do two things at once, after all...", parse);
 	Text.Flush();
 	
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 	
 	player.AddLustFraction(0.25);
 	
@@ -10735,7 +10735,7 @@ TerryScenes.SexHaveADrinkPussy = function() {
 			Text.Add("That said, you wrap your arms around the [foxvixen] and draw [himher] in close, holding [himher] tenderly and listening to [hisher] breathing. You both allow yourselves to drift off, the smell of sex still lingering in your nose.", parse);
 			Text.Flush();
 			
-			world.TimeStep({minute: 30});
+			TimeStep({minute: 30});
 			
 			Gui.NextPrompt();
 		}, enabled : true
@@ -10911,7 +10911,7 @@ TerryScenes.SexHaveADrinkPussy = function() {
 			Text.Add("With a soft sigh, you wrap your arms protectively around the tired [foxvixen], and gently rest yourself against [himher]. You allow your eyes to close, Terry’s quiet breathing lulling you to sleep alongside [himher].", parse);
 			Text.Flush();
 			
-			world.TimeStep({minute: 30});
+			TimeStep({minute: 30});
 			
 			Gui.NextPrompt();
 		}, enabled : true
@@ -11257,7 +11257,7 @@ TerryScenes.SexHaveADrinkPussy = function() {
 				Text.Flush();
 				
 				terry.relation.IncreaseStat(75, 1);
-				world.TimeStep({minute: 30});
+				TimeStep({minute: 30});
 				
 				Gui.NextPrompt();
 			}, enabled : true
@@ -11523,7 +11523,7 @@ TerryScenes.SexHaveADrinkCock = function() {
 				}
 				Text.Flush();
 				
-				world.TimeStep({minute: 30});
+				TimeStep({minute: 30});
 				
 				TerryScenes.TerryCleansPC();
 			}
@@ -11671,7 +11671,7 @@ TerryScenes.SexHaveADrinkCock = function() {
 			player.AddSexExp(2);
 			terry.AddSexExp(2);
 			
-			world.TimeStep({hour: 1});
+			TimeStep({hour: 1});
 			
 			Gui.NextPrompt();
 		}
@@ -11847,7 +11847,7 @@ TerryScenes.SexHaveADrinkCock = function() {
 				}
 				Text.Flush();
 				
-				world.TimeStep({minute: 30});
+				TimeStep({minute: 30});
 				
 				TerryScenes.TerryCleansPC();
 			}
@@ -11914,7 +11914,7 @@ TerryScenes.SexHaveADrinkCock = function() {
 				}
 				Text.Flush();
 				
-				world.TimeStep({hour: 1});
+				TimeStep({hour: 1});
 				
 				terry.relation.IncreaseStat(70, 1);
 				
@@ -12008,7 +12008,7 @@ TerryScenes.SexHaveADrinkCock = function() {
 				}
 				Text.Flush();
 				
-				world.TimeStep({hour: 1});
+				TimeStep({hour: 1});
 				
 				terry.relation.IncreaseStat(70, 1);
 				
@@ -12223,7 +12223,7 @@ TerryScenes.SexHaveADrinkCock = function() {
 			
 			terry.relation.IncreaseStat(70, 1);
 			
-			world.TimeStep({hour: 1});
+			TimeStep({hour: 1});
 			
 			player.AddSexExp(2);
 			terry.AddSexExp(2);
@@ -12469,7 +12469,7 @@ TerryScenes.SexHaveADrinkBreasts = function() {
 	}
 	Text.Flush();
 	
-	world.TimeStep({minute: 15});
+	TimeStep({minute: 15});
 	
 	Gui.NextPrompt(function() {
 		TerryScenes.SexHaveADrinkBreastsMilk(parse);
@@ -12620,7 +12620,7 @@ TerryScenes.SexHaveADrinkBreastsRomance = function(parse) {
 	Text.Add("Oh, that sounds like a wonderful idea... but, you have a little something else in mind for [himher] right at this moment. Don’t worry, you know [heshe]’s just going to <i>love</i> it...", parse);
 	Text.Flush();
 	
-	world.TimeStep({minute: 20});
+	TimeStep({minute: 20});
 	
 	TerryScenes.SexHaveADrinkBreastsArousal(parse);
 }
@@ -12815,7 +12815,7 @@ TerryScenes.SexHaveADrinkBreastsArousalHorsecock = function(parse) {
 	Text.Add("Casting an eye over Terry’s paintings, you teasingly praise [hisher] efforts; who would believe such a cute little [foxvixen] could shoot [hisher] load that far?", parse);
 	Text.NL();
 	
-	world.TimeStep({minute: 15});
+	TimeStep({minute: 15});
 	
 	if(terry.Relation() < 30) {
 		Text.Add("The [foxvixen] simply stares at you with disdain.", parse);
@@ -13091,7 +13091,7 @@ TerryScenes.SexHaveADrinkBreastsArousalFoxcock = function(parse) {
 	Text.Add("Seems like you wore [himher] out.", parse);
 	Text.NL();
 	
-	world.TimeStep({minute: 15});
+	TimeStep({minute: 15});
 	
 	if(terry.Relation() < 30) {
 		Text.Add("<i>“Uhh, just give me a few minutes...”</i>", parse);
@@ -13467,7 +13467,7 @@ TerryScenes.SexHaveADrinkBreastsArousalPussy = function(parse) {
 	Text.Add("Terry nuzzles against you, and you gently kiss [himher] on the cheek, asking if [heshe] enjoyed your little present.", parse);
 	Text.NL();
 	
-	world.TimeStep({minute: 15});
+	TimeStep({minute: 15});
 	
 	if(terry.Relation() < 30) {
 		Text.Add("<i>“That was nice.”</i>", parse);

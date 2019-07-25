@@ -1,5 +1,5 @@
 
-import { Event, Link, MoveToLocation } from '../../event';
+import { Event, Link } from '../../event';
 
 import { GryphonsScenes } from '../../event/brothel/gryphons';
 import { FireblossomScenes } from '../../event/brothel/fireblossom';
@@ -7,6 +7,7 @@ import { ChesScenes } from '../../event/brothel/ches';
 import { BelindaScenes } from '../../event/brothel/belinda';
 import { BastetScenes } from '../../event/brothel/bastet';
 import { Gender } from '../../body/gender';
+import { MoveToLocation } from '../../GAME';
 
 let BrothelLoc = {
 	brothel  : new Event("Brothel"),
@@ -173,7 +174,7 @@ BrothelScenes.First = function() {
 		Text.Add("You wipe some drool off your chin. As her spell on you lifts, you realize that you never told her your name.", parse);
 		Text.Flush();
 		
-		world.TimeStep({minute: 30});
+		TimeStep({minute: 30});
 		
 		Gui.NextPrompt();
 	});

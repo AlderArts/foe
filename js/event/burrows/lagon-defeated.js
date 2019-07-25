@@ -1,7 +1,7 @@
 
 import { GetDEBUG } from '../../../app';
 import { Gender } from '../../body/gender';
-import { MoveToLocation } from '../../event';
+import { MoveToLocation } from '../../GAME';
 
 let LagonDScenes = {};
 
@@ -11,7 +11,7 @@ LagonDScenes.RoomApproach = function() {
 	};
 	
 	party.location = world.loc.Burrows.LagonCell;
-	world.TimeStep({minute: 15});
+	TimeStep({minute: 15});
 	
 	Text.Clear();
 	Text.Add("Decision made, you set off through the maze of tunnels leading out of the throne room. It doesn’t take long before you find yourself in front of Lagon’s new home; two bunnies stand watch beside an actual door, a surprisingly solid-looking thing set into one of the dug-out chambers.", parse);
@@ -515,7 +515,7 @@ LagonDScenes.PitchAnal = function() {
 	Text.Flush();
 	
 	player.subDom.IncreaseStat(75, 1);
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 
 	Gui.NextPrompt(function() {
 		MoveToLocation(world.loc.Burrows.Throne, {minute: 15});
@@ -615,7 +615,7 @@ LagonDScenes.ScepterEntry = function() {
 	}
 	Text.Flush();
 	
-	world.TimeStep({minute: 15});
+	TimeStep({minute: 15});
 	
 	LagonDScenes.ScepterPrompt();
 }
@@ -1242,7 +1242,7 @@ LagonDScenes.ScepterPitchAnal = function() {
 	}
 	Text.Flush();
 	
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 	
 	Gui.NextPrompt(function() {
 		MoveToLocation(world.loc.Burrows.Throne, {minute : 15});
@@ -1508,7 +1508,7 @@ LagonDScenes.PunishmentPC = function() {
 	Text.Add("All around you, bunnies are staring transfixed as you fuck their queen-mother, filling the air with a chorus of appreciative sighs and squeaks as they drink in the sight. Some are so heated up that they’re actually starting their own little gangbangs, but most are content to just enjoy the show.", parse);
 	Text.NL();
 	
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 	
 	if(!strapon) {
 		Text.Add("Soon, though, you have no attention to spare for your audience. Vena’s cunt milks away at you like a champ, the velvety touch of her petals threatening to scatter your wits and melt you into a puddle of mush.", parse);
@@ -1893,7 +1893,7 @@ LagonDScenes.PunishmentPCCont = function(came) {
 	Text.Add("You nod your head, and indicate for her to lead the way, silently following her through the tunnels back to her throne room.", parse);
 	Text.Flush();
 
-	world.TimeStep({hour: 1, minute: 30});
+	TimeStep({hour: 1, minute: 30});
 	
 	Gui.NextPrompt(function() {
 		MoveToLocation(world.loc.Burrows.Throne, {minute: 15});
@@ -2034,7 +2034,7 @@ LagonDScenes.PunishmentVena = function() {
 	Text.NL();
 	Text.Add("It looks like Vena is going to lose her nerve at the final stretch. You promptly charge forward, racing for the matriarch, intent on ensuring that she really rubs her lesson in. Only question is, how are you going to do that?", parse);
 	Text.Flush();
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 	
 	var options = [];
 	//[Cum inside] [Cum bath]
@@ -2129,7 +2129,7 @@ LagonDScenes.PunishmentVenaCont = function() {
 	Text.Add("You nod your agreement, and indicate for her to lead the way. The lagomorph queen pads off into the tunnels, heading towards the throne room, and you follow close behind.", parse);
 	Text.Flush();
 	
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 	
 	Gui.NextPrompt(function() {
 		MoveToLocation(world.loc.Burrows.Throne, {minute: 15});

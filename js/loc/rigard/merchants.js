@@ -1,11 +1,11 @@
 
-import { Event, Link, EncounterTable, MoveToLocation } from '../../event';
+import { Event, Link, EncounterTable } from '../../event';
 import { OddShopLoc } from './sexstore';
 import { ArmorShopLoc } from './armorshop';
 import { MagicShopLoc } from './magicshop';
 import { ClothShopLoc } from './clothstore';
 import { WeaponShopLoc } from './weaponshop';
-import { WorldTime } from '../../worldtime';
+import { WorldTime, MoveToLocation } from '../../GAME';
 import { Text } from '../../text';
 
 
@@ -305,7 +305,7 @@ ShopStreetLoc.street.events.push(new Link(
 					
 					room69.flags["Hinges"] = Room69.HingesFlags.TalkedToSmith;
 					
-					world.TimeStep({hour: 1});
+					TimeStep({hour: 1});
 					Gui.NextPrompt();
 				}, enabled : party.coin >= 120,
 				tooltip : "Pay 120 coins for the hinges."
@@ -594,7 +594,7 @@ ShopStreetScenes.Speculate = function() {
 					Text.NL();
 					Text.Add("<b>You gain [x] coins!</b>", parse);
 					party.coin += coins;
-					world.TimeStep({hour : 1});
+					TimeStep({hour : 1});
 				}
 				else {
 					buyingFalseVars();
@@ -603,7 +603,7 @@ ShopStreetScenes.Speculate = function() {
 					Text.NL();
 					Text.Add("<b>You lose [x] coins!</b>", parse);
 					party.coin -= coins;
-					world.TimeStep({hour : 1});
+					TimeStep({hour : 1});
 				}
 			}
 			else {
@@ -611,7 +611,7 @@ ShopStreetScenes.Speculate = function() {
 				Text.Add(", but immediately starts calling out to the other passersby, hoping to still make that quick sale.", parse);
 				Text.NL();
 				Text.Add("Although you didn't buy anything, you still feel like you've learned something from the experience.", parse);
-				world.TimeStep({minute : 20});
+				TimeStep({minute : 20});
 			}
 			rigard.flags["BuyingExp"]++;
 			player.intelligence.IncreaseStat(40, 0.5);
@@ -626,7 +626,7 @@ ShopStreetScenes.Speculate = function() {
 			Text.Clear();
 			Text.Add("You tell [himher] that you really have no use for [wares], and walk on, deciding you'd rather not bother trying to speculate on the price.", parse);
 			Text.Flush();
-			world.TimeStep({minute: 10});
+			TimeStep({minute: 10});
 			Gui.NextPrompt();
 		}, enabled : true,
 		tooltip : "You aren't particularly interested in following up on this right now."
@@ -647,7 +647,7 @@ ShopStreetScenes.Scepter = function() {
 	Text.Add("<b>Perhaps you should search along the King's Road.</b>", parse);
 	Text.Flush();
 	
-	world.TimeStep({minute: 15});
+	TimeStep({minute: 15});
 	
 	rigard.flags["Scepter"] = 0;
 	

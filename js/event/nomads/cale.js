@@ -10,7 +10,7 @@ import { Race } from '../../body/race';
 import { Color } from '../../body/color';
 import { AppendageType } from '../../body/appendage';
 import { TF } from '../../tf';
-import { WorldTime } from '../../worldtime';
+import { WorldTime } from '../../GAME';
 
 function Cale(storage) {
 	Entity.call(this);

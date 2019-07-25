@@ -3,7 +3,7 @@ import { Party } from "../party";
 import { Encounter } from "../combat";
 import { GameState, SetGameState } from "../gamestate";
 import { Gender } from "../body/gender";
-import { WorldTime } from "../worldtime";
+import { WorldTime } from "../GAME";
 import { Gui } from "../gui";
 import { Text } from "../text";
 
@@ -22,7 +22,7 @@ RoamingScenes.FlowerPetal = function() {
 	
 	party.inventory.AddItem(Items.FlowerPetal);
 	
-	world.TimeStep({minute: 15});
+	TimeStep({minute: 15});
 	Gui.NextPrompt();
 };
 

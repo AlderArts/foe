@@ -5,8 +5,8 @@
  * 
  */
 
-import { Event, Link, EncounterTable, MoveToLocation } from '../event';
-import { WorldTime } from '../worldtime';
+import { Event, Link, EncounterTable } from '../event';
+import { WorldTime, MoveToLocation } from '../GAME';
 import { Season } from '../time';
 
 // Create namespace

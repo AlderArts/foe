@@ -10,7 +10,7 @@ import { Images } from '../assets';
 import { Items } from '../items';
 import { Color } from '../body/color';
 import { Race } from '../body/race';
-import { WorldTime } from '../worldtime';
+import { WorldTime } from '../GAME';
 import { Text } from '../text';
 import { Gui } from '../gui';
 
@@ -210,7 +210,7 @@ Miranda.prototype.Interact = function(switchSpot) {
 			Text.Clear();
 			Text.Add("[Placeholder] Miranda masturbates fiercely, cumming buckets.");
 			
-			world.TimeStep({minute : 10});
+			TimeStep({minute : 10});
 			
 			that.OrgasmCum();
 			Text.Flush();

@@ -134,7 +134,7 @@ VenaScenes.PitApproach = function() {
 	else
 		Text.Add("<i>“Ahh… you… different. Fuck me?”</i> There’s no sense of recognition in her eyes; you’re just another fucktoy come to use and pleasure her. From her rapt, ecstatic expression, she couldn’t be any happier.", parse);
 	Text.Flush();
-	world.TimeStep({minute: 5});
+	TimeStep({minute: 5});
 	
 	VenaScenes.PitPrompt();
 }
@@ -148,7 +148,7 @@ VenaScenes.PitPrompt = function() {
 	options.push({ nameStr : "Talk",
 		func : function() {
 			Text.Clear();
-			world.TimeStep({minute: 5});
+			TimeStep({minute: 5});
 			Text.Add("You make an attempt at catching Vena’s attention, trying to divert her mind from sex for a few moments. Caressing her cheek, you ask if she wants to answer a few questions.", parse);
 			Text.NL();
 			if(burrows.BrainyActive()) {
@@ -202,7 +202,7 @@ VenaScenes.PitTalkPrompt = function() {
 			Text.NL();
 			Text.Add("<i>“Don’t… remember before.”</i> She struggles, trying to concentrate. <i>“Vena feels good here. Warm and safe, always lots of sex!”</i>", parse);
 			Text.Flush();
-			world.TimeStep({minute: 5});
+			TimeStep({minute: 5});
 		}, enabled : true,
 		tooltip : "Ask Vena about herself and her past."
 	});
@@ -215,7 +215,7 @@ VenaScenes.PitTalkPrompt = function() {
 			Text.NL();
 			Text.Add("Well… that’s certainly an understatement.", parse);
 			Text.Flush();
-			world.TimeStep({minute: 5});
+			TimeStep({minute: 5});
 		}, enabled : true,
 		tooltip : "How does she feel about Lagon? How did he rise to his throne?"
 	});
@@ -229,7 +229,7 @@ VenaScenes.PitTalkPrompt = function() {
 			else if(ophelia.InPartyAndBroken())
 				Text.Add("The matriarch gives Ophelia a happy squee, embracing her. <i>“Me here, mother!”</i> It’s actually quite touching.", parse);
 			Text.Flush();
-			world.TimeStep({minute: 5});
+			TimeStep({minute: 5});
 		}, enabled : true,
 		tooltip : "How does she feel about her daughter Ophelia?"
 	});
@@ -243,7 +243,7 @@ VenaScenes.PitTalkPrompt = function() {
 					Text.Add("<i>“I’m here, mother,”</i> Roa reassures her, petting the larger bunny. You catch his gaze drifting to his mother’s erection, the slutty little trap eyeing it hungrily.", parse);
 				}
 				Text.Flush();
-				world.TimeStep({minute: 5});
+				TimeStep({minute: 5});
 			}, enabled : true,
 			tooltip : "Does she remember her son, Roa?"
 		});
@@ -253,7 +253,7 @@ VenaScenes.PitTalkPrompt = function() {
 			Text.Clear();
 			Text.Add("<i>“This my home, everyone nice here,”</i> she proclaims, nuzzling her children. <i>“They care for Vena, give me all the food and warmth and sex I need.”</i>", parse);
 			Text.Flush();
-			world.TimeStep({minute: 5});
+			TimeStep({minute: 5});
 		}, enabled : true,
 		tooltip : "How does she like it here?"
 	});
@@ -334,7 +334,7 @@ VenaScenes.RestoreEntrypoint = function(fight) {
 	Text.Add("<i>“No, daughter, they can’t,”</i> Vena agrees, shaking her head. Steeling herself, she gets up. <i>“Better get this over with. I think my other children can handle themselves for a while.”</i> Sure enough, the cheery mood in the Pit has lit a new fire in the orgy. The matriarch waves for you to follow her, her daughter hanging on to her arm and her guards close in tow as she heads toward the throne room.", parse);
 	Text.Flush();
 	
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 	Gui.NextPrompt(function() {
 		party.location = world.loc.Burrows.Throne;
 		
@@ -377,7 +377,7 @@ VenaScenes.RestoreEntrypoint = function(fight) {
 		Text.Add("You leave the lagomorphs to their business, promising that you’ll return once things have quieted down.", parse);
 		Text.Flush();
 		
-		world.TimeStep({hour: 1});
+		TimeStep({hour: 1});
 		
 		Gui.NextPrompt();
 	});

@@ -751,7 +751,7 @@ EquineScenes.WinFuckHim = function(enc) {
 	Text.Add("You inform the equine that you are not quite hard enough yet, suggesting that he put his tongue to work for you. The stallion blanches at the order, but relents quickly enough after you pierce him with an icy stare of disapproval. Tentatively, he leans his muzzle a fraction closer to your throbbing meat, extending his tongue for an experimental lick. The flexible organ feels hot against your sensitive skin as he drags it upward, his inexperience plain but easy to ignore. He reaches the tip, then moves downward to start at the base again, his awkward movements speaking volumes of how odd he feels about being at the wrong end of a blowjob. It hardly matters; this is all just preparation for what comes next, you tell yourself with a smirk.", parse);
 	Text.Flush();
 
-	world.TimeStep({minute: 10});
+	TimeStep({minute: 10});
 
 	//[Get blown] [Fuck his ass]
 	var options = new Array();
@@ -831,7 +831,7 @@ EquineScenes.WinFuckHim = function(enc) {
 						Text.Add("Your reason and sense is gone - all that matters is filling the equine's hole with as much spunk as you can muster. A tiny voice in the back of your mind tells you that you may be injuring the inexperienced horse with such brutal humping, but the thought is quashed as he continues prodding your prostate, doing his best even now to milk you like the cocksucker you're training him to be. A few more desperate thrusts, and you groan loudly as you feel the pressure of your imminent release churning through your groin.", parse);
 						Text.Flush();
 
-						world.TimeStep({minute: 20});
+						TimeStep({minute: 20});
 
 						//[Cum Inside] [Cum Outside]
 						var options = new Array();
@@ -880,7 +880,7 @@ EquineScenes.WinFuckHim = function(enc) {
 								}
 								Text.Flush();
 
-								world.TimeStep({minute: 10});
+								TimeStep({minute: 10});
 
 								Gui.NextPrompt();
 							}, enabled : true
@@ -920,7 +920,7 @@ EquineScenes.WinFuckHim = function(enc) {
 								}
 								Text.Flush();
 
-								world.TimeStep({minute: 10});
+								TimeStep({minute: 10});
 
 								Gui.NextPrompt();
 							}, enabled : true
@@ -943,7 +943,7 @@ EquineScenes.WinFuckHim = function(enc) {
 							Text.Add("You chuckle at them, making a jibe about class being dismissed as you clean yourself off as best you can. Satisfied, you collect your scattered gear and return to the road[party].", parse);
 							Text.Flush();
 
-							world.TimeStep({minute: 15});
+							TimeStep({minute: 15});
 
 							Gui.NextPrompt();
 						});
@@ -1023,7 +1023,7 @@ EquineScenes.WinFuckHim = function(enc) {
 						Text.Add("Your thrusts take on a frantic pace, each movement sending bolts of pleasure up your spine. The telltale warmth glows within you, and you strain to hold out for just a little longer, although your willpower is faltering with unnerving speed. You are surprised when the stallion reaches back with trembling hands, grabbing his own ass cheeks and spreading them wider for you, his back arching ever-so-slightly more to get you as far in as he can. The gesture, the sensations, the blissed-out look on his face… it’s all too much!", parse);
 						Text.Flush();
 
-						world.TimeStep({minute: 30});
+						TimeStep({minute: 30});
 
 						//[CumInside][CumOutside]
 						var options = new Array();
@@ -1065,7 +1065,7 @@ EquineScenes.WinFuckHim = function(enc) {
 								Text.Add("You glance at the mare - curious to hear what she thought of the show - only to see her sprawled under the tree, her legs spread wide and her pussy glistening with femlube. Apparently, she jilled herself unconscious a while ago. You must have been more entertaining than you thought. Satisfied, you gather your gear[party] and return to your travels.", parse);
 								Text.Flush();
 
-								world.TimeStep({minute: 30});
+								TimeStep({minute: 30});
 
 								Gui.NextPrompt();
 							}, enabled : true
@@ -1107,7 +1107,7 @@ EquineScenes.WinFuckHim = function(enc) {
 								Text.Add("Casting a glance around to see what became of the mare, you see her passed out spread-eagle under the tree, her pussy and thighs glistening with moisture. Seems like she rather enjoyed the show, and overindulged herself a bit. Ah well, she only did what you told her to do. Maybe she and the stallion will have some new ways to pleasure each other from now on. Satisfied with the fruits of your labor, you gather your gear[party] and head back toward the road.", parse);
 								Text.Flush();
 
-								world.TimeStep({minute: 30});
+								TimeStep({minute: 30});
 
 								Gui.NextPrompt();
 							}, enabled : true

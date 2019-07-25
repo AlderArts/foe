@@ -1,5 +1,5 @@
 import { Cveta } from './cveta';
-import { WorldTime } from '../../worldtime';
+import { WorldTime } from '../../GAME';
 
 let DateScenes = {};
 

@@ -1,7 +1,7 @@
 
-import { Event, Link, EncounterTable, MoveToLocation } from '../../event';
+import { Event, Link, EncounterTable } from '../../event';
 import { MageTowerLoc } from './magetower';
-import { WorldTime } from '../../worldtime';
+import { WorldTime, MoveToLocation } from '../../GAME';
 
 
 let CastleLoc = {
@@ -141,7 +141,7 @@ NobleScenes.Parkland = function() {
 	}
 	Text.Flush();
 	
-	world.TimeStep({minute: 15});
+	TimeStep({minute: 15});
 	
 	Gui.NextPrompt();
 }
@@ -172,7 +172,7 @@ NobleScenes.JeannesTower = function() {
 	
 	Text.Flush();
 	
-	world.TimeStep({minute: 15});
+	TimeStep({minute: 15});
 	
 	Gui.NextPrompt();
 }
@@ -227,7 +227,7 @@ NobleScenes.TheDistrict = function() {
 	
 	Text.Flush();
 	
-	world.TimeStep({minute: 15});
+	TimeStep({minute: 15});
 	
 	Gui.NextPrompt();
 }
@@ -257,7 +257,7 @@ NobleScenes.MeetingMajid = function() {
 	
 	rigard.flags["Nobles"] |= Rigard.Nobles.MetMajid;
 	
-	world.TimeStep({minute: 15});
+	TimeStep({minute: 15});
 	
 	Gui.NextPrompt();
 }
@@ -283,7 +283,7 @@ NobleScenes.GuardPatrol = function() {
 	Text.Add("You’re vaguely reminded of some saying or the other, something about effective policing being the lack of crime rather than guards being seen about doing their job, but you don’t quite remember just how it went… nevertheless, though the Royal Guards are clearly anything but incompetent, it seems like they have a much better life than the overworked city watch.", parse);
 	Text.Flush();
 	
-	world.TimeStep({minute: 15});
+	TimeStep({minute: 15});
 	
 	Gui.NextPrompt();
 }
@@ -309,7 +309,7 @@ NobleScenes.AlmsForThePoor = function() {
 	Text.Add("What an interesting dilemma you’ve stumbled onto. Is there something you ought to do about this? There are a few stances you could take here…", parse);
 	Text.Flush();
 	
-	world.TimeStep({minute: 15});
+	TimeStep({minute: 15});
 	
 	rigard.flags["Nobles"] |= Rigard.Nobles.Alms;
 	
@@ -442,7 +442,7 @@ NobleScenes.Elodie = function() {
 		Text.Add("Still, there’s nothing else you can do about the strange incident for now, so you might as well not let it get to you too much. Shrugging, you move along on your way.", parse);
 		Text.Flush();
 		
-		world.TimeStep({minute: 15});
+		TimeStep({minute: 15});
 		
 		Gui.NextPrompt();
 	});
@@ -461,7 +461,7 @@ NobleScenes.RoyalGetaway = function() {
 	Text.Add("Maybe they shouldn’t be skipping their lessons to go out into the city, but who’s going to stop them - and besides, if their teachers are willing to stoop so low as to let the future of the kingdom skive just for the sake for a few coins, they can’t be very good teachers, can they?", parse);
 	Text.Flush();
 	
-	world.TimeStep({minute: 5});
+	TimeStep({minute: 5});
 	
 	Gui.NextPrompt();
 }
@@ -491,7 +491,7 @@ NobleScenes.MagicalJackal = function() {
 	Text.Add("Well, if she’s sure, then. Asche gives you a small smile, then swooshes past you and is on her way, sauntering down the broad path like she owns the entirety of the castle district. Ah, to be so carefree…", parse);
 	Text.Flush();
 	
-	world.TimeStep({minute: 15});
+	TimeStep({minute: 15});
 	
 	Gui.NextPrompt();
 }
@@ -535,7 +535,7 @@ NobleScenes.PalaceParade = function() {
 	
 	rigard.ParadeTimer = new Time(0,0,4,0,0);
 	
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 	
 	Gui.NextPrompt();
 }
@@ -581,7 +581,7 @@ NobleScenes.Buns = function() {
 	}
 	Text.Flush();
 	
-	world.TimeStep({minute: 15});
+	TimeStep({minute: 15});
 	
 	NobleScenes.BunsChoice();
 }
@@ -642,7 +642,7 @@ NobleScenes.BunsChoice = function() {
 				Text.Flush();
 				party.coin -= 20;
 				
-				world.TimeStep({minute: 15});
+				TimeStep({minute: 15});
 				
 				Gui.NextPrompt();
 			}, enabled : party.coin >= 20
@@ -716,7 +716,7 @@ NobleScenes.BunsChoice = function() {
 				Text.Flush();
 				party.coin -= 20;
 				
-				world.TimeStep({minute: 15});
+				TimeStep({minute: 15});
 				
 				Gui.NextPrompt();
 			}, enabled : party.coin >= 20

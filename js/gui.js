@@ -10,9 +10,8 @@ import { isOnline, SetGameState } from './gamestate';
 import { gameState, GameState } from './gamestate';
 import { ExploreButtonIndex } from './explorestate';
 import { Text } from './text';
-import { GAME } from './GAME';
+import { GAME, WorldTime } from './GAME';
 import { Explore, Exploration } from './exploration';
-import { WorldTime } from './worldtime';
 import { StatusList } from './statuslist';
 import { isFunction } from './utility';
 

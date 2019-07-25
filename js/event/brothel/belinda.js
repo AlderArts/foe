@@ -6,7 +6,7 @@
 import { Entity } from '../../entity';
 import { Race } from '../../body/race';
 import { Color } from '../../body/color';
-import { WorldTime } from '../../worldtime';
+import { WorldTime } from '../../GAME';
 
 let BelindaScenes = {};
 

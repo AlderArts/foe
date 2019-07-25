@@ -507,7 +507,7 @@ CaleSexScenes.SexSuckHimEntryPoint = function(outside) {
 			Text.Flush();
 			
 			cale.relation.IncreaseStat(100, 2);
-			world.TimeStep({hour : 1});
+			TimeStep({hour : 1});
 			
 			Gui.NextPrompt();
 		});
@@ -807,7 +807,7 @@ CaleSexScenes.SexGetBJSneakyEntry = function(outside, sneaky) {
 	cale.relation.IncreaseStat(100, 2);
 	cale.slut.IncreaseStat(25, 1);
 	
-	world.TimeStep({minute : 30});
+	TimeStep({minute : 30});
 	
 	Gui.NextPrompt();
 }
@@ -941,7 +941,7 @@ CaleSexScenes.SexGetEatenEntrypoint = function(outside) {
 	Text.Flush();
 	
 	cale.relation.IncreaseStat(100, 2);
-	world.TimeStep({minute : 30});
+	TimeStep({minute : 30});
 	
 	Gui.NextPrompt();
 }
@@ -1179,7 +1179,7 @@ CaleSexScenes.SexFuckHim = function(outside, opts) {
 				parse["cum"] = player.FirstCock() ? " both your and" : "";
 				Text.Add("Finally released, Cale drops into a panting heap, soaking his fur in[cum] his own seed.", parse);
 				
-				world.TimeStep({minute : 30});
+				TimeStep({minute : 30});
 			}
 			Text.Flush();
 			
@@ -1261,7 +1261,7 @@ CaleSexScenes.SexFuckHim = function(outside, opts) {
 						Text.Add("<i>“I don’t think I’ll be able to walk for a while after this though,”</i> he groans, rubbing his sore bum. You give him a kiss, leaving him to recover while you clean yourself up before heading out on your journey again. Cale looks like he wouldn’t mind another one of these ‘visits’ from you.", parse);
 						Text.Flush();
 						
-						world.TimeStep({hour : 1});
+						TimeStep({hour : 1});
 						
 						Gui.NextPrompt();
 					});
@@ -1275,7 +1275,7 @@ CaleSexScenes.SexFuckHim = function(outside, opts) {
 	
 					cale.slut.IncreaseStat(max, slut);
 					
-					world.TimeStep({hour : 1});
+					TimeStep({hour : 1});
 					
 					Gui.NextPrompt();
 				}
@@ -1607,7 +1607,7 @@ CaleSexScenes.SexCatchVagEntrypoint = function(outside, fromAnal, customIntro) {
 					Text.Flush();
 					
 					cale.relation.IncreaseStat(100, 4);
-					world.TimeStep({hour : 2});
+					TimeStep({hour : 2});
 					
 					Gui.NextPrompt();
 				});
@@ -1636,7 +1636,7 @@ CaleSexScenes.SexCatchVagEntrypoint = function(outside, fromAnal, customIntro) {
 					Text.Flush();
 				
 					cale.relation.IncreaseStat(100, 3);
-					world.TimeStep({hour : 1});
+					TimeStep({hour : 1});
 					
 					Gui.NextPrompt();
 				});
@@ -1805,7 +1805,7 @@ CaleSexScenes.SexCaleShowerEntrypoint = function(outside) {
 	Text.Flush();
 	
 	cale.relation.IncreaseStat(100, 3);
-	world.TimeStep({hour : 1, minute : 30});
+	TimeStep({hour : 1, minute : 30});
 	
 	Gui.NextPrompt();
 }
@@ -1952,7 +1952,7 @@ CaleSexScenes.SexCaleButtslutEntrypoint = function(cocks, outside) {
 					
 					cale.slut.IncreaseStat(max, slut);
 					
-					world.TimeStep({hour : 2});
+					TimeStep({hour : 2});
 					
 					Gui.NextPrompt();
 				});
@@ -2000,7 +2000,7 @@ CaleSexScenes.SexCaleButtslutEntrypoint = function(cocks, outside) {
 			
 			cale.slut.IncreaseStat(max, slut);
 			
-			world.TimeStep({hour : 1});
+			TimeStep({hour : 1});
 			
 			Gui.NextPrompt();
 		}, enabled : true,
@@ -2148,7 +2148,7 @@ CaleSexScenes.SexCatchAnalEntrypoint = function(outside, fromVag) {
 					Text.Flush();
 					
 					cale.relation.IncreaseStat(100, 4);
-					world.TimeStep({hour : 2});
+					TimeStep({hour : 2});
 					
 					Gui.NextPrompt();
 				});
@@ -2184,7 +2184,7 @@ CaleSexScenes.SexCatchAnalEntrypoint = function(outside, fromVag) {
 				Text.Flush();
 				
 				cale.relation.IncreaseStat(100, 3);
-				world.TimeStep({hour : 1});
+				TimeStep({hour : 1});
 				
 				Gui.NextPrompt();
 			}, enabled : true,

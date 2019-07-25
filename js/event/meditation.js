@@ -274,7 +274,7 @@ MeditationScenes.Entry = function() {
 	Text.Add("Right. Checking the place over one last time to make sure you haven’t left anything behind, you make to head out and are soon on your way again.", parse);
 	Text.Flush();
 	
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 	
 	player.AddLustFraction(-1);
 	if(party.InParty(kiakai, switchSpot))

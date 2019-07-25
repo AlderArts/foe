@@ -1,7 +1,7 @@
 import { SetGameState, GameState } from "../gamestate";
 import { Gui } from "../gui";
 import { Text } from "../text";
-import { MoveToLocation } from "../event";
+import { MoveToLocation } from "../GAME";
 
 let SexScenes = {};
 let SparSexScenes = {};
@@ -159,7 +159,7 @@ SexScenes.Savor = function(opts) {
 	Text.Flush();
 	
 	player.AddLustFraction(0.3);
-	world.TimeStep({minute: 15});
+	TimeStep({minute: 15});
 	
 	SexScenes.IndoorPrompt(opts);
 }

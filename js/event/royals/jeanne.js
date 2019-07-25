@@ -258,7 +258,7 @@ JeanneScenes.Talk = function() {
 				Text.NL();
 				Text.Add("You thank her for her time, stretching awkwardly. Time ended up just flying by.", parse);
 				
-				world.TimeStep({hour: 8});
+				TimeStep({hour: 8});
 				
 				gameCache.flags["LearnedMagic"] = 2;
 			}
@@ -274,7 +274,7 @@ JeanneScenes.Talk = function() {
 					Text.NL();
 					Text.Add("At last, she seems happy with your results. <i>“It is a good start, but you will need to practice more before I can teach you anything more advanced.”</i> You thank her for her time, your head spinning slightly from all the new information.", parse);
 					
-					world.TimeStep({hour:3});
+					TimeStep({hour:3});
 				}
 				else {
 					Text.Add("With practiced ease, you focus your mind, summoning a ball of energy between your hands.", parse);
@@ -285,7 +285,7 @@ JeanneScenes.Talk = function() {
 					Text.NL();
 					Text.Add("<i>“The next step will take significantly longer, so come back once you are ready,”</i> Jeanne instructs you, commending you for your quick progress.", parse);
 					
-					world.TimeStep({hour:1});
+					TimeStep({hour:1});
 				}
 				
 				gameCache.flags["LearnedMagic"] = 2;
@@ -607,7 +607,7 @@ JeanneScenes.FirstCont = function() {
 	Text.Add("You thank her for her help, she’s given you a lot to think about.", parse);
 	Text.Flush();
 
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 	Gui.NextPrompt();
 }
 

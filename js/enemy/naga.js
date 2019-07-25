@@ -5,7 +5,7 @@
  */
 
 import { Entity } from '../entity';
-import { WorldTime } from '../worldtime';
+import { WorldTime } from '../GAME';
 import { Images } from '../assets';
 import { Cock } from '../body/cock';
 import { Vagina } from '../body/vagina';
@@ -454,7 +454,7 @@ NagaScenes.DesertLossGetDPd = function(enc) {
 	Text.Add("You pass out, waking hours later[c].", parse);
 	Text.Flush();
 
-	world.TimeStep({hour: 2});
+	TimeStep({hour: 2});
 
 	Gui.NextPrompt();
 }
@@ -636,7 +636,7 @@ NagaScenes.DesertLossUseCock = function(enc) {
 	Text.Add("<i>“Oh, you thought we were done?”</i> The naga asks rhetorically, leaning in to whisper in your ear. <i>“We. Are. Just. Getting. Started. <b>Pet.</b>”</i>", parse);
 	Text.Flush();
 
-	world.TimeStep({hour: 2});
+	TimeStep({hour: 2});
 
 	var cocks = player.AllCocks();
 	var len = false, thk = false;
@@ -669,7 +669,7 @@ NagaScenes.DesertLossUseCock = function(enc) {
 		}
 		Text.Flush();
 
-		world.TimeStep({hour: 1});
+		TimeStep({hour: 1});
 
 		Gui.NextPrompt();
 	});
@@ -811,7 +811,7 @@ NagaScenes.DesertWinHypnotize = function(enc) {
 
 	player.subDom.IncreaseStat(75, 1);
 
-	world.TimeStep({minute : 5});
+	TimeStep({minute : 5});
 
 	NagaScenes.DesertWinPrompt2(enc, true);
 }
@@ -836,7 +836,7 @@ NagaScenes.DesertWinHypnotizeOwn = function(enc) {
 
 	player.subDom.IncreaseStat(75, 1);
 
-	world.TimeStep({minute : 5});
+	TimeStep({minute : 5});
 
 	NagaScenes.DesertWinPrompt2(enc, true);
 }
@@ -966,7 +966,7 @@ NagaScenes.DesertWinFuckJerk = function(enc, hypno) {
 	Text.Add("Utterly spent, the[hypno] naga loses consciousness, collapsing to the sand. You free your softening cock from the still-tight confines of the sleeping naga’s pussy. Exhausted yourself, you gather your discarded clothing and get dressed, shaking the sand out as you go.", parse);
 	Text.Flush();
 
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 
 	Gui.NextPrompt();
 }
@@ -1109,7 +1109,7 @@ NagaScenes.DesertWinGetFuckedVag = function(enc, hypno) {
 			Text.Add("Gathering your senses and your equipment, you leave the defeated serpent woman behind and set about cleaning and clothing yourself[c].", parse);
 			Text.Flush();
 
-			world.TimeStep({hour: 1});
+			TimeStep({hour: 1});
 
 			Gui.NextPrompt();
 		}
@@ -1229,7 +1229,7 @@ NagaScenes.DesertNagaMating = function(naga) {
 		Text.NL();
 		Text.Add("<i>“Such a well-behaved mate… It seems I made the right choice!”</i> the naga purrs with a wink. She cleans your own face of cum with a finger, feeding it to you as you finish cleaning her face. You lick it off eagerly, drawing a smile and a giggle from your scaled lover. She rolls your bodies onto the sand so that you lie on your side, still face to face. The mess of cum between you slowly oozes down toward the ground, leaving you comparatively [warm/cool] against the desert air. You drift to sleep in your mate’s arms, her cock still firmly embedded in your [vag].", parse);
 
-		world.TimeStep({hour: 4});
+		TimeStep({hour: 4});
 
 		Gui.NextPrompt();
 	}, 1.0, function() { return player.FirstVag(); });
@@ -1277,7 +1277,7 @@ NagaScenes.DesertNagaMating = function(naga) {
 		Text.NL();
 		Text.Add("The naga collapses on top of you, a wet splat echoing out around you as your bodies slither against each other in a morass of cum. She licks at your lips until you open them, then kisses you, feeding you a mouthful of spunk gathered from your visage. She repeats the process while her fingers link with yours, cleaning your face off completely by slurping up all of its alabaster mask and then snowballing it into your mouth. You both roll to one side just before you pass out, losing consciousness after such an intense orgasm, your [cock] still lodged firmly in your mate’s greedy pussy.", parse);
 
-		world.TimeStep({hour: 4});
+		TimeStep({hour: 4});
 
 		Gui.NextPrompt();
 	}, 1.0, function() { return player.FirstCock(); });

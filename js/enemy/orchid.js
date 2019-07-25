@@ -332,7 +332,7 @@ OrchidScenes.TalkPrompt = function() {
 			Text.Add("It’s alright, you comfort her.", parse);
 			Text.Flush();
 			
-			world.TimeStep({minute: 5});
+			TimeStep({minute: 5});
 			
 			OrchidScenes.TalkPrompt();
 		}, enabled : true
@@ -410,7 +410,7 @@ OrchidScenes.TalkPrompt = function() {
 			}
 			Text.Flush();
 			
-			world.TimeStep({minute: 5});
+			TimeStep({minute: 5});
 			
 			OrchidScenes.TalkPrompt();
 		}, enabled : true
@@ -456,7 +456,7 @@ OrchidScenes.TalkPrompt = function() {
 			Text.Add("<i>“Anytime, [playername]. Anything else you’d like to talk about?”</i>", parse);
 			Text.Flush();
 			
-			world.TimeStep({minute: 10});
+			TimeStep({minute: 10});
 			
 			OrchidScenes.TalkPrompt();
 		}, enabled : true
@@ -497,7 +497,7 @@ OrchidScenes.TalkPrompt = function() {
 			}
 			Text.Flush();
 			
-			world.TimeStep({minute: 5});
+			TimeStep({minute: 5});
 			
 			OrchidScenes.TalkPrompt();
 		}, enabled : true

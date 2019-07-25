@@ -4,8 +4,8 @@
  * 
  */
 
-import { Event, Link, MoveToLocation } from '../event';
-import { WorldTime } from '../worldtime';
+import { Event, Link } from '../event';
+import { WorldTime, MoveToLocation } from '../GAME';
 import { Season } from '../time';
 import { SetGameState, GameState } from '../gamestate';
 import { Gui } from '../gui';
@@ -527,7 +527,7 @@ DryadGladeScenes.FirstLoss = function() {
 	Text.Flush();
 	
 	Gui.NextPrompt(function() {
-		world.TimeStep({ season : 2 });
+		TimeStep({ season : 2 });
 		
 		if(party.Num() <= 1)
 			parse["comp"] = "";
@@ -584,7 +584,7 @@ DryadGladeScenes.FirstWin = function(enc) {
 		Text.Add("It takes a while longer before everything is returned to normality and you can begin to piece together Orchid’s story. The creatures of the forest gather around you, still eyeing the betentacled dryad warily.", parse);
 		Text.Flush();
 		
-		world.TimeStep({ hour : 1 });
+		TimeStep({ hour : 1 });
 		
 		Gui.NextPrompt(function() {
 			Text.Clear();
@@ -692,7 +692,7 @@ DryadGladeScenes.MotherTreePrompt = function() {
 			Text.Add("You thank the dryad, feeling fully capable of continuing your journey again.", parse);
 			Text.Flush();
 			
-			world.TimeStep({minute: 15});
+			TimeStep({minute: 15});
 			party.RestFull();
 		}, enabled : true,
 		tooltip : Text.Parse("Ask her to use her powers to heal you[comp].", parse)

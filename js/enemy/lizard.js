@@ -7,7 +7,7 @@
 import { Entity } from '../entity';
 import { Cock } from '../body/cock';
 import { Gender } from '../body/gender';
-import { WorldTime } from '../worldtime';
+import { WorldTime } from '../GAME';
 import { Images } from '../assets';
 import { Element } from '../ability';
 import { TF } from '../tf';
@@ -531,7 +531,7 @@ LizardsScenes.WinFuckVag = function(enc) {
 	}
 	Text.Flush();
 
-	world.TimeStep({minute : 30});
+	TimeStep({minute : 30});
 
 	Gui.NextPrompt();
 }
@@ -2709,7 +2709,7 @@ LizardsScenes.LossFemale = function() {
 			Text.Add("You’re thoroughly exhausted when the playful lizard finally leaves you alone. Wobbling slightly, you[c] set out on your journey again.", parse);
 			Text.Flush();
 
-			world.TimeStep({hour: 2});
+			TimeStep({hour: 2});
 			player.subDom.DecreaseStat(-75, 1);
 
 			Gui.NextPrompt();

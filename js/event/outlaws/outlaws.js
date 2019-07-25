@@ -6,7 +6,7 @@ import { GetDEBUG } from '../../../app';
 import { OCavalcadeScenes } from './cavalcade';
 import { Stat } from '../../stat';
 import { Time } from '../../time';
-import { WorldTime } from '../../worldtime';
+import { WorldTime } from '../../GAME';
 
 let OutlawsScenes = {
 	Cavalcade : OCavalcadeScenes,
@@ -343,7 +343,7 @@ OutlawsScenes.MariasBouquetPrompt = function(opts) {
 			Text.Add("Nodding, you start on your way out of the glade, a soft rustling echoing in the air as you make your way through the tall grass field. The last sight you have of Maria is that of the archer prostrating herself before the memory of the deceased, her head bowed and eyes closed even as a stiff breeze carries red and white petals through the air.", parse);
 			Text.Flush();
 			
-			world.TimeStep({hour: 3});
+			TimeStep({hour: 3});
 			outlaws.mainQuestTimer = new Time(0,0,1,0,0);
 			outlaws.flags["Met"] = Outlaws.Met.Bouqet;
 			
@@ -420,7 +420,7 @@ OutlawsScenes.PathIntoRigardInitiation = function() {
 		
 		party.Inv().AddItem(Items.Quest.OutlawLetter);
 		
-		world.TimeStep({hour: 1});
+		TimeStep({hour: 1});
 		
 		outlaws.mainQuestTimer = new Time(0,0,2,0,0);
 		outlaws.flags["Met"] = Outlaws.Met.Letter;
@@ -648,7 +648,7 @@ OutlawsScenes.PathIntoRigardBelinda = function() {
 		//Note, don't set Belinda's regular met flag, to get a custom meeting at the brothel
 		outlaws.flags["Met"] = Outlaws.Met.MetBelinda;
 		
-		world.TimeStep({hour: 1});
+		TimeStep({hour: 1});
 		
 		Gui.NextPrompt();
 	});	
@@ -735,7 +735,7 @@ OutlawsScenes.Exploration.ChowTime = function() {
 	}
 	Text.Flush();
 	
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 	
 	Gui.NextPrompt();
 }
@@ -935,7 +935,7 @@ OutlawsScenes.Exploration.Archery = function() {
 				Text.Add("Oh well, there’s always another time. You take a moment to gather yourself, then turn to leave.", parse);
 				Text.Flush();
 				
-				world.TimeStep({hour: 1});
+				TimeStep({hour: 1});
 				
 				Gui.NextPrompt();
 			});
@@ -972,7 +972,7 @@ OutlawsScenes.Exploration.Archery = function() {
 			Text.Add("<i>“Pestering? I only brought it up twice. If that’s the way you want it, suit yourself; your skills will out in time to come. Me, I’ve got bigger fish to fry.”</i> She gives you a nod and smile. <i>“Enjoy the rest of your day, [playername]. I’ll see you around.”</i>", parse);
 			Text.Flush();
 			
-			world.TimeStep({hour: 1});
+			TimeStep({hour: 1});
 			
 			Gui.NextPrompt();
 		}, enabled : true
@@ -993,7 +993,7 @@ OutlawsScenes.Exploration.CampFollowers = function() {
 	Text.Add("Shaking your head, you continue on your way.", parse);
 	Text.Flush();
 	
-	world.TimeStep({minute: 10});
+	TimeStep({minute: 10});
 	
 	Gui.NextPrompt();
 }
@@ -1053,7 +1053,7 @@ OutlawsScenes.Exploration.Feeding = function() {
 	Text.Add("It’s then that they realize you’re listening in, and quickly pipe down, eyeing you cautiously. Well, you’d heard enough anyway - passing them by, you pace along the riverside in as nonchalant a fashion as you can even as you feel their gazes on the back of your neck.", parse);
 	Text.Flush();
 	
-	world.TimeStep({minute: 20});
+	TimeStep({minute: 20});
 	
 	Gui.NextPrompt();
 }
@@ -1115,7 +1115,7 @@ OutlawsScenes.Exploration.Carpentry = function() {
 			Text.Flush();
 			
 			outlaws.relation.IncreaseStat(20, 1);
-			world.TimeStep({hour: 1});
+			TimeStep({hour: 1});
 			
 			Gui.NextPrompt();
 		}, enabled : true
@@ -1131,7 +1131,7 @@ OutlawsScenes.Exploration.Carpentry = function() {
 			Text.Add("All right - not that you were planning to drink any of the outlaws’ moonshine, anyway. You return Vaughn’s nod, leave him to his work, and are gone from sight before long.", parse);
 			Text.Flush();
 			
-			world.TimeStep({minute: 20});
+			TimeStep({minute: 20});
 			
 			Gui.NextPrompt();
 		}, enabled : true
@@ -1260,7 +1260,7 @@ OutlawsScenes.Exploration.FactFinding = function() {
 	}
 	Text.Flush();
 	
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 	
 	outlaws.factTimer = new Time(0,0,3,0,0);
 	
@@ -1306,7 +1306,7 @@ OutlawsScenes.Exploration.DailyLife = function() {
 	Text.Add("Which makes sense. If you were in their position and kept on thinking about it, it’d be really easy to give in to despair. Shaking your head, you turn from the scene and head back, wondering just how long this can go on.", parse);
 	Text.Flush();
 	
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 	
 	Gui.NextPrompt();
 }

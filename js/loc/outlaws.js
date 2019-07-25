@@ -4,9 +4,9 @@
  * 
  */
 
-import { Event, Link, EncounterTable, MoveToLocation } from '../event';
+import { Event, Link, EncounterTable } from '../event';
 import { Scenes } from '../scenes';
-import { WorldTime } from '../worldtime';
+import { WorldTime, MoveToLocation } from '../GAME';
 
 let world = null;
 

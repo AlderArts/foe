@@ -1,5 +1,5 @@
 import { Lei } from './lei';
-import { WorldTime } from '../../worldtime';
+import { WorldTime } from '../../GAME';
 
 let SexScenes = {};
 
@@ -124,7 +124,7 @@ SexScenes.Petting = function(repeat) {
 	});
 	
 	Gui.Callstack.push(function() {
-		world.TimeStep({hour: 1});
+		TimeStep({hour: 1});
 		
 		Text.Add(" <i>“It’s nice to let someone close sometimes, isn’t it?”</i>", parse);
 		Text.NL();

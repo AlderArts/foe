@@ -7,7 +7,7 @@ import { Entity } from '../../entity';
 import { Images } from '../../assets';
 import { Color } from '../../body/color';
 import { HairStyle } from '../../body/hair';
-import { WorldTime } from '../../worldtime';
+import { WorldTime } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
 
@@ -136,7 +136,7 @@ Gwendy.prototype.Interact = function(switchSpot) {
 			Text.Clear();
 			Text.Add("[Placeholder] Gwendy masturbates fiercely, cumming buckets.");
 			
-			world.TimeStep({minute : 10});
+			TimeStep({minute : 10});
 			
 			that.AddLustFraction(-1);
 			Text.Flush();

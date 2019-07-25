@@ -1,12 +1,13 @@
 
-import { Event, Link, MoveToLocation } from '../event';
+import { Event, Link } from '../event';
 import { Inventory } from '../inventory';
 import { GetDEBUG } from '../../app';
 import { Gender } from '../body/gender';
-import { WorldTime } from '../worldtime';
+import { WorldTime } from '../GAME';
 import { Player } from './player';
 import { Party } from '../party';
 import { Items } from '../items';
+import { EntityStorage, MoveToLocation } from '../GAME';
 
 let HalloweenScenes = {};
 
@@ -92,11 +93,11 @@ Halloween.IsSeason = function() {
 
 Halloween.prototype.Restore = function() {
 	// Restore player/party
-	_.remove(world.EntityStorage, function(e) {
+	_.remove(EntityStorage(), function(e) {
 		return e == player;
 	});
 	player = new Player(this.player);
-	world.EntityStorage.push(player);
+	EntityStorage().push(player);
 	party = new Party(this.party);
 }
 
@@ -179,7 +180,7 @@ HalloweenScenes.PieIntro = function() {
 	
 	gameCache.flags["HW"] |= Halloween.State.Intro;
 	
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 	
 	Gui.NextPrompt();
 }
@@ -327,7 +328,7 @@ HalloweenScenes.PumpkinPie = function() {
 				Text.Add("Although there’s still plenty of life in the party, there <i>are</i> a few who’ve slipped off to sleep off the heavy meal, so you feel no shame in deciding to call it a night. Saying goodbye to[c] the nomads still up and about, you stumble in an approximate beeline for your tent, and are asleep before you even hit the bedroll.", parse);
 				Text.Flush();
 				
-				world.TimeStep({hour: 1});
+				TimeStep({hour: 1});
 				
 				Gui.NextPrompt(function() {
 					HalloweenScenes.EnterDream(true);
@@ -380,7 +381,7 @@ HalloweenScenes.PumpkinPie = function() {
 		Text.Add("Don’t mind if you do, then! With your opportune moment of arrival, you soon find yourself at the head of a rapidly growing line, and are served your wonderful pie[c]. It’s every bit as wonderful as you remember it being, and soon enough, you feel the strong liquor in the pie filling beginning to take effect. Nevertheless, you manage to down two more slices, and then wobble off to your tent, clutching at your stuffed stomach. You’ll just sleep off this food coma in a bit… ", parse);
 		Text.Flush();
 		
-		world.TimeStep({hour: 1});
+		TimeStep({hour: 1});
 		
 		Gui.NextPrompt(function() {
 			HalloweenScenes.EnterDream(false);
@@ -6797,7 +6798,7 @@ HalloweenScenes.WakingUp = function(badend) {
 	
 	HalloweenScenes.HW.Restore();
 	//Sleep
-	world.TimeStep({hour: 8});
+	TimeStep({hour: 8});
 	party.RestFull();
 	//Return to Eden
 	party.location = world.loc.Plains.Nomads.Tent;

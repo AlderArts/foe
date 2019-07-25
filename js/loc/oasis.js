@@ -3,7 +3,7 @@ import { EncounterTable } from '../event';
 import { Shop } from '../shop';
 import { Gender } from '../body/gender';
 import { IngredientItems } from '../items/ingredients';
-import { WorldTime } from '../worldtime';
+import { WorldTime } from '../GAME';
 
 let OasisScenes = {};
 
@@ -259,7 +259,7 @@ OasisScenes.DesertCaravanEncounter = function() {
 		Text.NL();
 		busy = false;
 		
-		world.TimeStep({minute: 15});
+		TimeStep({minute: 15});
 	};
 	
 	var prompt = function() {
@@ -314,7 +314,7 @@ OasisScenes.DesertCaravanEncounter = function() {
 				Text.Flush();
 				rumors = false;
 				
-				world.TimeStep({minute: 10});
+				TimeStep({minute: 10});
 				
 				prompt();
 			}, enabled : rumors,
@@ -425,7 +425,7 @@ OasisScenes.DesertCaravanEncounter = function() {
 				fun = false;
 				busy = true;
 				
-				world.TimeStep({minute: 40});
+				TimeStep({minute: 40});
 				
 				prompt();
 			}, enabled : fun,
@@ -433,7 +433,7 @@ OasisScenes.DesertCaravanEncounter = function() {
 		});
 		options.push({ nameStr : "Leave",
 			func : function() {
-				world.TimeStep({hour: 1});
+				TimeStep({hour: 1});
 				PrintDefaultOptions();
 			}, enabled : true,
 			tooltip : Text.Parse("It’s time to head out.", parse)

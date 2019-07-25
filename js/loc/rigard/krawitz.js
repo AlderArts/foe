@@ -4,10 +4,10 @@
  * 
  */
 
-import { Event, Link, EncounterTable, MoveToLocation } from '../../event';
+import { Event, Link, EncounterTable } from '../../event';
 import { GetDEBUG } from '../../../app';
 import { Gender } from '../../body/gender';
-import { WorldTime } from '../../worldtime';
+import { WorldTime, MoveToLocation } from '../../GAME';
 import { SetGameState, GameState } from '../../gamestate';
 import { Text } from '../../text';
 
@@ -2066,7 +2066,7 @@ KrawitzScenes.Aftermath = function() {
 	lei.relation.IncreaseStat(100, points*3);
 	
 	Gui.NextPrompt(function() {
-		world.TimeStep({hour: 2});
+		TimeStep({hour: 2});
 		party.location = world.loc.Rigard.Inn.common;
 		
 		party.LoadActiveParty();

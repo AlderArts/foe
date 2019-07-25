@@ -1,5 +1,5 @@
 
-import { Event, Link, MoveToLocation } from '../event';
+import { Event, Link } from '../event';
 import { Maze } from '../maze';
 import { GetDEBUG } from '../../app';
 import { Halloween, HalloweenScenes } from '../event/halloween';
@@ -12,7 +12,7 @@ import { EstevanScenes } from '../event/nomads/estevan';
 import { MagnusScenes } from '../event/nomads/magnus';
 import { RosalinScenes } from '../event/nomads/rosalin';
 import { PatchworkScenes } from '../event/nomads/patchwork';
-import { WorldTime } from '../worldtime';
+import { WorldTime, MoveToLocation } from '../GAME';
 
 //
 // Nomads

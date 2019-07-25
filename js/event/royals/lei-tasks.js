@@ -1,6 +1,6 @@
 import { Lei } from './lei';
 import { Gender } from "../../body/gender";
-import { WorldTime } from '../../worldtime';
+import { WorldTime } from '../../GAME';
 import { SetGameState, GameState } from '../../gamestate';
 import { Gui } from '../../gui';
 import { Text } from '../../text';
@@ -121,7 +121,7 @@ TasksScenes.Escort.Start = function() {
 		Text.NL();
 		Text.Add("<b>You should meet Ventor Orellos at his home in the Plaza between ten and seventeen tomorrow for an escort job. Don’t be late!</b>", parse);
 		
-		world.TimeStep({minute: 15});
+		TimeStep({minute: 15});
 
 		lei.flags["Met"] = Lei.Met.OnTaskEscort;
 		
@@ -228,7 +228,7 @@ TasksScenes.Escort.Estate = function() {
 	Text.Add("The older man’s stern face melts into a smile. <i>“Of course, you know I can’t refuse you.”</i> He looks at you over her shoulder. <i>“I will trust you to protect my daughter above all else, [playername]. Do not disappoint me.”</i>", parse);
 	Text.Flush();
 	
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 	
 	Gui.NextPrompt(function() {
 		Text.Clear();
@@ -238,7 +238,7 @@ TasksScenes.Escort.Estate = function() {
 		Text.Add("Aliana, on the other hand, went in the opposite direction. Her outfit hugs her body tightly, emphasizing her cute breasts and curvy butt, drawing the eye to all the right places.", parse);
 		Text.Flush();
 		
-		world.TimeStep({minute: 30});
+		TimeStep({minute: 30});
 		
 		//[Flirt][Don’t]
 		var options = new Array();
@@ -356,7 +356,7 @@ TasksScenes.Escort.Estate = function() {
 				Text.Add("It’s time to do your job.", parse);
 				Text.Flush();
 				
-				world.TimeStep({minute: 20});
+				TimeStep({minute: 20});
 
 				/*
 #combat encounter
@@ -626,7 +626,7 @@ TasksScenes.Escort.PostCombat = function(enc, won) {
 					Text.Add("You should return to Lei to make your report.", parse);
 					Text.Flush();
 					
-					world.TimeStep({hour: 1});
+					TimeStep({hour: 1});
 					
 					lei.flags["Met"] = Lei.Met.EscortFinished;
 					
@@ -660,7 +660,7 @@ TasksScenes.Escort.Debrief = function() {
 	var ontime = lei.flags["T1"] & Lei.EscortTask.OnTime;
 	var flirted = lei.flags["T1"] & Lei.EscortTask.Flirted;
 	
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 	lei.flags["Met"] = Lei.Met.CompletedTaskEscort;
 	
 	Text.Clear();

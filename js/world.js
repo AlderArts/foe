@@ -18,7 +18,6 @@ import { InitNomads } from './loc/nomads';
 import { InitMiranda } from './event/miranda-scenes';
 import { BullTowerLoc } from './event/outlaws/bulltower';
 import { InitCheats } from './cheats';
-import { WorldTime } from './worldtime';
 
 let world = {
 	// Prototype initialization
@@ -41,7 +40,6 @@ let world = {
 		DarkAspect : DarkAspect,
 		LightAspect : LightAspect,
 	},
-	EntityStorage : new Array(),
 	SaveSpots     : {},
 };
 
@@ -84,23 +82,6 @@ world.Update = function(frametime) {
 	this.x += xDir * frametime * 200;
 	this.y += yDir * frametime * 200;
 	*/
-}
-
-// Update function (for internal game time)
-world.TimeStep = function(step) {
-	WorldTime().Inc(step);
-	
-	for(var i = 0; i < this.EntityStorage.length; i++)
-		if(this.EntityStorage[i].Update) this.EntityStorage[i].Update(step);
-}
-
-// Update function (for internal game time)
-world.StepToHour = function(hour, minute) {
-	var step = WorldTime().TimeToHour(hour, minute);
-	
-	world.TimeStep(step);
-
-	return step;
 }
 
 //TODO

@@ -4,7 +4,7 @@
 import { Entity } from '../../entity';
 import { Time } from '../../time';
 import { IngredientItems } from '../../items/ingredients';
-import { WorldTime } from '../../worldtime';
+import { WorldTime } from '../../GAME';
 
 let AquiliusScenes = {};
 
@@ -176,7 +176,7 @@ AquiliusScenes.FirstMeeting = function() {
 	Text.Add("With that, he walks away, leaving you to fume.", parse);
 	Text.Flush();
 	
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 	
 	Gui.NextPrompt();
 }
@@ -479,7 +479,7 @@ AquiliusScenes.TalkSelfPrompt = function() {
 			Text.Add("<i>“That’s another story,”</i> Aquilius replies. <i>“If you’re really that interested, I’ll tell you. Anything else, though?”</i>", parse);
 			Text.Flush();
 			
-			world.TimeStep({minute: 30});
+			TimeStep({minute: 30});
 		}, enabled : true
 	});
 	options.push({ nameStr : "Surgery",
@@ -517,7 +517,7 @@ AquiliusScenes.TalkSelfPrompt = function() {
 			Text.Add("<i>“What I’m trying to get at is that… well, I’m certainly not going to be taking on any airs for what I do. That’s all.”</i>", parse);
 			Text.Flush();
 			
-			world.TimeStep({minute: 30});
+			TimeStep({minute: 30});
 		}, enabled : true
 	});
 	options.push({ nameStr : "Outlaws",
@@ -553,7 +553,7 @@ AquiliusScenes.TalkSelfPrompt = function() {
 			Text.Add("Aquilius nods. <i>“Believe it or not, it is that simple.”</i>", parse);
 			Text.Flush();
 			
-			world.TimeStep({minute: 30});
+			TimeStep({minute: 30});
 		}, enabled : true
 	});
 	if(party.InParty(kiakai, true)) { //TODO flags for this!
@@ -576,7 +576,7 @@ AquiliusScenes.TalkSelfPrompt = function() {
 				Text.Add("<i>“Look, I went off my head over there,”</i> Aquilius says at last. <i>“I know I can’t stop people from doing stupid things, like they’ve been since the dawn of time. But if they get themselves cut up, at least I can stitch them back together. If they want to charge headlong into death, I can try and talk them out of it. But if they’re really determined… I don’t want to see another freshly dead body if I can help it, especially if it’s still walking and talking. You get me?”</i>", parse);
 				Text.Flush();
 				
-				world.TimeStep({minute: 30});
+				TimeStep({minute: 30});
 			}, enabled : !party.InParty(kiakai)
 		});
 	}
@@ -660,7 +660,7 @@ AquiliusScenes.TalkGrind = function() {
 	
 	Text.Flush();
 	
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 }
 
 AquiliusScenes.TalkWarPrompt = function() {
@@ -698,7 +698,7 @@ AquiliusScenes.TalkWarPrompt = function() {
 			Text.Add("<i>“So there you have it, [playername]. There weren’t any good sides in that mess that was called a civil war, so if anyone tells you that they were the good guys, they’re a lying bucket of warm piss.”</i>", parse);
 			Text.Flush();
 			
-			world.TimeStep({minute: 30});
+			TimeStep({minute: 30});
 		}, enabled : true
 	});
 	options.push({ nameStr : "Fighting",
@@ -720,7 +720,7 @@ AquiliusScenes.TalkWarPrompt = function() {
 			Text.Add("<i>“I don’t want to dwell on it anymore,”</i> Aquilius says all of a sudden. <i>“I think you get the general idea by now, yes?”</i>", parse);
 			Text.Flush();
 			
-			world.TimeStep({minute: 30});
+			TimeStep({minute: 30});
 		}, enabled : true
 	});
 	options.push({ nameStr : "Free Cities",
@@ -731,7 +731,7 @@ AquiliusScenes.TalkWarPrompt = function() {
 			Text.NL();
 			Text.Add("<i>“It wouldn’t surprise me if they bankrolled some of the players in the civil war, stir up some trouble to keep the king from noticing them, but that’s just my guess. Anything else?”</i>", parse);
 			Text.Flush();
-			world.TimeStep({minute: 5});
+			TimeStep({minute: 5});
 		}, enabled : true
 	});
 	options.push({ nameStr : "End",
@@ -753,7 +753,7 @@ AquiliusScenes.TalkWarPrompt = function() {
 			Text.Add("He sighs, taking his pipe out of his beak and staring into the bowl as if it holds the mysteries of the universe. <i>“Nevertheless, Zenith’s going to fight. He’s like that; good boys fight for what they believe is right. When people fight, someone always ends up getting killed. The war produced enough cadavers for me to practice on back in the day, and I’d rather not have more turning up. It’s one of the reasons I’m here.”</i>", parse);
 			Text.Flush();
 			
-			world.TimeStep({minute: 30});
+			TimeStep({minute: 30});
 		}, enabled : true
 	});
 	Gui.SetButtonsFromList(options, true, function() {
@@ -849,7 +849,7 @@ AquiliusScenes.Smoke = function() {
 	if(WorldTime().hour < 22)
 		world.StepToHour(22);
 	else
-		world.TimeStep({hour: 2});
+		TimeStep({hour: 2});
 	
 	aquilius.relation.IncreaseStat(100, 2);
 	Gui.NextPrompt();
@@ -942,7 +942,7 @@ AquiliusScenes.HelpOutPrompt = function() {
 			
 			aquilius.flags["Herbs"] = Aquilius.Herbs.OnQuest;
 			
-			world.TimeStep({minute: 10});
+			TimeStep({minute: 10});
 			
 			Gui.NextPrompt();
 		}, enabled : aquilius.QualifiesForHerbs(player)
@@ -1003,7 +1003,7 @@ AquiliusScenes.PickHerbs = function() {
 	Text.Add("With all that nastiness behind you, you sort through today’s pickings - a medley of grasses, roots, bits of bark and the occasional odd mushroom. There’s about enough to fill a hand basket, which should be enough to appease Aquilius for a day’s worth of work; time to head back and see what he has for you.", parse);
 	Text.Flush();
 	
-	world.TimeStep({hour: 5});
+	TimeStep({hour: 5});
 	
 	aquilius.flags["Herbs"] = Aquilius.Herbs.Finished;
 	
@@ -1111,7 +1111,7 @@ AquiliusScenes.TendToSick = function() {
 	Text.Add("<i>“Decent work, [playername],”</i> Aquilius tells you, noticing your return. <i>“I expected no less from you. Well, I suppose that’ll be all for today - why don’t you go and get some rest and come back tomorrow if you want to have another go at it? I’ll still be needed around these parts for a little while longer, so don’t wait up on me.”</i>", parse);
 	Text.Flush();
 	
-	world.TimeStep({hour: 5});
+	TimeStep({hour: 5});
 	
 	outlaws.relation.IncreaseStat(30, 1);
 	aquilius.relation.IncreaseStat(100, 2);
@@ -1192,7 +1192,7 @@ AquiliusScenes.AlchemyHelp = function() {
 	Text.Add("<i>“Yes, it’ll do. You’ve done adequately, and for that, you do have my gratitude. I’m afraid there’s not much I can pay you directly with, but everyone in the camp respects those who’re willing to do more than the minimum to scrape by. Go and get some rest, and if you still want to turn up here tomorrow, I won’t say no.”</i>", parse);
 	Text.Flush();
 	
-	world.TimeStep({hour: 5});
+	TimeStep({hour: 5});
 	
 	outlaws.relation.IncreaseStat(30, 1);
 	aquilius.relation.IncreaseStat(100, 2);

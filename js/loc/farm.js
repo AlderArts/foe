@@ -4,11 +4,11 @@
  *
  */
 
-import { Event, Link, EncounterTable, MoveToLocation } from '../event';
+import { Event, Link, EncounterTable } from '../event';
 import { Gender } from '../body/gender';
 import { GwendyScenes } from '../event/farm/gwendy-scenes';
 import { LaylaScenes } from '../event/farm/layla-scenes';
-import { WorldTime } from '../worldtime';
+import { WorldTime, MoveToLocation } from '../GAME';
 import { SetGameState, GameState } from '../gamestate';
 import { Gui } from '../gui';
 import { Text } from '../text';
@@ -142,7 +142,7 @@ FarmLoc.Fields.enc.AddEnc(function() {
 		Text.Add("You pick up some fresh grass.", null, 'bold');
 		party.inventory.AddItem(Items.FreshGrass);
 
-		world.TimeStep({minute: 15});
+		TimeStep({minute: 15});
 		Text.Flush();
 		Gui.NextPrompt();
 	};
@@ -161,7 +161,7 @@ FarmLoc.Fields.enc.AddEnc(function() {
 		Text.Add("You pick up a Foxglove.", null, 'bold');
 		party.inventory.AddItem(Items.Foxglove);
 
-		world.TimeStep({minute: 15});
+		TimeStep({minute: 15});
 
 		Text.Flush();
 		Gui.NextPrompt();
@@ -241,7 +241,7 @@ FarmLoc.Loft.SleepFunc = function() {
 	Text.Flush();
 
 	var func = function(dream) {
-		world.TimeStep({hour: 8});
+		TimeStep({hour: 8});
 		party.Sleep();
 
 		if(LaylaScenes.FarmMeetingTrigger()) return;
@@ -269,7 +269,7 @@ let FarmScenesIntro = {};
 
 
 FarmScenesIntro.Start = function() {
-	world.TimeStep({minute: 15});
+	TimeStep({minute: 15});
 	Text.Clear();
 
 	var parse = {};
@@ -297,7 +297,7 @@ FarmScenesIntro.Start = function() {
 
 FarmScenesIntro.Approach = function() {
 	party.location = FarmLoc.Fields;
-	world.TimeStep({minute: 15});
+	TimeStep({minute: 15});
 	Text.Clear();
 
 	gwendy.flags["Met"] = 1;
@@ -389,7 +389,7 @@ FarmScenesIntro.Approach = function() {
 
 FarmScenesIntro.EnterBarn = function() {
 	party.location = FarmLoc.Barn;
-	world.TimeStep({minute: 10});
+	TimeStep({minute: 10});
 
 	var parse = {};
 
@@ -413,7 +413,7 @@ FarmScenesIntro.EnterBarn = function() {
 
 FarmScenesIntro.EnterLoft = function() {
 	party.location = FarmLoc.Loft;
-	world.TimeStep({minute: 5});
+	TimeStep({minute: 5});
 	Text.Clear();
 
 	var parse = {};
@@ -649,7 +649,7 @@ FarmScenesIntro.GwendyQuestions2 = function() {
 			Text.Add("<b>Found Gwendy's Farm (can now be visited from plains)</b>");
 			Text.Flush();
 
-			world.TimeStep({minute: 20});
+			TimeStep({minute: 20});
 
 			Gui.NextPrompt(function() {
 				MoveToLocation(world.loc.Plains.Crossroads, {minute: 30});
@@ -662,7 +662,7 @@ FarmScenesIntro.GwendyQuestions2 = function() {
 
 FarmScenesIntro.HelpAdrian = function() {
 	party.location = FarmLoc.Barn;
-	world.TimeStep({minute: 10});
+	TimeStep({minute: 10});
 	Text.Clear();
 
 	adrian.flags["Met"] = 1;
@@ -755,7 +755,7 @@ FarmScenesIntro.HelpAdrian = function() {
 
 FarmScenesIntro.HelpAdrianFinished = function() {
 	Text.Clear();
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 
 	var parse = {
 		playername : player.name,
@@ -787,7 +787,7 @@ FarmScenesIntro.HelpAdrianFinished = function() {
 FarmScenesIntro.MeetDanie = function() {
 	Text.Clear();
 	party.location = FarmLoc.Fields;
-	world.TimeStep({minute: 5});
+	TimeStep({minute: 5});
 
 	danie.flags["Met"] = 1;
 
@@ -1143,7 +1143,7 @@ FarmScenesIntro.DanieAnalSex = function() {
 
 FarmScenesIntro.ReturnToGwendy = function() {
 	Text.Clear();
-	world.TimeStep({hour: 2});
+	TimeStep({hour: 2});
 
 	var parse = {
 		playername : player.name
@@ -1233,7 +1233,7 @@ FarmScenes.GoToMarketFirst = function(backfunc) {
 	gwendy.RestFull();
 
 	party.location = world.loc.Plains.Crossroads;
-	world.TimeStep({hour:2});
+	TimeStep({hour:2});
 	Text.Flush();
 
 	Gui.NextPrompt(function() {
@@ -1395,7 +1395,7 @@ FarmScenes.GoToMarketFirstAfterBandits = function(won) {
 		Text.NL();
 		Text.Add("...Looks like hate at first sight. Better not stand between these two if they ever clash again.", parse);
 	}
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 	Text.Flush();
 
 	Gui.NextPrompt(function() {
@@ -1569,7 +1569,7 @@ FarmScenes.Market = function(haul, next) {
 	farm.coin  += gcoin;
 	party.coin += coin;
 
-	world.TimeStep({hour: 4});
+	TimeStep({hour: 4});
 
 	Gui.NextPrompt(next);
 }
@@ -1592,7 +1592,7 @@ FarmScenes.GoToMarketFirstFinale = function() {
 
 		rigard.flags["Visa"] = 1;
 
-		world.TimeStep({minute: 30});
+		TimeStep({minute: 30});
 	}
 	Text.Add("The trip back is considerably less eventful than the morning was. The two of you are on your toes, especially when passing through the forested area, but there are no bandits in sight. You both let out a sigh of relief as you leave it behind you, continuing over the flat plains toward the farm.", parse);
 	Text.NL();
@@ -1605,7 +1605,7 @@ FarmScenes.GoToMarketFirstFinale = function() {
 
 	party.LoadActiveParty();
 	party.location = FarmLoc.Fields;
-	world.TimeStep({hour: 2});
+	TimeStep({hour: 2});
 
 	gwendy.relation.IncreaseStat(100, 5);
 

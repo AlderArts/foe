@@ -1,8 +1,8 @@
 
-import { Event, Link, MoveToLocation } from '../../event';
+import { Event, Link } from '../../event';
 import { TwinsScenes } from '../../event/royals/twins';
 import { TasksScenes } from '../../event/outlaws/vaughn-tasks';
-import { WorldTime } from '../../worldtime';
+import { WorldTime, MoveToLocation } from '../../GAME';
 import { SetGameState, GameState } from '../../gamestate';
 import { Gui } from '../../gui';
 import { Text } from '../../text';
@@ -311,7 +311,7 @@ LBScenes.OrderFood = function() {
 		Text.Add("You finish the meal gladly, and set the dishes aside. That was quite filling, but, still, it is time to be on your way.", parse);
 		
 		Text.Flush();
-		world.TimeStep({minute: 35});
+		TimeStep({minute: 35});
 		party.coin -= RigardLB.MealCost();
 		Gui.NextPrompt();
 		return;
@@ -346,7 +346,7 @@ LBScenes.OrderFood = function() {
 	});
 	
 	Text.Flush();
-	world.TimeStep({minute: 35});
+	TimeStep({minute: 35});
 	party.coin -= RigardLB.MealCost();
 	
 	Gui.NextPrompt();
@@ -1775,7 +1775,7 @@ InnLoc.room.SleepFunc = function() {
 	Text.Flush();
 	
 	var func = function(dream) {
-		world.TimeStep({hour: 8});
+		TimeStep({hour: 8});
 		party.Sleep();
 		
 		if(!dream) {

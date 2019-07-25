@@ -154,7 +154,7 @@ NCavalcadeScenes.PrepCoinGame = function() {
 
 		SetGameState(GameState.Event, Gui);
 
-		world.TimeStep({minute: 5});
+		TimeStep({minute: 5});
 
 		Text.NL();
 		if(NCavalcadeScenes.Enabled()) {
@@ -227,7 +227,7 @@ NCavalcadeScenes.PrepSexyGame = function() {
 
 	var onEnd = function() {
 		Text.NL();
-		world.TimeStep({minute: 5});
+		TimeStep({minute: 5});
 
 		var onLoss = function() {
 			if(NCavalcadeScenes.PlayersLeft(players) <= 1)
@@ -256,7 +256,7 @@ NCavalcadeScenes.PrepSexyGame = function() {
 				scenes.Get();
 
 				parse["name"] = name;
-				world.TimeStep({minute: 15});
+				TimeStep({minute: 15});
 				Text.Add("The game goes on for a while longer, eventually ending up with [name] as the winner.", parse);
 
 				onEnd();
@@ -379,7 +379,7 @@ NCavalcadeScenes.CheatGame = function() {
 	estevan.flags["Cheat"] = Estevan.Cheat.Triggered;
 	var virgin = cale.Butt().virgin;
 
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 
 	Text.Add("<i>“I sure am!”</i> Cale rubs his hands together, eagerly.", parse);
 	Text.NL();

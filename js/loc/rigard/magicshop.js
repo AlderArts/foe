@@ -3,10 +3,10 @@
 // Asche's
 //
 
-import { Event, Link, EncounterTable, MoveToLocation } from '../../event';
+import { Event, Link, EncounterTable } from '../../event';
 import { Shop } from '../../shop';
 import { Items } from '../../items';
-import { WorldTime } from '../../worldtime';
+import { WorldTime, MoveToLocation } from '../../GAME';
 
 let MagicShopLoc = new Event("Asche's Fanciful Trinkets");
 

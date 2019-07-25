@@ -69,7 +69,7 @@ Time.prototype.Leq = function(time) {
 Time.prototype.TimeToHour = function(hour, minute) {
 	hour   = hour   || 0;
 	minute = minute || 0;
-	var step = {
+	let step = {
 		hour   : hour   - this.hour,
 		minute : minute - this.minute
 	};
@@ -85,11 +85,11 @@ Time.prototype.TimeToHour = function(hour, minute) {
 }
 
 Time.prototype.Inc = function(time) {
-	minutes = time.minute || 0;
-	hours   = time.hour   || 0;
-	days    = time.day    || 0;
-	seasons = time.season || 0;
-	years   = time.year   || 0;
+	let minutes = time.minute || 0;
+	let hours   = time.hour   || 0;
+	let days    = time.day    || 0;
+	let seasons = time.season || 0;
+	let years   = time.year   || 0;
 	
 	this.minute += minutes;
 	this.hour   += hours;
@@ -116,11 +116,11 @@ Time.prototype.Inc = function(time) {
 }
 
 Time.prototype.Dec = function(time) {
-	minutes = time.minute || 0;
-	hours   = time.hour   || 0;
-	days    = time.day    || 0;
-	seasons = time.season || 0;
-	years   = time.year   || 0;
+	let minutes = time.minute || 0;
+	let hours   = time.hour   || 0;
+	let days    = time.day    || 0;
+	let seasons = time.season || 0;
+	let years   = time.year   || 0;
 	
 	this.minute -= minutes;
 	this.hour   -= hours;
@@ -198,7 +198,7 @@ Time.prototype.DateStringShort = function() {
 }
 
 Time.prototype.TimeString = function() {
-	var minutes = "00" + this.minute;
+	let minutes = "00" + this.minute;
 	minutes = minutes.substr(minutes.length-2);
 	
 	return this.hour + ":" + minutes;

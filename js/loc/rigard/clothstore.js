@@ -1,7 +1,7 @@
 
-import { Event, Link, MoveToLocation } from '../../event';
+import { Event, Link } from '../../event';
 import { Gender } from '../../body/gender';
-import { WorldTime } from '../../worldtime';
+import { WorldTime, MoveToLocation } from '../../GAME';
 
 //
 // Sliken Delights

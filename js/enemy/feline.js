@@ -14,7 +14,7 @@ import { Abilities } from '../abilities';
 import { Element } from '../ability';
 import { Race } from '../body/race';
 import { Color } from '../body/color';
-import { WorldTime } from '../worldtime';
+import { WorldTime } from '../GAME';
 import { SetGameState, GameState } from '../gamestate';
 import { Gui } from '../gui';
 import { Text } from '../text';
@@ -847,7 +847,7 @@ FelinesScenes.WinCatchVag = function(mainCat, enemy) {
 		Text.Add("You grab your [armor] and put it on after cleaning yourself up, then you take one last look at the sleeping feline before leaving [himher] behind.", parse);
 		Text.Flush();
 
-		world.TimeStep({hour: 1});
+		TimeStep({hour: 1});
 
 		Gui.NextPrompt();
 	})
@@ -962,7 +962,7 @@ FelinesScenes.WinFuckVag = function(cat, group, enc, cocks, numFemales) {
 
 		player.subDom.IncreaseStat(70, 1);
 
-		world.TimeStep({hour: 1});
+		TimeStep({hour: 1});
 
 		Gui.NextPrompt();
 	});
@@ -1231,7 +1231,7 @@ FelinesScenes.WinFuckButt = function(cat, group, enc, cocks) {
 		Text.Flush();
 
 		player.subDom.IncreaseStat(50, 1);
-		world.TimeStep({hour: 1});
+		TimeStep({hour: 1});
 
 		Gui.NextPrompt();
 	});
@@ -1490,7 +1490,7 @@ FelinesScenes.WinGetBlowjob = function(cat, group, enc) {
 		Text.Flush();
 
 		player.subDom.IncreaseStat(40, 1);
-		world.TimeStep({minute: 30});
+		TimeStep({minute: 30});
 
 		Gui.NextPrompt();
 	});
@@ -1650,7 +1650,7 @@ FelinesScenes.WinGroupService = function(enc, enemy) {
 	}
 	Text.Flush();
 
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 
 	Gui.NextPrompt();
 }
@@ -2024,7 +2024,7 @@ FelinesScenes.LossPCblowsCat = function(mainCat, enemy) {
 	}
 	Text.Flush();
 
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 	player.AddLustFraction(0.2);
 
 	Gui.NextPrompt();
@@ -3013,7 +3013,7 @@ FelinesScenes.LossDoubleTeam = function(cat, cat2, group, enc) {
 		party.coin -= 25;
 		if(party.coin < 0) party.coin = 0;
 
-		world.TimeStep({hour: 1});
+		TimeStep({hour: 1});
 
 		Gui.NextPrompt();
 	});

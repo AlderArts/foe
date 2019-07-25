@@ -4,7 +4,8 @@
  * 
  */
 
-import { Event, Link, EncounterTable, MoveToLocation } from '../event';
+import { Event, Link, EncounterTable } from '../event';
+import { MoveToLocation } from '../GAME';
 
 // Create namespace
 let DragonDenLoc = {

@@ -4,7 +4,7 @@
  */
 import { GetDEBUG } from '../../app';
 import { Gender } from '../body/gender';
-import { WorldTime } from '../worldtime';
+import { WorldTime } from '../GAME';
 import { SetGameState, GameState } from '../gamestate';
 import { Gui } from '../gui';
 import { Text } from '../text';
@@ -215,7 +215,7 @@ TasksScenes.Ginseng.Highlands = function() {
 				Text.Flush();
 				
 				party.Inv().AddItem(Items.Quest.Ginseng);
-				world.TimeStep({hour: 1});
+				TimeStep({hour: 1});
 				
 				asche.flags["Tasks"] |= Asche.Tasks.Ginseng_Succeeded;
 				
@@ -313,7 +313,7 @@ TasksScenes.Ginseng.Bribe = function() {
 			Text.Flush();
 			
 			party.Inv().AddItem(Items.Quest.Ginseng);
-			world.TimeStep({hour: 1});
+			TimeStep({hour: 1});
 			
 			asche.flags["Tasks"] |= Asche.Tasks.Ginseng_Succeeded;
 			
@@ -414,7 +414,7 @@ TasksScenes.Ginseng.Whore = function() {
 		Text.Flush();
 		
 		party.Inv().AddItem(Items.Quest.Ginseng);
-		world.TimeStep({hour: 4});
+		TimeStep({hour: 4});
 
 		asche.flags["Tasks"] |= Asche.Tasks.Ginseng_Succeeded;
 
@@ -738,7 +738,7 @@ TasksScenes.Nightshade.BlindStart = function() {
 		Text.Add("Unfortunately, after half an hour you’re still as empty-handed as you were when you set out, the only thing you’ve gained being an ache in your back and crick in your neck from staring at the forest floor for so long. In a decidedly more sour mood than before, you rub your various sore spots and decide that this wasn’t exactly your lucky day. Maybe you’ll try again later when you’ve made yourself a little more comfortable… or at least, a little less tender.", parse);
 		Text.Flush();
 		
-		world.TimeStep({minute: 30});
+		TimeStep({minute: 30});
 		
 		Gui.NextPrompt();
 	}, 3, function() { return true; });
@@ -747,7 +747,7 @@ TasksScenes.Nightshade.BlindStart = function() {
 		Text.NL();
 		Text.Add("Now, to get it down…", parse);
 		
-		world.TimeStep({minute: 30});
+		TimeStep({minute: 30});
 		
 		TasksScenes.Nightshade.HerbComplications();
 	}, 1 + rangerBonus, function() { return true; });
@@ -768,7 +768,7 @@ TasksScenes.Nightshade.FollowAquilius = function() {
 	Text.NL();
 	Text.Add("Not quite what you’d expected, but there it is. At least, it’s better than dealing with shamans, right?", parse);
 	
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 	
 	TasksScenes.Nightshade.HerbComplications();
 }
@@ -1046,7 +1046,7 @@ TasksScenes.Spring.Initiation = function() {
 	Text.Add("<i>“Asche is being wishing you good luck, customer.”</i> A faint clink of gold, and she’s withdrawn her hand and settled back behind the counter. <i>“Perhaps you will be needing it.”</i>", parse);
 	Text.Flush();
 	
-	world.TimeStep({hour: 1});
+	TimeStep({hour: 1});
 	
 	asche.flags["Tasks"] |= Asche.Tasks.Spring_Started;
 	
@@ -1079,7 +1079,7 @@ TasksScenes.Spring.Highlands = function() {
 	Text.Add("Will you remain hidden where you are and wait this out, or step out and confront whoever may be coming down the trail?", parse);
 	Text.Flush();
 	
-	world.TimeStep({minute: 30});
+	TimeStep({minute: 30});
 	
 	//[Step Out][Hide]
 	var options = new Array();
@@ -1143,7 +1143,7 @@ TasksScenes.Spring.Highlands = function() {
 		Text.Add("Job done, you head back down the trail, eager to make yourself scarce before anyone else happens to burst in on the scene. The descent is much easier than climbing up was, and you’re back on the main highland roads within the hour. Time to return to Asche and see what she has to say about the water you collected.", parse);
 		Text.Flush();
 		
-		world.TimeStep({minute: 30});
+		TimeStep({minute: 30});
 		
 		asche.flags["Tasks"] |= Asche.Tasks.Spring_Visited;
 		
@@ -1197,7 +1197,7 @@ TasksScenes.Spring.Complete = function() {
 	Text.Add("<i>“Of course, if [handsomepretty] customer is not wanting adventure, there is always option of educational experience or traditional reward.”</i>", parse);
 	Text.Flush();
 	
-	world.TimeStep({minute: 15});
+	TimeStep({minute: 15});
 	
 	//[Reward][Education][Adventure]
 	var options = new Array();

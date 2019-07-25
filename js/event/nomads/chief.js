@@ -6,7 +6,7 @@
 import { Entity } from '../../entity';
 import { GetDEBUG } from '../../../app';
 import { Gender } from '../../body/gender';
-import { WorldTime } from '../../worldtime';
+import { WorldTime } from '../../GAME';
 
 let ChiefScenes = {};
 

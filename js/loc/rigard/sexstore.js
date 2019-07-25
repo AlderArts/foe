@@ -3,8 +3,8 @@
 // Shop of oddities
 //
 
-import { Event, Link, MoveToLocation } from '../../event';
-import { WorldTime } from '../../worldtime';
+import { Event, Link } from '../../event';
+import { WorldTime, MoveToLocation } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
 

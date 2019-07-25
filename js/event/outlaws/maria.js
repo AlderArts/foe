@@ -9,7 +9,7 @@ import { DeadDropScenes } from './maria-dd';
 import { Images } from '../../assets';
 import { Color } from '../../body/color';
 import { Time } from '../../time';
-import { WorldTime } from '../../worldtime';
+import { WorldTime } from '../../GAME';
 import { Abilities } from '../../abilities';
 import { Text } from '../../text';
 import { EncounterTable } from '../../event';
@@ -381,7 +381,7 @@ MariaScenes.RangerTraining = function() {
 				Text.Flush();
 				
 				maria.relation.IncreaseStat(100, 3);
-				world.TimeStep({hour: 2});
+				TimeStep({hour: 2});
 				
 				if(maria.flags["Ranger"] < Maria.Ranger.Taught)
 					maria.flags["Ranger"] = Maria.Ranger.Taught;
@@ -425,7 +425,7 @@ MariaScenes.RangerTraining = function() {
 		Text.Add("<b>Ranger job unlocked!</b>", parse);
 		Text.Flush();
 		
-		world.TimeStep({hour: 5});
+		TimeStep({hour: 5});
 		
 		maria.relation.IncreaseStat(100, 7);
 		
@@ -454,7 +454,7 @@ MariaScenes.RangerTraining = function() {
 		Text.Add("<b>(You need Fighter level 3 on at least one of your current party members to be able to unlock the Ranger job)</b>", parse);
 		Text.Flush();
 		
-		world.TimeStep({minute: 15});
+		TimeStep({minute: 15});
 		
 		MariaScenes.CampPrompt();
 	}
@@ -532,7 +532,7 @@ MariaScenes.TalkPrompt = function() {
 			scenes.Get();
 			Text.Flush();
 			
-			world.TimeStep({minute: 15});
+			TimeStep({minute: 15});
 			maria.relation.IncreaseStat(100, 1);
 			MariaScenes.TalkPrompt();
 		}
@@ -575,7 +575,7 @@ MariaScenes.TalkPrompt = function() {
 			}
 			Text.Flush();
 			
-			world.TimeStep({minute: 15});
+			TimeStep({minute: 15});
 			maria.relation.IncreaseStat(100, 1);
 			MariaScenes.TalkPrompt();
 		}
@@ -697,7 +697,7 @@ MariaScenes.TalkPrompt = function() {
 			Text.Add("<i>“And that’s about that. News about these parts isn’t often very good, I’m afraid. Is there anything else you wanted to bring up?”</i>", parse);
 			Text.Flush();
 			
-			world.TimeStep({minute: 15});
+			TimeStep({minute: 15});
 			maria.relation.IncreaseStat(100, 1);
 			MariaScenes.TalkPrompt();
 		}
@@ -718,7 +718,7 @@ MariaScenes.TalkPrompt = function() {
 			Text.Add("<i>“Like I said, I respect Zenith enough to not talk about him when he’s not here, so draw what conclusions you will. Let’s talk about something else, shall we?”</i>", parse);
 			Text.Flush();
 			
-			world.TimeStep({minute: 15});
+			TimeStep({minute: 15});
 			maria.relation.IncreaseStat(100, 1);
 			MariaScenes.TalkPrompt();
 		}
@@ -740,7 +740,7 @@ MariaScenes.TalkPrompt = function() {
 				Text.Add("<i>“Thank you. Now, is there anything you’d like to bring up? To take our minds off this?”</i>", parse);
 				Text.Flush();
 				
-				world.TimeStep({minute: 15});
+				TimeStep({minute: 15});
 				maria.relation.IncreaseStat(100, 1);
 				MariaScenes.TalkPrompt();
 			}
@@ -922,7 +922,7 @@ MariaScenes.ForestConfront = function() {
 			}
 			Text.Flush();
 			// END ENCOUNTER
-			world.TimeStep({hour:1});
+			TimeStep({hour:1});
 			Gui.NextPrompt(PrintDefaultOptions);
 		}, enabled : true,
 		tooltip : "Try to trick Maria."
@@ -1232,7 +1232,7 @@ MariaScenes.ForestEnd = function() {
 
 	outlaws.flags["Met"] = Outlaws.Met.Met;
 
-	world.TimeStep({hour: 3});
+	TimeStep({hour: 3});
 	Gui.NextPrompt();
 }
 

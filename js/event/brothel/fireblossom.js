@@ -167,7 +167,7 @@ FireblossomScenes.Outro = function() {
 	Text.Flush();
 	
 	Gui.NextPrompt(function() {
-		world.TimeStep({hour: 3});
+		TimeStep({hour: 3});
 		Scenes.Lucille.WhoreAftermath(null, fireblossom.Cost());
 	});
 }

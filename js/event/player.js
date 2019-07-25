@@ -4,7 +4,7 @@
  * 
  */
 
-import { Entity } from '../entity';
+import { Entity, DrunkLevel } from '../entity';
 import { GetDEBUG } from '../../app';
 import { Gender } from '../body/gender';
 import { Jobs, JobDesc, JobEnum } from '../job';
@@ -177,7 +177,7 @@ Player.prototype.Drink = function(drink, suppressText) {
 			var remaining = this.drunkLevel - 0.8;
 			var minutes   = Math.floor(remaining / this.DrunkRecoveryRate() * 60);
 			
-			world.TimeStep({minute: minutes});
+			TimeStep({minute: minutes});
 			
 			Gui.NextPrompt(party.location.DrunkHandler);
 			
@@ -674,7 +674,7 @@ Player.prototype.PregnancyTrigger = function(womb, slot) {
 		//TODO
 		// #Follower father talk block. Use only if specified, else ignore. (Defined in follower documents)
 		
-		world.TimeStep({hour: 4});
+		TimeStep({hour: 4});
 		
 		//#Post-partum care block
 		NurseryScenes.CareBlock(womb);
@@ -695,7 +695,7 @@ Player.prototype.Interact = function(switchSpot) {
 			Text.Clear();
 			Text.Add("[Placeholder] You dream about sexy things.");
 			Text.Flush();
-			world.TimeStep({hour : 1});
+			TimeStep({hour : 1});
 			
 			that.AddLustFraction(0.5);
 			

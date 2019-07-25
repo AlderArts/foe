@@ -4,7 +4,8 @@
  * 
  */
 
-import { Event, Link, EncounterTable, MoveToLocation } from '../event';
+import { Event, Link, EncounterTable } from '../event';
+import { MoveToLocation } from '../GAME';
 
 // Create namespace
 let LakeLoc = {
@@ -49,7 +50,7 @@ LakeLoc.Shore.enc.AddEnc(function() {
 		Text.Add("You think you've gathered enough of these for now, you should return them to Ophelia.", parse);
 		Text.Flush();
 		
-		world.TimeStep({minute: 15});
+		TimeStep({minute: 15});
 		
 		Gui.NextPrompt();
 	};
