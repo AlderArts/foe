@@ -1,6 +1,8 @@
 
 import { Items } from './items';
 import { GetDEBUG } from '../app';
+import { VaughnScenes } from './event/outlaws/vaughn-scenes';
+import { VaughnFlags } from './event/outlaws/vaughn-flags';
 
 let Quests = {};
 Quests.Type = {
@@ -889,9 +891,9 @@ Quests.quests.push(new Quest({
 	},
 	active: function() {
 		var status = Quests.Type.NotStarted;
-		if(Scenes.Vaughn.Tasks.Lockpicks.Completed())
+		if(VaughnScenes.Tasks.Lockpicks.Completed())
 			status |= Quests.Type.Completed;
-		else if(vaughn.flags["Met"] >= Vaughn.Met.OnTaskLockpicks)
+		else if(vaughn.flags["Met"] >= VaughnFlags.Met.OnTaskLockpicks)
 			status |= Quests.Type.Visible;
 		return status;
 	},
@@ -903,7 +905,7 @@ Quests.quests.push(new Quest({
 			active: function() {
 				var status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(vaughn.flags["Met"] >= Vaughn.Met.LockpicksElodie)
+				if(vaughn.flags["Met"] >= VaughnFlags.Met.LockpicksElodie)
 					status |= Quests.Type.Completed;
 				return status;
 			}
@@ -915,7 +917,7 @@ Quests.quests.push(new Quest({
 			active: function() {
 				var status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(Scenes.Vaughn.Tasks.Lockpicks.Completed())
+				if(VaughnScenes.Tasks.Lockpicks.Completed())
 					status |= Quests.Type.Completed;
 				return status;
 			}
@@ -932,9 +934,9 @@ Quests.quests.push(new Quest({
 	},
 	active: function() {
 		var status = Quests.Type.NotStarted;
-		if(Scenes.Vaughn.Tasks.Snitch.Completed())
+		if(VaughnScenes.Tasks.Snitch.Completed())
 			status |= Quests.Type.Completed;
-		else if(vaughn.flags["Met"] >= Vaughn.Met.OnTaskSnitch)
+		else if(vaughn.flags["Met"] >= VaughnFlags.Met.OnTaskSnitch)
 			status |= Quests.Type.Visible;
 		return status;
 	},
@@ -946,7 +948,7 @@ Quests.quests.push(new Quest({
 			active: function() {
 				var status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(vaughn.flags["Met"] >= Vaughn.Met.SnitchMirandaSuccess)
+				if(vaughn.flags["Met"] >= VaughnFlags.Met.SnitchMirandaSuccess)
 					status |= Quests.Type.Completed;
 				return status;
 			}
@@ -958,7 +960,7 @@ Quests.quests.push(new Quest({
 			active: function() {
 				var status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(Scenes.Vaughn.Tasks.Snitch.Completed())
+				if(VaughnScenes.Tasks.Snitch.Completed())
 					status |= Quests.Type.Completed;
 				return status;
 			}
@@ -976,26 +978,26 @@ Quests.quests.push(new Quest({
 	active: function() {
 		var status = Quests.Type.NotStarted;
 		
-		if(Scenes.Vaughn.Tasks.Poisoning.Completed() && !(vaughn.flags["T3"] & Vaughn.Poisoning.Success))
+		if(VaughnScenes.Tasks.Poisoning.Completed() && !(vaughn.flags["T3"] & VaughnFlags.Poisoning.Success))
 			status |= Quests.Type.Failed;
-		else if(Scenes.Vaughn.Tasks.Poisoning.Completed())
+		else if(VaughnScenes.Tasks.Poisoning.Completed())
 			status |= Quests.Type.Completed;
-		else if(vaughn.flags["Met"] >= Vaughn.Met.OnTaskPoisoning)
+		else if(vaughn.flags["Met"] >= VaughnFlags.Met.OnTaskPoisoning)
 			status |= Quests.Type.Visible;
 		return status;
 	},
 	list: [
 		new QuestItem({
 			desc: function() {
-				var poison = vaughn.flags["T3"] & Vaughn.Poisoning.Aphrodisiac ? "aphrodisiac" : "poison";
+				var poison = vaughn.flags["T3"] & VaughnFlags.Poisoning.Aphrodisiac ? "aphrodisiac" : "poison";
 				return "Somehow feed Lady Heydrich the " + poison + ". She can be found in the Lady's Blessing inn in Rigard.";
 			},
 			active: function() {
 				var status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if((vaughn.flags["Met"] >= Vaughn.Met.PoisoningFail) && !(vaughn.flags["T3"] & Vaughn.Poisoning.Success))
+				if((vaughn.flags["Met"] >= VaughnFlags.Met.PoisoningFail) && !(vaughn.flags["T3"] & VaughnFlags.Poisoning.Success))
 					status |= Quests.Type.Failed;
-				else if(vaughn.flags["Met"] >= Vaughn.Met.PoisoningFail)
+				else if(vaughn.flags["Met"] >= VaughnFlags.Met.PoisoningFail)
 					status |= Quests.Type.Completed;
 				return status;
 			}
@@ -1007,7 +1009,7 @@ Quests.quests.push(new Quest({
 			active: function() {
 				var status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(Scenes.Vaughn.Tasks.Poisoning.Completed())
+				if(VaughnScenes.Tasks.Poisoning.Completed())
 					status |= Quests.Type.Completed;
 				return status;
 			}

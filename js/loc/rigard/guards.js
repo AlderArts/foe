@@ -1,6 +1,7 @@
 
 import { Event, Link, EncounterTable } from '../../event';
 import { WorldTime, MoveToLocation } from '../../GAME';
+import { VaughnScenes } from '../../event/outlaws/vaughn-scenes';
 
 let GateLoc = new Event("Main Gate");
 let BarracksLoc = {
@@ -138,12 +139,12 @@ BarracksLoc.common.events.push(new Link(
 ));
 BarracksLoc.common.events.push(new Link(
 	"Evidence", function() {
-		return Scenes.Vaughn.Tasks.Snitch.OnTask();
+		return VaughnScenes.Tasks.Snitch.OnTask();
 	}, function() {
 		return !vaughn.taskTimer.Expired();
 	},
 	function() {
-		if(Scenes.Vaughn.Tasks.Snitch.OnTask()) {
+		if(VaughnScenes.Tasks.Snitch.OnTask()) {
 			if(vaughn.taskTimer.Expired())
 				Text.Add("You were supposed to plant the evidence in the lockers here for Vaughn, but you weren't quick enough; the inspection has already happened. You should return and report to Vaughn.");
 			else {
@@ -155,7 +156,7 @@ BarracksLoc.common.events.push(new Link(
 		}
 	},
 	function() {
-		Scenes.Vaughn.Tasks.Snitch.PlantEvidence();
+		VaughnScenes.Tasks.Snitch.PlantEvidence();
 	}
 ));
 

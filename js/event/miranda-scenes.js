@@ -7,6 +7,7 @@ import { Gui } from "../gui";
 import { Text } from "../text";
 import { Party } from "../party";
 import { Encounter } from "../combat";
+import { VaughnScenes } from "./outlaws/vaughn-scenes";
 
 let MirandaScenes = {};
 
@@ -130,8 +131,8 @@ MirandaScenes.BarracksPrompt = function() {
 			tooltip : "Ask her to teach you how to fight."
 		});
 	}
-	
-	Scenes.Vaughn.Tasks.Snitch.MirandaTalk(options, true);
+    
+    VaughnScenes.Tasks.Snitch.MirandaTalk(options, true);
 	
 	Gui.SetButtonsFromList(options, true, function() {
 		//TODO
@@ -2375,7 +2376,7 @@ MirandaScenes.MaidensBanePrompt = function() {
 		MirandaScenes.BarSexOptions(options);
 	}
 	
-	Scenes.Vaughn.Tasks.Snitch.MirandaTalk(options);
+	VaughnScenes.Tasks.Snitch.MirandaTalk(options);
 	
 	Gui.SetButtonsFromList(options, true);
 }

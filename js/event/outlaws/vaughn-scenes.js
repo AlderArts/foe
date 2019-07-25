@@ -1,6 +1,8 @@
-import { Vaughn } from './vaughn';
 import { TasksScenes } from './vaughn-tasks';
 import { WorldTime } from '../../GAME';
+import { VaughnFlags } from './vaughn-flags';
+import { Text } from '../../text';
+import { Gui } from '../../gui';
 
 let VaughnScenes = {
 	Tasks : TasksScenes,
@@ -33,7 +35,7 @@ VaughnScenes.Introduction = function() {
 	Text.Add("Yeah, you won’t. Giving Vaughn a wave and receiving a tip of his hat in return, you head off into the camp proper.", parse);
 	Text.Flush();
 	
-	vaughn.flags["Met"] = Vaughn.Met.Met;
+	vaughn.flags["Met"] = VaughnFlags.Met.Met;
 	
 	TimeStep({minute: 30});
 	
@@ -54,11 +56,11 @@ VaughnScenes.CampApproach = function() {
 	
 	Text.Clear();
 	// Trigger the one-shot confront scene
-	if(vaughn.flags["Talk"] & Vaughn.Talk.Confront && !vaughn.Confronted()) {
+	if(vaughn.flags["Talk"] & VaughnFlags.Talk.Confront && !vaughn.Confronted()) {
 		VaughnScenes.ConfrontFollowup();
 		return;
 	}
-	else if(vaughn.flags["Met"] == Vaughn.Met.LockpicksElodie) {
+	else if(vaughn.flags["Met"] == VaughnFlags.Met.LockpicksElodie) {
 		VaughnScenes.Tasks.Lockpicks.Debrief();
 		return;
 	}
@@ -70,11 +72,11 @@ VaughnScenes.CampApproach = function() {
 		VaughnScenes.Tasks.Snitch.DebriefOutOfTime();
 		return;
 	}
-	else if(vaughn.flags["Met"] == Vaughn.Met.PoisoningSucceed) {
+	else if(vaughn.flags["Met"] == VaughnFlags.Met.PoisoningSucceed) {
 		VaughnScenes.Tasks.Poisoning.DebriefSuccess();
 		return;
 	}
-	else if(vaughn.flags["Met"] == Vaughn.Met.PoisoningFail) {
+	else if(vaughn.flags["Met"] == VaughnFlags.Met.PoisoningFail) {
 		VaughnScenes.Tasks.Poisoning.DebriefFailure();
 		return;
 	}
@@ -201,8 +203,8 @@ VaughnScenes.TalkPrompt = function() {
 		func : function() {
 			Text.Clear();
 			
-			var first = !(vaughn.flags["Talk"] & Vaughn.Talk.Himself);
-			vaughn.flags["Talk"] |= Vaughn.Talk.Himself;
+			var first = !(vaughn.flags["Talk"] & VaughnFlags.Talk.Himself);
+			vaughn.flags["Talk"] |= VaughnFlags.Talk.Himself;
 			
 			if(first)
 				Text.Add("<i>“Me? You want to talk about little old me? Well, that so happens to be my favorite subject.”</i> Vaughn pauses for a second to let his words sink in, then lets out a short, yipping laugh. <i>“No one’s asked about me for a long, long while. Last time that happened, I was being trundled into the camp, although in a much friendlier manner than you were, and Zenith was asking me why I wanted to be here. Go on, ask to your heart’s content. I won’t mind.”</i>", parse);
@@ -296,7 +298,7 @@ VaughnScenes.TalkHimself = function() {
 			
 			TimeStep({minute: 10});
 			
-			vaughn.flags["Talk"] |= Vaughn.Talk.Past;
+			vaughn.flags["Talk"] |= VaughnFlags.Talk.Past;
 			
 			VaughnScenes.TalkHimself();
 		}, enabled : true
@@ -397,7 +399,7 @@ VaughnScenes.TalkHimself = function() {
 			VaughnScenes.TalkHimself();
 		}, enabled : true
 	});
-	if((vaughn.flags["Talk"] & Vaughn.Talk.Past) || (vaughn.flags["TWar"] >= Vaughn.TalkWar.Desertion)) {
+	if((vaughn.flags["Talk"] & VaughnFlags.Talk.Past) || (vaughn.flags["TWar"] >= VaughnFlags.TalkWar.Desertion)) {
 		options.push({ nameStr : "Fiancee",
 			tooltip : "So, he mentioned a fiancee…",
 			func : function() {
@@ -431,7 +433,7 @@ VaughnScenes.TalkHimself = function() {
 				
 				TimeStep({minute: 10});
 				
-				vaughn.flags["Talk"] |= Vaughn.Talk.Fiancee;
+				vaughn.flags["Talk"] |= VaughnFlags.Talk.Fiancee;
 				
 				VaughnScenes.TalkHimself();
 			}, enabled : true
@@ -532,8 +534,8 @@ VaughnScenes.TalkWar = function() {
 					
 					TimeStep({minute: 10});
 					
-					if(vaughn.flags["TWar"] < Vaughn.TalkWar.Beginnings)
-						vaughn.flags["TWar"] = Vaughn.TalkWar.Beginnings;
+					if(vaughn.flags["TWar"] < VaughnFlags.TalkWar.Beginnings)
+						vaughn.flags["TWar"] = VaughnFlags.TalkWar.Beginnings;
 					
 					VaughnScenes.TalkWar();
 				});
@@ -542,7 +544,7 @@ VaughnScenes.TalkWar = function() {
 			});
 		}, enabled : true
 	});
-	if(vaughn.flags["TWar"] >= Vaughn.TalkWar.Beginnings) {
+	if(vaughn.flags["TWar"] >= VaughnFlags.TalkWar.Beginnings) {
 		options.push({ nameStr : "Wartime",
 			tooltip : "So… just how did it go down? The civil war, that is.",
 			func : function() {
@@ -601,15 +603,15 @@ VaughnScenes.TalkWar = function() {
 					
 					TimeStep({minute: 10});
 					
-					if(vaughn.flags["TWar"] < Vaughn.TalkWar.Wartime)
-						vaughn.flags["TWar"] = Vaughn.TalkWar.Wartime;
+					if(vaughn.flags["TWar"] < VaughnFlags.TalkWar.Wartime)
+						vaughn.flags["TWar"] = VaughnFlags.TalkWar.Wartime;
 					
 					VaughnScenes.TalkWar();
 				});
 			}, enabled : true
 		});
 	}
-	if(vaughn.flags["TWar"] >= Vaughn.TalkWar.Wartime) {
+	if(vaughn.flags["TWar"] >= VaughnFlags.TalkWar.Wartime) {
 		options.push({ nameStr : "Desertion",
 			tooltip : "What was life as a deserter like?",
 			func : function() {
@@ -641,8 +643,8 @@ VaughnScenes.TalkWar = function() {
 				
 				TimeStep({minute: 10});
 				
-				if(vaughn.flags["TWar"] < Vaughn.TalkWar.Desertion)
-					vaughn.flags["TWar"] = Vaughn.TalkWar.Desertion;
+				if(vaughn.flags["TWar"] < VaughnFlags.TalkWar.Desertion)
+					vaughn.flags["TWar"] = VaughnFlags.TalkWar.Desertion;
 				
 				VaughnScenes.TalkWar();
 			}, enabled : true
@@ -660,27 +662,13 @@ VaughnScenes.TalkWar = function() {
 
 /* VAUGHN SEX SCENES */
 
-
-Vaughn.prototype.SexTime = function() {
-	return WorldTime().hour < 12;
-}
-
-Vaughn.prototype.HaveDoneTerryRoleplay = function() {
-	return false; //TODO
-}
-
-Vaughn.prototype.Confronted = function() {
-	return this.flags["Talk"] & Vaughn.Talk.ConfrontFollowup;
-}
-
-
 VaughnScenes.Sex = function() {
 	var parse = {
 		breasts : function() { return player.FirstBreastRow().Short(); }
 	};
 	
-	var first = !(vaughn.flags["Talk"] & Vaughn.Talk.Sex);
-	vaughn.flags["Talk"] |= Vaughn.Talk.Sex;
+	var first = !(vaughn.flags["Talk"] & VaughnFlags.Talk.Sex);
+	vaughn.flags["Talk"] |= VaughnFlags.Talk.Sex;
 	
 	Text.Clear();
 	if(first) {
@@ -802,7 +790,7 @@ VaughnScenes.SexTitfuckBig = function() {
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	
-	vaughn.flags["Sex"] |= Vaughn.Sex.Titfuck;
+	vaughn.flags["Sex"] |= VaughnFlags.Sex.Titfuck;
 	
 	Text.Clear();
 	Text.Add("It’s a few moments before he’s able to speak again, an edge of raw emotion in his voice. <i>“All right, all right, I give. That <b>is</b> quite the rack you’ve got there, and it <b>would</b> be a pity for the both of us if it went unused. That’ll do, [playername]. That’ll do.”</i>", parse);
@@ -955,7 +943,7 @@ VaughnScenes.SexTitfuckAverage = function() {
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	
-	vaughn.flags["Sex"] |= Vaughn.Sex.Titfuck;
+	vaughn.flags["Sex"] |= VaughnFlags.Sex.Titfuck;
 	
 	Text.Clear();
 	Text.Add("The long silence that follows is awkward and anything but encouraging. The blatant way Vaughn is studying you is reminiscent of a housewife watching the scales at market, and you - well, it wouldn’t be wrong to say that you <i>did</i> put yourself on sale in a sense.", parse);
@@ -1118,7 +1106,7 @@ VaughnScenes.SexConfront = function() {
 	Text.Add("Gee, this sure went well… but you’re sure that you made the right decision. Entertaining Vaughn’s fantasy might have been the easy way out, but it wouldn’t been good for anyone in the long run. It’s probably fine to let him fume for a while, but you ought to talk to him again tomorrow evening once he’s calmed down somewhat. Maybe he’ll be less defensive and more open to reason then…", parse);
 	Text.Flush();
 	
-	vaughn.flags["Talk"] |= Vaughn.Talk.Confront;
+	vaughn.flags["Talk"] |= VaughnFlags.Talk.Confront;
 	
 	world.StepToHour(6);
 	
@@ -1171,7 +1159,7 @@ VaughnScenes.ConfrontFollowup = function() {
 	Text.Add("Vaughn mumbles something that’s neither here nor there, then sighs and lets his shoulders sag. <i>“Fine. Can we talk about something else now?”</i>", parse);
 	Text.Flush();
 	
-	vaughn.flags["Talk"] |= Vaughn.Talk.ConfrontFollowup;
+	vaughn.flags["Talk"] |= VaughnFlags.Talk.ConfrontFollowup;
 	
 	TimeStep({hour: 1});
 	

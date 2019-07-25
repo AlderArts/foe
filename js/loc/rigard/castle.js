@@ -1,7 +1,12 @@
 
 import { Event, Link, EncounterTable } from '../../event';
 import { MageTowerLoc } from './magetower';
-import { WorldTime, MoveToLocation } from '../../GAME';
+import { WorldTime, MoveToLocation, TimeStep } from '../../GAME';
+import { VaughnScenes } from '../../event/outlaws/vaughn-scenes';
+import { Season } from '../../time';
+import { Text } from '../../text';
+import { Gui } from '../../gui';
+import { VaughnFlags } from '../../event/outlaws/vaughn-flags';
 
 
 let CastleLoc = {
@@ -36,7 +41,7 @@ CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.Elodie;}, 1.0, func
 		!(rigard.flags["Nobles"] & Rigard.Nobles.Elodie) &&
 		Scenes.Global.VisitedOutlaws() &&
 		WorldTime().IsDay() &&
-		vaughn.flags["Met"] < Vaughn.Met.OnTaskLockpicks;
+		vaughn.flags["Met"] < VaughnFlags.Met.OnTaskLockpicks;
 });
 CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.RoyalGetaway;});
 CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.MagicalJackal;}, 1.0, function() {
@@ -97,15 +102,15 @@ CastleLoc.Grounds.links.push(new Link(
 
 
 CastleLoc.Grounds.events.push(new Link(
-	"Elodie", function() { return vaughn.flags["Met"] == Vaughn.Met.OnTaskLockpicks; }, true,
+	"Elodie", function() { return vaughn.flags["Met"] == VaughnFlags.Met.OnTaskLockpicks; }, true,
 	function() {
-		if(vaughn.flags["Met"] == Vaughn.Met.OnTaskLockpicks) {
+		if(vaughn.flags["Met"] == VaughnFlags.Met.OnTaskLockpicks) {
 			Text.Add("Somewhere around here, you should look for Elodie, the contact of the outlaws, and hand over the tools you were given. Vaughn said that she has some time off during evenings.");
 			Text.NL();
 		}
 	},
 	function() {
-		Scenes.Vaughn.Tasks.Lockpicks.MeetingElodie();
+		VaughnScenes.Tasks.Lockpicks.MeetingElodie();
 	}
 ));
 

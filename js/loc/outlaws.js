@@ -7,6 +7,8 @@
 import { Event, Link, EncounterTable } from '../event';
 import { Scenes } from '../scenes';
 import { WorldTime, MoveToLocation } from '../GAME';
+import { VaughnScenes } from '../event/outlaws/vaughn-scenes';
+import { Text } from '../text';
 
 let world = null;
 
@@ -48,7 +50,7 @@ OutlawsLoc.Camp.onEntry = function() {
 	else if(maria.EligableForDeaddropAlert())
 		Scenes.Maria.DeadDrops.Alert();
 	else if(vaughn.IntroAvailable())
-		Scenes.Vaughn.Introduction();
+		VaughnScenes.Introduction();
 	else
 		PrintDefaultOptions();
 }
@@ -99,10 +101,10 @@ OutlawsLoc.Camp.events.push(new Link(
 	}, true,
 	function() {
 		if(vaughn.Met())
-			Scenes.Vaughn.CampDesc();
+			VaughnScenes.CampDesc();
 	},
 	function() {
-		Scenes.Vaughn.CampApproach();
+		VaughnScenes.CampApproach();
 	}
 ));
 
