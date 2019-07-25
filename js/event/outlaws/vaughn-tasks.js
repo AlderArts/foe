@@ -2,6 +2,11 @@
 import { GetDEBUG } from '../../../app';
 import { Vaughn } from './vaughn';
 import { WorldTime, MoveToLocation, TimeStep } from '../../GAME';
+import { Text } from '../../text';
+import { Gui } from '../../gui';
+import { Jobs } from '../../job';
+import { GlobalScenes } from '../global';
+import { Items } from '../../items';
 
 let TasksScenes = {};
 
@@ -801,7 +806,7 @@ TasksScenes.Snitch.PlantEvidence = function() {
 				Text.NL();
 				
 				var mag = player.Int() + Math.random() * 20;
-				var magStage2 = Scenes.Global.MagicStage2();
+				var magStage2 = GlobalScenes.MagicStage2();
 				if(magStage2) mag += 20;
 
 				var check = 50;
