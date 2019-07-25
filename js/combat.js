@@ -2,6 +2,10 @@ import { GetDEBUG } from "../app";
 import { SetGameState, GameState } from "./gamestate";
 import { Gui } from "./gui";
 import { Input } from "./input";
+import { GAME } from "./GAME";
+import { StatusEffect } from "./statuseffect";
+import { Text } from "./text";
+import { Abilities } from "./abilities";
 
 // Create encounter with a Party() containing enemies
 function Encounter(enemy)
@@ -42,27 +46,27 @@ Encounter.prototype.PrepCombat = function() {
 	
 	curEncounter = this;
 	
-	if(party.members.length == 0)
+	if(GAME().party.members.length == 0)
 		throw "Errol: no members in party";
 	if(this.enemy.members.length == 0)
 		throw "Errol: no enemy to fight";
 		
 	// Set up combat order
-	for(var i = 0; i < party.members.length; i++)
+	for(let ent of GAME().party.members)
 		this.combatOrder.push({
-			entity  : party.members[i],
+			entity  : ent,
 			isEnemy : false});
-	for(var i = 0; i < this.enemy.members.length; i++)
+	for(let ent of this.enemy.members)
 		this.combatOrder.push({
-			entity  : this.enemy.members[i], 
+			entity  : ent, 
 			isEnemy : true,
 			aggro   : []});
 			
-	for(var i = 0; i < this.combatOrder.length; i++) {
-		this.combatOrder[i].initiative   = Math.random() * 5;
+	for(let ent of this.combatOrder) {
+		ent.initiative   = Math.random() * 5;
 		// Fill aggro table
-		if(this.combatOrder[i].isEnemy) {
-			this.combatOrder[i].entity.GetSingleTarget(this, this.combatOrder[i]);
+		if(ent.isEnemy) {
+			ent.entity.GetSingleTarget(this, ent);
 		}
 	}
 
@@ -73,10 +77,9 @@ Encounter.prototype.PrepCombat = function() {
 	}
 	
 	Gui.Callstack.push(function() {
-		for(var i = 0; i < party.members.length; i++) {
-			var e = party.members[i];
+		for(let ent of GAME().party.members) {
 			// Ressurect fallen
-			if(e.curHp < 1) e.curHp = 1;
+			if(ent.curHp < 1) ent.curHp = 1;
 		}
 		Gui.PrintDefaultOptions();
 	});
@@ -100,55 +103,51 @@ Encounter.InitiativeSorter = function(a, b) {
 
 Encounter.prototype.GetLiveEnemyArray = function() {
 	var e = new Array();
-	for(var i = 0; i < this.enemy.members.length; i++) {
-		var c = this.enemy.members[i];
-		if(!c.Incapacitated())
-			e.push(c);
+	for(let ent of this.enemy.members) {
+		if(!ent.Incapacitated())
+			e.push(ent);
 	}
 	return e;
 }
 
 Encounter.prototype.GetDownedEnemyArray = function() {
 	var e = new Array();
-	for(var i = 0; i < this.enemy.members.length; i++) {
-		var c = this.enemy.members[i];
-		if(c.Incapacitated())
-			e.push(c);
+	for(let ent of this.enemy.members) {
+		if(ent.Incapacitated())
+			e.push(ent);
 	}
 	return e;
 }
 
 Encounter.prototype.GetLivePartyArray = function() {
 	var p = new Array();
-	for(var i = 0; i < party.members.length; i++) {
-		var c = party.members[i];
-		if(!c.Incapacitated())
-			p.push(c);
+	for(let ent of GAME().party.members) {
+		if(!ent.Incapacitated())
+			p.push(ent);
 	}
 	return p;
 }
 
 Encounter.prototype.GetDownedPartyArray = function() {
 	var p = new Array();
-	for(var i = 0; i < party.members.length; i++) {
-		var c = party.members[i];
-		if(c.Incapacitated())
-			p.push(c);
+	for(let ent of GAME().party.members) {
+		if(ent.Incapacitated())
+			p.push(ent);
 	}
 	return p;
 }
 
 Encounter.prototype.GetEnemyArray = function() {
 	var e = new Array();
-	for(var i = 0; i < this.enemy.members.length; i++)
-		e.push(this.enemy.members[i]);
+	for(let ent of this.enemy.members)
+		e.push(ent);
 	return e;
 }
 
 Encounter.prototype.GetPartyArray = function() {
 	var p = new Array();
-	for(var i = 0; i < party.members.length; i++)
-		p.push(party.members[i]);
+	for(let ent of GAME().party.members)
+		p.push(ent);
 	return p;
 }
 
@@ -177,7 +176,7 @@ Encounter.prototype.SetButtons = function(activeChar, combatScreen) {
 			Input.buttons[7].SetFromAbility(encounter, entity, entity.abilities["Seduce"], BasePrompt);
 		Input.buttons[8].SetFromAbility(encounter, entity, Abilities.Wait, BasePrompt);
 		Input.buttons[9].Setup("Item", function() {
-			party.inventory.CombatInventory(encounter, entity, BasePrompt);
+			GAME().party.inventory.CombatInventory(encounter, entity, BasePrompt);
 		}, true);
 		Input.buttons[10].Setup("Submit", function() {
 			encounter.onLoss();
@@ -197,17 +196,15 @@ Encounter.prototype.SetButtons = function(activeChar, combatScreen) {
 
 
 Encounter.prototype.Cleanup = function() {
-	for(var i = 0; i < this.enemy.members.length; i++) {
-		var e = this.enemy.members[i];
-		e.ClearCombatBonuses();
-		e.combatStatus.EndOfCombat();
-		e.uniqueName = null;
+	for(let ent of this.enemy.members) {
+		ent.ClearCombatBonuses();
+		ent.combatStatus.EndOfCombat();
+		ent.uniqueName = null;
 	}
-	for(var i = 0; i < party.members.length; i++) {
-		var e = party.members[i];
-		e.ClearCombatBonuses();
-		e.combatStatus.EndOfCombat();
-		e.uniqueName = null;
+	for(let ent of GAME().party.members) {
+		ent.ClearCombatBonuses();
+		ent.combatStatus.EndOfCombat();
+		ent.uniqueName = null;
 	}
 	curEncounter = null;
 }
@@ -227,9 +224,8 @@ Encounter.prototype.onRun = function() {
 // Default loss condition: party is downed
 Encounter.prototype.LossCondition = function() {
 	var downed = true;
-	for(var i = 0; i < party.members.length; i++) {
-		var e = party.members[i];
-		if(e.Incapacitated() == false) downed = false;
+	for(let ent of GAME().party.members) {
+		if(ent.Incapacitated() == false) downed = false;
 	}
 	return downed;
 }
@@ -254,9 +250,8 @@ Encounter.prototype.onLoss = function() {
 // Default win condition: enemy party is downed
 Encounter.prototype.VictoryCondition = function() {
 	var downed = true;
-	for(var i = 0; i < this.enemy.members.length; i++) {
-		var e = this.enemy.members[i];
-		if(e.Incapacitated() == false) downed = false;
+	for(let ent of this.enemy.members) {
+		if(ent.Incapacitated() == false) downed = false;
 	}
 	return downed;
 }
@@ -273,31 +268,29 @@ Encounter.prototype.onVictory = function() {
 		coin += e.coinDrop;
 		
 		var drops = e.DropTable();
-		for(var j = 0; j < drops.length; j++) {
-			var it  = drops[j].it;
-			var num = drops[j].num || 1;
+		for(let drop of drops) {
+			var it  = drop.it;
+			var num = drop.num || 1;
 			
 			Text.Add("The party finds " + num + "x " + it.name + ".<br>");
-			party.inventory.AddItem(it, num);
+			GAME().party.inventory.AddItem(it, num);
 		}
 	}
 	
 	Text.Add("The party gains " + exp + " experience and " + coin + " coins.");
 	
-	for(var i = 0; i < party.members.length; i++) {
-		var e = party.members[i];
+	for(let ent of GAME().party.members) {
 		// Don't give exp to fallen characters
-		if(e.Incapacitated()) continue;
-		e.AddExp(exp);
+		if(ent.Incapacitated()) continue;
+		ent.AddExp(exp);
 	}
 	// Reward xp to passive characters
-	for(var i = 0; i < party.reserve.length; i++) {
-		var e = party.reserve[i];
-		e.AddExp(exp * 0.75, true);
+	for(let ent of GAME().party.reserve) {
+		ent.AddExp(exp * 0.75, true);
 	}
 	
 	// ADD COIN TO PURSE
-	party.coin += coin;
+	GAME().party.coin += coin;
 	
 	this.Cleanup();
 	
@@ -312,8 +305,8 @@ Encounter.prototype.onVictory = function() {
 }
 
 Encounter.prototype.OnIncapacitate = function(entity) {
-	for(var i=0,j=this.combatOrder.length; i<j; i++){
-		var e = this.combatOrder[i].entity;
+	for(let ent of this.combatOrder){
+		var e = ent.entity;
 		if(e == entity) {
 			// Check for sleep
 			if(e.combatStatus.stats[StatusEffect.Sleep] != null) {
@@ -478,7 +471,7 @@ Encounter.prototype.CombatTick = function() {
 			});
 			Text.NL();
 			
-			if(activeChar.entity == player)
+			if(activeChar.entity == GAME().player)
 				Text.Add("It's your turn.");
 			else
 				Text.Add(activeChar.entity.Possessive() + " turn.");
