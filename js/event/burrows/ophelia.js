@@ -18,6 +18,7 @@ import { AlchemyItems } from '../../items/alchemy';
 import { Abilities } from '../../abilities';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
+import { BodyPartType } from '../../body/bodypart';
 
 let OpheliaScenes = {};
 

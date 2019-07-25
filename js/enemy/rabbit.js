@@ -22,6 +22,8 @@ import { EncounterTable } from '../event';
 import { Text } from '../text';
 import { Gui } from '../gui';
 import { SetGameState, GameState } from '../gamestate';
+import { BodyPartType } from '../body/bodypart';
+import { Sex } from '../entity-sex';
 
 let LagomorphScenes = {};
 

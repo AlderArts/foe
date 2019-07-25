@@ -23,6 +23,7 @@ import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { SetGameState, GameState } from '../../gamestate';
 import { Time } from '../../time';
+import { BodyPartType } from '../../body/bodypart';
 
 let LagonScenes = {
 	Defeated : LagonDScenes,

@@ -14,6 +14,9 @@ import { Body } from '../../body/body';
 import { TF } from '../../tf';
 import { AppendageType } from '../../body/appendage';
 import { WorldTime } from '../../GAME';
+import { BodyPartType } from '../../body/bodypart';
+import { Sex } from '../../entity-sex';
+import { PregnancyHandler } from '../../pregnancy';
 
 let RosalinScenes = {};
 

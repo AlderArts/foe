@@ -21,6 +21,7 @@ import { Encounter } from '../combat';
 import { Text } from '../text';
 import { Gui } from '../gui';
 import { SetGameState, GameState } from '../gamestate';
+import { BodyPartType } from '../body/bodypart';
 
 let LizardsScenes = {};
 

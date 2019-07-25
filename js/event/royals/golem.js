@@ -16,6 +16,10 @@ import { Encounter } from '../../combat';
 import { SetGameState, GameState } from '../../gamestate';
 import { Gui } from '../../gui';
 import { MoveToLocation } from '../../GAME';
+import { BodyPartType } from '../../body/bodypart';
+import { Sex } from '../../entity-sex';
+import { Orifice } from '../../body/orifice';
+import { LowerBodyType } from '../../entity-desc';
 
 let GolemScenes = {};
 GolemScenes.State = {

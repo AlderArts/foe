@@ -8,6 +8,8 @@ import { Text } from "../text";
 import { Party } from "../party";
 import { Encounter } from "../combat";
 import { VaughnScenes } from "./outlaws/vaughn-scenes";
+import { BodyPartType } from "../body/bodypart";
+import { Sex } from "../entity-sex";
 
 let MirandaScenes = {};
 

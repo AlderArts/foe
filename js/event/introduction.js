@@ -25,6 +25,7 @@ import { TF } from '../tf';
 import { AppendageType } from '../body/appendage';
 import { Race } from '../body/race';
 import { Sex } from '../entity-sex';
+import { BodyPartType } from '../body/bodypart';
 
 let Intro = {};
 
@@ -1738,7 +1739,7 @@ Intro.UruSexFuckVagina = function() {
 	Text.Add("Suddenly a bit nervous, you align your [cock] with her wet opening, accidentally rubbing against her own significantly larger member. Overcome by your lust, you thrust forward into her folds, eliciting a soft moan from the omnibus. You slowly push your [cock] to the hilt, greatly enjoying the feeling.", parse);
 	Text.NL();
 
-	Sex.Vaginal(GAME().player, uru);
+	Sex.Vaginal(GAME().player, GAME().uru);
 	GAME().uru.FuckVag(GAME().uru.FirstVag(), GAME().player.FirstCock(), 5);
 	GAME().player.Fuck(GAME().player.FirstCock(), 5);
 
@@ -1775,7 +1776,7 @@ Intro.UruSexFuckVagina = function() {
 			Intro.timesSuckedUru++;
 			GAME().player.slut.IncreaseStat(100, 5);
 
-			Sex.Blowjob(GAME().player, uru);
+			Sex.Blowjob(GAME().player, GAME().uru);
 			GAME().player.FuckOral(GAME().player.Mouth(), GAME().uru.FirstCock(), 2);
 			GAME().uru.Fuck(GAME().uru.FirstCock(), 2);
 
@@ -1885,7 +1886,7 @@ Intro.UruSexFuckAnal = function() {
 			suckeddick = true;
 			Intro.timesSuckedUru++;
 
-			Sex.Blowjob(GAME().player, uru);
+			Sex.Blowjob(GAME().player, GAME().uru);
 			GAME().player.FuckOral(GAME().player.Mouth(), GAME().uru.FirstCock(), 2);
 			GAME().uru.Fuck(GAME().uru.FirstCock(), 2);
 
@@ -1924,7 +1925,7 @@ Intro.UruSexFuckAnal = function() {
 		Text.Add("<i>“Ah, so this was what you had in mind,”</i> the horny demon moans appreciatively while you grind your lubed [cock] against her back door. Taking the hint, you slowly push against her tight opening. The sexual fluids coating your [cock] certainly help, but her butt is still incredibly tight. With a grunt from you, and a delighted scream from Uru, you manage to push an inch of your member inside her.", parse);
 		Text.NL();
 
-		Sex.Anal(GAME().player, uru);
+		Sex.Anal(GAME().player, GAME().uru);
 		GAME().uru.FuckAnal(GAME().uru.Butt(), GAME().player.FirstCock(), 5);
 		GAME().player.Fuck(GAME().player.FirstCock(), 5);
 
@@ -2137,7 +2138,7 @@ Intro.UruSexGetFuckedSuck = function() {
 	}
 	Text.NL();
 
-	Sex.Blowjob(GAME().player, uru);
+	Sex.Blowjob(GAME().player, GAME().uru);
 	GAME().player.FuckOral(GAME().player.Mouth(), GAME().uru.FirstCock(), 2);
 	GAME().uru.Fuck(GAME().uru.FirstCock(), 2);
 
@@ -2207,12 +2208,12 @@ Intro.UruSexGetFuckedLead = function() {
 	Text.Add("You cut her off with a deep kiss as you straddle her hips, her perky " + uruCockDesc() + " rubbing against your soft undercarriage. Positioning yourself so that her cock is pointing straight at your [target], you sigh with euphoria as you ease yourself down, relishing in the feeling of the omnibus entering you.", parse);
 
 	if(Intro.fuckedTarget == BodyPartType.ass) {
-		Sex.Anal(uru, GAME().player);
+		Sex.Anal(GAME().uru, GAME().player);
 		GAME().player.FuckAnal(GAME().player.Butt(), GAME().uru.FirstCock(), 5);
 		GAME().uru.Fuck(GAME().uru.FirstCock(), 5);
 	}
 	else {
-		Sex.Vaginal(uru, GAME().player);
+		Sex.Vaginal(GAME().uru, GAME().player);
 		GAME().player.FuckVag(GAME().player.FirstVag(), GAME().uru.FirstCock(), 5);
 		GAME().uru.Fuck(GAME().uru.FirstCock(), 5);
 	}
@@ -2352,12 +2353,12 @@ Intro.UruSexGetFuckedPassive2 = function() {
 	Text.NL();
 
 	if(Intro.fuckedTarget == BodyPartType.vagina) {
-		Sex.Vaginal(uru, GAME().player);
+		Sex.Vaginal(GAME().uru, GAME().player);
 		GAME().player.FuckVag(GAME().player.FirstVag(), GAME().uru.FirstCock(), 5);
 		GAME().uru.Fuck(GAME().uru.FirstCock(), 5);
 	}
 	else {
-		Sex.Anal(uru, GAME().player);
+		Sex.Anal(GAME().uru, GAME().player);
 		GAME().player.FuckAnal(GAME().player.Butt(), GAME().uru.FirstCock(), 5);
 		GAME().uru.Fuck(GAME().uru.FirstCock(), 5);
 	}
@@ -2788,16 +2789,16 @@ Intro.NomadsWakingUp = function() {
 	var options = new Array();
 	options.push({ nameStr : "Male",
 		func : function() {
-			kiakai.flags["InitialGender"] = Gender.male;
-			kiakai.InitCharacter(Gender.male);
+			GAME().kiakai.flags["InitialGender"] = Gender.male;
+			GAME().kiakai.InitCharacter(Gender.male);
 			Intro.MeetingKia();
 		}, enabled : true,
 		tooltip : "Is that a bulge in your pants?"
 	});
 	options.push({ nameStr : "Female",
 		func : function() {
-			kiakai.flags["InitialGender"] = Gender.female;
-			kiakai.InitCharacter(Gender.female);
+			GAME().kiakai.flags["InitialGender"] = Gender.female;
+			GAME().kiakai.InitCharacter(Gender.female);
 			Intro.MeetingKia();
 		}, enabled : true,
 		tooltip : "Well, it <i>looks</i> like a girl..."
@@ -2807,14 +2808,14 @@ Intro.NomadsWakingUp = function() {
 
 Intro.MeetingKia = function() {
 	var parse = {
-		name : kiakai.name
+		name : GAME().kiakai.name
 	};
-	parse = kiakai.ParserPronouns(parse);
+	parse = GAME().kiakai.ParserPronouns(parse);
 
 	Text.Clear();
 
 	Text.Add("You gently dislodge yourself from the horny elf, pushing yourself into sitting position. Your chest is bare, but someone has managed to get you into a comfortable pair of pants. A better look at your bedmate confirms that ");
-	if(kiakai.Gender() == Gender.female)
+	if(GAME().kiakai.Gender() == Gender.female)
 		Text.Add("she is indeed a she, the soft swell of her small breasts and her slightly widened hips both telltale signs. ");
 	else
 		Text.Add("he is indeed a he, his flat chest, slim figure and the slight bulge between his legs being telltale signs. ");
@@ -2834,10 +2835,10 @@ Intro.MeetingKia = function() {
 
 Intro.KiaQnA = function() {
 	var parse = {
-		name : kiakai.name,
-		boygirl : kiakai.mfTrue("boy", "girl")
+		name : GAME().kiakai.name,
+		boygirl : GAME().kiakai.mfTrue("boy", "girl")
 	};
-	parse = kiakai.ParserPronouns(parse);
+	parse = GAME().kiakai.ParserPronouns(parse);
 
 	Text.Flush();
 	// [Aria][Eden][Kia/Kai]["Healing"]
@@ -2884,10 +2885,10 @@ Intro.KiaQnA = function() {
 		});
 	}
 	if(!Intro.KiaTalkedAboutSelf) {
-		options.push({ nameStr : kiakai.name,
+		options.push({ nameStr : GAME().kiakai.name,
 			func : function() {
 				Text.Clear();
-				parse["title"] = kiakai.mfTrue("priest", "priestess");
+				parse["title"] = GAME().kiakai.mfTrue("priest", "priestess");
 				Text.Add("<i>“I have been in the service of Lady Aria for some thirty years now. I am honored to be a member of her priesthood.”</i>");
 				Text.NL();
 				Text.Add("Hold on. Thirty years? The slender elf hardly looks more than eighteen.");
@@ -2900,7 +2901,7 @@ Intro.KiaQnA = function() {
 
 				Intro.KiaQnA();
 			}, enabled : true,
-			tooltip : Text.Parse("How about prodding the elf to reveal a bit more about [himher]self?", {himher : kiakai.himher()})
+			tooltip : Text.Parse("How about prodding the elf to reveal a bit more about [himher]self?", {himher : GAME().kiakai.himher()})
 		});
 	}
 	if(!Intro.KiaTalkedAboutHealing) {
@@ -2928,7 +2929,7 @@ Intro.KiaQnA = function() {
 
 Intro.KiaSurroundings = function() {
 	var parse = {
-		name : kiakai.name
+		name : GAME().kiakai.name
 	}
 	Text.Clear();
 
@@ -2958,9 +2959,9 @@ Intro.Outset = {
 
 Intro.KiaDecideOutset = function() {
 	var parse = {
-		name : kiakai.name
+		name : GAME().kiakai.name
 	};
-	parse = kiakai.ParserPronouns(parse);
+	parse = GAME().kiakai.ParserPronouns(parse);
 
 	Text.Clear();
 
@@ -2978,8 +2979,8 @@ Intro.KiaDecideOutset = function() {
 		tooltip : "The elf seems to be earnest and the cause good, why not join each other?",
 		func : function() {
 			gameCache.flags["IntroOutset"] = Intro.Outset.SaveWorld;
-			kiakai.flags["Attitude"] = Kiakai.Attitude.Nice;
-			kiakai.relation.IncreaseStat(100, 10);
+			GAME().kiakai.flags["Attitude"] = Kiakai.Attitude.Nice;
+			GAME().kiakai.relation.IncreaseStat(100, 10);
 
 			Text.Add("You agree, the demon must be stopped, and following the advice of [name] seems like a good start, at least. You also have to find out more about this land you have found yourself stuck in.", parse);
 			Text.NL();
@@ -2987,7 +2988,7 @@ Intro.KiaDecideOutset = function() {
 			Text.NL();
 			Text.Add("<b>[name] joins your party!</b>", parse);
 
-			GAME().party.SwitchIn(kiakai);
+			GAME().party.SwitchIn(GAME().kiakai);
 			Text.Flush();
 			Gui.NextPrompt(Intro.KiaNiceSex);
 		}, enabled : true
@@ -3010,14 +3011,14 @@ Intro.KiaDecideOutset = function() {
 			options.push({ nameStr : "Accept",
 				tooltip : "A friend on the road could certainly help.",
 				func : function() {
-					kiakai.flags["Attitude"] = Kiakai.Attitude.Nice;
-					kiakai.relation.IncreaseStat(100, 5);
+					GAME().kiakai.flags["Attitude"] = Kiakai.Attitude.Nice;
+					GAME().kiakai.relation.IncreaseStat(100, 5);
 
 					Text.Add("You accept the company of the elf, feeling glad that you will have someone along who knows the land.");
 					Text.NL();
 					Text.Add("<b>[name] joins your party!</b>", parse);
 
-					GAME().party.SwitchIn(kiakai);
+					GAME().party.SwitchIn(GAME().kiakai);
 					Text.Flush();
 					Gui.NextPrompt(Intro.KiaNiceSex);
 				}, enabled : true
@@ -3025,22 +3026,22 @@ Intro.KiaDecideOutset = function() {
 			options.push({ nameStr : "I'm the boss",
 				tooltip : Text.Parse("The elf could be useful to you, but [heshe] needs to be put in [hisher] place.", parse),
 				func : function() {
-					kiakai.flags["Attitude"] = Kiakai.Attitude.Naughty;
-					kiakai.relation.DecreaseStat(-100, 5);
+					GAME().kiakai.flags["Attitude"] = Kiakai.Attitude.Naughty;
+					GAME().kiakai.relation.DecreaseStat(-100, 5);
 
 					Text.Add("<i>“You may come along if you wish, but don't think that you, or your Lady, is in charge here,”</i> you declare. [name] looks shocked for a moment, but humbly nods, content that [heshe] can follow you and help you.", parse);
 					Text.NL();
 					Text.Add("<b>[name] joins your party!</b>", parse);
 
-					GAME().party.SwitchIn(kiakai);
+					GAME().party.SwitchIn(GAME().kiakai);
 					Text.Flush();
 					Gui.NextPrompt(Intro.KiaNaughtySex);
 				}, enabled : true
 			});
 			options.push({ nameStr : "Decline",
-				tooltip : Text.Parse("You'll probably be better off on your own, could you really trust [name]?", {name : kiakai.name}),
+				tooltip : Text.Parse("You'll probably be better off on your own, could you really trust [name]?", {name : GAME().kiakai.name}),
 				func : function() {
-					kiakai.flags["Attitude"] = Kiakai.Attitude.Neutral;
+					GAME().kiakai.flags["Attitude"] = Kiakai.Attitude.Neutral;
 					Text.Add("<i>“I understand,”</i> the elf nods sadly. <i>“I will try to make inquiries on my own, then. Should you ever change your mind, find me at the center, at Aria's shrine.”</i> The elf bows to you and quietly moves toward the entrance of the tent, leaving you to your own devices.");
 					Text.Flush();
 					Gui.NextPrompt(Intro.Finalizing);
@@ -3054,8 +3055,8 @@ Intro.KiaDecideOutset = function() {
 		func : function() {
 			gameCache.flags["IntroOutset"] = Intro.Outset.GainPower;
 			GAME().player.subDom.IncreaseStat(100, 5);
-			kiakai.subDom.DecreaseStat(-100, 5);
-			kiakai.relation.DecreaseStat(-100, 10);
+			GAME().kiakai.subDom.DecreaseStat(-100, 5);
+			GAME().kiakai.relation.DecreaseStat(-100, 10);
 
 			Text.Add("<i>“That's cute and all, but this isn't how we're going to do things,”</i> you dismiss the holier-than-thou elf.");
 			Text.NL();
@@ -3072,12 +3073,12 @@ Intro.KiaDecideOutset = function() {
 			options.push({ nameStr : "I'm the boss",
 				tooltip : Text.Parse("The elf could be useful to you, but [heshe] needs to be put in [hisher] place.", parse),
 				func : function() {
-					kiakai.flags["Attitude"] = Kiakai.Attitude.Naughty;
+					GAME().kiakai.flags["Attitude"] = Kiakai.Attitude.Naughty;
 					Text.Add("<i>“You may come along if you wish, but don't think that you, or your Lady, is in charge here,”</i> you declare. [name] looks shocked for a moment, but humbly nods, content that [heshe] can follow you and help you.", parse);
 					Text.NL();
 					Text.Add("<b>[name] joins your party!</b>", parse);
 
-					GAME().party.SwitchIn(kiakai);
+					GAME().party.SwitchIn(GAME().kiakai);
 					Text.Flush();
 					Gui.NextPrompt(Intro.KiaNaughtySex);
 				}, enabled : true
@@ -3085,7 +3086,7 @@ Intro.KiaDecideOutset = function() {
 			options.push({ nameStr : "Decline",
 				tooltip : "What use could the elf possibly be?",
 				func : function() {
-					kiakai.flags["Attitude"] = Kiakai.Attitude.Neutral;
+					GAME().kiakai.flags["Attitude"] = Kiakai.Attitude.Neutral;
 					Text.Add("<i>“I understand,”</i> the elf nods sadly. <i>“I will try to make inquiries on my own, then. Should you ever change your mind, find me at the center, at Aria's shrine.”</i> The elf bows to you and quietly moves toward the entrance of the tent, leaving you to your own devices.");
 					Text.Flush();
 					Gui.NextPrompt(Intro.Finalizing);
@@ -3100,10 +3101,10 @@ Intro.KiaDecideOutset = function() {
 
 Intro.KiaNiceSex = function() {
 	var parse = {
-		name : kiakai.name,
-		boygirl : kiakai.mfTrue("boy", "girl")
+		name : GAME().kiakai.name,
+		boygirl : GAME().kiakai.mfTrue("boy", "girl")
 	};
-	parse = kiakai.ParserPronouns(parse);
+	parse = GAME().kiakai.ParserPronouns(parse);
 	parse = GAME().player.ParserTags(parse);
 
 	Text.Clear();
@@ -3115,17 +3116,17 @@ Intro.KiaNiceSex = function() {
 
 	// [Male][Female]
 	var options = new Array();
-	options.push({ nameStr : kiakai.name,
+	options.push({ nameStr : GAME().kiakai.name,
 		tooltip : Text.Parse("How about asking [name] to finish [hisher] healing session, you could use some release.", parse),
 		func : function() {
-			kiakai.flags["Sexed"]++;
+			GAME().kiakai.flags["Sexed"]++;
 
 			Text.Add("<i>“Actually, before we head out, could you help me with something?”</i>");
 			Text.NL();
 			Text.Add("<i>“I would love to aid you, what is on your mind?”</i> the elf looks at you inquiringly. You indicate that you could use some more of that healing to get your body in shape. Blushing slightly, [name] motions for you to lie on the bedding. With a naughty grin, you recline as the elven [boygirl] straddles you and begins to massage your [breasts] and nibble your nipples. You take a moment to enjoy [hisher] attentions, before gently pushing [hisher] head lower.", parse);
 			Text.NL();
 			Text.Add("The elf gives you a long gaze through [hisher] thick lashes, then shifts [himher]self to be propped against your side", parse);
-			if(kiakai.Gender() == Gender.male)
+			if(GAME().kiakai.Gender() == Gender.male)
 				Text.Add(", his rising erection bumping against your thigh");
 			Text.Add(". Moving [hisher] hands slowly over your stomach and toward your crotch, [name] leans over to plant a series of kisses around your navel. The elf trails lower and lower, reaching the waistline of your pants, [heshe] ceremoniously undoes them using only [hisher] teeth, then slowly pulls them off your legs.", parse);
 			Text.NL();
@@ -3133,25 +3134,25 @@ Intro.KiaNiceSex = function() {
 			if(GAME().player.Gender() == Gender.female) {
 				Text.Add("You shiver as the elf dips one of [hisher] fingers into your sopping wet [vag], lightly teasing your labia with [hisher] other digits.", parse);
 
-				Sex.Cunnilingus(kiakai, GAME().player);
-				kiakai.Fuck(null, 2);
+				Sex.Cunnilingus(GAME().kiakai, GAME().player);
+				GAME().kiakai.Fuck(null, 2);
 				GAME().player.Fuck(null, 2);
 			}
 			else if(GAME().player.Gender() == Gender.male) {
 				Text.Add("Your stiff [cock] springs to attention as it is bared, almost slapping the elf in the face. Using careful touches and light pecks, [name] gently nurses it to full stiffness.", parse);
-				Sex.Blowjob(kiakai, GAME().player);
-				kiakai.FuckOral(kiakai.Mouth(), GAME().player.FirstCock(), 2);
+				Sex.Blowjob(GAME().kiakai, GAME().player);
+				GAME().kiakai.FuckOral(GAME().kiakai.Mouth(), GAME().player.FirstCock(), 2);
 				GAME().player.Fuck(GAME().player.FirstCock(), 2);
 			}
 			else {
 				Text.Add("Your [cock] springs to attention as it is bared, almost slapping the elf in the face. <i>“W-wow, I wasn't expecting it to be so... big,”</i> [name] reverently whispers. Apparently, the elf got [himher]self a good look at your unusual genitalia when clothing you, though it did not seem to prepare [himher] for your full erection. [HeShe] teases your female parts with one hand while planting hot kisses and licks on your [cock].", parse);
 
-				Sex.Cunnilingus(kiakai, GAME().player);
-				kiakai.Fuck(null, 2);
+				Sex.Cunnilingus(GAME().kiakai, GAME().player);
+				GAME().kiakai.Fuck(null, 2);
 				GAME().player.Fuck(null, 2);
 
-				Sex.Blowjob(kiakai, GAME().player);
-				kiakai.FuckOral(kiakai.Mouth(), GAME().player.FirstCock(), 2);
+				Sex.Blowjob(GAME().kiakai, GAME().player);
+				GAME().kiakai.FuckOral(GAME().kiakai.Mouth(), GAME().player.FirstCock(), 2);
 				GAME().player.Fuck(GAME().player.FirstCock(), 2);
 			}
 			Text.NL();
@@ -3182,10 +3183,10 @@ Intro.KiaNiceSex = function() {
 
 Intro.KiaNiceSex69 = function() {
 	var parse = {
-		name : kiakai.name
+		name : GAME().kiakai.name
 	};
-	parse = kiakai.ParserPronouns(parse);
-	parse = kiakai.ParserTags(parse, "k");
+	parse = GAME().kiakai.ParserPronouns(parse);
+	parse = GAME().kiakai.ParserTags(parse, "k");
 	parse = GAME().player.ParserTags(parse);
 
 	GAME().player.AddLustFraction(1);
@@ -3195,27 +3196,27 @@ Intro.KiaNiceSex69 = function() {
 
 	Text.Flush();
 	var options = new Array();
-	if(kiakai.NumVags() > 0) {
+	if(GAME().kiakai.NumVags() > 0) {
 		options.push({ nameStr : "Vagina",
 			tooltip : Text.Parse("[name] deserves some attention too, how about eating [himher] out?", parse),
 			func : function() {
 				Text.Clear();
-				Sex.Cunnilingus(GAME().player, kiakai);
+				Sex.Cunnilingus(GAME().player, GAME().kiakai);
 				GAME().player.Fuck(null, 1);
-				kiakai.Fuck(null, 1);
+				GAME().kiakai.Fuck(null, 1);
 				Text.Add("Deciding to return the favor, you carefully lift the hem of the elf's robe, exposing [hisher] white panties. Pulling them aside, you expose a tight pink slit, absolutely moist with female juices. Humming to yourself, you lean in to administer some 'healing' of your own. Judging from the muffled gasps down between your legs, the effort is much appreciated.", parse);
 				Gui.PrintDefaultOptions();
 			}, enabled : true
 		});
 	}
-	if(kiakai.NumCocks() > 0) {
+	if(GAME().kiakai.NumCocks() > 0) {
 		options.push({ nameStr : "Cock",
 		tooltip : Text.Parse("[name] deserves some attention too, and that cock looks rather juicy...", parse),
 			func : function() {
 				Text.Clear();
-				Sex.Blowjob(GAME().player, kiakai);
-				GAME().player.FuckOral(GAME().player.Mouth(), kiakai.FirstCock(), 1);
-				kiakai.Fuck(kiakai.FirstCock(), 1);
+				Sex.Blowjob(GAME().player, GAME().kiakai);
+				GAME().player.FuckOral(GAME().player.Mouth(), GAME().kiakai.FirstCock(), 1);
+				GAME().kiakai.Fuck(GAME().kiakai.FirstCock(), 1);
 				Text.Add("Deciding to return the favor, you carefully lift the hem of the elf's robe, exposing [hisher] white panties. Pulling them aside, you free the elf's [kcock], hard from the excitement. Humming to yourself, you lean in to administer some 'healing' of your own. Judging from the muffled gasps down between your legs, the effort is much appreciated.", parse);
 				Gui.PrintDefaultOptions();
 			}, enabled : true
@@ -3226,9 +3227,9 @@ Intro.KiaNiceSex69 = function() {
 		func : function() {
 			Text.Clear();
 			GAME().player.AddSexExp(2);
-			kiakai.AddSexExp(2);
-			kiakai.flags["AnalExp"] = 1;
-			parse["gen"] = kiakai.FirstVag() ? "wet slit" : "stiff cock";
+			GAME().kiakai.AddSexExp(2);
+			GAME().kiakai.flags["AnalExp"] = 1;
+			parse["gen"] = GAME().kiakai.FirstVag() ? "wet slit" : "stiff cock";
 			Text.Add("Deciding to return the favor, you carefully lift the hem of the elf's robe, exposing [hisher] white panties. Licking your lips, you pull the panties down, ignoring [name]'s [gen] for now. Aiming your attention slightly higher up, you wet one of your fingers with saliva and plunge it into [hisher] tight rosebud. Judging from the muffled gasps down between your legs, the effort is much appreciated.", parse);
 			sucking = false;
 			fingering = true;
@@ -3263,14 +3264,14 @@ Intro.KiaNiceSex69 = function() {
 
 		if(sucking) {
 			Text.Add("Your own sensual licks also bear fruit, ");
-			if(kiakai.Gender() == Gender.male) Text.Add("as your tongue is splattered in salty cream from the elf's quivering cock. ");
+			if(GAME().kiakai.Gender() == Gender.male) Text.Add("as your tongue is splattered in salty cream from the elf's quivering cock. ");
 			else Text.Add("as your tongue is battered with sweet-tasting girl-cum. ");
 			Text.Add("[HisHer] head buried between your legs, [name] lets out a shuddering sigh, utterly spent.", parse);
 			Text.NL();
 		}
 		else if(fingering) {
 			Text.Add("Your own sensual touches also bear fruit, ");
-			if(kiakai.Gender() == Gender.male) Text.Add("as the elf's cock suddenly stiffens and unloads a batch of sticky fluid on your chest. ");
+			if(GAME().kiakai.Gender() == Gender.male) Text.Add("as the elf's cock suddenly stiffens and unloads a batch of sticky fluid on your chest. ");
 			else Text.Add("as the elf's hips tremble, streams of clear liquid dripping from her untouched vaginal tunnel. ");
 			Text.Add("Smiling, you remove three fingers from the elf's once incredibly tight back door, watching as it quickly closes up. Seems like [heshe] enjoyed it, perhaps you could convince [himher] to let you stick something else in that tight hole another time...", parse);
 			Text.NL();
@@ -3278,8 +3279,8 @@ Intro.KiaNiceSex69 = function() {
 
 		Text.Add("[name] swallows your fluids, licking [hisher] lips with a satisfied smile on [hisher] face before silently turning around to face you. The two of you rest for a bit, before restoring your clothes in a slightly embarrassed silence. You have a feeling that the elf would be happy healing you a few more times, were you to ask. It would seem you have found yourself quite the horny travel companion.", parse);
 
-		kiakai.slut.IncreaseStat(100, 5);
-		kiakai.relation.IncreaseStat(100, 5);
+		GAME().kiakai.slut.IncreaseStat(100, 5);
+		GAME().kiakai.relation.IncreaseStat(100, 5);
 		TimeStep({minute: 20});
 		GAME().player.AddLustFraction(-1);
 
@@ -3290,11 +3291,11 @@ Intro.KiaNiceSex69 = function() {
 
 Intro.KiaNaughtySex = function() {
 	var parse = {
-		name : kiakai.name,
+		name : GAME().kiakai.name,
 		stutterName : GAME().player.name[0] + "-" + GAME().player.name
 	};
 	parse = GAME().player.ParserTags(parse);
-	parse = kiakai.ParserPronouns(parse);
+	parse = GAME().kiakai.ParserPronouns(parse);
 
 	GAME().player.AddLustFraction(1);
 
@@ -3309,10 +3310,10 @@ Intro.KiaNaughtySex = function() {
 		options.push({ nameStr : "Blowjob",
 			tooltip : Text.Parse("Your cock needs release, and [name] looks like [heshe] has the perfect mouth to provide it.", parse),
 			func : function() {
-				kiakai.flags["Sexed"]++;
+				GAME().kiakai.flags["Sexed"]++;
 
-				Sex.Blowjob(kiakai, GAME().player);
-				kiakai.FuckOral(kiakai.Mouth(), GAME().player.FirstCock(), 4);
+				Sex.Blowjob(GAME().kiakai, GAME().player);
+				GAME().kiakai.FuckOral(GAME().kiakai.Mouth(), GAME().player.FirstCock(), 4);
 				GAME().player.Fuck(GAME().player.FirstCock(), 4);
 
 				Text.Add("<i>“Before we go, you should finish what you started,”</i> you insist, smirking at the confused elf.");
@@ -3332,9 +3333,9 @@ Intro.KiaNaughtySex = function() {
 				Text.Add("Neither of you speak as you put your clothes on again. You get a feeling that your slutty companion might be receptive of more of this later, and that [heshe] will be more subdued from now on.", parse);
 
 				GAME().player.subDom.IncreaseStat(100, 5);
-				kiakai.subDom.DecreaseStat(-100, 5);
-				kiakai.slut.IncreaseStat(100, 5);
-				kiakai.relation.DecreaseStat(-100, 5);
+				GAME().kiakai.subDom.DecreaseStat(-100, 5);
+				GAME().kiakai.slut.IncreaseStat(100, 5);
+				GAME().kiakai.relation.DecreaseStat(-100, 5);
 				TimeStep({minute: 20});
 				GAME().player.AddLustFraction(-1);
 
@@ -3347,10 +3348,10 @@ Intro.KiaNaughtySex = function() {
 		options.push({ nameStr : "Get eaten",
 			tooltip : Text.Parse("Your cunt is itching for release. Straddling [name]'s face and letting [himher] eat you out should hit the spot.", parse),
 			func : function() {
-				kiakai.flags["Sexed"]++;
+				GAME().kiakai.flags["Sexed"]++;
 
-				Sex.Cunnilingus(kiakai, GAME().player);
-				kiakai.Fuck(null, 4);
+				Sex.Cunnilingus(GAME().kiakai, GAME().player);
+				GAME().kiakai.Fuck(null, 4);
 				GAME().player.Fuck(null, 4);
 
 				Text.Add("<i>“Before we go, you should finish what you started,”</i> you insist, smirking at the confused elf.");
@@ -3373,9 +3374,9 @@ Intro.KiaNaughtySex = function() {
 				Text.Add("Neither of you speak as you put your clothes on again. You get a feeling that your slutty companion might be receptive of more of this later, and that [heshe] will be more subdued from now on.", parse);
 
 				GAME().player.subDom.IncreaseStat(100, 5);
-				kiakai.subDom.DecreaseStat(-100, 5);
-				kiakai.slut.IncreaseStat(100, 5);
-				kiakai.relation.DecreaseStat(-100, 5);
+				GAME().kiakai.subDom.DecreaseStat(-100, 5);
+				GAME().kiakai.slut.IncreaseStat(100, 5);
+				GAME().kiakai.relation.DecreaseStat(-100, 5);
 				TimeStep({minute: 20});
 				GAME().player.AddLustFraction(-1);
 
@@ -3400,9 +3401,9 @@ Intro.Finalizing = function() {
 	Text.Clear();
 
 	var parse = {
-		name  : kiakai.name,
-		HeShe : kiakai.HeShe(),
-		i     : GAME().party.InParty(kiakai) ? "we" : "I"
+		name  : GAME().kiakai.name,
+		HeShe : GAME().kiakai.HeShe(),
+		i     : GAME().party.InParty(GAME().kiakai) ? "we" : "I"
 	};
 	if(GAME().player.flags["startJob"] == JobEnum.Scholar)
 		parse["job"] = "Scholar";
