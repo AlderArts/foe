@@ -2432,7 +2432,7 @@ Intro.UruSexAftermath = function() {
 	Text.Clear();
 
 	// Soul-sucking is tiring
-	GAME().player.curSp.base = 0;
+	GAME().player.curSp = 0;
 
 	Text.Add("<i>“Aww... and things were just starting to get fun,”</i> Uru complains as she stands above your fallen form. She trails one of her sharp nails - colored black, you idly note - down your stomach and toward your exposed crotch. <i>“There is sooo much you will tell me,”</i> she purrs, <i>“Why not start with how you got here, again? </i>");
 	if(GAME().uru.flags["Intro"] & Uru.IntroFlags.ToldUruAboutMirror)

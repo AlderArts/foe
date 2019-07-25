@@ -857,6 +857,8 @@ Gui.RenderStatsScreen = function(context) {
 	context.fillText("Sex level: ", 0, 380);
 	context.fillText("Sexp: ", 0, 410);
 
+	let player = GAME().player;
+
 	context.translate(300, 0);
 	context.textAlign = 'right';
 	context.fillText(Math.floor(player.strength.Get()), 0, 0);
