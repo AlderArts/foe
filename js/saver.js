@@ -2,6 +2,7 @@ import { Gui } from './gui';
 import { isOnline } from './gamestate';
 import { Text } from './text';
 import { SetGameCache, GameCache } from './GAME';
+import { loadfileOverlay } from './fileoverlay';
 
 let Saver = {}
 
@@ -181,11 +182,6 @@ Saver.Clear = function() {
 			delete localStorage["savedata" + i];
 		}
 	}
-}
-
-export function loadfileOverlay() {
-	var el = document.getElementById("overlay_load");
-	el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
 }
 
 Saver.OnLoadFromFileClick = function() {

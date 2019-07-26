@@ -3,7 +3,7 @@ import { Images, LoadImages, assetsOverlay } from './assets';
 import { Gui } from './gui';
 import { VERSION_STRING, GetRenderPictures, SetRenderPictures, GetDEBUG, SetDEBUG } from '../app';
 import { Input } from './input';
-import { Saver, loadfileOverlay } from './saver';
+import { Saver } from './saver';
 import { CreditsScreen } from './credits';
 import { CacheToGame } from './gamecache';
 import { GameState, setOnline, isOnline, SetGameState } from './gamestate';
@@ -11,6 +11,7 @@ import { DataPrompt } from './exploration';
 import { Text } from './text';
 import { Intro } from './event/introduction';
 import { SetGameCache } from './GAME';
+import { loadfileOverlay } from './fileoverlay';
 
 // Prevent selection
 $(function() {

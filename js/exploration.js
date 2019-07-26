@@ -13,7 +13,7 @@ import { GAME, GameCache } from './GAME';
 import { Text } from './text';
 import { Input } from './input';
 import { Images } from './assets';
-import { loadfileOverlay } from './saver';
+import { loadfileOverlay } from './fileoverlay';
 //import { Alchemy } from './alchemy'; TODO Circular dep
 //import { Quest } from './quest'; TODO Circular dep
 
