@@ -100,7 +100,7 @@ GladeLoc.events.push(new Link(
 
 GladeLoc.onEntry = function() {
 	if(glade.flags["Visit"] >= DryadGlade.Visit.DefeatedOrchid) {
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 		return;
 	}
 	
@@ -697,7 +697,7 @@ DryadGladeScenes.MotherTreePrompt = function() {
 		}, enabled : true,
 		tooltip : Text.Parse("Ask her to use her powers to heal you[comp].", parse)
 	});
-	Gui.SetButtonsFromList(options, true, PrintDefaultOptions);
+	Gui.SetButtonsFromList(options, true, Gui.PrintDefaultOptions);
 }
 
 DryadGladeScenes.MotherTreeTalk = function() {

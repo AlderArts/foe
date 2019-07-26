@@ -317,7 +317,7 @@ PlainsLoc.Gate.onEntry = function() {
 	if(miranda.flags["Met"] == 0)
 		Scenes.Miranda.WelcomeToRigard();
 	else
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 }
 PlainsLoc.Gate.description = function() {
 	Text.Add("You are standing on a split in the road leading from the great plains to the city of Rigard. Just up ahead you can see the gates of the great city, and the castle towering above a river flowing beside the town. ");
@@ -375,7 +375,7 @@ PlainsLoc.Gate.links.push(new Link(
 				Text.NL();
 			}
 			Text.Flush();
-			PrintDefaultOptions(true);
+			Gui.PrintDefaultOptions(true);
 		}
 	}
 ));

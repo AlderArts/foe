@@ -104,7 +104,7 @@ NomadsLoc.Fireplace.onEntry = function() {
 		(WorldTime().hour < 22))
 		HalloweenScenes.PieIntro();
 	else
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 }
 
 NomadsLoc.Fireplace.description = function() {

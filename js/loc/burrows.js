@@ -197,7 +197,7 @@ BurrowsLoc.Entrance.onEntry = function() {
 		BurrowsScenes.FirstApproach();
 	}
 	else
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 }
 
 

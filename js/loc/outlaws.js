@@ -52,7 +52,7 @@ OutlawsLoc.Camp.onEntry = function() {
 	else if(vaughn.IntroAvailable())
 		VaughnScenes.Introduction();
 	else
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 }
 
 OutlawsLoc.Camp.links.push(new Link(
@@ -209,7 +209,7 @@ OutlawsLoc.Infirmary.onEntry = function() {
 	if(aquilius.flags["Met"] == 0)
 		Scenes.Aquilius.FirstMeeting();
 	else
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 }
 
 OutlawsLoc.Infirmary.links.push(new Link(

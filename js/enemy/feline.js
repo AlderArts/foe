@@ -822,7 +822,7 @@ FelinesScenes.WinCatchVag = function(mainCat, enemy) {
 			FelinesScenes.Impregnate(player, mainCat);
 
 			Text.Add("As if responding to your request, the feline yowls loudly and bucks against you as hard as [heshe] can. Moments later, you cry out as you feel [hisher] warm seed pumping deep into you, triggering your own orgasm as you flood your respective crotches in girl-juice.", parse);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	options.push({ nameStr : "No",
@@ -835,7 +835,7 @@ FelinesScenes.WinCatchVag = function(mainCat, enemy) {
 			player.OrgasmCum();
 			
 			Text.Add("[HeShe] yowls loudly as [heshe] reaches [hisher] climax, spraying your front with kitty-jism. The feeling of [hisher] dick rubbing against your nethers as [hisher] barbs prickle your [clit] is enough to trigger your own orgasm, and you cry out as your femcum splashes onto the [cat]’s lap below.", parse);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 
@@ -1017,7 +1017,7 @@ FelinesScenes.WinFuckVag = function(cat, group, enc, cocks, numFemales) {
 			Text.Add("[Possessive] companion[s] [is] looking on, perhaps in jealousy or apprehension, not that you care either way. If you still feel in the mood for it, perhaps you’ll give them a good fucking too.", parse);
 		}
 
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 	}
 	else {
 		Text.Add("No doubt you are acting quite differently from her usual mates - intimate and loving while still giving it to her hard and deep. You lean down, locking lips with the feline, your [tongue] wrestling with her rough tongue. Rolling over, you let her be on top a while, stretching back languidly as the aroused cat rides your [cock]. She moans lustfully, happily grinding her hips against yours as she willfully impales herself on you.", parse);
@@ -1044,7 +1044,7 @@ FelinesScenes.WinFuckVag = function(cat, group, enc, cocks, numFemales) {
 					Text.Flush();
 
 					player.subDom.DecreaseStat(-20, 1);
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 				}, enabled : true,
 				tooltip : "Jerk her off."
 			});
@@ -1063,7 +1063,7 @@ FelinesScenes.WinFuckVag = function(cat, group, enc, cocks, numFemales) {
 					Text.Flush();
 
 					player.subDom.IncreaseStat(50, 1);
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 				}, enabled : true,
 				tooltip : "Keep teasing her, but don’t let her cum."
 			});
@@ -1089,7 +1089,7 @@ FelinesScenes.WinFuckVag = function(cat, group, enc, cocks, numFemales) {
 			}, 1.0, function() { return true; });
 
 			scenes.Get();
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}
 	}
 }
@@ -1250,7 +1250,7 @@ FelinesScenes.WinFuckButt = function(cat, group, enc, cocks) {
 			Text.NL();
 			Text.Add("Before leaving the kitty in a panting, sticky heap, you wipe your [cocks] clean on [hisher] fur. A little more cream surely can’t hurt.", parse);
 
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		});
 
 		//[Inside][Mouth][Body]
@@ -1277,7 +1277,7 @@ FelinesScenes.WinFuckButt = function(cat, group, enc, cocks) {
 				}
 				Text.Add(" With a sloppy plop, you pull out your [cock], leaving behind a strand of cum connecting to [possessive] gaping asshole.", parse);
 
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true,
 			tooltip : Text.Parse("Just keep ramming [himher] until [heshe]’s leaking cum from [hisher] ears!", parse)
 		});
@@ -1299,7 +1299,7 @@ FelinesScenes.WinFuckButt = function(cat, group, enc, cocks) {
 				}
 				Text.Add(" [Name] actually sucks on the [cockTip] of your cock as you attempt to withdraw it, unwilling to let any of your seed go to waste. [HeShe] looks very satisfied, licking [hisher] lips and purring softly. [HeShe] looks very tired after the ordeal, to the point of being unable to raise [hisher] head.", parse);
 
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true,
 			tooltip : Text.Parse("Give the kitty a tasty treat as your farewell gift!", parse)
 		});
@@ -1320,7 +1320,7 @@ FelinesScenes.WinFuckButt = function(cat, group, enc, cocks) {
 					Text.Add("You spill your load across [possessive] stomach, a stray strand of cum jetting farther than the other and landing across [hisher] muzzle. Draped in your spunk, [name] makes an unsteady attempt to clean [hisher] fur, only succeeding in spreading the mess and working it in.", parse);
 				}
 
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true,
 			tooltip : Text.Parse("Mark the kitty as yours by showering [himher] in your seed!", parse)
 		});
@@ -1330,7 +1330,7 @@ FelinesScenes.WinFuckButt = function(cat, group, enc, cocks) {
 		player.AddLustFraction(-1);
 		Text.Add("The base of the artificial cock grinds against your [vag], triggering your own climax. For a long while, you remain there, your [cock] buried deep inside [possessive] overstimulated colon. Both of you are panting, sweat dripping from your exhausted bodies. When you do pull out, you leave [hisher] hole gaping, twitching slightly as if grasping after the withdrawn toy.", parse);
 
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 	}
 }
 
@@ -1412,7 +1412,7 @@ FelinesScenes.WinGetBlowjob = function(cat, group, enc) {
 				Text.Add("When you are done, a generous amount of seed is coating [possessive] face and hair, dripping down on [hisher] chest.", parse);
 			}
 			Text.Add(" Almost absently, [name] licks [hisher] lips, tasting your sticky treat.", parse);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true,
 		tooltip : Text.Parse("Shoot your load all over [hisher] face.", parse)
 	});
@@ -1432,7 +1432,7 @@ FelinesScenes.WinGetBlowjob = function(cat, group, enc) {
 			}
 			Text.Add(" With a loud pop, you pull out, and [name] swallows any of your seed still in [hisher] mouth without having to be told to.", parse);
 
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true,
 		tooltip : Text.Parse("Pour it in [hisher] mouth and let [himher] taste it.", parse)
 	});
@@ -1456,7 +1456,7 @@ FelinesScenes.WinGetBlowjob = function(cat, group, enc) {
 
 			player.subDom.IncreaseStat(70, 1);
 
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : player.FirstCock().length.Get() > 20,
 		tooltip : Text.Parse("Ram your [cock] as far down [hisher] throat as it will go.", parse)
 	});

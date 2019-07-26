@@ -111,7 +111,7 @@ BrothelLoc.brothel.onEntry = function() {
 	if(rigard.Brothel["Visit"] == 0)
 		BrothelScenes.First();
 	else
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 }
 
 BrothelScenes.First = function() {
@@ -148,14 +148,14 @@ BrothelScenes.First = function() {
 			Text.Clear();
 			Text.Add("You open your mouth to reject her… but who are you kidding? You want... no. You need her!", parse);
 			Text.NL();
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true,
 		tooltip : "Despite your arousal, attempt to resist temptation."
 	});
 	options.push({ nameStr : "Lucille",
 		func : function() {
 			Text.Clear();
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true,
 		tooltip : "You want her."
 	});

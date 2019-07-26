@@ -42,7 +42,7 @@ let EntityCombat = {
 			if(encounter)
 				encounter.CombatTick();
 			else
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 		});
 	},
 

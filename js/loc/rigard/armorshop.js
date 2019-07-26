@@ -352,7 +352,7 @@ ArmorShopScenes.RegularEntry = function(newStock) {
 	}
 	Text.NL();
 	
-	PrintDefaultOptions(true);
+	Gui.PrintDefaultOptions(true);
 }
 
 ArmorShopScenes.Prompt = function() {

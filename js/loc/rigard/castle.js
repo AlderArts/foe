@@ -59,7 +59,7 @@ CastleLoc.Grounds.onEntry = function() {
 	if(Math.random() < 0.2)
 		Scenes.Rigard.Chatter2(true);
 	else
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 }
 
 CastleLoc.Grounds.links.push(new Link(
@@ -424,7 +424,7 @@ NobleScenes.Elodie = function() {
 			Text.Add("Making up your mind to confront the strange servant, you start off towards her, determined to at least find out why you’re such an interesting person. Before you can reach her, though, she disappears almost as if by magic - it happens so suddenly that you do a double-take, but there’s no doubt about it: she’s gone.", parse);
 			Text.NL();
 			Text.Add("You can only conclude that she must’ve slipped away in one of the nobles’ entourages of servants, but the way she so effortlessly inserted herself into the crowd makes you wonder.", parse);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Leave",
@@ -438,7 +438,7 @@ NobleScenes.Elodie = function() {
 			if(humanity < 0.95)
 				Text.Add("especially with you looking as you are, ", parse);
 			Text.Add("you break the gaze and go your own merry way down the street. While you still feel the royal servant’s gaze on the small of your back for a little while longer, it eventually fades, and when you next look back, she’s no longer there. Odd.", parse);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	

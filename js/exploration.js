@@ -170,7 +170,7 @@ function DataPrompt() {
 		DataPrompt();
 	}, true);
 
-	Input.buttons[11].Setup("Back", PrintDefaultOptions, true);
+	Input.buttons[11].Setup("Back", Gui.PrintDefaultOptions, true);
 }
 
 //***************************************************//

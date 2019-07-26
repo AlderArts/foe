@@ -141,7 +141,7 @@ HighlandsLoc.Spring.onEntry = function() {
 	if(isla.flags["Met"] < Isla.Met.Met)
 		Scenes.Isla.Introduction();
 	else
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 }
 HighlandsLoc.Spring.description = function() {
 	var parse = {};

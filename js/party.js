@@ -246,7 +246,7 @@ Party.prototype.SwitchPrompt = function(member) {
 		options.push({ nameStr : "---",
 			func : function() {
 				that.SwitchOut(member);
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true,
 			tooltip: Text.Parse("Send [name] to the reserve.", parse)
 		});
@@ -258,14 +258,14 @@ Party.prototype.SwitchPrompt = function(member) {
 				func : function(obj) {
 					that.SwitchOut(member);
 					that.SwitchIn(obj);
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 				}, enabled : true,
 				tooltip: Text.Parse("Switch [name] to the reserve, replacing [himher] with [name2].", parse)
 			});
 		}
 		if(options.length == 1) {
 			that.SwitchOut(member);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}
 		else
 			Gui.SetButtonsFromList(options);
@@ -279,21 +279,21 @@ Party.prototype.SwitchPrompt = function(member) {
 				func : function(obj) {
 					that.SwitchOut(obj);
 					that.SwitchIn(member);
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 				}, enabled : i != 0,
 				tooltip: Text.Parse("Switch [name] into the active party, replacing [name2].", parse)
 			});
 		}
 		if(options.length == 1) {
 			that.SwitchIn(member);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}
 		else {
 			if(options.length < 4) {
 				options.push({ nameStr : "+++",
 					func : function() {
 						that.SwitchIn(member);
-						PrintDefaultOptions();
+						Gui.PrintDefaultOptions();
 					}, enabled : true,
 					tooltip: Text.Parse("Bring [name] into the active party.", parse)
 				});

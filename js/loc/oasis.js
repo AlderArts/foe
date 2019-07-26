@@ -435,7 +435,7 @@ OasisScenes.DesertCaravanEncounter = function() {
 		options.push({ nameStr : "Leave",
 			func : function() {
 				TimeStep({hour: 1});
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true,
 			tooltip : Text.Parse("It’s time to head out.", parse)
 		});

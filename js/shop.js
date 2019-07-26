@@ -1,4 +1,7 @@
 import { GetDEBUG } from "../app";
+import { Gui } from "./gui";
+import { Text } from "./text";
+import { ItemType, ItemSubtype } from "./item";
 
 
 /*
@@ -59,7 +62,7 @@ Shop.prototype.AddItem = function(item, price, enabled, func, num) {
 
 Shop.prototype.Buy = function(back, preventClear) {
 	var shop = this;
-	back = back || PrintDefaultOptions;
+	back = back || Gui.PrintDefaultOptions;
 
 	if(!preventClear)
 		Text.Clear();
@@ -168,7 +171,7 @@ Shop.prototype.Buy = function(back, preventClear) {
 
 Shop.prototype.Sell = function(back, preventClear, customSellFunc) {
 	var shop = this;
-	back = back || PrintDefaultOptions;
+	back = back || Gui.PrintDefaultOptions;
 
 	if(!preventClear)
 		Text.Clear();

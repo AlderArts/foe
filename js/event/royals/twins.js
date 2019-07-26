@@ -139,7 +139,7 @@ TwinsScenes.Interact = function() {
 		tooltip : "Talkie talkie."
 	});
 	Gui.SetButtonsFromList(options, true, function() {
-		PrintDefaultOptions(); //TODO, leave
+		Gui.PrintDefaultOptions(); //TODO, leave
 	});
 }
 

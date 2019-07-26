@@ -8,10 +8,12 @@ import { Event, Link, EncounterTable } from '../event';
 import { Gender } from '../body/gender';
 import { GwendyScenes } from '../event/farm/gwendy-scenes';
 import { LaylaScenes } from '../event/farm/layla-scenes';
-import { WorldTime, MoveToLocation } from '../GAME';
+import { WorldTime, MoveToLocation, TimeStep } from '../GAME';
 import { SetGameState, GameState } from '../gamestate';
 import { Gui } from '../gui';
 import { Text } from '../text';
+import { IngredientItems } from '../items/ingredients';
+import { Season } from '../time';
 
 let world = null;
 
@@ -129,7 +131,7 @@ FarmLoc.Fields.onEntry = function(x, from) {
 	if(from == world.loc.Plains.Crossroads) {
 		if(LaylaScenes.FarmMeetingTrigger(true)) return;
 	}
-	PrintDefaultOptions();
+	Gui.PrintDefaultOptions();
 }
 
 FarmLoc.Fields.enc = new EncounterTable();
@@ -140,7 +142,7 @@ FarmLoc.Fields.enc.AddEnc(function() {
 		Text.Add("Not having much else to do, you wander the fields for a few minutes. You pick up a particularly fresh bundle of grass. Who knows, could be useful for something.");
 		Text.NL();
 		Text.Add("You pick up some fresh grass.", null, 'bold');
-		party.inventory.AddItem(Items.FreshGrass);
+		party.inventory.AddItem(IngredientItems.FreshGrass);
 
 		TimeStep({minute: 15});
 		Text.Flush();
@@ -159,7 +161,7 @@ FarmLoc.Fields.enc.AddEnc(function() {
 		Text.Add("Not having much else to do, you wander the fields for a few minutes. You pick up a pretty flower. Who knows, could be useful for something.");
 		Text.NL();
 		Text.Add("You pick up a Foxglove.", null, 'bold');
-		party.inventory.AddItem(Items.Foxglove);
+		party.inventory.AddItem(IngredientItems.Foxglove);
 
 		TimeStep({minute: 15});
 
@@ -250,7 +252,7 @@ FarmLoc.Loft.SleepFunc = function() {
 		Text.Add("You wake up, feeling rested and refreshed.", parse);
 
 		Text.Flush();
-		PrintDefaultOptions(true);
+		Gui.PrintDefaultOptions(true);
 	}
 
 	Gui.NextPrompt(function() {

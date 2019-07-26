@@ -47,7 +47,7 @@ GateLoc.onEntry = function() {
 	else if(Math.random() < 0.3)
 		Scenes.Rigard.Chatter2(true);
 	else
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 }
 
 GateLoc.links.push(new Link(
