@@ -10,7 +10,7 @@ import { Images } from '../assets';
 import { Items } from '../items';
 import { Color } from '../body/color';
 import { Race } from '../body/race';
-import { WorldTime } from '../GAME';
+import { WorldTime, TimeStep } from '../GAME';
 import { Text } from '../text';
 import { Gui } from '../gui';
 

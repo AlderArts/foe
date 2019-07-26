@@ -476,7 +476,7 @@ TasksScenes.Snitch.Miranda = function(onDuty) {
 				
 				miranda.relation.IncreaseStat(100, 5);
 				
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true
 		});
 		options.push({ nameStr : "Lie",
@@ -497,7 +497,7 @@ TasksScenes.Snitch.Miranda = function(onDuty) {
 				
 				miranda.relation.IncreaseStat(100, 3);
 				
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true
 		});
 		
@@ -1105,7 +1105,7 @@ TasksScenes.Poisoning.Start = function() {
 			GAME().vaughn.flags["T3"] |= VaughnFlags.Poisoning.Poison;
 			party.Inv().AddItem(Items.Quest.OutlawPoison);
 			
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Aphrodisiac",
@@ -1122,7 +1122,7 @@ TasksScenes.Poisoning.Start = function() {
 			GAME().vaughn.flags["T3"] |= VaughnFlags.Poisoning.Aphrodisiac;
 			party.Inv().AddItem(Items.Quest.OutlawAphrodisiac);
 			
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	

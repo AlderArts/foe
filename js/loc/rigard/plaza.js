@@ -2,6 +2,7 @@
 import { Event, Link, EncounterTable } from '../../event';
 import { WorldTime, MoveToLocation } from '../../GAME';
 import { Text } from '../../text';
+import { Gui } from '../../gui';
 
 let PlazaLoc = new Event("Plaza");
 
@@ -29,7 +30,7 @@ PlazaLoc.onEntry = function() {
 	else if(Math.random() < 0.3)
 		Scenes.Rigard.Chatter2(true);
 	else
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 }
 
 PlazaLoc.enc = new EncounterTable();

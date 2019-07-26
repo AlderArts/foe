@@ -4,7 +4,7 @@
  */
 import { GetDEBUG } from '../../app';
 import { Gender } from '../body/gender';
-import { WorldTime } from '../GAME';
+import { WorldTime, TimeStep } from '../GAME';
 import { SetGameState, GameState } from '../gamestate';
 import { Gui } from '../gui';
 import { Text } from '../text';
@@ -1149,7 +1149,7 @@ TasksScenes.Spring.Highlands = function() {
 		
 		Gui.NextPrompt(function() {
 			party.location = world.loc.Highlands.Hills;
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		});
 	});
 	

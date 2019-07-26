@@ -12,7 +12,8 @@ import { EstevanScenes } from '../event/nomads/estevan';
 import { MagnusScenes } from '../event/nomads/magnus';
 import { RosalinScenes } from '../event/nomads/rosalin';
 import { PatchworkScenes } from '../event/nomads/patchwork';
-import { WorldTime, MoveToLocation } from '../GAME';
+import { GameCache, WorldTime, MoveToLocation } from '../GAME';
+import { Text } from '../text';
 
 //
 // Nomads
@@ -97,7 +98,7 @@ NomadsLoc.Tent.links.push(new Link(
 
 //Trigger this on stepping into the Nomads’ for the first time when season is active.
 NomadsLoc.Fireplace.onEntry = function() {
-	if(!(gameCache.flags["HW"] & Halloween.State.Intro) &&
+	if(!(GameCache().flags["HW"] & Halloween.State.Intro) &&
 		(GetDEBUG() || Halloween.IsSeason()) &&
 		(WorldTime().hour >= 8) &&
 		(WorldTime().hour < 22))
@@ -224,7 +225,7 @@ NomadsLoc.Fireplace.events.push(new Link(
 //#add “pie” option to nomads’ camp from 17-22 pm when Halloween season/debug is active.
 NomadsLoc.Fireplace.events.push(new Link(
 	"Pumpkin Pie", function() {
-		if(!(gameCache.flags["HW"] & Halloween.State.Intro)) return false;
+		if(!(GameCache().flags["HW"] & Halloween.State.Intro)) return false;
 		// Correct time of day
 		if((WorldTime().hour < 17) || (WorldTime().hour >= 22)) return false;
 		

@@ -11,6 +11,8 @@ import { OpheliaScenes } from '../event/burrows/ophelia';
 import { LagonScenes } from '../event/burrows/lagon';
 import { Gender } from '../body/gender';
 import { WorldTime, MoveToLocation } from '../GAME';
+import { Text } from '../text';
+import { Gui } from '../gui';
 
 let world = null;
 

@@ -3,6 +3,7 @@ import { DateScenes } from './cveta-date';
 import { WorldTime } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
+import { EncounterTable } from '../../event';
 
 let CvetaScenes = {
 	Dates : DateScenes,
@@ -876,7 +877,7 @@ CvetaScenes.HerselfPrompt = function() {
 						Text.NL();
 						Text.Add("“Eden can be a harsh place, and I know my way of seeing things can be hard to swallow by those weary with the world. At least you did not insult my intelligence by suggesting I had no knowledge of the ‘real’ world, as some would put it.”</i>", parse);
 						Text.NL();
-						PrintDefaultOptions();
+						Gui.PrintDefaultOptions();
 					}, enabled : true,
 					tooltip : "That sounds a little idealistic."
 				});
@@ -885,7 +886,7 @@ CvetaScenes.HerselfPrompt = function() {
 						Text.Clear();
 						Text.Add("<i>“That is all right,”</i> Cveta replies. clicking her beak. <i>“The less people have to think about politics in their day-to-day lives, the better the system is working to serve them in accordance with the Mandate of the Spirits. It is like… ah, air, money, or maybe love. Perfectly unimportant when all is proper and in place, a desperately pressing need when something has gone awry.”</i>", parse);
 						Text.NL();
-						PrintDefaultOptions();
+						Gui.PrintDefaultOptions();
 					}, enabled : true,
 					tooltip : "You haven’t really thought about it either way."
 				});
@@ -1255,7 +1256,7 @@ CvetaScenes.MusicPrompt = function() {
 							Text.Clear();
 							Text.Add("Cveta sniffs at your answer. <i>“You do not have to flatter me, you know. That outro was deliberately bad. Whoever ends like that and lets an audience down on their expectations? They end up feeling empty and unfulfilled, you know. I am not so full of myself that I cannot bear someone pointing out a flaw in my playing, especially when the entire point of this session is to improve.”</i>", parse);
 							Text.NL();
-							PrintDefaultOptions();
+							Gui.PrintDefaultOptions();
 						}, enabled : true,
 						tooltip : "Tell Cveta it was pretty good."
 					});
@@ -1264,7 +1265,7 @@ CvetaScenes.MusicPrompt = function() {
 							Text.Clear();
 							Text.Add("Cveta nods. <i>“Well, at least you are honest about it. Yes, I did that poorly on purpose. I suppose I should not have sought to test you, [playername], but you have not disappointed me. It gets very tiring when the only thing that comes out of another’s mouth is praise - not because it is deserved, but because one seeks to flatter.”</i>", parse);
 							Text.NL();
-							PrintDefaultOptions();
+							Gui.PrintDefaultOptions();
 						}, enabled : true,
 						tooltip : "No, that wasn’t acceptable, especially that last bit."
 					});
@@ -1277,7 +1278,7 @@ CvetaScenes.MusicPrompt = function() {
 							Text.NL();
 							Text.Add("<i>“Yes, it was bad, and that was the case because I made it so on purpose. My apologies for testing you this way, [playername], but I have heard enough honeyed words to last me a lifetime.”</i>", parse);
 							Text.NL();
-							PrintDefaultOptions();
+							Gui.PrintDefaultOptions();
 						}, enabled : true,
 						tooltip : "Tell the truth, but be diplomatic about it."
 					});
@@ -1314,7 +1315,7 @@ CvetaScenes.MusicPrompt = function() {
 							Text.NL();
 							Text.Add("<i>“I do not remember,”</i> the songstress admits. <i>“I only remember the music, not where it was played, or even who the musician was. Memory is a fickle thing that way.”</i>", parse);
 							Text.NL();
-							PrintDefaultOptions();
+							Gui.PrintDefaultOptions();
 						}, enabled : true,
 						tooltip : "Question Cveta if she’s feeling all right."
 					});
@@ -1323,7 +1324,7 @@ CvetaScenes.MusicPrompt = function() {
 							Text.Clear();
 							Text.Add("Knowing how much the songstress respects her own space, you decide to keep your concerns to yourself. After all, she’ll tell you of her own accord if and when she wants to - trying to pry words from her is harder than a yarn ball from a cat-morph, which everyone knows is almost impossible.", parse);
 							Text.NL();
-							PrintDefaultOptions();
+							Gui.PrintDefaultOptions();
 						}, enabled : true,
 						tooltip : "If she’s feeling out of sorts, she’ll want to keep it to herself. Respect her privacy and let her be."
 					});
@@ -1331,7 +1332,7 @@ CvetaScenes.MusicPrompt = function() {
 					Gui.Callstack.push(function() {
 						Text.Add("<i>“Well.”</i> she says, assuming her usual pleasant demeanor as the melancholy mood lifts from her like mist with the sun. <i>“It was not the most jovial of pieces I could come up with, but it takes all kinds to make a world. Without sorrow, we would not be equipped to appreciate joy; without pain, pleasure would be meaningless.”</i>", parse);
 						Text.NL();
-						PrintDefaultOptions();
+						Gui.PrintDefaultOptions();
 					});
 				}, 1.0, function() { return true; });
 				scenes.AddEnc(function() {
@@ -1347,7 +1348,7 @@ CvetaScenes.MusicPrompt = function() {
 					Text.NL();
 					Text.Add("<i>“I must say,”</i> she adds after you’ve recovered enough of your wits to pay attention, <i>“I am particularly pleased with the results of today’s practice.”</i>", parse);
 					Text.NL();
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 				}, 1.0, function() { return true; });
 				Gui.Callstack.push(function() {
 					Text.Add("<i>“And that will be it for today’s session,”</i> Cveta says, setting down the violin on her cot and giving you a small curtsey in her usual fashion. “Would you mind showing yourself out, [playername]?”</i>", parse);
@@ -2133,7 +2134,7 @@ CvetaScenes.PostBullTowerPerformance = function() {
 			Text.NL();
 			Text.Add("<i>“Think of a book. It is not that the words are missing, but one cannot be completely sure what has been put to paper is what is meant…”</i> she steps back and casts an appraising eye on you. <i>“Well, it is good that I achieved what I set out to do.</i>", parse);
 			Text.NL();
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	options.push({ nameStr : "No",
@@ -2146,7 +2147,7 @@ CvetaScenes.PostBullTowerPerformance = function() {
 			Text.NL();
 			Text.Add("<i>“Either that, or as I said, I misread you.”</i> She thinks a moment. <i>“It is not often that I distrust my own judgement and start to second-guess myself.</i>", parse);
 			Text.NL();
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	

@@ -2,6 +2,8 @@
 import { GetDEBUG } from '../../../app';
 import { Gender } from '../../body/gender';
 import { MoveToLocation } from '../../GAME';
+import { Text } from '../../text';
+import { Gui } from '../../gui';
 
 let LagonDScenes = {};
 

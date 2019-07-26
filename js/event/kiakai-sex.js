@@ -1,5 +1,8 @@
 import { Gender } from "../body/gender";
 import { Kiakai } from "./kiakai";
+import { Gui } from "../gui";
+import { Text } from "../text";
+import { EncounterTable } from "../event";
 
 /*
  * 
@@ -2115,7 +2118,7 @@ KiakaiSex.HealingAssertive = function() {
 							Text.Add("By now, three fingers hardly offer any resistance, so you add another one to the mix. You build up a rapid rhythm, plunging deep inside [name]'s [kanus].", parse);
 							if(kiakai.FirstCock())
 								Text.Add(" Cupping them and pushing them in up to the knuckles, you just about manage to reach [hisher] prostate, prodding the sensitive organ with each thrust.", parse);
-							PrintDefaultOptions();
+							Gui.PrintDefaultOptions();
 						}, enabled : true,
 						tooltip : "Use your fingers."
 					});
@@ -2127,7 +2130,7 @@ KiakaiSex.HealingAssertive = function() {
 								Text.Add("Your [tongue], rival to a cock in length, snakes out and buries itself deep inside [name], immediately beginning to thrust in and out.", parse);
 								if(kiakai.FirstCock())
 									Text.Add(" Due to your size, you can easily reach [hisher] prostate, each thrust mashing your [tongue] against the sensitive elf's sensitive pleasure button.", parse);
-								PrintDefaultOptions();
+								Gui.PrintDefaultOptions();
 							}, enabled : true,
 							tooltip : Text.Parse("Use your [tongue].", parse)
 						});
@@ -2170,7 +2173,7 @@ KiakaiSex.HealingAssertive = function() {
 										Text.Add("[name] looks a bit dubious, but nods slightly, giving [hisher] consent. With the help of a little lube, the penetration is almost effortless, the elf's [kanus] easily spreading around the [toy]. You begin to thrust [itThem] into [himher] rapidly, relying on speed rather than size to get the elf off.", parse);
 									}
 									kiakai.flags["AnalExp"]++;
-									PrintDefaultOptions();
+									Gui.PrintDefaultOptions();
 								}, enabled : toySize < 2*cap,
 								tooltip : Text.Parse("Use [toy] on [name].", {name: kiakai.name, toy: toy.name})
 							});

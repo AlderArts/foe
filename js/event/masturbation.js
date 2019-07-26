@@ -1,3 +1,10 @@
+import { Text } from "../text";
+import { Gui } from "../gui";
+import { Genitalia } from "../body/genitalia";
+import { CockType } from "../body/cock";
+import { Race } from "../body/race";
+import { ItemSubtype } from "../item";
+
 /*
  * Masturbation scenes for the PC
  */

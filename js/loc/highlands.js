@@ -8,6 +8,7 @@
 import { Event, Link, EncounterTable } from '../event';
 import { WorldTime, MoveToLocation } from '../GAME';
 import { Season } from '../time';
+import { Text } from '../text';
 
 // Create namespace
 let HighlandsLoc = {

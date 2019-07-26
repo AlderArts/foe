@@ -1,5 +1,7 @@
 import { Gui } from './gui';
 import { isOnline } from './gamestate';
+import { Text } from './text';
+import { SetGameCache, GameCache } from './GAME';
 
 let Saver = {}
 
@@ -53,7 +55,7 @@ Saver.SavePrompt = function(backFunc) {
 Saver.SaveGame = function(slot, comment) {
 	GameToCache();
 	var seen = [];
-	var saveData = JSON.stringify(gameCache, function(key, value) {
+	var saveData = JSON.stringify(GameCache(), function(key, value) {
 		if (typeof value === "object" && value !== null) {
 			if (seen.indexOf(value) !== -1) {
 				console.error("Circular reference found in the gameCache!\n" + key + ":", value);
@@ -64,7 +66,7 @@ Saver.SaveGame = function(slot, comment) {
 		return value;
 	});
 
-	var saveName = gameCache.name;
+	var saveName = GameCache().name;
 	if (comment) {
 		saveName += " :: Comment: " + comment;
 	}
@@ -88,7 +90,7 @@ Saver.SaveToFile = function() {
 	if(filename && filename != "") {
 		GameToCache();
 		var seen = [];
-		GenerateFile({filename: filename, content: JSON.stringify(gameCache,
+		GenerateFile({filename: filename, content: JSON.stringify(GameCache(),
 			function(key, val) {
 				if (typeof val == "object") {
 					if (seen.indexOf(val) >= 0)
@@ -151,14 +153,14 @@ Saver.LoadPrompt = function(backFunc) {
 Saver.LoadGame = function(slot) {
 	if (localStorage["saveDataLZ" + slot]) {
 		var saveData = LZString.decompressFromUTF16(localStorage["saveDataLZ" + slot]);
-		gameCache = JSON.parse(saveData);
+		SetGameCache(JSON.parse(saveData));
 	} else {
 		// Load from legacy storage.
-		gameCache = JSON.parse(localStorage["savedata" + slot]);
+		SetGameCache(JSON.parse(localStorage["savedata" + slot]));
 	}
 
 	CacheToGame();
-	PrintDefaultOptions();
+	Gui.PrintDefaultOptions();
 }
 
 Saver.SaveHeader = function(nr) {
@@ -181,7 +183,7 @@ Saver.Clear = function() {
 	}
 }
 
-function loadfileOverlay() {
+export function loadfileOverlay() {
 	var el = document.getElementById("overlay_load");
 	el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
 }
@@ -208,9 +210,9 @@ Saver.LoadFromFile = function(file) {
 	var reader = new FileReader();
 
 	reader.onload = function(e) {
-		gameCache = JSON.parse(e.target.result);
+		SetGameCache(JSON.parse(e.target.result));
 		CacheToGame();
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 		Gui.Render();
 	}
 

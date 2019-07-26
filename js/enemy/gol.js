@@ -20,6 +20,7 @@ import { Gui } from '../gui';
 import { Text } from '../text';
 import { Party } from '../party';
 import { Encounter } from '../combat';
+import { Abilities } from '../abilities';
 
 let GolScenes = {};
 

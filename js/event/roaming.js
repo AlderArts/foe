@@ -479,7 +479,7 @@ RoamingScenes.Bandits = function() {
 		tooltip : "You’re quite willing to leave them alone, if only they’ll pay you a little bit of compensation. Now to convince them..."
 	});
 	options.push({ nameStr : "Leave",
-		func : PrintDefaultOptions, enabled : true,
+		func : Gui.PrintDefaultOptions, enabled : true,
 		tooltip : "This isn’t worth the bother - just leave them alone."
 	});
 	Gui.SetButtonsFromList(options, false, null);

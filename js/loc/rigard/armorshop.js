@@ -7,6 +7,8 @@ import { Event, Link, EncounterTable } from '../../event';
 import { Shop } from '../../shop';
 import { Items } from '../../items';
 import { WorldTime, MoveToLocation } from '../../GAME';
+import { Text } from '../../text';
+import { Gui } from '../../gui';
 
 let ArmorShopLoc = new Event("Twopenny's");
 

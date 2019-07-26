@@ -10,7 +10,10 @@ import { TF } from '../../tf';
 import { AppendageType } from '../../body/appendage';
 import { Race } from '../../body/race';
 import { Color } from '../../body/color';
-import { WorldTime } from '../../GAME';
+import { WorldTime, TimeStep } from '../../GAME';
+import { Gui } from '../../gui';
+import { Text } from '../../text';
+import { Sex } from '../../entity-sex';
 
 let EstevanScenes = {};
 
@@ -310,7 +313,7 @@ EstevanScenes.Prompt = function() {
 		});
 	}
 	
-	Gui.SetButtonsFromList(options, true, PrintDefaultOptions);
+	Gui.SetButtonsFromList(options, true, Gui.PrintDefaultOptions);
 }
 
 EstevanScenes.Desc = function() {
@@ -702,7 +705,7 @@ EstevanScenes.SexGay = function() {
 					var cum = estevan.OrgasmCum();
 					
 					Text.Add("<i>“Usually I’m on the other side of this equation,”</i> Estevan jokes. <i>“Maybe I’ll have more empathy for the poor souls who have to wash my cum out of their hair?”</i> He ponders the proposition for a while, then shrugs. <i>Nah…”</i>", parse);
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 				}, enabled : true,
 				tooltip : "The satyr <i>would</i> look pretty hot with your spunk running down his face, wouldn’t he?"
 			});
@@ -735,7 +738,7 @@ EstevanScenes.SexGay = function() {
 					
 					Text.NL();
 					Text.Add("It takes a few minutes before he manages to gather his wits and come out of his jizz-soaked reverie. If you have any question that the satyr enjoyed the thorough fucking, it’s answered when he swipes a finger across his oozing orifice then sucks the cum from his finger.", parse);
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 				}, enabled : true,
 				tooltip : "You’ve already committed to fucking his ass, why give up before the grand finale?"
 			});

@@ -5,7 +5,9 @@
  */
 import { Entity } from '../entity';
 import { GetDEBUG } from '../../app';
-import { MoveToLocation } from '../GAME';
+import { MoveToLocation, TimeStep } from '../GAME';
+import { Gui } from '../gui';
+import { Text } from '../text';
 
 let Room69Scenes = {};
 
@@ -769,7 +771,7 @@ Room69Scenes.ApologizeTo69ForBreakingDoor = function() {
 		options.push({ nameStr : "Leave",
 			func : function() {
 				TimeStep({minute: 10});
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true,
 			tooltip : "Fine, maybe you <i>will</i> go!"
 		});
@@ -913,7 +915,7 @@ Room69Scenes.ApologizeTo69ForBeingMean = function() {
 	options.push({ nameStr : "Leave",
 		func : function() {
 			TimeStep({minute: 10});
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true,
 		tooltip : "With a start like that, it shouldn’t be any worse if you just try another time."
 	});

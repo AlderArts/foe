@@ -70,14 +70,14 @@ import { Sylistraxia } from './event/sylistraxia';
 import { Ches } from './event/brothel/ches';
 import { Gender } from './body/gender';
 import { Party } from './party';
-import { GAME, InitGAME, InitWorldTime, InitEntityStorage, EntityStorage } from './GAME';
-
-let gameCache = {};
+import { GAME, InitGAME, InitWorldTime, InitEntityStorage, EntityStorage, GameCache } from './GAME';
 
 let InitCache = function() {
 	// Reset exploration
 	Gui.SetLastSubmenu(null);
 	GAME().IntroActive = false;
+
+	let gameCache = GameCache();
 
 	// SAVE VERSION
 	gameCache.version = parseInt(gameCache.version) || SAVE_VERSION;
@@ -258,6 +258,8 @@ let InitCache = function() {
 
 let CacheToGame = function() {
 	InitCache();
+
+	let gameCache = GameCache();
 
 	// Load flags
 	for(var flag in gameCache.flags)
@@ -495,6 +497,8 @@ let CacheToGame = function() {
 }
 
 let GameToCache = function() {
+	let gameCache = GameCache();
+
 	gameCache.version  = SAVE_VERSION;
 	// For debugging
 	gameCache.build    = VERSION_STRING;
@@ -584,8 +588,4 @@ let GameToCache = function() {
 	gameCache.name = Text.Parse("[name]([gender]), Lvl [lvl]/[slvl], [date]", parse);
 }
 
-function ClearCache() {
-	gameCache = {};
-}
-
-export { gameCache, InitCache, CacheToGame, GameToCache, ClearCache };
+export { InitCache, CacheToGame, GameToCache };

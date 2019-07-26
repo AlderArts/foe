@@ -8,6 +8,7 @@ import { SetGameState, GameState } from '../../gamestate';
 import { Gui } from '../../gui';
 import { Text } from '../../text';
 import { MoveToLocation } from '../../GAME';
+import { Sex } from '../../entity-sex';
 
 let LaylaScenes = {};
 
@@ -874,7 +875,7 @@ LaylaScenes.FarmCombatWin = function() {
 					
 					Text.Clear();
 					Text.Add("<i>“That’s not a half-bad idea. But...”</i> She turns her gaze back to the strange girl. <i>“There’s the matter of broken storage doors, the shelves, pots and crates. Not to mention my frightened animals and workers.”</i>", parse);
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 				}, enabled : true,
 				tooltip : "Offer to take the creature with you; that should keep her out of mischief, at least."
 			});
@@ -886,7 +887,7 @@ LaylaScenes.FarmCombatWin = function() {
 					Text.Add("The girls simply tilts her head to the side, eyeing the farmer with confusion.", parse);
 					Text.NL();
 					Text.Add("<i>“The broken storage doors, the shelves, pots and crates. Not to mention my frightened animals and workers.”</i>", parse);
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 				}, enabled : true,
 				tooltip : "Tell Gwendy that you don’t have any ideas what to do with the creature."
 			});
@@ -1449,7 +1450,7 @@ LaylaScenes.SexFirstTime = function() {
 				Text.NL();
 				Text.Add("<i>“No problem!”</i> she replies with a smile.", parse);
 				Text.NL();
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true,
 			tooltip : "You’re not about to touch that, but you could always take a closer look."
 		});
@@ -1464,7 +1465,7 @@ LaylaScenes.SexFirstTime = function() {
 				Text.NL();
 				Text.Add("She pants a little, excitement apparent as the bead of pre on her tip slides down her length. <i>“Y-you’re welcome,”</i> she says, smiling nervously.", parse);
 				Text.NL();
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true,
 			tooltip : "Only one way to properly examine her..."
 		});
@@ -1488,7 +1489,7 @@ LaylaScenes.SexFirstTime = function() {
 				Text.NL();
 				Text.Add("<i>“S-sure,”</i> she says, panting a bit. <i>“You’re welcome.”</i>", parse);
 				Text.NL();
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true,
 			tooltip : "That’s a really nice cock she has. You wonder what it would taste like..."
 		});
@@ -1521,7 +1522,7 @@ LaylaScenes.SexFirstTime = function() {
 					Text.NL();
 					Text.Add("You watch as she continue to caress the smaller penis, observing as her cheeks turn a slightly purplish hue. Finally, after a few more moments, she grunts, and you watch as a rope of clear-looking fluid shoots out of her tail-cock’s head and lands on the ground.", parse);
 					Text.NL();
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 				}, enabled : true,
 				tooltip : "Yes, if she doesn’t mind showing you."
 			});
@@ -1530,7 +1531,7 @@ LaylaScenes.SexFirstTime = function() {
 					Text.Clear();
 					Text.Add("<i>“Okay,”</i> she replies, shrugging.", parse);
 					Text.NL();
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 				}, enabled : true,
 				tooltip : "It’s fine, she doesn’t have to."
 			});
@@ -1567,7 +1568,7 @@ LaylaScenes.SexFirstTime = function() {
 
 					player.AddLustFraction(0.3);
 
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 				}, enabled : true,
 				tooltip : "Better, you want to taste it."
 			});
@@ -1612,7 +1613,7 @@ LaylaScenes.SexFirstTime = function() {
 						Text.NL();
 						Text.Add("<i>“No problem,”</i> she smiles.", parse);
 						Text.NL();
-						PrintDefaultOptions();
+						Gui.PrintDefaultOptions();
 					}, enabled : true,
 					tooltip : "Well, if she’s really okay with it..."
 				});
@@ -1623,7 +1624,7 @@ LaylaScenes.SexFirstTime = function() {
 						Text.NL();
 						Text.Add("<i>“Okay.”</i> She shrugs.", parse);
 						Text.NL();
-						PrintDefaultOptions();
+						Gui.PrintDefaultOptions();
 					}, enabled : true,
 					tooltip : "You’d rather not, thanks for the offer."
 				});
@@ -1664,7 +1665,7 @@ LaylaScenes.SexFirstTime = function() {
 
 						player.AddLustFraction(0.5);
 
-						PrintDefaultOptions();
+						Gui.PrintDefaultOptions();
 					}, enabled : true,
 					tooltip : "You have something more interesting to stick in there than a finger, if she’s okay with that?"
 				});
@@ -2745,7 +2746,7 @@ LaylaScenes.SexPitchVaginalCont2 = function(opts, p1cock, parse) {
 			opts.LCock = true;
 			player.slut.IncreaseStat(30, 1);
 
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Tail-cock",
@@ -2792,7 +2793,7 @@ LaylaScenes.SexPitchVaginalCont2 = function(opts, p1cock, parse) {
 
 			opts.TailJuice = true;
 
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Finish up",
@@ -2800,7 +2801,7 @@ LaylaScenes.SexPitchVaginalCont2 = function(opts, p1cock, parse) {
 		func : function() {
 			Text.Clear();
 			Text.Add("After a moment’s thought, you shake your head; no need to go overboard. Layla’s soft panting fills your ears as the aroused chimera stares up at you expectantly; that’s all the evidence you need that it’s time to get things started for real.", parse);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 
@@ -2907,7 +2908,7 @@ LaylaScenes.SexPitchVaginalCont2 = function(opts, p1cock, parse) {
 					Text.Add("Without thinking, you clamp down with your ass, clenching and releasing in an attempt to milk her secondary shaft. Your efforts reward you with a sudden rush of wet warmth within you, sending a fire burning through your guts. Your heart hammers in your chest, racing faster as lust boils inside of you, compelling you to moan in desire as you try to keep up with both thrusting and milking.", parse);
 
 					opts.TailPeg = true;
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 				}, enabled : true
 			});
 			options.push({ nameStr : "Deny",
@@ -2917,7 +2918,7 @@ LaylaScenes.SexPitchVaginalCont2 = function(opts, p1cock, parse) {
 					Text.Add("You can’t bring yourself to speak, and so you simply shake your head.", parse);
 					Text.NL();
 					Text.Add("Layla smiles softly and you feel the skin of her tail closing up. <i>“Okay,”</i> she replies, moving her prehensile appendage to wrap around your waist in an impromptu hug.", parse);
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 				}, enabled : true
 			});
 			Gui.SetButtonsFromList(options, false, null);
@@ -2971,7 +2972,7 @@ LaylaScenes.SexPitchVaginalCont2 = function(opts, p1cock, parse) {
 
 					opts.TailPeg = true;
 
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 				}, enabled : true
 			});
 			options.push({ nameStr : "Deny",
@@ -2987,14 +2988,14 @@ LaylaScenes.SexPitchVaginalCont2 = function(opts, p1cock, parse) {
 					Text.Add("The chimera smile softly at that.", parse);
 					Text.NL();
 					Text.Add("You can feel her prehensile appendage drape itself affectionately over your [legs], but you dismiss it as unimportant, turning your attention to far more pleasant matters at hand.", parse);
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 				}, enabled : true
 			});
 			Gui.SetButtonsFromList(options, false, null);
 		}
 		else {
 			Text.Add("Throughout your efforts, you try to pay attention to Layla’s reactions. You carefully listen to her gasps and moans, trying to use them to help you gauge how well you’re pleasing her. When her eyes flutter closed and her lips part in a silent cry, you know you’ve found her G-spot, and you try to focus your efforts on it.", parse);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}
 	});
 

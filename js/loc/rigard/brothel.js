@@ -7,7 +7,9 @@ import { ChesScenes } from '../../event/brothel/ches';
 import { BelindaScenes } from '../../event/brothel/belinda';
 import { BastetScenes } from '../../event/brothel/bastet';
 import { Gender } from '../../body/gender';
-import { MoveToLocation } from '../../GAME';
+import { MoveToLocation, TimeStep } from '../../GAME';
+import { Text } from '../../text';
+import { Gui } from '../../gui';
 
 let BrothelLoc = {
 	brothel  : new Event("Brothel"),

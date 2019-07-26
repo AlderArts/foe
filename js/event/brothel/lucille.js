@@ -5,6 +5,9 @@
  */
 
 import { Entity } from '../../entity';
+import { Text } from '../../text';
+import { EncounterTable } from '../../event';
+import { Gui } from '../../gui';
 
 let LucilleScenes = {};
 

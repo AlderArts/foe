@@ -1,4 +1,6 @@
 import { Gender } from "../body/gender";
+import { Gui } from "../gui";
+import { Text } from "../text";
 
 let NurseryScenes = {};
 
@@ -337,7 +339,7 @@ NurseryScenes.Nomads = function() {
 	*/
 	Gui.SetButtonsFromList(options, true, function() {
 		party.location = world.loc.Plains.Nomads.Fireplace;
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 	});
 }
 

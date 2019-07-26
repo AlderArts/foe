@@ -15,6 +15,7 @@ import { Party } from '../party';
 import { Encounter } from '../combat';
 import { AlchemyItems } from '../items/alchemy';
 import { IngredientItems } from '../items/ingredients';
+import { Text } from '../text';
 
 let FeralWolfScenes = {};
 

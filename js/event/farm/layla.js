@@ -12,6 +12,7 @@ import { Color } from '../../body/color';
 import { WorldTime } from '../../GAME';
 import { Text } from '../../text';
 import { TargetStrategy } from '../../entity-combat';
+import { Abilities } from '../../abilities';
 
 function Layla(storage) {
 	Entity.call(this);

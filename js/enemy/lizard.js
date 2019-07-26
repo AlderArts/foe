@@ -22,6 +22,7 @@ import { Text } from '../text';
 import { Gui } from '../gui';
 import { SetGameState, GameState } from '../gamestate';
 import { BodyPartType } from '../body/bodypart';
+import { IngredientItems } from '../items/ingredients';
 
 let LizardsScenes = {};
 
@@ -108,13 +109,13 @@ Lizard.prototype.constructor = Lizard;
 Lizard.prototype.DropTable = function() {
 	var drops = [];
 	if(Math.random() < 0.05) drops.push({ it: AlchemyItems.Lacertium });
-	if(Math.random() < 0.5)  drops.push({ it: Items.SnakeOil });
-	if(Math.random() < 0.5)  drops.push({ it: Items.LizardScale });
-	if(Math.random() < 0.5)  drops.push({ it: Items.LizardEgg });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.SnakeOil });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.LizardScale });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.LizardEgg });
 
-	if(Math.random() < 0.1)  drops.push({ it: Items.SnakeFang });
-	if(Math.random() < 0.1)  drops.push({ it: Items.SnakeSkin });
-	if(Math.random() < 0.1)  drops.push({ it: Items.SpringWater });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.SnakeFang });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.SnakeSkin });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.SpringWater });
 
 	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Scorpius });
 	if(Math.random() < 0.01) drops.push({ it: AlchemySpecial.Nagazm });

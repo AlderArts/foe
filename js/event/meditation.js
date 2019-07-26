@@ -1,3 +1,7 @@
+import { Text } from "../text";
+import { EncounterTable } from "../event";
+import { Gui } from "../gui";
+import { TimeStep } from "../GAME";
 
 /*
  * Meditation scenes for the PC

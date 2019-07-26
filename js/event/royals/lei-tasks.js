@@ -1,10 +1,11 @@
 import { Lei } from './lei';
 import { Gender } from "../../body/gender";
-import { WorldTime } from '../../GAME';
+import { WorldTime, TimeStep } from '../../GAME';
 import { SetGameState, GameState } from '../../gamestate';
 import { Gui } from '../../gui';
 import { Text } from '../../text';
 import { Encounter } from '../../combat';
+import { Bandit } from '../../enemy/bandit';
 
 let TasksScenes = {};
 

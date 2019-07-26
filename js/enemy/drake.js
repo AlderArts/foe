@@ -14,6 +14,8 @@ import { Color } from '../body/color';
 import { TF } from '../tf';
 import { AppendageType } from '../body/appendage';
 import { Race } from '../body/race';
+import { Abilities } from '../abilities';
+import { Text } from '../text';
 
 let DrakeScenes = {};
 

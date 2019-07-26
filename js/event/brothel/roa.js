@@ -266,7 +266,7 @@ RoaScenes.BrothelPrompt = function() {
 	});
 	 */
 	Gui.SetButtonsFromList(options, true, function() {
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 	}); // TODO leave?
 }
 
@@ -592,7 +592,7 @@ RoaScenes.First = function() {
 	});
 	options.push({ nameStr : "Leave",
 		func : function() {
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true,
 		tooltip : Text.Parse("You’re not in the mood for this one.", parse)
 	});
@@ -1061,7 +1061,7 @@ RoaScenes.TSLCatchVaginal = function() {
 			//Impreg
 			RoaScenes.Impregnate(player, cameinside, PregnancyHandler.Slot.Vag);
 			
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true,
 		tooltip : Text.Parse("You’re a big [boygirl], let him give you a nice creamy filling.", {boygirl: player.mfFem("boy", "girl")})
 	});
@@ -1078,7 +1078,7 @@ RoaScenes.TSLCatchVaginal = function() {
 			
 			var cum = roa.OrgasmCum();
 			
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true,
 		tooltip : "You know better than to let a bunny-boy cum inside your cunt."
 	});
@@ -1112,7 +1112,7 @@ RoaScenes.TSLCatchVaginal = function() {
 				
 				player.slut.IncreaseStat(50, 1);
 				
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true,
 			tooltip : "Why not enjoy yourself by giving him an extra ‘hand’?"
 		});
@@ -1130,7 +1130,7 @@ RoaScenes.TSLCatchVaginal = function() {
 					Text.Add("As quick to recover as ever...", parse);
 				}
 				
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true,
 			tooltip : "He doesn’t need your help, so just sit back and watch."
 		});
@@ -1201,7 +1201,7 @@ RoaScenes.TSLCatchVaginal = function() {
 					var cum = roa.OrgasmCum();
 					RoaScenes.Impregnate(player, cameinside, PregnancyHandler.Slot.Vag);
 					
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 				}, enabled : true,
 				tooltip : cameinside > 0 ? "Double your pleasure, double your cum, right? What could another helping of Roa-spooge hurt?" : "Well, since he was good enough to let you cum this time, why not reward him by letting him shoot it where it belongs?"
 			});
@@ -1212,7 +1212,7 @@ RoaScenes.TSLCatchVaginal = function() {
 					
 					var cum = roa.OrgasmCum();
 					
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 				}, enabled : true,
 				tooltip : cameinside > 0 ? "Oh no, once was enough for you; you know what they say about bunny-boys, after all..." : "Not a chance, you didn’t do it before, why would you do it this time?"
 			});

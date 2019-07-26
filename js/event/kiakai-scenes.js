@@ -1,6 +1,8 @@
 
 import { KiakaiSex } from './kiakai-sex';
 import { Kiakai } from './kiakai';
+import { Text } from '../text';
+import { Gui } from '../gui';
 
 let KiakaiScenes = {
 	Sex : KiakaiSex

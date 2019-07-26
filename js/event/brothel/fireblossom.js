@@ -1,5 +1,7 @@
 
 import { Entity } from '../../entity';
+import { Text } from '../../text';
+import { Gui } from '../../gui';
 
 let FireblossomScenes = {};
 
@@ -123,7 +125,7 @@ FireblossomScenes.IntroEntryPoint = function() {
 			tooltip : "Continue exploring Fireblossom’s world from where you left off.",
 			func : function() {
 				Text.Clear();
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : !fireblossom.ReachedEnd()
 		});
 		options.push({ nameStr : "Reset",
@@ -134,7 +136,7 @@ FireblossomScenes.IntroEntryPoint = function() {
 				Text.Clear();
 				Text.Add("You press the glowing gemstone with your delicate finger, and there’s a sudden swirl of activity in the mirror as the lands beyond rearrange themselves, the spell returning to its original form. Perhaps this time you’ll act a different way.", parse);
 				Text.NL();
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true
 		});
 		
@@ -284,7 +286,7 @@ FireblossomScenes.S1TheJourney = function() {
 				player.subDom.IncreaseStat(10, 1);
 				fireblossom.xariRel--;
 				
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true
 		});
 		options.push({ nameStr : "Don’t",
@@ -303,7 +305,7 @@ FireblossomScenes.S1TheJourney = function() {
 				player.slut.IncreaseStat(25, 1);
 				player.subDom.DecreaseStat(0, 1);
 				
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true
 		});
 		options.push({ nameStr : "Encourage",
@@ -332,7 +334,7 @@ FireblossomScenes.S1TheJourney = function() {
 				
 				fireblossom.xariRel++;
 				
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true
 		});
 		

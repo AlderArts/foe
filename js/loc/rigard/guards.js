@@ -2,6 +2,7 @@
 import { Event, Link, EncounterTable } from '../../event';
 import { WorldTime, MoveToLocation } from '../../GAME';
 import { VaughnScenes } from '../../event/outlaws/vaughn-scenes';
+import { Text } from '../../text';
 
 let GateLoc = new Event("Main Gate");
 let BarracksLoc = {

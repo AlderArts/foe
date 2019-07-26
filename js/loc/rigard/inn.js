@@ -240,7 +240,7 @@ InnLoc.common.onEntry = function(preventClear, oldLocation) {
 	Text.NL();
 	Text.Flush();
 	
-	PrintDefaultOptions(true);
+	Gui.PrintDefaultOptions(true);
 }
 
 // SCENES
@@ -1797,7 +1797,7 @@ InnLoc.room.SleepFunc = function() {
 		}
 		
 		Text.Flush();
-		PrintDefaultOptions(true);
+		Gui.PrintDefaultOptions(true);
 	}
 	Gui.NextPrompt(function() {
 		Text.Clear();

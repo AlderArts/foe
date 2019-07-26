@@ -1,3 +1,8 @@
+import { EncounterTable } from "../../event";
+import { Text } from "../../text";
+import { TimeStep } from "../../GAME";
+import { Gui } from "../../gui";
+
 let VenaRScenes = {};
 
 VenaRScenes.Approach = function() {

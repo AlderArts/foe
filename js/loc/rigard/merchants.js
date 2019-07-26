@@ -7,6 +7,7 @@ import { ClothShopLoc } from './clothstore';
 import { WeaponShopLoc } from './weaponshop';
 import { WorldTime, MoveToLocation } from '../../GAME';
 import { Text } from '../../text';
+import { Gui } from '../../gui';
 
 
 let ShopStreetScenes = {}
@@ -61,7 +62,7 @@ ShopStreetLoc.street.onEntry = function() {
 	else if(Math.random() < 0.3)
 		Scenes.Rigard.Chatter2(true);
 	else
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 }
 
 ShopStreetLoc.street.links.push(new Link(
@@ -229,7 +230,7 @@ ShopStreetLoc.street.events.push(new Link(
 					Text.NL();
 					kiakai.relation.IncreaseStat(100, 3);
 				}
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true,
 			tooltip : "Tell the young lion-morph the violin is worth more than his grandfather’s valuation."
 		});
@@ -242,7 +243,7 @@ ShopStreetLoc.street.events.push(new Link(
 				Text.NL();
 				Text.Add("Smiling weakly at the lion-morph, you assure him that it’s not needed, and quickly slip out of the door before he can ask any more inconvenient and awkward questions.", parse);
 				Text.NL();
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true,
 			tooltip : "Pay Dio’s asking price for the violin."
 		});
@@ -311,7 +312,7 @@ ShopStreetLoc.street.events.push(new Link(
 				tooltip : "Pay 120 coins for the hinges."
 			});
 			options.push({ nameStr : "Leave",
-				func : PrintDefaultOptions, enabled : true,
+				func : Gui.PrintDefaultOptions, enabled : true,
 				tooltip : "Leave for now. You can always get the hinges later."
 			});
 			Gui.SetButtonsFromList(options);

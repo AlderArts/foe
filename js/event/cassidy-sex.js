@@ -2,6 +2,7 @@ import { SetGameState, GameState } from "../gamestate";
 import { Gui } from "../gui";
 import { Text } from "../text";
 import { MoveToLocation } from "../GAME";
+import { EncounterTable } from "../event";
 
 let SexScenes = {};
 let SparSexScenes = {};
@@ -508,7 +509,7 @@ SexScenes.Pet = function() {
 				Text.Add("Hmm, she sounds quite out of breath, though. Clearly, she’s had a extra tiring day and needs a deeper massage.", parse);
 			}
 			Text.NL();
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}
 	});
 	options.push({nameStr : "Cunt",
@@ -528,7 +529,7 @@ SexScenes.Pet = function() {
 			Text.NL();
 			Text.Add("All you get in reply is a little grunting noise, sounding much like a stifled cry. Heh. That’ll work.", parse);
 			Text.NL();
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}
 	});
 	options.push({nameStr : "Tail",
@@ -562,7 +563,7 @@ SexScenes.Pet = function() {
 			Text.NL();
 			Text.Add("Much better.", parse);
 			Text.NL();
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}
 	});
 	
@@ -1147,7 +1148,7 @@ SparSexScenes.AllFours = function() {
 			Text.Add("<i>“Eh, it’s not really fair to ask that kind of question, force someone have to make that choice, ace. Can’t I just say that I want to do as much of both as I can? Maybe a bit of both at the same time? Besides, it’s always better if you’re fighting someone you know. Good to pull out a trick or two.”</i>", parse);
 			Text.NL();
 			Text.Add("Heh. You give the salamander a pat on the ass, then sigh and make yourself comfortable on the grass.", parse);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}
 	});
 	options.push({nameStr : "Ass",
@@ -1194,7 +1195,7 @@ SparSexScenes.AllFours = function() {
 			Text.Add("Having her burning insides filled with warm, gooey cream is just too much for poor Cass. Unable to keep up the strength required to continue tailfucking herself, the salamander’s cum-slick tail falls out of her cunt as she makes desperate little noises in the back of her throat, fighting not to scream out loud as the shock of orgasm ravages her body. Glob upon glob of spunk sinks deep into her, backing up and oozing out from about your shaft - both your minds are pretty much black with pleasure, the two of you reduced to rutting animals from the burning heat of your copulation.", parse);
 			Text.NL();
 			Text.Add("All good things must come to an end, though, and eventually the steamy haze of sex begins to clear a little, restoring a spark of clarity to your mind. Still stuffed inside Cass, you groan and wobble unsteadily, taking a few deep breaths to clear your thoughts before trying to extract yourself from her asshole. It takes a few tries and much tugging, but eventually you manage to pull yourself free of her tight little ass and collapse onto the grass to recover.", parse);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}
 	});
 	if(player.NumCocks() > 1) {
@@ -1251,7 +1252,7 @@ SparSexScenes.AllFours = function() {
 				Text.Add("<i>“Shit,”</i> Cass moans weakly. <i>“Hope the neighbors don’t complain tomorrow, heh, but damn, it was worth it.”</i>", parse);
 				Text.NL();
 				Text.Add("Yes, yes it was. You’re loathe to actually withdraw from Cassidy’s well-used insides, but you know you can’t stay like this forever. Your jism lubricating things makes matters quite a bit easier, and you manage to pull yourself free with a pop, landing on your ass in the grass.", parse);
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}
 		});
 	}

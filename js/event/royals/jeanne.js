@@ -7,6 +7,9 @@ import { Entity } from '../../entity';
 import { GetDEBUG } from '../../../app';
 import { AlchemyItems } from '../../items/alchemy';
 import { Race } from '../../body/race';
+import { GameCache } from '../../GAME';
+import { Text } from '../../text';
+import { Gui } from '../../gui';
 
 let JeanneScenes = {};
 
@@ -260,9 +263,9 @@ JeanneScenes.Talk = function() {
 				
 				TimeStep({hour: 8});
 				
-				gameCache.flags["LearnedMagic"] = 2;
+				GameCache().flags["LearnedMagic"] = 2;
 			}
-			else if(gameCache.flags["LearnedMagic"] == 1) {
+			else if(GameCache().flags["LearnedMagic"] == 1) {
 				Text.Add("<i>“Hmm, I sense that you have already had a teacher - of sorts,”</i> Jeanne muses, studying you. <i>“That will make moving beyond the first steps easier for you.”</i> The elven magician quickly reviews what Magnus has taught you, remarking on your affinity with the gemstone, and how it helped you realize how to tap your inner energy.", parse);
 				Text.NL();
 				Text.Add("<i>“Your teaching has been rough, but I can sense your potential.”</i> She ponders your original question, tapping her chin. <i>“Can you show me what you can do?”</i>", parse);
@@ -288,9 +291,9 @@ JeanneScenes.Talk = function() {
 					TimeStep({hour:1});
 				}
 				
-				gameCache.flags["LearnedMagic"] = 2;
+				GameCache().flags["LearnedMagic"] = 2;
 			}
-			else if(gameCache.flags["LearnedMagic"] == 2) {
+			else if(GameCache().flags["LearnedMagic"] == 2) {
 				if(!Jeanne.ReadyForMagicTeaching()) {
 					Text.Add("<i>“Yes, I can teach you more about the arts of magic, but not until you have engrained the foundations into your mind and spirit,”</i> Jeanne explains. <i>“Only experience can take you further on this road.”</i>", parse);
 					Text.NL();
@@ -319,13 +322,13 @@ JeanneScenes.Talk = function() {
 					Text.NL();
 					Text.Add("With that, the magician leaves you to your scrolls.", parse);
 					
-					gameCache.flags["LearnedMagic"] = 3;
+					GameCache().flags["LearnedMagic"] = 3;
 				}
 			}
 			Text.Flush();
 			
 			JeanneScenes.Talk();
-		}, enabled : gameCache.flags["LearnedMagic"] < 3,
+		}, enabled : GameCache().flags["LearnedMagic"] < 3,
 		tooltip : "Jeanne is a magic teacher, isn’t she? Could she teach you about magic?"
 	});
 	/*

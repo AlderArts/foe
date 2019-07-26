@@ -10,6 +10,7 @@ import { Gender } from '../../body/gender';
 import { WorldTime, MoveToLocation } from '../../GAME';
 import { SetGameState, GameState } from '../../gamestate';
 import { Text } from '../../text';
+import { Gui } from '../../gui';
 
 let world = null;
 
@@ -190,7 +191,7 @@ KrawitzLoc.grounds.onEntry = function() {
 	var enc = new EncounterTable();
 	enc.AddEnc(KrawitzScenes.PatrollingGuards,  1.0, function() { return !KrawitzScenes.stat.Orgy; });
 	enc.AddEnc(KrawitzScenes.WanderingServants, 1.0, function() { return !KrawitzScenes.stat.ServantSpikedWine; });
-	enc.AddEnc(PrintDefaultOptions, 1.0, true);
+	enc.AddEnc(Gui.PrintDefaultOptions, 1.0, true);
 	enc.Get();
 }
 
@@ -423,7 +424,7 @@ KrawitzLoc.grounds.links.push(new Link(
 			tooltip : "Leave the estate; you've done enough for one night."
 		});
 		options.push({ nameStr : "No",
-			func : PrintDefaultOptions, enabled : true,
+			func : Gui.PrintDefaultOptions, enabled : true,
 			tooltip : "Stay for a while longer."
 		});
 		Gui.SetButtonsFromList(options);
@@ -546,7 +547,7 @@ KrawitzLoc.Mansion.hall.links.push(new Link(
 		
 		if(KrawitzScenes.stat.Orgy) {
 			Text.Flush();
-			PrintDefaultOptions(true);
+			Gui.PrintDefaultOptions(true);
 			return;
 		}
 		
@@ -972,7 +973,7 @@ KrawitzScenes.Scouting = function() {
 	else {
 		Text.NL();
 		Text.Flush();
-		PrintDefaultOptions(true);
+		Gui.PrintDefaultOptions(true);
 	}
 }
 
@@ -2121,14 +2122,14 @@ KrawitzScenes.Aftermath = function() {
 										Text.Clear();
 										Text.Add("<i>“Thank you, I appreciate it [sir],”</i> she smiles a bit under her grimace.", parse);
 										Text.NL();
-										PrintDefaultOptions();
+										Gui.PrintDefaultOptions();
 									}, enabled : true,
 									tooltip : "Express your sympathies for her loss."
 								});
 								options.push({ nameStr : "Continue",
 									func : function() {
 										Text.Clear();
-										PrintDefaultOptions();
+										Gui.PrintDefaultOptions();
 									}, enabled : true,
 									tooltip : "Time you both were getting inside the inn."
 								});
@@ -2145,7 +2146,7 @@ KrawitzScenes.Aftermath = function() {
 									
 									terry.relation.IncreaseStat(100, 6);
 									
-									PrintDefaultOptions();
+									Gui.PrintDefaultOptions();
 								});
 							}, enabled : true,
 							tooltip : "Your curiosity is piqued; you just have to know what she's carrying to make it so heavy."
@@ -2161,7 +2162,7 @@ KrawitzScenes.Aftermath = function() {
 								
 								terry.relation.IncreaseStat(100, 4);
 								
-								PrintDefaultOptions();
+								Gui.PrintDefaultOptions();
 							}, enabled : true,
 							tooltip : "You don’t want to pry, so you resolve to remain silent."
 						});
@@ -2179,7 +2180,7 @@ KrawitzScenes.Aftermath = function() {
 						Text.Add("You trudge after him wordlessly, feeling the long night in your joints. Your eyebrows rise slightly as the two of you enter the landing to the fourth floor, and head toward the penthouse suite at the end of the hallway.", parse);
 						
 						terry.relation.IncreaseStat(100, 2);
-						PrintDefaultOptions();
+						Gui.PrintDefaultOptions();
 					}, enabled : true,
 					tooltip : "Even if she doesn't want you to carry it for her, you could at least make it easier for her to get through with it."
 				});
@@ -2192,7 +2193,7 @@ KrawitzScenes.Aftermath = function() {
 						Text.NL();
 						Text.Add("His sharp eyes find you the moment you step inside, and he motions for you to follow him upstairs. You trudge after him wordlessly, feeling the long night in your joints. Your eyebrows rise slightly as the two of you enter the landing to the fourth floor, and head toward the penthouse suite at the end of the hallway.", parse);
 						
-						PrintDefaultOptions();
+						Gui.PrintDefaultOptions();
 					}, enabled : true,
 					tooltip : "Alright, if that's how she wants it. You may as well go on in ahead of her."
 				});
@@ -2208,7 +2209,7 @@ KrawitzScenes.Aftermath = function() {
 				Text.NL();
 				Text.Add("His sharp eyes find you the moment you step inside, and he motions for you to follow him upstairs. You trudge after him wordlessly, feeling the long night in your joints. Your eyebrows rise slightly as the two of you enter the landing to the fourth floor, and head toward the penthouse suite at the end of the hallway.", parse);
 				
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true,
 			tooltip : "What she does in her own time is none of your business. Bid farewell and get on with your <b>own</b> business."
 		});

@@ -13,6 +13,8 @@ import { SetGameState, GameState } from '../../gamestate';
 import { Gui } from '../../gui';
 import { Text } from '../../text';
 import { Encounter } from '../../combat';
+import { Party } from '../../party';
+import { Footman } from '../../enemy/knight';
 
 let BullTowerScenes = {};
 
@@ -50,7 +52,7 @@ BullTowerStats.prototype.IncSuspicion = function(max, inc) {
 	if(newSuspicion >= 100 && oldSuspicion < 100) {
 		Gui.Callstack.push(function() {
 			if(outlaws.flags["BullTower"] >= Outlaws.BullTowerQuest.Completed) {
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 				return;
 			}
 			Text.Clear();
@@ -66,37 +68,37 @@ BullTowerStats.prototype.IncSuspicion = function(max, inc) {
 	else if(newSuspicion >= 75 && oldSuspicion < 75) {
 		Gui.Callstack.push(function() {
 			if(outlaws.flags["BullTower"] >= Outlaws.BullTowerQuest.Completed) {
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 				return;
 			}
 			Text.Clear();
 			Text.Add("As you prowl through the shadows of the old fortress, you hear muttering and the distant trampling of boots from the King’s Road outside; it seems that the diversion has nearly run its course, and the game’ll be up once it has. You don’t have that much time left; if you have anything left to do, you’d best be about it - and quickly, too.", parse);
 			Text.NL();
-			PrintDefaultOptions(true);
+			Gui.PrintDefaultOptions(true);
 		});
 	}
 	else if(newSuspicion >= 50 && oldSuspicion < 50) {
 		Gui.Callstack.push(function() {
 			if(outlaws.flags["BullTower"] >= Outlaws.BullTowerQuest.Completed) {
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 				return;
 			}
 			Text.Clear();
 			Text.Add("Even as you silently make your way through the old fortress, you sense that the entire compound is growing more and more restless, a collective consciousness, perhaps, becoming aware of your intrusion despite the diversion Zenith created for you. You should not linger any longer than is absolutely necessary to get the job done.", parse);
 			Text.NL();
-			PrintDefaultOptions(true);
+			Gui.PrintDefaultOptions(true);
 		});
 	}
 	else if(newSuspicion >= 25 && oldSuspicion < 25) {
 		Gui.Callstack.push(function() {
 			if(outlaws.flags["BullTower"] >= Outlaws.BullTowerQuest.Completed) {
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 				return;
 			}
 			Text.Clear();
 			Text.Add("Moving through the grounds of the old fortress as silently as you can, you catch pieces and snatches of conversation from the front gate guard that Cveta “persuaded” to let the two of you through, carried to you by the wind. You’ve managed to remain undetected so far, but the longer you spend in here, the thinner your luck is going to stretch.", parse);
 			Text.NL();
-			PrintDefaultOptions(true);
+			Gui.PrintDefaultOptions(true);
 		});
 	}
 }
@@ -142,31 +144,31 @@ BullTowerLoc.Building.Watchtower.wait = function() { return false; };
 // Add onEntry, conversations to all locations (not Cell)
 BullTowerLoc.Courtyard.Yard.onEntry = function() {
 	if(Math.random() < 0.7) BullTowerScenes.Coversations(true);
-	else PrintDefaultOptions();
+	else Gui.PrintDefaultOptions();
 }
 BullTowerLoc.Courtyard.Pens.onEntry = function() {
 	if(Math.random() < 0.7) BullTowerScenes.Coversations(true);
-	else PrintDefaultOptions();
+	else Gui.PrintDefaultOptions();
 }
 BullTowerLoc.Courtyard.Caravans.onEntry = function() {
 	if(Math.random() < 0.7) BullTowerScenes.Coversations(true);
-	else PrintDefaultOptions();
+	else Gui.PrintDefaultOptions();
 }
 BullTowerLoc.Building.Hall.onEntry = function() {
 	if(Math.random() < 0.7) BullTowerScenes.Coversations();
-	else PrintDefaultOptions();
+	else Gui.PrintDefaultOptions();
 }
 BullTowerLoc.Building.Office.onEntry = function() {
 	if(Math.random() < 0.7) BullTowerScenes.Coversations();
-	else PrintDefaultOptions();
+	else Gui.PrintDefaultOptions();
 }
 BullTowerLoc.Building.Warehouse.onEntry = function() {
 	if(Math.random() < 0.7) BullTowerScenes.Coversations();
-	else PrintDefaultOptions();
+	else Gui.PrintDefaultOptions();
 }
 BullTowerLoc.Building.Watchtower.onEntry = function() {
 	if(Math.random() < 0.7) BullTowerScenes.Coversations();
-	else PrintDefaultOptions();
+	else Gui.PrintDefaultOptions();
 }
 
 
@@ -423,7 +425,7 @@ BullTowerScenes.MovingOut = function() {
 
 			TimeStep({minute: 5});
 
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true,
 		tooltip : "You still need to make a few more preparations."
 	});
@@ -897,7 +899,7 @@ BullTowerLoc.Courtyard.Caravans.events.push(new Link(
 			Text.Clear();
 			Text.Add("You decide that messing with these guards isn’t worth it right now. With that thought in mind, you slink back into the safety of the shadows, Cveta in tow.", parse);
 			Text.NL();
-			PrintDefaultOptions(true);
+			Gui.PrintDefaultOptions(true);
 			outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 		});
 	}
@@ -2170,7 +2172,7 @@ BullTowerScenes.Coversations = function(outside) {
 	
 	Text.NL();
 	
-	PrintDefaultOptions(true);
+	Gui.PrintDefaultOptions(true);
 }
 
 BullTowerScenes.EndingSlipOut = function() {

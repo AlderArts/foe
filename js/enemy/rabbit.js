@@ -24,6 +24,7 @@ import { Gui } from '../gui';
 import { SetGameState, GameState } from '../gamestate';
 import { BodyPartType } from '../body/bodypart';
 import { Sex } from '../entity-sex';
+import { TimeStep } from '../GAME';
 
 let LagomorphScenes = {};
 
@@ -908,7 +909,7 @@ LagomorphScenes.GroupWinOnPlainsPrompt = function() {
 		
 		options.push({ nameStr : "Leave",
 			func : function() {
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true,
 			tooltip : "Leave the rabbits."
 		});
@@ -1332,7 +1333,7 @@ LagomorphScenes.GroupWinOnPlainsFuckM = function(enc, group) {
 					var cum = kiakai.OrgasmCum();
 					kiakai.slut.IncreaseStat(75, 2);
 					
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 				}, enabled : true,
 				tooltip : "Encourage the elf to have a go at the bunnies."
 			});
@@ -1400,7 +1401,7 @@ LagomorphScenes.GroupWinOnPlainsFuckM = function(enc, group) {
 					var cum = kiakai.OrgasmCum();
 					kiakai.relation.IncreaseStat(50, 1);
 					
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 				}, enabled : !beingFucked,
 				tooltip : Text.Parse("Why don’t put that juicy cock of [hishers] to good use? Ask [name] to take position behind you and have a go.", parse)
 			});
@@ -1443,7 +1444,7 @@ LagomorphScenes.GroupWinOnPlainsFuckM = function(enc, group) {
 				kiakai.slut.IncreaseStat(40, 1);
 				kiakai.subDom.DecreaseStat(-75, 2);
 				
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true,
 			tooltip : Text.Parse("Doesn’t [heshe] think it’s unfair that all those bunny cocks are just bobbing there, unsatisfied?", parse)
 		});
@@ -1452,7 +1453,7 @@ LagomorphScenes.GroupWinOnPlainsFuckM = function(enc, group) {
 				Text.Clear();
 				Text.Add("<i>“R-right,”</i> the elf bobs [hisher] head in agreement, quickly scurrying away to [hisher] pile of discarded clothes. Maybe next time...", parse);
 				Text.NL();
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true,
 			tooltip : Text.Parse("Perhaps [name] should just sit this one out. You’ll be along eventually.", parse)
 		});
@@ -1591,7 +1592,7 @@ LagomorphScenes.GroupWinOnPlainsFuckM = function(enc, group) {
 							Text.NL();
 							Text.Add("You watch from your vantage point as Terry pulls out from between the lapins with a broad smile on [hisher] face. <i>“Good job, sluts. Now, here’s what I want you to do next,”</i> [heshe] says, already formulating the plans for the next taking. Seems like Terry’s enjoying [himher]self.", parse);
 							Text.NL();
-							PrintDefaultOptions();
+							Gui.PrintDefaultOptions();
 						}
 						else {
 							Text.Add("<i>“No time to waste then,”</i> the [foxvixen] declares, aligning [himher]self with the nearest willing bunny-butt.", parse);
@@ -1634,7 +1635,7 @@ LagomorphScenes.GroupWinOnPlainsFuckM = function(enc, group) {
 							
 							var cum = terry.OrgasmCum();
 							
-							PrintDefaultOptions();
+							Gui.PrintDefaultOptions();
 						}
 					}, enabled : true,
 					tooltip : Text.Parse("Let’s see what [heshe] can do with that cock of [hishers] and some willing bunny-butts!", parse)
@@ -1648,14 +1649,14 @@ LagomorphScenes.GroupWinOnPlainsFuckM = function(enc, group) {
 					Text.Add("No sooner have you finished speaking, a pair of bunnies immediately pounce on Terry, intent on removing his [tarmor].", parse);
 					Text.NL();
 					Scenes.Terry.FuckedByBunnyMob(male, parse);
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 				}, enabled : true,
 				tooltip : Text.Parse("Well, if [heshe] wants it so bad, you can spare some bunny-cocks for [hisher] needy holes...", parse)
 			});
 			options.push({ nameStr : "Don’t fuck",
 				func : function() {
 					Text.Clear();
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 				}, enabled : true,
 				tooltip : Text.Parse("[HeShe] can just stay there and watch, you don’t want any bunny-boys touching your pet.", parse)
 			});
@@ -1698,12 +1699,12 @@ LagomorphScenes.GroupWinOnPlainsFuckM = function(enc, group) {
 		});
 		
 		if(!blockTerry) {
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}
 	});
 	
 	if(!blockKiai) {
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 	}
 }
 

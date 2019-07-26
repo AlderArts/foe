@@ -7,7 +7,7 @@ import { Entity } from '../../entity';
 import { Images } from '../../assets';
 import { Color } from '../../body/color';
 import { HairStyle } from '../../body/hair';
-import { WorldTime } from '../../GAME';
+import { WorldTime, TimeStep } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
 

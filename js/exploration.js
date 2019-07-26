@@ -9,10 +9,11 @@ import { SetGameState, GameState, isOnline } from './gamestate';
 import { GetRenderPictures, SetRenderPictures, GetDEBUG, SetDEBUG } from '../app';
 
 import { ExploreButtonIndex } from './explorestate';
-import { GAME } from './GAME';
+import { GAME, GameCache } from './GAME';
 import { Text } from './text';
 import { Input } from './input';
 import { Images } from './assets';
+import { loadfileOverlay } from './saver';
 //import { Alchemy } from './alchemy'; TODO Circular dep
 //import { Quest } from './quest'; TODO Circular dep
 
@@ -77,7 +78,7 @@ function LimitedDataPrompt(backFunc) {
 	Input.buttons[6].Setup("Save text", function() {
 		GameToCache();
 		var seen = [];
-		var data = JSON.stringify(gameCache,
+		var data = JSON.stringify(GameCache(),
 			function(key, val) {
 				if (typeof val == "object") {
 					if (seen.indexOf(val) >= 0)
@@ -133,7 +134,7 @@ function DataPrompt() {
 	Input.buttons[6].Setup("Save text", function() {
 		GameToCache();
 		var seen = [];
-		var data = JSON.stringify(gameCache,
+		var data = JSON.stringify(GameCache(),
 			function(key, val) {
 				if (typeof val == "object") {
 					if (seen.indexOf(val) >= 0)

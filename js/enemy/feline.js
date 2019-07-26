@@ -18,6 +18,9 @@ import { WorldTime } from '../GAME';
 import { SetGameState, GameState } from '../gamestate';
 import { Gui } from '../gui';
 import { Text } from '../text';
+import { AlchemyItems } from '../items/alchemy';
+import { IngredientItems } from '../items/ingredients';
+import { AlchemySpecial } from '../items/alchemyspecial';
 
 let FelinesScenes = {};
 
@@ -25,23 +28,23 @@ let Feline = {};
 
 Feline.DropTable = function() {
 	var drops = [];
-	if(Math.random() < 0.05) drops.push({ it: Items.Felinix });
-	if(Math.random() < 0.5)  drops.push({ it: Items.Whiskers });
-	if(Math.random() < 0.5)  drops.push({ it: Items.HairBall });
-	if(Math.random() < 0.5)  drops.push({ it: Items.CatClaw });
+	if(Math.random() < 0.05) drops.push({ it: AlchemyItems.Felinix });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.Whiskers });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HairBall });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.CatClaw });
 
-	if(Math.random() < 0.1)  drops.push({ it: Items.GoatMilk });
-	if(Math.random() < 0.1)  drops.push({ it: Items.SheepMilk });
-	if(Math.random() < 0.1)  drops.push({ it: Items.CowMilk });
-	if(Math.random() < 0.1)  drops.push({ it: Items.RawHoney });
-	if(Math.random() < 0.05) drops.push({ it: Items.HorseCum });
-	if(Math.random() < 0.05) drops.push({ it: Items.LizardEgg });
-	if(Math.random() < 0.05) drops.push({ it: Items.Trinket });
-	if(Math.random() < 0.05) drops.push({ it: Items.MFluff });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.GoatMilk });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.SheepMilk });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.CowMilk });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.RawHoney });
+	if(Math.random() < 0.05) drops.push({ it: IngredientItems.HorseCum });
+	if(Math.random() < 0.05) drops.push({ it: IngredientItems.LizardEgg });
+	if(Math.random() < 0.05) drops.push({ it: IngredientItems.Trinket });
+	if(Math.random() < 0.05) drops.push({ it: IngredientItems.MFluff });
 
-	if(Math.random() < 0.01) drops.push({ it: Items.Avia });
-	if(Math.random() < 0.01) drops.push({ it: Items.Bovia });
-	if(Math.random() < 0.01) drops.push({ it: Items.Tigris });
+	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Avia });
+	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Bovia });
+	if(Math.random() < 0.01) drops.push({ it: AlchemySpecial.Tigris });
 
 	return drops;
 }

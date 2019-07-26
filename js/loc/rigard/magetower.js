@@ -4,6 +4,8 @@ import { Event, Link } from '../../event';
 import { JeanneScenes } from '../../event/royals/jeanne';
 import { GolemScenes } from '../../event/royals/golem';
 import { MoveToLocation } from '../../GAME';
+import { Text } from '../../text';
+import { Gui } from '../../gui';
 
 let world = null;
 
@@ -69,7 +71,7 @@ MageTowerLoc.onEntry = function() {
 	else if(golemState < GolemScenes.State.Won_noLoss)
 		GolemScenes.RepeatApproach();
 	else
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 }
 
 export { MageTowerLoc };

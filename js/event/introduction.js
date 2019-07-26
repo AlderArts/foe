@@ -10,7 +10,7 @@ import { Gui } from '../gui';
 import { Gender } from '../body/gender';
 import { Items } from '../items';
 import { JobEnum, Jobs } from '../job';
-import { GAME, MoveToLocation, TimeStep } from '../GAME';
+import { GAME, GameCache, MoveToLocation, TimeStep } from '../GAME';
 import { Text } from '../text';
 import { Input } from '../input';
 import { BodyTypeMale, BodyTypeFemale } from '../body/defbody';
@@ -26,6 +26,7 @@ import { AppendageType } from '../body/appendage';
 import { Race } from '../body/race';
 import { Sex } from '../entity-sex';
 import { BodyPartType } from '../body/bodypart';
+import { Kiakai } from './kiakai';
 
 let Intro = {};
 
@@ -2978,7 +2979,7 @@ Intro.KiaDecideOutset = function() {
 	options.push({ nameStr : "Save world",
 		tooltip : "The elf seems to be earnest and the cause good, why not join each other?",
 		func : function() {
-			gameCache.flags["IntroOutset"] = Intro.Outset.SaveWorld;
+			GameCache().flags["IntroOutset"] = Intro.Outset.SaveWorld;
 			GAME().kiakai.flags["Attitude"] = Kiakai.Attitude.Nice;
 			GAME().kiakai.relation.IncreaseStat(100, 10);
 
@@ -2996,7 +2997,7 @@ Intro.KiaDecideOutset = function() {
 	options.push({ nameStr : "Go home",
 		tooltip : "No... this is not your fight. Still, you seem to be stuck here, for better or worse.",
 		func : function() {
-			gameCache.flags["IntroOutset"] = Intro.Outset.GoHome;
+			GameCache().flags["IntroOutset"] = Intro.Outset.GoHome;
 
 			Text.Add("<i>“Look, I know you mean well, but I just want to go home,”</i> you explain to the disappointed elf. <i>“Saving the world is not my job.”</i>");
 			Text.NL();
@@ -3053,7 +3054,7 @@ Intro.KiaDecideOutset = function() {
 	options.push({ nameStr : "Gain power",
 		tooltip : "While recent events have put you in a completely unfamiliar environment, why not use this situation to your advantage? Seems like the gem you carry is an object of great power...",
 		func : function() {
-			gameCache.flags["IntroOutset"] = Intro.Outset.GainPower;
+			GameCache().flags["IntroOutset"] = Intro.Outset.GainPower;
 			GAME().player.subDom.IncreaseStat(100, 5);
 			GAME().kiakai.subDom.DecreaseStat(-100, 5);
 			GAME().kiakai.relation.DecreaseStat(-100, 10);

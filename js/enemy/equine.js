@@ -15,6 +15,12 @@ import { AppendageType } from '../body/appendage';
 import { SetGameState, GameState } from '../gamestate';
 import { Gui } from '../gui';
 import { Text } from '../text';
+import { Abilities } from '../abilities';
+import { PregnancyHandler } from '../pregnancy';
+import { Party } from '../party';
+import { Encounter } from '../combat';
+import { AlchemyItems } from '../items/alchemy';
+import { IngredientItems } from '../items/ingredients';
 
 let EquineScenes = {};
 
@@ -98,22 +104,22 @@ Equine.prototype.constructor = Equine;
 
 Equine.prototype.DropTable = function() {
 	var drops = [];
-	if(Math.random() < 0.05) drops.push({ it: Items.Equinium });
-	if(Math.random() < 0.5)  drops.push({ it: Items.HorseHair });
-	if(Math.random() < 0.5)  drops.push({ it: Items.HorseShoe });
-	if(Math.random() < 0.5)  drops.push({ it: Items.HorseCum });
+	if(Math.random() < 0.05) drops.push({ it: AlchemyItems.Equinium });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HorseHair });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HorseShoe });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HorseCum });
 
-	if(Math.random() < 0.3)  drops.push({ it: Items.FreshGrass });
-	if(Math.random() < 0.2)  drops.push({ it: Items.Foxglove });
-	if(Math.random() < 0.2)  drops.push({ it: Items.SpringWater });
-	if(Math.random() < 0.1)  drops.push({ it: Items.FlowerPetal });
-	if(Math.random() < 0.1)  drops.push({ it: Items.Feather });
+	if(Math.random() < 0.3)  drops.push({ it: IngredientItems.FreshGrass });
+	if(Math.random() < 0.2)  drops.push({ it: IngredientItems.Foxglove });
+	if(Math.random() < 0.2)  drops.push({ it: IngredientItems.SpringWater });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.FlowerPetal });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.Feather });
 
-	if(Math.random() < 0.01) drops.push({ it: Items.Bovia });
-	if(Math.random() < 0.01) drops.push({ it: Items.Ovis });
-	if(Math.random() < 0.01) drops.push({ it: Items.Virilium });
-	if(Math.random() < 0.01) drops.push({ it: Items.Gestarium });
-	if(Math.random() < 0.01) drops.push({ it: Items.GestariumPlus });
+	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Bovia });
+	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Ovis });
+	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Virilium });
+	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Gestarium });
+	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.GestariumPlus });
 
 	return drops;
 }

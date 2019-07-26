@@ -11,6 +11,7 @@ import { Color } from '../body/color';
 import { Abilities } from '../abilities';
 import { AlchemyItems } from '../items/alchemy';
 import { IngredientItems } from '../items/ingredients';
+import { Text } from '../text';
 
 function Footman(levelbonus) {
 	Entity.call(this);

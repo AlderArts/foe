@@ -6,7 +6,11 @@ import { GetDEBUG } from '../../../app';
 import { OCavalcadeScenes } from './cavalcade';
 import { Stat } from '../../stat';
 import { Time } from '../../time';
-import { WorldTime } from '../../GAME';
+import { WorldTime, TimeStep } from '../../GAME';
+import { Gui } from '../../gui';
+import { Text } from '../../text';
+import { Jobs } from '../../job';
+import { EncounterTable } from '../../event';
 
 let OutlawsScenes = {
 	Cavalcade : OCavalcadeScenes,
@@ -204,7 +208,7 @@ OutlawsScenes.MariasBouquet = function() {
 			Text.Add("With the bouquets and names, it’s not too hard to guess what this is supposed to be - a memorial of some sort, isn’t it? And the names… you’re guessing that they were outlaws who died while out and about outlaw business, right?", parse);
 			Text.NL();
 			Text.Add("Maria laughs, although there is no joy in the sound. <i>“If only we had the numbers to warrant this many forays in order to lose all these people, [playername]. No, these aren’t those who died fighting. The names here are of those who died all those years back, and only live on in our memories.</i>", parse);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	options.push({ nameStr : "No",
@@ -214,7 +218,7 @@ OutlawsScenes.MariasBouquet = function() {
 			Text.Add("Hmm… you can probably guess that this is a memorial of some sort, but as to <i>why</i> Maria brought you here… well, part of it’s probably that she wants to impress upon you the numbers of the dead. Beyond that, though, it’s anyone’s guess. Perhaps she could be so kind as to tell you?", parse);
 			Text.NL();
 			Text.Add("<i>“This is where we remember those who died in the civil war all those years back, [playername]. Nameless in the official records, remembered only by those they were close to, their bodies never found.</i>", parse);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	
@@ -862,7 +866,7 @@ OutlawsScenes.Exploration.Archery = function() {
 					
 					Text.Clear();
 					Text.Add("Well, you’re feeling like showing off today - why not go for the head? It’d definitely make for an impressive show… hopefully you have the skills to back it up, though.", parse);
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 				}, enabled : true
 			});
 			options.push({ nameStr : "Body",
@@ -872,7 +876,7 @@ OutlawsScenes.Exploration.Archery = function() {
 					
 					Text.Clear();
 					Text.Add("Deciding to go for a conservative approach, you decide to aim for the dummy’s centre. One bird in hand is worth two in the bush and all that, right?", parse);
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 				}, enabled : true
 			});
 			

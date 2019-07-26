@@ -55,7 +55,7 @@ BastetScenes.IntroEntryPoint = function() {
 		return function() {
 			choice = c;
 			Text.Clear();
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}
 	};
 	
@@ -83,7 +83,7 @@ BastetScenes.IntroEntryPoint = function() {
 		Text.NL();
 		choice = Bastet.State.S1Birth;
 		
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 	}
 	else {
 		Text.Add("As the door shuts behind you, you take glance at the familiar desert-themed closet. Well, you know the drill. Choose a chapter, get naked and enter the fantasy.", parse);
@@ -97,7 +97,7 @@ BastetScenes.SceneSelect = function(choice) {
 	Gui.Callstack.push(function() {
 		if(bastet.flags["State"] < choice)
 			bastet.flags["State"] = choice;
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 	});
 	
 	switch(choice) {
@@ -544,7 +544,7 @@ BastetScenes.Birth2 = function() {
 			Text.Add("You scrub yourself to clean up after your little playtime and return to the steps, where you once again take a seat and lean back as you try to relax. Aah… this feels much better now that you don’t have a raging erection clouding your thoughts.", parse);
 			Text.NL();
 			Text.Add("Sitting here, basking in the afterglow of sexual climax, listening to wind gently graze the water of the pool... it’s a wonderfully serene experience. Your ears twitch almost in time with the hypnotic sound of water rippling, and a dreamy smile crosses your lips as you allow your eyes to start sinking closed.", parse);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Meditate",
@@ -554,7 +554,7 @@ BastetScenes.Birth2 = function() {
 			Text.Add("Closing your eyes, you inhale deeply, holding your breath as you try to think of nothing. Though the lust continues to rage inside of you, it slowly ebbs away as you focus on nothing but breathing. In, out, in, out.", parse);
 			Text.NL();
 			Text.Add("With each exhalation, it feels as if the fire in your loins dwindle and die. Slowly, your cock grows limper and limper, until it begins to shrink back inside of your sheath. A feeling of deep tranquility washes over you, and you smile absently to yourself. It’s rare you get a feeling to just relax like this, and you willingly give yourself over to it, even though the flames within are well-quenched now.", parse);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	
@@ -601,7 +601,7 @@ BastetScenes.Birth2 = function() {
 						Text.Add("And is met with the cold logic of the matter. This is a sacred task. Your village, your family, they have been completing their side of the covenant for generations. Lady Bastet is the Goddess of love now, but once, she was Goddess of war and ruin. Do you dare to offend the Goddess herself by breaking the covenant? Even if you somehow believed you could escape her wrath yourself, what might happen to all you once called friends and family?", parse);
 						Text.NL();
 						Text.Add("With those thoughts ringing in your head, the panic leaks from your pores, washed away in the icy deluge of resignation. Shoulders slumping, you sigh and quietly thank Adala for at least being honest with you about what your fate will be.", parse);
-						PrintDefaultOptions();
+						Gui.PrintDefaultOptions();
 					}, enabled : true
 				});
 				options.push({ nameStr : "Hot",
@@ -611,7 +611,7 @@ BastetScenes.Birth2 = function() {
 						Text.Add("Your tail sticks as if you had been electrified, ears perked up. Shivers race across your body, prickles of delight dancing under your skin. That sounds... that sounds so <b>hot!</b> Your mind’s eye flashes before you, teasing you of images of yourself remade to fit the Goddess. Unthinkingly, you cup the imaginary bulge of your prodigious breasts, trembling with fantasized pleasure.", parse);
 						Text.NL();
 						Text.Add("Opening your eyes, lips curled into an eager smile, you purr avidly to Adala that you wish she’d told you this sooner. You can’t wait to begin now...", parse);
-						PrintDefaultOptions();
+						Gui.PrintDefaultOptions();
 					}, enabled : true
 				});
 				options.push({ nameStr : "No…",
@@ -619,7 +619,7 @@ BastetScenes.Birth2 = function() {
 					func : function() {
 						Text.Clear();
 						Text.Add("You inhale deeply, letting your raging emotions still, exhaling softly to expel your doubts. Humbly, you thank Adala for being honest with you about what will happen. You promise her that you will do whatever she asks so that you may fulfill your role.", parse);
-						PrintDefaultOptions();
+						Gui.PrintDefaultOptions();
 					}, enabled : true
 				});
 				
@@ -832,15 +832,15 @@ BastetScenes.Birth3 = function() {
 	var options = new Array();
 	options.push({ nameStr : "Yes!",
 		tooltip : "If that’s what she wants, who are you to say no? She can go right ahead and play to her heart’s content!",
-		func : PrintDefaultOptions, enabled : true
+		func : Gui.PrintDefaultOptions, enabled : true
 	});
 	options.push({ nameStr : "Definitely!",
 		tooltip : "She wants to play with your dick, and you’ve been wanting her to play with it since you laid eyes on her sexy body. Of course she can!",
-		func : PrintDefaultOptions, enabled : true
+		func : Gui.PrintDefaultOptions, enabled : true
 	});
 	options.push({ nameStr : "Absolutely!",
 		tooltip : "You’re so horny right now, you’d have to be crazy to deny her. You expect her to play with it like she plays with her favorite toy.",
-		func : PrintDefaultOptions, enabled : true
+		func : Gui.PrintDefaultOptions, enabled : true
 	});
 	
 	Gui.Callstack.push(function() {

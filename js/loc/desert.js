@@ -5,7 +5,9 @@
  */
 
 import { Event, Link, EncounterTable } from '../event';
-import { MoveToLocation } from '../GAME';
+import { MoveToLocation, TimeStep } from '../GAME';
+import { Text } from '../text';
+import { Gui } from '../gui';
 
 // Create namespace
 let DesertLoc = {

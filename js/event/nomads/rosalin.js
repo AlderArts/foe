@@ -17,6 +17,9 @@ import { WorldTime } from '../../GAME';
 import { BodyPartType } from '../../body/bodypart';
 import { Sex } from '../../entity-sex';
 import { PregnancyHandler } from '../../pregnancy';
+import { Text } from '../../text';
+import { Gui } from '../../gui';
+import { Alchemy } from '../../alchemy';
 
 let RosalinScenes = {};
 
@@ -277,7 +280,7 @@ RosalinScenes.Interact = function() {
 	});
 	*/
 
-	Gui.SetButtonsFromList(options, true, PrintDefaultOptions);
+	Gui.SetButtonsFromList(options, true, Gui.PrintDefaultOptions);
 }
 
 RosalinScenes.Desc = function() {

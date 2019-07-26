@@ -8,6 +8,8 @@ import { Entity } from '../entity';
 import { TasksScenes } from './asche-tasks';
 import { SexScenes } from './asche-sex';
 import { Race } from '../body/race';
+import { Text } from '../text';
+import { Gui } from '../gui';
 
 let AscheScenes = {
 	Tasks : TasksScenes,

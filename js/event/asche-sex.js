@@ -1,5 +1,6 @@
-
-import { Scenes } from '../event';
+import { Text } from "../text";
+import { Sex } from "../entity-sex";
+import { Gui } from "../gui";
 
 let SexScenes = {};
 

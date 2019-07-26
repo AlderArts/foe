@@ -78,11 +78,11 @@ Mothgirl.Flags = {
 };
 
 Mothgirl.Met = function() {
-	return gameCache.flags["Moth"] & Mothgirl.Flags.Met;
+	return GameCache().flags["Moth"] & Mothgirl.Flags.Met;
 }
 
 Mothgirl.Sexed = function() {
-	return gameCache.flags["Moth"] & Mothgirl.Flags.Sexed;
+	return GameCache().flags["Moth"] & Mothgirl.Flags.Sexed;
 }
 
 Mothgirl.prototype.DropTable = function() {
@@ -177,7 +177,7 @@ MothgirlScenes.LoneEnc = function() {
 		}
 		Text.Flush();
 
-		gameCache.flags["Moth"] |= Mothgirl.Flags.Met;
+		GameCache().flags["Moth"] |= Mothgirl.Flags.Met;
 
 		//[Fight] [Give Money] [Trade Sex]
 		var options = new Array();

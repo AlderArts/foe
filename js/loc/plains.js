@@ -10,6 +10,8 @@ import { Scenes } from '../scenes';
 import { BurrowsLoc } from './burrows';
 import { WorldTime, MoveToLocation } from '../GAME';
 import { Season } from '../time';
+import { Text } from '../text';
+import { Gui } from '../gui';
 
 // Create namespace
 let PlainsLoc = {

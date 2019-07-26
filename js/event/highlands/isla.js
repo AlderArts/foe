@@ -5,6 +5,8 @@ import { AppendageType } from '../../body/appendage';
 import { Color } from '../../body/color';
 import { Time } from '../../time';
 import { WorldTime, MoveToLocation } from '../../GAME';
+import { Gui } from '../../gui';
+import { Text } from '../../text';
 
 let IslaScenes = {};
 
@@ -169,7 +171,7 @@ IslaScenes.Introduction = function() {
 			Text.Add("You’re not sure, you reply. You’ve been walking for some time, trying to keep in a straight line, then you saw a trail that looked like it might lead to a road - or at least, somewhere where there might be people who could direct you to one.", parse);
 			Text.NL();
 			Text.Add("<i>“Well, you got that second part down right, at least.”</i> Isla replies, eyeing you up and down. <i>“Pah, you look too poorly to be much of a threat, unlike those three troublemakers. If you’ve been meandering around for as long as you say you’ve been, it wouldn’t be in good conscience to just send you down without at least something to drink.”</i>", parse);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Curious",
@@ -181,7 +183,7 @@ IslaScenes.Introduction = function() {
 			Text.Add("It’s pretty high up here, the air’s good, and you were passing by, anyway. It’s not as if you knew this place was inhabited until you saw her little camp.", parse);
 			Text.NL();
 			Text.Add("<i>“Psh, lowlanders. No sense of danger at all - see something pretty, and then risk life and limb to go take a gander at it. If you were from around here, I’d accuse you of lying, but this is so ridiculous that it’s hard to deny it. Even those three troublemakers can cook up a better excuse than that, and all they’ve got in their brains is air.”</i> She looks you up and down and sighs. <i>“Well, guess you must be thirsty. You look too poorly to be much of a threat at the moment - wouldn’t send you down the trail in good conscience without offering a drink first.”</i>", parse);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Spring",
@@ -199,7 +201,7 @@ IslaScenes.Introduction = function() {
 			Text.Add("Well, refusing would be kind of rude, and you guess you could do with a drink.", parse);
 			Text.NL();
 			Text.Add("<i>“Great. Just give me a moment.”</i>", parse);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	
@@ -272,7 +274,7 @@ IslaScenes.Introduction = function() {
 		
 		Gui.NextPrompt(function() {
 			party.location = world.loc.Highlands.Hills;
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		});
 	});
 	

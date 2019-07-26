@@ -1,5 +1,8 @@
 
 import { EncounterTable } from '../event';
+import { Text } from '../text';
+import { Gui } from '../gui';
+import { TimeStep } from '../GAME';
 
 let PoetScenes = {};
 

@@ -3,11 +3,13 @@ import { Event, Link } from '../event';
 import { Inventory } from '../inventory';
 import { GetDEBUG } from '../../app';
 import { Gender } from '../body/gender';
-import { WorldTime } from '../GAME';
+import { WorldTime, GameCache } from '../GAME';
 import { Player } from './player';
 import { Party } from '../party';
 import { Items } from '../items';
 import { EntityStorage, MoveToLocation } from '../GAME';
+import { Gui } from '../gui';
+import { Text } from '../text';
 
 let HalloweenScenes = {};
 
@@ -145,7 +147,7 @@ Halloween.Loc = {
 	WitchHut : new Event("Witch's hut")
 };
 
-// gameCache.flags["HW"]
+// GameCache().flags["HW"]
 Halloween.State = { //Bitmask for globally tracked flag
 	Intro : 1,
 	Pie   : 2
@@ -178,7 +180,7 @@ HalloweenScenes.PieIntro = function() {
 	Text.Add("<i>“No. [p].”</i> With that, the chief turns his attention back to the fire. There’s nothing else for you here, so you get up and head off into the camp.", parse);
 	Text.Flush();
 	
-	gameCache.flags["HW"] |= Halloween.State.Intro;
+	GameCache().flags["HW"] |= Halloween.State.Intro;
 	
 	TimeStep({minute: 30});
 	
@@ -190,8 +192,8 @@ HalloweenScenes.PumpkinPie = function() {
 		playername : player.name
 	};
 	
-	var first = !(gameCache.flags["HW"] & Halloween.State.Pie);
-	gameCache.flags["HW"] |= Halloween.State.Pie;
+	var first = !(GameCache().flags["HW"] & Halloween.State.Pie);
+	GameCache().flags["HW"] |= Halloween.State.Pie;
 	
 	parse["Momo"] = momo.AtCamp() ? "Momo" :
 		cale.Met() ? "Cale" : "A wolf morph";
@@ -605,7 +607,7 @@ Halloween.Loc.Path.onEntry = function() {
 	if(HalloweenScenes.HW.RonnieAvailable() && Math.random() < 0.5)
 		HalloweenScenes.Ronnie();
 	else
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 }
 
 Halloween.Loc.Path.links.push(new Link(
@@ -1561,7 +1563,7 @@ Halloween.Loc.Graveyard.onEntry = function() {
 	HalloweenScenes.HW.flags |= Halloween.Flags.Graveyard;
 	
 	if(repeat && (Math.random() < 0.5))
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 	else
 		HalloweenScenes.Kiai();
 }
@@ -1776,7 +1778,7 @@ HalloweenScenes.KiaiRun = function() {
 	
 	Gui.NextPrompt(function() {
 		party.location = dest;
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 	});
 }
 
@@ -1963,7 +1965,7 @@ HalloweenScenes.NadirMaApproach = function() {
 	options.push({ nameStr : "No",
 		tooltip : "No, you’re not going to fall for this. Let sleeping evils lie.",
 		func : function() {
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	Gui.SetButtonsFromList(options, false, null);
@@ -5068,7 +5070,7 @@ HalloweenScenes.Laggoth = function() {
 			Text.Add("Oh, no particular reason. You were just out here in the middle of the night, saw this burned chapel and thought to yourself that it might just be a nice place to do a little exploring.", parse);
 			Text.NL();
 			Text.Add("To your mild surprise, the demon king buys it lock, stock and barrel. <i>“Exploring? Exploring? How typical of you mortals to stick your noses into places where you don’t belong. Well, your curiosity has only led you to your doom!”</i>", parse);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Treasure",
@@ -5076,7 +5078,7 @@ HalloweenScenes.Laggoth = function() {
 		func : function() {
 			Text.Clear();
 			Text.Add("Laggoth sneers at your answer. <i>“Not once in my long captivity in the Pit did I doubt that the greed of mortals would free me from my prison. Even after that, it seems that this particular trait will be downfall of your kind. No! You will not find any treasure remaining in this place, fool. Instead, all you will find is your doom!”</i>", parse);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Fight Evil",
@@ -5094,7 +5096,7 @@ HalloweenScenes.Laggoth = function() {
 			Text.Add("Absolutely nothing?", parse);
 			Text.NL();
 			Text.Add("<i>“None except my only weakness, but you’ll never discover it. I’ll take delight in your pitiful attempts to figure it out before I’m done with you.”</i>", parse);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Don’t Answer",
@@ -5108,7 +5110,7 @@ HalloweenScenes.Laggoth = function() {
 			Text.Add("No, you’re not one for answering questions.", parse);
 			Text.NL();
 			Text.Add("<i>“Struggle all you want against my magnificent presence, mortal! It will all be in vain in the end, for there is nothing that can harm me! Well, save for my only weakness, but you’ll never discover that in a thousand years!”</i>", parse);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	

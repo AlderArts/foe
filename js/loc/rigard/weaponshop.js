@@ -6,6 +6,7 @@
 import { Event, Link } from '../../event';
 import { WorldTime, MoveToLocation } from '../../GAME';
 import { Text } from '../../text';
+import { Gui } from '../../gui';
 
 let WeaponShopLoc = new Event("The Pale Flame");
 
@@ -37,7 +38,7 @@ WeaponShopLoc.onEntry = function() {
 		Scenes.Cassidy.FemFinal();
 	}
 	else {
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 	}
 }
 

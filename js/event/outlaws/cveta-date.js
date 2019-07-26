@@ -1,5 +1,7 @@
 import { Cveta } from './cveta';
 import { WorldTime } from '../../GAME';
+import { Gui } from '../../gui';
+import { Text } from '../../text';
 
 let DateScenes = {};
 
@@ -103,7 +105,7 @@ DateScenes.PartySetup = function() {
 	//Set up restore party at the bottom of the callstack, fallthrough
 	Gui.Callstack.push(function() {
 		party.LoadActiveParty();
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 	});
 }
 
@@ -330,7 +332,7 @@ DateScenes.Spring = function() {
 			Text.Add("Cveta picks up her lyre and strums the strings with a sigh. <i>“I will reiterate, it was not an impulsive act. Now that I am settled, I write home on occasion, so at least they know that nothing unfortunate has happened to my person.</i>", parse);
 			Text.NL();
 			Text.Add("<i>“Yes, I know that I will have to return someday; duty demands it of me - such is inescapable. Become worthy, accept power and rule wisely, as Father is fond of saying. But someday is not today, and I do not wish to dwell on it further.”</i>", parse);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Hopes",
@@ -350,7 +352,7 @@ DateScenes.Spring = function() {
 			Text.Add("Well, that was quite a mouthful.", parse);
 			Text.NL();
 			Text.Add("<i>“It was, and perhaps too heavy a topic for today. Come now, are we not meant to be enjoying ourselves out here?”</i>", parse);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Yourself",
@@ -390,7 +392,7 @@ DateScenes.Spring = function() {
 				Text.NL();
 				Text.Add("<i>“There is no need to be so self-conscious, [playername]. Once you know you have reached a certain level of decorum and propriety, there is no need to constantly worry about the opinions of others towards you.”</i>", parse);
 			}
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Listen",
@@ -402,7 +404,7 @@ DateScenes.Spring = function() {
 			Text.Add("Clear, dark, and infinitely deep, like the spring itself. Muted in most parts, but brilliant where it shines through. Cveta is definitely getting better at improv, or at least that which you’re around to hear.", parse);
 			Text.NL();
 			Text.Add("You come to some moments later with Cveta closing the tune with a series of chords - with her music as gentle as it was, you must’ve dozed off sometime. The songstress either hasn’t noticed or doesn’t care, for she closes her music with a finishing flourish, the last notes lingering in the air before they fade into the dimly lit air.", parse);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	
@@ -448,7 +450,7 @@ DateScenes.Spring = function() {
 				Text.Add("You’re not so sure about that. It seems like such a waste, really.", parse);
 				Text.NL();
 				Text.Add("<i>“They are an important part of my image, thank you very much, and I am willing to give as much to sustain it. Come now, let us finish up and be off.”</i>", parse);
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true
 		});
 		options.push({ nameStr : "Lick",
@@ -464,7 +466,7 @@ DateScenes.Spring = function() {
 				Text.Add("<i>“Um… yes.”</i> Slowly, Cveta upends her cup on her finger and gives it a good scrubbing; sure enough, the stain is gone.", parse);
 				
 				cveta.relation.IncreaseStat(100, 1);
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true
 		});
 		options.push({ nameStr : "Watch",
@@ -474,7 +476,7 @@ DateScenes.Spring = function() {
 				Text.Add("Grumbling to herself, Cveta pours the contents of her cup over the offending stain on her finger, then another when it refuses to wash out. You watch her with a faint smile - given her tiny frame, being sulky and angry only makes the songstress harder to take seriously.", parse);
 				Text.NL();
 				Text.Add("<i>“Well. It seems that my negligence has had some consequences,”</i> she says with a small sigh. <i>“Please, do not let my problems trouble you unduly. We are supposed to be enjoying ourselves here.”</i>", parse);
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true
 		});
 		

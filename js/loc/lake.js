@@ -5,7 +5,9 @@
  */
 
 import { Event, Link, EncounterTable } from '../event';
-import { MoveToLocation } from '../GAME';
+import { MoveToLocation, TimeStep } from '../GAME';
+import { Gui } from '../gui';
+import { Text } from '../text';
 
 // Create namespace
 let LakeLoc = {

@@ -21,6 +21,7 @@ import { Gui } from '../gui';
 import { EncounterTable } from '../event';
 import { Encounter } from '../combat';
 import { Party } from '../party';
+import { Sex } from '../entity-sex';
 
 let TerryScenes = {};
 
@@ -1051,7 +1052,7 @@ TerryScenes.CaughtTheThief = function() {
 				
 				terry.flags["Met"] = Terry.Met.LetHer; // "0"
 				
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true,
 			tooltip : "What does it matter if you let the angry, horny herm vent her frustrations on some common thief? Who's it really going to hurt? Besides, you're sure that she'll appreciate your looking the other way."
 		});
@@ -1117,7 +1118,7 @@ TerryScenes.CaughtTheThief = function() {
 				
 				terry.flags["Met"] = Terry.Met.StopHer; // "1"
 				
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true,
 			tooltip : "Criminal or not, letting her rape him just isn't right. She's not going to appreciate you interfering in her affairs, but it's still the noble thing to do."
 		});
@@ -1170,7 +1171,7 @@ TerryScenes.CaughtTheThief = function() {
 					
 					terry.flags["Met"] = Terry.Met.TakeHim; // "2"
 					
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 				}, enabled : true,
 				tooltip : "Why should Miranda get to keep all the fun? You’ve worked just as hard to bust this fox."
 			});
@@ -3675,14 +3676,14 @@ TerryScenes.JeanneTFCraft = function(item, scene, horseTF) {
 				Text.NL();
 				parse["armorDesc"] = function() { return player.ArmorDesc(); }
 				Text.Add("Extricating your [cockDesc], you pat [himher] gently on the flank and inform [himher] that you’re all done. Having said that, you move to clean up and put your [armorDesc] back on.", parse);
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			});
 		}
 		else {
 			Text.Add("With a groan of arousal, Terry arches [hisher] back in unthinking pleasure as it glides smoothly inside, your fingers following it as deeply as you can fit them. Finally, you are inside [himher] to the knuckle, but you can feel the capsule continue gliding inwards, making course for Terry’s stomach.", parse);
 			Text.NL();
 			Text.Add("Extricating your digits, you pat the [foxvixen] tenderly on the flank and inform [himher] that you’re all done.", parse);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}
 	});
 }
@@ -4392,7 +4393,7 @@ TerryScenes.SexPrompt = function(backPrompt) {
 				
 				terry.relation.DecreaseStat(-100, 2);
 				
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true,
 			tooltip : Text.Parse("Maybe you should tease [himher]? It’s clearly a sensitive spot and you could do with having some fun at the [foxvixen]’s expense.", parse)
 		});
@@ -4417,7 +4418,7 @@ TerryScenes.SexPrompt = function(backPrompt) {
 				
 				terry.relation.IncreaseStat(100, 3);
 				
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true,
 			tooltip : Text.Parse("That mark is pretty attractive. Terry should learn to appreciate [hisher] charms better.", parse)
 		});
@@ -4451,7 +4452,7 @@ TerryScenes.SexPrompt = function(backPrompt) {
 		scenes.Get();
 	}
 	Text.NL();
-	PrintDefaultOptions();
+	Gui.PrintDefaultOptions();
 }
 
 TerryScenes.SexPromptChoice = function(backPrompt, haveadrink) {
@@ -5645,7 +5646,7 @@ TerryScenes.SexPitchAnal = function(cocksInAss) {
 				Text.Add("Once you deem Terry to feel sufficiently loose and lubed, you pull your fingers out again and stand up; time for the main event now...", parse);
 				Text.NL();
 				
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true,
 			tooltip : Text.Parse("Give [himher] a taste of what’s to come and stretch [himher] in preparation at the same time.", parse)
 		});
@@ -5722,7 +5723,7 @@ TerryScenes.SexPitchAnal = function(cocksInAss) {
 				
 				terry.flags["xLick"]++;
 				
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true,
 			tooltip : "Bite that tasty tush, and maybe have a taste of what’s to come..."
 		});
@@ -5739,7 +5740,7 @@ TerryScenes.SexPitchAnal = function(cocksInAss) {
 			Text.NL();
 			Text.Add("You start to rub [himher] with smooth, even strokes, kneading flesh through soft fur in a soothing massage and telling [himher] to relax. The [foxvixen] nods, trying [hisher] best to relax, despite the anxiety.", parse);
 			
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		});
 		
 		Text.Add("<i>“W-wait! I’m sure there’s something else we could-”</i> With a gentle smile on your lips, you cut the [foxvixen] off in mid-protest with a finger placed demurely to [hisher] mouth. Shaking your head makes it clear that [heshe]’s not going to make you change your mind, and [hisher] ears droop in submission.", parse);
@@ -5766,7 +5767,7 @@ TerryScenes.SexPitchAnal = function(cocksInAss) {
 					promise = true;
 					terry.relation.IncreaseStat(100, 5);
 					
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 				}, enabled : true,
 				tooltip : "You promise to be gentle."
 			});
@@ -5784,7 +5785,7 @@ TerryScenes.SexPitchAnal = function(cocksInAss) {
 					promise = false;
 					terry.relation.IncreaseStat(100, 2);
 					
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 				}, enabled : true,
 				tooltip : "You can't make that promise."
 			});
@@ -5792,28 +5793,28 @@ TerryScenes.SexPitchAnal = function(cocksInAss) {
 		}
 		else if(terry.Relation() >= 30) {
 			Text.Add("Still, there’s a definite wag in [hisher] tail as it swishes softly over [hisher] butt. It looks like Terry isn’t entirely against this...", parse);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}
 		else {
 			Text.Add("Cowed, [heshe] meekly looks at [hisher] feet, saying not a word.", parse);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}
 	}
 	else if(terry.Slut() < 30) {
 		Text.Add("<i>“Alright...”</i> Terry hesitantly turns around, first kneeling on the floor, then finally crawling on fours. [HisHer] tail is tucked between [hisher] legs, ears flat on [hisher] skull. It’s clear that the [foxvixen] is a nervous pile.", parse);
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 	}
 	else if(terry.Slut() < 60) {
 		Text.Add("<i>“Okay, sure. If you want my butt, it’s yours. Should I get on all fours now?”</i>", parse);
 		Text.NL();
 		Text.Add("Nodding your head, you tell the [foxvixen] that’s right. Without further ado, [heshe] kneels and complies with your command, crawling around until [heshe] has [hisher] back turned to you, tail raised to give you a clear view of your target.", parse);
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 	}
 	else {
 		Text.Add("<i>“My, my, someone can’t get enough of my butt.”</i> [HeShe] grins. <i>“Alright then, you can have it - but you’ll have to come and get it.”</i> The [foxvixen] gives you a wink.", parse);
 		Text.NL();
 		Text.Add("Well, that’s an invitation you can hardly refuse. In a few brisk motions, you have crossed the distance between the pair of you, one hand moving to possessively cup Terry’s ass. As your slutty [foxvixen] mewls in delight, you stifle [hisher] noise by hungrily enveloping [hisher] lips with your own. Terry melts into your embrace, and you easily coax [himher] into the proper stance before breaking the kiss, standing back up with an appreciative slap to [hisher] butt.", parse);
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 	}
 }
 
@@ -7559,7 +7560,7 @@ TerryScenes.SexPitchVaginal = function(cocks) {
 				Text.NL();
 				Text.Add("<i>“N-not really...”</i> the [foxvixen] replies, a bit embarrassed.", parse);
 				
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}
 			else if(terry.Slut() < 60) {
 				Text.Add("<i>“Lube me yourself? I wonder what do you mean by that?”</i> Terry asks with a smirk.", parse);
@@ -7575,7 +7576,7 @@ TerryScenes.SexPitchVaginal = function(cocks) {
 				Text.NL();
 				Text.Add("Alright then, in that case...", parse);
 				
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}
 			else {
 				Text.Add("<i>“I personally don’t think I need any lube. I’m more than capable of taking you on. But on the other hand, I’m pretty sure you got something good in store. So let’s say, yes.”</i> Terry grins knowingly.", parse);
@@ -7704,7 +7705,7 @@ TerryScenes.SexPitchVaginal = function(cocks) {
 					Gui.SetButtonsFromList(options, false, null);
 				}
 				else
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 			}
 		}, enabled : true,
 		tooltip : Text.Parse("Let’s see how your [foxvixen] likes being licked instead.", parse)

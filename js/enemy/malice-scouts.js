@@ -1185,7 +1185,7 @@ MaliceScoutsScenes.Catboy.Petting = function(enc) {
 			Text.Add("All good things must eventually come to an end, though, and the catboy’s torrential ejaculation slowly dies down to a dribble that runs down his maleness and onto your fingers. You clench your fist about his slowly softening shaft, feeling the thick spunk squish and burble, then wipe your digits clean on his clothes. The catboy himself is utterly drained, ears twisting this way and that as he pants away with the occasional groan of exhaustion.", parse);
 			Text.NL();
 			player.AddSexExp(2);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}
 	});
 	options.push({nameStr : "Tease",
@@ -1214,7 +1214,7 @@ MaliceScoutsScenes.Catboy.Petting = function(enc) {
 			Text.Add("The catboy is less lucky in this regard as most of his own fountaining seed lands right back down on him, splattering all over his fur and leaving him a sticky mess. After quite an impressive climax for someone his size, the shuddering kitty simmers down, collapsing in a heap.", parse);
 			Text.NL();
 			player.AddSexExp(1);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}
 	});
 

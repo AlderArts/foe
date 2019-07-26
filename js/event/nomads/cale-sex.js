@@ -1,5 +1,9 @@
 import { Cale } from './cale';
 import { PregnancyHandler } from '../../pregnancy';
+import { Text } from '../../text';
+import { Gui } from '../../gui';
+import { Sex } from '../../entity-sex';
+import { EncounterTable } from '../../event';
 
 /* CALE SEX SCENES */
 let CaleSexScenes = {};
@@ -302,7 +306,7 @@ CaleSexScenes.SexSuckHimEntryPoint = function(outside) {
 			Text.Add("You are just getting started.", parse);
 			Text.NL();
 			
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true,
 		tooltip : "You can’t resist any longer, just dive in and take him!"
 	});
@@ -329,7 +333,7 @@ CaleSexScenes.SexSuckHimEntryPoint = function(outside) {
 			Text.Add("<i>“T-totally worth the wait,”</i> Cale moans as you place a kiss at the base of his sheath.", parse);
 			Text.NL();
 			
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true,
 		tooltip : "Drag it out for as long as you can to tease him."
 	});
@@ -363,7 +367,7 @@ CaleSexScenes.SexSuckHimEntryPoint = function(outside) {
 			
 			finger = true;
 			
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true,
 		tooltip : "Give him some action on both fronts, distracting him with a blowjob while you plow his rear with your fingers."
 	});
@@ -434,7 +438,7 @@ CaleSexScenes.SexSuckHimEntryPoint = function(outside) {
 				Text.Add("That’s Cale alright; he really needs to work on his stamina. Seeing no reason to disrupt him from his nap, you get up and start to gather your things, slipping back into your [armor]. By the time you’re finished dressing up again, the wolf-morph is out like a snuffed candle. You can’t resist a grin and gently petting him between the ears before you wander off, leaving him to his sleep.", parse);
 				Text.NL();
 				
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true,
 			tooltip : "Gulp down his load."
 		});
@@ -453,7 +457,7 @@ CaleSexScenes.SexSuckHimEntryPoint = function(outside) {
 				
 				mess = true;
 				
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true,
 			tooltip : "Take a shower of cum from the wolf."
 		});
@@ -490,7 +494,7 @@ CaleSexScenes.SexSuckHimEntryPoint = function(outside) {
 					var max = virgin ? 25 : cale.flags["Met2"] >= Cale.Met2.Goop ? 100 : 50;
 					cale.slut.IncreaseStat(max, 1);
 					
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 				}, enabled : true,
 				tooltip : "Complete your humiliation of him by turning him on his back and making him eat his own seed."
 			});
@@ -1108,7 +1112,7 @@ CaleSexScenes.SexFuckHim = function(outside, opts) {
 					}
 				}
 				
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true,
 			tooltip : "Keep railing him from behind, you are so close to cumming..."
 		});
@@ -1148,7 +1152,7 @@ CaleSexScenes.SexFuckHim = function(outside, opts) {
 					}
 				}
 				
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true,
 			tooltip : "Put the wolf in your lap and make him ride you."
 		});
@@ -1214,7 +1218,7 @@ CaleSexScenes.SexFuckHim = function(outside, opts) {
 							
 							cale.slut.IncreaseStat(50, 5);
 							
-							PrintDefaultOptions();
+							Gui.PrintDefaultOptions();
 						}, enabled : true,
 						tooltip : "Looks like he liked it. Why not tease him a little?"
 					});
@@ -1230,7 +1234,7 @@ CaleSexScenes.SexFuckHim = function(outside, opts) {
 							Text.NL();
 							Text.Add("<i>“You… have a point. This isn’t so bad after all,”</i> the wolf replies, nuzzling back against you. <i>“Going to need some time after that last one,”</i> he grimaces.", parse);
 							
-							PrintDefaultOptions();
+							Gui.PrintDefaultOptions();
 						}, enabled : true,
 						tooltip : "Let's just cut to the chase, this isn’t such a big deal."
 					});
@@ -1250,7 +1254,7 @@ CaleSexScenes.SexFuckHim = function(outside, opts) {
 							cale.relation.IncreaseStat(100, 10);
 							cale.slut.DecreaseStat(0, 5);
 							
-							PrintDefaultOptions();
+							Gui.PrintDefaultOptions();
 						}, enabled : true,
 						tooltip : "He's obviously uncertain about how he feels; why not be nice to him?"
 					});
@@ -1370,7 +1374,7 @@ CaleSexScenes.SexFuckHim = function(outside, opts) {
 			});
 		});
 	});
-	if(!breakpoint) PrintDefaultOptions();
+	if(!breakpoint) Gui.PrintDefaultOptions();
 }
 
 CaleSexScenes.SexCatchVag = function(outside) {
@@ -2409,7 +2413,7 @@ CaleSexScenes.SexFuckingHimOutsideComments = function(cock, opts) {
 				var max = cale.flags["Met2"] >= Cale.Met2.Goop ? 100 : 50;
 				cale.slut.IncreaseStat(max, 2);
 				
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true,
 			tooltip : "Why not? Let the satyr have some fun with his wolf rival."
 		});
@@ -2423,7 +2427,7 @@ CaleSexScenes.SexFuckingHimOutsideComments = function(cock, opts) {
 					Text.NL();
 				}
 				
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true,
 			tooltip : "Nah, as amusing as that would be, Cale is <i>your</i> prize."
 		});

@@ -7,7 +7,10 @@ import { Entity } from '../../entity';
 import { GetDEBUG } from '../../../app';
 import { Race } from '../../body/race';
 import { Color } from '../../body/color';
-import { WorldTime } from '../../GAME';
+import { WorldTime, GameCache } from '../../GAME';
+import { Gui } from '../../gui';
+import { Text } from '../../text';
+import { GlobalScenes } from '../global';
 
 let MagnusScenes = {};
 
@@ -129,7 +132,7 @@ MagnusScenes.Interact = function() {
 		
 		Text.Add("You wave at Magnus as you pull up beside the young magician, flopping down on the log. He seems to register that you’re trying to talk to him, and briefly put his book down on his lap.", parse);
 		Text.NL();
-		if(!Scenes.Global.MagicStage1())
+		if(!GlobalScenes.MagicStage1())
 			Text.Add("<i>“Yes, [playername]? How can I help you?”</i>", parse);
 		else
 			Text.Add("<i>“[playername]! Great to see you again, how fare your studies?”</i>", parse);
@@ -179,7 +182,7 @@ MagnusScenes.Interact = function() {
 					func : function() {
 						Text.Clear();
 						
-						if(gameCache.flags["LearnedMagic"] >= 2) {
+						if(GameCache().flags["LearnedMagic"] >= 2) {
 							if(magnus.flags["Teach"] < Magnus.Teaching.Jeanne) {
 								if(magnus.flags["Teach"] == Magnus.Teaching.Done) {
 									Text.Add("<i>“Now that you mention it...”</i> Magnus peers at you curiously. <i>“I sense a change in your magic, as if you are much stronger now. Did you come to some insight, [playername]?”</i>", parse);
@@ -288,7 +291,7 @@ MagnusScenes.Interact = function() {
 					}, enabled : true,
 					tooltip : "Proposition Magnus for a romp in the hay, so to speak."
 				});
-				if(Scenes.Global.MagicStage1()) {
+				if(GlobalScenes.MagicStage1()) {
 					options.push({ nameStr : "Gem",
 						func : function() {
 							Text.Clear();
@@ -346,7 +349,7 @@ MagnusScenes.Meditation = function() {
 			Text.NL();
 			if(jeanne.flags["Met"] == 0)
 				Text.Add("All you have seen so far has been connected to the gemstone you carry. The more you find out about it, the better. A magician, or an alchemist, may be able to tell you more, if you find one skilled enough.", parse);
-			else if(!Scenes.Global.PortalsOpen())
+			else if(!GlobalScenes.PortalsOpen())
 				Text.Add("You need to find a way to power up the gemstone, and Jeanne seems to have a plan. Following her instructions seems to be the best course of action for now.", parse);
 			else
 				Text.Add("With the activation of the gemstone, the realms lie open for you to explore. Who knows what you might find if you step through one of the portals? Perhaps something that will aid you in your quest, and prepare you for the inevitable confrontation with Uru.", parse);
@@ -900,7 +903,7 @@ MagnusScenes.LearnMagic = function() {
 		TimeStep({hour: 3});
 		player.AddSPFraction(-1);
 		
-		gameCache.flags["LearnedMagic"] = 1;
+		GameCache().flags["LearnedMagic"] = 1;
 		magnus.flags["Teach"] = Magnus.Teaching.Done;
 		
 		Gui.NextPrompt();

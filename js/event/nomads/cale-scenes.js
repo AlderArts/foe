@@ -4,6 +4,8 @@ import { Gender } from '../../body/gender';
 import { CaleSexScenes } from './cale-sex';
 import { Cale } from './cale';
 import { WorldTime } from '../../GAME';
+import { Text } from '../../text';
+import { Gui } from '../../gui';
 
 let CaleScenes = {
     Sex : CaleSexScenes,
@@ -447,7 +449,7 @@ CaleScenes.Prompt = function() {
 			tooltip : "Ask him to teach you about the finer points of being a rogue."
 		});
 	}
-	Gui.SetButtonsFromList(options, true, PrintDefaultOptions);
+	Gui.SetButtonsFromList(options, true, Gui.PrintDefaultOptions);
 }
 
 CaleScenes.Shop = function() {

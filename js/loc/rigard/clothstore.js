@@ -2,6 +2,8 @@
 import { Event, Link } from '../../event';
 import { Gender } from '../../body/gender';
 import { WorldTime, MoveToLocation } from '../../GAME';
+import { Text } from '../../text';
+import { Gui } from '../../gui';
 
 //
 // Sliken Delights
@@ -48,7 +50,7 @@ ClothShopLoc.onEntry = function() {
 		Gui.NextPrompt();
 	}
 	else
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 }
 
 ClothShopLoc.description = function() {
@@ -218,7 +220,7 @@ ClothShopLoc.events.push(new Link(
 					tooltip : "Talk to her about Fera's mother."
 				});
 			}
-			Gui.SetButtonsFromList(options, true, PrintDefaultOptions);
+			Gui.SetButtonsFromList(options, true, Gui.PrintDefaultOptions);
 		}
 		nexellePrompt();
 	}

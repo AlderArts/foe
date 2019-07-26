@@ -1,3 +1,5 @@
+import { GameCache } from "../GAME";
+import { DryadGlade } from "../loc/glade";
 
 let GlobalScenes = {};
 
@@ -18,17 +20,17 @@ GlobalScenes.DefeatedOrchid = function() {
 }
 
 GlobalScenes.PortalsOpen = function() {
-	return gameCache.flags["Portals"] != 0;
+	return GameCache().flags["Portals"] != 0;
 }
 
 // Learned from Jeanne/Magnus
 GlobalScenes.MagicStage1 = function() {
-	return gameCache.flags["LearnedMagic"] != 0;
+	return GameCache().flags["LearnedMagic"] != 0;
 }
 
 // Learned from Jeanne
 GlobalScenes.MagicStage2 = function() {
-	return gameCache.flags["LearnedMagic"] >= 3;
+	return GameCache().flags["LearnedMagic"] >= 3;
 }
 
 export { GlobalScenes };

@@ -447,7 +447,7 @@ MomoScenes.Prompt = function() {
 		tooltip : ""
 	});
 	*/
-	Gui.SetButtonsFromList(options, true, PrintDefaultOptions);
+	Gui.SetButtonsFromList(options, true, Gui.PrintDefaultOptions);
 }
 
 MomoScenes.CookPrompt = function() {
@@ -807,7 +807,7 @@ MomoScenes.TalkPrompt = function() {
 						
 						momo.flags["tCook"] = Momo.TalkCook.BigFamily;
 						
-						PrintDefaultOptions();
+						Gui.PrintDefaultOptions();
 					}, enabled : true,
 					tooltip : "Your family was a lot like hers: big and noisy."
 				});
@@ -825,7 +825,7 @@ MomoScenes.TalkPrompt = function() {
 						
 						momo.flags["tCook"] = Momo.TalkCook.SmallFamily;
 
-						PrintDefaultOptions();
+						Gui.PrintDefaultOptions();
 					}, enabled : true,
 					tooltip : "You had some siblings, but not as many as she did."
 				});
@@ -843,7 +843,7 @@ MomoScenes.TalkPrompt = function() {
 						
 						momo.flags["tCook"] = Momo.TalkCook.OnlyChild;
 						
-						PrintDefaultOptions();
+						Gui.PrintDefaultOptions();
 					}, enabled : true,
 					tooltip : "You never had any siblings."
 				});
@@ -864,14 +864,14 @@ MomoScenes.TalkPrompt = function() {
 				if(momo.Ascended())
 					Text.Add(" She pauses suddenly, nibbling thoughtfully at a crooked finger. <i>“I wonder if they’d be more surprised at seeing you, or at seeing me,”</i> she mumbles, more to herself than to you.", parse);
 				Text.NL();
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}
 			else if(momo.flags["tCook"] == Momo.TalkCook.SmallFamily) {
 				Text.Add("Momo looks thoughtful for a moment, staring wistfully off into space. <i>“You want to know the truth? There are times I kind of wished my family was a little smaller. I mean, don’t get me wrong, I loved having brothers and sisters! It’s just... well, sometimes I wouldn’t have minded a little more attention from Mom and Dad, or just a little less noise in general.”</i>", parse);
 				Text.NL();
 				Text.Add("A frown crosses her face now. <i>“Not to mention there’s always been some little brats I wouldn’t have minded not having around,”</i> she grumbles, but it’s the half-hearted grumble of an exasperated older sibling; no venom to it at all.", parse);
 				Text.NL();
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}
 			else { // if(momo.flags["tCook"] == Momo.TalkCook.OnlyChild)
 				Text.Add("Momo purses her lips, tapping them in thought. <i>“Well, I guess there’s some good things to say about being an only child. You never have to worry about your parents not having time for you, you don’t have to share all your stuff, you don’t have bratty siblings stealing your things or making kites out of your panties or pulling your tail...”</i>", parse);
@@ -880,7 +880,7 @@ MomoScenes.TalkPrompt = function() {
 				Text.NL();
 				Text.Add("She’s smiling wistfully now. <i>“I guess, really, I’m not cut out to be a single child. They bug me sometimes, but I love my brothers and my sisters.”</i>", parse);
 				Text.NL();
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}
 		}, enabled : true,
 		tooltip : "So, what made her so fascinated with cooking, anyway?"

@@ -564,7 +564,7 @@ OpheliaScenes.TalkPrompt = function() {
 						Text.Add("She merely shakes her head. <i>“No, believe me, I’m not. Even if there are some of us who don’t seem to care, the truth is that you’ve done a great service for the colony.”</i>", parse);
 						Text.NL();
 						Text.Add("With a sheepish smile, you insist that you were just doing what anyone would have done - indeed, should have done - when faced with Lagon’s cruel tyranny.", parse);
-						PrintDefaultOptions();
+						Gui.PrintDefaultOptions();
 					}, enabled : true,
 					tooltip : "Ophelia is giving you far too much credit."
 				});
@@ -574,7 +574,7 @@ OpheliaScenes.TalkPrompt = function() {
 						Text.Add("Thrusting out your chin, you fold your arms over your chest and give a triumphant grin. With a firm tone, you praise Ophelia for her attentiveness; it’s good to see she, at least, appreciates your efforts in rescuing her and her siblings from Lagon.", parse);
 						Text.NL();
 						Text.Add("<i>“It’s not just me. I know my brothers and sister seem like they don’t care much for what you did, but some of them do. You truly are a hero, [playername].”</i>", parse);
-						PrintDefaultOptions();
+						Gui.PrintDefaultOptions();
 					}, enabled : true,
 					tooltip : "Of course you’re a hero, so why not accept the praise that is your due?"
 				});
@@ -1814,7 +1814,7 @@ OpheliaScenes.DeliverFollowup = function(trait) {
 				lagon.relation.DecreaseStat(-100, 25);
 				ophelia.relation.IncreaseStat(100, 25);
 				
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true,
 			tooltip : "Stand up for her."
 		});
@@ -1828,7 +1828,7 @@ OpheliaScenes.DeliverFollowup = function(trait) {
 				lagon.relation.DecreaseStat(-100, 5);
 				ophelia.relation.IncreaseStat(100, 10);
 				
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true,
 			tooltip : "Step in before something ugly happens."
 		});
@@ -1851,7 +1851,7 @@ OpheliaScenes.DeliverFollowup = function(trait) {
 				lagon.relation.IncreaseStat(100, 5);
 				ophelia.relation.DecreaseStat(-100, 25);
 				
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true,
 			tooltip : "It’s not worth sticking your neck out for. What is she to you, after all?"
 		});
@@ -2390,7 +2390,7 @@ OpheliaScenes.RewardAftermathStage2Prompt = function() {
 			
 			ophelia.relation.IncreaseStat(100, 5);
 			
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true,
 		tooltip : "Her father goes too far, and should be stopped."
 	});
@@ -2401,7 +2401,7 @@ OpheliaScenes.RewardAftermathStage2Prompt = function() {
 			
 			ophelia.relation.DecreaseStat(-100, 5);
 			
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true,
 		tooltip : "She shouldn’t keep defying her father, as it will put her in danger."
 	});
@@ -2437,7 +2437,7 @@ OpheliaScenes.RewardChoices = function() {
 				
 				player.AddLustFraction(1);
 				
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true,
 			tooltip : "Increase your cum production, capacity and potency."
 		});
@@ -2460,7 +2460,7 @@ OpheliaScenes.RewardChoices = function() {
 				
 				player.AddLustFraction(1);
 				
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true,
 			tooltip : "Increase your chances of getting pregnant. Additionally, it increases your milk capacity and production."
 		});
@@ -2482,7 +2482,7 @@ OpheliaScenes.RewardChoices = function() {
 				
 				player.AddLustFraction(1);
 				
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true,
 			tooltip : "Shortens gestation period and increases the chances of having multiple children."
 		});
@@ -2498,7 +2498,7 @@ OpheliaScenes.RewardChoices = function() {
 			
 			party.coin += 1500;
 			
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true,
 		tooltip : "Ask for treasures. Lagon is offering you 1500 coins for your services."
 	});
@@ -2528,7 +2528,7 @@ OpheliaScenes.RewardChoices = function() {
 					
 					TimeStep({minute: 10});
 					
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 				});
 				
 				OpheliaScenes.RewardChoices();

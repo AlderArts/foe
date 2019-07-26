@@ -1714,7 +1714,7 @@ CassidyScenes.InsideTalkPrompt = function() {
 							cassidy.flags["Met"] = Cassidy.Met.TalkFem;
 							cassidy.femTimer = new Time(0,0,2,0,0);
 							
-							PrintDefaultOptions();
+							Gui.PrintDefaultOptions();
 						}, enabled : true
 					});
 					options.push({ nameStr : "No",
@@ -1740,7 +1740,7 @@ CassidyScenes.InsideTalkPrompt = function() {
 							Text.Add("Right. She needs a bit of alone time; you can do that.", parse);
 							Text.NL();
 							Text.Add("<i>“Thanks again.”</i> Cassidy sags. <i>“I mean it.”</i>", parse);
-							PrintDefaultOptions();
+							Gui.PrintDefaultOptions();
 						}, enabled : true
 					});
 					
@@ -2020,7 +2020,7 @@ CassidyScenes.ManagingShop2 = function(score) {
 	var wrong = function() {
 		Text.Clear();
 		Text.Add("<i>“Hmm? That doesn’t sound quite right… but I suppose it’s just my memory playing tricks on me. You’re the shopkeep, after all.”</i>", parse);
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 	}
 	
 	//[325 coins][375 coins][425 coins]
@@ -2035,7 +2035,7 @@ CassidyScenes.ManagingShop2 = function(score) {
 			score++;
 			Text.Clear();
 			Text.Add("<i>“That does sound about right. Here’s your money, then.”</i>", parse);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	options.push({ nameStr : "425 coins",
@@ -2191,7 +2191,7 @@ CassidyScenes.ManagingShop5 = function(score) {
 		Text.Add("<i>“Is not a big problem,”</i> the minotaur rumbles. <i>“City doesn’t have much in the way for me. Maybe should just get the job done and head back home.”</i>", parse);
 		Text.NL();
 		Text.Add("Right. Heading home. That’s something which he should be doing really soon, isn’t it?", parse);
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 	}
 	
 	//[Halberd][Greatsword][Warhammer]
@@ -2221,7 +2221,7 @@ CassidyScenes.ManagingShop5 = function(score) {
 			Text.Add("Uh, okay. So long as he doesn’t mind stepping back a little to do it. The brute doesn’t even bother to count his payment - he simply reaches into his furs and draws out a fistful of old, battered coins. Admittedly, it’s a minotaur-sized fistful, so it’s almost certain the fellow is overpaying - but hey, you deserve as much for putting up with a sweaty, stanky hunk of meat.", parse);
 			Text.NL();
 			Text.Add("Right. Now that that’s over with…", parse);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	
@@ -2280,7 +2280,7 @@ CassidyScenes.ManagingShop6 = function(score) {
 			Text.Add("<i>“It can? Thank you so much. I’ll have my husband send down someone with the materials and drawings tomorrow, then.”</i>", parse);
 			Text.NL();
 			Text.Add("No problem. Knowing Cass, it should turn out good!", parse);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	options.push({ nameStr : "No",
@@ -2305,7 +2305,7 @@ CassidyScenes.ManagingShop6 = function(score) {
 				Text.NL();
 				Text.Add("<i>“It’ll have to do, I suppose. I’ll be back another time.”</i>", parse);
 			}
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	
@@ -2432,7 +2432,7 @@ CassidyScenes.ManagingShopCookies = function() {
 			Text.Add("<i>“Great! Help me get this open, okay?”</i>", parse);
 			Text.NL();
 			Text.Add("It doesn’t take too long for the little wax paper parcel to be torn apart and set out on the counter, and then Cass and you are enjoying the glorious taste of home-baked peanut cookies.", parse);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	options.push({ nameStr : "No",
@@ -2444,7 +2444,7 @@ CassidyScenes.ManagingShopCookies = function() {
 			Text.Add("It doesn’t take too long for the little wax paper parcel to be torn apart and unfurled on the counter, and then Cassidy’s gleefully munching on a handful of home-baked peanut cookies.", parse);
 			Text.NL();
 			Text.Add("<i>“Really, you shouldn’t have said no, this stuff is delicious.”</i> A few crumbs spray out of [hisher] mouth. <i>“I suppose it makes me sound like a kid, but I really miss these.”</i>", parse);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	
@@ -2781,7 +2781,7 @@ CassidyScenes.Model = function() {
 					Text.NL();
 					Text.Add("That’s better than falling completely flat on your face, you suppose.", parse);
 					Text.NL();
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 				}
 			});
 			options.push({nameStr : "Determined",
@@ -2799,7 +2799,7 @@ CassidyScenes.Model = function() {
 					Text.NL();
 					Text.Add("Hard and heavy, like a mace or a hammer or something on those lines, you presume.", parse);
 					Text.NL();
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 				}
 			});
 			options.push({nameStr : "Mysterious",
@@ -2817,7 +2817,7 @@ CassidyScenes.Model = function() {
 					Text.NL();
 					Text.Add("<i>“No.”</i> Cass studies your reaction, then smiles. <i>“Great! Just like that! That face… that’s perfect; it’s exactly what I needed. Hold it right there… and I’ve got it. Wonderful!</i>", parse);
 					Text.NL();
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 				}
 			});
 			

@@ -9,6 +9,8 @@ import { Race } from '../../body/race';
 import { TF } from '../../tf';
 import { AppendageType } from '../../body/appendage';
 import { Color } from '../../body/color';
+import { Text } from '../../text';
+import { Gui } from '../../gui';
 
 function Adrian(storage) {
 	Entity.call(this);

@@ -7,6 +7,12 @@
 import { Entity } from '../entity';
 import { Gender } from '../body/gender';
 import { Images } from '../assets';
+import { Text } from '../text';
+import { Abilities } from '../abilities';
+import { AlchemyItems } from '../items/alchemy';
+import { IngredientItems } from '../items/ingredients';
+import { Color } from '../body/color';
+import { Race } from '../body/race';
 
 function StreetUrchin() {
 	Entity.call(this);
@@ -177,24 +183,24 @@ Bandit.prototype.constructor = Bandit;
 
 Bandit.prototype.DropTable = function() {
 	var drops = [];
-	if(Math.random() < 0.05) drops.push({ it: Items.Homos });
-	if(Math.random() < 0.5)  drops.push({ it: Items.Hummus });
-	if(Math.random() < 0.5)  drops.push({ it: Items.SpringWater });
-	if(Math.random() < 0.5)  drops.push({ it: Items.Letter });
+	if(Math.random() < 0.05) drops.push({ it: AlchemyItems.Homos });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.Hummus });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.SpringWater });
+	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.Letter });
 	
-	if(Math.random() < 0.1)  drops.push({ it: Items.GoatMilk });
-	if(Math.random() < 0.1)  drops.push({ it: Items.CowMilk });
-	if(Math.random() < 0.1)  drops.push({ it: Items.SheepMilk });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.GoatMilk });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.CowMilk });
+	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.SheepMilk });
 	
-	if(Math.random() < 0.05) drops.push({ it: Items.RabbitFoot });
-	if(Math.random() < 0.05) drops.push({ it: Items.Lettuce });
-	if(Math.random() < 0.05) drops.push({ it: Items.HorseShoe });
-	if(Math.random() < 0.05) drops.push({ it: Items.CowBell });
-	if(Math.random() < 0.05) drops.push({ it: Items.SnakeOil });
-	if(Math.random() < 0.05) drops.push({ it: Items.FreshGrass });
-	if(Math.random() < 0.05) drops.push({ it: Items.DogBiscuit });
-	if(Math.random() < 0.05) drops.push({ it: Items.DogBone });
-	if(Math.random() < 0.05) drops.push({ it: Items.Trinket });
+	if(Math.random() < 0.05) drops.push({ it: IngredientItems.RabbitFoot });
+	if(Math.random() < 0.05) drops.push({ it: IngredientItems.Lettuce });
+	if(Math.random() < 0.05) drops.push({ it: IngredientItems.HorseShoe });
+	if(Math.random() < 0.05) drops.push({ it: IngredientItems.CowBell });
+	if(Math.random() < 0.05) drops.push({ it: IngredientItems.SnakeOil });
+	if(Math.random() < 0.05) drops.push({ it: IngredientItems.FreshGrass });
+	if(Math.random() < 0.05) drops.push({ it: IngredientItems.DogBiscuit });
+	if(Math.random() < 0.05) drops.push({ it: IngredientItems.DogBone });
+	if(Math.random() < 0.05) drops.push({ it: IngredientItems.Trinket });
 	
 	return drops;
 }

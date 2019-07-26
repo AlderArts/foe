@@ -7,6 +7,9 @@ import { Entity } from '../../entity';
 import { GetDEBUG } from '../../../app';
 import { Gender } from '../../body/gender';
 import { WorldTime } from '../../GAME';
+import { Gui } from '../../gui';
+import { Text } from '../../text';
+import { RaceScore } from '../../body/race';
 
 let ChiefScenes = {};
 
@@ -66,7 +69,7 @@ ChiefScenes.Interact = function() {
 				chief.relation.IncreaseStat(100, 10);
 				Text.Add("You politely ask what he means, not sure what [elfname] has promised, or who the old man is, for that matter. The second question is answered almost immediately, as the grizzled man speaks. <i>“I'm the chief, herding these here folks in about the same direction, looking out for their interests, so to speak.”</i> The old man takes a deep draft from his pipe before continuing.", parse);
 				Text.NL();
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true,
 			tooltip : "Remain polite."
 		});
@@ -78,7 +81,7 @@ ChiefScenes.Interact = function() {
 				Text.NL();
 				Text.Add("Magical what?", parse);
 				Text.NL();
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true,
 			tooltip : "Take the old man down a notch."
 		});

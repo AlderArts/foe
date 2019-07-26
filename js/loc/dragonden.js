@@ -6,6 +6,7 @@
 
 import { Event, Link, EncounterTable } from '../event';
 import { MoveToLocation } from '../GAME';
+import { Text } from '../text';
 
 // Create namespace
 let DragonDenLoc = {

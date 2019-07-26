@@ -1,5 +1,5 @@
 import { TasksScenes } from './vaughn-tasks';
-import { WorldTime } from '../../GAME';
+import { WorldTime, TimeStep } from '../../GAME';
 import { VaughnFlags } from './vaughn-flags';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
@@ -503,7 +503,7 @@ VaughnScenes.TalkWar = function() {
 						Text.Add("<i>“Mister Hip Flask and I have been friends for a long time,”</i> Vaughn replies as he pockets the flask. <i>“He’s a loyal companion, still has to let me down. Doesn’t talk much, but he’s there when you need him.”</i>", parse);
 						Text.NL();
 						Text.Add("Yeah, you reply with a grin. Everyone could do with a friend like Mister Hip Flask.", parse);
-						PrintDefaultOptions();
+						Gui.PrintDefaultOptions();
 					}, enabled : true
 				});
 				options.push({ nameStr : "Nah",
@@ -511,7 +511,7 @@ VaughnScenes.TalkWar = function() {
 					func : function() {
 						Text.Clear();
 						Text.Add("You don’t feel like having a drink right at the moment, and wave off Vaughn’s offer. The fox-morph shrugs and takes a couple more swigs from the flask. <i>“Sure, that just means more for me. Don’t mind if I do, then.</i>", parse);
-						PrintDefaultOptions();
+						Gui.PrintDefaultOptions();
 					}, enabled : true
 				});
 				

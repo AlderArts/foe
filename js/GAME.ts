@@ -9,6 +9,15 @@ export function GAME() {
     return game;
 }
 
+let gameCache = {};
+
+export function SetGameCache(c : any) {
+	gameCache = c;
+}
+export function GameCache() {
+	return gameCache;
+}
+
 let worldTime : any = null;
 
 export function InitWorldTime(time : any) {

@@ -5,6 +5,8 @@ import { Entity } from '../../entity';
 import { Time } from '../../time';
 import { IngredientItems } from '../../items/ingredients';
 import { WorldTime } from '../../GAME';
+import { Gui } from '../../gui';
+import { Text } from '../../text';
 
 let AquiliusScenes = {};
 
@@ -381,7 +383,7 @@ AquiliusScenes.Prompt = function() {
 	}
 	Gui.SetButtonsFromList(options, true, function() {
 		if(WorldTime().hour < 17) {
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 			return;
 		}
 		

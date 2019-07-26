@@ -5,7 +5,7 @@
  */
 
 import { Entity } from '../entity';
-import { WorldTime } from '../GAME';
+import { WorldTime, TimeStep } from '../GAME';
 import { Images } from '../assets';
 import { Cock } from '../body/cock';
 import { Vagina } from '../body/vagina';
@@ -21,6 +21,7 @@ import { Encounter } from '../combat';
 import { EncounterTable } from '../event';
 import { Gui } from '../gui';
 import { SetGameState, GameState } from '../gamestate';
+import { Sex } from '../entity-sex';
 
 let NagaScenes = {};
 
@@ -80,11 +81,11 @@ Naga.prototype.constructor = Naga;
 
 //TODO other conditions?
 Naga.HypnoUnlocked = function() {
-	return gameCache.flags["NagaVenom"] != 0;
+	return GameCache().flags["NagaVenom"] != 0;
 }
 
 Naga.NagaMateUnlocked = function() {
-	return gameCache.flags["NagaMate"] != 0;
+	return GameCache().flags["NagaMate"] != 0;
 }
 
 Naga.prototype.DropTable = function() {
@@ -538,8 +539,8 @@ NagaScenes.DesertLossUseCock = function(enc) {
 	Text.Add("Your eyes widen as the naga pulls her lips back in a wicked grin, exposing a pair of fangs protruding from her upper jaw. With no further warning, she sinks them into your crotch. You feel searing pain for a split-second, but it subsides immediately, replaced by a warm, tingling sensation as the naga pumps venom into your body. You gasp, losing your breath as your [cocks] surge[notS] with renewed vigor, swelling beyond [itsTheir] normal limit[s] while bobbing wildly and squirting pre-cum. You realize [itsTheyve] actually grown longer and thicker than [itThey] [wasWere] moments ago! A haze of lust fills your mind as your libido goes into overdrive almost like if you hadn’t felt release in months.", parse);
 	Text.NL();
 
-	var first = gameCache.flags["NagaVenom"] == 0;
-	gameCache.flags["NagaVenom"]++;
+	var first = GameCache().flags["NagaVenom"] == 0;
+	GameCache().flags["NagaVenom"]++;
 
 	if(player.HasBalls()) {
 		Text.Add("Your [balls] churn and swell, and you can almost <i>feel</i> them overflowing with fresh spunk, coaxed into creation by the venom flowing through your loins. They begin to ache with fullness, engorged beyond their usual size from the excess load they bear.", parse);
@@ -1122,7 +1123,7 @@ NagaScenes.DesertWinTailpeg = function(opts) {
 	};
 
 	parse = player.ParserTags(parse);
-	var next  = opts.next || PrintDefaultOptions;
+	var next  = opts.next || Gui.PrintDefaultOptions;
 	var naga  = opts.naga || new Naga();
 	var hypno = opts.hypno || false;
 
@@ -1178,7 +1179,7 @@ NagaScenes.DesertNagaMating = function(naga) {
 
 	parse["comp"] = party.Num() == 2 ? party.Get(1).name : "your companions";
 
-	gameCache.flags["NagaMate"] = 1;
+	GameCache().flags["NagaMate"] = 1;
 
 	Text.Clear();
 	Text.Add("<i>“Such a pretty tail...”</i> the naga purrs, her gentle words echoing inside your entranced mind. <i>“Since you’re such a feisty one, I think I’ll take you as my mate!”</i> she continues, her voice surprisingly tender given her promise to “use” you. Her hands caress your face, her nails tracing soft lines across your [skin] and gently stroking your [hair].", parse);

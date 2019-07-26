@@ -1653,7 +1653,7 @@ RigardScenes.Lockdown = function() {
 					Text.Flush();
 
 					miranda.flags["Attitude"] = Miranda.Attitude.Neutral;
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 				}, enabled : true,
 				tooltip : "Not really your thing, sorry."
 			});
@@ -1703,7 +1703,7 @@ RigardScenes.Lockdown = function() {
 							Text.NL();
 							Text.Add("<i>“Good, I’m holding you to that promise,”</i> she replies, following after you as you exit the Maiden’s Bane and move back inside the gates.", parse);
 							Text.Flush();
-							PrintDefaultOptions();
+							Gui.PrintDefaultOptions();
 						}, enabled : true,
 						tooltip : "This is hardly the time to be having fun, so tuck her doghood back in and get down to business."
 					});
@@ -1723,7 +1723,7 @@ RigardScenes.Lockdown = function() {
 					Text.Flush();
 					miranda.flags["Attitude"] = Miranda.Attitude.Hate;
 
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 				}, enabled : true,
 				tooltip : "Eww, you’re not about to touch <b>that!</b>"
 			});
@@ -1773,7 +1773,7 @@ RigardScenes.Lockdown = function() {
 						Text.Add("<i>“Good, I’m holding you to that promise,”</i> she replies, following after you as you exit the Maiden’s Bane and move back inside the gates.", parse);
 						Text.Flush();
 
-						PrintDefaultOptions();
+						Gui.PrintDefaultOptions();
 					}, enabled : true,
 					tooltip : "This is hardly the time to be having fun. The two of you have a thief to catch."
 				});
@@ -1805,13 +1805,13 @@ RigardScenes.Lockdown = function() {
 
 						choice = Choice.Eager;
 
-						PrintDefaultOptions();
+						Gui.PrintDefaultOptions();
 					}, enabled : true,
 					tooltip : "Give in, you have no choice but to follow her whims."
 				});
 				var reluctant = function() {
 					Text.Add("Your blood boils in your veins at the outrage, fingers clenching, but you force yourself to swallow back the bile rising from the depths of your gut. The bitch has you over a barrel here, and you both know it. Slowly, reluctantly, you rise from your seat and start to remove your [armor].", parse);
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 				};
 				options.push({ nameStr : "Reluctant",
 					func : function() {

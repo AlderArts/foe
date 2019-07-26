@@ -1,5 +1,5 @@
 import { GetDEBUG } from '../../../app';
-import { WorldTime } from '../../GAME';
+import { WorldTime, TimeStep } from '../../GAME';
 import { Entity } from '../../entity';
 import { SetGameState, GameState } from '../../gamestate';
 import { Gui } from '../../gui';
@@ -158,7 +158,7 @@ DeadDropScenes.First.Start = function() {
 	//Set up restore party at the bottom of the callstack, fallthrough
 	Gui.Callstack.push(function() {
 		party.LoadActiveParty();
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 	});
 	// PARTY STUFF
 	
@@ -245,7 +245,7 @@ DeadDropScenes.First.Start = function() {
 			Text.NL();
 			Text.Add("<i>“Yes, but now they’ll actually be looking for them since they know there’s money in it - look, I’m not having this argument right now. Let’s get out of here and head back.”</i>", parse);
 			
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : party.coin >= 10
 	});
 	options.push({ nameStr : "No",
@@ -288,7 +288,7 @@ DeadDropScenes.First.Start = function() {
 			
 			outlaws.relation.IncreaseStat(100, 1);
 			
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	
@@ -501,7 +501,7 @@ DeadDropScenes.Docks.Ending = function() {
 	Text.Add("<i>“Well, that wraps up this particular drop,”</i> Maria says, dusting off her hands and picking up the crate. <i>“Thanks for sticking your neck out and helping, [playername]. I’ll take it from here and get these stowed away.”</i>", parse);
 	Text.NL();
 	
-	PrintDefaultOptions();
+	Gui.PrintDefaultOptions();
 	
 	parse["comp"] = party.saved.length == 2 ? party.saved[1].name : "your companions";
 	parse["c"] = party.saved.length > 1 ? Text.Parse(" to fetch [comp]", parse) : "";

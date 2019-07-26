@@ -1,6 +1,8 @@
 import { Gwendy } from './gwendy';
 import { Gender } from '../../body/gender';
 import { WorldTime } from '../../GAME';
+import { Text } from '../../text';
+import { Gui } from '../../gui';
 
 let GwendyScenes = {};
 
@@ -447,7 +449,7 @@ GwendyScenes.WorkMilking = function() {
 		func : function() {
 			Text.Clear();
 			Text.Add("You tell Gwendy you wouldn't mind taking her on, especially considering what winning seems to entail. <i>“I figured you'd say something like that, but don't think I'm gonna go easy on you, either.”</i> The two of you stare at one another for a moment, adopting challenging smiles on your faces before dashing off to try and best one another!", parse);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true,
 		tooltip : "Sounds like fun!"
 	});
@@ -456,7 +458,7 @@ GwendyScenes.WorkMilking = function() {
 			challenge = false;
 			Text.Clear();
 			Text.Add("You decline, saying with the workload before the two of you, a challenge should be the last thing on her mind. She sucks her teeth at that, but admits you have a point. <i>“Oh well, in any event, we probably will be more productive without the added stuff. Alright, I'll see you when we're finished then, okay?”</i> With a nod, you go back to what you were doing, though you notice that Gwendy has a slight pout on her face. While cute, she seems disappointed with you, but what's done is done. Now, time to get to work!", parse);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true,
 		tooltip : "Isn't there too much work to do to be playing around?"
 	});
@@ -465,7 +467,7 @@ GwendyScenes.WorkMilking = function() {
 			lose = true;
 			Text.Clear();
 			Text.Add("You accept her challenge, but in the back of your mind you decide to just lose for the sake of it. Given her demeanor and allure, a part of you wants to see what the losing side is like!", parse);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true,
 		tooltip : "Who gives a damn, you'll be with Gwendy! Lose on purpose."
 	});
@@ -1740,7 +1742,7 @@ GwendyScenes.ChallengeSexAnalToys = function(toy, hangout, first) {
 				Text.NL();
 				Text.Add("<i>“Ugh, you’ve had your fun, take this out already,”</i> Gwendy moans, annoyed with you. As the lady commands.", parse);
 				// Pop from call stack
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : player.SubDom() >= 15,
 			tooltip : "Have her walk around the room a bit, see if she's so tough."
 		});
@@ -1802,7 +1804,7 @@ GwendyScenes.ChallengeSexAnalToys = function(toy, hangout, first) {
 					parse["gen"] = gwendy.FirstCock() ? Text.Parse(", freeing her stiff [gcocks]", parse) : "";
 					Text.Add("<i>“T-take this out, right now!”</i> she whimpers, pulling down her shorts[gen]. As the lady commands.", parse);
 					// Pop from call stack
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 
 					player.subDom.IncreaseStat(50, 1);
 					gwendy.subDom.DecreaseStat(-10, 1);
@@ -1817,7 +1819,7 @@ GwendyScenes.ChallengeSexAnalToys = function(toy, hangout, first) {
 				Text.Clear();
 				Text.Add("Looks like she has had enough for now.", parse);
 				// Pop from call stack
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true,
 			tooltip : "Have mercy on her and remove the beads."
 		});

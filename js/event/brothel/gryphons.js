@@ -1,6 +1,8 @@
 
 import { Entity } from '../../entity';
 import { Gender } from '../../body/gender';
+import { Gui } from '../../gui';
+import { Text } from '../../text';
 
 let GryphonsScenes = {};
 
@@ -58,7 +60,7 @@ GryphonsScenes.IntroEntryPoint = function() {
 			choice = c;
 			gender = gen;
 			Text.Clear();
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}
 	};
 	
@@ -145,7 +147,7 @@ Not that it changes too much about you, since you were already one, but the fine
 		Text.NL();
 		choice = Gryphons.State.S1WorldsEdge;
 		
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 	}
 	else {
 		Text.Add("The confines of this particular theme room are a familiar sight to you by now, and you know what to do once the door is closed and latched. The only choice you really need to make is which chapter to play.", parse);
@@ -159,7 +161,7 @@ GryphonsScenes.SceneSelect = function(choice) {
 	Gui.Callstack.push(function() {
 		if(gryphons.flags["State"] < choice)
 			gryphons.flags["State"] = choice;
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 	});
 	
 	switch(choice) {
@@ -1654,7 +1656,7 @@ GryphonsScenes.Building = function() {
 				Text.Add("Satisfied. Sure, what you have to work with is really crude, but more importantly, it works. Of course, you’re not going to lie to yourself and this is the best you can do, but one step at a time - you’ve got only two pairs of hands to deal with things, and one pair is still learning.", parse);
 				Text.NL();
 				Text.Add("Surveying your handiwork once more, you allow yourself a little chirrup of contentment. Onwards and upwards, as the old saying goes.", parse);
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true
 		});
 		options.push({ nameStr : "Dissatisfied",
@@ -1666,7 +1668,7 @@ GryphonsScenes.Building = function() {
 				Text.Add("There’s always more to do. More to do… and not enough time in which to do it. you need a sharper blade for your axe, and that in turn means finding suitable quantities and forms of stone for sharpening. Better vines and resin with which to cure them. So much of the valley’s bounty lies unused; oh, if only you’d lived here as long as Aurora did - only in a less bestial fashion.", parse);
 				Text.NL();
 				Text.Add("Heavy hangs the head on which the crown lies.", parse);
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 			}, enabled : true
 		});
 		
@@ -1708,7 +1710,7 @@ GryphonsScenes.Building = function() {
 					Text.Add("Both of them take an involuntary step back, and a rush of grim satisfaction courses through your body. Were you that imposing? <i>“N-no.”</i>", parse);
 					Text.NL();
 					Text.Add("<i>“Good. Maybe now we can talk reasonably.", parse);
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 				}, enabled : true
 			});
 			options.push({ nameStr : "Diplomatic",
@@ -1728,7 +1730,7 @@ GryphonsScenes.Building = function() {
 					Text.Add("<i>“We are fleeing, and scented gryphons on the wind,”</i> the female pipes up. <i>“You have claimed a mate?”</i>", parse);
 					Text.NL();
 					Text.Add("<i>“I have instructed her to hide until it is certain there is no danger.", parse);
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 				}, enabled : true
 			});
 			options.push({ nameStr : "Thoughtful",
@@ -1754,7 +1756,7 @@ GryphonsScenes.Building = function() {
 					Text.Add("<i>“Yes.”</i> It’s the female’s turn to pipe up. <i>“We have traveled far and scented another mated pair on the wind, and thought it - well, we have not seen another gryphon for a while.”</i>", parse);
 					Text.NL();
 					Text.Add("You shake your head. Oh, you know how that feels well enough, but fleeing? That bears further questioning. <i>“", parse);
-					PrintDefaultOptions();
+					Gui.PrintDefaultOptions();
 				}, enabled : true
 			});
 			
@@ -1840,7 +1842,7 @@ GryphonsScenes.NewLife = function() {
 			player.slut.IncreaseStat(75, 1);
 			preg = 2;
 			
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Calm",
@@ -1853,7 +1855,7 @@ GryphonsScenes.NewLife = function() {
 			
 			preg = 1;
 			
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Frustrated",
@@ -1866,7 +1868,7 @@ GryphonsScenes.NewLife = function() {
 			Text.NL();
 			Text.Add("Ooh… maybe you’ll grow into this, maybe you won’t. In the meantime, though, you need to put aside your frustrations so that you can get this job done. A monumental task - the heavier with gryphlets you become, the wilder your mood swings are - but after a few deep breaths, you think that you might just be able to keep your head on straight until he comes back. It’s always easier to think when he’s around - you don’t understand why, but it just <i>is</i>.", parse);
 			
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	

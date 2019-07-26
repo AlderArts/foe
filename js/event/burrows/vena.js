@@ -10,6 +10,8 @@ import { Race } from '../../body/race';
 import { TF } from '../../tf';
 import { AppendageType } from '../../body/appendage';
 import { Color } from '../../body/color';
+import { Text } from '../../text';
+import { Gui } from '../../gui';
 
 let VenaScenes = {
 	Restored : VenaRScenes,
@@ -182,7 +184,7 @@ VenaScenes.PitPrompt = function() {
 		Text.Add("You are already forgotten as you step away from the matriarch, a swarm of her offspring flowing in demanding attention and sex.", parse);
 		Text.NL();
 		
-		PrintDefaultOptions(true);
+		Gui.PrintDefaultOptions(true);
 	});
 }
 

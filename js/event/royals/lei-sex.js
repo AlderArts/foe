@@ -1,5 +1,8 @@
 import { Lei } from './lei';
 import { WorldTime } from '../../GAME';
+import { Gui } from '../../gui';
+import { Text } from '../../text';
+import { Race } from '../../body/race';
 
 let SexScenes = {};
 
@@ -103,7 +106,7 @@ SexScenes.Petting = function(repeat) {
 			Text.Add("<i>“Good [boygirl],”</i> Lei says quietly. His hand moves down a little, and[h] scratches behind your [ear], and you tilt your head towards him in pleasure.", parse);
 			Text.NL();
 			Text.Add("Lei smiles, and with a turn, moves towards the bed and sits down, pulling you after him into his lap. You look up at him, wondering what he’s planning, but he only holds you.", parse);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Bite",
@@ -119,7 +122,7 @@ SexScenes.Petting = function(repeat) {
 			Text.Add("You feel his chest stir beneath your back, as he chuckles at the result of your resistance. Lying on top of him, in his arms, you can’t help but join in as well, and soon both of you are laughing together, tears of merriment springing to your eyes.", parse);
 			Text.NL();
 			Text.Add("After a minute, you quiet down. Lei sits up, pulling you along with him, leaving you sitting in his lap, held tight in his arms. You look up at him, wondering if he’s plotting something else, but he only holds you.", parse);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true
 	});
 	

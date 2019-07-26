@@ -9,7 +9,7 @@ import { DeadDropScenes } from './maria-dd';
 import { Images } from '../../assets';
 import { Color } from '../../body/color';
 import { Time } from '../../time';
-import { WorldTime } from '../../GAME';
+import { WorldTime, TimeStep } from '../../GAME';
 import { Abilities } from '../../abilities';
 import { Text } from '../../text';
 import { EncounterTable } from '../../event';
@@ -923,7 +923,7 @@ MariaScenes.ForestConfront = function() {
 			Text.Flush();
 			// END ENCOUNTER
 			TimeStep({hour:1});
-			Gui.NextPrompt(PrintDefaultOptions);
+			Gui.NextPrompt(Gui.PrintDefaultOptions);
 		}, enabled : true,
 		tooltip : "Try to trick Maria."
 	});

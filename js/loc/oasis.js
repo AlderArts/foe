@@ -4,6 +4,7 @@ import { Shop } from '../shop';
 import { Gender } from '../body/gender';
 import { IngredientItems } from '../items/ingredients';
 import { WorldTime } from '../GAME';
+import { Text } from '../text';
 
 let OasisScenes = {};
 

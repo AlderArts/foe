@@ -8,6 +8,8 @@ import { Shop } from '../../shop';
 import { GetDEBUG } from '../../../app';
 import { Gender } from '../../body/gender';
 import { Items } from '../../items';
+import { Text } from '../../text';
+import { Gui } from '../../gui';
 
 let PatchworkScenes = {};
 

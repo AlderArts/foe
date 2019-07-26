@@ -2,6 +2,7 @@
 import { Event, Link, EncounterTable } from '../../event';
 import { Text } from '../../text';
 import { MoveToLocation } from '../../GAME';
+import { Gui } from '../../gui';
 
 let ResidentialLoc = {
 	street   : new Event("Residential street"), // Will also contain gate to slums
@@ -58,7 +59,7 @@ ResidentialLoc.street.onEntry = function() {
 	else if(Math.random() < 0.3)
 		Scenes.Rigard.Chatter2(true);
 	else
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 }
 
 ResidentialLoc.street.links.push(new Link(

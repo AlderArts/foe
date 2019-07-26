@@ -9,6 +9,8 @@ import { GladeLoc } from './glade';
 import { MariaScenes } from '../event/outlaws/maria';
 import { GlobalScenes } from '../event/global';
 import { WorldTime, MoveToLocation } from '../GAME';
+import { Gui } from '../gui';
+import { Text } from '../text';
 
 // Create namespace
 let ForestLoc = {

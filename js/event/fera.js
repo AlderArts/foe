@@ -12,6 +12,8 @@ import { AppendageType } from '../body/appendage';
 import { Color } from '../body/color';
 import { Time } from '../time';
 import { WorldTime, MoveToLocation } from '../GAME';
+import { Text } from '../text';
+import { Gui } from '../gui';
 
 let FeraScenes = {};
 

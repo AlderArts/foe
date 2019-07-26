@@ -1,6 +1,8 @@
 
 import { EncounterTable } from '../event';
 import { Gender } from '../body/gender';
+import { Gui } from '../gui';
+import { Text } from '../text';
 
 let DreamsScenes = {}
 
@@ -60,7 +62,7 @@ DreamsScenes.Entry = function(func) {
 			Text.Flush();
 			
 			if(!ret)
-				PrintDefaultOptions();
+				Gui.PrintDefaultOptions();
 		}
 		
 		
@@ -415,7 +417,7 @@ DreamsScenes.UruChoice = function(ravenTrigger) {
 				Text.Add("Didn’t you enjoy having sex with me last time?”</i>", parse);
 			else
 				Text.Add("You didn’t want to fuck me last time, but I’ll show you just what you missed...”</i>", parse);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true,
 		tooltip : "Even if it’s come to this, you’ll fight her to the end!"
 	});
@@ -431,7 +433,7 @@ DreamsScenes.UruChoice = function(ravenTrigger) {
 				Text.Add("<i>“Then why did you turn me down?”</i> she demands. <i>“Well, maybe you were a little shy. I’ll make it simpler for you this time - I’m not taking ‘no’ for an answer.”</i>", parse);
 			Text.NL();
 			Text.Add("She strips your clothes with a gesture, dropping them in a messy pile behind her.", parse);
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true,
 		tooltip : "Maybe you should join the winning side. And besides, she’s gorgeous."
 	});
@@ -482,7 +484,7 @@ DreamsScenes.UruChoice = function(ravenTrigger) {
 		Text.Add("Sharp teeth dig into your flesh, and the sensation is almost welcome after the abuse Uru inflicted. As you feel your throat tear, you sit up and open your eyes, gasping for breath. A feeling of nauseous relief washes over you as you realize you are awake at last.", parse);
 		Text.Flush();
 		
-		PrintDefaultOptions();
+		Gui.PrintDefaultOptions();
 	});
 	
 	return true;
@@ -546,7 +548,7 @@ DreamsScenes.AriaTemple = function(ravenTrigger) {
 			Text.Add("Gradually, the Goddess’ beautiful visage fades, leaving only the dreary world of reality. You wake up feeling enlightened, but the happiness quickly fades as you realize how useless her advice was.", parse);
 			Text.Flush();
 			
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true,
 		tooltip : "Ask her for advice on how to complete your task."
 	});
@@ -609,7 +611,7 @@ DreamsScenes.AriaTemple = function(ravenTrigger) {
 			
 			Text.Flush();
 			
-			PrintDefaultOptions();
+			Gui.PrintDefaultOptions();
 		}, enabled : true,
 		tooltip : "If none of this is real, it can’t hurt to ask the Goddess to have sex with you."
 	});

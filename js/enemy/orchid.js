@@ -298,7 +298,7 @@ OrchidScenes.Prompt = function() {
 		}, enabled : true
 	});
 	*/
-	Gui.SetButtonsFromList(options, true, PrintDefaultOptions);
+	Gui.SetButtonsFromList(options, true, Gui.PrintDefaultOptions);
 }
 
 OrchidScenes.TalkPrompt = function() {
