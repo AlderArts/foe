@@ -1,14 +1,18 @@
 import { TasksScenes } from './vaughn-tasks';
-import { WorldTime, TimeStep } from '../../GAME';
+import { WorldTime, TimeStep, GAME } from '../../GAME';
 import { VaughnFlags } from './vaughn-flags';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
+import { EncounterTable } from '../../event';
 
 let VaughnScenes = {
 	Tasks : TasksScenes,
 };
 
 VaughnScenes.Introduction = function() {
+	let player = GAME().player;
+	let vaughn = GAME().vaughn;
+
 	var parse = {
 		playername : player.name
 	};
@@ -50,6 +54,9 @@ VaughnScenes.CampDesc = function() {
 }
 
 VaughnScenes.CampApproach = function() {
+	let player = GAME().player;
+	let vaughn = GAME().vaughn;
+
 	var parse = {
 		playername : player.name
 	};
@@ -131,6 +138,8 @@ VaughnScenes.CampApproach = function() {
 }
 
 VaughnScenes.Prompt = function() {
+	let player = GAME().player;
+
 	var parse = {
 		playername : player.name
 	};
@@ -192,6 +201,9 @@ VaughnScenes.Prompt = function() {
 }
 
 VaughnScenes.TalkPrompt = function() {
+	let player = GAME().player;
+	let vaughn = GAME().vaughn;
+
 	var parse = {
 		playername : player.name
 	};
@@ -263,6 +275,9 @@ VaughnScenes.TalkPrompt = function() {
 }
 
 VaughnScenes.TalkHimself = function() {
+	let player = GAME().player;
+	let vaughn = GAME().vaughn;
+
 	var parse = {
 		playername : player.name
 	};
@@ -450,6 +465,9 @@ VaughnScenes.TalkHimself = function() {
 }
 
 VaughnScenes.TalkWar = function() {
+	let player = GAME().player;
+	let vaughn = GAME().vaughn;
+
 	var parse = {
 		playername : player.name
 	};
@@ -663,6 +681,9 @@ VaughnScenes.TalkWar = function() {
 /* VAUGHN SEX SCENES */
 
 VaughnScenes.Sex = function() {
+	let player = GAME().player;
+	let vaughn = GAME().vaughn;
+
 	var parse = {
 		breasts : function() { return player.FirstBreastRow().Short(); }
 	};
@@ -749,6 +770,8 @@ VaughnScenes.Sex = function() {
 }
 
 VaughnScenes.SexTitfuck = function() {
+	let player = GAME().player;
+
 	var parse = {
 	};
 	
@@ -781,6 +804,9 @@ VaughnScenes.SexTitfuck = function() {
 }
 
 VaughnScenes.SexTitfuckBig = function() {
+	let player = GAME().player;
+	let vaughn = GAME().vaughn;
+
 	var parse = {
 		playername : player.name,
 		boygirl : player.mfFem("boy", "girl"),
@@ -878,6 +904,9 @@ VaughnScenes.SexTitfuckBig = function() {
 }
 
 VaughnScenes.SexTitfuckBigCont = function(parse) {
+	let player = GAME().player;
+	let vaughn = GAME().vaughn;
+
 	Text.NL();
 	Text.Add("With the way his shaft is twitching in between your milk makers, it’s clear that he’s going to cum soon. Closing your eyes, you arch yourself backwards as far as you dare, surrendering to the sheer pleasure emanating from your chest in those last few moments with Vaughn’s cock twisting in your cleavage, clearly trying to knot you.", parse);
 	Text.NL();
@@ -934,6 +963,9 @@ VaughnScenes.SexTitfuckBigCont = function(parse) {
 }
 
 VaughnScenes.SexTitfuckAverage = function() {
+	let player = GAME().player;
+	let vaughn = GAME().vaughn;
+
 	var parse = {
 		playername : player.name,
 		boygirl : player.mfFem("boy", "girl"),
@@ -1069,6 +1101,9 @@ VaughnScenes.SexTitfuckAverage = function() {
 
 // Confront Vaughn about calling you Sabrina
 VaughnScenes.SexConfront = function() {
+	let player = GAME().player;
+	let vaughn = GAME().vaughn;
+
 	var parse = {
 		playername : player.name
 	};
@@ -1115,6 +1150,8 @@ VaughnScenes.SexConfront = function() {
 
 //Trigger this when the player next approaches Vaughn in the outlaws’ camp.
 VaughnScenes.ConfrontFollowup = function() {
+	let vaughn = GAME().vaughn;
+
 	var parse = {
 		
 	};

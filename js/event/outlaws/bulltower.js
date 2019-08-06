@@ -15,6 +15,7 @@ import { Text } from '../../text';
 import { Encounter } from '../../combat';
 import { Party } from '../../party';
 import { Footman } from '../../enemy/knight';
+import { Race } from '../../body/race';
 
 let BullTowerScenes = {};
 
@@ -30,6 +31,7 @@ function BullTowerStats() {
 	this.foughtCorishev  = false;
 };
 BullTowerStats.prototype.StoleSomething = function() {
+	let outlaws = GAME().outlaws;
 	if(outlaws.flags["BT"] & Outlaws.BullTower.CaravansSearched) return true;
 	if(outlaws.flags["BT"] & Outlaws.BullTower.SafeLooted)       return true;
 	if(outlaws.flags["BT"] & Outlaws.BullTower.ContrabandStolen) return true;
@@ -41,6 +43,7 @@ BullTowerStats.prototype.Suspicion = function() {
 BullTowerStats.MoveSuspicion = 4;
 // outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 BullTowerStats.prototype.IncSuspicion = function(max, inc) {
+	let outlaws = GAME().outlaws;
 	var parse = {
 		
 	};
@@ -174,6 +177,10 @@ BullTowerLoc.Building.Watchtower.onEntry = function() {
 
 
 BullTowerScenes.Initiation = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let outlaws = GAME().outlaws;
+
 	var parse = {
 		playername: player.name
 	};
@@ -292,6 +299,10 @@ BullTowerScenes.Initiation = function() {
 }
 
 BullTowerScenes.InitiationQuestions = function(opts) {
+	let player = GAME().player;
+	let party = GAME().party;
+	let outlaws = GAME().outlaws;
+
 	opts = opts || {};
 	
 	var parse = {
@@ -403,6 +414,10 @@ BullTowerScenes.InitiationQuestions = function(opts) {
 }
 
 BullTowerScenes.MovingOut = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let outlaws = GAME().outlaws;
+
 	var parse = {
 		playername : player.name
 	};
@@ -541,6 +556,8 @@ BullTowerScenes.MovingOut = function() {
  * Dungeon starts here
  */
 BullTowerLoc.Courtyard.Yard.description = function() {
+	let outlaws = GAME().outlaws;
+
 	Text.Add("You are standing in the main courtyard of Bull Tower, flanked by high walls on three sides and the old watchtower to the north. The gates - the only way in or out of the old fortress - lie to the south, watched over by the two guards whom Cveta ‘persuaded’ to let you in. The effects of age and neglect are clearly visible in the appearance of the grounds  - the old training field is overgrown with weeds and wildflowers, and while the walls are still solid, bits of crumbling masonry lie at the base.");
 	Text.NL();
 	if(outlaws.flags["BT"] & Outlaws.BullTower.StatueDestroyed) {
@@ -567,6 +584,7 @@ BullTowerLoc.Courtyard.Yard.links.push(new Link(
 	"Enter tower", true, true,
 	null,
 	function() {
+		let outlaws = GAME().outlaws;
 		MoveToLocation(BullTowerLoc.Building.Hall, {minute: 5});
 		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	}
@@ -575,6 +593,7 @@ BullTowerLoc.Courtyard.Yard.links.push(new Link(
 	"Caravans", true, true,
 	null,
 	function() {
+		let outlaws = GAME().outlaws;
 		MoveToLocation(BullTowerLoc.Courtyard.Caravans, {minute: 5});
 		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	}
@@ -583,6 +602,7 @@ BullTowerLoc.Courtyard.Yard.links.push(new Link(
 	"Animal Pens", true, true,
 	null,
 	function() {
+		let outlaws = GAME().outlaws;
 		MoveToLocation(BullTowerLoc.Courtyard.Pens, {minute: 5});
 		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	}
@@ -590,10 +610,14 @@ BullTowerLoc.Courtyard.Yard.links.push(new Link(
 
 BullTowerLoc.Courtyard.Yard.events.push(new Link(
 	"Statue", function() {
+		let outlaws = GAME().outlaws;
 		return !(outlaws.flags["BT"] & Outlaws.BullTower.StatueDestroyed);
 	}, true,
 	null,
 	function() {
+		let player = GAME().player;
+		let outlaws = GAME().outlaws;
+
 		var parse = {
 			playername: player.name
 		};
@@ -675,6 +699,8 @@ BullTowerLoc.Courtyard.Yard.links.push(new Link(
 	"Slip out", true, true,
 	null,
 	function() {
+		let outlaws = GAME().outlaws;
+
 		var parse = {
 			
 		};
@@ -718,6 +744,7 @@ BullTowerLoc.Courtyard.Yard.links.push(new Link(
 
 
 BullTowerLoc.Courtyard.Caravans.description = function() {
+	let outlaws = GAME().outlaws;
 	Text.Add("Off to the east of the main tower building, this small courtyard is roofed, presumably to keep the wind and rain off carts, carriages and wagons parked in it. However, age has caused the roof to fall apart in places, allowing moonlight to shine through holes in the old masonry work.");
 	Text.NL();
 	if(outlaws.flags["BT"] & Outlaws.BullTower.CaravansIgnited) {
@@ -739,6 +766,7 @@ BullTowerLoc.Courtyard.Caravans.links.push(new Link(
 	"Courtyard", true, true,
 	null,
 	function() {
+		let outlaws = GAME().outlaws;
 		MoveToLocation(BullTowerLoc.Courtyard.Yard, {minute: 5});
 		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	}
@@ -746,10 +774,14 @@ BullTowerLoc.Courtyard.Caravans.links.push(new Link(
 
 BullTowerLoc.Courtyard.Caravans.events.push(new Link(
 	"Guards", function() {
+		let outlaws = GAME().outlaws;
 		return !(outlaws.BT.guardsDown);
 	}, true,
 	null,
 	function() {
+		let player = GAME().player;
+		let outlaws = GAME().outlaws;
+
 		var parse = {
 			playername : player.name
 		};
@@ -906,6 +938,8 @@ BullTowerLoc.Courtyard.Caravans.events.push(new Link(
 ));
 
 BullTowerScenes.GuardsWin = function() {
+	let outlaws = GAME().outlaws;
+	
 	var enc  = this;
 	SetGameState(GameState.Event, Gui);
 	
@@ -945,13 +979,17 @@ BullTowerScenes.GuardsLoss = function() {
 
 BullTowerLoc.Courtyard.Caravans.events.push(new Link(
 	"Search Caravans", function() {
+		let outlaws = GAME().outlaws;
 		return !(outlaws.flags["BT"] & Outlaws.BullTower.CaravansSearched) &&
 		       !(outlaws.flags["BT"] & Outlaws.BullTower.CaravansIgnited);
 	}, function() {
+		let outlaws = GAME().outlaws;
 		return outlaws.BT.guardsDown;
 	},
 	null,
 	function() {
+		let player = GAME().player;
+		let outlaws = GAME().outlaws;
 		var parse = {
 			playername : player.name
 		};
@@ -980,10 +1018,14 @@ BullTowerLoc.Courtyard.Caravans.events.push(new Link(
 
 BullTowerLoc.Courtyard.Caravans.events.push(new Link(
 	"Burn Caravans", function() {
+		let outlaws = GAME().outlaws;
 		return outlaws.BT.guardsDown && !(outlaws.flags["BT"] & Outlaws.BullTower.CaravansIgnited);
 	}, true,
 	null,
 	function() {
+		let player = GAME().player;
+		let outlaws = GAME().outlaws;
+
 		var parse = {
 			
 		};
@@ -1043,6 +1085,7 @@ BullTowerLoc.Courtyard.Caravans.events.push(new Link(
 ));
 
 BullTowerLoc.Courtyard.Pens.description = function() {
+	let outlaws = GAME().outlaws;
 	Text.Add("These pens look like they used to be proper stables, but time and neglect have eaten away at the supporting timbers. A few serviceable stalls remain, but… well, it wouldn’t be right to call them stables without a single horse in it.");
 	Text.NL();
 	Text.Add("The prevailing smell in the air is one of mold and old dirt rather than that of animals; any feeding or water troughs have long since decayed into dust, with hooks for tack and other riding gear long rusted down to brown stubs. Even with the wealthy Royal Guard secretly occupying Bull Tower, the building is not getting much use - they must do most of their travel on foot.");
@@ -1061,6 +1104,7 @@ BullTowerLoc.Courtyard.Pens.links.push(new Link(
 	"Courtyard", true, true,
 	null,
 	function() {
+		let outlaws = GAME().outlaws;
 		MoveToLocation(BullTowerLoc.Courtyard.Yard, {minute: 5});
 		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	}
@@ -1068,10 +1112,12 @@ BullTowerLoc.Courtyard.Pens.links.push(new Link(
 
 BullTowerLoc.Courtyard.Pens.events.push(new Link(
 	"Free Animals", function() {
+		let outlaws = GAME().outlaws;
 		return !(outlaws.flags["BT"] & Outlaws.BullTower.AnimalsFreed);
 	}, true,
 	null,
 	function() {
+		let outlaws = GAME().outlaws;
 		var parse = {
 			
 		};
@@ -1129,6 +1175,7 @@ BullTowerLoc.Building.Hall.links.push(new Link(
 	"Courtyard", true, true,
 	null,
 	function() {
+		let outlaws = GAME().outlaws;
 		MoveToLocation(BullTowerLoc.Courtyard.Yard, {minute: 5});
 		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	}
@@ -1137,6 +1184,8 @@ BullTowerLoc.Building.Hall.links.push(new Link(
 	"Warehouse", true, true,
 	null,
 	function() {
+		let party = GAME().party;
+		let outlaws = GAME().outlaws;
 		var parse = {
 			
 		};
@@ -1170,6 +1219,7 @@ BullTowerLoc.Building.Hall.links.push(new Link(
 	"Office", true, true,
 	null,
 	function() {
+		let outlaws = GAME().outlaws;
 		MoveToLocation(BullTowerLoc.Building.Office, {minute: 5});
 		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	}
@@ -1178,6 +1228,7 @@ BullTowerLoc.Building.Hall.links.push(new Link(
 	"Cell", true, true,
 	null,
 	function() {
+		let outlaws = GAME().outlaws;
 		MoveToLocation(BullTowerLoc.Building.Cell, {minute: 5});
 		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	}
@@ -1186,12 +1237,16 @@ BullTowerLoc.Building.Hall.links.push(new Link(
 	"Tower", true, true,
 	null,
 	function() {
+		let outlaws = GAME().outlaws;
 		MoveToLocation(BullTowerLoc.Building.Watchtower, {minute: 5});
 		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	}
 ));
 
 BullTowerLoc.Building.Cell.onEntry = function() {
+	let player = GAME().player;
+	let outlaws = GAME().outlaws;
+	
 	var parse = {
 		playername : player.name,
 		weapon : function() { return player.WeaponDesc(); }
@@ -1338,6 +1393,9 @@ BullTowerScenes.CorishevLoss = function() {
 }
 
 BullTowerScenes.CorishevWin = function() {
+	let player = GAME().player;
+	let outlaws = GAME().outlaws;
+
 	var enc  = this;
 	var corishev = enc.corishev;
 	SetGameState(GameState.Event, Gui);
@@ -1427,6 +1485,8 @@ BullTowerScenes.CorishevImpregnate = function(mother, father, slot) {
 }
 
 BullTowerScenes.CorishevFuck = function(corishev) {
+	let player = GAME().player;
+	
 	var p1cock = player.BiggestCock(null, true);
 	
 	var parse = {
@@ -1617,6 +1677,7 @@ BullTowerScenes.CorishevFuck = function(corishev) {
 
 
 BullTowerLoc.Building.Office.description = function() {
+	let outlaws = GAME().outlaws;
 	
 	var parse = {
 		t : terry.Recruited() ? ", perhaps so well that even Terry would find it quite the challenge" : ""
@@ -1635,6 +1696,7 @@ BullTowerLoc.Building.Office.links.push(new Link(
 	"Hall", true, true,
 	null,
 	function() {
+		let outlaws = GAME().outlaws;
 		MoveToLocation(BullTowerLoc.Building.Hall, {minute: 5});
 		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	}
@@ -1642,6 +1704,7 @@ BullTowerLoc.Building.Office.links.push(new Link(
 
 BullTowerLoc.Building.Office.events.push(new Link(
 	"Safe", function() {
+		let outlaws = GAME().outlaws;
 		return !(outlaws.flags["BT"] & Outlaws.BullTower.SafeLooted);
 	}, true,
 	null,
@@ -1659,6 +1722,9 @@ BullTowerLoc.Building.Office.events.push(new Link(
 ));
 
 BullTowerScenes.SafePrompt = function() {
+	let player = GAME().player;
+	let outlaws = GAME().outlaws;
+
 	var parse = {
 		playername : player.name
 	};
@@ -1798,6 +1864,9 @@ BullTowerScenes.SafePrompt = function() {
 }
 
 BullTowerScenes.SafeSuccess = function() {
+	let player = GAME().player;
+	let outlaws = GAME().outlaws;
+
 	var parse = {
 		playername : player.name
 	};
@@ -1821,6 +1890,8 @@ BullTowerScenes.SafeSuccess = function() {
 }
 
 BullTowerScenes.SafeFailure = function() {
+	let player = GAME().player;
+	
 	var parse = {
 		playername : player.name,
 		heshe : player.mfTrue("he", "she")
@@ -1851,6 +1922,8 @@ BullTowerScenes.SafeFailure = function() {
 }
 
 BullTowerLoc.Building.Warehouse.description = function() {
+	let outlaws = GAME().outlaws;
+
 	Text.Add("This must be where the guards are keeping the contraband until it’s eventually passed on to the high society of Rigard. Stacked in whatever open space is available, the Royal Guard has turned what was once a mess or meeting hall into a makeshift warehouse that’s surprisingly neat and orderly. There’s far too much in the way of ill-gotten gains for it to have come in with a single caravan - this has clearly been going on for some time.");
 	Text.NL();
 	Text.Add("<i>“I would not be surprised if some of this originated as confiscated property.”</i> Cveta muses. <i>“It is not unknown for confiscated goods to resurface now and again.”</i>");
@@ -1866,6 +1939,7 @@ BullTowerLoc.Building.Warehouse.links.push(new Link(
 	"Hall", true, true,
 	null,
 	function() {
+		let outlaws = GAME().outlaws;
 		MoveToLocation(BullTowerLoc.Building.Hall, {minute: 5});
 		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	}
@@ -1873,10 +1947,13 @@ BullTowerLoc.Building.Warehouse.links.push(new Link(
 
 BullTowerLoc.Building.Warehouse.events.push(new Link(
 	"Contraband", function() {
+		let outlaws = GAME().outlaws;
 		return !(outlaws.flags["BT"] & Outlaws.BullTower.ContrabandStolen);
 	}, true,
 	null,
 	function() {
+		let outlaws = GAME().outlaws;
+
 		var parse = {
 			
 		};
@@ -1896,10 +1973,14 @@ BullTowerLoc.Building.Warehouse.events.push(new Link(
 
 BullTowerLoc.Building.Warehouse.events.push(new Link(
 	"Roses", function() {
+		let outlaws = GAME().outlaws;
 		return !(outlaws.flags["BT"] & Outlaws.BullTower.BlueRoses);
 	}, true,
 	null,
 	function() {
+		let player = GAME().player;
+		let outlaws = GAME().outlaws;
+
 		var parse = {
 			playername : player.name
 		};
@@ -1931,6 +2012,8 @@ BullTowerLoc.Building.Warehouse.events.push(new Link(
 
 
 BullTowerLoc.Building.Watchtower.description = function() {
+	let outlaws = GAME().outlaws;
+
 	Text.Add("From the outside, the ancient watchtower of Bull Tower looks proud and strong in spite of its age. On the inside, it’s just dusty and claustrophobic. The long, spiral staircase up to the top is enough to take the wind out of anyone, and leads to a landing and a ladder that in turn leads up to the belfry. Flickering light filters down from above. A peek upward through the hatch reveals that ");
 	if(outlaws.BT.towerGuardDown)
 		Text.Add("the lookout you dealt with earlier is still out cold and unlikely to raise the alarm anytime soon.");
@@ -1944,6 +2027,7 @@ BullTowerLoc.Building.Watchtower.links.push(new Link(
 	"Hall", true, true,
 	null,
 	function() {
+		let outlaws = GAME().outlaws;
 		MoveToLocation(BullTowerLoc.Building.Hall, {minute: 5});
 		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	}
@@ -1951,10 +2035,14 @@ BullTowerLoc.Building.Watchtower.links.push(new Link(
 
 BullTowerLoc.Building.Watchtower.events.push(new Link(
 	"Guard", function() {
+		let outlaws = GAME().outlaws;
 		return !outlaws.BT.towerGuardDown;
 	}, true,
 	null,
 	function() {
+		let player = GAME().player;
+		let outlaws = GAME().outlaws;
+
 		var parse = {
 			
 		};
@@ -2026,10 +2114,12 @@ BullTowerLoc.Building.Watchtower.events.push(new Link(
 ));
 BullTowerLoc.Building.Watchtower.events.push(new Link(
 	"Lantern", function() {
+		let outlaws = GAME().outlaws;
 		return outlaws.BT.towerGuardDown && !outlaws.BT.stoleLantern;
 	}, true,
 	null,
 	function() {
+		let outlaws = GAME().outlaws;
 		var parse = {
 			
 		};
@@ -2045,6 +2135,8 @@ BullTowerLoc.Building.Watchtower.events.push(new Link(
 ));
 
 BullTowerScenes.Coversations = function(outside) {
+	let outlaws = GAME().outlaws;
+
 	var parse = {
 		a : outlaws.flags["BT"] & Outlaws.BullTower.AlaricFreed ? " and Alaric" : ""
 	};
@@ -2176,6 +2268,9 @@ BullTowerScenes.Coversations = function(outside) {
 }
 
 BullTowerScenes.EndingSlipOut = function() {
+	let party = GAME().party;
+	let outlaws = GAME().outlaws;
+
 	var parse = {
 		
 	};
@@ -2198,6 +2293,9 @@ BullTowerScenes.EndingSlipOut = function() {
 }
 
 BullTowerScenes.EndingFailure = function() {
+	let party = GAME().party;
+	let outlaws = GAME().outlaws;
+
 	var freed = outlaws.flags["BT"] & Outlaws.BullTower.AlaricFreed;
 	var parse = {
 		two : freed ? "three" : "two",
@@ -2236,6 +2334,9 @@ BullTowerScenes.EndingFailure = function() {
 }
 
 BullTowerScenes.EndingInjured = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	
 	var parse = {
 		playername : player.name,
 		name : kiakai.name
@@ -2281,6 +2382,10 @@ BullTowerScenes.EndingInjured = function() {
 }
 
 BullTowerScenes.EndingDebrief = function(injured) {
+	let player = GAME().player;
+	let party = GAME().party;
+	let outlaws = GAME().outlaws;
+
 	var parse = {
 		playername : player.name
 	};
@@ -2440,6 +2545,9 @@ BullTowerScenes.EndingDebrief = function(injured) {
 
 //#This will trigger three days after the event if the player saved Alaric.
 BullTowerScenes.AftermathAlaric = function() {
+	let player = GAME().player;
+	let outlaws = GAME().outlaws;
+
 	var parse = {
 		playername : player.name
 	};
@@ -2520,6 +2628,10 @@ BullTowerScenes.AftermathAlaric = function() {
 
 //#Triggers one day after the Alaric scene if the player has at least stolen the goods and payoff.
 BullTowerScenes.AftermathZenith = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let outlaws = GAME().outlaws;
+
 	var parse = {
 		playername : player.name
 	};

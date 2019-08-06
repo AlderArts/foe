@@ -22,6 +22,8 @@ import { EncounterTable } from '../event';
 import { Encounter } from '../combat';
 import { Party } from '../party';
 import { Sex } from '../entity-sex';
+import { GAME } from '../GAME';
+import { PregnancyHandler } from '../pregnancy';
 
 let TerryScenes = {};
 
@@ -381,6 +383,8 @@ Terry.prototype.PussyVirgin = function() {
 
 // Party interaction
 Terry.prototype.Interact = function(switchSpot) {
+	let terry = GAME().terry;
+
 	var parse = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		HeShe   : terry.HeShe(),
@@ -418,6 +422,8 @@ Terry.prototype.Interact = function(switchSpot) {
 }
 
 TerryScenes.Appearance = function() {
+	let terry = GAME().terry;
+
 	var parse = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		HeShe   : terry.HeShe(),
@@ -583,6 +589,10 @@ TerryScenes.Appearance = function() {
 }
 
 TerryScenes.Prompt = function() {
+	let terry = GAME().terry;
+	let party = GAME().party;
+	let player = GAME().player;
+
 	var parse = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		HeShe   : terry.HeShe(),
@@ -690,6 +700,8 @@ Terry.prototype.Act = function(encounter, activeChar) {
 }
 
 TerryScenes.ExploreGates = function() {
+	let terry = GAME().terry;
+
 	var parse = {
 		
 	};
@@ -724,6 +736,8 @@ TerryScenes.ExploreGates = function() {
 	Gui.NextPrompt();
 }
 TerryScenes.ExploreResidential = function() {
+	let terry = GAME().terry;
+
 	var parse = {
 		
 	};
@@ -760,6 +774,9 @@ TerryScenes.ExploreResidential = function() {
 	Gui.NextPrompt();
 }
 TerryScenes.ExploreMerchants = function() {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	var parse = {
 		weapon : player.WeaponDesc()
 	};
@@ -830,6 +847,10 @@ TerryScenes.ExploreMerchants = function() {
 	Gui.NextPrompt();
 }
 TerryScenes.ExplorePlaza = function() {
+	let terry = GAME().terry;
+	let player = GAME().player;
+	let miranda = GAME().miranda;
+
 	var parse = {
 		playername : player.name
 	};
@@ -874,6 +895,9 @@ TerryScenes.ExplorePlaza = function() {
 }
 
 TerryScenes.CombatVsMiranda = function() {
+	let terry = GAME().terry;
+	let party = GAME().party;
+
 	var enemy = new Party();
 	enemy.AddMember(terry);
 	var enc = new Encounter(enemy);
@@ -968,6 +992,12 @@ TerryScenes.CombatVsMiranda = function() {
 }
 
 TerryScenes.CaughtTheThief = function() {
+	let terry = GAME().terry;
+	let player = GAME().player;
+	let miranda = GAME().miranda;
+	let party = GAME().party;
+	let rigard = GAME().rigard;
+
 	var parse = {
 		playername : player.name,
 		masterMistress : player.mfTrue("master", "mistress")
@@ -1293,6 +1323,11 @@ TerryScenes.CaughtTheThief = function() {
 }
 
 TerryScenes.Release = function() {
+	let terry = GAME().terry;
+	let player = GAME().player;
+	let miranda = GAME().miranda;
+	let party = GAME().party;
+
 	var parse = {
 		playername : player.name,
 		masterMistress : player.mfTrue("master", "mistress"),
@@ -1512,6 +1547,8 @@ TerryScenes.Release = function() {
 }
 
 TerryScenes.TalkPrompt = function() {
+	let terry = GAME().terry;
+
 	var parse = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		HeShe   : terry.HeShe(),
@@ -1545,6 +1582,9 @@ TerryScenes.TalkPrompt = function() {
 }
 
 TerryScenes.TalkFeelings = function() {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	var parse = {
 		playername: player.name,
 		foxvixen : terry.mfPronoun("fox", "vixen"),
@@ -1675,6 +1715,9 @@ TerryScenes.TalkFeelings = function() {
 
 
 TerryScenes.TalkPronoun = function() {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	var parse = {
 		breasts : function() {
 			var desc = terry.FirstBreastRow().Desc();
@@ -1756,6 +1799,9 @@ TerryScenes.TalkPronoun = function() {
 }
 
 TerryScenes.TalkPast = function(force) {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	var parse = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		mastermistress : player.mfTrue("master", "mistress"),
@@ -2105,6 +2151,9 @@ TerryScenes.TalkPast = function(force) {
 }
 
 TerryScenes.TalkCompliment = function() {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	var parse = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		HeShe   : terry.HeShe(),
@@ -2198,6 +2247,9 @@ TerryScenes.TalkCompliment = function() {
 }
 
 TerryScenes.SkinshipRummagePack = function() {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	var parse = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		boygirl : terry.mfTrue("boy", "girl"),
@@ -2241,6 +2293,9 @@ TerryScenes.SkinshipRummagePack = function() {
 }
 
 TerryScenes.SkinshipPrompt = function() {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	var parse = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		HeShe   : terry.HeShe(),
@@ -2303,6 +2358,10 @@ TerryScenes.SkinshipPrompt = function() {
 
 
 TerryScenes.SkinshipPromptChoices = function() {
+	let terry = GAME().terry;
+	let player = GAME().player;
+	let party = GAME().party;
+
 	var parse = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		breasts : function() { return terry.FirstBreastRow().Short(); },
@@ -2601,6 +2660,9 @@ TerryScenes.SkinshipPromptChoices = function() {
 }
 
 TerryScenes.BrushTail = function() {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	var parse = {
 		foxvixen       : terry.mfPronoun("fox", "vixen"),
 		boygirl        : terry.mfPronoun("boy", "girl"),
@@ -2982,6 +3044,9 @@ TerryScenes.BrushTail = function() {
 
 
 TerryScenes.CheckFluids = function() {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	var parse = {
 		foxvixen       : terry.mfPronoun("fox", "vixen"),
 		boygirl        : terry.mfPronoun("boy", "girl"),
@@ -3191,6 +3256,8 @@ Terry.prototype.ItemUsable = function(item) {
 }
 
 Terry.prototype.ItemUse = function(item, backPrompt) {
+	let terry = GAME().terry;
+
 	if(item.isTF) {
 		var parse = {
 			item : item.sDesc(),
@@ -3228,6 +3295,10 @@ Terry.prototype.ItemUse = function(item, backPrompt) {
 
 // Need if(terry.flags["TF"] & Terry.TF.TriedItem && !(terry.flags["TF"] & Terry.TF.Rosalin))
 TerryScenes.RosalinTF = function() {
+	let terry = GAME().terry;
+	let player = GAME().player;
+	let rosalin = GAME().rosalin;
+
 	var parse = {
 		playername : player.name,
 		rearsDesc  : function() { return rosalin.EarDesc(true); },
@@ -3258,6 +3329,8 @@ TerryScenes.RosalinTF = function() {
 }
 
 TerryScenes.JeanneTFFirst = function() {
+	let terry = GAME().terry;
+
 	var parse = {
 		foxvixen : terry.mfPronoun("fox", "vixen")
 	};
@@ -3303,6 +3376,10 @@ Terry.JeanneTFCost = function() {
 	return 50;
 }
 TerryScenes.JeanneTFPrompt = function() {
+	let terry = GAME().terry;
+	let player = GAME().player;
+	let party = GAME().party;
+
 	var parse = {
 		playername : player.name
 	};
@@ -3369,6 +3446,9 @@ TerryScenes.JeanneTFPrompt = function() {
 }
 
 TerryScenes.JeanneTFCraft = function(item, scene, horseTF) {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	var parse = {
 		playername : player.name,
 		lowerArmorDesc : function() { return player.LowerArmorDesc(); },
@@ -3689,6 +3769,9 @@ TerryScenes.JeanneTFCraft = function(item, scene, horseTF) {
 }
 
 TerryScenes.JeanneTFGrowBoobs = function() {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	var parse = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
@@ -3799,6 +3882,9 @@ TerryScenes.JeanneTFGrowBoobs = function() {
 }
 
 TerryScenes.JeanneTFShrinkBoobs = function() {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	var parse = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen")
@@ -3864,6 +3950,9 @@ TerryScenes.JeanneTFShrinkBoobs = function() {
 }
 
 TerryScenes.JeanneTFStartLactate = function() {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	var parse = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
@@ -3924,6 +4013,9 @@ TerryScenes.JeanneTFStartLactate = function() {
 }
 
 TerryScenes.JeanneTFStopLactate = function() {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	var parse = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
@@ -3957,6 +4049,9 @@ TerryScenes.JeanneTFStopLactate = function() {
 }
 
 TerryScenes.JeanneTFGrowVag = function() {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	var parse = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
@@ -3999,6 +4094,9 @@ TerryScenes.JeanneTFGrowVag = function() {
 }
 
 TerryScenes.JeanneTFRemVag = function() {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	var parse = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
@@ -4046,6 +4144,9 @@ TerryScenes.JeanneTFRemVag = function() {
 }
 
 TerryScenes.JeanneTFGrowCockEntrypoint = function() {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	var parse = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen")
@@ -4058,6 +4159,9 @@ TerryScenes.JeanneTFGrowCockEntrypoint = function() {
 }
 
 TerryScenes.JeanneTFHorsegasmEntrypoint = function() {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	var parse = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
@@ -4080,6 +4184,9 @@ TerryScenes.JeanneTFHorsegasmEntrypoint = function() {
 }
 
 TerryScenes.JeanneTFGrowCock = function() {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	var parse = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
@@ -4127,6 +4234,9 @@ TerryScenes.JeanneTFGrowCock = function() {
 
 //TODO
 TerryScenes.JeanneTFRemCock = function() {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	var parse = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen")
@@ -4186,6 +4296,9 @@ TerryScenes.JeanneTFRemCock = function() {
 }
 
 TerryScenes.JeanneTFGrowHorsecock = function() {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	var parse = {
 		playername : player.name,
 		pheshe     : player.heshe(),
@@ -4321,6 +4434,9 @@ TerryScenes.Impregnate = function(mother, father, cum, slot) {
 
 // TODO
 TerryScenes.SexPrompt = function(backPrompt) {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	var parse = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		master : player.mfTrue("master", "mistress"),
@@ -4456,6 +4572,9 @@ TerryScenes.SexPrompt = function(backPrompt) {
 }
 
 TerryScenes.SexPromptChoice = function(backPrompt, haveadrink) {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	var parse = {
 		playername : player.name,
 		foxvixen : terry.mfPronoun("fox", "vixen"),
@@ -4588,6 +4707,9 @@ TerryScenes.SexPromptChoice = function(backPrompt, haveadrink) {
 }
 
 TerryScenes.SexGetOralPussy = function() {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	var parse = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
@@ -4761,6 +4883,9 @@ TerryScenes.SexGetOralPussy = function() {
 }
 
 TerryScenes.SexGetOralCock = function() {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	var p1cock = player.BiggestCock();
 	
 	var parse = {
@@ -4831,6 +4956,9 @@ TerryScenes.SexGetOralCock = function() {
 }
 
 TerryScenes.SexGetOralCockCont = function(parse, p1cock) {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	var isLarge = p1cock.Volume() >= 100;
 	
 	if(!isLarge) {
@@ -5235,6 +5363,9 @@ TerryScenes.SexGetOralCockCont = function(parse, p1cock) {
 }
 
 TerryScenes.SexPitchAnal = function(cocksInAss) {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	var p1Cock = player.BiggestCock(cocksInAss);
 	
 	var parse = {
@@ -5820,6 +5951,9 @@ TerryScenes.SexPitchAnal = function(cocksInAss) {
 
 
 TerryScenes.SexFuckButtEntrypoint = function(p1Cock, promise, retFunc) {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	var virgin = terry.Butt().virgin;
 	var knotted = p1Cock.knot != 0;
 
@@ -6086,6 +6220,9 @@ TerryScenes.SexFuckButtEntrypoint = function(p1Cock, promise, retFunc) {
 }
 
 TerryScenes.SexWorship = function() {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	var parse = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
@@ -6637,6 +6774,9 @@ TerryScenes.SexWorship = function() {
 
 // Clean Terry Up Entry Point
 TerryScenes.PCCleansTerry = function(func, opts) {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	var parse = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),		
@@ -6795,6 +6935,10 @@ TerryScenes.PCCleansTerry = function(func, opts) {
 
 // Terry cleans PC Entry Point
 TerryScenes.TCleansPC = function(func, opts) {
+	let terry = GAME().terry;
+	let player = GAME().player;
+	let party = GAME().party;
+
 	var parse = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),		
@@ -7139,6 +7283,8 @@ TerryScenes.TCleansPC = function(func, opts) {
 
 
 TerryScenes.FuckedByBunnyMob = function(male, parse) {
+	let terry = GAME().terry;
+
 	if(terry.Slut() < 45) {
 		Text.Add("<i>“Whoa, wait you bunch of pervs! I didn’t- mmf!”</i> Terry’s protests get immediately silenced as one of the males kisses [himher] straight on the lips. ", parse);
 		if(terry.PronounGender() == Gender.male)
@@ -7226,6 +7372,10 @@ TerryScenes.FuckedByBunnyMob = function(male, parse) {
 }
 
 TerryScenes.SexPitchVaginal = function(cocks) {
+	let terry = GAME().terry;
+	let player = GAME().player;
+	let party = GAME().party;
+
 	var p1cock  = player.BiggestCock(cocks);
 	var strapon = p1cock.isStrapon;
 	
@@ -8745,6 +8895,9 @@ TerryScenes.SexPitchVaginal = function(cocks) {
 }
 
 TerryScenes.SexCatchVaginal = function() {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	var p1cock = player.BiggestCock();
 	
 	var parse = {
@@ -9235,6 +9388,9 @@ TerryScenes.SexCatchVaginal = function() {
 
 // Returns true for inside, false for outside
 TerryScenes.SexCatchVaginalHeChooses = function() {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	var tpreg = terry.PregHandler().IsPregnant();
 	var preg = player.PregHandler().IsPregnant();
 	if(terry.Relation() < 30) {
@@ -9255,6 +9411,9 @@ TerryScenes.SexCatchVaginalHeChooses = function() {
 }
 
 TerryScenes.SexCatchVaginalInsideHorseCock = function(parse) {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	Text.Add("You gasp as you feel yourself stretching around the [foxvixen]’s knot; for a moment, you fear [heshe]’s going to force [himher]self in, but thankfully the pressure eases and Terry pulls away. That was kinda rough!", parse);
 	Text.NL();
 	Text.Add("<i>“Sorry...”</i>", parse);
@@ -9358,6 +9517,9 @@ TerryScenes.SexCatchVaginalInsideHorseCock = function(parse) {
 }
 
 TerryScenes.SexCatchVaginalOutsideHorseCock = function(parse) {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	Text.Add("You can't help but moan softly as you feel Terry slowing down. [HeShe] keeps thrusting, but at a much more sedate pace, gyrating [hisher] hips on each stroke through your tunnels. [HeShe] whimpers softly with the effort, [hisher] cock throbbing inside your tunnel, but is steadfast at [hisher] task.", parse);
 	Text.NL();
 	Text.Add("You can feel [himher] grinding deliberately against your most sensitive spots, substituting attentiveness for vigor. As aroused as you were to begin with, this skillful application of [hisher] dick is the last straw for you.", parse);
@@ -9432,6 +9594,9 @@ TerryScenes.SexCatchVaginalOutsideHorseCock = function(parse) {
 }
 
 TerryScenes.SexCatchVaginalInsideFoxCock = function(parse) {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	Text.Add("You cry out as you are forcibly stuffed and stretched by the [foxvixen]'s surprisingly big knot; as soon as it’s past your entrance, you can feel it growing into a rock-solid plug to hold you in place. Terry instinctively tries to back out, but since [hisher] knot has the two of you tied, all [heshe] manages to do is tug your walls. It feels wonderful, and you let [himher] know that with a deep, pleasure-filled moan.", parse);
 	Text.NL();
 	Text.Add("[HeShe] grunts with effort as [heshe] pushes inside you, driving [himher]self as far as [heshe] can into your pliable cunt, then [heshe] tries to pull away once more. The two of your repeat this back and forth until you can’t take it anymore and you clamp down on your willing partner’s shaft.", parse);
@@ -9541,6 +9706,9 @@ TerryScenes.SexCatchVaginalInsideFoxCock = function(parse) {
 }
 
 TerryScenes.SexCatchVaginalOutsideFoxCock = function(parse) {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	Text.Add("The [foxvixen] takes a few deep breaths, steadying [himher]self before cracking [hisher] knuckles. <i>“Alright, let’s get to work!”</i> Grinning widely, you nod hungrily and assure [himher] that you're ready.", parse);
 	Text.NL();
 	Text.Add("[HeShe] approaches you, leaning down to get to your [vag]. Your juices ooze from your entrance as [heshe] lets [hisher] tongue out to give your labia a sloppy lick. You moan appreciatively, squirming in your seat as Terry's warm, wet length caresses your petals and sends sparks of pleasure dancing along your spine.", parse);
@@ -9608,6 +9776,9 @@ TerryScenes.SexCatchVaginalOutsideFoxCock = function(parse) {
 }
 
 TerryScenes.SexCatchAnal = function() {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	var p1cock = player.BiggestCock();
 	
 	var parse = {
@@ -10295,6 +10466,8 @@ TerryScenes.SexCatchAnal = function() {
 /* TERRY SEX DRINK */
 
 TerryScenes.SexHaveADrink = function(back) {
+	let terry = GAME().terry;
+
 	var parse = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		tbreasts : terry.FirstBreastRow().Short()
@@ -10385,6 +10558,9 @@ TerryScenes.SexHaveADrink = function(back) {
 }
 
 TerryScenes.SexHaveADrinkPussy = function() {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	var parse = {
 		playername : player.name,
 		foxvixen : terry.mfPronoun("fox", "vixen"),
@@ -11268,6 +11444,9 @@ TerryScenes.SexHaveADrinkPussy = function() {
 }
 
 TerryScenes.SexHaveADrinkCock = function() {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	var parse = {
 		playername : player.name,
 		foxvixen : terry.mfPronoun("fox", "vixen"),
@@ -12237,6 +12416,9 @@ TerryScenes.SexHaveADrinkCock = function() {
 }
 
 TerryScenes.SexHaveADrinkBreasts = function() {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	var parse = {
 		playername : player.name,
 		foxvixen : terry.mfPronoun("fox", "vixen"),
@@ -12478,6 +12660,9 @@ TerryScenes.SexHaveADrinkBreasts = function() {
 }
 
 TerryScenes.SexHaveADrinkBreastsMilk = function(parse) {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	//#Milk quantity block
 	Text.Clear();
 	
@@ -12557,6 +12742,8 @@ TerryScenes.SexHaveADrinkBreastsMilk = function(parse) {
 }
 
 TerryScenes.SexHaveADrinkBreastsRomance = function(parse) {
+	let terry = GAME().terry;
+
 	Text.Add("Leisurely, you wrap your arms around Terry and snuggle close, demurely dipping your head down to play a tender kiss on the [foxvixen]’s collarbone, and grinning to yourself as [heshe] shivers in anticipation.", parse);
 	Text.NL();
 	Text.Add("With the same languid ease, you let your [tongue] loll freely from between your lips and start to glide it up Terry’s chest, stopping only when the silky fur gives way to cool leather.", parse);
@@ -12627,6 +12814,7 @@ TerryScenes.SexHaveADrinkBreastsRomance = function(parse) {
 }
 
 TerryScenes.SexHaveADrinkBreastsArousal = function(parse) {
+	let terry = GAME().terry;
 	//#arousal check block
 	
 	//[Cock][Pussy]
@@ -12660,6 +12848,9 @@ TerryScenes.SexHaveADrinkBreastsArousal = function(parse) {
 }
 
 TerryScenes.SexHaveADrinkBreastsArousalHorsecock = function(parse) {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	Text.Clear();
 	Text.Add("You suddenly feel something poking against ", parse);
 	var tail = player.HasTail();
@@ -12984,6 +13175,9 @@ TerryScenes.SexHaveADrinkBreastsArousalHorsecock = function(parse) {
 }
 
 TerryScenes.SexHaveADrinkBreastsArousalFoxcock = function(parse) {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	Text.Clear();
 	Text.Add("Decision made, you slide yourself neatly off of Terry’s back and seat yourself on the ground beside [himher]. Without preamble, you reach out and scoop the [foxvixen] off of the ground, pulling [himher] unceremoniously into your lap.", parse);
 	Text.NL();
@@ -13295,6 +13489,9 @@ TerryScenes.SexHaveADrinkBreastsArousalFoxcock = function(parse) {
 }
 
 TerryScenes.SexHaveADrinkBreastsArousalPussy = function(parse) {
+	let terry = GAME().terry;
+	let player = GAME().player;
+
 	Text.Clear();
 	Text.Add("Time to make your little [foxvixen] really feel like a woman...", parse);
 	if(terry.PronounGender() == Gender.male)

@@ -4,6 +4,7 @@ import { Entity } from '../../entity';
 import { SetGameState, GameState } from '../../gamestate';
 import { Gui } from '../../gui';
 import { Text } from '../../text';
+import { EncounterTable } from '../../event';
 
 //
 // Maria Dead drops
@@ -11,6 +12,9 @@ import { Text } from '../../text';
 let DeadDropScenes = {};
 
 DeadDropScenes.Alert = function() {
+	let player = GAME().player;
+	let maria = GAME().maria;
+
 	var parse = {
 		playername : player.name
 	};
@@ -34,6 +38,9 @@ DeadDropScenes.Alert = function() {
 
 //Trigger this when the player approaches Maria after having witnessed the above scene.
 DeadDropScenes.Initiation = function() {
+	let player = GAME().player;
+	let maria = GAME().maria;
+
 	var parse = {
 		playername : player.name
 	};
@@ -127,6 +134,11 @@ DeadDropScenes.First.Chat = function() {
 }
 
 DeadDropScenes.First.Start = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let outlaws = GAME().outlaws;
+	let maria = GAME().maria;
+
 	var parse = {};
 	
 	// PARTY STUFF
@@ -338,6 +350,10 @@ DeadDropScenes.First.Start = function() {
 }
 
 DeadDropScenes.Repeat = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let maria = GAME().maria;
+
 	var parse = {
 		playername : player.name
 	};
@@ -418,6 +434,8 @@ DeadDropScenes.Repeat = function() {
 
 DeadDropScenes.Docks = {};
 DeadDropScenes.Docks.Entry = function() {
+	let player = GAME().player;
+	
 	var parse = {
 		playername : player.name
 	};
@@ -472,6 +490,9 @@ DeadDropScenes.Docks.Entry = function() {
 }
 
 DeadDropScenes.Docks.Ending = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	
 	var parse = {
 		playername : player.name
 	};
@@ -512,6 +533,9 @@ DeadDropScenes.Docks.Ending = function() {
 }
 
 DeadDropScenes.Docks.Cavalcade = function() {
+	let party = GAME().party;
+	let estevan = GAME().estevan;
+	
 	var parse = {
 		
 	};
@@ -581,6 +605,9 @@ DeadDropScenes.Docks.CavalcadeCost = function() {
 }
 
 DeadDropScenes.Docks.CavalcadePrep = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	
 	player.purse  = party;
 	var players = [player];
 	
@@ -645,11 +672,13 @@ DeadDropScenes.Docks.CavalcadePrep = function() {
 }
 
 DeadDropScenes.Docks.CavalcadeWin = function() {
+	let outlaws = GAME().outlaws;
+	let maria = GAME().maria;
+
 	var parse = {
 		
 	};
-	
-	
+
 	Text.Add("Smiling, you display your winning hand and lay it out on the crate. Right, that’s one win for you - can you please, <i>please</i> have your goods now like what was promised?", parse);
 	Text.NL();
 	Text.Add("The dockhands look at each other, and for a moment, you wonder if they’re going to renege on their promise. Eventually, they gather their cards and stand up, allowing you access to your precious goods.", parse);
@@ -679,7 +708,7 @@ DeadDropScenes.Docks.CavalcadeLoss = function() {
 	var parse = {
 		
 	};
-	
+
 	Text.Clear();
 	Text.Add("So be it. You settle down on a nearby stack of sacks and watch the dockhands go at it - dealing, calling, folding, raking in winnings. The whole waiting thing wasn’t a joke, either - you must’ve dozed off, because next thing you know, you’re wakened by one of the dockhands from earlier tapping your shoulder.", parse);
 	Text.NL();
@@ -706,12 +735,16 @@ DeadDropScenes.Docks.CavalcadeLoss = function() {
 }
 
 DeadDropScenes.Docks.GuardInspection = function() {
+	let player = GAME().player;
+	let outlaws = GAME().outlaws;
+	let maria = GAME().maria;
+
 	var parse = {
 		playername : player.name
 	};
-	
+
 	var humanity = player.Humanity();
-	
+
 	Text.Add("The goods in question aren’t hard to find - a quick chat with the harbormaster has you directed to the barge you’re looking for, and another brief conversation with the first mate clears up matters. Seems like you, or at least someone from the outlaws was expected, and the crate in question is at the end of the pier, freshly offloaded and waiting under a tarpaulin for you to come in and collect it.", parse);
 	Text.NL();
 	Text.Add("Time’s a-wasting, then. Doing your best to keep out of the way of dockhands and stevedores about their business, you make all due haste for what you came for.", parse);
@@ -947,12 +980,17 @@ DeadDropScenes.Docks.GuardInspection = function() {
 }
 
 DeadDropScenes.Docks.GuardPrompt = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let outlaws = GAME().outlaws;
+	let maria = GAME().maria;
+
 	var parse = {
 		
 	};
-	
+
 	humanity = player.Humanity();
-	
+
 	//[Pay][Service][Royals]
 	var options = new Array();
 	options.push({ nameStr : "Pay",

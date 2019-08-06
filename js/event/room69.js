@@ -76,6 +76,8 @@ Room69.prototype.IsAtLocation = function(location) {
 
 // Party interaction
 Room69Scenes.Interact = function() {
+	let room69 = GAME().room69;
+
 	Text.Clear();
 	Text.Add("Rawr Imma room.");
 	
@@ -93,6 +95,8 @@ Room69Scenes.Interact = function() {
 }
 
 Room69Scenes.Discovering69 = function() {
+	let player = GAME().player;
+
 	var parse = {
 	};
 	
@@ -124,6 +128,9 @@ Room69Scenes.Discovering69 = function() {
 }
 
 Room69Scenes.Discovering69Prompt = function() {
+	let room69 = GAME().room69;
+	let player = GAME().player;
+
 	var parse = {
 	};
 	
@@ -194,6 +201,10 @@ Room69Scenes.Discovering69Prompt = function() {
 }
 
 Room69Scenes.Discovering69WhatNow = function() {
+	let room69 = GAME().room69;
+	let party = GAME().party;
+	let player = GAME().player;
+
 	var parse = {
 		
 	};
@@ -328,6 +339,8 @@ Room69Scenes.Discovering69WhatNow = function() {
 }
 
 Room69Scenes.Discovering69OrvinRant = function() {
+	let party = GAME().party;
+
 	var parse = {
 		
 	};
@@ -354,6 +367,9 @@ Room69Scenes.Discovering69OrvinRant = function() {
 }
 
 Room69Scenes.Discovering69ForceOutro = function() {
+	let room69 = GAME().room69;
+	let party = GAME().party;
+
 	var parse = {
 		
 	};
@@ -403,6 +419,10 @@ Room69Scenes.Discovering69ForceOutro = function() {
 
 // Lets get to the sex already!
 Room69Scenes.Discovering69Sex = function() {
+	let room69 = GAME().room69;
+	let party = GAME().party;
+	let player = GAME().player;
+
 	var parse = {
 		playername      : function() { return player.name; },
 		topArmorDesc    : function() { return player.ArmorDesc(); },
@@ -729,6 +749,9 @@ Room69Scenes.Discovering69Sex = function() {
 }
 
 Room69Scenes.ApologizeTo69ForBreakingDoor = function() {
+	let room69 = GAME().room69;
+	let player = GAME().player;
+
 	var parse = {
 		
 	};
@@ -812,6 +835,9 @@ Room69Scenes.ApologizeTo69ForBreakingDoor = function() {
 }
 
 Room69Scenes.ApologizeTo69ForBeingMean = function() {
+	let room69 = GAME().room69;
+	let player = GAME().player;
+
 	var parse = {
 		hisher : player.mfTrue("his", "her")
 	};

@@ -101,6 +101,8 @@ RavenMother.prototype.ToStorage = function() {
 }
 
 RavenMotherScenes.TheHunt = function(func) {
+	let ravenmother = GAME().ravenmother;
+	let party = GAME().party;
 	var parse = {};
 	
 	RavenMotherScenes.theHuntWakeup = func;
@@ -230,6 +232,9 @@ RavenMotherScenes.TheHuntWolf = function() {
 }
 
 RavenMotherScenes.TheHuntGlade = function() {
+	let ravenmother = GAME().ravenmother;
+	let player = GAME().player;
+
 	var parse = {
 		
 	};
@@ -281,6 +286,8 @@ RavenMotherScenes.TheHuntGlade = function() {
 }
 
 RavenMotherScenes.TheHuntGladeCont = function() {
+	let player = GAME().player;
+
 	var parse = {
 		playername : player.name
 	};
@@ -380,6 +387,8 @@ RavenMotherScenes.TheHuntGladeCont = function() {
 }
 
 RavenMotherScenes.TheHuntTalk = function() {
+	let ravenmother = GAME().ravenmother;
+
 	var parse = {
 		
 	};
@@ -507,6 +516,8 @@ RavenMotherScenes.TheHuntQuestions = function(back) {
 }
 
 RavenMotherScenes.RavenPrompt = function(back) {
+	let ravenmother = GAME().ravenmother;
+
 	var parse = {};
 	
 	Text.Clear();

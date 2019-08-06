@@ -2,10 +2,15 @@ import { Cveta } from './cveta';
 import { WorldTime } from '../../GAME';
 import { Gui } from '../../gui';
 import { Text } from '../../text';
+import { EncounterTable } from '../../event';
 
 let DateScenes = {};
 
 DateScenes.Prompt = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let cveta = GAME().cveta;
+
 	var parse = {
 		playername : player.name
 	};
@@ -95,6 +100,10 @@ DateScenes.Prompt = function() {
 }
 
 DateScenes.PartySetup = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let cveta = GAME().cveta;
+
 	cveta.RestFull();
 	
 	party.SaveActiveParty();
@@ -110,6 +119,9 @@ DateScenes.PartySetup = function() {
 }
 
 DateScenes.DryadGlade = function() {
+	let player = GAME().player;
+	let cveta = GAME().cveta;
+
 	var parse = {
 		playername : player.name
 	};
@@ -284,6 +296,9 @@ DateScenes.DryadGlade = function() {
 }
 
 DateScenes.Spring = function() {
+	let player = GAME().player;
+	let cveta = GAME().cveta;
+
 	var parse = {
 		playername : player.name
 	};

@@ -135,6 +135,7 @@ Momo.prototype.IsAtLocation = function(location) {
 }
 
 MomoScenes.MomoEnc = function() {
+	let momo = GAME().momo;
 	if(momo.flags["Met"] == Momo.Met.NotMet)
 		MomoScenes.FindingMomo();
 	else
@@ -546,6 +547,7 @@ MomoScenes.CookPrompt = function() {
 
 MomoScenes.TalkPrompt = function() {
 	let player = GAME().player;
+	let momo = GAME().momo;
 	var parse = {
 		playername : player.name,
 		girlMorph  : momo.Ascended() ? "morph" : "girl",

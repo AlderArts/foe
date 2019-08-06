@@ -10,6 +10,8 @@ let CvetaScenes = {
 };
 
 CvetaScenes.CampDesc = function() {
+	let cveta = GAME().cveta;
+
 	var parse = {
 		
 	};
@@ -32,6 +34,10 @@ CvetaScenes.CampDesc = function() {
 }
 
 CvetaScenes.ViolinApproach = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let cveta = GAME().cveta;
+
 	var parse = {
 		playername : player.name
 	};
@@ -117,6 +123,11 @@ CvetaScenes.ViolinApproach = function() {
 }
 
 CvetaScenes.ViolinPrompt = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let outlaws = GAME().outlaws;
+	let cveta = GAME().cveta;
+
 	var parse = {
 		playername : player.name
 	};
@@ -186,6 +197,10 @@ CvetaScenes.ViolinPrompt = function() {
 }
 
 CvetaScenes.Approach = function() {
+	let player = GAME().player;
+	let outlaws = GAME().outlaws;
+	let cveta = GAME().cveta;
+
 	var parse = {
 		playername : player.name
 	};
@@ -226,6 +241,9 @@ CvetaScenes.Approach = function() {
 }
 
 CvetaScenes.Prompt = function() {
+	let outlaws = GAME().outlaws;
+	let cveta = GAME().cveta;
+
 	var parse = {
 		
 	};
@@ -290,6 +308,11 @@ CvetaScenes.Prompt = function() {
 }
 
 CvetaScenes.Teach = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let outlaws = GAME().outlaws;
+	let cveta = GAME().cveta;
+
 	var parse = {
 		playername : player.name
 	};
@@ -398,6 +421,9 @@ CvetaScenes.Teach = function() {
 }
 
 CvetaScenes.PlayPrompt = function() {
+	let player = GAME().player;
+	let cveta = GAME().cveta;
+
 	var parse = {
 		playername : player.name
 	};
@@ -479,6 +505,9 @@ CvetaScenes.PlayPrompt = function() {
 
 
 CvetaScenes.Pet = function() {
+	let player = GAME().player;
+	let cveta = GAME().cveta;
+
 	var parse = {
 		playername : player.name
 	};
@@ -672,6 +701,9 @@ CvetaScenes.Pet = function() {
 }
 
 CvetaScenes.TalkPrompt = function() {
+	let player = GAME().player;
+	let cveta = GAME().cveta;
+
 	var parse = {
 		playername : player.name
 	};
@@ -778,6 +810,10 @@ CvetaScenes.TalkPrompt = function() {
 }
 
 CvetaScenes.HerselfPrompt = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let cveta = GAME().cveta;
+
 	var parse = {
 		playername : player.name
 	};
@@ -1045,6 +1081,10 @@ CvetaScenes.HerselfPrompt = function() {
 }
 
 CvetaScenes.MusicPrompt = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let cveta = GAME().cveta;
+
 	var parse = {
 		playername : player.name,
 		skinDesc : function() { return player.SkinDesc(); }
@@ -1377,6 +1417,9 @@ CvetaScenes.MusicPrompt = function() {
 }
 
 CvetaScenes.MariaTalkFirst = function() {
+	let player = GAME().player;
+	let cveta = GAME().cveta;
+
 	var parse = {
 		playername : player.name
 	};
@@ -1429,6 +1472,8 @@ CvetaScenes.MariaTalkFirst = function() {
 }
 
 CvetaScenes.MariaTalkRepeat = function() {
+	let player = GAME().player;
+
 	var parse = {
 		playername : player.name
 	};
@@ -1446,6 +1491,9 @@ CvetaScenes.MariaTalkRepeat = function() {
 }
 
 CvetaScenes.FirstMeeting = function() {
+	let player = GAME().player;
+	let cveta = GAME().cveta;
+
 	var parse = {
 		playername : player.name
 	};
@@ -1489,6 +1537,8 @@ CvetaScenes.FirstMeeting = function() {
 }
 
 CvetaScenes.FirstMeetingPrompt = function(opts) {
+	let player = GAME().player;
+	
 	var parse = {
 		playername : player.name
 	};
@@ -1634,6 +1684,8 @@ CvetaScenes.FirstMeetingPrompt = function(opts) {
 }
 
 CvetaScenes.FirstMeetingCont = function() {
+	let outlaws = GAME().outlaws;
+	
 	var parse = {
 		
 	};
@@ -1658,6 +1710,11 @@ CvetaScenes.FirstMeetingCont = function() {
 }
 
 CvetaScenes.Performance = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let outlaws = GAME().outlaws;
+	let cveta = GAME().cveta;
+	
 	var parse = {
 		playername : player.name,
 		skinDesc : function() { return player.SkinDesc(); },
@@ -1974,6 +2031,8 @@ CvetaScenes.DreamRoses = function(ravenTrigger) {
 
 
 CvetaScenes.DreamBrood = function(ravenTrigger) {
+	let player = GAME().player;
+
 	var parse = {
 		skinDesc : function() { return player.SkinDesc(); },
 		playername : player.name,
@@ -2000,6 +2059,10 @@ CvetaScenes.DreamBrood = function(ravenTrigger) {
 
 //Trigger this the next time the player attempts to approach Cveta in her tent after the quest is over, regardless of success or failure.
 CvetaScenes.PostBullTowerPerformance = function() {
+	let player = GAME().player;
+	let outlaws = GAME().outlaws;
+	let cveta = GAME().cveta;
+
 	var parse = {
 		playername : player.name,
 		skin : function() { return player.SkinDesc(); }
@@ -2217,6 +2280,9 @@ CvetaScenes.IntimatePrompt = function() {
 }
 
 CvetaScenes.IntimateNuzzle = function() {
+	let player = GAME().player;
+	let cveta = GAME().cveta;
+
 	var parse = {
 		playername : player.name,
 		hairLong : player.Hair().Long()
@@ -2255,6 +2321,9 @@ CvetaScenes.IntimateNuzzle = function() {
 }
 
 CvetaScenes.IntimateCuddle = function() {
+	let player = GAME().player;
+	let cveta = GAME().cveta;
+
 	var parse = {
 		playername : player.name,
 		skin : function() { return player.SkinDesc(); }
@@ -2309,6 +2378,9 @@ CvetaScenes.IntimateCuddle = function() {
 }
 
 CvetaScenes.IntimateGrope = function() {
+	let player = GAME().player;
+	let cveta = GAME().cveta;
+
 	var parse = {
 		playername : player.name
 	};

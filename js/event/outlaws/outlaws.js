@@ -1,6 +1,7 @@
 /*
  * Outlaws flags
  */
+import * as _ from 'lodash';
 
 import { GetDEBUG } from '../../../app';
 import { OCavalcadeScenes } from './cavalcade';
@@ -115,6 +116,8 @@ Outlaws.prototype.MetPenPam = function() {
 #Possibly require some rep with outlaws first (helping Maria/Aquilius for a bit)
  */
 Outlaws.prototype.MariasBouqetAvailable = function() {
+	let outlaws = GAME().outlaws;
+	let aquilius = GAME().aquilius;
 	//Only in the initial phase
 	if(outlaws.flags["Met"] != Outlaws.Met.Met) return false;
 	//Only when meeting the correct relation requirements TODO
@@ -146,6 +149,8 @@ Outlaws.BullTowerQuest = {
 };
 
 OutlawsScenes.MariasBouquet = function() {
+	let player = GAME().player;
+
 	var parse = {
 		playername : player.name,
 		afternoonevening : WorldTime().hour >= 16 ? "evening" : "afternoon"
@@ -251,6 +256,9 @@ OutlawsScenes.MariasBouquet = function() {
 }
 
 OutlawsScenes.MariasBouquetPrompt = function(opts) {
+	let player = GAME().player;
+	let outlaws = GAME().outlaws;
+
 	var parse = {
 		playername : player.name
 	};
@@ -357,6 +365,10 @@ OutlawsScenes.MariasBouquetPrompt = function(opts) {
 }
 
 OutlawsScenes.PathIntoRigardInitiation = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let outlaws = GAME().outlaws;
+
 	var parse = {
 		playername : player.name
 	};
@@ -434,6 +446,12 @@ OutlawsScenes.PathIntoRigardInitiation = function() {
 }
 
 OutlawsScenes.PathIntoRigardBelinda = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let outlaws = GAME().outlaws;
+	let miranda = GAME().miranda;
+	let belinda = GAME().belinda;
+
 	var parse = {
 		playername : player.name
 	};
@@ -672,6 +690,9 @@ OutlawsScenes.Exploration.RandName = function() {
 
 
 OutlawsScenes.Exploration.ChowTime = function() {
+	let player = GAME().player;
+	let outlaws = GAME().outlaws;
+
 	var parse = {
 		lad : player.mfFem("laddie", "lassie")
 	};
@@ -745,6 +766,9 @@ OutlawsScenes.Exploration.ChowTime = function() {
 }
 
 OutlawsScenes.Exploration.Cavalcade = function() {
+	let party = GAME().party;
+	let outlaws = GAME().outlaws;
+
 	var parse = {
 		
 	};
@@ -797,6 +821,9 @@ OutlawsScenes.Exploration.Cavalcade = function() {
 }
 
 OutlawsScenes.Exploration.Archery = function() {
+	let player = GAME().player;
+	let outlaws = GAME().outlaws;
+
 	var parse = {
 		playername : player.name
 	};
@@ -985,6 +1012,8 @@ OutlawsScenes.Exploration.Archery = function() {
 }
 
 OutlawsScenes.Exploration.CampFollowers = function() {
+	let player = GAME().player;
+
 	var parse = {
 		s : player.sexlevel >= 4 ? "familiar" : "odd"
 	};
@@ -1063,6 +1092,9 @@ OutlawsScenes.Exploration.Feeding = function() {
 }
 
 OutlawsScenes.Exploration.Carpentry = function() {
+	let player = GAME().player;
+	let outlaws = GAME().outlaws;
+
 	var parse = {
 		playername : player.name
 	};
@@ -1144,6 +1176,9 @@ OutlawsScenes.Exploration.Carpentry = function() {
 }
 
 OutlawsScenes.Exploration.FactFinding = function() {
+	let player = GAME().player;
+	let outlaws = GAME().outlaws;
+
 	var parse = {
 		playername : player.name
 	};

@@ -7,7 +7,7 @@ import { Entity } from '../../entity';
 import { Color } from '../../body/color';
 import { Race } from '../../body/race';
 import { Time } from '../../time';
-import { WorldTime } from '../../GAME';
+import { WorldTime, GAME } from '../../GAME';
 import { VaughnFlags } from './vaughn-flags';
 import { VaughnScenes } from './vaughn-scenes';
 
@@ -73,7 +73,7 @@ Vaughn.prototype.Update = function(step) {
 
 // Schedule
 Vaughn.prototype.IsAtLocation = function(location) {
-	location = location || party.location;
+	location = location || GAME().party.location;
 	if(location == world.loc.Outlaws.Camp)
 		return (WorldTime().hour >= 18 || WorldTime().hour < 6);
 	return false;
@@ -83,6 +83,8 @@ Vaughn.prototype.IsAtLocation = function(location) {
 // TODO OR after Belindaquest has been done (in the case the PC ignores the outlaws all the way up till then).
 //Also requires that player have access to castle grounds.
 Vaughn.prototype.IntroAvailable = function() {
+	let rigard = GAME().rigard;
+	let outlaws = GAME().outlaws;
 	if(this.Met()) return false;
 	if(!outlaws.CompletedPathIntoRigard()) return false;
 	if(!rigard.RoyalAccess()) return false;

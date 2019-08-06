@@ -10,7 +10,7 @@ import { Images } from '../assets';
 import { Items } from '../items';
 import { Color } from '../body/color';
 import { Race } from '../body/race';
-import { WorldTime, TimeStep } from '../GAME';
+import { WorldTime, TimeStep, GAME } from '../GAME';
 import { Text } from '../text';
 import { Gui } from '../gui';
 
@@ -198,6 +198,9 @@ Miranda.prototype.Update = function(step) {
 
 // Party interaction
 Miranda.prototype.Interact = function(switchSpot) {
+	let rigard = GAME().rigard;
+	let miranda = GAME().miranda;
+
 	Text.Clear();
 	var that = miranda;
 	
@@ -228,6 +231,9 @@ Miranda.prototype.Interact = function(switchSpot) {
 
 // Schedule
 Miranda.prototype.IsAtLocation = function(location) {
+	let party = GAME().party;
+	let miranda = GAME().miranda;
+
 	if(party.InParty(miranda)) return false;
 	if(!miranda.snitchTimer.Expired()) return false;
 	location = location || party.location;
@@ -247,6 +253,7 @@ Miranda.prototype.IsAtLocation = function(location) {
 }
 
 Miranda.prototype.OnPatrol = function() {
+	let party = GAME().party;
 	if(party.InParty(this))
 		return false;
 	else

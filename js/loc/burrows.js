@@ -104,10 +104,6 @@ Burrows.prototype.LagonChained = function() {
 	return GAME().burrows.LagonDefeated(); //TODO
 }
 Burrows.prototype.LagonJudged = function() {
-	let player = GAME().player;
-	let party = GAME().party;
-	let burrows = GAME().burrows;
-	let lagon = GAME().lagon;
 	let vena = GAME().vena;
 	return vena.flags["Met"] & Vena.Met.Judgement;
 }
@@ -116,6 +112,7 @@ Burrows.prototype.LagonPit = function() {
 	return false;
 }
 Burrows.prototype.VenaRestored = function() {
+	let vena = GAME().vena;
 	return vena.flags["Met"] & Vena.Met.Restored;
 }
 
@@ -358,6 +355,7 @@ BurrowsLoc.Pit.links.push(new Link(
 
 BurrowsLoc.Pit.events.push(new Link(
 	"Vena", function() {
+		let burrows = GAME().burrows;
 		return !burrows.VenaRestored();
 	}, true,
 	null,
@@ -386,6 +384,7 @@ BurrowsLoc.Lab.links.push(new Link(
 
 BurrowsLoc.Lab.events.push(new Link(
 	"Ophelia", function() {
+		let ophelia = GAME().ophelia;
 		return ophelia.IsAtLocation();
 	}, true,
 	null,
@@ -396,6 +395,7 @@ BurrowsLoc.Lab.events.push(new Link(
 
 
 BurrowsScenes.FirstApproach = function() {
+	let party = GAME().party;
 	var parse = {};
 		
 	if(party.Two())
@@ -471,6 +471,9 @@ BurrowsScenes.FirstApproach = function() {
 }
 
 BurrowsScenes.Arrival = function(alpha) {
+	let player = GAME().player;
+	let party = GAME().party;
+	let burrows = GAME().burrows;
 	var parse = {
 		skinDesc   : function() { return player.SkinDesc(); },
 		p1name     : function() { return party.Get(1).name; },
@@ -543,6 +546,7 @@ BurrowsScenes.Arrival = function(alpha) {
 }
 
 BurrowsScenes.ArrivalOphelia = function() {
+	let player = GAME().player;
 	var parse = {
 		playername : player.name
 	};
@@ -568,6 +572,8 @@ BurrowsScenes.ArrivalOphelia = function() {
 }
 
 BurrowsScenes.ArrivalOpheliaTalk = function() {
+	let player = GAME().player;
+	let party = GAME().party;
 	var parse = {
 		playername : player.name
 	};
@@ -731,6 +737,7 @@ BurrowsScenes.ArrivalOpheliaTalk = function() {
 }
 
 BurrowsScenes.ArrivalLagon = function() {
+	let player = GAME().player;
 	var parse = {
 		playername : player.name,
 		heshe      : player.mfFem("he", "she")
@@ -774,6 +781,8 @@ BurrowsScenes.ArrivalLagon = function() {
 }
 
 BurrowsScenes.ArrivalLagonTalk = function() {
+	let party = GAME().party;
+	let lagon = GAME().lagon;
 	var parse = {
 		
 	};

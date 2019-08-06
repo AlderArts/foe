@@ -14,6 +14,9 @@ OCavalcadeScenes.Enabled = function() {
 }
 
 OCavalcadeScenes.PrepRandomCoinGame = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	
 	var onEnd = function() {
 		var parse = {
 			playername : player.name

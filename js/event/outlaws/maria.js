@@ -9,7 +9,7 @@ import { DeadDropScenes } from './maria-dd';
 import { Images } from '../../assets';
 import { Color } from '../../body/color';
 import { Time } from '../../time';
-import { WorldTime, TimeStep } from '../../GAME';
+import { WorldTime, TimeStep, GAME } from '../../GAME';
 import { Abilities } from '../../abilities';
 import { Text } from '../../text';
 import { EncounterTable } from '../../event';
@@ -18,6 +18,8 @@ import { Jobs } from '../../job';
 import { Party } from '../../party';
 import { Encounter } from '../../combat';
 import { SetGameState, GameState } from '../../gamestate';
+import { StatusEffect } from '../../statuseffect';
+import { Items } from '../../items';
 
 let MariaScenes = {
 	DeadDrops : DeadDropScenes,
@@ -126,13 +128,15 @@ Maria.prototype.Update = function(step) {
 
 // Schedule
 Maria.prototype.IsAtLocation = function(location) {
-	location = location || party.location;
+	location = location || GAME().party.location;
 	if(location == world.loc.Outlaws.Camp)
 		return (WorldTime().hour >= 7 && WorldTime().hour < 22);
 	return false;
 }
 
 Maria.prototype.EligableForDeaddropAlert = function() {
+	let outlaws = GAME().outlaws;
+	let maria = GAME().maria;
 	//Only in the initial phase
 	if(maria.flags["DD"] != 0) return false;
 	//Only when meeting the correct conditions
@@ -172,6 +176,10 @@ Maria.prototype.Act = function(encounter, activeChar) {
 
 // Camp interaction
 MariaScenes.CampInteract = function() {
+	let player = GAME().player;
+	let outlaws = GAME().outlaws;
+	let maria = GAME().maria;
+
 	if(outlaws.MariasBouqetAvailable()) {
 		Scenes.Outlaws.MariasBouquet();
 	}
@@ -261,6 +269,8 @@ MariaScenes.CampInteract = function() {
 }
 
 MariaScenes.CampPrompt = function() {
+	let maria = GAME().maria;
+
 	var parse = {
 
 	};
@@ -330,6 +340,9 @@ MariaScenes.CampPrompt = function() {
 }
 
 MariaScenes.RangerTraining = function() {
+	let party = GAME().party;
+	let maria = GAME().maria;
+
 	var parse = {
 		
 	};
@@ -461,6 +474,10 @@ MariaScenes.RangerTraining = function() {
 }
 
 MariaScenes.TalkPrompt = function() {
+	let player = GAME().player;
+	let outlaws = GAME().outlaws;
+	let maria = GAME().maria;
+
 	var parse = {
 		playername : player.name
 	};
@@ -757,6 +774,10 @@ MariaScenes.TalkPrompt = function() {
 }
 
 MariaScenes.ForestMeeting = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let maria = GAME().maria;
+
 	Text.Clear();
 
 	var parse = {
@@ -821,6 +842,10 @@ MariaScenes.ForestMeeting = function() {
 }
 
 MariaScenes.ForestConfront = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let maria = GAME().maria;
+
 	var parse = {
 		
 	};
@@ -931,11 +956,14 @@ MariaScenes.ForestConfront = function() {
 }
 
 MariaScenes.ForestConfrontWin = function() {
+	let player = GAME().player;
+	let maria = GAME().maria;
+
 	var parse = {
 		
 	};
 	parse = player.ParserTags(parse);
-	
+
 	Text.Clear();
 	maria.flags["Met"] |= Maria.Met.Fight;
 	
@@ -1037,11 +1065,13 @@ MariaScenes.ForestConfrontWin = function() {
 }
 
 MariaScenes.ForestAftermath = function() {
+	let player = GAME().player;
+
 	var parse = {
 		
 	};
 	parse = player.ParserTags(parse);
-	
+
 	Text.Add("Reaching for her chest, Maria pulls something small from her prodigious cleavage. As she brings it up to her mouth, you realize what it is. You lunge forward, but you're too slow to stop her from blowing into the whistle. The sharp sound cuts through the murmur of the forest. All the normal wildlife sounds cease, and you hear rustling in the undergrowth around you.", parse);
 	Text.NL();
 	Text.Add("As you're momentarily paralyzed with indecision, a spear flies through the air, nearly impaling you. As it smashes into the ground just to your left, the thrower emerges from the bushes. A huge, jackal-headed warrior steps into the clearing, and stares you down. Behind him, a group of animal-morphs and a few humans brandish their weapons threateningly. As strong as you are, you don't think you can beat them in a fight just now.", parse);
@@ -1058,6 +1088,8 @@ MariaScenes.ForestAftermath = function() {
 }
 
 MariaScenes.ForestFollow = function() {
+	let maria = GAME().maria;
+
 	var parse = {};
 
 	Text.Clear();
@@ -1117,6 +1149,10 @@ MariaScenes.ForestFollow = function() {
 }
 
 MariaScenes.ForestCamp = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let maria = GAME().maria;
+
 	parse = {
 		num        : Text.NumToText(party.Num() + 2),
 		playername : player.name,
@@ -1219,6 +1255,10 @@ MariaScenes.ForestCamp = function() {
 }
 
 MariaScenes.ForestEnd = function() {
+	let party = GAME().party;
+	let outlaws = GAME().outlaws;
+	let maria = GAME().maria;
+
 	maria.RestFull();
 	party.RestFull();
 

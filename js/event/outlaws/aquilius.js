@@ -1,10 +1,12 @@
 /*
  * Aquilius, Outlaw Avian healer
  */
+import * as _ from 'lodash';
+
 import { Entity } from '../../entity';
 import { Time } from '../../time';
 import { IngredientItems } from '../../items/ingredients';
-import { WorldTime } from '../../GAME';
+import { WorldTime, GAME } from '../../GAME';
 import { Gui } from '../../gui';
 import { Text } from '../../text';
 
@@ -94,7 +96,7 @@ Aquilius.prototype.Update = function(step) {
 
 // Schedule TODO
 Aquilius.prototype.IsAtLocation = function(location) {
-	location = location || party.location;
+	location = location || GAME().party.location;
 	if(location == world.loc.Outlaws.Infirmary)
 		return (WorldTime().hour >= 7 && WorldTime().hour < 22);
 	return false;
@@ -110,6 +112,7 @@ Aquilius.prototype.HelpCooldown = function() {
 	return new Time(0,0,0,12,0);
 }
 Aquilius.prototype.QualifiesForAnyJob = function(entity) {
+	let aquilius = GAME().aquilius;
 	return aquilius.QualifiesForHerbs(entity) ||
 	       aquilius.QualifiesForHealing(entity) ||
 	       aquilius.QualifiesForAlchemy(entity); //TODO
@@ -130,6 +133,10 @@ Aquilius.prototype.SetHerb = function(override) {
 }
 
 AquiliusScenes.FirstMeeting = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let aquilius = GAME().aquilius;
+
 	var parse = {
 		playername : player.name
 	};
@@ -184,6 +191,11 @@ AquiliusScenes.FirstMeeting = function() {
 }
 
 AquiliusScenes.Approach = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let aquilius = GAME().aquilius;
+	let outlaws = GAME().outlaws;
+
 	var parse = {
 		playername : player.name
 	};
@@ -326,6 +338,8 @@ AquiliusScenes.Approach = function() {
 
 //TODO
 AquiliusScenes.Prompt = function() {
+	let aquilius = GAME().aquilius;
+
 	var parse = {
 		
 	};
@@ -398,6 +412,8 @@ AquiliusScenes.Prompt = function() {
 }
 
 AquiliusScenes.TalkPrompt = function() {
+	let aquilius = GAME().aquilius;
+	
 	var parse = {
 		
 	};
@@ -452,6 +468,9 @@ AquiliusScenes.TalkPrompt = function() {
 }
 
 AquiliusScenes.TalkSelfPrompt = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	
 	var parse = {
 		playername : player.name,
 		boygirl : kiakai.mfTrue("boy", "girl"),
@@ -586,6 +605,8 @@ AquiliusScenes.TalkSelfPrompt = function() {
 }
 
 AquiliusScenes.TalkGrind = function() {
+	let player = GAME().player;
+	
 	var parse = {
 		playername : player.name
 	};
@@ -666,6 +687,8 @@ AquiliusScenes.TalkGrind = function() {
 }
 
 AquiliusScenes.TalkWarPrompt = function() {
+	let player = GAME().player;
+	
 	var parse = {
 		playername : player.name
 	};
@@ -768,6 +791,9 @@ AquiliusScenes.TalkWarPrompt = function() {
 }
 
 AquiliusScenes.Smoke = function() {
+	let player = GAME().player;
+	let aquilius = GAME().aquilius;
+
 	var parse = {
 		playername : player.name
 	};
@@ -880,6 +906,9 @@ AquiliusScenes.Appearance = function() {
 }
 
 AquiliusScenes.HelpOut = function() {
+	let player = GAME().player;
+	let aquilius = GAME().aquilius;
+
 	var parse = {
 		playername : player.name
 	};
@@ -907,6 +936,9 @@ AquiliusScenes.HelpOut = function() {
 
 //TODO
 AquiliusScenes.HelpOutPrompt = function() {
+	let player = GAME().player;
+	let aquilius = GAME().aquilius;
+	
 	var parse = {
 		playername : player.name
 	};
@@ -982,6 +1014,9 @@ AquiliusScenes.HelpOutPrompt = function() {
 
 // [Herbs] - Go flower picking like Aquilius asked you to.
 AquiliusScenes.PickHerbs = function() {
+	let party = GAME().party;
+	let aquilius = GAME().aquilius;
+	
 	var parse = {
 		
 	};
@@ -1014,6 +1049,11 @@ AquiliusScenes.PickHerbs = function() {
 
 // Tend to sick (requires healer job available)
 AquiliusScenes.TendToSick = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let aquilius = GAME().aquilius;
+	let outlaws = GAME().outlaws;
+
 	var parse = {
 		playername : player.name
 	};
@@ -1125,6 +1165,9 @@ AquiliusScenes.TendToSick = function() {
 }
 
 AquiliusScenes.AlchemyHelp = function() {
+	let aquilius = GAME().aquilius;
+	let outlaws = GAME().outlaws;
+
 	var parse = {
 		
 	};
