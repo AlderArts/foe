@@ -8,7 +8,7 @@ import { Event, Link, EncounterTable } from '../event';
 import { Gender } from '../body/gender';
 import { GwendyScenes } from '../event/farm/gwendy-scenes';
 import { LaylaScenes } from '../event/farm/layla-scenes';
-import { WorldTime, MoveToLocation, TimeStep } from '../GAME';
+import { WorldTime, MoveToLocation, TimeStep, GAME } from '../GAME';
 import { SetGameState, GameState } from '../gamestate';
 import { Gui } from '../gui';
 import { Text } from '../text';
@@ -81,8 +81,12 @@ let FarmLoc = {
 
 
 FarmLoc.Loft.events.push(new Link(
-	"Gwendy", function() { return gwendy.IsAtLocation(FarmLoc.Loft); }, true,
+	"Gwendy", function() {
+		let gwendy = GAME().gwendy;
+		return gwendy.IsAtLocation(FarmLoc.Loft);
+	}, true,
 	function() {
+		let gwendy = GAME().gwendy;
 		if(gwendy.IsAtLocation(FarmLoc.Loft)) {
 			Text.Add("Gwendy is here.");
 		}
@@ -93,8 +97,12 @@ FarmLoc.Loft.events.push(new Link(
 	GwendyScenes.LoftPrompt
 ));
 FarmLoc.Barn.events.push(new Link(
-	"Gwendy", function() { return gwendy.IsAtLocation(FarmLoc.Barn); }, true,
+	"Gwendy", function() {
+		let gwendy = GAME().gwendy;
+		return gwendy.IsAtLocation(FarmLoc.Barn);
+	}, true,
 	function() {
+		let gwendy = GAME().gwendy;
 		if(gwendy.IsAtLocation(FarmLoc.Barn)) {
 			Text.Add("Gwendy is here.");
 		}
@@ -105,8 +113,12 @@ FarmLoc.Barn.events.push(new Link(
 	GwendyScenes.BarnPrompt
 ));
 FarmLoc.Fields.events.push(new Link(
-	"Gwendy", function() { return gwendy.IsAtLocation(FarmLoc.Fields); }, true,
+	"Gwendy", function() {
+		let gwendy = GAME().gwendy;
+		return gwendy.IsAtLocation(FarmLoc.Fields);
+	}, true,
 	function() {
+		let gwendy = GAME().gwendy;
 		if(gwendy.IsAtLocation(FarmLoc.Fields)) {
 			Text.Add("Gwendy is here.");
 		}
@@ -137,6 +149,7 @@ FarmLoc.Fields.onEntry = function(x, from) {
 FarmLoc.Fields.enc = new EncounterTable();
 FarmLoc.Fields.enc.AddEnc(function() {
 	return function() {
+		let party = GAME().party;
 		Text.Clear();
 
 		Text.Add("Not having much else to do, you wander the fields for a few minutes. You pick up a particularly fresh bundle of grass. Who knows, could be useful for something.");
@@ -156,6 +169,7 @@ FarmLoc.Fields.enc.AddEnc(function() {
 
 FarmLoc.Fields.enc.AddEnc(function() {
 	return function() {
+		let party = GAME().party;
 		Text.Clear();
 
 		Text.Add("Not having much else to do, you wander the fields for a few minutes. You pick up a pretty flower. Who knows, could be useful for something.");
@@ -225,6 +239,8 @@ FarmLoc.Loft.links.push(new Link(
 ));
 
 FarmLoc.Loft.SleepFunc = function() {
+	let party = GAME().party;
+
 	var parse = {
 
 	};
@@ -298,6 +314,10 @@ FarmScenesIntro.Start = function() {
 }
 
 FarmScenesIntro.Approach = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let gwendy = GAME().gwendy;
+
 	party.location = FarmLoc.Fields;
 	TimeStep({minute: 15});
 	Text.Clear();
@@ -390,6 +410,8 @@ FarmScenesIntro.Approach = function() {
 }
 
 FarmScenesIntro.EnterBarn = function() {
+	let party = GAME().party;
+
 	party.location = FarmLoc.Barn;
 	TimeStep({minute: 10});
 
@@ -414,6 +436,8 @@ FarmScenesIntro.EnterBarn = function() {
 }
 
 FarmScenesIntro.EnterLoft = function() {
+	let party = GAME().party;
+
 	party.location = FarmLoc.Loft;
 	TimeStep({minute: 5});
 	Text.Clear();
@@ -435,6 +459,8 @@ FarmScenesIntro.EnterLoft = function() {
 }
 
 FarmScenesIntro.GwendyQuestions1 = function() {
+	let player = GAME().player;
+
 	var parse = {
 		race : function() { return player.body.Race().Short(player.Gender()); }
 	};
@@ -498,6 +524,10 @@ FarmScenesIntro.GwendyQuestions1 = function() {
 }
 
 FarmScenesIntro.GwendyQuestions2 = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let gwendy = GAME().gwendy;
+
 	var parse = {
 		playername : player.name,
 		breastDesc : function() { return player.FirstBreastRow().Short(); }
@@ -663,6 +693,9 @@ FarmScenesIntro.GwendyQuestions2 = function() {
 }
 
 FarmScenesIntro.HelpAdrian = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+
 	party.location = FarmLoc.Barn;
 	TimeStep({minute: 10});
 	Text.Clear();
@@ -756,6 +789,8 @@ FarmScenesIntro.HelpAdrian = function() {
 }
 
 FarmScenesIntro.HelpAdrianFinished = function() {
+	let player = GAME().player;
+
 	Text.Clear();
 	TimeStep({hour: 1});
 
@@ -787,6 +822,9 @@ FarmScenesIntro.HelpAdrianFinished = function() {
 }
 
 FarmScenesIntro.MeetDanie = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+
 	Text.Clear();
 	party.location = FarmLoc.Fields;
 	TimeStep({minute: 5});
@@ -866,6 +904,8 @@ FarmScenesIntro.MeetDanie = function() {
 }
 
 FarmScenesIntro.HornyDanie = function() {
+	let player = GAME().player;
+
 	Text.Clear();
 	player.AddLustFraction(0.5);
 
@@ -918,6 +958,9 @@ FarmScenesIntro.HornyDanie = function() {
 }
 
 FarmScenesIntro.DanieFuckOptions = function() {
+	let player = GAME().player;
+	let danie = GAME().danie;
+
 	var cocksInVag = player.CocksThatFit(danie.FirstVag());
 	var cocksInAss = player.CocksThatFit(danie.Butt());
 
@@ -967,6 +1010,9 @@ FarmScenesIntro.DanieFuckOptions = function() {
 }
 
 FarmScenesIntro.DanieOralSex = function(bits) {
+	let player = GAME().player;
+	let danie = GAME().danie;
+
 	Text.Clear();
 	FarmScenesIntro.fuckedDanie = true;
 	danie.relation.IncreaseStat(100, 10);
@@ -1057,6 +1103,9 @@ FarmScenesIntro.DanieOralSex = function(bits) {
 }
 
 FarmScenesIntro.DanieVaginalSex = function() {
+	let player = GAME().player;
+	let danie = GAME().danie;
+
 	Text.Clear();
 	danie.relation.IncreaseStat(100, 15);
 	danie.slut.IncreaseStat(100, 5);
@@ -1100,6 +1149,9 @@ FarmScenesIntro.DanieVaginalSex = function() {
 }
 
 FarmScenesIntro.DanieAnalSex = function() {
+	let player = GAME().player;
+	let danie = GAME().danie;
+
 	Text.Clear();
 	danie.relation.IncreaseStat(100, 20);
 	danie.slut.IncreaseStat(100, 10);
@@ -1144,6 +1196,9 @@ FarmScenesIntro.DanieAnalSex = function() {
 }
 
 FarmScenesIntro.ReturnToGwendy = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+
 	Text.Clear();
 	TimeStep({hour: 2});
 
@@ -1188,6 +1243,10 @@ FarmScenesIntro.ReturnToGwendy = function() {
 }
 
 FarmScenes.GoToMarketFirst = function(backfunc) {
+	let player = GAME().player;
+	let party = GAME().party;
+	let gwendy = GAME().gwendy;
+
 	var parse = {
 		playername : player.name
 	};
@@ -1346,6 +1405,9 @@ FarmScenes.GoToMarketFirst = function(backfunc) {
 }
 
 FarmScenes.GoToMarketFirstAfterBandits = function(won) {
+	let player = GAME().player;
+	let party = GAME().party;
+
 	var parse = {
 		playername : player.name
 	};
@@ -1434,6 +1496,10 @@ FarmScenes.GoToMarketFirstAfterBandits = function(won) {
  * }
  */
 FarmScenes.Market = function(haul, next) {
+	let player = GAME().player;
+	let party = GAME().party;
+	let gwendy = GAME().gwendy;
+
 	var parse = {
 		playername : player.name,
 		enemy      : haul.badenc,
@@ -1577,6 +1643,10 @@ FarmScenes.Market = function(haul, next) {
 }
 
 FarmScenes.GoToMarketFirstFinale = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let gwendy = GAME().gwendy;
+
 	var parse = {
 		playername : player.name
 	};
