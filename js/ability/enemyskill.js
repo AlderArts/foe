@@ -4,6 +4,9 @@ import { Ability, TargetMode } from '../ability';
 import { Defaults } from './default';
 import { AttackAb } from './attack';
 import { Text } from '../text';
+import { GAME } from '../GAME';
+import { PregnancyHandler } from '../pregnancy';
+import { Sex } from '../entity-sex';
 
 let EnemySkillAb = {};
 
@@ -192,29 +195,29 @@ EnemySkillAb.TViolate.castTree.push(AbilityNode.Template.Physical({
 		parse["tarmor"] = target.ArmorDesc();
 		Text.Add("[tName] [tis] very aroused, and [thisher] reaction is dulled. The dryad laughs triumphantly as she strings [tname] up in the air, her tentacles worming their way inside [tposs] [tarmor]!", parse);
 		Text.NL();
-		if(target == player) {
-			parse["vagDesc"]  = function() { return player.FirstVag().Short(); }
-			parse["anusDesc"] = function() { return player.Butt().AnalShort(); }
-			parse["vag"] = player.FirstVag() ? Text.Parse(" [vagDesc] and", parse) : "";
+		if(target == GAME().player) {
+			parse["vagDesc"]  = function() { return GAME().player.FirstVag().Short(); }
+			parse["anusDesc"] = function() { return GAME().player.Butt().AnalShort(); }
+			parse["vag"] = GAME().player.FirstVag() ? Text.Parse(" [vagDesc] and", parse) : "";
 			Text.Add("You gasp as multiple plant-cocks press their way inside your[vag] [anusDesc]. A bad move it turns out, as additional ones shove their way inside your throat.", parse);
 			Text.NL();
 			
-			if(player.FirstVag()) {
-				Sex.Vaginal(orchid, player);
-				player.FuckVag(player.FirstVag(), orchid.FirstCock(), 2);
-				orchid.Fuck(orchid.FirstCock(), 2);
+			if(GAME().player.FirstVag()) {
+				Sex.Vaginal(GAME().orchid, GAME().player);
+				GAME().player.FuckVag(GAME().player.FirstVag(), GAME().orchid.FirstCock(), 2);
+				GAME().orchid.Fuck(GAME().orchid.FirstCock(), 2);
 				
-				Scenes.Orchid.Impregnate(player);
+				Scenes.Orchid.Impregnate(GAME().player);
 			}
-			Sex.Anal(orchid, player);
-			player.FuckAnal(player.Butt(), orchid.FirstCock(), 2);
-			orchid.Fuck(orchid.FirstCock(), 2);
+			Sex.Anal(GAME().orchid, GAME().player);
+			GAME().player.FuckAnal(GAME().player.Butt(), GAME().orchid.FirstCock(), 2);
+			GAME().orchid.Fuck(GAME().orchid.FirstCock(), 2);
 			
-			Scenes.Orchid.Impregnate(player, PregnancyHandler.Slot.Butt);
+			Scenes.Orchid.Impregnate(GAME().player, PregnancyHandler.Slot.Butt);
 			
-			Sex.Blowjob(player, orchid);
-			player.FuckOral(player.Mouth(), orchid.FirstCock(), 2);
-			orchid.Fuck(orchid.FirstCock(), 2);
+			Sex.Blowjob(GAME().player, GAME().orchid);
+			GAME().player.FuckOral(GAME().player.Mouth(), GAME().orchid.FirstCock(), 2);
+			GAME().orchid.Fuck(GAME().orchid.FirstCock(), 2);
 			
 			Text.NL();
 			Text.Add("You groan as your body protests against the massive strain of a dozen tentacles violently raping your every hole. The intense pressure quickly pushes you over the edge, and you feel your energy drain even as Orchid pumps her seed into you.", parse);

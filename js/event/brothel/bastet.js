@@ -1,6 +1,7 @@
 import { Entity } from '../../entity';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
+import { GAME } from '../../GAME';
 
 let BastetScenes = {};
 
@@ -45,6 +46,8 @@ Bastet.prototype.ToStorage = function() {
 }
 
 BastetScenes.IntroEntryPoint = function() {
+	let player = GAME().player;
+	let bastet = GAME().bastet;
 	var parse = {
 		armor : player.ArmorDesc()
 	};
@@ -93,6 +96,7 @@ BastetScenes.IntroEntryPoint = function() {
 }
 
 BastetScenes.SceneSelect = function(choice) {
+	let bastet = GAME().bastet;
 	
 	Gui.Callstack.push(function() {
 		if(bastet.flags["State"] < choice)
@@ -108,6 +112,8 @@ BastetScenes.SceneSelect = function(choice) {
 }
 
 BastetScenes.TFBlock = function() {
+	let player = GAME().player;
+
 	var parse = {};
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
@@ -296,6 +302,8 @@ BastetScenes.TFBlock = function() {
 }
 
 BastetScenes.Birth = function() {
+	let player = GAME().player;
+
 	var parse = {
 		
 	};
@@ -810,6 +818,7 @@ BastetScenes.Birth2 = function() {
 }
 
 BastetScenes.Birth3 = function() {
+	let bastet = GAME().bastet;
 	var parse = {
 		
 	};

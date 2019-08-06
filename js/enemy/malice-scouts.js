@@ -501,6 +501,8 @@ GoatAlchemist.prototype.Act = function(encounter, activeChar) {
 
 // CATBOY SCENES
 MaliceScoutsScenes.Catboy.LoneEncounter = function(levelbonus) {
+	let player = GAME().player;
+	let party = GAME().party;
 	var enemy    = new Party();
 	var catboy   = new CatboyMage(levelbonus);
 	enemy.AddMember(catboy);
@@ -560,6 +562,8 @@ MaliceScoutsScenes.Catboy.LoneEncounter = function(levelbonus) {
 }
 
 MaliceScoutsScenes.Catboy.WinPrompt = function() {
+	let player = GAME().player;
+	let party = GAME().party;
 	var enc  = this;
 	SetGameState(GameState.Event, Gui);
 
@@ -652,6 +656,7 @@ MaliceScoutsScenes.Catboy.WinPrompt = function() {
 }
 
 MaliceScoutsScenes.Catboy.PityFuck = function(enc, win) {
+	let player = GAME().player;
 	var catboy = enc.catboy;
 	var p1cock = player.BiggestCock();
 	var parse = {
@@ -848,6 +853,7 @@ MaliceScoutsScenes.Catboy.PityFuck = function(enc, win) {
 }
 
 MaliceScoutsScenes.Catboy.PetPlay = function(enc) {
+	let player = GAME().player;
 	var catboy = enc.catboy;
 	var p1cock = player.BiggestCock();
 	var parse = {
@@ -1119,6 +1125,7 @@ MaliceScoutsScenes.Catboy.PetPlay = function(enc) {
 }
 
 MaliceScoutsScenes.Catboy.Petting = function(enc) {
+	let player = GAME().player;
 	var parse = {
 
 	};
@@ -1237,6 +1244,8 @@ MaliceScoutsScenes.Catboy.Petting = function(enc) {
 }
 
 MaliceScoutsScenes.Catboy.LossPrompt = function() {
+	let player = GAME().player;
+	let party = GAME().party;
 	SetGameState(GameState.Event, Gui);
 	Text.Clear();
 
@@ -1310,6 +1319,7 @@ MaliceScoutsScenes.Catboy.LossPrompt = function() {
 }
 
 MaliceScoutsScenes.Catboy.GetMilked = function(enc) {
+	let player = GAME().player;
 	var catboy = enc.catboy;
 	var parse = {
 
@@ -1409,6 +1419,7 @@ MaliceScoutsScenes.Catboy.GetMilked = function(enc) {
 
 
 MaliceScoutsScenes.Mare.LoneEncounter = function(levelbonus) {
+	let player = GAME().player;
 	var enemy    = new Party();
 	var mare     = new CentaurMare(levelbonus);
 	enemy.AddMember(mare);
@@ -1505,6 +1516,7 @@ MaliceScoutsScenes.Mare.LoneEncounter = function(levelbonus) {
 }
 
 MaliceScoutsScenes.Mare.WinPrompt = function() {
+	let player = GAME().player;
 	var enc  = this;
 	SetGameState(GameState.Event, Gui);
 
@@ -1577,6 +1589,7 @@ MaliceScoutsScenes.Mare.WinPrompt = function() {
 }
 
 MaliceScoutsScenes.Mare.WinFuck = function(enc) {
+	let player = GAME().player;
 	var mare   = enc.mare;
 	var p1cock = player.BiggestCock();
 	var parse = {
@@ -1891,6 +1904,7 @@ MaliceScoutsScenes.Mare.WinFuck = function(enc) {
 
 
 MaliceScoutsScenes.Mare.WinFist = function(enc) {
+	let player = GAME().player;
 	var mare   = enc.mare;
 	var p1cock = player.BiggestCock();
 	var parse = {
@@ -2000,6 +2014,7 @@ MaliceScoutsScenes.Mare.WinFist = function(enc) {
 }
 
 MaliceScoutsScenes.Mare.LossPrompt = function() {
+	let player = GAME().player;
 	SetGameState(GameState.Event, Gui);
 	Text.Clear();
 
@@ -2058,6 +2073,7 @@ MaliceScoutsScenes.Mare.LossEntry = function(enc) {
 
 
 MaliceScoutsScenes.Mare.LossFacesit = function(enc) {
+	let player = GAME().player;
 	var parse = {
 
 	};
@@ -2133,6 +2149,8 @@ MaliceScoutsScenes.Mare.LossFacesit = function(enc) {
 
 
 MaliceScoutsScenes.Goat.LoneEncounter = function(levelbonus) {
+	let player = GAME().player;
+	let party = GAME().party;
 	var enemy    = new Party();
 	var goat     = new GoatAlchemist(levelbonus);
 	enemy.AddMember(goat);
@@ -2247,6 +2265,7 @@ MaliceScoutsScenes.Goat.WinPrompt = function() {
 }
 
 MaliceScoutsScenes.Goat.WinTurnTables = function(enc) {
+	let player = GAME().player;
 	var goat = enc.goat;
 	var parse = {
 		
@@ -2826,6 +2845,7 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc) {
 }
  
 MaliceScoutsScenes.Goat.LossPrompt = function() {
+	let player = GAME().player;
 	SetGameState(GameState.Event, Gui);
 	Text.Clear();
 
@@ -2852,6 +2872,7 @@ MaliceScoutsScenes.Goat.LossPrompt = function() {
 }
 
 MaliceScoutsScenes.Goat.LossEntry = function(enc) {
+	let player = GAME().player;
 	var parse = {
 		
 	};
@@ -3308,6 +3329,7 @@ MaliceScoutsScenes.Goat.LossEntry = function(enc) {
 // GROUP ENCOUNTER
 
 MaliceScoutsScenes.Group.Encounter = function(levelbonus) {
+	let player = GAME().player;
 	var enemy    = new Party();
 	var catboy   = new CatboyMage(levelbonus);
 	var goat     = new GoatAlchemist(levelbonus);
@@ -3381,6 +3403,7 @@ MaliceScoutsScenes.Group.Encounter = function(levelbonus) {
 }
 
 MaliceScoutsScenes.Group.WinPrompt = function() {
+	let player = GAME().player;
 	var enc  = this;
 	SetGameState(GameState.Event, Gui);
 
@@ -3433,6 +3456,8 @@ MaliceScoutsScenes.Group.WinPrompt = function() {
 
 
 MaliceScoutsScenes.Group.LossPrompt = function() {
+	let player = GAME().player;
+	let party = GAME().party;
 	SetGameState(GameState.Event, Gui);
 	Text.Clear();
 
@@ -3496,6 +3521,7 @@ MaliceScoutsScenes.Group.LossPrompt = function() {
 }
 
 MaliceScoutsScenes.Group.LossCatboyForcedTF = function(enc) {
+	let player = GAME().player;
 	var catboy = enc.catboy;
 	
 	var parse = {
@@ -3719,6 +3745,8 @@ MaliceScoutsScenes.Group.LossCatboyForcedTF = function(enc) {
 }
 
 MaliceScoutsScenes.Group.LossMagicalBondage = function(enc) {
+	let player = GAME().player;
+	let party = GAME().party;
 	var parse = {
 		hisher : player.mfTrue("his", "her"),
 		himher : player.mfTrue("him", "her")
@@ -4045,6 +4073,7 @@ MaliceScoutsScenes.Group.LossMagicalBondage = function(enc) {
 
 
 MaliceScoutsScenes.Group.LossCatRape = function(enc) {
+	let player = GAME().player;
 	var catboy = enc.catboy;
 	
 	var parse = {

@@ -18,6 +18,7 @@ import { InitNomads } from './loc/nomads';
 import { InitMiranda } from './event/miranda-scenes';
 import { BullTowerLoc } from './event/outlaws/bulltower';
 import { InitCheats } from './cheats';
+import { GAME } from './GAME';
 
 let world = {
 	// Prototype initialization
@@ -52,7 +53,7 @@ world.Locations = {
 };
 
 world.CurrentLocation = function(loc) {
-	loc = loc || party.location;
+	loc = loc || GAME().party.location;
 	
 	if     (loc == PlainsLoc.Crossroads)
 		return world.Locations.Plains;
@@ -66,22 +67,6 @@ world.CurrentLocation = function(loc) {
 		return world.Locations.Lake;
 	
 	return -1;
-}
-
-// Update function (for animations and transitions)
-world.Update = function(frametime) {
-	/*
-	var xDir = 0;
-	var yDir = 0;
-	
-	if(Input.keyinput[LEFT_ARROW])  xDir--;
-	if(Input.keyinput[RIGHT_ARROW]) xDir++;
-	if(Input.keyinput[UP_ARROW])    yDir--;
-	if(Input.keyinput[DOWN_ARROW])  yDir++;
-	
-	this.x += xDir * frametime * 200;
-	this.y += yDir * frametime * 200;
-	*/
 }
 
 //TODO

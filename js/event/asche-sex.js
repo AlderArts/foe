@@ -1,10 +1,12 @@
 import { Text } from "../text";
 import { Sex } from "../entity-sex";
 import { Gui } from "../gui";
+import { GAME } from "../GAME";
 
 let SexScenes = {};
 
 SexScenes.Prompt = function() {
+	let player = GAME().player;
 	var options = new Array();
 	options.push({ nameStr : "Fuck her",
 		tooltip : "You’ve long waited for the chance to have a go at the exotic shopkeeper.",
@@ -50,6 +52,7 @@ SexScenes.Prompt = function() {
 }
 
 SexScenes.FuckHer = function() {
+	let player = GAME().player;
 	var p1cock = player.BiggestCock(null, true);
 	var real = !p1cock.isStrapon;
 	var knotted = p1cock.Knot();
@@ -146,6 +149,7 @@ SexScenes.FuckHer = function() {
 }
 
 SexScenes.GiveOral = function() {
+	let player = GAME().player;
 	var parse = {
 		handsomepretty : player.mfFem("handsome", "pretty"),
 		heshe : player.mfFem("he", "she"),
@@ -191,6 +195,7 @@ SexScenes.GiveOral = function() {
 }
 
 SexScenes.GetOral = function() {
+	let player = GAME().player;
 	var p1cock = player.BiggestCock();
 	
 	var parse = {
@@ -305,6 +310,7 @@ SexScenes.GetOral = function() {
 }
 
 SexScenes.Titfuck = function() {
+	let player = GAME().player;
 	var p1cock = player.BiggestCock();
 	var longCock = p1cock.Len() > 28;
 	
@@ -354,6 +360,7 @@ SexScenes.Titfuck = function() {
 }
 
 SexScenes.MilkHer = function() {
+	let player = GAME().player;
 	var parse = {
 		heshe : player.mfFem("he", "she"),
 		nips : player.FirstBreastRow().NipsShort(),
@@ -396,6 +403,7 @@ SexScenes.MilkHer = function() {
 }
 
 SexScenes.Tribbing = function() {
+	let player = GAME().player;
 	var parse = {
 		heshe : player.mfFem("he", "she"),
 		hisher : player.mfFem("his", "her")
@@ -437,6 +445,7 @@ SexScenes.Tribbing = function() {
 }
 
 SexScenes.Ending = function() {
+	let player = GAME().player;
 	var parse = {
 		
 	};
@@ -464,6 +473,7 @@ SexScenes.Ending = function() {
 }
 
 SexScenes.MagicalThreesome = function() {
+	let player = GAME().player;
 	var p1cock = player.BiggestCock();
 	
 	var parse = {

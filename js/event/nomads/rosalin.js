@@ -13,7 +13,7 @@ import { Color } from '../../body/color';
 import { Body } from '../../body/body';
 import { TF } from '../../tf';
 import { AppendageType } from '../../body/appendage';
-import { WorldTime } from '../../GAME';
+import { WorldTime, GAME } from '../../GAME';
 import { BodyPartType } from '../../body/bodypart';
 import { Sex } from '../../entity-sex';
 import { PregnancyHandler } from '../../pregnancy';
@@ -204,6 +204,7 @@ RosalinScenes.Impregnate = function(mother, father, slot) {
 
 // Schedule
 Rosalin.prototype.IsAtLocation = function(location) {
+	let party = GAME().party;
 	location = location || party.location;
 	if(location == world.loc.Plains.Nomads.Fireplace)
 		return (WorldTime().hour >= 12 || WorldTime().hour < 3);
@@ -211,6 +212,10 @@ Rosalin.prototype.IsAtLocation = function(location) {
 }
 
 RosalinScenes.Interact = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let rosalin = GAME().rosalin;
+	let cale = GAME().cale;
 	var anusol = rosalin.flags["Anusol"];
 	var anusolIngredients = true;
 	if(anusol < Rosalin.Anusol.AskedForCalesHelp) {
@@ -284,6 +289,7 @@ RosalinScenes.Interact = function() {
 }
 
 RosalinScenes.Desc = function() {
+	let rosalin = GAME().rosalin;
 	var parse = {
 		extinguishedLit : (WorldTime().hour >= 19 || WorldTime().hour < 2) ? "lit" : "extinguished"
 	};
@@ -301,6 +307,10 @@ RosalinScenes.Desc = function() {
 }
 
 RosalinScenes.TalkPrompt = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let rosalin = GAME().rosalin;
+	let cale = GAME().cale;
 	Text.Clear();
 
 	var racescore = new RaceScore(rosalin.body);
@@ -711,6 +721,11 @@ RosalinScenes.TalkPrompt = function() {
 }
 
 RosalinScenes.BrewAnusol = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let rosalin = GAME().rosalin;
+	let kiakai = GAME().kiakai;
+	let cale = GAME().cale;
 	var racescore = new RaceScore(rosalin.body);
 	var compScore = rosalin.origRaceScore.Compare(racescore);
 
@@ -771,6 +786,9 @@ RosalinScenes.BrewAnusol = function() {
 }
 
 RosalinScenes.FirstTime = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let kiakai = GAME().kiakai;
 	Text.Clear();
 
 	var parse = {
@@ -845,6 +863,9 @@ RosalinScenes.FirstTime = function() {
 }
 
 RosalinScenes.FirstFuck = function() {
+	let player = GAME().player;
+	let rosalin = GAME().rosalin;
+	let cale = GAME().cale;
 
 	var parse = {
 		armorDesc     : function() { return player.ArmorDesc(); },
@@ -1183,6 +1204,9 @@ RosalinScenes.FirstFuck = function() {
 }
 
 RosalinScenes.FirstFuckPegWolf = function() {
+	let player = GAME().player;
+	let rosalin = GAME().rosalin;
+	let cale = GAME().cale;
 	Text.Clear();
 
 	cale.flags["Met"] = Cale.Met.SharedFuckedHim;
@@ -1290,6 +1314,10 @@ RosalinScenes.FirstFuckFollowup = function(outcome) {
 }
 
 RosalinScenes.CombineCallback = function(item) {
+	let player = GAME().player;
+	let party = GAME().party;
+	let rosalin = GAME().rosalin;
+	let cale = GAME().cale;
 	Text.Clear();
 
 	var racescore = new RaceScore(rosalin.body);
@@ -2743,6 +2771,10 @@ let RosalinSexState = {
 	Rut     : 2
 }
 RosalinScenes.SexPrompt = function(state) {
+	let player = GAME().player;
+	let rosalin = GAME().rosalin;
+	let cale = GAME().cale;
+
 	Text.Clear();
 
 	var racescore = new RaceScore(rosalin.body);
@@ -3344,6 +3376,8 @@ RosalinScenes.SexPrompt = function(state) {
 }
 
 RosalinScenes.CockWorship = function(sexState) {
+	let player = GAME().player;
+	let rosalin = GAME().rosalin;
 	Text.Clear();
 
 	var racescore = new RaceScore(rosalin.body);
@@ -3515,6 +3549,8 @@ RosalinScenes.CockWorship = function(sexState) {
 }
 
 RosalinScenes.VagAftermath = function() {
+	let player = GAME().player;
+	let rosalin = GAME().rosalin;
 	Text.Clear();
 
 	var racescore = new RaceScore(rosalin.body);

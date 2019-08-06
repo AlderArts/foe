@@ -162,6 +162,7 @@ NagaScenes.LoneEnc = function() {
 }
 
 NagaScenes.DesertEncounter = function() {
+	let player = GAME().player;
 	var enc  = this;
 	var naga = enc.naga;
 	var parse = {
@@ -250,6 +251,8 @@ NagaScenes.DesertEncounter = function() {
 }
 
 NagaScenes.DesertLoss = function() {
+	let player = GAME().player;
+	let party = GAME().party;
 	var enc  = this;
 	var naga = enc.naga;
 	SetGameState(GameState.Event, Gui);
@@ -296,6 +299,7 @@ NagaScenes.DesertLoss = function() {
 }
 
 NagaScenes.DesertLossScenes = function(enc) {
+	let player = GAME().player;
 	var scenes = new EncounterTable();
 	scenes.AddEnc(function() {
 		NagaScenes.DesertLossGetDPd(enc);
@@ -322,6 +326,8 @@ NagaScenes.DesertLossScenes = function(enc) {
 }
 
 NagaScenes.DesertLossGetDPd = function(enc) {
+	let player = GAME().player;
+	let party = GAME().party;
 	var naga = enc.naga;
 	SetGameState(GameState.Event, Gui);
 
@@ -462,6 +468,8 @@ NagaScenes.DesertLossGetDPd = function(enc) {
 
 
 NagaScenes.DesertLossUseCock = function(enc) {
+	let player = GAME().player;
+	let party = GAME().party;
 	var naga = enc.naga;
 	SetGameState(GameState.Event, Gui);
 
@@ -678,6 +686,8 @@ NagaScenes.DesertLossUseCock = function(enc) {
 
 //TODO
 NagaScenes.DesertWinPrompt = function() {
+	let player = GAME().player;
+	let party = GAME().party;
 	var enc  = this;
 	var naga = enc.naga;
 	SetGameState(GameState.Event, Gui);
@@ -709,6 +719,8 @@ NagaScenes.DesertWinPrompt = function() {
 }
 
 NagaScenes.DesertWinPrompt2 = function(enc, hypno) {
+	let player = GAME().player;
+	let party = GAME().party;
 	var naga = enc.naga;
 
 	var parse = {};
@@ -794,6 +806,7 @@ NagaScenes.DesertWinPrompt2 = function(enc, hypno) {
 }
 
 NagaScenes.DesertWinHypnotize = function(enc) {
+	let player = GAME().player;
 	var naga = enc.naga;
 
 	var parse = {};
@@ -818,6 +831,7 @@ NagaScenes.DesertWinHypnotize = function(enc) {
 }
 
 NagaScenes.DesertWinHypnotizeOwn = function(enc) {
+	let player = GAME().player;
 	var naga = enc.naga;
 
 	var parse = {
@@ -843,6 +857,7 @@ NagaScenes.DesertWinHypnotizeOwn = function(enc) {
 }
 
 NagaScenes.DesertWinFuckJerk = function(enc, hypno) {
+	let player = GAME().player;
 	var naga = enc.naga;
 
 	var p1cock = player.BiggestCock();
@@ -973,6 +988,8 @@ NagaScenes.DesertWinFuckJerk = function(enc, hypno) {
 }
 
 NagaScenes.DesertWinGetFuckedVag = function(enc, hypno) {
+	let player = GAME().player;
+	let party = GAME().party;
 	Text.Clear();
 
 	var naga = enc.naga;
@@ -1118,6 +1135,7 @@ NagaScenes.DesertWinGetFuckedVag = function(enc, hypno) {
 }
 
 NagaScenes.DesertWinTailpeg = function(opts) {
+	let player = GAME().player;
 	var parse = {
 
 	};
@@ -1167,6 +1185,8 @@ NagaScenes.DesertWinTailpeg = function(opts) {
 }
 
 NagaScenes.DesertNagaMating = function(naga) {
+	let player = GAME().player;
+	let party = GAME().party;
 	var p1cock = player.BiggestCock();
 
 	var parse = {

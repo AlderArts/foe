@@ -10,7 +10,7 @@ import { VenaScenes } from '../event/burrows/vena';
 import { OpheliaScenes } from '../event/burrows/ophelia';
 import { LagonScenes } from '../event/burrows/lagon';
 import { Gender } from '../body/gender';
-import { WorldTime, MoveToLocation } from '../GAME';
+import { WorldTime, MoveToLocation, GAME } from '../GAME';
 import { Text } from '../text';
 import { Gui } from '../gui';
 
@@ -91,19 +91,24 @@ Burrows.prototype.BrainyActive = function() {
 	return this.flags["BrainyTrait"] >= Burrows.TraitFlags.Active;
 }
 Burrows.prototype.LagonDefeated = function() {
-	return lagon.flags["Usurp"] & Lagon.Usurp.Defeated;
+	return GAME().lagon.flags["Usurp"] & Lagon.Usurp.Defeated;
 }
 Burrows.prototype.LagonChallenged = function() {
-	return lagon.flags["Usurp"] & Lagon.Usurp.FirstFight;
+	return GAME().lagon.flags["Usurp"] & Lagon.Usurp.FirstFight;
 }
 Burrows.prototype.LagonAlly = function() {
-	return lagon.flags["Usurp"] & Lagon.Usurp.SidedWith;
+	return GAME().lagon.flags["Usurp"] & Lagon.Usurp.SidedWith;
 }
 //TODO
 Burrows.prototype.LagonChained = function() {
-	return burrows.LagonDefeated(); //TODO
+	return GAME().burrows.LagonDefeated(); //TODO
 }
 Burrows.prototype.LagonJudged = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let burrows = GAME().burrows;
+	let lagon = GAME().lagon;
+	let vena = GAME().vena;
 	return vena.flags["Met"] & Vena.Met.Judgement;
 }
 //TODO
@@ -133,6 +138,7 @@ Burrows.prototype.FromStorage = function(storage) {
 // Burrows entrance
 //
 BurrowsLoc.Entrance.description = function() {
+	let burrows = GAME().burrows;
 	var parse = {
 		TreeFar : world.TreeFarDesc(),
 		l : burrows.LagonDefeated() ? "the lagomorph" : "Lagon’s"
@@ -182,6 +188,7 @@ BurrowsLoc.Entrance.links.push(new Link(
 	"Inside", true, true,
 	null,
 	function() {
+		let burrows = GAME().burrows;
 		if(!burrows.LagonDefeated() && burrows.LagonChallenged())
 			Scenes.Lagon.ReturnToBurrowsAfterFight();
 		else if(!burrows.LagonDefeated() && burrows.flags["Access"] == Burrows.AccessFlags.Stage5)
@@ -249,6 +256,7 @@ BurrowsLoc.Tunnels.enc = new EncounterTable();
 // Burrows throne room
 //
 BurrowsLoc.Throne.description = function() {
+	let burrows = GAME().burrows;
 	var parse = {
 		Lagon : burrows.VenaRestored() ? "Vena" : "Lagon"
 	};
@@ -280,6 +288,7 @@ BurrowsLoc.Throne.links.push(new Link(
 
 BurrowsLoc.Throne.events.push(new Link(
 	"Vena", function() {
+		let burrows = GAME().burrows;
 		return burrows.VenaRestored();
 	}, true,
 	null,
@@ -290,10 +299,13 @@ BurrowsLoc.Throne.events.push(new Link(
 
 BurrowsLoc.Throne.events.push(new Link(
 	"Lagon", function() {
+		let lagon = GAME().lagon;
 		return lagon.IsAtLocation();
 	}, true,
 	null,
 	function() {
+		let burrows = GAME().burrows;
+		let lagon = GAME().lagon;
 		if(burrows.LagonAlly() && !(lagon.flags["Talk"] & Lagon.Talk.AlliedFirst))
 			Scenes.Lagon.AlliedFirst();
 		else if(burrows.LagonJudged())
@@ -308,6 +320,8 @@ BurrowsLoc.Throne.events.push(new Link(
 // Burrows Pit
 //
 BurrowsLoc.Pit.description = function() {
+	let player = GAME().player;
+	let burrows = GAME().burrows;
 	var parse = {
 		Lagon : burrows.VenaRestored() ? "Vena" : "Lagon"
 	};

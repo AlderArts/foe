@@ -73,6 +73,12 @@ Lucille.prototype.IsAtLocation = function(location) {
 }
 
 LucilleScenes.Themerooms = function() {
+	let player = GAME().player;
+	let gryphons = GAME().gryphons;
+	let bastet = GAME().bastet;
+	let fireblossom = GAME().fireblossom;
+	let lucille = GAME().lucille;
+
 	var parse = {
 		playername: player.name,
 		sirmadam: player.mfFem("sir", "madam")
@@ -207,6 +213,9 @@ LucilleScenes.Themerooms = function() {
 }
 
 LucilleScenes.WhoreAftermath = function(name, cost) {
+	let player = GAME().player;
+	let lucille = GAME().lucille;
+
 	cost = cost || 0;
 	
 	var parse = {

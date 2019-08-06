@@ -1,7 +1,7 @@
 import { Text } from "../text";
 import { EncounterTable } from "../event";
 import { Gui } from "../gui";
-import { TimeStep } from "../GAME";
+import { TimeStep, GAME } from "../GAME";
 
 /*
  * Meditation scenes for the PC
@@ -10,6 +10,8 @@ import { TimeStep } from "../GAME";
 let MeditationScenes = {};
 
 MeditationScenes.Entry = function() {
+	let player = GAME().player;
+	let party = GAME().party;
 	var parse = {
 		playername : player.name,
 		Kiai : kiakai.name

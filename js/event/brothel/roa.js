@@ -110,6 +110,7 @@ Roa.prototype.IsAtLocation = function(location) {
 }
 
 RoaScenes.Impregnate = function(mother, load, slot) {
+	let roa = GAME().roa;
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother : mother,
@@ -123,6 +124,7 @@ RoaScenes.Impregnate = function(mother, load, slot) {
 
 // Party interaction //TODO
 Roa.prototype.Interact = function() {
+	let roa = GAME().roa;
 	Text.Clear();
 	Text.Add("Rawr Imma bunny.");
 	
@@ -144,6 +146,8 @@ Roa.prototype.Interact = function() {
 }
 
 RoaScenes.BrothelApproach = function() {
+	let player = GAME().player;
+	let roa = GAME().roa;
 	var parse = {
 		playername : player.name
 	};
@@ -190,6 +194,8 @@ RoaScenes.BrothelApproach = function() {
 }
 
 RoaScenes.BrothelPrompt = function() {
+	let player = GAME().player;
+	let roa = GAME().roa;
 	var parse = {
 		cost : Text.NumToText(roa.Cost())
 	};
@@ -272,6 +278,8 @@ RoaScenes.BrothelPrompt = function() {
 
 //TODO
 RoaScenes.TalkPrompt = function(backPrompt) {
+	let burrows = GAME().burrows;
+	let roa = GAME().roa;
 	var parse = {
 		
 	};
@@ -430,6 +438,7 @@ RoaScenes.TalkPrompt = function(backPrompt) {
 }
 
 RoaScenes.RestoredVenaTalk = function() {
+	let roa = GAME().roa;
 	var parse = {
 		
 	};
@@ -444,6 +453,10 @@ RoaScenes.RestoredVenaTalk = function() {
 }
 
 RoaScenes.First = function() {
+	let player = GAME().player;
+	let burrows = GAME().burrows;
+	let roa = GAME().roa;
+
 	var cost   = roa.Cost();
 	var p1cock = player.BiggestCock();
 	
@@ -600,6 +613,9 @@ RoaScenes.First = function() {
 }
 
 RoaScenes.TSLPitchAnal = function() {
+	let player = GAME().player;
+	let roa = GAME().roa;
+
 	if(roa.flags["Met"] < Roa.Met.Sexed)
 		roa.flags["Met"] = Roa.Met.Sexed;
 	
@@ -931,6 +947,9 @@ RoaScenes.TSLPitchAnal = function() {
 }
 
 RoaScenes.TSLCatchVaginal = function() {
+	let player = GAME().player;
+	let roa = GAME().roa;
+
 	if(roa.flags["Met"] < Roa.Met.Sexed)
 		roa.flags["Met"] = Roa.Met.Sexed;
 	
@@ -1260,6 +1279,9 @@ RoaScenes.TSLCatchVaginal = function() {
 }
 
 RoaScenes.TSLPostSexPrompt = function(mStrap) {
+	let player = GAME().player;
+	let roa = GAME().roa;
+
 	var parse = {
 		playername  : player.name,
 		lipsDesc    : function() { return player.LipsDesc(); }

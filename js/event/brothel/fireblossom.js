@@ -81,6 +81,9 @@ Fireblossom.prototype.ToStorage = function() {
 }
 
 FireblossomScenes.IntroEntryPoint = function() {
+	let player = GAME().player;
+	let kiakai = GAME().kiakai;
+	let fireblossom = GAME().fireblossom;
 	var parse = {
 		armor : player.ArmorDesc(),
 		skin  : player.SkinDesc(),
@@ -152,6 +155,7 @@ FireblossomScenes.IntroEntryPoint = function() {
 }
 
 FireblossomScenes.SceneSelect = function() {
+	let fireblossom = GAME().fireblossom;
 	switch(fireblossom.flags["State"]) {
 		default:
 		case Fireblossom.State.S1Journey: FireblossomScenes.S1TheJourney(); break;
@@ -160,6 +164,8 @@ FireblossomScenes.SceneSelect = function() {
 }
 
 FireblossomScenes.Outro = function() {
+	let player = GAME().player;
+	let fireblossom = GAME().fireblossom;
 	var parse = {
 		armor : player.ArmorDesc()
 	};
@@ -175,6 +181,8 @@ FireblossomScenes.Outro = function() {
 }
 
 FireblossomScenes.S1TheJourney = function() {
+	let player = GAME().player;
+	let fireblossom = GAME().fireblossom;
 	var parse = {
 		
 	};
@@ -432,6 +440,8 @@ FireblossomScenes.S1TheJourney = function() {
 }
 
 FireblossomScenes.S1Draxen = function() {
+	let player = GAME().player;
+	let fireblossom = GAME().fireblossom;
 	var parse = {
 		
 	};
@@ -554,6 +564,8 @@ FireblossomScenes.S1Draxen = function() {
 }
 
 FireblossomScenes.S1Rakkat = function() {
+	let player = GAME().player;
+	let fireblossom = GAME().fireblossom;
 	var parse = {
 		
 	};
@@ -746,6 +758,7 @@ FireblossomScenes.S1Rakkat = function() {
 }
 
 FireblossomScenes.S1RakkatCont = function() {
+	let fireblossom = GAME().fireblossom;
 	var parse = {
 		
 	};
@@ -827,6 +840,7 @@ FireblossomScenes.S1RakkatCont = function() {
 }
 
 FireblossomScenes.S1Grex = function() {
+	let fireblossom = GAME().fireblossom;
 	var parse = {
 		
 	};
@@ -863,6 +877,7 @@ FireblossomScenes.S1Grex = function() {
 }
 
 FireblossomScenes.S1GrexEntrypoint = function() {
+	let fireblossom = GAME().fireblossom;
 	var parse = {
 		
 	};
@@ -906,6 +921,8 @@ FireblossomScenes.S1GrexEntrypoint = function() {
 }
 
 FireblossomScenes.S1GrexRoom = function(opts) {
+	let player = GAME().player;
+	let fireblossom = GAME().fireblossom;
 	var parse = {
 		
 	};
@@ -976,6 +993,8 @@ FireblossomScenes.S1GrexRoom = function(opts) {
 }
 
 FireblossomScenes.S1GrexPens = function(opts) {
+	let player = GAME().player;
+	let fireblossom = GAME().fireblossom;
 	var parse = {
 		
 	};

@@ -15,6 +15,8 @@ let LeiScenes = {
 };
 
 LeiScenes.InnApproach = function() {
+	let party = GAME().party;
+	let lei = GAME().lei;
 	var parse = {
 
 	};
@@ -45,6 +47,9 @@ LeiScenes.InnApproach = function() {
 }
 
 LeiScenes.InnPrompt = function() {
+	let player = GAME().player;
+	let lei = GAME().lei;
+	let rigard = GAME().rigard;
 	var parse = {
 
 	};
@@ -189,6 +194,9 @@ LeiScenes.InnPrompt = function() {
 }
 
 LeiScenes.InnPromptFirst = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let lei = GAME().lei;
 	var parse = {
 
 	};
@@ -451,6 +459,8 @@ LeiScenes.InnPromptFirst = function() {
 }
 
 LeiScenes.ExplanationMain = function() {
+	let player = GAME().player;
+	let lei = GAME().lei;
 	var parse = {
 
 	};
@@ -544,6 +554,7 @@ LeiScenes.ExplanationMain = function() {
 }
 
 LeiScenes.ObserveMain = function(first) {
+	let party = GAME().party;
 	var parse = {
 		drink : party.Alone() ? "a drink" : "some drinks"
 	};
@@ -621,6 +632,8 @@ LeiScenes.ObserveMain = function(first) {
 }
 
 LeiScenes.RequestMain = function() {
+	let party = GAME().party;
+	let rigard = GAME().rigard;
 	Text.Clear();
 
 	var parse = {
@@ -783,6 +796,7 @@ LeiScenes.InnFirstPrompt = function() {
 */
 
 LeiScenes.Interact = function() {
+	let rigard = GAME().rigard;
 	if(rigard.Krawitz["Q"] < Rigard.KrawitzQ.Started) {
 		LeiScenes.InnPromptFirst();
 	}
@@ -792,6 +806,7 @@ LeiScenes.Interact = function() {
 }
 
 LeiScenes.Desc = function() {
+	let lei = GAME().lei;
 	if(lei.IsAtLocation(world.loc.Rigard.Inn.common)) {
 		if(lei.flags["Met"] < Lei.Met.SeenGates) {
 			Text.Add("You notice a man sitting in the corner of the room on his own, a hood covering his face. There are a few others alone, a few others concealing their faces, but what draws your eye the most is his stillness. Whereas all others in the tavern are in motion, he sits completely still, his only movements the occasional tilt of his head, as he seems to scan the room, and the movement of his hand as he nurses some drink in a dark glass. Everything about him works to pique your curiosity, but you can’t quite come up with a reason to approach him.");
@@ -813,6 +828,9 @@ LeiScenes.Desc = function() {
 }
 
 LeiScenes.BarFight = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let lei = GAME().lei;
 	var parse = {
 		time     : WorldTime().DayTime(),
 		feetDesc : function() { return player.FeetDesc(); },
@@ -988,6 +1006,8 @@ LeiScenes.BarFight = function() {
 
 
 LeiScenes.TalkPrompt = function() {
+	let player = GAME().player;
+	let lei = GAME().lei;
 	var parse = {
 		playername : player.name
 	};
@@ -1165,6 +1185,8 @@ LeiScenes.TalkPrompt = function() {
 }
 
 LeiScenes.TalkPastPrompt = function() {
+	let player = GAME().player;
+	let lei = GAME().lei;
 	var parse = {
 		playername : player.name
 	};
@@ -1236,6 +1258,7 @@ LeiScenes.TalkPastPrompt = function() {
 }
 
 LeiScenes.SexPrompt = function() {
+	let lei = GAME().lei;
 	var parse = {
 
 	};
@@ -1310,6 +1333,9 @@ LeiScenes.SexPrompt = function() {
 }
 
 LeiScenes.SparPrompt = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let lei = GAME().lei;
 	var parse = {
 
 	};
@@ -1390,6 +1416,9 @@ LeiScenes.SparPrompt = function() {
 }
 
 LeiScenes.SparWin = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let lei = GAME().lei;
 	var enc = this;
 
 	SetGameState(GameState.Event, Gui);
@@ -1467,6 +1496,8 @@ LeiScenes.SparWin = function() {
 }
 
 LeiScenes.SparLoss = function() {
+	let party = GAME().party;
+	let lei = GAME().lei;
 	var enc = this;
 
 	SetGameState(GameState.Event, Gui);
@@ -1504,10 +1535,15 @@ LeiScenes.SparLoss = function() {
 
 // #random one-off explore event in Slums/Residential at night (say 10pm-5am or whatever)
 LeiScenes.GuardStalkingApplicable = function() {
+	let lei = GAME().lei;
 	return lei.flags["Met"] >= Lei.Met.KnowName && !(lei.flags["Talk"] & Lei.Talk.GuardBeating) && ((WorldTime().hour >= 22) || (WorldTime().hour < 5));
 }
 
 LeiScenes.GuardStalking = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let lei = GAME().lei;
+	let kiakai = GAME().kiakai;
 	var parse = {
 		race : player.Eyes().race.qShort(),
 		playername : player.name,
@@ -1612,6 +1648,9 @@ LeiScenes.GuardStalking = function() {
 }
 
 LeiScenes.GuardStalkingEntry = function(parse, nv) {
+	let player = GAME().player;
+	let party = GAME().party;
+	let kiakai = GAME().kiakai;
 	Text.Add("Although the distance is short, the cloaked man moves with remarkable agility. The shortsword vanishes back inside his cloak, and he snatches up the guard’s longer weapon. Before you’re more than halfway to the scene, he reaches the mouth of the nearest alleyway, and pauses for a moment at the lip of deeper shadows. The man half-turns, momentarily meeting your eyes from beneath the hood of his cloak, and beckons for you to come before disappearing into darkness.", parse);
 	Text.NL();
 	if(party.InParty(miranda)) {
@@ -1655,6 +1694,8 @@ LeiScenes.GuardStalkingEntry = function(parse, nv) {
 }
 
 LeiScenes.GuardStalkingConverge = function(parse, nv) {
+	let player = GAME().player;
+	let lei = GAME().lei;
 	Text.Add("You gingerly take a few steps inside. ", parse);
 	if(nv) {
 		Text.Add("Blank walls loom to your left and right - the residents apparently preferring to do without windows. Your pupils widen to their widest. The sky above and reflected light from distant lanterns give you barely enough illumination to see, but even for you the alley is filled with obscuring shadow. Broken timber and other rubbish are piled high in places, providing cover and tricky terrain both.", parse);
@@ -1794,6 +1835,9 @@ LeiScenes.GuardStalkingConverge = function(parse, nv) {
 }
 
 LeiScenes.GuardStalkingApprove = function(parse, nv) {
+	let player = GAME().player;
+	let party = GAME().party;
+	let lei = GAME().lei;
 	Text.Add("<i>“I but water a young sprout. If it becomes strong, perhaps I can use it to grow myself.”</i> He pauses, and his next words are quieter. <i>“This one is not as promising as some I wish to cultivate, but one cannot rely overmuch on a single crop.”</i>", parse);
 	Text.Flush();
 
@@ -1854,6 +1898,7 @@ LeiScenes.GuardStalkingApprove = function(parse, nv) {
 }
 
 LeiScenes.GuardStalkingMoveOn = function(parse, nv) {
+	let party = GAME().party;
 	Text.Clear();
 	parse["comp"] = party.Num() == 2 ? party.Get(1).name + " is" : "your companions are";
 	parse["c"] = party.Num() > 1 ? Text.Parse("how [comp] doing with the guard", parse) : "on the guard";
@@ -1864,6 +1909,8 @@ LeiScenes.GuardStalkingMoveOn = function(parse, nv) {
 }
 
 LeiScenes.GuardStalkingOutro = function(parse, nv) {
+	let party = GAME().party;
+	let kiakai = GAME().kiakai;
 	Text.Add(" Before coming here, I had a summons delivered to a guard patrol to the west of here, notifying them of the injury of one of their own. They will arrive any minute, and likely be none too happy,”</i> Lei says, sounding quite pleased for his part. He motions for you to follow, as he starts walking toward the mouth of the alleyway. <i>“Did you think I would leave him to lie here all night? If he died, giving the lesson would have been a waste of my time, after all.”</i>", parse);
 	Text.NL();
 	Text.Add("He stops on the border of shadow and the relative light of the street outside. <i>“A small extra reminder…”</i> Lei twirls the guard’s longsword for a moment, apparently thinking, before ramming it into the wall at the corner of the building with a squeal of wood and metal. When he pulls back his hand, little more than the sword’s hilt is visible sticking out of the wood.", parse);

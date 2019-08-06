@@ -83,6 +83,7 @@ Danie.prototype.IsAtLocation = function(location) {
 
 // Party interaction
 Danie.prototype.Interact = function() {
+	let danie = GAME().danie;
 	Text.Clear();
 	Text.Add("Baah Imma sheep.");
 	

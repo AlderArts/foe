@@ -12,6 +12,8 @@ import { AppendageType } from '../../body/appendage';
 import { Color } from '../../body/color';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
+import { PregnancyHandler } from '../../pregnancy';
+import { GAME } from '../../GAME';
 
 let VenaScenes = {
 	Restored : VenaRScenes,
@@ -77,6 +79,7 @@ Vena.prototype.ToStorage = function() {
 }
 
 VenaScenes.Impregnate = function(mother, father, slot) {
+	let vena = GAME().vena;
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother : mother,
@@ -89,6 +92,8 @@ VenaScenes.Impregnate = function(mother, father, slot) {
 }
 
 VenaScenes.PitApproach = function() {
+	let burrows = GAME().burrows;
+
 	var parse = {
 		
 	};
@@ -142,6 +147,7 @@ VenaScenes.PitApproach = function() {
 }
 
 VenaScenes.PitPrompt = function() {
+	let burrows = GAME().burrows;
 	var parse = {
 		
 	};
@@ -189,6 +195,9 @@ VenaScenes.PitPrompt = function() {
 }
 
 VenaScenes.PitTalkPrompt = function() {
+	let roa = GAME().roa;
+	let ophelia = GAME().ophelia;
+	let burrows = GAME().burrows;
 	var parse = {
 		
 	};
@@ -269,6 +278,10 @@ VenaScenes.PitTalkPrompt = function() {
 }
 
 VenaScenes.RestoreEntrypoint = function(fight) {
+	let player = GAME().player;
+	let ophelia = GAME().ophelia;
+	let vena = GAME().vena;
+	let burrows = GAME().burrows;
 	var parse = {
 		playername : player.name
 	};

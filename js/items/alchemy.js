@@ -5,6 +5,7 @@ import { HipSize } from '../body/body';
 import { IngredientItems } from './ingredients';
 import { Race } from '../body/race';
 import { Color } from '../body/color';
+import { GAME } from '../GAME';
 
 let AlchemyItems = {};
 
@@ -907,7 +908,7 @@ AlchemyItems.Fertilium.commonUse = function(target) {
 	
 	var ret = true; // Set to false if the pot is refused
 	
-	if(target == player) {
+	if(target == GAME().player) {
 		var gen = "";
 		if(target.FirstCock()) gen += "[cocks]";
 		if(target.FirstCock() && target.FirstVag()) gen += " and ";

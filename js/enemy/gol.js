@@ -109,6 +109,7 @@ GolQueen.prototype.DropTable = function() {
 }
 
 GolQueen.prototype.Act = function(encounter, activeChar) {
+	let party = GAME().party;
 	// TODO: Very TEMP
 	Text.Add(this.name + " acts! Buzz!");
 	Text.NL();
@@ -140,6 +141,8 @@ GolQueen.prototype.Act = function(encounter, activeChar) {
 }
 
 GolScenes.SearchForScepter = function() {
+	let player = GAME().player;
+	let party = GAME().party;
 	var parse = {
 		
 	};
@@ -217,6 +220,7 @@ GolScenes.SearchForScepter = function() {
 
 //TODO
 GolScenes.CombatLoss = function() {
+	let player = GAME().player;
 	var enc = this;
 	var gol = enc.gol;
 	SetGameState(GameState.Event, Gui);
@@ -272,6 +276,7 @@ GolScenes.CombatLoss = function() {
 }
 
 GolScenes.CombatLossIncubator = function(gol) {
+	let player = GAME().player;
 	var parse = {
 		skinDesc : function() { return player.SkinDesc(); },
 		armor : function() { return player.ArmorDesc(); },
@@ -310,6 +315,7 @@ GolScenes.CombatLossIncubator = function(gol) {
 }
 
 GolScenes.CombatLossIncEntry = function(gol) {
+	let player = GAME().player;
 	var p1cock = player.BiggestCock();
 	
 	var parse = {
@@ -411,6 +417,7 @@ GolScenes.CombatLossIncEntry = function(gol) {
 }
 
 GolScenes.CombatLossDrone = function(gol) {
+	let player = GAME().player;
 	var p1cock = player.BiggestCock();
 	
 	var parse = {
@@ -530,6 +537,7 @@ GolScenes.CombatLossDrone = function(gol) {
 }
 
 GolScenes.CombatWin = function() {
+	let player = GAME().player;
 	var enc = this;
 	var gol = enc.gol;
 	SetGameState(GameState.Event, Gui);
@@ -614,6 +622,7 @@ GolScenes.CombatWin = function() {
 }
 
 GolScenes.CombatWinHyperFuck = function(enc, p1cock) {
+	let player = GAME().player;
 	var gol = enc.gol;
 	var lusty = gol.LustLevel() >= 0.5;
 	
@@ -719,6 +728,7 @@ GolScenes.CombatWinHyperFuck = function(enc, p1cock) {
 }
 
 GolScenes.CombatWinTailfuck = function(enc, p1cock) {
+	let player = GAME().player;
 	var gol = enc.gol;
 	var lusty = gol.LustLevel() >= 0.5;
 	
@@ -838,6 +848,7 @@ GolScenes.CombatWinTailfuck = function(enc, p1cock) {
 }
 
 GolScenes.CombatWinCunn = function(enc) {
+	let player = GAME().player;
 	var gol = enc.gol;
 	var lusty = gol.LustLevel() >= 0.5;
 	var p1cock = player.BiggestCock();

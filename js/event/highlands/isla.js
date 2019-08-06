@@ -104,6 +104,7 @@ Isla.prototype.IsAtLocation = function(location) {
 }
 
 Isla.prototype.PregnancyTrigger = function(womb, slot) {
+	let isla = GAME().isla;
 	// Use unshift instead of push to make sure pregnancy doesn't interfere with scene progression
 	Gui.Callstack.unshift(function() {
 		womb.pregnant = false;
@@ -115,6 +116,7 @@ Isla.prototype.PregnancyTrigger = function(womb, slot) {
 //SCENES
 
 IslaScenes.Impregnate = function(father, cum) {
+	let isla = GAME().isla;
 	isla.PregHandler().Impregnate({
 		slot   : PregnancyHandler.Slot.Vag,
 		mother : isla,
@@ -127,6 +129,8 @@ IslaScenes.Impregnate = function(father, cum) {
 }
 
 IslaScenes.Introduction = function() {
+	let party = GAME().party;
+	let isla = GAME().isla;
 	var parse = {
 		
 	};
@@ -282,6 +286,8 @@ IslaScenes.Introduction = function() {
 }
 
 IslaScenes.Approach = function() {
+	let player = GAME().player;
+	let isla = GAME().isla;
 	var parse = {
 		playername : player.name
 	};
@@ -328,6 +334,7 @@ IslaScenes.Approach = function() {
 }
 
 IslaScenes.Prompt = function() {
+	let isla = GAME().isla;
 	var parse = {
 		
 	};
@@ -376,6 +383,8 @@ IslaScenes.Prompt = function() {
 }
 
 IslaScenes.Appearance = function() {
+	let player = GAME().player;
+	let isla = GAME().isla;
 	var parse = {
 		
 	};
@@ -529,6 +538,8 @@ IslaScenes.Appearance = function() {
 }
 
 IslaScenes.TalkPrompt = function() {
+	let player = GAME().player;
+	let isla = GAME().isla;
 	var parse = {
 		
 	};
@@ -840,6 +851,8 @@ IslaScenes.TalkPrompt = function() {
 }
 
 IslaScenes.TummyRub = function() {
+	let player = GAME().player;
+	let isla = GAME().isla;
 	var parse = {
 		playername : player.name
 	};
@@ -1089,6 +1102,9 @@ IslaScenes.TummyRub = function() {
 IslaScenes.Sex = {};
 
 IslaScenes.Sex.First = function() {
+	let player = GAME().player;
+	let isla = GAME().isla;
+
 	var p1cock = player.BiggestCock(null, true);
 	var strapon = p1cock ? p1cock.isStrapon : null;
 	var knot = p1cock ? p1cock.Knot() : null;
@@ -1362,6 +1378,7 @@ IslaScenes.Sex.First = function() {
 }
 
 IslaScenes.Sex.Repeat = function() {
+	let isla = GAME().isla;
 	var parse = {
 		
 	};
@@ -1418,6 +1435,7 @@ IslaScenes.Sex.Repeat = function() {
 }
 
 IslaScenes.Sex.Prompt = function() {
+	let player = GAME().player;
 	var p1cock = player.BiggestCock(null, true);
 	
 	var parse = {
@@ -1440,6 +1458,9 @@ IslaScenes.Sex.Prompt = function() {
 }
 
 IslaScenes.Sex.PitchVaginal = function() {
+	let player = GAME().player;
+	let isla = GAME().isla;
+	
 	var p1cock = player.BiggestCock(null, true);
 	var strapon = p1cock ? p1cock.isStrapon : null;
 	var knot = p1cock ? p1cock.Knot() : null;
@@ -1584,6 +1605,8 @@ IslaScenes.Sex.PitchVaginalPrompt = function(parse, opts) {
 }
 
 IslaScenes.Sex.PitchVaginalUnder = function(parse, opts) {
+	let player = GAME().player;
+	let isla = GAME().isla;
 	Text.Clear();
 	Text.Add("You give Isla a wink and ease yourself to the ground, stretching languidly and making sure the sable-morph is taking in your every motion. The soft grass is cool against your [skin] with dew, and your [cocks] jut[notS] proudly into the night air.", parse);
 	Text.NL();
@@ -1735,6 +1758,8 @@ IslaScenes.Sex.PitchVaginalUnder = function(parse, opts) {
 }
 
 IslaScenes.Sex.PitchVaginalMount = function(parse, opts) {
+	let player = GAME().player;
+	let isla = GAME().isla;
 	var figure = opts.figure;
 	
 	Text.Clear();
@@ -1836,6 +1861,8 @@ IslaScenes.Sex.PitchVaginalMount = function(parse, opts) {
 }
 
 IslaScenes.Sex.PitchVaginalWall = function(parse, opts) {
+	let player = GAME().player;
+	let isla = GAME().isla;
 	Text.Add("Grabbing Isla by the shoulders, you whirl her around, leading her to the nearest mountain face and pinning her against the cool, mossy rock.", parse);
 	if(opts.preg)
 		Text.Add(" The sable-morph’s small baby bump protrudes from her midriff, but it isn’t large enough yet to be too much of an impediment for what you’re intending to do to her. Having blatant proof of her fertility - or conversely, your virility - so close only serves to excite you more, and you lean in to plant another kiss on her muzzle.", parse);
@@ -1934,6 +1961,8 @@ IslaScenes.Sex.PitchVaginalWall = function(parse, opts) {
 }
 
 IslaScenes.Sex.PitchVaginalExit = function(parse, opts) {
+	let player = GAME().player;
+	let isla = GAME().isla;
 	Text.Add("<i>“Oog… enough…”</i>", parse);
 	Text.NL();
 	Text.Add("Yeah, now that the rush is beginning to die down, you’re starting to feel more than a little spent, too. Isla displays no shame in sprawling out on the ground beside you, making little happy noises in the back of her throat as she catches her breath. You see no reason not to join her, running your hands through what little clean fur she has left, toying with the adornments tied therein.", parse);
@@ -1993,6 +2022,8 @@ Isla.Bathing = {
 };
 
 IslaScenes.Bathe = function() {
+	let player = GAME().player;
+	let isla = GAME().isla;
 	var parse = {
 		
 	};
@@ -2070,6 +2101,8 @@ IslaScenes.Bathe = function() {
 }
 
 IslaScenes.BatheTF = function(parse, level) {
+	let player = GAME().player;
+	
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	
 	var scenes = new EncounterTable();

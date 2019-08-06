@@ -144,6 +144,9 @@ TwinsScenes.Interact = function() {
 }
 
 TwinsScenes.TalkPrompt = function() {
+	let player = GAME().player;
+	let rigard = GAME().rigard;
+	let twins = GAME().twins;
 	var parse = {
 		playername : player.name
 	};

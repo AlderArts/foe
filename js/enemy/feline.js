@@ -433,6 +433,8 @@ FelinesScenes.Intro = function() {
 }
 
 FelinesScenes.IntroRegular = function() {
+	let player = GAME().player;
+	let party = GAME().party;
 	var enc     = this;
 	var enemy   = enc.enemy;
 	var group   = enemy.Num() > 1;
@@ -492,6 +494,8 @@ FelinesScenes.IntroRegular = function() {
 
 
 FelinesScenes.IntroStalking = function() {
+	let player = GAME().player;
+	let party = GAME().party;
 	var enc = this;
 	var p1  = party.Get(1);
 	var enemy   = enc.enemy;
@@ -542,6 +546,7 @@ FelinesScenes.IntroStalking = function() {
 }
 
 FelinesScenes.WinPrompt = function() {
+	let player = GAME().player;
 	SetGameState(GameState.Event, Gui);
 
 	var enc = this;
@@ -719,6 +724,7 @@ FelinesScenes.WinPrompt = function() {
 }
 
 FelinesScenes.WinCatchVag = function(mainCat, enemy) {
+	let player = GAME().player;
 	var otherCats = _.filter(enemy.members, function(cat) {
 		return cat != mainCat;
 	});
@@ -859,6 +865,7 @@ FelinesScenes.WinCatchVag = function(mainCat, enemy) {
 }
 
 FelinesScenes.WinFuckVag = function(cat, group, enc, cocks, numFemales) {
+	let player = GAME().player;
 	var pCock = player.BiggestCock(cocks);
 
 	var parse = {
@@ -1095,6 +1102,7 @@ FelinesScenes.WinFuckVag = function(cat, group, enc, cocks, numFemales) {
 }
 
 FelinesScenes.WinFuckButt = function(cat, group, enc, cocks) {
+	let player = GAME().player;
 	var pCock = player.BiggestCock(cocks);
 
 	var parse = {
@@ -1335,6 +1343,7 @@ FelinesScenes.WinFuckButt = function(cat, group, enc, cocks) {
 }
 
 FelinesScenes.WinGetBlowjob = function(cat, group, enc) {
+	let player = GAME().player;
 	var parse = {
 		oneof    : group ? " one of" : "",
 		s        : group ? "s" : "",
@@ -1501,6 +1510,7 @@ FelinesScenes.WinGetBlowjob = function(cat, group, enc) {
 
 
 FelinesScenes.WinGroupService = function(enc, enemy) {
+	let player = GAME().player;
 	var mainCat = enemy.Get(0);
 	var betaCat = enemy.Get(1);
 	var gammaCat = enemy.Get(2);
@@ -1659,6 +1669,7 @@ FelinesScenes.WinGroupService = function(enc, enemy) {
 }
 
 FelinesScenes.LossRegular = function() {
+	let player = GAME().player;
 	SetGameState(GameState.Event, Gui);
 
 	var enc = this;
@@ -1784,6 +1795,7 @@ FelinesScenes.LossRegular = function() {
 }
 
 FelinesScenes.LossPCblowsCat = function(mainCat, enemy) {
+	let player = GAME().player;
 	var group = enemy.Num() > 1;
 	var group2 = enemy.Num() > 2;
 	var cat1 = enemy.Get(1);
@@ -2036,6 +2048,7 @@ FelinesScenes.LossPCblowsCat = function(mainCat, enemy) {
 }
 
 FelinesScenes.LossCatchVaginal = function(cat, group, enc) {
+	let player = GAME().player;
 	var parse = {
 		oneof    : group ? " one of" : "",
 		s        : group ? "s" : "",
@@ -2273,6 +2286,7 @@ FelinesScenes.LossCatchVaginal = function(cat, group, enc) {
 
 
 FelinesScenes.LossPitchVaginal = function(cat, group, enc, cocksInVag) {
+	let player = GAME().player;
 	var pCock  = player.BiggestCock(cocksInVag);
 	var allCocks = player.AllCocksCopy();
 	for(var i = 0; i < allCocks.length; i++) {
@@ -2551,6 +2565,7 @@ FelinesScenes.LossPitchVaginal = function(cat, group, enc, cocksInVag) {
 }
 
 FelinesScenes.LossDrainMilk = function(mainCat, group, enc) {
+	let player = GAME().player;
 	var parse = {
 		name : mainCat.nameDesc()
 	};
@@ -2664,6 +2679,7 @@ FelinesScenes.WinPrompt = function() {
 */
 
 FelinesScenes.LossDoubleTeam = function(cat, cat2, group, enc) {
+	let player = GAME().player;
 	var parse = {
 		name  : cat.nameDesc(),
 		Name  : cat.NameDesc(),

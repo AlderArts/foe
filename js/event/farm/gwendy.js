@@ -125,6 +125,7 @@ Gwendy.prototype.IsAtLocation = function(location) {
 
 // Party interaction
 Gwendy.prototype.Interact = function(switchSpot) {
+	let gwendy = GAME().gwendy;
 	Text.Clear();
 	var that = gwendy;
 	

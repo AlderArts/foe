@@ -61,6 +61,7 @@ let GladeLoc = new Event("Dryads' glade");
 GladeLoc.SaveSpot = "Dryads";
 GladeLoc.safe = function() { return true; };
 GladeLoc.description = function() {
+	let orchid = GAME().orchid;
 	var parse = {
 		
 	};
@@ -99,6 +100,7 @@ GladeLoc.events.push(new Link(
 ));
 
 GladeLoc.onEntry = function() {
+	let glade = GAME().glade;
 	if(glade.flags["Visit"] >= DryadGlade.Visit.DefeatedOrchid) {
 		Gui.PrintDefaultOptions();
 		return;
@@ -146,6 +148,8 @@ GladeLoc.onEntry = function() {
 }
 
 DryadGladeScenes.First = function() {
+	let player = GAME().player;
+	let party = GAME().party;
 	var parse = {
 		playername : player.name
 	};
@@ -222,6 +226,9 @@ DryadGladeScenes.First = function() {
 }
 
 DryadGladeScenes.FirstLoss = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let orchid = GAME().orchid;
 	SetGameState(GameState.Event, Gui);
 	
 	var parse = {
@@ -551,6 +558,10 @@ DryadGladeScenes.FirstLoss = function() {
 }
 
 DryadGladeScenes.FirstWin = function(enc) {
+	let player = GAME().player;
+	let party = GAME().party;
+	let glade = GAME().glade;
+	let kiakai = GAME().kiakai;
 	SetGameState(GameState.Event, Gui);
 	
 	var enc = this;
@@ -651,6 +662,8 @@ DryadGladeScenes.MotherTree = function() {
 }
 
 DryadGladeScenes.MotherTreePrompt = function() {
+	let player = GAME().player;
+	let party = GAME().party;
 	var parse = {
 		playername : player.name
 	};
@@ -701,6 +714,7 @@ DryadGladeScenes.MotherTreePrompt = function() {
 }
 
 DryadGladeScenes.MotherTreeTalk = function() {
+	let player = GAME().player;
 	var parse = {
 		playername : player.name
 	};

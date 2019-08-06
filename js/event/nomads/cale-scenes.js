@@ -13,6 +13,9 @@ let CaleScenes = {
 
 // interaction
 CaleScenes.Interact = function() {
+	let player = GAME().player;
+	let rosalin = GAME().rosalin;
+	let cale = GAME().cale;
 	var parse = {
 		playername : player.name
 	};
@@ -85,6 +88,7 @@ CaleScenes.Interact = function() {
 }
 
 CaleScenes.Desc = function() {
+	let cale = GAME().cale;
 	var parse = {
 		
 	};
@@ -103,6 +107,8 @@ CaleScenes.Desc = function() {
 }
 
 CaleScenes.FirstApproach = function() {
+	let player = GAME().player;
+	let cale = GAME().cale;
 	var parse = {
 		playername : player.name,
 		guyGal     : player.mfTrue("guy", "gal")
@@ -394,6 +400,7 @@ CaleScenes.TalkSlut = function() {
 }
 
 CaleScenes.Prompt = function() {
+	let cale = GAME().cale;
 	var parse = {
 		
 	};
@@ -453,6 +460,7 @@ CaleScenes.Prompt = function() {
 }
 
 CaleScenes.Shop = function() {
+	let cale = GAME().cale;
 	var parse = {
 		
 	};
@@ -501,6 +509,10 @@ CaleScenes.Shop = function() {
 }
 
 CaleScenes.TalkPrompt = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let rosalin = GAME().rosalin;
+	let cale = GAME().cale;
 	var parse = {
 		playername : player.name
 	};
@@ -790,6 +802,8 @@ CaleScenes.TalkPrompt = function() {
 }
 
 CaleScenes.TalkPast = function() {
+	let player = GAME().player;
+	let cale = GAME().cale;
 	var parse = {
 		playername : player.name
 	};
@@ -951,6 +965,8 @@ CaleScenes.TalkPast = function() {
 }
 
 CaleScenes.Rogue = function() {
+	let player = GAME().player;
+	let cale = GAME().cale;
 	var parse = {
 		playername : player.name
 	};
@@ -1090,6 +1106,7 @@ CaleScenes.Rogue = function() {
 }
 
 CaleScenes.RogueTeach = function() {
+	let cale = GAME().cale;
 	var parse = {
 		
 	};

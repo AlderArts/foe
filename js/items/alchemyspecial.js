@@ -8,6 +8,7 @@ import { Color } from '../body/color';
 import { Cock } from '../body/cock';
 import { Vagina } from '../body/vagina';
 import { EncounterTable } from '../event';
+import { GAME } from '../GAME';
 
 let AlchemySpecial = {};
 
@@ -24,7 +25,7 @@ AlchemySpecial.EquiniumPlus.PushEffect(TF.ItemEffects.SetTail, {odds: 0.8, race:
 AlchemySpecial.EquiniumPlus.PushEffect(function(target) {
 	var parse = {
 		name: target.NameDesc(),
-		s: target == player ? "" : "s",
+		s: target == GAME().player ? "" : "s",
 		possessive: target.possessive(),
 		Possessive: target.Possessive(),
 		multiCockDesc : function() { return target.MultiCockDesc(); }
@@ -114,7 +115,7 @@ AlchemySpecial.Tigris.PushEffect(TF.ItemEffects.DecInt, {odds: 0.1, ideal: 25, m
 AlchemySpecial.Tigris.PushEffect(function(target) {
 	var parse = {
 		name: target.NameDesc(),
-		s: target == player ? "" : "s",
+		s: target == GAME().player ? "" : "s",
 		possessive: target.possessive(),
 		Possessive: target.Possessive()
 	};
@@ -148,7 +149,7 @@ AlchemySpecial.InfernumPlus.recipe = [{it: AlchemyItems.Infernum}, {it: Ingredie
 AlchemySpecial.InfernumPlus.PushEffect(function(target) {
 	var parse = {
 		name: target.NameDesc(),
-		s: target == player ? "" : "s",
+		s: target == GAME().player ? "" : "s",
 		possessive: target.possessive(),
 		Possessive: target.Possessive(),
 		multiCockDesc : function() { return target.MultiCockDesc(); }
@@ -438,7 +439,7 @@ AlchemySpecial.Gestarium.BellyGrowth = function(target, wombs, parse) {
 	
 	//PC only, since these are more internal feelings than anything else. Play these if the player progresses from one stage to another. I believe it’s impossible for the PC to jump any more than 1 stage from a potion, so things should be fine.
 	//Could a separate one be made for followers?
-	if(target == player) {
+	if(target == GAME().player) {
 		var newProgress = womb.progress;
 		
 		if(oldProgress < PregnancyLevel.Level2 && newProgress >= PregnancyHandler.Level2) {
@@ -547,7 +548,7 @@ AlchemySpecial.Anusol.PushEffect(function(target) {
 	
 	var cum = target.OrgasmCum();
 	
-	if(target == player) {
+	if(target == GAME().player) {
 		Text.Add("You raise the bottle to your lips and tip the contents down your throat. The oily green elixir disappears smoothly enough, leaving behind a somewhat greasy aftertaste and a lingering taste of sweetness.", parse);
 		Text.NL();
 		Text.Add("A quivering sensation erupts from your [anus], and you moan despite yourself, feeling your pucker wrinkle and flex as if it were being stretched by some ethereal phallus.", parse);
@@ -633,7 +634,7 @@ Trigger heat (10%)
 	 */
 	var mpreg = target.pregHandler.MPregEnabled();
 	
-	if(target == player) {
+	if(target == GAME().player) {
 		Text.Add("The potion is just as thick and slimy as it looks; it flows down your throat like drinking blue custard, practically thick enough to chew. But you persist and eventually the last drop disappears down your gullet. With a sigh of relief, you wipe your lips, feeling a tingling in your belly.", parse);
 		var scenes = new EncounterTable();
 		scenes.AddEnc(function() {

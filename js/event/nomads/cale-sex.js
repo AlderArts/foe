@@ -9,6 +9,7 @@ import { EncounterTable } from '../../event';
 let CaleSexScenes = {};
 
 CaleSexScenes.Impregnate = function(mother, slot, cum) {
+	let cale = GAME().cale;
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother : mother,
@@ -21,6 +22,8 @@ CaleSexScenes.Impregnate = function(mother, slot, cum) {
 }
 
 CaleSexScenes.TentSex = function() {
+	let player = GAME().player;
+	let cale = GAME().cale;
 	var parse = {
 		playername : player.name
 	};
@@ -127,6 +130,9 @@ CaleSexScenes.TentSex = function() {
 }
 
 CaleSexScenes.OutsideSex = function() {
+	let player = GAME().player;
+	let rosalin = GAME().rosalin;
+	let cale = GAME().cale;
 	var parse = {
 		playername : player.name
 	};
@@ -230,6 +236,7 @@ CaleSexScenes.OutsideSex = function() {
 
 
 CaleSexScenes.SexSuckHim = function(outside) {
+	let player = GAME().player;
 	var parse = {
 		masterMistress : player.mfTrue("master", "mistress")
 	};
@@ -249,6 +256,8 @@ CaleSexScenes.SexSuckHim = function(outside) {
 
 
 CaleSexScenes.SexSuckHimEntryPoint = function(outside) {
+	let player = GAME().player;
+	let cale = GAME().cale;
 	var virgin = cale.Butt().virgin;
 	
 	var parse = {
@@ -520,6 +529,8 @@ CaleSexScenes.SexSuckHimEntryPoint = function(outside) {
 
 
 CaleSexScenes.SexGetTrickBJ = function(outside) {
+	let player = GAME().player;
+	let cale = GAME().cale;
 	var virgin = cale.Butt().virgin;
 	
 	var parse = {
@@ -546,6 +557,8 @@ CaleSexScenes.SexGetTrickBJ = function(outside) {
 
 
 CaleSexScenes.SexGetBJ = function(outside) {
+	let player = GAME().player;
+	let cale = GAME().cale;
 	var parse = {
 		
 	};
@@ -621,6 +634,8 @@ CaleSexScenes.SexGetBJ = function(outside) {
 }
 
 CaleSexScenes.SexGetBJSneakyEntry = function(outside, sneaky) {
+	let player = GAME().player;
+	let cale = GAME().cale;
 	var p1cock = player.BiggestCock();
 	var virgin = cale.Butt().virgin;
 	
@@ -818,6 +833,8 @@ CaleSexScenes.SexGetBJSneakyEntry = function(outside, sneaky) {
 
 
 CaleSexScenes.SexGetEatenEntrypoint = function(outside) {
+	let player = GAME().player;
+	let cale = GAME().cale;
 	var virgin = cale.Butt().virgin;
 	var biggestCock = player.BiggestCock();
 	
@@ -952,6 +969,8 @@ CaleSexScenes.SexGetEatenEntrypoint = function(outside) {
 
 
 CaleSexScenes.SexFuckHim = function(outside, opts) {
+	let player = GAME().player;
+	let cale = GAME().cale;
 	opts = opts || {};
 	
 	var cocksInAss = player.CocksThatFit(cale.Butt());
@@ -1378,6 +1397,8 @@ CaleSexScenes.SexFuckHim = function(outside, opts) {
 }
 
 CaleSexScenes.SexCatchVag = function(outside) {
+	let player = GAME().player;
+	let cale = GAME().cale;
 	var parse = {
 		log           : outside ? "log" : "bedroll",
 		playername    : player.name
@@ -1485,6 +1506,8 @@ CaleSexScenes.SexCatchVag = function(outside) {
 }
 
 CaleSexScenes.SexCatchVagEntrypoint = function(outside, fromAnal, customIntro) {
+	let player = GAME().player;
+	let cale = GAME().cale;
 	var cocksInAss = player.CocksThatFit(cale.Butt(), true);
 	var cock = player.BiggestCock(null, true);
 	
@@ -1771,6 +1794,8 @@ CaleSexScenes.SexCatchVagEntrypoint = function(outside, fromAnal, customIntro) {
 }
 
 CaleSexScenes.SexCaleShowerEntrypoint = function(outside) {
+	let player = GAME().player;
+	let cale = GAME().cale;
 	var parse = {
 		log        : outside ? "log" : "bedroll",
 		playername : player.name
@@ -1815,6 +1840,7 @@ CaleSexScenes.SexCaleShowerEntrypoint = function(outside) {
 }
 
 CaleSexScenes.SexCaleCleanCockEntrypoint = function(cock, outside) {
+	let player = GAME().player;
 	var parse = {
 		
 	};
@@ -1851,6 +1877,8 @@ CaleSexScenes.SexCaleCleanCockEntrypoint = function(cock, outside) {
 }
 
 CaleSexScenes.SexCaleButtslutEntrypoint = function(cocks, outside) {
+	let player = GAME().player;
+	let cale = GAME().cale;
 	var p1cock = player.BiggestCock(cocks);
 	var knotted = p1cock.knot != 0;
 	
@@ -2017,6 +2045,8 @@ CaleSexScenes.SexCaleButtslutEntrypoint = function(cocks, outside) {
 }
 
 CaleSexScenes.SexCatchAnal = function(outside) {
+	let player = GAME().player;
+	let cale = GAME().cale;
 	var parse = {
 		log : outside ? "log" : "bedroll",
 		playername : player.name
@@ -2071,6 +2101,8 @@ CaleSexScenes.SexCatchAnal = function(outside) {
 }
 
 CaleSexScenes.SexCatchAnalEntrypoint = function(outside, fromVag) {
+	let player = GAME().player;
+	let cale = GAME().cale;
 	var cocksInAss = player.CocksThatFit(cale.Butt(), true);
 	
 	var parse = {
@@ -2258,6 +2290,7 @@ CaleSexScenes.SexCatchAnalEntrypoint = function(outside, fromVag) {
 }
 
 CaleSexScenes.SexGettingFuckedOutsideComments = function() {
+	let cale = GAME().cale;
 	var parse = {
 		
 	};
@@ -2286,6 +2319,10 @@ CaleSexScenes.SexGettingFuckedOutsideComments = function() {
 
 
 CaleSexScenes.SexFuckingHimOutsideComments = function(cock, opts) {
+	let player = GAME().player;
+	let rosalin = GAME().rosalin;
+	let cale = GAME().cale;
+
 	var goopFirst = opts.goop;
 	var cavalcade = opts.cavalcade;
 	var cheat     = opts.cheat;

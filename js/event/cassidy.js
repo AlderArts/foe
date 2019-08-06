@@ -181,6 +181,7 @@ Cassidy.prototype.mfPronoun = function(male, female) {
 // Scenes
 
 CassidyScenes.First = function() {
+	let player = GAME().player;
 	var parse = {
 		playername : player.name
 	};
@@ -232,6 +233,7 @@ CassidyScenes.First = function() {
 
 // The Pale Flame interior
 CassidyScenes.ShopDesc = function() {
+	let player = GAME().player;
 	var parse = {};
 	
 	Text.Add("You’re standing on the shop floor of The Pale Flame. Racks upon racks of implements of assorted death stand in lines and hang on the walls, each and every one of them dust-free and labeled with their name and make. Stabbing, impaling, bludgeoning, crushing, bleeding out, slashing - you name it, and it’s likely Cassidy that has it on display on the floor.", parse);
@@ -391,6 +393,7 @@ CassidyScenes.Approach = function() {
 }
 
 CassidyScenes.Prompt = function() {
+	let player = GAME().player;
 	var parse = {
 		playername : player.name
 	};
@@ -585,6 +588,7 @@ CassidyScenes.Appearance = function() {
 }
 
 CassidyScenes.TalkPrompt = function() {
+	let player = GAME().player;
 	var parse = {
 		
 	};
@@ -951,6 +955,7 @@ CassidyScenes.CreateShop = function() {
 }
 
 CassidyScenes.HeadInside = function() {
+	let player = GAME().player;
 	var parse = {
 		playername : player.name
 	};
@@ -1100,6 +1105,7 @@ CassidyScenes.HeadInside = function() {
 }
 
 CassidyScenes.InsidePrompt = function() {
+	let player = GAME().player;
 	var parse = {
 		playername : player.name
 	};
@@ -1181,6 +1187,7 @@ CassidyScenes.InsidePrompt = function() {
 }
 
 CassidyScenes.InsideMeal = function() {
+	let player = GAME().player;
 	var parse = {
 		playername : player.name
 	};
@@ -1393,6 +1400,7 @@ CassidyScenes.InsideMeal = function() {
 }
 
 CassidyScenes.InsideTalkPrompt = function() {
+	let player = GAME().player;
 	var parse = {
 		playername : player.name
 	};
@@ -1793,6 +1801,7 @@ CassidyScenes.InsideTalkPrompt = function() {
 }
 
 CassidyScenes.ManagingShop = function() {
+	let player = GAME().player;
 	var parse = {
 		playername : player.name
 	};
@@ -1893,6 +1902,7 @@ CassidyScenes.ManagingShop = function() {
 }
 
 CassidyScenes.ManagingShopAccept = function() {
+	let player = GAME().player;
 	var parse = {
 		playername : player.name
 	};
@@ -1937,6 +1947,7 @@ CassidyScenes.ManagingShopAccept = function() {
 }
 
 CassidyScenes.ManagingShop1 = function(score) {
+	let player = GAME().player;
 	var parse = {
 		
 	};
@@ -2472,6 +2483,7 @@ CassidyScenes.ManagingShopCookies = function() {
 }
 
 CassidyScenes.BigReveal = function() {
+	let player = GAME().player;
 	var parse = {
 		playername : player.name
 	};
@@ -2678,6 +2690,7 @@ CassidyScenes.BigReveal = function() {
 
 
 CassidyScenes.Model = function() {
+	let player = GAME().player;
 	var parse = {
 		playername : player.name
 	};
@@ -3007,6 +3020,7 @@ CassidyScenes.Model = function() {
 
 //FEMINIZING
 CassidyScenes.FemTalk2 = function() {
+	let player = GAME().player;
 	var parse = {
 		playername : player.name
 	};
@@ -3242,7 +3256,7 @@ function CassidySpar() {
 	if(!Scenes.Global.PortalsOpen())
 		levelLimit = Math.min(levelLimit, 14);
 	
-	var level = Math.min(levelLimit, player.level);
+	var level = Math.min(levelLimit, GAME().player.level);
 	
 	this.level    = level;
 	this.sexlevel = 3;
@@ -3342,11 +3356,13 @@ CassidySpar.prototype.PhysDmgHP = function(encounter, caster, val) {
 
 // SET UP ENCOUNTER SPAR
 CassidyScenes.Spar = function() {
+	let party = GAME().party;
+
 	var cass = new CassidySpar();
 	
 	party.SaveActiveParty();
 	party.ClearActiveParty();
-	party.SwitchIn(player);
+	party.SwitchIn(GAME().player);
 
 	var enemy = new Party();
 	enemy.AddMember(cass);

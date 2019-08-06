@@ -81,6 +81,7 @@ Magnus.prototype.ToStorage = function() {
 }
 
 MagnusScenes.Impregnate = function(mother, slot) {
+	let magnus = GAME().magnus;
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother : mother,
@@ -93,6 +94,8 @@ MagnusScenes.Impregnate = function(mother, slot) {
 }
 
 MagnusScenes.Interact = function() {
+	let player = GAME().player;
+	let magnus = GAME().magnus;
 	Text.Clear();
 	
 	var parse = {
@@ -325,6 +328,8 @@ MagnusScenes.Interact = function() {
 }
 
 MagnusScenes.Meditation = function() {
+	let player = GAME().player;
+	let magnus = GAME().magnus;
 	var parse = {
 		playername    : player.name
 	};
@@ -756,6 +761,7 @@ MagnusScenes.Meditation = function() {
 }
 
 MagnusScenes.SexSounding = function() {
+	let player = GAME().player;
 	var parse = {
 		setof : player.NumCocks() > 1 ? " set of" : ""
 	};
@@ -769,6 +775,10 @@ MagnusScenes.SexSounding = function() {
 }
 
 MagnusScenes.Confront = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let kiakai = GAME().kiakai;
+	let magnus = GAME().magnus;
 	var parse = {
 		playername : player.name
 	};
@@ -855,6 +865,8 @@ MagnusScenes.Confront = function() {
 }
 
 MagnusScenes.LearnMagic = function() {
+	let player = GAME().player;
+	let magnus = GAME().magnus;
 	var parse = {
 		hand : function() { return player.HandDesc(); },
 		playername : player.name
@@ -911,6 +923,7 @@ MagnusScenes.LearnMagic = function() {
 }
 
 MagnusScenes.Desc = function() {
+	let magnus = GAME().magnus;
 	var parse = {
 		litExtinguished : WorldTime().hour >= 19 ? "lit" : "extinguished"
 	};

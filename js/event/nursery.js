@@ -132,6 +132,7 @@ Nursery.Kid.prototype.SameType = function(kid) {
 }
 
 NurseryScenes.PrintPCbirthed = function() {
+	let player = GAME().player;
 	var kids = nursery.BirthedBy(player.ID);
 	
 	var parse = {};
@@ -160,6 +161,7 @@ NurseryScenes.PrintPCbirthed = function() {
 }
 
 NurseryScenes.PrintPCfathered = function() {
+	let player = GAME().player;
 	var kids = nursery.FatheredBy(player.ID);
 	
 	var num = 0;
@@ -186,6 +188,8 @@ NurseryScenes.PrintPCfathered = function() {
 }
 
 NurseryScenes.CareBlock = function(womb) {
+	let player = GAME().player;
+	let party = GAME().party;
 	var parse = {
 		
 	};
@@ -301,6 +305,7 @@ NurseryScenes.CareBlock = function(womb) {
 
 // Pre gemstead (only available if actually you have kids, and only in act 1)
 NurseryScenes.Nomads = function() {
+	let party = GAME().party;
 	var num = nursery.TotalKids();
 	var parse = {
 		ren   : num > 1 ? "ren" : "",

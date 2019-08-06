@@ -80,6 +80,7 @@ Adrian.prototype.IsAtLocation = function(location) {
 
 // Party interaction
 Adrian.prototype.Interact = function() {
+	let adrian = GAME().adrian;
 	Text.Clear();
 	Text.Add("Rawr Imma horse.");
 

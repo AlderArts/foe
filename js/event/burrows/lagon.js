@@ -97,6 +97,8 @@ Lagon.Talk = {
 
 // Schedule TODO
 Lagon.prototype.IsAtLocation = function(location) {
+	let party = GAME().party;
+	let burrows = GAME().burrows;
 	//if(burrows.LagonChained()) //Slave
 	location = location || party.location;
 	if(burrows.LagonChained()) {
@@ -128,6 +130,7 @@ Lagon.prototype.JailSexed = function() {
 }
 
 LagonScenes.LagonImpregnate = function(mother, slot) {
+	let lagon = GAME().lagon;
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother : mother,
@@ -222,6 +225,7 @@ LagonRegular.prototype.PhysDmgHP = function(encounter, caster, val) {
 
 //TODO
 LagonRegular.prototype.Act = function(enc, activeChar) {
+	let player = GAME().player;
 	// Pick a random target
 	var t = this.GetSingleTarget(enc, activeChar);
 
@@ -359,6 +363,7 @@ LagonBrute.prototype.DropTable = function() {
 
 //TODO
 LagonBrute.prototype.Act = function(encounter, activeChar) {
+	let party = GAME().party;
 	// Pick a random target
 	var targets = this.GetPartyTarget(encounter, activeChar);
 	var t = this.GetSingleTarget(encounter, activeChar);
@@ -423,6 +428,8 @@ LagonBrute.prototype.Act = function(encounter, activeChar) {
 }
 
 LagonScenes.InteractRuler = function() {
+	let lagon = GAME().lagon;
+	let burrows = GAME().burrows;
 	var parse = {
 		
 	};
@@ -453,6 +460,9 @@ LagonScenes.InteractRuler = function() {
 }
 
 LagonScenes.RulerPrompt = function() {
+	let player = GAME().player;
+	let lagon = GAME().lagon;
+	let burrows = GAME().burrows;
 	var parse = {
 		playername : player.name
 	};
@@ -570,6 +580,7 @@ LagonScenes.RulerPrompt = function() {
 
 //TODO
 LagonScenes.RulerSexPrompt = function() {
+	let lagon = GAME().lagon;
 	var parse = {
 		
 	};
@@ -628,6 +639,8 @@ LagonScenes.RulerSexPrompt = function() {
 }
 
 LagonScenes.RulerBlowjob = function() {
+	let player = GAME().player;
+	let lagon = GAME().lagon;
 	var parse = {
 		
 	};
@@ -677,6 +690,9 @@ LagonScenes.RulerBlowjob = function() {
 }
 
 LagonScenes.RulerBlowjobEntrypoint = function() {
+	let player = GAME().player;
+	let lagon = GAME().lagon;
+	let burrows = GAME().burrows;
 	var p1cock = player.BiggestCock();
 	
 	var parse = {
@@ -925,6 +941,9 @@ LagonScenes.RulerBlowjobSwallowEntrypoint = function(opheliaPresent) {
 
 
 LagonScenes.RulerBlowjobAftermath = function(opheliaPresent) {
+	let player = GAME().player;
+	let lagon = GAME().lagon;
+
 	var parse = {
 		
 	};
@@ -947,6 +966,9 @@ LagonScenes.RulerBlowjobAftermath = function(opheliaPresent) {
 
 //TODO
 LagonScenes.RulerGetFuckedEntrypoint = function(opheliaPresent) {
+	let player = GAME().player;
+	let lagon = GAME().lagon;
+
 	var p1cock = player.BiggestCock();
 	var lagonSize = lagon.FirstCock().Size();
 	var parse = {
@@ -1104,6 +1126,11 @@ LagonScenes.RulerGetFuckedEntrypoint = function(opheliaPresent) {
 
 //TODO
 LagonScenes.RulerGetFuckedEntrypoint2 = function(angry, target, opheliaPresent) {
+	let player = GAME().player;
+	let ophelia = GAME().ophelia;
+	let lagon = GAME().lagon;
+	let burrows = GAME().burrows;
+
 	var parse = {
 		
 	};
@@ -1378,6 +1405,9 @@ LagonScenes.RulerPitEntrypoint = function() {
 
 
 LagonScenes.AlliedFirst = function() {
+	let player = GAME().player;
+	let lagon = GAME().lagon;
+
 	var parse = {
 		
 	};
@@ -1445,6 +1475,13 @@ LagonScenes.AlliedFirst = function() {
 }
 
 LagonScenes.RulerTalkPrompt = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let roa = GAME().roa;
+	let ophelia = GAME().ophelia;
+	let lagon = GAME().lagon;
+	let burrows = GAME().burrows;
+
 	var parse = {
 		tongue : function() { return player.TongueDesc(); }
 	};
@@ -1845,6 +1882,10 @@ Pit loss (todo)
 }
 
 LagonScenes.PitDefianceWin = function() {
+	let party = GAME().party;
+	let ophelia = GAME().ophelia;
+	let lagon = GAME().lagon;
+
 	SetGameState(GameState.Event, Gui);
 	var enc = this;
 	var parse = {
@@ -1887,6 +1928,10 @@ LagonScenes.PitDefianceWin = function() {
 }
 
 LagonScenes.PitDefianceLoss = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let lagon = GAME().lagon;
+
 	SetGameState(GameState.Event, Gui);
 	var parse = {
 		face : function() { return player.FaceDesc(); },
@@ -1973,6 +2018,9 @@ LagonScenes.PitDefianceLoss = function() {
 }
 
 LagonScenes.BadendPit = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+
 	var parse = {
 		
 	};
@@ -2008,6 +2056,8 @@ LagonScenes.BadendPit = function() {
 
 
 LagonScenes.BadendBrute = function() {
+	let party = GAME().party;
+
 	SetGameState(GameState.Event, Gui);
 	
 	var scepter = party.Inv().QueryNum(Items.Quest.Scepter);
@@ -2079,6 +2129,10 @@ LagonScenes.BadendBrute = function() {
 }
 
 LagonScenes.ReturnToBurrowsAfterFight = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let ophelia = GAME().ophelia;
+
 	var parse = {
 		playername : player.name
 	};
@@ -2162,6 +2216,10 @@ LagonScenes.ReturnToBurrowsAfterFight = function() {
 }
 
 LagonScenes.ReturnToBurrowsAfterScepter = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let burrows = GAME().burrows;
+
 	var parse = {
 		playername : player.name
 	};
@@ -2315,6 +2373,10 @@ LagonScenes.Usurp = function(toolate) {
 }
 
 LagonScenes.LossToRegularLagon = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let lagon = GAME().lagon;
+	
 	SetGameState(GameState.Event, Gui);
 	
 	var enc = this;
@@ -2409,6 +2471,8 @@ LagonScenes.LossToRegularLagon = function() {
 }
 
 LagonScenes.WinToRegularLagon = function() {
+	let party = GAME().party;
+	
 	SetGameState(GameState.Event, Gui);
 	
 	var enc = this;
@@ -2453,6 +2517,11 @@ LagonScenes.WinToRegularLagon = function() {
 }
 
 LagonScenes.WinToBruteLagon = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let ophelia = GAME().ophelia;
+	let lagon = GAME().lagon;
+	
 	SetGameState(GameState.Event, Gui);
 	
 	var enc = this;
@@ -2549,6 +2618,8 @@ LagonScenes.OpheliaFight = function() {
 }
 
 LagonScenes.LossToOphelia = function() {
+	let player = GAME().player;
+	
 	SetGameState(GameState.Event, Gui);
 	var enc = this;
 	
@@ -2600,6 +2671,10 @@ LagonScenes.LossToOphelia = function() {
 }
 
 LagonScenes.WinToOphelia = function() {
+	let player = GAME().player;
+	let ophelia = GAME().ophelia;
+	let lagon = GAME().lagon;
+	
 	SetGameState(GameState.Event, Gui);
 	var enc = this;
 	

@@ -183,6 +183,7 @@ Kiakai.prototype.InitCharacter = function(gender) {
 
 // Party interaction
 Kiakai.prototype.Interact = function(switchSpot) {
+	let player = GAME().player;
 	Text.Clear();
 	var that = kiakai;
 	
@@ -263,6 +264,7 @@ Kiakai.prototype.Interact = function(switchSpot) {
 }
 
 Kiakai.prototype.TalkPrompt = function() {
+	let player = GAME().player;
 	var parse = {
 		playername : player.name,
 		name   : kiakai.name

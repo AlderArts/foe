@@ -13,6 +13,9 @@ import { Sex } from '../../entity-sex';
 let LaylaScenes = {};
 
 LaylaScenes.Prompt = function(switchSpot) {
+	let player = GAME().player;
+	let layla = GAME().layla;
+
 	var parse = {
 		
 	};
@@ -82,6 +85,8 @@ LaylaScenes.Prompt = function(switchSpot) {
 
 //TODO
 LaylaScenes.TalkPrompt = function(switchSpot) {
+	let player = GAME().player;
+	let layla = GAME().layla;
 	var parse = {
 		playername : player.name
 	};
@@ -172,6 +177,9 @@ LaylaScenes.TalkPrompt = function(switchSpot) {
 }
 
 LaylaScenes.Appearance = function(switchSpot) {
+	let player = GAME().player;
+	let kiakai = GAME().kiakai;
+	let layla = GAME().layla;
 	var parse = {
 		name : kiakai.name,
 		playername : player.name
@@ -325,6 +333,10 @@ LaylaScenes.Appearance = function(switchSpot) {
 }
 
 LaylaScenes.PartyRegular = function(switchSpot) {
+	let player = GAME().player;
+	let party = GAME().party;
+	let kiakai = GAME().kiakai;
+	let layla = GAME().layla;
 	var parse = {
 		playername : player.name
 	};
@@ -478,6 +490,8 @@ LaylaScenes.PartyRegular = function(switchSpot) {
  */
 
 LaylaScenes.FarmMeetingTrigger = function(approach) {
+	let glade = GAME().glade;
+	let layla = GAME().layla;
 	if(glade.flags["Visit"] < DryadGlade.Visit.DefeatedOrchid) return false; //TODO: change to after portals open?
 	if(layla.flags["Met"] == Layla.Met.NotMet) {
 		if(approach) {
@@ -520,6 +534,10 @@ LaylaScenes.FarmMeetingTrigger = function(approach) {
 
 //approaching/sleeping
 LaylaScenes.FirstMeeting = function(approach) {
+	let player = GAME().player;
+	let party = GAME().party;
+	let gwendy = GAME().gwendy;
+	let layla = GAME().layla;
 	var parse = {
 		playername : player.name
 	};
@@ -588,6 +606,9 @@ LaylaScenes.FirstMeeting = function(approach) {
 
 //In case you let her get away. This happens 3 days after that. And continue repeating every 3 days till you win.
 LaylaScenes.RepeatMeeting = function(approach) {
+	let player = GAME().player;
+	let party = GAME().party;
+	let gwendy = GAME().gwendy;
 	var parse = {
 		playername : player.name
 	};
@@ -658,6 +679,10 @@ LaylaScenes.FarmCombat = function() {
 }
 
 LaylaScenes.FarmCombatLoss = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let gwendy = GAME().gwendy;
+	let layla = GAME().layla;
 	var enc = this;
 	SetGameState(GameState.Event, Gui);
 	
@@ -700,6 +725,10 @@ LaylaScenes.FarmCombatLoss = function() {
 }
 
 LaylaScenes.FarmCombatWin = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let gwendy = GAME().gwendy;
+	let layla = GAME().layla;
 	var enc = this;
 	SetGameState(GameState.Event, Gui);
 	
@@ -955,6 +984,8 @@ LaylaScenes.FarmCombatWin = function() {
 
 //Automatically happens 3 days after you won against Layla. As soon as the PC steps on the field.
 LaylaScenes.SecondMeeting = function() {
+	let player = GAME().player;
+	let layla = GAME().layla;
 	var parse = {
 		playername : player.name
 	};
@@ -1011,6 +1042,9 @@ LaylaScenes.SecondMeeting = function() {
 }
 
 LaylaScenes.LeavesGwendy = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let layla = GAME().layla;
 	var parse = {
 		playername : player.name
 	};
@@ -1065,6 +1099,8 @@ LaylaScenes.Impregnate = function(mother, father, load, slot) {
 
 //TODO
 LaylaScenes.SexPrompt = function(switchSpot) {
+	let player = GAME().player;
+	let layla = GAME().layla;
 	var parse = {
 		playername : player.name,
 		armor : function() { return player.ArmorDesc(); }
@@ -1139,6 +1175,8 @@ LaylaScenes.SexPrompt = function(switchSpot) {
 }
 
 LaylaScenes.SexFirstTime = function() {
+	let player = GAME().player;
+	let layla = GAME().layla;
 
 	var p1cock = player.BiggestCock(null, true);
 	var strapon = p1cock.isStrapon;
@@ -1766,6 +1804,9 @@ LaylaScenes.SexFirstTime = function() {
 }
 
 LaylaScenes.SexCatchAnal = function() {
+	let player = GAME().player;
+	let layla = GAME().layla;
+
 	var parse = {
 		playername : player.name
 	};
@@ -1992,6 +2033,9 @@ LaylaScenes.SexCatchAnal = function() {
 }
 
 LaylaScenes.SexCatchAnalBlowher = function(parse) {
+	let player = GAME().player;
+	let layla = GAME().layla;
+
 	Text.Add("Layla’s flavor washes intensely over your tongue, and you shut your eyes to better focus on the taste. Inch by inch, you glide down her length, swallowing her shaft.", parse);
 	Text.NL();
 	Text.Add("A tickle in the back of your throat lets you know how far you’ve come, but when you open your eyes there is still so much more to take. Inhaling through your nose, you close your eyes again and press on.", parse);
@@ -2045,6 +2089,9 @@ LaylaScenes.SexCatchAnalBlowher = function(parse) {
 }
 
 LaylaScenes.SexCatchAnalCont = function(parse) {
+	let player = GAME().player;
+	let layla = GAME().layla;
+
 	Text.Add("Layla starts with shallow thrusts, letting herself build up momentum as she slowly begins to pump longer and harder with each movement.", parse);
 	Text.NL();
 	var gen = "";
@@ -2195,6 +2242,9 @@ LaylaScenes.SexCatchAnalCont = function(parse) {
 }
 
 LaylaScenes.SexCatchAnalCont2 = function(parse, kiss, tailcock) {
+	let player = GAME().player;
+	let layla = GAME().layla;
+
 	if(kiss) {
 		Text.Add("Writhing in the chimera’s arms, you hug her as tightly as you can. Her tongue thrashes in your mouth while your own tries to defend itself against the onslaught. Down below, her hips smack meatily against yours, a rhythmic thrusting that sends warmth and pleasure tingling along your spine.", parse);
 		Text.NL();
@@ -2314,6 +2364,9 @@ LaylaScenes.SexCatchAnalCont2 = function(parse, kiss, tailcock) {
 }
 
 LaylaScenes.SexCatchAnalCont3 = function(parse) {
+	let player = GAME().player;
+	let layla = GAME().layla;
+
 	Text.Add("<i>“O-okay,”</i> she replies, furrowing her brows to will her knot away, all the while pumping herself into you.", parse);
 	Text.NL();
 	Text.Add("As you thrust and moan, you feel your own pleasure building, curling your limbs around your chimeric lover as you grind together. Layla cries out, arching her back as the first shot of her cum erupts inside of you. The feeling of it - sticky and warm, like wet heat slurping lewdly inside of you - pushes you past the limit, and you climax in turn.", parse);
@@ -2380,6 +2433,7 @@ LaylaScenes.SexCatchVaginal = function() {
 
 
 LaylaScenes.FirstTimeSkinShift = function() {
+	let layla = GAME().layla;
 	var parse = {
 
 	};
@@ -2403,6 +2457,9 @@ LaylaScenes.FirstTimeSkinShift = function() {
 }
 
 LaylaScenes.SexPitchVaginal = function() {
+	let player = GAME().player;
+	let layla = GAME().layla;
+
 	var p1cock = player.BiggestCock(null, true);
 
 	var parse = {
@@ -2609,6 +2666,9 @@ LaylaScenes.SexPitchVaginal = function() {
 }
 
 LaylaScenes.SexPitchVaginalCont = function(opts, p1cock, parse) {
+	let player = GAME().player;
+	let layla = GAME().layla;
+
 	//[Finger][Eat her out]
 	var options = new Array();
 	options.push({ nameStr : "Finger",
@@ -2703,6 +2763,9 @@ LaylaScenes.SexPitchVaginalCont = function(opts, p1cock, parse) {
 }
 
 LaylaScenes.SexPitchVaginalCont2 = function(opts, p1cock, parse) {
+	let player = GAME().player;
+	let layla = GAME().layla;
+
 	//[Cock][Tail-cock][Finish up]
 	var options = new Array();
 	options.push({ nameStr : "Cock",
@@ -3003,6 +3066,9 @@ LaylaScenes.SexPitchVaginalCont2 = function(opts, p1cock, parse) {
 }
 
 LaylaScenes.SexPitchVaginalCont3 = function(opts, p1cock, parse) {
+	let player = GAME().player;
+	let layla = GAME().layla;
+
 	Text.NL();
 	if(player.FirstCock()) {
 		parse["tj"] = opts.TailJuice ? " Her aphrodisiac fluids burn against your throbbing member, enflaming you with the need to empty yourself into her receptive womb." : "";
@@ -3388,6 +3454,8 @@ LaylaScenes.SexPitchVaginalCont3 = function(opts, p1cock, parse) {
 }
 
 LaylaScenes.SexPitchVaginalVariable = function(opts, p1cock, parse) {
+	let layla = GAME().layla;
+
 	if(opts.LCock) {
 		Text.NL();
 		Text.Add("Her blue cock visibly pulsates, throbbing madly with her pleasure before it distends and erupts in a sympathetic male orgasm. Great arcs of chimera seed soar through the air, painting ropes of off-white all over her belly and breasts. Some even shoots so far as to spatter onto her face and into her gaping mouth, prompting her tongue to whip out and lap her face clean.", parse);

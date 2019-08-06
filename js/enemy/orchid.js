@@ -240,6 +240,8 @@ OrchidBoss.prototype.Act = function(encounter, activeChar) {
 }
 
 OrchidScenes.Interact = function() {
+	let player = GAME().player;
+	let orchid = GAME().orchid;
 	var parse = {
 		playername : player.name
 	};
@@ -302,6 +304,8 @@ OrchidScenes.Prompt = function() {
 }
 
 OrchidScenes.TalkPrompt = function() {
+	let player = GAME().player;
+	let orchid = GAME().orchid;
 	var parse = {
 		playername : player.name
 	};
@@ -525,6 +529,8 @@ OrchidScenes.TalkPrompt = function() {
 }
 
 OrchidScenes.FirstTalk = function() {
+	let kiakai = GAME().kiakai;
+	let party = GAME().party;
 	var parse = {
 		
 	};
@@ -558,6 +564,9 @@ OrchidScenes.FirstTalk = function() {
 }
 
 OrchidScenes.FirstTalkPrompt = function(opts) {
+	let player = GAME().player;
+	let kiakai = GAME().kiakai;
+	let party = GAME().party;
 	var parse = {
 		playername : player.name,
 		name : kiakai.name

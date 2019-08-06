@@ -6,6 +6,7 @@
 
 import { Item, ItemType } from './item';
 import { Appendage, AppendageType } from './body/appendage';
+import { GAME } from './GAME';
 
 let TF = {};
 
@@ -179,7 +180,7 @@ TF.UseItem = function(target, suppressUse) {
 }
 
 TF.UseItemDesc = function(target) {
-	var parse = { name: target.NameDesc(), s: target == player ? "" : "s", item: this.name };
+	var parse = { name: target.NameDesc(), s: target == GAME().player ? "" : "s", item: this.name };
 	Text.Add("[name] chug[s] down a bottle of [item].", parse);
 	Text.NL();
 	Text.Flush();
@@ -394,7 +395,7 @@ TF.ItemEffects.SetCover = function(target, opts) {
 // odds, race, str, color
 TF.ItemEffects.SetTail = function(target, opts) {
 	var changed = TF.Effect.Unchanged;
-	var parse   = { name: target.NameDesc(), Poss: target.Possessive(), s: target == player ? "" : "s", str: opts.str };
+	var parse   = { name: target.NameDesc(), Poss: target.Possessive(), s: target == GAME().player ? "" : "s", str: opts.str };
 	
 	var odds    = opts.odds || 1;
 	if(Math.random() < odds) {
@@ -441,7 +442,7 @@ TF.ItemEffects.RemTail = function(target, opts) {
 // odds, race, str, color, count
 TF.ItemEffects.SetHorn = function(target, opts) {
 	var changed = TF.Effect.Unchanged;
-	var parse   = { name: target.NameDesc(), Poss: target.Possessive(), s: target == player ? "" : "s", str: opts.str };
+	var parse   = { name: target.NameDesc(), Poss: target.Possessive(), s: target == GAME().player ? "" : "s", str: opts.str };
 	
 	var odds    = opts.odds || 1;
 	if(Math.random() < odds) {
@@ -486,7 +487,7 @@ TF.ItemEffects.RemHorn = function(target, opts) {
 // odds, race, str, color, count
 TF.ItemEffects.SetAntenna = function(target, opts) {
 	var changed = TF.Effect.Unchanged;
-	var parse   = { name: target.NameDesc(), Poss: target.Possessive(), s: target == player ? "" : "s", str: opts.str };
+	var parse   = { name: target.NameDesc(), Poss: target.Possessive(), s: target == GAME().player ? "" : "s", str: opts.str };
 	
 	var odds    = opts.odds  || 1;
 	var count   = opts.count || 2;
@@ -532,7 +533,7 @@ TF.ItemEffects.RemAntenna = function(target, opts) {
 // odds, race, str, color, count
 TF.ItemEffects.SetWings = function(target, opts) {
 	var changed = TF.Effect.Unchanged;
-	var parse   = { name: target.NameDesc(), Poss: target.Possessive(), s: target == player ? "" : "s", str: opts.str };
+	var parse   = { name: target.NameDesc(), Poss: target.Possessive(), s: target == GAME().player ? "" : "s", str: opts.str };
 	
 	var odds    = opts.odds  || 1;
 	var count   = opts.count || 2;
@@ -578,7 +579,7 @@ TF.ItemEffects.RemWings = function(target, opts) {
 // odds, race, str, color, count
 TF.ItemEffects.SetAbdomen = function(target, opts) {
 	var changed = TF.Effect.Unchanged;
-	var parse   = { name: target.NameDesc(), Poss: target.Possessive(), s: target == player ? "" : "s", str: opts.str };
+	var parse   = { name: target.NameDesc(), Poss: target.Possessive(), s: target == GAME().player ? "" : "s", str: opts.str };
 	
 	var odds    = opts.odds  || 1;
 	var count   = opts.count || 2;
@@ -624,7 +625,7 @@ TF.ItemEffects.RemAbdomen = function(target, opts) {
 // odds, race, color, ideal, count
 TF.ItemEffects.SetBalls = function(target, opts) {
 	var changed = TF.Effect.Unchanged;
-	var parse   = { name: target.NameDesc(), s: target == player ? "" : "s", count: Text.NumToText(opts.count), ballsDesc: function() { return target.BallsDesc(); } };
+	var parse   = { name: target.NameDesc(), s: target == GAME().player ? "" : "s", count: Text.NumToText(opts.count), ballsDesc: function() { return target.BallsDesc(); } };
 	var odds    = opts.odds  || 1;
 	var count   = opts.count || 2;
 	var ideal   = opts.ideal || 2;

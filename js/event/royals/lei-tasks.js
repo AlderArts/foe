@@ -23,6 +23,7 @@ TasksScenes.StartTask = function() { //TODO add tasks
 }
 
 TasksScenes.TaskPrompt = function() {
+	let lei = GAME().lei;
 	var parse = {
 		
 	};
@@ -56,16 +57,20 @@ Lei.EscortTask = {
 
 TasksScenes.Escort = {};
 TasksScenes.Escort.Available = function() {
+	let lei = GAME().lei;
 	if(lei.flags["Met"] >= Lei.Met.OnTaskEscort) return false;
 	return true;
 }
 TasksScenes.Escort.Eligable = function() {
+	let player = GAME().player;
 	return player.level >= 6;
 }
 TasksScenes.Escort.OnTask = function() {
+	let lei = GAME().lei;
 	return lei.flags["Met"] == Lei.Met.OnTaskEscort;
 }
 TasksScenes.Escort.OnTaskText = function() {
+	let lei = GAME().lei;
 	var parse = {
 		
 	};
@@ -90,6 +95,7 @@ TasksScenes.Escort.OnTaskText = function() {
 }
 
 TasksScenes.Escort.Completed = function() {
+	let lei = GAME().lei;
 	return lei.flags["Met"] >= Lei.Met.CompletedTaskEscort;
 }
 
@@ -99,6 +105,7 @@ TasksScenes.Escort.Coin = function() {
 }
 
 TasksScenes.Escort.Start = function() {
+	let lei = GAME().lei;
 	var parse = {
 		coin : Text.NumToText(TasksScenes.Escort.Coin())
 	};
@@ -143,6 +150,11 @@ TasksScenes.Escort.Start = function() {
 }
 
 TasksScenes.Escort.Estate = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let lei = GAME().lei;
+	let kiakai = GAME().kiakai;
+	let rigard = GAME().rigard;
 	var parse = {
 		sirmadam : player.mfFem("sir", "madam"),
 		playername : player.name
@@ -418,6 +430,8 @@ disable submit/run option?
 }
 
 TasksScenes.Escort.CombatLoss = function() {
+	let player = GAME().player;
+	let party = GAME().party;
 	SetGameState(GameState.Event, Gui);
 	Text.Clear();
 	
@@ -445,6 +459,9 @@ TasksScenes.Escort.CombatLoss = function() {
 }
 
 TasksScenes.Escort.CombatWin = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let lei = GAME().lei;
 	SetGameState(GameState.Event, Gui);
 	Text.Clear();
 	
@@ -474,6 +491,9 @@ TasksScenes.Escort.CombatWin = function() {
 }
 
 TasksScenes.Escort.PostCombat = function(enc, won) {
+	let player = GAME().player;
+	let party = GAME().party;
+	let lei = GAME().lei;
 	var parse = {
 		armor : player.ArmorDesc()
 	};
@@ -641,6 +661,8 @@ TasksScenes.Escort.PostCombat = function(enc, won) {
 }
 
 TasksScenes.Escort.Debrief = function() {
+	let party = GAME().party;
+	let lei = GAME().lei;
 	var parse = {
 		
 	};

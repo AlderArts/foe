@@ -220,6 +220,7 @@ Lei.Spar.prototype.Act = function(encounter, activeChar) {
 
 // Schedule
 Lei.prototype.IsAtLocation = function(location) {
+	let lei = GAME().lei;
 	// Numbers/slacking/sleep
 	if(location == world.loc.Rigard.Inn.common && lei.timeout.Expired())
 		return (WorldTime().hour >= 14 && WorldTime().hour < 23);
@@ -228,6 +229,7 @@ Lei.prototype.IsAtLocation = function(location) {
 
 // Party interaction
 Lei.prototype.Interact = function() {
+	let lei = GAME().lei;
 	Text.Clear();
 	Text.Add("Rawr Imma stabbitystab.");
 

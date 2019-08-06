@@ -796,7 +796,7 @@ Gui.Render = function() {
 					var showCard = cavalcade.round > 4;
 					// don't show folded opponents
 					if(p.folded) showCard = false;
-					showCard |= p == player; // always show own
+					showCard |= p == GAME().player; // always show own
 
 					if(showCard && k < p.hand.length)
 						cards[k].attr({src: p.hand[k].Img}).show();

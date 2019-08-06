@@ -46,6 +46,10 @@ Chief.prototype.ToStorage = function() {
 }
 
 ChiefScenes.Interact = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let kiakai = GAME().kiakai;
+	let chief = GAME().chief;
 	parse = {
 		elfname   : kiakai.name,
 		elfhimher : kiakai.himher(),
@@ -125,6 +129,10 @@ ChiefScenes.Interact = function() {
 }
 
 ChiefScenes.TalkPrompt = function() {
+	let player = GAME().player;
+	let rosalin = GAME().rosalin;
+	let kiakai = GAME().kiakai;
+	let chief = GAME().chief;
 	parse = {
 		elfname   : kiakai.name,
 		elfhimher : kiakai.himher(),
@@ -284,6 +292,7 @@ ChiefScenes.TalkPrompt = function() {
 }
 
 ChiefScenes.Desc = function() {
+	let chief = GAME().chief;
 	if(chief.flags["Met"] == 0)
 		Text.Add("On a log by the fire pit sits an old man smoking a pipe. His sharp eyes quickly find you and he gives you an uninterested look before returning to the pipe.");
 	else if(chief.relation.Get() >= 50)

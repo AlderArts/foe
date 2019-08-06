@@ -1,5 +1,6 @@
 import { GetDEBUG } from "../app";
 import { SetGameState, GameState } from "./gamestate";
+import { GAME } from './GAME';
 
 /*
  * The card game Cavalcade
@@ -275,7 +276,7 @@ Cavalcade.prototype.CoinGameRound = function() {
 			p.purse.coin -= that.bet;
 			that.pot += that.bet;
 		});
-		if(!player.out) {
+		if(!GAME().player.out) {
 			Text.Add("You put [bet] [token]s in the pot. The dealer gives you two cards.", parse);
 			Text.NL();
 		}
@@ -284,21 +285,21 @@ Cavalcade.prototype.CoinGameRound = function() {
 	case 1:
 	case 2:
 	case 3:
-		if(player.out) {
+		if(GAME().player.out) {
 			Text.Add("You are no longer in the game.");
 		}
-		else if(player.folded) {
+		else if(GAME().player.folded) {
 			Text.Add("You have folded.");
 		}
 		else {
 			Text.Add("Your cards are ");
-			var card = player.hand[0];
+			var card = GAME().player.hand[0];
 			if(card == that.stag)
 				Text.Add(card.name + " (*)", null, 'bold');
 			else
 				Text.Add(card.name);
 			Text.Add(", ");
-			card = player.hand[1];
+			card = GAME().player.hand[1];
 			if(card == that.stag)
 				Text.Add(card.name + " (*)", null, 'bold');
 			else
@@ -343,7 +344,7 @@ Cavalcade.prototype.CoinGameRound = function() {
 		Text.NL();
 		Text.Add("There are [pot] [token]s in the pot.", parse, 'bold');
 		
-		if(player.folded) {
+		if(GAME().player.folded) {
 			Input.buttons[0].Setup("Next", function() {
 				Text.Clear();
 				that.NextRound();
@@ -372,7 +373,7 @@ Cavalcade.prototype.CoinGameRound = function() {
 				Text.Clear();
 				Text.Add("You fold.");
 				Text.NL();
-				player.folded = true;
+				GAME().player.folded = true;
 				that.NextRound();
 			}, true);
 		}

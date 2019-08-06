@@ -10,6 +10,7 @@ import { SexScenes } from './asche-sex';
 import { Race } from '../body/race';
 import { Text } from '../text';
 import { Gui } from '../gui';
+import { GAME } from '../GAME';
 
 let AscheScenes = {
 	Tasks : TasksScenes,
@@ -105,6 +106,7 @@ Asche.prototype.ToStorage = function() {
 }
 
 AscheScenes.FirstEntry = function() {
+	let player = GAME().player;
 	var parse = {
 		heshe : player.mfFem("he","she"),
 		handsomepretty : player.mfFem("handsome", "pretty")
@@ -139,6 +141,7 @@ AscheScenes.FirstEntry = function() {
 }
 
 AscheScenes.Prompt = function() {
+	let player = GAME().player;
 	var parse = {
 		handsomepretty : player.mfFem("handsome", "pretty"),
 		heshe: player.mfFem("he", "she"),
@@ -263,6 +266,7 @@ AscheScenes.Prompt = function() {
 }
 
 AscheScenes.Appearance = function() {
+	let player = GAME().player;
 	var parse = {
 		handsomepretty : player.mfFem("handsome", "pretty")
 	};
@@ -279,6 +283,7 @@ AscheScenes.Appearance = function() {
 }
 
 AscheScenes.TalkPrompt = function() {
+	let player = GAME().player;
 	var parse = {
 		handsomepretty : player.mfFem("handsome", "pretty"),
 		heshe: player.mfFem("he", "she"),
@@ -437,6 +442,7 @@ AscheScenes.TalkPrompt = function() {
 }
 
 AscheScenes.Lessons = function() {
+	let player = GAME().player;
 	var parse = {
 		handsomepretty : player.mfFem("handsome", "pretty"),
 		heshe: player.mfFem("he", "she"),
@@ -596,6 +602,7 @@ AscheScenes.Lessons = function() {
 }
 
 AscheScenes.FortuneTellingPrompt = function() {
+	let player = GAME().player;
 	var parse = {
 		handsomepretty : player.mfFem("handsome", "pretty"),
 		HeShe: player.mfFem("He", "She"),
@@ -847,6 +854,7 @@ What? Why?
 
 
 AscheScenes.MagicBoxPrompt = function() {
+	let player = GAME().player;
 	var parse = {
 		coin : Text.NumToText(asche.MagicBoxCost()),
 		heshe : player.mfFem("he", "she"),
@@ -860,7 +868,7 @@ AscheScenes.MagicBoxPrompt = function() {
 			tooltip : "Stick your hand into limbo and see what you can draw out.",
 			func : function() {
 				AscheScenes.MagicBoxGrab();
-			}, enabled : party.coin >= asche.MagicBoxCost()
+			}, enabled : GAME().party.coin >= asche.MagicBoxCost()
 		});
 	}
 	options.push({ nameStr : "Explanation",
@@ -895,7 +903,7 @@ AscheScenes.MagicBoxGrab = function() {
 	
 	var cost = asche.MagicBoxCost();
 	
-	party.coin -= cost;
+	GAME().party.coin -= cost;
 	rigard.MagicShop.totalBought += cost;
 	
 	Text.Clear();
@@ -910,6 +918,8 @@ AscheScenes.MagicBoxGrab = function() {
 }
 
 AscheScenes.MagicBoxWin = function() {
+	let player = GAME().player;
+	let party = GAME().party;
 	var parse = {
 		himher : player.mfFem("him", "her"),
 		heshe : player.mfFem("he", "she")
@@ -1154,6 +1164,7 @@ AscheScenes.MagicBoxLoss = function() {
 }
 
 AscheScenes.MagicBoxRepeat = function() {
+	let party = GAME().party;
 	var parse = {
 		coin : Text.NumToText(asche.MagicBoxCost())
 	};

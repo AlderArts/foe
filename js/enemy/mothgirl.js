@@ -137,6 +137,8 @@ Mothgirl.prototype.Act = function(encounter, activeChar) {
 }
 
 MothgirlScenes.LoneEnc = function() {
+	let player = GAME().player;
+	let party = GAME().party;
 	var enemy = new Party();
 	var moth = new Mothgirl();
 	enemy.AddMember(moth);
@@ -283,6 +285,7 @@ MothgirlScenes.LoneEnc = function() {
 }
 
 MothgirlScenes.WinPrompt = function() {
+	let player = GAME().player;
 	var enc = this;
 	var moth = enc.moth;
 	SetGameState(GameState.Event, Gui);
@@ -334,6 +337,7 @@ MothgirlScenes.WinPrompt = function() {
 }
 
 MothgirlScenes.WinTitfuck = function(enc) {
+	let player = GAME().player;
 	var p1cock = player.BiggestCock();
 	var hugecock = p1cock.Len() > 20;
 
@@ -391,6 +395,7 @@ MothgirlScenes.WinTitfuck = function(enc) {
 }
 
 MothgirlScenes.WinAnal = function(enc, cocksInAss) {
+	let player = GAME().player;
 	var moth = enc.moth;
 	var p1cock = player.BiggestCock(cocksInAss);
 	var strapon = p1cock.isStrapon;
@@ -489,6 +494,7 @@ MothgirlScenes.WinAnal = function(enc, cocksInAss) {
 }
 
 MothgirlScenes.WinCunn = function(enc) {
+	let player = GAME().player;
 	var moth = enc.moth;
 
 	var parse = {
@@ -546,6 +552,7 @@ MothgirlScenes.WinCunn = function(enc) {
 }
 
 MothgirlScenes.Loss = function(enc, traded) {
+	let player = GAME().player;
 	var moth = enc.moth;
 	var p1cock = player.BiggestCock();
 	traded = traded || enc.coin <= 0;

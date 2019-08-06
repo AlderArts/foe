@@ -34,9 +34,13 @@ SexScenes.Prompt = function(options) {
 }
 
 SexScenes.PettingUnlocked = function() {
+	let lei = GAME().lei;
 	return lei.flags["Met"] >= Lei.Met.CompletedTaskEscort;
 }
 SexScenes.Petting = function(repeat) {
+	let player = GAME().player;
+	let party = GAME().party;
+	let lei = GAME().lei;
 	var parse = {
 		boygirl : player.mfFem("boy", "girl"),
 		hair : function() { return player.Hair().Short(); },

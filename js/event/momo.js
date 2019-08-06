@@ -6,7 +6,7 @@
 
 import { Entity } from '../entity';
 import { EncounterTable } from '../event';
-import { MoveToLocation } from '../GAME';
+import { MoveToLocation, GAME } from '../GAME';
 import { Gender } from '../body/gender';
 import { Images } from '../assets';
 import { Time } from '../time';
@@ -127,7 +127,7 @@ Momo.prototype.ToStorage = function() {
 
 // Schedule
 Momo.prototype.IsAtLocation = function(location) {
-	location = location || party.location;
+	location = location || GAME().party.location;
 	if(location == world.loc.Plains.Nomads.Fireplace && this.AtCamp() && WorldTime().hour >= 4 && WorldTime().hour < 21) {
 		return true;
 	}
@@ -142,6 +142,8 @@ MomoScenes.MomoEnc = function() {
 }
 
 MomoScenes.FindingMomo = function() {
+	let player = GAME().player;
+	let party = GAME().party;
 	var parse = {
 		playername : player.name
 	};
@@ -233,6 +235,7 @@ MomoScenes.FindingMomo = function() {
 }
 
 MomoScenes.WanderingMomo = function() {
+	let player = GAME().player;
 	var parse = {
 		playername : player.name
 	};
@@ -295,6 +298,7 @@ MomoScenes.WanderingMomo = function() {
 }
 
 MomoScenes.Interact = function() {
+	let player = GAME().player;
 	var parse = {
 		playername : player.name
 	};
@@ -410,6 +414,7 @@ MomoScenes.Interact = function() {
 
 //TODO
 MomoScenes.Prompt = function() {
+	let player = GAME().player;
 	var parse = {
 		playername : player.name
 	};
@@ -451,6 +456,8 @@ MomoScenes.Prompt = function() {
 }
 
 MomoScenes.CookPrompt = function() {
+	let player = GAME().player;
+	let party = GAME().party;
 	var parse = {
 		playername : player.name,
 		girlMorph  : momo.Ascended() ? "morph" : "girl",
@@ -538,6 +545,7 @@ MomoScenes.CookPrompt = function() {
 }
 
 MomoScenes.TalkPrompt = function() {
+	let player = GAME().player;
 	var parse = {
 		playername : player.name,
 		girlMorph  : momo.Ascended() ? "morph" : "girl",

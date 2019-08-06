@@ -8,6 +8,9 @@ import { Gui } from '../../gui';
 let LagonDScenes = {};
 
 LagonDScenes.RoomApproach = function() {
+	let party = GAME().party;
+	let lagon = GAME().lagon;
+	
 	var parse = {
 		
 	};
@@ -52,6 +55,9 @@ LagonDScenes.RoomApproach = function() {
 }
 
 LagonDScenes.Prompt = function() {
+	let party = GAME().party;
+	let lagon = GAME().lagon;
+	
 	var parse = {
 		scepter : "scepter" //TODO
 	};
@@ -108,6 +114,9 @@ LagonDScenes.Prompt = function() {
 
 
 LagonDScenes.SexPrompt = function() {
+	let player = GAME().player;
+	let lagon = GAME().lagon;
+	
 	var parse = {
 		
 	};
@@ -204,6 +213,10 @@ LagonDScenes.SexPrompt = function() {
 }
 
 LagonDScenes.PitchAnal = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let lagon = GAME().lagon;
+	
 	var p1cock = player.BiggestCock(null, true);
 	var strapon = p1cock.isStrapon;
 	
@@ -525,6 +538,9 @@ LagonDScenes.PitchAnal = function() {
 }
 
 LagonDScenes.ScepterEntry = function() {
+	let player = GAME().player;
+	let lagon = GAME().lagon;
+	
 	var parse = {
 		playername : player.name,
 		scepter : "scepter" //TODO
@@ -623,6 +639,9 @@ LagonDScenes.ScepterEntry = function() {
 }
 
 LagonDScenes.ScepterPrompt = function() {
+	let player = GAME().player;
+	let lagon = GAME().lagon;
+	
 	var parse = {
 		manwoman : player.mfTrue("man", "woman"),
 		playername : player.name
@@ -698,6 +717,8 @@ LagonDScenes.ScepterPrompt = function() {
 }
 
 LagonDScenes.ScepterSexPrompt = function() {
+	let player = GAME().player;
+
 	var parse = {
 		
 	};
@@ -732,6 +753,10 @@ LagonDScenes.ScepterSexPrompt = function() {
 }
 
 LagonDScenes.ScepterPitchAnal = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let lagon = GAME().lagon;
+
 	var p1cock = player.BiggestCock(null, true);
 	var strapon = p1cock.isStrapon;
 	var parse = {
@@ -1252,6 +1277,9 @@ LagonDScenes.ScepterPitchAnal = function() {
 }
 
 LagonDScenes.Punishment = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+
 	var parse = {
 		playername : player.name
 	};
@@ -1422,6 +1450,9 @@ LagonDScenes.Punishment = function() {
 }
 
 LagonDScenes.PunishmentPC = function() {
+	let player = GAME().player;
+	let vena = GAME().vena;
+
 	var p1cock = player.BiggestCock(null, true);
 	var strapon = p1cock.isStrapon;
 	
@@ -1594,6 +1625,9 @@ LagonDScenes.PunishmentPC = function() {
 }
 
 LagonDScenes.PunishmentPCCont = function(came) {
+	let player = GAME().player;
+	let lagon = GAME().lagon;
+	
 	var p1cock = player.BiggestCock(null, true);
 	var strapon = p1cock.isStrapon;
 	
@@ -1903,6 +1937,8 @@ LagonDScenes.PunishmentPCCont = function(came) {
 }
 
 LagonDScenes.PunishmentVena = function() {
+	let player = GAME().player;
+	
 	var parse = {
 		playername : player.name
 	};
@@ -2100,6 +2136,8 @@ LagonDScenes.PunishmentVena = function() {
 }
 
 LagonDScenes.PunishmentVenaCont = function() {
+	let player = GAME().player;
+	
 	var parse = {
 		playername : player.name
 	};

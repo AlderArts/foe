@@ -130,6 +130,8 @@ GolemBoss.prototype.Act = function(encounter, activeChar) {
 
 
 GolemScenes.FirstApproach = function() {
+	let party = GAME().party;
+	let golem = GAME().golem;
 	var parse = {
 		s : party.Num() > 1 ? "s" : ""
 	};
@@ -157,6 +159,7 @@ GolemScenes.FirstApproach = function() {
 }
 
 GolemScenes.FightPrompt = function() {
+	let golem = GAME().golem;
 	var parse = {};
 	//[Fight!][Leave]
 	var options = new Array();
@@ -200,6 +203,10 @@ GolemScenes.RepeatApproach = function() {
 }
 
 GolemScenes.OnWin = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let golem = GAME().golem;
+	let kiakai = GAME().kiakai;
 	var parse = {
 		name       : function() { return kiakai.name; },
 		hisher     : function() { return kiakai.hisher(); },
@@ -254,6 +261,9 @@ GolemScenes.OnWin = function() {
 }
 
 GolemScenes.OnLoss = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let golem = GAME().golem;
 	var parse = {
 		name          : function() { return party.Get(1).name; }
 	};

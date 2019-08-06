@@ -1,11 +1,12 @@
 import { EncounterTable } from "../../event";
 import { Text } from "../../text";
-import { TimeStep } from "../../GAME";
+import { TimeStep, GAME } from "../../GAME";
 import { Gui } from "../../gui";
 
 let VenaRScenes = {};
 
 VenaRScenes.Approach = function() {
+	let player = GAME().player;
 	var parse = {
 		playername : player.name
 	};
@@ -126,6 +127,7 @@ VenaRScenes.Approach = function() {
 }
 
 VenaRScenes.Prompt = function() {
+	let vena = GAME().vena;
 	var parse = {
 		
 	};
@@ -189,6 +191,7 @@ VenaRScenes.Prompt = function() {
 }
 
 VenaRScenes.LagonsFate = function(opts) {
+	let player = GAME().player;
 	var parse = {
 		playername : player.name
 	};

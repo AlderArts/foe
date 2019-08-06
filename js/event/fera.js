@@ -100,6 +100,7 @@ Fera.prototype.IsAtLocation = function(location) {
 
 // Party interaction
 FeraScenes.Interact = function() {
+	let player = GAME().player;
 	Text.Clear();
 	
 	if(!Scenes.Rigard.ClothShop.IsOpen()) {
@@ -369,6 +370,7 @@ FeraScenes.Interact = function() {
 }
 
 FeraScenes.TouchPrompt = function() {
+	let player = GAME().player;
 	var parse = {
 		against        : (player.FirstBreastRow().size.Get() > 3) ? "between" : "against"
 	};
@@ -459,6 +461,7 @@ FeraScenes.TouchPrompt = function() {
 }
 
 FeraScenes.SexPrompt = function() {
+	let player = GAME().player;
 	var cocksInVag = player.CocksThatFit(fera.FirstVag());
 	var cocksInAss = player.CocksThatFit(fera.Butt());
 	

@@ -4,6 +4,7 @@ import { Genitalia } from "../body/genitalia";
 import { CockType } from "../body/cock";
 import { Race } from "../body/race";
 import { ItemSubtype } from "../item";
+import { GAME } from "../GAME";
 
 /*
  * Masturbation scenes for the PC
@@ -14,6 +15,8 @@ let MasturbationScenes = {};
 // TODO: Stretch/Cap change for toy training
 
 MasturbationScenes.Entry = function() {
+	let player = GAME().player;
+	let party = GAME().party;
 	var parse = {
 		
 	};
@@ -186,6 +189,7 @@ MasturbationScenes.Entry = function() {
 }
 
 MasturbationScenes.CockOpening = function(p1cock) {
+	let player = GAME().player;
 	var allCocks = player.AllCocksCopy();
 	for(var i = 0; i < allCocks.length; i++) {
 		if(allCocks[i] == p1cock) {
@@ -530,6 +534,7 @@ MasturbationScenes.CockSize = function(parse, p1cock) {
 }
 
 MasturbationScenes.CockSlut = function(parse, p1cock) {
+	let player = GAME().player;
 	if(player.Slut() >= 30) {
 		Text.Add("In a bid to further increase your enjoyment, you gather some of your pre-ejaculate and take the musky liquid to your mouth, where you lap it all off your hand. Damn, you taste great!", parse);
 		if(player.Slut() >= 50 && (p1cock.Len() >= 25 || player.IsFlexible()))
@@ -550,6 +555,7 @@ MasturbationScenes.CockKnot = function(parse, p1cock) {
  */
 
 MasturbationScenes.AnalOpening = function(func, obj) {
+	let player = GAME().player;
 	var parse = {
 		toparmordesc : player.ArmorDesc(),
 		bottomarmordesc : player.LowerArmorDesc()
@@ -597,6 +603,7 @@ MasturbationScenes.AnalOpening = function(func, obj) {
 }
 
 MasturbationScenes.AnalFingerCockblock = function(parse, cum) {
+	let player = GAME().player;
 	if(player.FirstCock()) {
 		Text.Add("Unable to take the pounding at your prostate any longer, your [cocks] choose[notS] this moment to shoot off [itsTheir] load, string after string of hot, sticky seed arcing into the air and landing on the ground a good distance away. All the anticipation and stimulation seems to have done you good - your current load of semen looks much thicker and richer than normal, speaking well of your prostate-milking skills.", parse);
 		if(cum > 9)
@@ -608,6 +615,7 @@ MasturbationScenes.AnalFingerCockblock = function(parse, cum) {
 }
 
 MasturbationScenes.AnalFinger = function(parse) {
+	let player = GAME().player;
 	var cap = player.Butt().Cap();
 	var br = player.FirstBreastRow().Size();
 	
@@ -678,6 +686,7 @@ MasturbationScenes.AnalFinger = function(parse) {
 }
 
 MasturbationScenes.AnalToy = function(parse, toy) {
+	let player = GAME().player;
 	var cap = player.Butt().Cap();
 	var br = player.FirstBreastRow().Size();
 	
@@ -755,6 +764,7 @@ MasturbationScenes.AnalToy = function(parse, toy) {
 
 // Generic opening scene. Sets up all parser stuff and calls the scene proper
 MasturbationScenes.VagOpening = function(func, obj) {
+	let player = GAME().player;
 	var parse = {
 		toparmordesc : player.ArmorDesc(),
 		bottomarmordesc : player.LowerArmorDesc()
@@ -787,6 +797,7 @@ MasturbationScenes.VagOpening = function(func, obj) {
 }
 
 MasturbationScenes.VagFingerCockblock = function(parse, cum) {
+	let player = GAME().player;
 	if(player.FirstCock()) {
 		Text.Add("At the same time, your [cocks] choose[notS] this moment to shoot off [itsTheir] load, string after string of hot, sticky seed arcing into the air and landing on the ground a good distance away with a series of wet-sounding splats.", parse);
 		if(cum > 9)
@@ -798,6 +809,7 @@ MasturbationScenes.VagFingerCockblock = function(parse, cum) {
 }
 
 MasturbationScenes.VagFinger = function(parse) {
+	let player = GAME().player;
 	//Fisting is triggered with wide hips wide cunt. Else, default to fingering.
 	var cap = (player.body.torso.hipSize.Get() / 10) * (player.FirstVag().Cap() / 5);
 	var fisting = cap >= 1;
@@ -859,6 +871,7 @@ MasturbationScenes.VagFinger = function(parse) {
 }
 
 MasturbationScenes.VagToy = function(parse, toy) {
+	let player = GAME().player;
 	var preg = player.PregHandler().IsPregnant();
 	var bellySize = player.PregHandler().BellySize();
 	
@@ -901,6 +914,7 @@ MasturbationScenes.VagToy = function(parse, toy) {
 }
 
 MasturbationScenes.VagTailfuck = function(parse) {
+	let player = GAME().player;
 	var preg = player.PregHandler().IsPregnant();
 	var bellySize = player.PregHandler().BellySize();
 	
@@ -958,6 +972,7 @@ MasturbationScenes.VagTailfuck = function(parse) {
 }
 
 MasturbationScenes.Breasts = function() {
+	let player = GAME().player;
 	var parse = {
 		
 	};

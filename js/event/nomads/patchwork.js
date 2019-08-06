@@ -149,6 +149,7 @@ Patchwork.prototype.mfPronoun = function(male, female) {
 
 
 PatchworkScenes.Interact = function() {
+	let patchwork = GAME().patchwork;
 	var parse = {};
 	parse = patchwork.ParserPronouns(parse);
 	
@@ -240,11 +241,13 @@ PatchworkScenes.PW = function() {
 }
 
 PatchworkScenes.BuyFunc = function() {
+	let patchwork = GAME().patchwork;
 	patchwork.relation.IncreaseStat(10, 1);
 	return false;
 }
 
 PatchworkScenes.Prompt = function() {
+	let patchwork = GAME().patchwork;
 	var parse = {
 		notS : patchwork.mfPronoun("", "s")
 	};
@@ -303,6 +306,7 @@ PatchworkScenes.Prompt = function() {
 }
 
 PatchworkScenes.Desc = function() {
+	let patchwork = GAME().patchwork;
 	var parse = {
 		notS : patchwork.mfPronoun("", "s"),
 		dont : patchwork.mfPronoun("don’t", "doesn’t")

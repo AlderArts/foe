@@ -226,6 +226,7 @@ ZebraShamanScenes.LoneEnc = function(levelbonus) {
 }
 
 ZebraShamanScenes.OnLoss = function() {
+	let party = GAME().party;
 	var enc = this;
 	var zebra = enc.zebra;
 	SetGameState(GameState.Event, Gui);
@@ -260,6 +261,8 @@ ZebraShamanScenes.OnLoss = function() {
 }
 
 ZebraShamanScenes.Encounter = function() {
+	let player = GAME().player;
+	let party = GAME().party;
 	var enc = this;
 
 	var parse = {
@@ -299,6 +302,8 @@ ZebraShamanScenes.Encounter = function() {
 }
 
 ZebraShamanScenes.OnWin = function() {
+	let player = GAME().player;
+	let party = GAME().party;
 	var enc = this;
 	var zebra = enc.zebra;
 	SetGameState(GameState.Event, Gui);
@@ -357,6 +362,7 @@ ZebraShamanScenes.OnWin = function() {
 }
 
 ZebraShamanScenes.OnWinFuckHim = function(enc) {
+	let player = GAME().player;
 	var zebra = enc.zebra;
 
 	var lusty = zebra.LustLevel() > 0.5;
@@ -462,6 +468,7 @@ ZebraShamanScenes.OnWinFuckHim = function(enc) {
 }
 
 ZebraShamanScenes.OnWinVaginal = function(enc) {
+	let player = GAME().player;
 	var zebra = enc.zebra;
 
 	var lusty = zebra.LustLevel() > 0.5;

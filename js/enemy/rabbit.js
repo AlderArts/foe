@@ -398,6 +398,8 @@ LagomorphScenes.GroupEnc = function() {
 }
 
 LagomorphScenes.PlainsEncounter = function() {
+	let player = GAME().player;
+	let party = GAME().party;
 	var enc = this;
 	
 	var parse = {
@@ -520,6 +522,8 @@ LagomorphScenes.GroupLossOnPlains = function() {
 
 
 LagomorphScenes.GroupLossOnPlainsBrainy = function(enc) {
+	let player = GAME().player;
+	let party = GAME().party;
 	var p1cock = player.BiggestCock();
 
 	var brainy = enc.brainy;
@@ -659,6 +663,8 @@ LagomorphScenes.GroupLossOnPlainsBrainy = function(enc) {
 }
 
 LagomorphScenes.GroupLossOnPlainsToBurrows = function(enc) {
+	let player = GAME().player;
+	let party = GAME().party;
 	var alpha = enc.alpha;
 	var parse = {
 		p1name     : function() { return party.members[1].name; },
@@ -753,6 +759,8 @@ LagomorphScenes.GroupLossOnPlainsToBurrows = function(enc) {
 }
 
 LagomorphScenes.GroupWinOnPlainsPrompt = function() {
+	let player = GAME().player;
+	let party = GAME().party;
 	SetGameState(GameState.Event, Gui);
 	
 	var enc = this;
@@ -920,6 +928,8 @@ LagomorphScenes.GroupWinOnPlainsPrompt = function() {
 }
 
 LagomorphScenes.GroupWinOnPlainsFuckBrute = function(enc) {
+	let player = GAME().player;
+	let party = GAME().party;
 	var p1cock  = player.BiggestCock(null, true);
 	var strapon = p1cock ? p1cock.isStrapon : null;
 	
@@ -1137,6 +1147,7 @@ LagomorphScenes.GroupWinOnPlainsFuckBrute = function(enc) {
 }
 
 LagomorphScenes.GroupWinOnPlainsBruteIntro = function() {
+	let party = GAME().party;
 	var parse = {};
 	
 	if(party.Num() > 1) {
@@ -1168,6 +1179,8 @@ LagomorphScenes.GroupWinOnPlainsBruteCums = function() {
 }
 
 LagomorphScenes.GroupWinOnPlainsFuckM = function(enc, group) {
+	let player = GAME().player;
+	let party = GAME().party;
 	var male = new Lagomorph(Gender.male);
 	
 	var p1cock  = player.BiggestCock();
@@ -1709,6 +1722,8 @@ LagomorphScenes.GroupWinOnPlainsFuckM = function(enc, group) {
 }
 
 LagomorphScenes.GroupWinOnPlainsGetFuckedM = function(enc, group) {
+	let player = GAME().player;
+	let party = GAME().party;
 	var parse = {
 		playername : player.name
 		
@@ -1947,6 +1962,8 @@ LagomorphScenes.GroupWinOnPlainsGetFuckedM = function(enc, group) {
 
 
 LagomorphScenes.GroupWinInterrorigate = function(enc) {
+	let player = GAME().player;
+	let party = GAME().party;
 	var alpha = enc.alpha;
 	var parse = {
 		meUs       : party.Alone() ? "me" : "us",

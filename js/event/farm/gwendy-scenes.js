@@ -7,6 +7,7 @@ import { Gui } from '../../gui';
 let GwendyScenes = {};
 
 GwendyScenes.LoftPrompt = function() {
+	let gwendy = GAME().gwendy;
 	Text.Clear();
 	
 	var parse = {
@@ -127,6 +128,8 @@ GwendyScenes.FieldsPrompt = function() {
 }
 
 GwendyScenes.Talk = function(backfunc) {
+	let player = GAME().player;
+	let gwendy = GAME().gwendy;
 	var parse = {
 		playername : player.name
 	};
@@ -275,6 +278,8 @@ GwendyScenes.Talk = function(backfunc) {
 }
 
 GwendyScenes.Work = function() {
+	let party = GAME().party;
+	let gwendy = GAME().gwendy;
 	Text.Clear();
 	
 	gwendy.relation.IncreaseStat(40, 1);
@@ -318,6 +323,9 @@ GwendyScenes.Work = function() {
 }
 
 GwendyScenes.WorkFeedingDanie = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let gwendy = GAME().gwendy;
 	
 	var parse = {
 		playername : player.name
@@ -407,6 +415,9 @@ GwendyScenes.WorkFeedingDanie = function() {
 }
 
 GwendyScenes.WorkMilking = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let gwendy = GAME().gwendy;
 	var parse = {
 		playername : player.name
 	};
@@ -603,6 +614,7 @@ GwendyScenes.WorkMilking = function() {
 
 
 GwendyScenes.ChallengeSex = function(skillcheck, lose) {
+	let gwendy = GAME().gwendy;
 	var parse = {
 
 	};
@@ -646,6 +658,8 @@ GwendyScenes.ChallengeSex = function(skillcheck, lose) {
 }
 
 GwendyScenes.ChallengeSexWonPrompt = function(hangout, options, disableSleep) {
+	let player = GAME().player;
+	let gwendy = GAME().gwendy;
 	var parse = {
 		playername : player.name
 	};
@@ -816,6 +830,8 @@ GwendyScenes.ChallengeSexWonPrompt = function(hangout, options, disableSleep) {
 }
 
 GwendyScenes.ChallengeSexHands = function(cock, hangout) {
+	let player = GAME().player;
+	let gwendy = GAME().gwendy;
 	var parse = {
 		playername    : player.name
 	};
@@ -956,6 +972,8 @@ GwendyScenes.ChallengeSexHands = function(cock, hangout) {
 
 
 GwendyScenes.ChallengeSexBody = function(titjob, hangout, disableSleep) {
+	let player = GAME().player;
+	let gwendy = GAME().gwendy;
 
 	var parse = {
 		playername     : player.name
@@ -1163,6 +1181,8 @@ GwendyScenes.ChallengeSexBody = function(titjob, hangout, disableSleep) {
 }
 
 GwendyScenes.ChallengeSexOral = function(blow, hangout) {
+	let player = GAME().player;
+	let gwendy = GAME().gwendy;
 
 	var parse = {
 		playername     : player.name
@@ -1306,6 +1326,8 @@ GwendyScenes.ChallengeSexOral = function(blow, hangout) {
 }
 
 GwendyScenes.ChallengeSexVag = function(fuck, hangout) {
+	let player = GAME().player;
+	let gwendy = GAME().gwendy;
 
 	var parse = {
 		playername     : player.name,
@@ -1462,6 +1484,8 @@ GwendyScenes.ChallengeSexVag = function(fuck, hangout) {
 }
 
 GwendyScenes.ChallengeSexAnal = function(toys, hangout) {
+	let player = GAME().player;
+	let gwendy = GAME().gwendy;
 
 	var parse = {
 		playername     : player.name,
@@ -1666,6 +1690,9 @@ GwendyScenes.ChallengeSexAnal = function(toys, hangout) {
 }
 
 GwendyScenes.ChallengeSexAnalToys = function(toy, hangout, first) {
+	let player = GAME().player;
+	let gwendy = GAME().gwendy;
+
 	var parse = {
 		playername     : player.name,
 		manWoman       : function() { return player.mfTrue("man", "woman"); }
@@ -1944,6 +1971,9 @@ GwendyScenes.ChallengeSexAnalToys = function(toy, hangout, first) {
 }
 
 GwendyScenes.ChallengeSexLostPrompt = function(hangout, options, disableSleep) {
+	let player = GAME().player;
+	let gwendy = GAME().gwendy;
+
 	Text.Clear();
 
 	var parse = {

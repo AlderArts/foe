@@ -119,6 +119,8 @@ JeanneScenes.Interact = function() {
 }
 
 JeanneScenes.InteractPrompt = function() {
+	let player = GAME().player;
+	let party = GAME().party;
 	var parse = {};
 	//[Talk][Golem][Sex]
 	var options = new Array();
@@ -166,6 +168,8 @@ JeanneScenes.InteractPrompt = function() {
 }
 
 JeanneScenes.AlchemyCallback = function(item) {
+	let player = GAME().player;
+	let party = GAME().party;
 	var parse = {};
 	
 	Text.Clear();
@@ -199,6 +203,8 @@ JeanneScenes.AlchemyBack = function() {
 }
 
 JeanneScenes.Talk = function() {
+	let player = GAME().player;
+	let party = GAME().party;
 	var parse = {
 		playername : player.name
 	};
@@ -484,6 +490,8 @@ JeanneScenes.Talk = function() {
 }
 
 JeanneScenes.First = function() {
+	let player = GAME().player;
+	let party = GAME().party;
 	var parse = {
 		playername : player.name,
 		name       : function() { return kiakai.name; },
@@ -516,6 +524,7 @@ JeanneScenes.First = function() {
 }
 
 JeanneScenes.FirstPrompt = function() {
+	let golem = GAME().golem;
 	var parse = {};
 	//[Golem][Jeanne][Gem]
 	var options = new Array();
@@ -600,6 +609,7 @@ JeanneScenes.FirstPrompt = function() {
 }
 
 JeanneScenes.FirstCont = function() {
+	let player = GAME().player;
 	var parse = {
 		playername : player.name
 	};

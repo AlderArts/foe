@@ -47,6 +47,8 @@ Gryphons.prototype.ToStorage = function() {
 
 
 GryphonsScenes.IntroEntryPoint = function() {
+	let player = GAME().player;
+	let gryphons = GAME().gryphons;
 	var parse = {
 		armor : player.ArmorDesc(),
 		skin : player.SkinDesc()
@@ -157,6 +159,7 @@ Not that it changes too much about you, since you were already one, but the fine
 }
 
 GryphonsScenes.SceneSelect = function(choice) {
+	let gryphons = GAME().gryphons;
 	
 	Gui.Callstack.push(function() {
 		if(gryphons.flags["State"] < choice)
@@ -175,6 +178,8 @@ GryphonsScenes.SceneSelect = function(choice) {
 }
 
 GryphonsScenes.Outro = function(gender, preg) {
+	let player = GAME().player;
+	let gryphons = GAME().gryphons;
 	var parse = {
 		
 	};
@@ -1805,6 +1810,7 @@ GryphonsScenes.Building = function() {
 }
 
 GryphonsScenes.NewLife = function() {
+	let player = GAME().player;
 	var parse = {
 		
 	};

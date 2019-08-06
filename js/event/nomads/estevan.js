@@ -83,6 +83,7 @@ Estevan.prototype.ToStorage = function() {
 }
 
 EstevanScenes.Impregnate = function(mother, slot) {
+	let estevan = GAME().estevan;
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother : mother,
@@ -96,6 +97,7 @@ EstevanScenes.Impregnate = function(mother, slot) {
 
 // Schedule
 Estevan.prototype.IsAtLocation = function(location) {
+	let party = GAME().party;
 	location = location || party.location;
 	if(location == world.loc.Plains.Nomads.Fireplace)
 		return (WorldTime().hour >= 15 || WorldTime().hour < 3);
@@ -107,6 +109,9 @@ Estevan.prototype.HadGaySex = function() {
 }
 
 EstevanScenes.Interact = function() {
+	let player = GAME().player;
+	let cale = GAME().cale;
+	let estevan = GAME().estevan;
 	var parse = {
 		playername : player.name
 	};
@@ -172,6 +177,8 @@ EstevanScenes.Interact = function() {
 }
 
 EstevanScenes.Prompt = function() {
+	let player = GAME().player;
+	let estevan = GAME().estevan;
 	var parse = {
 		playername : player.name
 	};
@@ -317,6 +324,7 @@ EstevanScenes.Prompt = function() {
 }
 
 EstevanScenes.Desc = function() {
+	let estevan = GAME().estevan;
 	if(estevan.flags["Met"] == 0)
 		Text.Add("You see a strange creature by the fire, a man half human, half goat. He seems to be working on a contraption of some sort, probably a hunting trap. ");
 	else
@@ -325,6 +333,8 @@ EstevanScenes.Desc = function() {
 }
 
 EstevanScenes.SexGay = function() {
+	let player = GAME().player;
+	let estevan = GAME().estevan;
 	var p1cock = player.BiggestCock();
 	
 	var parse = {

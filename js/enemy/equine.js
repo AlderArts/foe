@@ -205,6 +205,8 @@ EquineScenes.PairEnc = function(levelbonus) {
 }
 
 EquineScenes.LossPrompt = function() {
+	let player = GAME().player;
+	let party = GAME().party;
 	SetGameState(GameState.Event, Gui);
 	
 	// this = encounter
@@ -341,6 +343,8 @@ EquineScenes.LossPrompt = function() {
 }
 
 EquineScenes.FuckFemale = function(enc) {
+	let player = GAME().player;
+	let party = GAME().party;
 	var parse = {		
 		mobVag : function() { return enc.mare.FirstVag().Short(); }
 	};
@@ -448,6 +452,7 @@ EquineScenes.FuckFemale = function(enc) {
 }
 
 EquineScenes.GetFucked = function(enc) {
+	let player = GAME().player;
 	var parse = {		
 		ifArmor    : player.Armor() ? "strips you down to full nudity" : "runs them down your naked body"
 	};
@@ -510,6 +515,7 @@ EquineScenes.GetFucked = function(enc) {
 
 // SCENE FOR MALES/HERMS
 EquineScenes.Threesome1 = function(enc) {
+	let player = GAME().player;
 	var parse = {		
 		mobVag : function() { return enc.mare.FirstVag().Short(); },		
 		ifBalls  : function() { return player.HasBalls() ? "r balls" : ""; }
@@ -584,6 +590,7 @@ EquineScenes.Threesome1 = function(enc) {
 }
 
 EquineScenes.Threesome2 = function(enc) {
+	let player = GAME().player;
 	var parse = {		
 		mobVag : function() { return enc.mare.FirstVag().Short(); }
 	};
@@ -633,6 +640,8 @@ EquineScenes.Threesome2 = function(enc) {
 
 //TODO
 EquineScenes.WinPrompt = function() {
+	let player = GAME().player;
+	let party = GAME().party;
 	var enc  = this;
 	SetGameState(GameState.Event, Gui);
 
@@ -698,6 +707,8 @@ EquineScenes.WinPrompt = function() {
 
 //TODO
 EquineScenes.WinFuckHim = function(enc) {
+	let player = GAME().player;
+	let party = GAME().party;
 	var mare     = enc.mare;
 	var stallion = enc.stallion;
 
@@ -1132,6 +1143,8 @@ EquineScenes.WinFuckHim = function(enc) {
 }
 
 EquineScenes.WinFuckHer = function(enc) {
+	let player = GAME().player;
+	let party = GAME().party;
 	var mare     = enc.mare;
 	var stallion = enc.stallion;
 
@@ -1272,6 +1285,7 @@ EquineScenes.WinFuckHer = function(enc) {
 }
 
 EquineScenes.WinRideHimVag = function(enc) {
+	let player = GAME().player;
 	var mare     = enc.mare;
 	var stallion = enc.stallion;
 

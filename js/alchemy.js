@@ -4,6 +4,7 @@ import { Images } from "./assets";
 import { Inventory } from "./inventory";
 import { Text } from "./text";
 import { Gui } from "./gui";
+import { GAME } from "./GAME";
 
 /*
  * 
@@ -24,7 +25,7 @@ Alchemy.AlchemyPrompt = function(alchemist, inventory, backPrompt, callback, pre
 	list = [];
 
 	var Brew = function(brewable) {
-		if (alchemist == player) {
+		if (alchemist == GAME().player) {
 			Alchemy.ItemDetails(brewable, inventory);
 		} else {
 			brewable.brewFn(1, backPrompt, callback);
@@ -50,9 +51,9 @@ Alchemy.AlchemyPrompt = function(alchemist, inventory, backPrompt, callback, pre
 			if(!enough) str += "</b>";
 		});
 
-		if(alchemist == player) {
+		if(alchemist == GAME().player) {
 			knownRecipe = true;
-		} else if (_.includes(player.recipes, item)) {
+		} else if (_.includes(GAME().player.recipes, item)) {
 			knownRecipe = true;
 		}
 

@@ -11,7 +11,7 @@ import { TF } from '../../tf';
 import { AppendageType } from '../../body/appendage';
 import { Color } from '../../body/color';
 import { Time } from '../../time';
-import { WorldTime } from '../../GAME';
+import { WorldTime, GAME } from '../../GAME';
 import { Images } from '../../assets';
 import { AlchemySpecial } from '../../items/alchemyspecial';
 import { AlchemyItems } from '../../items/alchemy';
@@ -103,7 +103,7 @@ Ophelia.prototype.CountdownExpired = function() {
 }
 
 Ophelia.prototype.IsAtLocation = function(location) {
-	location = location || party.location;
+	location = location || GAME().party.location;
 	if(location == world.loc.Burrows.Lab) {
 		if(this.Recruited()) return false;
 		if(this.Broken())    return false;
@@ -189,6 +189,8 @@ OpheliaBrute.prototype.Act = function(encounter, activeChar) {
 }
 
 OpheliaScenes.LabDesc = function() {
+	let ophelia = GAME().ophelia;
+	let burrows = GAME().burrows;
 	var parse = {
 		old  : ophelia.flags["Met"] != 0 ? " old" : "",
 		camp : Scenes.Global.PortalsOpen() ? "the gemstead" : "camp"
@@ -233,6 +235,7 @@ OpheliaScenes.LabDesc = function() {
 }
 
 OpheliaScenes.LabApproach = function() {
+	let player = GAME().player;
 	var parse = {
 		playername : player.name
 	};
@@ -245,6 +248,7 @@ OpheliaScenes.LabApproach = function() {
 }
 
 OpheliaScenes.TraitPrompt = function(options) {
+	let burrows = GAME().burrows;
 	var parse = {
 		
 	};
@@ -347,6 +351,9 @@ OpheliaScenes.TraitPrompt = function(options) {
 
 //TODO
 OpheliaScenes.TalkPrompt = function() {
+	let player = GAME().player;
+	let ophelia = GAME().ophelia;
+	let burrows = GAME().burrows;
 	var parse = {
 		playername : player.name
 	};
@@ -676,6 +683,10 @@ OpheliaScenes.TalkPrompt = function() {
 }
 
 OpheliaScenes.TalkRoa = function() {
+	let player = GAME().player;
+	let roa = GAME().roa;
+	let ophelia = GAME().ophelia;
+	let burrows = GAME().burrows;
 	var parse = {
 		playername : player.name
 	};
@@ -960,6 +971,9 @@ OpheliaScenes.TalkRoa = function() {
 }
 
 OpheliaScenes.TalkVena = function() {
+	let player = GAME().player;
+	let ophelia = GAME().ophelia;
+	let burrows = GAME().burrows;
 	var parse = {
 		playername : player.name
 	};
@@ -1046,6 +1060,8 @@ OpheliaScenes.TalkVena = function() {
 
 //TODO
 OpheliaScenes.SexEntryPoint = function() {
+	let player = GAME().player;
+	let ophelia = GAME().ophelia;
 	var parse = {
 		
 	};
@@ -1082,6 +1098,9 @@ OpheliaScenes.SexEntryPoint = function() {
 }
 
 OpheliaScenes.SexVaginal = function() {
+	let player = GAME().player;
+	let ophelia = GAME().ophelia;
+	let burrows = GAME().burrows;
 	var p1cock = player.BiggestCock();
 	var knotted = p1cock ? p1cock.knot != 0 : false;
 	
@@ -1376,6 +1395,9 @@ OpheliaScenes.SexVaginal = function() {
 }
 
 OpheliaScenes.LabPrompt = function() {
+	let player = GAME().player;
+	let ophelia = GAME().ophelia;
+	let burrows = GAME().burrows;
 	var parse = {
 		
 	};
@@ -1480,6 +1502,8 @@ OpheliaScenes.TurnInScepter = function() {
 }
 
 OpheliaScenes.PotionsPrompt = function() {
+	let player = GAME().player;
+	let burrows = GAME().burrows;
 	var parse = {
 		playername : player.name
 	};
@@ -1590,6 +1614,8 @@ OpheliaScenes.PotionsPrompt = function() {
 }
 
 OpheliaScenes.DeliverCactoids = function() {
+	let player = GAME().player;
+	let burrows = GAME().burrows;
 	var parse = {
 		playername : player.name
 	};
@@ -1648,6 +1674,8 @@ OpheliaScenes.DeliverCactoids = function() {
 }
 
 OpheliaScenes.DeliverGolHusks = function() {
+	let player = GAME().player;
+	let burrows = GAME().burrows;
 	var parse = {
 		playername : player.name
 	};
@@ -1696,6 +1724,8 @@ OpheliaScenes.DeliverGolHusks = function() {
 }
 
 OpheliaScenes.DeliverAlgae = function() {
+	let player = GAME().player;
+	let burrows = GAME().burrows;
 	var parse = {
 		playername : player.name
 	};
@@ -1732,6 +1762,10 @@ OpheliaScenes.DeliverAlgae = function() {
 }
 
 OpheliaScenes.DeliverFollowup = function(trait) {
+	let player = GAME().player;
+	let lagon = GAME().lagon;
+	let ophelia = GAME().ophelia;
+	let burrows = GAME().burrows;
 	var parse = {
 		playername : player.name,
 		himher : player.mfFem("him", "her")
@@ -1893,6 +1927,8 @@ OpheliaScenes.DeliverFollowup = function(trait) {
 }
 
 OpheliaScenes.DeliverVena = function(trait) {
+	let player = GAME().player;
+	let burrows = GAME().burrows;
 	var parse = {
 		playername : player.name
 	};
@@ -1944,6 +1980,11 @@ OpheliaScenes.DeliverVena = function(trait) {
 }
 
 OpheliaScenes.Reward = function() {
+	let player = GAME().player;
+	let vena = GAME().vena;
+	let ophelia = GAME().ophelia;
+	let burrows = GAME().burrows;
+
 	var parse = {
 		playername : player.name,
 		softToned : burrows.BruteActive() ? "toned" : "soft"
@@ -2291,6 +2332,8 @@ OpheliaScenes.Reward = function() {
 }
 
 OpheliaScenes.ScepterRequest = function(fight) {
+	let player = GAME().player;
+	
 	var parse = {
 		playername : player.name,
 		again : fight ? " again" : "",
@@ -2359,6 +2402,7 @@ OpheliaScenes.WatchVenaEntry = function() {
 }
 
 OpheliaScenes.RewardAftermathStage2Prompt = function() {
+	let ophelia = GAME().ophelia;
 	var parse = {
 		
 	};
@@ -2409,6 +2453,9 @@ OpheliaScenes.RewardAftermathStage2Prompt = function() {
 }
 
 OpheliaScenes.RewardChoices = function() {
+	let player = GAME().player;
+	let lagon = GAME().lagon;
+	
 	var parse = {
 	};
 	parse = player.ParserTags(parse);

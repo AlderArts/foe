@@ -17,6 +17,9 @@ NCavalcadeScenes.Bet = function() {
 }
 
 NCavalcadeScenes.Enabled = function() {
+	let rosalin = GAME().rosalin;
+	let cale = GAME().cale;
+	let estevan = GAME().estevan;
 	return cale.IsAtLocation() &&
 	       estevan.flags["Met"] != 0 &&
 	       estevan.IsAtLocation() &&
@@ -25,8 +28,9 @@ NCavalcadeScenes.Enabled = function() {
 
 // TODO TEMP CAVALCADE
 NomadsLoc.Fireplace.events.push(new Link(
-	"Cavalcade", function() { return NCavalcadeScenes.Enabled(); }, function() { return party.coin >= NCavalcadeScenes.Bet(); },
+	"Cavalcade", function() { return NCavalcadeScenes.Enabled(); }, function() { return GAME().party.coin >= NCavalcadeScenes.Bet(); },
 	function() {
+		let estevan = GAME().estevan;
 		if(NCavalcadeScenes.Enabled()) {
 			Text.Add("Both Rosalin, Cale and Estevan seem to be around. Perhaps they are up for a game of Cavalcade?");
 			if(estevan.flags["Cheat"] == Estevan.Cheat.Setup)
@@ -36,6 +40,7 @@ NomadsLoc.Fireplace.events.push(new Link(
 		}
 	},
 	function() {
+		let estevan = GAME().estevan;
 		/* Old explanation
 		Text.Add("PLACEHOLDER TEXT");
 		Text.NL();
@@ -74,6 +79,10 @@ NomadsLoc.Fireplace.events.push(new Link(
 ));
 
 NCavalcadeScenes.RegularGame = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let rosalin = GAME().rosalin;
+	let estevan = GAME().estevan;
 	var parse = {
 		playername : player.name,
 		hisher     : rosalin.hisher()
@@ -147,6 +156,11 @@ NCavalcadeScenes.RegularGame = function() {
 }
 
 NCavalcadeScenes.PrepCoinGame = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let rosalin = GAME().rosalin;
+	let cale = GAME().cale;
+	let estevan = GAME().estevan;
 	var onEnd = function() {
 		var parse = {
 			playername : player.name
@@ -211,6 +225,10 @@ NCavalcadeScenes.PlayersLeft = function(players) {
 }
 
 NCavalcadeScenes.PrepSexyGame = function() {
+	let player = GAME().player;
+	let rosalin = GAME().rosalin;
+	let cale = GAME().cale;
+	let estevan = GAME().estevan;
 	var token = 50;
 
 	var parse = {
@@ -363,6 +381,11 @@ NCavalcadeScenes.PrepSexyGame = function() {
 }
 
 NCavalcadeScenes.CheatGame = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let rosalin = GAME().rosalin;
+	let cale = GAME().cale;
+	let estevan = GAME().estevan;
 	var cocksInAss = player.CocksThatFit(cale.Butt());
 	var p1cock = player.BiggestCock(cocksInAss);
 
@@ -519,6 +542,8 @@ NCavalcadeScenes.CheatGame = function() {
 
 
 NCavalcadeScenes.SexyPlayerWin = function(cheat) {
+	let player = GAME().player;
+	let cale = GAME().cale;
 	var parse = {
 		playername : player.name
 	};
