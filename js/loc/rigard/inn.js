@@ -2,7 +2,7 @@
 import { Event, Link } from '../../event';
 import { TwinsScenes } from '../../event/royals/twins';
 import { TasksScenes } from '../../event/outlaws/vaughn-tasks';
-import { WorldTime, MoveToLocation } from '../../GAME';
+import { WorldTime, MoveToLocation, GAME } from '../../GAME';
 import { SetGameState, GameState } from '../../gamestate';
 import { Gui } from '../../gui';
 import { Text } from '../../text';
@@ -19,7 +19,10 @@ let InnLoc = {
 	common    : new Event("Lady's Blessing"),
 	backroom  : new Event("Back room"),
 	cellar    : new Event("Cellar"),
-	room      : new Event(function() { return "Room " + rigard.LB["RoomNr"]; }),
+	room      : new Event(function() {
+		let rigard = GAME().rigard;
+		return "Room " + rigard.LB["RoomNr"];
+	}),
 	room69    : new Event("Room 369"),
 	penthouse : new Event("Penthouse")
 };
@@ -46,6 +49,7 @@ RigardLB.Busy = function() {
 }
 
 RigardLB.KnowsOrvin = function() {
+	let rigard = GAME().rigard;
 	return rigard.LB["Orvin"] != 0;
 }
 
@@ -55,6 +59,7 @@ RigardLB.OrvinIsInnkeeper = function() {
 }
 
 RigardLB.HasRentedRoom = function() {
+	let rigard = GAME().rigard;
 	return !rigard.LBroomTimer.Expired();
 }
 
@@ -76,7 +81,10 @@ InnLoc.common.links.push(new Link(
 ));
 
 InnLoc.common.links.push(new Link(
-	"Penthouse", function() { return twins.flags["Met"] >= Twins.Met.Access; }, true,
+	"Penthouse", function() {
+		let twins = GAME().twins;
+		return twins.flags["Met"] >= Twins.Met.Access;
+	}, true,
 	null,
 	function() {
 		MoveToLocation(InnLoc.penthouse, {minute: 5});
@@ -131,6 +139,8 @@ InnLoc.common.links.push(new Link(
 */
 
 InnLoc.common.endDescription = function() {
+	let rigard = GAME().rigard;
+
 	if(rigard.Krawitz["Q"] < Rigard.KrawitzQ.HeistDone) {
 		Text.Add("You see the daintily attractive vixen-morph hard at work cleaning up the various dishes and tankards left behind by previous customers. She scurries ceaselessly back and forth, gathering dirty kitchenware and conveying it to the kitchens, only to return for a fresh load.");
 		if(player.Int() > 30) {
@@ -159,6 +169,10 @@ InnLoc.common.DrunkHandler = function() {
 }
 
 InnLoc.common.onEntry = function(preventClear, oldLocation) {
+	let rigard = GAME().rigard;
+	let player = GAME().player;
+	let party = GAME().party;
+
 	if(TasksScenes.Poisoning.InnAvailable()) {
 		TasksScenes.Poisoning.ArrivalAtInn(false, oldLocation);
 		return;
@@ -245,6 +259,10 @@ InnLoc.common.onEntry = function(preventClear, oldLocation) {
 
 // SCENES
 LBScenes.OrderFood = function() {
+	let rigard = GAME().rigard;
+	let player = GAME().player;
+	let party = GAME().party;
+
 	var parse = {
 		sirmadam : player.mfFem("sir", "madam"),
 		dname : rigard.LB["Efri"] == 0 ? "the girl" : "Efri"
@@ -353,6 +371,8 @@ LBScenes.OrderFood = function() {
 }
 
 LBScenes.FoodGet = function() {
+	let party = GAME().party;
+
 	var parse = {};
 	if(party.Two()) {
 		var p1 = party.Get(1);
@@ -435,6 +455,10 @@ LBScenes.FoodGet = function() {
 }
 
 LBScenes.OrvinPrompt = function() {
+	let rigard = GAME().rigard;
+	let player = GAME().player;
+	let party = GAME().party;
+
 	var parse = {
 		sirmadam : player.mfFem("sir", "madam"),
 		roomPrice : Text.NumToText(RigardLB.RoomCost()),
@@ -610,6 +634,9 @@ LBScenes.OrvinPrompt = function() {
 }
 
 LBScenes.OrvinTalkPrompt = function(innPrompt) {
+	let rigard = GAME().rigard;
+	let party = GAME().party;
+
 	var parse = {
 		
 	};
@@ -1032,6 +1059,10 @@ LBScenes.EfriPrompt = function() {
 }
 
 LBScenes.DrinksPrompt = function(innPrompt) {
+	let rigard = GAME().rigard;
+	let player = GAME().player;
+	let party = GAME().party;
+
 	var parse = {
 		playername : player.name,
 		IkName   : !RigardLB.KnowsOrvin() ? "The innkeeper" : "Orvin",
@@ -1509,6 +1540,10 @@ LBScenes.DrinksPrompt = function(innPrompt) {
 }
 
 LBScenes.GotoRoom = function() {
+	let rigard = GAME().rigard;
+	let player = GAME().player;
+	let party = GAME().party;
+
 	var parse = {
 		playername : player.name
 	};
@@ -1683,6 +1718,9 @@ LBScenes.GotoRoom = function() {
 
 
 LBScenes.RandomRoom = function(companion) {
+	let rigard = GAME().rigard;
+	let room69 = GAME().room69;
+	
 	var parse = {
 		roomNr : rigard.LB["RoomNr"]
 	};
@@ -1716,6 +1754,8 @@ LBScenes.RandomRoom = function(companion) {
 }
 
 LBScenes.RegularRoom = function(companion) {
+	let rigard = GAME().rigard;
+	let party = GAME().party;
 	var room = InnLoc.room;
 	rigard.LB["RoomComp"] = party.GetSlot(companion);
 	MoveToLocation(room, {minute : 5});
@@ -1730,10 +1770,14 @@ InnLoc.room.description = function() {
 }
 InnLoc.room.events.push(new Link(
 	function() {
+		let rigard = GAME().rigard;
+		let party = GAME().party;
 		var companion = party.Get(rigard.LB["RoomComp"]);
 		if(companion) return companion.name;
 	}, function() { return rigard.LB["RoomComp"] >= 1; }, true,
 	function() {
+		let rigard = GAME().rigard;
+		let party = GAME().party;
 		var companion = party.Get(rigard.LB["RoomComp"]);
 		if(companion) {
 			var parse = {
@@ -1744,12 +1788,17 @@ InnLoc.room.events.push(new Link(
 		}
 	},
 	function() {
+		let rigard = GAME().rigard;
+		let party = GAME().party;
 		var companion = party.Get(rigard.LB["RoomComp"]);
 		if(companion)
 			companion.InnPrompt();
 	}
 ));
 InnLoc.room.SleepFunc = function() {
+	let rigard = GAME().rigard;
+	let player = GAME().player;
+	let party = GAME().party;
 	var comp = party.Get(rigard.LB["RoomComp"]);
 	var parse = {
 		
@@ -1819,7 +1868,10 @@ InnLoc.room.links.push(new Link(
 // SET UP EVENTS/LINKS
 InnLoc.common.events.push(new Link(
 	"Order food",
-	true, function() { return party.coin >= RigardLB.MealCost(); },
+	true, function() {
+		let party = GAME().party;
+		return party.coin >= RigardLB.MealCost();
+	},
 	function() {
 		var parse = {
 			mealcost : RigardLB.MealCost()
@@ -1839,6 +1891,7 @@ InnLoc.common.events.push(new Link(
 
 InnLoc.common.events.push(new Link(
 	function() {
+		let rigard = GAME().rigard;
 		if(RigardLB.OrvinIsInnkeeper())
 			return !RigardLB.KnowsOrvin() ? "Innkeeper" : "Orvin";
 		else
@@ -1846,6 +1899,7 @@ InnLoc.common.events.push(new Link(
 	},
 	true, true,
 	function() {
+		let rigard = GAME().rigard;
 		var parse = {};
 		var busy = RigardLB.Busy();
 		
@@ -1895,9 +1949,13 @@ InnLoc.common.events.push(new Link(
 
 InnLoc.common.events.push(new Link(
 	function() {
+		let lei = GAME().lei;
 		return lei.flags["Met"] >= Lei.Met.KnowName ? "Lei" : "Stranger";
 	},
-	function() { return lei.IsAtLocation(InnLoc.common); }, function() { return rigard.flags["RoyalAccessTalk"] > 0; },
+	function() { return lei.IsAtLocation(InnLoc.common); }, function() {
+		let rigard = GAME().rigard;
+		return rigard.flags["RoyalAccessTalk"] > 0;
+	},
 	function() { Scenes.Lei.Desc(); },
 	function() { Scenes.Lei.Interact(); }
 ));
@@ -1915,8 +1973,12 @@ InnLoc.common.events.push(new Link(
 ));
 
 InnLoc.common.events.push(new Link(
-	"Room 369", function() { return room69.flags["Rel"] != Room69.RelFlags.NotMet; }, true,
+	"Room 369", function() {
+		let room69 = GAME().room69;
+		return room69.flags["Rel"] != Room69.RelFlags.NotMet;
+	}, true,
 	function() {
+		let room69 = GAME().room69;
 		if(room69.flags["Rel"] != Room69.RelFlags.NotMet) {
 			Text.Add("You could head up to the sentient room Sixtynine.");
 			Text.NL();
@@ -1924,6 +1986,7 @@ InnLoc.common.events.push(new Link(
 		}
 	},
 	function() {
+		let room69 = GAME().room69;
 		if(room69.flags["Rel"] == Room69.RelFlags.BadTerms)
 			Scenes.Room69.ApologizeTo69ForBeingMean();
 		else if(room69.flags["Rel"] == Room69.RelFlags.BrokeDoor)

@@ -1,7 +1,7 @@
 
 import { Event, Link } from '../../event';
 import { Gender } from '../../body/gender';
-import { WorldTime, MoveToLocation } from '../../GAME';
+import { WorldTime, MoveToLocation, GAME } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
 
@@ -13,10 +13,13 @@ let ClothShopLoc = new Event("Silken Delights");
 
 let ClothShopScenes = {};
 ClothShopScenes.IsOpen = function() {
+	let rigard = GAME().rigard;
 	return (WorldTime().hour >= 9 && WorldTime().hour < 20) && !rigard.UnderLockdown();
 }
 
 ClothShopLoc.onEntry = function() {
+	let party = GAME().party;
+	let rigard = GAME().rigard;
 	var parse = {};
 
 	if(party.Two())
@@ -103,6 +106,9 @@ ClothShopLoc.events.push(new Link(
 		Text.NL();
 	},
 	function() {
+		let player = GAME().player;
+		let rigard = GAME().rigard;
+
 		var nexellePrompt = function() {
 			if(!ClothShopScenes.IsOpen()) {
 				Text.Add("The shop is closing, and you are asked to leave.");
@@ -227,7 +233,10 @@ ClothShopLoc.events.push(new Link(
 ));
 
 ClothShopLoc.events.push(new Link(
-	"Fera", true, function() { return fera.timeout.Expired(); },
+	"Fera", true, function() {
+		let fera = GAME().fera;
+		return fera.timeout.Expired();
+	},
 	function() {
 		var parse = {};
 		// FERA
@@ -259,6 +268,7 @@ ClothShopLoc.events.push(new Link(
 ));
 
 ClothShopLoc.endDescription = function() {
+	let party = GAME().party;
 	var parse = {};
 
 	if(WorldTime().hour >= 9 && WorldTime().hour < 12)

@@ -3,12 +3,15 @@ import { Gui } from "../gui";
 import { Text } from "../text";
 import { MoveToLocation, GAME, TimeStep } from "../GAME";
 import { EncounterTable } from "../event";
+import { Sex } from "../entity-sex";
 
 let SexScenes = {};
 let SparSexScenes = {};
 
 SexScenes.Indoors = function() {
 	let player = GAME().player;
+	let cassidy = GAME().cassidy;
+
 	var parse = {
 		armor : function() { return player.ArmorDesc(); }
 	};
@@ -64,6 +67,8 @@ SexScenes.Indoors = function() {
 
 SexScenes.IndoorPrompt = function(opts) {
 	let player = GAME().player;
+	let cassidy = GAME().cassidy;
+
 	var parse = {
 		
 	};
@@ -112,6 +117,7 @@ SexScenes.IndoorPrompt = function(opts) {
 
 SexScenes.Savor = function(opts) {
 	let player = GAME().player;
+	let cassidy = GAME().cassidy;
 	opts.savor = true;
 	
 	var parse = {
@@ -170,6 +176,7 @@ SexScenes.Savor = function(opts) {
 
 SexScenes.Tail = function() {
 	let player = GAME().player;
+
 	var parse = {
 		
 	};
@@ -251,6 +258,7 @@ SexScenes.Tail = function() {
 
 SexScenes.Tailfuck = function() {
 	let player = GAME().player;
+	let cassidy = GAME().cassidy;
 	var parse = {
 		
 	};
@@ -291,6 +299,7 @@ SexScenes.Tailfuck = function() {
 
 SexScenes.Tailpeg = function() {
 	let player = GAME().player;
+	let cassidy = GAME().cassidy;
 	var parse = {
 		
 	};
@@ -359,6 +368,8 @@ SexScenes.Tailpeg = function() {
 
 SexScenes.FuckHer = function(cocksInVag) {
 	let player = GAME().player;
+	let cassidy = GAME().cassidy;
+
 	var p1cock = player.BiggestCock(cocksInVag);
 	var realcock = !p1cock.isStrapon;
 	
@@ -456,6 +467,8 @@ SexScenes.FuckHer = function(cocksInVag) {
 
 SexScenes.Pet = function() {
 	let player = GAME().player;
+	let cassidy = GAME().cassidy;
+
 	var parse = {
 		
 	};
@@ -730,6 +743,8 @@ SexScenes.Pet = function() {
 
 SexScenes.Anal = function(cocksInAss) {
 	let player = GAME().player;
+	let cassidy = GAME().cassidy;
+
 	var p1cock = player.BiggestCock(cocksInAss);
 	var realcock = !p1cock.isStrapon;
 	
@@ -851,6 +866,8 @@ SexScenes.Anal = function(cocksInAss) {
 }
 
 SexScenes.Outro = function() {
+	let cassidy = GAME().cassidy;
+
 	var parse = {
 		
 	};
@@ -879,6 +896,7 @@ SPARRING SEX
 SparSexScenes.Win = function() {
 	let player = GAME().player;
 	let party = GAME().party;
+	let cassidy = GAME().cassidy;
 
 	var enc  = this;
 	enc.Cleanup();
@@ -1020,6 +1038,7 @@ SparSexScenes.Win = function() {
 
 SparSexScenes.WinPrompt = function() {
 	let player = GAME().player;
+
 	var parse = {
 		
 	};
@@ -1055,6 +1074,8 @@ SparSexScenes.WinPrompt = function() {
 
 SparSexScenes.AllFours = function() {
 	let player = GAME().player;
+	let cassidy = GAME().cassidy;
+
 	var p1cock = player.BiggestCock();
 	
 	var parse = {
@@ -1281,6 +1302,8 @@ SparSexScenes.AllFours = function() {
 
 SparSexScenes.GetBlown = function() {
 	let player = GAME().player;
+	let cassidy = GAME().cassidy;
+
 	var p1cock = player.BiggestCock();
 	
 	var parse = {
@@ -1358,6 +1381,8 @@ SparSexScenes.GetBlown = function() {
 
 SparSexScenes.GetLicked = function() {
 	let player = GAME().player;
+	let cassidy = GAME().cassidy;
+
 	var parse = {
 		
 	};
@@ -1435,6 +1460,8 @@ SparSexScenes.GetLicked = function() {
 
 SparSexScenes.Spank = function() {
 	let player = GAME().player;
+	let cassidy = GAME().cassidy;
+
 	var parse = {
 		
 	};
@@ -1495,6 +1522,8 @@ SparSexScenes.Spank = function() {
 }
 
 SparSexScenes.Outro = function() {
+	let cassidy = GAME().cassidy;
+
 	var parse = {
 		
 	};
@@ -1522,6 +1551,7 @@ SparSexScenes.Outro = function() {
 SparSexScenes.Loss = function() {
 	let player = GAME().player;
 	let party = GAME().party;
+	let cassidy = GAME().cassidy;
 
 	var enc  = this;
 	enc.Cleanup();
@@ -1630,6 +1660,7 @@ SparSexScenes.Loss = function() {
 
 SparSexScenes.DomRide = function() {
 	let player = GAME().player;
+	let cassidy = GAME().cassidy;
 
 	var p1cock = player.BiggestCock();
 	
@@ -1820,6 +1851,7 @@ SparSexScenes.SuckOnBreasts = function() {
 
 SparSexScenes.Tribbing = function() {
 	let player = GAME().player;
+	let cassidy = GAME().cassidy;
 
 	var parse = {
 		
@@ -1932,6 +1964,8 @@ SparSexScenes.Tribbing = function() {
 }
 
 SparSexScenes.LossOutro = function() {
+	let cassidy = GAME().cassidy;
+
 	var parse = {
 		
 	};

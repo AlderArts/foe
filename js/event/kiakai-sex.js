@@ -3,6 +3,7 @@ import { Kiakai } from "./kiakai";
 import { Gui } from "../gui";
 import { Text } from "../text";
 import { EncounterTable } from "../event";
+import { GAME } from "../GAME";
 
 /*
  * 
@@ -14,6 +15,8 @@ let KiakaiSex = {};
 
 KiakaiSex.Healing = function() {
 	let player = GAME().player;
+	let kiakai = GAME().kiakai;
+
 	var parse = {
 		playername : player.name,
 		name   : kiakai.name,
@@ -192,6 +195,8 @@ KiakaiSex.Healing = function() {
 
 KiakaiSex.HealingSeducePrompt = function() {
 	let player = GAME().player;
+	let kiakai = GAME().kiakai;
+
 	var parse = {
 		playername : player.name,
 		name   : kiakai.name,
@@ -272,6 +277,8 @@ KiakaiSex.HealingSeducePrompt = function() {
 
 KiakaiSex.HealingNice = function() {
 	let player = GAME().player;
+	let kiakai = GAME().kiakai;
+
 	var parse = {
 		playername : player.name,
 		name    : kiakai.name,
@@ -996,6 +1003,8 @@ KiakaiSex.HealingNice = function() {
 
 KiakaiSex.PleasureElf = function() {
 	let player = GAME().player;
+	let kiakai = GAME().kiakai;
+
 	var parse = {
 		playername : player.name,
 		name    : kiakai.name,
@@ -1418,6 +1427,8 @@ KiakaiSex.PleasureElf = function() {
 
 KiakaiSex.PleasureElfEnd = function() {
 	let player = GAME().player;
+	let kiakai = GAME().kiakai;
+
 	var parse = {
 		playername   : player.name,
 		name         : kiakai.name
@@ -1438,6 +1449,8 @@ KiakaiSex.PleasureElfEnd = function() {
 
 KiakaiSex.HealingAssertive = function() {
 	let player = GAME().player;
+	let kiakai = GAME().kiakai;
+
 	var parse = {
 		playername   : player.name,
 		name         : kiakai.name,
@@ -2411,6 +2424,8 @@ KiakaiSex.HealingAssertive = function() {
 
 KiakaiSex.Sex = function() {
 	let player = GAME().player;
+	let kiakai = GAME().kiakai;
+
 	Text.Clear();
 	
 	// TODO Toys
@@ -2675,6 +2690,8 @@ Kiakai.SexFirstAttitude = {
 
 KiakaiSex.SexPrompt = function(attitude) {
 	let player = GAME().player;
+	let kiakai = GAME().kiakai;
+
 	// TODO Toys
 	var playerCock = player.BiggestCock(null, true);
 	var strapon    = playerCock ? playerCock.isStrapon : false;
@@ -3382,6 +3399,8 @@ Kiakai.AnalCatchPrepScene = {
 
 KiakaiSex.AnalCatchPrep = function(choice, assert) {
 	let player = GAME().player;
+	let kiakai = GAME().kiakai;
+
 	Text.Flush();
 	
 	// TODO Toys
@@ -4199,6 +4218,8 @@ KiakaiSex.AnalCatchPrep = function(choice, assert) {
 
 KiakaiSex.AnalCatchFinish = function() {
 	let player = GAME().player;
+	let kiakai = GAME().kiakai;
+
 	var playerCock = player.BiggestCock(null, true);
 	var kiaiCock   = kiakai.BiggestCock(null, true);
 	

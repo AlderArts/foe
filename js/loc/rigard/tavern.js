@@ -16,6 +16,7 @@ let BarnabyScenes = {};
 // Tavern
 //
 TavernLoc.common.description = function() {
+	let rigard = GAME().rigard;
 	Text.Add("You are in the tavern called the Maidens' Bane. The dim lighting makes it hard to make out details, and the heavy smell of hard alcohol mixed with bile stings your nostrils. Along the bar is a row of stools, a lot of them partly broken or mended - either missing a supporting peg, or the cushion is torn open with the material picked out, making the seat lumpy and hard.");
 	Text.NL();
 	Text.Add("In the main dining area, there are tables - most of them covered in the leftover dishes, foods and half-drunk mugs of other patrons. There are spills and stains on the tables that look as though they have been there for several weeks, with no hope of getting cleaned up anytime soon. On the wall opposite of the bar, there are booths, where it looks like couples could go for some public privacy. For true privacy, there are a few back rooms deeper inside the tavern.");
@@ -30,7 +31,10 @@ TavernLoc.common.description = function() {
 }
 
 TavernLoc.common.events.push(new Link(
-	function() { return rigard.MetBarnaby() ? "Barnaby" : "Bartender"; }, true, true,
+	function() {
+		let rigard = GAME().rigard;
+		return rigard.MetBarnaby() ? "Barnaby" : "Bartender";
+	}, true, true,
 	null,
 	function() {
 		BarnabyScenes.Approach();
@@ -47,6 +51,10 @@ TavernLoc.common.links.push(new Link(
 
 //TODO
 TavernLoc.common.DrunkHandler = function() {
+	let rigard = GAME().rigard;
+	let party = GAME().party;
+	let player = GAME().player;
+
 	var parse = {
 		phisher : player.mfTrue("his", "her")
 	};
@@ -251,6 +259,9 @@ TavernLoc.common.DrunkHandler = function() {
 }
 
 BarnabyScenes.Approach = function() {
+	let rigard = GAME().rigard;
+	let player = GAME().player;
+
 	var parse = {
 		playername : player.name
 	};
@@ -285,6 +296,10 @@ BarnabyScenes.Approach = function() {
 }
 
 BarnabyScenes.Prompt = function(talkative) {
+	let rigard = GAME().rigard;
+	let party = GAME().party;
+	let player = GAME().player;
+
 	var coin1 = 2;
 	var coin2 = 5;
 	var coin3 = 10;
@@ -633,6 +648,9 @@ BarnabyScenes.Prompt = function(talkative) {
 }
 
 BarnabyScenes.ChatPrompt = function() {
+	let player = GAME().player;
+	let miranda = GAME().miranda;
+
 	var parse = {
 		
 	};
@@ -791,6 +809,9 @@ BarnabyScenes.ChatPrompt = function() {
 
 
 BarnabyScenes.BlowjobEntrypoint = function(func) {
+	let player = GAME().player;
+	let miranda = GAME().miranda;
+
 	var parse = {
 		playername : player.name,
 		boygirl    : player.mfTrue("boy", "girl"),

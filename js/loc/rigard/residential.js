@@ -15,6 +15,8 @@ let ResidentialLoc = {
 // Residential area
 //
 ResidentialLoc.street.description = function() {
+	let rigard = GAME().rigard;
+
 	Text.Add("The common residential area is clearly a shadier part of the town. The closely spaced buildings here are shabbier than you would see elsewhere, hardly letting you see the sky for all the laundry hanging out on display for all to see.");
 	Text.NL();
 	
@@ -29,8 +31,14 @@ ResidentialLoc.street.description = function() {
 ResidentialLoc.street.enc = new EncounterTable();
 ResidentialLoc.street.enc.AddEnc(function() { return Scenes.Rigard.Chatter;});
 ResidentialLoc.street.enc.AddEnc(function() { return Scenes.Rigard.Chatter2;});
-ResidentialLoc.street.enc.AddEnc(function() { return Scenes.Rigard.CityHistory;}, 1.0, function() { return rigard.flags["CityHistory"] == 0; });
-ResidentialLoc.street.enc.AddEnc(function() { return Scenes.Terry.ExploreResidential; }, 1000000.0, function() { return rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry; });
+ResidentialLoc.street.enc.AddEnc(function() { return Scenes.Rigard.CityHistory;}, 1.0, function() {
+	let rigard = GAME().rigard;
+	return rigard.flags["CityHistory"] == 0;
+});
+ResidentialLoc.street.enc.AddEnc(function() { return Scenes.Terry.ExploreResidential; }, 1000000.0, function() {
+	let rigard = GAME().rigard;
+	return rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry;
+});
 ResidentialLoc.street.enc.AddEnc(function() { return Scenes.Lei.GuardStalking; }, 3.0, function() { return Scenes.Lei.GuardStalkingApplicable(); });
 ResidentialLoc.street.onEntry = function() {
 	
@@ -88,9 +96,13 @@ ResidentialLoc.street.links.push(new Link(
 ));
 
 ResidentialLoc.street.links.push(new Link(
-	"Slums", true, function() { return !rigard.UnderLockdown(); },
+	"Slums", true, function() {
+		let rigard = GAME().rigard;
+		return !rigard.UnderLockdown();
+	},
 	null,
 	function() {
+		let rigard = GAME().rigard;
 		if(rigard.Krawitz["Q"] == Rigard.KrawitzQ.HeistDone)
 			Scenes.Rigard.Lockdown();
 		else
@@ -108,7 +120,11 @@ ResidentialLoc.street.links.push(new Link(
 	}
 ));
 ResidentialLoc.street.links.push(new Link(
-	"Miranda's", true, function() { return party.InParty(miranda); },
+	"Miranda's", true, function() {
+		let miranda = GAME().miranda;
+		let party = GAME().party;
+		return party.InParty(miranda);
+	},
 	null,
 	function() {
 		MoveToLocation(ResidentialLoc.miranda);

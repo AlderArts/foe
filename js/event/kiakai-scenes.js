@@ -3,6 +3,7 @@ import { KiakaiSex } from './kiakai-sex';
 import { Kiakai } from './kiakai';
 import { Text } from '../text';
 import { Gui } from '../gui';
+import { GAME } from '../GAME';
 
 let KiakaiScenes = {
 	Sex : KiakaiSex
@@ -10,6 +11,8 @@ let KiakaiScenes = {
 
 KiakaiScenes.RavenDreams = function() {
 	let player = GAME().player;
+	let kiakai = GAME().kiakai;
+	
 	var parse = {
 		playername : player.name,
 		name   : kiakai.name
@@ -31,6 +34,10 @@ KiakaiScenes.RavenDreams = function() {
 
 KiakaiScenes.TalkQuest = function() {
 	let player = GAME().player;
+	let kiakai = GAME().kiakai;
+	let rosalin = GAME().rosalin;
+	let rigard = GAME().rigard;
+
 	var parse = {
 		playername : player.name,
 		name   : kiakai.name
@@ -85,6 +92,8 @@ KiakaiScenes.TalkQuest = function() {
 
 KiakaiScenes.TalkAria = function() {
 	let player = GAME().player;
+	let kiakai = GAME().kiakai;
+
 	var parse = {
 		playername : player.name,
 		name   : kiakai.name
@@ -161,6 +170,8 @@ KiakaiScenes.TalkAria = function() {
 
 KiakaiScenes.TalkUru = function() {
 	let player = GAME().player;
+	let kiakai = GAME().kiakai;
+
 	var parse = {
 		playername : player.name,
 		name   : kiakai.name
@@ -347,6 +358,8 @@ KiakaiScenes.TalkUru = function() {
 
 KiakaiScenes.TalkEden = function() {
 	let player = GAME().player;
+	let kiakai = GAME().kiakai;
+
 	var parse = {
 		playername : player.name,
 		name   : kiakai.name
@@ -554,6 +567,8 @@ KiakaiScenes.TalkEden = function() {
 
 KiakaiScenes.TalkFactions = function() {
 	let player = GAME().player;
+	let kiakai = GAME().kiakai;
+
 	var parse = {
 		playername : player.name,
 		name   : kiakai.name
@@ -628,6 +643,8 @@ KiakaiScenes.TalkFactions = function() {
 
 KiakaiScenes.TalkElves = function() {
 	let player = GAME().player;
+	let kiakai = GAME().kiakai;
+
 	var parse = {
 		playername : player.name,
 		name   : kiakai.name
@@ -941,6 +958,8 @@ KiakaiScenes.TalkElves = function() {
 
 KiakaiScenes.TalkDimensionalViolation = function() {
 	let player = GAME().player;
+	let kiakai = GAME().kiakai;
+
 	var parse = {
 		playername : player.name,
 		name   : kiakai.name
@@ -1019,6 +1038,8 @@ KiakaiScenes.TalkDimensionalViolation = function() {
 // CONTINUATION OF THE STORY
 KiakaiScenes.TalkDimensionalViolationCont = function() {
 	let player = GAME().player;
+	let kiakai = GAME().kiakai;
+
 	var parse = {
 		playername : player.name,
 		name   : kiakai.name
@@ -1117,6 +1138,8 @@ KiakaiScenes.TalkDimensionalViolationCont = function() {
 
 KiakaiScenes.TalkPriest = function() {
 	let player = GAME().player;
+	let kiakai = GAME().kiakai;
+
 	var parse = {
 		playername : player.name,
 		name   : kiakai.name
@@ -1186,6 +1209,8 @@ KiakaiScenes.TalkPriest = function() {
 
 KiakaiScenes.TalkPriestHierarchy = function() {
 	let player = GAME().player;
+	let kiakai = GAME().kiakai;
+
 	var parse = {
 		playername : player.name,
 		name   : kiakai.name
@@ -1240,6 +1265,8 @@ KiakaiScenes.TalkPriestHierarchy = function() {
 
 KiakaiScenes.TalkPriestDisciplines = function() {
 	let player = GAME().player;
+	let kiakai = GAME().kiakai;
+
 	var parse = {
 		playername : player.name,
 		name   : kiakai.name,
@@ -1394,6 +1421,8 @@ KiakaiScenes.TalkPriestDisciplines = function() {
 
 KiakaiScenes.TalkPriestActivities = function() {
 	let player = GAME().player;
+	let kiakai = GAME().kiakai;
+
 	var parse = {
 		playername : player.name,
 		name   : kiakai.name
@@ -1478,6 +1507,8 @@ KiakaiScenes.TalkPriestActivities = function() {
 
 KiakaiScenes.TalkPriestYrissa = function() {
 	let player = GAME().player;
+	let kiakai = GAME().kiakai;
+
 	var parse = {
 		playername : player.name,
 		name   : kiakai.name
@@ -1542,6 +1573,8 @@ KiakaiScenes.TalkPriestYrissa = function() {
 
 KiakaiScenes.TalkPriestAria = function() {
 	let player = GAME().player;
+	let kiakai = GAME().kiakai;
+
 	var parse = {
 		playername : player.name,
 		name   : kiakai.name
@@ -1583,6 +1616,8 @@ KiakaiScenes.TalkPriestAria = function() {
 
 KiakaiScenes.TalkPriestMeeting = function() {
 	let player = GAME().player;
+	let kiakai = GAME().kiakai;
+
 	var parse = {
 		playername : player.name,
 		name   : kiakai.name

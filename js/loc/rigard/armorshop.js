@@ -6,7 +6,7 @@
 import { Event, Link, EncounterTable } from '../../event';
 import { Shop } from '../../shop';
 import { Items } from '../../items';
-import { WorldTime, MoveToLocation } from '../../GAME';
+import { WorldTime, MoveToLocation, GAME } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
 
@@ -18,6 +18,8 @@ ArmorShopScenes.IsOpen = function() {
 }
 
 ArmorShopScenes.CreateShop = function() {
+	let player = GAME().player;
+	
 	var buySuccessFunc = function(item, cost, num) {
 		var parse = {
 			sirmadam : player.mfTrue("sir", "madam")
@@ -191,7 +193,6 @@ ArmorShopScenes.CreateShop = function() {
 	ArmorShopScenes.Shop = shop;
 	ArmorShopScenes.SpecialShop = specialShop;
 }
-ArmorShopScenes.CreateShop();
 
 
 ArmorShopLoc.description = function() {
@@ -248,6 +249,7 @@ ArmorShopLoc.events.push(new Link(
 [Buy][Sell][Specialties][Donovan][Back]
  */
 ArmorShopLoc.onEntry = function() {
+	let rigard = GAME().gwendy;
 	if(rigard.Twopenny["Met"] < 1)
 		ArmorShopScenes.FirstEntry();
 	//TODO LINK NEW STUFF
@@ -261,6 +263,9 @@ ArmorShopLoc.onEntry = function() {
 }
 
 ArmorShopScenes.FirstEntry = function() {
+	let party = GAME().party;
+	let rigard = GAME().rigard;
+
 	var parse = {
 		
 	};
@@ -319,6 +324,8 @@ ArmorShopScenes.FirstEntry = function() {
 
 
 ArmorShopScenes.RegularEntry = function(newStock) {
+	let rigard = GAME().rigard;
+
 	var parse = {
 		
 	};
@@ -356,6 +363,9 @@ ArmorShopScenes.RegularEntry = function(newStock) {
 }
 
 ArmorShopScenes.Prompt = function() {
+	let player = GAME().player;
+	let rigard = GAME().rigard;
+
 	var parse = {
 		sirmadam : player.mfFem("sir", "madam"),
 		heshe : player.mfFem("he", "she")
@@ -443,6 +453,9 @@ ArmorShopScenes.Prompt = function() {
 }
 
 ArmorShopScenes.Talk = function(backFunc) {
+	let player = GAME().player;
+	let rigard = GAME().rigard;
+
 	var parse = {
 		sirmadam : player.mfFem("sir", "madam")
 	};

@@ -1,7 +1,7 @@
 
 import { Event, Link, EncounterTable } from '../../event';
 import { MageTowerLoc } from './magetower';
-import { WorldTime, MoveToLocation, TimeStep } from '../../GAME';
+import { WorldTime, MoveToLocation, TimeStep, GAME } from '../../GAME';
 import { VaughnScenes } from '../../event/outlaws/vaughn-scenes';
 import { Season } from '../../time';
 import { Text } from '../../text';
@@ -33,10 +33,18 @@ CastleLoc.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Chatter2;});
 CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.Parkland;});
 CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.JeannesTower;}, 1.0, function() { return Scenes.Global.MetJeanne(); });
 CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.TheDistrict;});
-CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.MeetingMajid;}, 1.0, function() { return !Scenes.Global.PortalsOpen() && !(rigard.flags["Nobles"] & Rigard.Nobles.MetMajid); });
+CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.MeetingMajid;}, 1.0, function() {
+	let rigard = GAME().rigard;
+	return !Scenes.Global.PortalsOpen() && !(rigard.flags["Nobles"] & Rigard.Nobles.MetMajid);
+});
 CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.GuardPatrol;}, 1.0, function() { return !WorldTime().IsDay(); });
-CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.AlmsForThePoor;}, 1.0, function() { return !(rigard.flags["Nobles"] & Rigard.Nobles.Alms); });
+CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.AlmsForThePoor;}, 1.0, function() {
+	let rigard = GAME().rigard;
+	return !(rigard.flags["Nobles"] & Rigard.Nobles.Alms);
+});
 CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.Elodie;}, 1.0, function() {
+	let vaughn = GAME().vaughn;
+	let rigard = GAME().rigard;
 	return !Scenes.Global.PortalsOpen() &&
 		!(rigard.flags["Nobles"] & Rigard.Nobles.Elodie) &&
 		Scenes.Global.VisitedOutlaws() &&
@@ -45,10 +53,13 @@ CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.Elodie;}, 1.0, func
 });
 CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.RoyalGetaway;});
 CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.MagicalJackal;}, 1.0, function() {
+	let asche = GAME().asche;
 	return asche.flags["Met"] >= Asche.Met.Met &&
 		!WorldTime().IsDay();
 });
 CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.PalaceParade;}, 2.0, function() {
+	let terry = GAME().terry;
+	let rigard = GAME().rigard;
 	return terry.Recruited() &&
 		!WorldTime().IsDay() &&
 		rigard.ParadeTimer.Expired();
@@ -93,7 +104,10 @@ CastleLoc.Grounds.links.push(new Link(
 	}
 ));
 CastleLoc.Grounds.links.push(new Link(
-	"Jail", function() { return terry.flags["Saved"] == Terry.Saved.TalkedTwins2; }, true,
+	"Jail", function() {
+		let terry = GAME().terry;
+		return terry.flags["Saved"] == Terry.Saved.TalkedTwins2;
+	}, true,
 	null,
 	function() {
 		Scenes.Terry.Release();
@@ -102,8 +116,11 @@ CastleLoc.Grounds.links.push(new Link(
 
 
 CastleLoc.Grounds.events.push(new Link(
-	"Elodie", function() { return vaughn.flags["Met"] == VaughnFlags.Met.OnTaskLockpicks; }, true,
+	"Elodie", function() {
+		let vaughn = GAME().vaughn;
+		return vaughn.flags["Met"] == VaughnFlags.Met.OnTaskLockpicks; }, true,
 	function() {
+		let vaughn = GAME().vaughn;
 		if(vaughn.flags["Met"] == VaughnFlags.Met.OnTaskLockpicks) {
 			Text.Add("Somewhere around here, you should look for Elodie, the contact of the outlaws, and hand over the tools you were given. Vaughn said that she has some time off during evenings.");
 			Text.NL();
@@ -116,6 +133,8 @@ CastleLoc.Grounds.events.push(new Link(
 
 
 NobleScenes.Parkland = function() {
+	let player = GAME().player;
+
 	var parse = {
 		
 	};
@@ -183,6 +202,9 @@ NobleScenes.JeannesTower = function() {
 }
 
 NobleScenes.TheDistrict = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+
 	var parse = {
 		playername : player.name
 	};
@@ -238,6 +260,8 @@ NobleScenes.TheDistrict = function() {
 }
 
 NobleScenes.MeetingMajid = function() {
+	let rigard = GAME().rigard;
+
 	var parse = {
 		
 	};
@@ -268,6 +292,8 @@ NobleScenes.MeetingMajid = function() {
 }
 
 NobleScenes.GuardPatrol = function() {
+	let player = GAME().player;
+
 	var parse = {
 		
 	};
@@ -294,6 +320,10 @@ NobleScenes.GuardPatrol = function() {
 }
 
 NobleScenes.AlmsForThePoor = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let rigard = GAME().rigard;
+
 	var parse = {
 		
 	};
@@ -397,6 +427,9 @@ NobleScenes.AlmsForThePoor = function() {
 }
 
 NobleScenes.Elodie = function() {
+	let player = GAME().player;
+	let rigard = GAME().rigard;
+
 	var parse = {
 		
 	};
@@ -472,6 +505,8 @@ NobleScenes.RoyalGetaway = function() {
 }
 
 NobleScenes.MagicalJackal = function() {
+	let player = GAME().player;
+
 	var parse = {
 		heshe : player.mfFem("he", "she")
 	};
@@ -502,6 +537,10 @@ NobleScenes.MagicalJackal = function() {
 }
 
 NobleScenes.PalaceParade = function() {
+	let party = GAME().party;
+	let miranda = GAME().miranda;
+	let rigard = GAME().rigard;
+
 	var parse = {
 		
 	};
@@ -546,6 +585,8 @@ NobleScenes.PalaceParade = function() {
 }
 
 NobleScenes.Buns = function() {
+	let rigard = GAME().rigard;
+
 	var parse = {
 		
 	};
@@ -592,6 +633,9 @@ NobleScenes.Buns = function() {
 }
 
 NobleScenes.BunsChoice = function() {
+	let party = GAME().party;
+	let rigard = GAME().rigard;
+
 	var parse = {
 		
 	};

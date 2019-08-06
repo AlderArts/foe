@@ -1,6 +1,6 @@
 
 import { Event, Link, EncounterTable } from '../../event';
-import { WorldTime, MoveToLocation } from '../../GAME';
+import { WorldTime, MoveToLocation, GAME } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
 
@@ -13,6 +13,8 @@ let SlumsLoc = {
 // Slums
 //
 SlumsLoc.gate.description = function() {
+	let miranda = GAME().miranda;
+
 	Text.Add("The slum of Rigard is a wretched cesspool of bustling activity at all times of the day. The sprawling ghetto spreads out along the riverfront, crawling along the walls of the city as if trying to get inside. Most houses you see are built of sturdy but cheap wood, intended to weather the cold winters but not designed for comfort or aesthetics.");
 	Text.NL();
 	Text.Add("The ‘streets’ are mostly mud[winter], battered every day by countless feet. The smell of the docks reach you even here, near the gates to the inner city.", {winter: WorldTime().season == Season.Winter ? ", a dirty slush at this time of year" : ""});
@@ -38,7 +40,10 @@ SlumsLoc.gate.description = function() {
 SlumsLoc.gate.enc = new EncounterTable();
 SlumsLoc.gate.enc.AddEnc(function() { return Scenes.Rigard.Chatter;});
 SlumsLoc.gate.enc.AddEnc(function() { return Scenes.Rigard.Chatter2;});
-SlumsLoc.gate.enc.AddEnc(function() { return Scenes.Rigard.CityHistory;}, 1.0, function() { return rigard.flags["CityHistory"] == 0; });
+SlumsLoc.gate.enc.AddEnc(function() { return Scenes.Rigard.CityHistory;}, 1.0, function() {
+	let rigard = GAME().rigard;
+	return rigard.flags["CityHistory"] == 0;
+});
 SlumsLoc.gate.enc.AddEnc(function() { return Scenes.Lei.GuardStalking; }, 3.0, function() { return Scenes.Lei.GuardStalkingApplicable(); });
 SlumsLoc.gate.onEntry = function() {
 	if(Math.random() < 0.15)
@@ -55,6 +60,8 @@ SlumsLoc.gate.links.push(new Link(
 		Text.Add("Enter the city? ");
 	},
 	function() {
+		let rigard = GAME().rigard;
+		let miranda = GAME().miranda;
 		Text.Clear();
 		if(miranda.IsAtLocation()) {
 			Scenes.Miranda.RigardSlumGatesEnter();
@@ -108,7 +115,10 @@ SlumsLoc.gate.links.push(new Link(
 ));
 
 SlumsLoc.gate.events.push(new Link(
-	"Miranda", function() { return miranda.IsAtLocation(); }, true,
+	"Miranda", function() {
+		let miranda = GAME().miranda;
+		return miranda.IsAtLocation();
+	}, true,
 	null,
 	function() {
 		Scenes.Miranda.RigardGatesInteract();

@@ -7,7 +7,7 @@
 import { Event, Link, EncounterTable } from '../../event';
 import { GetDEBUG } from '../../../app';
 import { Gender } from '../../body/gender';
-import { WorldTime, MoveToLocation } from '../../GAME';
+import { WorldTime, MoveToLocation, GAME } from '../../GAME';
 import { SetGameState, GameState } from '../../gamestate';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
@@ -51,6 +51,10 @@ KrawitzScenes.Flags = {
 }
 
 KrawitzScenes.SetupStats = function() {
+	let rigard = GAME().rigard;
+	let player = GAME().player;
+	let party = GAME().party;
+
 	KrawitzScenes.stat = {};
 	
 	rigard.KrawitzWorkDay = null;
@@ -149,8 +153,12 @@ KrawitzLoc.street.links.push(new Link(
 	}
 ));
 KrawitzLoc.street.links.push(new Link(
-	"Back street", function() { return rigard.Krawitz["Work"] == 1;}, true,
+	"Back street", function() {
+		let rigard = GAME().rigard;
+		return rigard.Krawitz["Work"] == 1;
+	}, true,
 	function() {
+		let rigard = GAME().rigard;
 		if(rigard.Krawitz["Work"] == 1) {
 			Text.Add("Enter the servants' quarters through the back entrance?");
 			Text.NL();
@@ -199,6 +207,9 @@ KrawitzLoc.grounds.links.push(new Link(
 	"Servants'", true, true,
 	null,
 	function() {
+		let player = GAME().player;
+		let party = GAME().party;
+
 		var parse = {
 			
 		};
@@ -464,6 +475,8 @@ KrawitzLoc.Mansion.hall.links.push(new Link(
 	"Kitchen", true, true,
 	null,
 	function() {
+		let party = GAME().party;
+
 		party.location = KrawitzLoc.Mansion.kitchen;
 		Text.Clear();
 		Text.Add("The kitchen is relatively quiet during the dark hours, with only one cook being up and about, working on some leftover dishes. The rafters are bulging with delicious-looking foods, fresh spices hanging in rows along one wall, lending a pleasant aroma to the room.");
@@ -532,6 +545,10 @@ KrawitzLoc.Mansion.hall.links.push(new Link(
 		Text.Add("Go to Krawitz' study?<br>");
 	},
 	function() {
+		let rigard = GAME().rigard;
+		let player = GAME().player;
+		let party = GAME().party;
+
 		party.location = KrawitzLoc.Mansion.study;
 		var parse = {
 			
@@ -683,6 +700,9 @@ KrawitzScenes.KrawitzPrompt = function() {
 }
 
 KrawitzScenes.FightKrawitz = function() {
+	let rigard = GAME().rigard;
+	let player = GAME().player;
+
 	var parse = {};
 	if(rigard.Krawitz["Duel"] > 0) {
 		Text.Add("<i>“It- it’s you!”</i> Krawitz gasps, recognizing you from your previous encounter. <i>“Why have you come here?!”</i>");
@@ -781,6 +801,8 @@ KrawitzScenes.Flee = function(entryPoint) {
 // Mansion: Storeroom
 //
 KrawitzLoc.Mansion.storeroom.description = function() {
+	let player = GAME().player;
+
 	Text.Add("You are in a rather dusty storeroom, filled with boxes, crates and chests. A quick survey of the room reveals nothing of immediate value. A small glass cabinet filled with various flasks, partly obscured by a rolled up carpet, looks like it could be interesting.");
 	if(!KrawitzScenes.stat.TFItem) {
 		if(KrawitzScenes.stat.ChestLocKnown) {
@@ -807,6 +829,8 @@ KrawitzLoc.Mansion.storeroom.events.push(new Link(
 	"Cabinet", function() { return !KrawitzScenes.stat.LustPotion; }, true,
 	null,
 	function() {
+		let player = GAME().player;
+
 		KrawitzScenes.stat.LustPotion = true;
 		Text.Clear();
 		Text.Add("You open the cabinet, surveying the vials within. They seem to be different types of perfume, ranging from red to pink in color. Curious, you pick one at random and open the stopper. Just a sniff...");
@@ -827,7 +851,10 @@ KrawitzLoc.Mansion.storeroom.events.push(new Link(
 ));
 
 KrawitzLoc.Mansion.storeroom.events.push(new Link(
-	"Chest", function() { return !KrawitzScenes.stat.TFItem && (KrawitzScenes.stat.ChestLocKnown || player.Int() > 40); }, true,
+	"Chest", function() {
+		let player = GAME().player;
+		return !KrawitzScenes.stat.TFItem && (KrawitzScenes.stat.ChestLocKnown || player.Int() > 40);
+	}, true,
 	null,
 	function() {
 		KrawitzScenes.stat.TFItem = true;
@@ -885,6 +912,9 @@ KrawitzLoc.Mansion.study.events.push(new Link(
 ));
 
 KrawitzScenes.Scouting = function() {
+	let rigard = GAME().rigard;
+	let player = GAME().player;
+
 	var parse = {
 		
 	};
@@ -978,6 +1008,8 @@ KrawitzScenes.Scouting = function() {
 }
 
 KrawitzScenes.WorkWork = function() {
+	let rigard = GAME().rigard;
+
 	var parse = {
 		
 	};
@@ -1037,6 +1069,9 @@ KrawitzScenes.WorkWork = function() {
 }
 
 KrawitzScenes.EnteringTheWork = function() {
+	let rigard = GAME().rigard;
+	let party = GAME().party;
+
 	var parse = {
 		name : function() { return party.Get(1).name; }
 	};
@@ -1121,6 +1156,9 @@ KrawitzScenes.ApproachGates = function() {
 }
 
 KrawitzScenes.SneakingIn = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	
 	var parse = {
 		name : function() { return party.Get(1).name; }
 	};
@@ -1237,6 +1275,8 @@ KrawitzScenes.ServantConvinced = function(gender) {
 
 
 KrawitzScenes.FoundOut = function(entity, num, gender) {
+	let player = GAME().player;
+	
 	var parse = {
 		entity : entity == KrawitzScenes.EncType.Guard ? "the guard" : "the servant",
 		spiked : KrawitzScenes.stat.LustPotion && KrawitzScenes.stat.HasWine ? "spiked " : ""
@@ -1382,6 +1422,8 @@ KrawitzScenes.AddSuspicion = function(num, surpressNext) {
 
 
 KrawitzScenes.PatrollingGuards = function() {
+	let rigard = GAME().rigard;
+
 	var parse = {
 		
 	};
@@ -1611,6 +1653,8 @@ KrawitzScenes.WanderingServants = function() {
 }
 
 KrawitzScenes.StealingClothes = function() {
+	let player = GAME().player;
+	
 	var parse = {
 		
 	};
@@ -1662,6 +1706,9 @@ KrawitzScenes.StealingClothes = function() {
 }
 
 KrawitzScenes.Bathhouse = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+
 	var parse = {
 		cock2     	  : function() { return player.AllCocks()[1].Short(); },
 		cockTip2      : function() { return player.AllCocks()[1].TipShort(); }
@@ -2025,6 +2072,12 @@ KrawitzScenes.OrgyEntrypoint = function() {
 }
 
 KrawitzScenes.Aftermath = function() {
+	let rigard = GAME().rigard;
+	let player = GAME().player;
+	let party = GAME().party;
+	let twins = GAME().twins;
+	let lei = GAME().lei;
+	
 	var parse = {
 		playername : player.name
 	};
@@ -2375,6 +2428,7 @@ KrawitzScenes.Aftermath = function() {
 }
 
 KrawitzScenes.TwinsTalk = function() {
+	let player = GAME().player;
 	var parse = {
 		playername : player.name
 	};
@@ -2474,6 +2528,10 @@ KrawitzScenes.TwinsPrompt = function() {
 }
 
 KrawitzScenes.TwinsMoreTalk = function() {
+	let rigard = GAME().rigard;
+	let player = GAME().player;
+	let twins = GAME().twins;
+
 	var parse = {
 		playername : player.name
 	};
@@ -2511,6 +2569,9 @@ KrawitzScenes.TwinsMoreTalk = function() {
 }
 
 KrawitzScenes.Duel = function() {
+	let rigard = GAME().rigard;
+	let player = GAME().player;
+
 	SetGameState(GameState.Event, Gui);
 	var parse = {
 		

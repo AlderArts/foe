@@ -11,7 +11,7 @@ import { Race } from '../body/race';
 import { Time } from '../time';
 import { Items } from '../items';
 import { Shop } from '../shop';
-import { WorldTime } from '../GAME';
+import { WorldTime, GAME } from '../GAME';
 import { Images } from '../assets';
 import { Gui } from '../gui';
 import { Text } from '../text';
@@ -182,6 +182,7 @@ Cassidy.prototype.mfPronoun = function(male, female) {
 
 CassidyScenes.First = function() {
 	let player = GAME().player;
+	let cassidy = GAME().cassidy;
 	var parse = {
 		playername : player.name
 	};
@@ -534,6 +535,8 @@ CassidyScenes.Prompt = function() {
 }
 
 CassidyScenes.Appearance = function() {
+	let cassidy = GAME().cassidy;
+
 	var parse = {
 		
 	};
@@ -712,6 +715,8 @@ CassidyScenes.TalkPrompt = function() {
 //[Forge] - Ask Cass about firing up that forge and making a special order for you.
 //TODO
 CassidyScenes.ForgeFirst = function() {
+	let cassidy = GAME().cassidy;
+
 	var parse = {
 		
 	};
@@ -755,6 +760,8 @@ CassidyScenes.ForgeFirst = function() {
 }
 
 CassidyScenes.ShopBuy = function() {
+	let cassidy = GAME().cassidy;
+
 	var parse = {};
 	
 	CassidyScenes.Shopbought = false;
@@ -798,6 +805,8 @@ CassidyScenes.ShopBuy = function() {
 }
 
 CassidyScenes.ShopSell = function() {
+	let cassidy = GAME().cassidy;
+
 	var parse = {};
 	parse = cassidy.ParserPronouns(parse);
 	
@@ -826,6 +835,8 @@ CassidyScenes.ShopSell = function() {
 }
 
 CassidyScenes.CreateShop = function() {
+	let cassidy = GAME().cassidy;
+
 	return new Shop({
 		buyPromptFunc : function(item, cost, bought) {
 			var coin = Text.NumToText(cost);
@@ -956,6 +967,8 @@ CassidyScenes.CreateShop = function() {
 
 CassidyScenes.HeadInside = function() {
 	let player = GAME().player;
+	let cassidy = GAME().cassidy;
+
 	var parse = {
 		playername : player.name
 	};
@@ -1106,6 +1119,8 @@ CassidyScenes.HeadInside = function() {
 
 CassidyScenes.InsidePrompt = function() {
 	let player = GAME().player;
+	let cassidy = GAME().cassidy;
+
 	var parse = {
 		playername : player.name
 	};
@@ -1188,6 +1203,7 @@ CassidyScenes.InsidePrompt = function() {
 
 CassidyScenes.InsideMeal = function() {
 	let player = GAME().player;
+	let cassidy = GAME().cassidy;
 	var parse = {
 		playername : player.name
 	};
@@ -1401,6 +1417,8 @@ CassidyScenes.InsideMeal = function() {
 
 CassidyScenes.InsideTalkPrompt = function() {
 	let player = GAME().player;
+	let cassidy = GAME().cassidy;
+
 	var parse = {
 		playername : player.name
 	};
@@ -1802,6 +1820,7 @@ CassidyScenes.InsideTalkPrompt = function() {
 
 CassidyScenes.ManagingShop = function() {
 	let player = GAME().player;
+	let cassidy = GAME().cassidy;
 	var parse = {
 		playername : player.name
 	};
@@ -1903,6 +1922,7 @@ CassidyScenes.ManagingShop = function() {
 
 CassidyScenes.ManagingShopAccept = function() {
 	let player = GAME().player;
+	let cassidy = GAME().cassidy;
 	var parse = {
 		playername : player.name
 	};
@@ -2074,6 +2094,7 @@ CassidyScenes.ManagingShop2 = function(score) {
 }
 
 CassidyScenes.ManagingShop3 = function(score) {
+	let cassidy = GAME().cassidy;
 	var parse = {
 		
 	};
@@ -2134,6 +2155,9 @@ CassidyScenes.ManagingShop3 = function(score) {
 
 //Intermission 1! Only use if the PC knows who Lei is and if he hasn’t been recruited. Lei doesn’t count as a customer.
 CassidyScenes.ManagingShop4 = function(score) {
+	let rigard = GAME().rigard;
+	let lei = GAME().lei;
+
 	var parse = {
 		
 	};
@@ -2251,6 +2275,8 @@ CassidyScenes.ManagingShop5 = function(score) {
 }
 
 CassidyScenes.ManagingShop6 = function(score) {
+	let cassidy = GAME().cassidy;
+
 	var parse = {
 		
 	};
@@ -2409,6 +2435,8 @@ CassidyScenes.ManagingShop6 = function(score) {
 }
 
 CassidyScenes.ManagingShopCookies = function() {
+	let cassidy = GAME().cassidy;
+
 	var parse = {
 		
 	};
@@ -2484,6 +2512,8 @@ CassidyScenes.ManagingShopCookies = function() {
 
 CassidyScenes.BigReveal = function() {
 	let player = GAME().player;
+	let cassidy = GAME().cassidy;
+
 	var parse = {
 		playername : player.name
 	};
@@ -2690,7 +2720,10 @@ CassidyScenes.BigReveal = function() {
 
 
 CassidyScenes.Model = function() {
+	let party = GAME().party;
 	let player = GAME().player;
+	let cassidy = GAME().cassidy;
+
 	var parse = {
 		playername : player.name
 	};
@@ -3021,6 +3054,8 @@ CassidyScenes.Model = function() {
 //FEMINIZING
 CassidyScenes.FemTalk2 = function() {
 	let player = GAME().player;
+	let cassidy = GAME().cassidy;
+
 	var parse = {
 		playername : player.name
 	};
@@ -3080,6 +3115,8 @@ CassidyScenes.FemTalk2 = function() {
 }
 
 CassidyScenes.FemFinal = function() {
+	let cassidy = GAME().cassidy;
+
 	var parse = {
 		
 	};
@@ -3151,6 +3188,8 @@ CassidyScenes.FemFinal = function() {
 
 //Trigger this at 30 or more rel upon entering the back room and having saved her from her drunkenness.
 CassidyScenes.SparFirst = function() {
+	let cassidy = GAME().cassidy;
+
 	var parse = {
 		
 	};
@@ -3231,6 +3270,8 @@ CassidyScenes.SparFirst = function() {
 
 // SPARRING
 function CassidySpar() {
+	let cassidy = GAME().cassidy;
+
 	Entity.call(this);
 	this.ID = "cassidyspar";
 	

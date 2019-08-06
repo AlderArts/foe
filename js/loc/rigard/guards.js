@@ -1,6 +1,6 @@
 
 import { Event, Link, EncounterTable } from '../../event';
-import { WorldTime, MoveToLocation } from '../../GAME';
+import { WorldTime, MoveToLocation, GAME } from '../../GAME';
 import { VaughnScenes } from '../../event/outlaws/vaughn-scenes';
 import { Text } from '../../text';
 
@@ -16,6 +16,8 @@ let BarracksLoc = {
 // Gate house
 //
 GateLoc.description = function() {
+	let rigard = GAME().rigard;
+
 	Text.Add("The gate area is where most of the merchandise enters the city. It houses a stable for mounts and several checkpoints where you’re supposed to have your cargo inspected, though not everyone is ordered to head there. You wonder if there is an actual process for screening out shady sorts or if the watch simply chooses at random. Overall, this place seems well guarded, and you have a slight suspicion that the fact the Watch’s Barracks are located nearby might have something to do with it.");
 	Text.NL();
 	Text.Add("Ahead of you, the path splits into three. One path leads to the residential district, where most of the citizens live. Another path leads you to the merchant district, where most of the commerce is handled, and the merchant warehouses are located. The last path leads you toward Rigard’s richer areas - toward the Castle, which seems to be even more fortified than the front gates.");
@@ -39,8 +41,14 @@ GateLoc.description = function() {
 GateLoc.enc = new EncounterTable();
 GateLoc.enc.AddEnc(function() { return Scenes.Rigard.Chatter;});
 GateLoc.enc.AddEnc(function() { return Scenes.Rigard.Chatter2;});
-GateLoc.enc.AddEnc(function() { return Scenes.Rigard.CityHistory;}, 1.0, function() { return rigard.flags["CityHistory"] == 0; });
-GateLoc.enc.AddEnc(function() { return Scenes.Terry.ExploreGates; }, 1000000.0, function() { return rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry; });
+GateLoc.enc.AddEnc(function() { return Scenes.Rigard.CityHistory;}, 1.0, function() {
+	let rigard = GAME().rigard;
+	return rigard.flags["CityHistory"] == 0;
+});
+GateLoc.enc.AddEnc(function() { return Scenes.Terry.ExploreGates; }, 1000000.0, function() {
+	let rigard = GAME().rigard;
+	return rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry;
+});
 GateLoc.onEntry = function() {
 	if(Math.random() < 0.15)
 		Scenes.Rigard.Chatter(true);
@@ -75,9 +83,13 @@ GateLoc.links.push(new Link(
 	}
 ));
 GateLoc.links.push(new Link(
-	"Leave", true, function() { return (WorldTime().hour >= 6 && WorldTime().hour < 22) && !rigard.UnderLockdown(); },
+	"Leave", true, function() {
+		let rigard = GAME().rigard;
+		return (WorldTime().hour >= 6 && WorldTime().hour < 22) && !rigard.UnderLockdown();
+	},
 	null,
 	function() {
+		let rigard = GAME().rigard;
 		if(rigard.Krawitz["Q"] == Rigard.KrawitzQ.HeistDone)
 			Scenes.Rigard.Lockdown();
 		else
@@ -85,7 +97,10 @@ GateLoc.links.push(new Link(
 	}
 ));
 GateLoc.links.push(new Link(
-	"Barracks", true, function() { return !rigard.UnderLockdown(); },
+	"Barracks", true, function() {
+		let rigard = GAME().rigard;
+		return !rigard.UnderLockdown();
+	},
 	null,
 	function() {
 		MoveToLocation(BarracksLoc.common, {minute: 5});
@@ -127,8 +142,12 @@ BarracksLoc.common.links.push(new Link(
 ));
 
 BarracksLoc.common.events.push(new Link(
-	"Miranda", function() { return miranda.IsAtLocation(); }, true,
+	"Miranda", function() {
+		let miranda = GAME().miranda;
+		return miranda.IsAtLocation();
+	}, true,
 	function() {
+		let miranda = GAME().miranda;
 		if(miranda.IsAtLocation()) {
 			Text.Add("You spot Miranda hanging out with a few other guards, sneaking in a few drinks.");
 			Text.NL();
@@ -142,9 +161,12 @@ BarracksLoc.common.events.push(new Link(
 	"Evidence", function() {
 		return VaughnScenes.Tasks.Snitch.OnTask();
 	}, function() {
+		let vaughn = GAME().vaughn;
 		return !vaughn.taskTimer.Expired();
 	},
 	function() {
+		let miranda = GAME().miranda;
+		let vaughn = GAME().vaughn;
 		if(VaughnScenes.Tasks.Snitch.OnTask()) {
 			if(vaughn.taskTimer.Expired())
 				Text.Add("You were supposed to plant the evidence in the lockers here for Vaughn, but you weren't quick enough; the inspection has already happened. You should return and report to Vaughn.");

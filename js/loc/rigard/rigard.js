@@ -26,7 +26,7 @@ import { InitMageTower } from './magetower';
 import { Items } from '../../items';
 import { Time } from '../../time';
 import { Stat } from '../../stat';
-import { WorldTime, MoveToLocation } from '../../GAME';
+import { WorldTime, MoveToLocation, GAME } from '../../GAME';
 import { Gui } from '../../gui';
 import { Text } from '../../text';
 
@@ -38,6 +38,8 @@ export function InitRigard(w, scenes) {
 	InitLB(world, scenes);
 	InitMageTower(world);
 	InitKrawitz(world);
+	ArmorShopScenes.CreateShop();
+	MagicShopScenes.CreateShop();
 };
 
 // Create namespace
@@ -274,6 +276,9 @@ Rigard.prototype.BlownBarnaby = function() {
 }
 
 RigardScenes.CityHistory = function() {
+	let rigard = GAME().rigard;
+	let party = GAME().party;
+
 	Text.Clear();
 	var parse = {};
 
@@ -368,6 +373,9 @@ RigardScenes.ChatterOutro = function(parse) {
 }
 
 RigardScenes.Chatter = function(enteringArea) {
+	let rigard = GAME().rigard;
+	let party = GAME().party;
+
 	Text.Clear();
 	var parse = {};
 
@@ -685,6 +693,11 @@ RigardScenes.Chatter = function(enteringArea) {
 
 //New Del stuff
 RigardScenes.Chatter2 = function(enteringArea) {
+	let rigard = GAME().rigard;
+	let party = GAME().party;
+	let player = GAME().player;
+	let miranda = GAME().miranda;
+
 	Text.Clear();
 	var parse = {
 		playername : player.name
@@ -1483,6 +1496,11 @@ RigardScenes.Chatter2 = function(enteringArea) {
 }
 
 RigardScenes.Lockdown = function() {
+	let rigard = GAME().rigard;
+	let party = GAME().party;
+	let player = GAME().player;
+	let miranda = GAME().miranda;
+
 	var parse = {
 		playername : player.name,
 		merchantsCitizens : (party.location == RigardLoc.Gate) ? "merchants" : "citizens",

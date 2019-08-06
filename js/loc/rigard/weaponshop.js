@@ -13,6 +13,7 @@ let WeaponShopLoc = new Event("The Pale Flame");
 let WeaponShopScenes = {};
 
 WeaponShopScenes.IsOpen = function() {
+	let rigard = GAME().rigard;
 	return (WorldTime().hour >= 8 && WorldTime().hour < 17) && !rigard.UnderLockdown();
 }
 
@@ -21,6 +22,7 @@ WeaponShopLoc.description = function() {
 }
 
 WeaponShopLoc.onEntry = function() {
+	let cassidy = GAME().cassidy;
 	var first = cassidy.flags["Met"] < Cassidy.Met.Met;
 	if(first) {
 		Scenes.Cassidy.First();
@@ -59,6 +61,7 @@ WeaponShopLoc.events.push(new Link(
 ));
 
 WeaponShopScenes.StreetDesc = function() {
+	let cassidy = GAME().cassidy;
 	var parse = {};
 	
 	var first = cassidy.flags["Met"] < Cassidy.Met.Met;

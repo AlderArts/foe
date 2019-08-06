@@ -10,6 +10,9 @@ import { Gui } from '../gui';
 import { Text } from '../text';
 import { Items } from '../items';
 import { Party } from '../party';
+import { ZebraShaman, ZebraBrave } from '../enemy/zebra';
+import { Encounter } from '../combat';
+import { Jobs } from '../job';
 
 let TasksScenes = {};
 
@@ -33,21 +36,27 @@ TasksScenes.Default = function() {
 TasksScenes.Ginseng = {};
 
 TasksScenes.Ginseng.IsEligable = function() {
+	let asche = GAME().asche;
+	let rigard = GAME().rigard;
 	return asche.flags["Tasks"] < Asche.Tasks.Ginseng_Started &&
 	       rigard.MagicShop.totalBought >= 500 &&
 	       GAME().player.level >= 5;
 }
 TasksScenes.Ginseng.IsOn = function() {
+	let asche = GAME().asche;
 	return asche.flags["Tasks"] >= Asche.Tasks.Ginseng_Started &&
 	       asche.flags["Tasks"] < Asche.Tasks.Ginseng_Finished;
 }
 TasksScenes.Ginseng.IsFail = function() {
+	let asche = GAME().asche;
 	return asche.flags["Tasks"] & Asche.Tasks.Ginseng_Failed;
 }
 TasksScenes.Ginseng.IsSuccess = function() {
+	let asche = GAME().asche;
 	return asche.flags["Tasks"] & Asche.Tasks.Ginseng_Succeeded;
 }
 TasksScenes.Ginseng.IsCompleted = function() {
+	let asche = GAME().asche;
 	return asche.flags["Tasks"] >= Asche.Tasks.Ginseng_Finished;
 }
 
@@ -55,6 +64,8 @@ TasksScenes.Ginseng.IsCompleted = function() {
 //Maybe a minimum level of 7, the encounter will be 8 or 9.
 TasksScenes.Ginseng.Initiation = function() {
 	let player = GAME().player;
+	let asche = GAME().asche;
+
 	var parse = {
 		heshe : player.mfFem("he", "she"),
 		handsomepretty : player.mfFem("handsome", "pretty")
@@ -101,6 +112,7 @@ TasksScenes.Ginseng.Initiation = function() {
 
 TasksScenes.Ginseng.OnTask = function() {
 	let player = GAME().player;
+
 	var parse = {
 		handsomepretty : player.mfFem("handsome", "pretty")
 	};
@@ -118,6 +130,8 @@ TasksScenes.Ginseng.OnTask = function() {
 
 TasksScenes.Ginseng.Failed = function() {
 	let player = GAME().player;
+	let asche = GAME().asche;
+
 	var parse = {
 		himher : player.mfFem("him", "her")
 	};
@@ -133,6 +147,8 @@ TasksScenes.Ginseng.Failed = function() {
 
 TasksScenes.Ginseng.Highlands = function() {
 	let player = GAME().player;
+	let asche = GAME().asche;
+
 	var parse = {
 		
 	};
@@ -274,6 +290,8 @@ TasksScenes.Ginseng.Fight = function() {
 
 TasksScenes.Ginseng.Bribe = function() {
 	let party = GAME().party;
+	let asche = GAME().asche;
+
 	var parse = {
 		
 	};
@@ -348,6 +366,8 @@ TasksScenes.Ginseng.Bribe = function() {
 
 TasksScenes.Ginseng.Whore = function() {
 	let player = GAME().player;
+	let asche = GAME().asche;
+
 	var parse = {
 		
 	};
@@ -457,6 +477,8 @@ TasksScenes.Ginseng.Whore = function() {
 
 TasksScenes.Ginseng.FightWin = function() {
 	let party = GAME().party;
+	let asche = GAME().asche;
+
 	var enc = this;
 	SetGameState(GameState.Event, Gui);
 	
@@ -487,6 +509,8 @@ TasksScenes.Ginseng.FightWin = function() {
 
 TasksScenes.Ginseng.FightLoss = function() {
 	let party = GAME().party;
+	let asche = GAME().asche;
+
 	var enc = this;
 	SetGameState(GameState.Event, Gui);
 	
@@ -512,6 +536,8 @@ TasksScenes.Ginseng.FightLoss = function() {
 TasksScenes.Ginseng.Complete = function() {
 	let player = GAME().player;
 	let party = GAME().party;
+	let asche = GAME().asche;
+
 	var parse = {
 		himher : player.mfFem("him", "her"),
 		hisher : player.mfFem("his", "her"),
@@ -634,21 +660,27 @@ TasksScenes.Ginseng.Complete = function() {
 TasksScenes.Nightshade = {};
 
 TasksScenes.Nightshade.IsEligable = function() {
+	let asche = GAME().asche;
+	let rigard = GAME().rigard;
 	return asche.flags["Tasks"] < Asche.Tasks.Nightshade_Started &&
 	       rigard.MagicShop.totalBought >= 1000 &&
 	       GAME().player.level >= 8;
 }
 TasksScenes.Nightshade.IsOn = function() {
+	let asche = GAME().asche;
 	return asche.flags["Tasks"] >= Asche.Tasks.Nightshade_Started &&
 	       asche.flags["Tasks"] < Asche.Tasks.Nightshade_Finished;
 }
 TasksScenes.Nightshade.IsSuccess = function() {
+	let asche = GAME().asche;
 	return asche.flags["Tasks"] & Asche.Tasks.Nightshade_Succeeded;
 }
 TasksScenes.Nightshade.HasHelpFromAquilius = function() {
+	let asche = GAME().asche;
 	return asche.flags["Tasks"] & Asche.Tasks.Nightshade_Aquilius;
 }
 TasksScenes.Nightshade.IsCompleted = function() {
+	let asche = GAME().asche;
 	return asche.flags["Tasks"] >= Asche.Tasks.Nightshade_Finished;
 }
 
@@ -656,6 +688,8 @@ TasksScenes.Nightshade.IsCompleted = function() {
 //The player should have resolved the first quest, be at an appropriate level, and perhaps have spent x amount of money or bought so many items from Asche before this unlocks.
 TasksScenes.Nightshade.Initiation = function() {
 	let player = GAME().player;
+	let asche = GAME().asche;
+
 	var parse = {
 		heshe : player.mfFem("he", "she")
 	};
@@ -701,6 +735,8 @@ TasksScenes.Nightshade.OnTask = function() {
 //While on this quest, add a one-time “nightshade” button to Aquilius’ daytime talk menu.
 TasksScenes.Nightshade.AskAquiliusForHelp = function() {
 	let player = GAME().player;
+	let asche = GAME().asche;
+
 	var parse = {
 		playername : player.name
 	};
@@ -731,6 +767,7 @@ TasksScenes.Nightshade.AskAquiliusForHelp = function() {
 //Only used if PC is wandering around blind (I.E, didn’t ask Aquilius)
 TasksScenes.Nightshade.BlindStart = function() {
 	let player = GAME().player;
+
 	var parse = {
 		
 	};
@@ -791,6 +828,8 @@ TasksScenes.Nightshade.FollowAquilius = function() {
 TasksScenes.Nightshade.HerbComplications = function() {
 	let player = GAME().player;
 	let party = GAME().party;
+	let asche = GAME().asche;
+
 	var parse = {
 		feet : player.FeetDesc()
 	};
@@ -854,6 +893,8 @@ TasksScenes.Nightshade.HerbComplications = function() {
 TasksScenes.Nightshade.Complete = function() {
 	let player = GAME().player;
 	let party = GAME().party;
+	let asche = GAME().asche;
+
 	var parse = {
 		handsomepretty : player.mfFem("handsome", "pretty"),
 		himher : player.mfFem("him", "her"),
@@ -1006,23 +1047,30 @@ TasksScenes.Nightshade.Complete = function() {
 TasksScenes.Spring = {};
 
 TasksScenes.Spring.IsEligable = function() {
+	let asche = GAME().asche;
+	let rigard = GAME().rigard;
 	return asche.flags["Tasks"] < Asche.Tasks.Spring_Started &&
 	       rigard.MagicShop.totalBought >= 1500 &&
 	       GAME().player.level >= 8;
 }
 TasksScenes.Spring.IsOn = function() {
+	let asche = GAME().asche;
 	return asche.flags["Tasks"] >= Asche.Tasks.Spring_Started &&
 	       asche.flags["Tasks"] < Asche.Tasks.Spring_Finished;
 }
 TasksScenes.Spring.IsSuccess = function() {
+	let asche = GAME().asche;
 	return asche.flags["Tasks"] & Asche.Tasks.Spring_Visited;
 }
 TasksScenes.Spring.IsCompleted = function() {
+	let asche = GAME().asche;
 	return asche.flags["Tasks"] >= Asche.Tasks.Spring_Finished;
 }
 
 TasksScenes.Spring.Initiation = function() {
 	let player = GAME().player;
+	let asche = GAME().asche;
+
 	var parse = {
 		HandsomePretty: player.mfFem("Handsome", "Pretty"),
 		handsomepretty: player.mfFem("handsome", "pretty"),
@@ -1077,6 +1125,8 @@ TasksScenes.Spring.Initiation = function() {
 TasksScenes.Spring.Highlands = function() {
 	let player = GAME().player;
 	let party = GAME().party;
+	let asche = GAME().asche;
+
 	var parse = {
 		feet : player.FeetDesc()
 	};
@@ -1180,6 +1230,7 @@ TasksScenes.Spring.Highlands = function() {
 
 TasksScenes.Spring.OnTask = function() {
 	let player = GAME().player;
+
 	var parse = {
 		heshe  : player.mfFem("he","she"),
 		himher : player.mfFem("him","her")
@@ -1193,6 +1244,8 @@ TasksScenes.Spring.OnTask = function() {
 TasksScenes.Spring.Complete = function() {
 	let player = GAME().player;
 	let party = GAME().party;
+	let asche = GAME().asche;
+
 	var parse = {
 		himher : player.mfFem("him", "her"),
 		hisher : player.mfFem("his", "her"),

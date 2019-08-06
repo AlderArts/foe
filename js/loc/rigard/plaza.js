@@ -12,6 +12,8 @@ let PlazaScenes = {}
 // Plaza
 //
 PlazaLoc.description = function() {
+	let rigard = GAME().rigard;
+
 	Text.Add("You are in a large open square surrounded by posh houses.");
 	Text.NL();
 	Text.Add("In the middle of the plaza is a large fountain in white marble, full of clear water. In the middle of the fountain on a raised pedestal stands a stone statue of the Lady Aria, covered in robes of silk that sway in the wind.");
@@ -36,11 +38,25 @@ PlazaLoc.onEntry = function() {
 PlazaLoc.enc = new EncounterTable();
 PlazaLoc.enc.AddEnc(function() { return Scenes.Rigard.Chatter;});
 PlazaLoc.enc.AddEnc(function() { return Scenes.Rigard.Chatter2;});
-PlazaLoc.enc.AddEnc(function() { return Scenes.Rigard.CityHistory;}, 1.0, function() { return rigard.flags["CityHistory"] == 0; });
+PlazaLoc.enc.AddEnc(function() { return Scenes.Rigard.CityHistory;}, 1.0, function() {
+	let rigard = GAME().rigard;
+	return rigard.flags["CityHistory"] == 0;
+});
 PlazaLoc.enc.AddEnc(function() { return PlazaScenes.LetterDelivery; }, 1.0, function() { return (WorldTime().hour >= 6 && WorldTime().hour < 21); });
-PlazaLoc.enc.AddEnc(function() { return PlazaScenes.StatueInfo; }, 1.0, function() { return (WorldTime().hour >= 6 && WorldTime().hour < 21) && (rigard.flags["TalkedStatue"] == 0 || (party.InParty(kiakai) && kiakai.flags["TalkedStatue"] == 0)); });
-PlazaLoc.enc.AddEnc(function() { return Scenes.Krawitz.Duel;}, 3.0, function() { return rigard.Krawitz["Q"] == 1 && rigard.Krawitz["Duel"] == 0 && (WorldTime().hour >= 10 && WorldTime().hour < 20);});
-PlazaLoc.enc.AddEnc(function() { return Scenes.Terry.ExplorePlaza; }, 1000000.0, function() { return rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry; });
+PlazaLoc.enc.AddEnc(function() { return PlazaScenes.StatueInfo; }, 1.0, function() {
+	let party = GAME().party;
+	let rigard = GAME().rigard;
+	let kiakai = GAME().kiakai;
+	return (WorldTime().hour >= 6 && WorldTime().hour < 21) && (rigard.flags["TalkedStatue"] == 0 || (party.InParty(kiakai) && kiakai.flags["TalkedStatue"] == 0));
+});
+PlazaLoc.enc.AddEnc(function() { return Scenes.Krawitz.Duel;}, 3.0, function() {
+	let rigard = GAME().rigard;
+	return rigard.Krawitz["Q"] == 1 && rigard.Krawitz["Duel"] == 0 && (WorldTime().hour >= 10 && WorldTime().hour < 20);
+});
+PlazaLoc.enc.AddEnc(function() { return Scenes.Terry.ExplorePlaza; }, 1000000.0, function() {
+	let rigard = GAME().rigard;
+	return rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry;
+});
 
 PlazaLoc.links.push(new Link(
 	"Gate", true, true,
@@ -68,7 +84,10 @@ PlazaLoc.links.push(new Link(
 ));
 
 PlazaLoc.links.push(new Link(
-	"Inn", true, function() { return !rigard.UnderLockdown(); },
+	"Inn", true, function() {
+		let rigard = GAME().rigard;
+		return !rigard.UnderLockdown();
+	},
 	function() {
 		// TODO
 		Text.Add("There is a large building bustling with the activity, apparently an inn. The sign over the entrance says “The Lady's Blessing”. ");
@@ -78,11 +97,18 @@ PlazaLoc.links.push(new Link(
 	}
 ));
 PlazaLoc.links.push(new Link(
-	"Castle", true, function() { return !rigard.UnderLockdown(); },
+	"Castle", true, function() {
+		let rigard = GAME().rigard;
+		return !rigard.UnderLockdown();
+	},
 	function() {
 		Text.Add("The outer walls of the royal grounds stand near, and the castle looms on the hill above. ");
 	},
 	function() {
+		let player = GAME().player;
+		let rigard = GAME().rigard;
+		let lei = GAME().lei;
+
 		var parse = {
 			stride : player.LowerBodyType() == LowerBodyType.Single ? "slither" : "stride"
 		};
@@ -201,8 +227,12 @@ PlazaLoc.links.push(new Link(
 ));
 
 PlazaLoc.links.push(new Link(
-	"Krawitz", function() { return rigard.Krawitz["Q"] == 1; }, true,
+	"Krawitz", function() {
+		let rigard = GAME().rigard;
+		return rigard.Krawitz["Q"] == 1;
+	}, true,
 	function() {
+		let rigard = GAME().rigard;
 		if(rigard.Krawitz["Q"] == 1) {
 			Text.Add("Krawitz's estate is nearby.");
 			Text.NL();
@@ -217,6 +247,7 @@ PlazaLoc.links.push(new Link(
 	"Orellos", function() {
 		return Scenes.Lei.Tasks.Escort.OnTask();
 	}, function() {
+		let lei = GAME().lei;
 		var t = true;
 		if(WorldTime().hour < 10 || WorldTime().hour >= 17) t = false;
 		if(lei.taskTimer.ToHours() > 7) t = false;
@@ -234,14 +265,19 @@ PlazaLoc.links.push(new Link(
 ));
 
 PlazaLoc.events.push(new Link(
-	"Goldsmith", function() { return room69.flags["Hinges"] == Room69.HingesFlags.Asked; }, function() { return WorldTime().hour >= 9 && WorldTime().hour < 18; },
+	"Goldsmith", function() {
+		let room69 = GAME().room69;
+		return room69.flags["Hinges"] == Room69.HingesFlags.Asked;
+	}, function() { return WorldTime().hour >= 9 && WorldTime().hour < 18; },
 	function() {
+		let room69 = GAME().room69;
 		if(room69.flags["Hinges"] == Room69.HingesFlags.Asked) {
 			Text.Add("You see a rich establishment nearby, claiming to be the best goldsmith in town. Perhaps you could as the owner about making hinges for Sixtynine's door?");
 			Text.NL();
 		}
 	},
 	function() {
+		let room69 = GAME().room69;
 		Text.Clear();
 		Text.Add("You approach the luxurious building housing one of the city’s prominent goldsmiths. You’ve heard he dabbles in banking as well, and generally caters to the upper classes. Hopefully the charge for hinges won’t be too high.");
 		Text.NL();
@@ -264,6 +300,11 @@ PlazaLoc.events.push(new Link(
 ));
 
 PlazaScenes.StatueInfo = function() {
+	let rigard = GAME().rigard;
+	let player = GAME().player;
+	let party = GAME().party;
+	let kiakai = GAME().kiakai;
+
 	var parse = {
 		playername : player.name,
 		name   : kiakai.name,
@@ -376,6 +417,10 @@ PlazaScenes.StatueInfo = function() {
 }
 
 PlazaScenes.LetterDelivery = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let kiakai = GAME().kiakai;
+
 	var letters     = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	var animals     = ["stallion", "dog", "eel", "python", "pony", "wildcat", "mare"];
 	var colors      = ["green", "red", "blue", "purple", "pink", "gray", "orange"];

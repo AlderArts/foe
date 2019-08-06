@@ -7,7 +7,7 @@ import { ChesScenes } from '../../event/brothel/ches';
 import { BelindaScenes } from '../../event/brothel/belinda';
 import { BastetScenes } from '../../event/brothel/bastet';
 import { Gender } from '../../body/gender';
-import { MoveToLocation, TimeStep } from '../../GAME';
+import { MoveToLocation, TimeStep, GAME } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
 
@@ -59,6 +59,7 @@ BrothelLoc.brothel.links.push(new Link(
 BrothelLoc.brothel.events.push(new Link(
 	"Bouncer", true, false,
 	function() {
+		let ches = GAME().ches;
 		if(ches.Met())
 			Text.Add("Ches the shark-morph keeps a watchful eye on customers and employees alike, lounging by the wall and radiating a sense of quiet competence.");
 		else
@@ -71,9 +72,11 @@ BrothelLoc.brothel.events.push(new Link(
 ));
 BrothelLoc.brothel.events.push(new Link(
 	"Lucille", function() {
+		let lucille = GAME().lucille;
 		return lucille.IsAtLocation();
 	}, false,
 	function() {
+		let lucille = GAME().lucille;
 		if(lucille.IsAtLocation())
 			Text.Add("Lucille wanders the hall, starting conversations here and there, inserting her charm to subtly urge the customers to spends more, and settling deals, employing her concubines.");
 		else
@@ -85,8 +88,12 @@ BrothelLoc.brothel.events.push(new Link(
 	}
 ));
 BrothelLoc.brothel.events.push(new Link(
-	function() { return roa.Met() ? "Roa" : "Bunny"; }, true, true,
 	function() {
+		let roa = GAME().roa;
+		return roa.Met() ? "Roa" : "Bunny";
+	}, true, true,
+	function() {
+		let roa = GAME().roa;
 		if(roa.Met())
 			Text.Add("Roa the lapin is at his usual spot, clad in his skimpy outfit. He looks around for a potential john or jill, visibly sighing at the apparent lack of interest.");
 		else
@@ -99,6 +106,7 @@ BrothelLoc.brothel.events.push(new Link(
 ));
 BrothelLoc.brothel.events.push(new Link(
 	"Themed rooms", function() {
+		let lucille = GAME().lucille;
 		return lucille.ThemeroomOpen();
 	}, true,
 	null,
@@ -108,6 +116,7 @@ BrothelLoc.brothel.events.push(new Link(
 ));
 
 BrothelLoc.brothel.onEntry = function() {
+	let rigard = GAME().rigard;
 	if(rigard.Brothel["Visit"] == 0)
 		BrothelScenes.First();
 	else
@@ -115,6 +124,9 @@ BrothelLoc.brothel.onEntry = function() {
 }
 
 BrothelScenes.First = function() {
+	let player = GAME().player;
+	let rigard = GAME().rigard;
+
 	var parse = {
 		handsomePretty : player.mfFem("handsome", "pretty"),
 		playername : player.name,
@@ -183,6 +195,9 @@ BrothelScenes.First = function() {
 }
 
 BrothelScenes.MStrap = function() {
+	let player = GAME().player;
+	let rigard = GAME().rigard;
+
 	var parse = {
 	};
 	parse = player.ParserTags(parse);

@@ -6,7 +6,7 @@
 import { Event, Link, EncounterTable } from '../../event';
 import { Shop } from '../../shop';
 import { Items } from '../../items';
-import { WorldTime, MoveToLocation } from '../../GAME';
+import { WorldTime, MoveToLocation, GAME } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
 
@@ -14,10 +14,12 @@ let MagicShopLoc = new Event("Asche's Fanciful Trinkets");
 
 let MagicShopScenes = {}
 MagicShopScenes.IsOpen = function() {
+	let rigard = GAME().rigard;
 	return (WorldTime().hour >= 10) && !rigard.UnderLockdown();
 }
 
 MagicShopScenes.CreateShop = function() {
+	let player = GAME().player;
 	var buySuccessFunc = function(item, cost, num) {
 		var parse = {};
 		
@@ -216,7 +218,6 @@ MagicShopScenes.CreateShop = function() {
 	
 	MagicShopScenes.Shop = shop;
 }
-MagicShopScenes.CreateShop();
 
 MagicShopLoc.description = function() {
 	var parse = {
@@ -268,6 +269,7 @@ MagicShopLoc.description = function() {
 MagicShopLoc.events.push(new Link(
 	"Asche", true, true, null,
 	function() {
+		let player = GAME().player;
 		var parse = {
 			handsomepretty : player.mfFem("handsome", "pretty")
 		};
@@ -288,6 +290,7 @@ MagicShopLoc.events.push(new Link(
 ));
 
 MagicShopLoc.onEntry = function() {
+	let asche = GAME().asche;
 	if(asche.flags["Met"] < Asche.Met.Met)
 		Scenes.Asche.FirstEntry();
 	//TODO LINK NEW STUFF

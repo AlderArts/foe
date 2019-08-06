@@ -11,6 +11,7 @@ import { Race } from '../body/race';
 import { Text } from '../text';
 import { Gui } from '../gui';
 import { GAME } from '../GAME';
+import { EncounterTable } from '../event';
 
 let AscheScenes = {
 	Tasks : TasksScenes,
@@ -107,6 +108,8 @@ Asche.prototype.ToStorage = function() {
 
 AscheScenes.FirstEntry = function() {
 	let player = GAME().player;
+	let asche = GAME().asche;
+
 	var parse = {
 		heshe : player.mfFem("he","she"),
 		handsomepretty : player.mfFem("handsome", "pretty")
@@ -142,6 +145,8 @@ AscheScenes.FirstEntry = function() {
 
 AscheScenes.Prompt = function() {
 	let player = GAME().player;
+	let asche = GAME().asche;
+
 	var parse = {
 		handsomepretty : player.mfFem("handsome", "pretty"),
 		heshe: player.mfFem("he", "she"),
@@ -284,6 +289,8 @@ AscheScenes.Appearance = function() {
 
 AscheScenes.TalkPrompt = function() {
 	let player = GAME().player;
+	let asche = GAME().asche;
+
 	var parse = {
 		handsomepretty : player.mfFem("handsome", "pretty"),
 		heshe: player.mfFem("he", "she"),
@@ -443,6 +450,8 @@ AscheScenes.TalkPrompt = function() {
 
 AscheScenes.Lessons = function() {
 	let player = GAME().player;
+	let asche = GAME().asche;
+
 	var parse = {
 		handsomepretty : player.mfFem("handsome", "pretty"),
 		heshe: player.mfFem("he", "she"),
@@ -603,6 +612,7 @@ AscheScenes.Lessons = function() {
 
 AscheScenes.FortuneTellingPrompt = function() {
 	let player = GAME().player;
+
 	var parse = {
 		handsomepretty : player.mfFem("handsome", "pretty"),
 		HeShe: player.mfFem("He", "She"),
@@ -855,6 +865,8 @@ What? Why?
 
 AscheScenes.MagicBoxPrompt = function() {
 	let player = GAME().player;
+	let asche = GAME().asche;
+
 	var parse = {
 		coin : Text.NumToText(asche.MagicBoxCost()),
 		heshe : player.mfFem("he", "she"),
@@ -897,6 +909,9 @@ AscheScenes.MagicBoxPrompt = function() {
 }
 
 AscheScenes.MagicBoxGrab = function() {
+	let asche = GAME().asche;
+	let rigard = GAME().rigard;
+
 	var parse = {
 		
 	};
@@ -920,6 +935,8 @@ AscheScenes.MagicBoxGrab = function() {
 AscheScenes.MagicBoxWin = function() {
 	let player = GAME().player;
 	let party = GAME().party;
+	let asche = GAME().asche;
+
 	var parse = {
 		himher : player.mfFem("him", "her"),
 		heshe : player.mfFem("he", "she")
@@ -1165,6 +1182,8 @@ AscheScenes.MagicBoxLoss = function() {
 
 AscheScenes.MagicBoxRepeat = function() {
 	let party = GAME().party;
+	let asche = GAME().asche;
+
 	var parse = {
 		coin : Text.NumToText(asche.MagicBoxCost())
 	};

@@ -34,8 +34,12 @@ MageTowerLoc.links.push(new Link(
 	}
 ));
 MageTowerLoc.events.push(new Link(
-	"Jeanne", function() { return jeanne.IsAtLocation(MageTowerLoc); }, true,
+	"Jeanne", function() {
+		let jeanne = GAME().jeanne;
+		return jeanne.IsAtLocation(MageTowerLoc);
+	}, true,
 	function() {
+		let jeanne = GAME().jeanne;
 		if(jeanne.IsAtLocation(MageTowerLoc)) {
 			Text.Add("The sleepless magician is busy with some experiment or other, poring over some documents over by her workbench. The elf is stunning as always, her long pink hair flowing down her back in thick curls.");
 			Text.NL();
@@ -46,8 +50,12 @@ MageTowerLoc.events.push(new Link(
 	}
 ));
 MageTowerLoc.events.push(new Link(
-	"Golem", function() { return golem.flags["Met"] >= GolemScenes.State.Rebuilt; }, true,
+	"Golem", function() {
+		let golem = GAME().golem;
+		return golem.flags["Met"] >= GolemScenes.State.Rebuilt;
+	}, true,
 	function() {
+		let golem = GAME().golem;
 		if(golem.flags["Met"] >= GolemScenes.State.Rebuilt) {
 			Text.Add("The obsidian golem is standing near the wall, silent and unmoving.");
 			Text.NL();
@@ -65,6 +73,7 @@ MageTowerLoc.endDescription = function() {
 }
 
 MageTowerLoc.onEntry = function() {
+	let golem = GAME().golem;
 	var golemState = golem.flags["Met"];
 	if(golemState == GolemScenes.State.NotMet)
 		GolemScenes.FirstApproach();

@@ -1,22 +1,22 @@
-import { GameCache } from "../GAME";
+import { GameCache, GAME } from "../GAME";
 import { DryadGlade } from "../loc/glade";
 
 let GlobalScenes = {};
 
 GlobalScenes.VisitedRigardGates = function() {
-	return miranda.Met();
+	return GAME().miranda.Met();
 }
 
 GlobalScenes.VisitedOutlaws = function() {
-	return outlaws.flags["Met"] >= Outlaws.Met.Met;
+	return GAME().outlaws.flags["Met"] >= Outlaws.Met.Met;
 }
 
 GlobalScenes.MetJeanne = function() {
-	return jeanne.flags["Met"] != 0;
+	return GAME().jeanne.flags["Met"] != 0;
 }
 
 GlobalScenes.DefeatedOrchid = function() {
-	return glade.flags["Visit"] >= DryadGlade.Visit.DefeatedOrchid;
+	return GAME().glade.flags["Visit"] >= DryadGlade.Visit.DefeatedOrchid;
 }
 
 GlobalScenes.PortalsOpen = function() {

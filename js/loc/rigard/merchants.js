@@ -5,7 +5,7 @@ import { ArmorShopLoc } from './armorshop';
 import { MagicShopLoc } from './magicshop';
 import { ClothShopLoc } from './clothstore';
 import { WeaponShopLoc } from './weaponshop';
-import { WorldTime, MoveToLocation } from '../../GAME';
+import { WorldTime, MoveToLocation, GAME } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
 
@@ -33,6 +33,7 @@ let ShopStreetLoc =
 // Shopping street
 //
 ShopStreetLoc.street.description = function() {
+	let rigard = GAME().rigard;
 	Text.Add("The streets in this area of the city are lined with small merchant stalls and shops of all kinds. ");
 	if(WorldTime().hour >= 6 && WorldTime().hour < 9)
 		Text.Add("A few early birds prowl the streets as the merchant district starts to wake up. A few street vendors selling fresh foods are just opening up, and the smells of baked bread and spices fill the morning air.");
@@ -54,8 +55,14 @@ ShopStreetLoc.street.enc = new EncounterTable();
 ShopStreetLoc.street.enc.AddEnc(function() { return Scenes.Rigard.Chatter;});
 ShopStreetLoc.street.enc.AddEnc(function() { return Scenes.Rigard.Chatter2;});
 ShopStreetLoc.street.enc.AddEnc(function() { return ShopStreetScenes.Speculate;}, 1.0, function() { return (WorldTime().hour >= 6 && WorldTime().hour < 18); });
-ShopStreetLoc.street.enc.AddEnc(function() { return Scenes.Rigard.CityHistory;}, 1.0, function() { return rigard.flags["CityHistory"] == 0; });
-ShopStreetLoc.street.enc.AddEnc(function() { return Scenes.Terry.ExploreMerchants; }, 1000000.0, function() { return rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry; });
+ShopStreetLoc.street.enc.AddEnc(function() { return Scenes.Rigard.CityHistory;}, 1.0, function() {
+	let rigard = GAME().rigard;
+	return rigard.flags["CityHistory"] == 0;
+});
+ShopStreetLoc.street.enc.AddEnc(function() { return Scenes.Terry.ExploreMerchants; }, 1000000.0, function() {
+	let rigard = GAME().rigard;
+	return rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry;
+});
 ShopStreetLoc.street.onEntry = function() {
 	if(Math.random() < 0.15)
 		Scenes.Rigard.Chatter(true);
@@ -159,7 +166,11 @@ ShopStreetLoc.street.links.push(new Link(
 ));
 
 ShopStreetLoc.street.events.push(new Link(
-	"Scepter", function() { return rigard.flags["Scepter"] != 0 && burrows.flags["Access"] < Burrows.AccessFlags.Stage5; }, true,
+	"Scepter", function() {
+		let rigard = GAME().rigard;
+		let burrows = GAME().burrows;
+		return rigard.flags["Scepter"] != 0 && burrows.flags["Access"] < Burrows.AccessFlags.Stage5;
+	}, true,
 	null,
 	function() {
 		ShopStreetScenes.Scepter();
@@ -167,9 +178,16 @@ ShopStreetLoc.street.events.push(new Link(
 ));
 
 ShopStreetLoc.street.events.push(new Link(
-	"Violin", function() { return !rigard.UnderLockdown() && cveta.flags["Met"] == Cveta.Met.ViolinQ; }, function() { return party.coin >= 500; },
+	"Violin", function() {
+		let rigard = GAME().rigard;
+		let cveta = GAME().cveta;
+		return !rigard.UnderLockdown() && cveta.flags["Met"] == Cveta.Met.ViolinQ;
+	}, function() { return party.coin >= 500; },
 	null,
 	function() {
+		let cveta = GAME().cveta;
+		let player = GAME().player;
+		let party = GAME().party;
 		var parse = {
 			playername : player.name,
 			sirmadam : player.mfFem("sir", "madam")
@@ -261,8 +279,12 @@ ShopStreetLoc.street.events.push(new Link(
 ));
 
 ShopStreetLoc.street.events.push(new Link(
-	"Martello", function() { return room69.flags["Hinges"] == Room69.HingesFlags.TalkedToGoldsmith || room69.flags["Hinges"] == Room69.HingesFlags.TalkedToSmith; }, function() { return WorldTime().hour >= 9 && WorldTime().hour < 18; },
+	"Martello", function() {
+		let room69 = GAME().room69;
+		return room69.flags["Hinges"] == Room69.HingesFlags.TalkedToGoldsmith || room69.flags["Hinges"] == Room69.HingesFlags.TalkedToSmith;
+	}, function() { return WorldTime().hour >= 9 && WorldTime().hour < 18; },
 	function() {
+		let room69 = GAME().room69;
 		if(room69.flags["Hinges"] == Room69.HingesFlags.TalkedToGoldsmith) {
 			Text.Add("You could ask the smith Martello to make gilded hinges for Sixtynine’s door.");
 			Text.NL();
@@ -273,6 +295,9 @@ ShopStreetLoc.street.events.push(new Link(
 		}
 	},
 	function() {
+		let room69 = GAME().room69;
+		let player = GAME().player;
+		let party = GAME().party;
 		Text.Clear();
 		if(room69.flags["Hinges"] == Room69.HingesFlags.TalkedToGoldsmith) {
 			Text.Add("You ask around and quickly find your way to Martello’s smithy. It’s plain, especially after the goldsmith’s establishment, but seems well-kept and prosperous enough.");
@@ -332,6 +357,9 @@ ShopStreetLoc.street.events.push(new Link(
 ));
 
 ShopStreetScenes.Speculate = function() {
+	let player = GAME().player;
+	let party = GAME().party;
+	let rigard = GAME().rigard;
 	
 	var stalls = ["stall", "booth", "stand"];
 	var Sdescs = ["shabby-looking", "colorful", "neatly-decorated", "well-kept", "well-used", "plain"];
@@ -636,6 +664,8 @@ ShopStreetScenes.Speculate = function() {
 }
 
 ShopStreetScenes.Scepter = function() {
+	let rigard = GAME().rigard;
+
 	var parse = {
 		
 	};
