@@ -16,7 +16,6 @@ import { StatusList } from './statuslist';
 import { isFunction } from './utility';
 import { EnemyParty, CurrentActiveChar } from './combat-data';
 
-
 let Gui = {};
 
 Gui.w = 1280;

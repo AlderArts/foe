@@ -1,3 +1,7 @@
+import { Body } from "./body/body";
+import { PerkIds } from "./perks";
+import { ItemIds } from "./item";
+import { Jobs } from "./job";
 
 let EntitySave = {
 	SaveSexFlags : function(storage) {

@@ -3,6 +3,7 @@ import { BodyPart } from './bodypart';
 import { Stat } from '../stat';
 import { Rand } from '../utility';
 import { Text } from '../text';
+import { RaceDesc } from './race';
 
 function Balls(race, color) {
 	BodyPart.call(this, race, color);

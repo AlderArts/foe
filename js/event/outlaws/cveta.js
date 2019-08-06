@@ -8,7 +8,7 @@ import { JobDesc, Jobs } from '../../job';
 import { Images } from '../../assets';
 import { Color } from '../../body/color';
 import { Time } from '../../time';
-import { WorldTime } from '../../GAME';
+import { WorldTime, GAME } from '../../GAME';
 
 function Cveta(storage) {
 	Entity.call(this);
@@ -119,7 +119,7 @@ Cveta.prototype.FromStorage = function(storage) {
 	this.LoadPersonalityStats(storage);
 	this.LoadFlags(storage);
 	
-	if(outlaws.RetrievedBlueRoses())
+	if(GAME().outlaws.RetrievedBlueRoses())
 		this.avatar.combat = Images.cveta_b;
 }
 

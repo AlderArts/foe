@@ -7,9 +7,11 @@ import { Entity } from '../../entity';
 import { GetDEBUG } from '../../../app';
 import { AlchemyItems } from '../../items/alchemy';
 import { Race } from '../../body/race';
-import { GameCache } from '../../GAME';
+import { GameCache, GAME } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
+import { Rosalin } from '../nomads/rosalin';
+import { Items } from '../../items';
 
 let JeanneScenes = {};
 
@@ -68,7 +70,7 @@ Jeanne.prototype.FromStorage = function(storage) {
 	
 	// Load flags
 	this.LoadFlags(storage);
-	if(rosalin.flags["Anusol"] >= Rosalin.Anusol.ShowedJeanne)
+	if(GAME().rosalin.flags["Anusol"] >= Rosalin.Anusol.ShowedJeanne)
 		this.recipes.push(Items.AnusolPlus);
 }
 
@@ -83,9 +85,9 @@ Jeanne.prototype.ToStorage = function() {
 }
 
 Jeanne.ReadyForMagicTeaching = function() {
-	return (player.jobs["Mage"].level +
-	        player.jobs["Mystic"].level +
-	        player.jobs["Healer"].level) >= 9;
+	return (GAME().player.jobs["Mage"].level +
+	        GAME().player.jobs["Mystic"].level +
+	        GAME().player.jobs["Healer"].level) >= 9;
 }
 
 

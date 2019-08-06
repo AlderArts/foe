@@ -14,6 +14,8 @@ import { Gender } from './gender';
 import { Appendage } from './appendage';
 import { RaceDesc, Race } from './race';
 import { Color } from './color';
+import { Cock } from './cock';
+import { Vagina } from './vagina';
 
 // Describe a standard humanoid-ish body
 function Body(ent) {

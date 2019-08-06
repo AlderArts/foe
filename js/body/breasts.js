@@ -2,6 +2,7 @@
 import { BodyPart } from './bodypart';
 import { Stat } from '../stat';
 import { Rand } from '../utility';
+import { RaceDesc } from './race';
 
 var NippleType = {
 	ordinary : 0,

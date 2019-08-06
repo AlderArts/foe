@@ -136,6 +136,8 @@ function Setup() {
 
 	// Intialize GUI (set key shortcuts, buttons etc)
 	Gui.Init();
+	Saver.Init();
+
 	// Basic menu
 	Input.menuButtons[0].Setup("Data", DataPrompt, true);
 

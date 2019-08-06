@@ -1,4 +1,7 @@
+import * as _ from 'lodash';
+
 import { DamageType } from './damagetype';
+import { StatusEffect } from './statuseffect';
 
 let ItemIds = {};
 //Represents the overall category an item falls under.

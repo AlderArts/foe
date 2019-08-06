@@ -1,4 +1,4 @@
-import { StatusEffect } from "./statuseffect";
+import { Status, StatusEffect } from "./statuseffect";
 import { Images } from "./assets";
 
 function StatusList() {

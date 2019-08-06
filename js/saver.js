@@ -1,8 +1,11 @@
+import * as $ from 'jquery';
+
 import { Gui } from './gui';
 import { isOnline } from './gamestate';
 import { Text } from './text';
 import { SetGameCache, GameCache } from './GAME';
 import { loadfileOverlay } from './fileoverlay';
+import { CacheToGame } from './gamecache';
 
 let Saver = {}
 
@@ -213,6 +216,11 @@ Saver.LoadFromFile = function(file) {
 	}
 
 	reader.readAsText(file);
+}
+
+Saver.Init = function() {
+	$("#loadFileOk").click(Saver.OnLoadFromFileClick);
+	$("#loadFileCancel").click(loadfileOverlay);
 }
 
 export { Saver };
