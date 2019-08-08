@@ -5,6 +5,8 @@ import { SetGameState, GameState } from '../../gamestate';
 import { Gui } from '../../gui';
 import { Text } from '../../text';
 import { EncounterTable } from '../../event';
+import { EstevanFlags } from '../nomads/estevan-flags';
+import { MariaFlags } from './maria-flags';
 
 //
 // Maria Dead drops
@@ -29,7 +31,7 @@ DeadDropScenes.Alert = function() {
 	Text.Add("That’s silly. When have you never had your head on your shoulders? Nevertheless, you thank the sentry as the drawbridge is pulled up in your wake - if Maria is looking for you, then you shouldn’t keep her waiting. If it’s about what happened last time… well, let’s see if her putting in a good word for you has worked out.", parse);
 	Text.Flush();
 	
-	maria.flags["DD"] |= Maria.DeadDrops.Alert;
+	maria.flags["DD"] |= MariaFlags.DeadDrops.Alert;
 	
 	TimeStep({minute: 15});
 	
@@ -92,7 +94,7 @@ DeadDropScenes.Initiation = function() {
 		Text.Add("<i>“Good. We get drop-offs all the time, so I’m not going to rush you into this - the worst thing you can do to a greenhorn is to push him or her out the window overenthusiastic and underprepared. Talk to me again when you’re ready to head out, and I’ll check the schedule, see where we can take you. Now, if there’s nothing else, I’ve got a few matters to attend to.”</i>", parse);
 		Text.Flush();
 		
-		maria.flags["DD"] |= Maria.DeadDrops.Talked;
+		maria.flags["DD"] |= MariaFlags.DeadDrops.Talked;
 		
 		TimeStep({hour: 1});
 		
@@ -224,7 +226,7 @@ DeadDropScenes.First.Start = function() {
 		func : function() {
 			party.coin -= 10;
 			
-			maria.flags["DD"] |= Maria.DeadDrops.PaidKid;
+			maria.flags["DD"] |= MariaFlags.DeadDrops.PaidKid;
 			
 			Text.Clear();
 			Text.Add("Hey, if he’s willing to sell it back, you have the money to buy it. Doing your best not to lose sight of the little mouse-morph, you dig into your belongings for a handful of coins.", parse);
@@ -338,7 +340,7 @@ DeadDropScenes.First.Start = function() {
 		Text.Add("She leaves the end of that last sentence hanging and stalks away for the map building, leaving you alone to reflect on today’s events.", parse);
 		Text.Flush();
 		
-		maria.flags["DD"] |= Maria.DeadDrops.Completed;
+		maria.flags["DD"] |= MariaFlags.DeadDrops.Completed;
 		outlaws.relation.IncreaseStat(100, 1);
 		
 		TimeStep({hour: 4});
@@ -559,7 +561,7 @@ DeadDropScenes.Docks.Cavalcade = function() {
 	var coin = DeadDropScenes.Docks.CavalcadeCost();
 
 	Text.Add("<i>“Shut up, you. Anyway,”</i> he says, turning back to you, <i>“how about it? Buy-in is [coin] coins.”</i>", {coin: Text.NumToText(coin)});
-	if(estevan.flags["Cheat"] >= Estevan.Cheat.Triggered) {
+	if(estevan.flags["Cheat"] >= EstevanFlags.Cheat.Triggered) {
 		Text.NL();
 		Text.Add("You’re… not so sure about that, having some experience with cheating at Cavalcade yourself. Who’s to say that this game isn’t rigged in some way in much the same fashion that you rigged Cale’s game? Still, the only choice is for you to wait for them to finish their break… which could be goodness knows when…", parse);
 		Text.NL();
@@ -1105,7 +1107,7 @@ DeadDropScenes.Docks.GuardPrompt = function() {
 			maria.relation.IncreaseStat(50, 2);
 			outlaws.relation.IncreaseStat(30, 2);
 			
-			maria.flags["DD"] |= Maria.DeadDrops.SexedGuards;
+			maria.flags["DD"] |= MariaFlags.DeadDrops.SexedGuards;
 			
 			Gui.NextPrompt(DeadDropScenes.Docks.Ending);
 		}, enabled : true
@@ -1152,7 +1154,7 @@ DeadDropScenes.Docks.GuardPrompt = function() {
 				maria.relation.IncreaseStat(50, 2);
 				outlaws.relation.IncreaseStat(30, 2);
 			
-				maria.flags["DD"] |= Maria.DeadDrops.ShowedRoyal;
+				maria.flags["DD"] |= MariaFlags.DeadDrops.ShowedRoyal;
 				
 				Gui.NextPrompt(DeadDropScenes.Docks.Ending);
 			}, enabled : true

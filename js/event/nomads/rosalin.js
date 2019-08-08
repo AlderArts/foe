@@ -20,6 +20,9 @@ import { PregnancyHandler } from '../../pregnancy';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { Alchemy } from '../../alchemy';
+import { CaleFlags } from './cale-flags';
+import { TerryFlags } from '../terry-flags';
+import { KiakaiFlags } from '../kiakai-flags';
 
 let RosalinScenes = {};
 
@@ -227,7 +230,7 @@ RosalinScenes.Interact = function() {
 	// First time meeting
 	if(rosalin.flags["Met"] == 0) {
 		rosalin.flags["Met"] = 1;
-		cale.flags["Met"]    = Cale.Met.First;
+		cale.flags["Met"]    = CaleFlags.Met.First;
 		RosalinScenes.FirstTime();
 		return;
 	}
@@ -577,10 +580,10 @@ RosalinScenes.TalkPrompt = function() {
 			tooltip : Text.Parse("[HeShe] mentioned the tree city...?", parse)
 		});
 	}
-	if(cale.flags["Met2"] == Cale.Met2.TalkedSlut) {
+	if(cale.flags["Met2"] == CaleFlags.Met2.TalkedSlut) {
 		options.push({ nameStr : "Cale anal",
 			func : function() {
-				cale.flags["Met2"] = Cale.Met2.Goop;
+				cale.flags["Met2"] = CaleFlags.Met2.Goop;
 				Text.Clear();
 				Text.Add("<i>“Sure, what does wuffie want?”</i> the alchemist asks, a light shining up in [hisher] eyes at the opportunity to experiment on someone. You explain that he’s been taking a lot of cock lately, and he’s wondering if Rosalin could... help him with that.", parse);
 				Text.NL();
@@ -699,7 +702,7 @@ RosalinScenes.TalkPrompt = function() {
 			});
 		}
 	}
-	if(party.InParty(terry) && terry.flags["TF"] & Terry.TF.TriedItem && !(terry.flags["TF"] & Terry.TF.Rosalin)) {
+	if(party.InParty(terry) && terry.flags["TF"] & TerryFlags.TF.TriedItem && !(terry.flags["TF"] & TerryFlags.TF.Rosalin)) {
 		options.push({ nameStr : "Terry",
 			func : Scenes.Terry.RosalinTF, enabled : true,
 			tooltip : "Perhaps Rosalin can help you with Terry’s strange resistance to transformatives?"
@@ -851,7 +854,7 @@ RosalinScenes.FirstTime = function() {
 
 		if(party.InParty(kiakai)) {
 			Text.Add("<i>“[playername], is this really the time?”</i> [kiakai] asks you uncertainly. You point out that the alchemist seems to be in need, and it's not like you can just leave her like that.", parse);
-			if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral)
+			if(kiakai.flags["Attitude"] < KiakaiFlags.Attitude.Neutral)
 				Text.Add("After suggesting that the perhaps the elf wants to do it [himher]self, [heshe] hurriedly backs off, blushing furiously.", parse);
 			Text.NL();
 		}
@@ -896,7 +899,7 @@ RosalinScenes.FirstFuck = function() {
 		func : function() {
 			Text.Clear();
 
-			cale.flags["Met"] = Cale.Met.YouTookRosalin;
+			cale.flags["Met"] = CaleFlags.Met.YouTookRosalin;
 
 			rosalin.relation.IncreaseStat(100, 5);
 
@@ -942,7 +945,7 @@ RosalinScenes.FirstFuck = function() {
 	});
 	options.push({ nameStr : "Wolf",
 		func : function() {
-			cale.flags["Met"] = Cale.Met.CaleTookRosalin;
+			cale.flags["Met"] = CaleFlags.Met.CaleTookRosalin;
 
 			Text.Clear();
 			Text.Add("You delicately disentangle yourself from the horny catgirl, pushing her into the arms of the wolf-morph. Not wishing to take care of the alchemist yourself, you tell him that he can have her. Wasting no time, the wolf rips off Rosalin's dress, leaving her as nude as the day she was born. The alchemist eagerly returns the favor, pulling down his pants to reveal a strapping nine-inch canine shaft with a flat tip. A thick knot is slowly swelling at its base, peeking out of a furry sheet just above the wolf's heavy sack.", parse);
@@ -966,7 +969,7 @@ RosalinScenes.FirstFuck = function() {
 			Text.NL();
 			Text.Flush();
 
-			cale.flags["Met"] = Cale.Met.SharedOnlyRosie;
+			cale.flags["Met"] = CaleFlags.Met.SharedOnlyRosie;
 
 			parse.genDesc = function() { return player.FirstCock() ? player.MultiCockDesc() : player.FirstVag() ? player.FirstVag().Short() : "bare crotch"; }
 
@@ -1061,7 +1064,7 @@ RosalinScenes.FirstFuck = function() {
 					player.subDom.DecreaseStat(-100, 3);
 					cale.flags["Sexed"]++;
 
-					cale.flags["Met"] = Cale.Met.SharedGotFucked;
+					cale.flags["Met"] = CaleFlags.Met.SharedGotFucked;
 
 					Text.Add("Deciding to have a taste yourself, you drop to your knees beside Rosalin, hungrily eyeing the wolf-morph's thick member. He almost has to force Rosalin off it to allow you to get access. Getting far more of a treat than he expected, the wolf leans back languidly, enjoying the dual blowjob.", parse);
 					Text.NL();
@@ -1209,7 +1212,7 @@ RosalinScenes.FirstFuckPegWolf = function() {
 	let cale = GAME().cale;
 	Text.Clear();
 
-	cale.flags["Met"] = Cale.Met.SharedFuckedHim;
+	cale.flags["Met"] = CaleFlags.Met.SharedFuckedHim;
 
 	player.subDom.IncreaseStat(100, 5);
 	cale.flags["Sexed"]++;
@@ -2115,7 +2118,7 @@ RosalinScenes.CombineCallback = function(item) {
 		if(rosalin.flags["Lobos"] == 0) {
 			Text.Add("<i>“Did you get this from Wolfie?”</i> Rosalin asks guardedly as [heshe] eyes the wolf pelt you present [himher] with. <i>“If you did, I’ll have to make a potion to make it grow out again.”</i>", parse);
 			Text.NL();
-			parse["Cale"] = cale.flags["Met2"] >= Cale.Met2.Talked ? "Cale" : "the wolf";
+			parse["Cale"] = cale.flags["Met2"] >= CaleFlags.Met2.Talked ? "Cale" : "the wolf";
 			Text.Add("You hurriedly assure [himher] that you wouldn’t hurt [Cale]; you got this from somewhere else. The alchemist nods to [himher]self, the question already forgotten as [heshe] starts mixing ingredients together.", parse);
 			rosalin.flags["Lobos"] = 1;
 		}

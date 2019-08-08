@@ -1,176 +1,207 @@
 
 import { AbilityCollection } from './ability';
 import { Abilities } from './abilities';
+import { Entity } from './entity';
+import { Text } from './text';
+import { GAME } from './GAME';
+import { MirandaFlags } from './event/miranda-flags';
+import { CaleFlags } from './event/nomads/cale-flags';
+import { TerryFlags } from './event/terry-flags';
+import { EstevanFlags } from './event/nomads/estevan-flags';
+import { CvetaFlags } from './event/outlaws/cveta-flags';
+import { MariaFlags } from './event/outlaws/maria-flags';
+import { GlobalScenes } from './event/global';
 
-let Jobs = {};
+let Jobs : any = {};
 
-let Job = function(name) {
-	this.name   = name;
-	this.levels = []; // JobLevel elements
-	this.preqs  = []; // Pairs of {job : Jobs["Fighter"], lvl : 3} etc
-	this.abilities = new AbilityCollection("Job"); // Contains abilities available when job is used
-}
-Job.prototype.Short = function(entity) {
-	return this.name;
-}
-Job.prototype.Unlocked = function(entity) {
-	return true;
-}
+export class Job {
+	name : string;
+	levels : any[];
+	preqs : any[];
+	abilities : AbilityCollection;
 
-let JobDesc = function(job) {
-	this.job        = job;
-	this.level      = 1;
-	this.experience = 0;
-	this.mult       = 1;
-}
-JobDesc.prototype.ToStorage = function() {
-	if(this.level <= 1 && this.experience == 0) return null;
-	var storage = {};
-	if(this.level      != 1) storage["lvl"] = Math.floor(this.level);
-	if(this.experience != 0) storage["exp"] = Math.floor(this.experience);
-	return storage;
-}
-JobDesc.prototype.FromStorage = function(storage) {
-	if(storage) {
-		this.level      = parseInt(storage["lvl"]) || this.level;
-		this.experience = parseInt(storage["exp"]) || this.experience;
+	constructor(name : string) {
+		this.name   = name;
+		this.levels = []; // JobLevel elements
+		this.preqs  = []; // Pairs of {job : Jobs["Fighter"], lvl : 3} etc
+		this.abilities = new AbilityCollection("Job"); // Contains abilities available when job is used
 	}
-}
-
-Job.prototype.AddExp = function(entity, exp, reserve) {
-	// Check for null arguments and broken links
-	if(entity == null) return;
-	var jd = entity.jobs[this.name];
-	if(jd == null) return;
-	exp = exp || 0;
-	// Check for maxed out job
-	var newLevel = this.levels[jd.level-1];
-	if(newLevel == null) return;
-	var toLevel = newLevel.expToLevel;
-	if(toLevel == null) return;
-	toLevel *= jd.mult;
 	
-	// Add xp to pool
-	jd.experience += exp;
-	// Loop until xp isn't higher than xp to level
-	while(jd.experience >= toLevel) {
-		// Reduce pool by level
-		jd.experience -= toLevel;
-		// Save skills/bonuses gained
-		var skills = newLevel.skills;
-		var bonus  = newLevel.bonus;
-		var func   = newLevel.func;
-		// Increase level
-		jd.level++;
+	Short(entity : Entity) {
+		return this.name;
+	}
+	Unlocked(entity : Entity) {
+		return true;
+	}
+
+	AddExp(entity : Entity, exp? : number, reserve? : boolean) {
+		// Check for null arguments and broken links
+		if(entity == null) return;
+		var jd = entity.jobs[this.name];
+		if(jd == null) return;
+		exp = exp || 0;
+		// Check for maxed out job
+		var newLevel = this.levels[jd.level-1];
+		if(newLevel == null) return;
+		var toLevel = newLevel.expToLevel;
+		if(toLevel == null) return;
+		toLevel *= jd.mult;
 		
-		var parse = {
-			name : entity.NameDesc(),
-			is   : entity.is(),
-			lvl  : jd.level,
-			job  : this.Short(entity),
-			s    : entity.plural() ? "" : "s",
-			has  : entity.has()
-		};
-		Text.NL();
-		Text.Add("[name] [is] now a level [lvl] [job]!<br>", parse, 'bold');
-		// Teach new skills
-		if(skills) {
-			// [ { ab: Ablities.Black.Fireball, set: "Spells" }, ... ]
-			for(var i = 0; i < skills.length; i++) {
-				var sd      = skills[i];
-				var ability = sd.ab;
-				var set     = sd.set;
-				
-				parse["ability"] = ability.name;
-				
-				if(!entity.abilities[set].HasAbility(ability)) {
-					Text.Add("[name] [has] mastered [ability]!<br>", parse, 'bold');
+		// Add xp to pool
+		jd.experience += exp;
+		// Loop until xp isn't higher than xp to level
+		while(jd.experience >= toLevel) {
+			// Reduce pool by level
+			jd.experience -= toLevel;
+			// Save skills/bonuses gained
+			var skills = newLevel.skills;
+			var bonus  = newLevel.bonus;
+			var func   = newLevel.func;
+			// Increase level
+			jd.level++;
+			
+			var parse : any = {
+				name : entity.NameDesc(),
+				is   : entity.is(),
+				lvl  : jd.level,
+				job  : this.Short(entity),
+				s    : entity.plural() ? "" : "s",
+				has  : entity.has()
+			};
+			Text.NL();
+			Text.Add("[name] [is] now a level [lvl] [job]!<br>", parse, 'bold');
+			// Teach new skills
+			if(skills) {
+				// [ { ab: Ablities.Black.Fireball, set: "Spells" }, ... ]
+				for(var i = 0; i < skills.length; i++) {
+					var sd      = skills[i];
+					var ability = sd.ab;
+					var set     = sd.set;
+					
+					parse["ability"] = ability.name;
+					
+					if(!entity.abilities[set].HasAbility(ability)) {
+						Text.Add("[name] [has] mastered [ability]!<br>", parse, 'bold');
+					}
+					entity.abilities[set].AddAbility(ability);
 				}
-				entity.abilities[set].AddAbility(ability);
+			}
+			// Apply bonuses
+			if(bonus) {
+				if(bonus["hp"])  { entity.maxHp.growth        += bonus["hp"];  Text.Add("HP+"   + (bonus["hp"]  /  5) + "<br>"); }
+				if(bonus["sp"])  { entity.maxSp.growth        += bonus["sp"];  Text.Add("SP+"   + (bonus["sp"]  /  5) + "<br>"); }
+				if(bonus["lp"])  { entity.maxLust.growth      += bonus["lp"];  Text.Add("Lust+" + (bonus["lp"]  /  5) + "<br>"); }
+				if(bonus["str"]) { entity.strength.growth     += bonus["str"]; Text.Add("Str+"  + (bonus["str"] * 10) + "<br>"); }
+				if(bonus["sta"]) { entity.stamina.growth      += bonus["sta"]; Text.Add("Sta+"  + (bonus["sta"] * 10) + "<br>"); }
+				if(bonus["dex"]) { entity.dexterity.growth    += bonus["dex"]; Text.Add("Dex+"  + (bonus["dex"] * 10) + "<br>"); }
+				if(bonus["int"]) { entity.intelligence.growth += bonus["int"]; Text.Add("Int+"  + (bonus["int"] * 10) + "<br>"); }
+				if(bonus["spi"]) { entity.spirit.growth       += bonus["spi"]; Text.Add("Spi+"  + (bonus["spi"] * 10) + "<br>"); }
+				if(bonus["lib"]) { entity.libido.growth       += bonus["lib"]; Text.Add("Lib+"  + (bonus["lib"] * 10) + "<br>"); }
+				if(bonus["cha"]) { entity.charisma.growth     += bonus["cha"]; Text.Add("Cha+"  + (bonus["cha"] * 10) + "<br>"); }
+				entity.SetLevelBonus();
+			}
+			// Apply special functions
+			if(func) func(entity);
+			// Prepare for checking next level
+			var newLevel = this.levels[jd.level-1];
+			if(newLevel == null) break;
+			toLevel = newLevel.expToLevel;
+			if(toLevel == null) {
+				jd.experience = 0;
+				Text.Add("[name] [is] now a master [job]!", parse, 'bold');
+				Text.NL();
+				break;
+			}
+			toLevel *= jd.mult;
+		}
+		
+		Text.Flush();
+	}
+	// Returns true if job is mastered
+	Master(entity : Entity) {
+		// Check for null references
+		if(entity == null) return false;
+		var jd = entity.jobs[this.name];
+		if(jd == null) return false;
+		// Check if current level is same or higher than max level
+		return (jd.level > this.levels.length);
+	}
+
+	Available(entity : Entity) {
+		if(entity == null) return false;
+		
+		for(var i = 0; i < this.preqs.length; i++) {
+			// Pairs of {job : Jobs["Fighter"], lvl : 3} etc
+			var preq = this.preqs[i];
+			
+			var job = preq.job;
+			var lvl = preq.lvl || 1;
+			
+			if(job) {
+				var jd = entity.jobs[job.name];
+				if(jd == null)     return false;
+				if(jd.level < lvl) return false;
 			}
 		}
-		// Apply bonuses
-		if(bonus) {
-			if(bonus["hp"])  { entity.maxHp.growth        += bonus["hp"];  Text.Add("HP+"   + (bonus["hp"]  /  5) + "<br>"); }
-			if(bonus["sp"])  { entity.maxSp.growth        += bonus["sp"];  Text.Add("SP+"   + (bonus["sp"]  /  5) + "<br>"); }
-			if(bonus["lp"])  { entity.maxLust.growth      += bonus["lp"];  Text.Add("Lust+" + (bonus["lp"]  /  5) + "<br>"); }
-			if(bonus["str"]) { entity.strength.growth     += bonus["str"]; Text.Add("Str+"  + (bonus["str"] * 10) + "<br>"); }
-			if(bonus["sta"]) { entity.stamina.growth      += bonus["sta"]; Text.Add("Sta+"  + (bonus["sta"] * 10) + "<br>"); }
-			if(bonus["dex"]) { entity.dexterity.growth    += bonus["dex"]; Text.Add("Dex+"  + (bonus["dex"] * 10) + "<br>"); }
-			if(bonus["int"]) { entity.intelligence.growth += bonus["int"]; Text.Add("Int+"  + (bonus["int"] * 10) + "<br>"); }
-			if(bonus["spi"]) { entity.spirit.growth       += bonus["spi"]; Text.Add("Spi+"  + (bonus["spi"] * 10) + "<br>"); }
-			if(bonus["lib"]) { entity.libido.growth       += bonus["lib"]; Text.Add("Lib+"  + (bonus["lib"] * 10) + "<br>"); }
-			if(bonus["cha"]) { entity.charisma.growth     += bonus["cha"]; Text.Add("Cha+"  + (bonus["cha"] * 10) + "<br>"); }
-			entity.SetLevelBonus();
-		}
-		// Apply special functions
-		if(func) func(entity);
-		// Prepare for checking next level
-		var newLevel = this.levels[jd.level-1];
-		if(newLevel == null) break;
-		toLevel = newLevel.expToLevel;
-		if(toLevel == null) {
-			jd.experience = 0;
-			Text.Add("[name] [is] now a master [job]!", parse, 'bold');
-			Text.NL();
-			break;
-		}
-		toLevel *= jd.mult;
-	}
-	
-	Text.Flush();
-}
-// Returns true if job is mastered
-Job.prototype.Master = function(entity) {
-	// Check for null references
-	if(entity == null) return false;
-	var jd = entity.jobs[this.name];
-	if(jd == null) return false;
-	// Check if current level is same or higher than max level
-	return (jd.level > this.levels.length);
-}
-
-Job.prototype.Available = function(entity) {
-	if(entity == null) return false;
-	
-	for(var i = 0; i < this.preqs.length; i++) {
-		// Pairs of {job : Jobs["Fighter"], lvl : 3} etc
-		var preq = this.preqs[i];
 		
-		var job = preq.job;
-		var lvl = preq.lvl || 1;
-		
-		if(job) {
-			var jd = entity.jobs[job.name];
-			if(jd == null)     return false;
-			if(jd.level < lvl) return false;
-		}
+		return true;
 	}
-	
-	return true;
+
 }
 
-let JobLevel = function(expToLevel, skills, bonus, func) {
-	this.expToLevel = expToLevel;
-	this.skills     = skills; // [ { ab: Ablities.Black.Fireball, set: "Spells" }, ... ]
-	this.bonus      = bonus;  // { str: 0.1, int: 0.2 ...}
-	this.func       = func;   // func(entity)
+export class JobDesc {
+	job : Job;
+	level : number;
+	experience : number;
+	mult : number;
+	constructor(job : Job) {
+		this.job        = job;
+		this.level      = 1;
+		this.experience = 0;
+		this.mult       = 1;
+	}
+	ToStorage() {
+		if(this.level <= 1 && this.experience == 0) return null;
+		var storage : any = {};
+		if(this.level      != 1) storage["lvl"] = Math.floor(this.level);
+		if(this.experience != 0) storage["exp"] = Math.floor(this.experience);
+		return storage;
+	}
+	FromStorage(storage : any) {
+		if(storage) {
+			this.level      = parseInt(storage["lvl"]) || this.level;
+			this.experience = parseInt(storage["exp"]) || this.experience;
+		}
+	}	
+};
+
+export class JobLevel {
+	expToLevel : number;
+	skills : any[];
+	bonus : any;
+	func : any;
+	constructor(expToLevel : number, skills : any[], bonus : any, func? : any) {
+		this.expToLevel = expToLevel;
+		this.skills     = skills; // [ { ab: Ablities.Black.Fireball, set: "Spells" }, ... ]
+		this.bonus      = bonus;  // { str: 0.1, int: 0.2 ...}
+		this.func       = func;   // func(entity)
+	}
 }
 
 
 
-let JobEnum = {
-	Fighter   : 0,
-	Scholar   : 1,
-	Courtesan : 2
-}
+export enum JobEnum {
+	Fighter   = 0,
+	Scholar   = 1,
+	Courtesan = 2
+};
 
 ////////////
 // TIER 1 //
 ////////////
 
 Jobs["Fighter"] = new Job("Fighter");
-Jobs["Fighter"].Long = function(entity) {
+Jobs["Fighter"].Long = function(entity : Entity) {
 	var parse = {hisher: entity.hisher(), Name: entity.NameDesc(), name: entity.nameDesc(), has: entity.has(), s: entity.plural() ? "" : "s"};
 	return Text.Parse("As a fighter, [name] train[s] the fundamental basics of physical combat, honing [hisher] body for further specialization. [Name] [has] a broad set of attacks, but lack[s] a tactical mindset.", parse);
 }
@@ -187,7 +218,7 @@ Jobs["Fighter"].levels.push(new JobLevel(320, null, {"str" : 0.1, "dex" : 0.1}))
 Jobs["Fighter"].levels.push(new JobLevel(640, [{ab: Abilities.Physical.Provoke, set: "Skills"}, {ab: Abilities.Physical.TAttack, set: "Skills"}], {"str" : 0.2, "sta" : 0.2, "dex" : 0.2, "hp" : 5}));
 
 Jobs["Scholar"] = new Job("Scholar");
-Jobs["Scholar"].Long = function(entity) {
+Jobs["Scholar"].Long = function(entity : Entity) {
 	var parse = {hisher: entity.hisher(), Name: entity.NameDesc(), name: entity.nameDesc(), has: entity.has(), is: entity.is()};
 	return Text.Parse("As a scholar, [name] [is] a truthseeker, characterized by [hisher] curiosity and thirst for knowledge. While lacking in offensive strength, [name] [has] plenty of supportive abilities to field in combat.", parse);
 }
@@ -204,11 +235,12 @@ Jobs["Scholar"].levels.push(new JobLevel(320, null, {"int" : 0.1, "cha" : 0.1}))
 Jobs["Scholar"].levels.push(new JobLevel(640, [{ab: Abilities.White.Cheer, set: "Support"}, {ab: Abilities.White.Preach, set: "Support"}], {"int" : 0.2, "spi" : 0.2, "cha" : 0.2, "sp" : 5}));
 
 Jobs["Courtesan"] = new Job("Courtesan");
-Jobs["Courtesan"].Long = function(entity) {
+Jobs["Courtesan"].Long = function(entity : Entity) {
 	var parse = {hisher: entity.hisher(), heshe: entity.heshe(), name: entity.nameDesc(), Poss: entity.Possessive()};
 	return Text.Parse("As a playful courtesan, there is a lustful spark stirring within [name], something [heshe] has no qualms about flaunting in combat for [hisher] benefit. [Poss] teasing nature is something that one day might turn into something darker, more primal, should [heshe] give in to [hisher] lust.", parse);
 }
-Jobs["Courtesan"].Unlocked = function(entity) {
+Jobs["Courtesan"].Unlocked = function(entity : Entity) {
+	let layla = GAME().layla;
 	if(entity == layla) return !layla.Virgin();
 	return true;
 }
@@ -226,7 +258,7 @@ Jobs["Courtesan"].levels.push(new JobLevel(640, [{ab: Abilities.Seduction.Distra
 
 // Kiai specific
 Jobs["Acolyte"] = new Job("Acolyte");
-Jobs["Acolyte"].Long = function(entity) {
+Jobs["Acolyte"].Long = function(entity : Entity) {
 	var parse = {hisher: entity.hisher(), HeShe: entity.HeShe(), name: entity.nameDesc(), has: entity.has()};
 	return Text.Parse("As an acolyte, [name] [has] devoted years in the service of Lady Aria, learning empathy and love for [hisher] fellow man. [HeShe] [has] a strong supportive role, but lacks offensive capabilities.", parse);
 }
@@ -245,7 +277,7 @@ Jobs["Acolyte"].levels.push(new JobLevel(640, [{ab: Abilities.White.Empower, set
 
 // Cveta specific
 Jobs["Songstress"] = new Job("Songstress");
-Jobs["Songstress"].Long = function(entity) {
+Jobs["Songstress"].Long = function(entity : Entity) {
 	var parse = {};
 	return Text.Parse("All may practice hard, but some gifts are inborn and cannot be imparted through teaching. The Songstress uses the strange, magical qualities of her voice to sway the tides of battle.", parse);
 }
@@ -267,13 +299,14 @@ Jobs["Songstress"].levels.push(new JobLevel(640, [{ab: Abilities.Seduction.Capti
 ////////////
 
 Jobs["Bruiser"] = new Job("Bruiser");
-Jobs["Bruiser"].Long = function(entity) {
+Jobs["Bruiser"].Long = function(entity : Entity) {
 	var parse = {hisher: entity.hisher(), HeShe: entity.HeShe(), name: entity.nameDesc(), is: entity.is(), s: entity.plural() ? "" : "s"};
 	return Text.Parse("As a bruiser, [name] [is] all about brute strength, and can prove to be quite a fearsome warrior. [HeShe] can dish out a large amount of damage, but fare[s] badly against quick, evasive foes.", parse);
 }
-Jobs["Bruiser"].Unlocked = function(entity) {
+Jobs["Bruiser"].Unlocked = function(entity : Entity) {
+	let miranda = GAME().miranda;
 	if(entity == miranda) return true;
-	return miranda.flags["Bruiser"] == Miranda.Bruiser.Taught;
+	return miranda.flags["Bruiser"] == MirandaFlags.Bruiser.Taught;
 }
 Jobs["Bruiser"].preqs.push({job : Jobs["Fighter"], lvl : 3});
 Jobs["Bruiser"].abilities.AddAbility(Abilities.Physical.CrushingStrike);
@@ -289,14 +322,16 @@ Jobs["Bruiser"].levels.push(new JobLevel(640,  null, {"sta" : 0.2, "dex" : 0.1})
 Jobs["Bruiser"].levels.push(new JobLevel(1280, [{ab: Abilities.Physical.GrandSlam, set: "Skills"}, {ab: Abilities.Physical.Frenzy, set: "Skills"}], {"str" : 0.3, "sta" : 0.1, "dex" : 0.1, "hp" : 5}));
 
 Jobs["Rogue"] = new Job("Rogue");
-Jobs["Rogue"].Long = function(entity) {
+Jobs["Rogue"].Long = function(entity : Entity) {
 	var parse = {hisher: entity.hisher(), HeShe: entity.HeShe(), name: entity.nameDesc(), s: entity.plural() ? "" : "s"};
 	return Text.Parse("As a rogue, [name] fight[s] dirty, using any trick or scheme to deal decisive damage to [hisher] enemies. [HeShe] can deal large amounts of damage against distracted opponents.", parse);
 }
-Jobs["Rogue"].Unlocked = function(entity) {
+Jobs["Rogue"].Unlocked = function(entity : Entity) {
+	let cale = GAME().cale;
+	let terry = GAME().terry;
 	if(entity == terry) return true;
-	return (cale.flags["Rogue"]  >= Cale.Rogue.Taught) ||
-	       (terry.flags["Rogue"] >= Terry.Rogue.Taught);
+	return (cale.flags["Rogue"]  >= CaleFlags.Rogue.Taught) ||
+	       (terry.flags["Rogue"] >= TerryFlags.Rogue.Taught);
 }
 Jobs["Rogue"].preqs.push({job : Jobs["Fighter"], lvl : 3});
 Jobs["Rogue"].abilities.AddAbility(Abilities.Physical.DirtyBlow);
@@ -312,13 +347,15 @@ Jobs["Rogue"].levels.push(new JobLevel(640,  null, {"dex" : 0.2, "int" : 0.1}));
 Jobs["Rogue"].levels.push(new JobLevel(1280, [{ab: Abilities.Physical.Backstab, set: "Skills"}, {ab: Abilities.Physical.Fade, set: "Skills"}], {"dex" : 0.3, "int" : 0.1, "cha" : 0.1}));
 
 Jobs["Ranger"] = new Job("Ranger");
-Jobs["Ranger"].Long = function(entity) {
+Jobs["Ranger"].Long = function(entity : Entity) {
 	var parse = {hisher: entity.hisher(), HeShe: entity.HeShe(), name: entity.nameDesc(), is: entity.is()};
 	return Text.Parse("As a ranger, [name] [is] a skilled hunter, well versed in ways to ensnare and distract [hisher] prey.", parse);
 }
-Jobs["Ranger"].Unlocked = function(entity) {
-	if(estevan.flags["Ranger"] >= Estevan.Ranger.Taught) return true;
-	if(maria.flags["Ranger"]   >= Maria.Ranger.Taught) return true;
+Jobs["Ranger"].Unlocked = function(entity : Entity) {
+	let estevan = GAME().estevan;
+	let maria = GAME().maria;
+	if(estevan.flags["Ranger"] >= EstevanFlags.Ranger.Taught) return true;
+	if(maria.flags["Ranger"]   >= MariaFlags.Ranger.Taught) return true;
 	return false;
 }
 Jobs["Ranger"].preqs.push({job : Jobs["Fighter"], lvl : 3});
@@ -335,12 +372,12 @@ Jobs["Ranger"].levels.push(new JobLevel(640,  null, {"spi" : 0.2, "dex" : 0.1}))
 Jobs["Ranger"].levels.push(new JobLevel(1280, [{ab: Abilities.Physical.SetTrap, set: "Skills"}, {ab: Abilities.Physical.Swift, set: "Skills"}], {"int" : 0.1, "sta" : 0.1, "dex" : 0.3}));
 
 Jobs["Squire"] = new Job("Squire");
-Jobs["Squire"].Long = function(entity) {
+Jobs["Squire"].Long = function(entity : Entity) {
 	var parse = {hisher: entity.hisher(), HeShe: entity.HeShe(), name: entity.nameDesc(), is: entity.is()};
 	//TODO Desc
 	return Text.Parse("Tank", parse);
 }
-Jobs["Squire"].Unlocked = function(entity) {
+Jobs["Squire"].Unlocked = function(entity : Entity) {
 	return false; //TODO Trainer
 }
 Jobs["Squire"].preqs.push({job : Jobs["Fighter"], lvl : 3});
@@ -360,7 +397,7 @@ Jobs["Squire"].levels.push(new JobLevel(1280, [{ab: Abilities.Physical.Taunt, se
 
 
 Jobs["Mage"] = new Job("Mage");
-Jobs["Mage"].Long = function(entity) {
+Jobs["Mage"].Long = function(entity : Entity) {
 	var parse = {hisher: entity.hisher(), heshe: entity.heshe(), has: entity.has(), name: entity.nameDesc(), es: entity.plural() ? "" : "es" };
 	return Text.Parse("As a mage, [name] [has] taken the first steps into exploring the raw power of the elements and the chaotic force of magic. While [heshe] [has] barely begun tapping [hisher] innate potential, [name] already possess[es] formidable destructive power.", parse);
 }
@@ -377,12 +414,12 @@ Jobs["Mage"].levels.push(new JobLevel(160,  null, {"int" : 0.2, "cha" : 0.1}));
 Jobs["Mage"].levels.push(new JobLevel(320,  [{ab: Abilities.Black.Freeze, set: "Spells"}], {"int" : 0.2, "dex" : 0.1}));
 Jobs["Mage"].levels.push(new JobLevel(640,  [{ab: Abilities.White.Dispel, set: "Support"}], {"int" : 0.1, "spi" : 0.2}));
 Jobs["Mage"].levels.push(new JobLevel(1280, [{ab: Abilities.Black.Bolt, set: "Spells"}, {ab: Abilities.Black.Eruption, set: "Spells"}], {"int" : 0.4, "spi" : 0.1, "sp" : 5}));
-Jobs["Mage"].Unlocked = function(entity) {
-	return Scenes.Global.MagicStage1();
+Jobs["Mage"].Unlocked = function(entity : Entity) {
+	return GlobalScenes.MagicStage1();
 }
 
 Jobs["Mystic"] = new Job("Mystic");
-Jobs["Mystic"].Long = function(entity) {
+Jobs["Mystic"].Long = function(entity : Entity) {
 	var parse = {hisher: entity.hisher(), name: entity.nameDesc(), s: entity.plural() ? "" : "s"};
 	return Text.Parse("As a mystic, [name] take[s] the first steps in mastering the  power of nature, commanding water and plants to bend to [hisher] will.", parse);
 }
@@ -400,12 +437,12 @@ Jobs["Mystic"].levels.push(new JobLevel(160,  [{ab: Abilities.White.Purify, set:
 Jobs["Mystic"].levels.push(new JobLevel(320,  [{ab: Abilities.Black.Spire, set: "Spells"}], {"int" : 0.2, "str" : 0.1}));
 Jobs["Mystic"].levels.push(new JobLevel(640,  [{ab: Abilities.Black.Gust, set: "Spells"}], {"int" : 0.1, "lib" : 0.2}));
 Jobs["Mystic"].levels.push(new JobLevel(1280, [{ab: Abilities.Black.Venom, set: "Spells"}, {ab: Abilities.Black.Stalagmite, set: "Spells"}], {"spi" : 0.4, "sta" : 0.1}));
-Jobs["Mystic"].Unlocked = function(entity) {
-	return Scenes.Global.MagicStage1();
+Jobs["Mystic"].Unlocked = function(entity : Entity) {
+	return GlobalScenes.MagicStage1();
 }
 
 Jobs["Healer"] = new Job("Healer");
-Jobs["Healer"].Long = function(entity) {
+Jobs["Healer"].Long = function(entity : Entity) {
 	var parse = {hisher: entity.hisher(), HisHer: entity.HisHer(), name: entity.nameDesc(), s: entity.plural() ? "" : "s"};
 	return Text.Parse("As a proficient healer, [name] know[s] the bare essentials of caring for the wounded in [hisher] party, keeping them alive in any and all situations. [HisHer] healing hands can ease the pain of minor wounds and nurse people back to health.", parse);
 }
@@ -419,12 +456,12 @@ Jobs["Healer"].levels.push(new JobLevel(160,  null, {"spi" : 0.2, "int" : 0.1}))
 Jobs["Healer"].levels.push(new JobLevel(320,  [{ab: Abilities.White.Cleanse, set: "Support"}], {"int" : 0.3}));
 Jobs["Healer"].levels.push(new JobLevel(640,  null, {"cha" : 0.2, "sta" : 0.1}));
 Jobs["Healer"].levels.push(new JobLevel(1280, [{ab: Abilities.White.Recover, set: "Support"}], {"spi" : 0.4, "int" : 0.1, "sp" : 5}));
-Jobs["Healer"].Unlocked = function(entity) {
-	return Scenes.Global.MagicStage1();
+Jobs["Healer"].Unlocked = function(entity : Entity) {
+	return GlobalScenes.MagicStage1();
 }
 
 Jobs["Singer"] = new Job("Singer");
-Jobs["Singer"].Long = function(entity) {
+Jobs["Singer"].Long = function(entity : Entity) {
 	var parse = {hisher: entity.hisher(), himher: entity.himher(), name: entity.nameDesc(), s: entity.plural() ? "" : "s"};
 	return Text.Parse("As a singer, [name] can sway those around [himher] with [hisher] songs, rousing courage in [hisher] allies or inducing dismay in [hisher] foes.", parse);
 }
@@ -438,9 +475,10 @@ Jobs["Singer"].levels.push(new JobLevel(160,  null, {"spi" : 0.2, "int" : 0.1}))
 Jobs["Singer"].levels.push(new JobLevel(320,  null, {"int" : 0.3}));
 Jobs["Singer"].levels.push(new JobLevel(640,  null, {"cha" : 0.2, "sta" : 0.1}));
 Jobs["Singer"].levels.push(new JobLevel(1280, [{ab: Abilities.White.Heal, set: "Support"}], {"spi" : 0.4, "int" : 0.1}));
-Jobs["Singer"].Unlocked = function(entity) {
+Jobs["Singer"].Unlocked = function(entity : Entity) {
+	let cveta = GAME().cveta;
 	if(entity == cveta) return true;
-	return cveta.flags["Singer"] >= Cveta.Singer.Taught;
+	return cveta.flags["Singer"] >= CvetaFlags.Singer.Taught;
 }
 
 ////////////
@@ -448,7 +486,7 @@ Jobs["Singer"].Unlocked = function(entity) {
 ////////////
 
 Jobs["Elementalist"] = new Job("Elementalist");
-Jobs["Elementalist"].Long = function(entity) {
+Jobs["Elementalist"].Long = function(entity : Entity) {
 	var parse = {hisher: entity.hisher(), HisHer: entity.HisHer(), name: entity.nameDesc()};
 	return Text.Parse("The elementalist is a specialist magician, being able to call on the full fury of the elements to rain down on [hisher] foes. Very effective against large groups of enemies.", parse);
 }
@@ -464,13 +502,13 @@ Jobs["Elementalist"].levels.push(new JobLevel(320,  null, {"spi" : 0.2, "sta" : 
 Jobs["Elementalist"].levels.push(new JobLevel(640,  [{ab: Abilities.Black.Hailstorm, set: "Spells"}], {"int" : 0.4}));
 Jobs["Elementalist"].levels.push(new JobLevel(1280, null, {"dex" : 0.1, "sta" : 0.1, "spi" : 0.2}));
 Jobs["Elementalist"].levels.push(new JobLevel(2560, [{ab: Abilities.Black.Quake, set: "Spells"}, {ab: Abilities.Black.PrismaticBurst, set: "Spells"}], {"int" : 0.5, "spi" : 0.2, "sp" : 5}));
-Jobs["Elementalist"].Unlocked = function(entity) {
-	return Scenes.Global.MagicStage2();
+Jobs["Elementalist"].Unlocked = function(entity : Entity) {
+	return GlobalScenes.MagicStage2();
 }
 
 
 Jobs["Warlock"] = new Job("Warlock");
-Jobs["Warlock"].Long = function(entity) {
+Jobs["Warlock"].Long = function(entity : Entity) {
 	var parse = {hisher: entity.hisher(), HisHer: entity.HisHer(), name: entity.nameDesc()};
 	return Text.Parse("The warlock utilizes the power of darkness to weaken and drain [hisher] enemies. The warlock's curse makes [hisher] foes more susceptible to debilitating effects.", parse);
 }
@@ -486,13 +524,13 @@ Jobs["Warlock"].levels.push(new JobLevel(320,  null, {"lib" : 0.2, "sta" : 0.2})
 Jobs["Warlock"].levels.push(new JobLevel(640,  [{ab: Abilities.Black.DrainingTouch, set: "Spells"}], {"int" : 0.3, "str" : 0.1}));
 Jobs["Warlock"].levels.push(new JobLevel(1280, null, {"spi" : 0.3, "sta" : 0.1}));
 Jobs["Warlock"].levels.push(new JobLevel(2560, [{ab: Abilities.Black.EntropicFortune, set: "Spells"}, {ab: Abilities.Black.TaintedVitality, set: "Spells"}], {"int" : 0.3, "sta" : 0.3, "spi" : 0.1, "sp" : 5}));
-Jobs["Warlock"].Unlocked = function(entity) {
-	return Scenes.Global.MagicStage2();
+Jobs["Warlock"].Unlocked = function(entity : Entity) {
+	return GlobalScenes.MagicStage2();
 }
 
 
 Jobs["Hypnotist"] = new Job("Hypnotist");
-Jobs["Hypnotist"].Long = function(entity) {
+Jobs["Hypnotist"].Long = function(entity : Entity) {
 	var parse = {hisher: entity.hisher(), HisHer: entity.HisHer(), name: entity.nameDesc()};
 	return Text.Parse("Hypnotists utilize the alluring magic of illusion and mental suggestion to manipulate others, both on and off the battlefield. Practitioners of this advanced art require intimate familiarity of the unbridled passions that rule us all, as well as knowledge of the arcane.", parse);
 }
@@ -509,13 +547,13 @@ Jobs["Hypnotist"].levels.push(new JobLevel(320,  null, {"cha" : 0.3, "int" : 0.1
 Jobs["Hypnotist"].levels.push(new JobLevel(640,  [{ab: Abilities.Seduction.SIllusion, set: "Support"}], {"spi" : 0.2, "lib" : 0.2}));
 Jobs["Hypnotist"].levels.push(new JobLevel(1280, null, {"int" : 0.1, "cha" : 0.3}));
 Jobs["Hypnotist"].levels.push(new JobLevel(2560, [{ab: Abilities.Seduction.Confuse, set: "Support"}, {ab: Abilities.Seduction.Allure, set: "Support"}], {"cha" : 0.3, "lib" : 0.3, "int" : 0.2, "lp" : 5}));
-Jobs["Hypnotist"].Unlocked = function(entity) {
-	return Scenes.Global.MagicStage2();
+Jobs["Hypnotist"].Unlocked = function(entity : Entity) {
+	return GlobalScenes.MagicStage2();
 }
 
 Jobs["Eromancer"] = new Job("Eromancer");
 //TODO
-Jobs["Eromancer"].Long = function(entity) {
+Jobs["Eromancer"].Long = function(entity : Entity) {
 	var parse = {hisher: entity.hisher(), HisHer: entity.HisHer(), name: entity.nameDesc()};
 	return Text.Parse("", parse);
 }
@@ -531,13 +569,13 @@ Jobs["Eromancer"].levels.push(new JobLevel(320,  null, {"str" : 0.2}));
 Jobs["Eromancer"].levels.push(new JobLevel(640,  null, {"str" : 0.2}));
 Jobs["Eromancer"].levels.push(new JobLevel(1280, null, {"str" : 0.2}));
 Jobs["Eromancer"].levels.push(new JobLevel(2560, null, {"str" : 0.2}));
-Jobs["Eromancer"].Unlocked = function(entity) {
-	return Scenes.Global.MagicStage2();
+Jobs["Eromancer"].Unlocked = function(entity : Entity) {
+	return GlobalScenes.MagicStage2();
 }
 
 Jobs["RunicKnight"] = new Job("Runic Knight");
 //TODO
-Jobs["RunicKnight"].Long = function(entity) {
+Jobs["RunicKnight"].Long = function(entity : Entity) {
 	var parse = {hisher: entity.hisher(), HisHer: entity.HisHer(), name: entity.nameDesc()};
 	return Text.Parse("", parse);
 }
@@ -553,13 +591,13 @@ Jobs["RunicKnight"].levels.push(new JobLevel(320,  null, {"str" : 0.2}));
 Jobs["RunicKnight"].levels.push(new JobLevel(640,  null, {"str" : 0.2}));
 Jobs["RunicKnight"].levels.push(new JobLevel(1280, null, {"str" : 0.2}));
 Jobs["RunicKnight"].levels.push(new JobLevel(2560, null, {"str" : 0.2}));
-Jobs["RunicKnight"].Unlocked = function(entity) {
-	return Scenes.Global.MagicStage2();
+Jobs["RunicKnight"].Unlocked = function(entity : Entity) {
+	return GlobalScenes.MagicStage2();
 }
 
 Jobs["Bard"] = new Job("Bard");
 //TODO
-Jobs["Bard"].Long = function(entity) {
+Jobs["Bard"].Long = function(entity : Entity) {
 	var parse = {hisher: entity.hisher(), HisHer: entity.HisHer(), name: entity.nameDesc()};
 	return Text.Parse("", parse);
 }
@@ -575,9 +613,10 @@ Jobs["Bard"].levels.push(new JobLevel(320,  null, {"str" : 0.2}));
 Jobs["Bard"].levels.push(new JobLevel(640,  null, {"str" : 0.2}));
 Jobs["Bard"].levels.push(new JobLevel(1280, null, {"str" : 0.2}));
 Jobs["Bard"].levels.push(new JobLevel(2560, null, {"str" : 0.2}));
-Jobs["Bard"].Unlocked = function(entity) {
+Jobs["Bard"].Unlocked = function(entity : Entity) {
+	let cveta = GAME().cveta;
 	if(entity == cveta) return true;
-	return Scenes.Global.MagicStage2();
+	return GlobalScenes.MagicStage2();
 }
 ////////////
 // TIER 4 //
@@ -593,4 +632,4 @@ Jobs["Bard"].Unlocked = function(entity) {
 // TIER 6 //
 ////////////
 
-export { Job, JobDesc, JobEnum, JobLevel, Jobs };
+export { Jobs };

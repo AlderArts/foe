@@ -17,17 +17,14 @@ import './js/text.js';
 import './js/button.js';
 import './js/gui.js';
 
-import './js/gamecache.js';
 import './js/saver.js';
 
 // Entity scripts
 import './js/statuseffect.js';
-import './js/ability.js';
 
 import './js/pregnancy.js';
 import './js/lactation.js';
 
-import './js/body/gender.js';
 import './js/body/color.js';
 import './js/body/race.js';
 import './js/body/bodypart.js';
@@ -75,9 +72,6 @@ import './js/ability/run.js';
 import './js/ability/white.js';
 import './js/ability/black.js';
 import './js/ability/enemyskill.js';
-
-// Jobs
-import './js/job.js';
 
 // Items
 import './js/item.js';

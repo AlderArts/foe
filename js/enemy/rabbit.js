@@ -25,6 +25,7 @@ import { SetGameState, GameState } from '../gamestate';
 import { BodyPartType } from '../body/bodypart';
 import { Sex } from '../entity-sex';
 import { TimeStep } from '../GAME';
+import { TerryFlags } from '../event/terry-flags';
 
 let LagomorphScenes = {};
 
@@ -1517,7 +1518,7 @@ LagomorphScenes.GroupWinOnPlainsFuckM = function(enc, group) {
 						Text.Add("<i>“Afraid not, bunny-bums.”</i>", parse);
 						Text.NL();
 						Text.Add("The lapins halt, looking at the [foxvixen] with confused expression. One, bolder than his brother, dares to ask: <i>“We no fuck foxy?”</i> even as he hungrily eyes the naked expanse of Terry’s body.", parse);
-						if(terry.Cup() >= Terry.Breasts.Bcup)
+						if(terry.Cup() >= TerryFlags.Breasts.Bcup)
 							Text.Add(" Like a magnet, the two’s gaze is drawn to the bouncing tits upon the [foxvixen]’s chest.", parse);
 						Text.NL();
 						Text.Add("<i>“Oh, don’t worry. We’ll fuck. Just not the way you’re expecting,”</i> [heshe] rubs [hisher] chin. <i>“How to put it, hmm… Foxy fucks we,”</i> [heshe] says with a mischievous grin.", parse);

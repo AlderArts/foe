@@ -4,6 +4,7 @@ import { WorldTime } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { EncounterTable } from '../../event';
+import { CvetaFlags } from './cveta-flags';
 
 let CvetaScenes = {
 	Dates : DateScenes,
@@ -98,7 +99,7 @@ CvetaScenes.ViolinApproach = function() {
 				
 				party.coin += 500;
 				
-				cveta.flags["Met"] = Cveta.Met.ViolinQ;
+				cveta.flags["Met"] = CvetaFlags.Met.ViolinQ;
 				
 				Gui.NextPrompt();
 			});
@@ -170,11 +171,11 @@ CvetaScenes.ViolinPrompt = function() {
 			outlaws.relation.IncreaseStat(100, 3);
 			
 			cveta.relation.IncreaseStat(100, 5);
-			cveta.flags["Met"] = Cveta.Met.Available;
+			cveta.flags["Met"] = CvetaFlags.Met.Available;
 			party.Inv().RemoveItem(Items.Quest.Violin);
 			
 			Gui.NextPrompt();
-		}, enabled : cveta.flags["Met"] >= Cveta.Met.ViolinGet,
+		}, enabled : cveta.flags["Met"] >= CvetaFlags.Met.ViolinGet,
 		tooltip : "Yes, you got the violin. Here it is, in all its glory."
 	});
 	options.push({ nameStr : "No",
@@ -205,7 +206,7 @@ CvetaScenes.Approach = function() {
 		playername : player.name
 	};
 	
-	if(outlaws.BullTowerCompleted() && !(cveta.flags["Intimate"] & Cveta.Intimate.Introduced)) {
+	if(outlaws.BullTowerCompleted() && !(cveta.flags["Intimate"] & CvetaFlags.Intimate.Introduced)) {
 		CvetaScenes.PostBullTowerPerformance();
 	}
 	else if(cveta.InTent()) {
@@ -268,7 +269,7 @@ CvetaScenes.Prompt = function() {
 		}, enabled : true,
 		tooltip : "Play around with Cveta. Maybe you can break that prudish attitude of hers…"
 	});
-	if(cveta.flags["Music"] >= Cveta.Music.Talked && cveta.flags["Bard"] < Cveta.Bard.Taught && cveta.flags["Singer"] < Cveta.Singer.Taught) {
+	if(cveta.flags["Music"] >= CvetaFlags.Music.Talked && cveta.flags["Bard"] < CvetaFlags.Bard.Taught && cveta.flags["Singer"] < CvetaFlags.Singer.Taught) {
 		options.push({ nameStr : "Teach",
 			func : function() {
 				CvetaScenes.Teach();
@@ -328,7 +329,7 @@ CvetaScenes.Teach = function() {
 	}
 	
 	Text.Clear();
-	if(singerAvailable && cveta.flags["Singer"] < Cveta.Singer.Taught) {
+	if(singerAvailable && cveta.flags["Singer"] < CvetaFlags.Singer.Taught) {
 		parse["name"] = singerAvailable.name;
 		parse["poss"] = singerAvailable.possessive();
 		parse = singerAvailable.ParserPronouns(parse);
@@ -358,14 +359,14 @@ CvetaScenes.Teach = function() {
 		Text.Add("<b>You now have access to the Singer job.</b>", parse);
 		Text.Flush();
 		
-		cveta.flags["Singer"] = Cveta.Singer.Taught;
+		cveta.flags["Singer"] = CvetaFlags.Singer.Taught;
 		
 		outlaws.relation.IncreaseStat(100, 2);
 		
 		TimeStep({hour : 8});
 		Gui.NextPrompt();
 	}
-	else if(bardAvailable && cveta.flags["Bard"] < Cveta.Bard.Taught) {
+	else if(bardAvailable && cveta.flags["Bard"] < CvetaFlags.Bard.Taught) {
 		parse["name"] = bardAvailable.name;
 		parse["poss"] = bardAvailable.possessive();
 		parse = bardAvailable.ParserPronouns(parse);
@@ -391,7 +392,7 @@ CvetaScenes.Teach = function() {
 		Text.Add("<b>You now have access to the Bard job.</b>", parse);
 		Text.Flush();
 		
-		cveta.flags["Bard"] = Cveta.Bard.Taught;
+		cveta.flags["Bard"] = CvetaFlags.Bard.Taught;
 		
 		outlaws.relation.IncreaseStat(100, 2);
 		
@@ -825,7 +826,7 @@ CvetaScenes.HerselfPrompt = function() {
 			Text.Clear();
 			Text.Add("The songstress frowns at your question, moving to smooth out a few wrinkles on her faded gown. <i>“I believe I have already related this tale to you?”</i>", parse);
 			Text.NL();
-			if(cveta.flags["Herself"] < Cveta.Herself.Outlaws)
+			if(cveta.flags["Herself"] < CvetaFlags.Herself.Outlaws)
 				Text.Add("You point out to Cveta that she was quite remiss on the details that last time, when she asked you to buy a violin for her. What happened after her encounter with the gate guards?", parse);
 			else
 				Text.Add("You say that you’d like to hear it again. Cveta sighs, but it’s a good-natured one and she clears her throat.", parse);
@@ -851,13 +852,13 @@ CvetaScenes.HerselfPrompt = function() {
 			Text.NL();
 			Text.Add("<i>“Ah, if only Father were here,”</i> Cveta says with a small sniff, pulling at the neck of her gown absent-mindedly. <i>“He would outshine each and every piece of scum Rigard could throw at him, then flog them several ways in places they did not know they had before throwing them into the stocks.”</i>", parse);
 			Text.Flush();
-			if(cveta.flags["Herself"] < Cveta.Herself.Outlaws)
-				cveta.flags["Herself"] = Cveta.Herself.Outlaws;
+			if(cveta.flags["Herself"] < CvetaFlags.Herself.Outlaws)
+				cveta.flags["Herself"] = CvetaFlags.Herself.Outlaws;
 			CvetaScenes.HerselfPrompt();
 		}, enabled : true,
 		tooltip : "Ask her how she ended up with the outlaws."
 	});
-	if(cveta.flags["Herself"] >= Cveta.Herself.Outlaws) {
+	if(cveta.flags["Herself"] >= CvetaFlags.Herself.Outlaws) {
 		options.push({ nameStr : "Nobility",
 			func : function() {
 				Text.Clear();
@@ -885,8 +886,8 @@ CvetaScenes.HerselfPrompt = function() {
 				Text.NL();
 				Text.Add("“What do you think?”</i>", parse);
 				Text.Flush();
-				if(cveta.flags["Herself"] < Cveta.Herself.Nobility)
-					cveta.flags["Herself"] = Cveta.Herself.Nobility;
+				if(cveta.flags["Herself"] < CvetaFlags.Herself.Nobility)
+					cveta.flags["Herself"] = CvetaFlags.Herself.Nobility;
 				
 				//[Naive][Idealistic][No Comment]
 				var options = new Array();
@@ -937,7 +938,7 @@ CvetaScenes.HerselfPrompt = function() {
 			tooltip : "Ask Cveta about her curious ideas on nobility."
 		});
 	}
-	if(cveta.flags["Herself"] >= Cveta.Herself.Nobility) {
+	if(cveta.flags["Herself"] >= CvetaFlags.Herself.Nobility) {
 		options.push({ nameStr : "Mandate",
 			func : function() {
 				Text.Clear();
@@ -947,8 +948,8 @@ CvetaScenes.HerselfPrompt = function() {
 				Text.NL();
 				Text.Add("“It may not be wholly true, but the actual truth of the legend needs not have bearing on the lessons one can take away from it. Does that answer your question?”</i>", parse);
 				Text.Flush();
-				if(cveta.flags["Herself"] < Cveta.Herself.Mandate)
-					cveta.flags["Herself"] = Cveta.Herself.Mandate;
+				if(cveta.flags["Herself"] < CvetaFlags.Herself.Mandate)
+					cveta.flags["Herself"] = CvetaFlags.Herself.Mandate;
 				CvetaScenes.HerselfPrompt();
 			}, enabled : true,
 			tooltip : "What is this “Mandate of the Spirits” she speaks of?"
@@ -1053,8 +1054,8 @@ CvetaScenes.HerselfPrompt = function() {
 		func : function() {
 			Text.Clear();
 			
-			if(cveta.flags["Music"] < Cveta.Music.Talked)
-				cveta.flags["Music"] = Cveta.Music.Talked;
+			if(cveta.flags["Music"] < CvetaFlags.Music.Talked)
+				cveta.flags["Music"] = CvetaFlags.Music.Talked;
 			Text.Add("Cveta doesn’t reply immediately upon hearing your question, instead half-lidding her eyes as she thinks. Slowly, she lets the current tune fade into silence and begins anew, a little ditty springing from the strings of her lyre, sharp and lively, yet with a strange yearning, a distant longing buried in the undertones, a longing for… something, but you don’t know what.", parse);
 			Text.NL();
 			Text.Add("Then as suddenly as it begun, the music’s mood changes in quick succession, turning hard and fast, then slowing to a sad crawl. One moment it gushes like a stream swollen with spring rain, then turns immovable, stolid, forbidding the next.", parse);
@@ -1424,7 +1425,7 @@ CvetaScenes.MariaTalkFirst = function() {
 		playername : player.name
 	};
 	
-	cveta.flags["Met"] = Cveta.Met.MariaTalk;
+	cveta.flags["Met"] = CvetaFlags.Met.MariaTalk;
 	
 	Text.Clear();
 	Text.Add("As you step into the now-familiar confines of the outlaws' camp, the first sight you see is that of Maria pacing up to you, a scowl on her face. Something's clearly set her on edge, and hopefully it isn't your presence.", parse);
@@ -1498,7 +1499,7 @@ CvetaScenes.FirstMeeting = function() {
 		playername : player.name
 	};
 	
-	cveta.flags["Met"] = Cveta.Met.FirstMeeting;
+	cveta.flags["Met"] = CvetaFlags.Met.FirstMeeting;
 	
 	Text.Add("Approaching the tent Maria pointed out, the faint sound of music reaches you as you draw close, that of a slow, dolorous piece being played on a string instrument of some sort. The music is strangely haunting, and reminds you of home, your life before you picked that gem from the mirror, of better times…", parse);
 	Text.NL();
@@ -1999,9 +2000,9 @@ CvetaScenes.Performance = function() {
 	outlaws.relation.IncreaseStat(25, 1);
 	TimeStep({hour : 2});
 	
-	if(cveta.flags["Met"] >= Cveta.Met.ViolinQ && cveta.flags["Met"] < Cveta.Met.Available)
+	if(cveta.flags["Met"] >= CvetaFlags.Met.ViolinQ && cveta.flags["Met"] < CvetaFlags.Met.Available)
 		Gui.NextPrompt(CvetaScenes.ViolinPrompt);
-	else if(cveta.flags["Met"] < Cveta.Met.ViolinQ && cveta.Relation() >= 10 && cveta.violinTimer.Expired())
+	else if(cveta.flags["Met"] < CvetaFlags.Met.ViolinQ && cveta.Relation() >= 10 && cveta.violinTimer.Expired())
 		Gui.NextPrompt(CvetaScenes.ViolinApproach);
 	else
 		Gui.NextPrompt();
@@ -2234,7 +2235,7 @@ CvetaScenes.PostBullTowerPerformance = function() {
 		
 		TimeStep({hour: 1});
 		
-		cveta.flags["Intimate"] |= Cveta.Intimate.Introduced;
+		cveta.flags["Intimate"] |= CvetaFlags.Intimate.Introduced;
 		
 		Gui.NextPrompt();
 	});
@@ -2386,11 +2387,11 @@ CvetaScenes.IntimateGrope = function() {
 	};
 	parse = player.ParserTags(parse);
 	
-	var first = !(cveta.flags["Intimate"] & Cveta.Intimate.Groped);
+	var first = !(cveta.flags["Intimate"] & CvetaFlags.Intimate.Groped);
 	
 	Text.Clear();
 	if(cveta.Relation() >= 80) {
-		cveta.flags["Intimate"] |= Cveta.Intimate.Groped;
+		cveta.flags["Intimate"] |= CvetaFlags.Intimate.Groped;
 		
 		if(first) {
 			Text.Add("Cveta looks unsure at your proposition, her playing coming to an abrupt stop as she reaches up to brush away her hair from her eyes. She’s clearly trying to buy time for her to think things through, but all the time in the world won’t save her, not with the jumbled, warring thoughts and desires that must be going through her head.", parse);

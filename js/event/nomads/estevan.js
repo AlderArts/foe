@@ -14,6 +14,8 @@ import { WorldTime, TimeStep } from '../../GAME';
 import { Gui } from '../../gui';
 import { Text } from '../../text';
 import { Sex } from '../../entity-sex';
+import { CaleFlags } from './cale-flags';
+import { EstevanFlags } from './estevan-flags';
 
 let EstevanScenes = {};
 
@@ -33,33 +35,15 @@ function Estevan(storage) {
 	this.RestFull();
 	
 	this.flags["Met"]    = 0;
-	this.flags["Ranger"] = Estevan.Ranger.NotTalked;
-	this.flags["Cheat"]  = Estevan.Cheat.NotTalked;
+	this.flags["Ranger"] = EstevanFlags.Ranger.NotTalked;
+	this.flags["Cheat"]  = EstevanFlags.Cheat.NotTalked;
 	this.flags["cav"]    = 0; //cavalcade explanation
-	this.flags["Gay"]    = Estevan.GaySex.No;
+	this.flags["Gay"]    = EstevanFlags.GaySex.No;
 	
 	if(storage) this.FromStorage(storage);
 }
 Estevan.prototype = new Entity();
 Estevan.prototype.constructor = Estevan;
-
-Estevan.Ranger = {
-	NotTalked : 0,
-	Taught    : 1
-}
-Estevan.Cheat = {
-	NotTalked : 0,
-	Talked    : 1,
-	Setup     : 2,
-	Triggered : 3
-}
-Estevan.GaySex = {
-	No        : 0,
-	First     : 1,
-	Blowjob   : 2,
-	FuckedBy  : 4,
-	FuckedHim : 8
-}
 
 Estevan.prototype.Met = function() {
 	return this.flags["Met"] != 0;
@@ -105,7 +89,7 @@ Estevan.prototype.IsAtLocation = function(location) {
 }
 
 Estevan.prototype.HadGaySex = function() {
-	return this.flags["Gay"] >= Estevan.GaySex.First;
+	return this.flags["Gay"] >= EstevanFlags.GaySex.First;
 }
 
 EstevanScenes.Interact = function() {
@@ -131,12 +115,12 @@ EstevanScenes.Interact = function() {
 		Text.NL();
 		Text.Add("<i>“When I’m not out working, I usually hang around camp. Socialize, have a drink or five, play some cards and so on. Have you talked to Rosie and Wolfie yet? We could use a fourth player in our game.”</i>", parse);
 		Text.NL();
-		if(cale.flags["Met2"] > Cale.Met2.NotMet) {
+		if(cale.flags["Met2"] > CaleFlags.Met2.NotMet) {
 			Text.Add("Sure, you’ve met them, assuming that he means Cale?", parse);
 			Text.NL();
 			Text.Add("<i>“Yeah, that’s right,”</i> he nods.", parse);
 		}
-		else if(cale.flags["Met"] > Cale.Met.NotMet) {
+		else if(cale.flags["Met"] > CaleFlags.Met.NotMet) {
 			Text.Add("Yeah, you’ve met them, though you didn’t talk with the wolf much. You were both kind of occupied at the time.", parse);
 			Text.NL();
 			Text.Add("<i>“I bet, though I doubt you’d have gotten much of an intelligent conversation out of the guy anyways.”</i>", parse);
@@ -157,7 +141,7 @@ EstevanScenes.Interact = function() {
 	}
 	
 	Text.Add("<i>“Hey there, [playername]!”</i> Estevan greets you as you approach. <i>“What can I do for you?”</i>", parse);
-	if(cale.flags["Met2"] == Cale.Met2.NotMet) {
+	if(cale.flags["Met2"] == CaleFlags.Met2.NotMet) {
 		Text.NL();
 		Text.Add("<i>“Did you speak with Rosie and Wolfie yet? I wouldn’t mind another hand at cards, spice things up a bit.”</i>", parse);
 	}
@@ -200,7 +184,7 @@ EstevanScenes.Prompt = function() {
 		func : function() {
 			Text.Clear();
 			Text.Add("<i>“Sure, as long as you don’t spread my secrets to Wolfie, I can teach you a few tricks,”</i> the satyr agrees.", parse);
-			if(estevan.flags["Ranger"] == Estevan.Ranger.NotTalked) {
+			if(estevan.flags["Ranger"] == EstevanFlags.Ranger.NotTalked) {
 				Text.Add(" <i>“He figures himself to be something of an aspiring hunter. I’ll tell you, it’s rather fun to watch a city kid blundering about in the forest without a clue of what he’s doing.”</i>", parse);
 				Text.NL();
 				Text.Add("<i>“Anyways, like I told you before, I have a good hand with a bow, but my favored method of hunting is using traps. With the correct preparation and enough knowledge of his prey, even a single hunter can take down a beast many times his size.”</i>", parse);
@@ -222,8 +206,8 @@ EstevanScenes.Prompt = function() {
 			Text.Add("<i>“Was there something else you were wondering about?”</i> Estevan asks, putting away his tools.", parse);
 			Text.Flush();
 			
-			if(estevan.flags["Ranger"] == Estevan.Ranger.NotTalked)
-				estevan.flags["Ranger"] = Estevan.Ranger.Taught;
+			if(estevan.flags["Ranger"] == EstevanFlags.Ranger.NotTalked)
+				estevan.flags["Ranger"] = EstevanFlags.Ranger.Taught;
 			
 			TimeStep({hour: 1});
 			
@@ -245,7 +229,7 @@ EstevanScenes.Prompt = function() {
 							Text.Add("<i>“Aww, but it's such a nice idea!”</i>", parse);
 							Text.Flush();
 							
-							estevan.flags["Cheat"] = Estevan.Cheat.Talked;
+							estevan.flags["Cheat"] = EstevanFlags.Cheat.Talked;
 							
 							TimeStep({minute: 15});
 							EstevanScenes.Prompt();
@@ -258,7 +242,7 @@ EstevanScenes.Prompt = function() {
 							Text.Add("<i>“Knew I could count on you, partner!”</i> Estevan grins excitedly. <i>“Bring up the subject next time we run a game, and I’ll handle the rest. Poor wolf won’t know what hit him, and he’ll likely be butthurt about it for days after. Heh.”</i>", parse);
 							Text.Flush();
 							
-							estevan.flags["Cheat"] = Estevan.Cheat.Setup;
+							estevan.flags["Cheat"] = EstevanFlags.Cheat.Setup;
 							
 							TimeStep({minute: 15});
 							EstevanScenes.Prompt();
@@ -268,7 +252,7 @@ EstevanScenes.Prompt = function() {
 					Gui.SetButtonsFromList(options, false, null);
 				};
 				
-				if(estevan.flags["Cheat"] == Estevan.Cheat.NotTalked) {
+				if(estevan.flags["Cheat"] == EstevanFlags.Cheat.NotTalked) {
 					Text.Add("You have an idea, of sorts. Estevan wouldn’t mind helping you take Cale down a peg or two, right?", parse);
 					Text.NL();
 					Text.Add("<i>“What’d you have in mind?”</i> the satyr asks, looking intrigued.", parse);
@@ -288,13 +272,13 @@ EstevanScenes.Prompt = function() {
 					
 					setupFunc();
 				}
-				else if(estevan.flags["Cheat"] == Estevan.Cheat.Talked) {
+				else if(estevan.flags["Cheat"] == EstevanFlags.Cheat.Talked) {
 					Text.Add("<i>“So, what do you think about setting that prank in motion, [playername]? I deal the cards, you deal with the wolf afterward.”</i>", parse);
 					Text.Flush();
 					
 					setupFunc();
 				}
-				else if(estevan.flags["Cheat"] == Estevan.Cheat.Setup) {
+				else if(estevan.flags["Cheat"] == EstevanFlags.Cheat.Setup) {
 					Text.Add("<i>“So, how do you feel about our little prank, [playername]? Ready for the game?”</i>", parse);
 					Text.Flush();
 					
@@ -346,7 +330,7 @@ EstevanScenes.SexGay = function() {
 	
 	var first = !estevan.HadGaySex();
 	
-	estevan.flags["Gay"] |= Estevan.GaySex.First;
+	estevan.flags["Gay"] |= EstevanFlags.GaySex.First;
 	
 	Text.Clear();
 	if(first) {
@@ -516,7 +500,7 @@ EstevanScenes.SexGay = function() {
 					player.slut.IncreaseStat(50, 1);
 					player.subDom.DecreaseStat(-50, 1);
 					
-					estevan.flags["Gay"] |= Estevan.GaySex.FuckedBy;
+					estevan.flags["Gay"] |= EstevanFlags.GaySex.FuckedBy;
 					
 					TimeStep({minute: 30});
 					
@@ -526,11 +510,11 @@ EstevanScenes.SexGay = function() {
 			});
 			options.push({ nameStr : "Uh…",
 				func : function() {
-					var firstBlow = (estevan.flags["Gay"] & Estevan.GaySex.Blowjob) == 0;
+					var firstBlow = (estevan.flags["Gay"] & EstevanFlags.GaySex.Blowjob) == 0;
 					
 					Text.Clear();
 					Text.Add("You explain to Estevan that you're not quite up to an extended plowing considering the acreage of cock that he is offering. ", parse);
-					var fucks = estevan.flags["Gay"] & Estevan.GaySex.FuckedBy;
+					var fucks = estevan.flags["Gay"] & EstevanFlags.GaySex.FuckedBy;
 					if(firstBlow)
 						Text.Add("The satyr isn't thrilled with the change-up at first, clearly having anticipated using his bruiser-sized cock to do some damage to your [butt],", parse);
 					else if(fucks)
@@ -593,7 +577,7 @@ EstevanScenes.SexGay = function() {
 					}
 					Text.Flush();
 					
-					estevan.flags["Gay"] |= Estevan.GaySex.Blowjob;
+					estevan.flags["Gay"] |= EstevanFlags.GaySex.Blowjob;
 					
 					TimeStep({minute: 15});
 					
@@ -607,8 +591,8 @@ EstevanScenes.SexGay = function() {
 	});
 	options.push({ nameStr : "Taunt Estevan", //TODO
 		func : function() {
-			var firstSex = (estevan.flags["Gay"] & Estevan.GaySex.FuckedHim) == 0;
-			var fuckedBy = (estevan.flags["Gay"] & Estevan.GaySex.FuckedBy)  != 0;
+			var firstSex = (estevan.flags["Gay"] & EstevanFlags.GaySex.FuckedHim) == 0;
+			var fuckedBy = (estevan.flags["Gay"] & EstevanFlags.GaySex.FuckedBy)  != 0;
 			
 			Text.Clear();
 			if(firstSex) {
@@ -689,7 +673,7 @@ EstevanScenes.SexGay = function() {
 			
 			TimeStep({minute: 30});
 			
-			estevan.flags["Gay"] |= Estevan.GaySex.FuckedHim;
+			estevan.flags["Gay"] |= EstevanFlags.GaySex.FuckedHim;
 			
 			//[Facial][Inside]
 			var options = new Array();

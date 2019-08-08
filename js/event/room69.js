@@ -8,6 +8,7 @@ import { GetDEBUG } from '../../app';
 import { MoveToLocation, TimeStep } from '../GAME';
 import { Gui } from '../gui';
 import { Text } from '../text';
+import { KiakaiFlags } from './kiakai-flags';
 
 let Room69Scenes = {};
 
@@ -708,7 +709,7 @@ Room69Scenes.Discovering69Sex = function() {
 				var scenes = new EncounterTable();
 				scenes.AddEnc(function() {
 					parse["name"] = kiakai.name;
-					if(kiakai.flags["Attitude"] >= Kiakai.Attitude.Neutral)
+					if(kiakai.flags["Attitude"] >= KiakaiFlags.Attitude.Neutral)
 						parse["reaction"] = "You continue to surprise me!";
 					else
 						parse["reaction"] = "Nothing you do even surprises me anymore!";

@@ -21,6 +21,7 @@ import { Abilities } from '../abilities';
 import { Encounter } from '../combat';
 import { Party } from '../party';
 import { MoveToLocation } from '../GAME';
+import { MirandaFlags } from './miranda-flags';
 
 let CassidyScenes = {
 	Sex     : SexScenes,
@@ -306,7 +307,7 @@ CassidyScenes.ShopDesc = function() {
 		Text.NL();
 		Text.Add("<i>There are times when a strong word suffices.</i><br>", parse);
 		Text.Add("<i>I exist for other times.</i>", parse);
-	}, 1.0, function() { return miranda.flags["Bruiser"] >= Miranda.Bruiser.Taught; });
+	}, 1.0, function() { return miranda.flags["Bruiser"] >= MirandaFlags.Bruiser.Taught; });
 	scenes.AddEnc(function() {
 		Text.Add("cruel-looking dagger with a serrated edge and a gilded hilt. Amethysts have been set into sockets on the hilt, and though the steel blade is sharp, it fails to catch the light as you look upon it from different angles.", parse);
 		Text.NL();

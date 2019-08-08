@@ -10,6 +10,8 @@ import { Encounter } from "../combat";
 import { VaughnScenes } from "./outlaws/vaughn-scenes";
 import { BodyPartType } from "../body/bodypart";
 import { Sex } from "../entity-sex";
+import { MirandaFlags } from "./miranda-flags";
+import { TerryFlags } from "./terry-flags";
 
 let MirandaScenes = {};
 
@@ -61,12 +63,12 @@ MirandaScenes.BarracksApproach = function() {
 	};
 	
 	Text.Clear();
-	if(miranda.Attitude() >= Miranda.Attitude.Neutral)
+	if(miranda.Attitude() >= MirandaFlags.Attitude.Neutral)
 		Text.Add("<i>“Hey there, [playername]. What gives us the honor?”</i> the dobie greets you as you approach.", parse);
 	else
 		Text.Add("<i>“Oh. You. Why’re you here?”</i> The dobie frowns a bit at you showing up. <i>“Don’t loiter. I might be tempted to give you a night in the cells, and you wouldn’t like that.”</i>", parse);
 	
-	if(miranda.flags["Met"] < Miranda.Met.Tavern) {
+	if(miranda.flags["Met"] < MirandaFlags.Met.Tavern) {
 		Text.NL();
 		Text.Add("<i>“Say, how about you come by the Maidens’ Bane some time? Take a few drinks together in a more relaxed place? Just meet up with me there after work. As you can see, I’m a bit busy now.”</i>", parse);
 		Text.NL();
@@ -103,7 +105,7 @@ MirandaScenes.BarracksPrompt = function() {
 	options.push({ nameStr : "Spar",
 		func : function() {
 			Text.Clear();
-			if(miranda.Attitude() >= Miranda.Attitude.Neutral)
+			if(miranda.Attitude() >= MirandaFlags.Attitude.Neutral)
 				Text.Add("<i>“Hah, think you have a shot at beating me, [playername]? I’m not gonna play nice just cause I like you,”</i> Miranda replies, winking. <i>“I could use the workout. Well then, shall we?”</i>", parse);
 			else
 				Text.Add("<i>“Sure, I’ll fight you,”</i> Miranda replies, an evil glint in her eye. <i>“Can’t promise I won’t take advantage of your sorry ass once I’ve pounded it into the dirt, though.”</i>", parse);
@@ -137,7 +139,7 @@ MirandaScenes.BarracksPrompt = function() {
 		tooltip : "Ask her for a friendly spar in the yard."
 	});
 	
-	if(miranda.flags["Bruiser"] < Miranda.Bruiser.Taught) {
+	if(miranda.flags["Bruiser"] < MirandaFlags.Bruiser.Taught) {
 		options.push({ nameStr : "Train",
 			func : MirandaScenes.BruiserTraining, enabled : know,
 			tooltip : "Ask her to teach you how to fight."
@@ -221,7 +223,7 @@ MirandaScenes.BruiserTraining = function() {
 	};
 	
 	Text.Clear();
-	if(miranda.flags["Bruiser"] == Miranda.Bruiser.Progress) {
+	if(miranda.flags["Bruiser"] == MirandaFlags.Bruiser.Progress) {
 		if(player.jobs["Fighter"].level < 4) {
 			Text.Add("<i>“Why embarrass yourself more?”</i> Miranda shakes her head. <i>“Come back when you got the basics down, then we can talk. Before that, the only blade I’ll let you touch is the one between my legs.”</i>", parse);
 			Text.NL();
@@ -241,7 +243,7 @@ MirandaScenes.BruiserTraining = function() {
 		return;
 	}
 	
-	if(miranda.Attitude() >= Miranda.Attitude.Neutral)
+	if(miranda.Attitude() >= MirandaFlags.Attitude.Neutral)
 		Text.Add("<i>“I could show you a thing or two,”</i> Miranda takes another sip of her drink and smiles playfully. <i>“I am oh-so-busy though… what’s in it for me?”</i>", parse);
 	else // nasty
 		Text.Add("<i>“Sure, I could whack you around the yard for a bit, possibly teach you to be slightly less useless in a fight… but why should I?”</i> Miranda shoots back. <i>“I don’t work for free you know.”</i>", parse);
@@ -276,7 +278,7 @@ MirandaScenes.BruiserTraining = function() {
 					Text.Clear();
 					Text.Add("<i>“Hear that, guys? Miranda still has the skills,”</i> the dobie boasts, earning her a few catcalls. You blush at the attention, but there’s no way out of this rabbit hole now.", parse);
 					Text.NL();
-					parse["slut"] = miranda.Attitude() >= Miranda.Attitude.Neutral ? "pet" : "slut";
+					parse["slut"] = miranda.Attitude() >= MirandaFlags.Attitude.Neutral ? "pet" : "slut";
 					Text.Add("<i>“Get down and spread ‘em, [slut]!”</i> the herm hoots, to the cheers of her colleagues. She’s barely able to keep herself from laughing.", parse);
 					Text.NL();
 					Text.Add("Fuck… here?", parse);
@@ -332,7 +334,7 @@ MirandaScenes.BruiserTraining = function() {
 		}, enabled : true,
 		tooltip : "...Fine. She wants you to suck her cock, right?"
 	});
-	if(miranda.Attitude() >= Miranda.Attitude.Neutral) {
+	if(miranda.Attitude() >= MirandaFlags.Attitude.Neutral) {
 		var dom = player.SubDom() - miranda.SubDom();
 		options.push({ nameStr : "Assert",
 			func : function() {
@@ -383,7 +385,7 @@ MirandaScenes.BruiserTrainingCont = function() {
 		Text.Add("<b>You’ll need some more experience as a fighter before Miranda will train you. Raise your fighter job to level 4 or above before you return.</b>", parse);
 		Text.Flush();
 		
-		miranda.flags["Bruiser"] = Miranda.Bruiser.Progress;
+		miranda.flags["Bruiser"] = MirandaFlags.Bruiser.Progress;
 		
 		Gui.NextPrompt(function() {
 			Text.Clear();
@@ -422,7 +424,7 @@ MirandaScenes.BruiserTrainingCont = function() {
 	Text.Flush();
 	
 	miranda.flags["trainSex"] = 0;
-	miranda.flags["Bruiser"] = Miranda.Bruiser.Taught;
+	miranda.flags["Bruiser"] = MirandaFlags.Bruiser.Taught;
 	
 	Gui.NextPrompt(function() {
 		Text.Clear();
@@ -470,9 +472,9 @@ MirandaScenes.RigardGatesInteract = function() {
 		Text.NL();
 	}
 	
-	if(miranda.Attitude() > Miranda.Attitude.Neutral)
+	if(miranda.Attitude() > MirandaFlags.Attitude.Neutral)
 		Text.Add("<i>“If you feel brave enough, I could treat you to another round,”</i> the guardswoman suggests, winking at you. <i>“Meet me at the tavern in the slums after dark and we’ll party hard!”</i>", parse);
-	else if(miranda.Attitude() < Miranda.Attitude.Neutral)
+	else if(miranda.Attitude() < MirandaFlags.Attitude.Neutral)
 		Text.Add("<i>“So you come crawling back here, eh?”</i> The guardswoman looks at you dismissively. <i>“I really don’t have the time for you right now. What do you want?”</i>", parse);
 	else
 		Text.Add("<i>“Head over to the Maidens’ Bane tavern in the slums once in a while; we can have a drink and chat a bit.”</i>", parse);
@@ -491,7 +493,7 @@ MirandaScenes.RigardGatesEnter = function() {
 		playername : player.name
 	};
 	
-	if(miranda.Attitude() < Miranda.Attitude.Neutral) { // bad
+	if(miranda.Attitude() < MirandaFlags.Attitude.Neutral) { // bad
 		Text.Add("<i>“What now?”</i> Miranda asks shortly as you approach the gates.", parse);
 		if(miranda.Relation() < 25)
 			Text.Add(" She doesn’t look too happy to see you.");
@@ -516,7 +518,7 @@ MirandaScenes.RigardGatesEnter = function() {
 			Text.Add("<i>“You know damn well you aren’t getting through here without a pass,”</i> she growls. There is a dangerous glint in her eyes as she adds: <i>“Come by the slum-side gate when I’m on duty sometime, I might show mercy on you.”</i>", parse);
 		}
 	}
-	else if(miranda.Attitude() > Miranda.Attitude.Neutral) { // good
+	else if(miranda.Attitude() > MirandaFlags.Attitude.Neutral) { // good
 		Text.Add("<i>“Heading in?”</i> Miranda asks you as you approach the gates. <i>“Don’t be a stranger now!”</i>", parse);
 		Text.NL();
 		if(rigard.Visa()) {
@@ -589,7 +591,7 @@ MirandaScenes.RigardSlumGatesDesc = function() {
 	scenes.Get();
 	
 	Text.Add(" <i>“Quite the rural neighborhood, isn’t it?”</i> Miranda grunts, waving at the muddy streets near the gate. <i>“Still, I grew up in these parts, so I’ll always have a soft spot for it, no matter how much of a cesspit it is.”</i>", parse);
-	if(miranda.Attitude() == Miranda.Attitude.Neutral) {
+	if(miranda.Attitude() == MirandaFlags.Attitude.Neutral) {
 		Text.NL();
 		Text.Add("<i>“If you haven’t already, you should check out the local tavern, the Maidens’ Bane,”</i> Miranda suggests, <i>“I hang around there after work. Cozy little place.”</i>", parse);
 	}
@@ -610,9 +612,9 @@ MirandaScenes.RigardSlumGatesEnter = function() {
 	Text.Clear();
 	
 	if(!rigard.Visa()) {
-		if(miranda.Attitude() > Miranda.Attitude.Neutral) // nice
+		if(miranda.Attitude() > MirandaFlags.Attitude.Neutral) // nice
 			Text.Add("Miranda looks around, trying to see if any of her comrades overheard you. <i>“Keep it down will you?!”</i> she hisses, <i>“I’m not supposed to let you in without a pass, you know. Meet me at the tavern after work and we’ll talk.”</i>", parse);
-		else if(miranda.Attitude() < Miranda.Attitude.Neutral) { // nasty
+		else if(miranda.Attitude() < MirandaFlags.Attitude.Neutral) { // nasty
 			Text.Add("The dog-morph eyes you flatly. <i>“Why should I take that risk for you? There’d better be something in it for me if you want inside.”</i>");
 			Text.Flush();
 			
@@ -626,13 +628,13 @@ MirandaScenes.RigardSlumGatesEnter = function() {
 		Gui.PrintDefaultOptions(true);
 	}
 	else { //Visa
-		if(miranda.Attitude() < Miranda.Attitude.Neutral) { // nasty
+		if(miranda.Attitude() < MirandaFlags.Attitude.Neutral) { // nasty
 			Text.Add("<i>“Aww… you want to get in? What’s in it for me?”</i> Miranda asks, toying with you.", parse);
 			Text.Flush();
 			
 			MirandaScenes.RigardGatesBribe();
 		}
-		else if(miranda.Attitude() > Miranda.Attitude.Neutral) { // nice
+		else if(miranda.Attitude() > MirandaFlags.Attitude.Neutral) { // nice
 			Text.Add("<i>“Sure, come right through, honey,”</i> Miranda grins as you pass her, giving your [butt] a familiar slap. <i>“Come see me at the tavern later, okay?”</i>", parse);
 			if(!rigard.GatesOpen()) {
 				Text.NL();
@@ -771,12 +773,12 @@ MirandaScenes.RigardGatesBribe = function() {
 				if(miranda.flags["gBJ"] < 5)
 					Text.Add("<i>“You know the drill, come with me.”</i> Miranda leads you into a back alley, pushing your head down to her crotch and pulling out her [mcockDesc]. <i>“I’m sure you remember what to do.”</i> Meekly, you grasp her member, licking the [mcockTip] demurely. In your [hand]s, the hermaphrodite grows stiff, her rock-hard cock pointing right at you.", parse);
 				else {
-					parse["Bewildered"] = miranda.flags["public"] == Miranda.Public.Nothing ? "Bewildered, y" : "Y";
+					parse["Bewildered"] = miranda.flags["public"] == MirandaFlags.Public.Nothing ? "Bewildered, y" : "Y";
 					Text.Add("You wait for Miranda to get up, but she just leans back languidly. <i>“Well, what are you waiting for?”</i> she asks, annoyed. <i>“Start sucking, slut.”</i> She parts her legs, exposing her bulge to you. [Bewildered]ou glance around at the other guards, but Miranda redirects your attention to her crotch.", parse);
 					Text.NL();
 					Text.Add("<i>“Don’t mind them; this is the reason you came here anyways, isn’t it?”</i> By now, you might as well conceed her point… there are other ways for you to get into Rigard at this point, and yet here you are, back to get another mouthful of her [mcockDesc]. The others have most likely gotten a good idea of what is going on already anyways.", parse);
-					if(miranda.flags["public"] < Miranda.Public.Oral)
-						miranda.flags["public"] = Miranda.Public.Oral;
+					if(miranda.flags["public"] < MirandaFlags.Public.Oral)
+						miranda.flags["public"] = MirandaFlags.Public.Oral;
 				}
 				Text.NL();
 				parse["head"] = player.HasHorns() ? player.HasHorns().Short() : player.Hair().Short();
@@ -885,7 +887,7 @@ MirandaScenes.RigardGatesBribe = function() {
 					parse["hisher"] = player.mfTrue("his", "her");
 					Text.Add("<i>“Everyone, meet [playername], town slut,”</i> Miranda dramatically introduces you to the other guards, <i>“about to get [hisher] ass fucked by me. I might even allow sloppy seconds.”</i>", parse);
 					Text.NL();
-					if(miranda.flags["public"] < Miranda.Public.Sex) {
+					if(miranda.flags["public"] < MirandaFlags.Public.Sex) {
 						Text.Add("You start protesting - surely this is too much, even for her - but she cuts you off with a sharp bark.", parse);
 						Text.NL();
 						Text.Add("<i>“Wouldn’t want to be caught obstructing the long, thick, veiny cock of the law now, would you, [playername]?”</i> Miranda growl menacingly. <i>“The guys know all about our little deal, so don’t go looking to them for help. You might play hard to get, but deep down you know you are a total slut for my dick, and you want nothing more than for me to fuck your brains out.”</i>", parse);
@@ -896,7 +898,7 @@ MirandaScenes.RigardGatesBribe = function() {
 						miranda.subDom.IncreaseStat(100, 5);
 						player.subDom.DecreaseStat(-100, 5);
 						
-						miranda.flags["public"] = Miranda.Public.Sex;
+						miranda.flags["public"] = MirandaFlags.Public.Sex;
 					}
 					parse["himher"] = player.mfTrue("him", "her");
 					Text.Add("Cheeks burning slightly under the scrutiny of the other guardsmen - most of them male, and quite obviously throwing you lecherous glances - you disrobe, bending over the table obediently. <i>“See how well I’ve trained [himher],”</i> Miranda brags.", parse);
@@ -1070,7 +1072,7 @@ MirandaScenes.WelcomeToRigard = function() {
 		HisHer : kiakai.HisHer()
 	};
 	
-	miranda.flags["Met"] = Miranda.Met.Met;
+	miranda.flags["Met"] = MirandaFlags.Met.Met;
 	
 	if(party.Two())
 		parse["comp"] = " and " + party.Get(1).name;
@@ -1298,7 +1300,7 @@ MirandaScenes.HeyThere = function() {
 	};
 	parse = player.ParserTags(parse);
 	
-	miranda.flags["Met"] = Miranda.Met.Tavern;
+	miranda.flags["Met"] = MirandaFlags.Met.Tavern;
 	
 	Text.Add("As you head into the dimly lit bar, your eyes find Miranda, the guardswoman, sitting in a corner by herself. The tall and curvy dog-morph is wearing tight leather pants laced with green cloth tucked into her high boots, and a very suggestive top piece exposing a fair amount of her cleavage. She notices you and motions you over, patting the bench beside her.", parse);
 	Text.NL();
@@ -1455,7 +1457,7 @@ MirandaScenes.HeyThereCatPorn = function() {
 						Text.NL();
 						Text.Add("As she passes by, you could swear there is a spark of anger in her eyes, though she doesn’t act on it. You let out a ragged sigh of relief and go back to your drink.", parse);
 						
-						miranda.flags["Attitude"] = Miranda.Attitude.Dismiss;
+						miranda.flags["Attitude"] = MirandaFlags.Attitude.Dismiss;
 						miranda.relation.DecreaseStat(-100, 10);
 						
 						Text.Flush();
@@ -1484,7 +1486,7 @@ MirandaScenes.HeyThereCatPorn = function() {
 						Text.Add("<i>“We have to do that again sometime, honey... sometime soon.”</i> She grins wickedly. <i>“You should probably get yourself cleaned up for now though.”</i> She tucks her now softening member back into her tight leather pants, its size making you wonder how it could ever fit there in the first place. She leaves you standing in the dark street, covered in sticky girl-cum.", parse);
 						Text.Flush();
 						
-						miranda.flags["Attitude"] = Miranda.Attitude.Nice;
+						miranda.flags["Attitude"] = MirandaFlags.Attitude.Nice;
 						miranda.relation.IncreaseStat(100, 5);
 						miranda.subDom.IncreaseStat(100, 10);
 						var mCum = miranda.OrgasmCum();
@@ -1556,7 +1558,7 @@ MirandaScenes.HeyThereCatPorn = function() {
 						Text.Add("You snuggle with Miranda for a while longer, enjoying the mead, until the two of you decide to leave for the night. Before the two of you part on the street outside, Miranda pulls you close into a deep kiss, her hands groping your ass roughly. <i>“I think I'll be seeing more of you, and better sooner than later,”</i> she announces as she saunters off into the night. <i>“You know where to find me.”</i>", parse);
 						Text.Flush();
 						
-						miranda.flags["Attitude"] = Miranda.Attitude.Nice;
+						miranda.flags["Attitude"] = MirandaFlags.Attitude.Nice;
 						miranda.relation.IncreaseStat(100, 10);
 						miranda.subDom.IncreaseStat(100, 15);
 						
@@ -1823,12 +1825,12 @@ MirandaScenes.BarChatOptions = function(options, back) {
 			back();
 		}
 	});
-	var kidsFirst = !(miranda.flags["Talk"] & Miranda.Talk.Kids);
+	var kidsFirst = !(miranda.flags["Talk"] & MirandaFlags.Talk.Kids);
 	options.push({nameStr : "Kids",
 		tooltip : Text.Parse(kidsFirst ? "So… uh, from her tales, it sounds like she gets around a lot. Isn’t she ever worried about fathering a bastard? Or getting pregnant herself?" : "Has she ever considered getting kids?", parse),
 		enabled : miranda.flags["ssRotMax"] >= 3 && miranda.flags["bgRotMax"] >= 5 && miranda.Relation() >= 10,
 		func : function() {
-			miranda.flags["Talk"] |= Miranda.Talk.Kids;
+			miranda.flags["Talk"] |= MirandaFlags.Talk.Kids;
 			Text.Clear();
 			if(kidsFirst) {
 				Text.Add("<i>“I know that judging look,”</i> Miranda growls, squinting at you. <i>“‘How can she go sleeping around like that when she knows how difficult it is to grow up without parents?’ Is that it?”</i>", parse);
@@ -1878,7 +1880,7 @@ MirandaScenes.BarChatOptions = function(options, back) {
 	});
 	*/
 	
-	if((rigard.Krawitz["Q"] >= Rigard.KrawitzQ.CaughtTerry) && (terry.flags["Saved"] == Terry.Saved.NotStarted)) {
+	if((rigard.Krawitz["Q"] >= Rigard.KrawitzQ.CaughtTerry) && (terry.flags["Saved"] == TerryFlags.Saved.NotStarted)) {
 		options.push({ nameStr : "Thief",
 			func : function() {
 				Text.Clear();
@@ -1897,7 +1899,7 @@ MirandaScenes.BarChatOptions = function(options, back) {
 				Text.Add("Maybe you should do something about that fox’s execution. Perhaps the royal twins might be willing to help?", parse);
 				Text.Flush();
 				
-				terry.flags["Saved"] = Terry.Saved.TalkedMiranda;
+				terry.flags["Saved"] = TerryFlags.Saved.TalkedMiranda;
 				
 				back();
 			}, enabled : true,
@@ -1958,7 +1960,7 @@ MirandaScenes.TakeHome = function() {
 	parse = player.ParserTags(parse);
 	
 	Text.Clear();
-	if(miranda.Attitude() < Miranda.Attitude.Neutral) {
+	if(miranda.Attitude() < MirandaFlags.Attitude.Neutral) {
 		Text.Add("</i>”Heh, craving some dick, are you?”</i> Miranda chortles, draining the last of her drink and slamming the mug down on the table. </i>”Very well then, slut. Dating you is a waste of time anyway, so let’s get your sweet ass back to my den and skip straight to the part you love above all else: my cock,”</i> she says, grabbing your arm and dragging you after her as she exits the bar.", parse);
 		Text.NL();
 		if(player.SubDom() > 0)
@@ -2038,9 +2040,9 @@ MirandaScenes.JustOneMore = function() {
 	
 	parse["yourA"]    = player.NumCocks() > 2 ? " a" : "your";
 	
-	miranda.flags["Met"] = Miranda.Met.TavernAftermath;
+	miranda.flags["Met"] = MirandaFlags.Met.TavernAftermath;
 	
-	if(miranda.flags["Attitude"] == Miranda.Attitude.Nice) {
+	if(miranda.flags["Attitude"] == MirandaFlags.Attitude.Nice) {
 		Text.Add("<i>“Well, I honestly didn't think I would see you again after last time,”</i> she laughs softly as you squirm a bit, then pats the bench beside her. Miranda seems very happy that you decided to return, which she makes more clear as she reaches over and whispers in your ear, <i>“If you decided to come back, I guess that means you liked my extra equipment. Perhaps you are yearning for round two?”</i> She gently reaches down into your pants, ", parse);
 		if(player.FirstCock())
 			Text.Add("fondling your now aroused [cocks].", parse);
@@ -2062,7 +2064,7 @@ MirandaScenes.JustOneMore = function() {
 		
 		// TODO: Push sexy
 	}
-	else if(miranda.flags["Attitude"] == Miranda.Attitude.Dismiss) {
+	else if(miranda.flags["Attitude"] == MirandaFlags.Attitude.Dismiss) {
 		Text.Add("<i>“I.. uh.. I'm sorry about last time,”</i> she says, a bit defensively. <i>“Of course you weren't expecting... that, to, uh, show up.”</i> She rolls her shoulders. <i>“Well, that's my little secret, I'm a hermaphrodite, got both parts and all,”</i> she smiles, back to her old assertive self.", parse);
 		Text.NL();
 		Text.Add("<i>“Twice the fun though, if you care to try it out.”</i> The dog-morph is obviously waiting for you to say something.", parse);
@@ -2081,7 +2083,7 @@ MirandaScenes.JustOneMore = function() {
 				Text.Add("<i>“So... now what, pet?”</i> she asks, looking into your eyes. You suggest that the two of you grab a few drinks and have a chat. <i>“Well… a good start, I guess,”</i> she smirks.", parse);
 				Text.Flush();
 				
-				miranda.flags["Attitude"] = Miranda.Attitude.Nice;
+				miranda.flags["Attitude"] = MirandaFlags.Attitude.Nice;
 				
 				miranda.relation.IncreaseStat(100, 5);
 				
@@ -2097,7 +2099,7 @@ MirandaScenes.JustOneMore = function() {
 				Text.Add("<i>“Fine then,”</i> she snaps after you. <i>“Be that way. You’ll regret that if I ever catch you in the streets!”</i> As you glance over your shoulder, she is furiously chugging down a large bottle of booze. She probably won't appreciate seeing you around any more.", parse);
 				Text.Flush();
 				
-				miranda.flags["Attitude"] = Miranda.Attitude.Hate;
+				miranda.flags["Attitude"] = MirandaFlags.Attitude.Hate;
 				
 				miranda.relation.DecreaseStat(-25, 100);
 				
@@ -2135,7 +2137,7 @@ MirandaScenes.JustOneMore = function() {
 				Text.Add("<i>“Friendship accepted,”</i> the guardswoman murmurs. <i>“And who knows, perhaps something more down the line?”</i> she adds playfully.", parse);
 				Text.Flush();
 				
-				miranda.flags["Attitude"] = Miranda.Attitude.Nice;
+				miranda.flags["Attitude"] = MirandaFlags.Attitude.Nice;
 				
 				miranda.relation.IncreaseStat(100, 5);
 				
@@ -2151,7 +2153,7 @@ MirandaScenes.JustOneMore = function() {
 				Text.Add("<i>“Fine then,”</i> she snaps after you. <i>“Be that way. You’ll regret that if I ever catch you in the streets!”</i> As you glance over your shoulder, she is furiously chugging down a large bottle of booze. She probably won't appreciate seeing you around any more.", parse);
 				Text.Flush();
 				
-				miranda.flags["Attitude"] = Miranda.Attitude.Hate;
+				miranda.flags["Attitude"] = MirandaFlags.Attitude.Hate;
 				
 				miranda.relation.DecreaseStat(-25, 100);
 				
@@ -2161,7 +2163,7 @@ MirandaScenes.JustOneMore = function() {
 		});
 		options.push({ nameStr : "Touch it",
 			func : function() {
-				miranda.flags["Attitude"] = Miranda.Attitude.Nice;
+				miranda.flags["Attitude"] = MirandaFlags.Attitude.Nice;
 				
 				Text.Clear();
 				Text.Add("Fascinated by the long member, you move closer and study it meticulously.", parse);
@@ -2395,11 +2397,11 @@ MirandaScenes.MaidensBaneTalk = function() {
 
 	Text.Clear();
 	
-	if(miranda.flags["Met"] == Miranda.Met.Met) {
+	if(miranda.flags["Met"] == MirandaFlags.Met.Met) {
 		MirandaScenes.HeyThere();
 	}
-	else if(miranda.flags["Met"] == Miranda.Met.Tavern) {
-		if(miranda.flags["Attitude"] >= Miranda.Attitude.Neutral)
+	else if(miranda.flags["Met"] == MirandaFlags.Met.Tavern) {
+		if(miranda.flags["Attitude"] >= MirandaFlags.Attitude.Neutral)
 			Text.Add("You walk over to Miranda, who is lounging on one of the benches in the shady tavern. She’s already gotten started on her first few drinks, and waves you over when she notices you.");
 		else
 			Text.Add("You walk over to Miranda, who is lounging on one of the benches in the shady tavern. When she notices you, her eyes narrow dangerously. Looks like she isn't particularly happy about seeing you.");
@@ -2407,7 +2409,7 @@ MirandaScenes.MaidensBaneTalk = function() {
 		
 		MirandaScenes.JustOneMore();
 	}
-	else if(miranda.flags["Attitude"] >= Miranda.Attitude.Neutral) {
+	else if(miranda.flags["Attitude"] >= MirandaFlags.Attitude.Neutral) {
 		MirandaScenes.MaidensBaneNice();
 	}
 	else {
@@ -2451,7 +2453,7 @@ MirandaScenes.MaidensBanePrompt = function() {
 		tooltip : "Have a chat with Miranda."
 	});
 	
-	if(miranda.flags["Met"] >= Miranda.Met.TavernAftermath) {
+	if(miranda.flags["Met"] >= MirandaFlags.Met.TavernAftermath) {
 		MirandaScenes.BarSexOptions(options);
 	}
 	
@@ -2469,11 +2471,11 @@ MirandaScenes.MaidensBaneTalkPrompt = function() {
 	var dom = miranda.SubDom() - player.SubDom();
 	
 	var options = new Array();
-	if(miranda.flags["Attitude"] >= Miranda.Attitude.Neutral)
+	if(miranda.flags["Attitude"] >= MirandaFlags.Attitude.Neutral)
 		MirandaScenes.BarChatOptions(options, MirandaScenes.MaidensBaneTalkPrompt);
 	// TODO: Restructure this...
 	
-	if(miranda.flags["Met"] >= Miranda.Met.TavernAftermath) {
+	if(miranda.flags["Met"] >= MirandaFlags.Met.TavernAftermath) {
 		MirandaScenes.BarTalkOptions(options, MirandaScenes.MaidensBaneTalkPrompt);
 	}
 	
@@ -2533,7 +2535,7 @@ MirandaScenes.TerryChaseHome = function() {
 	Text.Clear();
 	Text.Add("The two of you pause on the street near Miranda’s house, both of you more than a little tired of searching for the elusive thief. Perhaps you could head inside to relieve some stress? Miranda certainly seems to have that idea in mind.", parse);
 	Text.NL();
-	if(miranda.Attitude() < Miranda.Attitude.Neutral) {
+	if(miranda.Attitude() < MirandaFlags.Attitude.Neutral) {
 		Text.Add("<i>“Stop for a quick fuck, [playername]?”</i> Miranda shoots, stretching languidly. <i>“All this searching has me aching for some action, if you catch my drift. If not, I’m sure you’ll get what I mean in a few minutes when you are biting the pillow.”</i> The herm closes in on you with a hungry look in her eyes, herding you toward her door.", parse);
 		Text.Flush();
 		
@@ -2550,7 +2552,7 @@ MirandaScenes.TerryChaseHome = function() {
 		options.push({ nameStr : "Not now",
 			func : function() {
 				Text.Clear();
-				parse["himher"] = terry.flags["Met"] < Terry.Met.Found ? "him" : "her";
+				parse["himher"] = terry.flags["Met"] < TerryFlags.Met.Found ? "him" : "her";
 				Text.Add("<i>“C’mon, I need some relief here!”</i> Miranda complains, attempting to shove you inside. You barely manage to avoid her grab, dancing outside her reach. <i>“Fine,”</i> she growls, <i>“but I’m getting some action today <b>one</b> way or another.”</i> That doesn’t sound like it bodes well for the thief when you finally catch [himher].", parse);
 				Text.Flush();
 				
@@ -2651,7 +2653,7 @@ MirandaScenes.TavernSexPublicPrompt = function() {
 	};
 
 	var dom = miranda.SubDom() - player.SubDom();
-	var nasty = miranda.Attitude() < Miranda.Attitude.Neutral;
+	var nasty = miranda.Attitude() < MirandaFlags.Attitude.Neutral;
 
 	Text.Clear();
 	if(nasty || dom > 25)
@@ -2769,7 +2771,7 @@ MirandaScenes.HomeDommySexLeavingFuckedHer = function() {
 			}
 		});
 
-		if(miranda.Attitude() >= Miranda.Attitude.Neutral && (WorldTime().hour > 20 || WorldTime().hour < 4)) {
+		if(miranda.Attitude() >= MirandaFlags.Attitude.Neutral && (WorldTime().hour > 20 || WorldTime().hour < 4)) {
 			Text.Add("<i>“Ya know, it’s kinda late. Why don’t you stay over? I wouldn’t mind sharing my bed with you. Maybe we can squeeze in a quickie before I have to leave in the morning?”</i> she grins.", parse);
 			Text.Flush();
 
@@ -4259,7 +4261,7 @@ MirandaScenes.HomeSubbySexLeavingFuckedHer = function() {
 
 	var parse = {
 		playername : player.name,
-		lover : miranda.Attitude() < Miranda.Attitude.Neutral ? "bitch" : "lover"
+		lover : miranda.Attitude() < MirandaFlags.Attitude.Neutral ? "bitch" : "lover"
 	};
 
 	if(player.sexlevel < 3)
@@ -4306,7 +4308,7 @@ MirandaScenes.HomeSubbySexLeavingFuckedHer = function() {
 			}
 		});
 
-		if(miranda.Attitude() >= Miranda.Attitude.Neutral && (WorldTime().hour > 20 || WorldTime().hour < 4)) {
+		if(miranda.Attitude() >= MirandaFlags.Attitude.Neutral && (WorldTime().hour > 20 || WorldTime().hour < 4)) {
 			Text.Add("<i>“Ya know, it’s kinda late. Why don’t you take that off and come back to bed? Maybe we can squeeze in a quickie before I have to leave in the morning?”</i> she grins.", parse);
 			Text.Flush();
 
@@ -4360,7 +4362,7 @@ MirandaScenes.HomeSubbySex = function() {
 	let miranda = GAME().miranda;
 	let party = GAME().party;
 
-	var nasty = miranda.Attitude() < Miranda.Attitude.Neutral;
+	var nasty = miranda.Attitude() < MirandaFlags.Attitude.Neutral;
 
 	var parse = {
 		
@@ -4463,7 +4465,7 @@ MirandaScenes.HomeSubbySexDommyRide = function(location, Loc) {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
 
-	var nasty = miranda.Attitude() < Miranda.Attitude.Neutral;
+	var nasty = miranda.Attitude() < MirandaFlags.Attitude.Neutral;
 	var p1cock = player.BiggestCock(null, true);
 	var strapon = p1cock ? p1cock.isStrapon : false;
 	var borrowed = false;
@@ -4687,7 +4689,7 @@ MirandaScenes.HomeSubbySexTakeAnal = function(location, Loc) {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
 
-	var nasty = miranda.Attitude() < Miranda.Attitude.Neutral;
+	var nasty = miranda.Attitude() < MirandaFlags.Attitude.Neutral;
 
 	var parse = {
 		playername : player.name,
@@ -5253,7 +5255,7 @@ MirandaScenes.TavernSexBackroomPrompt = function() {
 	var dom = player.SubDom() - miranda.SubDom();
 
 	Text.Clear();
-	if(miranda.Attitude() > Miranda.Attitude.Neutral) {
+	if(miranda.Attitude() > MirandaFlags.Attitude.Neutral) {
 		if(dom > 25)
 			Text.Add("<i>“Feel like using your favorite chew toy, huh? Let’s go then,”</i> Miranda says, getting up and shaking her butt teasingly at you as she walks toward the backrooms.", parse);
 		else
@@ -5262,7 +5264,7 @@ MirandaScenes.TavernSexBackroomPrompt = function() {
 	else
 		Text.Add("<i>“Can’t get enough of little Miranda, can you? Not a problem, I can accommodate.”</i> Miranda promptly hauls you off your seat and takes you to the back rooms.", parse);
 	Text.Add(" Selecting an empty room, Miranda leads you inside and steps away, allowing you to close the door. Since there's no lock, you make do and grab a nearby chair, barricading the doorway as an impromptu privacy measure.", parse);
-	if(miranda.Attitude() >= Miranda.Attitude.Neutral) {
+	if(miranda.Attitude() >= MirandaFlags.Attitude.Neutral) {
 		parse["m"] = dom > 50 ? player.mfTrue(", master", ", mistress") : "";
 		Text.Add(" <i>“Well, here we are. What now[m]?”</i>", parse);
 		Text.Flush();
@@ -5678,7 +5680,7 @@ MirandaScenes.TavernSexPublicBJ = function() {
 		player.slut.IncreaseStat(50, 1);
 		player.subDom.DecreaseStat(-50, 1);
 		setPublic = true;
-	}, 1.0, function() { return (miranda.Attitude() < Miranda.Attitude.Neutral) || miranda.SubDom() > 50; });
+	}, 1.0, function() { return (miranda.Attitude() < MirandaFlags.Attitude.Neutral) || miranda.SubDom() > 50; });
 
 	scenes.Get();
 
@@ -5827,7 +5829,7 @@ MirandaScenes.TavernSexPublicBJ = function() {
 	Text.NL();
 	Text.Add("Sated, the guardswoman pats you on the head, scratching you behind your [ears] while you clean her up.", parse);
 	Text.NL();
-	parse["lover"] = (miranda.Attitude() < Miranda.Attitude.Neutral) ? "bitch" : "lover";
+	parse["lover"] = (miranda.Attitude() < MirandaFlags.Attitude.Neutral) ? "bitch" : "lover";
 	Text.Add("<i>“Not bad, [lover],”</i> she sighs, waving for another drink as you hurriedly clean yourself up.", parse);
 
 	TimeStep({minute: 30});
@@ -5850,7 +5852,7 @@ MirandaScenes.TavernSexDommyBJ = function() {
 	parse = player.ParserTags(parse);
 	var dom = player.SubDom() - miranda.SubDom();
 
-	if(miranda.Attitude() >= Miranda.Attitude.Neutral)
+	if(miranda.Attitude() >= MirandaFlags.Attitude.Neutral)
 		Text.Add("<i>“Alright, [playername]. You know what to do, so open up,”</i> she says, brandishing her hardening prick and nestling it against your lips.", parse);
 	else
 		Text.Add("<i>“Okay, slut. Your best friend is ready for some action, so be a good bitch and roll that carpet out because I’m going in,”</i> Miranda says, slapping your face with her cock before forcefully shoving her pointed tip against your lips.", parse);
@@ -5863,17 +5865,17 @@ MirandaScenes.TavernSexDommyBJ = function() {
 	miranda.Fuck(miranda.FirstCock(), 2);
 
 	if(player.SubDom() > 0) {
-		parse["nasty"] = miranda.Attitude() < Miranda.Attitude.Neutral ? ", and your expectations of Miranda's wrath," : "";
+		parse["nasty"] = miranda.Attitude() < MirandaFlags.Attitude.Neutral ? ", and your expectations of Miranda's wrath," : "";
 		Text.Add("Despite any feelings of reluctance you have about this, your pride[nasty] demands you do your best. You take Miranda's foot-long as far into your mouth as you can bear, then pull your head back before sliding down again, washing the sensitive prickmeat with tongue and cheeks and lips as you go. You can't be called the most enthusiastic cock-sucker, but you do your best to be a good one, taking what respect you can in the grunts and growls of approval echoing down from above you.", parse);
 	}
 	else {
-		parse["Y"] = miranda.Attitude() < Miranda.Attitude.Neutral ? "Regardless of her opinion of you, y" : "Y";
+		parse["Y"] = miranda.Attitude() < MirandaFlags.Attitude.Neutral ? "Regardless of her opinion of you, y" : "Y";
 		Text.Add("Eagerly, you suck and swallow at Miranda's impressive piece of girl-dick, eyes closed in rapture as you savor the flavor of her washing over your tongue, her musk filling your nostrils. [Y]ou are determined to give her the best blowjob you can. Moaning in your aroused desire, you bob and lap and suckle for all you're worth, humming so as to better stir her dick with pleasure. You tease her by taking the first few inches of her shaft down your throat and then backing away, letting her crave the deepthroating you know she wants.", parse);
 	}
 	Text.NL();
 	Text.Add("Suddenly, you feel a pair of paws grabbing the sides of your head. Darting your eyes up, you see Miranda bearing an evil grin. ", parse);
 	parse["handsomeBeautiful"] = player.mfFem("handsome", "beautiful");
-	if(miranda.Attitude() >= Miranda.Attitude.Neutral)
+	if(miranda.Attitude() >= MirandaFlags.Attitude.Neutral)
 		Text.Add("<i>“Come on, [handsomeBeautiful], I know you can do better.”</i>", parse);
 	else
 		Text.Add("<i>“We both know you’re a cock hungry slut, so why not act the part and give me a proper blowjob.”</i>", parse);
@@ -5883,7 +5885,7 @@ MirandaScenes.TavernSexDommyBJ = function() {
 	Text.Add("<i>“Yeah, that’s how you do it,”</i> she comments, tongue lolling out as she becomes immersed in pleasure.", parse);
 	Text.NL();
 	var choices = 3;
-	if(miranda.Attitude() < Miranda.Attitude.Neutral) {
+	if(miranda.Attitude() < MirandaFlags.Attitude.Neutral) {
 		if(player.SubDom() > 0)
 			Text.Add("Much as the rancor burns in your veins at the thought, you know that the consequences of trying to defy her just aren't worth the satisfaction you'd get at interrupting her ravaging of your throat. You'll just have to let her do what she wants… for now.", parse);
 		else
@@ -5919,7 +5921,7 @@ MirandaScenes.TavernSexDommyBJ = function() {
 			miranda.subDom.IncreaseStat(50, 1);
 			player.subDom.DecreaseStat(-60, 1);
 
-			if(miranda.Attitude() >= Miranda.Attitude.Neutral)
+			if(miranda.Attitude() >= MirandaFlags.Attitude.Neutral)
 				Text.Add("<i>“Damn, your mouth feels so good around my dick, [playername]. Better brace yourself because I’m going all the way with you,”</i> the doberman says, tightening her grip on your head and thrusting with renewed vigor. Little by little, she finds purchase, slipping her knotted doggie-dong inside your throat.", parse);
 			else
 				Text.Add("<i>“So, how do you like getting used like a fucktoy, slut? What is it? Not enough dick for you? Fine, I’ll make sure to shove all of my eleven inches down your tight cocksleeve,”</i> she teases, carelessly gripping your head and redoubling her efforts. Her cock rubs against the back of your throat, roughly bashing you until she finally slips inside your gullet.", parse);
@@ -5936,7 +5938,7 @@ MirandaScenes.TavernSexDommyBJ = function() {
 				Text.Add("You have a sinking suspicion as to what she has in mind, and an experimental attempt to pull your head back from her bulb confirms it. She wants to knot your mouth again. Sighing softly as best you can through your filled mouth, you relax your jaws as best you can.", parse);
 			else {
 				Text.Add("What is this thing that she has with knotting herself to your mouth? ", parse);
-				if(miranda.Attitude() >= Miranda.Attitude.Neutral)
+				if(miranda.Attitude() >= MirandaFlags.Attitude.Neutral)
 					Text.Add("Does she love your cocksucking skills that much? ", parse);
 				else
 					Text.Add("Does she get off on having you forced to suck her even after she cums so badly? ", parse);
@@ -5951,14 +5953,14 @@ MirandaScenes.TavernSexDommyBJ = function() {
 			var cum = miranda.OrgasmCum();
 
 			if(player.SubDom() > 0) {
-				if(miranda.Attitude() >= Miranda.Attitude.Neutral)
+				if(miranda.Attitude() >= MirandaFlags.Attitude.Neutral)
 					Text.Add("Your guts roil and churn as the steaming cascade of salty she-spunk pours down your gullet. You want to stop this, but with her knot it's impossible; all you can do is open your throat and let her fill your protesting stomach. As your belly bloats out, hanging down heavily under its titanic liquid load, you repeat mentally to yourself that this is for Miranda; you want to make her happy... but she had better appreciate you doing this for her.", parse);
 				else
 					Text.Add("Oh, you <b>hate</b> this bitch! Damnation, your stomach... you want to whimper as you feel yourself distending from the cascade of jism flooding your guts, the eerie sensations of being stretched so full sending strange, mixed signals to your brain. Your mind reels with the need for revenge, but there's nothing you can do except swallow spooge and stew in your frustration.", parse);
 			}
 			else {
 				Text.Add("You do your best to moan in muffled ecstasy, eyes closing to fully savor the feeling of a tidal wave of hot girl-seed coursing into your stomach. You can feel Miranda's spooge burning all the way down, your belly bloating as she fires spurt after spurt of semen inside of you. Your hand moves unthinkingly to caress your [belly], brain afire with pleasure from the swelling and the touching. You feel so wonderful to be claimed like this, and you can't resist the mental chant for her to give you more, and more; you're her cumdumpster - you want her to fill you with everything she has! ", parse);
-				if(miranda.Attitude() >= Miranda.Attitude.Neutral)
+				if(miranda.Attitude() >= MirandaFlags.Attitude.Neutral)
 					Text.Add("By all the gods of this place, you love your strong, sexy, she-stud bitch!", parse);
 				else
 					Text.Add("Your love of what Miranda does for you and your mutual hate for each other war in your brain, the conflux of guilt and confusion and shame only stoking your pleasure to new heights.", parse);
@@ -5966,7 +5968,7 @@ MirandaScenes.TavernSexDommyBJ = function() {
 			Text.NL();
 			Text.Add("It takes the better part of a hour for Mirana to shrink down enough to pull out of your used throat, and when she does you immediately cough and sputter, gobs of doggie-spunk flying from your mouth. You gasp, inhaling as much oxygen as you can, glad to finally be free from her and able to breathe easy again.", parse);
 			Text.NL();
-			if(miranda.Attitude() >= Miranda.Attitude.Neutral) {
+			if(miranda.Attitude() >= MirandaFlags.Attitude.Neutral) {
 				Text.Add("Miranda pats your back, helping you as you finally have a chance to catch your breath. <i>“There, there. Easy now, [playername]. You’re a real trooper, ya know? If I tied anybody else, I’d probably wind up cracking their jaws,”</i> she laughs. <i>“Just hang in there, I’ll go grab you a cup of water,”</i> she says.", parse);
 				Text.NL();
 				Text.Add("That... that would be great, you absently reply to her. Gingerly, you settle yourself down, careful of your tender, cum-stretched stomach. Overwhelmed by what you've gone through, you allow your eyes to sink closed and lose yourself in torpor.", parse);
@@ -6382,7 +6384,7 @@ MirandaScenes.DatingEntry = function() {
 	
 	Text.Clear();
 	if(miranda.flags["Dates"] == 0) { // first
-		if(miranda.Attitude() >= Miranda.Attitude.Neutral)
+		if(miranda.Attitude() >= MirandaFlags.Attitude.Neutral)
 			Text.Add("<i>“You coming on to me, [playername]?”</i> Miranda looks amused, but nods. <i>“Sure, I’m game. Let’s ditch this place.”</i> Saying so, she drains her beer in one go, slamming the empty cup to the table.", parse);
 		else {
 			Text.Add("<i>“You are certainly singing a different tune now than when we first met.”</i> Miranda growls suspiciously. <i>“What’s your game?”</i> Grudgingly, she agrees to go with you, draining her beer and slamming the empty cup to the table.", parse);
@@ -6472,7 +6474,7 @@ MirandaScenes.DatingEntry = function() {
 			MirandaScenes.DatingBlockPrompt();
 		}
 		else {
-			if(miranda.Attitude() >= Miranda.Attitude.Neutral)
+			if(miranda.Attitude() >= MirandaFlags.Attitude.Neutral)
 				Text.Add("<i>“I’d love to, [playername],”</i> Miranda replies heartily. <i>“I had a good time before… but we need to talk first.”</i>", parse);
 			else
 				Text.Add("<i>“Just what is your game, [playername]?”</i> Miranda looks genuinely puzzled. <i>“You just don’t seem to take a hint… or maybe you get off on abuse. Is that it? Are you a masochist? Not that I’d mind...”</i>", parse);
@@ -6485,7 +6487,7 @@ MirandaScenes.DatingEntry = function() {
 			Text.NL();
 			Text.Add("<i>“Second thing. Expect to be on the receiving end of my cock. A lot.”</i> Your eyes unwittingly drift down to the bulge between her legs. When you glance back up, Miranda is grinning widely at you. <i>“I like being on top. Which means you like being my bottom.”</i>", parse);
 			Text.NL();
-			if(miranda.flags["public"] >= Miranda.Public.Oral) {
+			if(miranda.flags["public"] >= MirandaFlags.Public.Oral) {
 				Text.Add("<i>“Not that you seem to have a problem with that. Well then, shall we?”</i>", parse);
 				Text.NL();
 				Text.Add("You finish your drinks and head out into the slums.", parse);
@@ -6515,7 +6517,7 @@ MirandaScenes.DatingEntry = function() {
 		
 		parse["masterMistress"] = miranda.SubDom() - player.SubDom() > -50 ?
 			player.name : player.mfTrue("master", "mistress");
-		if(miranda.Attitude() >= Miranda.Attitude.Neutral)
+		if(miranda.Attitude() >= MirandaFlags.Attitude.Neutral)
 			Text.Add("<i>“Sure, I’d love to, [masterMistress]!”</i> Miranda replies, eagerly draining her tankard.", parse);
 		else
 			Text.Add("<i>“Just can’t get enough of my cock, can you?”</i> Miranda grins mockingly, draining her tankard. <i>“Sure, I’m game.”</i>", parse);
@@ -6529,7 +6531,7 @@ MirandaScenes.DatingBlockPrompt = function() {
 	let miranda = GAME().miranda;
 
 	var parse = {
-		name : miranda.Attitude() >= Miranda.Attitude.Neutral ?
+		name : miranda.Attitude() >= MirandaFlags.Attitude.Neutral ?
 			player.name : "slut"
 	};
 	
@@ -6566,7 +6568,7 @@ MirandaScenes.DatingBlockPrompt = function() {
 	options.push({ nameStr : "Refuse",
 		func : function() {
 			Text.Clear();
-			if(miranda.Attitude() >= Miranda.Attitude.Neutral) {
+			if(miranda.Attitude() >= MirandaFlags.Attitude.Neutral) {
 				Text.Add("<i>“Well, fuck. I’m sure you’ll come around sooner or later.”</i> Miranda sounds determined, if a bit disappointed. <i>“I’m not giving up on this, but you are off the hook until later tonight. Shall we go?”</i>", parse);
 				Text.NL();
 				Text.Add("You finish your drinks and head out into the slums.", parse);
@@ -7130,8 +7132,8 @@ MirandaScenes.TalkConquests = function(atBar) {
 			Text.Add("<i>“Right, right, don’t get your panties tied up in a bunch,”</i> Miranda replies, shrugging.", parse);
 			Text.NL();
 		}
-		else if(terry.flags["Met"] >= Terry.Met.Caught) {
-			var req = terry.flags["Saved"] >= Terry.Saved.Saved;
+		else if(terry.flags["Met"] >= TerryFlags.Met.Caught) {
+			var req = terry.flags["Saved"] >= TerryFlags.Saved.Saved;
 			parse["t"] = req ? " - Terry, was it" : "";
 			Text.Add("<i>“Case in point, remember that thief that we caught[t]?”</i> You nod. <i>“No one really gives a shit about Krawitz; he’s a small time noble without any real influence. He doesn’t exactly have a clear conscience himself, considering the things that were found when searching his mansion. I only intended to show him some… corrective action, perhaps throw him in a cell for a few days as payback for that note. That’d make sure he didn’t stir up trouble in my city again. The little fox would’ve been far better off in my care than in that of the Royal Guard, believe me.”</i>", parse);
 			Text.NL();
@@ -7479,13 +7481,13 @@ MirandaScenes.DatingFirstCity = function() {
 	
 	Text.Add("<i>“Seen enough of the slums to last you for tonight?”</i> The two of you are nearing the outer walls of Rigard, close to the peasants’ gate. ", parse);
 	if(rigard.Visa()) {
-		if(miranda.Attitude() < Miranda.Attitude.Neutral)
+		if(miranda.Attitude() < MirandaFlags.Attitude.Neutral)
 			Text.Add("<i>“That piece of paper they give you won’t help at this hour, but I know a way.”</i> Miranda grins. <i>“’Course, if we run into a patrol, you are on your own buddy.”</i>", parse);
 		else
 			Text.Add("<i>“You have a pass, right? Not that it matters at this hour. Don’t worry, we’ll use a back gate, bypass the security.”</i>", parse);
 	}
 	else {
-		if(miranda.Attitude() < Miranda.Attitude.Neutral)
+		if(miranda.Attitude() < MirandaFlags.Attitude.Neutral)
 			Text.Add("<i>“You’ll be an interloper, prowling around town illegally,”</i> Miranda almost purrs, a dangerous glint in her eyes. <i>“One could say you are at my mercy...”</i>", parse);
 		else
 			Text.Add("<i>“I’ll sneak you in. Don’t worry about the guards, I know a gate that isn’t guarded at this time.”</i>", parse);
@@ -7508,11 +7510,11 @@ MirandaScenes.DatingFirstCity = function() {
 		Gui.NextPrompt(MirandaScenes.DatingFirstHome);
 	}
 	else {
-		if(miranda.Attitude() < Miranda.Attitude.Neutral) {
+		if(miranda.Attitude() < MirandaFlags.Attitude.Neutral) {
 			if(MirandaScenes.DatingScore > 0) {
 				Text.Add("<i>“Listen, I might have been a bit harsh on you before,”</i> Miranda grudgingly admits. <i>“I don’t take negative feedback very well… You think I could make it up to you by getting you a city visa? The procedure is rather quick. We can save the fun stuff for later.”</i> She smiles, winking at you.", parse);
 				
-				miranda.flags["Attitude"] = Miranda.Attitude.Nice;
+				miranda.flags["Attitude"] = MirandaFlags.Attitude.Nice;
 			}
 			else {
 				Text.Add("<i>“Now I’ve got you here, deep within the city and without a visa,”</i> Miranda grins evilly at you. <i>“Wouldn’t it just be a shame if one of the guards caught word of this? A good thing you have such a <b>nice</b> friend as me helping you out, isn’t it?”</i>", parse);
@@ -7529,7 +7531,7 @@ MirandaScenes.DatingFirstCity = function() {
 		Text.NL();
 		Text.Add("The two of you arrive at a small booth, manned by a bored-looking city official. A sign beside it announces it as a city identification office. You find it rather curious that it would be open at this hour, but shrug it off as an oddity of the city administration.", parse);
 		Text.NL();
-		if(miranda.Attitude() >= Miranda.Attitude.Neutral && MirandaScenes.DatingScore >= 0) {
+		if(miranda.Attitude() >= MirandaFlags.Attitude.Neutral && MirandaScenes.DatingScore >= 0) {
 			Text.Add("The guardswoman explains that she’s brought you here to get you a pass, and that she’ll vouch for you. The administrator eyes you curtly, disapproval clear in his furrowed brow. In the end you get your pass, though it takes some time for all the necessary papers to be filled out.", parse);
 			Text.NL();
 			Text.Add("<b>Acquired citizen’s visa!</b>");
@@ -7545,7 +7547,7 @@ MirandaScenes.DatingFirstCity = function() {
 			Text.NL();
 			Text.Add("<i>“Now, listen close. If you’d like me to do you this favor, you’d better do <b>me</b> a favor.”</i> the herm grabs hold of your hand and moves it to her crotch. You can feel her thick cock straining against the leather of her pants.", parse);
 			Text.NL();
-			if(miranda.Attitude() >= Miranda.Attitude.Neutral && MirandaScenes.DatingScore < 0) {
+			if(miranda.Attitude() >= MirandaFlags.Attitude.Neutral && MirandaScenes.DatingScore < 0) {
 				Text.Add("<i>“Last chance to get on my good side, [boyGirl],”</i> she whispers through clenched teeth, grinding against you. <i>“Get down on your knees and suck like a good little slut, and all is forgiven.”</i>", parse);
 			}
 			else {
@@ -7598,7 +7600,7 @@ MirandaScenes.DatingFirstCity = function() {
 					
 					MirandaScenes.DatingScore--;
 					
-					miranda.flags["Attitude"] = Miranda.Attitude.Hate;
+					miranda.flags["Attitude"] = MirandaFlags.Attitude.Hate;
 					
 					Gui.NextPrompt(MirandaScenes.DatingFirstHome);
 				}, enabled : true,

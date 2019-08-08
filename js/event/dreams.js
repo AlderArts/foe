@@ -4,6 +4,7 @@ import { Gender } from '../body/gender';
 import { Gui } from '../gui';
 import { Text } from '../text';
 import { GAME } from '../GAME';
+import { CvetaFlags } from './outlaws/cveta-flags';
 
 let DreamsScenes = {}
 
@@ -57,8 +58,8 @@ DreamsScenes.Entry = function(func) {
 			scenes.AddEnc(DreamsScenes.BlowjobRec, 2.0, function() { return player.sex.rBlow >= 25; }, ravenTrigger);
 			scenes.AddEnc(DreamsScenes.CunnilingusGive, 2.0, function() { return player.sex.gCunn >= 25; }, ravenTrigger);
 			scenes.AddEnc(DreamsScenes.CunnilingusRec, 2.0, function() { return player.sex.rCunn >= 25; }, ravenTrigger);
-			scenes.AddEnc(Scenes.Cveta.DreamRoses, 1.0, function() { return cveta.flags["Met"] >= Cveta.Met.FirstMeeting; }, ravenTrigger);
-			scenes.AddEnc(Scenes.Cveta.DreamBrood, 1.0, function() { return cveta.flags["Met"] >= Cveta.Met.FirstMeeting; }, ravenTrigger);
+			scenes.AddEnc(Scenes.Cveta.DreamRoses, 1.0, function() { return cveta.flags["Met"] >= CvetaFlags.Met.FirstMeeting; }, ravenTrigger);
+			scenes.AddEnc(Scenes.Cveta.DreamBrood, 1.0, function() { return cveta.flags["Met"] >= CvetaFlags.Met.FirstMeeting; }, ravenTrigger);
 			scenes.AddEnc(DreamsScenes.FragileArmor, 1.0, function() { return rigard.Twopenny["Met"] > 0; }, ravenTrigger);
 			scenes.AddEnc(DreamsScenes.AscheNighttime, 1.0, function() { return asche.flags["Met"] >= Asche.Met.Met; }, ravenTrigger);
 			scenes.AddEnc(DreamsScenes.AscheDance, 1.0, function() { return asche.flags["Magic"] != 0; }, ravenTrigger);

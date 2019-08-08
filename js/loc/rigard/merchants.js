@@ -8,6 +8,7 @@ import { WeaponShopLoc } from './weaponshop';
 import { WorldTime, MoveToLocation, GAME } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
+import { CvetaFlags } from '../../event/outlaws/cveta-flags';
 
 
 let ShopStreetScenes = {}
@@ -181,7 +182,7 @@ ShopStreetLoc.street.events.push(new Link(
 	"Violin", function() {
 		let rigard = GAME().rigard;
 		let cveta = GAME().cveta;
-		return !rigard.UnderLockdown() && cveta.flags["Met"] == Cveta.Met.ViolinQ;
+		return !rigard.UnderLockdown() && cveta.flags["Met"] == CvetaFlags.Met.ViolinQ;
 	}, function() { return party.coin >= 500; },
 	null,
 	function() {
@@ -193,7 +194,7 @@ ShopStreetLoc.street.events.push(new Link(
 			sirmadam : player.mfFem("sir", "madam")
 		};
 		
-		cveta.flags["Met"] = Cveta.Met.ViolinGet;
+		cveta.flags["Met"] = CvetaFlags.Met.ViolinGet;
 		
 		Text.Clear();
 		Text.Add("Walking down the length of the Merchants’ Street, you keep an eye out for the store that Cveta mentioned. It’s not too hard to find, being just across the street from Silken Delights, wedged in between a confectioner’s and haberdashers’. It’s a crooked little thing, slightly out of place in the finery of many of the other shops in the district, but a look at the antiques displayed in the shop window suggests that its dinginess is part of its marketing. After all, where better to find deals on such knick-knacks than in small corner stores like these? Even the letters on the sign, “Rintell’s”, have been made to resemble spidery writing, rather than being printed onto the wood like they reveal themselves to be on closer inspection.", parse);

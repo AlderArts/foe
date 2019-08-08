@@ -6,6 +6,7 @@
 import { Entity } from '../../entity';
 import { Time } from '../../time';
 import { WorldTime } from '../../GAME';
+import { TerryFlags } from '../terry-flags';
 
 let TwinsScenes = {};
 
@@ -157,7 +158,7 @@ TwinsScenes.TalkPrompt = function() {
 		options.push({ nameStr : "Thief",
 			func : function() {
 				Text.Clear();
-				if(terry.flags["Saved"] <= Terry.Saved.TalkedMiranda) {
+				if(terry.flags["Saved"] <= TerryFlags.Saved.TalkedMiranda) {
 					Text.Add("You explain to them that you have been feeling guilty about the sentence of death decreed for the vulpine thief who inadvertently took the blame for your own raid on the Krawitz estate, as well as his own crimes there. You ask if they couldn't intervene somehow - at least to lighten his sentence, if they can't arrange a pardon?", parse);
 					Text.NL();
 					Text.Add("<i>“Well, I appreciate the fact that he robbed Krawitz, but it’s not so simple, [playername]. I don’t think-”</i>", parse);
@@ -170,9 +171,9 @@ TwinsScenes.TalkPrompt = function() {
 					
 					twins.terryTimer = new Time(0, 0, 0, 24 - WorldTime().hour);
 					
-					terry.flags["Saved"] = Terry.Saved.TalkedTwins1;
+					terry.flags["Saved"] = TerryFlags.Saved.TalkedTwins1;
 				}
-				else if(terry.flags["Saved"] == Terry.Saved.TalkedTwins1) {
+				else if(terry.flags["Saved"] == TerryFlags.Saved.TalkedTwins1) {
 					Text.Add("You asked them how it went with helping that thief.", parse);
 					Text.NL();
 					Text.Add("<i>“We managed to work something out, but pardoning the thief is completely out of question, and there are a few terms to this deal,”</i> Rumi says.", parse);
@@ -199,7 +200,7 @@ TwinsScenes.TalkPrompt = function() {
 					Text.NL();
 					Text.Add("<b>Received enchanted collar!</b><br>", parse);
 					Text.Add("<b>Received royal letter!</b>", parse);
-					terry.flags["Saved"] = Terry.Saved.TalkedTwins2;
+					terry.flags["Saved"] = TerryFlags.Saved.TalkedTwins2;
 				}
 				// TODO
 				else {
@@ -214,7 +215,7 @@ TwinsScenes.TalkPrompt = function() {
 				Text.Flush();
 				Gui.NextPrompt();
 			}, enabled : twins.terryTimer.Expired(),
-			tooltip : Text.Parse("Ask them if they can intervene on behalf of the thief[death].", {death: terry.flags["Saved"] >= Terry.Saved.TalkedMiranda ? " on death row" : ""})
+			tooltip : Text.Parse("Ask them if they can intervene on behalf of the thief[death].", {death: terry.flags["Saved"] >= TerryFlags.Saved.TalkedMiranda ? " on death row" : ""})
 		});
 	}
 	Gui.SetButtonsFromList(options, true, TwinsScenes.Interact);

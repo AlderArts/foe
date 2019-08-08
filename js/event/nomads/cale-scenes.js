@@ -6,6 +6,7 @@ import { Cale } from './cale';
 import { WorldTime } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
+import { CaleFlags } from './cale-flags';
 
 let CaleScenes = {
     Sex : CaleSexScenes,
@@ -20,14 +21,14 @@ CaleScenes.Interact = function() {
 		playername : player.name
 	};
 	
-	if(cale.flags["Met2"] == Cale.Met2.NotMet) {
+	if(cale.flags["Met2"] == CaleFlags.Met2.NotMet) {
 		cale.name = "Cale";
-		cale.flags["Met2"] = Cale.Met2.Talked;
+		cale.flags["Met2"] = CaleFlags.Met2.Talked;
 		CaleScenes.FirstApproach();
 		return;
 	}
-	else if((cale.flags["Met2"] == Cale.Met2.Talked) && cale.Slut() >= 50) {
-		cale.flags["Met2"] = Cale.Met2.TalkedSlut;
+	else if((cale.flags["Met2"] == CaleFlags.Met2.Talked) && cale.Slut() >= 50) {
+		cale.flags["Met2"] = CaleFlags.Met2.TalkedSlut;
 		CaleScenes.TalkSlut();
 		return;
 	}
@@ -121,7 +122,7 @@ CaleScenes.FirstApproach = function() {
 	
 	Text.Add("You approach the wolf-morph, calling out a greeting to him as you join him at the fireside.", parse);
 	Text.NL();
-	if(cale.flags["Met"] == Cale.Met.SharedFuckedHim) {
+	if(cale.flags["Met"] == CaleFlags.Met.SharedFuckedHim) {
 		Text.Add("Your eyes roam appreciatively over the wolf's form until they focus on the sweet ass you fucked before, and you can't help but lick your lips at the memory.", parse);
 		Text.NL();
 		Text.Add("He jumps a little at your greeting, looking to the sides nervously as he finally lets his gaze settle on you. <i>“Oh, umm… H-hey there,”</i> he greets you back with a nervous grin. <i>“How you doing… err…”</i> He trails off realizing he didn’t quite catch your name.", parse);
@@ -227,7 +228,7 @@ CaleScenes.FirstApproach = function() {
 		});
 		Gui.SetButtonsFromList(options, false, null);
 	}
-	else if(cale.flags["Met"] == Cale.Met.SharedGotFucked) {
+	else if(cale.flags["Met"] == CaleFlags.Met.SharedGotFucked) {
 		Text.Add("You swallow hard, mind replaying the memories of him as he fucked you earlier, a pang of equal parts lust and intimidation momentarily rocking through you.", parse);
 		Text.NL();
 		parse["thigh"] = player.LowerBodyType() == LowerBodyType.Single ? parse["hip"] : parse["thigh"];
@@ -341,7 +342,7 @@ CaleScenes.FirstApproach = function() {
 		});
 		Gui.SetButtonsFromList(options, false, null);
 	}
-	else if(cale.flags["Met"] == Cale.Met.CaleTookRosalin) {
+	else if(cale.flags["Met"] == CaleFlags.Met.CaleTookRosalin) {
 		Text.Add("<i>“Hey there! Didn’t catch your name last time,”</i> the wolf grins, reminiscing of his romp with Rosalin. <i>“I was a bit preoccupied.”</i>", parse);
 		Text.NL();
 		Text.Add("You introduce yourself, wondering if he and the alchemist are a couple.", parse);
@@ -363,7 +364,7 @@ CaleScenes.FirstApproach = function() {
 		Text.Add("You nod as you digest that fact. Then, prompted by curiosity, you ask how he knows Rosalin - it looks and sounds like the two of them are pretty close.", parse);
 		Text.NL();
 		Text.Add("<i>“Rosie and I got a thing going… well, I do anyway. But it’s nothing serious. She needs to get laid sometimes, and I like getting laid. She needs a stud, and I like pussy. Simple math. ", parse);
-		if(cale.flags["Met"] == Cale.Met.YouTookRosalin)
+		if(cale.flags["Met"] == CaleFlags.Met.YouTookRosalin)
 			Text.Add("Not gonna lie, I’m not happy that you beat me to the punch last time, but I won’t hold it against you either. So rest easy, there’s always next time,”</i> he gives you a lopsided grin.", parse);
 		else
 			Text.Add("I don’t mind sharing her from time to time. So long as you don’t hog all of her for yourself.”</i> The wolf gives you a lopsided grin.", parse);
@@ -641,7 +642,7 @@ CaleScenes.TalkPrompt = function() {
 		options.push({ nameStr : "Anal",
 			func : function() {
 				Text.Clear();
-				if(cale.flags["Met2"] == Cale.Met2.TalkedSlut) {
+				if(cale.flags["Met2"] == CaleFlags.Met2.TalkedSlut) {
 					Text.Add("<i>“Ah, don’t worry about what I said before, I like it, I like it,”</i> the wolf hurriedly assures you. <i>“A lot, actually,”</i> he adds, blushing faintly.", parse);
 					Text.NL();
 					Text.Add("<i>“...Still, if you could find something for the pain, perhaps some potion…?”</i>", parse);
@@ -899,8 +900,8 @@ CaleScenes.TalkPast = function() {
 		Text.Add("From the melancholic look on his face, he’s clearly drifting away amongst old memories. Doesn’t look like he’s in any mood to talk further; you’ll need to come back later.", parse);
 		
 		//Unlock Rogue training
-		if(cale.flags["Rogue"] == Cale.Rogue.Locked)
-			cale.flags["Rogue"] = Cale.Rogue.First;
+		if(cale.flags["Rogue"] == CaleFlags.Rogue.Locked)
+			cale.flags["Rogue"] = CaleFlags.Rogue.First;
 	});
 	if(cale.Relation() >= 50) {
 		scenes.push(function() {
@@ -978,8 +979,8 @@ CaleScenes.Rogue = function() {
 	
 	var cocksInAss = player.CocksThatFit(cale.Butt());
 	
-	if(cale.flags["Rogue"] == Cale.Rogue.First) {
-		cale.flags["Rogue"] = Cale.Rogue.Ret;
+	if(cale.flags["Rogue"] == CaleFlags.Rogue.First) {
+		cale.flags["Rogue"] = CaleFlags.Rogue.Ret;
 		Text.Add("Cale scratches himself thoughtfully. <i>“Teach you, huh? Never was the pedacolalogical type. I guess I could show you a few moves though.”</i> He jumps to his feet, warming up his sinewy limbs to get some flexibility.", parse);
 		Text.NL();
 		Text.Add("<i>“The key is to do what the opponent doesn’t expect-”</i> ", parse);
@@ -1099,7 +1100,7 @@ CaleScenes.Rogue = function() {
 		cale.relation.IncreaseStat(100, 1);
 		TimeStep({hour : 1});
 		
-		cale.flags["Rogue"] = Cale.Rogue.Taught;
+		cale.flags["Rogue"] = CaleFlags.Rogue.Taught;
 		
 		CaleScenes.Prompt();
 	}
@@ -1130,7 +1131,7 @@ CaleScenes.RogueTeach = function() {
 	cale.relation.IncreaseStat(100, 3);
 	TimeStep({hour : 1});
 	
-	cale.flags["Rogue"] = Cale.Rogue.Taught;
+	cale.flags["Rogue"] = CaleFlags.Rogue.Taught;
 	
 	CaleScenes.Prompt();
 }

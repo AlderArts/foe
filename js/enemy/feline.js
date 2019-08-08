@@ -163,10 +163,10 @@ FelinesScenes.WildcatEnc = function(levelbonus) {
 		enemy.AddMember(new Wildcat(Gender.female, levelbonus));
 	}
 	else {
-		enemy.AddMember(new Wildcat(Gender.Rand([3,4,1]), levelbonus));
+		enemy.AddMember(new Wildcat(Gender.Random([3,4,1]), levelbonus));
 		for(var i = 0; i < 3; i++) {
 			if(Math.random() < 0.5)
-				enemy.AddMember(new Wildcat(Gender.Rand([3,4,1]), levelbonus));
+				enemy.AddMember(new Wildcat(Gender.Random([3,4,1]), levelbonus));
 		}
 	}
 	var enc = new Encounter(enemy);
@@ -227,10 +227,10 @@ FelinesScenes.PumaEnc = function(levelbonus) {
 		enemy.AddMember(new Puma(Gender.female, levelbonus));
 	}
 	else {
-		enemy.AddMember(new Puma(Gender.Rand([3,4,1]), levelbonus));
+		enemy.AddMember(new Puma(Gender.Random([3,4,1]), levelbonus));
 		for(var i = 0; i < 3; i++) {
 			if(Math.random() < 0.5)
-				enemy.AddMember(new Puma(Gender.Rand([3,4,1]), levelbonus));
+				enemy.AddMember(new Puma(Gender.Random([3,4,1]), levelbonus));
 		}
 	}
 	var enc = new Encounter(enemy);
@@ -291,10 +291,10 @@ FelinesScenes.JaguarEnc = function(levelbonus) {
 		enemy.AddMember(new Jaguar(Gender.female, levelbonus));
 	}
 	else {
-		enemy.AddMember(new Jaguar(Gender.Rand([3,4,1]), levelbonus));
+		enemy.AddMember(new Jaguar(Gender.Random([3,4,1]), levelbonus));
 		for(var i = 0; i < 3; i++) {
 			if(Math.random() < 0.5)
-				enemy.AddMember(new Jaguar(Gender.Rand([3,4,1]), levelbonus));
+				enemy.AddMember(new Jaguar(Gender.Random([3,4,1]), levelbonus));
 		}
 	}
 	var enc = new Encounter(enemy);
@@ -355,10 +355,10 @@ FelinesScenes.LynxEnc = function(levelbonus) {
 		enemy.AddMember(new Lynx(Gender.female, levelbonus));
 	}
 	else {
-		enemy.AddMember(new Lynx(Gender.Rand([3,4,1]), levelbonus));
+		enemy.AddMember(new Lynx(Gender.Random([3,4,1]), levelbonus));
 		for(var i = 0; i < 3; i++) {
 			if(Math.random() < 0.5)
-				enemy.AddMember(new Lynx(Gender.Rand([3,4,1]), levelbonus));
+				enemy.AddMember(new Lynx(Gender.Random([3,4,1]), levelbonus));
 		}
 	}
 	var enc = new Encounter(enemy);

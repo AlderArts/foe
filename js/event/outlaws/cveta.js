@@ -9,6 +9,7 @@ import { Images } from '../../assets';
 import { Color } from '../../body/color';
 import { Time } from '../../time';
 import { WorldTime, GAME } from '../../GAME';
+import { CvetaFlags } from './cveta-flags';
 
 function Cveta(storage) {
 	Entity.call(this);
@@ -57,11 +58,11 @@ function Cveta(storage) {
 	this.SetLevelBonus();
 	this.RestFull();
 	
-	this.flags["Met"]     = Cveta.Met.NotMet;
-	this.flags["Herself"] = Cveta.Herself.None;
-	this.flags["Music"]   = Cveta.Music.No;
-	this.flags["Singer"]  = Cveta.Singer.No;
-	this.flags["Bard"]    = Cveta.Bard.No;
+	this.flags["Met"]     = CvetaFlags.Met.NotMet;
+	this.flags["Herself"] = CvetaFlags.Herself.None;
+	this.flags["Music"]   = CvetaFlags.Music.No;
+	this.flags["Singer"]  = CvetaFlags.Singer.No;
+	this.flags["Bard"]    = CvetaFlags.Bard.No;
 	this.flags["Wings"]   = 0;
 	this.flags["Intimate"] = 0; //Bitmask
 	this.flags["Date"]    = 0; //Bitmask
@@ -74,39 +75,8 @@ function Cveta(storage) {
 Cveta.prototype = new Entity();
 Cveta.prototype.constructor = Cveta;
 
-Cveta.Met = {
-	NotMet       : 0,
-	MariaTalk    : 1,
-	FirstMeeting : 2,
-	ViolinQ      : 3,
-	ViolinGet    : 4,
-	Available    : 5
-};
-Cveta.Herself = {
-	None     : 0,
-	Outlaws  : 1,
-	Nobility : 2,
-	Mandate  : 3
-};
-Cveta.Music = {
-	No     : 0,
-	Talked : 1
-}
-Cveta.Bard = {
-	No     : 0,
-	Taught : 1
-};
-Cveta.Singer = {
-	No     : 0,
-	Taught : 1
-};
-Cveta.Intimate = { //Bitmask
-	Introduced : 1, //seen post-bulltower performance
-	Groped : 2
-};
-
 Cveta.prototype.Met = function() {
-	return this.flags["Met"] >= Cveta.Met.FirstMeeting;
+	return this.flags["Met"] >= CvetaFlags.Met.FirstMeeting;
 }
 
 Cveta.prototype.FromStorage = function(storage) {
@@ -161,7 +131,7 @@ Cveta.prototype.InTent = function() {
 	return (WorldTime().hour >= 6 && WorldTime().hour < 10) || (WorldTime().hour >= 14 && WorldTime().hour < 20);
 }
 Cveta.prototype.Violin = function() {
-	return this.flags["Met"] >= Cveta.Met.Available;
+	return this.flags["Met"] >= CvetaFlags.Met.Available;
 }
 Cveta.prototype.BlueRoses = function() { //TODO
 	return false;

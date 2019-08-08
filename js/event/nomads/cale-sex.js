@@ -4,6 +4,7 @@ import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { Sex } from '../../entity-sex';
 import { EncounterTable } from '../../event';
+import { CaleFlags } from './cale-flags';
 
 /* CALE SEX SCENES */
 let CaleSexScenes = {};
@@ -500,7 +501,7 @@ CaleSexScenes.SexSuckHimEntryPoint = function(outside) {
 					mess = true;
 					player.AddLustFraction(0.5);
 					
-					var max = virgin ? 25 : cale.flags["Met2"] >= Cale.Met2.Goop ? 100 : 50;
+					var max = virgin ? 25 : cale.flags["Met2"] >= CaleFlags.Met2.Goop ? 100 : 50;
 					cale.slut.IncreaseStat(max, 1);
 					
 					Gui.PrintDefaultOptions();
@@ -1294,7 +1295,7 @@ CaleSexScenes.SexFuckHim = function(outside, opts) {
 					Text.Flush();
 					
 					var slut = outside ? 4 : 3;
-					var max  = (cale.flags["Met2"] >= Cale.Met2.Goop) ? 100 : 50;
+					var max  = (cale.flags["Met2"] >= CaleFlags.Met2.Goop) ? 100 : 50;
 	
 					cale.slut.IncreaseStat(max, slut);
 					
@@ -1922,7 +1923,7 @@ CaleSexScenes.SexCaleButtslutEntrypoint = function(cocks, outside) {
 	Text.Flush();
 	
 	var slut = outside ? 4 : 3;
-	var max = (cale.flags["Met2"] >= Cale.Met2.Goop) ? 100 : 50;
+	var max = (cale.flags["Met2"] >= CaleFlags.Met2.Goop) ? 100 : 50;
 	
 	//[Tie Him][Nah]
 	var options = new Array();
@@ -2447,7 +2448,7 @@ CaleSexScenes.SexFuckingHimOutsideComments = function(cock, opts) {
 				Text.Add(" With that, he leaves you alone with a Cale stuffed full of spunk. Well, you’ve still got business to take care of with the wolf...", parse);
 				Text.NL();
 				
-				var max = cale.flags["Met2"] >= Cale.Met2.Goop ? 100 : 50;
+				var max = cale.flags["Met2"] >= CaleFlags.Met2.Goop ? 100 : 50;
 				cale.slut.IncreaseStat(max, 2);
 				
 				Gui.PrintDefaultOptions();

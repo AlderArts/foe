@@ -12,6 +12,7 @@ import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { Rosalin } from '../nomads/rosalin';
 import { Items } from '../../items';
+import { TerryFlags } from '../terry-flags';
 
 let JeanneScenes = {};
 
@@ -142,7 +143,7 @@ JeanneScenes.InteractPrompt = function() {
 		}, enabled : true,
 		tooltip : "Ask to make use of Jeanne’s services as an alchemist."
 	});
-	if(party.InParty(terry) && (terry.flags["TF"] & Terry.TF.Jeanne)) {
+	if(party.InParty(terry) && (terry.flags["TF"] & TerryFlags.TF.Jeanne)) {
 		options.push({ nameStr : "Terry TF",
 			func : function() {
 				Text.Clear();
@@ -401,7 +402,7 @@ JeanneScenes.Talk = function() {
 		tooltip : "Ask Jeanne for her story."
 	});
 	parse["himher"] = terry.himher();
-	if(party.InParty(terry) && terry.flags["TF"] & Terry.TF.TriedItem && !(terry.flags["TF"] & Terry.TF.Jeanne)) {
+	if(party.InParty(terry) && terry.flags["TF"] & TerryFlags.TF.TriedItem && !(terry.flags["TF"] & TerryFlags.TF.Jeanne)) {
 		options.push({ nameStr : "Terry",
 			func : Scenes.Terry.JeanneTFFirst, enabled : true,
 			tooltip : Text.Parse("Ask Jeanne if she can help you with Terry’s collar, and figure out why it seems to make [himher] immune to transformative effects.", parse)

@@ -3,6 +3,8 @@ import { Items } from './items';
 import { GetDEBUG } from '../app';
 import { VaughnScenes } from './event/outlaws/vaughn-scenes';
 import { VaughnFlags } from './event/outlaws/vaughn-flags';
+import { CaleFlags } from './event/nomads/cale-flags';
+import { TerryFlags } from './event/terry-flags';
 
 let Quests = {};
 Quests.Type = {
@@ -242,7 +244,7 @@ Quests.quests.push(new Quest({
 				var status = Quests.Type.NotStarted;
 				if(rosalin.flags["Met"] != 0)
 					status |= Quests.Type.Visible;
-				if(cale.flags["Met2"] != Cale.Met2.NotMet)
+				if(cale.flags["Met2"] != CaleFlags.Met2.NotMet)
 					status |= Quests.Type.Completed;
 				return status;
 			}
@@ -407,7 +409,7 @@ Quests.quests.push(new Quest({
 			active: function() {
 				var status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(terry.flags["Met"] >= Terry.Met.Found)
+				if(terry.flags["Met"] >= TerryFlags.Met.Found)
 					status |= Quests.Type.Completed;
 				return status;
 			}
@@ -419,7 +421,7 @@ Quests.quests.push(new Quest({
 			active: function() {
 				var status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(terry.flags["Met"] >= Terry.Met.Caught)
+				if(terry.flags["Met"] >= TerryFlags.Met.Caught)
 					status |= Quests.Type.Completed;
 				return status;
 			}
@@ -439,7 +441,7 @@ Quests.quests.push(new Quest({
 	},
 	active: function() {
 		var status = Quests.Type.NotStarted;
-		if(terry.flags["Saved"] >= Terry.Saved.Saved)
+		if(terry.flags["Saved"] >= TerryFlags.Saved.Saved)
 			status |= Quests.Type.Completed;
 		else if(rigard.Krawitz["Q"] >= Rigard.KrawitzQ.CaughtTerry)
 			status |= Quests.Type.Visible;
@@ -453,7 +455,7 @@ Quests.quests.push(new Quest({
 			active: function() {
 				var status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(terry.flags["Saved"] >= Terry.Saved.TalkedTwins1)
+				if(terry.flags["Saved"] >= TerryFlags.Saved.TalkedTwins1)
 					status |= Quests.Type.Completed;
 				return status;
 			}
@@ -464,9 +466,9 @@ Quests.quests.push(new Quest({
 			},
 			active: function() {
 				var status = Quests.Type.NotStarted;
-				if(terry.flags["Saved"] >= Terry.Saved.TalkedTwins1)
+				if(terry.flags["Saved"] >= TerryFlags.Saved.TalkedTwins1)
 					status |= Quests.Type.Visible;
-				if(terry.flags["Saved"] >= Terry.Saved.TalkedTwins2)
+				if(terry.flags["Saved"] >= TerryFlags.Saved.TalkedTwins2)
 					status |= Quests.Type.Completed;
 				return status;
 			}
@@ -477,9 +479,9 @@ Quests.quests.push(new Quest({
 			},
 			active: function() {
 				var status = Quests.Type.NotStarted;
-				if(terry.flags["Saved"] >= Terry.Saved.TalkedTwins2)
+				if(terry.flags["Saved"] >= TerryFlags.Saved.TalkedTwins2)
 					status |= Quests.Type.Visible;
-				if(terry.flags["Saved"] >= Terry.Saved.Saved)
+				if(terry.flags["Saved"] >= TerryFlags.Saved.Saved)
 					status |= Quests.Type.Completed;
 				return status;
 			}

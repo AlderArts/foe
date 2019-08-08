@@ -1,5 +1,5 @@
 import { Gui } from './gui';
-import { SAVE_VERSION } from '../app';
+import { SAVE_VERSION, VERSION_STRING } from '../app';
 import { Season, Time } from './time';
 
 import { Intro } from './event/introduction';
@@ -70,14 +70,26 @@ import { Sylistraxia } from './event/sylistraxia';
 import { Ches } from './event/brothel/ches';
 import { Gender } from './body/gender';
 import { Party } from './party';
-import { GAME, InitGAME, InitWorldTime, InitEntityStorage, EntityStorage, GameCache } from './GAME';
+import { GAME, InitGAME, InitWorldTime, InitEntityStorage, EntityStorage, GameCache, WorldTime } from './GAME';
+import { Race } from './body/race';
+import { Color } from './body/color';
+import { TF } from './tf';
+import { Items } from './items';
+import { Text } from './text';
+import { JobEnum, Jobs } from './job';
+import { Scenes } from './scenes';
+import { Vagina } from './body/vagina';
+
+import { MirandaFlags } from './event/miranda-flags';
+import { TerryFlags } from './event/terry-flags';
+import { KiakaiFlags } from './event/kiakai-flags';
 
 let InitCache = function() {
 	// Reset exploration
 	Gui.SetLastSubmenu(null);
 	GAME().IntroActive = false;
 
-	let gameCache = GameCache();
+	let gameCache : any = GameCache();
 
 	// SAVE VERSION
 	gameCache.version = parseInt(gameCache.version) || SAVE_VERSION;
@@ -259,7 +271,7 @@ let InitCache = function() {
 let CacheToGame = function() {
 	InitCache();
 
-	let gameCache = GameCache();
+	let gameCache : any = GameCache();
 
 	// Load flags
 	for(var flag in gameCache.flags)
@@ -279,9 +291,9 @@ let CacheToGame = function() {
 		GAME().kiakai.body.SetRace(Race.Elf);
 	}
 	if(gameCache.version < 6) {
-		if     (gameCache.flags["KiakaiAttitude"] == 0) gameCache.flags["KiakaiAttitude"] = Kiakai.Attitude.Nice;
-		else if(gameCache.flags["KiakaiAttitude"] == 1) gameCache.flags["KiakaiAttitude"] = Kiakai.Attitude.Naughty;
-		else if(gameCache.flags["KiakaiAttitude"] == 2) gameCache.flags["KiakaiAttitude"] = Kiakai.Attitude.Neutral;
+		if     (gameCache.flags["KiakaiAttitude"] == 0) gameCache.flags["KiakaiAttitude"] = KiakaiFlags.Attitude.Nice;
+		else if(gameCache.flags["KiakaiAttitude"] == 1) gameCache.flags["KiakaiAttitude"] = KiakaiFlags.Attitude.Naughty;
+		else if(gameCache.flags["KiakaiAttitude"] == 2) gameCache.flags["KiakaiAttitude"] = KiakaiFlags.Attitude.Neutral;
 	}
 	if(gameCache.version < 7) {
 		GAME().chief.relation.base = gameCache.flags["NomadRep"] || 0;      gameCache.flags["NomadRep"] = null;
@@ -293,7 +305,7 @@ let CacheToGame = function() {
 		// Kiakai
 		GAME().kiakai.flags["InitialGender"]           = gameCache.flags["KiakaiInitialGender"] || Gender.male; gameCache.flags["KiakaiInitialGender"] = null;
 
-		GAME().kiakai.flags["Attitude"]                = gameCache.flags["KiakaiAttitude"] || Kiakai.Attitude.Neutral; gameCache.flags["KiakaiAttitude"] = null;
+		GAME().kiakai.flags["Attitude"]                = gameCache.flags["KiakaiAttitude"] || KiakaiFlags.Attitude.Neutral; gameCache.flags["KiakaiAttitude"] = null;
 		GAME().kiakai.flags["AnalExp"]                 = gameCache.flags["KiakaiAnalExp"] || 0; gameCache.flags["KiakaiAnalExp"] = null;
 		GAME().kiakai.flags["Sexed"]                   = gameCache.flags["KiakaiSexed"] || 0; gameCache.flags["KiakaiSexed"] = null;
 		// First time dialogue
@@ -410,7 +422,7 @@ let CacheToGame = function() {
 		}
 	}
 	if(gameCache.version < 14) {
-		GAME().miranda.flags["Herm"] = (GAME().miranda.flags["Met"] >= Miranda.Met.TavernAftermath) ? 1 : 0;
+		GAME().miranda.flags["Herm"] = (GAME().miranda.flags["Met"] >= MirandaFlags.Met.TavernAftermath) ? 1 : 0;
 	}
 	if(gameCache.version < 15) {
 		if(GAME().rigard.Krawitz["Q"] >= Rigard.KrawitzQ.HeistDone)
@@ -438,7 +450,7 @@ let CacheToGame = function() {
 			GAME().party.Inv().AddItem(Items.Weapons.VineWhip);
 			GAME().party.Inv().AddItem(Items.Armor.VineBra);
 			GAME().party.Inv().AddItem(Items.Armor.VinePanties);
-			GAME().party.Inv().AddItem(Items.Estros);
+			GAME().party.Inv().AddItem(Items.Alchemy.Estros);
 		}
 	}
 	if(gameCache.version < 21) {
@@ -454,10 +466,10 @@ let CacheToGame = function() {
 	}
 	if(gameCache.version < 22) {
 		var vag = GAME().terry.flags["vag"];
-		if(vag != Terry.Pussy.None) {
+		if(vag != TerryFlags.Pussy.None) {
 			GAME().terry.body.vagina = [];
 			GAME().terry.body.vagina.push(new Vagina());
-			if(vag == Terry.Pussy.Used)
+			if(vag == TerryFlags.Pussy.Used)
 				GAME().terry.FirstVag().virgin = false;
 		}
 	}
@@ -497,7 +509,7 @@ let CacheToGame = function() {
 }
 
 let GameToCache = function() {
-	let gameCache = GameCache();
+	let gameCache : any = GameCache();
 
 	gameCache.version  = SAVE_VERSION;
 	// For debugging

@@ -3,6 +3,7 @@ import { Event, Link, EncounterTable } from '../../event';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { MoveToLocation} from '../../GAME';
+import { MirandaFlags } from '../../event/miranda-flags';
 
 let TavernLoc = {
 	common   : new Event("Maidens' Bane")
@@ -680,7 +681,7 @@ BarnabyScenes.ChatPrompt = function() {
 			Text.NL();
 			Text.Add("<i>“Fair warning though, she doesn’t take well to bigots and assholes.”</i>", parse);
 			Text.NL();
-			if(miranda.flags["Met"] < Miranda.Met.Tavern) {
+			if(miranda.flags["Met"] < MirandaFlags.Met.Tavern) {
 				Text.Add("You’ll definitely need to keep that in mind, then. You thank him for the warning.", parse);
 				Text.NL();
 				Text.Add("<i>“You’re welcome.”</i>", parse);
@@ -1134,7 +1135,7 @@ BarnabyScenes.BlowjobEntrypoint = function(func) {
 					Text.NL();
 					Text.Add("You tuck yourself back into the shadows under the counter. Well, there are certainly worse people you could have been seen by than Miranda, right?", parse);
 				}
-			}, 1.0, function() { return miranda.IsAtLocation() && miranda.flags["Met"] >= Miranda.Met.TavernAftermath; });
+			}, 1.0, function() { return miranda.IsAtLocation() && miranda.flags["Met"] >= MirandaFlags.Met.TavernAftermath; });
 			scenes.AddEnc(function() {
 				Text.Add("Before you can really start to get going on your second round, something changes in Barnaby’s body language. He seems... excited, maybe? Or perhaps amused would be better?", parse);
 				Text.NL();

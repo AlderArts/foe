@@ -7,6 +7,7 @@ import { Jobs } from '../../job';
 import { GlobalScenes } from '../global';
 import { Items } from '../../items';
 import { VaughnFlags } from './vaughn-flags';
+import { MirandaFlags } from '../miranda-flags';
 
 let TasksScenes = {};
 
@@ -535,13 +536,13 @@ TasksScenes.Snitch.Miranda = function(onDuty) {
 			Text.Add("You watch Miranda storm off, and the palpable heaviness in the air lifts with her passing. Yeah… regardless of what happens next, Terrell’s fate isn’t one that you’d wish upon anyone. By the look of things, you can probably head back to Vaughn and tell him of your success, even if you didn’t come by it the way he expected.", parse);
 			Text.Flush();
 			
-			if(miranda.Attitude() < Miranda.Attitude.Nice)
-				miranda.flags["Attitude"] = Miranda.Attitude.Nice;
+			if(miranda.Attitude() < MirandaFlags.Attitude.Nice)
+				miranda.flags["Attitude"] = MirandaFlags.Attitude.Nice;
 			
 			TimeStep({hour: 1});
 			
 			vaughn.flags["Met"] = VaughnFlags.Met.SnitchMirandaSuccess;
-			miranda.flags["Snitch"] |= Miranda.Snitch.SnitchedOnSnitch;
+			miranda.flags["Snitch"] |= MirandaFlags.Snitch.SnitchedOnSnitch;
 			
 			miranda.snitchTimer = vaughn.taskTimer.Clone();
 			
@@ -666,8 +667,8 @@ TasksScenes.Snitch.Miranda = function(onDuty) {
 				Text.Flush();
 				
 				vaughn.flags["Met"] = VaughnFlags.Met.SnitchMirandaSuccess;
-				miranda.flags["Snitch"] |= Miranda.Snitch.SnitchedOnSnitch;
-				miranda.flags["Snitch"] |= Miranda.Snitch.Sexed;
+				miranda.flags["Snitch"] |= MirandaFlags.Snitch.SnitchedOnSnitch;
+				miranda.flags["Snitch"] |= MirandaFlags.Snitch.Sexed;
 				
 				miranda.snitchTimer = vaughn.taskTimer.Clone();
 				
@@ -686,7 +687,7 @@ TasksScenes.Snitch.Miranda = function(onDuty) {
 						Text.Add("With that, she turns and storms away, leaving you alone in the Maiden’s Bane.", parse);
 						Text.Flush();
 						
-						miranda.flags["Attitude"] = Miranda.Attitude.Neutral;
+						miranda.flags["Attitude"] = MirandaFlags.Attitude.Neutral;
 						
 						miranda.relation.IncreaseStat(100, 5);
 						
@@ -721,7 +722,7 @@ TasksScenes.Snitch.Miranda = function(onDuty) {
 				
 				TimeStep({minute: 30});
 				
-				miranda.flags["Snitch"] |= Miranda.Snitch.RefusedSex;
+				miranda.flags["Snitch"] |= MirandaFlags.Snitch.RefusedSex;
 				
 				Gui.NextPrompt();
 			}, enabled : true

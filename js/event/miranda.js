@@ -13,6 +13,7 @@ import { Race } from '../body/race';
 import { WorldTime, TimeStep, GAME } from '../GAME';
 import { Text } from '../text';
 import { Gui } from '../gui';
+import { MirandaFlags } from './miranda-flags';
 
 function Miranda(storage) {
 	Entity.call(this);
@@ -67,10 +68,10 @@ function Miranda(storage) {
 	this.SetLevelBonus();
 	this.RestFull();
 	
-	this.flags["Met"]      = Miranda.Met.NotMet;
+	this.flags["Met"]      = MirandaFlags.Met.NotMet;
 	this.flags["Talk"]     = 0; // bitmask
 	this.flags["Herm"]     = 0; // Know she is a herm
-	this.flags["Attitude"] = Miranda.Attitude.Neutral;
+	this.flags["Attitude"] = MirandaFlags.Attitude.Neutral;
 	this.flags["Thief"]    = 0;
 	this.flags["RotGuard"] = 0;
 	this.flags["Forest"]   = 0;
@@ -81,7 +82,7 @@ function Miranda(storage) {
 	
 	this.flags["Footjob"]  = 0;
 	
-	this.flags["Bruiser"]  = Miranda.Bruiser.No;
+	this.flags["Bruiser"]  = MirandaFlags.Bruiser.No;
 	this.flags["trainSex"] = 0;
 	//Peasants' gate antics
 	this.flags["gBJ"]      = 0;
@@ -103,45 +104,13 @@ function Miranda(storage) {
 Miranda.prototype = new Entity();
 Miranda.prototype.constructor = Miranda;
 
-Miranda.Attitude = {
-	Hate    : -2,
-	Dismiss : -1,
-	Neutral : 0,
-	Nice    : 1
-};
-
-Miranda.Met = {
-	NotMet : 0,
-	Met    : 1,
-	Tavern : 2,
-	TavernAftermath : 3
-};
-
-Miranda.Talk = {
-	Kids : 1
-};
-
-Miranda.Public = {
-	Nothing : 0,
-	Oral    : 1,
-	Sex     : 2,
-	Other   : 3,
-	Orgy    : 4
-};
-
-Miranda.Snitch = { //Bitmask
-	SnitchedOnSnitch : 1,
-	Sexed : 2,
-	RefusedSex : 4
-};
-
 //TODO
 Miranda.prototype.IsFollower = function() {
 	return false; //Met? Questline?
 }
 
 Miranda.prototype.Met = function() {
-	return this.flags["Met"] >= Miranda.Met.Met;
+	return this.flags["Met"] >= MirandaFlags.Met.Met;
 }
 
 Miranda.prototype.Attitude = function() {
@@ -149,10 +118,10 @@ Miranda.prototype.Attitude = function() {
 }
 
 Miranda.prototype.Nice = function() {
-	return this.flags["Attitude"] >= Miranda.Attitude.Neutral;
+	return this.flags["Attitude"] >= MirandaFlags.Attitude.Neutral;
 }
 Miranda.prototype.Nasty = function() {
-	return this.flags["Attitude"] < Miranda.Attitude.Neutral;
+	return this.flags["Attitude"] < MirandaFlags.Attitude.Neutral;
 }
 
 Miranda.prototype.FromStorage = function(storage) {
@@ -263,11 +232,5 @@ Miranda.prototype.OnPatrol = function() {
 Miranda.prototype.FuckedTerry = function() {
 	return false; //TODO
 }
-
-Miranda.Bruiser = {
-	No       : 0,
-	Progress : 1,
-	Taught   : 2
-};
 
 export { Miranda };

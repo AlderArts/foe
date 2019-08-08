@@ -29,6 +29,8 @@ import { Stat } from '../../stat';
 import { WorldTime, MoveToLocation, GAME } from '../../GAME';
 import { Gui } from '../../gui';
 import { Text } from '../../text';
+import { MirandaFlags } from '../../event/miranda-flags';
+import { TerryFlags } from '../../event/terry-flags';
 
 let world = null;
 let Scenes = null;
@@ -943,7 +945,7 @@ RigardScenes.Chatter2 = function(enteringArea) {
 		Text.NL();
 		// Outro text
 		RigardScenes.ChatterOutro(parse);
-	}, Math.max(lowerArea, middleArea), function() { return terry.flags["Saved"] >= Terry.Saved.Saved; });
+	}, Math.max(lowerArea, middleArea), function() { return terry.flags["Saved"] >= TerryFlags.Saved.Saved; });
 	scenes.AddEnc(function() {
 		SetGenders(CreateNPC(true, true, true, false),
 		           CreateNPC(true, true, true, false));
@@ -1523,9 +1525,9 @@ RigardScenes.Lockdown = function() {
 	Text.NL();
 	Text.Add("You examine the card. Both sides have the logo of a fox throwing a raspberry, the edge reads ‘Masked Fox’.", parse);
 	Text.NL();
-	parse["nice"] = miranda.Attitude() >= Miranda.Attitude.Neutral ? " some comforting," : "";
+	parse["nice"] = miranda.Attitude() >= MirandaFlags.Attitude.Neutral ? " some comforting," : "";
 	Text.Add("<i>“That pompous bastard of a captain put <b>me</b> on the job - said to use my nose. That damn bastard takes me for what? A common dog!?”</i> she exclaims, infuriated. After a few moments,[nice] and a deep breath, Miranda seems to visibly calm down. She examines you and grins. ", parse);
-	if(miranda.Attitude() >= Miranda.Attitude.Neutral) {
+	if(miranda.Attitude() >= MirandaFlags.Attitude.Neutral) {
 		Text.Add("<i>“Say, how about you help me catch this perp? I'm sure nobody will mind it if we duck out to a few places to do some 'investigating', if you catch my drift.”</i>", parse);
 		Text.NL();
 		Text.Add("If this isn't a golden opportunity to throw off any suspicion on you, you don't know what it is. No better way to help cover your own tracks than to agree to help her chase down some other thief who robbed the same place. Actually, who in the world could have done that? Dismissing the matter as unimportant, you quickly convey to Miranda that you're willing to help her find the culprit.", parse);
@@ -1657,7 +1659,7 @@ RigardScenes.Lockdown = function() {
 			Text.Flush();
 
 			miranda.flags["Herm"] = 1;
-			miranda.flags["Met"]  = Miranda.Met.TavernAftermath;
+			miranda.flags["Met"]  = MirandaFlags.Met.TavernAftermath;
 			//[Hot]
 			var options = new Array();
 			options.push({ nameStr : "Neutral",
@@ -1670,7 +1672,7 @@ RigardScenes.Lockdown = function() {
 					Text.Add("You insist that you should probably get going. That thief isn’t going to catch himself. She chuckles, amused at your reaction. <i>“Well, let's get to it then!”</i> The two of you leave the tavern and return inside the city proper. From what you gather, you aren’t going to get out of here before the thief is caught.", parse);
 					Text.Flush();
 
-					miranda.flags["Attitude"] = Miranda.Attitude.Neutral;
+					miranda.flags["Attitude"] = MirandaFlags.Attitude.Neutral;
 					Gui.PrintDefaultOptions();
 				}, enabled : true,
 				tooltip : "Not really your thing, sorry."
@@ -1726,7 +1728,7 @@ RigardScenes.Lockdown = function() {
 						tooltip : "This is hardly the time to be having fun, so tuck her doghood back in and get down to business."
 					});
 					Gui.SetButtonsFromList(options, false, null);
-					miranda.flags["Attitude"] = Miranda.Attitude.Nice;
+					miranda.flags["Attitude"] = MirandaFlags.Attitude.Nice;
 				}, enabled : true,
 				tooltip : "The way you see it, this just gives you more options. Why not indulge?"
 			});
@@ -1739,7 +1741,7 @@ RigardScenes.Lockdown = function() {
 					Text.NL();
 					Text.Add("Jolted into action, you follow after her as she leads you out of the Maiden’s Bane and back inside Rigard’s gates.", parse);
 					Text.Flush();
-					miranda.flags["Attitude"] = Miranda.Attitude.Hate;
+					miranda.flags["Attitude"] = MirandaFlags.Attitude.Hate;
 
 					Gui.PrintDefaultOptions();
 				}, enabled : true,
@@ -1748,7 +1750,7 @@ RigardScenes.Lockdown = function() {
 			Gui.SetButtonsFromList(options, false, null);
 		}
 		else {
-			if(miranda.Attitude() >= Miranda.Attitude.Neutral) {
+			if(miranda.Attitude() >= MirandaFlags.Attitude.Neutral) {
 				Text.Add("<i>“Before we get going, how about you help me with an itch I’m having?”</i> the herm dog asks with a mischievous grin.", parse);
 				Text.NL();
 				Text.Add("Oh, Miranda, she's just never going to change, is she? You fight back a smile as you consider the offer.", parse);

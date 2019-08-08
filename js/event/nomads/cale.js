@@ -11,6 +11,7 @@ import { Color } from '../../body/color';
 import { AppendageType } from '../../body/appendage';
 import { TF } from '../../tf';
 import { WorldTime, GAME } from '../../GAME';
+import { CaleFlags } from './cale-flags';
 
 function Cale(storage) {
 	Entity.call(this);
@@ -28,7 +29,7 @@ function Cale(storage) {
 	this.FirstCock().length.base = 20;
 	this.FirstCock().thickness.base = 4;
 	
-	this.flags["Met"]      = Cale.Met.NotMet;
+	this.flags["Met"]      = CaleFlags.Met.NotMet;
 	this.flags["Met2"]     = 0;
 	this.flags["Sexed"]    = 0;
 	this.flags["Rogue"]    = 0;
@@ -107,34 +108,12 @@ function Cale(storage) {
 Cale.prototype = new Entity();
 Cale.prototype.constructor = Cale;
 
-Cale.Met = {
-	NotMet : 0,
-	First  : 1,
-	YouTookRosalin  : 1,
-	CaleTookRosalin : 2,
-	SharedGotFucked : 3,
-	SharedFuckedHim : 4,
-	SharedOnlyRosie : 5
-};
-Cale.Met2 = {
-	NotMet     : 0,
-	Talked     : 1,
-	TalkedSlut : 2,
-	Goop       : 3
-}
-Cale.Rogue = {
-	Locked : 0,
-	First  : 1,
-	Ret    : 2,
-	Taught : 3
-}
-
 Cale.prototype.Met = function() {
-	return this.flags["Met2"] >= Cale.Met2.Talked;
+	return this.flags["Met2"] >= CaleFlags.Met2.Talked;
 }
 
 Cale.prototype.Buttslut = function() {
-	return this.flags["Met2"] >= Cale.Met2.Goop;
+	return this.flags["Met2"] >= CaleFlags.Met2.Goop;
 }
 
 Cale.prototype.FromStorage = function(storage) {
@@ -146,7 +125,7 @@ Cale.prototype.FromStorage = function(storage) {
 	this.LoadFlags(storage);
 	this.LoadSexFlags(storage);
 	
-	if(this.flags["Met2"] != Cale.Met2.NotMet)
+	if(this.flags["Met2"] != CaleFlags.Met2.NotMet)
 		this.name = "Cale";
 }
 

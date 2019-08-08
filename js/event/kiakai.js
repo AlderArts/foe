@@ -14,6 +14,7 @@ import { Items } from '../items';
 import { Text } from '../text';
 import { Gui } from '../gui';
 import { TimeStep } from '../GAME';
+import { KiakaiFlags } from './kiakai-flags';
 
 function Kiakai(storage) {
 	Entity.call(this);
@@ -83,7 +84,7 @@ function Kiakai(storage) {
 	this.flags["RotPrMeeting"]  = 0;
 
 	this.flags["InitialGender"] = Gender.male;
-	this.flags["Attitude"]      = Kiakai.Attitude.Neutral; 
+	this.flags["Attitude"]      = KiakaiFlags.Attitude.Neutral; 
 	this.flags["AnalExp"]       = 0; 
 	this.flags["Sexed"]         = 0;
 	
@@ -109,17 +110,6 @@ function Kiakai(storage) {
 }
 Kiakai.prototype = new Entity();
 Kiakai.prototype.constructor = Kiakai;
-
-// Flags
-Kiakai.Attitude = {
-	Slave   : -3,
-	Dom     : -2,
-	Naughty : -1,
-	Neutral : 0,
-	Nice    : 1,
-	Friend  : 2,
-	Lover   : 3
-}
 
 Kiakai.prototype.GiveAnalAllowed = function() {
 	return this.flags["SexCatchAnal"] > 0; // TODO > 1?
@@ -195,10 +185,10 @@ Kiakai.prototype.Interact = function(switchSpot) {
 		hisher     : kiakai.hisher()
 	};
 	
-	if(kiakai.flags["Attitude"] == Kiakai.Attitude.Nice) {
+	if(kiakai.flags["Attitude"] == KiakaiFlags.Attitude.Nice) {
 		Text.Add("The elf perks up as you approach, giving you a friendly smile. <i>“What is on your mind, [playername]?”</i>", parse);
 	}
-	else if(kiakai.flags["Attitude"] == Kiakai.Attitude.Naughty) {
+	else if(kiakai.flags["Attitude"] == KiakaiFlags.Attitude.Naughty) {
 		Text.Add("The elf regards your approach with a wary gaze, not sure what you are after. <i>“Yes?”</i>", parse);
 	}
 	else {

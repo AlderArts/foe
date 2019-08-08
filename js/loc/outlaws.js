@@ -9,6 +9,7 @@ import { Scenes } from '../scenes';
 import { WorldTime, MoveToLocation } from '../GAME';
 import { VaughnScenes } from '../event/outlaws/vaughn-scenes';
 import { Text } from '../text';
+import { CvetaFlags } from '../event/outlaws/cveta-flags';
 
 let world = null;
 
@@ -39,7 +40,7 @@ OutlawsLoc.Camp.description = function() {
 OutlawsLoc.Camp.onEntry = function() {
 	if(outlaws.Rep() >= 10 && outlaws.flags["Met"] == Outlaws.Met.Bouqet && outlaws.mainQuestTimer.Expired())
 		Scenes.Outlaws.PathIntoRigardInitiation();
-	else if(outlaws.Rep() >= 15 && rigard.Krawitz["Q"] >= Rigard.KrawitzQ.CaughtTerry && cveta.flags["Met"] < Cveta.Met.MariaTalk)
+	else if(outlaws.Rep() >= 15 && rigard.Krawitz["Q"] >= Rigard.KrawitzQ.CaughtTerry && cveta.flags["Met"] < CvetaFlags.Met.MariaTalk)
 		Scenes.Cveta.MariaTalkFirst();
 	else if(outlaws.Rep() >= 25 && outlaws.flags["Met"] >= Outlaws.Met.MetBelinda && cveta.Relation() >= 60 && outlaws.flags["BullTower"] < Outlaws.BullTowerQuest.Initiated)
 		Scenes.BullTower.Initiation();
@@ -110,12 +111,12 @@ OutlawsLoc.Camp.events.push(new Link(
 
 OutlawsLoc.Camp.events.push(new Link(
 	"Cveta", function() {
-		var met  = cveta.flags["Met"] >= Cveta.Met.Available;
+		var met  = cveta.flags["Met"] >= CvetaFlags.Met.Available;
 		var time = cveta.WakingTime();
 		return met && time;
 	}, true,
 	function() {
-		if(cveta.flags["Met"] >= Cveta.Met.FirstMeeting)
+		if(cveta.flags["Met"] >= CvetaFlags.Met.FirstMeeting)
 			Scenes.Cveta.CampDesc();
 	},
 	function() {
@@ -125,7 +126,7 @@ OutlawsLoc.Camp.events.push(new Link(
 
 OutlawsLoc.Camp.events.push(new Link(
 	"Performance", function() {
-		var met  = cveta.flags["Met"] >= Cveta.Met.FirstMeeting;
+		var met  = cveta.flags["Met"] >= CvetaFlags.Met.FirstMeeting;
 		var time = cveta.PerformanceTime();
 		return met && time;
 	}, true,

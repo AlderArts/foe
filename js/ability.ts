@@ -2,6 +2,9 @@ import * as _ from 'lodash';
 import { Text } from "./text";
 import { Gui } from './gui';
 import { Stat } from './stat';
+import { Encounter } from './combat';
+import { Entity } from './entity';
+import { GAME } from './GAME';
 
 /*
  *
@@ -9,31 +12,33 @@ import { Stat } from './stat';
  *
  */
 
-let TargetMode = {
-	Self        : 1,
-	Ally        : 2,
-	Enemy       : 3,
-	Party       : 4,
-	Enemies     : 5,
-	AllyNotSelf : 6,
-	AllyFallen  : 7,
-	All         : 8
+enum TargetMode {
+	Self        = 1,
+	Ally        = 2,
+	Enemy       = 3,
+	Party       = 4,
+	Enemies     = 5,
+	AllyNotSelf = 6,
+	AllyFallen  = 7,
+	All         = 8
 }
 
-TargetMode.ToString = function(mode) {
-	switch(mode) {
-		case TargetMode.Self:        return "self";
-		case TargetMode.Ally:        return "ally";
-		case TargetMode.Enemy:       return "enemy";
-		case TargetMode.Party:       return "party";
-		case TargetMode.Enemies:     return "enemies";
-		case TargetMode.AllyNotSelf: return "ally";
-		case TargetMode.AllyFallen:  return "fallen";
-		case TargetMode.All:         return "all";
+namespace TargetMode {
+	export function ToString(mode : TargetMode) {
+		switch(mode) {
+			case TargetMode.Self:        return "self";
+			case TargetMode.Ally:        return "ally";
+			case TargetMode.Enemy:       return "enemy";
+			case TargetMode.Party:       return "party";
+			case TargetMode.Enemies:     return "enemies";
+			case TargetMode.AllyNotSelf: return "ally";
+			case TargetMode.AllyFallen:  return "fallen";
+			case TargetMode.All:         return "all";
+		}
 	}
 }
 
-function Ability(name) {
+function Ability(name : string) {
 	this.targetMode = TargetMode.Enemy;
 	this.name = name || "ABILITY";
 	//TODO: Tooltip?
@@ -59,14 +64,14 @@ Ability.prototype.Short = function() {
 	return "NO DESC";
 }
 
-Ability.prototype.StartCast = function(encounter, caster, target) {
+Ability.prototype.StartCast = function(encounter : Encounter, caster : Entity, target : Entity) {
 	Text.NL();
 	_.each(this.onCast, function(node) {
 		node(this, encounter, caster, target);
 	});
 }
 
-Ability.prototype.CastInternal = function(encounter, caster, target) {
+Ability.prototype.CastInternal = function(encounter : Encounter, caster : Entity, target : Entity) {
 	Text.NL();
 	_.each(this.castTree, function(node) {
 		node(this, encounter, caster, target);
@@ -76,11 +81,12 @@ Ability.prototype.CastInternal = function(encounter, caster, target) {
 }
 
 // Used as entrypoint for PC/Party (active selection)
-Ability.prototype.OnSelect = function(encounter, caster, backPrompt, ext) {
+Ability.prototype.OnSelect = function(encounter : Encounter, caster : Entity, backPrompt? : any, ext? : any) {
 	var ability = this;
 	// TODO: Buttons (use portraits for target?)
 
-	var target = [];
+	var target : any[] = [];
+	let party = GAME().party;
 
 	switch(ability.targetMode) {
 		case TargetMode.All:
@@ -91,7 +97,7 @@ Ability.prototype.OnSelect = function(encounter, caster, backPrompt, ext) {
 
 				target.push({
 					nameStr : t.name,
-					func    : function(t) {
+					func    : function(t : Entity) {
 						ability.Use(encounter, caster, t, ext);
 					},
 					enabled : ability.enabledTargetCondition(encounter, caster, t),
@@ -105,7 +111,7 @@ Ability.prototype.OnSelect = function(encounter, caster, backPrompt, ext) {
 
 				target.push({
 					nameStr : t.uniqueName || t.name,
-					func    : function(t) {
+					func    : function(t : Entity) {
 						ability.Use(encounter, caster, t, ext);
 					},
 					enabled : ability.enabledTargetCondition(encounter, caster, t),
@@ -133,7 +139,7 @@ Ability.prototype.OnSelect = function(encounter, caster, backPrompt, ext) {
 
 				target.push({
 					nameStr : t.name,
-					func    : function(t) {
+					func    : function(t : Entity) {
 						ability.Use(encounter, caster, t, ext);
 					},
 					enabled : ability.enabledTargetCondition(encounter, caster, t),
@@ -152,7 +158,7 @@ Ability.prototype.OnSelect = function(encounter, caster, backPrompt, ext) {
 
 				target.push({
 					nameStr : t.uniqueName || t.name,
-					func    : function(t) {
+					func    : function(t : Entity) {
 						ability.Use(encounter, caster, t, ext);
 					},
 					enabled : ability.enabledTargetCondition(encounter, caster, t),
@@ -174,7 +180,7 @@ Ability.prototype.OnSelect = function(encounter, caster, backPrompt, ext) {
 	}
 }
 
-Ability.EnabledCost = function(ab, caster) {
+Ability.EnabledCost = function(ab : Ability, caster : Entity) {
 	if(_.isObject(ab.cost)) {
 		if(ab.cost.hp && ab.cost.hp > caster.curHp) return false;
 		if(ab.cost.sp && ab.cost.sp > caster.curSp) return false;
@@ -183,7 +189,7 @@ Ability.EnabledCost = function(ab, caster) {
 	return true;
 }
 
-Ability.ApplyCost = function(ab, caster) {
+Ability.ApplyCost = function(ab : Ability, caster : Entity) {
 	if(_.isObject(ab.cost)) {
 		if(ab.cost.hp) caster.curHp -= ab.cost.hp;
 		if(ab.cost.sp) caster.curSp -= ab.cost.sp;
@@ -191,7 +197,7 @@ Ability.ApplyCost = function(ab, caster) {
 	}
 }
 
-Ability.prototype.Use = function(encounter, caster, target) {
+Ability.prototype.Use = function(encounter : Encounter, caster : Entity, target : Entity) {
 	Ability.ApplyCost(this, caster);
 	this.StartCast(encounter, caster, target);
 
@@ -223,19 +229,19 @@ Ability.prototype.Use = function(encounter, caster, target) {
 	}
 }
 
-Ability.prototype.UseOutOfCombat = function(caster, target) {
+Ability.prototype.UseOutOfCombat = function(caster : Entity, target : Entity) {
 	Ability.ApplyCost(this, caster);
 	this.StartCast(null, caster, target);
 	this.CastInternal(null, caster, target);
 }
 
-Ability.prototype.enabledCondition = function(encounter, caster) {
+Ability.prototype.enabledCondition = function(encounter : Encounter, caster : Entity) {
 	var onCooldown = encounter ? this.OnCooldown(caster.GetCombatEntry(encounter)) : false;
 
 	return Ability.EnabledCost(this, caster) && !onCooldown;
 }
 
-Ability.prototype.OnCooldown = function(casterEntry) {
+Ability.prototype.OnCooldown = function(casterEntry : any) {
 	var ability = this;
 	var onCooldown = false;
 	_.each(casterEntry.cooldown, function(c) {
@@ -247,7 +253,7 @@ Ability.prototype.OnCooldown = function(casterEntry) {
 	return onCooldown;
 }
 
-Ability.prototype.enabledTargetCondition = function(encounter, caster, target) {
+Ability.prototype.enabledTargetCondition = function(encounter : Encounter, caster : Entity, target : Entity) {
 	return true;
 }
 
@@ -264,7 +270,7 @@ Ability.prototype.CostStr = function() {
 	return str;
 }
 
-Ability.ToHit = function(hit, evade) {
+Ability.ToHit = function(hit : number, evade : number) {
 	return 2 / (1+Math.exp(-2.5*hit/evade)) - 1;
 }
 
@@ -273,11 +279,7 @@ Ability.Damage = function(atk, def) {
 	return atk * (atk / (2.2*def+30));
 }
 */
-Ability.Damage = function(atk, def, casterLvl, targetLvl) {
-	// Safeguard
-	casterLvl = casterLvl || 1;
-	targetLvl = targetLvl || 1;
-
+Ability.Damage = function(atk : number, def : number, casterLvl : number = 1, targetLvl : number = 1) {
 	var maxDefense = (2+Stat.growthPerPoint*Stat.growthPointsPerLevel*(targetLvl-1)) * (targetLvl+9)*2 + 100;
 	var modRatio = Math.pow(maxDefense/def, 1.3);
 	var logistics = 1/(1+Math.exp(-1*modRatio));
@@ -288,56 +290,60 @@ Ability.Damage = function(atk, def, casterLvl, targetLvl) {
 	return defFactor * atk * levelFactor;
 }
 
-function AbilityCollection(name) {
-	this.name = name;
+export class AbilityCollection {
+	name : string;
+	AbilitySet : any[];
+	constructor(name : string) {
+		this.name = name;
 
-	this.AbilitySet = [];
-	//TODO: Tooltip
-}
-
-AbilityCollection.prototype.HasAbility = function(ability) {
-	var idx = this.AbilitySet.indexOf(ability); // Is the ability already part of the set?
-	return (idx!=-1);
-}
-
-AbilityCollection.prototype.AddAbility = function(ability) {
-	var idx = this.AbilitySet.indexOf(ability); // Is the ability already part of the set?
-	if(idx==-1)
-		this.AbilitySet.push(ability);
-}
-
-AbilityCollection.prototype.Empty = function() {
-	return this.AbilitySet.length == 0;
-}
-
-AbilityCollection.prototype.OnSelect = function(encounter, caster, backPrompt) {
-	var collection = this;
-	var entry = caster.GetCombatEntry(encounter);
-	var prompt = function() {
-		Text.Clear();
-		_.each(collection.AbilitySet, function(ability) {
-			var castTime = ability.castTime != 0 ? ability.castTime : "instant";
-			var cooldown = ability.OnCooldown(entry);
-			var plural   = (cooldown > 1 ? "s" : "");
-			Text.Add("[ability] (Cost: [cost], Cast time: [time][cd]): [desc]<br>",
-				{
-					ability: ability.name,
-					cost: ability.CostStr(),
-					time: castTime,
-					desc: ability.Short(),
-					cd: cooldown ? (", cooling down... " + cooldown + " turn" + plural) : ""
-				});
-		});
-		Text.Flush();
-	};
-
-	var ret = function() {
-		collection.OnSelect(encounter, caster, backPrompt);
-		prompt();
+		this.AbilitySet = [];
+		//TODO: Tooltip
+	}
+	
+	HasAbility(ability : Ability) {
+		var idx = this.AbilitySet.indexOf(ability); // Is the ability already part of the set?
+		return (idx!=-1);
 	}
 
-	prompt();
-	Gui.SetButtonsFromCollection(encounter, caster, this.AbilitySet, ret, backPrompt);
+	AddAbility(ability : Ability) {
+		var idx = this.AbilitySet.indexOf(ability); // Is the ability already part of the set?
+		if(idx==-1)
+			this.AbilitySet.push(ability);
+	}
+
+	Empty() {
+		return this.AbilitySet.length == 0;
+	}
+
+	OnSelect(encounter : Encounter, caster : Entity, backPrompt? : any) {
+		var collection = this;
+		var entry = caster.GetCombatEntry(encounter);
+		var prompt = function() {
+			Text.Clear();
+			_.each(collection.AbilitySet, function(ability) {
+				var castTime = ability.castTime != 0 ? ability.castTime : "instant";
+				var cooldown = ability.OnCooldown(entry);
+				var plural   = (cooldown > 1 ? "s" : "");
+				Text.Add("[ability] (Cost: [cost], Cast time: [time][cd]): [desc]<br>",
+					{
+						ability: ability.name,
+						cost: ability.CostStr(),
+						time: castTime,
+						desc: ability.Short(),
+						cd: cooldown ? (", cooling down... " + cooldown + " turn" + plural) : ""
+					});
+			});
+			Text.Flush();
+		};
+
+		var ret = function() {
+			collection.OnSelect(encounter, caster, backPrompt);
+			prompt();
+		}
+
+		prompt();
+		Gui.SetButtonsFromCollection(encounter, caster, this.AbilitySet, ret, backPrompt);
+	}
 }
 
-export { Ability, AbilityCollection, TargetMode };
+export { Ability, TargetMode };

@@ -20,6 +20,8 @@ import { Encounter } from '../../combat';
 import { SetGameState, GameState } from '../../gamestate';
 import { StatusEffect } from '../../statuseffect';
 import { Items } from '../../items';
+import { CvetaFlags } from './cveta-flags';
+import { MariaFlags } from './maria-flags';
 
 let MariaScenes = {
 	DeadDrops : DeadDropScenes,
@@ -71,29 +73,6 @@ function Maria(storage) {
 }
 Maria.prototype = new Entity();
 Maria.prototype.constructor = Maria;
-
-Maria.Met = {
-	ForestMeeting : 1,
-	Fight         : 2,
-	FightSexed    : 4,
-	FightLost     : 8
-};
-
-Maria.Ranger = {
-	NotTaught : 0,
-	Taught    : 1
-};
-
-Maria.DeadDrops = {
-	Alert     : 1,
-	Talked    : 2,
-	Completed : 4,
-	PaidKid   : 8,
-	SexedGuards : 16,
-	ShowedRoyal : 32
-	//TODO flag for repeat, specific things
-};
-
 
 Maria.prototype.FromStorage = function(storage) {
 	this.Butt().virgin       = parseInt(storage.avirgin) == 1;
@@ -183,8 +162,8 @@ MariaScenes.CampInteract = function() {
 	if(outlaws.MariasBouqetAvailable()) {
 		Scenes.Outlaws.MariasBouquet();
 	}
-	else if(maria.flags["DD"] & Maria.DeadDrops.Alert &&
-	      !(maria.flags["DD"] & Maria.DeadDrops.Talked)) {
+	else if(maria.flags["DD"] & MariaFlags.DeadDrops.Alert &&
+	      !(maria.flags["DD"] & MariaFlags.DeadDrops.Talked)) {
 		MariaScenes.DeadDrops.Initiation();
 	}
 	else {
@@ -306,7 +285,7 @@ MariaScenes.CampPrompt = function() {
 			MariaScenes.TalkPrompt();
 		}
 	});
-	if(cveta.flags["Met"] == Cveta.Met.MariaTalk) {
+	if(cveta.flags["Met"] == CvetaFlags.Met.MariaTalk) {
 		options.push({ nameStr : "Princess",
 			func : function() {
 				Scenes.Cveta.MariaTalkRepeat();
@@ -315,12 +294,12 @@ MariaScenes.CampPrompt = function() {
 		});
 	}
 
-	if(maria.flags["DD"] & Maria.DeadDrops.Talked)
+	if(maria.flags["DD"] & MariaFlags.DeadDrops.Talked)
 	{
 		options.push({ nameStr : "Dead-Drop",
 			tooltip : "So, does she want to go on a little pick-up errand?",
 			func : function() {
-				if(maria.flags["DD"] & Maria.DeadDrops.Completed)
+				if(maria.flags["DD"] & MariaFlags.DeadDrops.Completed)
 					MariaScenes.DeadDrops.Repeat();
 				else
 					MariaScenes.DeadDrops.First.Chat();
@@ -396,8 +375,8 @@ MariaScenes.RangerTraining = function() {
 				maria.relation.IncreaseStat(100, 3);
 				TimeStep({hour: 2});
 				
-				if(maria.flags["Ranger"] < Maria.Ranger.Taught)
-					maria.flags["Ranger"] = Maria.Ranger.Taught;
+				if(maria.flags["Ranger"] < MariaFlags.Ranger.Taught)
+					maria.flags["Ranger"] = MariaFlags.Ranger.Taught;
 
 				Gui.NextPrompt();
 			}
@@ -442,8 +421,8 @@ MariaScenes.RangerTraining = function() {
 		
 		maria.relation.IncreaseStat(100, 7);
 		
-		if(maria.flags["Ranger"] < Maria.Ranger.Taught)
-			maria.flags["Ranger"] = Maria.Ranger.Taught;
+		if(maria.flags["Ranger"] < MariaFlags.Ranger.Taught)
+			maria.flags["Ranger"] = MariaFlags.Ranger.Taught;
 		
 		Gui.NextPrompt();
 	}
@@ -501,7 +480,7 @@ MariaScenes.TalkPrompt = function() {
 				Text.NL();
 				Text.Add("<i>“About that…”</i> Maria looks a little pensive. The ebony beauty surely isn’t about to up and say that she was in the wrong, but neither is she probably going to flat-out claim to be squeaky clean, either. <i>“Better safe than sorry. Didn’t know how you’d react.”</i>", parse);
 				Text.NL();
-				if(maria.flags["Met"] & Maria.Met.Fight) {
+				if(maria.flags["Met"] & MariaFlags.Met.Fight) {
 					Text.Add("Hmph. Judging by the way you reacted, you’d have been in more of a mood to simply talk if she hadn’t outright threatened you to begin with.", parse);
 					Text.NL();
 					Text.Add("<i>“It’s harsh, but it’s also the truth that I haven’t lived this long as an outlaw by assuming the best of strangers,”</i> Maria replies matter-of-factly. <i>“It is what it is; we’ve all had to live with it. For what it’s worth, I’ll say I’m sorry.”</i>", parse);
@@ -792,7 +771,7 @@ MariaScenes.ForestMeeting = function() {
 	}
 
 	if(maria.flags["Met"] == 0) {
-		maria.flags["Met"] |= Maria.Met.ForestMeeting;
+		maria.flags["Met"] |= MariaFlags.Met.ForestMeeting;
 		Text.Add("Off in the distance, the massive tree at the center of Eden overlooks the entire verdant area, casting long shadows and slightly eclipsing the sun. This far into the woodland, the trees grow close together, and even the smallest is far too tall for you to climb. All around, the sounds of the forest pound against your ears. Up in the high branches, birds twitter at each other. Wind whistles through the limbs, brushing them against one another in a comforting melody. Dozens of unseen insects send mating songs through the air.", parse);
 		Text.NL();
 		Text.Add("The pleasant buzz distracts you from the soreness settling in your limbs. After a few more minutes of traveling, you decide to take a break, and sit down at the base of a tree. The rough bark rubs against you through your [armor]. Before long, you fall into a doze.", parse);
@@ -894,7 +873,7 @@ MariaScenes.ForestConfront = function() {
 				SetGameState(GameState.Event, Gui);
 				party.members = enc.oldParty;
 				
-				maria.flags["Met"] |= Maria.Met.FightLost;
+				maria.flags["Met"] |= MariaFlags.Met.FightLost;
 				
 				Text.Clear();
 				Text.Add("You fall to the ground, utterly defeated. The archer kicks away your [weapon] and levels an arrow at you. Glaring at you, she orders you to stand. As you wobble to get up, she comes up behind you, binding your hands fast with some rope. Cold shivers run up your spine as you feel the sharp point of a knife dig into the soft flesh between your shoulder blades.", parse);
@@ -965,7 +944,7 @@ MariaScenes.ForestConfrontWin = function() {
 	parse = player.ParserTags(parse);
 
 	Text.Clear();
-	maria.flags["Met"] |= Maria.Met.Fight;
+	maria.flags["Met"] |= MariaFlags.Met.Fight;
 	
 	Text.Add("Maria collapses, unable to fight any further.", parse);
 	if(maria.LustLevel() > 0.75)
@@ -981,7 +960,7 @@ MariaScenes.ForestConfrontWin = function() {
 		var options = new Array();
 		options.push({ nameStr : "Yes",
 			func : function() {
-				maria.flags["Met"] |= Maria.Met.FightSexed;
+				maria.flags["Met"] |= MariaFlags.Met.FightSexed;
 				
 				Text.Clear();
 				parse["k"] = player.HasLegs() ? " Kneeling over her, you press a knee into her stomach" : Text.Parse(" Using your [foot], you press the weight of it on her stomach", parse);
@@ -1132,7 +1111,7 @@ MariaScenes.ForestFollow = function() {
 			Text.Add("Watching her move her body enticingly, you strike up a conversation with the buxom bandit. First, the topic stays on innocuous things. Before long, you begin talking about Maria, and you compliment her on her generous cleavage.", parse);
 			Text.NL();
 
-			if(maria.flags["Met"] & Maria.Met.FightSexed) {
+			if(maria.flags["Met"] & MariaFlags.Met.FightSexed) {
 				Text.Add("Scowling at you, the archer slaps you. Stinging pain explodes across your face, and you wince, blinking back tears at the unexpected force. Ordering you to stay silent, Maria refuses to even acknowledge your existence from that point forward. You do notice, however, that her cheeks became quite flushed at your comment. You resolve to try and win her affections later, when you've made up for your offense.", parse);
 				maria.relation.IncreaseStat(100, 2);
 			}
@@ -1206,15 +1185,15 @@ MariaScenes.ForestCamp = function() {
 
 				// 0 = no, 1 = won, 2 = won, sexed, 3 = lost
 				// IF SEXED
-				if(maria.flags["Met"] & Maria.Met.FightSexed) {
+				if(maria.flags["Met"] & MariaFlags.Met.FightSexed) {
 					Text.Add("<i>“Turns out I was wrong. [HeShe] hits pretty damn hard. After that ass-kicking, I couldn't just let [himher] go.”</i> Maria turns and glares pointedly at you. After a moment, a slight, dark flush works its way into her cheeks and she averts her eyes. <i>“What happens now is your business, Zenith.”</i>", parse);
 				}
 				// WON
-				else if(maria.flags["Met"] & Maria.Met.Fight) {
+				else if(maria.flags["Met"] & MariaFlags.Met.Fight) {
 					Text.Add("<i>“[HeShe] actually fought better than I expected.”</i> Maria gives Zenith a pointed stare and he nods back. <i>“I'm going to need to see Aquilius after a bout like that.”</i> She seems to genuinely admire your fighting prowess, and a part of you feels proud that you managed to gain a complete stranger's respect through combat. She even ambushed you, and you still managed to fight her off.", parse);
 				}
 				// LOST
-				else if(maria.flags["Met"] & Maria.Met.FightLost) {
+				else if(maria.flags["Met"] & MariaFlags.Met.FightLost) {
 					Text.Add("<i>“And I was right. [HeShe] went down like a sack of potatoes. I admire [hisher] spirit, though. That's part of why I brought [himher] back to camp.”</i>", parse);
 				}
 				else {
@@ -1236,9 +1215,9 @@ MariaScenes.ForestCamp = function() {
 				Text.Add("He turns to Maria, fixing her with his intense gaze. <i>“I don’t. This is an unusual case.”</i> Shrinking back, the archer looks at the floor. The badger-morph turns back to you. <i>“As for you in particular? Well... I will let you leave this time.”</i>", parse);
 				Text.NL();
 
-				if(maria.flags["Met"] & Maria.Met.Fight)
+				if(maria.flags["Met"] & MariaFlags.Met.Fight)
 					Text.Add("<i>“You beat one of my best scouts. Not something every person can say, hm? You're not part of any law enforcement, are you?”</i> Shaking your head, you let Zenith continue. <i>“Come back later then. I'll have some things to discuss with you. For now, you should head back to wherever you call home.”</i>", parse);
-				else if(maria.flags["Met"] & Maria.Met.FightLost)
+				else if(maria.flags["Met"] & MariaFlags.Met.FightLost)
 					Text.Add("<i>“Seems there was a bit of a misunderstanding. We bear you no ill will, unless you decide to go against us.”</i> Shaking your head, you let Zenith continue. <i>“Come back later then. I'll have some things to discuss with you. For now, you should head back to wherever you call home.”</i>", parse);
 				else
 					Text.Add("<i>“Since you showed no violence towards myself or my people, you are free to return if you wish.”</i> As if that settles the entire matter, he shoos you from the room and shuts the door behind you and Maria.", parse);

@@ -9,6 +9,7 @@ import { NomadsLoc } from '../../loc/nomads';
 import { SetGameState, GameState } from '../../gamestate';
 import { Gui } from '../../gui';
 import { Text } from '../../text';
+import { EstevanFlags } from './estevan-flags';
 
 let NCavalcadeScenes = {};
 
@@ -33,7 +34,7 @@ NomadsLoc.Fireplace.events.push(new Link(
 		let estevan = GAME().estevan;
 		if(NCavalcadeScenes.Enabled()) {
 			Text.Add("Both Rosalin, Cale and Estevan seem to be around. Perhaps they are up for a game of Cavalcade?");
-			if(estevan.flags["Cheat"] == Estevan.Cheat.Setup)
+			if(estevan.flags["Cheat"] == EstevanFlags.Cheat.Setup)
 				Text.Add(" You remind yourself that you’ve rigged this coming game together with Estevan in order to play a prank on Cale.");
 			Text.NL();
 			Text.Flush();
@@ -71,7 +72,7 @@ NomadsLoc.Fireplace.events.push(new Link(
 		Text.Clear();
 		Text.Add("You round up the mismatched trio and ask them if they are up for a game of Cavalcade.");
 		Text.NL();
-		if(estevan.flags["Cheat"] == Estevan.Cheat.Setup)
+		if(estevan.flags["Cheat"] == EstevanFlags.Cheat.Setup)
 			NCavalcadeScenes.CheatGame();
 		else
 			NCavalcadeScenes.RegularGame();
@@ -122,7 +123,7 @@ NCavalcadeScenes.RegularGame = function() {
 	Text.NL();
 
 	// TODO: Other triggers?
-	if(estevan.flags["Cheat"] >= Estevan.Cheat.Talked) {
+	if(estevan.flags["Cheat"] >= EstevanFlags.Cheat.Talked) {
 		Text.Add("<i>“So, what are the stakes?”</i> the satyr asks innocently.", parse);
 		Text.Flush();
 
@@ -399,7 +400,7 @@ NCavalcadeScenes.CheatGame = function() {
 		cockTip    : function() { return p1cock.TipShort(); }
 	};
 
-	estevan.flags["Cheat"] = Estevan.Cheat.Triggered;
+	estevan.flags["Cheat"] = EstevanFlags.Cheat.Triggered;
 	var virgin = cale.Butt().virgin;
 
 	TimeStep({hour: 1});

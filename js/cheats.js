@@ -8,7 +8,7 @@ import { GetDEBUG, SetDEBUG } from '../app';
 import { Text } from './text';
 import { Gui } from './gui';
 import { GAME } from './GAME';
-import { Kiakai } from './event/kiakai';
+import { KiakaiFlags } from './event/kiakai-flags';
 
 export function InitCheats(world) {
 	/*
@@ -249,7 +249,7 @@ export function InitCheats(world) {
 						options.push({ nameStr : "Nice",
 							func : function() {
 								GAME().party.SwitchIn(GAME().kiakai);
-								GAME().kiakai.flags["Attitude"] = Kiakai.Attitude.Nice;
+								GAME().kiakai.flags["Attitude"] = KiakaiFlags.Attitude.Nice;
 								ElfSmith();
 							}, enabled : true,
 							tooltip : "Be nice to the elf."
@@ -257,7 +257,7 @@ export function InitCheats(world) {
 						options.push({ nameStr : "Naughty",
 							func : function() {
 								GAME().party.SwitchIn(GAME().kiakai);
-								GAME().kiakai.flags["Attitude"] = Kiakai.Attitude.Naughty;
+								GAME().kiakai.flags["Attitude"] = KiakaiFlags.Attitude.Naughty;
 								ElfSmith();
 							}, enabled : true,
 							tooltip : "Be naughty to the elf."
@@ -265,7 +265,7 @@ export function InitCheats(world) {
 						options.push({ nameStr : "Dismiss",
 							func : function() {
 								GAME().party.RemoveMember(GAME().kiakai);
-								GAME().kiakai.flags["Attitude"] = Kiakai.Attitude.Neutral;
+								GAME().kiakai.flags["Attitude"] = KiakaiFlags.Attitude.Neutral;
 								ElfSmith();
 							}, enabled : true,
 							tooltip : "Elf is gone."

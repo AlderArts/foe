@@ -14,6 +14,7 @@ import { Gui } from '../gui';
 import { Text } from '../text';
 import { IngredientItems } from '../items/ingredients';
 import { Season } from '../time';
+import { MirandaFlags } from '../event/miranda-flags';
 
 let world = null;
 
@@ -1442,7 +1443,7 @@ FarmScenes.GoToMarketFirstAfterBandits = function(won) {
 		Text.NL();
 		Text.Add("<i>“Hold a minute,”</i> a familiar voice calls out behind you. Gwendy freezes up as Miranda the guardswoman approaches, her look turning from rebellious to incredulous when the dog-morph ignores her and walks up to you. <i>“Thought I recognized you, luv,”</i> she grins up at you.", parse);
 		Text.NL();
-		if(miranda.flags["Met"] >= Miranda.Met.TavernAftermath) {
+		if(miranda.flags["Met"] >= MirandaFlags.Met.TavernAftermath) {
 			Text.Add("<i>“Why, [playername], back for more already?”</i> the guardswoman jests. <i>“You know where to find me - I’ve got a special gift waiting, just for you.”</i> The last proposal is delivered with a sultry wink, the faint bulge beneath her tight leather armor giving you an idea about just what kind of gift she is alluding to. She briefly inspects Gwendy, summarily dismissing her. <i>“Don’t bother bringing the hussy tho. Not my type.”</i>", parse);
 		}
 		else {

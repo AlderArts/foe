@@ -26,7 +26,7 @@ import { AppendageType } from '../body/appendage';
 import { Race } from '../body/race';
 import { Sex } from '../entity-sex';
 import { BodyPartType } from '../body/bodypart';
-import { Kiakai } from './kiakai';
+import { KiakaiFlags } from './kiakai-flags';
 
 let Intro = {};
 
@@ -2980,7 +2980,7 @@ Intro.KiaDecideOutset = function() {
 		tooltip : "The elf seems to be earnest and the cause good, why not join each other?",
 		func : function() {
 			GameCache().flags["IntroOutset"] = Intro.Outset.SaveWorld;
-			GAME().kiakai.flags["Attitude"] = Kiakai.Attitude.Nice;
+			GAME().kiakai.flags["Attitude"] = KiakaiFlags.Attitude.Nice;
 			GAME().kiakai.relation.IncreaseStat(100, 10);
 
 			Text.Add("You agree, the demon must be stopped, and following the advice of [name] seems like a good start, at least. You also have to find out more about this land you have found yourself stuck in.", parse);
@@ -3012,7 +3012,7 @@ Intro.KiaDecideOutset = function() {
 			options.push({ nameStr : "Accept",
 				tooltip : "A friend on the road could certainly help.",
 				func : function() {
-					GAME().kiakai.flags["Attitude"] = Kiakai.Attitude.Nice;
+					GAME().kiakai.flags["Attitude"] = KiakaiFlags.Attitude.Nice;
 					GAME().kiakai.relation.IncreaseStat(100, 5);
 
 					Text.Add("You accept the company of the elf, feeling glad that you will have someone along who knows the land.");
@@ -3027,7 +3027,7 @@ Intro.KiaDecideOutset = function() {
 			options.push({ nameStr : "I'm the boss",
 				tooltip : Text.Parse("The elf could be useful to you, but [heshe] needs to be put in [hisher] place.", parse),
 				func : function() {
-					GAME().kiakai.flags["Attitude"] = Kiakai.Attitude.Naughty;
+					GAME().kiakai.flags["Attitude"] = KiakaiFlags.Attitude.Naughty;
 					GAME().kiakai.relation.DecreaseStat(-100, 5);
 
 					Text.Add("<i>“You may come along if you wish, but don't think that you, or your Lady, is in charge here,”</i> you declare. [name] looks shocked for a moment, but humbly nods, content that [heshe] can follow you and help you.", parse);
@@ -3042,7 +3042,7 @@ Intro.KiaDecideOutset = function() {
 			options.push({ nameStr : "Decline",
 				tooltip : Text.Parse("You'll probably be better off on your own, could you really trust [name]?", {name : GAME().kiakai.name}),
 				func : function() {
-					GAME().kiakai.flags["Attitude"] = Kiakai.Attitude.Neutral;
+					GAME().kiakai.flags["Attitude"] = KiakaiFlags.Attitude.Neutral;
 					Text.Add("<i>“I understand,”</i> the elf nods sadly. <i>“I will try to make inquiries on my own, then. Should you ever change your mind, find me at the center, at Aria's shrine.”</i> The elf bows to you and quietly moves toward the entrance of the tent, leaving you to your own devices.");
 					Text.Flush();
 					Gui.NextPrompt(Intro.Finalizing);
@@ -3074,7 +3074,7 @@ Intro.KiaDecideOutset = function() {
 			options.push({ nameStr : "I'm the boss",
 				tooltip : Text.Parse("The elf could be useful to you, but [heshe] needs to be put in [hisher] place.", parse),
 				func : function() {
-					GAME().kiakai.flags["Attitude"] = Kiakai.Attitude.Naughty;
+					GAME().kiakai.flags["Attitude"] = KiakaiFlags.Attitude.Naughty;
 					Text.Add("<i>“You may come along if you wish, but don't think that you, or your Lady, is in charge here,”</i> you declare. [name] looks shocked for a moment, but humbly nods, content that [heshe] can follow you and help you.", parse);
 					Text.NL();
 					Text.Add("<b>[name] joins your party!</b>", parse);
@@ -3087,7 +3087,7 @@ Intro.KiaDecideOutset = function() {
 			options.push({ nameStr : "Decline",
 				tooltip : "What use could the elf possibly be?",
 				func : function() {
-					GAME().kiakai.flags["Attitude"] = Kiakai.Attitude.Neutral;
+					GAME().kiakai.flags["Attitude"] = KiakaiFlags.Attitude.Neutral;
 					Text.Add("<i>“I understand,”</i> the elf nods sadly. <i>“I will try to make inquiries on my own, then. Should you ever change your mind, find me at the center, at Aria's shrine.”</i> The elf bows to you and quietly moves toward the entrance of the tent, leaving you to your own devices.");
 					Text.Flush();
 					Gui.NextPrompt(Intro.Finalizing);

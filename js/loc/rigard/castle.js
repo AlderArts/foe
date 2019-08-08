@@ -7,6 +7,7 @@ import { Season } from '../../time';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { VaughnFlags } from '../../event/outlaws/vaughn-flags';
+import { TerryFlags } from '../../event/terry-flags';
 
 
 let CastleLoc = {
@@ -106,7 +107,7 @@ CastleLoc.Grounds.links.push(new Link(
 CastleLoc.Grounds.links.push(new Link(
 	"Jail", function() {
 		let terry = GAME().terry;
-		return terry.flags["Saved"] == Terry.Saved.TalkedTwins2;
+		return terry.flags["Saved"] == TerryFlags.Saved.TalkedTwins2;
 	}, true,
 	null,
 	function() {
