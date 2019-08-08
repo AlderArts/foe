@@ -94,8 +94,6 @@ import './js/loc/rigard/weaponshop.js';
 import './js/loc/rigard/inn.js';
 import './js/loc/rigard/magetower.js';
 
-import './js/loc/treecity/treecity.js';
-
 import './js/loc/plains.js';
 import './js/loc/nomads.js';
 import './js/loc/highlands.js';
@@ -184,9 +182,6 @@ import './js/event/outlaws/bulltower.js';
 import './js/event/outlaws/cavalcade.js';
 
 import './js/event/raven.js';
-
-import './js/event/portalopening.js';
-import './js/event/citywatch.js';
 
 // Seasonal
 import './js/event/halloween.js';

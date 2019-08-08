@@ -1,7 +1,7 @@
 import { Text } from "../text";
 import { Gui } from "../gui";
 
-let PortalOpeningScenes = {};
+let PortalOpeningScenes : any = {};
 
 PortalOpeningScenes.Intro = function() {
 	var parse = {

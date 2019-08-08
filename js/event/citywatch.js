@@ -1,4 +1,0 @@
-
-let CityWatchScenes = {};
-
-export { CityWatchScenes };

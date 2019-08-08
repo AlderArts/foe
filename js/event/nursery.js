@@ -1,3 +1,5 @@
+import * as _ from 'lodash';
+
 import { Gender } from "../body/gender";
 import { Gui } from "../gui";
 import { Text } from "../text";
