@@ -18,6 +18,8 @@ import { EntityDesc, LowerBodyType } from './entity-desc';
 import { EntityGrammar } from './entity-grammar';
 import { EntitySex } from './entity-sex';
 import { Time } from './time';
+import { Text } from './text';
+import { Gui } from './gui';
 
 // TODO: Should have shared features, such as combat stats. Body representation
 function Entity() {
