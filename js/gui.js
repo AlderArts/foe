@@ -17,6 +17,8 @@ import { isFunction } from './utility';
 import { EnemyParty, CurrentActiveChar } from './combat-data';
 
 let Gui = {};
+Gui.debug = null;
+Gui.ShortcutsVisible = false;
 
 Gui.w = 1280;
 Gui.h = 720;

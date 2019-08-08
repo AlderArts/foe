@@ -59,7 +59,6 @@ import './js/enemy/boss.js';
 // World description
 import './js/world.js';
 import './js/exploration.js';
-import './js/maze.js';
 
 // Abilities
 import './js/ability/node.js';
@@ -239,6 +238,6 @@ import './js/enemy/corishev.js';
 import './js/enemy/malice-scouts.js';
 
 // Start up the main text
-import './js/main.js';
+import './js/main.ts';
 import './js/credits.js';
 import './js/cheats.js';

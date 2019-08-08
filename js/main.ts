@@ -13,12 +13,12 @@ import { Intro } from './event/introduction';
 import { SetGameCache } from './GAME';
 import { loadfileOverlay } from './fileoverlay';
 import { InitWorld } from './world';
-
+/* TODO
 // Prevent selection
 $(function() {
-	$('canvas').mousedown(function(event) { event.preventDefault() });
+	$('canvas').mousedown(function(event : any) { event.preventDefault() });
 });
-
+*/
 // Set the main entrypoint of the application
 function EntryPoint() {
 	try {
@@ -35,7 +35,7 @@ function EntryPoint() {
 // Make sure that this loads
 window.onload = EntryPoint;
 
-let SetGameOverButton = function(text) {
+let SetGameOverButton = function(text : any) {
 	text = text || "This is where your journey comes to an end.";
 	Gui.ClearButtons();
 	Input.buttons[0].Setup("Game Over", GameOver, true, null, text);

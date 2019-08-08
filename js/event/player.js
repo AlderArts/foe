@@ -16,7 +16,7 @@ import { Perks } from '../perks';
 import { MasturbationScenes } from './masturbation';
 import { MeditationScenes } from './meditation';
 import { Images } from '../assets';
-import { TimeStep } from '../GAME';
+import { TimeStep, GAME } from '../GAME';
 
 function Player(storage) {
 	Entity.call(this);
