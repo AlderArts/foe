@@ -9,7 +9,7 @@ export function GAME() {
     return game;
 }
 
-let gameCache = {};
+let gameCache : any = {};
 
 export function SetGameCache(c : any) {
 	gameCache = c;

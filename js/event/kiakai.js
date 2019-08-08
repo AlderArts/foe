@@ -13,7 +13,7 @@ import { Images } from '../assets';
 import { Items } from '../items';
 import { Text } from '../text';
 import { Gui } from '../gui';
-import { TimeStep } from '../GAME';
+import { TimeStep, GAME } from '../GAME';
 import { KiakaiFlags } from './kiakai-flags';
 
 function Kiakai(storage) {

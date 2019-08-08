@@ -6,7 +6,6 @@
  */
 import { Event, Link } from '../../event';
 import { EncounterTable } from '../../encountertable';
-import { Outlaws } from './outlaws';
 import { GetDEBUG } from '../../../app';
 import { Stat } from '../../stat';
 import { WorldTime, MoveToLocation } from '../../GAME';
@@ -17,6 +16,7 @@ import { Encounter } from '../../combat';
 import { Party } from '../../party';
 import { Footman } from '../../enemy/knight';
 import { Race } from '../../body/race';
+import { OutlawsFlags } from './outlaws-flags';
 
 let BullTowerScenes = {};
 
@@ -33,9 +33,9 @@ function BullTowerStats() {
 };
 BullTowerStats.prototype.StoleSomething = function() {
 	let outlaws = GAME().outlaws;
-	if(outlaws.flags["BT"] & Outlaws.BullTower.CaravansSearched) return true;
-	if(outlaws.flags["BT"] & Outlaws.BullTower.SafeLooted)       return true;
-	if(outlaws.flags["BT"] & Outlaws.BullTower.ContrabandStolen) return true;
+	if(outlaws.flags["BT"] & OutlawsFlags.BullTower.CaravansSearched) return true;
+	if(outlaws.flags["BT"] & OutlawsFlags.BullTower.SafeLooted)       return true;
+	if(outlaws.flags["BT"] & OutlawsFlags.BullTower.ContrabandStolen) return true;
 	return false;
 }
 BullTowerStats.prototype.Suspicion = function() {
@@ -55,14 +55,14 @@ BullTowerStats.prototype.IncSuspicion = function(max, inc) {
 	
 	if(newSuspicion >= 100 && oldSuspicion < 100) {
 		Gui.Callstack.push(function() {
-			if(outlaws.flags["BullTower"] >= Outlaws.BullTowerQuest.Completed) {
+			if(outlaws.flags["BullTower"] >= OutlawsFlags.BullTowerQuest.Completed) {
 				Gui.PrintDefaultOptions();
 				return;
 			}
 			Text.Clear();
 			Text.Add("Sneaking through the fortress grounds, you suddenly hear a shout echoing across the old courtyard. Hoping that it’s just a fluke, you emerge to investigate, but the shout is quickly followed by the old bell in the tower being sounded, the steady bong-bong-bong of the striker hitting metal breaking the silence of night like a hammer against a window pane. Someone’s finally noticed what you’ve been up to, and the guards’ attention is turning inwards as they realize that the fortress has been infiltrated all this while.", parse);
 			Text.NL();
-			parse["two"] = outlaws.flags["BT"] & Outlaws.BullTower.AlaricFreed ? "three" : "two";
+			parse["two"] = outlaws.flags["BT"] & OutlawsFlags.BullTower.AlaricFreed ? "three" : "two";
 			Text.Add("No time to lose, then. Torches burst into life on the ramparts as the [two] of you break into a run across the courtyard, doing your best to avoid the scrambling guards.", parse);
 			Text.NL();
 			
@@ -71,7 +71,7 @@ BullTowerStats.prototype.IncSuspicion = function(max, inc) {
 	}
 	else if(newSuspicion >= 75 && oldSuspicion < 75) {
 		Gui.Callstack.push(function() {
-			if(outlaws.flags["BullTower"] >= Outlaws.BullTowerQuest.Completed) {
+			if(outlaws.flags["BullTower"] >= OutlawsFlags.BullTowerQuest.Completed) {
 				Gui.PrintDefaultOptions();
 				return;
 			}
@@ -83,7 +83,7 @@ BullTowerStats.prototype.IncSuspicion = function(max, inc) {
 	}
 	else if(newSuspicion >= 50 && oldSuspicion < 50) {
 		Gui.Callstack.push(function() {
-			if(outlaws.flags["BullTower"] >= Outlaws.BullTowerQuest.Completed) {
+			if(outlaws.flags["BullTower"] >= OutlawsFlags.BullTowerQuest.Completed) {
 				Gui.PrintDefaultOptions();
 				return;
 			}
@@ -95,7 +95,7 @@ BullTowerStats.prototype.IncSuspicion = function(max, inc) {
 	}
 	else if(newSuspicion >= 25 && oldSuspicion < 25) {
 		Gui.Callstack.push(function() {
-			if(outlaws.flags["BullTower"] >= Outlaws.BullTowerQuest.Completed) {
+			if(outlaws.flags["BullTower"] >= OutlawsFlags.BullTowerQuest.Completed) {
 				Gui.PrintDefaultOptions();
 				return;
 			}
@@ -186,7 +186,7 @@ BullTowerScenes.Initiation = function() {
 		playername: player.name
 	};
 	
-	outlaws.flags["BullTower"] = Outlaws.BullTowerQuest.Initiated;
+	outlaws.flags["BullTower"] = OutlawsFlags.BullTowerQuest.Initiated;
 	
 	Text.Clear();
 	Text.Add("The outlaw camp is always calmest at dawn and at dusk - the camp may never sleep, but it does have lulls when one shift of workers - be they hunters, sentries or otherwise - replaces another. It’s at one of these shift rotations that you arrive in the camp, feeling momentarily calmed by the brief surfeit of activity before you’re grabbed by the shoulder from behind.", parse);
@@ -561,7 +561,7 @@ BullTowerLoc.Courtyard.Yard.description = function() {
 
 	Text.Add("You are standing in the main courtyard of Bull Tower, flanked by high walls on three sides and the old watchtower to the north. The gates - the only way in or out of the old fortress - lie to the south, watched over by the two guards whom Cveta ‘persuaded’ to let you in. The effects of age and neglect are clearly visible in the appearance of the grounds  - the old training field is overgrown with weeds and wildflowers, and while the walls are still solid, bits of crumbling masonry lie at the base.");
 	Text.NL();
-	if(outlaws.flags["BT"] & Outlaws.BullTower.StatueDestroyed) {
+	if(outlaws.flags["BT"] & OutlawsFlags.BullTower.StatueDestroyed) {
 		Text.Add("The results of your heroic vandalism of Preston’s statue lie plain for all to see, and you can’t help but take a second or two to savor your handiwork. Toppled and smashed, only the feet remain attached to the plinth - the main body of the statue has been reduced to several chunks of marble, and the head has disappeared somewhere in the overgrown training field.");
 		Text.NL();
 		Text.Add("It’s a very poignant scene.");
@@ -572,7 +572,7 @@ BullTowerLoc.Courtyard.Yard.description = function() {
 	Text.NL();
 	Text.Add("From your hiding spot, you can see a set of animal pens - to call them stables would be too generous - to the west, and a sheltered courtyard to the east.");
 	Text.NL();
-	if(outlaws.flags["BT"] & Outlaws.BullTower.CaravansIgnited) {
+	if(outlaws.flags["BT"] & OutlawsFlags.BullTower.CaravansIgnited) {
 		Text.Add("Remains of the smugglers’ wagons you set aflame give off thin trails smoke that dissipate somewhere in the dark. While the courtyard’s roof is keeping it somewhat contained, someone is going to notice the smoke sooner or later.");
 		Text.NL();
 	}
@@ -612,7 +612,7 @@ BullTowerLoc.Courtyard.Yard.links.push(new Link(
 BullTowerLoc.Courtyard.Yard.events.push(new Link(
 	"Statue", function() {
 		let outlaws = GAME().outlaws;
-		return !(outlaws.flags["BT"] & Outlaws.BullTower.StatueDestroyed);
+		return !(outlaws.flags["BT"] & OutlawsFlags.BullTower.StatueDestroyed);
 	}, true,
 	null,
 	function() {
@@ -631,7 +631,7 @@ BullTowerLoc.Courtyard.Yard.events.push(new Link(
 		Text.Add("You hear Cveta click her beak as she steps up to your side. <i>“I take it that your thoughts and mine are aligned with regards to this pompous travesty?”</i>", parse);
 		Text.NL();
 		Text.Add("Why yes, you do believe they are. ", parse);
-		if(outlaws.flags["BT"] & Outlaws.BullTower.AlaricFreed) {
+		if(outlaws.flags["BT"] & OutlawsFlags.BullTower.AlaricFreed) {
 			Text.Add("Even Alaric appears grimly pleased at the prospect, the little bean counter’s lips thin and straight, his eyes hard.", parse);
 			Text.NL();
 			Text.Add("<i>“I’ll gladly help too,”</i> he says. <i>“I know I won’t get the chance to actually put a fist to Preston’s jaw, so this’ll have to do. And I daresay I deserve it.”</i>", parse);
@@ -649,7 +649,7 @@ BullTowerLoc.Courtyard.Yard.events.push(new Link(
 			func : function() {
 				Text.Clear();
 				var sus;
-				if(outlaws.flags["BT"] & Outlaws.BullTower.AlaricFreed) {
+				if(outlaws.flags["BT"] & OutlawsFlags.BullTower.AlaricFreed) {
 					Text.Add("<i>“Let’s get started, then!”</i> Alaric says, a twinge of vindictive glee in his voice. Without further ado, the three of you stride up to the statue’s base and, on a count of three, give it an experimental push. It wobbles a little, which is all the encouragement you need to set it to rocking dangerously. The statue’s fate is sealed - one final shove, good and hard, and it tips off-balance and tumbles from its plinth. Weeks, perhaps months’ worth of work by an artisan sculptor ruined in a matter of minutes, Preston’s chiseled form shattering into an assortment of fragments both large and small when it hits the ground.", parse);
 					Text.NL();
 					Text.Add("It’s a while before the echoes fade, contained within the high walls as they are. Without anything to hold onto, the ropes and canvas that once bound the statue lie loose in the dirt, and Alaric’s found the statue’s disembodied head; as you watch, he punts it into the tall grass with a savage kick. There’s a surprising amount of strength in that small frame of his - won’t he hurt his foot like that?", parse);
@@ -667,7 +667,7 @@ BullTowerLoc.Courtyard.Yard.events.push(new Link(
 				Text.Flush();
 				
 				TimeStep({minute: 20});
-				outlaws.flags["BT"] |= Outlaws.BullTower.StatueDestroyed;
+				outlaws.flags["BT"] |= OutlawsFlags.BullTower.StatueDestroyed;
 				
 				Gui.NextPrompt();
 				if(sus)
@@ -679,7 +679,7 @@ BullTowerLoc.Courtyard.Yard.events.push(new Link(
 			func : function() {
 				Text.Clear();
 				Text.Add("Despite you being sorely tempted to send the likeness of that pompous ass careening to the ground, you stay your hand for now and step back from the statue. Now’s not the time to give in to impulses of petty vindictiveness.", parse);
-				if(outlaws.flags["BT"] & Outlaws.BullTower.AlaricFreed) {
+				if(outlaws.flags["BT"] & OutlawsFlags.BullTower.AlaricFreed) {
 					Text.NL();
 					Text.Add("<i>“Oh?”</i> Cveta says, seeing you change your mind. <i>“Is there something you still need to accomplish in this place, [playername]? Time does grow short - we should keep backtracking to a minimum, lest we overstay our welcome.”</i>", parse);
 				}
@@ -707,7 +707,7 @@ BullTowerLoc.Courtyard.Yard.links.push(new Link(
 		};
 		
 		Text.Clear();
-		if(outlaws.flags["BT"] & Outlaws.BullTower.AlaricFreed) {
+		if(outlaws.flags["BT"] & OutlawsFlags.BullTower.AlaricFreed) {
 			Text.Add("With Alaric freed and the main objective of your mission completed, you could leave the fortress with a clean conscience - and it would be best to do so before the diversion runs its course and you’re forced to make a desperate escape. Best to quit while you’re ahead, as the saying goes.", parse);
 			Text.NL();
 			Text.Add("With that in mind, will you really leave the fortress now?", parse);
@@ -748,7 +748,7 @@ BullTowerLoc.Courtyard.Caravans.description = function() {
 	let outlaws = GAME().outlaws;
 	Text.Add("Off to the east of the main tower building, this small courtyard is roofed, presumably to keep the wind and rain off carts, carriages and wagons parked in it. However, age has caused the roof to fall apart in places, allowing moonlight to shine through holes in the old masonry work.");
 	Text.NL();
-	if(outlaws.flags["BT"] & Outlaws.BullTower.CaravansIgnited) {
+	if(outlaws.flags["BT"] & OutlawsFlags.BullTower.CaravansIgnited) {
 		Text.Add("The wagons are still alight - all that wood, oilcloth and canvas will sustain a lovely low fire that’ll burn till dawn. You can only hope that no one will actually notice it until you and Cveta have made your escape, and that the guards won’t come to their senses from all the heat and smoke wafting over and raise the alarm.");
 	}
 	else {
@@ -981,8 +981,8 @@ BullTowerScenes.GuardsLoss = function() {
 BullTowerLoc.Courtyard.Caravans.events.push(new Link(
 	"Search Caravans", function() {
 		let outlaws = GAME().outlaws;
-		return !(outlaws.flags["BT"] & Outlaws.BullTower.CaravansSearched) &&
-		       !(outlaws.flags["BT"] & Outlaws.BullTower.CaravansIgnited);
+		return !(outlaws.flags["BT"] & OutlawsFlags.BullTower.CaravansSearched) &&
+		       !(outlaws.flags["BT"] & OutlawsFlags.BullTower.CaravansIgnited);
 	}, function() {
 		let outlaws = GAME().outlaws;
 		return outlaws.BT.guardsDown;
@@ -1009,7 +1009,7 @@ BullTowerLoc.Courtyard.Caravans.events.push(new Link(
 		Text.Add("Well, you’ve seen enough to know that Zenith will very definitely be interested in these. Hastily bundling both receipts and invoices together, you stow them with your other belongings and turn to other matters.", parse);
 		Text.Flush();
 		
-		outlaws.flags["BT"] |= Outlaws.BullTower.CaravansSearched;
+		outlaws.flags["BT"] |= OutlawsFlags.BullTower.CaravansSearched;
 		
 		Gui.NextPrompt();
 		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
@@ -1020,7 +1020,7 @@ BullTowerLoc.Courtyard.Caravans.events.push(new Link(
 BullTowerLoc.Courtyard.Caravans.events.push(new Link(
 	"Burn Caravans", function() {
 		let outlaws = GAME().outlaws;
-		return outlaws.BT.guardsDown && !(outlaws.flags["BT"] & Outlaws.BullTower.CaravansIgnited);
+		return outlaws.BT.guardsDown && !(outlaws.flags["BT"] & OutlawsFlags.BullTower.CaravansIgnited);
 	}, true,
 	null,
 	function() {
@@ -1043,7 +1043,7 @@ BullTowerLoc.Courtyard.Caravans.events.push(new Link(
 			return;
 		}
 		Text.NL();
-		if(outlaws.flags["BT"] & Outlaws.BullTower.AlaricFreed)
+		if(outlaws.flags["BT"] & OutlawsFlags.BullTower.AlaricFreed)
 			Text.Add("Alaric catches your eye, and the injured dissident gives both you and Cveta a brisk nod. Torching the smuggling caravan would be a good way to cover your retreat and give the Royal Guard something to do other than hunt you down. Are you going to do it?", parse);
 		else
 			Text.Add("On the other hand, it’s very likely that once the sight and smoke of the burning wagons spreads beyond the confines of this small enclosure, you’re going to be feeling a lot of heat on your back. Are you sure you want to do this?", parse);
@@ -1055,16 +1055,16 @@ BullTowerLoc.Courtyard.Caravans.events.push(new Link(
 			func : function() {
 				Text.Clear();
 				Text.Add("Yes, the wagons are close enough that the fire should easily spread between them. You’re a bit surprised at how readily the canvas hoods catch flame - it’s almost as if they <i>want</i> to be destroyed - and just for good measure, you pay extra attention to the wooden frames, going over them carefully and making sure there’s going to be nothing salvageable after the intense heat has done its work.", parse);
-				if(!(outlaws.flags["BT"] & Outlaws.BullTower.AlaricFreed)) {
+				if(!(outlaws.flags["BT"] & OutlawsFlags.BullTower.AlaricFreed)) {
 					Text.NL();
 					Text.Add("With all the heat and smoke the burning wagons are creating, you’ve probably drawn plenty of attention to yourself. The roof will keep the inferno contained for a little while, but the smoke will spill out and someone is going to notice eventually - if the guards you took out aren’t roused by the flames first, that is.", parse);
 				}
 				Text.Flush();
 				
-				outlaws.flags["BT"] |= Outlaws.BullTower.CaravansIgnited;
+				outlaws.flags["BT"] |= OutlawsFlags.BullTower.CaravansIgnited;
 				
 				Gui.NextPrompt();
-				if(!(outlaws.flags["BT"] & Outlaws.BullTower.AlaricFreed))
+				if(!(outlaws.flags["BT"] & OutlawsFlags.BullTower.AlaricFreed))
 					outlaws.BT.IncSuspicion(100, 30);
 				else
 					outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
@@ -1093,7 +1093,7 @@ BullTowerLoc.Courtyard.Pens.description = function() {
 	Text.NL();
 	Text.Add("The only part of these pens which could be considered relatively new are the latches on the stall doors, which although not exactly shiny, have yet to accumulate the thick coat of rust and grime that covers every other metal object in the vicinity.");
 	Text.NL();
-	if(outlaws.flags["BT"] & Outlaws.BullTower.AnimalsFreed)
+	if(outlaws.flags["BT"] & OutlawsFlags.BullTower.AnimalsFreed)
 		Text.Add("Having released the mules, there’s nothing else for you to do here. The beasts mill about the grounds placidly, creating a bit of noise but presenting no immediate difficulty that would require the attention of the guard. It’s quite a clever diversion, now that you think about it - any strange noises that you or Cveta inadvertently make would in all probability be blamed on the poor animals and not investigated until sunup.");
 	else
 		Text.Add("The twenty or so mules that have been housed here are rather docile. The animals are clearly used to human-ish presence and give no reaction to your entry save for faint whuffs of breath and the occasional flick of a ear or tail. It might be worthwhile to let them out of their pens as a diversion.");
@@ -1114,7 +1114,7 @@ BullTowerLoc.Courtyard.Pens.links.push(new Link(
 BullTowerLoc.Courtyard.Pens.events.push(new Link(
 	"Free Animals", function() {
 		let outlaws = GAME().outlaws;
-		return !(outlaws.flags["BT"] & Outlaws.BullTower.AnimalsFreed);
+		return !(outlaws.flags["BT"] & OutlawsFlags.BullTower.AnimalsFreed);
 	}, true,
 	null,
 	function() {
@@ -1153,7 +1153,7 @@ BullTowerLoc.Courtyard.Pens.events.push(new Link(
 		Text.Add("Fred must have won the argument, for the lights eventually disappear, leaving you and Cveta to be on your way.", parse);
 		Text.Flush();
 		
-		outlaws.flags["BT"] |= Outlaws.BullTower.AnimalsFreed;
+		outlaws.flags["BT"] |= OutlawsFlags.BullTower.AnimalsFreed;
 		
 		TimeStep({ minute : 15 });
 		
@@ -1204,7 +1204,7 @@ BullTowerLoc.Building.Hall.links.push(new Link(
 			MoveToLocation(BullTowerLoc.Building.Warehouse, {minute: 5}, true);
 		}
 		else {
-			if(outlaws.flags["BT"] & Outlaws.BullTower.AlaricFreed)
+			if(outlaws.flags["BT"] & OutlawsFlags.BullTower.AlaricFreed)
 				Text.Add("You try every one of the keys on the key ring that you picked off Corishev’s pants, but none of them fit the keyhole. Guess he wasn’t holding onto the key for this door, then. Where is it?", parse);
 			else {
 				parse["t"] = party.InParty(terry, true) ? "would have daunted even Terry" : "would daunt even the most skilled of thieves";
@@ -1254,7 +1254,7 @@ BullTowerLoc.Building.Cell.onEntry = function() {
 	};
 	
 	Text.Clear();
-	if(outlaws.flags["BT"] & Outlaws.BullTower.AlaricFreed) {
+	if(outlaws.flags["BT"] & OutlawsFlags.BullTower.AlaricFreed) {
 		Text.Add("Now that Alaric’s been freed, there’s no reason for you to return to that horrible place, and neither is there any need to distress an already shaken Alaric by doing so. Besides, you’re not sure whether the lieutenant remains unconscious, and given the deafeningly loud silence that comes from within the cell, you’d rather not risk unlocking the door to find out.", parse);
 		Text.NL();
 		Text.Add("Best to let sleeping dog-morphs lie, as the saying goes. Quietly, you slip back to the main hall.", parse);
@@ -1405,7 +1405,7 @@ BullTowerScenes.CorishevWin = function() {
 		playername : player.name
 	};
 	
-	outlaws.flags["BT"] |= Outlaws.BullTower.AlaricFreed;
+	outlaws.flags["BT"] |= OutlawsFlags.BullTower.AlaricFreed;
 	
 	Gui.Callstack.push(function() {
 		Text.Clear();
@@ -1687,7 +1687,7 @@ BullTowerLoc.Building.Office.description = function() {
 	Text.Add("There’s no sign of what this room used to be, but what it is right now is a small office. As devoid of embellishments as the main hall, this small, musty room is adorned with a serviceable desk and chair, as well as a chest of drawers leaning against the wall; searching through the latter only turns up a number of carefully-wrapped quill pens, inkwells, and blank pieces of paper. The Royal Guard may do their paperwork here, but it’s clear that they’re smart enough to not leave incriminating evidence lying about for anyone passing by to swipe.", parse);
 	Text.NL();
 	Text.Add("The only other interesting detail in this room is a rather impressive-looking safe set into the wall, probably intended to be hidden behind a painting or somesuch. ", parse);
-	if(outlaws.flags["BT"] & Outlaws.BullTower.SafeLooted)
+	if(outlaws.flags["BT"] & OutlawsFlags.BullTower.SafeLooted)
 		Text.Add("Now that you’ve defeated the trap and looted the safe’s contents, it lies open, the door hanging forlornly open in the air. There’s not much point in closing it to disguise that you were here - by the time the sun comes up, the fact that someone was in the tower grounds is going to be common knowledge.", parse);
 	else
 		Text.Add("At first glance, the safe looks very well crafted[t]. You’ll have to get closer in order to inspect it in the dim light, though.", parse);
@@ -1706,7 +1706,7 @@ BullTowerLoc.Building.Office.links.push(new Link(
 BullTowerLoc.Building.Office.events.push(new Link(
 	"Safe", function() {
 		let outlaws = GAME().outlaws;
-		return !(outlaws.flags["BT"] & Outlaws.BullTower.SafeLooted);
+		return !(outlaws.flags["BT"] & OutlawsFlags.BullTower.SafeLooted);
 	}, true,
 	null,
 	function() {
@@ -1749,7 +1749,7 @@ BullTowerScenes.SafePrompt = function() {
 		tooltip : "Inspect the safe in detail."
 	});
 	if(outlaws.BT.inspectedSafe && !outlaws.BT.unlockedSafe) {
-		if(outlaws.flags["BT"] & Outlaws.BullTower.AlaricFreed) {
+		if(outlaws.flags["BT"] & OutlawsFlags.BullTower.AlaricFreed) {
 			options.push({ nameStr : "Unlock",
 				func : function() {
 					Text.Clear();
@@ -1765,7 +1765,7 @@ BullTowerScenes.SafePrompt = function() {
 			});
 		}
 	}
-	if(outlaws.BT.unlockedSafe && !(outlaws.flags["BT"] & Outlaws.BullTower.SafeLooted)) {
+	if(outlaws.BT.unlockedSafe && !(outlaws.flags["BT"] & OutlawsFlags.BullTower.SafeLooted)) {
 		options.push({ nameStr : "Disarm",
 			func : function() {
 				Text.Clear();
@@ -1885,7 +1885,7 @@ BullTowerScenes.SafeSuccess = function() {
 	Text.Add("You loot a few bags of coins from the safe.", parse, 'bold')
 	Text.Flush();
 	
-	outlaws.flags["BT"] |= Outlaws.BullTower.SafeLooted;
+	outlaws.flags["BT"] |= OutlawsFlags.BullTower.SafeLooted;
 	
 	Gui.NextPrompt();
 }
@@ -1930,7 +1930,7 @@ BullTowerLoc.Building.Warehouse.description = function() {
 	Text.Add("<i>“I would not be surprised if some of this originated as confiscated property.”</i> Cveta muses. <i>“It is not unknown for confiscated goods to resurface now and again.”</i>");
 	Text.NL();
 	Text.Add("Wandering amidst the boxes, sacks and barrels - the vast majority of them holding luxury goods of the sort no commoner would have the means to buy, the sort that’s heavily taxed - it’s hard to guess exactly how much in the way of levies is going unpaid on all these.");
-	if(!(outlaws.flags["BT"] & Outlaws.BullTower.BlueRoses)) {
+	if(!(outlaws.flags["BT"] & OutlawsFlags.BullTower.BlueRoses)) {
 		Text.NL();
 		Text.Add("There’s even a small potted plant on top of one of the stacks of crates, looking a little unhealthy in the dim room. On closer inspection, it’s a stem cutting of some kind of plant with blue flower buds, and someone’s scrawled ‘Handle carefully! For Preston!’ on the pot in charcoal.");
 	}
@@ -1949,7 +1949,7 @@ BullTowerLoc.Building.Warehouse.links.push(new Link(
 BullTowerLoc.Building.Warehouse.events.push(new Link(
 	"Contraband", function() {
 		let outlaws = GAME().outlaws;
-		return !(outlaws.flags["BT"] & Outlaws.BullTower.ContrabandStolen);
+		return !(outlaws.flags["BT"] & OutlawsFlags.BullTower.ContrabandStolen);
 	}, true,
 	null,
 	function() {
@@ -1965,7 +1965,7 @@ BullTowerLoc.Building.Warehouse.events.push(new Link(
 		Text.Add("Cveta nods, clearly approving of your decision, but doesn’t pick out anything herself. Stowing away your acquisition with your other possessions, you return your attention to the task at hand.", parse);
 		Text.Flush();
 		
-		outlaws.flags["BT"] |= Outlaws.BullTower.ContrabandStolen;
+		outlaws.flags["BT"] |= OutlawsFlags.BullTower.ContrabandStolen;
 		
 		Gui.NextPrompt();
 		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
@@ -1975,7 +1975,7 @@ BullTowerLoc.Building.Warehouse.events.push(new Link(
 BullTowerLoc.Building.Warehouse.events.push(new Link(
 	"Roses", function() {
 		let outlaws = GAME().outlaws;
-		return !(outlaws.flags["BT"] & Outlaws.BullTower.BlueRoses);
+		return !(outlaws.flags["BT"] & OutlawsFlags.BullTower.BlueRoses);
 	}, true,
 	null,
 	function() {
@@ -2004,7 +2004,7 @@ BullTowerLoc.Building.Warehouse.events.push(new Link(
 		Text.Add("<i>“Mother knew something of horticulture, yes. But now is not the time to get into extended discussions, [playername]. Suffice to say that I intend to take these with me. They do not deserve to wither for the sin of being sold to a brute. Do not worry; I will not be unduly burdened.”</i>", parse);
 		Text.Flush();
 		
-		outlaws.flags["BT"] |= Outlaws.BullTower.BlueRoses;
+		outlaws.flags["BT"] |= OutlawsFlags.BullTower.BlueRoses;
 		
 		Gui.NextPrompt();
 		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
@@ -2139,7 +2139,7 @@ BullTowerScenes.Coversations = function(outside) {
 	let outlaws = GAME().outlaws;
 
 	var parse = {
-		a : outlaws.flags["BT"] & Outlaws.BullTower.AlaricFreed ? " and Alaric" : ""
+		a : outlaws.flags["BT"] & OutlawsFlags.BullTower.AlaricFreed ? " and Alaric" : ""
 	};
 	
 	Text.Clear();
@@ -2297,7 +2297,7 @@ BullTowerScenes.EndingFailure = function() {
 	let party = GAME().party;
 	let outlaws = GAME().outlaws;
 
-	var freed = outlaws.flags["BT"] & Outlaws.BullTower.AlaricFreed;
+	var freed = outlaws.flags["BT"] & OutlawsFlags.BullTower.AlaricFreed;
 	var parse = {
 		two : freed ? "three" : "two",
 		al : freed ? " and Alaric" : ""
@@ -2396,31 +2396,31 @@ BullTowerScenes.EndingDebrief = function(injured) {
 	
 	Text.Flush();
 	
-	outlaws.flags["BullTower"] = Outlaws.BullTowerQuest.Completed;
+	outlaws.flags["BullTower"] = OutlawsFlags.BullTowerQuest.Completed;
 	
 	var foundOut = outlaws.BT.Suspicion() >= 100;
 	if(outlaws.BT.foughtCorishev && !(outlaws.AlaricSaved()))
 		foundOut = true;
 	
 	var score = 0;
-	if(outlaws.flags["BT"] & Outlaws.BullTower.AlaricFreed)      score += 2;
-	if(outlaws.flags["BT"] & Outlaws.BullTower.ContrabandStolen) score += 1;
-	if(outlaws.flags["BT"] & Outlaws.BullTower.BlueRoses)        score += 1;
-	if(outlaws.flags["BT"] & Outlaws.BullTower.StatueDestroyed)  score += 1;
-	if(outlaws.flags["BT"] & Outlaws.BullTower.AnimalsFreed)     score += 1;
-	if(outlaws.flags["BT"] & Outlaws.BullTower.SafeLooted)       score += 1;
-	if(outlaws.flags["BT"] & Outlaws.BullTower.CaravansIgnited)  score += 1;
-	if(outlaws.flags["BT"] & Outlaws.BullTower.CaravansSearched) score += 1;
+	if(outlaws.flags["BT"] & OutlawsFlags.BullTower.AlaricFreed)      score += 2;
+	if(outlaws.flags["BT"] & OutlawsFlags.BullTower.ContrabandStolen) score += 1;
+	if(outlaws.flags["BT"] & OutlawsFlags.BullTower.BlueRoses)        score += 1;
+	if(outlaws.flags["BT"] & OutlawsFlags.BullTower.StatueDestroyed)  score += 1;
+	if(outlaws.flags["BT"] & OutlawsFlags.BullTower.AnimalsFreed)     score += 1;
+	if(outlaws.flags["BT"] & OutlawsFlags.BullTower.SafeLooted)       score += 1;
+	if(outlaws.flags["BT"] & OutlawsFlags.BullTower.CaravansIgnited)  score += 1;
+	if(outlaws.flags["BT"] & OutlawsFlags.BullTower.CaravansSearched) score += 1;
 	if(!foundOut) score += 1;
 	//TOTAL: 10
-	if(score >= 10) outlaws.flags["BT"] |= Outlaws.BullTower.PerfectScore;
+	if(score >= 10) outlaws.flags["BT"] |= OutlawsFlags.BullTower.PerfectScore;
 	
 	var relevant = false;
-	if(outlaws.flags["BT"] & Outlaws.BullTower.ContrabandStolen) relevant = true;
-	if(outlaws.flags["BT"] & Outlaws.BullTower.StatueDestroyed) relevant = true;
-	if(outlaws.flags["BT"] & Outlaws.BullTower.SafeLooted) relevant = true;
-	if(outlaws.flags["BT"] & Outlaws.BullTower.CaravansSearched) relevant = true;
-	if(outlaws.flags["BT"] & Outlaws.BullTower.CaravansIgnited) relevant = true;
+	if(outlaws.flags["BT"] & OutlawsFlags.BullTower.ContrabandStolen) relevant = true;
+	if(outlaws.flags["BT"] & OutlawsFlags.BullTower.StatueDestroyed) relevant = true;
+	if(outlaws.flags["BT"] & OutlawsFlags.BullTower.SafeLooted) relevant = true;
+	if(outlaws.flags["BT"] & OutlawsFlags.BullTower.CaravansSearched) relevant = true;
+	if(outlaws.flags["BT"] & OutlawsFlags.BullTower.CaravansIgnited) relevant = true;
 	
 	Gui.NextPrompt(function() {
 		Text.Clear();
@@ -2442,7 +2442,7 @@ BullTowerScenes.EndingDebrief = function(injured) {
 				parse["o"] = relevant ? " Now, let’s go over the other things you did…" : "";
 				Text.Add("<i>“Exactly,”</i> Zenith replies. <i>“Most of us didn’t choose to be outlaws; I think of us as exiles, thrown out on one flimsy charge or another. But we make the most of the hand we’ve been dealt.[o]</i>", parse);
 				Text.NL();
-				if(outlaws.flags["BT"] & Outlaws.BullTower.StatueDestroyed) {
+				if(outlaws.flags["BT"] & OutlawsFlags.BullTower.StatueDestroyed) {
 					Text.Add("<i>“Smashing Preston’s statue was a very appropriate touch. I knew the man was pompous - we’re reminded of the fact every time we get news out of Rigard - but this is something else altogether. An entire marble statue… how much did it cost him, and how much of that money was earmarked for his underlings’ pay and equipment, I wonder?”</i>", parse);
 					Text.NL();
 					Text.Add("It was Cveta who thought to leave the outlaws’ mark on the plinth, you point out.", parse);
@@ -2450,7 +2450,7 @@ BullTowerScenes.EndingDebrief = function(injured) {
 					Text.Add("<i>“So she did, and she gets credit for that. I wish I could have been there to help you topple the thing.”</i> Zenith sounds a little wistful. <i>“Still, it’s important to remember that Preston is merely Rewyn’s hand. So long as the head remains, the snake lives on.”</i>", parse);
 					Text.NL();
 				}
-				if(outlaws.flags["BT"] & Outlaws.BullTower.CaravansSearched) {
+				if(outlaws.flags["BT"] & OutlawsFlags.BullTower.CaravansSearched) {
 					Text.Add("<i>“If the invoices and receipts the two of you found are indeed what they seem, we have a potent weapon for proving to the people what Rigard’s nobles think of their own laws. To impose taxes on those who bake the very bread they stuff themselves with, while they evade their share… that’s unforgivable. It is just one of the ways they attempted to break the guilds back then… but I’m rambling.”</i>", parse);
 					Text.NL();
 					Text.Add("What does he intend to do with this knowledge, by the by? You get the feeling that reporting the lot to the guard isn’t going to do very much.", parse);
@@ -2458,11 +2458,11 @@ BullTowerScenes.EndingDebrief = function(injured) {
 					Text.Add("<i>“Of course not,”</i> Zenith replies with a snort. <i>“I’ll go over the figures later and note down each and every one of the greedy pieces of filth. Then maybe we’ll have them copied, a few rumors spread in the right places… attacking or accusing them head-on isn’t going to do much, but the people of Rigard are already suspicious of their self-proclaimed leaders. It won’t take much effort on our part to turn that into hostility.”</i>", parse);
 					Text.NL();
 				}
-				if(outlaws.flags["BT"] & Outlaws.BullTower.CaravansIgnited) {
+				if(outlaws.flags["BT"] & OutlawsFlags.BullTower.CaravansIgnited) {
 					Text.Add("<i>“With those caravans you burned… well, perhaps they will think twice about consorting with the corrupt and decadent. I suspect that our friends will be having trouble finding someone to run their goods for them for a little while.”</i>", parse);
 					Text.NL();
 				}
-				if(outlaws.flags["BT"] & Outlaws.BullTower.SafeLooted) {
+				if(outlaws.flags["BT"] & OutlawsFlags.BullTower.SafeLooted) {
 					Text.Add("As he’s about to continue, a dog-morph comes running up to Zenith and salutes. <i>“Sir!”</i>", parse);
 					Text.NL();
 					Text.Add("<i>“Yes, Serana?”</i>", parse);
@@ -2484,7 +2484,7 @@ BullTowerScenes.EndingDebrief = function(injured) {
 					Text.Add("<i>“At least that much,”</i> Zenith says. <i>“Serana says they’re recounting right now, but some sums of money are such that past a certain point, the exact number becomes meaningless. This is one of them. Good work, [playername]. This news will soon find its way onto the streets of Rigard, I promise you that.”</i>", parse);
 					Text.NL();
 				}
-				if(outlaws.flags["BT"] & Outlaws.BullTower.ContrabandStolen) {
+				if(outlaws.flags["BT"] & OutlawsFlags.BullTower.ContrabandStolen) {
 					Text.Add("<i>“And finally, we come to the matter of the gemstones you brought back. Cut and polished, no less - we won’t be dumping these all at once, since even the best fences will have problems washing these clean. Still, it seems that we won’t be needing to worry about money for a while, and it’s all thanks to Preston and the incompetence of his little outfit. That’s what you get when you worry about polishing your armor more than how well your men are trained.”</i>", parse);
 					Text.NL();
 				}
@@ -2504,11 +2504,11 @@ BullTowerScenes.EndingDebrief = function(injured) {
 				Text.Add("<i>“Now, I suggest that you get some rest[c]. You’ve had enough adventure for a single night, [injured].”</i> With that, Zenith gives you one final nod, then turns and stalks away, his wide, easy stride eating up distance until he disappears amidst the camp’s morning activity.", parse);
 				var inc = 10;
 				
-				if(outlaws.flags["BT"] & Outlaws.BullTower.ContrabandStolen) inc += 2;
-				if(outlaws.flags["BT"] & Outlaws.BullTower.SafeLooted) inc += 2;
-				if(outlaws.flags["BT"] & Outlaws.BullTower.CaravansSearched) inc += 2;
-				if(outlaws.flags["BT"] & Outlaws.BullTower.StatueDestroyed) inc += 2;
-				if(outlaws.flags["BT"] & Outlaws.BullTower.BlueRoses) inc += 2;
+				if(outlaws.flags["BT"] & OutlawsFlags.BullTower.ContrabandStolen) inc += 2;
+				if(outlaws.flags["BT"] & OutlawsFlags.BullTower.SafeLooted) inc += 2;
+				if(outlaws.flags["BT"] & OutlawsFlags.BullTower.CaravansSearched) inc += 2;
+				if(outlaws.flags["BT"] & OutlawsFlags.BullTower.StatueDestroyed) inc += 2;
+				if(outlaws.flags["BT"] & OutlawsFlags.BullTower.BlueRoses) inc += 2;
 				if(outlaws.BT.Suspicion() < 100) inc += 2;
 				if(score >= 10) inc += 3;
 	
@@ -2620,7 +2620,7 @@ BullTowerScenes.AftermathAlaric = function() {
 		
 		outlaws.mainQuestTimer = new Time(0,0,1,0,0);
 		
-		outlaws.flags["BullTower"] = Outlaws.BullTowerQuest.AlaricFollowup;
+		outlaws.flags["BullTower"] = OutlawsFlags.BullTowerQuest.AlaricFollowup;
 		
 		Gui.NextPrompt();
 	});
@@ -2681,7 +2681,7 @@ BullTowerScenes.AftermathZenith = function() {
 	
 	Text.Add("<i>“I’d be careful with that, if I were you. All you need to do is to grab its hilt, think hard, and the blade bursts into flame. Then, think hard about it going out, and it does just that. The fence was going to charge us a pretty penny for it - with it being magic and all - but we haggled the price down to something more reasonable. I think you’ve earned that much.”</i>", parse);
 	Text.NL();
-	if(outlaws.flags["BT"] & Outlaws.BullTower.PerfectScore) {
+	if(outlaws.flags["BT"] & OutlawsFlags.BullTower.PerfectScore) {
 		Text.Add("<i>“That’s not all, though.”</i> Zenith produces another wrapped package, flatter and rounder than the first, then presses it into your hands. <i>“We heard that Preston’s been in a terrible mood for the last few days, and it’s all thanks to our efforts. Thought we’d spread the extra cheer around. Go on, open it.”</i>", parse);
 		Text.NL();
 		Text.Add("Tearing apart cord and paper, you find a small buckler inside, polished and gleaming. No doubt there’s supposed to be some kind of irony here…", parse);
@@ -2703,7 +2703,7 @@ BullTowerScenes.AftermathZenith = function() {
 	
 	TimeStep({hour: 1});
 	
-	outlaws.flags["BullTower"] = Outlaws.BullTowerQuest.ZenithFollowup;
+	outlaws.flags["BullTower"] = OutlawsFlags.BullTowerQuest.ZenithFollowup;
 	
 	Gui.NextPrompt();
 }

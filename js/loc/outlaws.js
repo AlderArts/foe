@@ -11,6 +11,7 @@ import { WorldTime, MoveToLocation } from '../GAME';
 import { VaughnScenes } from '../event/outlaws/vaughn-scenes';
 import { Text } from '../text';
 import { CvetaFlags } from '../event/outlaws/cveta-flags';
+import { OutlawsFlags } from '../event/outlaws/outlaws-flags';
 
 let world = null;
 
@@ -39,15 +40,15 @@ OutlawsLoc.Camp.description = function() {
 }
 
 OutlawsLoc.Camp.onEntry = function() {
-	if(outlaws.Rep() >= 10 && outlaws.flags["Met"] == Outlaws.Met.Bouqet && outlaws.mainQuestTimer.Expired())
+	if(outlaws.Rep() >= 10 && outlaws.flags["Met"] == OutlawsFlags.Met.Bouqet && outlaws.mainQuestTimer.Expired())
 		Scenes.Outlaws.PathIntoRigardInitiation();
 	else if(outlaws.Rep() >= 15 && rigard.Krawitz["Q"] >= Rigard.KrawitzQ.CaughtTerry && cveta.flags["Met"] < CvetaFlags.Met.MariaTalk)
 		Scenes.Cveta.MariaTalkFirst();
-	else if(outlaws.Rep() >= 25 && outlaws.flags["Met"] >= Outlaws.Met.MetBelinda && cveta.Relation() >= 60 && outlaws.flags["BullTower"] < Outlaws.BullTowerQuest.Initiated)
+	else if(outlaws.Rep() >= 25 && outlaws.flags["Met"] >= OutlawsFlags.Met.MetBelinda && cveta.Relation() >= 60 && outlaws.flags["BullTower"] < OutlawsFlags.BullTowerQuest.Initiated)
 		Scenes.BullTower.Initiation();
-	else if(outlaws.AlaricSaved() && outlaws.flags["BullTower"] < Outlaws.BullTowerQuest.AlaricFollowup && outlaws.mainQuestTimer.Expired())
+	else if(outlaws.AlaricSaved() && outlaws.flags["BullTower"] < OutlawsFlags.BullTowerQuest.AlaricFollowup && outlaws.mainQuestTimer.Expired())
 		Scenes.BullTower.AftermathAlaric();
-	else if(outlaws.BullTowerCanGetReward() && outlaws.flags["BullTower"] < Outlaws.BullTowerQuest.ZenithFollowup && outlaws.mainQuestTimer.Expired())
+	else if(outlaws.BullTowerCanGetReward() && outlaws.flags["BullTower"] < OutlawsFlags.BullTowerQuest.ZenithFollowup && outlaws.mainQuestTimer.Expired())
 		Scenes.BullTower.AftermathZenith();
 	else if(maria.EligableForDeaddropAlert())
 		Scenes.Maria.DeadDrops.Alert();
@@ -75,7 +76,7 @@ OutlawsLoc.Camp.links.push(new Link(
 
 OutlawsLoc.Camp.links.push(new Link(
 	"Tower", function() {
-		return outlaws.flags["BullTower"] == Outlaws.BullTowerQuest.Initiated;
+		return outlaws.flags["BullTower"] == OutlawsFlags.BullTowerQuest.Initiated;
 	}, true,
 	null,
 	function() {
@@ -147,7 +148,7 @@ OutlawsLoc.Camp.enc.AddEnc(function() {
 }, 1.0, function() { return Scenes.OutlawsCavalcade.Enabled(); });
 OutlawsLoc.Camp.enc.AddEnc(function() {
 	return Scenes.Outlaws.Exploration.Archery;
-}, 1.0, function() { return outlaws.flags["Met"] >= Outlaws.Met.MetBelinda && WorldTime().IsDay(); });
+}, 1.0, function() { return outlaws.flags["Met"] >= OutlawsFlags.Met.MetBelinda && WorldTime().IsDay(); });
 OutlawsLoc.Camp.enc.AddEnc(function() {
 	return Scenes.Outlaws.Exploration.CampFollowers;
 }, 1.0, function() { return !WorldTime().IsDay(); });
@@ -156,7 +157,7 @@ OutlawsLoc.Camp.enc.AddEnc(function() {
 }, 1.0, function() { return true; });
 OutlawsLoc.Camp.enc.AddEnc(function() {
 	return Scenes.Outlaws.Exploration.Carpentry;
-}, 1.0, function() { return outlaws.flags["Met"] >= Outlaws.Met.MetBelinda; });
+}, 1.0, function() { return outlaws.flags["Met"] >= OutlawsFlags.Met.MetBelinda; });
 OutlawsLoc.Camp.enc.AddEnc(function() {
 	return Scenes.Outlaws.Exploration.FactFinding;
 }, 1.0, function() { return outlaws.factTimer.Expired(); });

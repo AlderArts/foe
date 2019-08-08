@@ -56,7 +56,6 @@ import './js/combat.js';
 import './js/enemy/boss.js';
 
 // World description
-import './js/world.js';
 import './js/exploration.js';
 
 // Abilities
@@ -114,7 +113,6 @@ import './js/loc/glade.js';
 
 import './js/loc/burrows.js';
 
-import './js/event/global.js';
 import './js/event/dreams.js';
 import './js/event/nursery.js';
 

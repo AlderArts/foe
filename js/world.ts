@@ -42,7 +42,7 @@ export function InitWorld() {
 		LightAspect : LightAspect,
 	};
 	
-	world.CurrentLocation = function(loc) {
+	world.CurrentLocation = function(loc? : any) {
 		loc = loc || GAME().party.location;
 		
 		if     (loc == PlainsLoc.Crossroads)

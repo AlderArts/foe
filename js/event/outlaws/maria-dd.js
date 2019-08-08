@@ -7,6 +7,7 @@ import { Text } from '../../text';
 import { EncounterTable } from '../../encountertable';
 import { EstevanFlags } from '../nomads/estevan-flags';
 import { MariaFlags } from './maria-flags';
+import { OutlawsFlags } from './outlaws-flags';
 
 //
 // Maria Dead drops
@@ -895,7 +896,7 @@ DeadDropScenes.Docks.GuardInspection = function() {
 				Text.NL();
 				Text.Add("Grr. While it might be tempting, actually getting into a fight with the Royal Guard here isn’t going to be the best of ideas, and neither is running away. You’re going to have to return here later on  for future drop-offs if nothing else, and you really, <i>really</i> don’t want to end up wanted by this farce that passes for the law in Rigard.", parse);
 				Text.NL();
-				parse["b"] = outlaws.flags["BullTower"] >= Outlaws.BullTowerQuest.Completed ? ", considering what you got up to at Bull Tower" : "";
+				parse["b"] = outlaws.flags["BullTower"] >= OutlawsFlags.BullTowerQuest.Completed ? ", considering what you got up to at Bull Tower" : "";
 				Text.Add("On the other hand, there has to be some way of getting rid of them that doesn’t involve you being taken in for further questioning[b]. Any bright ideas?", parse);
 				Text.Flush();
 				

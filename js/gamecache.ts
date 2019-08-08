@@ -83,6 +83,7 @@ import { Vagina } from './body/vagina';
 import { MirandaFlags } from './event/miranda-flags';
 import { TerryFlags } from './event/terry-flags';
 import { KiakaiFlags } from './event/kiakai-flags';
+import { OutlawsFlags } from './event/outlaws/outlaws-flags';
 
 let InitCache = function() {
 	// Reset exploration
@@ -496,7 +497,7 @@ let CacheToGame = function() {
 	}
 	if(gameCache.version < 27) {
 		// OUTLAWS
-		if(GAME().outlaws.Rep() > 0) GAME().outlaws.flags["Met"] = Outlaws.Met.Met;
+		if(GAME().outlaws.Rep() > 0) GAME().outlaws.flags["Met"] = OutlawsFlags.Met.Met;
 	}
 	if(gameCache.version < 28) {
 		// LEI TASKS

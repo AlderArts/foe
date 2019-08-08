@@ -13,6 +13,7 @@ import { WorldTime, MoveToLocation } from '../GAME';
 import { Season } from '../time';
 import { Text } from '../text';
 import { Gui } from '../gui';
+import { OutlawsFlags } from '../event/outlaws/outlaws-flags';
 
 // Create namespace
 let PlainsLoc = {
@@ -403,12 +404,12 @@ PlainsLoc.Gate.events.push(new Link(
 ));
 PlainsLoc.Gate.events.push(new Link(
 	"Letter", function() {
-		return outlaws.flags["Met"] == Outlaws.Met.Letter;
+		return outlaws.flags["Met"] == OutlawsFlags.Met.Letter;
 	}, function() {
 		return WorldTime().hour >= 10 && WorldTime().hour < 14;
 	},
 	function() {
-		if(outlaws.flags["Met"] == Outlaws.Met.Letter) {
+		if(outlaws.flags["Met"] == OutlawsFlags.Met.Letter) {
 			Text.NL();
 			Text.Add("Zenith has asked you to deliver a letter to a contact at the Spitting Lion Inn at noon. It should be somewhere in the area.", null, 'bold');
 		}

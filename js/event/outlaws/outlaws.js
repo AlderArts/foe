@@ -12,6 +12,7 @@ import { Gui } from '../../gui';
 import { Text } from '../../text';
 import { Jobs } from '../../job';
 import { EncounterTable } from '../../encountertable';
+import { OutlawsFlags } from './outlaws-flags';
 
 let OutlawsScenes = {
 	Cavalcade : OCavalcadeScenes,
@@ -33,21 +34,6 @@ function Outlaws(storage) {
 	
 	if(storage) this.FromStorage(storage);
 }
-
-Outlaws.Met = {
-	NotMet     : 0,
-	Met        : 1,
-	Bouqet     : 2,
-	Letter     : 3,
-	MetBelinda : 4
-};
-
-Outlaws.Events = { //Bitmask
-	ChowTime : 1,
-	Cavalcade : 2,
-	BeatMaria : 4, //Beat maria at archery
-	FactFind : 8
-};
 
 Outlaws.prototype.ToStorage = function() {
 	var storage = {};
@@ -85,25 +71,25 @@ Outlaws.prototype.TurnedInBinder = function() {
 }
 
 Outlaws.prototype.BullTowerCompleted = function() {
-	return this.flags["BullTower"] >= Outlaws.BullTowerQuest.Completed;
+	return this.flags["BullTower"] >= OutlawsFlags.BullTowerQuest.Completed;
 }
 
 Outlaws.prototype.RetrievedBlueRoses = function() {
-	return this.flags["BT"] & Outlaws.BullTower.BlueRoses;
+	return this.flags["BT"] & OutlawsFlags.BullTower.BlueRoses;
 }
 
 Outlaws.prototype.AlaricSaved = function() {
-	return this.BullTowerCompleted() && (this.flags["BT"] & Outlaws.BullTower.AlaricFreed);
+	return this.BullTowerCompleted() && (this.flags["BT"] & OutlawsFlags.BullTower.AlaricFreed);
 }
 
 Outlaws.prototype.BullTowerCanGetReward = function() {
-	return this.AlaricSaved() && (this.flags["BT"] & Outlaws.BullTower.ContrabandStolen) && (this.flags["BT"] & Outlaws.BullTower.SafeLooted);
+	return this.AlaricSaved() && (this.flags["BT"] & OutlawsFlags.BullTower.ContrabandStolen) && (this.flags["BT"] & OutlawsFlags.BullTower.SafeLooted);
 }
 Outlaws.prototype.Rep = function() {
 	return this.relation.Get();
 }
 Outlaws.prototype.CompletedPathIntoRigard = function() {
-	return this.flags["Met"] >= Outlaws.Met.MetBelinda;
+	return this.flags["Met"] >= OutlawsFlags.Met.MetBelinda;
 }
 //TODO
 Outlaws.prototype.MetPenPam = function() {
@@ -119,34 +105,12 @@ Outlaws.prototype.MariasBouqetAvailable = function() {
 	let outlaws = GAME().outlaws;
 	let aquilius = GAME().aquilius;
 	//Only in the initial phase
-	if(outlaws.flags["Met"] != Outlaws.Met.Met) return false;
+	if(outlaws.flags["Met"] != OutlawsFlags.Met.Met) return false;
 	//Only when meeting the correct relation requirements TODO
 	if(aquilius.flags["Met"] < Aquilius.Met.Met) return false;
 	//Only when meeting total Outlaws rep
 	return outlaws.Rep() >= 0;
 }
-
-// Quest results
-Outlaws.BullTower = {
-	AlaricFreed      : 1,
-	StatueDestroyed  : 2,
-	CaravansIgnited  : 4,
-	CaravansSearched : 8,
-	AnimalsFreed     : 16,
-	SafeLooted       : 32,
-	BlueRoses        : 64,
-	ContrabandStolen : 128,
-	PerfectScore     : 256
-};
-
-// Quest state
-Outlaws.BullTowerQuest = {
-	NotStarted : 0,
-	Initiated  : 1,
-	Completed  : 2,
-	AlaricFollowup : 3,
-	ZenithFollowup : 4
-};
 
 OutlawsScenes.MariasBouquet = function() {
 	let player = GAME().player;
@@ -357,7 +321,7 @@ OutlawsScenes.MariasBouquetPrompt = function(opts) {
 			
 			TimeStep({hour: 3});
 			outlaws.mainQuestTimer = new Time(0,0,1,0,0);
-			outlaws.flags["Met"] = Outlaws.Met.Bouqet;
+			outlaws.flags["Met"] = OutlawsFlags.Met.Bouqet;
 			
 			Gui.NextPrompt();
 		});
@@ -439,7 +403,7 @@ OutlawsScenes.PathIntoRigardInitiation = function() {
 		TimeStep({hour: 1});
 		
 		outlaws.mainQuestTimer = new Time(0,0,2,0,0);
-		outlaws.flags["Met"] = Outlaws.Met.Letter;
+		outlaws.flags["Met"] = OutlawsFlags.Met.Letter;
 		
 		Gui.NextPrompt();
 	});
@@ -668,7 +632,7 @@ OutlawsScenes.PathIntoRigardBelinda = function() {
 		Text.Flush();
 		
 		//Note, don't set Belinda's regular met flag, to get a custom meeting at the brothel
-		outlaws.flags["Met"] = Outlaws.Met.MetBelinda;
+		outlaws.flags["Met"] = OutlawsFlags.Met.MetBelinda;
 		
 		TimeStep({hour: 1});
 		
@@ -697,9 +661,9 @@ OutlawsScenes.Exploration.ChowTime = function() {
 		lad : player.mfFem("laddie", "lassie")
 	};
 	
-	var first = !(outlaws.flags["events"] & Outlaws.Events.ChowTime);
+	var first = !(outlaws.flags["events"] & OutlawsFlags.Events.ChowTime);
 	
-	outlaws.flags["events"] |= Outlaws.Events.ChowTime;
+	outlaws.flags["events"] |= OutlawsFlags.Events.ChowTime;
 	
 	parse["chow"] = WorldTime().hour < 10 ? "Breakfast" :
 	                WorldTime().hour < 15 ? "Lunch" : "Dinner";
@@ -790,7 +754,7 @@ OutlawsScenes.Exploration.Cavalcade = function() {
 	Text.Add("<i>“Don’t worry about cheating. Doesn’t make sense to cheat when you know where the other guy lives, and it’s just a short stroll through the camp. So… you want in, or not?”</i>", parse);
 	Text.Flush();
 	
-	outlaws.flags["events"] |= Outlaws.Events.Cavalcade;
+	outlaws.flags["events"] |= OutlawsFlags.Events.Cavalcade;
 	
 	//[Yes][No]
 	var options = new Array();
@@ -924,7 +888,7 @@ OutlawsScenes.Exploration.Archery = function() {
 					Text.NL();
 					Text.Add("<i>“Well, we’ll see about that next time. We’ll be doing this again in a little while when the next batch of moonshine gets cooked up, so I’d like it if you could turn up again when that happens. I expect Vaughn and I will have improved by then, of course, and I hope you’ll have done the same, too.”</i>", parse);
 					
-					outlaws.flags["events"] |= Outlaws.Events.BeatMaria;
+					outlaws.flags["events"] |= OutlawsFlags.Events.BeatMaria;
 					
 					maria.relation.IncreaseStat(50, 2);
 					outlaws.relation.IncreaseStat(30, 2);
@@ -1183,8 +1147,8 @@ OutlawsScenes.Exploration.FactFinding = function() {
 		playername : player.name
 	};
 	
-	var first = !(outlaws.flags["events"] & Outlaws.Events.FactFind);
-	outlaws.flags["events"] |= Outlaws.Events.FactFind;
+	var first = !(outlaws.flags["events"] & OutlawsFlags.Events.FactFind);
+	outlaws.flags["events"] |= OutlawsFlags.Events.FactFind;
 	
 	Text.Clear();
 	if(first) {

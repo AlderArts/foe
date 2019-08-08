@@ -1,14 +1,15 @@
 import { GameCache, GAME } from "../GAME";
 import { DryadGlade } from "../loc/glade";
+import { OutlawsFlags } from "./outlaws/outlaws-flags";
 
-let GlobalScenes = {};
+let GlobalScenes : any = {};
 
 GlobalScenes.VisitedRigardGates = function() {
 	return GAME().miranda.Met();
 }
 
 GlobalScenes.VisitedOutlaws = function() {
-	return GAME().outlaws.flags["Met"] >= Outlaws.Met.Met;
+	return GAME().outlaws.flags["Met"] >= OutlawsFlags.Met.Met;
 }
 
 GlobalScenes.MetJeanne = function() {

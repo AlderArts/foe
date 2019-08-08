@@ -22,6 +22,7 @@ import { StatusEffect } from '../../statuseffect';
 import { Items } from '../../items';
 import { CvetaFlags } from './cveta-flags';
 import { MariaFlags } from './maria-flags';
+import { OutlawsFlags } from './outlaws-flags';
 
 let MariaScenes = {
 	DeadDrops : DeadDropScenes,
@@ -119,7 +120,7 @@ Maria.prototype.EligableForDeaddropAlert = function() {
 	//Only in the initial phase
 	if(maria.flags["DD"] != 0) return false;
 	//Only when meeting the correct conditions
-	if(outlaws.flags["Met"] < Outlaws.Met.Bouqet) return false;
+	if(outlaws.flags["Met"] < OutlawsFlags.Met.Bouqet) return false;
 	//Only when meeting total Outlaws rep
 	return true;
 }
@@ -719,7 +720,7 @@ MariaScenes.TalkPrompt = function() {
 			MariaScenes.TalkPrompt();
 		}
 	});
-	if(outlaws.flags["Met"] >= Outlaws.Met.Bouqet) {
+	if(outlaws.flags["Met"] >= OutlawsFlags.Met.Bouqet) {
 		options.push({nameStr : "Family",
 			tooltip : Text.Parse("Does she miss them?", parse),
 			enabled : true,
@@ -1249,7 +1250,7 @@ MariaScenes.ForestEnd = function() {
 
 	party.location = world.loc.Forest.Outskirts;
 
-	outlaws.flags["Met"] = Outlaws.Met.Met;
+	outlaws.flags["Met"] = OutlawsFlags.Met.Met;
 
 	TimeStep({hour: 3});
 	Gui.NextPrompt();

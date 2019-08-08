@@ -5,6 +5,7 @@ import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { EncounterTable } from '../../encountertable';
 import { CvetaFlags } from './cveta-flags';
+import { OutlawsFlags } from './outlaws-flags';
 
 let CvetaScenes = {
 	Dates : DateScenes,
@@ -2088,7 +2089,7 @@ CvetaScenes.PostBullTowerPerformance = function() {
 	Text.NL();
 	Text.Add("Oh, all right.", parse);
 	Text.NL();
-	if(outlaws.flags["BT"] & Outlaws.BullTower.BlueRoses) {
+	if(outlaws.flags["BT"] & OutlawsFlags.BullTower.BlueRoses) {
 		Text.Add("<i>“Before that, though, there is something else I would like to show you,”</i> she says, reaching into a corner by the entrance and drawing out something with both hands - the small pot that holds the rose plant you filched from Bull Tower. <i>“See?”</i>", parse);
 		Text.NL();
 		Text.Add("Yes, you see. On closer inspection, it’s evident that the plant is perking up, looking far less wilted than it was back in the warehouse. Goodness knows what Preston would have done with such a treasure - nothing good, that’s for sure.", parse);
