@@ -84,6 +84,7 @@ import { MirandaFlags } from './event/miranda-flags';
 import { TerryFlags } from './event/terry-flags';
 import { KiakaiFlags } from './event/kiakai-flags';
 import { OutlawsFlags } from './event/outlaws/outlaws-flags';
+import { TwinsFlags } from './event/royals/twins-flags';
 
 let InitCache = function() {
 	// Reset exploration
@@ -427,7 +428,7 @@ let CacheToGame = function() {
 	}
 	if(gameCache.version < 15) {
 		if(GAME().rigard.Krawitz["Q"] >= Rigard.KrawitzQ.HeistDone)
-			GAME().twins.flags["Met"] = Twins.Met.Access;
+			GAME().twins.flags["Met"] = TwinsFlags.Met.Access;
 	}
 	if(gameCache.version < 16) {
 		if(GAME().golem.flags["Met"] > Scenes.Golem.State.Lost)

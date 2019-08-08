@@ -69,7 +69,6 @@ import './js/ability/black.js';
 import './js/ability/enemyskill.js';
 
 import './js/alchemy.js';
-import './js/quest.js';
 import './js/cavalcade.js';
 
 // Locations and events

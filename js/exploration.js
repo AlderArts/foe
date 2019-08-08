@@ -282,7 +282,7 @@ function ShowQuests(preventClear) {
 		Text.Clear();
 	Gui.ClearButtons();
 
-	Quests.Print();
+	Quests.Print(SetExploreButtons);
 	Gui.SetLastSubmenu(Input.exploreButtons[ExploreButtonIndex.Quests]);
 
 	SetExploreButtons();

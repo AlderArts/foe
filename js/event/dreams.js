@@ -5,6 +5,7 @@ import { Gui } from '../gui';
 import { Text } from '../text';
 import { GAME } from '../GAME';
 import { CvetaFlags } from './outlaws/cveta-flags';
+import { TwinsFlags } from './royals/twins-flags';
 
 let DreamsScenes = {}
 
@@ -53,7 +54,7 @@ DreamsScenes.Entry = function(func) {
 			scenes.AddEnc(DreamsScenes.FeraKittens, 1.0, function() { return fera.FirstVag().virgin == false; }, ravenTrigger);
 			scenes.AddEnc(DreamsScenes.MirandaJailed, 1.0, function() { return miranda.flags["Met"] != 0; }, ravenTrigger);
 			scenes.AddEnc(DreamsScenes.MirandaMerc, 1.0, function() { return miranda.flags["Dates"] >= 1; }, ravenTrigger);
-			scenes.AddEnc(DreamsScenes.TwinsMaids, 1.0, function() { return twins.flags["Met"] >= Twins.Met.Access; }, ravenTrigger);
+			scenes.AddEnc(DreamsScenes.TwinsMaids, 1.0, function() { return twins.flags["Met"] >= TwinsFlags.Met.Access; }, ravenTrigger);
 			scenes.AddEnc(DreamsScenes.BlowjobGive, 2.0, function() { return player.sex.gBlow >= 25; }, ravenTrigger);
 			scenes.AddEnc(DreamsScenes.BlowjobRec, 2.0, function() { return player.sex.rBlow >= 25; }, ravenTrigger);
 			scenes.AddEnc(DreamsScenes.CunnilingusGive, 2.0, function() { return player.sex.gCunn >= 25; }, ravenTrigger);

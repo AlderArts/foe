@@ -6,6 +6,7 @@ import { WorldTime, MoveToLocation, GAME } from '../../GAME';
 import { SetGameState, GameState } from '../../gamestate';
 import { Gui } from '../../gui';
 import { Text } from '../../text';
+import { TwinsFlags } from '../../event/royals/twins-flags';
 
 let world = null;
 
@@ -83,7 +84,7 @@ InnLoc.common.links.push(new Link(
 InnLoc.common.links.push(new Link(
 	"Penthouse", function() {
 		let twins = GAME().twins;
-		return twins.flags["Met"] >= Twins.Met.Access;
+		return twins.flags["Met"] >= TwinsFlags.Met.Access;
 	}, true,
 	null,
 	function() {

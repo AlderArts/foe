@@ -7,6 +7,7 @@ import { Entity } from '../../entity';
 import { Time } from '../../time';
 import { WorldTime } from '../../GAME';
 import { TerryFlags } from '../terry-flags';
+import { TwinsFlags } from './twins-flags';
 
 let TwinsScenes = {};
 
@@ -15,19 +16,13 @@ function Twins(storage) {
 	this.rani = new Rani();
 	
 	this.flags = {};
-	this.flags["Met"] = Twins.Met.NotMet;
+	this.flags["Met"] = TwinsFlags.Met.NotMet;
 	this.flags["SexOpen"] = 0;
 	
 	this.terryTimer = new Time();
 	
 	if(storage) this.FromStorage(storage);
 }
-
-Twins.Met = {
-	NotMet : 0,
-	Met    : 1,
-	Access : 2
-};
 
 Twins.prototype.Relation = function() {
 	return this.rumi.Relation() + this.rani.Relation();

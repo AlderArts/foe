@@ -12,6 +12,7 @@ import { WorldTime, MoveToLocation, GAME } from '../../GAME';
 import { SetGameState, GameState } from '../../gamestate';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
+import { TwinsFlags } from '../../event/royals/twins-flags';
 
 let world = null;
 
@@ -2272,7 +2273,7 @@ KrawitzScenes.Aftermath = function() {
 		Gui.Callstack.push(function() {
 			party.location = world.loc.Rigard.Inn.penthouse;
 				
-			twins.flags["Met"] = Twins.Met.Access;
+			twins.flags["Met"] = TwinsFlags.Met.Access;
 			
 			Text.Add(" Renting this place must cost a fortune.", parse);
 			Text.NL();

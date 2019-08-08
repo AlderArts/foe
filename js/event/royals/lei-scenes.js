@@ -8,6 +8,7 @@ import { Party } from '../../party';
 import { Encounter } from '../../combat';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
+import { TwinsFlags } from './twins-flags';
 
 let LeiScenes = {
 	Tasks : TasksScenes,
@@ -705,7 +706,7 @@ LeiScenes.RequestMain = function() {
 				Text.Add("You briefly wonder if he actually likes you before going on your way.", parse);
 				Text.Flush();
 
-				twins.flags["Met"] = Twins.Met.Met;
+				twins.flags["Met"] = TwinsFlags.Met.Met;
 				// Start KrawitzQ
 				rigard.Krawitz["Q"] = Rigard.KrawitzQ.Started;
 				party.location = world.loc.Rigard.Plaza;
