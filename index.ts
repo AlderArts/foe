@@ -50,7 +50,6 @@ import './js/entity-sex.js';
 import './js/entity-dict.js';
 
 import './js/event/player.js';
-import './js/perks.js';
 
 // Combat
 import './js/combat.js';
@@ -221,5 +220,4 @@ import './js/enemy/malice-scouts.js';
 
 // Start up the main text
 import './js/main.ts';
-import './js/credits.js';
 import './js/cheats.js';
