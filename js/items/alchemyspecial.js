@@ -7,7 +7,7 @@ import { Race } from '../body/race';
 import { Color } from '../body/color';
 import { Cock } from '../body/cock';
 import { Vagina } from '../body/vagina';
-import { EncounterTable } from '../event';
+import { EncounterTable } from '../encountertable';
 import { GAME } from '../GAME';
 
 let AlchemySpecial = {};

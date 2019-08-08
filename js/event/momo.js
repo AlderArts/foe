@@ -5,7 +5,7 @@
  */
 
 import { Entity } from '../entity';
-import { EncounterTable } from '../event';
+import { EncounterTable } from '../encountertable';
 import { MoveToLocation, GAME } from '../GAME';
 import { Gender } from '../body/gender';
 import { Images } from '../assets';

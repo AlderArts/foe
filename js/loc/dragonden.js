@@ -4,7 +4,8 @@
  * 
  */
 
-import { Event, Link, EncounterTable } from '../event';
+import { Event, Link } from '../event';
+import { EncounterTable } from '../encountertable';
 import { MoveToLocation } from '../GAME';
 import { Text } from '../text';
 

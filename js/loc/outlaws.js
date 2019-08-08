@@ -4,7 +4,8 @@
  * 
  */
 
-import { Event, Link, EncounterTable } from '../event';
+import { Event, Link } from '../event';
+import { EncounterTable } from '../encountertable';
 import { Scenes } from '../scenes';
 import { WorldTime, MoveToLocation } from '../GAME';
 import { VaughnScenes } from '../event/outlaws/vaughn-scenes';

@@ -3,7 +3,7 @@ import { WorldTime, TimeStep, GAME } from '../../GAME';
 import { VaughnFlags } from './vaughn-flags';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
-import { EncounterTable } from '../../event';
+import { EncounterTable } from '../../encountertable';
 
 let VaughnScenes = {
 	Tasks : TasksScenes,

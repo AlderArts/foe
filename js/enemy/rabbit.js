@@ -18,7 +18,7 @@ import { Abilities } from '../abilities';
 import { PregnancyHandler } from '../pregnancy';
 import { Party } from '../party';
 import { Encounter } from '../combat';
-import { EncounterTable } from '../event';
+import { EncounterTable } from '../encountertable';
 import { Text } from '../text';
 import { Gui } from '../gui';
 import { SetGameState, GameState } from '../gamestate';

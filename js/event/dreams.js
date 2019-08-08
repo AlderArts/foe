@@ -1,5 +1,5 @@
 
-import { EncounterTable } from '../event';
+import { EncounterTable } from '../encountertable';
 import { Gender } from '../body/gender';
 import { Gui } from '../gui';
 import { Text } from '../text';

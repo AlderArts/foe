@@ -3,7 +3,7 @@ import { DateScenes } from './cveta-date';
 import { WorldTime } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
-import { EncounterTable } from '../../event';
+import { EncounterTable } from '../../encountertable';
 import { CvetaFlags } from './cveta-flags';
 
 let CvetaScenes = {

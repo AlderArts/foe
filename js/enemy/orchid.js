@@ -16,7 +16,7 @@ import { ArmorItems } from '../items/armor';
 import { IngredientItems } from '../items/ingredients';
 import { PregnancyHandler } from '../pregnancy';
 import { Text } from '../text';
-import { EncounterTable } from '../event';
+import { EncounterTable } from '../encountertable';
 import { Abilities } from '../abilities';
 import { Gui } from '../gui';
 

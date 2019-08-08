@@ -2,7 +2,7 @@ import { Cveta } from './cveta';
 import { WorldTime } from '../../GAME';
 import { Gui } from '../../gui';
 import { Text } from '../../text';
-import { EncounterTable } from '../../event';
+import { EncounterTable } from '../../encountertable';
 
 let DateScenes = {};
 

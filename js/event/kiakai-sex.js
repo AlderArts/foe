@@ -2,7 +2,7 @@ import { Gender } from "../body/gender";
 import { Kiakai } from "./kiakai";
 import { Gui } from "../gui";
 import { Text } from "../text";
-import { EncounterTable } from "../event";
+import { EncounterTable } from "../encountertable";
 import { GAME } from "../GAME";
 
 /*

@@ -8,7 +8,7 @@ import { Body } from '../body/body';
 import { StatusEffect } from '../statuseffect';
 import { Element } from '../damagetype';
 import { Items } from '../items';
-import { EncounterTable } from '../event';
+import { EncounterTable } from '../encountertable';
 import { Text } from '../text';
 import { Abilities } from '../abilities';
 

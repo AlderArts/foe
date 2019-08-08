@@ -5,7 +5,8 @@
  */
 
 
-import { Event, Link, EncounterTable } from '../event';
+import { Event, Link } from '../event';
+import { EncounterTable } from '../encountertable';
 import { VenaScenes } from '../event/burrows/vena';
 import { OpheliaScenes } from '../event/burrows/ophelia';
 import { LagonScenes } from '../event/burrows/lagon';

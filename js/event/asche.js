@@ -11,7 +11,7 @@ import { Race } from '../body/race';
 import { Text } from '../text';
 import { Gui } from '../gui';
 import { GAME } from '../GAME';
-import { EncounterTable } from '../event';
+import { EncounterTable } from '../encountertable';
 
 let AscheScenes = {
 	Tasks : TasksScenes,

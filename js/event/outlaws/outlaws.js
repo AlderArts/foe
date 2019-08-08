@@ -11,7 +11,7 @@ import { WorldTime, TimeStep } from '../../GAME';
 import { Gui } from '../../gui';
 import { Text } from '../../text';
 import { Jobs } from '../../job';
-import { EncounterTable } from '../../event';
+import { EncounterTable } from '../../encountertable';
 
 let OutlawsScenes = {
 	Cavalcade : OCavalcadeScenes,

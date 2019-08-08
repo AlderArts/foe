@@ -4,7 +4,7 @@
  *
  */
 
-import { EncounterTable } from '../../event';
+import { EncounterTable } from '../../encountertable';
 import { BrothelLoc } from './brothel';
 import { InnLoc, LBScenes, RigardLB, InitLB } from './inn';
 import { Shop } from '../../shop';

@@ -18,7 +18,7 @@ import { IngredientItems } from '../items/ingredients';
 import { Text } from '../text';
 import { Party } from '../party';
 import { Encounter } from '../combat';
-import { EncounterTable } from '../event';
+import { EncounterTable } from '../encountertable';
 import { Gui } from '../gui';
 import { SetGameState, GameState } from '../gamestate';
 import { Sex } from '../entity-sex';

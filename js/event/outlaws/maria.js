@@ -12,7 +12,7 @@ import { Time } from '../../time';
 import { WorldTime, TimeStep, GAME } from '../../GAME';
 import { Abilities } from '../../abilities';
 import { Text } from '../../text';
-import { EncounterTable } from '../../event';
+import { EncounterTable } from '../../encountertable';
 import { Gui } from '../../gui';
 import { Jobs } from '../../job';
 import { Party } from '../../party';

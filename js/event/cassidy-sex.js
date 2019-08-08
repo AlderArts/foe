@@ -2,7 +2,7 @@ import { SetGameState, GameState } from "../gamestate";
 import { Gui } from "../gui";
 import { Text } from "../text";
 import { MoveToLocation, GAME, TimeStep } from "../GAME";
-import { EncounterTable } from "../event";
+import { EncounterTable } from "../encountertable";
 import { Sex } from "../entity-sex";
 
 let SexScenes = {};

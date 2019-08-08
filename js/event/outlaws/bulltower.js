@@ -4,7 +4,7 @@
  * Flags in outlaws
  * stats in outlaws.BT
  */
-import { Event, Link, EncounterTable } from '../../event';
+import { Event, Link } from '../../event';
 import { Outlaws } from './outlaws';
 import { GetDEBUG } from '../../../app';
 import { Stat } from '../../stat';

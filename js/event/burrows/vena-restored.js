@@ -1,4 +1,4 @@
-import { EncounterTable } from "../../event";
+import { EncounterTable } from "../../encountertable";
 import { Text } from "../../text";
 import { TimeStep, GAME } from "../../GAME";
 import { Gui } from "../../gui";

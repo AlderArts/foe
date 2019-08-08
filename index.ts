@@ -57,7 +57,6 @@ import './js/combat.js';
 import './js/enemy/boss.js';
 
 // World description
-import './js/event.js';
 import './js/world.js';
 import './js/exploration.js';
 import './js/maze.js';

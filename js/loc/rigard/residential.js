@@ -1,5 +1,6 @@
 
-import { Event, Link, EncounterTable } from '../../event';
+import { Event, Link } from '../../event';
+import { EncounterTable } from '../../encountertable';
 import { Text } from '../../text';
 import { MoveToLocation } from '../../GAME';
 import { Gui } from '../../gui';

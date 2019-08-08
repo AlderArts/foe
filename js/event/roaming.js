@@ -1,9 +1,9 @@
-import { EncounterTable } from "../event";
+import { EncounterTable } from "../encountertable";
 import { Party } from "../party";
 import { Encounter } from "../combat";
 import { GameState, SetGameState } from "../gamestate";
 import { Gender } from "../body/gender";
-import { WorldTime } from "../GAME";
+import { WorldTime, TimeStep } from "../GAME";
 import { Gui } from "../gui";
 import { Text } from "../text";
 

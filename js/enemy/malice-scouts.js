@@ -1,6 +1,6 @@
 
 import { Entity } from '../entity';
-import { EncounterTable } from '../event';
+import { EncounterTable } from '../encountertable';
 import { Party } from '../party';
 import { Gender } from '../body/gender';
 import { WorldTime } from '../GAME';

@@ -16,7 +16,7 @@ import { Images } from '../assets';
 import { Gui } from '../gui';
 import { Text } from '../text';
 import { Element } from '../damagetype';
-import { EncounterTable } from '../event';
+import { EncounterTable } from '../encountertable';
 import { Abilities } from '../abilities';
 import { Encounter } from '../combat';
 import { Party } from '../party';

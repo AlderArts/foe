@@ -4,7 +4,7 @@ import { Entity } from '../../entity';
 import { SetGameState, GameState } from '../../gamestate';
 import { Gui } from '../../gui';
 import { Text } from '../../text';
-import { EncounterTable } from '../../event';
+import { EncounterTable } from '../../encountertable';
 import { EstevanFlags } from '../nomads/estevan-flags';
 import { MariaFlags } from './maria-flags';
 

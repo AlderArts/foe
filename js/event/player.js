@@ -8,7 +8,7 @@ import { Entity, DrunkLevel } from '../entity';
 import { GetDEBUG } from '../../app';
 import { Gender } from '../body/gender';
 import { Jobs, JobDesc, JobEnum } from '../job';
-import { EncounterTable } from '../event';
+import { EncounterTable } from '../encountertable';
 import { Gui } from '../gui';
 import { Text } from '../text';
 import { PregnancyLevel } from '../pregnancy';

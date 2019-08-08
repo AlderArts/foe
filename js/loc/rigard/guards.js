@@ -1,5 +1,6 @@
 
-import { Event, Link, EncounterTable } from '../../event';
+import { Event, Link } from '../../event';
+import { EncounterTable } from '../../encountertable';
 import { WorldTime, MoveToLocation, GAME } from '../../GAME';
 import { VaughnScenes } from '../../event/outlaws/vaughn-scenes';
 import { Text } from '../../text';

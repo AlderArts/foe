@@ -3,7 +3,7 @@ import { PregnancyHandler } from '../../pregnancy';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { Sex } from '../../entity-sex';
-import { EncounterTable } from '../../event';
+import { EncounterTable } from '../../encountertable';
 import { CaleFlags } from './cale-flags';
 
 /* CALE SEX SCENES */

@@ -5,7 +5,8 @@
  * 
  */
 
-import { Event, Link, EncounterTable } from '../event';
+import { Event, Link } from '../event';
+import { EncounterTable } from '../encountertable';
 import { WorldTime, MoveToLocation } from '../GAME';
 import { Season } from '../time';
 import { Text } from '../text';

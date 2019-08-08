@@ -1,5 +1,5 @@
 
-import { EncounterTable } from '../event';
+import { EncounterTable } from '../encountertable';
 import { Text } from '../text';
 import { Gui } from '../gui';
 import { TimeStep } from '../GAME';

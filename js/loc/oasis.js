@@ -1,5 +1,5 @@
 
-import { EncounterTable } from '../event';
+import { EncounterTable } from '../encountertable';
 import { Shop } from '../shop';
 import { Gender } from '../body/gender';
 import { IngredientItems } from '../items/ingredients';

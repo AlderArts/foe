@@ -14,7 +14,7 @@ import { Color } from '../../body/color';
 import { TF } from '../../tf';
 import { PregnancyHandler } from '../../pregnancy';
 import { Images } from '../../assets';
-import { EncounterTable } from '../../event';
+import { EncounterTable } from '../../encountertable';
 import { Abilities } from '../../abilities';
 import { Lagomorph, LagomorphBrute, LagomorphWizard, LagomorphElite, LagomorphAlpha } from '../../enemy/rabbit';
 import { AccItems } from '../../items/accessories';
