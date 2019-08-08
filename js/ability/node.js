@@ -2,6 +2,7 @@ import * as _ from 'lodash';
 import { DamageType } from '../damagetype';
 import { Ability } from '../ability';
 import { StatusEffect } from '../statuseffect';
+import { Text } from '../text';
 
 let AbilityNode = {};
 

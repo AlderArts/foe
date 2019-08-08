@@ -4,6 +4,7 @@
  * 
  */
 import { Ability, TargetMode } from '../ability';
+import { Text } from '../text';
 
 let WaitAb = new Ability();
 WaitAb.name = "Wait";

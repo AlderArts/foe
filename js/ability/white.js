@@ -6,6 +6,7 @@
 
 import { AbilityNode } from './node';
 import { Ability, TargetMode } from '../ability';
+import { Text } from '../text';
 
 let WhiteAb = {};
 WhiteAb._onHeal = function(ability, encounter, caster, target, dmg) {
