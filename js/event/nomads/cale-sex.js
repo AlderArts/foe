@@ -1,4 +1,3 @@
-import { Cale } from './cale';
 import { PregnancyHandler } from '../../pregnancy';
 import { Text } from '../../text';
 import { Gui } from '../../gui';

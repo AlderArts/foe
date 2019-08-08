@@ -7,11 +7,12 @@ import { Item } from './item';
 import { GetDEBUG, SetDEBUG } from '../app';
 import { Text } from './text';
 import { Gui } from './gui';
-import { GAME } from './GAME';
+import { GAME, WORLD } from './GAME';
 import { KiakaiFlags } from './event/kiakai-flags';
 import { Items } from './items';
 
-export function InitCheats(world : any) {
+export function InitCheats() {
+	let world = WORLD();
 	/*
 	world.loc.Plains.Nomads.Tent.events.push(new Link(
 		"TESTBUTTON", function() { return GetDEBUG(); }, true,

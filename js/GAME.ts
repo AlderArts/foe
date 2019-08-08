@@ -45,7 +45,7 @@ export function WorldTime() {
     return worldTime;
 }
 
-export function MoveToLocation(location : any, timestep : any, preventClear : boolean) {
+export function MoveToLocation(location : any, timestep? : any, preventClear? : boolean) {
 	var oldLocation = game.party.location;
 	game.party.location = location;
 

@@ -12,17 +12,15 @@ import { EstevanScenes } from '../event/nomads/estevan';
 import { MagnusScenes } from '../event/nomads/magnus';
 import { RosalinScenes } from '../event/nomads/rosalin';
 import { PatchworkScenes } from '../event/nomads/patchwork';
-import { GameCache, WorldTime, MoveToLocation } from '../GAME';
+import { GameCache, WorldTime, MoveToLocation, WORLD, GAME } from '../GAME';
 import { Text } from '../text';
+import { Gui } from '../gui';
 
 //
 // Nomads
 //
-let world = null;
-
-export function InitNomads(w) {
-	world = w;
-	world.SaveSpots["NomadsTent"] = NomadsLoc.Tent;
+export function InitNomads() {
+	WORLD().SaveSpots["NomadsTent"] = NomadsLoc.Tent;
 };
 
 let NomadsLoc = {
@@ -108,7 +106,7 @@ NomadsLoc.Fireplace.onEntry = function() {
 }
 
 NomadsLoc.Fireplace.description = function() {
-	Text.Add("The nomad camp is currently set up in the middle of a wide grassland spreading out in all directions. [TreeFar] In the middle of the gathering of disparate tents that make up the nomad camp - about twenty in total - is a large fire pit.", {TreeFar: world.TreeFarDesc()});
+	Text.Add("The nomad camp is currently set up in the middle of a wide grassland spreading out in all directions. [TreeFar] In the middle of the gathering of disparate tents that make up the nomad camp - about twenty in total - is a large fire pit.", {TreeFar: WORLD().TreeFarDesc()});
 	Text.NL();
 	if(WorldTime().hour >= 7 && WorldTime().hour < 19)
 		Text.Add("Currently it is unlit. Not many people are around, most likely seeing to their daily chores.");
@@ -124,7 +122,7 @@ NomadsLoc.Fireplace.links.push(new Link(
 		Text.Add("A faint trail leads out across the plains toward a low outcropping where several larger paths cross. ");
 	},
 	function() {
-		MoveToLocation(world.loc.Plains.Crossroads, {minute: 15});
+		MoveToLocation(WORLD().loc.Plains.Crossroads, {minute: 15});
 	}
 ));
 NomadsLoc.Fireplace.links.push(new Link(
@@ -140,11 +138,11 @@ NomadsLoc.Fireplace.links.push(new Link(
 NomadsLoc.Fireplace.links.push(new Link(
 	"Nursery", function() {
 		if(GlobalScenes.PortalsOpen()) return false;
-		return nursery.TotalKids() > 0;
+		return GAME().nursery.TotalKids() > 0;
 	}, true,
 	function() {
 		if(GlobalScenes.PortalsOpen()) return;
-		if(nursery.TotalKids() > 0) {
+		if(GAME().nursery.TotalKids() > 0) {
 			Text.Add("The nursery, where your kids are being taken care of, is nearby.");
 			Text.NL();
 		}
@@ -163,25 +161,25 @@ NomadsLoc.Fireplace.events.push(new Link(
 	ChiefScenes.Interact
 ));
 NomadsLoc.Fireplace.events.push(new Link(
-	function() { return cale.name; }, 
-	function() { return cale.IsAtLocation(NomadsLoc.Fireplace); }, true,
+	function() { return GAME().cale.name; }, 
+	function() { return GAME().cale.IsAtLocation(NomadsLoc.Fireplace); }, true,
 	function() {
-		if(cale.IsAtLocation(NomadsLoc.Fireplace))
+		if(GAME().cale.IsAtLocation(NomadsLoc.Fireplace))
 			CaleScenes.Desc();
 	},
 	CaleScenes.Interact
 ));
 NomadsLoc.Fireplace.events.push(new Link(
-	function() { return (estevan.flags["Met"] == 0) ? "Satyr" : "Estevan"; }, function() { return estevan.IsAtLocation(); }, true,
+	function() { return (GAME().estevan.flags["Met"] == 0) ? "Satyr" : "Estevan"; }, function() { return GAME().estevan.IsAtLocation(); }, true,
 	function() {
-		if(estevan.IsAtLocation())
+		if(GAME().estevan.IsAtLocation())
 			EstevanScenes.Desc();
 	},
 	EstevanScenes.Interact
 ));
 NomadsLoc.Fireplace.events.push(new Link(
 	function() {
-		return magnus.flags["Met"] == 0 ? "Scholar" : "Magnus";
+		return GAME().magnus.flags["Met"] == 0 ? "Scholar" : "Magnus";
 	}, function() { return (WorldTime().hour >= 8 && WorldTime().hour < 22); }, true,
 	function() {
 		if(!(WorldTime().hour >= 8 && WorldTime().hour < 22)) return;
@@ -190,10 +188,10 @@ NomadsLoc.Fireplace.events.push(new Link(
 	MagnusScenes.Interact
 ));
 NomadsLoc.Fireplace.events.push(new Link(
-	function() { return rosalin.flags["Met"] == 0 ? "Alchemist" : "Rosalin"; },
-	function() { return rosalin.IsAtLocation(NomadsLoc.Fireplace); }, true,
+	function() { return GAME().rosalin.flags["Met"] == 0 ? "Alchemist" : "Rosalin"; },
+	function() { return GAME().rosalin.IsAtLocation(NomadsLoc.Fireplace); }, true,
 	function() {
-		if(!rosalin.IsAtLocation(NomadsLoc.Fireplace)) return;
+		if(!GAME().rosalin.IsAtLocation(NomadsLoc.Fireplace)) return;
 		RosalinScenes.Desc();
 	},
 	RosalinScenes.Interact
@@ -211,8 +209,9 @@ NomadsLoc.Fireplace.events.push(new Link(
 
 NomadsLoc.Fireplace.events.push(new Link(
 	"Momo", 
-	function() { return momo.IsAtLocation(NomadsLoc.Fireplace); }, true,
+	function() { return GAME().momo.IsAtLocation(NomadsLoc.Fireplace); }, true,
 	function() {
+		let momo = GAME().momo;
 		if(momo.AtCamp()) {
 			Text.Add("A rather tatty tent has been set up close by the central cookfires for Momo, the dragon-girl.");
 			if(!momo.IsAtLocation())

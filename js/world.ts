@@ -65,7 +65,7 @@ export function InitWorld() {
 	}
 	
 	InitIntro(world);
-	InitNomads(world);
+	InitNomads();
 	InitOutlaws(world);
 	InitRigard(world, Scenes);
 	InitFarm(world);
@@ -74,5 +74,5 @@ export function InitWorld() {
 	
 	InitMiranda(world);
 	
-	InitCheats(world);
+	InitCheats();
 }

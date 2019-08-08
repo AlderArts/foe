@@ -2,13 +2,15 @@
 import { GetDEBUG } from '../../../app';
 import { Gender } from '../../body/gender';
 import { CaleSexScenes } from './cale-sex';
-import { Cale } from './cale';
-import { WorldTime } from '../../GAME';
+import { WorldTime, GAME, TimeStep } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { CaleFlags } from './cale-flags';
+import { Rosalin } from './rosalin';
+import { LowerBodyType } from '../../entity-desc';
+import { Jobs } from '../../job';
 
-let CaleScenes = {
+let CaleScenes : any = {
     Sex : CaleSexScenes,
 };
 
@@ -110,7 +112,7 @@ CaleScenes.Desc = function() {
 CaleScenes.FirstApproach = function() {
 	let player = GAME().player;
 	let cale = GAME().cale;
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		guyGal     : player.mfTrue("guy", "gal")
 	};
@@ -514,7 +516,7 @@ CaleScenes.TalkPrompt = function() {
 	let party = GAME().party;
 	let rosalin = GAME().rosalin;
 	let cale = GAME().cale;
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	parse = player.ParserTags(parse);
@@ -968,7 +970,7 @@ CaleScenes.TalkPast = function() {
 CaleScenes.Rogue = function() {
 	let player = GAME().player;
 	let cale = GAME().cale;
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	parse = player.ParserTags(parse);

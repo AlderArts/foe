@@ -27,6 +27,7 @@ export class Event {
 	hunt : any[];
 	onEntry : any;
 	enc : EncounterTable;
+	SaveSpot : string;
 
 	constructor(nameFunc : any, opts? : any) {
 		opts = opts || {};

@@ -24,7 +24,7 @@ export class Maze {
 		this.yMax = 0;
 	}
 
-	AddRoom(x : number, y : number, room : MazeRoom) {
+	AddRoom(x : number, y : number, room? : MazeRoom) {
 		x = x || 0;
 		y = y || 0;
 		room = room || new MazeRoom();
