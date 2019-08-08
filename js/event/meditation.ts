@@ -7,12 +7,14 @@ import { TimeStep, GAME } from "../GAME";
  * Meditation scenes for the PC
  */
 
-let MeditationScenes = {};
+let MeditationScenes : any = {};
 
 MeditationScenes.Entry = function() {
 	let player = GAME().player;
 	let party = GAME().party;
-	var parse = {
+	let kiakai = GAME().kiakai;
+	let miranda = GAME().miranda;
+	var parse : any = {
 		playername : player.name,
 		Kiai : kiakai.name
 	};

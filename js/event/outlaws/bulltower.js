@@ -5,6 +5,7 @@
  * stats in outlaws.BT
  */
 import { Event, Link } from '../../event';
+import { EncounterTable } from '../../encountertable';
 import { Outlaws } from './outlaws';
 import { GetDEBUG } from '../../../app';
 import { Stat } from '../../stat';

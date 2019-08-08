@@ -117,8 +117,6 @@ import './js/loc/burrows.js';
 import './js/event/global.js';
 import './js/event/dreams.js';
 import './js/event/nursery.js';
-import './js/event/masturbation.js';
-import './js/event/meditation.js';
 
 // Characters
 import './js/event/asche.js';

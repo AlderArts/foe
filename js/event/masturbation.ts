@@ -1,23 +1,26 @@
+import * as _ from 'lodash';
+
 import { Text } from "../text";
 import { Gui } from "../gui";
 import { Genitalia } from "../body/genitalia";
-import { CockType } from "../body/cock";
+import { CockType, Cock } from "../body/cock";
 import { Race } from "../body/race";
 import { ItemSubtype } from "../item";
-import { GAME } from "../GAME";
+import { GAME, TimeStep } from "../GAME";
+import { ToysItems } from "../items/toys";
 
 /*
  * Masturbation scenes for the PC
  */
 
-let MasturbationScenes = {};
+let MasturbationScenes : any = {};
 
 // TODO: Stretch/Cap change for toy training
 
 MasturbationScenes.Entry = function() {
 	let player = GAME().player;
 	let party = GAME().party;
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -50,7 +53,7 @@ MasturbationScenes.Entry = function() {
 		_.each(player.AllCocks(), function(c) {
 			optsTc.push({ nameStr : c.race.qCShort(),
 				tooltip : c.aLong(),
-				func : function(obj) {
+				func : function(obj : any) {
 					MasturbationScenes.CockOpening(obj);
 				}, enabled : true,
 				obj : c
@@ -81,12 +84,12 @@ MasturbationScenes.Entry = function() {
 		var vagCap = player.FirstVag().Cap();
 		
 		var optsTv = new Array();
-		var addVagToy = function(toy) {
+		var addVagToy = function(toy : any) {
 			var enabled = vagCap >= toy.cock.Thickness();
 			if(party.Inv().QueryNum(toy)) {
 				optsTv.push({ nameStr : toy.name,
 					tooltip : toy.Long(),
-					func : function(obj) {
+					func : function(obj : any) {
 						MasturbationScenes.VagOpening(MasturbationScenes.VagToy, obj);
 					}, enabled : enabled,
 					obj : toy
@@ -95,18 +98,18 @@ MasturbationScenes.Entry = function() {
 			}
 			return false;
 		}
-		var toyAvailable = false;
-		toyAvailable |= addVagToy(Items.Toys.SmallDildo);
-		toyAvailable |= addVagToy(Items.Toys.MediumDildo);
-		toyAvailable |= addVagToy(Items.Toys.LargeDildo);
-		toyAvailable |= addVagToy(Items.Toys.ThinDildo);
-		toyAvailable |= addVagToy(Items.Toys.ButtPlug);
-		toyAvailable |= addVagToy(Items.Toys.LargeButtPlug);
-		toyAvailable |= addVagToy(Items.Toys.AnalBeads);
-		toyAvailable |= addVagToy(Items.Toys.LargeAnalBeads);
-		toyAvailable |= addVagToy(Items.Toys.EquineDildo);
-		toyAvailable |= addVagToy(Items.Toys.CanidDildo);
-		toyAvailable |= addVagToy(Items.Toys.ChimeraDildo);
+		let toyAvailable =
+			addVagToy(ToysItems.SmallDildo) ||
+			addVagToy(ToysItems.MediumDildo) ||
+			addVagToy(ToysItems.LargeDildo) ||
+			addVagToy(ToysItems.ThinDildo) ||
+			addVagToy(ToysItems.ButtPlug) ||
+			addVagToy(ToysItems.LargeButtPlug) ||
+			addVagToy(ToysItems.AnalBeads) ||
+			addVagToy(ToysItems.LargeAnalBeads) ||
+			addVagToy(ToysItems.EquineDildo) ||
+			addVagToy(ToysItems.CanidDildo) ||
+			addVagToy(ToysItems.ChimeraDildo);
 		if(optsTv.length >= 1) {
 			options.push({ nameStr : "Vag - toys",
 				tooltip : "",
@@ -137,12 +140,12 @@ MasturbationScenes.Entry = function() {
 	var analCap = player.Butt().Cap();
 	
 	var optsTa = new Array();
-	var addAnalToy = function(toy) {
+	var addAnalToy = function(toy : any) {
 		var enabled = analCap >= toy.cock.Thickness();
 		if(party.Inv().QueryNum(toy)) {
 			optsTa.push({ nameStr : toy.name,
 				tooltip : toy.Long(),
-				func : function(obj) {
+				func : function(obj : any) {
 					MasturbationScenes.AnalOpening(MasturbationScenes.AnalToy, obj);
 				}, enabled : enabled,
 				obj : toy
@@ -151,18 +154,18 @@ MasturbationScenes.Entry = function() {
 		}
 		return false;
 	}
-	var toyAvailable = false;
-	toyAvailable |= addAnalToy(Items.Toys.SmallDildo);
-	toyAvailable |= addAnalToy(Items.Toys.MediumDildo);
-	toyAvailable |= addAnalToy(Items.Toys.LargeDildo);
-	toyAvailable |= addAnalToy(Items.Toys.ThinDildo);
-	toyAvailable |= addAnalToy(Items.Toys.ButtPlug);
-	toyAvailable |= addAnalToy(Items.Toys.LargeButtPlug);
-	toyAvailable |= addAnalToy(Items.Toys.AnalBeads);
-	toyAvailable |= addAnalToy(Items.Toys.LargeAnalBeads);
-	toyAvailable |= addAnalToy(Items.Toys.EquineDildo);
-	toyAvailable |= addAnalToy(Items.Toys.CanidDildo);
-	toyAvailable |= addAnalToy(Items.Toys.ChimeraDildo);
+	let toyAvailable =
+		addAnalToy(ToysItems.SmallDildo) ||
+		addAnalToy(ToysItems.MediumDildo) ||
+		addAnalToy(ToysItems.LargeDildo) ||
+		addAnalToy(ToysItems.ThinDildo) ||
+		addAnalToy(ToysItems.ButtPlug) ||
+		addAnalToy(ToysItems.LargeButtPlug) ||
+		addAnalToy(ToysItems.AnalBeads) ||
+		addAnalToy(ToysItems.LargeAnalBeads) ||
+		addAnalToy(ToysItems.EquineDildo) ||
+		addAnalToy(ToysItems.CanidDildo) ||
+		addAnalToy(ToysItems.ChimeraDildo);
 	if(optsTa.length >= 1) {
 		options.push({ nameStr : "Anal - toys",
 			tooltip : "",
@@ -188,7 +191,7 @@ MasturbationScenes.Entry = function() {
 	});
 }
 
-MasturbationScenes.CockOpening = function(p1cock) {
+MasturbationScenes.CockOpening = function(p1cock : Cock) {
 	let player = GAME().player;
 	var allCocks = player.AllCocksCopy();
 	for(var i = 0; i < allCocks.length; i++) {
@@ -198,7 +201,7 @@ MasturbationScenes.CockOpening = function(p1cock) {
 		}
 	}
 	
-	var parse = {
+	var parse : any = {
 		cocks2 : function() { return player.MultiCockDesc(allCocks); }
 	};
 	parse = player.ParserTags(parse);
@@ -513,7 +516,7 @@ MasturbationScenes.CockOpening = function(p1cock) {
 	Gui.NextPrompt();
 }
 
-MasturbationScenes.CockSize = function(parse, p1cock) {
+MasturbationScenes.CockSize = function(parse : any, p1cock : Cock) {
 	var len = p1cock.Len();
 	var girth = p1cock.Thickness();
 	
@@ -533,7 +536,7 @@ MasturbationScenes.CockSize = function(parse, p1cock) {
 	Text.NL();
 }
 
-MasturbationScenes.CockSlut = function(parse, p1cock) {
+MasturbationScenes.CockSlut = function(parse : any, p1cock : Cock) {
 	let player = GAME().player;
 	if(player.Slut() >= 30) {
 		Text.Add("In a bid to further increase your enjoyment, you gather some of your pre-ejaculate and take the musky liquid to your mouth, where you lap it all off your hand. Damn, you taste great!", parse);
@@ -543,7 +546,7 @@ MasturbationScenes.CockSlut = function(parse, p1cock) {
 	}
 }
 
-MasturbationScenes.CockKnot = function(parse, p1cock) {
+MasturbationScenes.CockKnot = function(parse : any, p1cock : Cock) {
 	if(p1cock.Knot()) {
 		Text.Add("Your mounting excitement causes your knot to bloat up like a balloon, and you adapt by sparing a hand to squeeze it. It feels great! Each squeeze makes a small rope of pre to spew from your [cockTip] and makes your knot grow ever larger. When you tire of that, you move your hand just behind the bulbous mass to hold tightly to the base of your dick. Doing this, it’s almost like you’d tied someone!", parse);
 		Text.NL();
@@ -554,9 +557,9 @@ MasturbationScenes.CockKnot = function(parse, p1cock) {
 
  */
 
-MasturbationScenes.AnalOpening = function(func, obj) {
+MasturbationScenes.AnalOpening = function(func : any, obj : any) {
 	let player = GAME().player;
-	var parse = {
+	var parse : any = {
 		toparmordesc : player.ArmorDesc(),
 		bottomarmordesc : player.LowerArmorDesc()
 	};
@@ -602,7 +605,7 @@ MasturbationScenes.AnalOpening = function(func, obj) {
 	func(parse, obj);
 }
 
-MasturbationScenes.AnalFingerCockblock = function(parse, cum) {
+MasturbationScenes.AnalFingerCockblock = function(parse : any, cum : number) {
 	let player = GAME().player;
 	if(player.FirstCock()) {
 		Text.Add("Unable to take the pounding at your prostate any longer, your [cocks] choose[notS] this moment to shoot off [itsTheir] load, string after string of hot, sticky seed arcing into the air and landing on the ground a good distance away. All the anticipation and stimulation seems to have done you good - your current load of semen looks much thicker and richer than normal, speaking well of your prostate-milking skills.", parse);
@@ -614,7 +617,7 @@ MasturbationScenes.AnalFingerCockblock = function(parse, cum) {
 	}
 }
 
-MasturbationScenes.AnalFinger = function(parse) {
+MasturbationScenes.AnalFinger = function(parse : any) {
 	let player = GAME().player;
 	var cap = player.Butt().Cap();
 	var br = player.FirstBreastRow().Size();
@@ -685,7 +688,7 @@ MasturbationScenes.AnalFinger = function(parse) {
 	Gui.NextPrompt();
 }
 
-MasturbationScenes.AnalToy = function(parse, toy) {
+MasturbationScenes.AnalToy = function(parse : any, toy : any) {
 	let player = GAME().player;
 	var cap = player.Butt().Cap();
 	var br = player.FirstBreastRow().Size();
@@ -763,9 +766,9 @@ MasturbationScenes.AnalToy = function(parse, toy) {
 }
 
 // Generic opening scene. Sets up all parser stuff and calls the scene proper
-MasturbationScenes.VagOpening = function(func, obj) {
+MasturbationScenes.VagOpening = function(func : any, obj : any) {
 	let player = GAME().player;
-	var parse = {
+	var parse : any = {
 		toparmordesc : player.ArmorDesc(),
 		bottomarmordesc : player.LowerArmorDesc()
 	};
@@ -796,7 +799,7 @@ MasturbationScenes.VagOpening = function(func, obj) {
 	func(parse, obj);
 }
 
-MasturbationScenes.VagFingerCockblock = function(parse, cum) {
+MasturbationScenes.VagFingerCockblock = function(parse : any, cum : number) {
 	let player = GAME().player;
 	if(player.FirstCock()) {
 		Text.Add("At the same time, your [cocks] choose[notS] this moment to shoot off [itsTheir] load, string after string of hot, sticky seed arcing into the air and landing on the ground a good distance away with a series of wet-sounding splats.", parse);
@@ -808,7 +811,7 @@ MasturbationScenes.VagFingerCockblock = function(parse, cum) {
 	}
 }
 
-MasturbationScenes.VagFinger = function(parse) {
+MasturbationScenes.VagFinger = function(parse : any) {
 	let player = GAME().player;
 	//Fisting is triggered with wide hips wide cunt. Else, default to fingering.
 	var cap = (player.body.torso.hipSize.Get() / 10) * (player.FirstVag().Cap() / 5);
@@ -870,7 +873,7 @@ MasturbationScenes.VagFinger = function(parse) {
 	Gui.NextPrompt();
 }
 
-MasturbationScenes.VagToy = function(parse, toy) {
+MasturbationScenes.VagToy = function(parse : any, toy : any) {
 	let player = GAME().player;
 	var preg = player.PregHandler().IsPregnant();
 	var bellySize = player.PregHandler().BellySize();
@@ -913,7 +916,7 @@ MasturbationScenes.VagToy = function(parse, toy) {
 	Gui.NextPrompt();
 }
 
-MasturbationScenes.VagTailfuck = function(parse) {
+MasturbationScenes.VagTailfuck = function(parse : any) {
 	let player = GAME().player;
 	var preg = player.PregHandler().IsPregnant();
 	var bellySize = player.PregHandler().BellySize();
@@ -973,7 +976,8 @@ MasturbationScenes.VagTailfuck = function(parse) {
 
 MasturbationScenes.Breasts = function() {
 	let player = GAME().player;
-	var parse = {
+	let party = GAME().party;
+	var parse : any = {
 		
 	};
 	parse = player.ParserTags(parse);
