@@ -9,7 +9,6 @@ import './assets/css/output.css';
 import './assets/css/droid-sans.css';
 
 // Javascript
-import './app.js';
 import './js/assets.js';
 
 import './js/utility.js';
@@ -209,4 +208,3 @@ import './js/enemy/malice-scouts.js';
 
 // Start up the main text
 import './js/main.ts';
-import './js/cheats.js';

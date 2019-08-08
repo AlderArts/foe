@@ -49,7 +49,7 @@ const DEFAULT_FONT = "20pt Calibri";
 const LARGE_FONT   = "26pt Calibri";
 
 let DEBUG = false;
-function SetDEBUG(val) {
+function SetDEBUG(val : boolean) {
 	DEBUG = val;
 }
 function GetDEBUG() {
@@ -57,7 +57,7 @@ function GetDEBUG() {
 }
 
 let RENDER_PICTURES = true;
-function SetRenderPictures(val) {
+function SetRenderPictures(val : boolean) {
 	RENDER_PICTURES = val;
 }
 function GetRenderPictures() {
