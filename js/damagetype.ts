@@ -18,38 +18,41 @@ let Element = {
 	numElements : 14
 }
 
-function DamageType(type : any) {
-	type = type || {};
-	this.dmg = [];
-	this.dmg[Element.pSlash]   = type.pSlash   || 0;
-	this.dmg[Element.pBlunt]   = type.pBlunt   || 0;
-	this.dmg[Element.pPierce]  = type.pPierce  || 0;
-	this.dmg[Element.mVoid]    = type.mVoid    || 0;
-	this.dmg[Element.mFire]    = type.mFire    || 0;
-	this.dmg[Element.mIce]     = type.mIce     || 0;
-	this.dmg[Element.mThunder] = type.mThunder || 0;
-	this.dmg[Element.mEarth]   = type.mEarth   || 0;
-	this.dmg[Element.mWater]   = type.mWater   || 0;
-	this.dmg[Element.mWind]    = type.mWind    || 0;
-	this.dmg[Element.mLight]   = type.mLight   || 0;
-	this.dmg[Element.mDark]    = type.mDark    || 0;
-	this.dmg[Element.mNature]  = type.mNature  || 0;
-	this.dmg[Element.lust]     = type.lust     || 0;
-}
-
-DamageType.prototype.Add = function(other : any) {
-	for(var i = 0; i < Element.numElements; i++)
-		this.dmg[i] += other.dmg[i];
-}
-
-DamageType.prototype.ApplyDmgType = function(def : any, atkDmg : number) {
-	var ret = 0;
-	for(var i = 0; i < Element.numElements; i++) {
-		var dmg = this.dmg[i] * atkDmg;
-		dmg -= dmg * def.dmg[i];
-		ret += dmg;
+export class DamageType {
+	dmg : number[];
+	constructor(type : any) {
+		type = type || {};
+		this.dmg = [];
+		this.dmg[Element.pSlash]   = type.pSlash   || 0;
+		this.dmg[Element.pBlunt]   = type.pBlunt   || 0;
+		this.dmg[Element.pPierce]  = type.pPierce  || 0;
+		this.dmg[Element.mVoid]    = type.mVoid    || 0;
+		this.dmg[Element.mFire]    = type.mFire    || 0;
+		this.dmg[Element.mIce]     = type.mIce     || 0;
+		this.dmg[Element.mThunder] = type.mThunder || 0;
+		this.dmg[Element.mEarth]   = type.mEarth   || 0;
+		this.dmg[Element.mWater]   = type.mWater   || 0;
+		this.dmg[Element.mWind]    = type.mWind    || 0;
+		this.dmg[Element.mLight]   = type.mLight   || 0;
+		this.dmg[Element.mDark]    = type.mDark    || 0;
+		this.dmg[Element.mNature]  = type.mNature  || 0;
+		this.dmg[Element.lust]     = type.lust     || 0;
 	}
-	return ret;
+	
+	Add(other : any) {
+		for(var i = 0; i < Element.numElements; i++)
+			this.dmg[i] += other.dmg[i];
+	}
+
+	ApplyDmgType(def : any, atkDmg : number) {
+		var ret = 0;
+		for(var i = 0; i < Element.numElements; i++) {
+			var dmg = this.dmg[i] * atkDmg;
+			dmg -= dmg * def.dmg[i];
+			ret += dmg;
+		}
+		return ret;
+	}
 }
 
-export { Element, DamageType };
+export { Element };

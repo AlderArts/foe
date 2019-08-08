@@ -1,4 +1,3 @@
-import * as $ from 'jquery';
 import { Images, LoadImages, assetsOverlay } from './assets';
 import { Gui } from './gui';
 import { VERSION_STRING, GetRenderPictures, SetRenderPictures, GetDEBUG, SetDEBUG } from '../app';
@@ -13,12 +12,7 @@ import { Intro } from './event/introduction';
 import { SetGameCache } from './GAME';
 import { loadfileOverlay } from './fileoverlay';
 import { InitWorld } from './world';
-/* TODO
-// Prevent selection
-$(function() {
-	$('canvas').mousedown(function(event : any) { event.preventDefault() });
-});
-*/
+
 // Set the main entrypoint of the application
 function EntryPoint() {
 	try {
