@@ -99,7 +99,6 @@ import './js/items/weapons.js';
 
 import './js/items/halloween.js';
 
-import './js/shop.js';
 import './js/alchemy.js';
 import './js/quest.js';
 import './js/cavalcade.js';
