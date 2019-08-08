@@ -79,7 +79,6 @@ import './js/items/alchemy.js';
 import './js/items/alchemyspecial.js';
 import './js/items/toys.js';
 import './js/items/cards.js';
-import './js/items/combatitems.js';
 import './js/items/accessories.js';
 import './js/items/armor.js';
 import './js/items/strapon.js';

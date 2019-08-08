@@ -38,256 +38,262 @@ namespace TargetMode {
 	}
 }
 
-function Ability(name : string) {
-	this.targetMode = TargetMode.Enemy;
-	this.name = name || "ABILITY";
-	//TODO: Tooltip?
-	this.cost = { hp: null, sp: null, lp: null};
+export class Ability {
+	targetMode : any;
+	name : string;
+	cost : any;
+	castTime : number;
+	cancellable : any;
+	cooldown : number;
+	onCast : any[];
+	castTree : any[];
+	
+	constructor(name? : string) {
+		this.targetMode = TargetMode.Enemy;
+		this.name = name || "ABILITY";
+		//TODO: Tooltip?
+		this.cost = { hp: null, sp: null, lp: null};
 
-	this.castTime = 0;
-	this.cancellable = true; // can be a function(ability, encounter, caster, target, result)
-	this.cooldown = 0; //nr of rounds cooldown
+		this.castTime = 0;
+		this.cancellable = true; // can be a function(ability, encounter, caster, target, result)
+		this.cooldown = 0; //nr of rounds cooldown
 
-	// Preparation nodes
-	this.onCast   = [];
-	// Actual cast nodes
-	this.castTree = [];
+		// Preparation nodes
+		this.onCast   = [];
+		// Actual cast nodes
+		this.castTree = [];
 
-	// Note, if CastInternalOOC is defined, ability will be usable out of combat
-	//this.CastInternalOOC = function(caster, target) {
-	//	Gui.NextPrompt(ShowAbilities);
-	//}
-
-}
-
-Ability.prototype.Short = function() {
-	return "NO DESC";
-}
-
-Ability.prototype.StartCast = function(encounter : Encounter, caster : Entity, target : Entity) {
-	Text.NL();
-	_.each(this.onCast, function(node) {
-		node(this, encounter, caster, target);
-	});
-}
-
-Ability.prototype.CastInternal = function(encounter : Encounter, caster : Entity, target : Entity) {
-	Text.NL();
-	_.each(this.castTree, function(node) {
-		node(this, encounter, caster, target);
-	});
-
-	caster.FinishCastInternal(this, encounter, caster, target);
-}
-
-// Used as entrypoint for PC/Party (active selection)
-Ability.prototype.OnSelect = function(encounter : Encounter, caster : Entity, backPrompt? : any, ext? : any) {
-	var ability = this;
-	// TODO: Buttons (use portraits for target?)
-
-	var target : any[] = [];
-	let party = GAME().party;
-
-	switch(ability.targetMode) {
-		case TargetMode.All:
-			_.each(party.members, function(t) {
-				// Don't add incapacitated
-				var incap = t.Incapacitated();
-				if(incap) return;
-
-				target.push({
-					nameStr : t.name,
-					func    : function(t : Entity) {
-						ability.Use(encounter, caster, t, ext);
-					},
-					enabled : ability.enabledTargetCondition(encounter, caster, t),
-					obj     : t
-				});
-			});
-			_.each(encounter.enemy.members, function(t) {
-				// Don't add incapacitated
-				var incap = t.Incapacitated();
-				if(incap) return;
-
-				target.push({
-					nameStr : t.uniqueName || t.name,
-					func    : function(t : Entity) {
-						ability.Use(encounter, caster, t, ext);
-					},
-					enabled : ability.enabledTargetCondition(encounter, caster, t),
-					obj     : t
-				});
-			});
-
-			Gui.SetButtonsFromList(target, true, backPrompt);
-			return true;
-
-		case TargetMode.Self:
-			ability.Use(encounter, caster, null, ext);
-			break;
-
-		case TargetMode.Ally:
-		case TargetMode.AllyNotSelf:
-		case TargetMode.AllyFallen:
-			_.each(party.members, function(t) {
-				// Don't add self unless allowed
-				if(ability.targetMode == TargetMode.AllyNotSelf && t == caster) return;
-				// Don't add incapacitated unless allowed
-				var incap = t.Incapacitated();
-				if(ability.targetMode == TargetMode.AllyFallen && !t.incap()) return;
-				else if(incap) return;
-
-				target.push({
-					nameStr : t.name,
-					func    : function(t : Entity) {
-						ability.Use(encounter, caster, t, ext);
-					},
-					enabled : ability.enabledTargetCondition(encounter, caster, t),
-					obj     : t
-				});
-			});
-
-			Gui.SetButtonsFromList(target, true, backPrompt);
-			return true;
-
-		case TargetMode.Enemy:
-			_.each(encounter.enemy.members, function(t) {
-				// Don't add incapacitated
-				var incap = t.Incapacitated();
-				if(incap) return;
-
-				target.push({
-					nameStr : t.uniqueName || t.name,
-					func    : function(t : Entity) {
-						ability.Use(encounter, caster, t, ext);
-					},
-					enabled : ability.enabledTargetCondition(encounter, caster, t),
-					obj     : t
-				});
-			});
-
-			Gui.SetButtonsFromList(target, true, backPrompt);
-			return true;
-
-		case TargetMode.Party:
-			ability.Use(encounter, caster, party, ext);
-			break;
-		case TargetMode.Enemies:
-			ability.Use(encounter, caster, encounter.enemy, ext);
-			break;
-		default:
-			encounter.CombatTick();
+		// Note, if CastInternalOOC is defined, ability will be usable out of combat
+		//this.CastInternalOOC = function(caster, target) {
+		//	Gui.NextPrompt(ShowAbilities);
+		//}
 	}
-}
-
-Ability.EnabledCost = function(ab : Ability, caster : Entity) {
-	if(_.isObject(ab.cost)) {
-		if(ab.cost.hp && ab.cost.hp > caster.curHp) return false;
-		if(ab.cost.sp && ab.cost.sp > caster.curSp) return false;
-		if(ab.cost.lp && ab.cost.lp > caster.curLust) return false;
+	
+	Short() {
+		return "NO DESC";
 	}
-	return true;
-}
 
-Ability.ApplyCost = function(ab : Ability, caster : Entity) {
-	if(_.isObject(ab.cost)) {
-		if(ab.cost.hp) caster.curHp -= ab.cost.hp;
-		if(ab.cost.sp) caster.curSp -= ab.cost.sp;
-		if(ab.cost.lp) caster.curLust -= ab.cost.lp;
-	}
-}
-
-Ability.prototype.Use = function(encounter : Encounter, caster : Entity, target : Entity) {
-	Ability.ApplyCost(this, caster);
-	this.StartCast(encounter, caster, target);
-
-	var entry = caster.GetCombatEntry(encounter);
-
-	// Set cooldown
-	if(this.cooldown) {
-		entry.cooldown = entry.cooldown || [];
-		entry.cooldown.push({
-			cooldown: this.cooldown,
-			ability: this
+	StartCast(encounter : Encounter, caster : Entity, target : Entity) {
+		Text.NL();
+		_.each(this.onCast, function(node) {
+			node(this, encounter, caster, target);
 		});
 	}
 
-	if(this.castTime > 0) {
-		entry.initiative = 100 - this.castTime; //TODO: not really good to have the fixed 100 here...
-		entry.casting = {
-			ability : this,
-			target  : target
-		};
-
-		Text.Flush();
-		Gui.NextPrompt(function() {
-			encounter.CombatTick();
+	CastInternal(encounter : Encounter, caster : Entity, target : Entity) {
+		Text.NL();
+		_.each(this.castTree, function(node) {
+			node(this, encounter, caster, target);
 		});
+
+		caster.FinishCastInternal(this, encounter, caster, target);
 	}
-	else {
-		this.CastInternal(encounter, caster, target);
-	}
-}
 
-Ability.prototype.UseOutOfCombat = function(caster : Entity, target : Entity) {
-	Ability.ApplyCost(this, caster);
-	this.StartCast(null, caster, target);
-	this.CastInternal(null, caster, target);
-}
+	// Used as entrypoint for PC/Party (active selection)
+	OnSelect(encounter : Encounter, caster : Entity, backPrompt? : any, ext? : any) {
+		var ability = this;
+		// TODO: Buttons (use portraits for target?)
 
-Ability.prototype.enabledCondition = function(encounter : Encounter, caster : Entity) {
-	var onCooldown = encounter ? this.OnCooldown(caster.GetCombatEntry(encounter)) : false;
+		var target : any[] = [];
+		let party = GAME().party;
 
-	return Ability.EnabledCost(this, caster) && !onCooldown;
-}
+		switch(ability.targetMode) {
+			case TargetMode.All:
+				_.each(party.members, function(t) {
+					// Don't add incapacitated
+					var incap = t.Incapacitated();
+					if(incap) return;
 
-Ability.prototype.OnCooldown = function(casterEntry : any) {
-	var ability = this;
-	var onCooldown = false;
-	_.each(casterEntry.cooldown, function(c) {
-		if(ability == c.ability) {
-			onCooldown = c.cooldown;
-			return false;
+					target.push({
+						nameStr : t.name,
+						func    : function(t : Entity) {
+							ability.Use(encounter, caster, t, ext);
+						},
+						enabled : ability.enabledTargetCondition(encounter, caster, t),
+						obj     : t
+					});
+				});
+				_.each(encounter.enemy.members, function(t) {
+					// Don't add incapacitated
+					var incap = t.Incapacitated();
+					if(incap) return;
+
+					target.push({
+						nameStr : t.uniqueName || t.name,
+						func    : function(t : Entity) {
+							ability.Use(encounter, caster, t, ext);
+						},
+						enabled : ability.enabledTargetCondition(encounter, caster, t),
+						obj     : t
+					});
+				});
+
+				Gui.SetButtonsFromList(target, true, backPrompt);
+				return true;
+
+			case TargetMode.Self:
+				ability.Use(encounter, caster, null, ext);
+				break;
+
+			case TargetMode.Ally:
+			case TargetMode.AllyNotSelf:
+			case TargetMode.AllyFallen:
+				_.each(party.members, function(t) {
+					// Don't add self unless allowed
+					if(ability.targetMode == TargetMode.AllyNotSelf && t == caster) return;
+					// Don't add incapacitated unless allowed
+					var incap = t.Incapacitated();
+					if(ability.targetMode == TargetMode.AllyFallen && !t.incap()) return;
+					else if(incap) return;
+
+					target.push({
+						nameStr : t.name,
+						func    : function(t : Entity) {
+							ability.Use(encounter, caster, t, ext);
+						},
+						enabled : ability.enabledTargetCondition(encounter, caster, t),
+						obj     : t
+					});
+				});
+
+				Gui.SetButtonsFromList(target, true, backPrompt);
+				return true;
+
+			case TargetMode.Enemy:
+				_.each(encounter.enemy.members, function(t) {
+					// Don't add incapacitated
+					var incap = t.Incapacitated();
+					if(incap) return;
+
+					target.push({
+						nameStr : t.uniqueName || t.name,
+						func    : function(t : Entity) {
+							ability.Use(encounter, caster, t, ext);
+						},
+						enabled : ability.enabledTargetCondition(encounter, caster, t),
+						obj     : t
+					});
+				});
+
+				Gui.SetButtonsFromList(target, true, backPrompt);
+				return true;
+
+			case TargetMode.Party:
+				ability.Use(encounter, caster, party, ext);
+				break;
+			case TargetMode.Enemies:
+				ability.Use(encounter, caster, encounter.enemy, ext);
+				break;
+			default:
+				encounter.CombatTick();
 		}
-	});
-	return onCooldown;
-}
-
-Ability.prototype.enabledTargetCondition = function(encounter : Encounter, caster : Entity, target : Entity) {
-	return true;
-}
-
-Ability.prototype.CostStr = function() {
-	var str = "";
-	if(this.cost.hp || this.cost.sp || this.cost.lp) {
-		if(this.cost.hp) str += Text.Damage(this.cost.hp + "HP ");
-		if(this.cost.sp) str += Text.Mana(this.cost.sp + "SP ");
-		if(this.cost.lp) str += Text.Lust(this.cost.lp + "LP ");
 	}
-	else
-		return Text.Bold("Free");
 
-	return str;
-}
+	Use(encounter : Encounter, caster : Entity, target : Entity, ext? : any) {
+		Ability.ApplyCost(this, caster);
+		this.StartCast(encounter, caster, target);
 
-Ability.ToHit = function(hit : number, evade : number) {
-	return 2 / (1+Math.exp(-2.5*hit/evade)) - 1;
-}
+		var entry = caster.GetCombatEntry(encounter);
 
-/*
-Ability.Damage = function(atk, def) {
-	return atk * (atk / (2.2*def+30));
-}
-*/
-Ability.Damage = function(atk : number, def : number, casterLvl : number = 1, targetLvl : number = 1) {
-	var maxDefense = (2+Stat.growthPerPoint*Stat.growthPointsPerLevel*(targetLvl-1)) * (targetLvl+9)*2 + 100;
-	var modRatio = Math.pow(maxDefense/def, 1.3);
-	var logistics = 1/(1+Math.exp(-1*modRatio));
-	var defFactor = 2*logistics-1;
+		// Set cooldown
+		if(this.cooldown) {
+			entry.cooldown = entry.cooldown || [];
+			entry.cooldown.push({
+				cooldown: this.cooldown,
+				ability: this
+			});
+		}
 
-	var levelFactor = 1.8 - 16/(5*Math.PI) * Math.atan((targetLvl+10)/(casterLvl+10));
+		if(this.castTime > 0) {
+			entry.initiative = 100 - this.castTime; //TODO: not really good to have the fixed 100 here...
+			entry.casting = {
+				ability : this,
+				target  : target
+			};
 
-	return defFactor * atk * levelFactor;
+			Text.Flush();
+			Gui.NextPrompt(function() {
+				encounter.CombatTick();
+			});
+		}
+		else {
+			this.CastInternal(encounter, caster, target);
+		}
+	}
+
+	UseOutOfCombat(caster : Entity, target : Entity) {
+		Ability.ApplyCost(this, caster);
+		this.StartCast(null, caster, target);
+		this.CastInternal(null, caster, target);
+	}
+
+	enabledCondition(encounter : Encounter, caster : Entity) {
+		var onCooldown = encounter ? this.OnCooldown(caster.GetCombatEntry(encounter)) : false;
+
+		return Ability.EnabledCost(this, caster) && !onCooldown;
+	}
+
+	OnCooldown(casterEntry : any) {
+		var ability = this;
+		var onCooldown = false;
+		_.each(casterEntry.cooldown, function(c) {
+			if(ability == c.ability) {
+				onCooldown = c.cooldown;
+				return false;
+			}
+		});
+		return onCooldown;
+	}
+
+	enabledTargetCondition(encounter : Encounter, caster : Entity, target : Entity) {
+		return true;
+	}
+
+	CostStr() {
+		var str = "";
+		if(this.cost.hp || this.cost.sp || this.cost.lp) {
+			if(this.cost.hp) str += Text.Damage(this.cost.hp + "HP ");
+			if(this.cost.sp) str += Text.Mana(this.cost.sp + "SP ");
+			if(this.cost.lp) str += Text.Lust(this.cost.lp + "LP ");
+		}
+		else
+			return Text.Bold("Free");
+
+		return str;
+	}
+
+	static EnabledCost(ab : any, caster : Entity) {
+		if(_.isObject(ab.cost)) {
+			if(ab.cost.hp && ab.cost.hp > caster.curHp) return false;
+			if(ab.cost.sp && ab.cost.sp > caster.curSp) return false;
+			if(ab.cost.lp && ab.cost.lp > caster.curLust) return false;
+		}
+		return true;
+	}
+
+	static ApplyCost(ab : any, caster : Entity) {
+		if(_.isObject(ab.cost)) {
+			if(ab.cost.hp) caster.curHp -= ab.cost.hp;
+			if(ab.cost.sp) caster.curSp -= ab.cost.sp;
+			if(ab.cost.lp) caster.curLust -= ab.cost.lp;
+		}
+	}
+
+	static ToHit(hit : number, evade : number) {
+		return 2 / (1+Math.exp(-2.5*hit/evade)) - 1;
+	}
+
+	static Damage(atk : number, def : number, casterLvl : number = 1, targetLvl : number = 1) {
+		var maxDefense = (2+Stat.growthPerPoint*Stat.growthPointsPerLevel*(targetLvl-1)) * (targetLvl+9)*2 + 100;
+		var modRatio = Math.pow(maxDefense/def, 1.3);
+		var logistics = 1/(1+Math.exp(-1*modRatio));
+		var defFactor = 2*logistics-1;
+
+		var levelFactor = 1.8 - 16/(5*Math.PI) * Math.atan((targetLvl+10)/(casterLvl+10));
+
+		return defFactor * atk * levelFactor;
+	}
+
 }
 
 export class AbilityCollection {
@@ -346,4 +352,4 @@ export class AbilityCollection {
 	}
 }
 
-export { Ability, TargetMode };
+export { TargetMode };
