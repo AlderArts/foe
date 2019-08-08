@@ -14,6 +14,9 @@ import { HalloweenItems } from '../items/halloween';
 let HalloweenScenes = {};
 HalloweenScenes.HW = null;
 
+// Put here instead of in Halloween items in order to prevent circular reference.
+HalloweenItems.SqueakyToy.Long = function() { return HalloweenScenes.HW.Werewolf() ? "It takes all your willpower to avoid giving in and chewing on this stupid toy every time it squeaks..." : "It squeaks when you squeeze it… kinda useless, though you suppose it could be useful when distracting a dog?"; }
+
 //Will be used for temporary variable storage.
 function Halloween() {
 	// Save player/party
