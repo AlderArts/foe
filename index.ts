@@ -25,8 +25,6 @@ import './js/saver.js';
 import './js/statuseffect.js';
 import './js/ability.js';
 
-import './js/stat.js';
-
 import './js/pregnancy.js';
 import './js/lactation.js';
 

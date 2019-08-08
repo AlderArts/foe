@@ -141,7 +141,6 @@ function Setup() {
 	// Basic menu
 	Input.menuButtons[0].Setup("Data", DataPrompt, true);
 
-
 	Gui.Render();
 }
 

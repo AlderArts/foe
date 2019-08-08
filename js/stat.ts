@@ -1,6 +1,7 @@
 import { GetDEBUG } from "../app";
+import { Text } from "./text";
 
-function Stat(base, growth, growthStep) {
+function Stat(base : number, growth : number, growthStep : number) {
 	this.base   = base || 0; // Base stat, increased by levelling and TFs
 	this.bonus  = 0; // Bonuses got by equipment/auras/perks etc
 	this.level  = 0; // Bonuses got from levels
@@ -16,11 +17,13 @@ Stat.growthPointsPerLevel = 3;
 
 Stat.prototype.Get = function() { return this.base + this.bonus + this.level + this.temp + this.cheat; }
 Stat.prototype.Clear = function() { this.bonus = 0; this.temp = 0; }
-Stat.prototype.GrowthRank = function() { return Math.round(((this.growth-this.growthBase) / this.growthStep) + 1, -1); }
+Stat.prototype.GrowthRank = function() {
+	return Math.round(((this.growth-this.growthBase) / this.growthStep) + 1); //, -1);
+}
 // Changes _ONE_ stat, closing in on the ideal
 // Cap the change to a maximum value
 // Returns the applied difference, unless the diff is zero
-Stat.prototype.IdealStat = function(ideal, maxChange, fraction) {
+Stat.prototype.IdealStat = function(ideal : number, maxChange : number, fraction : number) {
 	ideal = ideal || 0;
 	maxChange = maxChange || 1;
 	var diff = ideal - this.base;
@@ -48,7 +51,7 @@ Stat.prototype.IdealStat = function(ideal, maxChange, fraction) {
 // Changes _ONE_ stat, closing in on the ideal (ONLY INC)
 // Cap the change to a maximum value
 // Returns the applied difference (positive), unless the diff is zero
-Stat.prototype.IncreaseStat = function(ideal, maxChange, fraction) {
+Stat.prototype.IncreaseStat = function(ideal : number, maxChange : number, fraction : number) {
 	ideal = ideal || 0;
 	maxChange = maxChange || 1;
 	var diff = ideal - this.base;
@@ -74,7 +77,7 @@ Stat.prototype.IncreaseStat = function(ideal, maxChange, fraction) {
 // Changes _ONE_ stat, closing in on the ideal (ONLY DEC)
 // Cap the change to a maximum value
 // Returns the applied difference (positive), unless the diff is zero
-Stat.prototype.DecreaseStat = function(ideal, maxChange, fraction) {
+Stat.prototype.DecreaseStat = function(ideal : number, maxChange : number, fraction : number) {
 	ideal = ideal || 0;
 	maxChange = maxChange || 1;
 	var diff = this.base - ideal;

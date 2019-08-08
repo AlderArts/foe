@@ -14,6 +14,7 @@ import { Text } from './text';
 import { Input } from './input';
 import { Images } from './assets';
 import { loadfileOverlay } from './fileoverlay';
+//import { Saver } from './saver'; TODO Circular dep
 //import { Alchemy } from './alchemy'; TODO Circular dep
 //import { Quest } from './quest'; TODO Circular dep
 
@@ -27,6 +28,7 @@ let Exploration = {
 function SetExploreButtons() {
 	let player = GAME().player;
 	let party = GAME().party;
+
 	var waitLocation = party.location.wait();
 	// At safe locations you can sleep and save
 	var safeLocation = party.location.safe();
