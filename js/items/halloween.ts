@@ -1,7 +1,8 @@
 import { Item, ItemType, ItemSubtype } from '../item';
 import { Cock } from '../body/cock';
+import { HalloweenScenes } from '../event/halloween';
 
-let HalloweenItems = {};
+let HalloweenItems : any = {};
 
 HalloweenItems.SkimpyCostume = new Item("hw0", "Costume", ItemType.Armor);
 HalloweenItems.SkimpyCostume.price = 0;
@@ -62,7 +63,7 @@ HalloweenItems.SqueakyToy.price = 0;
 HalloweenItems.SqueakyToy.sDesc = function() { return "squeaky bone"; }
 HalloweenItems.SqueakyToy.lDesc = function() { return "a squeaky bone"; }
 HalloweenItems.SqueakyToy.Short = function() { return "Squeaky bone"; }
-HalloweenItems.SqueakyToy.Long = function() { return Scenes.Halloween.HW.Werewolf() ? "It takes all your willpower to avoid giving in and chewing on this stupid toy every time it squeaks..." : "It squeaks when you squeeze it… kinda useless, though you suppose it could be useful when distracting a dog?"; }
+HalloweenItems.SqueakyToy.Long = function() { return HalloweenScenes.HW.Werewolf() ? "It takes all your willpower to avoid giving in and chewing on this stupid toy every time it squeaks..." : "It squeaks when you squeeze it… kinda useless, though you suppose it could be useful when distracting a dog?"; }
 
 
 HalloweenItems.Bread = new Item("hw7", "Stale bread", ItemType.Quest);

@@ -2,7 +2,7 @@ import { Item, ItemType, ItemSubtype } from '../item';
 import { Cock } from '../body/cock';
 import { Race } from '../body/race';
 
-let StrapOnItems = {};
+let StrapOnItems : any  = {};
 
 StrapOnItems.PlainStrapon = new Item("strapon0", "Plain strap-on", ItemType.Toy);
 StrapOnItems.PlainStrapon.price = 40;

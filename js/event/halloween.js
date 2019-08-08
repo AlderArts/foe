@@ -6,12 +6,13 @@ import { Gender } from '../body/gender';
 import { WorldTime, GameCache } from '../GAME';
 import { Player } from './player';
 import { Party } from '../party';
-import { Items } from '../items';
 import { EntityStorage, MoveToLocation } from '../GAME';
 import { Gui } from '../gui';
 import { Text } from '../text';
+import { HalloweenItems } from '../items/halloween';
 
 let HalloweenScenes = {};
+HalloweenScenes.HW = null;
 
 //Will be used for temporary variable storage.
 function Halloween() {
@@ -20,7 +21,7 @@ function Halloween() {
 	this.party = GAME().party.ToStorage();
 	// Remove all equipment/items/coin
 	GAME().player.Strip();
-	GAME().player.topArmorSlot = Items.Halloween.SkimpyCostume;
+	GAME().player.topArmorSlot = HalloweenItems.SkimpyCostume;
 	GAME().player.Equip();
 	GAME().party.coin = 0;
 	GAME().party.inventory = new Inventory();
@@ -546,8 +547,8 @@ Halloween.Loc.Camp.events.push(new Link(
 			Text.NL();
 			Text.Add("<i>“Remember, I know of many myths and legends that may contain answers to questions that may arise in your journeys. If you come across challenges and questions to which you desire knowledge, seek me out and I will tell you what I can. Stay safe, young one.”</i> And with that, he returns to tending to the dying embers of the campfire.", parse);
 			
-			GAME().party.Inv().AddItem(Items.Halloween.Lantern);
-			GAME().party.Inv().AddItem(Items.Halloween.Stake);
+			GAME().party.Inv().AddItem(HalloweenItems.Lantern);
+			GAME().party.Inv().AddItem(HalloweenItems.Stake);
 		}
 		else {
 			Text.Add("Crouching down so that you’re on level with the robed figure, you ask if he’s any advice to dispense forthwith. He thinks a moment, then replies:", parse);
@@ -1095,7 +1096,7 @@ HalloweenScenes.RonnieFirst = function() {
 						Gui.SetButtonsFromList(options, false, null);
 					}, enabled : true
 				});
-				if(GAME().party.Inv().QueryNum(Items.Halloween.SqueakyToy)) {
+				if(GAME().party.Inv().QueryNum(HalloweenItems.SqueakyToy)) {
 					options.push({ nameStr : "Squeaky Bone!",
 						tooltip : "It’s a long shot, but maybe you can distract him with a doggie toy.",
 						func : function() {
@@ -1121,7 +1122,7 @@ HalloweenScenes.RonnieFirst = function() {
 							Text.Add("With a shrug of your shoulders, you turn and start making your way back to the road proper. Ronnie should be just fine out there on his own, no need to worry.", parse);
 							Text.Flush();
 							
-							GAME().party.Inv().RemoveItem(Items.Halloween.SqueakyToy);
+							GAME().party.Inv().RemoveItem(HalloweenItems.SqueakyToy);
 							
 							HalloweenScenes.HW.ronnie = Halloween.Ronnie.Removed;
 							
@@ -1253,9 +1254,9 @@ HalloweenScenes.WerewolfTF = function() {
 	}
 	
 	//Items/clothes
-	GAME().party.Inv().RemoveItem(Items.Halloween.SkimpyCostume); //Temp measure
-	GAME().player.topArmorSlot = Items.Halloween.WerewolfHide;
-	GAME().player.weaponSlot = Items.Halloween.WerewolfClaw;
+	GAME().party.Inv().RemoveItem(HalloweenItems.SkimpyCostume); //Temp measure
+	GAME().player.topArmorSlot = HalloweenItems.WerewolfHide;
+	GAME().player.weaponSlot = HalloweenItems.WerewolfClaw;
 	GAME().player.Equip();
 	
 	//Werewolf TF
@@ -1659,7 +1660,7 @@ HalloweenScenes.Kiai = function() {
 					HalloweenScenes.KiaiGangrape();
 				}, enabled : true
 			});
-			if(GAME().party.Inv().QueryNum(Items.Halloween.HolyWater)) {
+			if(GAME().party.Inv().QueryNum(HalloweenItems.HolyWater)) {
 				options.push({ nameStr : "Holy Water",
 					tooltip : "Holy water’s supposed to be good against the undead, isn’t it?",
 					func : function() {
@@ -1677,7 +1678,7 @@ HalloweenScenes.Kiai = function() {
 					}, enabled : true
 				});
 			}
-			if(GAME().party.Inv().QueryNum(Items.Halloween.Garlic)) {
+			if(GAME().party.Inv().QueryNum(HalloweenItems.Garlic)) {
 				options.push({ nameStr : "Garlic",
 					tooltip : "Maybe the garlic can help you here. It repels evil, right?",
 					func : function() {
@@ -1697,7 +1698,7 @@ HalloweenScenes.Kiai = function() {
 					}, enabled : true
 				});
 			}
-			if(GAME().party.Inv().QueryNum(Items.Halloween.Shades)) {
+			if(GAME().party.Inv().QueryNum(HalloweenItems.Shades)) {
 				options.push({ nameStr : "Shades",
 					tooltip : "The shades! You're not sure how they will work against the zombies, but perhaps it's time to try your luck...",
 					func : function() {
@@ -1721,7 +1722,7 @@ HalloweenScenes.Kiai = function() {
 					}, enabled : true
 				});
 			}
-			if(GAME().party.Inv().QueryNum(Items.Halloween.SqueakyToy)) {
+			if(GAME().party.Inv().QueryNum(HalloweenItems.SqueakyToy)) {
 				options.push({ nameStr : "Dog Bone",
 					tooltip : "Do zombies like to play fetch?",
 					func : function() {
@@ -3490,7 +3491,7 @@ HalloweenScenes.HarthonFirst = function() {
 			}
 		}, enabled : true
 	});
-	if(GAME().party.Inv().QueryNum(Items.Halloween.Garlic)) {
+	if(GAME().party.Inv().QueryNum(HalloweenItems.Garlic)) {
 		options.push({ nameStr : "Use garlic!",
 			tooltip : "That pack the merchant gave you; it’s your only hope!",
 			func : function() {
@@ -3655,7 +3656,7 @@ HalloweenScenes.HarthonDefeatedPrompt = function() {
 			Gui.SetButtonsFromList(options, false, null);
 		}, enabled : true
 	});
-	if(GAME().party.Inv().QueryNum(Items.Halloween.HolyWater) &&
+	if(GAME().party.Inv().QueryNum(HalloweenItems.HolyWater) &&
 		!(HalloweenScenes.HW.harthon & Halloween.Harthon.Feminized)) {
 		options.push({ nameStr : "Holy Water",
 			tooltip : "If the garlic did this, what might the Holy Water do? Can’t hurt to give it a shot.",
@@ -3688,7 +3689,7 @@ HalloweenScenes.HarthonDefeatedPrompt = function() {
 				Text.Add("As ‘Lady’ Harthon writhes, her legs splayed casually, you can see the crotch of her pants growing damp with arousal. You could put her out of her misery, if you wanted to...", parse);
 				
 				HalloweenScenes.HW.harthon |= Halloween.Harthon.Feminized;
-				GAME().party.Inv().RemoveItem(Items.Halloween.HolyWater);
+				GAME().party.Inv().RemoveItem(HalloweenItems.HolyWater);
 				
 				Text.Flush();
 				
@@ -4706,7 +4707,7 @@ HalloweenScenes.HarthonThrallPrompt = function(parse) {
 		}, enabled : true
 	});
 	*/
-	if(!femHarthon && GAME().party.Inv().QueryNum(Items.Halloween.HolyWater)) {
+	if(!femHarthon && GAME().party.Inv().QueryNum(HalloweenItems.HolyWater)) {
 		options.push({ nameStr : "Holy Water",
 			tooltip : "You wish to conduct a little experiment.",
 			func : function() {
@@ -4863,7 +4864,7 @@ HalloweenScenes.HarthonThrallPrompt = function(parse) {
 				Text.NL();
 				
 				HalloweenScenes.HW.harthon |= Halloween.Harthon.Feminized = true;
-				GAME().party.Inv().RemoveItem(Items.Halloween.HolyWater);
+				GAME().party.Inv().RemoveItem(HalloweenItems.HolyWater);
 				
 				HalloweenScenes.HarthonPitchVag(parse);
 			}, enabled : true
@@ -5441,7 +5442,7 @@ HalloweenScenes.LaggothDistract = function() {
 	
 	//[Holy Water][Stake][Garlic][Bread]
 	var options = new Array();
-	if(GAME().party.Inv().QueryNum(Items.Halloween.HolyWater)) {
+	if(GAME().party.Inv().QueryNum(HalloweenItems.HolyWater)) {
 		options.push({ nameStr : "Holy Water",
 			tooltip : "Holy water should be effective against demons. Splash it on him!",
 			func : function() {
@@ -5488,7 +5489,7 @@ HalloweenScenes.LaggothDistract = function() {
 				Text.NL();
 				Text.Add("The little buggers don’t waste any time. Scampering up and onto their former master, each and every one of the imps jostle and shove against each other, vying for the best spot on this sweet chunk of female flesh. Well, best to leave them to it - smiling at a job well-done, you turn your back on the rather one-sided orgy and make to leave the chapel. The last sight you have of the now demon queen is that of two of her imps trying to fit their shafts into her tight, elastic cunt at once, one sliding his entire body through her bountiful breasts and several just grinding against her soft, hellish fur. There’s no doubt that after tonight, Laggoth will no doubt have a very different outlook on life.", parse);
 				
-				GAME().party.Inv().RemoveItem(Items.Halloween.HolyWater);
+				GAME().party.Inv().RemoveItem(HalloweenItems.HolyWater);
 				
 				Text.Flush();
 				
@@ -5561,7 +5562,7 @@ HalloweenScenes.LaggothDistract = function() {
 			Gui.NextPrompt();
 		}, enabled : true
 	});
-	if(GAME().party.Inv().QueryNum(Items.Halloween.Garlic)) {
+	if(GAME().party.Inv().QueryNum(HalloweenItems.Garlic)) {
 		options.push({ nameStr : "Garlic",
 			tooltip : "Garlic is supposed to ward off evil… let’s see if it’s strong enough to ward off this evil.",
 			func : function() {
@@ -5578,7 +5579,7 @@ HalloweenScenes.LaggothDistract = function() {
 			}, enabled : true
 		});
 	}
-	if(GAME().party.Inv().QueryNum(Items.Halloween.Bread)) {
+	if(GAME().party.Inv().QueryNum(HalloweenItems.Bread)) {
 		options.push({ nameStr : "Bread",
 			tooltip : "That stick of bread you have… it’s perfectly useable as a club. Go to town!",
 			func : function() {
@@ -6699,12 +6700,12 @@ HalloweenScenes.Patches = function() {
 		
 		HalloweenScenes.HW.flags |= Halloween.Flags.Carepack;
 		
-		party.Inv().AddItem(Items.Halloween.HolyWater);
-		party.Inv().AddItem(Items.Halloween.Garlic);
-		party.Inv().AddItem(Items.Halloween.Shades);
-		party.Inv().AddItem(Items.Halloween.Bread);
-		party.Inv().AddItem(Items.Halloween.SqueakyToy);
-		party.Inv().AddItem(Items.Halloween.Guide);
+		party.Inv().AddItem(HalloweenItems.HolyWater);
+		party.Inv().AddItem(HalloweenItems.Garlic);
+		party.Inv().AddItem(HalloweenItems.Shades);
+		party.Inv().AddItem(HalloweenItems.Bread);
+		party.Inv().AddItem(HalloweenItems.SqueakyToy);
+		party.Inv().AddItem(HalloweenItems.Guide);
 		
 		Gui.NextPrompt();
 	};

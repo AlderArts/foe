@@ -1,7 +1,9 @@
 import { Item, ItemType } from '../item';
 import { GAME } from '../GAME';
+import { Text } from '../text';
+import { Entity } from '../entity';
 
-let IngredientItems = {};
+let IngredientItems : any = {};
 
 IngredientItems.HorseHair = new Item("equin1", "Horse hair", ItemType.Ingredient);
 IngredientItems.HorseHair.price = 1;
@@ -76,7 +78,7 @@ IngredientItems.LizardEgg = new Item("rept3", "L.Egg", ItemType.Ingredient);
 IngredientItems.LizardEgg.price = 2;
 IngredientItems.LizardEgg.sDesc = function() { return "lizard egg"; }
 IngredientItems.LizardEgg.Long = function() { return "An unfertilized lizard egg. Good for a snack."; }
-IngredientItems.LizardEgg.Use = function(target) {
+IngredientItems.LizardEgg.Use = function(target : Entity) {
 	target.AddHPFraction(0.02);
 	var parse = { name: target.NameDesc(), s: target == GAME().player ? "" : "s" };
 	Text.Add("[name] eat[s] a lizard egg. It is slightly invigorating.", parse);
@@ -101,7 +103,7 @@ IngredientItems.GoatMilk = new Item("goat1", "G.Milk", ItemType.Ingredient);
 IngredientItems.GoatMilk.price = 2;
 IngredientItems.GoatMilk.sDesc = function() { return "goat milk"; }
 IngredientItems.GoatMilk.Long = function() { return "A bottle of goat milk."; }
-IngredientItems.GoatMilk.Use = function(target) {
+IngredientItems.GoatMilk.Use = function(target : Entity) {
 	target.AddHPFraction(0.02);
 	var parse = { name: target.NameDesc(), s: target == GAME().player ? "" : "s" };
 	Text.Add("[name] drink[s] a bottle of milk. It is slightly invigorating.", parse);
@@ -120,7 +122,7 @@ IngredientItems.SheepMilk = new Item("ovis1", "S.Milk", ItemType.Ingredient);
 IngredientItems.SheepMilk.price = 2;
 IngredientItems.SheepMilk.sDesc = function() { return "sheep milk"; }
 IngredientItems.SheepMilk.Long = function() { return "A bottle of sheep milk."; }
-IngredientItems.SheepMilk.Use = function(target) {
+IngredientItems.SheepMilk.Use = function(target : Entity) {
 	target.AddHPFraction(0.02);
 	var parse = { name: target.NameDesc(), s: target == GAME().player ? "" : "s" };
 	Text.Add("[name] drink[s] a bottle of milk. It is slightly invigorating.", parse);
@@ -139,7 +141,7 @@ IngredientItems.CowMilk = new Item("bov1", "Milk", ItemType.Ingredient);
 IngredientItems.CowMilk.price = 2;
 IngredientItems.CowMilk.sDesc = function() { return "cow milk"; }
 IngredientItems.CowMilk.Long = function() { return "A bottle of ordinary cow milk."; }
-IngredientItems.CowMilk.Use = function(target) {
+IngredientItems.CowMilk.Use = function(target : Entity) {
 	target.AddHPFraction(0.02);
 	var parse = { name: target.NameDesc(), s: target == GAME().player ? "" : "s" };
 	Text.Add("[name] drink[s] a bottle of milk. It is slightly invigorating.", parse);
@@ -178,7 +180,7 @@ IngredientItems.DogBiscuit.price = 3;
 IngredientItems.DogBiscuit.sDesc = function() { return "dog biscuit"; }
 IngredientItems.DogBiscuit.Short = function() { return "A dog biscuit"; }
 IngredientItems.DogBiscuit.Long = function() { return "A biscuit, commonly given to dogs as a reward. It doesn't taste very good."; }
-IngredientItems.DogBiscuit.Use = function(target) {
+IngredientItems.DogBiscuit.Use = function(target : Entity) {
 	target.AddHPFraction(0.02);
 	var parse = { name: target.NameDesc(), s: target == GAME().player ? "" : "s" };
 	Text.Add("[name] chew[s] on a dog biscuit. It is slightly invigorating.", parse);
@@ -238,7 +240,7 @@ IngredientItems.DemonSeed = new Item("demon4", "Demon seed", ItemType.Ingredient
 IngredientItems.DemonSeed.price = 0;
 IngredientItems.DemonSeed.sDesc = function() { return "demonic seed"; }
 IngredientItems.DemonSeed.Long = function() { return "A vial filled with demon cum."; }
-IngredientItems.DemonSeed.Use = function(target) {
+IngredientItems.DemonSeed.Use = function(target : Entity) {
 	target.AddLustFraction(0.1);
 	target.RestoreCum(2);
 	var parse = {
@@ -259,7 +261,7 @@ IngredientItems.Hummus.price = 2;
 IngredientItems.Hummus.sDesc = function() { return "hummus"; }
 IngredientItems.Hummus.Short = function() { return "Hummus. Looks edible"; }
 IngredientItems.Hummus.Long = function() { return "Hummus: a foodlike substance."; }
-IngredientItems.Hummus.Use = function(target) {
+IngredientItems.Hummus.Use = function(target : Entity) {
 	target.AddHPFraction(0.03);
 	var parse = { name: target.NameDesc(), s: target == GAME().player ? "" : "s" };
 	Text.Add("[name] eat[s] some hummus. It is slightly invigorating.", parse);
@@ -368,7 +370,7 @@ IngredientItems.RawHoney.price = 5;
 IngredientItems.RawHoney.sDesc = function() { return "raw honey"; }
 IngredientItems.RawHoney.Short = function() { return "Raw honey"; }
 IngredientItems.RawHoney.Long = function() { return "A small jar of raw honey."; }
-IngredientItems.RawHoney.Use = function(target) {
+IngredientItems.RawHoney.Use = function(target : Entity) {
 	target.AddHPFraction(0.02);
 	var parse = { name: target.NameDesc(), s: target == GAME().player ? "" : "s" };
 	Text.Add("[name] eat[s] a small jar of sweet honey. It is slightly invigorating.", parse);

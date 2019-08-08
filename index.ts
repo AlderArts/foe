@@ -71,20 +71,6 @@ import './js/ability/white.js';
 import './js/ability/black.js';
 import './js/ability/enemyskill.js';
 
-// Items
-import './js/items/quest.js';
-import './js/items/ingredients.js';
-import './js/items/alchemy.js';
-import './js/items/alchemyspecial.js';
-import './js/items/toys.js';
-import './js/items/cards.js';
-import './js/items/accessories.js';
-import './js/items/armor.js';
-import './js/items/strapon.js';
-import './js/items/weapons.js';
-
-import './js/items/halloween.js';
-
 import './js/alchemy.js';
 import './js/quest.js';
 import './js/cavalcade.js';

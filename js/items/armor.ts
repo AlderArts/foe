@@ -1,6 +1,6 @@
 import { Item, ItemType, ItemSubtype } from '../item';
 
-let ArmorItems = {};
+let ArmorItems : any = {};
 
 ArmorItems.LeatherChest = new Item("chest0", "L.Chest", ItemType.Armor);
 ArmorItems.LeatherChest.price = 40;

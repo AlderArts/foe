@@ -1,7 +1,7 @@
 
 import { Item, ItemType } from '../item';
 
-let QuestItems = {};
+let QuestItems : any = {};
 
 QuestItems.Cactoid = new Item("quest0", "Cactoid", ItemType.Quest);
 QuestItems.Cactoid.price = 0;

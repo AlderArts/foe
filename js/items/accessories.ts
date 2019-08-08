@@ -1,7 +1,7 @@
 import { Item, ItemType } from '../item';
 import { StatusEffect } from '../statuseffect';
 
-let AccItems = {};
+let AccItems : any = {};
 
 AccItems.CrudeBook = new Item("book0", "C.Book", ItemType.Accessory);
 AccItems.CrudeBook.price = 20;

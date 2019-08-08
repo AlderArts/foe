@@ -3,8 +3,12 @@
  */
 import { Item, ItemType } from '../item';
 
-let CardItems = {};
-CardItems.Light = [];
+let CardItems : any = {
+    Light : [],
+    Darkness : [],
+    Shadow : [],
+};
+
 CardItems.Light[0] = new Item("cardL1", "[L1] Lady", ItemType.Card);
 CardItems.Light[0].val = 0;
 CardItems.Light[0].suit = 0;
@@ -31,7 +35,6 @@ CardItems.Light[4].suit = 0;
 CardItems.Light[4].Short = function() { return "The Maiden of Light"; }
 CardItems.Light[4].Long = function() { return "The Maiden of Light, a playing card from the game Cavalcade."; }
 
-CardItems.Darkness = [];
 CardItems.Darkness[0] = new Item("cardD1", "[D1] Queen", ItemType.Card);
 CardItems.Darkness[0].val = 0;
 CardItems.Darkness[0].suit = 1;
@@ -58,7 +61,6 @@ CardItems.Darkness[4].suit = 1;
 CardItems.Darkness[4].Short = function() { return "The Harlot of Darkness"; }
 CardItems.Darkness[4].Long = function() { return "The Harlot of Darkness, a playing card from the game Cavalcade."; }
 
-CardItems.Shadow = [];
 CardItems.Shadow[0] = new Item("cardS1", "[S1] Avatar", ItemType.Card);
 CardItems.Shadow[0].val = 0;
 CardItems.Shadow[0].suit = 2;
