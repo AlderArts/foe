@@ -18,6 +18,23 @@ export function GameCache() {
 	return gameCache;
 }
 
+let world : any = {
+	// Prototype initialization
+	SaveSpots     : {},
+};
+
+world.Locations = {
+	Plains    : 0,
+	Forest    : 1,
+	Desert    : 2,
+	Highlands : 3,
+	Lake      : 4
+};
+
+export function WORLD() {
+	return world;
+}
+
 let worldTime : any = null;
 
 export function InitWorldTime(time : any) {

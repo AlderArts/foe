@@ -12,6 +12,7 @@ import { Text } from './text';
 import { Intro } from './event/introduction';
 import { SetGameCache } from './GAME';
 import { loadfileOverlay } from './fileoverlay';
+import { InitWorld } from './world';
 
 // Prevent selection
 $(function() {
@@ -133,6 +134,8 @@ function Setup() {
 		// Render first frame
 		setTimeout(Gui.Render, 100);
 	});
+
+	InitWorld();
 
 	// Intialize GUI (set key shortcuts, buttons etc)
 	Gui.Init();

@@ -2,7 +2,7 @@ import { Button } from './button';
 import { Images } from './assets';
 import { gameState, GameState } from './gamestate';
 
-let Input = {
+let Input : any = {
 
 	//TODO: Raphael sets?
 	buttons        : new Array(),
@@ -17,12 +17,12 @@ let Input = {
 	// Mouse button states and mouse position
 	mousebutton    : false,
 	MousePos       : {x: 0, y: 0}
-}
+};
 
-let Gui = null;
+let Gui : any = null;
 
 // Initialize input callbacks
-Input.Init = function(gui) {
+Input.Init = function(gui : any) {
 	Gui = gui;
 	var canvas = document.getElementById("canvas");
 
@@ -99,7 +99,7 @@ Input.RenderExploreButtonGlow = function() {
 	}
 	*/
 	// Add a glow effect if this button is the currently choosen exploration option
-	for(var i = 0; i < Input.exploreButtons.length; i++) {
+	for(let i = 0; i < Input.exploreButtons.length; i++) {
 		if(!Input.exploreButtons[i].image.is_visible()) continue;
 		if(!Input.exploreButtons[i].glow) continue;
 		if(Input.exploreButtons[i] == Gui.GetLastSubmenu())
@@ -152,7 +152,7 @@ let Keys = {
 	KEY_M : 77,
 }
 
-let KeyToText = {};
+let KeyToText : any = {};
 KeyToText[Keys.KEY_CONSOLE] = "§";
 
 KeyToText[Keys.KEY_1] = "1";
@@ -200,7 +200,7 @@ let UP_ARROW    = 2;
 let DOWN_ARROW  = 3;
 
 // Catches keypresses
-Input.Keydown = function(event) {
+Input.Keydown = function(event : any) {
 	// Used for text input, when we don't want to have shortcut keys active
 	if(!Input.keyDownValid)
 		return true;
@@ -208,20 +208,19 @@ Input.Keydown = function(event) {
 	//event.preventDefault();
 
 	// TODO: Prioritze layers
-	var i;
 	switch(gameState) {
 		case GameState.Game:
-			for(var i = 0; i < Input.menuButtons.length; i++)
+			for(let i = 0; i < Input.menuButtons.length; i++)
 				Input.menuButtons[i].HandleKeydown(event.keyCode);
-			for(var i = 0; i < Input.exploreButtons.length; i++)
+			for(let i = 0; i < Input.exploreButtons.length; i++)
 				Input.exploreButtons[i].HandleKeydown(event.keyCode);
 		case GameState.Event:
 		case GameState.Credits:
 		case GameState.Combat:
 		case GameState.Cavalcade:
-			for(var i = 0; i < Input.buttons.length; i++)
+			for(let i = 0; i < Input.buttons.length; i++)
 				Input.buttons[i].HandleKeydown(event.keyCode);
-			for(var i = 0; i < Input.navButtons.length; i++)
+			for(let i = 0; i < Input.navButtons.length; i++)
 				Input.navButtons[i].HandleKeydown(event.keyCode);
 		break;
 	}
@@ -237,7 +236,7 @@ Input.Keydown = function(event) {
 }
 
 // Catches key releases
-Input.Keyup = function(event) {
+Input.Keyup = function(event : any) {
 	/* TODO Not really used atm
 	switch(event.keyCode) {
 		case Keys.KEY_A: Input.keyinput[LEFT_ARROW]  = false; break;

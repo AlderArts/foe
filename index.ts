@@ -13,7 +13,6 @@ import './app.js';
 import './js/assets.js';
 
 import './js/utility.js';
-import './js/input.js';
 import './js/text.js';
 import './js/button.js';
 import './js/gui.js';
@@ -54,7 +53,6 @@ import './js/entity-sex.js';
 import './js/entity-dict.js';
 
 import './js/event/player.js';
-import './js/party.js';
 import './js/perks.js';
 
 // Combat
@@ -102,7 +100,6 @@ import './js/items/halloween.js';
 import './js/alchemy.js';
 import './js/quest.js';
 import './js/cavalcade.js';
-import './js/prison.js';
 
 // Locations and events
 import './js/event/introduction.js';

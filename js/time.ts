@@ -44,7 +44,7 @@ class Time {
 		return storage;
 	}
 
-	FromStorage(storage : any) {
+	FromStorage(storage? : any) {
 		storage = storage || {};
 		this.year   = parseInt(storage.y) || this.year;
 		this.season = parseInt(storage.s) || this.season;
@@ -73,7 +73,7 @@ class Time {
 		return true;
 	}
 
-	TimeToHour(hour : number, minute : number) {
+	TimeToHour(hour? : number, minute? : number) {
 		hour   = hour   || 0;
 		minute = minute || 0;
 		let step = {
@@ -91,7 +91,7 @@ class Time {
 		return step;
 	}
 
-	Inc(time : Time) {
+	Inc(time : any) {
 		let minutes = time.minute || 0;
 		let hours   = time.hour   || 0;
 		let days    = time.day    || 0;
@@ -122,7 +122,7 @@ class Time {
 		}
 	}
 
-	Dec(time : Time) {
+	Dec(time : any) {
 		let minutes = time.minute || 0;
 		let hours   = time.hour   || 0;
 		let days    = time.day    || 0;
@@ -161,7 +161,7 @@ class Time {
 		}
 	}
 
-	Expired() {
+	Expired() : boolean {
 		return (this.year   <= 0) &&
 			   (this.season <= 0) &&
 			   (this.day    <= 0) &&
@@ -169,7 +169,7 @@ class Time {
 			   (this.minute <= 0);
 	}
 
-	DateString() {
+	DateString() : string {
 		var season;
 		if(this.season == Season.Spring) season = "Spring";
 		else if(this.season == Season.Summer) season = "Summer";
@@ -187,7 +187,7 @@ class Time {
 		return day + dateExtension + " of " + season + ", year " + (this.year + 1);
 	}
 
-	DateStringShort() {
+	DateStringShort() : string {
 		var season;
 		if(this.season == Season.Spring) season = "Spring";
 		else if(this.season == Season.Summer) season = "Summer";
@@ -205,43 +205,43 @@ class Time {
 		return day + dateExtension + " of " + season;
 	}
 
-	TimeString() {
+	TimeString() : string {
 		let minutes = "00" + this.minute;
 		minutes = minutes.substr(minutes.length-2);
 		
 		return this.hour + ":" + minutes;
 	}
 
-	DayTime() {
+	DayTime() : string {
 		return this.hour >= 5  && this.hour < 10 ? "morning" :
 			this.hour >= 10 && this.hour < 17 ? "day"     :
 			this.hour >= 17 && this.hour < 21 ? "evening" :
 			"night";
 	}
 
-	IsDay() {
+	IsDay() : boolean {
 		return this.hour >= 8 && this.hour < 20;
 	}
 
 	// TODO: possible variations for location
-	LightStr(light : string, dark : string) {
+	LightStr(light : string, dark : string) : string {
 		return this.hour >= 6 && this.hour < 21 ? light : dark;
 	}
 
-	ToDays() {
+	ToDays() : number {
 		var day = this.day + this.hour/24 + this.minute/24/60;
 		day += this.season * 30;
 		day += this.year * Season.LAST * 30;
 		return day;
 	}
-	ToHours() {
+	ToHours() : number {
 		var hour = this.hour + this.minute/60;
 		hour += this.day * 24;
 		hour += this.season * 30 * 24;
 		hour += this.year * Season.LAST * 30 * 24;
 		return hour;
 	}
-	ToMinutes() {
+	ToMinutes() : number {
 		var minute = this.minute;
 		minute += this.hour * 60;
 		minute += this.day * 24 * 60;
