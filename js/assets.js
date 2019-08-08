@@ -5,6 +5,8 @@ import { CardItems } from './items/cards';
 
 let Images = {};
 
+Images.status = [];
+
 Images.bg           = "assets/img/gui/background.jpg";
 
 Images.pc_male      = "assets/img/male_pc.png";
@@ -162,7 +164,6 @@ let LoadCardImages = function(imageArray) {
 }
 
 function LoadStatusImages(imageArray) {
-	Images.status = [];
 	for(var i = 0; i < StatusEffect.LAST; i++) {
 		Images.status[i]  = "";
 	}
