@@ -4,7 +4,7 @@ import { Text } from '../text';
 import { Gui } from '../gui';
 import { TimeStep } from '../GAME';
 
-let PoetScenes = {};
+let PoetScenes : any = {};
 
 PoetScenes.Entry = function() {
 	var parse = {

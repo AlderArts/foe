@@ -165,7 +165,6 @@ import './js/event/royals/jeanne.js';
 import './js/event/royals/golem.js';
 
 import './js/event/room69.js';
-import './js/event/poet.js';
 
 import './js/event/nomads/chief.js';
 import './js/event/nomads/patchwork.js';
@@ -188,7 +187,6 @@ import './js/event/outlaws/cavalcade.js';
 
 import './js/event/raven.js';
 
-import './js/event/roaming.js';
 import './js/event/portalopening.js';
 import './js/event/citywatch.js';
 

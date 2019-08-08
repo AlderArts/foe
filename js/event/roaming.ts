@@ -3,13 +3,19 @@ import { Party } from "../party";
 import { Encounter } from "../combat";
 import { GameState, SetGameState } from "../gamestate";
 import { Gender } from "../body/gender";
-import { WorldTime, TimeStep } from "../GAME";
+import { WorldTime, TimeStep, GAME, WORLD } from "../GAME";
 import { Gui } from "../gui";
 import { Text } from "../text";
+import { IngredientItems } from "../items/ingredients";
+import { Entity } from "../entity";
+import { Bandit } from "../enemy/bandit";
+import { WeaponsItems } from "../items/weapons";
+import { AccItems } from "../items/accessories";
 
-let RoamingScenes = {};
+let RoamingScenes : any = {};
 
 RoamingScenes.FlowerPetal = function() {
+	let party = GAME().party;
 	var parse = {
 		
 	};
@@ -20,16 +26,19 @@ RoamingScenes.FlowerPetal = function() {
 	Text.Add("<b>You picked up some colorful flower petals.</b>", parse);
 	Text.Flush();
 	
-	party.inventory.AddItem(Items.FlowerPetal);
+	party.inventory.AddItem(IngredientItems.FlowerPetal);
 	
 	TimeStep({minute: 15});
 	Gui.NextPrompt();
 };
 
 RoamingScenes.FindSomeCoins = function() {
+	let party = GAME().party;
+	let world = WORLD();
+
 	var coin = Math.floor(5 + Math.random() * 20);
 	
-	var parse = {
+	var parse : any = {
 		year    : Math.floor(WorldTime().year - (40 + Math.random() * 20)),
 		rhisher : Math.random() < 0.5 ? "his" : "her",
 		coin    : coin
@@ -58,8 +67,16 @@ RoamingScenes.FindSomeCoins = function() {
 	Gui.NextPrompt();
 }
 
-RoamingScenes.KingdomPatrol = function(entering) {
-	var parse = {
+RoamingScenes.KingdomPatrol = function(entering : boolean) {
+	let player = GAME().player;
+	let party = GAME().party;
+	let rigard = GAME().rigard;
+	let terry = GAME().terry;
+	let kiakai = GAME().kiakai;
+	let lei = GAME().lei;
+	let world = WORLD();
+
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -213,7 +230,7 @@ RoamingScenes.KingdomPatrol = function(entering) {
 	scenes.Get();
 }
 
-RoamingScenes.BanditsGen = function(capt, levelbonus) {
+RoamingScenes.BanditsGen = function(capt : Entity, levelbonus : number) {
 	var CreateBandit = function() {
 		var rand = Math.random();
 		var gender = rand < 0.5 ? Gender.male :
@@ -234,7 +251,7 @@ RoamingScenes.BanditsGen = function(capt, levelbonus) {
 	var males   = 0;
 	var females = 0;
 	for(var i = 0; i < num; ++i) {
-		var bandit = CreateBandit();
+		let bandit : Entity = CreateBandit();
 		if(bandit.Gender() == Gender.male)
 			males++;
 		else
@@ -267,7 +284,7 @@ RoamingScenes.BanditsGen = function(capt, levelbonus) {
 	
 	var desc = scenes.Get();
 	
-	var enc = new Encounter(enemy);
+	var enc : any = new Encounter(enemy);
 	enc.canRun      = false;
 	enc.onEncounter = RoamingScenes.BanditsOnEncounter;
 	enc.onLoss      = RoamingScenes.BanditsLoss;
@@ -278,7 +295,7 @@ RoamingScenes.BanditsGen = function(capt, levelbonus) {
 	enc.rclothing = rclothing;
 	enc.capt = capt;
 	
-	enc.OnIncapacitate = function(entity) {
+	enc.OnIncapacitate = function(entity : Entity) {
 		Encounter.prototype.OnIncapacitate.call(this, entity);
 		var enc = this;
 		var enemy = enc.enemy;
@@ -298,17 +315,18 @@ RoamingScenes.BanditsGen = function(capt, levelbonus) {
 					enemy.SwitchOut(entity);
 					enemy.SwitchIn(bandit);
 
-					var ent = {
+					var ent : any = {
 						entity     : bandit,
 						isEnemy    : true,
 						initiative : 0,
-						aggro      : []};
+						aggro      : [],
+					};
 
 					enc.combatOrder.push(ent);
 					ent.entity.GetSingleTarget(enc, ent);
 
 					enc.Callstack.push(function() {
-						var parse = {};
+						var parse : any = {};
 						Text.Clear();
 						parse["hisher"] = entity.hisher();
 						Text.Add("Another bandit pushes through the interior door, replacing [hisher] fallen comrade.", parse);
@@ -328,8 +346,12 @@ RoamingScenes.BanditsGen = function(capt, levelbonus) {
 }
 
 RoamingScenes.Bandits = function() {
-	var bandits = rigard.bandits;
-	var parse = {
+	let player = GAME().player;
+	let party = GAME().party;
+	let rigard = GAME().rigard;
+	let bandits = rigard.bandits;
+
+	var parse : any = {
 		rclothing : bandits.rclothing
 	};
 	
@@ -487,7 +509,7 @@ RoamingScenes.Bandits = function() {
 
 RoamingScenes.BanditsOnEncounter = function() {
 	var enc = this;
-	var parse = {};
+	var parse : any = {};
 	
 	var num = this.enemy.NumTotal();
 	if(num > 4) {
@@ -514,6 +536,8 @@ RoamingScenes.BanditsOnEncounter = function() {
 }
 
 RoamingScenes.BanditsLoss = function() {
+	let party = GAME().party;
+	
 	SetGameState(GameState.Event, Gui);
 	
 	var enc = this;
@@ -530,7 +554,7 @@ RoamingScenes.BanditsLoss = function() {
 	}
 	var remaining = num - fallen;
 	
-	var parse = {
+	var parse : any = {
 		comp : party.Num() > 1 ? "your party" : "you"
 	};
 	
@@ -589,6 +613,8 @@ RoamingScenes.BanditsLoss = function() {
 }
 
 RoamingScenes.BanditsWin = function() {
+	let party = GAME().party;
+	
 	SetGameState(GameState.Event, Gui);
 	
 	var enc = this;
@@ -596,7 +622,7 @@ RoamingScenes.BanditsWin = function() {
 	var bandits = enc.enemy;
 	var num = bandits.NumTotal();
 	
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -641,15 +667,15 @@ RoamingScenes.BanditsWin = function() {
 					var scenes = new EncounterTable();
 					scenes.AddEnc(function() {
 						Text.Add("One of them even has a pretty gold earring that you carefully unhook from [hisher] ear.", parse);
-						party.Inv().AddItem(Items.Accessories.GoldEarring);
+						party.Inv().AddItem(AccItems.GoldEarring);
 					}, 1.0, function() { return true; });
 					scenes.AddEnc(function() {
 						Text.Add("You pull eight throwing knives off one of them - you counted. Some say you can never have too many knives, but surely this many must’ve weighed [himher] down.", parse);
-						party.Inv().AddItem(Items.Weapons.Dagger);
+						party.Inv().AddItem(WeaponsItems.Dagger);
 					}, 1.0, function() { return true; });
 					scenes.AddEnc(function() {
 						Text.Add("Though you wouldn’t touch most of the weapons for fear of gangrene, one of the swords actually looks passable. Maybe you can put it to use.", parse);
-						party.Inv().AddItem(Items.Weapons.ShortSword);
+						party.Inv().AddItem(WeaponsItems.ShortSword);
 					}, 1.0, function() { return true; });
 					
 					scenes.Get();
