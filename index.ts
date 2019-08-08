@@ -72,7 +72,6 @@ import './js/ability/black.js';
 import './js/ability/enemyskill.js';
 
 // Items
-import './js/tf.js';
 import './js/items/quest.js';
 import './js/items/ingredients.js';
 import './js/items/alchemy.js';
