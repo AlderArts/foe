@@ -47,7 +47,7 @@ Cavalcade.Score = {
 Cavalcade.prototype.PullCard = function() {
 	var cIdx = Rand(this.Deck.length);
 	var card = this.Deck[cIdx];
-	this.Deck.remove(cIdx);
+	this.Deck.splice(cIdx, 1);
 	return card;
 }
 

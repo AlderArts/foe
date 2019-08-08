@@ -464,14 +464,14 @@ RigardScenes.Chatter = function(enteringArea) {
 	var npc1, npc2; var poshList = false;
 	if(Math.random() > 0.5) {
 		var idx = Rand(npcsA.length);
-		npc1 = npcsA[idx]; npcsA.remove(idx);
+		npc1 = npcsA[idx]; npcsA.splice(idx, 1);
 		npc2 = npcsA[Rand(npcsA.length)];
 		if(party.location == RigardLoc.Plaza)
 			poshList = true;
 	}
 	else {
 		var idx = Rand(npcsB.length);
-		npc1 = npcsB[idx]; npcsB.remove(idx);
+		npc1 = npcsB[idx]; npcsB.splice(idx, 1);
 		npc2 = npcsB[Rand(npcsB.length)];
 	}
 	var hasRoyalGuard = npc1.royalGuard || npc2.royalGuard;
@@ -723,7 +723,7 @@ RigardScenes.Chatter2 = function(enteringArea) {
 
 	var CreateLower = function() {
 		var idx = Rand(npcsLower.length);
-		var npc = npcsLower[idx]; npcsLower.remove(idx);
+		var npc = npcsLower[idx]; npcsLower.splice(idx, 1);
 		if(!npc.gender) npc.gender = Math.random() > 0.5 ? Gender.male : Gender.female;
 		return npc;
 	}
@@ -741,7 +741,7 @@ RigardScenes.Chatter2 = function(enteringArea) {
 
 	var CreateMiddle1 = function() {
 		var idx = Rand(npcsMiddle1.length);
-		var npc = npcsMiddle1[idx]; npcsMiddle1.remove(idx);
+		var npc = npcsMiddle1[idx]; npcsMiddle1.splice(idx, 1);
 		if(!npc.gender) npc.gender = Math.random() > 0.5 ? Gender.male : Gender.female;
 		return npc;
 	}
@@ -756,7 +756,7 @@ RigardScenes.Chatter2 = function(enteringArea) {
 
 	var CreateMiddle2 = function() {
 		var idx = Rand(npcsMiddle2.length);
-		var npc = npcsMiddle2[idx]; npcsMiddle2.remove(idx);
+		var npc = npcsMiddle2[idx]; npcsMiddle2.splice(idx, 1);
 		if(!npc.gender) npc.gender = Math.random() > 0.5 ? Gender.male : Gender.female;
 		return npc;
 	}
@@ -778,7 +778,7 @@ RigardScenes.Chatter2 = function(enteringArea) {
 
 	var CreateNoble = function() {
 		var idx = Rand(npcsNoble.length);
-		var npc = npcsNoble[idx]; npcsNoble.remove(idx);
+		var npc = npcsNoble[idx]; npcsNoble.splice(idx, 1);
 		if(!npc.gender) npc.gender = Math.random() > 0.5 ? Gender.male : Gender.female;
 		npc.noun += " noble";
 		npc.noun += (gender == Gender.male ? "man" : "woman");

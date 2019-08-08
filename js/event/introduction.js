@@ -2620,7 +2620,7 @@ Intro.AriaPurification = function() {
 				Text.Add("Aria gives her head a quick shake, clearing her thoughts.");
 				var cocks = GAME().player.AllCocks();
 				cocks[ccIdx].vag.clitCock = null;
-				cocks.remove(ccIdx);
+				cocks.splice(ccIdx, 1);
 				Text.Flush();
 				Gui.NextPrompt(Intro.AriaTalk);
 			}, enabled : true,

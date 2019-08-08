@@ -7,7 +7,7 @@ import { Text } from './text';
 
 let ItemIds : any = {};
 //Represents the overall category an item falls under.
-let ItemType = {
+let ItemType : {[index:string] : string } = {
 	Weapon     : "Weapons",
 	Armor      : "Armors",
 	Accessory  : "Accessories",
@@ -16,11 +16,11 @@ let ItemType = {
 	Ingredient : "Ingredients",
 	Quest      : "Quest Items",
 	Toy        : "Toys",
-	Misc       : "Misc" //Default catch all for all items. Should strive to not have this on any items though.
+	Misc       : "Misc", //Default catch all for all items. Should strive to not have this on any items though.
 };
 //Represents a second level of categorization for items.
 //FIXME Attempt to remove Acc1/Acc2 from here. They can exist on entity, but shouldn't exist as a type in items.
-let ItemSubtype = {
+let ItemSubtype : {[index:string] : any } = {
 	FullArmor : "Full Armors",
 	TopArmor  : "Top Armors",
 	BotArmor  : "Bottom Armors",
@@ -28,7 +28,7 @@ let ItemSubtype = {
 	Acc2      : 6,
 	StrapOn   : "Strapons",
 	Dildo	  : "Dildos",
-	None	  : "None" //Should be default case for all items
+	None	  : "None", //Should be default case for all items
 };
 
 export class Item {

@@ -105,7 +105,7 @@ TF.RemoveAppendage = function(slots, type, count) {
 			if(app.count > 0)
 				return TF.Effect.Changed;
 			else {
-				slots.remove(i);
+				slots.splice(i, 1);
 				return TF.Effect.Removed;
 			}
 		}

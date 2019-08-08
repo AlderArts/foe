@@ -246,7 +246,7 @@ function ShowInventory(preventClear) {
 	}
 	Gui.ClearButtons();
 
-	party.inventory.ShowInventory(preventClear);
+	party.inventory.ShowInventory(SetExploreButtons, preventClear);
 	Gui.SetLastSubmenu(Input.exploreButtons[ExploreButtonIndex.Items]);
 
 	SetExploreButtons();

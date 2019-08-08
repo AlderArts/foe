@@ -233,7 +233,7 @@ PatchworkScenes.PW = function() {
 	var getWord = function() {
 		var idx = Math.floor(Math.random() * words.length);
 		var word = words[idx];
-		words.remove(idx);
+		words.splice(idx, 1);
 		return word;
 	};
 	

@@ -666,7 +666,7 @@ AlchemyItems.Testos.PushEffect(function(target) {
 			
 			if(vag.capacity.Get() <= 2)
 			{
-				vags.remove(randVag);
+				vags.splice(randVag, 1);
 				//Clear clitcock
 				if(vag.clitCock)
 					vag.clitCock.vag = null;
@@ -761,7 +761,7 @@ AlchemyItems.Estros.PushEffect(function(target) {
 		
 		if(cock.Len() <= 7 || cock.Thickness() <= 2)
 		{
-			cocks.remove(randCock);
+			cocks.splice(randCock, 1);
 			//Clear clitcock
 			if(cock.vag)
 				cock.vag.clitCock = null;

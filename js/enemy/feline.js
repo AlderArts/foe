@@ -2291,7 +2291,7 @@ FelinesScenes.LossPitchVaginal = function(cat, group, enc, cocksInVag) {
 	var allCocks = player.AllCocksCopy();
 	for(var i = 0; i < allCocks.length; i++) {
 		if(allCocks[i] == pCock) {
-			allCocks.remove(i);
+			allCocks.splice(i, 1);
 			break;
 		}
 	}
@@ -2301,7 +2301,7 @@ FelinesScenes.LossPitchVaginal = function(cat, group, enc, cocksInVag) {
 
 		for(var i = 0; i < allCocks.length; i++) {
 			if(allCocks[i] == pCock2) {
-				allCocks.remove(i);
+				allCocks.splice(i, 1);
 				break;
 			}
 		}

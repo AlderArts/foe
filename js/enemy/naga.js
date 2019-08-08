@@ -477,7 +477,7 @@ NagaScenes.DesertLossUseCock = function(enc) {
 	var allCocks = player.AllCocksCopy();
 	for(var i = 0; i < allCocks.length; i++) {
 		if(allCocks[i] == p1cock) {
-			allCocks.remove(i);
+			allCocks.splice(i, 1);
 			break;
 		}
 	}
