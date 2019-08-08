@@ -1,5 +1,7 @@
 let preloader = require('preloader');
 
+import * as $ from 'jquery';
+
 import { StatusEffect } from './statuseffect';
 import { CardItems } from './items/cards';
 
@@ -91,14 +93,16 @@ var LoadImages = function(onComplete) {
 	});
 
 	//Fill image array
-	var imageArray = [];
-	for(var image in Images)
+	let imageArray = [];
+	for(let image in Images) {
+		if(Array.isArray(Images[image])) continue;
 		imageArray.push(Images[image]);
+	}
 	LoadCardImages(imageArray);
 	LoadStatusImages(imageArray);
 
 	// fetch HTML5 progress element
-	var legend = document.getElementById('progressLabel');
+	let legend = $('#progressLabel');
 
 	// Show progress element
 	assetsOverlay();
@@ -109,7 +113,7 @@ var LoadImages = function(onComplete) {
 	});
 	loader.on('complete', onComplete);
 
-	for(var image of imageArray) {
+	for(let image of imageArray) {
 		loader.add(image);
 	}
 
