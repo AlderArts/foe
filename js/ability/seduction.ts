@@ -3,18 +3,23 @@
  * Lust attacks
  * 
  */
+import * as _ from 'lodash';
+
 import { AbilityNode } from './node';
 import { Ability, TargetMode } from '../ability';
 import { Defaults, GetAggroEntry } from './default';
 import { Text } from '../text';
+import { Encounter } from '../combat';
+import { Entity } from '../entity';
+import { Status, StatusEffect } from '../statuseffect';
 
-let SeductionAb = {};
+let SeductionAb : any = {};
 
 
 SeductionAb.Sleep = new Ability("Sleep");
 SeductionAb.Sleep.Short = function() { return "Put one enemy to sleep for a short while with magical charms."; }
 SeductionAb.Sleep.cost = { hp: null, sp: 20, lp: null};
-SeductionAb.Sleep.castTree.push(function(ability, encounter, caster, target) {
+SeductionAb.Sleep.castTree.push(function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
 	var parse = AbilityNode.DefaultParser(caster, target);
 	
 	Text.Add("[Name] weave[notS] [hisher] [hand]s in alluring patterns, winking seductively at [tname]. ", parse);
@@ -31,14 +36,14 @@ SeductionAb.TIllusion = new Ability("T.Illusion");
 SeductionAb.TIllusion.Short = function() { return "Terrifies your foes by creating frightening phantasms that soak up any attacks directed at you."; }
 SeductionAb.TIllusion.cost = { hp: null, sp: 25, lp: 10};
 SeductionAb.TIllusion.targetMode = TargetMode.Self;
-SeductionAb.TIllusion.castTree.push(function(ability, encounter, caster) {
+SeductionAb.TIllusion.castTree.push(function(ability : Ability, encounter : Encounter, caster : Entity) {
 	var parse = AbilityNode.DefaultParser(caster);
 	var num = 2;
 	num += Math.random() * 3;
 	parse["num"] = Text.NumToText(num);
 	
 	Text.Add("Weaving [hisher] [hand]s in exotic patterns, [name] create[notS] [num] terrifying apparitions, which rise from purple smoke; bellowing in rage while drawing their phantasmal weapons.", parse);
-	Status.Decoy(caster, { copies : num, func : function(attacker) {
+	Status.Decoy(caster, { copies : num, func : function(attacker : Entity) {
 		var decoy = caster.combatStatus.stats[StatusEffect.Decoy];
 		var num = decoy.copies;
 		decoy.copies--;
@@ -70,14 +75,14 @@ SeductionAb.SIllusion = new Ability("S.Illusion");
 SeductionAb.SIllusion.Short = function() { return "Arouses your foes by creating a harem of alluring mirages."; }
 SeductionAb.SIllusion.cost = { hp: null, sp: 10, lp: 25};
 SeductionAb.SIllusion.targetMode = TargetMode.Self;
-SeductionAb.SIllusion.castTree.push(function(ability, encounter, caster) {
+SeductionAb.SIllusion.castTree.push(function(ability : Ability, encounter : Encounter, caster : Entity) {
 	var parse = AbilityNode.DefaultParser(caster);
 	var num = 2;
 	num += Math.random() * 3;
 	parse["num"] = Text.NumToText(num);
 	
 	Text.Add("Weaving [hisher] [hand]s in exotic patterns, [name] create[notS] [num] mesmerising and utterly lewd images which strut about invitingly; offering comfort and release with throaty groans and soft, alluring gasps.", parse);
-	Status.Decoy(caster, { copies : num, func : function(attacker) {
+	Status.Decoy(caster, { copies : num, func : function(attacker : Entity) {
 		var decoy = caster.combatStatus.stats[StatusEffect.Decoy];
 		var num = decoy.copies;
 		decoy.copies--;
@@ -109,7 +114,7 @@ SeductionAb.SIllusion.castTree.push(function(ability, encounter, caster) {
 SeductionAb.Confuse = new Ability("Confuse");
 SeductionAb.Confuse.Short = function() { return "Fuck a single opponent’s mind, temporarily drawing them to your side."; }
 SeductionAb.Confuse.cost = { hp: null, sp: 30, lp: 20};
-SeductionAb.Confuse.castTree.push(function(ability, encounter, caster, target) {
+SeductionAb.Confuse.castTree.push(function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
 	var parse = AbilityNode.DefaultParser(caster, target);
 
 	Text.Add("[Name] perform[notS] a hypnotising dance, blending in [hisher] alluring magic and attempting to assume control of [tname]. ", parse);
@@ -130,9 +135,9 @@ SeductionAb.Rut.castTree.push(AbilityNode.Template.Lust({
 	damageFunc: AbilityNode.DamageFunc.Physical,
 	damagePool: [AbilityNode.DamagePool.Physical],
 	damageType: {pBlunt: 0.2, lust: 0.8},
-	onDamage: [function(ability, encounter, caster, target, dmg) {
+	onDamage: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity, dmg : number) {
 		target.AddLustAbs(-dmg*0.25);
-	}, function(ability, encounter, caster, target, dmg) {
+	}, function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity, dmg : number) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] rut[notS] against [tname] for " + Text.Damage(-dmg) + " damage! Sexy!", parse);
 	}]
@@ -143,7 +148,7 @@ SeductionAb.Rut.castTree.push(AbilityNode.Template.Lust({
 SeductionAb.Fantasize = new Ability("Fantasize");
 SeductionAb.Fantasize.Short = function() { return "Raise own lust."; }
 SeductionAb.Fantasize.targetMode = TargetMode.Self;
-SeductionAb.Fantasize.castTree.push(function(ability, encounter, caster) {
+SeductionAb.Fantasize.castTree.push(function(ability : Ability, encounter : Encounter, caster : Entity) {
 	var dmg = 1 * caster.LAttack();
 	dmg = Math.floor(dmg);
 	
@@ -162,7 +167,7 @@ SeductionAb.Soothe = new Ability("Soothe");
 SeductionAb.Soothe.cost = { hp: null, sp: 20, lp: null};
 SeductionAb.Soothe.Short = function() { return "Calm the wayward thoughts of your allies with the gentle touch of your voice."; }
 SeductionAb.Soothe.targetMode = TargetMode.Party;
-SeductionAb.Soothe.castTree.push(function(ability, encounter, caster, target) {
+SeductionAb.Soothe.castTree.push(function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
 	var targets = target.members;
 	
 	var group = targets.length > 1;
@@ -191,18 +196,18 @@ SeductionAb.Soothe.castTree.push(function(ability, encounter, caster, target) {
 SeductionAb.Captivate = new Ability("Captivate");
 SeductionAb.Captivate.cost = { hp: null, sp: null, lp: 40};
 SeductionAb.Captivate.Short = function() { return "Attempt to immobilize and slow a foe with a captivating song. Success rate dependent on your charisma and the target’s lust. If it fails, the target is nevertheless slowed."; }
-SeductionAb.Captivate._onMiss = function(ability, encounter, caster, target) {
+SeductionAb.Captivate._onMiss = function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
 	var parse = AbilityNode.DefaultParser(caster, target);
 	Text.Add("[tName] manage[tnotS] to resist the brunt of the mesmerizing melody, but still finds [thisher] movements slowed.", parse);
 }
 SeductionAb.Captivate.castTree.push(AbilityNode.Template.Lust({
 	toDamage: null,
-	onCast: [function(ability, encounter, caster, target) {
+	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("Fixing [tname] with a piercing gaze, [name] begin[notS] singing, [hisher] song’s captivating undertones ringing through the air. ", parse);
 		Status.Slow(target, { hit : 0.6, factor : 2, turns : 3, turnsR : 3 });
 	}],
-	onHit: [function(ability, encounter, caster, target) {
+	onHit: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
 		if(Status.Numb(target, { hit : 0.8, turns : 2, proc : 1 })) {
 			var parse = AbilityNode.DefaultParser(caster, target);
 			Text.Add("[tName] is utterly entranced by [poss] song and is slowed to a stop, completely immobilized.", parse);
@@ -219,7 +224,7 @@ SeductionAb.Captivate.castTree.push(AbilityNode.Template.Lust({
 SeductionAb.Lull = new Ability("Lull");
 SeductionAb.Lull.cost = { hp: null, sp: 10, lp: 10};
 SeductionAb.Lull.Short = function() { return "Put the foe to sleep with a soothing song."; }
-SeductionAb.Lull.castTree.push(function(ability, encounter, caster, target) {
+SeductionAb.Lull.castTree.push(function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
 	/*
 	var hit    = caster.LHit();
 	var evade  = target.LEvade();
@@ -248,7 +253,7 @@ SeductionAb.Tease.Short = function() { return "Raises the lust of target."; }
 SeductionAb.Tease.castTree.push(AbilityNode.Template.Lust({
 	atkMod: 0.5,
 	damageType: {lust: 1},
-	onCast: [function(ability, encounter, caster, target) {
+	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		parse["hips"] = caster.HipsDesc();
 		Text.Add("[Name] tease[notS] [tname], shaking [hisher] [hips]! ", parse);
@@ -265,7 +270,7 @@ SeductionAb.Seduce.cost = { hp: null, sp: 10, lp: 10};
 SeductionAb.Seduce.castTree.push(AbilityNode.Template.Lust({
 	atkMod: 1,
 	damageType: {lust: 1},
-	onCast: [function(ability, encounter, caster, target) {
+	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		parse["hips"] = caster.HipsDesc();
 		Text.Add("[Name] tease[notS] [tname], shaking [hisher] [hips]! ", parse);
@@ -284,7 +289,7 @@ SeductionAb.StripTease.targetMode = TargetMode.Enemies;
 SeductionAb.StripTease.castTree.push(AbilityNode.Template.Lust({
 	atkMod: 1.5,
 	damageType: {lust: 1},
-	onCast: [function(ability, encounter, caster, target) {
+	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
 		var parse = AbilityNode.DefaultParser(caster);
 		parse["hips"] = caster.HipsDesc();
 		Text.Add("[Name] tease[notS] the enemy party, shaking [hisher] [hips]! ", parse);
@@ -302,13 +307,13 @@ SeductionAb.Distract.cooldown = 1;
 SeductionAb.Distract.castTree.push(AbilityNode.Template.Lust({
 	atkMod: 0.8,
 	damageType: {lust: 1},
-	onCast: [function(ability, encounter, caster, target) {
+	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		parse["hips"] = caster.HipsDesc();
 		Text.Add("[Name] distract[notS] [tname], shaking [hisher] [hips]! ", parse);
 	}],
 	onMiss: [Defaults.Seduction._onMiss],
-	onDamage: [function(ability, encounter, caster, target, dmg) {
+	onDamage: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity, dmg : number) {
 		target.GetCombatEntry(encounter).initiative -= 25;
 		var parse = AbilityNode.DefaultParser(caster, target);
 	Text.Add("[tName] become[tnotS] aroused, gaining " + Text.Lust(-dmg) + " lust! [tHeShe] become[tnotS] distracted.", parse);
@@ -324,14 +329,14 @@ SeductionAb.Charm.cooldown = 1;
 SeductionAb.Charm.castTree.push(AbilityNode.Template.Lust({
 	atkMod: 0.3,
 	damageType: {lust: 1},
-	onCast: [function(ability, encounter, caster, target) {
+	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		parse["hips"] = caster.HipsDesc();
 		Text.Add("[Name] charm[notS] [tname], shaking [hisher] [hips]! ", parse);
 	}],
 	onMiss: [Defaults.Seduction._onMiss],
-	onDamage: [function(ability, encounter, caster, target, dmg) {
-		var aggroEntry = GetAggroEntry(target.GetCombatEntry(encounter), caster);
+	onDamage: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity, dmg : number) {
+		var aggroEntry : any = GetAggroEntry(target.GetCombatEntry(encounter), caster);
 		if(aggroEntry) {
 			aggroEntry.aggro -= 0.4;
 			if(aggroEntry.aggro < 0) aggroEntry.aggro = 0;
@@ -349,14 +354,14 @@ SeductionAb.Allure.cost = { hp: null, sp: 30, lp: 60};
 SeductionAb.Allure.cooldown = 2;
 SeductionAb.Allure.castTree.push(AbilityNode.Template.Lust({
 	damageType: {lust: 1},
-	onCast: [function(ability, encounter, caster, target) {
+	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		parse["hips"] = caster.HipsDesc();
 		Text.Add("[Name] charm[notS] [tname], shaking [hisher] [hips]! ", parse);
 	}],
 	onMiss: [Defaults.Seduction._onMiss],
-	onDamage: [function(ability, encounter, caster, target, dmg) {
-		var aggroEntry = GetAggroEntry(target.GetCombatEntry(encounter), caster);
+	onDamage: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity, dmg : number) {
+		var aggroEntry : any = GetAggroEntry(target.GetCombatEntry(encounter), caster);
 		if(aggroEntry) {
 			aggroEntry.aggro -= 0.8;
 			if(aggroEntry.aggro < 0) aggroEntry.aggro = 0;
@@ -374,16 +379,16 @@ SeductionAb.Inflame.cost = { hp: null, sp: null, lp: 25};
 SeductionAb.Inflame.castTree.push(AbilityNode.Template.Lust({
 	atkMod: 2,
 	damageType: {lust: 1},
-	onCast: [function(ability, encounter, caster, target) {
+	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] slowly sing[notS] a few verses of a soft, sensual melody, projecting [hisher] rich voice at [tname]. ", parse);
 	}],
 	onMiss: [Defaults.Seduction._onMiss],
-	onDamage: [function(ability, encounter, caster, target, dmg) {
+	onDamage: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity, dmg : number) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[tName] squirm[tnotS] at the subtle undertones of the song, becoming greatly aroused. [tName] gain[tnotS] " + Text.Lust(-dmg) + " lust!", parse);
 	}],
-	onAbsorb: [function(ability, encounter, caster, target) {
+	onAbsorb: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[tName] manage[tnotS] to shake off the desire-inducing effects of [poss] voice.", parse);
 	}]

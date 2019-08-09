@@ -9,6 +9,7 @@ import { Gui } from '../../gui';
 import { Text } from '../../text';
 import { MoveToLocation } from '../../GAME';
 import { Sex } from '../../entity-sex';
+import { LaylaFlags } from './layla-flags';
 
 let LaylaScenes = {};
 
@@ -34,7 +35,7 @@ LaylaScenes.Prompt = function(switchSpot) {
 		tooltip : "You’d like to talk about some things with Layla, if she doesn’t mind."
 	});
 	var tooltip = layla.Virgin() ? "It’s time to make good on your promise and teach her about proper sex." : "You’re feeling a tad horny, and you doubt the pretty chimera would have anything against some intimacy.";
-	var enabled = layla.flags["Talk"] & Layla.Talk.Sex;
+	var enabled = layla.flags["Talk"] & LaylaFlags.Talk.Sex;
 	if(layla.Virgin()) enabled = enabled && (player.FirstCock() || player.Strapon());
 	options.push({ nameStr : "Sex",
 		func : function() {
@@ -99,7 +100,7 @@ LaylaScenes.TalkPrompt = function(switchSpot) {
 		func : function() {
 			Text.Clear();
 			
-			layla.flags["Talk"] |= Layla.Talk.Sex;
+			layla.flags["Talk"] |= LaylaFlags.Talk.Sex;
 			
 			if(layla.Virgin()) {
 				Text.Add("<i>“What is sex?”</i> she asks in confusion.", parse);
@@ -341,10 +342,10 @@ LaylaScenes.PartyRegular = function(switchSpot) {
 		playername : player.name
 	};
 	
-	var first = layla.flags["Met"] < Layla.Met.Talked;
+	var first = layla.flags["Met"] < LaylaFlags.Met.Talked;
 	Text.Clear();
 	if(first) {
-		layla.flags["Met"] = Layla.Met.Talked;
+		layla.flags["Met"] = LaylaFlags.Met.Talked;
 		Text.Add("You ask if Layla has a moment, you’d like to talk to her.", parse);
 		Text.NL();
 		Text.Add("<i>“Sure!”</i> she replies enthusiastically. ", parse);
@@ -493,7 +494,7 @@ LaylaScenes.FarmMeetingTrigger = function(approach) {
 	let glade = GAME().glade;
 	let layla = GAME().layla;
 	if(glade.flags["Visit"] < DryadGlade.Visit.DefeatedOrchid) return false; //TODO: change to after portals open?
-	if(layla.flags["Met"] == Layla.Met.NotMet) {
+	if(layla.flags["Met"] == LaylaFlags.Met.NotMet) {
 		if(approach) {
 			if(WorldTime().hour >= 8 && WorldTime().hour < 18) {
 				LaylaScenes.FirstMeeting(true);
@@ -506,7 +507,7 @@ LaylaScenes.FarmMeetingTrigger = function(approach) {
 			return true;
 		}
 	}
-	else if(layla.flags["Met"] == Layla.Met.First) {
+	else if(layla.flags["Met"] == LaylaFlags.Met.First) {
 		if(!layla.farmTimer.Expired()) return false;
 		if(approach) {
 			if(WorldTime().hour >= 8 && WorldTime().hour < 18) {
@@ -520,7 +521,7 @@ LaylaScenes.FarmMeetingTrigger = function(approach) {
 			return true;
 		}
 	}
-	else if(layla.flags["Met"] == Layla.Met.Won) {
+	else if(layla.flags["Met"] == LaylaFlags.Met.Won) {
 		if(!layla.farmTimer.Expired()) return false;
 		if(approach) {
 			if(WorldTime().hour >= 4 && WorldTime().hour < 22) {
@@ -545,7 +546,7 @@ LaylaScenes.FirstMeeting = function(approach) {
 	parse["comp"] = party.Num() == 2 ? party.Get(1).name : "your companions";
 	parse["c"] = party.Num() > 1 ? Text.Parse(" and [comp]", parse) : "";
 	
-	layla.flags["Met"] = Layla.Met.First;
+	layla.flags["Met"] = LaylaFlags.Met.First;
 	
 	Text.Clear();
 	if(approach) {
@@ -739,7 +740,7 @@ LaylaScenes.FarmCombatWin = function() {
 		playername : player.name
 	};
 	
-	layla.flags["Met"] = Layla.Met.Won;
+	layla.flags["Met"] = LaylaFlags.Met.Won;
 	
 	Text.Clear();
 	Text.Add("With a great hissing sigh, the creature staggers before collapsing onto the ground into a pile of scraps. Her formerly lashing tail goes limp and she lies motionless, clearly out cold.", parse);
@@ -1034,7 +1035,7 @@ LaylaScenes.SecondMeeting = function() {
 		Text.Flush();
 		//TODO
 		//#Layla can now be visited on Gwendy’s Farm Fields. From 8:00 to 19:00
-		layla.flags["Met"] = Layla.Met.Farm;
+		layla.flags["Met"] = LaylaFlags.Met.Farm;
 	
 		Gui.NextPrompt();
 	}
@@ -1071,7 +1072,7 @@ LaylaScenes.LeavesGwendy = function() {
 	
 	Text.Flush();
 	
-	layla.flags["Met"]  = Layla.Met.Party;
+	layla.flags["Met"]  = LaylaFlags.Met.Party;
 	layla.flags["Take"] = 0; //Remove variable from save
 	
 	Gui.NextPrompt(function() {

@@ -8,19 +8,9 @@ import { Text } from '../text';
 import { Item } from '../item';
 import { Gui } from '../gui';
 import { Entity } from '../entity';
+import { OasisFlags } from './oasis-flags';
 
 let OasisScenes : any = {};
-
-enum OasisVisit {
-	NotVisited = 0,
-	Visited    = 1,
-};
-
-//oasis.flags["Rakh"]
-enum OasisRakhFlag {
-	NotSeen = 0,
-	Seen    = 1,
-};
 
 export class Oasis {
 	flags : any;
@@ -77,14 +67,11 @@ export class Oasis {
 		this.shopItems.push(IngredientItems.RawHoney);
 		this.shopItems.push(IngredientItems.BeeChitin);
 		
-		this.flags["Visit"] = Oasis.Visit.NotVisited;
-		this.flags["Rakh"] = Oasis.RakhFlag.NotSeen;
+		this.flags["Visit"] = OasisFlags.Visit.NotVisited;
+		this.flags["Rakh"] = OasisFlags.RakhFlag.NotSeen;
 		
 		if(storage) this.FromStorage(storage);
-	}
-	
-	static get Visit() { return OasisVisit; }
-	static get RakhFlag() { return OasisRakhFlag; }
+	}	
 
 	ToStorage() {
 		var storage : any = {};
@@ -105,7 +92,7 @@ export class Oasis {
 	}
 
 	SeenRakh() {
-		return this.flags["Rakh"] >= Oasis.RakhFlag.Seen;
+		return this.flags["Rakh"] >= OasisFlags.RakhFlag.Seen;
 	}
 }
 
@@ -258,7 +245,7 @@ OasisScenes.DesertCaravanEncounter = function() {
 		Text.NL();
 		Text.Add("<i>“You wouldn’t want to face off against a feral one, but these ones are quite docile. My tribesmen of the desert train them from when they are young. They are far better suited to this climate than horses would be.”</i> [rHeShe] affectionately scratches one of the huge reptiles on the chin, coaxing a deep contented rumble from the beast.", parse);
 		Text.NL();
-		oasis.flags["Rakh"] = Oasis.RakhFlag.Seen;
+		oasis.flags["Rakh"] = OasisFlags.RakhFlag.Seen;
 	}
 	Text.Add("You chat a bit about what brought you here, and [rheshe] tells you a little about [rhisher] work planning the expedition and selecting goods to carry. <i>“We’re always happy to trade with a fellow traveler,”</i> [rheshe] says. <i>“We obviously can’t just unpack everything, but I’ve got a few select things set aside for occasions like these. Or if there’s anything else you need, I’d be happy to help out,”</i> [rheshe] adds with a wink, [rhisher] tail swaying back and forth in interest.", parse);
 	Text.Flush();

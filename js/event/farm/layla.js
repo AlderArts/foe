@@ -13,6 +13,7 @@ import { WorldTime } from '../../GAME';
 import { Text } from '../../text';
 import { TargetStrategy } from '../../entity-combat';
 import { Abilities } from '../../abilities';
+import { LaylaFlags } from './layla-flags';
 
 function Layla(storage) {
 	Entity.call(this);
@@ -66,7 +67,7 @@ function Layla(storage) {
 	this.SetLevelBonus();
 	this.RestFull();
 	
-	this.flags["Met"] = Layla.Met.NotMet;
+	this.flags["Met"] = LaylaFlags.Met.NotMet;
 	this.flags["Take"] = 0;
 	this.flags["Skin"] = 0;
 	this.flags["Talk"] = 0; //Bitmask
@@ -77,22 +78,6 @@ function Layla(storage) {
 }
 Layla.prototype = new Entity();
 Layla.prototype.constructor = Layla;
-
-
-Layla.Met = {
-	NotMet : 0,//Never seen
-	First  : 1,//Met at least once, not defeated
-	Won    : 2,//Defeated
-	Farm   : 3,//Talked to at farm, not in party
-	Party  : 4,//Recruited to party
-	Talked : 5 //Talked to her in party
-};
-
-Layla.Talk = {
-	Sex    : 1, //Talked about sex
-	Origin : 2
-};
-
 
 Layla.prototype.FromStorage = function(storage) {
 	storage = storage || {};

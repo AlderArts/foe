@@ -3,11 +3,14 @@ import { DamageType } from '../damagetype';
 import { Ability } from '../ability';
 import { StatusEffect } from '../statuseffect';
 import { Text } from '../text';
+import { Entity } from '../entity';
+import { Encounter } from '../combat';
+import { GAME } from '../GAME';
 
-let AbilityNode = {};
+let AbilityNode : any = {};
 
-AbilityNode.DefaultParser = function(caster, target) {
-	var parse = {};
+AbilityNode.DefaultParser = function(caster : Entity, target : Entity) {
+	var parse : any = {};
 	
 	if(caster) {
 		parse         = caster.ParserPronouns(parse);
@@ -43,7 +46,7 @@ AbilityNode.DefaultParser = function(caster, target) {
 
 AbilityNode.Template = {};
 
-AbilityNode.Template.Blank = function(node) {
+AbilityNode.Template.Blank = function(node : any) {
 	node = node || {};
 	
 	node.damageType = node.damageType ? new DamageType(node.damageType) : null;
@@ -76,7 +79,7 @@ AbilityNode.Template.Blank = function(node) {
 	
 	return _.bind(AbilityNode.Run, node);
 }
-AbilityNode.Template.Physical = function(node) {
+AbilityNode.Template.Physical = function(node : any) {
 	var node = node || {};
 	/*
 	node.hitFallen = node.hitFallen;
@@ -96,7 +99,7 @@ AbilityNode.Template.Physical = function(node) {
 	
 	return _.bind(AbilityNode.Run, node);
 }
-AbilityNode.Template.Magical = function(node) {
+AbilityNode.Template.Magical = function(node : any) {
 	var node = node || {};
 	/*
 	node.hitFallen = node.hitFallen;
@@ -116,7 +119,7 @@ AbilityNode.Template.Magical = function(node) {
 	
 	return _.bind(AbilityNode.Run, node);
 }
-AbilityNode.Template.Lust = function(node) {
+AbilityNode.Template.Lust = function(node : any) {
 	var node = node || {};
 	/*
 	node.hitFallen = node.hitFallen;
@@ -136,7 +139,7 @@ AbilityNode.Template.Lust = function(node) {
 	
 	return _.bind(AbilityNode.Run, node);
 }
-AbilityNode.Template.Heal = function(node) {
+AbilityNode.Template.Heal = function(node : any) {
 	var node = node || {};
 	/*
 	node.hitFallen = node.hitFallen;
@@ -155,7 +158,7 @@ AbilityNode.Template.Heal = function(node) {
 	
 	return _.bind(AbilityNode.Run, node);
 }
-AbilityNode.Template.Fallthrough = function(node) {
+AbilityNode.Template.Fallthrough = function(node : any) {
 	var node = node || {};
 
 	node.onDamage  = node.onDamage || [];
@@ -167,7 +170,7 @@ AbilityNode.Template.Fallthrough = function(node) {
 	
 	return _.bind(AbilityNode.RunFallthrough, node);
 }
-AbilityNode.RunFallthrough = function(ability, encounter, caster, target, result) {
+AbilityNode.RunFallthrough = function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity, result : any) {
 	var that = this;
 	var fraction = that.fraction || 1;
 	
@@ -191,14 +194,14 @@ AbilityNode.RunFallthrough = function(ability, encounter, caster, target, result
 	}
 }
 
-AbilityNode.Template.AddSpellstack = function(node) {
+AbilityNode.Template.AddSpellstack = function(node : any) {
 	var node = node || {};
 	/*
 	node.value = node.value;
 	*/
 	return _.bind(AbilityNode.RunAddSpellstack, node);
 }
-AbilityNode.RunAddSpellstack = function(ability, encounter, caster, target, result) {
+AbilityNode.RunAddSpellstack = function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity, result : any) {
 	var that = this;
 	
 	var value = _.isFunction(that.value) ? that.value() : that.value;
@@ -208,7 +211,7 @@ AbilityNode.RunAddSpellstack = function(ability, encounter, caster, target, resu
 	entry.spellstack.push(value);
 }
 
-AbilityNode.Template.MatchSpellstack = function(node) {
+AbilityNode.Template.MatchSpellstack = function(node : any) {
 	var node = node || {};
 	/*
 	node.consume = node.consume;
@@ -222,7 +225,7 @@ AbilityNode.Template.MatchSpellstack = function(node) {
 	
 	return _.bind(AbilityNode.RunMatchSpellstack, node);
 }
-AbilityNode.RunMatchSpellstack = function(ability, encounter, caster, target, result) {
+AbilityNode.RunMatchSpellstack = function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity, result : any) {
 	var that = this;
 	
 	var consume = that.consume;
@@ -259,7 +262,7 @@ AbilityNode.RunMatchSpellstack = function(ability, encounter, caster, target, re
 	}
 }
 
-AbilityNode.Template.Cancel = function(node) {
+AbilityNode.Template.Cancel = function(node : any) {
 	var node = node || {};
 	/*
 	node.result = node.result;
@@ -268,7 +271,7 @@ AbilityNode.Template.Cancel = function(node) {
 	node.onMiss    = node.onMiss   || [];
 	return _.bind(AbilityNode.RunCancel, node);
 }
-AbilityNode.RunCancel = function(ability, encounter, caster, target, result) {
+AbilityNode.RunCancel = function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity, result : any) {
 	var that = this;
 	var entry = target.GetCombatEntry(encounter);
 	// Only trigger if target is casting
@@ -303,10 +306,10 @@ AbilityNode.RunCancel = function(ability, encounter, caster, target, result) {
 }
 
 AbilityNode.ToHit = {};
-AbilityNode.ToHit.StrikeThrough = function(caster, target) {
+AbilityNode.ToHit.StrikeThrough = function(caster : Entity, target : Entity) {
 	return true;
 }
-AbilityNode.ToHit.Regular = function(caster, target) {
+AbilityNode.ToHit.Regular = function(caster : Entity, target : Entity) {
 	var hitMod = this.hitMod || 1;
 	var hit    = hitMod * this.hitFunc(caster, target);
 	var evade  = this.evadeFunc(caster, target);
@@ -315,29 +318,29 @@ AbilityNode.ToHit.Regular = function(caster, target) {
 }
 
 AbilityNode.HitFunc = {};
-AbilityNode.HitFunc.Physical = function(caster, target) {
+AbilityNode.HitFunc.Physical = function(caster : Entity, target : Entity) {
 	return caster.PHit();
 }
-AbilityNode.HitFunc.Magical = function(caster, target) {
+AbilityNode.HitFunc.Magical = function(caster : Entity, target : Entity) {
 	return caster.MHit();
 }
-AbilityNode.HitFunc.Lust = function(caster, target) {
+AbilityNode.HitFunc.Lust = function(caster : Entity, target : Entity) {
 	return caster.LHit();
 }
 
 AbilityNode.EvadeFunc = {};
-AbilityNode.EvadeFunc.Physical = function(caster, target) {
+AbilityNode.EvadeFunc.Physical = function(caster : Entity, target : Entity) {
 	return target.PEvade();
 }
-AbilityNode.EvadeFunc.Magical = function(caster, target) {
+AbilityNode.EvadeFunc.Magical = function(caster : Entity, target : Entity) {
 	return target.MEvade();
 }
-AbilityNode.EvadeFunc.Lust = function(caster, target) {
+AbilityNode.EvadeFunc.Lust = function(caster : Entity, target : Entity) {
 	return target.LEvade();
 }
 
 AbilityNode.ToDamage = {};
-AbilityNode.ToDamage.Regular = function(caster, target) {
+AbilityNode.ToDamage.Regular = function(caster : Entity, target : Entity) {
 	var damageType = this.damageType ? this.damageType : caster.elementAtk;
 	var atkMod     = this.atkMod || 1;
 	var defMod     = this.defMod || 1;
@@ -354,7 +357,7 @@ AbilityNode.ToDamage.Regular = function(caster, target) {
 	
 	return -dmg;
 }
-AbilityNode.ToDamage.Heal = function(caster, target) {
+AbilityNode.ToDamage.Heal = function(caster : Entity, target : Entity) {
 	var atkMod  = this.atkMod || 1;
 	
 	var healing = atkMod * this.atkFunc(caster, target);
@@ -366,29 +369,29 @@ AbilityNode.ToDamage.Heal = function(caster, target) {
 }
 
 AbilityNode.AtkFunc = {};
-AbilityNode.AtkFunc.Physical = function(caster, target) {
+AbilityNode.AtkFunc.Physical = function(caster : Entity, target : Entity) {
 	return caster.PAttack();
 }
-AbilityNode.AtkFunc.Magical = function(caster, target) {
+AbilityNode.AtkFunc.Magical = function(caster : Entity, target : Entity) {
 	return caster.MAttack();
 }
-AbilityNode.AtkFunc.Lust = function(caster, target) {
+AbilityNode.AtkFunc.Lust = function(caster : Entity, target : Entity) {
 	return caster.LAttack();
 }
 
 AbilityNode.DefFunc = {};
-AbilityNode.DefFunc.Physical = function(caster, target) {
+AbilityNode.DefFunc.Physical = function(caster : Entity, target : Entity) {
 	return target.PDefense();
 }
-AbilityNode.DefFunc.Magical = function(caster, target) {
+AbilityNode.DefFunc.Magical = function(caster : Entity, target : Entity) {
 	return target.MDefense();
 }
-AbilityNode.DefFunc.Lust = function(caster, target) {
+AbilityNode.DefFunc.Lust = function(caster : Entity, target : Entity) {
 	return target.LDefense();
 }
 
 AbilityNode.DamageFunc = {};
-AbilityNode.DamageFunc.Physical = function(encounter, caster, target, dmg) {
+AbilityNode.DamageFunc.Physical = function(encounter : Encounter, caster : Entity, target : Entity, dmg: number) {
 	if(target.PhysDmgHP(encounter, caster, dmg)) {
 		// Reduce defense due to bad status effect
 		var weakness = target.combatStatus.stats[StatusEffect.Weakness];
@@ -403,30 +406,30 @@ AbilityNode.DamageFunc.Physical = function(encounter, caster, target, dmg) {
 	else
 		return null;
 }
-AbilityNode.DamageFunc.Magical = function(encounter, caster, target, dmg) {
+AbilityNode.DamageFunc.Magical = function(encounter : Encounter, caster : Entity, target : Entity, dmg: number) {
 	return dmg;
 }
-AbilityNode.DamageFunc.Lust = function(encounter, caster, target, dmg) {
+AbilityNode.DamageFunc.Lust = function(encounter : Encounter, caster : Entity, target : Entity, dmg: number) {
 	return dmg;
 }
 
 AbilityNode.DamagePool = {};
-AbilityNode.DamagePool.Physical = function(ability, encounter, caster, target, dmg) {
+AbilityNode.DamagePool.Physical = function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity, dmg: number) {
 	target.AddHPAbs(dmg);
 }
-AbilityNode.DamagePool.Magical = function(ability, encounter, caster, target, dmg) {
+AbilityNode.DamagePool.Magical = function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity, dmg: number) {
 	target.AddSPAbs(dmg);
 }
-AbilityNode.DamagePool.Lust = function(ability, encounter, caster, target, dmg) {
+AbilityNode.DamagePool.Lust = function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity, dmg: number) {
 	target.AddLustAbs(-dmg);
 }
 
 AbilityNode.Retarget = {};
-AbilityNode.Retarget.Fallen = function(ability, encounter, caster, target, result) {
+AbilityNode.Retarget.Fallen = function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity, result : any) {
 	if(!_.has(target, 'members') && target.Incapacitated()) {
 		var entry = target.GetCombatEntry(encounter);
 		if(entry) {
-			var group = party.members;
+			var group = GAME().party.members;
 			if(entry.isEnemy)
 				group = encounter.enemy.members;
 			target = _.sample(_.filter(group, function(e) {
@@ -438,7 +441,7 @@ AbilityNode.Retarget.Fallen = function(ability, encounter, caster, target, resul
 	return target;
 }
 
-AbilityNode.Run = function(ability, encounter, caster, target, result) {
+AbilityNode.Run = function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity, result : any) {
 	var that = this;
 	
 	if(that.retarget) {

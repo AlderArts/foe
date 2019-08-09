@@ -7,9 +7,13 @@
 import { AbilityNode } from './node';
 import { Ability, TargetMode } from '../ability';
 import { Text } from '../text';
+import { Encounter } from '../combat';
+import { Entity } from '../entity';
+import { Gui } from '../gui';
+import { StatusEffect } from '../statuseffect';
 
-let WhiteAb = {};
-WhiteAb._onHeal = function(ability, encounter, caster, target, dmg) {
+let WhiteAb : any = {};
+WhiteAb._onHeal = function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity, dmg : number) {
 	if(dmg <= 0) return;
 	var parse = AbilityNode.DefaultParser(caster, target);
 	Text.Add("It heals [tname] for " + Text.Heal(dmg) + " damage!", parse);
@@ -24,7 +28,7 @@ WhiteAb.FirstAid.cost = { hp: null, sp: 5, lp: null};
 WhiteAb.FirstAid.OOC = true;
 WhiteAb.FirstAid.castTree.push(AbilityNode.Template.Heal({
 	atkMod: 1,
-	onCast: [function(ability, encounter, caster, target) {
+	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		parse["skin"] = target.SkinDesc();
 		Text.Add("[Name] prepare[notS] some soothing salves, gently applying it to [tposs] [skin] with [hisher] [hand]s.", parse);
@@ -41,7 +45,7 @@ WhiteAb.Heal.cost = { hp: null, sp: 10, lp: null};
 WhiteAb.Heal.OOC = true;
 WhiteAb.Heal.castTree.push(AbilityNode.Template.Heal({
 	atkMod: 1.5,
-	onCast: [function(ability, encounter, caster, target) {
+	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] read[y] a healing spell, forming a sphere of soothing white magic between [hisher] [hand]s. [HeShe] cast[notS] the enchantment on [tname]", parse);
 		Text.NL();
@@ -57,7 +61,7 @@ WhiteAb.Recover.cost = { hp: null, sp: 30, lp: null};
 WhiteAb.Recover.OOC = true;
 WhiteAb.Recover.castTree.push(AbilityNode.Template.Heal({
 	atkMod: 2,
-	onCast: [function(ability, encounter, caster, target) {
+	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] read[y] a powerful healing spell, forming a glowing sphere of soothing white magic between [hisher] [hand]s. [HeShe] cast[notS] the enchantment on [tname]", parse);
 		Text.NL();
@@ -74,7 +78,7 @@ WhiteAb.Cheer.name = "Cheer";
 WhiteAb.Cheer.Short = function() { return "Boosts party morale, raising spirit and stamina slightly (doesn't stack)."; }
 WhiteAb.Cheer.targetMode = TargetMode.Party;
 WhiteAb.Cheer.cost = { hp: null, sp: 30, lp: null};
-WhiteAb.Cheer.CastInternal = function(encounter, caster, target) {
+WhiteAb.Cheer.CastInternal = function(encounter : Encounter, caster : Entity, target : Entity) {
 	// TODO: Make more flavor text
 	var parse = {
 		name : caster.name,
@@ -103,7 +107,7 @@ WhiteAb.Pinpoint.name = "Pinpoint";
 WhiteAb.Pinpoint.Short = function() { return "Buffs accuracy of one target (doesn't stack)."; }
 WhiteAb.Pinpoint.targetMode = TargetMode.Ally;
 WhiteAb.Pinpoint.cost = { hp: null, sp: 10, lp: null};
-WhiteAb.Pinpoint.CastInternal = function(encounter, caster, target) {
+WhiteAb.Pinpoint.CastInternal = function(encounter : Encounter, caster : Entity, target : Entity) {
 	target.dexterity.temp = Math.max(target.dexterity.temp, caster.MAttack() / 5);
 	
 	var parse = AbilityNode.DefaultParser(caster, target);
@@ -127,7 +131,7 @@ WhiteAb.Toughen.name = "Toughen";
 WhiteAb.Toughen.Short = function() { return "Buffs stamina of one target (doesn't stack)."; }
 WhiteAb.Toughen.targetMode = TargetMode.Ally;
 WhiteAb.Toughen.cost = { hp: null, sp: 10, lp: null};
-WhiteAb.Toughen.CastInternal = function(encounter, caster, target) {
+WhiteAb.Toughen.CastInternal = function(encounter : Encounter, caster : Entity, target : Entity) {
 	target.stamina.temp = Math.max(target.stamina.temp, caster.MAttack() / 5);
 	
 	var parse = AbilityNode.DefaultParser(caster, target);
@@ -151,7 +155,7 @@ WhiteAb.Empower.name = "Empower";
 WhiteAb.Empower.Short = function() { return "Buffs strength of one target (doesn't stack)."; }
 WhiteAb.Empower.targetMode = TargetMode.Ally;
 WhiteAb.Empower.cost = { hp: null, sp: 10, lp: null};
-WhiteAb.Empower.CastInternal = function(encounter, caster, target) {
+WhiteAb.Empower.CastInternal = function(encounter : Encounter, caster : Entity, target : Entity) {
 	target.strength.temp = Math.max(target.strength.temp, caster.MAttack() / 5);
 	
 	var parse = AbilityNode.DefaultParser(caster, target);
@@ -171,7 +175,7 @@ WhiteAb.Tirade.name = "Tirade";
 WhiteAb.Tirade.Short = function() { return "Attempt to bore the enemy with meaningless drivel. Drain enemy SP."; }
 WhiteAb.Tirade.cost = { hp: null, sp: 10, lp: null};
 WhiteAb.Tirade.cooldown = 1;
-WhiteAb.Tirade._onMiss = function(ability, encounter, caster, target) {
+WhiteAb.Tirade._onMiss = function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
 	var parse = AbilityNode.DefaultParser(null, target);
 	Text.Add(", but [tname] [tis]n't very impressed!", parse);
 }
@@ -181,11 +185,11 @@ WhiteAb.Tirade.castTree.push(AbilityNode.Template.Magical({
 	damageFunc: AbilityNode.DamageFunc.Magical,
 	damageType: {mVoid: 1},
 	damagePool: [AbilityNode.DamagePool.Magical],
-	onCast: [function(ability, encounter, caster, target) {
+	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
 		var parse = AbilityNode.DefaultParser(caster);
 		Text.Add("[Name] start[notS] rambling about petty things", parse);
 	}],
-	onDamage: [function(ability, encounter, caster, target, dmg) {
+	onDamage: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity, dmg : number) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add(" in an attempt to distract [tname]. It seems to be working, [theshe] look[tnotS] slightly annoyed! [Name] drain[notS] " + Text.Mana(-dmg) + " SP from [tname]!", parse);
 	}],
@@ -198,7 +202,7 @@ WhiteAb.Preach = new Ability("Preach");
 WhiteAb.Preach.Short = function() { return "Attempt to bore the enemy with pompous religious drivel. Drain enemy SP."; }
 WhiteAb.Preach.cost = { hp: null, sp: 20, lp: null};
 WhiteAb.Preach.cooldown = 2;
-WhiteAb.Preach._onMiss = function(ability, encounter, caster, target) {
+WhiteAb.Preach._onMiss = function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
 	var parse = AbilityNode.DefaultParser(null, target);
 	Text.Add("However, [tname] [tis]n't very impressed!", parse);
 	Text.NL();
@@ -208,12 +212,12 @@ WhiteAb.Preach.castTree.push(AbilityNode.Template.Magical({
 	damageFunc: AbilityNode.DamageFunc.Magical,
 	damageType: {mVoid: 1},
 	damagePool: [AbilityNode.DamagePool.Magical],
-	onCast: [function(ability, encounter, caster, target) {
+	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] start[notS] preaching to [tname]. ", parse);
 		Text.NL();
 	}],
-	onDamage: [function(ability, encounter, caster, target, dmg) {
+	onDamage: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity, dmg : number) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("It seems to be working, [tname] look[tnotS] slightly annoyed! [Name] drain[notS] " + Text.Mana(-dmg) + " SP from [tname]!", parse);
 		Text.NL();
@@ -233,12 +237,12 @@ WhiteAb.Sermon.castTree.push(AbilityNode.Template.Magical({
 	damageFunc: AbilityNode.DamageFunc.Magical,
 	damageType: {mVoid: 1},
 	damagePool: [AbilityNode.DamagePool.Magical],
-	onCast: [function(ability, encounter, caster, target) {
+	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
 		var parse = AbilityNode.DefaultParser(caster);
 		Text.Add("[Name] start[notS] proselytizing to the enemy party. Somehow, [heshe] manage[notS] to sound extremely condescending and immensly boring at the same time!", parse);
 		Text.NL();
 	}],
-	onDamage: [function(ability, encounter, caster, target, dmg) {
+	onDamage: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity, dmg : number) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("It seems to be working, [tname] look[tnotS] slightly annoyed! [Name] drain[notS] " + Text.Mana(-dmg) + " SP from [tname]!", parse);
 		Text.NL();
@@ -255,7 +259,7 @@ WhiteAb.Cleanse.targetMode = TargetMode.All;
 WhiteAb.Cleanse.cost = { hp: null, sp: 20, lp: null};
 WhiteAb.Cleanse.cooldown = 2;
 WhiteAb.Cleanse.casttime = 25;
-WhiteAb.Cleanse.CastInternal = function(encounter, caster, target) {
+WhiteAb.Cleanse.CastInternal = function(encounter : Encounter, caster : Entity, target : Entity) {
 	var parse = AbilityNode.DefaultParser(caster, target);
 	
 	var ally = true;
@@ -299,7 +303,7 @@ WhiteAb.Dispel.targetMode = TargetMode.All;
 WhiteAb.Dispel.cost = { hp: null, sp: 20, lp: null};
 WhiteAb.Dispel.cooldown = 2;
 WhiteAb.Dispel.casttime = 25;
-WhiteAb.Dispel.CastInternal = function(encounter, caster, target) {
+WhiteAb.Dispel.CastInternal = function(encounter : Encounter, caster : Entity, target : Entity) {
 	var parse = AbilityNode.DefaultParser(caster, target);
 	
 	var ally = true;
@@ -346,7 +350,7 @@ WhiteAb.Purify.targetMode = TargetMode.All;
 WhiteAb.Purify.cost = { hp: null, sp: 20, lp: null};
 WhiteAb.Purify.cooldown = 2;
 WhiteAb.Purify.casttime = 25;
-WhiteAb.Purify.CastInternal = function(encounter, caster, target) {
+WhiteAb.Purify.CastInternal = function(encounter : Encounter, caster : Entity, target : Entity) {
 	var parse = AbilityNode.DefaultParser(caster, target);
 	
 	var ally = true;

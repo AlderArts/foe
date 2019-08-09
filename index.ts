@@ -51,17 +51,6 @@ import './js/enemy/boss.js';
 // World description
 import './js/exploration.js';
 
-// Abilities
-import './js/ability/node.js';
-import './js/ability/attack.js';
-import './js/ability/physical.js';
-import './js/ability/seduction.js';
-import './js/ability/wait.js';
-import './js/ability/run.js';
-import './js/ability/white.js';
-import './js/ability/black.js';
-import './js/ability/enemyskill.js';
-
 import './js/alchemy.js';
 
 // Locations and events

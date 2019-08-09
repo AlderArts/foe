@@ -8,6 +8,7 @@ import { Ability, TargetMode } from '../ability';
 import { Gui } from '../gui';
 import { GetDEBUG } from '../../app';
 import { Text } from '../text';
+import { Perks } from '../perks';
 
 let RunAb = new Ability();
 RunAb.name = "Run";
