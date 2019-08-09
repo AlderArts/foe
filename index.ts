@@ -23,7 +23,6 @@ import './js/statuseffect.js';
 
 import './js/lactation.js';
 
-import './js/body/balls.js';
 import './js/body/breasts.js';
 import './js/body/body.js';
 
