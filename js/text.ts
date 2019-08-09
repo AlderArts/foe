@@ -4,20 +4,20 @@ import * as _ from 'lodash';
 import { GetRenderPictures } from '../app';
 import { isFunction, Rand } from './utility';
 
-let Text = {};
+let Text : any = {};
 
 Text.buffer = "";
 //A div that contains 'groups' of inputs. Each group is on a new line (so you can basically have multiple toolbars).
 Text.toolbars = $('<div></div>');
 
-Text.InsertImage = function(imgSrc, align) {
+Text.InsertImage = function(imgSrc : string, align? : string) {
 	if(!GetRenderPictures()) return "";
 
 	align = align || 'left';
 	return "<img src='" + imgSrc + "' align='" + align + "' alt='MISSING IMAGE: " + imgSrc + "' style='margin: 1px 8px;'/>";
 }
 
-Text.Say = function(imgSrc, text, align) {
+Text.Say = function(imgSrc : string, text? : string, align? : string) {
 	var textbox = document.getElementById("mainTextArea");
 	align = align || 'left';
 	text = text || "";
@@ -29,12 +29,12 @@ Text.Say = function(imgSrc, text, align) {
 }
 
 
-Text.SetTooltip = function(text, parseStrings) {
+Text.SetTooltip = function(text : string, parseStrings? : any) {
 	var textbox = document.getElementById("tooltipTextArea");
 	textbox.innerHTML = Text.Parse(text, parseStrings);
 }
 
-Text.Parse = function(text, parseStrings) {
+Text.Parse = function(text : string, parseStrings? : any) {
 	try {
 		// Simple parser
 		if(parseStrings) {
@@ -97,7 +97,7 @@ Text.Clear = function() {
 //This is used internally by Add and the helper methods below.
 //This should be used for styling any text that should 
 //not be passed through Text.Parse
-Text.ApplyStyle = function(text, cssClasses, tag) {
+Text.ApplyStyle = function(text : string, cssClasses? : string, tag? : string) {
 	tag = tag || "span";
 	return '<' + tag + (cssClasses ? (' class ="' + cssClasses + '">') : '>') + text + '</' + tag + '>';
 }
@@ -107,7 +107,7 @@ Text.ApplyStyle = function(text, cssClasses, tag) {
 // This is primarily meant to be used for dialogue and scenes,
 // but AddSpan and AddDiv both call it, since this would make
 // testing easier in the future, as only this needs unit testing
-Text.Add = function(text, parse, cssClasses, tag) {
+Text.Add = function(text : string, parse? : any, cssClasses? : string, tag? : string) {
 	var parsed = Text.Parse(text, parse);
 	if (cssClasses) {
 		Text.buffer += Text.ApplyStyle(parsed, cssClasses, tag);
@@ -117,12 +117,12 @@ Text.Add = function(text, parse, cssClasses, tag) {
 }
 
 //Adds text wrapped in a span.
-Text.AddSpan = function(text, parse, cssClasses) {
+Text.AddSpan = function(text : string, parse? : any, cssClasses? : string) {
 	Text.Add(text, parse, cssClasses, "span");
 }
 
 //Adds text wrapped in a div.
-Text.AddDiv = function(text, parse, cssClasses) {
+Text.AddDiv = function(text : string, parse? : any, cssClasses? : string) {
 	Text.Add(text, parse, cssClasses, "div");
 }
 
@@ -132,10 +132,10 @@ Text.AddDiv = function(text, parse, cssClasses) {
 * ToolbarLabel: A text label that will be put at the very start of the toolbar. Default is no label.
 * cssClasses : A string of css classes that will be added to every input in the 'list' parameter.
  */
-Text.AddToolbar = function(list, toolbarLabel, cssClasses) {
+Text.AddToolbar = function(list : any[], toolbarLabel? : string, cssClasses? : string) {
 	var toolbar = $("<div>");
 	//Add toolbar label if specified
-	if(toolbarLabel){
+	if(toolbarLabel) {
 		var label= $('<span>', {
 			"class" : 'tbarLbl',
 			text : toolbarLabel
@@ -157,7 +157,7 @@ Text.NL = function() {
 	Text.buffer += "<br/><br/>";
 }
 
-Text.Flush = function(textCssClasses, toolbarCssClasses) {
+Text.Flush = function(textCssClasses? : string, toolbarCssClasses? : string) {
 	//var textbox = document.getElementById("mainTextArea");
 	var textBox = $("#mainTextArea");
 	var textClasses = (textCssClasses) ? textCssClasses : "";
@@ -172,7 +172,7 @@ Text.Flush = function(textCssClasses, toolbarCssClasses) {
 	Text.toolbars = $('<div></div>');
 }
 
-Text.DigitToText = function(num) {
+Text.DigitToText = function(num : number) {
 	num = Math.floor(num);
 	switch(num) {
 		case 0: return "zero";
@@ -199,7 +199,7 @@ Text.DigitToText = function(num) {
 	}
 }
 
-Text.NumToText = function(num) {
+Text.NumToText = function(num : number) {
 	num = Math.floor(num);
 	if(num < 0)
 		return num;
@@ -246,7 +246,7 @@ Text.NumToText = function(num) {
 	return num;
 }
 
-Text.Quantify = function(num) {
+Text.Quantify = function(num : number) {
 	num = Math.floor(num);
 	if(num < 0)
 		return num;
@@ -276,7 +276,7 @@ Text.Quantify = function(num) {
 	}
 }
 
-Text.Ordinal = function(num, capital) {
+Text.Ordinal = function(num : number, capital : boolean) {
 	num = Math.floor(num);
 	switch(num) {
 		case 1: return capital ? "First"   : "first";
@@ -293,7 +293,7 @@ Text.Ordinal = function(num, capital) {
 }
 
 
-Text.ParserPlural = function(parse, condition, prefix, postfix) {
+Text.ParserPlural = function(parse? : any, condition? : any, prefix? : string, postfix? : string) {
 	parse   = parse   || {};
 	prefix  = prefix  || "";
 	postfix = postfix || "";
@@ -327,7 +327,7 @@ Text.ParserPlural = function(parse, condition, prefix, postfix) {
 	return parse;
 }
 
-Text.Enumerate = function(list, conjunction) {
+Text.Enumerate = function(list : any[], conjunction : any) {
 	var output = "";
 	list.reverse(); // We're assuming that the order matters
 	list.forEach(function(elem, idx) {
@@ -349,7 +349,7 @@ Text.Enumerate = function(list, conjunction) {
  *   checkbox::: TODO
  *   radio   ::: TODO
  */
-var createInput = function(inputOptions, cssClasses) {
+var createInput = function(inputOptions : any, cssClasses? : any) {
 	var input;
 	var type = inputOptions.type || 'button';
 	var classesStr = (cssClasses || "") +" "+ (inputOptions.classes || "");
@@ -492,32 +492,32 @@ var createInput = function(inputOptions, cssClasses) {
 
 // Replaces Text.BoldColor when no color specified
 // Inherits the default color from parent style
-Text.Bold = function(text) {
+Text.Bold = function(text : string) {
 	return Text.ApplyStyle(text, "bold");
 }
 
 // Apply a standard life damage style
-Text.Damage = function(text) {
+Text.Damage = function(text : string) {
 	return Text.ApplyStyle(text, "life bold");
 }
 
 // Apply a standard life heal style
-Text.Heal = function(text) {
+Text.Heal = function(text : string) {
 	return Text.ApplyStyle(text, "heal bold");
 }
 
 // Apply a standard lust 'damage' style
-Text.Lust = function(text) {
+Text.Lust = function(text : string) {
 	return Text.ApplyStyle(text, "pink bold");
 }
 
 // Apply a standard lust 'heal' style
-Text.Soothe = function(text) {
+Text.Soothe = function(text : string) {
 	return Text.ApplyStyle(text, "soothe bold");
 }
 
 // Apply a standard mana / SP  style
-Text.Mana = function(text) {
+Text.Mana = function(text : string) {
 	return Text.ApplyStyle(text, "mana bold");
 }
 

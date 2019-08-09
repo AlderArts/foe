@@ -11,7 +11,6 @@ import './assets/css/droid-sans.css';
 import './js/assets.js';
 
 import './js/utility.js';
-import './js/text.js';
 import './js/gui.js';
 
 // Entity scripts
