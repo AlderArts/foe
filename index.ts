@@ -93,10 +93,7 @@ import './js/loc/dragonden.js';
 import './js/loc/forest.js';
 import './js/loc/desert.js';
 import './js/loc/farm.js';
-import './js/loc/lake.js';
 import './js/loc/kingsroad.js';
-
-import './js/loc/oasis.js';
 
 import './js/loc/outlaws.js';
 import './js/loc/glade.js';

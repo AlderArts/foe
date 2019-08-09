@@ -3,102 +3,115 @@ import { EncounterTable } from '../encountertable';
 import { Shop } from '../shop';
 import { Gender } from '../body/gender';
 import { IngredientItems } from '../items/ingredients';
-import { WorldTime } from '../GAME';
+import { WorldTime, TimeStep, GAME } from '../GAME';
 import { Text } from '../text';
+import { Item } from '../item';
+import { Gui } from '../gui';
+import { Entity } from '../entity';
 
-let OasisScenes = {};
+let OasisScenes : any = {};
 
-let Oasis = function(storage) {
-	this.flags = {};
-	
-	// Caravan Shop
-	this.shop = new Shop();
-	this.flags["shop"]     = 0;
-	this.shopItems = []; //TODO
-	this.shopItems.push(IngredientItems.HorseHair);
-	this.shopItems.push(IngredientItems.HorseShoe);
-	this.shopItems.push(IngredientItems.HorseCum);
-	this.shopItems.push(IngredientItems.RabbitFoot);
-	this.shopItems.push(IngredientItems.CarrotJuice);
-	this.shopItems.push(IngredientItems.Lettuce);
-	this.shopItems.push(IngredientItems.Whiskers);
-	this.shopItems.push(IngredientItems.HairBall);
-	this.shopItems.push(IngredientItems.CatClaw);
-	this.shopItems.push(IngredientItems.SnakeOil);
-	this.shopItems.push(IngredientItems.LizardScale);
-	this.shopItems.push(IngredientItems.LizardEgg);
-	this.shopItems.push(IngredientItems.GoatMilk);
-	this.shopItems.push(IngredientItems.SheepMilk);
-	this.shopItems.push(IngredientItems.Ramshorn);
-	this.shopItems.push(IngredientItems.CowMilk);
-	this.shopItems.push(IngredientItems.CowBell);
-	this.shopItems.push(IngredientItems.FreshGrass);
-	this.shopItems.push(IngredientItems.CanisRoot);
-	this.shopItems.push(IngredientItems.DogBone);
-	this.shopItems.push(IngredientItems.DogBiscuit);
-	this.shopItems.push(IngredientItems.WolfFang);
-	this.shopItems.push(IngredientItems.Wolfsbane);
-	this.shopItems.push(IngredientItems.FoxBerries);
-	this.shopItems.push(IngredientItems.Foxglove);
-	this.shopItems.push(IngredientItems.BlackGem);
-	this.shopItems.push(IngredientItems.Hummus);
-	this.shopItems.push(IngredientItems.SpringWater);
-	this.shopItems.push(IngredientItems.Feather);
-	this.shopItems.push(IngredientItems.Trinket);
-	this.shopItems.push(IngredientItems.FruitSeed);
-	this.shopItems.push(IngredientItems.MFluff);
-	this.shopItems.push(IngredientItems.MDust);
-	this.shopItems.push(IngredientItems.Stinger);
-	this.shopItems.push(IngredientItems.SVenom);
-	this.shopItems.push(IngredientItems.SClaw);
-	this.shopItems.push(IngredientItems.TreeBark);
-	this.shopItems.push(IngredientItems.AntlerChip);
-	this.shopItems.push(IngredientItems.GoatFleece);
-	this.shopItems.push(IngredientItems.FlowerPetal);
-	this.shopItems.push(IngredientItems.RawHoney);
-	this.shopItems.push(IngredientItems.BeeChitin);
-	
-	this.flags["Visit"] = Oasis.Visit.NotVisited;
-	this.flags["Rakh"] = Oasis.RakhFlag.NotSeen;
-	
-	if(storage) this.FromStorage(storage);
-}
-
-Oasis.prototype.ToStorage = function() {
-	var storage = {};
-	
-	storage.flags   = this.flags;
-	
-	return storage;
-}
-
-Oasis.prototype.FromStorage = function(storage) {
-	// Load flags
-	for(var flag in storage.flags)
-		this.flags[flag] = parseInt(storage.flags[flag]);
-}
-
-Oasis.prototype.Update = function(step) {
-	
-}
-
-Oasis.Visit = {
-	NotVisited : 0,
-	Visited : 1
-}
+enum OasisVisit {
+	NotVisited = 0,
+	Visited    = 1,
+};
 
 //oasis.flags["Rakh"]
-Oasis.RakhFlag = {
-	NotSeen : 0,
-	Seen    : 1
+enum OasisRakhFlag {
+	NotSeen = 0,
+	Seen    = 1,
+};
+
+export class Oasis {
+	flags : any;
+	shop : Shop;
+	shopItems : Item[];
+
+	constructor(storage? : any) {
+		this.flags = {};
+		
+		// Caravan Shop
+		this.shop = new Shop();
+		this.flags["shop"]     = 0;
+		this.shopItems = []; //TODO
+		this.shopItems.push(IngredientItems.HorseHair);
+		this.shopItems.push(IngredientItems.HorseShoe);
+		this.shopItems.push(IngredientItems.HorseCum);
+		this.shopItems.push(IngredientItems.RabbitFoot);
+		this.shopItems.push(IngredientItems.CarrotJuice);
+		this.shopItems.push(IngredientItems.Lettuce);
+		this.shopItems.push(IngredientItems.Whiskers);
+		this.shopItems.push(IngredientItems.HairBall);
+		this.shopItems.push(IngredientItems.CatClaw);
+		this.shopItems.push(IngredientItems.SnakeOil);
+		this.shopItems.push(IngredientItems.LizardScale);
+		this.shopItems.push(IngredientItems.LizardEgg);
+		this.shopItems.push(IngredientItems.GoatMilk);
+		this.shopItems.push(IngredientItems.SheepMilk);
+		this.shopItems.push(IngredientItems.Ramshorn);
+		this.shopItems.push(IngredientItems.CowMilk);
+		this.shopItems.push(IngredientItems.CowBell);
+		this.shopItems.push(IngredientItems.FreshGrass);
+		this.shopItems.push(IngredientItems.CanisRoot);
+		this.shopItems.push(IngredientItems.DogBone);
+		this.shopItems.push(IngredientItems.DogBiscuit);
+		this.shopItems.push(IngredientItems.WolfFang);
+		this.shopItems.push(IngredientItems.Wolfsbane);
+		this.shopItems.push(IngredientItems.FoxBerries);
+		this.shopItems.push(IngredientItems.Foxglove);
+		this.shopItems.push(IngredientItems.BlackGem);
+		this.shopItems.push(IngredientItems.Hummus);
+		this.shopItems.push(IngredientItems.SpringWater);
+		this.shopItems.push(IngredientItems.Feather);
+		this.shopItems.push(IngredientItems.Trinket);
+		this.shopItems.push(IngredientItems.FruitSeed);
+		this.shopItems.push(IngredientItems.MFluff);
+		this.shopItems.push(IngredientItems.MDust);
+		this.shopItems.push(IngredientItems.Stinger);
+		this.shopItems.push(IngredientItems.SVenom);
+		this.shopItems.push(IngredientItems.SClaw);
+		this.shopItems.push(IngredientItems.TreeBark);
+		this.shopItems.push(IngredientItems.AntlerChip);
+		this.shopItems.push(IngredientItems.GoatFleece);
+		this.shopItems.push(IngredientItems.FlowerPetal);
+		this.shopItems.push(IngredientItems.RawHoney);
+		this.shopItems.push(IngredientItems.BeeChitin);
+		
+		this.flags["Visit"] = Oasis.Visit.NotVisited;
+		this.flags["Rakh"] = Oasis.RakhFlag.NotSeen;
+		
+		if(storage) this.FromStorage(storage);
+	}
+	
+	static get Visit() { return OasisVisit; }
+	static get RakhFlag() { return OasisRakhFlag; }
+
+	ToStorage() {
+		var storage : any = {};
+		
+		storage.flags   = this.flags;
+		
+		return storage;
+	}
+
+	FromStorage(storage : any) {
+		// Load flags
+		for(var flag in storage.flags)
+			this.flags[flag] = parseInt(storage.flags[flag]);
+	}
+
+	Update(step : any) {
+		
+	}
+
+	SeenRakh() {
+		return this.flags["Rakh"] >= Oasis.RakhFlag.Seen;
+	}
 }
 
-Oasis.prototype.SeenRakh = function() {
-	return this.flags["Rakh"] >= Oasis.RakhFlag.Seen;
-}
 
-
-OasisScenes.CaravanShop = function(back) {
+OasisScenes.CaravanShop = function(back : any) {
+	let oasis = GAME().oasis;
 	var parse = {
 		
 	};
@@ -148,7 +161,10 @@ OasisScenes.CaravanShop = function(back) {
 
 
 OasisScenes.DesertCaravanEncounter = function() {
-	var parse = {
+	let player = GAME().player;
+	let party = GAME().party;
+	let oasis = GAME().oasis;
+	var parse : any = {
 		
 	};
 	parse = player.ParserTags(parse);
@@ -444,4 +460,4 @@ OasisScenes.DesertCaravanEncounter = function() {
 	prompt();
 }
 
-export { Oasis, OasisScenes };
+export { OasisScenes };

@@ -6,9 +6,12 @@
 
 import { Event, Link } from '../event';
 import { EncounterTable } from '../encountertable';
-import { MoveToLocation, TimeStep } from '../GAME';
+import { MoveToLocation, TimeStep, WORLD, GAME } from '../GAME';
 import { Gui } from '../gui';
 import { Text } from '../text';
+import { MomoScenes } from '../event/momo';
+import { Burrows } from './burrows';
+import { QuestItems } from '../items/quest';
 
 // Create namespace
 let LakeLoc = {
@@ -26,17 +29,19 @@ LakeLoc.Shore.links.push(new Link(
 	"Slums", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Rigard.Slums.gate, {minute: 45});
+		MoveToLocation(WORLD().loc.Rigard.Slums.gate, {minute: 45});
 	}
 ));
 
 LakeLoc.Shore.enc = new EncounterTable();
 LakeLoc.Shore.enc.AddEnc(function() {
-	return Scenes.Momo.MomoEnc;
-}, 1.0, function() { return momo.Wandering(); });
+	return MomoScenes.MomoEnc;
+}, 1.0, function() { return GAME().momo.Wandering(); });
 
 LakeLoc.Shore.enc.AddEnc(function() {
 	return function() {
+		let party = GAME().party;
+		let burrows = GAME().burrows;
 		var parse = {
 			
 		};
@@ -47,7 +52,7 @@ LakeLoc.Shore.enc.AddEnc(function() {
 		Text.Add("<b>Received three samples of red algae!</b>", parse);
 		Text.Flush();
 		
-		party.Inv().AddItem(Items.Quest.RedAlgae, 3);
+		party.Inv().AddItem(QuestItems.RedAlgae, 3);
 		burrows.flags["BrainyTrait"] = Burrows.TraitFlags.Gathered;
 		Text.NL();
 		Text.Add("You think you've gathered enough of these for now, you should return them to Ophelia.", parse);
@@ -57,6 +62,9 @@ LakeLoc.Shore.enc.AddEnc(function() {
 		
 		Gui.NextPrompt();
 	};
-}, 1.0, function() { return burrows.Access() && burrows.flags["BrainyTrait"] == Burrows.TraitFlags.Inactive; });
+}, 1.0, function() {
+	let burrows = GAME().burrows;
+	return burrows.Access() && burrows.flags["BrainyTrait"] == Burrows.TraitFlags.Inactive;
+});
 
 export { LakeLoc };

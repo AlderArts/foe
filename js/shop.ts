@@ -30,7 +30,7 @@ export class Shop {
 	sellSuccessFunc : any;
 	sellFailFunc : any;
 
-	constructor(opts : any) {
+	constructor(opts? : any) {
 		// Contains {it: Item, [num: Number], [enabled: Function], [func: Function], [price: Number]}
 		// Set num to null for infinite stock
 		// Set enabled to null for unconditional
