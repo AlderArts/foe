@@ -1,16 +1,26 @@
 import { Gwendy } from './gwendy';
 import { Gender } from '../../body/gender';
-import { WorldTime } from '../../GAME';
+import { WorldTime, GAME, WORLD, TimeStep } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
+import { EncounterTable } from '../../encountertable';
+import { Burrows } from '../../loc/burrows';
+import { FarmScenes } from '../../loc/farm';
+import { IngredientItems } from '../../items/ingredients';
+import { AlchemyItems } from '../../items/alchemy';
+import { ToysItems } from '../../items/toys';
+import { Cock } from '../../body/cock';
+import { Sex } from '../../entity-sex';
+import { Race } from '../../body/race';
+import { LowerBodyType } from '../../entity-desc';
 
-let GwendyScenes = {};
+let GwendyScenes : any = {};
 
 GwendyScenes.LoftPrompt = function() {
 	let gwendy = GAME().gwendy;
 	Text.Clear();
 	
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -37,8 +47,8 @@ GwendyScenes.LoftPrompt = function() {
 	Gui.SetButtonsFromList(options, true);
 }
 
-GwendyScenes.LoftSexPrompt = function(back, disableSleep) {
-	var parse = {};
+GwendyScenes.LoftSexPrompt = function(back : any, disableSleep : boolean) {
+	var parse : any = {};
 	var options = new Array();
 	GwendyScenes.ChallengeSexWonPrompt(true, options, disableSleep);
 	GwendyScenes.ChallengeSexLostPrompt(true, options, disableSleep);
@@ -54,7 +64,7 @@ GwendyScenes.LoftSexPrompt = function(back, disableSleep) {
 				Text.Flush();
 				
 				Gui.NextPrompt(function() {
-					world.loc.Farm.Loft.SleepFunc();
+					WORLD().loc.Farm.Loft.SleepFunc();
 				});
 			}, enabled : true,
 			tooltip : "Just sleep for now."
@@ -70,7 +80,7 @@ GwendyScenes.LoftSexPrompt = function(back, disableSleep) {
 GwendyScenes.BarnPrompt = function() {
 	Text.Clear();
 	
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -101,7 +111,7 @@ GwendyScenes.BarnPrompt = function() {
 GwendyScenes.FieldsPrompt = function() {
 	Text.Clear();
 	
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -127,10 +137,10 @@ GwendyScenes.FieldsPrompt = function() {
 	Gui.SetButtonsFromList(options, true);
 }
 
-GwendyScenes.Talk = function(backfunc) {
+GwendyScenes.Talk = function(backfunc : any) {
 	let player = GAME().player;
 	let gwendy = GAME().gwendy;
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -150,7 +160,7 @@ GwendyScenes.Talk = function(backfunc) {
 			scenes.AddEnc(function() {
 				Text.Add("<i>“D’you know anything about those rabbit people that’ve been showing up lately?”</i> Gwendy asks you. <i>“They come in groups, usually at dusk or dawn when there isn’t anyone on watch. I’ve had to chase them off several times, but they still managed to steal a lot of goods.”</i> The farmer grimaces. <i>“Not to mention they ruin the crops with all their hopping about, the dumb things.”</i>", parse);
 				Text.NL();
-				if(burrows.flags["Access"] == Burrows.AccessFlags.Unknown) {
+				if(GAME().burrows.flags["Access"] == Burrows.AccessFlags.Unknown) {
 					Text.Add("You admit that you don’t know much about them, although you think you’ve seen some of them while traveling.", parse);
 					Text.NL();
 					Text.Add("<i>“Nasty critters,”</i> the girl mutters.", parse);
@@ -238,7 +248,7 @@ GwendyScenes.Talk = function(backfunc) {
 				//[Yes][No]
 				var options = new Array();
 				options.push({ nameStr : "Yes",
-					func : Scenes.Farm.GoToMarketFirst, enabled : true,
+					func : FarmScenes.GoToMarketFirst, enabled : true,
 					tooltip : "Despite all adversities, you still want to go. Besides, if it‘s that bad, she probably needs some company, right?"
 				});
 				options.push({ nameStr : "No",
@@ -284,7 +294,7 @@ GwendyScenes.Work = function() {
 	
 	gwendy.relation.IncreaseStat(40, 1);
 	
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -326,8 +336,9 @@ GwendyScenes.WorkFeedingDanie = function() {
 	let player = GAME().player;
 	let party = GAME().party;
 	let gwendy = GAME().gwendy;
+	let danie = GAME().danie;
 	
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -418,7 +429,7 @@ GwendyScenes.WorkMilking = function() {
 	let player = GAME().player;
 	let party = GAME().party;
 	let gwendy = GAME().gwendy;
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -564,19 +575,19 @@ GwendyScenes.WorkMilking = function() {
 		var scenes = new EncounterTable();
 		scenes.AddEnc(function() {
 			Text.Add("She hands you a bottle of milk.", parse);
-			party.inventory.AddItem(Items.CowMilk);
+			party.inventory.AddItem(IngredientItems.CowMilk);
 		}, 8.0, function() { return true; });
 		scenes.AddEnc(function() {
 			Text.Add("She hands you a bottle of goat milk.", parse);
-			party.inventory.AddItem(Items.GoatMilk);
+			party.inventory.AddItem(IngredientItems.GoatMilk);
 		}, 8.0, function() { return true; });
 		scenes.AddEnc(function() {
 			Text.Add("She hands you a bottle of sheep milk.", parse);
-			party.inventory.AddItem(Items.SheepMilk);
+			party.inventory.AddItem(IngredientItems.SheepMilk);
 		}, 8.0, function() { return true; });
 		scenes.AddEnc(function() {
 			Text.Add("She hands you a bottle of Bovia.", parse);
-			party.inventory.AddItem(Items.Bovia);
+			party.inventory.AddItem(AlchemyItems.Bovia);
 		}, 1.0, function() { return true; });
 		/* TODO: other items
 		scenes.AddEnc(function() {
@@ -613,9 +624,9 @@ GwendyScenes.WorkMilking = function() {
 /* GWENDY SEX SCENES */
 
 
-GwendyScenes.ChallengeSex = function(skillcheck, lose) {
+GwendyScenes.ChallengeSex = function(skillcheck : number, lose : boolean) {
 	let gwendy = GAME().gwendy;
-	var parse = {
+	var parse : any = {
 
 	};
 
@@ -657,10 +668,10 @@ GwendyScenes.ChallengeSex = function(skillcheck, lose) {
 	}
 }
 
-GwendyScenes.ChallengeSexWonPrompt = function(hangout, options, disableSleep) {
+GwendyScenes.ChallengeSexWonPrompt = function(hangout : boolean, options : any[], disableSleep : boolean) {
 	let player = GAME().player;
 	let gwendy = GAME().gwendy;
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 
@@ -822,17 +833,17 @@ GwendyScenes.ChallengeSexWonPrompt = function(hangout, options, disableSleep) {
 			options.push({ nameStr : "D.Dildo",
 				func : function() {
 					GwendyScenes.ChallengeSexAnal(Gwendy.Toys.DDildo, hangout);
-				}, enabled : player.AnalCap() >= Items.Toys.EquineDildo.cock.Thickness(),
+				}, enabled : player.AnalCap() >= ToysItems.EquineDildo.cock.Thickness(),
 				tooltip : "Bring out Gwendy’s double-ended horsedildo for some double anal fun."
 			});
 		}
 	}
 }
 
-GwendyScenes.ChallengeSexHands = function(cock, hangout) {
+GwendyScenes.ChallengeSexHands = function(cock : Cock, hangout : boolean) {
 	let player = GAME().player;
 	let gwendy = GAME().gwendy;
-	var parse = {
+	var parse : any = {
 		playername    : player.name
 	};
 	parse = player.ParserTags(parse);
@@ -971,11 +982,11 @@ GwendyScenes.ChallengeSexHands = function(cock, hangout) {
 }
 
 
-GwendyScenes.ChallengeSexBody = function(titjob, hangout, disableSleep) {
+GwendyScenes.ChallengeSexBody = function(titjob : boolean, hangout : boolean, disableSleep : boolean) {
 	let player = GAME().player;
 	let gwendy = GAME().gwendy;
 
-	var parse = {
+	var parse : any = {
 		playername     : player.name
 	};
 	parse = player.ParserTags(parse);
@@ -1180,11 +1191,11 @@ GwendyScenes.ChallengeSexBody = function(titjob, hangout, disableSleep) {
 	}
 }
 
-GwendyScenes.ChallengeSexOral = function(blow, hangout) {
+GwendyScenes.ChallengeSexOral = function(blow : boolean, hangout : boolean) {
 	let player = GAME().player;
 	let gwendy = GAME().gwendy;
 
-	var parse = {
+	var parse : any = {
 		playername     : player.name
 	};
 	parse = player.ParserTags(parse);
@@ -1325,11 +1336,11 @@ GwendyScenes.ChallengeSexOral = function(blow, hangout) {
 	Gui.NextPrompt();
 }
 
-GwendyScenes.ChallengeSexVag = function(fuck, hangout) {
+GwendyScenes.ChallengeSexVag = function(fuck : boolean, hangout : boolean) {
 	let player = GAME().player;
 	let gwendy = GAME().gwendy;
 
-	var parse = {
+	var parse : any = {
 		playername     : player.name,
 		manWoman       : function() { return player.mfTrue("man", "woman"); }
 	};
@@ -1483,11 +1494,11 @@ GwendyScenes.ChallengeSexVag = function(fuck, hangout) {
 	Gui.NextPrompt();
 }
 
-GwendyScenes.ChallengeSexAnal = function(toys, hangout) {
+GwendyScenes.ChallengeSexAnal = function(toys : boolean, hangout : boolean) {
 	let player = GAME().player;
 	let gwendy = GAME().gwendy;
 
-	var parse = {
+	var parse : any = {
 		playername     : player.name,
 		manWoman       : function() { return player.mfTrue("man", "woman"); }
 	};
@@ -1581,7 +1592,7 @@ GwendyScenes.ChallengeSexAnal = function(toys, hangout) {
 			options.push({ nameStr : "D.Dildo",
 				func : function() {
 					GwendyScenes.ChallengeSexAnalToys(Gwendy.Toys.DDildo, hangout, first);
-				}, enabled : player.AnalCap() >= Items.Toys.EquineDildo.cock.Thickness(),
+				}, enabled : player.AnalCap() >= ToysItems.EquineDildo.cock.Thickness(),
 				tooltip : "Bring out Gwendy’s double-ended horsedildo for some double anal fun."
 			});
 			Gui.SetButtonsFromList(options);
@@ -1689,11 +1700,12 @@ GwendyScenes.ChallengeSexAnal = function(toys, hangout) {
 	}
 }
 
-GwendyScenes.ChallengeSexAnalToys = function(toy, hangout, first) {
+GwendyScenes.ChallengeSexAnalToys = function(toy : any, hangout : boolean, first : boolean) {
 	let player = GAME().player;
 	let gwendy = GAME().gwendy;
+	let adrian = GAME().adrian;
 
-	var parse = {
+	var parse : any = {
 		playername     : player.name,
 		manWoman       : function() { return player.mfTrue("man", "woman"); }
 	};
@@ -1752,7 +1764,7 @@ GwendyScenes.ChallengeSexAnalToys = function(toy, hangout, first) {
 		Text.NL();
 
 		Sex.Anal(null, gwendy);
-		gwendy.FuckAnal(gwendy.Butt(), Items.Toys.LargeAnalBeads.cock, 2);
+		gwendy.FuckAnal(gwendy.Butt(), ToysItems.LargeAnalBeads.cock, 2);
 		player.AddSexExp(2);
 
 		Text.Add("<i>“Hah! Something like this is nothing!”</i> the farmer scoffs, blushing slightly as she adjusts her stance, perhaps more aroused by the beads than she wants to let on.", parse);
@@ -1903,7 +1915,7 @@ GwendyScenes.ChallengeSexAnalToys = function(toy, hangout, first) {
 		Text.NL();
 
 		Sex.Anal(null, gwendy);
-		gwendy.FuckAnal(gwendy.Butt(), Items.Toys.EquineDildo.cock, 3);
+		gwendy.FuckAnal(gwendy.Butt(), ToysItems.EquineDildo.cock, 3);
 
 		Text.Add("<i>“Your turn,”</i> she smiles at you, exhausted from the effort.", parse);
 		Text.NL();
@@ -1918,7 +1930,7 @@ GwendyScenes.ChallengeSexAnalToys = function(toy, hangout, first) {
 		Text.NL();
 
 		Sex.Anal(null, player);
-		player.FuckAnal(player.Butt(), Items.Toys.EquineDildo.cock, 3);
+		player.FuckAnal(player.Butt(), ToysItems.EquineDildo.cock, 3);
 
 		parse["l"] = player.HasLegs() ? "legs together" : "[legs] with Gwendy's legs";
 		if(player.FirstCock())
@@ -1970,13 +1982,13 @@ GwendyScenes.ChallengeSexAnalToys = function(toy, hangout, first) {
 	}
 }
 
-GwendyScenes.ChallengeSexLostPrompt = function(hangout, options, disableSleep) {
+GwendyScenes.ChallengeSexLostPrompt = function(hangout : boolean, options : any[], disableSleep : boolean) {
 	let player = GAME().player;
 	let gwendy = GAME().gwendy;
 
 	Text.Clear();
 
-	var parse = {
+	var parse : any = {
 		playername      : player.name,
 		phisher         : player.body.Gender() == Gender.male ? "his" : "her"
 	};

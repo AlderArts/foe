@@ -14,6 +14,8 @@ import { Gender } from '../body/gender';
 import { WorldTime, MoveToLocation, GAME } from '../GAME';
 import { Text } from '../text';
 import { Gui } from '../gui';
+import { LagonFlags } from '../event/burrows/lagon-flags';
+import { VenaFlags } from '../event/burrows/vena-flags';
 
 let world = null;
 
@@ -92,13 +94,13 @@ Burrows.prototype.BrainyActive = function() {
 	return this.flags["BrainyTrait"] >= Burrows.TraitFlags.Active;
 }
 Burrows.prototype.LagonDefeated = function() {
-	return GAME().lagon.flags["Usurp"] & Lagon.Usurp.Defeated;
+	return GAME().lagon.flags["Usurp"] & LagonFlags.Usurp.Defeated;
 }
 Burrows.prototype.LagonChallenged = function() {
-	return GAME().lagon.flags["Usurp"] & Lagon.Usurp.FirstFight;
+	return GAME().lagon.flags["Usurp"] & LagonFlags.Usurp.FirstFight;
 }
 Burrows.prototype.LagonAlly = function() {
-	return GAME().lagon.flags["Usurp"] & Lagon.Usurp.SidedWith;
+	return GAME().lagon.flags["Usurp"] & LagonFlags.Usurp.SidedWith;
 }
 //TODO
 Burrows.prototype.LagonChained = function() {
@@ -106,7 +108,7 @@ Burrows.prototype.LagonChained = function() {
 }
 Burrows.prototype.LagonJudged = function() {
 	let vena = GAME().vena;
-	return vena.flags["Met"] & Vena.Met.Judgement;
+	return vena.flags["Met"] & VenaFlags.Met.Judgement;
 }
 //TODO
 Burrows.prototype.LagonPit = function() {
@@ -114,7 +116,7 @@ Burrows.prototype.LagonPit = function() {
 }
 Burrows.prototype.VenaRestored = function() {
 	let vena = GAME().vena;
-	return vena.flags["Met"] & Vena.Met.Restored;
+	return vena.flags["Met"] & VenaFlags.Met.Restored;
 }
 
 Burrows.prototype.ToStorage = function() {
@@ -304,7 +306,7 @@ BurrowsLoc.Throne.events.push(new Link(
 	function() {
 		let burrows = GAME().burrows;
 		let lagon = GAME().lagon;
-		if(burrows.LagonAlly() && !(lagon.flags["Talk"] & Lagon.Talk.AlliedFirst))
+		if(burrows.LagonAlly() && !(lagon.flags["Talk"] & LagonFlags.Talk.AlliedFirst))
 			Scenes.Lagon.AlliedFirst();
 		else if(burrows.LagonJudged())
 			Scenes.Lagon.Defeated.RoomApproach();

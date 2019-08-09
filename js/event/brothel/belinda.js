@@ -6,7 +6,7 @@
 import { Entity } from '../../entity';
 import { Race } from '../../body/race';
 import { Color } from '../../body/color';
-import { WorldTime } from '../../GAME';
+import { WorldTime, GAME, WORLD } from '../../GAME';
 
 let BelindaScenes = {};
 
@@ -70,7 +70,7 @@ Belinda.prototype.ToStorage = function() {
 Belinda.prototype.IsAtLocation = function(location) {
 	let party = GAME().party;
 	location = location || party.location;
-	if(location == world.loc.Rigard.Brothel.brothel)
+	if(location == WORLD().loc.Rigard.Brothel.brothel)
 		return (WorldTime().hour >= 18 || WorldTime().hour < 6);
 	return false;
 }

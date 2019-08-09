@@ -24,6 +24,8 @@ import { Gui } from '../../gui';
 import { SetGameState, GameState } from '../../gamestate';
 import { Time } from '../../time';
 import { BodyPartType } from '../../body/bodypart';
+import { WORLD } from '../../GAME';
+import { LagonFlags } from './lagon-flags';
 
 let LagonScenes = {
 	Defeated : LagonDScenes,
@@ -87,18 +89,11 @@ Lagon.prototype.Update = function(step) {
 	Entity.prototype.Update.call(this, step);
 }
 
-Lagon.Talk = {
-	AlliedFirst : 1,
-	ScepterTalk : 2,
-	RoaTalk     : 4,
-	RegularSex  : 8,
-	BJfinger    : 16
-};
-
 // Schedule TODO
 Lagon.prototype.IsAtLocation = function(location) {
 	let party = GAME().party;
 	let burrows = GAME().burrows;
+	let world = WORLD();
 	//if(burrows.LagonChained()) //Slave
 	location = location || party.location;
 	if(burrows.LagonChained()) {
@@ -111,19 +106,6 @@ Lagon.prototype.IsAtLocation = function(location) {
 	/*else
 		return (location == world.loc.Burrows.Pit);*/
 }
-
-Lagon.Usurp = {
-	FirstFight   : 1,
-	Defeated     : 2,
-	SidedWith    : 4,
-	JailSexFirst : 8,
-	NiceFlag     : 16,
-	NiceFirst    : 32,
-	NiceReact    : 64
-};
-Lagon.JailSex = {
-	PitchAnal : 1
-};
 
 Lagon.prototype.JailSexed = function() {
 	return this.flags["JSex"] != 0;
@@ -488,7 +470,7 @@ LagonScenes.RulerPrompt = function() {
 	options.push({ nameStr : "Sex",
 		func : function() {
 			Text.Clear();
-			var first = !(lagon.flags["Talk"] & Lagon.Talk.RegularSex);
+			var first = !(lagon.flags["Talk"] & LagonFlags.Talk.RegularSex);
 			if(first) {
 				Text.Add("Feeling a bit apprehensive, you ask the king if he might be interested in having sex with you.", parse);
 				Text.NL();
@@ -589,14 +571,14 @@ LagonScenes.RulerSexPrompt = function() {
 	var options = new Array();
 	options.push({ nameStr : "Blowjob",
 		func : function() {
-			lagon.flags["Talk"] |= Lagon.Talk.RegularSex;
+			lagon.flags["Talk"] |= LagonFlags.Talk.RegularSex;
 			LagonScenes.RulerBlowjob();
 		}, enabled : true,
 		tooltip : "Ask the king for permission to suck his cock."
 	});
 	options.push({ nameStr : "Get fucked",
 		func : function() {
-			lagon.flags["Talk"] |= Lagon.Talk.RegularSex;
+			lagon.flags["Talk"] |= LagonFlags.Talk.RegularSex;
 			Text.Clear();
 			Text.Add("You tell him that you want him to mount you and make you his bitch, to fuck you with that amazing cock of his. Judging from his expression, those were just the right words to use.", parse);
 			Text.NL();
@@ -847,13 +829,13 @@ LagonScenes.RulerBlowjobEntrypoint = function() {
 		tooltip : "Let the powerful male show you just how much cum he has backed up for you."
 	});
 	if(player.sex.gBlow >= 25) {
-		var first = !(lagon.flags["Talk"] & Lagon.Talk.BJfinger);
+		var first = !(lagon.flags["Talk"] & LagonFlags.Talk.BJfinger);
 		var tooltip = first ? "Let’s see just how far you can push him. You’re interested to find out how the lagomorph king would react to a prostate massage… and who knows, perhaps it’ll lead to even more fun." : "You know what will happen, but you can’t resist the urge to tease the lagomorph king further. Him getting rougher only turns you on even more, and your loins ache, longing for his cock."
 		options.push({ nameStr : "Finger",
 			func : function() {
 				Text.Clear();
 				if(first) {
-					lagon.flags["Talk"] |= Lagon.Talk.BJfinger;
+					lagon.flags["Talk"] |= LagonFlags.Talk.BJfinger;
 					Text.Add("Lagon’s just on the cusp of climaxing, but you can’t help yourself but mess with him. Having the high and mighty king melt like butter in your hands is such a delight to see… and speaking of hands, that gives you a <i>very</i> naughty idea. You pop his cock out of your mouth, using your [tongue] to tease his glans. One of your hands lightly strokes him, tracing his veins and moving down to cradle his huge sack, teeming with tasty cum. Purring, you wet your fingers and coax him to lean back and enjoy; this is how you pleasure a man on the surface.", parse);
 					Text.NL();
 					Text.Add("Your other hand is busy even lower down, steadily increasing the pressure on Lagon’s virgin rosebud. ", parse);
@@ -1412,7 +1394,7 @@ LagonScenes.AlliedFirst = function() {
 		
 	};
 	
-	lagon.flags["Talk"] |= Lagon.Talk.AlliedFirst;
+	lagon.flags["Talk"] |= LagonFlags.Talk.AlliedFirst;
 	
 	Text.Clear();
 	Text.Add("<i>“Ah, if it isn’t my little loyal minion,”</i> Lagon greets you expansively as you approach. The king is lounging on his throne as usual, a pretty little lagomorph female kneeling at his feet, dutifully polishing the royal cock. He irritably shoves her away, letting the glistening pillar of flesh out into the air. Lagon lets it bob there, unconcerned about the pre forming on the tip. You shift uncomfortably, uncertain what he has in mind.", parse);
@@ -1767,7 +1749,7 @@ LagonScenes.RulerTalkPrompt = function() {
 								LagonScenes.RulerTalkPrompt();
 								return;
 							}
-							else if(lagon.flags["Talk"] & Lagon.Talk.ScepterTalk == 0) {
+							else if(lagon.flags["Talk"] & LagonFlags.Talk.ScepterTalk == 0) {
 								Text.Add("<i>“Oh? What value has it to you?”</i> Lagon asks curiously.", parse);
 								Text.NL();
 								Text.Add("Well, a powerful artifact like that could be of much use to you in your fight.", parse);
@@ -1787,7 +1769,7 @@ LagonScenes.RulerTalkPrompt = function() {
 								Text.Add("<i>“Spend a week in the Pit, for anyone to use and abuse,”</i> Lagon purrs. <i>“Embrace your slutty nature and take your place beside Vena. Endure for a week, and it shall be yours.”</i>", parse);
 								Text.NL();
 								Text.Add("You give the king a dubious glance. He’s obviously testing you… but you have no leverage here. <i>“Of course, you are free to refuse,”</i> he shrugs, carelessly throwing the scepter back on the pile. <i>“No Pit, no scepter.”</i>", parse);
-								lagon.flags["Talk"] |= Lagon.Talk.ScepterTalk;
+								lagon.flags["Talk"] |= LagonFlags.Talk.ScepterTalk;
 							}
 							else {
 								Text.Add("<i>“Oh, would you like to reconsider our deal?”</i> The lecherous king grins. <i>“Give me a week, and it shall be yours.”</i>", parse);
@@ -1847,7 +1829,7 @@ Pit loss (todo)
 				if(roa.Recruited()) {
 					//TODO Recruited Roa talk
 				}
-				else if(lagon.flags["Talk"] & Lagon.Talk.RoaTalk) {
+				else if(lagon.flags["Talk"] & LagonFlags.Talk.RoaTalk) {
 					Text.Add("<i>“Him again?”</i> Lagon frowns. <i>“If you have the time to waste your breath asking about that slut, why don’t you go and fetch him instead? I’d like to talk to him about disobedience.”</i>", parse);
 				}
 				else {
@@ -1864,7 +1846,7 @@ Pit loss (todo)
 					Text.Add("What does he have in mind?", parse);
 					Text.NL();
 					Text.Add("<i>“I’d like you to fetch my son and bring him here. I’m sure his sister can convince him to come along, he always looked up to her.”</i> There’s a malicious smile playing on the lapin’s lips. <i>“I’d like to talk with him on the subject of disobedience.”</i>", parse);
-					lagon.flags["Talk"] |= Lagon.Talk.RoaTalk;
+					lagon.flags["Talk"] |= LagonFlags.Talk.RoaTalk;
 				}
 				Text.Flush();
 				LagonScenes.RulerTalkPrompt();
@@ -1916,7 +1898,7 @@ LagonScenes.PitDefianceWin = function() {
 		
 		Text.Flush();
 		
-		lagon.flags["Usurp"] |= Lagon.Usurp.FirstFight;
+		lagon.flags["Usurp"] |= LagonFlags.Usurp.FirstFight;
 		
 		TimeStep({minute: 30});
 		party.location = world.loc.Burrows.Entrance;
@@ -2532,7 +2514,7 @@ LagonScenes.WinToBruteLagon = function() {
 		playername : player.name
 	};
 	
-	lagon.flags["Usurp"] |= Lagon.Usurp.Defeated;
+	lagon.flags["Usurp"] |= LagonFlags.Usurp.Defeated;
 	
 	Gui.Callstack.push(function() {
 		Text.Clear();
@@ -2684,7 +2666,7 @@ LagonScenes.WinToOphelia = function() {
 		pheshe : player.mfFem("he", "she")
 	};
 	
-	lagon.flags["Usurp"] |= Lagon.Usurp.SidedWith;
+	lagon.flags["Usurp"] |= LagonFlags.Usurp.SidedWith;
 	ophelia.flags["Met"] |= Ophelia.Met.Recruited;
 	ophelia.flags["Met"] |= Ophelia.Met.Broken;
 	ophelia.flags["Met"] |= Ophelia.Met.InParty;

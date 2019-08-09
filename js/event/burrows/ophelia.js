@@ -19,6 +19,7 @@ import { Abilities } from '../../abilities';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { BodyPartType } from '../../body/bodypart';
+import { VenaFlags } from './vena-flags';
 
 let OpheliaScenes = {};
 
@@ -2120,8 +2121,8 @@ OpheliaScenes.Reward = function() {
 				Text.Clear();
 				OpheliaScenes.fuckedByVena = true;
 				
-				vena.flags["Sex"] |= Vena.Sex.FuckedBy;
-				vena.flags["Sex"] |= Vena.Sex.Forced;
+				vena.flags["Sex"] |= VenaFlags.Sex.FuckedBy;
+				vena.flags["Sex"] |= VenaFlags.Sex.Forced;
 				
 				parse["himher"] = player.mfTrue("him", "her");
 				Text.Add("You shout for her to wait, to take you instead, tearing off your gear quickly. Vena’s clouded gaze flits between you and her daughter in confusion, torn between the initial target of her lust and the new, willing slut presenting [himher]self. After a brief moment of indecision, she jumps you, nearly crushing you with her weight.", parse);

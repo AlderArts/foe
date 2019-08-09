@@ -1,21 +1,25 @@
 
 import { GetDEBUG } from '../../../app';
 import { Gender } from '../../body/gender';
-import { MoveToLocation } from '../../GAME';
+import { MoveToLocation, GAME, TimeStep, WORLD } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
+import { LagonFlags } from './lagon-flags';
+import { Sex } from '../../entity-sex';
+import { LagomorphElite } from '../../enemy/rabbit';
+import { AlchemyItems } from '../../items/alchemy';
 
-let LagonDScenes = {};
+let LagonDScenes : any = {};
 
 LagonDScenes.RoomApproach = function() {
 	let party = GAME().party;
 	let lagon = GAME().lagon;
 	
-	var parse = {
+	var parse : any = {
 		
 	};
 	
-	party.location = world.loc.Burrows.LagonCell;
+	party.location = WORLD().loc.Burrows.LagonCell;
 	TimeStep({minute: 15});
 	
 	Text.Clear();
@@ -32,11 +36,11 @@ LagonDScenes.RoomApproach = function() {
 	Text.Add("Lagon is currently lounging on his seat, chin in his palm and idly drumming on an armrest with his fingertips. His ear twitches at the sound of his door opening and closing, and he looks towards you, trying to keep any interest from his face. When he sees you, he scowls bitterly.", parse);
 	Text.NL();
 	Text.Add("<i>“Oh. It’s you. What do you want?”</i> he growls.", parse);
-	if(lagon.flags["Usurp"] & Lagon.Usurp.NiceFlag) {
+	if(lagon.flags["Usurp"] & LagonFlags.Usurp.NiceFlag) {
 		//Remove nice flag
-		lagon.flags["Usurp"] &= ~Lagon.Usurp.NiceFlag;
-		var first = !(lagon.flags["Usurp"] & Lagon.Usurp.NiceReact);
-		lagon.flags["Usurp"] |= Lagon.Usurp.NiceReact;
+		lagon.flags["Usurp"] &= ~LagonFlags.Usurp.NiceFlag;
+		var first = !(lagon.flags["Usurp"] & LagonFlags.Usurp.NiceReact);
+		lagon.flags["Usurp"] |= LagonFlags.Usurp.NiceReact;
 		if(first) {
 			Text.NL();
 			Text.Add("You are a bit taken aback by the sudden change - last time you left him, you thought he was a changed bunny. You comment on this too: did those sons of his deny him the buttfuck he was craving so?", parse);
@@ -58,7 +62,7 @@ LagonDScenes.Prompt = function() {
 	let party = GAME().party;
 	let lagon = GAME().lagon;
 	
-	var parse = {
+	var parse : any = {
 		scepter : "scepter" //TODO
 	};
 	
@@ -70,7 +74,7 @@ LagonDScenes.Prompt = function() {
 			LagonDScenes.SexPrompt();
 		}
 	});
-	var first = !(lagon.flags["Usurp"] & Lagon.Usurp.NiceFirst);
+	var first = !(lagon.flags["Usurp"] & LagonFlags.Usurp.NiceFirst);
 	options.push({nameStr : "Scepter", //TODO
 		tooltip : Text.Parse(first ? "If this [scepter] can affect minds so much, maybe it can give Lagon a little attitude adjustment? It's worth a shot." : "Time to give Lagon a little time with his inner feelings.", parse),
 		enabled : true,
@@ -107,7 +111,7 @@ LagonDScenes.Prompt = function() {
 		Text.Flush();
 		
 		Gui.NextPrompt(function() {
-			MoveToLocation(world.loc.Burrows.Throne, {minute: 15});
+			MoveToLocation(WORLD().loc.Burrows.Throne, {minute: 15});
 		});
 	});
 }
@@ -117,13 +121,13 @@ LagonDScenes.SexPrompt = function() {
 	let player = GAME().player;
 	let lagon = GAME().lagon;
 	
-	var parse = {
+	var parse : any = {
 		
 	};
 	parse = player.ParserTags(parse);
 	
-	var first = !(lagon.flags["Usurp"] & Lagon.Usurp.JailSexFirst);
-	lagon.flags["Usurp"] |= Lagon.Usurp.JailSexFirst;
+	var first = !(lagon.flags["Usurp"] & LagonFlags.Usurp.JailSexFirst);
+	lagon.flags["Usurp"] |= LagonFlags.Usurp.JailSexFirst;
 	
 	Text.Clear();
 	if(first) {
@@ -220,15 +224,15 @@ LagonDScenes.PitchAnal = function() {
 	var p1cock = player.BiggestCock(null, true);
 	var strapon = p1cock.isStrapon;
 	
-	var parse = {
+	var parse : any = {
 		
 	};
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
 	
-	var first = !(lagon.flags["JSex"] & Lagon.JailSex.PitchAnal);
-	lagon.flags["JSex"] |= Lagon.JailSex.PitchAnal;
+	var first = !(lagon.flags["JSex"] & LagonFlags.JailSex.PitchAnal);
+	lagon.flags["JSex"] |= LagonFlags.JailSex.PitchAnal;
 	
 	Text.Clear();
 	Text.Add("Looking at Lagon's supine form, your eyes trail over his naked body until they are drawn like magnets to the tantalizing hint of his rear.", parse);
@@ -533,7 +537,7 @@ LagonDScenes.PitchAnal = function() {
 	TimeStep({hour: 1});
 
 	Gui.NextPrompt(function() {
-		MoveToLocation(world.loc.Burrows.Throne, {minute: 15});
+		MoveToLocation(WORLD().loc.Burrows.Throne, {minute: 15});
 	});
 }
 
@@ -541,15 +545,15 @@ LagonDScenes.ScepterEntry = function() {
 	let player = GAME().player;
 	let lagon = GAME().lagon;
 	
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		scepter : "scepter" //TODO
 	};
 	
-	var first = !(lagon.flags["Usurp"] & Lagon.Usurp.NiceFirst);
-	lagon.flags["Usurp"] |= Lagon.Usurp.NiceFirst;
+	var first = !(lagon.flags["Usurp"] & LagonFlags.Usurp.NiceFirst);
+	lagon.flags["Usurp"] |= LagonFlags.Usurp.NiceFirst;
 	// Set flag
-	lagon.flags["Usurp"] |= Lagon.Usurp.NiceFlag;
+	lagon.flags["Usurp"] |= LagonFlags.Usurp.NiceFlag;
 	
 	Text.Clear();
 	if(first) {
@@ -642,7 +646,7 @@ LagonDScenes.ScepterPrompt = function() {
 	let player = GAME().player;
 	let lagon = GAME().lagon;
 	
-	var parse = {
+	var parse : any = {
 		manwoman : player.mfTrue("man", "woman"),
 		playername : player.name
 	};
@@ -702,7 +706,7 @@ LagonDScenes.ScepterPrompt = function() {
 		Text.NL();
 		Text.Add("Amused, you salute him in return, and turn to leave. You haven’t gotten far down the tunnel when lapine moaning echoes back to you from Lagon’s chamber. Looking back over your shoulder, you see the other guard looking through the window in Lagon’s door, an expression of surprise giving way to one of envy. You chuckle to yourself in amusement and keep heading to the throne room.", parse);
 		
-		var guard = new LagomorphElite(Gender.male);
+		var guard : any = new LagomorphElite(Gender.male);
 		
 		Sex.Anal(guard, lagon);
 		lagon.FuckAnal(lagon.Butt(), guard.FirstCock(), 0);
@@ -711,7 +715,7 @@ LagonDScenes.ScepterPrompt = function() {
 		Text.Flush();
 		
 		Gui.NextPrompt(function() {
-			MoveToLocation(world.loc.Burrows.Throne, {minute: 30});
+			MoveToLocation(WORLD().loc.Burrows.Throne, {minute: 30});
 		});
 	});
 }
@@ -719,7 +723,7 @@ LagonDScenes.ScepterPrompt = function() {
 LagonDScenes.ScepterSexPrompt = function() {
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -759,7 +763,7 @@ LagonDScenes.ScepterPitchAnal = function() {
 
 	var p1cock = player.BiggestCock(null, true);
 	var strapon = p1cock.isStrapon;
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		stuttername : player.name[0] + "-" + player.name
 	};
@@ -767,7 +771,7 @@ LagonDScenes.ScepterPitchAnal = function() {
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
 	
-	lagon.flags["JSex"] |= Lagon.JailSex.PitchAnal;
+	lagon.flags["JSex"] |= LagonFlags.JailSex.PitchAnal;
 	
 	Text.Clear();
 	Text.Add("Lasciviously licking your lips, you tell Lagon to spin around and let you get a good look at that cute little rump of his.", parse);
@@ -1272,7 +1276,7 @@ LagonDScenes.ScepterPitchAnal = function() {
 	TimeStep({hour: 1});
 	
 	Gui.NextPrompt(function() {
-		MoveToLocation(world.loc.Burrows.Throne, {minute : 15});
+		MoveToLocation(WORLD().loc.Burrows.Throne, {minute : 15});
 	});
 }
 
@@ -1280,12 +1284,12 @@ LagonDScenes.Punishment = function() {
 	let player = GAME().player;
 	let party = GAME().party;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	parse = player.ParserTags(parse);
 	
-	party.location = world.loc.Burrows.Pit;
+	party.location = WORLD().loc.Burrows.Pit;
 	
 	Text.Clear();
 	Text.Add("With the lapine queen leading you, it doesn’t take long for you to arrive at the warren’s central orgy room - the Pit. As she leads you out of one of the tunnels and onto the floor, you surreptitiously steal a look at your surroundings.", parse);
@@ -1456,7 +1460,7 @@ LagonDScenes.PunishmentPC = function() {
 	var p1cock = player.BiggestCock(null, true);
 	var strapon = p1cock.isStrapon;
 	
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	parse = player.ParserTags(parse);
@@ -1624,14 +1628,14 @@ LagonDScenes.PunishmentPC = function() {
 	}
 }
 
-LagonDScenes.PunishmentPCCont = function(came) {
+LagonDScenes.PunishmentPCCont = function(came : boolean) {
 	let player = GAME().player;
 	let lagon = GAME().lagon;
 	
 	var p1cock = player.BiggestCock(null, true);
 	var strapon = p1cock.isStrapon;
 	
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	parse = player.ParserTags(parse);
@@ -1773,7 +1777,7 @@ LagonDScenes.PunishmentPCCont = function(came) {
 			Text.Add("The cascade of spunk hits Lagon like a tidal wave, visibly deforming his once-tight stomach as it slams into his guts. His midriff bulges out from the sheer quantity of semen rushing into it, then shrinks back as your first spurt ends... and then the next one hits. And then the next.", parse);
 			Text.NL();
 			Text.Add("Like a pregnancy on fast-forward, Lagon's stomach balloons outward, round and flush with your seed, packed so tight that the skin is stretched taut as a drum. By the time you finally run dry, his belly is enormous; he looks like his wife does when she's ready to pop out one of her bigger litters.", parse);
-			if(player.KnowsRecipe(Items.Anusol)) {
+			if(player.KnowsRecipe(AlchemyItems.Anusol)) {
 				Text.NL();
 				Text.Add("A brief flicker of breeder-lust flashes through the swirling stew of your thoughts, making you momentarily wish that were the case, just to really hammer it home who's the alpha here.", parse);
 			}
@@ -1932,14 +1936,14 @@ LagonDScenes.PunishmentPCCont = function(came) {
 	TimeStep({hour: 1, minute: 30});
 	
 	Gui.NextPrompt(function() {
-		MoveToLocation(world.loc.Burrows.Throne, {minute: 15});
+		MoveToLocation(WORLD().loc.Burrows.Throne, {minute: 15});
 	});
 }
 
 LagonDScenes.PunishmentVena = function() {
 	let player = GAME().player;
 	
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -2138,7 +2142,7 @@ LagonDScenes.PunishmentVena = function() {
 LagonDScenes.PunishmentVenaCont = function() {
 	let player = GAME().player;
 	
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -2172,7 +2176,7 @@ LagonDScenes.PunishmentVenaCont = function() {
 	TimeStep({hour: 1});
 	
 	Gui.NextPrompt(function() {
-		MoveToLocation(world.loc.Burrows.Throne, {minute: 15});
+		MoveToLocation(WORLD().loc.Burrows.Throne, {minute: 15});
 	});
 }
 

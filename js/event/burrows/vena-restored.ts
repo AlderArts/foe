@@ -2,12 +2,14 @@ import { EncounterTable } from "../../encountertable";
 import { Text } from "../../text";
 import { TimeStep, GAME } from "../../GAME";
 import { Gui } from "../../gui";
+import { VenaFlags } from "./vena-flags";
+import { LagonDScenes } from "./lagon-defeated";
 
-let VenaRScenes = {};
+let VenaRScenes : any = {};
 
 VenaRScenes.Approach = function() {
 	let player = GAME().player;
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -128,19 +130,19 @@ VenaRScenes.Approach = function() {
 
 VenaRScenes.Prompt = function() {
 	let vena = GAME().vena;
-	var parse = {
+	var parse : any = {
 		
 	};
 	
 	var options = [];
 	
-	var judged = vena.flags["Met"] & Vena.Met.Judgement;
+	var judged = vena.flags["Met"] & VenaFlags.Met.Judgement;
 	if(!judged) {
 		options.push({nameStr : "Lagon’s fate",
 			tooltip : Text.Parse("You want to talk about what’s going to happen to Lagon.", parse),
 			enabled : true,
 			func : function() {
-				vena.flags["Met"] |= Vena.Met.Judgement;
+				vena.flags["Met"] |= VenaFlags.Met.Judgement;
 				
 				Text.Clear();
 				Text.Add("As delicately as you can, you reply that you were wondering what she’s going to do with the former king.", parse);
@@ -190,9 +192,9 @@ VenaRScenes.Prompt = function() {
 	});
 }
 
-VenaRScenes.LagonsFate = function(opts) {
+VenaRScenes.LagonsFate = function(opts : any) {
 	let player = GAME().player;
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -230,7 +232,7 @@ VenaRScenes.LagonsFate = function(opts) {
 			TimeStep({minute: 15});
 			
 			Gui.NextPrompt(function() {
-				Scenes.Lagon.Defeated.Punishment();
+				LagonDScenes.Punishment();
 			});
 		}
 	});

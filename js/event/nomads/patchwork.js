@@ -10,6 +10,7 @@ import { Gender } from '../../body/gender';
 import { Items } from '../../items';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
+import { GAME } from '../../GAME';
 
 let PatchworkScenes = {};
 

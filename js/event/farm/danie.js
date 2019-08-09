@@ -11,6 +11,7 @@ import { AppendageType } from '../../body/appendage';
 import { Color } from '../../body/color';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
+import { GAME } from '../../GAME';
 
 function Danie(storage) {
 	Entity.call(this);

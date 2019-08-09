@@ -6,7 +6,7 @@
 import { Entity } from '../../entity';
 import { GetDEBUG } from '../../../app';
 import { Gender } from '../../body/gender';
-import { WorldTime } from '../../GAME';
+import { WorldTime, GAME } from '../../GAME';
 import { Gui } from '../../gui';
 import { Text } from '../../text';
 import { RaceScore } from '../../body/race';

@@ -6,7 +6,7 @@
 
 import { Entity } from '../entity';
 import { EncounterTable } from '../encountertable';
-import { MoveToLocation, GAME } from '../GAME';
+import { MoveToLocation, GAME, WORLD } from '../GAME';
 import { Gender } from '../body/gender';
 import { Images } from '../assets';
 import { Time } from '../time';
@@ -128,7 +128,7 @@ Momo.prototype.ToStorage = function() {
 // Schedule
 Momo.prototype.IsAtLocation = function(location) {
 	location = location || GAME().party.location;
-	if(location == world.loc.Plains.Nomads.Fireplace && this.AtCamp() && WorldTime().hour >= 4 && WorldTime().hour < 21) {
+	if(location == WORLD().loc.Plains.Nomads.Fireplace && this.AtCamp() && WorldTime().hour >= 4 && WorldTime().hour < 21) {
 		return true;
 	}
 	return false;

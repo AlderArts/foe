@@ -7,7 +7,7 @@ import { Entity } from '../../entity';
 import { Images } from '../../assets';
 import { Color } from '../../body/color';
 import { HairStyle } from '../../body/hair';
-import { WorldTime, TimeStep } from '../../GAME';
+import { WorldTime, TimeStep, GAME, WORLD } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
 
@@ -114,6 +114,7 @@ Gwendy.prototype.ToStorage = function() {
 
 // Schedule
 Gwendy.prototype.IsAtLocation = function(location) {
+	let world = WORLD();
 	// Numbers/slacking/sleep
 	if     (location == world.loc.Farm.Loft)   return (WorldTime().hour >= 19 || WorldTime().hour < 5);
 	// Morning routine

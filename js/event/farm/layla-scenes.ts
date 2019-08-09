@@ -1,7 +1,7 @@
 
 import { Layla } from './layla';
 import { Gender } from '../../body/gender';
-import { WorldTime } from '../../GAME';
+import { WorldTime, GAME, TimeStep, WORLD } from '../../GAME';
 import { Party } from '../../party';
 import { Encounter } from '../../combat';
 import { SetGameState, GameState } from '../../gamestate';
@@ -10,14 +10,23 @@ import { Text } from '../../text';
 import { MoveToLocation } from '../../GAME';
 import { Sex } from '../../entity-sex';
 import { LaylaFlags } from './layla-flags';
+import { EncounterTable } from '../../encountertable';
+import { DryadGlade } from '../../loc/glade';
+import { PregnancyHandler } from '../../pregnancy';
+import { Cock } from '../../body/cock';
+import { Race } from '../../body/race';
+import { Entity } from '../../entity';
+import { Time } from '../../time';
+import { GwendyScenes } from './gwendy-scenes';
+import { PartyInteraction } from '../../exploration';
 
-let LaylaScenes = {};
+let LaylaScenes : any = {};
 
-LaylaScenes.Prompt = function(switchSpot) {
+LaylaScenes.Prompt = function(switchSpot : boolean) {
 	let player = GAME().player;
 	let layla = GAME().layla;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -85,10 +94,10 @@ LaylaScenes.Prompt = function(switchSpot) {
 
 
 //TODO
-LaylaScenes.TalkPrompt = function(switchSpot) {
+LaylaScenes.TalkPrompt = function(switchSpot : boolean) {
 	let player = GAME().player;
 	let layla = GAME().layla;
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -177,11 +186,11 @@ LaylaScenes.TalkPrompt = function(switchSpot) {
 	});
 }
 
-LaylaScenes.Appearance = function(switchSpot) {
+LaylaScenes.Appearance = function(switchSpot : boolean) {
 	let player = GAME().player;
 	let kiakai = GAME().kiakai;
 	let layla = GAME().layla;
-	var parse = {
+	var parse : any = {
 		name : kiakai.name,
 		playername : player.name
 	};
@@ -333,12 +342,19 @@ LaylaScenes.Appearance = function(switchSpot) {
 	LaylaScenes.Prompt(switchSpot);
 }
 
-LaylaScenes.PartyRegular = function(switchSpot) {
+LaylaScenes.PartyRegular = function(switchSpot : boolean) {
 	let player = GAME().player;
 	let party = GAME().party;
 	let kiakai = GAME().kiakai;
 	let layla = GAME().layla;
-	var parse = {
+	let terry = GAME().terry;
+	let roa = GAME().roa;
+	let momo = GAME().momo;
+	let miranda = GAME().miranda;
+	let cveta = GAME().cveta;
+	let burrows = GAME().burrows;
+
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -490,7 +506,7 @@ LaylaScenes.PartyRegular = function(switchSpot) {
  * 
  */
 
-LaylaScenes.FarmMeetingTrigger = function(approach) {
+LaylaScenes.FarmMeetingTrigger = function(approach : boolean) {
 	let glade = GAME().glade;
 	let layla = GAME().layla;
 	if(glade.flags["Visit"] < DryadGlade.Visit.DefeatedOrchid) return false; //TODO: change to after portals open?
@@ -534,12 +550,12 @@ LaylaScenes.FarmMeetingTrigger = function(approach) {
 }
 
 //approaching/sleeping
-LaylaScenes.FirstMeeting = function(approach) {
+LaylaScenes.FirstMeeting = function(approach : boolean) {
 	let player = GAME().player;
 	let party = GAME().party;
 	let gwendy = GAME().gwendy;
 	let layla = GAME().layla;
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -606,11 +622,11 @@ LaylaScenes.FirstMeeting = function(approach) {
 
 
 //In case you let her get away. This happens 3 days after that. And continue repeating every 3 days till you win.
-LaylaScenes.RepeatMeeting = function(approach) {
+LaylaScenes.RepeatMeeting = function(approach : boolean) {
 	let player = GAME().player;
 	let party = GAME().party;
 	let gwendy = GAME().gwendy;
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -690,7 +706,7 @@ LaylaScenes.FarmCombatLoss = function() {
 	if(party.InParty(gwendy))
 		party.LoadActiveParty();
 	
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -736,7 +752,7 @@ LaylaScenes.FarmCombatWin = function() {
 	if(party.InParty(gwendy))
 		party.LoadActiveParty();
 	
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -811,7 +827,7 @@ LaylaScenes.FarmCombatWin = function() {
 				
 				hadSex = true;
 				
-				Scenes.Gwendy.LoftSexPrompt(function() {
+				GwendyScenes.LoftSexPrompt(function() {
 					hadSex = false;
 					
 					Text.Clear();
@@ -987,7 +1003,7 @@ LaylaScenes.FarmCombatWin = function() {
 LaylaScenes.SecondMeeting = function() {
 	let player = GAME().player;
 	let layla = GAME().layla;
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -1046,7 +1062,7 @@ LaylaScenes.LeavesGwendy = function() {
 	let player = GAME().player;
 	let party = GAME().party;
 	let layla = GAME().layla;
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -1076,7 +1092,7 @@ LaylaScenes.LeavesGwendy = function() {
 	layla.flags["Take"] = 0; //Remove variable from save
 	
 	Gui.NextPrompt(function() {
-		MoveToLocation(world.loc.Plains.Crossroads, {minute: 30});
+		MoveToLocation(WORLD().loc.Plains.Crossroads, {minute: 30});
 	});
 }
 
@@ -1086,7 +1102,7 @@ LaylaScenes.LeavesGwendy = function() {
 
 
 
-LaylaScenes.Impregnate = function(mother, father, load, slot) {
+LaylaScenes.Impregnate = function(mother : Entity, father : Entity, load : number, slot? : number) {
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother : mother,
@@ -1099,10 +1115,10 @@ LaylaScenes.Impregnate = function(mother, father, load, slot) {
 }
 
 //TODO
-LaylaScenes.SexPrompt = function(switchSpot) {
+LaylaScenes.SexPrompt = function(switchSpot : boolean) {
 	let player = GAME().player;
 	let layla = GAME().layla;
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		armor : function() { return player.ArmorDesc(); }
 	};
@@ -1182,7 +1198,7 @@ LaylaScenes.SexFirstTime = function() {
 	var p1cock = player.BiggestCock(null, true);
 	var strapon = p1cock.isStrapon;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		upperArmor : function() { return player.ArmorDesc(); },
 		lowerArmor : function() { return player.LowerArmorDesc(); }
@@ -1808,7 +1824,7 @@ LaylaScenes.SexCatchAnal = function() {
 	let player = GAME().player;
 	let layla = GAME().layla;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	parse = player.ParserTags(parse);
@@ -2033,7 +2049,7 @@ LaylaScenes.SexCatchAnal = function() {
 	}
 }
 
-LaylaScenes.SexCatchAnalBlowher = function(parse) {
+LaylaScenes.SexCatchAnalBlowher = function(parse : any) {
 	let player = GAME().player;
 	let layla = GAME().layla;
 
@@ -2089,7 +2105,7 @@ LaylaScenes.SexCatchAnalBlowher = function(parse) {
 	LaylaScenes.SexCatchAnalCont(parse);
 }
 
-LaylaScenes.SexCatchAnalCont = function(parse) {
+LaylaScenes.SexCatchAnalCont = function(parse : any) {
 	let player = GAME().player;
 	let layla = GAME().layla;
 
@@ -2216,7 +2232,6 @@ LaylaScenes.SexCatchAnalCont = function(parse) {
 							Text.Add("Without hesitation, you open your lips, inviting the chimera’s tongue inside, an invitation she immediately seizes upon. A long, writhing appendage squirms inside, filling your taste buds with her flavor as it ensnares your [tongue].", parse);
 							Text.NL();
 
-							kiss = true;
 							LaylaScenes.SexCatchAnalCont2(parse, true);
 						}, enabled : true,
 						tooltip : "Of course you can."
@@ -2242,7 +2257,7 @@ LaylaScenes.SexCatchAnalCont = function(parse) {
 		LaylaScenes.SexCatchAnalCont2(parse);
 }
 
-LaylaScenes.SexCatchAnalCont2 = function(parse, kiss, tailcock) {
+LaylaScenes.SexCatchAnalCont2 = function(parse : any, kiss? : boolean, tailcock? : boolean) {
 	let player = GAME().player;
 	let layla = GAME().layla;
 
@@ -2364,7 +2379,7 @@ LaylaScenes.SexCatchAnalCont2 = function(parse, kiss, tailcock) {
 		LaylaScenes.SexCatchAnalCont3(parse);
 }
 
-LaylaScenes.SexCatchAnalCont3 = function(parse) {
+LaylaScenes.SexCatchAnalCont3 = function(parse : any) {
 	let player = GAME().player;
 	let layla = GAME().layla;
 
@@ -2419,7 +2434,7 @@ LaylaScenes.SexCatchAnalCont3 = function(parse) {
 
 //TODO
 LaylaScenes.SexCatchVaginal = function() {
-	var parse = {
+	var parse : any = {
 
 	};
 
@@ -2435,7 +2450,7 @@ LaylaScenes.SexCatchVaginal = function() {
 
 LaylaScenes.FirstTimeSkinShift = function() {
 	let layla = GAME().layla;
-	var parse = {
+	var parse : any = {
 
 	};
 
@@ -2463,7 +2478,7 @@ LaylaScenes.SexPitchVaginal = function() {
 
 	var p1cock = player.BiggestCock(null, true);
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	parse = player.ParserTags(parse);
@@ -2666,7 +2681,7 @@ LaylaScenes.SexPitchVaginal = function() {
 	}
 }
 
-LaylaScenes.SexPitchVaginalCont = function(opts, p1cock, parse) {
+LaylaScenes.SexPitchVaginalCont = function(opts : any, p1cock : Cock, parse : any) {
 	let player = GAME().player;
 	let layla = GAME().layla;
 
@@ -2763,7 +2778,7 @@ LaylaScenes.SexPitchVaginalCont = function(opts, p1cock, parse) {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-LaylaScenes.SexPitchVaginalCont2 = function(opts, p1cock, parse) {
+LaylaScenes.SexPitchVaginalCont2 = function(opts : any, p1cock : Cock, parse : any) {
 	let player = GAME().player;
 	let layla = GAME().layla;
 
@@ -3066,7 +3081,7 @@ LaylaScenes.SexPitchVaginalCont2 = function(opts, p1cock, parse) {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-LaylaScenes.SexPitchVaginalCont3 = function(opts, p1cock, parse) {
+LaylaScenes.SexPitchVaginalCont3 = function(opts : any, p1cock : Cock, parse : any) {
 	let player = GAME().player;
 	let layla = GAME().layla;
 
@@ -3454,7 +3469,7 @@ LaylaScenes.SexPitchVaginalCont3 = function(opts, p1cock, parse) {
 	}
 }
 
-LaylaScenes.SexPitchVaginalVariable = function(opts, p1cock, parse) {
+LaylaScenes.SexPitchVaginalVariable = function(opts : any, p1cock : Cock, parse : any) {
 	let layla = GAME().layla;
 
 	if(opts.LCock) {
@@ -3478,7 +3493,7 @@ LaylaScenes.SexPitchVaginalVariable = function(opts, p1cock, parse) {
 	}
 }
 
-LaylaScenes.SexPitchVaginalCummy = function(opts, p1cock, parse) {
+LaylaScenes.SexPitchVaginalCummy = function(opts : any, p1cock : Cock, parse : any) {
 	Text.NL();
 	if(opts.CummyL) {
 		Text.Add("Layla sits up, still a bit sluggish after the sex. Once she’s had time to catch her breath, she busies herself with licking the cum off her body, her long tongue extending to catch every little wad of semen still clinging to her.", parse);

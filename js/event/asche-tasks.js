@@ -4,7 +4,7 @@
  */
 import { GetDEBUG } from '../../app';
 import { Gender } from '../body/gender';
-import { WorldTime, TimeStep, GAME } from '../GAME';
+import { WorldTime, TimeStep, GAME, WORLD } from '../GAME';
 import { SetGameState, GameState } from '../gamestate';
 import { Gui } from '../gui';
 import { Text } from '../text';
@@ -1131,7 +1131,7 @@ TasksScenes.Spring.Highlands = function() {
 		feet : player.FeetDesc()
 	};
 	
-	party.location = world.loc.Highlands.Spring;
+	party.location = WORLD().loc.Highlands.Spring;
 	
 	Text.Clear();
 	parse["season"] = WorldTime().season == Season.Summer ? ", even for summer" : "";
@@ -1220,7 +1220,7 @@ TasksScenes.Spring.Highlands = function() {
 		asche.flags["Tasks"] |= Asche.Tasks.Spring_Visited;
 		
 		Gui.NextPrompt(function() {
-			party.location = world.loc.Highlands.Hills;
+			party.location = WORLD().loc.Highlands.Hills;
 			Gui.PrintDefaultOptions();
 		});
 	});

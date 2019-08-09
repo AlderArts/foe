@@ -14,6 +14,7 @@ import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { PregnancyHandler } from '../../pregnancy';
 import { GAME } from '../../GAME';
+import { VenaFlags } from './vena-flags';
 
 let VenaScenes = {
 	Restored : VenaRScenes,
@@ -48,18 +49,6 @@ function Vena(storage) {
 }
 Vena.prototype = new Entity();
 Vena.prototype.constructor = Vena;
-
-Vena.Met = {
-	PitFirst  : 1,
-	Restored  : 2,
-	Judgement : 4
-}
-
-Vena.Sex = {
-	Fucked   : 1,
-	FuckedBy : 2,
-	Forced   : 4
-}
 
 Vena.prototype.FromStorage = function(storage) {
 	this.LoadPersonalityStats(storage);
@@ -286,7 +275,7 @@ VenaScenes.RestoreEntrypoint = function(fight) {
 		playername : player.name
 	};
 	
-	vena.flags["Met"] |= Vena.Met.Restored;
+	vena.flags["Met"] |= VenaFlags.Met.Restored;
 	burrows.flags["Access"] = Burrows.AccessFlags.QuestlineComplete;
 	
 	ophelia.relation.IncreaseStat(100, 25);

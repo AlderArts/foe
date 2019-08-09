@@ -90,10 +90,8 @@ import './js/event/brothel/gryphons.js';
 import './js/event/brothel/fireblossom.js';
 
 import './js/event/burrows/lagon.js';
-import './js/event/burrows/lagon-defeated.js';
 import './js/event/burrows/ophelia.js';
 import './js/event/burrows/vena.js';
-import './js/event/burrows/vena-restored.js';
 
 import './js/event/farm/gwendy.js';
 import './js/event/farm/adrian.js';
