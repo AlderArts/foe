@@ -30,10 +30,7 @@ import './js/body/bodypart.js';
 import './js/body/appendage.js';
 import './js/body/balls.js';
 import './js/body/breasts.js';
-import './js/body/orifice.js';
-import './js/body/butt.js';
 import './js/body/cock.js';
-import './js/body/vagina.js';
 import './js/body/hair.js';
 import './js/body/head.js';
 import './js/body/genitalia.js';
@@ -179,9 +176,6 @@ import './js/event/outlaws/bulltower.js';
 import './js/event/outlaws/cavalcade.js';
 
 import './js/event/raven.js';
-
-// Seasonal
-import './js/event/halloween.js';
 
 // Enemies
 import './js/enemy/bandit.js';
