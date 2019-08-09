@@ -86,7 +86,6 @@ import './js/loc/rigard/weaponshop.js';
 import './js/loc/rigard/inn.js';
 import './js/loc/rigard/magetower.js';
 
-import './js/loc/plains.js';
 import './js/loc/highlands.js';
 import './js/loc/dragonden.js';
 import './js/loc/forest.js';

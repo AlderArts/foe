@@ -1719,4 +1719,4 @@ FarmScenes.GoToMarketFirstFinale = function() {
 	Gui.SetButtonsFromList(options);
 }
 
-export { Farm, FarmLoc, FarmScenes };
+export { Farm, FarmLoc, FarmScenes, FarmScenesIntro };
