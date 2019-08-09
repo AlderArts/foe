@@ -4,6 +4,7 @@ import { EncounterTable } from '../../encountertable';
 import { Text } from '../../text';
 import { MoveToLocation } from '../../GAME';
 import { Gui } from '../../gui';
+import { RigardFlags } from './rigard-flags';
 
 let ResidentialLoc = {
 	street   : new Event("Residential street"), // Will also contain gate to slums
@@ -21,7 +22,7 @@ ResidentialLoc.street.description = function() {
 	Text.Add("The common residential area is clearly a shadier part of the town. The closely spaced buildings here are shabbier than you would see elsewhere, hardly letting you see the sky for all the laundry hanging out on display for all to see.");
 	Text.NL();
 	
-	if(rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry) {
+	if(rigard.Krawitz["Q"] == RigardFlags.KrawitzQ.HuntingTerry) {
 		Text.Add("Though many residents are still going about their normal business, even here, the lockdown has caused disruptions. There's a sizable group of residents standing near the gate, trying in vain to get past the guards and arguing quite vehemently as they try and make their case. An even larger group is watching the argument; some simply for entertainment, undoubtedly, but most of them are glaring at the guards.");
 		Text.NL();
 		Text.Add("It's not a very likely hiding place, but there's enough nooks, crannies and people here that a bold or desperate thief could try and conceal themselves.");
@@ -38,7 +39,7 @@ ResidentialLoc.street.enc.AddEnc(function() { return Scenes.Rigard.CityHistory;}
 });
 ResidentialLoc.street.enc.AddEnc(function() { return Scenes.Terry.ExploreResidential; }, 1000000.0, function() {
 	let rigard = GAME().rigard;
-	return rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry;
+	return rigard.Krawitz["Q"] == RigardFlags.KrawitzQ.HuntingTerry;
 });
 ResidentialLoc.street.enc.AddEnc(function() { return Scenes.Lei.GuardStalking; }, 3.0, function() { return Scenes.Lei.GuardStalkingApplicable(); });
 ResidentialLoc.street.onEntry = function() {
@@ -104,7 +105,7 @@ ResidentialLoc.street.links.push(new Link(
 	null,
 	function() {
 		let rigard = GAME().rigard;
-		if(rigard.Krawitz["Q"] == Rigard.KrawitzQ.HeistDone)
+		if(rigard.Krawitz["Q"] == RigardFlags.KrawitzQ.HeistDone)
 			Scenes.Rigard.Lockdown();
 		else
 			MoveToLocation(world.loc.Rigard.Slums.gate, {minute: 10});

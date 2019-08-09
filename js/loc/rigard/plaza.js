@@ -4,6 +4,7 @@ import { EncounterTable } from '../../encountertable';
 import { WorldTime, MoveToLocation } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
+import { RigardFlags } from './rigard-flags';
 
 let PlazaLoc = new Event("Plaza");
 
@@ -19,7 +20,7 @@ PlazaLoc.description = function() {
 	Text.NL();
 	Text.Add("In the middle of the plaza is a large fountain in white marble, full of clear water. In the middle of the fountain on a raised pedestal stands a stone statue of the Lady Aria, covered in robes of silk that sway in the wind.");
 	Text.NL();
-	if(rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry) {
+	if(rigard.Krawitz["Q"] == RigardFlags.KrawitzQ.HuntingTerry) {
 		Text.Add("The place is absolutely swarming with people as frazzled guards, irate merchants and angry residents swarm and flock and mingle in the now surprisingly cramped-feeling square.");
 		Text.NL();
 		Text.Add("There's not a lot of hiding places here, as even a cursory glance tells you, but the confusion and roving groups of people could be used as a kind of mobile camouflage, so it might be worth checking out.");
@@ -56,7 +57,7 @@ PlazaLoc.enc.AddEnc(function() { return Scenes.Krawitz.Duel;}, 3.0, function() {
 });
 PlazaLoc.enc.AddEnc(function() { return Scenes.Terry.ExplorePlaza; }, 1000000.0, function() {
 	let rigard = GAME().rigard;
-	return rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry;
+	return rigard.Krawitz["Q"] == RigardFlags.KrawitzQ.HuntingTerry;
 });
 
 PlazaLoc.links.push(new Link(

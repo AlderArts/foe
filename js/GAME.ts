@@ -65,7 +65,7 @@ export function TimeStep(step : {}) {
 }
 
 // Update function (for internal game time)
-export function StepToHour(hour : number, minute : number) {
+export function StepToHour(hour : number, minute : number = 0) {
 	let step = worldTime.TimeToHour(hour, minute);
 	
 	TimeStep(step);

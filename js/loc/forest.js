@@ -7,7 +7,7 @@
 import { Event, Link } from '../event';
 import { EncounterTable } from '../encountertable';
 import { GladeLoc } from './glade';
-import { MariaScenes } from '../event/outlaws/maria';
+import { MariaScenes } from '../event/outlaws/maria-scenes';
 import { GlobalScenes } from '../event/global';
 import { WorldTime, MoveToLocation } from '../GAME';
 import { Gui } from '../gui';

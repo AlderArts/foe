@@ -1,6 +1,6 @@
 
 import { GetDEBUG } from '../../../app';
-import { WorldTime, MoveToLocation, TimeStep, GAME } from '../../GAME';
+import { WorldTime, MoveToLocation, TimeStep, GAME, WORLD } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { Jobs } from '../../job';
@@ -8,8 +8,12 @@ import { GlobalScenes } from '../global';
 import { Items } from '../../items';
 import { VaughnFlags } from './vaughn-flags';
 import { MirandaFlags } from '../miranda-flags';
+import { Time } from '../../time';
+import { Lei } from '../royals/lei';
+import { Room69 } from '../room69';
+import { RigardFlags } from '../../loc/rigard/rigard-flags';
 
-let TasksScenes = {};
+let TasksScenes : any = {};
 
 TasksScenes.OnTask = function() { //TODO add tasks
 	return TasksScenes.Lockpicks.OnTask() ||
@@ -32,7 +36,7 @@ TasksScenes.StartTask = function() { //TODO add tasks
 		TasksScenes.Poisoning.Start();
 }
 
-TasksScenes.TaskPrompt = function() {
+TasksScenes.TaskPrompt = function(Prompt : any) {
 	var parse = {
 		
 	};
@@ -65,7 +69,7 @@ TasksScenes.TaskPrompt = function() {
 				Text.Add("<i>“Might be, might not be,”</i> Vaughn replies with a completely straight face. <i>“Now, was there something else you wanted of me?”</i>", parse);
 				Text.Flush();
 				
-				Scenes.Vaughn.Prompt();
+				Prompt();
 			}, enabled : true
 		});
 		Gui.SetButtonsFromList(options, false, null);
@@ -78,7 +82,7 @@ TasksScenes.TaskPrompt = function() {
 		Text.Add("<i>“Don’t just come calling around these parts,”</i> Vaughn calls out after you as you leave. <i>“I’m just one fellow, you know. Pretty sure there’re other folks in camp who could use a hand or two anytime - just have to ask around until you find them.”</i>", parse);
 		Text.Flush();
 		
-		Scenes.Vaughn.Prompt();
+		Prompt();
 	}
 }
 
@@ -104,7 +108,7 @@ TasksScenes.Lockpicks.Start = function() {
 	let party = GAME().party;
 	let terry = GAME().terry;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -199,7 +203,7 @@ TasksScenes.Lockpicks.MeetingElodie = function() {
 		return;
 	}
 	
-	var metElodie = rigard.flags["Nobles"] & Rigard.Nobles.Elodie;
+	var metElodie = rigard.flags["Nobles"] & RigardFlags.Nobles.Elodie;
 	
 	Text.Add("Evening lends a calm air to the castle grounds, and you arrive at the park as instructed. With the day drawing to a close, servants and nobles alike are enjoying what small amount of free time there’s to be had - this close to the castle proper, extra care is taken by the groundskeepers to ensure the flowerbeds are pristine and the lakes clear.", parse);
 	Text.NL();
@@ -349,7 +353,7 @@ TasksScenes.Snitch.Start = function() {
 	let miranda = GAME().miranda;
 	let vaughn = GAME().vaughn;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -411,7 +415,7 @@ TasksScenes.Snitch.Start = function() {
 	Gui.NextPrompt();
 }
 
-TasksScenes.Snitch.MirandaTalk = function(options, onDuty) {
+TasksScenes.Snitch.MirandaTalk = function(options : any[], onDuty : any) {
 	let miranda = GAME().miranda;
 	let vaughn = GAME().vaughn;
 
@@ -426,12 +430,12 @@ TasksScenes.Snitch.MirandaTalk = function(options, onDuty) {
 	}
 }
 
-TasksScenes.Snitch.Miranda = function(onDuty) {
+TasksScenes.Snitch.Miranda = function(onDuty : any) {
 	let player = GAME().player;
 	let vaughn = GAME().vaughn;
 	let miranda = GAME().miranda;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -738,7 +742,7 @@ TasksScenes.Snitch.PlantEvidence = function() {
 	let vaughn = GAME().vaughn;
 	let terry = GAME().terry;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -1025,7 +1029,7 @@ TasksScenes.Snitch.DebriefOutOfTime = function() {
 	TasksScenes.Snitch.DebriefFailure(parse);
 }
 
-TasksScenes.Snitch.DebriefSuccess = function(parse) {
+TasksScenes.Snitch.DebriefSuccess = function(parse : any) {
 	let party = GAME().party;
 	let outlaws = GAME().outlaws;
 	let vaughn = GAME().vaughn;
@@ -1058,7 +1062,7 @@ TasksScenes.Snitch.DebriefSuccess = function(parse) {
 	Gui.NextPrompt();
 }
 
-TasksScenes.Snitch.DebriefFailure = function(parse) {
+TasksScenes.Snitch.DebriefFailure = function(parse : any) {
 	let vaughn = GAME().vaughn;
 
 	Text.NL();
@@ -1102,7 +1106,7 @@ TasksScenes.Poisoning.Start = function() {
 	let party = GAME().party;
 	let vaughn = GAME().vaughn;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -1218,9 +1222,9 @@ TasksScenes.Poisoning.InnAvailable = function() {
 	return true;
 }
 
-TasksScenes.Poisoning.ArrivalAtInn = function(onWait, oldLocation) {
-	var parse = {
-		Orvin : Rigard.LB.KnowsOrvin() ? "Orvin" : "the innkeeper"
+TasksScenes.Poisoning.ArrivalAtInn = function(onWait : any, oldLocation : any) {
+	var parse : any = {
+		Orvin : RigardFlags.LB.KnowsOrvin() ? "Orvin" : "the innkeeper"
 	};
 	
 	Text.Clear();
@@ -1228,13 +1232,13 @@ TasksScenes.Poisoning.ArrivalAtInn = function(onWait, oldLocation) {
 		Text.Add("There's a sudden influx of activity as you overhear a conversation between [Orvin] and his staff. Apparently, the Lady Heydrich and her entourage are about to arrive any minute. As if summoned, small groups of chattering nobles wearing fancy clothes start filtering in through the front doors, quickly greeted by the waiters and ushered into a back room. Meanwhile, the rest of the staff busy themselves with their tasks, working with feverish determination.", parse);
 	}
 	else {
-		parse["start"] = (oldLocation == world.loc.Rigard.Plaza) ? "Pushing open the door of the Lady’s Blessing" : "Walking down the stairs";
+		parse["start"] = (oldLocation == WORLD().loc.Rigard.Plaza) ? "Pushing open the door of the Lady’s Blessing" : "Walking down the stairs";
 		Text.Add("[start], you find the the common room a whirl of activity. Not with patrons - the evening crowd is thin today - but with numerous staff, almost all of them darting between the kitchen and the stairs leading up to the rooms. The few patrons who are present are almost exclusively gathered about the gambling tables, keeping themselves out of the way of the busy waiters darting to and fro.", parse);
 	}
 	Text.NL();
 	Text.Add("An organized scene indeed… but teetering on the edge of confusion, an insidious current of chaos under the rushing surface. All it’d take is a push in the right direction to create a situation you could take advantage of… ", parse);
 	Text.NL();
-	if(!lei.Recruited()) {
+	if(!GAME().lei.Recruited()) {
 		Text.Add("Lei is sitting in his usual corner, ever faithful to his charge. You meet the mercenary’s eyes, and he gives you a silent nod before turning his gaze away from you. He’s a small circle of calm in the whirlwind of activity, but he wouldn’t be Lei otherwise, you guess.", parse);
 		Text.NL();
 	}
@@ -1246,19 +1250,21 @@ TasksScenes.Poisoning.ArrivalAtInn = function(onWait, oldLocation) {
 	TasksScenes.Poisoning.InnPrompt({});
 }
 
-TasksScenes.Poisoning.InnPrompt = function(opts) {
+TasksScenes.Poisoning.InnPrompt = function(opts : any) {
 	let player = GAME().player;
 	let party = GAME().party;
 	let vaughn = GAME().vaughn;
+	let lei = GAME().lei;
+	let twins = GAME().twins;
 
-	var parse = {
-		Orvin : Rigard.LB.KnowsOrvin() ? "Orvin" : "the innkeeper",
+	var parse : any = {
+		Orvin : RigardFlags.LB.KnowsOrvin() ? "Orvin" : "the innkeeper",
 		playername : player.name
 	};
 	
 	//[Orvin][Kitchen][Waiters][Lei][Twins]
 	var options = new Array();
-	if(Rigard.LB.KnowsOrvin() && !opts.Orvin) {
+	if(RigardFlags.LB.KnowsOrvin() && !opts.Orvin) {
 		options.push({ nameStr : "Orvin",
 			tooltip : "Chat with Orvin and try to find out more about the situation.",
 			func : function() {
@@ -1402,7 +1408,7 @@ TasksScenes.Poisoning.InnPrompt = function(opts) {
 										Gui.NextPrompt(TasksScenes.Poisoning.AphrodisiacEntry);
 									else
 										Gui.NextPrompt(function() {
-											MoveToLocation(world.loc.Rigard.Plaza);
+											MoveToLocation(WORLD().loc.Rigard.Plaza);
 										});
 								}, enabled : party.coin >= 250
 							});
@@ -1579,7 +1585,7 @@ TasksScenes.Poisoning.InnPrompt = function(opts) {
 						Gui.NextPrompt(TasksScenes.Poisoning.AphrodisiacEntry);
 					else
 						Gui.NextPrompt(function() {
-							MoveToLocation(world.loc.Rigard.Plaza);
+							MoveToLocation(WORLD().loc.Rigard.Plaza);
 						});
 				}
 				else {
@@ -1607,7 +1613,7 @@ TasksScenes.Poisoning.Kitchen = function() {
 	let vaughn = GAME().vaughn;
 	let terry = GAME().terry;
 
-	var parse = {
+	var parse : any = {
 		playername: player.name
 	};
 	
@@ -1696,7 +1702,7 @@ TasksScenes.Poisoning.Kitchen = function() {
 					Gui.NextPrompt(TasksScenes.Poisoning.AphrodisiacEntry);
 				else
 					Gui.NextPrompt(function() {
-						MoveToLocation(world.loc.Rigard.Plaza);
+						MoveToLocation(WORLD().loc.Rigard.Plaza);
 					});
 			}, enabled : true
 		});
@@ -1719,8 +1725,8 @@ TasksScenes.Poisoning.KitchenYourself = function() {
 	let party = GAME().party;
 	let vaughn = GAME().vaughn;
 
-	var parse = {
-		Orvin : Rigard.LB.KnowsOrvin() ? "Orvin" : "the innkeeper"
+	var parse : any = {
+		Orvin : RigardFlags.LB.KnowsOrvin() ? "Orvin" : "the innkeeper"
 	};
 	
 	parse["comp"] = party.Num() == 2 ? party.Get(1).name : "your companions";
@@ -1767,7 +1773,7 @@ TasksScenes.Poisoning.KitchenYourself = function() {
 			Gui.NextPrompt(TasksScenes.Poisoning.AphrodisiacEntry);
 		else
 			Gui.NextPrompt(function() {
-				MoveToLocation(world.loc.Rigard.Plaza);
+				MoveToLocation(WORLD().loc.Rigard.Plaza);
 			});
 	}
 	else {
@@ -1794,14 +1800,14 @@ TasksScenes.Poisoning.KitchenYourself = function() {
 		TimeStep({hour: 1});
 		
 		Gui.NextPrompt(function() {
-			MoveToLocation(world.loc.Rigard.Plaza);
+			MoveToLocation(WORLD().loc.Rigard.Plaza);
 		});
 	}
 }
 
 TasksScenes.Poisoning.AphrodisiacEntry = function() {
 	var parse = {
-		Orvin : Rigard.LB.KnowsOrvin() ? "Orvin" : "the innkeeper"
+		Orvin : RigardFlags.LB.KnowsOrvin() ? "Orvin" : "the innkeeper"
 	};
 	
 	Text.Clear();
@@ -1841,9 +1847,10 @@ TasksScenes.Poisoning.AphrodisiacPeek = function() {
 	let player = GAME().player;
 	let party = GAME().party;
 	let vaughn = GAME().vaughn;
+	let room69 = GAME().room69;
 
-	var parse = {
-		Orvin : Rigard.LB.KnowsOrvin() ? "Orvin" : "the innkeeper"
+	var parse : any = {
+		Orvin : RigardFlags.LB.KnowsOrvin() ? "Orvin" : "the innkeeper"
 	};
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
@@ -1917,7 +1924,7 @@ TasksScenes.Poisoning.AphrodisiacPeek = function() {
 			TimeStep({hour: 1});
 			
 			Gui.NextPrompt(function() {
-				MoveToLocation(world.loc.Rigard.Plaza);
+				MoveToLocation(WORLD().loc.Rigard.Plaza);
 			});
 		}, enabled : player.FirstCock() || player.FirstVag()
 	});
@@ -1944,7 +1951,7 @@ TasksScenes.Poisoning.AphrodisiacPeek = function() {
 				TimeStep({hour: 1});
 				
 				Gui.NextPrompt(function() {
-					MoveToLocation(world.loc.Rigard.Plaza);
+					MoveToLocation(WORLD().loc.Rigard.Plaza);
 				});
 			}, enabled : true
 		});
@@ -1970,7 +1977,7 @@ TasksScenes.Poisoning.DebriefSuccess = function() {
 	let vaughn = GAME().vaughn;
 
 	var parse = {
-		Orvin : Rigard.LB.KnowsOrvin() ? "Orvin" : "the innkeeper",
+		Orvin : RigardFlags.LB.KnowsOrvin() ? "Orvin" : "the innkeeper",
 		playername : player.name
 	};
 	
@@ -2045,7 +2052,7 @@ TasksScenes.Poisoning.DebriefFailure = function() {
 	let vaughn = GAME().vaughn;
 
 	var parse = {
-		Orvin : Rigard.LB.KnowsOrvin() ? "Orvin" : "the innkeeper",
+		Orvin : RigardFlags.LB.KnowsOrvin() ? "Orvin" : "the innkeeper",
 		playername : player.name
 	};
 	

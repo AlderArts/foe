@@ -10,6 +10,7 @@ import { WorldTime, MoveToLocation, GAME } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { CvetaFlags } from '../../event/outlaws/cveta-flags';
+import { RigardFlags } from './rigard-flags';
 
 
 let ShopStreetScenes = {}
@@ -45,7 +46,7 @@ ShopStreetLoc.street.description = function() {
 		Text.Add("Usually this place is bustling with people, but with all the shops closed for the night, no one is about.");
 	Text.NL();
 	
-	if(rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry) {
+	if(rigard.Krawitz["Q"] == RigardFlags.KrawitzQ.HuntingTerry) {
 		Text.Add("Most of the shops are closed, and even at the open ones there's very little activity. The occasional guard wanders past on patrol and nods absently to Miranda in recognition, but it's clear that they're a token effort at best.");
 		Text.NL();
 		Text.Add("Despite its calmness, indeed because of it, this actually seems like a very good place for an enterprising thief to try and hide from the eyes and arms of the law.");
@@ -63,7 +64,7 @@ ShopStreetLoc.street.enc.AddEnc(function() { return Scenes.Rigard.CityHistory;},
 });
 ShopStreetLoc.street.enc.AddEnc(function() { return Scenes.Terry.ExploreMerchants; }, 1000000.0, function() {
 	let rigard = GAME().rigard;
-	return rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry;
+	return rigard.Krawitz["Q"] == RigardFlags.KrawitzQ.HuntingTerry;
 });
 ShopStreetLoc.street.onEntry = function() {
 	if(Math.random() < 0.15)

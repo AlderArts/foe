@@ -1,11 +1,12 @@
 import { TasksScenes } from './vaughn-tasks';
-import { WorldTime, TimeStep, GAME } from '../../GAME';
+import { WorldTime, TimeStep, GAME, StepToHour } from '../../GAME';
 import { VaughnFlags } from './vaughn-flags';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { EncounterTable } from '../../encountertable';
+import { Season } from '../../time';
 
-let VaughnScenes = {
+let VaughnScenes : any = {
 	Tasks : TasksScenes,
 };
 
@@ -140,7 +141,7 @@ VaughnScenes.CampApproach = function() {
 VaughnScenes.Prompt = function() {
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -179,7 +180,7 @@ VaughnScenes.Prompt = function() {
 	});
 	options.push({ nameStr : "Tasks",
 		tooltip : "Ask him if he has any work for you.",
-		func : VaughnScenes.Tasks.TaskPrompt, enabled : true
+		func : function() { VaughnScenes.Tasks.TaskPrompt(VaughnScenes.Prompt); }, enabled : true
 	});
 	options.push({ nameStr : "Sex",
 		tooltip : "Proposition Vaughn for sex.",
@@ -684,7 +685,7 @@ VaughnScenes.Sex = function() {
 	let player = GAME().player;
 	let vaughn = GAME().vaughn;
 
-	var parse = {
+	var parse : any = {
 		breasts : function() { return player.FirstBreastRow().Short(); }
 	};
 	
@@ -807,7 +808,7 @@ VaughnScenes.SexTitfuckBig = function() {
 	let player = GAME().player;
 	let vaughn = GAME().vaughn;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		boygirl : player.mfFem("boy", "girl"),
 		upperarmordesc : function() { return player.ArmorDesc(); },
@@ -903,7 +904,7 @@ VaughnScenes.SexTitfuckBig = function() {
 	scenes.Get();
 }
 
-VaughnScenes.SexTitfuckBigCont = function(parse) {
+VaughnScenes.SexTitfuckBigCont = function(parse : any) {
 	let player = GAME().player;
 	let vaughn = GAME().vaughn;
 
@@ -966,7 +967,7 @@ VaughnScenes.SexTitfuckAverage = function() {
 	let player = GAME().player;
 	let vaughn = GAME().vaughn;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		boygirl : player.mfFem("boy", "girl"),
 		upperarmordesc : function() { return player.ArmorDesc(); },
@@ -1143,7 +1144,7 @@ VaughnScenes.SexConfront = function() {
 	
 	vaughn.flags["Talk"] |= VaughnFlags.Talk.Confront;
 	
-	world.StepToHour(6);
+	StepToHour(6);
 	
 	Gui.NextPrompt();
 }

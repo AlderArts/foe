@@ -12,6 +12,7 @@ import { BodyPartType } from "../body/bodypart";
 import { Sex } from "../entity-sex";
 import { MirandaFlags } from "./miranda-flags";
 import { TerryFlags } from "./terry-flags";
+import { RigardFlags } from '../loc/rigard/rigard-flags';
 
 let MirandaScenes = {};
 
@@ -44,7 +45,7 @@ export function InitMiranda(w) {
         
     }
     world.loc.Rigard.Residential.miranda.onEntry = function() {
-        if(rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry)
+        if(rigard.Krawitz["Q"] == RigardFlags.KrawitzQ.HuntingTerry)
             MirandaScenes.TerryChaseHome();
         else
             Gui.PrintDefaultOptions();
@@ -1880,7 +1881,7 @@ MirandaScenes.BarChatOptions = function(options, back) {
 	});
 	*/
 	
-	if((rigard.Krawitz["Q"] >= Rigard.KrawitzQ.CaughtTerry) && (terry.flags["Saved"] == TerryFlags.Saved.NotStarted)) {
+	if((rigard.Krawitz["Q"] >= RigardFlags.KrawitzQ.CaughtTerry) && (terry.flags["Saved"] == TerryFlags.Saved.NotStarted)) {
 		options.push({ nameStr : "Thief",
 			func : function() {
 				Text.Clear();
@@ -2728,7 +2729,7 @@ MirandaScenes.HomeDommySexLeavingFuckedHer = function() {
 		playername : player.name
 	};
 
-	if(rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry) {
+	if(rigard.Krawitz["Q"] == RigardFlags.KrawitzQ.HuntingTerry) {
 		Text.Add("The two of you set out, returning to your search for the elusive thief.", parse);
 		Text.Flush();
 
@@ -4272,7 +4273,7 @@ MirandaScenes.HomeSubbySexLeavingFuckedHer = function() {
 		Text.Add("<i>“Wow, that was intense!”</i> she exclaims, praising your performance. <i>“We’ll be seeing more of each other, and soon.”</i>", parse);
 	Text.NL();
 
-	if(rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry) {
+	if(rigard.Krawitz["Q"] == RigardFlags.KrawitzQ.HuntingTerry) {
 		Text.Add("The two of you set out, returning to your search for the elusive thief.", parse);
 		Text.Flush();
 

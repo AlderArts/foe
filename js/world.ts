@@ -66,7 +66,7 @@ export function InitWorld() {
 	
 	InitIntro(world);
 	InitNomads();
-	InitOutlaws(world);
+	InitOutlaws();
 	InitRigard(world, Scenes);
 	InitFarm(world);
 	InitBurrows(world);

@@ -85,6 +85,7 @@ import { TerryFlags } from './event/terry-flags';
 import { KiakaiFlags } from './event/kiakai-flags';
 import { OutlawsFlags } from './event/outlaws/outlaws-flags';
 import { TwinsFlags } from './event/royals/twins-flags';
+import { RigardFlags } from './loc/rigard/rigard-flags';
 
 let InitCache = function() {
 	// Reset exploration
@@ -427,7 +428,7 @@ let CacheToGame = function() {
 		GAME().miranda.flags["Herm"] = (GAME().miranda.flags["Met"] >= MirandaFlags.Met.TavernAftermath) ? 1 : 0;
 	}
 	if(gameCache.version < 15) {
-		if(GAME().rigard.Krawitz["Q"] >= Rigard.KrawitzQ.HeistDone)
+		if(GAME().rigard.Krawitz["Q"] >= RigardFlags.KrawitzQ.HeistDone)
 			GAME().twins.flags["Met"] = TwinsFlags.Met.Access;
 	}
 	if(gameCache.version < 16) {

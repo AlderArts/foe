@@ -6,110 +6,120 @@ import * as _ from 'lodash';
 import { GetDEBUG } from '../../../app';
 import { OCavalcadeScenes } from './cavalcade';
 import { Stat } from '../../stat';
-import { Time } from '../../time';
-import { WorldTime, TimeStep } from '../../GAME';
+import { Time, Season } from '../../time';
+import { WorldTime, TimeStep, GAME } from '../../GAME';
 import { Gui } from '../../gui';
 import { Text } from '../../text';
 import { Jobs } from '../../job';
 import { EncounterTable } from '../../encountertable';
 import { OutlawsFlags } from './outlaws-flags';
+import { AquiliusFlags } from './aquilius-flags';
+import { QuestItems } from '../../items/quest';
 
-let OutlawsScenes = {
+let OutlawsScenes : any = {
 	Cavalcade : OCavalcadeScenes,
 };
 
 // Class to handle global flags and logic for outlaws
-function Outlaws(storage) {
-	this.flags = {};
-	
-	this.flags["Met"] = 0;
-	this.flags["BT"] = 0; // Bitmask
-	this.flags["BullTower"] = 0;
-	this.flags["events"] = 0; // Bitmask
-	
-	this.relation = new Stat(0);
-	
-	this.mainQuestTimer = new Time();
-	this.factTimer = new Time();
-	
-	if(storage) this.FromStorage(storage);
-}
+export class Outlaws {
+	flags : any;
+	relation : Stat;
+	mainQuestTimer : Time;
+	factTimer : Time;
 
-Outlaws.prototype.ToStorage = function() {
-	var storage = {};
-	
-	storage.flags = this.flags;
-	if(this.relation.base != 0)
-		storage.rep = this.relation.base.toFixed();
-	
-	storage.Qtime = this.mainQuestTimer.ToStorage();
-	storage.Ftime = this.factTimer.ToStorage();
-	
-	return storage;
-}
+	constructor(storage? : any) {
+		this.flags = {};
+		
+		this.flags["Met"] = 0;
+		this.flags["BT"] = 0; // Bitmask
+		this.flags["BullTower"] = 0;
+		this.flags["events"] = 0; // Bitmask
+		
+		this.relation = new Stat(0);
+		
+		this.mainQuestTimer = new Time();
+		this.factTimer = new Time();
+		
+		if(storage) this.FromStorage(storage);
+	}
 
-Outlaws.prototype.FromStorage = function(storage) {
-	storage = storage || {};
-	// Load flags
-	for(var flag in storage.flags)
-		this.flags[flag] = parseInt(storage.flags[flag]);
-	this.relation.base = !isNaN(parseInt(storage.rep)) ? parseInt(storage.rep) : this.relation.base;
-	
-	this.mainQuestTimer.FromStorage(storage.Qtime);
-	this.factTimer.FromStorage(storage.Ftime);
-}
+	ToStorage() {
+		var storage : any = {};
+		
+		storage.flags = this.flags;
+		if(this.relation.base != 0)
+			storage.rep = this.relation.base.toFixed();
+		
+		storage.Qtime = this.mainQuestTimer.ToStorage();
+		storage.Ftime = this.factTimer.ToStorage();
+		
+		return storage;
+	}
 
-Outlaws.prototype.Update = function(step) {
-	this.mainQuestTimer.Dec(step);
-	this.factTimer.Dec(step);
-}
+	FromStorage(storage? : any) {
+		storage = storage || {};
+		// Load flags
+		for(var flag in storage.flags)
+			this.flags[flag] = parseInt(storage.flags[flag]);
+		this.relation.base = !isNaN(parseInt(storage.rep)) ? parseInt(storage.rep) : this.relation.base;
+		
+		this.mainQuestTimer.FromStorage(storage.Qtime);
+		this.factTimer.FromStorage(storage.Ftime);
+	}
+
+	Update(step : number) {
+		this.mainQuestTimer.Dec(step);
+		this.factTimer.Dec(step);
+	}
 
 
-// TODO
-Outlaws.prototype.TurnedInBinder = function() {
-	return false;
-}
+	// TODO
+	TurnedInBinder() {
+		return false;
+	}
 
-Outlaws.prototype.BullTowerCompleted = function() {
-	return this.flags["BullTower"] >= OutlawsFlags.BullTowerQuest.Completed;
-}
+	BullTowerCompleted() {
+		return this.flags["BullTower"] >= OutlawsFlags.BullTowerQuest.Completed;
+	}
 
-Outlaws.prototype.RetrievedBlueRoses = function() {
-	return this.flags["BT"] & OutlawsFlags.BullTower.BlueRoses;
-}
+	RetrievedBlueRoses() {
+		return this.flags["BT"] & OutlawsFlags.BullTower.BlueRoses;
+	}
 
-Outlaws.prototype.AlaricSaved = function() {
-	return this.BullTowerCompleted() && (this.flags["BT"] & OutlawsFlags.BullTower.AlaricFreed);
-}
+	AlaricSaved() {
+		return this.BullTowerCompleted() && (this.flags["BT"] & OutlawsFlags.BullTower.AlaricFreed);
+	}
 
-Outlaws.prototype.BullTowerCanGetReward = function() {
-	return this.AlaricSaved() && (this.flags["BT"] & OutlawsFlags.BullTower.ContrabandStolen) && (this.flags["BT"] & OutlawsFlags.BullTower.SafeLooted);
-}
-Outlaws.prototype.Rep = function() {
-	return this.relation.Get();
-}
-Outlaws.prototype.CompletedPathIntoRigard = function() {
-	return this.flags["Met"] >= OutlawsFlags.Met.MetBelinda;
-}
-//TODO
-Outlaws.prototype.MetPenPam = function() {
-	return false;
-}
+	BullTowerCanGetReward() {
+		return this.AlaricSaved() && (this.flags["BT"] & OutlawsFlags.BullTower.ContrabandStolen) && (this.flags["BT"] & OutlawsFlags.BullTower.SafeLooted);
+	}
+	Rep() {
+		return this.relation.Get();
+	}
+	CompletedPathIntoRigard() {
+		return this.flags["Met"] >= OutlawsFlags.Met.MetBelinda;
+	}
+	//TODO
+	MetPenPam() {
+		return false;
+	}
 
-/*
-#Require that PC have introduced self to all outlaws available from start. (Aquilius, Maria at present)
-#Trigger upon trying to find Maria in the outlaws’ camp. (I.E, clicking on her button)
-#Possibly require some rep with outlaws first (helping Maria/Aquilius for a bit)
- */
-Outlaws.prototype.MariasBouqetAvailable = function() {
-	let outlaws = GAME().outlaws;
-	let aquilius = GAME().aquilius;
-	//Only in the initial phase
-	if(outlaws.flags["Met"] != OutlawsFlags.Met.Met) return false;
-	//Only when meeting the correct relation requirements TODO
-	if(aquilius.flags["Met"] < Aquilius.Met.Met) return false;
-	//Only when meeting total Outlaws rep
-	return outlaws.Rep() >= 0;
+	/*
+	#Require that PC have introduced self to all outlaws available from start. (Aquilius, Maria at present)
+	#Trigger upon trying to find Maria in the outlaws’ camp. (I.E, clicking on her button)
+	#Possibly require some rep with outlaws first (helping Maria/Aquilius for a bit)
+	*/
+	MariasBouqetAvailable() {
+		let outlaws = GAME().outlaws;
+		let aquilius = GAME().aquilius;
+		//Only in the initial phase
+		if(outlaws.flags["Met"] != OutlawsFlags.Met.Met) return false;
+		//Only when meeting the correct relation requirements TODO
+		if(aquilius.flags["Met"] < AquiliusFlags.Met.Met) return false;
+		//Only when meeting total Outlaws rep
+		return outlaws.Rep() >= 0;
+	}
+
 }
 
 OutlawsScenes.MariasBouquet = function() {
@@ -219,7 +229,7 @@ OutlawsScenes.MariasBouquet = function() {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-OutlawsScenes.MariasBouquetPrompt = function(opts) {
+OutlawsScenes.MariasBouquetPrompt = function(opts : any) {
 	let player = GAME().player;
 	let outlaws = GAME().outlaws;
 
@@ -377,7 +387,7 @@ OutlawsScenes.PathIntoRigardInitiation = function() {
 		Text.NL();
 		Text.Add("He waves the plain, unsealed envelope in the air. <i>“I would like you to deliver this missive to one of our operatives stationed in Rigard - it holds a freshly-prepared set of directives concerning our future movements.”</i>", parse);
 		Text.NL();
-		if(!rigard.Visa()) {
+		if(!GAME().rigard.Visa()) {
 			Text.Add("There’s a small problem with that, though. You can’t get into Rigard without a visa.", parse);
 			Text.NL();
 			Text.Add("<i>“That shouldn’t be a problem.”</i>", parse);
@@ -398,7 +408,7 @@ OutlawsScenes.PathIntoRigardInitiation = function() {
 		
 		//TODO quest log
 		
-		party.Inv().AddItem(Items.Quest.OutlawLetter);
+		party.Inv().AddItem(QuestItems.OutlawLetter);
 		
 		TimeStep({hour: 1});
 		
@@ -415,8 +425,9 @@ OutlawsScenes.PathIntoRigardBelinda = function() {
 	let outlaws = GAME().outlaws;
 	let miranda = GAME().miranda;
 	let belinda = GAME().belinda;
+	let rigard = GAME().rigard;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -510,7 +521,7 @@ OutlawsScenes.PathIntoRigardBelinda = function() {
 		Text.Add("…And tips it over to reveal a small sheaf of papers. Your breath catches in your throat as Belinda stretches open the envelope’s mouth to get a better look at what’s inside, the stiff brown paper folding under her fine, delicate fingers, then draws out the lot and rips them to pieces without even so much as looking at them. Tiny scraps of paper float to the floor, dotting the straw-and-sawdust floor like new snow.", parse);
 		Text.NL();
 		
-		party.Inv().RemoveItem(Items.Quest.OutlawLetter);
+		party.Inv().RemoveItem(QuestItems.OutlawLetter);
 		
 		Text.Add("Wait, what’s going on? Wasn’t that supposed to be a missive about -", parse);
 		Text.NL();
@@ -657,7 +668,7 @@ OutlawsScenes.Exploration.ChowTime = function() {
 	let player = GAME().player;
 	let outlaws = GAME().outlaws;
 
-	var parse = {
+	var parse : any = {
 		lad : player.mfFem("laddie", "lassie")
 	};
 	
@@ -764,8 +775,8 @@ OutlawsScenes.Exploration.Cavalcade = function() {
 			Text.Clear();
 			Text.Add("Yeah, sure. You shrug your shoulders, push through the small crowd and step forward to take the lizan’s place, settling in with a minimum of fuss. One of the other players deals out the hand, and the game begins.", parse);
 			Text.NL();
-			OutlawsScenesCavalcade.PrepRandomCoinGame();
-		}, enabled : party.coin >= OutlawsScenesCavalcade.Bet()
+			OutlawsScenes.Cavalcade.PrepRandomCoinGame();
+		}, enabled : party.coin >= OutlawsScenes.Cavalcade.Bet()
 	});
 	options.push({ nameStr : "No",
 		tooltip : "Nah, not now.",
@@ -787,6 +798,7 @@ OutlawsScenes.Exploration.Cavalcade = function() {
 OutlawsScenes.Exploration.Archery = function() {
 	let player = GAME().player;
 	let outlaws = GAME().outlaws;
+	let maria = GAME().maria;
 
 	var parse = {
 		playername : player.name
@@ -1271,7 +1283,7 @@ OutlawsScenes.Exploration.FactFinding = function() {
 }
 
 OutlawsScenes.Exploration.DailyLife = function() {
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -1314,4 +1326,4 @@ OutlawsScenes.Exploration.DailyLife = function() {
 	Gui.NextPrompt();
 }
 
-export { Outlaws, OutlawsScenes };
+export { OutlawsScenes };

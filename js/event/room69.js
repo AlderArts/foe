@@ -9,6 +9,7 @@ import { MoveToLocation, TimeStep } from '../GAME';
 import { Gui } from '../gui';
 import { Text } from '../text';
 import { KiakaiFlags } from './kiakai-flags';
+import { RigardFlags } from '../loc/rigard/rigard-flags';
 
 let Room69Scenes = {};
 
@@ -345,11 +346,11 @@ Room69Scenes.Discovering69OrvinRant = function() {
 	var parse = {
 		
 	};
-	parse["IkName"] = !Rigard.LB.KnowsOrvin() ? "The innkeeper" : "Orvin";
-	parse["ikname"] = !Rigard.LB.KnowsOrvin() ? "the innkeeper" : "Orvin";
+	parse["IkName"] = !RigardFlags.LB.KnowsOrvin() ? "The innkeeper" : "Orvin";
+	parse["ikname"] = !RigardFlags.LB.KnowsOrvin() ? "the innkeeper" : "Orvin";
 	
 	Text.Add("You return downstairs, deciding to confront [ikname] about this trap room. ", parse);
-	if(Rigard.LB.OrvinIsInnkeeper())
+	if(RigardFlags.LB.OrvinIsInnkeeper())
 		Text.Add("As soon as you get his attention and say enough for him to understand what you’re talking about, he leaves the bar, grabbing your hand, and forcibly pulling you behind him to the back room.", parse);
 	else
 		Text.Add("He’s not in the common room at this time of the night, but you demand to see him, and after a few minutes he finally comes out to meet you. As soon as you say enough for him to understand what you’re talking about, he grabs your hand, and forcibly pulls you behind him to the back room.", parse);
@@ -374,8 +375,8 @@ Room69Scenes.Discovering69ForceOutro = function() {
 	var parse = {
 		
 	};
-	parse["IkName"] = !Rigard.LB.KnowsOrvin() ? "The innkeeper" : "Orvin";
-	parse["ikname"] = !Rigard.LB.KnowsOrvin() ? "the innkeeper" : "Orvin";
+	parse["IkName"] = !RigardFlags.LB.KnowsOrvin() ? "The innkeeper" : "Orvin";
+	parse["ikname"] = !RigardFlags.LB.KnowsOrvin() ? "the innkeeper" : "Orvin";
 	
 	Text.Clear();
 	Text.Add("<i>“N-no... why would you do that?”</i> Sixtynine asks, sounding on the edge of tears. <i>“My door... have you ever lost a limb? I have. It’s just like that. Like where I had a hand before, now there is nothing, an emptiness.”</i>", parse);
@@ -440,8 +441,8 @@ Room69Scenes.Discovering69Sex = function() {
 		stomachDesc     : function() { return player.StomachDesc(); },
 		boygirl         : player.mfTrue("boy", "girl"),
 		isAre           : player.HasScales() ? "are" : "is",
-		IkName          : !Rigard.LB.KnowsOrvin() ? "The innkeeper" : "Orvin",
-		ikname          : !Rigard.LB.KnowsOrvin() ? "the innkeeper" : "Orvin"
+		IkName          : !RigardFlags.LB.KnowsOrvin() ? "The innkeeper" : "Orvin",
+		ikname          : !RigardFlags.LB.KnowsOrvin() ? "the innkeeper" : "Orvin"
 	};
 	
 	if(player.FirstBreastRow().nippleType == NippleType.lipple ||

@@ -31,6 +31,7 @@ import { Gui } from '../../gui';
 import { Text } from '../../text';
 import { MirandaFlags } from '../../event/miranda-flags';
 import { TerryFlags } from '../../event/terry-flags';
+import { RigardFlags } from './rigard-flags';
 
 let world = null;
 let Scenes = null;
@@ -139,7 +140,7 @@ function Rigard(storage) {
 	this.RotOrvinInnTalk = 0;
 
 	this.Krawitz = {};
-	this.Krawitz["Q"]    = Rigard.KrawitzQ.NotStarted; // Krawitz quest status
+	this.Krawitz["Q"]    = RigardFlags.KrawitzQ.NotStarted; // Krawitz quest status
 	this.Krawitz["F"]    = 0; // Aftermath flags
 	this.Krawitz["Work"] = 0; //
 	this.KrawitzWorkDay  = null; // Time
@@ -159,29 +160,6 @@ function Rigard(storage) {
 
 	if(storage) this.FromStorage(storage);
 }
-
-Rigard.LB = RigardLB;
-
-Rigard.Nobles = {
-	MetMajid : 1,
-	Alms     : 2,
-	Elodie   : 4,
-	Parade   : 8,
-	Buns     : 16,
-	BoughtBuns : 32
-};
-Rigard.KrawitzQ = {
-	NotStarted   : 0,
-	Started      : 1,
-	HeistDone    : 2,
-	HuntingTerry : 3,
-	CaughtTerry  : 4
-};
-Rigard.Barnaby = { //Bitmask
-	Met     : 1,
-	Blowjob : 2,
-	PassedOut : 4
-};
 
 Rigard.prototype.ToStorage = function() {
 	var storage = {};
@@ -267,14 +245,14 @@ Rigard.prototype.GatesOpen = function() {
 }
 
 Rigard.prototype.UnderLockdown = function() {
-	return this.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry;
+	return this.Krawitz["Q"] == RigardFlags.KrawitzQ.HuntingTerry;
 }
 
 Rigard.prototype.MetBarnaby = function() {
-	return this.flags["Barnaby"] & Rigard.Barnaby.Met;
+	return this.flags["Barnaby"] & RigardFlags.Barnaby.Met;
 }
 Rigard.prototype.BlownBarnaby = function() {
-	return this.flags["Barnaby"] & Rigard.Barnaby.Blowjob;
+	return this.flags["Barnaby"] & RigardFlags.Barnaby.Blowjob;
 }
 
 RigardScenes.CityHistory = function() {
@@ -928,7 +906,7 @@ RigardScenes.Chatter2 = function(enteringArea) {
 		Text.Add("Hold on… now that you look, isn’t that Krawitz? The same paunch to his stomach, the same height, the same ratty eyes. There’s a new slump to his shoulders, however, as he hunches down beneath his hood and hurries along somewhere.", parse);
 		Text.NL();
 		Text.Add("You consider calling attention to him, but decide against it. He seems to be suffering enough already.", parse);
-	}, 1.0, function() { return rigard.Krawitz["Q"] >= Rigard.KrawitzQ.CaughtTerry; });
+	}, 1.0, function() { return rigard.Krawitz["Q"] >= RigardFlags.KrawitzQ.CaughtTerry; });
 	scenes.AddEnc(function() {
 		SetGenders(CreateNPC(true, true, true, false),
 		           CreateNPC(true, true, true, false));
@@ -1510,7 +1488,7 @@ RigardScenes.Lockdown = function() {
 	};
 	
 	parse = player.ParserTags(parse);
-	rigard.Krawitz["Q"] = Rigard.KrawitzQ.HuntingTerry;
+	rigard.Krawitz["Q"] = RigardFlags.KrawitzQ.HuntingTerry;
 
 	var dom = miranda.SubDom() - player.SubDom();
 

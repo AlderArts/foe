@@ -13,6 +13,7 @@ import { SetGameState, GameState } from '../../gamestate';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { TwinsFlags } from '../../event/royals/twins-flags';
+import { RigardFlags } from './rigard-flags';
 
 let world = null;
 
@@ -2097,7 +2098,7 @@ KrawitzScenes.Aftermath = function() {
 	if(KrawitzScenes.stat.Orgy)            points += 2;
 	
 	if(rigard.Krawitz["Duel"] <= 0) rigard.Krawitz["Duel"] = 0;
-	rigard.Krawitz["Q"] = Rigard.KrawitzQ.HeistDone;
+	rigard.Krawitz["Q"] = RigardFlags.KrawitzQ.HeistDone;
 	
 	// Save flags
 	rigard.Krawitz["F"] = 0;

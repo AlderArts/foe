@@ -56,7 +56,7 @@ import { LucilleScenes } from "./event/brothel/lucille";
 import { BullTowerScenes } from "./event/outlaws/bulltower";
 import { OutlawsScenes } from "./event/outlaws/outlaws";
 import { CvetaScenes } from "./event/outlaws/cveta-scenes";
-import { MariaScenes } from "./event/outlaws/maria";
+import { MariaScenes } from "./event/outlaws/maria-scenes";
 import { VaughnScenes } from "./event/outlaws/vaughn-scenes";
 import { NCavalcadeScenes } from "./event/nomads/cavalcade";
 import { GolemScenes } from "./event/royals/golem";

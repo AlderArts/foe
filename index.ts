@@ -64,7 +64,6 @@ import './js/ability/black.js';
 import './js/ability/enemyskill.js';
 
 import './js/alchemy.js';
-import './js/cavalcade.js';
 
 // Locations and events
 import './js/event/introduction.js';
@@ -95,7 +94,6 @@ import './js/loc/desert.js';
 import './js/loc/farm.js';
 import './js/loc/kingsroad.js';
 
-import './js/loc/outlaws.js';
 import './js/loc/glade.js';
 
 import './js/loc/burrows.js';
@@ -159,14 +157,11 @@ import './js/event/nomads/cale.js';
 import './js/event/nomads/magnus.js';
 import './js/event/nomads/cavalcade.js';
 
-import './js/event/outlaws/outlaws.js';
 import './js/event/outlaws/aquilius.js';
 import './js/event/outlaws/maria.js';
-import './js/event/outlaws/maria-dd.js';
 import './js/event/outlaws/cveta.js';
 import './js/event/outlaws/cveta-date.js';
 import './js/event/outlaws/vaughn.js';
-import './js/event/outlaws/vaughn-tasks.js';
 import './js/event/outlaws/bulltower.js';
 import './js/event/outlaws/cavalcade.js';
 

@@ -5,6 +5,7 @@ import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { MoveToLocation} from '../../GAME';
 import { MirandaFlags } from '../../event/miranda-flags';
+import { RigardFlags } from './rigard-flags';
 
 let TavernLoc = {
 	common   : new Event("Maidens' Bane")
@@ -61,8 +62,8 @@ TavernLoc.common.DrunkHandler = function() {
 		phisher : player.mfTrue("his", "her")
 	};
 	
-	var first = !rigard.flags["Barnaby"] & Rigard.Barnaby.PassedOut;
-	rigard.flags["Barnaby"] |= Rigard.Barnaby.PassedOut;
+	var first = !rigard.flags["Barnaby"] & RigardFlags.Barnaby.PassedOut;
+	rigard.flags["Barnaby"] |= RigardFlags.Barnaby.PassedOut;
 	
 	Text.Clear();
 	Text.Add("The first thing that you can say you feel when your eyes open is <i>pain</i>. Your skull feels like something is trying to hammer it open from the inside, your vision swims, and the light is far, far too bright. Moving gingerly, afraid your limbs will fall off if you go too quickly, you slowly take in your surroundings; you’ve been laid out on the floor of a room... one of the backrooms of the Maiden’s Bane, you promptly realize.", parse);
@@ -122,7 +123,7 @@ TavernLoc.common.DrunkHandler = function() {
 		enabled : true,
 		func : function() {
 			var bjfirst = !rigard.BlownBarnaby();
-			rigard.flags["Barnaby"] |= Rigard.Barnaby.Blowjob;
+			rigard.flags["Barnaby"] |= RigardFlags.Barnaby.Blowjob;
 			
 			Text.Clear();
 			if(bjfirst) {
@@ -269,7 +270,7 @@ BarnabyScenes.Approach = function() {
 	};
 	
 	var first = !rigard.MetBarnaby();
-	rigard.flags["Barnaby"] |= Rigard.Barnaby.Met;
+	rigard.flags["Barnaby"] |= RigardFlags.Barnaby.Met;
 	
 	Text.Clear();
 	if(first) {
@@ -516,7 +517,7 @@ BarnabyScenes.Prompt = function(talkative) {
 		enabled : true,
 		func : function() {
 			var bjfirst = !rigard.BlownBarnaby();
-			rigard.flags["Barnaby"] |= Rigard.Barnaby.Blowjob;
+			rigard.flags["Barnaby"] |= RigardFlags.Barnaby.Blowjob;
 			
 			Text.Clear();
 			if(bjfirst) {

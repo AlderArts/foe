@@ -9,6 +9,7 @@ import { Encounter } from '../../combat';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { TwinsFlags } from './twins-flags';
+import { RigardFlags } from '../../loc/rigard/rigard-flags';
 
 let LeiScenes = {
 	Tasks : TasksScenes,
@@ -57,7 +58,7 @@ LeiScenes.InnPrompt = function() {
 
 	var options = new Array();
 	//PRE KRAWITZ
-	if(rigard.Krawitz["Q"] >= Rigard.KrawitzQ.Started && rigard.Krawitz["Q"] < Rigard.KrawitzQ.HeistDone) {
+	if(rigard.Krawitz["Q"] >= RigardFlags.KrawitzQ.Started && rigard.Krawitz["Q"] < RigardFlags.KrawitzQ.HeistDone) {
 		options.push({ nameStr : "Krawitz",
 			func : function() {
 				Text.Clear();
@@ -708,7 +709,7 @@ LeiScenes.RequestMain = function() {
 
 				twins.flags["Met"] = TwinsFlags.Met.Met;
 				// Start KrawitzQ
-				rigard.Krawitz["Q"] = Rigard.KrawitzQ.Started;
+				rigard.Krawitz["Q"] = RigardFlags.KrawitzQ.Started;
 				party.location = world.loc.Rigard.Plaza;
 
 				Gui.NextPrompt();
@@ -798,7 +799,7 @@ LeiScenes.InnFirstPrompt = function() {
 
 LeiScenes.Interact = function() {
 	let rigard = GAME().rigard;
-	if(rigard.Krawitz["Q"] < Rigard.KrawitzQ.Started) {
+	if(rigard.Krawitz["Q"] < RigardFlags.KrawitzQ.Started) {
 		LeiScenes.InnPromptFirst();
 	}
 	else {

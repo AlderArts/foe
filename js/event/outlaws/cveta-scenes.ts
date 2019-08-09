@@ -1,13 +1,21 @@
-import { Cveta } from './cveta';
+import * as _ from 'lodash';
+
 import { DateScenes } from './cveta-date';
-import { WorldTime } from '../../GAME';
+import { WorldTime, GAME, TimeStep } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { EncounterTable } from '../../encountertable';
 import { CvetaFlags } from './cveta-flags';
 import { OutlawsFlags } from './outlaws-flags';
+import { Time } from '../../time';
+import { QuestItems } from '../../items/quest';
+import { Entity } from '../../entity';
+import { KrawitzScenes } from '../../loc/rigard/krawitz';
+import { Momo } from '../momo';
+import { Status } from '../../statuseffect';
+import { DreamsScenes } from '../dreams';
 
-let CvetaScenes = {
+let CvetaScenes : any = {
 	Dates : DateScenes,
 };
 
@@ -39,8 +47,9 @@ CvetaScenes.ViolinApproach = function() {
 	let player = GAME().player;
 	let party = GAME().party;
 	let cveta = GAME().cveta;
+	let terry = GAME().terry;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -173,7 +182,7 @@ CvetaScenes.ViolinPrompt = function() {
 			
 			cveta.relation.IncreaseStat(100, 5);
 			cveta.flags["Met"] = CvetaFlags.Met.Available;
-			party.Inv().RemoveItem(Items.Quest.Violin);
+			party.Inv().RemoveItem(QuestItems.Violin);
 			
 			Gui.NextPrompt();
 		}, enabled : cveta.flags["Met"] >= CvetaFlags.Met.ViolinGet,
@@ -246,7 +255,7 @@ CvetaScenes.Prompt = function() {
 	let outlaws = GAME().outlaws;
 	let cveta = GAME().cveta;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -315,12 +324,12 @@ CvetaScenes.Teach = function() {
 	let outlaws = GAME().outlaws;
 	let cveta = GAME().cveta;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
-	var bardAvailable   = false;
-	var singerAvailable = false;
+	var bardAvailable : Entity = null;
+	var singerAvailable : Entity = null;
 	for(var i = party.Num()-1; i >= 0; i--) {
 		var p = party.Get(i);
 		var bard   = p.jobs["Bard"];
@@ -510,7 +519,7 @@ CvetaScenes.Pet = function() {
 	let player = GAME().player;
 	let cveta = GAME().cveta;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -815,8 +824,11 @@ CvetaScenes.HerselfPrompt = function() {
 	let player = GAME().player;
 	let party = GAME().party;
 	let cveta = GAME().cveta;
+	let rigard = GAME().rigard;
+	let momo = GAME().momo;
+	let miranda = GAME().miranda;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -846,7 +858,7 @@ CvetaScenes.HerselfPrompt = function() {
 			Text.NL();
 			Text.Add("“They are a group of disgusting, decadent degenerates and it is only right that anyone with a shred of actual nobility should encourage them to get their act together, lest they lose even the thin facade of legitimacy they have left.”</i>", parse);
 			Text.NL();
-			parse["binder"] = rigard.Krawitz["F"] & Scenes.Krawitz.Flags.Binder ? " and the binder you stole - uh, found in his study. That was pretty damning of the man" : "";
+			parse["binder"] = rigard.Krawitz["F"] & KrawitzScenes.Flags.Binder ? " and the binder you stole - uh, found in his study. That was pretty damning of the man" : "";
 			Text.Add("Well, you can’t help but admit that there was the whole matter of Lord Krawitz[binder]. Neither can you deny that the royal twins <i>are</i> running around Rigard creating mischief, and with all the new laws against non-humans in place, let alone the inane ones that apply to everyone… ", parse);
 			Text.NL();
 			Text.Add("Oh, and the patrol by the crossroads which seems to never be able to root out any bandits, no matter how many times they receive reports of such.", parse);
@@ -1086,8 +1098,9 @@ CvetaScenes.MusicPrompt = function() {
 	let player = GAME().player;
 	let party = GAME().party;
 	let cveta = GAME().cveta;
+	let kiakai = GAME().kiakai;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		skinDesc : function() { return player.SkinDesc(); }
 	};
@@ -1538,7 +1551,7 @@ CvetaScenes.FirstMeeting = function() {
 	CvetaScenes.FirstMeetingPrompt(opts);
 }
 
-CvetaScenes.FirstMeetingPrompt = function(opts) {
+CvetaScenes.FirstMeetingPrompt = function(opts : any) {
 	let player = GAME().player;
 	
 	var parse = {
@@ -1689,9 +1702,8 @@ CvetaScenes.FirstMeetingCont = function() {
 	let outlaws = GAME().outlaws;
 	
 	var parse = {
-		
+		SunlightMoonlight : WorldTime().LightStr("Sunlight", "Moonlight"),
 	};
-	parse["SunlightMoonlight"] = WorldTime().LightStr("Sunlight", "Moonlight");
 	
 	Text.Add("<i>“And with that, I think this brings our introduction to an end. It has a pleasure, I assure you, despite the circumstances under which we have been acquainted,”</i> Cveta says, rising from the stool and making a sweeping gesture toward the tent flaps. <i>“Allow me to show you out.”</i>", parse);
 	Text.NL();
@@ -1716,8 +1728,11 @@ CvetaScenes.Performance = function() {
 	let party = GAME().party;
 	let outlaws = GAME().outlaws;
 	let cveta = GAME().cveta;
+	let kiakai = GAME().kiakai;
+	let momo = GAME().momo;
+	let terry = GAME().terry;
 	
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		skinDesc : function() { return player.SkinDesc(); },
 		cocks : function() { return player.MultiCockDesc(); },
@@ -1870,7 +1885,7 @@ CvetaScenes.Performance = function() {
 		Text.Add("A light breeze has picked up in the camp, and your gaze wanders back to Cveta. The songstress is huddled in on herself as she plays, and your eyes are drawn to the ruffled beauty of her vermillion feathers, the flow of her gown, and those long, dexterous fingers working away with both strings and pick, fingers that could easily be put to much, much better use…", parse);
 		Text.NL();
 		if(party.InParty(kiakai) || party.InParty(terry) || party.InParty(momo)) {
-			var comp;
+			let comp : Entity = null;
 			var scenes = new EncounterTable();
 			scenes.AddEnc(function() {
 				comp = kiakai;
@@ -2009,9 +2024,9 @@ CvetaScenes.Performance = function() {
 		Gui.NextPrompt();
 }
 
-CvetaScenes.DreamRoses = function(ravenTrigger) {
+CvetaScenes.DreamRoses = function(ravenTrigger : any) {
 	var parse = {
-		raven : Scenes.Dreams.RavenText(ravenTrigger, " and a raven perched on one of the thorny rosebushes", " and the familiar form of a raven perched on one of the rosebushes, something you should remember")
+		raven : DreamsScenes.RavenText(ravenTrigger, " and a raven perched on one of the thorny rosebushes", " and the familiar form of a raven perched on one of the rosebushes, something you should remember")
 	};
 	
 	Text.Add("Roses.", parse);
@@ -2032,13 +2047,13 @@ CvetaScenes.DreamRoses = function(ravenTrigger) {
 }
 
 
-CvetaScenes.DreamBrood = function(ravenTrigger) {
+CvetaScenes.DreamBrood = function(ravenTrigger : any) {
 	let player = GAME().player;
 
 	var parse = {
 		skinDesc : function() { return player.SkinDesc(); },
 		playername : player.name,
-		raven : Scenes.Dreams.RavenText(ravenTrigger, " Off in the distance, high above the two of you, a raven circles in the air, its dark feathers starkly contrasting against the colorful scene. You can’t quite make it out, but does it look… jealous?", " There’s that raven again, spying on the two of you from up high in the clouds, the voyeuristic little thing. You should really remember it when you wake up.")
+		raven : DreamsScenes.RavenText(ravenTrigger, " Off in the distance, high above the two of you, a raven circles in the air, its dark feathers starkly contrasting against the colorful scene. You can’t quite make it out, but does it look… jealous?", " There’s that raven again, spying on the two of you from up high in the clouds, the voyeuristic little thing. You should really remember it when you wake up.")
 	};
 	
 	Text.Add("<i>“Wake up, beloved.”</i>", parse);

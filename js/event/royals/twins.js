@@ -8,6 +8,7 @@ import { Time } from '../../time';
 import { WorldTime } from '../../GAME';
 import { TerryFlags } from '../terry-flags';
 import { TwinsFlags } from './twins-flags';
+import { RigardFlags } from '../../loc/rigard/rigard-flags';
 
 let TwinsScenes = {};
 
@@ -149,7 +150,7 @@ TwinsScenes.TalkPrompt = function() {
 	
 	//[Thief]
 	var options = new Array();
-	if(rigard.Krawitz["Q"] >= Rigard.KrawitzQ.CaughtTerry) {
+	if(rigard.Krawitz["Q"] >= RigardFlags.KrawitzQ.CaughtTerry) {
 		options.push({ nameStr : "Thief",
 			func : function() {
 				Text.Clear();

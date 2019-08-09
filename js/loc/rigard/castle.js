@@ -9,6 +9,7 @@ import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { VaughnFlags } from '../../event/outlaws/vaughn-flags';
 import { TerryFlags } from '../../event/terry-flags';
+import { RigardFlags } from './rigard-flags';
 
 
 let CastleLoc = {
@@ -37,18 +38,18 @@ CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.JeannesTower;}, 1.0
 CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.TheDistrict;});
 CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.MeetingMajid;}, 1.0, function() {
 	let rigard = GAME().rigard;
-	return !Scenes.Global.PortalsOpen() && !(rigard.flags["Nobles"] & Rigard.Nobles.MetMajid);
+	return !Scenes.Global.PortalsOpen() && !(rigard.flags["Nobles"] & RigardFlags.Nobles.MetMajid);
 });
 CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.GuardPatrol;}, 1.0, function() { return !WorldTime().IsDay(); });
 CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.AlmsForThePoor;}, 1.0, function() {
 	let rigard = GAME().rigard;
-	return !(rigard.flags["Nobles"] & Rigard.Nobles.Alms);
+	return !(rigard.flags["Nobles"] & RigardFlags.Nobles.Alms);
 });
 CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.Elodie;}, 1.0, function() {
 	let vaughn = GAME().vaughn;
 	let rigard = GAME().rigard;
 	return !Scenes.Global.PortalsOpen() &&
-		!(rigard.flags["Nobles"] & Rigard.Nobles.Elodie) &&
+		!(rigard.flags["Nobles"] & RigardFlags.Nobles.Elodie) &&
 		Scenes.Global.VisitedOutlaws() &&
 		WorldTime().IsDay() &&
 		vaughn.flags["Met"] < VaughnFlags.Met.OnTaskLockpicks;
@@ -286,7 +287,7 @@ NobleScenes.MeetingMajid = function() {
 	Text.Add("For a moment, you wonder if Majid’s going to step out and confront you, but the sedan-bearers pick up their pace and ferry him away, leaving you wondering. Gradually, the furor kicked up by the vizier’s passing begins to die down a little, some semblance of normalcy returning to the streets, and there’s little left for you but to continue on your way.", parse);
 	Text.Flush();
 	
-	rigard.flags["Nobles"] |= Rigard.Nobles.MetMajid;
+	rigard.flags["Nobles"] |= RigardFlags.Nobles.MetMajid;
 	
 	TimeStep({minute: 15});
 	
@@ -348,7 +349,7 @@ NobleScenes.AlmsForThePoor = function() {
 	
 	TimeStep({minute: 15});
 	
-	rigard.flags["Nobles"] |= Rigard.Nobles.Alms;
+	rigard.flags["Nobles"] |= RigardFlags.Nobles.Alms;
 	
 	//[Old man][Young man][Leave]
 	var options = new Array();
@@ -448,7 +449,7 @@ NobleScenes.Elodie = function() {
 	Text.Add("The way she’s staring at you unblinkingly, holding your gaze like that… do you confront her?", parse);
 	Text.Flush();
 	
-	rigard.flags["Nobles"] |= Rigard.Nobles.Elodie;
+	rigard.flags["Nobles"] |= RigardFlags.Nobles.Elodie;
 	
 	//[Confront][Leave]
 	var options = new Array();
@@ -547,8 +548,8 @@ NobleScenes.PalaceParade = function() {
 		
 	};
 	
-	var first = !(rigard.flags["Nobles"] & Rigard.Nobles.Parade);
-	rigard.flags["Nobles"] |= Rigard.Nobles.Parade;
+	var first = !(rigard.flags["Nobles"] & RigardFlags.Nobles.Parade);
+	rigard.flags["Nobles"] |= RigardFlags.Nobles.Parade;
 	
 	Text.Clear();
 	if(first) {
@@ -593,8 +594,8 @@ NobleScenes.Buns = function() {
 		
 	};
 	
-	var first = !(rigard.flags["Nobles"] & Rigard.Nobles.Buns);
-	rigard.flags["Nobles"] |= Rigard.Nobles.Buns;
+	var first = !(rigard.flags["Nobles"] & RigardFlags.Nobles.Buns);
+	rigard.flags["Nobles"] |= RigardFlags.Nobles.Buns;
 	
 	Text.Clear();
 	if(first) {
@@ -645,7 +646,7 @@ NobleScenes.BunsChoice = function() {
 	parse["comp"] = party.Num() == 2 ? party.Get(1).name :
 	                "your companions";
 	
-	var first = !(rigard.flags["Nobles"] & Rigard.Nobles.BoughtBuns);
+	var first = !(rigard.flags["Nobles"] & RigardFlags.Nobles.BoughtBuns);
 	
 	var options = new Array();
 	if(first) {
@@ -654,7 +655,7 @@ NobleScenes.BunsChoice = function() {
 			func : function() {
 				Text.Clear();
 				
-				rigard.flags["Nobles"] |= Rigard.Nobles.BoughtBuns;
+				rigard.flags["Nobles"] |= RigardFlags.Nobles.BoughtBuns;
 				
 				Text.Add("Why not? If it tastes as good as it smells, you’re not going to be regretting this purchase. Shelling over the coins, you step back and relax as the young man gets to work, bringing out a meat patty from a sealed basket and setting it on the hot plate. There’s a very satisfying hiss, followed by a cloud of fragrant steam, and you have to admit, there’s quite a bit of flair in his way of doing things. A pinch of what could be lard or butter, some sliced tomatoes and onions, a bit of sauce… layer by layer, he piles on the ingredients in one glorious heap.", parse);
 				Text.NL();

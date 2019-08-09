@@ -12,12 +12,12 @@ import { DryadGlade } from './loc/glade';
 import { GlobalScenes } from './event/global';
 import { GAME } from './GAME';
 import { TwinsFlags } from './event/royals/twins-flags';
-import { Rigard } from './loc/rigard/rigard';
 import { AlchemyItems } from './items/alchemy';
 import { Burrows } from './loc/burrows';
 import { AscheScenes } from './event/asche';
 import { Lei } from './event/royals/lei';
 import { LeiScenes } from './event/royals/lei-scenes';
+import { RigardFlags } from './loc/rigard/rigard-flags';
 
 export class Quest {
 	name : any;
@@ -428,9 +428,9 @@ Quests.quests.push(new Quest({
 	active: function() {
 		let rigard = GAME().rigard;
 		var status = Quests.Type.NotStarted;
-		if(rigard.Krawitz["Q"] >= Rigard.KrawitzQ.CaughtTerry)
+		if(rigard.Krawitz["Q"] >= RigardFlags.KrawitzQ.CaughtTerry)
 			status |= Quests.Type.Completed;
-		else if(rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry)
+		else if(rigard.Krawitz["Q"] == RigardFlags.KrawitzQ.HuntingTerry)
 			status |= Quests.Type.Visible;
 		return status;
 	},
@@ -476,7 +476,7 @@ Quests.quests.push(new Quest({
 		var status = Quests.Type.NotStarted;
 		if(GAME().terry.flags["Saved"] >= TerryFlags.Saved.Saved)
 			status |= Quests.Type.Completed;
-		else if(GAME().rigard.Krawitz["Q"] >= Rigard.KrawitzQ.CaughtTerry)
+		else if(GAME().rigard.Krawitz["Q"] >= RigardFlags.KrawitzQ.CaughtTerry)
 			status |= Quests.Type.Visible;
 		return status;
 	},

@@ -4,6 +4,7 @@ import { EncounterTable } from '../../encountertable';
 import { WorldTime, MoveToLocation, GAME } from '../../GAME';
 import { VaughnScenes } from '../../event/outlaws/vaughn-scenes';
 import { Text } from '../../text';
+import { RigardFlags } from './rigard-flags';
 
 let GateLoc = new Event("Main Gate");
 let BarracksLoc = {
@@ -24,7 +25,7 @@ GateLoc.description = function() {
 	Text.Add("Ahead of you, the path splits into three. One path leads to the residential district, where most of the citizens live. Another path leads you to the merchant district, where most of the commerce is handled, and the merchant warehouses are located. The last path leads you toward Rigard’s richer areas - toward the Castle, which seems to be even more fortified than the front gates.");
 	Text.NL();
 	
-	if(rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry) {
+	if(rigard.Krawitz["Q"] == RigardFlags.KrawitzQ.HuntingTerry) {
 		Text.Add("With the lockdown, the whole place is in a near-riot, the usual commotion and clamour amplified tenfold as caravans try and fail to get past the blockade in either direction and merchants and guards argue with one another, devolving into screaming matches as much to try and be heard over the noise as from sheer frustration.");
 		Text.NL();
 		Text.Add("The gates certainly won't be opening anytime soon, but this is still a pretty good place for a thief to try hiding. All this chaos will easily cover someone sneaking around.");
@@ -48,7 +49,7 @@ GateLoc.enc.AddEnc(function() { return Scenes.Rigard.CityHistory;}, 1.0, functio
 });
 GateLoc.enc.AddEnc(function() { return Scenes.Terry.ExploreGates; }, 1000000.0, function() {
 	let rigard = GAME().rigard;
-	return rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry;
+	return rigard.Krawitz["Q"] == RigardFlags.KrawitzQ.HuntingTerry;
 });
 GateLoc.onEntry = function() {
 	if(Math.random() < 0.15)
@@ -91,7 +92,7 @@ GateLoc.links.push(new Link(
 	null,
 	function() {
 		let rigard = GAME().rigard;
-		if(rigard.Krawitz["Q"] == Rigard.KrawitzQ.HeistDone)
+		if(rigard.Krawitz["Q"] == RigardFlags.KrawitzQ.HeistDone)
 			Scenes.Rigard.Lockdown();
 		else
 			MoveToLocation(world.loc.Plains.Gate, {minute: 5});

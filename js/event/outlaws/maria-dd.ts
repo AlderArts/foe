@@ -1,5 +1,5 @@
 import { GetDEBUG } from '../../../app';
-import { WorldTime, TimeStep } from '../../GAME';
+import { WorldTime, TimeStep, GAME } from '../../GAME';
 import { Entity } from '../../entity';
 import { SetGameState, GameState } from '../../gamestate';
 import { Gui } from '../../gui';
@@ -8,11 +8,15 @@ import { EncounterTable } from '../../encountertable';
 import { EstevanFlags } from '../nomads/estevan-flags';
 import { MariaFlags } from './maria-flags';
 import { OutlawsFlags } from './outlaws-flags';
+import { Time, Season } from '../../time';
+import { Sex } from '../../entity-sex';
+import { Cavalcade } from '../../cavalcade';
+import { RigardFlags } from '../../loc/rigard/rigard-flags';
 
 //
 // Maria Dead drops
 //
-let DeadDropScenes = {};
+let DeadDropScenes : any = {};
 
 DeadDropScenes.Alert = function() {
 	let player = GAME().player;
@@ -104,7 +108,7 @@ DeadDropScenes.Initiation = function() {
 }
 
 DeadDropScenes.First = {};
-DeadDropScenes.First.Chat = function() {
+DeadDropScenes.First.Chat = function(CampPrompt : any) {
 	var parse = {};
 	
 	Text.Clear();
@@ -130,7 +134,7 @@ DeadDropScenes.First.Chat = function() {
 			Text.Add("You nod and back away from her. Whatever it is that you’ve forgotten to do, you should get it out of the way first before returning.", parse);
 			Text.Flush();
 			
-			Scenes.Maria.CampPrompt();
+			CampPrompt();
 		}, enabled : true
 	});
 	Gui.SetButtonsFromList(options, false, null);
@@ -142,7 +146,7 @@ DeadDropScenes.First.Start = function() {
 	let outlaws = GAME().outlaws;
 	let maria = GAME().maria;
 
-	var parse = {};
+	var parse : any = {};
 	
 	// PARTY STUFF
 	maria.DDtimer = new Time(0,0,2,0,0);
@@ -352,12 +356,12 @@ DeadDropScenes.First.Start = function() {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-DeadDropScenes.Repeat = function() {
+DeadDropScenes.Repeat = function(CampPrompt : any) {
 	let player = GAME().player;
 	let party = GAME().party;
 	let maria = GAME().maria;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -429,7 +433,7 @@ DeadDropScenes.Repeat = function() {
 			Text.Add("<i>“If you <b>do</b> want to do something later you can come back - assuming I’m still around, that is.”</i>", parse);
 			Text.Flush();
 			
-			Scenes.Maria.CampPrompt();
+			CampPrompt();
 		}, enabled : true
 	});
 	Gui.SetButtonsFromList(options, false, null);
@@ -496,7 +500,7 @@ DeadDropScenes.Docks.Ending = function() {
 	let player = GAME().player;
 	let party = GAME().party;
 	
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -539,7 +543,7 @@ DeadDropScenes.Docks.Cavalcade = function() {
 	let party = GAME().party;
 	let estevan = GAME().estevan;
 	
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -617,7 +621,7 @@ DeadDropScenes.Docks.CavalcadePrep = function() {
 	var coin = DeadDropScenes.Docks.CavalcadeCost();
 	
 	for(var i = 0; i < 3; i++) {
-		var dockworker = new Entity();
+		var dockworker : any = new Entity();
 		
 		dockworker.name = "Dockworker";
 		dockworker.body.DefMale();
@@ -742,7 +746,7 @@ DeadDropScenes.Docks.GuardInspection = function() {
 	let outlaws = GAME().outlaws;
 	let maria = GAME().maria;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 
@@ -965,7 +969,7 @@ DeadDropScenes.Docks.GuardInspection = function() {
 				Text.NL();
 				Text.Add("Shoot, and you were so close, too. Blinking, you quickly rack your mind for any way to get yourself out of this sticky situation. Fighting them won’t work - and it’ll make things even worse, not to mention disrupt business down at the docks. You have to come back here again sometime, after all.", parse);
 				Text.NL();
-				parse["b"] = rigard.Krawitz["Q"] >= Rigard.KrawitzQ.HeistDone ? ", especially with what happened back at Bull Tower. These two might not know you, but it’s likely that someone on duty back at the cells will" : "";
+				parse["b"] = GAME().rigard.Krawitz["Q"] >= RigardFlags.KrawitzQ.HeistDone ? ", especially with what happened back at Bull Tower. These two might not know you, but it’s likely that someone on duty back at the cells will" : "";
 				Text.Add("What now? You really, really, don’t want to be taken in for questioning[b].", parse);
 				Text.NL();
 				Text.Add("Happily, the guard offers you an out: <i>“Trying to hide from the long arm of the law, eh, citizen? Well, I’m going to have to take you in for wasting my time. Of course, there’s always the option of paying a small fine…”</i>", parse);
@@ -988,11 +992,11 @@ DeadDropScenes.Docks.GuardPrompt = function() {
 	let outlaws = GAME().outlaws;
 	let maria = GAME().maria;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 
-	humanity = player.Humanity();
+	let humanity = player.Humanity();
 
 	//[Pay][Service][Royals]
 	var options = new Array();
@@ -1113,7 +1117,7 @@ DeadDropScenes.Docks.GuardPrompt = function() {
 			Gui.NextPrompt(DeadDropScenes.Docks.Ending);
 		}, enabled : true
 	});
-	if(rigard.Krawitz["Q"] >= Rigard.KrawitzQ.HeistDone) {
+	if(GAME().rigard.Krawitz["Q"] >= RigardFlags.KrawitzQ.HeistDone) {
 		options.push({ nameStr : "Royals",
 			tooltip : "You have the Twins’ letter with you, don’t you? Time to turn the tables.",
 			func : function() {

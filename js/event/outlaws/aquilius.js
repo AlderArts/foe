@@ -9,6 +9,7 @@ import { IngredientItems } from '../../items/ingredients';
 import { WorldTime, GAME } from '../../GAME';
 import { Gui } from '../../gui';
 import { Text } from '../../text';
+import { AquiliusFlags } from './aquilius-flags';
 
 let AquiliusScenes = {};
 
@@ -24,8 +25,8 @@ function Aquilius(storage) {
 	this.SetLevelBonus();
 	this.RestFull();
 	
-	this.flags["Met"]   = Aquilius.Met.NotMet;
-	this.flags["Herbs"] = Aquilius.Herbs.No;
+	this.flags["Met"]   = AquiliusFlags.Met.NotMet;
+	this.flags["Herbs"] = AquiliusFlags.Herbs.No;
 	this.flags["Talk"]  = 0; //Bitmask
 	this.herbIngredient = null;
 	
@@ -36,22 +37,6 @@ function Aquilius(storage) {
 Aquilius.prototype = new Entity();
 Aquilius.prototype.constructor = Aquilius;
 
-Aquilius.Met = {
-	NotMet : 0,
-	Met    : 1,
-	Helped : 2
-};
-Aquilius.Talk = {
-	TendToSick  : 1,
-	AlchemyHelp : 2,
-	War         : 4
-};
-Aquilius.Herbs = {
-	No       : 0,
-	Known    : 1,
-	OnQuest  : 2,
-	Finished : 3
-};
 Aquilius.ExtraHerbs = function() {
 	return [
 		IngredientItems.Lettuce,
@@ -103,10 +88,10 @@ Aquilius.prototype.IsAtLocation = function(location) {
 }
 
 Aquilius.prototype.OnHerbsQuest = function() {
-	return this.flags["Herbs"] >= Aquilius.Herbs.OnQuest;
+	return this.flags["Herbs"] >= AquiliusFlags.Herbs.OnQuest;
 }
 Aquilius.prototype.OnHerbsQuestFinished = function() {
-	return this.flags["Herbs"] >= Aquilius.Herbs.Finished;
+	return this.flags["Herbs"] >= AquiliusFlags.Herbs.Finished;
 }
 Aquilius.prototype.HelpCooldown = function() {
 	return new Time(0,0,0,12,0);
@@ -213,13 +198,13 @@ AquiliusScenes.Approach = function() {
 		outlaws.relation.IncreaseStat(30, 1);
 		aquilius.relation.IncreaseStat(100, 2);
 		
-		aquilius.flags["Herbs"] = Aquilius.Herbs.Known;
+		aquilius.flags["Herbs"] = AquiliusFlags.Herbs.Known;
 		
 		//#Set timer on helping out at infirmary for the rest of the day.
 		aquilius.helpTimer = aquilius.HelpCooldown();
 		
-		if(aquilius.flags["Met"] < Aquilius.Met.Helped)
-			aquilius.flags["Met"] = Aquilius.Met.Helped;
+		if(aquilius.flags["Met"] < AquiliusFlags.Met.Helped)
+			aquilius.flags["Met"] = AquiliusFlags.Met.Helped;
 		
 		var item = aquilius.herbIngredient;
 		aquilius.herbIngredient = null;
@@ -434,11 +419,11 @@ AquiliusScenes.TalkPrompt = function() {
 			Text.Clear();
 			Text.Add("Aquilius doesn’t reply at first, instead staring intently into the distance just past your shoulder, as if he’s seen a ghost. Maybe he has. It’s a good half-minute before he finally moves again, taking his pipe out of his beak and blowing a slow, long stream of smoke through his nostrils.", parse);
 			Text.NL();
-			if(aquilius.flags["Talk"] & Aquilius.Talk.War) {
+			if(aquilius.flags["Talk"] & AquiliusFlags.Talk.War) {
 				Text.Add("<i>“You want to hear about it again? Well, it’s important that kids these days learn history, else we’re doomed to repeat it. Come to think of it, learning history doesn’t necessarily mean you aren’t going to repeat it anyway. Bah, what do you want me to tell you about?”</i>", parse);
 			}
 			else {
-				aquilius.flags["Talk"] |= Aquilius.Talk.War;
+				aquilius.flags["Talk"] |= AquiliusFlags.Talk.War;
 				Text.Add("<i>“Yes, I can tell you about the war,”</i> he says. <i>“Brother against brother, parent against child, king against his own. I may be not quite as young as I was then, but I still remember every single moment of it. What would you like to know?”</i>", parse);
 			}
 			Text.Flush();
@@ -917,7 +902,7 @@ AquiliusScenes.HelpOut = function() {
 	Text.Add("You ask Aquilius if there’s anything you can do to help out around the infirmary.", parse);
 	Text.NL();
 	if(aquilius.helpTimer.Expired()) {
-		if(aquilius.flags["Met"] < Aquilius.Met.Helped)
+		if(aquilius.flags["Met"] < AquiliusFlags.Met.Helped)
 			Text.Add("Aquilius eyes you uncertainly. <i>“I’m not exactly sure, [playername]. After all, I’m ultimately responsible for those under my care, and you’re a bit of an unknown - but on the other hand, it’d be stupid of me to turn away good help. Tell you what - why don’t I get you started on the simple tasks first, then move onto the others when you prove yourself capable of not fouling up?”</i>", parse);
 		else
 			Text.Add("<i>“There’s always work to be done here; I’ll gladly accept any help you’re willing to offer. What did you have in mind, [playername]?”</i>", parse);
@@ -949,7 +934,7 @@ AquiliusScenes.HelpOutPrompt = function() {
 		tooltip : "Offer to go herb picking.",
 		func : function() {
 			Text.Clear();
-			if(aquilius.flags["Herbs"] < Aquilius.Herbs.Known) {
+			if(aquilius.flags["Herbs"] < AquiliusFlags.Herbs.Known) {
 				Text.Add("<i>“This is the first time you’ve offered to go flower picking for me. Do you know what I’m looking for?”</i>", parse);
 				Text.NL();
 				Text.Add("You admit that no, you don’t.", parse);
@@ -974,7 +959,7 @@ AquiliusScenes.HelpOutPrompt = function() {
 			Text.Add("<i>“There is one thing. Today, I’m looking out for some [ingredient] in particular. If you could get your hands on some before you come back, I’d be glad to give you a little something in return for the extra effort. Happy hunting.”</i>", parse);
 			Text.Flush();
 			
-			aquilius.flags["Herbs"] = Aquilius.Herbs.OnQuest;
+			aquilius.flags["Herbs"] = AquiliusFlags.Herbs.OnQuest;
 			
 			TimeStep({minute: 10});
 			
@@ -1042,7 +1027,7 @@ AquiliusScenes.PickHerbs = function() {
 	
 	TimeStep({hour: 5});
 	
-	aquilius.flags["Herbs"] = Aquilius.Herbs.Finished;
+	aquilius.flags["Herbs"] = AquiliusFlags.Herbs.Finished;
 	
 	Gui.NextPrompt();
 }
@@ -1058,13 +1043,13 @@ AquiliusScenes.TendToSick = function() {
 		playername : player.name
 	};
 	
-	if(aquilius.flags["Met"] < Aquilius.Met.Helped)
-		aquilius.flags["Met"] = Aquilius.Met.Helped;
+	if(aquilius.flags["Met"] < AquiliusFlags.Met.Helped)
+		aquilius.flags["Met"] = AquiliusFlags.Met.Helped;
 	
 	Text.Clear();
 	Text.Add("You indicate to Aquilius that you since you know something about medicine, you wouldn’t mind helping out with the injured and infirm.", parse);
 	Text.NL();
-	if(aquilius.flags["Talk"] & Aquilius.Talk.TendToSick) {
+	if(aquilius.flags["Talk"] & AquiliusFlags.Talk.TendToSick) {
 		Text.Add("<i>“While there’s no shortage of folk willing to do the menial jobs about these parts, we could always use an extra pair of skilled hands around,”</i> Aquilius tells you. <i>“Of course you’re more than welcome to do your share - more, if you’re so inclined.”</i>", parse);
 	}
 	else {
@@ -1078,7 +1063,7 @@ AquiliusScenes.TendToSick = function() {
 		Text.NL();
 		Text.Add("Your little tour over, he calls over his three assistants and briefly introduces you in turn, then dismisses them with a wave of his hand before turning back to you. <i>“All right, [playername]. Enough talk, let’s have at it. We’ll see what you’re made of.”</i>", parse);
 		
-		aquilius.flags["Talk"] |= Aquilius.Talk.TendToSick;
+		aquilius.flags["Talk"] |= AquiliusFlags.Talk.TendToSick;
 	}
 	Text.NL();
 	
@@ -1172,13 +1157,13 @@ AquiliusScenes.AlchemyHelp = function() {
 		
 	};
 	
-	if(aquilius.flags["Met"] < Aquilius.Met.Helped)
-		aquilius.flags["Met"] = Aquilius.Met.Helped;
+	if(aquilius.flags["Met"] < AquiliusFlags.Met.Helped)
+		aquilius.flags["Met"] = AquiliusFlags.Met.Helped;
 		
 	Text.Clear();
 	Text.Add("Knowing something of alchemy yourself, you offer to watch the proverbial pots so Aquilius can go about his more important tasks.", parse);
 	Text.NL();
-	if(aquilius.flags["Talk"] & Aquilius.Talk.AlchemyHelp) {
+	if(aquilius.flags["Talk"] & AquiliusFlags.Talk.AlchemyHelp) {
 		Text.Add("<i>“Well, I guess I can trust you with the apparatus.”</i>", parse);
 		Text.NL();
 		Text.Add("You’re about to say that you’ll be careful, but he waves you off. <i>“Yes, I know you’ll be careful. Let’s get started.”</i>", parse);
@@ -1197,7 +1182,7 @@ AquiliusScenes.AlchemyHelp = function() {
 		Text.Add("And what does he make here, anyway?", parse);
 		Text.NL();
 		Text.Add("<i>“A bit of this, a bit of that as circumstances demand. Mostly, I just cook up alcohol for cleaning purposes - we go through that like a drunk with a bottle, but there’re some other popular bits and pieces, though. Come on, let me demonstrate.”</i>", parse);
-		aquilius.flags["Talk"] |= Aquilius.Talk.AlchemyHelp;
+		aquilius.flags["Talk"] |= AquiliusFlags.Talk.AlchemyHelp;
 	}
 	Text.NL();
 	

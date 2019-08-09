@@ -7,29 +7,33 @@
 import { Event, Link } from '../event';
 import { EncounterTable } from '../encountertable';
 import { Scenes } from '../scenes';
-import { WorldTime, MoveToLocation } from '../GAME';
+import { WorldTime, MoveToLocation, WORLD, GAME } from '../GAME';
 import { VaughnScenes } from '../event/outlaws/vaughn-scenes';
 import { Text } from '../text';
 import { CvetaFlags } from '../event/outlaws/cveta-flags';
 import { OutlawsFlags } from '../event/outlaws/outlaws-flags';
+import { GetDEBUG } from '../../app';
+import { Gui } from '../gui';
+import { OutlawsScenes } from '../event/outlaws/outlaws';
+import { CvetaScenes } from '../event/outlaws/cveta-scenes';
+import { MariaScenes } from '../event/outlaws/maria-scenes';
+import { RigardFlags } from './rigard/rigard-flags';
 
-let world = null;
-
-export function InitOutlaws(w) {
-	world = w;
-	world.SaveSpots["Outlaws"] = OutlawsLoc.Camp;
+export function InitOutlaws() {
+	WORLD().SaveSpots["Outlaws"] = OutlawsLoc.Camp;
 };
 
 // Create namespace
 let OutlawsLoc = {
 	Camp : new Event("Outlaws' camp"),
 	Infirmary : new Event("Infirmary")
-}
+};
 
 OutlawsLoc.Camp.SaveSpot = "Outlaws";
 OutlawsLoc.Camp.safe = function() { return true; };
 //TODO
 OutlawsLoc.Camp.description = function() {
+	let outlaws = GAME().outlaws;
 	Text.Add("You are in the outlaws' camp.<br>");
 	
 	if(GetDEBUG()) {
@@ -40,9 +44,14 @@ OutlawsLoc.Camp.description = function() {
 }
 
 OutlawsLoc.Camp.onEntry = function() {
+	let outlaws = GAME().outlaws;
+	let maria = GAME().maria;
+	let vaughn = GAME().vaughn;
+	let rigard = GAME().rigard;
+	let cveta = GAME().cveta;
 	if(outlaws.Rep() >= 10 && outlaws.flags["Met"] == OutlawsFlags.Met.Bouqet && outlaws.mainQuestTimer.Expired())
 		Scenes.Outlaws.PathIntoRigardInitiation();
-	else if(outlaws.Rep() >= 15 && rigard.Krawitz["Q"] >= Rigard.KrawitzQ.CaughtTerry && cveta.flags["Met"] < CvetaFlags.Met.MariaTalk)
+	else if(outlaws.Rep() >= 15 && rigard.Krawitz["Q"] >= RigardFlags.KrawitzQ.CaughtTerry && cveta.flags["Met"] < CvetaFlags.Met.MariaTalk)
 		Scenes.Cveta.MariaTalkFirst();
 	else if(outlaws.Rep() >= 25 && outlaws.flags["Met"] >= OutlawsFlags.Met.MetBelinda && cveta.Relation() >= 60 && outlaws.flags["BullTower"] < OutlawsFlags.BullTowerQuest.Initiated)
 		Scenes.BullTower.Initiation();
@@ -62,7 +71,7 @@ OutlawsLoc.Camp.links.push(new Link(
 	"Forest", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Forest.Outskirts, {hour: 1});
+		MoveToLocation(WORLD().loc.Forest.Outskirts, {hour: 1});
 	}
 ));
 
@@ -76,6 +85,7 @@ OutlawsLoc.Camp.links.push(new Link(
 
 OutlawsLoc.Camp.links.push(new Link(
 	"Tower", function() {
+		let outlaws = GAME().outlaws;
 		return outlaws.flags["BullTower"] == OutlawsFlags.BullTowerQuest.Initiated;
 	}, true,
 	null,
@@ -86,6 +96,7 @@ OutlawsLoc.Camp.links.push(new Link(
 
 OutlawsLoc.Camp.events.push(new Link(
 	"Maria", function() {
+		let maria = GAME().maria;
 		var time = maria.IsAtLocation();
 		return time;
 	}, true,
@@ -93,16 +104,18 @@ OutlawsLoc.Camp.events.push(new Link(
 		//TODO
 	},
 	function() {
-		Scenes.Maria.CampInteract();
+		MariaScenes.CampInteract();
 	}
 ));
 
 OutlawsLoc.Camp.events.push(new Link(
 	"Vaughn", function() {
+		let vaughn = GAME().vaughn;
 		var time = vaughn.IsAtLocation();
 		return time && vaughn.Met();
 	}, true,
 	function() {
+		let vaughn = GAME().vaughn;
 		if(vaughn.Met())
 			VaughnScenes.CampDesc();
 	},
@@ -113,11 +126,13 @@ OutlawsLoc.Camp.events.push(new Link(
 
 OutlawsLoc.Camp.events.push(new Link(
 	"Cveta", function() {
+		let cveta = GAME().cveta;
 		var met  = cveta.flags["Met"] >= CvetaFlags.Met.Available;
 		var time = cveta.WakingTime();
 		return met && time;
 	}, true,
 	function() {
+		let cveta = GAME().cveta;
 		if(cveta.flags["Met"] >= CvetaFlags.Met.FirstMeeting)
 			Scenes.Cveta.CampDesc();
 	},
@@ -128,13 +143,14 @@ OutlawsLoc.Camp.events.push(new Link(
 
 OutlawsLoc.Camp.events.push(new Link(
 	"Performance", function() {
+		let cveta = GAME().cveta;
 		var met  = cveta.flags["Met"] >= CvetaFlags.Met.FirstMeeting;
 		var time = cveta.PerformanceTime();
 		return met && time;
 	}, true,
 	null,
 	function() {
-		Scenes.Cveta.Performance();
+		CvetaScenes.Performance();
 	}
 ));
 
@@ -145,10 +161,10 @@ OutlawsLoc.Camp.enc.AddEnc(function() {
 }, 1.0, function() { return WorldTime().hour >= 5 && WorldTime().hour < 22; });
 OutlawsLoc.Camp.enc.AddEnc(function() {
 	return Scenes.Outlaws.Exploration.Cavalcade;
-}, 1.0, function() { return Scenes.OutlawsCavalcade.Enabled(); });
+}, 1.0, function() { return OutlawsScenes.Cavalcade.Enabled(); });
 OutlawsLoc.Camp.enc.AddEnc(function() {
 	return Scenes.Outlaws.Exploration.Archery;
-}, 1.0, function() { return outlaws.flags["Met"] >= OutlawsFlags.Met.MetBelinda && WorldTime().IsDay(); });
+}, 1.0, function() { return GAME().outlaws.flags["Met"] >= OutlawsFlags.Met.MetBelinda && WorldTime().IsDay(); });
 OutlawsLoc.Camp.enc.AddEnc(function() {
 	return Scenes.Outlaws.Exploration.CampFollowers;
 }, 1.0, function() { return !WorldTime().IsDay(); });
@@ -157,10 +173,10 @@ OutlawsLoc.Camp.enc.AddEnc(function() {
 }, 1.0, function() { return true; });
 OutlawsLoc.Camp.enc.AddEnc(function() {
 	return Scenes.Outlaws.Exploration.Carpentry;
-}, 1.0, function() { return outlaws.flags["Met"] >= OutlawsFlags.Met.MetBelinda; });
+}, 1.0, function() { return GAME().outlaws.flags["Met"] >= OutlawsFlags.Met.MetBelinda; });
 OutlawsLoc.Camp.enc.AddEnc(function() {
 	return Scenes.Outlaws.Exploration.FactFinding;
-}, 1.0, function() { return outlaws.factTimer.Expired(); });
+}, 1.0, function() { return GAME().outlaws.factTimer.Expired(); });
 OutlawsLoc.Camp.enc.AddEnc(function() {
 	return Scenes.Outlaws.Exploration.DailyLife;
 }, 1.0, function() { return true; });
@@ -173,7 +189,9 @@ OutlawsLoc.Camp.enc.AddEnc(function() {
 */
 
 OutlawsLoc.Infirmary.description = function() {
-	var parse = {
+	let terry = GAME().terry;
+	let party = GAME().party;
+	var parse : any = {
 		
 	};
 	
@@ -209,7 +227,7 @@ OutlawsLoc.Infirmary.description = function() {
 }
 
 OutlawsLoc.Infirmary.onEntry = function() {
-	if(aquilius.flags["Met"] == 0)
+	if(GAME().aquilius.flags["Met"] == 0)
 		Scenes.Aquilius.FirstMeeting();
 	else
 		Gui.PrintDefaultOptions();
@@ -225,7 +243,7 @@ OutlawsLoc.Infirmary.links.push(new Link(
 
 OutlawsLoc.Infirmary.events.push(new Link(
 	"Aquilius", function() {
-		return aquilius.IsAtLocation();
+		return GAME().aquilius.IsAtLocation();
 	}, true,
 	null,
 	function() {

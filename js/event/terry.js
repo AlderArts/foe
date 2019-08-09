@@ -26,6 +26,7 @@ import { GAME } from '../GAME';
 import { PregnancyHandler } from '../pregnancy';
 import { MirandaFlags } from './miranda-flags';
 import { TerryFlags } from './terry-flags';
+import { RigardFlags } from '../loc/rigard/rigard-flags';
 
 let TerryScenes = {};
 
@@ -938,7 +939,7 @@ TerryScenes.CaughtTheThief = function() {
 	};
 	
 	SetGameState(GameState.Event, Gui);
-	rigard.Krawitz["Q"] = Rigard.KrawitzQ.CaughtTerry;
+	rigard.Krawitz["Q"] = RigardFlags.KrawitzQ.CaughtTerry;
 	
 	terry.flags["PrefGender"] = Gender.male;
 	
