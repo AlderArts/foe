@@ -98,7 +98,7 @@ export class RaceDesc {
 		return desc ? (desc.a + " " + desc.noun) : ("ERROR in " + this.name + ".aShort()");
 	}
 
-	Quantifier(gender : Gender) {
+	Quantifier(gender? : Gender) {
 		var quantify = this.quantify;
 		if(_.isNumber(gender)) {
 			if(gender == Gender.male)
@@ -110,15 +110,15 @@ export class RaceDesc {
 		return quantify;
 	}
 
-	qShort(gender : Gender) {
+	qShort(gender? : Gender) {
 		var desc = _.sample(this.Quantifier(gender));
 		return desc ? desc.noun : ("ERROR in " + this.name + ".qShort()");
 	}
-	qCShort(gender : Gender) {
+	qCShort(gender? : Gender) {
 		var desc = _.sample(this.Quantifier(gender));
 		return desc ? _.capitalize(desc.noun) : ("ERROR in " + this.name + ".qCShort()");
 	}
-	aqShort(gender : Gender) {
+	aqShort(gender? : Gender) {
 		var desc = _.sample(this.Quantifier(gender));
 		return desc ? (desc.a + " " + desc.noun) : ("ERROR in " + this.name + ".aqShort()");
 	}

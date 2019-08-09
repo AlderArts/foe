@@ -17,7 +17,7 @@ export class Hair extends BodyPart {
 	length : Stat;
 	style : HairStyle;
 
-	constructor(color : Color) {
+	constructor(color? : Color) {
 		super(null, color);
 		this.length = new Stat(5);
 		this.style = HairStyle.straight;
