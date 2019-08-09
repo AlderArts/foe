@@ -13,7 +13,7 @@ import { Color } from '../../body/color';
 import { Body } from '../../body/body';
 import { TF } from '../../tf';
 import { AppendageType } from '../../body/appendage';
-import { WorldTime, GAME } from '../../GAME';
+import { WorldTime, GAME, WORLD } from '../../GAME';
 import { BodyPartType } from '../../body/bodypart';
 import { Sex } from '../../entity-sex';
 import { PregnancyHandler } from '../../pregnancy';
@@ -209,7 +209,7 @@ RosalinScenes.Impregnate = function(mother, father, slot) {
 Rosalin.prototype.IsAtLocation = function(location) {
 	let party = GAME().party;
 	location = location || party.location;
-	if(location == world.loc.Plains.Nomads.Fireplace)
+	if(location == WORLD().loc.Plains.Nomads.Fireplace)
 		return (WorldTime().hour >= 12 || WorldTime().hour < 3);
 	return false;
 }

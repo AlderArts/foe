@@ -1038,7 +1038,7 @@ CaleScenes.Rogue = function() {
 					
 					cale.slut.IncreaseStat(50, 5);
 					
-					CaleScenes.SexFuckHim(true);
+					CaleSexScenes.SexFuckHim(true);
 				}, enabled : (cocksInAss.length > 0),
 				tooltip : "All that matters is winning, wasn’t it?"
 			});
@@ -1078,9 +1078,9 @@ CaleScenes.Rogue = function() {
 					Text.NL();
 					
 					if(player.FirstVag())
-						CaleScenes.SexCatchVagEntrypoint(true, false, true); // Use the customIntro flag to repress the usual initial dialogue
+						CaleSexScenes.SexCatchVagEntrypoint(true, false, true); // Use the customIntro flag to repress the usual initial dialogue
 					else
-						CaleScenes.SexCatchAnalEntrypoint(true);
+						CaleSexScenes.SexCatchAnalEntrypoint(true);
 				}, enabled : true,
 				tooltip : "It wouldn’t be a proper lesson if he stopped here, would it?"
 			});

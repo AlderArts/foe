@@ -10,12 +10,13 @@ import { TF } from '../../tf';
 import { AppendageType } from '../../body/appendage';
 import { Race } from '../../body/race';
 import { Color } from '../../body/color';
-import { WorldTime, TimeStep } from '../../GAME';
+import { WorldTime, TimeStep, GAME, WORLD } from '../../GAME';
 import { Gui } from '../../gui';
 import { Text } from '../../text';
 import { Sex } from '../../entity-sex';
 import { CaleFlags } from './cale-flags';
 import { EstevanFlags } from './estevan-flags';
+import { PregnancyHandler } from '../../pregnancy';
 
 let EstevanScenes = {};
 
@@ -83,7 +84,7 @@ EstevanScenes.Impregnate = function(mother, slot) {
 Estevan.prototype.IsAtLocation = function(location) {
 	let party = GAME().party;
 	location = location || party.location;
-	if(location == world.loc.Plains.Nomads.Fireplace)
+	if(location == WORLD().loc.Plains.Nomads.Fireplace)
 		return (WorldTime().hour >= 15 || WorldTime().hour < 3);
 	return false;
 }

@@ -4,14 +4,20 @@
 import { Link } from '../../event';
 import { GetDEBUG } from '../../../app';
 import { Gender } from '../../body/gender';
-import { Estevan } from './estevan';
 import { NomadsLoc } from '../../loc/nomads';
 import { SetGameState, GameState } from '../../gamestate';
 import { Gui } from '../../gui';
 import { Text } from '../../text';
 import { EstevanFlags } from './estevan-flags';
+import { GAME, TimeStep } from '../../GAME';
+import { Cavalcade } from '../../cavalcade';
+import { EncounterTable } from '../../encountertable';
+import { Input } from '../../input';
+import { RaceScore } from '../../body/race';
+import { StrapOnItems } from '../../items/strapon';
+import { CaleSexScenes } from './cale-sex';
 
-let NCavalcadeScenes = {};
+let NCavalcadeScenes : any = {};
 
 NCavalcadeScenes.Bet = function() {
 	return 5;
@@ -217,7 +223,7 @@ NCavalcadeScenes.PrepCoinGame = function() {
 	g.NextRound();
 }
 
-NCavalcadeScenes.PlayersLeft = function(players) {
+NCavalcadeScenes.PlayersLeft = function(players : any[]) {
 	var num = 0;
 	for(var i = 0; i < players.length; i++)
 		if(!players[i].out)
@@ -232,7 +238,7 @@ NCavalcadeScenes.PrepSexyGame = function() {
 	let estevan = GAME().estevan;
 	var token = 50;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		coin : Text.NumToText(token)
 	};
@@ -312,7 +318,7 @@ NCavalcadeScenes.PrepSexyGame = function() {
 		}
 
 		if(NCavalcadeScenes.PlayersLeft(players) <= 1) {
-			var next = null;
+			var next : any = null;
 			if     (!player.out)  next = NCavalcadeScenes.SexyPlayerWin;
 			else if(!estevan.out) next = NCavalcadeScenes.SexyEstevanWin;
 			else if(!rosalin.out) next = NCavalcadeScenes.SexyRosalinWin;
@@ -393,7 +399,7 @@ NCavalcadeScenes.CheatGame = function() {
 	var racescore = new RaceScore(rosalin.body);
 	var compScore = rosalin.origRaceScore.Compare(racescore);
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		racedesc   : function() { return rosalin.raceDesc(compScore); },
 		cockDesc   : function() { return p1cock.Short(); },
@@ -457,7 +463,7 @@ NCavalcadeScenes.CheatGame = function() {
 						Text.Add("<i>“Oh, I know! You can have one of mine!”</i> Rosalin quips in to the frustration of the wolf. The [racedesc] scurries away, returning with an immense canine dildo, complete with a knot. <i>“I know you’ll like it, wuffie!”</i> the alchemist exclaims, handing you the toy.", parse);
 						var inv = party.inventory;
 						if(player.strapOn) inv.AddItem(player.strapOn);
-						player.strapOn = Items.StrapOn.CanidStrapon;
+						player.strapOn = StrapOnItems.CanidStrapon;
 						player.Equip();
 					}
 					Text.NL();
@@ -490,7 +496,7 @@ NCavalcadeScenes.CheatGame = function() {
 						Text.Add("<i>“Oh, I know! You can have one of mine!”</i> Rosalin quips in. The [racedesc] scurries away, returning with an immense canine dildo, complete with a knot. <i>“I know you’ll like it, wuffie!”</i> the alchemist exclaims, handing you the toy. Cale blanches a bit at the sight of it.", parse);
 						var inv = party.inventory;
 						if(player.strapOn) inv.AddItem(player.strapOn);
-						player.strapOn = Items.StrapOn.CanidStrapon;
+						player.strapOn = StrapOnItems.CanidStrapon;
 						player.Equip();
 					}
 					Text.NL();
@@ -519,7 +525,7 @@ NCavalcadeScenes.CheatGame = function() {
 						Text.Add("<i>“Thanks, Rosie!”</i> the wolf yips cheerfully.", parse);
 						var inv = party.inventory;
 						if(player.strapOn) inv.AddItem(player.strapOn);
-						player.strapOn = Items.StrapOn.CanidStrapon;
+						player.strapOn = StrapOnItems.CanidStrapon;
 						player.Equip();
 					}
 					Text.NL();
@@ -536,16 +542,16 @@ NCavalcadeScenes.CheatGame = function() {
 			Text.Add("Not wasting any time, you pull down his pants, baring his round butt and tight rosebud. The wolf raises his tail [uncertainly], allowing you full access.", parse);
 			Text.NL();
 
-			Scenes.Cale.SexFuckHim(true, {cavalcade: true, cheat: true});
+			CaleSexScenes.SexFuckHim(true, {cavalcade: true, cheat: true});
 		});
 	});
 }
 
 
-NCavalcadeScenes.SexyPlayerWin = function(cheat) {
+NCavalcadeScenes.SexyPlayerWin = function(cheat : boolean) {
 	let player = GAME().player;
 	let cale = GAME().cale;
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 
@@ -613,7 +619,7 @@ NCavalcadeScenes.SexyPlayerWin = function(cheat) {
 				Text.Add("Not wasting any time, you pull down his pants, baring his round butt and [tight] rosebud. The wolf raises his tail [uncertainly], allowing you full access.", parse);
 				Text.NL();
 
-				Scenes.Cale.SexFuckHim(true, {cavalcade : true, cheat: cheat})
+				CaleSexScenes.SexFuckHim(true, {cavalcade : true, cheat: cheat})
 			}, enabled : true,
 			tooltip : "Bend the wolf over and make him your bitch."
 		});
@@ -641,7 +647,7 @@ NCavalcadeScenes.SexyPlayerWin = function(cheat) {
 }
 
 //TODO
-NCavalcadeScenes.SexyEstevanWin = function(cheat) {
+NCavalcadeScenes.SexyEstevanWin = function(cheat : boolean) {
 	var parse = {
 
 	};
@@ -656,7 +662,7 @@ NCavalcadeScenes.SexyEstevanWin = function(cheat) {
 }
 
 //TODO
-NCavalcadeScenes.SexyCaleWin = function(cheat) {
+NCavalcadeScenes.SexyCaleWin = function(cheat : boolean) {
 	var parse = {
 
 	};
@@ -671,7 +677,7 @@ NCavalcadeScenes.SexyCaleWin = function(cheat) {
 }
 
 //TODO
-NCavalcadeScenes.SexyRosalinWin = function(cheat) {
+NCavalcadeScenes.SexyRosalinWin = function(cheat : boolean) {
 	var parse = {
 
 	};

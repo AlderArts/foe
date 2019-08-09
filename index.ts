@@ -120,7 +120,6 @@ import './js/event/nomads/rosalin.js';
 import './js/event/nomads/estevan.js';
 import './js/event/nomads/cale.js';
 import './js/event/nomads/magnus.js';
-import './js/event/nomads/cavalcade.js';
 
 import './js/event/outlaws/aquilius.js';
 import './js/event/outlaws/maria.js';
