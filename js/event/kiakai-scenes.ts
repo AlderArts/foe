@@ -3,9 +3,12 @@ import { KiakaiSex } from './kiakai-sex';
 import { Kiakai } from './kiakai';
 import { Text } from '../text';
 import { Gui } from '../gui';
-import { GAME } from '../GAME';
+import { GAME, TimeStep } from '../GAME';
+import { KiakaiFlags } from './kiakai-flags';
+import { Uru } from './uru';
+import { Burrows } from '../loc/burrows';
 
-let KiakaiScenes = {
+let KiakaiScenes : any = {
 	Sex : KiakaiSex
 };
 
@@ -46,7 +49,7 @@ KiakaiScenes.TalkQuest = function() {
 	
 	Text.Clear();
 	// Initial stage
-	if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral) {
+	if(kiakai.flags["Attitude"] < KiakaiFlags.Attitude.Neutral) {
 		Text.Add("You ask what you are to do with the gem.", parse);
 		Text.NL();
 		Text.Add("<i>“Lady Aria has told me that the gem holds great power. If you are able to wield it, maybe it can be used to stop Uru before it is too late.”</i> [name] looks at you suspiciously, clearly wondering if that's what you'd really do with it. <i>“Unfortunately, I know nothing of the magic that powers the artifact.”</i>", parse);
@@ -103,7 +106,7 @@ KiakaiScenes.TalkAria = function() {
 	// First time
 	if(kiakai.flags["TalkedAria"] == 0) {
 		
-		if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral) {
+		if(kiakai.flags["Attitude"] < KiakaiFlags.Attitude.Neutral) {
 			Text.Add("<i>“You may be ignorant of much, [playername], but you have had the honor of standing in her presence yourself.”</i> [name] looks a little angry, perhaps almost jealous. <i>“She is the Lady of Light, the embodiment of good in the worlds. Surely, you must have seen at least that much?”</i>", parse);
 		}
 		else {
@@ -113,7 +116,7 @@ KiakaiScenes.TalkAria = function() {
 		Text.Add("You explain that you would like to know more about Aria and her followers.", parse);
 		Text.NL();
 		
-		if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral) {
+		if(kiakai.flags["Attitude"] < KiakaiFlags.Attitude.Neutral) {
 			Text.Add("<i>“It is good that you take interest in her.”</i> The elf seems a little relieved that you're interested in [hisher] Goddess. ", parse);
 		}
 		else {
@@ -124,7 +127,7 @@ KiakaiScenes.TalkAria = function() {
 		Text.Add("You ask how long this has been going on. <i>“The records are not clear on this, and the records of my people go back a long time,”</i> [name] answers you. <i>“These kinds of portals have been opening on Eden for thousands of years, as far as I know.”</i>", parse);
 		Text.NL();
 		
-		if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral)
+		if(kiakai.flags["Attitude"] < KiakaiFlags.Attitude.Neutral)
 			Text.Add("<i>“Is there anything else that you would like to know about Lady Aria, [playername]?”</i>", parse);
 		else
 			Text.Add("<i>“Tell me, is there anything else that you would like to know about Lady Aria, [playername]?”</i>", parse);
@@ -146,7 +149,7 @@ KiakaiScenes.TalkAria = function() {
 			Text.Add("What are Aria's goals exactly? For what reason is she putting so much effort into keeping Eden safe?", parse);
 			Text.NL();
 			
-			if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral)
+			if(kiakai.flags["Attitude"] < KiakaiFlags.Attitude.Neutral)
 				Text.Add("[name], looking affronted, replies curtly, <i>“She is the caretaker of the worlds, [playername]! It is her very nature to protect those who follow and worship her!”</i> You explain that while she did seem benevolent when you met her, you still need to find out everything you can about your situation. Still a bit huffy, [heshe] goes on, <i>“It is not for us to know exactly what the Lady's plans are; we need only trust in her and we will no doubt prevail. I do know that you are instrumental for them, however.”</i>", parse);
 			else
 				Text.Add("[name], looking affronted, replies curtly, <i>“For the safety of those who follow and worship her, of course!”</i> You calm the elf down, explaining that you meant no offense. Still a bit huffy, [heshe] continues, <i>“It is not for me to know exactly what the Lady's plans are, but I do know that you are instrumental for them.”</i>", parse);
@@ -184,7 +187,7 @@ KiakaiScenes.TalkUru = function() {
 		Text.Add("The elf clears [hisher] throat, preparing for a longer dissertation. <i>“Uru is a foul and evil creature, utterly selfish and chaotically destructive,”</i> [heshe] begins, <i>“I know very little of the details, but she and Lady Aria have battled with each other before, though I do not know where.”</i>", parse);
 		Text.NL();
 		
-		if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral) {
+		if(kiakai.flags["Attitude"] < KiakaiFlags.Attitude.Neutral) {
 			Text.Add("<i>“I thankfully have not experienced it as you have. I have seen visions of the hellish realm she has been trapped in,”</i> [name] shudders uncomfortably. <i>“The truly terrible thing is: that realm was once lush and filled with life. Now, it is nothing more than a defiled wasteland, plagued by demons.”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“Do not trust her under any circumstances, [playername]! She is treacherous, the very embodiment of evil!”</i> The elf adds, clearly worried.", parse);
@@ -236,7 +239,7 @@ KiakaiScenes.TalkUru = function() {
 			
 			if(kiakai.flags["TalkedUruDA"] == 0) {
 				
-				if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral)
+				if(kiakai.flags["Attitude"] < KiakaiFlags.Attitude.Neutral)
 					Text.Add("[name] looks at you pleadingly, fear visible in [hisher] eyes, <i>“Y-you saw what it was like there, [playername]. She <b>cannot</b> be allowed to enter Eden!”</i>", parse);
 				else
 					Text.Add("[name] grabs your hand, fear visible in [hisher] eyes, <i>“Y-you saw what it was like there, [playername]. She <b>cannot</b> be allowed to enter Eden!”</i>", parse);
@@ -246,7 +249,7 @@ KiakaiScenes.TalkUru = function() {
 				var options = [];
 				options.push({ nameStr: "Comfort",
 					func : function() {
-						if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral) {
+						if(kiakai.flags["Attitude"] < KiakaiFlags.Attitude.Neutral) {
 							Text.Add("You take pity on the poor elf and embrace [himher]. You feel [hisher] body momentarily go rigid, surprised by your actions, before [heshe] relaxes in your arms. You do your best to soothe and calm [himher] as you assure [himher] that it will not come to that. The elf's shaking slowly subsides as [heshe] presses desperately against you.", parse);
 							Text.NL();
 							Text.Add("<i>“Th-thank you for that,”</i> [name] mumbles, disentangling [himher]self from you and blushing. <i>“Perhaps I have misjudged you.”</i>", parse);
@@ -270,7 +273,8 @@ KiakaiScenes.TalkUru = function() {
 					tooltip : Text.Parse("Try to comfort [himher].", parse)
 				});
 				options.push({ nameStr: "Boast",
-					func : function() {	
+					func : function() {
+						let uru = GAME().uru;
 						Text.Add("<i>“Hah, that demon isn't so tough,”</i> you brag confidently, ", parse);
 						if(uru.flags["Intro"] & Uru.IntroFlags.FuckedUru ||
 						   uru.flags["Intro"] & Uru.IntroFlags.FuckedByUru)
@@ -293,7 +297,7 @@ KiakaiScenes.TalkUru = function() {
 						Text.Add("You explain to [name] that Eden isn't your world, and you have higher priorities than dealing with Uru.",parse);
 						Text.NL();
 						
-						if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral)
+						if(kiakai.flags["Attitude"] < KiakaiFlags.Attitude.Neutral)
 							Text.Add("The elf looks at you, clearly disappointed. <i>“I know you must walk your own path, and I will support you, but please think of the people of this world. They have friends, families, children, the same as you or I.”</i>", parse);
 						else
 							Text.Add("<i>“Think of all the people in this world. You may well be the only one who can help them,”</i> the elf tells you, clearly agitated. <i>“Would you doom all of us to be Uru's prey? Look around you! Would you see it reduced to the wasteland you saw in Uru's realm?”</i>", parse);
@@ -316,7 +320,7 @@ KiakaiScenes.TalkUru = function() {
 			}
 			else {
 				Text.Add("<i>“Though no fault of yours, it seems that safety could now be at an end, but only time will tell,”</i> the elf shudders with unease. <i>“Uru is very, very powerful. Should she ever unleash the full force of her wrath on Eden, we would be as ants before her. It must not come to a direct confrontation.”</i>", parse);
-				if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral) {
+				if(kiakai.flags["Attitude"] < KiakaiFlags.Attitude.Neutral) {
 					Text.NL();
 					Text.Add("<i>“Please, help us to prevent her coming.”</i>", parse);
 				}
@@ -335,7 +339,7 @@ KiakaiScenes.TalkUru = function() {
 			
 			Text.Add("<i>“Before Uru was sealed in the dark realm, many worlds fell under her influence,”</i> [name] intones sorrowfully. <i>“Twisted, corrupted, defiled... they all succumbed, until Lady Aria intervened.”</i>", parse);
 			Text.NL();
-			if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral)
+			if(kiakai.flags["Attitude"] < KiakaiFlags.Attitude.Neutral)
 				Text.Add("<i>“Uru's very presence is enough to corrupt those around her. I hope your stay was brief enough that you were not significantly affected,”</i> the elf concludes, sounding a little suspicious.", parse);
 			else
 				Text.Add("<i>“Uru's very presence is enough to corrupt those around her, given time,”</i> the elf concludes.", parse);
@@ -484,6 +488,7 @@ KiakaiScenes.TalkEden = function() {
 			});
 			// RABBITS
 			scenes.push(function() {
+				let burrows = GAME().burrows;
 				if(burrows.flags["Access"] == Burrows.AccessFlags.Unknown) {
 					Text.Add("<i>“Some of the priests at the shrine told me about strange creatures they encountered on the plains, walking upright like humans, but very similar to rabbits in appearance. They are fleet-footed, and ran away before the traveling priests could get a closer look at them.”</i>", parse);
 					Text.NL();
@@ -806,7 +811,7 @@ KiakaiScenes.TalkElves = function() {
 						options.push({ nameStr : "Comfort",
 							func : function() {
 								kiakai.relation.IncreaseStat(100, 5);
-								if(kiakai.flags["Attitude"] > Kiakai.Attitude.Neutral) {
+								if(kiakai.flags["Attitude"] > KiakaiFlags.Attitude.Neutral) {
 									Text.Add("You embrace the elf, telling [himher] that you will be with [himher] now. [name] relaxes in your grasp and hugs you back tightly, pressing [hisher] head into your chest.", parse);
 									Text.NL();
 									Text.Add("<i>“Thank you, [playername],”</i> [heshe] whispers, almost too quiet for you to hear.", parse);
@@ -891,7 +896,7 @@ KiakaiScenes.TalkElves = function() {
 				
 				Text.Add("<i>“One day, a priestess came to my village,”</i> [name] tells you, and pauses briefly, clearly deciding what to say next. <i>“Though we did not worship Aria, she was still generous to us, and aided us with healing. I was impressed as much by her as her abilities, and I saw also the goodness of Aria within her. I decided I too wanted to be able to help people as she did, and went with her to join the priesthood.”</i>", parse);
 				Text.NL();
-				if(kiakai.flags["Attitude"] > Kiakai.Attitude.Neutral) {
+				if(kiakai.flags["Attitude"] > KiakaiFlags.Attitude.Neutral) {
 					Text.Add("You see pain in the elf's eyes and sense that there's much [heshe]'s not telling you, but you decide not to press the issue. [HeShe] will tell you when [heshe] is ready.", parse);
 					Text.NL();
 					Text.NL();
@@ -1076,7 +1081,7 @@ KiakaiScenes.TalkDimensionalViolationCont = function() {
 				kiakai.relation.IncreaseStat(100, 10);
 				kiakai.spirit.IncreaseStat(100, 1);
 				
-				if(kiakai.flags["Attitude"] > Kiakai.Attitude.Neutral) {
+				if(kiakai.flags["Attitude"] > KiakaiFlags.Attitude.Neutral) {
 					Text.Add("You put your arms around [name], drawing [himher] closer to you, and [heshe] returns your embrace. You whisper that it is all in the past now, and [heshe] is well. You reassure [himher] that [heshe] did what was right, and that [heshe] is now a splendid healer.", parse);
 					Text.NL();
 					Text.Add("[name] eventually disentangles [himher]self from your arms and smiles up at you. Perhaps [heshe] will be able to deal with the memories better now.", parse);
@@ -1147,7 +1152,7 @@ KiakaiScenes.TalkPriest = function() {
 	parse = kiakai.ParserPronouns(parse);
 	
 	if(kiakai.flags["TalkedPriest"] == 0) {
-		if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral) {
+		if(kiakai.flags["Attitude"] < KiakaiFlags.Attitude.Neutral) {
 			Text.Add("<i>“The priesthood is the instrument of the Lady on Eden,”</i> the elf tells you, looking proud. <i>“The order mostly stays at the Shrine of Aria, though we sometimes venture out at the request of nearby villages, and some serve as advisers to men of power. Among other things, the priests of Aria are exceptionally skilled healers.”</i>", parse);
 			Text.NL();
 			if(kiakai.relation.Get() > 25)
@@ -1527,7 +1532,7 @@ KiakaiScenes.TalkPriestYrissa = function() {
 		Text.Add("<i>“She was actually the one who brought me from the village to the order.", parse);
 		Text.NL();
 		
-		if(kiakai.relation.Get() > 25 || kiakai.flags["Attitude"] > Kiakai.Attitude.Neutral)
+		if(kiakai.relation.Get() > 25 || kiakai.flags["Attitude"] > KiakaiFlags.Attitude.Neutral)
 			Text.Add("She is very precious to me,”</i> [name] confesses. <i>“She was the one who made sure I was accepted even though the leadership back then was still skeptical of admitting an elf, and she has been like an older sister, and sometimes almost a... mother, to me.”</i>", parse);
 		else
 			Text.Add("She has kept watch over me since then, making sure that I am doing well and learning to best serve Lady Aria. She has been a great help in guiding me on my path, [playername]. Perhaps she will be able to assist you, as well,”</i> [name] tells you, looking you straight in the eyes.", parse);
@@ -1650,7 +1655,7 @@ KiakaiScenes.TalkPriestMeeting = function() {
 			Text.Add("<i>“There was naught else I could do, [playername]! How was I to prove that my revelation was genuine, when the only sign of it was in my mind. If they hesitated or debated, or, worst of all, did not believe me, my purpose would have been ruined. Not telling the priesthood of Lady Aria's wishes was the only way I could carry them out!”</i>", parse);
 			Text.NL();
 			
-			if(kiakai.flags["Attitude"] > Kiakai.Attitude.Neutral)
+			if(kiakai.flags["Attitude"] > KiakaiFlags.Attitude.Neutral)
 				Text.Add("You hug the agitated elf, telling [himher] that [heshe] chose well. If [heshe] had delayed, you would've been lost, a near-dead stranger in a strange land, and Aria's plan would have been for naught.", parse);
 			else
 				Text.Add("You pat the agitated elf on the head, telling [himher] that [heshe] did well. You tell [himher] that [heshe] doesn't need to worry about the attitude of the priesthood while [heshe]'s following you. After all, in serving you, [heshe] furthers the will of Aria.", parse);

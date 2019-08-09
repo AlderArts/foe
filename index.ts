@@ -23,7 +23,6 @@ import './js/statuseffect.js';
 
 import './js/lactation.js';
 
-import './js/body/color.js';
 import './js/body/bodypart.js';
 import './js/body/appendage.js';
 import './js/body/balls.js';
@@ -108,7 +107,6 @@ import './js/event/terry.js';
 import './js/event/momo.js';
 import './js/event/sylistraxia.js';
 import './js/event/kiakai.js';
-import './js/event/kiakai-sex.js';
 import './js/event/zina.js';
 
 import './js/event/brothel/roa.js';

@@ -202,7 +202,7 @@ function Explore(preventClear) {
 	SetExploreButtons();
 }
 
-function PartyInteraction(preventClear) {
+export function PartyInteraction(preventClear) {
 	let party = GAME().party;
 	party.Interact(preventClear, party.location.switchSpot());
 	Gui.SetLastSubmenu(Input.exploreButtons[ExploreButtonIndex.Party]);
