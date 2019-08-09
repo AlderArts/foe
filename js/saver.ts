@@ -1,17 +1,19 @@
 import * as $ from 'jquery';
+import * as LZString from 'lz-string';
 
 import { Gui } from './gui';
 import { isOnline } from './gamestate';
 import { Text } from './text';
 import { SetGameCache, GameCache } from './GAME';
 import { loadfileOverlay } from './fileoverlay';
-import { CacheToGame } from './gamecache';
+import { CacheToGame, GameToCache } from './gamecache';
+import { GenerateFile } from './utility';
 
-let Saver = {}
+let Saver : any = {};
 
 Saver.slots = 12;
 
-Saver.SavePrompt = function(backFunc) {
+Saver.SavePrompt = function(backFunc : any) {
 	Text.Clear();
 
 	Text.Add("Save game:");
@@ -24,7 +26,7 @@ Saver.SavePrompt = function(backFunc) {
 		if(name) {
 			Text.Add(name);
 			options.push({ nameStr : "Game " + i,
-				func : function(obj) {
+				func : function(obj : number) {
 					var prmpt = prompt("This will overwrite save slot " + obj + ", continue? \n\n Comment:");
 					if(prmpt != null) Saver.SaveGame(obj, prmpt);
 				}, enabled : true, obj : i
@@ -33,7 +35,7 @@ Saver.SavePrompt = function(backFunc) {
 		else {
 			Text.Add("EMPTY");
 			options.push({ nameStr : "Game " + i,
-				func : function(obj) {
+				func : function(obj : number) {
 					var prmpt = prompt("This will save to slot " + obj + ", continue? \n\n Comment:");
 					if(prmpt != null) Saver.SaveGame(obj, prmpt);
 				}, enabled : true, obj : i
@@ -56,9 +58,9 @@ Saver.SavePrompt = function(backFunc) {
 	Text.Flush();
 }
 
-Saver.SaveGame = function(slot, comment) {
+Saver.SaveGame = function(slot : number, comment : string) {
 	GameToCache();
-	var seen = [];
+	var seen : any[] = [];
 	var saveData = JSON.stringify(GameCache(), function(key, value) {
 		if (typeof value === "object" && value !== null) {
 			if (seen.indexOf(value) !== -1) {
@@ -93,7 +95,7 @@ Saver.SaveToFile = function() {
 	}
 	if(filename && filename != "") {
 		GameToCache();
-		var seen = [];
+		var seen : any[] = [];
 		GenerateFile({filename: filename, content: JSON.stringify(GameCache(),
 			function(key, val) {
 				if (typeof val == "object") {
@@ -120,7 +122,7 @@ Saver.HasSaves = function() {
 	return false;
 }
 
-Saver.LoadPrompt = function(backFunc) {
+Saver.LoadPrompt = function(backFunc : any) {
 	Text.Clear();
 
 	Text.Add("Load game:");
@@ -154,7 +156,7 @@ Saver.LoadPrompt = function(backFunc) {
 	Text.Flush();
 }
 
-Saver.LoadGame = function(slot) {
+Saver.LoadGame = function(slot : number) {
 	if (localStorage["saveDataLZ" + slot]) {
 		var saveData = LZString.decompressFromUTF16(localStorage["saveDataLZ" + slot]);
 		SetGameCache(JSON.parse(saveData));
@@ -167,11 +169,11 @@ Saver.LoadGame = function(slot) {
 	Gui.PrintDefaultOptions();
 }
 
-Saver.SaveHeader = function(nr) {
+Saver.SaveHeader = function(nr : number) {
 	return localStorage["save" + nr];
 }
 
-Saver.DeleteSave = function(nr) {
+Saver.DeleteSave = function(nr : number) {
 	delete localStorage["save" + nr];
 	delete localStorage["savedata" + nr];
 }
@@ -188,8 +190,8 @@ Saver.Clear = function() {
 }
 
 Saver.OnLoadFromFileClick = function() {
-
-	var files = document.getElementById('loadFileFiles').files;
+	let el : any = document.getElementById('loadFileFiles');
+	let files = el.files;
 	if (!files.length) {
 		alert('Please select a file!');
 		return;
@@ -203,13 +205,14 @@ Saver.OnLoadFromFileClick = function() {
 }
 
 // Takes a File as argument
-Saver.LoadFromFile = function(file) {
+Saver.LoadFromFile = function(file : any) {
 	if(!file) return;
 
 	var reader = new FileReader();
 
 	reader.onload = function(e) {
-		SetGameCache(JSON.parse(e.target.result));
+		let target : any = e.target;
+		SetGameCache(JSON.parse(target.result));
 		CacheToGame();
 		Gui.PrintDefaultOptions();
 		Gui.Render();

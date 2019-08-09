@@ -1,5 +1,4 @@
 import * as _ from 'lodash';
-import * as lzstring from 'lz-string';
 
 // Assets
 import './js/vendor/kimberley_bl_900.min.font.js';
@@ -15,8 +14,6 @@ import './js/utility.js';
 import './js/text.js';
 import './js/button.js';
 import './js/gui.js';
-
-import './js/saver.js';
 
 // Entity scripts
 import './js/statuseffect.js';
