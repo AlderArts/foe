@@ -23,14 +23,11 @@ import './js/statuseffect.js';
 
 import './js/lactation.js';
 
-import './js/body/bodypart.js';
 import './js/body/appendage.js';
 import './js/body/balls.js';
 import './js/body/breasts.js';
 import './js/body/cock.js';
-import './js/body/hair.js';
 import './js/body/head.js';
-import './js/body/genitalia.js';
 import './js/body/body.js';
 
 import './js/entity.js';
