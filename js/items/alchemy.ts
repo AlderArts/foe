@@ -6,8 +6,13 @@ import { IngredientItems } from './ingredients';
 import { Race } from '../body/race';
 import { Color } from '../body/color';
 import { GAME } from '../GAME';
+import { Text } from '../text';
+import { Entity } from '../entity';
+import { Status } from '../statuseffect';
+import { Vagina } from '../body/vagina';
+import { Cock } from '../body/cock';
 
-let AlchemyItems = {};
+let AlchemyItems : any = {};
 
 AlchemyItems.Equinium = new TFItem("equin0", "Equinium");
 AlchemyItems.Equinium.price = 7;
@@ -82,7 +87,7 @@ AlchemyItems.Lacertium.recipe = [{it: IngredientItems.SnakeOil}, {it: Ingredient
 // Effects
 AlchemyItems.Lacertium.PushEffect(TF.ItemEffects.SetTongue, {odds: 0.3, race: Race.Lizard, str: "long, serpentine tongue"});
 AlchemyItems.Lacertium.PushEffect(TF.ItemEffects.SetCock, {odds: 0.4, race: Race.Lizard, str: "a lizard cock"});
-AlchemyItems.Lacertium.PushEffect(function(target) {
+AlchemyItems.Lacertium.PushEffect(function(target : Entity) {
 	var cocks = target.AllCocks();
 	if(cocks.length == 1 && cocks[0].race == Race.Lizard && Math.random() < 0.1) {
 		cocks.push(cocks[0].Clone());
@@ -137,7 +142,7 @@ AlchemyItems.Bovia.PushEffect(TF.ItemEffects.SetCock, {odds: 0.4, race: Race.Cow
 AlchemyItems.Bovia.PushEffect(TF.ItemEffects.SetEars, {odds: 0.4, race: Race.Cow, str: "bovine ears"});
 AlchemyItems.Bovia.PushEffect(TF.ItemEffects.SetTail, {odds: 0.4, race: Race.Cow, color: Color.black, str: "a long bovine tail, ending in a tuft of black hair"});
 AlchemyItems.Bovia.PushEffect(TF.ItemEffects.SetHorn, {odds: 0.4, race: Race.Cow, color: Color.black, str: "a pair of strong bovine horns!", count: 2});
-AlchemyItems.Bovia.PushEffect(function(target) {
+AlchemyItems.Bovia.PushEffect(function(target : Entity) {
 	var parse = { Poss: target.Possessive() };
 	var breasts = target.BiggestBreasts();
 	if(target.FirstVag() || (breasts && breasts.size.Get() > 5)) {
@@ -456,7 +461,7 @@ AlchemyItems.Homos.PushEffect(TF.ItemEffects.RemTail, {odds: 0.6, count: 1});
 AlchemyItems.Homos.PushEffect(TF.ItemEffects.RemWings, {odds: 0.6, count: 2});
 AlchemyItems.Homos.PushEffect(TF.ItemEffects.RemAntenna, {odds: 0.6, count: 2});
 AlchemyItems.Homos.PushEffect(TF.ItemEffects.RemAbdomen, {odds: 0.6, count: 1});
-AlchemyItems.Homos.PushEffect(function(target) {
+AlchemyItems.Homos.PushEffect(function(target : Entity) {
 	var parse = {
 		Poss : target.Possessive(),
 		legsDesc : function() { return target.LegsDesc(); },
@@ -488,7 +493,7 @@ AlchemyItems.Virilium.recipe = [{it: AlchemyItems.Equinium}, {it: AlchemyItems.L
 AlchemyItems.Virilium.PushEffect(TF.ItemEffects.IncLib, {odds: 0.3, ideal: 40, max: 2});
 AlchemyItems.Virilium.PushEffect(TF.ItemEffects.IncCha, {odds: 0.2, ideal: 40, max: 2});
 AlchemyItems.Virilium.PushEffect(TF.ItemEffects.SetBalls, {odds: 0.1, ideal: 2, count: 2});
-AlchemyItems.Virilium.PushEffect(function(target) {
+AlchemyItems.Virilium.PushEffect(function(target : Entity) {
 	var parse = {
 		name  : target.nameDesc(),
 		heshe : target.heshe(),
@@ -500,7 +505,7 @@ AlchemyItems.Virilium.PushEffect(function(target) {
 	Text.Add("A shiver runs through [name] as [heshe] [is] hit by a wave of lust!", parse);
 	Text.NL();
 });
-AlchemyItems.Virilium.PushEffect(function(target) {
+AlchemyItems.Virilium.PushEffect(function(target : Entity) {
 	var parse = {
 		Poss: target.Possessive(),
 		ballsDesc : function() { return target.BallsDesc(); },
@@ -548,7 +553,7 @@ AlchemyItems.GestariumPlus.recipe = [{it: AlchemyItems.Felinix}, {it: AlchemyIte
 // Effects
 AlchemyItems.GestariumPlus.PushEffect(TF.ItemEffects.IncLib, {odds: 0.3, ideal: 40, max: 2});
 AlchemyItems.GestariumPlus.PushEffect(TF.ItemEffects.IncCha, {odds: 0.2, ideal: 40, max: 2});
-AlchemyItems.GestariumPlus.PushEffect(function(target) {
+AlchemyItems.GestariumPlus.PushEffect(function(target : Entity) {
 	var parse = {
 		Poss: target.Possessive(),
 		notS: target.plural() ? "" : "s"
@@ -567,7 +572,7 @@ AlchemyItems.GestariumPlus.PushEffect(function(target) {
 	}
 	Text.Flush();
 });
-AlchemyItems.GestariumPlus.PushEffect(function(target) {
+AlchemyItems.GestariumPlus.PushEffect(function(target : Entity) {
 	var parse = {
 		name  : target.nameDesc(),
 		heshe : target.heshe(),
@@ -578,7 +583,7 @@ AlchemyItems.GestariumPlus.PushEffect(function(target) {
 	Text.Add("A shiver runs through [name] as [heshe] [is] hit by a wave of lust!", parse);
 	Text.NL();
 });
-AlchemyItems.GestariumPlus.PushEffect(function(target) {
+AlchemyItems.GestariumPlus.PushEffect(function(target : Entity) {
 	var parse = {
 		name : target.nameDesc(),
 		poss : target.possessive()
@@ -621,7 +626,7 @@ AlchemyItems.Testos.recipe = [{it: AlchemyItems.Equinium}, {it: AlchemyItems.Hom
 AlchemyItems.Testos.PushEffect(TF.ItemEffects.IncTone, {odds: 0.3, ideal: .7, max: .1});
 AlchemyItems.Testos.PushEffect(TF.ItemEffects.DecFem, {odds: 0.4, ideal: -1, max: .1});
 AlchemyItems.Testos.PushEffect(TF.ItemEffects.DecBreastSize, {odds: 0.7, ideal: 0, max: 6 });
-AlchemyItems.Testos.PushEffect(function(target) {
+AlchemyItems.Testos.PushEffect(function(target : Entity) {
 	var parse = {
 		Name: target.NameDesc(),
 		Poss: target.Possessive(),
@@ -646,8 +651,8 @@ AlchemyItems.Testos.PushEffect(function(target) {
 	}
 	Text.Flush();
 });
-AlchemyItems.Testos.PushEffect(function(target) {
-	var parse = {
+AlchemyItems.Testos.PushEffect(function(target : Entity) {
+	var parse : any = {
 		Name : target.NameDesc(),
 		poss : target.possessive(),
 		Poss : target.Possessive(),
@@ -694,8 +699,8 @@ AlchemyItems.Testos.PushEffect(function(target) {
 		var len = false, thk = false;
 		for(var i = 0; i < cocks.length; i++) {
 			// Base size
-			len |= cocks[i].length.IncreaseStat(35, 1);
-			thk |= cocks[i].thickness.IncreaseStat(10, .5);
+			len = len || cocks[i].length.IncreaseStat(35, 1);
+			thk = thk || cocks[i].thickness.IncreaseStat(10, .5);
 		}
 		if(len || thk) {
 			parse["s"]    = target.NumCocks() > 1 ? "s" : "";
@@ -723,7 +728,7 @@ AlchemyItems.Estros.recipe = [{it: AlchemyItems.Vulpinix}, {it: AlchemyItems.Hom
 AlchemyItems.Estros.PushEffect(TF.ItemEffects.DecTone, {odds: 0.2, ideal: 0, max: .1});
 AlchemyItems.Estros.PushEffect(TF.ItemEffects.IncFem, {odds: 0.8, ideal: 1, max: .1});
 AlchemyItems.Estros.PushEffect(TF.ItemEffects.IncBreastSize, {odds: 0.4, ideal: 20, max: 3 });
-AlchemyItems.Estros.PushEffect(function(target) {
+AlchemyItems.Estros.PushEffect(function(target : Entity) {
 	var parse = {
 		Poss: target.Possessive(),
 		notS: target.plural() ? "" : "s"
@@ -742,7 +747,7 @@ AlchemyItems.Estros.PushEffect(function(target) {
 	}
 	Text.Flush();
 });
-AlchemyItems.Estros.PushEffect(function(target) {
+AlchemyItems.Estros.PushEffect(function(target : Entity) {
 	var parse = {
 		Name : target.NameDesc(),
 		Poss : target.Possessive(),
@@ -785,7 +790,7 @@ AlchemyItems.Estros.PushEffect(function(target) {
 	if(Math.random() < 0.75) {
 		var growth = false;
 		for(var i = 0; i < vags.length; i++) {
-			growth |= vags[i].capacity.IncreaseStat(10, .5);
+			growth = growth || vags[i].capacity.IncreaseStat(10, .5);
 		}
 		if(growth) {
 			parse = Text.ParserPlural(parse, target.NumVags() > 1);
@@ -803,7 +808,7 @@ AlchemyItems.Infertilium.lDesc = function() { return "a bottle of Infertilium"; 
 AlchemyItems.Infertilium.Short = function() { return "A bottle of Infertilium"; }
 AlchemyItems.Infertilium.Long = function() { return "A small, unmarked glass vial that feels cool to the touch. Drinking this will render the drinker practically sterile for one day."; }
 //TODO AlchemyItems.Infertilium.recipe = [{it: AlchemyItems.Felinix}, {it: AlchemyItems.Leporine}, {it: AlchemyItems.Bovia}];
-AlchemyItems.Infertilium.useStr = function(target) {
+AlchemyItems.Infertilium.useStr = function(target : Entity) {
 	var parse = {
 		Name: target.NameDesc(),
 		name: target.nameDesc()
@@ -852,7 +857,7 @@ AlchemyItems.InfertiliumPlus.lDesc = function() { return "a bottle of Infertiliu
 AlchemyItems.InfertiliumPlus.Short = function() { return "A bottle of Infertilium+"; }
 AlchemyItems.InfertiliumPlus.Long = function() { return "A small, unmarked glass vial with a thin sheen of frost clinging to its sides. Drinking this will render the drinker practically sterile for five days."; }
 //TODO AlchemyItems.InfertiliumPlus.recipe = [{it: AlchemyItems.Felinix}, {it: AlchemyItems.Leporine}, {it: AlchemyItems.Bovia}];
-AlchemyItems.InfertiliumPlus.useStr = function(target) {
+AlchemyItems.InfertiliumPlus.useStr = function(target : Entity) {
 	var parse = {
 		Name: target.NameDesc(),
 		name: target.nameDesc()
@@ -897,8 +902,8 @@ AlchemyItems.InfertiliumPlus.PushEffect(TF.ItemEffects.DecLib, {odds: 0.75, idea
 
 
 AlchemyItems.Fertilium = new Item("sex6", "Fertilium", ItemType.Potion);
-AlchemyItems.Fertilium.commonUse = function(target) {
-	var parse = {
+AlchemyItems.Fertilium.commonUse = function(target : Entity) {
+	var parse : any = {
 		name: target.nameDesc(),
 		lowerArmor: target.LowerArmorDesc()
 	};
@@ -949,7 +954,7 @@ AlchemyItems.Fertilium.lDesc = function() { return "a bottle of Fertilium"; }
 AlchemyItems.Fertilium.Short = function() { return "A bottle of Fertilium"; }
 AlchemyItems.Fertilium.Long = function() { return "A vial containing a sweet-smelling pink liquid. On the label there’s the picture of a man having sex with a woman, pouring her swelling belly full of virile seed. Its purpose seems to be to enhance potency."; }
 //TODO AlchemyItems.Fertilium.recipe = [{it: AlchemyItems.Felinix}, {it: AlchemyItems.Leporine}, {it: AlchemyItems.Bovia}];
-AlchemyItems.Fertilium.Use = function(target) {
+AlchemyItems.Fertilium.Use = function(target : Entity) {
 	if(AlchemyItems.Fertilium.commonUse(target)) {
 		target.AddLustFraction(0.5);
 
@@ -970,7 +975,7 @@ AlchemyItems.FertiliumPlus.lDesc = function() { return "a bottle of Fertilium+";
 AlchemyItems.FertiliumPlus.Short = function() { return "A bottle of Fertilium+"; }
 AlchemyItems.FertiliumPlus.Long = function() { return "A vial containing a cloyingly sweet-smelling pink liquid. On the label there’s the picture of a man having sex with a woman, pouring her obscenely swollen belly full of virile seed. Its purpose seems to be to greatly enhance potency."; }
 //TODO AlchemyItems.FertiliumPlus.recipe = [{it: AlchemyItems.Felinix}, {it: AlchemyItems.Leporine}, {it: AlchemyItems.Bovia}];
-AlchemyItems.FertiliumPlus.Use = function(target) {
+AlchemyItems.FertiliumPlus.Use = function(target : Entity) {
 	if(AlchemyItems.Fertilium.commonUse(target)) {
 		target.AddLustFraction(1);
 

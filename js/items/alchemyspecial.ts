@@ -1,3 +1,5 @@
+import * as _ from 'lodash';
+
 import { TF, TFItem } from '../tf';
 import { Genitalia } from '../body/genitalia';
 import { HipSize } from '../body/body';
@@ -9,8 +11,11 @@ import { Cock } from '../body/cock';
 import { Vagina } from '../body/vagina';
 import { EncounterTable } from '../encountertable';
 import { GAME } from '../GAME';
+import { Text } from '../text';
+import { Entity } from '../entity';
+import { Womb, PregnancyLevel } from '../pregnancy';
 
-let AlchemySpecial = {};
+let AlchemySpecial : any = {};
 
 AlchemySpecial.EquiniumPlus = new TFItem("equin+", "Equinium+");
 AlchemySpecial.EquiniumPlus.price = 100;
@@ -22,8 +27,8 @@ AlchemySpecial.EquiniumPlus.recipe = [{it: AlchemyItems.Equinium, num: 3}, {it: 
 // Effects
 AlchemySpecial.EquiniumPlus.PushEffect(TF.ItemEffects.SetEars, {odds: 0.8, race: Race.Horse, str: "equine ears"});
 AlchemySpecial.EquiniumPlus.PushEffect(TF.ItemEffects.SetTail, {odds: 0.8, race: Race.Horse, color: Color.brown, str: "a brown, bushy horse tail"});
-AlchemySpecial.EquiniumPlus.PushEffect(function(target) {
-	var parse = {
+AlchemySpecial.EquiniumPlus.PushEffect(function(target : Entity) {
+	var parse : any = {
 		name: target.NameDesc(),
 		s: target == GAME().player ? "" : "s",
 		possessive: target.possessive(),
@@ -56,8 +61,8 @@ AlchemySpecial.EquiniumPlus.PushEffect(function(target) {
 			inc = cocks[i].length.IncreaseStat(50, 5);
 		if(inc2 == null)
 			inc2 = cocks[i].thickness.IncreaseStat(12, 1);
-		len |= inc;
-		thk |= inc2;
+		len = len || inc;
+		thk = thk || inc2;
 	}
 	if(len || thk) {
 		parse["s"]    = target.NumCocks() > 1 ? "s" : "";
@@ -112,7 +117,7 @@ AlchemySpecial.Tigris.PushEffect(TF.ItemEffects.IncStr, {odds: 0.5, ideal: 45, m
 AlchemySpecial.Tigris.PushEffect(TF.ItemEffects.IncCha, {odds: 0.3, ideal: 25, max: 2});
 AlchemySpecial.Tigris.PushEffect(TF.ItemEffects.IncSta, {odds: 0.2, ideal: 40, max: 2});
 AlchemySpecial.Tigris.PushEffect(TF.ItemEffects.DecInt, {odds: 0.1, ideal: 25, max: 1});
-AlchemySpecial.Tigris.PushEffect(function(target) {
+AlchemySpecial.Tigris.PushEffect(function(target : Entity) {
 	var parse = {
 		name: target.NameDesc(),
 		s: target == GAME().player ? "" : "s",
@@ -146,8 +151,8 @@ AlchemySpecial.InfernumPlus.Short = function() { return "A bottle of Infernum+";
 AlchemySpecial.InfernumPlus.Long = function() { return "A bottle of extra potent Infernum, with the picture of a large, decidedly male demon on it. The fluid within is a thick black sludge, reeking of corruption."; }
 AlchemySpecial.InfernumPlus.recipe = [{it: AlchemyItems.Infernum}, {it: IngredientItems.BlackGem}, {it: IngredientItems.DemonSeed, num: 3}];
 // Effects
-AlchemySpecial.InfernumPlus.PushEffect(function(target) {
-	var parse = {
+AlchemySpecial.InfernumPlus.PushEffect(function(target : Entity) {
+	var parse : any = {
 		name: target.NameDesc(),
 		s: target == GAME().player ? "" : "s",
 		possessive: target.possessive(),
@@ -213,7 +218,7 @@ AlchemySpecial.Nagazm.Short = function() { return "A bottle of Nagazm"; }
 AlchemySpecial.Nagazm.Long  = function() { return "A bottle with a pink, bubbly liquid, labeled Nagasm. It has the picture of a snake on it."; }
 AlchemySpecial.Nagazm.recipe = [{it: IngredientItems.SnakeOil}, {it: IngredientItems.SnakeFang}, {it: IngredientItems.SnakeSkin}];
 // Effects
-AlchemySpecial.Nagazm.PushEffect(function(target) {
+AlchemySpecial.Nagazm.PushEffect(function(target : Entity) {
 	var parse = {
 		Poss : target.Possessive(),
 		legsDesc : function() { return target.LegsDesc(); },
@@ -234,8 +239,8 @@ AlchemySpecial.Nagazm.PushEffect(function(target) {
 	Text.Flush();
 });
 AlchemySpecial.Nagazm.PushEffect(TF.ItemEffects.RemBalls, {odds: 0.5, ideal: 0, count: 2});
-AlchemySpecial.Nagazm.PushEffect(function(target) {
-	var parse = { Name: target.NameDesc(), s: target.plural() ? "" : "s" };
+AlchemySpecial.Nagazm.PushEffect(function(target : Entity) {
+	var parse : any = { Name: target.NameDesc(), s: target.plural() ? "" : "s" };
 	
 	if (Math.random() < 0.5) {
 		var vags  = target.AllVags();
@@ -255,7 +260,7 @@ AlchemySpecial.Nagazm.PushEffect(function(target) {
 	}
 	Text.Flush();
 });
-AlchemySpecial.Nagazm.PushEffect(function(target) {
+AlchemySpecial.Nagazm.PushEffect(function(target : Entity) {
 	// TODO: Race check like in Lacertium? What race are Naga penises?
 	// TODO: Other prerequisites? No testicles? Hermaphroditism?
 	var cocks = target.AllCocks();
@@ -292,7 +297,7 @@ AlchemySpecial.Taurico.Short = function() { return "A bottle of Taurico"; }
 AlchemySpecial.Taurico.Long  = function() { return "A bottle filled with a strange, jelly-like substance. It has a picture of a centaur on it."; }
 AlchemySpecial.Taurico.recipe = [{it: IngredientItems.HorseShoe}, {it: IngredientItems.CanisRoot}, {it: IngredientItems.Ramshorn}];
 // Effects
-AlchemySpecial.Taurico.PushEffect(function(target) {
+AlchemySpecial.Taurico.PushEffect(function(target : Entity) {
 	var parse = {
 		Poss : target.Possessive(),
 		legsDesc : function() { return target.LegsDesc(); },
@@ -346,8 +351,8 @@ AlchemySpecial.Gestarium.Short = function() { return "A bottle of Gestarium"; }
 AlchemySpecial.Gestarium.Long  = function() { return "A small vial of thick, clear liquid. Drinking this while pregnant will cause the drinker’s pregnancy to advance somewhat."; }
 AlchemySpecial.Gestarium.recipe = [{it: AlchemyItems.Fertilium}, {it: AlchemyItems.Estros}, {it: AlchemyItems.Bovia}];
 // Effects
-AlchemySpecial.Gestarium.PushEffect(function(target) {
-	var parse = {
+AlchemySpecial.Gestarium.PushEffect(function(target : Entity) {
+	var parse : any = {
 		Name : target.NameDesc(),
 		name : target.nameDesc(),
 		Poss : target.Possessive(),
@@ -381,7 +386,7 @@ AlchemySpecial.Gestarium.PushEffect(function(target) {
 	Text.NL();
 });
 
-AlchemySpecial.Gestarium.BellyGrowth = function(target, wombs, parse) {
+AlchemySpecial.Gestarium.BellyGrowth = function(target : Entity, wombs : Womb[], parse : any) {
 	var size = target.pregHandler.BellySize();
 	
 	if(size < 0.1)
@@ -442,11 +447,11 @@ AlchemySpecial.Gestarium.BellyGrowth = function(target, wombs, parse) {
 	if(target == GAME().player) {
 		var newProgress = womb.progress;
 		
-		if(oldProgress < PregnancyLevel.Level2 && newProgress >= PregnancyHandler.Level2) {
+		if(oldProgress < PregnancyLevel.Level2 && newProgress >= PregnancyLevel.Level2) {
 			Text.NL();
 			Text.Add("The growth is accompanied by a pleasant surprise: the vague queasiness that’d been plaguing you quickly vanishes, to be replaced by a warm glow of contentment. It’s faint, but you have the feeling it’ll be growing…", parse);
 		}
-		else if(oldProgress < PregnancyLevel.Level3 && newProgress >= PregnancyHandler.Level3) {
+		else if(oldProgress < PregnancyLevel.Level3 && newProgress >= PregnancyLevel.Level3) {
 			Text.NL();
 			if(target.FirstBreastRow().Size() >= 2) {
 				Text.Add("As your womb has grown, so have your breasts - and the sensation of pressure within them, your boobflesh having perked up. With a faint dribble of warmth, you look down to discover a small white bead welling up on each of your nipples before falling away.", parse);
@@ -460,7 +465,7 @@ AlchemySpecial.Gestarium.BellyGrowth = function(target, wombs, parse) {
 			else
 				Text.Add("Accompanying your potion-induced growth spurt is a faint flutter of movement from within your lower belly; you wonder at first if it’s just your imagination, but another faint stirring quashes that doubt. Seems like the life growing within you has decided to make itself known in no uncertain terms.", parse);
 		}
-		else if(oldProgress < PregnancyLevel.Level4 && newProgress >= PregnancyHandler.Level4) {
+		else if(oldProgress < PregnancyLevel.Level4 && newProgress >= PregnancyLevel.Level4) {
 			Text.NL();
 			Text.Add("Hugging your now-bigger belly, you’re rewarded with ", parse);
 			if(womb.IsEgg())
@@ -468,7 +473,7 @@ AlchemySpecial.Gestarium.BellyGrowth = function(target, wombs, parse) {
 			else
 				Text.Add("a powerful kick from within your [belly], aimed squarely at your hands. Seems like the life you’re bearing is getting quite active now, birth can’t be that far away. Well, hopefully - judging by that last kick and the squirming that’s going on inside you, you’re going to end up perpetually winded if this keeps up all the time.", parse);
 		}
-		else if(oldProgress < PregnancyLevel.Level5 && newProgress >= PregnancyHandler.Level5) {
+		else if(oldProgress < PregnancyLevel.Level5 && newProgress >= PregnancyLevel.Level5) {
 			Text.NL();
 			Text.Add("With the final pulses of growth, you feel a weight slip downwards from your [belly], nestling snugly against your pelvis and weighing heavily against your cervix. Uh-oh - it seems like you’re really, <i>really</i> close to popping now… best to get yourself to a safe spot to do the deed, lest your body decides to do it anyway at the most inconvenient time…", parse);
 		}
@@ -539,8 +544,8 @@ AlchemySpecial.Anusol.Short = function() { return "A bottle of Anusol"; }
 AlchemySpecial.Anusol.Long  = function() { return "A bottle labeled Anusol, filled with an oily-looking dark green fluid. It increases anal sensitivity."; }
 AlchemySpecial.Anusol.recipe = [{it: IngredientItems.SnakeOil}, {it: IngredientItems.SpringWater}, {it: IngredientItems.FruitSeed}];
 // Effects
-AlchemySpecial.Anusol.PushEffect(function(target) {
-	var parse = {
+AlchemySpecial.Anusol.PushEffect(function(target : Entity) {
+	var parse : any = {
 		botArmor : target.LowerArmorDesc(),
 		Poss : target.Possessive()
 	};
@@ -614,8 +619,8 @@ AlchemySpecial.AnusolPlus.Short = function() { return "A bottle of Anusol+"; }
 AlchemySpecial.AnusolPlus.Long  = function() { return "A bottle labled Anusol+, filled with a thick and slimy-looking blue fluid. It’s supposed to make anal sex out of this world for the drinker."; }
 AlchemySpecial.AnusolPlus.recipe = [{it: IngredientItems.SnakeOil}, {it: IngredientItems.SpringWater}, {it: AlchemySpecial.Gestarium}];
 // Effects
-AlchemySpecial.AnusolPlus.PushEffect(function(target) {
-	var parse = {
+AlchemySpecial.AnusolPlus.PushEffect(function(target : Entity) {
+	var parse : any = {
 		botArmor : target.LowerArmorDesc(),
 		Poss : target.Possessive()
 	};
