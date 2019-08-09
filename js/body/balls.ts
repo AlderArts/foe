@@ -16,7 +16,6 @@ export class Balls extends BodyPart {
 
 	constructor(race? : RaceDesc, color? : Color) {
 		super(race, color);
-		BodyPart.call(this, race, color);
 		this.count         = new Stat(0);
 		this.size          = new Stat(3);
 		this.cumProduction = new Stat(1);

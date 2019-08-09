@@ -17,7 +17,6 @@ import './js/gui.js';
 // Entity scripts
 import './js/statuseffect.js';
 
-import './js/body/breasts.js';
 import './js/body/body.js';
 
 import './js/entity.js';
