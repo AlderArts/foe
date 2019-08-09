@@ -12,13 +12,10 @@ import './js/assets.js';
 
 import './js/utility.js';
 import './js/text.js';
-import './js/button.js';
 import './js/gui.js';
 
 // Entity scripts
 import './js/statuseffect.js';
-
-import './js/lactation.js';
 
 import './js/body/breasts.js';
 import './js/body/body.js';

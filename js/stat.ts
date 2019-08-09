@@ -35,7 +35,7 @@ export class Stat {
 	// Changes _ONE_ stat, closing in on the ideal
 	// Cap the change to a maximum value
 	// Returns the applied difference, unless the diff is zero
-	IdealStat(ideal : number, maxChange? : number, fraction? : number) {
+	IdealStat(ideal : number, maxChange? : number, fraction? : boolean) {
 		ideal = ideal || 0;
 		maxChange = maxChange || 1;
 		var diff = ideal - this.base;
@@ -63,7 +63,7 @@ export class Stat {
 	// Changes _ONE_ stat, closing in on the ideal (ONLY INC)
 	// Cap the change to a maximum value
 	// Returns the applied difference (positive), unless the diff is zero
-	IncreaseStat(ideal : number, maxChange? : number, fraction? : number) {
+	IncreaseStat(ideal : number, maxChange? : number, fraction? : boolean) {
 		ideal = ideal || 0;
 		maxChange = maxChange || 1;
 		var diff = ideal - this.base;
@@ -89,7 +89,7 @@ export class Stat {
 	// Changes _ONE_ stat, closing in on the ideal (ONLY DEC)
 	// Cap the change to a maximum value
 	// Returns the applied difference (positive), unless the diff is zero
-	DecreaseStat(ideal : number, maxChange? : number, fraction? : number) {
+	DecreaseStat(ideal : number, maxChange? : number, fraction? : boolean) {
 		ideal = ideal || 0;
 		maxChange = maxChange || 1;
 		var diff = this.base - ideal;
