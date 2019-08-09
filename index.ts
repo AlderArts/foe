@@ -30,7 +30,6 @@ import './js/entity-dict.js';
 import './js/event/player.js';
 
 // Combat
-import './js/combat.js';
 import './js/enemy/boss.js';
 
 // World description

@@ -1,15 +1,15 @@
 
-let curEncounter      = null;
-let enemyParty        = null;
-let currentActiveChar = null;
+let curEncounter      : any = null;
+let enemyParty        : any = null;
+let currentActiveChar : any = null;
 
-export function SetCurEncounter(enc) {
+export function SetCurEncounter(enc : any) {
     curEncounter = enc;
 }
-export function SetEnemyParty(p) {
+export function SetEnemyParty(p : any) {
     enemyParty = p;
 }
-export function SetCurrentActiveChar(c) {
+export function SetCurrentActiveChar(c : any) {
     currentActiveChar = c;
 }
 
