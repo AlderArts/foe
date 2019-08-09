@@ -21,11 +21,9 @@ import './js/saver.js';
 // Entity scripts
 import './js/statuseffect.js';
 
-import './js/pregnancy.js';
 import './js/lactation.js';
 
 import './js/body/color.js';
-import './js/body/race.js';
 import './js/body/bodypart.js';
 import './js/body/appendage.js';
 import './js/body/balls.js';

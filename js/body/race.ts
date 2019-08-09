@@ -1,206 +1,235 @@
+import * as _ from 'lodash';
+
 import { Gender } from "./gender";
 
 // Contains references to descriptors
-let Race = {};
+let Race : any = {};
 
 // TODO Need to fix numbering to something automatic, or at least ordered
 
-function RaceDesc(name, id, opts, superclass) {
-	opts = opts || {};
-	this.name = name || 'RACE';
-	this.superclass = superclass;
-	this.children = [];
-	if(superclass) {
-		superclass.children.push(this);
-	}
-	
-	this.desc           = opts.desc           || [];
-	this.descMale       = opts.descMale       || [];
-	this.descFemale     = opts.descFemale     || [];
-	this.quantify       = opts.quantify       || [];
-	this.quantifyMale   = opts.quantifyMale   || [];
-	this.quantifyFemale = opts.quantifyFemale || [];
-	this.geneSize       = opts.geneSize;
-	
-	this.id = id;
-	RaceDesc.Num++;
-	RaceDesc.IdToRace[this.id] = this;
-}
 // Contains a set of Id,RaceDesc pairs
-RaceDesc.IdToRace = {};
-RaceDesc.Num = 0;
+let _IdToRace : any = {};
+let _Num = 0;
 
-RaceDesc.prototype.GeneSize = function() {
-	if(this.geneSize)
-		return this.geneSize;
-	else if(this.superclass)
-		return this.superclass.GeneSize();
-	else
-		return 1;
-}
+export class RaceDesc {
+	name : string;
+	superclass : any;
+	children : any[];
+	desc : any[];
+	descMale : any[];
+	descFemale : any[];
+	quantify : any[];
+	quantifyMale : any[];
+	quantifyFemale : any[];
+	geneSize : any;
+	id : number;
 
-RaceDesc.prototype.Desc = function(gender) {
-	var desc = this.desc;
-	if(_.isNumber(gender)) {
-		if(gender == Gender.male)
-			desc = desc.concat(this.descMale);
-		else
-			desc = desc.concat(this.descFemale);
-	}
-	if(this.superclass) desc = desc.concat(this.superclass.Desc(gender));
-	return desc;
-}
-
-// Checks if this race (or any of its parents)
-RaceDesc.prototype.isRace = function() {
-	for(var i = 0; i < arguments.length; ++i)
-		if(this == arguments[i]) return true;
-	if(this.superclass) return RaceDesc.prototype.isRace.apply(this.superclass, arguments);
-	return false;
-}
-// Checks if this race (not parents)
-RaceDesc.prototype.isRaceNotParent = function() {
-	for(var i = 0; i < arguments.length; ++i)
-		if(this == arguments[i]) return true;
-	return false;
-}
-
-RaceDesc.prototype.Short = function(gender) {
-	var desc = _.sample(this.Desc(gender));
-	return desc ? desc.noun : ("ERROR in " + this.name + ".Short()");
-}
-RaceDesc.prototype.CShort = function(gender) {
-	var desc = _.sample(this.Desc(gender));
-	return desc ? _.capitalize(desc.noun) : ("ERROR in " + this.name + ".CShort()");
-}
-RaceDesc.prototype.aShort = function(gender) {
-	var desc = _.sample(this.Desc(gender));
-	return desc ? (desc.a + " " + desc.noun) : ("ERROR in " + this.name + ".aShort()");
-}
-
-RaceDesc.prototype.Quantifier = function(gender) {
-	var quantify = this.quantify;
-	if(_.isNumber(gender)) {
-		if(gender == Gender.male)
-			quantify = quantify.concat(this.quantifyMale);
-		else
-			quantify = quantify.concat(this.quantifyFemale);
-	}
-	if(this.superclass) quantify = quantify.concat(this.superclass.Quantifier(gender));
-	return quantify;
-}
-
-RaceDesc.prototype.qShort = function(gender) {
-	var desc = _.sample(this.Quantifier(gender));
-	return desc ? desc.noun : ("ERROR in " + this.name + ".qShort()");
-}
-RaceDesc.prototype.qCShort = function(gender) {
-	var desc = _.sample(this.Quantifier(gender));
-	return desc ? _.capitalize(desc.noun) : ("ERROR in " + this.name + ".qCShort()");
-}
-RaceDesc.prototype.aqShort = function(gender) {
-	var desc = _.sample(this.Quantifier(gender));
-	return desc ? (desc.a + " " + desc.noun) : ("ERROR in " + this.name + ".aqShort()");
-}
-
-function RaceScore(body) {
-	this.score = [];
-	// Init
-	for(var race = 0; race < RaceDesc.Num; race++)
-		this.score[race] = 0;
-	
-	this.len = 1;
-	
-	// If init values
-	if(body)
-	{
-		// Generic attributes
-		this.score[body.head.race.id]++;
-		this.score[body.head.mouth.tongue.race.id]++;
-		this.score[body.head.eyes.race.id]++;
-		this.score[body.head.ears.race.id]++;
-		this.score[body.torso.race.id]++;
-		this.score[body.arms.race.id]++;
-		this.score[body.legs.race.id]++;
-		
-		for(var i = 0; i < body.cock.length; i++)
-			this.score[body.cock[i].race.id]++;
-		if(body.balls.count.Get() > 0) this.score[body.balls.race.id]++;
-		for(var i = 0; i < body.backSlots.length; i++)
-			this.score[body.backSlots[i].race.id]++;
-		for(var i = 0; i < body.head.appendages.length; i++)
-			this.score[body.head.appendages[i].race.id]++;
-		
-		// Specific attributes
-		// KNOT (CANID)
-		for(var i = 0; i < body.cock.length; i++) {
-			if(body.cock[i].knot) {
-				this.score[Race.Canine.id]++;
-			}
-		}
-		//IF 2 COCKS
-		if(body.cock.length == 2) {
-			this.score[Race.Lizard.id]++;
+	constructor(name : string, id : number, opts? : any, superclass? : any) {
+		opts = opts || {};
+		this.name = name || 'RACE';
+		this.superclass = superclass;
+		this.children = [];
+		if(superclass) {
+			superclass.children.push(this);
 		}
 		
-		// Human-ish looks
-		if(body.arms.count == 2) this.score[Race.Human.id] += 2;
-		if(body.legs.count == 2) this.score[Race.Human.id] += 2;
+		this.desc           = opts.desc           || [];
+		this.descMale       = opts.descMale       || [];
+		this.descFemale     = opts.descFemale     || [];
+		this.quantify       = opts.quantify       || [];
+		this.quantifyMale   = opts.quantifyMale   || [];
+		this.quantifyFemale = opts.quantifyFemale || [];
+		this.geneSize       = opts.geneSize;
 		
-		this.len = 0;
-		// EQUALIZE
+		this.id = id;
+		RaceDesc.Num++;
+		RaceDesc.IdToRace[this.id] = this;
+	}
+
+	static get Num() { return _Num; }
+	static set Num(value: number) { _Num = value; }
+	static get IdToRace() { return _IdToRace; }
+
+	GeneSize() {
+		if(this.geneSize)
+			return this.geneSize;
+		else if(this.superclass)
+			return this.superclass.GeneSize();
+		else
+			return 1;
+	}
+
+	Desc(gender : Gender) {
+		var desc = this.desc;
+		if(_.isNumber(gender)) {
+			if(gender == Gender.male)
+				desc = desc.concat(this.descMale);
+			else
+				desc = desc.concat(this.descFemale);
+		}
+		if(this.superclass) desc = desc.concat(this.superclass.Desc(gender));
+		return desc;
+	}
+
+	// Checks if this race (or any of its parents)
+	isRace(...args : RaceDesc[]) {
+		for(var i = 0; i < args.length; ++i)
+			if(this == args[i]) return true;
+		if(this.superclass) return RaceDesc.prototype.isRace.apply(this.superclass, args);
+		return false;
+	}
+	// Checks if this race (not parents)
+	isRaceNotParent(...args : RaceDesc[]) {
+		for(var i = 0; i < args.length; ++i)
+			if(this == args[i]) return true;
+		return false;
+	}
+
+	Short(gender : Gender) {
+		var desc = _.sample(this.Desc(gender));
+		return desc ? desc.noun : ("ERROR in " + this.name + ".Short()");
+	}
+	CShort(gender : Gender) {
+		var desc = _.sample(this.Desc(gender));
+		return desc ? _.capitalize(desc.noun) : ("ERROR in " + this.name + ".CShort()");
+	}
+	aShort(gender : Gender) {
+		var desc = _.sample(this.Desc(gender));
+		return desc ? (desc.a + " " + desc.noun) : ("ERROR in " + this.name + ".aShort()");
+	}
+
+	Quantifier(gender : Gender) {
+		var quantify = this.quantify;
+		if(_.isNumber(gender)) {
+			if(gender == Gender.male)
+				quantify = quantify.concat(this.quantifyMale);
+			else
+				quantify = quantify.concat(this.quantifyFemale);
+		}
+		if(this.superclass) quantify = quantify.concat(this.superclass.Quantifier(gender));
+		return quantify;
+	}
+
+	qShort(gender : Gender) {
+		var desc = _.sample(this.Quantifier(gender));
+		return desc ? desc.noun : ("ERROR in " + this.name + ".qShort()");
+	}
+	qCShort(gender : Gender) {
+		var desc = _.sample(this.Quantifier(gender));
+		return desc ? _.capitalize(desc.noun) : ("ERROR in " + this.name + ".qCShort()");
+	}
+	aqShort(gender : Gender) {
+		var desc = _.sample(this.Quantifier(gender));
+		return desc ? (desc.a + " " + desc.noun) : ("ERROR in " + this.name + ".aqShort()");
+	}
+
+}
+
+export class RaceScore {
+	score : number[];
+	len : number;
+
+	constructor(body? : any) {
+		this.score = [];
+		// Init
 		for(var race = 0; race < RaceDesc.Num; race++)
-			this.len += Math.pow(this.score[race], 2);
-		this.len = Math.sqrt(this.len);
-	}
-}
-
-// Produces a value between 0 and 1 for how similar the vectors are
-RaceScore.prototype.Compare = function(racescore) {
-	var dot = 0;
-	for(var race = 0; race < RaceDesc.Num; race++) {
-		dot += this.score[race] * racescore.score[race];
-	};
-	// Euclidian dot product
-	return dot / (this.len * racescore.len);
-}
-
-RaceScore.prototype.SumRace = function(race) {
-	var that = this;
-	var sum = that.score[race.id];
-	_.each(race.children, function(r) {
-		sum += that.SumRace(r);
-	});
-	return sum;
-}
-
-// Produces a value between 0 and 1 for how close to a certain race the racescore is. Checks for children
-RaceScore.prototype.SumScore = function(race) {
-	// Euclidian dot product
-	return this.SumRace(race) / this.len;
-}
-
-RaceScore.prototype.Sorted = function() {
-	var copiedScore = [];
-	var sorted = [];
-	for(var i = 0; i < RaceDesc.Num; i++)
-		copiedScore[i] = this.score[i];
-	
-	for(var num = 0; num < RaceDesc.Num; num++) {	
-		var highest    = -1;
-		var highestIdx =  0;
-		for(var i = 0; i < RaceDesc.Num; i++) {
-			if(copiedScore[i] > highest) {
-				highest    = copiedScore[i];
-				highestIdx = i;
+			this.score[race] = 0;
+		
+		this.len = 1;
+		
+		// If init values
+		if(body)
+		{
+			// Generic attributes
+			this.score[body.head.race.id]++;
+			this.score[body.head.mouth.tongue.race.id]++;
+			this.score[body.head.eyes.race.id]++;
+			this.score[body.head.ears.race.id]++;
+			this.score[body.torso.race.id]++;
+			this.score[body.arms.race.id]++;
+			this.score[body.legs.race.id]++;
+			
+			for(var i = 0; i < body.cock.length; i++)
+				this.score[body.cock[i].race.id]++;
+			if(body.balls.count.Get() > 0) this.score[body.balls.race.id]++;
+			for(var i = 0; i < body.backSlots.length; i++)
+				this.score[body.backSlots[i].race.id]++;
+			for(var i = 0; i < body.head.appendages.length; i++)
+				this.score[body.head.appendages[i].race.id]++;
+			
+			// Specific attributes
+			// KNOT (CANID)
+			for(var i = 0; i < body.cock.length; i++) {
+				if(body.cock[i].knot) {
+					this.score[Race.Canine.id]++;
+				}
 			}
+			//IF 2 COCKS
+			if(body.cock.length == 2) {
+				this.score[Race.Lizard.id]++;
+			}
+			
+			// Human-ish looks
+			if(body.arms.count == 2) this.score[Race.Human.id] += 2;
+			if(body.legs.count == 2) this.score[Race.Human.id] += 2;
+			
+			this.len = 0;
+			// EQUALIZE
+			for(var race = 0; race < RaceDesc.Num; race++)
+				this.len += Math.pow(this.score[race], 2);
+			this.len = Math.sqrt(this.len);
+		}
+	}
+
+
+	// Produces a value between 0 and 1 for how similar the vectors are
+	Compare(racescore : RaceScore) {
+		var dot = 0;
+		for(var race = 0; race < RaceDesc.Num; race++) {
+			dot += this.score[race] * racescore.score[race];
+		};
+		// Euclidian dot product
+		return dot / (this.len * racescore.len);
+	}
+
+	SumRace(race : RaceDesc) {
+		var that = this;
+		var sum = that.score[race.id];
+		_.each(race.children, function(r) {
+			sum += that.SumRace(r);
+		});
+		return sum;
+	}
+
+	// Produces a value between 0 and 1 for how close to a certain race the racescore is. Checks for children
+	SumScore(race : RaceDesc) {
+		// Euclidian dot product
+		return this.SumRace(race) / this.len;
+	}
+
+	Sorted() {
+		var copiedScore = [];
+		var sorted = [];
+		for(var i = 0; i < RaceDesc.Num; i++)
+			copiedScore[i] = this.score[i];
+		
+		for(var num = 0; num < RaceDesc.Num; num++) {	
+			var highest    = -1;
+			var highestIdx =  0;
+			for(var i = 0; i < RaceDesc.Num; i++) {
+				if(copiedScore[i] > highest) {
+					highest    = copiedScore[i];
+					highestIdx = i;
+				}
+			}
+			
+			sorted[num] = highestIdx;
+			copiedScore[highestIdx] = -1;
 		}
 		
-		sorted[num] = highestIdx;
-		copiedScore[highestIdx] = -1;
+		return sorted;
 	}
-	
-	return sorted;
+
 }
 
 //TODO Current max 44
@@ -418,4 +447,4 @@ Race.Hyena = new RaceDesc("hyena", 44, {
 	quantify: [{a:"a", noun:"hyenalike"}]
 });
 
-export { Race, RaceDesc, RaceScore };
+export { Race };

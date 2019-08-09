@@ -10,7 +10,7 @@ import { Item, ItemType } from './item';
 import { Appendage, AppendageType } from './body/appendage';
 import { GAME } from './GAME';
 import { Rand } from './utility';
-import { Race } from './body/race';
+import { RaceDesc } from './body/race';
 import { Balls } from './body/balls';
 import { Entity } from './entity';
 import { Text } from './text';
@@ -25,7 +25,7 @@ export namespace TF {
 	};
 	
 	// Change of bodyparts, return if something was changed
-	export function SetRaceOne(bodypart : any, race : Race, ret? : any) {
+	export function SetRaceOne(bodypart : any, race : RaceDesc, ret? : any) {
 		ret = ret || {};
 		var changed = Effect.Unchanged;
 		if(Array.isArray(bodypart)) {
@@ -49,7 +49,7 @@ export namespace TF {
 		return changed;
 	}
 	
-	export function SetRaceAll(bodypart : any, race : Race) {
+	export function SetRaceAll(bodypart : any, race : RaceDesc) {
 		let changed : any = Effect.Unchanged;
 		if(Array.isArray(bodypart)) {
 			var list = [];
@@ -72,7 +72,7 @@ export namespace TF {
 	
 	
 	// Will create a new appendage or replace an old one
-	export function SetAppendage(slots : any, type : any, race : Race, color : any, count? : number) {
+	export function SetAppendage(slots : any, type : any, race : RaceDesc, color : any, count? : number) {
 		if(!_.isNumber(count))
 			count = 1;
 		
