@@ -9,9 +9,19 @@ import { EncounterTable } from '../encountertable';
 import { GladeLoc } from './glade';
 import { MariaScenes } from '../event/outlaws/maria-scenes';
 import { GlobalScenes } from '../event/global';
-import { WorldTime, MoveToLocation } from '../GAME';
+import { WorldTime, MoveToLocation, TimeStep, WORLD, GAME } from '../GAME';
 import { Gui } from '../gui';
 import { Text } from '../text';
+import { IngredientItems } from '../items/ingredients';
+import { Season } from '../time';
+import { RoamingScenes } from '../event/roaming';
+import { MothgirlScenes } from '../enemy/mothgirl';
+import { FeralWolfScenes } from '../enemy/feralwolf';
+import { MomoScenes } from '../event/momo';
+import { QuestItems } from '../items/quest';
+import { Burrows } from './burrows';
+import { AquiliusScenes } from '../event/outlaws/aquilius';
+import { AscheScenes } from '../event/asche';
 
 // Create namespace
 let ForestLoc = {
@@ -30,13 +40,14 @@ ForestLoc.Outskirts.description = function() {
 ForestLoc.Outskirts.enc = new EncounterTable();
 ForestLoc.Outskirts.enc.AddEnc(function() {
 	return function() {
+		let party = GAME().party;
 		Text.Clear();
 
 		Text.Add("Not having much else to do, you wander the outskirts of the forest for a few minutes. You pick up a particularly fresh bundle of grass. Who knows, could be useful for something.");
 		Text.NL();
 		Text.Add("You pick up some fresh grass.", null, 'bold');
 		Text.Flush();
-		party.inventory.AddItem(Items.FreshGrass);
+		party.inventory.AddItem(IngredientItems.FreshGrass);
 		
 		TimeStep({minute: 15});
 		Gui.NextPrompt();
@@ -44,13 +55,14 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 }, 1.0, function() { return WorldTime().season != Season.Winter; });
 ForestLoc.Outskirts.enc.AddEnc(function() {
 	return function() {
+		let party = GAME().party;
 		Text.Clear();
 
 		Text.Add("Not having much else to do, you wander the outskirts of the forest for a few minutes. You pick up a pretty flower. Who knows, could be useful for something.");
 		Text.NL();
 		Text.Add("You pick up a Foxglove.", null, 'bold');
 		Text.Flush();
-		party.inventory.AddItem(Items.Foxglove);
+		party.inventory.AddItem(IngredientItems.Foxglove);
 		
 		TimeStep({minute: 15});
 		Gui.NextPrompt();
@@ -58,13 +70,14 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 }, 1.0, function() { return WorldTime().season != Season.Winter; });
 ForestLoc.Outskirts.enc.AddEnc(function() {
 	return function() {
+		let party = GAME().party;
 		Text.Clear();
 
 		Text.Add("As you trek through the undergrowth of the deep forest, you come across a cluster of small bushes with red berries. Seeing as nothing is trying to kill you at the moment, you spend some time gathering them, figuring they could be of some use.");
 		Text.NL();
 		Text.Add("You pick some fox berries.", null, 'bold');
 		Text.Flush();
-		party.inventory.AddItem(Items.FoxBerries);
+		party.inventory.AddItem(IngredientItems.FoxBerries);
 		
 		TimeStep({minute: 15});
 		Gui.NextPrompt();
@@ -72,13 +85,14 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 }, 1.0, function() { return WorldTime().season != Season.Winter; });
 ForestLoc.Outskirts.enc.AddEnc(function() {
 	return function() {
+		let party = GAME().party;
 		Text.Clear();
 
 		Text.Add("Not having much else to do, you wander the outskirts of the forest for a few minutes. You pick up an odd root. Who knows, could be useful for something.");
 		Text.NL();
 		Text.Add("You pick up a Canis root.", null, 'bold');
 		Text.Flush();
-		party.inventory.AddItem(Items.CanisRoot);
+		party.inventory.AddItem(IngredientItems.CanisRoot);
 		
 		TimeStep({minute: 15});
 		Gui.NextPrompt();
@@ -86,13 +100,14 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 }, 1.0, function() { return WorldTime().season != Season.Winter; });
 ForestLoc.Outskirts.enc.AddEnc(function() {
 	return function() {
+		let party = GAME().party;
 		Text.Clear();
 
 		Text.Add("While wandering the forest, you come across a small spring filled with clear water. Figuring you might as well get some in case you grow thirsty, you pick out a vial from your pack.");
 		Text.NL();
 		Text.Add("You fill a vial with pure spring water.", null, 'bold');
 		Text.Flush();
-		party.inventory.AddItem(Items.SpringWater);
+		party.inventory.AddItem(IngredientItems.SpringWater);
 		
 		TimeStep({minute: 15});
 		Gui.NextPrompt();
@@ -100,6 +115,7 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 }, 1.0, function() { return true; });
 ForestLoc.Outskirts.enc.AddEnc(function() {
 	return function() {
+		let party = GAME().party;
 		var parse = {
 			
 		};
@@ -109,7 +125,7 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 		Text.Add("<b>Picked up some tree bark.</b>", parse);
 		Text.Flush();
 		
-		party.inventory.AddItem(Items.TreeBark);
+		party.inventory.AddItem(IngredientItems.TreeBark);
 		
 		TimeStep({minute: 15});
 		Gui.NextPrompt();
@@ -117,6 +133,7 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 }, 1.0, function() { return true; });
 ForestLoc.Outskirts.enc.AddEnc(function() {
 	return function() {
+		let party = GAME().party;
 		var parse = {
 			
 		};
@@ -126,14 +143,14 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 		Text.Add("<b>Picked up part of a deer antler.</b>", parse);
 		Text.Flush();
 		
-		party.inventory.AddItem(Items.AntlerChip);
+		party.inventory.AddItem(IngredientItems.AntlerChip);
 		
 		TimeStep({minute: 15});
 		Gui.NextPrompt();
 	};
 }, 1.0, function() { return true; });
 ForestLoc.Outskirts.enc.AddEnc(function() {
-	return Scenes.Roaming.FlowerPetal;
+	return RoamingScenes.FlowerPetal;
 }, 1.0, function() { return WorldTime().season != Season.Winter; });
 
 
@@ -154,7 +171,7 @@ ForestLoc.Outskirts.enc.AddEnc(
 ForestLoc.Outskirts.AddEncounter({
 	nameStr : "Mothgirl",
 	func    : function() {
-		return Scenes.Mothgirl.LoneEnc();
+		return MothgirlScenes.LoneEnc();
 	}, odds : 1.0, enc : true,
 	visible : true, enabled : true, hunt : true
 });
@@ -162,21 +179,23 @@ ForestLoc.Outskirts.AddEncounter({
 ForestLoc.Outskirts.AddEncounter({
 	nameStr : "Wolf",
 	func    : function() {
-		return Scenes.FeralWolf.LoneEnc();
+		return FeralWolfScenes.LoneEnc();
 	}, odds : 1.0, enc : true,
 	visible : true, enabled : true, hunt : true
 });
 
 ForestLoc.Outskirts.enc.AddEnc(function() {
-	return Scenes.Momo.MomoEnc;
-}, 1.0, function() { return momo.Wandering(); });
+	return MomoScenes.MomoEnc;
+}, 1.0, function() { return GAME().momo.Wandering(); });
 
 ForestLoc.Outskirts.enc.AddEnc(function() {
-	return Scenes.Roaming.FindSomeCoins;
+	return RoamingScenes.FindSomeCoins;
 }, 0.5, function() { return true; });
 
 ForestLoc.Outskirts.enc.AddEnc(function() {
 	return function() {
+		let burrows = GAME().burrows;
+		let party = GAME().party;
 		var parse = {
 			
 		};
@@ -189,9 +208,9 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 		Text.Add("<b>Received a Gol husk!</b>", parse);
 		Text.Flush();
 		
-		party.Inv().AddItem(Items.Quest.GolHusk);
+		party.Inv().AddItem(QuestItems.GolHusk);
 		
-		if(party.Inv().QueryNum(Items.Quest.GolHusk) >= 3) {
+		if(party.Inv().QueryNum(QuestItems.GolHusk) >= 3) {
 			burrows.flags["HermTrait"] = Burrows.TraitFlags.Gathered;
 			Text.NL();
 			Text.Add("You think you've gathered enough of these for now, you should return them to Ophelia.", parse);
@@ -202,7 +221,10 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 		
 		Gui.NextPrompt();
 	};
-}, 4.0, function() { return burrows.Access() && burrows.flags["HermTrait"] == Burrows.TraitFlags.Inactive; });
+}, 4.0, function() {
+	let burrows = GAME().burrows;
+	return burrows.Access() && burrows.flags["HermTrait"] == Burrows.TraitFlags.Inactive;
+});
 
 
 ForestLoc.Outskirts.links.push(new Link(
@@ -211,18 +233,21 @@ ForestLoc.Outskirts.links.push(new Link(
 		Text.Add("Behind you is the way back to the crossroads.<br>");
 	},
 	function() {
-		MoveToLocation(world.loc.Plains.Crossroads, {hour: 2});
+		MoveToLocation(WORLD().loc.Plains.Crossroads, {hour: 2});
 	}
 ));
 ForestLoc.Outskirts.links.push(new Link(
 	"Outlaws", function() { return GlobalScenes.VisitedOutlaws(); }, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Outlaws.Camp, {hour: 1});
+		MoveToLocation(WORLD().loc.Outlaws.Camp, {hour: 1});
 	}
 ));
 ForestLoc.Outskirts.links.push(new Link(
-	"Glade", function() { return jeanne.flags["Met"] >= 1; }, true,
+	"Glade", function() {
+		let jeanne = GAME().jeanne;
+		return jeanne.flags["Met"] >= 1;
+	}, true,
 	null,
 	function() {
 		MoveToLocation(ForestLoc.Glade, {minute: 15});
@@ -230,20 +255,23 @@ ForestLoc.Outskirts.links.push(new Link(
 ));
 
 ForestLoc.Outskirts.events.push(new Link(
-	"Herbs", function() { return aquilius.OnHerbsQuest() && !aquilius.OnHerbsQuestFinished(); }, true,
+	"Herbs", function() {
+		let aquilius = GAME().aquilius;
+		return aquilius.OnHerbsQuest() && !aquilius.OnHerbsQuestFinished();
+	}, true,
 	null,
 	function() {
-		Scenes.Aquilius.PickHerbs();
+		AquiliusScenes.PickHerbs();
 	}
 ));
 ForestLoc.Outskirts.events.push(new Link(
-	"Nightshade", function() { return Scenes.Asche.Tasks.Nightshade.IsOn() && !Scenes.Asche.Tasks.Nightshade.IsSuccess(); }, true,
+	"Nightshade", function() { return AscheScenes.Tasks.Nightshade.IsOn() && !AscheScenes.Tasks.Nightshade.IsSuccess(); }, true,
 	null,
 	function() {
-		if(Scenes.Asche.Tasks.Nightshade.HasHelpFromAquilius())
-			Scenes.Asche.Tasks.Nightshade.FollowAquilius();
+		if(AscheScenes.Tasks.Nightshade.HasHelpFromAquilius())
+			AscheScenes.Tasks.Nightshade.FollowAquilius();
 		else
-			Scenes.Asche.Tasks.Nightshade.BlindStart();
+			AscheScenes.Tasks.Nightshade.BlindStart();
 	}
 ));
 

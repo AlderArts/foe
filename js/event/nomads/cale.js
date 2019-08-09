@@ -10,7 +10,7 @@ import { Race } from '../../body/race';
 import { Color } from '../../body/color';
 import { AppendageType } from '../../body/appendage';
 import { TF } from '../../tf';
-import { WorldTime, GAME } from '../../GAME';
+import { WorldTime, GAME, WORLD } from '../../GAME';
 import { CaleFlags } from './cale-flags';
 
 function Cale(storage) {
@@ -145,8 +145,8 @@ Cale.prototype.ToStorage = function() {
 // Schedule
 Cale.prototype.IsAtLocation = function(location) {
 	location = location || GAME().party.location;
-	if(location == world.loc.Plains.Nomads.Fireplace)
-		return cale.flags["Met"] != 0 && (WorldTime().hour >= 15 || WorldTime().hour < 3);
+	if(location == WORLD().loc.Plains.Nomads.Fireplace)
+		return GAME().cale.flags["Met"] != 0 && (WorldTime().hour >= 15 || WorldTime().hour < 3);
 	return false;
 }
 
