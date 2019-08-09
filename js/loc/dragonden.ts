@@ -6,8 +6,9 @@
 
 import { Event, Link } from '../event';
 import { EncounterTable } from '../encountertable';
-import { MoveToLocation } from '../GAME';
+import { MoveToLocation, WORLD } from '../GAME';
 import { Text } from '../text';
+import { DrakeScenes } from '../enemy/drake';
 
 // Create namespace
 let DragonDenLoc = {
@@ -27,7 +28,7 @@ DragonDenLoc.Entry.links.push(new Link(
 		Text.Add("Behind you is the way back to the hills.<br>");
 	},
 	function() {
-		MoveToLocation(world.loc.Highlands.Hills, {minute: 15});
+		MoveToLocation(WORLD().loc.Highlands.Hills, {minute: 15});
 	}
 ));
 
@@ -41,7 +42,7 @@ DragonDenLoc.Entry.enc = new EncounterTable();
 DragonDenLoc.Entry.AddEncounter({
 	nameStr : "Drake",
 	func    : function() {
-		return Scenes.Drake.DrakeEnc();
+		return DrakeScenes.DrakeEnc();
 	}, odds : 1.0, enc : true,
 	visible : true, enabled : true, hunt : true
 });

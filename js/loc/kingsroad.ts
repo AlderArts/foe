@@ -6,9 +6,16 @@
 
 import { Event, Link } from '../event';
 import { EncounterTable } from '../encountertable';
-import { WorldTime, MoveToLocation } from '../GAME';
+import { WorldTime, MoveToLocation, WORLD, GAME } from '../GAME';
 import { Season } from '../time';
 import { Text } from '../text';
+import { EquineScenes } from '../enemy/equine';
+import { FelinesScenes } from '../enemy/feline';
+import { RoamingScenes } from '../event/roaming';
+import { PoetScenes } from '../event/poet';
+import { MomoScenes } from '../event/momo';
+import { GolScenes } from '../enemy/gol';
+import { Burrows } from './burrows';
 
 // Create namespace
 let KingsRoadLoc = {
@@ -20,7 +27,7 @@ let KingsRoadLoc = {
 //
 KingsRoadLoc.Road.description = function() {
 	var parse = {
-		TreeFar : world.TreeFarDesc()
+		TreeFar : WORLD().TreeFarDesc()
 	};
 	Text.Add("You are standing on the well-paved road leading from Rigard to the Free Cities, a major trading route on Eden. Estates and farm holds dot the landscape, which is a blend of flat plains on one side, and rougher country on the other as the gentle grasslands are swallowed by the great forest. [TreeFar]", parse);
 }
@@ -29,48 +36,48 @@ KingsRoadLoc.Road.links.push(new Link(
 	"Rigard", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Plains.Gate, {hour: 1});
+		MoveToLocation(WORLD().loc.Plains.Gate, {hour: 1});
 	}
 ));
 
 KingsRoadLoc.Road.events.push(new Link(
-	"Scepter", function() { return burrows.flags["Access"] == Burrows.AccessFlags.Stage4; }, true,
+	"Scepter", function() { return GAME().burrows.flags["Access"] == Burrows.AccessFlags.Stage4; }, true,
 	null,
 	function() {
-		Scenes.Gol.SearchForScepter();
+		GolScenes.SearchForScepter();
 	}
 ));
 
 KingsRoadLoc.Road.enc = new EncounterTable();
 KingsRoadLoc.Road.enc.AddEnc(function() {
-	return Scenes.Momo.MomoEnc;
-}, 1.0, function() { return momo.Wandering(); });
+	return MomoScenes.MomoEnc;
+}, 1.0, function() { return GAME().momo.Wandering(); });
 
 
 KingsRoadLoc.Road.enc.AddEnc(function() {
-	return Scenes.Poet.Entry;
+	return PoetScenes.Entry;
 }, 1.0, function() { return true; });
 
 KingsRoadLoc.Road.enc.AddEnc(function() {
-	return Scenes.Roaming.FindSomeCoins;
+	return RoamingScenes.FindSomeCoins;
 }, 0.5, function() { return true; });
 
 
 KingsRoadLoc.Road.enc.AddEnc(function() {
-	return Scenes.Roaming.KingdomPatrol;
+	return RoamingScenes.KingdomPatrol;
 }, 1.0, function() { return true; });
 KingsRoadLoc.Road.enc.AddEnc(function() {
-	return Scenes.Roaming.Bandits;
-}, 5.0, function() { return rigard.bandits; });
+	return RoamingScenes.Bandits;
+}, 5.0, function() { return GAME().rigard.bandits; });
 
 KingsRoadLoc.Road.enc.AddEnc(function() {
-	return Scenes.Roaming.FlowerPetal;
+	return RoamingScenes.FlowerPetal;
 }, 1.0, function() { return WorldTime().season != Season.Winter; });
 
 KingsRoadLoc.Road.AddEncounter({
 	nameStr : "Wildcat",
 	func    : function() {
-		return Scenes.Felines.WildcatEnc(2);
+		return FelinesScenes.WildcatEnc(2);
 	}, odds : 0.25, enc : true,
 	visible : true, enabled : true, hunt : true
 });
@@ -78,7 +85,7 @@ KingsRoadLoc.Road.AddEncounter({
 KingsRoadLoc.Road.AddEncounter({
 	nameStr : "Puma",
 	func    : function() {
-		return Scenes.Felines.PumaEnc(3);
+		return FelinesScenes.PumaEnc(3);
 	}, odds : 0.25, enc : true,
 	visible : true, enabled : true, hunt : true
 });
@@ -86,7 +93,7 @@ KingsRoadLoc.Road.AddEncounter({
 KingsRoadLoc.Road.AddEncounter({
 	nameStr : "Jaguar",
 	func    : function() {
-		return Scenes.Felines.JaguarEnc(3);
+		return FelinesScenes.JaguarEnc(3);
 	}, odds : 0.25, enc : true,
 	visible : true, enabled : true, hunt : true
 });
@@ -94,7 +101,7 @@ KingsRoadLoc.Road.AddEncounter({
 KingsRoadLoc.Road.AddEncounter({
 	nameStr : "Lynx",
 	func    : function() {
-		return Scenes.Felines.LynxEnc(3);
+		return FelinesScenes.LynxEnc(3);
 	}, odds : 0.25, enc : true,
 	visible : true, enabled : true, hunt : true
 });
@@ -102,7 +109,7 @@ KingsRoadLoc.Road.AddEncounter({
 KingsRoadLoc.Road.AddEncounter({
 	nameStr : "Equines",
 	func    : function() {
-		return Scenes.Equine.PairEnc(4);
+		return EquineScenes.PairEnc(4);
 	}, odds : 1.0, enc : true,
 	visible : true, enabled : true, hunt : true
 });

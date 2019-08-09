@@ -86,12 +86,8 @@ import './js/loc/rigard/weaponshop.js';
 import './js/loc/rigard/inn.js';
 import './js/loc/rigard/magetower.js';
 
-import './js/loc/highlands.js';
-import './js/loc/dragonden.js';
 import './js/loc/forest.js';
-import './js/loc/desert.js';
 import './js/loc/farm.js';
-import './js/loc/kingsroad.js';
 
 import './js/loc/glade.js';
 

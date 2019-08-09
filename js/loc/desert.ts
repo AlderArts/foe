@@ -6,9 +6,17 @@
 
 import { Event, Link } from '../event';
 import { EncounterTable } from '../encountertable';
-import { MoveToLocation, TimeStep } from '../GAME';
+import { MoveToLocation, TimeStep, GAME, WORLD } from '../GAME';
 import { Text } from '../text';
 import { Gui } from '../gui';
+import { MomoScenes } from '../event/momo';
+import { OasisScenes } from './oasis';
+import { QuestItems } from '../items/quest';
+import { Burrows } from './burrows';
+import { RoamingScenes } from '../event/roaming';
+import { LizardsScenes } from '../enemy/lizard';
+import { NagaScenes } from '../enemy/naga';
+import { ScorpionScenes } from '../enemy/scorp';
 
 // Create namespace
 let DesertLoc = {
@@ -25,15 +33,18 @@ DesertLoc.Drylands.description = function() {
 DesertLoc.Drylands.enc = new EncounterTable();
 
 DesertLoc.Drylands.enc.AddEnc(function() {
-	return Scenes.Momo.MomoEnc;
-}, 1.0, function() { return momo.Wandering(); });
+	return MomoScenes.MomoEnc;
+}, 1.0, function() { return GAME().momo.Wandering(); });
 
 DesertLoc.Drylands.enc.AddEnc(function() {
-	return Scenes.Oasis.DesertCaravanEncounter;
+	return OasisScenes.DesertCaravanEncounter;
 }, 1.0, function() { return true; });
 
 DesertLoc.Drylands.enc.AddEnc(function() {
 	return function() {
+		let party = GAME().party;
+		let burrows = GAME().burrows;
+
 		var parse = {
 			
 		};
@@ -43,9 +54,9 @@ DesertLoc.Drylands.enc.AddEnc(function() {
 		Text.NL();
 		Text.Add("<b>Received a cactoid!</b>", parse);
 		
-		party.Inv().AddItem(Items.Quest.Cactoid);
+		party.Inv().AddItem(QuestItems.Cactoid);
 		
-		if(party.Inv().QueryNum(Items.Quest.Cactoid) >= 3) {
+		if(party.Inv().QueryNum(QuestItems.Cactoid) >= 3) {
 			burrows.flags["BruteTrait"] = Burrows.TraitFlags.Gathered;
 			Text.NL();
 			Text.Add("You think you've gathered enough of these for now, you should return them to Ophelia.", parse);
@@ -56,24 +67,27 @@ DesertLoc.Drylands.enc.AddEnc(function() {
 		
 		Gui.NextPrompt();
 	};
-}, 1.0, function() { return burrows.Access() && burrows.flags["BruteTrait"] == Burrows.TraitFlags.Inactive; });
+}, 1.0, function() {
+	let burrows = GAME().burrows;
+	return burrows.Access() && burrows.flags["BruteTrait"] == Burrows.TraitFlags.Inactive;
+});
 
 DesertLoc.Drylands.links.push(new Link(
 	"Crossroads", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Plains.Crossroads, {hour: 2});
+		MoveToLocation(WORLD().loc.Plains.Crossroads, {hour: 2});
 	}
 ));
 
 DesertLoc.Drylands.enc.AddEnc(function() {
-	return Scenes.Roaming.FindSomeCoins;
+	return RoamingScenes.FindSomeCoins;
 }, 0.5, function() { return true; });
 
 DesertLoc.Drylands.AddEncounter({
 	nameStr : "Lizard",
 	func    : function() {
-		return Scenes.Lizards.GroupEnc();
+		return LizardsScenes.GroupEnc();
 	}, odds : 1.0, enc : true,
 	visible : true, enabled : true, hunt : true
 });
@@ -81,7 +95,7 @@ DesertLoc.Drylands.AddEncounter({
 DesertLoc.Drylands.AddEncounter({
 	nameStr : "Naga",
 	func    : function() {
-		return Scenes.Naga.LoneEnc();
+		return NagaScenes.LoneEnc();
 	}, odds : 1.0, enc : true,
 	visible : true, enabled : true, hunt : true
 });
@@ -89,7 +103,7 @@ DesertLoc.Drylands.AddEncounter({
 DesertLoc.Drylands.AddEncounter({
 	nameStr : "Scorpion",
 	func    : function() {
-		return Scenes.Scorpion.LoneEnc();
+		return ScorpionScenes.LoneEnc();
 	}, odds : 1.0, enc : true,
 	visible : true, enabled : true, hunt : true
 });
