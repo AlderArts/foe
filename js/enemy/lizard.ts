@@ -7,12 +7,12 @@
 import { Entity } from '../entity';
 import { Cock } from '../body/cock';
 import { Gender } from '../body/gender';
-import { WorldTime } from '../GAME';
+import { WorldTime, GAME, TimeStep } from '../GAME';
 import { Images } from '../assets';
 import { Element } from '../damagetype';
 import { TF } from '../tf';
 import { AppendageType } from '../body/appendage';
-import { Race } from '../body/race';
+import { Race, RaceScore } from '../body/race';
 import { Color } from '../body/color';
 import { AlchemyItems } from '../items/alchemy';
 import { AlchemySpecial } from '../items/alchemyspecial';
@@ -23,85 +23,94 @@ import { Gui } from '../gui';
 import { SetGameState, GameState } from '../gamestate';
 import { BodyPartType } from '../body/bodypart';
 import { IngredientItems } from '../items/ingredients';
+import { Abilities } from '../abilities';
+import { PregnancyHandler } from '../pregnancy';
+import { EncounterTable } from '../encountertable';
+import { Sex } from '../entity-sex';
+import { LowerBodyType } from '../entity-desc';
+import { Capacity, Orifice } from '../body/orifice';
 
-let LizardsScenes = {};
+let LizardsScenes : any = {};
 
-function Lizard(gender) {
-	Entity.call(this);
-	this.ID = "lizard";
+export class Lizard extends Entity {
+	constructor(gender : Gender) {
+		super();
 
-	if(gender == Gender.male) {
-		this.avatar.combat     = Images.lizard_male;
-		this.name              = "Lizard";
-		this.monsterName       = "the male lizard";
-		this.MonsterName       = "The male lizard";
-		this.body.cock.push(new Cock());
-		this.body.cock.push(new Cock());
-		if(Math.random() < 0.1)
-			this.Butt().virgin = false;
+		this.ID = "lizard";
+
+		if(gender == Gender.male) {
+			this.avatar.combat     = Images.lizard_male;
+			this.name              = "Lizard";
+			this.monsterName       = "the male lizard";
+			this.MonsterName       = "The male lizard";
+			this.body.cock.push(new Cock());
+			this.body.cock.push(new Cock());
+			if(Math.random() < 0.1)
+				this.Butt().virgin = false;
+		}
+		else if(gender == Gender.female) {
+			this.avatar.combat     = Images.lizard_fem;
+			this.name              = "Lizard";
+			this.monsterName       = "the female lizard";
+			this.MonsterName       = "The female lizard";
+			this.body.DefFemale();
+			this.Butt().buttSize.base = 4;
+			if(Math.random() < 0.9)
+				this.FirstVag().virgin = false;
+			if(Math.random() < 0.4)
+				this.Butt().virgin = false;
+		}
+		else {
+			this.avatar.combat     = Images.lizard_fem;
+			this.name              = "Lizard";
+			this.monsterName       = "the herm lizard";
+			this.MonsterName       = "The herm lizard";
+			this.body.DefHerm(false);
+			this.Butt().buttSize.base = 4;
+			if(Math.random() < 0.5)
+				this.FirstVag().virgin = false;
+			this.body.cock.push(new Cock());
+			if(Math.random() < 0.5)
+				this.Butt().virgin = false;
+		}
+
+		this.maxHp.base        = 40;
+		this.maxSp.base        = 20;
+		this.maxLust.base      = 25;
+		// Main stats
+		this.strength.base     = 10;
+		this.stamina.base      = 13;
+		this.dexterity.base    = 13;
+		this.intelligence.base = 11;
+		this.spirit.base       = 11;
+		this.libido.base       = 14;
+		this.charisma.base     = 15;
+
+		this.elementDef.dmg[Element.mFire]    =   0.5;
+		this.elementDef.dmg[Element.mIce]     =  -0.5;
+		this.elementDef.dmg[Element.mWater]   = -0.25;
+		this.elementDef.dmg[Element.mThunder] =  -0.5;
+
+		this.level             = 1;
+		if(Math.random() > 0.8) this.level = 2;
+		this.sexlevel          = 1;
+
+		this.combatExp         = this.level;
+		this.coinDrop          = this.level * 4;
+
+		TF.SetAppendage(this.Back(), AppendageType.tail, Race.Lizard, Color.brown);
+		TF.SetAppendage(this.Appendages(), AppendageType.horn, Race.Lizard, Color.green);
+
+		this.body.SetRace(Race.Lizard);
+
+		this.body.SetBodyColor(Color.green);
+
+		this.body.SetEyeColor(Color.blue);
+
+		// Set hp and mana to full
+		this.SetLevelBonus();
+		this.RestFull();
 	}
-	else if(gender == Gender.female) {
-		this.avatar.combat     = Images.lizard_fem;
-		this.name              = "Lizard";
-		this.monsterName       = "the female lizard";
-		this.MonsterName       = "The female lizard";
-		this.body.DefFemale();
-		this.Butt().buttSize.base = 4;
-		if(Math.random() < 0.9)
-			this.FirstVag().virgin = false;
-		if(Math.random() < 0.4)
-			this.Butt().virgin = false;
-	}
-	else {
-		this.avatar.combat     = Images.lizard_fem;
-		this.name              = "Lizard";
-		this.monsterName       = "the herm lizard";
-		this.MonsterName       = "The herm lizard";
-		this.body.DefHerm(false);
-		this.Butt().buttSize.base = 4;
-		if(Math.random() < 0.5)
-			this.FirstVag().virgin = false;
-		this.body.cock.push(new Cock());
-		if(Math.random() < 0.5)
-			this.Butt().virgin = false;
-	}
-
-	this.maxHp.base        = 40;
-	this.maxSp.base        = 20;
-	this.maxLust.base      = 25;
-	// Main stats
-	this.strength.base     = 10;
-	this.stamina.base      = 13;
-	this.dexterity.base    = 13;
-	this.intelligence.base = 11;
-	this.spirit.base       = 11;
-	this.libido.base       = 14;
-	this.charisma.base     = 15;
-
-	this.elementDef.dmg[Element.mFire]    =   0.5;
-	this.elementDef.dmg[Element.mIce]     =  -0.5;
-	this.elementDef.dmg[Element.mWater]   = -0.25;
-	this.elementDef.dmg[Element.mThunder] =  -0.5;
-
-	this.level             = 1;
-	if(Math.random() > 0.8) this.level = 2;
-	this.sexlevel          = 1;
-
-	this.combatExp         = this.level;
-	this.coinDrop          = this.level * 4;
-
-	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Lizard, Color.brown);
-	TF.SetAppendage(this.Appendages(), AppendageType.horn, Race.Lizard, Color.green);
-
-	this.body.SetRace(Race.Lizard);
-
-	this.body.SetBodyColor(Color.green);
-
-	this.body.SetEyeColor(Color.blue);
-
-	// Set hp and mana to full
-	this.SetLevelBonus();
-	this.RestFull();
 }
 Lizard.prototype = new Entity();
 Lizard.prototype.constructor = Lizard;
@@ -146,7 +155,7 @@ Lizard.prototype.Act = function(encounter, activeChar) {
 		Abilities.Seduction.Tease.Use(encounter, this, t);
 }
 
-LizardsScenes.Impregnate = function(mother, father, slot) {
+LizardsScenes.Impregnate = function(mother : Entity, father : Lizard, slot? : number) {
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother : mother,
@@ -166,7 +175,7 @@ LizardsScenes.GroupEnc = function() {
 	var female   = new Lizard(Gender.female);
 	enemy.AddMember(male);
 	enemy.AddMember(female);
-	var enc      = new Encounter(enemy);
+	var enc : any = new Encounter(enemy);
 	enc.male     = male;
 	enc.female   = female;
 
@@ -185,7 +194,7 @@ LizardsScenes.GroupEnc = function() {
 	*/
 
 	enc.onEncounter = function() {
-		var parse = {
+		var parse : any = {
 			numQ     : Text.Quantify(enemy.Num()),
 			num      : Text.NumToText(enemy.Num())
 		};
@@ -243,10 +252,10 @@ LizardsScenes.WinPrompt = function() {
 	Gui.Callstack.push(function() {
 		Text.Clear();
 
-		var parse = {
+		var parse : any = {
 			two : enc.third ? " two" : ""
 		};
-		var scene;
+		var scene : any;
 
 		var odds = enc.third ? (enc.third.body.Gender() == Gender.male ? 0.66 : 0.33) : 0.5;
 
@@ -307,10 +316,10 @@ LizardsScenes.WinPrompt = function() {
 	Encounter.prototype.onVictory.call(enc);
 }
 
-LizardsScenes.WinMale = function(enc) {
+LizardsScenes.WinMale = function(enc : any) {
 	let player = GAME().player;
 	let party = GAME().party;
-	var parse = {
+	var parse : any = {
 		p1name        : function() { return party.members[1].NameDesc(); },
 		m1Name        : function() { return enc.male.NameDesc(); },
 		m1name        : function() { return enc.male.nameDesc(); }
@@ -370,10 +379,10 @@ LizardsScenes.WinMale = function(enc) {
 	Text.Flush();
 }
 
-LizardsScenes.WinFemale = function(enc) {
+LizardsScenes.WinFemale = function(enc : any) {
 	let player = GAME().player;
 	let party = GAME().party;
-	var parse = {
+	var parse : any = {
 		p1name        : function() { return party.members[1].NameDesc(); },
 		m1Name        : function() { return enc.female.NameDesc(); },
 		m1name        : function() { return enc.female.nameDesc(); }
@@ -443,15 +452,16 @@ LizardsScenes.WinFemale = function(enc) {
 	Text.Flush();
 }
 
-LizardsScenes.WinFuckVag = function(enc) {
+LizardsScenes.WinFuckVag = function(enc : any) {
 	let player = GAME().player;
+	let party = GAME().party;
 	var enemy = enc.female;
 	var third = enc.third;
 
 	var p1cock = player.BiggestCock(null, true);
 	var realCock = p1cock.isStrapon == false;
 
-	var parse = {
+	var parse : any = {
 	};
 	parse = player.ParserTags(parse);
 
@@ -546,12 +556,12 @@ LizardsScenes.WinFuckVag = function(enc) {
 	Gui.NextPrompt();
 }
 
-LizardsScenes.WinTailpeg = function(enc) {
+LizardsScenes.WinTailpeg = function(enc : any) {
 	let player = GAME().player;
 	let party = GAME().party;
 	var enemy = enc.female;
 
-	var parse = {
+	var parse : any = {
 		p1name        : function() { return party.members[1].NameDesc(); },
 		m1Name        : function() { return enemy.NameDesc(); },
 		m1name        : function() { return enemy.nameDesc(); },
@@ -747,10 +757,10 @@ LizardsScenes.WinTailpeg = function(enc) {
 	});
 }
 
-LizardsScenes.WinClaimAss = function(enc, enemy) {
+LizardsScenes.WinClaimAss = function(enc : any, enemy : Lizard) {
 	let player = GAME().player;
 	let party = GAME().party;
-	var parse = {
+	var parse : any = {
 		p1name        : function() { return party.members[1].NameDesc(); },
 		m1Name        : function() { return enemy.NameDesc(); },
 		m1name        : function() { return enemy.nameDesc(); },
@@ -867,10 +877,10 @@ LizardsScenes.WinClaimAss = function(enc, enemy) {
 	});
 }
 
-LizardsScenes.WinBlowjob = function(enc, enemy) {
+LizardsScenes.WinBlowjob = function(enc : any, enemy : Lizard) {
 	let player = GAME().player;
 	let party = GAME().party;
-	var parse = {
+	var parse : any = {
 		p1name        : function() { return party.members[1].NameDesc(); },
 		m1cocks : function() { return enemy.MultiCockDesc(); },
 		m1Name        : function() { return enemy.NameDesc(); },
@@ -934,12 +944,12 @@ LizardsScenes.WinBlowjob = function(enc, enemy) {
 	});
 }
 
-LizardsScenes.WinPowerbottom = function(enc) {
+LizardsScenes.WinPowerbottom = function(enc : any) {
 	let player = GAME().player;
 	let party = GAME().party;
 	var enemy = enc.male;
 
-	var parse = {
+	var parse : any = {
 		p1name        : function() { return party.members[1].NameDesc(); },
 		m1cock    : function() { return enemy.FirstCock().Short(); },
 		m1cocks : function() { return enemy.MultiCockDesc(); },
@@ -1358,12 +1368,12 @@ LizardsScenes.WinPowerbottom = function(enc) {
 	Text.Flush();
 }
 
-LizardsScenes.WinPowerbottomAssert = function(enc) {
+LizardsScenes.WinPowerbottomAssert = function(enc : any) {
 	let player = GAME().player;
 	let party = GAME().party;
 	var enemy = enc.male;
 
-	var parse = {
+	var parse : any = {
 		p1name        : function() { return party.members[1].NameDesc(); },
 		m1cock    : function() { return enemy.FirstCock().Short(); },
 		m1cocks : function() { return enemy.MultiCockDesc(); },
@@ -1496,12 +1506,12 @@ LizardsScenes.WinPowerbottomAssert = function(enc) {
 	});
 }
 
-LizardsScenes.WinPowerbottomDeny = function(enc) {
+LizardsScenes.WinPowerbottomDeny = function(enc : any) {
 	let player = GAME().player;
 	let party = GAME().party;
 	var enemy = enc.male;
 
-	var parse = {
+	var parse : any = {
 		p1name        : function() { return party.members[1].NameDesc(); },
 		m1cock    : function() { return enemy.FirstCock().Short(); },
 		m1cocks : function() { return enemy.MultiCockDesc(); },
@@ -1556,7 +1566,7 @@ LizardsScenes.LossPrompt = function() {
 
 	var enc = this;
 
-	var parse = {
+	var parse : any = {
 		m1Name     : function() { return enc.male.NameDesc(); },
 		m1hisher   : function() { return enc.male.hisher(); },
 		m1HeShe    : function() { return enc.male.HeShe(); },
@@ -1610,7 +1620,7 @@ LizardsScenes.LossMale = function() {
 	var member1 = party.members[1];
 	var member2 = party.members[2];
 
-	var parse = {
+	var parse : any = {
 		m1name     : function() { return enc.male.nameDesc(); },
 		m1Name     : function() { return enc.male.NameDesc(); },
 		m1race     : function() { return enc.male.body.RaceStr(); },
@@ -1732,7 +1742,7 @@ LizardsScenes.LossMaleVagVariations = function() {
 
 	var member1 = party.members[1];
 
-	var parse = {
+	var parse : any = {
 		m1Name     : function() { return enc.male.NameDesc(); },
 		m1name     : function() { return enc.male.nameDesc(); },
 		m2name     : function() { return enc.female.nameDesc(); },
@@ -1931,7 +1941,7 @@ LizardsScenes.LossMaleCockVariations = function() {
 
 	var member1 = party.members[1];
 
-	var parse = {
+	var parse : any = {
 		MalesHerms : player.FirstVag() ? "Herms" : "Males",
 		playerRace : function() { return player.body.RaceStr(); },
 		m1Name     : function() { return enc.male.NameDesc(); },
@@ -2207,7 +2217,7 @@ LizardsScenes.LossFemale = function() {
 	var member1 = party.members[1];
 	var lizard = enc.female;
 
-	var parse = {
+	var parse : any = {
 		playerName   : player.name,
 		race         : function() { return player.body.RaceStr(); },
 		boygirl      : function() { return player.body.femininity.Get() > 0 ? "girl" : "boy"; },
@@ -2619,11 +2629,11 @@ LizardsScenes.LossFemale = function() {
 			Text.Add("<i>“Good, that’s the expression I want you to have,”</i> she encourages you as her hand slides down [l]. <i>“I’ll ease you open, then it’s time...”</i> Her tail sways back and forth eagerly, glistening with your saliva.", parse);
 			Text.NL();
 
-			var target = BodyPartType.ass;
+			let pussy : boolean = false;
 
 			var scenes = new EncounterTable();
 			scenes.AddEnc(function() {
-				target = BodyPartType.vagina;
+				pussy = true;
 				Text.Add("You moan as she once again thrusts her fingers into your [vag]; the reptile savouring your discomfort. <i>“Don’t try to fool me, you’re wet as the Oasis itself,”</i> she leans closer and taunts you. <i>“You can put on a defiant facade if you want; your body sings a different song.”</i>", parse);
 				Text.NL();
 				parse["dom"] = dom > 25 ? " reluctantly" :
@@ -2641,8 +2651,7 @@ LizardsScenes.LossFemale = function() {
 			}, 1.0, function() { return true; });
 
 			scenes.Get();
-			parse["target"] = target == BodyPartType.vagina ? parse["vag"] : parse["anus"];
-			var pussy = target == BodyPartType.vagina;
+			parse["target"] = pussy ? parse["vag"] : parse["anus"];
 
 			Text.NL();
 			Text.Add("<i>“Mmm, you’re so hot inside,”</i> the reptile sighs, probing deeper and deeper. <i>“My cock wants you, are you ready for it?”</i> ", parse);
@@ -2749,4 +2758,4 @@ LizardsScenes.LossFemale = function() {
 	scenes.Get();
 }
 
-export { Lizard, LizardsScenes };
+export { LizardsScenes };

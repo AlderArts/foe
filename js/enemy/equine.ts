@@ -21,134 +21,140 @@ import { Party } from '../party';
 import { Encounter } from '../combat';
 import { AlchemyItems } from '../items/alchemy';
 import { IngredientItems } from '../items/ingredients';
+import { GAME, TimeStep } from '../GAME';
+import { EncounterTable } from '../encountertable';
+import { Sex } from '../entity-sex';
+import { LowerBodyType } from '../entity-desc';
 
-let EquineScenes = {};
+let EquineScenes : any = {};
 
-function Equine(gender, levelbonus) {
-	Entity.call(this);
-	this.ID = "equine";
+export class Equine extends Entity {
+	constructor(gender : Gender, levelbonus? : number) {
+		super();
 
-	if(gender == Gender.male) {
-		this.avatar.combat     = Images.stallion;
-		this.name              = "Stallion";
-		this.monsterName       = "the stallion";
-		this.MonsterName       = "The stallion";
-		this.body.DefMale();
-		this.FirstCock().thickness.base = 6;
-		this.FirstCock().length.base = 32;
-		this.Balls().size.base = 6;
+		this.ID = "equine";
+
+		if(gender == Gender.male) {
+			this.avatar.combat     = Images.stallion;
+			this.name              = "Stallion";
+			this.monsterName       = "the stallion";
+			this.MonsterName       = "The stallion";
+			this.body.DefMale();
+			this.FirstCock().thickness.base = 6;
+			this.FirstCock().length.base = 32;
+			this.Balls().size.base = 6;
+		}
+		else if(gender == Gender.female) {
+			this.avatar.combat     = Images.mare;
+			this.name              = "Mare";
+			this.monsterName       = "the mare";
+			this.MonsterName       = "The mare";
+			this.body.DefFemale();
+			this.FirstBreastRow().size.base = 20;
+			this.Butt().buttSize.base = 7;
+			if(Math.random() < 0.95)
+				this.FirstVag().virgin = false;
+		}
+		else {
+			this.avatar.combat     = Images.mare;
+			this.name              = "Herm equine";
+			this.monsterName       = "the herm equine";
+			this.MonsterName       = "The herm equine";
+			this.body.DefHerm(true);
+			this.FirstCock().thickness.base = 6;
+			this.FirstCock().length.base = 32;
+			this.FirstBreastRow().size.base = 20;
+			this.Butt().buttSize.base = 7;
+			if(Math.random() < 0.8)
+				this.FirstVag().virgin = false;
+		}
+
+		this.maxHp.base        = 100;
+		this.maxSp.base        = 14;
+		this.maxLust.base      = 15;
+		// Main stats
+		this.strength.base     = 18;
+		this.stamina.base      = 15;
+		this.dexterity.base    = 7;
+		this.intelligence.base = 9;
+		this.spirit.base       = 11;
+		this.libido.base       = 14;
+		this.charisma.base     = 12;
+
+		this.elementDef.dmg[Element.mEarth] = 0.5;
+		this.elementDef.dmg[Element.mWind]  = 0.5;
+		this.elementDef.dmg[Element.pBlunt] = 0.3;
+
+		this.level             = 2;
+		if(Math.random() > 0.8) this.level++;
+		this.level             += levelbonus || 0;
+		this.sexlevel          = 2;
+
+		this.combatExp         = this.level;
+		this.coinDrop          = this.level * 4;
+
+		this.body.SetRace(Race.Horse);
+
+		this.body.SetBodyColor(Color.brown);
+
+		TF.SetAppendage(this.Back(), AppendageType.tail, Race.Horse, Color.brown);
+
+		this.body.SetEyeColor(Color.green);
+
+		// Set hp and mana to full
+		this.SetLevelBonus();
+		this.RestFull();
 	}
-	else if(gender == Gender.female) {
-		this.avatar.combat     = Images.mare;
-		this.name              = "Mare";
-		this.monsterName       = "the mare";
-		this.MonsterName       = "The mare";
-		this.body.DefFemale();
-		this.FirstBreastRow().size.base = 20;
-		this.Butt().buttSize.base = 7;
-		if(Math.random() < 0.95)
-			this.FirstVag().virgin = false;
-	}
-	else {
-		this.avatar.combat     = Images.mare;
-		this.name              = "Herm equine";
-		this.monsterName       = "the herm equine";
-		this.MonsterName       = "The herm equine";
-		this.body.DefHerm(true);
-		this.FirstCock().thickness.base = 6;
-		this.FirstCock().length.base = 32;
-		this.FirstBreastRow().size.base = 20;
-		this.Butt().buttSize.base = 7;
-		if(Math.random() < 0.8)
-			this.FirstVag().virgin = false;
+
+	DropTable() {
+		var drops = [];
+		if(Math.random() < 0.05) drops.push({ it: AlchemyItems.Equinium });
+		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HorseHair });
+		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HorseShoe });
+		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HorseCum });
+
+		if(Math.random() < 0.3)  drops.push({ it: IngredientItems.FreshGrass });
+		if(Math.random() < 0.2)  drops.push({ it: IngredientItems.Foxglove });
+		if(Math.random() < 0.2)  drops.push({ it: IngredientItems.SpringWater });
+		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.FlowerPetal });
+		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.Feather });
+
+		if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Bovia });
+		if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Ovis });
+		if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Virilium });
+		if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Gestarium });
+		if(Math.random() < 0.01) drops.push({ it: AlchemyItems.GestariumPlus });
+
+		return drops;
 	}
 
-	this.maxHp.base        = 100;
-	this.maxSp.base        = 14;
-	this.maxLust.base      = 15;
-	// Main stats
-	this.strength.base     = 18;
-	this.stamina.base      = 15;
-	this.dexterity.base    = 7;
-	this.intelligence.base = 9;
-	this.spirit.base       = 11;
-	this.libido.base       = 14;
-	this.charisma.base     = 12;
+	Act(encounter : any, activeChar : any) {
+		// TODO: Very TEMP
+		Text.Add(this.name + " acts! Rawr!");
+		Text.NL();
+		Text.Flush();
 
-	this.elementDef.dmg[Element.mEarth] = 0.5;
-	this.elementDef.dmg[Element.mWind]  = 0.5;
-	this.elementDef.dmg[Element.pBlunt] = 0.3;
+		// Pick a random target
+		var t = this.GetSingleTarget(encounter, activeChar);
 
-	this.level             = 2;
-	if(Math.random() > 0.8) this.level++;
-	this.level             += levelbonus || 0;
-	this.sexlevel          = 2;
+		var parseVars = {
+			name   : this.name,
+			hisher : this.hisher(),
+			tName  : t.name
+		};
 
-	this.combatExp         = this.level;
-	this.coinDrop          = this.level * 4;
+		var choice = Math.random();
+		if(choice < 0.6)
+			Abilities.Attack.Use(encounter, this, t);
+		else if(choice < 0.8 && Abilities.Physical.Bash.enabledCondition(encounter, this))
+			Abilities.Physical.Bash.Use(encounter, this, t);
+		else
+			Abilities.Seduction.Tease.Use(encounter, this, t);
+	}
 
-	this.body.SetRace(Race.Horse);
-
-	this.body.SetBodyColor(Color.brown);
-
-	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Horse, Color.brown);
-
-	this.body.SetEyeColor(Color.green);
-
-	// Set hp and mana to full
-	this.SetLevelBonus();
-	this.RestFull();
-}
-Equine.prototype = new Entity();
-Equine.prototype.constructor = Equine;
-
-Equine.prototype.DropTable = function() {
-	var drops = [];
-	if(Math.random() < 0.05) drops.push({ it: AlchemyItems.Equinium });
-	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HorseHair });
-	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HorseShoe });
-	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HorseCum });
-
-	if(Math.random() < 0.3)  drops.push({ it: IngredientItems.FreshGrass });
-	if(Math.random() < 0.2)  drops.push({ it: IngredientItems.Foxglove });
-	if(Math.random() < 0.2)  drops.push({ it: IngredientItems.SpringWater });
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.FlowerPetal });
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.Feather });
-
-	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Bovia });
-	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Ovis });
-	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Virilium });
-	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Gestarium });
-	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.GestariumPlus });
-
-	return drops;
 }
 
-Equine.prototype.Act = function(encounter, activeChar) {
-	// TODO: Very TEMP
-	Text.Add(this.name + " acts! Rawr!");
-	Text.NL();
-	Text.Flush();
-
-	// Pick a random target
-	var t = this.GetSingleTarget(encounter, activeChar);
-
-	var parseVars = {
-		name   : this.name,
-		hisher : this.hisher(),
-		tName  : t.name
-	};
-
-	var choice = Math.random();
-	if(choice < 0.6)
-		Abilities.Attack.Use(encounter, this, t);
-	else if(choice < 0.8 && Abilities.Physical.Bash.enabledCondition(encounter, this))
-		Abilities.Physical.Bash.Use(encounter, this, t);
-	else
-		Abilities.Seduction.Tease.Use(encounter, this, t);
-}
-
-EquineScenes.StallionImpregnate = function(mother, father, slot) {
+EquineScenes.StallionImpregnate = function(mother : Entity, father : Equine, slot : number) {
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother : mother,
@@ -160,19 +166,19 @@ EquineScenes.StallionImpregnate = function(mother, father, slot) {
 	});
 }
 
-EquineScenes.PairEnc = function(levelbonus) {
+EquineScenes.PairEnc = function(levelbonus : number) {
 	var enemy    = new Party();
 	var stallion = new Equine(Gender.male, levelbonus);
 	var mare     = new Equine(Gender.female, levelbonus);
 	enemy.AddMember(stallion);
 	enemy.AddMember(mare);
-	var enc      = new Encounter(enemy);
+	var enc : any = new Encounter(enemy);
 	enc.stallion = stallion;
 	enc.mare     = mare;
 
 	enc.onEncounter = function() {
-		var parse = {
-			party         : !party.Alone() ? " and your party" : "",
+		var parse : any = {
+			party         : !GAME().party.Alone() ? " and your party" : "",
 			breastCup : enc.mare.FirstBreastRow().ShortCup()
 		};
 
@@ -212,7 +218,7 @@ EquineScenes.LossPrompt = function() {
 	// this = encounter
 	var enc = this;
 
-	var parse = {
+	var parse : any = {
 		party         : !party.Alone() ? " and your party" : "",
 		hisher1       : enc.stallion.hisher(),
 		heshe1        : enc.stallion.heshe(),
@@ -342,10 +348,10 @@ EquineScenes.LossPrompt = function() {
 	Encounter.prototype.onLoss.call(enc);
 }
 
-EquineScenes.FuckFemale = function(enc) {
+EquineScenes.FuckFemale = function(enc : any) {
 	let player = GAME().player;
 	let party = GAME().party;
-	var parse = {		
+	var parse : any = {		
 		mobVag : function() { return enc.mare.FirstVag().Short(); }
 	};
 	
@@ -451,9 +457,9 @@ EquineScenes.FuckFemale = function(enc) {
 	});
 }
 
-EquineScenes.GetFucked = function(enc) {
+EquineScenes.GetFucked = function(enc : any) {
 	let player = GAME().player;
-	var parse = {		
+	var parse : any = {		
 		ifArmor    : player.Armor() ? "strips you down to full nudity" : "runs them down your naked body"
 	};
 	
@@ -503,7 +509,7 @@ EquineScenes.GetFucked = function(enc) {
 		Text.Add("Failing miserably at holding up to his methods, you cry out as your [vag] clamps against his tongue, shooting girl-cum onto his muzzle. You swallow his tip and a few inches beyond that, furiously jerking the rest of his horse cock. Feeling the release come through the large rod, cum floods your mouth. At first, you try to gulp down his slightly sweet release, but it comes far too quick for that. You release his dick from your lips and the shaft shoots several ropes onto your [face] and chest. The immediate aftermath of your climax only makes you lustfully open your mouth for the falling seed.", parse);
 		Text.NL();
 		Text.Add("After a minute or so, you and the equine lazily get to your feet, clean up, dress, and head your different paths. When you pay more attention, you notice that the mare seems to be gone.", parse);
-		if(!party.Alone())
+		if(!GAME().party.Alone())
 			Text.Add(" Your party eventually meets you on the path, and when you ask them where they were, they seem unwilling to tell you. You suspect the mare had something to do with that!", parse);
 		Text.Flush();
 
@@ -514,9 +520,9 @@ EquineScenes.GetFucked = function(enc) {
 }
 
 // SCENE FOR MALES/HERMS
-EquineScenes.Threesome1 = function(enc) {
+EquineScenes.Threesome1 = function(enc : any) {
 	let player = GAME().player;
-	var parse = {		
+	var parse : any = {		
 		mobVag : function() { return enc.mare.FirstVag().Short(); },		
 		ifBalls  : function() { return player.HasBalls() ? "r balls" : ""; }
 	};
@@ -577,7 +583,7 @@ EquineScenes.Threesome1 = function(enc) {
 		Text.Add("Eventually, the mare pulls away from his rod while he's still shooting. She has neglected to swallow any of it, and as the tip leaves her lips, the flood of virile cum comes down her chest and begins dripping on you. The semi-erect horse cock covered in semen rises something in your stomach and you can't help but grab the base of his dick, pushing your head up and swallowing him with one lusty gulp. Your tongue works quickly, cleaning him of his release and sending the salty treat down your gullet. The mare follows your lead and you take turns cleaning him off, both of you lovingly working for the sweet reward.", parse);
 		Text.NL();
 		Text.Add("The scene calms down slowly, and you recollect your bearings. The two equines go their way", parse);
-		if(!party.Alone())
+		if(!GAME().party.Alone())
 			Text.Add(", and you go back to your party. They were knocked out from the fight, unfortunately, so they have no idea what they missed.", parse);
 		else
 			Text.Add(", leaving you alone again.", parse);
@@ -589,9 +595,9 @@ EquineScenes.Threesome1 = function(enc) {
 	});
 }
 
-EquineScenes.Threesome2 = function(enc) {
+EquineScenes.Threesome2 = function(enc : any) {
 	let player = GAME().player;
-	var parse = {		
+	var parse : any = {		
 		mobVag : function() { return enc.mare.FirstVag().Short(); }
 	};
 	
@@ -627,7 +633,7 @@ EquineScenes.Threesome2 = function(enc) {
 	Text.Add("The stallion suddenly pulls out of the mare and for a moment you are unsure of what he's doing. Before you think of pushing the mare out of the way, you feel a cool shot hit your sore slit and several more following up. The stallion softly stroked himself to orgasm over both of your pussies, covering both in his potent seed. You and the mare have the same idea, and begin stuffing the semen into each other's cunts.", parse);
 	Text.NL();
 	Text.Add("Despite having quite a fun time, you and the equines part ways.", parse);
-	if(!party.Alone())
+	if(!GAME().party.Alone())
 		Text.Add(" Your party awakens, and questions the strange smell on your body. You ignore their probes, and head out.", parse);
 	Text.Flush();
 
@@ -645,7 +651,7 @@ EquineScenes.WinPrompt = function() {
 	var enc  = this;
 	SetGameState(GameState.Event, Gui);
 
-	var parse = {
+	var parse : any = {
 
 	};
 
@@ -706,7 +712,7 @@ EquineScenes.WinPrompt = function() {
 }
 
 //TODO
-EquineScenes.WinFuckHim = function(enc) {
+EquineScenes.WinFuckHim = function(enc : any) {
 	let player = GAME().player;
 	let party = GAME().party;
 	var mare     = enc.mare;
@@ -721,7 +727,7 @@ EquineScenes.WinFuckHim = function(enc) {
 		}
 	}
 
-	var parse = {		
+	var parse : any = {		
 		cocks2 : function() { return player.MultiCockDesc(allCocks); }
 	};
 
@@ -1142,13 +1148,13 @@ EquineScenes.WinFuckHim = function(enc) {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-EquineScenes.WinFuckHer = function(enc) {
+EquineScenes.WinFuckHer = function(enc : any) {
 	let player = GAME().player;
 	let party = GAME().party;
 	var mare     = enc.mare;
 	var stallion = enc.stallion;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 
@@ -1284,12 +1290,12 @@ EquineScenes.WinFuckHer = function(enc) {
 	});
 }
 
-EquineScenes.WinRideHimVag = function(enc) {
+EquineScenes.WinRideHimVag = function(enc : any) {
 	let player = GAME().player;
 	var mare     = enc.mare;
 	var stallion = enc.stallion;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -1441,4 +1447,4 @@ EquineScenes.WinRideHimVag = function(enc) {
 	});
 }
 
-export { Equine, EquineScenes };
+export { EquineScenes };

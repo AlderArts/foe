@@ -94,8 +94,6 @@ import './js/event/outlaws/cavalcade.js';
 import './js/event/raven.js';
 
 // Enemies
-import './js/enemy/equine.js';
-import './js/enemy/lizard.js';
 import './js/enemy/mothgirl.js';
 import './js/enemy/naga.js';
 
