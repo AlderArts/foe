@@ -12,6 +12,7 @@ import { Text } from '../text';
 import { Gui } from '../gui';
 import { GAME } from '../GAME';
 import { EncounterTable } from '../encountertable';
+import { DryadGladeFlags } from '../loc/glade-flags';
 
 let AscheScenes = {
 	Tasks : TasksScenes,
@@ -763,7 +764,7 @@ AscheScenes.FortuneTellingPrompt = function() {
 				Text.Add("Can she give you an idea of how many more?", parse);
 				Text.NL();
 				Text.Add("<i>“All customer can be having. More the merrier, as saying goes; customer will be requiring everything that [heshe] can be bringing to bear.”</i>", parse);
-			}, 1.0, function() { return glade.flags["Visit"] >= DryadGlade.Visit.DefeatedOrchid; });
+			}, 1.0, function() { return glade.flags["Visit"] >= DryadGladeFlags.Visit.DefeatedOrchid; });
 			scenes.AddEnc(function() {
 				Text.Add("<i>“Asche recognizes this place where customer is standing, is minotaur village in highlands. Barricades, they are being there, but are likely to be of not much use against foe customer faces, a fearsome man-beast. Behind each, two evenly matched forces.”</i> The jackaless scratches her muzzle. <i>“Asche will say that she is finding customer’s fate disturbing. Is not liking to think that old tribe may be caught up in strife, too.”</i>", parse);
 			}, 1.0, function() { return true; });

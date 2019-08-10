@@ -1,5 +1,4 @@
 
-import { Layla } from './layla';
 import { Gender } from '../../body/gender';
 import { WorldTime, GAME, TimeStep, WORLD } from '../../GAME';
 import { Party } from '../../party';
@@ -11,7 +10,6 @@ import { MoveToLocation } from '../../GAME';
 import { Sex } from '../../entity-sex';
 import { LaylaFlags } from './layla-flags';
 import { EncounterTable } from '../../encountertable';
-import { DryadGlade } from '../../loc/glade';
 import { PregnancyHandler } from '../../pregnancy';
 import { Cock } from '../../body/cock';
 import { Race } from '../../body/race';
@@ -19,6 +17,7 @@ import { Entity } from '../../entity';
 import { Time } from '../../time';
 import { GwendyScenes } from './gwendy-scenes';
 import { PartyInteraction } from '../../exploration';
+import { DryadGladeFlags } from '../../loc/glade-flags';
 
 let LaylaScenes : any = {};
 
@@ -509,7 +508,7 @@ LaylaScenes.PartyRegular = function(switchSpot : boolean) {
 LaylaScenes.FarmMeetingTrigger = function(approach : boolean) {
 	let glade = GAME().glade;
 	let layla = GAME().layla;
-	if(glade.flags["Visit"] < DryadGlade.Visit.DefeatedOrchid) return false; //TODO: change to after portals open?
+	if(glade.flags["Visit"] < DryadGladeFlags.Visit.DefeatedOrchid) return false; //TODO: change to after portals open?
 	if(layla.flags["Met"] == LaylaFlags.Met.NotMet) {
 		if(approach) {
 			if(WorldTime().hour >= 8 && WorldTime().hour < 18) {

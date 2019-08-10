@@ -20,11 +20,11 @@ import { MomoScenes } from '../event/momo';
 import { EquineScenes } from '../enemy/equine';
 import { PoetScenes } from '../event/poet';
 import { RoamingScenes } from '../event/roaming';
-import { DryadGlade } from './glade';
 import { PortalOpeningScenes } from '../event/portalopening';
 import { MirandaScenes } from '../event/miranda-scenes';
 import { OutlawsScenes } from '../event/outlaws/outlaws';
 import { FarmScenesIntro } from './farm-scenes';
+import { DryadGladeFlags } from './glade-flags';
 
 // Create namespace
 let PlainsLoc = {
@@ -302,7 +302,7 @@ PlainsLoc.Portals.description = function() {
 	else {
 		Text.Add("You are standing at its apex, studying the strange stone obelisks standing in a large circle. Each one taller than two men in height, the black slates are covered in intricate magical runes, a few of them glowing faintly. There is an eerie feeling in the air around them.", parse);
 		Text.NL();
-		if(GAME().glade.flags["Visit"] >= DryadGlade.Visit.DefeatedOrchid) {
+		if(GAME().glade.flags["Visit"] >= DryadGladeFlags.Visit.DefeatedOrchid) {
 			Text.Add("Not far from the strange stone pillars you can see Jeanne standing near a small tent, working on some form of magical device powered by a set of crystals.", parse);
 			if(!WorldTime().IsDay())
 				Text.Add(" She’s set up some torches to light her way, and that together with the glowing runes gives you just enough illumination to see.", parse);
@@ -321,7 +321,7 @@ PlainsLoc.Portals.links.push(new Link(
 
 PlainsLoc.Portals.events.push(new Link(
 	"Jeanne", function() {
-		return !GlobalScenes.PortalsOpen() && GAME().glade.flags["Visit"] >= DryadGlade.Visit.DefeatedOrchid;
+		return !GlobalScenes.PortalsOpen() && GAME().glade.flags["Visit"] >= DryadGladeFlags.Visit.DefeatedOrchid;
 	}, true,
 	null,
 	function() {

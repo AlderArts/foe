@@ -86,6 +86,7 @@ import { KiakaiFlags } from './event/kiakai-flags';
 import { OutlawsFlags } from './event/outlaws/outlaws-flags';
 import { TwinsFlags } from './event/royals/twins-flags';
 import { RigardFlags } from './loc/rigard/rigard-flags';
+import { DryadGladeFlags } from './loc/glade-flags';
 
 let InitCache = function() {
 	// Reset exploration
@@ -449,7 +450,7 @@ let CacheToGame = function() {
 			GAME().party.Inv().AddItem(Items.Weapons.MageStaff);
 			GAME().party.Inv().AddItem(Items.Armor.MageRobes);
 		}
-		if(GAME().glade.flags["Visit"] >= DryadGlade.Visit.DefeatedOrchid) {
+		if(GAME().glade.flags["Visit"] >= DryadGladeFlags.Visit.DefeatedOrchid) {
 			GAME().party.Inv().AddItem(Items.Weapons.VineWhip);
 			GAME().party.Inv().AddItem(Items.Armor.VineBra);
 			GAME().party.Inv().AddItem(Items.Armor.VinePanties);

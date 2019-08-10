@@ -8,7 +8,6 @@ import { TerryFlags } from './event/terry-flags';
 import { isFunction } from './utility';
 import { Text } from './text';
 import { Gui } from './gui';
-import { DryadGlade } from './loc/glade';
 import { GlobalScenes } from './event/global';
 import { GAME } from './GAME';
 import { TwinsFlags } from './event/royals/twins-flags';
@@ -18,6 +17,7 @@ import { AscheScenes } from './event/asche';
 import { Lei } from './event/royals/lei';
 import { LeiScenes } from './event/royals/lei-scenes';
 import { RigardFlags } from './loc/rigard/rigard-flags';
+import { DryadGladeFlags } from './loc/glade-flags';
 
 export class Quest {
 	name : any;
@@ -201,7 +201,7 @@ Quests.quests.push(new Quest({
 				var status = Quests.Type.NotStarted;
 				if(GAME().jeanne.flags["Met"] != 0)
 					status |= Quests.Type.Visible;
-				if(GAME().glade.flags["Visit"] >= DryadGlade.Visit.DefeatedOrchid)
+				if(GAME().glade.flags["Visit"] >= DryadGladeFlags.Visit.DefeatedOrchid)
 					status |= Quests.Type.Completed;
 				return status;
 			}
@@ -212,7 +212,7 @@ Quests.quests.push(new Quest({
 			},
 			active: function() {
 				var status = Quests.Type.NotStarted;
-				if(GAME().glade.flags["Visit"] >= DryadGlade.Visit.DefeatedOrchid)
+				if(GAME().glade.flags["Visit"] >= DryadGladeFlags.Visit.DefeatedOrchid)
 					status |= Quests.Type.Visible;
 				//TODO
 				return status;

@@ -1,6 +1,6 @@
 import { GameCache, GAME } from "../GAME";
-import { DryadGlade } from "../loc/glade";
 import { OutlawsFlags } from "./outlaws/outlaws-flags";
+import { DryadGladeFlags } from "../loc/glade-flags";
 
 let GlobalScenes : any = {};
 
@@ -17,7 +17,7 @@ GlobalScenes.MetJeanne = function() {
 }
 
 GlobalScenes.DefeatedOrchid = function() {
-	return GAME().glade.flags["Visit"] >= DryadGlade.Visit.DefeatedOrchid;
+	return GAME().glade.flags["Visit"] >= DryadGladeFlags.Visit.DefeatedOrchid;
 }
 
 GlobalScenes.PortalsOpen = function() {

@@ -3,6 +3,7 @@ import { WorldTime } from '../../GAME';
 import { Gui } from '../../gui';
 import { Text } from '../../text';
 import { EncounterTable } from '../../encountertable';
+import { DryadGladeFlags } from '../../loc/glade-flags';
 
 let DateScenes = {};
 
@@ -40,7 +41,7 @@ DateScenes.Prompt = function() {
 		
 		//[Glade][Spring][Rigard][Up to her][Back]
 		var options = new Array();
-		if(glade.flags["Visit"] >= DryadGlade.Visit.DefeatedOrchid) {
+		if(glade.flags["Visit"] >= DryadGladeFlags.Visit.DefeatedOrchid) {
 			options.push({ nameStr : "Glade",
 				tooltip : "Why not take her out to the dryads’ glade?",
 				func : function() {
