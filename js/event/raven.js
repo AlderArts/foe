@@ -102,7 +102,7 @@ RavenMother.prototype.ToStorage = function() {
 
 RavenMotherScenes.TheHunt = function(func) {
 	let ravenmother = GAME().ravenmother;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var parse = {};
 	
 	RavenMotherScenes.theHuntWakeup = func;

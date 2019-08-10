@@ -8,6 +8,7 @@ import { Race } from "../body/race";
 import { ItemSubtype } from "../item";
 import { GAME, TimeStep } from "../GAME";
 import { ToysItems } from "../items/toys";
+import { Party } from '../party';
 
 /*
  * Masturbation scenes for the PC
@@ -19,7 +20,7 @@ let MasturbationScenes : any = {};
 
 MasturbationScenes.Entry = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var parse : any = {
 		
 	};
@@ -976,7 +977,7 @@ MasturbationScenes.VagTailfuck = function(parse : any) {
 
 MasturbationScenes.Breasts = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var parse : any = {
 		
 	};

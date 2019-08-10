@@ -56,7 +56,7 @@ KrawitzScenes.Flags = {
 KrawitzScenes.SetupStats = function() {
 	let rigard = GAME().rigard;
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 
 	KrawitzScenes.stat = {};
 	
@@ -211,7 +211,7 @@ KrawitzLoc.grounds.links.push(new Link(
 	null,
 	function() {
 		let player = GAME().player;
-		let party = GAME().party;
+		let party : Party = GAME().party;
 
 		var parse = {
 			
@@ -478,7 +478,7 @@ KrawitzLoc.Mansion.hall.links.push(new Link(
 	"Kitchen", true, true,
 	null,
 	function() {
-		let party = GAME().party;
+		let party : Party = GAME().party;
 
 		party.location = KrawitzLoc.Mansion.kitchen;
 		Text.Clear();
@@ -550,7 +550,7 @@ KrawitzLoc.Mansion.hall.links.push(new Link(
 	function() {
 		let rigard = GAME().rigard;
 		let player = GAME().player;
-		let party = GAME().party;
+		let party : Party = GAME().party;
 
 		party.location = KrawitzLoc.Mansion.study;
 		var parse = {
@@ -1073,7 +1073,7 @@ KrawitzScenes.WorkWork = function() {
 
 KrawitzScenes.EnteringTheWork = function() {
 	let rigard = GAME().rigard;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 
 	var parse = {
 		name : function() { return party.Get(1).name; }
@@ -1160,7 +1160,7 @@ KrawitzScenes.ApproachGates = function() {
 
 KrawitzScenes.SneakingIn = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	
 	var parse = {
 		name : function() { return party.Get(1).name; }
@@ -1710,7 +1710,7 @@ KrawitzScenes.StealingClothes = function() {
 
 KrawitzScenes.Bathhouse = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 
 	var parse = {
 		cock2     	  : function() { return player.AllCocks()[1].Short(); },
@@ -2077,7 +2077,7 @@ KrawitzScenes.OrgyEntrypoint = function() {
 KrawitzScenes.Aftermath = function() {
 	let rigard = GAME().rigard;
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let twins = GAME().twins;
 	let lei = GAME().lei;
 	

@@ -96,7 +96,7 @@ export class Ability {
 		// TODO: Buttons (use portraits for target?)
 
 		var target : any[] = [];
-		let party = GAME().party;
+		let party : Party = GAME().party;
 
 		switch(ability.targetMode) {
 			case TargetMode.All:

@@ -191,7 +191,7 @@ ShopStreetLoc.street.events.push(new Link(
 	function() {
 		let cveta = GAME().cveta;
 		let player = GAME().player;
-		let party = GAME().party;
+		let party : Party = GAME().party;
 		var parse = {
 			playername : player.name,
 			sirmadam : player.mfFem("sir", "madam")
@@ -301,7 +301,7 @@ ShopStreetLoc.street.events.push(new Link(
 	function() {
 		let room69 = GAME().room69;
 		let player = GAME().player;
-		let party = GAME().party;
+		let party : Party = GAME().party;
 		Text.Clear();
 		if(room69.flags["Hinges"] == Room69.HingesFlags.TalkedToGoldsmith) {
 			Text.Add("You ask around and quickly find your way to Martello’s smithy. It’s plain, especially after the goldsmith’s establishment, but seems well-kept and prosperous enough.");
@@ -362,7 +362,7 @@ ShopStreetLoc.street.events.push(new Link(
 
 ShopStreetScenes.Speculate = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let rigard = GAME().rigard;
 	
 	var stalls = ["stall", "booth", "stand"];

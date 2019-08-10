@@ -6,6 +6,7 @@ import { Gui } from '../../gui';
 import { MoveToLocation} from '../../GAME';
 import { MirandaFlags } from '../../event/miranda-flags';
 import { RigardFlags } from './rigard-flags';
+import { ZinaFlags } from '../../event/zina';
 
 let TavernLoc = {
 	common   : new Event("Maidens' Bane")
@@ -55,7 +56,7 @@ TavernLoc.common.links.push(new Link(
 //TODO
 TavernLoc.common.DrunkHandler = function() {
 	let rigard = GAME().rigard;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let player = GAME().player;
 
 	var parse = {
@@ -300,7 +301,7 @@ BarnabyScenes.Approach = function() {
 
 BarnabyScenes.Prompt = function(talkative) {
 	let rigard = GAME().rigard;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let player = GAME().player;
 
 	var coin1 = 2;
@@ -747,7 +748,7 @@ BarnabyScenes.ChatPrompt = function() {
 				Text.NL();
 				Text.Add("<i>“Yeah, she’s a total lightweight, but at least she sobers up quick. Gotta say tho, she <b>knows</b> her stuff when it comes to blowjobs.”</i>", parse);
 				Text.NL();
-				if(zina.flags["Met"] & Zina.Met.BJ) {
+				if(zina.flags["Met"] & ZinaFlags.Met.BJ) {
 					Text.Add("You can’t help the wistful smile that spreads across your lips as you recall your little rendezvous with Zina in the back rooms, chuckling as you confess that she most certainly does. Sounds like he has some personal experience with that, hmm?", parse);
 					Text.NL();
 					Text.Add("<i>“Yup, she gives me one as an apology every time she screws up. Main reason I don’t mind putting up with her. Well, that and her coin.”</i>", parse);
@@ -756,7 +757,7 @@ BarnabyScenes.ChatPrompt = function() {
 					Text.NL();
 					Text.Add("<i>“No, really. I’d rather just have her coin and none of her trouble.”</i>", parse);
 				}
-				else if(zina.flags["Met"] & Zina.Met.Cunn) {
+				else if(zina.flags["Met"] & ZinaFlags.Met.Cunn) {
 					Text.Add("Chuckling, you note that she knows her way around a pussy pretty well, too. Girl like her should make friends pretty easily here.", parse);
 					Text.NL();
 					Text.Add("<i>“She could if she were interested in doing that. I’ve seen my share of guys try to ask her for a blowjob only to wind up getting their asses kicked when they wouldn’t take no for an answer.”</i>", parse);

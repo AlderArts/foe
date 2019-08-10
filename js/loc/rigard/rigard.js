@@ -257,7 +257,7 @@ Rigard.prototype.BlownBarnaby = function() {
 
 RigardScenes.CityHistory = function() {
 	let rigard = GAME().rigard;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 
 	Text.Clear();
 	var parse = {};
@@ -354,7 +354,7 @@ RigardScenes.ChatterOutro = function(parse) {
 
 RigardScenes.Chatter = function(enteringArea) {
 	let rigard = GAME().rigard;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 
 	Text.Clear();
 	var parse = {};
@@ -674,7 +674,7 @@ RigardScenes.Chatter = function(enteringArea) {
 //New Del stuff
 RigardScenes.Chatter2 = function(enteringArea) {
 	let rigard = GAME().rigard;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let player = GAME().player;
 	let miranda = GAME().miranda;
 
@@ -1477,7 +1477,7 @@ RigardScenes.Chatter2 = function(enteringArea) {
 
 RigardScenes.Lockdown = function() {
 	let rigard = GAME().rigard;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let player = GAME().player;
 	let miranda = GAME().miranda;
 

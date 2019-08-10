@@ -6,10 +6,11 @@ import { GAME, TimeStep, NAV } from "../GAME";
 import { KiakaiFlags } from "./kiakai-flags";
 import { Color } from "../body/color";
 import { Sex } from "../entity-sex";
-import { LowerBodyType } from "../entity-desc";
+import { LowerBodyType } from '../body/body';
 import { ToysItems } from "../items/toys";
 import { Orifice } from "../body/orifice";
 import { IngredientItems } from "../items/ingredients";
+import { Party } from "../party";
 
 /*
  * 
@@ -2690,7 +2691,7 @@ KiakaiSex.Sex = function() {
 
 KiakaiSex.SexPrompt = function(attitude : number) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let kiakai = GAME().kiakai;
 
 	// TODO Toys
@@ -3392,7 +3393,7 @@ KiakaiSex.SexPrompt = function(attitude : number) {
 
 KiakaiSex.AnalCatchPrep = function(choice : any, assert : boolean) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let kiakai = GAME().kiakai;
 
 	Text.Flush();

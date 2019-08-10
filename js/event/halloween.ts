@@ -44,7 +44,7 @@ export class Halloween {
 
 	constructor() {
 		let player = GAME().player;
-		let party = GAME().party;
+		let party : Party = GAME().party;
 
 		// Save player/party
 		this.player = player.ToStorage();
@@ -104,7 +104,7 @@ export class Halloween {
 
 	Restore() {
 		let player = GAME().player;
-		let party = GAME().party;
+		let party : Party = GAME().party;
 		// Restore player/party
 		_.remove(EntityStorage(), function(e) {
 			return e == player;
@@ -193,7 +193,7 @@ HalloweenScenes.PieIntro = function() {
 
 HalloweenScenes.PumpkinPie = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let momo = GAME().momo;
 	let cale = GAME().cale;
 	let rosalin = GAME().rosalin;
@@ -411,7 +411,7 @@ HalloweenScenes.PumpkinPie = function() {
 
 HalloweenScenes.EnterDream = function(first : boolean) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 
 	var parse : any = {
 		skin : player.SkinDesc()
@@ -500,7 +500,7 @@ Halloween.Loc.Camp.events.push(new Link(
 	}, true, true,
 	null,
 	function() {
-		let party = GAME().party;
+		let party : Party = GAME().party;
 		var parse = {
 			
 		};
@@ -836,7 +836,7 @@ HalloweenScenes.Ronnie = function() {
 
 HalloweenScenes.RonnieFirst = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let roa = GAME().roa;
 
 	var parse : any = {
@@ -1189,7 +1189,7 @@ HalloweenScenes.RonnieFirst = function() {
 
 HalloweenScenes.WerewolfTF = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 
 	var parse = {
 		
@@ -1608,7 +1608,7 @@ Halloween.Loc.Graveyard.onEntry = function() {
 
 HalloweenScenes.Kiai = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let kiakai = GAME().kiakai;
 	var parse : any = {
 		name : kiakai.name
@@ -1789,7 +1789,7 @@ HalloweenScenes.Kiai = function() {
 }
 
 HalloweenScenes.KiaiRun = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var parse : any = {
 		
 	};
@@ -3433,7 +3433,7 @@ HalloweenScenes.NadirMaBadend = function() {
 
 HalloweenScenes.HarthonFirst = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let terry = GAME().terry;
 
 	var werewolf = HalloweenScenes.HW.Werewolf();
@@ -3595,7 +3595,7 @@ HalloweenScenes.HarthonFirst = function() {
 
 HalloweenScenes.HarthonDefeatedPrompt = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 
 	var werewolf = HalloweenScenes.HW.Werewolf();
 	var femHarthon = HalloweenScenes.HW.harthon & HalloweenFlags.Harthon.Feminized;
@@ -3778,7 +3778,7 @@ HalloweenScenes.HarthonDefeatedPrompt = function() {
 
 HalloweenScenes.HarthonPitchAnal = function(parse : any) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 
 	var p1cock = player.BiggestCock();
 	var femHarthon = HalloweenScenes.HW.harthon & HalloweenFlags.Harthon.Feminized;
@@ -4489,7 +4489,7 @@ HalloweenScenes.HarthonThrall = function() {
 //TODO
 HalloweenScenes.HarthonThrallPrompt = function(parse : any) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 
 	var werewolf = HalloweenScenes.HW.Werewolf();
 	var femHarthon = HalloweenScenes.HW.harthon & HalloweenFlags.Harthon.Feminized;
@@ -5502,7 +5502,7 @@ HalloweenScenes.LaggothQnA = function(opts : any) {
 
 HalloweenScenes.LaggothDistract = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 
 	var parse : any = {
 		
@@ -6666,7 +6666,7 @@ HalloweenScenes.JennaBroomfuck = function() {
 
 HalloweenScenes.Patches = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let patchwork = GAME().patchwork;
 
 	var knowsPatches = patchwork.Met();
@@ -6878,7 +6878,7 @@ HalloweenScenes.Patches = function() {
 }
 
 HalloweenScenes.WakingUp = function(badend : boolean) {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var parse = {
 		
 	};

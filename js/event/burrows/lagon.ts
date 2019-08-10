@@ -21,6 +21,7 @@ import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { WORLD, GAME } from '../../GAME';
 import { AlchemyItems } from '../../items/alchemy';
+import { Party } from '../../party';
 
 export class Lagon extends Entity {
 	constructor(storage? : any) {
@@ -80,7 +81,7 @@ export class Lagon extends Entity {
 
 	// Schedule TODO
 	IsAtLocation(location : any) {
-		let party = GAME().party;
+		let party : Party = GAME().party;
 		let burrows = GAME().burrows;
 		let world = WORLD();
 		//if(burrows.LagonChained()) //Slave
@@ -326,7 +327,7 @@ export class LagonBrute extends BossEntity {
 
 	//TODO
 	Act(encounter : any, activeChar : any) {
-		let party = GAME().party;
+		let party : Party = GAME().party;
 		// Pick a random target
 		var targets = this.GetPartyTarget(encounter, activeChar);
 		var t = this.GetSingleTarget(encounter, activeChar);

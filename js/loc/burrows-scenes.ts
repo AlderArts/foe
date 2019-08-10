@@ -12,6 +12,7 @@ import { Season } from '../time';
 import { Link } from '../event';
 import { LagonScenes, InitLagon } from '../event/burrows/lagon-scenes';
 import { LagonFlags } from '../event/burrows/lagon-flags';
+import { Party } from '../party';
 
 export function InitBurrows() {
     InitLagon(OpheliaScenes);
@@ -35,7 +36,7 @@ let BurrowsScenes : any = {
 };
 
 BurrowsScenes.FirstApproach = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var parse : any = {};
 		
 	if(party.Two())
@@ -112,7 +113,7 @@ BurrowsScenes.FirstApproach = function() {
 
 BurrowsScenes.Arrival = function(alpha : any) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let burrows = GAME().burrows;
 	var parse : any = {
 		skinDesc   : function() { return player.SkinDesc(); },
@@ -213,7 +214,7 @@ BurrowsScenes.ArrivalOphelia = function() {
 
 BurrowsScenes.ArrivalOpheliaTalk = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
     let rosalin = GAME().rosalin;
     
 	var parse : any = {
@@ -423,7 +424,7 @@ BurrowsScenes.ArrivalLagon = function() {
 }
 
 BurrowsScenes.ArrivalLagonTalk = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let lagon = GAME().lagon;
 	var parse : any = {
 		

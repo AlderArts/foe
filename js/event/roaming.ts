@@ -15,7 +15,7 @@ import { AccItems } from "../items/accessories";
 let RoamingScenes : any = {};
 
 RoamingScenes.FlowerPetal = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var parse = {
 		
 	};
@@ -33,7 +33,7 @@ RoamingScenes.FlowerPetal = function() {
 };
 
 RoamingScenes.FindSomeCoins = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let world = WORLD();
 
 	var coin = Math.floor(5 + Math.random() * 20);
@@ -69,7 +69,7 @@ RoamingScenes.FindSomeCoins = function() {
 
 RoamingScenes.KingdomPatrol = function(entering : boolean) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let rigard = GAME().rigard;
 	let terry = GAME().terry;
 	let kiakai = GAME().kiakai;
@@ -347,7 +347,7 @@ RoamingScenes.BanditsGen = function(capt : Entity, levelbonus : number) {
 
 RoamingScenes.Bandits = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let rigard = GAME().rigard;
 	let bandits = rigard.bandits;
 
@@ -536,7 +536,7 @@ RoamingScenes.BanditsOnEncounter = function() {
 }
 
 RoamingScenes.BanditsLoss = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	
 	SetGameState(GameState.Event, Gui);
 	
@@ -613,7 +613,7 @@ RoamingScenes.BanditsLoss = function() {
 }
 
 RoamingScenes.BanditsWin = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	
 	SetGameState(GameState.Event, Gui);
 	

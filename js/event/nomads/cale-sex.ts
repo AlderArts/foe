@@ -7,7 +7,7 @@ import { CaleFlags } from './cale-flags';
 import { GAME, TimeStep } from '../../GAME';
 import { Race, RaceScore } from '../../body/race';
 import { Entity } from '../../entity';
-import { LowerBodyType } from '../../entity-desc';
+import { LowerBodyType } from '../../body/body';
 import { Cock } from '../../body/cock';
 
 /* CALE SEX SCENES */

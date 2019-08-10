@@ -187,7 +187,7 @@ MariaScenes.CampPrompt = function() {
 }
 
 MariaScenes.RangerTraining = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let maria = GAME().maria;
 
 	var parse : any = {
@@ -623,7 +623,7 @@ MariaScenes.TalkPrompt = function() {
 
 MariaScenes.ForestMeeting = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let maria = GAME().maria;
 
 	Text.Clear();
@@ -691,7 +691,7 @@ MariaScenes.ForestMeeting = function() {
 
 MariaScenes.ForestConfront = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let maria = GAME().maria;
 
 	var parse : any = {
@@ -998,7 +998,7 @@ MariaScenes.ForestFollow = function() {
 
 MariaScenes.ForestCamp = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let maria = GAME().maria;
 
 	let parse : any = {
@@ -1103,7 +1103,7 @@ MariaScenes.ForestCamp = function() {
 }
 
 MariaScenes.ForestEnd = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let outlaws = GAME().outlaws;
 	let maria = GAME().maria;
 

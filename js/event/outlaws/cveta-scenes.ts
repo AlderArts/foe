@@ -14,6 +14,7 @@ import { KrawitzScenes } from '../../loc/rigard/krawitz';
 import { Momo } from '../momo';
 import { Status } from '../../statuseffect';
 import { DreamsScenes } from '../dreams';
+import { Party } from '../../party';
 
 let CvetaScenes : any = {
 	Dates : DateScenes,
@@ -45,7 +46,7 @@ CvetaScenes.CampDesc = function() {
 
 CvetaScenes.ViolinApproach = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let cveta = GAME().cveta;
 	let terry = GAME().terry;
 
@@ -135,7 +136,7 @@ CvetaScenes.ViolinApproach = function() {
 
 CvetaScenes.ViolinPrompt = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let outlaws = GAME().outlaws;
 	let cveta = GAME().cveta;
 
@@ -320,7 +321,7 @@ CvetaScenes.Prompt = function() {
 
 CvetaScenes.Teach = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let outlaws = GAME().outlaws;
 	let cveta = GAME().cveta;
 
@@ -822,7 +823,7 @@ CvetaScenes.TalkPrompt = function() {
 
 CvetaScenes.HerselfPrompt = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let cveta = GAME().cveta;
 	let rigard = GAME().rigard;
 	let momo = GAME().momo;
@@ -1096,7 +1097,7 @@ CvetaScenes.HerselfPrompt = function() {
 
 CvetaScenes.MusicPrompt = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let cveta = GAME().cveta;
 	let kiakai = GAME().kiakai;
 
@@ -1725,7 +1726,7 @@ CvetaScenes.FirstMeetingCont = function() {
 
 CvetaScenes.Performance = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let outlaws = GAME().outlaws;
 	let cveta = GAME().cveta;
 	let kiakai = GAME().kiakai;

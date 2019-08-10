@@ -235,7 +235,7 @@ ZebraShamanScenes.LoneEnc = function(levelbonus? : number) {
 }
 
 ZebraShamanScenes.OnLoss = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var enc = this;
 	var zebra = enc.zebra;
 	SetGameState(GameState.Event, Gui);
@@ -271,7 +271,7 @@ ZebraShamanScenes.OnLoss = function() {
 
 ZebraShamanScenes.Encounter = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var enc = this;
 
 	var parse : any = {
@@ -312,7 +312,7 @@ ZebraShamanScenes.Encounter = function() {
 
 ZebraShamanScenes.OnWin = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var enc = this;
 	var zebra = enc.zebra;
 	SetGameState(GameState.Event, Gui);

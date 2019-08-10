@@ -25,7 +25,7 @@ import { BurrowsFlags } from '../loc/burrows-flags';
 import { GAME, TimeStep } from '../GAME';
 import { Sex } from '../entity-sex';
 import { SetGameOverButton } from '../main-gameover';
-import { LowerBodyType } from '../entity-desc';
+import { LowerBodyType } from '../body/body';
 import { EncounterTable } from '../encountertable';
 
 let GolScenes : any = {};
@@ -115,7 +115,7 @@ export class GolQueen extends BossEntity {
 	}
 
 	Act(encounter : any, activeChar : any) {
-		let party = GAME().party;
+		let party : Party = GAME().party;
 		// TODO: Very TEMP
 		Text.Add(this.name + " acts! Buzz!");
 		Text.NL();
@@ -150,7 +150,7 @@ export class GolQueen extends BossEntity {
 
 GolScenes.SearchForScepter = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var parse : any = {
 		
 	};

@@ -2,6 +2,7 @@ import { Text } from "../text";
 import { EncounterTable } from "../encountertable";
 import { Gui } from "../gui";
 import { TimeStep, GAME } from "../GAME";
+import { Party } from "../party";
 
 /*
  * Meditation scenes for the PC
@@ -11,7 +12,7 @@ let MeditationScenes : any = {};
 
 MeditationScenes.Entry = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let kiakai = GAME().kiakai;
 	let miranda = GAME().miranda;
 	var parse : any = {

@@ -18,7 +18,7 @@ ClothShopScenes.IsOpen = function() {
 }
 
 ClothShopLoc.onEntry = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let rigard = GAME().rigard;
 	var parse = {};
 
@@ -268,7 +268,7 @@ ClothShopLoc.events.push(new Link(
 ));
 
 ClothShopLoc.endDescription = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var parse = {};
 
 	if(WorldTime().hour >= 9 && WorldTime().hour < 12)

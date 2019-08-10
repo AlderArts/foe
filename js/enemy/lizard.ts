@@ -27,7 +27,7 @@ import { Abilities } from '../abilities';
 import { PregnancyHandler } from '../pregnancy';
 import { EncounterTable } from '../encountertable';
 import { Sex } from '../entity-sex';
-import { LowerBodyType } from '../entity-desc';
+import { LowerBodyType } from '../body/body';
 import { Capacity, Orifice } from '../body/orifice';
 
 let LizardsScenes : any = {};
@@ -168,7 +168,7 @@ LizardsScenes.Impregnate = function(mother : Entity, father : Lizard, slot? : nu
 
 LizardsScenes.GroupEnc = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 
 	var enemy    = new Party();
 	var male     = new Lizard(Gender.male);
@@ -318,7 +318,7 @@ LizardsScenes.WinPrompt = function() {
 
 LizardsScenes.WinMale = function(enc : any) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var parse : any = {
 		p1name        : function() { return party.members[1].NameDesc(); },
 		m1Name        : function() { return enc.male.NameDesc(); },
@@ -381,7 +381,7 @@ LizardsScenes.WinMale = function(enc : any) {
 
 LizardsScenes.WinFemale = function(enc : any) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var parse : any = {
 		p1name        : function() { return party.members[1].NameDesc(); },
 		m1Name        : function() { return enc.female.NameDesc(); },
@@ -454,7 +454,7 @@ LizardsScenes.WinFemale = function(enc : any) {
 
 LizardsScenes.WinFuckVag = function(enc : any) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var enemy = enc.female;
 	var third = enc.third;
 
@@ -558,7 +558,7 @@ LizardsScenes.WinFuckVag = function(enc : any) {
 
 LizardsScenes.WinTailpeg = function(enc : any) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var enemy = enc.female;
 
 	var parse : any = {
@@ -759,7 +759,7 @@ LizardsScenes.WinTailpeg = function(enc : any) {
 
 LizardsScenes.WinClaimAss = function(enc : any, enemy : Lizard) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var parse : any = {
 		p1name        : function() { return party.members[1].NameDesc(); },
 		m1Name        : function() { return enemy.NameDesc(); },
@@ -879,7 +879,7 @@ LizardsScenes.WinClaimAss = function(enc : any, enemy : Lizard) {
 
 LizardsScenes.WinBlowjob = function(enc : any, enemy : Lizard) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var parse : any = {
 		p1name        : function() { return party.members[1].NameDesc(); },
 		m1cocks : function() { return enemy.MultiCockDesc(); },
@@ -946,7 +946,7 @@ LizardsScenes.WinBlowjob = function(enc : any, enemy : Lizard) {
 
 LizardsScenes.WinPowerbottom = function(enc : any) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var enemy = enc.male;
 
 	var parse : any = {
@@ -1370,7 +1370,7 @@ LizardsScenes.WinPowerbottom = function(enc : any) {
 
 LizardsScenes.WinPowerbottomAssert = function(enc : any) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var enemy = enc.male;
 
 	var parse : any = {
@@ -1508,7 +1508,7 @@ LizardsScenes.WinPowerbottomAssert = function(enc : any) {
 
 LizardsScenes.WinPowerbottomDeny = function(enc : any) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var enemy = enc.male;
 
 	var parse : any = {
@@ -1614,7 +1614,7 @@ LizardsScenes.LossPrompt = function() {
 
 LizardsScenes.LossMale = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var enc = this;
 
 	var member1 = party.members[1];
@@ -1735,7 +1735,7 @@ LizardsScenes.LossMale = function() {
 
 LizardsScenes.LossMaleVagVariations = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	Text.Clear();
 
 	var enc = this;
@@ -1936,7 +1936,7 @@ LizardsScenes.LossMaleVagVariations = function() {
 
 LizardsScenes.LossMaleCockVariations = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var enc = this;
 
 	var member1 = party.members[1];
@@ -2209,7 +2209,7 @@ LizardsScenes.LossMaleCockVariations = function() {
 
 LizardsScenes.LossFemale = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	Text.Clear();
 
 	var enc = this;

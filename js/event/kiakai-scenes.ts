@@ -5,7 +5,7 @@ import { Text } from '../text';
 import { Gui } from '../gui';
 import { GAME, TimeStep } from '../GAME';
 import { KiakaiFlags } from './kiakai-flags';
-import { Uru } from './uru';
+import { Uru, UruFlags } from './uru';
 import { Burrows } from '../loc/burrows';
 import { BurrowsFlags } from '../loc/burrows-flags';
 
@@ -277,8 +277,8 @@ KiakaiScenes.TalkUru = function() {
 					func : function() {
 						let uru = GAME().uru;
 						Text.Add("<i>“Hah, that demon isn't so tough,”</i> you brag confidently, ", parse);
-						if(uru.flags["Intro"] & Uru.IntroFlags.FuckedUru ||
-						   uru.flags["Intro"] & Uru.IntroFlags.FuckedByUru)
+						if(uru.flags["Intro"] & UruFlags.Intro.FuckedUru ||
+						   uru.flags["Intro"] & UruFlags.Intro.FuckedByUru)
 							Text.Add("<i>“I could handle her just fine, and I left her begging for more!”</i>", parse);
 						else
 							Text.Add("<i>“I could easily withstand her wiles, you have nothing to fear as long as I'm around!”</i>", parse);

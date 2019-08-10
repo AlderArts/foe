@@ -935,7 +935,7 @@ AscheScenes.MagicBoxGrab = function() {
 
 AscheScenes.MagicBoxWin = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let asche = GAME().asche;
 
 	var parse = {
@@ -1182,7 +1182,7 @@ AscheScenes.MagicBoxLoss = function() {
 }
 
 AscheScenes.MagicBoxRepeat = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let asche = GAME().asche;
 
 	var parse = {

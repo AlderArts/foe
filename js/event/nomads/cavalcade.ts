@@ -16,6 +16,7 @@ import { Input } from '../../input';
 import { RaceScore } from '../../body/race';
 import { StrapOnItems } from '../../items/strapon';
 import { CaleSexScenes } from './cale-sex';
+import { Party } from '../../party';
 
 let NCavalcadeScenes : any = {};
 
@@ -87,7 +88,7 @@ NomadsLoc.Fireplace.events.push(new Link(
 
 NCavalcadeScenes.RegularGame = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let rosalin = GAME().rosalin;
 	let estevan = GAME().estevan;
 	var parse = {
@@ -164,7 +165,7 @@ NCavalcadeScenes.RegularGame = function() {
 
 NCavalcadeScenes.PrepCoinGame = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let rosalin = GAME().rosalin;
 	let cale = GAME().cale;
 	let estevan = GAME().estevan;
@@ -389,7 +390,7 @@ NCavalcadeScenes.PrepSexyGame = function() {
 
 NCavalcadeScenes.CheatGame = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let rosalin = GAME().rosalin;
 	let cale = GAME().cale;
 	let estevan = GAME().estevan;

@@ -3,141 +3,165 @@ import * as _ from 'lodash';
 import { Gender } from "../body/gender";
 import { Gui } from "../gui";
 import { Text } from "../text";
+import { Entity } from '../entity';
+import { Party } from '../party';
+import { WORLD, GAME, TimeStep } from '../GAME';
+import { GlobalScenes } from './global';
+import { Womb } from '../pregnancy';
+import { RaceDesc, Race } from '../body/race';
 
-let NurseryScenes = {};
+let NurseryScenes : any = {};
 
-function Nursery(storage) {
-	this.kids = [];
-	this.flags = {};
-	
-	this.flags["Met"] = Nursery.Met.NotVisited;
-	
-	if(storage) this.FromStorage(storage);
-}
-Nursery.Met = {
-	NotVisited : 0,
-	Visited    : 1
+let NurseryFlags = {
+	Met : {
+		NotVisited : 0,
+		Visited    : 1
+	},
 };
 
-Nursery.prototype.ToStorage = function() {
-	var storage = {};
-	if(this.TotalKids() > 0) {
-		var kids = [];
-		_.each(this.kids, function(kid) {
-			kids.push(kid.ToStorage());
-		});
-		storage.kids = kids;
+export class Nursery {
+	kids : any[];
+	flags : any;
+
+	constructor(storage? : any) {
+		this.kids = [];
+		this.flags = {};
+		
+		this.flags["Met"] = NurseryFlags.Met.NotVisited;
+		
+		if(storage) this.FromStorage(storage);
 	}
-	var flags = {};
-	for(var flag in this.flags) {
-		if(this.flags[flag] != 0)
-			flags[flag] = this.flags[flag];
+
+	ToStorage() {
+		var storage : any = {};
+		if(this.TotalKids() > 0) {
+			var kids : any[] = [];
+			_.each(this.kids, function(kid) {
+				kids.push(kid.ToStorage());
+			});
+			storage.kids = kids;
+		}
+		var flags : any = {};
+		for(var flag in this.flags) {
+			if(this.flags[flag] != 0)
+				flags[flag] = this.flags[flag];
+		}
+		storage.flags = flags;
+		
+		return storage;
 	}
-	storage.flags = flags;
 	
-	return storage;
-}
-
-Nursery.prototype.FromStorage = function(storage) {
-	var that = this;
-	storage = storage || {};
-	var kids = storage.kids;
-	_.each(kids, function(kid) {
-		var k = new Nursery.Kid(kid);
-		that.kids.push(k);
-	});
-	for(var flag in storage.flags)
-		this.flags[flag] = parseInt(storage.flags[flag]);
-}
-
-Nursery.prototype.BirthedBy = function(mother) {
-	var ret = [];
-	_.each(this.kids, function(kid) {
-		if(kid.mother == mother) ret.push(kid);
-	});
-	return ret;
-}
-Nursery.prototype.FatheredBy = function(father) {
-	var ret = [];
-	_.each(this.kids, function(kid) {
-		if(kid.father == father) ret.push(kid);
-	});
-	return ret;
-}
-Nursery.prototype.TotalKids = function(person) {
-	if(person) {
-		var num = 0;
-		_.each(this.BirthedBy(person), function(kid) {
-			num += kid.num;
+	FromStorage(storage : any) {
+		var that = this;
+		storage = storage || {};
+		var kids = storage.kids;
+		_.each(kids, function(kid) {
+			var k = new NurseryKid(kid);
+			that.kids.push(k);
 		});
-		_.each(this.FatheredBy(person), function(kid) {
+		for(var flag in storage.flags)
+			this.flags[flag] = parseInt(storage.flags[flag]);
+	}
+	
+	BirthedBy(mother : Entity) {
+		var ret : any[] = [];
+		_.each(this.kids, function(kid) {
+			if(kid.mother == mother) ret.push(kid);
+		});
+		return ret;
+	}
+	FatheredBy(father : Entity) {
+		var ret : any[] = [];
+		_.each(this.kids, function(kid) {
+			if(kid.father == father) ret.push(kid);
+		});
+		return ret;
+	}
+	TotalKids(person? : Entity) {
+		if(person) {
+			var num = 0;
+			_.each(this.BirthedBy(person), function(kid) {
+				num += kid.num;
+			});
+			_.each(this.FatheredBy(person), function(kid) {
+				num += kid.num;
+			});
+			return num;
+		}
+		//Default to all
+		var num = 0;
+		_.each(this.kids, function(kid) {
 			num += kid.num;
 		});
 		return num;
 	}
-	//Default to all
-	var num = 0;
-	_.each(this.kids, function(kid) {
-		num += kid.num;
-	});
-	return num;
-}
-
-Nursery.prototype.AddKid = function(newkid) {
-	if(!newkid) return; //Shouldn't happen
 	
-	var found = false;
-	_.each(this.kids, function(kid) {
-		if(kid.SameType(newkid)) {
-			kid.num += newkid.num;
-			found = true;
-			return false;
-		}
-	});
+	AddKid(newkid : NurseryKid) {
+		if(!newkid) return; //Shouldn't happen
+		
+		var found = false;
+		_.each(this.kids, function(kid) {
+			if(kid.SameType(newkid)) {
+				kid.num += newkid.num;
+				found = true;
+				return false;
+			}
+		});
+		
+		if(!found)
+			this.kids.push(newkid);
+	}
+}
+
+
+
+
+export class NurseryKid {
+	mother : Entity;
+	father : Entity;
+	num : number;
+	race : RaceDesc;
+
+	constructor(storage? : any) {
+		this.mother = null;
+		this.father = null;
+		this.num    = 1;
+		this.race   = Race.Human;
+		
+		if(storage) this.FromStorage(storage);
+	}
+
+	ToStorage() {
+		var storage : any = {};
+		if(this.mother) storage.m  = this.mother;
+		if(this.father) storage.f  = this.father;
+		if(this.num)    storage.nr = this.num.toFixed();
+		if(this.race != Race.Human) storage.r = this.race.id.toFixed();
+		return storage;
+	}
 	
-	if(!found)
-		this.kids.push(newkid);
-}
-
-
-Nursery.Kid = function(storage) {
-	this.mother = null;
-	this.father = null;
-	this.num    = 1;
-	this.race   = Race.Human;
+	FromStorage(storage : any) {
+		storage = storage || {};
+		if(storage.m)  this.mother = storage.m;
+		if(storage.f)  this.father = storage.f;
+		if(storage.nr) this.num    = parseInt(storage.nr);
+		this.race = (storage.r === undefined) ? this.race : RaceDesc.IdToRace[parseInt(storage.r)];
+	}
 	
-	if(storage) this.FromStorage(storage);
-}
-
-Nursery.Kid.prototype.ToStorage = function() {
-	var storage = {};
-	if(this.mother) storage.m  = this.mother;
-	if(this.father) storage.f  = this.father;
-	if(this.num)    storage.nr = this.num.toFixed();
-	if(this.race != Race.Human) storage.r = this.race.id.toFixed();
-	return storage;
-}
-
-Nursery.Kid.prototype.FromStorage = function(storage) {
-	storage = storage || {};
-	if(storage.m)  this.mother = storage.m;
-	if(storage.f)  this.father = storage.f;
-	if(storage.nr) this.num    = parseInt(storage.nr);
-	this.race = (storage.r === undefined) ? this.race : RaceDesc.IdToRace[parseInt(storage.r)];
-}
-
-Nursery.Kid.prototype.SameType = function(kid) {
-	if(kid.mother != this.mother) return false;
-	if(kid.father != this.father) return false;
-	if(kid.race   != this.race)   return false;
-	return true;
+	SameType(kid : NurseryKid) {
+		if(kid.mother != this.mother) return false;
+		if(kid.father != this.father) return false;
+		if(kid.race   != this.race)   return false;
+		return true;
+	}	
 }
 
 NurseryScenes.PrintPCbirthed = function() {
 	let player = GAME().player;
+	let nursery : Nursery = GAME().nursery;
 	var kids = nursery.BirthedBy(player.ID);
 	
-	var parse = {};
+	var parse : any = {};
 	
 	var num = 0;
 	if(kids.length > 0) {
@@ -164,8 +188,12 @@ NurseryScenes.PrintPCbirthed = function() {
 
 NurseryScenes.PrintPCfathered = function() {
 	let player = GAME().player;
+	let nursery : Nursery = GAME().nursery;
+	
 	var kids = nursery.FatheredBy(player.ID);
 	
+	let parse : any = {};
+
 	var num = 0;
 	if(kids.length > 0) {
 		Text.Add("<b>You’ve fathered:</b>", parse);
@@ -189,10 +217,13 @@ NurseryScenes.PrintPCfathered = function() {
 	}
 }
 
-NurseryScenes.CareBlock = function(womb) {
+NurseryScenes.CareBlock = function(womb : Womb) {
 	let player = GAME().player;
-	let party = GAME().party;
-	var parse = {
+	let party : Party = GAME().party;
+	let nursery : Nursery = GAME().nursery;
+	let world = WORLD();
+
+	var parse : any = {
 		
 	};
 	
@@ -212,11 +243,11 @@ NurseryScenes.CareBlock = function(womb) {
 	var yours = PCmother || PCfather;
 	parse["your"] = yours ? "your" : "the";
 	
-	if(!Scenes.Global.PortalsOpen()) { // ACT 1
+	if(!GlobalScenes.PortalsOpen()) { // ACT 1
 		
-		var first = nursery.flags["Met"] < Nursery.Met.Visited;
-		if(nursery.flags["Met"] < Nursery.Met.Visited)
-			nursery.flags["Met"] = Nursery.Met.Visited;
+		var first = nursery.flags["Met"] < NurseryFlags.Met.Visited;
+		if(nursery.flags["Met"] < NurseryFlags.Met.Visited)
+			nursery.flags["Met"] = NurseryFlags.Met.Visited;
 		
 		var atNomads = party.location == world.loc.Plains.Nomads.Tent;
 		party.location = world.loc.Plains.Nomads.Fireplace;
@@ -293,7 +324,7 @@ NurseryScenes.CareBlock = function(womb) {
 	}
 	
 	// Add to nursery
-	var kid = new Nursery.Kid();
+	var kid = new NurseryKid();
 	kid.mother = womb.mother;
 	kid.father = womb.father;
 	kid.num    = num;
@@ -307,7 +338,10 @@ NurseryScenes.CareBlock = function(womb) {
 
 // Pre gemstead (only available if actually you have kids, and only in act 1)
 NurseryScenes.Nomads = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
+	let nursery : Nursery = GAME().nursery;
+	let world = WORLD();
+
 	var num = nursery.TotalKids();
 	var parse = {
 		ren   : num > 1 ? "ren" : "",
@@ -352,4 +386,4 @@ NurseryScenes.Nomads = function() {
 
 // TODO Post gemstead
 
-export { Nursery, NurseryScenes };
+export { NurseryScenes };

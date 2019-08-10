@@ -39,7 +39,7 @@ SexScenes.PettingUnlocked = function() {
 }
 SexScenes.Petting = function(repeat) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let lei = GAME().lei;
 	var parse = {
 		boygirl : player.mfFem("boy", "girl"),

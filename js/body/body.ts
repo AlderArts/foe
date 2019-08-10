@@ -25,6 +25,12 @@ export enum HipSize {
 	VeryWide = 15
 };
 
+export enum LowerBodyType {
+	Single   = 0,
+	Humanoid = 1,
+	Taur     = 2,
+};
+
 export class Torso extends BodyPart {
 	hipSize : Stat;
 

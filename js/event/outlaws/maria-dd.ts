@@ -12,6 +12,7 @@ import { Time, Season } from '../../time';
 import { Sex } from '../../entity-sex';
 import { Cavalcade } from '../../cavalcade';
 import { RigardFlags } from '../../loc/rigard/rigard-flags';
+import { Party } from '../../party';
 
 //
 // Maria Dead drops
@@ -142,7 +143,7 @@ DeadDropScenes.First.Chat = function(CampPrompt : any) {
 
 DeadDropScenes.First.Start = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let outlaws = GAME().outlaws;
 	let maria = GAME().maria;
 
@@ -358,7 +359,7 @@ DeadDropScenes.First.Start = function() {
 
 DeadDropScenes.Repeat = function(CampPrompt : any) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let maria = GAME().maria;
 
 	var parse : any = {
@@ -498,7 +499,7 @@ DeadDropScenes.Docks.Entry = function() {
 
 DeadDropScenes.Docks.Ending = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	
 	var parse : any = {
 		playername : player.name
@@ -540,7 +541,7 @@ DeadDropScenes.Docks.Ending = function() {
 }
 
 DeadDropScenes.Docks.Cavalcade = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let estevan = GAME().estevan;
 	
 	var parse : any = {
@@ -613,7 +614,7 @@ DeadDropScenes.Docks.CavalcadeCost = function() {
 
 DeadDropScenes.Docks.CavalcadePrep = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	
 	player.purse  = party;
 	var players = [player];
@@ -988,7 +989,7 @@ DeadDropScenes.Docks.GuardInspection = function() {
 
 DeadDropScenes.Docks.GuardPrompt = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let outlaws = GAME().outlaws;
 	let maria = GAME().maria;
 

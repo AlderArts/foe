@@ -150,7 +150,7 @@ GladeLoc.onEntry = function() {
 
 DryadGladeScenes.First = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let orchid = GAME().orchid;
 
 	var parse : any = {
@@ -230,7 +230,7 @@ DryadGladeScenes.First = function() {
 
 DryadGladeScenes.FirstLoss = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let orchid = GAME().orchid;
 	let kiakai = GAME().kiakai;
 	let terry = GAME().terry;
@@ -566,7 +566,7 @@ DryadGladeScenes.FirstLoss = function() {
 
 DryadGladeScenes.FirstWin = function(enc : Encounter) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let glade = GAME().glade;
 	let kiakai = GAME().kiakai;
 	SetGameState(GameState.Event, Gui);
@@ -670,7 +670,7 @@ DryadGladeScenes.MotherTree = function() {
 
 DryadGladeScenes.MotherTreePrompt = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var parse : any = {
 		playername : player.name
 	};

@@ -14,7 +14,7 @@ import { AlchemyItems } from "../../items/alchemy";
 import { IngredientItems } from "../../items/ingredients";
 import { VenaFlags } from "./vena-flags";
 import { BodyPartType } from "../../body/bodypart";
-import { LowerBodyType } from "../../entity-desc";
+import { LowerBodyType } from '../../body/body';
 import { PregnancyHandler } from "../../pregnancy";
 import { SetGameOverButton } from "../../main-gameover";
 import { Party } from "../../party";
@@ -1237,7 +1237,7 @@ OpheliaScenes.SexVaginal = function() {
 
 OpheliaScenes.LabPrompt = function() {
     let player = GAME().player;
-    let party = GAME().party;
+    let party : Party = GAME().party;
 	let ophelia = GAME().ophelia;
     let burrows = GAME().burrows;
     
@@ -1346,7 +1346,7 @@ OpheliaScenes.TurnInScepter = function() {
 
 OpheliaScenes.PotionsPrompt = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
     let burrows = GAME().burrows;
     
 	var parse : any = {
@@ -1460,7 +1460,7 @@ OpheliaScenes.PotionsPrompt = function() {
 
 OpheliaScenes.DeliverCactoids = function() {
 	let player = GAME().player;
-    let party = GAME().party;
+    let party : Party = GAME().party;
     let burrows = GAME().burrows;
     
 	var parse : any = {
@@ -1522,7 +1522,7 @@ OpheliaScenes.DeliverCactoids = function() {
 
 OpheliaScenes.DeliverGolHusks = function() {
 	let player = GAME().player;
-    let party = GAME().party;
+    let party : Party = GAME().party;
 	let burrows = GAME().burrows;
 
     var parse : any = {
@@ -1574,7 +1574,7 @@ OpheliaScenes.DeliverGolHusks = function() {
 
 OpheliaScenes.DeliverAlgae = function() {
 	let player = GAME().player;
-    let party = GAME().party;
+    let party : Party = GAME().party;
     let burrows = GAME().burrows;
     
 	var parse : any = {
@@ -1614,7 +1614,7 @@ OpheliaScenes.DeliverAlgae = function() {
 
 OpheliaScenes.DeliverFollowup = function(trait : number) {
 	let player = GAME().player;
-    let party = GAME().party;
+    let party : Party = GAME().party;
 	let lagon = GAME().lagon;
 	let ophelia = GAME().ophelia;
     let burrows = GAME().burrows;
@@ -1834,7 +1834,7 @@ OpheliaScenes.DeliverVena = function(trait : number) {
 
 OpheliaScenes.Reward = function() {
 	let player = GAME().player;
-    let party = GAME().party;
+    let party : Party = GAME().party;
 	let terry = GAME().terry;
 	let miranda = GAME().miranda;
 	let kiakai = GAME().kiakai;
@@ -2311,7 +2311,7 @@ OpheliaScenes.RewardAftermathStage2Prompt = function() {
 
 OpheliaScenes.RewardChoices = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let lagon = GAME().lagon;
 	
 	var parse : any = {

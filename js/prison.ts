@@ -30,7 +30,7 @@ export class PrisonMinigame {
 	}
 	
 	Prep() {
-		let party = GAME().party;
+		let party : Party = GAME().party;
 
 		party.SaveActiveParty();
 		party.ClearActiveParty();
@@ -43,7 +43,7 @@ export class PrisonMinigame {
 
 
 	Cleanup() {
-		let party = GAME().party;
+		let party : Party = GAME().party;
 
 		for(var i = 0; i < this.enemy.members.length; i++) {
 			var e = this.enemy.members[i];

@@ -129,7 +129,7 @@ IslaScenes.Impregnate = function(father, cum) {
 }
 
 IslaScenes.Introduction = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let isla = GAME().isla;
 	var parse = {
 		

@@ -18,7 +18,7 @@ let MarketScenes : any = {};
 
 MarketScenes.GoToMarketFirst = function(backfunc : any) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let gwendy = GAME().gwendy;
 
 	var parse : any = {
@@ -180,7 +180,7 @@ MarketScenes.GoToMarketFirst = function(backfunc : any) {
 
 MarketScenes.GoToMarketFirstAfterBandits = function(won : boolean) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let rigard = GAME().rigard;
 	let miranda = GAME().miranda;
 
@@ -273,7 +273,7 @@ MarketScenes.GoToMarketFirstAfterBandits = function(won : boolean) {
  */
 MarketScenes.Market = function(haul : any, next : any) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let gwendy = GAME().gwendy;
 	let farm = GAME().farm;
 
@@ -421,7 +421,7 @@ MarketScenes.Market = function(haul : any, next : any) {
 
 MarketScenes.GoToMarketFirstFinale = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
     let gwendy = GAME().gwendy;
     let rigard = GAME().rigard;
 

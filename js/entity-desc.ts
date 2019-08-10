@@ -5,7 +5,7 @@ import { Unit } from './utility';
 import { PregnancyHandler } from './pregnancy';
 
 let EntityDesc = {
-	PrintDescription : function(partial : boolean) {
+	PrintDescription : function(partial? : boolean) {
 		
 		var parse : any = {
 			name     : this.NameDesc(),
@@ -217,10 +217,4 @@ let EntityDesc = {
 	},
 }
 
-let LowerBodyType = {
-	Single   : 0,
-	Humanoid : 1,
-	Taur     : 2
-};
-
-export { LowerBodyType, EntityDesc };
+export { EntityDesc };

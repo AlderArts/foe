@@ -206,7 +206,7 @@ NobleScenes.JeannesTower = function() {
 
 NobleScenes.TheDistrict = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 
 	var parse = {
 		playername : player.name
@@ -324,7 +324,7 @@ NobleScenes.GuardPatrol = function() {
 
 NobleScenes.AlmsForThePoor = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let rigard = GAME().rigard;
 
 	var parse = {
@@ -540,7 +540,7 @@ NobleScenes.MagicalJackal = function() {
 }
 
 NobleScenes.PalaceParade = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let miranda = GAME().miranda;
 	let rigard = GAME().rigard;
 
@@ -636,7 +636,7 @@ NobleScenes.Buns = function() {
 }
 
 NobleScenes.BunsChoice = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let rigard = GAME().rigard;
 
 	var parse = {

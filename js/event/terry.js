@@ -525,7 +525,7 @@ TerryScenes.Appearance = function() {
 
 TerryScenes.Prompt = function() {
 	let terry = GAME().terry;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let player = GAME().player;
 
 	var parse = {
@@ -831,7 +831,7 @@ TerryScenes.ExplorePlaza = function() {
 
 TerryScenes.CombatVsMiranda = function() {
 	let terry = GAME().terry;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 
 	var enemy = new Party();
 	enemy.AddMember(terry);
@@ -930,7 +930,7 @@ TerryScenes.CaughtTheThief = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 	let miranda = GAME().miranda;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let rigard = GAME().rigard;
 
 	var parse = {
@@ -1261,7 +1261,7 @@ TerryScenes.Release = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 	let miranda = GAME().miranda;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 
 	var parse = {
 		playername : player.name,
@@ -2295,7 +2295,7 @@ TerryScenes.SkinshipPrompt = function() {
 TerryScenes.SkinshipPromptChoices = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 
 	var parse = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
@@ -3313,7 +3313,7 @@ Terry.JeanneTFCost = function() {
 TerryScenes.JeanneTFPrompt = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 
 	var parse = {
 		playername : player.name
@@ -6872,7 +6872,7 @@ TerryScenes.PCCleansTerry = function(func, opts) {
 TerryScenes.TCleansPC = function(func, opts) {
 	let terry = GAME().terry;
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 
 	var parse = {
 		playername : player.name,
@@ -7309,7 +7309,7 @@ TerryScenes.FuckedByBunnyMob = function(male, parse) {
 TerryScenes.SexPitchVaginal = function(cocks) {
 	let terry = GAME().terry;
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 
 	var p1cock  = player.BiggestCock(cocks);
 	var strapon = p1cock.isStrapon;

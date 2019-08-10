@@ -204,7 +204,7 @@ Room69Scenes.Discovering69Prompt = function() {
 
 Room69Scenes.Discovering69WhatNow = function() {
 	let room69 = GAME().room69;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let player = GAME().player;
 
 	var parse = {
@@ -341,7 +341,7 @@ Room69Scenes.Discovering69WhatNow = function() {
 }
 
 Room69Scenes.Discovering69OrvinRant = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 
 	var parse = {
 		
@@ -370,7 +370,7 @@ Room69Scenes.Discovering69OrvinRant = function() {
 
 Room69Scenes.Discovering69ForceOutro = function() {
 	let room69 = GAME().room69;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 
 	var parse = {
 		
@@ -422,7 +422,7 @@ Room69Scenes.Discovering69ForceOutro = function() {
 // Lets get to the sex already!
 Room69Scenes.Discovering69Sex = function() {
 	let room69 = GAME().room69;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let player = GAME().player;
 
 	var parse = {

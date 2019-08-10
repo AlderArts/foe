@@ -207,7 +207,7 @@ RosalinScenes.Impregnate = function(mother, father, slot) {
 
 // Schedule
 Rosalin.prototype.IsAtLocation = function(location) {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	location = location || party.location;
 	if(location == WORLD().loc.Plains.Nomads.Fireplace)
 		return (WorldTime().hour >= 12 || WorldTime().hour < 3);
@@ -216,7 +216,7 @@ Rosalin.prototype.IsAtLocation = function(location) {
 
 RosalinScenes.Interact = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let rosalin = GAME().rosalin;
 	let cale = GAME().cale;
 	var anusol = rosalin.flags["Anusol"];
@@ -311,7 +311,7 @@ RosalinScenes.Desc = function() {
 
 RosalinScenes.TalkPrompt = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let rosalin = GAME().rosalin;
 	let cale = GAME().cale;
 	Text.Clear();
@@ -725,7 +725,7 @@ RosalinScenes.TalkPrompt = function() {
 
 RosalinScenes.BrewAnusol = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let rosalin = GAME().rosalin;
 	let kiakai = GAME().kiakai;
 	let cale = GAME().cale;
@@ -790,7 +790,7 @@ RosalinScenes.BrewAnusol = function() {
 
 RosalinScenes.FirstTime = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let kiakai = GAME().kiakai;
 	Text.Clear();
 
@@ -1318,7 +1318,7 @@ RosalinScenes.FirstFuckFollowup = function(outcome) {
 
 RosalinScenes.CombineCallback = function(item) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let rosalin = GAME().rosalin;
 	let cale = GAME().cale;
 	Text.Clear();

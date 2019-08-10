@@ -27,7 +27,7 @@ import { Encounter } from '../combat';
 import { PregnancyHandler } from '../pregnancy';
 import { Sex } from '../entity-sex';
 import { Cock } from '../body/cock';
-import { LowerBodyType } from '../entity-desc';
+import { LowerBodyType } from '../body/body';
 import { Season } from '../time';
 
 let FelinesScenes : any = {};
@@ -448,7 +448,7 @@ FelinesScenes.Intro = function() {
 
 FelinesScenes.IntroRegular = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var enc     = this;
 	var enemy   = enc.enemy;
 	var group   = enemy.Num() > 1;
@@ -509,7 +509,7 @@ FelinesScenes.IntroRegular = function() {
 
 FelinesScenes.IntroStalking = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var enc = this;
 	var p1  = party.Get(1);
 	var enemy   = enc.enemy;
@@ -1117,7 +1117,7 @@ FelinesScenes.WinFuckVag = function(cat : Wildcat, group : boolean, enc : any, c
 
 FelinesScenes.WinFuckButt = function(cat : Wildcat, group : boolean, enc : any, cocks : Cock[]) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var pCock = player.BiggestCock(cocks);
 
 	var parse : any = {
@@ -1685,7 +1685,7 @@ FelinesScenes.WinGroupService = function(enc : any, enemy : Party) {
 
 FelinesScenes.LossRegular = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 
 	SetGameState(GameState.Event, Gui);
 
@@ -2697,7 +2697,7 @@ FelinesScenes.WinPrompt = function() {
 
 FelinesScenes.LossDoubleTeam = function(cat : Wildcat, cat2 : Wildcat, group : boolean, enc : any) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 
 	var parse : any = {
 		name  : cat.nameDesc(),

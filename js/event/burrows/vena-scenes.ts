@@ -8,6 +8,7 @@ import { BurrowsFlags } from '../../loc/burrows-flags';
 import { Race } from "../../body/race";
 import { Entity } from "../../entity";
 import { EncounterTable } from "../../encountertable";
+import { Party } from "../../party";
 
 let VenaScenes : any = {
 	Restored : VenaRScenes,
@@ -133,7 +134,7 @@ VenaScenes.PitTalkPrompt = function() {
 	let roa = GAME().roa;
 	let ophelia = GAME().ophelia;
 	let burrows = GAME().burrows;
-    let party = GAME().party;
+    let party : Party = GAME().party;
     
 	var parse : any = {
 		
@@ -216,7 +217,7 @@ VenaScenes.PitTalkPrompt = function() {
 
 VenaScenes.RestoreEntrypoint = function(fight : boolean) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let ophelia = GAME().ophelia;
 	let vena = GAME().vena;
     let burrows = GAME().burrows;

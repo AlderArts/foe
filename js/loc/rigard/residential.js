@@ -124,7 +124,7 @@ ResidentialLoc.street.links.push(new Link(
 ResidentialLoc.street.links.push(new Link(
 	"Miranda's", true, function() {
 		let miranda = GAME().miranda;
-		let party = GAME().party;
+		let party : Party = GAME().party;
 		return party.InParty(miranda);
 	},
 	null,

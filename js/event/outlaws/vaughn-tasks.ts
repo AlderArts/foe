@@ -12,6 +12,7 @@ import { Time } from '../../time';
 import { Lei } from '../royals/lei';
 import { Room69 } from '../room69';
 import { RigardFlags } from '../../loc/rigard/rigard-flags';
+import { Party } from '../../party';
 
 let TasksScenes : any = {};
 
@@ -105,7 +106,7 @@ TasksScenes.Lockpicks.Completed = function() {
 //TODO Note for far future: Do not enable this if/when Majid has been run out of Rigard.
 TasksScenes.Lockpicks.Start = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let terry = GAME().terry;
 
 	var parse : any = {
@@ -184,7 +185,7 @@ TasksScenes.Lockpicks.ElodieAvailable = function() {
 //Triggered in castle grounds
 TasksScenes.Lockpicks.MeetingElodie = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let rigard = GAME().rigard;
 
 	var parse = {
@@ -738,7 +739,7 @@ TasksScenes.Snitch.Miranda = function(onDuty : any) {
 //Triggered via [Evidence] - Break into the watchmens’ lockers and plant the evidence. while in the City Watch area.
 TasksScenes.Snitch.PlantEvidence = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let vaughn = GAME().vaughn;
 	let terry = GAME().terry;
 
@@ -1030,7 +1031,7 @@ TasksScenes.Snitch.DebriefOutOfTime = function() {
 }
 
 TasksScenes.Snitch.DebriefSuccess = function(parse : any) {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let outlaws = GAME().outlaws;
 	let vaughn = GAME().vaughn;
 
@@ -1103,7 +1104,7 @@ TasksScenes.Poisoning.Completed = function() {
 
 TasksScenes.Poisoning.Start = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let vaughn = GAME().vaughn;
 
 	var parse : any = {
@@ -1252,7 +1253,7 @@ TasksScenes.Poisoning.ArrivalAtInn = function(onWait : any, oldLocation : any) {
 
 TasksScenes.Poisoning.InnPrompt = function(opts : any) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let vaughn = GAME().vaughn;
 	let lei = GAME().lei;
 	let twins = GAME().twins;
@@ -1609,7 +1610,7 @@ TasksScenes.Poisoning.InnPrompt = function(opts : any) {
 
 TasksScenes.Poisoning.Kitchen = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let vaughn = GAME().vaughn;
 	let terry = GAME().terry;
 
@@ -1722,7 +1723,7 @@ TasksScenes.Poisoning.Kitchen = function() {
 
 TasksScenes.Poisoning.KitchenYourself = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let vaughn = GAME().vaughn;
 
 	var parse : any = {
@@ -1845,7 +1846,7 @@ TasksScenes.Poisoning.AphrodisiacLeave = function() {
 
 TasksScenes.Poisoning.AphrodisiacPeek = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let vaughn = GAME().vaughn;
 	let room69 = GAME().room69;
 
@@ -1972,7 +1973,7 @@ TasksScenes.Poisoning.OutOfTime = function() {
 
 TasksScenes.Poisoning.DebriefSuccess = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let outlaws = GAME().outlaws;
 	let vaughn = GAME().vaughn;
 
@@ -2088,7 +2089,7 @@ TasksScenes.Poisoning.DebriefFailure = function() {
 }
 
 TasksScenes.Poisoning.DebriefOutOfTime = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let outlaws = GAME().outlaws;
 	let vaughn = GAME().vaughn;
 

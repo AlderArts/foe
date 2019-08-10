@@ -5,7 +5,7 @@
  */
 
 import { Entity } from '../entity';
-import { WorldTime, TimeStep } from '../GAME';
+import { WorldTime, TimeStep, GameCache, GAME } from '../GAME';
 import { Images } from '../assets';
 import { Cock } from '../body/cock';
 import { Vagina } from '../body/vagina';
@@ -22,119 +22,127 @@ import { EncounterTable } from '../encountertable';
 import { Gui } from '../gui';
 import { SetGameState, GameState } from '../gamestate';
 import { Sex } from '../entity-sex';
+import { Abilities } from '../abilities';
+import { PregnancyHandler } from '../pregnancy';
+import { LowerBodyType } from '../body/body';
+import { Orifice } from '../body/orifice';
+import { Jobs } from '../job';
 
-let NagaScenes = {};
+let NagaScenes : any = {};
 
-function Naga() {
-	Entity.call(this);
-	this.ID = "naga";
+export class Naga extends Entity {
+	constructor() {
+		super();
 
-	this.avatar.combat     = Images.naga;
-	this.name              = "Naga";
-	this.monsterName       = "the naga";
-	this.MonsterName       = "The naga";
-	this.body.cock.push(new Cock());
-	this.body.cock.push(new Cock());
-	this.body.vagina.push(new Vagina());
-	if(Math.random() < 0.7)
-		this.Butt().virgin = false;
-	this.FirstVag().virgin = false;
-	this.FirstBreastRow().size.base = 10;
+		this.ID = "naga";
 
-	this.maxHp.base        = 100;
-	this.maxSp.base        = 40;
-	this.maxLust.base      = 65;
-	// Main stats
-	this.strength.base     = 20;
-	this.stamina.base      = 18;
-	this.dexterity.base    = 23;
-	this.intelligence.base = 21;
-	this.spirit.base       = 22;
-	this.libido.base       = 24;
-	this.charisma.base     = 27;
+		this.avatar.combat     = Images.naga;
+		this.name              = "Naga";
+		this.monsterName       = "the naga";
+		this.MonsterName       = "The naga";
+		this.body.cock.push(new Cock());
+		this.body.cock.push(new Cock());
+		this.body.vagina.push(new Vagina());
+		if(Math.random() < 0.7)
+			this.Butt().virgin = false;
+		this.FirstVag().virgin = false;
+		this.FirstBreastRow().size.base = 10;
 
-	this.elementDef.dmg[Element.lust]   =   0.5;
-	this.elementDef.dmg[Element.mFire]  =   0.5;
-	this.elementDef.dmg[Element.mIce]   =  -0.5;
-	this.elementDef.dmg[Element.mWater] = -0.25;
+		this.maxHp.base        = 100;
+		this.maxSp.base        = 40;
+		this.maxLust.base      = 65;
+		// Main stats
+		this.strength.base     = 20;
+		this.stamina.base      = 18;
+		this.dexterity.base    = 23;
+		this.intelligence.base = 21;
+		this.spirit.base       = 22;
+		this.libido.base       = 24;
+		this.charisma.base     = 27;
 
-	this.level             = 4;
-	if(Math.random() > 0.8) this.level = 6;
-	this.sexlevel          = 2;
+		this.elementDef.dmg[Element.lust]   =   0.5;
+		this.elementDef.dmg[Element.mFire]  =   0.5;
+		this.elementDef.dmg[Element.mIce]   =  -0.5;
+		this.elementDef.dmg[Element.mWater] = -0.25;
 
-	this.combatExp         = this.level;
-	this.coinDrop          = this.level * 4;
+		this.level             = 4;
+		if(Math.random() > 0.8) this.level = 6;
+		this.sexlevel          = 2;
 
-	this.body.SetRace(Race.Snake);
+		this.combatExp         = this.level;
+		this.coinDrop          = this.level * 4;
 
-	this.body.SetBodyColor(Color.olive);
+		this.body.SetRace(Race.Snake);
 
-	this.body.SetEyeColor(Color.purple);
-	this.body.SetHairColor(Color.blue);
+		this.body.SetBodyColor(Color.olive);
 
-	// Set hp and mana to full
-	this.SetLevelBonus();
-	this.RestFull();
+		this.body.SetEyeColor(Color.purple);
+		this.body.SetHairColor(Color.blue);
+
+		// Set hp and mana to full
+		this.SetLevelBonus();
+		this.RestFull();
+	}
+	
+	//TODO other conditions?
+	static HypnoUnlocked() {
+		return GameCache().flags["NagaVenom"] != 0;
+	}
+
+	static NagaMateUnlocked() {
+		return GameCache().flags["NagaMate"] != 0;
+	}
+		
+	DropTable() {
+		var drops = [];
+		if(Math.random() < 0.05) drops.push({ it: AlchemySpecial.Nagazm });
+		if(Math.random() < 0.05) drops.push({ it: AlchemyItems.Lacertium });
+		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.SnakeOil });
+		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.SnakeFang });
+		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.SnakeSkin });
+
+		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.LizardEgg });
+		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.LizardScale });
+		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.SpringWater });
+		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.Trinket });
+
+		if(Math.random() < 0.01) drops.push({ it: IngredientItems.BlackGem });
+		if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Scorpius });
+		if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Gestarium });
+		return drops;
+	}
+
+	Act(encounter : any, activeChar : any) {
+		// TODO: Very TEMP
+		Text.Add(this.name + " acts! Hiss!");
+		Text.NL();
+
+		// Pick a random target
+		var t = this.GetSingleTarget(encounter, activeChar);
+
+		var parseVars = {
+			name   : this.name,
+			hisher : this.hisher(),
+			tName  : t.name
+		};
+
+		var choice = Math.random();
+		if(choice < 0.4)
+			Abilities.Attack.Use(encounter, this, t);
+		else if(choice < 0.6 && Abilities.Physical.Ensnare.enabledCondition(encounter, this))
+			Abilities.Physical.Ensnare.Use(encounter, this, t);
+		else if(choice < 0.8 && Abilities.Physical.Pierce.enabledCondition(encounter, this))
+			Abilities.Physical.Pierce.Use(encounter, this, t);
+		else if(choice < 0.9 && Abilities.Seduction.Distract.enabledCondition(encounter, this))
+			Abilities.Seduction.Distract.Use(encounter, this, t);
+		else
+			Abilities.Seduction.Tease.Use(encounter, this, t);
+	}
+
 }
-Naga.prototype = new Entity();
-Naga.prototype.constructor = Naga;
 
-//TODO other conditions?
-Naga.HypnoUnlocked = function() {
-	return GameCache().flags["NagaVenom"] != 0;
-}
 
-Naga.NagaMateUnlocked = function() {
-	return GameCache().flags["NagaMate"] != 0;
-}
-
-Naga.prototype.DropTable = function() {
-	var drops = [];
-	if(Math.random() < 0.05) drops.push({ it: AlchemySpecial.Nagazm });
-	if(Math.random() < 0.05) drops.push({ it: AlchemyItems.Lacertium });
-	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.SnakeOil });
-	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.SnakeFang });
-	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.SnakeSkin });
-
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.LizardEgg });
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.LizardScale });
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.SpringWater });
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.Trinket });
-
-	if(Math.random() < 0.01) drops.push({ it: IngredientItems.BlackGem });
-	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Scorpius });
-	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Gestarium });
-	return drops;
-}
-
-Naga.prototype.Act = function(encounter, activeChar) {
-	// TODO: Very TEMP
-	Text.Add(this.name + " acts! Hiss!");
-	Text.NL();
-
-	// Pick a random target
-	var t = this.GetSingleTarget(encounter, activeChar);
-
-	var parseVars = {
-		name   : this.name,
-		hisher : this.hisher(),
-		tName  : t.name
-	};
-
-	var choice = Math.random();
-	if(choice < 0.4)
-		Abilities.Attack.Use(encounter, this, t);
-	else if(choice < 0.6 && Abilities.Physical.Ensnare.enabledCondition(encounter, this))
-		Abilities.Physical.Ensnare.Use(encounter, this, t);
-	else if(choice < 0.8 && Abilities.Physical.Pierce.enabledCondition(encounter, this))
-		Abilities.Physical.Pierce.Use(encounter, this, t);
-	else if(choice < 0.9 && Abilities.Seduction.Distract.enabledCondition(encounter, this))
-		Abilities.Seduction.Distract.Use(encounter, this, t);
-	else
-		Abilities.Seduction.Tease.Use(encounter, this, t);
-}
-
-NagaScenes.Impregnate = function(mother, father, slot) {
+NagaScenes.Impregnate = function(mother : Entity, father : Naga, slot? : number) {
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother : mother,
@@ -148,7 +156,7 @@ NagaScenes.Impregnate = function(mother, father, slot) {
 
 NagaScenes.LoneEnc = function() {
 	var enemy = new Party();
-	var enc = new Encounter(enemy);
+	var enc : any = new Encounter(enemy);
 
 	enc.naga = new Naga();
 
@@ -164,8 +172,8 @@ NagaScenes.LoneEnc = function() {
 NagaScenes.DesertEncounter = function() {
 	let player = GAME().player;
 	var enc  = this;
-	var naga = enc.naga;
-	var parse = {
+	var naga : Naga = enc.naga;
+	var parse : any = {
 
 	};
 
@@ -252,12 +260,12 @@ NagaScenes.DesertEncounter = function() {
 
 NagaScenes.DesertLoss = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var enc  = this;
-	var naga = enc.naga;
+	var naga : Naga = enc.naga;
 	SetGameState(GameState.Event, Gui);
 
-	var parse = {
+	var parse : any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -298,7 +306,7 @@ NagaScenes.DesertLoss = function() {
 	Encounter.prototype.onLoss.call(enc);
 }
 
-NagaScenes.DesertLossScenes = function(enc) {
+NagaScenes.DesertLossScenes = function(enc : any) {
 	let player = GAME().player;
 	var scenes = new EncounterTable();
 	scenes.AddEnc(function() {
@@ -325,13 +333,13 @@ NagaScenes.DesertLossScenes = function(enc) {
 	return scenes.Get();
 }
 
-NagaScenes.DesertLossGetDPd = function(enc) {
+NagaScenes.DesertLossGetDPd = function(enc : any) {
 	let player = GAME().player;
-	let party = GAME().party;
-	var naga = enc.naga;
+	let party : Party = GAME().party;
+	var naga : Naga = enc.naga;
 	SetGameState(GameState.Event, Gui);
 
-	var parse = {
+	var parse : any = {
 
 	};
 
@@ -467,10 +475,10 @@ NagaScenes.DesertLossGetDPd = function(enc) {
 }
 
 
-NagaScenes.DesertLossUseCock = function(enc) {
+NagaScenes.DesertLossUseCock = function(enc : any) {
 	let player = GAME().player;
-	let party = GAME().party;
-	var naga = enc.naga;
+	let party : Party = GAME().party;
+	var naga : Naga = enc.naga;
 	SetGameState(GameState.Event, Gui);
 
 	var p1cock = player.BiggestCock();
@@ -482,7 +490,7 @@ NagaScenes.DesertLossUseCock = function(enc) {
 		}
 	}
 
-	var parse = {
+	var parse : any = {
 		cocks2 : function() { return player.MultiCockDesc(allCocks); }
 	};
 
@@ -652,8 +660,8 @@ NagaScenes.DesertLossUseCock = function(enc) {
 	for(var i = 0; i < cocks.length; i++) {
 		var inc  = cocks[i].length.IncreaseStat(50, 3);
 		var inc2 = cocks[i].thickness.IncreaseStat(12, 1);
-		len |= inc;
-		thk |= inc2;
+		len = len || inc;
+		thk = thk || inc2;
 	}
 	var grown = len || thk;
 
@@ -687,12 +695,12 @@ NagaScenes.DesertLossUseCock = function(enc) {
 //TODO
 NagaScenes.DesertWinPrompt = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var enc  = this;
-	var naga = enc.naga;
+	var naga : Naga = enc.naga;
 	SetGameState(GameState.Event, Gui);
 
-	var parse = {
+	var parse : any = {
 		master : player.mfFem("master", "mistress")
 	};
 
@@ -718,12 +726,12 @@ NagaScenes.DesertWinPrompt = function() {
 	Encounter.prototype.onVictory.call(enc);
 }
 
-NagaScenes.DesertWinPrompt2 = function(enc, hypno) {
+NagaScenes.DesertWinPrompt2 = function(enc : any, hypno : boolean) {
 	let player = GAME().player;
-	let party = GAME().party;
-	var naga = enc.naga;
+	let party : Party = GAME().party;
+	var naga : Naga = enc.naga;
 
-	var parse = {};
+	var parse : any = {};
 
 	//[Fuck][Hypnotize][Leave]
 	var options = new Array();
@@ -805,11 +813,11 @@ NagaScenes.DesertWinPrompt2 = function(enc, hypno) {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-NagaScenes.DesertWinHypnotize = function(enc) {
+NagaScenes.DesertWinHypnotize = function(enc : any) {
 	let player = GAME().player;
-	var naga = enc.naga;
+	var naga : Naga = enc.naga;
 
-	var parse = {};
+	var parse : any = {};
 
 	parse = player.ParserTags(parse);
 	parse = naga.ParserTags(parse, "n");
@@ -830,11 +838,11 @@ NagaScenes.DesertWinHypnotize = function(enc) {
 	NagaScenes.DesertWinPrompt2(enc, true);
 }
 
-NagaScenes.DesertWinHypnotizeOwn = function(enc) {
+NagaScenes.DesertWinHypnotizeOwn = function(enc : any) {
 	let player = GAME().player;
-	var naga = enc.naga;
+	var naga : Naga = enc.naga;
 
-	var parse = {
+	var parse : any = {
 		master : player.mfFem("master", "mistress")
 	};
 
@@ -856,13 +864,13 @@ NagaScenes.DesertWinHypnotizeOwn = function(enc) {
 	NagaScenes.DesertWinPrompt2(enc, true);
 }
 
-NagaScenes.DesertWinFuckJerk = function(enc, hypno) {
+NagaScenes.DesertWinFuckJerk = function(enc : any, hypno : boolean) {
 	let player = GAME().player;
-	var naga = enc.naga;
+	var naga : Naga = enc.naga;
 
 	var p1cock = player.BiggestCock();
 
-	var parse = {
+	var parse : any = {
 		master  : player.mfFem("master", "mistress"),
 		biggest : player.NumCocks() > 1 ? " biggest" : ""
 	};
@@ -987,17 +995,17 @@ NagaScenes.DesertWinFuckJerk = function(enc, hypno) {
 	Gui.NextPrompt();
 }
 
-NagaScenes.DesertWinGetFuckedVag = function(enc, hypno) {
+NagaScenes.DesertWinGetFuckedVag = function(enc : any, hypno : boolean) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	Text.Clear();
 
-	var naga = enc.naga;
+	var naga : Naga = enc.naga;
 
 	var p1cock = player.BiggestCock();
 	var vag = player.FirstVag();
 
-	var parse = {
+	var parse : any = {
 		master  : player.mfFem("master", "mistress"),
 		biggest : player.NumCocks() > 1 ? " biggest" : ""
 	};
@@ -1090,7 +1098,7 @@ NagaScenes.DesertWinGetFuckedVag = function(enc, hypno) {
 	Text.Flush();
 
 	NagaScenes.DesertWinTailpeg({naga : naga, hypno : hypno,
-		next : function(tailPeg) {
+		next : function(tailPeg : boolean) {
 			var sens = 0;
 			if(tailPeg) sens++;
 			if(player.FirstCock()) sens++;
@@ -1134,16 +1142,16 @@ NagaScenes.DesertWinGetFuckedVag = function(enc, hypno) {
 	});
 }
 
-NagaScenes.DesertWinTailpeg = function(opts) {
+NagaScenes.DesertWinTailpeg = function(opts : any) {
 	let player = GAME().player;
-	var parse = {
+	var parse : any = {
 
 	};
 
 	parse = player.ParserTags(parse);
 	var next  = opts.next || Gui.PrintDefaultOptions;
-	var naga  = opts.naga || new Naga();
-	var hypno = opts.hypno || false;
+	var naga : Naga = opts.naga || new Naga();
+	var hypno : boolean = opts.hypno || false;
 
 	//[Tailpeg][No]
 	var options = new Array();
@@ -1184,12 +1192,12 @@ NagaScenes.DesertWinTailpeg = function(opts) {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-NagaScenes.DesertNagaMating = function(naga) {
+NagaScenes.DesertNagaMating = function(naga : Naga) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var p1cock = player.BiggestCock();
 
-	var parse = {
+	var parse : any = {
 		boyGirl : player.mfTrue("boy", "girl")
 	};
 	parse = player.ParserTags(parse);
@@ -1318,4 +1326,4 @@ NagaScenes.DesertNagaMating = function(naga) {
 	scenes.Get();
 }
 
-export { Naga, NagaScenes };
+export { NagaScenes };

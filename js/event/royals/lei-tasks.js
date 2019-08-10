@@ -151,7 +151,7 @@ TasksScenes.Escort.Start = function() {
 
 TasksScenes.Escort.Estate = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let lei = GAME().lei;
 	let kiakai = GAME().kiakai;
 	let rigard = GAME().rigard;
@@ -431,7 +431,7 @@ disable submit/run option?
 
 TasksScenes.Escort.CombatLoss = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	SetGameState(GameState.Event, Gui);
 	Text.Clear();
 	
@@ -460,7 +460,7 @@ TasksScenes.Escort.CombatLoss = function() {
 
 TasksScenes.Escort.CombatWin = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let lei = GAME().lei;
 	SetGameState(GameState.Event, Gui);
 	Text.Clear();
@@ -492,7 +492,7 @@ TasksScenes.Escort.CombatWin = function() {
 
 TasksScenes.Escort.PostCombat = function(enc, won) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let lei = GAME().lei;
 	var parse = {
 		armor : player.ArmorDesc()
@@ -661,7 +661,7 @@ TasksScenes.Escort.PostCombat = function(enc, won) {
 }
 
 TasksScenes.Escort.Debrief = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let lei = GAME().lei;
 	var parse = {
 		

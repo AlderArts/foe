@@ -82,7 +82,7 @@ export class Drake extends Entity {
 		if(Math.random() < 0.1)  drops.push({ it: AlchemyItems.Lacertium });
 		if(Math.random() < 0.1)  drops.push({ it: AlchemySpecial.Taurico });
 		if(Math.random() < 0.1)  drops.push({ it: AlchemySpecial.Nagazm });
-		if(Math.random() < 0.1) drops.push({ it: AlchemySpecial.Gestarium });
+		if(Math.random() < 0.1) drops.push({ it: AlchemyItems.Gestarium });
 
 		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.BlackGem });
 		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.DemonSeed });

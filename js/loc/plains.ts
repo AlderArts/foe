@@ -26,6 +26,7 @@ import { OutlawsScenes } from '../event/outlaws/outlaws';
 import { FarmScenesIntro } from './farm-scenes';
 import { DryadGladeFlags } from './glade-flags';
 import { BurrowsFlags } from './burrows-flags';
+import { Party } from '../party';
 
 // Create namespace
 let PlainsLoc = {
@@ -136,7 +137,7 @@ PlainsLoc.Crossroads.enc.AddEnc(function() {
 PlainsLoc.Crossroads.enc.AddEnc(function() {
 	return function() {
 		let player = GAME().player;
-		let party = GAME().party;
+		let party : Party = GAME().party;
 		let kiakai = GAME().kiakai;
 
 		var parse = {

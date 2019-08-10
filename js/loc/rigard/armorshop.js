@@ -264,7 +264,7 @@ ArmorShopLoc.onEntry = function() {
 }
 
 ArmorShopScenes.FirstEntry = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let rigard = GAME().rigard;
 
 	var parse = {

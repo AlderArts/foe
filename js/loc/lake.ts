@@ -10,9 +10,9 @@ import { MoveToLocation, TimeStep, WORLD, GAME } from '../GAME';
 import { Gui } from '../gui';
 import { Text } from '../text';
 import { MomoScenes } from '../event/momo';
-import { Burrows } from './burrows';
 import { QuestItems } from '../items/quest';
 import { BurrowsFlags } from './burrows-flags';
+import { Party } from '../party';
 
 // Create namespace
 let LakeLoc = {
@@ -41,7 +41,7 @@ LakeLoc.Shore.enc.AddEnc(function() {
 
 LakeLoc.Shore.enc.AddEnc(function() {
 	return function() {
-		let party = GAME().party;
+		let party : Party = GAME().party;
 		let burrows = GAME().burrows;
 		var parse = {
 			

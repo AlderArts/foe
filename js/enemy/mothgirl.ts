@@ -19,71 +19,77 @@ import { Party } from '../party';
 import { Encounter } from '../combat';
 import { Gui } from '../gui';
 import { SetGameState, GameState } from '../gamestate';
+import { TimeStep, GAME, GameCache } from '../GAME';
+import { Sex } from '../entity-sex';
+import { EncounterTable } from '../encountertable';
+import { LowerBodyType } from '../body/body';
+import { Cock } from '../body/cock';
 
-let MothgirlScenes = {};
+let MothgirlScenes : any = {};
 
-function Mothgirl() {
-	Entity.call(this);
-	this.ID = "lusina";
+export class Mothgirl extends Entity {
+	constructor() {
+		super();
 
-	this.avatar.combat     = Images.mothgirl;
-	this.name              = "Mothgirl";
-	this.monsterName       = "the mothgirl";
-	this.MonsterName       = "The mothgirl";
-	this.body.DefFemale();
+		this.ID = "lusina";
 
-	this.FirstVag().virgin = false;
-	this.Butt().virgin     = false;
+		this.avatar.combat     = Images.mothgirl;
+		this.name              = "Mothgirl";
+		this.monsterName       = "the mothgirl";
+		this.MonsterName       = "The mothgirl";
+		this.body.DefFemale();
 
-	this.maxHp.base        = 120;
-	this.maxSp.base        = 40;
-	this.maxLust.base      = 45;
-	// Main stats
-	this.strength.base     = 15;
-	this.stamina.base      = 14;
-	this.dexterity.base    = 25;
-	this.intelligence.base = 18;
-	this.spirit.base       = 13;
-	this.libido.base       = 20;
-	this.charisma.base     = 20;
+		this.FirstVag().virgin = false;
+		this.Butt().virgin     = false;
 
-	this.elementDef.dmg[Element.mEarth]   =  0.5;
-	this.elementDef.dmg[Element.mFire]    = -0.5;
-	this.elementDef.dmg[Element.mThunder] = -0.5;
-	this.elementDef.dmg[Element.mWind]    =  0.5;
+		this.maxHp.base        = 120;
+		this.maxSp.base        = 40;
+		this.maxLust.base      = 45;
+		// Main stats
+		this.strength.base     = 15;
+		this.stamina.base      = 14;
+		this.dexterity.base    = 25;
+		this.intelligence.base = 18;
+		this.spirit.base       = 13;
+		this.libido.base       = 20;
+		this.charisma.base     = 20;
 
-	this.level             = 4 + Math.floor(Math.random() * 4);
-	this.sexlevel          = 3;
+		this.elementDef.dmg[Element.mEarth]   =  0.5;
+		this.elementDef.dmg[Element.mFire]    = -0.5;
+		this.elementDef.dmg[Element.mThunder] = -0.5;
+		this.elementDef.dmg[Element.mWind]    =  0.5;
 
-	this.combatExp         = 5 + this.level;
-	this.coinDrop          = 2 + this.level * 4;
+		this.level             = 4 + Math.floor(Math.random() * 4);
+		this.sexlevel          = 3;
 
-	this.body.SetBodyColor(Color.white);
+		this.combatExp         = 5 + this.level;
+		this.coinDrop          = 2 + this.level * 4;
 
-	this.body.SetEyeColor(Color.red);
+		this.body.SetBodyColor(Color.white);
 
-	TF.SetAppendage(this.Back(), AppendageType.wing, Race.Moth, Color.purple);
-	TF.SetAppendage(this.Appendages(), AppendageType.antenna, Race.Moth, Color.purple);
+		this.body.SetEyeColor(Color.red);
 
-	// Set hp and mana to full
-	this.SetLevelBonus();
-	this.RestFull();
+		TF.SetAppendage(this.Back(), AppendageType.wing, Race.Moth, Color.purple);
+		TF.SetAppendage(this.Appendages(), AppendageType.antenna, Race.Moth, Color.purple);
+
+		// Set hp and mana to full
+		this.SetLevelBonus();
+		this.RestFull();
+	}
+	
+	static Met() {
+		return GameCache().flags["Moth"] & MothgirlFlags.Met;
+	}
+
+	static Sexed() {
+		return GameCache().flags["Moth"] & MothgirlFlags.Sexed;
+	}
 }
-Mothgirl.prototype = new Entity();
-Mothgirl.prototype.constructor = Mothgirl;
 
-Mothgirl.Flags = {
-	Met : 1,
-	Sexed : 2
+export enum MothgirlFlags {
+	Met   = 1,
+	Sexed = 2
 };
-
-Mothgirl.Met = function() {
-	return GameCache().flags["Moth"] & Mothgirl.Flags.Met;
-}
-
-Mothgirl.Sexed = function() {
-	return GameCache().flags["Moth"] & Mothgirl.Flags.Sexed;
-}
 
 Mothgirl.prototype.DropTable = function() {
 	var drops = [];
@@ -138,16 +144,17 @@ Mothgirl.prototype.Act = function(encounter, activeChar) {
 
 MothgirlScenes.LoneEnc = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let terry = GAME().terry;
+	let party : Party = GAME().party;
 	var enemy = new Party();
 	var moth = new Mothgirl();
 	enemy.AddMember(moth);
-	var enc = new Encounter(enemy);
+	var enc : any = new Encounter(enemy);
 	enc.moth = moth;
 
 	enc.coin = Math.max(Math.floor(party.coin * 0.1), 100);
 
-	var parse = {
+	var parse : any = {
 		legs   : function() { return player.LegsDesc(); },
 		weapon : function() { return player.WeaponDesc(); },
 		armor  : function() { return player.ArmorDesc(); },
@@ -179,7 +186,7 @@ MothgirlScenes.LoneEnc = function() {
 		}
 		Text.Flush();
 
-		GameCache().flags["Moth"] |= Mothgirl.Flags.Met;
+		GameCache().flags["Moth"] |= MothgirlFlags.Met;
 
 		//[Fight] [Give Money] [Trade Sex]
 		var options = new Array();
@@ -294,7 +301,7 @@ MothgirlScenes.WinPrompt = function() {
 	var p1cock = player.BiggestCock(cocksInAss);
 	var strapon = p1cock ? p1cock.isStrapon : false;
 
-	var parse = {
+	var parse : any = {
 		acocks : function() { return player.MultiCockDesc(cocksInAss); }
 	};
 	if(strapon) parse["acocks"] = "strapon";
@@ -336,12 +343,12 @@ MothgirlScenes.WinPrompt = function() {
 	Encounter.prototype.onVictory.call(enc);
 }
 
-MothgirlScenes.WinTitfuck = function(enc) {
+MothgirlScenes.WinTitfuck = function(enc : any) {
 	let player = GAME().player;
 	var p1cock = player.BiggestCock();
 	var hugecock = p1cock.Len() > 20;
 
-	var parse = {
+	var parse : any = {
 		breasts : function() { return player.FirstBreastRow().Short(); },
 		tongue  : function() { return player.TongueDesc(); },
 		armor   : function() { return player.ArmorDesc(); },
@@ -394,14 +401,14 @@ MothgirlScenes.WinTitfuck = function(enc) {
 	Gui.NextPrompt();
 }
 
-MothgirlScenes.WinAnal = function(enc, cocksInAss) {
+MothgirlScenes.WinAnal = function(enc : any, cocksInAss : Cock[]) {
 	let player = GAME().player;
 	var moth = enc.moth;
 	var p1cock = player.BiggestCock(cocksInAss);
 	var strapon = p1cock.isStrapon;
 	var hugecock = p1cock.Len() > 50;
 
-	var parse = {
+	var parse : any = {
 		armor : function() { return player.ArmorDesc(); },
 		cocks : function() { return player.MultiCockDesc(cocksInAss); },
 		cock  : function() { return p1cock.Short(); },
@@ -493,11 +500,11 @@ MothgirlScenes.WinAnal = function(enc, cocksInAss) {
 	Gui.NextPrompt();
 }
 
-MothgirlScenes.WinCunn = function(enc) {
+MothgirlScenes.WinCunn = function(enc : any) {
 	let player = GAME().player;
 	var moth = enc.moth;
 
-	var parse = {
+	var parse : any = {
 		cocks : function() { return player.MultiCockDesc(); },
 		cunt  : function() { return player.FirstVag().Short(); },
 		clit  : function() { return player.FirstVag().ClitShort(); },
@@ -551,13 +558,15 @@ MothgirlScenes.WinCunn = function(enc) {
 	Gui.NextPrompt();
 }
 
-MothgirlScenes.Loss = function(enc, traded) {
+MothgirlScenes.Loss = function(enc : any, traded? : boolean) {
 	let player = GAME().player;
+	let party : Party = GAME().party;
+
 	var moth = enc.moth;
 	var p1cock = player.BiggestCock();
 	traded = traded || enc.coin <= 0;
 
-	var parse = {
+	var parse : any = {
 		coin    : Text.NumToText(enc.coin),
 		armor   : function() { return player.ArmorDesc(); },
 		legs    : function() { return player.LegsDesc(); },
@@ -731,4 +740,4 @@ MothgirlScenes.Loss = function(enc, traded) {
 	Gui.NextPrompt();
 }
 
-export { Mothgirl, MothgirlScenes };
+export { MothgirlScenes };

@@ -9,7 +9,7 @@ let DateScenes = {};
 
 DateScenes.Prompt = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let cveta = GAME().cveta;
 
 	var parse = {
@@ -102,7 +102,7 @@ DateScenes.Prompt = function() {
 
 DateScenes.PartySetup = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let cveta = GAME().cveta;
 
 	cveta.RestFull();

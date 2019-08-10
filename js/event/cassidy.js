@@ -2721,7 +2721,7 @@ CassidyScenes.BigReveal = function() {
 
 
 CassidyScenes.Model = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let player = GAME().player;
 	let cassidy = GAME().cassidy;
 
@@ -3398,7 +3398,7 @@ CassidySpar.prototype.PhysDmgHP = function(encounter, caster, val) {
 
 // SET UP ENCOUNTER SPAR
 CassidyScenes.Spar = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 
 	var cass = new CassidySpar();
 	

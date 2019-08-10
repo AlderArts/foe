@@ -7,8 +7,9 @@ import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { CaleFlags } from './cale-flags';
 import { Rosalin } from './rosalin';
-import { LowerBodyType } from '../../entity-desc';
+import { LowerBodyType } from '../../body/body';
 import { Jobs } from '../../job';
+import { Party } from '../../party';
 
 let CaleScenes : any = {
     Sex : CaleSexScenes,
@@ -513,7 +514,7 @@ CaleScenes.Shop = function() {
 
 CaleScenes.TalkPrompt = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let rosalin = GAME().rosalin;
 	let cale = GAME().cale;
 	var parse : any = {

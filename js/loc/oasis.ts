@@ -9,6 +9,7 @@ import { Item } from '../item';
 import { Gui } from '../gui';
 import { Entity } from '../entity';
 import { OasisFlags } from './oasis-flags';
+import { Party } from '../party';
 
 let OasisScenes : any = {};
 
@@ -149,7 +150,7 @@ OasisScenes.CaravanShop = function(back : any) {
 
 OasisScenes.DesertCaravanEncounter = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let oasis = GAME().oasis;
 	var parse : any = {
 		

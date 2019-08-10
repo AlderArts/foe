@@ -9,12 +9,7 @@ import './assets/css/droid-sans.css';
 
 // Javascript
 
-// Entity scripts
-import './js/event/player.js';
-
 // Locations and events
-import './js/event/introduction.js';
-
 import './js/loc/rigard/rigard.js';
 import './js/loc/rigard/residential.js';
 import './js/loc/rigard/guards.js';
@@ -34,7 +29,6 @@ import './js/loc/rigard/inn.js';
 import './js/loc/rigard/magetower.js';
 
 import './js/event/dreams.js';
-import './js/event/nursery.js';
 
 // Characters
 import './js/event/asche.js';
@@ -43,12 +37,8 @@ import './js/event/asche-sex.js';
 import './js/event/cassidy.js';
 import './js/event/cassidy-sex.js';
 import './js/event/fera.js';
-import './js/event/miranda.js';
 import './js/event/terry.js';
 import './js/event/momo.js';
-import './js/event/sylistraxia.js';
-import './js/event/kiakai.js';
-import './js/event/zina.js';
 
 import './js/event/brothel/roa.js';
 import './js/event/brothel/ches.js';
@@ -63,9 +53,6 @@ import './js/event/farm/adrian.js';
 import './js/event/farm/danie.js';
 
 import './js/event/highlands/isla.js';
-
-import './js/event/uru.js';
-import './js/event/aria.js';
 
 import './js/event/royals/lei.js';
 import './js/event/royals/lei-tasks.js';
@@ -92,13 +79,6 @@ import './js/event/outlaws/bulltower.js';
 import './js/event/outlaws/cavalcade.js';
 
 import './js/event/raven.js';
-
-// Enemies
-import './js/enemy/mothgirl.js';
-import './js/enemy/naga.js';
-
-import './js/enemy/orchid.js';
-import './js/enemy/malice-scouts.js';
 
 // Start up the main text
 import './js/main-entry';

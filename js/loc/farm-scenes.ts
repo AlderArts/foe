@@ -15,6 +15,7 @@ import { Season } from '../time';
 import { RoamingScenes } from '../event/roaming';
 import { DreamsScenes } from '../event/dreams';
 import { InitMarket } from "./farm-market";
+import { Party } from "../party";
 
 
 export function InitFarm() {
@@ -61,7 +62,7 @@ FarmScenesIntro.Start = function() {
 
 FarmScenesIntro.Approach = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let gwendy = GAME().gwendy;
 
 	party.location = FarmLoc.Fields;
@@ -156,7 +157,7 @@ FarmScenesIntro.Approach = function() {
 }
 
 FarmScenesIntro.EnterBarn = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 
 	party.location = FarmLoc.Barn;
 	TimeStep({minute: 10});
@@ -182,7 +183,7 @@ FarmScenesIntro.EnterBarn = function() {
 }
 
 FarmScenesIntro.EnterLoft = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 
 	party.location = FarmLoc.Loft;
 	TimeStep({minute: 5});
@@ -271,7 +272,7 @@ FarmScenesIntro.GwendyQuestions1 = function() {
 
 FarmScenesIntro.GwendyQuestions2 = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let gwendy = GAME().gwendy;
 	let farm = GAME().farm;
 	let danie = GAME().danie;
@@ -443,7 +444,7 @@ FarmScenesIntro.GwendyQuestions2 = function() {
 
 FarmScenesIntro.HelpAdrian = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let adrian = GAME().adrian;
 
 	party.location = FarmLoc.Barn;
@@ -573,7 +574,7 @@ FarmScenesIntro.HelpAdrianFinished = function() {
 
 FarmScenesIntro.MeetDanie = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let danie = GAME().danie;
 
 	Text.Clear();
@@ -949,7 +950,7 @@ FarmScenesIntro.DanieAnalSex = function() {
 
 FarmScenesIntro.ReturnToGwendy = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let farm = GAME().farm;
 
 	Text.Clear();
@@ -1074,7 +1075,7 @@ FarmLoc.Fields.onEntry = function(x : any, from : any) {
 FarmLoc.Fields.enc = new EncounterTable();
 FarmLoc.Fields.enc.AddEnc(function() {
 	return function() {
-		let party = GAME().party;
+		let party : Party = GAME().party;
 		Text.Clear();
 
 		Text.Add("Not having much else to do, you wander the fields for a few minutes. You pick up a particularly fresh bundle of grass. Who knows, could be useful for something.");
@@ -1094,7 +1095,7 @@ FarmLoc.Fields.enc.AddEnc(function() {
 
 FarmLoc.Fields.enc.AddEnc(function() {
 	return function() {
-		let party = GAME().party;
+		let party : Party = GAME().party;
 		Text.Clear();
 
 		Text.Add("Not having much else to do, you wander the fields for a few minutes. You pick up a pretty flower. Who knows, could be useful for something.");
@@ -1164,7 +1165,7 @@ FarmLoc.Loft.links.push(new Link(
 ));
 
 FarmLoc.Loft.SleepFunc = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 
 	var parse = {
 

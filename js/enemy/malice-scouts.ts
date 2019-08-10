@@ -1,9 +1,10 @@
+import * as _ from 'lodash';
 
 import { Entity } from '../entity';
 import { EncounterTable } from '../encountertable';
 import { Party } from '../party';
 import { Gender } from '../body/gender';
-import { WorldTime } from '../GAME';
+import { WorldTime, TimeStep, GAME } from '../GAME';
 import { Images } from '../assets';
 import { Element } from '../damagetype';
 import { Race } from '../body/race';
@@ -23,12 +24,17 @@ import { Encounter } from '../combat';
 import { Gui } from '../gui';
 import { SetGameState, GameState } from '../gamestate';
 import { TargetStrategy } from '../entity';
+import { AlchemyItems } from '../items/alchemy';
+import { Sex } from '../entity-sex';
+import { HipSize } from '../body/body';
+import { Capacity, Orifice } from '../body/orifice';
+import { CockType, Cock } from '../body/cock';
 
 /*
 Tier 1 Malice scouts and outriders
 */
 
-let MaliceScoutsScenes = {};
+let MaliceScoutsScenes : any = {};
 MaliceScoutsScenes.Catboy = {};
 MaliceScoutsScenes.Mare = {};
 MaliceScoutsScenes.Goat = {};
@@ -39,156 +45,160 @@ MaliceScoutsScenes.Group = {};
  * Catboy Mage, lvl 9-13
  *
  */
-function CatboyMage(levelbonus) {
-	Entity.call(this);
-	this.ID = "catboymage";
+export class CatboyMage extends Entity {
+	turnCounter : number;
 
-	this.avatar.combat     = Images.catboy;
-	this.name              = "Catboy";
-	this.monsterName       = "the catboy";
-	this.MonsterName       = "The catboy";
-	this.body.DefMale();
-	this.FirstCock().thickness.base = 4;
-	this.FirstCock().length.base = 19;
-	this.Balls().size.base = 2;
+	constructor(levelbonus? : number) {
+		super();
 
-	this.maxHp.base        = 500;
-	this.maxSp.base        = 800;
-	this.maxLust.base      = 50;
-	// Main stats
-	this.strength.base     = 20;
-	this.stamina.base      = 25;
-	this.dexterity.base    = 30;
-	this.intelligence.base = 50;
-	this.spirit.base       = 45;
-	this.libido.base       = 20;
-	this.charisma.base     = 18;
+		this.ID = "catboymage";
 
-	this.elementDef.dmg[Element.mWater]  = -0.5;
+		this.avatar.combat     = Images.catboy;
+		this.name              = "Catboy";
+		this.monsterName       = "the catboy";
+		this.MonsterName       = "The catboy";
+		this.body.DefMale();
+		this.FirstCock().thickness.base = 4;
+		this.FirstCock().length.base = 19;
+		this.Balls().size.base = 2;
 
-	var level = 0;
+		this.maxHp.base        = 500;
+		this.maxSp.base        = 800;
+		this.maxLust.base      = 50;
+		// Main stats
+		this.strength.base     = 20;
+		this.stamina.base      = 25;
+		this.dexterity.base    = 30;
+		this.intelligence.base = 50;
+		this.spirit.base       = 45;
+		this.libido.base       = 20;
+		this.charisma.base     = 18;
 
-	var scenes = new EncounterTable();
-	scenes.AddEnc(function() {
-		level = 9;
-	}, 4.0, function() { return true; });
-	scenes.AddEnc(function() {
-		level = 10;
-	}, 5.0, function() { return true; });
-	scenes.AddEnc(function() {
-		level = 11;
-	}, 3.0, function() { return true; });
-	scenes.AddEnc(function() {
-		level = 12;
-	}, 2.0, function() { return true; });
-	scenes.AddEnc(function() {
-		level = 13;
-	}, 1.0, function() { return true; });
-	scenes.Get();
+		this.elementDef.dmg[Element.mWater]  = -0.5;
 
-	this.level             = level + (levelbonus || 0);
-	this.sexlevel          = 0;
+		var level = 0;
 
-	this.combatExp         = this.level * 2;
-	this.coinDrop          = this.level * 5;
+		var scenes = new EncounterTable();
+		scenes.AddEnc(function() {
+			level = 9;
+		}, 4.0, function() { return true; });
+		scenes.AddEnc(function() {
+			level = 10;
+		}, 5.0, function() { return true; });
+		scenes.AddEnc(function() {
+			level = 11;
+		}, 3.0, function() { return true; });
+		scenes.AddEnc(function() {
+			level = 12;
+		}, 2.0, function() { return true; });
+		scenes.AddEnc(function() {
+			level = 13;
+		}, 1.0, function() { return true; });
+		scenes.Get();
 
-	this.body.SetRace(Race.Feline);
+		this.level             = level + (levelbonus || 0);
+		this.sexlevel          = 0;
 
-	this.body.SetBodyColor(Color.white);
+		this.combatExp         = this.level * 2;
+		this.coinDrop          = this.level * 5;
 
-	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Feline, Color.white);
+		this.body.SetRace(Race.Feline);
 
-	this.body.SetEyeColor(Color.green);
+		this.body.SetBodyColor(Color.white);
 
-	this.weaponSlot   = WeaponsItems.MageStaff;
-	this.topArmorSlot = ArmorItems.MageRobes;
+		TF.SetAppendage(this.Back(), AppendageType.tail, Race.Feline, Color.white);
 
-	this.Equip();
+		this.body.SetEyeColor(Color.green);
 
-	// Set hp and mana to full
-	this.SetLevelBonus();
-	this.RestFull();
-}
-CatboyMage.prototype = new Entity();
-CatboyMage.prototype.constructor = CatboyMage;
+		this.weaponSlot   = WeaponsItems.MageStaff;
+		this.topArmorSlot = ArmorItems.MageRobes;
 
-CatboyMage.prototype.DropTable = function() {
-	var drops = [];
-	if(Math.random() < 0.1)  drops.push({ it: AlchemyItems.Felinix });
-	if(Math.random() < 0.02) drops.push({ it: AlchemySpecial.Tigris });
-	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.Whiskers });
-	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HairBall });
-	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.CatClaw });
+		this.Equip();
 
-	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Bovia });
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.GoatMilk });
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.SheepMilk });
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.CowMilk });
-	if(Math.random() < 0.05) drops.push({ it: IngredientItems.LizardEgg });
-	if(Math.random() < 0.05) drops.push({ it: IngredientItems.MFluff });
-
-	if(Math.random() < 0.3)  drops.push({ it: IngredientItems.FreshGrass });
-	if(Math.random() < 0.3)  drops.push({ it: IngredientItems.SpringWater });
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.Foxglove });
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.TreeBark });
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.RawHoney });
-
-	if(Math.random() < 0.05) drops.push({ it: IngredientItems.Wolfsbane });
-	if(Math.random() < 0.05) drops.push({ it: IngredientItems.Ramshorn });
-
-	if(Math.random() < 0.01) drops.push({ it: IngredientItems.BlackGem });
-	if(Math.random() < 0.01) drops.push({ it: IngredientItems.CorruptPlant });
-	if(Math.random() < 0.01) drops.push({ it: IngredientItems.CorruptSeed });
-	if(Math.random() < 0.01) drops.push({ it: IngredientItems.DemonSeed });
-
-	return drops;
-}
-
-CatboyMage.prototype.Act = function(encounter, activeChar) {
-	// TODO: Very TEMP
-	Text.Add(this.name + " acts! Meow!");
-	Text.NL();
-	Text.Flush();
-
-	// Pick a random target
-	var targets = this.GetPartyTarget(encounter, activeChar);
-	var t = this.GetSingleTarget(encounter, activeChar);
-
-	this.turnCounter = this.turnCounter || 0;
-
-	var first = (this.turnCounter == 0);
-	this.turnCounter++;
-
-	if(first) {
-		CombatItems.DecoyStick.combat.Use(encounter, this);
-		return;
+		// Set hp and mana to full
+		this.SetLevelBonus();
+		this.RestFull();
 	}
 
-	var that = this;
+	DropTable() {
+		var drops = [];
+		if(Math.random() < 0.1)  drops.push({ it: AlchemyItems.Felinix });
+		if(Math.random() < 0.02) drops.push({ it: AlchemySpecial.Tigris });
+		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.Whiskers });
+		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HairBall });
+		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.CatClaw });
 
-	var scenes = new EncounterTable();
-	scenes.AddEnc(function() {
-		Abilities.Attack.Use(encounter, that, t);
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
-		CombatItems.DecoyStick.combat.Use(encounter, that);
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
-		CombatItems.HPotion.combat.Use(encounter, that);
-	}, 1.0, function() { return that.HPLevel() < 0.5; });
-	scenes.AddEnc(function() {
-		Abilities.Black.Bolt.Use(encounter, that, t);
-	}, 3.0, function() { return Abilities.Black.Bolt.enabledCondition(encounter, that); });
-	scenes.AddEnc(function() {
-		Abilities.Black.Eruption.Use(encounter, that, targets);
-	}, 4.0, function() { return Abilities.Black.Eruption.enabledCondition(encounter, that); });
-	scenes.AddEnc(function() {
-		Abilities.Black.ThunderStorm.Use(encounter, that, targets);
-	}, 3.0, function() { return Abilities.Black.ThunderStorm.enabledCondition(encounter, that); });
-	scenes.Get();
+		if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Bovia });
+		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.GoatMilk });
+		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.SheepMilk });
+		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.CowMilk });
+		if(Math.random() < 0.05) drops.push({ it: IngredientItems.LizardEgg });
+		if(Math.random() < 0.05) drops.push({ it: IngredientItems.MFluff });
+
+		if(Math.random() < 0.3)  drops.push({ it: IngredientItems.FreshGrass });
+		if(Math.random() < 0.3)  drops.push({ it: IngredientItems.SpringWater });
+		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.Foxglove });
+		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.TreeBark });
+		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.RawHoney });
+
+		if(Math.random() < 0.05) drops.push({ it: IngredientItems.Wolfsbane });
+		if(Math.random() < 0.05) drops.push({ it: IngredientItems.Ramshorn });
+
+		if(Math.random() < 0.01) drops.push({ it: IngredientItems.BlackGem });
+		if(Math.random() < 0.01) drops.push({ it: IngredientItems.CorruptPlant });
+		if(Math.random() < 0.01) drops.push({ it: IngredientItems.CorruptSeed });
+		if(Math.random() < 0.01) drops.push({ it: IngredientItems.DemonSeed });
+
+		return drops;
+	}
+
+	Act(encounter : any, activeChar : any) {
+		// TODO: Very TEMP
+		Text.Add(this.name + " acts! Meow!");
+		Text.NL();
+		Text.Flush();
+
+		// Pick a random target
+		var targets = this.GetPartyTarget(encounter, activeChar);
+		var t = this.GetSingleTarget(encounter, activeChar);
+
+		this.turnCounter = this.turnCounter || 0;
+
+		var first = (this.turnCounter == 0);
+		this.turnCounter++;
+
+		if(first) {
+			CombatItems.DecoyStick.combat.Use(encounter, this);
+			return;
+		}
+
+		var that = this;
+
+		var scenes = new EncounterTable();
+		scenes.AddEnc(function() {
+			Abilities.Attack.Use(encounter, that, t);
+		}, 1.0, function() { return true; });
+		scenes.AddEnc(function() {
+			CombatItems.DecoyStick.combat.Use(encounter, that);
+		}, 1.0, function() { return true; });
+		scenes.AddEnc(function() {
+			CombatItems.HPotion.combat.Use(encounter, that);
+		}, 1.0, function() { return that.HPLevel() < 0.5; });
+		scenes.AddEnc(function() {
+			Abilities.Black.Bolt.Use(encounter, that, t);
+		}, 3.0, function() { return Abilities.Black.Bolt.enabledCondition(encounter, that); });
+		scenes.AddEnc(function() {
+			Abilities.Black.Eruption.Use(encounter, that, targets);
+		}, 4.0, function() { return Abilities.Black.Eruption.enabledCondition(encounter, that); });
+		scenes.AddEnc(function() {
+			Abilities.Black.ThunderStorm.Use(encounter, that, targets);
+		}, 3.0, function() { return Abilities.Black.ThunderStorm.enabledCondition(encounter, that); });
+		scenes.Get();
+	}
+
 }
 
-MaliceScoutsScenes.Catboy.Impregnate = function(mother, father, slot, load) {
+MaliceScoutsScenes.Catboy.Impregnate = function(mother : Entity, father : CatboyMage, slot? : number, load? : number) {
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother : mother,
@@ -206,142 +216,143 @@ MaliceScoutsScenes.Catboy.Impregnate = function(mother, father, slot, load) {
  * Centaur Mare, lvl 9-13
  *
  */
-function CentaurMare(levelbonus) {
-	Entity.call(this);
-	this.ID = "centaurmare";
+export class CentaurMare extends Entity {
+	constructor(levelbonus? : number) {
+		super();
 
-	this.avatar.combat     = Images.centaur_mare;
-	this.name              = "Centauress";
-	this.monsterName       = "the centauress";
-	this.MonsterName       = "The centauress";
-	this.body.DefFemale();
-	this.FirstVag().virgin = false;
-	this.Butt().virgin     = false;
+		this.ID = "centaurmare";
 
-	this.maxHp.base        = 1000;
-	this.maxSp.base        = 400;
-	this.maxLust.base      = 400;
-	// Main stats
-	// High stamina, dex. Mid str, int, spi, libido. Low cha.
-	this.strength.base     = 40;
-	this.stamina.base      = 50;
-	this.dexterity.base    = 45;
-	this.intelligence.base = 35;
-	this.spirit.base       = 35;
-	this.libido.base       = 30;
-	this.charisma.base     = 15;
+		this.avatar.combat     = Images.centaur_mare;
+		this.name              = "Centauress";
+		this.monsterName       = "the centauress";
+		this.MonsterName       = "The centauress";
+		this.body.DefFemale();
+		this.FirstVag().virgin = false;
+		this.Butt().virgin     = false;
 
-	this.elementDef.dmg[Element.mEarth]  = 0.5;
+		this.maxHp.base        = 1000;
+		this.maxSp.base        = 400;
+		this.maxLust.base      = 400;
+		// Main stats
+		// High stamina, dex. Mid str, int, spi, libido. Low cha.
+		this.strength.base     = 40;
+		this.stamina.base      = 50;
+		this.dexterity.base    = 45;
+		this.intelligence.base = 35;
+		this.spirit.base       = 35;
+		this.libido.base       = 30;
+		this.charisma.base     = 15;
 
-	var level = 0;
+		this.elementDef.dmg[Element.mEarth]  = 0.5;
 
-	var scenes = new EncounterTable();
-	scenes.AddEnc(function() {
-		level = 9;
-	}, 4.0, function() { return true; });
-	scenes.AddEnc(function() {
-		level = 10;
-	}, 5.0, function() { return true; });
-	scenes.AddEnc(function() {
-		level = 11;
-	}, 3.0, function() { return true; });
-	scenes.AddEnc(function() {
-		level = 12;
-	}, 2.0, function() { return true; });
-	scenes.AddEnc(function() {
-		level = 13;
-	}, 1.0, function() { return true; });
-	scenes.Get();
+		var level = 0;
 
-	this.level             = level + (levelbonus || 0);
-	this.sexlevel          = 0;
+		var scenes = new EncounterTable();
+		scenes.AddEnc(function() {
+			level = 9;
+		}, 4.0, function() { return true; });
+		scenes.AddEnc(function() {
+			level = 10;
+		}, 5.0, function() { return true; });
+		scenes.AddEnc(function() {
+			level = 11;
+		}, 3.0, function() { return true; });
+		scenes.AddEnc(function() {
+			level = 12;
+		}, 2.0, function() { return true; });
+		scenes.AddEnc(function() {
+			level = 13;
+		}, 1.0, function() { return true; });
+		scenes.Get();
 
-	this.combatExp         = this.level * 2;
-	this.coinDrop          = this.level * 5;
+		this.level             = level + (levelbonus || 0);
+		this.sexlevel          = 0;
 
-	this.body.SetRace(Race.Horse);
+		this.combatExp         = this.level * 2;
+		this.coinDrop          = this.level * 5;
 
-	this.body.SetBodyColor(Color.brown);
+		this.body.SetRace(Race.Horse);
 
-	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Horse, Color.black);
+		this.body.SetBodyColor(Color.brown);
 
-	this.body.SetEyeColor(Color.blue);
+		TF.SetAppendage(this.Back(), AppendageType.tail, Race.Horse, Color.black);
 
-	this.weaponSlot   = Items.Weapons.OakSpear;
-	this.topArmorSlot = Items.Armor.BronzeChest;
-	this.botArmorSlot = Items.Armor.BronzeLeggings;
+		this.body.SetEyeColor(Color.blue);
 
-	this.Equip();
+		this.weaponSlot   = WeaponsItems.OakSpear;
+		this.topArmorSlot = ArmorItems.BronzeChest;
+		this.botArmorSlot = ArmorItems.BronzeLeggings;
 
-	// Set hp and mana to full
-	this.SetLevelBonus();
-	this.RestFull();
-}
-CentaurMare.prototype = new Entity();
-CentaurMare.prototype.constructor = CentaurMare;
+		this.Equip();
 
-CentaurMare.prototype.DropTable = function() {
-	var drops = [];
+		// Set hp and mana to full
+		this.SetLevelBonus();
+		this.RestFull();
+	}
 
-	if(Math.random() < 0.1)  drops.push({ it: AlchemyItems.Equinium });
-	if(Math.random() < 0.05) drops.push({ it: AlchemySpecial.Taurico });
-	if(Math.random() < 0.01) drops.push({ it: AlchemySpecial.EquiniumPlus });
-	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HorseHair });
-	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HorseShoe });
-	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HorseCum });
-
-	if(Math.random() < 0.3)  drops.push({ it: IngredientItems.FruitSeed });
-	if(Math.random() < 0.2)  drops.push({ it: IngredientItems.Hummus });
-	if(Math.random() < 0.2)  drops.push({ it: IngredientItems.SpringWater });
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.FlowerPetal });
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.Wolfsbane });
-
-	if(Math.random() < 0.05) drops.push({ it: WeaponsItems.OakSpear });
-	if(Math.random() < 0.05) drops.push({ it: ArmorItems.BronzeChest });
-	if(Math.random() < 0.05) drops.push({ it: ToysItems.EquineDildo });
-	if(Math.random() < 0.05) drops.push({ it: CombatItems.HPotion });
-	if(Math.random() < 0.05) drops.push({ it: CombatItems.LustDart });
-
-	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Caprinium });
-	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Cerventine });
-	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Estros });
-	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Fertilium });
-	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.FertiliumPlus });
-
-	return drops;
-}
-
-CentaurMare.prototype.Act = function(encounter, activeChar) {
-	// TODO: Very TEMP
-	Text.Add(this.name + " acts! Hyaaah!");
-	Text.NL();
-	Text.Flush();
-
-	// Pick a random target
-	var t = this.GetSingleTarget(encounter, activeChar);
-
-	var that = this;
-
-	var scenes = new EncounterTable();
-
-	scenes.AddEnc(function() {
-		Abilities.Attack.Use(encounter, that, t);
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
-		Abilities.Physical.Bash.Use(encounter, that, t);
-	}, 2.0, function() { return Abilities.Physical.Bash.enabledCondition(encounter, that); });
-	scenes.AddEnc(function() {
-		Abilities.Physical.CrushingStrike.Use(encounter, that, t);
-	}, 3.0, function() { return Abilities.Physical.CrushingStrike.enabledCondition(encounter, that); });
-	scenes.AddEnc(function() {
-		Abilities.Physical.FocusStrike.Use(encounter, that, t);
-	}, 2.0, function() { return Abilities.Physical.FocusStrike.enabledCondition(encounter, that); });
-	/* TODO Taunt attack? (focus)
-	scenes.AddEnc(function() {
-		Abilities.Physical.TAttack.Use(encounter, that, t);
-	}, 3.0, function() { return Abilities.Physical.TAttack.enabledCondition(encounter, that); });
-	*/
-	scenes.Get();
+	DropTable() {
+		var drops = [];
+	
+		if(Math.random() < 0.1)  drops.push({ it: AlchemyItems.Equinium });
+		if(Math.random() < 0.05) drops.push({ it: AlchemySpecial.Taurico });
+		if(Math.random() < 0.01) drops.push({ it: AlchemySpecial.EquiniumPlus });
+		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HorseHair });
+		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HorseShoe });
+		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HorseCum });
+	
+		if(Math.random() < 0.3)  drops.push({ it: IngredientItems.FruitSeed });
+		if(Math.random() < 0.2)  drops.push({ it: IngredientItems.Hummus });
+		if(Math.random() < 0.2)  drops.push({ it: IngredientItems.SpringWater });
+		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.FlowerPetal });
+		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.Wolfsbane });
+	
+		if(Math.random() < 0.05) drops.push({ it: WeaponsItems.OakSpear });
+		if(Math.random() < 0.05) drops.push({ it: ArmorItems.BronzeChest });
+		if(Math.random() < 0.05) drops.push({ it: ToysItems.EquineDildo });
+		if(Math.random() < 0.05) drops.push({ it: CombatItems.HPotion });
+		if(Math.random() < 0.05) drops.push({ it: CombatItems.LustDart });
+	
+		if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Caprinium });
+		if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Cerventine });
+		if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Estros });
+		if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Fertilium });
+		if(Math.random() < 0.01) drops.push({ it: AlchemyItems.FertiliumPlus });
+	
+		return drops;
+	}
+	
+	Act(encounter : any, activeChar : any) {
+		// TODO: Very TEMP
+		Text.Add(this.name + " acts! Hyaaah!");
+		Text.NL();
+		Text.Flush();
+	
+		// Pick a random target
+		var t = this.GetSingleTarget(encounter, activeChar);
+	
+		var that = this;
+	
+		var scenes = new EncounterTable();
+	
+		scenes.AddEnc(function() {
+			Abilities.Attack.Use(encounter, that, t);
+		}, 1.0, function() { return true; });
+		scenes.AddEnc(function() {
+			Abilities.Physical.Bash.Use(encounter, that, t);
+		}, 2.0, function() { return Abilities.Physical.Bash.enabledCondition(encounter, that); });
+		scenes.AddEnc(function() {
+			Abilities.Physical.CrushingStrike.Use(encounter, that, t);
+		}, 3.0, function() { return Abilities.Physical.CrushingStrike.enabledCondition(encounter, that); });
+		scenes.AddEnc(function() {
+			Abilities.Physical.FocusStrike.Use(encounter, that, t);
+		}, 2.0, function() { return Abilities.Physical.FocusStrike.enabledCondition(encounter, that); });
+		/* TODO Taunt attack? (focus)
+		scenes.AddEnc(function() {
+			Abilities.Physical.TAttack.Use(encounter, that, t);
+		}, 3.0, function() { return Abilities.Physical.TAttack.enabledCondition(encounter, that); });
+		*/
+		scenes.Get();
+	}	
 }
 
 
@@ -351,166 +362,168 @@ CentaurMare.prototype.Act = function(encounter, activeChar) {
  * Goat Alchemist, lvl 9-13
  *
  */
-function GoatAlchemist(levelbonus) {
-	Entity.call(this);
-	this.ID = "goatalchemist";
+export class GoatAlchemist extends Entity {
+	constructor(levelbonus? : number) {
+		super();
 
-	this.avatar.combat     = Images.old_goat;
-	this.name              = "Alchemist";
-	this.monsterName       = "the goat alchemist";
-	this.MonsterName       = "The goat alchemist";
+		this.ID = "goatalchemist";
+
+		this.avatar.combat     = Images.old_goat;
+		this.name              = "Alchemist";
+		this.monsterName       = "the goat alchemist";
+		this.MonsterName       = "The goat alchemist";
+		
+		this.body.DefMale();
+		this.FirstCock().thickness.base = 5;
+		this.FirstCock().length.base = 22;
+		this.Balls().size.base = 3;
+
+		this.maxHp.base        = 700;
+		this.maxSp.base        = 500;
+		this.maxLust.base      = 500;
+		// Main stats
+		this.strength.base     = 22;
+		this.stamina.base      = 45;
+		this.dexterity.base    = 34;
+		this.intelligence.base = 40;
+		this.spirit.base       = 40;
+		this.libido.base       = 35;
+		this.charisma.base     = 13;
+
+		this.elementDef.dmg[Element.mIce]  =  0.5;
+		this.elementDef.dmg[Element.mFire] = -0.5;
+
+		var level = 0;
+
+		var scenes = new EncounterTable();
+		scenes.AddEnc(function() {
+			level = 9;
+		}, 4.0, function() { return true; });
+		scenes.AddEnc(function() {
+			level = 10;
+		}, 5.0, function() { return true; });
+		scenes.AddEnc(function() {
+			level = 11;
+		}, 3.0, function() { return true; });
+		scenes.AddEnc(function() {
+			level = 12;
+		}, 2.0, function() { return true; });
+		scenes.AddEnc(function() {
+			level = 13;
+		}, 1.0, function() { return true; });
+		scenes.Get();
+
+		this.level             = level + (levelbonus || 0);
+		this.sexlevel          = 0;
+
+		this.combatExp         = this.level * 2;
+		this.coinDrop          = this.level * 5;
+
+		this.body.SetRace(Race.Goat);
+
+		this.body.SetBodyColor(Color.white);
+
+		TF.SetAppendage(this.Back(), AppendageType.tail, Race.Goat, Color.white);
+
+		this.body.SetEyeColor(Color.gray);
+
+		this.topArmorSlot = ArmorItems.SimpleRobes;
+
+		this.Equip();
+
+		// Set hp and mana to full
+		this.SetLevelBonus();
+		this.RestFull();
+	}
+
+
+	DropTable() {
+		var drops = [];
+		if(Math.random() < 0.1)  drops.push({ it: AlchemyItems.Caprinium });
+		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.Ramshorn });
+		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.GoatMilk });
+		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.GoatFleece });
+		
+		if(Math.random() < 0.3)  drops.push({ it: IngredientItems.FreshGrass });
+		if(Math.random() < 0.3)  drops.push({ it: IngredientItems.SpringWater });
+		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.Foxglove });
+		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.FlowerPetal });
+		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.FoxBerries });
+		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.TreeBark });
+		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.AntlerChip });
+		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.SVenom });
+		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.MDust });
+		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.RawHoney });
+		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.BeeChitin });
 	
-	this.body.DefMale();
-	this.FirstCock().thickness.base = 5;
-	this.FirstCock().length.base = 22;
-	this.Balls().size.base = 3;
-
-	this.maxHp.base        = 700;
-	this.maxSp.base        = 500;
-	this.maxLust.base      = 500;
-	// Main stats
-	this.strength.base     = 22;
-	this.stamina.base      = 45;
-	this.dexterity.base    = 34;
-	this.intelligence.base = 40;
-	this.spirit.base       = 40;
-	this.libido.base       = 35;
-	this.charisma.base     = 13;
-
-	this.elementDef.dmg[Element.mIce]  =  0.5;
-	this.elementDef.dmg[Element.mFire] = -0.5;
-
-	var level = 0;
-
-	var scenes = new EncounterTable();
-	scenes.AddEnc(function() {
-		level = 9;
-	}, 4.0, function() { return true; });
-	scenes.AddEnc(function() {
-		level = 10;
-	}, 5.0, function() { return true; });
-	scenes.AddEnc(function() {
-		level = 11;
-	}, 3.0, function() { return true; });
-	scenes.AddEnc(function() {
-		level = 12;
-	}, 2.0, function() { return true; });
-	scenes.AddEnc(function() {
-		level = 13;
-	}, 1.0, function() { return true; });
-	scenes.Get();
-
-	this.level             = level + (levelbonus || 0);
-	this.sexlevel          = 0;
-
-	this.combatExp         = this.level * 2;
-	this.coinDrop          = this.level * 5;
-
-	this.body.SetRace(Race.Goat);
-
-	this.body.SetBodyColor(Color.white);
-
-	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Goat, Color.white);
-
-	this.body.SetEyeColor(Color.gray);
-
-	this.topArmorSlot = ArmorItems.SimpleRobes;
-
-	this.Equip();
-
-	// Set hp and mana to full
-	this.SetLevelBonus();
-	this.RestFull();
-}
-GoatAlchemist.prototype = new Entity();
-GoatAlchemist.prototype.constructor = GoatAlchemist;
-
-GoatAlchemist.prototype.DropTable = function() {
-	var drops = [];
-	if(Math.random() < 0.1)  drops.push({ it: AlchemyItems.Caprinium });
-	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.Ramshorn });
-	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.GoatMilk });
-	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.GoatFleece });
+		if(Math.random() < 0.3) drops.push({ it: IngredientItems.Wolfsbane });
 	
-	if(Math.random() < 0.3)  drops.push({ it: IngredientItems.FreshGrass });
-	if(Math.random() < 0.3)  drops.push({ it: IngredientItems.SpringWater });
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.Foxglove });
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.FlowerPetal });
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.FoxBerries });
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.TreeBark });
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.AntlerChip });
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.SVenom });
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.MDust });
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.RawHoney });
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.BeeChitin });
-
-	if(Math.random() < 0.3) drops.push({ it: IngredientItems.Wolfsbane });
-
-	if(Math.random() < 0.02) drops.push({ it: IngredientItems.BlackGem });
-	if(Math.random() < 0.02) drops.push({ it: IngredientItems.CorruptPlant });
-	if(Math.random() < 0.02) drops.push({ it: IngredientItems.CorruptSeed });
-	if(Math.random() < 0.02) drops.push({ it: IngredientItems.DemonSeed });
-
-	return drops;
-}
-
-GoatAlchemist.prototype.Act = function(encounter, activeChar) {
-	// TODO: Very TEMP
-	Text.Add(this.name + " acts! Harrumph!");
-	Text.NL();
-	Text.Flush();
-
-	// Pick a random target
-	var targets = this.GetPartyTarget(encounter, activeChar);
-	var t = this.GetSingleTarget(encounter, activeChar);
+		if(Math.random() < 0.02) drops.push({ it: IngredientItems.BlackGem });
+		if(Math.random() < 0.02) drops.push({ it: IngredientItems.CorruptPlant });
+		if(Math.random() < 0.02) drops.push({ it: IngredientItems.CorruptSeed });
+		if(Math.random() < 0.02) drops.push({ it: IngredientItems.DemonSeed });
 	
-	var allies = this.GetPartyTarget(encounter, activeChar, true);
-	var ally = this.GetSingleTarget(encounter, activeChar, TargetStrategy.LowHp, true);
-
-	var that = this;
-
-	var scenes = new EncounterTable();
-	//Offensive
-	scenes.AddEnc(function() {
-		Abilities.Attack.Use(encounter, that, t);
-	}, 2.0, function() { return true; });
-	scenes.AddEnc(function() {
-		Abilities.Black.Shimmer.Use(encounter, that, t);
-	}, 3.0, function() { return Abilities.Black.Shimmer.enabledCondition(encounter, that); });
-	scenes.AddEnc(function() {
-		Abilities.White.Tirade.Use(encounter, that, t);
-	}, 1.0, function() { return Abilities.White.Tirade.enabledCondition(encounter, that); });
-	//Buffing/Healing
-	scenes.AddEnc(function() {
-		Items.Combat.SpeedPotion.combat.Use(encounter, that);
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
-		Abilities.White.Heal.Use(encounter, that, ally);
-	}, 1.0, function() { return Abilities.White.Heal.enabledCondition(encounter, that) && ally.HPLevel() < 0.9; });
-	scenes.AddEnc(function() {
-		Abilities.White.Cheer.Use(encounter, that, allies);
-	}, 1.0, function() { return Abilities.White.Cheer.enabledCondition(encounter, that); });
-	scenes.AddEnc(function() {
-		Abilities.White.Empower.Use(encounter, that, ally);
-	}, 1.0, function() { return Abilities.White.Empower.enabledCondition(encounter, that); });
-
-	scenes.Get();
+		return drops;
+	}
+	
+	Act(encounter : any, activeChar : any) {
+		// TODO: Very TEMP
+		Text.Add(this.name + " acts! Harrumph!");
+		Text.NL();
+		Text.Flush();
+	
+		// Pick a random target
+		var targets = this.GetPartyTarget(encounter, activeChar);
+		var t = this.GetSingleTarget(encounter, activeChar);
+		
+		var allies = this.GetPartyTarget(encounter, activeChar, true);
+		var ally = this.GetSingleTarget(encounter, activeChar, TargetStrategy.LowHp, true);
+	
+		var that = this;
+	
+		var scenes = new EncounterTable();
+		//Offensive
+		scenes.AddEnc(function() {
+			Abilities.Attack.Use(encounter, that, t);
+		}, 2.0, function() { return true; });
+		scenes.AddEnc(function() {
+			Abilities.Black.Shimmer.Use(encounter, that, t);
+		}, 3.0, function() { return Abilities.Black.Shimmer.enabledCondition(encounter, that); });
+		scenes.AddEnc(function() {
+			Abilities.White.Tirade.Use(encounter, that, t);
+		}, 1.0, function() { return Abilities.White.Tirade.enabledCondition(encounter, that); });
+		//Buffing/Healing
+		scenes.AddEnc(function() {
+			CombatItems.SpeedPotion.combat.Use(encounter, that);
+		}, 1.0, function() { return true; });
+		scenes.AddEnc(function() {
+			Abilities.White.Heal.Use(encounter, that, ally);
+		}, 1.0, function() { return Abilities.White.Heal.enabledCondition(encounter, that) && ally.HPLevel() < 0.9; });
+		scenes.AddEnc(function() {
+			Abilities.White.Cheer.Use(encounter, that, allies);
+		}, 1.0, function() { return Abilities.White.Cheer.enabledCondition(encounter, that); });
+		scenes.AddEnc(function() {
+			Abilities.White.Empower.Use(encounter, that, ally);
+		}, 1.0, function() { return Abilities.White.Empower.enabledCondition(encounter, that); });
+	
+		scenes.Get();
+	}	
 }
 
 
 
 // CATBOY SCENES
-MaliceScoutsScenes.Catboy.LoneEncounter = function(levelbonus) {
+MaliceScoutsScenes.Catboy.LoneEncounter = function(levelbonus : number) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var enemy    = new Party();
 	var catboy   = new CatboyMage(levelbonus);
 	enemy.AddMember(catboy);
-	var enc      = new Encounter(enemy);
+	var enc : any = new Encounter(enemy);
 	enc.catboy   = catboy;
 
 	enc.onEncounter = function() {
-		var parse = {
+		var parse : any = {
 			day : WorldTime().LightStr("sun beats down warmly", "moon shines softly")
 		};
 		parse = player.ParserTags(parse);
@@ -563,11 +576,11 @@ MaliceScoutsScenes.Catboy.LoneEncounter = function(levelbonus) {
 
 MaliceScoutsScenes.Catboy.WinPrompt = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var enc  = this;
 	SetGameState(GameState.Event, Gui);
 
-	var parse = {
+	var parse : any = {
 
 	};
 
@@ -655,11 +668,12 @@ MaliceScoutsScenes.Catboy.WinPrompt = function() {
 	Encounter.prototype.onVictory.call(enc);
 }
 
-MaliceScoutsScenes.Catboy.PityFuck = function(enc, win) {
+MaliceScoutsScenes.Catboy.PityFuck = function(enc : any, win : boolean) {
 	let player = GAME().player;
+	let party : Party = GAME().party;
 	var catboy = enc.catboy;
 	var p1cock = player.BiggestCock();
-	var parse = {
+	var parse : any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -852,11 +866,11 @@ MaliceScoutsScenes.Catboy.PityFuck = function(enc, win) {
 	Gui.NextPrompt();
 }
 
-MaliceScoutsScenes.Catboy.PetPlay = function(enc) {
+MaliceScoutsScenes.Catboy.PetPlay = function(enc : any) {
 	let player = GAME().player;
 	var catboy = enc.catboy;
 	var p1cock = player.BiggestCock();
-	var parse = {
+	var parse : any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -1124,9 +1138,9 @@ MaliceScoutsScenes.Catboy.PetPlay = function(enc) {
 	Gui.NextPrompt();
 }
 
-MaliceScoutsScenes.Catboy.Petting = function(enc) {
+MaliceScoutsScenes.Catboy.Petting = function(enc : any) {
 	let player = GAME().player;
-	var parse = {
+	var parse : any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -1245,14 +1259,14 @@ MaliceScoutsScenes.Catboy.Petting = function(enc) {
 
 MaliceScoutsScenes.Catboy.LossPrompt = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	SetGameState(GameState.Event, Gui);
 	Text.Clear();
 
 	// this = encounter
 	var enc = this;
 
-	var parse = {
+	var parse : any = {
 
 	};
 
@@ -1318,10 +1332,10 @@ MaliceScoutsScenes.Catboy.LossPrompt = function() {
 	Encounter.prototype.onLoss.call(enc);
 }
 
-MaliceScoutsScenes.Catboy.GetMilked = function(enc) {
+MaliceScoutsScenes.Catboy.GetMilked = function(enc : any) {
 	let player = GAME().player;
 	var catboy = enc.catboy;
-	var parse = {
+	var parse : any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -1418,16 +1432,16 @@ MaliceScoutsScenes.Catboy.GetMilked = function(enc) {
 
 
 
-MaliceScoutsScenes.Mare.LoneEncounter = function(levelbonus) {
+MaliceScoutsScenes.Mare.LoneEncounter = function(levelbonus : number) {
 	let player = GAME().player;
 	var enemy    = new Party();
 	var mare     = new CentaurMare(levelbonus);
 	enemy.AddMember(mare);
-	var enc      = new Encounter(enemy);
+	var enc : any = new Encounter(enemy);
 	enc.mare     = mare;
 
 	enc.onEncounter = function() {
-		var parse = {
+		var parse : any = {
 
 		};
 		parse = player.ParserTags(parse);
@@ -1520,7 +1534,7 @@ MaliceScoutsScenes.Mare.WinPrompt = function() {
 	var enc  = this;
 	SetGameState(GameState.Event, Gui);
 
-	var parse = {
+	var parse : any = {
 
 	};
 
@@ -1588,11 +1602,11 @@ MaliceScoutsScenes.Mare.WinPrompt = function() {
 	Encounter.prototype.onVictory.call(enc);
 }
 
-MaliceScoutsScenes.Mare.WinFuck = function(enc) {
+MaliceScoutsScenes.Mare.WinFuck = function(enc : any) {
 	let player = GAME().player;
 	var mare   = enc.mare;
 	var p1cock = player.BiggestCock();
-	var parse = {
+	var parse : any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -1903,11 +1917,11 @@ MaliceScoutsScenes.Mare.WinFuck = function(enc) {
 }
 
 
-MaliceScoutsScenes.Mare.WinFist = function(enc) {
+MaliceScoutsScenes.Mare.WinFist = function(enc : any) {
 	let player = GAME().player;
 	var mare   = enc.mare;
 	var p1cock = player.BiggestCock();
-	var parse = {
+	var parse : any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -2019,9 +2033,9 @@ MaliceScoutsScenes.Mare.LossPrompt = function() {
 	Text.Clear();
 
 	// this = encounter
-	enc = this;
+	let enc = this;
 
-	var parse = {
+	var parse : any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -2055,7 +2069,7 @@ MaliceScoutsScenes.Mare.LossPrompt = function() {
 	Encounter.prototype.onLoss.call(enc);
 }
 
-MaliceScoutsScenes.Mare.LossEntry = function(enc) {
+MaliceScoutsScenes.Mare.LossEntry = function(enc : any) {
 	//TODO More Loss Scenes
 	var scenes = new EncounterTable();
 
@@ -2072,9 +2086,9 @@ MaliceScoutsScenes.Mare.LossEntry = function(enc) {
 }
 
 
-MaliceScoutsScenes.Mare.LossFacesit = function(enc) {
+MaliceScoutsScenes.Mare.LossFacesit = function(enc : any) {
 	let player = GAME().player;
-	var parse = {
+	var parse : any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -2148,17 +2162,17 @@ MaliceScoutsScenes.Mare.LossFacesit = function(enc) {
 // GOAT ALCHEMIST SCENES
 
 
-MaliceScoutsScenes.Goat.LoneEncounter = function(levelbonus) {
+MaliceScoutsScenes.Goat.LoneEncounter = function(levelbonus : number) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var enemy    = new Party();
 	var goat     = new GoatAlchemist(levelbonus);
 	enemy.AddMember(goat);
-	var enc      = new Encounter(enemy);
+	var enc : any = new Encounter(enemy);
 	enc.goat     = goat;
 
 	enc.onEncounter = function() {
-		var parse = {
+		var parse : any = {
 
 		};
 		parse = player.ParserTags(parse);
@@ -2214,7 +2228,7 @@ MaliceScoutsScenes.Goat.WinPrompt = function() {
 	var enc  = this;
 	SetGameState(GameState.Event, Gui);
 
-	var parse = {
+	var parse : any = {
 
 	};
 
@@ -2264,10 +2278,10 @@ MaliceScoutsScenes.Goat.WinPrompt = function() {
 	Encounter.prototype.onVictory.call(enc);
 }
 
-MaliceScoutsScenes.Goat.WinTurnTables = function(enc) {
+MaliceScoutsScenes.Goat.WinTurnTables = function(enc : any) {
 	let player = GAME().player;
 	var goat = enc.goat;
-	var parse = {
+	var parse : any = {
 		
 	};
 	parse = player.ParserTags(parse);
@@ -2850,9 +2864,9 @@ MaliceScoutsScenes.Goat.LossPrompt = function() {
 	Text.Clear();
 
 	// this = encounter
-	enc = this;
+	let enc = this;
 
-	var parse = {
+	var parse : any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -2871,9 +2885,9 @@ MaliceScoutsScenes.Goat.LossPrompt = function() {
 	Encounter.prototype.onLoss.call(enc);
 }
 
-MaliceScoutsScenes.Goat.LossEntry = function(enc) {
+MaliceScoutsScenes.Goat.LossEntry = function(enc : any) {
 	let player = GAME().player;
-	var parse = {
+	var parse : any = {
 		
 	};
 	parse = player.ParserTags(parse);
@@ -2884,7 +2898,6 @@ MaliceScoutsScenes.Goat.LossEntry = function(enc) {
 
 	// Tentacle Pet
 	scenes.AddEnc(function() {
-		
 		var tentacock = new Cock();
 		tentacock.type = CockType.tentacle;
 		tentacock.length.base = 50;
@@ -3328,8 +3341,9 @@ MaliceScoutsScenes.Goat.LossEntry = function(enc) {
 
 // GROUP ENCOUNTER
 
-MaliceScoutsScenes.Group.Encounter = function(levelbonus) {
+MaliceScoutsScenes.Group.Encounter = function(levelbonus : number) {
 	let player = GAME().player;
+	let party : Party = GAME().party;
 	var enemy    = new Party();
 	var catboy   = new CatboyMage(levelbonus);
 	var goat     = new GoatAlchemist(levelbonus);
@@ -3337,13 +3351,13 @@ MaliceScoutsScenes.Group.Encounter = function(levelbonus) {
 	enemy.AddMember(catboy);
 	enemy.AddMember(goat);
 	enemy.AddMember(mare);
-	var enc      = new Encounter(enemy);
+	var enc : any = new Encounter(enemy);
 	enc.catboy   = catboy;
 	enc.goat     = goat;
 	enc.mare     = mare;
 
 	enc.onEncounter = function() {
-		var parse = {
+		var parse : any = {
 			himher : player.mfFem("him", "her")
 		};
 
@@ -3407,7 +3421,7 @@ MaliceScoutsScenes.Group.WinPrompt = function() {
 	var enc  = this;
 	SetGameState(GameState.Event, Gui);
 
-	var parse = {
+	var parse : any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -3421,7 +3435,7 @@ MaliceScoutsScenes.Group.WinPrompt = function() {
 		Text.Add("What do you do?", parse);
 		Text.Flush();
 
-		var options = [];
+		var options : any[] = [];
 		/* TODO
 		options.push({nameStr : "",
 			tooltip : Text.Parse("", parse),
@@ -3457,14 +3471,14 @@ MaliceScoutsScenes.Group.WinPrompt = function() {
 
 MaliceScoutsScenes.Group.LossPrompt = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	SetGameState(GameState.Event, Gui);
 	Text.Clear();
 
 	// this = encounter
 	var enc = this;
 
-	var parse = {
+	var parse : any = {
 
 	};
 
@@ -3520,11 +3534,11 @@ MaliceScoutsScenes.Group.LossPrompt = function() {
 	Encounter.prototype.onLoss.call(enc);
 }
 
-MaliceScoutsScenes.Group.LossCatboyForcedTF = function(enc) {
+MaliceScoutsScenes.Group.LossCatboyForcedTF = function(enc : any) {
 	let player = GAME().player;
 	var catboy = enc.catboy;
 	
-	var parse = {
+	var parse : any = {
 		
 	};
 	parse = player.ParserTags(parse);
@@ -3744,10 +3758,10 @@ MaliceScoutsScenes.Group.LossCatboyForcedTF = function(enc) {
 	Gui.NextPrompt();
 }
 
-MaliceScoutsScenes.Group.LossMagicalBondage = function(enc) {
+MaliceScoutsScenes.Group.LossMagicalBondage = function(enc : any) {
 	let player = GAME().player;
-	let party = GAME().party;
-	var parse = {
+	let party : Party = GAME().party;
+	var parse : any = {
 		hisher : player.mfTrue("his", "her"),
 		himher : player.mfTrue("him", "her")
 	};
@@ -4072,11 +4086,11 @@ MaliceScoutsScenes.Group.LossMagicalBondage = function(enc) {
 }
 
 
-MaliceScoutsScenes.Group.LossCatRape = function(enc) {
+MaliceScoutsScenes.Group.LossCatRape = function(enc : any) {
 	let player = GAME().player;
 	var catboy = enc.catboy;
 	
-	var parse = {
+	var parse : any = {
 		
 	};
 	parse = player.ParserTags(parse);
@@ -4266,4 +4280,4 @@ MaliceScoutsScenes.Group.LossCatRape = function(enc) {
 	Gui.NextPrompt();
 }
 
-export { CatboyMage, CentaurMare, GoatAlchemist, MaliceScoutsScenes };
+export { MaliceScoutsScenes };

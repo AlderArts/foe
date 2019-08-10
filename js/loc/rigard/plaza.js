@@ -46,7 +46,7 @@ PlazaLoc.enc.AddEnc(function() { return Scenes.Rigard.CityHistory;}, 1.0, functi
 });
 PlazaLoc.enc.AddEnc(function() { return PlazaScenes.LetterDelivery; }, 1.0, function() { return (WorldTime().hour >= 6 && WorldTime().hour < 21); });
 PlazaLoc.enc.AddEnc(function() { return PlazaScenes.StatueInfo; }, 1.0, function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let rigard = GAME().rigard;
 	let kiakai = GAME().kiakai;
 	return (WorldTime().hour >= 6 && WorldTime().hour < 21) && (rigard.flags["TalkedStatue"] == 0 || (party.InParty(kiakai) && kiakai.flags["TalkedStatue"] == 0));
@@ -304,7 +304,7 @@ PlazaLoc.events.push(new Link(
 PlazaScenes.StatueInfo = function() {
 	let rigard = GAME().rigard;
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let kiakai = GAME().kiakai;
 
 	var parse = {
@@ -420,7 +420,7 @@ PlazaScenes.StatueInfo = function() {
 
 PlazaScenes.LetterDelivery = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let kiakai = GAME().kiakai;
 
 	var letters     = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";

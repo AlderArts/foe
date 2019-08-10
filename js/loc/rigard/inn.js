@@ -139,7 +139,7 @@ InnLoc.common.DrunkHandler = function() {
 InnLoc.common.onEntry = function(preventClear, oldLocation) {
 	let rigard = GAME().rigard;
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 
 	if(TasksScenes.Poisoning.InnAvailable()) {
 		TasksScenes.Poisoning.ArrivalAtInn(false, oldLocation);
@@ -229,7 +229,7 @@ InnLoc.common.onEntry = function(preventClear, oldLocation) {
 LBScenes.OrderFood = function() {
 	let rigard = GAME().rigard;
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 
 	var parse = {
 		sirmadam : player.mfFem("sir", "madam"),
@@ -339,7 +339,7 @@ LBScenes.OrderFood = function() {
 }
 
 LBScenes.FoodGet = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 
 	var parse = {};
 	if(party.Two()) {
@@ -425,7 +425,7 @@ LBScenes.FoodGet = function() {
 LBScenes.OrvinPrompt = function() {
 	let rigard = GAME().rigard;
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 
 	var parse = {
 		sirmadam : player.mfFem("sir", "madam"),
@@ -603,7 +603,7 @@ LBScenes.OrvinPrompt = function() {
 
 LBScenes.OrvinTalkPrompt = function(innPrompt) {
 	let rigard = GAME().rigard;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 
 	var parse = {
 		
@@ -1029,7 +1029,7 @@ LBScenes.EfriPrompt = function() {
 LBScenes.DrinksPrompt = function(innPrompt) {
 	let rigard = GAME().rigard;
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 
 	var parse = {
 		playername : player.name,
@@ -1510,7 +1510,7 @@ LBScenes.DrinksPrompt = function(innPrompt) {
 LBScenes.GotoRoom = function() {
 	let rigard = GAME().rigard;
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 
 	var parse = {
 		playername : player.name
@@ -1723,7 +1723,7 @@ LBScenes.RandomRoom = function(companion) {
 
 LBScenes.RegularRoom = function(companion) {
 	let rigard = GAME().rigard;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var room = InnLoc.room;
 	rigard.LB["RoomComp"] = party.GetSlot(companion);
 	MoveToLocation(room, {minute : 5});
@@ -1739,13 +1739,13 @@ InnLoc.room.description = function() {
 InnLoc.room.events.push(new Link(
 	function() {
 		let rigard = GAME().rigard;
-		let party = GAME().party;
+		let party : Party = GAME().party;
 		var companion = party.Get(rigard.LB["RoomComp"]);
 		if(companion) return companion.name;
 	}, function() { return rigard.LB["RoomComp"] >= 1; }, true,
 	function() {
 		let rigard = GAME().rigard;
-		let party = GAME().party;
+		let party : Party = GAME().party;
 		var companion = party.Get(rigard.LB["RoomComp"]);
 		if(companion) {
 			var parse = {
@@ -1757,7 +1757,7 @@ InnLoc.room.events.push(new Link(
 	},
 	function() {
 		let rigard = GAME().rigard;
-		let party = GAME().party;
+		let party : Party = GAME().party;
 		var companion = party.Get(rigard.LB["RoomComp"]);
 		if(companion)
 			companion.InnPrompt();
@@ -1766,7 +1766,7 @@ InnLoc.room.events.push(new Link(
 InnLoc.room.SleepFunc = function() {
 	let rigard = GAME().rigard;
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var comp = party.Get(rigard.LB["RoomComp"]);
 	var parse = {
 		
@@ -1837,7 +1837,7 @@ InnLoc.room.links.push(new Link(
 InnLoc.common.events.push(new Link(
 	"Order food",
 	true, function() {
-		let party = GAME().party;
+		let party : Party = GAME().party;
 		return party.coin >= RigardFlags.LB.MealCost();
 	},
 	function() {

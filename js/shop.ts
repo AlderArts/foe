@@ -4,6 +4,7 @@ import { Text } from "./text";
 import { ItemType, ItemSubtype } from "./item";
 import { Inventory } from "./inventory";
 import { GAME } from "./GAME";
+import { Party } from "./party";
 
 
 /*
@@ -77,7 +78,7 @@ export class Shop {
 	}
 
 	Buy(back? : any, preventClear? : boolean) {
-		let party = GAME().party;
+		let party : Party = GAME().party;
 
 		var shop = this;
 		back = back || Gui.PrintDefaultOptions;
@@ -188,7 +189,7 @@ export class Shop {
 	}
 
 	Sell(back? : any, preventClear? : boolean, customSellFunc? : any) {
-		let party = GAME().party;
+		let party : Party = GAME().party;
 
 		var shop = this;
 		back = back || Gui.PrintDefaultOptions;

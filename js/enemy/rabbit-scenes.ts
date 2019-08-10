@@ -15,7 +15,7 @@ import { Race } from '../body/race';
 import { Gender } from '../body/gender';
 import { LagomorphBrute, Lagomorph, LagomorphWizard } from './rabbit';
 import { Entity } from '../entity';
-import { LowerBodyType } from '../entity-desc';
+import { LowerBodyType } from '../body/body';
 import { BurrowsScenes } from '../loc/burrows-scenes';
 import { TerryScenes } from '../event/terry';
 import { IngredientItems } from '../items/ingredients';
@@ -88,7 +88,7 @@ LagomorphScenes.GroupEnc = function() {
 
 LagomorphScenes.PlainsEncounter = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
     let burrows = GAME().burrows;
     
 	var enc = this;
@@ -215,7 +215,7 @@ LagomorphScenes.GroupLossOnPlains = function() {
 
 LagomorphScenes.GroupLossOnPlainsBrainy = function(enc : any) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var p1cock = player.BiggestCock();
 
 	var brainy = enc.brainy;
@@ -356,7 +356,7 @@ LagomorphScenes.GroupLossOnPlainsBrainy = function(enc : any) {
 
 LagomorphScenes.GroupLossOnPlainsToBurrows = function(enc : any) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
     let burrows = GAME().burrows;
     var alpha = enc.alpha;
     
@@ -454,7 +454,7 @@ LagomorphScenes.GroupLossOnPlainsToBurrows = function(enc : any) {
 
 LagomorphScenes.GroupWinOnPlainsPrompt = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let burrows = GAME().burrows;
 	SetGameState(GameState.Event, Gui);
 	
@@ -624,7 +624,7 @@ LagomorphScenes.GroupWinOnPlainsPrompt = function() {
 
 LagomorphScenes.GroupWinOnPlainsFuckBrute = function(enc : any) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var p1cock  = player.BiggestCock(null, true);
 	var strapon = p1cock ? p1cock.isStrapon : null;
 	
@@ -842,7 +842,7 @@ LagomorphScenes.GroupWinOnPlainsFuckBrute = function(enc : any) {
 }
 
 LagomorphScenes.GroupWinOnPlainsBruteIntro = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var parse : any = {};
 	
 	if(party.Num() > 1) {
@@ -875,7 +875,7 @@ LagomorphScenes.GroupWinOnPlainsBruteCums = function() {
 
 LagomorphScenes.GroupWinOnPlainsFuckM = function(enc : any, group : any) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let kiakai = GAME().kiakai;
 	let terry = GAME().terry;
 	var male = new Lagomorph(Gender.male);
@@ -1420,7 +1420,7 @@ LagomorphScenes.GroupWinOnPlainsFuckM = function(enc : any, group : any) {
 
 LagomorphScenes.GroupWinOnPlainsGetFuckedM = function(enc : any, group : any) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let kiakai = GAME().kiakai;
     let terry = GAME().terry;
     
@@ -1663,7 +1663,7 @@ LagomorphScenes.GroupWinOnPlainsGetFuckedM = function(enc : any, group : any) {
 
 LagomorphScenes.GroupWinInterrorigate = function(enc : any) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let burrows = GAME().burrows;
     var alpha = enc.alpha;
     

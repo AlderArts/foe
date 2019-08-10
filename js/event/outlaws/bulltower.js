@@ -180,7 +180,7 @@ BullTowerLoc.Building.Watchtower.onEntry = function() {
 
 BullTowerScenes.Initiation = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let outlaws = GAME().outlaws;
 
 	var parse = {
@@ -302,7 +302,7 @@ BullTowerScenes.Initiation = function() {
 
 BullTowerScenes.InitiationQuestions = function(opts) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let outlaws = GAME().outlaws;
 
 	opts = opts || {};
@@ -417,7 +417,7 @@ BullTowerScenes.InitiationQuestions = function(opts) {
 
 BullTowerScenes.MovingOut = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let outlaws = GAME().outlaws;
 
 	var parse = {
@@ -1186,7 +1186,7 @@ BullTowerLoc.Building.Hall.links.push(new Link(
 	"Warehouse", true, true,
 	null,
 	function() {
-		let party = GAME().party;
+		let party : Party = GAME().party;
 		let outlaws = GAME().outlaws;
 		var parse = {
 			
@@ -2270,7 +2270,7 @@ BullTowerScenes.Coversations = function(outside) {
 }
 
 BullTowerScenes.EndingSlipOut = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let outlaws = GAME().outlaws;
 
 	var parse = {
@@ -2295,7 +2295,7 @@ BullTowerScenes.EndingSlipOut = function() {
 }
 
 BullTowerScenes.EndingFailure = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let outlaws = GAME().outlaws;
 
 	var freed = outlaws.flags["BT"] & OutlawsFlags.BullTower.AlaricFreed;
@@ -2337,7 +2337,7 @@ BullTowerScenes.EndingFailure = function() {
 
 BullTowerScenes.EndingInjured = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	
 	var parse = {
 		playername : player.name,
@@ -2385,7 +2385,7 @@ BullTowerScenes.EndingInjured = function() {
 
 BullTowerScenes.EndingDebrief = function(injured) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let outlaws = GAME().outlaws;
 
 	var parse = {
@@ -2631,7 +2631,7 @@ BullTowerScenes.AftermathAlaric = function() {
 //#Triggers one day after the Alaric scene if the player has at least stolen the goods and payoff.
 BullTowerScenes.AftermathZenith = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let outlaws = GAME().outlaws;
 
 	var parse = {

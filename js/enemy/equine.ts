@@ -24,7 +24,7 @@ import { IngredientItems } from '../items/ingredients';
 import { GAME, TimeStep } from '../GAME';
 import { EncounterTable } from '../encountertable';
 import { Sex } from '../entity-sex';
-import { LowerBodyType } from '../entity-desc';
+import { LowerBodyType } from '../body/body';
 
 let EquineScenes : any = {};
 
@@ -212,7 +212,7 @@ EquineScenes.PairEnc = function(levelbonus : number) {
 
 EquineScenes.LossPrompt = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	SetGameState(GameState.Event, Gui);
 	
 	// this = encounter
@@ -350,7 +350,7 @@ EquineScenes.LossPrompt = function() {
 
 EquineScenes.FuckFemale = function(enc : any) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var parse : any = {		
 		mobVag : function() { return enc.mare.FirstVag().Short(); }
 	};
@@ -647,7 +647,7 @@ EquineScenes.Threesome2 = function(enc : any) {
 //TODO
 EquineScenes.WinPrompt = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var enc  = this;
 	SetGameState(GameState.Event, Gui);
 
@@ -714,7 +714,7 @@ EquineScenes.WinPrompt = function() {
 //TODO
 EquineScenes.WinFuckHim = function(enc : any) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var mare     = enc.mare;
 	var stallion = enc.stallion;
 
@@ -1150,7 +1150,7 @@ EquineScenes.WinFuckHim = function(enc : any) {
 
 EquineScenes.WinFuckHer = function(enc : any) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var mare     = enc.mare;
 	var stallion = enc.stallion;
 

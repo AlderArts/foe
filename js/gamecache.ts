@@ -57,7 +57,7 @@ import { GolemBoss } from './event/royals/golem';
 import { OrchidBoss } from './enemy/orchid';
 
 import { RavenMother } from './event/raven';
-import { Uru } from './event/uru';
+import { Uru, UruFlags } from './event/uru';
 
 import { Lucille } from './event/brothel/lucille';
 import { Belinda } from './event/brothel/belinda';
@@ -494,10 +494,10 @@ let CacheToGame = function() {
 	}
 	if(gameCache.version < 26) {
 		// URU INTRO FLAGS
-		GAME().uru.flags["Intro"] |= gameCache.flags["IntroLostToImps"] ? Uru.IntroFlags.LostToImps : 0;
-		GAME().uru.flags["Intro"] |= gameCache.flags["IntroToldUruAboutMirror"] ? Uru.IntroFlags.ToldUruAboutMirror : 0;
-		GAME().uru.flags["Intro"] |= gameCache.flags["IntroFuckedUru"] ? Uru.IntroFlags.FuckedUru : 0;
-		GAME().uru.flags["Intro"] |= gameCache.flags["IntroFuckedByUru"] ? Uru.IntroFlags.FuckedByUru : 0;
+		GAME().uru.flags["Intro"] |= gameCache.flags["IntroLostToImps"] ? UruFlags.Intro.LostToImps : 0;
+		GAME().uru.flags["Intro"] |= gameCache.flags["IntroToldUruAboutMirror"] ? UruFlags.Intro.ToldUruAboutMirror : 0;
+		GAME().uru.flags["Intro"] |= gameCache.flags["IntroFuckedUru"] ? UruFlags.Intro.FuckedUru : 0;
+		GAME().uru.flags["Intro"] |= gameCache.flags["IntroFuckedByUru"] ? UruFlags.Intro.FuckedByUru : 0;
 	}
 	if(gameCache.version < 27) {
 		// OUTLAWS

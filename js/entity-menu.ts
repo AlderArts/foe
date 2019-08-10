@@ -1,7 +1,7 @@
 import { Images } from "./assets";
 import { Text } from "./text";
 import { Gui } from "./gui";
-import { JobDesc, Job } from "./job";
+import { Job } from "./job";
 import { ItemSubtype, Item, ItemType } from "./item";
 import { GAME } from "./GAME";
 import { Stat } from "./stat";

@@ -776,7 +776,7 @@ MagnusScenes.SexSounding = function() {
 
 MagnusScenes.Confront = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let kiakai = GAME().kiakai;
 	let magnus = GAME().magnus;
 	var parse = {

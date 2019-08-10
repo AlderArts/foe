@@ -9,10 +9,11 @@ import { ToysItems } from '../../items/toys';
 import { Cock } from '../../body/cock';
 import { Sex } from '../../entity-sex';
 import { Race } from '../../body/race';
-import { LowerBodyType } from '../../entity-desc';
+import { LowerBodyType } from '../../body/body';
 import { BurrowsFlags } from '../../loc/burrows-flags';
 import { GwendyFlags } from './gwendy-flags';
 import { MarketScenes } from '../../loc/farm-market';
+import { Party } from '../../party';
 
 let GwendyScenes : any = {};
 
@@ -288,7 +289,7 @@ GwendyScenes.Talk = function(backfunc : any) {
 }
 
 GwendyScenes.Work = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let gwendy = GAME().gwendy;
 	Text.Clear();
 	
@@ -334,7 +335,7 @@ GwendyScenes.Work = function() {
 
 GwendyScenes.WorkFeedingDanie = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let gwendy = GAME().gwendy;
 	let danie = GAME().danie;
 	
@@ -427,7 +428,7 @@ GwendyScenes.WorkFeedingDanie = function() {
 
 GwendyScenes.WorkMilking = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let gwendy = GAME().gwendy;
 	var parse : any = {
 		playername : player.name

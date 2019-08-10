@@ -313,7 +313,7 @@ OrchidScenes.TalkPrompt = function() {
 
 OrchidScenes.FirstTalk = function() {
 	let kiakai = GAME().kiakai;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var parse : any = {
 		
 	};
@@ -349,7 +349,7 @@ OrchidScenes.FirstTalk = function() {
 OrchidScenes.FirstTalkPrompt = function(opts : any) {
 	let player = GAME().player;
 	let kiakai = GAME().kiakai;
-    let party = GAME().party;
+    let party : Party = GAME().party;
     let layla = GAME().layla;
     let oasis = GAME().oasis;
     

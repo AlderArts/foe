@@ -1,7 +1,7 @@
 
 import { GetDEBUG } from '../app';
 import { Text } from './text';
-import { BodyPartType, BodyPart } from './body/bodypart';
+import { BodyPartType } from './body/bodypart';
 import { Cock } from './body/cock';
 import { Orifice } from './body/orifice';
 import { NippleType } from './body/breasts';
@@ -240,18 +240,6 @@ let EntitySex = {
 		return ret;
 	},
 
-	Lactation : function() {
-		return this.lactHandler.Lactation();
-	},
-	Milk : function() {
-		return this.lactHandler.milk.Get();
-	},
-	MilkCap : function() {
-		return this.lactHandler.MilkCap();
-	},
-	LactationProgress : function(oldMilk : number, newMilk : number, lactationRate : number) {
-		//Placeholder, implement in each entity if applicable
-	},
 
 	Fuck : function(cock : Cock, expMult? : number) {
 		expMult = expMult || 1;

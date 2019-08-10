@@ -13,8 +13,8 @@ import { DamageType, Element } from './damagetype';
 import { GetDEBUG } from '../app';
 import { EntityMenu } from './entity-menu';
 import { EntityDict } from './entity-dict';
-import { EntityDesc, LowerBodyType } from './entity-desc';
-import { EntityGrammar } from './entity-grammar';
+import { EntityDesc } from './entity-desc';
+import { LowerBodyType } from './body/body';
 import { EntitySex } from './entity-sex';
 import { Time } from './time';
 import { Text } from './text';
@@ -30,6 +30,8 @@ import { GAME } from './GAME';
 import { GetAggroEntry } from './ability/default';
 import { CurEncounter } from './combat-data';
 import { Jobs } from './job';
+import { Gender } from './body/gender';
+import { Cock } from './body/cock';
 
 export enum DrunkLevel {
 	Sober   = 0.25,
@@ -533,7 +535,7 @@ export class Entity {
 		if(sta < Math.E) sta = Math.E;
 		return Math.log(sta) / 25;
 	}
-	HandleDrunknessOverTime(hours : number) {
+	HandleDrunknessOverTime(hours : number, suppressText? : boolean) {
 		var oldLevel = this.drunkLevel;
 		this.drunkLevel -= this.DrunkRecoveryRate() * hours;
 		if(this.drunkLevel < 0) this.drunkLevel = 0;
@@ -1682,8 +1684,8 @@ export class Entity {
 	Ears() {
 		return this.body.head.ears;
 	}
-	EarDesc() {
-		return this.body.EarDesc();
+	EarDesc(plural? : boolean) {
+		return this.body.EarDesc(plural);
 	}
 	HasFlexibleEars() {
 		return this.body.HasFlexibleEars();
@@ -1889,28 +1891,176 @@ export class Entity {
 	}
 	
 	/* ENTITY GRAMMAR */
-	nameDesc = EntityGrammar.nameDesc;
-	NameDesc = EntityGrammar.NameDesc;
-	possessive = EntityGrammar.possessive;
-	Possessive = EntityGrammar.Possessive;
-	possessivePlural = EntityGrammar.possessivePlural;
-	PossessivePlural = EntityGrammar.PossessivePlural;
-	heshe = EntityGrammar.heshe;
-	HeShe = EntityGrammar.HeShe;
-	himher = EntityGrammar.himher;
-	HimHer = EntityGrammar.HimHer;
-	hisher = EntityGrammar.hisher;
-	HisHer = EntityGrammar.HisHer;
-	hishers = EntityGrammar.hishers;
-	has = EntityGrammar.has;
-	is = EntityGrammar.is;
-	plural = EntityGrammar.plural;
-	mfFem = EntityGrammar.mfFem;
-	mfTrue = EntityGrammar.mfTrue;
-	ParserPronouns = EntityGrammar.ParserPronouns;
-	ParserTags = EntityGrammar.ParserTags;
-	toString = EntityGrammar.toString;
-	Appearance = EntityGrammar.Appearance;
+	
+	nameDesc() {
+		return this.monsterName || this.name;
+	}
+	NameDesc() {
+		return this.MonsterName || this.name;
+	}
+	possessive() {
+		var name = this.monsterName || this.name || "the entity";
+		var letter = name[name.length-1];
+		var s = (letter == 's' || letter == 'x') ? "'" : "'s";
+		return name + s;
+	}
+	Possessive() {
+		var name = this.MonsterName || this.name || "The entity";
+		var letter = name[name.length-1];
+		var s = (letter == 's' || letter == 'x') ? "'" : "'s";
+		return name + s;
+	}
+	possessivePlural() {
+		var name = this.groupName || this.name || "the entities";
+		return name + "'";
+	}
+	PossessivePlural() {
+		var name = this.GroupName || this.name || "The entities";
+		return name + "'";
+	}
+	heshe(forcegender? : Gender) : string {
+		var gender = forcegender ? forcegender : this.body.Gender();
+		if(gender == Gender.male) return "he";
+		else if(gender == Gender.female) return "she";
+		else if(gender == Gender.herm) return "she";
+		else return "they";
+	}
+	HeShe(forcegender? : Gender) : string {
+		var gender = forcegender ? forcegender : this.body.Gender();
+		if(gender == Gender.male) return "He";
+		else if(gender == Gender.female) return "She";
+		else if(gender == Gender.herm) return "She";
+		else return "They";
+	}
+	himher(forcegender? : Gender) : string {
+		var gender = forcegender ? forcegender : this.body.Gender();
+		if(gender == Gender.male) return "him";
+		else if(gender == Gender.female) return "her";
+		else if(gender == Gender.herm) return "her";
+		else return "them";
+	}
+	HimHer(forcegender? : Gender) : string {
+		var gender = forcegender ? forcegender : this.body.Gender();
+		if(gender == Gender.male) return "Him";
+		else if(gender == Gender.female) return "Her";
+		else if(gender == Gender.herm) return "Her";
+		else return "Them";
+	}
+	hisher(forcegender? : Gender) : string {
+		var gender = forcegender ? forcegender : this.body.Gender();
+		if(gender == Gender.male) return "his";
+		else if(gender == Gender.female) return "her";
+		else if(gender == Gender.herm) return "her";
+		else return "their";
+	}
+	HisHer(forcegender? : Gender) : string {
+		var gender = forcegender ? forcegender : this.body.Gender();
+		if(gender == Gender.male) return "His";
+		else if(gender == Gender.female) return "Her";
+		else if(gender == Gender.herm) return "Her";
+		else return "Their";
+	}
+	hishers(forcegender? : Gender) : string {
+		var gender = forcegender ? forcegender : this.body.Gender();
+		if(gender == Gender.male) return "his";
+		else if(gender == Gender.female) return "hers";
+		else if(gender == Gender.herm) return "hers";
+		else return "theirs";
+	}
+	has() : string {
+		if(this.body.Gender() == Gender.none) return "have";
+		return "has";
+	}
+	is() : string {
+		if(this.body.Gender() == Gender.none) return "are";
+		return "is";
+	}
+	plural() {
+		return (this.body.Gender() == Gender.none);
+	}
+	// TODO femininity from other things (breasts etc)
+	mfFem(male : any, female : any) {
+		return this.body.femininity.Get() > 0 ? female : male;
+	}
+	mfTrue(male : any, female : any) {
+		return (this.body.Gender() == Gender.male) ? male : female;
+	}
+
+	ParserPronouns(parse? : any, prefix? : string, postfix? : string, forcegender? : Gender) {
+		parse   = parse   || {};
+		prefix  = prefix  || "";
+		postfix = postfix || "";
+		parse[prefix + "HeShe" + postfix]   = this.HeShe(forcegender);
+		parse[prefix + "heshe" + postfix]   = this.heshe(forcegender);
+		parse[prefix + "HisHer" + postfix]  = this.HisHer(forcegender);
+		parse[prefix + "hisher" + postfix]  = this.hisher(forcegender);
+		parse[prefix + "HimHer" + postfix]  = this.HimHer(forcegender);
+		parse[prefix + "himher" + postfix]  = this.himher(forcegender);
+		parse[prefix + "hishers" + postfix] = this.hishers(forcegender);
+		return parse;
+	}
+
+	ParserTags(parse? : any, prefix? : string, p1cock? : Cock) {
+		var ent = this;
+		parse  = parse  || {};
+		prefix = prefix || "";
+		
+		p1cock = p1cock || ent.BiggestCock(null, true);
+		
+		parse[prefix + "cocks"]     = function() { return ent.MultiCockDesc(); }
+		parse[prefix + "cock"]      = function() { return p1cock.Short(); }
+		parse[prefix + "cockTip"]   = function() { return p1cock.TipShort(); }
+		parse[prefix + "knot"]      = function() { return p1cock.KnotShort(); }
+		parse[prefix + "balls"]     = function() { return ent.BallsDesc(); }
+		parse[prefix + "butt"]      = function() { return ent.Butt().Short(); }
+		parse[prefix + "anus"]      = function() { return ent.Butt().AnalShort(); }
+		parse[prefix + "vag"]       = function() { return ent.FirstVag() ? ent.FirstVag().Short() : "crotch"; }
+		parse[prefix + "clit"]      = function() { return ent.FirstVag().ClitShort(); }
+		parse[prefix + "breasts"]   = function() { return ent.FirstBreastRow().Short(); }
+		parse[prefix + "nip"]       = function() { return ent.FirstBreastRow().NipShort(); }
+		parse[prefix + "nips"]      = function() { return ent.FirstBreastRow().NipsShort(); }
+		parse[prefix + "tongue"]    = function() { return ent.TongueDesc(); }
+		parse[prefix + "tongueTip"] = function() { return ent.TongueTipDesc(); }
+		parse[prefix + "skin"]      = function() { return ent.SkinDesc(); }
+		parse[prefix + "hair"]      = function() { return ent.Hair().Short(); }
+		parse[prefix + "face"]      = function() { return ent.FaceDesc(); }
+		parse[prefix + "ear"]       = function() { return ent.EarDesc(); }
+		parse[prefix + "ears"]      = function() { return ent.EarDesc(true); }
+		parse[prefix + "eye"]       = function() { return ent.EyeDesc(); }
+		parse[prefix + "eyes"]      = function() { return ent.EyeDesc() + "s"; }
+		parse[prefix + "hand"]      = function() { return ent.HandDesc(); }
+		parse[prefix + "palm"]      = function() { return ent.PalmDesc(); }
+		parse[prefix + "hip"]       = function() { return ent.HipDesc(); }
+		parse[prefix + "hips"]      = function() { return ent.HipsDesc(); }
+		parse[prefix + "thigh"]     = function() { return ent.ThighDesc(); }
+		parse[prefix + "thighs"]    = function() { return ent.ThighsDesc(); }
+		parse[prefix + "legs"]      = function() { return ent.LegsDesc(); }
+		parse[prefix + "leg"]       = function() { return ent.LegDesc(); }
+		parse[prefix + "knee"]      = function() { return ent.KneeDesc(); }
+		parse[prefix + "knees"]     = function() { return ent.KneesDesc(); }
+		parse[prefix + "foot"]      = function() { return ent.FootDesc(); }
+		parse[prefix + "feet"]      = function() { return ent.FeetDesc(); }
+		parse[prefix + "belly"]     = function() { return ent.StomachDesc(); }
+		parse[prefix + "tail"]      = function() { var tail = ent.HasTail(); return tail ? tail.Short() : ""; }
+		parse[prefix + "wings"]     = function() { var wings = ent.HasWings(); return wings ? wings.Short() : ""; }
+		parse[prefix + "horns"]     = function() { var horns = ent.HasHorns(); return horns ? horns.Short() : ""; }
+		
+		parse[prefix + "weapon"]    = function() { return ent.WeaponDesc(); }
+		parse[prefix + "armor"]     = function() { return ent.ArmorDesc(); }
+		parse[prefix + "botarmor"]  = function() { return ent.LowerArmorDesc(); }
+		return parse;
+	}
+
+	toString() {
+		return this.name;
+	}
+
+	Appearance() {
+		return this.NameDesc()
+		+ " is a "
+		+ this.body.GenderStr() + " "
+		+ this.body.RaceStr() + ".";
+	}
 	
 	/* ENTITY SEX */
 	Genitalia = EntitySex.Genitalia;
@@ -1941,10 +2091,20 @@ export class Entity {
 	NipplesThatFitLen = EntitySex.NipplesThatFitLen;
 	AllOrfices = EntitySex.AllOrfices;
 	AllPenetrators = EntitySex.AllPenetrators;
-	Lactation = EntitySex.Lactation;
-	Milk = EntitySex.Milk;
-	MilkCap = EntitySex.MilkCap;
-	LactationProgress = EntitySex.LactationProgress;
+
+	Lactation() {
+		return this.lactHandler.Lactation();
+	}
+	Milk() {
+		return this.lactHandler.milk.Get();
+	}
+	MilkCap() {
+		return this.lactHandler.MilkCap();
+	}
+	LactationProgress(oldMilk : number, newMilk : number, lactationRate : number) {
+		//Placeholder, implement in each entity if applicable
+	}
+
 	Fuck = EntitySex.Fuck;
 	FuckOral = EntitySex.FuckOral;
 	FuckAnal = EntitySex.FuckAnal;

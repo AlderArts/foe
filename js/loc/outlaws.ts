@@ -18,6 +18,7 @@ import { OutlawsScenes } from '../event/outlaws/outlaws';
 import { CvetaScenes } from '../event/outlaws/cveta-scenes';
 import { MariaScenes } from '../event/outlaws/maria-scenes';
 import { RigardFlags } from './rigard/rigard-flags';
+import { Party } from '../party';
 
 export function InitOutlaws() {
 	WORLD().SaveSpots["Outlaws"] = OutlawsLoc.Camp;
@@ -190,7 +191,7 @@ OutlawsLoc.Camp.enc.AddEnc(function() {
 
 OutlawsLoc.Infirmary.description = function() {
 	let terry = GAME().terry;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var parse : any = {
 		
 	};

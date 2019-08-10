@@ -68,8 +68,7 @@ Belinda.prototype.ToStorage = function() {
 //TODO
 // Schedule
 Belinda.prototype.IsAtLocation = function(location) {
-	let party = GAME().party;
-	location = location || party.location;
+	location = location || GAME().party.location;
 	if(location == WORLD().loc.Rigard.Brothel.brothel)
 		return (WorldTime().hour >= 18 || WorldTime().hour < 6);
 	return false;

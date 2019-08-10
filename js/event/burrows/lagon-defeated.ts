@@ -8,11 +8,12 @@ import { LagonFlags } from './lagon-flags';
 import { Sex } from '../../entity-sex';
 import { LagomorphElite } from '../../enemy/rabbit';
 import { AlchemyItems } from '../../items/alchemy';
+import { Party } from '../../party';
 
 let LagonDScenes : any = {};
 
 LagonDScenes.RoomApproach = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let lagon = GAME().lagon;
 	
 	var parse : any = {
@@ -59,7 +60,7 @@ LagonDScenes.RoomApproach = function() {
 }
 
 LagonDScenes.Prompt = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let lagon = GAME().lagon;
 	
 	var parse : any = {
@@ -218,7 +219,7 @@ LagonDScenes.SexPrompt = function() {
 
 LagonDScenes.PitchAnal = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let lagon = GAME().lagon;
 	
 	var p1cock = player.BiggestCock(null, true);
@@ -758,7 +759,7 @@ LagonDScenes.ScepterSexPrompt = function() {
 
 LagonDScenes.ScepterPitchAnal = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let lagon = GAME().lagon;
 
 	var p1cock = player.BiggestCock(null, true);
@@ -1282,7 +1283,7 @@ LagonDScenes.ScepterPitchAnal = function() {
 
 LagonDScenes.Punishment = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 
 	var parse : any = {
 		playername : player.name

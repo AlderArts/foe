@@ -19,7 +19,7 @@ import { MoveToLocation } from '../../GAME';
 import { BodyPartType } from '../../body/bodypart';
 import { Sex } from '../../entity-sex';
 import { Orifice } from '../../body/orifice';
-import { LowerBodyType } from '../../entity-desc';
+import { LowerBodyType } from '../../body/body';
 
 let GolemScenes = {};
 GolemScenes.State = {
@@ -130,7 +130,7 @@ GolemBoss.prototype.Act = function(encounter, activeChar) {
 
 
 GolemScenes.FirstApproach = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let golem = GAME().golem;
 	var parse = {
 		s : party.Num() > 1 ? "s" : ""
@@ -204,7 +204,7 @@ GolemScenes.RepeatApproach = function() {
 
 GolemScenes.OnWin = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let golem = GAME().golem;
 	let kiakai = GAME().kiakai;
 	var parse = {
@@ -262,7 +262,7 @@ GolemScenes.OnWin = function() {
 
 GolemScenes.OnLoss = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let golem = GAME().golem;
 	var parse = {
 		name          : function() { return party.Get(1).name; }

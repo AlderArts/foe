@@ -15,6 +15,7 @@ import { EncounterTable } from '../../encountertable';
 import { OutlawsFlags } from './outlaws-flags';
 import { AquiliusFlags } from './aquilius-flags';
 import { QuestItems } from '../../items/quest';
+import { Party } from '../../party';
 
 let OutlawsScenes : any = {
 	Cavalcade : OCavalcadeScenes,
@@ -340,7 +341,7 @@ OutlawsScenes.MariasBouquetPrompt = function(opts : any) {
 
 OutlawsScenes.PathIntoRigardInitiation = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let outlaws = GAME().outlaws;
 
 	var parse = {
@@ -421,7 +422,7 @@ OutlawsScenes.PathIntoRigardInitiation = function() {
 
 OutlawsScenes.PathIntoRigardBelinda = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let outlaws = GAME().outlaws;
 	let miranda = GAME().miranda;
 	let belinda = GAME().belinda;
@@ -741,7 +742,7 @@ OutlawsScenes.Exploration.ChowTime = function() {
 }
 
 OutlawsScenes.Exploration.Cavalcade = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let outlaws = GAME().outlaws;
 
 	var parse = {

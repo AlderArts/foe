@@ -19,10 +19,10 @@ import { MothgirlScenes } from '../enemy/mothgirl';
 import { FeralWolfScenes } from '../enemy/feralwolf';
 import { MomoScenes } from '../event/momo';
 import { QuestItems } from '../items/quest';
-import { Burrows } from './burrows';
 import { AquiliusScenes } from '../event/outlaws/aquilius';
 import { AscheScenes } from '../event/asche';
 import { BurrowsFlags } from './burrows-flags';
+import { Party } from '../party';
 
 // Create namespace
 let ForestLoc = {
@@ -41,7 +41,7 @@ ForestLoc.Outskirts.description = function() {
 ForestLoc.Outskirts.enc = new EncounterTable();
 ForestLoc.Outskirts.enc.AddEnc(function() {
 	return function() {
-		let party = GAME().party;
+		let party : Party = GAME().party;
 		Text.Clear();
 
 		Text.Add("Not having much else to do, you wander the outskirts of the forest for a few minutes. You pick up a particularly fresh bundle of grass. Who knows, could be useful for something.");
@@ -56,7 +56,7 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 }, 1.0, function() { return WorldTime().season != Season.Winter; });
 ForestLoc.Outskirts.enc.AddEnc(function() {
 	return function() {
-		let party = GAME().party;
+		let party : Party = GAME().party;
 		Text.Clear();
 
 		Text.Add("Not having much else to do, you wander the outskirts of the forest for a few minutes. You pick up a pretty flower. Who knows, could be useful for something.");
@@ -71,7 +71,7 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 }, 1.0, function() { return WorldTime().season != Season.Winter; });
 ForestLoc.Outskirts.enc.AddEnc(function() {
 	return function() {
-		let party = GAME().party;
+		let party : Party = GAME().party;
 		Text.Clear();
 
 		Text.Add("As you trek through the undergrowth of the deep forest, you come across a cluster of small bushes with red berries. Seeing as nothing is trying to kill you at the moment, you spend some time gathering them, figuring they could be of some use.");
@@ -86,7 +86,7 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 }, 1.0, function() { return WorldTime().season != Season.Winter; });
 ForestLoc.Outskirts.enc.AddEnc(function() {
 	return function() {
-		let party = GAME().party;
+		let party : Party = GAME().party;
 		Text.Clear();
 
 		Text.Add("Not having much else to do, you wander the outskirts of the forest for a few minutes. You pick up an odd root. Who knows, could be useful for something.");
@@ -101,7 +101,7 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 }, 1.0, function() { return WorldTime().season != Season.Winter; });
 ForestLoc.Outskirts.enc.AddEnc(function() {
 	return function() {
-		let party = GAME().party;
+		let party : Party = GAME().party;
 		Text.Clear();
 
 		Text.Add("While wandering the forest, you come across a small spring filled with clear water. Figuring you might as well get some in case you grow thirsty, you pick out a vial from your pack.");
@@ -116,7 +116,7 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 }, 1.0, function() { return true; });
 ForestLoc.Outskirts.enc.AddEnc(function() {
 	return function() {
-		let party = GAME().party;
+		let party : Party = GAME().party;
 		var parse = {
 			
 		};
@@ -134,7 +134,7 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 }, 1.0, function() { return true; });
 ForestLoc.Outskirts.enc.AddEnc(function() {
 	return function() {
-		let party = GAME().party;
+		let party : Party = GAME().party;
 		var parse = {
 			
 		};
@@ -196,7 +196,7 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 ForestLoc.Outskirts.enc.AddEnc(function() {
 	return function() {
 		let burrows = GAME().burrows;
-		let party = GAME().party;
+		let party : Party = GAME().party;
 		var parse = {
 			
 		};

@@ -1095,7 +1095,7 @@ LagonScenes.AlliedFirst = function() {
 
 LagonScenes.RulerTalkPrompt = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let roa = GAME().roa;
 	let ophelia = GAME().ophelia;
 	let lagon = GAME().lagon;
@@ -1501,7 +1501,7 @@ Pit loss (todo)
 }
 
 LagonScenes.PitDefianceWin = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let ophelia = GAME().ophelia;
 	let lagon = GAME().lagon;
 
@@ -1548,7 +1548,7 @@ LagonScenes.PitDefianceWin = function() {
 
 LagonScenes.PitDefianceLoss = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let lagon = GAME().lagon;
 
 	SetGameState(GameState.Event, Gui);
@@ -1638,7 +1638,7 @@ LagonScenes.PitDefianceLoss = function() {
 
 LagonScenes.BadendPit = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 
 	var parse : any = {
 		
@@ -1675,7 +1675,7 @@ LagonScenes.BadendPit = function() {
 
 
 LagonScenes.BadendBrute = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 
 	SetGameState(GameState.Event, Gui);
 	
@@ -1749,7 +1749,7 @@ LagonScenes.BadendBrute = function() {
 
 LagonScenes.ReturnToBurrowsAfterFight = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let ophelia = GAME().ophelia;
 
 	var parse : any = {
@@ -1836,7 +1836,7 @@ LagonScenes.ReturnToBurrowsAfterFight = function() {
 
 LagonScenes.ReturnToBurrowsAfterScepter = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let burrows = GAME().burrows;
 	let kiakai = GAME().kiakai;
 
@@ -1994,7 +1994,7 @@ LagonScenes.Usurp = function(toolate : boolean) {
 
 LagonScenes.LossToRegularLagon = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let lagon = GAME().lagon;
 	
 	SetGameState(GameState.Event, Gui);
@@ -2091,7 +2091,7 @@ LagonScenes.LossToRegularLagon = function() {
 }
 
 LagonScenes.WinToRegularLagon = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	
 	SetGameState(GameState.Event, Gui);
 	
@@ -2138,7 +2138,7 @@ LagonScenes.WinToRegularLagon = function() {
 
 LagonScenes.WinToBruteLagon = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let ophelia = GAME().ophelia;
 	let lagon = GAME().lagon;
 	

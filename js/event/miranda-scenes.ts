@@ -1,7 +1,7 @@
 import { Link } from '../event';
 import { EncounterTable } from '../encountertable';
 import { Gender } from '../body/gender';
-import { WorldTime, MoveToLocation, GAME } from "../GAME";
+import { WorldTime, MoveToLocation, GAME, WORLD, TimeStep } from "../GAME";
 import { SetGameState, GameState } from "../gamestate";
 import { Gui } from "../gui";
 import { Text } from "../text";
@@ -13,16 +13,22 @@ import { Sex } from "../entity-sex";
 import { MirandaFlags } from "./miranda-flags";
 import { TerryFlags } from "./terry-flags";
 import { RigardFlags } from '../loc/rigard/rigard-flags';
+import { GlobalScenes } from './global';
+import { Season } from '../time';
+import { Orifice } from '../body/orifice';
+import { LowerBodyType } from '../body/body';
+import { Cock } from '../body/cock';
+import { GetDEBUG } from '../../app';
+import { DreamsScenes } from './dreams';
+import { StrapOnItems } from '../items/strapon';
 
-let MirandaScenes = {};
+let MirandaScenes : any = {};
 
-let world = null;
-
-export function InitMiranda(w) {
+export function InitMiranda() {
 	let rigard = GAME().rigard;
 	let miranda = GAME().miranda;
 
-	world = w;
+	let world = WORLD();
     // Add catch thief as explorable event
     world.loc.Rigard.Slums.gate.enc.AddEnc(function() { return MirandaScenes.CatchThatThief; }, 1.0, function() { return miranda.flags["Thief"] == 0 && miranda.OnPatrol(); });
     world.loc.Rigard.Residential.street.enc.AddEnc(function() { return MirandaScenes.CatchThatThief; }, 1.0, function() { return miranda.flags["Thief"] == 0 && miranda.OnPatrol(); });
@@ -59,7 +65,7 @@ MirandaScenes.BarracksApproach = function() {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -81,10 +87,10 @@ MirandaScenes.BarracksApproach = function() {
 
 MirandaScenes.BarracksPrompt = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let miranda = GAME().miranda;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -157,14 +163,14 @@ MirandaScenes.BarracksPrompt = function() {
 
 MirandaScenes.SparLoss = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let miranda = GAME().miranda;
 
 	SetGameState(GameState.Event, Gui);
 	var enc = this;
 	enc.Cleanup();
 	
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -185,14 +191,14 @@ MirandaScenes.SparLoss = function() {
 
 MirandaScenes.SparWin = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let miranda = GAME().miranda;
 
 	SetGameState(GameState.Event, Gui);
 	var enc = this;
 	enc.Cleanup();
 	
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -219,7 +225,7 @@ MirandaScenes.BruiserTraining = function() {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -355,10 +361,11 @@ MirandaScenes.BruiserTraining = function() {
 
 MirandaScenes.BruiserTrainingCont = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let miranda = GAME().miranda;
+	let world = WORLD();
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -465,7 +472,7 @@ MirandaScenes.RigardGatesInteract = function() {
 	let rigard = GAME().rigard;
 	let miranda = GAME().miranda;
 
-	var parse = {};
+	var parse : any = {};
 	
 	Text.Clear();
 	if(!rigard.Visa()) {
@@ -489,8 +496,9 @@ MirandaScenes.RigardGatesEnter = function() {
 	let player = GAME().player;
 	let rigard = GAME().rigard;
 	let miranda = GAME().miranda;
+	let world = WORLD();
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -567,7 +575,7 @@ MirandaScenes.RigardSlumGatesDesc = function() {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -603,8 +611,9 @@ MirandaScenes.RigardSlumGatesEnter = function() {
 	let player = GAME().player;
 	let rigard = GAME().rigard;
 	let miranda = GAME().miranda;
+	let world = WORLD();
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		guygal : player.mfFem("guy", "gal")
 	};
@@ -670,8 +679,9 @@ MirandaScenes.RigardGatesBribe = function() {
 	let player = GAME().player;
 	let rigard = GAME().rigard;
 	let miranda = GAME().miranda;
+	let world = WORLD();
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		mcockDesc : function() { return miranda.FirstCock().Short(); },
 		mcockTip  : function() { return miranda.FirstCock().TipShort(); }
@@ -1060,10 +1070,11 @@ MirandaScenes.RigardGatesBribe = function() {
 MirandaScenes.WelcomeToRigard = function() {
 	let player = GAME().player;
 	let kiakai = GAME().kiakai;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let miranda = GAME().miranda;
+	let rosalin = GAME().rosalin;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		name   : kiakai.name,
 		heshe  : kiakai.heshe(),
@@ -1155,7 +1166,7 @@ MirandaScenes.WelcomeToRigardQnA = function() {
 	let player = GAME().player;
 	let kiakai = GAME().kiakai;
 	
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		name       : kiakai.name,
 		guygirl    : player.mfTrue("guy", "girl")
@@ -1219,9 +1230,11 @@ MirandaScenes.WelcomeToRigardQnA = function() {
 
 MirandaScenes.WelcomeToRigardEnd = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let kiakai = GAME().kiakai;
+	let farm = GAME().farm;
+	let party : Party = GAME().party;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		name       : kiakai.name
 	};
@@ -1250,7 +1263,7 @@ MirandaScenes.WelcomeToRigardEnd = function() {
 	Text.Add("Miranda herself seems like she isn't really the sort to bow to authority. She is at work now, but perhaps she could be persuaded to let you into the city if you meet up with her in the slums during the evening hours.", parse);
 	Text.NL();
 	Text.Add("Failing all else, if those outlaws are as crafty as the guardswoman made them out to be, they should have some way of accessing the city. ", parse);
-	if(Scenes.Global.VisitedOutlaws())
+	if(GlobalScenes.VisitedOutlaws())
 		Text.Add("Asking Zenith or Maria could perhaps give you a clue on how to proceed.", parse);
 	else
 		Text.Add("From what Miranda said, they are probably holed up somewhere in the forest... perhaps it's worth seeking them out.", parse);
@@ -1260,12 +1273,12 @@ MirandaScenes.WelcomeToRigardEnd = function() {
 }
 
 MirandaScenes.CatchThatThief = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let miranda = GAME().miranda;
 
 	miranda.flags["Thief"] = 1;
 
-	parse = {};
+	let parse : any = {};
 	if(party.Two())
 		parse["comp"] = " and " + party.Get(1).name;
 	else if(!party.Alone())
@@ -1296,7 +1309,7 @@ MirandaScenes.HeyThere = function() {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
 
-	var parse = {
+	var parse : any = {
 		boygirl : function() { return player.mfFem("boy", "girl"); }
 	};
 	parse = player.ParserTags(parse);
@@ -1362,7 +1375,7 @@ MirandaScenes.HeyThere = function() {
 }
 
 MirandaScenes.HeyThereCont = function() {
-	var parse = {};
+	var parse : any = {};
 	
 	Text.NL();
 	Text.Add("The booze starts to stack up as you continue to talk into the night. You tell her a bit about yourself and your adventures so far, and she contributes witty comments and suggestive remarks.", parse);
@@ -1379,7 +1392,7 @@ MirandaScenes.HeyThereCatPorn = function() {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	parse = player.ParserTags(parse);
@@ -1578,12 +1591,14 @@ MirandaScenes.HeyThereCatPorn = function() {
 	});
 }
 
-MirandaScenes.BarChatOptions = function(options, back) {
+MirandaScenes.BarChatOptions = function(options : any[], back : any) {
 	let player = GAME().player;
 	let rigard = GAME().rigard;
 	let miranda = GAME().miranda;
+	let belinda = GAME().belinda;
+	let terry = GAME().terry;
 
-	var parse = {};
+	var parse : any = {};
 	parse = player.ParserTags(parse);
 	
 	back = back || Gui.PrintDefaultOptions;
@@ -1606,7 +1621,7 @@ MirandaScenes.BarChatOptions = function(options, back) {
 				Text.Add("<i>“About the rabid army wandering the hills or the place filled with dragon bones?”</i> She shakes her head. <i>“If I were still with the Black Hounds, I could tell you more about the fighting at least. I hear they have a company there fighting. Dunno on which side, it probably changes from week to week.”</i>", parse);
 				Text.NL();
 				Text.Add("<i>“As for the Boneyard… it’s a valley said to be an old burial ground for dragons. Never been there myself, but I’ve heard the stories. Ask travelers about it and they’ll tell you anything from animated skeletons to giant fire-breathing lizards inhabit the place. Not really one for superstition, but I could tell you this much at least: no one who goes in there comes back to tell the tale. I’d stay clear of it if I were you.”</i>", parse);
-			}, 1.0, function() { return !Scenes.Global.PortalsOpen(); }); //Act 1
+			}, 1.0, function() { return !GlobalScenes.PortalsOpen(); }); //Act 1
 			scenes.Get();
 			
 			Text.Flush();
@@ -1659,7 +1674,7 @@ MirandaScenes.BarChatOptions = function(options, back) {
 					Text.Add("<i>“Not that they would’ve showed up at all if a noble wasn’t involved. Heck, at this point I doubt they’d bat an eye even if the city stood in flames. If the right person gave the orders, they’d probably be the ones lighting the matches. Whole damn organization is rotten to the core.”</i>", parse);
 				}); //Finished Krawitz, but didn't recruit Terry yet
 			}
-			if(!Scenes.Global.PortalsOpen()) {
+			if(!GlobalScenes.PortalsOpen()) {
 				scenes.push(function() {
 					Text.Add("<i>“There’s been some ugly rumors about that brothel, the Shadow Lady.”</i> Miranda frowns. <i>“Nothing concrete, but word on the street is that some of their services aren’t exactly legal. People who go there often… change. Not that it’s likely to come to anything... the place is off limits to the Watch.”</i>", parse);
 					Text.NL();
@@ -1909,8 +1924,8 @@ MirandaScenes.BarChatOptions = function(options, back) {
 	}
 }
 
-MirandaScenes.BarTalkOptions = function(options, next) {
-	var parse = {};
+MirandaScenes.BarTalkOptions = function(options : any[], next : any) {
+	var parse : any = {};
 	
 	options.push({ nameStr : "Her past",
 		func : function() {
@@ -1935,7 +1950,7 @@ MirandaScenes.BarTalkOptions = function(options, next) {
 }
 
 MirandaScenes.HeyThereChat = function() {
-	var parse = {};
+	var parse : any = {};
 	Text.NL();
 	Text.Add("What do you want to chat with Miranda about?", parse);
 	Text.Flush();
@@ -1954,7 +1969,7 @@ MirandaScenes.TakeHome = function() {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
 
-	var parse = {
+	var parse : any = {
 		masterMistress : player.mfTrue("master", "mistress"),
 		guyGirl : player.mfTrue("guy", "girl")
 	};
@@ -2032,8 +2047,9 @@ MirandaScenes.TakeHome = function() {
 MirandaScenes.JustOneMore = function() {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
+	let world = WORLD();
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	parse = player.ParserTags(parse);
@@ -2423,7 +2439,7 @@ MirandaScenes.MaidensBanePrompt = function() {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
 
-	var parse = {};
+	var parse : any = {};
 	
 	var options = new Array();
 	
@@ -2467,7 +2483,7 @@ MirandaScenes.MaidensBaneTalkPrompt = function() {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
 
-	var parse = {};
+	var parse : any = {};
 	
 	var dom = miranda.SubDom() - player.SubDom();
 	
@@ -2505,7 +2521,7 @@ MirandaScenes.MaidensBaneTalkPrompt = function() {
 }
 
 MirandaScenes.MaidensBaneNice = function() {
-	var parse = {};
+	var parse : any = {};
 	//TODO
 	Text.Add("", parse);
 	Text.Add("You walk over to Miranda, who is lounging on one of the benches in the shady tavern. She’s already gotten started on her first few drinks, and waves you over when she notices you.");
@@ -2514,7 +2530,7 @@ MirandaScenes.MaidensBaneNice = function() {
 }
 
 MirandaScenes.MaidensBaneNasty = function() {
-	var parse = {};
+	var parse : any = {};
 	//TODO
 	Text.Add("", parse);
 	Text.Add("[PLACEHOLDER] Bad interactions.");
@@ -2528,8 +2544,9 @@ MirandaScenes.TerryChaseHome = function() {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
 	let terry = GAME().terry;
+	let world = WORLD();
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -2618,10 +2635,10 @@ MirandaScenes.TerryChaseHome = function() {
 /* MIRANDA SEX */
 
 
-MirandaScenes.BarSexOptions = function(options) {
+MirandaScenes.BarSexOptions = function(options : any[]) {
 	let miranda = GAME().miranda;
 	
-	var parse = {};
+	var parse : any = {};
 
 	options.push({ nameStr : "Date",
 		func : MirandaScenes.DatingEntry, enabled : true,
@@ -2649,7 +2666,7 @@ MirandaScenes.TavernSexPublicPrompt = function() {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
 	
-	var parse = {
+	var parse : any = {
 		mastermistress : player.mfTrue("master", "mistress")
 	};
 
@@ -2690,7 +2707,7 @@ MirandaScenes.TavernSexPublicPrompt = function() {
 MirandaScenes.HomeDescFloor1 = function() {
 	let miranda = GAME().miranda;
 
-	var parse = {
+	var parse : any = {
 
 	};
 	Text.NL();
@@ -2706,7 +2723,7 @@ MirandaScenes.HomeDescFloor1 = function() {
 MirandaScenes.HomeDescFloor2 = function() {
 	let miranda = GAME().miranda;
 
-	var parse = {
+	var parse : any = {
 
 	};
 	Text.NL();
@@ -2721,11 +2738,12 @@ MirandaScenes.HomeDescFloor2 = function() {
 
 MirandaScenes.HomeDommySexLeavingFuckedHer = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let rigard = GAME().rigard;
 	let miranda = GAME().miranda;
+	let world = WORLD();
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 
@@ -2796,7 +2814,7 @@ MirandaScenes.HomeDommySexLeavingFuckedHer = function() {
 					Gui.NextPrompt(function() {
 						Text.Clear();
 
-						Scenes.Dreams.Entry(func);
+						DreamsScenes.Entry(func);
 					});
 				}, enabled : true,
 				tooltip : "Why not? You’re feeling pretty tired after all."
@@ -2822,10 +2840,11 @@ MirandaScenes.HomeDommySexLeavingFuckedHer = function() {
 
 MirandaScenes.HomeDommySex = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let miranda = GAME().miranda;
+	let world = WORLD();
 
-	var parse = {
+	var parse : any = {
 		
 	};
 
@@ -2879,7 +2898,7 @@ MirandaScenes.HomeDommySexRideDobieCockVag = function() {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
 	
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		master : player.mfFem("master", "mistress")
 	};
@@ -3045,12 +3064,12 @@ MirandaScenes.HomeDommySexRideDobieCockVag = function() {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-MirandaScenes.HomeDommySexRideDobieCockVagFuck = function(stickymiranda, came) {
+MirandaScenes.HomeDommySexRideDobieCockVagFuck = function(stickymiranda : boolean, came : boolean) {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
 
 	var dom = player.SubDom() - miranda.SubDom();
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		master : dom < 25 ? player.name : player.mfFem("master", "mistress"),
 		
@@ -3162,11 +3181,11 @@ MirandaScenes.HomeDommySexRideDobieCockVagFuck = function(stickymiranda, came) {
 	});
 }
 
-MirandaScenes.HomeDommySexRideDobieCockVagSubmit = function(submit) {
+MirandaScenes.HomeDommySexRideDobieCockVagSubmit = function(submit : boolean) {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	parse = player.ParserTags(parse);
@@ -3202,13 +3221,13 @@ MirandaScenes.HomeDommySexRideDobieCockVagSubmit = function(submit) {
 	MirandaScenes.HomeDommySexLeavingFuckedHer();
 }
 
-MirandaScenes.HomeDommySexFuckDobieAss = function(cocks) {
+MirandaScenes.HomeDommySexFuckDobieAss = function(cocks : Cock[]) {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
 
 	var pCock = cocks[0];
 
-	var parse = {
+	var parse : any = {
 		playername    : player.name,
 		boyGirl       : player.mfTrue("boy", "girl"),
 				
@@ -3302,12 +3321,12 @@ MirandaScenes.HomeDommySexFuckDobieAss = function(cocks) {
 	Text.Add("You know just the thing to keep her occupied.", parse);
 	Text.Flush();
 
-	var Target = {
-		boobs : 0,
-		cunt  : 1,
-		cock  : 2
+	enum Target {
+		boobs = 0,
+		cunt  = 1,
+		cock  = 2
 	};
-	var target;
+	let target : Target;
 
 	//[Boobs][Cunt][Cock]
 	var options = new Array();
@@ -3557,7 +3576,7 @@ MirandaScenes.HomeDommySexRideDobieCockShared = function() {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
 	
-	var parse = {
+	var parse : any = {
 		
 	};
 	parse = player.ParserTags(parse);
@@ -3587,7 +3606,7 @@ MirandaScenes.HomeDommySexRideDobieCockAnal = function() {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
 	
-	var parse = {
+	var parse : any = {
 		playername    : player.name,
 		masterMistress: player.mfTrue("master", "mistress"),
 		boyGirl       : player.mfTrue("boy", "girl"),
@@ -3917,13 +3936,13 @@ MirandaScenes.HomeDommySexRideDobieCockAnal = function() {
 
 }
 
-MirandaScenes.HomeDommySexFuckDobieVag = function(cocks) {
+MirandaScenes.HomeDommySexFuckDobieVag = function(cocks : Cock[]) {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
 
 	var pCock = cocks[0];
 
-	var parse = {
+	var parse : any = {
 		playername    : player.name,
 		boyGirl       : player.mfTrue("boy", "girl"),
 		
@@ -3964,11 +3983,11 @@ MirandaScenes.HomeDommySexFuckDobieVag = function(cocks) {
 	Text.Add("The herm hops onto the bed, turning to face you with a sultry expression. <i>“Now what, bad [boyGirl]?”</i> she asks, parting her legs slightly. At this angle, all you can see of her crotch is her thick puppy pecker - grown erect during her ascent - and her balls. This won’t do.", parse);
 	Text.NL();
 
-	var mode;
-	var Mode = {
-		back  : 0,
-		doggy : 1
+	enum Mode {
+		back  = 0,
+		doggy = 1
 	};
+	let mode : Mode;
 
 	var scenes = new EncounterTable();
 	scenes.AddEnc(function() {
@@ -4106,13 +4125,13 @@ MirandaScenes.HomeDommySexFuckDobieVag = function(cocks) {
 		Text.Add("With a final thrust, you send her over the edge, gripping the guardswoman’s hips tightly as you drive into her, triggering her climax. The doggie’s pussy clamps down on your[artificial] shaft, clenching you tightly even as it stains your pillar with its sweet nectar.", parse);
 	}, 1.0, function() { return true; });
 
-	var load;
-	var LoadIn = {
-		vag : 0,
-		ass : 1,
-		out : 2
+	let load : number;
+	enum LoadIn {
+		vag = 0,
+		ass = 1,
+		out = 2
 	};
-	var loadIn;
+	let loadIn : LoadIn;
 
 	var cont = function() {
 		Text.Add(" The two of you collapse on top of each other, exhausted from your wild romp.", parse);
@@ -4257,10 +4276,11 @@ MirandaScenes.HomeDommySexFuckDobieVag = function(cocks) {
 MirandaScenes.HomeSubbySexLeavingFuckedHer = function() {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let rigard = GAME().rigard;
+	let world = WORLD();
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		lover : miranda.Attitude() < MirandaFlags.Attitude.Neutral ? "bitch" : "lover"
 	};
@@ -4333,7 +4353,7 @@ MirandaScenes.HomeSubbySexLeavingFuckedHer = function() {
 					Gui.NextPrompt(function() {
 						Text.Clear();
 
-						Scenes.Dreams.Entry(func);
+						DreamsScenes.Entry(func);
 					});
 				}, enabled : true,
 				tooltip : "Why not? You’re feeling pretty tired after all."
@@ -4361,11 +4381,12 @@ MirandaScenes.HomeSubbySexLeavingFuckedHer = function() {
 MirandaScenes.HomeSubbySex = function() {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
-	let party = GAME().party;
+	let party : Party = GAME().party;
+	let world = WORLD();
 
 	var nasty = miranda.Attitude() < MirandaFlags.Attitude.Neutral;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 
@@ -4462,7 +4483,7 @@ MirandaScenes.HomeSubbySex = function() {
 }
 
 //TODO
-MirandaScenes.HomeSubbySexDommyRide = function(location, Loc) {
+MirandaScenes.HomeSubbySexDommyRide = function(location : any, Loc : any) {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
 
@@ -4471,7 +4492,7 @@ MirandaScenes.HomeSubbySexDommyRide = function(location, Loc) {
 	var strapon = p1cock ? p1cock.isStrapon : false;
 	var borrowed = false;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		boygirl : player.mfFem("boy", "girl"),
 		
@@ -4494,7 +4515,7 @@ MirandaScenes.HomeSubbySexDommyRide = function(location, Loc) {
 	Text.NL();
 	Text.Add("Well… perhaps not what you were after, but it looks like this is all you’re going to get for the moment. Miranda pushes you down on [loc2], seating herself on your [breasts], facing away from you. ", parse);
 
-	p1cock = p1cock || Items.StrapOn.CanidStrapon.cock;
+	p1cock = p1cock || StrapOnItems.CanidStrapon.cock;
 	parse["cocks"] = function() { return player.MultiCockDesc(); }
 	parse["cock"]  = function() { return p1cock.Short(); }
 	parse["tip"]   = function() { return p1cock.TipShort(); }
@@ -4686,13 +4707,13 @@ MirandaScenes.HomeSubbySexDommyRide = function(location, Loc) {
 	});
 }
 
-MirandaScenes.HomeSubbySexTakeAnal = function(location, Loc) {
+MirandaScenes.HomeSubbySexTakeAnal = function(location : any, Loc : any) {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
 
 	var nasty = miranda.Attitude() < MirandaFlags.Attitude.Neutral;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		lover : nasty ? "bitch" : "lover",
 		boyGirl : player.mfTrue("boy", "girl"),
@@ -5165,7 +5186,9 @@ MirandaScenes.HomeSubbySexTakeAnal = function(location, Loc) {
 
 // TODO
 MirandaScenes.HomeDommyDungeonFirst = function() {
-	var parse = {
+	let world = WORLD();
+
+	var parse : any = {
 
 	};
 
@@ -5185,7 +5208,9 @@ MirandaScenes.HomeDommyDungeonFirst = function() {
 
 // TODO
 MirandaScenes.HomeDommyDungeon = function() {
-	var parse = {
+	let world = WORLD();
+
+	var parse : any = {
 
 	};
 
@@ -5205,9 +5230,10 @@ MirandaScenes.HomeDommyDungeon = function() {
 
 // TODO
 MirandaScenes.HomeSubbyDungeon = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
+	let world = WORLD();
 
-	var parse = {
+	var parse : any = {
 
 	};
 
@@ -5227,7 +5253,7 @@ MirandaScenes.HomeSubbyDungeon = function() {
 
 // TODO
 MirandaScenes.TavernSexPrompt = function() {
-	var parse = {
+	var parse : any = {
 
 	};
 
@@ -5249,7 +5275,7 @@ MirandaScenes.TavernSexBackroomPrompt = function() {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	parse = player.ParserTags(parse);
@@ -5321,13 +5347,13 @@ MirandaScenes.TavernSexBackroomPrompt = function() {
 	}
 }
 
-MirandaScenes.TavernSexBackroomSubbyVag = function(cocks) {
+MirandaScenes.TavernSexBackroomSubbyVag = function(cocks : Cock[]) {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 
 	var p1Cock = player.BiggestCock(cocks);
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		
 	};
@@ -5441,7 +5467,7 @@ MirandaScenes.TavernSexBackroomSubbyVag = function(cocks) {
 	Gui.NextPrompt();
 }
 
-MirandaScenes.TavernSexSubbyVag = function(cocks) {
+MirandaScenes.TavernSexSubbyVag = function(cocks : Cock[]) {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
 
@@ -5454,7 +5480,7 @@ MirandaScenes.TavernSexSubbyVag = function(cocks) {
 		}
 	}
 
-	var parse = {
+	var parse : any = {
 		playername     : player.name,
 		lordLady       : player.mfTrue("lord", "lady"),
 		masterMistress : player.mfTrue("master", "mistress"),
@@ -5637,10 +5663,14 @@ MirandaScenes.TavernSexSubbyVag = function(cocks) {
 MirandaScenes.TavernSexPublicBJ = function() {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let terry = GAME().terry;
+	let kiakai = GAME().kiakai;
+	let roa = GAME().roa;
+	let momo = GAME().momo;
+	let gwendy = GAME().gwendy;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		mastermistress : player.mfTrue("master", "mistress"),
 		boyGirl : player.mfTrue("boy", "girl"),
@@ -5846,7 +5876,7 @@ MirandaScenes.TavernSexDommyBJ = function() {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		masterMistress : player.mfTrue("master", "mistress")
 	};
@@ -6258,7 +6288,7 @@ MirandaScenes.TavernSexDommyBJ = function() {
 }
 
 MirandaScenes.TerryTavernSexDommyBJ = function() {
-	var parse = {
+	var parse : any = {
 
 	};
 
@@ -6273,12 +6303,12 @@ MirandaScenes.TerryTavernSexDommyBJ = function() {
 	MirandaScenes.TavernSexDommyBJ();
 }
 
-MirandaScenes.TerryTavernSexSubbyVag = function(cocks) {
+MirandaScenes.TerryTavernSexSubbyVag = function(cocks : Cock[]) {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
 
 	var p1Cock = player.BiggestCock(cocks);
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 
@@ -6377,9 +6407,10 @@ MirandaScenes.TerryTavernSexSubbyVag = function(cocks) {
 MirandaScenes.DatingEntry = function() {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
-	let party = GAME().party;
+	let party : Party = GAME().party;
+	let world = WORLD();
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -6531,7 +6562,7 @@ MirandaScenes.DatingBlockPrompt = function() {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
 
-	var parse = {
+	var parse : any = {
 		name : miranda.Attitude() >= MirandaFlags.Attitude.Neutral ?
 			player.name : "slut"
 	};
@@ -6600,7 +6631,7 @@ MirandaScenes.DatingStage1 = function() {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -6696,7 +6727,7 @@ MirandaScenes.DatingStage1 = function() {
 MirandaScenes.DatingStage2 = function() {
 	let miranda = GAME().miranda;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -6757,11 +6788,11 @@ MirandaScenes.DatingStage2 = function() {
 	scenes.Get();
 }
 
-MirandaScenes.TalkBackstory = function(atBar) {
+MirandaScenes.TalkBackstory = function(atBar : boolean) {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -6998,13 +7029,13 @@ MirandaScenes.TalkBackstory = function(atBar) {
 	if(miranda.flags["bgRotMax"] < sceneId)
 		miranda.flags["bgRotMax"] = sceneId;
 }
-MirandaScenes.TalkConquests = function(atBar) {
+MirandaScenes.TalkConquests = function(atBar : boolean) {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let terry = GAME().terry;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -7177,11 +7208,12 @@ MirandaScenes.TalkConquests = function(atBar) {
 MirandaScenes.DatingStage3 = function() {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
-	let party = GAME().party;
+	let party : Party = GAME().party;
+	let world = WORLD();
 
 	var dom = miranda.SubDom() - player.SubDom();
 	
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		stud : dom >= 50 ? player.mfTrue("master", "mistress") : player.mfTrue("stud", "beautiful")
 	};
@@ -7344,9 +7376,10 @@ MirandaScenes.DatingStage3 = function() {
 
 MirandaScenes.DatingFirstDocks = function() {
 	let miranda = GAME().miranda;
-	let party = GAME().party;
+	let party : Party = GAME().party;
+	let world = WORLD();
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -7405,7 +7438,7 @@ MirandaScenes.DatingFirstDocks = function() {
 MirandaScenes.DatingFirstMercs = function() {
 	let miranda = GAME().miranda;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -7468,10 +7501,11 @@ MirandaScenes.DatingFirstMercs = function() {
 MirandaScenes.DatingFirstCity = function() {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let rigard = GAME().rigard;
+	let world = WORLD();
 
-	var parse = {
+	var parse : any = {
 		boyGirl : player.mfTrue("boy", "girl"),
 		tongueDesc : function() { return player.TongueDesc(); },
 		breastDesc : function() { return player.FirstBreastRow().Short(); }
@@ -7615,10 +7649,11 @@ MirandaScenes.DatingFirstCity = function() {
 MirandaScenes.DatingFirstHome = function() {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let rigard = GAME().rigard;
+	let world = WORLD();
 
-	var parse = {
+	var parse : any = {
 		guyGirl : player.mfTrue("guy", "girl"),
 		playername : player.name
 	};

@@ -20,13 +20,14 @@ import { Saver } from './saver';
 import { Alchemy } from './alchemy';
 import { Quests } from './quest';
 import { Gui } from './gui';
+import { Party } from './party';
 //import { Saver } from './saver'; TODO Circular dep
 //import { Alchemy } from './alchemy'; TODO Circular dep
 //import { Quest } from './quest'; TODO Circular dep
 
 function SetExploreButtons() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 
 	var waitLocation = party.location.wait();
 	// At safe locations you can sleep and save
@@ -103,7 +104,7 @@ function LimitedDataPrompt(backFunc : any) {
 NAV().LimitedDataPrompt = LimitedDataPrompt;
 
 function DataPrompt() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	SetGameState(GameState.Event, Gui);
 	// At safe locations you can sleep and save
 	var safeLocation = party.location.safe();
@@ -186,7 +187,7 @@ NAV().DataPrompt = DataPrompt;
 //***************************************************//
 
 let Explore = function(preventClear : boolean) {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	if(!preventClear)
 		Text.Clear();
 
@@ -205,7 +206,7 @@ let Explore = function(preventClear : boolean) {
 NAV().Explore = Explore;
 
 let PartyInteraction = function(preventClear : boolean) {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	party.Interact(preventClear, party.location.switchSpot());
 	Gui.SetLastSubmenu(Input.exploreButtons[ExploreButtonIndex.Party]);
 
@@ -214,7 +215,7 @@ let PartyInteraction = function(preventClear : boolean) {
 NAV().PartyInteraction = PartyInteraction;
 
 let Fight = function(preventClear : boolean) {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	if(!preventClear)
 		Text.Clear();
 	if(party.location == null) {
@@ -240,7 +241,7 @@ let Fight = function(preventClear : boolean) {
 NAV().Fight = Fight;
 
 let ShowInventory = function(preventClear : boolean) {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	if(!preventClear)
 		Text.Clear();
 	if(party.inventory == null) {
@@ -258,7 +259,7 @@ let ShowInventory = function(preventClear : boolean) {
 NAV().ShowInventory = ShowInventory;
 
 let ShowAbilities = function(preventClear : boolean) {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	if(!preventClear)
 		Text.Clear();
 	Gui.ClearButtons();
@@ -272,7 +273,7 @@ NAV().ShowAbilities = ShowAbilities;
 
 let ShowAlchemy = function(preventClear? : boolean) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	if(!preventClear)
 		Text.Clear();
 	Gui.ClearButtons();
@@ -297,7 +298,7 @@ let ShowQuests = function(preventClear : boolean) {
 NAV().ShowQuests = ShowQuests;
 
 let ShowHunting = function(preventClear : boolean) {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	if(!preventClear)
 		Text.Clear();
 	Gui.ClearButtons();

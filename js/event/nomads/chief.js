@@ -47,7 +47,7 @@ Chief.prototype.ToStorage = function() {
 
 ChiefScenes.Interact = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let kiakai = GAME().kiakai;
 	let chief = GAME().chief;
 	parse = {

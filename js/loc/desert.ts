@@ -12,12 +12,12 @@ import { Gui } from '../gui';
 import { MomoScenes } from '../event/momo';
 import { OasisScenes } from './oasis';
 import { QuestItems } from '../items/quest';
-import { Burrows } from './burrows';
 import { RoamingScenes } from '../event/roaming';
 import { LizardsScenes } from '../enemy/lizard';
 import { NagaScenes } from '../enemy/naga';
 import { ScorpionScenes } from '../enemy/scorp';
 import { BurrowsFlags } from './burrows-flags';
+import { Party } from '../party';
 
 // Create namespace
 let DesertLoc = {
@@ -43,7 +43,7 @@ DesertLoc.Drylands.enc.AddEnc(function() {
 
 DesertLoc.Drylands.enc.AddEnc(function() {
 	return function() {
-		let party = GAME().party;
+		let party : Party = GAME().party;
 		let burrows = GAME().burrows;
 
 		var parse = {

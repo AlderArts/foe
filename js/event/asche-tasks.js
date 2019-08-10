@@ -289,7 +289,7 @@ TasksScenes.Ginseng.Fight = function() {
 }
 
 TasksScenes.Ginseng.Bribe = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let asche = GAME().asche;
 
 	var parse = {
@@ -476,7 +476,7 @@ TasksScenes.Ginseng.Whore = function() {
 }
 
 TasksScenes.Ginseng.FightWin = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let asche = GAME().asche;
 
 	var enc = this;
@@ -508,7 +508,7 @@ TasksScenes.Ginseng.FightWin = function() {
 }
 
 TasksScenes.Ginseng.FightLoss = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let asche = GAME().asche;
 
 	var enc = this;
@@ -535,7 +535,7 @@ TasksScenes.Ginseng.FightLoss = function() {
 
 TasksScenes.Ginseng.Complete = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let asche = GAME().asche;
 
 	var parse = {
@@ -827,7 +827,7 @@ TasksScenes.Nightshade.FollowAquilius = function() {
 
 TasksScenes.Nightshade.HerbComplications = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let asche = GAME().asche;
 
 	var parse = {
@@ -892,7 +892,7 @@ TasksScenes.Nightshade.HerbComplications = function() {
 
 TasksScenes.Nightshade.Complete = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let asche = GAME().asche;
 
 	var parse = {
@@ -1124,7 +1124,7 @@ TasksScenes.Spring.Initiation = function() {
 //Select “spring” from Highlands menu.
 TasksScenes.Spring.Highlands = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let asche = GAME().asche;
 
 	var parse = {
@@ -1243,7 +1243,7 @@ TasksScenes.Spring.OnTask = function() {
 
 TasksScenes.Spring.Complete = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let asche = GAME().asche;
 
 	var parse = {

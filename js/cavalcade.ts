@@ -8,6 +8,7 @@ import { Gui } from "./gui";
 import { Text } from "./text";
 import { Rand } from "./utility";
 import { Input } from './input';
+import { Party } from './party';
 
 enum CScore {
 	Cavalcade = 0,
@@ -277,7 +278,7 @@ export class Cavalcade {
 	// Rounds of betting, reveal of house cards
 	// If the Stag is revealed in the house hand, replace it with a new card
 	CoinGameRound() {
-		let party = GAME().party;
+		let party : Party = GAME().party;
 		var that : any = this;
 		var parse = {
 			token : that.token,

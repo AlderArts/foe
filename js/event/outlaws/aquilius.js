@@ -119,7 +119,7 @@ Aquilius.prototype.SetHerb = function(override) {
 
 AquiliusScenes.FirstMeeting = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let aquilius = GAME().aquilius;
 
 	var parse = {
@@ -177,7 +177,7 @@ AquiliusScenes.FirstMeeting = function() {
 
 AquiliusScenes.Approach = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let aquilius = GAME().aquilius;
 	let outlaws = GAME().outlaws;
 
@@ -454,7 +454,7 @@ AquiliusScenes.TalkPrompt = function() {
 
 AquiliusScenes.TalkSelfPrompt = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	
 	var parse = {
 		playername : player.name,
@@ -999,7 +999,7 @@ AquiliusScenes.HelpOutPrompt = function() {
 
 // [Herbs] - Go flower picking like Aquilius asked you to.
 AquiliusScenes.PickHerbs = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let aquilius = GAME().aquilius;
 	
 	var parse = {
@@ -1035,7 +1035,7 @@ AquiliusScenes.PickHerbs = function() {
 // Tend to sick (requires healer job available)
 AquiliusScenes.TendToSick = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let aquilius = GAME().aquilius;
 	let outlaws = GAME().outlaws;
 

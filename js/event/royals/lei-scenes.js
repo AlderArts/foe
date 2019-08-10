@@ -17,7 +17,7 @@ let LeiScenes = {
 };
 
 LeiScenes.InnApproach = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let lei = GAME().lei;
 	var parse = {
 
@@ -197,7 +197,7 @@ LeiScenes.InnPrompt = function() {
 
 LeiScenes.InnPromptFirst = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let lei = GAME().lei;
 	var parse = {
 
@@ -556,7 +556,7 @@ LeiScenes.ExplanationMain = function() {
 }
 
 LeiScenes.ObserveMain = function(first) {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var parse = {
 		drink : party.Alone() ? "a drink" : "some drinks"
 	};
@@ -634,7 +634,7 @@ LeiScenes.ObserveMain = function(first) {
 }
 
 LeiScenes.RequestMain = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let rigard = GAME().rigard;
 	Text.Clear();
 
@@ -831,7 +831,7 @@ LeiScenes.Desc = function() {
 
 LeiScenes.BarFight = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let lei = GAME().lei;
 	var parse = {
 		time     : WorldTime().DayTime(),
@@ -1336,7 +1336,7 @@ LeiScenes.SexPrompt = function() {
 
 LeiScenes.SparPrompt = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let lei = GAME().lei;
 	var parse = {
 
@@ -1419,7 +1419,7 @@ LeiScenes.SparPrompt = function() {
 
 LeiScenes.SparWin = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let lei = GAME().lei;
 	var enc = this;
 
@@ -1498,7 +1498,7 @@ LeiScenes.SparWin = function() {
 }
 
 LeiScenes.SparLoss = function() {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let lei = GAME().lei;
 	var enc = this;
 
@@ -1543,7 +1543,7 @@ LeiScenes.GuardStalkingApplicable = function() {
 
 LeiScenes.GuardStalking = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let lei = GAME().lei;
 	let kiakai = GAME().kiakai;
 	var parse = {
@@ -1651,7 +1651,7 @@ LeiScenes.GuardStalking = function() {
 
 LeiScenes.GuardStalkingEntry = function(parse, nv) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let kiakai = GAME().kiakai;
 	Text.Add("Although the distance is short, the cloaked man moves with remarkable agility. The shortsword vanishes back inside his cloak, and he snatches up the guard’s longer weapon. Before you’re more than halfway to the scene, he reaches the mouth of the nearest alleyway, and pauses for a moment at the lip of deeper shadows. The man half-turns, momentarily meeting your eyes from beneath the hood of his cloak, and beckons for you to come before disappearing into darkness.", parse);
 	Text.NL();
@@ -1838,7 +1838,7 @@ LeiScenes.GuardStalkingConverge = function(parse, nv) {
 
 LeiScenes.GuardStalkingApprove = function(parse, nv) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let lei = GAME().lei;
 	Text.Add("<i>“I but water a young sprout. If it becomes strong, perhaps I can use it to grow myself.”</i> He pauses, and his next words are quieter. <i>“This one is not as promising as some I wish to cultivate, but one cannot rely overmuch on a single crop.”</i>", parse);
 	Text.Flush();
@@ -1900,7 +1900,7 @@ LeiScenes.GuardStalkingApprove = function(parse, nv) {
 }
 
 LeiScenes.GuardStalkingMoveOn = function(parse, nv) {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	Text.Clear();
 	parse["comp"] = party.Num() == 2 ? party.Get(1).name + " is" : "your companions are";
 	parse["c"] = party.Num() > 1 ? Text.Parse("how [comp] doing with the guard", parse) : "on the guard";
@@ -1911,7 +1911,7 @@ LeiScenes.GuardStalkingMoveOn = function(parse, nv) {
 }
 
 LeiScenes.GuardStalkingOutro = function(parse, nv) {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let kiakai = GAME().kiakai;
 	Text.Add(" Before coming here, I had a summons delivered to a guard patrol to the west of here, notifying them of the injury of one of their own. They will arrive any minute, and likely be none too happy,”</i> Lei says, sounding quite pleased for his part. He motions for you to follow, as he starts walking toward the mouth of the alleyway. <i>“Did you think I would leave him to lie here all night? If he died, giving the lesson would have been a waste of my time, after all.”</i>", parse);
 	Text.NL();

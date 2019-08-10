@@ -82,7 +82,7 @@ EstevanScenes.Impregnate = function(mother, slot) {
 
 // Schedule
 Estevan.prototype.IsAtLocation = function(location) {
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	location = location || party.location;
 	if(location == WORLD().loc.Plains.Nomads.Fireplace)
 		return (WorldTime().hour >= 15 || WorldTime().hour < 3);

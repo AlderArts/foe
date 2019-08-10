@@ -343,7 +343,7 @@ LaylaScenes.Appearance = function(switchSpot : boolean) {
 
 LaylaScenes.PartyRegular = function(switchSpot : boolean) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let kiakai = GAME().kiakai;
 	let layla = GAME().layla;
 	let terry = GAME().terry;
@@ -551,7 +551,7 @@ LaylaScenes.FarmMeetingTrigger = function(approach : boolean) {
 //approaching/sleeping
 LaylaScenes.FirstMeeting = function(approach : boolean) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let gwendy = GAME().gwendy;
 	let layla = GAME().layla;
 	var parse : any = {
@@ -623,7 +623,7 @@ LaylaScenes.FirstMeeting = function(approach : boolean) {
 //In case you let her get away. This happens 3 days after that. And continue repeating every 3 days till you win.
 LaylaScenes.RepeatMeeting = function(approach : boolean) {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let gwendy = GAME().gwendy;
 	var parse : any = {
 		playername : player.name
@@ -696,7 +696,7 @@ LaylaScenes.FarmCombat = function() {
 
 LaylaScenes.FarmCombatLoss = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let gwendy = GAME().gwendy;
 	let layla = GAME().layla;
 	var enc = this;
@@ -742,7 +742,7 @@ LaylaScenes.FarmCombatLoss = function() {
 
 LaylaScenes.FarmCombatWin = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let gwendy = GAME().gwendy;
 	let layla = GAME().layla;
 	var enc = this;
@@ -1059,7 +1059,7 @@ LaylaScenes.SecondMeeting = function() {
 
 LaylaScenes.LeavesGwendy = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	let layla = GAME().layla;
 	var parse : any = {
 		playername : player.name

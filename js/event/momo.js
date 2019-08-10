@@ -144,7 +144,7 @@ MomoScenes.MomoEnc = function() {
 
 MomoScenes.FindingMomo = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var parse = {
 		playername : player.name
 	};
@@ -458,7 +458,7 @@ MomoScenes.Prompt = function() {
 
 MomoScenes.CookPrompt = function() {
 	let player = GAME().player;
-	let party = GAME().party;
+	let party : Party = GAME().party;
 	var parse = {
 		playername : player.name,
 		girlMorph  : momo.Ascended() ? "morph" : "girl",
