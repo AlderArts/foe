@@ -394,7 +394,7 @@ export class Body {
 		return eyes.qShort() + " eye";
 	}
 
-	EarDesc(plural : boolean) {
+	EarDesc(plural? : boolean) {
 		var ret;
 		var ears = this.head.ears.race;
 		if(ears.isRace(Race.Reptile)) ret = "pointed, scaled ear";
@@ -539,7 +539,7 @@ export class Body {
 		return "thighs";
 	}
 	// TODO
-	KneesDesc(plural : boolean) {
+	KneesDesc(plural? : boolean) {
 		var legs = this.legs;
 		if(!legs) return "body";
 		if(legs.count == 0) {
@@ -631,7 +631,7 @@ export class Body {
 	}
 
 	// TODO
-	HipsDesc(plural : boolean) {
+	HipsDesc(plural? : boolean) {
 		var size = this.HipSize();
 		
 		var adjs = [];

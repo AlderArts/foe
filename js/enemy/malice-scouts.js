@@ -22,7 +22,7 @@ import { ToysItems } from '../items/toys';
 import { Encounter } from '../combat';
 import { Gui } from '../gui';
 import { SetGameState, GameState } from '../gamestate';
-import { TargetStrategy } from '../entity-combat';
+import { TargetStrategy } from '../entity';
 
 /*
 Tier 1 Malice scouts and outriders

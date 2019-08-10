@@ -18,6 +18,7 @@ import { Time } from '../../time';
 import { GwendyScenes } from './gwendy-scenes';
 import { PartyInteraction } from '../../exploration';
 import { DryadGladeFlags } from '../../loc/glade-flags';
+import { LaylaMob } from './layla-mob';
 
 let LaylaScenes : any = {};
 

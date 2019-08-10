@@ -5,6 +5,7 @@ import { Stat } from './stat';
 import { Encounter } from './combat';
 import { Entity } from './entity';
 import { GAME } from './GAME';
+import { Party } from './party';
 
 /*
  *
@@ -73,14 +74,14 @@ export class Ability {
 		return "NO DESC";
 	}
 
-	StartCast(encounter : Encounter, caster : Entity, target : Entity) {
+	StartCast(encounter : Encounter, caster : Entity, target : Entity|Party) {
 		Text.NL();
 		_.each(this.onCast, function(node) {
 			node(this, encounter, caster, target);
 		});
 	}
 
-	CastInternal(encounter : Encounter, caster : Entity, target : Entity) {
+	CastInternal(encounter : Encounter, caster : Entity, target : Entity|Party) {
 		Text.NL();
 		_.each(this.castTree, function(node) {
 			node(this, encounter, caster, target);
@@ -189,11 +190,11 @@ export class Ability {
 		}
 	}
 
-	Use(encounter : Encounter, caster : Entity, target : Entity, ext? : any) {
+	Use(encounter : Encounter, caster : Entity, target : Entity|Party, ext? : any) {
 		Ability.ApplyCost(this, caster);
 		this.StartCast(encounter, caster, target);
 
-		var entry = caster.GetCombatEntry(encounter);
+		var entry : any = caster.GetCombatEntry(encounter);
 
 		// Set cooldown
 		if(this.cooldown) {

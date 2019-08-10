@@ -6,6 +6,7 @@ import { Text } from '../text';
 import { Entity } from '../entity';
 import { Encounter } from '../combat';
 import { GAME } from '../GAME';
+import { Party } from '../party';
 
 let AbilityNode : any = {};
 
@@ -441,7 +442,7 @@ AbilityNode.Retarget.Fallen = function(ability : Ability, encounter : Encounter,
 	return target;
 }
 
-AbilityNode.Run = function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity, result : any) {
+AbilityNode.Run = function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity|Party|any, result : any) {
 	var that = this;
 	
 	if(that.retarget) {

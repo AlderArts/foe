@@ -12,6 +12,7 @@ import { Text } from '../text';
 import { Encounter } from '../combat';
 import { Entity } from '../entity';
 import { Status, StatusEffect } from '../statuseffect';
+import { Party } from '../party';
 
 let SeductionAb : any = {};
 
@@ -167,7 +168,7 @@ SeductionAb.Soothe = new Ability("Soothe");
 SeductionAb.Soothe.cost = { hp: null, sp: 20, lp: null};
 SeductionAb.Soothe.Short = function() { return "Calm the wayward thoughts of your allies with the gentle touch of your voice."; }
 SeductionAb.Soothe.targetMode = TargetMode.Party;
-SeductionAb.Soothe.castTree.push(function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
+SeductionAb.Soothe.castTree.push(function(ability : Ability, encounter : Encounter, caster : Entity, target : Party) {
 	var targets = target.members;
 	
 	var group = targets.length > 1;

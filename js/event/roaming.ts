@@ -251,7 +251,7 @@ RoamingScenes.BanditsGen = function(capt : Entity, levelbonus : number) {
 	var males   = 0;
 	var females = 0;
 	for(var i = 0; i < num; ++i) {
-		let bandit : Entity = CreateBandit();
+		let bandit = CreateBandit();
 		if(bandit.Gender() == Gender.male)
 			males++;
 		else

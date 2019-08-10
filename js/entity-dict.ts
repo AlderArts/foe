@@ -5,7 +5,7 @@ let EntityDict = {
 		return this.ID;
 	},
 
-	IdToEntity : function(id) {
+	IdToEntity : function(id : string) {
 		if(id == "player") return GAME().player;
 		if(id == "kiakai") return GAME().kiakai;
 		if(id == "miranda") return GAME().miranda;

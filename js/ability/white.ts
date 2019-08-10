@@ -11,6 +11,7 @@ import { Encounter } from '../combat';
 import { Entity } from '../entity';
 import { Gui } from '../gui';
 import { StatusEffect } from '../statuseffect';
+import { Party } from '../party';
 
 let WhiteAb : any = {};
 WhiteAb._onHeal = function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity, dmg : number) {
@@ -78,7 +79,7 @@ WhiteAb.Cheer.name = "Cheer";
 WhiteAb.Cheer.Short = function() { return "Boosts party morale, raising spirit and stamina slightly (doesn't stack)."; }
 WhiteAb.Cheer.targetMode = TargetMode.Party;
 WhiteAb.Cheer.cost = { hp: null, sp: 30, lp: null};
-WhiteAb.Cheer.CastInternal = function(encounter : Encounter, caster : Entity, target : Entity) {
+WhiteAb.Cheer.CastInternal = function(encounter : Encounter, caster : Entity, target : Party) {
 	// TODO: Make more flavor text
 	var parse = {
 		name : caster.name,

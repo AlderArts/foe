@@ -14,15 +14,6 @@ import './js/utility.js';
 import './js/gui.js';
 
 // Entity scripts
-import './js/entity.js';
-import './js/entity-combat.js';
-import './js/entity-desc.js';
-import './js/entity-grammar.js';
-import './js/entity-menu.js';
-import './js/entity-save.js';
-import './js/entity-sex.js';
-import './js/entity-dict.js';
-
 import './js/event/player.js';
 
 // Combat
@@ -86,7 +77,6 @@ import './js/event/burrows/vena.js';
 import './js/event/farm/gwendy.js';
 import './js/event/farm/adrian.js';
 import './js/event/farm/danie.js';
-import './js/event/farm/layla.js';
 
 import './js/event/highlands/isla.js';
 
@@ -120,7 +110,6 @@ import './js/event/outlaws/cavalcade.js';
 import './js/event/raven.js';
 
 // Enemies
-import './js/enemy/bandit.js';
 import './js/enemy/knight.js';
 import './js/enemy/imp.js';
 import './js/enemy/introdemon.js';

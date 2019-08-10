@@ -1,9 +1,13 @@
 import { Images } from "./assets";
 import { Text } from "./text";
 import { Gui } from "./gui";
+import { JobDesc, Job } from "./job";
+import { ItemSubtype, Item, ItemType } from "./item";
+import { GAME } from "./GAME";
+import { Stat } from "./stat";
 
 let EntityMenu = {
-	InteractDefault : function(options, switchSpot, enableEquip, enableStats, enableJob, enableSwitch) {
+	InteractDefault : function(options : any[], switchSpot : boolean, enableEquip : any, enableStats : any, enableJob : any, enableSwitch : boolean) {
 		var that = this;
 		options.push({ nameStr: "Equip",
 			func : function() {
@@ -22,6 +26,7 @@ let EntityMenu = {
 			}, enabled : enableJob
 		});
 		if(switchSpot) {
+			let party = GAME().party;
 			options.push({ nameStr: party.InParty(that) ? "Switch out" : "Switch in",
 				func : function() {
 					party.SwitchPrompt(that);
@@ -31,7 +36,7 @@ let EntityMenu = {
 		}
 	},
 
-	LevelUpPrompt : function(backFunc) {
+	LevelUpPrompt : function(backFunc : any) {
 		Text.Clear();
 
 		Text.Add("[name] has [points] stat points pending.",
@@ -175,7 +180,8 @@ let EntityMenu = {
 		Gui.SetButtonsFromList(options, true, backFunc);
 	},
 
-	EquipPrompt : function(backfunc) {
+	EquipPrompt : function(backfunc : any) {
+		let party = GAME().party;
 		var that = this;
 		var parse = {
 			name    : that.NameDesc(),
@@ -192,7 +198,7 @@ let EntityMenu = {
 		var equipFunc = function() {
 			Text.Clear();
 
-			var slotFunc = function(slotname, slot) {
+			var slotFunc = function(slotname : string, slot : Item) {
 				//Text.AddDiv("<hr>");
 				Text.AddDiv(slotname, null, "itemTypeHeader");
 				//Text.AddDiv("<hr>");
@@ -214,7 +220,7 @@ let EntityMenu = {
 			slotFunc("Toy", that.strapOn);
 			Text.Flush();
 
-			var slotFunc2 = function(slotname, slot) {
+			var slotFunc2 = function(slotname : string, slot? : Item) {
 				Text.AddDiv(slotname, null, "itemTypeHeader");
 				Text.AddDiv("<hr>");
 				Text.Add("[name] [isAre] currently equipped with:", parse);
@@ -304,7 +310,7 @@ let EntityMenu = {
 		equipFunc();
 	},
 
-	JobPrompt : function(backfunc) {
+	JobPrompt : function(backfunc : any) {
 		var that = this;
 		Text.Clear();
 		// Fallback for bugs
@@ -389,7 +395,7 @@ let EntityMenu = {
 			}
 
 			options.push({ nameStr : jd.job.Short(this),
-				func : function(obj) {
+				func : function(obj : Job) {
 					parse.job = obj.Short(this);
 					Text.Clear();
 					Text.Add("[Possessive] current job is <b>[job]</b>.", parse);

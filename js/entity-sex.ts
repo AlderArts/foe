@@ -1,7 +1,12 @@
 
 import { GetDEBUG } from '../app';
 import { Text } from './text';
-import { BodyPartType } from './body/bodypart';
+import { BodyPartType, BodyPart } from './body/bodypart';
+import { Cock } from './body/cock';
+import { Orifice } from './body/orifice';
+import { NippleType } from './body/breasts';
+import { Vagina } from './body/vagina';
+import { Butt } from './body/butt';
 
 let EntitySex = {
 	Genitalia : function() {
@@ -41,7 +46,7 @@ let EntitySex = {
 		}
 		return -1;
 	},
-	BiggestCock : function(cocks, incStrapon) {
+	BiggestCock : function(cocks? : Cock[], incStrapon? : boolean) {
 		cocks = cocks || this.body.cock;
 		var c = cocks[0];
 		if(c) {
@@ -59,7 +64,7 @@ let EntitySex = {
 		else if(incStrapon && this.strapOn)
 			return this.strapOn.cock;
 	},
-	CocksThatFit : function(orifice, onlyRealCocks, extension) {
+	CocksThatFit : function(orifice? : Orifice, onlyRealCocks? : boolean, extension? : any) {
 		var ret = [];
 		for(var i=0,j=this.body.cock.length; i<j; i++) {
 			var c = this.body.cock[i];
@@ -85,7 +90,7 @@ let EntitySex = {
 		return this.body.cock;
 	},
 	// TODO: Race too
-	MultiCockDesc : function(cocks) {
+	MultiCockDesc : function(cocks? : Cock[]) {
 		cocks = cocks || this.body.cock;
 		if(cocks.length == 0) {
 			if(this.strapOn)
@@ -108,7 +113,7 @@ let EntitySex = {
 	FirstVag : function() {
 		return this.body.vagina[0];
 	},
-	VagsThatFit : function(capacity) {
+	VagsThatFit : function(capacity : number) {
 		for(var i=0,j=this.body.vagina.length; i<j; i++) {
 			var size = this.body.vagina[i].capacity.Get();
 			if(size >= capacity)
@@ -192,7 +197,7 @@ let EntitySex = {
 		};
 		return c;
 	},
-	NipplesThatFitLen : function(capacity) {
+	NipplesThatFitLen : function(capacity : number) {
 		var ret = new Array();
 		for(var i=0,j=this.body.breasts.length; i<j; i++) {
 			var row = this.body.breasts[i];
@@ -206,7 +211,7 @@ let EntitySex = {
 	},
 
 
-	AllOrfices : function(capacity) {
+	AllOrfices : function(capacity? : number) {
 		capacity = capacity || 0;
 		var ret = new Array();
 		
@@ -224,7 +229,7 @@ let EntitySex = {
 		return ret;
 	},
 
-	AllPenetrators : function(orifice) {
+	AllPenetrators : function(orifice : Orifice) {
 		var ret = new Array();
 		
 		var cocks = this.CocksThatFit(orifice);
@@ -244,25 +249,25 @@ let EntitySex = {
 	MilkCap : function() {
 		return this.lactHandler.MilkCap();
 	},
-	LactationProgress : function(oldMilk, newMilk, lactationRate) {
+	LactationProgress : function(oldMilk : number, newMilk : number, lactationRate : number) {
 		//Placeholder, implement in each entity if applicable
 	},
 
-	Fuck : function(cock, expMult) {
+	Fuck : function(cock : Cock, expMult? : number) {
 		expMult = expMult || 1;
 		this.AddSexExp(expMult);
 		// TODO: Stretch
 	},
 
 	// Fuck entitys mouth (vag, cock)
-	FuckOral : function(mouth, cock, expMult) {
+	FuckOral : function(mouth : any, cock : Cock, expMult? : number) {
 		expMult = expMult || 1;
 		this.AddSexExp(expMult);
 		// TODO: Stretch
 	},
 
 	// Fuck entitys anus (anus, cock)
-	FuckAnal : function(butt, cock, expMult) {
+	FuckAnal : function(butt : Butt, cock? : Cock, expMult? : number) {
 		var parse = {
 			name   : this.NameDesc(),
 			has    : this.has(),
@@ -285,7 +290,7 @@ let EntitySex = {
 	},
 
 	// Fuck entitys vagina (vag, cock)
-	FuckVag : function(vag, cock, expMult) {
+	FuckVag : function(vag : Vagina, cock? : Cock, expMult? : number) {
 		var parse = {
 			name   : this.NameDesc(),
 			has    : this.has(),
@@ -316,7 +321,7 @@ let EntitySex = {
 		return false;
 	},
 
-	RestoreCum : function(quantity) {
+	RestoreCum : function(quantity? : number) {
 		quantity = quantity || 1;
 		var balls = this.Balls();
 		return balls.cum.IncreaseStat(balls.CumCap(), quantity);
@@ -325,7 +330,7 @@ let EntitySex = {
 	Cum : function() {
 		return this.Balls().cum.Get();
 	},
-	CumOutput : function(mult) {
+	CumOutput : function(mult? : number) {
 		mult = mult || 1;
 		var balls = this.Balls();
 		var cum = mult * balls.CumCap() / 4;
@@ -335,7 +340,7 @@ let EntitySex = {
 		return cum;
 	},
 	// TODO test
-	OrgasmCum : function(mult) {
+	OrgasmCum : function(mult? : number) {
 		mult = mult || 1;
 		var balls = this.Balls();
 		var cumQ  = this.CumOutput(mult);
@@ -356,28 +361,28 @@ let EntitySex = {
 /*
  * New Sex functions
  */
-let Sex = {};
+export namespace Sex {
+	export function Cunnilingus(giver : any, reciever : any) {
+		if(giver)    giver.sex.gCunn++;
+		if(reciever) reciever.sex.rCunn++;
+	}
+	export function Blowjob(giver : any, reciever : any) {
+		if(giver)    giver.sex.gBlow++;
+		if(reciever) reciever.sex.rBlow++;
+	}
+	export function Vaginal(giver : any, reciever : any) {
+		if(giver)    giver.sex.gVag++;
+		if(reciever) reciever.sex.rVag++;
+	}
+	export function Anal(giver : any, reciever : any) {
+		if(giver)    giver.sex.gAnal++;
+		if(reciever) reciever.sex.rAnal++;
+	}
+	export function Preg(father : any, mother : any, num? : number) {
+		num = num || 1;
+		if(father) father.sex.sired += num;
+		if(mother) mother.sex.birth += num;
+	}	
+};
 
-Sex.Cunnilingus = function(giver, reciever) {
-	if(giver)    giver.sex.gCunn++;
-	if(reciever) reciever.sex.rCunn++;
-}
-Sex.Blowjob = function(giver, reciever) {
-	if(giver)    giver.sex.gBlow++;
-	if(reciever) reciever.sex.rBlow++;
-}
-Sex.Vaginal = function(giver, reciever) {
-	if(giver)    giver.sex.gVag++;
-	if(reciever) reciever.sex.rVag++;
-}
-Sex.Anal = function(giver, reciever) {
-	if(giver)    giver.sex.gAnal++;
-	if(reciever) reciever.sex.rAnal++;
-}
-Sex.Preg = function(father, mother, num) {
-	num = num || 1;
-	if(father) father.sex.sired += num;
-	if(mother) mother.sex.birth += num;
-}
-
-export { Sex, EntitySex };
+export { EntitySex };

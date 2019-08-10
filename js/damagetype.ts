@@ -20,7 +20,7 @@ let Element = {
 
 export class DamageType {
 	dmg : number[];
-	constructor(type : any) {
+	constructor(type? : any) {
 		type = type || {};
 		this.dmg = [];
 		this.dmg[Element.pSlash]   = type.pSlash   || 0;

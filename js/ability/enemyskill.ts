@@ -11,6 +11,7 @@ import { Status } from '../statuseffect';
 import { Encounter } from '../combat';
 import { Entity } from '../entity';
 import { OrchidScenes } from '../enemy/orchid-scenes';
+import { Party } from '../party';
 
 let EnemySkillAb : any = {};
 
@@ -77,9 +78,9 @@ EnemySkillAb.TSpray.targetMode = TargetMode.Enemies;
 EnemySkillAb.TSpray.cooldown = 2;
 EnemySkillAb.TSpray.castTree.push(AbilityNode.Template.Physical({
 	damageType: {lust: 0.1},
-	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
+	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Party) {
 		var parse = AbilityNode.DefaultParser(caster);
-		parse["foes"] = target.length > 1 ? "foes" : "foe";
+		parse["foes"] = target.members.length > 1 ? "foes" : "foe";
 		Text.Add("[Name] brandish[notEs] [hisher] tentacles, pointing them toward [hisher] [foes]. In a great fountain, sticky strands of cum splatter from the cock-like tentacles!", parse);
 		Text.NL();
 	}],
@@ -540,7 +541,7 @@ EnemySkillAb.Cassidy.Reflex.Short = function() { return "CassReflex"; }
 EnemySkillAb.Cassidy.Reflex.cooldown = 5;
 //Push a regular attack
 EnemySkillAb.Cassidy.Reflex.castTree.push(AttackAb.castTree[0]);
-EnemySkillAb.Cassidy.Reflex.castTree.push(function(ability : Ability, encounter : Encounter, caster : Entity) {
+EnemySkillAb.Cassidy.Reflex.castTree.push(function(ability : Ability, encounter : Encounter, caster : Entity|any) {
 	caster.reflexFlag = true;
 });
 

@@ -1,4 +1,5 @@
 import { Gender } from "./body/gender";
+import { Cock } from "./body/cock";
 
 let EntityGrammar = {
 	// Grammar
@@ -28,49 +29,49 @@ let EntityGrammar = {
 		var name = this.GroupName || this.name || "The entities";
 		return name + "'";
 	},
-	heshe : function(forcegender) {
+	heshe : function(forcegender? : Gender) {
 		var gender = forcegender ? forcegender : this.body.Gender();
 		if(gender == Gender.male) return "he";
 		else if(gender == Gender.female) return "she";
 		else if(gender == Gender.herm) return "she";
 		else return "they";
 	},
-	HeShe : function(forcegender) {
+	HeShe : function(forcegender? : Gender) {
 		var gender = forcegender ? forcegender : this.body.Gender();
 		if(gender == Gender.male) return "He";
 		else if(gender == Gender.female) return "She";
 		else if(gender == Gender.herm) return "She";
 		else return "They";
 	},
-	himher : function(forcegender) {
+	himher : function(forcegender? : Gender) {
 		var gender = forcegender ? forcegender : this.body.Gender();
 		if(gender == Gender.male) return "him";
 		else if(gender == Gender.female) return "her";
 		else if(gender == Gender.herm) return "her";
 		else return "them";
 	},
-	HimHer : function(forcegender) {
+	HimHer : function(forcegender? : Gender) {
 		var gender = forcegender ? forcegender : this.body.Gender();
 		if(gender == Gender.male) return "Him";
 		else if(gender == Gender.female) return "Her";
 		else if(gender == Gender.herm) return "Her";
 		else return "Them";
 	},
-	hisher : function(forcegender) {
+	hisher : function(forcegender? : Gender) {
 		var gender = forcegender ? forcegender : this.body.Gender();
 		if(gender == Gender.male) return "his";
 		else if(gender == Gender.female) return "her";
 		else if(gender == Gender.herm) return "her";
 		else return "their";
 	},
-	HisHer : function(forcegender) {
+	HisHer : function(forcegender? : Gender) {
 		var gender = forcegender ? forcegender : this.body.Gender();
 		if(gender == Gender.male) return "His";
 		else if(gender == Gender.female) return "Her";
 		else if(gender == Gender.herm) return "Her";
 		else return "Their";
 	},
-	hishers : function(forcegender) {
+	hishers : function(forcegender? : Gender) {
 		var gender = forcegender ? forcegender : this.body.Gender();
 		if(gender == Gender.male) return "his";
 		else if(gender == Gender.female) return "hers";
@@ -89,14 +90,14 @@ let EntityGrammar = {
 		return (this.body.Gender() == Gender.none);
 	},
 	// TODO femininity from other things (breasts etc)
-	mfFem : function(male, female) {
+	mfFem : function(male : any, female : any) {
 		return this.body.femininity.Get() > 0 ? female : male;
 	},
-	mfTrue : function(male, female) {
+	mfTrue : function(male : any, female : any) {
 		return (this.body.Gender() == Gender.male) ? male : female;
 	},
 
-	ParserPronouns : function(parse, prefix, postfix, forcegender) {
+	ParserPronouns : function(parse? : any, prefix? : string, postfix? : string, forcegender? : Gender) {
 		parse   = parse   || {};
 		prefix  = prefix  || "";
 		postfix = postfix || "";
@@ -110,7 +111,7 @@ let EntityGrammar = {
 		return parse;
 	},
 
-	ParserTags : function(parse, prefix, p1cock) {
+	ParserTags : function(parse? : any, prefix? : string, p1cock? : Cock) {
 		var ent = this;
 		parse  = parse  || {};
 		prefix = prefix || "";

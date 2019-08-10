@@ -1207,7 +1207,6 @@ export namespace TF {
 export class TFItem extends Item {
 	useStr : any;
 	effects : any[];
-	isTF : boolean;
 	constructor(id : string, name : string) {
 		super(id, name, ItemType.Potion);
 		this.Use     = TF.UseItem;

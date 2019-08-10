@@ -41,6 +41,7 @@ export class Item {
 	recipe : any[];
 	Use : any;
 	effect : any;
+	isTF : boolean;
 
 	constructor(id : string, name : string, type : any) {
 		//Required (An item will always have these)

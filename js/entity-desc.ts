@@ -5,9 +5,9 @@ import { Unit } from './utility';
 import { PregnancyHandler } from './pregnancy';
 
 let EntityDesc = {
-	PrintDescription : function(partial) {
+	PrintDescription : function(partial : boolean) {
 		
-		var parse = {
+		var parse : any = {
 			name     : this.NameDesc(),
 			possesive: this.possessive(),
 			weigth   : Math.floor(this.body.weigth.Get() * 2),

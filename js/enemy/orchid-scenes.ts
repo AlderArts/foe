@@ -5,7 +5,6 @@ import { Text } from "../text";
 import { OrchidFlags } from "./orchid-flags";
 import { Entity } from "../entity";
 import { Gui } from "../gui";
-import { Oasis } from "../loc/oasis";
 import { LaylaFlags } from "../event/farm/layla-flags";
 import { OasisFlags } from "../loc/oasis-flags";
 
