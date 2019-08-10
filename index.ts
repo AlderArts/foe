@@ -52,8 +52,6 @@ import './js/event/farm/gwendy.js';
 import './js/event/farm/adrian.js';
 import './js/event/farm/danie.js';
 
-import './js/event/highlands/isla.js';
-
 import './js/event/royals/lei.js';
 import './js/event/royals/lei-tasks.js';
 import './js/event/royals/lei-sex.js';

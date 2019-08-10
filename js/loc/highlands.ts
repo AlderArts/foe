@@ -19,6 +19,7 @@ import { Asche } from '../event/asche';
 import { TasksScenes } from '../event/asche-tasks';
 import { Isla, IslaScenes } from '../event/highlands/isla';
 import { Gui } from '../gui';
+import { IslaFlags } from '../event/highlands/isla-flags';
 
 // Create namespace
 let HighlandsLoc = {
@@ -148,7 +149,7 @@ HighlandsLoc.Hills.links.push(new Link(
 
 
 HighlandsLoc.Spring.onEntry = function() {
-	if(GAME().isla.flags["Met"] < Isla.Met.Met)
+	if(GAME().isla.flags["Met"] < IslaFlags.Met.Met)
 		IslaScenes.Introduction();
 	else
 		Gui.PrintDefaultOptions();

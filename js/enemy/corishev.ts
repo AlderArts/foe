@@ -16,6 +16,7 @@ import { CombatItems } from '../items/combatitems';
 import { WeaponsItems } from '../items/weapons';
 import { AccItems } from '../items/accessories';
 import { GAME } from '../GAME';
+import { Party } from '../party';
 
 export class Corishev extends BossEntity {
 	constructor() {

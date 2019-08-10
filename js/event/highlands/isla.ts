@@ -1,121 +1,120 @@
+import * as _ from 'lodash';
+
 import { Entity } from '../../entity';
 import { Race } from '../../body/race';
 import { TF } from '../../tf';
 import { AppendageType } from '../../body/appendage';
 import { Color } from '../../body/color';
 import { Time } from '../../time';
-import { WorldTime, MoveToLocation } from '../../GAME';
+import { WorldTime, MoveToLocation, GAME, TimeStep, WORLD } from '../../GAME';
 import { Gui } from '../../gui';
 import { Text } from '../../text';
+import { Vagina } from '../../body/vagina';
+import { Cock } from '../../body/cock';
+import { HipSize, LowerBodyType } from '../../body/body';
+import { Genitalia } from '../../body/genitalia';
+import { EncounterTable } from '../../encountertable';
+import { Asche } from '../asche';
+import { IslaFlags } from './isla-flags';
+import { PregnancyHandler, Womb } from '../../pregnancy';
+import { Party } from '../../party';
+import { Sex } from '../../entity-sex';
 
-let IslaScenes = {};
+let IslaScenes : any = {};
 
-function Isla(storage) {
-	Entity.call(this);
-	this.ID = "isla";
+export class Isla extends Entity {
+	springTimer : Time;
 
-	// Character stats
-	this.name = "Isla";
-	
-	// TODO: Set body
-	this.body.DefFemale();
-	this.FirstBreastRow().size.base = 6;
-	this.Butt().buttSize.base = 4;
-	this.body.SetRace(Race.Ferret);
-	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Ferret, Color.brown);
-	
-	this.flags["Met"] = Isla.Met.NotMet;
-	this.flags["Talk"] = 0;
-	this.flags["Figure"] = Isla.Figure.Girly;
-	this.flags["Kids"] = 0; //Number of kids birthed (by the PC)
+	constructor(storage? : any) {
+		super();
 
-	this.springTimer = new Time();
-	
-	if(storage) this.FromStorage(storage);
-}
-Isla.prototype = new Entity();
-Isla.prototype.constructor = Isla;
+		this.ID = "isla";
 
-Isla.Met = {
-	NotMet : 0,
-	Met    : 1
-};
-
-Isla.Figure = {
-	Girly      : 0,
-	Womanly    : 1,
-	Voluptuous : 2
-};
-
-Isla.Talk = { //Bitmask
-	Spring : 1,
-	Sex    : 2, //First time fucked
-	SexVag : 4 //First time pitch vag
-};
-
-Isla.prototype.Update = function(step) {
-	Entity.prototype.Update.call(this, step);
-	
-	this.springTimer.Dec(step);
-}
-
-Isla.Available = function() {
-	return asche.flags["Tasks"] & Asche.Tasks.Spring_Visited;
-}
-
-// Number of kids Isla birthed by the PC
-Isla.prototype.Kids = function() {
-	return this.flags["Kids"];
-}
-
-Isla.prototype.Figure = function() {
-	return this.flags["Figure"];
-}
-
-Isla.prototype.FromStorage = function(storage) {
-	this.LoadPregnancy(storage);
-	this.LoadPersonalityStats(storage);
-	
-	// Load flags
-	this.LoadFlags(storage);
-	
-	if(this.flags["Talk"] & Isla.Talk.Sex)
-		this.FirstVag().virgin = false;
-	
-	this.springTimer.FromStorage(storage.ST);
-}
-
-Isla.prototype.ToStorage = function() {
-	var storage = {
-	};
-	
-	this.SavePregnancy(storage);
-	this.SavePersonalityStats(storage);
-	this.SaveFlags(storage);
-	
-	storage.ST = this.springTimer.ToStorage();
-	
-	return storage;
-}
-
-// Schedule
-Isla.prototype.IsAtLocation = function(location) {
-	return true;
-}
-
-Isla.prototype.PregnancyTrigger = function(womb, slot) {
-	let isla = GAME().isla;
-	// Use unshift instead of push to make sure pregnancy doesn't interfere with scene progression
-	Gui.Callstack.unshift(function() {
-		womb.pregnant = false;
+		// Character stats
+		this.name = "Isla";
 		
-		isla.flags["Kids"] += womb.litterSize;
-	});
+		// TODO: Set body
+		this.body.DefFemale();
+		this.FirstBreastRow().size.base = 6;
+		this.Butt().buttSize.base = 4;
+		this.body.SetRace(Race.Ferret);
+		TF.SetAppendage(this.Back(), AppendageType.tail, Race.Ferret, Color.brown);
+		
+		this.flags["Met"] = IslaFlags.Met.NotMet;
+		this.flags["Talk"] = 0;
+		this.flags["Figure"] = IslaFlags.Figure.Girly;
+		this.flags["Kids"] = 0; //Number of kids birthed (by the PC)
+
+		this.springTimer = new Time();
+		
+		if(storage) this.FromStorage(storage);
+	}
+	
+	static Available() {
+		return GAME().asche.flags["Tasks"] & Asche.Tasks.Spring_Visited;
+	}
+	
+	Update(step : number) {
+		super.Update(step);
+		this.springTimer.Dec(step);
+	}
+
+
+	// Number of kids Isla birthed by the PC
+	Kids() {
+		return this.flags["Kids"];
+	}
+
+	Figure() {
+		return this.flags["Figure"];
+	}
+
+	FromStorage(storage : any) {
+		this.LoadPregnancy(storage);
+		this.LoadPersonalityStats(storage);
+		
+		// Load flags
+		this.LoadFlags(storage);
+		
+		if(this.flags["Talk"] & IslaFlags.Talk.Sex)
+			this.FirstVag().virgin = false;
+		
+		this.springTimer.FromStorage(storage.ST);
+	}
+
+	ToStorage() {
+		var storage : any = {
+		};
+		
+		this.SavePregnancy(storage);
+		this.SavePersonalityStats(storage);
+		this.SaveFlags(storage);
+		
+		storage.ST = this.springTimer.ToStorage();
+		
+		return storage;
+	}
+
+	// Schedule
+	IsAtLocation(location? : any) {
+		return true;
+	}
+
+	PregnancyTrigger(womb : Womb, slot : number) {
+		let isla = GAME().isla;
+		// Use unshift instead of push to make sure pregnancy doesn't interfere with scene progression
+		Gui.Callstack.unshift(function() {
+			womb.pregnant = false;
+			
+			isla.flags["Kids"] += womb.litterSize;
+		});
+	}
+
 }
 
 //SCENES
 
-IslaScenes.Impregnate = function(father, cum) {
+IslaScenes.Impregnate = function(father : Entity, cum : number) {
 	let isla = GAME().isla;
 	isla.PregHandler().Impregnate({
 		slot   : PregnancyHandler.Slot.Vag,
@@ -131,11 +130,13 @@ IslaScenes.Impregnate = function(father, cum) {
 IslaScenes.Introduction = function() {
 	let party : Party = GAME().party;
 	let isla = GAME().isla;
-	var parse = {
+	let world = WORLD();
+
+	var parse : any = {
 		
 	};
 	
-	isla.flags["Met"] = Isla.Met.Met;
+	isla.flags["Met"] = IslaFlags.Met.Met;
 	
 	Text.Clear();
 	Text.Add("As you explore the Highlands, you find yourself in the general area of the strange spring Asche sent you to investigate last time. Yes, there’s the mountainside, and if you strain your eyes a little, you can make out the plateau on its side. Last time, you were there on business, and as they say, going somewhere on your own time is bound to be plenty different than going someplace on business… at least this time you’ll get to see the sights.", parse);
@@ -288,7 +289,7 @@ IslaScenes.Introduction = function() {
 IslaScenes.Approach = function() {
 	let player = GAME().player;
 	let isla = GAME().isla;
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -335,7 +336,7 @@ IslaScenes.Approach = function() {
 
 IslaScenes.Prompt = function() {
 	let isla = GAME().isla;
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -368,7 +369,7 @@ IslaScenes.Prompt = function() {
 	options.push({ nameStr : "Sex",
 		tooltip : "Proposition Isla for sex.",
 		func : function() {
-			if(isla.flags["Talk"] & Isla.Talk.Sex)
+			if(isla.flags["Talk"] & IslaFlags.Talk.Sex)
 				IslaScenes.Sex.Repeat();
 			else
 				IslaScenes.Sex.First();
@@ -385,14 +386,14 @@ IslaScenes.Prompt = function() {
 IslaScenes.Appearance = function() {
 	let player = GAME().player;
 	let isla = GAME().isla;
-	var parse = {
+	var parse : any = {
 		
 	};
 	
 	var figure = isla.Figure();
 	
 	Text.Clear();
-	if(figure == Isla.Figure.Girly) {
+	if(figure == IslaFlags.Figure.Girly) {
 		Text.Add("Seeing your eyes rove over her, Isla folds her arms across her flat chest and snorts. <i>“You looking at me?”</i>", parse);
 		Text.NL();
 		parse["dom"] = player.SubDom() >= 20 ? "Does she have a problem with that" : "Why, does it bother her";
@@ -400,7 +401,7 @@ IslaScenes.Appearance = function() {
 		Text.NL();
 		Text.Add("She doesn’t reply and turns her head away from you, clearly acting fed up with you. Though she doesn’t look like she cares - you do spot her stealing glances at you out from the corner of her eyes. Fine, you can live with that.", parse);
 	}
-	else if(figure == Isla.Figure.Womanly) {
+	else if(figure == IslaFlags.Figure.Womanly) {
 		Text.Add("Noticing you looking at her, Isla shakes her head and turns her gaze skyward, but there’s a small smile on her muzzle as she does so. <i>“Really? You’re gonna ogle me? I’m still not anything special, you know.”</i>", parse);
 		Text.NL();
 		Text.Add("Well, if she’s not anything special, then she certainly can’t object to you taking a look-see, can she?", parse);
@@ -424,12 +425,12 @@ IslaScenes.Appearance = function() {
 	Text.Add("The only true clothing on her consists of a short skirt of tough fabric, designed to allow for some amount of modesty while allowing for a free range of movement - a huntress’ garb, and a crude string belt to hold it all in place. No, what actually clothes her is the body paint that’s been smeared on much of her fur in intricate patterns that resemble knotwork, equal parts vibrant hues of red and blue. This is accentuated by the string of the same color she’s tied into her fur and the plaited braid of dark black hair that runs down to the small of her back.", parse);
 	Text.NL();
 	Text.Add("She’s not that tall - perhaps five foot three, give or take an inch - but judging from the way she moves, there’s certainly a lot of energy in that short frame of hers. ", parse);
-	if(figure == Isla.Figure.Girly) {
+	if(figure == IslaFlags.Figure.Girly) {
 		Text.Add("Slender and lithe, her form moves with the sure-footed grace that comes with a mustelid’s natural flexibility, tempered by years upon years of navigating treacherous highland trails. Her natural thinness, flat ass and narrow hips - for a girl, at least - make her furry arms and legs look a little too long for her body, resulting in a somewhat gangly look to her; while her chest fur is pretty fluffy, you’re also quite sure that she’s either flat-chested, or almost so.", parse);
 		Text.NL();
 		Text.Add("The movements of Isla’s wiry muscles under her skin are clear when she leaps and jumps, and you faintly wonder if that same athleticism and flexibility could be put to better use elsewhere.", parse);
 	}
-	else if(figure == Isla.Figure.Womanly) {
+	else if(figure == IslaFlags.Figure.Womanly) {
 		Text.Add("Improved by the extended soak she took in the spring, Isla’s figure is now easier on the eyes than before. While her body is still wiry and athletic - simply watching her slinking, stalking movements leave little doubt as to that - the spring’s mystical power has filled out her form, rendering her much more like the traditional concept of a woman. She’s still a little abashed by the attention, but doesn’t resist as you step up and place your hands on the sides of her waist, sliding your palms down to the noticeable curves of her hips and taking pleasure in the sleek feel of her lovely fur.", parse);
 		Text.NL();
 		Text.Add("<i>“Oy! There’s no need to get all touchy-feely…”</i>", parse);
@@ -540,7 +541,7 @@ IslaScenes.Appearance = function() {
 IslaScenes.TalkPrompt = function() {
 	let player = GAME().player;
 	let isla = GAME().isla;
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -584,7 +585,7 @@ IslaScenes.TalkPrompt = function() {
 	options.push({ nameStr : "Spring",
 		tooltip : "So, what’s so special about this spring, anyway?",
 		func : function() {
-			isla.flags["Talk"] |= Isla.Talk.Spring;
+			isla.flags["Talk"] |= IslaFlags.Talk.Spring;
 			
 			Text.Clear();
 			Text.Add("<i>“Well, all we have are legends and hearsay… no one from that time’s still alive, so that’s what we’ve got to work on.”</i>", parse);
@@ -600,7 +601,7 @@ IslaScenes.TalkPrompt = function() {
 			Text.Add("Changing into a mustelid aside, is there anything else you ought to know about it?", parse);
 			Text.NL();
 			Text.Add("Isla reaches up and scratches her ears as she thinks. <i>“Well… what exactly you turn into is different for different folks. If ya were born a morph like me, then you’d turn into your old self. If you weren’t, then it’s a toss-up what you’ll end up as. And if you’re already fully one…", parse);
-			if(isla.Figure() == Isla.Figure.Girly) {
+			if(isla.Figure() == IslaFlags.Figure.Girly) {
 				Text.Add("”</i>", parse);
 				Text.NL();
 				Text.Add("Yes? She was about to say something?", parse);
@@ -651,7 +652,7 @@ IslaScenes.TalkPrompt = function() {
 			Text.Add("Huh. Sounds like a pretty boring job.", parse);
 			Text.NL();
 			Text.Add("<i>“Boring, maybe, but not idle. Keeping myself fed and warm is more than enough to keep me busy for most of the day. Before I got stuck with this post, I never quite realized just how much work being by myself would be.”</i> She looks around for a bit, then heaves a sigh. <i>“I know, I know. It’s just a ceremonial position nowadays… there’s a reason why it’s the last of the leftovers who ends up chosen for the spot. Can we talk about something else, please? ", parse);
-			if(isla.Figure() == Isla.Figure.Girly)
+			if(isla.Figure() == IslaFlags.Figure.Girly)
 				Text.Add("This is getting to me. I know I should count my blessings, that having a plain face isn’t by far the worst thing that could’ve happened to me, but still…”</i>", parse);
 			else
 				Text.Add("I don’t like to look back on things behind me that’re done and over with - rather move ahead, y’know?”</i>", parse);
@@ -700,14 +701,14 @@ IslaScenes.TalkPrompt = function() {
 			IslaScenes.TalkPrompt();
 		}, enabled : true
 	});
-	if(isla.flags["Talk"] & Isla.Talk.Spring &&
+	if(isla.flags["Talk"] & IslaFlags.Talk.Spring &&
 		!isla.PregHandler().IsPregnant() &&
-		isla.flags["Talk"] & Isla.Talk.Sex) {
+		isla.flags["Talk"] & IslaFlags.Talk.Sex) {
 		
 		var figure = isla.Figure();
 		
 		var enabled = true;
-		if(figure == Isla.Figure.Womanly)
+		if(figure == IslaFlags.Figure.Womanly)
 			enabled = isla.Relation() >= 50;
 		
 		options.push({ nameStr : "Figure",
@@ -715,8 +716,8 @@ IslaScenes.TalkPrompt = function() {
 			func : function() {
 				Text.Clear();
 				
-				if(figure == Isla.Figure.Girly) {
-					isla.flags["Figure"] = Isla.Figure.Womanly;
+				if(figure == IslaFlags.Figure.Girly) {
+					isla.flags["Figure"] = IslaFlags.Figure.Womanly;
 					
 					Text.Add("You have to admit, you’re curious. Since Isla knows what the spring does, why doesn’t she just use it herself?", parse);
 					Text.NL();
@@ -781,8 +782,8 @@ IslaScenes.TalkPrompt = function() {
 					isla.relation.IncreaseStat(100, 10);
 					TimeStep({hour: 1});
 				}
-				else if(figure == Isla.Figure.Womanly) {
-					isla.flags["Figure"] = Isla.Figure.Voluptuous;
+				else if(figure == IslaFlags.Figure.Womanly) {
+					isla.flags["Figure"] = IslaFlags.Figure.Voluptuous;
 					
 					Text.Add("Isla grins at your suggestion, and cocks her head at you. <i>“Heh… I honestly think I don’t look too bad like this. But you’ve got a point… and it’d be worth it to see the look on their faces when they discover how favored I’ve been by the spirits.”</i>", parse);
 					Text.NL();
@@ -853,7 +854,9 @@ IslaScenes.TalkPrompt = function() {
 IslaScenes.TummyRub = function() {
 	let player = GAME().player;
 	let isla = GAME().isla;
-	var parse = {
+	let world = WORLD();
+
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -996,7 +999,7 @@ IslaScenes.TummyRub = function() {
 	Text.NL();
 	Text.Add("Isn’t it? Smiling, you push her braid aside and roll your knuckles against her shoulders, eliciting a few small, happy noises from the back of her throat, then slide them down her back until they’re just above her tailbone.", parse);
 	Text.NL();
-	if(figure != Isla.Figure.Girly) {
+	if(figure != IslaFlags.Figure.Girly) {
 		Text.Add("Your eyes are drawn to the pert, rounded form of Isla’s butt, so much more improved than the flat ass cheeks she’d started out with when you first met her. On impulse, you give one of them a light smack, watching with no small amount of satisfaction the firm jiggle that ripples outward from your touch.", parse);
 		Text.NL();
 		Text.Add("<i>“Eep! Oy!”</i>", parse);
@@ -1021,10 +1024,10 @@ IslaScenes.TummyRub = function() {
 	Text.Add("What, is that an invitation you hear? Does she need some relief for those aching jugs of hers?", parse);
 	Text.NL();
 	Text.Add("<i>“Wait, I never said -”</i> Isla begins, but her words are cut off by a soft squeal as you embrace her from behind, wrapping your arms around her squarely to cup her breasts with your hands. She wriggles a little, but you soon put a stop to that by rubbing your thumbs against her nipples, coaxing a soft moan from her mouth. ", parse);
-	if(figure == Isla.Figure.Girly) {
+	if(figure == IslaFlags.Figure.Girly) {
 		Text.Add("Mm, wonderful. Her breasts may be nothing to look at normally, but their milky swelling has caused them to grow into perfectly palmable orbs that fit snugly into your cupped hands. As you begin your gentle massaging, beads of pearly white milk begin leaking from her nipples, slowly seeping into her fur.", parse);
 	}
-	else if(figure == Isla.Figure.Womanly) {
+	else if(figure == IslaFlags.Figure.Womanly) {
 		Text.Add("Now that’s more like it; all she has to do is lie back and enjoy things as they happen. Not too much to ask, is it? The effects of the spring on Isla’s physique are readily apparent - engorged with production in preparation for the eventual birth, the sable-morph’s baby feeders are large enough such that your hands can’t engulf all of their warm, slightly jiggly goodness.", parse);
 		Text.NL();
 		Text.Add("Another moan, more impassioned this time, sounds in the air as you apply pressure to her tender boobflesh. Slowly but surely, heat rises into her chest as her nipples harden even further, and a steady dribble of warm milk flows into your palm.", parse);
@@ -1049,12 +1052,12 @@ IslaScenes.TummyRub = function() {
 	Text.NL();
 	Text.Add("You stop your milking for a moment to turn Isla’s head and gaze into her eyes, unfocused and addled with a mixture of pleasure and wonder. She mewls plaintively, clearly wondering why you’ve stopped, then starts panting again as you start up your efforts once more.", parse);
 	Text.NL();
-	if(figure == Isla.Figure.Girly) {
+	if(figure == IslaFlags.Figure.Girly) {
 		Text.Add("With how enthusiastically you’re milking her, it doesn’t take long for Isla’s small breasts to be completely drained. Small streams quickly dry up to dribbles, and then into drops.", parse);
 		Text.NL();
 		Text.Add("Nevertheless, you make sure that you give her a full massage, else she’ll be complaining about an aching chest again before long. You wouldn’t want that, would you? Or maybe you do…", parse);
 	}
-	else if(figure == Isla.Figure.Womanly) {
+	else if(figure == IslaFlags.Figure.Womanly) {
 		Text.Add("Enthusiastic as you are, it still takes a little while for Isla’s milkiness to start tapering off. The magical spring’s certainly done its job, that’s for sure - not just outside, but inside as well. By the time you’re done draining her tits with a full massage, the grass and ground underneath her are absolutely sodden with sweet-smelling milk - streams slowly become dribbles, and from there drops until the she’s well and truly emptied.", parse);
 		Text.NL();
 		Text.Add("Not that your efforts weren’t welcome, of course. Isla’s body readily betrays her arousal, her breasts having perked up even more, the flush in her chest burning away, her breath heated and heavy. Savoring the last of the experience, you shower every last square inch of breastflesh with light, tender caresses, making sure that all her tensions are soothed and her stresses relieved.", parse);
@@ -1104,19 +1107,20 @@ IslaScenes.Sex = {};
 IslaScenes.Sex.First = function() {
 	let player = GAME().player;
 	let isla = GAME().isla;
+	let world = WORLD();
 
 	var p1cock = player.BiggestCock(null, true);
 	var strapon = p1cock ? p1cock.isStrapon : null;
 	var knot = p1cock ? p1cock.Knot() : null;
 	
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
 	
-	isla.flags["Talk"] |= Isla.Talk.Sex;
+	isla.flags["Talk"] |= IslaFlags.Talk.Sex;
 	
 	Text.Clear();
 	Text.Add("<i>“What?”</i> Isla says as you broach the subject with her. The sable-morph’s round eyes grow - well, rounder, she looks pensively down at the remains in the fire pit, poking at it agitatedly. <i>“C’mon, [playername], you know better than to tease me like that.”</i>", parse);
@@ -1379,7 +1383,7 @@ IslaScenes.Sex.First = function() {
 
 IslaScenes.Sex.Repeat = function() {
 	let isla = GAME().isla;
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -1438,7 +1442,7 @@ IslaScenes.Sex.Prompt = function() {
 	let player = GAME().player;
 	var p1cock = player.BiggestCock(null, true);
 	
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -1465,7 +1469,7 @@ IslaScenes.Sex.PitchVaginal = function() {
 	var strapon = p1cock ? p1cock.isStrapon : null;
 	var knot = p1cock ? p1cock.Knot() : null;
 	
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		lowerarmordesc : player.LowerArmorDesc()
 	};
@@ -1514,8 +1518,8 @@ IslaScenes.Sex.PitchVaginal = function() {
 	Text.NL();
 	Text.Add("Why, you’ll go for the tried and true method of going about things - you’ll stick something long and hard into her, then pound away at her until she screams. After all, you know from personal experience that this is quite the surefire way to please her.", parse);
 	Text.NL();
-	parse["f"] = figure == Isla.Figure.Girly ? "small" :
-		figure == Isla.Figure.Womanly ? "generous" : "hefty";
+	parse["f"] = figure == IslaFlags.Figure.Girly ? "small" :
+		figure == IslaFlags.Figure.Womanly ? "generous" : "hefty";
 	Text.Add("Isla says nothing, but licks her muzzle, her stare growing more intense. Smiling, you push her tongue back into her mouth, then trail that finger down her chin, between her [f] breasts, down ", parse);
 	if(preg)
 		Text.Add("the fecund, womanly swell of her pregnancy", parse);
@@ -1548,9 +1552,9 @@ IslaScenes.Sex.PitchVaginal = function() {
 		Text.NL();
 	}
 	Text.Add("Sighing softly into Isla’s face, you move your hands down to the sable-morph’s tail. ", parse);
-	if(figure == Isla.Figure.Girly)
+	if(figure == IslaFlags.Figure.Girly)
 		Text.Add("Her slender hips are firm and solid, and as you press down with your fingers on skin and fur you can feel muscle shift underneath. She may not look it, but there’s no doubt the sable-morph is a fine girl in her own right and has the strength to be just as vigorous when the situation calls for it.", parse);
-	else if(figure == Isla.Figure.Womanly)
+	else if(figure == IslaFlags.Figure.Womanly)
 		Text.Add("Her widened hips and rounded butt have definitely improved her overall figure, and the difference is distinct under your fingertips as you reach for her firm, fleshy butt for a squeeze and pinch. No matter how many times you do it, it’s always worth that flustered squeak that it elicits from her muzzle.", parse);
 	else //curvy
 		Text.Add("Her broodmother-worthy hips and swollen rump are a delight to grope, testament to how the spring’s changed her. Feeling your fingers at her crack, the sable-morph thrusts her ass firmly into your grasp, giving you a delightful handful of tail.", parse);
@@ -1570,7 +1574,7 @@ IslaScenes.Sex.PitchVaginal = function() {
 	});
 }
 
-IslaScenes.Sex.PitchVaginalPrompt = function(parse, opts) {
+IslaScenes.Sex.PitchVaginalPrompt = function(parse : any, opts : any) {
 	//[Against Wall][Mount Her][Go Under]
 	var options = new Array();
 	options.push({ nameStr : "Against Wall",
@@ -1604,7 +1608,7 @@ IslaScenes.Sex.PitchVaginalPrompt = function(parse, opts) {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-IslaScenes.Sex.PitchVaginalUnder = function(parse, opts) {
+IslaScenes.Sex.PitchVaginalUnder = function(parse : any, opts : any) {
 	let player = GAME().player;
 	let isla = GAME().isla;
 	Text.Clear();
@@ -1653,8 +1657,8 @@ IslaScenes.Sex.PitchVaginalUnder = function(parse, opts) {
 	Text.Add("Arching her back and pushing her hips forward, Isla grinds her cunt along[oneof] your length[s]. The sable-morph’s crotch fur brushes against your [skin], her increasingly wet and puffy folds a delight against your [cock]. You can feel them throb and pulse as they kiss your [cock], those petals of her womanly flower, painting her girl-cum all over your shaft. You ache to thrust away, your instincts raring to get going already, but you make an effort to hold back and wait until the going gets good to unleash your full fury.", parse);
 	Text.NL();
 	Text.Add("When you’re sufficiently lubed up, Isla slowly leans her weight on you, guiding you into the tight walls of her pussy. Slowly, she takes your [cockTip] into her, then withdraws until you’re almost completely out, then plunges in onto your shaft again. In such a manner is the entirety of your [cock] consumed - bit by bit, inch by inch, Isla’s cunt devours your man-meat until you’re almost hilted into her.", parse);
-	if(opts.figure >= Isla.Figure.Womanly) {
-		parse["f"] = opts.figure == Isla.Figure.Womanly ? "wide" : "broodmother-worthy";
+	if(opts.figure >= IslaFlags.Figure.Womanly) {
+		parse["f"] = opts.figure == IslaFlags.Figure.Womanly ? "wide" : "broodmother-worthy";
 		Text.Add(" Her [f] hips easily accommodate your length and girth - a happy side-effect of their widening thanks to the transformative spring’s powers.", parse);
 	}
 	Text.NL();
@@ -1668,7 +1672,7 @@ IslaScenes.Sex.PitchVaginalUnder = function(parse, opts) {
 		Text.NL();
 		Text.Add("<i>“Ngh!”</i>", parse);
 		Text.NL();
-		parse["f"] = opts.figure == Isla.Figure.Girly ? "slender" : opts.figure == Isla.Figure.Womanly ? "curvaceous" : "luscious";
+		parse["f"] = opts.figure == IslaFlags.Figure.Girly ? "slender" : opts.figure == IslaFlags.Figure.Womanly ? "curvaceous" : "luscious";
 		Text.Add("You pant and rock under the [f] sable-morph, electric tingles travelling through the base of your shaft as you feel your knot swell and tie her neatly. Isla squeals as she rocks back and forth on your cock, gripping your shoulders tightly to steady herself.", parse);
 	}
 	else {
@@ -1679,7 +1683,7 @@ IslaScenes.Sex.PitchVaginalUnder = function(parse, opts) {
 	Text.NL();
 	Text.Add("Now, it’s time for you to make your move. Working up a passionate, powerful rhythm, you begin to drill into Isla from below, feeling her love-juices seep down and out from her tight, muscular cunt and stain your [skin]. Isla yelps openly, her fingers clenching tight about your shoulders, which only encourages you to go faster.", parse);
 	Text.NL();
-	parse["f"] = opts.figure == Isla.Figure.Girly ? "small" : opts.figure == Isla.Figure.Womanly ? "generous" : "hefty";
+	parse["f"] = opts.figure == IslaFlags.Figure.Girly ? "small" : opts.figure == IslaFlags.Figure.Womanly ? "generous" : "hefty";
 	Text.Add("Up and down. Up and down. Her [f] breasts jiggle with the motions, ", parse);
 	if(opts.stage >= 0.75)
 		Text.Add("her massive baby bump heaves in time with your movements, sending her nipples to leaking, ", parse);
@@ -1757,7 +1761,7 @@ IslaScenes.Sex.PitchVaginalUnder = function(parse, opts) {
 	IslaScenes.Sex.PitchVaginalExit(parse, opts);
 }
 
-IslaScenes.Sex.PitchVaginalMount = function(parse, opts) {
+IslaScenes.Sex.PitchVaginalMount = function(parse : any, opts : any) {
 	let player = GAME().player;
 	let isla = GAME().isla;
 	var figure = opts.figure;
@@ -1772,7 +1776,7 @@ IslaScenes.Sex.PitchVaginalMount = function(parse, opts) {
 	Text.NL();
 	Text.Add("<i>“Wanna count how many times you can make me scream in one sitting?”</i>", parse);
 	Text.NL();
-	parse["f"] = figure == Isla.Figure.Girly ? "firm" : figure == Isla.Figure.Womanly ? "rounded" : "lush";
+	parse["f"] = figure == IslaFlags.Figure.Girly ? "firm" : figure == IslaFlags.Figure.Womanly ? "rounded" : "lush";
 	parse["c"] = player.NumCocks() > 1 ? Text.Parse("the largest of your [cocks]", parse) : Text.Parse("your [cock]", parse);
 	Text.Add("From how the juices are running from her cunt and soaking her crotch fur, you’re pretty sure she’s already well on her way to the next one. Giving your lover’s [f] behind a firm swat, you get down behind her and inspect what’s to be had. Isla backs up a little, thrusting her ass towards you to present herself better, and it’s only when you’re satisfied with her tight little asshole and glistening, swollen cunt that you get [c] lined up, ready to drill into her at any moment.", parse);
 	Text.NL();
@@ -1796,7 +1800,7 @@ IslaScenes.Sex.PitchVaginalMount = function(parse, opts) {
 	Text.NL();
 	Text.Add("Why hold back? She’s already a hopeless mess. Just let it go. Let it all go…", parse);
 	Text.NL();
-	parse["f"] = figure == Isla.Figure.Girly ? "perky" : figure == Isla.Figure.Womanly ? "rounded" : "heavy";
+	parse["f"] = figure == IslaFlags.Figure.Girly ? "perky" : figure == IslaFlags.Figure.Womanly ? "rounded" : "heavy";
 	parse["c"] = player.NumCocks() > 1 ? Text.Parse(", your unused cock[s2] slapping against the backs of her thighs as you continue drilling into her", parse) : "";
 	parse["k"] = opts.knot ? "r knot" : "";
 	parse["ks"] = opts.knot ? "s" : "";
@@ -1806,7 +1810,7 @@ IslaScenes.Sex.PitchVaginalMount = function(parse, opts) {
 	Text.NL();
 	Text.Add("Isla’s dark, beady eyes are half-glazed over, but what’s left of her wits that isn’t already addled looks back at you pleadingly. Hmm… maybe you’ve teased her enough… or maybe not. Pulling her flexible body up to you by her braid, you lean in and plant a kiss on Isla’s muzzle before letting her fall back onto all fours. That done, you gather yourself and begin drilling her fast and furiously, trying to push her to the finish line as quickly as you can.", parse);
 	Text.NL();
-	parse["f"] = figure == Isla.Figure.Girly ? "slim" : figure == Isla.Figure.Womanly ? "protruding" : "prominent";
+	parse["f"] = figure == IslaFlags.Figure.Girly ? "slim" : figure == IslaFlags.Figure.Womanly ? "protruding" : "prominent";
 	Text.Add("The effect is immediate. Unable to withstand the relentless assault on her delicate, sensitive pussy, Isla wails like she’s been caught in a trap, her paws scrabbling at the ground and throwing up little crumbs of earth in the throes of her passion. Her body is flush with heat that you can distinctly feel, even as you grab her [f] hips to steady yourself in your assault.", parse);
 	Text.NL();
 	Text.Add("She’s the first one to orgasm yet again; her entire body locks up and stiffens about your [cock], a drop of blood welling up at her muzzle where she’s bitten it in a bid not to cry out.", parse);
@@ -1860,7 +1864,7 @@ IslaScenes.Sex.PitchVaginalMount = function(parse, opts) {
 	IslaScenes.Sex.PitchVaginalExit(parse, opts);
 }
 
-IslaScenes.Sex.PitchVaginalWall = function(parse, opts) {
+IslaScenes.Sex.PitchVaginalWall = function(parse : any, opts : any) {
 	let player = GAME().player;
 	let isla = GAME().isla;
 	Text.Add("Grabbing Isla by the shoulders, you whirl her around, leading her to the nearest mountain face and pinning her against the cool, mossy rock.", parse);
@@ -1884,8 +1888,8 @@ IslaScenes.Sex.PitchVaginalWall = function(parse, opts) {
 	
 	Text.Add("Pressed against the wall as she is, Isla’s whimpers turn to moans as you start up a steady rhythm, spreading her legs ever further to encourage your furious thrusts.", parse);
 	Text.NL();
-	parse["f"] = opts.figure == Isla.Figure.Girly ? "small" :
-		opts.figure == Isla.Figure.Womanly ? "shapely" : "generous";
+	parse["f"] = opts.figure == IslaFlags.Figure.Girly ? "small" :
+		opts.figure == IslaFlags.Figure.Womanly ? "shapely" : "generous";
 	Text.Add("<I>“Ya may have me pinned down, but you’ll never break me!”</i> Isla gasps, even as you press her further against the wall until her hands are spread out and head is thrown back against it. Each firm movement of your hips sends her [f] breasts jiggling, and you can’t help but smile at the mock bravado she’s putting on despite the orgasmic sensations that must be coursing through her body at the moment.", parse);
 	Text.NL();
 	Text.Add("Oh? Is that an invitation for you to do your best, then? Well, since she asked so nicely, guess you’ll just have to oblige her wishes. Even from up here, you can get a good whiff of the scents carried by the sable-morph’s crotch fur and leaking pussy, and it only serves to excite you more.", parse);
@@ -1960,9 +1964,11 @@ IslaScenes.Sex.PitchVaginalWall = function(parse, opts) {
 	IslaScenes.Sex.PitchVaginalExit(parse, opts);
 }
 
-IslaScenes.Sex.PitchVaginalExit = function(parse, opts) {
+IslaScenes.Sex.PitchVaginalExit = function(parse : any, opts : any) {
 	let player = GAME().player;
 	let isla = GAME().isla;
+	let world = WORLD();
+
 	Text.Add("<i>“Oog… enough…”</i>", parse);
 	Text.NL();
 	Text.Add("Yeah, now that the rush is beginning to die down, you’re starting to feel more than a little spent, too. Isla displays no shame in sprawling out on the ground beside you, making little happy noises in the back of her throat as she catches her breath. You see no reason not to join her, running your hands through what little clean fur she has left, toying with the adornments tied therein.", parse);
@@ -1975,7 +1981,7 @@ IslaScenes.Sex.PitchVaginalExit = function(parse, opts) {
 	if(player.FirstCock() && !opts.preg) {
 		Text.Add("<i>“Welp. Chances are you probably just knocked me up, ya bastard,”</i> Isla whispers softly.", parse);
 		Text.NL();
-		if(!(isla.flags["Talk"] & Isla.Talk.SexVag)) {
+		if(!(isla.flags["Talk"] & IslaFlags.Talk.SexVag)) {
 			Text.Add("Is that going to be a problem?", parse);
 			Text.NL();
 			Text.Add("<i>“Naah, else I wouldn’t have agreed to fuck you.”</i> Isla sighs again and presses her body against you, trying to get comfortable. <i>“To be honest, since a number of the marriage alliances have been out of the clan the last few rounds, we do need some fresh blood… I’ll just keep the little tykes ‘round till they’re weaned and bring them back to the tribe when I next pop by to get stuff. Know plenty of older folk who’d love another cub, but can’t have one anymore.”</i>", parse);
@@ -1997,7 +2003,7 @@ IslaScenes.Sex.PitchVaginalExit = function(parse, opts) {
 		}
 		Text.NL();
 		
-		isla.flags["Talk"] |= Isla.Talk.SexVag;
+		isla.flags["Talk"] |= IslaFlags.Talk.SexVag;
 	}
 	Text.Add("Now, she really ought to be getting some sleep. Tomorrow’s still going to come along, and work isn’t going to get itself done.", parse);
 	Text.NL();
@@ -2013,18 +2019,11 @@ IslaScenes.Sex.PitchVaginalExit = function(parse, opts) {
 	Gui.NextPrompt();
 }
 
-// Isla's spring
-
-Isla.Bathing = {
-	Quick  : 0,
-	Medium : 1,
-	Long   : 2
-};
 
 IslaScenes.Bathe = function() {
 	let player = GAME().player;
 	let isla = GAME().isla;
-	var parse = {
+	var parse : any = {
 		
 	};
 	parse = player.ParserTags(parse);
@@ -2054,7 +2053,7 @@ IslaScenes.Bathe = function() {
 			
 			isla.springTimer = new Time(0,0,1,0,0);
 			
-			IslaScenes.BatheTF(parse, Isla.Bathing.Quick);
+			IslaScenes.BatheTF(parse, IslaFlags.Bathing.Quick);
 		}, enabled : true
 	});
 	options.push({ nameStr : "Relax",
@@ -2071,7 +2070,7 @@ IslaScenes.Bathe = function() {
 			
 			isla.springTimer = new Time(0,0,1,0,0);
 			
-			IslaScenes.BatheTF(parse, Isla.Bathing.Medium);
+			IslaScenes.BatheTF(parse, IslaFlags.Bathing.Medium);
 		}, enabled : true
 	});
 	options.push({ nameStr : "Long Soak",
@@ -2088,7 +2087,7 @@ IslaScenes.Bathe = function() {
 			
 			isla.springTimer = new Time(0,0,1,0,0);
 			
-			IslaScenes.BatheTF(parse, Isla.Bathing.Long);
+			IslaScenes.BatheTF(parse, IslaFlags.Bathing.Long);
 		}, enabled : true
 	});
 	Gui.SetButtonsFromList(options, true, function() {
@@ -2100,7 +2099,7 @@ IslaScenes.Bathe = function() {
 	});
 }
 
-IslaScenes.BatheTF = function(parse, level) {
+IslaScenes.BatheTF = function(parse : any, level : number) {
 	let player = GAME().player;
 	
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
@@ -2211,7 +2210,7 @@ IslaScenes.BatheTF = function(parse, level) {
 		return true;
 	}, 1.0, function() { return player.body.muscleTone.Get() > 0; });
 	
-	if(level >= Isla.Bathing.Medium) {
+	if(level >= IslaFlags.Bathing.Medium) {
 		var IncompleteCockLenTf = function() {
 			var changed = false;
 			_.each(player.AllCocks(), function(c) {
@@ -2290,7 +2289,7 @@ IslaScenes.BatheTF = function(parse, level) {
 			return true;
 		}, 1.0, function() { return player.PregHandler().IsPregnant(); });
 	}
-	if(level >= Isla.Bathing.Long) {
+	if(level >= IslaFlags.Bathing.Long) {
 		scenes.AddEnc(function() {
 			Text.NL();
 			var cock;
@@ -2362,7 +2361,7 @@ IslaScenes.BatheTF = function(parse, level) {
 	var changed = false;
 	//1-5 effects
 	_.times(_.random(1,3) + level, function() {
-		changed |= scenes.Get();
+		changed = changed || scenes.Get();
 	});
 	
 	if(!changed) {
@@ -2374,4 +2373,4 @@ IslaScenes.BatheTF = function(parse, level) {
 	Gui.NextPrompt();
 }
 
-export { Isla, IslaScenes };
+export { IslaScenes };

@@ -7,6 +7,7 @@ import { Entity } from "../entity";
 import { Gui } from "../gui";
 import { LaylaFlags } from "../event/farm/layla-flags";
 import { OasisFlags } from "../loc/oasis-flags";
+import { Party } from "../party";
 
 let OrchidScenes : any = {};
 
