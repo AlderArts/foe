@@ -1,189 +1,38 @@
-/*
- * 
- * Define Ophelia
- * 
- */
+import { GAME, TimeStep, WORLD } from "../../GAME";
+import { GlobalScenes } from "../global";
+import { Text } from "../../text";
+import { BurrowsFlags } from "../../loc/burrows-flags";
+import { OpheliaFlags } from "./ophelia-flags";
+import { QuestItems } from "../../items/quest";
+import { Gui } from "../../gui";
+import { EncounterTable } from "../../encountertable";
+import { RoaFlags } from "../brothel/roa-flags";
+import { Sex } from "../../entity-sex";
+import { Cock } from "../../body/cock";
+import { VenaScenes } from "./vena-scenes";
+import { AlchemyItems } from "../../items/alchemy";
+import { IngredientItems } from "../../items/ingredients";
+import { VenaFlags } from "./vena-flags";
+import { BodyPartType } from "../../body/bodypart";
+import { LowerBodyType } from "../../entity-desc";
+import { PregnancyHandler } from "../../pregnancy";
+import { SetGameOverButton } from "../../main-gameover";
+import { Party } from "../../party";
+import { Encounter } from "../../combat";
+import { LagonScenes } from "./lagon-scenes";
+import { Lagomorph, LagomorphAlpha } from "../../enemy/rabbit";
+import { Gender } from "../../body/gender";
+import { LagonRegular } from "./lagon";
+import { Perks } from "../../perks";
 
-import { Entity } from '../../entity';
-import { BossEntity } from '../../enemy/boss';
-import { Race } from '../../body/race';
-import { TF } from '../../tf';
-import { AppendageType } from '../../body/appendage';
-import { Color } from '../../body/color';
-import { Time } from '../../time';
-import { WorldTime, GAME } from '../../GAME';
-import { Images } from '../../assets';
-import { AlchemySpecial } from '../../items/alchemyspecial';
-import { AlchemyItems } from '../../items/alchemy';
-import { Abilities } from '../../abilities';
-import { Text } from '../../text';
-import { Gui } from '../../gui';
-import { BodyPartType } from '../../body/bodypart';
-import { VenaFlags } from './vena-flags';
-import { BurrowsFlags } from '../../loc/burrows-flags';
-import { OpheliaFlags } from './ophelia-flags';
-
-let OpheliaScenes = {};
-
-function Ophelia(storage) {
-	Entity.call(this);
-	this.ID = "ophelia";
-	
-	this.name              = "Ophelia";
-	this.body.DefFemale();
-	
-	this.Butt().virgin = false;
-	this.FirstVag().virgin = false;
-	
-	this.body.SetRace(Race.Rabbit);
-	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Rabbit, Color.white);
-	this.body.SetBodyColor(Color.white);
-	this.body.SetEyeColor(Color.blue);
-	
-	this.flags["Met"]  = 0; // note, bitmask OpheliaFlags.Met
-	this.flags["Talk"] = 0; // note, bitmask OpheliaFlags.Talk
-	this.flags["rotRExp"] = 0;
-	this.flags["rotRSex"] = 0;
-	this.burrowsCountdown = new Time();
-	
-	if(storage) this.FromStorage(storage);
-}
-Ophelia.prototype = new Entity();
-Ophelia.prototype.constructor = Ophelia;
-
-Ophelia.prototype.FromStorage = function(storage) {
-	this.LoadPersonalityStats(storage);
-	this.LoadFlags(storage);
-	
-	this.burrowsCountdown.FromStorage(storage.Btime);
-}
-
-Ophelia.prototype.ToStorage = function() {
-	var storage = {};
-	
-	this.SavePersonalityStats(storage);
-	this.SaveFlags(storage);
-	
-	storage.Btime = this.burrowsCountdown.ToStorage();
-	
-	return storage;
-}
-
-Ophelia.prototype.Update = function(step) {
-	Entity.prototype.Update.call(this, step);
-	
-	this.burrowsCountdown.Dec(step);
-}
-
-Ophelia.prototype.Recruited = function() {
-	return this.flags["Met"] & OpheliaFlags.Met.Recruited;
-}
-Ophelia.prototype.Broken = function() {
-	return this.flags["Met"] & OpheliaFlags.Met.Broken;
-}
-//TODO account for Roa
-Ophelia.prototype.InParty = function() {
-	return this.flags["Met"] & OpheliaFlags.Met.InParty;
-}
-Ophelia.prototype.InPartyAndBroken = function() {
-	return this.Broken() && this.InParty();
-}
-Ophelia.prototype.CountdownExpired = function() {
-	return this.burrowsCountdown.Expired();
-}
-
-Ophelia.prototype.IsAtLocation = function(location) {
-	location = location || GAME().party.location;
-	if(location == world.loc.Burrows.Lab) {
-		if(this.Recruited()) return false;
-		if(this.Broken())    return false;
-		return WorldTime().hour >= 8 && WorldTime().hour < 22;
-	}
-	return false;
-}
-
-//For final fight
-function OpheliaBrute() {
-	BossEntity.call(this);
-	
-	this.name              = "Ophelia";
-	
-	this.avatar.combat     = Images.ophelia_b;
-	
-	this.maxHp.base        = 3000;
-	this.maxSp.base        = 700;
-	this.maxLust.base      = 300;
-	// Main stats
-	this.strength.base     = 100;
-	this.stamina.base      = 100;
-	this.dexterity.base    = 110;
-	this.intelligence.base = 70;
-	this.spirit.base       = 60;
-	this.libido.base       = 70;
-	this.charisma.base     = 70;
-	
-	this.level             = 15;
-	this.sexlevel          = 4;
-	
-	this.combatExp         = 400;
-	this.coinDrop          = 800;
-	
-	this.body.DefFemale();
-	
-	this.Butt().buttSize.base = 4;
-	
-	this.body.SetRace(Race.Rabbit);
-	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Rabbit, Color.white);
-	this.body.SetBodyColor(Color.white);
-	this.body.SetEyeColor(Color.red);
-
-	// Set hp and mana to full
-	this.SetLevelBonus();
-	this.RestFull();
-}
-OpheliaBrute.prototype = new BossEntity();
-OpheliaBrute.prototype.constructor = OpheliaBrute;
-
-OpheliaBrute.prototype.DropTable = function() {
-	var drops = [];
-	drops.push({ it: AlchemyItems.Leporine });
-	drops.push({ it: AlchemySpecial.EquiniumPlus });
-	drops.push({ it: AlchemyItems.Estros });
-	drops.push({ it: AlchemyItems.GestariumPlus });
-	return drops;
-}
-
-//TODO
-OpheliaBrute.prototype.Act = function(encounter, activeChar) {
-	// Pick a random target
-	var targets = this.GetPartyTarget(encounter, activeChar);
-	var t = this.GetSingleTarget(encounter, activeChar);
-
-	var parseVars = {
-		name   : this.name,
-		hisher : this.hisher(),
-		tName  : t.name
-	};
-
-	var choice = Math.random();
-	if(choice < 0.2 && Abilities.Physical.Bash.enabledCondition(encounter, this))
-		Abilities.Physical.Bash.Use(encounter, this, t);
-	else if(choice < 0.4 && Abilities.Physical.Frenzy.enabledCondition(encounter, this))
-		Abilities.Physical.Frenzy.Use(encounter, this, t);
-	else if(choice < 0.6 && Abilities.Physical.CrushingStrike.enabledCondition(encounter, this))
-		Abilities.Physical.CrushingStrike.Use(encounter, this, t);
-	else if(choice < 0.8 && Abilities.Physical.GrandSlam.enabledCondition(encounter, this))
-		Abilities.Physical.GrandSlam.Use(encounter, this, targets);
-	else
-		Abilities.Attack.Use(encounter, this, t);
-}
+let OpheliaScenes : any = {};
 
 OpheliaScenes.LabDesc = function() {
 	let ophelia = GAME().ophelia;
 	let burrows = GAME().burrows;
-	var parse = {
+	var parse : any = {
 		old  : ophelia.flags["Met"] != 0 ? " old" : "",
-		camp : Scenes.Global.PortalsOpen() ? "the gemstead" : "camp"
+		camp : GlobalScenes.PortalsOpen() ? "the gemstead" : "camp"
 	};
 	
 	Text.Add("You are standing in Ophelia’s[old] makeshift laboratory, which is cast in bright light with a strangely greenish hue. Scrolls and books are stacked on narrow shelves alongside earthenware pots containing who-knows-what and odd mixtures boiling in large glass flasks. Grime and smoke have added a permanent patina of grease to everything in the room, which speaks to you of the wisdom of having an alchemical lab without a proper air vent. A handful of lapine guinea-pigs are shackled to one wall, either waiting for new experiments or under observation.", parse);
@@ -226,7 +75,7 @@ OpheliaScenes.LabDesc = function() {
 
 OpheliaScenes.LabApproach = function() {
 	let player = GAME().player;
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -237,9 +86,9 @@ OpheliaScenes.LabApproach = function() {
 	OpheliaScenes.LabPrompt();
 }
 
-OpheliaScenes.TraitPrompt = function(options) {
+OpheliaScenes.TraitPrompt = function(options : any) {
 	let burrows = GAME().burrows;
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -344,7 +193,7 @@ OpheliaScenes.TalkPrompt = function() {
 	let player = GAME().player;
 	let ophelia = GAME().ophelia;
 	let burrows = GAME().burrows;
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -520,7 +369,7 @@ OpheliaScenes.TalkPrompt = function() {
 					options.push({ nameStr : "Yes",
 						func : function() {
 							OpheliaScenes.TurnInScepter();
-						}, enabled : party.Inv().QueryNum(Items.Quest.Scepter),
+						}, enabled : GAME().party.Inv().QueryNum(QuestItems.Scepter),
 						tooltip : "Show her the scepter."
 					});
 					options.push({ nameStr : "No",
@@ -676,8 +525,10 @@ OpheliaScenes.TalkRoa = function() {
 	let player = GAME().player;
 	let roa = GAME().roa;
 	let ophelia = GAME().ophelia;
-	let burrows = GAME().burrows;
-	var parse = {
+	let rosalin = GAME().rosalin;
+    let burrows = GAME().burrows;
+    
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -889,7 +740,7 @@ OpheliaScenes.TalkRoa = function() {
 				scenes.push(function() {
 					Text.Add("Who was Roa’s favorite partner? And how did he prefer to have sex?", parse);
 					Text.NL();
-					if(roa.flags["Met"] >= Roa.Met.Sexed)
+					if(roa.flags["Met"] >= RoaFlags.Met.Sexed)
 						Text.Add("<i>“You’ve been with him, and you couldn’t tell? Guess you aren’t as sharp as I thought, [playername],”</i> Ophelia replies smugly. ", parse);
 					Text.Add("<i>“When he has the urge, brother will have sex with anyone in order to get release. He very much prefers being fucked over fucking, though, and the bigger the better.”</i> The alchemist adjusts her glasses, peering at you. <i>“Sadly, that meant I couldn’t always satisfy him, but being with him was still nice. I found some ways, but I couldn’t compare to a thick, juicy cock.”</i>", parse);
 					Text.NL();
@@ -917,7 +768,7 @@ OpheliaScenes.TalkRoa = function() {
 					Text.NL();
 					Text.Add("<i>“I’m sure my sisters would have a fun time with him too.”</i>", parse);
 				});
-				if(roa.flags["Met"] >= Roa.Met.Sexed) {
+				if(roa.flags["Met"] >= RoaFlags.Met.Sexed) {
 					scenes.push(function() {
 						Text.Add("<i>“So… um, you’ve fucked my brother, haven’t you?”</i> She peers at you inquisitorially.", parse);
 						Text.NL();
@@ -964,7 +815,7 @@ OpheliaScenes.TalkVena = function() {
 	let player = GAME().player;
 	let ophelia = GAME().ophelia;
 	let burrows = GAME().burrows;
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	parse = player.ParserTags(parse);
@@ -1052,7 +903,7 @@ OpheliaScenes.TalkVena = function() {
 OpheliaScenes.SexEntryPoint = function() {
 	let player = GAME().player;
 	let ophelia = GAME().ophelia;
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -1094,7 +945,7 @@ OpheliaScenes.SexVaginal = function() {
 	var p1cock = player.BiggestCock();
 	var knotted = p1cock ? p1cock.knot != 0 : false;
 	
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
@@ -1385,10 +1236,12 @@ OpheliaScenes.SexVaginal = function() {
 }
 
 OpheliaScenes.LabPrompt = function() {
-	let player = GAME().player;
+    let player = GAME().player;
+    let party = GAME().party;
 	let ophelia = GAME().ophelia;
-	let burrows = GAME().burrows;
-	var parse = {
+    let burrows = GAME().burrows;
+    
+	var parse : any = {
 		
 	};
 	
@@ -1451,7 +1304,7 @@ OpheliaScenes.LabPrompt = function() {
 		}, enabled : true,
 		tooltip : "Ask if Ophelia’s interested in have sex with you."
 	});
-	if(burrows.flags["Access"] < BurrowsFlags.AccessFlags.QuestlineComplete && party.Inv().QueryNum(Items.Quest.Scepter))
+	if(burrows.flags["Access"] < BurrowsFlags.AccessFlags.QuestlineComplete && party.Inv().QueryNum(QuestItems.Scepter))
 	options.push({ nameStr : "Scepter",
 		func : function() {
 			OpheliaScenes.TurnInScepter();
@@ -1475,7 +1328,7 @@ OpheliaScenes.LabPrompt = function() {
 }
 
 OpheliaScenes.TurnInScepter = function() {
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -1488,13 +1341,15 @@ OpheliaScenes.TurnInScepter = function() {
 	Text.NL();
 	Text.Add("The alchemist motions for you to follow, studying the rod as the two of you head toward the Pit. The queen’s guards silently fold in around you, staying close to their interim matriarch.", parse);
 	Text.NL();
-	Scenes.Vena.RestoreEntrypoint(false);
+	VenaScenes.RestoreEntrypoint(false);
 }
 
 OpheliaScenes.PotionsPrompt = function() {
 	let player = GAME().player;
-	let burrows = GAME().burrows;
-	var parse = {
+	let party = GAME().party;
+    let burrows = GAME().burrows;
+    
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -1511,7 +1366,7 @@ OpheliaScenes.PotionsPrompt = function() {
 				burrows.flags["Felinix"] = 1;
 				
 				OpheliaScenes.PotionsPrompt();
-			}, enabled : party.Inv().QueryNum(Items.Felinix),
+			}, enabled : party.Inv().QueryNum(AlchemyItems.Felinix),
 			tooltip : "Introduce Felinix into the diet of the colony."
 		});
 	}
@@ -1543,7 +1398,7 @@ OpheliaScenes.PotionsPrompt = function() {
 				burrows.flags["Lacertium"] = 1;
 				
 				OpheliaScenes.PotionsPrompt();
-			}, enabled : party.Inv().QueryNum(Items.Lacertium),
+			}, enabled : party.Inv().QueryNum(IngredientItems.Lacertium),
 			tooltip : "Introduce Lacertium into the diet of the colony."
 		});
 	}
@@ -1595,7 +1450,7 @@ OpheliaScenes.PotionsPrompt = function() {
 					
 					OpheliaScenes.PotionsPrompt();
 				});
-			}, enabled : party.Inv().QueryNum(Items.Equinium),
+			}, enabled : party.Inv().QueryNum(IngredientItems.Equinium),
 			tooltip : "Introduce Equinium into the diet of the colony."
 		});
 	}
@@ -1605,8 +1460,10 @@ OpheliaScenes.PotionsPrompt = function() {
 
 OpheliaScenes.DeliverCactoids = function() {
 	let player = GAME().player;
-	let burrows = GAME().burrows;
-	var parse = {
+    let party = GAME().party;
+    let burrows = GAME().burrows;
+    
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -1652,7 +1509,7 @@ OpheliaScenes.DeliverCactoids = function() {
 	Text.Add("The other test subjects perk up at this, eager to be helpful.", parse);
 	Text.Flush();
 	
-	party.Inv().RemoveItem(Items.Quest.Cactoid, 3);
+	party.Inv().RemoveItem(QuestItems.Cactoid, 3);
 	
 	TimeStep({hour: 1});
 	
@@ -1665,8 +1522,10 @@ OpheliaScenes.DeliverCactoids = function() {
 
 OpheliaScenes.DeliverGolHusks = function() {
 	let player = GAME().player;
+    let party = GAME().party;
 	let burrows = GAME().burrows;
-	var parse = {
+
+    var parse : any = {
 		playername : player.name
 	};
 	
@@ -1702,7 +1561,7 @@ OpheliaScenes.DeliverGolHusks = function() {
 	Text.Add("<i>“I need to have something to show daddy, don’t I?”</i> she answers the bunny’s accusatory stare. She turns back to the other volunteer - you are not quite sure which one, male or female. <i>“I… I’m sure the others can help you out. It should go soft if you do it a few more times. I think.”</i> The herm doesn’t seem to be complaining, quickly finding a group of her siblings to fuck and be fucked by.", parse);
 	Text.Flush();
 	
-	party.Inv().RemoveItem(Items.Quest.GolHusk, 3);
+	party.Inv().RemoveItem(QuestItems.GolHusk, 3);
 
 	TimeStep({hour: 1});
 	
@@ -1715,8 +1574,10 @@ OpheliaScenes.DeliverGolHusks = function() {
 
 OpheliaScenes.DeliverAlgae = function() {
 	let player = GAME().player;
-	let burrows = GAME().burrows;
-	var parse = {
+    let party = GAME().party;
+    let burrows = GAME().burrows;
+    
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -1740,7 +1601,7 @@ OpheliaScenes.DeliverAlgae = function() {
 	Text.Add("You still have your doubts. While the lagomorph certainly seems more articulate than before, her mind seems to wander easily. Ophelia tries to show her a few books, but she seems more interested in returning to her fellow volunteers and fuck them. Can’t win every battle, you suppose.", parse);
 	Text.Flush();
 	
-	party.Inv().RemoveItem(Items.Quest.RedAlgae, 3);
+	party.Inv().RemoveItem(QuestItems.RedAlgae, 3);
 	
 	TimeStep({hour: 1});
 	
@@ -1751,17 +1612,19 @@ OpheliaScenes.DeliverAlgae = function() {
 	});
 }
 
-OpheliaScenes.DeliverFollowup = function(trait) {
+OpheliaScenes.DeliverFollowup = function(trait : number) {
 	let player = GAME().player;
+    let party = GAME().party;
 	let lagon = GAME().lagon;
 	let ophelia = GAME().ophelia;
-	let burrows = GAME().burrows;
-	var parse = {
+    let burrows = GAME().burrows;
+    
+	var parse : any = {
 		playername : player.name,
 		himher : player.mfFem("him", "her")
 	};
 	
-	party.location = world.loc.Burrows.Pit;
+	party.location = WORLD().loc.Burrows.Pit;
 	
 	Text.Clear();
 	Text.Add("<i>“Thank you for gathering the ingredients for me,”</i> Ophelia nods, satisfied with the results of her new concoction. She fills a large bottle with the substance, adjusting her glasses and smoothing out her lab coat before turning back to you.", parse);
@@ -1916,10 +1779,10 @@ OpheliaScenes.DeliverFollowup = function(trait) {
 	}
 }
 
-OpheliaScenes.DeliverVena = function(trait) {
+OpheliaScenes.DeliverVena = function(trait : number) {
 	let player = GAME().player;
 	let burrows = GAME().burrows;
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -1971,11 +1834,15 @@ OpheliaScenes.DeliverVena = function(trait) {
 
 OpheliaScenes.Reward = function() {
 	let player = GAME().player;
+    let party = GAME().party;
+	let terry = GAME().terry;
+	let miranda = GAME().miranda;
+	let kiakai = GAME().kiakai;
 	let vena = GAME().vena;
 	let ophelia = GAME().ophelia;
 	let burrows = GAME().burrows;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		softToned : burrows.BruteActive() ? "toned" : "soft"
 	};
@@ -2049,7 +1916,7 @@ OpheliaScenes.Reward = function() {
 				Text.Add("You are not quite sure what she is plotting; considering her mood, you doubt it bodes well for anyone, least of all her father.", parse);
 				Text.Flush();
 				
-				party.location = world.loc.Burrows.Lab;
+				party.location = WORLD().loc.Burrows.Lab;
 				
 				Gui.NextPrompt();
 			});
@@ -2145,14 +2012,14 @@ OpheliaScenes.Reward = function() {
 					player.FuckVag(player.FirstVag(), vena.FirstCock(), 25);
 					vena.Fuck(vena.FirstCock(), 25);
 					
-					Scenes.Vena.Impregnate(player, vena, PregnancyHandler.Slot.Vag);
+					VenaScenes.Impregnate(player, vena, PregnancyHandler.Slot.Vag);
 				}
 				else {
 					Sex.Anal(vena, player);
 					player.FuckAnal(player.Butt(), vena.FirstCock(), 25);
 					vena.Fuck(vena.FirstCock(), 25);
 					
-					Scenes.Vena.Impregnate(player, vena, PregnancyHandler.Slot.Butt);
+					VenaScenes.Impregnate(player, vena, PregnancyHandler.Slot.Butt);
 				}
 				
 				if(cap < 60) {
@@ -2262,9 +2129,9 @@ OpheliaScenes.Reward = function() {
 					var enemy = new Party();
 					var lagonMob = new LagonRegular(false);
 					enemy.AddMember(lagonMob);
-					enemy.AddMember(new LagomorphAlpha());
-					enemy.AddMember(new Lagomorph());
-					enemy.AddMember(new Lagomorph());
+					enemy.AddMember(new LagomorphAlpha(Gender.Random()));
+					enemy.AddMember(new Lagomorph(Gender.Random()));
+					enemy.AddMember(new Lagomorph(Gender.Random()));
 					var enc = new Encounter(enemy);
 					
 					enc.canRun = true;
@@ -2272,8 +2139,8 @@ OpheliaScenes.Reward = function() {
 						return lagonMob.Incapacitated();
 					}
 					
-					enc.onLoss = Scenes.Lagon.PitDefianceLoss;
-					enc.onVictory = Scenes.Lagon.PitDefianceWin;
+					enc.onLoss = LagonScenes.PitDefianceLoss;
+					enc.onVictory = LagonScenes.PitDefianceWin;
 					
 					enc.Start();
 				});
@@ -2310,7 +2177,7 @@ OpheliaScenes.Reward = function() {
 					
 					Text.Flush();
 					
-					party.location = world.loc.Burrows.Lab;
+					party.location = WORLD().loc.Burrows.Lab;
 					
 					Gui.NextPrompt();
 				});
@@ -2321,10 +2188,10 @@ OpheliaScenes.Reward = function() {
 	}
 }
 
-OpheliaScenes.ScepterRequest = function(fight) {
+OpheliaScenes.ScepterRequest = function(fight : boolean) {
 	let player = GAME().player;
 	
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		again : fight ? " again" : "",
 		haggardDetermined : fight ? "determined" : "haggard"
@@ -2356,7 +2223,7 @@ OpheliaScenes.ScepterRequest = function(fight) {
 }
 
 OpheliaScenes.WatchVenaEntry = function() {
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -2393,7 +2260,7 @@ OpheliaScenes.WatchVenaEntry = function() {
 
 OpheliaScenes.RewardAftermathStage2Prompt = function() {
 	let ophelia = GAME().ophelia;
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -2444,16 +2311,17 @@ OpheliaScenes.RewardAftermathStage2Prompt = function() {
 
 OpheliaScenes.RewardChoices = function() {
 	let player = GAME().player;
+	let party = GAME().party;
 	let lagon = GAME().lagon;
 	
-	var parse = {
+	var parse : any = {
 	};
 	parse = player.ParserTags(parse);
 	
 	Text.Add("<b>Pick your reward. Any potions you choose will be consumed on the spot.</b>", parse);
 	Text.Flush();
 	
-	party.location = world.loc.Burrows.Throne;
+	party.location = WORLD().loc.Burrows.Throne;
 	
 	//[Virility][Fertility][Breeder][Gold][Sex]
 	var options = new Array();
@@ -2590,6 +2458,4 @@ OpheliaScenes.RewardChoices = function() {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-
-
-export { Ophelia, OpheliaScenes };
+export { OpheliaScenes };

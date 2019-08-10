@@ -12,6 +12,7 @@ import { PregnancyHandler } from '../../pregnancy';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { BurrowsFlags } from '../../loc/burrows-flags';
+import { RoaFlags } from './roa-flags';
 
 let RoaScenes = {};
 
@@ -48,8 +49,8 @@ function Roa(storage) {
 	this.SetLevelBonus();
 	this.RestFull();
 	
-	this.flags["Met"]   = Roa.Met.NotMet;
-	this.flags["Lagon"] = Roa.Lagon.No;
+	this.flags["Met"]   = RoaFlags.Met.NotMet;
+	this.flags["Lagon"] = RoaFlags.Lagon.No;
 	this.flags["sFuck"] = 0; //strapon fuck
 	this.flags["snug"]  = 0; //snuggle
 
@@ -58,27 +59,13 @@ function Roa(storage) {
 Roa.prototype = new Entity();
 Roa.prototype.constructor = Roa;
 
-Roa.Met = {
-	NotMet : 0,
-	Met    : 1,
-	Sexed  : 2
-};
-
-Roa.Lagon = {
-	No        : 0,
-	Talked    : 1,
-	Defeated  : 2,
-	Restored  : 3,
-	SidedWith : 4
-};
-
 //TODO
 Roa.prototype.Cost = function() {
 	return 100;
 }
 
 Roa.prototype.Met = function() {
-	return this.flags["Met"] >= Roa.Met.Met;
+	return this.flags["Met"] >= RoaFlags.Met.Met;
 }
 
 //TODO (Met flag?)
@@ -157,7 +144,7 @@ RoaScenes.BrothelApproach = function() {
 		Text.Clear();
 		Text.Add("You make your way to the couch where the lusty lapin is lounging.", parse);
 		Text.NL();
-		if(roa.flags["Lagon"] >= Roa.Lagon.Defeated) {
+		if(roa.flags["Lagon"] >= RoaFlags.Lagon.Defeated) {
 			Text.Add("He gasps once he sees you approach, and immediately gets down on his knees, bowing respectfully as he looks up at you with gleaming eyes. <i>“It’s my champion! [playername]! What brings you to my humble corner? Is there something I can do to serve you?”</i>", parse);
 			Text.NL();
 			Text.Add("Smiling, you lay a hand on his shoulder and tell him that he can start by getting up. If you wanted him down on his knees, you’d tell him that.", parse);
@@ -300,7 +287,7 @@ RoaScenes.TalkPrompt = function(backPrompt) {
 	*/
 	
 	/*
-	if(burrows.LagonAlly() && roa.flags["Lagon"] < Roa.Lagon.SidedWith) {
+	if(burrows.LagonAlly() && roa.flags["Lagon"] < RoaFlags.Lagon.SidedWith) {
 		options.push({ nameStr : "",
 			func : function() {
 				Text.Clear();
@@ -308,7 +295,7 @@ RoaScenes.TalkPrompt = function(backPrompt) {
 				Text.NL();
 				Text.Flush();
 				
-				roa.flags["Lagon"] = Roa.Lagon.SidedWith;
+				roa.flags["Lagon"] = RoaFlags.Lagon.SidedWith;
 				
 				roa.relation.DecreaseStat(-100, 50);
 				
@@ -317,11 +304,11 @@ RoaScenes.TalkPrompt = function(backPrompt) {
 			tooltip : "" //TODO
 		});
 	}
-	else*/ if(burrows.flags["Access"] >= BurrowsFlags.AccessFlags.Stage3 && roa.flags["Lagon"] < Roa.Lagon.Talked) {
+	else*/ if(burrows.flags["Access"] >= BurrowsFlags.AccessFlags.Stage3 && roa.flags["Lagon"] < RoaFlags.Lagon.Talked) {
 		options.push({ nameStr : "Scepter",
 			func : function() {
 				burrows.flags["Access"] = BurrowsFlags.AccessFlags.Stage4;
-				roa.flags["Lagon"]      = Roa.Lagon.Talked;
+				roa.flags["Lagon"]      = RoaFlags.Lagon.Talked;
 				rigard.flags["Scepter"] = 1;
 				
 				Text.Clear();
@@ -334,7 +321,7 @@ RoaScenes.TalkPrompt = function(backPrompt) {
 				Text.NL();
 				Text.Add("The little bunny’s expression turns from guilty to aghast as you tell him what has transgressed in the Burrows in his absence. ", parse);
 				if(burrows.LagonDefeated()) {
-					roa.flags["Lagon"] = Roa.Lagon.Defeated;
+					roa.flags["Lagon"] = RoaFlags.Lagon.Defeated;
 					Text.Add("His surprise knows no bounds when you tell him that you’ve defeated Lagon.", parse);
 					Text.NL();
 					Text.Add("<i>“Impossible!”</i> he spouts. <i>“T-there was no one who could even lay a finger on him in the Burrows! Just how strong are you?!”</i>", parse);
@@ -394,11 +381,11 @@ RoaScenes.TalkPrompt = function(backPrompt) {
 			tooltip : "Ask if he’s Ophelia’s brother; and if that’s so, what he’s done with Lagon scepter."
 		});
 	}
-	else if(burrows.LagonDefeated() && roa.flags["Lagon"] < Roa.Lagon.Defeated) {
+	else if(burrows.LagonDefeated() && roa.flags["Lagon"] < RoaFlags.Lagon.Defeated) {
 		options.push({ nameStr : "Lagon",
 			func : function() {
 				Text.Clear();
-				roa.flags["Lagon"] = Roa.Lagon.Defeated;
+				roa.flags["Lagon"] = RoaFlags.Lagon.Defeated;
 				Text.Add("<i>“Y-you did what?”</i> Roa looks shocked at your revelation, disbelief clear in his eyes. <i>“That’s impossible! No one in the Burrows could even touch my father! J-just how strong are you?!”</i>", parse);
 				Text.NL();
 				Text.Add("Once he has accepted your tale, the lagomorph’s expression changes to one brimming with respect; it’s almost worshipful. He hesitantly puts a trembling hand on your chest, poking at you to make sure you are really flesh and blood and not some demigod come down to Eden.", parse);
@@ -420,7 +407,7 @@ RoaScenes.TalkPrompt = function(backPrompt) {
 			tooltip : "Tell him about how you defeated Lagon."
 		});
 	}
-	else if(burrows.VenaRestored() && roa.flags["Lagon"] < Roa.Lagon.Restored) {
+	else if(burrows.VenaRestored() && roa.flags["Lagon"] < RoaFlags.Lagon.Restored) {
 		options.push({ nameStr : "Vena",
 			func : function() {
 				Text.Clear();
@@ -467,7 +454,7 @@ RoaScenes.First = function() {
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	
-	roa.flags["Met"] = Roa.Met.Met;
+	roa.flags["Met"] = RoaFlags.Met.Met;
 	
 	Text.Clear();
 	Text.Add("As you make your way through the crowds and couches, you’re able to get a better look at the bunny. She’s a dainty little thing, as you’d expect a rabbit-morph to be; petitely built, but feminine, and covered in pink-tinged white fur. Her hair is long and kind of messy, falling forward over beautiful baby-blue eyes, but it’s an interesting sort of disheveled look.", parse);
@@ -617,8 +604,8 @@ RoaScenes.TSLPitchAnal = function() {
 	let player = GAME().player;
 	let roa = GAME().roa;
 
-	if(roa.flags["Met"] < Roa.Met.Sexed)
-		roa.flags["Met"] = Roa.Met.Sexed;
+	if(roa.flags["Met"] < RoaFlags.Met.Sexed)
+		roa.flags["Met"] = RoaFlags.Met.Sexed;
 	
 	var p1cock = player.BiggestCock(null, true);
 	
@@ -951,8 +938,8 @@ RoaScenes.TSLCatchVaginal = function() {
 	let player = GAME().player;
 	let roa = GAME().roa;
 
-	if(roa.flags["Met"] < Roa.Met.Sexed)
-		roa.flags["Met"] = Roa.Met.Sexed;
+	if(roa.flags["Met"] < RoaFlags.Met.Sexed)
+		roa.flags["Met"] = RoaFlags.Met.Sexed;
 	
 	var parse = {
 		playername : player.name,

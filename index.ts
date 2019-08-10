@@ -16,9 +16,6 @@ import './js/gui.js';
 // Entity scripts
 import './js/event/player.js';
 
-// Combat
-import './js/enemy/boss.js';
-
 // World description
 import './js/exploration.js';
 
@@ -69,10 +66,6 @@ import './js/event/brothel/belinda.js';
 import './js/event/brothel/bastet.js';
 import './js/event/brothel/gryphons.js';
 import './js/event/brothel/fireblossom.js';
-
-import './js/event/burrows/lagon.js';
-import './js/event/burrows/ophelia.js';
-import './js/event/burrows/vena.js';
 
 import './js/event/farm/gwendy.js';
 import './js/event/farm/adrian.js';

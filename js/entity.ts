@@ -644,7 +644,7 @@ export class Entity {
 	}
 
 
-	GetPartyTarget(encounter : any, activeChar : any, ally : any) {
+	GetPartyTarget(encounter : any, activeChar : any, ally? : any) {
 		var isEnemy = activeChar.isEnemy;
 		var confuse = activeChar.entity.combatStatus.stats[StatusEffect.Confuse];
 		if(confuse)

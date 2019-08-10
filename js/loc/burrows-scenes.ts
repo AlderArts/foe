@@ -1,6 +1,6 @@
 
 import { VenaScenes } from '../event/burrows/vena-scenes';
-import { OpheliaScenes } from '../event/burrows/ophelia';
+import { OpheliaScenes } from '../event/burrows/ophelia-scenes';
 import { GAME, WorldTime, MoveToLocation, TimeStep, WORLD } from '../GAME';
 import { Text } from '../text';
 import { Gui } from '../gui';
@@ -10,10 +10,11 @@ import { BurrowsFlags } from './burrows-flags';
 import { EncounterTable } from '../encountertable';
 import { Season } from '../time';
 import { Link } from '../event';
-import { LagonScenes } from '../event/burrows/lagon-scenes';
+import { LagonScenes, InitLagon } from '../event/burrows/lagon-scenes';
 import { LagonFlags } from '../event/burrows/lagon-flags';
 
 export function InitBurrows() {
+    InitLagon(OpheliaScenes);
 	WORLD().SaveSpots["Burrows"] = BurrowsLoc.Lab;
 };
 

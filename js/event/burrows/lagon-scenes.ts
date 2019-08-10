@@ -11,7 +11,7 @@ import { Gender } from "../../body/gender";
 import { Lagomorph, LagomorphBrute, LagomorphWizard, LagomorphElite } from "../../enemy/rabbit";
 import { PregnancyHandler } from "../../pregnancy";
 import { QuestItems } from "../../items/quest";
-import { OpheliaScenes } from "./ophelia";
+import { OpheliaBrute } from "./ophelia";
 import { Time } from "../../time";
 import { Encounter } from "../../combat";
 import { SetGameState, GameState } from "../../gamestate";
@@ -19,12 +19,32 @@ import { SetGameOverButton } from "../../main-gameover";
 import { Party } from "../../party";
 import { VenaScenes } from "./vena-scenes";
 import { OpheliaFlags } from "./ophelia-flags";
+import { Race } from "../../body/race";
+import { Entity } from "../../entity";
+import { LagonRegular, LagonBrute } from "./lagon";
+
+let OpheliaScenes : any;
+export function InitLagon(opheliaScenes : any) {
+    OpheliaScenes = opheliaScenes;
+}
 
 let LagonScenes : any = {
 	Defeated : LagonDScenes,
 };
 
 
+LagonScenes.LagonImpregnate = function(mother : Entity, slot? : number) {
+	let lagon = GAME().lagon;
+	mother.PregHandler().Impregnate({
+		slot   : slot || PregnancyHandler.Slot.Vag,
+		mother : mother,
+		father : lagon,
+		race   : Race.Rabbit,
+		num    : 5,
+		time   : 20 * 24,
+		load   : 4
+	});
+}
 
 LagonScenes.InteractRuler = function() {
 	let lagon = GAME().lagon;
