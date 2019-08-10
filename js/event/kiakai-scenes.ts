@@ -7,6 +7,7 @@ import { GAME, TimeStep } from '../GAME';
 import { KiakaiFlags } from './kiakai-flags';
 import { Uru } from './uru';
 import { Burrows } from '../loc/burrows';
+import { BurrowsFlags } from '../loc/burrows-flags';
 
 let KiakaiScenes : any = {
 	Sex : KiakaiSex
@@ -489,7 +490,7 @@ KiakaiScenes.TalkEden = function() {
 			// RABBITS
 			scenes.push(function() {
 				let burrows = GAME().burrows;
-				if(burrows.flags["Access"] == Burrows.AccessFlags.Unknown) {
+				if(burrows.flags["Access"] == BurrowsFlags.AccessFlags.Unknown) {
 					Text.Add("<i>“Some of the priests at the shrine told me about strange creatures they encountered on the plains, walking upright like humans, but very similar to rabbits in appearance. They are fleet-footed, and ran away before the traveling priests could get a closer look at them.”</i>", parse);
 					Text.NL();
 					Text.Add("<i>“According to the locals, they tend to stay together in small groups, and avoid travelers and larger settlements. As I understand it, they are not very sophisticated or intelligent.”</i>", parse);

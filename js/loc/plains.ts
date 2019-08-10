@@ -7,7 +7,7 @@
 import { Event, Link } from '../event';
 import { EncounterTable } from '../encountertable';
 import { NomadsLoc } from './nomads';
-import { BurrowsLoc, Burrows } from './burrows';
+import { BurrowsLoc } from './burrows-scenes';
 import { WorldTime, MoveToLocation, WORLD, GAME, TimeStep } from '../GAME';
 import { Season } from '../time';
 import { Text } from '../text';
@@ -25,6 +25,7 @@ import { MirandaScenes } from '../event/miranda-scenes';
 import { OutlawsScenes } from '../event/outlaws/outlaws';
 import { FarmScenesIntro } from './farm-scenes';
 import { DryadGladeFlags } from './glade-flags';
+import { BurrowsFlags } from './burrows-flags';
 
 // Create namespace
 let PlainsLoc = {
@@ -261,9 +262,9 @@ PlainsLoc.Crossroads.links.push(new Link(
 	}
 ));
 PlainsLoc.Crossroads.links.push(new Link(
-	"Burrows", function() { return GAME().burrows.flags["Access"] != Burrows.AccessFlags.Unknown; }, true,
+	"Burrows", function() { return GAME().burrows.flags["Access"] != BurrowsFlags.AccessFlags.Unknown; }, true,
 	function() {
-		if(GAME().burrows.flags["Access"] != Burrows.AccessFlags.Unknown) {
+		if(GAME().burrows.flags["Access"] != BurrowsFlags.AccessFlags.Unknown) {
 			Text.NL();
 			Text.Add("You know how to find the Burrows, should you want to.");
 		}

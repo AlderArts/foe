@@ -26,6 +26,7 @@ import { BodyPartType } from '../body/bodypart';
 import { Sex } from '../entity-sex';
 import { TimeStep } from '../GAME';
 import { TerryFlags } from '../event/terry-flags';
+import { BurrowsFlags } from '../loc/burrows-flags';
 
 let LagomorphScenes = {};
 
@@ -493,7 +494,7 @@ LagomorphScenes.GroupLossOnPlains = function() {
 		// TODO: Add alternate loss scene that 
 		scenes.AddEnc(function() {
 			LagomorphScenes.GroupLossOnPlainsToBurrows(enc);
-		}, 1.0, function() { return burrows.flags["Access"] == Burrows.AccessFlags.Unknown; });
+		}, 1.0, function() { return burrows.flags["Access"] == BurrowsFlags.AccessFlags.Unknown; });
 		
 		if(enc.brainy) {
 			scenes.AddEnc(function() {
@@ -747,7 +748,7 @@ LagomorphScenes.GroupLossOnPlainsToBurrows = function(enc) {
 		Text.Clear();
 		Text.Add("The rabbits are traveling straight toward a low set of hills in the distance, an air of purpose about them. As you draw closer, you see that there are quite a number of their kind milling about the mounds, with even more passing in and out of large holes leading underground.", parse);
 		Text.NL();
-		if(burrows.flags["Access"] == Burrows.AccessFlags.Unknown) {
+		if(burrows.flags["Access"] == BurrowsFlags.AccessFlags.Unknown) {
 			Text.Add("<b>You discovered the Burrows.</b>", parse);
 			Text.NL();
 		}
@@ -793,7 +794,7 @@ LagomorphScenes.GroupWinOnPlainsPrompt = function() {
 		
 		var options = new Array();
 		
-		if(burrows.flags["Access"] == Burrows.AccessFlags.Unknown) {
+		if(burrows.flags["Access"] == BurrowsFlags.AccessFlags.Unknown) {
 			Text.NL();
 			Text.Add("...Just what is going on here? Where are all these bunnies coming from anyways?", parse);
 			
@@ -2032,7 +2033,7 @@ LagomorphScenes.GroupWinInterrorigate = function(enc) {
 			Text.Add("<b>You discovered the Burrows.</b>", parse);
 			Text.Flush();
 			
-			burrows.flags["Access"] = Burrows.AccessFlags.KnownNotVisited;
+			burrows.flags["Access"] = BurrowsFlags.AccessFlags.KnownNotVisited;
 			
 			Gui.NextPrompt();
 		}, enabled : true,
@@ -2115,7 +2116,7 @@ LagomorphScenes.GroupWinInterrorigate = function(enc) {
 					Text.Add("For the moment, you retreat back to the plains, not quite ready to tackle the burrows yet.", parse);
 					Text.Flush();
 					
-					burrows.flags["Access"] = Burrows.AccessFlags.KnownNotVisited;
+					burrows.flags["Access"] = BurrowsFlags.AccessFlags.KnownNotVisited;
 					
 					Gui.NextPrompt();
 				}, enabled : true,

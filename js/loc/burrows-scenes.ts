@@ -1,31 +1,24 @@
-/*
- * 
- * The Burrows, Lagomorph dungeon
- * 
- */
 
-
-import { Event, Link } from '../event';
-import { EncounterTable } from '../encountertable';
-import { VenaScenes } from '../event/burrows/vena';
+import { VenaScenes } from '../event/burrows/vena-scenes';
 import { OpheliaScenes } from '../event/burrows/ophelia';
-import { LagonScenes } from '../event/burrows/lagon';
-import { Gender } from '../body/gender';
-import { WorldTime, MoveToLocation, GAME } from '../GAME';
+import { GAME, WorldTime, MoveToLocation, TimeStep, WORLD } from '../GAME';
 import { Text } from '../text';
 import { Gui } from '../gui';
+import { Gender } from '../body/gender';
+import { LagomorphAlpha } from '../enemy/rabbit';
+import { BurrowsFlags } from './burrows-flags';
+import { EncounterTable } from '../encountertable';
+import { Season } from '../time';
+import { Link } from '../event';
+import { LagonScenes } from '../event/burrows/lagon-scenes';
 import { LagonFlags } from '../event/burrows/lagon-flags';
-import { VenaFlags } from '../event/burrows/vena-flags';
 
-let world = null;
-
-export function InitBurrows(w) {
-	world = w;
-	world.SaveSpots["Burrows"] = BurrowsLoc.Lab;
+export function InitBurrows() {
+	WORLD().SaveSpots["Burrows"] = BurrowsLoc.Lab;
 };
 
 // Create namespace
-let BurrowsLoc = {
+let BurrowsLoc : any = {
 	Entrance  : new Event("The Burrows"),
 	Tunnels   : new Event("Burrows: Tunnels"),
 	Pit       : new Event("Burrows: The Pit"),
@@ -34,372 +27,15 @@ let BurrowsLoc = {
 	LagonCell : new Event("Burrows: Lagon's cell") //Only used for the name
 }
 
-
-let BurrowsScenes = {
+let BurrowsScenes : any = {
 	Vena : VenaScenes,
 	Ophelia : OpheliaScenes,
 	Lagon : LagonScenes,
 };
 
-// Class to handle global flags and logic for dungeon
-function Burrows(storage) {
-	this.flags = {};
-	
-	this.flags["Access"]      = Burrows.AccessFlags.Unknown;
-	this.flags["BruteTrait"]  = Burrows.TraitFlags.Inactive;
-	this.flags["HermTrait"]   = Burrows.TraitFlags.Inactive;
-	this.flags["BrainyTrait"] = Burrows.TraitFlags.Inactive;
-	
-	this.flags["Felinix"]   = 0;
-	this.flags["Lacertium"] = 0;
-	this.flags["Equinium"]  = 0;
-	
-	if(storage) this.FromStorage(storage);
-}
-
-Burrows.AccessFlags = {
-	Unknown           : 0, //TODO: maybe redo burrows intro
-	KnownNotVisited   : 1,
-	Visited           : 2, //talked to Lagon
-	Stage1            : 3, //turned in first ingredient
-	Stage2            : 4, //turned in second ingredient
-	Stage3            : 5, //turned in final ingredient
-	Stage4            : 6, //talked to Roa about scepter
-	Stage5            : 7, //confronted Gol
-	QuestlineComplete : 8  //confronted Lagon and sided with him or Ophelia
-};
-
-Burrows.Traits = {
-	Brute  : 0,
-	Herm   : 1,
-	Brainy : 2
-};
-Burrows.TraitFlags = {
-	Inactive         : 0,
-	Gathered         : 1,
-	Active           : 2
-};
-
-Burrows.prototype.Access = function() {
-	return this.flags["Access"] >= Burrows.AccessFlags.Visited;
-}
-
-Burrows.prototype.BruteActive = function() {
-	return this.flags["BruteTrait"] >= Burrows.TraitFlags.Active;
-}
-Burrows.prototype.HermActive = function() {
-	return this.flags["HermTrait"] >= Burrows.TraitFlags.Active;
-}
-Burrows.prototype.BrainyActive = function() {
-	return this.flags["BrainyTrait"] >= Burrows.TraitFlags.Active;
-}
-Burrows.prototype.LagonDefeated = function() {
-	return GAME().lagon.flags["Usurp"] & LagonFlags.Usurp.Defeated;
-}
-Burrows.prototype.LagonChallenged = function() {
-	return GAME().lagon.flags["Usurp"] & LagonFlags.Usurp.FirstFight;
-}
-Burrows.prototype.LagonAlly = function() {
-	return GAME().lagon.flags["Usurp"] & LagonFlags.Usurp.SidedWith;
-}
-//TODO
-Burrows.prototype.LagonChained = function() {
-	return GAME().burrows.LagonDefeated(); //TODO
-}
-Burrows.prototype.LagonJudged = function() {
-	let vena = GAME().vena;
-	return vena.flags["Met"] & VenaFlags.Met.Judgement;
-}
-//TODO
-Burrows.prototype.LagonPit = function() {
-	return false;
-}
-Burrows.prototype.VenaRestored = function() {
-	let vena = GAME().vena;
-	return vena.flags["Met"] & VenaFlags.Met.Restored;
-}
-
-Burrows.prototype.ToStorage = function() {
-	var storage = {};
-	
-	storage.flags = this.flags;
-	
-	return storage;
-}
-
-Burrows.prototype.FromStorage = function(storage) {
-	// Load flags
-	for(var flag in storage.flags)
-		this.flags[flag] = parseInt(storage.flags[flag]);
-}
-
-
-//
-// Burrows entrance
-//
-BurrowsLoc.Entrance.description = function() {
-	let burrows = GAME().burrows;
-	var parse = {
-		TreeFar : world.TreeFarDesc(),
-		l : burrows.LagonDefeated() ? "the lagomorph" : "Lagon’s"
-	};
-	
-	Text.Add("Just beyond lies the dark tunnel that leads down into [l] lair. It looks innocent enough on the outside, with a few bunny-morphs hopping around and frolicking aimlessly, but you know very well what lies underground.", parse);
-	Text.NL();
-	Text.Add("The burrows are located in a group of low hills on the plains, still quite a ways from the forest. [TreeFar]", parse);
-	Text.NL();
-	var scenes = new EncounterTable();
-	scenes.AddEnc(function() {
-		Text.Add("There is a curious group of rabbits gathered a short distance from the main tunnel. They are carrying what looks like makeshift farming tools, poking at a patch of ground haphazardly. It looks like they are trying to plant carrots.", parse);
-		if(WorldTime().season == Season.Winter) {
-			Text.NL();
-			Text.Add("You consider telling them that the snow will probably complicate things, but they seem to be having fun.", parse);
-		}
-		Text.NL();
-	}, 1.0, function() { return burrows.BrainyActive(); });
-	scenes.AddEnc(function() {
-		Text.Add("You see a strange structure being put together close by. A pile of scrap material is being stacked in the rough semblance of a house, but with barely enough room for a person to fit in. A short female lagomorph seems to be directing a small workforce in the assembly, gesturing insistently. Nodding to herself, she waves the others off and crawls inside the rickety hovel, smiling triumphantly at this defiance of the elements.", parse);
-		Text.NL();
-		Text.Add("The elements in question have something else to say about the matter though; a slight breeze causes the structure to wobble unsteadily before it slowly collapses in on itself, trapping the squealing architect beneath the rubble. Her fellow construction workers mill around uncertainly, apparently unsure if they should be helping her, before pulling away some of the material, freeing her head. She seems to be largely unharmed, although trapped in place.", parse);
-		Text.NL();
-		Text.Add("At her insistent pleading, most of the rubble covering the lagomorph is removed, but a particularly heavy crossbeam is pinning her midsection to the ground. The others make a few half-hearted attempts to pull it aside, but failing that, they shrug and make the best of the situation. Ignoring her muffled protests, three of the male workers set to filling her front and back, quickly reducing the enterprising architect to a moaning slut.", parse);
-		Text.NL();
-	}, 1.0, function() { return burrows.BrainyActive(); });
-	scenes.AddEnc(function() {
-		Text.Add("A group of female lagomorphs are flocking around a bulging brute of a rabbit, at least twice as tall as the regular creatures. He looks almost as wide as he is tall, rippling with muscles, and from the delighted 'oohs' and 'aahs' of the crowd, he is likely sporting quite the third leg. The hulking rabbit is wearing a huge grin and not much else, flexing pompously for his admirers.", parse);
-		Text.NL();
-	}, 1.0, function() { return burrows.BruteActive(); });
-	scenes.AddEnc(function() {
-		Text.Add("There is a small crowd of rabbits gathered close by, hooting and cheering. The focus of their attention is a trio of lagomorphs, panting and grinding against each other. You judge them to be female at first due to their breasts, but all three seems to be sporting rather respectable dicks. One is on her back, cock flopping around freely as she is railed by one of her moaning companions. She, in turn, is getting a good fucking from the third hermaphrodite.", parse);
-		Text.NL();
-	}, 1.0, function() { return burrows.HermActive(); });
-	
-	scenes.Get();
-}
-
-BurrowsLoc.Entrance.links.push(new Link(
-	"Plains", true, true,
-	null,
-	function() {
-		MoveToLocation(world.loc.Plains.Crossroads, {minute: 30});
-	}
-));
-BurrowsLoc.Entrance.links.push(new Link(
-	"Inside", true, true,
-	null,
-	function() {
-		let burrows = GAME().burrows;
-		if(!burrows.LagonDefeated() && burrows.LagonChallenged())
-			Scenes.Lagon.ReturnToBurrowsAfterFight();
-		else if(!burrows.LagonDefeated() && burrows.flags["Access"] == Burrows.AccessFlags.Stage5)
-			Scenes.Lagon.ReturnToBurrowsAfterScepter();
-		else
-			MoveToLocation(BurrowsLoc.Tunnels, {minute: 10});
-	}
-));
-
-
-BurrowsLoc.Entrance.onEntry = function() {
-	if(burrows.flags["Access"] == Burrows.AccessFlags.KnownNotVisited) {
-		BurrowsScenes.FirstApproach();
-	}
-	else
-		Gui.PrintDefaultOptions();
-}
-
-
-//
-// Tunnels
-//
-BurrowsLoc.Tunnels.description = function() {
-	Text.Add("The burrows are a confusing maze of tunnels criss-crossing through the hillside. There is no real way to navigate in the faintly lit darkness of the lagomorph stronghold, so moving around is a bit of guesswork. Still, you think you could find your way around, given some time. Echoes of the giant orgy in the Pit can be heard even here; finding that place will at least be easy.");
-	Text.NL();
-}
-
-BurrowsLoc.Tunnels.links.push(new Link(
-	"Outside", true, true,
-	null,
-	function() {
-		MoveToLocation(BurrowsLoc.Entrance, {minute: 10});
-	}
-));
-
-BurrowsLoc.Tunnels.links.push(new Link(
-	"Throne", true, true,
-	null,
-	function() {
-		MoveToLocation(BurrowsLoc.Throne, {minute: 10});
-	}
-));
-
-BurrowsLoc.Tunnels.links.push(new Link(
-	"The Pit", true, true,
-	null,
-	function() {
-		MoveToLocation(BurrowsLoc.Pit, {minute: 10});
-	}
-));
-
-BurrowsLoc.Tunnels.links.push(new Link(
-	"Lab", true, true,
-	null,
-	function() {
-		MoveToLocation(BurrowsLoc.Lab, {minute: 10});
-	}
-));
-
-
-BurrowsLoc.Tunnels.enc = new EncounterTable();
-//TODO add encounters
-
-//
-// Burrows throne room
-//
-BurrowsLoc.Throne.description = function() {
-	let burrows = GAME().burrows;
-	var parse = {
-		Lagon : burrows.VenaRestored() ? "Vena" : "Lagon"
-	};
-	
-	Text.Add("[Lagon]’s throne room is where the bunnies have gathered all the riches that they’ve scavenged from around the land. Due to their non-conventional measure of value, it’s an odd collection to say the least. There’s mounds of coins, jewels and gear of various kinds, to be sure, but also various oddments like wheelbarrows and iron pots - not exactly your usual treasures.", parse);
-	Text.NL();
-	if(burrows.VenaRestored())
-		Text.Add("The lagomorph matriarch is busy dealing with the everyday ruling of her little kingdom, and often sends out messengers to tend to various tasks. She still has a long way to go before her vision of the colony is realized. Progress is halted now and again when her pent up lust forces her to call some of her harem to aid her. Old habits die hard.", parse);
-	else if(burrows.LagonDefeated())
-		Text.Add("After Lagon’s defeat at your hands, the throne stands empty, waiting for a new ruler of the lagomorphs.", parse);
-	else
-		Text.Add("The lagomorph king himself rests on his seat, a bored look on his face as he oversees the matters of his kingdom - punishes those that need punishing, fucks those that need fucking. His personal harem is close at hand, attentive to his whims.", parse);
-	Text.NL();
-	if(burrows.LagonDefeated()) {
-		if(burrows.LagonChained())
-			Text.Add("The former king is locked away nearby in his cell, away from the bustle of the everyday activities of running the lagomorph realm.", parse);
-		else if(burrows.LagonPit())
-			Text.Add("The former king is probably where he usually is; in the depths of the Pit getting his every hole fucked by the endless mob of rabbits. From what you’ve gathered, he doesn’t seem to want to leave, even if he’s free to.", parse);
-	}
-}
-
-BurrowsLoc.Throne.links.push(new Link(
-	"Tunnels", true, true,
-	null,
-	function() {
-		MoveToLocation(BurrowsLoc.Tunnels, {minute: 10});
-	}
-));
-
-BurrowsLoc.Throne.events.push(new Link(
-	"Vena", function() {
-		let burrows = GAME().burrows;
-		return burrows.VenaRestored();
-	}, true,
-	null,
-	function() {
-		Scenes.Vena.Restored.Approach();
-	}
-));
-
-BurrowsLoc.Throne.events.push(new Link(
-	"Lagon", function() {
-		let lagon = GAME().lagon;
-		return lagon.IsAtLocation();
-	}, true,
-	null,
-	function() {
-		let burrows = GAME().burrows;
-		let lagon = GAME().lagon;
-		if(burrows.LagonAlly() && !(lagon.flags["Talk"] & LagonFlags.Talk.AlliedFirst))
-			Scenes.Lagon.AlliedFirst();
-		else if(burrows.LagonJudged())
-			Scenes.Lagon.Defeated.RoomApproach();
-		else
-			Scenes.Lagon.InteractRuler();
-	}
-));
-
-
-//
-// Burrows Pit
-//
-BurrowsLoc.Pit.description = function() {
-	let player = GAME().player;
-	let burrows = GAME().burrows;
-	var parse = {
-		Lagon : burrows.VenaRestored() ? "Vena" : "Lagon"
-	};
-	
-	Text.Add("The Pit is probably the largest cavern in the lagomorph colony, a massive breeding chamber filled with the never-ending grunts and moans of the giant orgy. Several hundred rabbits have joined in the party, with those too tired to go on continually being replaced by new arrivals. The floor tilts toward the center of the chamber, the narrow open pathways sticky with cum.", parse);
-	Text.NL();
-	if(burrows.LagonPit()) {
-		if(WorldTime().hour >= 2 && WorldTime().hour < 6)
-			Text.Add("At the bottom of the pit, the former king of the lagomorphs is sleeping deeply, exhausted from perpetual sex. A dozen or so of his children are curled up against him, sharing the heat of their bodies with their father.", parse);
-		else
-			Text.Add("At the very bottom of the pit, in a knee-deep pool of sexual fluids, Lagon the former rabbit king is getting pounded by several of his willing breeders, not unlike how Vena once was.", parse);
-	}
-	else if(burrows.VenaRestored())
-		Text.Add("The orgy still continues in Vena’s absence, though it’s just not the same without her.", parse);
-	else {
-		if(WorldTime().hour >= 2 && WorldTime().hour < 6)
-			Text.Add("At the bottom of the pit, Vena is sleeping deeply, heavy with child. A dozen or so of her children are curled up against her, sharing the heat of their bodies with her.", parse);
-		else
-			Text.Add("At the very bottom of the pit, in a knee-deep pool of sexual fluids, Vena the rabbit matriarch is getting pounded by several of her willing breeders.", parse);
-	}
-	Text.NL();
-	parse["e"] = player.HasNightvision() ? ", and even with your good night vision, you can only just make out the other side of the immense room" : ", but it’s much too dark to see the other end";
-	Text.Add("The cavern is dimly lit by the same strange pots placed in many of the tunnels[e]. Several tunnels lead out from the chamber, bustling with activity as exhausted rabbits hobble away to rest, and diligent youths bring platters of food for the participants. The raw smell of sex permeates the air like incense, making you light-headed.", parse);
-	Text.NL();
-}
-
-BurrowsLoc.Pit.links.push(new Link(
-	"Tunnels", true, true,
-	null,
-	function() {
-		MoveToLocation(BurrowsLoc.Tunnels, {minute: 10});
-	}
-));
-
-BurrowsLoc.Pit.events.push(new Link(
-	"Vena", function() {
-		let burrows = GAME().burrows;
-		return !burrows.VenaRestored();
-	}, true,
-	null,
-	function() {
-		Scenes.Vena.PitApproach();
-	}
-));
-
-//
-// Burrows Lab
-//
-BurrowsLoc.Lab.description = function() {
-	Scenes.Ophelia.LabDesc();
-}
-
-
-BurrowsLoc.Lab.SaveSpot = "Burrows";
-BurrowsLoc.Lab.safe = function() { return true; };
-BurrowsLoc.Lab.links.push(new Link(
-	"Tunnels", true, true,
-	null,
-	function() {
-		MoveToLocation(BurrowsLoc.Tunnels, {minute: 10});
-	}
-));
-
-BurrowsLoc.Lab.events.push(new Link(
-	"Ophelia", function() {
-		let ophelia = GAME().ophelia;
-		return ophelia.IsAtLocation();
-	}, true,
-	null,
-	function() {
-		Scenes.Ophelia.LabApproach();
-	}
-));
-
-
 BurrowsScenes.FirstApproach = function() {
 	let party = GAME().party;
-	var parse = {};
+	var parse : any = {};
 		
 	if(party.Two())
 		parse["comp"] = " and " + party.Get(1).name;
@@ -424,7 +60,7 @@ BurrowsScenes.FirstApproach = function() {
 			Text.Flush();
 			
 			Gui.NextPrompt(function() {
-				MoveToLocation(world.loc.Plains.Crossroads, {minute: 30});
+				MoveToLocation(WORLD().loc.Plains.Crossroads, {minute: 30});
 			})
 		}, enabled : true,
 		tooltip : "Go back where you came from."
@@ -438,7 +74,7 @@ BurrowsScenes.FirstApproach = function() {
 			Text.NL();
 			
 			// Create a new alpha
-			var alpha = new LagomorphAlpha();
+			var alpha : any = new LagomorphAlpha();
 			parse["m1HeShe"]  = function() { return alpha.HeShe(); };
 			parse["m1heshe"]  = function() { return alpha.heshe(); };
 			parse["m1HisHer"] = function() { return alpha.HisHer(); };
@@ -473,11 +109,11 @@ BurrowsScenes.FirstApproach = function() {
 	Gui.SetButtonsFromList(options);
 }
 
-BurrowsScenes.Arrival = function(alpha) {
+BurrowsScenes.Arrival = function(alpha : any) {
 	let player = GAME().player;
 	let party = GAME().party;
 	let burrows = GAME().burrows;
-	var parse = {
+	var parse : any = {
 		skinDesc   : function() { return player.SkinDesc(); },
 		p1name     : function() { return party.Get(1).name; },
 		m1HeShe    : function() { return alpha.HeShe(); },
@@ -496,7 +132,7 @@ BurrowsScenes.Arrival = function(alpha) {
 	
 	party.location = BurrowsLoc.Pit;
 	
-	burrows.flags["Access"] = Burrows.AccessFlags.Visited;
+	burrows.flags["Access"] = BurrowsFlags.AccessFlags.Visited;
 	
 	BurrowsScenes.ArrivalTime = WorldTime().hour;
 	
@@ -550,7 +186,7 @@ BurrowsScenes.Arrival = function(alpha) {
 
 BurrowsScenes.ArrivalOphelia = function() {
 	let player = GAME().player;
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -577,7 +213,9 @@ BurrowsScenes.ArrivalOphelia = function() {
 BurrowsScenes.ArrivalOpheliaTalk = function() {
 	let player = GAME().player;
 	let party = GAME().party;
-	var parse = {
+    let rosalin = GAME().rosalin;
+    
+	var parse : any = {
 		playername : player.name
 	};
 	if(party.Two())
@@ -741,7 +379,7 @@ BurrowsScenes.ArrivalOpheliaTalk = function() {
 
 BurrowsScenes.ArrivalLagon = function() {
 	let player = GAME().player;
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		heshe      : player.mfFem("he", "she")
 	};
@@ -786,7 +424,7 @@ BurrowsScenes.ArrivalLagon = function() {
 BurrowsScenes.ArrivalLagonTalk = function() {
 	let party = GAME().party;
 	let lagon = GAME().lagon;
-	var parse = {
+	var parse : any = {
 		
 	};
 	if(party.Two())
@@ -862,35 +500,270 @@ BurrowsScenes.ArrivalLagonTalk = function() {
 	Gui.SetButtonsFromList(options);
 }
 
-Burrows.prototype.GenerateLagomorph = function(gender) {
-	if(gender == null) {
-		var scenes = new EncounterTable();
-		scenes.AddEnc(function() {
-			gender = Gender.male;
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
-			gender = Gender.female;
-		}, 1.0, function() { return true; });
-		scenes.Get();
-	}
+
+//
+// Burrows entrance
+//
+BurrowsLoc.Entrance.description = function() {
+	let burrows = GAME().burrows;
+	var parse : any = {
+		TreeFar : WORLD().TreeFarDesc(),
+		l : burrows.LagonDefeated() ? "the lagomorph" : "Lagon’s"
+	};
 	
-	return new Lagomorph(gender);
+	Text.Add("Just beyond lies the dark tunnel that leads down into [l] lair. It looks innocent enough on the outside, with a few bunny-morphs hopping around and frolicking aimlessly, but you know very well what lies underground.", parse);
+	Text.NL();
+	Text.Add("The burrows are located in a group of low hills on the plains, still quite a ways from the forest. [TreeFar]", parse);
+	Text.NL();
+	var scenes = new EncounterTable();
+	scenes.AddEnc(function() {
+		Text.Add("There is a curious group of rabbits gathered a short distance from the main tunnel. They are carrying what looks like makeshift farming tools, poking at a patch of ground haphazardly. It looks like they are trying to plant carrots.", parse);
+		if(WorldTime().season == Season.Winter) {
+			Text.NL();
+			Text.Add("You consider telling them that the snow will probably complicate things, but they seem to be having fun.", parse);
+		}
+		Text.NL();
+	}, 1.0, function() { return burrows.BrainyActive(); });
+	scenes.AddEnc(function() {
+		Text.Add("You see a strange structure being put together close by. A pile of scrap material is being stacked in the rough semblance of a house, but with barely enough room for a person to fit in. A short female lagomorph seems to be directing a small workforce in the assembly, gesturing insistently. Nodding to herself, she waves the others off and crawls inside the rickety hovel, smiling triumphantly at this defiance of the elements.", parse);
+		Text.NL();
+		Text.Add("The elements in question have something else to say about the matter though; a slight breeze causes the structure to wobble unsteadily before it slowly collapses in on itself, trapping the squealing architect beneath the rubble. Her fellow construction workers mill around uncertainly, apparently unsure if they should be helping her, before pulling away some of the material, freeing her head. She seems to be largely unharmed, although trapped in place.", parse);
+		Text.NL();
+		Text.Add("At her insistent pleading, most of the rubble covering the lagomorph is removed, but a particularly heavy crossbeam is pinning her midsection to the ground. The others make a few half-hearted attempts to pull it aside, but failing that, they shrug and make the best of the situation. Ignoring her muffled protests, three of the male workers set to filling her front and back, quickly reducing the enterprising architect to a moaning slut.", parse);
+		Text.NL();
+	}, 1.0, function() { return burrows.BrainyActive(); });
+	scenes.AddEnc(function() {
+		Text.Add("A group of female lagomorphs are flocking around a bulging brute of a rabbit, at least twice as tall as the regular creatures. He looks almost as wide as he is tall, rippling with muscles, and from the delighted 'oohs' and 'aahs' of the crowd, he is likely sporting quite the third leg. The hulking rabbit is wearing a huge grin and not much else, flexing pompously for his admirers.", parse);
+		Text.NL();
+	}, 1.0, function() { return burrows.BruteActive(); });
+	scenes.AddEnc(function() {
+		Text.Add("There is a small crowd of rabbits gathered close by, hooting and cheering. The focus of their attention is a trio of lagomorphs, panting and grinding against each other. You judge them to be female at first due to their breasts, but all three seems to be sporting rather respectable dicks. One is on her back, cock flopping around freely as she is railed by one of her moaning companions. She, in turn, is getting a good fucking from the third hermaphrodite.", parse);
+		Text.NL();
+	}, 1.0, function() { return burrows.HermActive(); });
+	
+	scenes.Get();
+}
+
+BurrowsLoc.Entrance.links.push(new Link(
+	"Plains", true, true,
+	null,
+	function() {
+		MoveToLocation(WORLD().loc.Plains.Crossroads, {minute: 30});
+	}
+));
+BurrowsLoc.Entrance.links.push(new Link(
+	"Inside", true, true,
+	null,
+	function() {
+		let burrows = GAME().burrows;
+		if(!burrows.LagonDefeated() && burrows.LagonChallenged())
+            LagonScenes.ReturnToBurrowsAfterFight();
+		else if(!burrows.LagonDefeated() && burrows.flags["Access"] == BurrowsFlags.AccessFlags.Stage5)
+            LagonScenes.ReturnToBurrowsAfterScepter();
+		else
+			MoveToLocation(BurrowsLoc.Tunnels, {minute: 10});
+	}
+));
+
+
+BurrowsLoc.Entrance.onEntry = function() {
+	if(GAME().burrows.flags["Access"] == BurrowsFlags.AccessFlags.KnownNotVisited) {
+		BurrowsScenes.FirstApproach();
+	}
+	else
+		Gui.PrintDefaultOptions();
 }
 
 
-Burrows.prototype.GenerateLagomorphAlpha = function(gender) {
-	if(gender == null) {
-		var scenes = new EncounterTable();
-		scenes.AddEnc(function() {
-			gender = Gender.male;
-		}, 3.0, function() { return true; });
-		scenes.AddEnc(function() {
-			gender = Gender.female;
-		}, 2.0, function() { return true; });
-		scenes.Get();
-	}
-	
-	return new LagomorphAlpha(gender);
+//
+// Tunnels
+//
+BurrowsLoc.Tunnels.description = function() {
+	Text.Add("The burrows are a confusing maze of tunnels criss-crossing through the hillside. There is no real way to navigate in the faintly lit darkness of the lagomorph stronghold, so moving around is a bit of guesswork. Still, you think you could find your way around, given some time. Echoes of the giant orgy in the Pit can be heard even here; finding that place will at least be easy.");
+	Text.NL();
 }
 
-export { Burrows, BurrowsLoc, BurrowsScenes };
+BurrowsLoc.Tunnels.links.push(new Link(
+	"Outside", true, true,
+	null,
+	function() {
+		MoveToLocation(BurrowsLoc.Entrance, {minute: 10});
+	}
+));
+
+BurrowsLoc.Tunnels.links.push(new Link(
+	"Throne", true, true,
+	null,
+	function() {
+		MoveToLocation(BurrowsLoc.Throne, {minute: 10});
+	}
+));
+
+BurrowsLoc.Tunnels.links.push(new Link(
+	"The Pit", true, true,
+	null,
+	function() {
+		MoveToLocation(BurrowsLoc.Pit, {minute: 10});
+	}
+));
+
+BurrowsLoc.Tunnels.links.push(new Link(
+	"Lab", true, true,
+	null,
+	function() {
+		MoveToLocation(BurrowsLoc.Lab, {minute: 10});
+	}
+));
+
+
+BurrowsLoc.Tunnels.enc = new EncounterTable();
+//TODO add encounters
+
+//
+// Burrows throne room
+//
+BurrowsLoc.Throne.description = function() {
+	let burrows = GAME().burrows;
+	var parse : any = {
+		Lagon : burrows.VenaRestored() ? "Vena" : "Lagon"
+	};
+	
+	Text.Add("[Lagon]’s throne room is where the bunnies have gathered all the riches that they’ve scavenged from around the land. Due to their non-conventional measure of value, it’s an odd collection to say the least. There’s mounds of coins, jewels and gear of various kinds, to be sure, but also various oddments like wheelbarrows and iron pots - not exactly your usual treasures.", parse);
+	Text.NL();
+	if(burrows.VenaRestored())
+		Text.Add("The lagomorph matriarch is busy dealing with the everyday ruling of her little kingdom, and often sends out messengers to tend to various tasks. She still has a long way to go before her vision of the colony is realized. Progress is halted now and again when her pent up lust forces her to call some of her harem to aid her. Old habits die hard.", parse);
+	else if(burrows.LagonDefeated())
+		Text.Add("After Lagon’s defeat at your hands, the throne stands empty, waiting for a new ruler of the lagomorphs.", parse);
+	else
+		Text.Add("The lagomorph king himself rests on his seat, a bored look on his face as he oversees the matters of his kingdom - punishes those that need punishing, fucks those that need fucking. His personal harem is close at hand, attentive to his whims.", parse);
+	Text.NL();
+	if(burrows.LagonDefeated()) {
+		if(burrows.LagonChained())
+			Text.Add("The former king is locked away nearby in his cell, away from the bustle of the everyday activities of running the lagomorph realm.", parse);
+		else if(burrows.LagonPit())
+			Text.Add("The former king is probably where he usually is; in the depths of the Pit getting his every hole fucked by the endless mob of rabbits. From what you’ve gathered, he doesn’t seem to want to leave, even if he’s free to.", parse);
+	}
+}
+
+BurrowsLoc.Throne.links.push(new Link(
+	"Tunnels", true, true,
+	null,
+	function() {
+		MoveToLocation(BurrowsLoc.Tunnels, {minute: 10});
+	}
+));
+
+BurrowsLoc.Throne.events.push(new Link(
+	"Vena", function() {
+		let burrows = GAME().burrows;
+		return burrows.VenaRestored();
+	}, true,
+	null,
+	function() {
+		VenaScenes.Restored.Approach();
+	}
+));
+
+BurrowsLoc.Throne.events.push(new Link(
+	"Lagon", function() {
+		let lagon = GAME().lagon;
+		return lagon.IsAtLocation();
+	}, true,
+	null,
+	function() {
+		let burrows = GAME().burrows;
+		let lagon = GAME().lagon;
+		if(burrows.LagonAlly() && !(lagon.flags["Talk"] & LagonFlags.Talk.AlliedFirst)) {
+            LagonScenes.AlliedFirst();
+        }
+		else if(burrows.LagonJudged()) {
+            LagonScenes.Defeated.RoomApproach();
+        }
+        else {
+            LagonScenes.InteractRuler();
+        }
+	}
+));
+
+
+//
+// Burrows Pit
+//
+BurrowsLoc.Pit.description = function() {
+	let player = GAME().player;
+	let burrows = GAME().burrows;
+	var parse : any = {
+		Lagon : burrows.VenaRestored() ? "Vena" : "Lagon"
+	};
+	
+	Text.Add("The Pit is probably the largest cavern in the lagomorph colony, a massive breeding chamber filled with the never-ending grunts and moans of the giant orgy. Several hundred rabbits have joined in the party, with those too tired to go on continually being replaced by new arrivals. The floor tilts toward the center of the chamber, the narrow open pathways sticky with cum.", parse);
+	Text.NL();
+	if(burrows.LagonPit()) {
+		if(WorldTime().hour >= 2 && WorldTime().hour < 6)
+			Text.Add("At the bottom of the pit, the former king of the lagomorphs is sleeping deeply, exhausted from perpetual sex. A dozen or so of his children are curled up against him, sharing the heat of their bodies with their father.", parse);
+		else
+			Text.Add("At the very bottom of the pit, in a knee-deep pool of sexual fluids, Lagon the former rabbit king is getting pounded by several of his willing breeders, not unlike how Vena once was.", parse);
+	}
+	else if(burrows.VenaRestored())
+		Text.Add("The orgy still continues in Vena’s absence, though it’s just not the same without her.", parse);
+	else {
+		if(WorldTime().hour >= 2 && WorldTime().hour < 6)
+			Text.Add("At the bottom of the pit, Vena is sleeping deeply, heavy with child. A dozen or so of her children are curled up against her, sharing the heat of their bodies with her.", parse);
+		else
+			Text.Add("At the very bottom of the pit, in a knee-deep pool of sexual fluids, Vena the rabbit matriarch is getting pounded by several of her willing breeders.", parse);
+	}
+	Text.NL();
+	parse["e"] = player.HasNightvision() ? ", and even with your good night vision, you can only just make out the other side of the immense room" : ", but it’s much too dark to see the other end";
+	Text.Add("The cavern is dimly lit by the same strange pots placed in many of the tunnels[e]. Several tunnels lead out from the chamber, bustling with activity as exhausted rabbits hobble away to rest, and diligent youths bring platters of food for the participants. The raw smell of sex permeates the air like incense, making you light-headed.", parse);
+	Text.NL();
+}
+
+BurrowsLoc.Pit.links.push(new Link(
+	"Tunnels", true, true,
+	null,
+	function() {
+		MoveToLocation(BurrowsLoc.Tunnels, {minute: 10});
+	}
+));
+
+BurrowsLoc.Pit.events.push(new Link(
+	"Vena", function() {
+		let burrows = GAME().burrows;
+		return !burrows.VenaRestored();
+	}, true,
+	null,
+	function() {
+		VenaScenes.PitApproach();
+	}
+));
+
+//
+// Burrows Lab
+//
+BurrowsLoc.Lab.description = function() {
+	OpheliaScenes.LabDesc();
+}
+
+
+BurrowsLoc.Lab.SaveSpot = "Burrows";
+BurrowsLoc.Lab.safe = function() { return true; };
+BurrowsLoc.Lab.links.push(new Link(
+	"Tunnels", true, true,
+	null,
+	function() {
+		MoveToLocation(BurrowsLoc.Tunnels, {minute: 10});
+	}
+));
+
+BurrowsLoc.Lab.events.push(new Link(
+	"Ophelia", function() {
+		let ophelia = GAME().ophelia;
+		return ophelia.IsAtLocation();
+	}, true,
+	null,
+	function() {
+		OpheliaScenes.LabApproach();
+	}
+));
+
+export { BurrowsLoc, BurrowsScenes };

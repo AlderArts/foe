@@ -22,6 +22,7 @@ import { QuestItems } from '../items/quest';
 import { Burrows } from './burrows';
 import { AquiliusScenes } from '../event/outlaws/aquilius';
 import { AscheScenes } from '../event/asche';
+import { BurrowsFlags } from './burrows-flags';
 
 // Create namespace
 let ForestLoc = {
@@ -211,7 +212,7 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 		party.Inv().AddItem(QuestItems.GolHusk);
 		
 		if(party.Inv().QueryNum(QuestItems.GolHusk) >= 3) {
-			burrows.flags["HermTrait"] = Burrows.TraitFlags.Gathered;
+			burrows.flags["HermTrait"] = BurrowsFlags.TraitFlags.Gathered;
 			Text.NL();
 			Text.Add("You think you've gathered enough of these for now, you should return them to Ophelia.", parse);
 		}
@@ -223,7 +224,7 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 	};
 }, 4.0, function() {
 	let burrows = GAME().burrows;
-	return burrows.Access() && burrows.flags["HermTrait"] == Burrows.TraitFlags.Inactive;
+	return burrows.Access() && burrows.flags["HermTrait"] == BurrowsFlags.TraitFlags.Inactive;
 });
 
 

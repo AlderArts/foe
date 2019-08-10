@@ -17,6 +17,7 @@ import { Party } from '../../party';
 import { Footman } from '../../enemy/knight';
 import { Race } from '../../body/race';
 import { OutlawsFlags } from './outlaws-flags';
+import { BurrowsFlags } from '../../loc/burrows-flags';
 
 let BullTowerScenes = {};
 
@@ -1335,7 +1336,7 @@ BullTowerLoc.Building.Cell.onEntry = function() {
 					Text.Add("<i>“Hello, my lovelies,”</i> he says in a little sing-song voice, turning to face you, his eyes bloodshot, a cheeky grin plastered onto his face. You note that the same green slime that was on Alaric and the whip is also plastered all over his exposed lower half, beads of pre dripping from his veined, throbbing dick. An aphrodisiac? The slime has seeped into the top of the Royal Guard uniform he has on, so you have little doubt that whatever the effects of this stuff, he’s gotten a strong dose of it, and his unfocused gaze only serves to confirm your suspicions. <i>“Come to share in my private stash of Gol venom? Preston told me to expect trouble on the road tonight, but I wasn’t expecting furbag scum to come straight to my doorstep[h]! Never mind, though, I’ve enough venom for everyone, even if it did cost me a pretty penny! Seems like I’ll have to whip the guards for letting you in here, though. They’re all very naughty boys, like our friend here.”</i> He cracks the whip in Alaric’s direction.", parse);
 					Text.NL();
 					
-					parse["g"] = burrows.flags["Access"] < Burrows.AccessFlags.Stage5 ? ", from what you've heard" : "";
+					parse["g"] = burrows.flags["Access"] < BurrowsFlags.AccessFlags.Stage5 ? ", from what you've heard" : "";
 					Text.Add("Gol venom. Yes[g], that would certainly intoxicate - and arouse - the bastard into the crazed state he’s currently in.", parse);
 					Text.NL();
 					Text.Add("Cveta looks unimpressed. <i>“You filthy degenerate. How does even a man like Preston stand having you around?”</i>", parse);

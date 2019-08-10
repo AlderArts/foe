@@ -7,9 +7,9 @@ import { LakeLoc } from './loc/lake';
 import { OutlawsLoc, InitOutlaws } from './loc/outlaws';
 import { ForestLoc } from './loc/forest';
 import { DragonDenLoc } from './loc/dragonden';
-import { FarmLoc, InitFarm } from './loc/farm';
+import { FarmLoc, InitFarm } from './loc/farm-scenes';
 import { DesertLoc } from './loc/desert';
-import { BurrowsLoc, InitBurrows } from './loc/burrows';
+import { BurrowsLoc, InitBurrows } from './loc/burrows-scenes';
 import { TreeCityLoc } from './loc/treecity/treecity';
 import { RigardLoc, InitRigard } from './loc/rigard/rigard';
 import { Scenes } from './scenes';
@@ -69,7 +69,7 @@ export function InitWorld() {
 	InitOutlaws();
 	InitRigard(world, Scenes);
 	InitFarm();
-	InitBurrows(world);
+	InitBurrows();
 	InitGlade();
 	
 	InitMiranda(world);

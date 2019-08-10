@@ -20,6 +20,8 @@ import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { BodyPartType } from '../../body/bodypart';
 import { VenaFlags } from './vena-flags';
+import { BurrowsFlags } from '../../loc/burrows-flags';
+import { OpheliaFlags } from './ophelia-flags';
 
 let OpheliaScenes = {};
 
@@ -38,8 +40,8 @@ function Ophelia(storage) {
 	this.body.SetBodyColor(Color.white);
 	this.body.SetEyeColor(Color.blue);
 	
-	this.flags["Met"]  = 0; // note, bitmask Ophelia.Met
-	this.flags["Talk"] = 0; // note, bitmask Ophelia.Talk
+	this.flags["Met"]  = 0; // note, bitmask OpheliaFlags.Met
+	this.flags["Talk"] = 0; // note, bitmask OpheliaFlags.Talk
 	this.flags["rotRExp"] = 0;
 	this.flags["rotRSex"] = 0;
 	this.burrowsCountdown = new Time();
@@ -48,19 +50,6 @@ function Ophelia(storage) {
 }
 Ophelia.prototype = new Entity();
 Ophelia.prototype.constructor = Ophelia;
-
-Ophelia.Met = {
-	Recruited : 1,
-	Broken    : 2,
-	InParty   : 4
-};
-
-Ophelia.Talk = {
-	Herself : 1,
-	Sex     : 2,
-	Vena    : 4,
-	Roa     : 8
-};
 
 Ophelia.prototype.FromStorage = function(storage) {
 	this.LoadPersonalityStats(storage);
@@ -87,14 +76,14 @@ Ophelia.prototype.Update = function(step) {
 }
 
 Ophelia.prototype.Recruited = function() {
-	return this.flags["Met"] & Ophelia.Met.Recruited;
+	return this.flags["Met"] & OpheliaFlags.Met.Recruited;
 }
 Ophelia.prototype.Broken = function() {
-	return this.flags["Met"] & Ophelia.Met.Broken;
+	return this.flags["Met"] & OpheliaFlags.Met.Broken;
 }
 //TODO account for Roa
 Ophelia.prototype.InParty = function() {
-	return this.flags["Met"] & Ophelia.Met.InParty;
+	return this.flags["Met"] & OpheliaFlags.Met.InParty;
 }
 Ophelia.prototype.InPartyAndBroken = function() {
 	return this.Broken() && this.InParty();
@@ -254,7 +243,7 @@ OpheliaScenes.TraitPrompt = function(options) {
 		
 	};
 	
-	if(burrows.flags["BruteTrait"] == Burrows.TraitFlags.Inactive) {
+	if(burrows.flags["BruteTrait"] == BurrowsFlags.TraitFlags.Inactive) {
 		options.push({ nameStr : "Cactoid",
 			func : function() {
 				Text.Clear();
@@ -267,7 +256,7 @@ OpheliaScenes.TraitPrompt = function(options) {
 			tooltip : "Ask Ophelia about the cactoids."
 		});
 	}
-	else if(burrows.flags["BruteTrait"] == Burrows.TraitFlags.Gathered) {
+	else if(burrows.flags["BruteTrait"] == BurrowsFlags.TraitFlags.Gathered) {
 		options.push({ nameStr : "Cactoid",
 			func : OpheliaScenes.DeliverCactoids, enabled : true,
 			tooltip : "Deliver the cactoids."
@@ -286,7 +275,7 @@ OpheliaScenes.TraitPrompt = function(options) {
 			tooltip : "Ask Ophelia about the brawny trait."
 		});
 	}
-	if(burrows.flags["HermTrait"] == Burrows.TraitFlags.Inactive) {
+	if(burrows.flags["HermTrait"] == BurrowsFlags.TraitFlags.Inactive) {
 		options.push({ nameStr : "Gol husk",
 			func : function() {
 				Text.Clear();
@@ -299,7 +288,7 @@ OpheliaScenes.TraitPrompt = function(options) {
 			tooltip : "Ask Ophelia about the Gol husks."
 		});
 	}
-	else if(burrows.flags["HermTrait"] == Burrows.TraitFlags.Gathered) {
+	else if(burrows.flags["HermTrait"] == BurrowsFlags.TraitFlags.Gathered) {
 		options.push({ nameStr : "Gol husk",
 			func : OpheliaScenes.DeliverGolHusks, enabled : true,
 			tooltip : "Deliver the Gol husks."
@@ -318,7 +307,7 @@ OpheliaScenes.TraitPrompt = function(options) {
 			tooltip : "Ask Ophelia about the herm trait."
 		});
 	}
-	if(burrows.flags["BrainyTrait"] == Burrows.TraitFlags.Inactive) {
+	if(burrows.flags["BrainyTrait"] == BurrowsFlags.TraitFlags.Inactive) {
 		options.push({ nameStr : "Algae",
 			func : function() {
 				Text.Clear();
@@ -331,7 +320,7 @@ OpheliaScenes.TraitPrompt = function(options) {
 			tooltip : "Ask Ophelia about the red algae."
 		});
 	}
-	else if(burrows.flags["BrainyTrait"] == Burrows.TraitFlags.Gathered) {
+	else if(burrows.flags["BrainyTrait"] == BurrowsFlags.TraitFlags.Gathered) {
 		options.push({ nameStr : "Algae",
 			func : OpheliaScenes.DeliverAlgae, enabled : true,
 			tooltip : "Deliver the red algae."
@@ -364,7 +353,7 @@ OpheliaScenes.TalkPrompt = function() {
 	options.push({ nameStr : "Herself",
 		func : function() {
 			Text.Clear();
-			if(ophelia.flags["Talk"] & Ophelia.Talk.Herself) {
+			if(ophelia.flags["Talk"] & OpheliaFlags.Talk.Herself) {
 				Text.Add("<i>“Again?”</i>", parse);
 				Text.NL();
 				Text.Add("Yes, please, you’d like to hear it again.", parse);
@@ -428,7 +417,7 @@ OpheliaScenes.TalkPrompt = function() {
 			
 			ophelia.relation.IncreaseStat(20, 1);
 			
-			ophelia.flags["Talk"] |= Ophelia.Talk.Herself;
+			ophelia.flags["Talk"] |= OpheliaFlags.Talk.Herself;
 			
 			OpheliaScenes.TalkPrompt();
 		}, enabled : true,
@@ -473,7 +462,7 @@ OpheliaScenes.TalkPrompt = function() {
 	options.push({ nameStr : "Sex",
 		func : function() {
 			Text.Clear();
-			if(ophelia.flags["Talk"] & Ophelia.Talk.Sex) {
+			if(ophelia.flags["Talk"] & OpheliaFlags.Talk.Sex) {
 				Text.Add("<i>“I love sex. You should know. You’ve had me.”</i>", parse);
 				Text.NL();
 				Text.Add("You smile at her and apologize. You simply thought it would be a nice little icebreaker; a girl like her deserves a little more finesse than just ‘hey, wanna fuck?’", parse);
@@ -522,7 +511,7 @@ OpheliaScenes.TalkPrompt = function() {
 				OpheliaScenes.TalkVena();
 			}
 			else {
-				if(burrows.flags["Access"] >= Burrows.AccessFlags.Stage3) {
+				if(burrows.flags["Access"] >= BurrowsFlags.AccessFlags.Stage3) {
 					Text.Add("<i>“Speaking of which, have you had any luck tracking down the scepter?”</i>", parse);
 					Text.Flush();
 					
@@ -672,12 +661,12 @@ OpheliaScenes.TalkPrompt = function() {
 		tooltip : "Can she tell you anything about her father?"
 	});
 	
-	if(burrows.flags["Access"] >= Burrows.AccessFlags.Stage3) {
+	if(burrows.flags["Access"] >= BurrowsFlags.AccessFlags.Stage3) {
 		options.push({ nameStr : "Roa",
 			func : function() {
 				OpheliaScenes.TalkRoa();
 			}, enabled : true,
-			tooltip : burrows.flags["Access"] >= Burrows.AccessFlags.Stage4 ? "Talk to Ophelia about Roa." : "Ask Ophelia for clues on Roa’s whereabouts."
+			tooltip : burrows.flags["Access"] >= BurrowsFlags.AccessFlags.Stage4 ? "Talk to Ophelia about Roa." : "Ask Ophelia for clues on Roa’s whereabouts."
 		});
 	}
 	Gui.SetButtonsFromList(options, true, OpheliaScenes.LabPrompt);
@@ -693,7 +682,7 @@ OpheliaScenes.TalkRoa = function() {
 	};
 	
 	Text.Clear();
-	if(burrows.flags["Access"] < Burrows.AccessFlags.Stage4) {
+	if(burrows.flags["Access"] < BurrowsFlags.AccessFlags.Stage4) {
 		Text.Add("<i>“My little brother is not a well-versed adventurer like you. I fear he may have fallen prey to some horrible monster, perhaps a bloodthirsty fox, or even a ferret...”</i> The alchemist shudders. <i>“If he made it, he is hiding somewhere that my father’s soldiers cannot enter, like the big city or the deep forest.”</i>", parse);
 		Text.NL();
 		Text.Add("<i>“I wonder where he is… He could never stand being away from the breeding pit for long. I hope that he has found some nice friends to breed with.”</i> She sighs dejectedly.", parse);
@@ -703,8 +692,8 @@ OpheliaScenes.TalkRoa = function() {
 		OpheliaScenes.TalkPrompt();
 	}
 	else {
-		var first = !(ophelia.flags["Talk"] & Ophelia.Talk.Roa);
-		ophelia.flags["Talk"] |= Ophelia.Talk.Roa;
+		var first = !(ophelia.flags["Talk"] & OpheliaFlags.Talk.Roa);
+		ophelia.flags["Talk"] |= OpheliaFlags.Talk.Roa;
 		if(first) {
 			Text.Add("<i>“You’ve found my brother? It’s great to know he’s safe. Tell me, how is he?”</i> she asks enthusiastically, grasping your arm.", parse);
 			Text.NL();
@@ -934,7 +923,7 @@ OpheliaScenes.TalkRoa = function() {
 						Text.NL();
 						Text.Add("...You have, you confirm.", parse);
 						Text.NL();
-						if(ophelia.flags["Talk"] & Ophelia.Talk.Sex) {
+						if(ophelia.flags["Talk"] & OpheliaFlags.Talk.Sex) {
 							if(player.sexlevel > 3)
 								Text.Add("<i>“I’m sure he was as satisfied as I was,”</i> Ophelia nods to herself confidently.", parse);
 							else
@@ -1013,7 +1002,7 @@ OpheliaScenes.TalkVena = function() {
 	else {
 		Text.Add("She takes a deep breath and visibly steels herself. <i>“That day… it was all my fault.”</i>", parse);
 		Text.NL();
-		if(ophelia.flags["Talk"] & Ophelia.Talk.Vena) {
+		if(ophelia.flags["Talk"] & OpheliaFlags.Talk.Vena) {
 			Text.Add("You place a comforting hand on Ophelia’s shoulder. It wasn’t her fault, you assure her. She created the potion, yes, but Lagon was the one who tricked Vena into taking it. Lagon is to blame here, not Ophelia.", parse);
 			Text.NL();
 			Text.Add("<i>“Thank you for saying that, [playername], but I still feel guilty all the same...”</i>", parse);
@@ -1053,7 +1042,7 @@ OpheliaScenes.TalkVena = function() {
 			Text.Add("You pet her head and smile, assuring her that you don’t mind. Now, why don’t the two of you talk about something else?", parse);
 			ophelia.relation.IncreaseStat(100, 3);
 		}
-		ophelia.flags["Talk"] |= Ophelia.Talk.Vena;
+		ophelia.flags["Talk"] |= OpheliaFlags.Talk.Vena;
 	}
 	Text.Flush();
 	OpheliaScenes.TalkPrompt();
@@ -1072,7 +1061,7 @@ OpheliaScenes.SexEntryPoint = function() {
 	if(player.FirstCock()) {
 		options.push({ nameStr : "Vaginal",
 			func : function() {
-				ophelia.flags["Talk"] |= Ophelia.Talk.Sex;
+				ophelia.flags["Talk"] |= OpheliaFlags.Talk.Sex;
 				OpheliaScenes.SexVaginal();
 			}, enabled : true,
 			tooltip : "Well, if she wants to research, the traditional way is always the best."
@@ -1081,7 +1070,7 @@ OpheliaScenes.SexEntryPoint = function() {
 	/* TODO
 	options.push({ nameStr : "name",
 		func : function() {
-			ophelia.flags["Talk"] |= Ophelia.Talk.Sex;
+			ophelia.flags["Talk"] |= OpheliaFlags.Talk.Sex;
 			Text.Clear();
 			Text.Add("", parse);
 			Text.NL();
@@ -1439,7 +1428,7 @@ OpheliaScenes.LabPrompt = function() {
 	options.push({ nameStr : "Sex",
 		func : function() {
 			Text.Clear();
-			var first = !(ophelia.flags["Talk"] & Ophelia.Talk.Sex);
+			var first = !(ophelia.flags["Talk"] & OpheliaFlags.Talk.Sex);
 			if(first) {
 				Text.Add("The lapin alchemist looks you over for a moment, then breaks into a soft smile. <i>“Okay, I’ll admit I haven’t had any experience with outsiders. I’m curious about how you’d perform...”</i> she trails off tapping her chin in thought.", parse);
 				Text.NL();
@@ -1462,7 +1451,7 @@ OpheliaScenes.LabPrompt = function() {
 		}, enabled : true,
 		tooltip : "Ask if Ophelia’s interested in have sex with you."
 	});
-	if(burrows.flags["Access"] < Burrows.AccessFlags.QuestlineComplete && party.Inv().QueryNum(Items.Quest.Scepter))
+	if(burrows.flags["Access"] < BurrowsFlags.AccessFlags.QuestlineComplete && party.Inv().QueryNum(Items.Quest.Scepter))
 	options.push({ nameStr : "Scepter",
 		func : function() {
 			OpheliaScenes.TurnInScepter();
@@ -1579,7 +1568,7 @@ OpheliaScenes.PotionsPrompt = function() {
 				Text.Add("The rabbit is panting with need, and eagerly obeys, begging for her restraints to be undone so she can throw herself at the magnificent horsecock. Ophelia circles the girl, pulling her long tail aside to expose her dripping pussy. The scientist carefully inserts two fingers into the folds of her test subject, followed by two more when she meets no resistance.", parse);
 				Text.NL();
 				Text.Add("<i>“Hey, [playername], have a look at this!”</i> she calls out to you, simultaneously shoving her entire fist inside the bunny-girl. <i>“She can take my entire forearm without even blinking!”</i> Ophelia marvels at the girl’s flexible cunt, <i>“I guess they are meant for each other.”</i> There is a large visible bulge on the lagomorph’s stomach, yet she doesn’t seem to experience any pain or discomfort from the intruding limb, continuing to beg for the tantalizing equine dick just outside her reach. The alchemist pulls out her arm, releasing a waft of musk so heady it feels like a punch in the face. Almost instinctively, she gives the fluid a lick, shaking her head in confusion.", parse);
-				if(burrows.flags["Access"] >= Burrows.AccessFlags.QuestlineComplete)
+				if(burrows.flags["Access"] >= BurrowsFlags.AccessFlags.QuestlineComplete)
 					Text.Add(" Her cock is straining against the fabric of her lab coat, aching to be buried in that sweet honeypot.", parse);
 				Text.NL();
 				Text.Add("The strong secretions reach the male lagomorph-equine hybrid, who groans almost as if in pain, thrashing against his bonds, his cock impossibly stiff and leaking pre like a broken faucet. The rest of the chained test subjects are also stirring, roused and aroused by the strong scents that now permeate the entire lab. Ophelia’s guards pick this moment to step inside to see what all the fuss is about, their jaws dropping in unison as they drink in the scene before them. As one, they jump toward the pair, overcome by their lust.", parse);
@@ -1667,10 +1656,10 @@ OpheliaScenes.DeliverCactoids = function() {
 	
 	TimeStep({hour: 1});
 	
-	burrows.flags["BruteTrait"] = Burrows.TraitFlags.Active;
+	burrows.flags["BruteTrait"] = BurrowsFlags.TraitFlags.Active;
 	
 	Gui.NextPrompt(function() {
-		OpheliaScenes.DeliverFollowup(Burrows.Traits.Brute);
+		OpheliaScenes.DeliverFollowup(BurrowsFlags.Traits.Brute);
 	});
 }
 
@@ -1717,10 +1706,10 @@ OpheliaScenes.DeliverGolHusks = function() {
 
 	TimeStep({hour: 1});
 	
-	burrows.flags["HermTrait"] = Burrows.TraitFlags.Active;
+	burrows.flags["HermTrait"] = BurrowsFlags.TraitFlags.Active;
 	
 	Gui.NextPrompt(function() {
-		OpheliaScenes.DeliverFollowup(Burrows.Traits.Herm);
+		OpheliaScenes.DeliverFollowup(BurrowsFlags.Traits.Herm);
 	});
 }
 
@@ -1755,10 +1744,10 @@ OpheliaScenes.DeliverAlgae = function() {
 	
 	TimeStep({hour: 1});
 	
-	burrows.flags["BrainyTrait"] = Burrows.TraitFlags.Active;
+	burrows.flags["BrainyTrait"] = BurrowsFlags.TraitFlags.Active;
 	
 	Gui.NextPrompt(function() {
-		OpheliaScenes.DeliverFollowup(Burrows.Traits.Brainy);
+		OpheliaScenes.DeliverFollowup(BurrowsFlags.Traits.Brainy);
 	});
 }
 
@@ -1778,8 +1767,8 @@ OpheliaScenes.DeliverFollowup = function(trait) {
 	Text.Add("<i>“Thank you for gathering the ingredients for me,”</i> Ophelia nods, satisfied with the results of her new concoction. She fills a large bottle with the substance, adjusting her glasses and smoothing out her lab coat before turning back to you.", parse);
 	Text.NL();
 	
-	if(burrows.flags["Access"] < Burrows.AccessFlags.Stage1) {
-		burrows.flags["Access"] = Burrows.AccessFlags.Stage1;
+	if(burrows.flags["Access"] < BurrowsFlags.AccessFlags.Stage1) {
+		burrows.flags["Access"] = BurrowsFlags.AccessFlags.Stage1;
 		
 		Text.Add("<i>“We should take this to father right away, I know he’ll love this!”</i> You have your reservations, but you are interested in the payment offered, so you follow behind the excited bunny. Once in the tunnels, the guards silently close in around you, escorting you toward Lagon’s throne room.", parse);
 		Text.NL();
@@ -1813,8 +1802,8 @@ OpheliaScenes.DeliverFollowup = function(trait) {
 		
 		OpheliaScenes.DeliverVena(trait);
 	}
-	else if(burrows.flags["Access"] < Burrows.AccessFlags.Stage2) {
-		burrows.flags["Access"] = Burrows.AccessFlags.Stage2;
+	else if(burrows.flags["Access"] < BurrowsFlags.AccessFlags.Stage2) {
+		burrows.flags["Access"] = BurrowsFlags.AccessFlags.Stage2;
 		
 		Text.Add("Ophelia thoughtfully pours the rest of the brew into a larger flask. She squares her shoulders, looking determined. <i>“Shall we? I have a thing or two I wish to talk with father about.”</i> With that, you set out toward the throne room, guards in tow. For once Lagon isn’t fucking someone, instead merely reclining on his throne, munching on some snacks.", parse);
 		Text.NL();
@@ -1901,8 +1890,8 @@ OpheliaScenes.DeliverFollowup = function(trait) {
 			OpheliaScenes.DeliverVena(trait);
 		});
 	}
-	else if(burrows.flags["Access"] < Burrows.AccessFlags.Stage3) {
-		burrows.flags["Access"] = Burrows.AccessFlags.Stage3;
+	else if(burrows.flags["Access"] < BurrowsFlags.AccessFlags.Stage3) {
+		burrows.flags["Access"] = BurrowsFlags.AccessFlags.Stage3;
 		
 		Text.Add("<i>“Well… let's go see father.”</i> Ophelia looks a little scared, no doubt reluctant since her last encounter with Lagon, but not daring to disobey him. The two of you head toward the throne room, successful test subject and guard troop in tow. The alchemist looks morose, constantly fidgeting and adjusting her glasses nervously.", parse);
 		Text.NL();
@@ -1935,7 +1924,7 @@ OpheliaScenes.DeliverVena = function(trait) {
 	};
 	
 	Text.NL();
-	if(trait == Burrows.Traits.Brute) {
+	if(trait == BurrowsFlags.Traits.Brute) {
 		Text.Add("Just like with the test subject, the effects on Vena are immediate, if not quite as violent. All her limbs grow thicker, longer, filling out with muscle. It looks like she is gaining a good few feet on her already large frame. She looks much more athletic, her features toned but not overly bulging.", parse);
 		Text.NL();
 		if(burrows.HermActive()) {
@@ -1947,10 +1936,10 @@ OpheliaScenes.DeliverVena = function(trait) {
 		Text.Add("<i>“Birth me many strong sons and daughters,”</i> Lagon murmurs.", parse);
 		if(burrows.HermActive())
 			Text.Add(" He is eyeing her immense member almost nervously, perhaps a bit intimidated by her size.", parse);
-		if(burrows.flags["Access"] >= Burrows.AccessFlags.Stage3)
+		if(burrows.flags["Access"] >= BurrowsFlags.AccessFlags.Stage3)
 			Text.Add(" <i>“This is going to be interesting,”</i> Lagon chuckles, grinning maliciously.", parse);
 	}
-	else if(trait == Burrows.Traits.Herm) {
+	else if(trait == BurrowsFlags.Traits.Herm) {
 		Text.Add("<i>“Going to be interesting to see the effects of this one, it should make things… more efficient.”</i> Lagon chuckles as Vena squirms, crossing her legs feebly as unfamiliar feelings race through her body, focusing to a pinpoint on her clit. The matriarch cries out in surprise as the sensitive organ begins to grow rapidly, gaining inch upon inch and thickening significantly. The bulging new shaft is about nine inches when a cumslit forms on the head, squirting thick white fluids into the air.", parse);
 		Text.NL();
 		Text.Add("In the place of her clit stands a girthy rod that would put most men to shame, swollen in the middle and throbbing slightly as thick rivulets of girl-cum ooze down its length, making the mouths of every female in close vicinity water. It is clear that the matriarch is going to have even more rabbits vying for her attentions from now on.", parse);
@@ -1960,15 +1949,15 @@ OpheliaScenes.DeliverVena = function(trait) {
 			Text.NL();
 		}
 		Text.Add("Vena looks almost exhausted, but her erection shows no signs of diminishing.", parse);
-		if(burrows.flags["Access"] >= Burrows.AccessFlags.Stage3)
+		if(burrows.flags["Access"] >= BurrowsFlags.AccessFlags.Stage3)
 			Text.Add(" <i>“Haha, this will be fun!”</i> Lagon gloats, grinning maliciously.", parse);
 	}
-	else if(trait == Burrows.Traits.Brainy) {
+	else if(trait == BurrowsFlags.Traits.Brainy) {
 		Text.Add("Vena’s eyes flutter shut, her hands clutching her head as sparks of intelligence try to break the surface of her shattered mind. For a brief moment, she almost looks lucid, before her eyes are once again clouded by lust.", parse);
 		Text.NL();
 		Text.Add("<i>“Are you really too far gone, mother?”</i> Ophelia murmurs sadly, crestfallen to see how little effect even such a powerful dose had. Lagon just shrugs, more concerned with what effect the drug will have on her children than on the woman herself.", parse);
 		
-		if(burrows.flags["Access"] >= Burrows.AccessFlags.Stage3) {
+		if(burrows.flags["Access"] >= BurrowsFlags.AccessFlags.Stage3) {
 			Text.NL();
 			Text.Add("Vena shudders as a wave of arousal courses through her body, triggered by her new mutations. In no time, her immense cock is at full mast, eager to bury itself in some needy cunt.", parse);
 			Text.NL();
@@ -1995,7 +1984,7 @@ OpheliaScenes.Reward = function() {
 	OpheliaScenes.rewardSexFlag = false;
 	
 	Text.Clear();
-	if(burrows.flags["Access"] <= Burrows.AccessFlags.Stage1) {
+	if(burrows.flags["Access"] <= BurrowsFlags.AccessFlags.Stage1) {
 		Text.Add("<i>“And there you have it, the strain will spread,”</i> Lagon announces, looking pleased with himself. <i>“All that is needed now is breeding, but you are good at that, aren’t you Vena?”</i> He pats the broodmother’s swollen belly fondly. For a moment, it looks like he is about to withdraw his hand, but instead his fondling turns more intimate, caressing Vena’s [softToned] fur as his fingers trail toward her crotch.", parse);
 		Text.NL();
 		if(burrows.HermActive()) {
@@ -2031,7 +2020,7 @@ OpheliaScenes.Reward = function() {
 		
 		OpheliaScenes.RewardChoices();
 	}
-	else if(burrows.flags["Access"] <= Burrows.AccessFlags.Stage2) {
+	else if(burrows.flags["Access"] <= BurrowsFlags.AccessFlags.Stage2) {
 		Text.Add("<i>“Very good, my girl,”</i> Lagon encourages Vena, scratching the panting matriarch behind her ear. <i>“Breed me many children, my dear, be a good slut for your master.”</i>", parse);
 		Text.NL();
 		if(burrows.BrainyActive())

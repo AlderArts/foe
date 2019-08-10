@@ -17,6 +17,7 @@ import { RoamingScenes } from '../event/roaming';
 import { LizardsScenes } from '../enemy/lizard';
 import { NagaScenes } from '../enemy/naga';
 import { ScorpionScenes } from '../enemy/scorp';
+import { BurrowsFlags } from './burrows-flags';
 
 // Create namespace
 let DesertLoc = {
@@ -57,7 +58,7 @@ DesertLoc.Drylands.enc.AddEnc(function() {
 		party.Inv().AddItem(QuestItems.Cactoid);
 		
 		if(party.Inv().QueryNum(QuestItems.Cactoid) >= 3) {
-			burrows.flags["BruteTrait"] = Burrows.TraitFlags.Gathered;
+			burrows.flags["BruteTrait"] = BurrowsFlags.TraitFlags.Gathered;
 			Text.NL();
 			Text.Add("You think you've gathered enough of these for now, you should return them to Ophelia.", parse);
 		}
@@ -69,7 +70,7 @@ DesertLoc.Drylands.enc.AddEnc(function() {
 	};
 }, 1.0, function() {
 	let burrows = GAME().burrows;
-	return burrows.Access() && burrows.flags["BruteTrait"] == Burrows.TraitFlags.Inactive;
+	return burrows.Access() && burrows.flags["BruteTrait"] == BurrowsFlags.TraitFlags.Inactive;
 });
 
 DesertLoc.Drylands.links.push(new Link(

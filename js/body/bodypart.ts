@@ -37,12 +37,10 @@ export class BodyPart {
 	}
 }
 
-let BodyPartType = {
-	cock   : 0,
-	vagina : 1,
-	ass    : 2,
-	nipple : 3,
-	mouth  : 4,
+export enum BodyPartType {
+	cock   = 0,
+	vagina = 1,
+	ass    = 2,
+	nipple = 3,
+	mouth  = 4,
 };
-
-export { BodyPartType };

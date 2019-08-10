@@ -21,6 +21,7 @@ import { Text } from '../text';
 import { Party } from '../party';
 import { Encounter } from '../combat';
 import { Abilities } from '../abilities';
+import { BurrowsFlags } from '../loc/burrows-flags';
 
 let GolScenes = {};
 
@@ -988,7 +989,7 @@ GolScenes.CombatAftermath = function(enc) {
 	Text.Add("<b>You’ve acquired Lagon’s scepter.</b>", parse);
 	Text.Flush();
 	
-	burrows.flags["Access"] = Burrows.AccessFlags.Stage5;
+	burrows.flags["Access"] = BurrowsFlags.AccessFlags.Stage5;
 	
 	Gui.NextPrompt();
 }

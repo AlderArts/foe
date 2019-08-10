@@ -12,6 +12,7 @@ import { Text } from '../text';
 import { MomoScenes } from '../event/momo';
 import { Burrows } from './burrows';
 import { QuestItems } from '../items/quest';
+import { BurrowsFlags } from './burrows-flags';
 
 // Create namespace
 let LakeLoc = {
@@ -53,7 +54,7 @@ LakeLoc.Shore.enc.AddEnc(function() {
 		Text.Flush();
 		
 		party.Inv().AddItem(QuestItems.RedAlgae, 3);
-		burrows.flags["BrainyTrait"] = Burrows.TraitFlags.Gathered;
+		burrows.flags["BrainyTrait"] = BurrowsFlags.TraitFlags.Gathered;
 		Text.NL();
 		Text.Add("You think you've gathered enough of these for now, you should return them to Ophelia.", parse);
 		Text.Flush();
@@ -64,7 +65,7 @@ LakeLoc.Shore.enc.AddEnc(function() {
 	};
 }, 1.0, function() {
 	let burrows = GAME().burrows;
-	return burrows.Access() && burrows.flags["BrainyTrait"] == Burrows.TraitFlags.Inactive;
+	return burrows.Access() && burrows.flags["BrainyTrait"] == BurrowsFlags.TraitFlags.Inactive;
 });
 
 export { LakeLoc };

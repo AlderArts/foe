@@ -37,7 +37,7 @@ import { GolScenes } from "./enemy/gol";
 import { FeralWolfScenes } from "./enemy/feralwolf";
 import { FelinesScenes } from "./enemy/feline";
 import { DrakeScenes } from "./enemy/drake";
-import { BurrowsScenes } from "./loc/burrows";
+import { BurrowsScenes } from "./loc/burrows-scenes";
 import { KrawitzScenes } from "./loc/rigard/krawitz";
 import { RigardScenes } from "./loc/rigard/rigard";
 import { BarnabyScenes } from "./loc/rigard/tavern";

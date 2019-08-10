@@ -15,7 +15,7 @@ import { RoamingScenes } from '../event/roaming';
 import { PoetScenes } from '../event/poet';
 import { MomoScenes } from '../event/momo';
 import { GolScenes } from '../enemy/gol';
-import { Burrows } from './burrows';
+import { BurrowsFlags } from './burrows-flags';
 
 // Create namespace
 let KingsRoadLoc = {
@@ -41,7 +41,7 @@ KingsRoadLoc.Road.links.push(new Link(
 ));
 
 KingsRoadLoc.Road.events.push(new Link(
-	"Scepter", function() { return GAME().burrows.flags["Access"] == Burrows.AccessFlags.Stage4; }, true,
+	"Scepter", function() { return GAME().burrows.flags["Access"] == BurrowsFlags.AccessFlags.Stage4; }, true,
 	null,
 	function() {
 		GolScenes.SearchForScepter();

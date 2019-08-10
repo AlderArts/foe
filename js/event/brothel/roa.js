@@ -11,6 +11,7 @@ import { Race } from '../../body/race';
 import { PregnancyHandler } from '../../pregnancy';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
+import { BurrowsFlags } from '../../loc/burrows-flags';
 
 let RoaScenes = {};
 
@@ -316,10 +317,10 @@ RoaScenes.TalkPrompt = function(backPrompt) {
 			tooltip : "" //TODO
 		});
 	}
-	else*/ if(burrows.flags["Access"] >= Burrows.AccessFlags.Stage3 && roa.flags["Lagon"] < Roa.Lagon.Talked) {
+	else*/ if(burrows.flags["Access"] >= BurrowsFlags.AccessFlags.Stage3 && roa.flags["Lagon"] < Roa.Lagon.Talked) {
 		options.push({ nameStr : "Scepter",
 			func : function() {
-				burrows.flags["Access"] = Burrows.AccessFlags.Stage4;
+				burrows.flags["Access"] = BurrowsFlags.AccessFlags.Stage4;
 				roa.flags["Lagon"]      = Roa.Lagon.Talked;
 				rigard.flags["Scepter"] = 1;
 				
@@ -407,7 +408,7 @@ RoaScenes.TalkPrompt = function(backPrompt) {
 				
 				roa.relation.IncreaseStat(50, 10);
 				
-				if(burrows.flags["Access"] >= Burrows.AccessFlags.QuestlineComplete)
+				if(burrows.flags["Access"] >= BurrowsFlags.AccessFlags.QuestlineComplete)
 					RoaScenes.RestoredVenaTalk();
 				else {
 					Text.Add("<i>“I cannot thank you enough.”</i> Roa bows his head humbly. <i>“You have freed my sister, and for that, you have my eternal gratitude.”</i>", parse);
@@ -481,7 +482,7 @@ RoaScenes.First = function() {
 	Text.Add("<i>“My name is Roa. I haven’t been here very long, to be honest. So I’m still adjusting, but I’ll try my best to fulfill any desire you got,”</i> he smiles again.", parse);
 	Text.NL();
 	Text.Add("He certainly has the attitude right; he genuinely sounds enthusiastic about it.", parse);
-	if(burrows.flags["Access"] >= Burrows.AccessFlags.Stage3)
+	if(burrows.flags["Access"] >= BurrowsFlags.AccessFlags.Stage3)
 		Text.Add(" Roa... why does that name sound familiar...?", parse);
 	Text.NL();
 	if(player.FirstCock()) {

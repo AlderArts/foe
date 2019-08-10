@@ -1,11 +1,8 @@
-import { Gwendy } from './gwendy';
 import { Gender } from '../../body/gender';
 import { WorldTime, GAME, WORLD, TimeStep } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { EncounterTable } from '../../encountertable';
-import { Burrows } from '../../loc/burrows';
-import { FarmScenes } from '../../loc/farm-scenes';
 import { IngredientItems } from '../../items/ingredients';
 import { AlchemyItems } from '../../items/alchemy';
 import { ToysItems } from '../../items/toys';
@@ -13,6 +10,9 @@ import { Cock } from '../../body/cock';
 import { Sex } from '../../entity-sex';
 import { Race } from '../../body/race';
 import { LowerBodyType } from '../../entity-desc';
+import { BurrowsFlags } from '../../loc/burrows-flags';
+import { GwendyFlags } from './gwendy-flags';
+import { MarketScenes } from '../../loc/farm-market';
 
 let GwendyScenes : any = {};
 
@@ -160,7 +160,7 @@ GwendyScenes.Talk = function(backfunc : any) {
 			scenes.AddEnc(function() {
 				Text.Add("<i>“D’you know anything about those rabbit people that’ve been showing up lately?”</i> Gwendy asks you. <i>“They come in groups, usually at dusk or dawn when there isn’t anyone on watch. I’ve had to chase them off several times, but they still managed to steal a lot of goods.”</i> The farmer grimaces. <i>“Not to mention they ruin the crops with all their hopping about, the dumb things.”</i>", parse);
 				Text.NL();
-				if(GAME().burrows.flags["Access"] == Burrows.AccessFlags.Unknown) {
+				if(GAME().burrows.flags["Access"] == BurrowsFlags.AccessFlags.Unknown) {
 					Text.Add("You admit that you don’t know much about them, although you think you’ve seen some of them while traveling.", parse);
 					Text.NL();
 					Text.Add("<i>“Nasty critters,”</i> the girl mutters.", parse);
@@ -192,7 +192,7 @@ GwendyScenes.Talk = function(backfunc : any) {
 		tooltip : "Talk about random things."
 	});
 	
-	if(gwendy.flags["Market"] == Gwendy.Market.NotAsked) {
+	if(gwendy.flags["Market"] == GwendyFlags.Market.NotAsked) {
 		options.push({ nameStr : "Rigard",
 			func : function() {
 				Text.Clear();
@@ -200,7 +200,7 @@ GwendyScenes.Talk = function(backfunc : any) {
 				Text.NL();
 				Text.Add("<i>“Just make sure to catch me early, it usually takes most of the day before I finish. Of course, with your help it will hopefully be quicker.”</i>", parse);
 				Text.Flush();
-				gwendy.flags["Market"] = Gwendy.Market.Asked;
+				gwendy.flags["Market"] = GwendyFlags.Market.Asked;
 				
 				Gui.NextPrompt(function() {
 					GwendyScenes.Talk(backfunc);
@@ -209,7 +209,7 @@ GwendyScenes.Talk = function(backfunc : any) {
 			tooltip : "Ask her for a way to get into the city of Rigard."
 		});
 	}
-	else if(gwendy.flags["Market"] == Gwendy.Market.Asked) {
+	else if(gwendy.flags["Market"] == GwendyFlags.Market.Asked) {
 		options.push({ nameStr : "Market",
 			func : function() {
 				Text.Clear();
@@ -248,7 +248,7 @@ GwendyScenes.Talk = function(backfunc : any) {
 				//[Yes][No]
 				var options = new Array();
 				options.push({ nameStr : "Yes",
-					func : FarmScenes.GoToMarketFirst, enabled : true,
+					func : MarketScenes.GoToMarketFirst, enabled : true,
 					tooltip : "Despite all adversities, you still want to go. Besides, if it‘s that bad, she probably needs some company, right?"
 				});
 				options.push({ nameStr : "No",
@@ -814,25 +814,25 @@ GwendyScenes.ChallengeSexWonPrompt = function(hangout : boolean, options : any[]
 		else {
 			options.push({ nameStr : "Strapon",
 				func : function() {
-					GwendyScenes.ChallengeSexAnal(Gwendy.Toys.Strapon, hangout);
+					GwendyScenes.ChallengeSexAnal(GwendyFlags.Toys.Strapon, hangout);
 				}, enabled : false && !player.FirstCock(), // TODO ACTIVATE SCENE
 				tooltip : "Fuck her with one of her horsecock strap-ons."
 			});
 			options.push({ nameStr : "R.Strapon",
 				func : function() {
-					GwendyScenes.ChallengeSexAnal(Gwendy.Toys.RStrapon, hangout);
+					GwendyScenes.ChallengeSexAnal(GwendyFlags.Toys.RStrapon, hangout);
 				}, enabled : false, // TODO ACTIVATE SCENE
 				tooltip : "Have her wear a strap-on and fuck you."
 			});
 			options.push({ nameStr : "Beads",
 				func : function() {
-					GwendyScenes.ChallengeSexAnal(Gwendy.Toys.Beads, hangout);
+					GwendyScenes.ChallengeSexAnal(GwendyFlags.Toys.Beads, hangout);
 				}, enabled : true,
 				tooltip : "Wonder how many beads her ass can take?"
 			});
 			options.push({ nameStr : "D.Dildo",
 				func : function() {
-					GwendyScenes.ChallengeSexAnal(Gwendy.Toys.DDildo, hangout);
+					GwendyScenes.ChallengeSexAnal(GwendyFlags.Toys.DDildo, hangout);
 				}, enabled : player.AnalCap() >= ToysItems.EquineDildo.cock.Thickness(),
 				tooltip : "Bring out Gwendy’s double-ended horsedildo for some double anal fun."
 			});
@@ -1573,25 +1573,25 @@ GwendyScenes.ChallengeSexAnal = function(toys : boolean, hangout : boolean) {
 			var options = new Array();
 			options.push({ nameStr : "Strapon",
 				func : function() {
-					GwendyScenes.ChallengeSexAnalToys(Gwendy.Toys.Strapon, hangout, first);
+					GwendyScenes.ChallengeSexAnalToys(GwendyFlags.Toys.Strapon, hangout, first);
 				}, enabled : false && !player.FirstCock(), // TODO ACTIVATE SCENE
 				tooltip : "Fuck her with one of her horsecock strapons."
 			});
 			options.push({ nameStr : "R.Strapon",
 				func : function() {
-					GwendyScenes.ChallengeSexAnalToys(Gwendy.Toys.RStrapon, hangout, first);
+					GwendyScenes.ChallengeSexAnalToys(GwendyFlags.Toys.RStrapon, hangout, first);
 				}, enabled : false, // TODO ACTIVATE SCENE
 				tooltip : "Have her wear a strapon and fuck you."
 			});
 			options.push({ nameStr : "Beads",
 				func : function() {
-					GwendyScenes.ChallengeSexAnalToys(Gwendy.Toys.Beads, hangout, first);
+					GwendyScenes.ChallengeSexAnalToys(GwendyFlags.Toys.Beads, hangout, first);
 				}, enabled : true,
 				tooltip : "Wonder how many beads her ass can take?"
 			});
 			options.push({ nameStr : "D.Dildo",
 				func : function() {
-					GwendyScenes.ChallengeSexAnalToys(Gwendy.Toys.DDildo, hangout, first);
+					GwendyScenes.ChallengeSexAnalToys(GwendyFlags.Toys.DDildo, hangout, first);
 				}, enabled : player.AnalCap() >= ToysItems.EquineDildo.cock.Thickness(),
 				tooltip : "Bring out Gwendy’s double-ended horsedildo for some double anal fun."
 			});
@@ -1728,7 +1728,7 @@ GwendyScenes.ChallengeSexAnalToys = function(toy : any, hangout : boolean, first
 	parse["gits"]     = gwendy.NumCocks() > 1 ? "their" : "its";
 
 
-	if(toy == Gwendy.Toys.Strapon) { //TODO Write scene
+	if(toy == GwendyFlags.Toys.Strapon) { //TODO Write scene
 		Text.Add("", parse);
 		Text.NL();
 		Text.Add("", parse);
@@ -1740,7 +1740,7 @@ GwendyScenes.ChallengeSexAnalToys = function(toy : any, hangout : boolean, first
 
 		Gui.NextPrompt();
 	}
-	else if(toy == Gwendy.Toys.RStrapon) { //TODO Write scene
+	else if(toy == GwendyFlags.Toys.RStrapon) { //TODO Write scene
 		Text.Add("", parse);
 		Text.NL();
 		Text.Add("", parse);
@@ -1752,7 +1752,7 @@ GwendyScenes.ChallengeSexAnalToys = function(toy : any, hangout : boolean, first
 
 		Gui.NextPrompt();
 	}
-	else if(toy == Gwendy.Toys.Beads) {
+	else if(toy == GwendyFlags.Toys.Beads) {
 		if(!first) {
 			Text.Add("Grinning, you tell her to wait while you rummage through her toy collection, pulling out a series of large, thick anal beads.", parse);
 			Text.NL();

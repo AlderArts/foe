@@ -11,6 +11,7 @@ import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { CvetaFlags } from '../../event/outlaws/cveta-flags';
 import { RigardFlags } from './rigard-flags';
+import { BurrowsFlags } from '../burrows-flags';
 
 
 let ShopStreetScenes = {}
@@ -172,7 +173,7 @@ ShopStreetLoc.street.events.push(new Link(
 	"Scepter", function() {
 		let rigard = GAME().rigard;
 		let burrows = GAME().burrows;
-		return rigard.flags["Scepter"] != 0 && burrows.flags["Access"] < Burrows.AccessFlags.Stage5;
+		return rigard.flags["Scepter"] != 0 && burrows.flags["Access"] < BurrowsFlags.AccessFlags.Stage5;
 	}, true,
 	null,
 	function() {

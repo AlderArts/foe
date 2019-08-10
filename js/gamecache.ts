@@ -87,6 +87,7 @@ import { OutlawsFlags } from './event/outlaws/outlaws-flags';
 import { TwinsFlags } from './event/royals/twins-flags';
 import { RigardFlags } from './loc/rigard/rigard-flags';
 import { DryadGladeFlags } from './loc/glade-flags';
+import { BurrowsFlags } from './loc/burrows-flags';
 
 let InitCache = function() {
 	// Reset exploration
@@ -269,7 +270,7 @@ let InitCache = function() {
 	//Halloween event
 	gameCache.flags["HW"] = gameCache.flags["HW"] || 0;
 
-	if(GAME().burrows.flags["Access"] >= Burrows.AccessFlags.Stage5) GAME().rigard.flags["Scepter"] = 0;
+	if(GAME().burrows.flags["Access"] >= BurrowsFlags.AccessFlags.Stage5) GAME().rigard.flags["Scepter"] = 0;
 }
 
 let CacheToGame = function() {

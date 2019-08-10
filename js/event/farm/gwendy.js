@@ -71,19 +71,6 @@ function Gwendy(storage) {
 Gwendy.prototype = new Entity();
 Gwendy.prototype.constructor = Gwendy;
 
-Gwendy.Market = {
-	NotAsked : 0,
-	Asked    : 1,
-	GoneToMarket : 2
-}
-
-Gwendy.Toys = {
-	Strapon  : 1,
-	RStrapon : 2,
-	Beads    : 3,
-	DDildo   : 4
-}
-
 Gwendy.prototype.Sexed = function() {
 	for(var flag in this.sex)
 		if(this.sex[flag] != 0)

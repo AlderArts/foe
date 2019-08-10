@@ -54,8 +54,6 @@ import './js/loc/rigard/weaponshop.js';
 import './js/loc/rigard/inn.js';
 import './js/loc/rigard/magetower.js';
 
-import './js/loc/burrows.js';
-
 import './js/event/dreams.js';
 import './js/event/nursery.js';
 

@@ -12,12 +12,12 @@ import { GlobalScenes } from './event/global';
 import { GAME } from './GAME';
 import { TwinsFlags } from './event/royals/twins-flags';
 import { AlchemyItems } from './items/alchemy';
-import { Burrows } from './loc/burrows';
 import { AscheScenes } from './event/asche';
 import { Lei } from './event/royals/lei';
 import { LeiScenes } from './event/royals/lei-scenes';
 import { RigardFlags } from './loc/rigard/rigard-flags';
 import { DryadGladeFlags } from './loc/glade-flags';
+import { BurrowsFlags } from './loc/burrows-flags';
 
 export class Quest {
 	name : any;
@@ -603,9 +603,9 @@ Quests.quests.push(new Quest({
 	active: function() {
 		let burrows = GAME().burrows;
 		var status = Quests.Type.NotStarted;
-		if(burrows.flags["Access"] >= Burrows.AccessFlags.Stage3)
+		if(burrows.flags["Access"] >= BurrowsFlags.AccessFlags.Stage3)
 			status |= Quests.Type.Completed;
-		else if(burrows.flags["Access"] >= Burrows.AccessFlags.Visited)
+		else if(burrows.flags["Access"] >= BurrowsFlags.AccessFlags.Visited)
 			status |= Quests.Type.Visible;
 		return status;
 	},
@@ -674,9 +674,9 @@ Quests.quests.push(new Quest({
 	active: function() {
 		let burrows = GAME().burrows;
 		var status = Quests.Type.NotStarted;
-		if(burrows.flags["Access"] >= Burrows.AccessFlags.QuestlineComplete)
+		if(burrows.flags["Access"] >= BurrowsFlags.AccessFlags.QuestlineComplete)
 			status |= Quests.Type.Completed;
-		else if(burrows.flags["Access"] >= Burrows.AccessFlags.Stage3)
+		else if(burrows.flags["Access"] >= BurrowsFlags.AccessFlags.Stage3)
 			status |= Quests.Type.Visible;
 		return status;
 	},
@@ -688,7 +688,7 @@ Quests.quests.push(new Quest({
 			active: function() {
 				var status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(GAME().burrows.flags["Access"] >= Burrows.AccessFlags.Stage4)
+				if(GAME().burrows.flags["Access"] >= BurrowsFlags.AccessFlags.Stage4)
 					status |= Quests.Type.Completed;
 				return status;
 			}
@@ -700,9 +700,9 @@ Quests.quests.push(new Quest({
 			active: function() {
 				let burrows = GAME().burrows;
 				var status = Quests.Type.NotStarted;
-				if(burrows.flags["Access"] >= Burrows.AccessFlags.Stage4)
+				if(burrows.flags["Access"] >= BurrowsFlags.AccessFlags.Stage4)
 					status |= Quests.Type.Visible;
-				if(burrows.flags["Access"] >= Burrows.AccessFlags.Stage5)
+				if(burrows.flags["Access"] >= BurrowsFlags.AccessFlags.Stage5)
 					status |= Quests.Type.Completed;
 				return status;
 			}
@@ -714,9 +714,9 @@ Quests.quests.push(new Quest({
 			active: function() {
 				let burrows = GAME().burrows;
 				var status = Quests.Type.NotStarted;
-				if(burrows.flags["Access"] >= Burrows.AccessFlags.Stage5)
+				if(burrows.flags["Access"] >= BurrowsFlags.AccessFlags.Stage5)
 					status |= Quests.Type.Visible;
-				if(burrows.flags["Access"] >= Burrows.AccessFlags.QuestlineComplete)
+				if(burrows.flags["Access"] >= BurrowsFlags.AccessFlags.QuestlineComplete)
 					status |= Quests.Type.Completed;
 				return status;
 			}

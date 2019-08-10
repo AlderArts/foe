@@ -9,12 +9,12 @@ import { Gui } from "../../gui";
 import { CvetaScenes } from "./cveta-scenes";
 import { CvetaFlags } from "./cveta-flags";
 import { Jobs } from "../../job";
-import { Gwendy } from "../farm/gwendy";
 import { OutlawsFlags } from "./outlaws-flags";
 import { Party } from "../../party";
 import { Encounter } from "../../combat";
 import { SetGameState, GameState } from "../../gamestate";
 import { Sex } from "../../entity-sex";
+import { GwendyFlags } from "../farm/gwendy-flags";
 
 let MariaScenes : any = {
 	DeadDrops : DeadDropScenes,
@@ -467,7 +467,7 @@ MariaScenes.TalkPrompt = function() {
 				Text.Add("<i>“Now, I can see why he would do such a thing - coin doesn’t spoil, it has a much more stable value, and it’s easy to count and store, amongst other issues. Understanding someone’s motives, though, doesn’t necessarily mean agreeing with them, because this pigheaded move meant that people needed to go into town to sell their crops in order to pay their taxes. And if you don’t keep the roads safe…”</i>", parse);
 				Text.NL();
 				Text.Add("Ah. ", parse);
-				if(gwendy.flags["Market"] >= Gwendy.Market.GoneToMarket) {
+				if(gwendy.flags["Market"] >= GwendyFlags.Market.GoneToMarket) {
 					Text.Add("You think back to your little trip with Gwendy, and instantly understand Maria’s point.", parse);
 				}
 				else {
