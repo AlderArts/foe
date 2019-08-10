@@ -12,141 +12,148 @@ import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { GAME } from '../../GAME';
 
-let PatchworkScenes = {};
+let PatchworkScenes : any = {};
 
-function Patchwork(storage) {
-	Entity.call(this);
-	this.ID = "patchwork";
-	
-	this.name = "Patches";
-	
-	this.body.DefFemale();
-	//TODO body
-	
-	/*
-	 * Set up patchworks shop
-	 */
-	this.Shop = new Shop();
-	
-	this.Shop.AddItem(Items.Combat.HPotion, 5, null, PatchworkScenes.BuyFunc);
-	
-	this.Shop.AddItem(Items.Alchemy.Equinium, 5, null, PatchworkScenes.BuyFunc);
-	//this.Shop.AddItem(Items.Ingredients.HorseHair, 5, null, PatchworkScenes.BuyFunc);
-	this.Shop.AddItem(Items.Ingredients.HorseShoe, 5, null, PatchworkScenes.BuyFunc);
-	//this.Shop.AddItem(Items.Ingredients.HorseCum, 5, null, PatchworkScenes.BuyFunc);
-	
-	this.Shop.AddItem(Items.Alchemy.Leporine, 5, null, PatchworkScenes.BuyFunc);
-	this.Shop.AddItem(Items.Ingredients.RabbitFoot, 5, null, PatchworkScenes.BuyFunc);
-	//this.Shop.AddItem(Items.Ingredients.CarrotJuice, 5, null, PatchworkScenes.BuyFunc);
-	//this.Shop.AddItem(Items.Ingredients.Lettuce, 5, null, PatchworkScenes.BuyFunc);
-	
-	this.Shop.AddItem(Items.Alchemy.Felinix, 5, null, PatchworkScenes.BuyFunc);
-	//this.Shop.AddItem(Items.Ingredients.Whiskers, 5, null, PatchworkScenes.BuyFunc);
-	this.Shop.AddItem(Items.Ingredients.HairBall, 5, null, PatchworkScenes.BuyFunc);
-	//this.Shop.AddItem(Items.Ingredients.CatClaw, 5, null, PatchworkScenes.BuyFunc);
-	
-	this.Shop.AddItem(Items.Ingredients.CowBell, 5, null, PatchworkScenes.BuyFunc);
-	
-	this.Shop.AddItem(Items.Ingredients.DogBiscuit, 5, null, PatchworkScenes.BuyFunc);
-	
-	this.Shop.AddItem(Items.Ingredients.Trinket, 5, null, PatchworkScenes.BuyFunc);
-	this.Shop.AddItem(Items.Ingredients.Feather, 5, null, PatchworkScenes.BuyFunc);
-	this.Shop.AddItem(Items.Ingredients.FruitSeed, 5, null, PatchworkScenes.BuyFunc);
-	
-	this.Shop.AddItem(Items.Ingredients.Hummus, 5, null, PatchworkScenes.BuyFunc);
-	
-	this.Shop.AddItem(Items.Alchemy.Fertilium, 5, null, PatchworkScenes.BuyFunc);
-	this.Shop.AddItem(Items.Alchemy.FertiliumPlus, 5, null, PatchworkScenes.BuyFunc);
-	
-	this.Shop.AddItem(Items.Alchemy.Infertilium, 5, null, PatchworkScenes.BuyFunc);
-	this.Shop.AddItem(Items.Alchemy.InfertiliumPlus, 5, null, PatchworkScenes.BuyFunc);
-	
-	this.Shop.AddItem(Items.Toys.SmallDildo, 5, null, PatchworkScenes.BuyFunc);
-	
-	this.flags = {};
-	this.flags["Met"] = Patchwork.Met.NotMet;
-	
-	if(storage) this.FromStorage(storage);
-}
-Patchwork.prototype = new Entity();
-Patchwork.prototype.constructor = Patchwork;
-
-Patchwork.Met = {
-	NotMet     : 0,
-	Met        : 1,
-	Met2       : 2,
-	KnowGender : 3
-};
-Patchwork.prototype.KnowGender = function() {
-	return this.flags["Met"] >= Patchwork.Met.KnowGender;
-}
-Patchwork.prototype.Met = function() {
-	return this.flags["Met"] >= Patchwork.Met.Met;
+let PatchworkFlags = {
+	Met : {
+		NotMet     : 0,
+		Met        : 1,
+		Met2       : 2,
+		KnowGender : 3
+	},
 }
 
-Patchwork.prototype.FromStorage = function(storage) {
-	this.body.FromStorage(storage.body);
-	this.LoadPersonalityStats(storage);
-	this.LoadFlags(storage);
-	this.LoadSexFlags(storage);
+export class Patchwork extends Entity {
+	Shop : Shop;
+
+	constructor(storage? : any) {
+		super();
+
+		this.ID = "patchwork";
+		
+		this.name = "Patches";
+		
+		this.body.DefFemale();
+		//TODO body
+		
+		/*
+		* Set up patchworks shop
+		*/
+		this.Shop = new Shop();
+		
+		this.Shop.AddItem(Items.Combat.HPotion, 5, null, PatchworkScenes.BuyFunc);
+		
+		this.Shop.AddItem(Items.Alchemy.Equinium, 5, null, PatchworkScenes.BuyFunc);
+		//this.Shop.AddItem(Items.Ingredients.HorseHair, 5, null, PatchworkScenes.BuyFunc);
+		this.Shop.AddItem(Items.Ingredients.HorseShoe, 5, null, PatchworkScenes.BuyFunc);
+		//this.Shop.AddItem(Items.Ingredients.HorseCum, 5, null, PatchworkScenes.BuyFunc);
+		
+		this.Shop.AddItem(Items.Alchemy.Leporine, 5, null, PatchworkScenes.BuyFunc);
+		this.Shop.AddItem(Items.Ingredients.RabbitFoot, 5, null, PatchworkScenes.BuyFunc);
+		//this.Shop.AddItem(Items.Ingredients.CarrotJuice, 5, null, PatchworkScenes.BuyFunc);
+		//this.Shop.AddItem(Items.Ingredients.Lettuce, 5, null, PatchworkScenes.BuyFunc);
+		
+		this.Shop.AddItem(Items.Alchemy.Felinix, 5, null, PatchworkScenes.BuyFunc);
+		//this.Shop.AddItem(Items.Ingredients.Whiskers, 5, null, PatchworkScenes.BuyFunc);
+		this.Shop.AddItem(Items.Ingredients.HairBall, 5, null, PatchworkScenes.BuyFunc);
+		//this.Shop.AddItem(Items.Ingredients.CatClaw, 5, null, PatchworkScenes.BuyFunc);
+		
+		this.Shop.AddItem(Items.Ingredients.CowBell, 5, null, PatchworkScenes.BuyFunc);
+		
+		this.Shop.AddItem(Items.Ingredients.DogBiscuit, 5, null, PatchworkScenes.BuyFunc);
+		
+		this.Shop.AddItem(Items.Ingredients.Trinket, 5, null, PatchworkScenes.BuyFunc);
+		this.Shop.AddItem(Items.Ingredients.Feather, 5, null, PatchworkScenes.BuyFunc);
+		this.Shop.AddItem(Items.Ingredients.FruitSeed, 5, null, PatchworkScenes.BuyFunc);
+		
+		this.Shop.AddItem(Items.Ingredients.Hummus, 5, null, PatchworkScenes.BuyFunc);
+		
+		this.Shop.AddItem(Items.Alchemy.Fertilium, 5, null, PatchworkScenes.BuyFunc);
+		this.Shop.AddItem(Items.Alchemy.FertiliumPlus, 5, null, PatchworkScenes.BuyFunc);
+		
+		this.Shop.AddItem(Items.Alchemy.Infertilium, 5, null, PatchworkScenes.BuyFunc);
+		this.Shop.AddItem(Items.Alchemy.InfertiliumPlus, 5, null, PatchworkScenes.BuyFunc);
+		
+		this.Shop.AddItem(Items.Toys.SmallDildo, 5, null, PatchworkScenes.BuyFunc);
+		
+		this.flags = {};
+		this.flags["Met"] = PatchworkFlags.Met.NotMet;
+		
+		if(storage) this.FromStorage(storage);
+	}
+
+	KnowGender() {
+		return this.flags["Met"] >= PatchworkFlags.Met.KnowGender;
+	}
+	Met() {
+		return this.flags["Met"] >= PatchworkFlags.Met.Met;
+	}
+
+	FromStorage(storage : any) {
+		this.body.FromStorage(storage.body);
+		this.LoadPersonalityStats(storage);
+		this.LoadFlags(storage);
+		this.LoadSexFlags(storage);
+	}
+
+	ToStorage() {
+		var storage = {};
+		
+		this.SaveBodyPartial(storage, {ass: true, vag: true});
+		
+		this.SavePersonalityStats(storage);
+		this.SaveFlags(storage);
+		this.SaveSexFlags(storage);
+		
+		return storage;
+	}
+
+	PronounGender() {
+		return this.flags["Met"] >= PatchworkFlags.Met.KnowGender ? Gender.female : Gender.male;
+	}
+
+	heshe() {
+		var gender = this.PronounGender();
+		if(gender == Gender.male) return "they";
+		else return "she";
+	}
+	HeShe() {
+		var gender = this.PronounGender();
+		if(gender == Gender.male) return "They";
+		else return "She";
+	}
+	himher() {
+		var gender = this.PronounGender();
+		if(gender == Gender.male) return "them";
+		else return "her";
+	}
+	HimHer() {
+		var gender = this.PronounGender();
+		if(gender == Gender.male) return "Them";
+		else return "Her";
+	}
+	hisher() {
+		var gender = this.PronounGender();
+		if(gender == Gender.male) return "their";
+		else return "her";
+	}
+	HisHer() {
+		var gender = this.PronounGender();
+		if(gender == Gender.male) return "Their";
+		else return "Her";
+	}
+	hishers() {
+		var gender = this.PronounGender();
+		if(gender == Gender.male) return "theirs";
+		else return "hers";
+	}
+	mfPronoun(male : any, female : any) {
+		var gender = this.PronounGender();
+		if(gender == Gender.male) return male;
+		else return female;
+	}
 }
 
-Patchwork.prototype.ToStorage = function() {
-	var storage = {};
-	
-	this.SaveBodyPartial(storage, {ass: true, vag: true});
-	
-	this.SavePersonalityStats(storage);
-	this.SaveFlags(storage);
-	this.SaveSexFlags(storage);
-	
-	return storage;
-}
-
-Patchwork.prototype.PronounGender = function() {
-	return this.flags["Met"] >= Patchwork.Met.KnowGender ? Gender.female : Gender.male;
-}
-
-Patchwork.prototype.heshe = function() {
-	var gender = this.PronounGender();
-	if(gender == Gender.male) return "they";
-	else return "she";
-}
-Patchwork.prototype.HeShe = function() {
-	var gender = this.PronounGender();
-	if(gender == Gender.male) return "They";
-	else return "She";
-}
-Patchwork.prototype.himher = function() {
-	var gender = this.PronounGender();
-	if(gender == Gender.male) return "them";
-	else return "her";
-}
-Patchwork.prototype.HimHer = function() {
-	var gender = this.PronounGender();
-	if(gender == Gender.male) return "Them";
-	else return "Her";
-}
-Patchwork.prototype.hisher = function() {
-	var gender = this.PronounGender();
-	if(gender == Gender.male) return "their";
-	else return "her";
-}
-Patchwork.prototype.HisHer = function() {
-	var gender = this.PronounGender();
-	if(gender == Gender.male) return "Their";
-	else return "Her";
-}
-Patchwork.prototype.hishers = function() {
-	var gender = this.PronounGender();
-	if(gender == Gender.male) return "theirs";
-	else return "hers";
-}
-Patchwork.prototype.mfPronoun = function(male, female) {
-	var gender = this.PronounGender();
-	if(gender == Gender.male) return male;
-	else return female;
-}
 
 
 PatchworkScenes.Interact = function() {
@@ -155,7 +162,7 @@ PatchworkScenes.Interact = function() {
 	parse = patchwork.ParserPronouns(parse);
 	
 	Text.Clear();
-	if(patchwork.flags["Met"] < Patchwork.Met.Met) {
+	if(patchwork.flags["Met"] < PatchworkFlags.Met.Met) {
 		Text.Add("You make your way toward the mysterious robed peddler and their makeshift shop, near the campfire. Even as you get right up to them, they remain as enigmatic as before; the robes they wear are so all-encompassing, you can’t make out anything about their features. You’re pretty sure that whatever’s under there is humanoid, but that’s as far as you’d dare to venture.", parse);
 		Text.NL();
 		Text.Add("Wide, flared sleeves completely swallow their arms and hands alike, whilst the hem trails along the ground, preventing even the slightest glimpse of their feet. A raised neck - a shawl, maybe, but it’s hard to tell where any part of the robe ends and another begins - combines with a low-fallen hood to completely obscure the face. And all over, patches of fabric, a dazzling array of pattern-fragments and colors, scattered about without any semblance of rhyme or reason.", parse);
@@ -172,7 +179,7 @@ PatchworkScenes.Interact = function() {
 		Text.Flush();
 		PatchworkScenes.Prompt();
 	}
-	else if(patchwork.flags["Met"] < Patchwork.Met.Met2) {
+	else if(patchwork.flags["Met"] < PatchworkFlags.Met.Met2) {
 		Text.Add("With a little trepidation, you approach the eccentric peddler in their patchworked robes again, asking if they are willing to do business with you.", parse);
 		Text.NL();
 		Text.Add("<i>“Password?”</i>", parse);
@@ -249,7 +256,7 @@ PatchworkScenes.BuyFunc = function() {
 
 PatchworkScenes.Prompt = function() {
 	let patchwork = GAME().patchwork;
-	var parse = {
+	var parse : any = {
 		notS : patchwork.mfPronoun("", "s")
 	};
 	parse = patchwork.ParserPronouns(parse);
@@ -283,17 +290,17 @@ PatchworkScenes.Prompt = function() {
 		parse["pw"] = PatchworkScenes.PW();
 		
 		Text.Clear();
-		if(patchwork.flags["Met"] < Patchwork.Met.Met) {
+		if(patchwork.flags["Met"] < PatchworkFlags.Met.Met) {
 			Text.Add("<i>“Wait,”</i> the creature calls as you’re about to turn. <i>“The password for next time is: [pw]. Remember it or no business for you, stranger.”</i>", parse);
 			Text.NL();
 			Text.Add("Lets see… [pw], huh? Privately noting the oddity of requiring a password to do business to yourself, you assure the mysterious merchant you will remember it.", parse);
-			patchwork.flags["Met"] = Patchwork.Met.Met;
+			patchwork.flags["Met"] = PatchworkFlags.Met.Met;
 		}
-		else if(patchwork.flags["Met"] < Patchwork.Met.Met2) {
+		else if(patchwork.flags["Met"] < PatchworkFlags.Met.Met2) {
 			Text.Add("<i>“Next time’s password is: [pw].”</i>", parse);
 			Text.NL();
 			Text.Add("Slowly you nod your head, dryly assuring them that you have it... but privately, you ask yourself if you really need it; so long as you play along, it looks like they’ll accept whatever you say.", parse);
-			patchwork.flags["Met"] = Patchwork.Met.Met2;
+			patchwork.flags["Met"] = PatchworkFlags.Met.Met2;
 		}
 		else {
 			Text.Add("<i>“Next time’s password is: [pw].”</i>", parse);
@@ -321,4 +328,4 @@ PatchworkScenes.Desc = function() {
 	Text.NL();
 }
 
-export { Patchwork, PatchworkScenes };
+export { PatchworkScenes, PatchworkFlags };

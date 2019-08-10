@@ -61,11 +61,8 @@ import './js/event/royals/golem.js';
 
 import './js/event/room69.js';
 
-import './js/event/nomads/chief.js';
-import './js/event/nomads/patchwork.js';
 import './js/event/nomads/rosalin.js';
 import './js/event/nomads/estevan.js';
-import './js/event/nomads/cale.js';
 import './js/event/nomads/magnus.js';
 
 import './js/event/outlaws/aquilius.js';

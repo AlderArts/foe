@@ -21,7 +21,7 @@ import { TF } from '../tf';
 import { Vagina } from '../body/vagina';
 import { GlobalScenes } from './global';
 import { Perks } from '../perks';
-import { Patchwork, PatchworkScenes } from './nomads/patchwork';
+import { Patchwork, PatchworkScenes, PatchworkFlags } from './nomads/patchwork';
 import { Input } from '../input';
 import { Status } from '../statuseffect';
 
@@ -6801,7 +6801,7 @@ HalloweenScenes.Patches = function() {
 		Text.NL();
 		Text.Add("<i>“Wrong.”</i>", parse);
 		Text.NL();
-		if(patchwork.flags["Met"] >= Patchwork.Met.Met2) {
+		if(patchwork.flags["Met"] >= PatchworkFlags.Met.Met2) {
 			Text.Add("Wait, <b>what</b>!? Patches <i>never</i> cared about the specifics of the password before - so long as you at least made the effort of humoring [himher], [heshe] would always let you off the hook for trying. ", parse);
 			Text.NL();
 			parse["isare"] = patchesGender ? "is" : "are";

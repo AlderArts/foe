@@ -67,7 +67,7 @@ export class Shop {
 		this.totalSold   = !isNaN(parseInt(storage.ts)) ? parseInt(storage.ts) : this.totalSold;
 	}
 
-	AddItem(item : any, price : number, enabled : boolean, func : any, num : number) {
+	AddItem(item : any, price : number, enabled : boolean, func : any, num? : number) {
 		this.inventory.push({
 			it      : item,
 			price   : price,
