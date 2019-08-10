@@ -6,29 +6,29 @@
 
 import { Vagina } from './vagina';
 import { Cock } from './cock';
-import { Race } from './race';
+import { Race, RaceDesc } from './race';
 import { Color } from './color';
 
-let BodyTypeFemale = {
-	Average  : 0,
-	Slim     : 1,
-	Curvy    : 2,
-	Tomboy   : 3,
-	Cuntboy  : 4,
-	Voluptous : 5,
+export enum BodyTypeFemale {
+	Average   = 0,
+	Slim      = 1,
+	Curvy     = 2,
+	Tomboy    = 3,
+	Cuntboy   = 4,
+	Voluptous = 5,
 };
 
-let BodyTypeMale = {
-	Average  : 0,
-	Thin     : 1,
-	Muscular : 2,
-	Girly    : 3,
-	Trap     : 4,
-	Shemale  : 5
+export enum BodyTypeMale {
+	Average  = 0,
+	Thin     = 1,
+	Muscular = 2,
+	Girly    = 3,
+	Trap     = 4,
+	Shemale  = 5
 };
 
 let DefBody = {
-	DefFemale : function(bodytype) {
+	DefFemale : function(bodytype? : BodyTypeFemale) {
 		bodytype = bodytype || BodyTypeFemale.Average;
 		
 		switch(bodytype)
@@ -98,7 +98,7 @@ let DefBody = {
 		this.vagina.push(new Vagina());
 	},
 
-	DefMale : function(bodytype) {
+	DefMale : function(bodytype? : BodyTypeMale) {
 		bodytype = bodytype || BodyTypeMale.Average;
 		
 		switch(bodytype)
@@ -170,7 +170,7 @@ let DefBody = {
 		this.balls.count.base = 2;
 	},
 
-	DefHerm : function(balls) {
+	DefHerm : function(balls? : boolean) {
 		this.femininity.base = 0.3;
 		this.vagina.push(new Vagina());
 		this.cock.push(new Cock());
@@ -180,7 +180,7 @@ let DefBody = {
 			this.balls.count.base = 2;
 	},
 
-	SetRace : function(race) {
+	SetRace : function(race : RaceDesc) {
 		// Default
 		race = race || Race.Human;
 		
@@ -212,7 +212,7 @@ let DefBody = {
 		this.legs.race = race;
 	},
 
-	SetBodyColor : function(color) {
+	SetBodyColor : function(color : Color) {
 		color = color || Color.white;
 		
 		// Head
@@ -241,15 +241,15 @@ let DefBody = {
 			this.legs[i].color = color;
 	},
 
-	SetHairColor : function(color) {
+	SetHairColor : function(color : Color) {
 		color = color || Color.white;
 		this.head.hair.color = color;
 	},
 
-	SetEyeColor : function(color) {
+	SetEyeColor : function(color : Color) {
 		color = color || Color.white;
 		this.head.eyes.color = color;
 	},
 };
 
-export { DefBody, BodyTypeMale, BodyTypeFemale };
+export { DefBody };

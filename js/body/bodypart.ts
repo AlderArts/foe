@@ -32,6 +32,9 @@ export class BodyPart {
 			Race.Dryad);
 	}
 
+	Feathered() {
+		return this.race.isRace(Race.Avian);
+	}
 }
 
 let BodyPartType = {

@@ -5,43 +5,43 @@
 import { DamageType } from './damagetype';
 import { CurEncounter } from './combat-data';
 
-let Status = {};
+let Status : any = {};
 
-let StatusEffect = {
-	Burn     : 0, //OK
-	Freeze   : 1, //OK
-	Numb     : 2, //OK
-	Petrify  : 3,
-	Venom    : 4, //OK
-	Blind    : 5, //OK
-	Siphon   : 6, //OK
-	Seal     : 7,
-	Sleep    : 8, //OK
-	Enrage   : 9,
-	Fatigue  : 10,
-	Bleed    : 11, //OK
-	Haste    : 12, //OK
-	Slow     : 13, //OK
-	Regen    : 14,
-	Boon     : 15,
-	Horny    : 16, //OK
-	Aroused  : 17, //WIP
-	Limp     : 18, //OK
-	Bimbo    : 19,
-	Decoy    : 20, //OK
-	Counter  : 21, //OK
-	Confuse  : 22, //OK
-	Full     : 23, //OK
-	Weakness : 24, //OK
-	Buff     : 25, //OK
-	Curse    : 26, 
+export enum StatusEffect {
+	Burn     = 0, //OK
+	Freeze   = 1, //OK
+	Numb     = 2, //OK
+	Petrify  = 3,
+	Venom    = 4, //OK
+	Blind    = 5, //OK
+	Siphon   = 6, //OK
+	Seal     = 7,
+	Sleep    = 8, //OK
+	Enrage   = 9,
+	Fatigue  = 10,
+	Bleed    = 11, //OK
+	Haste    = 12, //OK
+	Slow     = 13, //OK
+	Regen    = 14,
+	Boon     = 15,
+	Horny    = 16, //OK
+	Aroused  = 17, //WIP
+	Limp     = 18, //OK
+	Bimbo    = 19,
+	Decoy    = 20, //OK
+	Counter  = 21, //OK
+	Confuse  = 22, //OK
+	Full     = 23, //OK
+	Weakness = 24, //OK
+	Buff     = 25, //OK
+	Curse    = 26, 
 
-	LAST     : 27
+	LAST     = 27
 };
 
 Status.Keys = Object.keys(StatusEffect);
 
-Status.Venom = function(target, opts) {
+Status.Venom = function(target : any, opts? : any) {
 	if(!target) return;
 	opts = opts || {};
 
@@ -67,7 +67,7 @@ Status.Venom = function(target, opts) {
 	return true;
 }
 //TODO fix formula
-Status.Venom.Tick = function(target) {
+Status.Venom.Tick = function(target : any) {
 	var damageType = new DamageType({mNature : this.str});
 	var atkRand = 0.05 * (Math.random() - 0.5) + 1;
 	var dmg = this.dmg * atkRand * target.HP();
@@ -84,7 +84,7 @@ Status.Venom.Tick = function(target) {
 }
 
 
-Status.Burn = function(target, opts) {
+Status.Burn = function(target : any, opts? : any) {
 	if(!target) return;
 	opts = opts || {};
 
@@ -110,7 +110,7 @@ Status.Burn = function(target, opts) {
 	return true;
 }
 //TODO fix formula
-Status.Burn.Tick = function(target) {
+Status.Burn.Tick = function(target : any) {
 	var damageType = new DamageType({mFire : this.str});
 	var atkRand = 0.05 * (Math.random() - 0.5) + 1;
 	var dmg = this.dmg * atkRand * target.HP();
@@ -127,7 +127,7 @@ Status.Burn.Tick = function(target) {
 }
 
 
-Status.Freeze = function(target, opts) {
+Status.Freeze = function(target : any, opts? : any) {
 	if(!target) return;
 	opts = opts || {};
 
@@ -151,7 +151,7 @@ Status.Freeze = function(target, opts) {
 
 	return true;
 }
-Status.Freeze.Tick = function(target) {
+Status.Freeze.Tick = function(target : any) {
 	this.turns--;
 	// Remove freeze effect
 	if(this.turns <= 0) {
@@ -160,7 +160,7 @@ Status.Freeze.Tick = function(target) {
 }
 
 
-Status.Numb = function(target, opts) {
+Status.Numb = function(target : any, opts? : any) {
 	if(!target) return;
 	opts = opts || {};
 
@@ -183,7 +183,7 @@ Status.Numb = function(target, opts) {
 
 	return true;
 }
-Status.Numb.Tick = function(target) {
+Status.Numb.Tick = function(target : any) {
 	this.turns--;
 	// Remove numb effect
 	if(this.turns <= 0) {
@@ -192,7 +192,7 @@ Status.Numb.Tick = function(target) {
 }
 
 
-Status.Blind = function(target, opts) {
+Status.Blind = function(target : any, opts? : any) {
 	if(!target) return;
 	opts = opts || {};
 
@@ -216,7 +216,7 @@ Status.Blind = function(target, opts) {
 
 	return true;
 }
-Status.Blind.Tick = function(target) {
+Status.Blind.Tick = function(target : any) {
 	this.turns--;
 	// Remove blind effect
 	if(this.turns <= 0) {
@@ -225,7 +225,7 @@ Status.Blind.Tick = function(target) {
 }
 
 
-Status.Siphon = function(target, opts) {
+Status.Siphon = function(target : any, opts? : any) {
 	if(!target) return;
 	opts = opts || {};
 
@@ -251,7 +251,7 @@ Status.Siphon = function(target, opts) {
 
 	return true;
 }
-Status.Siphon.Tick = function(target) {
+Status.Siphon.Tick = function(target : any) {
 	this.turns--;
 
 	var hp = target.AddHPAbs(-this.hp);
@@ -269,7 +269,7 @@ Status.Siphon.Tick = function(target) {
 	}
 }
 
-Status.Sleep = function(target, opts) {
+Status.Sleep = function(target : any, opts? : any) {
 	if(!target) return;
 	opts = opts || {};
 
@@ -291,7 +291,7 @@ Status.Sleep = function(target, opts) {
 
 	return true;
 }
-Status.Sleep.Tick = function(target) {
+Status.Sleep.Tick = function(target : any) {
 	this.turns--;
 	// Remove sleep effect
 	if(this.turns <= 0) {
@@ -300,7 +300,7 @@ Status.Sleep.Tick = function(target) {
 }
 
 
-Status.Bleed = function(target, opts) {
+Status.Bleed = function(target : any, opts? : any) {
 	if(!target) return;
 	opts = opts || {};
 
@@ -325,7 +325,7 @@ Status.Bleed = function(target, opts) {
 	return true;
 }
 //TODO fix formula
-Status.Bleed.Tick = function(target) {
+Status.Bleed.Tick = function(target : any) {
 	var atkRand = 0.05 * (Math.random() - 0.5) + 1;
 	var dmg = this.dmg * atkRand * target.HP();
 	dmg = Math.floor(dmg);
@@ -341,7 +341,7 @@ Status.Bleed.Tick = function(target) {
 
 
 // TODO: Use as heal of slow?
-Status.Haste = function(target, opts) {
+Status.Haste = function(target : any, opts? : any) {
 	if(!target) return;
 	opts = opts || {};
 
@@ -358,7 +358,7 @@ Status.Haste = function(target, opts) {
 
 	return true;
 }
-Status.Haste.Tick = function(target) {
+Status.Haste.Tick = function(target : any) {
 	this.turns--;
 	// Remove haste effect
 	if(this.turns <= 0) {
@@ -368,7 +368,7 @@ Status.Haste.Tick = function(target) {
 
 
 // TODO: Remove haste?
-Status.Slow = function(target, opts) {
+Status.Slow = function(target : any, opts? : any) {
 	if(!target) return;
 	opts = opts || {};
 
@@ -393,7 +393,7 @@ Status.Slow = function(target, opts) {
 
 	return true;
 }
-Status.Slow.Tick = function(target) {
+Status.Slow.Tick = function(target : any) {
 	this.turns--;
 	// Remove slow effect
 	if(this.turns <= 0) {
@@ -402,7 +402,7 @@ Status.Slow.Tick = function(target) {
 }
 
 
-Status.Horny = function(target, opts) {
+Status.Horny = function(target : any, opts? : any) {
 	if(!target) return;
 	opts = opts || {};
 
@@ -428,7 +428,7 @@ Status.Horny = function(target, opts) {
 	return true;
 }
 //TODO fix formula?
-Status.Horny.Tick = function(target) {
+Status.Horny.Tick = function(target : any) {
 	var damageType = new DamageType({lust : this.str});
 	var atkRand = 0.05 * (Math.random() - 0.5) + 1;
 	var dmg = this.dmg * atkRand * target.Lust();
@@ -444,7 +444,7 @@ Status.Horny.Tick = function(target) {
 }
 
 //All modifiers are multipliers, so 1.05 means 5% extra.
-Status.Aroused = function(target, opts) {
+Status.Aroused = function(target : any, opts? : any) {
 	if(!target) return;
 	opts = opts || {};
 
@@ -472,23 +472,23 @@ Status.Aroused = function(target, opts) {
 
 	return true;
 }
-Status.Aroused.Update = function(target, step) {
+Status.Aroused.Update = function(target : any, step : number) {
 	this.hours -= step;
 	if(this.hours <= 0) {
 		target.combatStatus.stats[StatusEffect.Aroused] = null;
 	}
 }
 Status.Aroused.ToStorage = function() {
-	var ret = {};
+	var ret : any = {};
 	if(this.hours) ret["hours"] = this.hours.toFixed(2);
 
 	if(this.fer != 0) ret["fer"] = this.fer.toFixed(2);
 
 	return ret;
 }
-Status.Aroused.FromStorage = function(storage) {
+Status.Aroused.FromStorage = function(storage : any) {
 	storage = storage || {};
-	var obj = {};
+	var obj : any = {};
 	if(storage["hours"]) obj.hours = parseFloat(storage["hours"]);
 
 	if(storage["fer"]) obj.fer = parseFloat(storage["fer"]);
@@ -501,7 +501,7 @@ Status.Aroused.FromStorage = function(storage) {
 }
 
 //All modifiers are multipliers, so 1.05 means 5% extra.
-Status.Limp = function(target, opts) {
+Status.Limp = function(target : any, opts? : any) {
 	if(!target) return;
 	opts = opts || {};
 
@@ -530,23 +530,23 @@ Status.Limp = function(target, opts) {
 
 	return true;
 }
-Status.Limp.Update = function(target, step) {
+Status.Limp.Update = function(target : any, step : number) {
 	this.hours -= step;
 	if(this.hours <= 0) {
 		target.combatStatus.stats[StatusEffect.Limp] = null;
 	}
 }
 Status.Limp.ToStorage = function() {
-	var ret = {};
+	var ret : any = {};
 	if(this.hours) ret["hours"] = this.hours.toFixed(2);
 
 	if(this.fer != 0) ret["fer"] = this.fer.toFixed(2);
 
 	return ret;
 }
-Status.Limp.FromStorage = function(storage) {
+Status.Limp.FromStorage = function(storage : any) {
 	storage = storage || {};
-	var obj = {};
+	var obj : any = {};
 	if(storage["hours"]) obj.hours = parseFloat(storage["hours"]);
 
 	if(storage["fer"]) obj.fer = parseFloat(storage["fer"]);
@@ -558,7 +558,7 @@ Status.Limp.FromStorage = function(storage) {
 	return obj;
 }
 
-Status.Decoy = function(target, opts) {
+Status.Decoy = function(target : any, opts? : any) {
 	if(!target) return;
 	opts = opts || {};
 
@@ -574,7 +574,7 @@ Status.Decoy = function(target, opts) {
 /*
  * OnHit = function(enc, target, attacker, dmg)
  */
-Status.Counter = function(target, opts) {
+Status.Counter = function(target : any, opts? : any) {
 	if(!target) return;
 	opts = opts || {};
 
@@ -591,7 +591,7 @@ Status.Counter = function(target, opts) {
 
 	return true;
 }
-Status.Counter.Tick = function(target) {
+Status.Counter.Tick = function(target : any) {
 	this.turns--;
 	// Remove counter effect
 	if(this.turns <= 0) {
@@ -600,7 +600,7 @@ Status.Counter.Tick = function(target) {
 }
 
 // opts.exp is a modifier that adds extra exp. 1.05 means 5% extra, rounded up.
-Status.Full = function(target, opts) {
+Status.Full = function(target : any, opts? : any) {
 	if(!target) return;
 	opts = opts || {};
 
@@ -615,7 +615,7 @@ Status.Full = function(target, opts) {
 
 	return true;
 }
-Status.Full.Update = function(target, step) {
+Status.Full.Update = function(target : any, step : number) {
 	this.hours -= step;
 	// Remove full effect
 	if(this.hours <= 0) {
@@ -623,15 +623,15 @@ Status.Full.Update = function(target, step) {
 	}
 }
 Status.Full.ToStorage = function() {
-	var ret = {};
+	var ret : any = {};
 	if(this.hours) ret["hours"] = this.hours.toFixed(2);
 	if(this.exp)   ret["exp"]   = this.exp.toFixed(2);
 
 	return ret;
 }
-Status.Full.FromStorage = function(storage) {
+Status.Full.FromStorage = function(storage : any) {
 	storage = storage || {};
-	var obj = {};
+	var obj : any = {};
 	if(storage["hours"]) obj.hours = parseFloat(storage["hours"]);
 	if(storage["exp"])   obj.exp   = parseFloat(storage["exp"]);
 
@@ -643,7 +643,7 @@ Status.Full.FromStorage = function(storage) {
 /*
  * func = function(encounter, activeChar)
  */
-Status.Confuse = function(target, opts) {
+Status.Confuse = function(target : any, opts? : any) {
 	if(!target) return;
 	opts = opts || {};
 
@@ -676,14 +676,14 @@ Status.Confuse = function(target, opts) {
 
 	return true;
 }
-Status.Confuse.Tick = function(target) {
+Status.Confuse.Tick = function(target : any) {
 	this.turns--;
 	// Remove confuse effect
 	if(this.turns <= 0) {
 		target.combatStatus.stats[StatusEffect.Confuse] = null;
 	}
 }
-Status.Confuse.OnFade = function(encounter, entity) {
+Status.Confuse.OnFade = function(encounter : any, entity : any) {
 	// cleanup
 	for(var i=0,j=encounter.combatOrder.length; i<j; i++){
 		var c = encounter.combatOrder[i];
@@ -696,7 +696,7 @@ Status.Confuse.OnFade = function(encounter, entity) {
 	entity.combatStatus.stats[StatusEffect.Confuse] = null;
 }
 
-Status.Weakness = function(target, opts) {
+Status.Weakness = function(target : any, opts? : any) {
 	if(!target) return;
 	opts = opts || {};
 
@@ -719,7 +719,7 @@ Status.Weakness = function(target, opts) {
 
 	return true;
 }
-Status.Weakness.Tick = function(target) {
+Status.Weakness.Tick = function(target : any) {
 	this.turns--;
 	// Remove weakness effect
 	if(this.turns <= 0) {
@@ -728,7 +728,7 @@ Status.Weakness.Tick = function(target) {
 }
 
 //All modifiers are multipliers, so 1.05 means 5% extra.
-Status.Buff = function(target, opts) {
+Status.Buff = function(target : any, opts? : any) {
 	if(!target) return;
 	opts = opts || {};
 
@@ -754,14 +754,14 @@ Status.Buff = function(target, opts) {
 
 	return true;
 }
-Status.Buff.Update = function(target, step) {
+Status.Buff.Update = function(target : any, step : number) {
 	this.hours -= step;
 	if(this.hours <= 0) {
 		target.combatStatus.stats[StatusEffect.Buff] = null;
 	}
 }
 Status.Buff.ToStorage = function() {
-	var ret = {};
+	var ret : any = {};
 	if(this.hours) ret["hours"] = this.hours.toFixed(2);
 
 	if(this.Str) ret["Str"] = this.Str.toFixed(2);
@@ -776,9 +776,9 @@ Status.Buff.ToStorage = function() {
 	if(this.LP)  ret["LP"]  = this.LP.toFixed(2);
 	return ret;
 }
-Status.Buff.FromStorage = function(storage) {
+Status.Buff.FromStorage = function(storage : any) {
 	storage = storage || {};
-	var obj = {};
+	var obj : any = {};
 	if(storage["hours"]) obj.hours = parseFloat(storage["hours"]);
 
 	if(storage["Str"]) obj.Str = parseFloat(storage["Str"]);
@@ -799,7 +799,7 @@ Status.Buff.FromStorage = function(storage) {
 }
 
 
-Status.Curse = function(target, opts) {
+Status.Curse = function(target : any, opts? : any) {
 	if(!target) return;
 	opts = opts || {};
 
@@ -822,7 +822,7 @@ Status.Curse = function(target, opts) {
 
 	return true;
 }
-Status.Curse.Tick = function(target) {
+Status.Curse.Tick = function(target : any) {
 	this.turns--;
 	// Remove curse effect
 	if(this.turns <= 0) {
@@ -830,4 +830,4 @@ Status.Curse.Tick = function(target) {
 	}
 }
 
-export { Status, StatusEffect };
+export { Status };

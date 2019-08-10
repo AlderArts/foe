@@ -59,7 +59,7 @@ export class RaceDesc {
 			return 1;
 	}
 
-	Desc(gender : Gender) {
+	Desc(gender? : Gender) {
 		var desc = this.desc;
 		if(_.isNumber(gender)) {
 			if(gender == Gender.male)
@@ -85,15 +85,15 @@ export class RaceDesc {
 		return false;
 	}
 
-	Short(gender : Gender) {
+	Short(gender? : Gender) {
 		var desc = _.sample(this.Desc(gender));
 		return desc ? desc.noun : ("ERROR in " + this.name + ".Short()");
 	}
-	CShort(gender : Gender) {
+	CShort(gender? : Gender) {
 		var desc = _.sample(this.Desc(gender));
 		return desc ? _.capitalize(desc.noun) : ("ERROR in " + this.name + ".CShort()");
 	}
-	aShort(gender : Gender) {
+	aShort(gender? : Gender) {
 		var desc = _.sample(this.Desc(gender));
 		return desc ? (desc.a + " " + desc.noun) : ("ERROR in " + this.name + ".aShort()");
 	}

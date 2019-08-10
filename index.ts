@@ -14,10 +14,6 @@ import './js/utility.js';
 import './js/gui.js';
 
 // Entity scripts
-import './js/statuseffect.js';
-
-import './js/body/body.js';
-
 import './js/entity.js';
 import './js/entity-combat.js';
 import './js/entity-desc.js';
