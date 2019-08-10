@@ -22,7 +22,7 @@ import { EncounterTable } from '../encountertable';
 import { Encounter } from '../combat';
 import { Party } from '../party';
 import { Sex } from '../entity-sex';
-import { GAME } from '../GAME';
+import { GAME, NAV } from '../GAME';
 import { PregnancyHandler } from '../pregnancy';
 import { MirandaFlags } from './miranda-flags';
 import { TerryFlags } from './terry-flags';
@@ -595,7 +595,7 @@ TerryScenes.Prompt = function() {
 	//Equip, stats, job, switch
 	that.InteractDefault(options, switchSpot, true, true, true, true);
 	
-	Gui.SetButtonsFromList(options, true, PartyInteraction);
+	Gui.SetButtonsFromList(options, true, NAV().PartyInteraction);
 }
 
 Terry.prototype.Act = function(encounter, activeChar) {

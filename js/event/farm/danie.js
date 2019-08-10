@@ -11,7 +11,7 @@ import { AppendageType } from '../../body/appendage';
 import { Color } from '../../body/color';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
-import { GAME } from '../../GAME';
+import { GAME, NAV } from '../../GAME';
 
 function Danie(storage) {
 	Entity.call(this);
@@ -99,9 +99,7 @@ Danie.prototype.Interact = function() {
 		Text.NL();
 	}
 	Text.Flush();
-	Gui.NextPrompt(function() {
-		PartyInteraction();
-	});
+	Gui.NextPrompt(NAV().PartyInteraction);
 }
 
 export { Danie };

@@ -10,7 +10,7 @@ import { Images } from '../assets';
 import { Items } from '../items';
 import { Color } from '../body/color';
 import { Race } from '../body/race';
-import { WorldTime, TimeStep, GAME } from '../GAME';
+import { WorldTime, TimeStep, GAME, NAV } from '../GAME';
 import { Text } from '../text';
 import { Gui } from '../gui';
 import { MirandaFlags } from './miranda-flags';
@@ -195,7 +195,7 @@ Miranda.prototype.Interact = function(switchSpot) {
 	//Equip, stats, job, switch
 	that.InteractDefault(options, switchSpot, !rigard.UnderLockdown(), true, !rigard.UnderLockdown(), true);
 	
-	Gui.SetButtonsFromList(options, true, PartyInteraction);
+	Gui.SetButtonsFromList(options, true, NAV().PartyInteraction);
 }
 
 // Schedule

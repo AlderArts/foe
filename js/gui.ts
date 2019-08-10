@@ -6,17 +6,15 @@ import { SMALL_FONT, DEFAULT_FONT, GetRenderPictures } from '../app';
 import { StatusEffect } from './statuseffect';
 import { Input, Keys } from './input';
 import { isOnline, SetGameState } from './gamestate';
-// import { Explore } from './exploration';
 import { gameState, GameState } from './gamestate';
 import { ExploreButtonIndex } from './explorestate';
 import { Text } from './text';
-import { GAME, WorldTime } from './GAME';
-import { Explore, Exploration } from './exploration';
+import { GAME, WorldTime, GetCavalcade, NAV } from './GAME';
 import { StatusList } from './statuslist';
 import { isFunction } from './utility';
 import { EnemyParty, CurrentActiveChar } from './combat-data';
 
-let Gui = {};
+let Gui : any = {};
 Gui.debug = null;
 Gui.ShortcutsVisible = false;
 
@@ -51,7 +49,7 @@ Raphael.el.is_visible = function() {
 }
 
 Gui.Init = function() {
-	Gui.canvas = Raphael("wrap");
+	Gui.canvas = Raphael("wrap", 100, 100);
 	Gui.canvas.setViewBox(0,0,Gui.w,Gui.h,true);
 	Gui.canvas.setSize('100%', '100%');
 	Gui.bg = Gui.canvas.image(Images.bg, 0, 0, Gui.w, Gui.h);
@@ -136,7 +134,6 @@ Gui.Init = function() {
 
 	// Set up key listeners (input.js)
 	Input.Init(Gui);
-	Exploration.Init(Gui);
 
 	// Set bg
 	Gui.BgColor = isOnline() && localStorage["bgcolor"] ? localStorage["bgcolor"] : "rgba(255, 255, 255, 0.2)";
@@ -185,7 +182,7 @@ Gui.Init = function() {
 	Gui.ClearButtons();
 }
 
-Gui.Print = function(x, y, text, font, size, align) {
+Gui.Print = function(x : number, y : number, text : string, font : RaphaelFont, size : number, align? : string) {
 	align = align || "start";
 	var t = Gui.canvas.print(x, y, text, font, size);
 	var bb = t.getBBox();
@@ -196,7 +193,7 @@ Gui.Print = function(x, y, text, font, size, align) {
 	return t;
 }
 
-Gui.PrintGlow = function(set, obj, x, y, text, font, size, align, glow) {
+Gui.PrintGlow = function(set : RaphaelSet, obj : any, x : number, y : number, text : string, font : RaphaelFont, size : number, align : string, glow : boolean) {
 	if(text != obj.str) {
 		obj.str = text;
 		if(obj.text) {
@@ -216,12 +213,12 @@ Gui.PrintGlow = function(set, obj, x, y, text, font, size, align, glow) {
 	}
 }
 
-Gui.PrintShow = function(obj) {
+Gui.PrintShow = function(obj : any) {
 	obj.text.show();
 	obj.glow.show();
 }
 
-Gui.SetupPortrait = function(xoffset, yoffset, set, obj, isParty, index) {
+Gui.SetupPortrait = function(xoffset : number, yoffset : number, set : RaphaelSet, obj : any, isParty : boolean, index : number) {
 	var barStart   = 85;
 	var barWidth   = Gui.barWidth;
 	var barHeigth  = 30;
@@ -237,7 +234,7 @@ Gui.SetupPortrait = function(xoffset, yoffset, set, obj, isParty, index) {
 	portrait.node.ondragstart = function() {
 		return false;
 	}
-	var local = {
+	var local : any = {
 		xoffset : xoffset,
 		yoffset : yoffset,
 		portrait: portrait,
@@ -283,7 +280,7 @@ Gui.SetupPortrait = function(xoffset, yoffset, set, obj, isParty, index) {
 	});
 }
 
-Gui.HandlePortraitClick = function(index, isParty) {
+Gui.HandlePortraitClick = function(index : number, isParty : boolean) {
 	if(gameState == GameState.Game && !GAME().IntroActive) {
 		if(isParty) {
 			var character = GAME().party.Get(index);
@@ -295,7 +292,7 @@ Gui.HandlePortraitClick = function(index, isParty) {
 	}
 }
 
-Gui.SetupCavalcadeHand = function(xoffset, yoffset, set, obj) {
+Gui.SetupCavalcadeHand = function(xoffset : number, yoffset : number, set : RaphaelSet, obj : any) {
 	var charSet = Gui.canvas.set();
 
 	//var portrait = Gui.canvas.image(Images.pc_male, xoffset, yoffset, 100, 100);
@@ -358,7 +355,7 @@ document.body.onresize = Gui.Resize;
 Gui.Callstack = new Array();
 
 
-Gui.FontPicker = function(back) {
+Gui.FontPicker = function(back : any) {
 	Text.Clear();
 	Text.Add("Set a new font/fontsize?");
 	Text.NL();
@@ -407,7 +404,7 @@ Gui.FontPicker = function(back) {
 }
 
 
-Gui.BgColorPicker = function(back) {
+Gui.BgColorPicker = function(back : any) {
 	Text.Clear();
 	Text.Add("Set a new background color?");
 	Text.Flush();
@@ -508,13 +505,13 @@ Gui.ClearButtons = function() {
 		Input.exploreButtons[i].SetVisible(false);
 }
 
-Gui.NextPrompt = function(func, text, tooltip) {
+Gui.NextPrompt = function(func? : any, text? : string, tooltip? : any) {
 	Gui.ClearButtons();
 	//text, func, enabled, obj, tooltip, state
 	Input.buttons[0].Setup(text || "Next", func || Gui.PrintDefaultOptions, true, null, tooltip);
 }
 
-Gui.SetButtonPage = function(list, page, state) {
+Gui.SetButtonPage = function(list : any[], page : number, state : GameState) {
 	Gui.ClearChoiceButtons();
 	for(var i=0, j=page*Input.buttons.length; i<Input.buttons.length && j<list.length; i++, j++) {
 		var name = list[j].nameStr || "NULL";
@@ -525,7 +522,7 @@ Gui.SetButtonPage = function(list, page, state) {
 	}
 }
 
-Gui.SetButtonsFromList = function(list, backEnabled, backFunc, state, backState) {
+Gui.SetButtonsFromList = function(list : any[], backEnabled : boolean, backFunc : any, state : GameState, backState : GameState) {
 	Gui.ClearButtons();
 	var currentPage = 0;
 	backFunc = backFunc || Gui.PrintDefaultOptions;
@@ -563,14 +560,14 @@ Gui.SetButtonsFromList = function(list, backEnabled, backFunc, state, backState)
 	return function() { return currentPage; }
 }
 
-Gui.SetButtonCollectionPage = function(encounter, caster, list, ret, page) {
+Gui.SetButtonCollectionPage = function(encounter : any, caster : any, list : any[], ret : any, page : number) {
 	Gui.ClearChoiceButtons();
 	for(var i=0, j=page*Input.buttons.length; i<Input.buttons.length && j<list.length; i++, j++) {
 		Input.buttons[i].SetFromAbility(encounter, caster, list[j], ret);
 	}
 }
 
-Gui.SetButtonsFromCollection = function(encounter, caster, list, ret, backFunc) {
+Gui.SetButtonsFromCollection = function(encounter : any, caster : any, list : any[], ret : any, backFunc : any) {
 	Gui.ClearButtons();
 	var currentPage = 0;
 
@@ -605,7 +602,7 @@ Gui.SetButtonsFromCollection = function(encounter, caster, list, ret, backFunc) 
 	updateNav();
 }
 
-Gui.RenderParty = function(p, set, obj, max) {
+Gui.RenderParty = function(p : any, set : RaphaelSet, obj : any, max? : number) {
 	max = max || 4;
 	var i = 0;
 	for(; i < p.Num() && i < max; ++i) {
@@ -618,7 +615,7 @@ Gui.RenderParty = function(p, set, obj, max) {
 	for(; i < 4 && i < max; ++i)
 		set[i].hide();
 }
-Gui.RenderEntity = function(entity, set, obj) {
+Gui.RenderEntity = function(entity : any, set : RaphaelSet, obj : any) {
 	/*
 	var local = {
 		portrait: Gui.canvas.image(Images.pc_male, xoffset, yoffset, 100, 100),
@@ -679,7 +676,7 @@ Gui.RenderEntity = function(entity, set, obj) {
 	entity.combatStatus.Render(obj.status);
 }
 
-Gui.RenderLocation = function(name) {
+Gui.RenderLocation = function(name : any) {
 	var nameStr;
 	if(isFunction(name))
 		nameStr = name();
@@ -716,8 +713,8 @@ Gui.RenderTime = function() {
 	Gui.clock.minuteNum = minute;
 }
 
-Gui.SetGameState = function(state) {
-	switch(gameState) {
+Gui.SetGameState = function(state : GameState) {
+	switch(gameState) { // TODO?
 		case GameState.Game:
 			for(var i = 0; i < Input.menuButtons.length; i++)
 				Input.menuButtons[i].SetVisibility();
@@ -740,6 +737,8 @@ Gui.SetGameState = function(state) {
 
 // Animation loop Rendering
 Gui.Render = function() {
+	let cavalcade = GetCavalcade();
+
 	Gui.cavalcade.hide();
 
 	switch (gameState) {
@@ -798,7 +797,7 @@ Gui.Render = function() {
 					var showCard = cavalcade.round > 4;
 					// don't show folded opponents
 					if(p.folded) showCard = false;
-					showCard |= p == GAME().player; // always show own
+					showCard = showCard || (p == GAME().player); // always show own
 
 					if(showCard && k < p.hand.length)
 						cards[k].attr({src: p.hand[k].Img}).show();
@@ -834,7 +833,7 @@ Gui.Render = function() {
 	}
 }
 
-Gui.RenderStatsScreen = function(context) {
+Gui.RenderStatsScreen = function(context : any) { // TODO never used anywhere
 	// Set up context for drawing text
 	context.fillStyle = "black";
 	context.textAlign = 'start';
@@ -894,15 +893,15 @@ Gui.SavePromptText = function() {
 	Text.Flush();
 }
 
-let LastSubmenu = null;
-Gui.SetLastSubmenu = function(menu) {
+let LastSubmenu : any = null;
+Gui.SetLastSubmenu = function(menu : any) {
 	LastSubmenu = menu;
 }
 Gui.GetLastSubmenu = function() {
 	return LastSubmenu;
 }
 
-Gui.PrintDefaultOptions = function(preventClear) {
+Gui.PrintDefaultOptions = function(preventClear? : boolean) {
 	var e = Gui.Callstack.pop();
 	if(e) {
 		e();
@@ -925,7 +924,7 @@ Gui.PrintDefaultOptions = function(preventClear) {
 	if(LastSubmenu)
 		LastSubmenu.func(preventClear);
 	else
-		Explore();
+		NAV().Explore();
 }
 
 

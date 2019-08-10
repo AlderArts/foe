@@ -9,7 +9,6 @@ import './assets/css/droid-sans.css';
 
 // Javascript
 import './js/utility.js';
-import './js/gui.js';
 
 // Entity scripts
 import './js/event/player.js';

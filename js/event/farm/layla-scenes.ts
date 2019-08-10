@@ -1,6 +1,6 @@
 
 import { Gender } from '../../body/gender';
-import { WorldTime, GAME, TimeStep, WORLD } from '../../GAME';
+import { WorldTime, GAME, TimeStep, WORLD, NAV } from '../../GAME';
 import { Party } from '../../party';
 import { Encounter } from '../../combat';
 import { SetGameState, GameState } from '../../gamestate';
@@ -16,7 +16,6 @@ import { Race } from '../../body/race';
 import { Entity } from '../../entity';
 import { Time } from '../../time';
 import { GwendyScenes } from './gwendy-scenes';
-import { PartyInteraction } from '../../exploration';
 import { DryadGladeFlags } from '../../loc/glade-flags';
 import { LaylaMob } from './layla-mob';
 
@@ -89,7 +88,7 @@ LaylaScenes.Prompt = function(switchSpot : boolean) {
 	//Layla can't equip things
 	that.InteractDefault(options, switchSpot, false, true, true, true);
 	
-	Gui.SetButtonsFromList(options, true, PartyInteraction);
+	Gui.SetButtonsFromList(options, true, NAV().PartyInteraction);
 }
 
 

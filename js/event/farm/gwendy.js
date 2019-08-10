@@ -7,7 +7,7 @@ import { Entity } from '../../entity';
 import { Images } from '../../assets';
 import { Color } from '../../body/color';
 import { HairStyle } from '../../body/hair';
-import { WorldTime, TimeStep, GAME, WORLD } from '../../GAME';
+import { WorldTime, TimeStep, GAME, WORLD, NAV } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
 
@@ -138,7 +138,7 @@ Gwendy.prototype.Interact = function(switchSpot) {
 	//Equip, stats, job, switch
 	that.InteractDefault(options, switchSpot, true, true, true, true);
 	
-	Gui.SetButtonsFromList(options, true, PartyInteraction);
+	Gui.SetButtonsFromList(options, true, NAV().PartyInteraction);
 }
 
 

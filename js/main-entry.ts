@@ -5,8 +5,8 @@ import { Gui } from "./gui";
 import { InitWorld } from "./world";
 import { Saver } from "./saver";
 import { Input } from "./input";
-import { DataPrompt } from "./exploration";
 import { InitGameOver } from "./main-gameover";
+import { NAV } from "./GAME";
 
 // Set the main entrypoint of the application
 function EntryPoint() {
@@ -44,7 +44,7 @@ function Setup() {
 	Saver.Init();
 
 	// Basic menu
-	Input.menuButtons[0].Setup("Data", DataPrompt, true);
+	Input.menuButtons[0].Setup("Data", NAV().DataPrompt, true);
 
 	Gui.Render();
 }

@@ -13,6 +13,7 @@ import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { BurrowsFlags } from '../../loc/burrows-flags';
 import { RoaFlags } from './roa-flags';
+import { NAV } from '../../GAME';
 
 let RoaScenes = {};
 
@@ -128,9 +129,7 @@ Roa.prototype.Interact = function() {
 	}
 	
 	Text.Flush();
-	Gui.NextPrompt(function() {
-		PartyInteraction();
-	});
+	Gui.NextPrompt(NAV().PartyInteraction);
 }
 
 RoaScenes.BrothelApproach = function() {

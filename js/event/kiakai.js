@@ -13,7 +13,7 @@ import { Images } from '../assets';
 import { Items } from '../items';
 import { Text } from '../text';
 import { Gui } from '../gui';
-import { TimeStep, GAME } from '../GAME';
+import { TimeStep, GAME, NAV } from '../GAME';
 import { KiakaiFlags } from './kiakai-flags';
 
 function Kiakai(storage) {
@@ -252,7 +252,7 @@ Kiakai.prototype.Interact = function(switchSpot) {
 	//Equip, stats, job, switch
 	that.InteractDefault(options, switchSpot, true, true, true, true);
 	
-	Gui.SetButtonsFromList(options, true, PartyInteraction);
+	Gui.SetButtonsFromList(options, true, NAV().PartyInteraction);
 }
 
 Kiakai.prototype.TalkPrompt = function() {

@@ -8,7 +8,7 @@ import { Event, Link } from '../../event';
 import { EncounterTable } from '../../encountertable';
 import { GetDEBUG } from '../../../app';
 import { Gender } from '../../body/gender';
-import { WorldTime, MoveToLocation, GAME } from '../../GAME';
+import { WorldTime, MoveToLocation, GAME, NAV } from '../../GAME';
 import { SetGameState, GameState } from '../../gamestate';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
@@ -1052,7 +1052,7 @@ KrawitzScenes.WorkWork = function() {
 		var options = new Array();
 		options.push({ nameStr : "Yes",
 			func : function() {
-				LimitedDataPrompt(KrawitzScenes.EnteringTheWork);
+				NAV().LimitedDataPrompt(KrawitzScenes.EnteringTheWork);
 			}, enabled : true, tooltip : ""
 		});
 		options.push({ nameStr : "No",
@@ -1139,7 +1139,7 @@ KrawitzScenes.ApproachGates = function() {
 		var options = new Array();
 		options.push({ nameStr : "Yes",
 			func : function() {
-				LimitedDataPrompt(KrawitzScenes.SneakingIn);
+				NAV().LimitedDataPrompt(KrawitzScenes.SneakingIn);
 			}, enabled : true, tooltip : ""
 		});
 		options.push({ nameStr : "No",

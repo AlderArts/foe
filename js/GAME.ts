@@ -82,3 +82,19 @@ export function EntityStorage() {
 export function InitEntityStorage() {
     entityStorage = new Array();
 }
+
+let cavalcade : any = null;
+
+export function SetCavalcade(c : any) {
+	cavalcade = c;
+}
+
+export function GetCavalcade() {
+	return cavalcade;
+}
+
+let nav : any = {};
+
+export function NAV() {
+	return nav;
+}

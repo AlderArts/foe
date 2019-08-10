@@ -21,7 +21,7 @@ export class Button {
 	obj : any;
 	tooltip : any;
 	key : number;
-	state : any;
+	state : GameState;
 	oldEnImagePath : any;
 	oldDisImagePath : any;
 	set : any;
@@ -187,7 +187,7 @@ export class Button {
 	/*
 	 * This function is used to set the state of a button after it is created
 	 */
-	Setup(text : string, func : any, enabled : boolean, obj : any, tooltip : any, state : any) {
+	Setup(text : string, func : any, enabled : boolean, obj : any, tooltip : any, state : GameState) {
 		this.SetText(text);
 		this.func    = func;
 		this.obj     = obj;

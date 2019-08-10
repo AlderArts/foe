@@ -1,9 +1,8 @@
 import { Gender } from "../body/gender";
-import { Kiakai } from "./kiakai";
 import { Gui } from "../gui";
 import { Text } from "../text";
 import { EncounterTable } from "../encountertable";
-import { GAME, TimeStep } from "../GAME";
+import { GAME, TimeStep, NAV } from "../GAME";
 import { KiakaiFlags } from "./kiakai-flags";
 import { Color } from "../body/color";
 import { Sex } from "../entity-sex";
@@ -11,7 +10,6 @@ import { LowerBodyType } from "../entity-desc";
 import { ToysItems } from "../items/toys";
 import { Orifice } from "../body/orifice";
 import { IngredientItems } from "../items/ingredients";
-import { PartyInteraction } from "../exploration";
 
 /*
  * 
@@ -588,7 +586,7 @@ KiakaiSex.HealingNice = function() {
 										
 										Text.Add("Troubled, you gather up your gear and prepare to continue your journey.", parse);
 										Text.Flush();
-										Gui.NextPrompt(PartyInteraction);
+										Gui.NextPrompt(NAV().PartyInteraction);
 										
 										player.AddLustFraction(-1);
 										kiakai.flags["Sexed"]++;

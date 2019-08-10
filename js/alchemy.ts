@@ -4,10 +4,9 @@ import { Images } from "./assets";
 import { Inventory } from "./inventory";
 import { Text } from "./text";
 import { Gui } from "./gui";
-import { GAME } from "./GAME";
+import { GAME, NAV } from "./GAME";
 import { Entity } from './entity';
 import { ItemIds, Item } from './item';
-import { ShowAlchemy } from './exploration';
 
 /*
  * 
@@ -102,7 +101,7 @@ Alchemy.MakeItem = function(it : Item, qty : number, alchemist : Entity, invento
 			if(backPrompt)
 				Alchemy.AlchemyPrompt(alchemist, inventory, backPrompt);
 			else
-				ShowAlchemy();
+				NAV().ShowAlchemy();
 		});
 	}
 };

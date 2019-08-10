@@ -2,14 +2,12 @@ import * as _ from 'lodash';
 
 import { GetDEBUG } from "../app";
 import { SetGameState, GameState } from "./gamestate";
-import { GAME } from './GAME';
+import { GAME, SetCavalcade } from './GAME';
 import { Items } from "./items";
 import { Gui } from "./gui";
 import { Text } from "./text";
 import { Rand } from "./utility";
 import { Input } from './input';
-
-let cavalcade : any = null;
 
 enum CScore {
 	Cavalcade = 0,
@@ -106,8 +104,8 @@ export class Cavalcade {
 	
 	PrepGame(keepOut? : boolean) {
 		SetGameState(GameState.Cavalcade, Gui);
-		cavalcade = this;
 		
+		let that = this;
 		_.each(this.players, function(p) {
 			if(!keepOut) {
 				p.out = false;
@@ -117,8 +115,8 @@ export class Cavalcade {
 			if(p.out)
 				p.folded = true;
 			else {
-				p.hand.push(cavalcade.PullCard());
-				p.hand.push(cavalcade.PullCard());
+				p.hand.push(that.PullCard());
+				p.hand.push(that.PullCard());
 				p.folded = false;
 			}
 			p.res = null;
@@ -127,6 +125,8 @@ export class Cavalcade {
 		this.house.push(this.PullCard());
 		this.house.push(this.PullCard());
 		this.house.push(this.PullCard());
+
+		SetCavalcade(this);
 	}
 	
 	Finish() {

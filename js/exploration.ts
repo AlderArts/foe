@@ -9,7 +9,7 @@ import { SetGameState, GameState, isOnline } from './gamestate';
 import { GetRenderPictures, SetRenderPictures, GetDEBUG, SetDEBUG } from '../app';
 
 import { ExploreButtonIndex } from './explorestate';
-import { GAME, GameCache } from './GAME';
+import { GAME, GameCache, NAV } from './GAME';
 import { Text } from './text';
 import { Input } from './input';
 import { Images } from './assets';
@@ -19,16 +19,10 @@ import { SplashScreen } from './main-splash';
 import { Saver } from './saver';
 import { Alchemy } from './alchemy';
 import { Quests } from './quest';
+import { Gui } from './gui';
 //import { Saver } from './saver'; TODO Circular dep
 //import { Alchemy } from './alchemy'; TODO Circular dep
 //import { Quest } from './quest'; TODO Circular dep
-
-let Gui : any = null;
-let Exploration = {
-	Init : function(gui : any) {
-		Gui = gui;
-	}
-};
 
 function SetExploreButtons() {
 	let player = GAME().player;
@@ -106,6 +100,7 @@ function LimitedDataPrompt(backFunc : any) {
 
 	Input.buttons[11].Setup("Back", backFunc, true);
 }
+NAV().LimitedDataPrompt = LimitedDataPrompt;
 
 function DataPrompt() {
 	let party = GAME().party;
@@ -182,6 +177,7 @@ function DataPrompt() {
 
 	Input.buttons[11].Setup("Back", Gui.PrintDefaultOptions, true);
 }
+NAV().DataPrompt = DataPrompt;
 
 //***************************************************//
 //                                                   //
@@ -189,7 +185,7 @@ function DataPrompt() {
 //                                                   //
 //***************************************************//
 
-function Explore(preventClear : boolean) {
+let Explore = function(preventClear : boolean) {
 	let party = GAME().party;
 	if(!preventClear)
 		Text.Clear();
@@ -206,16 +202,18 @@ function Explore(preventClear : boolean) {
 
 	SetExploreButtons();
 }
+NAV().Explore = Explore;
 
-export function PartyInteraction(preventClear : boolean) {
+let PartyInteraction = function(preventClear : boolean) {
 	let party = GAME().party;
 	party.Interact(preventClear, party.location.switchSpot());
 	Gui.SetLastSubmenu(Input.exploreButtons[ExploreButtonIndex.Party]);
 
 	SetExploreButtons();
 }
+NAV().PartyInteraction = PartyInteraction;
 
-function Fight(preventClear : boolean) {
+let Fight = function(preventClear : boolean) {
 	let party = GAME().party;
 	if(!preventClear)
 		Text.Clear();
@@ -239,8 +237,9 @@ function Fight(preventClear : boolean) {
 		SetGameState(GameState.Game, Gui);
 	}
 }
+NAV().Fight = Fight;
 
-function ShowInventory(preventClear : boolean) {
+let ShowInventory = function(preventClear : boolean) {
 	let party = GAME().party;
 	if(!preventClear)
 		Text.Clear();
@@ -256,8 +255,9 @@ function ShowInventory(preventClear : boolean) {
 
 	SetExploreButtons();
 }
+NAV().ShowInventory = ShowInventory;
 
-function ShowAbilities(preventClear : boolean) {
+let ShowAbilities = function(preventClear : boolean) {
 	let party = GAME().party;
 	if(!preventClear)
 		Text.Clear();
@@ -268,8 +268,9 @@ function ShowAbilities(preventClear : boolean) {
 
 	SetExploreButtons();
 }
+NAV().ShowAbilities = ShowAbilities;
 
-export function ShowAlchemy(preventClear? : boolean) {
+let ShowAlchemy = function(preventClear? : boolean) {
 	let player = GAME().player;
 	let party = GAME().party;
 	if(!preventClear)
@@ -281,8 +282,9 @@ export function ShowAlchemy(preventClear? : boolean) {
 
 	SetExploreButtons();
 }
+NAV().ShowAlchemy = ShowAlchemy;
 
-function ShowQuests(preventClear : boolean) {
+let ShowQuests = function(preventClear : boolean) {
 	if(!preventClear)
 		Text.Clear();
 	Gui.ClearButtons();
@@ -292,8 +294,9 @@ function ShowQuests(preventClear : boolean) {
 
 	SetExploreButtons();
 }
+NAV().ShowQuests = ShowQuests;
 
-function ShowHunting(preventClear : boolean) {
+let ShowHunting = function(preventClear : boolean) {
 	let party = GAME().party;
 	if(!preventClear)
 		Text.Clear();
@@ -306,5 +309,4 @@ function ShowHunting(preventClear : boolean) {
 
 	SetExploreButtons();
 }
-
-export { DataPrompt, LimitedDataPrompt, Explore, Exploration };
+NAV().ShowHunting = ShowHunting;

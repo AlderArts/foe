@@ -10,7 +10,7 @@ import { Images } from '../../assets';
 import { HairStyle } from '../../body/hair';
 import { Stat } from '../../stat';
 import { Time } from '../../time';
-import { WorldTime } from '../../GAME';
+import { WorldTime, NAV } from '../../GAME';
 import { Abilities } from '../../abilities';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
@@ -245,9 +245,7 @@ Lei.prototype.Interact = function() {
 	}
 
 	Text.Flush();
-	Gui.NextPrompt(function() {
-		PartyInteraction();
-	});
+	Gui.NextPrompt(NAV().PartyInteraction);
 }
 
 export { Lei };
