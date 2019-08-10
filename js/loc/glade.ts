@@ -5,55 +5,63 @@
  */
 
 import { Event, Link } from '../event';
-import { WorldTime, MoveToLocation } from '../GAME';
+import { WorldTime, MoveToLocation, GAME, TimeStep, WORLD } from '../GAME';
 import { Season } from '../time';
 import { SetGameState, GameState } from '../gamestate';
 import { Gui } from '../gui';
 import { Text } from '../text';
 import { Encounter } from '../combat';
 import { Party } from '../party';
+import { Sex } from '../entity-sex';
+import { SetGameOverButton } from '../main';
+import { GlobalScenes } from '../event/global';
+import { OrchidScenes } from '../enemy/orchid-scenes';
 
-let world = null;
-
-export function InitGlade(w) {
-	world = w;
-	world.SaveSpots["Dryads"] = GladeLoc;
+export function InitGlade() {
+	WORLD().SaveSpots["Dryads"] = GladeLoc;
 };
 
-let DryadGladeScenes = {};
+let DryadGladeScenes : any = {};
 
-function DryadGlade(storage) {
-	this.flags = {};
-	
-	this.flags["Visit"] = DryadGlade.Visit.NotVisited;
-	
-	if(storage) this.FromStorage(storage);
-}
-
-DryadGlade.Visit = {
-	NotVisited     : 0,
-	Visited        : 1,
-	DefeatedOrchid : 2
+enum DryadGladeVisit {
+	NotVisited     = 0,
+	Visited        = 1,
+	DefeatedOrchid = 2
 };
 
-DryadGlade.prototype.ToStorage = function() {
-	var storage = {};
-	storage.flags = this.flags;
-	return storage;
-}
+export class DryadGlade {
+	flags : any;
 
-DryadGlade.prototype.FromStorage = function(storage) {
-	for(var flag in storage.flags)
-		this.flags[flag] = parseInt(storage.flags[flag]);
-}
+	constructor(storage? : any) {
+		this.flags = {};
+		
+		this.flags["Visit"] = DryadGlade.Visit.NotVisited;
+		
+		if(storage) this.FromStorage(storage);
+	}
 
-DryadGlade.prototype.Update = function(step) {
+	static get Visit() { return DryadGladeVisit; }
 	
-}
+	ToStorage() {
+		var storage : any = {};
+		storage.flags = this.flags;
+		return storage;
+	}
 
-//TODO
-DryadGlade.prototype.OrchidSlut = function() {
-	return false;
+	FromStorage(storage : any) {
+		for(var flag in storage.flags)
+			this.flags[flag] = parseInt(storage.flags[flag]);
+	}
+
+	Update(step : number) {
+		
+	}
+
+	//TODO
+	OrchidSlut() {
+		return false;
+	}
+
 }
 
 let GladeLoc = new Event("Dryads' glade");
@@ -81,7 +89,7 @@ GladeLoc.links.push(new Link(
 	"Leave", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Forest.Outskirts, {minute: 15});
+		MoveToLocation(WORLD().loc.Forest.Outskirts, {minute: 15});
 	}
 ));
 GladeLoc.events.push(new Link(
@@ -95,7 +103,7 @@ GladeLoc.events.push(new Link(
 	"Orchid", true, true,
 	null,
 	function() {
-		Scenes.Orchid.Interact();
+		OrchidScenes.Interact();
 	}
 ));
 
@@ -139,7 +147,7 @@ GladeLoc.onEntry = function() {
 			Text.Flush();
 			
 			Gui.NextPrompt(function() {
-				MoveToLocation(world.loc.Forest.Outskirts, {minute: 15})
+				MoveToLocation(WORLD().loc.Forest.Outskirts, {minute: 15})
 			});
 		}, enabled : true,
 		tooltip : "Return once you are better prepared."
@@ -150,7 +158,9 @@ GladeLoc.onEntry = function() {
 DryadGladeScenes.First = function() {
 	let player = GAME().player;
 	let party = GAME().party;
-	var parse = {
+	let orchid = GAME().orchid;
+
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -229,9 +239,13 @@ DryadGladeScenes.FirstLoss = function() {
 	let player = GAME().player;
 	let party = GAME().party;
 	let orchid = GAME().orchid;
+	let kiakai = GAME().kiakai;
+	let terry = GAME().terry;
+	let roa = GAME().roa;
+	let momo = GAME().momo;
 	SetGameState(GameState.Event, Gui);
 	
-	var parse = {
+	var parse : any = {
 		armor : function() { return player.ArmorDesc(); }
 	};
 	
@@ -267,7 +281,7 @@ DryadGladeScenes.FirstLoss = function() {
 		Text.Add("<i>“I’ll get to you in a moment, okay?”</i> Orchid says, turning to [comp].", parse);
 		Text.NL();
 		if(party.InParty(kiakai)) {
-			var parse = {
+			parse = {
 				name : kiakai.name,
 				possessive : kiakai.possessive(),
 				boyGirl : kiakai.mfTrue("boy", "girl"),
@@ -315,7 +329,7 @@ DryadGladeScenes.FirstLoss = function() {
 			}
 		}
 		if(party.InParty(terry)) {
-			var parse = {
+			parse = {
 				playername : player.name,
 				foxvixen : terry.mfPronoun("fox", "vixen")
 			};
@@ -446,7 +460,7 @@ DryadGladeScenes.FirstLoss = function() {
 			var plural = total - count > 1;
 			var rest   = plural && count > 1;
 			var p1     = party.Get(count);
-			var parse = {
+			parse = {
 				bodyBodies : plural ? "bodies" : "body",
 				hisher     : plural ? "their" : p1.hisher()
 			};
@@ -557,14 +571,14 @@ DryadGladeScenes.FirstLoss = function() {
 	});
 }
 
-DryadGladeScenes.FirstWin = function(enc) {
+DryadGladeScenes.FirstWin = function(enc : Encounter) {
 	let player = GAME().player;
 	let party = GAME().party;
 	let glade = GAME().glade;
 	let kiakai = GAME().kiakai;
 	SetGameState(GameState.Event, Gui);
 	
-	var enc = this;
+	enc = this;
 	
 	var parse = {
 		playername : player.name,
@@ -664,7 +678,7 @@ DryadGladeScenes.MotherTree = function() {
 DryadGladeScenes.MotherTreePrompt = function() {
 	let player = GAME().player;
 	let party = GAME().party;
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	if(party.Num() == 2)
@@ -746,7 +760,7 @@ DryadGladeScenes.MotherTreeTalk = function() {
 	options.push({ nameStr : "Spirit",
 		func : function() {
 			Text.Clear();
-			if(Scenes.Global.PortalsOpen()) {
+			if(GlobalScenes.PortalsOpen()) {
 				Text.Add("<i>“It really surprised me when Spirit said she was going with you. Then again, she’s always been a headstrong child. Though she looks young, she does so because she wishes to; it’s well over two decades since her birth.”</i>", parse);
 				Text.NL();
 				Text.Add("<i>“I truly believe she can aid you, though. She is at least as strong as I was before I took root.”</i>", parse);
@@ -794,4 +808,4 @@ DryadGladeScenes.MotherTreeTalk = function() {
 	Gui.SetButtonsFromList(options, true, DryadGladeScenes.MotherTreePrompt);
 }
 
-export { DryadGlade, GladeLoc, DryadGladeScenes };
+export { GladeLoc, DryadGladeScenes };

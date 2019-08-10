@@ -70,7 +70,7 @@ export function InitWorld() {
 	InitRigard(world, Scenes);
 	InitFarm();
 	InitBurrows(world);
-	InitGlade(world);
+	InitGlade();
 	
 	InitMiranda(world);
 	

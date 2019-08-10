@@ -1,35 +1,17 @@
-import { Images, LoadImages, assetsOverlay } from './assets';
+import { Images } from './assets';
 import { Gui } from './gui';
 import { VERSION_STRING, GetRenderPictures, SetRenderPictures, GetDEBUG, SetDEBUG } from '../app';
 import { Input } from './input';
 import { Saver } from './saver';
 import { CreditsScreen } from './credits';
 import { CacheToGame } from './gamecache';
-import { GameState, setOnline, isOnline, SetGameState } from './gamestate';
-import { DataPrompt } from './exploration';
+import { GameState, isOnline, SetGameState } from './gamestate';
 import { Text } from './text';
 import { Intro } from './event/introduction';
 import { SetGameCache } from './GAME';
 import { loadfileOverlay } from './fileoverlay';
-import { InitWorld } from './world';
 
-// Set the main entrypoint of the application
-function EntryPoint() {
-	try {
-		setOnline(localStorage ? true : false);
-	}
-	catch(ex) {
-		setOnline(false);
-	}
-	finally {
-		// Setup the application
-		Setup();
-	}
-}
-// Make sure that this loads
-window.onload = EntryPoint;
-
-let SetGameOverButton = function(text : any) {
+let SetGameOverButton = function(text? : any) {
 	text = text || "This is where your journey comes to an end.";
 	Gui.ClearButtons();
 	Input.buttons[0].Setup("Game Over", GameOver, true, null, text);
@@ -114,31 +96,6 @@ let SplashScreen = function() {
 	if(isOnline() && Saver.HasSaves())
 		Text.Add("DEBUG: localStorage usage: " + JSON.stringify(localStorage).length / 2636625);
 	Text.Flush();
-}
-
-
-
-function Setup() {
-	// Load assets
-	LoadImages(function() {
-		assetsOverlay();
-
-		// Go to credits screen
-		SplashScreen();
-		// Render first frame
-		setTimeout(Gui.Render, 100);
-	});
-
-	InitWorld();
-
-	// Intialize GUI (set key shortcuts, buttons etc)
-	Gui.Init();
-	Saver.Init();
-
-	// Basic menu
-	Input.menuButtons[0].Setup("Data", DataPrompt, true);
-
-	Gui.Render();
 }
 
 export { SetGameOverButton, SplashScreen };
