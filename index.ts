@@ -143,4 +143,4 @@ import './js/enemy/corishev.js';
 import './js/enemy/malice-scouts.js';
 
 // Start up the main text
-import './js/main.ts';
+import './js/main-entry';

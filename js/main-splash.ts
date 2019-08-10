@@ -11,18 +11,6 @@ import { Intro } from './event/introduction';
 import { SetGameCache } from './GAME';
 import { loadfileOverlay } from './fileoverlay';
 
-let SetGameOverButton = function(text? : any) {
-	text = text || "This is where your journey comes to an end.";
-	Gui.ClearButtons();
-	Input.buttons[0].Setup("Game Over", GameOver, true, null, text);
-}
-
-// TODO: Stats, newgame+ etc
-let GameOver = function() {
-	Gui.Callstack = [];
-	SplashScreen();
-}
-
 let SplashScreen = function() {
 	SetGameState(GameState.Credits, Gui);
 	Text.Clear();
@@ -98,4 +86,4 @@ let SplashScreen = function() {
 	Text.Flush();
 }
 
-export { SetGameOverButton, SplashScreen };
+export { SplashScreen };

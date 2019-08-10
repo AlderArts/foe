@@ -13,7 +13,7 @@ import { Text } from '../text';
 import { Encounter } from '../combat';
 import { Party } from '../party';
 import { Sex } from '../entity-sex';
-import { SetGameOverButton } from '../main';
+import { SetGameOverButton } from '../main-gameover';
 import { GlobalScenes } from '../event/global';
 import { OrchidScenes } from '../enemy/orchid-scenes';
 import { DryadGladeFlags } from './glade-flags';

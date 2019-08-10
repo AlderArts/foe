@@ -1,11 +1,12 @@
 import { setOnline } from "./gamestate";
 import { LoadImages, assetsOverlay } from "./assets";
-import { SplashScreen } from "./main";
+import { SplashScreen } from "./main-splash";
 import { Gui } from "./gui";
 import { InitWorld } from "./world";
 import { Saver } from "./saver";
 import { Input } from "./input";
 import { DataPrompt } from "./exploration";
+import { InitGameOver } from "./main-gameover";
 
 // Set the main entrypoint of the application
 function EntryPoint() {
@@ -24,6 +25,8 @@ function EntryPoint() {
 window.onload = EntryPoint;
 
 function Setup() {
+    InitGameOver(SplashScreen);
+
 	// Load assets
 	LoadImages(function() {
 		assetsOverlay();
