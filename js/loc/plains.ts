@@ -24,7 +24,7 @@ import { DryadGlade } from './glade';
 import { PortalOpeningScenes } from '../event/portalopening';
 import { MirandaScenes } from '../event/miranda-scenes';
 import { OutlawsScenes } from '../event/outlaws/outlaws';
-import { FarmScenesIntro } from './farm';
+import { FarmScenesIntro } from './farm-scenes';
 
 // Create namespace
 let PlainsLoc = {

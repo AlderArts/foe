@@ -5,7 +5,7 @@ import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { EncounterTable } from '../../encountertable';
 import { Burrows } from '../../loc/burrows';
-import { FarmScenes } from '../../loc/farm';
+import { FarmScenes } from '../../loc/farm-scenes';
 import { IngredientItems } from '../../items/ingredients';
 import { AlchemyItems } from '../../items/alchemy';
 import { ToysItems } from '../../items/toys';

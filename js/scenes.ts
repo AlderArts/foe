@@ -21,7 +21,7 @@ import { GlobalScenes } from "./event/global";
 import { TerryScenes } from "./event/terry";
 import { KiakaiScenes } from "./event/kiakai-scenes";
 import { HalloweenScenes } from "./event/halloween";
-import { FarmScenes } from "./loc/farm";
+import { FarmScenes } from "./loc/farm-scenes";
 import { DryadGladeScenes } from "./loc/glade";
 
 import { EquineScenes } from "./enemy/equine";

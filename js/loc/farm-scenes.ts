@@ -1,291 +1,27 @@
-/*
- *
- * Gwendy's farm
- *
- */
-
-import { Event, Link } from '../event';
-import { EncounterTable } from '../encountertable';
+import { TimeStep, GAME, MoveToLocation, WORLD } from "../GAME";
+import { Text } from "../text";
+import { Gui } from "../gui";
 import { Gender } from '../body/gender';
-import { GwendyScenes } from '../event/farm/gwendy-scenes';
-import { LaylaScenes } from '../event/farm/layla-scenes';
-import { WorldTime, MoveToLocation, TimeStep, GAME } from '../GAME';
-import { SetGameState, GameState } from '../gamestate';
-import { Gui } from '../gui';
-import { Text } from '../text';
-import { IngredientItems } from '../items/ingredients';
-import { Season } from '../time';
 import { MirandaFlags } from '../event/miranda-flags';
+import { FarmLoc } from "./farm";
+import { Race } from "../body/race";
+import { Color } from "../body/color";
+import { Sex } from "../entity-sex";
+import { Gwendy } from "../event/farm/gwendy";
+import { Party } from "../party";
+import { Bandit } from "../enemy/bandit";
+import { Encounter } from "../combat";
+import { SetGameState, GameState } from "../gamestate";
+import { GwendyScenes } from "../event/farm/gwendy-scenes";
 
-let world = null;
-
-export function InitFarm(w) {
-	world = w;
-	world.SaveSpots["GwendysLoft"] = FarmLoc.Loft;
-};
-
-/*
- * Structure to hold farm management minigame
- */
-let FarmScenes = {};
-
-function Farm(storage) {
-	this.coin = 1000;
-
-	this.flags = {};
-	//this.flags["flag"] = 0;
-	this.flags["Visit"] = 0;
-
-	if(storage) this.FromStorage(storage);
-}
-
-Farm.prototype.FromStorage = function(storage) {
-	this.coin = parseInt(storage.coin) || this.coin;
-	// Load flags
-	for(var flag in storage.flags)
-		this.flags[flag] = parseInt(storage.flags[flag]);
-}
-
-Farm.prototype.ToStorage = function() {
-	var storage   = {};
-	storage.coin  = this.coin;
-	storage.flags = this.flags;
-
-	return storage;
-}
-
-Farm.prototype.Update = function(step) {
-	// TODO: Farm produce etc
-}
-
-Farm.prototype.Found = function() {
-	return this.flags["Visit"] != 0;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Create namespace
-let FarmLoc = {
-	Fields : new Event("Plains: Gwendy's farm"),
-	Barn   : new Event("The barn"),
-	Loft   : new Event("Gwendy's loft")
-}
-
-
-FarmLoc.Loft.events.push(new Link(
-	"Gwendy", function() {
-		let gwendy = GAME().gwendy;
-		return gwendy.IsAtLocation(FarmLoc.Loft);
-	}, true,
-	function() {
-		let gwendy = GAME().gwendy;
-		if(gwendy.IsAtLocation(FarmLoc.Loft)) {
-			Text.Add("Gwendy is here.");
-		}
-		else
-			Text.Add("Gwendy doesn't seem to be in at the moment.");			
-		Text.NL();
-	},
-	GwendyScenes.LoftPrompt
-));
-FarmLoc.Barn.events.push(new Link(
-	"Gwendy", function() {
-		let gwendy = GAME().gwendy;
-		return gwendy.IsAtLocation(FarmLoc.Barn);
-	}, true,
-	function() {
-		let gwendy = GAME().gwendy;
-		if(gwendy.IsAtLocation(FarmLoc.Barn)) {
-			Text.Add("Gwendy is here.");
-		}
-		else
-			Text.Add("Gwendy doesn't seem to be here at the moment.");			
-		Text.NL();
-	},
-	GwendyScenes.BarnPrompt
-));
-FarmLoc.Fields.events.push(new Link(
-	"Gwendy", function() {
-		let gwendy = GAME().gwendy;
-		return gwendy.IsAtLocation(FarmLoc.Fields);
-	}, true,
-	function() {
-		let gwendy = GAME().gwendy;
-		if(gwendy.IsAtLocation(FarmLoc.Fields)) {
-			Text.Add("Gwendy is here.");
-		}
-		else
-			Text.Add("Gwendy doesn't seem to be here at the moment.");			
-		Text.NL();
-	},
-	GwendyScenes.FieldsPrompt
-));
-
-
-//
-// Gwendy's farm, the fields
-//
-FarmLoc.Fields.description = function() {
-	Text.Add("Fields.");
-	Text.NL();
-}
-
-// Set up Layla events
-FarmLoc.Fields.onEntry = function(x, from) {
-	if(from == world.loc.Plains.Crossroads) {
-		if(LaylaScenes.FarmMeetingTrigger(true)) return;
-	}
-	Gui.PrintDefaultOptions();
-}
-
-FarmLoc.Fields.enc = new EncounterTable();
-FarmLoc.Fields.enc.AddEnc(function() {
-	return function() {
-		let party = GAME().party;
-		Text.Clear();
-
-		Text.Add("Not having much else to do, you wander the fields for a few minutes. You pick up a particularly fresh bundle of grass. Who knows, could be useful for something.");
-		Text.NL();
-		Text.Add("You pick up some fresh grass.", null, 'bold');
-		party.inventory.AddItem(IngredientItems.FreshGrass);
-
-		TimeStep({minute: 15});
-		Text.Flush();
-		Gui.NextPrompt();
-	};
-}, 1.0, function() { return WorldTime().season != Season.Winter; });
-
-FarmLoc.Fields.enc.AddEnc(function() {
-	return Scenes.Roaming.FlowerPetal;
-}, 1.0, function() { return WorldTime().season != Season.Winter; });
-
-FarmLoc.Fields.enc.AddEnc(function() {
-	return function() {
-		let party = GAME().party;
-		Text.Clear();
-
-		Text.Add("Not having much else to do, you wander the fields for a few minutes. You pick up a pretty flower. Who knows, could be useful for something.");
-		Text.NL();
-		Text.Add("You pick up a Foxglove.", null, 'bold');
-		party.inventory.AddItem(IngredientItems.Foxglove);
-
-		TimeStep({minute: 15});
-
-		Text.Flush();
-		Gui.NextPrompt();
-	};
-}, 1.0, function() { return WorldTime().season != Season.Winter; });
-
-FarmLoc.Fields.links.push(new Link(
-	"Crossroads", true, true,
-	null,
-	function() {
-		MoveToLocation(world.loc.Plains.Crossroads, {minute: 30});
-	}
-));
-FarmLoc.Fields.links.push(new Link(
-	"Barn", true, true,
-	null,
-	function() {
-		MoveToLocation(FarmLoc.Barn, {minute: 5});
-	}
-));
-
-//
-// Gwendy's barn
-//
-FarmLoc.Barn.description = function() {
-	Text.Add("Barn.");
-	Text.NL();
-}
-FarmLoc.Barn.links.push(new Link(
-	"Fields", true, true,
-	null,
-	function() {
-		MoveToLocation(FarmLoc.Fields, {minute: 5});
-	}
-));
-FarmLoc.Barn.links.push(new Link(
-	"Loft", true, true,
-	null,
-	function() {
-		MoveToLocation(FarmLoc.Loft, {minute: 5});
-	}
-));
-
-//
-// Gwendy's loft
-//
-FarmLoc.Loft.SaveSpot   = "GwendysLoft";
-FarmLoc.Loft.safe       = function() { return true; };
-FarmLoc.Loft.description = function() {
-	Text.Add("Gwendy's loft. ");
-	Text.NL();
-}
-FarmLoc.Loft.links.push(new Link(
-	"Climb down", true, true,
-	null,
-	function() {
-		MoveToLocation(FarmLoc.Barn, {minute: 5});
-	}
-));
-
-FarmLoc.Loft.SleepFunc = function() {
-	let party = GAME().party;
-
-	var parse = {
-
-	};
-
-	SetGameState(GameState.Event, Gui);
-
-	Text.Clear();
-
-	//TODO
-	Text.Add("PLACEHOLDER", parse);
-	Text.NL();
-	Text.Add("You head off to bed", parse);
-	Text.NL();
-	Text.Add("", parse);
-
-	Text.Flush();
-
-	var func = function(dream) {
-		TimeStep({hour: 8});
-		party.Sleep();
-
-		if(LaylaScenes.FarmMeetingTrigger()) return;
-
-		//TODO
-		Text.Add("You wake up, feeling rested and refreshed.", parse);
-
-		Text.Flush();
-		Gui.PrintDefaultOptions(true);
-	}
-
-	Gui.NextPrompt(function() {
-		Text.Clear();
-
-		Scenes.Dreams.Entry(func);
-	});
-}
+let FarmScenes : any = {};
 
 /*
  * ----------------------
  * FARM INTRO SEGMENT
  * ----------------------
  */
-let FarmScenesIntro = {};
+let FarmScenesIntro : any = {};
 
 
 FarmScenesIntro.Start = function() {
@@ -529,8 +265,11 @@ FarmScenesIntro.GwendyQuestions2 = function() {
 	let player = GAME().player;
 	let party = GAME().party;
 	let gwendy = GAME().gwendy;
+	let farm = GAME().farm;
+	let danie = GAME().danie;
+	let adrian = GAME().adrian;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		breastDesc : function() { return player.FirstBreastRow().Short(); }
 	}
@@ -686,7 +425,7 @@ FarmScenesIntro.GwendyQuestions2 = function() {
 			TimeStep({minute: 20});
 
 			Gui.NextPrompt(function() {
-				MoveToLocation(world.loc.Plains.Crossroads, {minute: 30});
+				MoveToLocation(WORLD().loc.Plains.Crossroads, {minute: 30});
 			});
 		}, enabled : true,
 		tooltip : "It is time to get going, you have other matters to attend."
@@ -697,6 +436,7 @@ FarmScenesIntro.GwendyQuestions2 = function() {
 FarmScenesIntro.HelpAdrian = function() {
 	let player = GAME().player;
 	let party = GAME().party;
+	let adrian = GAME().adrian;
 
 	party.location = FarmLoc.Barn;
 	TimeStep({minute: 10});
@@ -826,6 +566,7 @@ FarmScenesIntro.HelpAdrianFinished = function() {
 FarmScenesIntro.MeetDanie = function() {
 	let player = GAME().player;
 	let party = GAME().party;
+	let danie = GAME().danie;
 
 	Text.Clear();
 	party.location = FarmLoc.Fields;
@@ -907,6 +648,7 @@ FarmScenesIntro.MeetDanie = function() {
 
 FarmScenesIntro.HornyDanie = function() {
 	let player = GAME().player;
+	let danie = GAME().danie;
 
 	Text.Clear();
 	player.AddLustFraction(0.5);
@@ -1011,7 +753,7 @@ FarmScenesIntro.DanieFuckOptions = function() {
 	Gui.SetButtonsFromList(options);
 }
 
-FarmScenesIntro.DanieOralSex = function(bits) {
+FarmScenesIntro.DanieOralSex = function(bits : boolean) {
 	let player = GAME().player;
 	let danie = GAME().danie;
 
@@ -1200,6 +942,7 @@ FarmScenesIntro.DanieAnalSex = function() {
 FarmScenesIntro.ReturnToGwendy = function() {
 	let player = GAME().player;
 	let party = GAME().party;
+	let farm = GAME().farm;
 
 	Text.Clear();
 	TimeStep({hour: 2});
@@ -1240,16 +983,16 @@ FarmScenesIntro.ReturnToGwendy = function() {
 	Text.Add("<b>Found Gwendy's Farm (can now be visited from plains).</b>");
 	Text.Flush();
 	Gui.NextPrompt(function() {
-		MoveToLocation(world.loc.Plains.Crossroads, {minute: 30});
+		MoveToLocation(WORLD().loc.Plains.Crossroads, {minute: 30});
 	});
 }
 
-FarmScenes.GoToMarketFirst = function(backfunc) {
+FarmScenes.GoToMarketFirst = function(backfunc : any) {
 	let player = GAME().player;
 	let party = GAME().party;
 	let gwendy = GAME().gwendy;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 
@@ -1295,7 +1038,7 @@ FarmScenes.GoToMarketFirst = function(backfunc) {
 
 	gwendy.RestFull();
 
-	party.location = world.loc.Plains.Crossroads;
+	party.location = WORLD().loc.Plains.Crossroads;
 	TimeStep({hour:2});
 	Text.Flush();
 
@@ -1406,15 +1149,17 @@ FarmScenes.GoToMarketFirst = function(backfunc) {
 	});
 }
 
-FarmScenes.GoToMarketFirstAfterBandits = function(won) {
+FarmScenes.GoToMarketFirstAfterBandits = function(won : boolean) {
 	let player = GAME().player;
 	let party = GAME().party;
+	let rigard = GAME().rigard;
+	let miranda = GAME().miranda;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 
-	party.location = world.loc.Plains.Gate;
+	party.location = WORLD().loc.Plains.Gate;
 
 	Text.Clear();
 	Text.Add("You ask her if you should head back to the farm, in light of what happened.", parse);
@@ -1497,20 +1242,21 @@ FarmScenes.GoToMarketFirstAfterBandits = function(won) {
  *  enclost
  * }
  */
-FarmScenes.Market = function(haul, next) {
+FarmScenes.Market = function(haul : any, next : any) {
 	let player = GAME().player;
 	let party = GAME().party;
 	let gwendy = GAME().gwendy;
+	let farm = GAME().farm;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		enemy      : haul.badenc,
-		ear    : function() { return player.EarDesc(); }
+		ear        : function() { return player.EarDesc(); }
 	};
 
 	var humanity = player.Humanity();
 
-	party.location = world.loc.Rigard.ShopStreet.street;
+	party.location = WORLD().loc.Rigard.ShopStreet.street;
 	var score = 0;
 
 	Text.Add("<i>“Alright, [playername]. Put on your best smile and let’s get this gig started,”</i> Gwendy declares with a smile of her own. ", parse);
@@ -1647,9 +1393,10 @@ FarmScenes.Market = function(haul, next) {
 FarmScenes.GoToMarketFirstFinale = function() {
 	let player = GAME().player;
 	let party = GAME().party;
-	let gwendy = GAME().gwendy;
+    let gwendy = GAME().gwendy;
+    let rigard = GAME().rigard;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 
@@ -1695,7 +1442,7 @@ FarmScenes.GoToMarketFirstFinale = function() {
 
 			party.location = FarmLoc.Loft;
 
-			Scenes.Gwendy.LoftSexPrompt();
+			GwendyScenes.LoftSexPrompt();
 		}, enabled : true,
 		tooltip : "Join her in the loft."
 	});
@@ -1712,11 +1459,11 @@ FarmScenes.GoToMarketFirstFinale = function() {
 			}
 			Text.Flush();
 
-			MoveToLocation(world.loc.Plains.Crossroads, {minute: 30});
+			MoveToLocation(WORLD().loc.Plains.Crossroads, {minute: 30});
 		}, enabled : true,
 		tooltip : "Thank her for the offer, but you have other things to do."
 	});
 	Gui.SetButtonsFromList(options);
 }
 
-export { Farm, FarmLoc, FarmScenes, FarmScenesIntro };
+export { FarmScenes, FarmScenesIntro };
