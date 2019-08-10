@@ -10,7 +10,7 @@ import { Element } from '../damagetype';
 import { Body } from '../body/body';
 import { Race } from '../body/race';
 import { Color } from '../body/color';
-import { CockType } from '../body/cock';
+import { CockType, Cock } from '../body/cock';
 import { AlchemyItems } from '../items/alchemy';
 import { IngredientItems } from '../items/ingredients';
 import { QuestItems } from '../items/quest';
@@ -22,129 +22,136 @@ import { Party } from '../party';
 import { Encounter } from '../combat';
 import { Abilities } from '../abilities';
 import { BurrowsFlags } from '../loc/burrows-flags';
+import { GAME, TimeStep } from '../GAME';
+import { Sex } from '../entity-sex';
+import { SetGameOverButton } from '../main-gameover';
+import { LowerBodyType } from '../entity-desc';
+import { EncounterTable } from '../encountertable';
 
-let GolScenes = {};
+let GolScenes : any = {};
 
-function GolQueen() {
-	BossEntity.call(this);
-	this.ID = "gol";
-	
-	this.avatar.combat     = Images.gol;
-	
-	this.name              = "Gol Queen";
-	this.monsterName       = "the Gol";
-	this.MonsterName       = "The Gol";
-	
-	// TODO Stats
-	
-	this.maxHp.base        = 1800;
-	this.maxSp.base        = 700;
-	this.maxLust.base      = 900;
-	// Main stats
-	this.strength.base     = 70;
-	this.stamina.base      = 60;
-	this.dexterity.base    = 30;
-	this.intelligence.base = 50;
-	this.spirit.base       = 50;
-	this.libido.base       = 100;
-	this.charisma.base     = 70;
-	
-	this.level             = 13;
-	this.sexlevel          = 6;
-	
-	this.combatExp         = 350;
-	this.coinDrop          = 1500;
-	
-	this.elementAtk.dmg[Element.pSlash]   =    1;
-	this.elementDef.dmg[Element.mNature]  =  0.5;
-	this.elementDef.dmg[Element.mIce]     =   -1;
-	this.elementDef.dmg[Element.mThunder] = -0.5;
-	
-	this.body              = new Body(this);
-	
-	this.body.DefHerm();
-	
-	this.body.SetRace(Race.Gol);
-	this.body.SetBodyColor(Color.green);
-	this.body.SetHairColor(Color.green);	
-	this.body.SetEyeColor(Color.red);
-	this.FirstCock().race = Race.Gol;
-	this.FirstCock().type = CockType.ovipositor;
-	this.FirstCock().length.base = 400;
-	this.FirstCock().thickness.base = 10;
-	
-	//3'
-	this.FirstVag().capacity.base = 20;
-	this.FirstVag().virgin = false;
-	
-	// Set hp and mana to full
-	this.SetLevelBonus();
-	this.RestFull();
-	
-	this.AddLustFraction(0.3);
-}
-GolQueen.prototype = new BossEntity();
-GolQueen.prototype.constructor = GolQueen;
+export class GolQueen extends BossEntity {
+	constructor() {
+		super();
 
-GolQueen.prototype.DropTable = function() {
-	var drops = [];
-	drops.push({ it: QuestItems.Scepter });
-	drops.push({ it: WeaponsItems.GolClaw });
-	drops.push({ it: AlchemyItems.GestariumPlus });
-	
-	drops.push({ it: IngredientItems.Letter, num: 3 });
-	drops.push({ it: IngredientItems.Trinket, num: 3 });
-	drops.push({ it: IngredientItems.HorseShoe, num: 3 });
-	
-	if(Math.random() < 0.1) drops.push({ it: IngredientItems.RawHoney });
-	if(Math.random() < 0.1) drops.push({ it: IngredientItems.BeeChitin });
-	if(Math.random() < 0.1) drops.push({ it: IngredientItems.MFluff });
-	if(Math.random() < 0.1) drops.push({ it: IngredientItems.HorseCum });
-	if(Math.random() < 0.1) drops.push({ it: IngredientItems.BlackGem });
-	
-	if(Math.random() < 0.2) drops.push({ it: AlchemyItems.Estros });
-	if(Math.random() < 0.2) drops.push({ it: AlchemyItems.Gestarium });
-	if(Math.random() < 0.2) drops.push({ it: AlchemyItems.GestariumPlus });
-	
-	return drops;
-}
+		this.ID = "gol";
+		
+		this.avatar.combat     = Images.gol;
+		
+		this.name              = "Gol Queen";
+		this.monsterName       = "the Gol";
+		this.MonsterName       = "The Gol";
+		
+		// TODO Stats
+		
+		this.maxHp.base        = 1800;
+		this.maxSp.base        = 700;
+		this.maxLust.base      = 900;
+		// Main stats
+		this.strength.base     = 70;
+		this.stamina.base      = 60;
+		this.dexterity.base    = 30;
+		this.intelligence.base = 50;
+		this.spirit.base       = 50;
+		this.libido.base       = 100;
+		this.charisma.base     = 70;
+		
+		this.level             = 13;
+		this.sexlevel          = 6;
+		
+		this.combatExp         = 350;
+		this.coinDrop          = 1500;
+		
+		this.elementAtk.dmg[Element.pSlash]   =    1;
+		this.elementDef.dmg[Element.mNature]  =  0.5;
+		this.elementDef.dmg[Element.mIce]     =   -1;
+		this.elementDef.dmg[Element.mThunder] = -0.5;
+		
+		this.body              = new Body(this);
+		
+		this.body.DefHerm();
+		
+		this.body.SetRace(Race.Gol);
+		this.body.SetBodyColor(Color.green);
+		this.body.SetHairColor(Color.green);	
+		this.body.SetEyeColor(Color.red);
+		this.FirstCock().race = Race.Gol;
+		this.FirstCock().type = CockType.ovipositor;
+		this.FirstCock().length.base = 400;
+		this.FirstCock().thickness.base = 10;
+		
+		//3'
+		this.FirstVag().capacity.base = 20;
+		this.FirstVag().virgin = false;
+		
+		// Set hp and mana to full
+		this.SetLevelBonus();
+		this.RestFull();
+		
+		this.AddLustFraction(0.3);
+	}
 
-GolQueen.prototype.Act = function(encounter, activeChar) {
-	let party = GAME().party;
-	// TODO: Very TEMP
-	Text.Add(this.name + " acts! Buzz!");
-	Text.NL();
-	
-	// Pick a random target
-	var t = this.GetSingleTarget(encounter, activeChar);
+	DropTable() {
+		var drops = [];
+		drops.push({ it: QuestItems.Scepter });
+		drops.push({ it: WeaponsItems.GolClaw });
+		drops.push({ it: AlchemyItems.GestariumPlus });
+		
+		drops.push({ it: IngredientItems.Letter, num: 3 });
+		drops.push({ it: IngredientItems.Trinket, num: 3 });
+		drops.push({ it: IngredientItems.HorseShoe, num: 3 });
+		
+		if(Math.random() < 0.1) drops.push({ it: IngredientItems.RawHoney });
+		if(Math.random() < 0.1) drops.push({ it: IngredientItems.BeeChitin });
+		if(Math.random() < 0.1) drops.push({ it: IngredientItems.MFluff });
+		if(Math.random() < 0.1) drops.push({ it: IngredientItems.HorseCum });
+		if(Math.random() < 0.1) drops.push({ it: IngredientItems.BlackGem });
+		
+		if(Math.random() < 0.2) drops.push({ it: AlchemyItems.Estros });
+		if(Math.random() < 0.2) drops.push({ it: AlchemyItems.Gestarium });
+		if(Math.random() < 0.2) drops.push({ it: AlchemyItems.GestariumPlus });
+		
+		return drops;
+	}
 
-	var parseVars = {
-		name   : this.name,
-		hisher : this.hisher(),
-		tName  : t.name
-	};
+	Act(encounter : any, activeChar : any) {
+		let party = GAME().party;
+		// TODO: Very TEMP
+		Text.Add(this.name + " acts! Buzz!");
+		Text.NL();
+		
+		// Pick a random target
+		var t = this.GetSingleTarget(encounter, activeChar);
 
-	var choice = Math.random();
-	if(choice < 0.2) //TODO
-		Abilities.Attack.CastInternal(encounter, this, t);
-	else if(choice < 0.4 && Abilities.EnemySkill.GolPollen.enabledCondition(encounter, this))
-		Abilities.EnemySkill.GolPollen.Use(encounter, this, party);
-	else if(choice < 0.55 && Abilities.EnemySkill.GolLustyPheromones.enabledCondition(encounter, this))
-		Abilities.EnemySkill.GolLustyPheromones.Use(encounter, this, t);
-	else if(choice < 0.7 && Abilities.EnemySkill.GolCuntDash.enabledCondition(encounter, this))
-		Abilities.EnemySkill.GolCuntDash.Use(encounter, this, t);
-	else if(choice < 0.8 && Abilities.Physical.DAttack.enabledCondition(encounter, this))
-		Abilities.Physical.DAttack.Use(encounter, this, t);
-	else if(choice < 0.9 && Abilities.Physical.GrandSlam.enabledCondition(encounter, this))
-		Abilities.Physical.GrandSlam.Use(encounter, this, party);
-	else
-		Abilities.Attack.Use(encounter, this, t);
+		var parseVars = {
+			name   : this.name,
+			hisher : this.hisher(),
+			tName  : t.name
+		};
+
+		var choice = Math.random();
+		if(choice < 0.2) //TODO
+			Abilities.Attack.CastInternal(encounter, this, t);
+		else if(choice < 0.4 && Abilities.EnemySkill.GolPollen.enabledCondition(encounter, this))
+			Abilities.EnemySkill.GolPollen.Use(encounter, this, party);
+		else if(choice < 0.55 && Abilities.EnemySkill.GolLustyPheromones.enabledCondition(encounter, this))
+			Abilities.EnemySkill.GolLustyPheromones.Use(encounter, this, t);
+		else if(choice < 0.7 && Abilities.EnemySkill.GolCuntDash.enabledCondition(encounter, this))
+			Abilities.EnemySkill.GolCuntDash.Use(encounter, this, t);
+		else if(choice < 0.8 && Abilities.Physical.DAttack.enabledCondition(encounter, this))
+			Abilities.Physical.DAttack.Use(encounter, this, t);
+		else if(choice < 0.9 && Abilities.Physical.GrandSlam.enabledCondition(encounter, this))
+			Abilities.Physical.GrandSlam.Use(encounter, this, party);
+		else
+			Abilities.Attack.Use(encounter, this, t);
+	}
+
 }
 
 GolScenes.SearchForScepter = function() {
 	let player = GAME().player;
 	let party = GAME().party;
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -204,7 +211,7 @@ GolScenes.SearchForScepter = function() {
 				var enemy = new Party();
 				var gol = new GolQueen();
 				enemy.AddMember(gol);
-				var enc = new Encounter(enemy);
+				var enc : any = new Encounter(enemy);
 				enc.gol = gol;
 				
 				enc.canRun = false;
@@ -226,7 +233,7 @@ GolScenes.CombatLoss = function() {
 	var gol = enc.gol;
 	SetGameState(GameState.Event, Gui);
 	
-	var parse = {
+	var parse : any = {
 		foot : function() { return player.FootDesc(); }
 	};
 	
@@ -243,7 +250,7 @@ GolScenes.CombatLoss = function() {
 	Text.Add("You're not going to give her the chance[lust]! You twist to the side and claw forward, giving yourself a half-dozen splinters in the process. The pain is nothing next to the fear[lust2] coursing through you.", parse);
 	Text.NL();
 	
-	var incubator;
+	var incubator : boolean;
 	
 	var scenes = new EncounterTable();
 	scenes.AddEnc(function() {
@@ -276,9 +283,9 @@ GolScenes.CombatLoss = function() {
 	});
 }
 
-GolScenes.CombatLossIncubator = function(gol) {
+GolScenes.CombatLossIncubator = function(gol : GolQueen) {
 	let player = GAME().player;
-	var parse = {
+	var parse : any = {
 		skinDesc : function() { return player.SkinDesc(); },
 		armor : function() { return player.ArmorDesc(); },
 		legs : function() { return player.LegsDesc(); },
@@ -315,11 +322,11 @@ GolScenes.CombatLossIncubator = function(gol) {
 	GolScenes.CombatLossIncEntry(gol);
 }
 
-GolScenes.CombatLossIncEntry = function(gol) {
+GolScenes.CombatLossIncEntry = function(gol : GolQueen) {
 	let player = GAME().player;
 	var p1cock = player.BiggestCock();
 	
-	var parse = {
+	var parse : any = {
 		vagina : function() { return player.FirstVag().Short(); },
 		cocks : function() { return player.MultiCockDesc(); },
 		cock : function() { return p1cock.Short(); }
@@ -417,11 +424,11 @@ GolScenes.CombatLossIncEntry = function(gol) {
 	});
 }
 
-GolScenes.CombatLossDrone = function(gol) {
+GolScenes.CombatLossDrone = function(gol : GolQueen) {
 	let player = GAME().player;
 	var p1cock = player.BiggestCock();
 	
-	var parse = {
+	var parse : any = {
 		vagina : function() { return player.FirstVag().Short(); },
 		cocks : function() { return player.MultiCockDesc(); },
 		cock : function() { return p1cock.Short(); },
@@ -543,7 +550,7 @@ GolScenes.CombatWin = function() {
 	var gol = enc.gol;
 	SetGameState(GameState.Event, Gui);
 	
-	var parse = {
+	var parse : any = {
 		feet : function() { return player.FeetDesc(); },
 		foot : function() { return player.FootDesc(); }
 	};
@@ -622,12 +629,12 @@ GolScenes.CombatWin = function() {
 	Encounter.prototype.onVictory.call(enc);
 }
 
-GolScenes.CombatWinHyperFuck = function(enc, p1cock) {
+GolScenes.CombatWinHyperFuck = function(enc : any, p1cock : Cock) {
 	let player = GAME().player;
 	var gol = enc.gol;
 	var lusty = gol.LustLevel() >= 0.5;
 	
-	var parse = {
+	var parse : any = {
 		cocks : function() { return player.MultiCockDesc(); },
 		cock  : function() { return p1cock.Short(); },
 		cockTip : function() { return p1cock.TipShort(); },
@@ -728,12 +735,12 @@ GolScenes.CombatWinHyperFuck = function(enc, p1cock) {
 	});
 }
 
-GolScenes.CombatWinTailfuck = function(enc, p1cock) {
+GolScenes.CombatWinTailfuck = function(enc : any, p1cock : Cock) {
 	let player = GAME().player;
 	var gol = enc.gol;
 	var lusty = gol.LustLevel() >= 0.5;
 	
-	var parse = {
+	var parse : any = {
 		cocks : function() { return player.MultiCockDesc(); },
 		cock  : function() { return p1cock.Short(); },
 		cockTip : function() { return p1cock.TipShort(); },
@@ -848,13 +855,13 @@ GolScenes.CombatWinTailfuck = function(enc, p1cock) {
 	
 }
 
-GolScenes.CombatWinCunn = function(enc) {
+GolScenes.CombatWinCunn = function(enc : any) {
 	let player = GAME().player;
 	var gol = enc.gol;
 	var lusty = gol.LustLevel() >= 0.5;
 	var p1cock = player.BiggestCock();
 	
-	var parse = {
+	var parse : any = {
 		cocks : function() { return player.MultiCockDesc(); },
 		cock  : function() { return p1cock.Short(); },
 		cockTip : function() { return p1cock.TipShort(); },
@@ -966,8 +973,8 @@ GolScenes.CombatWinCunn = function(enc) {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-GolScenes.CombatAftermath = function(enc) {
-	var parse = {
+GolScenes.CombatAftermath = function(enc : any) {
+	var parse : any = {
 		
 	};
 	
@@ -989,9 +996,9 @@ GolScenes.CombatAftermath = function(enc) {
 	Text.Add("<b>You’ve acquired Lagon’s scepter.</b>", parse);
 	Text.Flush();
 	
-	burrows.flags["Access"] = BurrowsFlags.AccessFlags.Stage5;
+	GAME().burrows.flags["Access"] = BurrowsFlags.AccessFlags.Stage5;
 	
 	Gui.NextPrompt();
 }
 
-export { GolQueen, GolScenes };
+export { GolScenes };

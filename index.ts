@@ -103,22 +103,13 @@ import './js/event/outlaws/cavalcade.js';
 import './js/event/raven.js';
 
 // Enemies
-import './js/enemy/knight.js';
-import './js/enemy/imp.js';
-import './js/enemy/introdemon.js';
 import './js/enemy/equine.js';
 import './js/enemy/feline.js';
 import './js/enemy/lizard.js';
 import './js/enemy/mothgirl.js';
-import './js/enemy/feralwolf.js';
-import './js/enemy/scorp.js';
 import './js/enemy/naga.js';
-import './js/enemy/drake.js';
-import './js/enemy/zebra.js';
 
 import './js/enemy/orchid.js';
-import './js/enemy/gol.js';
-import './js/enemy/corishev.js';
 import './js/enemy/malice-scouts.js';
 
 // Start up the main text

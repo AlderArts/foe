@@ -18,188 +18,197 @@ import { Gui } from '../gui';
 import { Party } from '../party';
 import { Encounter } from '../combat';
 import { SetGameState, GameState } from '../gamestate';
+import { TimeStep, GAME } from '../GAME';
+import { Sex } from '../entity-sex';
+import { PregnancyHandler } from '../pregnancy';
 
-let ZebraShamanScenes = {};
+let ZebraShamanScenes : any = {};
 
-function ZebraShaman(levelbonus) {
-	Entity.call(this);
-	this.ID = "zebra";
+export class ZebraShaman extends Entity {
+	constructor(levelbonus? : number) {
+		super();
 
-	this.avatar.combat     = Images.zebra;
-	this.name              = "Shaman";
-	this.monsterName       = "the zebra shaman";
-	this.MonsterName       = "The zebra shaman";
-	this.body.DefMale();
-	this.FirstCock().thickness.base = 7;
-	this.FirstCock().length.base = 30;
-	this.Balls().size.base = 6;
+		this.ID = "zebra";
 
-	this.maxHp.base        = 250;
-	this.maxSp.base        = 150;
-	this.maxLust.base      = 80;
-	// Main stats
-	this.strength.base     = 20;
-	this.stamina.base      = 30;
-	this.dexterity.base    = 16;
-	this.intelligence.base = 30;
-	this.spirit.base       = 35;
-	this.libido.base       = 16;
-	this.charisma.base     = 18;
+		this.avatar.combat     = Images.zebra;
+		this.name              = "Shaman";
+		this.monsterName       = "the zebra shaman";
+		this.MonsterName       = "The zebra shaman";
+		this.body.DefMale();
+		this.FirstCock().thickness.base = 7;
+		this.FirstCock().length.base = 30;
+		this.Balls().size.base = 6;
 
-	this.level             = 6 + Math.floor(Math.random() * 4);
-	this.sexlevel          = 2;
-	if(levelbonus)
-		this.level += levelbonus;
+		this.maxHp.base        = 250;
+		this.maxSp.base        = 150;
+		this.maxLust.base      = 80;
+		// Main stats
+		this.strength.base     = 20;
+		this.stamina.base      = 30;
+		this.dexterity.base    = 16;
+		this.intelligence.base = 30;
+		this.spirit.base       = 35;
+		this.libido.base       = 16;
+		this.charisma.base     = 18;
 
-	this.combatExp         = 6 + this.level;
-	this.coinDrop          = 8 + this.level * 4;
-	//TODO
-	this.body.SetRace(Race.Zebra);
-	this.body.SetBodyColor(Color.gray);
+		this.level             = 6 + Math.floor(Math.random() * 4);
+		this.sexlevel          = 2;
+		if(levelbonus)
+			this.level += levelbonus;
 
-	this.body.SetEyeColor(Color.blue);
+		this.combatExp         = 6 + this.level;
+		this.coinDrop          = 8 + this.level * 4;
+		//TODO
+		this.body.SetRace(Race.Zebra);
+		this.body.SetBodyColor(Color.gray);
 
-	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Zebra, Color.black);
+		this.body.SetEyeColor(Color.blue);
 
-	// Set hp and mana to full
-	this.SetLevelBonus();
-	this.RestFull();
-}
-ZebraShaman.prototype = new Entity();
-ZebraShaman.prototype.constructor = ZebraShaman;
+		TF.SetAppendage(this.Back(), AppendageType.tail, Race.Zebra, Color.black);
 
-ZebraShaman.prototype.DropTable = function() {
-	var drops = [];
-	if(Math.random() < 0.05) drops.push({ it: AlchemyItems.Equinium });
-	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HorseCum });
-	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HorseHair });
-	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HorseShoe });
+		// Set hp and mana to full
+		this.SetLevelBonus();
+		this.RestFull();
+	}
 
-	if(Math.random() < 0.3)  drops.push({ it: IngredientItems.FreshGrass });
-	if(Math.random() < 0.3)  drops.push({ it: IngredientItems.SpringWater });
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.Foxglove });
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.FlowerPetal });
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.FoxBerries });
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.TreeBark });
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.AntlerChip });
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.SVenom });
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.MDust });
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.RawHoney });
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.BeeChitin });
+	DropTable() {
+		var drops = [];
+		if(Math.random() < 0.05) drops.push({ it: AlchemyItems.Equinium });
+		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HorseCum });
+		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HorseHair });
+		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HorseShoe });
 
-	if(Math.random() < 0.05) drops.push({ it: IngredientItems.Wolfsbane });
-	if(Math.random() < 0.05) drops.push({ it: IngredientItems.Ramshorn });
+		if(Math.random() < 0.3)  drops.push({ it: IngredientItems.FreshGrass });
+		if(Math.random() < 0.3)  drops.push({ it: IngredientItems.SpringWater });
+		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.Foxglove });
+		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.FlowerPetal });
+		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.FoxBerries });
+		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.TreeBark });
+		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.AntlerChip });
+		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.SVenom });
+		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.MDust });
+		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.RawHoney });
+		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.BeeChitin });
 
-	if(Math.random() < 0.01) drops.push({ it: IngredientItems.BlackGem });
-	if(Math.random() < 0.01) drops.push({ it: IngredientItems.CorruptPlant });
-	if(Math.random() < 0.01) drops.push({ it: IngredientItems.CorruptSeed });
-	if(Math.random() < 0.01) drops.push({ it: IngredientItems.DemonSeed });
+		if(Math.random() < 0.05) drops.push({ it: IngredientItems.Wolfsbane });
+		if(Math.random() < 0.05) drops.push({ it: IngredientItems.Ramshorn });
 
-	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Gestarium });
-	return drops;
-}
+		if(Math.random() < 0.01) drops.push({ it: IngredientItems.BlackGem });
+		if(Math.random() < 0.01) drops.push({ it: IngredientItems.CorruptPlant });
+		if(Math.random() < 0.01) drops.push({ it: IngredientItems.CorruptSeed });
+		if(Math.random() < 0.01) drops.push({ it: IngredientItems.DemonSeed });
 
-ZebraShaman.prototype.Act = function(encounter, activeChar) {
-	// TODO: Very TEMP
-	Text.Add(this.name + " acts!");
-	Text.NL();
-	Text.Flush();
+		if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Gestarium });
+		return drops;
+	}
 
-	// Pick a random target
-	var t = this.GetSingleTarget(encounter, activeChar);
+	Act(encounter : any, activeChar : any) {
+		// TODO: Very TEMP
+		Text.Add(this.name + " acts!");
+		Text.NL();
+		Text.Flush();
 
-	var choice = Math.random();
-	if(choice < 0.2 && Abilities.Black.Thorn.enabledCondition(encounter, this))
-		Abilities.Black.Thorn.Use(encounter, this, t);
-	else if(choice < 0.4 && Abilities.Black.Spray.enabledCondition(encounter, this))
-		Abilities.Black.Spray.Use(encounter, this, t);
-	else if(choice < 0.6 && Abilities.Black.Spire.enabledCondition(encounter, this))
-		Abilities.Black.Spire.Use(encounter, this, t);
-	else if(choice < 0.8 && Abilities.Black.Venom.enabledCondition(encounter, this))
-		Abilities.Black.Venom.Use(encounter, this, t);
-	else
-		Abilities.Attack.Use(encounter, this, t);
-}
+		// Pick a random target
+		var t = this.GetSingleTarget(encounter, activeChar);
 
-function ZebraBrave(levelbonus) {
-	Entity.call(this);
+		var choice = Math.random();
+		if(choice < 0.2 && Abilities.Black.Thorn.enabledCondition(encounter, this))
+			Abilities.Black.Thorn.Use(encounter, this, t);
+		else if(choice < 0.4 && Abilities.Black.Spray.enabledCondition(encounter, this))
+			Abilities.Black.Spray.Use(encounter, this, t);
+		else if(choice < 0.6 && Abilities.Black.Spire.enabledCondition(encounter, this))
+			Abilities.Black.Spire.Use(encounter, this, t);
+		else if(choice < 0.8 && Abilities.Black.Venom.enabledCondition(encounter, this))
+			Abilities.Black.Venom.Use(encounter, this, t);
+		else
+			Abilities.Attack.Use(encounter, this, t);
+	}
 
-	this.avatar.combat     = Images.zebra_b;
-	this.name              = "Brave";
-	this.monsterName       = "the zebra brave";
-	this.MonsterName       = "The zebra brave";
-	this.body.DefMale();
-	this.FirstCock().thickness.base = 7;
-	this.FirstCock().length.base = 35;
-	this.Balls().size.base = 6;
-
-	this.maxHp.base        = 350;
-	this.maxSp.base        = 80;
-	this.maxLust.base      = 60;
-	// Main stats
-	this.strength.base     = 30;
-	this.stamina.base      = 30;
-	this.dexterity.base    = 25;
-	this.intelligence.base = 15;
-	this.spirit.base       = 17;
-	this.libido.base       = 18;
-	this.charisma.base     = 17;
-
-	this.level             = 6 + Math.floor(Math.random() * 4);
-	this.sexlevel          = 2;
-	if(levelbonus)
-		this.level += levelbonus;
-
-	this.combatExp         = 6 + this.level;
-	this.coinDrop          = 8 + this.level * 4;
-	//TODO
-	this.body.SetRace(Race.Zebra);
-	this.body.SetBodyColor(Color.gray);
-
-	this.body.SetEyeColor(Color.blue);
-
-	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Zebra, Color.black);
-
-	// Set hp and mana to full
-	this.SetLevelBonus();
-	this.RestFull();
-}
-ZebraBrave.prototype = new Entity();
-ZebraBrave.prototype.constructor = ZebraBrave;
-
-ZebraBrave.prototype.DropTable = function() {
-	var drops = [];
-	if(Math.random() < 0.05) drops.push({ it: AlchemyItems.Equinium });
-	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HorseCum });
-	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HorseHair });
-	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HorseShoe });
-
-	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.FreshGrass });
-	if(Math.random() < 0.4)  drops.push({ it: IngredientItems.SpringWater });
-	return drops;
 }
 
-ZebraBrave.prototype.Act = function(encounter, activeChar) {
-	// TODO: Very TEMP
-	Text.Add(this.name + " acts!");
-	Text.NL();
-	Text.Flush();
+export class ZebraBrave extends Entity {
+	constructor(levelbonus? : number) {
+		super();
 
-	// Pick a random target
-	var t = this.GetSingleTarget(encounter, activeChar);
+		this.avatar.combat     = Images.zebra_b;
+		this.name              = "Brave";
+		this.monsterName       = "the zebra brave";
+		this.MonsterName       = "The zebra brave";
+		this.body.DefMale();
+		this.FirstCock().thickness.base = 7;
+		this.FirstCock().length.base = 35;
+		this.Balls().size.base = 6;
 
-	var choice = Math.random();
-	if(choice < 0.2 && Abilities.Physical.Bash.enabledCondition(encounter, this))
-		Abilities.Physical.Bash.Use(encounter, this, t);
-	else if(choice < 0.4 && Abilities.Physical.CrushingStrike.enabledCondition(encounter, this))
-		Abilities.Physical.CrushingStrike.Use(encounter, this, t);
-	else if(choice < 0.6 && Abilities.Physical.Ensnare.enabledCondition(encounter, this))
-		Abilities.Physical.Ensnare.Use(encounter, this, t);
-	else
-		Abilities.Attack.Use(encounter, this, t);
+		this.maxHp.base        = 350;
+		this.maxSp.base        = 80;
+		this.maxLust.base      = 60;
+		// Main stats
+		this.strength.base     = 30;
+		this.stamina.base      = 30;
+		this.dexterity.base    = 25;
+		this.intelligence.base = 15;
+		this.spirit.base       = 17;
+		this.libido.base       = 18;
+		this.charisma.base     = 17;
+
+		this.level             = 6 + Math.floor(Math.random() * 4);
+		this.sexlevel          = 2;
+		if(levelbonus)
+			this.level += levelbonus;
+
+		this.combatExp         = 6 + this.level;
+		this.coinDrop          = 8 + this.level * 4;
+		//TODO
+		this.body.SetRace(Race.Zebra);
+		this.body.SetBodyColor(Color.gray);
+
+		this.body.SetEyeColor(Color.blue);
+
+		TF.SetAppendage(this.Back(), AppendageType.tail, Race.Zebra, Color.black);
+
+		// Set hp and mana to full
+		this.SetLevelBonus();
+		this.RestFull();
+	}
+
+	DropTable() {
+		var drops = [];
+		if(Math.random() < 0.05) drops.push({ it: AlchemyItems.Equinium });
+		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HorseCum });
+		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HorseHair });
+		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HorseShoe });
+
+		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.FreshGrass });
+		if(Math.random() < 0.4)  drops.push({ it: IngredientItems.SpringWater });
+		return drops;
+	}
+
+	Act(encounter : any, activeChar : any) {
+		// TODO: Very TEMP
+		Text.Add(this.name + " acts!");
+		Text.NL();
+		Text.Flush();
+
+		// Pick a random target
+		var t = this.GetSingleTarget(encounter, activeChar);
+
+		var choice = Math.random();
+		if(choice < 0.2 && Abilities.Physical.Bash.enabledCondition(encounter, this))
+			Abilities.Physical.Bash.Use(encounter, this, t);
+		else if(choice < 0.4 && Abilities.Physical.CrushingStrike.enabledCondition(encounter, this))
+			Abilities.Physical.CrushingStrike.Use(encounter, this, t);
+		else if(choice < 0.6 && Abilities.Physical.Ensnare.enabledCondition(encounter, this))
+			Abilities.Physical.Ensnare.Use(encounter, this, t);
+		else
+			Abilities.Attack.Use(encounter, this, t);
+	}
+
 }
 
-ZebraShamanScenes.Impregnate = function(mother, father, slot) {
+
+
+
+ZebraShamanScenes.Impregnate = function(mother : Entity, father : Entity, slot? : number) {
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother : mother,
@@ -211,11 +220,11 @@ ZebraShamanScenes.Impregnate = function(mother, father, slot) {
 	});
 }
 
-ZebraShamanScenes.LoneEnc = function(levelbonus) {
+ZebraShamanScenes.LoneEnc = function(levelbonus? : number) {
 	var enemy = new Party();
 	var zebra = new ZebraShaman(levelbonus);
 	enemy.AddMember(zebra);
-	var enc = new Encounter(enemy);
+	var enc : any = new Encounter(enemy);
 	enc.zebra = zebra;
 
 	enc.onEncounter = ZebraShamanScenes.Encounter;
@@ -231,7 +240,7 @@ ZebraShamanScenes.OnLoss = function() {
 	var zebra = enc.zebra;
 	SetGameState(GameState.Event, Gui);
 
-	var parse = {
+	var parse : any = {
 
 	};
 
@@ -265,7 +274,7 @@ ZebraShamanScenes.Encounter = function() {
 	let party = GAME().party;
 	var enc = this;
 
-	var parse = {
+	var parse : any = {
 		weapon : player.WeaponDesc()
 	};
 
@@ -308,7 +317,7 @@ ZebraShamanScenes.OnWin = function() {
 	var zebra = enc.zebra;
 	SetGameState(GameState.Event, Gui);
 
-	var parse = {
+	var parse : any = {
 		weapon : player.WeaponDesc()
 	};
 
@@ -361,7 +370,7 @@ ZebraShamanScenes.OnWin = function() {
 	Encounter.prototype.onVictory.call(enc);
 }
 
-ZebraShamanScenes.OnWinFuckHim = function(enc) {
+ZebraShamanScenes.OnWinFuckHim = function(enc : any) {
 	let player = GAME().player;
 	var zebra = enc.zebra;
 
@@ -467,14 +476,14 @@ ZebraShamanScenes.OnWinFuckHim = function(enc) {
 	});
 }
 
-ZebraShamanScenes.OnWinVaginal = function(enc) {
+ZebraShamanScenes.OnWinVaginal = function(enc : any) {
 	let player = GAME().player;
 	var zebra = enc.zebra;
 
 	var lusty = zebra.LustLevel() > 0.5;
 	var p1cock = player.BiggestCock();
 
-	var parse = {
+	var parse : any = {
 		clothes : function() { return player.ArmorDesc(); }
 	};
 	parse = player.ParserTags(parse);
@@ -599,4 +608,4 @@ ZebraShamanScenes.OnWinVaginal = function(enc) {
 	});
 }
 
-export { ZebraBrave, ZebraShaman, ZebraShamanScenes };
+export { ZebraShamanScenes };
