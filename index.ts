@@ -8,18 +8,11 @@ import './assets/css/output.css';
 import './assets/css/droid-sans.css';
 
 // Javascript
-import './js/assets.js';
-
 import './js/utility.js';
 import './js/gui.js';
 
 // Entity scripts
 import './js/event/player.js';
-
-// World description
-import './js/exploration.js';
-
-import './js/alchemy.js';
 
 // Locations and events
 import './js/event/introduction.js';

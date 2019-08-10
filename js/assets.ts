@@ -5,7 +5,7 @@ import * as $ from 'jquery';
 import { StatusEffect } from './statuseffect';
 import { CardItems } from './items/cards';
 
-let Images = {};
+let Images : any = {};
 
 Images.status = [];
 
@@ -87,7 +87,7 @@ Images.imgWaitDisabled      = "assets/img/gui/wait_disabled.png";
 Images.imgSleepEnabled      = "assets/img/gui/sleep_enabled.png";
 Images.imgSleepDisabled     = "assets/img/gui/sleep_disabled.png";
 
-var LoadImages = function(onComplete) {
+var LoadImages = function(onComplete : any) {
 	let loader = preloader({
 		xhrImages: false
 	});
@@ -102,12 +102,12 @@ var LoadImages = function(onComplete) {
 	LoadStatusImages(imageArray);
 
 	// fetch HTML5 progress element
-	let legend = $('#progressLabel');
+	let legend : any = $('#progressLabel');
 
 	// Show progress element
 	assetsOverlay();
 
-	loader.on('progress', function(progress) {
+	loader.on('progress', function(progress : number) {
 		// update the progress element
 		legend.innerHTML = '<span>Loading assets... ' + progress * 100 + '%</span>';
 	});
@@ -125,7 +125,7 @@ let assetsOverlay = function() {
 	el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
 }
 
-let LoadCardImages = function(imageArray) {
+let LoadCardImages = function(imageArray : any[]) {
 	CardItems.Light[0].Img    = "assets/img/cards/L1.png";
 	CardItems.Light[1].Img    = "assets/img/cards/L2.png";
 	CardItems.Light[2].Img    = "assets/img/cards/L3.png";
@@ -167,7 +167,7 @@ let LoadCardImages = function(imageArray) {
 		imageArray.push(cards[i]);
 }
 
-function LoadStatusImages(imageArray) {
+function LoadStatusImages(imageArray : any[]) {
 	for(var i = 0; i < StatusEffect.LAST; i++) {
 		Images.status[i]  = "";
 	}

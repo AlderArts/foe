@@ -5,16 +5,19 @@ import { Inventory } from "./inventory";
 import { Text } from "./text";
 import { Gui } from "./gui";
 import { GAME } from "./GAME";
+import { Entity } from './entity';
+import { ItemIds, Item } from './item';
+import { ShowAlchemy } from './exploration';
 
 /*
  * 
  * Alchemy
  * 
  */
-let Alchemy = {};
+let Alchemy : any = {};
 
 // callback in the form of function(item)
-Alchemy.AlchemyPrompt = function(alchemist, inventory, backPrompt, callback, preventClear) {
+Alchemy.AlchemyPrompt = function(alchemist? : Entity, inventory? : Inventory, backPrompt? : any, callback? : any, preventClear? : boolean) {
 	alchemist  = alchemist  || new Entity();
 	inventory  = inventory  || new Inventory();
 	
@@ -22,9 +25,9 @@ Alchemy.AlchemyPrompt = function(alchemist, inventory, backPrompt, callback, pre
 		Text.Clear();
 	Text.Add("[name] can transmute the following items:", {name: alchemist.NameDesc()});
 	
-	list = [];
+	let list : any[] = [];
 
-	var Brew = function(brewable) {
+	var Brew = function(brewable : any) {
 		if (alchemist == GAME().player) {
 			Alchemy.ItemDetails(brewable, inventory);
 		} else {
@@ -79,13 +82,13 @@ Alchemy.AlchemyPrompt = function(alchemist, inventory, backPrompt, callback, pre
 	Text.Flush();
 }
 
-Alchemy.MakeItem = function(it, qty, alchemist, inventory, backPrompt, callback, remove) {
+Alchemy.MakeItem = function(it : Item, qty : number, alchemist : Entity, inventory : Inventory, backPrompt : any, callback : any, remove : boolean) {
 	Text.Clear();
 	Text.Add("[name] mix[es] the ingredients, preparing [qty]x [item].", {name: alchemist.NameDesc(), es: alchemist.plural() ? "" : "es", item: it.name, qty: qty});
 	Text.Flush();
 
 	if(remove) {
-		it.recipe.forEach(function(component) {
+		it.recipe.forEach(function(component : any) {
 			inventory.RemoveItem(component.it, qty);
 		});
 	}
@@ -104,7 +107,7 @@ Alchemy.MakeItem = function(it, qty, alchemist, inventory, backPrompt, callback,
 	}
 };
 
-Alchemy.ItemDetails = function(brewable, inventory) {
+Alchemy.ItemDetails = function(brewable : any, inventory : Inventory) {
 	var batchFormats = [1, 5, 10, 25];
 	var list = [];
 	var BrewBatch = brewable.brewFn;
@@ -148,9 +151,9 @@ Alchemy.ItemDetails = function(brewable, inventory) {
 	Text.Flush();
 }
 
-Alchemy.GetRecipeDict = function(it) {
+Alchemy.GetRecipeDict = function(it : Item) {
 	var recipe = it.recipe;
-	var recipeDict = {};
+	var recipeDict : any = {};
 
 	// There's always the possibility of some items being required more than once
 	recipe.forEach(function(ingredient) {
@@ -161,10 +164,10 @@ Alchemy.GetRecipeDict = function(it) {
 	return recipeDict;
 }
 
-Alchemy.CountBrewable = function(it, inventory, alchemist) {
+Alchemy.CountBrewable = function(it : Item, inventory : Inventory, alchemist : Entity) {
 	var recipeDict = Alchemy.GetRecipeDict(it);
 	var invDict = _.chain(inventory.ToStorage()).keyBy('it').mapValues('num').value();
-	var productionSteps = []; // [{qty: 5, recipe: [...]}]
+	var productionSteps : any[] = []; // [{qty: 5, recipe: [...]}]
 
 	while(!_.isEmpty(recipeDict)) {
 		var limitingQuota = Infinity;
@@ -205,7 +208,7 @@ Alchemy.CountBrewable = function(it, inventory, alchemist) {
 			return sum += qty;
 		}, 0),
 		steps: productionSteps,
-		brewFn: function(batchSize, backPrompt, callback, mockRemove){
+		brewFn: function(batchSize : number, backPrompt : any, callback : any, mockRemove : boolean) {
 			var amountProduced = 0;
 			productionSteps.some(function(step) {
 				var qty = Math.min(batchSize - amountProduced, step.qty);
@@ -223,7 +226,7 @@ Alchemy.CountBrewable = function(it, inventory, alchemist) {
 	};
 }
 
-Alchemy.AdaptRecipe = function(recipeDict, invDict, alchemist) {
+Alchemy.AdaptRecipe = function(recipeDict : any, invDict : any, alchemist : Entity) {
 	var origRecipeDict = recipeDict;
 	recipeDict = Object.assign({}, recipeDict);
 

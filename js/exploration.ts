@@ -14,13 +14,18 @@ import { Text } from './text';
 import { Input } from './input';
 import { Images } from './assets';
 import { loadfileOverlay } from './fileoverlay';
+import { GameToCache } from './gamecache';
+import { SplashScreen } from './main-splash';
+import { Saver } from './saver';
+import { Alchemy } from './alchemy';
+import { Quests } from './quest';
 //import { Saver } from './saver'; TODO Circular dep
 //import { Alchemy } from './alchemy'; TODO Circular dep
 //import { Quest } from './quest'; TODO Circular dep
 
-let Gui = null;
+let Gui : any = null;
 let Exploration = {
-	Init : function(gui) {
+	Init : function(gui : any) {
 		Gui = gui;
 	}
 };
@@ -64,7 +69,7 @@ function SetExploreButtons() {
 	}
 }
 
-function LimitedDataPrompt(backFunc) {
+function LimitedDataPrompt(backFunc : any) {
 	SetGameState(GameState.Event, Gui);
 
 	Gui.ClearButtons();
@@ -81,7 +86,7 @@ function LimitedDataPrompt(backFunc) {
 
 	Input.buttons[6].Setup("Save text", function() {
 		GameToCache();
-		var seen = [];
+		var seen : any[] = [];
 		var data = JSON.stringify(GameCache(),
 			function(key, val) {
 				if (typeof val == "object") {
@@ -138,7 +143,7 @@ function DataPrompt() {
 
 	Input.buttons[6].Setup("Save text", function() {
 		GameToCache();
-		var seen = [];
+		var seen : any[] = [];
 		var data = JSON.stringify(GameCache(),
 			function(key, val) {
 				if (typeof val == "object") {
@@ -184,7 +189,7 @@ function DataPrompt() {
 //                                                   //
 //***************************************************//
 
-function Explore(preventClear) {
+function Explore(preventClear : boolean) {
 	let party = GAME().party;
 	if(!preventClear)
 		Text.Clear();
@@ -202,7 +207,7 @@ function Explore(preventClear) {
 	SetExploreButtons();
 }
 
-export function PartyInteraction(preventClear) {
+export function PartyInteraction(preventClear : boolean) {
 	let party = GAME().party;
 	party.Interact(preventClear, party.location.switchSpot());
 	Gui.SetLastSubmenu(Input.exploreButtons[ExploreButtonIndex.Party]);
@@ -210,7 +215,7 @@ export function PartyInteraction(preventClear) {
 	SetExploreButtons();
 }
 
-function Fight(preventClear) {
+function Fight(preventClear : boolean) {
 	let party = GAME().party;
 	if(!preventClear)
 		Text.Clear();
@@ -235,7 +240,7 @@ function Fight(preventClear) {
 	}
 }
 
-function ShowInventory(preventClear) {
+function ShowInventory(preventClear : boolean) {
 	let party = GAME().party;
 	if(!preventClear)
 		Text.Clear();
@@ -252,7 +257,7 @@ function ShowInventory(preventClear) {
 	SetExploreButtons();
 }
 
-function ShowAbilities(preventClear) {
+function ShowAbilities(preventClear : boolean) {
 	let party = GAME().party;
 	if(!preventClear)
 		Text.Clear();
@@ -264,7 +269,7 @@ function ShowAbilities(preventClear) {
 	SetExploreButtons();
 }
 
-function ShowAlchemy(preventClear) {
+export function ShowAlchemy(preventClear? : boolean) {
 	let player = GAME().player;
 	let party = GAME().party;
 	if(!preventClear)
@@ -277,7 +282,7 @@ function ShowAlchemy(preventClear) {
 	SetExploreButtons();
 }
 
-function ShowQuests(preventClear) {
+function ShowQuests(preventClear : boolean) {
 	if(!preventClear)
 		Text.Clear();
 	Gui.ClearButtons();
@@ -288,7 +293,7 @@ function ShowQuests(preventClear) {
 	SetExploreButtons();
 }
 
-function ShowHunting(preventClear) {
+function ShowHunting(preventClear : boolean) {
 	let party = GAME().party;
 	if(!preventClear)
 		Text.Clear();
