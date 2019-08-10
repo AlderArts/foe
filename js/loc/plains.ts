@@ -15,7 +15,7 @@ import { Gui } from '../gui';
 import { OutlawsFlags } from '../event/outlaws/outlaws-flags';
 import { GlobalScenes } from '../event/global';
 import { FelinesScenes } from '../enemy/feline';
-import { LagomorphScenes } from '../enemy/rabbit';
+import { LagomorphScenes } from '../enemy/rabbit-scenes';
 import { MomoScenes } from '../event/momo';
 import { EquineScenes } from '../enemy/equine';
 import { PoetScenes } from '../event/poet';

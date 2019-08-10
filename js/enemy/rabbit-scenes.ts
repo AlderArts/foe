@@ -1,20 +1,4 @@
-/*
- * 
- * Rabbit-morph lvl 1-2
- * 
- */
 
-import { Entity } from '../entity';
-import { Images } from '../assets';
-import { TF } from '../tf';
-import { AppendageType } from '../body/appendage';
-import { Gender } from '../body/gender';
-import { Color } from '../body/color';
-import { Race } from '../body/race';
-import { Element } from '../damagetype';
-import { AlchemyItems } from '../items/alchemy';
-import { IngredientItems } from '../items/ingredients';
-import { Abilities } from '../abilities';
 import { PregnancyHandler } from '../pregnancy';
 import { Party } from '../party';
 import { Encounter } from '../combat';
@@ -24,319 +8,21 @@ import { Gui } from '../gui';
 import { SetGameState, GameState } from '../gamestate';
 import { BodyPartType } from '../body/bodypart';
 import { Sex } from '../entity-sex';
-import { TimeStep } from '../GAME';
+import { TimeStep, GAME } from '../GAME';
 import { TerryFlags } from '../event/terry-flags';
 import { BurrowsFlags } from '../loc/burrows-flags';
+import { Race } from '../body/race';
+import { Gender } from '../body/gender';
+import { LagomorphBrute, Lagomorph, LagomorphWizard } from './rabbit';
+import { Entity } from '../entity';
+import { LowerBodyType } from '../entity-desc';
+import { BurrowsScenes } from '../loc/burrows-scenes';
+import { TerryScenes } from '../event/terry';
+import { IngredientItems } from '../items/ingredients';
 
-let LagomorphScenes = {};
+let LagomorphScenes : any = {};
 
-// TODO: Make base stats depend on Burrows flags (perhaps make a factory function?)
-
-function Lagomorph(gender) {
-	Entity.call(this);
-	this.ID = "lagomorph";
-	
-	this.name              = "Lagomorph";
-	this.monsterName       = "the lagomorph";
-	this.MonsterName       = "The lagomorph";
-	this.maxHp.base        = 30;
-	this.maxSp.base        = 10;
-	this.maxLust.base      = 5;
-	// Main stats
-	this.strength.base     = 8;
-	this.stamina.base      = 9;
-	this.dexterity.base    = 12;
-	this.intelligence.base = 8;
-	this.spirit.base       = 10;
-	this.libido.base       = 17;
-	this.charisma.base     = 12;
-	
-	this.elementDef.dmg[Element.mFire] = -0.5;
-	
-	this.level             = 1;
-	if(Math.random() > 0.8) this.level = 2;
-	this.sexlevel          = 3;
-	
-	this.combatExp         = this.level;
-	this.coinDrop          = this.level * 3;
-	
-	if(gender == Gender.male) {
-		this.body.DefMale();
-		this.avatar.combat     = Images.lago_male;
-	}
-	else if(gender == Gender.female) {
-		this.body.DefFemale();
-		this.avatar.combat     = Images.lago_fem;
-		this.FirstBreastRow().size.base = 5;
-		this.FirstVag().virgin = false;
-	}
-	else {
-		this.body.DefHerm(true);
-		this.avatar.combat     = Images.lago_fem;
-		this.FirstBreastRow().size.base = 5;
-		if(Math.random() < 0.8)
-			this.FirstVag().virgin = false;
-	}
-	this.Butt().buttSize.base = 2;
-	this.Butt().virgin = false;
-	
-	this.body.SetRace(Race.Rabbit);
-	
-	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Rabbit, Color.white);
-	
-	this.body.SetBodyColor(Color.white);
-	
-	this.body.SetEyeColor(Color.blue);
-
-	// Set hp and mana to full
-	this.SetLevelBonus();
-	this.RestFull();
-}
-Lagomorph.prototype = new Entity();
-Lagomorph.prototype.constructor = Lagomorph;
-
-Lagomorph.prototype.DropTable = function() {
-	var drops = [];
-	if(Math.random() < 0.05) drops.push({ it: AlchemyItems.Leporine });
-	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.RabbitFoot });
-	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.CarrotJuice });
-	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.Lettuce });
-	
-	
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.Whiskers });
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.HorseHair });
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.HorseCum });
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.FruitSeed });
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.FreshGrass });
-	
-	if(Math.random() < 0.01) drops.push({ it: IngredientItems.CorruptSeed });
-	if(Math.random() < 0.01) drops.push({ it: IngredientItems.DemonSeed });
-	
-	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Felinix });
-	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Equinium });
-	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Lacertium });
-	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Gestarium });
-	return drops;
-}
-
-Lagomorph.prototype.Act = function(encounter, activeChar) {
-	// Pick a random target
-	var t = this.GetSingleTarget(encounter, activeChar);
-
-	var parseVars = {
-		name   : this.name,
-		hisher : this.hisher(),
-		tName  : t.name
-	};
-
-	var choice = Math.random();
-	if(choice < 0.6)
-		Abilities.Attack.Use(encounter, this, t);
-	else if(choice < 0.8 && Abilities.Physical.DAttack.enabledCondition(encounter, this))
-		Abilities.Physical.DAttack.Use(encounter, this, t);
-	else
-		Abilities.Seduction.Tease.Use(encounter, this, t);
-}
-
-
-function LagomorphAlpha(gender) {
-	Lagomorph.call(this, gender);
-	
-	this.name              = "Alpha";
-	this.monsterName       = "the lagomorph alpha";
-	this.MonsterName       = "The lagomorph alpha";
-	
-	this.maxHp.base        *= 2;
-	this.maxSp.base        *= 1.2;
-	this.maxLust.base      *= 2;
-	// Main stats
-	this.strength.base     *= 1.4;
-	this.stamina.base      *= 1.2;
-	this.dexterity.base    *= 1.5;
-	this.intelligence.base *= 1.1;
-	this.spirit.base       *= 1.2;
-	this.libido.base       *= 2;
-	this.charisma.base     *= 1.3;
-	
-	this.level             = Math.floor(this.level * 1.5 + 0.5);
-	this.sexlevel          = Math.floor(this.sexlevel * 1.5 + 0.5);
-	
-	this.combatExp         *= 2;
-	this.coinDrop          *= 2;
-	
-	// Set hp and mana to full
-	this.SetLevelBonus();
-	this.RestFull();
-}
-LagomorphAlpha.prototype = new Lagomorph();
-LagomorphAlpha.prototype.constructor = LagomorphAlpha;
-
-/*
- * TODO Drop table & act for alpha
- */
-
-function LagomorphElite(gender) {
-	Lagomorph.call(this, gender);
-	
-	this.name              = "Elite";
-	this.monsterName       = "the lagomorph elite";
-	this.MonsterName       = "The lagomorph elite";
-	
-	this.maxHp.base        *= 6;
-	this.maxSp.base        *= 4;
-	this.maxLust.base      *= 4;
-	// Main stats
-	this.strength.base     *= 4;
-	this.stamina.base      *= 4;
-	this.dexterity.base    *= 4;
-	this.intelligence.base *= 4;
-	this.spirit.base       *= 4;
-	this.libido.base       *= 4;
-	this.charisma.base     *= 4;
-	
-	this.level             = Math.floor(this.level * 4);
-	this.sexlevel          = Math.floor(this.sexlevel * 4);
-	
-	this.combatExp         *= 4;
-	this.coinDrop          *= 4;
-	
-	// Set hp and mana to full
-	this.SetLevelBonus();
-	this.RestFull();
-}
-LagomorphElite.prototype = new Lagomorph();
-LagomorphElite.prototype.constructor = LagomorphElite;
-
-
-/*
- * TODO Drop table & act for elite
- */
-
-
-function LagomorphBrute(gender) {
-	gender = gender || Gender.male;
-	Lagomorph.call(this, gender);
-	
-	this.name              = "Brute";
-	this.monsterName       = "the lagomorph brute";
-	this.MonsterName       = "The lagomorph brute";
-	
-	this.avatar.combat     = Images.lago_brute;
-	
-	this.maxHp.base        *= 10;
-	this.maxSp.base        *= 3;
-	this.maxLust.base      *= 2;
-	// Main stats
-	this.strength.base     *= 5;
-	this.stamina.base      *= 4;
-	this.dexterity.base    *= 0.9;
-	this.intelligence.base *= 0.9;
-	this.spirit.base       *= 2;
-	this.libido.base       *= 2;
-	this.charisma.base     *= 0.9;
-	
-	this.level             *= 3;
-	this.sexlevel          *= 3;
-	
-	this.combatExp         *= 3;
-	this.coinDrop          *= 3;
-	
-	// Set hp and mana to full
-	this.SetLevelBonus();
-	this.RestFull();
-}
-LagomorphBrute.prototype = new Lagomorph();
-LagomorphBrute.prototype.constructor = LagomorphBrute;
-
-// TODO: Drop table
-
-LagomorphBrute.prototype.Act = function(encounter, activeChar) {
-	// Pick a random target
-	var t = this.GetSingleTarget(encounter, activeChar);
-
-	var parseVars = {
-		name   : this.name,
-		hisher : this.hisher(),
-		tName  : t.name
-	};
-
-	var choice = Math.random();
-	if(choice < 0.4)
-		Abilities.Attack.Use(encounter, this, t);
-	else if(choice < 0.6 && Abilities.Physical.CrushingStrike.enabledCondition(encounter, this))
-		Abilities.Physical.CrushingStrike.Use(encounter, this, t);
-	else if(choice < 0.8 && Abilities.Physical.Bash.enabledCondition(encounter, this))
-		Abilities.Physical.Bash.Use(encounter, this, t);
-	else if(choice < 0.9 && Abilities.Physical.Frenzy.enabledCondition(encounter, this))
-		Abilities.Physical.Frenzy.Use(encounter, this, t);
-	else
-		Abilities.Seduction.Tease.Use(encounter, this, t);
-}
-
-
-function LagomorphWizard(gender) {
-	gender = gender || Gender.male;
-	Lagomorph.call(this, gender);
-	
-	this.avatar.combat     = Images.lago_brain;
-	
-	this.name              = "Wizard";
-	this.monsterName       = "the lagomorph wizard";
-	this.MonsterName       = "The lagomorph wizard";
-	
-	this.maxHp.base        *= 1.5;
-	this.maxSp.base        *= 6;
-	this.maxLust.base      *= 2;
-	// Main stats
-	this.strength.base     *= 1.2;
-	this.stamina.base      *= 1.1;
-	this.dexterity.base    *= 3;
-	this.intelligence.base *= 5;
-	this.spirit.base       *= 5;
-	this.libido.base       *= 2;
-	this.charisma.base     *= 2;
-	
-	this.level             *= 3;
-	this.sexlevel          *= 3;
-	
-	this.combatExp         *= 3;
-	this.coinDrop          *= 3;
-	
-	// Set hp and mana to full
-	this.SetLevelBonus();
-	this.RestFull();
-}
-LagomorphWizard.prototype = new Lagomorph();
-LagomorphWizard.prototype.constructor = LagomorphWizard;
-
-// TODO: Drop table
-
-LagomorphWizard.prototype.Act = function(encounter, activeChar) {
-	// Pick a random target
-	var t = this.GetSingleTarget(encounter, activeChar);
-
-	var parseVars = {
-		name   : this.name,
-		hisher : this.hisher(),
-		tName  : t.name
-	};
-
-	var choice = Math.random();
-	if(choice < 0.1)
-		Abilities.Attack.Use(encounter, this, t);
-	else if(choice < 0.3 && Abilities.Black.Fireball.enabledCondition(encounter, this))
-		Abilities.Black.Fireball.Use(encounter, this, t);
-	else if(choice < 0.5 && Abilities.Black.Freeze.enabledCondition(encounter, this))
-		Abilities.Black.Freeze.Use(encounter, this, t);
-	else if(choice < 0.7 && Abilities.Black.Bolt.enabledCondition(encounter, this))
-		Abilities.Black.Bolt.Use(encounter, this, t);
-	else if(choice < 0.9 && Abilities.Black.Venom.enabledCondition(encounter, this))
-		Abilities.Black.Venom.Use(encounter, this, t);
-	else
-		Abilities.Seduction.Tease.Use(encounter, this, t);
-}
-
-LagomorphScenes.Impregnate = function(mother, father, slot) {
+LagomorphScenes.Impregnate = function(mother : Entity, father : Entity, slot? : number) {
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother : mother,
@@ -348,8 +34,9 @@ LagomorphScenes.Impregnate = function(mother, father, slot) {
 }
 
 LagomorphScenes.GroupEnc = function() {
+    let burrows = GAME().burrows;
 	var enemy = new Party();
-	var enc = new Encounter(enemy);
+	var enc : any = new Encounter(enemy);
 	
 	var scenes = new EncounterTable();
 	scenes.AddEnc(function() {
@@ -402,9 +89,11 @@ LagomorphScenes.GroupEnc = function() {
 LagomorphScenes.PlainsEncounter = function() {
 	let player = GAME().player;
 	let party = GAME().party;
+    let burrows = GAME().burrows;
+    
 	var enc = this;
 	
-	var parse = {
+	var parse : any = {
 		himherthem : party.Num() > 1 ? "them" : player.mfFem("him", "her")
 	};
 	
@@ -484,6 +173,7 @@ LagomorphScenes.PlainsEncounter = function() {
 }
 
 LagomorphScenes.GroupLossOnPlains = function() {
+    let burrows = GAME().burrows;
 	SetGameState(GameState.Event, Gui);
 	
 	var enc = this;
@@ -523,13 +213,13 @@ LagomorphScenes.GroupLossOnPlains = function() {
 }
 
 
-LagomorphScenes.GroupLossOnPlainsBrainy = function(enc) {
+LagomorphScenes.GroupLossOnPlainsBrainy = function(enc : any) {
 	let player = GAME().player;
 	let party = GAME().party;
 	var p1cock = player.BiggestCock();
 
 	var brainy = enc.brainy;
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -664,11 +354,13 @@ LagomorphScenes.GroupLossOnPlainsBrainy = function(enc) {
 	Gui.NextPrompt();
 }
 
-LagomorphScenes.GroupLossOnPlainsToBurrows = function(enc) {
+LagomorphScenes.GroupLossOnPlainsToBurrows = function(enc : any) {
 	let player = GAME().player;
 	let party = GAME().party;
-	var alpha = enc.alpha;
-	var parse = {
+    let burrows = GAME().burrows;
+    var alpha = enc.alpha;
+    
+	var parse : any = {
 		p1name     : function() { return party.members[1].name; },
 		m1HeShe    : function() { return alpha.HeShe(); },
 		m1heshe    : function() { return alpha.heshe(); },
@@ -728,7 +420,7 @@ LagomorphScenes.GroupLossOnPlainsToBurrows = function(enc) {
 		
 		TimeStep({minute: 20});
 		
-		party.inventory.AddItem(Items.Lettuce);
+		party.inventory.AddItem(IngredientItems.Lettuce);
 		player.AddLustFraction(0.3);
 		
 		Gui.NextPrompt();
@@ -756,18 +448,19 @@ LagomorphScenes.GroupLossOnPlainsToBurrows = function(enc) {
 		Text.NL();
 		Text.Flush();
 		
-		Scenes.Burrows.Arrival(alpha);
+		BurrowsScenes.Arrival(alpha);
 	});
 }
 
 LagomorphScenes.GroupWinOnPlainsPrompt = function() {
 	let player = GAME().player;
 	let party = GAME().party;
+	let burrows = GAME().burrows;
 	SetGameState(GameState.Event, Gui);
 	
 	var enc = this;
 	
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -808,7 +501,7 @@ LagomorphScenes.GroupWinOnPlainsPrompt = function() {
 		Text.Flush();
 		
 		
-		var group = {};
+		var group : any = {};
 		
 		group.males   = 0;
 		group.females = 0;
@@ -929,13 +622,13 @@ LagomorphScenes.GroupWinOnPlainsPrompt = function() {
 	Encounter.prototype.onVictory.call(enc);
 }
 
-LagomorphScenes.GroupWinOnPlainsFuckBrute = function(enc) {
+LagomorphScenes.GroupWinOnPlainsFuckBrute = function(enc : any) {
 	let player = GAME().player;
 	let party = GAME().party;
 	var p1cock  = player.BiggestCock(null, true);
 	var strapon = p1cock ? p1cock.isStrapon : null;
 	
-	var parse = {
+	var parse : any = {
 		playername : player.name
 		
 	};
@@ -1150,7 +843,7 @@ LagomorphScenes.GroupWinOnPlainsFuckBrute = function(enc) {
 
 LagomorphScenes.GroupWinOnPlainsBruteIntro = function() {
 	let party = GAME().party;
-	var parse = {};
+	var parse : any = {};
 	
 	if(party.Num() > 1) {
 		var p1 = party.Get(1);
@@ -1169,7 +862,7 @@ LagomorphScenes.GroupWinOnPlainsBruteIntro = function() {
 }
 
 LagomorphScenes.GroupWinOnPlainsBruteCums = function() {
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -1180,15 +873,17 @@ LagomorphScenes.GroupWinOnPlainsBruteCums = function() {
 	Text.Add("When even his prodigious balls are tapped, he slumps forward, panting heavily, ears almost trailing down into the great puddle of jism centered on his hulking form, washing thick and sticky over his hands and swirling around his knees and lower legs.", parse);
 }
 
-LagomorphScenes.GroupWinOnPlainsFuckM = function(enc, group) {
+LagomorphScenes.GroupWinOnPlainsFuckM = function(enc : any, group : any) {
 	let player = GAME().player;
 	let party = GAME().party;
+	let kiakai = GAME().kiakai;
+	let terry = GAME().terry;
 	var male = new Lagomorph(Gender.male);
 	
 	var p1cock  = player.BiggestCock();
 	var strapon = p1cock ? p1cock.isStrapon : null;
 	
-	var parse = {
+	var parse : any = {
 		playername : player.name
 		
 	};
@@ -1283,7 +978,7 @@ LagomorphScenes.GroupWinOnPlainsFuckM = function(enc, group) {
 	// COMPANION SECTION BEGIN
 	//TODO Miranda
 	
-	var compsJoining = [];
+	var compsJoining : Entity[] = [];
 	
 	var blockKiai = false;
 	
@@ -1663,7 +1358,7 @@ LagomorphScenes.GroupWinOnPlainsFuckM = function(enc, group) {
 					Text.Clear();
 					Text.Add("No sooner have you finished speaking, a pair of bunnies immediately pounce on Terry, intent on removing his [tarmor].", parse);
 					Text.NL();
-					Scenes.Terry.FuckedByBunnyMob(male, parse);
+					TerryScenes.FuckedByBunnyMob(male, parse);
 					Gui.PrintDefaultOptions();
 				}, enabled : true,
 				tooltip : Text.Parse("Well, if [heshe] wants it so bad, you can spare some bunny-cocks for [hisher] needy holes...", parse)
@@ -1723,10 +1418,13 @@ LagomorphScenes.GroupWinOnPlainsFuckM = function(enc, group) {
 	}
 }
 
-LagomorphScenes.GroupWinOnPlainsGetFuckedM = function(enc, group) {
+LagomorphScenes.GroupWinOnPlainsGetFuckedM = function(enc : any, group : any) {
 	let player = GAME().player;
 	let party = GAME().party;
-	var parse = {
+	let kiakai = GAME().kiakai;
+    let terry = GAME().terry;
+    
+	var parse : any = {
 		playername : player.name
 		
 	};
@@ -1927,7 +1625,7 @@ LagomorphScenes.GroupWinOnPlainsGetFuckedM = function(enc, group) {
 		Text.Add("A small group of rabbits approach the [foxvixen] thief and immediately set about removing [hisher] [tarmor].", parse);
 		Text.NL();
 		
-		Scenes.Terry.FuckedByBunnyMob(male, parse);
+		TerryScenes.FuckedByBunnyMob(male, parse);
 	}
 	
 	//TODO Others
@@ -1963,11 +1661,13 @@ LagomorphScenes.GroupWinOnPlainsGetFuckedM = function(enc, group) {
 }
 
 
-LagomorphScenes.GroupWinInterrorigate = function(enc) {
+LagomorphScenes.GroupWinInterrorigate = function(enc : any) {
 	let player = GAME().player;
 	let party = GAME().party;
-	var alpha = enc.alpha;
-	var parse = {
+	let burrows = GAME().burrows;
+    var alpha = enc.alpha;
+    
+	var parse : any = {
 		meUs       : party.Alone() ? "me" : "us",
 		p1name     : function() { return party.members[1].name; }
 	};
@@ -2079,7 +1779,7 @@ LagomorphScenes.GroupWinInterrorigate = function(enc) {
 					
 					Gui.NextPrompt(function() {
 						Text.Clear();
-						Scenes.Burrows.Arrival(alpha);
+						BurrowsScenes.Arrival(alpha);
 					});
 				}, enabled : true,
 				tooltip : "Follow the alpha into the crowd."
@@ -2130,4 +1830,4 @@ LagomorphScenes.GroupWinInterrorigate = function(enc) {
 	Gui.SetButtonsFromList(options);
 }
 
-export { Lagomorph, LagomorphAlpha, LagomorphElite, LagomorphBrute, LagomorphWizard, LagomorphScenes };
+export { LagomorphScenes };

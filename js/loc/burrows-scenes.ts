@@ -74,7 +74,7 @@ BurrowsScenes.FirstApproach = function() {
 			Text.NL();
 			
 			// Create a new alpha
-			var alpha : any = new LagomorphAlpha();
+			var alpha : any = new LagomorphAlpha(Gender.Random());
 			parse["m1HeShe"]  = function() { return alpha.HeShe(); };
 			parse["m1heshe"]  = function() { return alpha.heshe(); };
 			parse["m1HisHer"] = function() { return alpha.HisHer(); };

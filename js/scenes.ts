@@ -29,7 +29,7 @@ import { LizardsScenes } from "./enemy/lizard";
 import { NagaScenes } from "./enemy/naga";
 import { MaliceScoutsScenes } from "./enemy/malice-scouts";
 import { OrchidScenes } from "./enemy/orchid-scenes";
-import { LagomorphScenes } from "./enemy/rabbit";
+import { LagomorphScenes } from "./enemy/rabbit-scenes";
 import { MothgirlScenes } from "./enemy/mothgirl";
 import { ScorpionScenes } from "./enemy/scorp";
 import { ZebraShamanScenes } from "./enemy/zebra";

@@ -113,7 +113,6 @@ import './js/event/raven.js';
 import './js/enemy/knight.js';
 import './js/enemy/imp.js';
 import './js/enemy/introdemon.js';
-import './js/enemy/rabbit.js';
 import './js/enemy/equine.js';
 import './js/enemy/feline.js';
 import './js/enemy/lizard.js';

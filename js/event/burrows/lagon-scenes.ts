@@ -1957,7 +1957,7 @@ LagonScenes.Usurp = function(toolate : boolean) {
 	enemy.AddMember(lagonMob);
 	enemy.AddMember(new LagomorphBrute());
 	enemy.AddMember(new LagomorphWizard());
-	enemy.AddMember(new LagomorphElite());
+	enemy.AddMember(new LagomorphElite(Gender.Random()));
 	var enc : any = new Encounter(enemy);
 	enc.toolate = toolate;
 	
