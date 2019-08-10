@@ -3,152 +3,162 @@
  * Wildcat, lvl 1-2
  *
  */
+import * as _ from 'lodash';
 
 import { Entity } from '../entity';
 import { Images } from '../assets';
 import { TF } from '../tf';
 import { AppendageType } from '../body/appendage';
-import { Items } from '../items';
 import { Gender } from '../body/gender';
 import { Abilities } from '../abilities';
 import { Element } from '../damagetype';
-import { Race } from '../body/race';
+import { Race, RaceDesc } from '../body/race';
 import { Color } from '../body/color';
-import { WorldTime } from '../GAME';
+import { WorldTime, GAME, TimeStep } from '../GAME';
 import { SetGameState, GameState } from '../gamestate';
 import { Gui } from '../gui';
 import { Text } from '../text';
 import { AlchemyItems } from '../items/alchemy';
 import { IngredientItems } from '../items/ingredients';
 import { AlchemySpecial } from '../items/alchemyspecial';
+import { EncounterTable } from '../encountertable';
+import { Party } from '../party';
+import { Encounter } from '../combat';
+import { PregnancyHandler } from '../pregnancy';
+import { Sex } from '../entity-sex';
+import { Cock } from '../body/cock';
+import { LowerBodyType } from '../entity-desc';
+import { Season } from '../time';
 
-let FelinesScenes = {};
+let FelinesScenes : any = {};
 
-let Feline = {};
+export class Wildcat extends Entity {
+	race : RaceDesc;
+	desc : string;
+	isLion : boolean;
 
-Feline.DropTable = function() {
-	var drops = [];
-	if(Math.random() < 0.05) drops.push({ it: AlchemyItems.Felinix });
-	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.Whiskers });
-	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HairBall });
-	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.CatClaw });
+	constructor(gender : Gender, levelbonus? : number) {
+		super();
 
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.GoatMilk });
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.SheepMilk });
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.CowMilk });
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.RawHoney });
-	if(Math.random() < 0.05) drops.push({ it: IngredientItems.HorseCum });
-	if(Math.random() < 0.05) drops.push({ it: IngredientItems.LizardEgg });
-	if(Math.random() < 0.05) drops.push({ it: IngredientItems.Trinket });
-	if(Math.random() < 0.05) drops.push({ it: IngredientItems.MFluff });
+		this.ID = "wildcat";
 
-	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Avia });
-	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Bovia });
-	if(Math.random() < 0.01) drops.push({ it: AlchemySpecial.Tigris });
+		this.race = Race.Feline;
 
-	return drops;
-}
+		this.monsterName       = "the wildcat";
+		this.MonsterName       = "The wildcat";
 
-Feline.Act = function(encounter, activeChar) {
-	// TODO: Very TEMP
-	Text.Add(this.name + " acts! Meow!");
-	Text.NL();
-
-	// Pick a random target
-	var t = this.GetSingleTarget(encounter, activeChar);
-
-	var parseVars = {
-		name   : this.name,
-		hisher : this.hisher(),
-		tName  : t.name
-	};
-
-	var choice = Math.random();
-	if(choice < 0.7)
-		Abilities.Attack.Use(encounter, this, t);
-	else if(choice < 0.9 && Abilities.Physical.Pierce.enabledCondition(encounter, this))
-		Abilities.Physical.Pierce.Use(encounter, this, t);
-	else
-		Abilities.Seduction.Tease.Use(encounter, this, t);
-}
-
-function Wildcat(gender, levelbonus) {
-	Entity.call(this);
-	this.ID = "wildcat";
-
-	this.race = Race.Feline;
-
-	this.monsterName       = "the wildcat";
-	this.MonsterName       = "The wildcat";
-
-	if(gender == Gender.male) {
-		this.avatar.combat     = Images.wildcat_male;
-		this.name              = "Wildcat(M)";
-		this.body.DefMale();
-	}
-	else if(gender == Gender.female) {
-		this.avatar.combat     = Images.wildcat_fem;
-		this.name              = "Wildcat(F)";
-		this.body.DefFemale();
-		if(Math.random() < 0.8)
-			this.FirstVag().virgin = false;
-	}
-	else {
-		this.avatar.combat     = Images.wildcat_fem;
-		this.name              = "Wildcat(H)";
-		this.body.DefHerm(true);
+		if(gender == Gender.male) {
+			this.avatar.combat     = Images.wildcat_male;
+			this.name              = "Wildcat(M)";
+			this.body.DefMale();
+		}
+		else if(gender == Gender.female) {
+			this.avatar.combat     = Images.wildcat_fem;
+			this.name              = "Wildcat(F)";
+			this.body.DefFemale();
+			if(Math.random() < 0.8)
+				this.FirstVag().virgin = false;
+		}
+		else {
+			this.avatar.combat     = Images.wildcat_fem;
+			this.name              = "Wildcat(H)";
+			this.body.DefHerm(true);
+			if(Math.random() < 0.6)
+				this.FirstVag().virgin = false;
+		}
+		if(this.FirstVag()) {
+			this.FirstVag().capacity.base = 8;
+		}
+		this.Butt().capacity.base = 8;
 		if(Math.random() < 0.6)
-			this.FirstVag().virgin = false;
+			this.Butt().virgin = false;
+
+		this.desc      = "large wildcat";
+		this.GroupName = "The wildcats";
+		this.groupName = "the wildcats";
+
+		this.maxHp.base        = 40;
+		this.maxSp.base        = 20;
+		this.maxLust.base      = 25;
+		// Main stats
+		this.strength.base     = 9;
+		this.stamina.base      = 11;
+		this.dexterity.base    = 14;
+		this.intelligence.base = 11;
+		this.spirit.base       = 12;
+		this.libido.base       = 17;
+		this.charisma.base     = 16;
+
+		this.elementDef.dmg[Element.mWater]  = -0.5;
+
+		this.level             = 1;
+		if(Math.random() > 0.8) this.level++;
+		this.level             += levelbonus || 0;
+		this.sexlevel          = 1;
+
+		this.combatExp         = this.level;
+		this.coinDrop          = this.level * 4;
+
+		this.body.SetRace(Race.Feline);
+		this.body.SetBodyColor(Color.brown);
+		this.body.SetEyeColor(Color.green);
+		TF.SetAppendage(this.Back(), AppendageType.tail, Race.Feline, Color.brown);
+
+		// Set hp and mana to full
+		this.SetLevelBonus();
+		this.RestFull();
 	}
-	if(this.FirstVag()) {
-		this.FirstVag().capacity.base = 8;
+	
+	DropTable() {
+		var drops = [];
+		if(Math.random() < 0.05) drops.push({ it: AlchemyItems.Felinix });
+		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.Whiskers });
+		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HairBall });
+		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.CatClaw });
+
+		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.GoatMilk });
+		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.SheepMilk });
+		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.CowMilk });
+		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.RawHoney });
+		if(Math.random() < 0.05) drops.push({ it: IngredientItems.HorseCum });
+		if(Math.random() < 0.05) drops.push({ it: IngredientItems.LizardEgg });
+		if(Math.random() < 0.05) drops.push({ it: IngredientItems.Trinket });
+		if(Math.random() < 0.05) drops.push({ it: IngredientItems.MFluff });
+
+		if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Avia });
+		if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Bovia });
+		if(Math.random() < 0.01) drops.push({ it: AlchemySpecial.Tigris });
+
+		return drops;
 	}
-	this.Butt().capacity.base = 8;
-	if(Math.random() < 0.6)
-		this.Butt().virgin = false;
 
-	this.desc      = "large wildcat";
-	this.GroupName = "The wildcats";
-	this.groupName = "the wildcats";
+	Act(encounter : any, activeChar : any) {
+		// TODO: Very TEMP
+		Text.Add(this.name + " acts! Meow!");
+		Text.NL();
 
-	this.maxHp.base        = 40;
-	this.maxSp.base        = 20;
-	this.maxLust.base      = 25;
-	// Main stats
-	this.strength.base     = 9;
-	this.stamina.base      = 11;
-	this.dexterity.base    = 14;
-	this.intelligence.base = 11;
-	this.spirit.base       = 12;
-	this.libido.base       = 17;
-	this.charisma.base     = 16;
+		// Pick a random target
+		var t = this.GetSingleTarget(encounter, activeChar);
 
-	this.elementDef.dmg[Element.mWater]  = -0.5;
+		var parseVars = {
+			name   : this.name,
+			hisher : this.hisher(),
+			tName  : t.name
+		};
 
-	this.level             = 1;
-	if(Math.random() > 0.8) this.level++;
-	this.level             += levelbonus || 0;
-	this.sexlevel          = 1;
+		var choice = Math.random();
+		if(choice < 0.7)
+			Abilities.Attack.Use(encounter, this, t);
+		else if(choice < 0.9 && Abilities.Physical.Pierce.enabledCondition(encounter, this))
+			Abilities.Physical.Pierce.Use(encounter, this, t);
+		else
+			Abilities.Seduction.Tease.Use(encounter, this, t);
+	}
 
-	this.combatExp         = this.level;
-	this.coinDrop          = this.level * 4;
-
-	this.body.SetRace(Race.Feline);
-	this.body.SetBodyColor(Color.brown);
-	this.body.SetEyeColor(Color.green);
-	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Feline, Color.brown);
-
-	// Set hp and mana to full
-	this.SetLevelBonus();
-	this.RestFull();
 }
-Wildcat.prototype = new Entity();
-Wildcat.prototype.constructor = Wildcat;
 
-Wildcat.prototype.DropTable = Feline.DropTable;
-Wildcat.prototype.Act = Feline.Act;
 
-FelinesScenes.WildcatEnc = function(levelbonus) {
+FelinesScenes.WildcatEnc = function(levelbonus : number) {
 	var enemy = new Party();
 	var r = Math.random();
 	if(r < 0.2) {
@@ -184,35 +194,36 @@ FelinesScenes.WildcatEnc = function(levelbonus) {
 	return enc;
 }
 
-function Puma(gender, levelbonus) {
-	Wildcat.call(this, gender, levelbonus);
-	this.ID = "puma";
+export class Puma extends Wildcat {
+	constructor(gender : Gender, levelbonus? : number) {
+		super(gender, levelbonus);
 
-	this.race = Race.Puma;
+		this.ID = "puma";
 
-	this.monsterName = "the puma";
-	this.MonsterName = "The puma";
-	this.desc        = "lithe puma";
-	this.GroupName   = "The pumas";
-	this.groupName   = "the pumas";
+		this.race = Race.Puma;
 
-	if(gender == Gender.male) {
-		this.avatar.combat = Images.puma_male;
-		this.name          = "Puma(M)";
-	}
-	else if(gender == Gender.female) {
-		this.avatar.combat = Images.puma_fem;
-		this.name          = "Puma(F)";
-	}
-	else {
-		this.avatar.combat = Images.puma_fem;
-		this.name          = "Puma(H)";
+		this.monsterName = "the puma";
+		this.MonsterName = "The puma";
+		this.desc        = "lithe puma";
+		this.GroupName   = "The pumas";
+		this.groupName   = "the pumas";
+
+		if(gender == Gender.male) {
+			this.avatar.combat = Images.puma_male;
+			this.name          = "Puma(M)";
+		}
+		else if(gender == Gender.female) {
+			this.avatar.combat = Images.puma_fem;
+			this.name          = "Puma(F)";
+		}
+		else {
+			this.avatar.combat = Images.puma_fem;
+			this.name          = "Puma(H)";
+		}
 	}
 }
-Puma.prototype = new Wildcat();
-Puma.prototype.constructor = Puma;
 
-FelinesScenes.PumaEnc = function(levelbonus) {
+FelinesScenes.PumaEnc = function(levelbonus : number) {
 	var enemy = new Party();
 	var r = Math.random();
 	if(r < 0.2) {
@@ -248,35 +259,36 @@ FelinesScenes.PumaEnc = function(levelbonus) {
 	return enc;
 }
 
-function Jaguar(gender, levelbonus) {
-	Wildcat.call(this, gender, levelbonus);
-	this.ID = "jaguar";
+export class Jaguar extends Wildcat {
+	constructor(gender : Gender, levelbonus? : number) {
+		super(gender, levelbonus);
 
-	this.race = Race.Jaguar;
+		this.ID = "jaguar";
 
-	this.monsterName = "the jaguar";
-	this.MonsterName = "The jaguar";
-	this.desc        = "swift jaguar";
-	this.GroupName   = "The jaguars";
-	this.groupName   = "the jaguars";
+		this.race = Race.Jaguar;
 
-	if(gender == Gender.male) {
-		this.avatar.combat = Images.jaguar_male;
-		this.name          = "Jaguar(M)";
-	}
-	else if(gender == Gender.female) {
-		this.avatar.combat = Images.jaguar_fem;
-		this.name          = "Jaguar(F)";
-	}
-	else {
-		this.avatar.combat = Images.jaguar_fem;
-		this.name          = "Jaguar(H)";
+		this.monsterName = "the jaguar";
+		this.MonsterName = "The jaguar";
+		this.desc        = "swift jaguar";
+		this.GroupName   = "The jaguars";
+		this.groupName   = "the jaguars";
+
+		if(gender == Gender.male) {
+			this.avatar.combat = Images.jaguar_male;
+			this.name          = "Jaguar(M)";
+		}
+		else if(gender == Gender.female) {
+			this.avatar.combat = Images.jaguar_fem;
+			this.name          = "Jaguar(F)";
+		}
+		else {
+			this.avatar.combat = Images.jaguar_fem;
+			this.name          = "Jaguar(H)";
+		}
 	}
 }
-Jaguar.prototype = new Wildcat();
-Jaguar.prototype.constructor = Jaguar;
 
-FelinesScenes.JaguarEnc = function(levelbonus) {
+FelinesScenes.JaguarEnc = function(levelbonus : number) {
 	var enemy = new Party();
 	var r = Math.random();
 	if(r < 0.2) {
@@ -312,35 +324,36 @@ FelinesScenes.JaguarEnc = function(levelbonus) {
 	return enc;
 }
 
-function Lynx(gender, levelbonus) {
-	Wildcat.call(this, gender, levelbonus);
-	this.ID = "lynx";
+export class Lynx extends Wildcat {
+	constructor(gender : Gender, levelbonus? : number) {
+		super(gender, levelbonus);
+		Wildcat.call(this, gender, levelbonus);
+		this.ID = "lynx";
 
-	this.race = Race.Lynx;
+		this.race = Race.Lynx;
 
-	this.monsterName = "the lynx";
-	this.MonsterName = "The lynx";
-	this.desc        = "proud lynx";
-	this.GroupName   = "The lynx";
-	this.groupName   = "the lynx";
+		this.monsterName = "the lynx";
+		this.MonsterName = "The lynx";
+		this.desc        = "proud lynx";
+		this.GroupName   = "The lynx";
+		this.groupName   = "the lynx";
 
-	if(gender == Gender.male) {
-		this.avatar.combat = Images.lynx_male;
-		this.name          = "Lynx(M)";
-	}
-	else if(gender == Gender.female) {
-		this.avatar.combat = Images.lynx_fem;
-		this.name          = "Lynx(F)";
-	}
-	else {
-		this.avatar.combat = Images.lynx_fem;
-		this.name          = "Lynx(H)";
+		if(gender == Gender.male) {
+			this.avatar.combat = Images.lynx_male;
+			this.name          = "Lynx(M)";
+		}
+		else if(gender == Gender.female) {
+			this.avatar.combat = Images.lynx_fem;
+			this.name          = "Lynx(F)";
+		}
+		else {
+			this.avatar.combat = Images.lynx_fem;
+			this.name          = "Lynx(H)";
+		}
 	}
 }
-Lynx.prototype = new Wildcat();
-Lynx.prototype.constructor = Lynx;
 
-FelinesScenes.LynxEnc = function(levelbonus) {
+FelinesScenes.LynxEnc = function(levelbonus : number) {
 	var enemy = new Party();
 	var r = Math.random();
 	if(r < 0.2) {
@@ -377,38 +390,39 @@ FelinesScenes.LynxEnc = function(levelbonus) {
 }
 
 // TODO
-function Lion(gender, levelbonus) {
-	Wildcat.call(this, gender, levelbonus);
-	this.ID = "lion";
+export class Lion extends Wildcat {
+	constructor(gender : Gender, levelbonus? : number) {
+		super(gender, levelbonus);
 
-	this.race = Race.Lion;
+		this.ID = "lion";
 
-	this.monsterName = "the lion";
-	this.MonsterName = "The lion";
-	this.desc        = "hulking lion";
-	this.GroupName   = "The lions";
-	this.groupName   = "the lions";
-	this.isLion = true;
+		this.race = Race.Lion;
 
-	if(gender == Gender.male) {
-		//this.avatar.combat = Images.lion_male;
-		this.name          = "Lion(M)";
-	}
-	else if(gender == Gender.female) {
-		//this.avatar.combat = Images.lion_fem;
-		this.name          = "Lion(F)";
-	}
-	else {
-		//this.avatar.combat = Images.lion_fem;
-		this.name          = "Lion(H)";
+		this.monsterName = "the lion";
+		this.MonsterName = "The lion";
+		this.desc        = "hulking lion";
+		this.GroupName   = "The lions";
+		this.groupName   = "the lions";
+		this.isLion = true;
+
+		if(gender == Gender.male) {
+			//this.avatar.combat = Images.lion_male;
+			this.name          = "Lion(M)";
+		}
+		else if(gender == Gender.female) {
+			//this.avatar.combat = Images.lion_fem;
+			this.name          = "Lion(F)";
+		}
+		else {
+			//this.avatar.combat = Images.lion_fem;
+			this.name          = "Lion(H)";
+		}
 	}
 }
-Lion.prototype = new Wildcat();
-Lion.prototype.constructor = Lion;
 
 
 
-FelinesScenes.Impregnate = function(mother, father, slot) {
+FelinesScenes.Impregnate = function(mother : Entity, father : Wildcat, slot : number) {
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother : mother,
@@ -440,7 +454,7 @@ FelinesScenes.IntroRegular = function() {
 	var group   = enemy.Num() > 1;
 	var mainCat = enemy.Get(0);
 
-	var parse = {
+	var parse : any = {
 		groupof    : group ? " group of" : "",
 		s          : group ? "s" : "",
 		notS       : group ? "" : "s",
@@ -502,7 +516,7 @@ FelinesScenes.IntroStalking = function() {
 	var group   = enemy.Num() > 1;
 	var mainCat = enemy.Get(0);
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		desc       : mainCat.desc,
 		m1name     : mainCat.nameDesc()
@@ -555,7 +569,7 @@ FelinesScenes.WinPrompt = function() {
 	var mainCat = enemy.Get(0);
 	var taur    = player.IsTaur();
 
-	var parse = {
+	var parse : any = {
 		oneof        : group ? " one of" : "",
 		enemyEnemies : group ? "enemies" : "enemy",
 		s            : group ? "s" : "",
@@ -576,9 +590,9 @@ FelinesScenes.WinPrompt = function() {
 		var numMales   = 0;
 		var numFemales = 0;
 		var numHerms   = 0;
-		var male       = null;
-		var female     = null;
-		var herm       = null;
+		var male :   Wildcat = null;
+		var female : Wildcat = null;
+		var herm :   Wildcat = null;
 		for(var i = 0; i < enemy.Num(); ++i) {
 			var ent    = enemy.Get(i);
 			var gender = ent.Gender();
@@ -723,7 +737,7 @@ FelinesScenes.WinPrompt = function() {
 	Encounter.prototype.onVictory.call(enc);
 }
 
-FelinesScenes.WinCatchVag = function(mainCat, enemy) {
+FelinesScenes.WinCatchVag = function(mainCat : Wildcat, enemy : Party) {
 	let player = GAME().player;
 	var otherCats = _.filter(enemy.members, function(cat) {
 		return cat != mainCat;
@@ -733,7 +747,7 @@ FelinesScenes.WinCatchVag = function(mainCat, enemy) {
 	var cat1 = otherCats[0];
 	var group = enemy.Num() > 1;
 	var group2 = enemy.Num() > 2;
-	var parse = {
+	var parse : any = {
 		cat : function() { return _.sample(mainCat.Race().Desc()).noun; }
 	};
 	parse = player.ParserTags(parse);
@@ -864,11 +878,11 @@ FelinesScenes.WinCatchVag = function(mainCat, enemy) {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-FelinesScenes.WinFuckVag = function(cat, group, enc, cocks, numFemales) {
+FelinesScenes.WinFuckVag = function(cat : Wildcat, group : boolean, enc : any, cocks : Cock[], numFemales : number) {
 	let player = GAME().player;
 	var pCock = player.BiggestCock(cocks);
 
-	var parse = {
+	var parse : any = {
 		Name     : cat.NameDesc(),
 		name     : cat.nameDesc(),
 		Possessive  : cat.Possessive(),
@@ -1101,11 +1115,12 @@ FelinesScenes.WinFuckVag = function(cat, group, enc, cocks, numFemales) {
 	}
 }
 
-FelinesScenes.WinFuckButt = function(cat, group, enc, cocks) {
+FelinesScenes.WinFuckButt = function(cat : Wildcat, group : boolean, enc : any, cocks : Cock[]) {
 	let player = GAME().player;
+	let party = GAME().party;
 	var pCock = player.BiggestCock(cocks);
 
-	var parse = {
+	var parse : any = {
 		oneof    : group ? " one of" : "",
 		s        : group ? "s" : "",
 		Name     : cat.NameDesc(),
@@ -1342,9 +1357,9 @@ FelinesScenes.WinFuckButt = function(cat, group, enc, cocks) {
 	}
 }
 
-FelinesScenes.WinGetBlowjob = function(cat, group, enc) {
+FelinesScenes.WinGetBlowjob = function(cat : Wildcat, group : boolean, enc : any) {
 	let player = GAME().player;
-	var parse = {
+	var parse : any = {
 		oneof    : group ? " one of" : "",
 		s        : group ? "s" : "",
 		Name     : cat.NameDesc(),
@@ -1509,7 +1524,7 @@ FelinesScenes.WinGetBlowjob = function(cat, group, enc) {
 }
 
 
-FelinesScenes.WinGroupService = function(enc, enemy) {
+FelinesScenes.WinGroupService = function(enc : any, enemy : Party) {
 	let player = GAME().player;
 	var mainCat = enemy.Get(0);
 	var betaCat = enemy.Get(1);
@@ -1520,7 +1535,7 @@ FelinesScenes.WinGroupService = function(enc, enemy) {
 
 	var numCocks = player.NumCocks();
 
-	var parse = {
+	var parse : any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -1670,6 +1685,8 @@ FelinesScenes.WinGroupService = function(enc, enemy) {
 
 FelinesScenes.LossRegular = function() {
 	let player = GAME().player;
+	let party = GAME().party;
+
 	SetGameState(GameState.Event, Gui);
 
 	var enc = this;
@@ -1677,7 +1694,7 @@ FelinesScenes.LossRegular = function() {
 	var group   = enemy.Num() > 1;
 	var mainCat = enemy.Get(0);
 
-	var parse = {
+	var parse : any = {
 		oneof        : group ? " one of" : "",
 		enemyEnemies : group ? "enemies" : "enemy",
 		s            : group ? "s" : "",
@@ -1698,9 +1715,9 @@ FelinesScenes.LossRegular = function() {
 	var numMales   = 0;
 	var numFemales = 0;
 	var numHerms   = 0;
-	var male       = null;
-	var female     = null;
-	var herm       = null;
+	var male   : Wildcat = null;
+	var female : Wildcat = null;
+	var herm   : Wildcat = null;
 	for(var i = 0; i < enemy.Num(); ++i) {
 		var ent    = enemy.Get(i);
 		var gender = ent.Gender();
@@ -1794,13 +1811,13 @@ FelinesScenes.LossRegular = function() {
 	Encounter.prototype.onLoss.call(enc);
 }
 
-FelinesScenes.LossPCblowsCat = function(mainCat, enemy) {
+FelinesScenes.LossPCblowsCat = function(mainCat : Wildcat, enemy : Party) {
 	let player = GAME().player;
 	var group = enemy.Num() > 1;
 	var group2 = enemy.Num() > 2;
 	var cat1 = enemy.Get(1);
 	var herm = mainCat.FirstVag();
-	var parse = {
+	var parse : any = {
 		cat : function() { return _.sample(mainCat.Race().Desc()).noun; }
 	};
 	parse = player.ParserTags(parse);
@@ -2047,9 +2064,9 @@ FelinesScenes.LossPCblowsCat = function(mainCat, enemy) {
 	return true;
 }
 
-FelinesScenes.LossCatchVaginal = function(cat, group, enc) {
+FelinesScenes.LossCatchVaginal = function(cat : Wildcat, group : boolean, enc : any) {
 	let player = GAME().player;
-	var parse = {
+	var parse : any = {
 		oneof    : group ? " one of" : "",
 		s        : group ? "s" : "",
 		Name     : cat.NameDesc(),
@@ -2135,7 +2152,7 @@ FelinesScenes.LossCatchVaginal = function(cat, group, enc) {
 	parse["t"] = tail ? Text.Parse("and gently stroking your [tail] with the other", parse) : "";
 	Text.Add("[Name] approaches you from behind, laying a hand on your [hips] [t]. Without saying a word, [heshe] leans forward to kiss your lower back, trailing soft pecks along your spine as [heshe] simultaneously aligns [himher]self with your [vag].", parse);
 	Text.NL();
-	parse["bitingbackUttering"] = dom > 0 ? "biting back" : "uttering";
+	parse["bitingbackUttering"] = dom ? "biting back" : "uttering";
 	Text.Add("Involuntarily, you arch your back, [bitingbackUttering] a moan of desire as you feel [hisher] feather-light touch dancing down your back. You're intimately aware of the warmth of [hisher] cock as it hovers temptingly just outside your [vag], and you feel the ache for [himher] to start claiming you well inside your stomach.", parse);
 	Text.NL();
 	Text.Add("[HisHer] hands slide to your [butt], gripping the cheeks and spreading them apart. You’re dimly aware of [hisher] claws gently prickling you.", parse);
@@ -2285,7 +2302,7 @@ FelinesScenes.LossCatchVaginal = function(cat, group, enc) {
 }
 
 
-FelinesScenes.LossPitchVaginal = function(cat, group, enc, cocksInVag) {
+FelinesScenes.LossPitchVaginal = function(cat : Wildcat, group : boolean, enc : any, cocksInVag : Cock[]) {
 	let player = GAME().player;
 	var pCock  = player.BiggestCock(cocksInVag);
 	var allCocks = player.AllCocksCopy();
@@ -2295,7 +2312,7 @@ FelinesScenes.LossPitchVaginal = function(cat, group, enc, cocksInVag) {
 			break;
 		}
 	}
-	var pCock2;
+	var pCock2 : Cock;
 	if(allCocks.length > 0) {
 		pCock2 = player.BiggestCock(allCocks);
 
@@ -2307,7 +2324,7 @@ FelinesScenes.LossPitchVaginal = function(cat, group, enc, cocksInVag) {
 		}
 	}
 
-	var parse = {
+	var parse : any = {
 		oneof    : player.NumCocks() > 1 ? " one of" : "",
 		s        : group ? "s" : "",
 		Name     : cat.NameDesc(),
@@ -2564,9 +2581,9 @@ FelinesScenes.LossPitchVaginal = function(cat, group, enc, cocksInVag) {
 	return true;
 }
 
-FelinesScenes.LossDrainMilk = function(mainCat, group, enc) {
+FelinesScenes.LossDrainMilk = function(mainCat : Wildcat, group : boolean, enc : any) {
 	let player = GAME().player;
-	var parse = {
+	var parse : any = {
 		name : mainCat.nameDesc()
 	};
 	parse = player.ParserTags(parse);
@@ -2667,7 +2684,7 @@ FelinesScenes.LossDrainMilk = function(mainCat, group, enc) {
 /*
 FelinesScenes.WinPrompt = function() {
 	var enc = this;
-	var parse = {
+	var parse : any = {
 
 	};
 
@@ -2678,9 +2695,11 @@ FelinesScenes.WinPrompt = function() {
 }
 */
 
-FelinesScenes.LossDoubleTeam = function(cat, cat2, group, enc) {
+FelinesScenes.LossDoubleTeam = function(cat : Wildcat, cat2 : Wildcat, group : boolean, enc : any) {
 	let player = GAME().player;
-	var parse = {
+	let party = GAME().party;
+
+	var parse : any = {
 		name  : cat.nameDesc(),
 		Name  : cat.NameDesc(),
 		group : cat.groupName,
@@ -3042,4 +3061,4 @@ FelinesScenes.LossDoubleTeam = function(cat, cat2, group, enc) {
 	return true;
 }
 
-export { Feline, FelinesScenes };
+export { FelinesScenes };
