@@ -8,7 +8,6 @@ import './assets/css/output.css';
 import './assets/css/droid-sans.css';
 
 // Javascript
-import './js/utility.js';
 
 // Entity scripts
 import './js/event/player.js';

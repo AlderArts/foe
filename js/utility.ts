@@ -1,20 +1,19 @@
 
 // Borrowed from Underscore.js
-let isFunction = function(obj) {
+let isFunction = function(obj : any) {
 	return !!(obj && obj.constructor && obj.call && obj.apply);
 };
 
 if(!Array.isArray) {
-	Array.isArray = function (vArg) {
-		return Object.prototype.toString.call(vArg) === "[object Array]";
+	Array.isArray = function(arg : any) : arg is any[] {
+		return (Object.prototype.toString.call(arg) === "[object Array]");
 	};
 }
 
 // Polyfill for Object.assign
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
 if (typeof Object.assign != 'function') {
-  Object.assign = function(target, varArgs) { // .length of function is 2
-    'use strict';
+  Object.assign = function(target : any, ...varArgs : any) { // .length of function is 2
     if (target == null) { // TypeError if undefined or null
       throw new TypeError('Cannot convert undefined or null to object');
     }
@@ -37,16 +36,16 @@ if (typeof Object.assign != 'function') {
   };
 }
 
-let Rand = function(max) {
+let Rand = function(max : number) {
 	var r = Math.floor(Math.random() * max);
 	return (r < max) ? r : max - 1;
 }
 
 const Unit = {
-	CmToInch   : function(cm) { return cm / 2.54; },
-	InchToFoot : function(inch) { return inch / 12; },
-	MToFoot    : function(m) { return m * 3.28; },
-	KgToPound  : function(kg) { return kg * 2.2; },
+	CmToInch   : function(cm : number) { return cm / 2.54; },
+	InchToFoot : function(inch : number) { return inch / 12; },
+	MToFoot    : function(m : number) { return m * 3.28; },
+	KgToPound  : function(kg : number) { return kg * 2.2; },
 }
 
 /*
@@ -57,7 +56,7 @@ const Unit = {
 	});
  */
 // Download script, used for save to file. Calls download.php
-let GenerateFile = function(options) {
+let GenerateFile : any = function(options? : any) {
 	options = options || {};
 	options.script = options.script || "download.php";
 
@@ -107,13 +106,13 @@ let GenerateFile = function(options) {
 		// cause the file download dialog box to appear.
 
 		form.submit();
-	},50);
+	}, 50);
 };
 GenerateFile.canSaveOffline = false;
 
 (function(){
 	// calling convention for destroying local variables instead of keeping them in global namespace
-	var lnk;
+	var lnk : HTMLAnchorElement;
 	try {
 		new Blob([JSON.stringify({"obj":"discarded"})],{"type":"application/json"});
 		var fl = new File([JSON.stringify({"obj":"discarded"})],"FoE.json",{"type":"application/json"});
@@ -132,7 +131,7 @@ GenerateFile.canSaveOffline = false;
 		return;
 	}
 	// if no exceptions are thrown, we simply replace the GenerateFile function with this one
-	window.GenerateFile = function(options) {
+	GenerateFile = function(options : any) {
 		if(!options.filename || !options.content) {
 			throw new Error("Please enter all the required config options!");
 		}
@@ -145,7 +144,7 @@ GenerateFile.canSaveOffline = false;
 		lnk.download = options.filename;
 		lnk.click();
 	}
-	window.GenerateFile.canSaveOffline = true;
+	GenerateFile.canSaveOffline = true;
 })();
 
 export { isFunction, Unit, GenerateFile, Rand };
