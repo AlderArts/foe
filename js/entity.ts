@@ -15,7 +15,6 @@ import { EntityMenu } from './entity-menu';
 import { EntityDict } from './entity-dict';
 import { EntityDesc } from './entity-desc';
 import { LowerBodyType } from './body/body';
-import { EntitySex } from './entity-sex';
 import { Time } from './time';
 import { Text } from './text';
 import { Gui } from './gui';
@@ -32,6 +31,11 @@ import { CurEncounter } from './combat-data';
 import { Jobs } from './job';
 import { Gender } from './body/gender';
 import { Cock } from './body/cock';
+import { Vagina } from './body/vagina';
+import { Butt } from './body/butt';
+import { BodyPartType } from './body/bodypart';
+import { Orifice } from './body/orifice';
+import { NippleType } from './body/breasts';
 
 export enum DrunkLevel {
 	Sober   = 0.25,
@@ -103,7 +107,7 @@ export class Entity {
 	acc1Slot : Item;
 	acc2Slot : Item;
 
-	strapOn : Item;
+	strapOn : any;
 
 	elementAtk : DamageType;
 	elementDef : DamageType;
@@ -2063,35 +2067,344 @@ export class Entity {
 	}
 	
 	/* ENTITY SEX */
-	Genitalia = EntitySex.Genitalia;
-	VagCap = EntitySex.VagCap;
-	OralCap = EntitySex.OralCap;
-	AnalCap = EntitySex.AnalCap;
-	ResetVirgin = EntitySex.ResetVirgin;
-	NumCocks = EntitySex.NumCocks;
-	FirstCock = EntitySex.FirstCock;
-	FirstClitCockIdx = EntitySex.FirstClitCockIdx;
-	BiggestCock = EntitySex.BiggestCock;
-	CocksThatFit = EntitySex.CocksThatFit;
-	AllCocksCopy = EntitySex.AllCocksCopy;
-	AllCocks = EntitySex.AllCocks;
-	MultiCockDesc = EntitySex.MultiCockDesc;
-	NumVags = EntitySex.NumVags;
-	FirstVag = EntitySex.FirstVag;
-	VagsThatFit = EntitySex.VagsThatFit;
-	AllVags = EntitySex.AllVags;
-	UnfertilezedWomb = EntitySex.UnfertilezedWomb;
-	NumBreastRows = EntitySex.NumBreastRows;
-	FirstBreastRow = EntitySex.FirstBreastRow;
-	AllBreastRows = EntitySex.AllBreastRows;
-	BiggestBreasts = EntitySex.BiggestBreasts;
-	SmallestBreasts = EntitySex.SmallestBreasts;
-	BiggestNips = EntitySex.BiggestNips;
-	SmallestNips = EntitySex.SmallestNips;
-	NipplesThatFitLen = EntitySex.NipplesThatFitLen;
-	AllOrfices = EntitySex.AllOrfices;
-	AllPenetrators = EntitySex.AllPenetrators;
+	Genitalia() {
+		return this.body.gen;
+	}
 
+	// TODO: affect with things such as stretch, lust, perks etc
+	VagCap() {
+		return this.FirstVag().capacity.Get();
+	}
+	OralCap() {
+		return this.Mouth().capacity.Get();
+	}
+	AnalCap() {
+		return this.Butt().capacity.Get();
+	}
+
+	ResetVirgin() {
+		this.Butt().virgin = true;
+		var vags = this.AllVags();
+		for(var i = 0; i < vags.length; i++)
+			vags[i].virgin = true;
+	}
+
+	// Convenience functions, cock
+	NumCocks() {
+		return this.body.cock.length;
+	}
+	FirstCock() {
+		return this.body.cock[0];
+	}
+	FirstClitCockIdx() {
+		for(var i=0,j=this.body.cock.length; i<j; i++) {
+			var c = this.body.cock[i];
+			if(c.vag)
+				return i;
+		}
+		return -1;
+	}
+	BiggestCock(cocks? : Cock[], incStrapon? : boolean) {
+		cocks = cocks || this.body.cock;
+		var c = cocks[0];
+		if(c) {
+			var cSize = cocks[0].length.Get() * cocks[0].thickness.Get();
+			for(var i=1,j=cocks.length; i<j; i++) {
+				var newSize = cocks[i].length.Get() * cocks[i].thickness.Get();
+				if(newSize > cSize) {
+					cSize = newSize;
+					c = cocks[i];
+				}
+			};
+		}
+		if(c)
+			return c;
+		else if(incStrapon && this.strapOn)
+			return this.strapOn.cock;
+	}
+	CocksThatFit(orifice? : Orifice, onlyRealCocks? : boolean, extension? : any) {
+		var ret = [];
+		for(var i=0,j=this.body.cock.length; i<j; i++) {
+			var c = this.body.cock[i];
+			if(!orifice || orifice.Fits(c, extension))
+				ret.push(c);
+		};
+		if(ret.length == 0 && !onlyRealCocks && this.strapOn) {
+			var c : Cock = this.strapOn.cock;
+			if(!orifice || orifice.Fits(c, extension))
+				ret.push(c);
+		}
+		return ret;
+	}
+	AllCocksCopy() {
+		var ret = [];
+		for(var i=0,j=this.body.cock.length; i<j; i++) {
+			var c = this.body.cock[i];
+				ret.push(c);
+		};
+		return ret;
+	}
+	AllCocks() {
+		return this.body.cock;
+	}
+	// TODO: Race too
+	MultiCockDesc(cocks? : Cock[]) {
+		cocks = cocks || this.body.cock;
+		if(cocks.length == 0) {
+			if(this.strapOn)
+				return this.strapOn.cock.Short();
+			else
+				return "[NO COCKS]";
+		}
+		else if(cocks.length == 1)
+			return cocks[0].Short();
+		else
+			return Text.Quantify(cocks.length) + " of " + cocks[0].Desc().adj + " " + cocks[0].nounPlural();
+	}
+
+
+
+	// Convenience functions, vag
+	NumVags() {
+		return this.body.vagina.length;
+	}
+	FirstVag() {
+		return this.body.vagina[0];
+	}
+	VagsThatFit(capacity : number) {
+		var ret : Vagina[] = [];
+		for(var i=0; i<this.body.vagina.length; i++) {
+			let vag = this.body.vagina[i];
+			var size = vag.capacity.Get();
+			if(size >= capacity) {
+				ret.push(vag);
+			}
+		};
+		return ret;
+	}
+	AllVags() {
+		return this.body.vagina;
+	}
+	UnfertilezedWomb() {
+		var ret : Womb[] = [];
+		for(var i=0,j=this.body.vagina.length; i<j; i++){
+			var womb = this.body.vagina[i].womb;
+			if(womb.pregnant == false)
+				ret.push(womb);
+		};
+		return ret;
+	}
+
+
+	// Convenience functions, breasts
+	NumBreastRows() {
+		return this.body.breasts.length;
+	}
+	FirstBreastRow() {
+		return this.body.breasts[0];
+	}
+	AllBreastRows() {
+		return this.body.breasts;
+	}
+	BiggestBreasts() {
+		var breasts = this.body.breasts;
+		var c = breasts[0];
+		var cSize = breasts[0].Size();
+		for(var i=1,j=breasts.length; i<j; i++) {
+			var newSize = breasts[i].Size();
+			if(newSize > cSize) {
+				cSize = newSize;
+				c = breasts[i];
+			}
+		};
+		return c;
+	}
+	SmallestBreasts() {
+		var breasts = this.body.breasts;
+		var c = breasts[0];
+		var cSize = breasts[0].Size();
+		for(var i=1,j=breasts.length; i<j; i++) {
+			var newSize = breasts[i].Size();
+			if(newSize < cSize) {
+				cSize = newSize;
+				c = breasts[i];
+			}
+		};
+		return c;
+	}
+	BiggestNips() {
+		var breasts = this.body.breasts;
+		var c = breasts[0];
+		var cSize = breasts[0].NipSize();
+		for(var i=1,j=breasts.length; i<j; i++) {
+			var newSize = breasts[i].NipSize();
+			if(newSize > cSize) {
+				cSize = newSize;
+				c = breasts[i];
+			}
+		};
+		return c;
+	}
+	SmallestNips() {
+		var breasts = this.body.breasts;
+		var c = breasts[0];
+		var cSize = breasts[0].NipSize();
+		for(var i=1,j=breasts.length; i<j; i++) {
+			var newSize = breasts[i].NipSize();
+			if(newSize < cSize) {
+				cSize = newSize;
+				c = breasts[i];
+			}
+		};
+		return c;
+	}
+	NipplesThatFitLen(capacity : number) {
+		var ret = new Array();
+		for(var i=0,j=this.body.breasts.length; i<j; i++) {
+			var row = this.body.breasts[i];
+			if(row.nippleType == NippleType.lipple ||
+				row.nippleType == NippleType.cunt) {
+				if(row.NipSize() >= capacity)
+					ret.push(row);
+			}
+		};
+		return ret;
+	}
+
+
+	AllOrfices(capacity? : number) {
+		capacity = capacity || 0;
+		var ret = new Array();
+		
+		let vags = this.VagsThatFit(capacity);
+		for(var i=0,j=vags.length; i<j; i++)
+			ret.push({type: BodyPartType.vagina, obj: vags[i]});
+		var nips = this.NipplesThatFitLen(capacity);
+		for(var i=0,j=nips.length; i<j; i++)
+			ret.push({type: BodyPartType.nipple, obj: nips[i]});
+		if(this.body.ass.capacity.Get() >= capacity)
+			ret.push({type: BodyPartType.ass, obj: this.body.ass});
+		if(this.body.head.mouth.capacity.Get() >= capacity)
+			ret.push({type: BodyPartType.mouth, obj: this.body.head.mouth});
+		
+		return ret;
+	}
+
+	AllPenetrators(orifice : Orifice) {
+		var ret = new Array();
+		
+		var cocks = this.CocksThatFit(orifice);
+		for(var i=0,j=cocks.length; i<j; i++)
+			ret.push({type: BodyPartType.cock, obj: cocks[i]});
+		// TODO: Tongue, Nipple-cock, Clitcock
+		
+		return ret;
+	}
+
+
+	Fuck(cock : Cock, expMult? : number) {
+		expMult = expMult || 1;
+		this.AddSexExp(expMult);
+		// TODO: Stretch
+	}
+
+	// Fuck entitys mouth (vag, cock)
+	FuckOral(mouth : any, cock : Cock, expMult? : number) {
+		expMult = expMult || 1;
+		this.AddSexExp(expMult);
+		// TODO: Stretch
+	}
+
+	// Fuck entitys anus (anus, cock)
+	FuckAnal(butt : Butt, cock? : Cock, expMult? : number) {
+		var parse = {
+			name   : this.NameDesc(),
+			has    : this.has(),
+			hisher : this.hisher()
+		};
+		expMult = expMult || 1;
+		if(butt.virgin) {
+			butt.virgin = false;
+			Text.Add("<b>[name] [has] lost [hisher] anal virginity.</b>", parse);
+			Text.NL();
+			this.AddSexExp(5 * expMult);
+		}
+		else
+			this.AddSexExp(expMult);
+		
+		if(cock) {
+			butt.StretchOrifice(this, cock, false);
+		}
+		Text.Flush();
+	}
+
+	// Fuck entitys vagina (vag, cock)
+	FuckVag(vag : Vagina, cock? : Cock, expMult? : number) {
+		var parse = {
+			name   : this.NameDesc(),
+			has    : this.has(),
+			hisher : this.hisher()
+		};
+		expMult = expMult || 1;
+		if(vag.virgin) {
+			vag.virgin = false;
+			Text.Add("<b>[name] [has] lost [hisher] virginity.</b>", parse);
+			Text.NL();
+			this.AddSexExp(5 * expMult);
+		}
+		else
+			this.AddSexExp(expMult);
+		
+		if(cock) {
+			vag.StretchOrifice(this, cock, false);
+		}
+		Text.Flush();
+	}
+
+	Sexed() {
+		if(this.flags["Sexed"] && this.flags["Sexed"] != 0)
+			return true;
+		for(var flag in this.sex)
+			if(this.sex[flag] != 0)
+				return true;
+		return false;
+	}
+
+	RestoreCum(quantity? : number) {
+		quantity = quantity || 1;
+		var balls = this.Balls();
+		return balls.cum.IncreaseStat(balls.CumCap(), quantity);
+	}
+	// TODO
+	Cum() {
+		return this.Balls().cum.Get();
+	}
+	CumOutput(mult? : number) {
+		mult = mult || 1;
+		var balls = this.Balls();
+		var cum = mult * balls.CumCap() / 4;
+		cum *= this.LustLevel() + 0.5;
+		
+		cum = Math.min(cum, this.Cum());
+		return cum;
+	}
+	// TODO test
+	OrgasmCum(mult? : number) {
+		mult = mult || 1;
+		var balls = this.Balls();
+		var cumQ  = this.CumOutput(mult);
+		
+		this.AddLustFraction(-1);
+		
+		balls.cum.DecreaseStat(0, cumQ);
+		if(GetDEBUG()) {
+			Text.NL();
+			Text.Add("<b>[name] came ([cum]).</b>", {name: this.NameDesc(), cum: cumQ.toFixed(2)});
+			Text.NL();
+			Text.Flush();
+		}
+		return cumQ;
+	}
 	Lactation() {
 		return this.lactHandler.Lactation();
 	}
@@ -2104,14 +2417,4 @@ export class Entity {
 	LactationProgress(oldMilk : number, newMilk : number, lactationRate : number) {
 		//Placeholder, implement in each entity if applicable
 	}
-
-	Fuck = EntitySex.Fuck;
-	FuckOral = EntitySex.FuckOral;
-	FuckAnal = EntitySex.FuckAnal;
-	FuckVag = EntitySex.FuckVag;
-	Sexed = EntitySex.Sexed;
-	RestoreCum = EntitySex.RestoreCum;
-	Cum = EntitySex.Cum;
-	CumOutput = EntitySex.CumOutput;
-	OrgasmCum = EntitySex.OrgasmCum;	
 }
