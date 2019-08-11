@@ -60,8 +60,8 @@ AlchemySpecial.EquiniumPlus.PushEffect(function(target : Entity) {
 			inc = cocks[i].length.IncreaseStat(50, 5);
 		if(inc2 == null)
 			inc2 = cocks[i].thickness.IncreaseStat(12, 1);
-		len = len || inc;
-		thk = thk || inc2;
+		len = len || (inc > 0);
+		thk = thk || (inc2 > 0);
 	}
 	if(len || thk) {
 		parse["s"]    = target.NumCocks() > 1 ? "s" : "";

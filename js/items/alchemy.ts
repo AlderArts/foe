@@ -897,8 +897,8 @@ AlchemyItems.Testos.PushEffect(function(target : Entity) {
 		var len = false, thk = false;
 		for(var i = 0; i < cocks.length; i++) {
 			// Base size
-			len = len || cocks[i].length.IncreaseStat(35, 1);
-			thk = thk || cocks[i].thickness.IncreaseStat(10, .5);
+			len = len || (cocks[i].length.IncreaseStat(35, 1) > 0);
+			thk = thk || (cocks[i].thickness.IncreaseStat(10, .5) > 0);
 		}
 		if(len || thk) {
 			parse["s"]    = target.NumCocks() > 1 ? "s" : "";
@@ -988,7 +988,7 @@ AlchemyItems.Estros.PushEffect(function(target : Entity) {
 	if(Math.random() < 0.75) {
 		var growth = false;
 		for(var i = 0; i < vags.length; i++) {
-			growth = growth || vags[i].capacity.IncreaseStat(10, .5);
+			growth = growth || (vags[i].capacity.IncreaseStat(10, .5) > 0);
 		}
 		if(growth) {
 			parse = Text.ParserPlural(parse, target.NumVags() > 1);
