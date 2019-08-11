@@ -51,7 +51,6 @@ import { CaleScenes } from "./event/nomads/cale-scenes";
 import { IslaScenes } from "./event/highlands/isla";
 import { LaylaScenes } from "./event/farm/layla-scenes";
 import { GwendyScenes } from "./event/farm/gwendy-scenes";
-import { RoaScenes } from "./event/brothel/roa";
 import { LucilleScenes } from "./event/brothel/lucille";
 import { BullTowerScenes } from "./event/outlaws/bulltower";
 import { OutlawsScenes } from "./event/outlaws/outlaws";
@@ -84,7 +83,6 @@ let Scenes = {
     Miranda       : MirandaScenes,
     Gwendy        : GwendyScenes,
     Layla         : LaylaScenes,
-    Roa           : RoaScenes,
     Cveta         : CvetaScenes,
 
 	Aria          : AriaScenes,

@@ -6,7 +6,7 @@
 
 import { EncounterTable } from '../../encountertable';
 import { BrothelLoc } from './brothel';
-import { InnLoc, LBScenes, RigardLB, InitLB } from './inn';
+import { InnLoc, LBScenes, InitLB } from './inn';
 import { Shop } from '../../shop';
 import { ResidentialLoc } from './residential';
 import { SlumsLoc } from './slums';

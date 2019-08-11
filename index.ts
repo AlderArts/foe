@@ -17,7 +17,6 @@ import './js/loc/rigard/merchants.js';
 import './js/loc/rigard/plaza.js';
 import './js/loc/rigard/slums.js';
 import './js/loc/rigard/tavern.js';
-import './js/loc/rigard/brothel.js';
 import './js/loc/rigard/krawitz.js';
 import './js/loc/rigard/castle.js';
 import './js/loc/rigard/clothstore.js';
@@ -39,14 +38,6 @@ import './js/event/cassidy-sex.js';
 import './js/event/fera.js';
 import './js/event/terry.js';
 import './js/event/momo.js';
-
-import './js/event/brothel/roa.js';
-import './js/event/brothel/ches.js';
-import './js/event/brothel/lucille.js';
-import './js/event/brothel/belinda.js';
-import './js/event/brothel/bastet.js';
-import './js/event/brothel/gryphons.js';
-import './js/event/brothel/fireblossom.js';
 
 import './js/event/royals/lei.js';
 import './js/event/royals/lei-tasks.js';

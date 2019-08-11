@@ -7,25 +7,30 @@ import { ChesScenes } from '../../event/brothel/ches';
 import { BelindaScenes } from '../../event/brothel/belinda';
 import { BastetScenes } from '../../event/brothel/bastet';
 import { Gender } from '../../body/gender';
-import { MoveToLocation, TimeStep, GAME } from '../../GAME';
+import { MoveToLocation, TimeStep, GAME, WORLD } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
+import { LucilleScenes } from '../../event/brothel/lucille';
+import { RoaScenes } from '../../event/brothel/roa-scenes';
+import { Cock } from '../../body/cock';
+import { Race } from '../../body/race';
 
 let BrothelLoc = {
 	brothel  : new Event("Brothel"),
 	cellar   : new Event("Brothel: Cellar")
 };
 
-let BrothelScenes = {
+let BrothelScenes : any = {
 	Gryphons : GryphonsScenes,
 	Fireblossom : FireblossomScenes,
 	Bastet : BastetScenes,
 	Ches : ChesScenes,
 	Belinda : BelindaScenes,
+	Roa : RoaScenes,
 };
 
 BrothelScenes.IsOpen = function() {
-	return !rigard.UnderLockdown(); // No closed hours
+	return !GAME().rigard.UnderLockdown(); // No closed hours
 }
 
 BrothelScenes.NewMStrap = function() {
@@ -52,7 +57,7 @@ BrothelLoc.brothel.links.push(new Link(
 	"Outside", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Rigard.Residential.street, {minute: 5});
+		MoveToLocation(WORLD().loc.Rigard.Residential.street, {minute: 5});
 	}
 ));
 
@@ -101,7 +106,7 @@ BrothelLoc.brothel.events.push(new Link(
 		Text.NL();
 	},
 	function() {
-		Scenes.Roa.BrothelApproach();
+		RoaScenes.BrothelApproach();
 	}
 ));
 BrothelLoc.brothel.events.push(new Link(
@@ -111,7 +116,7 @@ BrothelLoc.brothel.events.push(new Link(
 	}, true,
 	null,
 	function() {
-		Scenes.Lucille.Themerooms();
+		LucilleScenes.Themerooms();
 	}
 ));
 
@@ -198,7 +203,7 @@ BrothelScenes.MStrap = function() {
 	let player = GAME().player;
 	let rigard = GAME().rigard;
 
-	var parse = {
+	var parse : any = {
 	};
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumLegs() > 1);

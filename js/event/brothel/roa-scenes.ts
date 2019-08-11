@@ -1,104 +1,20 @@
-/*
- * 
- * Define Roa
- * 
- */
 
+import { LowerBodyType } from '../../body/body';
+import { Sex } from '../../entity-sex';
+import { GAME, TimeStep } from '../../GAME';
 import { Entity } from '../../entity';
-import { GetDEBUG } from '../../../app';
-import { Images } from '../../assets';
-import { Race } from '../../body/race';
 import { PregnancyHandler } from '../../pregnancy';
+import { Race } from '../../body/race';
+import { RoaFlags } from './roa-flags';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { BurrowsFlags } from '../../loc/burrows-flags';
-import { RoaFlags } from './roa-flags';
-import { NAV } from '../../GAME';
+import { BrothelScenes } from '../../loc/rigard/brothel';
+import { LucilleScenes } from './lucille';
 
-let RoaScenes = {};
+let RoaScenes : any = {};
 
-function Roa(storage) {
-	Entity.call(this);
-	this.ID = "roa";
-	
-	// Character stats
-	this.name = "Roa";
-	
-	this.avatar.combat = Images.roa;
-	
-	this.maxHp.base        = 30;
-	this.maxSp.base        = 40;
-	this.maxLust.base      = 20;
-	// Main stats
-	this.strength.base     = 10;
-	this.stamina.base      = 11;
-	this.dexterity.base    = 22;
-	this.intelligence.base = 17;
-	this.spirit.base       = 19;
-	this.libido.base       = 18;
-	this.charisma.base     = 16;
-	
-	this.level = 1;
-	this.sexlevel = 1;
-	
-	this.body.DefMale();
-	this.FirstBreastRow().size.base = 2;
-	this.Butt().buttSize.base = 3;
-	this.Butt().virgin = false;
-	this.body.SetRace(Race.Rabbit);
-	
-	this.SetLevelBonus();
-	this.RestFull();
-	
-	this.flags["Met"]   = RoaFlags.Met.NotMet;
-	this.flags["Lagon"] = RoaFlags.Lagon.No;
-	this.flags["sFuck"] = 0; //strapon fuck
-	this.flags["snug"]  = 0; //snuggle
-
-	if(storage) this.FromStorage(storage);
-}
-Roa.prototype = new Entity();
-Roa.prototype.constructor = Roa;
-
-//TODO
-Roa.prototype.Cost = function() {
-	return 100;
-}
-
-Roa.prototype.Met = function() {
-	return this.flags["Met"] >= RoaFlags.Met.Met;
-}
-
-//TODO (Met flag?)
-Roa.prototype.Recruited = function() {
-	return false;
-}
-
-Roa.prototype.FromStorage = function(storage) {
-	this.LoadPersonalityStats(storage);
-	
-	// Load flags
-	this.LoadFlags(storage);
-	this.LoadSexFlags(storage);
-}
-
-Roa.prototype.ToStorage = function() {
-	var storage = {};
-	
-	this.SavePersonalityStats(storage);
-	
-	this.SaveFlags(storage);
-	this.SaveSexFlags(storage);
-	
-	return storage;
-}
-
-// Schedule //TODO
-Roa.prototype.IsAtLocation = function(location) {
-	return true;
-}
-
-RoaScenes.Impregnate = function(mother, load, slot) {
+RoaScenes.Impregnate = function(mother : Entity, load : number, slot? : number) {
 	let roa = GAME().roa;
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
@@ -111,31 +27,10 @@ RoaScenes.Impregnate = function(mother, load, slot) {
 	});
 }
 
-// Party interaction //TODO
-Roa.prototype.Interact = function() {
-	let roa = GAME().roa;
-	Text.Clear();
-	Text.Add("Rawr Imma bunny.");
-	
-	
-	if(GetDEBUG()) {
-		Text.NL();
-		Text.Add("DEBUG: relation: " + roa.relation.Get(), null, 'bold');
-		Text.NL();
-		Text.Add("DEBUG: subDom: " + roa.subDom.Get(), null, 'bold');
-		Text.NL();
-		Text.Add("DEBUG: slut: " + roa.slut.Get(), null, 'bold');
-		Text.NL();
-	}
-	
-	Text.Flush();
-	Gui.NextPrompt(NAV().PartyInteraction);
-}
-
 RoaScenes.BrothelApproach = function() {
 	let player = GAME().player;
 	let roa = GAME().roa;
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -183,7 +78,7 @@ RoaScenes.BrothelApproach = function() {
 RoaScenes.BrothelPrompt = function() {
 	let player = GAME().player;
 	let roa = GAME().roa;
-	var parse = {
+	var parse : any = {
 		cost : Text.NumToText(roa.Cost())
 	};
 	parse = player.ParserTags(parse);
@@ -264,10 +159,13 @@ RoaScenes.BrothelPrompt = function() {
 }
 
 //TODO
-RoaScenes.TalkPrompt = function(backPrompt) {
+RoaScenes.TalkPrompt = function(backPrompt : any) {
 	let burrows = GAME().burrows;
 	let roa = GAME().roa;
-	var parse = {
+	let rigard = GAME().rigard;
+	let ches = GAME().ches;
+
+	var parse : any = {
 		
 	};
 	
@@ -426,7 +324,7 @@ RoaScenes.TalkPrompt = function(backPrompt) {
 
 RoaScenes.RestoredVenaTalk = function() {
 	let roa = GAME().roa;
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -447,7 +345,7 @@ RoaScenes.First = function() {
 	var cost   = roa.Cost();
 	var p1cock = player.BiggestCock();
 	
-	var parse = {
+	var parse : any = {
 		cost : Text.NumToText(cost)
 	};
 	parse = player.ParserTags(parse);
@@ -602,13 +500,14 @@ RoaScenes.First = function() {
 RoaScenes.TSLPitchAnal = function() {
 	let player = GAME().player;
 	let roa = GAME().roa;
+	let rigard = GAME().rigard;
 
 	if(roa.flags["Met"] < RoaFlags.Met.Sexed)
 		roa.flags["Met"] = RoaFlags.Met.Sexed;
 	
 	var p1cock = player.BiggestCock(null, true);
 	
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
@@ -707,7 +606,7 @@ RoaScenes.TSLPitchAnal = function() {
 			Text.Add("You waste no time in springing up to join him. Clutching him by the waist, you line your pseudo-cock up and start sinking it into the warm, welcoming embrace of his asshole, moaning in pleasure as he gives so readily to your thrust.", parse);
 		}
 		
-		p1cock = Scenes.Brothel.NewMStrap();
+		p1cock = BrothelScenes.NewMStrap();
 		rigard.Brothel["MStrap"]++;
 		mStrap = true;
 		
@@ -940,7 +839,7 @@ RoaScenes.TSLCatchVaginal = function() {
 	if(roa.flags["Met"] < RoaFlags.Met.Sexed)
 		roa.flags["Met"] = RoaFlags.Met.Sexed;
 	
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		lipsDesc   : function() { return player.LipsDesc(); }
 	};
@@ -1265,11 +1164,11 @@ RoaScenes.TSLCatchVaginal = function() {
 	});
 }
 
-RoaScenes.TSLPostSexPrompt = function(mStrap) {
+RoaScenes.TSLPostSexPrompt = function(mStrap : boolean) {
 	let player = GAME().player;
 	let roa = GAME().roa;
 
-	var parse = {
+	var parse : any = {
 		playername  : player.name,
 		lipsDesc    : function() { return player.LipsDesc(); }
 	};
@@ -1406,12 +1305,12 @@ RoaScenes.TSLPostSexPrompt = function(mStrap) {
 	Gui.SetButtonsFromList(options, false, null);
 	
 	Gui.Callstack.push(function() {
-		Scenes.Lucille.WhoreAftermath("Roa", roa.Cost());
+		LucilleScenes.WhoreAftermath("Roa", roa.Cost());
 	});
 	
 	if(mStrap) {
-		Gui.Callstack.push(Scenes.Brothel.MStrap);
+		Gui.Callstack.push(BrothelScenes.MStrap);
 	}
 }
 
-export { Roa, RoaScenes };
+export { RoaScenes };

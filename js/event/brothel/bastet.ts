@@ -1,48 +1,60 @@
+import * as _ from 'lodash';
+
 import { Entity } from '../../entity';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
-import { GAME } from '../../GAME';
+import { GAME, TimeStep } from '../../GAME';
+import { LucilleFlags } from './lucille-flags';
+import { LucilleScenes } from './lucille';
+import { EncounterTable } from '../../encountertable';
+import { Race } from '../../body/race';
+import { TF } from '../../tf';
+import { Cock } from '../../body/cock';
+import { Capacity } from '../../body/orifice';
+import { Vagina } from '../../body/vagina';
+import { AppendageType } from '../../body/appendage';
+import { Color } from '../../body/color';
 
-let BastetScenes = {};
+let BastetScenes : any = {};
 
-function Bastet(storage) {
-	Entity.call(this);
-	
-	this.flags["State"] = Bastet.State.NotViewed;
-	
-	if(storage) this.FromStorage(storage);
-}
-Bastet.prototype = new Entity();
-Bastet.prototype.constructor = Bastet;
-
-Bastet.State = {
-	NotViewed : 0,
-	S1Birth : 1,
-	S2Life : 2,
-	S3Anubis : 3,
-	S4Drought : 4,
-	S5Trouble : 5
+enum BastetState {
+	NotViewed = 0,
+	S1Birth   = 1,
+	S2Life    = 2,
+	S3Anubis  = 3,
+	S4Drought = 4,
+	S5Trouble = 5
 };
 
-Bastet.prototype.Cost = function() {
-	return 250;
-}
-Bastet.prototype.First = function() {
-	return this.flags["State"] == Bastet.State.NotViewed;
-}
+export class Bastet extends Entity {
+	constructor(storage? : any) {
+		super();
+		
+		this.flags["State"] = BastetState.NotViewed;
+		
+		if(storage) this.FromStorage(storage);
+	}
 
-
-Bastet.prototype.FromStorage = function(storage) {
-	// Load flags
-	this.LoadFlags(storage);
-}
-
-Bastet.prototype.ToStorage = function() {
-	var storage = {};
+	Cost() {
+		return 250;
+	}
+	First() {
+		return this.flags["State"] == BastetState.NotViewed;
+	}
 	
-	this.SaveFlags(storage);
 	
-	return storage;
+	FromStorage(storage : any) {
+		// Load flags
+		this.LoadFlags(storage);
+	}
+	
+	ToStorage() {
+		var storage = {};
+		
+		this.SaveFlags(storage);
+		
+		return storage;
+	}	
 }
 
 BastetScenes.IntroEntryPoint = function() {
@@ -52,9 +64,9 @@ BastetScenes.IntroEntryPoint = function() {
 		armor : player.ArmorDesc()
 	};
 	
-	var choice = 0;
+	var choice = BastetState.NotViewed;
 	
-	var func = function(c) {
+	var func = function(c : BastetState) {
 		return function() {
 			choice = c;
 			Text.Clear();
@@ -76,7 +88,7 @@ BastetScenes.IntroEntryPoint = function() {
 	var options = new Array();
 	options.push({ nameStr : "Birth",
 		tooltip : "“Enjoy life as the avatar of a cat Goddess.” Says the poster beside the door.",
-		func : func(Bastet.State.S1Birth), enabled : true
+		func : func(BastetState.S1Birth), enabled : true
 	});
 	
 	if(bastet.First()) {
@@ -84,7 +96,7 @@ BastetScenes.IntroEntryPoint = function() {
 		Text.NL();
 		Text.Add("As you examine the switch, you note what appears to be a selection of chapters within this theme room. You try to move the switch experimentally, but it seems to be locked in the first choice for now. Looks like you’re supposed to experience these in order...", parse);
 		Text.NL();
-		choice = Bastet.State.S1Birth;
+		choice = BastetState.S1Birth;
 		
 		Gui.PrintDefaultOptions();
 	}
@@ -95,7 +107,7 @@ BastetScenes.IntroEntryPoint = function() {
 	}
 }
 
-BastetScenes.SceneSelect = function(choice) {
+BastetScenes.SceneSelect = function(choice : BastetState) {
 	let bastet = GAME().bastet;
 	
 	Gui.Callstack.push(function() {
@@ -106,7 +118,7 @@ BastetScenes.SceneSelect = function(choice) {
 	
 	switch(choice) {
 		default:
-		case Bastet.State.S1Birth: BastetScenes.Birth(); break;
+		case BastetState.S1Birth: BastetScenes.Birth(); break;
 		//TODO new scenes
 	}
 }
@@ -114,7 +126,7 @@ BastetScenes.SceneSelect = function(choice) {
 BastetScenes.TFBlock = function() {
 	let player = GAME().player;
 
-	var parse = {};
+	var parse : any = {};
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	
@@ -138,7 +150,7 @@ BastetScenes.TFBlock = function() {
 		return false;
 	};
 	
-	var func = function(obj) {
+	var func = function(obj : any) {
 		scenes.AddEnc(function() {
 			TFapplied = true;
 			return _.isFunction(obj.tf) ? obj.tf() : "";
@@ -224,13 +236,14 @@ BastetScenes.TFBlock = function() {
 	});
 	func({
 		tf: function() {
+			let t : string;
 			if(!player.Ears().race.isRace(Race.Feline)) {
-				var t = Text.Parse("You hadn’t realized before, but it seems your [ears] have have turned into triangular cat-ears. You twitch them experimentally and reach up to touch them. These are no illusion...", parse);
+				t = Text.Parse("You hadn’t realized before, but it seems your [ears] have have turned into triangular cat-ears. You twitch them experimentally and reach up to touch them. These are no illusion...", parse);
 				player.Ears().race = Race.Feline;
 				return t;
 			}
 			else if(player.HasTail() && !player.HasTail().race.isRace(Race.Feline)) {
-				var t = "A strange sensation on your lower back makes itself known, and you reach back to check what is it. A gasp escapes your lips as you grasp the source of the discomfort, and feel a light tug. Looking back, it seems you have grown a cat tail.";
+				t = "A strange sensation on your lower back makes itself known, and you reach back to check what is it. A gasp escapes your lips as you grasp the source of the discomfort, and feel a light tug. Looking back, it seems you have grown a cat tail.";
 				var tail = player.HasTail();
 				if(tail) {
 					parse["tail"] = tail.Short();
@@ -251,7 +264,7 @@ BastetScenes.TFBlock = function() {
 				return "A tingle inside your mouth causes you some discomfort, and when you examine your tongue you realize that it has changed into a rough feline tongue.";
 			}
 			else if(player.FirstCock() && !player.BiggestCock().race.isRace(Race.Feline)) {
-				var t = Text.Parse("Something feels different on your [cocks]. Examining [itThem], you realise[oneof] your [cocks] has changed into a feline pecker, complete with a barbed tip.", parse);
+				t = Text.Parse("Something feels different on your [cocks]. Examining [itThem], you realise[oneof] your [cocks] has changed into a feline pecker, complete with a barbed tip.", parse);
 				player.BiggestCock().race = Race.Feline;
 				return t;
 			}
@@ -260,7 +273,7 @@ BastetScenes.TFBlock = function() {
 				return "You notice a strange feeling on the tips of your fingers, and upon close inspection, you realize that you have pads on your hands now. Flexing them, you gasp as a sharp feline claw emerges from the tips of your fingers.";
 			}
 			else if(!player.Legs().race.isRace(Race.Feline)) {
-				var t = Text.Parse("You hadn’t even realized, but your [legs] have changed. It felt so natural to walk like this in the illusion that you hadn’t even paid attention to it. Sitting down on the stool you examine your new legs. They look like cat-legs, tipped with cat-paws for feet.", parse);
+				t = Text.Parse("You hadn’t even realized, but your [legs] have changed. It felt so natural to walk like this in the illusion that you hadn’t even paid attention to it. Sitting down on the stool you examine your new legs. They look like cat-legs, tipped with cat-paws for feet.", parse);
 				if(player.HasLegs())
 					t = Text.Parse("You shift your stance a little. Your [legs] feel different. Sitting on the stool, you take a closer look. Seems like your legs have changed into feline legs, capped with cat footpaws.", parse);
 				player.Legs().race = Race.Feline;
@@ -281,7 +294,7 @@ BastetScenes.TFBlock = function() {
 		cond: function() { return incompleteCatTF(); }
 	});
 	
-	var text = [];
+	var text : string[] = [];
 	_.times(_.random(0, 3), function() {
 		text.push(scenes.Get());
 	});
@@ -303,6 +316,7 @@ BastetScenes.TFBlock = function() {
 
 BastetScenes.Birth = function() {
 	let player = GAME().player;
+	let lucille = GAME().lucille;
 
 	var parse = {
 		
@@ -324,7 +338,7 @@ BastetScenes.Birth = function() {
 	else {
 		Text.Add("You’ll never get used to the feeling of stepping through the mirror...", parse);
 	}
-	lucille.flags["Theme"] |= Lucille.Themeroom.CatDynasty;
+	lucille.flags["Theme"] |= LucilleFlags.Themeroom.CatDynasty;
 	Text.NL();
 	Text.Add("You look back and see that the doorway has vanished; you’re left standing in the middle of the desert. At least you’re no longer naked, or not as naked as before anyway. Looking over yourself, you see that you’re clad in a simple loincloth with another piece of cloth over your head to protect you from the oppressive heat of the desert.", parse);
 	Text.NL();
@@ -1059,7 +1073,7 @@ BastetScenes.Birth3 = function() {
 			
 			Gui.NextPrompt(function() {
 				TimeStep({hour: 3});
-				Scenes.Lucille.WhoreAftermath(null, bastet.Cost());
+				LucilleScenes.WhoreAftermath(null, bastet.Cost());
 			});
 		});
 	});
@@ -1067,4 +1081,4 @@ BastetScenes.Birth3 = function() {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-export { Bastet, BastetScenes };
+export { BastetScenes };

@@ -2,89 +2,102 @@
 import { Entity } from '../../entity';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
+import { LucilleFlags } from './lucille-flags';
+import { GAME, TimeStep } from '../../GAME';
+import { LucilleScenes } from './lucille';
 
-let FireblossomScenes = {};
+let FireblossomScenes : any = {};
 
-function Fireblossom(storage) {
-	Entity.call(this);
-	
-	this.flags["State"]  = Fireblossom.State.S1Journey;
-	this.flags["Outset"] = 0;
-	this.flags["Rakkat"] = 0; //Bitmask
-	
-	this.xariRel   = 0;
-	this.draxenRel = 0;
-	this.rakkatRel = 0;
-	this.grexRel   = 0;
-	this.qinRel    = 0;
-	
-	if(storage) this.FromStorage(storage);
-}
-Fireblossom.prototype = new Entity();
-Fireblossom.prototype.constructor = Fireblossom;
-
-Fireblossom.State = {
-	S1Journey   : 0,
-	S2DraxenPet : 1,
-	S2RakkatPet : 2,
-	S2GrexPet   : 3
-};
-Fireblossom.Outset = {
-	Draxen       : 0,
-	Rakkat       : 1,
-	RakkatToGrex : 2,
-	Grex         : 3
-};
-Fireblossom.Rakkat = {
-	Lover   : 1,
-	Seduced : 2
+let FireblossomFlags = {
+	State : {
+		S1Journey   : 0,
+		S2DraxenPet : 1,
+		S2RakkatPet : 2,
+		S2GrexPet   : 3,
+	},
+	Outset : {
+		Draxen       : 0,
+		Rakkat       : 1,
+		RakkatToGrex : 2,
+		Grex         : 3,
+	},
+	Rakkat : {
+		Lover   : 1,
+		Seduced : 2,
+	},
 };
 
-Fireblossom.prototype.Cost = function() {
-	return 250;
-}
-Fireblossom.prototype.First = function() {
-	return !(lucille.flags["Theme"] & Lucille.Themeroom.Fireblossom);
-}
-Fireblossom.prototype.ResetState = function() {
-	fireblossom = new Fireblossom();
-}
-//TODO Update as new episodes are added
-Fireblossom.prototype.ReachedEnd = function() {
-	return this.flags["State"] > Fireblossom.State.S1Journey;
-}
+export class Fireblossom extends Entity {
+	xariRel : number;
+	draxenRel : number;
+	rakkatRel : number;
+	grexRel : number;
+	qinRel : number;
 
+	constructor(storage? : any) {
+		super();
+		
+		this.flags["State"]  = FireblossomFlags.State.S1Journey;
+		this.flags["Outset"] = 0;
+		this.flags["Rakkat"] = 0; //Bitmask
+		
+		this.xariRel   = 0;
+		this.draxenRel = 0;
+		this.rakkatRel = 0;
+		this.grexRel   = 0;
+		this.qinRel    = 0;
+		
+		if(storage) this.FromStorage(storage);
+	}
 
-Fireblossom.prototype.FromStorage = function(storage) {
-	// Load flags
-	this.LoadFlags(storage);
+	Cost() {
+		return 250;
+	}
+	First() {
+		return !(GAME().lucille.flags["Theme"] & LucilleFlags.Themeroom.Fireblossom);
+	}
+	ResetState() {
+		GAME().fireblossom = new Fireblossom();
+	}
+	//TODO Update as new episodes are added
+	ReachedEnd() {
+		return this.flags["State"] > FireblossomFlags.State.S1Journey;
+	}
 	
-	this.xariRel = !isNaN(parseInt(storage.xariRel)) ? parseInt(storage.xariRel) : this.xariRel;
-	this.draxenRel = !isNaN(parseInt(storage.draxenRel)) ? parseInt(storage.draxenRel) : this.draxenRel;
-	this.rakkatRel = !isNaN(parseInt(storage.rakkatRel)) ? parseInt(storage.rakkatRel) : this.rakkatRel;
-	this.grexRel = !isNaN(parseInt(storage.grexRel)) ? parseInt(storage.grexRel) : this.grexRel;
-	this.qinRel = !isNaN(parseInt(storage.qinRel)) ? parseInt(storage.qinRel) : this.qinRel;
-}
-
-Fireblossom.prototype.ToStorage = function() {
-	var storage = {};
 	
-	this.SaveFlags(storage);
+	FromStorage(storage : any) {
+		// Load flags
+		this.LoadFlags(storage);
+		
+		this.xariRel = !isNaN(parseInt(storage.xariRel)) ? parseInt(storage.xariRel) : this.xariRel;
+		this.draxenRel = !isNaN(parseInt(storage.draxenRel)) ? parseInt(storage.draxenRel) : this.draxenRel;
+		this.rakkatRel = !isNaN(parseInt(storage.rakkatRel)) ? parseInt(storage.rakkatRel) : this.rakkatRel;
+		this.grexRel = !isNaN(parseInt(storage.grexRel)) ? parseInt(storage.grexRel) : this.grexRel;
+		this.qinRel = !isNaN(parseInt(storage.qinRel)) ? parseInt(storage.qinRel) : this.qinRel;
+	}
 	
-	storage.xariRel   = this.xariRel.toFixed();
-	storage.draxenRel = this.draxenRel.toFixed();
-	storage.rakkatRel = this.rakkatRel.toFixed();
-	storage.grexRel   = this.grexRel.toFixed();
-	storage.qinRel    = this.qinRel.toFixed();
-	
-	return storage;
+	ToStorage() {
+		var storage : any = {};
+		
+		this.SaveFlags(storage);
+		
+		storage.xariRel   = this.xariRel.toFixed();
+		storage.draxenRel = this.draxenRel.toFixed();
+		storage.rakkatRel = this.rakkatRel.toFixed();
+		storage.grexRel   = this.grexRel.toFixed();
+		storage.qinRel    = this.qinRel.toFixed();
+		
+		return storage;
+	}	
 }
 
 FireblossomScenes.IntroEntryPoint = function() {
 	let player = GAME().player;
 	let kiakai = GAME().kiakai;
 	let fireblossom = GAME().fireblossom;
-	var parse = {
+	let lucille = GAME().lucille;
+
+	var parse : any = {
 		armor : player.ArmorDesc(),
 		skin  : player.SkinDesc(),
 		name  : kiakai.name,
@@ -93,7 +106,7 @@ FireblossomScenes.IntroEntryPoint = function() {
 	
 	var first = fireblossom.First();
 	
-	lucille.flags["Theme"] |= Lucille.Themeroom.Fireblossom;
+	lucille.flags["Theme"] |= LucilleFlags.Themeroom.Fireblossom;
 	
 	Text.Clear();
 	Text.Add("The chamber beyond the door is sparsely furnished, containing a rack for clothing, a cushioned chair and a large, full-body mirror. There’s a small oil lamp hanging from the ceiling, casting a warm glow on the room. On the walls hang expensive-looking tapestries, showing images of ornate dragons. Drawn on the floor next to the mirror is a complex magic circle.", parse);
@@ -158,7 +171,7 @@ FireblossomScenes.SceneSelect = function() {
 	let fireblossom = GAME().fireblossom;
 	switch(fireblossom.flags["State"]) {
 		default:
-		case Fireblossom.State.S1Journey: FireblossomScenes.S1TheJourney(); break;
+		case FireblossomFlags.State.S1Journey: FireblossomScenes.S1TheJourney(); break;
 		//TODO new scenes
 	}
 }
@@ -166,7 +179,7 @@ FireblossomScenes.SceneSelect = function() {
 FireblossomScenes.Outro = function() {
 	let player = GAME().player;
 	let fireblossom = GAME().fireblossom;
-	var parse = {
+	var parse : any = {
 		armor : player.ArmorDesc()
 	};
 	
@@ -176,14 +189,14 @@ FireblossomScenes.Outro = function() {
 	
 	Gui.NextPrompt(function() {
 		TimeStep({hour: 3});
-		Scenes.Lucille.WhoreAftermath(null, fireblossom.Cost());
+		LucilleScenes.WhoreAftermath(null, fireblossom.Cost());
 	});
 }
 
 FireblossomScenes.S1TheJourney = function() {
 	let player = GAME().player;
 	let fireblossom = GAME().fireblossom;
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -410,7 +423,7 @@ FireblossomScenes.S1TheJourney = function() {
 				options.push({ nameStr : "Give in",
 					tooltip : "It’s no use, you can’t fight him.",
 					func : function() {
-						fireblossom.flags["Outset"] = Fireblossom.Outset.Draxen;
+						fireblossom.flags["Outset"] = FireblossomFlags.Outset.Draxen;
 						
 						FireblossomScenes.S1Draxen();
 					}, enabled : true
@@ -418,7 +431,7 @@ FireblossomScenes.S1TheJourney = function() {
 				options.push({ nameStr : "Scheme",
 					tooltip : "You can’t fight back openly, not here and now - you can’t even think straight in Draxen’s presence. You must find a way to get away from him.",
 					func : function() {
-						fireblossom.flags["Outset"] = Fireblossom.Outset.Rakkat;
+						fireblossom.flags["Outset"] = FireblossomFlags.Outset.Rakkat;
 						
 						FireblossomScenes.S1Rakkat();
 					}, enabled : true
@@ -426,7 +439,7 @@ FireblossomScenes.S1TheJourney = function() {
 				options.push({ nameStr : "Protest",
 					tooltip : "Invoke your right as princess of Galenta, demand that this outrage is stopped!",
 					func : function() {
-						fireblossom.flags["Outset"] = Fireblossom.Outset.Grex;
+						fireblossom.flags["Outset"] = FireblossomFlags.Outset.Grex;
 						
 						FireblossomScenes.S1Grex();
 					}, enabled : true
@@ -442,7 +455,7 @@ FireblossomScenes.S1TheJourney = function() {
 FireblossomScenes.S1Draxen = function() {
 	let player = GAME().player;
 	let fireblossom = GAME().fireblossom;
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -555,7 +568,7 @@ FireblossomScenes.S1Draxen = function() {
 				
 				fireblossom.draxenRel++;
 				
-				fireblossom.flags["State"] = Fireblossom.State.S2DraxenPet;
+				fireblossom.flags["State"] = FireblossomFlags.State.S2DraxenPet;
 				
 				Gui.NextPrompt(FireblossomScenes.Outro);
 			});
@@ -566,7 +579,7 @@ FireblossomScenes.S1Draxen = function() {
 FireblossomScenes.S1Rakkat = function() {
 	let player = GAME().player;
 	let fireblossom = GAME().fireblossom;
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -707,7 +720,7 @@ FireblossomScenes.S1Rakkat = function() {
 				player.subDom.IncreaseStat(50, 1);
 				fireblossom.rakkatRel += 2;
 				
-				fireblossom.flags["Rakkat"] |= Fireblossom.Rakkat.Seduced;
+				fireblossom.flags["Rakkat"] |= FireblossomFlags.Rakkat.Seduced;
 				
 				Gui.NextPrompt(FireblossomScenes.S1RakkatCont);
 			}, enabled : true
@@ -743,7 +756,7 @@ FireblossomScenes.S1Rakkat = function() {
 				
 				player.subDom.IncreaseStat(100, 2);
 				fireblossom.rakkatRel--;
-				fireblossom.flags["Outset"] = Fireblossom.Outset.RakkatToGrex;
+				fireblossom.flags["Outset"] = FireblossomFlags.Outset.RakkatToGrex;
 				
 				Gui.NextPrompt(function() {
 					Text.Clear();
@@ -759,13 +772,13 @@ FireblossomScenes.S1Rakkat = function() {
 
 FireblossomScenes.S1RakkatCont = function() {
 	let fireblossom = GAME().fireblossom;
-	var parse = {
+	var parse : any = {
 		
 	};
 	
-	fireblossom.flags["Rakkat"] |= Fireblossom.Rakkat.Lover;
+	fireblossom.flags["Rakkat"] |= FireblossomFlags.Rakkat.Lover;
 	
-	var seduced = fireblossom.flags["Rakkat"] & Fireblossom.Rakkat.Seduced;
+	var seduced = fireblossom.flags["Rakkat"] & FireblossomFlags.Rakkat.Seduced;
 	
 	Text.Clear();
 	Text.Add("<i>“Get ready to be plucked, my pretty little flower,”</i> the General huffs, leaning in for a kiss. Your tongues intermingle and wrestle, his long and sinuous. ", parse);
@@ -833,7 +846,7 @@ FireblossomScenes.S1RakkatCont = function() {
 		Text.Add("When at last you fall into exhausted sleep, it is with a satisfied smile on your lips.", parse);
 		Text.Flush();
 		
-		fireblossom.flags["State"] = Fireblossom.State.S2RakkatPet;
+		fireblossom.flags["State"] = FireblossomFlags.State.S2RakkatPet;
 		
 		Gui.NextPrompt(FireblossomScenes.Outro);
 	});
@@ -841,7 +854,7 @@ FireblossomScenes.S1RakkatCont = function() {
 
 FireblossomScenes.S1Grex = function() {
 	let fireblossom = GAME().fireblossom;
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -878,7 +891,7 @@ FireblossomScenes.S1Grex = function() {
 
 FireblossomScenes.S1GrexEntrypoint = function() {
 	let fireblossom = GAME().fireblossom;
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -887,7 +900,7 @@ FireblossomScenes.S1GrexEntrypoint = function() {
 	Text.Add("Beside Grex, Qin is jogging as fast as she can, trying to keep up with the brute. <i>“G-Grex, wait!”</i> she yelps, gasping for air. <i>“Don’t do something rash now!”</i>", parse);
 	Text.NL();
 	Text.Add("<i>“What, you think I’ll get in trouble for a bit of rough and tumble?”</i> he growls. ", parse);
-	if(fireblossom.flags["Outset"] == Fireblossom.Outset.RakkatToGrex)
+	if(fireblossom.flags["Outset"] == FireblossomFlags.Outset.RakkatToGrex)
 		Text.Add("<i>“Little Fireblossom isn’t exactly in favor at the moment. She made a mistake by trying to show steel while having too little of it.”</i>", parse);
 	else
 		Text.Add("<i>“Where you perhaps at a different audience than me?”</i>", parse);
@@ -920,10 +933,10 @@ FireblossomScenes.S1GrexEntrypoint = function() {
 	FireblossomScenes.S1GrexRoom({});
 }
 
-FireblossomScenes.S1GrexRoom = function(opts) {
+FireblossomScenes.S1GrexRoom = function(opts : any) {
 	let player = GAME().player;
 	let fireblossom = GAME().fireblossom;
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -934,7 +947,7 @@ FireblossomScenes.S1GrexRoom = function(opts) {
 		func : function() {
 			Text.Clear();
 			Text.Add("The room is bigger than what you thought a regular soldier would have, even counting the size of the drakes; it really seems like Grex occupies some position of power here. That, or he’s murdered the previous owner of the quarters. Much of it is occupied by a low drake-sized bed lining one of the sides of the room. Plain, but at least it’s not a bale of hay. Along one side of the wall is Grex’s armory, containing a selection of various weapons.", parse);
-			if(fireblossom.flags["Outset"] == Fireblossom.Outset.RakkatToGrex)
+			if(fireblossom.flags["Outset"] == FireblossomFlags.Outset.RakkatToGrex)
 				Text.Add(" You doubt you could lift any of them, so your last plan is even more hopeless here than it was with Rakkat. Probably best to drop that line of thought altogether; Grex doesn’t look like he’d take kindly to it.", parse);
 			Text.NL();
 			Text.Add("There’s a long table set in the side of one wall. At first you think it a shelf, but you realize that for Grex, it’d be on level with his torso; you can barely reach it if you stretch your arms up. The remaining fourth wall is covered by a drapery. Peering in behind it, you deem it some form of storage area, containing various articles of oversized clothing, a discarded tankard and a large chest. Further examination reveal that the chest is soundly locked. No luck there.", parse);
@@ -992,14 +1005,14 @@ FireblossomScenes.S1GrexRoom = function(opts) {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-FireblossomScenes.S1GrexPens = function(opts) {
+FireblossomScenes.S1GrexPens = function(opts : any) {
 	let player = GAME().player;
 	let fireblossom = GAME().fireblossom;
-	var parse = {
+	var parse : any = {
 		
 	};
 	
-	var fromRakkat = fireblossom.flags["Outset"] == Fireblossom.Outset.RakkatToGrex;
+	var fromRakkat = fireblossom.flags["Outset"] == FireblossomFlags.Outset.RakkatToGrex;
 	
 	Text.Add("Qin opens her satchel and brings out several vials and jars containing strange fluids and salves. You look at her bewildered and ask her how these are going to aid in your escape. The maid blinks at you.", parse);
 	Text.NL();
@@ -1093,10 +1106,10 @@ FireblossomScenes.S1GrexPens = function(opts) {
 		fireblossom.grexRel++;
 		fireblossom.qinRel++;
 		
-		fireblossom.flags["State"] = Fireblossom.State.S2GrexPet;
+		fireblossom.flags["State"] = FireblossomFlags.State.S2GrexPet;
 		
 		Gui.NextPrompt(FireblossomScenes.Outro);
 	});
 }
 
-export { Fireblossom, FireblossomScenes };
+export { FireblossomScenes };

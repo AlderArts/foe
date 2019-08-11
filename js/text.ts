@@ -34,7 +34,7 @@ Text.SetTooltip = function(text : string, parseStrings? : any) {
 	textbox.innerHTML = Text.Parse(text, parseStrings);
 }
 
-Text.Parse = function(text : string, parseStrings? : any) {
+Text.Parse = function(text : string, parseStrings? : any) : string {
 	try {
 		// Simple parser
 		if(parseStrings) {

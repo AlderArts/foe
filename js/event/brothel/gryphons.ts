@@ -1,63 +1,79 @@
+import * as _ from 'lodash';
 
 import { Entity } from '../../entity';
 import { Gender } from '../../body/gender';
 import { Gui } from '../../gui';
 import { Text } from '../../text';
+import { LucilleFlags } from './lucille-flags';
+import { GAME, TimeStep } from '../../GAME';
+import { EncounterTable } from '../../encountertable';
+import { Race } from '../../body/race';
+import { TF } from '../../tf';
+import { Genitalia } from '../../body/genitalia';
+import { Color } from '../../body/color';
+import { AppendageType } from '../../body/appendage';
+import { Cock } from '../../body/cock';
+import { Capacity } from '../../body/orifice';
+import { PregnancyHandler } from '../../pregnancy';
+import { LucilleScenes } from './lucille';
 
-let GryphonsScenes = {};
+let GryphonsScenes : any = {};
 
-function Gryphons(storage) {
-	Entity.call(this);
+enum GryphonsState {
+	NotViewed    = 0,
+	S1WorldsEdge = 1,
+	S2Pasts      = 2,
+	S3Building   = 3,
+	S4NewLife    = 4
+}
+
+export class Gryphons extends Entity {
+	constructor(storage? : any) {
+		super();
+		
+		this.flags["State"] = GryphonsState.NotViewed;
+		
+		if(storage) this.FromStorage(storage);
+	}
+
+	Cost() {
+		return 200;
+	}
+	First() {
+		return this.flags["State"] == GryphonsState.NotViewed;
+	}
 	
-	this.flags["State"] = Gryphons.State.NotViewed;
+	FromStorage(storage : any) {
+		// Load flags
+		this.LoadFlags(storage);
+	}
 	
-	if(storage) this.FromStorage(storage);
-}
-Gryphons.prototype = new Entity();
-Gryphons.prototype.constructor = Gryphons;
-
-Gryphons.State = {
-	NotViewed : 0,
-	S1WorldsEdge : 1,
-	S2Pasts : 2,
-	S3Building : 3,
-	S4NewLife : 4
-};
-
-Gryphons.prototype.Cost = function() {
-	return 200;
-}
-Gryphons.prototype.First = function() {
-	return this.flags["State"] == Gryphons.State.NotViewed;
+	ToStorage() {
+		var storage = {};
+		
+		this.SaveFlags(storage);
+		
+		return storage;
+	}
 }
 
 
-Gryphons.prototype.FromStorage = function(storage) {
-	// Load flags
-	this.LoadFlags(storage);
-}
-
-Gryphons.prototype.ToStorage = function() {
-	var storage = {};
-	
-	this.SaveFlags(storage);
-	
-	return storage;
-}
 
 
 GryphonsScenes.IntroEntryPoint = function() {
 	let player = GAME().player;
 	let gryphons = GAME().gryphons;
-	var parse = {
+	let lucille = GAME().lucille;
+
+	var parse : any = {
 		armor : player.ArmorDesc(),
 		skin : player.SkinDesc()
 	};
 	
-	var choice = 0;
+	var choice = GryphonsState.NotViewed;
 	var gender = Gender.male;
 	
-	var func = function(c, gen) {
+	var func = function(c : GryphonsState, gen : Gender) {
 		return function() {
 			choice = c;
 			gender = gen;
@@ -107,7 +123,7 @@ Not that it changes too much about you, since you were already one, but the fine
 		else {
 			Text.Add("You’ll never get used to the feeling of stepping through the mirror…", parse);
 		}
-		lucille.flags["Theme"] |= Lucille.Themeroom.Gryphons;
+		lucille.flags["Theme"] |= LucilleFlags.Themeroom.Gryphons;
 		Text.Flush();
 		
 		Gui.NextPrompt(function() {
@@ -121,24 +137,24 @@ Not that it changes too much about you, since you were already one, but the fine
 	var options = new Array();
 	options.push({ nameStr : "World's Edge",
 		tooltip : "",
-		func : func(Gryphons.State.S1WorldsEdge, Gender.male), enabled : true
+		func : func(GryphonsState.S1WorldsEdge, Gender.male), enabled : true
 	});
-	if(gryphons.flags["State"] >= Gryphons.State.S1WorldsEdge) {
+	if(gryphons.flags["State"] >= GryphonsState.S1WorldsEdge) {
 		options.push({ nameStr : "Pasts",
 			tooltip : "",
-			func : func(Gryphons.State.S2Pasts, Gender.female), enabled : true
+			func : func(GryphonsState.S2Pasts, Gender.female), enabled : true
 		});
 	}
-	if(gryphons.flags["State"] >= Gryphons.State.S2Pasts) {
+	if(gryphons.flags["State"] >= GryphonsState.S2Pasts) {
 		options.push({ nameStr : "Building",
 			tooltip : "",
-			func : func(Gryphons.State.S3Building, Gender.male), enabled : true
+			func : func(GryphonsState.S3Building, Gender.male), enabled : true
 		});
 	}
-	if(gryphons.flags["State"] >= Gryphons.State.S3Building) {
+	if(gryphons.flags["State"] >= GryphonsState.S3Building) {
 		options.push({ nameStr : "New life",
 			tooltip : "",
-			func : func(Gryphons.State.S4NewLife, Gender.female), enabled : true
+			func : func(GryphonsState.S4NewLife, Gender.female), enabled : true
 		});
 	}
 	
@@ -147,7 +163,7 @@ Not that it changes too much about you, since you were already one, but the fine
 		Text.NL();
 		Text.Add("The rest of the room is sparsely furnished; a hook on the door on which to hang your possessions, a full-body mirror, an elaborate magic circle set into the floor, and just beside the mirror’s frame, a small dial that appears to have various settings listed at an equal number of positions. Attempts to turn the dial fail - seems like you’re going to have to play out this story from the beginning.", parse);
 		Text.NL();
-		choice = Gryphons.State.S1WorldsEdge;
+		choice = GryphonsState.S1WorldsEdge;
 		
 		Gui.PrintDefaultOptions();
 	}
@@ -158,7 +174,7 @@ Not that it changes too much about you, since you were already one, but the fine
 	}
 }
 
-GryphonsScenes.SceneSelect = function(choice) {
+GryphonsScenes.SceneSelect = function(choice : GryphonsState) {
 	let gryphons = GAME().gryphons;
 	
 	Gui.Callstack.push(function() {
@@ -169,18 +185,18 @@ GryphonsScenes.SceneSelect = function(choice) {
 	
 	switch(choice) {
 		default:
-		case Gryphons.State.S1WorldsEdge: GryphonsScenes.WorldsEdge(); break;
-		case Gryphons.State.S2Pasts: GryphonsScenes.Pasts(); break;
-		case Gryphons.State.S3Building: GryphonsScenes.Building(); break;
-		case Gryphons.State.S4NewLife: GryphonsScenes.NewLife(); break;
+		case GryphonsState.S1WorldsEdge: GryphonsScenes.WorldsEdge(); break;
+		case GryphonsState.S2Pasts: GryphonsScenes.Pasts(); break;
+		case GryphonsState.S3Building: GryphonsScenes.Building(); break;
+		case GryphonsState.S4NewLife: GryphonsScenes.NewLife(); break;
 		//TODO new scenes
 	}
 }
 
-GryphonsScenes.Outro = function(gender, preg) {
+GryphonsScenes.Outro = function(gender : Gender, preg : number) {
 	let player = GAME().player;
 	let gryphons = GAME().gryphons;
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -229,7 +245,7 @@ GryphonsScenes.Outro = function(gender, preg) {
 		return false;
 	};
 	
-	var func = function(obj) {
+	var func = function(obj : any) {
 		scenes.AddEnc(function() {
 			TFapplied = true;
 			return _.isFunction(obj.tf) ? obj.tf() : "";
@@ -238,10 +254,11 @@ GryphonsScenes.Outro = function(gender, preg) {
 	
 	func({
 		tf: function() {
+			let t : string;
 			var wings = player.HasWings();
 			var tail = player.HasTail();
 			if(!wings || (wings && !wings.race.isRace(Race.Gryphon))) {
-				var t = "You feel a strange new weight on your back, a sensation of heaviness and resistance, and to your surprise, you find you’ve grown a pair of wide, powerful wings tipped with white feathers.";
+				t = "You feel a strange new weight on your back, a sensation of heaviness and resistance, and to your surprise, you find you’ve grown a pair of wide, powerful wings tipped with white feathers.";
 				if(wings) {
 					t = Text.Parse("A strange sensation between your shoulders has you turning your head. It looks like your wings have changed while you were out in the fantasy - becoming broad, powerful and vaguely scythe-shaped, made for soaring.", parse);
 					wings.race = Race.Gryphon;
@@ -254,7 +271,7 @@ GryphonsScenes.Outro = function(gender, preg) {
 				return t;
 			}
 			else if(tail && !tail.race.isRace(Race.Lion)) {
-				var t = "A new weight at your tailbone has you turning around to investigate. Seems like you’ve managed to acquire a tail, long and leonine with a furry tuft on the end. It’s slightly prehensile, but not enough to be useful.";
+				t = "A new weight at your tailbone has you turning around to investigate. Seems like you’ve managed to acquire a tail, long and leonine with a furry tuft on the end. It’s slightly prehensile, but not enough to be useful.";
 				if(tail) {
 					t = Text.Parse("Your tail feels different. A cursory glance behind you reveals that it’s turned long and slender, capped by a furry tuft - just like the gryphon in the fantasy.", parse);
 					tail.race = Race.Lion;
@@ -270,12 +287,12 @@ GryphonsScenes.Outro = function(gender, preg) {
 				return "Your skin feels different. Warmer… heavier… oh. You’ve grown a coat of tawny golden fur <i>and</i> dark brown feathers - the former covers your body from the chest down, while the latter coats your chest, shoulders, and arms. ";
 			}
 			else if(!player.Arms().race.isRace(Race.Lion)) {
-				var t = Text.Parse("Your [hand]s and arms have changed - while still human-like, your fingers are now tipped with a small set of claws. They’re not sharp enough to be useful as a weapon, but nevertheless are still a curiosity.", {hand: player.HandDesc()});
+				t = Text.Parse("Your [hand]s and arms have changed - while still human-like, your fingers are now tipped with a small set of claws. They’re not sharp enough to be useful as a weapon, but nevertheless are still a curiosity.", {hand: player.HandDesc()});
 				player.Arms().race = Race.Lion;
 				return t;
 			}
 			else if(!player.Legs().race.isRace(Race.Gryphon)) {
-				var t = Text.Parse("You look down and find that your lower body has changed completely - you now sport a pair of leonine and digitigrade legs and feet, capped with hooked talons. Rippling with muscle, they’re suited for both slow stalking and quick pouncing.", parse);
+				t = Text.Parse("You look down and find that your lower body has changed completely - you now sport a pair of leonine and digitigrade legs and feet, capped with hooked talons. Rippling with muscle, they’re suited for both slow stalking and quick pouncing.", parse);
 				if(player.HasLegs())
 					t = Text.Parse("Your stance seems to be carrying your weight a little differently, and when you look down you realize that your legs and feet have changed. They’re now leonine, digitigrade and capped with talons, rippling with muscle and suited for both slow stalking and quick movement.", parse);
 				player.Legs().race = Race.Gryphon;
@@ -283,7 +300,7 @@ GryphonsScenes.Outro = function(gender, preg) {
 				return t;
 			}
 			else if(incompleteGryphonCockTF()) {
-				var parse2 = {};
+				var parse2 : any = {};
 				parse2 = Text.ParserPlural(parse2, player.NumCocks() > 1);
 				var cscenes = new EncounterTable();
 				_.each(player.AllCocks(), function(c) {
@@ -326,10 +343,10 @@ GryphonsScenes.Outro = function(gender, preg) {
 	});
 	
 	if(gender == Gender.male && player.FirstCock()) {
-		var parse2 = {};
+		var parse2 : any = {};
 		parse2 = Text.ParserPlural(parse2, player.NumCocks() > 1);
 		
-		var incompleteCockSizeOne = function(c) {
+		var incompleteCockSizeOne = function(c : Cock) {
 			if(c.Len() < 28) return true;
 			if(c.Thickness() < 5) return true;
 			return false;
@@ -397,7 +414,7 @@ GryphonsScenes.Outro = function(gender, preg) {
 		});
 	}
 	else if(gender == Gender.female && player.FirstVag()) { //female
-		var parse2 = {
+		var parse2 : any = {
 			breasts : player.FirstBreastRow().Short()
 		};
 		var incompleteVagSize = function() {
@@ -523,7 +540,7 @@ GryphonsScenes.Outro = function(gender, preg) {
 		});
 	}
 	
-	var text = [];
+	var text : string[] = [];
 	_.times(_.random(1, 4), function() {
 		text.push(scenes.Get());
 	});
@@ -546,13 +563,13 @@ GryphonsScenes.Outro = function(gender, preg) {
 	
 	Gui.NextPrompt(function() {
 		TimeStep({hour: 3});
-		Scenes.Lucille.WhoreAftermath(null, gryphons.Cost());
+		LucilleScenes.WhoreAftermath(null, gryphons.Cost());
 	});
 }
 
 //Chapter one - World’s Edge
 GryphonsScenes.WorldsEdge = function() {
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -681,7 +698,7 @@ GryphonsScenes.WorldsEdge = function() {
 }
 
 GryphonsScenes.WorldsEdgeCaught = function() {
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -783,8 +800,8 @@ GryphonsScenes.WorldsEdgeCaught = function() {
 	});
 }
 
-GryphonsScenes.WorldsEdgeQuestions = function(opts) {
-	var parse = {
+GryphonsScenes.WorldsEdgeQuestions = function(opts : any) {
+	var parse : any = {
 		
 	};
 	
@@ -842,7 +859,7 @@ GryphonsScenes.WorldsEdgeQuestions = function(opts) {
 }
 
 GryphonsScenes.WorldsEdgeSexytimes = function() {
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -949,7 +966,7 @@ GryphonsScenes.WorldsEdgeSexytimes = function() {
 
 // Chapter two - Pasts
 GryphonsScenes.Pasts = function() {
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -1075,7 +1092,7 @@ GryphonsScenes.Pasts = function() {
 }
 
 GryphonsScenes.PastsWashed = function() {
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -1244,7 +1261,7 @@ GryphonsScenes.PastsWashed = function() {
 }
 
 GryphonsScenes.PastsRemembrance = function() {
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -1345,8 +1362,8 @@ GryphonsScenes.PastsRemembrance = function() {
 	});
 }
 
-GryphonsScenes.PastsSexytimes = function(preg) {
-	var parse = {
+GryphonsScenes.PastsSexytimes = function(preg : number) {
+	var parse : any = {
 		
 	};
 	
@@ -1475,8 +1492,8 @@ GryphonsScenes.PastsSexytimes = function(preg) {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-GryphonsScenes.PastsSexytimes2 = function(preg) {
-	var parse = {
+GryphonsScenes.PastsSexytimes2 = function(preg : number) {
+	var parse : any = {
 		
 	};
 	
@@ -1539,7 +1556,7 @@ GryphonsScenes.PastsSexytimes2 = function(preg) {
 }
 
 GryphonsScenes.Building = function() {
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -1811,7 +1828,7 @@ GryphonsScenes.Building = function() {
 
 GryphonsScenes.NewLife = function() {
 	let player = GAME().player;
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -2138,7 +2155,7 @@ GryphonsScenes.NewLife = function() {
 }
 
 GryphonsScenes.NewLifeHugEnding = function() {
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -2163,4 +2180,4 @@ GryphonsScenes.NewLifeHugEnding = function() {
 	});
 }
 
-export { Gryphons, GryphonsScenes };
+export { GryphonsScenes };

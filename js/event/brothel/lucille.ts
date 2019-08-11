@@ -8,68 +8,60 @@ import { Entity } from '../../entity';
 import { Text } from '../../text';
 import { EncounterTable } from '../../encountertable';
 import { Gui } from '../../gui';
+import { GAME } from '../../GAME';
+import { BrothelScenes } from '../../loc/rigard/brothel';
+import { Party } from '../../party';
+import { LucilleFlags } from './lucille-flags';
 
-let LucilleScenes = {};
+let LucilleScenes : any = {};
 
-function Lucille(storage) {
-	Entity.call(this);
-	this.ID = "lucille";
+export class Lucille extends Entity {
+	constructor(storage? : any) {
+		super();
+
+		this.ID = "lucille";
+		
+		// Character stats
+		this.name = "Lucille";
+		
+		this.body.DefFemale();
+		
+		this.flags["buy"] = 0;
+		this.flags["Theme"] = 0; //Been to theme room. Bitmask
+		
+		if(storage) this.FromStorage(storage);
+	}
+
+	ThemeroomOpen() {
+		return this.flags["buy"] >= LucilleFlags.Buy.First;
+	}
+	ThemeroomFirst() {
+		return this.flags["Theme"] == 0;
+	}
 	
-	// Character stats
-	this.name = "Lucille";
+	FromStorage(storage : any) {
+		this.LoadPersonalityStats(storage);
+		
+		// Load flags
+		this.LoadFlags(storage);
+	}
 	
-	this.body.DefFemale();
+	ToStorage() {
+		var storage = {};
+		
+		this.SavePersonalityStats(storage);
+		
+		this.SaveFlags(storage);
+		
+		return storage;
+	}
 	
-	this.flags["buy"] = 0;
-	this.flags["Theme"] = 0; //Been to theme room. Bitmask
+	// Flags
 	
-	if(storage) this.FromStorage(storage);
-}
-Lucille.prototype = new Entity();
-Lucille.prototype.constructor = Lucille;
-
-Lucille.Buy = {
-	No    : 0,
-	First : 1,
-	Deal  : 2
-};
-
-//TODO
-Lucille.Themeroom = { //Bitmask
-	CatDynasty : 1,
-	Gryphons : 2,
-	Fireblossom : 4
-};
-
-Lucille.prototype.ThemeroomOpen = function() {
-	return this.flags["buy"] >= Lucille.Buy.First;
-}
-Lucille.prototype.ThemeroomFirst = function() {
-	return this.flags["Theme"] == 0;
-}
-
-Lucille.prototype.FromStorage = function(storage) {
-	this.LoadPersonalityStats(storage);
-	
-	// Load flags
-	this.LoadFlags(storage);
-}
-
-Lucille.prototype.ToStorage = function() {
-	var storage = {};
-	
-	this.SavePersonalityStats(storage);
-	
-	this.SaveFlags(storage);
-	
-	return storage;
-}
-
-// Flags
-
-// Schedule TODO
-Lucille.prototype.IsAtLocation = function(location) {
-	return true;
+	// Schedule TODO
+	IsAtLocation(location? : any) {
+		return true;
+	}	
 }
 
 LucilleScenes.Themerooms = function() {
@@ -132,7 +124,7 @@ LucilleScenes.Themerooms = function() {
 	*/
 	Text.Flush();
 	
-	var selection = function(func) {
+	var selection = function(func : any) {
 		Text.Clear();
 		if(lucillePresent) {
 			Text.Add("<i>“A wise choice,”</i> Lucille affirms, leading you toward the back. The two of you enter a narrow corridor with a long line of doors, each marked by a small symbol indicating what is inside. Some of the rooms are marked as occupied, and you hear strange noises from inside them.", parse);
@@ -181,19 +173,19 @@ LucilleScenes.Themerooms = function() {
 	options.push({ nameStr : "Cat Dynasty",
 		tooltip : "Choose the Cat Dynasty and enter the role of Bastet, the hermaphrodite feline Goddess.",
 		func : function() {
-			selection(Scenes.Brothel.Bastet.IntroEntryPoint);
+			selection(BrothelScenes.Bastet.IntroEntryPoint);
 		}, enabled : true
 	});
 	options.push({ nameStr : "Gryphons",
 		tooltip : "Choose Birth of a Kingdom and step back to the beginning of time, seeing history through the eyes of two gryphon-morphs.",
 		func : function() {
-			selection(Scenes.Brothel.Gryphons.IntroEntryPoint);
+			selection(BrothelScenes.Gryphons.IntroEntryPoint);
 		}, enabled : true
 	});
 	options.push({ nameStr : "Fireblossom",
 		tooltip : "Choose Under the Dragon’s Claw, and embody Fireblossom, the princess turned slave.",
 		func : function() {
-			selection(Scenes.Brothel.Fireblossom.IntroEntryPoint);
+			selection(BrothelScenes.Fireblossom.IntroEntryPoint);
 		}, enabled : true
 	});
 	/* TODO */
@@ -212,13 +204,14 @@ LucilleScenes.Themerooms = function() {
 	});
 }
 
-LucilleScenes.WhoreAftermath = function(name, cost) {
+LucilleScenes.WhoreAftermath = function(name : string, cost : number) {
 	let player = GAME().player;
+	let party : Party = GAME().party;
 	let lucille = GAME().lucille;
 
 	cost = cost || 0;
 	
-	var parse = {
+	var parse : any = {
 		name       : name,
 		playername : player.name,
 		skinDesc   : function() { return player.SkinDesc(); },
@@ -238,7 +231,7 @@ LucilleScenes.WhoreAftermath = function(name, cost) {
 	
 	Text.Clear();
 	Text.Add("You make your way back into the main chamber of the brothel, where you are met up with madame Lucille.", parse);
-	if(lucille.flags["buy"] == Lucille.Buy.No) {
+	if(lucille.flags["buy"] == LucilleFlags.Buy.No) {
 		Text.NL();
 		Text.Add("<i>“Did you have an enjoyable time, [playername]?”</i> the sultry raven-haired beauty asks you. <i>“You seem more relaxed than back when you came in here… did [name] help you relieve some stress?”</i>", parse);
 		Text.NL();
@@ -260,11 +253,11 @@ LucilleScenes.WhoreAftermath = function(name, cost) {
 
 		player.AddLustFraction(0.5);
 		
-		lucille.flags["buy"] = Lucille.Buy.First;
+		lucille.flags["buy"] = LucilleFlags.Buy.First;
 		
 		Gui.NextPrompt();
 	}
-	else if(lucille.flags["buy"] == Lucille.Buy.First) {
+	else if(lucille.flags["buy"] == LucilleFlags.Buy.First) {
 		if(party.coin >= cost) {
 			Text.NL();
 			payFunc();
@@ -300,7 +293,7 @@ LucilleScenes.WhoreAftermath = function(name, cost) {
 			Text.Add("You’re troubled as she sways away, not sure what to make of this strange ‘offer’ of hers.", parse);
 			Text.Flush();
 			
-			lucille.flags["buy"] = Lucille.Buy.Deal;
+			lucille.flags["buy"] = LucilleFlags.Buy.Deal;
 			
 			Gui.NextPrompt();
 		}
@@ -341,4 +334,4 @@ LucilleScenes.WhoreAftermath = function(name, cost) {
 	}
 }
 
-export { Lucille, LucilleScenes };
+export { LucilleScenes };
