@@ -11,10 +11,10 @@ import { Time } from '../../time';
 import { QuestItems } from '../../items/quest';
 import { Entity } from '../../entity';
 import { KrawitzScenes } from '../../loc/rigard/krawitz';
-import { Momo } from '../momo';
 import { Status } from '../../statuseffect';
 import { DreamsScenes } from '../dreams';
 import { Party } from '../../party';
+import { MomoFlags } from '../momo-flags';
 
 let CvetaScenes : any = {
 	Dates : DateScenes,
@@ -1035,7 +1035,7 @@ CvetaScenes.HerselfPrompt = function() {
 			Text.Add("<i>“Even I do not know much about it myself, I must confess,”</i> Cveta admits, staring into the distance past your shoulder. <i>“Father told me that it has always been in our family line, just as we have always been bird-morphs of one kind or another. Our voices manifest themselves differently in accordance to who we are - for example, one of my cousins simply commands with brute force and expects to be obeyed, while I myself prefer to be more… subtle.”</i>", parse);
 			Text.NL();
 			Text.Add("You nod, and urge her to continue. This is getting to be quite interesting. Although you must ask - if it started with one of her ancestors, certainly it has been watered down considerably since? After all, the main pretext for all the repressive laws against non-humans is the purity of the royal bloodline.", parse);
-			if(momo.flags["Met"] >= Momo.Met.Camp)
+			if(momo.flags["Met"] >= MomoFlags.Met.Camp)
 				Text.Add(" Then there’s the matter of Momo - her draconic heritage was diluted to the point where she was the only one in a long while to manifest some of her family’s traits. Surely something like this should have happened?", parse);
 			Text.NL();
 			Text.Add("<i>“Like nobility, inheritance is more than simply blood. If it were, then the outlaws would not need to exist,”</i> Cveta replies. <i>“It is true that what you said should have happened, yet interestingly, it has not. Some of my ancestors have suggested that such failure of our gift to diminish itself through the generations is evidence it was a divine gift from a spirit - perhaps even the Lady Aria herself, or one of her subordinates - but where they see an avenue to puff up pompously, I see only wishful thinking. I do not countenance taking pride in non-achievements like these.”</i>", parse);

@@ -5,6 +5,7 @@ import { WorldTime, MoveToLocation } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { RigardFlags } from './rigard-flags';
+import { Room69Flags } from '../../event/room69-flags';
 
 let PlazaLoc = new Event("Plaza");
 
@@ -269,11 +270,11 @@ PlazaLoc.links.push(new Link(
 PlazaLoc.events.push(new Link(
 	"Goldsmith", function() {
 		let room69 = GAME().room69;
-		return room69.flags["Hinges"] == Room69.HingesFlags.Asked;
+		return room69.flags["Hinges"] == Room69Flags.HingesFlags.Asked;
 	}, function() { return WorldTime().hour >= 9 && WorldTime().hour < 18; },
 	function() {
 		let room69 = GAME().room69;
-		if(room69.flags["Hinges"] == Room69.HingesFlags.Asked) {
+		if(room69.flags["Hinges"] == Room69Flags.HingesFlags.Asked) {
 			Text.Add("You see a rich establishment nearby, claiming to be the best goldsmith in town. Perhaps you could as the owner about making hinges for Sixtynine's door?");
 			Text.NL();
 		}
@@ -294,7 +295,7 @@ PlazaLoc.events.push(new Link(
 		Text.Add("Hearing the dismissal in his words, you thank him and leave. A bit pompous, but he did direct you at least.");
 		Text.Flush();
 
-		room69.flags["Hinges"] = Room69.HingesFlags.TalkedToGoldsmith;
+		room69.flags["Hinges"] = Room69Flags.HingesFlags.TalkedToGoldsmith;
 
 		TimeStep({minute: 10});
 		Gui.NextPrompt();

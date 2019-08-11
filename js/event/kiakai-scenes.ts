@@ -1,12 +1,10 @@
 
 import { KiakaiSex } from './kiakai-sex';
-import { Kiakai } from './kiakai';
 import { Text } from '../text';
 import { Gui } from '../gui';
 import { GAME, TimeStep } from '../GAME';
 import { KiakaiFlags } from './kiakai-flags';
-import { Uru, UruFlags } from './uru';
-import { Burrows } from '../loc/burrows';
+import { UruFlags } from './uru';
 import { BurrowsFlags } from '../loc/burrows-flags';
 
 let KiakaiScenes : any = {

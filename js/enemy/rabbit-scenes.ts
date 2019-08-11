@@ -17,7 +17,7 @@ import { LagomorphBrute, Lagomorph, LagomorphWizard } from './rabbit';
 import { Entity } from '../entity';
 import { LowerBodyType } from '../body/body';
 import { BurrowsScenes } from '../loc/burrows-scenes';
-import { TerryScenes } from '../event/terry';
+import { TerryScenes } from '../event/terry-scenes';
 import { IngredientItems } from '../items/ingredients';
 
 let LagomorphScenes : any = {};

@@ -12,6 +12,7 @@ import { Gui } from '../../gui';
 import { CvetaFlags } from '../../event/outlaws/cveta-flags';
 import { RigardFlags } from './rigard-flags';
 import { BurrowsFlags } from '../burrows-flags';
+import { Room69Flags } from '../../event/room69-flags';
 
 
 let ShopStreetScenes = {}
@@ -285,15 +286,15 @@ ShopStreetLoc.street.events.push(new Link(
 ShopStreetLoc.street.events.push(new Link(
 	"Martello", function() {
 		let room69 = GAME().room69;
-		return room69.flags["Hinges"] == Room69.HingesFlags.TalkedToGoldsmith || room69.flags["Hinges"] == Room69.HingesFlags.TalkedToSmith;
+		return room69.flags["Hinges"] == Room69Flags.HingesFlags.TalkedToGoldsmith || room69.flags["Hinges"] == Room69Flags.HingesFlags.TalkedToSmith;
 	}, function() { return WorldTime().hour >= 9 && WorldTime().hour < 18; },
 	function() {
 		let room69 = GAME().room69;
-		if(room69.flags["Hinges"] == Room69.HingesFlags.TalkedToGoldsmith) {
+		if(room69.flags["Hinges"] == Room69Flags.HingesFlags.TalkedToGoldsmith) {
 			Text.Add("You could ask the smith Martello to make gilded hinges for Sixtynine’s door.");
 			Text.NL();
 		}
-		else if(room69.flags["Hinges"] == Room69.HingesFlags.TalkedToSmith) {
+		else if(room69.flags["Hinges"] == Room69Flags.HingesFlags.TalkedToSmith) {
 			Text.Add("You could ask the smith Martello how the work on the gilded hinges for Sixtynine’s door is progressing.");
 			Text.NL();
 		}
@@ -303,7 +304,7 @@ ShopStreetLoc.street.events.push(new Link(
 		let player = GAME().player;
 		let party : Party = GAME().party;
 		Text.Clear();
-		if(room69.flags["Hinges"] == Room69.HingesFlags.TalkedToGoldsmith) {
+		if(room69.flags["Hinges"] == Room69Flags.HingesFlags.TalkedToGoldsmith) {
 			Text.Add("You ask around and quickly find your way to Martello’s smithy. It’s plain, especially after the goldsmith’s establishment, but seems well-kept and prosperous enough.");
 			Text.NL();
 			Text.Add("Inside, you are met by the smith’s assistant, and, when he hears your request, forced to wait for a few minutes for Martello to finish up with his current task. You hear clanging from the forge room, and it seems that the man is observing one of his apprentices work on a horseshoe, checking her technique.");
@@ -333,7 +334,7 @@ ShopStreetLoc.street.events.push(new Link(
 					Text.Add("<b>You should come back later to retrieve the hinges.</b>", parse);
 					Text.Flush();
 					
-					room69.flags["Hinges"] = Room69.HingesFlags.TalkedToSmith;
+					room69.flags["Hinges"] = Room69Flags.HingesFlags.TalkedToSmith;
 					
 					TimeStep({hour: 1});
 					Gui.NextPrompt();
@@ -354,7 +355,7 @@ ShopStreetLoc.street.events.push(new Link(
 			Text.Add("Seeing no problem with the order, you thank the assistant, and head out. Looks like you can fulfill Sixtynine's request now, if you want. Which you probably do, unless you can think of another pressing use for gilded door hinges...");
 			Text.Flush();
 			
-			room69.flags["Hinges"] = Room69.HingesFlags.HaveHinges;
+			room69.flags["Hinges"] = Room69Flags.HingesFlags.HaveHinges;
 			Gui.NextPrompt();
 		}
 	}

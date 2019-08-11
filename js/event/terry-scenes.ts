@@ -1,365 +1,43 @@
-/*
- * 
- * Define Terry
- * 
- */
+import * as _ from 'lodash';
 
-import { Entity } from '../entity';
-import { GetDEBUG } from '../../app';
-import { JobDesc, Jobs } from '../job';
-import { Gender } from '../body/gender';
-import { Items } from '../items';
-import { Images } from '../assets';
-import { Color } from '../body/color';
-import { Race } from '../body/race';
-import { RigardLoc } from '../loc/rigard/rigard';
-import { Cock } from '../body/cock';
-import { Vagina } from '../body/vagina';
-import { Text } from '../text';
-import { SetGameState, GameState } from '../gamestate';
-import { Gui } from '../gui';
-import { EncounterTable } from '../encountertable';
-import { Encounter } from '../combat';
-import { Party } from '../party';
-import { Sex } from '../entity-sex';
-import { GAME, NAV } from '../GAME';
-import { PregnancyHandler } from '../pregnancy';
-import { MirandaFlags } from './miranda-flags';
-import { TerryFlags } from './terry-flags';
-import { RigardFlags } from '../loc/rigard/rigard-flags';
+import { Gender } from "../body/gender";
+import { GAME, TimeStep, NAV, WORLD } from "../GAME";
+import { Text } from "../text";
+import { TerryFlags } from "./terry-flags";
+import { Party } from "../party";
+import { Gui } from "../gui";
+import { MirandaFlags } from "./miranda-flags";
+import { Encounter } from "../combat";
+import { SetGameState, GameState } from "../gamestate";
+import { EncounterTable } from "../encountertable";
+import { RigardFlags } from "../loc/rigard/rigard-flags";
+import { Images } from "../assets";
+import { ArmorItems } from "../items/armor";
+import { LowerBodyType } from "../body/body";
+import { JeanneScenes } from "./royals/jeanne";
+import { AlchemyItems } from "../items/alchemy";
+import { TFItem } from "../tf";
+import { StrapOnItems } from "../items/strapon";
+import { PregnancyHandler } from "../pregnancy";
+import { Race } from "../body/race";
+import { Entity } from "../entity";
+import { Sex } from "../entity-sex";
+import { Cock } from "../body/cock";
+import { Item } from "../item";
+import { ToysItems } from "../items/toys";
+import { Perks } from "../perks";
+import { Capacity } from "../body/orifice";
 
-let TerryScenes = {};
+let TerryScenes : any = {};
 
-function Terry(storage) {
-	Entity.call(this);
-	this.ID = "terry";
-	
-	// Character stats
-	this.name = "Thief";
-	this.monsterName = "the thief";
-	this.MonsterName = "The thief";
-	
-	this.avatar.combat = Images.terry;
-	
-	this.currentJob = Jobs.Rogue;
-	this.jobs["Fighter"]   = new JobDesc(Jobs.Fighter);
-	this.jobs["Fighter"].level = 3;
-	this.jobs["Fighter"].mult  = 2;
-	this.jobs["Rogue"]     = new JobDesc(Jobs.Rogue);
-	this.jobs["Ranger"]    = new JobDesc(Jobs.Ranger);    this.jobs["Ranger"].mult    = 2;
-	this.jobs["Scholar"]   = new JobDesc(Jobs.Scholar);   this.jobs["Scholar"].mult   = 3;
-	this.jobs["Courtesan"] = new JobDesc(Jobs.Courtesan); this.jobs["Courtesan"].mult = 2;
-
-	this.jobs["Mage"]      = new JobDesc(Jobs.Mage);   this.jobs["Mage"].mult   = 2;
-	this.jobs["Mystic"]    = new JobDesc(Jobs.Mystic); this.jobs["Mystic"].mult = 2;
-	this.jobs["Healer"]    = new JobDesc(Jobs.Healer); this.jobs["Healer"].mult = 2;
-	
-	this.jobs["Hypnotist"] = new JobDesc(Jobs.Hypnotist);
-	
-	this.maxHp.base        = 50;
-	this.maxSp.base        = 60; this.maxSp.growth        = 6;
-	this.maxLust.base      = 50;
-	// Main stats
-	this.strength.base     = 13;
-	this.stamina.base      = 10;
-	this.dexterity.base    = 24; this.dexterity.growth    = 1.5;
-	this.intelligence.base = 15; this.intelligence.growth = 1.2;
-	this.spirit.base       = 13;
-	this.libido.base       = 15; this.libido.growth       = 1.1;
-	this.charisma.base     = 20; this.charisma.growth     = 1.3;
-	
-	this.level    = 5;
-	this.sexlevel = 1;
-	this.SetExpToLevel();
-	
-	this.body.DefMale();
-	this.body.muscleTone.base = 0.1;
-	this.body.femininity.base = 0.9;
-	this.Butt().buttSize.base = 3;
-	this.SetSkinColor(Color.gold);
-	this.SetHairColor(Color.red);
-	this.SetEyeColor(Color.blue);
-	this.body.SetRace(Race.Fox);
-	this.body.height.base      = 157;
-	this.body.weigth.base      = 45;
-	
-	this.weaponSlot   = Items.Weapons.Dagger;
-	
-	this.Equip();
-	this.SetLevelBonus();
-	this.RecallAbilities();
-	this.RestFull();
-	
-	this.flags["Met"]   = 0;
-	this.flags["Saved"] = 0;
-	this.flags["PrefGender"] = Gender.male;
-	this.flags["Skin"] = 0;
-	this.flags["BM"] = 0;
-	this.flags["pQ"] = 0;
-	this.flags["xLick"] = 0; //lick butt in buttfuck
-	this.flags["Rogue"] = 0;
-	this.flags["TF"] = TerryFlags.TF.NotTried;
-	this.flags["TFd"] = 0;
-	this.flags["xLact"] = 0;
-	this.flags["maxPast"] = 0;
-	this.flags["rotPast"] = 0;
-	this.flags["vFirst"] = 0;
-	this.flags["caFirst"] = 0; //Catch anal (terry pitching)
-	this.flags["vengeance"] = TerryFlags.Vengeance.NotTriggered;
-	//TF state
-	this.flags["breasts"] = TerryFlags.Breasts.Flat;
-	this.flags["lact"] = 0;
-	this.flags["vag"]  = TerryFlags.Pussy.None;
-	this.flags["cock"] = TerryFlags.Cock.Regular;
-	
-	this.sbombs = 3;
-	this.hidingSpot = RigardLoc.ShopStreet.street;
-	
-	if(storage) this.FromStorage(storage);
-	
-	this.SetBreasts();
-	this.SetLactation();
-	this.SetCock();
-}
-Terry.prototype = new Entity();
-Terry.prototype.constructor = Terry;
-
-Terry.prototype.Changed = function() {
-	return this.flags["breasts"] != 0 ||
-		this.flags["vag"]     != 0 ||
-		this.flags["cock"]    != 0;
-}
-
-Terry.prototype.Recruited = function() {
-	return this.flags["Saved"] >= TerryFlags.Saved.Saved;
-}
-
-Terry.prototype.FromStorage = function(storage) {
-	storage = storage || {};
-	
-	this.body.FromStorage(storage.body);
-	this.LoadLactation(storage);
-	this.LoadPregnancy(storage);
-	
-	// Load flags
-	this.LoadFlags(storage);
-	this.LoadSexFlags(storage);
-	this.LoadCombatStats(storage);
-	this.LoadPersonalityStats(storage);
-	
-	this.LoadJobs(storage);
-	this.LoadEquipment(storage);
-	
-	this.RecallAbilities();
-	this.SetLevelBonus();
-	this.Equip();
-		
-	if(this.flags["Met"] >= TerryFlags.Met.Caught || this.Recruited()) {
-		this.name = "Terry";
-		this.avatar.combat = Images.terry_c;
-		this.monsterName = null;
-		this.MonsterName = null;
-	}
-}
-
-Terry.prototype.ToStorage = function() {
-	var storage = {};
-	this.SaveBodyPartial(storage, {ass: true, vag: true, balls: true});
-	this.SaveLactation(storage);
-	this.SavePregnancy(storage);
-	
-	// Save flags
-	this.SaveFlags(storage);
-	this.SaveSexFlags(storage);
-	this.SaveCombatStats(storage);
-	this.SavePersonalityStats(storage);
-	
-	this.SaveJobs(storage);
-	this.SaveEquipment(storage);
-	
-	return storage;
-}
-
-Terry.prototype.SetBreasts = function() {
-	switch(this.flags["breasts"]) {
-		default:
-		case TerryFlags.Breasts.Flat:
-			this.FirstBreastRow().size.base = 1;
-			break;
-		case TerryFlags.Breasts.Acup:
-			this.FirstBreastRow().size.base = 3;
-			break;
-		case TerryFlags.Breasts.Bcup:
-			this.FirstBreastRow().size.base = 5;
-			break;
-		case TerryFlags.Breasts.Ccup:
-			this.FirstBreastRow().size.base = 7.5;
-			break;
-		case TerryFlags.Breasts.Dcup:
-			this.FirstBreastRow().size.base = 10;
-			break;
-	}
-}
-Terry.prototype.SetLactation = function() {
-	if(this.flags["lact"] != 0) {
-		this.lactHandler.milkProduction.base = 3;
-		this.lactHandler.lactationRate.base = 1;
-		this.lactHandler.lactating = true;
-	}
-	else {
-		this.lactHandler.milkProduction.base = 0;
-		this.lactHandler.lactationRate.base = 0;
-		this.lactHandler.lactating = false;
-	}
-}
-Terry.prototype.Lactation = function() {
-	return terry.flags["lact"] != 0;
-}
-Terry.prototype.SetPussy = function() {
-	var vag = this.flags["vag"];
-	if(vag == TerryFlags.Pussy.None) {
-		if(this.FirstVag())
-			this.body.vagina = [];
-	}
-	else if(this.NumVags() == 0) {
-		this.body.vagina.push(new Vagina());
-		if(vag == TerryFlags.Pussy.Used)
-			this.FirstVag().virgin = false;
-	}
-}
-Terry.prototype.SetCock = function() {
-	this.body.cock = [];
-	if(this.flags["cock"] == TerryFlags.Cock.Regular) {
-		this.body.cock.push(new Cock());
-		this.FirstCock().length.base = 8;
-		this.FirstCock().thickness.base = 2;
-		this.FirstCock().race = Race.Fox;
-		this.FirstCock().knot = 1;
-		this.Balls().cumCap.base = 5;
-		this.Balls().size.base  = 2;
-		this.Balls().count.base = 2;
-	}
-	else if(this.flags["cock"] == TerryFlags.Cock.Horse) {
-		this.body.cock.push(new Cock());
-		this.FirstCock().length.base = 28;
-		this.FirstCock().thickness.base = 6;
-		this.FirstCock().race = Race.Horse;
-		this.FirstCock().knot = 1;
-		this.Balls().cumCap.base = 10;
-		this.Balls().size.base  = 5;
-		this.Balls().count.base = 2;
-	}
-	else { //None
-		this.Balls().count.base = 0;
-	}
-}
-
-
-Terry.prototype.PronounGender = function() {
-	return this.flags["PrefGender"];
-}
-
-Terry.prototype.heshe = function() {
-	var gender = this.flags["PrefGender"];
-	if(gender == Gender.male) return "he";
-	else return "she";
-}
-Terry.prototype.HeShe = function() {
-	var gender = this.flags["PrefGender"];
-	if(gender == Gender.male) return "He";
-	else return "She";
-}
-Terry.prototype.himher = function() {
-	var gender = this.flags["PrefGender"];
-	if(gender == Gender.male) return "him";
-	else return "her";
-}
-Terry.prototype.HimHer = function() {
-	var gender = this.flags["PrefGender"];
-	if(gender == Gender.male) return "Him";
-	else return "Her";
-}
-Terry.prototype.hisher = function() {
-	var gender = this.flags["PrefGender"];
-	if(gender == Gender.male) return "his";
-	else return "her";
-}
-Terry.prototype.HisHer = function() {
-	var gender = this.flags["PrefGender"];
-	if(gender == Gender.male) return "His";
-	else return "Her";
-}
-Terry.prototype.hishers = function() {
-	var gender = this.flags["PrefGender"];
-	if(gender == Gender.male) return "his";
-	else return "hers";
-}
-Terry.prototype.mfPronoun = function(male, female) {
-	var gender = this.flags["PrefGender"];
-	if(gender == Gender.male) return male;
-	else return female;
-}
-
-Terry.prototype.HorseCock = function() {
-	return (this.FirstCock() && this.FirstCock().race.isRace(Race.Horse));
-}
-Terry.prototype.Cup = function() {
-	return this.flags["breasts"];
-}
-
-Terry.prototype.FuckVag = function(vag, cock, expMult) {
-	this.flags["vag"] = TerryFlags.Pussy.Used;
-	Entity.prototype.FuckVag.call(this, vag, cock, expMult);
-}
-
-Terry.prototype.PussyVirgin = function() {
-	return this.flags["vFirst"] == 0;
-}
-
-// Party interaction
-Terry.prototype.Interact = function(switchSpot) {
-	let terry = GAME().terry;
-
-	var parse = {
-		foxvixen : terry.mfPronoun("fox", "vixen"),
-		HeShe   : terry.HeShe(),
-		heshe   : terry.heshe(),
-		HisHer  : terry.HisHer(),
-		hisher  : terry.hisher(),
-		himher  : terry.himher(),
-		hishers : terry.hishers(),
-		truegender : Gender.Desc(terry.Gender()),
-		armordesc  : function() { return terry.ArmorDescLong(); },
-		weapondesc : function() { return terry.WeaponDescLong(); }
-	};
-	
-	Text.Clear();
-	Text.Add("Terry is a [truegender] fox-morph follower you 'recruited' from Rigard’s Jail; [heshe]’s currently wearing [armordesc] and wielding [weapondesc].", parse);
-	Text.NL();
-	if(terry.Relation() < 30)
-		Text.Add("[HeShe] occasionally scratches [hisher] neck, around the enchanted collar you gave [himher] to ensure [heshe]’s kept under control. Sometimes, [heshe] gives you an irritated glance when [heshe] thinks you’re not looking.", parse);
-	else if(terry.Relation() < 60)
-		Text.Add("Around [hisher] neck is an enchanted collar that prevents [himher] from leaving you or otherwise disobeying you. It was the only way you could take the petite [foxvixen] away from the death row. It’s probably a good thing [heshe]’s wearing it too; considering [hisher] thieving past, there’s no guarantee [heshe] won’t get in trouble again. When [heshe] spots you looking, [heshe] quickly nods in acknowledgement at you.", parse);
-	else if(terry.flags["pQ"] >= TerryFlags.PersonalQuest.Completed)
-		Text.Add("The [foxvixen] is always wearing that enchanted collar you gave [himher] when you bailed [himher] out of jail, even though [heshe] technically doesn’t have to wear it anymore. You didn’t think the crafty [foxvixen] would find a way out of it, but [heshe] did. Even so, [heshe] insists on wearing it: “As proof of ownership,” you quote. You didn’t think [heshe] would take to [hisher] station so well, nor that you’d grow this close as you travelled together. When your eyes meet, [heshe] smiles warmly at you.", parse);
-	else
-		Text.Add("[HeShe]’s grown quite close to you as you spent time together, and you gotta admit, the [foxvixen] is not so bad once you get to know [himher]. You’ve found [himher] to be quite amorous when [heshe] wants to, and even a bit clingy at times… but nevertheless, you’re glad to have the company of the pretty [foxvixen]. When your eyes meet, [heshe] smiles warmly at you.", parse);
-	
-	if(GetDEBUG()) {
-		Text.NL();
-		Text.Add("DEBUG: relation: " + terry.Relation(), null, 'bold');
-		Text.NL();
-		Text.Add("DEBUG: slut: " + terry.Slut(), null, 'bold');
-	}
-	Text.Flush();
-	
-	TerryScenes.Prompt();
+TerryScenes.JeanneTFCost = function() {
+    return 50;
 }
 
 TerryScenes.Appearance = function() {
 	let terry = GAME().terry;
 
-	var parse = {
+	var parse : any = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		HeShe   : terry.HeShe(),
 		heshe   : terry.heshe(),
@@ -528,7 +206,7 @@ TerryScenes.Prompt = function() {
 	let party : Party = GAME().party;
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		HeShe   : terry.HeShe(),
 		heshe   : terry.heshe(),
@@ -598,46 +276,10 @@ TerryScenes.Prompt = function() {
 	Gui.SetButtonsFromList(options, true, NAV().PartyInteraction);
 }
 
-Terry.prototype.Act = function(encounter, activeChar) {
-	// TODO: AI!
-	Text.Add("The thief hops around nimbly.");
-	Text.NL();
-	
-	// Pick a random target
-	var t = this.GetSingleTarget(encounter, activeChar);
-	
-	var first = this.turnCounter == 0;
-	this.turnCounter++;
-	
-	if(first) {
-		Items.Combat.DecoyStick.combat.Use(encounter, this);
-		return;
-	}
-	
-	var choice = Math.random();
-	
-	if(this.turnCounter > 4 && this.sbombs > 0)
-		Items.Combat.SmokeBomb.combat.Use(encounter, this);
-	else if(Abilities.Physical.Backstab.enabledCondition(encounter, this) && Abilities.Physical.Backstab.enabledTargetCondition(encounter, this, t))
-		Abilities.Physical.Backstab.Use(encounter, this, t);
-	else if(choice < 0.2 && Abilities.Physical.Kicksand.enabledCondition(encounter, this))
-		Abilities.Physical.Kicksand.Use(encounter, this, t);
-	else if(choice < 0.4 && Abilities.Physical.Swift.enabledCondition(encounter, this))
-		Abilities.Physical.Swift.Use(encounter, this);
-	else if(choice < 0.6)
-		Items.Combat.PoisonDart.combat.Use(encounter, this, t);
-	else if(choice < 0.8)
-		Items.Combat.LustDart.combat.Use(encounter, this, t);
-	else if(Abilities.Physical.DirtyBlow.enabledCondition(encounter, this))
-		Abilities.Physical.DirtyBlow.Use(encounter, this, t);
-	else
-		Abilities.Attack.Use(encounter, this, t);
-}
-
 TerryScenes.ExploreGates = function() {
 	let terry = GAME().terry;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -647,7 +289,7 @@ TerryScenes.ExploreGates = function() {
 	if(terry.flags["Met"] >= TerryFlags.Met.Found) {
 		Text.Add("As best you can, the pair of you make your way through the crowds, looking for the slightest sign of the thief you're chasing, eyes ever alert for a telltale vulpine form. With the sheer number of people here, it doesn't make your task easy, and you keep having to push your way through the scrum.", parse);
 		Text.NL();
-		if(terry.hidingSpot == world.loc.Rigard.Gate) {
+		if(terry.hidingSpot == WORLD().loc.Rigard.Gate) {
 			Text.Add("Your search finally pays off when you see a vulpine tail rounding a corner toward an alleyway. You signal to Miranda and she opens a path in the crowd so you can give chase. As soon as she notices she’s being followed, she makes a mad dash toward the other side. <i>“Dammit!</i> Miranda curses as she rushes ahead. You follow in tow.", parse);
 			Text.NL();
 			Text.Add("After a while, she finally makes a mistake and rounds a corner on a dead end. Without so much a batting an eye, she readies herself for combat!", parse);
@@ -673,7 +315,7 @@ TerryScenes.ExploreGates = function() {
 TerryScenes.ExploreResidential = function() {
 	let terry = GAME().terry;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -683,7 +325,7 @@ TerryScenes.ExploreResidential = function() {
 	
 	if(terry.flags["Met"] >= TerryFlags.Met.Found) {
 		Text.Add("You decide to look around and ask a few people. Someone might’ve seen her. ", parse);
-		if(terry.hidingSpot == world.loc.Rigard.Residential.street) {
+		if(terry.hidingSpot == WORLD().loc.Rigard.Residential.street) {
 			Text.Add("After a long string of complaints, annoyed comments and plain rudeness, one of the residents finally provides a lead.<i>“A vixen? You mean that one?”</i> They point toward an alleyway, where you see a distinct vulpine running off.", parse);
 			Text.NL();
 			Text.Add("Without missing a beat, you call for Miranda and make a mad dash after the thief. You chase after her for a while, until Miranda manages to corner her at a dead end. She draws her blade and prepares for battle!", parse);
@@ -712,7 +354,7 @@ TerryScenes.ExploreMerchants = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		weapon : player.WeaponDesc()
 	};
 	
@@ -721,7 +363,7 @@ TerryScenes.ExploreMerchants = function() {
 	Text.NL();
 	
 	if(terry.flags["Met"] >= TerryFlags.Met.Found) {
-		if(terry.hidingSpot == world.loc.Rigard.ShopStreet.street) {
+		if(terry.hidingSpot == WORLD().loc.Rigard.ShopStreet.street) {
 			Text.Add("You and Miranda wander through the warehouses of the merchant’s district, looking for any sign of the sleek vixen. The two of you check a few of them before you catch a glimpse of a moving shadow. You rush ahead without thinking, Miranda following hot on your heels, and as soon as round the corner, you’re faced with the vixen thief, already ready for combat!", parse);
 			Text.Flush();
 			TerryScenes.CombatVsMiranda();
@@ -786,7 +428,7 @@ TerryScenes.ExplorePlaza = function() {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -797,7 +439,7 @@ TerryScenes.ExplorePlaza = function() {
 		Text.NL();
 		Text.Add("Luckily for you, the bustling movement of the people here makes the plaza seem more crowded than it really is, and there aren't that many places to hide anyway. Thusly, if the thief is here, you have a chance of finding her.", parse);
 		Text.NL();
-		if(terry.hidingSpot == world.loc.Rigard.Plaza) {
+		if(terry.hidingSpot == WORLD().loc.Rigard.Plaza) {
 			Text.Add("As you make your way through the crowds, you feel someone walk straight into you, having been looking over their shoulder and not watching where they were going. As you shake your head to recover, you find yourself looking right into the eyes of the vixen you were chasing! She yelps in shock and tries to run away, but the crowd is in the path and so she is cornered inadvertently by the scrum. You shout at her to halt, and she replies by drawing her weapons, sending the crowd fleeing and bringing Miranda running to assist.", parse);
 			Text.Flush();
 			TerryScenes.CombatVsMiranda();
@@ -831,7 +473,8 @@ TerryScenes.ExplorePlaza = function() {
 
 TerryScenes.CombatVsMiranda = function() {
 	let terry = GAME().terry;
-	let party : Party = GAME().party;
+    let party : Party = GAME().party;
+    let world = WORLD();
 
 	var enemy = new Party();
 	enemy.AddMember(terry);
@@ -844,7 +487,7 @@ TerryScenes.CombatVsMiranda = function() {
 	enc.canRun = false;
 	
 	enc.onLoss = function() {
-		var parse = {
+		var parse : any = {
 			
 		};
 		
@@ -882,7 +525,7 @@ TerryScenes.CombatVsMiranda = function() {
 		Gui.NextPrompt();
 	}
 	enc.onRun = function() {
-		var parse = {
+		var parse : any = {
 			
 		};
 		terry.sbombs--;
@@ -931,9 +574,10 @@ TerryScenes.CaughtTheThief = function() {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
 	let party : Party = GAME().party;
-	let rigard = GAME().rigard;
+    let rigard = GAME().rigard;
+    let world = WORLD();
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		masterMistress : player.mfTrue("master", "mistress")
 	};
@@ -1262,8 +906,9 @@ TerryScenes.Release = function() {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
 	let party : Party = GAME().party;
+    let world = WORLD();
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		masterMistress : player.mfTrue("master", "mistress"),
 		armorTopDesc : function() { return player.ArmorDesc(); }
@@ -1386,13 +1031,13 @@ TerryScenes.Release = function() {
 		Text.NL();
 		Text.Add("<i>“So… out of curiosity, what exactly happens if I disobey you or try to run?”</i> he asks, tail swaying behind.", parse);
 		Text.NL();
-		parse["j"] = jeanne.flags["Met"] != 0 ? "Jeanne, " : "";
+		parse["j"] = GAME().jeanne.flags["Met"] != 0 ? "Jeanne, " : "";
 		Text.Add("You consider it for a moment, then finally decide to tell him the truth, admitting you don't really know. But you know the collar was made by [j]the Royal Court Mage, so he can probably figure it out himself.", parse);
 		Text.NL();
 		Text.Add("<i>“I see… so I guess I’m at your mercy. Lead away then?”</i>", parse);
 		
-		terry.topArmorSlot = Items.Armor.LeatherChest;
-		terry.botArmorSlot = Items.Armor.LeatherPants;
+		terry.topArmorSlot = ArmorItems.LeatherChest;
+		terry.botArmorSlot = ArmorItems.LeatherPants;
 		terry.Equip();
 		terry.RestFull();
 		
@@ -1484,7 +1129,7 @@ TerryScenes.Release = function() {
 TerryScenes.TalkPrompt = function() {
 	let terry = GAME().terry;
 
-	var parse = {
+	var parse : any = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		HeShe   : terry.HeShe(),
 		heshe   : terry.heshe(),
@@ -1520,7 +1165,7 @@ TerryScenes.TalkFeelings = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		playername: player.name,
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		breasts : function() { return terry.FirstBreastRow().Short(); },
@@ -1653,7 +1298,7 @@ TerryScenes.TalkPronoun = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		breasts : function() {
 			var desc = terry.FirstBreastRow().Desc();
 			return desc.cup + "s";
@@ -1733,11 +1378,11 @@ TerryScenes.TalkPronoun = function() {
 	TerryScenes.TalkPrompt();
 }
 
-TerryScenes.TalkPast = function(force) {
+TerryScenes.TalkPast = function(force : boolean) {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		mastermistress : player.mfTrue("master", "mistress"),
 		playername : player.name
@@ -2089,7 +1734,7 @@ TerryScenes.TalkCompliment = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		HeShe   : terry.HeShe(),
 		heshe   : terry.heshe(),
@@ -2185,7 +1830,7 @@ TerryScenes.SkinshipRummagePack = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		boygirl : terry.mfTrue("boy", "girl"),
 		HeShe   : terry.HeShe(),
@@ -2231,7 +1876,7 @@ TerryScenes.SkinshipPrompt = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		HeShe   : terry.HeShe(),
 		heshe   : terry.heshe(),
@@ -2297,7 +1942,7 @@ TerryScenes.SkinshipPromptChoices = function() {
 	let player = GAME().player;
 	let party : Party = GAME().party;
 
-	var parse = {
+	var parse : any = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		breasts : function() { return terry.FirstBreastRow().Short(); },
 		boygirl : terry.mfTrue("boy", "girl"),
@@ -2598,7 +2243,7 @@ TerryScenes.BrushTail = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		foxvixen       : terry.mfPronoun("fox", "vixen"),
 		boygirl        : terry.mfPronoun("boy", "girl"),
 		tarmorDesc     : function() { return terry.ArmorDesc(); },
@@ -2982,7 +2627,7 @@ TerryScenes.CheckFluids = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		foxvixen       : terry.mfPronoun("fox", "vixen"),
 		boygirl        : terry.mfPronoun("boy", "girl"),
 		armorDesc      : function() { return terry.ArmorDesc(); },
@@ -3184,57 +2829,13 @@ TerryScenes.CheckFluids = function() {
 
 
 
-// TODO ITEMS
-
-Terry.prototype.ItemUsable = function(item) {
-	return true;
-}
-
-Terry.prototype.ItemUse = function(item, backPrompt) {
-	let terry = GAME().terry;
-
-	if(item.isTF) {
-		var parse = {
-			item : item.sDesc(),
-			aItem : item.lDesc(),
-			foxvixen : terry.mfPronoun("fox", "vixen")
-		};
-		parse = terry.ParserPronouns(parse);
-		
-		if(terry.flags["TF"] & TerryFlags.TF.TriedItem) {
-			Text.Add("Terry does as ordered and takes the [item]. [HisHer] collar glows for a moment, but nothing else happens.", parse);
-		}
-		else {
-			Text.Add("You hand Terry [aItem] and tell [himher] to try it. [HeShe] examines the [item] for a moment, before shrugging and moving to take it.", parse);
-			Text.NL();
-			Text.Add("[HeShe] swallows and you observe a faint, pinkish glow emanating from [hisher] collar, however it quickly fades. After a while, the [foxvixen] shrugs. <i>“So… that was it? I don’t feel any different.”</i>", parse);
-			Text.NL();
-			Text.Add("Considering what you’ve seen, you can only assume that this has something to do with that collar of [hishers]. It seems like it just isn't going to let you just transform [himher] like that. You'll need to see a specialist about this...", parse);
-			Text.NL();
-			if(jeanne.flags["Met"] != 0)
-				Text.Add("It'd probably be best if you talked to Jeanne; she most likely made the collar, so she should be able to explain what's going on.", parse);
-			else
-				Text.Add("Given you got this collar from the heirs of the throne in Rigard, the creator of it is probably the Rigard court wizard; talking to him or her may help answer why this just happened.", parse);
-		}
-		
-		terry.flags["TF"] |= TerryFlags.TF.TriedItem;
-		
-		Text.Flush();
-		Gui.NextPrompt(backPrompt);
-		
-		return {grab : true, consume : true};
-	}
-	else
-		return {grab : false, consume : true};
-}
-
 // Need if(terry.flags["TF"] & TerryFlags.TF.TriedItem && !(terry.flags["TF"] & TerryFlags.TF.Rosalin))
 TerryScenes.RosalinTF = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 	let rosalin = GAME().rosalin;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		rearsDesc  : function() { return rosalin.EarDesc(true); },
 		foxvixen   : terry.mfPronoun("fox", "vixen")
@@ -3266,7 +2867,7 @@ TerryScenes.RosalinTF = function() {
 TerryScenes.JeanneTFFirst = function() {
 	let terry = GAME().terry;
 
-	var parse = {
+	var parse : any = {
 		foxvixen : terry.mfPronoun("fox", "vixen")
 	};
 	parse = terry.ParserPronouns(parse);
@@ -3304,18 +2905,15 @@ TerryScenes.JeanneTFFirst = function() {
 	TimeStep({minute: 30});
 	terry.flags["TF"] |= TerryFlags.TF.Jeanne;
 	
-	Scenes.Jeanne.Talk();
+	JeanneScenes.Talk();
 }
 
-Terry.JeanneTFCost = function() {
-	return 50;
-}
 TerryScenes.JeanneTFPrompt = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 	let party : Party = GAME().party;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	parse = terry.ParserPronouns(parse);
@@ -3323,16 +2921,16 @@ TerryScenes.JeanneTFPrompt = function() {
 	//[name]
 	var options = new Array();
 	
-	var AddItem = function(item, scene, name, tooltip, costmult, horseTF) {
+	var AddItem = function(item : TFItem, scene : any, name : string, tooltip : string, costmult : number, horseTF? : boolean) {
 		options.push({ nameStr : name || item.name,
-			func : function(obj) {
+			func : function(obj : any) {
 				parse["item"] = obj.str;
-				var coin = obj.mult * Terry.JeanneTFCost();
+				var coin = obj.mult * TerryScenes.JeanneTFCost();
 				parse["coin"] = Text.NumToText(coin);
 				
 				Text.Clear();
 				Text.Add("<i>“For that, I will need [item], plus [coin] coins,”</i> she says, showing you a scroll of what she’ll be needing.", parse);
-				if(terry.PregHandler().IsPregnant() && item == Items.Testos) {
+				if(terry.PregHandler().IsPregnant() && item == AlchemyItems.Testos) {
 					Text.NL();
 					Text.Add("<i>“Sorry, [playername]. Trying to modify [hisher] womb while [heshe] is still pregnant could have disastrous consequences both for [himher] and the baby. So I am going to have to refuse to do so until Terry has given birth.”</i>", parse);
 					Text.NL();
@@ -3367,24 +2965,24 @@ TerryScenes.JeanneTFPrompt = function() {
 	};
 	
 	//TODO items?
-	AddItem(Items.Bovia,     TerryScenes.JeanneTFGrowBoobs,     "Grow boobs", "", 1);
-	AddItem(Items.Lacertium, TerryScenes.JeanneTFShrinkBoobs,   "Shrink boobs", "", 1);
-	AddItem(Items.Bovia,     TerryScenes.JeanneTFStartLactate,  "Lactate+", "", 1);
-	AddItem(Items.Lacertium, TerryScenes.JeanneTFStopLactate,   "Lactate-", "", 1);
-	AddItem(Items.Estros,    TerryScenes.JeanneTFGrowVag,       "Add pussy", "", 2);
-	AddItem(Items.Testos,    TerryScenes.JeanneTFRemVag,        "Rem pussy", "", 1);
-	AddItem(Items.Testos,    TerryScenes.JeanneTFGrowCock,      "Add cock", "", 2);
-	AddItem(Items.Estros,    TerryScenes.JeanneTFRemCock,       "Rem cock", "", 1);
-	AddItem(Items.Equinium,  TerryScenes.JeanneTFGrowHorsecock, "Horsecock", "", 5, true);
+	AddItem(AlchemyItems.Bovia,     TerryScenes.JeanneTFGrowBoobs,     "Grow boobs", "", 1);
+	AddItem(AlchemyItems.Lacertium, TerryScenes.JeanneTFShrinkBoobs,   "Shrink boobs", "", 1);
+	AddItem(AlchemyItems.Bovia,     TerryScenes.JeanneTFStartLactate,  "Lactate+", "", 1);
+	AddItem(AlchemyItems.Lacertium, TerryScenes.JeanneTFStopLactate,   "Lactate-", "", 1);
+	AddItem(AlchemyItems.Estros,    TerryScenes.JeanneTFGrowVag,       "Add pussy", "", 2);
+	AddItem(AlchemyItems.Testos,    TerryScenes.JeanneTFRemVag,        "Rem pussy", "", 1);
+	AddItem(AlchemyItems.Testos,    TerryScenes.JeanneTFGrowCock,      "Add cock", "", 2);
+	AddItem(AlchemyItems.Estros,    TerryScenes.JeanneTFRemCock,       "Rem cock", "", 1);
+	AddItem(AlchemyItems.Equinium,  TerryScenes.JeanneTFGrowHorsecock, "Horsecock", "", 5, true);
 	
-	Gui.SetButtonsFromList(options, true, Scenes.Jeanne.InteractPrompt);
+	Gui.SetButtonsFromList(options, true, JeanneScenes.InteractPrompt);
 }
 
-TerryScenes.JeanneTFCraft = function(item, scene, horseTF) {
+TerryScenes.JeanneTFCraft = function(item : TFItem, scene : any, horseTF : boolean) {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		lowerArmorDesc : function() { return player.LowerArmorDesc(); },
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
@@ -3599,11 +3197,11 @@ TerryScenes.JeanneTFCraft = function(item, scene, horseTF) {
 				Text.Add("<i>“Do not mind me,”</i> the elven mage replies, taking a seat on a nearby chair, studying the fox intently.", parse);
 				Text.NL();
 				Text.Add("It’s settled then. You strip off your [lowerArmorDesc] and attach the strap-on, making sure it won’t come loose. Now, about Terry’s butt...", parse);
-				p1Cock = Items.StrapOn.PlainStrapon.cock;
+				p1Cock = StrapOnItems.PlainStrapon.cock;
 			}
 			Text.NL();
 			
-			TerryScenes.SexFuckButtEntrypoint(p1Cock, false, function(rough) {
+			TerryScenes.SexFuckButtEntrypoint(p1Cock, false, function(rough : boolean) {
 				Text.Add("There, now [heshe]’s all stretched up, you proudly declare, working the tip of the big suppository into [hisher] butt. ", parse);
 				if(rough) {
 					Text.Add("<i>“That works, I suppose,”</i> Jeanne muses, huffing as she adjusts her gown, unabashedly licking her drenched fingers clean. <i>“Was it really necessary to be that rough, though?”</i> She really shouldn’t be one to talk. While you had your own fun, the court magician has been playing with some toys out of her collection, eyeing Terry lustfully; looks like she really enjoyed the show.", parse);
@@ -3707,7 +3305,7 @@ TerryScenes.JeanneTFGrowBoobs = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
 		terrycock  : function() { return terry.MultiCockDesc(); }
@@ -3813,14 +3411,14 @@ TerryScenes.JeanneTFGrowBoobs = function() {
 	}
 	Text.Flush();
 	
-	Scenes.Jeanne.InteractPrompt();
+	JeanneScenes.InteractPrompt();
 }
 
 TerryScenes.JeanneTFShrinkBoobs = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen")
 	};
@@ -3881,14 +3479,14 @@ TerryScenes.JeanneTFShrinkBoobs = function() {
 	}
 	Text.Flush();
 	
-	Scenes.Jeanne.InteractPrompt();
+	JeanneScenes.InteractPrompt();
 }
 
 TerryScenes.JeanneTFStartLactate = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
 		terrybreasts : function() { return terry.FirstBreastRow().Short(); }
@@ -3944,14 +3542,14 @@ TerryScenes.JeanneTFStartLactate = function() {
 	terry.SetLactation();
 	terry.lactHandler.milk.base = terry.MilkCap();
 	
-	Scenes.Jeanne.InteractPrompt();
+	JeanneScenes.InteractPrompt();
 }
 
 TerryScenes.JeanneTFStopLactate = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
 		terrybreasts : function() { return terry.FirstBreastRow().Short(); }
@@ -3980,14 +3578,14 @@ TerryScenes.JeanneTFStopLactate = function() {
 	terry.flags["lact"] = 0;
 	terry.SetLactation();
 	
-	Scenes.Jeanne.InteractPrompt();
+	JeanneScenes.InteractPrompt();
 }
 
 TerryScenes.JeanneTFGrowVag = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
 		tcockDesc  : function() { return terry.MultiCockDesc(); },
@@ -4025,14 +3623,14 @@ TerryScenes.JeanneTFGrowVag = function() {
 	
 	var cum = terry.OrgasmCum();
 	
-	Scenes.Jeanne.InteractPrompt();
+	JeanneScenes.InteractPrompt();
 }
 
 TerryScenes.JeanneTFRemVag = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
 		tcockDesc  : function() { return terry.MultiCockDesc(); },
@@ -4075,14 +3673,14 @@ TerryScenes.JeanneTFRemVag = function() {
 	terry.flags["vag"] = TerryFlags.Pussy.None;
 	terry.SetPussy();
 	
-	Scenes.Jeanne.InteractPrompt();
+	JeanneScenes.InteractPrompt();
 }
 
 TerryScenes.JeanneTFGrowCockEntrypoint = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen")
 	};
@@ -4097,7 +3695,7 @@ TerryScenes.JeanneTFHorsegasmEntrypoint = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
 		tcockDesc  : function() { return terry.MultiCockDesc(); },
@@ -4122,7 +3720,7 @@ TerryScenes.JeanneTFGrowCock = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
 		tcockDesc  : function() { return terry.MultiCockDesc(); }
@@ -4164,7 +3762,7 @@ TerryScenes.JeanneTFGrowCock = function() {
 	
 	var cum = terry.OrgasmCum();
 	
-	Scenes.Jeanne.InteractPrompt();
+	JeanneScenes.InteractPrompt();
 }
 
 //TODO
@@ -4172,7 +3770,7 @@ TerryScenes.JeanneTFRemCock = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen")
 	};
@@ -4227,14 +3825,14 @@ TerryScenes.JeanneTFRemCock = function() {
 	}
 	Text.Flush();
 	
-	Scenes.Jeanne.InteractPrompt();
+	JeanneScenes.InteractPrompt();
 }
 
 TerryScenes.JeanneTFGrowHorsecock = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		pheshe     : player.heshe(),
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
@@ -4249,7 +3847,7 @@ TerryScenes.JeanneTFGrowHorsecock = function() {
 		Text.Flush();
 		var cum = terry.OrgasmCum();
 		
-		Scenes.Jeanne.InteractPrompt();
+		JeanneScenes.InteractPrompt();
 		return;
 	}
 	
@@ -4347,7 +3945,7 @@ TerryScenes.JeanneTFGrowHorsecock = function() {
 	TimeStep({hour: 1});
 	var cum = terry.OrgasmCum();
 	
-	Scenes.Jeanne.InteractPrompt();
+	JeanneScenes.InteractPrompt();
 }
 
 
@@ -4355,7 +3953,7 @@ TerryScenes.JeanneTFGrowHorsecock = function() {
 /* TERRY SEX SCENES */
 
 
-TerryScenes.Impregnate = function(mother, father, cum, slot) {
+TerryScenes.Impregnate = function(mother : Entity, father : Entity, cum : number, slot? : number) {
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother : mother,
@@ -4368,11 +3966,11 @@ TerryScenes.Impregnate = function(mother, father, cum, slot) {
 }
 
 // TODO
-TerryScenes.SexPrompt = function(backPrompt) {
+TerryScenes.SexPrompt = function(backPrompt : any) {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		master : player.mfTrue("master", "mistress"),
 		playername : player.name
@@ -4506,11 +4104,11 @@ TerryScenes.SexPrompt = function(backPrompt) {
 	Gui.PrintDefaultOptions();
 }
 
-TerryScenes.SexPromptChoice = function(backPrompt, haveadrink) {
+TerryScenes.SexPromptChoice = function(backPrompt : any, haveadrink : boolean) {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		master : player.mfTrue("master", "mistress")
@@ -4645,7 +4243,7 @@ TerryScenes.SexGetOralPussy = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
 		master     : player.mfTrue("master", "mistress")
@@ -4823,7 +4421,7 @@ TerryScenes.SexGetOralCock = function() {
 
 	var p1cock = player.BiggestCock();
 	
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
 		boygirl    : terry.mfPronoun("boy", "girl"),
@@ -4865,7 +4463,7 @@ TerryScenes.SexGetOralCock = function() {
 		//[name]
 		var options = new Array();
 		
-		var cockFunc = function(c, idx) {
+		var cockFunc = function(c : Cock, idx : number) {
 			options.push({ nameStr : Text.Ordinal(idx+1, true),
 				func : function() {
 					Text.Clear();
@@ -4877,7 +4475,7 @@ TerryScenes.SexGetOralCock = function() {
 			});
 		};
 		
-		_.each(player.AllCocks(), function(c, key) {
+		_.each(player.AllCocks(), function(c, key : number) {
 			cockFunc(c, key);
 		});
 		
@@ -4890,7 +4488,7 @@ TerryScenes.SexGetOralCock = function() {
 	}
 }
 
-TerryScenes.SexGetOralCockCont = function(parse, p1cock) {
+TerryScenes.SexGetOralCockCont = function(parse : any, p1cock : Cock) {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
@@ -5297,13 +4895,13 @@ TerryScenes.SexGetOralCockCont = function(parse, p1cock) {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-TerryScenes.SexPitchAnal = function(cocksInAss) {
+TerryScenes.SexPitchAnal = function(cocksInAss : Cock[]) {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
 	var p1Cock = player.BiggestCock(cocksInAss);
 	
-	var parse = {
+	var parse : any = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		boygirl : terry.mfPronoun("boy", "girl"),
 		master  : player.mfTrue("master", "mistress"),		
@@ -5314,7 +4912,7 @@ TerryScenes.SexPitchAnal = function(cocksInAss) {
 	parse = terry.ParserTags(parse, "t");
 	
 	var virgin = terry.Butt().virgin;
-	var promise;
+	var promise : boolean;
 	
 	Gui.Callstack.push(function() {
 		
@@ -5347,7 +4945,7 @@ TerryScenes.SexPitchAnal = function(cocksInAss) {
 				Text.NL();
 			}
 			
-			TerryScenes.SexFuckButtEntrypoint(p1Cock, promise, function(rough) {
+			TerryScenes.SexFuckButtEntrypoint(p1Cock, promise, function(rough : boolean) {
 				if(rough) {
 					Text.Add("<i>“Ugh, my ass...”</i> Terry groans. <i>“My hips feel sore, my butt feels sore, I’m feeling sore in places I didn’t even think it was possible to feel sore...”</i>", parse);
 					Text.NL();
@@ -5583,7 +5181,7 @@ TerryScenes.SexPitchAnal = function(cocksInAss) {
 						}
 					}
 					options.push({ nameStr : "Pull out",
-						func : function(choice) {
+						func : function(choice : boolean) {
 							if(choice)
 								Text.Clear();
 							else
@@ -5885,14 +5483,14 @@ TerryScenes.SexPitchAnal = function(cocksInAss) {
 }
 
 
-TerryScenes.SexFuckButtEntrypoint = function(p1Cock, promise, retFunc) {
+TerryScenes.SexFuckButtEntrypoint = function(p1Cock : Cock, promise : boolean, retFunc : any) {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
 	var virgin = terry.Butt().virgin;
 	var knotted = p1Cock.knot != 0;
 
-	var parse = {
+	var parse : any = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		boygirl  : terry.mfPronoun("boy", "girl"),
 		master  : player.mfTrue("master", "mistress"),
@@ -6158,7 +5756,7 @@ TerryScenes.SexWorship = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
 		boygirl    : terry.mfPronoun("boy", "girl"),
@@ -6415,7 +6013,7 @@ TerryScenes.SexWorship = function() {
 				Text.NL();
 				Text.Add("Teasingly, you assure the [foxvixen] that if [heshe] wants you to start making meals for [himher], all [heshe] needs to do is just say so.", parse);
 				Text.NL();
-				if(momo.IsFollower()) {
+				if(GAME().momo.IsFollower()) {
 					Text.Add("<i>“With Momo around? No offense, but as good a cook as you may be, love, I don’t think you can beat a professional chef,”</i> [heshe] chuckles.", parse);
 					Text.NL();
 					Text.Add("Maybe not, you agree, but your cooking would certainly have an... investment... that hers wouldn’t.", parse);
@@ -6708,11 +6306,11 @@ TerryScenes.SexWorship = function() {
 }
 
 // Clean Terry Up Entry Point
-TerryScenes.PCCleansTerry = function(func, opts) {
+TerryScenes.PCCleansTerry = function(func : any, opts : any) {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),		
 	};
@@ -6723,7 +6321,7 @@ TerryScenes.PCCleansTerry = function(func, opts) {
 	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
 	
 	opts = opts || {};
-	func = func || function(opts) {
+	func = func || function(opts : any) {
 		Text.Flush();
 		Gui.NextPrompt();
 	};
@@ -6869,12 +6467,12 @@ TerryScenes.PCCleansTerry = function(func, opts) {
 // Clean Terry Up Exit Point
 
 // Terry cleans PC Entry Point
-TerryScenes.TCleansPC = function(func, opts) {
+TerryScenes.TCleansPC = function(func : any, opts : any) {
 	let terry = GAME().terry;
 	let player = GAME().player;
 	let party : Party = GAME().party;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),		
 	};
@@ -6885,7 +6483,7 @@ TerryScenes.TCleansPC = function(func, opts) {
 	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");	
 					
 	opts = opts || {};
-	func = func || function(opts) {
+	func = func || function(opts : any) {
 		Text.Flush();
 		Gui.NextPrompt();
 	};
@@ -7217,7 +6815,7 @@ TerryScenes.TCleansPC = function(func, opts) {
 // Terry cleans PC Exit Point
 
 
-TerryScenes.FuckedByBunnyMob = function(male, parse) {
+TerryScenes.FuckedByBunnyMob = function(male : Entity, parse : any) {
 	let terry = GAME().terry;
 
 	if(terry.Slut() < 45) {
@@ -7306,7 +6904,7 @@ TerryScenes.FuckedByBunnyMob = function(male, parse) {
 	var cum = terry.OrgasmCum();
 }
 
-TerryScenes.SexPitchVaginal = function(cocks) {
+TerryScenes.SexPitchVaginal = function(cocks : Cock[]) {
 	let terry = GAME().terry;
 	let player = GAME().player;
 	let party : Party = GAME().party;
@@ -7314,7 +6912,7 @@ TerryScenes.SexPitchVaginal = function(cocks) {
 	var p1cock  = player.BiggestCock(cocks);
 	var strapon = p1cock.isStrapon;
 	
-	var parse = {
+	var parse : any = {
 		playername  : player.name,
 		master      : player.mfTrue("master", "mistress"),
 		foxvixen    : terry.mfPronoun("fox", "vixen"),
@@ -7324,7 +6922,7 @@ TerryScenes.SexPitchVaginal = function(cocks) {
 	parse = player.ParserTags(parse);
 	parse = terry.ParserTags(parse, "t");
 	
-	var p2cock;
+	var p2cock : Cock;
 	if(player.NumCocks() > 1) {
 		var allCocks = player.AllCocksCopy();
 		for(var i = 0; i < allCocks.length; i++) {
@@ -7796,7 +7394,7 @@ TerryScenes.SexPitchVaginal = function(cocks) {
 		tooltip : Text.Parse("Let’s see how your [foxvixen] likes being licked instead.", parse)
 	});
 	
-	var dildoScene = function(toy) {
+	var dildoScene = function(toy : any) {
 		parse["toy"]     = toy.sDesc();
 		parse["toyHead"] = toy.cock.TipShort();
 		
@@ -7898,7 +7496,7 @@ TerryScenes.SexPitchVaginal = function(cocks) {
 		Gui.NextPrompt();
 	};
 	
-	var addDildoScene = function(toy) {
+	var addDildoScene = function(toy : Item) {
 		if(party.Inv().QueryNum(toy) < 1) return;
 		
 		parse["toy"] = toy.sDesc();
@@ -7908,15 +7506,15 @@ TerryScenes.SexPitchVaginal = function(cocks) {
 		});
 	}
 	
-	addDildoScene(Items.Toys.SmallDildo);
-	addDildoScene(Items.Toys.MediumDildo);
-	addDildoScene(Items.Toys.LargeDildo);
-	addDildoScene(Items.Toys.ThinDildo);
-	addDildoScene(Items.Toys.ButtPlug);
-	addDildoScene(Items.Toys.LargeButtPlug);
-	addDildoScene(Items.Toys.EquineDildo);
-	addDildoScene(Items.Toys.CanidDildo);
-	addDildoScene(Items.Toys.ChimeraDildo);
+	addDildoScene(ToysItems.SmallDildo);
+	addDildoScene(ToysItems.MediumDildo);
+	addDildoScene(ToysItems.LargeDildo);
+	addDildoScene(ToysItems.ThinDildo);
+	addDildoScene(ToysItems.ButtPlug);
+	addDildoScene(ToysItems.LargeButtPlug);
+	addDildoScene(ToysItems.EquineDildo);
+	addDildoScene(ToysItems.CanidDildo);
+	addDildoScene(ToysItems.ChimeraDildo);
 		
 		//TODO: additional toys
 	
@@ -8061,7 +7659,7 @@ TerryScenes.SexPitchVaginal = function(cocks) {
 		Text.NL();
 		Text.Add("Your own need boils within you; you know you’re in no better shape than the [foxvixen] beneath you. You need to consider how you want to finish this, and quickly!", parse);
 		
-		cumbath = false;
+		let cumbath : boolean = false;
 		
 		var knotted = p1cock.knot != 0;
 		var doubleKnot = knotted;
@@ -8835,7 +8433,7 @@ TerryScenes.SexCatchVaginal = function() {
 
 	var p1cock = player.BiggestCock();
 	
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
 		FoxVixen   : terry.mfPronoun("Fox", "Vixen"),
@@ -9345,7 +8943,7 @@ TerryScenes.SexCatchVaginalHeChooses = function() {
 	}
 }
 
-TerryScenes.SexCatchVaginalInsideHorseCock = function(parse) {
+TerryScenes.SexCatchVaginalInsideHorseCock = function(parse : any) {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
@@ -9451,7 +9049,7 @@ TerryScenes.SexCatchVaginalInsideHorseCock = function(parse) {
 	});
 }
 
-TerryScenes.SexCatchVaginalOutsideHorseCock = function(parse) {
+TerryScenes.SexCatchVaginalOutsideHorseCock = function(parse : any) {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
@@ -9528,7 +9126,7 @@ TerryScenes.SexCatchVaginalOutsideHorseCock = function(parse) {
 	TerryScenes.TCleansPC();
 }
 
-TerryScenes.SexCatchVaginalInsideFoxCock = function(parse) {
+TerryScenes.SexCatchVaginalInsideFoxCock = function(parse : any) {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
@@ -9640,7 +9238,7 @@ TerryScenes.SexCatchVaginalInsideFoxCock = function(parse) {
 	Gui.NextPrompt();
 }
 
-TerryScenes.SexCatchVaginalOutsideFoxCock = function(parse) {
+TerryScenes.SexCatchVaginalOutsideFoxCock = function(parse : any) {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
@@ -9716,7 +9314,7 @@ TerryScenes.SexCatchAnal = function() {
 
 	var p1cock = player.BiggestCock();
 	
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
 		fox        : terry.HorseCock() ? "stallion" : "fox-",		
@@ -9811,7 +9409,7 @@ TerryScenes.SexCatchAnal = function() {
 	});
 	if(player.FirstVag()) {
 		options.push({ nameStr : "Vagina",
-			func : function(hischoice) {
+			func : function(hischoice : boolean) {
 				Text.Clear();
 				if(hischoice)
 					Text.Add("<i>“You know what, I think I’ll just use your [vag] for this. Get down on the floor and raise your butt for me!”</i>", parse);
@@ -9881,7 +9479,7 @@ TerryScenes.SexCatchAnal = function() {
 		});
 	}
 	options.push({ nameStr : "Grind",
-		func : function(hischoice) {
+		func : function(hischoice : boolean) {
 			Text.Clear();
 			if(hischoice)
 				Text.Add("<i>“You know what, I think all you need is a bit of grinding and you’ll be all set. Get down and spread yourself for me!”</i>", parse);
@@ -10400,10 +9998,10 @@ TerryScenes.SexCatchAnal = function() {
 
 /* TERRY SEX DRINK */
 
-TerryScenes.SexHaveADrink = function(back) {
+TerryScenes.SexHaveADrink = function(back : any) {
 	let terry = GAME().terry;
 
-	var parse = {
+	var parse : any = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		tbreasts : terry.FirstBreastRow().Short()
 	};
@@ -10496,7 +10094,7 @@ TerryScenes.SexHaveADrinkPussy = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		foxxyvixxy : terry.mfPronoun("foxxy", "vixxy"),
@@ -11382,7 +10980,7 @@ TerryScenes.SexHaveADrinkCock = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		handsomebeautiful : terry.mfPronoun("handsome", "beautiful"),
@@ -12354,7 +11952,7 @@ TerryScenes.SexHaveADrinkBreasts = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		foxxyvixxy : terry.mfPronoun("foxxy", "vixxy"),
@@ -12594,7 +12192,7 @@ TerryScenes.SexHaveADrinkBreasts = function() {
 	});
 }
 
-TerryScenes.SexHaveADrinkBreastsMilk = function(parse) {
+TerryScenes.SexHaveADrinkBreastsMilk = function(parse : any) {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
@@ -12676,7 +12274,7 @@ TerryScenes.SexHaveADrinkBreastsMilk = function(parse) {
 	TerryScenes.SexHaveADrinkBreastsRomance(parse);
 }
 
-TerryScenes.SexHaveADrinkBreastsRomance = function(parse) {
+TerryScenes.SexHaveADrinkBreastsRomance = function(parse : any) {
 	let terry = GAME().terry;
 
 	Text.Add("Leisurely, you wrap your arms around Terry and snuggle close, demurely dipping your head down to play a tender kiss on the [foxvixen]’s collarbone, and grinning to yourself as [heshe] shivers in anticipation.", parse);
@@ -12748,7 +12346,7 @@ TerryScenes.SexHaveADrinkBreastsRomance = function(parse) {
 	TerryScenes.SexHaveADrinkBreastsArousal(parse);
 }
 
-TerryScenes.SexHaveADrinkBreastsArousal = function(parse) {
+TerryScenes.SexHaveADrinkBreastsArousal = function(parse : any) {
 	let terry = GAME().terry;
 	//#arousal check block
 	
@@ -12782,7 +12380,7 @@ TerryScenes.SexHaveADrinkBreastsArousal = function(parse) {
 		Gui.NextPrompt(options[0].func);
 }
 
-TerryScenes.SexHaveADrinkBreastsArousalHorsecock = function(parse) {
+TerryScenes.SexHaveADrinkBreastsArousalHorsecock = function(parse : any) {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
@@ -13109,7 +12707,7 @@ TerryScenes.SexHaveADrinkBreastsArousalHorsecock = function(parse) {
 	}
 }
 
-TerryScenes.SexHaveADrinkBreastsArousalFoxcock = function(parse) {
+TerryScenes.SexHaveADrinkBreastsArousalFoxcock = function(parse : any) {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
@@ -13423,7 +13021,7 @@ TerryScenes.SexHaveADrinkBreastsArousalFoxcock = function(parse) {
 	}
 }
 
-TerryScenes.SexHaveADrinkBreastsArousalPussy = function(parse) {
+TerryScenes.SexHaveADrinkBreastsArousalPussy = function(parse : any) {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
@@ -13788,7 +13386,4 @@ TerryScenes.SexHaveADrinkBreastsArousalPussy = function(parse) {
 	}
 }
 
-
-
-
-export { Terry, TerryScenes };
+export { TerryScenes };

@@ -30,7 +30,7 @@ import { EncounterTable } from '../../encountertable';
 import { Cock } from '../../body/cock';
 import { Rand } from '../../utility';
 import { CaleScenes } from './cale-scenes';
-import { TerryScenes } from '../terry';
+import { TerryScenes } from '../terry-scenes';
 import { StrapOnItems } from '../../items/strapon';
 
 let RosalinScenes : any = {};

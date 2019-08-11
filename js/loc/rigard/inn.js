@@ -8,6 +8,7 @@ import { Gui } from '../../gui';
 import { Text } from '../../text';
 import { TwinsFlags } from '../../event/royals/twins-flags';
 import { RigardFlags } from './rigard-flags';
+import { Room69Flags } from '../../event/room69-flags';
 
 let world = null;
 
@@ -810,11 +811,11 @@ LBScenes.OrvinTalkPrompt = function(innPrompt) {
 		});
 	}
 	//SixtyNine
-	if(room69.flags["Rel"] != Room69.RelFlags.NotMet) {
+	if(room69.flags["Rel"] != Room69Flags.RelFlags.NotMet) {
 		options.push({ nameStr : "Sixtynine",
 			func : function() {
 				Text.Clear();
-				if(room69.flags["Rel"] == Room69.RelFlags.BrokeDoor || room69.flags["Rel"] == Room69.RelFlags.BadTerms) {
+				if(room69.flags["Rel"] == Room69Flags.RelFlags.BrokeDoor || room69.flags["Rel"] == Room69Flags.RelFlags.BadTerms) {
 					Text.Add("Orvin looks you up and down in response to your question. <i>“Well, I suppose I should tell you, even if you aren’t exactly friendly with it.”</i>", parse);
 					Text.NL();
 					Text.Add("<i>“The room used to be the same as any other room at first, but just about eighty years ago, from what I understand, strange things started happening there. Objects would move in the night. Visitors would complain of something whispering to them when they were alone...”</i>", parse);
@@ -849,7 +850,7 @@ LBScenes.OrvinTalkPrompt = function(innPrompt) {
 					Text.Add("<i>“So - and I admit father didn’t exactly tell it to me straight out - grandfather must have had quite the eye-opening experience! He was apparently even in love with it for a year or two, before the fascination passed and he met grandmother.”</i>", parse);
 					Text.NL();
 					Text.Add("<i>“It’s been like that with most everyone in the family since then, be they boy or girl, man or woman. Sixtynine is a family friend, a confidante... an occasional lover.”</i> He blushes a little at this last.", parse);
-					if(room69.flags["BadStart"] == Room69.RelFlags.BrokeDoor)
+					if(room69.flags["BadStart"] == Room69Flags.RelFlags.BrokeDoor)
 						Text.Add(" <i>“So you can see why I was upset that you hurt her. Hurt it.”</i>", parse);
 				}
 				Text.Flush();
@@ -1699,7 +1700,7 @@ LBScenes.RandomRoom = function(companion) {
 		Text.Flush();
 		LBScenes.RegularRoom(companion);
 	}
-	else if(room69.flags["Rel"] == Room69.RelFlags.NotMet) {
+	else if(room69.flags["Rel"] == Room69Flags.RelFlags.NotMet) {
 		// First time
 		Text.Add("Room 369 - perfect. You shove open the door, a little surprised to find it unlocked, and push through, stumbling slightly.", parse);
 		Text.NL();
@@ -1943,11 +1944,11 @@ InnLoc.common.events.push(new Link(
 InnLoc.common.events.push(new Link(
 	"Room 369", function() {
 		let room69 = GAME().room69;
-		return room69.flags["Rel"] != Room69.RelFlags.NotMet;
+		return room69.flags["Rel"] != Room69Flags.RelFlags.NotMet;
 	}, true,
 	function() {
 		let room69 = GAME().room69;
-		if(room69.flags["Rel"] != Room69.RelFlags.NotMet) {
+		if(room69.flags["Rel"] != Room69Flags.RelFlags.NotMet) {
 			Text.Add("You could head up to the sentient room Sixtynine.");
 			Text.NL();
 			Text.Flush();
@@ -1955,9 +1956,9 @@ InnLoc.common.events.push(new Link(
 	},
 	function() {
 		let room69 = GAME().room69;
-		if(room69.flags["Rel"] == Room69.RelFlags.BadTerms)
+		if(room69.flags["Rel"] == Room69Flags.RelFlags.BadTerms)
 			Scenes.Room69.ApologizeTo69ForBeingMean();
-		else if(room69.flags["Rel"] == Room69.RelFlags.BrokeDoor)
+		else if(room69.flags["Rel"] == Room69Flags.RelFlags.BrokeDoor)
 			Scenes.Room69.ApologizeTo69ForBreakingDoor();
 		else // TODO: Additional options?
 			Scenes.Room69.Normal69();

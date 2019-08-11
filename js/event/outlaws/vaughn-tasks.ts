@@ -10,9 +10,9 @@ import { VaughnFlags } from './vaughn-flags';
 import { MirandaFlags } from '../miranda-flags';
 import { Time } from '../../time';
 import { Lei } from '../royals/lei';
-import { Room69 } from '../room69';
 import { RigardFlags } from '../../loc/rigard/rigard-flags';
 import { Party } from '../../party';
+import { Room69Flags } from '../room69-flags';
 
 let TasksScenes : any = {};
 
@@ -1929,7 +1929,7 @@ TasksScenes.Poisoning.AphrodisiacPeek = function() {
 			});
 		}, enabled : player.FirstCock() || player.FirstVag()
 	});
-	if(room69.flags["Rel"] >= Room69.RelFlags.GoodTerms) {
+	if(room69.flags["Rel"] >= Room69Flags.RelFlags.GoodTerms) {
 		options.push({ nameStr : "69",
 			tooltip : "Come to think of it, you know someone who might keep them occupied for a while…",
 			func : function() {

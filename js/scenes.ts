@@ -18,7 +18,7 @@ import { AscheScenes } from "./event/asche";
 import { FeraScenes } from "./event/fera";
 import { MirandaScenes } from "./event/miranda-scenes";
 import { GlobalScenes } from "./event/global";
-import { TerryScenes } from "./event/terry";
+import { TerryScenes } from "./event/terry-scenes";
 import { KiakaiScenes } from "./event/kiakai-scenes";
 import { HalloweenScenes } from "./event/halloween";
 import { FarmScenes } from "./loc/farm-scenes";

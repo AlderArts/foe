@@ -16,6 +16,8 @@ import { Gui } from '../gui';
 import { TimeStep, GAME, NAV } from '../GAME';
 import { KiakaiFlags } from './kiakai-flags';
 import { Item } from '../item';
+import { RavenFlags } from './raven-flags';
+import { KiakaiScenes } from './kiakai-scenes';
 
 export class Kiakai extends Entity {
 	constructor(storage? : any) {
@@ -173,7 +175,7 @@ export class Kiakai extends Entity {
 	}
 	
 	// Party interaction
-	Kiakai.prototype.Interact = function(switchSpot) {
+	Interact(switchSpot : boolean) {
 		let player = GAME().player;
 		let kiakai = GAME().kiakai;
 	
@@ -256,9 +258,10 @@ export class Kiakai extends Entity {
 		Gui.SetButtonsFromList(options, true, NAV().PartyInteraction);
 	}
 	
-	Kiakai.prototype.TalkPrompt = function() {
+	TalkPrompt() {
 		let player = GAME().player;
 		let kiakai = GAME().kiakai;
+		let ravenmother = GAME().ravenmother;
 		
 		var parse = {
 			playername : player.name,
@@ -314,7 +317,7 @@ export class Kiakai extends Entity {
 		});
 		// TALK RAVENS
 		var r = ravenmother.Ravenness();
-		if(r >= RavenMother.Stage.ravenstage2 + 2 &&
+		if(r >= RavenFlags.Stage.ravenstage2 + 2 &&
 		   ravenmother.flags["Met"] == 0) {
 			options.push({ nameStr : "Ravens",
 				func : function() {

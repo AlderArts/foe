@@ -9,6 +9,7 @@ import { TwinsFlags } from './royals/twins-flags';
 import { Party } from '../party';
 import { UruFlags } from './uru';
 import { RosalinFlags } from './nomads/rosalin-flags';
+import { RavenFlags } from './raven-flags';
 
 let DreamsScenes = {}
 
@@ -85,7 +86,7 @@ DreamsScenes.Entry = function(func) {
 		}
 		
 		
-		if(ravenTrigger && ravenmother.Ravenness() >= RavenMother.Stage.ravenstage3 && ravenmother.flags["Met"] == 0) {
+		if(ravenTrigger && ravenmother.Ravenness() >= RavenFlags.Stage.ravenstage3 && ravenmother.flags["Met"] == 0) {
 			Text.Add("You prepare for sleep, and lie down, fiddling with the gemstone in your hands. Do you really want to pursue these ravens? They have not harmed you so far, and what if it turns out to be dangerous? Most of your dreams don’t mean much anyway, so perhaps it’s not so bad to have them watched.");
 			Text.NL();
 			Text.Add("You feel like once you plunge ahead into this chase, you won’t be able to back out. Are you sure you want to do it?");
@@ -122,17 +123,17 @@ DreamsScenes.RavenAfterDream = function(ravenTrigger, func) {
 	
 	if(ravenTrigger) {
 		var r = ravenmother.Ravenness();
-		if     (r == RavenMother.Stage.ravenstage2) {
+		if     (r == RavenFlags.Stage.ravenstage2) {
 			Text.NL();
 			Text.Add("Most of the dream you just experienced is clear in your mind, though fading fast. But there is some part that feels strangely obscured... clawing at your memory, wishing to be recalled, but just beyond your reach.");
 			Text.Flush();
 		}
-		else if(r == RavenMother.Stage.ravenstage2 + 1) {
+		else if(r == RavenFlags.Stage.ravenstage2 + 1) {
 			Text.NL();
 			Text.Add("The memories come clearer this time. And amid the clear memories, you distinguish one spot that is veiled in blackness, as if excised from your mind. You grab at it, pushing the veil aside with a mental effort, but it’s already faded too far. Next time, you will be quicker.");
 			Text.Flush();
 		}
-		else if(r == RavenMother.Stage.ravenstage2 + 2) {
+		else if(r == RavenFlags.Stage.ravenstage2 + 2) {
 			Text.NL();
 			Text.Add("You turn your mind to the dream, and in moments find the veiled spot. In your mind, you examine it closer and closer, willing it to resolve, and finally it clears, and you see a raven. But what’s the significance of it being part of your dream? There is still something you’re missing.");
 			if(party.InParty(kiakai)) {
@@ -175,7 +176,7 @@ DreamsScenes.RavenAfterDream = function(ravenTrigger, func) {
 			}
 			Text.Flush();
 		}
-		else if(r == RavenMother.Stage.ravenstage2 + 3) {
+		else if(r == RavenFlags.Stage.ravenstage2 + 3) {
 			Text.NL();
 			Text.Add("When you think of your dream, there is no veil this time - you see everything clearly. The bird was there again, watching you, tracking you. And when you tried to confront it while asleep, you managed to focus on it for a short while, but it somehow slipped away, forcing your mind back into the flow of the dream.");
 			Text.NL();
@@ -200,7 +201,7 @@ DreamsScenes.RavenText = function(trigger, stage1, stage2, no) {
 	
 	if(trigger) {
 		var r = ravenmother.Ravenness();
-		if(r < RavenMother.Stage.ravenstage2 || r >= RavenMother.Stage.ravenstage3)
+		if(r < RavenFlags.Stage.ravenstage2 || r >= RavenFlags.Stage.ravenstage3)
 			return stage1;
 		else
 			return stage2;

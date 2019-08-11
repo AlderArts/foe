@@ -11,99 +11,98 @@ import { AppendageType } from '../body/appendage';
 import { Color } from '../body/color';
 import { Text } from '../text';
 import { Gui } from '../gui';
+import { GAME } from '../GAME';
+import { Party } from '../party';
+import { GlobalScenes } from './global';
 
-let RavenMotherScenes = {};
+let RavenMotherScenes : any = {};
 
-function RavenMother(storage) {
-	Entity.call(this);
-	this.ID = "ravenmother";
+export class RavenMother extends Entity {
+	constructor(storage? : any) {
+		super();
+
+		this.ID = "ravenmother";
+		
+		this.name              = "RavenMother";
+		this.maxHp.base        = 3000;
+		this.maxSp.base        = 500;
+		this.maxLust.base      = 500;
+		// Main stats
+		this.strength.base     = 100;
+		this.stamina.base      = 120;
+		this.dexterity.base    = 150;
+		this.intelligence.base = 90;
+		this.spirit.base       = 100;
+		this.libido.base       = 100;
+		this.charisma.base     = 80;
+		
+		this.level             = 20;
+		this.sexlevel          = 15;
+		
+		this.combatExp         = 800;
+		this.coinDrop          = 1500;
+		
+		this.body.DefMale();
+		// TODO: Special avatar
+		//this.avatar.combat     = Images.lago_male;
+		
+		this.Butt().buttSize.base = 2;
+		
+		this.body.SetRace(Race.Avian);
+		
+		TF.SetAppendage(this.Back(), AppendageType.wing, Race.Avian, Color.black);
+		
+		this.body.SetBodyColor(Color.white);
+		
+		this.body.SetEyeColor(Color.green);
+		
+		// Set hp and mana to full
+		this.SetLevelBonus();
+		this.RestFull();
+		
+		this.flags["Stage"]     = 0;
+		this.flags["Met"]       = 0;
+		this.flags["KeptRaven"] = 0;
+		this.flags["RBlock"]    = 0;
+		
+		if(storage) this.FromStorage(storage);
+	}
+
+	Ravenness() {
+		return Math.floor(this.flags["Stage"] / 100);
+	}
 	
-	this.name              = "RavenMother";
-	this.maxHp.base        = 3000;
-	this.maxSp.base        = 500;
-	this.maxLust.base      = 500;
-	// Main stats
-	this.strength.base     = 100;
-	this.stamina.base      = 120;
-	this.dexterity.base    = 150;
-	this.intelligence.base = 90;
-	this.spirit.base       = 100;
-	this.libido.base       = 100;
-	this.charisma.base     = 80;
+	// Increase ravenness and return trigger
+	RavenTrigger() {
+		var oldVal = this.Ravenness();
+		this.flags["Stage"] += Math.floor(10 + Math.random() * 70);
+		var newVal = this.Ravenness();
+		
+		return newVal > oldVal;
+	}
 	
-	this.level             = 20;
-	this.sexlevel          = 15;
+	FromStorage(storage : any) {
+		this.LoadPersonalityStats(storage);
+		
+		// Load flags
+		this.LoadFlags(storage);
+	}
 	
-	this.combatExp         = 800;
-	this.coinDrop          = 1500;
-	
-	this.body.DefMale();
-	// TODO: Special avatar
-	//this.avatar.combat     = Images.lago_male;
-	
-	this.Butt().buttSize.base = 2;
-	
-	this.body.SetRace(Race.Avian);
-	
-	TF.SetAppendage(this.Back(), AppendageType.wing, Race.Avian, Color.black);
-	
-	this.body.SetBodyColor(Color.white);
-	
-	this.body.SetEyeColor(Color.green);
-	
-	// Set hp and mana to full
-	this.SetLevelBonus();
-	this.RestFull();
-	
-	this.flags["Stage"]     = 0;
-	this.flags["Met"]       = 0;
-	this.flags["KeptRaven"] = 0;
-	this.flags["RBlock"]    = 0;
-	
-	if(storage) this.FromStorage(storage);
+	ToStorage() {
+		var storage = {};
+		
+		this.SavePersonalityStats(storage);
+		
+		this.SaveFlags(storage);
+		
+		return storage;
+	}	
 }
-RavenMother.prototype = new Entity();
-RavenMother.prototype.constructor = RavenMother;
 
-RavenMother.Stage = {
-	ravenstage2 : 8,
-	ravenstage3 : 12
-}
-
-RavenMother.prototype.Ravenness = function() {
-	return Math.floor(this.flags["Stage"] / 100);
-}
-
-// Increase ravenness and return trigger
-RavenMother.prototype.RavenTrigger = function() {
-	var oldVal = this.Ravenness();
-	this.flags["Stage"] += Math.floor(10 + Math.random() * 70);
-	var newVal = this.Ravenness();
-	
-	return newVal > oldVal;
-}
-
-RavenMother.prototype.FromStorage = function(storage) {
-	this.LoadPersonalityStats(storage);
-	
-	// Load flags
-	this.LoadFlags(storage);
-}
-
-RavenMother.prototype.ToStorage = function() {
-	var storage = {};
-	
-	this.SavePersonalityStats(storage);
-	
-	this.SaveFlags(storage);
-	
-	return storage;
-}
-
-RavenMotherScenes.TheHunt = function(func) {
+RavenMotherScenes.TheHunt = function(func : any) {
 	let ravenmother = GAME().ravenmother;
 	let party : Party = GAME().party;
-	var parse = {};
+	var parse : any = {};
 	
 	RavenMotherScenes.theHuntWakeup = func;
 	
@@ -146,7 +145,7 @@ RavenMotherScenes.TheHunt = function(func) {
 		Text.Add("You’re unsure what to do next, but the bird is not so uncertain. With an outraged croak, it flies straight at the corner of the room, but instead of crashing into the wall, it somehow shifts through it, and with a blur in the air it is gone.", parse);
 		Text.Flush();
 		
-		var prompt = function(asked) {
+		var prompt = function(asked : boolean) {
 			//[Ask][Investigate]
 			var options = new Array();
 			options.push({ nameStr : "Ask",
@@ -186,7 +185,7 @@ RavenMotherScenes.TheHunt = function(func) {
 
 
 RavenMotherScenes.TheHuntWolf = function() {
-	var parse = {};
+	var parse : any = {};
 	
 	Text.Clear();
 	Text.Add("...You run on all fours, as a hunter, chasing a deer. This time, however, you’re prepared, and slow to a walk, looking around at the trees above. You feel more in control of the dream now. You think you could change into a human if you tried, but there’s no need.", parse);
@@ -235,7 +234,7 @@ RavenMotherScenes.TheHuntGlade = function() {
 	let ravenmother = GAME().ravenmother;
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -288,7 +287,7 @@ RavenMotherScenes.TheHuntGlade = function() {
 RavenMotherScenes.TheHuntGladeCont = function() {
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -389,7 +388,7 @@ RavenMotherScenes.TheHuntGladeCont = function() {
 RavenMotherScenes.TheHuntTalk = function() {
 	let ravenmother = GAME().ravenmother;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -446,8 +445,8 @@ RavenMotherScenes.TheHuntTalk = function() {
 	prompt();
 }
 
-RavenMotherScenes.TheHuntQuestions = function(back) {
-	var parse = {
+RavenMotherScenes.TheHuntQuestions = function(back : any) {
+	var parse : any = {
 		
 	};
 	
@@ -500,7 +499,7 @@ RavenMotherScenes.TheHuntQuestions = function(back) {
 			Text.NL();
 			Text.Add("Soft side?", parse);
 			Text.NL();
-			parse["mage"] = Scenes.Global.MagicStage1() ? "She must be a natural mage. Apparently capable of shaping the world with her will, even if it is ‘difficult’." : "She pauses for a moment to gather her thoughts.";
+			parse["mage"] = GlobalScenes.MagicStage1() ? "She must be a natural mage. Apparently capable of shaping the world with her will, even if it is ‘difficult’." : "She pauses for a moment to gather her thoughts.";
 			Text.Add("<i>“Here, things are easy to change. On the hard side, it is difficult. Sometimes I forget which is which until I try,”</i> she confides. [mage] <i>“You are usually gone, and only come to the soft side sometimes. But I am always here.”</i>", parse);
 			Text.NL();
 			Text.Add("She is always sleeping?", parse);
@@ -515,10 +514,10 @@ RavenMotherScenes.TheHuntQuestions = function(back) {
 	Gui.SetButtonsFromList(options, true, back);
 }
 
-RavenMotherScenes.RavenPrompt = function(back) {
+RavenMotherScenes.RavenPrompt = function(back : any) {
 	let ravenmother = GAME().ravenmother;
 
-	var parse = {};
+	var parse : any = {};
 	
 	Text.Clear();
 	
@@ -565,4 +564,4 @@ RavenMotherScenes.RavenPrompt = function(back) {
 	Gui.SetButtonsFromList(options, true, back);
 }
 
-export { RavenMother, RavenMotherScenes };
+export { RavenMotherScenes };

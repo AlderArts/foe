@@ -6,7 +6,7 @@
 
 import { Entity } from '../entity';
 import { EncounterTable } from '../encountertable';
-import { MoveToLocation, GAME, WORLD } from '../GAME';
+import { MoveToLocation, GAME, WORLD, TimeStep } from '../GAME';
 import { Gender } from '../body/gender';
 import { Images } from '../assets';
 import { Time } from '../time';
@@ -14,129 +14,119 @@ import { Race } from '../body/race';
 import { WorldTime } from '../GAME';
 import { Text } from '../text';
 import { Gui } from '../gui';
+import { MomoFlags } from './momo-flags';
+import { Party } from '../party';
+import { Status } from '../statuseffect';
 
-let MomoScenes = {};
+let MomoScenes : any = {};
 
-function Momo(storage) {
-	Entity.call(this);
-	this.ID = "momo";
-	
-	// Character stats
-	this.name = "Momo";
-	
-	this.avatar.combat = Images.momo;
-	
-	// TODO Stats
-	this.maxHp.base        = 30;
-	this.maxSp.base        = 40;
-	this.maxLust.base      = 20;
-	// Main stats
-	this.strength.base     = 10;
-	this.stamina.base      = 11;
-	this.dexterity.base    = 22;
-	this.intelligence.base = 17;
-	this.spirit.base       = 19;
-	this.libido.base       = 18;
-	this.charisma.base     = 16;
-	
-	this.level = 1;
-	this.sexlevel = 1;
-	
-	this.body.DefFemale();
-	this.FirstBreastRow().size.base = 12.5;
-	this.Butt().buttSize.base = 6;
-	this.body.SetRace(Race.Dragon);
-	
-	this.SetLevelBonus();
-	this.RestFull();
-	
-	this.flags["Met"]     = Momo.Met.NotMet;
-	this.flags["tSelf"]   = 0;
-	this.flags["tFamily"] = 0;
-	this.flags["tCook"]   = Momo.TalkCook.First;
-	this.flags["tSkills"] = 0;
-	
-	this.wanderTimer = new Time();
 
-	if(storage) this.FromStorage(storage);
-}
-Momo.prototype = new Entity();
-Momo.prototype.constructor = Momo;
+export class Momo extends Entity {
+	wanderTimer : Time;
 
-Momo.Met = {
-	NotMet    : 0,
-	Wandering : 1,
-	CampFirst : 2,
-	Camp      : 3,
-	Follower  : 4,
-	Ascended  : 5
-};
+	constructor(storage? : any) {
+		super();
 
-Momo.TalkCook = {
-	First       : 0,
-	BigFamily   : 1,
-	SmallFamily : 2,
-	OnlyChild   : 3
-};
+		this.ID = "momo";
+		
+		// Character stats
+		this.name = "Momo";
+		
+		this.avatar.combat = Images.momo;
+		
+		// TODO Stats
+		this.maxHp.base        = 30;
+		this.maxSp.base        = 40;
+		this.maxLust.base      = 20;
+		// Main stats
+		this.strength.base     = 10;
+		this.stamina.base      = 11;
+		this.dexterity.base    = 22;
+		this.intelligence.base = 17;
+		this.spirit.base       = 19;
+		this.libido.base       = 18;
+		this.charisma.base     = 16;
+		
+		this.level = 1;
+		this.sexlevel = 1;
+		
+		this.body.DefFemale();
+		this.FirstBreastRow().size.base = 12.5;
+		this.Butt().buttSize.base = 6;
+		this.body.SetRace(Race.Dragon);
+		
+		this.SetLevelBonus();
+		this.RestFull();
+		
+		this.flags["Met"]     = MomoFlags.Met.NotMet;
+		this.flags["tSelf"]   = 0;
+		this.flags["tFamily"] = 0;
+		this.flags["tCook"]   = MomoFlags.TalkCook.First;
+		this.flags["tSkills"] = 0;
+		
+		this.wanderTimer = new Time();
 
-Momo.prototype.Wandering = function() {
-	return this.flags["Met"] < Momo.Met.CampFirst && this.wanderTimer.Expired();
-}
-Momo.prototype.AtCamp = function() {
-	return this.flags["Met"] >= Momo.Met.CampFirst && this.flags["Met"] <= Momo.Met.Camp;
-}
-Momo.prototype.Ascended = function() {
-	return this.flags["Met"] >= Momo.Met.Ascended;
-}
-Momo.prototype.IsFollower = function() {
-	return this.flags["Met"] >= Momo.Met.Follower;
-}
-
-Momo.prototype.Update = function(step) {
-	Entity.prototype.Update.call(this, step);
-	
-	this.wanderTimer.Dec(step);
-}
-
-Momo.prototype.FromStorage = function(storage) {
-	this.LoadPersonalityStats(storage);
-	this.body.FromStorage(storage.body);
-	
-	// Load flags
-	this.LoadFlags(storage);
-	this.LoadSexFlags(storage);
-	
-	//TODO combat stats
-	
-	this.wanderTimer.FromStorage(storage.wTime);
-}
-
-Momo.prototype.ToStorage = function() {
-	var storage = {};
-	
-	this.SavePersonalityStats(storage);
-	this.SaveBodyPartial(storage, {ass: true, vag: true});
-	
-	this.SaveFlags(storage);
-	this.SaveSexFlags(storage);
-	
-	storage.wTime = this.wanderTimer.ToStorage();
-	
-	return storage;
-}
-
-// Schedule
-Momo.prototype.IsAtLocation = function(location) {
-	location = location || GAME().party.location;
-	if(location == WORLD().loc.Plains.Nomads.Fireplace && this.AtCamp() && WorldTime().hour >= 4 && WorldTime().hour < 21) {
-		return true;
+		if(storage) this.FromStorage(storage);
 	}
-	return false;
-}
 
+
+	Wandering() {
+		return this.flags["Met"] < MomoFlags.Met.CampFirst && this.wanderTimer.Expired();
+	}
+	AtCamp() {
+		return this.flags["Met"] >= MomoFlags.Met.CampFirst && this.flags["Met"] <= MomoFlags.Met.Camp;
+	}
+	Ascended() {
+		return this.flags["Met"] >= MomoFlags.Met.Ascended;
+	}
+	IsFollower() {
+		return this.flags["Met"] >= MomoFlags.Met.Follower;
+	}
+	
+	Update(step : number) {
+		super.Update(step);		
+		this.wanderTimer.Dec(step);
+	}
+	
+	FromStorage(storage : any) {
+		this.LoadPersonalityStats(storage);
+		this.body.FromStorage(storage.body);
+		
+		// Load flags
+		this.LoadFlags(storage);
+		this.LoadSexFlags(storage);
+		
+		//TODO combat stats
+		
+		this.wanderTimer.FromStorage(storage.wTime);
+	}
+	
+	ToStorage() {
+		var storage : any = {};
+		
+		this.SavePersonalityStats(storage);
+		this.SaveBodyPartial(storage, {ass: true, vag: true});
+		
+		this.SaveFlags(storage);
+		this.SaveSexFlags(storage);
+		
+		storage.wTime = this.wanderTimer.ToStorage();
+		
+		return storage;
+	}
+	
+	// Schedule
+	IsAtLocation(location? : any) {
+		location = location || GAME().party.location;
+		if(location == WORLD().loc.Plains.Nomads.Fireplace && this.AtCamp() && WorldTime().hour >= 4 && WorldTime().hour < 21) {
+			return true;
+		}
+		return false;
+	}	
+}
 MomoScenes.MomoEnc = function() {
 	let momo = GAME().momo;
-	if(momo.flags["Met"] == Momo.Met.NotMet)
+	if(momo.flags["Met"] == MomoFlags.Met.NotMet)
 		MomoScenes.FindingMomo();
 	else
 		MomoScenes.WanderingMomo();
@@ -145,7 +135,10 @@ MomoScenes.MomoEnc = function() {
 MomoScenes.FindingMomo = function() {
 	let player = GAME().player;
 	let party : Party = GAME().party;
-	var parse = {
+	let momo = GAME().momo;
+	let world = WORLD();
+
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -198,7 +191,7 @@ MomoScenes.FindingMomo = function() {
 			Text.Add("With the beaming dragon-girl hot on your trail, you set about confidently, retracing your steps.", parse);
 			Text.Flush();
 			
-			momo.flags["Met"] = Momo.Met.CampFirst;
+			momo.flags["Met"] = MomoFlags.Met.CampFirst;
 			
 			Gui.NextPrompt(function() {
 				MoveToLocation(world.loc.Plains.Nomads.Fireplace, {hour : 1});
@@ -222,7 +215,7 @@ MomoScenes.FindingMomo = function() {
 			Text.Add("Shaking your head, you turn around and head back to the Nomads’ camp. You run into all kinds of lunatics out on the roads it looks like.", parse);
 			Text.Flush();
 			
-			momo.flags["Met"] = Momo.Met.Wandering;
+			momo.flags["Met"] = MomoFlags.Met.Wandering;
 			
 			TimeStep({hour: 1});
 			
@@ -237,7 +230,9 @@ MomoScenes.FindingMomo = function() {
 
 MomoScenes.WanderingMomo = function() {
 	let player = GAME().player;
-	var parse = {
+	let momo = GAME().momo;
+
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -273,10 +268,10 @@ MomoScenes.WanderingMomo = function() {
 			Text.Add("With the beaming dragon-girl hot on your trail, you set about confidently, retracing your steps.", parse);
 			Text.Flush();
 			
-			momo.flags["Met"] = Momo.Met.CampFirst;
+			momo.flags["Met"] = MomoFlags.Met.CampFirst;
 			
 			Gui.NextPrompt(function() {
-				MoveToLocation(world.loc.Plains.Nomads.Fireplace, {hour : 1});
+				MoveToLocation(WORLD().loc.Plains.Nomads.Fireplace, {hour : 1});
 			});
 		}, enabled : true,
 		tooltip : "Let your pity win over and help the girl."
@@ -300,13 +295,15 @@ MomoScenes.WanderingMomo = function() {
 
 MomoScenes.Interact = function() {
 	let player = GAME().player;
-	var parse = {
+	let momo = GAME().momo;
+
+	var parse : any = {
 		playername : player.name
 	};
 	
 	Text.Clear();
-	if(momo.flags["Met"] <= Momo.Met.CampFirst) {
-		momo.flags["Met"] = Momo.Met.Camp;
+	if(momo.flags["Met"] <= MomoFlags.Met.CampFirst) {
+		momo.flags["Met"] = MomoFlags.Met.Camp;
 		Text.Add("<i>“Oh, come on! Where is it? Couldn’t just get up and walk away!”</i>", parse);
 		Text.NL();
 		Text.Add("As you approach the tent by the fire where Momo now lives, you hear the dragonette complaining about something. You see a great variety of pots, pans and other cooking implements scattered around the entry into the tent, whilst Momo herself is currently bent over rummaging through something in its interior. Her hips wriggle and twitch restlessly as she browses, making her ass jiggle quite nicely. The dragon-girl’s long, swaying tail above it draws your eyes to her shapely rump.", parse);
@@ -416,7 +413,7 @@ MomoScenes.Interact = function() {
 //TODO
 MomoScenes.Prompt = function() {
 	let player = GAME().player;
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -458,8 +455,10 @@ MomoScenes.Prompt = function() {
 
 MomoScenes.CookPrompt = function() {
 	let player = GAME().player;
+	let momo = GAME().momo;
 	let party : Party = GAME().party;
-	var parse = {
+
+	var parse : any = {
 		playername : player.name,
 		girlMorph  : momo.Ascended() ? "morph" : "girl",
 		dragonette : momo.Ascended() ? "dragon" : "dragonette",
@@ -521,7 +520,7 @@ MomoScenes.CookPrompt = function() {
 			TimeStep({hour: 1});
 			
 			for(var i = 0; i < tempParty.length; ++i) {
-				var c = tempParty[i];
+				var c : Entity = tempParty[i];
 				c.AddHPFraction(0.3);
 				c.AddSPFraction(0.3);
 				Status.Full(c, {hours: 8, exp: 1.1});
@@ -548,7 +547,7 @@ MomoScenes.CookPrompt = function() {
 MomoScenes.TalkPrompt = function() {
 	let player = GAME().player;
 	let momo = GAME().momo;
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		girlMorph  : momo.Ascended() ? "morph" : "girl",
 		dragonette : momo.Ascended() ? "dragon" : "dragonette"
@@ -795,7 +794,7 @@ MomoScenes.TalkPrompt = function() {
 			});
 			
 			
-			if(momo.flags["tCook"] == Momo.TalkCook.First) {
+			if(momo.flags["tCook"] == MomoFlags.TalkCook.First) {
 				Text.Add("Head tilting to the side, she directs an inquisitive look at you. <i>“What about you, [playername]? What kind of family did you come from?”</i> she asks, her tone innocent and sincerely interested.", parse);
 				Text.Flush();
 				
@@ -815,7 +814,7 @@ MomoScenes.TalkPrompt = function() {
 							Text.NL();
 						}
 						
-						momo.flags["tCook"] = Momo.TalkCook.BigFamily;
+						momo.flags["tCook"] = MomoFlags.TalkCook.BigFamily;
 						
 						Gui.PrintDefaultOptions();
 					}, enabled : true,
@@ -833,7 +832,7 @@ MomoScenes.TalkPrompt = function() {
 							Text.NL();
 						}
 						
-						momo.flags["tCook"] = Momo.TalkCook.SmallFamily;
+						momo.flags["tCook"] = MomoFlags.TalkCook.SmallFamily;
 
 						Gui.PrintDefaultOptions();
 					}, enabled : true,
@@ -851,7 +850,7 @@ MomoScenes.TalkPrompt = function() {
 							Text.NL();
 						}
 						
-						momo.flags["tCook"] = Momo.TalkCook.OnlyChild;
+						momo.flags["tCook"] = MomoFlags.TalkCook.OnlyChild;
 						
 						Gui.PrintDefaultOptions();
 					}, enabled : true,
@@ -859,7 +858,7 @@ MomoScenes.TalkPrompt = function() {
 				});
 				Gui.SetButtonsFromList(options, false, null);
 			}
-			else if(momo.flags["tCook"] == Momo.TalkCook.BigFamily) {
+			else if(momo.flags["tCook"] == MomoFlags.TalkCook.BigFamily) {
 				Text.Add("Momo chuckles and shakes her head. <i>“I tell you, I never had any problems learning to cope with customers; my kitchen back on the farm was busy as any restaurant ever gets,”</i> she declares, sounding perversely proud of that fact. <i>“Breakfast, lunch, dinner, it was like a battle every time, and the washing up... you could have had a bath in the tub we used for all our plates and stuff...”</i>", parse);
 				Text.NL();
 				Text.Add("She trails off, looking baffled, clearly trying to recall something. Then, a dopey grin stretches her face into a beam of delight and she bursts out giggling. <i>“Actually, there was this one time, when Veran was four, when that’s exactly what I did! I just whisked her up off the floor and plunged her into the tub and started scrubbing her with the washcloths,”</i> Momo declares.", parse);
@@ -876,14 +875,14 @@ MomoScenes.TalkPrompt = function() {
 				Text.NL();
 				Gui.PrintDefaultOptions();
 			}
-			else if(momo.flags["tCook"] == Momo.TalkCook.SmallFamily) {
+			else if(momo.flags["tCook"] == MomoFlags.TalkCook.SmallFamily) {
 				Text.Add("Momo looks thoughtful for a moment, staring wistfully off into space. <i>“You want to know the truth? There are times I kind of wished my family was a little smaller. I mean, don’t get me wrong, I loved having brothers and sisters! It’s just... well, sometimes I wouldn’t have minded a little more attention from Mom and Dad, or just a little less noise in general.”</i>", parse);
 				Text.NL();
 				Text.Add("A frown crosses her face now. <i>“Not to mention there’s always been some little brats I wouldn’t have minded not having around,”</i> she grumbles, but it’s the half-hearted grumble of an exasperated older sibling; no venom to it at all.", parse);
 				Text.NL();
 				Gui.PrintDefaultOptions();
 			}
-			else { // if(momo.flags["tCook"] == Momo.TalkCook.OnlyChild)
+			else { // if(momo.flags["tCook"] == MomoFlags.TalkCook.OnlyChild)
 				Text.Add("Momo purses her lips, tapping them in thought. <i>“Well, I guess there’s some good things to say about being an only child. You never have to worry about your parents not having time for you, you don’t have to share all your stuff, you don’t have bratty siblings stealing your things or making kites out of your panties or pulling your tail...”</i>", parse);
 				Text.NL();
 				Text.Add("<i>“Yeah, you were lucky, [playername]; brothers and sisters can be a real pain in the ass... but then again, you never got any of the good stuff, either. You never had siblings help you out when you scraped your knee, or got your tail caught in a door. You never got to listen to your bigger siblings telling you stories, or have your little ones bring you presents they found out on the farm either. No playing together in the bath, no games together, no hiding from thunder under the covers...”</i>", parse);
@@ -895,7 +894,7 @@ MomoScenes.TalkPrompt = function() {
 		}, enabled : true,
 		tooltip : "So, what made her so fascinated with cooking, anyway?"
 	});
-	if(momo.flags["tCook"] != Momo.TalkCook.First) {
+	if(momo.flags["tCook"] != MomoFlags.TalkCook.First) {
 		options.push({ nameStr : "Skills",
 			func : function() {
 				Text.Clear();
@@ -944,7 +943,7 @@ MomoScenes.TalkPrompt = function() {
 }
 /*
 MomoScenes.FindingMomo = function() {
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -955,4 +954,4 @@ MomoScenes.FindingMomo = function() {
 }
 */
 
-export { Momo, MomoScenes };
+export { MomoScenes };

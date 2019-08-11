@@ -5,75 +5,68 @@
  */
 import { Entity } from '../entity';
 import { GetDEBUG } from '../../app';
-import { MoveToLocation, TimeStep } from '../GAME';
+import { MoveToLocation, TimeStep, WORLD, GAME } from '../GAME';
 import { Gui } from '../gui';
 import { Text } from '../text';
 import { KiakaiFlags } from './kiakai-flags';
 import { RigardFlags } from '../loc/rigard/rigard-flags';
+import { Room69Flags } from './room69-flags';
+import { Party } from '../party';
+import { GlobalScenes } from './global';
+import { NippleType } from '../body/breasts';
+import { LowerBodyType } from '../body/body';
+import { EncounterTable } from '../encountertable';
+import { Race, RaceDesc, RaceScore } from '../body/race';
 
-let Room69Scenes = {};
+let Room69Scenes : any = {};
 
-function Room69(storage) {
-	Entity.call(this);
-	this.ID = "room69";
-	
-	// Character stats
-	this.name = "Sixtynine";
-	
-	this.strength.base = 65;
-	this.spirit.base   = 65;
-	
-	this.level = 0;
-	
-	this.flags["Rel"]      = Room69.RelFlags.NotMet;
-	this.flags["Sexed"]    = 0;
-	this.flags["BadStart"] = 0;
-	this.flags["Hinges"]   = Room69.HingesFlags.No;
-	
-	this.SetLevelBonus();
-	this.RestFull();
-	
-	if(storage) this.FromStorage(storage);
-}
-Room69.prototype = new Entity();
-Room69.prototype.constructor = Room69;
+export class Room69 extends Entity {
+	constructor(storage? : any) {
+		super();
 
-Room69.RelFlags = {
-	NotMet    : 0,
-	BrokeDoor : 1,
-	BadTerms  : 2,
-	GoodTerms : 3
-};
+		this.ID = "room69";
+		
+		// Character stats
+		this.name = "Sixtynine";
+		
+		this.strength.base = 65;
+		this.spirit.base   = 65;
+		
+		this.level = 0;
+		
+		this.flags["Rel"]      = Room69Flags.RelFlags.NotMet;
+		this.flags["Sexed"]    = 0;
+		this.flags["BadStart"] = 0;
+		this.flags["Hinges"]   = Room69Flags.HingesFlags.No;
+		
+		this.SetLevelBonus();
+		this.RestFull();
+		
+		if(storage) this.FromStorage(storage);
+	}
 
-Room69.HingesFlags = {
-	No                : 0,
-	Asked             : 1,
-	TalkedToGoldsmith : 2,
-	TalkedToSmith     : 3,
-	HaveHinges        : 4,
-	Delivered         : 5
-};
+	FromStorage(storage : any) {
+		this.LoadPersonalityStats(storage);
+		
+		// Load flags
+		this.LoadFlags(storage);
+	}
 
-Room69.prototype.FromStorage = function(storage) {
-	this.LoadPersonalityStats(storage);
-	
-	// Load flags
-	this.LoadFlags(storage);
-}
+	ToStorage() {
+		var storage = {};
+		
+		this.SavePersonalityStats(storage);
+		
+		this.SaveFlags(storage);
+		
+		return storage;
+	}
 
-Room69.prototype.ToStorage = function() {
-	var storage = {};
-	
-	this.SavePersonalityStats(storage);
-	
-	this.SaveFlags(storage);
-	
-	return storage;
-}
+	// Schedule (IS a location. Heh)
+	IsAtLocation(location : any) {
+		return location == WORLD().loc.Rigard.Inn.room69;
+	}
 
-// Schedule (IS a location. Heh)
-Room69.prototype.IsAtLocation = function(location) {
-	return location == world.loc.Rigard.Inn.room69;
 }
 
 // Party interaction
@@ -99,7 +92,7 @@ Room69Scenes.Interact = function() {
 Room69Scenes.Discovering69 = function() {
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 	};
 	
 	Text.Clear();
@@ -133,7 +126,7 @@ Room69Scenes.Discovering69Prompt = function() {
 	let room69 = GAME().room69;
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 	};
 	
 	//[Sentience][What now][Leave]
@@ -206,8 +199,9 @@ Room69Scenes.Discovering69WhatNow = function() {
 	let room69 = GAME().room69;
 	let party : Party = GAME().party;
 	let player = GAME().player;
+	let world = WORLD();
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -258,8 +252,8 @@ Room69Scenes.Discovering69WhatNow = function() {
 				Text.Flush();
 				
 				room69.relation.DecreaseStat(-100, 10);
-				room69.flags["Rel"] = Room69.RelFlags.BadTerms;
-				room69.flags["BadStart"] = Room69.RelFlags.BadTerms;
+				room69.flags["Rel"] = Room69Flags.RelFlags.BadTerms;
+				room69.flags["BadStart"] = Room69Flags.RelFlags.BadTerms;
 				
 				Gui.NextPrompt(function() {
 					party.location = world.loc.Rigard.Inn.common;
@@ -289,7 +283,7 @@ Room69Scenes.Discovering69WhatNow = function() {
 				Text.NL();
 				if(player.PAttack() < 75 && player.MAttack() < 75) {
 					Text.Add("You try to kick and batter down the door, but while it rattles slightly, it shows no signs of giving.", parse);
-					if(Scenes.Global.MagicStage1())
+					if(GlobalScenes.MagicStage1())
 						Text.Add(" You attempt to supplement your attack with a few well-placed spells, but they seem to dissolve strangely in the air, as if power is being drained from them before they can fully materialize.", parse);
 					Text.Add(" As you pound fruitlessly, you hear Sixtynine humming to itself. <i>“They can’t even hear you out there, you know,”</i> it remarks idly.", parse);
 					Text.NL();
@@ -343,7 +337,7 @@ Room69Scenes.Discovering69WhatNow = function() {
 Room69Scenes.Discovering69OrvinRant = function() {
 	let party : Party = GAME().party;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	parse["IkName"] = !RigardFlags.LB.KnowsOrvin() ? "The innkeeper" : "Orvin";
@@ -371,8 +365,9 @@ Room69Scenes.Discovering69OrvinRant = function() {
 Room69Scenes.Discovering69ForceOutro = function() {
 	let room69 = GAME().room69;
 	let party : Party = GAME().party;
+	let world = WORLD();
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	parse["IkName"] = !RigardFlags.LB.KnowsOrvin() ? "The innkeeper" : "Orvin";
@@ -395,8 +390,8 @@ Room69Scenes.Discovering69ForceOutro = function() {
 	Text.Flush();
 	
 	room69.relation.DecreaseStat(-100, 25);
-	room69.flags["Rel"] = Room69.RelFlags.BrokeDoor;
-	room69.flags["BadStart"] = Room69.RelFlags.BrokeDoor;
+	room69.flags["Rel"] = Room69Flags.RelFlags.BrokeDoor;
+	room69.flags["BadStart"] = Room69Flags.RelFlags.BrokeDoor;
 	
 	Gui.NextPrompt(function() {
 		party.location = world.loc.Rigard.Inn.common;
@@ -424,8 +419,14 @@ Room69Scenes.Discovering69Sex = function() {
 	let room69 = GAME().room69;
 	let party : Party = GAME().party;
 	let player = GAME().player;
+	let kiakai = GAME().kiakai;
+	let lei = GAME().lei;
+	let miranda = GAME().miranda;
+	let gwendy = GAME().gwendy;
+	let roa = GAME().roa;
+	let world = WORLD();
 
-	var parse = {
+	var parse : any = {
 		playername      : function() { return player.name; },
 		topArmorDesc    : function() { return player.ArmorDesc(); },
 		topitthem       : function() { return player.Armor() ? "it" : "them"; },
@@ -673,7 +674,7 @@ Room69Scenes.Discovering69Sex = function() {
 		TimeStep({hour : 3});
 		player.AddLustFraction(-1);
 		room69.flags["Sexed"]++;
-		room69.flags["Rel"] = Room69.RelFlags.GoodTerms;
+		room69.flags["Rel"] = Room69Flags.RelFlags.GoodTerms;
 		room69.relation.IncreaseStat(100, 10);
 		
 		if(party.Num() <= 1) {
@@ -754,12 +755,12 @@ Room69Scenes.ApologizeTo69ForBreakingDoor = function() {
 	let room69 = GAME().room69;
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	Text.Clear();
 	
-	if(room69.flags["Hinges"] == Room69.HingesFlags.No) {
+	if(room69.flags["Hinges"] == Room69Flags.HingesFlags.No) {
 		Text.Add("You head up to the third floor, feeling a little guilty about the way your last encounter with Sixtynine ended.", parse);
 		Text.NL();
 		Text.Add("An oak door has been installed to replace the one you broke, making the room blatantly stand out compared to the ones around it. Looks like they managed to finish the repairs very quickly, though you wonder if they sacrificed quality to get it done.", parse);
@@ -787,7 +788,7 @@ Room69Scenes.ApologizeTo69ForBreakingDoor = function() {
 				Text.NL();
 				Text.Add("You nod and take your leave. Looks like you’ll have to find a smith to make those hinges if you want to get back in the room’s good graces. But at least you made an effort and said you’re sorry, so this will probably be enough to get the innkeeper to let you stay at the inn again.", parse);
 				Text.Flush();
-				room69.flags["Hinges"] = Room69.HingesFlags.Asked;
+				room69.flags["Hinges"] = Room69Flags.HingesFlags.Asked;
 				TimeStep({minute: 30});
 				Gui.NextPrompt();
 			}, enabled : true,
@@ -805,7 +806,7 @@ Room69Scenes.ApologizeTo69ForBreakingDoor = function() {
 	else { // Not delivered hinges
 		Text.Add("<i>“Well. It’s you,”</i> Sixtynine greets you, still sulky despite letting you in. <i>“Does this mean you brought me my hinges?”</i>", parse);
 		Text.NL();
-		if(room69.flags["Hinges"] != Room69.HingesFlags.HaveHinges) {
+		if(room69.flags["Hinges"] != Room69Flags.HingesFlags.HaveHinges) {
 			Text.Add("You tell the room that you don’t have the hinges just yet, but you’re working on it.", parse);
 			Text.NL();
 			Text.Add("<i>“No hinges, no you being here!”</i> the voice exclaims imperiously. <i>“Begone!”</i>", parse);
@@ -825,8 +826,8 @@ Room69Scenes.ApologizeTo69ForBreakingDoor = function() {
 			Text.Add("You wonder just how the room is going to install the hinges, but accept its wishes and head out.", parse);
 			Text.Flush();
 			
-			room69.flags["Hinges"] = Room69.HingesFlags.Delivered; // delivered
-			room69.flags["Rel"]    = Room69.RelFlags.GoodTerms;
+			room69.flags["Hinges"] = Room69Flags.HingesFlags.Delivered; // delivered
+			room69.flags["Rel"]    = Room69Flags.RelFlags.GoodTerms;
 			
 			room69.relation.IncreaseStat(100, 10); //-15
 			
@@ -840,7 +841,7 @@ Room69Scenes.ApologizeTo69ForBeingMean = function() {
 	let room69 = GAME().room69;
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		hisher : player.mfTrue("his", "her")
 	};
 	
@@ -891,7 +892,7 @@ Room69Scenes.ApologizeTo69ForBeingMean = function() {
 			Text.Add("You nod slightly, say something non-committal and back out the door, beating a hasty retreat. That’s enough for now - maybe you can come back later, once the mood is a bit more settled.", parse);
 			Text.Flush();
 			
-			room69.flags["Rel"] = Room69.RelFlags.GoodTerms;
+			room69.flags["Rel"] = Room69Flags.RelFlags.GoodTerms;
 			room69.relation.IncreaseStat(100, 10); //0
 			
 			TimeStep({minute: 30});
@@ -933,7 +934,7 @@ Room69Scenes.ApologizeTo69ForBeingMean = function() {
 			}
 			Text.Flush();
 			
-			room69.flags["Rel"] = Room69.RelFlags.GoodTerms;
+			room69.flags["Rel"] = Room69Flags.RelFlags.GoodTerms;
 			
 			TimeStep({minute: 30});
 			Gui.NextPrompt();
@@ -952,7 +953,7 @@ Room69Scenes.ApologizeTo69ForBeingMean = function() {
 
 // TODO: PLACEHOLDER
 Room69Scenes.Normal69 = function() {
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -977,7 +978,7 @@ Room69Scenes.Normal69 = function() {
 
 /*
 Room69Scenes.Discovering69 = function() {
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -988,4 +989,4 @@ Room69Scenes.Discovering69 = function() {
 }
 */
 
-export { Room69, Room69Scenes };
+export { Room69Scenes };

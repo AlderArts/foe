@@ -36,8 +36,6 @@ import './js/event/asche-sex.js';
 import './js/event/cassidy.js';
 import './js/event/cassidy-sex.js';
 import './js/event/fera.js';
-import './js/event/terry.js';
-import './js/event/momo.js';
 
 import './js/event/royals/lei.js';
 import './js/event/royals/lei-tasks.js';
@@ -46,8 +44,6 @@ import './js/event/royals/twins.js';
 import './js/event/royals/jeanne.js';
 import './js/event/royals/golem.js';
 
-import './js/event/room69.js';
-
 import './js/event/outlaws/aquilius.js';
 import './js/event/outlaws/maria.js';
 import './js/event/outlaws/cveta.js';
@@ -55,8 +51,6 @@ import './js/event/outlaws/cveta-date.js';
 import './js/event/outlaws/vaughn.js';
 import './js/event/outlaws/bulltower.js';
 import './js/event/outlaws/cavalcade.js';
-
-import './js/event/raven.js';
 
 // Start up the main text
 import './js/main-entry';
