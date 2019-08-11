@@ -1,10 +1,12 @@
-import { WorldTime } from "../../GAME";
+import { WorldTime, GAME, TimeStep } from "../../GAME";
 import { SetGameState, GameState } from "../../gamestate";
 import { Gui } from "../../gui";
 import { Text } from "../../text";
 import { Entity } from "../../entity";
+import { Party } from "../../party";
+import { Cavalcade } from "../../cavalcade";
 
-let OCavalcadeScenes = {};
+let OCavalcadeScenes : any = {};
 
 OCavalcadeScenes.Bet = function() {
 	return 10; //TODO
@@ -18,7 +20,7 @@ OCavalcadeScenes.PrepRandomCoinGame = function() {
 	let party : Party = GAME().party;
 	
 	var onEnd = function() {
-		var parse = {
+		var parse : any = {
 			playername : player.name
 		};
 		
@@ -64,7 +66,7 @@ OCavalcadeScenes.PrepRandomCoinGame = function() {
 	var players = [player];
 	
 	for(var i = 0; i < 3; i++) {
-		var ent = new Entity();
+		var ent : any = new Entity();
 		
 		ent.name = "Outlaw";
 		ent.purse = { coin: 100 };

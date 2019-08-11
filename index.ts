@@ -50,7 +50,6 @@ import './js/event/outlaws/cveta.js';
 import './js/event/outlaws/cveta-date.js';
 import './js/event/outlaws/vaughn.js';
 import './js/event/outlaws/bulltower.js';
-import './js/event/outlaws/cavalcade.js';
 
 // Start up the main text
 import './js/main-entry';
