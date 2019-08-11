@@ -17,57 +17,76 @@ import { Sex } from '../../entity-sex';
 import { CaleFlags } from './cale-flags';
 import { EstevanFlags } from './estevan-flags';
 import { PregnancyHandler } from '../../pregnancy';
+import { Jobs } from '../../job';
+import { Orifice } from '../../body/orifice';
+import { EncounterTable } from '../../encountertable';
+import { Party } from '../../party';
 
-let EstevanScenes = {};
+let EstevanScenes : any = {};
 
-function Estevan(storage) {
-	Entity.call(this);
-	this.ID = "estevan";
-	
-	this.name         = "Estevan";
-	
-	this.body.DefMale();
-	this.body.legs.race = Race.Satyr;
-	this.SetSkinColor(Color.olive);
-	this.SetHairColor(Color.black);
-	TF.SetAppendage(this.Back(), AppendageType.horn, Race.Satyr, Color.black, 2);
-	
-	this.SetLevelBonus();
-	this.RestFull();
-	
-	this.flags["Met"]    = 0;
-	this.flags["Ranger"] = EstevanFlags.Ranger.NotTalked;
-	this.flags["Cheat"]  = EstevanFlags.Cheat.NotTalked;
-	this.flags["cav"]    = 0; //cavalcade explanation
-	this.flags["Gay"]    = EstevanFlags.GaySex.No;
-	
-	if(storage) this.FromStorage(storage);
+export class Estevan extends Entity {
+	constructor(storage? : any) {
+		super();
+
+		this.ID = "estevan";
+		
+		this.name         = "Estevan";
+		
+		this.body.DefMale();
+		this.body.legs.race = Race.Satyr;
+		this.SetSkinColor(Color.olive);
+		this.SetHairColor(Color.black);
+		TF.SetAppendage(this.Back(), AppendageType.horn, Race.Satyr, Color.black, 2);
+		
+		this.SetLevelBonus();
+		this.RestFull();
+		
+		this.flags["Met"]    = 0;
+		this.flags["Ranger"] = EstevanFlags.Ranger.NotTalked;
+		this.flags["Cheat"]  = EstevanFlags.Cheat.NotTalked;
+		this.flags["cav"]    = 0; //cavalcade explanation
+		this.flags["Gay"]    = EstevanFlags.GaySex.No;
+		
+		if(storage) this.FromStorage(storage);
+	}
+		
+	Met() {
+		return this.flags["Met"] != 0;
+	}
+
+	FromStorage(storage : any) {
+		this.LoadPersonalityStats(storage);
+		this.body.FromStorage(storage.body);
+		// Load flags
+		this.LoadFlags(storage);
+	}
+
+	ToStorage() {
+		var storage = {};
+		
+		this.SavePersonalityStats(storage);
+		this.SaveBodyPartial(storage, {ass: true});
+		this.SaveFlags(storage);
+		
+		return storage;
+	}
+
+	// Schedule
+	IsAtLocation(location : any) {
+		let party : Party = GAME().party;
+		location = location || party.location;
+		if(location == WORLD().loc.Plains.Nomads.Fireplace)
+			return (WorldTime().hour >= 15 || WorldTime().hour < 3);
+		return false;
+	}
+
+	HadGaySex() {
+		return this.flags["Gay"] >= EstevanFlags.GaySex.First;
+	}
+
 }
-Estevan.prototype = new Entity();
-Estevan.prototype.constructor = Estevan;
 
-Estevan.prototype.Met = function() {
-	return this.flags["Met"] != 0;
-}
-
-Estevan.prototype.FromStorage = function(storage) {
-	this.LoadPersonalityStats(storage);
-	this.body.FromStorage(storage.body);
-	// Load flags
-	this.LoadFlags(storage);
-}
-
-Estevan.prototype.ToStorage = function() {
-	var storage = {};
-	
-	this.SavePersonalityStats(storage);
-	this.SaveBodyPartial(storage, {ass: true});
-	this.SaveFlags(storage);
-	
-	return storage;
-}
-
-EstevanScenes.Impregnate = function(mother, slot) {
+EstevanScenes.Impregnate = function(mother : Entity, slot? : number) {
 	let estevan = GAME().estevan;
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
@@ -80,24 +99,11 @@ EstevanScenes.Impregnate = function(mother, slot) {
 	});
 }
 
-// Schedule
-Estevan.prototype.IsAtLocation = function(location) {
-	let party : Party = GAME().party;
-	location = location || party.location;
-	if(location == WORLD().loc.Plains.Nomads.Fireplace)
-		return (WorldTime().hour >= 15 || WorldTime().hour < 3);
-	return false;
-}
-
-Estevan.prototype.HadGaySex = function() {
-	return this.flags["Gay"] >= EstevanFlags.GaySex.First;
-}
-
 EstevanScenes.Interact = function() {
 	let player = GAME().player;
 	let cale = GAME().cale;
 	let estevan = GAME().estevan;
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -762,4 +768,4 @@ EstevanScenes.SexGay = function() {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-export { Estevan, EstevanScenes };
+export { EstevanScenes };

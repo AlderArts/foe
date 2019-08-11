@@ -10,9 +10,9 @@ import { Race } from '../../body/race';
 import { GameCache, GAME } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
-import { Rosalin } from '../nomads/rosalin';
 import { Items } from '../../items';
 import { TerryFlags } from '../terry-flags';
+import { RosalinFlags } from '../nomads/rosalin-flags';
 
 let JeanneScenes = {};
 
@@ -71,7 +71,7 @@ Jeanne.prototype.FromStorage = function(storage) {
 	
 	// Load flags
 	this.LoadFlags(storage);
-	if(GAME().rosalin.flags["Anusol"] >= Rosalin.Anusol.ShowedJeanne)
+	if(GAME().rosalin.flags["Anusol"] >= RosalinFlags.Anusol.ShowedJeanne)
 		this.recipes.push(Items.AnusolPlus);
 }
 
@@ -448,11 +448,11 @@ JeanneScenes.Talk = function() {
 			tooltip : "Ask the court mage about her former pupil."
 		});
 		
-		if(party.Inv().QueryNum(Items.Anusol) && rosalin.flags["Anusol"] < Rosalin.Anusol.ShowedJeanne) {
+		if(party.Inv().QueryNum(Items.Anusol) && rosalin.flags["Anusol"] < RosalinFlags.Anusol.ShowedJeanne) {
 			options.push({ nameStr : "Rosalin’s pot",
 				tooltip : "You wonder what Jeanne would have to say about this new potion of Rosalin’s. Maybe showing it to her would be a good idea?",
 				func : function() {
-					rosalin.flags["Anusol"] = Rosalin.Anusol.ShowedJeanne;
+					rosalin.flags["Anusol"] = RosalinFlags.Anusol.ShowedJeanne;
 					jeanne.recipes.push(Items.AnusolPlus);
 					
 					Text.Clear();

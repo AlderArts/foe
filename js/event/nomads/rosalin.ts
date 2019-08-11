@@ -3,6 +3,7 @@
  * Define Rosalin
  *
  */
+import * as _ from 'lodash';
 
 import { Entity } from '../../entity';
 import { Gender } from '../../body/gender';
@@ -10,10 +11,10 @@ import { RaceScore, Race } from '../../body/race';
 import { AlchemyItems } from '../../items/alchemy';
 import { AlchemySpecial } from '../../items/alchemyspecial';
 import { Color } from '../../body/color';
-import { Body } from '../../body/body';
-import { TF } from '../../tf';
+import { Body, LowerBodyType } from '../../body/body';
+import { TF, TFItem } from '../../tf';
 import { AppendageType } from '../../body/appendage';
-import { WorldTime, GAME, WORLD } from '../../GAME';
+import { WorldTime, GAME, WORLD, TimeStep } from '../../GAME';
 import { BodyPartType } from '../../body/bodypart';
 import { Sex } from '../../entity-sex';
 import { PregnancyHandler } from '../../pregnancy';
@@ -23,177 +24,181 @@ import { Alchemy } from '../../alchemy';
 import { CaleFlags } from './cale-flags';
 import { TerryFlags } from '../terry-flags';
 import { KiakaiFlags } from '../kiakai-flags';
+import { RosalinFlags } from './rosalin-flags';
+import { Party } from '../../party';
+import { EncounterTable } from '../../encountertable';
+import { Cock } from '../../body/cock';
+import { Rand } from '../../utility';
+import { CaleScenes } from './cale-scenes';
+import { TerryScenes } from '../terry';
+import { StrapOnItems } from '../../items/strapon';
 
-let RosalinScenes = {};
+let RosalinScenes : any = {};
 
-function Rosalin(storage) {
-	Entity.call(this);
-	this.ID = "rosalin";
+export class Rosalin extends Entity {
+	origRaceScore : RaceScore;
 
-	this.ResetBody();
-	this.origRaceScore = new RaceScore(this.body);
+	constructor(storage? : any) {
+		super();
 
-	this.name         = "Rosalin";
-	this.alchemyLevel = 3;
+		this.ID = "rosalin";
 
-	this.recipes.push(AlchemyItems.Equinium);
-	this.recipes.push(AlchemyItems.Leporine);
-	this.recipes.push(AlchemyItems.Felinix);
-	this.recipes.push(AlchemyItems.Lacertium);
-	this.recipes.push(AlchemySpecial.Nagazm);
-	this.recipes.push(AlchemyItems.Bovia);
-	this.recipes.push(AlchemyItems.Canis);
-	this.recipes.push(AlchemyItems.Lobos);
-	this.recipes.push(AlchemyItems.Vulpinix);
-	this.recipes.push(AlchemyItems.Scorpius);
-	this.recipes.push(AlchemyItems.Lepida);
-	this.recipes.push(AlchemyItems.Avia);
-	this.recipes.push(AlchemyItems.Ovis);
+		this.ResetBody();
+		this.origRaceScore = new RaceScore(this.body);
 
-	this.flags["PrefGender"]   = Gender.female;
+		this.name         = "Rosalin";
+		this.alchemyLevel = 3;
 
-	this.flags["Met"]          = 0;
-	this.flags["AlQuest"]      = 0;
-	this.flags["PastDialog"]   = Rosalin.PastDialog.Past;
-	this.flags["TreeCityTalk"] = 0;
+		this.recipes.push(AlchemyItems.Equinium);
+		this.recipes.push(AlchemyItems.Leporine);
+		this.recipes.push(AlchemyItems.Felinix);
+		this.recipes.push(AlchemyItems.Lacertium);
+		this.recipes.push(AlchemySpecial.Nagazm);
+		this.recipes.push(AlchemyItems.Bovia);
+		this.recipes.push(AlchemyItems.Canis);
+		this.recipes.push(AlchemyItems.Lobos);
+		this.recipes.push(AlchemyItems.Vulpinix);
+		this.recipes.push(AlchemyItems.Scorpius);
+		this.recipes.push(AlchemyItems.Lepida);
+		this.recipes.push(AlchemyItems.Avia);
+		this.recipes.push(AlchemyItems.Ovis);
 
-	// Firsttime TFs
-	this.flags["Felinix"]        = 0;
-	this.flags["Leporine"]       = 0;
-	this.flags["Equinium"]       = 0;
-	this.flags["Equinium+"]      = 0;
-	this.flags["TakenEquinium+"] = 0;
-	this.flags["Lacertium"]      = 0;
-	this.flags["Nagazm"]         = 0;
-	this.flags["Bovia"]          = 0;
-	this.flags["Canis"]          = 0;
-	this.flags["Lobos"]          = 0;
-	this.flags["Vulpinix"]       = 0;
-	this.flags["Scorpius"]       = 0;
-	this.flags["Lepida"]         = 0;
-	this.flags["Avia"]           = 0;
-	this.flags["Ovis"]           = 0;
-	this.flags["Anusol"]         = 0;
+		this.flags["PrefGender"]   = Gender.female;
 
-	if(storage) this.FromStorage(storage);
+		this.flags["Met"]          = 0;
+		this.flags["AlQuest"]      = 0;
+		this.flags["PastDialog"]   = RosalinFlags.PastDialog.Past;
+		this.flags["TreeCityTalk"] = 0;
+
+		// Firsttime TFs
+		this.flags["Felinix"]        = 0;
+		this.flags["Leporine"]       = 0;
+		this.flags["Equinium"]       = 0;
+		this.flags["Equinium+"]      = 0;
+		this.flags["TakenEquinium+"] = 0;
+		this.flags["Lacertium"]      = 0;
+		this.flags["Nagazm"]         = 0;
+		this.flags["Bovia"]          = 0;
+		this.flags["Canis"]          = 0;
+		this.flags["Lobos"]          = 0;
+		this.flags["Vulpinix"]       = 0;
+		this.flags["Scorpius"]       = 0;
+		this.flags["Lepida"]         = 0;
+		this.flags["Avia"]           = 0;
+		this.flags["Ovis"]           = 0;
+		this.flags["Anusol"]         = 0;
+
+		if(storage) this.FromStorage(storage);
+	}
+
+	Met() {
+		return this.flags["Met"] != 0;
+	}
+	
+	FromStorage(storage : any) {
+		storage = storage || {};
+	
+		this.body.FromStorage(storage.body);
+		this.LoadPregnancy(storage);
+		this.LoadLactation(storage);
+	
+		// Load flags
+		this.LoadFlags(storage);
+		this.LoadPersonalityStats(storage);
+	
+		if(this.flags["Anusol"] >= RosalinFlags.Anusol.Brewed)
+			this.AddAlchemy(AlchemySpecial.Anusol);
+	}
+	
+	ToStorage() {
+		var storage : any = {};
+	
+		storage.body = this.body.ToStorage();
+		this.SavePregnancy(storage);
+		this.SaveLactation(storage);
+	
+		this.SaveFlags(storage);
+		this.SavePersonalityStats(storage);
+	
+		return storage;
+	}
+	
+	// Reset Rosalin to her original state
+	ResetBody() {
+		this.body = new Body(this);
+		this.body.DefFemale();
+		this.FirstVag().virgin = false;
+		this.Butt().virgin = false;
+		TF.SetAppendage(this.Back(), AppendageType.tail, Race.Feline, Color.brown);
+		TF.SetRaceOne(this.Ears(), Race.Feline);
+		this.SetSkinColor(Color.bronze);
+		this.Ears().color = Color.brown;
+		TF.SetRaceOne(this.Eyes(), Race.Feline);
+		this.Eyes().color = Color.green;
+		this.Hair().color = Color.teal;
+		this.body.height.base = 155;
+		this.body.weigth.base = 49;
+		this.FirstBreastRow().size.base = 10;
+		this.Butt().buttSize.base = 6;
+	}
+	
+	heshe() {
+		var gender = this.flags["PrefGender"];
+		if(gender == Gender.male) return "he";
+		else return "she";
+	}
+	HeShe() {
+		var gender = this.flags["PrefGender"];
+		if(gender == Gender.male) return "He";
+		else return "She";
+	}
+	himher() {
+		var gender = this.flags["PrefGender"];
+		if(gender == Gender.male) return "him";
+		else return "her";
+	}
+	HimHer() {
+		var gender = this.flags["PrefGender"];
+		if(gender == Gender.male) return "Him";
+		else return "Her";
+	}
+	hisher() {
+		var gender = this.flags["PrefGender"];
+		if(gender == Gender.male) return "his";
+		else return "her";
+	}
+	HisHer() {
+		var gender = this.flags["PrefGender"];
+		if(gender == Gender.male) return "His";
+		else return "Her";
+	}
+	hishers() {
+		var gender = this.flags["PrefGender"];
+		if(gender == Gender.male) return "his";
+		else return "hers";
+	}
+	
+	// TODO More variations
+	raceDesc(compScore? : number) {
+		if(compScore == null)
+			compScore = this.origRaceScore.Compare(new RaceScore(this.body));
+		if(compScore > 0.95)
+			return "former catgirl";
+		else
+			return "catgirl";
+	}
+	
+	// Schedule
+	IsAtLocation(location : any) {
+		let party : Party = GAME().party;
+		location = location || party.location;
+		if(location == WORLD().loc.Plains.Nomads.Fireplace)
+			return (WorldTime().hour >= 12 || WorldTime().hour < 3);
+		return false;
+	}	
 }
-Rosalin.prototype = new Entity();
-Rosalin.prototype.constructor = Rosalin;
 
-Rosalin.PastDialog = {
-	Past     : 0,
-	Teacher  : 1,
-	Nomads   : 2,
-	TreeCity : 3
-}
-
-Rosalin.Anusol = {
-	OnTask            : 1,
-	TalkedToCale      : 2,
-	AskedForCalesHelp : 3,
-	DeliveryFromCale  : 4,
-	Brewed            : 5,
-	ShowedJeanne      : 6
-}
-
-Rosalin.prototype.Met = function() {
-	return this.flags["Met"] != 0;
-}
-
-Rosalin.prototype.FromStorage = function(storage) {
-	storage = storage || {};
-
-	this.body.FromStorage(storage.body);
-	this.LoadPregnancy(storage);
-	this.LoadLactation(storage);
-
-	// Load flags
-	this.LoadFlags(storage);
-	this.LoadPersonalityStats(storage);
-
-	if(this.flags["Anusol"] >= Rosalin.Anusol.Brewed)
-		this.AddAlchemy(AlchemyItems.Anusol);
-}
-
-Rosalin.prototype.ToStorage = function() {
-	var storage = {};
-
-	storage.body = this.body.ToStorage();
-	this.SavePregnancy(storage);
-	this.SaveLactation(storage);
-
-	this.SaveFlags(storage);
-	this.SavePersonalityStats(storage);
-
-	return storage;
-}
-
-// Reset Rosalin to her original state
-Rosalin.prototype.ResetBody = function() {
-	this.body = new Body(this);
-	this.body.DefFemale();
-	this.FirstVag().virgin = false;
-	this.Butt().virgin = false;
-	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Feline, Color.brown);
-	TF.SetRaceOne(this.Ears(), Race.Feline);
-	this.SetSkinColor(Color.bronze);
-	this.Ears().color = Color.brown;
-	TF.SetRaceOne(this.Eyes(), Race.Feline);
-	this.Eyes().color = Color.green;
-	this.Hair().color = Color.teal;
-	this.body.height.base = 155;
-	this.body.weigth.base = 49;
-	this.FirstBreastRow().size.base = 10;
-	this.Butt().buttSize.base = 6;
-}
-
-Rosalin.prototype.heshe = function() {
-	var gender = this.flags["PrefGender"];
-	if(gender == Gender.male) return "he";
-	else return "she";
-}
-Rosalin.prototype.HeShe = function() {
-	var gender = this.flags["PrefGender"];
-	if(gender == Gender.male) return "He";
-	else return "She";
-}
-Rosalin.prototype.himher = function() {
-	var gender = this.flags["PrefGender"];
-	if(gender == Gender.male) return "him";
-	else return "her";
-}
-Rosalin.prototype.HimHer = function() {
-	var gender = this.flags["PrefGender"];
-	if(gender == Gender.male) return "Him";
-	else return "Her";
-}
-Rosalin.prototype.hisher = function() {
-	var gender = this.flags["PrefGender"];
-	if(gender == Gender.male) return "his";
-	else return "her";
-}
-Rosalin.prototype.HisHer = function() {
-	var gender = this.flags["PrefGender"];
-	if(gender == Gender.male) return "His";
-	else return "Her";
-}
-Rosalin.prototype.hishers = function() {
-	var gender = this.flags["PrefGender"];
-	if(gender == Gender.male) return "his";
-	else return "hers";
-}
-
-// TODO More variations
-Rosalin.prototype.raceDesc = function(compScore) {
-	if(compScore == null)
-		compScore = this.origRaceScore.Compare(new RaceScore(this.body));
-	if(compScore > 0.95)
-		return "former catgirl";
-	else
-		return "catgirl";
-}
-
-RosalinScenes.Impregnate = function(mother, father, slot) {
+RosalinScenes.Impregnate = function(mother : Entity, father : Entity, slot? : number) {
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother : mother,
@@ -205,15 +210,6 @@ RosalinScenes.Impregnate = function(mother, father, slot) {
 	});
 }
 
-// Schedule
-Rosalin.prototype.IsAtLocation = function(location) {
-	let party : Party = GAME().party;
-	location = location || party.location;
-	if(location == WORLD().loc.Plains.Nomads.Fireplace)
-		return (WorldTime().hour >= 12 || WorldTime().hour < 3);
-	return false;
-}
-
 RosalinScenes.Interact = function() {
 	let player = GAME().player;
 	let party : Party = GAME().party;
@@ -221,8 +217,8 @@ RosalinScenes.Interact = function() {
 	let cale = GAME().cale;
 	var anusol = rosalin.flags["Anusol"];
 	var anusolIngredients = true;
-	if(anusol < Rosalin.Anusol.AskedForCalesHelp) {
-		_.each(Items.Anusol.recipe, function(it) {
+	if(anusol < RosalinFlags.Anusol.AskedForCalesHelp) {
+		_.each(AlchemySpecial.Anusol.recipe, function(it) {
 			anusolIngredients = anusolIngredients && (party.Inv().QueryNum(it.it) > 0);
 		});
 	}
@@ -234,14 +230,14 @@ RosalinScenes.Interact = function() {
 		RosalinScenes.FirstTime();
 		return;
 	}
-	else if((anusol >= Rosalin.Anusol.OnTask) && (anusol < Rosalin.Anusol.Brewed) && anusolIngredients) {
+	else if((anusol >= RosalinFlags.Anusol.OnTask) && (anusol < RosalinFlags.Anusol.Brewed) && anusolIngredients) {
 		RosalinScenes.BrewAnusol();
 		return;
 	}
 
 	Text.Clear();
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		heshe      : rosalin.heshe()
 	}
@@ -293,7 +289,7 @@ RosalinScenes.Interact = function() {
 
 RosalinScenes.Desc = function() {
 	let rosalin = GAME().rosalin;
-	var parse = {
+	var parse : any = {
 		extinguishedLit : (WorldTime().hour >= 19 || WorldTime().hour < 2) ? "lit" : "extinguished"
 	};
 	parse = rosalin.ParserPronouns(parse);
@@ -314,12 +310,15 @@ RosalinScenes.TalkPrompt = function() {
 	let party : Party = GAME().party;
 	let rosalin = GAME().rosalin;
 	let cale = GAME().cale;
+	let terry = GAME().terry;
+	let treecity = GAME().treecity;
+	let rigard = GAME().rigard;
 	Text.Clear();
 
 	var racescore = new RaceScore(rosalin.body);
 	var compScore = rosalin.origRaceScore.Compare(racescore);
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		raceDesc       : function() { return rosalin.raceDesc(compScore); }
 	};
@@ -364,7 +363,7 @@ RosalinScenes.TalkPrompt = function() {
 				Text.Clear();
 
 				// Removed requested items
-				var it = Items.Leporine;
+				var it = AlchemyItems.Leporine;
 				for(var j = 0; j < it.recipe.length; j++) {
 					var ingredient = it.recipe[j];
 					party.inventory.RemoveItem(ingredient.it, ingredient.num);
@@ -403,17 +402,17 @@ RosalinScenes.TalkPrompt = function() {
 				rosalin.Ears().color = Color.black;
 
 				player.alchemyLevel = 1;
-				player.AddAlchemy(Items.Leporine);
+				player.AddAlchemy(AlchemyItems.Leporine);
 				rosalin.flags["AlQuest"] = 2;
 				rosalin.relation.IncreaseStat(100, 10);
 
 				Gui.NextPrompt();
 			}, enabled : (function() {
-				var item = Items.Leporine;
+				var item = AlchemyItems.Leporine;
 				var enabled = true;
 				for(var j = 0; j < item.recipe.length; j++) {
 					var component = item.recipe[j];
-					enabled &= (party.inventory.QueryNum(component.it) >= (component.num || 1));
+					enabled = enabled && (party.inventory.QueryNum(component.it) >= (component.num || 1));
 				}
 				return enabled;
 			})(),
@@ -438,7 +437,7 @@ RosalinScenes.TalkPrompt = function() {
 			tooltip : "Have Rosalin repeat her teachings on alchemy to you."
 		});
 	}
-	if(rosalin.flags["PastDialog"] >= Rosalin.PastDialog.Past) {
+	if(rosalin.flags["PastDialog"] >= RosalinFlags.PastDialog.Past) {
 		options.push({ nameStr : Text.Parse("[HisHer] past", parse),
 			func : function() {
 				Text.Clear();
@@ -455,7 +454,7 @@ RosalinScenes.TalkPrompt = function() {
 				Text.NL();
 				Text.Add("You wait to hear a continuation of the story, but Rosalin seems to be finished for now. [HeShe] stares off into the distance for a while, then goes back to her work, ignoring you.", parse);
 
-				if(rosalin.flags["PastDialog"] == Rosalin.PastDialog.Past) {
+				if(rosalin.flags["PastDialog"] == RosalinFlags.PastDialog.Past) {
 					rosalin.relation.IncreaseStat(100, 3);
 					rosalin.flags["PastDialog"]++;
 				}
@@ -465,7 +464,7 @@ RosalinScenes.TalkPrompt = function() {
 			tooltip : Text.Parse("Ask about [hisher] past.", parse)
 		});
 	}
-	if(rosalin.flags["PastDialog"] >= Rosalin.PastDialog.Teacher) {
+	if(rosalin.flags["PastDialog"] >= RosalinFlags.PastDialog.Teacher) {
 		options.push({ nameStr : Text.Parse("[HisHer] teacher", parse),
 			func : function() {
 				Text.Clear();
@@ -489,12 +488,12 @@ RosalinScenes.TalkPrompt = function() {
 					Text.NL();
 					Text.Add("It sounds like the court mage could be a good person to ask about the gemstone, but to reach her you have to enter the City of Rigard first, and then somehow get to her tower.", parse);
 				}
-				else if(rigard.flags["RoyalAccess" != 0]) {
+				else if(rigard.flags["RoyalAccess"] != 0) {
 					Text.NL();
 					Text.Add("One more set of walls still stand between you and Jeanne. Somehow, you must find your way into the royal estate and enter her tower.", parse);
 				}
 
-				if(rosalin.flags["PastDialog"] == Rosalin.PastDialog.Teacher) {
+				if(rosalin.flags["PastDialog"] == RosalinFlags.PastDialog.Teacher) {
 					rosalin.relation.IncreaseStat(100, 3);
 					rosalin.flags["PastDialog"]++;
 				}
@@ -505,7 +504,7 @@ RosalinScenes.TalkPrompt = function() {
 			tooltip : Text.Parse("Ask Rosalin about [hisher] alchemy teacher, the court mage Jeanne.", parse)
 		});
 	}
-	if(rosalin.flags["PastDialog"] >= Rosalin.PastDialog.Nomads) {
+	if(rosalin.flags["PastDialog"] >= RosalinFlags.PastDialog.Nomads) {
 		options.push({ nameStr : "The Nomads",
 			func : function() {
 				Text.Clear();
@@ -522,7 +521,7 @@ RosalinScenes.TalkPrompt = function() {
 				Text.NL();
 				Text.Add("<i>“That too!”</i> Rosalin agrees, unperturbed.", parse);
 
-				if(rosalin.flags["PastDialog"] == Rosalin.PastDialog.Nomads) {
+				if(rosalin.flags["PastDialog"] == RosalinFlags.PastDialog.Nomads) {
 					rosalin.relation.IncreaseStat(100, 3);
 					rosalin.flags["PastDialog"]++;
 				}
@@ -532,7 +531,7 @@ RosalinScenes.TalkPrompt = function() {
 			tooltip : Text.Parse("Ask Rosalin about how [heshe] ended up at the Nomads' camp, and what [heshe] has been doing here since.", parse)
 		});
 	}
-	if(rosalin.flags["PastDialog"] >= Rosalin.PastDialog.TreeCity) {
+	if(rosalin.flags["PastDialog"] >= RosalinFlags.PastDialog.TreeCity) {
 		options.push({ nameStr : "Tree city",
 			func : function() {
 				Text.Clear();
@@ -570,7 +569,7 @@ RosalinScenes.TalkPrompt = function() {
 				Text.NL();
 				Text.Add("After chatting for a bit, you decide to leave the alchemist to [hisher] dreams.", parse);
 
-				if(rosalin.flags["PastDialog"] == Rosalin.PastDialog.TreeCity) {
+				if(rosalin.flags["PastDialog"] == RosalinFlags.PastDialog.TreeCity) {
 					rosalin.relation.IncreaseStat(100, 3);
 					rosalin.flags["PastDialog"]++;
 				}
@@ -636,13 +635,13 @@ RosalinScenes.TalkPrompt = function() {
 
 							var inv = party.inventory;
 							if(player.strapOn) inv.AddItem(player.strapOn);
-							player.strapOn = Items.StrapOn.CanidStrapon;
+							player.strapOn = StrapOnItems.CanidStrapon;
 							player.Equip();
 						}
 						Text.Add("Over by the campfire, Cale is growing anxious. The horny wolf, desperate to be filled, is pumping three of his fingers into his [canusDesc], trying his outmost to sate his desires. He lights up when you step up behind him, grinding your [cocks] between his cheeks. His tail is wagging back and forth in excitement, conveniently raised high to allow you full access.", parse);
 						Text.NL();
 
-						Scenes.Cale.SexFuckHim(true, {goop: true});
+						CaleScenes.SexFuckHim(true, {goop: true});
 					}, enabled : true,
 					tooltip : "Looks like he’s gone into heat… best help him through this."
 				});
@@ -675,7 +674,7 @@ RosalinScenes.TalkPrompt = function() {
 		if(rosalin.flags["Anusol"] == 0) {
 			options.push({ nameStr : "Anal experiment",
 				func : function() {
-					rosalin.flags["Anusol"] = Rosalin.Anusol.OnTask;
+					rosalin.flags["Anusol"] = RosalinFlags.Anusol.OnTask;
 
 					Text.Clear();
 					Text.Add(tooltip, parse);
@@ -704,7 +703,7 @@ RosalinScenes.TalkPrompt = function() {
 	}
 	if(party.InParty(terry) && terry.flags["TF"] & TerryFlags.TF.TriedItem && !(terry.flags["TF"] & TerryFlags.TF.Rosalin)) {
 		options.push({ nameStr : "Terry",
-			func : Scenes.Terry.RosalinTF, enabled : true,
+			func : TerryScenes.RosalinTF, enabled : true,
 			tooltip : "Perhaps Rosalin can help you with Terry’s strange resistance to transformatives?"
 		});
 	}
@@ -732,7 +731,7 @@ RosalinScenes.BrewAnusol = function() {
 	var racescore = new RaceScore(rosalin.body);
 	var compScore = rosalin.origRaceScore.Compare(racescore);
 
-	var parse = {
+	var parse : any = {
 		race   : function() { return rosalin.raceDesc(compScore); },
 		rcocks : function() { return rosalin.MultiCockDesc(); }
 	};
@@ -742,7 +741,7 @@ RosalinScenes.BrewAnusol = function() {
 	var anusol = rosalin.flags["Anusol"];
 
 	Text.Clear();
-	if(anusol >= Rosalin.Anusol.AskedForCalesHelp) {
+	if(anusol >= RosalinFlags.Anusol.AskedForCalesHelp) {
 		Text.Add("As you approach the humming chimeric alchemist, [heshe] whirls around to face you.", parse);
 		Text.NL();
 		Text.Add("<i>“Ah, I was wondering where you had gone to! Wolfie already delivered the goods, so let’s get started shall we?”</i>", parse);
@@ -772,18 +771,18 @@ RosalinScenes.BrewAnusol = function() {
 	Text.Add("Accepting the potion, you tuck it carefully away and thank [himher] for [hisher] efforts before you leave [himher] to enjoy [hisher] afterglow.", parse);
 	Text.Flush();
 
-	if(anusol < Rosalin.Anusol.AskedForCalesHelp) {
-		_.each(Items.Anusol.recipe, function(it) {
+	if(anusol < RosalinFlags.Anusol.AskedForCalesHelp) {
+		_.each(AlchemySpecial.Anusol.recipe, function(it) {
 			party.Inv().RemoveItem(it.it);
 		});
 	}
 
-	party.Inv().AddItem(Items.Anusol);
+	party.Inv().AddItem(AlchemySpecial.Anusol);
 
-	player.AddAlchemy(Items.Anusol);
-	rosalin.AddAlchemy(Items.Anusol);
+	player.AddAlchemy(AlchemySpecial.Anusol);
+	rosalin.AddAlchemy(AlchemySpecial.Anusol);
 
-	rosalin.flags["Anusol"] = Rosalin.Anusol.Brewed;
+	rosalin.flags["Anusol"] = RosalinFlags.Anusol.Brewed;
 
 	Gui.NextPrompt();
 }
@@ -794,7 +793,7 @@ RosalinScenes.FirstTime = function() {
 	let kiakai = GAME().kiakai;
 	Text.Clear();
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		faceDesc   : function() { return player.FaceDesc(); },
 		armDesc    : function() { return player.ArmDesc(); },
@@ -870,7 +869,7 @@ RosalinScenes.FirstFuck = function() {
 	let rosalin = GAME().rosalin;
 	let cale = GAME().cale;
 
-	var parse = {
+	var parse : any = {
 		armorDesc     : function() { return player.ArmorDesc(); },
 		cocks : function() { return player.MultiCockDesc(); },
 		vagDesc       : function() { return player.FirstVag().Short(); },
@@ -1078,7 +1077,7 @@ RosalinScenes.FirstFuck = function() {
 					Text.NL();
 
 					var target;
-					var targetType;
+					var targetType : BodyPartType;
 					if(player.FirstVag()) {
 						target     = player.FirstVag();
 						targetType = BodyPartType.vagina;
@@ -1102,12 +1101,12 @@ RosalinScenes.FirstFuck = function() {
 					if(targetType == BodyPartType.ass) {
 						Sex.Anal(cale, player);
 						player.FuckAnal(target, cale.FirstCock(), 3);
-						Scenes.Cale.Impregnate(player, PregnancyHandler.Slot.Butt, 2);
+						CaleScenes.Impregnate(player, PregnancyHandler.Slot.Butt, 2);
 					}
 					else {
 						Sex.Vaginal(cale, player);
 						player.FuckVag(target, cale.FirstCock(), 3);
-						Scenes.Cale.Impregnate(player, PregnancyHandler.Slot.Vag, 2);
+						CaleScenes.Impregnate(player, PregnancyHandler.Slot.Vag, 2);
 					}
 
 					Text.Add("<i>“Ah... not bad,”</i> the wolf sighs, repeatedly pounding your [targetDesc], trying to build a rhythm. Being so close to the edge already pushes his instincts to the forefront, and soon you feel an even thicker mass press against your [targetDesc]. <i>“Gonna breed you, little slut,”</i> he hisses into your ear as his knot forces it's way inside your [targetDesc]", parse);
@@ -1217,7 +1216,7 @@ RosalinScenes.FirstFuckPegWolf = function() {
 	player.subDom.IncreaseStat(100, 5);
 	cale.flags["Sexed"]++;
 
-	var parse = {
+	var parse : any = {
 		armorDesc     : function() { return player.ArmorDesc(); },
 		cocks : function() { return player.MultiCockDesc(); },
 		vagDesc       : function() { return player.FirstVag().Short(); },
@@ -1270,7 +1269,7 @@ RosalinScenes.FirstFuckPegWolf = function() {
 	});
 }
 
-RosalinScenes.FirstFuckFollowup = function(outcome) {
+RosalinScenes.FirstFuckFollowup = function(outcome : number) {
 	// Outcome: 0 = fucked her
 	// Outcome: 1 = let wolf
 	// Outcome: 2 = shared, oral
@@ -1279,7 +1278,7 @@ RosalinScenes.FirstFuckFollowup = function(outcome) {
 
 	Text.Clear();
 
-	var parse = {
+	var parse : any = {
 
 	};
 
@@ -1316,7 +1315,7 @@ RosalinScenes.FirstFuckFollowup = function(outcome) {
 	Gui.NextPrompt();
 }
 
-RosalinScenes.CombineCallback = function(item) {
+RosalinScenes.CombineCallback = function(item : TFItem) {
 	let player = GAME().player;
 	let party : Party = GAME().party;
 	let rosalin = GAME().rosalin;
@@ -1326,7 +1325,7 @@ RosalinScenes.CombineCallback = function(item) {
 	var racescore = new RaceScore(rosalin.body);
 	var compScore = rosalin.origRaceScore.Compare(racescore);
 
-	var parse = {
+	var parse : any = {
 		raceDesc       : function() { return rosalin.raceDesc(compScore); },
 
 		breasts     : function() { return player.FirstBreastRow().Short(); }
@@ -1337,7 +1336,7 @@ RosalinScenes.CombineCallback = function(item) {
 
 	player.AddAlchemy(item);
 
-	if(item == Items.Felinix) {
+	if(item == AlchemyItems.Felinix) {
 		if(rosalin.flags["Felinix"] == 0) {
 			Text.Add("<i>“Ah yes, these bring back fond memories,”</i> Rosalin says as [heshe] caresses the items you present. <i>“With these, I can recreate the very first potion I made, the one which turned me into a cat!”</i> [HeShe] quickly prepares the ingredients, making sure you understand how to do it yourself.", parse);
 			Text.NL();
@@ -1373,7 +1372,7 @@ RosalinScenes.CombineCallback = function(item) {
 				if(rosalin.Lactation()) r.push("of my milk");
 				parse["seasoning"] = r[Rand(r.length)];
 
-				Items.Felinix.Use(player);
+				AlchemyItems.Felinix.Use(player);
 
 				Text.Add("<i>“Rather nice taste huh?”</i> Rosalin smiles at you, <i>“This time, I added some [seasoning], what do you think?”</i> Not quite trusting yourself to answer that, you prepare to leave.", parse);
 				Text.Flush();
@@ -1420,7 +1419,7 @@ RosalinScenes.CombineCallback = function(item) {
 		});
 		Gui.SetButtonsFromList(options);
 	}
-	else if(item == Items.Leporine) {
+	else if(item == AlchemyItems.Leporine) {
 		if(rosalin.flags["Leporine"] == 0) {
 			Text.Add("<i>“Ah, you should know this one already,”</i> Rosalin nods, looking over the ingredients. <i>“With this, I can make Leporine. Brings out the bunny in you!”</i> [HeShe] hesitates slightly before beginning to mix the items. <i>“This time... I'll skip the salamander scales, I think.”</i>", parse);
 			rosalin.flags["Leporine"] = 1;
@@ -1437,7 +1436,7 @@ RosalinScenes.CombineCallback = function(item) {
 			func : function() {
 				Text.Clear();
 
-				Items.Leporine.Use(player);
+				AlchemyItems.Leporine.Use(player);
 
 				Text.Add("<i>“Never was one for vegetable dishes,”</i> Rosalin notes, <i>“but the carrot juice does make it rather refreshing!”</i>", parse);
 				Text.Flush();
@@ -1514,7 +1513,7 @@ RosalinScenes.CombineCallback = function(item) {
 		Gui.SetButtonsFromList(options);
 	}
 	// E+
-	else if(item == Items.Equinium && rosalin.flags["Equinium"] == 1 && Math.random() < 0.2) {
+	else if(item == AlchemyItems.Equinium && rosalin.flags["Equinium"] == 1 && Math.random() < 0.2) {
 		if(rosalin.flags["Equinium+"] == 0) {
 			Text.Add("Rather than mixing the ingredients in the usual way, Rosalin grumbles a bit, sucking on [hisher] thumb, absently pouring some equine cum on top of the metal filings. <i>“You know what this needs?”</i> [heshe] asks thoughtfully, <i>“a bit more punch!”</i>", parse);
 			Text.NL();
@@ -1546,7 +1545,7 @@ RosalinScenes.CombineCallback = function(item) {
 
 				var c1 = checkCocks();
 
-				Items.EquiniumPlus.Use(player);
+				AlchemySpecial.EquiniumPlus.Use(player);
 
 				var c2 = checkCocks();
 
@@ -1666,7 +1665,7 @@ RosalinScenes.CombineCallback = function(item) {
 		Gui.SetButtonsFromList(options);
 	}
 	// EQUINIUM
-	else if(item == Items.Equinium) {
+	else if(item == AlchemyItems.Equinium) {
 		if(rosalin.flags["Equinium"] == 0) {
 			Text.Add("<i>“Some horse hair, a horse shoe... and some delicious equine... fluids.”</i> Rosalin licks [hisher] lips hungrily. <i>“With these, I can make Equinium.”</i> [HeShe] starts mixing the ingredients, showing you how each has to be prepared. Now and again, [heshe] sticks [hisher] hand in the jar containing the equine fluids, apparently taking them as a snack.", parse);
 			Text.NL();
@@ -1685,7 +1684,7 @@ RosalinScenes.CombineCallback = function(item) {
 			func : function() {
 				Text.Clear();
 
-				Items.Equinium.Use(player);
+				AlchemyItems.Equinium.Use(player);
 
 				Text.Add("<i>“Good one, isn't it?”</i> Rosalin smiles, <i>“I added some extra toppings, just for you!”</i>", parse);
 				Text.Flush();
@@ -1763,7 +1762,7 @@ RosalinScenes.CombineCallback = function(item) {
 		});
 		Gui.SetButtonsFromList(options);
 	}
-	else if(item == Items.Lacertium) {
+	else if(item == AlchemyItems.Lacertium) {
 		if(rosalin.flags["Lacertium"] == 0) {
 			Text.Add("<i>“Hoh, let's see what we have here,”</i> Rosalin sniffs the oil and eggs, wrinkling [hisher] nose. <i>“This one is going to smell a little, I'm afraid. Scalies are weird!”</i> Even so, [heshe] dutifully brews the ingredients, making sure to show you how each must be prepared and handled. <i>“Make sure the eggs haven't gone bad, it ruins the whole thing,”</i> [heshe] adds.", parse);
 			Text.NL();
@@ -1783,7 +1782,7 @@ RosalinScenes.CombineCallback = function(item) {
 			func : function() {
 				Text.Clear();
 				var c1 = player.NumCocks();
-				Items.Lacertium.Use(player);
+				AlchemyItems.Lacertium.Use(player);
 				if(c1 == 1 && player.NumCocks() == 2) {
 					Text.Add("<i>“Mmm, that looks juicy!”</i> Rosalin eagerly licks [hisher] lips at your new twin members. <i>“I can hardly wait to give those a test run!”</i>", parse);
 					Text.Flush();
@@ -1853,7 +1852,7 @@ RosalinScenes.CombineCallback = function(item) {
 		});
 		Gui.SetButtonsFromList(options);
 	}
-	else if(item == Items.Bovia) {
+	else if(item == AlchemyItems.Bovia) {
 		if(rosalin.flags["Bovia"] == 0) {
 			Text.Add("<i>“Ah, this looks promising!”</i> Rosalin bustles around, sorting through [hisher] tools. <i>“If I can just find... here!”</i> [HeShe] proudly brandishes a whisk, procured from somewhere under the mountain of garbage on [hisher] workbench. The alchemist whistles as [heshe] prepares the milk, working up a foamy layer on top of the liquid.", parse);
 			Text.NL();
@@ -1873,7 +1872,7 @@ RosalinScenes.CombineCallback = function(item) {
 		options.push({ nameStr : "You",
 			func : function() {
 				Text.Clear();
-				Items.Bovia.Use(player);
+				AlchemyItems.Bovia.Use(player);
 				if(player.Lactation()) {
 					Text.Add("<i>“Would be a shame to let all that milk go to waste, wouldn't it?”</i> Rosalin eyes your dripping [breasts] hungrily.", parse);
 					Text.Flush();
@@ -1948,7 +1947,7 @@ RosalinScenes.CombineCallback = function(item) {
 		});
 		Gui.SetButtonsFromList(options);
 	}
-	else if(item == Items.Nagazm) {
+	else if(item == AlchemySpecial.Nagazm) {
 		if(rosalin.flags["Nagazm"] == 0) {
 			Text.Add("<i>“A bit oily...”</i> Rosalin frowns as [heshe] prods the slimy liquid you present [himher] with. Shrugging, the alchemist grinds the other ingredients and mixes them together. As [heshe] does, the mixture slowly turns into a bubbly pink goop, exuding a putrid smell.", parse);
 			Text.NL();
@@ -1970,7 +1969,7 @@ RosalinScenes.CombineCallback = function(item) {
 				Text.Add("Steeling yourself, you take a large swig of the pink goop.", parse);
 				Text.NL();
 				var body = player.LowerBodyType();
-				Items.Nagazm.Use(player);
+				AlchemySpecial.Nagazm.Use(player);
 				Text.NL();
 				if(body != player.LowerBodyType()) {
 					Text.Add("<i>“Wow!”</i> Rosalin exclaims. <i>“That’s so cool!”</i> [HeShe] gingerly touches your new tail, caressing the scales thoughtfully.", parse);
@@ -2012,7 +2011,7 @@ RosalinScenes.CombineCallback = function(item) {
 		});
 		Gui.SetButtonsFromList(options);
 	}
-	else if(item == Items.Canis) {
+	else if(item == AlchemyItems.Canis) {
 		if(rosalin.flags["Canis"] == 0) {
 			Text.Add("<i>“This root could probably be used to make several different kind of potions,”</i> Rosalin muses as [heshe] studies the knotted veggie. Shrugging, [heshe] chops it up into a fine mince, mixing it with powdered bone and… biscuit. Humming to [himher]self, the alchemist adds several other ingredients at random. There is a puff of smoke as [heshe] pours some kind of liquid over the mixture.", parse);
 			rosalin.flags["Canis"] = 1;
@@ -2030,7 +2029,7 @@ RosalinScenes.CombineCallback = function(item) {
 			func : function() {
 				Text.Clear();
 				Text.NL();
-				Items.Canis.Use(player);
+				AlchemyItems.Canis.Use(player);
 				parse["boyGirl"] = player.mfTrue("boy", "girl");
 				Text.Add("<i>“Who’s a good [boyGirl], yeees!”</i> Rosalin cheers, patting you.", parse);
 				Text.Flush();
@@ -2062,7 +2061,7 @@ RosalinScenes.CombineCallback = function(item) {
 				scenes.AddEnc(function() {
 					parse["oneof"] = rosalin.NumCocks() > 1 ? "one of " : "";
 					Text.Add("<i>“Ahn!”</i> Rosalin exclaims, moaning loudly as [hisher] hands go to [hisher] crotch. Pulling [hisher] dress up, [heshe] reveals that [oneof][hisher] [rcocks] has turned into a pointed canine cock, complete with a knot.", parse);
-					var ret = {};
+					var ret : any = {};
 					TF.SetRaceOne(rosalin.AllCocks(), Race.Dog, ret);
 					if(ret.bodypart) ret.bodypart.knot = 1;
 					Text.NL();
@@ -2114,7 +2113,7 @@ RosalinScenes.CombineCallback = function(item) {
 		});
 		Gui.SetButtonsFromList(options);
 	}
-	else if(item == Items.Lobos) {
+	else if(item == AlchemyItems.Lobos) {
 		if(rosalin.flags["Lobos"] == 0) {
 			Text.Add("<i>“Did you get this from Wolfie?”</i> Rosalin asks guardedly as [heshe] eyes the wolf pelt you present [himher] with. <i>“If you did, I’ll have to make a potion to make it grow out again.”</i>", parse);
 			Text.NL();
@@ -2136,7 +2135,7 @@ RosalinScenes.CombineCallback = function(item) {
 		options.push({ nameStr : "You",
 			func : function() {
 				Text.Clear();
-				Items.Lobos.Use(player);
+				AlchemyItems.Lobos.Use(player);
 				Text.Add("<i>“Hmm,”</i> Rosalin mutters, jotting down a few observations in [hisher] notebook. <i>“Tell me, do you feel more inclined to… howl?”</i>", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
@@ -2167,7 +2166,7 @@ RosalinScenes.CombineCallback = function(item) {
 				scenes.AddEnc(function() {
 					parse["oneof"] = rosalin.NumCocks() > 1 ? "one of " : "";
 					Text.Add("<i>“Ahn!”</i> Rosalin exclaims, moaning loudly as [hisher] hands go to [hisher] crotch. Pulling [hisher] dress up, [heshe] reveals that [oneof][hisher] [rcocks] has turned into a pointed canine cock, complete with a knot.", parse);
-					var ret = {};
+					var ret : any = {};
 					TF.SetRaceOne(rosalin.AllCocks(), Race.Wolf, ret);
 					if(ret.bodypart) ret.bodypart.knot = 1;
 					Text.NL();
@@ -2219,7 +2218,7 @@ RosalinScenes.CombineCallback = function(item) {
 		});
 		Gui.SetButtonsFromList(options);
 	}
-	else if(item == Items.Vulpinix) {
+	else if(item == AlchemyItems.Vulpinix) {
 		if(rosalin.flags["Vulpinix"] == 0) {
 			Text.Add("<i>“Hmm, a bunch of berries and plants huh? Wonder what I can do with this...”</i> Rosalin muses, absently reaching for some additional herbs from [hisher] collection. <i>“Perhaps a vegetable stew?”</i>", parse);
 			Text.NL();
@@ -2239,7 +2238,7 @@ RosalinScenes.CombineCallback = function(item) {
 		options.push({ nameStr : "You",
 			func : function() {
 				Text.Clear();
-				Items.Vulpinix.Use(player);
+				AlchemyItems.Vulpinix.Use(player);
 				Text.Add("<i>“Well, what do you think?”</i> Rosalin asks expectantly. <i>“Perhaps I should try being a chef again? Maybe open a restaurant.”</i>", parse);
 				Text.NL();
 				Text.Add("...That’d certainly be an interesting - possibly lethal - venture.", parse);
@@ -2271,7 +2270,7 @@ RosalinScenes.CombineCallback = function(item) {
 				scenes.AddEnc(function() {
 					parse["oneof"] = rosalin.NumCocks() > 1 ? "one of " : "";
 					Text.Add("<i>“Ahn!”</i> Rosalin exclaims, moaning loudly as [hisher] hands go to [hisher] crotch. Pulling [hisher] dress up, [heshe] reveals that [oneof][hisher] [rcocks] has turned into a pointed canine cock, complete with a knot.", parse);
-					var ret = {};
+					var ret : any = {};
 					TF.SetRaceOne(rosalin.AllCocks(), Race.Fox, ret);
 					if(ret.bodypart) ret.bodypart.knot = 1;
 					Text.NL();
@@ -2324,7 +2323,7 @@ RosalinScenes.CombineCallback = function(item) {
 		});
 		Gui.SetButtonsFromList(options);
 	}
-	else if(item == Items.Scorpius) {
+	else if(item == AlchemyItems.Scorpius) {
 		if(rosalin.flags["Scorpius"] == 0) {
 			Text.Add("<i>“Where do you find this stuff?”</i> the alchemist asks curiously, holding up the large scorpion stinger. <i>“Whoops!”</i> [heshe] exclaims, hopping back as the thing lets out a spray of poisonous fluid.", parse);
 			Text.NL();
@@ -2343,7 +2342,7 @@ RosalinScenes.CombineCallback = function(item) {
 		options.push({ nameStr : "You",
 			func : function() {
 				Text.Clear();
-				Items.Scorpius.Use(player);
+				AlchemyItems.Scorpius.Use(player);
 				Text.Add("Rosalin studies you for a few moments after you down the potion, counting under [hisher] breath. After ten seconds or so, [heshe] relaxes.", parse);
 				Text.NL();
 				Text.Add("<i>“Alright, if there aren’t any bad symptoms by now, you’re probably fine.”</i>", parse);
@@ -2393,7 +2392,7 @@ RosalinScenes.CombineCallback = function(item) {
 		});
 		Gui.SetButtonsFromList(options);
 	}
-	else if(item == Items.Lepida) {
+	else if(item == AlchemyItems.Lepida) {
 		if(rosalin.flags["Lepida"] == 0) {
 			Text.Add("<i>“It’s pretty!”</i> Rosalin exclaims as [heshe] carefully handles the colorful moth-wing you handed over. [HeShe] waves the thing, releasing a puff of glittering powder. <i>“It’s like fairy dust!”</i> The alchemist turns to [hisher] workbench, starting to pick out various vials and jars.", parse);
 			Text.NL();
@@ -2412,7 +2411,7 @@ RosalinScenes.CombineCallback = function(item) {
 		options.push({ nameStr : "You",
 			func : function() {
 				Text.Clear();
-				Items.Lepida.Use(player);
+				AlchemyItems.Lepida.Use(player);
 				Text.Add("Rosalin jots down some notes on a piece of paper as [heshe] observes the potion’s effect on you.", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
@@ -2480,7 +2479,7 @@ RosalinScenes.CombineCallback = function(item) {
 		});
 		Gui.SetButtonsFromList(options);
 	}
-	else if(item == Items.Avia) {
+	else if(item == AlchemyItems.Avia) {
 		if(rosalin.flags["Avia"] == 0) {
 			Text.Add("<i>“Shiny,”</i> Rosalin comments, holding up the gaudy trinket you brought to the light. <i>“I suppose I could melt it down… but I don’t have a strong enough fire. I wish I knew magic,”</i> [heshe] sighs.", parse);
 			Text.NL();
@@ -2503,7 +2502,7 @@ RosalinScenes.CombineCallback = function(item) {
 		options.push({ nameStr : "You",
 			func : function() {
 				Text.Clear();
-				Items.Avia.Use(player);
+				AlchemyItems.Avia.Use(player);
 				Text.Add("Rosalin notes the effects of the potion on your body, humming to [himher]self happily.", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
@@ -2561,7 +2560,7 @@ RosalinScenes.CombineCallback = function(item) {
 		});
 		Gui.SetButtonsFromList(options);
 	}
-	else if(item == Items.Ovis) {
+	else if(item == AlchemyItems.Ovis) {
 		if(rosalin.flags["Ovis"] == 0) {
 			Text.Add("<i>“Hmm… doesn’t smell like cow milk. Is this… sheep?”</i> Rosalin frowns as [heshe] suspiciously sniffs the bottle you give [himher]. <i>“I wonder...”</i>", parse);
 			Text.NL();
@@ -2582,7 +2581,7 @@ RosalinScenes.CombineCallback = function(item) {
 			options.push({ nameStr : "You",
 				func : function() {
 					Text.Clear();
-					Items.Ovis.Use(player);
+					AlchemyItems.Ovis.Use(player);
 					Text.Add("<i>“Do you feel any… different?”</i> the alchemist asks you, notepad at the ready. <i>“Any urge to give up your quest and follow the masses?”</i>", parse);
 					Text.Flush();
 					Gui.NextPrompt(function() {
@@ -2618,7 +2617,7 @@ RosalinScenes.CombineCallback = function(item) {
 		}
 		prompt();
 	}
-	else if(item == Items.Anusol) {
+	else if(item == AlchemySpecial.Anusol) {
 		Text.Add("<i>“One butt-lotion coming up!”</i>", parse);
 		Text.NL();
 		Text.Add("Before long, the alchemist presents you with a bottle containing a greenish fluid. It’s somewhat oily, and almost clear-looking. It looks almost like juice from some fruit, but the lack of smell instantly throws that hypothesis out of the window.", parse);
@@ -2631,7 +2630,7 @@ RosalinScenes.CombineCallback = function(item) {
 		options.push({ nameStr : "You",
 			func : function() {
 				Text.Clear();
-				Items.Anusol.Use(player);
+				AlchemySpecial.Anusol.Use(player);
 				Text.Add("You take the oily green fluid a little cautiously, then slowly drink it down. No sooner have you finished off the last of it, when you drop the bottle in shock as a tingling sensation sweeps across your [skin]. Warmth emanates from deep inside of you, and your arms sweep around your stomach as you moan. ", parse);
 				Text.NL();
 				Text.Add("The feelings seem to be coming from your [anus]... a sort of prickling that sends pleasure coiling up your spine, making you wriggle and shake your [hips]. It grows stronger and stronger, and you pant heavily in desire. It feels like you are being fucked by the biggest, longest, hardest cock you can image - a dream cock that is ravaging your ass with unnatural expertise, blotting out everything but the feelings sweeping through you.", parse);
@@ -2761,19 +2760,20 @@ RosalinScenes.CombineCallback = function(item) {
 
 	// Fallback
 	else {
-		inventory.AddItem(it);
+		party.inventory.AddItem(item);
 		Gui.NextPrompt(function() {
 			Alchemy.AlchemyPrompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
 		});
 	}
 }
 
-let RosalinSexState = {
-	Regular : 0,
-	Heat    : 1,
-	Rut     : 2
-}
-RosalinScenes.SexPrompt = function(state) {
+enum RosalinSexState {
+	Regular = 0,
+	Heat    = 1,
+	Rut     = 2
+};
+
+RosalinScenes.SexPrompt = function(state : RosalinSexState) {
 	let player = GAME().player;
 	let rosalin = GAME().rosalin;
 	let cale = GAME().cale;
@@ -2799,7 +2799,7 @@ RosalinScenes.SexPrompt = function(state) {
 	}
 	var p2Cock = player.BiggestCock(allCocks);
 
-	var parse = {
+	var parse : any = {
 		raceDesc       : function() { return rosalin.raceDesc(compScore); },
 		rbreasts    : function() { return rosalin.FirstBreastRow().Short(); },
 		rnips   : function() { return rosalin.FirstBreastRow().NipsShort(); },
@@ -3265,13 +3265,13 @@ RosalinScenes.SexPrompt = function(state) {
 							Text.Add("Pulling out, you ignore Rosalin's moaned complaints as you lather each of your [cocks] in [hisher] hot pussy-juices.", parse);
 							Text.NL();
 
-							var target = BodyPartType.vagina;
+							let pussy : boolean = true;
 							var scenes = new EncounterTable();
 							scenes.AddEnc(function() {
 								Text.Add("Lining up again, you press [both] of your [cocks] against [hisher] eager snatch. You push in, enjoying the suddenly much tighter fit. The [raceDesc], meanwhile, is going nuts, yowling in pleasure as [hisher] [rvag] gets double the amount of cock stuffed inside it.", parse);
 							}, 1.0, function() { return true; });
 							scenes.AddEnc(function() {
-								var target = BodyPartType.ass;
+								pussy = false;
 								Text.Add("Resuming your brutal conquest of [hisher] [rvag], you line up[oneof] your other cock[s] with [hisher] puckered [ranus], insistently prodding at the tight opening. Rosalin lets out a drawn out yowl as you slowly push the [cockTip2] of your [cock2] past [hisher] tight ring, sealing it inside [hisher] back door.", parse);
 							}, 1.0, function() { return true; });
 							scenes.Get();
@@ -3279,7 +3279,7 @@ RosalinScenes.SexPrompt = function(state) {
 							Text.Add("Your rough double penetration soon has the [raceDesc] alchemist delirious with pleasure, as [heshe] moans incoherently, alternating between begging you to stop and pleading for you to fuck [himher] faster, harder.", parse);
 							Text.NL();
 
-							parse["s"] = target == BodyPartType.vagina ? "s" : "";
+							parse["s"] = pussy ? "s" : "";
 							Text.Add("The horny alchemist cums before you, soaking your shaft[s] in [hisher] sweet juices.", parse);
 							if(rosalin.FirstCock())
 								Text.Add(" The barrel is generously coated by [hisher] twitching [rcocks], the sticky strands slowly dripping down, fertilizing the ground below.", parse);
@@ -3295,7 +3295,7 @@ RosalinScenes.SexPrompt = function(state) {
 							var cum = player.OrgasmCum();
 
 							parse["kd"] = p2Cock.knot ? Text.Parse(", the [knotDesc2] sealing it inside", parse) : "";
-							if(target == BodyPartType.vagina)
+							if(pussy)
 								Text.Add("Your [cock2] joins its sibling, pressing inside Rosalin's tight passage[kd].", parse);
 							else // butt
 								Text.Add("Your [cock2] pushes its way into Rosalin's [ranus][kd].", parse);
@@ -3313,7 +3313,7 @@ RosalinScenes.SexPrompt = function(state) {
 									Text.Add("Thanks to your knot[s], [someMost] of your seed is trapped inside.", parse);
 								}
 								else {
-									parse["s"] = target == BodyPartType.ass ? "s" : "";
+									parse["s"] = !pussy ? "s" : "";
 									Text.Add("The passage[s] unable to contain all of your seed, much of the sticky liquid spills outside, trailing down Rosalin's [rlegs].", parse);
 								}
 							}
@@ -3378,7 +3378,7 @@ RosalinScenes.SexPrompt = function(state) {
 	}
 }
 
-RosalinScenes.CockWorship = function(sexState) {
+RosalinScenes.CockWorship = function(sexState : RosalinSexState) {
 	let player = GAME().player;
 	let rosalin = GAME().rosalin;
 	Text.Clear();
@@ -3388,7 +3388,7 @@ RosalinScenes.CockWorship = function(sexState) {
 
 	var cock = rosalin.BiggestCock();
 
-	var parse = {
+	var parse : any = {
 		raceDesc       : function() { return rosalin.raceDesc(compScore); },
 		rbreasts    : function() { return rosalin.FirstBreastRow().Short(); },
 		rnips   : function() { return rosalin.FirstBreastRow().NipsShort(); },
@@ -3559,7 +3559,7 @@ RosalinScenes.VagAftermath = function() {
 	var racescore = new RaceScore(rosalin.body);
 	var compScore = rosalin.origRaceScore.Compare(racescore);
 
-	var parse = {
+	var parse : any = {
 		raceDesc       : function() { return rosalin.raceDesc(compScore); },
 
 		playername     : player.name,
@@ -3620,7 +3620,7 @@ RosalinScenes.VagAftermath = function() {
 }
 
 RosalinScenes.FuckCaleWatchEntryPoint = function() {
-	var parse = {
+	var parse : any = {
 
 	};
 
@@ -3631,4 +3631,4 @@ RosalinScenes.FuckCaleWatchEntryPoint = function() {
 	Gui.NextPrompt();
 }
 
-export { Rosalin, RosalinScenes };
+export { RosalinScenes };

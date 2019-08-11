@@ -7,80 +7,76 @@ import { Entity } from '../../entity';
 import { GetDEBUG } from '../../../app';
 import { Race } from '../../body/race';
 import { Color } from '../../body/color';
-import { WorldTime, GameCache } from '../../GAME';
+import { WorldTime, GameCache, GAME, TimeStep } from '../../GAME';
 import { Gui } from '../../gui';
 import { Text } from '../../text';
 import { GlobalScenes } from '../global';
+import { MagnusFlags } from './magnus-flags';
+import { Party } from '../../party';
+import { Sex } from '../../entity-sex';
+import { LowerBodyType } from '../../body/body';
+import { EncounterTable } from '../../encountertable';
+import { PregnancyHandler } from '../../pregnancy';
+import { AlchemyItems } from '../../items/alchemy';
+import { TF } from '../../tf';
 
-let MagnusScenes = {};
+let MagnusScenes : any = {};
 
-function Magnus(storage) {
-	Entity.call(this);
-	this.ID = "magnus";
-	
-	this.name         = "Magnus";
-	
-	this.body.DefMale();
-	this.body.SetRace(Race.Human);
-	this.SetSkinColor(Color.white);
-	this.FirstCock().length.base    = 80;
-	this.FirstCock().thickness.base = 6;
-	this.FirstCock().race           = Race.Demon;
-	this.body.cock.push(this.FirstCock().Clone());
-	this.body.cock.push(this.FirstCock().Clone());
-	
-	this.SetLevelBonus();
-	this.RestFull();
-	
-	this.flags["Met"] = 0;
-	this.flags["Talked"] = 0;
-	this.flags["Sexed"] = 0;
-	this.flags["Teach"] = Magnus.Teaching.None;
-	this.flags["Confronted"] = 0;
-	
-	if(storage) this.FromStorage(storage);
-}
-Magnus.prototype = new Entity();
-Magnus.prototype.constructor = Magnus;
+export class Magnus extends Entity {
+	constructor(storage? : any) {
+		super();
 
-Magnus.Teaching = {
-	None : 0,
-	Wait : 1,
-	Done : 2,
-	Jeanne : 3
-};
+		this.ID = "magnus";
+		
+		this.name         = "Magnus";
+		
+		this.body.DefMale();
+		this.body.SetRace(Race.Human);
+		this.SetSkinColor(Color.white);
+		this.FirstCock().length.base    = 80;
+		this.FirstCock().thickness.base = 6;
+		this.FirstCock().race           = Race.Demon;
+		this.body.cock.push(this.FirstCock().Clone());
+		this.body.cock.push(this.FirstCock().Clone());
+		
+		this.SetLevelBonus();
+		this.RestFull();
+		
+		this.flags["Met"] = 0;
+		this.flags["Talked"] = 0;
+		this.flags["Sexed"] = 0;
+		this.flags["Teach"] = MagnusFlags.Teaching.None;
+		this.flags["Confronted"] = 0;
+		
+		if(storage) this.FromStorage(storage);
+	}
+		
+	Met() {
+		return this.flags["Met"] != 0;
+	}
 
-Magnus.Confront = {
-	Not      : 0,
-	Comfort  : 1,
-	Complain : 2,
-	Condemn  : 3
-};
+	FromStorage(storage : any) {
+		this.LoadPersonalityStats(storage);
+		
+		// Load flags
+		this.LoadFlags(storage);
+		this.LoadSexFlags(storage);
+	}
 
-Magnus.prototype.Met = function() {
-	return this.flags["Met"] != 0;
-}
+	ToStorage() {
+		var storage = {};
+		
+		this.SavePersonalityStats(storage);
+		
+		this.SaveFlags(storage);
+		this.SaveSexFlags(storage);
+		
+		return storage;
+	}
 
-Magnus.prototype.FromStorage = function(storage) {
-	this.LoadPersonalityStats(storage);
-	
-	// Load flags
-	this.LoadFlags(storage);
-	this.LoadSexFlags(storage);
-}
-
-Magnus.prototype.ToStorage = function() {
-	var storage = {};
-	
-	this.SavePersonalityStats(storage);
-	
-	this.SaveFlags(storage);
-	this.SaveSexFlags(storage);
-	
-	return storage;
 }
 
-MagnusScenes.Impregnate = function(mother, slot) {
+MagnusScenes.Impregnate = function(mother : Entity, slot? : number) {
 	let magnus = GAME().magnus;
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
@@ -98,7 +94,7 @@ MagnusScenes.Interact = function() {
 	let magnus = GAME().magnus;
 	Text.Clear();
 	
-	var parse = {
+	var parse : any = {
 		upDown     : player.Height() >= 185 ? " up" : player.Height() <= 165 ? " down" : "",
 		playername : player.name
 	};
@@ -186,16 +182,16 @@ MagnusScenes.Interact = function() {
 						Text.Clear();
 						
 						if(GameCache().flags["LearnedMagic"] >= 2) {
-							if(magnus.flags["Teach"] < Magnus.Teaching.Jeanne) {
-								if(magnus.flags["Teach"] == Magnus.Teaching.Done) {
+							if(magnus.flags["Teach"] < MagnusFlags.Teaching.Jeanne) {
+								if(magnus.flags["Teach"] == MagnusFlags.Teaching.Done) {
 									Text.Add("<i>“Now that you mention it...”</i> Magnus peers at you curiously. <i>“I sense a change in your magic, as if you are much stronger now. Did you come to some insight, [playername]?”</i>", parse);
 									Text.NL();
 									Text.Add("You confide that you asked Jeanne to help you out with your studies, and that it helped you understand things better.", parse);
 								}
 								else {
-									if(magnus.flags["Teach"] == Magnus.Teaching.None)
+									if(magnus.flags["Teach"] == MagnusFlags.Teaching.None)
 										Text.Add("<i>“Ah, does the subject of magic interest you?”</i> Magnus seems to brighten up, no longer the only nerd in the gathering. You nod.", parse);
-									else if(magnus.flags["Teach"] == Magnus.Teaching.Wait)
+									else if(magnus.flags["Teach"] == MagnusFlags.Teaching.Wait)
 										Text.Add("<i>“Ah, have you decided to give it another try, [playername]?”</i> Magnus peers at you suspiciously. <i>“I would really appreciate it if you could stay awake this time.”</i>", parse);
 									Text.NL();
 									Text.Add("Excited, he starts to quickly line out abstract concepts and ideas pertaining to the nature of magic. He scribbles magical symbols on the ground, explaining their origins and meaning. It’s not long before you feel yourself drowsing off. Let’s see if this shuts him up.", parse);
@@ -222,10 +218,10 @@ MagnusScenes.Interact = function() {
 							else {
 								Text.Add("<i>“Ah, I’m afraid I can’t really teach you anything that you don’t already know,”</i> Magnus confides, hanging his head sheepishly. <i>“I could perhaps be of some help in aiding you with meditation, if you’d like. Tell me, did you talk more with Jeanne? There is so much I want to ask her...”</i>", parse);
 							}
-							magnus.flags["Teach"] = Magnus.Teaching.Jeanne;
+							magnus.flags["Teach"] = MagnusFlags.Teaching.Jeanne;
 							Text.Flush();
 						}
-						else if(magnus.flags["Teach"] == Magnus.Teaching.None) {
+						else if(magnus.flags["Teach"] == MagnusFlags.Teaching.None) {
 							Text.Add("<i>“Ah, does the subject of magic interest you?”</i> Magnus seems to brighten up, no longer the only nerd in the gathering. You nod uncertainly, not really sure what you are getting yourself into.", parse);
 							Text.NL();
 							Text.Add("Excited, he starts to quickly line out abstract concepts and ideas pertaining to the nature of magic. He scribbles strange symbols on the ground, explaining their origins and meaning.", parse);
@@ -245,11 +241,11 @@ MagnusScenes.Interact = function() {
 								Text.NL();
 								Text.Add("<b>You will need to be at least a level 3 scholar to avoid falling asleep.</b>", parse);
 								Text.Flush();
-								magnus.flags["Teach"] = Magnus.Teaching.Wait;
+								magnus.flags["Teach"] = MagnusFlags.Teaching.Wait;
 								TimeStep({hour: 1});
 							}
 						}
-						else if(magnus.flags["Teach"] == Magnus.Teaching.Wait) {
+						else if(magnus.flags["Teach"] == MagnusFlags.Teaching.Wait) {
 							if(player.jobs["Scholar"].level >= 3) {
 								Text.Add("You tell him that you are ready to accept his teachings. This time, you manage to hang on to his words, and somehow remain alert throughout the ordeal. The magician looks encouraged by your intense focus.", parse);
 								Text.NL();
@@ -330,7 +326,7 @@ MagnusScenes.Interact = function() {
 MagnusScenes.Meditation = function() {
 	let player = GAME().player;
 	let magnus = GAME().magnus;
-	var parse = {
+	var parse : any = {
 		playername    : player.name
 	};
 	parse = player.ParserTags(parse);
@@ -352,7 +348,7 @@ MagnusScenes.Meditation = function() {
 			Text.Clear();
 			Text.Add("You dwell on the actions and events that have led you to this point, and how you should proceed next.", parse);
 			Text.NL();
-			if(jeanne.flags["Met"] == 0)
+			if(GAME().jeanne.flags["Met"] == 0)
 				Text.Add("All you have seen so far has been connected to the gemstone you carry. The more you find out about it, the better. A magician, or an alchemist, may be able to tell you more, if you find one skilled enough.", parse);
 			else if(!GlobalScenes.PortalsOpen())
 				Text.Add("You need to find a way to power up the gemstone, and Jeanne seems to have a plan. Following her instructions seems to be the best course of action for now.", parse);
@@ -690,13 +686,13 @@ MagnusScenes.Meditation = function() {
 				
 				Text.NL();
 				Text.Add("Finally sated, the betentacled demon discards you on the ground, throwing you aside like a used rag, leaking at the seams.", parse);
-				var TFd;
+				var TFd : boolean;
 				if(first) {
 					Text.Add(" You feel an uneasy rumbling in your belly, but miraculously, the substances the demon poured into you doesn’t seem to have had any effect on you. So far.", parse);
 				}
 				else {
 					Text.Add(" You can feel the roiling pool of cum inside, seeping into your very being and suffusing it with corruption.", parse);
-					TFd = Items.Infernum.Use(player, true).changed != TF.Effect.Unchanged;
+					TFd = AlchemyItems.Infernum.Use(player, true).changed != TF.Effect.Unchanged;
 				}
 				Text.NL();
 				Text.Add("<i>It’s such a… bind to have been imprisoned in this host. He holds no… thought but that which seeks to further his, knowledge, of magic. Our seduction, doesn’t work… But. If we are drawn forth by… naughty souls such as you, we can… thrive. We will one day be… free.</i>", parse);
@@ -762,7 +758,7 @@ MagnusScenes.Meditation = function() {
 
 MagnusScenes.SexSounding = function() {
 	let player = GAME().player;
-	var parse = {
+	var parse : any = {
 		setof : player.NumCocks() > 1 ? " set of" : ""
 	};
 	parse = player.ParserTags(parse);
@@ -779,7 +775,7 @@ MagnusScenes.Confront = function() {
 	let party : Party = GAME().party;
 	let kiakai = GAME().kiakai;
 	let magnus = GAME().magnus;
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -818,7 +814,7 @@ MagnusScenes.Confront = function() {
 			Text.Add("You decide to leave the disheartened mage to his thoughts for now.", parse);
 			Text.Flush();
 			
-			magnus.flags["Confronted"] = Magnus.Confront.Comfort;
+			magnus.flags["Confronted"] = MagnusFlags.Confront.Comfort;
 	
 			Gui.NextPrompt();
 		}, enabled : true,
@@ -839,7 +835,7 @@ MagnusScenes.Confront = function() {
 			Text.Add("You leave the troubled magician to his thoughts. Perhaps he will be more susceptible to intimate things later, and, if not, you know how to call out the demon now. You find yourself drooling a bit as you ponder the notion.", parse);
 			Text.Flush();
 			
-			magnus.flags["Confronted"] = Magnus.Confront.Complain;
+			magnus.flags["Confronted"] = MagnusFlags.Confront.Complain;
 	
 			Gui.NextPrompt();
 		}, enabled : true,
@@ -855,7 +851,7 @@ MagnusScenes.Confront = function() {
 			Text.Add("Perhaps you will. Perhaps you won’t.", parse);
 			Text.Flush();
 			
-			magnus.flags["Confronted"] = Magnus.Confront.Condemn;
+			magnus.flags["Confronted"] = MagnusFlags.Confront.Condemn;
 	
 			Gui.NextPrompt();
 		}, enabled : true,
@@ -867,7 +863,7 @@ MagnusScenes.Confront = function() {
 MagnusScenes.LearnMagic = function() {
 	let player = GAME().player;
 	let magnus = GAME().magnus;
-	var parse = {
+	var parse : any = {
 		hand : function() { return player.HandDesc(); },
 		playername : player.name
 	};
@@ -916,7 +912,7 @@ MagnusScenes.LearnMagic = function() {
 		player.AddSPFraction(-1);
 		
 		GameCache().flags["LearnedMagic"] = 1;
-		magnus.flags["Teach"] = Magnus.Teaching.Done;
+		magnus.flags["Teach"] = MagnusFlags.Teaching.Done;
 		
 		Gui.NextPrompt();
 	});
@@ -924,7 +920,7 @@ MagnusScenes.LearnMagic = function() {
 
 MagnusScenes.Desc = function() {
 	let magnus = GAME().magnus;
-	var parse = {
+	var parse : any = {
 		litExtinguished : WorldTime().hour >= 19 ? "lit" : "extinguished"
 	};
 	
@@ -937,4 +933,4 @@ MagnusScenes.Desc = function() {
 	Text.NL();
 }
 
-export { Magnus, MagnusScenes };
+export { MagnusScenes };

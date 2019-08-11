@@ -7,8 +7,8 @@ import { Gui } from '../../gui';
 import { LagonFlags } from './lagon-flags';
 import { Sex } from '../../entity-sex';
 import { LagomorphElite } from '../../enemy/rabbit';
-import { AlchemyItems } from '../../items/alchemy';
 import { Party } from '../../party';
+import { AlchemySpecial } from '../../items/alchemyspecial';
 
 let LagonDScenes : any = {};
 
@@ -1778,7 +1778,7 @@ LagonDScenes.PunishmentPCCont = function(came : boolean) {
 			Text.Add("The cascade of spunk hits Lagon like a tidal wave, visibly deforming his once-tight stomach as it slams into his guts. His midriff bulges out from the sheer quantity of semen rushing into it, then shrinks back as your first spurt ends... and then the next one hits. And then the next.", parse);
 			Text.NL();
 			Text.Add("Like a pregnancy on fast-forward, Lagon's stomach balloons outward, round and flush with your seed, packed so tight that the skin is stretched taut as a drum. By the time you finally run dry, his belly is enormous; he looks like his wife does when she's ready to pop out one of her bigger litters.", parse);
-			if(player.KnowsRecipe(AlchemyItems.Anusol)) {
+			if(player.KnowsRecipe(AlchemySpecial.Anusol)) {
 				Text.NL();
 				Text.Add("A brief flicker of breeder-lust flashes through the swirling stew of your thoughts, making you momentarily wish that were the case, just to really hammer it home who's the alpha here.", parse);
 			}

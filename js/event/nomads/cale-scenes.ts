@@ -6,10 +6,10 @@ import { WorldTime, GAME, TimeStep } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { CaleFlags } from './cale-flags';
-import { Rosalin } from './rosalin';
 import { LowerBodyType } from '../../body/body';
 import { Jobs } from '../../job';
 import { Party } from '../../party';
+import { RosalinFlags } from './rosalin-flags';
 
 let CaleScenes : any = {
     Sex : CaleSexScenes,
@@ -35,10 +35,10 @@ CaleScenes.Interact = function() {
 		CaleScenes.TalkSlut();
 		return;
 	}
-	else if((rosalin.flags["Anusol"] >= Rosalin.Anusol.AskedForCalesHelp) &&
-		(rosalin.flags["Anusol"] < Rosalin.Anusol.DeliveryFromCale)) {
+	else if((rosalin.flags["Anusol"] >= RosalinFlags.Anusol.AskedForCalesHelp) &&
+		(rosalin.flags["Anusol"] < RosalinFlags.Anusol.DeliveryFromCale)) {
 		
-		rosalin.flags["Anusol"] = Rosalin.Anusol.DeliveryFromCale;
+		rosalin.flags["Anusol"] = RosalinFlags.Anusol.DeliveryFromCale;
 		
 		Text.Clear();
 		Text.Add("<i>“Hey, [playername]. Got your goods!”</i> the wolf announces as you approach. <i>“I delivered it to Rosie already, so just go talk to her when you want to run your experiment.”</i>", parse);
@@ -673,15 +673,15 @@ CaleScenes.TalkPrompt = function() {
 			tooltip : "Ask him about how it feels to be the one on the receiving end."
 		});
 	}
-	if((rosalin.flags["Anusol"] >= Rosalin.Anusol.OnTask) &&
-		(rosalin.flags["Anusol"] < Rosalin.Anusol.AskedForCalesHelp)) {
+	if((rosalin.flags["Anusol"] >= RosalinFlags.Anusol.OnTask) &&
+		(rosalin.flags["Anusol"] < RosalinFlags.Anusol.AskedForCalesHelp)) {
 		//[name]
 		options.push({ nameStr : "Anal experiment",
 			tooltip : "Cale goes on frequent runs for Rosalin, maybe he could get some stuff for you on the side?",
 			func : function() {
 				
-				var first = (rosalin.flags["Anusol"] < Rosalin.Anusol.TalkedToCale);
-				rosalin.flags["Anusol"] = Rosalin.Anusol.TalkedToCale;
+				var first = (rosalin.flags["Anusol"] < RosalinFlags.Anusol.TalkedToCale);
+				rosalin.flags["Anusol"] = RosalinFlags.Anusol.TalkedToCale;
 				
 				var coin = 200;
 				parse["coin"] = Text.NumToText(coin);
@@ -727,7 +727,7 @@ CaleScenes.TalkPrompt = function() {
 							Text.Add("Your lips curl into a smirk as you take the coins from your belongings and reach for his hand, fingers brushing his as you drop the money into his palm. Before he can move to transfer them to his pocket, your fingers wrap around his hand and the coins alike and you start leading Cale towards his tent. The wolf catches on in an instant and keeps up, tail wagging happily all the way.", parse);
 							Text.NL();
 							
-							rosalin.flags["Anusol"] = Rosalin.Anusol.AskedForCalesHelp;
+							rosalin.flags["Anusol"] = RosalinFlags.Anusol.AskedForCalesHelp;
 							
 							party.coin -= (coin - 50);
 							
@@ -747,7 +747,7 @@ CaleScenes.TalkPrompt = function() {
 							Text.Add("That’s only fair. After a few moments of searching, you fish out the money that Cale requested and it tinkles into his open palm before he makes it vanish with a smirk.", parse);
 							Text.Flush();
 							
-							rosalin.flags["Anusol"] = Rosalin.Anusol.AskedForCalesHelp;
+							rosalin.flags["Anusol"] = RosalinFlags.Anusol.AskedForCalesHelp;
 							
 							party.coin -= coin;
 							
@@ -778,7 +778,7 @@ CaleScenes.TalkPrompt = function() {
 							Text.Add("With a smile of your own, you count out the gold he needs and pass it to him, watching as the wolf-morph makes it disappear into one of his pockets.", parse);
 							Text.Flush();
 							
-							rosalin.flags["Anusol"] = Rosalin.Anusol.AskedForCalesHelp;
+							rosalin.flags["Anusol"] = RosalinFlags.Anusol.AskedForCalesHelp;
 							
 							party.coin -= coin;
 							

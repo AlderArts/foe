@@ -17,7 +17,7 @@ import { Text } from './text';
 import { Genitalia } from './body/genitalia';
 
 export namespace TF {
-	enum Effect {
+	export enum Effect {
 		Unchanged = 0,
 		Changed   = 1,
 		Added     = 2,

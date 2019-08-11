@@ -8,6 +8,7 @@ import { CvetaFlags } from './outlaws/cveta-flags';
 import { TwinsFlags } from './royals/twins-flags';
 import { Party } from '../party';
 import { UruFlags } from './uru';
+import { RosalinFlags } from './nomads/rosalin-flags';
 
 let DreamsScenes = {}
 
@@ -49,7 +50,7 @@ DreamsScenes.Entry = function(func) {
 			scenes.AddEnc(DreamsScenes.AriaTemple, 1.0, function() { return true; }, ravenTrigger);
 			scenes.AddEnc(DreamsScenes.KiakaiMonster, 1.0, function() { return party.location == world.loc.Rigard.Inn.room && party.InParty(kiakai); }, ravenTrigger);
 			scenes.AddEnc(DreamsScenes.Kiakai63, 1.0, function() { return party.InParty(kiakai); }, ravenTrigger);
-			scenes.AddEnc(DreamsScenes.RosalinNursing, 1.0, function() { return rosalin.flags["PastDialog"] > Rosalin.PastDialog.Past; }, ravenTrigger);
+			scenes.AddEnc(DreamsScenes.RosalinNursing, 1.0, function() { return rosalin.flags["PastDialog"] > RosalinFlags.PastDialog.Past; }, ravenTrigger);
 			scenes.AddEnc(DreamsScenes.RosalinTransformation, 1.0, function() { return rosalin.flags["Met"] != 0; }, ravenTrigger);
 			scenes.AddEnc(DreamsScenes.GwendyBarn, 1.0, function() { return gwendy.flags["Met"] != 0; }, ravenTrigger);
 			scenes.AddEnc(DreamsScenes.GwendyStallion, 1.0, function() { return gwendy.flags["Met"] != 0; }, ravenTrigger);
