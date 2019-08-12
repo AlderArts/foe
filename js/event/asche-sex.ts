@@ -3,55 +3,55 @@ import { Sex } from "../entity-sex";
 import { Gui } from "../gui";
 import { GAME, TimeStep } from "../GAME";
 
-let SexScenes : any = {};
+let AscheSexScenes : any = {};
 
-SexScenes.Prompt = function() {
+AscheSexScenes.Prompt = function() {
 	let player = GAME().player;
 	var options = new Array();
 	options.push({ nameStr : "Fuck her",
 		tooltip : "You’ve long waited for the chance to have a go at the exotic shopkeeper.",
 		func : function() {
-			SexScenes.FuckHer();
+			AscheSexScenes.FuckHer();
 		}, enabled : player.FirstCock() || player.Strapon()
 	});
 	options.push({ nameStr : "Give Oral",
 		tooltip : "Better to give than to receive, isn’t it?",
 		func : function() {
-			SexScenes.GiveOral();
+			AscheSexScenes.GiveOral();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Get Oral",
 		tooltip : "She certainly has a nice, long muzzle… wonder if her tongue’s just as good.",
 		func : function() {
-			SexScenes.GetOral();
+			AscheSexScenes.GetOral();
 		}, enabled : player.Humanoid() && (player.FirstCock() || player.FirstVag())
 	});
 	if(player.FirstCock()) {
 		options.push({ nameStr : "Titfuck",
 			tooltip : "Those ripe melons sure look soft and juicy… a verdant valley to bury your cock in.",
 			func : function() {
-				SexScenes.Titfuck();
+				AscheSexScenes.Titfuck();
 			}, enabled : true
 		});
 	}
 	options.push({ nameStr : "Milk",
 		tooltip : "You’d like to sample her tits, please. Those are bound to be delicious.",
 		func : function() {
-			SexScenes.MilkHer();
+			AscheSexScenes.MilkHer();
 		}, enabled : true
 	});
 	if(player.FirstVag()) {
 		options.push({ nameStr : "Tribbing",
 			tooltip : "Maybe some lady love would be nice.",
 			func : function() {
-				SexScenes.Tribbing();
+				AscheSexScenes.Tribbing();
 			}, enabled : true
 		});
 	}
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-SexScenes.FuckHer = function() {
+AscheSexScenes.FuckHer = function() {
 	let player = GAME().player;
 	let asche = GAME().asche;
 
@@ -147,10 +147,10 @@ SexScenes.FuckHer = function() {
 	Text.Add("<i>“Asche thanks you for a good time,”</i> she says, a mischievous, though tired, lilt in her voice. <i>“Although experience is not the best she has had, nevertheless is still very good.</i>", parse);
 	Text.Flush();
 	
-	Gui.NextPrompt(SexScenes.Ending);
+	Gui.NextPrompt(AscheSexScenes.Ending);
 }
 
-SexScenes.GiveOral = function() {
+AscheSexScenes.GiveOral = function() {
 	let player = GAME().player;
 	let asche = GAME().asche;
 
@@ -195,10 +195,10 @@ SexScenes.GiveOral = function() {
 	Text.Add("Panting, heaving, both of you just lie there for a time. You feel a coolness on your face as Asche’s sweet honey dries on your [skin]. At last, the jackaless recovers enough to stand - albeit shakily - and looks down on you with a very satisfied expression on her muzzle.", parse);
 	Text.Flush();
 	
-	Gui.NextPrompt(SexScenes.Ending);
+	Gui.NextPrompt(AscheSexScenes.Ending);
 }
 
-SexScenes.GetOral = function() {
+AscheSexScenes.GetOral = function() {
 	let player = GAME().player;
 	let asche = GAME().asche;
 
@@ -312,10 +312,10 @@ SexScenes.GetOral = function() {
 	Text.Add("It’s a while before either of you can muster the energy to so much as speak, and a good ten or fifteen minutes before Asche recovers enough to so much as lift her head off the mattress and let out a long, salacious moan.", parse);
 	Text.Flush();
 	
-	Gui.NextPrompt(SexScenes.Ending);
+	Gui.NextPrompt(AscheSexScenes.Ending);
 }
 
-SexScenes.Titfuck = function() {
+AscheSexScenes.Titfuck = function() {
 	let player = GAME().player;
 
 	var p1cock = player.BiggestCock();
@@ -363,10 +363,10 @@ SexScenes.Titfuck = function() {
 	Text.Add("Grinning at you, the sexy, exotic shopkeeper lifts herself into a kneeling position and starts to fondle her breasts, slathering your cum all over her fur until it’s a slick, matted mess, drawing small circles around her dark, fat nipples as she shivers with magically enhanced pleasure.", parse);
 	Text.Flush();
 	
-	Gui.NextPrompt(SexScenes.Ending);
+	Gui.NextPrompt(AscheSexScenes.Ending);
 }
 
-SexScenes.MilkHer = function() {
+AscheSexScenes.MilkHer = function() {
 	let player = GAME().player;
 
 	var parse : any = {
@@ -407,10 +407,10 @@ SexScenes.MilkHer = function() {
 	Text.Add("You cry out as well, sharing her pleasure and riding her orgasm, and tremble from head to [foot] before finally going limp, as utterly exhausted as your sexy, exotic lover is. You lie against each other for a few minutes, utterly winded, until Asche shakily pushes herself off you, a big, silly grin on her face.", parse);
 	Text.Flush();
 	
-	Gui.NextPrompt(SexScenes.Ending);
+	Gui.NextPrompt(AscheSexScenes.Ending);
 }
 
-SexScenes.Tribbing = function() {
+AscheSexScenes.Tribbing = function() {
 	let player = GAME().player;
 
 	var parse : any = {
@@ -450,10 +450,10 @@ SexScenes.Tribbing = function() {
 	Text.Add("Too dazed and addled to so much as move herself for the moment, Asche slumps atop you, the pulse and ebb of your intermeshed cunts setting you both down gently from your climaxes while you catch your breath. Gradually, the light from the golden patterns on your bodies fades away, and Asche manages to summon enough strength to stand, albeit shakily.", parse);
 	Text.Flush();
 	
-	Gui.NextPrompt(SexScenes.Ending);
+	Gui.NextPrompt(AscheSexScenes.Ending);
 }
 
-SexScenes.Ending = function() {
+AscheSexScenes.Ending = function() {
 	let player = GAME().player;
 
 	var parse : any = {
@@ -482,7 +482,7 @@ SexScenes.Ending = function() {
 	Gui.NextPrompt();
 }
 
-SexScenes.MagicalThreesome = function() {
+AscheSexScenes.MagicalThreesome = function() {
 	let player = GAME().player;
 	let asche = GAME().asche;
 
@@ -599,4 +599,4 @@ SexScenes.MagicalThreesome = function() {
 	Gui.NextPrompt();
 }
 
-export { SexScenes };
+export { AscheSexScenes };

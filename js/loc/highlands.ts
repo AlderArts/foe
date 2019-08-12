@@ -15,7 +15,7 @@ import { ZebraShamanScenes } from '../enemy/zebra';
 import { MaliceScoutsScenes } from '../enemy/malice-scouts';
 import { MomoScenes } from '../event/momo';
 import { RoamingScenes } from '../event/roaming';
-import { TasksScenes } from '../event/asche-tasks';
+import { AscheTasksScenes } from '../event/asche-tasks';
 import { Isla, IslaScenes } from '../event/highlands/isla';
 import { Gui } from '../gui';
 import { IslaFlags } from '../event/highlands/isla-flags';
@@ -122,18 +122,18 @@ HighlandsLoc.Hills.events.push(new Link(
 	}, true,
 	null,
 	function() {
-		TasksScenes.Ginseng.Highlands();
+		AscheTasksScenes.Ginseng.Highlands();
 	}
 ));
 
 HighlandsLoc.Hills.events.push(new Link(
 	"Spring", function() {
 		//TODO Isla's string (put as loc rather than event)
-		return TasksScenes.Spring.IsOn() && !TasksScenes.Spring.IsSuccess();
+		return AscheTasksScenes.Spring.IsOn() && !AscheTasksScenes.Spring.IsSuccess();
 	}, true,
 	null,
 	function() {
-		TasksScenes.Spring.Highlands();
+		AscheTasksScenes.Spring.Highlands();
 	}
 ));
 

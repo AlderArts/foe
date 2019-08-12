@@ -12,12 +12,12 @@ import { GlobalScenes } from './event/global';
 import { GAME } from './GAME';
 import { TwinsFlags } from './event/royals/twins-flags';
 import { AlchemyItems } from './items/alchemy';
-import { AscheScenes } from './event/asche-scenes';
 import { LeiScenes } from './event/royals/lei-scenes';
 import { RigardFlags } from './loc/rigard/rigard-flags';
 import { DryadGladeFlags } from './loc/glade-flags';
 import { BurrowsFlags } from './loc/burrows-flags';
 import { LeiFlags } from './event/royals/lei-flags';
+import { AscheTasksScenes } from './event/asche-tasks';
 
 export class Quest {
 	name : any;
@@ -788,13 +788,13 @@ Quests.quests.push(new Quest({
 	},
 	active: function() {
 		var status = Quests.Type.NotStarted;
-		if(AscheScenes.Tasks.Ginseng.IsCompleted()) {
-			if(AscheScenes.Tasks.Ginseng.IsSuccess())
+		if(AscheTasksScenes.Ginseng.IsCompleted()) {
+			if(AscheTasksScenes.Ginseng.IsSuccess())
 				status |= Quests.Type.Completed;
-			else if(AscheScenes.Tasks.Ginseng.IsFail())
+			else if(AscheTasksScenes.Ginseng.IsFail())
 				status |= Quests.Type.Failed;
 		}
-		else if(AscheScenes.Tasks.Ginseng.IsOn())
+		else if(AscheTasksScenes.Ginseng.IsOn())
 			status |= Quests.Type.Visible;
 		return status;
 	},
@@ -806,9 +806,9 @@ Quests.quests.push(new Quest({
 			active: function() {
 				var status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(AscheScenes.Tasks.Ginseng.IsSuccess())
+				if(AscheTasksScenes.Ginseng.IsSuccess())
 					status |= Quests.Type.Completed;
-				else if(AscheScenes.Tasks.Ginseng.IsFail())
+				else if(AscheTasksScenes.Ginseng.IsFail())
 					status |= Quests.Type.Failed;
 				return status;
 			}
@@ -820,7 +820,7 @@ Quests.quests.push(new Quest({
 			active: function() {
 				var status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(AscheScenes.Tasks.Ginseng.IsCompleted())
+				if(AscheTasksScenes.Ginseng.IsCompleted())
 					status |= Quests.Type.Completed;
 				return status;
 			}
@@ -838,9 +838,9 @@ Quests.quests.push(new Quest({
 	},
 	active: function() {
 		var status = Quests.Type.NotStarted;
-		if(AscheScenes.Tasks.Nightshade.IsCompleted())
+		if(AscheTasksScenes.Nightshade.IsCompleted())
 			status |= Quests.Type.Completed;
-		else if(AscheScenes.Tasks.Nightshade.IsOn())
+		else if(AscheTasksScenes.Nightshade.IsOn())
 			status |= Quests.Type.Visible;
 		return status;
 	},
@@ -852,7 +852,7 @@ Quests.quests.push(new Quest({
 			active: function() {
 				var status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(AscheScenes.Tasks.Nightshade.HasHelpFromAquilius())
+				if(AscheTasksScenes.Nightshade.HasHelpFromAquilius())
 					status |= Quests.Type.Completed;
 				return status;
 			}
@@ -864,7 +864,7 @@ Quests.quests.push(new Quest({
 			active: function() {
 				var status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(AscheScenes.Tasks.Nightshade.IsSuccess())
+				if(AscheTasksScenes.Nightshade.IsSuccess())
 					status |= Quests.Type.Completed;
 				return status;
 			}
@@ -876,7 +876,7 @@ Quests.quests.push(new Quest({
 			active: function() {
 				var status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(AscheScenes.Tasks.Nightshade.IsCompleted())
+				if(AscheTasksScenes.Nightshade.IsCompleted())
 					status |= Quests.Type.Completed;
 				return status;
 			}
@@ -893,9 +893,9 @@ Quests.quests.push(new Quest({
 	},
 	active: function() {
 		var status = Quests.Type.NotStarted;
-		if(AscheScenes.Tasks.Spring.IsCompleted())
+		if(AscheTasksScenes.Spring.IsCompleted())
 			status |= Quests.Type.Completed;
-		else if(AscheScenes.Tasks.Spring.IsOn())
+		else if(AscheTasksScenes.Spring.IsOn())
 			status |= Quests.Type.Visible;
 		return status;
 	},
@@ -907,7 +907,7 @@ Quests.quests.push(new Quest({
 			active: function() {
 				var status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(AscheScenes.Tasks.Spring.IsSuccess())
+				if(AscheTasksScenes.Spring.IsSuccess())
 					status |= Quests.Type.Completed;
 				return status;
 			}
@@ -919,7 +919,7 @@ Quests.quests.push(new Quest({
 			active: function() {
 				var status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(AscheScenes.Tasks.Spring.IsCompleted())
+				if(AscheTasksScenes.Spring.IsCompleted())
 					status |= Quests.Type.Completed;
 				return status;
 			}

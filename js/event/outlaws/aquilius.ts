@@ -15,7 +15,7 @@ import { Party } from '../../party';
 import { Jobs } from '../../job';
 import { GlobalScenes } from '../global';
 import { ItemIds, Item } from '../../item';
-import { AscheScenes } from '../asche-scenes';
+import { AscheTasksScenes } from '../asche-tasks';
 
 let AquiliusScenes : any = {};
 
@@ -344,12 +344,12 @@ AquiliusScenes.Prompt = function() {
 		tooltip : "Give the good surgeon a look-over.",
 		func : AquiliusScenes.Appearance, enabled : true
 	});
-	if(AscheScenes.Tasks.Nightshade.IsOn() &&
-	   !AscheScenes.Tasks.Nightshade.IsSuccess() &&
-	   !AscheScenes.Tasks.Nightshade.HasHelpFromAquilius()) {
+	if(AscheTasksScenes.Nightshade.IsOn() &&
+	   !AscheTasksScenes.Nightshade.IsSuccess() &&
+	   !AscheTasksScenes.Nightshade.HasHelpFromAquilius()) {
 		options.push({ nameStr : "Nightshade",
 			tooltip : "Ask Aquilius about the herb that Asche sent you to look for.",
-			func : AscheScenes.Tasks.Nightshade.AskAquiliusForHelp, enabled : true
+			func : AscheTasksScenes.Nightshade.AskAquiliusForHelp, enabled : true
 		});
 	}
 	// DAYTIME

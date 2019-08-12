@@ -22,12 +22,12 @@ import { IngredientItems } from '../items/ingredients';
 import { QuestItems } from '../items/quest';
 import { AccItems } from '../items/accessories';
 import { AscheFlags } from './asche-flags';
-import { SexScenes } from './asche-sex';
 import { AscheScenes } from './asche-scenes';
+import { AscheSexScenes } from './asche-sex';
 
-let TasksScenes : any = {};
+let AscheTasksScenes : any = {};
 
-TasksScenes.Default = function() {
+AscheTasksScenes.Default = function() {
 	var parse : any = {};
 	
 	//Play this if the player isn’t eligible for a new task at the moment.
@@ -44,36 +44,36 @@ TasksScenes.Default = function() {
 	AscheScenes.TalkPrompt();
 }
 
-TasksScenes.Ginseng = {};
+AscheTasksScenes.Ginseng = {};
 
-TasksScenes.Ginseng.IsEligable = function() {
+AscheTasksScenes.Ginseng.IsEligable = function() {
 	let asche = GAME().asche;
 	let rigard = GAME().rigard;
 	return asche.flags["Tasks"] < AscheFlags.Tasks.Ginseng_Started &&
 	       rigard.MagicShop.totalBought >= 500 &&
 	       GAME().player.level >= 5;
 }
-TasksScenes.Ginseng.IsOn = function() {
+AscheTasksScenes.Ginseng.IsOn = function() {
 	let asche = GAME().asche;
 	return asche.flags["Tasks"] >= AscheFlags.Tasks.Ginseng_Started &&
 	       asche.flags["Tasks"] < AscheFlags.Tasks.Ginseng_Finished;
 }
-TasksScenes.Ginseng.IsFail = function() {
+AscheTasksScenes.Ginseng.IsFail = function() {
 	let asche = GAME().asche;
 	return asche.flags["Tasks"] & AscheFlags.Tasks.Ginseng_Failed;
 }
-TasksScenes.Ginseng.IsSuccess = function() {
+AscheTasksScenes.Ginseng.IsSuccess = function() {
 	let asche = GAME().asche;
 	return asche.flags["Tasks"] & AscheFlags.Tasks.Ginseng_Succeeded;
 }
-TasksScenes.Ginseng.IsCompleted = function() {
+AscheTasksScenes.Ginseng.IsCompleted = function() {
 	let asche = GAME().asche;
 	return asche.flags["Tasks"] >= AscheFlags.Tasks.Ginseng_Finished;
 }
 
 //This should have a level requirement such that the PC has a chance at actually beating the enemies involved. Maybe add a money spent or items bought requirement?
 //Maybe a minimum level of 7, the encounter will be 8 or 9.
-TasksScenes.Ginseng.Initiation = function() {
+AscheTasksScenes.Ginseng.Initiation = function() {
 	let player = GAME().player;
 	let asche = GAME().asche;
 
@@ -121,7 +121,7 @@ TasksScenes.Ginseng.Initiation = function() {
 	Gui.NextPrompt();
 }
 
-TasksScenes.Ginseng.OnTask = function() {
+AscheTasksScenes.Ginseng.OnTask = function() {
 	let player = GAME().player;
 
 	var parse : any = {
@@ -139,7 +139,7 @@ TasksScenes.Ginseng.OnTask = function() {
 	AscheScenes.TalkPrompt();
 }
 
-TasksScenes.Ginseng.Failed = function() {
+AscheTasksScenes.Ginseng.Failed = function() {
 	let player = GAME().player;
 	let asche = GAME().asche;
 
@@ -156,7 +156,7 @@ TasksScenes.Ginseng.Failed = function() {
 	asche.flags["Tasks"] |= AscheFlags.Tasks.Ginseng_Finished;
 }
 
-TasksScenes.Ginseng.Highlands = function() {
+AscheTasksScenes.Ginseng.Highlands = function() {
 	let player = GAME().player;
 	let party : Party = GAME().party;
 	let asche = GAME().asche;
@@ -206,11 +206,11 @@ TasksScenes.Ginseng.Highlands = function() {
 			var options = new Array();
 			options.push({ nameStr : "Bribe",
 				tooltip : "See if you can buy off the zebras.",
-				func : TasksScenes.Ginseng.Bribe, enabled : true
+				func : AscheTasksScenes.Ginseng.Bribe, enabled : true
 			});
 			options.push({ nameStr : "Whore",
 				tooltip : "A whole year of celibacy, huh… they must be pretty pent-up. Maybe you can whore yourself out for a favor.",
-				func : TasksScenes.Ginseng.Whore, enabled : true
+				func : AscheTasksScenes.Ginseng.Whore, enabled : true
 			});
 			Gui.SetButtonsFromList(options, false, null);
 		}, enabled : true
@@ -260,7 +260,7 @@ TasksScenes.Ginseng.Highlands = function() {
 				Text.Add("So much for stealth! A shout comes up, directed at you - down below, the shaman and his companions are already on their feet, having seized their staff and spears. Scowling in frustration, you narrowly dodge a few beams of magic aimed your way, and slide down the ravine to do battle.", parse);
 				Text.Flush();
 				
-				TasksScenes.Ginseng.Fight();
+				AscheTasksScenes.Ginseng.Fight();
 			}
 		}, enabled : true
 	});
@@ -278,13 +278,13 @@ TasksScenes.Ginseng.Highlands = function() {
 			Text.Add(" Best to press your advantage while you still have it.", parse);
 			Text.Flush();
 			
-			TasksScenes.Ginseng.Fight();
+			AscheTasksScenes.Ginseng.Fight();
 		}, enabled : true
 	});
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-TasksScenes.Ginseng.Fight = function() {
+AscheTasksScenes.Ginseng.Fight = function() {
 	var enemy = new Party();
 	enemy.AddMember(new ZebraShaman(2));
 	enemy.AddMember(new ZebraBrave(2));
@@ -292,15 +292,15 @@ TasksScenes.Ginseng.Fight = function() {
 	var enc = new Encounter(enemy);
 	
 	enc.canRun = false;
-	enc.onLoss = TasksScenes.Ginseng.FightLoss;
-	enc.onVictory = TasksScenes.Ginseng.FightWin;
+	enc.onLoss = AscheTasksScenes.Ginseng.FightLoss;
+	enc.onVictory = AscheTasksScenes.Ginseng.FightWin;
 	
 	Gui.NextPrompt(function() {
 		enc.Start();
 	});
 }
 
-TasksScenes.Ginseng.Bribe = function() {
+AscheTasksScenes.Ginseng.Bribe = function() {
 	let party : Party = GAME().party;
 	let asche = GAME().asche;
 
@@ -358,7 +358,7 @@ TasksScenes.Ginseng.Bribe = function() {
 	});
 	options.push({ nameStr : "Whore",
 		tooltip : "Hmm, maybe they’re willing to accept another price…",
-		func : TasksScenes.Ginseng.Whore, enabled : true
+		func : AscheTasksScenes.Ginseng.Whore, enabled : true
 	});
 	options.push({ nameStr : "Fight",
 		tooltip : "Screw this - enough talk! Have at them!",
@@ -369,14 +369,14 @@ TasksScenes.Ginseng.Bribe = function() {
 			Text.Add("It’s a fight!", parse);
 			Text.Flush();
 			
-			TasksScenes.Ginseng.Fight();
+			AscheTasksScenes.Ginseng.Fight();
 		}, enabled : true
 	});
 	Gui.SetButtonsFromList(options, false, null);
 }
 
 
-TasksScenes.Ginseng.Whore = function() {
+AscheTasksScenes.Ginseng.Whore = function() {
 	let player = GAME().player;
 	let party : Party = GAME().party;
 	let asche = GAME().asche;
@@ -470,7 +470,7 @@ TasksScenes.Ginseng.Whore = function() {
 		var options = new Array();
 		options.push({ nameStr : "Bribe",
 			tooltip : "If sex won’t sway them, maybe money will…",
-			func : TasksScenes.Ginseng.Bribe, enabled : true
+			func : AscheTasksScenes.Ginseng.Bribe, enabled : true
 		});
 		options.push({ nameStr : "Fight",
 			tooltip : "Screw this (well, not literally), enough talk! Have at them!",
@@ -481,14 +481,14 @@ TasksScenes.Ginseng.Whore = function() {
 				Text.Add("It’s a fight!", parse);
 				Text.Flush();
 				
-				TasksScenes.Ginseng.Fight();
+				AscheTasksScenes.Ginseng.Fight();
 			}, enabled : true
 		});
 		Gui.SetButtonsFromList(options, false, null);
 	}
 }
 
-TasksScenes.Ginseng.FightWin = function() {
+AscheTasksScenes.Ginseng.FightWin = function() {
 	let party : Party = GAME().party;
 	let asche = GAME().asche;
 
@@ -520,7 +520,7 @@ TasksScenes.Ginseng.FightWin = function() {
 	Encounter.prototype.onVictory.call(enc);
 }
 
-TasksScenes.Ginseng.FightLoss = function() {
+AscheTasksScenes.Ginseng.FightLoss = function() {
 	let party : Party = GAME().party;
 	let asche = GAME().asche;
 
@@ -546,7 +546,7 @@ TasksScenes.Ginseng.FightLoss = function() {
 	Gui.NextPrompt();
 }
 
-TasksScenes.Ginseng.Complete = function() {
+AscheTasksScenes.Ginseng.Complete = function() {
 	let player = GAME().player;
 	let party : Party = GAME().party;
 	let asche = GAME().asche;
@@ -635,7 +635,7 @@ TasksScenes.Ginseng.Complete = function() {
 			Text.Add("<i>“Now, what kind of lesson would customer like for [hisher] reward?”</i>", parse);
 			Text.Flush();
 			
-			SexScenes.Prompt();
+			AscheSexScenes.Prompt();
 		}, enabled : true
 	});
 	options.push({ nameStr : "No",
@@ -670,36 +670,36 @@ TasksScenes.Ginseng.Complete = function() {
 //
 // Second Quest (Nightshade)
 //
-TasksScenes.Nightshade = {};
+AscheTasksScenes.Nightshade = {};
 
-TasksScenes.Nightshade.IsEligable = function() {
+AscheTasksScenes.Nightshade.IsEligable = function() {
 	let asche = GAME().asche;
 	let rigard = GAME().rigard;
 	return asche.flags["Tasks"] < AscheFlags.Tasks.Nightshade_Started &&
 	       rigard.MagicShop.totalBought >= 1000 &&
 	       GAME().player.level >= 8;
 }
-TasksScenes.Nightshade.IsOn = function() {
+AscheTasksScenes.Nightshade.IsOn = function() {
 	let asche = GAME().asche;
 	return asche.flags["Tasks"] >= AscheFlags.Tasks.Nightshade_Started &&
 	       asche.flags["Tasks"] < AscheFlags.Tasks.Nightshade_Finished;
 }
-TasksScenes.Nightshade.IsSuccess = function() {
+AscheTasksScenes.Nightshade.IsSuccess = function() {
 	let asche = GAME().asche;
 	return asche.flags["Tasks"] & AscheFlags.Tasks.Nightshade_Succeeded;
 }
-TasksScenes.Nightshade.HasHelpFromAquilius = function() {
+AscheTasksScenes.Nightshade.HasHelpFromAquilius = function() {
 	let asche = GAME().asche;
 	return asche.flags["Tasks"] & AscheFlags.Tasks.Nightshade_Aquilius;
 }
-TasksScenes.Nightshade.IsCompleted = function() {
+AscheTasksScenes.Nightshade.IsCompleted = function() {
 	let asche = GAME().asche;
 	return asche.flags["Tasks"] >= AscheFlags.Tasks.Nightshade_Finished;
 }
 
 
 //The player should have resolved the first quest, be at an appropriate level, and perhaps have spent x amount of money or bought so many items from Asche before this unlocks.
-TasksScenes.Nightshade.Initiation = function() {
+AscheTasksScenes.Nightshade.Initiation = function() {
 	let player = GAME().player;
 	let asche = GAME().asche;
 
@@ -730,7 +730,7 @@ TasksScenes.Nightshade.Initiation = function() {
 	Gui.NextPrompt();
 }
 
-TasksScenes.Nightshade.OnTask = function() {
+AscheTasksScenes.Nightshade.OnTask = function() {
 	let player = GAME().player;
 	var parse : any = {
 		hisher : player.mfFem("his", "her")
@@ -746,7 +746,7 @@ TasksScenes.Nightshade.OnTask = function() {
 }
 
 //While on this quest, add a one-time “nightshade” button to Aquilius’ daytime talk menu.
-TasksScenes.Nightshade.AskAquiliusForHelp = function() {
+AscheTasksScenes.Nightshade.AskAquiliusForHelp = function() {
 	let player = GAME().player;
 	let asche = GAME().asche;
 
@@ -778,7 +778,7 @@ TasksScenes.Nightshade.AskAquiliusForHelp = function() {
 //Maybe a success bonus if the player has ranger job mastered?
 
 //Only used if PC is wandering around blind (I.E, didn’t ask Aquilius)
-TasksScenes.Nightshade.BlindStart = function() {
+AscheTasksScenes.Nightshade.BlindStart = function() {
 	let player = GAME().player;
 
 	var parse : any = {
@@ -814,14 +814,14 @@ TasksScenes.Nightshade.BlindStart = function() {
 		
 		TimeStep({minute: 30});
 		
-		TasksScenes.Nightshade.HerbComplications();
+		AscheTasksScenes.Nightshade.HerbComplications();
 	}, 1 + rangerBonus, function() { return true; });
 	
 	scenes.Get();
 }
 
 //Use this if asked Aquilius for help
-TasksScenes.Nightshade.FollowAquilius = function() {
+AscheTasksScenes.Nightshade.FollowAquilius = function() {
 	var parse : any = {
 		
 	};
@@ -835,10 +835,10 @@ TasksScenes.Nightshade.FollowAquilius = function() {
 	
 	TimeStep({minute: 30});
 	
-	TasksScenes.Nightshade.HerbComplications();
+	AscheTasksScenes.Nightshade.HerbComplications();
 }
 
-TasksScenes.Nightshade.HerbComplications = function() {
+AscheTasksScenes.Nightshade.HerbComplications = function() {
 	let player = GAME().player;
 	let party : Party = GAME().party;
 	let asche = GAME().asche;
@@ -903,7 +903,7 @@ TasksScenes.Nightshade.HerbComplications = function() {
 	}
 }
 
-TasksScenes.Nightshade.Complete = function() {
+AscheTasksScenes.Nightshade.Complete = function() {
 	let player = GAME().player;
 	let party : Party = GAME().party;
 	let asche = GAME().asche;
@@ -1026,7 +1026,7 @@ TasksScenes.Nightshade.Complete = function() {
 			Text.Add("<i>“Mm, which is just nice,”</i> Asche replies, the jackaless finishing up the pattern by drawing a series of concentric circles about your groin. Done, she screws the lid back on the ointment pot before licking her fingertips with exaggerated relish. <i>“Now, what kind of educational experience was [handsomepretty] customer wanting?”</i>", parse);
 			Text.Flush();
 			
-			SexScenes.Prompt();
+			AscheSexScenes.Prompt();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Money",
@@ -1057,30 +1057,30 @@ TasksScenes.Nightshade.Complete = function() {
 
 
 
-TasksScenes.Spring = {};
+AscheTasksScenes.Spring = {};
 
-TasksScenes.Spring.IsEligable = function() {
+AscheTasksScenes.Spring.IsEligable = function() {
 	let asche = GAME().asche;
 	let rigard = GAME().rigard;
 	return asche.flags["Tasks"] < AscheFlags.Tasks.Spring_Started &&
 	       rigard.MagicShop.totalBought >= 1500 &&
 	       GAME().player.level >= 8;
 }
-TasksScenes.Spring.IsOn = function() {
+AscheTasksScenes.Spring.IsOn = function() {
 	let asche = GAME().asche;
 	return asche.flags["Tasks"] >= AscheFlags.Tasks.Spring_Started &&
 	       asche.flags["Tasks"] < AscheFlags.Tasks.Spring_Finished;
 }
-TasksScenes.Spring.IsSuccess = function() {
+AscheTasksScenes.Spring.IsSuccess = function() {
 	let asche = GAME().asche;
 	return asche.flags["Tasks"] & AscheFlags.Tasks.Spring_Visited;
 }
-TasksScenes.Spring.IsCompleted = function() {
+AscheTasksScenes.Spring.IsCompleted = function() {
 	let asche = GAME().asche;
 	return asche.flags["Tasks"] >= AscheFlags.Tasks.Spring_Finished;
 }
 
-TasksScenes.Spring.Initiation = function() {
+AscheTasksScenes.Spring.Initiation = function() {
 	let player = GAME().player;
 	let asche = GAME().asche;
 
@@ -1135,7 +1135,7 @@ TasksScenes.Spring.Initiation = function() {
 }
 
 //Select “spring” from Highlands menu.
-TasksScenes.Spring.Highlands = function() {
+AscheTasksScenes.Spring.Highlands = function() {
 	let player = GAME().player;
 	let party : Party = GAME().party;
 	let asche = GAME().asche;
@@ -1241,7 +1241,7 @@ TasksScenes.Spring.Highlands = function() {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-TasksScenes.Spring.OnTask = function() {
+AscheTasksScenes.Spring.OnTask = function() {
 	let player = GAME().player;
 
 	var parse : any = {
@@ -1254,7 +1254,7 @@ TasksScenes.Spring.OnTask = function() {
 	Text.Flush();
 }
 
-TasksScenes.Spring.Complete = function() {
+AscheTasksScenes.Spring.Complete = function() {
 	let player = GAME().player;
 	let party : Party = GAME().party;
 	let asche = GAME().asche;
@@ -1343,14 +1343,14 @@ TasksScenes.Spring.Complete = function() {
 			Text.Add("<i>“Now… which lesson would [handsomepretty] customer be liking to be taking today?”</i>", parse);
 			Text.Flush();
 			
-			SexScenes.Prompt();
+			AscheSexScenes.Prompt();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Adventure",
 		tooltip : "An adventure? Why, that sounds like a whole barrel of fun! What could go wrong?",
-		func : SexScenes.MagicalThreesome, enabled : true
+		func : AscheSexScenes.MagicalThreesome, enabled : true
 	});
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-export { TasksScenes };
+export { AscheTasksScenes };

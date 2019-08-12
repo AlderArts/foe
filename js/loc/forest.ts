@@ -20,9 +20,9 @@ import { FeralWolfScenes } from '../enemy/feralwolf';
 import { MomoScenes } from '../event/momo';
 import { QuestItems } from '../items/quest';
 import { AquiliusScenes } from '../event/outlaws/aquilius';
-import { AscheScenes } from '../event/asche-scenes';
 import { BurrowsFlags } from './burrows-flags';
 import { Party } from '../party';
+import { AscheTasksScenes } from '../event/asche-tasks';
 
 // Create namespace
 let ForestLoc = {
@@ -266,13 +266,13 @@ ForestLoc.Outskirts.events.push(new Link(
 	}
 ));
 ForestLoc.Outskirts.events.push(new Link(
-	"Nightshade", function() { return AscheScenes.Tasks.Nightshade.IsOn() && !AscheScenes.Tasks.Nightshade.IsSuccess(); }, true,
+	"Nightshade", function() { return AscheTasksScenes.Nightshade.IsOn() && !AscheTasksScenes.Nightshade.IsSuccess(); }, true,
 	null,
 	function() {
-		if(AscheScenes.Tasks.Nightshade.HasHelpFromAquilius())
-			AscheScenes.Tasks.Nightshade.FollowAquilius();
+		if(AscheTasksScenes.Nightshade.HasHelpFromAquilius())
+			AscheTasksScenes.Nightshade.FollowAquilius();
 		else
-			AscheScenes.Tasks.Nightshade.BlindStart();
+			AscheTasksScenes.Nightshade.BlindStart();
 	}
 ));
 
