@@ -16,7 +16,7 @@ import { Room69Flags } from '../../event/room69-flags';
 import { Party } from '../../party';
 import { QuestItems } from '../../items/quest';
 import { TerryScenes } from '../../event/terry-scenes';
-import { RigardScenes } from './rigard';
+import { RigardScenes } from './rigard-scenes';
 
 
 let ShopStreetScenes : any = {}

@@ -5,7 +5,7 @@ import { WorldTime, MoveToLocation, GAME, WORLD } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { Season } from '../../time';
-import { RigardScenes } from './rigard';
+import { RigardScenes } from './rigard-scenes';
 import { LeiScenes } from '../../event/royals/lei-scenes';
 import { MirandaScenes } from '../../event/miranda-scenes';
 

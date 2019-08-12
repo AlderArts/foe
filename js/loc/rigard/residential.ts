@@ -5,7 +5,7 @@ import { Text } from '../../text';
 import { MoveToLocation, GAME, WORLD } from '../../GAME';
 import { Gui } from '../../gui';
 import { RigardFlags } from './rigard-flags';
-import { RigardScenes } from './rigard';
+import { RigardScenes } from './rigard-scenes';
 import { TerryScenes } from '../../event/terry-scenes';
 import { LeiScenes } from '../../event/royals/lei-scenes';
 import { Party } from '../../party';

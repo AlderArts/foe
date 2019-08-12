@@ -15,7 +15,7 @@ import { WorldTime, MoveToLocation, GAME, WORLD, TimeStep } from '../GAME';
 import { Text } from '../text';
 import { Gui } from '../gui';
 import { EncounterTable } from '../encountertable';
-import { RigardScenes } from '../loc/rigard/rigard';
+import { RigardScenes } from '../loc/rigard/rigard-scenes';
 
 let FeraScenes : any = {};
 

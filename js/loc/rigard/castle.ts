@@ -14,7 +14,7 @@ import { AscheFlags } from '../../event/asche-flags';
 import { GlobalScenes } from '../../event/global';
 import { TerryScenes } from '../../event/terry-scenes';
 import { Party } from '../../party';
-import { RigardScenes } from './rigard';
+import { RigardScenes } from './rigard-scenes';
 
 
 let CastleLoc = {

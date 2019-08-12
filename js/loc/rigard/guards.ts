@@ -7,7 +7,7 @@ import { Text } from '../../text';
 import { RigardFlags } from './rigard-flags';
 import { Gui } from '../../gui';
 import { TerryScenes } from '../../event/terry-scenes';
-import { RigardScenes } from './rigard';
+import { RigardScenes } from './rigard-scenes';
 import { MirandaScenes } from '../../event/miranda-scenes';
 
 let GateLoc = new Event("Main Gate");

@@ -7,7 +7,7 @@ import { Gui } from '../../gui';
 import { RigardFlags } from './rigard-flags';
 import { Room69Flags } from '../../event/room69-flags';
 import { LeiFlags } from '../../event/royals/lei-flags';
-import { RigardScenes } from './rigard';
+import { RigardScenes } from './rigard-scenes';
 import { Party } from '../../party';
 import { KrawitzScenes } from './krawitz';
 import { TerryScenes } from '../../event/terry-scenes';
