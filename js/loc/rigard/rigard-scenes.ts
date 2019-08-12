@@ -9,10 +9,40 @@ import { Rand } from '../../utility';
 import { MirandaScenes } from '../../event/miranda-scenes';
 import { Party } from '../../party';
 import { KrawitzFlags } from './krawitz-flags';
-
 import { GAME, TimeStep, WorldTime, MoveToLocation } from '../../GAME';
 import { RigardFlags } from './rigard-flags';
-import { RigardLoc } from './rigard';
+
+import { GateLoc, BarracksLoc } from './guards';
+import { ResidentialLoc } from './residential';
+import { BrothelLoc } from './brothel';
+import { PlazaLoc } from './plaza';
+import { InnLoc } from './inn';
+import { ShopStreetLoc } from './merchants';
+import { KrawitzLoc } from './krawitz';
+import { CastleLoc } from './castle';
+import { SlumsLoc } from './slums';
+import { TavernLoc } from './tavern';
+
+// Create namespace
+let RigardLoc = {
+	Gate         : GateLoc,
+	Barracks     : BarracksLoc,
+
+	Residential   : ResidentialLoc,
+
+	Brothel      : BrothelLoc,
+
+	Plaza        : PlazaLoc,
+	Inn          : InnLoc,
+	ShopStreet   : ShopStreetLoc,
+
+	Krawitz      : KrawitzLoc,
+
+	Castle       : CastleLoc,
+
+	Slums        : SlumsLoc,
+	Tavern       : TavernLoc,
+}
 
 let RigardScenes : any = {
 };
@@ -1618,4 +1648,4 @@ RigardScenes.Lockdown = function() {
 	});
 }
 
-export { RigardScenes };
+export { RigardScenes, RigardLoc };

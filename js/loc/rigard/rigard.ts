@@ -4,17 +4,16 @@
  *
  */
 
-import { BrothelLoc, InitBrothel } from './brothel';
-import { InnLoc, InitLB } from './inn';
+import { InitBrothel } from './brothel';
+import { InitLB } from './inn';
 import { Shop } from '../../shop';
-import { ResidentialLoc, InitResidential } from './residential';
-import { SlumsLoc, InitSlums } from './slums';
-import { TavernLoc } from './tavern';
-import { GateLoc, BarracksLoc, InitGuards } from './guards';
-import { ShopStreetLoc } from './merchants';
-import { CastleLoc, InitCastle } from './castle';
-import { PlazaLoc } from './plaza';
-import { KrawitzLoc, InitKrawitz } from './krawitz';
+import { InitResidential } from './residential';
+import { InitSlums } from './slums';
+import { InitGuards } from './guards';
+import { InitMerchants } from './merchants';
+import { InitCastle } from './castle';
+import { InitPlaza } from './plaza';
+import { InitKrawitz } from './krawitz';
 import { MagicShopScenes } from './magicshop';
 import { ArmorShopScenes } from './armorshop';
 import { InitMageTower } from './magetower';
@@ -26,40 +25,24 @@ import { ArmorItems } from '../../items/armor';
 import { StrapOnItems } from '../../items/strapon';
 import { WeaponsItems } from '../../items/weapons';
 import { RigardScenes } from './rigard-scenes';
+import { InitFera } from '../../event/fera';
 
+// Dealing with circular dependencies
 export function InitRigard() {
 	InitBrothel();
+	InitMerchants(RigardScenes);
 	InitSlums(RigardScenes);
 	InitResidential(RigardScenes);
 	InitGuards(RigardScenes);
 	InitCastle(RigardScenes);
+	InitPlaza(RigardScenes);
+	InitFera(RigardScenes);
 	InitLB();
 	InitMageTower();
 	InitKrawitz();
 	ArmorShopScenes.CreateShop();
 	MagicShopScenes.CreateShop();
 };
-
-// Create namespace
-let RigardLoc = {
-	Gate         : GateLoc,
-	Barracks     : BarracksLoc,
-
-	Residential   : ResidentialLoc,
-
-	Brothel      : BrothelLoc,
-
-	Plaza        : PlazaLoc,
-	Inn          : InnLoc,
-	ShopStreet   : ShopStreetLoc,
-
-	Krawitz      : KrawitzLoc,
-
-	Castle       : CastleLoc,
-
-	Slums        : SlumsLoc,
-	Tavern       : TavernLoc,
-}
 
 // Class to handle global flags and logic for town
 export class Rigard {
@@ -262,5 +245,3 @@ export class Rigard {
 		return this.flags["Barnaby"] & RigardFlags.Barnaby.Blowjob;
 	}
 }
-
-export { RigardLoc };

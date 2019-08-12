@@ -12,7 +12,7 @@ import { Items } from '../items';
 import { Images } from '../assets';
 import { Color } from '../body/color';
 import { Race } from '../body/race';
-import { RigardLoc } from '../loc/rigard/rigard';
+import { RigardLoc } from '../loc/rigard/rigard-scenes';
 import { Cock } from '../body/cock';
 import { Vagina } from '../body/vagina';
 import { Text } from '../text';

@@ -11,13 +11,14 @@ import { FarmLoc, InitFarm } from './loc/farm-scenes';
 import { DesertLoc } from './loc/desert';
 import { BurrowsLoc, InitBurrows } from './loc/burrows-scenes';
 import { TreeCityLoc } from './loc/treecity/treecity';
-import { RigardLoc, InitRigard } from './loc/rigard/rigard';
+import { InitRigard } from './loc/rigard/rigard';
 import { InitGlade } from './loc/glade';
 import { InitNomads } from './loc/nomads';
 import { InitMiranda } from './event/miranda-scenes';
 import { BullTowerLoc } from './event/outlaws/bulltower';
 import { InitCheats } from './cheats';
 import { GAME, WORLD } from './GAME';
+import { RigardLoc } from './loc/rigard/rigard-scenes';
 
 export function InitWorld() {
 	let world = WORLD(); 

@@ -16,8 +16,11 @@ import { Room69Flags } from '../../event/room69-flags';
 import { Party } from '../../party';
 import { QuestItems } from '../../items/quest';
 import { TerryScenes } from '../../event/terry-scenes';
-import { RigardScenes } from './rigard-scenes';
 
+let RigardScenes : any;
+export function InitMerchants(rigardScenes : any) {
+	RigardScenes = rigardScenes;
+}
 
 let ShopStreetScenes : any = {}
 

@@ -7,7 +7,6 @@ import { Gui } from '../../gui';
 import { RigardFlags } from './rigard-flags';
 import { Room69Flags } from '../../event/room69-flags';
 import { LeiFlags } from '../../event/royals/lei-flags';
-import { RigardScenes } from './rigard-scenes';
 import { Party } from '../../party';
 import { KrawitzScenes } from './krawitz';
 import { TerryScenes } from '../../event/terry-scenes';
@@ -15,6 +14,11 @@ import { LowerBodyType } from '../../body/body';
 import { Rand } from '../../utility';
 import { IngredientItems } from '../../items/ingredients';
 import { LeiScenes } from '../../event/royals/lei-scenes';
+
+let RigardScenes : any;
+export function InitPlaza(rigardScenes : any) {
+	RigardScenes = rigardScenes;
+}
 
 let PlazaLoc = new Event("Plaza");
 
