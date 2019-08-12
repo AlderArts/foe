@@ -10,7 +10,6 @@ import { GlobalScenes } from './event/global';
 import { GAME } from './GAME';
 import { TwinsFlags } from './event/royals/twins-flags';
 import { AlchemyItems } from './items/alchemy';
-import { LeiScenes } from './event/royals/lei-scenes';
 import { RigardFlags } from './loc/rigard/rigard-flags';
 import { DryadGladeFlags } from './loc/glade-flags';
 import { BurrowsFlags } from './loc/burrows-flags';
@@ -18,6 +17,7 @@ import { LeiFlags } from './event/royals/lei-flags';
 import { AscheTasksScenes } from './event/asche-tasks';
 import { VaughnFlags } from './event/outlaws/vaughn-flags';
 import { VaughnTasksScenes } from './event/outlaws/vaughn-tasks';
+import { LeiTaskScenes } from './event/royals/lei-tasks';
 
 export class Quest {
 	name : any;
@@ -1073,7 +1073,7 @@ Quests.quests.push(new Quest({
 	},
 	active: function() {
 		var status = Quests.Type.NotStarted;
-		if(LeiScenes.Tasks.Escort.Completed())
+		if(LeiTaskScenes.Escort.Completed())
 			status |= Quests.Type.Completed;
 		else if(GAME().lei.flags["Met"] >= LeiFlags.Met.OnTaskEscort)
 			status |= Quests.Type.Visible;
@@ -1099,7 +1099,7 @@ Quests.quests.push(new Quest({
 			active: function() {
 				var status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(LeiScenes.Tasks.Escort.Completed())
+				if(LeiTaskScenes.Escort.Completed())
 					status |= Quests.Type.Completed;
 				return status;
 			}

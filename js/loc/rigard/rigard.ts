@@ -26,6 +26,8 @@ import { StrapOnItems } from '../../items/strapon';
 import { WeaponsItems } from '../../items/weapons';
 import { RigardScenes } from './rigard-scenes';
 import { InitFera } from '../../event/fera';
+import { LeiTaskScenes } from '../../event/royals/lei-tasks';
+import { LeiScenes } from '../../event/royals/lei-scenes';
 
 // Dealing with circular dependencies
 export function InitRigard() {
@@ -37,6 +39,7 @@ export function InitRigard() {
 	InitCastle(RigardScenes);
 	InitPlaza(RigardScenes);
 	InitFera(RigardScenes);
+	LeiTaskScenes.INIT(LeiScenes);
 	InitLB();
 	InitMageTower();
 	InitKrawitz();

@@ -13,7 +13,7 @@ import { TerryScenes } from '../../event/terry-scenes';
 import { LowerBodyType } from '../../body/body';
 import { Rand } from '../../utility';
 import { IngredientItems } from '../../items/ingredients';
-import { LeiScenes } from '../../event/royals/lei-scenes';
+import { LeiTaskScenes } from '../../event/royals/lei-tasks';
 
 let RigardScenes : any;
 export function InitPlaza(rigardScenes : any) {
@@ -263,7 +263,7 @@ PlazaLoc.links.push(new Link(
 
 PlazaLoc.links.push(new Link(
 	"Orellos", function() {
-		return LeiScenes.Tasks.Escort.OnTask();
+		return LeiTaskScenes.Escort.OnTask();
 	}, function() {
 		let lei = GAME().lei;
 		var t = true;
@@ -272,13 +272,13 @@ PlazaLoc.links.push(new Link(
 		return t;
 	},
 	function() {
-		if(LeiScenes.Tasks.Escort.OnTask()) {
+		if(LeiTaskScenes.Escort.OnTask()) {
 			Text.Add("Ventos Orellos' estate is nearby.");
 			Text.NL();
 		}
 	},
 	function() {
-		LeiScenes.Tasks.Escort.Estate();
+		LeiTaskScenes.Escort.Estate();
 	}
 ));
 
