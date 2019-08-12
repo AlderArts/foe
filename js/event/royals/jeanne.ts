@@ -7,99 +7,108 @@ import { Entity } from '../../entity';
 import { GetDEBUG } from '../../../app';
 import { AlchemyItems } from '../../items/alchemy';
 import { Race } from '../../body/race';
-import { GameCache, GAME } from '../../GAME';
+import { GameCache, GAME, TimeStep } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
-import { Items } from '../../items';
 import { TerryFlags } from '../terry-flags';
 import { RosalinFlags } from '../nomads/rosalin-flags';
+import { AlchemySpecial } from '../../items/alchemyspecial';
+import { GolemFlags } from './golem-flags';
+import { Party } from '../../party';
+import { GlobalScenes } from '../global';
+import { Alchemy } from '../../alchemy';
+import { TFItem } from '../../tf';
+import { TerryScenes } from '../terry-scenes';
 
-let JeanneScenes = {};
+let JeanneScenes : any = {};
 
-function Jeanne(storage) {
-	Entity.call(this);
-	this.ID = "jeanne";
-	
-	// Character stats
-	this.name = "Jeanne";
-	this.alchemyLevel = 10;
-	
-	this.recipes.push(AlchemyItems.Homos);
-	this.recipes.push(AlchemyItems.Estros);
-	this.recipes.push(AlchemyItems.Testos);
-	this.recipes.push(AlchemyItems.Gestarium);
-	this.recipes.push(AlchemyItems.GestariumPlus);
-	this.recipes.push(AlchemyItems.Virilium);
-	
-	//this.avatar.combat = new Image();
-	
-	this.maxHp.base        = 100;
-	this.maxSp.base        = 80;
-	this.maxLust.base      = 50;
-	// Main stats
-	this.strength.base     = 20;
-	this.stamina.base      = 22;
-	this.dexterity.base    = 16;
-	this.intelligence.base = 17;
-	this.spirit.base       = 15;
-	this.libido.base       = 20;
-	this.charisma.base     = 18;
-	
-	this.level = 5;
-	this.sexlevel = 3;
-	this.SetExpToLevel();
-	
-	this.body.DefFemale();
-	this.FirstBreastRow().size.base = 9;
-	this.Butt().buttSize.base = 7;
-	this.body.SetRace(Race.Elf);
-	
-	this.SetLevelBonus();
-	this.RestFull();
-	
-	this.flags["Met"] = 0;
-	this.flags["bg"] = 0;
+export class Jeanne extends Entity {
+	constructor(storage? : any) {
+		super();
 
-	if(storage) this.FromStorage(storage);
+		this.ID = "jeanne";
+		
+		// Character stats
+		this.name = "Jeanne";
+		this.alchemyLevel = 10;
+		
+		this.recipes.push(AlchemyItems.Homos);
+		this.recipes.push(AlchemyItems.Estros);
+		this.recipes.push(AlchemyItems.Testos);
+		this.recipes.push(AlchemyItems.Gestarium);
+		this.recipes.push(AlchemyItems.GestariumPlus);
+		this.recipes.push(AlchemyItems.Virilium);
+		
+		//this.avatar.combat = new Image();
+		
+		this.maxHp.base        = 100;
+		this.maxSp.base        = 80;
+		this.maxLust.base      = 50;
+		// Main stats
+		this.strength.base     = 20;
+		this.stamina.base      = 22;
+		this.dexterity.base    = 16;
+		this.intelligence.base = 17;
+		this.spirit.base       = 15;
+		this.libido.base       = 20;
+		this.charisma.base     = 18;
+		
+		this.level = 5;
+		this.sexlevel = 3;
+		this.SetExpToLevel();
+		
+		this.body.DefFemale();
+		this.FirstBreastRow().size.base = 9;
+		this.Butt().buttSize.base = 7;
+		this.body.SetRace(Race.Elf);
+		
+		this.SetLevelBonus();
+		this.RestFull();
+		
+		this.flags["Met"] = 0;
+		this.flags["bg"] = 0;
+
+		if(storage) this.FromStorage(storage);
+	}
+	
+	static ReadyForMagicTeaching() {
+		return (GAME().player.jobs["Mage"].level +
+				GAME().player.jobs["Mystic"].level +
+				GAME().player.jobs["Healer"].level) >= 9;
+	}
+
+	FromStorage(storage : any) {
+		this.LoadPersonalityStats(storage);
+		
+		// Load flags
+		this.LoadFlags(storage);
+		if(GAME().rosalin.flags["Anusol"] >= RosalinFlags.Anusol.ShowedJeanne)
+			this.recipes.push(AlchemySpecial.AnusolPlus);
+	}
+	
+	ToStorage() {
+		var storage = {};
+		
+		this.SavePersonalityStats(storage);
+		
+		this.SaveFlags(storage);
+		
+		return storage;
+	}
+	
+	
+	// Schedule
+	IsAtLocation(location? : any) {
+		return true;
+	}	
 }
-Jeanne.prototype = new Entity();
-Jeanne.prototype.constructor = Jeanne;
 
-
-Jeanne.prototype.FromStorage = function(storage) {
-	this.LoadPersonalityStats(storage);
-	
-	// Load flags
-	this.LoadFlags(storage);
-	if(GAME().rosalin.flags["Anusol"] >= RosalinFlags.Anusol.ShowedJeanne)
-		this.recipes.push(Items.AnusolPlus);
-}
-
-Jeanne.prototype.ToStorage = function() {
-	var storage = {};
-	
-	this.SavePersonalityStats(storage);
-	
-	this.SaveFlags(storage);
-	
-	return storage;
-}
-
-Jeanne.ReadyForMagicTeaching = function() {
-	return (GAME().player.jobs["Mage"].level +
-	        GAME().player.jobs["Mystic"].level +
-	        GAME().player.jobs["Healer"].level) >= 9;
-}
-
-
-// Schedule
-Jeanne.prototype.IsAtLocation = function(location) {
-	return true;
-}
 
 // Interaction
 JeanneScenes.Interact = function() {
-	var parse = {};
+	let jeanne = GAME().jeanne;
+
+	var parse : any = {};
 	Text.Clear();
 	Text.Add("Jeanne greets you as you approach her, politely inquiring what’s on your mind. The gorgeous elven magician flicks her long, pink hair over her shoulder, smiling seductively.", parse);
 	Text.NL();
@@ -121,8 +130,11 @@ JeanneScenes.Interact = function() {
 
 JeanneScenes.InteractPrompt = function() {
 	let player = GAME().player;
+	let jeanne = GAME().jeanne;
+	let terry = GAME().terry;
 	let party : Party = GAME().party;
-	var parse = {};
+
+	var parse : any = {};
 	//[Talk][Golem][Sex]
 	var options = new Array();
 	options.push({ nameStr : "Talk",
@@ -149,7 +161,7 @@ JeanneScenes.InteractPrompt = function() {
 				Text.Clear();
 				Text.Add("<i>“Sure, what would you like me to prepare?”</i>", parse);
 				Text.Flush();
-				Scenes.Terry.JeanneTFPrompt();
+				TerryScenes.JeanneTFPrompt();
 			}, enabled : true,
 			tooltip : "Ask Jeanne to help you make some transformatives for Terry."
 		});
@@ -168,13 +180,15 @@ JeanneScenes.InteractPrompt = function() {
 	Gui.SetButtonsFromList(options, true);
 }
 
-JeanneScenes.AlchemyCallback = function(item) {
+JeanneScenes.AlchemyCallback = function(item : TFItem) {
 	let player = GAME().player;
+	let jeanne = GAME().jeanne;
 	let party : Party = GAME().party;
-	var parse = {};
+
+	var parse : any = {};
 	
 	Text.Clear();
-	if(item == Items.AnusolPlus) {
+	if(item == AlchemySpecial.AnusolPlus) {
 		Text.Add("<i>“Just wait for a bit and I will have your potion ready,”</i> she says, walking off towards her alchemical supplies.", parse);
 		Text.NL();
 		Text.Add("True to her word, it only takes a few moments for her to finish preparing the mixture. It’s a clear blue liquid, thick and slimy, but with a fragrant scent. The bottle she presents you with is clearly labeled ‘Anusol+’.", parse);
@@ -194,7 +208,7 @@ JeanneScenes.AlchemyCallback = function(item) {
 }
 
 JeanneScenes.AlchemyBack = function() {
-	var parse = {};
+	var parse : any = {};
 	
 	Text.Clear();
 	Text.Add("<i>“Do come back if there is anything else I can help you with.”</i>", parse);
@@ -205,8 +219,12 @@ JeanneScenes.AlchemyBack = function() {
 
 JeanneScenes.Talk = function() {
 	let player = GAME().player;
+	let terry = GAME().terry;
+	let rosalin = GAME().rosalin;
+	let jeanne = GAME().jeanne;
 	let party : Party = GAME().party;
-	var parse = {
+
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -220,7 +238,7 @@ JeanneScenes.Talk = function() {
 			Text.Add("<i>“Never give the gem to someone else, not even someone you trust, as it could potentially be used to harm you. The stronger the gem becomes, the stronger this connection will be.”</i>", parse);
 			Text.NL();
 			
-			if(Scenes.Global.PortalsOpen()) {
+			if(GlobalScenes.PortalsOpen()) {
 				Text.Add("<i>“After what happened, I can understand if you do not want anything to do with these portals any longer, but it is vital that we are able to find out what caused the portals to disappear in the first place. Lately, I have felt it growing stronger...”</i>", parse);
 			}
 			else if(player.summons.length > 0) {
@@ -243,7 +261,7 @@ JeanneScenes.Talk = function() {
 		func : function() {
 			Text.Clear();
 			
-			if(!Scenes.Global.MagicStage1()) {
+			if(!GlobalScenes.MagicStage1()) {
 				Text.Add("<i>“It is a lengthy process, but yes, I can help you. Perhaps… the gem you carry will make this easier.”</i> Jeanne instructs you to take out the stone, and hold it in both hands. She places her own slender hands on top of yours, the beautiful elf’s warmth making your heart race a bit faster.", parse);
 				Text.NL();
 				Text.Add("<i>“The fundamentals of magic is focus, knowing how to channel the energies in and around you and mold them to your will,”</i> the magician explains. <i>“Learn to feel the ebb and flow, become the fulcrum upon which the energy spins...”</i>", parse);
@@ -404,7 +422,7 @@ JeanneScenes.Talk = function() {
 	parse["himher"] = terry.himher();
 	if(party.InParty(terry) && terry.flags["TF"] & TerryFlags.TF.TriedItem && !(terry.flags["TF"] & TerryFlags.TF.Jeanne)) {
 		options.push({ nameStr : "Terry",
-			func : Scenes.Terry.JeanneTFFirst, enabled : true,
+			func : TerryScenes.JeanneTFFirst, enabled : true,
 			tooltip : Text.Parse("Ask Jeanne if she can help you with Terry’s collar, and figure out why it seems to make [himher] immune to transformative effects.", parse)
 		});
 	}
@@ -448,12 +466,12 @@ JeanneScenes.Talk = function() {
 			tooltip : "Ask the court mage about her former pupil."
 		});
 		
-		if(party.Inv().QueryNum(Items.Anusol) && rosalin.flags["Anusol"] < RosalinFlags.Anusol.ShowedJeanne) {
+		if(party.Inv().QueryNum(AlchemySpecial.Anusol) && rosalin.flags["Anusol"] < RosalinFlags.Anusol.ShowedJeanne) {
 			options.push({ nameStr : "Rosalin’s pot",
 				tooltip : "You wonder what Jeanne would have to say about this new potion of Rosalin’s. Maybe showing it to her would be a good idea?",
 				func : function() {
 					rosalin.flags["Anusol"] = RosalinFlags.Anusol.ShowedJeanne;
-					jeanne.recipes.push(Items.AnusolPlus);
+					jeanne.recipes.push(AlchemySpecial.AnusolPlus);
 					
 					Text.Clear();
 					Text.Add("Reaching into your belongings, you draw forth a bottle of Anusol and offer it to the elven mage.", parse);
@@ -492,8 +510,11 @@ JeanneScenes.Talk = function() {
 
 JeanneScenes.First = function() {
 	let player = GAME().player;
+	let kiakai = GAME().kiakai;
+	let jeanne = GAME().jeanne;
 	let party : Party = GAME().party;
-	var parse = {
+
+	var parse : any = {
 		playername : player.name,
 		name       : function() { return kiakai.name; },
 		hisher     : function() { return kiakai.hisher(); }
@@ -526,7 +547,7 @@ JeanneScenes.First = function() {
 
 JeanneScenes.FirstPrompt = function() {
 	let golem = GAME().golem;
-	var parse = {};
+	var parse : any = {};
 	//[Golem][Jeanne][Gem]
 	var options = new Array();
 	if(JeanneScenes.talkedGolem == false) {
@@ -537,7 +558,7 @@ JeanneScenes.FirstPrompt = function() {
 				Text.NL();
 				Text.Add("<i>“Tell me, it did not… do anything to you, did it?”</i>", parse);
 				Text.NL();
-				if(golem.flags["Met"] == Scenes.Golem.State.Won_prevLoss) {
+				if(golem.flags["Met"] == GolemFlags.State.Won_prevLoss) {
 					Text.Add("Your blush must speak volumes, as the magician looks apologetic. <i>“I was afraid of that,”</i> she says in a small voice. <i>“I must have forgotten to deactivate the carnal spell on it.”</i>", parse);
 				}
 				else {
@@ -611,7 +632,7 @@ JeanneScenes.FirstPrompt = function() {
 
 JeanneScenes.FirstCont = function() {
 	let player = GAME().player;
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -627,4 +648,4 @@ JeanneScenes.FirstCont = function() {
 	Gui.NextPrompt();
 }
 
-export { Jeanne, JeanneScenes };
+export { JeanneScenes };

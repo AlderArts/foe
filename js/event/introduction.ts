@@ -547,7 +547,7 @@ Intro.ImpsWinPrompt = function() {
 		function() { return player.FirstCock().Short(); } :
 		function() { return player.FirstVag().Short(); };
 		
-	var parse = {genDesc: genDesc};
+	var parse : any = {genDesc: genDesc};
 	
 	Text.Flush();
 	//[No][Use][Ride][Group]
@@ -585,7 +585,7 @@ Intro.ImpsWinUseMale = function() {
 
 	var imp = new Imp();
 	
-	var parse = {
+	var parse : any = {
 		cockDesc : function() { return player.FirstCock().Short(); },
 		cockLen  : function() { return player.FirstCock().Desc().len; }
 	};
@@ -691,7 +691,7 @@ Intro.ImpsWinUseFemale = function() {
 	
 	var imp = new Imp();
 	
-	var parse = {
+	var parse : any = {
 		cuntDesc   : function() { return player.FirstVag().Short(); },
 		breastDesc : function() { return player.FirstBreastRow().Short(); },
 		clitDesc   : function() { return player.FirstVag().ClitShort(); },
@@ -789,7 +789,7 @@ Intro.ImpsWinRide = function() {
 	let player = GAME().player;
 	var imp = new Imp();
 	
-	var parse = {
+	var parse : any = {
 		cuntDesc    : function() { return player.FirstVag().Short(); },
 		breastDesc  : function() { return player.FirstBreastRow().Short(); },
 		clitDesc    : function() { return player.FirstVag().ClitShort(); },
@@ -824,7 +824,7 @@ Intro.ImpsWinRideEntrypoint = function() {
 	let player = GAME().player;
 	var imp = new Imp();
 	
-	var parse = {
+	var parse : any = {
 		cuntDesc    : function() { return player.FirstVag().Short(); },
 		breastDesc  : function() { return player.FirstBreastRow().Short(); },
 		clitDesc    : function() { return player.FirstVag().ClitShort(); },
@@ -865,7 +865,7 @@ Intro.ImpsWinGroup = function() {
 	let player = GAME().player;
 	var imp = new Imp();
 	
-	var parse = {
+	var parse : any = {
 		cuntDesc    : function() { return player.FirstVag().Short(); },
 		breastDesc  : function() { return player.FirstBreastRow().Short(); },
 		clitDesc    : function() { return player.FirstVag().ClitShort(); },
@@ -982,7 +982,7 @@ Intro.ImpsLossOral = function() {
 	let player = GAME().player;
 	var imp = new Imp();
 	
-	var parse = {
+	var parse : any = {
 		cuntDesc    : function() { return player.FirstVag().Short(); },
 		breastDesc  : function() { return player.FirstBreastRow().Short(); },
 		clitDesc    : function() { return player.FirstVag().ClitShort(); },
@@ -1022,7 +1022,7 @@ Intro.ImpsLossFucked = function() {
 	let player = GAME().player;
 	var imp = new Imp();
 	
-	var parse = {
+	var parse : any = {
 		cuntDesc    : function() { return player.FirstVag().Short(); },
 		breastDesc  : function() { return player.FirstBreastRow().Short(); },
 		clitDesc    : function() { return player.FirstVag().ClitShort(); },
@@ -1092,7 +1092,7 @@ Intro.DemonGift = function() {
 		return;
 	}
 	
-	var parse = {
+	var parse : any = {
 		msmr        : (player.Gender() == Gender.male) ? "MISTER" : "MISS",
 		hisher      : (player.Gender() == Gender.male) ? "HIS" : "HER",
 		cuntDesc    : function() { return player.FirstVag().Short(); },
@@ -1204,7 +1204,7 @@ Intro.DemonFight = function() {
 	let player = GAME().player;
 	let uru = GAME().uru;
 
-	var parse = {
+	var parse : any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -2082,7 +2082,7 @@ Intro.UruSexFuckAnal = function() {
 Intro.UruSexFuckAnal2 = function() {
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		cock : function() { return player.FirstCock().Short(); }
 	};
 
@@ -2372,7 +2372,7 @@ Intro.UruSexGetFuckedPassive2 = function() {
 	let player = GAME().player;
 	let uru = GAME().uru;
 
-	var parse = {
+	var parse : any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -2905,7 +2905,7 @@ Intro.NomadsWakingUp = function() {
 Intro.MeetingKia = function() {
 	let kiakai = GAME().kiakai;
 
-	var parse = {
+	var parse : any = {
 		name : kiakai.name
 	};
 	parse = kiakai.ParserPronouns(parse);
@@ -3030,7 +3030,7 @@ Intro.KiaQnA = function() {
 Intro.KiaSurroundings = function() {
 	let kiakai = GAME().kiakai;
 
-	var parse = {
+	var parse : any = {
 		name : kiakai.name
 	}
 	Text.Clear();
@@ -3064,7 +3064,7 @@ Intro.KiaDecideOutset = function() {
 	let kiakai = GAME().kiakai;
 	let party : Party = GAME().party;
 
-	var parse = {
+	var parse : any = {
 		name : kiakai.name
 	};
 	parse = kiakai.ParserPronouns(parse);
@@ -3209,7 +3209,7 @@ Intro.KiaNiceSex = function() {
 	let player = GAME().player;
 	let kiakai = GAME().kiakai;
 
-	var parse = {
+	var parse : any = {
 		name : kiakai.name,
 		boygirl : kiakai.mfTrue("boy", "girl")
 	};
@@ -3405,7 +3405,7 @@ Intro.KiaNaughtySex = function() {
 	let player = GAME().player;
 	let kiakai = GAME().kiakai;
 
-	var parse = {
+	var parse : any = {
 		name : kiakai.name,
 		stutterName : player.name[0] + "-" + player.name
 	};

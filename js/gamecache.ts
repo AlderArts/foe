@@ -77,7 +77,6 @@ import { TF } from './tf';
 import { Items } from './items';
 import { Text } from './text';
 import { JobEnum, Jobs } from './job';
-import { Scenes } from './scenes';
 import { Vagina } from './body/vagina';
 
 import { MirandaFlags } from './event/miranda-flags';
@@ -88,6 +87,8 @@ import { TwinsFlags } from './event/royals/twins-flags';
 import { RigardFlags } from './loc/rigard/rigard-flags';
 import { DryadGladeFlags } from './loc/glade-flags';
 import { BurrowsFlags } from './loc/burrows-flags';
+import { GolemFlags } from './event/royals/golem-flags';
+import { LeiFlags } from './event/royals/lei-flags';
 
 let InitCache = function() {
 	// Reset exploration
@@ -434,7 +435,7 @@ let CacheToGame = function() {
 			GAME().twins.flags["Met"] = TwinsFlags.Met.Access;
 	}
 	if(gameCache.version < 16) {
-		if(GAME().golem.flags["Met"] > Scenes.Golem.State.Lost)
+		if(GAME().golem.flags["Met"] > GolemFlags.State.Lost)
 			GAME().jeanne.flags["Met"] = 1;
 	}
 	if(gameCache.version < 17) {
@@ -447,7 +448,7 @@ let CacheToGame = function() {
 		GAME().miranda.SetExpToLevel();
 	}
 	if(gameCache.version < 20) {
-		if(GAME().golem.flags["Met"] >= Scenes.Golem.State.Won_noLoss) {
+		if(GAME().golem.flags["Met"] >= GolemFlags.State.Won_noLoss) {
 			GAME().party.Inv().AddItem(Items.Weapons.MageStaff);
 			GAME().party.Inv().AddItem(Items.Armor.MageRobes);
 		}
@@ -505,7 +506,7 @@ let CacheToGame = function() {
 	}
 	if(gameCache.version < 28) {
 		// LEI TASKS
-		if(GAME().lei.flags["Met"] > Lei.Met.KnowName) GAME().lei.flags["Met"] = Lei.Met.KnowName;
+		if(GAME().lei.flags["Met"] > LeiFlags.Met.KnowName) GAME().lei.flags["Met"] = LeiFlags.Met.KnowName;
 	}
 	if(gameCache.version < 29) {
 		// LAGON DEFEATED FLAGS (clear unused)
@@ -594,7 +595,7 @@ let GameToCache = function() {
 	gameCache.party   = GAME().party.ToStorage();
 
 
-	var parse = {
+	var parse : any = {
 		name   : gameCache.player.name,
 		gender : Gender.Short(GAME().player.body.Gender()),
 		lvl    : gameCache.player.lvl,

@@ -2,18 +2,26 @@
 //
 // Asche's
 //
+import * as _ from 'lodash';
 
 import { Event, Link } from '../../event';
 import { EncounterTable } from '../../encountertable';
 import { Shop } from '../../shop';
-import { Items } from '../../items';
-import { WorldTime, MoveToLocation, GAME } from '../../GAME';
+import { WorldTime, MoveToLocation, GAME, WORLD } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
+import { AscheFlags } from '../../event/asche-flags';
+import { CombatItems } from '../../items/combatitems';
+import { AlchemyItems } from '../../items/alchemy';
+import { IngredientItems } from '../../items/ingredients';
+import { AccItems } from '../../items/accessories';
+import { WeaponsItems } from '../../items/weapons';
+import { AscheScenes } from '../../event/asche';
+import { Item } from '../../item';
 
 let MagicShopLoc = new Event("Asche's Fanciful Trinkets");
 
-let MagicShopScenes = {}
+let MagicShopScenes : any = {}
 MagicShopScenes.IsOpen = function() {
 	let rigard = GAME().rigard;
 	return (WorldTime().hour >= 10) && !rigard.UnderLockdown();
@@ -21,8 +29,8 @@ MagicShopScenes.IsOpen = function() {
 
 MagicShopScenes.CreateShop = function() {
 	let player = GAME().player;
-	var buySuccessFunc = function(item, cost, num) {
-		var parse = {};
+	var buySuccessFunc = function(item : Item, cost : number, num : number) {
+		var parse : any = {};
 		
 		Text.Clear();
 		var scenes = new EncounterTable();
@@ -33,8 +41,8 @@ MagicShopScenes.CreateShop = function() {
 		
 		Text.NL();
 	};
-	var buyFailFunc = function(item, cost, bought) {
-		var parse = {};
+	var buyFailFunc = function(item : Item, cost : number, bought : boolean) {
+		var parse : any = {};
 		
 		Text.Clear();
 		if(bought) {
@@ -47,9 +55,9 @@ MagicShopScenes.CreateShop = function() {
 		}
 		Text.NL();
 	};
-	var buyPromptFunc = function(item, cost, bought) {
+	var buyPromptFunc = function(item : Item, cost : number, bought : boolean) {
 		var coin = Text.NumToText(cost);
-		var parse = {
+		var parse : any = {
 			heshe : player.mfFem("he", "she"),
 			item : item.sDesc(),
 			coin : coin,
@@ -65,13 +73,13 @@ MagicShopScenes.CreateShop = function() {
 		Text.NL();
 	};
 	
-	var shop = new Shop({
+	let shop : any = new Shop({
 		buyPromptFunc : buyPromptFunc,
 		buySuccessFunc : buySuccessFunc,
 		buyFailFunc : buyFailFunc,
-		sellPromptFunc : function(item, cost, sold) {
+		sellPromptFunc : function(item : Item, cost : number, sold : boolean) {
 			var coin = Text.NumToText(cost);
-			var parse = {
+			var parse : any = {
 				item : item.sDesc(),
 				coin : coin,
 				Coin : _.capitalize(coin)
@@ -98,8 +106,8 @@ MagicShopScenes.CreateShop = function() {
 			
 			Text.NL();
 		},
-		sellSuccessFunc : function(item, cost, num) {
-			var parse = {
+		sellSuccessFunc : function(item : Item, cost : number, num : number) {
+			var parse : any = {
 				hisher : player.mfFem("his", "her"),
 				heshe : player.mfFem("he", "she")
 			};
@@ -116,8 +124,8 @@ MagicShopScenes.CreateShop = function() {
 			
 			Text.NL();
 		},
-		sellFailFunc : function(item, cost, sold) {
-			var parse = {
+		sellFailFunc : function(item : Item, cost : number, sold : boolean) {
+			var parse : any = {
 				hisher : player.mfFem("his", "her"),
 				himher : player.mfFem("him", "her"),
 				heshe : player.mfFem("he", "she")
@@ -140,88 +148,88 @@ MagicShopScenes.CreateShop = function() {
 	
 	//For magic box
 	shop.potions = [
-		Items.Combat.HPotion,
-		Items.Combat.EPotion,
-		Items.Combat.SpeedPotion,
-		Items.Gestarium
+		CombatItems.HPotion,
+		CombatItems.EPotion,
+		CombatItems.SpeedPotion,
+		AlchemyItems.Gestarium
 	];
 	shop.consumables = [
-		Items.Combat.DecoyStick,
-		Items.Combat.SmokeBomb,
-		Items.Combat.PoisonDart,
-		Items.Combat.LustDart
+		CombatItems.DecoyStick,
+		CombatItems.SmokeBomb,
+		CombatItems.PoisonDart,
+		CombatItems.LustDart
 	];
 	shop.ingredients = [
-		Items.HorseHair,
-		Items.HorseShoe,
-		Items.HorseCum,
-		Items.RabbitFoot,
-		Items.CarrotJuice,
-		Items.Lettuce,
-		Items.Whiskers,
-		Items.HairBall,
-		Items.CatClaw,
-		Items.SnakeOil,
-		Items.LizardScale,
-		Items.LizardEgg,
-		Items.SnakeFang,
-		Items.SnakeSkin,
-		Items.GoatMilk,
-		Items.GoatFleece,
-		Items.SheepMilk,
-		Items.Ramshorn,
-		Items.CowMilk,
-		Items.CowBell,
-		Items.FreshGrass,
-		Items.CanisRoot,
-		Items.DogBone,
-		Items.DogBiscuit,
-		Items.WolfFang,
-		Items.Wolfsbane,
-		Items.FoxBerries,
-		Items.Foxglove,
-		Items.CorruptPlant,
-		Items.BlackGem,
-		Items.CorruptSeed,
-		Items.DemonSeed,
-		Items.Hummus,
-		Items.SpringWater,
-		Items.Letter,
-		Items.Feather,
-		Items.Trinket,
-		Items.FruitSeed,
-		Items.PipeLeaf,
-		Items.MFluff,
-		Items.MDust,
-		Items.Stinger,
-		Items.SVenom,
-		Items.SClaw,
-		Items.TreeBark,
-		Items.AntlerChip,
-		Items.FlowerPetal,
-		Items.RawHoney,
-		Items.BeeChitin
+		IngredientItems.HorseHair,
+		IngredientItems.HorseShoe,
+		IngredientItems.HorseCum,
+		IngredientItems.RabbitFoot,
+		IngredientItems.CarrotJuice,
+		IngredientItems.Lettuce,
+		IngredientItems.Whiskers,
+		IngredientItems.HairBall,
+		IngredientItems.CatClaw,
+		IngredientItems.SnakeOil,
+		IngredientItems.LizardScale,
+		IngredientItems.LizardEgg,
+		IngredientItems.SnakeFang,
+		IngredientItems.SnakeSkin,
+		IngredientItems.GoatMilk,
+		IngredientItems.GoatFleece,
+		IngredientItems.SheepMilk,
+		IngredientItems.Ramshorn,
+		IngredientItems.CowMilk,
+		IngredientItems.CowBell,
+		IngredientItems.FreshGrass,
+		IngredientItems.CanisRoot,
+		IngredientItems.DogBone,
+		IngredientItems.DogBiscuit,
+		IngredientItems.WolfFang,
+		IngredientItems.Wolfsbane,
+		IngredientItems.FoxBerries,
+		IngredientItems.Foxglove,
+		IngredientItems.CorruptPlant,
+		IngredientItems.BlackGem,
+		IngredientItems.CorruptSeed,
+		IngredientItems.DemonSeed,
+		IngredientItems.Hummus,
+		IngredientItems.SpringWater,
+		IngredientItems.Letter,
+		IngredientItems.Feather,
+		IngredientItems.Trinket,
+		IngredientItems.FruitSeed,
+		IngredientItems.PipeLeaf,
+		IngredientItems.MFluff,
+		IngredientItems.MDust,
+		IngredientItems.Stinger,
+		IngredientItems.SVenom,
+		IngredientItems.SClaw,
+		IngredientItems.TreeBark,
+		IngredientItems.AntlerChip,
+		IngredientItems.FlowerPetal,
+		IngredientItems.RawHoney,
+		IngredientItems.BeeChitin
 	];
 
 	//Actual inventory
-	shop.AddItem(Items.Combat.HPotion, 5);
-	shop.AddItem(Items.Combat.EPotion, 5);
-	shop.AddItem(Items.Combat.SpeedPotion, 5);
-	shop.AddItem(Items.Gestarium, 5);
-	shop.AddItem(Items.Combat.DecoyStick, 5);
-	shop.AddItem(Items.Combat.SmokeBomb, 5);
-	shop.AddItem(Items.Accessories.CrudeBook, 5);
-	shop.AddItem(Items.Accessories.GoldEarring, 5);
-	shop.AddItem(Items.Accessories.SimpleCharm, 5);
-	shop.AddItem(Items.Weapons.WoodenStaff, 5);
-	shop.AddItem(Items.Weapons.MageStaff, 5);
-	shop.AddItem(Items.Weapons.AmberStaff, 5);
+	shop.AddItem(CombatItems.HPotion, 5);
+	shop.AddItem(CombatItems.EPotion, 5);
+	shop.AddItem(CombatItems.SpeedPotion, 5);
+	shop.AddItem(AlchemyItems.Gestarium, 5);
+	shop.AddItem(CombatItems.DecoyStick, 5);
+	shop.AddItem(CombatItems.SmokeBomb, 5);
+	shop.AddItem(AccItems.CrudeBook, 5);
+	shop.AddItem(AccItems.GoldEarring, 5);
+	shop.AddItem(AccItems.SimpleCharm, 5);
+	shop.AddItem(WeaponsItems.WoodenStaff, 5);
+	shop.AddItem(WeaponsItems.MageStaff, 5);
+	shop.AddItem(WeaponsItems.AmberStaff, 5);
 	
 	MagicShopScenes.Shop = shop;
 }
 
 MagicShopLoc.description = function() {
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -271,7 +279,7 @@ MagicShopLoc.events.push(new Link(
 	"Asche", true, true, null,
 	function() {
 		let player = GAME().player;
-		var parse = {
+		var parse : any = {
 			handsomepretty : player.mfFem("handsome", "pretty")
 		};
 		
@@ -279,21 +287,21 @@ MagicShopLoc.events.push(new Link(
 		Text.Add("You approach the counter and Asche’s ears perk up, the proprietress rousing herself with an air of barely contained enthusiasm. The jackaless’ tail swishes back and forth as she leans on the counter with her head in her hands, dark eyes fixed on you like a friendly yet mischievous puppy. <i>“Ah, [handsomepretty] customer has returned! Can Asche do something to brighten customer’s day?”</i>", parse);
 		Text.Flush();
 		
-		Scenes.Asche.Prompt();
+		AscheScenes.Prompt();
 	}
 ));
 
 MagicShopLoc.events.push(new Link(
 	"Leave", true, true, null,
 	function() {
-		MoveToLocation(world.loc.Rigard.ShopStreet.street, {minute: 5});
+		MoveToLocation(WORLD().loc.Rigard.ShopStreet.street, {minute: 5});
 	}
 ));
 
 MagicShopLoc.onEntry = function() {
 	let asche = GAME().asche;
-	if(asche.flags["Met"] < Asche.Met.Met)
-		Scenes.Asche.FirstEntry();
+	if(asche.flags["Met"] < AscheFlags.Met.Met)
+		AscheScenes.FirstEntry();
 	//TODO LINK NEW STUFF
 	/*
 	else if(X && rigard.Twopenny["Met"] < 2) {

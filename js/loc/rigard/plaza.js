@@ -6,6 +6,7 @@ import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { RigardFlags } from './rigard-flags';
 import { Room69Flags } from '../../event/room69-flags';
+import { LeiFlags } from '../../event/royals/lei-flags';
 
 let PlazaLoc = new Event("Plaza");
 
@@ -112,7 +113,7 @@ PlazaLoc.links.push(new Link(
 		let rigard = GAME().rigard;
 		let lei = GAME().lei;
 
-		var parse = {
+		var parse : any = {
 			stride : player.LowerBodyType() == LowerBodyType.Single ? "slither" : "stride"
 		};
 		if(rigard.flags["RoyalAccess"] == 0) {
@@ -158,7 +159,7 @@ PlazaLoc.links.push(new Link(
 				Text.Add("You turn to go, leaving the unfriendly watchmen behind you. The pair you saw exit the wall are still barely in sight, and on impulse you hurry toward them. Of course the guard said they wouldn’t speak to you, but it’s not like you have any better leads to follow.", parse);
 				Text.NL();
 				Text.Add("Past the couple, you spot another figure heading slowly toward them. He seems almost innocuous, but after a few moments you spot what drew your attention to him. He carefully maintains a set distance from the couple, clearly following them. You can’t quite make out his face at the distance, but you notice that his right hand hovers at his hip, fingering the hilt of a sword.", parse);
-				if(lei.flags["Met"] == Lei.Met.SeenInn)
+				if(lei.flags["Met"] == LeiFlags.Met.SeenInn)
 					Text.Add(" You realize that you’ve seen him before, in the common room of the Lady’s Blessing inn.", parse);
 				Text.NL();
 				Text.Add("You try to hurry, wondering if the two are being pursued, but unfortunately, before you are even half way, they follow the street past a corner and you lose sight of them, their tail disappearing soon after. By the time you reach the corner yourself, ", parse);
@@ -171,7 +172,7 @@ PlazaLoc.links.push(new Link(
 					Text.Add("the street in front of you is totally empty.", parse);
 				Text.NL();
 				Text.Add("Well, that was a little disappointing. Still, judging by their quick disappearance, they probably turned into one of the buildings around here. It could be one of the private residences, but ", parse);
-				if(lei.flags["Met"] == Lei.Met.SeenInn) {
+				if(lei.flags["Met"] == LeiFlags.Met.SeenInn) {
 					Text.Add("perhaps the best course of action would be to seek out the stranger at the Lady’s Blessing inn.", parse);
 				}
 				else if(rigard.LB["Visit"] != 0) {
@@ -308,7 +309,7 @@ PlazaScenes.StatueInfo = function() {
 	let party : Party = GAME().party;
 	let kiakai = GAME().kiakai;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		name   : kiakai.name,
 		heshe  : kiakai.heshe(),
@@ -436,7 +437,7 @@ PlazaScenes.LetterDelivery = function() {
 	var coin  = 5  + Rand(10);
 	var coin2 = 10 + Rand(10);
 
-	var parse = {
+	var parse : any = {
 		name    : kiakai.name,
 		heshe   : kiakai.heshe(),
 		hisher  : kiakai.hisher(),

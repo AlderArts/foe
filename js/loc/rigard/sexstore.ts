@@ -4,13 +4,13 @@
 //
 
 import { Event, Link } from '../../event';
-import { WorldTime, MoveToLocation, GAME } from '../../GAME';
+import { WorldTime, MoveToLocation, GAME, WORLD } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
 
 let OddShopLoc = new Event("Odd shop");
 
-let OddShopScenes = {};
+let OddShopScenes : any = {};
 OddShopScenes.IsOpen = function() {
 	let rigard = GAME().rigard;
 	return (WorldTime().hour >= 9 && WorldTime().hour < 18) && !rigard.UnderLockdown();
@@ -30,14 +30,14 @@ OddShopLoc.events.push(new Link(
 OddShopLoc.events.push(new Link(
 	"Leave", true, true, null,
 	function() {
-		MoveToLocation(world.loc.Rigard.ShopStreet.street, {minute: 5});
+		MoveToLocation(WORLD().loc.Rigard.ShopStreet.street, {minute: 5});
 	}
 ));
 
 OddShopScenes.Prompt = function() {
 	let rigard = GAME().rigard;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	

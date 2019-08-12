@@ -23,7 +23,7 @@ DeadDropScenes.Alert = function() {
 	let player = GAME().player;
 	let maria = GAME().maria;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -49,7 +49,7 @@ DeadDropScenes.Initiation = function() {
 	let player = GAME().player;
 	let maria = GAME().maria;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -110,7 +110,7 @@ DeadDropScenes.Initiation = function() {
 
 DeadDropScenes.First = {};
 DeadDropScenes.First.Chat = function(CampPrompt : any) {
-	var parse = {};
+	var parse : any = {};
 	
 	Text.Clear();
 	Text.Add("All right, you’re ready. You tell Maria as much, and the ebony beauty looks you up and down.", parse);
@@ -444,7 +444,7 @@ DeadDropScenes.Docks = {};
 DeadDropScenes.Docks.Entry = function() {
 	let player = GAME().player;
 	
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -634,7 +634,7 @@ DeadDropScenes.Docks.CavalcadePrep = function() {
 	var onEnd = function() {
 		var that = this;
 		
-		var parse = {
+		var parse : any = {
 			playername : player.name
 		};
 		
@@ -683,7 +683,7 @@ DeadDropScenes.Docks.CavalcadeWin = function() {
 	let outlaws = GAME().outlaws;
 	let maria = GAME().maria;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 
@@ -713,7 +713,7 @@ DeadDropScenes.Docks.CavalcadeWin = function() {
 }
 
 DeadDropScenes.Docks.CavalcadeLoss = function() {
-	var parse = {
+	var parse : any = {
 		
 	};
 

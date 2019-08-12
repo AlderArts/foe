@@ -7,7 +7,7 @@ import { TimeStep } from '../GAME';
 let PoetScenes : any = {};
 
 PoetScenes.Entry = function() {
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -30,7 +30,7 @@ PoetScenes.Entry = function() {
 }
 
 PoetScenes.ToDragonOrLizard = function() {
-	var parse = {};
+	var parse : any = {};
 	
 	Text.Add("To be dragon or lizard, that is the question–<br>", parse);
 	Text.Add("Whether ’tis nobler in the mind to suffer<br>", parse);

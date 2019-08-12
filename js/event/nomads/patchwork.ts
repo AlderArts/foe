@@ -158,7 +158,7 @@ export class Patchwork extends Entity {
 
 PatchworkScenes.Interact = function() {
 	let patchwork = GAME().patchwork;
-	var parse = {};
+	var parse : any = {};
 	parse = patchwork.ParserPronouns(parse);
 	
 	Text.Clear();
@@ -315,7 +315,7 @@ PatchworkScenes.Prompt = function() {
 
 PatchworkScenes.Desc = function() {
 	let patchwork = GAME().patchwork;
-	var parse = {
+	var parse : any = {
 		notS : patchwork.mfPronoun("", "s"),
 		dont : patchwork.mfPronoun("don’t", "doesn’t")
 	};

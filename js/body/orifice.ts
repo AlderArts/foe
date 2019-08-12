@@ -77,7 +77,7 @@ export class Orifice {
 	}
 
 	StretchOrifice(entity : any, cock : Cock, silent? : boolean) {
-		var parse = {
+		var parse : any = {
 			poss : entity.Possessive(),
 			or   : this.holeDesc()
 		};

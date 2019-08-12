@@ -81,7 +81,7 @@ WhiteAb.Cheer.targetMode = TargetMode.Party;
 WhiteAb.Cheer.cost = { hp: null, sp: 30, lp: null};
 WhiteAb.Cheer.CastInternal = function(encounter : Encounter, caster : Entity, target : Party) {
 	// TODO: Make more flavor text
-	var parse = {
+	var parse : any = {
 		name : caster.name,
 		s : caster.plural() ? "" : "s"
 	}

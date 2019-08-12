@@ -59,7 +59,7 @@ TavernLoc.common.DrunkHandler = function() {
 	let party : Party = GAME().party;
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		phisher : player.mfTrue("his", "her")
 	};
 	
@@ -266,7 +266,7 @@ BarnabyScenes.Approach = function() {
 	let rigard = GAME().rigard;
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -308,7 +308,7 @@ BarnabyScenes.Prompt = function(talkative) {
 	var coin2 = 5;
 	var coin3 = 10;
 	
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		coin1 : Text.NumToText(coin1),
 		coin2 : Text.NumToText(coin2),
@@ -655,7 +655,7 @@ BarnabyScenes.ChatPrompt = function() {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -816,7 +816,7 @@ BarnabyScenes.BlowjobEntrypoint = function(func) {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		boygirl    : player.mfTrue("boy", "girl"),
 		guygal     : player.mfTrue("guy", "gal")

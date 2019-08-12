@@ -78,7 +78,7 @@ export class Corishev extends BossEntity {
 	Act(encounter : any, activeChar : any) {
 		let party : Party = GAME().party;
 		
-		var parse = {
+		var parse : any = {
 			
 		};
 		

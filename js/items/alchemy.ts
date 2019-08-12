@@ -147,7 +147,7 @@ AlchemyItems.Bovia.PushEffect(TF.ItemEffects.SetEars, {odds: 0.4, race: Race.Cow
 AlchemyItems.Bovia.PushEffect(TF.ItemEffects.SetTail, {odds: 0.4, race: Race.Cow, color: Color.black, str: "a long bovine tail, ending in a tuft of black hair"});
 AlchemyItems.Bovia.PushEffect(TF.ItemEffects.SetHorn, {odds: 0.4, race: Race.Cow, color: Color.black, str: "a pair of strong bovine horns!", count: 2});
 AlchemyItems.Bovia.PushEffect(function(target : Entity) {
-	var parse = { Poss: target.Possessive() };
+	var parse : any = { Poss: target.Possessive() };
 	var breasts = target.BiggestBreasts();
 	if(target.FirstVag() || (breasts && breasts.size.Get() > 5)) {
 		if(Math.random() < 0.5) {
@@ -466,7 +466,7 @@ AlchemyItems.Homos.PushEffect(TF.ItemEffects.RemWings, {odds: 0.6, count: 2});
 AlchemyItems.Homos.PushEffect(TF.ItemEffects.RemAntenna, {odds: 0.6, count: 2});
 AlchemyItems.Homos.PushEffect(TF.ItemEffects.RemAbdomen, {odds: 0.6, count: 1});
 AlchemyItems.Homos.PushEffect(function(target : Entity) {
-	var parse = {
+	var parse : any = {
 		Poss : target.Possessive(),
 		legsDesc : function() { return target.LegsDesc(); },
 		notS : target.body.legs.count > 1 ? "s" : "",
@@ -498,7 +498,7 @@ AlchemyItems.Virilium.PushEffect(TF.ItemEffects.IncLib, {odds: 0.3, ideal: 40, m
 AlchemyItems.Virilium.PushEffect(TF.ItemEffects.IncCha, {odds: 0.2, ideal: 40, max: 2});
 AlchemyItems.Virilium.PushEffect(TF.ItemEffects.SetBalls, {odds: 0.1, ideal: 2, count: 2});
 AlchemyItems.Virilium.PushEffect(function(target : Entity) {
-	var parse = {
+	var parse : any = {
 		name  : target.nameDesc(),
 		heshe : target.heshe(),
 		is    : target.is()
@@ -510,7 +510,7 @@ AlchemyItems.Virilium.PushEffect(function(target : Entity) {
 	Text.NL();
 });
 AlchemyItems.Virilium.PushEffect(function(target : Entity) {
-	var parse = {
+	var parse : any = {
 		Poss: target.Possessive(),
 		ballsDesc : function() { return target.BallsDesc(); },
 		s      : target.HasBalls() ? "s" : "",
@@ -752,7 +752,7 @@ AlchemyItems.GestariumPlus.recipe = [{it: AlchemyItems.Felinix}, {it: AlchemyIte
 AlchemyItems.GestariumPlus.PushEffect(TF.ItemEffects.IncLib, {odds: 0.3, ideal: 40, max: 2});
 AlchemyItems.GestariumPlus.PushEffect(TF.ItemEffects.IncCha, {odds: 0.2, ideal: 40, max: 2});
 AlchemyItems.GestariumPlus.PushEffect(function(target : Entity) {
-	var parse = {
+	var parse : any = {
 		Poss: target.Possessive(),
 		notS: target.plural() ? "" : "s"
 	};
@@ -771,7 +771,7 @@ AlchemyItems.GestariumPlus.PushEffect(function(target : Entity) {
 	Text.Flush();
 });
 AlchemyItems.GestariumPlus.PushEffect(function(target : Entity) {
-	var parse = {
+	var parse : any = {
 		name  : target.nameDesc(),
 		heshe : target.heshe(),
 		is    : target.is()
@@ -782,7 +782,7 @@ AlchemyItems.GestariumPlus.PushEffect(function(target : Entity) {
 	Text.NL();
 });
 AlchemyItems.GestariumPlus.PushEffect(function(target : Entity) {
-	var parse = {
+	var parse : any = {
 		name : target.nameDesc(),
 		poss : target.possessive()
 	};
@@ -825,7 +825,7 @@ AlchemyItems.Testos.PushEffect(TF.ItemEffects.IncTone, {odds: 0.3, ideal: .7, ma
 AlchemyItems.Testos.PushEffect(TF.ItemEffects.DecFem, {odds: 0.4, ideal: -1, max: .1});
 AlchemyItems.Testos.PushEffect(TF.ItemEffects.DecBreastSize, {odds: 0.7, ideal: 0, max: 6 });
 AlchemyItems.Testos.PushEffect(function(target : Entity) {
-	var parse = {
+	var parse : any = {
 		Name: target.NameDesc(),
 		Poss: target.Possessive(),
 		ballsDesc : function() { return target.BallsDesc(); },
@@ -927,7 +927,7 @@ AlchemyItems.Estros.PushEffect(TF.ItemEffects.DecTone, {odds: 0.2, ideal: 0, max
 AlchemyItems.Estros.PushEffect(TF.ItemEffects.IncFem, {odds: 0.8, ideal: 1, max: .1});
 AlchemyItems.Estros.PushEffect(TF.ItemEffects.IncBreastSize, {odds: 0.4, ideal: 20, max: 3 });
 AlchemyItems.Estros.PushEffect(function(target : Entity) {
-	var parse = {
+	var parse : any = {
 		Poss: target.Possessive(),
 		notS: target.plural() ? "" : "s"
 	};
@@ -946,7 +946,7 @@ AlchemyItems.Estros.PushEffect(function(target : Entity) {
 	Text.Flush();
 });
 AlchemyItems.Estros.PushEffect(function(target : Entity) {
-	var parse = {
+	var parse : any = {
 		Name : target.NameDesc(),
 		Poss : target.Possessive(),
 		multiCockDesc : function() { return target.MultiCockDesc(); }
@@ -1007,7 +1007,7 @@ AlchemyItems.Infertilium.Short = function() { return "A bottle of Infertilium"; 
 AlchemyItems.Infertilium.Long = function() { return "A small, unmarked glass vial that feels cool to the touch. Drinking this will render the drinker practically sterile for one day."; }
 //TODO AlchemyItems.Infertilium.recipe = [{it: AlchemyItems.Felinix}, {it: AlchemyItems.Leporine}, {it: AlchemyItems.Bovia}];
 AlchemyItems.Infertilium.useStr = function(target : Entity) {
-	var parse = {
+	var parse : any = {
 		Name: target.NameDesc(),
 		name: target.nameDesc()
 	};
@@ -1056,7 +1056,7 @@ AlchemyItems.InfertiliumPlus.Short = function() { return "A bottle of Infertiliu
 AlchemyItems.InfertiliumPlus.Long = function() { return "A small, unmarked glass vial with a thin sheen of frost clinging to its sides. Drinking this will render the drinker practically sterile for five days."; }
 //TODO AlchemyItems.InfertiliumPlus.recipe = [{it: AlchemyItems.Felinix}, {it: AlchemyItems.Leporine}, {it: AlchemyItems.Bovia}];
 AlchemyItems.InfertiliumPlus.useStr = function(target : Entity) {
-	var parse = {
+	var parse : any = {
 		Name: target.NameDesc(),
 		name: target.nameDesc()
 	};

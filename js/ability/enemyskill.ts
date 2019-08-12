@@ -311,7 +311,7 @@ EnemySkillAb.GolPollen.castTree.push(AbilityNode.Template.Physical({
 	hitMod: 0.8,
 	toDamage: null,
 	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = {};
+		var parse : any = {};
 		Text.Add("Sighing, the Gol runs her hands through her shimmering black hair in frustration. After her fingers' first pass, she repeats the action, then does it again. And again. Soon, the air around her seems slightly foggy, and your nose itches. A sneeze wracks your body as she continues the motion, filling the air with... something. You can't say what, but it's making you sneeze, and causing your nose to get itchy and irritable. The insectile beauty seems taller and more imposing after each involuntary spasm of your body. Her breasts appear larger, her pussy more inviting, and her face more charmingly human. For a monster, she wouldn't be a bad one to settle down with.", parse);
 		Text.NL();
 	}],
@@ -399,7 +399,7 @@ EnemySkillAb.Corishev.WideStrike.castTree.push(AbilityNode.Template.Physical({
 	atkMod: 1.2,
 	damageType: {pPierce: 1, lust: 0.2},
 	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-	var parse = {};
+	var parse : any = {};
 		Text.Add("The crazed lieutenant swings his whip in an arc, hoping to catch the both of you with a single strike.", parse);
 		Text.NL();
 	}],
@@ -421,7 +421,7 @@ EnemySkillAb.Corishev.SelfHarm = new Ability("SelfHarm");
 EnemySkillAb.Corishev.SelfHarm.Short = function() { return "Corishev SelfHarm."; }
 EnemySkillAb.Corishev.SelfHarm.targetMode = TargetMode.Self;
 EnemySkillAb.Corishev.SelfHarm.castTree.push(function(ability : Ability, encounter : Encounter, caster : Entity) {
-	var parse = {};
+	var parse : any = {};
 	
 	Text.Add("<i>“Yes… Yes!”</i> Corishev pants, the sounds of his whip repeatedly hitting his own flesh echoing throughout the dungeon. <i>“Ah… the fight excites me so… I’ll let you have a taste of it too, this burning lust!”</i>", parse);
 	

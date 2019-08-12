@@ -517,7 +517,7 @@ export class Entity {
 			womb.pregnant = false;
 			
 			if(GetDEBUG()) {
-				var parse = {
+				var parse : any = {
 					name : this.name
 				};
 				
@@ -548,7 +548,7 @@ export class Entity {
 		return this.drunkLevel;
 	}
 	DrunkStr() {
-		var parse = {
+		var parse : any = {
 			name : this.NameDesc(),
 			isAre : this.is()
 		};
@@ -2317,7 +2317,7 @@ export class Entity {
 
 	// Fuck entitys anus (anus, cock)
 	FuckAnal(butt : Butt, cock? : Cock, expMult? : number) {
-		var parse = {
+		var parse : any = {
 			name   : this.NameDesc(),
 			has    : this.has(),
 			hisher : this.hisher()
@@ -2340,7 +2340,7 @@ export class Entity {
 
 	// Fuck entitys vagina (vag, cock)
 	FuckVag(vag : Vagina, cock? : Cock, expMult? : number) {
-		var parse = {
+		var parse : any = {
 			name   : this.NameDesc(),
 			has    : this.has(),
 			hisher : this.hisher()

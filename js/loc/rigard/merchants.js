@@ -193,7 +193,7 @@ ShopStreetLoc.street.events.push(new Link(
 		let cveta = GAME().cveta;
 		let player = GAME().player;
 		let party : Party = GAME().party;
-		var parse = {
+		var parse : any = {
 			playername : player.name,
 			sirmadam : player.mfFem("sir", "madam")
 		};
@@ -309,7 +309,7 @@ ShopStreetLoc.street.events.push(new Link(
 			Text.NL();
 			Text.Add("Inside, you are met by the smith’s assistant, and, when he hears your request, forced to wait for a few minutes for Martello to finish up with his current task. You hear clanging from the forge room, and it seems that the man is observing one of his apprentices work on a horseshoe, checking her technique.");
 			Text.NL();
-			var parse = {
+			var parse : any = {
 				str : player.Str() > 35 ?
 				", and you return it in kind, your hands briefly locking in an immovable bond. The smith smiles at you, in apparent approval" :
 				", and you shake your hand a little to adjust your joints once he releases you"
@@ -370,7 +370,7 @@ ShopStreetScenes.Speculate = function() {
 	var Sdescs = ["shabby-looking", "colorful", "neatly-decorated", "well-kept", "well-used", "plain"];
 	var Mdescs = ["an agitated-looking merchant", "a wildly gesticulating merchant", "an excited-looking merchant", "a desperate-looking merchant"];
 	
-	var parse = {
+	var parse : any = {
 		p1name       : party.Get(1).name,
 		stall        : function() { return stalls[Math.floor(Math.random() * stalls.length)]; },
 		stallDesc    : function() { return Sdescs[Math.floor(Math.random() * Sdescs.length)]; },
@@ -671,7 +671,7 @@ ShopStreetScenes.Speculate = function() {
 ShopStreetScenes.Scepter = function() {
 	let rigard = GAME().rigard;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	

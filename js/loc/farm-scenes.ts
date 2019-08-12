@@ -37,7 +37,7 @@ FarmScenesIntro.Start = function() {
 	TimeStep({minute: 15});
 	Text.Clear();
 
-	var parse = {};
+	var parse : any = {};
 
 	Text.Add("While trekking along the rolling grasslands of the plains, you briefly wonder what else might lie out here, until you spot a foreign structure with a muddy pathway leading toward it. In the distance, you see what appears to be an old and worn building. Although from here you are not sure what it is, you feel compelled to go out there and have a look.", parse);
 	Text.Flush();
@@ -71,7 +71,7 @@ FarmScenesIntro.Approach = function() {
 
 	gwendy.flags["Met"] = 1;
 
-	var parse = {
+	var parse : any = {
 		handsomecute : player.body.femininity.Get() > 0 ? "cute" : "handsome",
 		playername   : player.name
 	};
@@ -162,7 +162,7 @@ FarmScenesIntro.EnterBarn = function() {
 	party.location = FarmLoc.Barn;
 	TimeStep({minute: 10});
 
-	var parse = {};
+	var parse : any = {};
 
 	Text.Clear();
 
@@ -189,7 +189,7 @@ FarmScenesIntro.EnterLoft = function() {
 	TimeStep({minute: 5});
 	Text.Clear();
 
-	var parse = {};
+	var parse : any = {};
 
 	Text.Add("Upon reaching the top, you are greeted with the homely sight of furniture spread somewhat clumsily around the place. There is a simple unmade bed with a rather worn, but comfy-looking, quilt resting atop it, and two pillows at the head. A pair of simple wooden drawers lie under the bed, and what looks to be the strap of a bra juts out from one of them. A dresser with a mirror sits close to a round wooden table with two chairs, and a small washtub is under the table filled with dirty dishes. A few essentials that come to mind, like a toilet, are missing, but you believe you saw an outhouse on the way here.", parse);
 	Text.NL();
@@ -208,7 +208,7 @@ FarmScenesIntro.EnterLoft = function() {
 FarmScenesIntro.GwendyQuestions1 = function() {
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		race : function() { return player.body.Race().Short(player.Gender()); }
 	};
 
@@ -453,7 +453,7 @@ FarmScenesIntro.HelpAdrian = function() {
 
 	adrian.flags["Met"] = 1;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		buttDesc   : function() { return player.Butt().Short(); }
 	};
@@ -545,7 +545,7 @@ FarmScenesIntro.HelpAdrianFinished = function() {
 	Text.Clear();
 	TimeStep({hour: 1});
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		buttDesc   : function() { return player.Butt().Short(); }
 	};
@@ -583,7 +583,7 @@ FarmScenesIntro.MeetDanie = function() {
 
 	danie.flags["Met"] = 1;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		eyeColor   : Color.Desc(player.Eyes().color),
 		mistermiss : player.body.Gender() == Gender.male ? "mister" : "miss",
@@ -662,7 +662,7 @@ FarmScenesIntro.HornyDanie = function() {
 	Text.Clear();
 	player.AddLustFraction(0.5);
 
-	var parse = {
+	var parse : any = {
 		playername      : player.name,
 		erectionwetness : player.FirstCock() ? "erection" :
 		                  player.FirstVag()  ? "wetness" : "arousal"
@@ -717,7 +717,7 @@ FarmScenesIntro.DanieFuckOptions = function() {
 	var cocksInVag = player.CocksThatFit(danie.FirstVag());
 	var cocksInAss = player.CocksThatFit(danie.Butt());
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 
@@ -773,7 +773,7 @@ FarmScenesIntro.DanieOralSex = function(bits : boolean) {
 
 	// IF bits == true, cock, else vag
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		cockDesc   : function() { return player.FirstCock().Short(); },
 		cuntDesc   : function() { return player.FirstVag().Short(); },
@@ -868,7 +868,7 @@ FarmScenesIntro.DanieVaginalSex = function() {
 
 	var p1Cock = player.BiggestCock(cocksInVag);
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		cockDesc   : function() { return p1Cock.Short(); },
 		cuntDesc   : function() { return danie.FirstVag().Short(); },
@@ -914,7 +914,7 @@ FarmScenesIntro.DanieAnalSex = function() {
 
 	var p1Cock = player.BiggestCock(cocksInAss);
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		cockDesc   : function() { return p1Cock.Short(); },
 		anusDesc   : function() { return danie.Butt().AnalShort(); },
@@ -956,7 +956,7 @@ FarmScenesIntro.ReturnToGwendy = function() {
 	Text.Clear();
 	TimeStep({hour: 2});
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 
@@ -1167,7 +1167,7 @@ FarmLoc.Loft.links.push(new Link(
 FarmLoc.Loft.SleepFunc = function() {
 	let party : Party = GAME().party;
 
-	var parse = {
+	var parse : any = {
 
 	};
 

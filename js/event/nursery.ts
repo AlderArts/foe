@@ -343,7 +343,7 @@ NurseryScenes.Nomads = function() {
 	let world = WORLD();
 
 	var num = nursery.TotalKids();
-	var parse = {
+	var parse : any = {
 		ren   : num > 1 ? "ren" : "",
 		isAre : num > 1 ? "are" : "is"
 	};

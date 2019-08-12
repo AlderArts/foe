@@ -4,13 +4,15 @@
 //
 
 import { Event, Link } from '../../event';
-import { WorldTime, MoveToLocation } from '../../GAME';
+import { WorldTime, MoveToLocation, GAME, WORLD } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
+import { CassidyFlags } from '../../event/cassidy-flags';
+import { CassidyScenes } from '../../event/cassidy-scenes';
 
 let WeaponShopLoc = new Event("The Pale Flame");
 
-let WeaponShopScenes = {};
+let WeaponShopScenes : any = {};
 
 WeaponShopScenes.IsOpen = function() {
 	let rigard = GAME().rigard;
@@ -18,26 +20,26 @@ WeaponShopScenes.IsOpen = function() {
 }
 
 WeaponShopLoc.description = function() {
-	Scenes.Cassidy.ShopDesc();
+	CassidyScenes.ShopDesc();
 }
 
 WeaponShopLoc.onEntry = function() {
 	let cassidy = GAME().cassidy;
-	var first = cassidy.flags["Met"] < Cassidy.Met.Met;
+	var first = cassidy.flags["Met"] < CassidyFlags.Met.Met;
 	if(first) {
-		Scenes.Cassidy.First();
+		CassidyScenes.First();
 	}
-	else if(!(cassidy.flags["Talk"] & Cassidy.Talk.MShop) && (cassidy.Relation() >= 10) && (WorldTime().hour < 12)) {
-		Scenes.Cassidy.ManagingShop();
+	else if(!(cassidy.flags["Talk"] & CassidyFlags.Talk.MShop) && (cassidy.Relation() >= 10) && (WorldTime().hour < 12)) {
+		CassidyScenes.ManagingShop();
 	}
-	else if((cassidy.flags["Met"] == Cassidy.Met.WentBack) && (cassidy.Relation() >= 30)) {
-		Scenes.Cassidy.BigReveal();
+	else if((cassidy.flags["Met"] == CassidyFlags.Met.WentBack) && (cassidy.Relation() >= 30)) {
+		CassidyScenes.BigReveal();
 	}
-	else if((cassidy.flags["Met"] == Cassidy.Met.TalkFem) && (cassidy.femTimer.Expired())) {
-		Scenes.Cassidy.FemTalk2();
+	else if((cassidy.flags["Met"] == CassidyFlags.Met.TalkFem) && (cassidy.femTimer.Expired())) {
+		CassidyScenes.FemTalk2();
 	}
-	else if((cassidy.flags["Met"] == Cassidy.Met.BeganFem) && (cassidy.femTimer.Expired())) {
-		Scenes.Cassidy.FemFinal();
+	else if((cassidy.flags["Met"] == CassidyFlags.Met.BeganFem) && (cassidy.femTimer.Expired())) {
+		CassidyScenes.FemFinal();
 	}
 	else {
 		Gui.PrintDefaultOptions();
@@ -49,24 +51,24 @@ WeaponShopLoc.onEntry = function() {
 WeaponShopLoc.events.push(new Link(
 	"Cassidy", true, true, null,
 	function() {
-		Scenes.Cassidy.Approach();
+		CassidyScenes.Approach();
 	}
 ));
 
 WeaponShopLoc.events.push(new Link(
 	"Leave", true, true, null,
 	function() {
-		MoveToLocation(world.loc.Rigard.ShopStreet.street, {minute: 5});
+		MoveToLocation(WORLD().loc.Rigard.ShopStreet.street, {minute: 5});
 	}
 ));
 
 WeaponShopScenes.StreetDesc = function() {
 	let cassidy = GAME().cassidy;
-	var parse = {};
+	var parse : any = {};
 	
-	var first = cassidy.flags["Met"] < Cassidy.Met.Met;
+	var first = cassidy.flags["Met"] < CassidyFlags.Met.Met;
 	var open  = WeaponShopScenes.IsOpen();
-	var order = (cassidy.flags["Order"] != Cassidy.Order.None) && !cassidy.orderTimer.Expired();
+	var order = (cassidy.flags["Order"] != CassidyFlags.Order.None) && !cassidy.orderTimer.Expired();
 	
 	if(first) {
 		if(open)

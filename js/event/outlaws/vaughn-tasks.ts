@@ -9,10 +9,10 @@ import { Items } from '../../items';
 import { VaughnFlags } from './vaughn-flags';
 import { MirandaFlags } from '../miranda-flags';
 import { Time } from '../../time';
-import { Lei } from '../royals/lei';
 import { RigardFlags } from '../../loc/rigard/rigard-flags';
 import { Party } from '../../party';
 import { Room69Flags } from '../room69-flags';
+import { LeiFlags } from '../royals/lei-flags';
 
 let TasksScenes : any = {};
 
@@ -38,7 +38,7 @@ TasksScenes.StartTask = function() { //TODO add tasks
 }
 
 TasksScenes.TaskPrompt = function(Prompt : any) {
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -188,7 +188,7 @@ TasksScenes.Lockpicks.MeetingElodie = function() {
 	let party : Party = GAME().party;
 	let rigard = GAME().rigard;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -291,7 +291,7 @@ TasksScenes.Lockpicks.Debrief = function() {
 	let outlaws = GAME().outlaws;
 	let vaughn = GAME().vaughn;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -937,7 +937,7 @@ TasksScenes.Snitch.Debrief = function() {
 	let player = GAME().player;
 	let vaughn = GAME().vaughn;
 	
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -1002,7 +1002,7 @@ TasksScenes.Snitch.DebriefOutOfTime = function() {
 	let player = GAME().player;
 	let outlaws = GAME().outlaws;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -1350,7 +1350,7 @@ TasksScenes.Poisoning.InnPrompt = function(opts : any) {
 						Text.NL();
 						Text.Add("That’s the idea, yes. Will he do it?", parse);
 						Text.NL();
-						if(lei.Relation() >= Lei.Rel.L3) {
+						if(lei.Relation() >= LeiFlags.Rel.L3) {
 							Text.Add("Lei closes his eyes and thinks a moment. <i>“An interesting proposal. As luck would have it, I am certain that my employers will not be in need of my services for the next couple of hours. It appears a suitable opportunity to practice some of my more subtle skills.</i>", parse);
 							Text.NL();
 							Text.Add("<i>“Show me this vial of yours.”</i>", parse);
@@ -1807,7 +1807,7 @@ TasksScenes.Poisoning.KitchenYourself = function() {
 }
 
 TasksScenes.Poisoning.AphrodisiacEntry = function() {
-	var parse = {
+	var parse : any = {
 		Orvin : RigardFlags.LB.KnowsOrvin() ? "Orvin" : "the innkeeper"
 	};
 	
@@ -1835,7 +1835,7 @@ TasksScenes.Poisoning.AphrodisiacEntry = function() {
 }
 
 TasksScenes.Poisoning.AphrodisiacLeave = function() {
-	var parse = {};
+	var parse : any = {};
 	
 	Text.Clear();
 	Text.Add("Shaking your head, you turn your back and hurry down and out of the Lady’s Blessing. Things should be getting heated up soon, if Vaughn’s description of the aphrodisiac’s effects were accurate, and since you know for sure that the job’s taken care of, you don’t want to be here any longer than necessary. There’s nothing left for you now but to report back to Vaughn and hear what he has to say.", parse);
@@ -1977,7 +1977,7 @@ TasksScenes.Poisoning.DebriefSuccess = function() {
 	let outlaws = GAME().outlaws;
 	let vaughn = GAME().vaughn;
 
-	var parse = {
+	var parse : any = {
 		Orvin : RigardFlags.LB.KnowsOrvin() ? "Orvin" : "the innkeeper",
 		playername : player.name
 	};
@@ -2052,7 +2052,7 @@ TasksScenes.Poisoning.DebriefFailure = function() {
 	let player = GAME().player;
 	let vaughn = GAME().vaughn;
 
-	var parse = {
+	var parse : any = {
 		Orvin : RigardFlags.LB.KnowsOrvin() ? "Orvin" : "the innkeeper",
 		playername : player.name
 	};
@@ -2093,7 +2093,7 @@ TasksScenes.Poisoning.DebriefOutOfTime = function() {
 	let outlaws = GAME().outlaws;
 	let vaughn = GAME().vaughn;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	

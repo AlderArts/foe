@@ -22,7 +22,7 @@ ArmorShopScenes.CreateShop = function() {
 	let player = GAME().player;
 	
 	var buySuccessFunc = function(item, cost, num) {
-		var parse = {
+		var parse : any = {
 			sirmadam : player.mfTrue("sir", "madam")
 		};
 		
@@ -37,7 +37,7 @@ ArmorShopScenes.CreateShop = function() {
 		Text.NL();
 	};
 	var buyFailFunc = function(item, cost, bought) {
-		var parse = {
+		var parse : any = {
 			sirmadam : player.mfTrue("sir", "madam")
 		};
 		
@@ -59,7 +59,7 @@ ArmorShopScenes.CreateShop = function() {
 	var shop = new Shop({
 		buyPromptFunc : function(item, cost, bought) {
 			var coin = Text.NumToText(cost);
-			var parse = {
+			var parse : any = {
 				sirmadam : player.mfTrue("sir", "madam"),
 				item : item.sDesc(),
 				coin : coin,
@@ -80,7 +80,7 @@ ArmorShopScenes.CreateShop = function() {
 		buyFailFunc : buyFailFunc,
 		sellPromptFunc : function(item, cost, sold) {
 			var coin = Text.NumToText(cost);
-			var parse = {
+			var parse : any = {
 				sirmadam : player.mfTrue("sir", "madam"),
 				item : item.sDesc(),
 				coin : coin,
@@ -114,7 +114,7 @@ ArmorShopScenes.CreateShop = function() {
 			Text.NL();
 		},
 		sellSuccessFunc : function(item, cost, num) {
-			var parse = {
+			var parse : any = {
 				sirmadam : player.mfTrue("sir", "madam")
 			};
 			
@@ -135,7 +135,7 @@ ArmorShopScenes.CreateShop = function() {
 			Text.NL();
 		},
 		sellFailFunc : function(item, cost, sold) {
-			var parse = {
+			var parse : any = {
 				sirmadam : player.mfTrue("sir", "madam"),
 				item : item.sDesc()
 			};
@@ -160,7 +160,7 @@ ArmorShopScenes.CreateShop = function() {
 	var specialShop = new Shop({
 		buyPromptFunc : function(item, cost) {
 			var coin = Text.NumToText(cost);
-			var parse = {
+			var parse : any = {
 				sirmadam : player.mfTrue("sir", "madam"),
 				item : item.sDesc(),
 				coin : coin,
@@ -197,7 +197,7 @@ ArmorShopScenes.CreateShop = function() {
 
 
 ArmorShopLoc.description = function() {
-	var parse = {};
+	var parse : any = {};
 	
 	var scenes = new EncounterTable();
 	scenes.AddEnc(function() { parse["sign"] = "NO REFUNDS"; });
@@ -267,7 +267,7 @@ ArmorShopScenes.FirstEntry = function() {
 	let party : Party = GAME().party;
 	let rigard = GAME().rigard;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -327,7 +327,7 @@ ArmorShopScenes.FirstEntry = function() {
 ArmorShopScenes.RegularEntry = function(newStock) {
 	let rigard = GAME().rigard;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -367,7 +367,7 @@ ArmorShopScenes.Prompt = function() {
 	let player = GAME().player;
 	let rigard = GAME().rigard;
 
-	var parse = {
+	var parse : any = {
 		sirmadam : player.mfFem("sir", "madam"),
 		heshe : player.mfFem("he", "she")
 	};
@@ -457,7 +457,7 @@ ArmorShopScenes.Talk = function(backFunc) {
 	let player = GAME().player;
 	let rigard = GAME().rigard;
 
-	var parse = {
+	var parse : any = {
 		sirmadam : player.mfFem("sir", "madam")
 	};
 	

@@ -132,7 +132,7 @@ BrothelScenes.First = function() {
 	let player = GAME().player;
 	let rigard = GAME().rigard;
 
-	var parse = {
+	var parse : any = {
 		handsomePretty : player.mfFem("handsome", "pretty"),
 		playername : player.name,
 		gender : Gender.Desc(player.Gender())

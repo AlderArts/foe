@@ -1436,7 +1436,7 @@ KiakaiSex.PleasureElfEnd = function() {
 	let player = GAME().player;
 	let kiakai = GAME().kiakai;
 
-	var parse = {
+	var parse : any = {
 		playername   : player.name,
 		name         : kiakai.name
 	};
@@ -4218,7 +4218,7 @@ KiakaiSex.AnalCatchFinish = function() {
 	var playerCock = player.BiggestCock(null, true);
 	var kiaiCock   = kiakai.BiggestCock(null, true);
 	
-	var parse = {
+	var parse : any = {
 		playername   : player.name,
 		name         : kiakai.name,		
 		kCockDesc2   : function() { return kiakai.AllCocks()[1].Short(); },		

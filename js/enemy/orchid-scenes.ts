@@ -26,7 +26,7 @@ OrchidScenes.Impregnate = function(mother : Entity, slot : number) {
 OrchidScenes.Interact = function() {
 	let player = GAME().player;
 	let orchid = GAME().orchid;
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -56,7 +56,7 @@ OrchidScenes.Interact = function() {
 }
 
 OrchidScenes.Prompt = function() {
-	var parse = {
+	var parse : any = {
 		
 	};
 	

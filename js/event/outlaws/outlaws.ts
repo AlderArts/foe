@@ -126,7 +126,7 @@ export class Outlaws {
 OutlawsScenes.MariasBouquet = function() {
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		afternoonevening : WorldTime().hour >= 16 ? "evening" : "afternoon"
 	};
@@ -234,7 +234,7 @@ OutlawsScenes.MariasBouquetPrompt = function(opts : any) {
 	let player = GAME().player;
 	let outlaws = GAME().outlaws;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -344,7 +344,7 @@ OutlawsScenes.PathIntoRigardInitiation = function() {
 	let party : Party = GAME().party;
 	let outlaws = GAME().outlaws;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -745,7 +745,7 @@ OutlawsScenes.Exploration.Cavalcade = function() {
 	let party : Party = GAME().party;
 	let outlaws = GAME().outlaws;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -801,7 +801,7 @@ OutlawsScenes.Exploration.Archery = function() {
 	let outlaws = GAME().outlaws;
 	let maria = GAME().maria;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -991,7 +991,7 @@ OutlawsScenes.Exploration.Archery = function() {
 OutlawsScenes.Exploration.CampFollowers = function() {
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		s : player.sexlevel >= 4 ? "familiar" : "odd"
 	};
 	
@@ -1009,7 +1009,7 @@ OutlawsScenes.Exploration.CampFollowers = function() {
 }
 
 OutlawsScenes.Exploration.Feeding = function() {
-	var parse = {
+	var parse : any = {
 		outlaw1 : OutlawsScenes.Exploration.RandName(),
 		outlaw2 : OutlawsScenes.Exploration.RandName()
 	};
@@ -1072,7 +1072,7 @@ OutlawsScenes.Exploration.Carpentry = function() {
 	let player = GAME().player;
 	let outlaws = GAME().outlaws;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -1156,7 +1156,7 @@ OutlawsScenes.Exploration.FactFinding = function() {
 	let player = GAME().player;
 	let outlaws = GAME().outlaws;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	

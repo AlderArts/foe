@@ -2,9 +2,14 @@
 import { Event, Link } from '../../event';
 import { EncounterTable } from '../../encountertable';
 import { Text } from '../../text';
-import { MoveToLocation } from '../../GAME';
+import { MoveToLocation, GAME, WORLD } from '../../GAME';
 import { Gui } from '../../gui';
 import { RigardFlags } from './rigard-flags';
+import { RigardScenes } from './rigard';
+import { TerryScenes } from '../../event/terry-scenes';
+import { LeiScenes } from '../../event/royals/lei-scenes';
+import { Party } from '../../party';
+import { BrothelScenes } from './brothel';
 
 let ResidentialLoc = {
 	street   : new Event("Residential street"), // Will also contain gate to slums
@@ -31,17 +36,17 @@ ResidentialLoc.street.description = function() {
 }
 
 ResidentialLoc.street.enc = new EncounterTable();
-ResidentialLoc.street.enc.AddEnc(function() { return Scenes.Rigard.Chatter;});
-ResidentialLoc.street.enc.AddEnc(function() { return Scenes.Rigard.Chatter2;});
-ResidentialLoc.street.enc.AddEnc(function() { return Scenes.Rigard.CityHistory;}, 1.0, function() {
+ResidentialLoc.street.enc.AddEnc(function() { return RigardScenes.Chatter;});
+ResidentialLoc.street.enc.AddEnc(function() { return RigardScenes.Chatter2;});
+ResidentialLoc.street.enc.AddEnc(function() { return RigardScenes.CityHistory;}, 1.0, function() {
 	let rigard = GAME().rigard;
 	return rigard.flags["CityHistory"] == 0;
 });
-ResidentialLoc.street.enc.AddEnc(function() { return Scenes.Terry.ExploreResidential; }, 1000000.0, function() {
+ResidentialLoc.street.enc.AddEnc(function() { return TerryScenes.ExploreResidential; }, 1000000.0, function() {
 	let rigard = GAME().rigard;
 	return rigard.Krawitz["Q"] == RigardFlags.KrawitzQ.HuntingTerry;
 });
-ResidentialLoc.street.enc.AddEnc(function() { return Scenes.Lei.GuardStalking; }, 3.0, function() { return Scenes.Lei.GuardStalkingApplicable(); });
+ResidentialLoc.street.enc.AddEnc(function() { return LeiScenes.GuardStalking; }, 3.0, function() { return LeiScenes.GuardStalkingApplicable(); });
 ResidentialLoc.street.onEntry = function() {
 	
 	// TODO
@@ -65,9 +70,9 @@ ResidentialLoc.street.onEntry = function() {
 	}
 	*/
 	if(Math.random() < 0.15)
-		Scenes.Rigard.Chatter(true);
+		RigardScenes.Chatter(true);
 	else if(Math.random() < 0.3)
-		Scenes.Rigard.Chatter2(true);
+		RigardScenes.Chatter2(true);
 	else
 		Gui.PrintDefaultOptions();
 }
@@ -76,7 +81,7 @@ ResidentialLoc.street.links.push(new Link(
 	"Gate", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Rigard.Gate, {minute: 10});
+		MoveToLocation(WORLD().loc.Rigard.Gate, {minute: 10});
 	}
 ));
 ResidentialLoc.street.links.push(new Link(
@@ -86,14 +91,14 @@ ResidentialLoc.street.links.push(new Link(
 	"Merchants", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Rigard.ShopStreet.street, {minute: 20});
+		MoveToLocation(WORLD().loc.Rigard.ShopStreet.street, {minute: 20});
 	}
 ));
 ResidentialLoc.street.links.push(new Link(
 	"Plaza", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Rigard.Plaza, {minute: 10});
+		MoveToLocation(WORLD().loc.Rigard.Plaza, {minute: 10});
 	}
 ));
 
@@ -106,19 +111,19 @@ ResidentialLoc.street.links.push(new Link(
 	function() {
 		let rigard = GAME().rigard;
 		if(rigard.Krawitz["Q"] == RigardFlags.KrawitzQ.HeistDone)
-			Scenes.Rigard.Lockdown();
+			RigardScenes.Lockdown();
 		else
-			MoveToLocation(world.loc.Rigard.Slums.gate, {minute: 10});
+			MoveToLocation(WORLD().loc.Rigard.Slums.gate, {minute: 10});
 	}
 ));
 ResidentialLoc.street.links.push(new Link(
-	"Brothel", true, function() { return Scenes.Brothel.IsOpen(); },
+	"Brothel", true, function() { return BrothelScenes.IsOpen(); },
 	function() {
 		Text.Add("A rather discreet sign on a large nearby building invites you to the brothel ‘The Shadow Lady’. The facade is richer than the regular houses of the district, and the establishment is bustling with activity.");
 		Text.NL();
 	},
 	function() {
-		MoveToLocation(world.loc.Rigard.Brothel.brothel, {minute: 5});
+		MoveToLocation(WORLD().loc.Rigard.Brothel.brothel, {minute: 5});
 	}
 ));
 ResidentialLoc.street.links.push(new Link(

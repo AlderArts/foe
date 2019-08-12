@@ -12,7 +12,6 @@ import { DesertLoc } from './loc/desert';
 import { BurrowsLoc, InitBurrows } from './loc/burrows-scenes';
 import { TreeCityLoc } from './loc/treecity/treecity';
 import { RigardLoc, InitRigard } from './loc/rigard/rigard';
-import { Scenes } from './scenes';
 import { InitGlade } from './loc/glade';
 import { InitNomads } from './loc/nomads';
 import { InitMiranda } from './event/miranda-scenes';
@@ -67,7 +66,7 @@ export function InitWorld() {
 	InitIntro();
 	InitNomads();
 	InitOutlaws();
-	InitRigard(world, Scenes);
+	InitRigard();
 	InitFarm();
 	InitBurrows();
 	InitGlade();

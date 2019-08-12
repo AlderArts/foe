@@ -8,18 +8,26 @@ import { Event, Link } from '../../event';
 import { EncounterTable } from '../../encountertable';
 import { GetDEBUG } from '../../../app';
 import { Gender } from '../../body/gender';
-import { WorldTime, MoveToLocation, GAME, NAV } from '../../GAME';
+import { WorldTime, MoveToLocation, GAME, NAV, WORLD, TimeStep } from '../../GAME';
 import { SetGameState, GameState } from '../../gamestate';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { TwinsFlags } from '../../event/royals/twins-flags';
 import { RigardFlags } from './rigard-flags';
+import { Party } from '../../party';
+import { Input } from '../../input';
+import { LowerBodyType } from '../../body/body';
+import { Entity } from '../../entity';
+import { Race } from '../../body/race';
+import { StrapOnItems } from '../../items/strapon';
+import { Sex } from '../../entity-sex';
+import { Season } from '../../time';
+import { WeaponsItems } from '../../items/weapons';
+import { AccItems } from '../../items/accessories';
+import { KrawitzFlags } from './krawitz-flags';
 
-let world = null;
-
-export function InitKrawitz(w) {
-	world = w;
-	world.SaveSpots["Krawitz"] = KrawitzLoc.street;
+export function InitKrawitz() {
+	WORLD().SaveSpots["Krawitz"] = KrawitzLoc.street;
 };
 
 let KrawitzLoc = {
@@ -36,22 +44,12 @@ let KrawitzLoc = {
 	}
 }
 
-let KrawitzScenes = {};
-KrawitzScenes.EncType = {
-	Guard   : 0,
-	Servant : 1
-}
+enum EncType {
+	Guard   = 0,
+	Servant = 1
+};
 
-KrawitzScenes.Flags = {
-	Clothes        : 1,
-	Binder         : 2,
-	Sword          : 4,
-	SpikedLadies   : 8,
-	Sex            : 16,
-	SpikedServants : 32,
-	Orgy           : 64,
-	TF             : 128
-}
+let KrawitzScenes : any = {};
 
 KrawitzScenes.SetupStats = function() {
 	let rigard = GAME().rigard;
@@ -96,20 +94,20 @@ KrawitzScenes.SetupStats = function() {
 	party.SwitchIn(player);
 }
 
-KrawitzScenes.GuardDex = function(entity, num) {
+KrawitzScenes.GuardDex = function(entity : EncType, num? : number) {
 	num = num || 1;
-	var dex = (entity == KrawitzScenes.EncType.Guard) ? 10 : 15;
+	var dex = (entity == EncType.Guard) ? 10 : 15;
 	return num * dex;
 }
-KrawitzScenes.GuardAtk = function(entity, num) {
+KrawitzScenes.GuardAtk = function(entity : EncType, num? : number) {
 	num = num || 1;
-	var str = (entity == KrawitzScenes.EncType.Guard) ? 40 : 20;
+	var str = (entity == EncType.Guard) ? 40 : 20;
 	return num * str;
 }
-KrawitzScenes.GuardCha = function(entity, num) {
+KrawitzScenes.GuardCha = function(entity : EncType, num? : number) {
 	num = num || 1;
-	var cha = (entity == KrawitzScenes.EncType.Guard) ? 15 : 10;
-	if(entity == KrawitzScenes.EncType.Guard) {
+	var cha = (entity == EncType.Guard) ? 15 : 10;
+	if(entity == EncType.Guard) {
 		if(KrawitzScenes.stat.HasServantClothes) cha /= 2;
 	}
 	else { //Servants
@@ -128,8 +126,8 @@ KrawitzScenes.GuardSuspicion = function() {
 	if(KrawitzScenes.stat.HasServantClothes) return 1;
 	else return 3;
 }
-KrawitzScenes.EntitySuspicion = function(entity) {
-	if(entity == KrawitzScenes.EncType.Guard)
+KrawitzScenes.EntitySuspicion = function(entity : EncType) {
+	if(entity == EncType.Guard)
 		return KrawitzScenes.GuardSuspicion();
 	else
 		return KrawitzScenes.ServantSuspicion();
@@ -152,7 +150,7 @@ KrawitzLoc.street.links.push(new Link(
 	"Plaza", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Rigard.Plaza, {minute: 10});
+		MoveToLocation(WORLD().loc.Rigard.Plaza, {minute: 10});
 	}
 ));
 KrawitzLoc.street.links.push(new Link(
@@ -213,7 +211,7 @@ KrawitzLoc.grounds.links.push(new Link(
 		let player = GAME().player;
 		let party : Party = GAME().party;
 
-		var parse = {
+		var parse : any = {
 			
 		};
 		party.location = KrawitzLoc.servants;
@@ -455,7 +453,7 @@ KrawitzLoc.Mansion.hall.description = function() {
 		
 		KrawitzScenes.stat.Swiped = true;
 	}
-	var parse = {
+	var parse : any = {
 		vase : KrawitzScenes.stat.Swiped ? "The huge staircase nearby is in disrepair, with visibly flaky paint." : "It’s a rather jarring contrast to see an ornate antique statue, no doubt very expensive, standing beside a huge staircase with visibly flaky paint."
 	}
 	Text.Add("You are in the main building of the Krawitz estate. The interior of the mansion, while richly decorated, has clearly seen better days. [vase] Though the main hallway is spotless, you can see tufts of dust gathering in the more dimly lit side corridors. The intricately designed carpet you are standing on exudes a faint smell of mold. Either Krawitz has been a massive cheapskate with maintenance lately, or the servants aren’t doing a very good job keeping this place in shape.", parse);
@@ -553,7 +551,7 @@ KrawitzLoc.Mansion.hall.links.push(new Link(
 		let party : Party = GAME().party;
 
 		party.location = KrawitzLoc.Mansion.study;
-		var parse = {
+		var parse : any = {
 			
 		};
 		Text.Clear();
@@ -671,7 +669,7 @@ KrawitzLoc.Mansion.hall.links.push(new Link(
 ));
 
 KrawitzScenes.KrawitzPrompt = function() {
-	var parse = {};
+	var parse : any = {};
 	//[Challenge][Leave]
 	var options = new Array();
 	options.push({ nameStr : "Challenge",
@@ -706,7 +704,7 @@ KrawitzScenes.FightKrawitz = function() {
 	let rigard = GAME().rigard;
 	let player = GAME().player;
 
-	var parse = {};
+	var parse : any = {};
 	if(rigard.Krawitz["Duel"] > 0) {
 		Text.Add("<i>“It- it’s you!”</i> Krawitz gasps, recognizing you from your previous encounter. <i>“Why have you come here?!”</i>");
 	}
@@ -785,8 +783,8 @@ KrawitzScenes.FightKrawitz = function() {
 	Gui.SetButtonsFromList(options);
 }
 
-KrawitzScenes.Flee = function(entryPoint) {
-	var parse = {};
+KrawitzScenes.Flee = function(entryPoint : boolean) {
+	var parse : any = {};
 	if(!entryPoint) {
 		Text.Add("This wasn’t a very good plan to start with. You curse yourself as you dash through the dark corridors of the mansion, the sound of alarms rising around you, the livid lord hot on your heels. You hear him groaning in pain as you throw down various vases and statues to block his path, though you don’t stop to find out if the pain is physical or merely monetary.", parse);
 		Text.NL();
@@ -918,7 +916,7 @@ KrawitzScenes.Scouting = function() {
 	let rigard = GAME().rigard;
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	Text.Clear();
@@ -1013,7 +1011,7 @@ KrawitzScenes.Scouting = function() {
 KrawitzScenes.WorkWork = function() {
 	let rigard = GAME().rigard;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -1075,7 +1073,7 @@ KrawitzScenes.EnteringTheWork = function() {
 	let rigard = GAME().rigard;
 	let party : Party = GAME().party;
 
-	var parse = {
+	var parse : any = {
 		name : function() { return party.Get(1).name; }
 	};
 	
@@ -1116,7 +1114,7 @@ KrawitzScenes.EnteringTheWork = function() {
 }
 
 KrawitzScenes.ApproachGates = function() {
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -1162,7 +1160,7 @@ KrawitzScenes.SneakingIn = function() {
 	let player = GAME().player;
 	let party : Party = GAME().party;
 	
-	var parse = {
+	var parse : any = {
 		name : function() { return party.Get(1).name; }
 	};
 	
@@ -1203,8 +1201,8 @@ KrawitzScenes.SneakingIn = function() {
 	});
 }
 
-KrawitzScenes.GuardLost = function(gender) {
-	var parse = {
+KrawitzScenes.GuardLost = function(gender : Gender) {
+	var parse : any = {
 		HeShe  : gender == Gender.male ? "He" : "She",
 		heshe  : gender == Gender.male ? "he" : "she",
 		hisher : gender == Gender.male ? "his" : "her"
@@ -1221,8 +1219,8 @@ KrawitzScenes.GuardLost = function(gender) {
 	return Text.Add(text, parse);
 }
 
-KrawitzScenes.GuardConvinced = function(gender) {
-	var parse = {
+KrawitzScenes.GuardConvinced = function(gender : Gender) {
+	var parse : any = {
 		HeShe  : gender == Gender.male ? "He" : "She",
 		heshe  : gender == Gender.male ? "he" : "she",
 		hisher : gender == Gender.male ? "his" : "her"
@@ -1238,8 +1236,8 @@ KrawitzScenes.GuardConvinced = function(gender) {
 	return Text.Add(text, parse);
 }
 
-KrawitzScenes.ServantLost = function(gender) {
-	var parse = {
+KrawitzScenes.ServantLost = function(gender : Gender) {
+	var parse : any = {
 		HeShe   : gender == Gender.male ? "He" : "She",
 		heshe   : gender == Gender.male ? "he" : "she",
 		hisher  : gender == Gender.male ? "his" : "her",
@@ -1257,8 +1255,9 @@ KrawitzScenes.ServantLost = function(gender) {
 	return Text.Add(text, parse);
 }
 
-KrawitzScenes.ServantConvinced = function(gender) {
-	var parse = {
+KrawitzScenes.ServantConvinced = function(gender : Gender) {
+	let player : Entity = GAME().player;
+	var parse : any = {
 		HeShe   : gender == Gender.male ? "He" : "She",
 		heshe   : gender == Gender.male ? "he" : "she",
 		hisher  : gender == Gender.male ? "his" : "her",
@@ -1277,11 +1276,11 @@ KrawitzScenes.ServantConvinced = function(gender) {
 }
 
 
-KrawitzScenes.FoundOut = function(entity, num, gender) {
+KrawitzScenes.FoundOut = function(entity : EncType, num : number, gender? : Gender) {
 	let player = GAME().player;
 	
-	var parse = {
-		entity : entity == KrawitzScenes.EncType.Guard ? "the guard" : "the servant",
+	var parse : any = {
+		entity : entity == EncType.Guard ? "the guard" : "the servant",
 		spiked : KrawitzScenes.stat.LustPotion && KrawitzScenes.stat.HasWine ? "spiked " : ""
 	};
 	parse = Text.ParserPlural(parse, num > 1);
@@ -1321,7 +1320,7 @@ KrawitzScenes.FoundOut = function(entity, num, gender) {
 			Text.Add("Quickly, you fade into the shadows, avoiding detection.", parse);
 			Text.NL();
 			
-			if(entity == KrawitzScenes.EncType.Guard)
+			if(entity == EncType.Guard)
 				KrawitzScenes.GuardLost(gender);
 			else
 				KrawitzScenes.ServantLost(gender);
@@ -1337,7 +1336,7 @@ KrawitzScenes.FoundOut = function(entity, num, gender) {
 			Text.Add("With your charm and wit, you try to convince [entity][s] that you are one of the staff.", parse);
 			Text.NL();
 			
-			if(entity == KrawitzScenes.EncType.Guard)
+			if(entity == EncType.Guard)
 				KrawitzScenes.GuardConvinced(gender);
 			else
 				KrawitzScenes.ServantConvinced(gender);
@@ -1391,7 +1390,7 @@ KrawitzScenes.FoundOut = function(entity, num, gender) {
 }
 
 // TODO: Trigger found out
-KrawitzScenes.AddSuspicion = function(num, surpressNext) {
+KrawitzScenes.AddSuspicion = function(num : number, surpressNext : boolean) {
 	KrawitzScenes.stat.Suspicion += num;
 	
 	if(KrawitzScenes.stat.Suspicion > 100) KrawitzScenes.stat.Suspicion = 100;
@@ -1427,7 +1426,7 @@ KrawitzScenes.AddSuspicion = function(num, surpressNext) {
 KrawitzScenes.PatrollingGuards = function() {
 	let rigard = GAME().rigard;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -1531,13 +1530,13 @@ KrawitzScenes.PatrollingGuards = function() {
 		Text.Add("<i>“Hey, who goes there!”</i> one of the guards calls in your direction, noticing someone hiding in the bushes.", parse);
 		
 		Text.Flush();
-		KrawitzScenes.FoundOut(KrawitzScenes.EncType.Guard, 2, gender);
+		KrawitzScenes.FoundOut(EncType.Guard, 2, gender);
 	}
 }
 
 //Overhear servants (grounds/servants/mansion)
 KrawitzScenes.WanderingServants = function() {
-	var parse = {
+	var parse : any = {
 		
 	};
 	var gender = Math.random() > 0.5 ? Gender.male : Gender.female;
@@ -1651,14 +1650,14 @@ KrawitzScenes.WanderingServants = function() {
 		Text.Add("<i>“Is there someone there?”</i> one of the maids peers into the shadows nervously.", parse);
 		
 		Text.Flush();
-		KrawitzScenes.FoundOut(KrawitzScenes.EncType.Servant, Math.random() < 0.5 ? 3 : 4, gender);
+		KrawitzScenes.FoundOut(EncType.Servant, Math.random() < 0.5 ? 3 : 4, gender);
 	}
 }
 
 KrawitzScenes.StealingClothes = function() {
 	let player = GAME().player;
 	
-	var parse = {
+	var parse : any = {
 		
 	};
 	Text.Clear();
@@ -1712,7 +1711,7 @@ KrawitzScenes.Bathhouse = function() {
 	let player = GAME().player;
 	let party : Party = GAME().party;
 
-	var parse = {
+	var parse : any = {
 		cock2     	  : function() { return player.AllCocks()[1].Short(); },
 		cockTip2      : function() { return player.AllCocks()[1].TipShort(); }
 	};
@@ -1926,7 +1925,7 @@ KrawitzScenes.Bathhouse = function() {
 							Text.Flush();
 								
 							Gui.NextPrompt(function() {
-								var playerCock = player.FirstCock() || (player.strapOn ? player.strapOn.cock : Items.StrapOn.LargeStrapon.cock);
+								var playerCock = player.FirstCock() || (player.strapOn ? player.strapOn.cock : StrapOnItems.LargeStrapon.cock);
 								parse = player.ParserTags(parse, "", playerCock);
 								Text.Clear();
 								
@@ -2012,7 +2011,7 @@ KrawitzScenes.Bathhouse = function() {
 }
 
 KrawitzScenes.BathhouseWine = function() {
-	var parse = {
+	var parse : any = {
 	};
 	
 	KrawitzScenes.stat.BathhouseWine = true;
@@ -2029,7 +2028,7 @@ KrawitzScenes.BathhouseWine = function() {
 }
 
 KrawitzScenes.OrgyEntrypoint = function() {
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -2080,8 +2079,10 @@ KrawitzScenes.Aftermath = function() {
 	let party : Party = GAME().party;
 	let twins = GAME().twins;
 	let lei = GAME().lei;
+	let terry = GAME().terry;
+	let world = WORLD();
 	
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -2102,14 +2103,14 @@ KrawitzScenes.Aftermath = function() {
 	
 	// Save flags
 	rigard.Krawitz["F"] = 0;
-	if(KrawitzScenes.stat.HasServantClothes) rigard.Krawitz["F"] |= KrawitzScenes.Flags.Clothes;
-	if(KrawitzScenes.stat.HasBinder) rigard.Krawitz["F"] |= KrawitzScenes.Flags.Binder;
-	if(KrawitzScenes.stat.HasSword) rigard.Krawitz["F"] |= KrawitzScenes.Flags.Sword;
-	if(KrawitzScenes.stat.BathhouseSpiked) rigard.Krawitz["F"] |= KrawitzScenes.Flags.SpikedLadies;
-	if(KrawitzScenes.stat.SexedGirls) rigard.Krawitz["F"] |= KrawitzScenes.Flags.Sex;
-	if(KrawitzScenes.stat.ServantSpikedWine) rigard.Krawitz["F"] |= KrawitzScenes.Flags.SpikedServants;
-	if(KrawitzScenes.stat.Orgy) rigard.Krawitz["F"] |= KrawitzScenes.Flags.Orgy;
-	if(KrawitzScenes.stat.TFdKrawitz) rigard.Krawitz["F"] |= KrawitzScenes.Flags.TF;
+	if(KrawitzScenes.stat.HasServantClothes) rigard.Krawitz["F"] |= KrawitzFlags.Clothes;
+	if(KrawitzScenes.stat.HasBinder) rigard.Krawitz["F"] |= KrawitzFlags.Binder;
+	if(KrawitzScenes.stat.HasSword) rigard.Krawitz["F"] |= KrawitzFlags.Sword;
+	if(KrawitzScenes.stat.BathhouseSpiked) rigard.Krawitz["F"] |= KrawitzFlags.SpikedLadies;
+	if(KrawitzScenes.stat.SexedGirls) rigard.Krawitz["F"] |= KrawitzFlags.Sex;
+	if(KrawitzScenes.stat.ServantSpikedWine) rigard.Krawitz["F"] |= KrawitzFlags.SpikedServants;
+	if(KrawitzScenes.stat.Orgy) rigard.Krawitz["F"] |= KrawitzFlags.Orgy;
+	if(KrawitzScenes.stat.TFdKrawitz) rigard.Krawitz["F"] |= KrawitzFlags.TF;
 	
 	Text.Clear();
 	Text.Add("<b>Final Score:</b><br>", parse);
@@ -2317,7 +2318,7 @@ KrawitzScenes.Aftermath = function() {
 				Text.Add("Grinning, you pull out Lord Krawitz’ blade and present it to the pair. <i>“How in… oh, this is going to sting him something fierce!”</i> the man chuckles, admiring the sword. <i>“One almost feels a bit bad for him… This sword is just about the most valuable thing in his possession, an heirloom that has been in his family for generations. Until now, that is.”</i> He hands it back to you. <i>“You’ve earned it. Make good use of it - it is a fine blade.”</i>", parse);
 				Text.NL();
 				Text.Flush();
-				party.inventory.AddItem(Items.Weapons.KrawitzSword);
+				party.inventory.AddItem(WeaponsItems.KrawitzSword);
 			}
 			if(KrawitzScenes.stat.TFdKrawitz) {
 				Text.Add("You tell them how you slipped something extra into the lord’s food. <i>“Oh, that is too rich!”</i> the man laughs out loud, slapping his knees in mirth. <i>“I look forward to seeing that bastard trying to show up in court with animal ears and a tail on him. That ought to lend less credence to his damn xenophobic politics!”</i>", parse);
@@ -2370,7 +2371,7 @@ KrawitzScenes.Aftermath = function() {
 						Text.NL();
 						Text.Add("<b>Received woman’s favor!</b>", parse);
 						Text.NL();
-						party.inventory.AddItem(Items.Accessories.RaniFavor);
+						party.inventory.AddItem(AccItems.RaniFavor);
 					}
 					if(points >= 10) {
 						Text.Add("<i>“Why, I’d say you’ve made quite the impression on my companion,”</i> the man grins. <i>“If you are looking for more ‘favors’, I’m sure she wouldn’t mind providing them.”</i> The woman blushes deeply at this, but nods nervously.", parse);
@@ -2432,7 +2433,7 @@ KrawitzScenes.Aftermath = function() {
 
 KrawitzScenes.TwinsTalk = function() {
 	let player = GAME().player;
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -2453,7 +2454,7 @@ KrawitzScenes.TwinsTalk = function() {
 }
 
 KrawitzScenes.TwinsPrompt = function() {
-	var parse = {
+	var parse : any = {
 		
 	};
 
@@ -2535,7 +2536,7 @@ KrawitzScenes.TwinsMoreTalk = function() {
 	let player = GAME().player;
 	let twins = GAME().twins;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -2567,7 +2568,7 @@ KrawitzScenes.TwinsMoreTalk = function() {
 	Text.Flush();
 
 	Gui.NextPrompt(function() {
-		MoveToLocation(world.loc.Rigard.Inn.common, {hour: 2});
+		MoveToLocation(WORLD().loc.Rigard.Inn.common, {hour: 2});
 	});
 }
 
@@ -2576,7 +2577,7 @@ KrawitzScenes.Duel = function() {
 	let player = GAME().player;
 
 	SetGameState(GameState.Event, Gui);
-	var parse = {
+	var parse : any = {
 		
 	};
 	

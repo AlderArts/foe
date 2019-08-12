@@ -377,7 +377,7 @@ ZebraShamanScenes.OnWinFuckHim = function(enc : any) {
 	var lusty = zebra.LustLevel() > 0.5;
 	var p1cock = player.BiggestCock();
 
-	var parse = {
+	var parse : any = {
 		clothes : function() { return player.ArmorDesc(); }
 	};
 	parse = player.ParserTags(parse);

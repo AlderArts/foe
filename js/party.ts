@@ -177,7 +177,7 @@ export class Party {
 	GetInParty(num : number) : Entity {
 		if(num < this.members.length) return this.members[num];
 	}
-	GetSlot(member : number) : number {
+	GetSlot(member : Entity) : number {
 		for(var i=0; i < this.members.length; ++i) {
 			if(this.members[i] == member) return i;
 		}
@@ -340,7 +340,7 @@ export class Party {
 	}
 
 	Interact(preventClear? : boolean, switchSpot? : boolean, back? : any) {
-		var parse = {
+		var parse : any = {
 
 		};
 

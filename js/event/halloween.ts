@@ -501,7 +501,7 @@ Halloween.Loc.Camp.events.push(new Link(
 	null,
 	function() {
 		let party : Party = GAME().party;
-		var parse = {
+		var parse : any = {
 			
 		};
 		
@@ -617,7 +617,7 @@ Halloween.Loc.Camp.events.push(new Link(
 
 Halloween.Loc.Path.description = function() {
 	let player = GAME().player;
-	var parse = {
+	var parse : any = {
 		feet : player.FeetDesc()
 	};
 	
@@ -675,7 +675,7 @@ Halloween.Loc.Path.events.push(new Link(
 	function() {
 		let player = GAME().player;
 
-		var parse = {
+		var parse : any = {
 			
 		};
 		parse = player.ParserTags(parse);
@@ -1191,7 +1191,7 @@ HalloweenScenes.WerewolfTF = function() {
 	let player = GAME().player;
 	let party : Party = GAME().party;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	parse = player.ParserTags(parse);
@@ -1495,7 +1495,7 @@ HalloweenScenes.RonnieCatch = function() {
 }
 
 HalloweenScenes.RonnieReversal = function() {
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -1525,7 +1525,7 @@ Halloween.Loc.Path.events.push(new Link(
 	"Ravens", true, true,
 	null,
 	function() {
-		var parse = {
+		var parse : any = {
 			
 		};
 		
@@ -1992,7 +1992,7 @@ Halloween.Loc.TortureRoom.events.push(new Link(
 ));
 
 HalloweenScenes.NadirMaApproach = function() {
-	var parse = {
+	var parse : any = {
 		
 	};
 	Text.Clear();
@@ -5234,7 +5234,7 @@ HalloweenScenes.Laggoth = function() {
 }
 
 HalloweenScenes.LaggothQnA = function(opts : any) {
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -5684,7 +5684,7 @@ HalloweenScenes.LaggothDistract = function() {
 HalloweenScenes.LaggothPit = function() {
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		skin : player.SkinDesc()
 	};
 	
@@ -5752,7 +5752,7 @@ Halloween.Loc.Chapel.events.push(new Link(
 ));
 
 HalloweenScenes.Sacristy = function() {
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -6879,7 +6879,7 @@ HalloweenScenes.Patches = function() {
 
 HalloweenScenes.WakingUp = function(badend : boolean) {
 	let party : Party = GAME().party;
-	var parse = {
+	var parse : any = {
 		
 	};
 	

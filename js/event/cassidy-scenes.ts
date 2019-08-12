@@ -1,182 +1,24 @@
-/*
- * 
- * Define Cassidy
- * 
- */
+import * as _ from 'lodash';
 
-import { Entity } from '../entity';
-import { GetDEBUG } from '../../app';
-import { SexScenes, SparSexScenes } from './cassidy-sex';
-import { Race } from '../body/race';
+import { SexScenes, SparSexScenes } from "./cassidy-sex";
+import { CassidyFlags } from "./cassidy-flags";
+import { GAME, WorldTime, TimeStep, StepToHour, MoveToLocation, WORLD } from "../GAME";
+import { Text } from "../text";
+import { Gui } from "../gui";
+import { Party } from "../party";
+import { Encounter } from "../combat";
+import { EncounterTable } from "../encountertable";
+import { MirandaFlags } from "./miranda-flags";
+import { Status } from '../statuseffect';
 import { Time } from '../time';
-import { Items } from '../items';
-import { Shop } from '../shop';
-import { WorldTime, GAME } from '../GAME';
-import { Images } from '../assets';
-import { Gui } from '../gui';
-import { Text } from '../text';
-import { Element } from '../damagetype';
-import { EncounterTable } from '../encountertable';
-import { Abilities } from '../abilities';
-import { Encounter } from '../combat';
-import { Party } from '../party';
-import { MoveToLocation } from '../GAME';
-import { MirandaFlags } from './miranda-flags';
+import { GetDEBUG } from '../../app';
+import { HipSize } from '../body/body';
+import { CassidySpar } from './cassidy';
 
-let CassidyScenes = {
+let CassidyScenes : any = {
 	Sex     : SexScenes,
 	SparSex : SparSexScenes,
 };
-
-function Cassidy(storage) {
-	Entity.call(this);
-	this.ID = "cassidy";
-	
-	// Character stats
-	this.name = "Cassidy";
-	
-	this.body.DefFemale();
-	this.FirstBreastRow().size.base = 2;
-	this.body.SetRace(Race.Salamander);
-	
-	this.FirstVag().capacity.base = 10;
-	this.FirstVag().virgin = false;
-	this.Butt().capacity.base = 20;
-	this.Butt().virgin = false;
-	
-	this.flags["Met"]   = Cassidy.Met.NotMet;
-	this.flags["Talk"]  = 0; //Bitmask
-	this.flags["SparL"] = 0; //Times lost
-	this.flags["Order"] = Cassidy.Order.None;
-	this.orderTimer = new Time();
-	//Use for feminize
-	this.femTimer   = new Time();
-	
-	//Shop stuff
-	this.shop = CassidyScenes.CreateShop();
-	this.flags["shop"]     = 0;
-	this.shopItems = [];
-	
-	this.shopItems.push(Items.Weapons.Dagger);
-	this.shopItems.push(Items.Weapons.Rapier);
-	this.shopItems.push(Items.Weapons.WoodenStaff);
-	this.shopItems.push(Items.Weapons.ShortSword);
-	this.shopItems.push(Items.Weapons.GreatSword);
-	this.shopItems.push(Items.Weapons.OakSpear);
-	this.shopItems.push(Items.Weapons.Halberd);
-	this.shopItems.push(Items.Weapons.HeavyFlail);
-	this.shopItems.push(Items.Weapons.WarHammer);
-	
-	if(storage) this.FromStorage(storage);
-}
-Cassidy.prototype = new Entity();
-Cassidy.prototype.constructor = Cassidy;
-
-Cassidy.Met = {
-	NotMet     : 0,
-	Met        : 1,
-	AskedBack  : 2,
-	WentBack   : 3,
-	KnowGender : 4,
-	TalkFem    : 5,
-	BeganFem   : 6,
-	Feminized  : 7
-};
-
-Cassidy.Talk = {
-	Salamanders : 1,
-	Family      : 2,
-	Loner       : 4,
-	MShop       : 8, //One off manage the shop event
-	Forge       : 16,
-	SexIndoor   : 32,
-	Spar        : 64,
-	Model       : 128
-};
-
-Cassidy.Order = {
-	None : 0
-};
-
-Cassidy.prototype.Update = function(step) {
-	Entity.prototype.Update.call(this, step);
-	
-	this.orderTimer.Dec(step);
-	this.femTimer.Dec(step);
-}
-
-Cassidy.prototype.FromStorage = function(storage) {
-	this.Butt().virgin     = parseInt(storage.avirgin) == 1;
-	this.FirstVag().virgin = parseInt(storage.virgin)  == 1;
-	
-	this.LoadPersonalityStats(storage);
-	
-	// Load flags
-	this.LoadFlags(storage);
-	this.LoadSexFlags(storage);
-	
-	this.orderTimer.FromStorage(storage.oTime);
-	this.femTimer.FromStorage(storage.fTime);
-}
-
-Cassidy.prototype.ToStorage = function() {
-	var storage = {
-		avirgin : this.Butt().virgin ? 1 : 0,
-		virgin  : this.FirstVag().virgin ? 1 : 0
-	};
-	
-	this.SavePersonalityStats(storage);
-	
-	this.SaveFlags(storage);
-	this.SaveSexFlags(storage);
-	
-	storage.oTime = this.orderTimer.ToStorage();
-	storage.fTime = this.femTimer.ToStorage();
-	
-	return storage;
-}
-
-//Pronoun stuff
-Cassidy.prototype.KnowGender = function() {
-	return this.flags["Met"] >= Cassidy.Met.KnowGender;
-}
-Cassidy.prototype.Feminized = function() {
-	return this.flags["Met"] >= Cassidy.Met.Feminized;
-}
-
-Cassidy.prototype.heshe = function() {
-	if(this.KnowGender()) return "she";
-	else return "he";
-}
-Cassidy.prototype.HeShe = function() {
-	if(this.KnowGender()) return "She";
-	else return "He";
-}
-Cassidy.prototype.himher = function() {
-	if(this.KnowGender()) return "her";
-	else return "him";
-}
-Cassidy.prototype.HimHer = function() {
-	if(this.KnowGender()) return "Her";
-	else return "Him";
-}
-Cassidy.prototype.hisher = function() {
-	if(this.KnowGender()) return "her";
-	else return "his";
-}
-Cassidy.prototype.HisHer = function() {
-	if(this.KnowGender()) return "Her";
-	else return "His";
-}
-Cassidy.prototype.hishers = function() {
-	if(this.KnowGender()) return "hers";
-	else return "his";
-}
-Cassidy.prototype.mfPronoun = function(male, female) {
-	if(this.KnowGender()) return female;
-	else return male;
-}
-
 
 
 // Scenes
@@ -184,11 +26,11 @@ Cassidy.prototype.mfPronoun = function(male, female) {
 CassidyScenes.First = function() {
 	let player = GAME().player;
 	let cassidy = GAME().cassidy;
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
-	cassidy.flags["Met"] = Cassidy.Met.Met;
+	cassidy.flags["Met"] = CassidyFlags.Met.Met;
 	
 	Text.Clear();
 	Text.Add("Stepping through the open door, you’re greeted by a discernible rise in temperature, as well as the faint smell of smoke - and all this despite the draft you feel flowing in with you. The reason for the heat soon becomes clear, though: a massive forge in the back of the storefront, currently blazing away with yellowish-white flames that’re painful to look directly at. Still, you can vaguely make out a figure amidst it all…", parse);
@@ -236,7 +78,9 @@ CassidyScenes.First = function() {
 // The Pale Flame interior
 CassidyScenes.ShopDesc = function() {
 	let player = GAME().player;
-	var parse = {};
+	let cassidy = GAME().cassidy;
+	let miranda = GAME().miranda;
+	var parse : any = {};
 	
 	Text.Add("You’re standing on the shop floor of The Pale Flame. Racks upon racks of implements of assorted death stand in lines and hang on the walls, each and every one of them dust-free and labeled with their name and make. Stabbing, impaling, bludgeoning, crushing, bleeding out, slashing - you name it, and it’s likely Cassidy that has it on display on the floor.", parse);
 	Text.NL();
@@ -339,7 +183,7 @@ CassidyScenes.ShopDesc = function() {
 	Text.NL();
 	Text.Add("You pause a moment, and weigh your options.", parse);
 	
-	var orderReady = (cassidy.flags["Order"] != Cassidy.Order.None) && cassidy.orderTimer.Expired();
+	var orderReady = (cassidy.flags["Order"] != CassidyFlags.Order.None) && cassidy.orderTimer.Expired();
 	
 	if(orderReady) {
 		parse = cassidy.ParserPronouns(parse);
@@ -352,7 +196,9 @@ CassidyScenes.ShopDesc = function() {
 }
 
 CassidyScenes.Approach = function() {
-	var parse = {
+    let cassidy = GAME().cassidy;
+
+	var parse : any = {
 		
 	};
 	parse = cassidy.ParserPronouns(parse);
@@ -396,7 +242,9 @@ CassidyScenes.Approach = function() {
 
 CassidyScenes.Prompt = function() {
 	let player = GAME().player;
-	var parse = {
+    let cassidy = GAME().cassidy;
+
+	var parse : any = {
 		playername : player.name
 	};
 	parse = cassidy.ParserPronouns(parse);
@@ -451,7 +299,7 @@ CassidyScenes.Prompt = function() {
 			CassidyScenes.ShopSell();
 		}, enabled : true
 	});
-	if(cassidy.flags["Met"] < Cassidy.Met.AskedBack) {
+	if(cassidy.flags["Met"] < CassidyFlags.Met.AskedBack) {
 		options.push({ nameStr : "Hang Out",
 			tooltip : "Ask Cassidy if he’d like to hang out with you for a bit after work.",
 			func : function() {
@@ -499,7 +347,7 @@ CassidyScenes.Prompt = function() {
 					Text.NL();
 					Text.Add("<b>You may now Head Inside the back with Cassidy near closing time.</b>", parse);
 					
-					cassidy.flags["Met"] = Cassidy.Met.AskedBack;
+					cassidy.flags["Met"] = CassidyFlags.Met.AskedBack;
 				}
 				Text.Flush();
 				
@@ -538,7 +386,7 @@ CassidyScenes.Prompt = function() {
 CassidyScenes.Appearance = function() {
 	let cassidy = GAME().cassidy;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	parse = cassidy.ParserPronouns(parse);
@@ -593,7 +441,9 @@ CassidyScenes.Appearance = function() {
 
 CassidyScenes.TalkPrompt = function() {
 	let player = GAME().player;
-	var parse = {
+    let cassidy = GAME().cassidy;
+
+	var parse : any = {
 		
 	};
 	parse = cassidy.ParserPronouns(parse);
@@ -718,12 +568,12 @@ CassidyScenes.TalkPrompt = function() {
 CassidyScenes.ForgeFirst = function() {
 	let cassidy = GAME().cassidy;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	parse = cassidy.ParserPronouns(parse);
 	
-	cassidy.flags["Talk"] |= Cassidy.Talk.Forge;
+	cassidy.flags["Talk"] |= CassidyFlags.Talk.Forge;
 	
 	Text.Clear();
 	Text.Add("<i>“Ah-ha,”</i> Cassidy says, striding up and catching you by the shoulder as [heshe] notices your attention being drawn to the forge in the back. <i>“Let me guess… you want me to make a custom job for you, right? You think you’ve got your hands on some bits of a one-of-a-kind material, and want me to turn it into something you can actually use?”</i>", parse);
@@ -763,7 +613,7 @@ CassidyScenes.ForgeFirst = function() {
 CassidyScenes.ShopBuy = function() {
 	let cassidy = GAME().cassidy;
 
-	var parse = {};
+	var parse : any = {};
 	
 	CassidyScenes.Shopbought = false;
 	
@@ -808,7 +658,7 @@ CassidyScenes.ShopBuy = function() {
 CassidyScenes.ShopSell = function() {
 	let cassidy = GAME().cassidy;
 
-	var parse = {};
+	var parse : any = {};
 	parse = cassidy.ParserPronouns(parse);
 	
 	CassidyScenes.Shopsold = false;
@@ -835,142 +685,11 @@ CassidyScenes.ShopSell = function() {
 	cassidy.shop.Sell(backPrompt, true, sellFunc);
 }
 
-CassidyScenes.CreateShop = function() {
-	let cassidy = GAME().cassidy;
-
-	return new Shop({
-		buyPromptFunc : function(item, cost, bought) {
-			var coin = Text.NumToText(cost);
-			var parse = {
-				item : item.sDesc(),
-				coin : coin
-			};
-			parse = cassidy.ParserPronouns(parse);
-			if(!bought) {
-				Text.Clear();
-				Text.Add("Right. Stepping up to Cassidy, you inquire about buying the [item] for yourself, if it’s not too much of a bother. ", parse);
-				
-				var scenes = new EncounterTable();
-				scenes.AddEnc(function() {
-					Text.Add("<i>“Nah, it’s no bother - always happy to serve a reasonable customer. For you, that’ll be [coin] coins.”</i>", parse);
-					Text.NL();
-					Text.Add("For you? Why, you feel so special and treasured!", parse);
-					Text.NL();
-					Text.Add("Cass shows you [hisher] teeth. <i>“Thing about you, ace? Sometimes, I can’t tell if you’re serious or kidding. But yeah, [coin] coins, them’s the breaks. You want it?”</i>", parse);
-				}, 1.0, function() { return true; });
-				scenes.AddEnc(function() {
-					Text.Add("<i>“Oh, that’s a good choice you have there,”</i> Cass replies, studying you up and down as if you were a really tasty morsel. <i>“Really fits you - you look braver just holding it. How about [coin] coins?”</i>", parse);
-				}, 1.0, function() { return true; });
-				scenes.AddEnc(function() {
-					Text.Add("Cassidy frowns. <i>“That one? I didn’t think - well, if you want to… [coin] coins if you wanna take that baby of mine home, I guess.”</i>", parse);
-					Text.NL();
-					Text.Add("Hey, why the sudden reluctance? This is a shop, isn’t it?", parse);
-					Text.NL();
-					Text.Add("The salamander grins weakly and looks away, unable to meet your eyes. <i>“Yeah, I get that. Problem is, well, it’s sometimes hard to see them go… look, if you want her, just pay up and you can have her.”</i>", parse);
-				}, 1.0, function() { return true; });
-				scenes.Get();
-				Text.NL();
-			}
-		},
-		buySuccessFunc : function(item, cost, num) {
-			var parse = {
-				num : num > 1 ? "them" : "it",
-				her : num > 1 ? "them" : "her",
-				y   : num > 1 ? "ies" : "y"
-			};
-			parse = cassidy.ParserPronouns(parse);
-			
-			Text.Clear();
-			Text.Add("<i>“Gotcha. Give me a moment, and I’ll have [num] ready for you.”</i>", parse);
-			Text.NL();
-			Text.Add("As you watch, Cass nips over to the racks behind the counter and draws out what you selected from [hisher] stock, holding [num] up for your inspection.", parse);
-			Text.NL();
-			Text.Add("<i>“You wanna make sure there’s nothing wrong with [her] before I wrap [her] up?”</i>", parse);
-			Text.NL();
-			Text.Add("Nah, it’s fine. You’ll trust [himher].", parse);
-			Text.NL();
-			Text.Add("<i>“All right then, ace! You take good care of my bab[y], you hear?”</i> Before too long, Cass passes you a small bundle wrapped in oilcloth. <i>“Hope you have a good time together!”</i>", parse);
-			Text.NL();
-			Text.Add("<i>“Right! You want anything else?”</i>", parse);
-			Text.NL();
-			
-			cassidy.relation.IncreaseStat(30, 2);
-		},
-		buyFailFunc : function(item, cost, bought) {
-			var parse = {
-				
-			};
-			parse = cassidy.ParserPronouns(parse);
-			
-			Text.Clear();
-			Text.Add("Hmm. On second thought, maybe not.", parse);
-			Text.NL();
-			Text.Add("<i>“Changed your mind?”</i> Cass’ tail seems a little warmer and more agitated than normal - its tip twitches to and fro on the ground. <i>“Anything wrong with it?”</i>", parse);
-			Text.NL();
-			Text.Add("No, no, there’s nothing wrong with [hisher] workmanship. You just thought better of it, that’s all.", parse);
-			Text.NL();
-			Text.Add("<i>“Oh, all right then. If you say so.”</i> Cass still looks worried and unsure, but you guess that just shows how seriously [heshe] takes [hisher] work. <i>“You still interested in something?”</i>", parse);
-			Text.NL();
-		},
-		sellPromptFunc : function(item, cost, sold) {
-			var coin = Text.NumToText(cost);
-			var parse = {
-				item : item.sDesc(),
-				coin : coin
-			};
-			parse = cassidy.ParserPronouns(parse);
-			
-			if(!sold) {
-				Text.Clear();
-				var scenes = new EncounterTable();
-				scenes.AddEnc(function() {
-					Text.Add("Cass throws your proffered item a quick glance of [hisher] expert eye. <i>“Yeah, ace. For that, I’ll do [coin] coins, perfectly reasonable price to me. Sound good to you?”</i>", parse);
-				}, 1.0, function() { return true; });
-				scenes.AddEnc(function() {
-					Text.Add("Cass makes a show of examining your proffered item, then grins and snaps [hisher] fingers with an audible click of [hisher] claws. <i>“Okay, here’s my offer: [coin] coins. Deal, or no deal?”</i>", parse);
-				}, 1.0, function() { return true; });
-				scenes.AddEnc(function() {
-					Text.Add("Cass looks down at your offering. <i>“Hmm. Hmmmmmmm.”</i>", parse);
-					Text.NL();
-					Text.Add("Hmm?", parse);
-					Text.NL();
-					Text.Add("<i>“Hmm.”</i> [HeShe] looks up at you. <i>“I guess I can do [coin] coins, if you’d like. Scrap value isn’t usually worth a lot.”</i>", parse);
-				}, 1.0, function() { return true; });
-				scenes.Get();
-				
-				Text.NL();
-			}
-		},
-		sellSuccessFunc : function(item, cost, num) {
-			var parse = {
-				
-			};
-			parse = cassidy.ParserPronouns(parse);
-			
-			Text.Clear();
-			Text.Add("Sure, some price is better than no price, after all. You pass your offering over to Cass, who lazily grabs it with [hisher] tail and tosses into the scrap heap with a bunch all the other waste waiting to be reforged.", parse);
-			Text.NL();
-			Text.Add("<i>“That’ll do, that’ll do… damn, I really hate bookkeeping…”</i> the salamander mutters as [heshe] scribbles in a ledger, then slams it shut and counts out your money. <i>“Okay, there I go, and here you are. Enjoy!”</i> ", parse);
-			Text.NL();
-		},
-		sellFailFunc : function(item, cost, sold) {
-			var parse = {
-				item : item.sDesc()
-			};
-			parse = cassidy.ParserPronouns(parse);
-			
-			Text.Clear();
-			Text.Add("<i>“Eh? Suit yourself,”</i> Cass replies with a shrug. <i>“I guess it’s a better fate than being taken apart and melted down for scrap...there’s still some use out of it, really. You want to sell anything else?”</i>", parse);
-			Text.NL();
-		}
-	});
-}
-
 CassidyScenes.HeadInside = function() {
 	let player = GAME().player;
 	let cassidy = GAME().cassidy;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	parse = cassidy.ParserPronouns(parse);
@@ -1016,10 +735,10 @@ CassidyScenes.HeadInside = function() {
 	
 	Text.NL();
 	
-	var first = cassidy.flags["Met"] < Cassidy.Met.WentBack;
+	var first = cassidy.flags["Met"] < CassidyFlags.Met.WentBack;
 	
 	if(first) {
-		cassidy.flags["Met"] = Cassidy.Met.WentBack;
+		cassidy.flags["Met"] = CassidyFlags.Met.WentBack;
 		Text.Add("Tailing closely behind Cassidy, you step into what looks to be a small-ish living room-cum-kitchen - there’s a grated fireplace in one corner of the room, a dining table situated close by to let diners bask in both warmth and light of the flames whilst they eat.", parse);
 		Text.NL();
 		Text.Add("On the opposite end of the room, a small kitchen - like the forge, it has a hood to draw away the grease and fumes of cooking, and that aside, it’s quite well-equipped. Racks of preserves line the walls alongside a small grain bin; it seems that Cassidy’s tastes in food lie along the spicy. There’re also two doors on either side of the room, each leading to different bedrooms.", parse);
@@ -1103,12 +822,12 @@ CassidyScenes.HeadInside = function() {
 	
 	TimeStep({minute: 15});
 	
-	if(cassidy.KnowGender() && cassidy.Relation() >= 30 && !(cassidy.flags["Talk"] & Cassidy.Talk.Spar)) {
+	if(cassidy.KnowGender() && cassidy.Relation() >= 30 && !(cassidy.flags["Talk"] & CassidyFlags.Talk.Spar)) {
 		Gui.NextPrompt(function() {
 			CassidyScenes.SparFirst();
 		});
 	}
-	else if((cassidy.flags["Talk"] & Cassidy.Talk.Spar) && (cassidy.flags["Talk"] & Cassidy.Talk.MShop) && !(cassidy.flags["Talk"] & Cassidy.Talk.Model)) {
+	else if((cassidy.flags["Talk"] & CassidyFlags.Talk.Spar) && (cassidy.flags["Talk"] & CassidyFlags.Talk.MShop) && !(cassidy.flags["Talk"] & CassidyFlags.Talk.Model)) {
 		Gui.NextPrompt(function() {
 			CassidyScenes.Model();
 		});
@@ -1122,7 +841,7 @@ CassidyScenes.InsidePrompt = function() {
 	let player = GAME().player;
 	let cassidy = GAME().cassidy;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	parse = cassidy.ParserPronouns(parse);
@@ -1147,7 +866,7 @@ CassidyScenes.InsidePrompt = function() {
 			tooltip : "Ask Cass if she’d like to head a little further in back and have some fun.",
 			func : CassidyScenes.Sex.Indoors, enabled : true
 		});
-		if(cassidy.flags["Talk"] & Cassidy.Talk.Spar) {
+		if(cassidy.flags["Talk"] & CassidyFlags.Talk.Spar) {
 			options.push({ nameStr : "Spar",
 				tooltip : "Test your strength against Cassidy’s.",
 				func : function() {
@@ -1195,9 +914,9 @@ CassidyScenes.InsidePrompt = function() {
 		
 		Gui.NextPrompt(function() {
 			if(WorldTime().hour < 17)
-				world.StepToHour(17);
+				StepToHour(17);
 			
-			MoveToLocation(world.loc.Rigard.ShopStreet.street);
+			MoveToLocation(WORLD().loc.Rigard.ShopStreet.street);
 		});
 	});
 }
@@ -1205,7 +924,7 @@ CassidyScenes.InsidePrompt = function() {
 CassidyScenes.InsideMeal = function() {
 	let player = GAME().player;
 	let cassidy = GAME().cassidy;
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	parse = cassidy.ParserPronouns(parse);
@@ -1404,7 +1123,7 @@ CassidyScenes.InsideMeal = function() {
 	Text.Flush();
 	
 	if(WorldTime().hour < 17)
-		world.StepToHour(17);
+		StepToHour(17);
 	TimeStep({hour: 1});
 	
 	cassidy.relation.IncreaseStat(30, 2);
@@ -1412,7 +1131,7 @@ CassidyScenes.InsideMeal = function() {
 	Status.Full(player, {hours: 12, exp: 1.15});
 	
 	Gui.NextPrompt(function() {
-		MoveToLocation(world.loc.Rigard.ShopStreet.street);
+		MoveToLocation(WORLD().loc.Rigard.ShopStreet.street);
 	});
 }
 
@@ -1420,7 +1139,7 @@ CassidyScenes.InsideTalkPrompt = function() {
 	let player = GAME().player;
 	let cassidy = GAME().cassidy;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	parse = cassidy.ParserPronouns(parse);
@@ -1470,8 +1189,8 @@ CassidyScenes.InsideTalkPrompt = function() {
 		func : function() {
 			Text.Clear();
 			
-			var first = !(cassidy.flags["Talk"] & Cassidy.Talk.Salamanders);
-			cassidy.flags["Talk"] |= Cassidy.Talk.Salamanders;
+			var first = !(cassidy.flags["Talk"] & CassidyFlags.Talk.Salamanders);
+			cassidy.flags["Talk"] |= CassidyFlags.Talk.Salamanders;
 			
 			if(first) {
 				Text.Add("<i>“No,”</i> Cassidy replies. [HeShe] looks thoughtful for a moment or two, and then [hisher] thin lips turn upward in a small smile. <i>“It’s a pretty long tale, so if you’re asking, I hope you’ve the time for listening.”</i>", parse);
@@ -1571,8 +1290,8 @@ CassidyScenes.InsideTalkPrompt = function() {
 		func : function() {
 			Text.Clear();
 			
-			var first = !(cassidy.flags["Talk"] & Cassidy.Talk.Family);
-			cassidy.flags["Talk"] |= Cassidy.Talk.Family;
+			var first = !(cassidy.flags["Talk"] & CassidyFlags.Talk.Family);
+			cassidy.flags["Talk"] |= CassidyFlags.Talk.Family;
 			
 			if(first) {
 				Text.Add("So, what’s [hisher] family like? [HeShe]’s spoken of them some, but you’ve never really actually managed to meet any of them.", parse);
@@ -1644,8 +1363,8 @@ CassidyScenes.InsideTalkPrompt = function() {
 		func : function() {
 			Text.Clear();
 			
-			var first = !(cassidy.flags["Talk"] & Cassidy.Talk.Loner);
-			cassidy.flags["Talk"] |= Cassidy.Talk.Loner;
+			var first = !(cassidy.flags["Talk"] & CassidyFlags.Talk.Loner);
+			cassidy.flags["Talk"] |= CassidyFlags.Talk.Loner;
 			
 			if(first) {
 				Text.Add("Cass’ face immediately sours. <i>“Why, is it a problem?”</i>", parse);
@@ -1674,7 +1393,7 @@ CassidyScenes.InsideTalkPrompt = function() {
 			CassidyScenes.InsideTalkPrompt();
 		}, enabled : true
 	});
-	if((cassidy.flags["Met"] < Cassidy.Met.TalkFem) && cassidy.KnowGender()) {
+	if((cassidy.flags["Met"] < CassidyFlags.Met.TalkFem) && cassidy.KnowGender()) {
 		options.push({ nameStr : "Tomboy",
 			tooltip : "So, does she really mind that much if others mistake her for a guy?",
 			func : function() {
@@ -1738,7 +1457,7 @@ CassidyScenes.InsideTalkPrompt = function() {
 							Text.NL();
 							Text.Add("<i>“Right. I’m not making any promises or anything, just so we’re clear on that.”</i>", parse);
 							
-							cassidy.flags["Met"] = Cassidy.Met.TalkFem;
+							cassidy.flags["Met"] = CassidyFlags.Met.TalkFem;
 							cassidy.femTimer = new Time(0,0,2,0,0);
 							
 							Gui.PrintDefaultOptions();
@@ -1779,7 +1498,7 @@ CassidyScenes.InsideTalkPrompt = function() {
 						TimeStep({minute: 10});
 						
 						Gui.NextPrompt(function() {
-							MoveToLocation(world.loc.Rigard.ShopStreet.street);
+							MoveToLocation(WORLD().loc.Rigard.ShopStreet.street);
 						});
 					});
 					
@@ -1822,12 +1541,12 @@ CassidyScenes.InsideTalkPrompt = function() {
 CassidyScenes.ManagingShop = function() {
 	let player = GAME().player;
 	let cassidy = GAME().cassidy;
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	parse = cassidy.ParserPronouns(parse);
 	
-	cassidy.flags["Talk"] |= Cassidy.Talk.MShop;
+	cassidy.flags["Talk"] |= CassidyFlags.Talk.MShop;
 	
 	Text.Clear();
 	Text.Add("<i>“Heya, ace!”</i>", parse);
@@ -1857,7 +1576,7 @@ CassidyScenes.ManagingShop = function() {
 	
 	TimeStep({minute: 15});
 	
-	var askprompt = function(asked) {
+	var askprompt = function(asked? : boolean) {
 		var options = new Array();
 		//[What Do?][Yes][No]
 		if(!asked) {
@@ -1912,7 +1631,7 @@ CassidyScenes.ManagingShop = function() {
 				TimeStep({hour: 2});
 				
 				Gui.NextPrompt(function() {
-					MoveToLocation(world.loc.Rigard.ShopStreet.street);
+					MoveToLocation(WORLD().loc.Rigard.ShopStreet.street);
 				});
 			}, enabled : true
 		});
@@ -1924,7 +1643,7 @@ CassidyScenes.ManagingShop = function() {
 CassidyScenes.ManagingShopAccept = function() {
 	let player = GAME().player;
 	let cassidy = GAME().cassidy;
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	parse = cassidy.ParserPronouns(parse);
@@ -1960,16 +1679,14 @@ CassidyScenes.ManagingShopAccept = function() {
 	
 	TimeStep({hour: 1});
 	
-	var score = 0;
-	
 	Gui.NextPrompt(function() {
-		CassidyScenes.ManagingShop1(score);
+		CassidyScenes.ManagingShop1(0);
 	});
 }
 
-CassidyScenes.ManagingShop1 = function(score) {
+CassidyScenes.ManagingShop1 = function(score : number) {
 	let player = GAME().player;
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -2030,8 +1747,8 @@ CassidyScenes.ManagingShop1 = function(score) {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-CassidyScenes.ManagingShop2 = function(score) {
-	var parse = {
+CassidyScenes.ManagingShop2 = function(score : number) {
+	var parse : any = {
 		
 	};
 	
@@ -2094,9 +1811,9 @@ CassidyScenes.ManagingShop2 = function(score) {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-CassidyScenes.ManagingShop3 = function(score) {
+CassidyScenes.ManagingShop3 = function(score : number) {
 	let cassidy = GAME().cassidy;
-	var parse = {
+	var parse : any = {
 		
 	};
 	parse = cassidy.ParserPronouns(parse);
@@ -2155,11 +1872,11 @@ CassidyScenes.ManagingShop3 = function(score) {
 }
 
 //Intermission 1! Only use if the PC knows who Lei is and if he hasn’t been recruited. Lei doesn’t count as a customer.
-CassidyScenes.ManagingShop4 = function(score) {
+CassidyScenes.ManagingShop4 = function(score : number) {
 	let rigard = GAME().rigard;
 	let lei = GAME().lei;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -2197,8 +1914,8 @@ CassidyScenes.ManagingShop4 = function(score) {
 	}
 }
 
-CassidyScenes.ManagingShop5 = function(score) {
-	var parse = {
+CassidyScenes.ManagingShop5 = function(score : number) {
+	var parse : any = {
 		
 	};
 	
@@ -2275,10 +1992,10 @@ CassidyScenes.ManagingShop5 = function(score) {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-CassidyScenes.ManagingShop6 = function(score) {
+CassidyScenes.ManagingShop6 = function(score : number) {
 	let cassidy = GAME().cassidy;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	parse = cassidy.ParserPronouns(parse);
@@ -2327,7 +2044,7 @@ CassidyScenes.ManagingShop6 = function(score) {
 			score++;
 			
 			Text.Clear();
-			if(cassidy.flags["Talk"] & Cassidy.Talk.Forge) {
+			if(cassidy.flags["Talk"] & CassidyFlags.Talk.Forge) {
 				Text.Add("You regretfully inform the elderly lady that it can’t really be done. Cassidy’s masterpieces are done on the fly, after all - [heshe] works by [hisher] muse, and asking for something exact… well, it’s not like [heshe] won’t do it, but it simply won’t have the top-tier quality desired.", parse);
 				Text.NL();
 				Text.Add("<i>“My friends did tell me something to that effect, but I didn’t think it was real,”</i> the elderly lady admits with a sigh. <i>“Well, if it can’t be done, it can’t be done. I’ll just have to take my business elsewhere.”</i>", parse);
@@ -2427,7 +2144,7 @@ CassidyScenes.ManagingShop6 = function(score) {
 			TimeStep({hour: 1});
 			
 			Gui.NextPrompt(function() {
-				MoveToLocation(world.loc.Rigard.ShopStreet.street);
+				MoveToLocation(WORLD().loc.Rigard.ShopStreet.street);
 			});
 		}
 	});
@@ -2438,7 +2155,7 @@ CassidyScenes.ManagingShop6 = function(score) {
 CassidyScenes.ManagingShopCookies = function() {
 	let cassidy = GAME().cassidy;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	parse = cassidy.ParserPronouns(parse);
@@ -2504,7 +2221,7 @@ CassidyScenes.ManagingShopCookies = function() {
 		Text.Flush();
 		
 		Gui.NextPrompt(function() {
-			MoveToLocation(world.loc.Rigard.ShopStreet.street);
+			MoveToLocation(WORLD().loc.Rigard.ShopStreet.street);
 		});
 	});
 	
@@ -2515,11 +2232,11 @@ CassidyScenes.BigReveal = function() {
 	let player = GAME().player;
 	let cassidy = GAME().cassidy;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
-	cassidy.flags["Met"] = Cassidy.Met.KnowGender;
+	cassidy.flags["Met"] = CassidyFlags.Met.KnowGender;
 	
 	Text.Clear();
 	Text.Add("In through the door of The Pale Flame, out to the familiar smells of oil, steel and soot that pervade the smithy. The place is spick and span as always, but there’s no sign of Cassidy anywhere - when searching the forge’s immediate area fails to turn up either skin or shadow of the salamander, you turn your attention to the displays, and then the counter.", parse);
@@ -2586,7 +2303,7 @@ CassidyScenes.BigReveal = function() {
 		Text.Flush();
 		
 		Gui.NextPrompt(function() {
-			world.StepToHour(19);
+			StepToHour(19);
 			
 			Text.Clear();
 			Text.Add("<i>“Spirits above.”</i>", parse);
@@ -2672,7 +2389,7 @@ CassidyScenes.BigReveal = function() {
 				Text.Flush();
 				
 				Gui.NextPrompt(function() {
-					world.StepToHour(8);
+					StepToHour(8);
 					
 					Text.Clear();
 					Text.Add("You awake again, this time to the smell of cooking. It’s warm, slightly peppery, and promises to be thick and heavy - opening your eyes, you find yourself slouched in one of Cassidy’s dining chairs where you’d placed yourself last night. Cass herself, on her part, is bent over the stove, stirring a large pot of porridge. She still looks a little haggard, but at least in better shape than she was in the day before; it’s clear that she’s had a bath, as the reek of drink about her is barely present now.", parse);
@@ -2711,7 +2428,7 @@ CassidyScenes.BigReveal = function() {
 					Text.Flush();
 					
 					Gui.NextPrompt(function() {
-						MoveToLocation(world.loc.Rigard.ShopStreet.street);
+						MoveToLocation(WORLD().loc.Rigard.ShopStreet.street);
 					});
 				});
 			});
@@ -2725,12 +2442,12 @@ CassidyScenes.Model = function() {
 	let player = GAME().player;
 	let cassidy = GAME().cassidy;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	parse = player.ParserTags(parse);
 	
-	cassidy.flags["Talk"] |= Cassidy.Talk.Model;
+	cassidy.flags["Talk"] |= CassidyFlags.Talk.Model;
 	
 	Text.Clear();
 	Text.Add("<i>“Hey, ace,”</i> Cassidy pipes up as the two of you ease yourself into your respective seats, a comforting ritual by now. <i>“I know that you might’ve had your own plans for tonight… but I wanted to ask you something. Had an idea while lying in bed last night and I want to know if you’re up for it.”</i>", parse);
@@ -3022,8 +2739,8 @@ CassidyScenes.Model = function() {
 				Text.Add("<i>“Great! Let me let you out, and I’ll see you around. Don’t be too long in coming back, okay?”</i>", parse);
 				Text.Flush();
 				
-				party.location = world.loc.Rigard.ShopStreet.street;
-				world.StepToHour(22);
+				party.location = WORLD().loc.Rigard.ShopStreet.street;
+				StepToHour(22);
 				
 				Gui.NextPrompt();
 			});
@@ -3057,11 +2774,11 @@ CassidyScenes.FemTalk2 = function() {
 	let player = GAME().player;
 	let cassidy = GAME().cassidy;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
-	cassidy.flags["Met"] = Cassidy.Met.BeganFem;
+	cassidy.flags["Met"] = CassidyFlags.Met.BeganFem;
 	
 	Text.Clear();
 	Text.Add("Stepping into The Pale Flame, you’re greeted by the ringing of Cassidy’s hammer on metal. With the shop empty of customers at the moment, she’s taken advantage of the lull in business to get back to working at what she loves to do. The salamander’s brow is furrowed in concentration, having removed her gloves in order to handle the yellow-hot sword blank she’s working on with her bare hands. Sure, Cass may be impervious to heat, but the edge is mighty sharp… oh well, you’ll trust her to know what she’s doing.", parse);
@@ -3118,11 +2835,11 @@ CassidyScenes.FemTalk2 = function() {
 CassidyScenes.FemFinal = function() {
 	let cassidy = GAME().cassidy;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
-	cassidy.flags["Met"] = Cassidy.Met.Feminized;
+	cassidy.flags["Met"] = CassidyFlags.Met.Feminized;
 	
 	Text.Clear();
 	Text.Add("The first thing that strikes you when you step into The Pale Flame is Cass. Seems like she’s stepped up the ante of her experimentation - at the very least, she’s grown out her hair a bit to the point where it curls about her ears and sticks close to the back of her neck. It’s not a pretty cut, but it <i>is</i> cute. Like she said the last time, it’s not as if she’s gunning to be some sort of bimbo, after all.", parse);
@@ -3191,11 +2908,11 @@ CassidyScenes.FemFinal = function() {
 CassidyScenes.SparFirst = function() {
 	let cassidy = GAME().cassidy;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
-	cassidy.flags["Talk"] |= Cassidy.Talk.Spar;
+	cassidy.flags["Talk"] |= CassidyFlags.Talk.Spar;
 	
 	Text.Clear();
 	Text.Add("As Cassidy and you settle down at the table, she gives you a glance.", parse);
@@ -3269,133 +2986,6 @@ CassidyScenes.SparFirst = function() {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-// SPARRING
-function CassidySpar() {
-	let cassidy = GAME().cassidy;
-
-	Entity.call(this);
-	this.ID = "cassidyspar";
-	
-	// Character stats
-	this.name = "Cassidy";
-	
-	this.avatar.combat = Images.cassidy;
-	
-	this.maxHp.base        = 300; this.maxHp.growth       = 15;
-	this.maxSp.base        = 90; this.maxSp.growth        = 8;
-	this.maxLust.base      = 50; this.maxLust.growth      = 6;
-	// Main stats
-	this.strength.base     = 26; this.strength.growth     = 2;
-	this.stamina.base      = 24; this.stamina.growth      = 2;
-	this.dexterity.base    = 19; this.dexterity.growth    = 1.6;
-	this.intelligence.base = 18; this.intelligence.growth = 1.6;
-	this.spirit.base       = 13; this.spirit.growth       = 1.2;
-	this.libido.base       = 17; this.libido.growth       = 1.2;
-	this.charisma.base     = 14; this.charisma.growth     = 1.2;
-	
-	var levelLimit = 6 + cassidy.flags["SparL"] * 2;
-	// In act 1, max out at level 14
-	if(!Scenes.Global.PortalsOpen())
-		levelLimit = Math.min(levelLimit, 14);
-	
-	var level = Math.min(levelLimit, GAME().player.level);
-	
-	this.level    = level;
-	this.sexlevel = 3;
-	
-	this.elementDef.dmg[Element.mFire]  = 1;
-	this.elementDef.dmg[Element.mIce]   = -0.5;
-	this.elementDef.dmg[Element.mWater] = -0.5;
-	
-	this.body.DefFemale();
-	this.FirstBreastRow().size.base = 2;
-	this.body.SetRace(Race.Salamander);
-	
-	this.FirstVag().capacity.base = 10;
-	this.FirstVag().virgin = false;
-	this.Butt().capacity.base = 20;
-	this.Butt().virgin = false;
-	
-	this.weaponSlot   = Items.Weapons.WarHammer;
-	this.topArmorSlot = Items.Armor.BronzeChest;
-	this.botArmorSlot = Items.Armor.BronzeLeggings;
-	
-	this.Equip();
-	this.SetLevelBonus();
-	this.RestFull();
-}
-CassidySpar.prototype = new Entity();
-CassidySpar.prototype.constructor = CassidySpar;
-
-CassidySpar.prototype.Act = function(encounter, activeChar) {
-	var that = this;
-	// TODO: Very TEMP
-	Text.Add(this.name + " acts! Rawr!");
-	Text.NL();
-	Text.Flush();
-	
-	// Pick a random target
-	var t = this.GetSingleTarget(encounter, activeChar);
-	
-	var scenes = new EncounterTable();
-	scenes.AddEnc(function() {
-		Abilities.Attack.Use(encounter, that, t);
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
-		Abilities.Physical.Bash.Use(encounter, that, t);
-	}, 1.0, function() { return Abilities.Physical.Bash.enabledCondition(encounter, that); });
-	scenes.AddEnc(function() {
-		Abilities.Physical.DAttack.Use(encounter, that, t);
-	}, 1.0, function() { return Abilities.Physical.DAttack.enabledCondition(encounter, that); });
-	scenes.AddEnc(function() {
-		Abilities.EnemySkill.Cassidy.TailSlap.Use(encounter, that, t);
-	}, 1.0, function() { return Abilities.EnemySkill.Cassidy.TailSlap.enabledCondition(encounter, that); });
-	scenes.AddEnc(function() {
-		Abilities.EnemySkill.Cassidy.Smoke.Use(encounter, that, t);
-	}, 1.0, function() { return Abilities.EnemySkill.Cassidy.Smoke.enabledCondition(encounter, that); });
-	scenes.AddEnc(function() {
-		Abilities.Seduction.Tease.Use(encounter, that, t);
-	}, 1.0, function() { return true; });
-	
-	// Conditional abilities (only available at higher Cass levels)
-	
-	if(that.level >= 10) {
-		if(!that.reflexFlag) {
-			scenes.AddEnc(function() {
-				Abilities.EnemySkill.Cassidy.Reflex.Use(encounter, that, t);
-			}, 1.0, function() { return Abilities.EnemySkill.Cassidy.Reflex.enabledCondition(encounter, that); });
-		}
-	}
-	
-	if(that.level >= 14) {
-		scenes.AddEnc(function() {
-			Abilities.EnemySkill.Cassidy.Impact.Use(encounter, that, t);
-		}, 1.0, function() { return Abilities.EnemySkill.Cassidy.Impact.enabledCondition(encounter, that); });
-	}
-	
-	scenes.Get();
-}
-
-CassidySpar.prototype.PhysDmgHP = function(encounter, caster, val) {
-	var parse = {};
-	
-	if(this.reflexFlag) {
-		Text.Add("Before your attack connects, Cassidy dances out of the way so quickly that the salamander smith is practically a blur. Your wasted attack goes wide, and she gives you one of her trademark shit-eating grins.", parse);
-		Text.NL();
-		Text.Add("Hey!", parse);
-		Text.NL();
-		Text.Add("<i>“What?”</i> Cassidy snickers. <i>“You thought I was just gonna stand there and take it like a champ?”</i>", parse);
-		Text.Flush();
-		
-		this.reflexFlag = false;
-		
-		return false;
-	}
-	else
-		return Entity.prototype.PhysDmgHP.call(this, encounter, caster, val);
-}
-
-
 // SET UP ENCOUNTER SPAR
 CassidyScenes.Spar = function() {
 	let party : Party = GAME().party;
@@ -3420,4 +3010,4 @@ CassidyScenes.Spar = function() {
 	});
 }
 
-export { Cassidy, CassidyScenes };
+export { CassidyScenes };

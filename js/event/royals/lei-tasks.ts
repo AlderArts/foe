@@ -1,13 +1,20 @@
-import { Lei } from './lei';
+import * as _ from 'lodash';
+
 import { Gender } from "../../body/gender";
-import { WorldTime, TimeStep } from '../../GAME';
+import { WorldTime, TimeStep, GAME } from '../../GAME';
 import { SetGameState, GameState } from '../../gamestate';
 import { Gui } from '../../gui';
 import { Text } from '../../text';
 import { Encounter } from '../../combat';
 import { Bandit } from '../../enemy/bandit';
+import { LeiFlags } from './lei-flags';
+import { Party } from '../../party';
+import { Time, Season } from '../../time';
+import { LeiScenes } from './lei-scenes';
+import { Equine } from '../../enemy/equine';
+import { Entity } from '../../entity';
 
-let TasksScenes = {};
+let TasksScenes : any = {};
 
 TasksScenes.OnTask = function() { //TODO add tasks
 	return TasksScenes.Escort.OnTask();
@@ -24,7 +31,7 @@ TasksScenes.StartTask = function() { //TODO add tasks
 
 TasksScenes.TaskPrompt = function() {
 	let lei = GAME().lei;
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -49,16 +56,10 @@ TasksScenes.TaskPrompt = function() {
 	Text.Flush();
 }
 
-Lei.EscortTask = {
-	OnTime    : 1,
-	Flirted   : 2,
-	WonCombat : 4
-};
-
 TasksScenes.Escort = {};
 TasksScenes.Escort.Available = function() {
 	let lei = GAME().lei;
-	if(lei.flags["Met"] >= Lei.Met.OnTaskEscort) return false;
+	if(lei.flags["Met"] >= LeiFlags.Met.OnTaskEscort) return false;
 	return true;
 }
 TasksScenes.Escort.Eligable = function() {
@@ -67,11 +68,11 @@ TasksScenes.Escort.Eligable = function() {
 }
 TasksScenes.Escort.OnTask = function() {
 	let lei = GAME().lei;
-	return lei.flags["Met"] == Lei.Met.OnTaskEscort;
+	return lei.flags["Met"] == LeiFlags.Met.OnTaskEscort;
 }
 TasksScenes.Escort.OnTaskText = function() {
 	let lei = GAME().lei;
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -91,12 +92,12 @@ TasksScenes.Escort.OnTaskText = function() {
 		Text.Add("Right. You tell him you just wanted to double-check the details, and thank him for the reminder.", parse);
 	}
 	Text.Flush();
-	Scenes.Lei.InnPrompt();
+	LeiScenes.InnPrompt();
 }
 
 TasksScenes.Escort.Completed = function() {
 	let lei = GAME().lei;
-	return lei.flags["Met"] >= Lei.Met.CompletedTaskEscort;
+	return lei.flags["Met"] >= LeiFlags.Met.CompletedTaskEscort;
 }
 
 TasksScenes.Escort.Coin = function() {
@@ -106,7 +107,7 @@ TasksScenes.Escort.Coin = function() {
 
 TasksScenes.Escort.Start = function() {
 	let lei = GAME().lei;
-	var parse = {
+	var parse : any = {
 		coin : Text.NumToText(TasksScenes.Escort.Coin())
 	};
 	
@@ -131,7 +132,7 @@ TasksScenes.Escort.Start = function() {
 		
 		TimeStep({minute: 15});
 
-		lei.flags["Met"] = Lei.Met.OnTaskEscort;
+		lei.flags["Met"] = LeiFlags.Met.OnTaskEscort;
 		
 		var step = WorldTime().TimeToHour(17);
 		lei.taskTimer = new Time(0, 0, step.hour < 12 ? 1 : 0, step.hour, step.minute);
@@ -146,7 +147,7 @@ TasksScenes.Escort.Start = function() {
 	Text.Flush();
 	
 	
-	Scenes.Lei.InnPrompt();
+	LeiScenes.InnPrompt();
 }
 
 TasksScenes.Escort.Estate = function() {
@@ -154,8 +155,9 @@ TasksScenes.Escort.Estate = function() {
 	let party : Party = GAME().party;
 	let lei = GAME().lei;
 	let kiakai = GAME().kiakai;
+	let terry = GAME().terry;
 	let rigard = GAME().rigard;
-	var parse = {
+	var parse : any = {
 		sirmadam : player.mfFem("sir", "madam"),
 		playername : player.name
 	};
@@ -164,7 +166,7 @@ TasksScenes.Escort.Estate = function() {
 	var prof = 0;
 	
 	if(!late)
-		lei.flags["T1"] |= Lei.EscortTask.OnTime;
+		lei.flags["T1"] |= LeiFlags.EscortTask.OnTime;
 	
 	parse["comp"] = party.Num() == 2 ? party.Get(1).name : "your companions";
 	
@@ -266,7 +268,7 @@ TasksScenes.Escort.Estate = function() {
 				Text.Add("Ventor coughs audibly, looking annoyed with you. <i>“We shall be on our way now. Follow me.”</i>", parse);
 				
 				rigard.alianaRel.IncreaseStat(100, 3);
-				lei.flags["T1"] |= Lei.EscortTask.Flirted;
+				lei.flags["T1"] |= LeiFlags.EscortTask.Flirted;
 				
 				Gui.PrintDefaultOptions();
 			}, enabled : true
@@ -382,7 +384,7 @@ disable submit/run option?
 				enemy.AddMember(new Equine(Gender.male, 2));
 				enemy.AddMember(new Bandit(Gender.female));
 				enemy.AddMember(new Equine(Gender.female, 2));
-				var enc = new Encounter(enemy);
+				var enc : any = new Encounter(enemy);
 				
 				enc.late = late;
 				enc.prof = prof;
@@ -406,7 +408,7 @@ disable submit/run option?
 					var p = party.Get(i);
 					options.push({ nameStr : p.name,
 						tooltip : Text.Parse("Take [name] with you.", {name: p.name}),
-						func : function(obj) {
+						func : function(obj : Entity) {
 							Text.Clear();
 							
 							party.ClearActiveParty();
@@ -437,7 +439,7 @@ TasksScenes.Escort.CombatLoss = function() {
 	
 	var enc = this;
 	
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -467,11 +469,11 @@ TasksScenes.Escort.CombatWin = function() {
 	
 	var enc = this;
 	
-	var parse = {
+	var parse : any = {
 		
 	};
 	
-	lei.flags["T1"] |= Lei.EscortTask.WonCombat;
+	lei.flags["T1"] |= LeiFlags.EscortTask.WonCombat;
 	
 	Gui.Callstack.push(function() {
 		enc.prof += 2;
@@ -490,11 +492,11 @@ TasksScenes.Escort.CombatWin = function() {
 	Encounter.prototype.onVictory.call(enc);
 }
 
-TasksScenes.Escort.PostCombat = function(enc, won) {
+TasksScenes.Escort.PostCombat = function(enc : any, won : boolean) {
 	let player = GAME().player;
 	let party : Party = GAME().party;
 	let lei = GAME().lei;
-	var parse = {
+	var parse : any = {
 		armor : player.ArmorDesc()
 	};
 	
@@ -649,7 +651,7 @@ TasksScenes.Escort.PostCombat = function(enc, won) {
 					
 					TimeStep({hour: 1});
 					
-					lei.flags["Met"] = Lei.Met.EscortFinished;
+					lei.flags["Met"] = LeiFlags.Met.EscortFinished;
 					
 					Gui.NextPrompt();
 				}, enabled : true
@@ -663,7 +665,7 @@ TasksScenes.Escort.PostCombat = function(enc, won) {
 TasksScenes.Escort.Debrief = function() {
 	let party : Party = GAME().party;
 	let lei = GAME().lei;
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -679,12 +681,12 @@ TasksScenes.Escort.Debrief = function() {
 		parse["notS"] = "";
 	}
 	
-	var won = lei.flags["T1"] & Lei.EscortTask.WonCombat;
-	var ontime = lei.flags["T1"] & Lei.EscortTask.OnTime;
-	var flirted = lei.flags["T1"] & Lei.EscortTask.Flirted;
+	var won = lei.flags["T1"] & LeiFlags.EscortTask.WonCombat;
+	var ontime = lei.flags["T1"] & LeiFlags.EscortTask.OnTime;
+	var flirted = lei.flags["T1"] & LeiFlags.EscortTask.Flirted;
 	
 	TimeStep({hour: 1});
-	lei.flags["Met"] = Lei.Met.CompletedTaskEscort;
+	lei.flags["Met"] = LeiFlags.Met.CompletedTaskEscort;
 	
 	Text.Clear();
 	Text.Add("You tell Lei that you’d like to talk about the last job with him.", parse);
@@ -764,7 +766,7 @@ TasksScenes.Escort.Debrief = function() {
 			options.push({ nameStr : "Reward",
 				tooltip : "Rewards are nice. You’d like a reward.",
 				func : function() {
-					Scenes.Lei.Sex.Petting(false);
+					LeiScenes.Sex.Petting(false);
 				}, enabled : true
 			});
 			options.push({ nameStr : "Refuse",
@@ -802,17 +804,17 @@ TasksScenes.Escort.Debrief = function() {
 /*
 TasksScenes.Escort = {};
 TasksScenes.Escort.Available = function() {
-	if(lei.flags["Met"] >= Lei.Met.OnTaskEscort) return false;
+	if(lei.flags["Met"] >= LeiFlags.Met.OnTaskEscort) return false;
 	return true;
 }
 TasksScenes.Escort.Eligable = function() {
 	return player.level >= 6;
 }
 TasksScenes.Escort.OnTask = function() {
-	return lei.flags["Met"] == Lei.Met.OnTaskEscort;
+	return lei.flags["Met"] == LeiFlags.Met.OnTaskEscort;
 }
 TasksScenes.Escort.OnTaskText = function() {
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -822,11 +824,11 @@ TasksScenes.Escort.OnTaskText = function() {
 	Text.Flush();
 }
 TasksScenes.Escort.Completed = function() {
-	return lei.flags["Met"] >= Lei.Met.CompletedTaskEscort;
+	return lei.flags["Met"] >= LeiFlags.Met.CompletedTaskEscort;
 }
 
 TasksScenes.Escort.Start = function() {
-	var parse = {
+	var parse : any = {
 		
 	};
 	

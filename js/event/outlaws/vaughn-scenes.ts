@@ -14,7 +14,7 @@ VaughnScenes.Introduction = function() {
 	let player = GAME().player;
 	let vaughn = GAME().vaughn;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -48,7 +48,7 @@ VaughnScenes.Introduction = function() {
 }
 
 VaughnScenes.CampDesc = function() {
-	var parse = {};
+	var parse : any = {};
 	
 	Text.Add("Vaughn should be on watch around this time, if you wish to seek out the fox.", parse);
 	Text.NL();
@@ -58,7 +58,7 @@ VaughnScenes.CampApproach = function() {
 	let player = GAME().player;
 	let vaughn = GAME().vaughn;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -205,7 +205,7 @@ VaughnScenes.TalkPrompt = function() {
 	let player = GAME().player;
 	let vaughn = GAME().vaughn;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -279,7 +279,7 @@ VaughnScenes.TalkHimself = function() {
 	let player = GAME().player;
 	let vaughn = GAME().vaughn;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -469,7 +469,7 @@ VaughnScenes.TalkWar = function() {
 	let player = GAME().player;
 	let vaughn = GAME().vaughn;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -773,7 +773,7 @@ VaughnScenes.Sex = function() {
 VaughnScenes.SexTitfuck = function() {
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 	};
 	
 	Text.Clear();
@@ -1105,7 +1105,7 @@ VaughnScenes.SexConfront = function() {
 	let player = GAME().player;
 	let vaughn = GAME().vaughn;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	parse = player.ParserTags(parse);
@@ -1153,7 +1153,7 @@ VaughnScenes.SexConfront = function() {
 VaughnScenes.ConfrontFollowup = function() {
 	let vaughn = GAME().vaughn;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	

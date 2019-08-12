@@ -20,7 +20,7 @@ CaleScenes.Interact = function() {
 	let player = GAME().player;
 	let rosalin = GAME().rosalin;
 	let cale = GAME().cale;
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -93,7 +93,7 @@ CaleScenes.Interact = function() {
 
 CaleScenes.Desc = function() {
 	let cale = GAME().cale;
-	var parse = {
+	var parse : any = {
 		
 	};
 	if(cale.flags["Met2"] == 0) {
@@ -386,7 +386,7 @@ CaleScenes.FirstApproach = function() {
 }
 
 CaleScenes.TalkSlut = function() {
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -405,7 +405,7 @@ CaleScenes.TalkSlut = function() {
 
 CaleScenes.Prompt = function() {
 	let cale = GAME().cale;
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -465,7 +465,7 @@ CaleScenes.Prompt = function() {
 
 CaleScenes.Shop = function() {
 	let cale = GAME().cale;
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -808,7 +808,7 @@ CaleScenes.TalkPrompt = function() {
 CaleScenes.TalkPast = function() {
 	let player = GAME().player;
 	let cale = GAME().cale;
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	parse = player.ParserTags(parse);
@@ -1111,7 +1111,7 @@ CaleScenes.Rogue = function() {
 
 CaleScenes.RogueTeach = function() {
 	let cale = GAME().cale;
-	var parse = {
+	var parse : any = {
 		
 	};
 	

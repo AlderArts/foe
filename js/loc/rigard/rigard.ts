@@ -23,24 +23,26 @@ import { ClothShopScenes } from './clothstore';
 import { ArmorShopScenes } from './armorshop';
 import { Gender } from '../../body/gender';
 import { InitMageTower } from './magetower';
-import { Items } from '../../items';
 import { Time } from '../../time';
 import { Stat } from '../../stat';
-import { WorldTime, MoveToLocation, GAME } from '../../GAME';
+import { WorldTime, MoveToLocation, GAME, TimeStep } from '../../GAME';
 import { Gui } from '../../gui';
 import { Text } from '../../text';
 import { MirandaFlags } from '../../event/miranda-flags';
 import { TerryFlags } from '../../event/terry-flags';
 import { RigardFlags } from './rigard-flags';
+import { ArmorItems } from '../../items/armor';
+import { StrapOnItems } from '../../items/strapon';
+import { WeaponsItems } from '../../items/weapons';
+import { Rand } from '../../utility';
+import { MirandaScenes } from '../../event/miranda-scenes';
+import { Party } from '../../party';
+import { KrawitzFlags } from './krawitz-flags';
 
-let world = null;
-let Scenes = null;
-export function InitRigard(w, scenes) {
-	world = w;
-	Scenes = scenes;
-	InitLB(world, scenes);
-	InitMageTower(world);
-	InitKrawitz(world);
+export function InitRigard() {
+	InitLB();
+	InitMageTower();
+	InitKrawitz();
 	ArmorShopScenes.CreateShop();
 	MagicShopScenes.CreateShop();
 };
@@ -66,7 +68,7 @@ let RigardLoc = {
 	Tavern       : TavernLoc,
 }
 
-let RigardScenes = {
+let RigardScenes : any = {
 	OddShop : OddShopScenes,
 	WeaponShop : WeaponShopScenes,
 	Plaza : PlazaScenes,
@@ -79,180 +81,205 @@ let RigardScenes = {
 };
 
 // Class to handle global flags and logic for town
-function Rigard(storage) {
-	this.flags = {};
-
-	// TODO: Store
-	this.ClothShop = new Shop();
-	this.ClothShop.AddItem(Items.Armor.SimpleRobes, 5);
-	this.ClothShop.AddItem(Items.Armor.StylizedClothes, 5);
-
-	this.ArmorShop = RigardScenes.ArmorShop.Shop;
-	this.ArmorShopSpecial = RigardScenes.ArmorShop.SpecialShop;
-
-	this.SexShop = new Shop();
-	this.SexShop.AddItem(Items.StrapOn.PlainStrapon, 5);
-	this.SexShop.AddItem(Items.StrapOn.LargeStrapon, 5);
-	this.SexShop.AddItem(Items.StrapOn.CanidStrapon, 5);
-	this.SexShop.AddItem(Items.StrapOn.EquineStrapon, 5);
-	this.SexShop.AddItem(Items.StrapOn.ChimeraStrapon, 5);
-	this.SexShop.AddItem(Items.Weapons.LWhip, 5);
-
-	this.MagicShop = RigardScenes.MagicShop.Shop;
-
-	// Have accessed town (not necessarily free access)
-	this.flags["Visa"] = 0;
-	this.flags["CityHistory"] = 0;
-	this.flags["Nobles"] = 0; //Bitmask
-	this.ParadeTimer = new Time();
-	// Have access to royal grounds (not necessarily free access)
-	this.flags["RoyalAccess"] = 0;
-	this.flags["RoyalAccessTalk"] = 0;
-
-	this.flags["TalkedStatue"] = 0;
-
-	this.flags["TailorMet"]   = 0;
-	this.flags["BuyingExp"]   = 0;
-	this.flags["Scepter"]     = 0;
-
-	this.Twopenny = {};
-	this.Twopenny["Met"]   = 0;
-	this.Twopenny["TShop"] = 0;
-
-	this.LB = {};
-	this.LB["Visit"]    = 0;
-	this.LB["Orvin"]    = 0;
-	this.LB["OTerry"]   = 0;
-	this.LB["Orvin69"]  = 0;
-	this.LB["CityTalk"] = 0;
-	this.LB["RotRumor"] = 0;
-	this.LB["Efri"]     = 0;
-	this.LB["RoomNr"]   = 0;
-	this.LB["RoomComp"] = 0;
-	this.LB["Tea"]      = 0;
-	this.LB["Lizan"]    = 0;
-	this.LB["Elven"]    = 0;
-	this.LB["Fairy"]    = 0;
-	this.LB["Red"]      = 0;
-	this.LBroomTimer    = new Time();
-
-	// Non-permanent
-	this.RotOrvinInnTalk = 0;
-
-	this.Krawitz = {};
-	this.Krawitz["Q"]    = RigardFlags.KrawitzQ.NotStarted; // Krawitz quest status
-	this.Krawitz["F"]    = 0; // Aftermath flags
-	this.Krawitz["Work"] = 0; //
-	this.KrawitzWorkDay  = null; // Time
-	this.Krawitz["Duel"] = 0; // 0 = no, 1 = superwin, 2 = win, 3 = loss
-
-	this.Brothel = {};
-	this.Brothel["Visit"]  = 0;
-	this.Brothel["MStrap"] = 0;
-
-	this.CW = {};
-	this.CW["Visit"] = 0;
-	this.cwrel = new Stat(0);
-
-	this.alianaRel = new Stat(0);
+export class Rigard {
+	flags : any;
+	ClothShop : Shop;
+	ArmorShop : Shop;
+	ArmorShopSpecial : Shop;
+	SexShop : Shop;
+	MagicShop : Shop;
 	
-	this.flags["Barnaby"] = 0;
+	ParadeTimer : Time;
+	Twopenny : any;
+	LB : any;
+	LBroomTimer : Time;
+	RotOrvinInnTalk : number;
 
-	if(storage) this.FromStorage(storage);
-}
+	Krawitz : any;
+	KrawitzWorkDay : Time;
 
-Rigard.prototype.ToStorage = function() {
-	var storage = {};
+	Brothel : any;
 
-	storage.flags   = this.flags;
-	storage.twoP    = this.Twopenny;
-	storage.Krawitz = this.Krawitz;
-	storage.Brothel = this.Brothel;
-	storage.CW      = this.CW;
-	if(this.cwrel.base != 0)
-		storage.cwrel = this.cwrel.base.toFixed();
-	storage.LB      = this.LB;
-	storage.LBroom  = this.LBroomTimer.ToStorage();
-	storage.PT      = this.ParadeTimer.ToStorage();
-	if(this.KrawitzWorkDay)
-		storage.KWork   = this.KrawitzWorkDay.ToStorage();
+	CW : any;
+	cwrel : Stat;
 
-	storage.MS = this.MagicShop.ToStorage();
+	alianaRel : Stat;
 
-	if(this.alianaRel.base != 0)
-		storage.alrel = this.alianaRel.base.toFixed();
+	constructor(storage? : any) {
+		this.flags = {};
 
-	return storage;
-}
+		// TODO: Store
+		this.ClothShop = new Shop();
+		this.ClothShop.AddItem(ArmorItems.SimpleRobes, 5);
+		this.ClothShop.AddItem(ArmorItems.StylizedClothes, 5);
 
-Rigard.prototype.FromStorage = function(storage) {
-	storage = storage || {};
-	this.LBroomTimer.FromStorage(storage.LBroom);
-	this.ParadeTimer.FromStorage(storage.PT);
-	if(storage.KWork) {
-		this.KrawitzWorkDay = new Time();
-		this.KrawitzWorkDay.FromStorage(storage.KWork);
+		this.ArmorShop = RigardScenes.ArmorShop.Shop;
+		this.ArmorShopSpecial = RigardScenes.ArmorShop.SpecialShop;
+
+		this.SexShop = new Shop();
+		this.SexShop.AddItem(StrapOnItems.PlainStrapon, 5);
+		this.SexShop.AddItem(StrapOnItems.LargeStrapon, 5);
+		this.SexShop.AddItem(StrapOnItems.CanidStrapon, 5);
+		this.SexShop.AddItem(StrapOnItems.EquineStrapon, 5);
+		this.SexShop.AddItem(StrapOnItems.ChimeraStrapon, 5);
+		this.SexShop.AddItem(WeaponsItems.LWhip, 5);
+
+		this.MagicShop = RigardScenes.MagicShop.Shop;
+
+		// Have accessed town (not necessarily free access)
+		this.flags["Visa"] = 0;
+		this.flags["CityHistory"] = 0;
+		this.flags["Nobles"] = 0; //Bitmask
+		this.ParadeTimer = new Time();
+		// Have access to royal grounds (not necessarily free access)
+		this.flags["RoyalAccess"] = 0;
+		this.flags["RoyalAccessTalk"] = 0;
+
+		this.flags["TalkedStatue"] = 0;
+
+		this.flags["TailorMet"]   = 0;
+		this.flags["BuyingExp"]   = 0;
+		this.flags["Scepter"]     = 0;
+
+		this.Twopenny = {};
+		this.Twopenny["Met"]   = 0;
+		this.Twopenny["TShop"] = 0;
+
+		this.LB = {};
+		this.LB["Visit"]    = 0;
+		this.LB["Orvin"]    = 0;
+		this.LB["OTerry"]   = 0;
+		this.LB["Orvin69"]  = 0;
+		this.LB["CityTalk"] = 0;
+		this.LB["RotRumor"] = 0;
+		this.LB["Efri"]     = 0;
+		this.LB["RoomNr"]   = 0;
+		this.LB["RoomComp"] = 0;
+		this.LB["Tea"]      = 0;
+		this.LB["Lizan"]    = 0;
+		this.LB["Elven"]    = 0;
+		this.LB["Fairy"]    = 0;
+		this.LB["Red"]      = 0;
+		this.LBroomTimer    = new Time();
+
+		// Non-permanent
+		this.RotOrvinInnTalk = 0;
+
+		this.Krawitz = {};
+		this.Krawitz["Q"]    = RigardFlags.KrawitzQ.NotStarted; // Krawitz quest status
+		this.Krawitz["F"]    = 0; // Aftermath flags
+		this.Krawitz["Work"] = 0; //
+		this.KrawitzWorkDay  = null; // Time
+		this.Krawitz["Duel"] = 0; // 0 = no, 1 = superwin, 2 = win, 3 = loss
+
+		this.Brothel = {};
+		this.Brothel["Visit"]  = 0;
+		this.Brothel["MStrap"] = 0;
+
+		this.CW = {};
+		this.CW["Visit"] = 0;
+		this.cwrel = new Stat(0);
+
+		this.alianaRel = new Stat(0);
+		
+		this.flags["Barnaby"] = 0;
+
+		if(storage) this.FromStorage(storage);
 	}
-	// Load flags
-	for(var flag in storage.flags)
-		this.flags[flag] = parseInt(storage.flags[flag]);
-	for(var flag in storage.twoP)
-		this.Twopenny[flag] = parseInt(storage.twoP[flag]);
-	for(var flag in storage.Krawitz)
-		this.Krawitz[flag] = parseInt(storage.Krawitz[flag]);
-	for(var flag in storage.Brothel)
-		this.Brothel[flag] = parseInt(storage.Brothel[flag]);
-	for(var flag in storage.CW)
-		this.CW[flag] = parseInt(storage.CW[flag]);
-	if(storage.cwrel)
-		this.cwrel.base = parseInt(storage.cwrel) || this.cwrel.base;
-	for(var flag in storage.LB)
-		this.LB[flag] = parseInt(storage.LB[flag]);
 
-	this.MagicShop.FromStorage(storage.MS);
-
-	if(storage.alrel)
-		this.alianaRel.base = parseInt(storage.alrel) || this.alianaRel.base;
-}
-
-Rigard.prototype.Update = function(step) {
-	this.LBroomTimer.Dec(step);
-	this.ParadeTimer.Dec(step);
-}
-
-Rigard.prototype.Visa = function() {
-	return this.flags["Visa"] != 0;
-}
-
-Rigard.prototype.Visited = function() {
-	return miranda.flags["Met"] != 0;
-}
-
-Rigard.prototype.Access = function() {
-	return this.Visa();
-}
-// TODO: add other ways
-Rigard.prototype.RoyalAccess = function() {
-	return this.flags["RoyalAccess"] != 0;
-}
-// TODO: use flags
-Rigard.prototype.CastleAccess = function() {
-	return false;
-}
-
-Rigard.prototype.GatesOpen = function() {
-	return WorldTime().hour >= 8 && WorldTime().hour < 17;
-}
-
-Rigard.prototype.UnderLockdown = function() {
-	return this.Krawitz["Q"] == RigardFlags.KrawitzQ.HuntingTerry;
-}
-
-Rigard.prototype.MetBarnaby = function() {
-	return this.flags["Barnaby"] & RigardFlags.Barnaby.Met;
-}
-Rigard.prototype.BlownBarnaby = function() {
-	return this.flags["Barnaby"] & RigardFlags.Barnaby.Blowjob;
+	ToStorage() {
+		var storage : any = {};
+	
+		storage.flags   = this.flags;
+		storage.twoP    = this.Twopenny;
+		storage.Krawitz = this.Krawitz;
+		storage.Brothel = this.Brothel;
+		storage.CW      = this.CW;
+		if(this.cwrel.base != 0)
+			storage.cwrel = this.cwrel.base.toFixed();
+		storage.LB      = this.LB;
+		storage.LBroom  = this.LBroomTimer.ToStorage();
+		storage.PT      = this.ParadeTimer.ToStorage();
+		if(this.KrawitzWorkDay)
+			storage.KWork   = this.KrawitzWorkDay.ToStorage();
+	
+		storage.MS = this.MagicShop.ToStorage();
+	
+		if(this.alianaRel.base != 0)
+			storage.alrel = this.alianaRel.base.toFixed();
+	
+		return storage;
+	}
+	
+	FromStorage(storage : any) {
+		storage = storage || {};
+		this.LBroomTimer.FromStorage(storage.LBroom);
+		this.ParadeTimer.FromStorage(storage.PT);
+		if(storage.KWork) {
+			this.KrawitzWorkDay = new Time();
+			this.KrawitzWorkDay.FromStorage(storage.KWork);
+		}
+		// Load flags
+		for(var flag in storage.flags)
+			this.flags[flag] = parseInt(storage.flags[flag]);
+		for(var flag in storage.twoP)
+			this.Twopenny[flag] = parseInt(storage.twoP[flag]);
+		for(var flag in storage.Krawitz)
+			this.Krawitz[flag] = parseInt(storage.Krawitz[flag]);
+		for(var flag in storage.Brothel)
+			this.Brothel[flag] = parseInt(storage.Brothel[flag]);
+		for(var flag in storage.CW)
+			this.CW[flag] = parseInt(storage.CW[flag]);
+		if(storage.cwrel)
+			this.cwrel.base = parseInt(storage.cwrel) || this.cwrel.base;
+		for(var flag in storage.LB)
+			this.LB[flag] = parseInt(storage.LB[flag]);
+	
+		this.MagicShop.FromStorage(storage.MS);
+	
+		if(storage.alrel)
+			this.alianaRel.base = parseInt(storage.alrel) || this.alianaRel.base;
+	}
+	
+	Update(step : number) {
+		this.LBroomTimer.Dec(step);
+		this.ParadeTimer.Dec(step);
+	}
+	
+	Visa() {
+		return this.flags["Visa"] != 0;
+	}
+	
+	Visited() {
+		return GAME().miranda.flags["Met"] != 0;
+	}
+	
+	Access() {
+		return this.Visa();
+	}
+	// TODO: add other ways
+	RoyalAccess() {
+		return this.flags["RoyalAccess"] != 0;
+	}
+	// TODO: use flags
+	CastleAccess() {
+		return false;
+	}
+	
+	GatesOpen() {
+		return WorldTime().hour >= 8 && WorldTime().hour < 17;
+	}
+	
+	UnderLockdown() {
+		return this.Krawitz["Q"] == RigardFlags.KrawitzQ.HuntingTerry;
+	}
+	
+	MetBarnaby() {
+		return this.flags["Barnaby"] & RigardFlags.Barnaby.Met;
+	}
+	BlownBarnaby() {
+		return this.flags["Barnaby"] & RigardFlags.Barnaby.Blowjob;
+	}
 }
 
 RigardScenes.CityHistory = function() {
@@ -260,7 +287,7 @@ RigardScenes.CityHistory = function() {
 	let party : Party = GAME().party;
 
 	Text.Clear();
-	var parse = {};
+	var parse : any = {};
 
 	if(party.location == RigardLoc.Plaza) {
 		parse.person = "a well-dressed youngster";
@@ -312,7 +339,7 @@ RigardScenes.CityHistory = function() {
 	Gui.NextPrompt();
 }
 
-RigardScenes.ChatterIntro = function(parse, enteringArea) {
+RigardScenes.ChatterIntro = function(parse : any, enteringArea : boolean) {
 	var introText = new EncounterTable();
 	introText.AddEnc(function() {
 		Text.Add("As you are entering the area, you overhear [aAn1] [NPC1] and [aAn2] [NPC2] talking.", parse);
@@ -329,7 +356,7 @@ RigardScenes.ChatterIntro = function(parse, enteringArea) {
 	introText.Get();
 }
 
-RigardScenes.ChatterOutro = function(parse) {
+RigardScenes.ChatterOutro = function(parse : any) {
 	var outroText = new EncounterTable();
 	outroText.AddEnc(function() {
 		Text.Add("Their conversation fades behind you as you walk on.", parse);
@@ -352,12 +379,13 @@ RigardScenes.ChatterOutro = function(parse) {
 	outroText.Get();
 }
 
-RigardScenes.Chatter = function(enteringArea) {
+RigardScenes.Chatter = function(enteringArea : boolean) {
 	let rigard = GAME().rigard;
+	let outlaws = GAME().outlaws;
 	let party : Party = GAME().party;
 
 	Text.Clear();
-	var parse = {};
+	var parse : any = {};
 
 	var posh = false;
 	
@@ -672,21 +700,22 @@ RigardScenes.Chatter = function(enteringArea) {
 }
 
 //New Del stuff
-RigardScenes.Chatter2 = function(enteringArea) {
+RigardScenes.Chatter2 = function(enteringArea : boolean) {
 	let rigard = GAME().rigard;
 	let party : Party = GAME().party;
 	let player = GAME().player;
 	let miranda = GAME().miranda;
+	let terry = GAME().terry;
 
 	Text.Clear();
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 
-	var npcsLower   = [];
-	var npcsMiddle1 = [];
-	var npcsMiddle2 = [];
-	var npcsNoble   = [];
+	var npcsLower   : any[] = [];
+	var npcsMiddle1 : any[] = [];
+	var npcsMiddle2 : any[] = [];
+	var npcsNoble   : any[] = [];
 
 	npcsLower.push({noun: "ragged servant", a: "a"});
 	npcsLower.push({noun: "tired servant", a: "a"});
@@ -713,9 +742,9 @@ RigardScenes.Chatter2 = function(enteringArea) {
 	npcsMiddle1.push({noun: "pretty courtesan", a: "a", gender: Math.random() > 0.8 ? Gender.male : Gender.female});
 	npcsMiddle1.push({noun: "dour worker", a: "a"});
 	var gender = Math.random() > 0.5 ? Gender.male : Gender.female;
-	npcsMiddle1.push({noun: "muscular trades" + gender == Gender.male ? "man" : "woman", a: "a", gender: gender});
+	npcsMiddle1.push({noun: "muscular trades" + (gender == Gender.male) ? "man" : "woman", a: "a", gender: gender});
 	var gender = Math.random() > 0.5 ? Gender.male : Gender.female;
-	npcsMiddle1.push({noun: "stylish " + gender == Gender.male ? "man" : "woman", a: "a", gender: gender});
+	npcsMiddle1.push({noun: "stylish " + (gender == Gender.male) ? "man" : "woman", a: "a", gender: gender});
 
 	var CreateMiddle1 = function() {
 		var idx = Rand(npcsMiddle1.length);
@@ -777,7 +806,7 @@ RigardScenes.Chatter2 = function(enteringArea) {
 		parse.areaname = "royal grounds";
 	else return; // Incorrect location
 
-	var SetGenders = function(npc1, npc2) {
+	var SetGenders = function(npc1? : any, npc2? : any) {
 		npc1  = npc1  || {};
 		npc2  = npc2  || {};
 		parse.NPC1     = npc1.noun;
@@ -834,7 +863,7 @@ RigardScenes.Chatter2 = function(enteringArea) {
 	                 party.location == RigardLoc.Gate ? 1 :
 	                 party.location == RigardLoc.Slums.gate ? 1 : 0;
 
-	var CreateNPC = function(lower, mid1, mid2, noble) {
+	var CreateNPC = function(lower : boolean, mid1 : boolean, mid2 : boolean, noble : boolean) {
 		var scenes = new EncounterTable();
 		scenes.AddEnc(function() {
 			return CreateLower();
@@ -899,7 +928,7 @@ RigardScenes.Chatter2 = function(enteringArea) {
 		Text.NL();
 		// Outro text
 		RigardScenes.ChatterOutro(parse);
-	}, 1.0, function() { return rigard.Krawitz["F"] & Scenes.Krawitz.Flags.Orgy; });
+	}, 1.0, function() { return rigard.Krawitz["F"] & KrawitzFlags.Orgy; });
 	scenes.AddEnc(function() {
 		Text.Add("Walking along, your eyes are drawn to a man in front of you. He reaches up to pull the hood of his cloak further down over his face, even though only a hint of his features is visible as it is.", parse);
 		Text.NL();
@@ -1312,7 +1341,7 @@ RigardScenes.Chatter2 = function(enteringArea) {
 		Text.NL();
 		// Outro text
 		RigardScenes.ChatterOutro(parse);
-	}, nobleArea, function() { return rigard.Krawitz["F"] & Scenes.Krawitz.Flags.TF; });
+	}, nobleArea, function() { return rigard.Krawitz["F"] & KrawitzFlags.TF; });
 	scenes.AddEnc(function() {
 		Text.Add("Standing at the mouth of an alleyway, a short bulky man is chatting with a taller, broad-shouldered man. Their clothes hang a little loose on them, and are spotted with unpatched holes. The mention of rather impressive sexual acts catches your attention.", parse);
 		Text.NL();
@@ -1481,7 +1510,7 @@ RigardScenes.Lockdown = function() {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		merchantsCitizens : (party.location == RigardLoc.Gate) ? "merchants" : "citizens",
 		assCunt : player.FirstVag() ? "cunt" : "ass"
@@ -1582,21 +1611,21 @@ RigardScenes.Lockdown = function() {
 		Text.Add("You quickly inform her that starting from the beginning would be best; the first you had heard of the break in was when she spoke to you just before.", parse);
 		Text.NL();
 		Text.Add("<i>“It’s really not that complicated. Someone decided that they’ve had enough of old Krawitz and broke in to pay their respects. Let me list the charges for you,”</i> she clears her throat. <i>“They stole a few art pieces, a statue, several coins, defaced a few paintings, messed up the old man’s room, stole some wine, ", parse);
-		if(rigard.Krawitz["F"] & Scenes.Krawitz.Flags.Clothes != 0)
+		if(rigard.Krawitz["F"] & KrawitzFlags.Clothes)
 			Text.Add("impersonated a member of the staff, ", parse);
-		if(rigard.Krawitz["F"] & Scenes.Krawitz.Flags.Binder != 0)
+		if(rigard.Krawitz["F"] & KrawitzFlags.Binder)
 			Text.Add("stole a few important documents, ", parse);
-		if(rigard.Krawitz["F"] & Scenes.Krawitz.Flags.Sword != 0)
+		if(rigard.Krawitz["F"] & KrawitzFlags.Sword)
 			Text.Add("made away with his family heirloom, ", parse);
-		if(rigard.Krawitz["F"] & Scenes.Krawitz.Flags.SpikedLadies != 0)
+		if(rigard.Krawitz["F"] & KrawitzFlags.SpikedLadies)
 			Text.Add("drugged his daughter and his wife, ", parse);
-		if(rigard.Krawitz["F"] & Scenes.Krawitz.Flags.Sex != 0)
+		if(rigard.Krawitz["F"] & KrawitzFlags.Sex)
 			Text.Add("had sex with them, ", parse);
-		if(rigard.Krawitz["F"] & Scenes.Krawitz.Flags.SpikedServants != 0)
+		if(rigard.Krawitz["F"] & KrawitzFlags.SpikedServants)
 			Text.Add("drugged the entire staff, ", parse);
-		if(rigard.Krawitz["F"] & Scenes.Krawitz.Flags.Orgy != 0)
+		if(rigard.Krawitz["F"] & KrawitzFlags.Orgy)
 			Text.Add("invited the drugged staff to get it on with the drugged ladies, ", parse);
-		if(rigard.Krawitz["F"] & Scenes.Krawitz.Flags.TF != 0)
+		if(rigard.Krawitz["F"] & KrawitzFlags.TF)
 			Text.Add("poured a transformative in the old fool’s food, ", parse);
 		Text.Add("and last but not least, they also left that damn card mocking us all.”</i>", parse);
 		Text.NL();
@@ -1674,7 +1703,7 @@ RigardScenes.Lockdown = function() {
 							Text.NL();
 							Text.Flush();
 
-							Scenes.Miranda.TerryTavernSexSubbyVag(cocksInVag);
+							MirandaScenes.TerryTavernSexSubbyVag(cocksInVag);
 						}, enabled : cocksInVag.length > 0,
 						tooltip : "She wants sex, but who says she has to get it on her terms? Why not take charge of scratching her itch?"
 					});
@@ -1686,7 +1715,7 @@ RigardScenes.Lockdown = function() {
 							Text.NL();
 							Text.Flush();
 
-							Scenes.Miranda.TerryTavernSexDommyBJ();
+							MirandaScenes.TerryTavernSexDommyBJ();
 						}, enabled : true,
 						tooltip : "If she wants her itch scratched, then she can come and get it."
 					});
@@ -1744,7 +1773,7 @@ RigardScenes.Lockdown = function() {
 						Text.Add("For several long, pleasant moments, the two of you tongue wrestle, softly moaning and mumbling your pleasure into each other's lips before you break away. Smirking down at the panting herm, her erection visibly tenting her pants from this angle, you mockingly ask her how she intends to have you sex her whilst she insists on keeping that pretty rump of hers all covered up in her uniform.", parse);
 						Text.Flush();
 
-						Scenes.Miranda.TerryTavernSexSubbyVag(cocksInVag);
+						MirandaScenes.TerryTavernSexSubbyVag(cocksInVag);
 					}, enabled : cocksInVag.length > 0,
 					tooltip : "Even if she wants sex, who says she has to get it on her terms? Why not take charge of scratching her itch?"
 				});
@@ -1755,7 +1784,7 @@ RigardScenes.Lockdown = function() {
 						Text.Add("The dog-herm wastes no time in hopping on her feet, stripping off her armor as she approaches you to help you take off your [armor]. Though she fumbles with both your outfits she has you naked in record time. Without so much as a word, she takes you by the arm and sets you down[legs] atop the cushions in the corner of the room.", parse);
 						Text.Flush();
 
-						Scenes.Miranda.TerryTavernSexDommyBJ();
+						MirandaScenes.TerryTavernSexDommyBJ();
 					}, enabled : true,
 					tooltip : "If she wants her itch scratched, then she can come and get it."
 				});
@@ -1841,7 +1870,7 @@ RigardScenes.Lockdown = function() {
 					Text.Add("Miranda's eyes never leave you, her lips curled into a smirk and her fingers brushing almost mockingly against the bulge in her trousers as she watches you finish undressing. As her gaze hungrily follows you, you [reluctantlyEagerly] head for the cushioned corner of the room[legs3], just waiting for her to claim you.", parse);
 					Text.Flush();
 
-					Scenes.Miranda.TerryTavernSexDommyBJ();
+					MirandaScenes.TerryTavernSexDommyBJ();
 				});
 			}
 		}
@@ -1854,4 +1883,4 @@ RigardScenes.Lockdown = function() {
 	});
 }
 
-export { Rigard, RigardLoc, RigardScenes };
+export { RigardLoc, RigardScenes };

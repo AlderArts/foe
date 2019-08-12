@@ -4,7 +4,7 @@ import { Gui } from "./gui";
 import { Images } from "./assets";
 import { isFunction } from "./utility";
 import { GameState, SetGameState } from "./gamestate";
-import { GAME, TimeStep, WORLD } from "./GAME";
+import { GAME, TimeStep, WORLD, StepToHour } from "./GAME";
 import { Text } from "./text";
 import { DreamsScenes } from './event/dreams';
 import { EncounterTable } from './encountertable';
@@ -107,7 +107,6 @@ export class Event {
 	}
 
 	WaitFunc = function() {
-		let world = WORLD();
 		SetGameState(GameState.Event, Gui);
 		Text.Clear();
 		Text.Add("How long do you want to wait?");
@@ -159,42 +158,42 @@ export class Event {
 		options.push({ nameStr : "Until 4:00",
 			tooltip : "Wait until early morning.",
 			func : function() {
-				world.StepToHour(4);
+				StepToHour(4);
 				Gui.PrintDefaultOptions();
 			}, enabled : true
 		});
 		options.push({ nameStr : "Until 8:00",
 			tooltip : "Wait until morning.",
 			func : function() {
-				world.StepToHour(8);
+				StepToHour(8);
 				Gui.PrintDefaultOptions();
 			}, enabled : true
 		});
 		options.push({ nameStr : "Until 12:00",
 			tooltip : "Wait until midday.",
 			func : function() {
-				world.StepToHour(12);
+				StepToHour(12);
 				Gui.PrintDefaultOptions();
 			}, enabled : true
 		});
 		options.push({ nameStr : "Until 16:00",
 			tooltip : "Wait until afternoon.",
 			func : function() {
-				world.StepToHour(16);
+				StepToHour(16);
 				Gui.PrintDefaultOptions();
 			}, enabled : true
 		});
 		options.push({ nameStr : "Until 20:00",
 			tooltip : "Wait until evening.",
 			func : function() {
-				world.StepToHour(20);
+				StepToHour(20);
 				Gui.PrintDefaultOptions();
 			}, enabled : true
 		});
 		options.push({ nameStr : "Until 00:00",
 			tooltip : "Wait until midnight.",
 			func : function() {
-				world.StepToHour(0);
+				StepToHour(0);
 				Gui.PrintDefaultOptions();
 			}, enabled : true
 		});
@@ -308,7 +307,7 @@ export class Link {
 	func : any;
 	tooltip : any;
 
-	constructor(name : any, visibleCondition : any, enabledCondition : any, print : any, func : any, tooltip? : any) {
+	constructor(name : any, visibleCondition : any, enabledCondition : any, print? : any, func? : any, tooltip? : any) {
 		// String or function that returns string
 		this.name = name;
 		// This can be set to true, or to a function

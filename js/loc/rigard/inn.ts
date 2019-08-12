@@ -1,19 +1,27 @@
+import * as _ from 'lodash';
 
 import { Event, Link } from '../../event';
 import { TwinsScenes } from '../../event/royals/twins';
 import { TasksScenes } from '../../event/outlaws/vaughn-tasks';
-import { WorldTime, MoveToLocation, GAME } from '../../GAME';
+import { WorldTime, MoveToLocation, GAME, WORLD, TimeStep } from '../../GAME';
 import { SetGameState, GameState } from '../../gamestate';
 import { Gui } from '../../gui';
 import { Text } from '../../text';
 import { TwinsFlags } from '../../event/royals/twins-flags';
 import { RigardFlags } from './rigard-flags';
 import { Room69Flags } from '../../event/room69-flags';
+import { LeiFlags } from '../../event/royals/lei-flags';
+import { Party } from '../../party';
+import { Season, Time } from '../../time';
+import { Status } from '../../statuseffect';
+import { EncounterTable } from '../../encountertable';
+import { Entity } from '../../entity';
+import { Room69Scenes } from '../../event/room69';
+import { DreamsScenes } from '../../event/dreams';
+import { LeiScenes } from '../../event/royals/lei-scenes';
 
-let world = null;
-
-export function InitLB(w) {
-	world = w;
+export function InitLB() {
+	let world = WORLD();
 	world.SaveSpots["LB"] = InnLoc.room;
 	world.SaveSpots["LB2"] = InnLoc.penthouse;
 };
@@ -30,7 +38,7 @@ let InnLoc = {
 	penthouse : new Event("Penthouse")
 };
 
-let LBScenes = {};
+let LBScenes : any = {};
 
 //
 // Bar
@@ -45,7 +53,7 @@ InnLoc.common.links.push(new Link(
 	"Outside", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Rigard.Plaza);
+		MoveToLocation(WORLD().loc.Rigard.Plaza);
 	}
 ));
 
@@ -109,6 +117,7 @@ InnLoc.common.links.push(new Link(
 
 InnLoc.common.endDescription = function() {
 	let rigard = GAME().rigard;
+	let player = GAME().player;
 
 	if(rigard.Krawitz["Q"] < RigardFlags.KrawitzQ.HeistDone) {
 		Text.Add("You see the daintily attractive vixen-morph hard at work cleaning up the various dishes and tankards left behind by previous customers. She scurries ceaselessly back and forth, gathering dirty kitchenware and conveying it to the kitchens, only to return for a fresh load.");
@@ -126,7 +135,7 @@ InnLoc.common.endDescription = function() {
 
 //TODO: Companion reactions?
 InnLoc.common.DrunkHandler = function() {
-	var parse = {};
+	var parse : any = {};
 	var busy = RigardFlags.LB.Busy();
 	parse["busy"] = busy == RigardFlags.LB.BusyState.busy ? "few places" : "spot";
 	Text.Clear();
@@ -137,7 +146,7 @@ InnLoc.common.DrunkHandler = function() {
 	Gui.NextPrompt();
 }
 
-InnLoc.common.onEntry = function(preventClear, oldLocation) {
+InnLoc.common.onEntry = function(preventClear : boolean, oldLocation : any) {
 	let rigard = GAME().rigard;
 	let player = GAME().player;
 	let party : Party = GAME().party;
@@ -176,7 +185,7 @@ InnLoc.common.onEntry = function(preventClear, oldLocation) {
 	Text.Add("The room as a whole is pristine, kept perfectly clean despite the daily spills of drink and dropped food that are an inevitable occurrence in such a busy bar.");
 	
 	if(first) {
-		var parse = {
+		var parse : any = {
 			sir : player.mfFem("sir", "ma’am")
 		};
 		Text.NL();
@@ -232,7 +241,7 @@ LBScenes.OrderFood = function() {
 	let player = GAME().player;
 	let party : Party = GAME().party;
 
-	var parse = {
+	var parse : any = {
 		sirmadam : player.mfFem("sir", "madam"),
 		dname : rigard.LB["Efri"] == 0 ? "the girl" : "Efri"
 	};
@@ -342,7 +351,7 @@ LBScenes.OrderFood = function() {
 LBScenes.FoodGet = function() {
 	let party : Party = GAME().party;
 
-	var parse = {};
+	var parse : any = {};
 	if(party.Two()) {
 		var p1 = party.Get(1);
 		parse["p1name"] = p1.name;
@@ -399,10 +408,10 @@ LBScenes.FoodGet = function() {
 		"spaghetti squash",
 		"fried onions and vegetables"
 		];
-		loc = locs[Math.floor(Math.random() * locs.length)];
-		style    = styles[Math.floor(Math.random() * styles.length)];
-		mainFood = mainFoods[Math.floor(Math.random() * mainFoods.length)];
-		side     = sides[Math.floor(Math.random() * sides.length)];
+		let loc = locs[Math.floor(Math.random() * locs.length)];
+		let style    = styles[Math.floor(Math.random() * styles.length)];
+		let mainFood = mainFoods[Math.floor(Math.random() * mainFoods.length)];
+		let side     = sides[Math.floor(Math.random() * sides.length)];
 		
 		return loc + " " + style + " " + mainFood + " with a side of " + side;
 	}
@@ -428,7 +437,7 @@ LBScenes.OrvinPrompt = function() {
 	let player = GAME().player;
 	let party : Party = GAME().party;
 
-	var parse = {
+	var parse : any = {
 		sirmadam : player.mfFem("sir", "madam"),
 		roomPrice : Text.NumToText(RigardFlags.LB.RoomCost()),
 		IkName   : !RigardFlags.LB.KnowsOrvin() ? "The innkeeper" : "Orvin",
@@ -602,11 +611,14 @@ LBScenes.OrvinPrompt = function() {
 	innPrompt();
 }
 
-LBScenes.OrvinTalkPrompt = function(innPrompt) {
+LBScenes.OrvinTalkPrompt = function(innPrompt : any) {
 	let rigard = GAME().rigard;
+	let terry = GAME().terry;
+	let room69 = GAME().room69;
+	let lei = GAME().lei;
 	let party : Party = GAME().party;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -757,7 +769,7 @@ LBScenes.OrvinTalkPrompt = function(innPrompt) {
 	
 	var leiPresent = lei.IsAtLocation(InnLoc.common);
 	
-	if(lei.flags["Met"] < Lei.Met.KnowName) {
+	if(lei.flags["Met"] < LeiFlags.Met.KnowName) {
 		options.push({ nameStr : "Stranger",
 			func : function() {
 				Text.Clear();
@@ -985,7 +997,7 @@ LBScenes.OrvinTalkPrompt = function(innPrompt) {
 }
 
 LBScenes.EfriPrompt = function() {
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -1027,12 +1039,13 @@ LBScenes.EfriPrompt = function() {
 	Gui.SetButtonsFromList(options, true);
 }
 
-LBScenes.DrinksPrompt = function(innPrompt) {
+LBScenes.DrinksPrompt = function(innPrompt : any) {
 	let rigard = GAME().rigard;
 	let player = GAME().player;
+	let kiakai = GAME().kiakai;
 	let party : Party = GAME().party;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		IkName   : !RigardFlags.LB.KnowsOrvin() ? "The innkeeper" : "Orvin",
 		ikname   : !RigardFlags.LB.KnowsOrvin() ? "the innkeeper" : "Orvin"
@@ -1511,9 +1524,13 @@ LBScenes.DrinksPrompt = function(innPrompt) {
 LBScenes.GotoRoom = function() {
 	let rigard = GAME().rigard;
 	let player = GAME().player;
+	let kiakai = GAME().kiakai;
+	let lei = GAME().lei;
+	let gwendy = GAME().gwendy;
+	let miranda = GAME().miranda;
 	let party : Party = GAME().party;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -1560,7 +1577,7 @@ LBScenes.GotoRoom = function() {
 				var comp = party.Get(i);
 				parse["comp"]    = comp.name;
 				options.push({ nameStr : comp.name,
-					func : function(obj) {
+					func : function(obj : Entity) {
 						Text.NL();
 						Text.Add("You decide that [comp] can share your room, and lead [chimher] inside.", { comp : obj.name, chimher : obj.himher() });
 						Text.Flush();
@@ -1597,7 +1614,7 @@ LBScenes.GotoRoom = function() {
 		Text.NL();
 		
 		if(party.NumTotal() > 1) {
-			var comp;
+			var comp : Entity;
 			
 			var scenes = new EncounterTable();
 			if(party.InParty(kiakai)) {
@@ -1630,7 +1647,7 @@ LBScenes.GotoRoom = function() {
 			if(scenes.Num() == 0) {
 				for(var i = 1; i < party.NumTotal(); i++) {
 					var randcomp = party.Get(i);
-					scenes.AddEnc(function(obj) {
+					scenes.AddEnc(function(obj : Entity) {
 						parse["comp"] = obj.name;
 						Text.Add("<i>“Do you need a hand getting to the room?”</i> [comp] asks, looking mildly concerned.", parse);
 						comp = obj;
@@ -1686,11 +1703,11 @@ LBScenes.GotoRoom = function() {
 
 
 
-LBScenes.RandomRoom = function(companion) {
+LBScenes.RandomRoom = function(companion? : Entity) {
 	let rigard = GAME().rigard;
 	let room69 = GAME().room69;
 	
-	var parse = {
+	var parse : any = {
 		roomNr : rigard.LB["RoomNr"]
 	};
 	Text.NL();
@@ -1710,7 +1727,7 @@ LBScenes.RandomRoom = function(companion) {
 			Text.Add("As you reach the bed and grab onto a bedpost for balance, you hear the door slam shut behind you.", parse);
 		Text.Flush();
 		
-		Gui.NextPrompt(Scenes.Room69.Discovering69);
+		Gui.NextPrompt(Room69Scenes.Discovering69);
 	}
 	else {
 		// TODO: Adjust arriving at 69 for repeat scenes. For now. Finds the regular room
@@ -1722,7 +1739,7 @@ LBScenes.RandomRoom = function(companion) {
 	}
 }
 
-LBScenes.RegularRoom = function(companion) {
+LBScenes.RegularRoom = function(companion : Entity) {
 	let rigard = GAME().rigard;
 	let party : Party = GAME().party;
 	var room = InnLoc.room;
@@ -1743,13 +1760,13 @@ InnLoc.room.events.push(new Link(
 		let party : Party = GAME().party;
 		var companion = party.Get(rigard.LB["RoomComp"]);
 		if(companion) return companion.name;
-	}, function() { return rigard.LB["RoomComp"] >= 1; }, true,
+	}, function() { return GAME().rigard.LB["RoomComp"] >= 1; }, true,
 	function() {
 		let rigard = GAME().rigard;
 		let party : Party = GAME().party;
 		var companion = party.Get(rigard.LB["RoomComp"]);
 		if(companion) {
-			var parse = {
+			var parse : any = {
 				name   : companion.name,
 				hisher : companion.hisher()
 			};
@@ -1769,7 +1786,7 @@ InnLoc.room.SleepFunc = function() {
 	let player = GAME().player;
 	let party : Party = GAME().party;
 	var comp = party.Get(rigard.LB["RoomComp"]);
-	var parse = {
+	var parse : any = {
 		
 	};
 	if(comp) {
@@ -1792,7 +1809,7 @@ InnLoc.room.SleepFunc = function() {
 	}
 	Text.Flush();
 	
-	var func = function(dream) {
+	var func = function(dream : boolean) {
 		TimeStep({hour: 8});
 		party.Sleep();
 		
@@ -1820,7 +1837,7 @@ InnLoc.room.SleepFunc = function() {
 	Gui.NextPrompt(function() {
 		Text.Clear();
 		
-		Scenes.Dreams.Entry(func);
+		DreamsScenes.Entry(func);
 	});
 }
 
@@ -1842,7 +1859,7 @@ InnLoc.common.events.push(new Link(
 		return party.coin >= RigardFlags.LB.MealCost();
 	},
 	function() {
-		var parse = {
+		var parse : any = {
 			mealcost : RigardFlags.LB.MealCost()
 		};
 		var busy = RigardFlags.LB.Busy();
@@ -1869,7 +1886,7 @@ InnLoc.common.events.push(new Link(
 	true, true,
 	function() {
 		let rigard = GAME().rigard;
-		var parse = {};
+		var parse : any = {};
 		var busy = RigardFlags.LB.Busy();
 		
 		if(RigardFlags.LB.OrvinIsInnkeeper()) {
@@ -1919,14 +1936,14 @@ InnLoc.common.events.push(new Link(
 InnLoc.common.events.push(new Link(
 	function() {
 		let lei = GAME().lei;
-		return lei.flags["Met"] >= Lei.Met.KnowName ? "Lei" : "Stranger";
+		return lei.flags["Met"] >= LeiFlags.Met.KnowName ? "Lei" : "Stranger";
 	},
-	function() { return lei.IsAtLocation(InnLoc.common); }, function() {
+	function() { return GAME().lei.IsAtLocation(InnLoc.common); }, function() {
 		let rigard = GAME().rigard;
 		return rigard.flags["RoyalAccessTalk"] > 0;
 	},
-	function() { Scenes.Lei.Desc(); },
-	function() { Scenes.Lei.Interact(); }
+	function() { LeiScenes.Desc(); },
+	function() { LeiScenes.Interact(); }
 ));
 
 InnLoc.common.events.push(new Link(
@@ -1957,11 +1974,11 @@ InnLoc.common.events.push(new Link(
 	function() {
 		let room69 = GAME().room69;
 		if(room69.flags["Rel"] == Room69Flags.RelFlags.BadTerms)
-			Scenes.Room69.ApologizeTo69ForBeingMean();
+			Room69Scenes.ApologizeTo69ForBeingMean();
 		else if(room69.flags["Rel"] == Room69Flags.RelFlags.BrokeDoor)
-			Scenes.Room69.ApologizeTo69ForBreakingDoor();
+			Room69Scenes.ApologizeTo69ForBreakingDoor();
 		else // TODO: Additional options?
-			Scenes.Room69.Normal69();
+			Room69Scenes.Normal69();
 	}
 ));
 

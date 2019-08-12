@@ -54,7 +54,7 @@ let EntityMenu = {
 		if(this.currentJob) {
 			var jd  = this.jobs[this.currentJob.name];
 			if(jd) {
-				var parse = {
+				var parse : any = {
 					job        : jd.job.Short(this),
 					lvl        : jd.level,
 					maxlvl     : jd.job.levels.length + 1
@@ -183,7 +183,7 @@ let EntityMenu = {
 	EquipPrompt : function(backfunc : any) {
 		let party = GAME().party;
 		var that = this;
-		var parse = {
+		var parse : any = {
 			name    : that.NameDesc(),
 			isAre   : that.is(),
 			HeShe   : function() { return that.HeShe(); },
@@ -329,7 +329,7 @@ let EntityMenu = {
 			return;
 		}
 
-		var parse = {
+		var parse : any = {
 			name       : this.NameDesc(),
 			has        : this.has(),
 			Possessive : this.Possessive(),

@@ -5,122 +5,135 @@
  */
 import { Entity } from '../../entity';
 import { Time } from '../../time';
-import { WorldTime } from '../../GAME';
+import { WorldTime, GAME } from '../../GAME';
 import { TerryFlags } from '../terry-flags';
 import { TwinsFlags } from './twins-flags';
 import { RigardFlags } from '../../loc/rigard/rigard-flags';
+import { Text } from '../../text';
+import { Gui } from '../../gui';
 
-let TwinsScenes = {};
+let TwinsScenes : any = {};
 
-function Twins(storage) {
-	this.rumi = new Rumi();
-	this.rani = new Rani();
-	
-	this.flags = {};
-	this.flags["Met"] = TwinsFlags.Met.NotMet;
-	this.flags["SexOpen"] = 0;
-	
-	this.terryTimer = new Time();
-	
-	if(storage) this.FromStorage(storage);
-}
+export class Twins {
+	rumi : Rumi;
+	rani : Rani;
+	flags : any;
+	terryTimer : Time;
 
-Twins.prototype.Relation = function() {
-	return this.rumi.Relation() + this.rani.Relation();
-}
-
-Twins.prototype.Update = function(step) {
-	this.terryTimer.Dec(step);
-}
-
-Twins.prototype.FromStorage = function(storage) {
-	if(storage.rumi) this.rumi.FromStorage(storage.rumi);
-	if(storage.rani) this.rani.FromStorage(storage.rani);
-	// Load flags
-	for(var flag in storage.flags)
-		this.flags[flag] = parseInt(storage.flags[flag]);
+	constructor(storage? : any) {
+		this.rumi = new Rumi();
+		this.rani = new Rani();
 		
-	this.terryTimer.FromStorage(storage.Ttime);
-}
-
-Twins.prototype.ToStorage = function() {
-	var storage = {
-	};
-	storage.rumi  = this.rumi.ToStorage();
-	storage.rani  = this.rani.ToStorage();
-	storage.flags = this.flags;
-	
-	storage.Ttime = this.terryTimer.ToStorage();
-	
-	return storage;
-}
-
-// Schedule
-Twins.prototype.IsAtLocation = function(location) {
-	return true;
-}
-
-
-
-
-
-
-function Rumi() {
-	Entity.call(this);
-	this.ID = "rumi";
-	
-}
-Rumi.prototype = new Entity();
-Rumi.prototype.constructor = Rumi;
-
-Rumi.prototype.FromStorage = function(storage) {
-	this.LoadPersonalityStats(storage);
-	
-	// Load flags
-	this.LoadFlags(storage);
-}
-
-Rumi.prototype.ToStorage = function() {
-	var storage = {
+		this.flags = {};
+		this.flags["Met"] = TwinsFlags.Met.NotMet;
+		this.flags["SexOpen"] = 0;
 		
-	};
-	
-	this.SavePersonalityStats(storage);
-	this.SaveFlags(storage);
-	
-	return storage;
-}
-
-function Rani() {
-	Entity.call(this);
-	this.ID = "rani";
-	
-	
-}
-Rani.prototype = new Entity();
-Rani.prototype.constructor = Rani;
-
-Rani.prototype.FromStorage = function(storage) {
-	this.LoadPersonalityStats(storage);
-	
-	// Load flags
-	this.LoadFlags(storage);
-}
-
-Rani.prototype.ToStorage = function() {
-	var storage = {
+		this.terryTimer = new Time();
 		
-	};
+		if(storage) this.FromStorage(storage);
+	}
+
+	Relation() {
+		return this.rumi.Relation() + this.rani.Relation();
+	}
 	
-	this.SavePersonalityStats(storage);
-	this.SaveFlags(storage);
+	Update(step : number) {
+		this.rumi.Update(step);
+		this.rani.Update(step);
+		this.terryTimer.Dec(step);
+	}
 	
-	return storage;
+	FromStorage(storage : any) {
+		if(storage.rumi) this.rumi.FromStorage(storage.rumi);
+		if(storage.rani) this.rani.FromStorage(storage.rani);
+		// Load flags
+		for(var flag in storage.flags)
+			this.flags[flag] = parseInt(storage.flags[flag]);
+			
+		this.terryTimer.FromStorage(storage.Ttime);
+	}
+	
+	ToStorage() {
+		var storage : any = {
+		};
+		storage.rumi  = this.rumi.ToStorage();
+		storage.rani  = this.rani.ToStorage();
+		storage.flags = this.flags;
+		
+		storage.Ttime = this.terryTimer.ToStorage();
+		
+		return storage;
+	}
+	
+	// Schedule
+	IsAtLocation(location? : any) {
+		return true;
+	}
 }
+
+
+
+
+
+
+
+export class Rumi extends Entity {
+	constructor() {
+		super();
+		this.ID = "rumi";
+	}
+
+	FromStorage(storage : any) {
+		this.LoadPersonalityStats(storage);
+		
+		// Load flags
+		this.LoadFlags(storage);
+	}
+	
+	ToStorage() {
+		var storage : any = {
+			
+		};
+		
+		this.SavePersonalityStats(storage);
+		this.SaveFlags(storage);
+		
+		return storage;
+	}	
+}
+
+
+export class Rani extends Entity {
+	constructor() {
+		super();
+		this.ID = "rani";
+	}
+
+	FromStorage(storage : any) {
+		this.LoadPersonalityStats(storage);
+		
+		// Load flags
+		this.LoadFlags(storage);
+	}
+	
+	ToStorage() {
+		var storage : any = {
+			
+		};
+		
+		this.SavePersonalityStats(storage);
+		this.SaveFlags(storage);
+		
+		return storage;
+	}	
+}
+
+
+
 
 // TODO
 TwinsScenes.Interact = function() {
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -144,7 +157,9 @@ TwinsScenes.TalkPrompt = function() {
 	let player = GAME().player;
 	let rigard = GAME().rigard;
 	let twins = GAME().twins;
-	var parse = {
+	let terry = GAME().terry;
+	
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -217,4 +232,4 @@ TwinsScenes.TalkPrompt = function() {
 	Gui.SetButtonsFromList(options, true, TwinsScenes.Interact);
 }
 
-export { Twins, TwinsScenes };
+export { TwinsScenes };

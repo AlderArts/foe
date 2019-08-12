@@ -71,7 +71,7 @@ LucilleScenes.Themerooms = function() {
 	let fireblossom = GAME().fireblossom;
 	let lucille = GAME().lucille;
 
-	var parse = {
+	var parse : any = {
 		playername: player.name,
 		sirmadam: player.mfFem("sir", "madam")
 	};

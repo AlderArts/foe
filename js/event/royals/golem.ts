@@ -15,128 +15,125 @@ import { Party } from '../../party';
 import { Encounter } from '../../combat';
 import { SetGameState, GameState } from '../../gamestate';
 import { Gui } from '../../gui';
-import { MoveToLocation } from '../../GAME';
+import { MoveToLocation, GAME, TimeStep, WORLD } from '../../GAME';
 import { BodyPartType } from '../../body/bodypart';
 import { Sex } from '../../entity-sex';
 import { Orifice } from '../../body/orifice';
 import { LowerBodyType } from '../../body/body';
+import { GolemFlags } from './golem-flags';
+import { Abilities } from '../../abilities';
+import { WeaponsItems } from '../../items/weapons';
+import { ArmorItems } from '../../items/armor';
+import { JeanneScenes } from './jeanne';
 
-let GolemScenes = {};
-GolemScenes.State = {
-	NotMet       : 0,
-	Met_ran      : 1,
-	Lost         : 2,
-	Won_noLoss   : 3,
-	Won_prevLoss : 4,
-	Rebuilt      : 5
-};
+let GolemScenes : any = {};
 
 
-function GolemBoss(storage) {
-	BossEntity.call(this);
-	this.ID = "golem";
-	
-	this.avatar.combat     = Images.golemboss;
-	
-	this.name              = "Golem";
-	this.monsterName       = "the golem";
-	this.MonsterName       = "The golem";
-	
-	// TODO Stats
-	
-	this.maxHp.base        = 800;
-	this.maxSp.base        = 250;
-	this.maxLust.base      = 100;
-	// Main stats
-	this.strength.base     = 40;
-	this.stamina.base      = 30;
-	this.dexterity.base    = 20;
-	this.intelligence.base = 5;
-	this.spirit.base       = 8;
-	this.libido.base       = 30;
-	this.charisma.base     = 20;
-	
-	this.elementDef.dmg[Element.mFire]    =  0.5;
-	this.elementDef.dmg[Element.mIce]     =  0.5;
-	this.elementDef.dmg[Element.mThunder] =  0.5;
-	this.elementDef.dmg[Element.mEarth]   =   -1;
-	
-	this.level             = 10;
-	this.sexlevel          = 2;
-	
-	this.combatExp         = 100;
-	this.coinDrop          = 500;
-	
-	this.body              = new Body(this);
-	
-	this.body.SetRace(Race.Demon);
-	
-	this.body.SetBodyColor(Color.black);
-	
-	this.body.SetEyeColor(Color.red);
-	
-	this.flags["Met"] = GolemScenes.State.NotMet;
+export class GolemBoss extends BossEntity {
+	constructor(storage? : any) {
+		super();
 
-	// Set hp and mana to full
-	this.SetLevelBonus();
-	this.RestFull();
+		this.ID = "golem";
+		
+		this.avatar.combat     = Images.golemboss;
+		
+		this.name              = "Golem";
+		this.monsterName       = "the golem";
+		this.MonsterName       = "The golem";
+		
+		// TODO Stats
+		
+		this.maxHp.base        = 800;
+		this.maxSp.base        = 250;
+		this.maxLust.base      = 100;
+		// Main stats
+		this.strength.base     = 40;
+		this.stamina.base      = 30;
+		this.dexterity.base    = 20;
+		this.intelligence.base = 5;
+		this.spirit.base       = 8;
+		this.libido.base       = 30;
+		this.charisma.base     = 20;
+		
+		this.elementDef.dmg[Element.mFire]    =  0.5;
+		this.elementDef.dmg[Element.mIce]     =  0.5;
+		this.elementDef.dmg[Element.mThunder] =  0.5;
+		this.elementDef.dmg[Element.mEarth]   =   -1;
+		
+		this.level             = 10;
+		this.sexlevel          = 2;
+		
+		this.combatExp         = 100;
+		this.coinDrop          = 500;
+		
+		this.body              = new Body(this);
+		
+		this.body.SetRace(Race.Demon);
+		
+		this.body.SetBodyColor(Color.black);
+		
+		this.body.SetEyeColor(Color.red);
+		
+		this.flags["Met"] = GolemFlags.State.NotMet;
 
-	if(storage) this.FromStorage(storage);
+		// Set hp and mana to full
+		this.SetLevelBonus();
+		this.RestFull();
+
+		if(storage) this.FromStorage(storage);
+	}
+
+	//TODO
+	DropTable() {
+		var drops = [];
+		drops.push({ it: WeaponsItems.MageStaff });
+		drops.push({ it: ArmorItems.MageRobes });
+		return drops;
+	}
+
+	FromStorage(storage : any) {
+		// Personality stats
+		
+		// Load flags
+		this.LoadFlags(storage);
+	}
+
+	ToStorage() {
+		var storage = {};
+		this.SaveFlags(storage);
+		
+		return storage;
+	}
+
+	Act(encounter : any, activeChar : any) {
+		// TODO: AI!
+		Text.Add(this.NameDesc() + " shuffles around cumbersomely.");
+		Text.NL();
+		
+		// Pick a random target
+		var t = this.GetSingleTarget(encounter, activeChar);
+		
+		
+		var choice = Math.random();
+		if(choice < 0.2 && Abilities.Physical.Bash.enabledCondition(encounter, this))
+			Abilities.Physical.Bash.Use(encounter, this, t);
+		else if(choice < 0.4 && Abilities.Physical.CrushingStrike.enabledCondition(encounter, this))
+			Abilities.Physical.CrushingStrike.Use(encounter, this, t);
+		else if(choice < 0.6 && Abilities.Physical.GrandSlam.enabledCondition(encounter, this))
+			Abilities.Physical.GrandSlam.Use(encounter, this, GAME().party);
+		else
+			Abilities.Attack.Use(encounter, this, t);
+	}
 }
-GolemBoss.prototype = new BossEntity();
-GolemBoss.prototype.constructor = GolemBoss;
-
-//TODO
-GolemBoss.prototype.DropTable = function() {
-	var drops = [];
-	drops.push({ it: Items.Weapons.MageStaff });
-	drops.push({ it: Items.Armor.MageRobes });
-	return drops;
-}
-
-GolemBoss.prototype.FromStorage = function(storage) {
-	// Personality stats
-	
-	// Load flags
-	this.LoadFlags(storage);
-}
-
-GolemBoss.prototype.ToStorage = function() {
-	var storage = {};
-	this.SaveFlags(storage);
-	
-	return storage;
-}
-
-GolemBoss.prototype.Act = function(encounter, activeChar) {
-	// TODO: AI!
-	Text.Add(this.NameDesc() + " shuffles around cumbersomely.");
-	Text.NL();
-	
-	// Pick a random target
-	var t = this.GetSingleTarget(encounter, activeChar);
-	
-	
-	var choice = Math.random();
-	if(choice < 0.2 && Abilities.Physical.Bash.enabledCondition(encounter, this))
-		Abilities.Physical.Bash.Use(encounter, this, t);
-	else if(choice < 0.4 && Abilities.Physical.CrushingStrike.enabledCondition(encounter, this))
-		Abilities.Physical.CrushingStrike.Use(encounter, this, t);
-	else if(choice < 0.6 && Abilities.Physical.GrandSlam.enabledCondition(encounter, this))
-		Abilities.Physical.GrandSlam.Use(encounter, this, party);
-	else
-		Abilities.Attack.Use(encounter, this, t);
-}
-
 
 GolemScenes.FirstApproach = function() {
 	let party : Party = GAME().party;
 	let golem = GAME().golem;
-	var parse = {
+	var parse : any = {
 		s : party.Num() > 1 ? "s" : ""
 	};
 	
-	golem.flags["Met"] = GolemScenes.State.Met_ran;
+	golem.flags["Met"] = GolemFlags.State.Met_ran;
 	
 	Text.Clear();
 	Text.Add("You apprehensively approach the ancient tower, a structure that appears to have stood in this spot for ages. From the crumbling stone, you’d guess it is much older than the walls surrounding the royal grounds, and perhaps older than the castle itself. It is somewhat surprising that it has been allowed to fall into such disrepair, considering the neat appearance of the surrounding area.", parse);
@@ -160,7 +157,9 @@ GolemScenes.FirstApproach = function() {
 
 GolemScenes.FightPrompt = function() {
 	let golem = GAME().golem;
-	var parse = {};
+	let world = WORLD();
+
+	var parse : any = {};
 	//[Fight!][Leave]
 	var options = new Array();
 	options.push({ nameStr : "Fight!",
@@ -207,7 +206,7 @@ GolemScenes.OnWin = function() {
 	let party : Party = GAME().party;
 	let golem = GAME().golem;
 	let kiakai = GAME().kiakai;
-	var parse = {
+	var parse : any = {
 		name       : function() { return kiakai.name; },
 		hisher     : function() { return kiakai.hisher(); },
 		playername : player.name
@@ -219,7 +218,7 @@ GolemScenes.OnWin = function() {
 		
 		Text.Clear();
 		Text.Add("With a final shudder, the golem staggers back, unable to withstand any more punishment. As the magic that holds it together dissipates, the automaton cracks apart, crumbling into a pile of rubble.", parse);
-		if(golem.flags["Met"] == GolemScenes.State.Lost)
+		if(golem.flags["Met"] == GolemFlags.State.Lost)
 			Text.Add(" You are slightly disappointed that the golem didn’t assume its other form, robbing you of the opportunity to return the favor.", parse);
 		Text.Add(" Behind it, the dense darkness filling the interior of the tower lifts, revealing a number of strange devices and a narrow staircase leading to the upper floors.", parse);
 		Text.NL();
@@ -250,12 +249,12 @@ GolemScenes.OnWin = function() {
 		
 		TimeStep({minute: 30});
 		
-		if(golem.flags["Met"] == GolemScenes.State.Lost)
-			golem.flags["Met"] = GolemScenes.State.Won_prevLoss;
+		if(golem.flags["Met"] == GolemFlags.State.Lost)
+			golem.flags["Met"] = GolemFlags.State.Won_prevLoss;
 		else
-			golem.flags["Met"] = GolemScenes.State.Won_noLoss;
+			golem.flags["Met"] = GolemFlags.State.Won_noLoss;
 		
-		Gui.NextPrompt(Scenes.Jeanne.First);
+		Gui.NextPrompt(JeanneScenes.First);
 	});
 	Encounter.prototype.onVictory.call(this);
 }
@@ -264,7 +263,7 @@ GolemScenes.OnLoss = function() {
 	let player = GAME().player;
 	let party : Party = GAME().party;
 	let golem = GAME().golem;
-	var parse = {
+	var parse : any = {
 		name          : function() { return party.Get(1).name; }
 	};
 	
@@ -284,7 +283,7 @@ GolemScenes.OnLoss = function() {
 	
 	Text.Clear();
 	Text.Add("Unable to fight back any longer, you[comp] fall to the ground, defeated by the hulking golem. ", parse);
-	if(golem.flags["Met"] == GolemScenes.State.Lost) {
+	if(golem.flags["Met"] == GolemFlags.State.Lost) {
 		Text.Add("Having seen the process before doesn’t make it any less strange as the giant transforms into a perfect ebony Goddess, her body striped with pulsing red veins. Without a word or hint of an expression, the stunning animated statue closes in on you.", parse);
 	}
 	else {
@@ -313,7 +312,7 @@ GolemScenes.OnLoss = function() {
 	parse["tail"] = tail ? Text.Parse(", her tongue playing along[oneof] your tail[s]") : "";
 	Text.Add("Satisfied with her treatment of your front, the golem rolls you over on your stomach, her slick fingers trailing down your back[tail].", parse);
 	Text.NL();
-	if(golem.flags["Met"] == GolemScenes.State.Lost) {
+	if(golem.flags["Met"] == GolemFlags.State.Lost) {
 		Text.Add("Knowing what comes next, and that struggling against it is futile, you resign yourself to the obsidian golem’s wishes. Last time wasn’t too bad, you tell yourself.", parse);
 	}
 	else {
@@ -358,9 +357,9 @@ GolemScenes.OnLoss = function() {
 	Text.NL();
 	Text.Add("Just when you’ve grown accustomed to the steady tide of withdraw and thrust - resigned to the fact that the golem is much stronger than you and is going to have its way no matter what your opinions on the matter are - your lover abruptly changes her rhythm. Adjusting her stance, she plants her feet along your sides, grabbing hold of your [butt] with her iron grip. With new fervor, she starts relentlessly pounding your [target], her cock a blur as it pistons your insides.", parse);
 	Text.NL();
-	parse["again"] = golem.flags["Met"] == GolemScenes.State.Lost ? " again" : "";
+	parse["again"] = golem.flags["Met"] == GolemFlags.State.Lost ? " again" : "";
 	Text.Add("No longer capable of rational thought, you gasp for breath, moaning incoherently as the automaton fucks you. Why did you even come here[again]?", parse);
-	if(golem.flags["Met"] == GolemScenes.State.Lost)
+	if(golem.flags["Met"] == GolemFlags.State.Lost)
 		Text.Add(" Did you just return in order for her to dominate you? Are you really that much of a slut?", parse);
 	Text.Add(" Though her movements remain mechanical, she is adjusting her angle according to your response, shifting slightly until each thrust is a blinding shock of pleasure surging up your spine. You know you can’t last like this for long - you are so close to cumming...", parse);
 	Text.NL();
@@ -392,12 +391,12 @@ GolemScenes.OnLoss = function() {
 		Text.Add("Still feeling shaky, you gather up your things, making a futile attempt to clean yourself up before continuing your travels.", parse);
 		Text.Flush();
 		
-		golem.flags["Met"] = GolemScenes.State.Lost;
+		golem.flags["Met"] = GolemFlags.State.Lost;
 		
 		Gui.NextPrompt(function() {
-			MoveToLocation(world.loc.Rigard.Castle.Grounds);
+			MoveToLocation(WORLD().loc.Rigard.Castle.Grounds);
 		});
 	});
 }
 
-export { GolemBoss, GolemScenes };
+export { GolemScenes };

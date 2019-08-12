@@ -117,7 +117,7 @@ AlchemySpecial.Tigris.PushEffect(TF.ItemEffects.IncCha, {odds: 0.3, ideal: 25, m
 AlchemySpecial.Tigris.PushEffect(TF.ItemEffects.IncSta, {odds: 0.2, ideal: 40, max: 2});
 AlchemySpecial.Tigris.PushEffect(TF.ItemEffects.DecInt, {odds: 0.1, ideal: 25, max: 1});
 AlchemySpecial.Tigris.PushEffect(function(target : Entity) {
-	var parse = {
+	var parse : any = {
 		name: target.NameDesc(),
 		s: target == GAME().player ? "" : "s",
 		possessive: target.possessive(),
@@ -218,7 +218,7 @@ AlchemySpecial.Nagazm.Long  = function() { return "A bottle with a pink, bubbly 
 AlchemySpecial.Nagazm.recipe = [{it: IngredientItems.SnakeOil}, {it: IngredientItems.SnakeFang}, {it: IngredientItems.SnakeSkin}];
 // Effects
 AlchemySpecial.Nagazm.PushEffect(function(target : Entity) {
-	var parse = {
+	var parse : any = {
 		Poss : target.Possessive(),
 		legsDesc : function() { return target.LegsDesc(); },
 		s : target.body.legs.count > 1 ? "" : "s"
@@ -264,7 +264,7 @@ AlchemySpecial.Nagazm.PushEffect(function(target : Entity) {
 	// TODO: Other prerequisites? No testicles? Hermaphroditism?
 	var cocks = target.AllCocks();
 	if(cocks.length == 1 && Math.random() < 0.1) {
-		var parse = { Poss: target.Possessive(), cockDesc: cocks[0].Short()};
+		var parse : any = { Poss: target.Possessive(), cockDesc: cocks[0].Short()};
 		cocks.push(cocks[0].Clone());
 		Text.Add("[Poss] [cockDesc] splits in two identical dicks!", parse);
 		Text.NL();
@@ -297,7 +297,7 @@ AlchemySpecial.Taurico.Long  = function() { return "A bottle filled with a stran
 AlchemySpecial.Taurico.recipe = [{it: IngredientItems.HorseShoe}, {it: IngredientItems.CanisRoot}, {it: IngredientItems.Ramshorn}];
 // Effects
 AlchemySpecial.Taurico.PushEffect(function(target : Entity) {
-	var parse = {
+	var parse : any = {
 		Poss : target.Possessive(),
 		legsDesc : function() { return target.LegsDesc(); },
 		race : function() { return target.body.legs.race.qShort(); },

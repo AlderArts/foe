@@ -116,7 +116,7 @@ export class Layla extends Entity {
 	}
 
 	Update(step : number) {
-		Entity.prototype.Update.call(this, step);
+		super.Update(step);
 		this.farmTimer.Dec(step);
 	}
 

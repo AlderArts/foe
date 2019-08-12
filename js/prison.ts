@@ -63,7 +63,7 @@ export class PrisonMinigame {
 
 	//TODO
 	Tick() {
-		var parse = {
+		var parse : any = {
 
 		};
 

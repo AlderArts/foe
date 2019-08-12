@@ -161,7 +161,7 @@ export class LagonRegular extends BossEntity {
 	}
 
 	PhysDmgHP(encounter : any, caster : Entity, val : number) {
-		var parse = {
+		var parse : any = {
 			poss : caster.possessive()
 		};
 		
@@ -182,7 +182,7 @@ export class LagonRegular extends BossEntity {
 			return false;
 		}
 		else
-			return Entity.prototype.PhysDmgHP.call(this, encounter, caster, val);
+			return super.PhysDmgHP(encounter, caster, val);
 	}
 
 	//TODO
@@ -191,7 +191,7 @@ export class LagonRegular extends BossEntity {
 		// Pick a random target
 		var t = this.GetSingleTarget(enc, activeChar);
 
-		var parse = {
+		var parse : any = {
 			name   : this.name,
 			hisher : this.hisher(),
 			tName  : t.name,
@@ -332,7 +332,7 @@ export class LagonBrute extends BossEntity {
 		var targets = this.GetPartyTarget(encounter, activeChar);
 		var t = this.GetSingleTarget(encounter, activeChar);
 
-		var parse = {
+		var parse : any = {
 			
 		};
 

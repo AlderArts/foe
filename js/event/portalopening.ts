@@ -4,7 +4,7 @@ import { Gui } from "../gui";
 let PortalOpeningScenes : any = {};
 
 PortalOpeningScenes.Intro = function() {
-	var parse = {
+	var parse : any = {
 		
 	};
 	

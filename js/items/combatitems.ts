@@ -38,17 +38,17 @@ export class CombatItem extends Item {
 	
 	// Default messages
 	static _onDamage(ability : Ability, encounter : Encounter, caster : Entity, target : Entity, dmg : number) {
-		var parse = { tName : target.nameDesc() };
+		var parse : any = { tName : target.nameDesc() };
 		Text.Add("The attack hits [tName] for " + Text.Damage(dmg) + " damage!", parse);
 		Text.NL();
 	}
 	static _onMiss(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = { tName : target.nameDesc() };
+		var parse : any = { tName : target.nameDesc() };
 		Text.Add("The attack narrowly misses [tName], dealing no damage!", parse);
 		Text.NL();
 	}
 	static _onAbsorb(ability : Ability, encounter : Encounter, caster : Entity, target : Entity, dmg : number) {
-		var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s" };
+		var parse : any = { tName : target.NameDesc(), s : target.plural() ? "" : "s" };
 		Text.Add("[tName] absorb[s] the attack, gaining " + Text.Heal(dmg) + " health!", parse);
 		Text.NL();
 	}

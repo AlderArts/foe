@@ -117,7 +117,7 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 ForestLoc.Outskirts.enc.AddEnc(function() {
 	return function() {
 		let party : Party = GAME().party;
-		var parse = {
+		var parse : any = {
 			
 		};
 		Text.Clear();
@@ -135,7 +135,7 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 ForestLoc.Outskirts.enc.AddEnc(function() {
 	return function() {
 		let party : Party = GAME().party;
-		var parse = {
+		var parse : any = {
 			
 		};
 		Text.Clear();
@@ -197,7 +197,7 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 	return function() {
 		let burrows = GAME().burrows;
 		let party : Party = GAME().party;
-		var parse = {
+		var parse : any = {
 			
 		};
 		

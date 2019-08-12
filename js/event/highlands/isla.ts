@@ -6,7 +6,7 @@ import { TF } from '../../tf';
 import { AppendageType } from '../../body/appendage';
 import { Color } from '../../body/color';
 import { Time } from '../../time';
-import { WorldTime, MoveToLocation, GAME, TimeStep, WORLD } from '../../GAME';
+import { WorldTime, MoveToLocation, GAME, TimeStep, WORLD, StepToHour } from '../../GAME';
 import { Gui } from '../../gui';
 import { Text } from '../../text';
 import { Vagina } from '../../body/vagina';
@@ -14,11 +14,11 @@ import { Cock } from '../../body/cock';
 import { HipSize, LowerBodyType } from '../../body/body';
 import { Genitalia } from '../../body/genitalia';
 import { EncounterTable } from '../../encountertable';
-import { Asche } from '../asche';
 import { IslaFlags } from './isla-flags';
 import { PregnancyHandler, Womb } from '../../pregnancy';
 import { Party } from '../../party';
 import { Sex } from '../../entity-sex';
+import { AscheFlags } from '../asche-flags';
 
 let IslaScenes : any = {};
 
@@ -51,7 +51,7 @@ export class Isla extends Entity {
 	}
 	
 	static Available() {
-		return GAME().asche.flags["Tasks"] & Asche.Tasks.Spring_Visited;
+		return GAME().asche.flags["Tasks"] & AscheFlags.Tasks.Spring_Visited;
 	}
 	
 	Update(step : number) {
@@ -1967,7 +1967,6 @@ IslaScenes.Sex.PitchVaginalWall = function(parse : any, opts : any) {
 IslaScenes.Sex.PitchVaginalExit = function(parse : any, opts : any) {
 	let player = GAME().player;
 	let isla = GAME().isla;
-	let world = WORLD();
 
 	Text.Add("<i>“Oog… enough…”</i>", parse);
 	Text.NL();
@@ -2014,7 +2013,7 @@ IslaScenes.Sex.PitchVaginalExit = function(parse : any, opts : any) {
 	
 	isla.relation.IncreaseStat(100, 5);
 	
-	world.StepToHour(6);
+	StepToHour(6);
 	
 	Gui.NextPrompt();
 }

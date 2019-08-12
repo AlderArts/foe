@@ -100,7 +100,7 @@ export class Oasis {
 
 OasisScenes.CaravanShop = function(back : any) {
 	let oasis = GAME().oasis;
-	var parse = {
+	var parse : any = {
 		
 	};
 	

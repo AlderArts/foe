@@ -3,6 +3,7 @@
  * Define Asche
  * 
  */
+import * as _ from 'lodash';
 
 import { Entity } from '../entity';
 import { TasksScenes } from './asche-tasks';
@@ -13,110 +14,83 @@ import { Gui } from '../gui';
 import { GAME } from '../GAME';
 import { EncounterTable } from '../encountertable';
 import { DryadGladeFlags } from '../loc/glade-flags';
+import { AscheFlags } from './asche-flags';
+import { GlobalScenes } from './global';
+import { AccItems } from '../items/accessories';
+import { CombatItems } from '../items/combatitems';
+import { Party } from '../party';
+import { MagicShopScenes } from '../loc/rigard/magicshop';
 
-let AscheScenes = {
+let AscheScenes : any = {
 	Tasks : TasksScenes,
 	Sex   : SexScenes,
 };
 
-function Asche(storage) {
-	Entity.call(this);
-	this.ID = "asche";
-	
-	// Character stats
-	this.name = "Asche";
-	
-	this.body.DefFemale();
-	this.FirstBreastRow().size.base = 12.5;
-	this.Butt().buttSize.base = 6;
-	this.body.SetRace(Race.Jackal);
-	
-	this.FirstVag().virgin = false;
-	this.Butt().virgin = false;
-	
-	this.flags["Met"]   = Asche.Met.NotMet;
-	this.flags["Talk"]  = 0; //Bitmask
-	this.flags["Magic"] = 0;
-	this.flags["Tasks"] = 0; //Bitmask
-	
-	if(storage) this.FromStorage(storage);
-}
-Asche.prototype = new Entity();
-Asche.prototype.constructor = Asche;
+export class Asche extends Entity {
+	constructor(storage? : any) {
+		super();
 
-Asche.FortuneCost = function() {
-	return 10;
-}
+		this.ID = "asche";
+		
+		// Character stats
+		this.name = "Asche";
+		
+		this.body.DefFemale();
+		this.FirstBreastRow().size.base = 12.5;
+		this.Butt().buttSize.base = 6;
+		this.body.SetRace(Race.Jackal);
+		
+		this.FirstVag().virgin = false;
+		this.Butt().virgin = false;
+		
+		this.flags["Met"]   = AscheFlags.Met.NotMet;
+		this.flags["Talk"]  = 0; //Bitmask
+		this.flags["Magic"] = 0;
+		this.flags["Tasks"] = 0; //Bitmask
+		
+		if(storage) this.FromStorage(storage);
+	}
 
-Asche.Met = {
-	NotMet : 0,
-	Met    : 1
-};
-Asche.Talk = {
-	Shop    : 1,
-	Herself : 2,
-	Sister  : 4,
-	Stock   : 8,
-	Box     : 16,
-	BoxDoll : 32
-};
-Asche.Magic = {
-	Components : 1,
-	Rituals    : 2,
-	Authority  : 3,
-	Spirits    : 4
-};
-Asche.Tasks = {
-	Ginseng_Started : 1,
-	Ginseng_Failed : 2,
-	Ginseng_Succeeded : 4,
-	Ginseng_Finished : 8,
-	Nightshade_Started  : 16,
-	Nightshade_Aquilius : 32,
-	Nightshade_Succeeded : 64,
-	Nightshade_Finished : 128,
-	Spring_Started : 256,
-	Spring_Visited : 512,
-	Spring_Finished : 1024
-};
+	static FortuneCost() {
+		return 10;
+	}
 
-Asche.prototype.MagicBoxCost = function() {
-	return 100;
+	MagicBoxCost() {
+		return 100;
+	}
+
+	FromStorage(storage : any) {
+		this.LoadPersonalityStats(storage);
+		
+		// Load flags
+		this.LoadFlags(storage);
+		this.LoadSexFlags(storage);
+	}
+
+	ToStorage() {
+		var storage : any = {};
+		
+		this.SavePersonalityStats(storage);
+		
+		this.SaveFlags(storage);
+		this.SaveSexFlags(storage);
+		
+		return storage;
+	}
+
 }
 
-Asche.prototype.Update = function(step) {
-	Entity.prototype.Update.call(this, step);
-}
-
-Asche.prototype.FromStorage = function(storage) {
-	this.LoadPersonalityStats(storage);
-	
-	// Load flags
-	this.LoadFlags(storage);
-	this.LoadSexFlags(storage);
-}
-
-Asche.prototype.ToStorage = function() {
-	var storage = {};
-	
-	this.SavePersonalityStats(storage);
-	
-	this.SaveFlags(storage);
-	this.SaveSexFlags(storage);
-	
-	return storage;
-}
 
 AscheScenes.FirstEntry = function() {
 	let player = GAME().player;
 	let asche = GAME().asche;
 
-	var parse = {
+	var parse : any = {
 		heshe : player.mfFem("he","she"),
 		handsomepretty : player.mfFem("handsome", "pretty")
 	};
 	
-	asche.flags["Met"] = Asche.Met.Met;
+	asche.flags["Met"] = AscheFlags.Met.Met;
 	
 	Text.Clear();
 	Text.Add("A gentle jingle of chimes greets you as you push open the hardwood door, followed by a strong, heady aroma of incense that’s practically overpowering. Still, you forge ahead into the small store, and are greeted by the proprietor behind the counter, a jackal-morph of slender build. Her large ears perk up as she sees you, and she adjusts her clothing - an exotic-looking garment consisting of a white drape, mostly wrapped about her waist and with one end hung loosely over a shoulder, baring her furry midriff. Her dark eyes look as if she’s gone way overboard with the eyeliner and shadow, and she’s adorned from head to toe in jewelery - some of it tasteful, but most of it absolutely tacky, with bangles, earrings, and all.", parse);
@@ -147,8 +121,9 @@ AscheScenes.FirstEntry = function() {
 AscheScenes.Prompt = function() {
 	let player = GAME().player;
 	let asche = GAME().asche;
+	let rigard = GAME().rigard;
 
-	var parse = {
+	var parse : any = {
 		handsomepretty : player.mfFem("handsome", "pretty"),
 		heshe: player.mfFem("he", "she"),
 		hisher: player.mfFem("his", "her"),
@@ -273,7 +248,7 @@ AscheScenes.Prompt = function() {
 
 AscheScenes.Appearance = function() {
 	let player = GAME().player;
-	var parse = {
+	var parse : any = {
 		handsomepretty : player.mfFem("handsome", "pretty")
 	};
 	
@@ -292,7 +267,7 @@ AscheScenes.TalkPrompt = function() {
 	let player = GAME().player;
 	let asche = GAME().asche;
 
-	var parse = {
+	var parse : any = {
 		handsomepretty : player.mfFem("handsome", "pretty"),
 		heshe: player.mfFem("he", "she"),
 		hisher: player.mfFem("his", "her"),
@@ -324,7 +299,7 @@ AscheScenes.TalkPrompt = function() {
 			Text.Add("Well, from a business standpoint, you suppose it is. From a more personal point of view, though, it’s hardly enough. Nevertheless, it’s probably not good to press her for too much in one go…", parse);
 			Text.Flush();
 			
-			asche.flags["Talk"] |= Asche.Talk.Shop;
+			asche.flags["Talk"] |= AscheFlags.Talk.Shop;
 			
 			AscheScenes.TalkPrompt();
 		}, enabled : true
@@ -358,7 +333,7 @@ AscheScenes.TalkPrompt = function() {
 			Text.Add("<i>“Soon enough, Asche is having enough money to rent out small place in merchants’ district - rent of this place was very much cheaper back then, so easier to do. When she is earning enough money later on, she is buying place and making it her own. Is very nice story, no?”</i>", parse);
 			Text.Flush();
 			
-			asche.flags["Talk"] |= Asche.Talk.Herself;
+			asche.flags["Talk"] |= AscheFlags.Talk.Herself;
 			
 			AscheScenes.TalkPrompt();
 		}, enabled : true
@@ -383,10 +358,10 @@ AscheScenes.TalkPrompt = function() {
 			Text.Add("<i>“Nevertheless, if you are finding in your travels shop much like Asche’s, and also owner who looks like Asche, only she has black and silver fur instead… customer is not to be buying anything and leaving immediately. But there is little to fear from Asche, good customer. Asche is a nice girl, and knows not to salt earth. None of Asche’s merchandise will harm you - unless you mean to do evil with it.”</i>", parse);
 			Text.Flush();
 			
-			asche.flags["Talk"] |= Asche.Talk.Sister;
+			asche.flags["Talk"] |= AscheFlags.Talk.Sister;
 			
 			AscheScenes.TalkPrompt();
-		}, enabled : (asche.flags["Talk"] & Asche.Talk.Shop) && (asche.flags["Talk"] & Asche.Talk.Herself)
+		}, enabled : (asche.flags["Talk"] & AscheFlags.Talk.Shop) && (asche.flags["Talk"] & AscheFlags.Talk.Herself)
 	});
 	options.push({ nameStr : "Stock",
 		tooltip : "Where does she get all the stuff she sells?",
@@ -401,7 +376,7 @@ AscheScenes.TalkPrompt = function() {
 			Text.Add("<i>“As for potions, all are brewed by Asche. Simple ones anyone who studies can make, but some are Asche’s special recipe and she is not letting such secrets slip easily.”</i> With that, the jackaless clears her throat and gestures at her store. <i>“Asche has not stayed in business for so long by being stupid or careless; she is having many loyal customers who be relying on her not to make mistake.”</i>", parse);
 			Text.Flush();
 			
-			asche.flags["Talk"] |= Asche.Talk.Stock;
+			asche.flags["Talk"] |= AscheFlags.Talk.Stock;
 			
 			AscheScenes.TalkPrompt();
 		}, enabled : true
@@ -453,7 +428,7 @@ AscheScenes.Lessons = function() {
 	let player = GAME().player;
 	let asche = GAME().asche;
 
-	var parse = {
+	var parse : any = {
 		handsomepretty : player.mfFem("handsome", "pretty"),
 		heshe: player.mfFem("he", "she"),
 		hisher: player.mfFem("his", "her"),
@@ -462,7 +437,7 @@ AscheScenes.Lessons = function() {
 	
 	Text.Clear();
 	// Lesson one - Components
-	if(asche.flags["Magic"] < Asche.Magic.Components) {
+	if(asche.flags["Magic"] < AscheFlags.Magic.Components) {
 		Text.Add("You’d like to discuss the nature of magic with her. It seems quite different from what is usually practiced on Eden.", parse);
 		Text.NL();
 		Text.Add("<i>“Oh-ho,”</i> the jackaless replies, eyeing you with a raised eyebrow, her tail swishing from side to side. <i>“Customer is wanting to know the secrets of highlander witch doctors, herb women, and shamans? Is taking many years to truly understand, as well as good memory; Asche spent her whole time as girl learning basics of such magic.”</i>", parse);
@@ -483,13 +458,13 @@ AscheScenes.Lessons = function() {
 		Text.NL();
 		Text.Add("<i>“Rituals is also being important in working of highlander magic, but maybe is discussion best saved for another time, is it not? Asche’s tongue is getting dry from so much talking, maybe is wanting something to drink.”</i> The jackaless chuckles.", parse);
 		
-		asche.flags["Magic"] = Asche.Magic.Components;
+		asche.flags["Magic"] = AscheFlags.Magic.Components;
 		
 		Text.Flush();
 		AscheScenes.TalkPrompt();
 	}
 	// Lesson two - Ritual
-	else if((asche.flags["Magic"] < Asche.Magic.Rituals) && (asche.flags["Tasks"] >= Asche.Tasks.Ginseng_Finished)) {
+	else if((asche.flags["Magic"] < AscheFlags.Magic.Rituals) && (asche.flags["Tasks"] >= AscheFlags.Tasks.Ginseng_Finished)) {
 		Text.Add("<i>“Now that customer has had chance to see shamanistic power for [himher]self, Asche is thinking that maybe [heshe] is ready for deeper explanation. But… really, this jackaless is curious - she cannot be teaching customer to be doing highlander magic, so why is customer being asking so many questions?”</i>", parse);
 		Text.NL();
 		Text.Add("Curiosity, nothing more.", parse);
@@ -521,7 +496,7 @@ AscheScenes.Lessons = function() {
 			Text.NL();
 			Text.Add("<i>“Now, Asche has said enough, and has shop to tend to. Maybe you buy something to make up for Asche telling you long grandmother story, yes?”</i>", parse);
 			
-			asche.flags["Magic"] = Asche.Magic.Rituals;
+			asche.flags["Magic"] = AscheFlags.Magic.Rituals;
 			
 			Text.Flush();
 			AscheScenes.TalkPrompt();
@@ -529,7 +504,7 @@ AscheScenes.Lessons = function() {
 	}
 	// Lesson three - Authority
 	//TODO Act 1?
-	else if(!Scenes.Global.PortalsOpen() && (asche.flags["Magic"] < Asche.Magic.Authority) && (asche.flags["Tasks"] >= Asche.Tasks.Nightshade_Finished)) {
+	else if(!GlobalScenes.PortalsOpen() && (asche.flags["Magic"] < AscheFlags.Magic.Authority) && (asche.flags["Tasks"] >= AscheFlags.Tasks.Nightshade_Finished)) {
 		Text.Add("<i>“Today, Asche would be liking to be talking about what kinds of magic can be done, and what is to not be done. This jackaless is admitting that maybe she should have been making this her very first lesson to customer, but it was slipping her mind…</i>", parse);
 		Text.NL();
 		Text.Add("<i>“Never mind. She can be making up for lost time right now.”</i>", parse);
@@ -554,13 +529,13 @@ AscheScenes.Lessons = function() {
 		Text.NL();
 		Text.Add("<i>“Good, that is one thing off this jackaless’ conscience.”</i> Asche huffs, warm breath jetting from her muzzle, and pulls herself away from you. <i>“Do not be saying that Asche is not giving warning… and that is being ending today’s lesson. Is an important one, so Asche is hoping customer is learning it well.”</i>", parse);
 		
-		asche.flags["Magic"] = Asche.Magic.Authority;
+		asche.flags["Magic"] = AscheFlags.Magic.Authority;
 		
 		Text.Flush();
 		AscheScenes.TalkPrompt();
 	}
 	// Lesson Four - Spirits
-	else if((asche.flags["Magic"] < Asche.Magic.Spirits) && (asche.flags["Tasks"] >= Asche.Tasks.Spring_Finished) && Scenes.Global.DefeatedOrchid()) {
+	else if((asche.flags["Magic"] < AscheFlags.Magic.Spirits) && (asche.flags["Tasks"] >= AscheFlags.Tasks.Spring_Finished) && GlobalScenes.DefeatedOrchid()) {
 		Text.Add("Asche nods and traces a finger on the counter. <i>“For today’s lesson with customer, Asche is wishing to be broaching the subject of spirits.”</i>", parse);
 		Text.NL();
 		Text.Add("Right. Spirits. That’s how you ended up in this mess in the first place - the gem aside, of course. Aria, Uru…", parse);
@@ -595,7 +570,7 @@ AscheScenes.Lessons = function() {
 		Text.NL();
 		Text.Add("<i>“Is as much as this jackaless can be asking for, and that is concluding today’s lesson. If customer is taking only one thing away from Asche’s words, she is asking customer to remember to be treating accompanying spirits with respect. Much will be owed them in future.”</i>", parse);
 		
-		asche.flags["Magic"] = Asche.Magic.Spirits;
+		asche.flags["Magic"] = AscheFlags.Magic.Spirits;
 		
 		Text.Flush();
 		AscheScenes.TalkPrompt();
@@ -613,8 +588,14 @@ AscheScenes.Lessons = function() {
 
 AscheScenes.FortuneTellingPrompt = function() {
 	let player = GAME().player;
+	let kiakai = GAME().kiakai;
+	let terry = GAME().terry;
+	let layla = GAME().layla;
+	let party : Party = GAME().party;
+	let rigard = GAME().rigard;
+	let glade = GAME().glade;
 
-	var parse = {
+	var parse : any = {
 		handsomepretty : player.mfFem("handsome", "pretty"),
 		HeShe: player.mfFem("He", "She"),
 		heshe: player.mfFem("he", "she"),
@@ -797,7 +778,7 @@ What? Why?
 #converge
 */
 			// SECOND PHASE
-			if(Scenes.Global.PortalsOpen()) {
+			if(GlobalScenes.PortalsOpen()) {
 				scenes.AddEnc(function() {
 					Text.Add("The jackaless throws you a suspicious glare. <i>“All muddy. Customer is messing things up! Things Asche saw before are still being there, still connected, but in different way… is confusing.”</i>", parse);
 					Text.NL();
@@ -868,7 +849,7 @@ AscheScenes.MagicBoxPrompt = function() {
 	let player = GAME().player;
 	let asche = GAME().asche;
 
-	var parse = {
+	var parse : any = {
 		coin : Text.NumToText(asche.MagicBoxCost()),
 		heshe : player.mfFem("he", "she"),
 		himher : player.mfFem("him", "her")
@@ -876,7 +857,7 @@ AscheScenes.MagicBoxPrompt = function() {
 	
 	//[Explanation][Grab][Back]
 	var options = new Array();
-	if(asche.flags["Talk"] & Asche.Talk.Box) {
+	if(asche.flags["Talk"] & AscheFlags.Talk.Box) {
 		options.push({ nameStr : "Grab",
 			tooltip : "Stick your hand into limbo and see what you can draw out.",
 			func : function() {
@@ -895,7 +876,7 @@ AscheScenes.MagicBoxPrompt = function() {
 			Text.Add("<i>“To be frank, box is Asche’s most popular part of shop, even if it does not directly bring in that much money. People come in to see what bin holds, end up buying things off shelves. Maybe good customer might want to try it out [himher]self?” The jackal-morph giggles. <i>“Perhaps fortune will be smiling today - as saying goes, does customer feel lucky? Well, does [heshe]?”</i>", parse);
 			Text.Flush();
 			
-			asche.flags["Talk"] |= Asche.Talk.Box;
+			asche.flags["Talk"] |= AscheFlags.Talk.Box;
 			
 			AscheScenes.MagicBoxPrompt();
 		}, enabled : true
@@ -913,7 +894,7 @@ AscheScenes.MagicBoxGrab = function() {
 	let asche = GAME().asche;
 	let rigard = GAME().rigard;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -938,7 +919,7 @@ AscheScenes.MagicBoxWin = function() {
 	let party : Party = GAME().party;
 	let asche = GAME().asche;
 
-	var parse = {
+	var parse : any = {
 		himher : player.mfFem("him", "her"),
 		heshe : player.mfFem("he", "she")
 	};
@@ -948,7 +929,7 @@ AscheScenes.MagicBoxWin = function() {
 		Text.Add("Your hand closes around something distinctly bottle-shaped - pulling it out, you find that it is indeed a bottle. Inside, you find a potion, and though the bottle looks old and dusty, it should still be drinkable. You stow it away with your other belongings.", parse);
 		Text.NL();
 		
-		var item = _.sample(Scenes.Rigard.MagicShop.Shop.potions);
+		var item = _.sample(MagicShopScenes.Shop.potions);
 		
 		party.Inv().AddItem(item);
 		
@@ -964,7 +945,7 @@ AscheScenes.MagicBoxWin = function() {
 		Text.Add("It seems a little ironic that you could’ve bought her stock off the shelves instead of going to such trouble. Still, you guess that it could have been a worse deal, and stow away your new acquisition.", parse);
 		Text.NL();
 		
-		var item = _.sample(Scenes.Rigard.MagicShop.Shop.consumables);
+		var item = _.sample(MagicShopScenes.Shop.consumables);
 		
 		party.Inv().AddItem(item);
 		
@@ -977,7 +958,7 @@ AscheScenes.MagicBoxWin = function() {
 		Text.NL();
 		Text.Add("Putting away the reagents and throwing the pouch back into the bin, you turn to other matters.<br>", parse);
 		_.times(_.random(4,10), function() {
-			var item = _.sample(Scenes.Rigard.MagicShop.Shop.ingredients);
+			var item = _.sample(MagicShopScenes.Shop.ingredients);
 			
 			party.Inv().AddItem(item);
 			
@@ -1003,10 +984,10 @@ AscheScenes.MagicBoxWin = function() {
 		
 		party.coin += asche.MagicBoxCost();
 		
-		asche.flags["Talk"] |= Asche.Talk.BoxDoll;
+		asche.flags["Talk"] |= AscheFlags.Talk.BoxDoll;
 		
 		AscheScenes.MagicBoxRepeat();
-	}, 1.0, function() { return !(asche.flags["Talk"] & Asche.Talk.BoxDoll); });
+	}, 1.0, function() { return !(asche.flags["Talk"] & AscheFlags.Talk.BoxDoll); });
 	scenes.AddEnc(function() {
 		Text.Add("You dig around for a bit in the darkness, not really finding anything to your liking, but eventually, your fingers close about something cold and slender, and you pull it out. It’s a thin glass vial of bluish liquid labeled “Lewton’s Concentrate”, but the potion is clearly old and stale; who knows what might have happened to it after sitting around for so long. Best to decide what to do with it while there’s trained help on hand - do you drink it?", parse);
 		Text.Flush();
@@ -1078,7 +1059,7 @@ AscheScenes.MagicBoxWin = function() {
 			func : function() {
 				Text.Clear();
 				Text.Add("Books are books, wherever you find them. Asche coughs loudly when you elect to keep the salacious novel on you, but keeps any comments to herself as you pack it away. Maybe it’ll come in useful later on… or at the very least, keep you company on those cold, lonely nights.", parse);
-				party.Inv().AddItem(Items.Accessories.TrashyNovel);
+				party.Inv().AddItem(AccItems.TrashyNovel);
 				
 				AscheScenes.MagicBoxRepeat();
 			}, enabled : true
@@ -1095,7 +1076,7 @@ AscheScenes.MagicBoxWin = function() {
 		Gui.SetButtonsFromList(options, false, null);
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
-		if(party.Inv().QueryNum(Items.Combat.GlassSword) >= 3) {
+		if(party.Inv().QueryNum(CombatItems.GlassSword) >= 3) {
 			Text.Add("Your hand closes about the familiar shape of a hilt, cool to the touch, and your heart skips a beat. However, the thing wrests itself from your grasp at the last moment with a savage twist, slipping back into the swirling darkness of the box.", parse);
 			Text.NL();
 			Text.Add("What? You stand there for a moment, cursing your luck, then remember that you already carry a number of glass swords with you at the moment. Perhaps they don’t like being cooped up together in one place - it might be best to get rid of one or two of them before trying to acquire another.", parse);
@@ -1112,7 +1093,7 @@ AscheScenes.MagicBoxWin = function() {
 			Text.Add("You thank the jackaless for her advice and put the glass sword away carefully. It looks sturdy enough that a simple jostle probably won’t break it, but best not to take any chances.", parse);
 			Text.NL();
 			
-			party.Inv().AddItem(Items.Combat.GlassSword);
+			party.Inv().AddItem(CombatItems.GlassSword);
 			
 			Text.Add("<b>Acquired a glass sword!</b>", parse);
 		}
@@ -1123,7 +1104,7 @@ AscheScenes.MagicBoxWin = function() {
 }
 
 AscheScenes.MagicBoxLoss = function() {
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -1185,7 +1166,7 @@ AscheScenes.MagicBoxRepeat = function() {
 	let party : Party = GAME().party;
 	let asche = GAME().asche;
 
-	var parse = {
+	var parse : any = {
 		coin : Text.NumToText(asche.MagicBoxCost())
 	};
 	
@@ -1214,4 +1195,4 @@ AscheScenes.MagicBoxRepeat = function() {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-export { Asche, AscheScenes };
+export { AscheScenes };

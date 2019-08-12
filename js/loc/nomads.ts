@@ -67,7 +67,7 @@ MazeTest.AddRoom(2,5);
 MazeTest.AddRoom(4,5);
 MazeTest.AddRoom(5,5);
 MazeTest.GetRoom(5,5).description = function() {
-	var parse = {};
+	var parse : any = {};
 	
 	Text.Add("Sample desc", parse);
 	Text.NL();

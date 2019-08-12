@@ -315,7 +315,7 @@ export class Terry extends Entity {
 	Interact(switchSpot : boolean) {
 		let terry = GAME().terry;
 	
-		var parse = {
+		var parse : any = {
 			foxvixen : terry.mfPronoun("fox", "vixen"),
 			HeShe   : terry.HeShe(),
 			heshe   : terry.heshe(),

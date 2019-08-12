@@ -18,7 +18,7 @@ RunAb.enabledCondition = function(encounter, caster) {
 	return encounter.canRun;
 }
 RunAb.CastInternal = function(encounter, caster) {
-	var parse = {
+	var parse : any = {
 		Name : caster.NameDesc(),
 		y : caster.plural() ? "y" : "ies",
 		was : caster.plural() ? "were" : "was"

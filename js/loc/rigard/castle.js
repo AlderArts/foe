@@ -10,6 +10,7 @@ import { Gui } from '../../gui';
 import { VaughnFlags } from '../../event/outlaws/vaughn-flags';
 import { TerryFlags } from '../../event/terry-flags';
 import { RigardFlags } from './rigard-flags';
+import { AscheFlags } from '../../event/asche-flags';
 
 
 let CastleLoc = {
@@ -57,7 +58,7 @@ CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.Elodie;}, 1.0, func
 CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.RoyalGetaway;});
 CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.MagicalJackal;}, 1.0, function() {
 	let asche = GAME().asche;
-	return asche.flags["Met"] >= Asche.Met.Met &&
+	return asche.flags["Met"] >= AscheFlags.Met.Met &&
 		!WorldTime().IsDay();
 });
 CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.PalaceParade;}, 2.0, function() {
@@ -138,7 +139,7 @@ CastleLoc.Grounds.events.push(new Link(
 NobleScenes.Parkland = function() {
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -174,7 +175,7 @@ NobleScenes.Parkland = function() {
 }
 
 NobleScenes.JeannesTower = function() {
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -208,7 +209,7 @@ NobleScenes.TheDistrict = function() {
 	let player = GAME().player;
 	let party : Party = GAME().party;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -265,7 +266,7 @@ NobleScenes.TheDistrict = function() {
 NobleScenes.MeetingMajid = function() {
 	let rigard = GAME().rigard;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -297,7 +298,7 @@ NobleScenes.MeetingMajid = function() {
 NobleScenes.GuardPatrol = function() {
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -327,7 +328,7 @@ NobleScenes.AlmsForThePoor = function() {
 	let party : Party = GAME().party;
 	let rigard = GAME().rigard;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -433,7 +434,7 @@ NobleScenes.Elodie = function() {
 	let player = GAME().player;
 	let rigard = GAME().rigard;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -492,7 +493,7 @@ NobleScenes.Elodie = function() {
 }
 
 NobleScenes.RoyalGetaway = function() {
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -510,7 +511,7 @@ NobleScenes.RoyalGetaway = function() {
 NobleScenes.MagicalJackal = function() {
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		heshe : player.mfFem("he", "she")
 	};
 	
@@ -544,7 +545,7 @@ NobleScenes.PalaceParade = function() {
 	let miranda = GAME().miranda;
 	let rigard = GAME().rigard;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -590,7 +591,7 @@ NobleScenes.PalaceParade = function() {
 NobleScenes.Buns = function() {
 	let rigard = GAME().rigard;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -639,7 +640,7 @@ NobleScenes.BunsChoice = function() {
 	let party : Party = GAME().party;
 	let rigard = GAME().rigard;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	parse = Text.ParserPlural(parse, party.Num() > 1);

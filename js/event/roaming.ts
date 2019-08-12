@@ -16,7 +16,7 @@ let RoamingScenes : any = {};
 
 RoamingScenes.FlowerPetal = function() {
 	let party : Party = GAME().party;
-	var parse = {
+	var parse : any = {
 		
 	};
 	

@@ -15,7 +15,7 @@ KiakaiScenes.RavenDreams = function() {
 	let player = GAME().player;
 	let kiakai = GAME().kiakai;
 	
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		name   : kiakai.name
 	};
@@ -40,7 +40,7 @@ KiakaiScenes.TalkQuest = function() {
 	let rosalin = GAME().rosalin;
 	let rigard = GAME().rigard;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		name   : kiakai.name
 	};
@@ -96,7 +96,7 @@ KiakaiScenes.TalkAria = function() {
 	let player = GAME().player;
 	let kiakai = GAME().kiakai;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		name   : kiakai.name
 	};
@@ -174,7 +174,7 @@ KiakaiScenes.TalkUru = function() {
 	let player = GAME().player;
 	let kiakai = GAME().kiakai;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		name   : kiakai.name
 	};
@@ -363,7 +363,7 @@ KiakaiScenes.TalkEden = function() {
 	let player = GAME().player;
 	let kiakai = GAME().kiakai;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		name   : kiakai.name
 	};
@@ -573,7 +573,7 @@ KiakaiScenes.TalkFactions = function() {
 	let player = GAME().player;
 	let kiakai = GAME().kiakai;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		name   : kiakai.name
 	};
@@ -649,7 +649,7 @@ KiakaiScenes.TalkElves = function() {
 	let player = GAME().player;
 	let kiakai = GAME().kiakai;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		name   : kiakai.name
 	};
@@ -964,7 +964,7 @@ KiakaiScenes.TalkDimensionalViolation = function() {
 	let player = GAME().player;
 	let kiakai = GAME().kiakai;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		name   : kiakai.name
 	};
@@ -1044,7 +1044,7 @@ KiakaiScenes.TalkDimensionalViolationCont = function() {
 	let player = GAME().player;
 	let kiakai = GAME().kiakai;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		name   : kiakai.name
 	};
@@ -1144,7 +1144,7 @@ KiakaiScenes.TalkPriest = function() {
 	let player = GAME().player;
 	let kiakai = GAME().kiakai;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		name   : kiakai.name
 	};
@@ -1215,7 +1215,7 @@ KiakaiScenes.TalkPriestHierarchy = function() {
 	let player = GAME().player;
 	let kiakai = GAME().kiakai;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		name   : kiakai.name
 	};
@@ -1271,7 +1271,7 @@ KiakaiScenes.TalkPriestDisciplines = function() {
 	let player = GAME().player;
 	let kiakai = GAME().kiakai;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		name   : kiakai.name,
 		virg   : kiakai.FirstCock() ? "p-penis has not entered a vagina" : "v-vagina has not felt the touch of a penis"
@@ -1427,7 +1427,7 @@ KiakaiScenes.TalkPriestActivities = function() {
 	let player = GAME().player;
 	let kiakai = GAME().kiakai;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		name   : kiakai.name
 	};
@@ -1513,7 +1513,7 @@ KiakaiScenes.TalkPriestYrissa = function() {
 	let player = GAME().player;
 	let kiakai = GAME().kiakai;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		name   : kiakai.name
 	};
@@ -1579,7 +1579,7 @@ KiakaiScenes.TalkPriestAria = function() {
 	let player = GAME().player;
 	let kiakai = GAME().kiakai;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		name   : kiakai.name
 	};
@@ -1622,7 +1622,7 @@ KiakaiScenes.TalkPriestMeeting = function() {
 	let player = GAME().player;
 	let kiakai = GAME().kiakai;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		name   : kiakai.name
 	};

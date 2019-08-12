@@ -1,7 +1,7 @@
 import { Link } from '../event';
 import { EncounterTable } from '../encountertable';
 import { Gender } from '../body/gender';
-import { WorldTime, MoveToLocation, GAME, WORLD, TimeStep } from "../GAME";
+import { WorldTime, MoveToLocation, GAME, WORLD, TimeStep, StepToHour } from "../GAME";
 import { SetGameState, GameState } from "../gamestate";
 import { Gui } from "../gui";
 import { Text } from "../text";
@@ -2805,7 +2805,7 @@ MirandaScenes.HomeDommySexLeavingFuckedHer = function() {
 					Text.Flush();
 
 					var func = function() {
-						world.StepToHour(8);
+						StepToHour(8);
 						party.Sleep();
 
 						Gui.PrintDefaultOptions();
@@ -4344,7 +4344,7 @@ MirandaScenes.HomeSubbySexLeavingFuckedHer = function() {
 					Text.Flush();
 
 					var func = function() {
-						world.StepToHour(8);
+						StepToHour(8);
 						party.Sleep();
 
 						Gui.PrintDefaultOptions();

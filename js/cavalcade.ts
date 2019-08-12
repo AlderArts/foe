@@ -280,7 +280,7 @@ export class Cavalcade {
 	CoinGameRound() {
 		let party : Party = GAME().party;
 		var that : any = this;
-		var parse = {
+		var parse : any = {
 			token : that.token,
 			bet : that.bet,
 			pot : function() { return that.pot; }

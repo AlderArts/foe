@@ -91,7 +91,7 @@ NCavalcadeScenes.RegularGame = function() {
 	let party : Party = GAME().party;
 	let rosalin = GAME().rosalin;
 	let estevan = GAME().estevan;
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		hisher     : rosalin.hisher()
 	};
@@ -170,7 +170,7 @@ NCavalcadeScenes.PrepCoinGame = function() {
 	let cale = GAME().cale;
 	let estevan = GAME().estevan;
 	var onEnd = function() {
-		var parse = {
+		var parse : any = {
 			playername : player.name
 		};
 
@@ -649,7 +649,7 @@ NCavalcadeScenes.SexyPlayerWin = function(cheat : boolean) {
 
 //TODO
 NCavalcadeScenes.SexyEstevanWin = function(cheat : boolean) {
-	var parse = {
+	var parse : any = {
 
 	};
 
@@ -664,7 +664,7 @@ NCavalcadeScenes.SexyEstevanWin = function(cheat : boolean) {
 
 //TODO
 NCavalcadeScenes.SexyCaleWin = function(cheat : boolean) {
-	var parse = {
+	var parse : any = {
 
 	};
 
@@ -679,7 +679,7 @@ NCavalcadeScenes.SexyCaleWin = function(cheat : boolean) {
 
 //TODO
 NCavalcadeScenes.SexyRosalinWin = function(cheat : boolean) {
-	var parse = {
+	var parse : any = {
 
 	};
 

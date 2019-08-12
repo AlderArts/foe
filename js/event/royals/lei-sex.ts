@@ -1,13 +1,15 @@
 import { Lei } from './lei';
-import { WorldTime } from '../../GAME';
+import { WorldTime, GAME, TimeStep } from '../../GAME';
 import { Gui } from '../../gui';
 import { Text } from '../../text';
 import { Race } from '../../body/race';
+import { Party } from '../../party';
+import { LeiFlags } from './lei-flags';
 
-let SexScenes = {};
+let SexScenes : any = {};
 
-SexScenes.Prompt = function(options) {
-	var parse = {
+SexScenes.Prompt = function(options : any[]) {
+	var parse : any = {
 		
 	};
 	
@@ -35,13 +37,14 @@ SexScenes.Prompt = function(options) {
 
 SexScenes.PettingUnlocked = function() {
 	let lei = GAME().lei;
-	return lei.flags["Met"] >= Lei.Met.CompletedTaskEscort;
+	return lei.flags["Met"] >= LeiFlags.Met.CompletedTaskEscort;
 }
-SexScenes.Petting = function(repeat) {
+SexScenes.Petting = function(repeat : boolean) {
 	let player = GAME().player;
 	let party : Party = GAME().party;
 	let lei = GAME().lei;
-	var parse = {
+
+	var parse : any = {
 		boygirl : player.mfFem("boy", "girl"),
 		hair : function() { return player.Hair().Short(); },
 		ear : function() { return player.EarDesc(); },

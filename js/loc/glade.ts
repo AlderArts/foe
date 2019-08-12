@@ -63,7 +63,7 @@ GladeLoc.SaveSpot = "Dryads";
 GladeLoc.safe = function() { return true; };
 GladeLoc.description = function() {
 	let orchid = GAME().orchid;
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -107,7 +107,7 @@ GladeLoc.onEntry = function() {
 		return;
 	}
 	
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -573,7 +573,7 @@ DryadGladeScenes.FirstWin = function(enc : Encounter) {
 	
 	enc = this;
 	
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		name       : kiakai.name
 	};
@@ -653,7 +653,7 @@ DryadGladeScenes.FirstWin = function(enc : Encounter) {
 }
 
 DryadGladeScenes.MotherTree = function() {
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -722,7 +722,7 @@ DryadGladeScenes.MotherTreePrompt = function() {
 
 DryadGladeScenes.MotherTreeTalk = function() {
 	let player = GAME().player;
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	

@@ -60,7 +60,7 @@ export class Bastet extends Entity {
 BastetScenes.IntroEntryPoint = function() {
 	let player = GAME().player;
 	let bastet = GAME().bastet;
-	var parse = {
+	var parse : any = {
 		armor : player.ArmorDesc()
 	};
 	
@@ -318,7 +318,7 @@ BastetScenes.Birth = function() {
 	let player = GAME().player;
 	let lucille = GAME().lucille;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -473,7 +473,7 @@ BastetScenes.Birth = function() {
 }
 
 BastetScenes.Birth2 = function() {
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -833,7 +833,7 @@ BastetScenes.Birth2 = function() {
 
 BastetScenes.Birth3 = function() {
 	let bastet = GAME().bastet;
-	var parse = {
+	var parse : any = {
 		
 	};
 	

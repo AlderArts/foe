@@ -182,7 +182,7 @@ export class Kiakai extends Entity {
 		Text.Clear();
 		var that = kiakai;
 		
-		var parse = {
+		var parse : any = {
 			playername : player.name,
 			name       : kiakai.name,
 			hisher     : kiakai.hisher()
@@ -263,7 +263,7 @@ export class Kiakai extends Entity {
 		let kiakai = GAME().kiakai;
 		let ravenmother = GAME().ravenmother;
 		
-		var parse = {
+		var parse : any = {
 			playername : player.name,
 			name   : kiakai.name
 		};

@@ -118,7 +118,7 @@ MariaScenes.CampPrompt = function() {
 	let maria = GAME().maria;
 	let cveta = GAME().cveta;
 
-	var parse = {
+	var parse : any = {
 
 	};
 
@@ -938,7 +938,7 @@ MariaScenes.ForestAftermath = function() {
 MariaScenes.ForestFollow = function() {
 	let maria = GAME().maria;
 
-	var parse = {};
+	var parse : any = {};
 
 	Text.Clear();
 	Text.Add("You decide the best course of action is to follow Maria.", parse);

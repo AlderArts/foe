@@ -23,7 +23,7 @@ export function InitCheats() {
 		},
 		function() {
 			//Scenes.Golem.FightPrompt();
-			world.StepToHour(13, 14);
+			StepToHour(13, 14);
 		}
 	));
 	*/

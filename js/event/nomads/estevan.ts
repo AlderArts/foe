@@ -170,7 +170,7 @@ EstevanScenes.Interact = function() {
 EstevanScenes.Prompt = function() {
 	let player = GAME().player;
 	let estevan = GAME().estevan;
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -328,7 +328,7 @@ EstevanScenes.SexGay = function() {
 	let estevan = GAME().estevan;
 	var p1cock = player.BiggestCock();
 	
-	var parse = {
+	var parse : any = {
 		playername    : player.name
 	};
 	parse = player.ParserTags(parse);

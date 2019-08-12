@@ -1,24 +1,29 @@
 import { SetGameState, GameState } from "../gamestate";
 import { Gui } from "../gui";
 import { Text } from "../text";
-import { MoveToLocation, GAME, TimeStep } from "../GAME";
+import { MoveToLocation, GAME, TimeStep, StepToHour, WORLD } from "../GAME";
 import { EncounterTable } from "../encountertable";
 import { Sex } from "../entity-sex";
+import { CassidyFlags } from "./cassidy-flags";
+import { Race } from "../body/race";
+import { Cock } from "../body/cock";
+import { Jobs } from "../job";
+import { HipSize } from "../body/body";
 
-let SexScenes = {};
-let SparSexScenes = {};
+let SexScenes : any = {};
+let SparSexScenes : any = {};
 
 SexScenes.Indoors = function() {
 	let player = GAME().player;
 	let cassidy = GAME().cassidy;
 
-	var parse = {
+	var parse : any = {
 		armor : function() { return player.ArmorDesc(); }
 	};
 	
 	
-	var first = !(cassidy.flags["Talk"] & Cassidy.Talk.SexIndoor);
-	cassidy.flags["Talk"] |= Cassidy.Talk.SexIndoor;
+	var first = !(cassidy.flags["Talk"] & CassidyFlags.Talk.SexIndoor);
+	cassidy.flags["Talk"] |= CassidyFlags.Talk.SexIndoor;
 	
 	Text.Clear();
 	if(first) {
@@ -65,11 +70,11 @@ SexScenes.Indoors = function() {
 	SexScenes.IndoorPrompt();
 }
 
-SexScenes.IndoorPrompt = function(opts) {
+SexScenes.IndoorPrompt = function(opts? : any) {
 	let player = GAME().player;
 	let cassidy = GAME().cassidy;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -115,12 +120,12 @@ SexScenes.IndoorPrompt = function(opts) {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-SexScenes.Savor = function(opts) {
+SexScenes.Savor = function(opts : any) {
 	let player = GAME().player;
 	let cassidy = GAME().cassidy;
 	opts.savor = true;
 	
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -177,7 +182,7 @@ SexScenes.Savor = function(opts) {
 SexScenes.Tail = function() {
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	parse = player.ParserTags(parse);
@@ -259,7 +264,7 @@ SexScenes.Tail = function() {
 SexScenes.Tailfuck = function() {
 	let player = GAME().player;
 	let cassidy = GAME().cassidy;
-	var parse = {
+	var parse : any = {
 		
 	};
 	parse = player.ParserTags(parse);
@@ -300,7 +305,7 @@ SexScenes.Tailfuck = function() {
 SexScenes.Tailpeg = function() {
 	let player = GAME().player;
 	let cassidy = GAME().cassidy;
-	var parse = {
+	var parse : any = {
 		
 	};
 	parse = player.ParserTags(parse);
@@ -366,14 +371,14 @@ SexScenes.Tailpeg = function() {
 	SexScenes.Outro();
 }
 
-SexScenes.FuckHer = function(cocksInVag) {
+SexScenes.FuckHer = function(cocksInVag : Cock[]) {
 	let player = GAME().player;
 	let cassidy = GAME().cassidy;
 
 	var p1cock = player.BiggestCock(cocksInVag);
 	var realcock = !p1cock.isStrapon;
 	
-	var parse = {
+	var parse : any = {
 		
 	};
 	parse = player.ParserTags(parse, "", p1cock);
@@ -469,7 +474,7 @@ SexScenes.Pet = function() {
 	let player = GAME().player;
 	let cassidy = GAME().cassidy;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	parse = player.ParserTags(parse);
@@ -741,14 +746,14 @@ SexScenes.Pet = function() {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-SexScenes.Anal = function(cocksInAss) {
+SexScenes.Anal = function(cocksInAss : Cock[]) {
 	let player = GAME().player;
 	let cassidy = GAME().cassidy;
 
 	var p1cock = player.BiggestCock(cocksInAss);
 	var realcock = !p1cock.isStrapon;
 	
-	var parse = {
+	var parse : any = {
 		
 	};
 	parse = player.ParserTags(parse, "", p1cock);
@@ -867,8 +872,9 @@ SexScenes.Anal = function(cocksInAss) {
 
 SexScenes.Outro = function() {
 	let cassidy = GAME().cassidy;
+	let world = WORLD();
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -881,7 +887,7 @@ SexScenes.Outro = function() {
 	Text.Add("It feels like forever before Cass releases you from her crushing grip, but she does just that and you feel the blood return to your extremities. <i>“Sheesh. Going to have trouble sleeping tonight, but guess it was worth it. Don’t be long in coming back!”</i>", parse);
 	
 	cassidy.relation.IncreaseStat(100, 2);
-	world.StepToHour(0);
+	StepToHour(0);
 	GAME().party.location = world.loc.Rigard.ShopStreet.street;
 	
 	Text.Flush();
@@ -897,6 +903,7 @@ SparSexScenes.Win = function() {
 	let player = GAME().player;
 	let party = GAME().party;
 	let cassidy = GAME().cassidy;
+	let world = WORLD();
 
 	var enc  = this;
 	enc.Cleanup();
@@ -904,7 +911,7 @@ SparSexScenes.Win = function() {
 	
 	party.LoadActiveParty();
 	
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	parse = player.ParserTags(parse);
@@ -930,7 +937,7 @@ SparSexScenes.Win = function() {
 
 	cassidy.relation.IncreaseStat(50, 3);
 
-	if(cassidy.flags["Talk"] & Cassidy.Talk.SexIndoor) {
+	if(cassidy.flags["Talk"] & CassidyFlags.Talk.SexIndoor) {
 		Text.Add("Even if she doesn’t want to admit it, she really does get off on violence, doesn’t she? If she’s willing and you are too, what’s to stop you from taking things a little further? That is, of course, assuming that you’re willing… are you?", parse);
 		Text.Flush();
 
@@ -1010,7 +1017,7 @@ SparSexScenes.Win = function() {
 				Text.Flush();
 
 				Gui.NextPrompt(function() {
-					world.StepToHour(22);
+					StepToHour(22);
 					MoveToLocation(world.loc.Rigard.ShopStreet.street);
 				});
 			}
@@ -1030,7 +1037,7 @@ SparSexScenes.Win = function() {
 		Text.Flush();
 
 		Gui.NextPrompt(function() {
-			world.StepToHour(22);
+			StepToHour(22);
 			MoveToLocation(world.loc.Rigard.ShopStreet.street);
 		});
 	}
@@ -1039,7 +1046,7 @@ SparSexScenes.Win = function() {
 SparSexScenes.WinPrompt = function() {
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -1078,7 +1085,7 @@ SparSexScenes.AllFours = function() {
 
 	var p1cock = player.BiggestCock();
 	
-	var parse = {
+	var parse : any = {
 		
 	};
 	parse = player.ParserTags(parse, "", p1cock);
@@ -1306,7 +1313,7 @@ SparSexScenes.GetBlown = function() {
 
 	var p1cock = player.BiggestCock();
 	
-	var parse = {
+	var parse : any = {
 		
 	};
 	parse = player.ParserTags(parse, "", p1cock);
@@ -1383,7 +1390,7 @@ SparSexScenes.GetLicked = function() {
 	let player = GAME().player;
 	let cassidy = GAME().cassidy;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	parse = player.ParserTags(parse);
@@ -1462,7 +1469,7 @@ SparSexScenes.Spank = function() {
 	let player = GAME().player;
 	let cassidy = GAME().cassidy;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	parse = player.ParserTags(parse);
@@ -1523,8 +1530,9 @@ SparSexScenes.Spank = function() {
 
 SparSexScenes.Outro = function() {
 	let cassidy = GAME().cassidy;
+	let world = WORLD();
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -1541,7 +1549,7 @@ SparSexScenes.Outro = function() {
 	cassidy.relation.IncreaseStat(100, 2);
 	GAME().party.location = world.loc.Rigard.ShopStreet.street;
 	
-	world.StepToHour(22);
+	StepToHour(22);
 	
 	Text.Flush();
 	
@@ -1552,6 +1560,7 @@ SparSexScenes.Loss = function() {
 	let player = GAME().player;
 	let party = GAME().party;
 	let cassidy = GAME().cassidy;
+	let world = WORLD();
 
 	var enc  = this;
 	enc.Cleanup();
@@ -1559,7 +1568,7 @@ SparSexScenes.Loss = function() {
 	
 	party.LoadActiveParty();
 	
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	parse = player.ParserTags(parse);
@@ -1577,7 +1586,7 @@ SparSexScenes.Loss = function() {
 
 	cassidy.relation.IncreaseStat(50, 1);
 
-	if((cassidy.flags["Talk"] & Cassidy.Talk.SexIndoor) && (Math.random() < 0.5)) {
+	if((cassidy.flags["Talk"] & CassidyFlags.Talk.SexIndoor) && (Math.random() < 0.5)) {
 		Text.Add("Ouch. You’re doing your best, but evidently your best isn’t enough for your body to obey you. The most you manage is a soft groan, accompanied by a vague flop like a rather pathetic fish out of water.", parse);
 		Text.NL();
 		Text.Add("<i>“Oh. So it’s over.”</i> There’s a distinct tinge of disappointment in Cassidy’s voice as she looks you over, her feet crunching on the grass as she steps closer. <i>“Now you’ve gotten me all worked up and with no way to blow off all this steam and smoke; what’s a poor girl like me to do?”</i>", parse);
@@ -1664,7 +1673,7 @@ SparSexScenes.DomRide = function() {
 
 	var p1cock = player.BiggestCock();
 	
-	var parse = {
+	var parse : any = {
 		
 	};
 	parse = player.ParserTags(parse);
@@ -1799,7 +1808,7 @@ SparSexScenes.DomRide = function() {
 SparSexScenes.SuckOnBreasts = function() {
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	parse = player.ParserTags(parse);
@@ -1853,7 +1862,7 @@ SparSexScenes.Tribbing = function() {
 	let player = GAME().player;
 	let cassidy = GAME().cassidy;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	parse = player.ParserTags(parse);
@@ -1965,8 +1974,9 @@ SparSexScenes.Tribbing = function() {
 
 SparSexScenes.LossOutro = function() {
 	let cassidy = GAME().cassidy;
+	let world = WORLD();
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -1985,7 +1995,7 @@ SparSexScenes.LossOutro = function() {
 	Text.Add("Oh, you won’t, you won’t. All right, then - you’ll be seeing her around!", parse);
 	
 	cassidy.relation.IncreaseStat(100, 1);
-	world.StepToHour(0);
+	StepToHour(0);
 	GAME().party.location = world.loc.Rigard.ShopStreet.street;
 	
 	Text.Flush();

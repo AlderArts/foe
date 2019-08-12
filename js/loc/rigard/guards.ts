@@ -1,10 +1,14 @@
 
 import { Event, Link } from '../../event';
 import { EncounterTable } from '../../encountertable';
-import { WorldTime, MoveToLocation, GAME } from '../../GAME';
+import { WorldTime, MoveToLocation, GAME, WORLD } from '../../GAME';
 import { VaughnScenes } from '../../event/outlaws/vaughn-scenes';
 import { Text } from '../../text';
 import { RigardFlags } from './rigard-flags';
+import { Gui } from '../../gui';
+import { TerryScenes } from '../../event/terry-scenes';
+import { RigardScenes } from './rigard';
+import { MirandaScenes } from '../../event/miranda-scenes';
 
 let GateLoc = new Event("Main Gate");
 let BarracksLoc = {
@@ -41,21 +45,21 @@ GateLoc.description = function() {
 
 
 GateLoc.enc = new EncounterTable();
-GateLoc.enc.AddEnc(function() { return Scenes.Rigard.Chatter;});
-GateLoc.enc.AddEnc(function() { return Scenes.Rigard.Chatter2;});
-GateLoc.enc.AddEnc(function() { return Scenes.Rigard.CityHistory;}, 1.0, function() {
+GateLoc.enc.AddEnc(function() { return RigardScenes.Chatter;});
+GateLoc.enc.AddEnc(function() { return RigardScenes.Chatter2;});
+GateLoc.enc.AddEnc(function() { return RigardScenes.CityHistory;}, 1.0, function() {
 	let rigard = GAME().rigard;
 	return rigard.flags["CityHistory"] == 0;
 });
-GateLoc.enc.AddEnc(function() { return Scenes.Terry.ExploreGates; }, 1000000.0, function() {
+GateLoc.enc.AddEnc(function() { return TerryScenes.ExploreGates; }, 1000000.0, function() {
 	let rigard = GAME().rigard;
 	return rigard.Krawitz["Q"] == RigardFlags.KrawitzQ.HuntingTerry;
 });
 GateLoc.onEntry = function() {
 	if(Math.random() < 0.15)
-		Scenes.Rigard.Chatter(true);
+		RigardScenes.Chatter(true);
 	else if(Math.random() < 0.3)
-		Scenes.Rigard.Chatter2(true);
+		RigardScenes.Chatter2(true);
 	else
 		Gui.PrintDefaultOptions();
 }
@@ -67,21 +71,21 @@ GateLoc.links.push(new Link(
 	"Residential", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Rigard.Residential.street, {minute: 10});
+		MoveToLocation(WORLD().loc.Rigard.Residential.street, {minute: 10});
 	}
 ));
 GateLoc.links.push(new Link(
 	"Merchants", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Rigard.ShopStreet.street, {minute: 10});
+		MoveToLocation(WORLD().loc.Rigard.ShopStreet.street, {minute: 10});
 	}
 ));
 GateLoc.links.push(new Link(
 	"Plaza", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Rigard.Plaza, {minute: 20});
+		MoveToLocation(WORLD().loc.Rigard.Plaza, {minute: 20});
 	}
 ));
 GateLoc.links.push(new Link(
@@ -93,9 +97,9 @@ GateLoc.links.push(new Link(
 	function() {
 		let rigard = GAME().rigard;
 		if(rigard.Krawitz["Q"] == RigardFlags.KrawitzQ.HeistDone)
-			Scenes.Rigard.Lockdown();
+			RigardScenes.Lockdown();
 		else
-			MoveToLocation(world.loc.Plains.Gate, {minute: 5});
+			MoveToLocation(WORLD().loc.Plains.Gate, {minute: 5});
 	}
 ));
 GateLoc.links.push(new Link(
@@ -156,7 +160,7 @@ BarracksLoc.common.events.push(new Link(
 		}
 	},
 	function() {
-		Scenes.Miranda.BarracksApproach();
+		MirandaScenes.BarracksApproach();
 	}
 ));
 BarracksLoc.common.events.push(new Link(

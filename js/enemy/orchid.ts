@@ -163,7 +163,7 @@ export class OrchidBoss extends BossEntity {
 		else if(choice < 0.4 && Abilities.EnemySkill.TRavage.enabledCondition(encounter, this))
 			Abilities.EnemySkill.TRavage.Use(encounter, this, t);
 		else if(choice < 0.6) { // Tease
-			var parse = {
+			var parse : any = {
 				
 			};
 			

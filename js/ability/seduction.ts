@@ -50,7 +50,7 @@ SeductionAb.TIllusion.castTree.push(function(ability : Ability, encounter : Enco
 		decoy.copies--;
 		if(decoy.copies <= 0)
 			caster.combatStatus.stats[StatusEffect.Decoy] = null;
-		var parse = {
+		var parse : any = {
 			p : num > 1 ? "One of " + caster.possessive() : caster.Possessive(),
 			s : num > 1 ? "s" : "",
 			aposs   : attacker.possessive(),
@@ -89,7 +89,7 @@ SeductionAb.SIllusion.castTree.push(function(ability : Ability, encounter : Enco
 		decoy.copies--;
 		if(decoy.copies <= 0)
 			caster.combatStatus.stats[StatusEffect.Decoy] = null;
-		var parse = {
+		var parse : any = {
 			p : num > 1 ? "One of " + caster.possessive() : caster.Possessive(),
 			s : num > 1 ? "s" : "",
 			aposs   : attacker.possessive(),
@@ -155,7 +155,7 @@ SeductionAb.Fantasize.castTree.push(function(ability : Ability, encounter : Enco
 	
 	caster.AddLustAbs(dmg);
 	
-	var parse = {
+	var parse : any = {
 		name : caster.NameDesc()
 	}
 
@@ -172,7 +172,7 @@ SeductionAb.Soothe.castTree.push(function(ability : Ability, encounter : Encount
 	var targets = target.members;
 	
 	var group = targets.length > 1;
-	var parse = {
+	var parse : any = {
 		Poss: caster.Possessive(),
 		their: group ? "their" : caster.hisher(),
 		himher: group ? caster.hisher() + ' party' : caster.himher()

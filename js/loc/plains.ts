@@ -43,7 +43,7 @@ let PlainsLoc = {
 // Crossroads
 //
 PlainsLoc.Crossroads.description = function() {
-	var parse = {
+	var parse : any = {
 		TreeFar : WORLD().TreeFarDesc(),
 		Rigard : GAME().rigard.Visited() ? "Rigard" : "a big city in the distance"
 	};
@@ -140,7 +140,7 @@ PlainsLoc.Crossroads.enc.AddEnc(function() {
 		let party : Party = GAME().party;
 		let kiakai = GAME().kiakai;
 
-		var parse = {
+		var parse : any = {
 			playername : player.name,
 			name : kiakai.name
 		};
@@ -216,7 +216,7 @@ PlainsLoc.Crossroads.links.push(new Link(
 
 		if(miranda.flags["Met"] != 0 && Math.random() < 0.1) {
 			Text.Clear();
-			var parse = {};
+			var parse : any = {};
 			Text.Add("As you make your way, a farmers’ wagon catches up to you from behind. ", parse);
 			var scenes = new EncounterTable();
 			scenes.AddEnc(function() {
@@ -296,7 +296,7 @@ PlainsLoc.Crossroads.links.push(new Link(
 //
 
 PlainsLoc.Portals.description = function() {
-	var parse = {};
+	var parse : any = {};
 	
 	Text.Add("Located near the crossroads at the center of the great plains lies a lone hill, visible for miles around. ", parse);
 	if(GlobalScenes.PortalsOpen())

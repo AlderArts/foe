@@ -6,96 +6,105 @@
 import { Entity } from '../entity';
 import { GetDEBUG } from '../../app';
 import { Gender } from '../body/gender';
-import { Race } from '../body/race';
+import { Race, RaceScore } from '../body/race';
 import { TF } from '../tf';
 import { AppendageType } from '../body/appendage';
 import { Color } from '../body/color';
 import { Time } from '../time';
-import { WorldTime, MoveToLocation } from '../GAME';
+import { WorldTime, MoveToLocation, GAME, WORLD, TimeStep } from '../GAME';
 import { Text } from '../text';
 import { Gui } from '../gui';
+import { EncounterTable } from '../encountertable';
+import { RigardScenes } from '../loc/rigard/rigard';
 
-let FeraScenes = {};
+let FeraScenes : any = {};
 
-function Fera(storage) {
-	Entity.call(this);
-	this.ID = "fera";
+export class Fera extends Entity {
+	nexelleTimer : Time;
+	shopTimer : Time;
+	cityTimer : Time;
+	fondleTimer : Time;
+	timeout : Time;
 
-	// Character stats
-	this.name = "Fera";
-	
-	// TODO: Set body
-	this.body.DefFemale();
-	this.FirstBreastRow().size.base = 6;
-	this.Butt().buttSize.base = 4;
-	this.body.SetRace(Race.Feline);
-	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Feline, Color.brown);
-	
-	this.flags["Met"] = 0;
-	this.flags["Mom"] = 0;
-	this.flags["Blowjob"] = 0;
-	this.flags["Standing"] = 0;
-	this.flags["Behind"] = 0;
-	this.flags["Anal"] = 0;
-	
-	this.nexelleTimer = new Time();
-	this.shopTimer    = new Time();
-	this.cityTimer    = new Time();
-	this.fondleTimer  = new Time();
-	this.timeout      = new Time();
+	constructor(storage? : any) {
+		super();
 
-	if(storage) this.FromStorage(storage);
-}
-Fera.prototype = new Entity();
-Fera.prototype.constructor = Fera;
+		this.ID = "fera";
 
-Fera.prototype.Update = function(step) {
-	Entity.prototype.Update.call(this, step);
-	
-	this.nexelleTimer.Dec(step);
-	this.shopTimer.Dec(step);
-	this.cityTimer.Dec(step);
-	this.fondleTimer.Dec(step);
-	this.timeout.Dec(step);
-}
+		// Character stats
+		this.name = "Fera";
+		
+		// TODO: Set body
+		this.body.DefFemale();
+		this.FirstBreastRow().size.base = 6;
+		this.Butt().buttSize.base = 4;
+		this.body.SetRace(Race.Feline);
+		TF.SetAppendage(this.Back(), AppendageType.tail, Race.Feline, Color.brown);
+		
+		this.flags["Met"] = 0;
+		this.flags["Mom"] = 0;
+		this.flags["Blowjob"] = 0;
+		this.flags["Standing"] = 0;
+		this.flags["Behind"] = 0;
+		this.flags["Anal"] = 0;
+		
+		this.nexelleTimer = new Time();
+		this.shopTimer    = new Time();
+		this.cityTimer    = new Time();
+		this.fondleTimer  = new Time();
+		this.timeout      = new Time();
 
-Fera.prototype.FromStorage = function(storage) {
-	this.Butt().virgin     = parseInt(storage.avirgin) == 1;
-	this.FirstVag().virgin = parseInt(storage.virgin)  == 1;
-	
-	this.LoadPersonalityStats(storage);
-	
-	this.nexelleTimer.FromStorage(storage.nexTim);
-	this.shopTimer.FromStorage(storage.shopTim);
-	this.cityTimer.FromStorage(storage.cityTim);
-	this.fondleTimer.FromStorage(storage.fonTim);
-	this.timeout.FromStorage(storage.timeout);
-	// Load flags
-	this.LoadFlags(storage);
-}
+		if(storage) this.FromStorage(storage);
+	}
 
-Fera.prototype.ToStorage = function() {
-	var storage = {
-		avirgin : this.Butt().virgin ? 1 : 0,
-		virgin  : this.FirstVag().virgin ? 1 : 0
-	};
+	Update(step : number) {
+		super.Update(step);
+		
+		this.nexelleTimer.Dec(step);
+		this.shopTimer.Dec(step);
+		this.cityTimer.Dec(step);
+		this.fondleTimer.Dec(step);
+		this.timeout.Dec(step);
+	}
 	
-	this.SavePersonalityStats(storage);
+	FromStorage(storage : any) {
+		this.Butt().virgin     = parseInt(storage.avirgin) == 1;
+		this.FirstVag().virgin = parseInt(storage.virgin)  == 1;
+		
+		this.LoadPersonalityStats(storage);
+		
+		this.nexelleTimer.FromStorage(storage.nexTim);
+		this.shopTimer.FromStorage(storage.shopTim);
+		this.cityTimer.FromStorage(storage.cityTim);
+		this.fondleTimer.FromStorage(storage.fonTim);
+		this.timeout.FromStorage(storage.timeout);
+		// Load flags
+		this.LoadFlags(storage);
+	}
 	
-	storage.nexTim  = this.nexelleTimer.ToStorage();
-	storage.shopTim = this.shopTimer.ToStorage();
-	storage.cityTim = this.cityTimer.ToStorage();
-	storage.fonTim  = this.fondleTimer.ToStorage();
-	storage.timeout = this.timeout.ToStorage();
+	ToStorage() {
+		var storage : any = {
+			avirgin : this.Butt().virgin ? 1 : 0,
+			virgin  : this.FirstVag().virgin ? 1 : 0
+		};
+		
+		this.SavePersonalityStats(storage);
+		
+		storage.nexTim  = this.nexelleTimer.ToStorage();
+		storage.shopTim = this.shopTimer.ToStorage();
+		storage.cityTim = this.cityTimer.ToStorage();
+		storage.fonTim  = this.fondleTimer.ToStorage();
+		storage.timeout = this.timeout.ToStorage();
+		
+		this.SaveFlags(storage);
+		
+		return storage;
+	}
 	
-	this.SaveFlags(storage);
-	
-	return storage;
-}
-
-// Schedule
-Fera.prototype.IsAtLocation = function(location) {
-	return true;
+	// Schedule
+	IsAtLocation(location? : any) {
+		return true;
+	}	
 }
 
 // Party interaction
@@ -105,11 +114,11 @@ FeraScenes.Interact = function() {
 
 	Text.Clear();
 	
-	if(!Scenes.Rigard.ClothShop.IsOpen()) {
+	if(!RigardScenes.ClothShop.IsOpen()) {
 		Text.Add("The shop is closing, and you are asked to leave.");
 		Text.Flush();
 		Gui.NextPrompt(function() {
-			MoveToLocation(world.loc.Rigard.ShopStreet.street);
+			MoveToLocation(WORLD().loc.Rigard.ShopStreet.street);
 		});
 		return;
 	}
@@ -118,7 +127,7 @@ FeraScenes.Interact = function() {
 	cat.score[Race.Feline] = 1;
 	var catScore = cat.Compare(new RaceScore(player.body));
 	
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		sirmiss    : player.body.Gender() == Gender.male ? "sir" : "miss"
 	};
@@ -375,7 +384,7 @@ FeraScenes.TouchPrompt = function() {
 	let player = GAME().player;
 	let fera = GAME().fera;
 
-	var parse = {
+	var parse : any = {
 		against        : (player.FirstBreastRow().size.Get() > 3) ? "between" : "against"
 	};
 	parse = player.ParserTags(parse);
@@ -473,7 +482,7 @@ FeraScenes.SexPrompt = function() {
 	
 	var p1Cock = player.BiggestCock(cocksInVag);
 	
-	var parse = {
+	var parse : any = {
 		playername     : player.name,
 		cockDesc2      : function() { return player.AllCocks()[1].Short(); }
 	};
@@ -1181,4 +1190,4 @@ FeraScenes.SexPrompt = function() {
 		Gui.SetButtonsFromList(options);
 }
 
-export { Fera, FeraScenes };
+export { FeraScenes };

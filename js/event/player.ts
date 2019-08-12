@@ -213,7 +213,7 @@ export class Player extends Entity {
 
 		if(oldMilk < 0.5 && newMilk >= 0.5) {
 			Gui.Callstack.unshift(function() {
-				var parse = {
+				var parse : any = {
 					breasts : player.FirstBreastRow().Short()
 				};
 				Text.Clear();
@@ -224,7 +224,7 @@ export class Player extends Entity {
 		}
 		if(oldMilk < 0.9 && newMilk >= 0.9) {
 			Gui.Callstack.unshift(function() {
-				var parse = {
+				var parse : any = {
 					breasts : function() { return player.FirstBreastRow().Short(); },
 					nips: player.FirstBreastRow().NipsShort()
 				};
@@ -238,7 +238,7 @@ export class Player extends Entity {
 		// Trigger start of lactation
 		if(oldMilk < 1 && newMilk >= 1 && lactationRate != 0) {
 			Gui.Callstack.unshift(function() {
-				var parse = {
+				var parse : any = {
 					breasts : function() { return player.FirstBreastRow().Short(); },
 					nips: player.FirstBreastRow().NipsShort()
 				};
@@ -270,7 +270,7 @@ export class Player extends Entity {
 		// Trigger end of lactaction
 		if(oldMilk > 0 && newMilk <= 0) {
 			Gui.Callstack.unshift(function() {
-				var parse = {
+				var parse : any = {
 					nips: player.FirstBreastRow().NipsShort()
 				};
 				

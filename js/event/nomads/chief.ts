@@ -202,7 +202,7 @@ ChiefScenes.TalkPrompt = function() {
 			var scenes = [];
 			// ROSALIN
 			scenes.push(function() {
-				var parse = {
+				var parse : any = {
 					heshe   : rosalin.heshe(),
 					hisher  : rosalin.hisher(),
 					himher  : rosalin.himher(),

@@ -1,9 +1,9 @@
 import { Text } from "../text";
 import { Sex } from "../entity-sex";
 import { Gui } from "../gui";
-import { GAME } from "../GAME";
+import { GAME, TimeStep } from "../GAME";
 
-let SexScenes = {};
+let SexScenes : any = {};
 
 SexScenes.Prompt = function() {
 	let player = GAME().player;
@@ -61,7 +61,7 @@ SexScenes.FuckHer = function() {
 	var longCock = p1cock.Len() > 18;
 	var massiveCock = p1cock.Volume() > 750;
 	
-	var parse = {};
+	var parse : any = {};
 	
 	parse = player.ParserTags(parse);
 	
@@ -154,7 +154,7 @@ SexScenes.GiveOral = function() {
 	let player = GAME().player;
 	let asche = GAME().asche;
 
-	var parse = {
+	var parse : any = {
 		handsomepretty : player.mfFem("handsome", "pretty"),
 		heshe : player.mfFem("he", "she"),
 		himher : player.mfFem("him", "her"),
@@ -204,7 +204,7 @@ SexScenes.GetOral = function() {
 
 	var p1cock = player.BiggestCock();
 	
-	var parse = {
+	var parse : any = {
 		
 	};
 	parse = player.ParserTags(parse);
@@ -321,7 +321,7 @@ SexScenes.Titfuck = function() {
 	var p1cock = player.BiggestCock();
 	var longCock = p1cock.Len() > 28;
 	
-	var parse = {
+	var parse : any = {
 		heshe : player.mfFem("he", "she")
 	};
 	parse = player.ParserTags(parse);
@@ -369,7 +369,7 @@ SexScenes.Titfuck = function() {
 SexScenes.MilkHer = function() {
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		heshe : player.mfFem("he", "she"),
 		nips : player.FirstBreastRow().NipsShort(),
 		handsomepretty : player.mfFem("handsome", "pretty"),
@@ -413,7 +413,7 @@ SexScenes.MilkHer = function() {
 SexScenes.Tribbing = function() {
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		heshe : player.mfFem("he", "she"),
 		hisher : player.mfFem("his", "her")
 	};
@@ -456,7 +456,7 @@ SexScenes.Tribbing = function() {
 SexScenes.Ending = function() {
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -488,7 +488,7 @@ SexScenes.MagicalThreesome = function() {
 
 	var p1cock = player.BiggestCock();
 	
-	var parse = {
+	var parse : any = {
 		lowerarmordesc : player.LowerArmorDesc(),
 		upperarmordesc : player.ArmorDesc(),
 		handsomepretty : player.mfFem("handsome", "pretty")

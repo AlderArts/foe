@@ -46,7 +46,7 @@ DesertLoc.Drylands.enc.AddEnc(function() {
 		let party : Party = GAME().party;
 		let burrows = GAME().burrows;
 
-		var parse = {
+		var parse : any = {
 			
 		};
 		

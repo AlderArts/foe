@@ -13,7 +13,7 @@ import { MeditationScenes } from "./event/meditation";
 import { AriaScenes } from "./event/aria";
 import { DreamsScenes } from "./event/dreams";
 import { OasisScenes } from "./loc/oasis";
-import { CassidyScenes } from "./event/cassidy";
+import { CassidyScenes } from "./event/cassidy-scenes";
 import { AscheScenes } from "./event/asche";
 import { FeraScenes } from "./event/fera";
 import { MirandaScenes } from "./event/miranda-scenes";

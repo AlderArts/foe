@@ -10,11 +10,11 @@ import { OutlawsFlags } from './outlaws-flags';
 import { Time } from '../../time';
 import { QuestItems } from '../../items/quest';
 import { Entity } from '../../entity';
-import { KrawitzScenes } from '../../loc/rigard/krawitz';
 import { Status } from '../../statuseffect';
 import { DreamsScenes } from '../dreams';
 import { Party } from '../../party';
 import { MomoFlags } from '../momo-flags';
+import { KrawitzFlags } from '../../loc/rigard/krawitz-flags';
 
 let CvetaScenes : any = {
 	Dates : DateScenes,
@@ -23,7 +23,7 @@ let CvetaScenes : any = {
 CvetaScenes.CampDesc = function() {
 	let cveta = GAME().cveta;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -140,7 +140,7 @@ CvetaScenes.ViolinPrompt = function() {
 	let outlaws = GAME().outlaws;
 	let cveta = GAME().cveta;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -213,7 +213,7 @@ CvetaScenes.Approach = function() {
 	let outlaws = GAME().outlaws;
 	let cveta = GAME().cveta;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -438,7 +438,7 @@ CvetaScenes.PlayPrompt = function() {
 	let player = GAME().player;
 	let cveta = GAME().cveta;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -718,7 +718,7 @@ CvetaScenes.TalkPrompt = function() {
 	let player = GAME().player;
 	let cveta = GAME().cveta;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -861,7 +861,7 @@ CvetaScenes.HerselfPrompt = function() {
 			Text.NL();
 			Text.Add("“They are a group of disgusting, decadent degenerates and it is only right that anyone with a shred of actual nobility should encourage them to get their act together, lest they lose even the thin facade of legitimacy they have left.”</i>", parse);
 			Text.NL();
-			parse["binder"] = rigard.Krawitz["F"] & KrawitzScenes.Flags.Binder ? " and the binder you stole - uh, found in his study. That was pretty damning of the man" : "";
+			parse["binder"] = rigard.Krawitz["F"] & KrawitzFlags.Binder ? " and the binder you stole - uh, found in his study. That was pretty damning of the man" : "";
 			Text.Add("Well, you can’t help but admit that there was the whole matter of Lord Krawitz[binder]. Neither can you deny that the royal twins <i>are</i> running around Rigard creating mischief, and with all the new laws against non-humans in place, let alone the inane ones that apply to everyone… ", parse);
 			Text.NL();
 			Text.Add("Oh, and the patrol by the crossroads which seems to never be able to root out any bandits, no matter how many times they receive reports of such.", parse);
@@ -1438,7 +1438,7 @@ CvetaScenes.MariaTalkFirst = function() {
 	let player = GAME().player;
 	let cveta = GAME().cveta;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -1492,7 +1492,7 @@ CvetaScenes.MariaTalkFirst = function() {
 CvetaScenes.MariaTalkRepeat = function() {
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -1512,7 +1512,7 @@ CvetaScenes.FirstMeeting = function() {
 	let player = GAME().player;
 	let cveta = GAME().cveta;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -1557,7 +1557,7 @@ CvetaScenes.FirstMeeting = function() {
 CvetaScenes.FirstMeetingPrompt = function(opts : any) {
 	let player = GAME().player;
 	
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -1704,7 +1704,7 @@ CvetaScenes.FirstMeetingPrompt = function(opts : any) {
 CvetaScenes.FirstMeetingCont = function() {
 	let outlaws = GAME().outlaws;
 	
-	var parse = {
+	var parse : any = {
 		SunlightMoonlight : WorldTime().LightStr("Sunlight", "Moonlight"),
 	};
 	
@@ -2028,7 +2028,7 @@ CvetaScenes.Performance = function() {
 }
 
 CvetaScenes.DreamRoses = function(ravenTrigger : any) {
-	var parse = {
+	var parse : any = {
 		raven : DreamsScenes.RavenText(ravenTrigger, " and a raven perched on one of the thorny rosebushes", " and the familiar form of a raven perched on one of the rosebushes, something you should remember")
 	};
 	
@@ -2053,7 +2053,7 @@ CvetaScenes.DreamRoses = function(ravenTrigger : any) {
 CvetaScenes.DreamBrood = function(ravenTrigger : any) {
 	let player = GAME().player;
 
-	var parse = {
+	var parse : any = {
 		skinDesc : function() { return player.SkinDesc(); },
 		playername : player.name,
 		raven : DreamsScenes.RavenText(ravenTrigger, " Off in the distance, high above the two of you, a raven circles in the air, its dark feathers starkly contrasting against the colorful scene. You can’t quite make it out, but does it look… jealous?", " There’s that raven again, spying on the two of you from up high in the clouds, the voyeuristic little thing. You should really remember it when you wake up.")
@@ -2083,7 +2083,7 @@ CvetaScenes.PostBullTowerPerformance = function() {
 	let outlaws = GAME().outlaws;
 	let cveta = GAME().cveta;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		skin : function() { return player.SkinDesc(); }
 	};
@@ -2263,7 +2263,7 @@ CvetaScenes.PostBullTowerPerformance = function() {
 }
 
 CvetaScenes.IntimatePrompt = function() {
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -2303,7 +2303,7 @@ CvetaScenes.IntimateNuzzle = function() {
 	let player = GAME().player;
 	let cveta = GAME().cveta;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		hairLong : player.Hair().Long()
 	};
@@ -2344,7 +2344,7 @@ CvetaScenes.IntimateCuddle = function() {
 	let player = GAME().player;
 	let cveta = GAME().cveta;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		skin : function() { return player.SkinDesc(); }
 	};
@@ -2401,7 +2401,7 @@ CvetaScenes.IntimateGrope = function() {
 	let player = GAME().player;
 	let cveta = GAME().cveta;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	parse = player.ParserTags(parse);

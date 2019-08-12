@@ -400,7 +400,7 @@ var createInput = function(inputOptions : any, cssClasses? : any) {
 }
 /*
 	// REGULAR TEXT (NEW METHOD)
-	var parse = {
+	var parse : any = {
 
 	};
 

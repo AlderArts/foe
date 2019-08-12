@@ -15,11 +15,11 @@ import { ZebraShamanScenes } from '../enemy/zebra';
 import { MaliceScoutsScenes } from '../enemy/malice-scouts';
 import { MomoScenes } from '../event/momo';
 import { RoamingScenes } from '../event/roaming';
-import { Asche } from '../event/asche';
 import { TasksScenes } from '../event/asche-tasks';
 import { Isla, IslaScenes } from '../event/highlands/isla';
 import { Gui } from '../gui';
 import { IslaFlags } from '../event/highlands/isla-flags';
+import { AscheFlags } from '../event/asche-flags';
 
 // Create namespace
 let HighlandsLoc = {
@@ -118,7 +118,7 @@ HighlandsLoc.Hills.enc.AddEnc(function() {
 
 HighlandsLoc.Hills.events.push(new Link(
 	"Ginseng", function() {
-		return GAME().asche.flags["Tasks"] == Asche.Tasks.Ginseng_Started;
+		return GAME().asche.flags["Tasks"] == AscheFlags.Tasks.Ginseng_Started;
 	}, true,
 	null,
 	function() {
