@@ -9,12 +9,21 @@ import { LucilleScenes } from '../../event/brothel/lucille';
 import { RoaScenes } from '../../event/brothel/roa-scenes';
 import { Cock } from '../../body/cock';
 import { Race } from '../../body/race';
+import { BastetScenes } from '../../event/brothel/bastet';
+import { GryphonsScenes } from '../../event/brothel/gryphons';
+import { FireblossomScenes } from '../../event/brothel/fireblossom';
 
 let BrothelLoc = {
 	brothel  : new Event("Brothel"),
 	cellar   : new Event("Brothel: Cellar")
 };
 
+export function InitBrothel() {
+	BastetScenes.INIT(LucilleScenes);
+	GryphonsScenes.INIT(LucilleScenes);
+	FireblossomScenes.INIT(LucilleScenes);
+	RoaScenes.INIT(BrothelScenes);
+}
 
 //
 // Brothel

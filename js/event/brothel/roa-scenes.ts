@@ -9,10 +9,13 @@ import { RoaFlags } from './roa-flags';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { BurrowsFlags } from '../../loc/burrows-flags';
-import { BrothelScenes } from '../../loc/rigard/brothel';
 import { LucilleScenes } from './lucille';
 
 export namespace RoaScenes {
+    let BrothelScenes : any;
+    export function INIT(brothelScenes : any) {
+        BrothelScenes = brothelScenes;
+    }
 
     export function Impregnate(mother : Entity, load : number, slot? : number) {
         let roa = GAME().roa;

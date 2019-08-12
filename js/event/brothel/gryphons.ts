@@ -15,7 +15,6 @@ import { AppendageType } from '../../body/appendage';
 import { Cock } from '../../body/cock';
 import { Capacity } from '../../body/orifice';
 import { PregnancyHandler } from '../../pregnancy';
-import { LucilleScenes } from './lucille';
 
 enum GryphonsState {
 	NotViewed    = 0,
@@ -58,6 +57,10 @@ export class Gryphons extends Entity {
 
 
 export namespace GryphonsScenes {
+	let LucilleScenes : any;
+	export function INIT(lucilleScenes : any) {
+		LucilleScenes = lucilleScenes;
+	}
 
 	export function IntroEntryPoint() {
 		let player = GAME().player;

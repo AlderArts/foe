@@ -4,7 +4,7 @@
  *
  */
 
-import { BrothelLoc } from './brothel';
+import { BrothelLoc, InitBrothel } from './brothel';
 import { InnLoc, InitLB } from './inn';
 import { Shop } from '../../shop';
 import { ResidentialLoc } from './residential';
@@ -27,6 +27,7 @@ import { StrapOnItems } from '../../items/strapon';
 import { WeaponsItems } from '../../items/weapons';
 
 export function InitRigard() {
+	InitBrothel();
 	InitLB();
 	InitMageTower();
 	InitKrawitz();

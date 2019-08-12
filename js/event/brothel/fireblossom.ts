@@ -4,7 +4,6 @@ import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { LucilleFlags } from './lucille-flags';
 import { GAME, TimeStep } from '../../GAME';
-import { LucilleScenes } from './lucille';
 
 let FireblossomFlags = {
 	State : {
@@ -91,6 +90,11 @@ export class Fireblossom extends Entity {
 
 
 export namespace FireblossomScenes {
+	let LucilleScenes : any;
+	export function INIT(lucilleScenes : any) {
+		LucilleScenes = lucilleScenes;
+	}
+
 	export function IntroEntryPoint() {
 		let player = GAME().player;
 		let kiakai = GAME().kiakai;

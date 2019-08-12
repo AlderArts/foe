@@ -5,7 +5,6 @@ import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { GAME, TimeStep } from '../../GAME';
 import { LucilleFlags } from './lucille-flags';
-import { LucilleScenes } from './lucille';
 import { EncounterTable } from '../../encountertable';
 import { Race } from '../../body/race';
 import { TF } from '../../tf';
@@ -56,6 +55,10 @@ export class Bastet extends Entity {
 }
 
 export namespace BastetScenes {
+	let LucilleScenes : any;
+	export function INIT(lucilleScenes : any) {
+		LucilleScenes = lucilleScenes;
+	}
 
 	export function IntroEntryPoint() {
 		let player = GAME().player;
