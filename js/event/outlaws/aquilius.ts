@@ -6,123 +6,132 @@ import * as _ from 'lodash';
 import { Entity } from '../../entity';
 import { Time } from '../../time';
 import { IngredientItems } from '../../items/ingredients';
-import { WorldTime, GAME } from '../../GAME';
+import { WorldTime, GAME, TimeStep, WORLD, StepToHour } from '../../GAME';
 import { Gui } from '../../gui';
 import { Text } from '../../text';
 import { AquiliusFlags } from './aquilius-flags';
+import { EncounterTable } from '../../encountertable';
+import { Party } from '../../party';
+import { Jobs } from '../../job';
+import { GlobalScenes } from '../global';
+import { ItemIds, Item } from '../../item';
+import { AscheScenes } from '../asche';
 
-let AquiliusScenes = {};
+let AquiliusScenes : any = {};
 
-function Aquilius(storage) {
-	Entity.call(this);
-	this.ID = "aquilius";
+export class Aquilius extends Entity {
+	helpTimer : Time;
+	herbIngredient : Item;
 
-	// Character stats
-	this.name = "Aquilius";
+	constructor(storage? : any) {
+		super();
+
+		this.ID = "aquilius";
+
+		// Character stats
+		this.name = "Aquilius";
+			
+		this.body.DefMale();
 		
-	this.body.DefMale();
-	
-	this.SetLevelBonus();
-	this.RestFull();
-	
-	this.flags["Met"]   = AquiliusFlags.Met.NotMet;
-	this.flags["Herbs"] = AquiliusFlags.Herbs.No;
-	this.flags["Talk"]  = 0; //Bitmask
-	this.herbIngredient = null;
-	
-	this.helpTimer  = new Time();
-
-	if(storage) this.FromStorage(storage);
-}
-Aquilius.prototype = new Entity();
-Aquilius.prototype.constructor = Aquilius;
-
-Aquilius.ExtraHerbs = function() {
-	return [
-		IngredientItems.Lettuce,
-		IngredientItems.SnakeOil,
-		IngredientItems.FreshGrass,
-		IngredientItems.Foxglove,
-		IngredientItems.FruitSeed
-	];
-}
-
-Aquilius.prototype.FromStorage = function(storage) {
-	if(storage.herb)
-		this.herbIngredient = ItemIds[storage.herb];
-	this.helpTimer.FromStorage(storage.Htime);
-	
-	this.LoadPersonalityStats(storage);
-	
-	// Load flags
-	this.LoadFlags(storage);
-}
-
-Aquilius.prototype.ToStorage = function() {
-	var storage = {
+		this.SetLevelBonus();
+		this.RestFull();
 		
-	};
-	
-	if(this.herbIngredient)
-		storage.herb = this.herbIngredient.id;
-	storage.Htime = this.helpTimer.ToStorage();
-	
-	this.SavePersonalityStats(storage);
-	this.SaveFlags(storage);
-	
-	return storage;
-}
+		this.flags["Met"]   = AquiliusFlags.Met.NotMet;
+		this.flags["Herbs"] = AquiliusFlags.Herbs.No;
+		this.flags["Talk"]  = 0; //Bitmask
+		this.herbIngredient = null;
+		
+		this.helpTimer  = new Time();
 
-Aquilius.prototype.Update = function(step) {
-	Entity.prototype.Update.call(this, step);
+		if(storage) this.FromStorage(storage);
+	}
 	
-	this.helpTimer.Dec(step);
-}
+	static ExtraHerbs() : Item[] {
+		return [
+			IngredientItems.Lettuce,
+			IngredientItems.SnakeOil,
+			IngredientItems.FreshGrass,
+			IngredientItems.Foxglove,
+			IngredientItems.FruitSeed
+		];
+	}
 
-// Schedule TODO
-Aquilius.prototype.IsAtLocation = function(location) {
-	location = location || GAME().party.location;
-	if(location == world.loc.Outlaws.Infirmary)
-		return (WorldTime().hour >= 7 && WorldTime().hour < 22);
-	return false;
-}
-
-Aquilius.prototype.OnHerbsQuest = function() {
-	return this.flags["Herbs"] >= AquiliusFlags.Herbs.OnQuest;
-}
-Aquilius.prototype.OnHerbsQuestFinished = function() {
-	return this.flags["Herbs"] >= AquiliusFlags.Herbs.Finished;
-}
-Aquilius.prototype.HelpCooldown = function() {
-	return new Time(0,0,0,12,0);
-}
-Aquilius.prototype.QualifiesForAnyJob = function(entity) {
-	let aquilius = GAME().aquilius;
-	return aquilius.QualifiesForHerbs(entity) ||
-	       aquilius.QualifiesForHealing(entity) ||
-	       aquilius.QualifiesForAlchemy(entity); //TODO
-}
-Aquilius.prototype.QualifiesForHealing = function(entity) {
-	return Jobs.Healer.Unlocked(entity);
-}
-Aquilius.prototype.QualifiesForAlchemy = function(entity) {
-	return entity.alchemyLevel >= 1;
-}
-Aquilius.prototype.QualifiesForHerbs = function(entity) {
-	return Jobs.Ranger.Unlocked(entity);
-}
-Aquilius.prototype.SetHerb = function(override) {
-	var item = override || _.sample(Aquilius.ExtraHerbs());
-	this.herbIngredient = item;
-	return item;
+	FromStorage(storage : any) {
+		if(storage.herb)
+			this.herbIngredient = ItemIds[storage.herb];
+		this.helpTimer.FromStorage(storage.Htime);
+		
+		this.LoadPersonalityStats(storage);
+		
+		// Load flags
+		this.LoadFlags(storage);
+	}
+	
+	ToStorage() {
+		var storage : any = {
+			
+		};
+		
+		if(this.herbIngredient)
+			storage.herb = this.herbIngredient.id;
+		storage.Htime = this.helpTimer.ToStorage();
+		
+		this.SavePersonalityStats(storage);
+		this.SaveFlags(storage);
+		
+		return storage;
+	}
+	
+	Update(step : number) {
+		super.Update(step);		
+		this.helpTimer.Dec(step);
+	}
+	
+	// Schedule TODO
+	IsAtLocation(location? : any) {
+		location = location || GAME().party.location;
+		if(location == WORLD().loc.Outlaws.Infirmary)
+			return (WorldTime().hour >= 7 && WorldTime().hour < 22);
+		return false;
+	}
+	
+	OnHerbsQuest() {
+		return this.flags["Herbs"] >= AquiliusFlags.Herbs.OnQuest;
+	}
+	OnHerbsQuestFinished() {
+		return this.flags["Herbs"] >= AquiliusFlags.Herbs.Finished;
+	}
+	HelpCooldown() {
+		return new Time(0,0,0,12,0);
+	}
+	QualifiesForAnyJob(entity : Entity) {
+		return this.QualifiesForHerbs(entity) ||
+			this.QualifiesForHealing(entity) ||
+			this.QualifiesForAlchemy(entity); //TODO
+	}
+	QualifiesForHealing(entity : Entity) {
+		return Jobs.Healer.Unlocked(entity);
+	}
+	QualifiesForAlchemy(entity : Entity) {
+		return entity.alchemyLevel >= 1;
+	}
+	QualifiesForHerbs(entity : Entity) {
+		return Jobs.Ranger.Unlocked(entity);
+	}
+	SetHerb(override? : Item) {
+		var item = override || _.sample(Aquilius.ExtraHerbs());
+		this.herbIngredient = item;
+		return item;
+	}	
 }
 
 AquiliusScenes.FirstMeeting = function() {
 	let player = GAME().player;
 	let party : Party = GAME().party;
 	let aquilius = GAME().aquilius;
+	let kiakai = GAME().kiakai;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -181,7 +190,7 @@ AquiliusScenes.Approach = function() {
 	let aquilius = GAME().aquilius;
 	let outlaws = GAME().outlaws;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -232,7 +241,7 @@ AquiliusScenes.Approach = function() {
 					Text.Flush();
 					
 					party.Inv().RemoveItem(item);
-					party.Inv().AddItem(Items.PipeLeaf);
+					party.Inv().AddItem(IngredientItems.PipeLeaf);
 					
 					outlaws.relation.IncreaseStat(30, 1);
 					aquilius.relation.IncreaseStat(100, 1);
@@ -325,7 +334,7 @@ AquiliusScenes.Approach = function() {
 AquiliusScenes.Prompt = function() {
 	let aquilius = GAME().aquilius;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -335,12 +344,12 @@ AquiliusScenes.Prompt = function() {
 		tooltip : "Give the good surgeon a look-over.",
 		func : AquiliusScenes.Appearance, enabled : true
 	});
-	if(Scenes.Asche.Tasks.Nightshade.IsOn() &&
-	   !Scenes.Asche.Tasks.Nightshade.IsSuccess() &&
-	   !Scenes.Asche.Tasks.Nightshade.HasHelpFromAquilius()) {
+	if(AscheScenes.Tasks.Nightshade.IsOn() &&
+	   !AscheScenes.Tasks.Nightshade.IsSuccess() &&
+	   !AscheScenes.Tasks.Nightshade.HasHelpFromAquilius()) {
 		options.push({ nameStr : "Nightshade",
 			tooltip : "Ask Aquilius about the herb that Asche sent you to look for.",
-			func : Scenes.Asche.Tasks.Nightshade.AskAquiliusForHelp, enabled : true
+			func : AscheScenes.Tasks.Nightshade.AskAquiliusForHelp, enabled : true
 		});
 	}
 	// DAYTIME
@@ -399,7 +408,7 @@ AquiliusScenes.Prompt = function() {
 AquiliusScenes.TalkPrompt = function() {
 	let aquilius = GAME().aquilius;
 	
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -455,8 +464,9 @@ AquiliusScenes.TalkPrompt = function() {
 AquiliusScenes.TalkSelfPrompt = function() {
 	let player = GAME().player;
 	let party : Party = GAME().party;
+	let kiakai = GAME().kiakai;
 	
-	var parse = {
+	var parse : any = {
 		playername : player.name,
 		boygirl : kiakai.mfTrue("boy", "girl"),
 		manwoman : player.mfTrue("man", "woman"),
@@ -592,7 +602,7 @@ AquiliusScenes.TalkSelfPrompt = function() {
 AquiliusScenes.TalkGrind = function() {
 	let player = GAME().player;
 	
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -674,7 +684,7 @@ AquiliusScenes.TalkGrind = function() {
 AquiliusScenes.TalkWarPrompt = function() {
 	let player = GAME().player;
 	
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -688,7 +698,7 @@ AquiliusScenes.TalkWarPrompt = function() {
 			Text.NL();
 			Text.Add("<i>“You want to know how it got started? Listen up then, for it’s going to be a long story.</i>", parse);
 			Text.NL();
-			parse["are"] = !Scenes.Global.PortalsOpen() ? "are" : "used to be";
+			parse["are"] = !GlobalScenes.PortalsOpen() ? "are" : "used to be";
 			Text.Add("<i>“In my father’s time, so I’m told, portals were very commonplace. People could go through one, come out on another plane and do business, then return to Eden before lunch. As you no doubt know, portals [are] pretty much non-existent these days, but they didn’t disappear all at once. Slowly, they began to get rarer and rarer, opening and closing more and more erratically.</i>", parse);
 			Text.NL();
 			Text.Add("<i>“Now, there were merchant guilds who did business between the worlds using the portals, and since Eden had plenty of them, you can imagine they’d grown quite rich and influential. They had a direct voice in the passing of laws, wielded influence in various social circles, that sort of thing - and the new rich were always at loggerheads with the old rich. If the merchants wanted one thing, you’d bet the king and the nobles would want another.</i>", parse);
@@ -779,7 +789,7 @@ AquiliusScenes.Smoke = function() {
 	let player = GAME().player;
 	let aquilius = GAME().aquilius;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -860,7 +870,7 @@ AquiliusScenes.Smoke = function() {
 	Text.Flush();
 	
 	if(WorldTime().hour < 22)
-		world.StepToHour(22);
+		StepToHour(22);
 	else
 		TimeStep({hour: 2});
 	
@@ -869,7 +879,7 @@ AquiliusScenes.Smoke = function() {
 }
 
 AquiliusScenes.Appearance = function() {
-	var parse = {};
+	var parse : any = {};
 	
 	Text.Clear();
 	Text.Add("You give the good surgeon a look-over.", parse);
@@ -894,7 +904,7 @@ AquiliusScenes.HelpOut = function() {
 	let player = GAME().player;
 	let aquilius = GAME().aquilius;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -924,7 +934,7 @@ AquiliusScenes.HelpOutPrompt = function() {
 	let player = GAME().player;
 	let aquilius = GAME().aquilius;
 	
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -1002,7 +1012,7 @@ AquiliusScenes.PickHerbs = function() {
 	let party : Party = GAME().party;
 	let aquilius = GAME().aquilius;
 	
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -1038,8 +1048,9 @@ AquiliusScenes.TendToSick = function() {
 	let party : Party = GAME().party;
 	let aquilius = GAME().aquilius;
 	let outlaws = GAME().outlaws;
+	let kiakai = GAME().kiakai;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -1153,7 +1164,7 @@ AquiliusScenes.AlchemyHelp = function() {
 	let aquilius = GAME().aquilius;
 	let outlaws = GAME().outlaws;
 
-	var parse = {
+	var parse : any = {
 		
 	};
 	
@@ -1233,4 +1244,4 @@ AquiliusScenes.AlchemyHelp = function() {
 	Gui.NextPrompt();
 }
 
-export { Aquilius, AquiliusScenes };
+export { AquiliusScenes };

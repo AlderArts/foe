@@ -44,9 +44,5 @@ import './js/event/royals/twins.js';
 import './js/event/royals/jeanne.js';
 import './js/event/royals/golem.js';
 
-import './js/event/outlaws/aquilius.js';
-import './js/event/outlaws/vaughn.js';
-import './js/event/outlaws/bulltower.js';
-
 // Start up the main text
 import './js/main-entry';
