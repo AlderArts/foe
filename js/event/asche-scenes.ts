@@ -866,7 +866,7 @@ export namespace AscheScenes {
             Text.Add("Your hand closes around something distinctly bottle-shaped - pulling it out, you find that it is indeed a bottle. Inside, you find a potion, and though the bottle looks old and dusty, it should still be drinkable. You stow it away with your other belongings.", parse);
             Text.NL();
             
-            var item = _.sample(MagicShopScenes.Shop.potions);
+            var item = _.sample(MagicShopScenes.MShop().potions);
             
             party.Inv().AddItem(item);
             
@@ -882,7 +882,7 @@ export namespace AscheScenes {
             Text.Add("It seems a little ironic that you could’ve bought her stock off the shelves instead of going to such trouble. Still, you guess that it could have been a worse deal, and stow away your new acquisition.", parse);
             Text.NL();
             
-            var item = _.sample(MagicShopScenes.Shop.consumables);
+            var item = _.sample(MagicShopScenes.MShop().consumables);
             
             party.Inv().AddItem(item);
             
@@ -895,7 +895,7 @@ export namespace AscheScenes {
             Text.NL();
             Text.Add("Putting away the reagents and throwing the pouch back into the bin, you turn to other matters.<br>", parse);
             _.times(_.random(4,10), function() {
-                var item = _.sample(MagicShopScenes.Shop.ingredients);
+                var item = _.sample(MagicShopScenes.MShop().ingredients);
                 
                 party.Inv().AddItem(item);
                 

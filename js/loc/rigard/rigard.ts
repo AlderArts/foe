@@ -28,6 +28,11 @@ import { RigardScenes } from './rigard-scenes';
 import { InitFera } from '../../event/fera';
 import { LeiTaskScenes } from '../../event/royals/lei-tasks';
 import { LeiScenes } from '../../event/royals/lei-scenes';
+import { JeanneScenes } from '../../event/royals/jeanne-scenes';
+import { TerryScenes } from '../../event/terry-scenes';
+import { AscheTasksScenes } from '../../event/asche-tasks';
+import { AscheScenes } from '../../event/asche-scenes';
+import { AquiliusScenes } from '../../event/outlaws/aquilius';
 
 // Dealing with circular dependencies
 export function InitRigard() {
@@ -40,6 +45,8 @@ export function InitRigard() {
 	InitPlaza(RigardScenes);
 	InitFera(RigardScenes);
 	LeiTaskScenes.INIT(LeiScenes);
+	JeanneScenes.INIT(TerryScenes);
+	AscheTasksScenes.INIT(AscheScenes, AquiliusScenes);
 	InitLB();
 	InitMageTower();
 	InitKrawitz();
@@ -91,7 +98,7 @@ export class Rigard {
 		this.SexShop.AddItem(StrapOnItems.ChimeraStrapon, 5);
 		this.SexShop.AddItem(WeaponsItems.LWhip, 5);
 
-		this.MagicShop = MagicShopScenes.Shop;
+		this.MagicShop = MagicShopScenes.MShop();
 
 		// Have accessed town (not necessarily free access)
 		this.flags["Visa"] = 0;

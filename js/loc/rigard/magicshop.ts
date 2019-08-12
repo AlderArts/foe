@@ -16,216 +16,223 @@ import { AlchemyItems } from '../../items/alchemy';
 import { IngredientItems } from '../../items/ingredients';
 import { AccItems } from '../../items/accessories';
 import { WeaponsItems } from '../../items/weapons';
-import { AscheScenes } from '../../event/asche-scenes';
 import { Item } from '../../item';
 
 let MagicShopLoc = new Event("Asche's Fanciful Trinkets");
 
-let MagicShopScenes : any = {}
-MagicShopScenes.IsOpen = function() {
-	let rigard = GAME().rigard;
-	return (WorldTime().hour >= 10) && !rigard.UnderLockdown();
-}
+let AscheScenes : any;
 
-MagicShopScenes.CreateShop = function() {
-	let player = GAME().player;
-	var buySuccessFunc = function(item : Item, cost : number, num : number) {
-		var parse : any = {};
-		
-		Text.Clear();
-		var scenes = new EncounterTable();
-		scenes.AddEnc(function() { Text.Add("<i>“Wonderful,”</i> the jackaless says as she takes your coins, flashing you a smile in return. <i>“Remember - not to be misusing things that Asche sells customer, for her guarantee of her goods not being harmful only holds if customer is not planning to do evil with it…”</i>", parse); });
-		scenes.AddEnc(function() { Text.Add("Asche’s fingers flick the beads of her abacus as she sums up your total with lightning speed. <i>“Ah… there. Well, please to be taking ownership of new possession; may it be serving customer well. If you are having doubts, please to be taking it back to Asche, who will be explaining in more detail its use.”</i>", parse); });
-		scenes.AddEnc(function() { Text.Add("With an almost lazy ease, Asche works her abacus with one hand while she counts your money with the other. Satisfied, she sweeps your coins to her side of the counter, then nudges your purchase to you. <i>“Please to be enjoying purchase. Asche is happy to help you out with your needs.”</i>", parse); });
-		scenes.Get();
-		
-		Text.NL();
-	};
-	var buyFailFunc = function(item : Item, cost : number, bought : boolean) {
-		var parse : any = {};
-		
-		Text.Clear();
-		if(bought) {
-			Text.Add("<i>“Anything else, good customer?”</i>", parse);
-		}
-		else {
+export namespace MagicShopScenes {
+	export function INIT(ascheScenes : any) {
+		AscheScenes = ascheScenes;
+	}
+
+	let shop : any;
+	export function MShop() { return shop };
+
+	export function IsOpen() {
+		let rigard = GAME().rigard;
+		return (WorldTime().hour >= 10) && !rigard.UnderLockdown();
+	}
+
+	export function CreateShop() {
+		let player = GAME().player;
+		var buySuccessFunc = function(item : Item, cost : number, num : number) {
+			var parse : any = {};
+			
+			Text.Clear();
 			var scenes = new EncounterTable();
-			scenes.AddEnc(function() { Text.Add("<i>“Oh? Customer is not liking price? Asche is sorry, she cannot be lowering cost any for good customer. Price is only being in coins - while she can be asking for other forms of payment, is very bad form to be doing so… and if coins is being too much for customer, then other payment is not likely to be favored, either. Maybe customer will be picking different purchase?”</i>", parse); });
+			scenes.AddEnc(function() { Text.Add("<i>“Wonderful,”</i> the jackaless says as she takes your coins, flashing you a smile in return. <i>“Remember - not to be misusing things that Asche sells customer, for her guarantee of her goods not being harmful only holds if customer is not planning to do evil with it…”</i>", parse); });
+			scenes.AddEnc(function() { Text.Add("Asche’s fingers flick the beads of her abacus as she sums up your total with lightning speed. <i>“Ah… there. Well, please to be taking ownership of new possession; may it be serving customer well. If you are having doubts, please to be taking it back to Asche, who will be explaining in more detail its use.”</i>", parse); });
+			scenes.AddEnc(function() { Text.Add("With an almost lazy ease, Asche works her abacus with one hand while she counts your money with the other. Satisfied, she sweeps your coins to her side of the counter, then nudges your purchase to you. <i>“Please to be enjoying purchase. Asche is happy to help you out with your needs.”</i>", parse); });
 			scenes.Get();
-		}
-		Text.NL();
-	};
-	var buyPromptFunc = function(item : Item, cost : number, bought : boolean) {
-		var coin = Text.NumToText(cost);
-		var parse : any = {
-			heshe : player.mfFem("he", "she"),
-			item : item.sDesc(),
-			coin : coin,
-			Coin : _.capitalize(coin)
+			
+			Text.NL();
 		};
-		if(!bought) Text.Clear();
-		var scenes = new EncounterTable();
-		scenes.AddEnc(function() { Text.Add("<i>“Ah, so that is being customer’s desire? Asche can be selling it for [coin] coins. Price is always final, unless this jackaless is saying otherwise; she is knowing the worth of her stock.”</i>", parse); });
-		scenes.AddEnc(function() { Text.Add("Asche peers at the [item] you’ve picked out. <i>“Oh, that one is being sold for [coin] coins. This jackaless is thinking that customer is making very good choice, may not be helpful in all situations, but then again, what is being that way? Is customer wishing to be buying?”</i>", parse); });
-		scenes.AddEnc(function() { Text.Add("<i>“Customer’s choice is not exactly being what Asche expected, but is still being very fine nevertheless. Cost of that will be [coin] coins, [heshe] will be making payment, yes?”</i>", parse); });
-		scenes.Get();
-		
-		Text.NL();
-	};
-	
-	let shop : any = new Shop({
-		buyPromptFunc : buyPromptFunc,
-		buySuccessFunc : buySuccessFunc,
-		buyFailFunc : buyFailFunc,
-		sellPromptFunc : function(item : Item, cost : number, sold : boolean) {
+		var buyFailFunc = function(item : Item, cost : number, bought : boolean) {
+			var parse : any = {};
+			
+			Text.Clear();
+			if(bought) {
+				Text.Add("<i>“Anything else, good customer?”</i>", parse);
+			}
+			else {
+				var scenes = new EncounterTable();
+				scenes.AddEnc(function() { Text.Add("<i>“Oh? Customer is not liking price? Asche is sorry, she cannot be lowering cost any for good customer. Price is only being in coins - while she can be asking for other forms of payment, is very bad form to be doing so… and if coins is being too much for customer, then other payment is not likely to be favored, either. Maybe customer will be picking different purchase?”</i>", parse); });
+				scenes.Get();
+			}
+			Text.NL();
+		};
+		var buyPromptFunc = function(item : Item, cost : number, bought : boolean) {
 			var coin = Text.NumToText(cost);
 			var parse : any = {
+				heshe : player.mfFem("he", "she"),
 				item : item.sDesc(),
 				coin : coin,
 				Coin : _.capitalize(coin)
 			};
-			
-			if(!sold) Text.Clear();
+			if(!bought) Text.Clear();
 			var scenes = new EncounterTable();
-			scenes.AddEnc(function() {
-				Text.Add("Asche squints at your [item], prodding it with her fingertips as she mumbles something under her breath. You notice the jackal-morph’s fingertips glow a faint gold, and then she raises her eyes to meet yours.", parse);
-				Text.NL();
-				Text.Add("<i>“Asche values this thing at [coin] coins. Is this acceptable to customer?”</i>", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
-				Text.Add("You slide your [item] over the counter to Asche, who treats it as if it were a bubbling flask of hot acid. Slipping on a pair of heavy linen gloves, the jackaless turns in about, examining it from every side until she’s finally convinced it’s not an immediate threat.", parse);
-				Text.NL();
-				Text.Add("<i>“Asche can offer [coin] coins for this, good customer. No more, no less. While Asche owns store, Asche also needs to buy groceries and pay taxes.”</i>", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
-				Text.Add("You hand over your [item] to Asche, who raises it to her muzzle and gives it a sniff. Closing her eyes, the jackaless mumbles to herself for a few seconds, then her eyes snap open and she smiles at you.", parse);
-				Text.NL();
-				Text.Add("<i>“For this thing here, Asche can offer good customer [coin] coins. What does good customer say to this deal?”</i>", parse);
-			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() { Text.Add("<i>“Ah, so that is being customer’s desire? Asche can be selling it for [coin] coins. Price is always final, unless this jackaless is saying otherwise; she is knowing the worth of her stock.”</i>", parse); });
+			scenes.AddEnc(function() { Text.Add("Asche peers at the [item] you’ve picked out. <i>“Oh, that one is being sold for [coin] coins. This jackaless is thinking that customer is making very good choice, may not be helpful in all situations, but then again, what is being that way? Is customer wishing to be buying?”</i>", parse); });
+			scenes.AddEnc(function() { Text.Add("<i>“Customer’s choice is not exactly being what Asche expected, but is still being very fine nevertheless. Cost of that will be [coin] coins, [heshe] will be making payment, yes?”</i>", parse); });
 			scenes.Get();
 			
 			Text.NL();
-		},
-		sellSuccessFunc : function(item : Item, cost : number, num : number) {
-			var parse : any = {
-				hisher : player.mfFem("his", "her"),
-				heshe : player.mfFem("he", "she")
-			};
-			
-			Text.Clear();
-			var scenes = new EncounterTable();
-			scenes.AddEnc(function() {
-				Text.Add("The jackaless’ muzzle widens in a toothy grin as she tucks your offering away under the counter. <i>“Asche is very pleased to do business with you. Thing you just sold her will get layer of spit and polish, then find its way onto shelf. Maybe if customer is regretting decision later, [heshe] can buy it back from Asche.”</i>", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
-				Text.Add("Asche’s smile widens as she counts out your payment, fingers clicking away at an abacus. <i>“And that concludes sale. May good customer enjoy [hisher] newfound wealth, although hopefully not all in one place.”</i>", parse);
-			}, 1.0, function() { return true; });
-			scenes.Get();
-			
-			Text.NL();
-		},
-		sellFailFunc : function(item : Item, cost : number, sold : boolean) {
-			var parse : any = {
-				hisher : player.mfFem("his", "her"),
-				himher : player.mfFem("him", "her"),
-				heshe : player.mfFem("he", "she")
-			};
-			
-			Text.Clear();
-			if(sold) {
-				Text.Add("<i>“Anything else for Asche, good customer?”</i>", parse);
-			}
-			else {
+		};
+		
+		shop = new Shop({
+			buyPromptFunc : buyPromptFunc,
+			buySuccessFunc : buySuccessFunc,
+			buyFailFunc : buyFailFunc,
+			sellPromptFunc : function(item : Item, cost : number, sold : boolean) {
+				var coin = Text.NumToText(cost);
+				var parse : any = {
+					item : item.sDesc(),
+					coin : coin,
+					Coin : _.capitalize(coin)
+				};
+				
+				if(!sold) Text.Clear();
 				var scenes = new EncounterTable();
-				scenes.AddEnc(function() { Text.Add("Asche smiles and returns the item to you. <i>“Customer is not liking price Asche has given? Is quite natural, everyone is thinking their little personal treasure is worth more than it is. Alas, Asche cannot pay for sentimental value - is pity, but what can she do? Perhaps there is something else customer might be wanting?”</i>", parse); });
-				scenes.AddEnc(function() { Text.Add("The jackal-morph smiles and casually pushes your offering back to you. <i>“Customer is to be suiting [himher]self; Asche does not force anyone to accept her prices. Maybe customer is coming back when [heshe] is changing [hisher] mind, yes?”</i>", parse); });
+				scenes.AddEnc(function() {
+					Text.Add("Asche squints at your [item], prodding it with her fingertips as she mumbles something under her breath. You notice the jackal-morph’s fingertips glow a faint gold, and then she raises her eyes to meet yours.", parse);
+					Text.NL();
+					Text.Add("<i>“Asche values this thing at [coin] coins. Is this acceptable to customer?”</i>", parse);
+				}, 1.0, function() { return true; });
+				scenes.AddEnc(function() {
+					Text.Add("You slide your [item] over the counter to Asche, who treats it as if it were a bubbling flask of hot acid. Slipping on a pair of heavy linen gloves, the jackaless turns in about, examining it from every side until she’s finally convinced it’s not an immediate threat.", parse);
+					Text.NL();
+					Text.Add("<i>“Asche can offer [coin] coins for this, good customer. No more, no less. While Asche owns store, Asche also needs to buy groceries and pay taxes.”</i>", parse);
+				}, 1.0, function() { return true; });
+				scenes.AddEnc(function() {
+					Text.Add("You hand over your [item] to Asche, who raises it to her muzzle and gives it a sniff. Closing her eyes, the jackaless mumbles to herself for a few seconds, then her eyes snap open and she smiles at you.", parse);
+					Text.NL();
+					Text.Add("<i>“For this thing here, Asche can offer good customer [coin] coins. What does good customer say to this deal?”</i>", parse);
+				}, 1.0, function() { return true; });
 				scenes.Get();
+				
+				Text.NL();
+			},
+			sellSuccessFunc : function(item : Item, cost : number, num : number) {
+				var parse : any = {
+					hisher : player.mfFem("his", "her"),
+					heshe : player.mfFem("he", "she")
+				};
+				
+				Text.Clear();
+				var scenes = new EncounterTable();
+				scenes.AddEnc(function() {
+					Text.Add("The jackaless’ muzzle widens in a toothy grin as she tucks your offering away under the counter. <i>“Asche is very pleased to do business with you. Thing you just sold her will get layer of spit and polish, then find its way onto shelf. Maybe if customer is regretting decision later, [heshe] can buy it back from Asche.”</i>", parse);
+				}, 1.0, function() { return true; });
+				scenes.AddEnc(function() {
+					Text.Add("Asche’s smile widens as she counts out your payment, fingers clicking away at an abacus. <i>“And that concludes sale. May good customer enjoy [hisher] newfound wealth, although hopefully not all in one place.”</i>", parse);
+				}, 1.0, function() { return true; });
+				scenes.Get();
+				
+				Text.NL();
+			},
+			sellFailFunc : function(item : Item, cost : number, sold : boolean) {
+				var parse : any = {
+					hisher : player.mfFem("his", "her"),
+					himher : player.mfFem("him", "her"),
+					heshe : player.mfFem("he", "she")
+				};
+				
+				Text.Clear();
+				if(sold) {
+					Text.Add("<i>“Anything else for Asche, good customer?”</i>", parse);
+				}
+				else {
+					var scenes = new EncounterTable();
+					scenes.AddEnc(function() { Text.Add("Asche smiles and returns the item to you. <i>“Customer is not liking price Asche has given? Is quite natural, everyone is thinking their little personal treasure is worth more than it is. Alas, Asche cannot pay for sentimental value - is pity, but what can she do? Perhaps there is something else customer might be wanting?”</i>", parse); });
+					scenes.AddEnc(function() { Text.Add("The jackal-morph smiles and casually pushes your offering back to you. <i>“Customer is to be suiting [himher]self; Asche does not force anyone to accept her prices. Maybe customer is coming back when [heshe] is changing [hisher] mind, yes?”</i>", parse); });
+					scenes.Get();
+				}
+				
+				Text.NL();
 			}
-			
-			Text.NL();
-		}
-	});
-	
-	//For magic box
-	shop.potions = [
-		CombatItems.HPotion,
-		CombatItems.EPotion,
-		CombatItems.SpeedPotion,
-		AlchemyItems.Gestarium
-	];
-	shop.consumables = [
-		CombatItems.DecoyStick,
-		CombatItems.SmokeBomb,
-		CombatItems.PoisonDart,
-		CombatItems.LustDart
-	];
-	shop.ingredients = [
-		IngredientItems.HorseHair,
-		IngredientItems.HorseShoe,
-		IngredientItems.HorseCum,
-		IngredientItems.RabbitFoot,
-		IngredientItems.CarrotJuice,
-		IngredientItems.Lettuce,
-		IngredientItems.Whiskers,
-		IngredientItems.HairBall,
-		IngredientItems.CatClaw,
-		IngredientItems.SnakeOil,
-		IngredientItems.LizardScale,
-		IngredientItems.LizardEgg,
-		IngredientItems.SnakeFang,
-		IngredientItems.SnakeSkin,
-		IngredientItems.GoatMilk,
-		IngredientItems.GoatFleece,
-		IngredientItems.SheepMilk,
-		IngredientItems.Ramshorn,
-		IngredientItems.CowMilk,
-		IngredientItems.CowBell,
-		IngredientItems.FreshGrass,
-		IngredientItems.CanisRoot,
-		IngredientItems.DogBone,
-		IngredientItems.DogBiscuit,
-		IngredientItems.WolfFang,
-		IngredientItems.Wolfsbane,
-		IngredientItems.FoxBerries,
-		IngredientItems.Foxglove,
-		IngredientItems.CorruptPlant,
-		IngredientItems.BlackGem,
-		IngredientItems.CorruptSeed,
-		IngredientItems.DemonSeed,
-		IngredientItems.Hummus,
-		IngredientItems.SpringWater,
-		IngredientItems.Letter,
-		IngredientItems.Feather,
-		IngredientItems.Trinket,
-		IngredientItems.FruitSeed,
-		IngredientItems.PipeLeaf,
-		IngredientItems.MFluff,
-		IngredientItems.MDust,
-		IngredientItems.Stinger,
-		IngredientItems.SVenom,
-		IngredientItems.SClaw,
-		IngredientItems.TreeBark,
-		IngredientItems.AntlerChip,
-		IngredientItems.FlowerPetal,
-		IngredientItems.RawHoney,
-		IngredientItems.BeeChitin
-	];
+		});
+		
+		//For magic box
+		shop.potions = [
+			CombatItems.HPotion,
+			CombatItems.EPotion,
+			CombatItems.SpeedPotion,
+			AlchemyItems.Gestarium
+		];
+		shop.consumables = [
+			CombatItems.DecoyStick,
+			CombatItems.SmokeBomb,
+			CombatItems.PoisonDart,
+			CombatItems.LustDart
+		];
+		shop.ingredients = [
+			IngredientItems.HorseHair,
+			IngredientItems.HorseShoe,
+			IngredientItems.HorseCum,
+			IngredientItems.RabbitFoot,
+			IngredientItems.CarrotJuice,
+			IngredientItems.Lettuce,
+			IngredientItems.Whiskers,
+			IngredientItems.HairBall,
+			IngredientItems.CatClaw,
+			IngredientItems.SnakeOil,
+			IngredientItems.LizardScale,
+			IngredientItems.LizardEgg,
+			IngredientItems.SnakeFang,
+			IngredientItems.SnakeSkin,
+			IngredientItems.GoatMilk,
+			IngredientItems.GoatFleece,
+			IngredientItems.SheepMilk,
+			IngredientItems.Ramshorn,
+			IngredientItems.CowMilk,
+			IngredientItems.CowBell,
+			IngredientItems.FreshGrass,
+			IngredientItems.CanisRoot,
+			IngredientItems.DogBone,
+			IngredientItems.DogBiscuit,
+			IngredientItems.WolfFang,
+			IngredientItems.Wolfsbane,
+			IngredientItems.FoxBerries,
+			IngredientItems.Foxglove,
+			IngredientItems.CorruptPlant,
+			IngredientItems.BlackGem,
+			IngredientItems.CorruptSeed,
+			IngredientItems.DemonSeed,
+			IngredientItems.Hummus,
+			IngredientItems.SpringWater,
+			IngredientItems.Letter,
+			IngredientItems.Feather,
+			IngredientItems.Trinket,
+			IngredientItems.FruitSeed,
+			IngredientItems.PipeLeaf,
+			IngredientItems.MFluff,
+			IngredientItems.MDust,
+			IngredientItems.Stinger,
+			IngredientItems.SVenom,
+			IngredientItems.SClaw,
+			IngredientItems.TreeBark,
+			IngredientItems.AntlerChip,
+			IngredientItems.FlowerPetal,
+			IngredientItems.RawHoney,
+			IngredientItems.BeeChitin
+		];
 
-	//Actual inventory
-	shop.AddItem(CombatItems.HPotion, 5);
-	shop.AddItem(CombatItems.EPotion, 5);
-	shop.AddItem(CombatItems.SpeedPotion, 5);
-	shop.AddItem(AlchemyItems.Gestarium, 5);
-	shop.AddItem(CombatItems.DecoyStick, 5);
-	shop.AddItem(CombatItems.SmokeBomb, 5);
-	shop.AddItem(AccItems.CrudeBook, 5);
-	shop.AddItem(AccItems.GoldEarring, 5);
-	shop.AddItem(AccItems.SimpleCharm, 5);
-	shop.AddItem(WeaponsItems.WoodenStaff, 5);
-	shop.AddItem(WeaponsItems.MageStaff, 5);
-	shop.AddItem(WeaponsItems.AmberStaff, 5);
-	
-	MagicShopScenes.Shop = shop;
+		//Actual inventory
+		shop.AddItem(CombatItems.HPotion, 5);
+		shop.AddItem(CombatItems.EPotion, 5);
+		shop.AddItem(CombatItems.SpeedPotion, 5);
+		shop.AddItem(AlchemyItems.Gestarium, 5);
+		shop.AddItem(CombatItems.DecoyStick, 5);
+		shop.AddItem(CombatItems.SmokeBomb, 5);
+		shop.AddItem(AccItems.CrudeBook, 5);
+		shop.AddItem(AccItems.GoldEarring, 5);
+		shop.AddItem(AccItems.SimpleCharm, 5);
+		shop.AddItem(WeaponsItems.WoodenStaff, 5);
+		shop.AddItem(WeaponsItems.MageStaff, 5);
+		shop.AddItem(WeaponsItems.AmberStaff, 5);
+	}
 }
 
 MagicShopLoc.description = function() {
@@ -312,4 +319,4 @@ MagicShopLoc.onEntry = function() {
 		Gui.PrintDefaultOptions();
 }
 
-export { MagicShopLoc, MagicShopScenes };
+export { MagicShopLoc };

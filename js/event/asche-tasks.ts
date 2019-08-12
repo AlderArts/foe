@@ -16,16 +16,21 @@ import { Encounter } from '../combat';
 import { Jobs } from '../job';
 import { Sex } from '../entity-sex';
 import { EncounterTable } from '../encountertable';
-import { AquiliusScenes } from './outlaws/aquilius';
 import { Season } from '../time';
 import { IngredientItems } from '../items/ingredients';
 import { QuestItems } from '../items/quest';
 import { AccItems } from '../items/accessories';
 import { AscheFlags } from './asche-flags';
-import { AscheScenes } from './asche-scenes';
 import { AscheSexScenes } from './asche-sex';
 
 export namespace AscheTasksScenes {
+	let AscheScenes : any;
+	let AquiliusScenes : any;
+	export function INIT(ascheScenes : any, aquiliusScenes : any) {
+		AscheScenes = ascheScenes;
+		AquiliusScenes = aquiliusScenes;
+	}
+
 	export function Default() {
 		var parse : any = {};
 		

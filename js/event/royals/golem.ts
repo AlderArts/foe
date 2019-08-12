@@ -24,7 +24,7 @@ import { GolemFlags } from './golem-flags';
 import { Abilities } from '../../abilities';
 import { WeaponsItems } from '../../items/weapons';
 import { ArmorItems } from '../../items/armor';
-import { JeanneScenes } from './jeanne';
+import { JeanneScenes } from './jeanne-scenes';
 
 let GolemScenes : any = {};
 

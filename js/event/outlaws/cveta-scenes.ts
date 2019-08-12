@@ -10,13 +10,16 @@ import { Time } from '../../time';
 import { QuestItems } from '../../items/quest';
 import { Entity } from '../../entity';
 import { Status } from '../../statuseffect';
-import { DreamsScenes } from '../dreams';
 import { Party } from '../../party';
 import { MomoFlags } from '../momo-flags';
 import { KrawitzFlags } from '../../loc/rigard/krawitz-flags';
 import { CvetaDateScenes } from './cveta-date';
 
 export namespace CvetaScenes {
+	let DreamsScenes : any;
+	export function INIT(dreamsScenes : any) {
+		DreamsScenes = dreamsScenes;
+	}
 
 	export function CampDesc() {
 		let cveta = GAME().cveta;

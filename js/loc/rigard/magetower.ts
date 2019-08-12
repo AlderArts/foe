@@ -1,7 +1,7 @@
 
 
 import { Event, Link } from '../../event';
-import { JeanneScenes } from '../../event/royals/jeanne';
+import { JeanneScenes } from '../../event/royals/jeanne-scenes';
 import { GolemScenes } from '../../event/royals/golem';
 import { MoveToLocation, GAME, WORLD } from '../../GAME';
 import { Text } from '../../text';

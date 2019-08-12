@@ -14,7 +14,7 @@ import { RigardFlags } from "../loc/rigard/rigard-flags";
 import { Images } from "../assets";
 import { ArmorItems } from "../items/armor";
 import { LowerBodyType } from "../body/body";
-import { JeanneScenes } from "./royals/jeanne";
+import { JeanneScenes } from "./royals/jeanne-scenes";
 import { AlchemyItems } from "../items/alchemy";
 import { TFItem } from "../tf";
 import { StrapOnItems } from "../items/strapon";

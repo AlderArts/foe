@@ -19,6 +19,8 @@ import { BullTowerLoc } from './event/outlaws/bulltower';
 import { InitCheats } from './cheats';
 import { GAME, WORLD } from './GAME';
 import { RigardLoc } from './loc/rigard/rigard-scenes';
+import { CvetaScenes } from './event/outlaws/cveta-scenes';
+import { DreamsScenes } from './event/dreams';
 
 export function InitWorld() {
 	let world = WORLD(); 
@@ -73,6 +75,7 @@ export function InitWorld() {
 	InitGlade();
 	
 	InitMiranda();
+	CvetaScenes.INIT(DreamsScenes);
 	
 	InitCheats();
 }
