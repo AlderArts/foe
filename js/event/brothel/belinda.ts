@@ -8,7 +8,6 @@ import { Race } from '../../body/race';
 import { Color } from '../../body/color';
 import { WorldTime, GAME, WORLD } from '../../GAME';
 
-let BelindaScenes = {};
 let BelindaFlags = {
 	Met : {
 		NotMet : 0,
@@ -74,5 +73,6 @@ export class Belinda extends Entity {
 	}	
 }
 
+export namespace BelindaScenes {
 
-export { BelindaScenes };
+};

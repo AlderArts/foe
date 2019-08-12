@@ -5,8 +5,6 @@
  */
 import { Entity } from '../../entity';
 
-let ChesScenes : any = {};
-
 let ChesFlags = {
 	Met : {
 		NotMet : 0
@@ -58,4 +56,6 @@ export class Ches extends Entity {
 	}	
 }
 
-export { ChesScenes };
+export namespace ChesScenes {
+	
+};
