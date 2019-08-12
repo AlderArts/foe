@@ -9,7 +9,7 @@ import { LagomorphAlpha } from '../enemy/rabbit';
 import { BurrowsFlags } from './burrows-flags';
 import { EncounterTable } from '../encountertable';
 import { Season } from '../time';
-import { Link } from '../event';
+import { Link, Event } from '../event';
 import { LagonScenes, InitLagon } from '../event/burrows/lagon-scenes';
 import { LagonFlags } from '../event/burrows/lagon-flags';
 import { Party } from '../party';
@@ -20,7 +20,7 @@ export function InitBurrows() {
 };
 
 // Create namespace
-let BurrowsLoc : any = {
+let BurrowsLoc = {
 	Entrance  : new Event("The Burrows"),
 	Tunnels   : new Event("Burrows: Tunnels"),
 	Pit       : new Event("Burrows: The Pit"),

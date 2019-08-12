@@ -25,20 +25,29 @@ import { VaughnTasksScenes } from './outlaws/vaughn-tasks';
 let MirandaScenes : any = {};
 
 export function InitMiranda() {
-	let rigard = GAME().rigard;
-	let miranda = GAME().miranda;
-
 	let world = WORLD();
     // Add catch thief as explorable event
-    world.loc.Rigard.Slums.Gate.enc.AddEnc(function() { return MirandaScenes.CatchThatThief; }, 1.0, function() { return miranda.flags["Thief"] == 0 && miranda.OnPatrol(); });
-    world.loc.Rigard.Residential.Street.enc.AddEnc(function() { return MirandaScenes.CatchThatThief; }, 1.0, function() { return miranda.flags["Thief"] == 0 && miranda.OnPatrol(); });
-    world.loc.Rigard.Gate.enc.AddEnc(function() { return MirandaScenes.CatchThatThief; }, 1.0, function() { return miranda.flags["Thief"] == 0 && miranda.OnPatrol(); });
-    world.loc.Rigard.ShopStreet.Street.enc.AddEnc(function() { return MirandaScenes.CatchThatThief; }, 1.0, function() { return miranda.flags["Thief"] == 0 && miranda.OnPatrol(); });
+    world.loc.Rigard.Slums.Gate.enc.AddEnc(function() { return MirandaScenes.CatchThatThief; }, 1.0, function() {
+		let miranda = GAME().miranda;
+		return miranda.flags["Thief"] == 0 && miranda.OnPatrol();
+	});
+    world.loc.Rigard.Residential.Street.enc.AddEnc(function() { return MirandaScenes.CatchThatThief; }, 1.0, function() {
+		let miranda = GAME().miranda;
+		return miranda.flags["Thief"] == 0 && miranda.OnPatrol();
+	});
+    world.loc.Rigard.Gate.enc.AddEnc(function() { return MirandaScenes.CatchThatThief; }, 1.0, function() {
+		let miranda = GAME().miranda;
+		return miranda.flags["Thief"] == 0 && miranda.OnPatrol();
+	});
+    world.loc.Rigard.ShopStreet.Street.enc.AddEnc(function() { return MirandaScenes.CatchThatThief; }, 1.0, function() {
+		let miranda = GAME().miranda;
+		return miranda.flags["Thief"] == 0 && miranda.OnPatrol();
+	});
 
     
-    world.loc.Rigard.Tavern.common.events.push(new Link("Miranda", function() { return miranda.IsAtLocation(); }, true,
+    world.loc.Rigard.Tavern.common.events.push(new Link("Miranda", function() { return GAME().miranda.IsAtLocation(); }, true,
         function() {
-            if(miranda.IsAtLocation())
+            if(GAME().miranda.IsAtLocation())
                 Text.Add("Miranda is lounging at a table in the shady tavern. ");
         },
         MirandaScenes.MaidensBaneTalk,
@@ -47,11 +56,11 @@ export function InitMiranda() {
 
     
     /* TODO */
-    world.loc.Rigard.Residential.miranda.description = function() {
+    world.loc.Rigard.Residential.Miranda.description = function() {
         
     }
-    world.loc.Rigard.Residential.miranda.onEntry = function() {
-        if(rigard.Krawitz["Q"] == RigardFlags.KrawitzQ.HuntingTerry)
+    world.loc.Rigard.Residential.Miranda.onEntry = function() {
+        if(GAME().rigard.Krawitz["Q"] == RigardFlags.KrawitzQ.HuntingTerry)
             MirandaScenes.TerryChaseHome();
         else
             Gui.PrintDefaultOptions();
@@ -2849,7 +2858,7 @@ MirandaScenes.HomeDommySex = function() {
 	};
 
 	parse = player.ParserTags(parse);
-	party.location = world.loc.Rigard.Residential.miranda;
+	party.location = world.loc.Rigard.Residential.Miranda;
 
 	Text.NL();
 	Text.Add("You are standing in the murky hallway just inside Miranda’s house, the doggie herself huffing and panting in your arms. She is really starting to get into it, kissing your neck and caressing your back and [butt] with her hands.", parse);
@@ -4391,7 +4400,7 @@ MirandaScenes.HomeSubbySex = function() {
 	};
 
 	parse = player.ParserTags(parse);
-	party.location = world.loc.Rigard.Residential.miranda;
+	party.location = world.loc.Rigard.Residential.Miranda;
 
 	Text.NL();
 	Text.Add("Miranda is breathing heavily as she paws at you, dragging and clawing at your gear. There is a fierce fire in her eyes, indicating that at least one of you is in for a <i>really</i> good time. How well this bodes for you, you are not sure.", parse);

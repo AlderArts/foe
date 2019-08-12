@@ -21,7 +21,6 @@ import { Encounter } from '../combat';
 import { Text } from '../text';
 import { Gui } from '../gui';
 import { SetGameState, GameState } from '../gamestate';
-import { BodyPartType } from '../body/bodypart';
 import { IngredientItems } from '../items/ingredients';
 import { Abilities } from '../abilities';
 import { PregnancyHandler } from '../pregnancy';
@@ -111,48 +110,46 @@ export class Lizard extends Entity {
 		this.SetLevelBonus();
 		this.RestFull();
 	}
-}
-Lizard.prototype = new Entity();
-Lizard.prototype.constructor = Lizard;
 
-Lizard.prototype.DropTable = function() {
-	var drops = [];
-	if(Math.random() < 0.05) drops.push({ it: AlchemyItems.Lacertium });
-	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.SnakeOil });
-	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.LizardScale });
-	if(Math.random() < 0.5)  drops.push({ it: IngredientItems.LizardEgg });
-
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.SnakeFang });
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.SnakeSkin });
-	if(Math.random() < 0.1)  drops.push({ it: IngredientItems.SpringWater });
-
-	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Scorpius });
-	if(Math.random() < 0.01) drops.push({ it: AlchemySpecial.Nagazm });
-	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Gestarium });
-	return drops;
-}
-
-Lizard.prototype.Act = function(encounter, activeChar) {
-	// TODO: Very TEMP
-	Text.Add(this.name + " acts! Hiss!");
-	Text.NL();
-
-	// Pick a random target
-	var t = this.GetSingleTarget(encounter, activeChar);
-
-	var parseVars = {
-		name   : this.name,
-		hisher : this.hisher(),
-		tName  : t.name
-	};
-
-	var choice = Math.random();
-	if(choice < 0.6)
-		Abilities.Attack.Use(encounter, this, t);
-	else if(choice < 0.8 && Abilities.Physical.Pierce.enabledCondition(encounter, this))
-		Abilities.Physical.Pierce.Use(encounter, this, t);
-	else
-		Abilities.Seduction.Tease.Use(encounter, this, t);
+	DropTable() {
+		var drops = [];
+		if(Math.random() < 0.05) drops.push({ it: AlchemyItems.Lacertium });
+		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.SnakeOil });
+		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.LizardScale });
+		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.LizardEgg });
+	
+		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.SnakeFang });
+		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.SnakeSkin });
+		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.SpringWater });
+	
+		if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Scorpius });
+		if(Math.random() < 0.01) drops.push({ it: AlchemySpecial.Nagazm });
+		if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Gestarium });
+		return drops;
+	}
+	
+	Act(encounter : any, activeChar : any) {
+		// TODO: Very TEMP
+		Text.Add(this.name + " acts! Hiss!");
+		Text.NL();
+	
+		// Pick a random target
+		var t = this.GetSingleTarget(encounter, activeChar);
+	
+		var parseVars = {
+			name   : this.name,
+			hisher : this.hisher(),
+			tName  : t.name
+		};
+	
+		var choice = Math.random();
+		if(choice < 0.6)
+			Abilities.Attack.Use(encounter, this, t);
+		else if(choice < 0.8 && Abilities.Physical.Pierce.enabledCondition(encounter, this))
+			Abilities.Physical.Pierce.Use(encounter, this, t);
+		else
+			Abilities.Seduction.Tease.Use(encounter, this, t);
+	}
 }
 
 LizardsScenes.Impregnate = function(mother : Entity, father : Lizard, slot? : number) {

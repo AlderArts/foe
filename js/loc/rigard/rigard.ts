@@ -87,8 +87,8 @@ export class Rigard {
 		this.ClothShop.AddItem(ArmorItems.SimpleRobes, 5);
 		this.ClothShop.AddItem(ArmorItems.StylizedClothes, 5);
 
-		this.ArmorShop = ArmorShopScenes.Shop;
-		this.ArmorShopSpecial = ArmorShopScenes.SpecialShop;
+		this.ArmorShop = ArmorShopScenes.AShop();
+		this.ArmorShopSpecial = ArmorShopScenes.ASpecialShop();
 
 		this.SexShop = new Shop();
 		this.SexShop.AddItem(StrapOnItems.PlainStrapon, 5);
