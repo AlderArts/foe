@@ -7,12 +7,12 @@
 import { BrothelLoc, InitBrothel } from './brothel';
 import { InnLoc, InitLB } from './inn';
 import { Shop } from '../../shop';
-import { ResidentialLoc } from './residential';
-import { SlumsLoc } from './slums';
+import { ResidentialLoc, InitResidential } from './residential';
+import { SlumsLoc, InitSlums } from './slums';
 import { TavernLoc } from './tavern';
-import { GateLoc, BarracksLoc } from './guards';
+import { GateLoc, BarracksLoc, InitGuards } from './guards';
 import { ShopStreetLoc } from './merchants';
-import { CastleLoc } from './castle';
+import { CastleLoc, InitCastle } from './castle';
 import { PlazaLoc } from './plaza';
 import { KrawitzLoc, InitKrawitz } from './krawitz';
 import { MagicShopScenes } from './magicshop';
@@ -25,9 +25,14 @@ import { RigardFlags } from './rigard-flags';
 import { ArmorItems } from '../../items/armor';
 import { StrapOnItems } from '../../items/strapon';
 import { WeaponsItems } from '../../items/weapons';
+import { RigardScenes } from './rigard-scenes';
 
 export function InitRigard() {
 	InitBrothel();
+	InitSlums(RigardScenes);
+	InitResidential(RigardScenes);
+	InitGuards(RigardScenes);
+	InitCastle(RigardScenes);
 	InitLB();
 	InitMageTower();
 	InitKrawitz();

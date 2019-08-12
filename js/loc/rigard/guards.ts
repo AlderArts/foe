@@ -6,9 +6,14 @@ import { Text } from '../../text';
 import { RigardFlags } from './rigard-flags';
 import { Gui } from '../../gui';
 import { TerryScenes } from '../../event/terry-scenes';
-import { RigardScenes } from './rigard-scenes';
 import { MirandaScenes } from '../../event/miranda-scenes';
 import { VaughnTasksScenes } from '../../event/outlaws/vaughn-tasks';
+
+let RigardScenes : any;
+export function InitGuards(rigardScenes : any) {
+	RigardScenes = rigardScenes;
+}
+
 
 let GateLoc = new Event("Main Gate");
 let BarracksLoc = {

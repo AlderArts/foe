@@ -13,9 +13,12 @@ import { AscheFlags } from '../../event/asche-flags';
 import { GlobalScenes } from '../../event/global';
 import { TerryScenes } from '../../event/terry-scenes';
 import { Party } from '../../party';
-import { RigardScenes } from './rigard-scenes';
 import { VaughnTasksScenes } from '../../event/outlaws/vaughn-tasks';
 
+let RigardScenes : any;
+export function InitCastle(rigardScenes : any) {
+	RigardScenes = rigardScenes;
+}
 
 let CastleLoc = {
 	Grounds   : new Event("Royal grounds"),

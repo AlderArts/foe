@@ -5,9 +5,13 @@ import { WorldTime, MoveToLocation, GAME, WORLD } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { Season } from '../../time';
-import { RigardScenes } from './rigard-scenes';
 import { LeiScenes } from '../../event/royals/lei-scenes';
 import { MirandaScenes } from '../../event/miranda-scenes';
+
+let RigardScenes : any;
+export function InitSlums(rigardScenes : any) {
+	RigardScenes = rigardScenes;
+}
 
 let SlumsLoc = {
 	Gate     : new Event("Peasants' Gate"),

@@ -5,11 +5,15 @@ import { Text } from '../../text';
 import { MoveToLocation, GAME, WORLD } from '../../GAME';
 import { Gui } from '../../gui';
 import { RigardFlags } from './rigard-flags';
-import { RigardScenes } from './rigard-scenes';
 import { TerryScenes } from '../../event/terry-scenes';
 import { LeiScenes } from '../../event/royals/lei-scenes';
 import { Party } from '../../party';
 import { BrothelScenes } from './brothel';
+
+let RigardScenes : any;
+export function InitResidential(rigardScenes : any) {
+	RigardScenes = rigardScenes;
+}
 
 let ResidentialLoc = {
 	Street   : new Event("Residential street"), // Will also contain gate to slums
