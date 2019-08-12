@@ -302,7 +302,9 @@ CvetaScenes.Prompt = function() {
 		});
 		
 		options.push({ nameStr : "Date",
-			func : CvetaScenes.Dates.Prompt, enabled : true,
+			func : function() {
+				CvetaScenes.Dates.Prompt(CvetaScenes.Prompt);
+			}, enabled : true,
 			tooltip : "Ask Cveta if she’d like to go somewhere with you."
 		});
 	}

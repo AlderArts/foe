@@ -1,18 +1,22 @@
-import { Cveta } from './cveta';
-import { WorldTime } from '../../GAME';
+import * as _ from 'lodash';
+
+import { WorldTime, GAME, StepToHour } from '../../GAME';
 import { Gui } from '../../gui';
 import { Text } from '../../text';
 import { EncounterTable } from '../../encountertable';
 import { DryadGladeFlags } from '../../loc/glade-flags';
+import { Party } from '../../party';
+import { CvetaFlags } from './cveta-flags';
 
-let DateScenes = {};
+let DateScenes : any = {};
 
-DateScenes.Prompt = function() {
+DateScenes.Prompt = function(Prompt : any) {
 	let player = GAME().player;
 	let party : Party = GAME().party;
 	let cveta = GAME().cveta;
+	let glade = GAME().glade;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
@@ -31,7 +35,7 @@ DateScenes.Prompt = function() {
 		Text.Add("<i>“Could you perhaps ask again tomorrow, before noon?”</i>", parse);
 		Text.Flush();
 		
-		Scenes.Cveta.Prompt();
+		Prompt();
 	}
 	else {
 		Text.Add("<i>“I would not mind, [playername]. I have some spare time, and perhaps a change in scenery would help inspire my practice. Was there a place you had in mind?”<i/>", parse);
@@ -78,8 +82,8 @@ DateScenes.Prompt = function() {
 					
 					var arr = [];
 					
-					if(cveta.flags["Date"] & Cveta.Dates.Glade) arr.push(DateScenes.DryadGlade);
-					if(cveta.flags["Date"] & Cveta.Dates.Spring) arr.push(DateScenes.Spring);
+					if(cveta.flags["Date"] & CvetaFlags.Dates.Glade) arr.push(DateScenes.DryadGlade);
+					if(cveta.flags["Date"] & CvetaFlags.Dates.Spring) arr.push(DateScenes.Spring);
 					
 					//TODO add
 					
@@ -95,7 +99,7 @@ DateScenes.Prompt = function() {
 			Text.Add("<i>“You know where to find me,”</i> Cveta replies amiably.", parse);
 			Text.Flush();
 			
-			Scenes.Cveta.Prompt();
+			Prompt();
 		});
 	}
 }
@@ -122,15 +126,16 @@ DateScenes.PartySetup = function() {
 DateScenes.DryadGlade = function() {
 	let player = GAME().player;
 	let cveta = GAME().cveta;
+	let glade = GAME().glade;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
 	DateScenes.PartySetup();
 	
-	var first = !(cveta.flags["Date"] & Cveta.Dates.Glade);
-	cveta.flags["Date"] |= Cveta.Dates.Glade;
+	var first = !(cveta.flags["Date"] & CvetaFlags.Dates.Glade);
+	cveta.flags["Date"] |= CvetaFlags.Dates.Glade;
 	
 	Text.Add("The glade, yes, that sounds like a good idea. Cveta would appreciate the flowers, and it would do her some good to see someone who isn’t an outlaw every now and then.", parse);
 	Text.NL();
@@ -291,7 +296,7 @@ DateScenes.DryadGlade = function() {
 	Text.Flush();
 	
 	cveta.relation.IncreaseStat(100, 2);
-	world.StepToHour(18);
+	StepToHour(18);
 	
 	Gui.NextPrompt();
 }
@@ -300,13 +305,13 @@ DateScenes.Spring = function() {
 	let player = GAME().player;
 	let cveta = GAME().cveta;
 
-	var parse = {
+	var parse : any = {
 		playername : player.name
 	};
 	
 	DateScenes.PartySetup();
 	
-	cveta.flags["Date"] |= Cveta.Dates.Spring;
+	cveta.flags["Date"] |= CvetaFlags.Dates.Spring;
 	
 	Text.Add("Hmm… well, there’s nothing against it. The spring’s probably a good place - unlikely that anyone’s bound to walk in on the two of you, it’s quiet and appropriately inspirational, and the water is clear if it comes to that. The more you consider it, the more of a good idea it promises to be. The change of scenery would probably help her music along, too.", parse);
 	Text.NL();
@@ -512,7 +517,7 @@ DateScenes.Spring = function() {
 			Text.Flush();
 			
 			cveta.relation.IncreaseStat(100, 2);
-			world.StepToHour(18);
+			StepToHour(18);
 			
 			Gui.NextPrompt();
 		});

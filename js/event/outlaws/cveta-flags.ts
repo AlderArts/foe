@@ -29,6 +29,11 @@ let CvetaFlags = {
         Introduced : 1, //seen post-bulltower performance
         Groped : 2
     },
+    
+    Dates : { //Bitmask
+        Glade : 1,
+        Spring : 2
+    },
 };
 
 export { CvetaFlags };

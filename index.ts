@@ -45,9 +45,6 @@ import './js/event/royals/jeanne.js';
 import './js/event/royals/golem.js';
 
 import './js/event/outlaws/aquilius.js';
-import './js/event/outlaws/maria.js';
-import './js/event/outlaws/cveta.js';
-import './js/event/outlaws/cveta-date.js';
 import './js/event/outlaws/vaughn.js';
 import './js/event/outlaws/bulltower.js';
 
