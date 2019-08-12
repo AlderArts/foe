@@ -25,11 +25,11 @@ export class Shop {
 
 	//TODO
 	buyPromptFunc : (it: any, cost: number, bought: boolean) => void;
-	buySuccessFunc : any;
-	buyFailFunc : any;
-	sellPromptFunc : any;
-	sellSuccessFunc : any;
-	sellFailFunc : any;
+	buySuccessFunc : CallableFunction;
+	buyFailFunc : CallableFunction;
+	sellPromptFunc : CallableFunction;
+	sellSuccessFunc : CallableFunction;
+	sellFailFunc : CallableFunction;
 
 	constructor(opts? : any) {
 		// Contains {it: Item, [num: Number], [enabled: Function], [func: Function], [price: Number]}
@@ -67,7 +67,7 @@ export class Shop {
 		this.totalSold   = !isNaN(parseInt(storage.ts)) ? parseInt(storage.ts) : this.totalSold;
 	}
 
-	AddItem(item : any, price : number, enabled? : boolean, func? : any, num? : number) {
+	AddItem(item : any, price : number, enabled? : boolean, func? : CallableFunction, num? : number) {
 		this.inventory.push({
 			it      : item,
 			price   : price,
@@ -77,7 +77,7 @@ export class Shop {
 		});
 	}
 
-	Buy(back? : any, preventClear? : boolean) {
+	Buy(back? : CallableFunction, preventClear? : boolean) {
 		let party : Party = GAME().party;
 
 		var shop = this;
@@ -188,7 +188,7 @@ export class Shop {
 		Gui.SetButtonsFromList(options, true, back);
 	}
 
-	Sell(back? : any, preventClear? : boolean, customSellFunc? : any) {
+	Sell(back? : CallableFunction, preventClear? : boolean, customSellFunc? : CallableFunction) {
 		let party : Party = GAME().party;
 
 		var shop = this;

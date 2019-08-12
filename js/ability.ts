@@ -91,7 +91,7 @@ export class Ability {
 	}
 
 	// Used as entrypoint for PC/Party (active selection)
-	OnSelect(encounter : Encounter, caster : Entity, backPrompt? : any, ext? : any) {
+	OnSelect(encounter : Encounter, caster : Entity, backPrompt? : CallableFunction, ext? : any) {
 		var ability = this;
 		// TODO: Buttons (use portraits for target?)
 
@@ -322,7 +322,7 @@ export class AbilityCollection {
 		return this.AbilitySet.length == 0;
 	}
 
-	OnSelect(encounter : Encounter, caster : Entity, backPrompt? : any) {
+	OnSelect(encounter : Encounter, caster : Entity, backPrompt? : CallableFunction) {
 		var collection = this;
 		var entry = caster.GetCombatEntry(encounter);
 		var prompt = function() {

@@ -17,7 +17,7 @@ export class Button {
 	disabledImage : any;
 	visible : boolean;
 	enabled : boolean;
-	func : any;
+	func : CallableFunction;
 	obj : any;
 	tooltip : any;
 	key : number;
@@ -30,7 +30,7 @@ export class Button {
 	text2 : any;
 	glow : any;
 
-	constructor(Gui : any, rect : any, text : string, func : any, enabled : boolean, image : any, disabledImage : any, glow? : boolean) {
+	constructor(Gui : any, rect : any, text : string, func : CallableFunction, enabled : boolean, image : any, disabledImage : any, glow? : boolean) {
 		var that = this;
 
 		this.Gui = Gui;
@@ -187,7 +187,7 @@ export class Button {
 	/*
 	 * This function is used to set the state of a button after it is created
 	 */
-	Setup(text : string, func : any, enabled : boolean, obj : any, tooltip : any, state : GameState) {
+	Setup(text : string, func : CallableFunction, enabled : boolean, obj : any, tooltip : any, state : GameState) {
 		this.SetText(text);
 		this.func    = func;
 		this.obj     = obj;
@@ -200,7 +200,7 @@ export class Button {
 	/*
 	 * Set from ability
 	 */
-	SetFromAbility(encounter : any, caster : any, ability : any, backPrompt : any) {
+	SetFromAbility(encounter : any, caster : any, ability : any, backPrompt : CallableFunction) {
 		this.SetText(ability.name);
 		this.tooltip = ability.tooltip;
 		this.SetVisible(true);

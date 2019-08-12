@@ -13,7 +13,7 @@ let Saver : any = {};
 
 Saver.slots = 12;
 
-Saver.SavePrompt = function(backFunc : any) {
+Saver.SavePrompt = function(backFunc : CallableFunction) {
 	Text.Clear();
 
 	Text.Add("Save game:");

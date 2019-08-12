@@ -76,8 +76,8 @@ ClothShopLoc.description = function() {
 
 /*
 ClothShopLoc.enc = new EncounterTable();
-ClothShopLoc.enc.AddEnc(function() { return Scenes.Rigard.Plaza.LetterDelivery; }, 1.0, function() { return (WorldTime().hour >= 6 && WorldTime().hour < 21); });
-ClothShopLoc.enc.AddEnc(function() { return Scenes.Rigard.Plaza.StatueInfo; }, 1.0, function() { return (WorldTime().hour >= 6 && WorldTime().hour < 21) && (rigard.flags["TalkedStatue"] == 0 || (party.InParty(kiakai) && kiakai.flags["TalkedStatue"] == 0)); });
+ClothShopLoc.enc.AddEnc(function() { return RigardScenes.Plaza.LetterDelivery; }, 1.0, function() { return (WorldTime().hour >= 6 && WorldTime().hour < 21); });
+ClothShopLoc.enc.AddEnc(function() { return RigardScenes.Plaza.StatueInfo; }, 1.0, function() { return (WorldTime().hour >= 6 && WorldTime().hour < 21) && (rigard.flags["TalkedStatue"] == 0 || (party.InParty(kiakai) && kiakai.flags["TalkedStatue"] == 0)); });
 */
 
 ClothShopLoc.events.push(new Link(

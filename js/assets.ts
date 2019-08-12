@@ -87,7 +87,7 @@ Images.imgWaitDisabled      = "assets/img/gui/wait_disabled.png";
 Images.imgSleepEnabled      = "assets/img/gui/sleep_enabled.png";
 Images.imgSleepDisabled     = "assets/img/gui/sleep_disabled.png";
 
-var LoadImages = function(onComplete : any) {
+var LoadImages = function(onComplete : CallableFunction) {
 	let loader = preloader({
 		xhrImages: false
 	});
