@@ -21,6 +21,7 @@ import { Party } from '../party';
 import { BullTowerScenes } from '../event/outlaws/bulltower';
 import { AquiliusScenes } from '../event/outlaws/aquilius';
 import { DeadDropScenes } from '../event/outlaws/maria-dd';
+import { OCavalcadeScenes } from '../event/outlaws/cavalcade';
 
 export function InitOutlaws() {
 	WORLD().SaveSpots["Outlaws"] = OutlawsLoc.Camp;
@@ -164,7 +165,7 @@ OutlawsLoc.Camp.enc.AddEnc(function() {
 }, 1.0, function() { return WorldTime().hour >= 5 && WorldTime().hour < 22; });
 OutlawsLoc.Camp.enc.AddEnc(function() {
 	return OutlawsScenes.Exploration.Cavalcade;
-}, 1.0, function() { return OutlawsScenes.Cavalcade.Enabled(); });
+}, 1.0, function() { return OCavalcadeScenes.Enabled(); });
 OutlawsLoc.Camp.enc.AddEnc(function() {
 	return OutlawsScenes.Exploration.Archery;
 }, 1.0, function() { return GAME().outlaws.flags["Met"] >= OutlawsFlags.Met.MetBelinda && WorldTime().IsDay(); });
