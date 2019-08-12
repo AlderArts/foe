@@ -15,7 +15,7 @@ import { Party } from '../../party';
 import { Jobs } from '../../job';
 import { GlobalScenes } from '../global';
 import { ItemIds, Item } from '../../item';
-import { AscheScenes } from '../asche';
+import { AscheScenes } from '../asche-scenes';
 
 let AquiliusScenes : any = {};
 

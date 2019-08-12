@@ -12,7 +12,7 @@ import { GlobalScenes } from './event/global';
 import { GAME } from './GAME';
 import { TwinsFlags } from './event/royals/twins-flags';
 import { AlchemyItems } from './items/alchemy';
-import { AscheScenes } from './event/asche';
+import { AscheScenes } from './event/asche-scenes';
 import { LeiScenes } from './event/royals/lei-scenes';
 import { RigardFlags } from './loc/rigard/rigard-flags';
 import { DryadGladeFlags } from './loc/glade-flags';

@@ -16,7 +16,7 @@ import { AlchemyItems } from '../../items/alchemy';
 import { IngredientItems } from '../../items/ingredients';
 import { AccItems } from '../../items/accessories';
 import { WeaponsItems } from '../../items/weapons';
-import { AscheScenes } from '../../event/asche';
+import { AscheScenes } from '../../event/asche-scenes';
 import { Item } from '../../item';
 
 let MagicShopLoc = new Event("Asche's Fanciful Trinkets");

@@ -23,7 +23,7 @@ import { QuestItems } from '../items/quest';
 import { AccItems } from '../items/accessories';
 import { AscheFlags } from './asche-flags';
 import { SexScenes } from './asche-sex';
-import { AscheScenes } from './asche';
+import { AscheScenes } from './asche-scenes';
 
 let TasksScenes : any = {};
 

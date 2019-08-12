@@ -20,7 +20,7 @@ import { FeralWolfScenes } from '../enemy/feralwolf';
 import { MomoScenes } from '../event/momo';
 import { QuestItems } from '../items/quest';
 import { AquiliusScenes } from '../event/outlaws/aquilius';
-import { AscheScenes } from '../event/asche';
+import { AscheScenes } from '../event/asche-scenes';
 import { BurrowsFlags } from './burrows-flags';
 import { Party } from '../party';
 
