@@ -3,7 +3,6 @@ import { Event, Link } from '../../event';
 import { EncounterTable } from '../../encountertable';
 import { MageTowerLoc } from './magetower';
 import { WorldTime, MoveToLocation, TimeStep, GAME, WORLD } from '../../GAME';
-import { VaughnScenes } from '../../event/outlaws/vaughn-scenes';
 import { Season, Time } from '../../time';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
@@ -15,6 +14,7 @@ import { GlobalScenes } from '../../event/global';
 import { TerryScenes } from '../../event/terry-scenes';
 import { Party } from '../../party';
 import { RigardScenes } from './rigard-scenes';
+import { VaughnTasksScenes } from '../../event/outlaws/vaughn-tasks';
 
 
 let CastleLoc = {
@@ -135,7 +135,7 @@ CastleLoc.Grounds.events.push(new Link(
 		}
 	},
 	function() {
-		VaughnScenes.Tasks.Lockpicks.MeetingElodie();
+		VaughnTasksScenes.Lockpicks.MeetingElodie();
 	}
 ));
 

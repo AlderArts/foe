@@ -9,7 +9,7 @@ import { Race } from '../../body/race';
 import { Time } from '../../time';
 import { WorldTime, GAME, WORLD } from '../../GAME';
 import { VaughnFlags } from './vaughn-flags';
-import { VaughnScenes } from './vaughn-scenes';
+import { VaughnTasksScenes } from './vaughn-tasks';
 
 export class Vaughn extends Entity {
 	taskTimer : Time;
@@ -69,7 +69,7 @@ export class Vaughn extends Entity {
 	
 	Update(step : number) {
 		super.Update(step);
-		if(VaughnScenes.Tasks.OnTask())
+		if(VaughnTasksScenes.OnTask())
 			this.taskTimer.Dec(step);
 	}
 	

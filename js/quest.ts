@@ -1,8 +1,6 @@
 
 import { Items } from './items';
 import { GetDEBUG } from '../app';
-import { VaughnScenes } from './event/outlaws/vaughn-scenes';
-import { VaughnFlags } from './event/outlaws/vaughn-flags';
 import { CaleFlags } from './event/nomads/cale-flags';
 import { TerryFlags } from './event/terry-flags';
 import { isFunction } from './utility';
@@ -18,6 +16,8 @@ import { DryadGladeFlags } from './loc/glade-flags';
 import { BurrowsFlags } from './loc/burrows-flags';
 import { LeiFlags } from './event/royals/lei-flags';
 import { AscheTasksScenes } from './event/asche-tasks';
+import { VaughnFlags } from './event/outlaws/vaughn-flags';
+import { VaughnTasksScenes } from './event/outlaws/vaughn-tasks';
 
 export class Quest {
 	name : any;
@@ -936,7 +936,7 @@ Quests.quests.push(new Quest({
 	},
 	active: function() {
 		var status = Quests.Type.NotStarted;
-		if(VaughnScenes.Tasks.Lockpicks.Completed())
+		if(VaughnTasksScenes.Lockpicks.Completed())
 			status |= Quests.Type.Completed;
 		else if(GAME().vaughn.flags["Met"] >= VaughnFlags.Met.OnTaskLockpicks)
 			status |= Quests.Type.Visible;
@@ -962,7 +962,7 @@ Quests.quests.push(new Quest({
 			active: function() {
 				var status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(VaughnScenes.Tasks.Lockpicks.Completed())
+				if(VaughnTasksScenes.Lockpicks.Completed())
 					status |= Quests.Type.Completed;
 				return status;
 			}
@@ -979,7 +979,7 @@ Quests.quests.push(new Quest({
 	},
 	active: function() {
 		var status = Quests.Type.NotStarted;
-		if(VaughnScenes.Tasks.Snitch.Completed())
+		if(VaughnTasksScenes.Snitch.Completed())
 			status |= Quests.Type.Completed;
 		else if(GAME().vaughn.flags["Met"] >= VaughnFlags.Met.OnTaskSnitch)
 			status |= Quests.Type.Visible;
@@ -1005,7 +1005,7 @@ Quests.quests.push(new Quest({
 			active: function() {
 				var status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(VaughnScenes.Tasks.Snitch.Completed())
+				if(VaughnTasksScenes.Snitch.Completed())
 					status |= Quests.Type.Completed;
 				return status;
 			}
@@ -1024,9 +1024,9 @@ Quests.quests.push(new Quest({
 		let vaughn = GAME().vaughn;
 		var status = Quests.Type.NotStarted;
 		
-		if(VaughnScenes.Tasks.Poisoning.Completed() && !(vaughn.flags["T3"] & VaughnFlags.Poisoning.Success))
+		if(VaughnTasksScenes.Poisoning.Completed() && !(vaughn.flags["T3"] & VaughnFlags.Poisoning.Success))
 			status |= Quests.Type.Failed;
-		else if(VaughnScenes.Tasks.Poisoning.Completed())
+		else if(VaughnTasksScenes.Poisoning.Completed())
 			status |= Quests.Type.Completed;
 		else if(vaughn.flags["Met"] >= VaughnFlags.Met.OnTaskPoisoning)
 			status |= Quests.Type.Visible;
@@ -1056,7 +1056,7 @@ Quests.quests.push(new Quest({
 			active: function() {
 				var status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(VaughnScenes.Tasks.Poisoning.Completed())
+				if(VaughnTasksScenes.Poisoning.Completed())
 					status |= Quests.Type.Completed;
 				return status;
 			}

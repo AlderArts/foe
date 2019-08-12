@@ -2,13 +2,13 @@
 import { Event, Link } from '../../event';
 import { EncounterTable } from '../../encountertable';
 import { WorldTime, MoveToLocation, GAME, WORLD } from '../../GAME';
-import { VaughnScenes } from '../../event/outlaws/vaughn-scenes';
 import { Text } from '../../text';
 import { RigardFlags } from './rigard-flags';
 import { Gui } from '../../gui';
 import { TerryScenes } from '../../event/terry-scenes';
 import { RigardScenes } from './rigard-scenes';
 import { MirandaScenes } from '../../event/miranda-scenes';
+import { VaughnTasksScenes } from '../../event/outlaws/vaughn-tasks';
 
 let GateLoc = new Event("Main Gate");
 let BarracksLoc = {
@@ -165,7 +165,7 @@ BarracksLoc.common.events.push(new Link(
 ));
 BarracksLoc.common.events.push(new Link(
 	"Evidence", function() {
-		return VaughnScenes.Tasks.Snitch.OnTask();
+		return VaughnTasksScenes.Snitch.OnTask();
 	}, function() {
 		let vaughn = GAME().vaughn;
 		return !vaughn.taskTimer.Expired();
@@ -173,7 +173,7 @@ BarracksLoc.common.events.push(new Link(
 	function() {
 		let miranda = GAME().miranda;
 		let vaughn = GAME().vaughn;
-		if(VaughnScenes.Tasks.Snitch.OnTask()) {
+		if(VaughnTasksScenes.Snitch.OnTask()) {
 			if(vaughn.taskTimer.Expired())
 				Text.Add("You were supposed to plant the evidence in the lockers here for Vaughn, but you weren't quick enough; the inspection has already happened. You should return and report to Vaughn.");
 			else {
@@ -185,7 +185,7 @@ BarracksLoc.common.events.push(new Link(
 		}
 	},
 	function() {
-		VaughnScenes.Tasks.Snitch.PlantEvidence();
+		VaughnTasksScenes.Snitch.PlantEvidence();
 	}
 ));
 

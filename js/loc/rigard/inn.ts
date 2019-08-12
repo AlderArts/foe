@@ -2,7 +2,6 @@ import * as _ from 'lodash';
 
 import { Event, Link } from '../../event';
 import { TwinsScenes } from '../../event/royals/twins';
-import { TasksScenes } from '../../event/outlaws/vaughn-tasks';
 import { WorldTime, MoveToLocation, GAME, WORLD, TimeStep } from '../../GAME';
 import { SetGameState, GameState } from '../../gamestate';
 import { Gui } from '../../gui';
@@ -19,6 +18,7 @@ import { Entity } from '../../entity';
 import { Room69Scenes } from '../../event/room69';
 import { DreamsScenes } from '../../event/dreams';
 import { LeiScenes } from '../../event/royals/lei-scenes';
+import { VaughnTasksScenes } from '../../event/outlaws/vaughn-tasks';
 
 export function InitLB() {
 	let world = WORLD();
@@ -128,8 +128,8 @@ InnLoc.common.endDescription = function() {
 	}
 	Text.Flush();
 	
-	if(TasksScenes.Poisoning.InnAvailable()) {
-		TasksScenes.Poisoning.ArrivalAtInn(true);
+	if(VaughnTasksScenes.Poisoning.InnAvailable()) {
+		VaughnTasksScenes.Poisoning.ArrivalAtInn(true);
 	}
 }
 
@@ -151,8 +151,8 @@ InnLoc.common.onEntry = function(preventClear : boolean, oldLocation : any) {
 	let player = GAME().player;
 	let party : Party = GAME().party;
 
-	if(TasksScenes.Poisoning.InnAvailable()) {
-		TasksScenes.Poisoning.ArrivalAtInn(false, oldLocation);
+	if(VaughnTasksScenes.Poisoning.InnAvailable()) {
+		VaughnTasksScenes.Poisoning.ArrivalAtInn(false, oldLocation);
 		return;
 	}
 	

@@ -7,7 +7,6 @@ import { Gui } from "../gui";
 import { Text } from "../text";
 import { Party } from "../party";
 import { Encounter } from "../combat";
-import { VaughnScenes } from "./outlaws/vaughn-scenes";
 import { BodyPartType } from "../body/bodypart";
 import { Sex } from "../entity-sex";
 import { MirandaFlags } from "./miranda-flags";
@@ -21,6 +20,7 @@ import { Cock } from '../body/cock';
 import { GetDEBUG } from '../../app';
 import { DreamsScenes } from './dreams';
 import { StrapOnItems } from '../items/strapon';
+import { VaughnTasksScenes } from './outlaws/vaughn-tasks';
 
 let MirandaScenes : any = {};
 
@@ -153,7 +153,7 @@ MirandaScenes.BarracksPrompt = function() {
 		});
 	}
     
-    VaughnScenes.Tasks.Snitch.MirandaTalk(options, true);
+    VaughnTasksScenes.Snitch.MirandaTalk(options, true);
 	
 	Gui.SetButtonsFromList(options, true, function() {
 		//TODO
@@ -2474,7 +2474,7 @@ MirandaScenes.MaidensBanePrompt = function() {
 		MirandaScenes.BarSexOptions(options);
 	}
 	
-	VaughnScenes.Tasks.Snitch.MirandaTalk(options);
+	VaughnTasksScenes.Snitch.MirandaTalk(options, false);
 	
 	Gui.SetButtonsFromList(options, true);
 }
