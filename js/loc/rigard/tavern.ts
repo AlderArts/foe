@@ -53,7 +53,7 @@ TavernLoc.common.links.push(new Link(
 	"Slums", true, true,
 	null,
 	function() {
-		MoveToLocation(WORLD().loc.Rigard.Slums.gate, {minute: 10});
+		MoveToLocation(WORLD().loc.Rigard.Slums.Gate, {minute: 10});
 	}
 ));
 

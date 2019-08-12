@@ -325,7 +325,7 @@ TerryScenes.ExploreResidential = function() {
 	
 	if(terry.flags["Met"] >= TerryFlags.Met.Found) {
 		Text.Add("You decide to look around and ask a few people. Someone might’ve seen her. ", parse);
-		if(terry.hidingSpot == WORLD().loc.Rigard.Residential.street) {
+		if(terry.hidingSpot == WORLD().loc.Rigard.Residential.Street) {
 			Text.Add("After a long string of complaints, annoyed comments and plain rudeness, one of the residents finally provides a lead.<i>“A vixen? You mean that one?”</i> They point toward an alleyway, where you see a distinct vulpine running off.", parse);
 			Text.NL();
 			Text.Add("Without missing a beat, you call for Miranda and make a mad dash after the thief. You chase after her for a while, until Miranda manages to corner her at a dead end. She draws her blade and prepares for battle!", parse);
@@ -363,7 +363,7 @@ TerryScenes.ExploreMerchants = function() {
 	Text.NL();
 	
 	if(terry.flags["Met"] >= TerryFlags.Met.Found) {
-		if(terry.hidingSpot == WORLD().loc.Rigard.ShopStreet.street) {
+		if(terry.hidingSpot == WORLD().loc.Rigard.ShopStreet.Street) {
 			Text.Add("You and Miranda wander through the warehouses of the merchant’s district, looking for any sign of the sleek vixen. The two of you check a few of them before you catch a glimpse of a moving shadow. You rush ahead without thinking, Miranda following hot on your heels, and as soon as round the corner, you’re faced with the vixen thief, already ready for combat!", parse);
 			Text.Flush();
 			TerryScenes.CombatVsMiranda();
@@ -511,11 +511,11 @@ TerryScenes.CombatVsMiranda = function() {
 			terry.hidingSpot = world.loc.Rigard.Gate;
 		}, 1.0, function() { return terry.hidingSpot != world.loc.Rigard.Gate; });
 		scenes.AddEnc(function() {
-			terry.hidingSpot = world.loc.Rigard.Residential.street;
-		}, 1.0, function() { return terry.hidingSpot != world.loc.Rigard.Residential.street; });
+			terry.hidingSpot = world.loc.Rigard.Residential.Street;
+		}, 1.0, function() { return terry.hidingSpot != world.loc.Rigard.Residential.Street; });
 		scenes.AddEnc(function() {
-			terry.hidingSpot = world.loc.Rigard.ShopStreet.street;
-		}, 1.0, function() { return terry.hidingSpot != world.loc.Rigard.ShopStreet.street; });
+			terry.hidingSpot = world.loc.Rigard.ShopStreet.Street;
+		}, 1.0, function() { return terry.hidingSpot != world.loc.Rigard.ShopStreet.Street; });
 		scenes.AddEnc(function() {
 			terry.hidingSpot = world.loc.Rigard.Plaza;
 		}, 1.0, function() { return terry.hidingSpot != world.loc.Rigard.Plaza; });
@@ -546,11 +546,11 @@ TerryScenes.CombatVsMiranda = function() {
 			terry.hidingSpot = world.loc.Rigard.Gate;
 		}, 1.0, function() { return terry.hidingSpot != world.loc.Rigard.Gate; });
 		scenes.AddEnc(function() {
-			terry.hidingSpot = world.loc.Rigard.Residential.street;
-		}, 1.0, function() { return terry.hidingSpot != world.loc.Rigard.Residential.street; });
+			terry.hidingSpot = world.loc.Rigard.Residential.Street;
+		}, 1.0, function() { return terry.hidingSpot != world.loc.Rigard.Residential.Street; });
 		scenes.AddEnc(function() {
-			terry.hidingSpot = world.loc.Rigard.ShopStreet.street;
-		}, 1.0, function() { return terry.hidingSpot != world.loc.Rigard.ShopStreet.street; });
+			terry.hidingSpot = world.loc.Rigard.ShopStreet.Street;
+		}, 1.0, function() { return terry.hidingSpot != world.loc.Rigard.ShopStreet.Street; });
 		scenes.AddEnc(function() {
 			terry.hidingSpot = world.loc.Rigard.Plaza;
 		}, 1.0, function() { return terry.hidingSpot != world.loc.Rigard.Plaza; });
@@ -600,7 +600,7 @@ TerryScenes.CaughtTheThief = function() {
 	Text.NL();
 	Text.Add("The vixen swallows audibly…", parse);
 	Text.NL();
-	if(party.location == world.loc.Rigard.ShopStreet.street)
+	if(party.location == world.loc.Rigard.ShopStreet.Street)
 		Text.Add("<i>“I-it’s in that warehouse over there,”</i> she squeaks, pointing across the street. Her eyes never leave Miranda’s face.", parse);
 	else
 		Text.Add("<i>“I… I hid it in a warehouse in the merchant district!”</i> she squeaks, eyeing Miranda fearfully.", parse);

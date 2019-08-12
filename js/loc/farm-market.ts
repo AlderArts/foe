@@ -285,7 +285,7 @@ MarketScenes.Market = function(haul : any, next : any) {
 
 	var humanity = player.Humanity();
 
-	party.location = WORLD().loc.Rigard.ShopStreet.street;
+	party.location = WORLD().loc.Rigard.ShopStreet.Street;
 	var score = 0;
 
 	Text.Add("<i>“Alright, [playername]. Put on your best smile and let’s get this gig started,”</i> Gwendy declares with a smile of her own. ", parse);

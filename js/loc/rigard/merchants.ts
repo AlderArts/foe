@@ -26,7 +26,7 @@ let ShopStreetScenes : any = {}
 //
 let ShopStreetLoc =
 {
-	street       : new Event("Merchant street"),
+	Street       : new Event("Merchant street"),
 	OddShop      : OddShopLoc,
 	ClothShop    : ClothShopLoc,
 	WeaponShop   : WeaponShopLoc,
@@ -34,14 +34,14 @@ let ShopStreetLoc =
 	AlchemyShop  : new Event("Alchemical Wonders"),
 	MagicShop    : MagicShopLoc,
 	
-	gate         : new Event("Merchants' Gate")
+	Gate         : new Event("Merchants' Gate")
 }
 
 
 //
 // Shopping street
 //
-ShopStreetLoc.street.description = function() {
+ShopStreetLoc.Street.description = function() {
 	let rigard = GAME().rigard;
 	Text.Add("The streets in this area of the city are lined with small merchant stalls and shops of all kinds. ");
 	if(WorldTime().hour >= 6 && WorldTime().hour < 9)
@@ -60,19 +60,19 @@ ShopStreetLoc.street.description = function() {
 	}
 }
 
-ShopStreetLoc.street.enc = new EncounterTable();
-ShopStreetLoc.street.enc.AddEnc(function() { return RigardScenes.Chatter;});
-ShopStreetLoc.street.enc.AddEnc(function() { return RigardScenes.Chatter2;});
-ShopStreetLoc.street.enc.AddEnc(function() { return ShopStreetScenes.Speculate;}, 1.0, function() { return (WorldTime().hour >= 6 && WorldTime().hour < 18); });
-ShopStreetLoc.street.enc.AddEnc(function() { return RigardScenes.CityHistory;}, 1.0, function() {
+ShopStreetLoc.Street.enc = new EncounterTable();
+ShopStreetLoc.Street.enc.AddEnc(function() { return RigardScenes.Chatter;});
+ShopStreetLoc.Street.enc.AddEnc(function() { return RigardScenes.Chatter2;});
+ShopStreetLoc.Street.enc.AddEnc(function() { return ShopStreetScenes.Speculate;}, 1.0, function() { return (WorldTime().hour >= 6 && WorldTime().hour < 18); });
+ShopStreetLoc.Street.enc.AddEnc(function() { return RigardScenes.CityHistory;}, 1.0, function() {
 	let rigard = GAME().rigard;
 	return rigard.flags["CityHistory"] == 0;
 });
-ShopStreetLoc.street.enc.AddEnc(function() { return TerryScenes.ExploreMerchants; }, 1000000.0, function() {
+ShopStreetLoc.Street.enc.AddEnc(function() { return TerryScenes.ExploreMerchants; }, 1000000.0, function() {
 	let rigard = GAME().rigard;
 	return rigard.Krawitz["Q"] == RigardFlags.KrawitzQ.HuntingTerry;
 });
-ShopStreetLoc.street.onEntry = function() {
+ShopStreetLoc.Street.onEntry = function() {
 	if(Math.random() < 0.15)
 		RigardScenes.Chatter(true);
 	else if(Math.random() < 0.3)
@@ -81,24 +81,24 @@ ShopStreetLoc.street.onEntry = function() {
 		Gui.PrintDefaultOptions();
 }
 
-ShopStreetLoc.street.links.push(new Link(
+ShopStreetLoc.Street.links.push(new Link(
 	"Gate", true, true,
 	null,
 	function() {
 		MoveToLocation(WORLD().loc.Rigard.Gate, {minute: 10});
 	}
 ));
-ShopStreetLoc.street.links.push(new Link(
+ShopStreetLoc.Street.links.push(new Link(
 	"Residential", true, true,
 	null,
 	function() {
-		MoveToLocation(WORLD().loc.Rigard.Residential.street, {minute: 20});
+		MoveToLocation(WORLD().loc.Rigard.Residential.Street, {minute: 20});
 	}
 ));
-ShopStreetLoc.street.links.push(new Link(
+ShopStreetLoc.Street.links.push(new Link(
 	"Merchants", true, false
 ));
-ShopStreetLoc.street.links.push(new Link(
+ShopStreetLoc.Street.links.push(new Link(
 	"Plaza", true, true,
 	null,
 	function() {
@@ -107,7 +107,7 @@ ShopStreetLoc.street.links.push(new Link(
 ));
 
 
-ShopStreetLoc.street.links.push(new Link(
+ShopStreetLoc.Street.links.push(new Link(
 	"Armor", true, function() { return ArmorShopScenes.IsOpen(); },
 	function() {
 		Text.Add("You catch sight of a ramshackle shop tucked away into a cul-de-sac. An old, weather-beaten sign swings over the entrance with “Twopenny's Used Protectives” printed on it in faded paint. ");
@@ -123,7 +123,7 @@ ShopStreetLoc.street.links.push(new Link(
 	}
 ));
 
-ShopStreetLoc.street.links.push(new Link(
+ShopStreetLoc.Street.links.push(new Link(
 	"Weapons", true, function() { return WeaponShopScenes.IsOpen(); },
 	function() {
 		WeaponShopScenes.StreetDesc();
@@ -133,7 +133,7 @@ ShopStreetLoc.street.links.push(new Link(
 	}
 ));
 
-ShopStreetLoc.street.links.push(new Link(
+ShopStreetLoc.Street.links.push(new Link(
 	"Tailor", true, function() { return ClothShopScenes.IsOpen() },
 	function() {
 		Text.Add("There is a large two floor shop in the center of the street, with two guards watching the large, well crafted doors. The fancy sign above the door reads <i>Silken Delights</i>, and there are many beautiful and intricately crafted articles of clothing on display in the windows. The clothing store seems large, and there are pretty decorations bordering the display windows. A decorated sign next to the door informs you that the shops business hours are from 9 to 20.");
@@ -146,7 +146,7 @@ ShopStreetLoc.street.links.push(new Link(
 	}
 ));
 
-ShopStreetLoc.street.links.push(new Link(
+ShopStreetLoc.Street.links.push(new Link(
 	"Magic", true, function() { return MagicShopScenes.IsOpen(); },
 	function() {
 		Text.Add("Off on a side street, a small, brightly lit building stands sandwiched between a barber shop and a bakery. The wide, glass-panelled shopfront has an impressive number of curios on display, and by the looks of it, there are many more on the shelves within. ");
@@ -161,7 +161,7 @@ ShopStreetLoc.street.links.push(new Link(
 	}
 ));
 
-ShopStreetLoc.street.links.push(new Link(
+ShopStreetLoc.Street.links.push(new Link(
 	"Odd shop", true, function() { return OddShopScenes.IsOpen(); },
 	function() {
 		Text.Add("One particular shop catch your eye. A garish sign hanging outside announce it the 'Shoppe of oddities', though from just the exterior, it is a bit unclear what is actually on sale.");
@@ -174,7 +174,7 @@ ShopStreetLoc.street.links.push(new Link(
 	}
 ));
 
-ShopStreetLoc.street.events.push(new Link(
+ShopStreetLoc.Street.events.push(new Link(
 	"Scepter", function() {
 		let rigard = GAME().rigard;
 		let burrows = GAME().burrows;
@@ -186,7 +186,7 @@ ShopStreetLoc.street.events.push(new Link(
 	}
 ));
 
-ShopStreetLoc.street.events.push(new Link(
+ShopStreetLoc.Street.events.push(new Link(
 	"Violin", function() {
 		let rigard = GAME().rigard;
 		let cveta = GAME().cveta;
@@ -292,7 +292,7 @@ ShopStreetLoc.street.events.push(new Link(
 	}
 ));
 
-ShopStreetLoc.street.events.push(new Link(
+ShopStreetLoc.Street.events.push(new Link(
 	"Martello", function() {
 		let room69 = GAME().room69;
 		return room69.flags["Hinges"] == Room69Flags.HingesFlags.TalkedToGoldsmith || room69.flags["Hinges"] == Room69Flags.HingesFlags.TalkedToSmith;

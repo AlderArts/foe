@@ -57,7 +57,7 @@ BrothelLoc.brothel.links.push(new Link(
 	"Outside", true, true,
 	null,
 	function() {
-		MoveToLocation(WORLD().loc.Rigard.Residential.street, {minute: 5});
+		MoveToLocation(WORLD().loc.Rigard.Residential.Street, {minute: 5});
 	}
 ));
 

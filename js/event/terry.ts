@@ -112,7 +112,7 @@ export class Terry extends Entity {
 		this.flags["cock"] = TerryFlags.Cock.Regular;
 		
 		this.sbombs = 3;
-		this.hidingSpot = RigardLoc.ShopStreet.street;
+		this.hidingSpot = RigardLoc.ShopStreet.Street;
 		
 		if(storage) this.FromStorage(storage);
 		

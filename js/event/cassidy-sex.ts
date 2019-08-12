@@ -888,7 +888,7 @@ SexScenes.Outro = function() {
 	
 	cassidy.relation.IncreaseStat(100, 2);
 	StepToHour(0);
-	GAME().party.location = world.loc.Rigard.ShopStreet.street;
+	GAME().party.location = world.loc.Rigard.ShopStreet.Street;
 	
 	Text.Flush();
 	
@@ -1018,7 +1018,7 @@ SparSexScenes.Win = function() {
 
 				Gui.NextPrompt(function() {
 					StepToHour(22);
-					MoveToLocation(world.loc.Rigard.ShopStreet.street);
+					MoveToLocation(world.loc.Rigard.ShopStreet.Street);
 				});
 			}
 		});
@@ -1038,7 +1038,7 @@ SparSexScenes.Win = function() {
 
 		Gui.NextPrompt(function() {
 			StepToHour(22);
-			MoveToLocation(world.loc.Rigard.ShopStreet.street);
+			MoveToLocation(world.loc.Rigard.ShopStreet.Street);
 		});
 	}
 }
@@ -1547,7 +1547,7 @@ SparSexScenes.Outro = function() {
 	Text.Add("Oh, you won’t.", parse);
 	
 	cassidy.relation.IncreaseStat(100, 2);
-	GAME().party.location = world.loc.Rigard.ShopStreet.street;
+	GAME().party.location = world.loc.Rigard.ShopStreet.Street;
 	
 	StepToHour(22);
 	
@@ -1661,7 +1661,7 @@ SparSexScenes.Loss = function() {
 		Text.Add("<i>“Okay, if you say so.”</i> Cassidy gives you a cheery little wave. <i>“Don’t be long in coming back now, you hear?”</i>", parse);
 		Text.Flush();
 
-		party.location = world.loc.Rigard.ShopStreet.street;
+		party.location = world.loc.Rigard.ShopStreet.Street;
 
 		Gui.NextPrompt();
 	}
@@ -1996,7 +1996,7 @@ SparSexScenes.LossOutro = function() {
 	
 	cassidy.relation.IncreaseStat(100, 1);
 	StepToHour(0);
-	GAME().party.location = world.loc.Rigard.ShopStreet.street;
+	GAME().party.location = world.loc.Rigard.ShopStreet.Street;
 	
 	Text.Flush();
 	

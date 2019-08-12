@@ -118,7 +118,7 @@ FeraScenes.Interact = function() {
 		Text.Add("The shop is closing, and you are asked to leave.");
 		Text.Flush();
 		Gui.NextPrompt(function() {
-			MoveToLocation(WORLD().loc.Rigard.ShopStreet.street);
+			MoveToLocation(WORLD().loc.Rigard.ShopStreet.Street);
 		});
 		return;
 	}

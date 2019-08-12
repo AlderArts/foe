@@ -916,7 +916,7 @@ CassidyScenes.InsidePrompt = function() {
 			if(WorldTime().hour < 17)
 				StepToHour(17);
 			
-			MoveToLocation(WORLD().loc.Rigard.ShopStreet.street);
+			MoveToLocation(WORLD().loc.Rigard.ShopStreet.Street);
 		});
 	});
 }
@@ -1131,7 +1131,7 @@ CassidyScenes.InsideMeal = function() {
 	Status.Full(player, {hours: 12, exp: 1.15});
 	
 	Gui.NextPrompt(function() {
-		MoveToLocation(WORLD().loc.Rigard.ShopStreet.street);
+		MoveToLocation(WORLD().loc.Rigard.ShopStreet.Street);
 	});
 }
 
@@ -1498,7 +1498,7 @@ CassidyScenes.InsideTalkPrompt = function() {
 						TimeStep({minute: 10});
 						
 						Gui.NextPrompt(function() {
-							MoveToLocation(WORLD().loc.Rigard.ShopStreet.street);
+							MoveToLocation(WORLD().loc.Rigard.ShopStreet.Street);
 						});
 					});
 					
@@ -1631,7 +1631,7 @@ CassidyScenes.ManagingShop = function() {
 				TimeStep({hour: 2});
 				
 				Gui.NextPrompt(function() {
-					MoveToLocation(WORLD().loc.Rigard.ShopStreet.street);
+					MoveToLocation(WORLD().loc.Rigard.ShopStreet.Street);
 				});
 			}, enabled : true
 		});
@@ -2144,7 +2144,7 @@ CassidyScenes.ManagingShop6 = function(score : number) {
 			TimeStep({hour: 1});
 			
 			Gui.NextPrompt(function() {
-				MoveToLocation(WORLD().loc.Rigard.ShopStreet.street);
+				MoveToLocation(WORLD().loc.Rigard.ShopStreet.Street);
 			});
 		}
 	});
@@ -2221,7 +2221,7 @@ CassidyScenes.ManagingShopCookies = function() {
 		Text.Flush();
 		
 		Gui.NextPrompt(function() {
-			MoveToLocation(WORLD().loc.Rigard.ShopStreet.street);
+			MoveToLocation(WORLD().loc.Rigard.ShopStreet.Street);
 		});
 	});
 	
@@ -2428,7 +2428,7 @@ CassidyScenes.BigReveal = function() {
 					Text.Flush();
 					
 					Gui.NextPrompt(function() {
-						MoveToLocation(WORLD().loc.Rigard.ShopStreet.street);
+						MoveToLocation(WORLD().loc.Rigard.ShopStreet.Street);
 					});
 				});
 			});
@@ -2739,7 +2739,7 @@ CassidyScenes.Model = function() {
 				Text.Add("<i>“Great! Let me let you out, and I’ll see you around. Don’t be too long in coming back, okay?”</i>", parse);
 				Text.Flush();
 				
-				party.location = WORLD().loc.Rigard.ShopStreet.street;
+				party.location = WORLD().loc.Rigard.ShopStreet.Street;
 				StepToHour(22);
 				
 				Gui.NextPrompt();

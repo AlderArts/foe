@@ -30,7 +30,7 @@ LakeLoc.Shore.links.push(new Link(
 	"Slums", true, true,
 	null,
 	function() {
-		MoveToLocation(WORLD().loc.Rigard.Slums.gate, {minute: 45});
+		MoveToLocation(WORLD().loc.Rigard.Slums.Gate, {minute: 45});
 	}
 ));
 

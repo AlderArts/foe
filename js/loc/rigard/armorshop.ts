@@ -245,7 +245,7 @@ ArmorShopLoc.events.push(new Link(
 ArmorShopLoc.events.push(new Link(
 	"Leave", true, true, null,
 	function() {
-		MoveToLocation(WORLD().loc.Rigard.ShopStreet.street, {minute: 5});
+		MoveToLocation(WORLD().loc.Rigard.ShopStreet.Street, {minute: 5});
 	}
 ));
 

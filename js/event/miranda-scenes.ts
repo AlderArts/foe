@@ -30,10 +30,10 @@ export function InitMiranda() {
 
 	let world = WORLD();
     // Add catch thief as explorable event
-    world.loc.Rigard.Slums.gate.enc.AddEnc(function() { return MirandaScenes.CatchThatThief; }, 1.0, function() { return miranda.flags["Thief"] == 0 && miranda.OnPatrol(); });
-    world.loc.Rigard.Residential.street.enc.AddEnc(function() { return MirandaScenes.CatchThatThief; }, 1.0, function() { return miranda.flags["Thief"] == 0 && miranda.OnPatrol(); });
+    world.loc.Rigard.Slums.Gate.enc.AddEnc(function() { return MirandaScenes.CatchThatThief; }, 1.0, function() { return miranda.flags["Thief"] == 0 && miranda.OnPatrol(); });
+    world.loc.Rigard.Residential.Street.enc.AddEnc(function() { return MirandaScenes.CatchThatThief; }, 1.0, function() { return miranda.flags["Thief"] == 0 && miranda.OnPatrol(); });
     world.loc.Rigard.Gate.enc.AddEnc(function() { return MirandaScenes.CatchThatThief; }, 1.0, function() { return miranda.flags["Thief"] == 0 && miranda.OnPatrol(); });
-    world.loc.Rigard.ShopStreet.street.enc.AddEnc(function() { return MirandaScenes.CatchThatThief; }, 1.0, function() { return miranda.flags["Thief"] == 0 && miranda.OnPatrol(); });
+    world.loc.Rigard.ShopStreet.Street.enc.AddEnc(function() { return MirandaScenes.CatchThatThief; }, 1.0, function() { return miranda.flags["Thief"] == 0 && miranda.OnPatrol(); });
 
     
     world.loc.Rigard.Tavern.common.events.push(new Link("Miranda", function() { return miranda.IsAtLocation(); }, true,
@@ -653,7 +653,7 @@ MirandaScenes.RigardSlumGatesEnter = function() {
 			Text.Flush();
 			
 			Gui.NextPrompt(function() {
-				MoveToLocation(world.loc.Rigard.Residential.street, {minute: 5});
+				MoveToLocation(world.loc.Rigard.Residential.Street, {minute: 5});
 			});
 		}
 		else { // neutral
@@ -662,7 +662,7 @@ MirandaScenes.RigardSlumGatesEnter = function() {
 				Text.NL();
 				
 				Gui.NextPrompt(function() {
-					MoveToLocation(world.loc.Rigard.Residential.street, {minute: 5});
+					MoveToLocation(world.loc.Rigard.Residential.Street, {minute: 5});
 				});
 			}
 			else {
@@ -777,7 +777,7 @@ MirandaScenes.RigardGatesBribe = function() {
 				}
 				
 				Gui.NextPrompt(function() {
-					MoveToLocation(world.loc.Rigard.Residential.street, {hour: 1});
+					MoveToLocation(world.loc.Rigard.Residential.Street, {hour: 1});
 				});
 			}
 			else { // Repeat blowjob
@@ -817,7 +817,7 @@ MirandaScenes.RigardGatesBribe = function() {
 						Text.Add("Wiping the remaining droplets of the dog-herm’s cum from your lips, you enter the city of Rigard.", parse);
 						
 						Gui.NextPrompt(function() {
-							MoveToLocation(world.loc.Rigard.Residential.street, {minute: 5});
+							MoveToLocation(world.loc.Rigard.Residential.Street, {minute: 5});
 						});
 					}
 					else {
@@ -1050,7 +1050,7 @@ MirandaScenes.RigardGatesBribe = function() {
 						Text.Flush();
 						
 						Gui.NextPrompt(function() {
-							MoveToLocation(world.loc.Rigard.Residential.street, {minute : 10});
+							MoveToLocation(world.loc.Rigard.Residential.Street, {minute : 10});
 						});
 					}
 					else {
@@ -2246,7 +2246,7 @@ MirandaScenes.JustOneMore = function() {
 							miranda.subDom.DecreaseStat(-100, 10);
 							
 							Gui.NextPrompt(function() {
-								MoveToLocation(world.loc.Rigard.Slums.gate, {hour: 4});
+								MoveToLocation(world.loc.Rigard.Slums.Gate, {hour: 4});
 								player.AddLustFraction(-1);
 								miranda.AddLustFraction(-1);
 							});
@@ -2313,7 +2313,7 @@ MirandaScenes.JustOneMore = function() {
 						miranda.subDom.IncreaseStat(100, 10);
 						
 						Gui.NextPrompt(function() {
-							MoveToLocation(world.loc.Rigard.Slums.gate, {hour: 4});
+							MoveToLocation(world.loc.Rigard.Slums.Gate, {hour: 4});
 							player.AddLustFraction(-1);
 							miranda.AddLustFraction(-1);
 						});
@@ -2394,7 +2394,7 @@ MirandaScenes.JustOneMore = function() {
 						
 						
 						Gui.NextPrompt(function() {
-							MoveToLocation(world.loc.Rigard.Slums.gate, {hour: 4});
+							MoveToLocation(world.loc.Rigard.Slums.Gate, {hour: 4});
 							player.AddLustFraction(-1);
 							miranda.AddLustFraction(-1);
 						});
@@ -2575,7 +2575,7 @@ MirandaScenes.TerryChaseHome = function() {
 				Text.Flush();
 				
 				Gui.NextPrompt(function() {
-					MoveToLocation(world.loc.Rigard.Residential.street, {minute: 5});
+					MoveToLocation(world.loc.Rigard.Residential.Street, {minute: 5});
 				});
 			}, enabled : true,
 			tooltip : "Point out that you should perhaps look for the thief instead."
@@ -2620,7 +2620,7 @@ MirandaScenes.TerryChaseHome = function() {
 				Text.Flush();
 				
 				Gui.NextPrompt(function() {
-					MoveToLocation(world.loc.Rigard.Residential.street, {minute: 5});
+					MoveToLocation(world.loc.Rigard.Residential.Street, {minute: 5});
 				});
 			}, enabled : true,
 			tooltip : "You should focus on catching the thief instead."
@@ -2752,7 +2752,7 @@ MirandaScenes.HomeDommySexLeavingFuckedHer = function() {
 		Text.Flush();
 
 		Gui.NextPrompt(function() {
-			MoveToLocation(world.loc.Rigard.Residential.street, {minute : 5});
+			MoveToLocation(world.loc.Rigard.Residential.Street, {minute : 5});
 		});
 	}
 	else if(party.InParty(miranda)) {
@@ -2779,13 +2779,13 @@ MirandaScenes.HomeDommySexLeavingFuckedHer = function() {
 				Text.Add("Somehow, you make it out the gates in order to rejoin [comp].", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
-					MoveToLocation(world.loc.Rigard.Slums.gate, {minute: 30});
+					MoveToLocation(world.loc.Rigard.Slums.Gate, {minute: 30});
 				});
 			}
 			else {
 				Text.Flush();
 				Gui.NextPrompt(function() {
-					MoveToLocation(world.loc.Rigard.Residential.street, {minute: 5});
+					MoveToLocation(world.loc.Rigard.Residential.Street, {minute: 5});
 				});
 			}
 		});
@@ -4298,7 +4298,7 @@ MirandaScenes.HomeSubbySexLeavingFuckedHer = function() {
 		Text.Flush();
 
 		Gui.NextPrompt(function() {
-			MoveToLocation(world.loc.Rigard.Residential.street, {minute : 5});
+			MoveToLocation(world.loc.Rigard.Residential.Street, {minute : 5});
 		});
 	}
 	else if(party.InParty(miranda)) {
@@ -4318,13 +4318,13 @@ MirandaScenes.HomeSubbySexLeavingFuckedHer = function() {
 				Text.Add("Somehow, you make it out the gates in order to rejoin [comp].", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
-					MoveToLocation(world.loc.Rigard.Slums.gate, {minute: 30});
+					MoveToLocation(world.loc.Rigard.Slums.Gate, {minute: 30});
 				});
 			}
 			else {
 				Text.Flush();
 				Gui.NextPrompt(function() {
-					MoveToLocation(world.loc.Rigard.Residential.street, {minute: 5});
+					MoveToLocation(world.loc.Rigard.Residential.Street, {minute: 5});
 				});
 			}
 		});
@@ -5202,7 +5202,7 @@ MirandaScenes.HomeDommyDungeonFirst = function() {
 	Text.Flush();
 
 	Gui.NextPrompt(function() {
-		MoveToLocation(world.loc.Rigard.Slums.gate);
+		MoveToLocation(world.loc.Rigard.Slums.Gate);
 	});
 }
 
@@ -5224,7 +5224,7 @@ MirandaScenes.HomeDommyDungeon = function() {
 	Text.Flush();
 
 	Gui.NextPrompt(function() {
-		MoveToLocation(world.loc.Rigard.Slums.gate);
+		MoveToLocation(world.loc.Rigard.Slums.Gate);
 	});
 }
 
@@ -5247,7 +5247,7 @@ MirandaScenes.HomeSubbyDungeon = function() {
 	Text.Flush();
 
 	Gui.NextPrompt(function() {
-		MoveToLocation(world.loc.Rigard.Slums.gate);
+		MoveToLocation(world.loc.Rigard.Slums.Gate);
 	});
 }
 
@@ -6440,7 +6440,7 @@ MirandaScenes.DatingEntry = function() {
 		}
 		Text.Add("<i>“So, what do you think, [playername]?”</i>", parse);
 		
-		party.location = world.loc.Rigard.Slums.gate;
+		party.location = world.loc.Rigard.Slums.Gate;
 		TimeStep({minute: 20});
 		
 		Text.Flush();
@@ -7266,7 +7266,7 @@ MirandaScenes.DatingStage3 = function() {
 					Text.Flush();
 					
 					Gui.NextPrompt(function() {
-						MoveToLocation(world.loc.Rigard.Slums.gate, {minute: 20});
+						MoveToLocation(world.loc.Rigard.Slums.Gate, {minute: 20});
 					});
 				}
 			}, enabled : true,
@@ -7309,7 +7309,7 @@ MirandaScenes.DatingStage3 = function() {
 					Text.Flush();
 					
 					Gui.NextPrompt(function() {
-						MoveToLocation(world.loc.Rigard.Slums.gate, {minute: 20});
+						MoveToLocation(world.loc.Rigard.Slums.Gate, {minute: 20});
 					});
 				}
 			}, enabled : true,
@@ -7364,7 +7364,7 @@ MirandaScenes.DatingStage3 = function() {
 					Text.Flush();
 					
 					Gui.NextPrompt(function() {
-						MoveToLocation(world.loc.Rigard.Slums.gate, {minute: 20});
+						MoveToLocation(world.loc.Rigard.Slums.Gate, {minute: 20});
 					});
 				}
 			}, enabled : true,
@@ -7511,7 +7511,7 @@ MirandaScenes.DatingFirstCity = function() {
 		breastDesc : function() { return player.FirstBreastRow().Short(); }
 	};
 	
-	party.location = world.loc.Rigard.Residential.street;
+	party.location = world.loc.Rigard.Residential.Street;
 	TimeStep({minute: 20});
 	
 	Text.Add("<i>“Seen enough of the slums to last you for tonight?”</i> The two of you are nearing the outer walls of Rigard, close to the peasants’ gate. ", parse);
@@ -7705,7 +7705,7 @@ MirandaScenes.DatingFirstHome = function() {
 				Text.Flush();
 				
 				Gui.NextPrompt(function() {
-					MoveToLocation(world.loc.Rigard.Slums.gate, {minute: 20});
+					MoveToLocation(world.loc.Rigard.Slums.Gate, {minute: 20});
 				});
 			}, enabled : true,
 			tooltip : "Thank her for the evening, but politely decline her invitation."
@@ -7743,7 +7743,7 @@ MirandaScenes.DatingFirstHome = function() {
 					Text.Flush();
 					
 					Gui.NextPrompt(function() {
-						MoveToLocation(world.loc.Rigard.Slums.gate, {minute: 20});
+						MoveToLocation(world.loc.Rigard.Slums.Gate, {minute: 20});
 					});
 				}
 			}, enabled : true,
@@ -7791,7 +7791,7 @@ MirandaScenes.DatingFirstHome = function() {
 				Text.Flush();
 				
 				Gui.NextPrompt(function() {
-					MoveToLocation(world.loc.Rigard.Slums.gate, {minute: 20});
+					MoveToLocation(world.loc.Rigard.Slums.Gate, {minute: 20});
 				});
 			}, enabled : true,
 			tooltip : "You are getting seriously bad vibes here, better get out while you still can."

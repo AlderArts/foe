@@ -217,7 +217,7 @@ export class Miranda extends Entity {
 			else if(WorldTime().day % 3 == 1)
 				return (location == world.loc.Plains.Gate) || (location == world.loc.Rigard.Gate);
 			else
-				return (location == world.loc.Rigard.Slums.gate);
+				return (location == world.loc.Rigard.Slums.Gate);
 		}
 		else if(WorldTime().hour >= 19 || WorldTime().hour < 2)
 			return (location == world.loc.Rigard.Tavern.common);

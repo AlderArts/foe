@@ -68,7 +68,7 @@ ClothShopLoc.description = function() {
 		if(WorldTime().hour >= 20 || WorldTime().hour < 9) {
 			Text.Add("The shop is currently closed, and you are asked to leave.", parse);
 			Gui.NextPrompt(function() {
-				MoveToLocation(world.loc.Rigard.ShopStreet.street, {minute: 5});
+				MoveToLocation(world.loc.Rigard.ShopStreet.Street, {minute: 5});
 			});
 		}
 	*/
@@ -119,7 +119,7 @@ ClothShopLoc.events.push(new Link(
 				Text.Add("The shop is closing, and you are asked to leave.");
 				Text.Flush();
 				Gui.NextPrompt(function() {
-					MoveToLocation(WORLD().loc.Rigard.ShopStreet.street);
+					MoveToLocation(WORLD().loc.Rigard.ShopStreet.Street);
 				});
 				return;
 			}
@@ -268,7 +268,7 @@ ClothShopLoc.events.push(new Link(
 ClothShopLoc.events.push(new Link(
 	"Leave", true, true, null,
 	function() {
-		MoveToLocation(WORLD().loc.Rigard.ShopStreet.street, {minute: 5});
+		MoveToLocation(WORLD().loc.Rigard.ShopStreet.Street, {minute: 5});
 	}
 ));
 

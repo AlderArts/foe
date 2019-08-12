@@ -71,14 +71,14 @@ GateLoc.links.push(new Link(
 	"Residential", true, true,
 	null,
 	function() {
-		MoveToLocation(WORLD().loc.Rigard.Residential.street, {minute: 10});
+		MoveToLocation(WORLD().loc.Rigard.Residential.Street, {minute: 10});
 	}
 ));
 GateLoc.links.push(new Link(
 	"Merchants", true, true,
 	null,
 	function() {
-		MoveToLocation(WORLD().loc.Rigard.ShopStreet.street, {minute: 10});
+		MoveToLocation(WORLD().loc.Rigard.ShopStreet.Street, {minute: 10});
 	}
 ));
 GateLoc.links.push(new Link(
