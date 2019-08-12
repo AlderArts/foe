@@ -20,6 +20,7 @@ import { RigardFlags } from './rigard/rigard-flags';
 import { Party } from '../party';
 import { BullTowerScenes } from '../event/outlaws/bulltower';
 import { AquiliusScenes } from '../event/outlaws/aquilius';
+import { DeadDropScenes } from '../event/outlaws/maria-dd';
 
 export function InitOutlaws() {
 	WORLD().SaveSpots["Outlaws"] = OutlawsLoc.Camp;
@@ -62,7 +63,7 @@ OutlawsLoc.Camp.onEntry = function() {
 	else if(outlaws.BullTowerCanGetReward() && outlaws.flags["BullTower"] < OutlawsFlags.BullTowerQuest.ZenithFollowup && outlaws.mainQuestTimer.Expired())
 		BullTowerScenes.AftermathZenith();
 	else if(maria.EligableForDeaddropAlert())
-		MariaScenes.DeadDrops.Alert();
+		DeadDropScenes.Alert();
 	else if(vaughn.IntroAvailable())
 		VaughnScenes.Introduction();
 	else
