@@ -27,8 +27,6 @@ import { AccItems } from '../../items/accessories';
 import { WeaponsItems } from '../../items/weapons';
 import { Entity } from '../../entity';
 
-let BullTowerScenes : any = {};
-
 export class BullTowerStats {
 	suspicion : Stat;
 	stoleLantern : boolean;
@@ -180,399 +178,20 @@ BullTowerLoc.Courtyard.Caravans.onEntry = function() {
 	else Gui.PrintDefaultOptions();
 }
 BullTowerLoc.Building.Hall.onEntry = function() {
-	if(Math.random() < 0.7) BullTowerScenes.Coversations();
+	if(Math.random() < 0.7) BullTowerScenes.Coversations(false);
 	else Gui.PrintDefaultOptions();
 }
 BullTowerLoc.Building.Office.onEntry = function() {
-	if(Math.random() < 0.7) BullTowerScenes.Coversations();
+	if(Math.random() < 0.7) BullTowerScenes.Coversations(false);
 	else Gui.PrintDefaultOptions();
 }
 BullTowerLoc.Building.Warehouse.onEntry = function() {
-	if(Math.random() < 0.7) BullTowerScenes.Coversations();
+	if(Math.random() < 0.7) BullTowerScenes.Coversations(false);
 	else Gui.PrintDefaultOptions();
 }
 BullTowerLoc.Building.Watchtower.onEntry = function() {
-	if(Math.random() < 0.7) BullTowerScenes.Coversations();
+	if(Math.random() < 0.7) BullTowerScenes.Coversations(false);
 	else Gui.PrintDefaultOptions();
-}
-
-
-
-BullTowerScenes.Initiation = function() {
-	let player = GAME().player;
-	let party : Party = GAME().party;
-	let outlaws = GAME().outlaws;
-	let terry = GAME().terry;
-
-	var parse : any = {
-		playername: player.name
-	};
-	
-	outlaws.flags["BullTower"] = OutlawsFlags.BullTowerQuest.Initiated;
-	
-	Text.Clear();
-	Text.Add("The outlaw camp is always calmest at dawn and at dusk - the camp may never sleep, but it does have lulls when one shift of workers - be they hunters, sentries or otherwise - replaces another. It’s at one of these shift rotations that you arrive in the camp, feeling momentarily calmed by the brief surfeit of activity before you’re grabbed by the shoulder from behind.", parse);
-	Text.NL();
-	Text.Add("<i>“[playername].”</i> Zenith’s familiar, deep voice comes from behind you. <i>“What a pleasant surprise to find that you’ve arrived in our camp. In fact, I was just thinking of you when one of the lookouts spotted you coming. Do you have a moment to talk?”</i>", parse);
-	Text.NL();
-	Text.Add("It seems rather impolite to decline the outlaw leader, so you nod.", parse);
-	Text.NL();
-	Text.Add("<i>“Everyone’s waiting,”</i> he rumbles. <i>“Let’s go.”</i>", parse);
-	Text.NL();
-	Text.Add("What Zenith means by ‘everyone’ soon becomes clear: you’re led to his tent, and a small group has gathered within, clustered around the map table, sitting on anything and everything that can serve as a seat. You recognize Maria, Cveta, and a few others, but most of those present aren’t known to you. It seems like a pretty lively conversation’s going on, too.", parse);
-	Text.NL();
-	Text.Add("<i>“Well, the twins are said to be better than their father on the issue…”</i>", parse);
-	Text.NL();
-	Text.Add("<i>“And it’ll take decades for Rewyn to die and be succeeded, assuming he doesn’t do us the favor of getting killed off. You really want to live in the woods that long on a rumor that the children are going to be more fair-minded than their father? Even if they started working on reversing his policies before his body’s cold, the damage will have been done.”</i>", parse);
-	Text.NL();
-	Text.Add("<i>“I’m not convinced…”</i>", parse);
-	Text.NL();
-	Text.Add("<i>“Few with power ever actually want to give it up. You think that once Rewyn’s given the lands of us exiled nobles to his favorites, the new owners are just going to hand them over because Rumi or Rani say so?”</i>", parse);
-	Text.NL();
-	Text.Add("Zenith clears his throat. <i>“Ladies. Gentlemen.”</i>", parse);
-	Text.NL();
-	Text.Add("As one, morphs and pure humans alike turn their heads to acknowledge the outlaw leader’s arrival.", parse);
-	Text.NL();
-	Text.Add("<i>“Maria. Aquilius. Friends,”</i> he continues, motioning for you to find a seat, which you do. <i>“Thank you for being here on such short notice this evening. I would have asked you to come earlier, but I only received news on the matter a few hours ago.”</i>", parse);
-	Text.NL();
-	Text.Add("<i>“As most of you know, the Royal Guard blames us for the disappearance of Alaric two days ago. Of course, we had no hand in it, but these accusations necessisated our involvement in order to clear our name. I set Maria to the task immediately, with a little fieldwork of my own, and our discoveries were interesting, to say the least.”</i>", parse);
-	Text.NL();
-	Text.Add("<i>“Hey, I don’t know any Alaric,”</i> someone calls from the back.", parse);
-	Text.NL();
-	Text.Add("<i>“I do,”</i> a well-dressed cat-morph replies. <i>“Bean-counter in the King’s Treasury, supposedly discovered someone was pocketing coins on the sly, was going to make a fuss about it. Is what I heard some little birds whisper, in any case.”</i>", parse);
-	Text.NL();
-	Text.Add("<i>“Yes, Lady Radigaz, you’re very well-informed,”</i> Zenith says coolly. <i>“But if we can avoid further interruptions? Maria?”</i>", parse);
-	Text.Flush();
-	
-	TimeStep({ minute : 30 });
-	
-	Gui.NextPrompt(function() {
-		Text.Clear();
-		Text.Add("Rising from her seat, Maria glances about the tent before speaking. <i>“I gathered my team and went to take a look around the place where he supposedly disappeared, close to the King’s Road. To make a long story short, we did find some leads… which brought us straight to Bull Tower. It’s supposed to have been abandoned for decades, but the place is crawling with guards. They seem to be trying to keep a low profile, but there’s no hiding that many men.”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“And did you manage to take a look at these guards? Were they mercenaries? Did they seem competent?”</i> asks one of the assembly.", parse);
-		Text.NL();
-		Text.Add("<i>“Calm down, I’m getting there.”</i> Maria clears her throat. <i>“At first we considered the possibility of them being mercenaries, but they seemed too well disciplined. So I had one of my men take a closer look, and he recognized lieutenant Corishev of the Royal Guard talking to one of the sentries at the wall.”</i>", parse);
-		Text.NL();
-		Text.Add("The Royal Guard? What are they doing so far away from the castle district, let alone Rigard? Zenith looks down at his assembled audience, and nods.", parse);
-		Text.NL();
-		Text.Add("<i>“For those of you less learned in law, Bull Tower, abandoned though it is, is still Crown land. When it was decommissioned, responsibility for its care passed to the Royal Guard, although it was not to be  be manned, so far as I know… the sudden influx of guards posed an interesting question which we bent our minds to.”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“Lieutenant Corishev? He’s one of Preston’s head flunkies, there’s no way he’d be there without his commander knowing.”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“The Shining doesn’t want to step any farther than the good end of the Merchants’ Street lest he get a smidge of dust on that breastplate of his,”</i> someone pipes up from the back.", parse);
-		Text.NL();
-		Text.Add("<i>“Not true. Didn’t he lead that band of his into the warehouse district to catch-”</i>", parse);
-		Text.NL();
-		Text.Add("Zenith claps his hands once, and the discussion is immediately shushed. <i>“Please, let’s have some respect for those who are speaking.</i>", parse);
-		Text.NL();
-		Text.Add("<i>“Well, I won’t bore you. Long story short, Maria and I think our man is in there. We will free him, clear our name, and sully the King’s <b>and</b> the Royal Guard’s - the former’s for having embezzlers in his employ, and the latter’s for trying to cover it up and pin the blame on us.</i>", parse);
-		Text.NL();
-		Text.Add("<i>“Yes, I know Bull Tower was built to be impregnable. However, we’ve come up with an idea that might work. If we can pull it off, we move another step toward the moral high ground, my friends. Amongst other things. That is all I wish of you today, my friends - to keep you informed. You may leave now.”</i>", parse);
-		Text.Flush();
-		
-		TimeStep({ minute : 10 });
-		
-		Gui.NextPrompt(function() {
-			Text.Clear();
-			Text.Add("As you stand and make to leave with the small crowd flowing out of Zenith’s tent, though, another hand falls on your shoulder - smaller and lighter this time, but no less firm.", parse);
-			Text.NL();
-			parse["handsomebeautiful"] = player.mfFem("handsome", "beautiful");
-			Text.Add("<i>“Going somewhere, [handsomebeautiful]?”</i>", parse);
-			Text.NL();
-			Text.Add("You half-turn, and Maria is there, smiling with apparent sweetness - and you’re pretty sure she hasn’t suddenly become taken with you. <i>“Zenith would appreciate it if you stayed a little longer.”</i>", parse);
-			Text.NL();
-			Text.Add("Well, it makes sense. He wouldn’t go to all the trouble of seeking you out just to have you hear him speak, right? A faint sense of foreboding welling up in the pit of your stomach, you sit back down and wait for the tent to empty of everyone save you, Zenith, Maria, and oddly enough, Cveta, who’s been seated near the back all the while, unruffled as always.", parse);
-			if(party.Num() > 1) {
-				var p1 = party.Get(1);
-				parse["comp"]  = party.Num() == 2 ? p1.name : "Your companions";
-				parse["s"]     = party.Num() == 2 ? "s" : "";
-				parse["has"]   = party.Num() == 2 ? "has" : "have";
-				parse["heshe"] = party.Num() == 2 ? p1.heshe() : "they";
-				
-				Text.Add(" [comp] look[s] about, clearly wondering if [heshe] should be here, then come[s] to the conclusion that if you’ve been invited, then so [has] [heshe].", parse);
-			}
-			Text.NL();
-			Text.Add("Apparently, this still isn’t enough privacy for the outlaw leader. Gesturing for you to follow, he leads you to a corner and speaks in a low whisper.", parse);
-			Text.NL();
-			parse["t"] = party.InParty(terry) ? "-”</i> he gestures at Terry with a nonchalant wave of his hand - <i>“" : "";
-			parse["b"] = outlaws.TurnedInBinder() ? " That your coming across Krawitz’s binder was no accident - which is why I didn’t question you when you passed it along to us." : "";
-			Text.Add("<i>“I know that you probably don’t want this to be public knowledge, which is why I called you over. [playername], I know that you were involved in the heist on Krawitz’s place, that the Masked Fox [t]wasn’t the only one present that night.[b]”</i>", parse);
-			Text.NL();
-			Text.Add("You swallow hard. Just how long has he known?", parse);
-			Text.NL();
-			Text.Add("<i>“In such a place as Rigard, nothing goes unnoticed, for there are always eyes and ears about. Beggars. Street urchins. Laborers. Those beneath notice. Many willingly tell us what they’ve seen and heard, while others need their tongues loosened with a hot meal.”</i>", parse);
-			Text.NL();
-			Text.Add("With a pat on your shoulder and a smile, he walks you back as if nothing had happened, speaking in normal tones once more. <i>“[playername], you have a skill that we are in need of - that of infiltration. Our dear songstress here is also in the same position, albeit with a different ability we can bring to bear. Maria and I have come up with a plan to get through Bull Tower’s defenses, and it will require the both of you.</i>", parse);
-			Text.NL();
-			Text.Add("<i>“Bull Tower was designed to be impregnable and would normally be impossible to enter by stealth, especially since Preston has put a good number of his lackeys on perimeter guard. We’ll create a diversion, draw as much attention as we can and throw them off edge so you can enter. Once inside, it should be far easier for you to move about and find our man.”</i>", parse);
-			Text.NL();
-			Text.Add("Surely it can’t be that simple. Maybe you should ask for the details later.", parse);
-			Text.NL();
-			Text.Add("<i>“What does he look like?”</i> Cveta asks, and you realize it’s the first time she’s spoken throughout this whole exchange.", parse);
-			Text.NL();
-			Text.Add("Zenith scratches his chin. <i>“Small. Thin. Balding. Maria will draw you a sketch before you leave; she will also provide precise directions to the tower. Are there any questions?”</i>", parse);
-			Text.Flush();
-			
-			TimeStep({ minute : 20 });
-			
-			BullTowerScenes.InitiationQuestions();
-		});
-	});
-}
-
-BullTowerScenes.InitiationQuestions = function(opts? : any) {
-	let player = GAME().player;
-	let party : Party = GAME().party;
-	let outlaws = GAME().outlaws;
-
-	opts = opts || {};
-	
-	var parse : any = {
-		playername : player.name
-	};
-	
-	
-	//[Presence][Plan][Binder][Leave]
-	var options = new Array();
-	if(!opts.presence) {
-		options.push({ nameStr : "Presence",
-			func : function() {
-				Text.Clear();
-				Text.Add("<i>“Some sort of smuggling is my guess,”</i> Maria pipes up. <i>“I’ve spotted some of the Royal Guard hanging around the old fort from time to time since the beginning of the year, almost always escorting folk transporting goods or lugging the stuff themselves. I managed to jump one of the caravan parties after they’d left the tower, made it look like your standard highway holdup. Most of what they were carrying were luxury goods from outside Rigard. Cheeses, wine, fine fabrics, smokes, other odds and ends. None of them illegal, but all of them highly taxed.”</i>", parse);
-				Text.NL();
-				Text.Add("<i>“Guards do not search their own,”</i> Cveta states flatly. <i>“Especially those that outrank them.”</i>", parse);
-				Text.NL();
-				Text.Add("Zenith nods. <i>“Or those who claim to be under the protection of such. It does seem like an open-and-shut case of tax evasion. If Bull Tower is being used as a waystation, it would make sense for them to hold Alaric there until one of the smugglers turns up to take him away.”</i>", parse);
-				Text.Flush();
-				
-				TimeStep({ minute : 5 });
-				
-				opts.presence = true;
-				BullTowerScenes.InitiationQuestions(opts);
-			}, enabled : true,
-			tooltip : "Why is the Royal Guard out along the King’s Road, anyway?"
-		});
-	}
-	if(!opts.plan) {
-		options.push({ nameStr : "Plan",
-			func : function() {
-				Text.Clear();
-				Text.Add("Zenith nods at your question. <i>“Our eyes and ears have informed us that there are a number of shipments slated to come in that night; we’ll divert the guards by attacking the last of the convoys along the King’s Road within sight of the tower. ", parse);
-				if(party.Num() > 1) {
-					parse["s"] = party.Num() == 2 ? "" : "s";
-					Text.Add("Your companion[s] can join in if they like; we could use the help, especially if we’re to effect a good fighting retreat. ", parse);
-				}
-				Text.Add("The fact that it’s a diversion is something only Maria, I, and a few others know; everyone else will be informed it’s a raid - which it is as well.</i>", parse);
-				Text.NL();
-				Text.Add("<i>“Once they’re preoccupied with us, the two of you can waltz on in.”</i>", parse);
-				Text.NL();
-				Text.Add("You guess that means Cveta asks them nicely to let you pass.", parse);
-				Text.NL();
-				Text.Add("<i>“That’s correct. Since every pair of eyes still on the walls is going to be facing outwards toward us, things will be much easier for you. You’re not going to pass as a Royal Guard - I’m willing to wager everyone knows everyone - so don’t even try disguising yourself.</i>", parse);
-				Text.NL();
-				Text.Add("<i>“After you’re in, though, you’re on your own. No one has cared about the inside of Bull Tower for the last generation, and the Royal Guard has had time to make their own unofficial changes, if they’ve so desired. I’ve managed to acquire a copy of the floor plans, but they’re at least sixty years out of date.</i>", parse);
-				Text.NL();
-				Text.Add("<i>“What probably hasn’t changed, though, is that there’ll be a central yard and somewhere to stable animals. Everything else will be centered about the main watchtower. Cells below to hold troublemakers on the road - almost certainly where Alaric is being held, although you may have some searching to do. I’m afraid I can’t be of more help, [playername].”</i>", parse);
-				Text.NL();
-				Text.Add("You think a moment, and agree that from the way this fortress sounds, Zenith’s information is probably the best you’ll be getting. It’s not much, but it sounds like only the Royal Guard would have more.", parse);
-				Text.Flush();
-				
-				TimeStep({ minute : 5 });
-				
-				opts.plan = true;
-				BullTowerScenes.InitiationQuestions(opts);
-			}, enabled : true,
-			tooltip : "So, what’s the plan? In detail, that is."
-		});
-	}
-	if(!opts.obj && opts.presence) {
-		options.push({ nameStr : "Objectives",
-			func : function() {
-				Text.Clear();
-				Text.Add("Zenith and Maria look at each other for a moment, then the former shrugs and smiles. <i>“By all means, [playername]. Opportunities to screw Preston over are hard to come by, so feel free to be creative. Although I must remind you to focus on your primary goal and to take no unnecessary risks. Alaric comes first; everything else is secondary.</i>", parse);
-				Text.NL();
-				Text.Add("<i>“Concrete evidence of what the Royal Guard is up to within those walls - evidence that we can hang out in the street for all to see - now that would be a nice catch, if you can find any. Bring down Preston a peg or two.”</i>", parse);
-				if(outlaws.TurnedInBinder()) {
-					Text.NL();
-					Text.Add("Zenith grunts, then looks thoughtful as he turns to you. <i>“Well, [playername], there is one more thing I need to mention. When we caught wind of this, I thought it would be prudent to give that binder of Krawitz’s - the one you so thoughtfully obtained for us - a detailed look-through. As it turns out, the contents of one of the inbound shipments written off as lost matched the wagons that Maria and her team took that night, down to the wine’s vintage. It’s circumstantial evidence, but it’s a lead as to why the Royal Guard is aiding and abetting smugglers.</i>", parse);
-					Text.NL();
-					Text.Add("<i>“I’m certain there’s more evidence to be found in Bull Tower itself, and with the numbers involved, as well as the fact that one only works with smugglers with payment on delivery… well, there’s likely to be some coin on hand in there, too.</i>", parse);
-					Text.NL();
-					Text.Add("<i>“Not that it tells us <b>where</b> it is, more’s the pity, but it’s better than stumbling around in the dark.”</i>", parse);
-					Text.NL();
-					Text.Add("Evidence, payoff. All right, you’ll keep an eye out for those while you’re sneaking about.", parse);
-				}
-				Text.Flush();
-				
-				TimeStep({ minute : 5 });
-				
-				opts.obj = true;
-				BullTowerScenes.InitiationQuestions(opts);
-			}, enabled : true,
-			tooltip : "If the Royal Guard have been lurking about for some time now, surely that means there’s more you can do…"
-		});
-	}
-	options.push({ nameStr : "Leave",
-		func : function() {
-			Text.Clear();
-			Text.Add("You decide you’re as ready as you’ll ever be, and say so.", parse);
-			Text.NL();
-			Text.Add("<i>“I will require a little time to make my preparations,”</i> Cveta says, turning to you. <i>“Meet me at nine in the evening, [playername], and we can be on our way.”</i>", parse);
-			Text.NL();
-			Text.Add("Woman of few words as ever, isn’t she?", parse);
-			Text.NL();
-			Text.Add("<i>“Well then,”</i> Zenith says, striding over to the tent flaps and undoing them to let you through, <i>“don’t let me keep you up. Good night, [playername]. Feel free to rest in our camp; you’ll need all your strength. No, Cveta, please sit down. I would have further words with you and Maria concerning the events of two evenings ago…”</i>", parse);
-			Text.NL();
-			Text.Add("Well, it seems that you’re done here. Once you’re ready, you should see Cveta about setting off.", parse);
-			Text.Flush();
-			
-			TimeStep({ minute : 5 });
-			
-			Gui.NextPrompt();
-		}, enabled : true,
-		tooltip : "You’re about done here."
-	});
-	Gui.SetButtonsFromList(options, false, null);
-}
-
-BullTowerScenes.MovingOut = function() {
-	let player = GAME().player;
-	let party : Party = GAME().party;
-	let outlaws = GAME().outlaws;
-	let cveta = GAME().cveta;
-
-	var parse : any = {
-		playername : player.name
-	};
-	
-	Text.Clear();
-	if(WorldTime().hour >= 21 || WorldTime().hour < 4)
-		Text.Add("Although the flaps of Cveta’s tent are tightly drawn, you catch a glimpse of light at the seams. The songstress is still awake and presumably waiting for you so you can set off - would you like to do so?", parse);
-	else
-		Text.Add("You’ve arrived early, but you don’t think there are any more preparations you need to make. Maybe you could help Cveta or review the plan to make sure you’re in sync.", parse);
-	Text.NL();
-	Text.Add("<b>Remember that you will only have one try at this task; whether it meets with success or failure, there will be no retracing your steps, for what is done will remain done.</b>", parse);
-	Text.Flush();
-	
-	var options = new Array();
-	options.push({ nameStr : "Wait",
-		func : function() {
-			Text.Clear();
-			Text.Add("You’re going to have only one shot at this. While time is of the essence here, it won’t do to head into the great unknown without making all the preparations you can; with that in mind, you step back and return to the middle of camp. You’ll be back when everything’s been taken care of.", parse);
-			Text.NL();
-
-			TimeStep({minute: 5});
-
-			Gui.PrintDefaultOptions();
-		}, enabled : true,
-		tooltip : "You still need to make a few more preparations."
-	});
-	options.push({ nameStr : "Move out",
-		func : function() {
-			Text.Clear();
-			if(WorldTime().hour >= 21 || WorldTime().hour < 4)
-				Text.Add("There’s no need to wait any longer; time’s a-wasting. Stepping towards Cveta’s tent, you practically run into the songstress as she emerges from within.", parse);
-			else {
-				Text.Add("<i>“You are here early, [playername],”</i> Cveta says, greeting you with a nod as you approach her tent. <i>“There are still some hours left before our departure.”</i>", parse);
-				Text.NL();
-				Text.Add("You didn’t want to risk missing out on the action, you explain.", parse);
-				Text.NL();
-				Text.Add("<i>“Perhaps it is for the best; there are still preparations everyone needs to make. Might I trouble you to make yourself useful until dusk?”</i>", parse);
-				Text.NL();
-				Text.Add("Indeed, as evening nears, the camp becomes abuzz with activity - blades put to the whetstone, bowstrings tested and replaced, orders given and bootstraps tightened. The atmosphere is military - save that there are no banners or formations. The raiding party numbers about thirty, with Maria at its head; most of them look quite eager to set out and to scratch that itch with a bit of action. While the raid may be intended as a diversion, it goes without saying that they intend to make it as profitable as possible.", parse);
-				Text.NL();
-				Text.Add("<i>“I hope fate is kind to them. They may treat their task with levity, but I would rather not have Aquilius do much work as a result of tonight’s venture.”</i>", parse);
-				Text.NL();
-				Text.Add("You turn to find Cveta standing beside you, having changed into clothes more suited for sneaking about.", parse);
-			}
-			Text.NL();
-			Text.Add("Seeing her without her gown for once throws you off a little - without all that fabric to hide her figure, it’s plain how thin and tiny she really is. You eye the simple blouse and leggings she’s donned, plain gray against an equally unremarkable brown, and have to concede that so long as Cveta doesn’t open her mouth or look anyone in the eye, she might pass for… well, someone of lower stature. Not a commoner - even when trying to hide it, she moves with far too much elegance for that - but perhaps a merchant’s daughter…", parse);
-			Text.NL();
-			Text.Add("Odd, though, that she’s kept the gloves. Come to think of it, there hasn’t been a single time that you’ve seen her without them.", parse);
-			Text.NL();
-			Text.Add("The songstress’ voice slices cleanly through your thoughts. <i>“Are we ready?”</i>", parse);
-			Text.NL();
-			if(party.Num() > 1) {
-				var p1 = party.Get(1);
-				parse["comp"]   = party.Num() == 2 ? p1.name     : "your companions";
-				parse["himher"] = party.Num() == 2 ? p1.himher() : "them";
-				parse["heshe"]  = party.Num() == 2 ? p1.heshe()  : "they";
-				Text.Add("Just one more thing, you tell Cveta, then turn to [comp], asking [himher] to wait for you here in the outlaws’ camp; if [heshe]’d like, [heshe] can ask Zenith to join in on the raid. Sneaking around alone is already hard enough, two is a crowd, and any more would be impossible. With that out of the way, you turn back to the songstress.", parse);
-				Text.NL();
-			}
-			Text.Add("You tell Cveta that you’re prepared, and she nods. <i>“I visited Maria earlier and got the requisite items.”</i> She produces two slips of paper, one with directions to the tower and the other a sketch of a sad-faced, balding man. <i>“Let us not tarry. The night is short.”</i>", parse);
-			Text.NL();
-			Text.Add("With that, she turns, leading the way. She’s careful to never venture more than a half-step ahead, politely allowing you the illusion that you know where you’re going too. The lookouts on duty lower the drawbridge, and crossing the  trenches, you’re on your way.", parse);
-			Text.Flush();
-			
-			TimeStep({hour: 1});
-			
-			Gui.NextPrompt(function() {
-				Text.Clear();
-				Text.Add("The trip to the King’s Road is uneventful; the two of you slip through the thick undergrowth out of the forest. The road is clear, largely devoid of travelers, and well-lit under the clear, cloudless sky. Off in the distance, the many lights of Rigard flicker and twinkle, the city drowsy but never quite falling asleep.", parse);
-				Text.NL();
-				Text.Add("The further you get from Rigard, the less maintained and wilder the road becomes; it remains paved, but you notice the occasional pothole and missing flagstone, while the surrounding vegetation becomes coarser and more overgrown. You’d have guessed that the main route connecting Rigard and the Free Cities would be better maintained. Perhaps this is just a neglected patch, with no one living nearby to take responsibility for its upkeep.", parse);
-				Text.NL();
-				Text.Add("Another half-hour along the road and one sleepy-looking patrol later, the walls of Bull Tower draw into sight, thick and rising tall despite their age, clearly illuminated by the moonlight. Thin vines crisscross the old stone and mortar like veins across skin, and in the middle of it all, a singular watchtower stands above the walls, stiff and stout as it deeply penetrates the heavens.", parse);
-				Text.NL();
-				Text.Add("You’re not the only ones present, though. Even at this distance, you spot silhouettes moving atop the ramparts, and the gate - an immense archway a little ways away from the main trunk of the King’s Road - is flanked by two figures. From woodland cover to the thick, waist-high undergrowth to the shadow of the high, ancient walls, both of you creep closer and closer to the gate and its watchers. They are two pure humans, dressed in simple, unmarked clothes, with no visible armor, but by the way they carry themselves and handle their pikes, it’s clear that they’re used to handling their weapons.", parse);
-				Text.NL();
-				Text.Add("These must be the guards, then - you didn’t expect that they’d be in uniform, did you? Signaling for Cveta to wait, you take cover in the shadows and sneak as close as you dare, finding a good patch of undergrowth to crouch in and spy on the men. They’re clearly on edge and more than a little twitchy, constantly glancing around and fidgeting. After about ten minutes of waiting, you’re rewarded with the sound of faint clacking of hooves and wooden wheels on stone, growing steadily louder as its source draws closer: a single wagon. Its driver leans down and whispers something to the guards, receiving a reply in return; while you can’t make out the words at this distance, the tone is nevertheless urgent.", parse);
-				Text.NL();
-				Text.Add("<i>“...patrol... return later... give or take an hour or two... let you through first. Don’t drop that, it’s an important delivery.”</i>", parse);
-				Text.NL();
-				Text.Add("With that, the guards wave the wagon through and resume their vigil, peering intently into the night. Whatever it was that they were looking for, it wasn’t the wagon - and hopefully it’s not you. A knot twisting in the pit of your stomach, you stealthily withdraw from your hiding place and make your way back to Cveta, briefly relaying what you’ve seen. She folds her arms and clicks her beak impatiently, glancing down the road, into the distance.", parse);
-				Text.NL();
-				Text.Add("<i>“Where is Zenith?”</i>", parse);
-				Text.NL();
-				Text.Add("Cveta’s question is answered by an explosion that lights up a whole stretch of the King’s Road about two miles down the road from the tower. Even from ground level, it’s starkly visible - how much more it must be, then, for anyone watching from the ramparts. The flash of light is followed by a dull, thunderous roar that sweeps across the grasslands and plains, reminding you of an approaching thunderstorm.", parse);
-				Text.NL();
-				Text.Add("While you can’t tell if it’s of alchemical or magical origin, the enormous orange cloud of flame and smoke that rises into the air is conspicuous enough to do its job. Shouts erupt from within the fortress, followed by the clatter of boots on the ground. In less than five minutes, an entire squad of plainclothes guardsmen have pass you by at a quick march, heading directly for the source of the explosion, disappearing rapidly in the gloom. You’re not in any position to see any of the actual fighting that must be taking place, but the night air carries the shouts and screams well enough; it’ll only get worse when the squad arrives.", parse);
-				Text.NL();
-				Text.Add("This is it, then. You point at the guards posted by the gate, and Cveta nods in understanding. Though you know what the songstress can do, it’s still a little bizarre seeing her step out of the shadows and glide down the path to the tower on airy footsteps. To be frank, the whole thing feels  melodramatic, Cveta painting a stark silhouette in the silver moonlight.", parse);
-				Text.NL();
-				Text.Add("If she wanted to draw their attention, she’s definitely managed to do it - the gate guards straighten their backs and clutch their pikes with a little more vigor, practically standing at attention, but they evidently don’t think her a threat, or they’d be running off to raise the alarm.", parse);
-				Text.NL();
-				Text.Add("<i>“Halt! Who goes there?”</i>", parse);
-				Text.NL();
-				Text.Add("Cliched, but it gets the point across.", parse);
-				Text.NL();
-				Text.Add("<i>“Maybe she’s one of the things that Majid ordered and wandered over when the caravan blew up. You know...”</i> the other says, not taking his eyes off Cveta. <i>“You. State your name and business-”</i>", parse);
-				Text.NL();
-				Text.Add("<i><b>“We are familiar faces.”</b></i>", parse);
-				Text.NL();
-				Text.Add("The way Cveta says it… her voice is light and airy, rippling through the air. The effect it  have on the gate guards is immediate. Ready to spring out and aid the songstress at the first sign of trouble, you watch as they shake and grunt, clearly struggling against the compulsion.", parse);
-				Text.NL();
-				Text.Add("Then, after the pain, a release: <i>“My friend and I are amongst the smugglers expected here tonight; we are merely escaping the bandits who attacked our transport. The two of you desire to let us through, so you can return to your warm beds as soon as possible with a minimum of trouble. You are glad to have pulled guard duty instead of having to respond to the attack further down the road.”</i>", parse);
-				Text.NL();
-				Text.Add("The guards waste no time in taking the avenue of escape afforded to them; they visibly sag with relief, leaning on their pikes and waving Cveta onward through the gates. You step out of the shadows to join her, and the two of you quickly slip past the guards and through the ancient stone walls.", parse);
-				Text.NL();
-				Text.Add("<i>“Sometimes, it is easier to divert the flow of a river than to dam it,”</i> Cveta whispers to you as both of you pass through the old, crumbling gate. <i>“As my father said, it is often not a good idea to cut off an enemy from all avenues of retreat. They would have been much harder to sway if I had ordered them to let us through and not notice our presence at all.”</i>", parse);
-				Text.NL();
-				Text.Add("As opposed to seeing her and thinking she was expected?", parse);
-				Text.NL();
-				Text.Add("Cveta nods. <i>“Right. Nevertheless, we have limited time to act. The moment that squadron returns is the moment our game is up. We will have to move quickly, but not rashly.”</i>", parse);
-				Text.NL();
-				Text.Add("With that thought in mind, you step into the deserted main courtyard of Bull Tower, the main structure of the ancient outpost standing before you, a remnant of a time when Eden was wilder and yet more prosperous. The shadows cast by the walls are as thick on the inside as they are on the outside, and it is into the cover of these that the two of you dive, taking a moment to catch your breaths and plan your next move.", parse);
-				Text.Flush();
-				
-				party.SaveActiveParty();
-				party.ClearActiveParty();
-				
-				party.SwitchIn(player);
-				party.AddMember(cveta, true);
-				
-				party.RestFull();
-				
-				outlaws.BT = new BullTowerStats();
-				
-				MoveToLocation(BullTowerLoc.Courtyard.Yard, {hour: 3});
-			});
-		}, enabled : true,
-		tooltip : "You’re as ready as you’ll ever be."
-	});
-	Gui.SetButtonsFromList(options, false, null);
 }
 
 
@@ -961,45 +580,6 @@ BullTowerLoc.Courtyard.Caravans.events.push(new Link(
 	}
 ));
 
-BullTowerScenes.GuardsWin = function() {
-	let outlaws = GAME().outlaws;
-	
-	var enc  = this;
-	SetGameState(GameState.Event, Gui);
-	
-	var parse : any = {
-		
-	};
-	
-	Gui.Callstack.push(function() {
-		Text.Clear();
-		Text.Add("The last of the sentries guarding the caravans collapses to the ground, succumbing to his wounds. Wasting no time, you hurry to hide your unconscious adversaries in an overgrown patch of weeds - the thigh-height grass conceals them nicely, and they should stay out cold for a good while.", parse);
-		Text.NL();
-		Text.Add("Naturally, you rifle through their pockets, but fail to find much of use. A box of matches, a few loose cigarettes - the sort of thing guards on duty might have on their person. One particular item stands out, though - a key that looks almost as ancient as the fortress. Wondering if it unlocks something in the tower, you pocket the thing. Maybe it’ll come in handy later.", parse);
-		Text.Flush();
-		
-		outlaws.BT.guardsDown = true;
-		
-		Gui.NextPrompt();
-		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
-	});
-	Encounter.prototype.onVictory.call(enc);
-}
-
-BullTowerScenes.GuardsLoss = function() {
-	var enc  = this;
-	SetGameState(GameState.Event, Gui);
-	
-	var parse : any = {
-		
-	};
-	
-	Text.Clear();
-	Text.Add("Seems like this scuffle isn’t going as you planned. Deciding to disengage while you still can, you quickly signal to Cveta to beat a fighting retreat. The caravan guards break off pursuit after just a few more blows, and the reason for that soon becomes apparent: the two of you have barely crossed the courtyard when the loud clanging of a bell being rung echoes across the entirety of the ancient fortress - the alarm!", parse);
-	Text.NL();
-	
-	BullTowerScenes.EndingFailure();
-}
 
 BullTowerLoc.Courtyard.Caravans.events.push(new Link(
 	"Search Caravans", function() {
@@ -1394,562 +974,6 @@ BullTowerLoc.Building.Cell.onEntry = function() {
 	}
 }
 
-BullTowerScenes.CorishevLoss = function() {
-	var enc  = this;
-	SetGameState(GameState.Event, Gui);
-	
-	var parse : any = {
-		
-	};
-	
-	Text.Clear();
-	Text.Add("Despite success being right before your eyes, you’re quickly realizing why the Royal Guards are so terrified of Corishev’s whip. It’s not only the force of the blows or the barbs on the whip that make this so difficult. The venom makes it hard to think about anything other than sweet, sweet sex, which in turn allows him to land more blows on you, letting more venom mingle with your blood…", parse);
-	Text.NL();
-	Text.Add("As hard as it is to admit, you’re losing. It’s getting harder to concentrate, and you can feel your strength starting to flag; it’s best to beat a tactical retreat while you can and avoid ending up in irons alongside Alaric.", parse);
-	Text.NL();
-	Text.Add("You croak out an apology as you start a fighting retreat towards the door behind you, Cveta doing her best to cover your back. Alaric goes wide-eyed as he realizes his would-be saviors are abandoning him, and struggles against his chains.", parse);
-	Text.NL();
-	Text.Add("<i>“Don’t leave me here! ”</i> he cries.", parse);
-	Text.NL();
-	Text.Add("<i>“Where are you going, would-be heroes?”</i> Judging by Corishev’s maniacal giggling and the lewd undertones of his voice, it’s clear that he’s completely intoxicated by all the Gol venom he’s smeared on himself. The orgulous sight of him jacking off to your escape is enough to make Cveta’s face crumple in disgust. <i>“Come back! You forgot your damsel in distress!”</i>", parse);
-	Text.NL();
-	Text.Add("Trying your best to shut the sounds coming from behind you out of your mind, you throw open the door and fly up the stairs as quickly as your legs will carry you. The lieutenant doesn’t seem to be pursuing you - the reason for which soon becomes clear when the alarm sounds throughout the entirety of the ancient fortress. Seems like he’s leaving the chore of hunting you down to his underlings.", parse);
-	Text.NL();
-	BullTowerScenes.EndingFailure();
-}
-
-BullTowerScenes.CorishevWin = function() {
-	let player = GAME().player;
-	let outlaws = GAME().outlaws;
-
-	var enc  = this;
-	var corishev = enc.corishev;
-	SetGameState(GameState.Event, Gui);
-	
-	var parse : any = {
-		playername : player.name
-	};
-	
-	outlaws.flags["BT"] |= OutlawsFlags.BullTower.AlaricFreed;
-	
-	Gui.Callstack.push(function() {
-		Text.Clear();
-		Text.Add("That last blow did the trick. Still grinning madly - whether it’s the venom, or whether he’s just plain unhinged by now is anyone’s guess - Corishev staggers backward a few steps, perhaps to give himself a little breathing space. His wide, maniacal gaze darts this way and that, his breathing labored as you advance on him. Too bad there’s nowhere for him to run.", parse);
-		Text.NL();
-		Text.Add("<i>“Kids these days. Beaten by… a couple of young punks…”</i>", parse);
-		Text.NL();
-		parse["w"] = player.Weapon() ? "the blunt end of your weapon" : "your fist";
-		Text.Add("Ducking under a desperate overhead lash, you slip within his guard and land a solid blow to his head with [w]. Giggling, he doesn’t seem to notice it at first, then the force of your blow finally registers and he crumples to the ground like a folded reed, his barbed whip falling out of his grasp and clattering on the floor. With a twitch, his cock ejects one last spurt of cum, a whitish streak mixing with the sweat and blood on the floor, then goes as limp as the rest of him.", parse);
-		Text.NL();
-		Text.Add("<i>“Very fitting,”</i> Cveta remarks dryly at the sight, doing her best to avoid stepping in any of the mess.", parse);
-		Text.NL();
-		Text.Add("<i>“Finally.”</i> Alaric’s been so quiet throughout the whole fight that you’d almost forgotten he was there. He pauses to catch his breath, summoning the strength to speak properly. <i>“Could you get me out of here? He’s got the keys in his pants - they’re hanging over by the door.”</i>", parse);
-		Text.NL();
-		Text.Add("Wasting no time, you tiptoe around the fallen lieutenant and reach for the pants Alaric mentioned. Searching the pockets unearths an empty coin purse, several vials of clear green liquid you try not to look at too closely, and a large iron keyring from which several keys hang. With the keys, it’s a small matter to unlock the chains and cuffs that hold Alaric in place, and he collapses to the ground, groaning.", parse);
-		Text.NL();
-		parse["m"] = player.mfFem("Mister", "Miss");
-		Text.Add("<i>“Ow. Ow. Ow. Fucking. Ow. Thank you, um, [m]…?”<i/>", parse);
-		Text.NL();
-		Text.Add("You nod, and tell him your name.", parse);
-		Text.NL();
-		Text.Add("<i>“Right. Thank you, then, [m] [playername], and -”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“My name is Cveta.”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“Cveta, then. I’m Alaric. For the record, I didn’t embezzle anything. In fact, the Royal Guards have been taking payoffs from anyone and everyone who has connections to turn a blind eye to tax evasion on imports! They’re keeping the money up top in a trapped safe - I overheard the lieutenant talking to one of his men about it - and the key should be on his keyring-”", parse);
-		Text.NL();
-		Text.Add("<i>“You do not need to prove your innocence to us, Alaric,”</i> Cveta replies. <i>“We know who you are, and were specifically sent to get you. Do you think you can walk?”</i>", parse);
-		Text.NL();
-		Text.Add("Alaric tries to rise, grimacing and wincing, then staggers back onto his knees. <i>“No. But I’m going to have to do it anyway, aren’t I? I’ll just have to walk it off,”</i> he replies with a forced laugh. <i>“I guess that’s enough for introductions and thanks - can we please get out of here before the crazy bastard comes to?”</i>", parse);
-		Text.Flush();
-		
-		//[Fuck][Leave]
-		var options = new Array();
-		options.push({ nameStr : "Fuck",
-			func : function() {
-				Text.Clear();
-				Text.Add("Just a minute, you tell Alaric. There’s some unfinished business you have to take care of - if Cveta would be kind enough to help him out? You’ll catch up with them in a moment.", parse);
-				Text.NL();
-				Text.Add("Cveta gives you an odd look, but agrees and helps Alaric to his feet. It takes her a little effort, considering her slight stature, but the songstress eventually gets a firm grip under Alaric’s arm and begins hefting him out of the cell and up the stairs.", parse);
-				Text.NL();
-				Text.Add("Now that you’re alone, you look down at the lieutenant. The bastard is still largely out cold, save for the occasional twitch and groan, and you’re certain that between the Gol venom and having the wind knocked out of him, he’s not going to put up much of a fight for what you have in mind for him.", parse);
-				Text.NL();
-				Text.Add("Come to think of it, what <i>did</i> you have in mind?", parse);
-				Text.Flush();
-				
-				BullTowerScenes.CorishevFuck(corishev);
-			}, enabled : true,
-			tooltip : "The bastard lieutenant sure can dish it out; let’s see how well he can take it."
-		});
-		options.push({ nameStr : "Leave",
-			func : function() {
-				Text.Clear();
-				Text.Add("You find yourself in total agreement with the little bean counter. Not wishing to spend one moment longer in the cell, you help Alaric to his feet, you and Cveta each grabbing him under a shoulder and lifting. Before stepping onto the stairs, you relieve the lieutenant of his venom-coated whip, which could make a good weapon. The little bean-counter is still bleeding from his lashes, but he summons the strength to keep pace with both of you. Together, the three of you hobble up the steps and to the main hall, but not before you lock the cell door with the keys you found. On the off-chance that the lieutenant comes to before dawn, he can stew there until his underlings come and get him out.", parse);
-				Text.Flush();
-				
-				Gui.NextPrompt(function() {
-					MoveToLocation(BullTowerLoc.Building.Hall, {minute: 5});
-				});
-			}, enabled : true,
-			tooltip : "Get out of here before things get any worse."
-		});
-		Gui.SetButtonsFromList(options, false, null);
-	});
-	Encounter.prototype.onVictory.call(enc);
-}
-
-BullTowerScenes.CorishevImpregnate = function(mother : Entity, father : Corishev, slot? : number) {
-	mother.PregHandler().Impregnate({
-		slot   : slot || PregnancyHandler.Slot.Vag,
-		mother : mother,
-		father : father,
-		race   : Race.Human,
-		num    : 1,
-		time   : 30 * 24,
-		load   : 2
-	});
-}
-
-BullTowerScenes.CorishevFuck = function(corishev : Corishev) {
-	let player = GAME().player;
-	
-	var p1cock = player.BiggestCock(null, true);
-	
-	var parse : any = {
-		playername : player.name,
-		lowerarmordesc : function() { return player.LowerArmorDesc(); }
-	};
-	parse = player.ParserTags(parse);
-	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
-	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
-	
-	
-	//[Whip][Ride][Anal][Reconsider]
-	var options = new Array();
-	options.push({ nameStr : "Whip",
-		func : function() {
-			Text.Clear();
-			Text.Add("An evil grin spreads across your lips as you reach down and pick up the lieutenant’s whip from the floor. While it looks quite nice as it is, you carefully pick off the barbs - you don’t want to kill the twisted bastard, as much as he deserves it, just bleed and humiliate him a little. It’s still got a thick coat of aphrodisiac venom on it, but you reach over for the vials you discovered and give the whip a second coating until it’s practically dripping with the stuff. Taking a step back to admire your handiwork, you shake your head at the poetic justice of the lieutenant becoming victim to the very same methods with which he tormented others.", parse);
-			Text.NL();
-			Text.Add("Well, time to administer justice. Lots and lots of justice. A good flick of your wrist sends the length of leather sailing through the air to land squarely on Corishev’s exposed ass. Droplets of viscous venom sail into the air as the coating on the whip’s length splatters, some of it landing on you. Oh well - you aren’t about to let it diminish your satisfaction at seeing a thin red welt rise up on his pale peaches. Pulling your arm back for a second stroke, you let loose with all your might, and by some quirk of fate or good fortune, the second lash lands in almost the same spot as the first.", parse);
-			Text.NL();
-			Text.Add("This one’s strong enough to cut through the lieutenant’s unconscious state, the bastard instinctively twitching and moaning at the pain, the original welt turning an angry red and beginning to seep blood. Wait, moaning? Then again, he was already pretty much hopped up on Gol venom when you came in. As you watch, his flaccid cock twitches as it pushes against the slick stone floor; you roll him over with a foot, and once given enough space, it stands at full mast, just begging to be used.", parse);
-			Text.NL();
-			Text.Add("Well. If he’s <i>enjoying</i> it…", parse);
-			Text.NL();
-			Text.Add("You’re feeling a little lightheaded yourself - maybe it’s the venom in the air? Can it be inhaled, or did some of it get onto you? Then again, who cares? Stifling the impulse to laugh, you let swing zealously with the whip, the whoosh of it traveling through the air, the crack of leather against skin music to your ears. Corishev accompanies it with grunts and moans, squirming in the mixture of sweat, blood and cum that covers the floor. The overdose of Gol venom has pretty much short-circuited his senses by now, turning pain and pleasure into one.", parse);
-			Text.NL();
-			parse["la"] = player.LowerArmor() ? Text.Parse(" rip off your [lowerarmordesc] and", parse) : "";
-			Text.Add("You judge him guilty as charged on all counts! Of corruption! - a swipe, a lash, a splatter of viscous, cum-like venom. Of unlawful abduction! - you’re finding it hard not to giggle with glee, the weight of the whip’s handle the centre of your world. Of conspiracy against the good name of the crown! - the smell of the potent mixture rising from the floor is almost too much to bear now. Barely hesitating, you[la] begin to openly fondle yourself, ", parse);
-			if(player.FirstCock() && player.FirstVag())
-				Text.Add("alternating your free hand between both your [cocks] and [vag], sticky fluids dribbling down and adding to the mess on the floor as you try to get all the pleasure you can out of the strange situation.", parse);
-			else if(player.FirstCock())
-				Text.Add("jerking off your [cocks], pumping away at your shaft[s] furiously with your free hand.", parse);
-			else
-				Text.Add("fingering yourself at the sight of justice being dealt, girl-honey running down from your [vag], onto your fingers and into the palm of your free hand, making it nice and slick.", parse);
-			Text.NL();
-			Text.Add("Whip it! Whip it good! A misaimed blow rips apart the shirt of Corishev’s Royal Guard uniform, but you’re not too concerned. It’s sort of hard to aim with one hand, especially when you’re trying to get yourself off with the other. Too weak, dazed, or lustful - probably a combination of all three - to form any intelligible words at the tender ministrations of the whip, the lieutenant writhes and wriggles between moans and pants, beads of precum dribbling from the tip of his cock. He thrusts at the air feebly with his hips, grinding away at some invisible mate.", parse);
-			Text.NL();
-			Text.Add("Pain is pleasure, and pleasure is yet even more pleasure. And from the looks of it, justice is pleasure, too, which is a good thing for you. Criminals have got to be punished, after all, and doubly so if the crime is being a hypocritical bastard. By now, the whip is just an extension of your body. You move your hand just like <i>this</i>, and its very tip coils about the lieutenant’s raging erection like some kind of prehensile vine or tentacle, still infused with more than enough of the potent venom to do its work. The Gol venom seeps through skin and flesh, and you flash a triumphant smile as Corishev bucks against empty air, his member bulging and twitching against its restraints. Slowly, you ease the whip so that it unwinds like a snake climbing a tree - venom, venom everywhere - and the moment it slides off, you bring it down again onto his now tattered and torn uniform with everything you’ve got.", parse);
-			Text.NL();
-			Text.Add("It’s too much for the poor bastard to bear. With a cry of pleasure-pain, Corishev orgasms, an arc of cum shooting from the debased lieutenant’s coated cock to splatter on his legs and the floor. Despite all the fluids mixed in the mess, the only thing you can smell right now is Gol venom - a heady, heavy smell that feels synonymous with sex.", parse);
-			Text.NL();
-			
-			var gen = "";
-			if(player.FirstCock()) gen += "[cocks]";
-			if(player.FirstCock() && player.FirstVag()) gen += " and ";
-			if(player.FirstVag()) gen += "[vag]";
-			parse["gen"] = Text.Parse(gen, parse);
-			
-			if(player.FirstCock() && player.FirstVag())
-				parse["gen2"] = "working both sets of your equipment";
-			else if(player.FirstCock())
-				parse["gen2"] = "jerking yourself off";
-			else
-				parse["gen2"] = "fingering yourself";
-			
-			Text.Add("You aren’t done yet, though, and you decide there’s no need to feel remorse about it; this is what he’d have done to Alaric in the end, and it’s only right that he get a taste of his own medicine. Standing over the lieutenant, you let the whip fall to the ground and focus your attentions on your [gen], a trickle of drool hanging from your open mouth as you work yourself into a frenzy [gen2].", parse);
-			Text.NL();
-			
-			var cum = player.OrgasmCum(2);
-			
-			Text.Add("It’s not long before you simply can’t hold back any more; with a groan that sets your knees trembling, you unload ", parse);
-			if(player.FirstCock()) {
-				if(cum > 4)
-					Text.Add("a veritable torrent of nice, hot cum from your [cocks] onto the dazed lieutenant. There’s so much of it, more than enough to completely soak his tattered and torn uniform and give him a good glazing. String upon string of thick, ropy seed spurts from your [cockTip][s] in a seemingly never-ending cascade, an impossibly long orgasm helped along by all the Gol venom in the air and on your skin.", parse);
-				else
-					Text.Add("burst after burst of cum from your [cockTip][s] onto the dazed lieutenant, strings of your seed arcing through the air and splattering on him in the most ignoble fashion. Moaning, eyes unfocused, you jack off furiously, coaxing every last drop of seed out of your [balls] and onto Corishev.", parse);
-				if(player.FirstVag()) {
-					Text.NL();
-					Text.Add("While your [cocks] may have had enough, the rest of your body is far from done, though. The sheer strength of the venom-assisted orgasm causes your [vag] to clench tightly about your fingers. An orgiastic spray of your girl-cum squirts from from your [vag], honey mixing in with the mess of cum your cock created.", parse);
-				}
-			}
-			else {
-				Text.Add("plentiful squirts of girl-cum from your [vag] onto the dazed lieutenant, panting in pleasure as you unload your honey onto him in a glistening sheen. Desperately fingering yourself until there’s nothing left, you shudder at the exquisite sensations of the last few warm trickles running down your thighs and down to your calves.", parse);
-			}
-			Text.NL();
-			Text.Add("Well. That should quite thoroughly humiliate Preston’s lapdog. Doing your best - which, admittedly, isn’t very good - to clean yourself up, you get up on shaky feet and hurriedly dress yourself, trying to hide the worst of the cum stains. Once you’re certain you’re not going to slip on the slick floor, you stash the venom-coated whip with the rest of your belongings and hobble up the stairs to catch up with Cveta and Alaric, but not before locking the cell door behind you. Corishev will certainly be an interesting sight for his men when they get the door open and find him.", parse);
-			Text.Flush();
-			
-			Gui.NextPrompt(function() {
-				MoveToLocation(BullTowerLoc.Building.Hall, {minute: 20});
-			});
-		}, enabled : true,
-		tooltip : "Whip him. Whip him good."
-	});
-	parse["gen"] = player.FirstVag() ? "pussy" : "ass";
-	options.push({ nameStr : "Ride",
-		func : function() {
-			Text.Clear();
-			Text.Add("The sight of the lieutenant’s limp prick gives you an idea. Sure, it’s pretty dead at the moment, but with all that Gol venom on it getting the little soldier to stand to attention shouldn’t be too hard. Your suspicions are confirmed when you reach down and get a firm hold on his flaccid prick - a few strokes are all it takes to have it up and ready, as thick and vital as it was when you entered the cell.", parse);
-			Text.NL();
-			
-			var pussy = player.FirstVag();
-			if(pussy)
-				parse["gen"] = Text.Parse("wet folds into your [vag]", parse);
-			else
-				parse["gen"] = Text.Parse("[anus]", parse);
-			
-			Text.Add("Perfect. Still not quite coherent, Corishev tries to fend you off with a weak flail of his arm, but you easily knock it away and lower yourself on top of him. Gripping his shoulders as you straddle him, you steady yourself and pin him down in one easy movement. Having positioned yourself, you’re ready now - with one violent movement, you let yourself drop, impaling yourself onto his veined, venom-slick shaft and feeling him push past your [gen].", parse);
-			Text.NL();
-			
-			if(pussy) {
-				Sex.Vaginal(corishev, player);
-				player.FuckVag(player.FirstVag(), corishev.FirstCock(), 4);
-				corishev.Fuck(corishev.FirstCock(), 4);
-				
-				BullTowerScenes.CorishevImpregnate(player, corishev, PregnancyHandler.Slot.Vag);
-			}
-			else {
-				Sex.Anal(corishev, player);
-				player.FuckAnal(player.Butt(), corishev.FirstCock(), 4);
-				corishev.Fuck(corishev.FirstCock(), 4);
-				
-				BullTowerScenes.CorishevImpregnate(player, corishev, PregnancyHandler.Slot.Butt);
-			}
-			
-			parse["target"] = Text.Parse(pussy ? "[vag]" : "[anus]", parse);
-			
-			Text.Add("Once he’s hilted to the base inside you, flashes of warmth creeping into your [target]’s inner walls as the Gol venom works its magic, you shift your weight forward and begin to ride his shaft roughly. As if eager to make sure that your fun isn’t spoiled halfway, your [target] grips his member tightly, ensuring that he isn’t going to be escaping anytime soon.", parse);
-			Text.NL();
-			Text.Add("Not that he intends to, of course. There’s not much behind those fogged eyes of his, but the lieutenant’s body responds eagerly enough to the rough, dominant fucking you’re giving him. Your grip on his shoulders tightens to the point that your knuckles are growing white. Corishev moans and struggles underneath you, the occasional crazed giggle slipping through his teeth as you administer a good heap of fucking justice upon him. There’s a certain thrill to fucking an intoxicated madman - perhaps due to the sheer danger of it all - that only makes things more exciting, and the venom encroaching upon your senses only serves to inflame that insane desire even further.", parse);
-			Text.NL();
-			Text.Add("Harder and faster you work your humiliated fucktoy, slamming your hips down on on his cock even as he instinctively rises to meet you, the pace of the grinding and slurping only quickening as sparks of pleasure erupt from the motions to send electric tingles down your spine. Perhaps remembering that he’s supposed to be trying to stop you, Corishev attempts to swat you off him from time to time, but you simply grin and quash his pathetic attempts to unseat you with ease. You give the bastard a good shaking by the shoulders and ask him how it feels to be utterly helpless and at the mercy of someone else who’s giving him a good thorough fucking.", parse);
-			Text.NL();
-			Text.Add("The only response you get is a shudder and moan as the lieutenant’s member throbs inside you, alternating between swelling and clenching as he nears his peak. Fuck that, can’t he last longer than two minutes? You’re not even halfway done! Unfortunately for you, Corishev picks that very moment to explode inside you, filling your [target] with meagre gobs of hot seed, barely enough to trickle out about the seal joining the two of you. Snarling, you keep pounding away mercilessly, the ground beneath the two of you squelching with your effort, but it seems like he’s all spent. Even with the venom aiding him, the lieutenant is softening rapidly inside you, leaving you feeling very much unsatisfied.", parse);
-			Text.NL();
-			parse["la"] = player.LowerArmor() ? Text.Parse(" and pull on your [lowerarmordesc]", parse) : "";
-			Text.Add("This is the best of Preston’s men, an idiot who can’t even last five minutes? Having fucked your fucktoy senseless, you sniff disdainfully at his form sprawled out in the midst of the sticky, slimy mess on the cell floor. Levering yourself off the unconscious Corishev, you clean yourself as best you can[la] before heading for the door, picking up the dropped whip on the way. Hey, at least it might be a little more useful than this loser here. Taking a moment to lock the cell door behind you - best to make sure he stays in there until the rest of the guards have a chance to find him - you hurry along to catch up with Cveta and Alaric, hoping they didn’t miss you too much while you were gone.", parse);
-			
-			player.AddLustFraction(0.5);
-			
-			Text.Flush();
-			
-			Gui.NextPrompt(function() {
-				MoveToLocation(BullTowerLoc.Building.Hall, {minute: 20});
-			});
-		}, enabled : true,
-		tooltip : Text.Parse("Ride Corishev’s Cock with your [gen] and show him who’s boss.", parse)
-	});
-	options.push({ nameStr : "Anal",
-		func : function() {
-			var strapon = p1cock.isStrapon;
-			
-			Text.Clear();
-			parse["c"] = Text.Parse(strapon ? "pull out and affix your strap-on, knowing that your toy will be more than enough to get the job done with maximal efficiency" : "whip out your package, feeling the venom do its work as your [cocks] swell[notS] and stiffen[notS] with alarming rapidity, internal pressure building up in your ramming rod", parse);
-			parse["c2"] = player.NumCocks() > 1 ? " the biggest of your cocks" : "";
-			Text.Add("A mad grin splitting your face from ear to ear, you grab Corishev roughly by the shoulders and flip him over, forcing him on his hands and knees, ass high in the air and presented nicely to you. He tries to fight you off, but to no avail, as you easily overpower him in his defeated state. Since he’s so used to giving, let’s see how good he is at receiving. With great gusto, you [c]. The lieutenant half-snarls, half-giggles, squirming in your grasp as he dimly realizes through his drug-fogged mind what’s about to happen, but you keep a firm hold on his thin, bony ass and thrust[c2] into him without so much as a second thought.", parse);
-			Text.NL();
-			parse["knot"] = p1cock.Knot() ? ", especially with all the whimpering and whining when you force your knot into him, its prodigious bulge grinding against his entrance" : "";
-			Text.Add("Corishev is a tight fit - he yelps and growls wordlessly as you begin to pound his pucker rhythmically; you can’t help but wonder if that ass of his was virginal[knot]. All the more humiliating for him, then - you had thought that if he’s so into power games, he would have tried being on the receiving end as well. You had planned to start slow, but maybe it’s best to make it fast and hard, break him into it a little more quickly. Giving the lieutenant’s ass a good smack that leaves your palm stinging and a growing red mark on his rump, you grin and tell him in no uncertain terms how you’re going to very thoroughly use his hole even harder than you are doing already. His ass walls clench about your shaft as he wriggles, trying to escape your vicious thrusts, but you’re expecting it by now and pull him back.", parse);
-			Text.NL();
-			parse["c"] = player.NumCocks() > 1 ? Text.Parse(", your other cock[s2] waving about and leaking pre like some ecstatic tentacled monster", parse) : "";
-			Text.Add("Just for that, you’re going to teach him even more of a lesson. Groping about on his skin for a good hold, you redouble your efforts, violating the lieutenant as best your [cock] will allow[c]. Corishev howls and yips like a mad dog at the repeated and forceful intrusions of your magnificent member, his protests growing even more forceful as you reach between his legs to jerk off his stiff cock. You touch gently at first, caressing the veins and glans with your fingertips, but before long you’ve grasped the shaft in your palm and are yanking away in tandem with the pounding you’re giving his ass.", parse);
-			Text.NL();
-			parse["c"] = strapon ? "elicit a moan of pleasure-pain from the lieutenant" : "cum over and over again into his bowels";
-			parse["c2"] = player.NumCocks() > 1 ? Text.Parse(", your other cock[s2] spraying seed all over him to drip off and mix in with the mess on the floor", parse) : "";
-			parse["knot"] = p1cock.Knot() ? " and knot" : "";
-			Text.Add("It seems doubtful that he can take much more, and to be frank, neither can you. With a final, hard thrust, you [c][c2]. Corishev’s rectum instinctively clenches down hard about your shaft[knot], his cock simultaneously expelling the remainder of his seed. Satisfied that you’ve taught the bastard a lesson in humility, you begin the arduous task of retrieving your shaft from his ass, letting him slump off you and into the puddle of sexual fluids on the floor.", parse);
-			Text.NL();
-			
-			var cum = player.OrgasmCum();
-			
-			parse["la"] = player.LowerArmor() ? Text.Parse(", don your [lowerarmordesc]", parse) : "";
-			Text.Add("Finally, done! You clean yourself up as best you can[la] and head for the exit, stopping along the way to pick up Corishev’s whip, still on the floor where it had been dropped. Taking care, you lock the cell behind you - best to make sure he stays in there until the rest of the guards have a chance to find him - and hurry to rejoin Cveta and Alaric. Hopefully you haven’t taken too long in administering that much-needed dose of discipline.", parse);
-			Text.Flush();
-			
-			Gui.NextPrompt(function() {
-				MoveToLocation(BullTowerLoc.Building.Hall, {minute: 20});
-			});
-		}, enabled : p1cock,
-		tooltip : Text.Parse("Fuck that ass of his with your [cocks].", parse)
-	});
-	options.push({ nameStr : "Reconsider",
-		func : function() {
-			Text.Clear();
-			Text.Add("Looking down at the defeated lieutenant, you shake your head. What were you thinking, wasting precious time on this? Turning heel on the scene, you stop on the way to pick up Corishev’s whip - it might be useful as a weapon - and lock the cell door behind you with the keys you found. Hopefully it’ll keep him from raising the alarm if he comes around too quickly.", parse);
-			Text.NL();
-			Text.Add("With that done, you hurry up the steps to rejoin Cveta and Alaric in the main hall.", parse);
-			Text.Flush();
-			
-			Gui.NextPrompt(function() {
-				MoveToLocation(BullTowerLoc.Building.Hall, {minute: 5});
-			});
-		}, enabled : true,
-		tooltip : "Nah, now’s not the time to be doing this."
-	});
-	Gui.SetButtonsFromList(options, false, null);
-}
-
-
-BullTowerLoc.Building.Office.description = function() {
-	let outlaws = GAME().outlaws;
-	let terry = GAME().terry;
-	
-	var parse : any = {
-		t : terry.Recruited() ? ", perhaps so well that even Terry would find it quite the challenge" : ""
-	};
-	
-	Text.Add("There’s no sign of what this room used to be, but what it is right now is a small office. As devoid of embellishments as the main hall, this small, musty room is adorned with a serviceable desk and chair, as well as a chest of drawers leaning against the wall; searching through the latter only turns up a number of carefully-wrapped quill pens, inkwells, and blank pieces of paper. The Royal Guard may do their paperwork here, but it’s clear that they’re smart enough to not leave incriminating evidence lying about for anyone passing by to swipe.", parse);
-	Text.NL();
-	Text.Add("The only other interesting detail in this room is a rather impressive-looking safe set into the wall, probably intended to be hidden behind a painting or somesuch. ", parse);
-	if(outlaws.flags["BT"] & OutlawsFlags.BullTower.SafeLooted)
-		Text.Add("Now that you’ve defeated the trap and looted the safe’s contents, it lies open, the door hanging forlornly open in the air. There’s not much point in closing it to disguise that you were here - by the time the sun comes up, the fact that someone was in the tower grounds is going to be common knowledge.", parse);
-	else
-		Text.Add("At first glance, the safe looks very well crafted[t]. You’ll have to get closer in order to inspect it in the dim light, though.", parse);
-}
-
-BullTowerLoc.Building.Office.links.push(new Link(
-	"Hall", true, true,
-	null,
-	function() {
-		let outlaws = GAME().outlaws;
-		MoveToLocation(BullTowerLoc.Building.Hall, {minute: 5});
-		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
-	}
-));
-
-BullTowerLoc.Building.Office.events.push(new Link(
-	"Safe", function() {
-		let outlaws = GAME().outlaws;
-		return !(outlaws.flags["BT"] & OutlawsFlags.BullTower.SafeLooted);
-	}, true,
-	null,
-	function() {
-		var parse : any = {
-			
-		};
-		
-		Text.Clear();
-		Text.Add("Gingerly, you step toward the wall safe, half-expecting a couple of guards to burst in through the entrance behind you, but thankfully nothing of the sort happens. Well, what will you do?", parse);
-		Text.Flush();
-		
-		BullTowerScenes.SafePrompt();
-	}
-));
-
-BullTowerScenes.SafePrompt = function() {
-	let player = GAME().player;
-	let outlaws = GAME().outlaws;
-	let terry = GAME().terry;
-
-	var parse : any = {
-		playername : player.name
-	};
-	
-	//[Inspect][Unlock][Disarm][Fake Out][Leave]
-	var options = new Array();
-	options.push({ nameStr : "Inspect",
-		func : function() {
-			Text.Clear();
-			Text.Add("Leaning closer in the dim light, you take a closer look at the safe and its mechanisms. About the size of a bedside stand, it’s newer than the masonry that surrounds it, having yet to gain the coat of tarnish or rust that covers most of the metal objects remaining in the tower. Rapping on the solid steel door with your knuckles fails to produce a hollow sound - it’s unlikely you’ll be able to break into it by brute force, then.", parse);
-			Text.NL();
-			parse["t"] = Jobs.Rogue.Master(player) ? "you know enough about thieving to know that this workmanship is beyond your abilities. Something really important must be stowed away in there" :
-				terry.Recruited() ? "perhaps if Terry were here, the thief would be able to make some sense of this, but you definitely can’t" :
-				"most likely beyond your abilities to pick";
-			Text.Add("Set in the side of the safe’s door is a small, intricate keyhole - [t]. One thing’s certain: you’re not getting inside without the key. You wonder what the guards have in here that warrants such security… Just under the safe itself, framed by steel, is a thin slot at about thigh height - an obvious trap to make would-be thieves think twice about attempting to crack the safe.", parse);
-			Text.NL();
-			Text.Add("You look to Cveta to see if she has anything to say, but the songstress simply shakes her head. Should have expected as much - it’s not her area of expertise. Well, looks like it’s up to you to try and figure this one out.", parse);
-			Text.Flush();
-			outlaws.BT.inspectedSafe = true;
-			
-			BullTowerScenes.SafePrompt();
-		}, enabled : true,
-		tooltip : "Inspect the safe in detail."
-	});
-	if(outlaws.BT.inspectedSafe && !outlaws.BT.unlockedSafe) {
-		if(outlaws.flags["BT"] & OutlawsFlags.BullTower.AlaricFreed) {
-			options.push({ nameStr : "Unlock",
-				func : function() {
-					Text.Clear();
-					Text.Add("Could it be? Is it? Steadying yourself, you take out the key you picked off the lecherous lieutenant and push it into the keyhole. It’s a perfect fit, the tumblers slide smoothly, and there’s an audible click from within as the latch moves. Unfortunately, there’s also a click from the slot beneath you, something sliding into place and poised to spring once triggered.", parse);
-					Text.NL();
-					Text.Add("<i>“Well, looks like I wasn’t wrong,”</i> Alaric mumbles from behind you, forcing a grin despite his pained expression. <i>“Watch out, though, [playername]. There’s still the trap to deal with, and I’ve no idea how to prevent it from triggering once you open the door.”</i>", parse);
-					Text.Flush();
-					outlaws.BT.unlockedSafe = true;
-					
-					BullTowerScenes.SafePrompt();
-				}, enabled : true,
-				tooltip : "Open the safe with the key you acquired from the lieutenant."
-			});
-		}
-	}
-	if(outlaws.BT.unlockedSafe && !(outlaws.flags["BT"] & OutlawsFlags.BullTower.SafeLooted)) {
-		options.push({ nameStr : "Disarm",
-			func : function() {
-				Text.Clear();
-				Text.Add("Crouching down so you’re level with the slot, you do your best to take stock of the workings of the trap. Both Cveta and Alaric stand a healthy distance back as you begin to work, the latter looking distinctly nervous as you begin your fiddling.", parse);
-				Text.NL();
-				Text.Add("<i>“Be careful, friend.”</i>", parse);
-				Text.NL();
-				Text.Add("As if you needed telling. After some inspection, you’re fairly certain that this indeed is a spring-loaded blade trap, which would explain the second click you heard when unlocking the safe; the blade is designed to whip out in an arc when released, slash the would-be thief opening the safe door across the thighs, then retreat into the slot once more. As for options… you <b>could</b> try taking apart the frame that surrounds the slot and try to see if you can disarm the mechanism inside - it’s the only obvious way you could get at the trap’s inner workings, anyway. Standing, you briefly explain your findings to Cveta and Alaric.", parse);
-				Text.NL();
-				Text.Add("<i>“Are you sure you want to risk this, [playername]?”</i> the songstress whispers. <i>“If you are incapacitated here…”</i>", parse);
-				Text.NL();
-				Text.Add("Yes, you’re willing to risk this, and tell her as much. Cveta tilts her head at your words, but says nothing and steps back to watch as you kneel once more and begin your work in earnest.", parse);
-				Text.NL();
-				
-				var check = (player.Int() + player.Dex())/2 + Math.random() * 20;
-				check += player.jobs['Rogue'].level * 5;
-				
-				if(GetDEBUG()) {
-					Text.Add("Int/Dex check (with bonuses for Rogue levels): [check] vs 80", {check: check}, 'bold');
-					Text.NL();
-				}
-				
-				if(check >= 80) {
-					Text.Add("Loosening the screws on the frame with a small knife Cveta provides, you carefully ease it off the wall, widening the slot considerably. You suspected that both safe and trap weren’t here when the tower was first built, and the rectangular recess that’s been revealed makes it all but certain.", parse);
-					Text.NL();
-					if(Jobs.Rogue.Master(player))
-						Text.Add("Your mastery of rogue skills serves you well here. ", parse);
-					Text.Add("You get as close a look at the trap as you dare. Even though you can see both spring and blade glinting in the dark recess, you still have no idea how long their reach is - you study the mechanisms before making your move. It’s a surprisingly simple system; opening the safe releases a catch which allows the springs holding the blade in place to whip outward. There’s also a deadbolt that prevents the trap from triggering and must be how the lieutenant safely accesses the safe’s contents, but you see no obvious way to set it in place.", parse);
-					Text.NL();
-					Text.Add("Well, as the saying goes, there’s more than one way to skin a cat. Holding your breath and willing your fingers not to shake, you reach in with your knife and cut away at the springs. The catch looks solid, and so long as it isn’t released, you should be safe… you cut through the springs one at a time, setting them off with audible twangs until you’re sure you’re done and the trap is wholly disarmed.", parse);
-					Text.NL();
-					
-					BullTowerScenes.SafeSuccess();
-				}
-				else {
-					Text.Add("Things don’t go quite as planned, though. You must’ve fumbled somewhere, made a mistake; there’s a glint of light, the faintest of swishing sounds, and sudden, terrible pain flares up on your shoulder and across your collarbone. Just a little higher, and the blade - now wet and glistening with your blood - would have removed your head from your shoulders.", parse);
-					Text.NL();
-					
-					BullTowerScenes.SafeFailure();
-				}
-			}, enabled : true,
-			tooltip : "Attempt to disarm the trap."
-		});
-		options.push({ nameStr : "Fake Out",
-			func : function() {
-				Text.Clear();
-				Text.Add("You think it better that you don’t actually attempt to disarm the trap and instead set it off safely.", parse);
-				Text.NL();
-				Text.Add("<i>“How do you intend to do that?”</i> Alaric whispers. <i>“Surely you don’t intend to just dance out of its path?”</i>", parse);
-				Text.NL();
-				Text.Add("Why, that <i>was</i> what you’d intended, save with a few extra precautions. While the desk is fixed to the floor and can’t be moved, the chair and drawers can - and no matter how sharp this blade is, surely they’d buy you some time at the very least.", parse);
-				Text.NL();
-				Text.Add("Alaric shakes his head and looks to Cveta, but the songstress has her all-too-familiar dispassionate face on, as readable as a brick wall. With a sigh, the bean-counter takes an unsteady step back. <i>“I’ll trust you to know what you’re doing, [playername]. It would be a horrible turn of fate if you ended up being the one needing rescuing.”</i>", parse);
-				Text.NL();
-				Text.Add("It’s a risk you’re willing to take, you assure him as you shift the small chest of drawers and chair up against the slot. With how long the slot is, the maximum arc of the blade would be this much, and you guess you’d need to be this far after the trap is sprung…", parse);
-				Text.NL();
-				Text.Add("Well, you’re as ready as you’ll ever be. Feeling both Cveta and Alaric’s gazes on the back of your neck and the tension building up in your muscles, you grasp the safe’s handle with both hands and heave. There’s a slight resistance which must be the triggering mechanism, a twang of released tension, and then a flash of light as a sharp blade slices through the air and sinks into the old furniture.", parse);
-				Text.NL();
-				
-				var check = player.Dex() + Math.random() * 20;
-				check += player.jobs['Rogue'].level * 5;
-				
-				if(GetDEBUG()) {
-					Text.Add("Dex check (with bonuses for Rogue levels): [check] vs 90", {check: check}, 'bold');
-					Text.NL();
-				}
-				
-				if(check >= 90) {
-					if(Jobs.Rogue.Master(player))
-						Text.Add("Your mastery of a rogue’s reflexes comes in handy here. ", parse);
-					Text.Add("Although the blade is fast, your movements are faster - by the time it’s cleaved through the dry rot of the old furniture you’ve placed in its path, you’re well out of its range. The drawer and chair were rickety to begin with, and they’re but so many splinters now, the blade having sheared them apart with its passage.", parse);
-					Text.NL();
-					Text.Add("<i>“Wow,”</i> Alaric says after the dust has settled. <i>“Impressive.”</i>", parse);
-					Text.NL();
-					Text.Add("<i>“Perhaps, but we should not be wasting time. With the amount of noise this has created and how well sound carries in this place, I am sure someone will be coming to investigate before long. Please, [playername], would you finish opening the safe with all due haste?”</i>", parse);
-					Text.NL();
-					
-					BullTowerScenes.SafeSuccess();
-				}
-				else {
-					Text.Add("Things don’t go quite as planned, though. Weakened with years of neglect and dry rot, the chair and drawers don’t hold up as long as you’d hoped they would, nor are you as quick as you imagined you’d be. Tearing through the old wood in a shower of splinters, the blade flashes in the dim light as it sings through the air, sharp and serrated. Numbness comes first, then pain flares up on your outer thigh just under your hips. You’re vaguely aware through the sudden surge of dizziness that hits you that there’s now blood on the edge of the sprung blade - blood that used to be in your body.", parse);
-					Text.NL();
-					
-					BullTowerScenes.SafeFailure();
-				}
-			}, enabled : true,
-			tooltip : "Attempt to set off the trap safely."
-		});
-	}
-	Gui.SetButtonsFromList(options, true, function() {
-		Text.Clear();
-		Text.Add("Taking one last look at the safe, you shake your head and turn your back on it. You decide to leave the steel-bound thing for later - it’s not as if it’ll be going anywhere should you change your mind, after all.", parse);
-		Text.Flush();
-		
-		Gui.NextPrompt();
-	});
-}
-
-BullTowerScenes.SafeSuccess = function() {
-	let player = GAME().player;
-	let outlaws = GAME().outlaws;
-
-	var parse : any = {
-		playername : player.name
-	};
-	
-	Text.Add("Wasting no time, you fling open the safe and reach greedily into its recesses. Alaric’s eyes grow wide at the sight of the small fortune stashed inside, and even Cveta is impressed enough to raise an eyebrow. No wonder the guards went to such lengths to secure the safe - and it also explains how Preston managed to afford the statue, amongst other things.", parse);
-	Text.NL();
-	Text.Add("<i>“We should take these coin bags with us,”</i> Alaric says, grinning weakly. <i>“Shouldn’t leave valuables like that lying around. Someone might…uh, steal them.”</i>", parse);
-	Text.NL();
-	Text.Add("<i>“If that was a jest, it failed to provoke much amusement on my part,”</i> Cveta replies dryly. <i>“However, I am in agreement that we should purloin the Royal Guard’s ill-gotten gains. It will be valuable evidence that they have been ‘on the take’, as I believe it is called.”</i>", parse);
-	Text.NL();
-	Text.Add("Even consider leaving the lot after you went to so much trouble to get at it? Perish the thought! The money bags are as heavy as they look, but you’re certain that you can get out with them in tow. Even Alaric, injured as he is, manages to summon up the strength to heft one of the smaller bags over his shoulder.", parse);
-	Text.NL();
-	Text.Add("Well then. There’s nothing left for you in this room - time to move along before someone thinks to check in on all the noise.", parse);
-	Text.NL();
-	Text.Add("You loot a few bags of coins from the safe.", parse, 'bold')
-	Text.Flush();
-	
-	outlaws.flags["BT"] |= OutlawsFlags.BullTower.SafeLooted;
-	
-	Gui.NextPrompt();
-}
-
-BullTowerScenes.SafeFailure = function() {
-	let player = GAME().player;
-	
-	var parse : any = {
-		playername : player.name,
-		heshe : player.mfTrue("he", "she")
-	};
-	
-	Text.Add("With how hard you’re clenching your teeth in a bid not to scream, it’s only through good fortune that you don’t bite off your tongue. Staggering away from the safe, blood seeping into your clothing, you manage to stay upright just long enough for Alaric and Cveta to catch you before you slump to the ground.", parse);
-	Text.NL();
-	Text.Add("<i>“[playername]! Alaric, your shirt.”</i> Is that Cveta speaking? It probably is, but it’s hard to be completely certain through the warm haze that’s creeping in around your senses. Everything feels lighter, fluffier…", parse);
-	Text.NL();
-	Text.Add("<i>“Huh?”</i>", parse);
-	Text.NL();
-	Text.Add("<i>“Your clothing is already mostly rags, and we need to staunch the bleeding. Your shirt, now.”</i>", parse);
-	Text.NL();
-	Text.Add("<i>“Right!”</i>", parse);
-	Text.NL();
-	Text.Add("What happens afterward is a bit of a blur. Bursts of pain lance through your consciousness, providing sharp moments of clarity that rapidly sink back into the dull haze that shrouds your mind. Something tight is tied about your wound, staunching the pain a little, and you’re grateful for that. Support comes by way of a gentle pressure under your arms, and you inch forward, one step at a time, seeking the music.", parse);
-	Text.NL();
-	Text.Add("The music. Where did it come from? Where is it leading you? Such questions melt away into insignificance; the music fills the world, <i>is</i> the world. A small bird of golden orange light flutters on in the darkness, its aura trailing behind it; you do your best to follow the warm melody, your steps faltering but never failing.", parse);
-	Text.NL();
-	Text.Add("<i>“Is [heshe] going to bleed out? I knew trying to open that safe was a bad idea!”</i>", parse);
-	Text.NL();
-	Text.Add("<i>“…Hindsight… do not complain… keep moving…”</i>", parse);
-	Text.Flush();
-	
-	Gui.NextPrompt(function() {
-		BullTowerScenes.EndingInjured();
-	});
-}
 
 BullTowerLoc.Building.Warehouse.description = function() {
 	let outlaws = GAME().outlaws;
@@ -2142,6 +1166,7 @@ BullTowerLoc.Building.Watchtower.events.push(new Link(
 		});
 	}
 ));
+
 BullTowerLoc.Building.Watchtower.events.push(new Link(
 	"Lantern", function() {
 		let outlaws = GAME().outlaws;
@@ -2164,578 +1189,1556 @@ BullTowerLoc.Building.Watchtower.events.push(new Link(
 	}
 ));
 
-BullTowerScenes.Coversations = function(outside : boolean) {
+BullTowerLoc.Building.Office.description = function() {
 	let outlaws = GAME().outlaws;
-
+	let terry = GAME().terry;
+	
 	var parse : any = {
-		a : outlaws.flags["BT"] & OutlawsFlags.BullTower.AlaricFreed ? " and Alaric" : ""
+		t : terry.Recruited() ? ", perhaps so well that even Terry would find it quite the challenge" : ""
 	};
 	
-	Text.Clear();
-	
-	var scenes = new EncounterTable();
-	scenes.AddEnc(function() {
-		Text.Add("Lurking about in the deep shadows cast by the walls, you hear snatches of conversation drifting down from the ramparts:", parse);
-	}, 1.0, function() { return outside; });
-	scenes.AddEnc(function() {
-		Text.Add("Crouched in the tall grass that surrounds the tower proper, you overhear two silhouettes chatting as they make their rounds:", parse);
-	}, 1.0, function() { return outside; });
-	scenes.AddEnc(function() {
-		Text.Add("The interior of Bull Tower might be solid stone, but sound echoes easily through the ancient hallways. Cveta quickly ducks into a shadowed alcove and you[a] follow suit as footsteps pass by, their owners unseen:", parse);
-	}, 1.0, function() { return !outside; });
-	
-	scenes.Get();
-	
+	Text.Add("There’s no sign of what this room used to be, but what it is right now is a small office. As devoid of embellishments as the main hall, this small, musty room is adorned with a serviceable desk and chair, as well as a chest of drawers leaning against the wall; searching through the latter only turns up a number of carefully-wrapped quill pens, inkwells, and blank pieces of paper. The Royal Guard may do their paperwork here, but it’s clear that they’re smart enough to not leave incriminating evidence lying about for anyone passing by to swipe.", parse);
 	Text.NL();
-	
-	var scenes = new EncounterTable();
-	scenes.AddEnc(function() {
-		Text.Add("<i>“So… why’d you join up, anyway?”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“You want to know? You really want to know?”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“Yeah.”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“The outfit’s good, and it’s okay pay.”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“What? That’s all?”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“What did you expect? Work is hard to come by these days…”</i>", parse);
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
-		Text.Add("<i>“You think that blast down the road is what we were told to prepare for?”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“What else would it be? Bloody forest-dwelling outlaws.”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“I dunno, I’m just glad I’m not the one who has to check it out.”</i>", parse);
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
-		Text.Add("<i>“So what’s up with the statue they brought in earlier today?”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“I think it’s for his garden. That, and the blue roses, too. That second one came all the way from the Tree, I heard.”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“I knew Preston can be full of it, but what sort of ass has a damned <b>statue</b> of himself made? He’s worse than my mother-in-law!”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“I wouldn’t let the lieutenant catch you saying that if I were you… he’ll take any excuse to use that whip of his.”</i>", parse);
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
-		Text.Add("<i>“This isn’t right, you know.”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“What isn’t?”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“This! We should be in the streets of Rigard, in the palace defending his Majesty and the rest of the royal family, not lurking about in this old dump. Calling it a ‘special assignment’ doesn’t change what it is. I feel like we’re just no-name bit-parters in some stage production. You know, the kind who’re just there to be a minor annoyance to the hero and are never remembered…”</i>", parse);
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
-		Text.Add("<i>“Where’s the little guy?”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“In the cells. Lieutenant’s interrogating him right now.”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“Ooh, nasty.”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“Standing orders are for him not to be disturbed, no matter what we hear coming from inside.”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“Anyone told him about the explosion down the road yet?”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“Fred went down earlier, although he took a lot of convincing.”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“I don’t blame him - I don’t want to be down there, either. Well, you can’t deny that he gets results, especially with that odd venom he uses…”</i>", parse);
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
-		Text.Add("<i>“You know that brothel we raided the other day? That one in the slums? You didn’t hear it from me, but I think someone high up was refused service and asked Preston to do something about it.”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“You sure about that?”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“Everyone gets that his whole ‘The Shining’ schtick is as fake as a strap-on, and you ought to know better.”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“Not saying that it isn’t - armor should be too battered and dented to take a good shine - but how do you know that <b>this</b> raid wasn’t legit? We did see some weird shit in there…”</i>", parse);
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
-		Text.Add("<i>“I can’t believe we’re out here in the cold of night on some emergency. I was supposed to be off duty, damn it! Fuck Preston!”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“You shouldn’t speak of him that way.”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“Why not? He certainly deserves it, and you know as much. Why, you gonna snitch on me, old man?”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“It’s not that. He wasn’t always like that. His first assignment, during the rebellion... things didn’t go down the way it’s told in the books. Something happened to him… I was there when it happened, you know. Saw it with my own eyes. Preston was never the same man after that.”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“Ooh, tell me more…”</i>", parse);
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
-		Text.Add("<i>“So, everything’s in the warehouse?”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“Locked up tight; Jimmy has the key, and he’s on caravan duty. Spirits, my back aches, and it’s only going to get worse tomorrow.”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“Well, I said to lift with your knees, but would you listen?”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“Shut up, Fred. I didn’t sign on with the Royal Guard to be a stevedore.”</i>", parse);
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
-		Text.Add("<i>“…Taking down tough guys isn’t that bad. At least when you beat them, they’ve the brains to know when they’re beat. No, it’s the crazy ones you have to worry about.”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“Like that little guy we tried to pull for loitering the other day?”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“Yeah, or like the Lieutenant when he’s hopped up on Gol venom. He’s bearable otherwise, but let him get at the stuff… ugh. I saw what happened to Randell - and just for fidgeting during parade. Five lashes in front of everyone.”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“Y’know, for someone who calls himself the Shining, I wonder why Preston puts up with someone like that.”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“That’s ‘cause he does all the stuff Preston won’t dirty his hands with…”</i>", parse);
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
-		Text.Add("<i>“Something is up tonight, and I don’t like it.”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“You mean the explosion down the road?”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“Not just that… something’s up inside the fort. Feels like there’s eyes watching me from the shadows...”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“You were always paranoid.”</i>", parse);
-	}, 3.0, function() { return outlaws.BT.Suspicion() >= 50; });
-
-	scenes.Get();
-	
-	Text.NL();
-	
-	Gui.PrintDefaultOptions(true);
+	Text.Add("The only other interesting detail in this room is a rather impressive-looking safe set into the wall, probably intended to be hidden behind a painting or somesuch. ", parse);
+	if(outlaws.flags["BT"] & OutlawsFlags.BullTower.SafeLooted)
+		Text.Add("Now that you’ve defeated the trap and looted the safe’s contents, it lies open, the door hanging forlornly open in the air. There’s not much point in closing it to disguise that you were here - by the time the sun comes up, the fact that someone was in the tower grounds is going to be common knowledge.", parse);
+	else
+		Text.Add("At first glance, the safe looks very well crafted[t]. You’ll have to get closer in order to inspect it in the dim light, though.", parse);
 }
 
-BullTowerScenes.EndingSlipOut = function() {
-	let party : Party = GAME().party;
-	let outlaws = GAME().outlaws;
+BullTowerLoc.Building.Office.links.push(new Link(
+	"Hall", true, true,
+	null,
+	function() {
+		let outlaws = GAME().outlaws;
+		MoveToLocation(BullTowerLoc.Building.Hall, {minute: 5});
+		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
+	}
+));
 
-	var parse : any = {
+BullTowerLoc.Building.Office.events.push(new Link(
+	"Safe", function() {
+		let outlaws = GAME().outlaws;
+		return !(outlaws.flags["BT"] & OutlawsFlags.BullTower.SafeLooted);
+	}, true,
+	null,
+	function() {
+		var parse : any = {
+			
+		};
 		
-	};
-	
-	var stole = outlaws.BT.StoleSomething();
-	
-	party.LoadActiveParty();
-	
-	Text.Clear();
-	Text.Add("Well, there’s nothing left for you here. Time to get out and go home - without further ado, you urge Cveta and Alaric into position, the three of you walking abreast. Alaric helped along between the two of you. The little bean-counter looks unsure at the idea of just sauntering by the gate guards, but you reassure him that Cveta’s voice will hold.", parse);
-	Text.NL();
-	Text.Add("And indeed, it does. Tromping through the archway as if you have every right to be there, the three of you don’t raise a single objection from the spellbound men as you slip across the King’s Road and disappear into the nearby woods. From there, it’s a long, slow walk back to the outlaws’ camp - despite the fact that there was still fighting going on on the road when you left, Zenith is there to receive you as you cross the drawbridge into the camp proper, arms folded as he waits to receive your report. The badger-morph is positively scruffy and reeks of dirt, blood and sweat, but remains composed as he greets you.", parse);
-	Text.NL();
-	Text.Add("<i>“You’ve returned,”</i> he says. <i>“And it seems you’ve brought back our friend, although he could use some attention from Aquilius. Someone send him over, please.”</i>", parse);
-	Text.NL();
-	parse["stole"] = stole ? " who also unburden you of your purloined goods," : "";
-	Text.Add("As Alaric is led away by a couple of dog-morphs,[stole] you briefly recount the details of your little adventure, Cveta backing you up every so often with her version of events. Zenith listens intently to your story, then gives you a brisk nod when you’re done.", parse);
-	
-	BullTowerScenes.EndingDebrief();
-}
-
-BullTowerScenes.EndingFailure = function() {
-	let party : Party = GAME().party;
-	let outlaws = GAME().outlaws;
-
-	var freed = outlaws.flags["BT"] & OutlawsFlags.BullTower.AlaricFreed;
-	var parse : any = {
-		two : freed ? "three" : "two",
-		al : freed ? " and Alaric" : ""
-	};
-	
-	var stole = outlaws.BT.StoleSomething();
-	
-	party.LoadActiveParty();
-	
-	Text.Add("Making a mad dash for the gates before someone has the chance to draw them shut, the [two] of you bowl past the gate guards. Fortunately, you take them by surprise and are out of reach before they can gather their senses enough to give pursuit; thankfully, the cover of night is deep, and the woods by the King’s Road close enough for you to slip between the trees and vanish into their shadows. A few minutes later, you hear the detachment of Royal Guards return, their lanterns lighting up the road as you watch from the treeline.", parse);
-	Text.NL();
-	Text.Add("<i>“That did not go as expected,”</i> Cveta mutters, finally able to stop and catch her breath.", parse);
-	Text.NL();
-	Text.Add("No, it didn’t.", parse);
-	if(freed) {
-		Text.Add(" You turn to Alaric - supported between the two of you, the little accountant has somehow managed to keep up on your flight out of the fortress and into the woods, despite his rapid, harried breathing on your run. Clearly unaccustomed to physical activity even at the best of times, Alaric wheezes and splutters as he gasps for breath, and it’s a good five minutes before he recovers enough to be able to speak. Some of his wounds have reopened from the exertion, and he rubs at them in a bid to staunch the blood trickling down his arms and back.", parse);
-		Text.NL();
-		Text.Add("<i>“Gah! First time I’ve had to run for my life, although knowing my luck, it won’t be the last.”</i>", parse);
-	}
-	Text.NL();
-	Text.Add("From your hiding spot amongst the trees, you take one last look back at Bull Tower. With it being rife with activity - no doubt caused by the discovery of your presence - it’s going to be impossible to head back anytime soon, not with search parties fanning out from the fortress and the ramparts lit up like a festival day. For better or worse, it’s time for you to head back and report to Zenith. Cveta[al] in tow, you turn and begin the long journey back to the outlaws’ camp.", parse);
-	Text.NL();
-	Text.Add("It’s nearly dawn by the time you return, and the camp guards let down the drawbridge for you to enter. Zenith is already waiting for you by the entrance, the badger-morph standing with his arms folded and looking at you expectantly. ", parse);
-	if(freed) {
-		parse["stole"] = stole ? " who also relieve you of your purloined goods," : "";
-		Text.Add("Alaric is led away by a couple of dog-morphs,[stole] and you", parse);
-	}
-	else {
-		parse["stole"] = stole ? "relieve you of your purloined goods, and you" : "stand ready to take the material proceeds of your infiltration, and are left looking at you in bemusement as they realize you’ve returned with nothing. You";
-		Text.Add("A couple of dog-morphs [stole]", parse);
-	}
-	Text.Add(" briefly recount the details of your little adventure, Cveta backing you up every so often with her version of events. Zenith listens intently to your story, then gives you a brisk nod when you’re done.", parse);
-	
-	BullTowerScenes.EndingDebrief();
-}
-
-BullTowerScenes.EndingInjured = function() {
-	let player = GAME().player;
-	let party : Party = GAME().party;
-	let kiakai = GAME().kiakai;
-	
-	var parse : any = {
-		playername : player.name,
-		name : kiakai.name
-	};
-	
-	party.LoadActiveParty();
-	
-	TimeStep({hour: 6});
-	
-	Text.Clear();
-	Text.Add("When you eventually come to, you find yourself lying on a stretcher - no, it’s a cot - and at length the familiar hustle and bustle of the bandit camp comes to your ears. Muffled curses, the sounds of wood being chopped, a child laughing while dogs bark away; ah, it’s good to be back, even if you’re rather unclear on the how.", parse);
-	Text.NL();
-	Text.Add("<i>“Don’t sit up. I know you probably feel like you ought to, but with all the blood you’ve lost, you’ll probably just end up on the cot again. I don’t know what you did to earn that gash, and with it being as deep as it was, I don’t think I want to find out. Painfully close to a major artery there.”</i> The voice is gentle but distinctly masculine, and you turn your gaze to its source to find its owner: Aquillus.", parse);
-	Text.NL();
-	parse["k"] = party.InParty(kiakai) ? " with a little help from your elf friend there," : "";
-	Text.Add("<i>“Nevertheless,[k] I was able to pull you out of danger. You’ll be weak for a while yet, but at least you’re no longer in danger of bleeding out. Zenith will want to know that you’ve come to - why don’t you make yourself comfortable while I go get him?”</i>", parse);
-	Text.NL();
-	if(party.InParty(kiakai)) {
-		Text.Add("Scarcely has Aquilius left, though, than [name] comes practically bounding in through the flaps, coming to a stop by your bedside.", parse);
-		Text.NL();
-		Text.Add("<i>“[playername]! [playername]! You are awake!”</i>", parse);
-		Text.NL();
-		Text.Add("You reassure [name] that you’re still in one piece, and intend to stay that way for the foreseeable future. As for feeling fine… well, you’ve had better days, but you’ll be better once you’ve had a lie-down.", parse);
-		Text.NL();
-		Text.Add("<i>“I was shocked at the condition you were in when you were brought into the camp. Aquilius is a skilled surgeon, but his bedside manner leaves much to be desired. I had to plead with him at some length to persuade him to allow me to aid in your recovery.”</i>", parse);
-		Text.NL();
-		Text.Add("Your thoughts drift back to when you first arrived in Eden, and nod. Yes, you can definitely see Aquilius protesting [name]’s methods, regardless of their efficacy. After a few more reassurances and gently refused attempts of the poor elf to start fussing over you, you finally manage to convince [name] to give you some quiet time before Aquilius returns.", parse);
-		Text.NL();
-	}
-	Text.Add("Finally, you have a little time alone to examine yourself. You tilt your head forward to get a look at Aquilus’ handiwork. The safe’s blade trap definitely did a number on you, judging by the extensive coverage of the bandages that Aquilius has dressed your wound with, and you’re pretty sure you can feel the gentle pull of thread against flesh at your slight movement. The bandages themselves have been soaked in something that smells vaguely antiseptic and completely awful, and with how much of your blood has found its way into them, are going to need changing soon.", parse);
-	Text.NL();
-	Text.Add("Just how did you manage to make it all the way back from Bull Tower? Certainly neither Cveta nor Alaric could have carried you such a long way… that train of thought is interrupted when the tent flaps are drawn once more, and Aquilius returns with Zenith in tow. The outlaw leader passes his firm gaze over you a couple times, then purses his lips.", parse);
-	Text.NL();
-	Text.Add("<i>“Bad, but I’ve seen worse in my time. I’ll agree with Aquilius here - you’ll live.”</i>", parse);
-	Text.NL();
-	Text.Add("Aquilius shrugs. <i>“You won’t have to come back later to get those stitches removed. The thread I used is a rare plant fiber - just leave them in, and they’ll melt into your flesh as you heal.”</i>", parse);
-	Text.NL();
-	Text.Add("<i>“Thank you, Aquilius. Now, while Cveta gets Alaric settled in with us, let’s review the events of your evening, shall we? I’ve heard most of the story from Cveta, but I’d like to get your version of events.”</i>", parse);
-	Text.NL();
-	Text.Add("Although you find yourself getting quickly tired from talking, you do your best to recount the events as you remember them, careful to not leave out any details.", parse);
-	
-	BullTowerScenes.EndingDebrief(true);
-}
-
-BullTowerScenes.EndingDebrief = function(injured : boolean) {
-	let player = GAME().player;
-	let party : Party = GAME().party;
-	let outlaws = GAME().outlaws;
-
-	var parse : any = {
-		playername : player.name
-	};
-	
-	party.location = WORLD().loc.Outlaws.Camp;
-	TimeStep({hour: 3});
-	
-	Text.Flush();
-	
-	outlaws.flags["BullTower"] = OutlawsFlags.BullTowerQuest.Completed;
-	
-	var foundOut = outlaws.BT.Suspicion() >= 100;
-	if(outlaws.BT.foughtCorishev && !(outlaws.AlaricSaved()))
-		foundOut = true;
-	
-	var score = 0;
-	if(outlaws.flags["BT"] & OutlawsFlags.BullTower.AlaricFreed)      score += 2;
-	if(outlaws.flags["BT"] & OutlawsFlags.BullTower.ContrabandStolen) score += 1;
-	if(outlaws.flags["BT"] & OutlawsFlags.BullTower.BlueRoses)        score += 1;
-	if(outlaws.flags["BT"] & OutlawsFlags.BullTower.StatueDestroyed)  score += 1;
-	if(outlaws.flags["BT"] & OutlawsFlags.BullTower.AnimalsFreed)     score += 1;
-	if(outlaws.flags["BT"] & OutlawsFlags.BullTower.SafeLooted)       score += 1;
-	if(outlaws.flags["BT"] & OutlawsFlags.BullTower.CaravansIgnited)  score += 1;
-	if(outlaws.flags["BT"] & OutlawsFlags.BullTower.CaravansSearched) score += 1;
-	if(!foundOut) score += 1;
-	//TOTAL: 10
-	if(score >= 10) outlaws.flags["BT"] |= OutlawsFlags.BullTower.PerfectScore;
-	
-	var relevant = false;
-	if(outlaws.flags["BT"] & OutlawsFlags.BullTower.ContrabandStolen) relevant = true;
-	if(outlaws.flags["BT"] & OutlawsFlags.BullTower.StatueDestroyed) relevant = true;
-	if(outlaws.flags["BT"] & OutlawsFlags.BullTower.SafeLooted) relevant = true;
-	if(outlaws.flags["BT"] & OutlawsFlags.BullTower.CaravansSearched) relevant = true;
-	if(outlaws.flags["BT"] & OutlawsFlags.BullTower.CaravansIgnited) relevant = true;
-	
-	Gui.NextPrompt(function() {
 		Text.Clear();
-		Text.Add("<b>Final Score:</b><br>", parse);
-		Text.Add("Suspicion raised: " + outlaws.BT.Suspicion() + "/100<br>", parse);
-		Text.Add("Mayhem spread: " + score + "/10<br>", parse);
-		Text.Add("Alarm raised: " + (foundOut ? "yes" : "no"), parse);
+		Text.Add("Gingerly, you step toward the wall safe, half-expecting a couple of guards to burst in through the entrance behind you, but thankfully nothing of the sort happens. Well, what will you do?", parse);
 		Text.Flush();
+		
+		BullTowerScenes.SafePrompt();
+	}
+));
+
+
+export namespace BullTowerScenes {
+	export function Initiation() {
+		let player = GAME().player;
+		let party : Party = GAME().party;
+		let outlaws = GAME().outlaws;
+		let terry = GAME().terry;
+
+		var parse : any = {
+			playername: player.name
+		};
+		
+		outlaws.flags["BullTower"] = OutlawsFlags.BullTowerQuest.Initiated;
+		
+		Text.Clear();
+		Text.Add("The outlaw camp is always calmest at dawn and at dusk - the camp may never sleep, but it does have lulls when one shift of workers - be they hunters, sentries or otherwise - replaces another. It’s at one of these shift rotations that you arrive in the camp, feeling momentarily calmed by the brief surfeit of activity before you’re grabbed by the shoulder from behind.", parse);
+		Text.NL();
+		Text.Add("<i>“[playername].”</i> Zenith’s familiar, deep voice comes from behind you. <i>“What a pleasant surprise to find that you’ve arrived in our camp. In fact, I was just thinking of you when one of the lookouts spotted you coming. Do you have a moment to talk?”</i>", parse);
+		Text.NL();
+		Text.Add("It seems rather impolite to decline the outlaw leader, so you nod.", parse);
+		Text.NL();
+		Text.Add("<i>“Everyone’s waiting,”</i> he rumbles. <i>“Let’s go.”</i>", parse);
+		Text.NL();
+		Text.Add("What Zenith means by ‘everyone’ soon becomes clear: you’re led to his tent, and a small group has gathered within, clustered around the map table, sitting on anything and everything that can serve as a seat. You recognize Maria, Cveta, and a few others, but most of those present aren’t known to you. It seems like a pretty lively conversation’s going on, too.", parse);
+		Text.NL();
+		Text.Add("<i>“Well, the twins are said to be better than their father on the issue…”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“And it’ll take decades for Rewyn to die and be succeeded, assuming he doesn’t do us the favor of getting killed off. You really want to live in the woods that long on a rumor that the children are going to be more fair-minded than their father? Even if they started working on reversing his policies before his body’s cold, the damage will have been done.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“I’m not convinced…”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Few with power ever actually want to give it up. You think that once Rewyn’s given the lands of us exiled nobles to his favorites, the new owners are just going to hand them over because Rumi or Rani say so?”</i>", parse);
+		Text.NL();
+		Text.Add("Zenith clears his throat. <i>“Ladies. Gentlemen.”</i>", parse);
+		Text.NL();
+		Text.Add("As one, morphs and pure humans alike turn their heads to acknowledge the outlaw leader’s arrival.", parse);
+		Text.NL();
+		Text.Add("<i>“Maria. Aquilius. Friends,”</i> he continues, motioning for you to find a seat, which you do. <i>“Thank you for being here on such short notice this evening. I would have asked you to come earlier, but I only received news on the matter a few hours ago.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“As most of you know, the Royal Guard blames us for the disappearance of Alaric two days ago. Of course, we had no hand in it, but these accusations necessisated our involvement in order to clear our name. I set Maria to the task immediately, with a little fieldwork of my own, and our discoveries were interesting, to say the least.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Hey, I don’t know any Alaric,”</i> someone calls from the back.", parse);
+		Text.NL();
+		Text.Add("<i>“I do,”</i> a well-dressed cat-morph replies. <i>“Bean-counter in the King’s Treasury, supposedly discovered someone was pocketing coins on the sly, was going to make a fuss about it. Is what I heard some little birds whisper, in any case.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Yes, Lady Radigaz, you’re very well-informed,”</i> Zenith says coolly. <i>“But if we can avoid further interruptions? Maria?”</i>", parse);
+		Text.Flush();
+		
+		TimeStep({ minute : 30 });
 		
 		Gui.NextPrompt(function() {
 			Text.Clear();
-			if(outlaws.AlaricSaved()) {
-				Text.Add("<i>“Thank you for pulling this off without a hitch,”</i> Zenith says, a rare smile on the outlaw leader’s face. <i>“I confess that I had some doubts about your abilities and wondered if I should have sent Maria in your place, but it seems you and Cveta made a fine team and put Preston to shame. It’s not often that I’m glad to be proven wrong.</i>", parse);
+			Text.Add("Rising from her seat, Maria glances about the tent before speaking. <i>“I gathered my team and went to take a look around the place where he supposedly disappeared, close to the King’s Road. To make a long story short, we did find some leads… which brought us straight to Bull Tower. It’s supposed to have been abandoned for decades, but the place is crawling with guards. They seem to be trying to keep a low profile, but there’s no hiding that many men.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“And did you manage to take a look at these guards? Were they mercenaries? Did they seem competent?”</i> asks one of the assembly.", parse);
+			Text.NL();
+			Text.Add("<i>“Calm down, I’m getting there.”</i> Maria clears her throat. <i>“At first we considered the possibility of them being mercenaries, but they seemed too well disciplined. So I had one of my men take a closer look, and he recognized lieutenant Corishev of the Royal Guard talking to one of the sentries at the wall.”</i>", parse);
+			Text.NL();
+			Text.Add("The Royal Guard? What are they doing so far away from the castle district, let alone Rigard? Zenith looks down at his assembled audience, and nods.", parse);
+			Text.NL();
+			Text.Add("<i>“For those of you less learned in law, Bull Tower, abandoned though it is, is still Crown land. When it was decommissioned, responsibility for its care passed to the Royal Guard, although it was not to be  be manned, so far as I know… the sudden influx of guards posed an interesting question which we bent our minds to.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Lieutenant Corishev? He’s one of Preston’s head flunkies, there’s no way he’d be there without his commander knowing.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“The Shining doesn’t want to step any farther than the good end of the Merchants’ Street lest he get a smidge of dust on that breastplate of his,”</i> someone pipes up from the back.", parse);
+			Text.NL();
+			Text.Add("<i>“Not true. Didn’t he lead that band of his into the warehouse district to catch-”</i>", parse);
+			Text.NL();
+			Text.Add("Zenith claps his hands once, and the discussion is immediately shushed. <i>“Please, let’s have some respect for those who are speaking.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Well, I won’t bore you. Long story short, Maria and I think our man is in there. We will free him, clear our name, and sully the King’s <b>and</b> the Royal Guard’s - the former’s for having embezzlers in his employ, and the latter’s for trying to cover it up and pin the blame on us.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Yes, I know Bull Tower was built to be impregnable. However, we’ve come up with an idea that might work. If we can pull it off, we move another step toward the moral high ground, my friends. Amongst other things. That is all I wish of you today, my friends - to keep you informed. You may leave now.”</i>", parse);
+			Text.Flush();
+			
+			TimeStep({ minute : 10 });
+			
+			Gui.NextPrompt(function() {
+				Text.Clear();
+				Text.Add("As you stand and make to leave with the small crowd flowing out of Zenith’s tent, though, another hand falls on your shoulder - smaller and lighter this time, but no less firm.", parse);
 				Text.NL();
-				Text.Add("<i>“You don’t have to worry about Alaric. We’ll feed him, treat his wounds as best we can, and ask him to tell his tale. It’s unlikely that he’ll be able to go back to his old life now that he’s a wanted fugitive, but we should be able to set him up somewhere in the Free Cities. Honest accountants are hard to come by and in high demand.”</i>", parse);
+				parse["handsomebeautiful"] = player.mfFem("handsome", "beautiful");
+				Text.Add("<i>“Going somewhere, [handsomebeautiful]?”</i>", parse);
 				Text.NL();
-				Text.Add("That makes sense. Even if there aren’t any official charges, it wouldn’t be hard for Preston to trump some up, you point out.", parse);
+				Text.Add("You half-turn, and Maria is there, smiling with apparent sweetness - and you’re pretty sure she hasn’t suddenly become taken with you. <i>“Zenith would appreciate it if you stayed a little longer.”</i>", parse);
 				Text.NL();
-				parse["o"] = relevant ? " Now, let’s go over the other things you did…" : "";
-				Text.Add("<i>“Exactly,”</i> Zenith replies. <i>“Most of us didn’t choose to be outlaws; I think of us as exiles, thrown out on one flimsy charge or another. But we make the most of the hand we’ve been dealt.[o]</i>", parse);
+				Text.Add("Well, it makes sense. He wouldn’t go to all the trouble of seeking you out just to have you hear him speak, right? A faint sense of foreboding welling up in the pit of your stomach, you sit back down and wait for the tent to empty of everyone save you, Zenith, Maria, and oddly enough, Cveta, who’s been seated near the back all the while, unruffled as always.", parse);
+				if(party.Num() > 1) {
+					var p1 = party.Get(1);
+					parse["comp"]  = party.Num() == 2 ? p1.name : "Your companions";
+					parse["s"]     = party.Num() == 2 ? "s" : "";
+					parse["has"]   = party.Num() == 2 ? "has" : "have";
+					parse["heshe"] = party.Num() == 2 ? p1.heshe() : "they";
+					
+					Text.Add(" [comp] look[s] about, clearly wondering if [heshe] should be here, then come[s] to the conclusion that if you’ve been invited, then so [has] [heshe].", parse);
+				}
 				Text.NL();
-				if(outlaws.flags["BT"] & OutlawsFlags.BullTower.StatueDestroyed) {
-					Text.Add("<i>“Smashing Preston’s statue was a very appropriate touch. I knew the man was pompous - we’re reminded of the fact every time we get news out of Rigard - but this is something else altogether. An entire marble statue… how much did it cost him, and how much of that money was earmarked for his underlings’ pay and equipment, I wonder?”</i>", parse);
+				Text.Add("Apparently, this still isn’t enough privacy for the outlaw leader. Gesturing for you to follow, he leads you to a corner and speaks in a low whisper.", parse);
+				Text.NL();
+				parse["t"] = party.InParty(terry) ? "-”</i> he gestures at Terry with a nonchalant wave of his hand - <i>“" : "";
+				parse["b"] = outlaws.TurnedInBinder() ? " That your coming across Krawitz’s binder was no accident - which is why I didn’t question you when you passed it along to us." : "";
+				Text.Add("<i>“I know that you probably don’t want this to be public knowledge, which is why I called you over. [playername], I know that you were involved in the heist on Krawitz’s place, that the Masked Fox [t]wasn’t the only one present that night.[b]”</i>", parse);
+				Text.NL();
+				Text.Add("You swallow hard. Just how long has he known?", parse);
+				Text.NL();
+				Text.Add("<i>“In such a place as Rigard, nothing goes unnoticed, for there are always eyes and ears about. Beggars. Street urchins. Laborers. Those beneath notice. Many willingly tell us what they’ve seen and heard, while others need their tongues loosened with a hot meal.”</i>", parse);
+				Text.NL();
+				Text.Add("With a pat on your shoulder and a smile, he walks you back as if nothing had happened, speaking in normal tones once more. <i>“[playername], you have a skill that we are in need of - that of infiltration. Our dear songstress here is also in the same position, albeit with a different ability we can bring to bear. Maria and I have come up with a plan to get through Bull Tower’s defenses, and it will require the both of you.</i>", parse);
+				Text.NL();
+				Text.Add("<i>“Bull Tower was designed to be impregnable and would normally be impossible to enter by stealth, especially since Preston has put a good number of his lackeys on perimeter guard. We’ll create a diversion, draw as much attention as we can and throw them off edge so you can enter. Once inside, it should be far easier for you to move about and find our man.”</i>", parse);
+				Text.NL();
+				Text.Add("Surely it can’t be that simple. Maybe you should ask for the details later.", parse);
+				Text.NL();
+				Text.Add("<i>“What does he look like?”</i> Cveta asks, and you realize it’s the first time she’s spoken throughout this whole exchange.", parse);
+				Text.NL();
+				Text.Add("Zenith scratches his chin. <i>“Small. Thin. Balding. Maria will draw you a sketch before you leave; she will also provide precise directions to the tower. Are there any questions?”</i>", parse);
+				Text.Flush();
+				
+				TimeStep({ minute : 20 });
+				
+				BullTowerScenes.InitiationQuestions();
+			});
+		});
+	}
+
+	export function InitiationQuestions(opts? : any) {
+		let player = GAME().player;
+		let party : Party = GAME().party;
+		let outlaws = GAME().outlaws;
+
+		opts = opts || {};
+		
+		var parse : any = {
+			playername : player.name
+		};
+		
+		
+		//[Presence][Plan][Binder][Leave]
+		var options = new Array();
+		if(!opts.presence) {
+			options.push({ nameStr : "Presence",
+				func : function() {
+					Text.Clear();
+					Text.Add("<i>“Some sort of smuggling is my guess,”</i> Maria pipes up. <i>“I’ve spotted some of the Royal Guard hanging around the old fort from time to time since the beginning of the year, almost always escorting folk transporting goods or lugging the stuff themselves. I managed to jump one of the caravan parties after they’d left the tower, made it look like your standard highway holdup. Most of what they were carrying were luxury goods from outside Rigard. Cheeses, wine, fine fabrics, smokes, other odds and ends. None of them illegal, but all of them highly taxed.”</i>", parse);
 					Text.NL();
-					Text.Add("It was Cveta who thought to leave the outlaws’ mark on the plinth, you point out.", parse);
+					Text.Add("<i>“Guards do not search their own,”</i> Cveta states flatly. <i>“Especially those that outrank them.”</i>", parse);
 					Text.NL();
-					Text.Add("<i>“So she did, and she gets credit for that. I wish I could have been there to help you topple the thing.”</i> Zenith sounds a little wistful. <i>“Still, it’s important to remember that Preston is merely Rewyn’s hand. So long as the head remains, the snake lives on.”</i>", parse);
+					Text.Add("Zenith nods. <i>“Or those who claim to be under the protection of such. It does seem like an open-and-shut case of tax evasion. If Bull Tower is being used as a waystation, it would make sense for them to hold Alaric there until one of the smugglers turns up to take him away.”</i>", parse);
+					Text.Flush();
+					
+					TimeStep({ minute : 5 });
+					
+					opts.presence = true;
+					BullTowerScenes.InitiationQuestions(opts);
+				}, enabled : true,
+				tooltip : "Why is the Royal Guard out along the King’s Road, anyway?"
+			});
+		}
+		if(!opts.plan) {
+			options.push({ nameStr : "Plan",
+				func : function() {
+					Text.Clear();
+					Text.Add("Zenith nods at your question. <i>“Our eyes and ears have informed us that there are a number of shipments slated to come in that night; we’ll divert the guards by attacking the last of the convoys along the King’s Road within sight of the tower. ", parse);
+					if(party.Num() > 1) {
+						parse["s"] = party.Num() == 2 ? "" : "s";
+						Text.Add("Your companion[s] can join in if they like; we could use the help, especially if we’re to effect a good fighting retreat. ", parse);
+					}
+					Text.Add("The fact that it’s a diversion is something only Maria, I, and a few others know; everyone else will be informed it’s a raid - which it is as well.</i>", parse);
+					Text.NL();
+					Text.Add("<i>“Once they’re preoccupied with us, the two of you can waltz on in.”</i>", parse);
+					Text.NL();
+					Text.Add("You guess that means Cveta asks them nicely to let you pass.", parse);
+					Text.NL();
+					Text.Add("<i>“That’s correct. Since every pair of eyes still on the walls is going to be facing outwards toward us, things will be much easier for you. You’re not going to pass as a Royal Guard - I’m willing to wager everyone knows everyone - so don’t even try disguising yourself.</i>", parse);
+					Text.NL();
+					Text.Add("<i>“After you’re in, though, you’re on your own. No one has cared about the inside of Bull Tower for the last generation, and the Royal Guard has had time to make their own unofficial changes, if they’ve so desired. I’ve managed to acquire a copy of the floor plans, but they’re at least sixty years out of date.</i>", parse);
+					Text.NL();
+					Text.Add("<i>“What probably hasn’t changed, though, is that there’ll be a central yard and somewhere to stable animals. Everything else will be centered about the main watchtower. Cells below to hold troublemakers on the road - almost certainly where Alaric is being held, although you may have some searching to do. I’m afraid I can’t be of more help, [playername].”</i>", parse);
+					Text.NL();
+					Text.Add("You think a moment, and agree that from the way this fortress sounds, Zenith’s information is probably the best you’ll be getting. It’s not much, but it sounds like only the Royal Guard would have more.", parse);
+					Text.Flush();
+					
+					TimeStep({ minute : 5 });
+					
+					opts.plan = true;
+					BullTowerScenes.InitiationQuestions(opts);
+				}, enabled : true,
+				tooltip : "So, what’s the plan? In detail, that is."
+			});
+		}
+		if(!opts.obj && opts.presence) {
+			options.push({ nameStr : "Objectives",
+				func : function() {
+					Text.Clear();
+					Text.Add("Zenith and Maria look at each other for a moment, then the former shrugs and smiles. <i>“By all means, [playername]. Opportunities to screw Preston over are hard to come by, so feel free to be creative. Although I must remind you to focus on your primary goal and to take no unnecessary risks. Alaric comes first; everything else is secondary.</i>", parse);
+					Text.NL();
+					Text.Add("<i>“Concrete evidence of what the Royal Guard is up to within those walls - evidence that we can hang out in the street for all to see - now that would be a nice catch, if you can find any. Bring down Preston a peg or two.”</i>", parse);
+					if(outlaws.TurnedInBinder()) {
+						Text.NL();
+						Text.Add("Zenith grunts, then looks thoughtful as he turns to you. <i>“Well, [playername], there is one more thing I need to mention. When we caught wind of this, I thought it would be prudent to give that binder of Krawitz’s - the one you so thoughtfully obtained for us - a detailed look-through. As it turns out, the contents of one of the inbound shipments written off as lost matched the wagons that Maria and her team took that night, down to the wine’s vintage. It’s circumstantial evidence, but it’s a lead as to why the Royal Guard is aiding and abetting smugglers.</i>", parse);
+						Text.NL();
+						Text.Add("<i>“I’m certain there’s more evidence to be found in Bull Tower itself, and with the numbers involved, as well as the fact that one only works with smugglers with payment on delivery… well, there’s likely to be some coin on hand in there, too.</i>", parse);
+						Text.NL();
+						Text.Add("<i>“Not that it tells us <b>where</b> it is, more’s the pity, but it’s better than stumbling around in the dark.”</i>", parse);
+						Text.NL();
+						Text.Add("Evidence, payoff. All right, you’ll keep an eye out for those while you’re sneaking about.", parse);
+					}
+					Text.Flush();
+					
+					TimeStep({ minute : 5 });
+					
+					opts.obj = true;
+					BullTowerScenes.InitiationQuestions(opts);
+				}, enabled : true,
+				tooltip : "If the Royal Guard have been lurking about for some time now, surely that means there’s more you can do…"
+			});
+		}
+		options.push({ nameStr : "Leave",
+			func : function() {
+				Text.Clear();
+				Text.Add("You decide you’re as ready as you’ll ever be, and say so.", parse);
+				Text.NL();
+				Text.Add("<i>“I will require a little time to make my preparations,”</i> Cveta says, turning to you. <i>“Meet me at nine in the evening, [playername], and we can be on our way.”</i>", parse);
+				Text.NL();
+				Text.Add("Woman of few words as ever, isn’t she?", parse);
+				Text.NL();
+				Text.Add("<i>“Well then,”</i> Zenith says, striding over to the tent flaps and undoing them to let you through, <i>“don’t let me keep you up. Good night, [playername]. Feel free to rest in our camp; you’ll need all your strength. No, Cveta, please sit down. I would have further words with you and Maria concerning the events of two evenings ago…”</i>", parse);
+				Text.NL();
+				Text.Add("Well, it seems that you’re done here. Once you’re ready, you should see Cveta about setting off.", parse);
+				Text.Flush();
+				
+				TimeStep({ minute : 5 });
+				
+				Gui.NextPrompt();
+			}, enabled : true,
+			tooltip : "You’re about done here."
+		});
+		Gui.SetButtonsFromList(options, false, null);
+	}
+
+	export function MovingOut() {
+		let player = GAME().player;
+		let party : Party = GAME().party;
+		let outlaws = GAME().outlaws;
+		let cveta = GAME().cveta;
+
+		var parse : any = {
+			playername : player.name
+		};
+		
+		Text.Clear();
+		if(WorldTime().hour >= 21 || WorldTime().hour < 4)
+			Text.Add("Although the flaps of Cveta’s tent are tightly drawn, you catch a glimpse of light at the seams. The songstress is still awake and presumably waiting for you so you can set off - would you like to do so?", parse);
+		else
+			Text.Add("You’ve arrived early, but you don’t think there are any more preparations you need to make. Maybe you could help Cveta or review the plan to make sure you’re in sync.", parse);
+		Text.NL();
+		Text.Add("<b>Remember that you will only have one try at this task; whether it meets with success or failure, there will be no retracing your steps, for what is done will remain done.</b>", parse);
+		Text.Flush();
+		
+		var options = new Array();
+		options.push({ nameStr : "Wait",
+			func : function() {
+				Text.Clear();
+				Text.Add("You’re going to have only one shot at this. While time is of the essence here, it won’t do to head into the great unknown without making all the preparations you can; with that in mind, you step back and return to the middle of camp. You’ll be back when everything’s been taken care of.", parse);
+				Text.NL();
+
+				TimeStep({minute: 5});
+
+				Gui.PrintDefaultOptions();
+			}, enabled : true,
+			tooltip : "You still need to make a few more preparations."
+		});
+		options.push({ nameStr : "Move out",
+			func : function() {
+				Text.Clear();
+				if(WorldTime().hour >= 21 || WorldTime().hour < 4)
+					Text.Add("There’s no need to wait any longer; time’s a-wasting. Stepping towards Cveta’s tent, you practically run into the songstress as she emerges from within.", parse);
+				else {
+					Text.Add("<i>“You are here early, [playername],”</i> Cveta says, greeting you with a nod as you approach her tent. <i>“There are still some hours left before our departure.”</i>", parse);
+					Text.NL();
+					Text.Add("You didn’t want to risk missing out on the action, you explain.", parse);
+					Text.NL();
+					Text.Add("<i>“Perhaps it is for the best; there are still preparations everyone needs to make. Might I trouble you to make yourself useful until dusk?”</i>", parse);
+					Text.NL();
+					Text.Add("Indeed, as evening nears, the camp becomes abuzz with activity - blades put to the whetstone, bowstrings tested and replaced, orders given and bootstraps tightened. The atmosphere is military - save that there are no banners or formations. The raiding party numbers about thirty, with Maria at its head; most of them look quite eager to set out and to scratch that itch with a bit of action. While the raid may be intended as a diversion, it goes without saying that they intend to make it as profitable as possible.", parse);
+					Text.NL();
+					Text.Add("<i>“I hope fate is kind to them. They may treat their task with levity, but I would rather not have Aquilius do much work as a result of tonight’s venture.”</i>", parse);
+					Text.NL();
+					Text.Add("You turn to find Cveta standing beside you, having changed into clothes more suited for sneaking about.", parse);
+				}
+				Text.NL();
+				Text.Add("Seeing her without her gown for once throws you off a little - without all that fabric to hide her figure, it’s plain how thin and tiny she really is. You eye the simple blouse and leggings she’s donned, plain gray against an equally unremarkable brown, and have to concede that so long as Cveta doesn’t open her mouth or look anyone in the eye, she might pass for… well, someone of lower stature. Not a commoner - even when trying to hide it, she moves with far too much elegance for that - but perhaps a merchant’s daughter…", parse);
+				Text.NL();
+				Text.Add("Odd, though, that she’s kept the gloves. Come to think of it, there hasn’t been a single time that you’ve seen her without them.", parse);
+				Text.NL();
+				Text.Add("The songstress’ voice slices cleanly through your thoughts. <i>“Are we ready?”</i>", parse);
+				Text.NL();
+				if(party.Num() > 1) {
+					var p1 = party.Get(1);
+					parse["comp"]   = party.Num() == 2 ? p1.name     : "your companions";
+					parse["himher"] = party.Num() == 2 ? p1.himher() : "them";
+					parse["heshe"]  = party.Num() == 2 ? p1.heshe()  : "they";
+					Text.Add("Just one more thing, you tell Cveta, then turn to [comp], asking [himher] to wait for you here in the outlaws’ camp; if [heshe]’d like, [heshe] can ask Zenith to join in on the raid. Sneaking around alone is already hard enough, two is a crowd, and any more would be impossible. With that out of the way, you turn back to the songstress.", parse);
 					Text.NL();
 				}
-				if(outlaws.flags["BT"] & OutlawsFlags.BullTower.CaravansSearched) {
-					Text.Add("<i>“If the invoices and receipts the two of you found are indeed what they seem, we have a potent weapon for proving to the people what Rigard’s nobles think of their own laws. To impose taxes on those who bake the very bread they stuff themselves with, while they evade their share… that’s unforgivable. It is just one of the ways they attempted to break the guilds back then… but I’m rambling.”</i>", parse);
+				Text.Add("You tell Cveta that you’re prepared, and she nods. <i>“I visited Maria earlier and got the requisite items.”</i> She produces two slips of paper, one with directions to the tower and the other a sketch of a sad-faced, balding man. <i>“Let us not tarry. The night is short.”</i>", parse);
+				Text.NL();
+				Text.Add("With that, she turns, leading the way. She’s careful to never venture more than a half-step ahead, politely allowing you the illusion that you know where you’re going too. The lookouts on duty lower the drawbridge, and crossing the  trenches, you’re on your way.", parse);
+				Text.Flush();
+				
+				TimeStep({hour: 1});
+				
+				Gui.NextPrompt(function() {
+					Text.Clear();
+					Text.Add("The trip to the King’s Road is uneventful; the two of you slip through the thick undergrowth out of the forest. The road is clear, largely devoid of travelers, and well-lit under the clear, cloudless sky. Off in the distance, the many lights of Rigard flicker and twinkle, the city drowsy but never quite falling asleep.", parse);
 					Text.NL();
-					Text.Add("What does he intend to do with this knowledge, by the by? You get the feeling that reporting the lot to the guard isn’t going to do very much.", parse);
+					Text.Add("The further you get from Rigard, the less maintained and wilder the road becomes; it remains paved, but you notice the occasional pothole and missing flagstone, while the surrounding vegetation becomes coarser and more overgrown. You’d have guessed that the main route connecting Rigard and the Free Cities would be better maintained. Perhaps this is just a neglected patch, with no one living nearby to take responsibility for its upkeep.", parse);
 					Text.NL();
-					Text.Add("<i>“Of course not,”</i> Zenith replies with a snort. <i>“I’ll go over the figures later and note down each and every one of the greedy pieces of filth. Then maybe we’ll have them copied, a few rumors spread in the right places… attacking or accusing them head-on isn’t going to do much, but the people of Rigard are already suspicious of their self-proclaimed leaders. It won’t take much effort on our part to turn that into hostility.”</i>", parse);
+					Text.Add("Another half-hour along the road and one sleepy-looking patrol later, the walls of Bull Tower draw into sight, thick and rising tall despite their age, clearly illuminated by the moonlight. Thin vines crisscross the old stone and mortar like veins across skin, and in the middle of it all, a singular watchtower stands above the walls, stiff and stout as it deeply penetrates the heavens.", parse);
 					Text.NL();
-				}
-				if(outlaws.flags["BT"] & OutlawsFlags.BullTower.CaravansIgnited) {
-					Text.Add("<i>“With those caravans you burned… well, perhaps they will think twice about consorting with the corrupt and decadent. I suspect that our friends will be having trouble finding someone to run their goods for them for a little while.”</i>", parse);
+					Text.Add("You’re not the only ones present, though. Even at this distance, you spot silhouettes moving atop the ramparts, and the gate - an immense archway a little ways away from the main trunk of the King’s Road - is flanked by two figures. From woodland cover to the thick, waist-high undergrowth to the shadow of the high, ancient walls, both of you creep closer and closer to the gate and its watchers. They are two pure humans, dressed in simple, unmarked clothes, with no visible armor, but by the way they carry themselves and handle their pikes, it’s clear that they’re used to handling their weapons.", parse);
 					Text.NL();
-				}
-				if(outlaws.flags["BT"] & OutlawsFlags.BullTower.SafeLooted) {
-					Text.Add("As he’s about to continue, a dog-morph comes running up to Zenith and salutes. <i>“Sir!”</i>", parse);
+					Text.Add("These must be the guards, then - you didn’t expect that they’d be in uniform, did you? Signaling for Cveta to wait, you take cover in the shadows and sneak as close as you dare, finding a good patch of undergrowth to crouch in and spy on the men. They’re clearly on edge and more than a little twitchy, constantly glancing around and fidgeting. After about ten minutes of waiting, you’re rewarded with the sound of faint clacking of hooves and wooden wheels on stone, growing steadily louder as its source draws closer: a single wagon. Its driver leans down and whispers something to the guards, receiving a reply in return; while you can’t make out the words at this distance, the tone is nevertheless urgent.", parse);
 					Text.NL();
-					Text.Add("<i>“Yes, Serana?”</i>", parse);
+					Text.Add("<i>“...patrol... return later... give or take an hour or two... let you through first. Don’t drop that, it’s an important delivery.”</i>", parse);
 					Text.NL();
-					Text.Add("<i>“We’ve counted the money [playername] brought back, as you requested.”</i>", parse);
+					Text.Add("With that, the guards wave the wagon through and resume their vigil, peering intently into the night. Whatever it was that they were looking for, it wasn’t the wagon - and hopefully it’s not you. A knot twisting in the pit of your stomach, you stealthily withdraw from your hiding place and make your way back to Cveta, briefly relaying what you’ve seen. She folds her arms and clicks her beak impatiently, glancing down the road, into the distance.", parse);
 					Text.NL();
-					Text.Add("<i>“And the total is?”</i>", parse);
+					Text.Add("<i>“Where is Zenith?”</i>", parse);
 					Text.NL();
-					Text.Add("<i>“I’d rather not say it in the open, sir.”</i>", parse);
+					Text.Add("Cveta’s question is answered by an explosion that lights up a whole stretch of the King’s Road about two miles down the road from the tower. Even from ground level, it’s starkly visible - how much more it must be, then, for anyone watching from the ramparts. The flash of light is followed by a dull, thunderous roar that sweeps across the grasslands and plains, reminding you of an approaching thunderstorm.", parse);
 					Text.NL();
-					Text.Add("Zenith blinks, truly surprised, but leans in while the dog-morph whispers in his ear. His eyes grow wide for a second or two, until his features settle into a more composed, bemused expression.", parse);
+					Text.Add("While you can’t tell if it’s of alchemical or magical origin, the enormous orange cloud of flame and smoke that rises into the air is conspicuous enough to do its job. Shouts erupt from within the fortress, followed by the clatter of boots on the ground. In less than five minutes, an entire squad of plainclothes guardsmen have pass you by at a quick march, heading directly for the source of the explosion, disappearing rapidly in the gloom. You’re not in any position to see any of the actual fighting that must be taking place, but the night air carries the shouts and screams well enough; it’ll only get worse when the squad arrives.", parse);
 					Text.NL();
-					Text.Add("<i>“Thank you, Serana. You may take your leave now.”</i> As the dog-morph pads off, Zenith turns back to you and sighs. <i>“Well! It appears that our Royal Guards have been on the take for quite the sum. Ten thousand coins… considerable, but if caravans’ worth of goods are being regularly smuggled into Rigard, the price would have been worth it, from the nobles’ point of view.”</i>", parse);
+					Text.Add("This is it, then. You point at the guards posted by the gate, and Cveta nods in understanding. Though you know what the songstress can do, it’s still a little bizarre seeing her step out of the shadows and glide down the path to the tower on airy footsteps. To be frank, the whole thing feels  melodramatic, Cveta painting a stark silhouette in the silver moonlight.", parse);
 					Text.NL();
-					Text.Add("<i>“Just how deep does the corruption run, I wonder? And Rewyn is always complaining that the treasury is empty, using that as an excuse to squeeze the people…”</i>", parse);
+					Text.Add("If she wanted to draw their attention, she’s definitely managed to do it - the gate guards straighten their backs and clutch their pikes with a little more vigor, practically standing at attention, but they evidently don’t think her a threat, or they’d be running off to raise the alarm.", parse);
 					Text.NL();
-					Text.Add("Ten thousand, hmm?", parse);
+					Text.Add("<i>“Halt! Who goes there?”</i>", parse);
 					Text.NL();
-					Text.Add("<i>“At least that much,”</i> Zenith says. <i>“Serana says they’re recounting right now, but some sums of money are such that past a certain point, the exact number becomes meaningless. This is one of them. Good work, [playername]. This news will soon find its way onto the streets of Rigard, I promise you that.”</i>", parse);
+					Text.Add("Cliched, but it gets the point across.", parse);
 					Text.NL();
-				}
-				if(outlaws.flags["BT"] & OutlawsFlags.BullTower.ContrabandStolen) {
-					Text.Add("<i>“And finally, we come to the matter of the gemstones you brought back. Cut and polished, no less - we won’t be dumping these all at once, since even the best fences will have problems washing these clean. Still, it seems that we won’t be needing to worry about money for a while, and it’s all thanks to Preston and the incompetence of his little outfit. That’s what you get when you worry about polishing your armor more than how well your men are trained.”</i>", parse);
+					Text.Add("<i>“Maybe she’s one of the things that Majid ordered and wandered over when the caravan blew up. You know...”</i> the other says, not taking his eyes off Cveta. <i>“You. State your name and business-”</i>", parse);
 					Text.NL();
-				}
-				Text.Add("<i>“Once more, I’ll congratulate you on your success. The blow you struck might be small, but it is nevertheless important - after all, Eden wasn’t settled in a day. ", parse);
-				if(score >= 10)
-					Text.Add("The two of you did a most excellent job in there - I couldn’t have done better myself. Causing that much mayhem and yet managing to escape undetected; Preston is going to throw a fit once word of this gets to him. I knew I made the right choice in picking you and Cveta for this task.”</i>", parse);
-				else if(score >= 6)
-					Text.Add("The two of you performed admirably tonight - you certainly had an eye for spotting opportunities while not losing track of what you were there for. I expect to see a lot of unhappy Royal Guards tomorrow.”</i>", parse);
+					Text.Add("<i><b>“We are familiar faces.”</b></i>", parse);
+					Text.NL();
+					Text.Add("The way Cveta says it… her voice is light and airy, rippling through the air. The effect it  have on the gate guards is immediate. Ready to spring out and aid the songstress at the first sign of trouble, you watch as they shake and grunt, clearly struggling against the compulsion.", parse);
+					Text.NL();
+					Text.Add("Then, after the pain, a release: <i>“My friend and I are amongst the smugglers expected here tonight; we are merely escaping the bandits who attacked our transport. The two of you desire to let us through, so you can return to your warm beds as soon as possible with a minimum of trouble. You are glad to have pulled guard duty instead of having to respond to the attack further down the road.”</i>", parse);
+					Text.NL();
+					Text.Add("The guards waste no time in taking the avenue of escape afforded to them; they visibly sag with relief, leaning on their pikes and waving Cveta onward through the gates. You step out of the shadows to join her, and the two of you quickly slip past the guards and through the ancient stone walls.", parse);
+					Text.NL();
+					Text.Add("<i>“Sometimes, it is easier to divert the flow of a river than to dam it,”</i> Cveta whispers to you as both of you pass through the old, crumbling gate. <i>“As my father said, it is often not a good idea to cut off an enemy from all avenues of retreat. They would have been much harder to sway if I had ordered them to let us through and not notice our presence at all.”</i>", parse);
+					Text.NL();
+					Text.Add("As opposed to seeing her and thinking she was expected?", parse);
+					Text.NL();
+					Text.Add("Cveta nods. <i>“Right. Nevertheless, we have limited time to act. The moment that squadron returns is the moment our game is up. We will have to move quickly, but not rashly.”</i>", parse);
+					Text.NL();
+					Text.Add("With that thought in mind, you step into the deserted main courtyard of Bull Tower, the main structure of the ancient outpost standing before you, a remnant of a time when Eden was wilder and yet more prosperous. The shadows cast by the walls are as thick on the inside as they are on the outside, and it is into the cover of these that the two of you dive, taking a moment to catch your breaths and plan your next move.", parse);
+					Text.Flush();
+					
+					party.SaveActiveParty();
+					party.ClearActiveParty();
+					
+					party.SwitchIn(player);
+					party.AddMember(cveta, true);
+					
+					party.RestFull();
+					
+					outlaws.BT = new BullTowerStats();
+					
+					MoveToLocation(BullTowerLoc.Courtyard.Yard, {hour: 3});
+				});
+			}, enabled : true,
+			tooltip : "You’re as ready as you’ll ever be."
+		});
+		Gui.SetButtonsFromList(options, false, null);
+	}
+
+
+	export function GuardsWin() {
+		let outlaws = GAME().outlaws;
+		
+		var enc  = this;
+		SetGameState(GameState.Event, Gui);
+		
+		var parse : any = {
+			
+		};
+		
+		Gui.Callstack.push(function() {
+			Text.Clear();
+			Text.Add("The last of the sentries guarding the caravans collapses to the ground, succumbing to his wounds. Wasting no time, you hurry to hide your unconscious adversaries in an overgrown patch of weeds - the thigh-height grass conceals them nicely, and they should stay out cold for a good while.", parse);
+			Text.NL();
+			Text.Add("Naturally, you rifle through their pockets, but fail to find much of use. A box of matches, a few loose cigarettes - the sort of thing guards on duty might have on their person. One particular item stands out, though - a key that looks almost as ancient as the fortress. Wondering if it unlocks something in the tower, you pocket the thing. Maybe it’ll come in handy later.", parse);
+			Text.Flush();
+			
+			outlaws.BT.guardsDown = true;
+			
+			Gui.NextPrompt();
+			outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
+		});
+		Encounter.prototype.onVictory.call(enc);
+	}
+
+	export function GuardsLoss() {
+		var enc  = this;
+		SetGameState(GameState.Event, Gui);
+		
+		var parse : any = {
+			
+		};
+		
+		Text.Clear();
+		Text.Add("Seems like this scuffle isn’t going as you planned. Deciding to disengage while you still can, you quickly signal to Cveta to beat a fighting retreat. The caravan guards break off pursuit after just a few more blows, and the reason for that soon becomes apparent: the two of you have barely crossed the courtyard when the loud clanging of a bell being rung echoes across the entirety of the ancient fortress - the alarm!", parse);
+		Text.NL();
+		
+		BullTowerScenes.EndingFailure();
+	}
+
+	export function CorishevLoss() {
+		var enc  = this;
+		SetGameState(GameState.Event, Gui);
+		
+		var parse : any = {
+			
+		};
+		
+		Text.Clear();
+		Text.Add("Despite success being right before your eyes, you’re quickly realizing why the Royal Guards are so terrified of Corishev’s whip. It’s not only the force of the blows or the barbs on the whip that make this so difficult. The venom makes it hard to think about anything other than sweet, sweet sex, which in turn allows him to land more blows on you, letting more venom mingle with your blood…", parse);
+		Text.NL();
+		Text.Add("As hard as it is to admit, you’re losing. It’s getting harder to concentrate, and you can feel your strength starting to flag; it’s best to beat a tactical retreat while you can and avoid ending up in irons alongside Alaric.", parse);
+		Text.NL();
+		Text.Add("You croak out an apology as you start a fighting retreat towards the door behind you, Cveta doing her best to cover your back. Alaric goes wide-eyed as he realizes his would-be saviors are abandoning him, and struggles against his chains.", parse);
+		Text.NL();
+		Text.Add("<i>“Don’t leave me here! ”</i> he cries.", parse);
+		Text.NL();
+		Text.Add("<i>“Where are you going, would-be heroes?”</i> Judging by Corishev’s maniacal giggling and the lewd undertones of his voice, it’s clear that he’s completely intoxicated by all the Gol venom he’s smeared on himself. The orgulous sight of him jacking off to your escape is enough to make Cveta’s face crumple in disgust. <i>“Come back! You forgot your damsel in distress!”</i>", parse);
+		Text.NL();
+		Text.Add("Trying your best to shut the sounds coming from behind you out of your mind, you throw open the door and fly up the stairs as quickly as your legs will carry you. The lieutenant doesn’t seem to be pursuing you - the reason for which soon becomes clear when the alarm sounds throughout the entirety of the ancient fortress. Seems like he’s leaving the chore of hunting you down to his underlings.", parse);
+		Text.NL();
+		BullTowerScenes.EndingFailure();
+	}
+
+	export function CorishevWin() {
+		let player = GAME().player;
+		let outlaws = GAME().outlaws;
+
+		var enc  = this;
+		var corishev = enc.corishev;
+		SetGameState(GameState.Event, Gui);
+		
+		var parse : any = {
+			playername : player.name
+		};
+		
+		outlaws.flags["BT"] |= OutlawsFlags.BullTower.AlaricFreed;
+		
+		Gui.Callstack.push(function() {
+			Text.Clear();
+			Text.Add("That last blow did the trick. Still grinning madly - whether it’s the venom, or whether he’s just plain unhinged by now is anyone’s guess - Corishev staggers backward a few steps, perhaps to give himself a little breathing space. His wide, maniacal gaze darts this way and that, his breathing labored as you advance on him. Too bad there’s nowhere for him to run.", parse);
+			Text.NL();
+			Text.Add("<i>“Kids these days. Beaten by… a couple of young punks…”</i>", parse);
+			Text.NL();
+			parse["w"] = player.Weapon() ? "the blunt end of your weapon" : "your fist";
+			Text.Add("Ducking under a desperate overhead lash, you slip within his guard and land a solid blow to his head with [w]. Giggling, he doesn’t seem to notice it at first, then the force of your blow finally registers and he crumples to the ground like a folded reed, his barbed whip falling out of his grasp and clattering on the floor. With a twitch, his cock ejects one last spurt of cum, a whitish streak mixing with the sweat and blood on the floor, then goes as limp as the rest of him.", parse);
+			Text.NL();
+			Text.Add("<i>“Very fitting,”</i> Cveta remarks dryly at the sight, doing her best to avoid stepping in any of the mess.", parse);
+			Text.NL();
+			Text.Add("<i>“Finally.”</i> Alaric’s been so quiet throughout the whole fight that you’d almost forgotten he was there. He pauses to catch his breath, summoning the strength to speak properly. <i>“Could you get me out of here? He’s got the keys in his pants - they’re hanging over by the door.”</i>", parse);
+			Text.NL();
+			Text.Add("Wasting no time, you tiptoe around the fallen lieutenant and reach for the pants Alaric mentioned. Searching the pockets unearths an empty coin purse, several vials of clear green liquid you try not to look at too closely, and a large iron keyring from which several keys hang. With the keys, it’s a small matter to unlock the chains and cuffs that hold Alaric in place, and he collapses to the ground, groaning.", parse);
+			Text.NL();
+			parse["m"] = player.mfFem("Mister", "Miss");
+			Text.Add("<i>“Ow. Ow. Ow. Fucking. Ow. Thank you, um, [m]…?”<i/>", parse);
+			Text.NL();
+			Text.Add("You nod, and tell him your name.", parse);
+			Text.NL();
+			Text.Add("<i>“Right. Thank you, then, [m] [playername], and -”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“My name is Cveta.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Cveta, then. I’m Alaric. For the record, I didn’t embezzle anything. In fact, the Royal Guards have been taking payoffs from anyone and everyone who has connections to turn a blind eye to tax evasion on imports! They’re keeping the money up top in a trapped safe - I overheard the lieutenant talking to one of his men about it - and the key should be on his keyring-”", parse);
+			Text.NL();
+			Text.Add("<i>“You do not need to prove your innocence to us, Alaric,”</i> Cveta replies. <i>“We know who you are, and were specifically sent to get you. Do you think you can walk?”</i>", parse);
+			Text.NL();
+			Text.Add("Alaric tries to rise, grimacing and wincing, then staggers back onto his knees. <i>“No. But I’m going to have to do it anyway, aren’t I? I’ll just have to walk it off,”</i> he replies with a forced laugh. <i>“I guess that’s enough for introductions and thanks - can we please get out of here before the crazy bastard comes to?”</i>", parse);
+			Text.Flush();
+			
+			//[Fuck][Leave]
+			var options = new Array();
+			options.push({ nameStr : "Fuck",
+				func : function() {
+					Text.Clear();
+					Text.Add("Just a minute, you tell Alaric. There’s some unfinished business you have to take care of - if Cveta would be kind enough to help him out? You’ll catch up with them in a moment.", parse);
+					Text.NL();
+					Text.Add("Cveta gives you an odd look, but agrees and helps Alaric to his feet. It takes her a little effort, considering her slight stature, but the songstress eventually gets a firm grip under Alaric’s arm and begins hefting him out of the cell and up the stairs.", parse);
+					Text.NL();
+					Text.Add("Now that you’re alone, you look down at the lieutenant. The bastard is still largely out cold, save for the occasional twitch and groan, and you’re certain that between the Gol venom and having the wind knocked out of him, he’s not going to put up much of a fight for what you have in mind for him.", parse);
+					Text.NL();
+					Text.Add("Come to think of it, what <i>did</i> you have in mind?", parse);
+					Text.Flush();
+					
+					BullTowerScenes.CorishevFuck(corishev);
+				}, enabled : true,
+				tooltip : "The bastard lieutenant sure can dish it out; let’s see how well he can take it."
+			});
+			options.push({ nameStr : "Leave",
+				func : function() {
+					Text.Clear();
+					Text.Add("You find yourself in total agreement with the little bean counter. Not wishing to spend one moment longer in the cell, you help Alaric to his feet, you and Cveta each grabbing him under a shoulder and lifting. Before stepping onto the stairs, you relieve the lieutenant of his venom-coated whip, which could make a good weapon. The little bean-counter is still bleeding from his lashes, but he summons the strength to keep pace with both of you. Together, the three of you hobble up the steps and to the main hall, but not before you lock the cell door with the keys you found. On the off-chance that the lieutenant comes to before dawn, he can stew there until his underlings come and get him out.", parse);
+					Text.Flush();
+					
+					Gui.NextPrompt(function() {
+						MoveToLocation(BullTowerLoc.Building.Hall, {minute: 5});
+					});
+				}, enabled : true,
+				tooltip : "Get out of here before things get any worse."
+			});
+			Gui.SetButtonsFromList(options, false, null);
+		});
+		Encounter.prototype.onVictory.call(enc);
+	}
+
+	export function CorishevImpregnate(mother : Entity, father : Corishev, slot? : number) {
+		mother.PregHandler().Impregnate({
+			slot   : slot || PregnancyHandler.Slot.Vag,
+			mother : mother,
+			father : father,
+			race   : Race.Human,
+			num    : 1,
+			time   : 30 * 24,
+			load   : 2
+		});
+	}
+
+	export function CorishevFuck(corishev : Corishev) {
+		let player = GAME().player;
+		
+		var p1cock = player.BiggestCock(null, true);
+		
+		var parse : any = {
+			playername : player.name,
+			lowerarmordesc : function() { return player.LowerArmorDesc(); }
+		};
+		parse = player.ParserTags(parse);
+		parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+		parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
+		
+		
+		//[Whip][Ride][Anal][Reconsider]
+		var options = new Array();
+		options.push({ nameStr : "Whip",
+			func : function() {
+				Text.Clear();
+				Text.Add("An evil grin spreads across your lips as you reach down and pick up the lieutenant’s whip from the floor. While it looks quite nice as it is, you carefully pick off the barbs - you don’t want to kill the twisted bastard, as much as he deserves it, just bleed and humiliate him a little. It’s still got a thick coat of aphrodisiac venom on it, but you reach over for the vials you discovered and give the whip a second coating until it’s practically dripping with the stuff. Taking a step back to admire your handiwork, you shake your head at the poetic justice of the lieutenant becoming victim to the very same methods with which he tormented others.", parse);
+				Text.NL();
+				Text.Add("Well, time to administer justice. Lots and lots of justice. A good flick of your wrist sends the length of leather sailing through the air to land squarely on Corishev’s exposed ass. Droplets of viscous venom sail into the air as the coating on the whip’s length splatters, some of it landing on you. Oh well - you aren’t about to let it diminish your satisfaction at seeing a thin red welt rise up on his pale peaches. Pulling your arm back for a second stroke, you let loose with all your might, and by some quirk of fate or good fortune, the second lash lands in almost the same spot as the first.", parse);
+				Text.NL();
+				Text.Add("This one’s strong enough to cut through the lieutenant’s unconscious state, the bastard instinctively twitching and moaning at the pain, the original welt turning an angry red and beginning to seep blood. Wait, moaning? Then again, he was already pretty much hopped up on Gol venom when you came in. As you watch, his flaccid cock twitches as it pushes against the slick stone floor; you roll him over with a foot, and once given enough space, it stands at full mast, just begging to be used.", parse);
+				Text.NL();
+				Text.Add("Well. If he’s <i>enjoying</i> it…", parse);
+				Text.NL();
+				Text.Add("You’re feeling a little lightheaded yourself - maybe it’s the venom in the air? Can it be inhaled, or did some of it get onto you? Then again, who cares? Stifling the impulse to laugh, you let swing zealously with the whip, the whoosh of it traveling through the air, the crack of leather against skin music to your ears. Corishev accompanies it with grunts and moans, squirming in the mixture of sweat, blood and cum that covers the floor. The overdose of Gol venom has pretty much short-circuited his senses by now, turning pain and pleasure into one.", parse);
+				Text.NL();
+				parse["la"] = player.LowerArmor() ? Text.Parse(" rip off your [lowerarmordesc] and", parse) : "";
+				Text.Add("You judge him guilty as charged on all counts! Of corruption! - a swipe, a lash, a splatter of viscous, cum-like venom. Of unlawful abduction! - you’re finding it hard not to giggle with glee, the weight of the whip’s handle the centre of your world. Of conspiracy against the good name of the crown! - the smell of the potent mixture rising from the floor is almost too much to bear now. Barely hesitating, you[la] begin to openly fondle yourself, ", parse);
+				if(player.FirstCock() && player.FirstVag())
+					Text.Add("alternating your free hand between both your [cocks] and [vag], sticky fluids dribbling down and adding to the mess on the floor as you try to get all the pleasure you can out of the strange situation.", parse);
+				else if(player.FirstCock())
+					Text.Add("jerking off your [cocks], pumping away at your shaft[s] furiously with your free hand.", parse);
 				else
-					Text.Add("You two performed well tonight, nothing less than I expected of you. Congratulations on getting Alaric out safely.”</i>", parse);
+					Text.Add("fingering yourself at the sight of justice being dealt, girl-honey running down from your [vag], onto your fingers and into the palm of your free hand, making it nice and slick.", parse);
 				Text.NL();
-				Text.Add("<i>“There is one more thing. They were prepared for us, [playername]. We still managed to pull off the diversion thanks to everyone’s grit and dedication, but the guards knew we were coming, even if the caravaneers didn’t. They turned up far sooner than we had expected them to. We didn’t get to claim much in the way of spoils from that attack, though since Alaric is free, I’ll nonetheless consider tonight a success. Still, it raises serious questions that I’ll have to look into later.</i>", parse);
+				Text.Add("Whip it! Whip it good! A misaimed blow rips apart the shirt of Corishev’s Royal Guard uniform, but you’re not too concerned. It’s sort of hard to aim with one hand, especially when you’re trying to get yourself off with the other. Too weak, dazed, or lustful - probably a combination of all three - to form any intelligible words at the tender ministrations of the whip, the lieutenant writhes and wriggles between moans and pants, beads of precum dribbling from the tip of his cock. He thrusts at the air feebly with his hips, grinding away at some invisible mate.", parse);
 				Text.NL();
-				parse["comp"] = party.Num() == 2 ? party.Get(1).name : "your companions";
-				parse["c"] = party.Num() > 1 ? Text.Parse(", and perhaps reassure [comp] that you’re fine", parse) : "";
-				parse["injured"] = injured ? "and that gash will take time to heal" : "and I’d rather not see you worn out";
-				Text.Add("<i>“Now, I suggest that you get some rest[c]. You’ve had enough adventure for a single night, [injured].”</i> With that, Zenith gives you one final nod, then turns and stalks away, his wide, easy stride eating up distance until he disappears amidst the camp’s morning activity.", parse);
-				var inc = 10;
+				Text.Add("Pain is pleasure, and pleasure is yet even more pleasure. And from the looks of it, justice is pleasure, too, which is a good thing for you. Criminals have got to be punished, after all, and doubly so if the crime is being a hypocritical bastard. By now, the whip is just an extension of your body. You move your hand just like <i>this</i>, and its very tip coils about the lieutenant’s raging erection like some kind of prehensile vine or tentacle, still infused with more than enough of the potent venom to do its work. The Gol venom seeps through skin and flesh, and you flash a triumphant smile as Corishev bucks against empty air, his member bulging and twitching against its restraints. Slowly, you ease the whip so that it unwinds like a snake climbing a tree - venom, venom everywhere - and the moment it slides off, you bring it down again onto his now tattered and torn uniform with everything you’ve got.", parse);
+				Text.NL();
+				Text.Add("It’s too much for the poor bastard to bear. With a cry of pleasure-pain, Corishev orgasms, an arc of cum shooting from the debased lieutenant’s coated cock to splatter on his legs and the floor. Despite all the fluids mixed in the mess, the only thing you can smell right now is Gol venom - a heady, heavy smell that feels synonymous with sex.", parse);
+				Text.NL();
 				
-				if(outlaws.flags["BT"] & OutlawsFlags.BullTower.ContrabandStolen) inc += 2;
-				if(outlaws.flags["BT"] & OutlawsFlags.BullTower.SafeLooted) inc += 2;
-				if(outlaws.flags["BT"] & OutlawsFlags.BullTower.CaravansSearched) inc += 2;
-				if(outlaws.flags["BT"] & OutlawsFlags.BullTower.StatueDestroyed) inc += 2;
-				if(outlaws.flags["BT"] & OutlawsFlags.BullTower.BlueRoses) inc += 2;
-				if(outlaws.BT.Suspicion() < 100) inc += 2;
-				if(score >= 10) inc += 3;
-	
-				outlaws.relation.IncreaseStat(100, inc);
-			}
-			else {
-				Text.Add("<i>“Well. You failed,”</i> Zenith states bluntly. <i>“And through no fault of Cveta’s, either - since you were de facto leader of this foray, she did all she could to aid you in your decisions, even if she didn’t agree with all of them. She did her part as a follower, but did you do yours as a leader?”</i>", parse);
+				var gen = "";
+				if(player.FirstCock()) gen += "[cocks]";
+				if(player.FirstCock() && player.FirstVag()) gen += " and ";
+				if(player.FirstVag()) gen += "[vag]";
+				parse["gen"] = Text.Parse(gen, parse);
+				
+				if(player.FirstCock() && player.FirstVag())
+					parse["gen2"] = "working both sets of your equipment";
+				else if(player.FirstCock())
+					parse["gen2"] = "jerking yourself off";
+				else
+					parse["gen2"] = "fingering yourself";
+				
+				Text.Add("You aren’t done yet, though, and you decide there’s no need to feel remorse about it; this is what he’d have done to Alaric in the end, and it’s only right that he get a taste of his own medicine. Standing over the lieutenant, you let the whip fall to the ground and focus your attentions on your [gen], a trickle of drool hanging from your open mouth as you work yourself into a frenzy [gen2].", parse);
 				Text.NL();
-				parse["c"] = outlaws.BT.foughtCorishev ? " You tried your best in attempting to save him, but alas, your best was not enough, and I won’t mince words: I don’t give points for effort." : "";
-				Text.Add("The outlaw leader paces in a small circle, each step slow and measured. <i>“This is going to be troublesome. Yes, we have a contingency plan in case you should fail to bring Alaric to us, but clearing our name is going to be much harder without his testimony. That, and one can only wonder what the Royal Guard is going to do with the man; it’s likely that we’ll never see or hear of him again.[c]</i>", parse);
-				Text.NL();
-				Text.Add("<i>“Perhaps it would have been better if I’d sent Maria instead.”</i>", parse);
-				Text.NL();
-				if(score >= 4) {
-					Text.Add("<i>“In the future, I suggest that you focus on the task at hand. Doing more than what’s strictly needed is appreciated, but not if it is a detriment to the main task.”</i>", parse);
-					Text.NL();
+				
+				var cum = player.OrgasmCum(2);
+				
+				Text.Add("It’s not long before you simply can’t hold back any more; with a groan that sets your knees trembling, you unload ", parse);
+				if(player.FirstCock()) {
+					if(cum > 4)
+						Text.Add("a veritable torrent of nice, hot cum from your [cocks] onto the dazed lieutenant. There’s so much of it, more than enough to completely soak his tattered and torn uniform and give him a good glazing. String upon string of thick, ropy seed spurts from your [cockTip][s] in a seemingly never-ending cascade, an impossibly long orgasm helped along by all the Gol venom in the air and on your skin.", parse);
+					else
+						Text.Add("burst after burst of cum from your [cockTip][s] onto the dazed lieutenant, strings of your seed arcing through the air and splattering on him in the most ignoble fashion. Moaning, eyes unfocused, you jack off furiously, coaxing every last drop of seed out of your [balls] and onto Corishev.", parse);
+					if(player.FirstVag()) {
+						Text.NL();
+						Text.Add("While your [cocks] may have had enough, the rest of your body is far from done, though. The sheer strength of the venom-assisted orgasm causes your [vag] to clench tightly about your fingers. An orgiastic spray of your girl-cum squirts from from your [vag], honey mixing in with the mess of cum your cock created.", parse);
+					}
 				}
-				Text.Add("<i>“There is one more thing. They were prepared for us, [playername]. We still managed to pull off the diversion thanks to everyone’s grit and dedication, but the guards knew we were coming, even if the caravaneers didn’t. They turned up far sooner than we had expected them to - we didn’t get to claim any spoils from that attack, which would at least have prevented this from being a complete loss.</i>", parse);
+				else {
+					Text.Add("plentiful squirts of girl-cum from your [vag] onto the dazed lieutenant, panting in pleasure as you unload your honey onto him in a glistening sheen. Desperately fingering yourself until there’s nothing left, you shudder at the exquisite sensations of the last few warm trickles running down your thighs and down to your calves.", parse);
+				}
 				Text.NL();
-				Text.Add("<i>“All in all, [playername], we are a very fair people here in this camp. Your standing depends on the goods you bring to the table, and I’m afraid I may have to reconsider your help when it comes to other sensitive tasks. Not that I doubt your loyalty to us, but it’s better to match tasks to people by their abilities. Have a good rest - too much adventure in one night is bad for one’s health.”</i> With that, he turns on his heels and strides off, taking big, determined steps, leaving you to wallow in your failure.", parse);
+				Text.Add("Well. That should quite thoroughly humiliate Preston’s lapdog. Doing your best - which, admittedly, isn’t very good - to clean yourself up, you get up on shaky feet and hurriedly dress yourself, trying to hide the worst of the cum stains. Once you’re certain you’re not going to slip on the slick floor, you stash the venom-coated whip with the rest of your belongings and hobble up the stairs to catch up with Cveta and Alaric, but not before locking the cell door behind you. Corishev will certainly be an interesting sight for his men when they get the door open and find him.", parse);
+				Text.Flush();
 				
-				outlaws.relation.DecreaseStat(-100, 10);
+				Gui.NextPrompt(function() {
+					MoveToLocation(BullTowerLoc.Building.Hall, {minute: 20});
+				});
+			}, enabled : true,
+			tooltip : "Whip him. Whip him good."
+		});
+		parse["gen"] = player.FirstVag() ? "pussy" : "ass";
+		options.push({ nameStr : "Ride",
+			func : function() {
+				Text.Clear();
+				Text.Add("The sight of the lieutenant’s limp prick gives you an idea. Sure, it’s pretty dead at the moment, but with all that Gol venom on it getting the little soldier to stand to attention shouldn’t be too hard. Your suspicions are confirmed when you reach down and get a firm hold on his flaccid prick - a few strokes are all it takes to have it up and ready, as thick and vital as it was when you entered the cell.", parse);
+				Text.NL();
+				
+				var pussy = player.FirstVag();
+				if(pussy)
+					parse["gen"] = Text.Parse("wet folds into your [vag]", parse);
+				else
+					parse["gen"] = Text.Parse("[anus]", parse);
+				
+				Text.Add("Perfect. Still not quite coherent, Corishev tries to fend you off with a weak flail of his arm, but you easily knock it away and lower yourself on top of him. Gripping his shoulders as you straddle him, you steady yourself and pin him down in one easy movement. Having positioned yourself, you’re ready now - with one violent movement, you let yourself drop, impaling yourself onto his veined, venom-slick shaft and feeling him push past your [gen].", parse);
+				Text.NL();
+				
+				if(pussy) {
+					Sex.Vaginal(corishev, player);
+					player.FuckVag(player.FirstVag(), corishev.FirstCock(), 4);
+					corishev.Fuck(corishev.FirstCock(), 4);
+					
+					BullTowerScenes.CorishevImpregnate(player, corishev, PregnancyHandler.Slot.Vag);
+				}
+				else {
+					Sex.Anal(corishev, player);
+					player.FuckAnal(player.Butt(), corishev.FirstCock(), 4);
+					corishev.Fuck(corishev.FirstCock(), 4);
+					
+					BullTowerScenes.CorishevImpregnate(player, corishev, PregnancyHandler.Slot.Butt);
+				}
+				
+				parse["target"] = Text.Parse(pussy ? "[vag]" : "[anus]", parse);
+				
+				Text.Add("Once he’s hilted to the base inside you, flashes of warmth creeping into your [target]’s inner walls as the Gol venom works its magic, you shift your weight forward and begin to ride his shaft roughly. As if eager to make sure that your fun isn’t spoiled halfway, your [target] grips his member tightly, ensuring that he isn’t going to be escaping anytime soon.", parse);
+				Text.NL();
+				Text.Add("Not that he intends to, of course. There’s not much behind those fogged eyes of his, but the lieutenant’s body responds eagerly enough to the rough, dominant fucking you’re giving him. Your grip on his shoulders tightens to the point that your knuckles are growing white. Corishev moans and struggles underneath you, the occasional crazed giggle slipping through his teeth as you administer a good heap of fucking justice upon him. There’s a certain thrill to fucking an intoxicated madman - perhaps due to the sheer danger of it all - that only makes things more exciting, and the venom encroaching upon your senses only serves to inflame that insane desire even further.", parse);
+				Text.NL();
+				Text.Add("Harder and faster you work your humiliated fucktoy, slamming your hips down on on his cock even as he instinctively rises to meet you, the pace of the grinding and slurping only quickening as sparks of pleasure erupt from the motions to send electric tingles down your spine. Perhaps remembering that he’s supposed to be trying to stop you, Corishev attempts to swat you off him from time to time, but you simply grin and quash his pathetic attempts to unseat you with ease. You give the bastard a good shaking by the shoulders and ask him how it feels to be utterly helpless and at the mercy of someone else who’s giving him a good thorough fucking.", parse);
+				Text.NL();
+				Text.Add("The only response you get is a shudder and moan as the lieutenant’s member throbs inside you, alternating between swelling and clenching as he nears his peak. Fuck that, can’t he last longer than two minutes? You’re not even halfway done! Unfortunately for you, Corishev picks that very moment to explode inside you, filling your [target] with meagre gobs of hot seed, barely enough to trickle out about the seal joining the two of you. Snarling, you keep pounding away mercilessly, the ground beneath the two of you squelching with your effort, but it seems like he’s all spent. Even with the venom aiding him, the lieutenant is softening rapidly inside you, leaving you feeling very much unsatisfied.", parse);
+				Text.NL();
+				parse["la"] = player.LowerArmor() ? Text.Parse(" and pull on your [lowerarmordesc]", parse) : "";
+				Text.Add("This is the best of Preston’s men, an idiot who can’t even last five minutes? Having fucked your fucktoy senseless, you sniff disdainfully at his form sprawled out in the midst of the sticky, slimy mess on the cell floor. Levering yourself off the unconscious Corishev, you clean yourself as best you can[la] before heading for the door, picking up the dropped whip on the way. Hey, at least it might be a little more useful than this loser here. Taking a moment to lock the cell door behind you - best to make sure he stays in there until the rest of the guards have a chance to find him - you hurry along to catch up with Cveta and Alaric, hoping they didn’t miss you too much while you were gone.", parse);
+				
+				player.AddLustFraction(0.5);
+				
+				Text.Flush();
+				
+				Gui.NextPrompt(function() {
+					MoveToLocation(BullTowerLoc.Building.Hall, {minute: 20});
+				});
+			}, enabled : true,
+			tooltip : Text.Parse("Ride Corishev’s Cock with your [gen] and show him who’s boss.", parse)
+		});
+		options.push({ nameStr : "Anal",
+			func : function() {
+				var strapon = p1cock.isStrapon;
+				
+				Text.Clear();
+				parse["c"] = Text.Parse(strapon ? "pull out and affix your strap-on, knowing that your toy will be more than enough to get the job done with maximal efficiency" : "whip out your package, feeling the venom do its work as your [cocks] swell[notS] and stiffen[notS] with alarming rapidity, internal pressure building up in your ramming rod", parse);
+				parse["c2"] = player.NumCocks() > 1 ? " the biggest of your cocks" : "";
+				Text.Add("A mad grin splitting your face from ear to ear, you grab Corishev roughly by the shoulders and flip him over, forcing him on his hands and knees, ass high in the air and presented nicely to you. He tries to fight you off, but to no avail, as you easily overpower him in his defeated state. Since he’s so used to giving, let’s see how good he is at receiving. With great gusto, you [c]. The lieutenant half-snarls, half-giggles, squirming in your grasp as he dimly realizes through his drug-fogged mind what’s about to happen, but you keep a firm hold on his thin, bony ass and thrust[c2] into him without so much as a second thought.", parse);
+				Text.NL();
+				parse["knot"] = p1cock.Knot() ? ", especially with all the whimpering and whining when you force your knot into him, its prodigious bulge grinding against his entrance" : "";
+				Text.Add("Corishev is a tight fit - he yelps and growls wordlessly as you begin to pound his pucker rhythmically; you can’t help but wonder if that ass of his was virginal[knot]. All the more humiliating for him, then - you had thought that if he’s so into power games, he would have tried being on the receiving end as well. You had planned to start slow, but maybe it’s best to make it fast and hard, break him into it a little more quickly. Giving the lieutenant’s ass a good smack that leaves your palm stinging and a growing red mark on his rump, you grin and tell him in no uncertain terms how you’re going to very thoroughly use his hole even harder than you are doing already. His ass walls clench about your shaft as he wriggles, trying to escape your vicious thrusts, but you’re expecting it by now and pull him back.", parse);
+				Text.NL();
+				parse["c"] = player.NumCocks() > 1 ? Text.Parse(", your other cock[s2] waving about and leaking pre like some ecstatic tentacled monster", parse) : "";
+				Text.Add("Just for that, you’re going to teach him even more of a lesson. Groping about on his skin for a good hold, you redouble your efforts, violating the lieutenant as best your [cock] will allow[c]. Corishev howls and yips like a mad dog at the repeated and forceful intrusions of your magnificent member, his protests growing even more forceful as you reach between his legs to jerk off his stiff cock. You touch gently at first, caressing the veins and glans with your fingertips, but before long you’ve grasped the shaft in your palm and are yanking away in tandem with the pounding you’re giving his ass.", parse);
+				Text.NL();
+				parse["c"] = strapon ? "elicit a moan of pleasure-pain from the lieutenant" : "cum over and over again into his bowels";
+				parse["c2"] = player.NumCocks() > 1 ? Text.Parse(", your other cock[s2] spraying seed all over him to drip off and mix in with the mess on the floor", parse) : "";
+				parse["knot"] = p1cock.Knot() ? " and knot" : "";
+				Text.Add("It seems doubtful that he can take much more, and to be frank, neither can you. With a final, hard thrust, you [c][c2]. Corishev’s rectum instinctively clenches down hard about your shaft[knot], his cock simultaneously expelling the remainder of his seed. Satisfied that you’ve taught the bastard a lesson in humility, you begin the arduous task of retrieving your shaft from his ass, letting him slump off you and into the puddle of sexual fluids on the floor.", parse);
+				Text.NL();
+				
+				var cum = player.OrgasmCum();
+				
+				parse["la"] = player.LowerArmor() ? Text.Parse(", don your [lowerarmordesc]", parse) : "";
+				Text.Add("Finally, done! You clean yourself up as best you can[la] and head for the exit, stopping along the way to pick up Corishev’s whip, still on the floor where it had been dropped. Taking care, you lock the cell behind you - best to make sure he stays in there until the rest of the guards have a chance to find him - and hurry to rejoin Cveta and Alaric. Hopefully you haven’t taken too long in administering that much-needed dose of discipline.", parse);
+				Text.Flush();
+				
+				Gui.NextPrompt(function() {
+					MoveToLocation(BullTowerLoc.Building.Hall, {minute: 20});
+				});
+			}, enabled : p1cock,
+			tooltip : Text.Parse("Fuck that ass of his with your [cocks].", parse)
+		});
+		options.push({ nameStr : "Reconsider",
+			func : function() {
+				Text.Clear();
+				Text.Add("Looking down at the defeated lieutenant, you shake your head. What were you thinking, wasting precious time on this? Turning heel on the scene, you stop on the way to pick up Corishev’s whip - it might be useful as a weapon - and lock the cell door behind you with the keys you found. Hopefully it’ll keep him from raising the alarm if he comes around too quickly.", parse);
+				Text.NL();
+				Text.Add("With that done, you hurry up the steps to rejoin Cveta and Alaric in the main hall.", parse);
+				Text.Flush();
+				
+				Gui.NextPrompt(function() {
+					MoveToLocation(BullTowerLoc.Building.Hall, {minute: 5});
+				});
+			}, enabled : true,
+			tooltip : "Nah, now’s not the time to be doing this."
+		});
+		Gui.SetButtonsFromList(options, false, null);
+	}
+
+
+	export function SafePrompt() {
+		let player = GAME().player;
+		let outlaws = GAME().outlaws;
+		let terry = GAME().terry;
+
+		var parse : any = {
+			playername : player.name
+		};
+		
+		//[Inspect][Unlock][Disarm][Fake Out][Leave]
+		var options = new Array();
+		options.push({ nameStr : "Inspect",
+			func : function() {
+				Text.Clear();
+				Text.Add("Leaning closer in the dim light, you take a closer look at the safe and its mechanisms. About the size of a bedside stand, it’s newer than the masonry that surrounds it, having yet to gain the coat of tarnish or rust that covers most of the metal objects remaining in the tower. Rapping on the solid steel door with your knuckles fails to produce a hollow sound - it’s unlikely you’ll be able to break into it by brute force, then.", parse);
+				Text.NL();
+				parse["t"] = Jobs.Rogue.Master(player) ? "you know enough about thieving to know that this workmanship is beyond your abilities. Something really important must be stowed away in there" :
+					terry.Recruited() ? "perhaps if Terry were here, the thief would be able to make some sense of this, but you definitely can’t" :
+					"most likely beyond your abilities to pick";
+				Text.Add("Set in the side of the safe’s door is a small, intricate keyhole - [t]. One thing’s certain: you’re not getting inside without the key. You wonder what the guards have in here that warrants such security… Just under the safe itself, framed by steel, is a thin slot at about thigh height - an obvious trap to make would-be thieves think twice about attempting to crack the safe.", parse);
+				Text.NL();
+				Text.Add("You look to Cveta to see if she has anything to say, but the songstress simply shakes her head. Should have expected as much - it’s not her area of expertise. Well, looks like it’s up to you to try and figure this one out.", parse);
+				Text.Flush();
+				outlaws.BT.inspectedSafe = true;
+				
+				BullTowerScenes.SafePrompt();
+			}, enabled : true,
+			tooltip : "Inspect the safe in detail."
+		});
+		if(outlaws.BT.inspectedSafe && !outlaws.BT.unlockedSafe) {
+			if(outlaws.flags["BT"] & OutlawsFlags.BullTower.AlaricFreed) {
+				options.push({ nameStr : "Unlock",
+					func : function() {
+						Text.Clear();
+						Text.Add("Could it be? Is it? Steadying yourself, you take out the key you picked off the lecherous lieutenant and push it into the keyhole. It’s a perfect fit, the tumblers slide smoothly, and there’s an audible click from within as the latch moves. Unfortunately, there’s also a click from the slot beneath you, something sliding into place and poised to spring once triggered.", parse);
+						Text.NL();
+						Text.Add("<i>“Well, looks like I wasn’t wrong,”</i> Alaric mumbles from behind you, forcing a grin despite his pained expression. <i>“Watch out, though, [playername]. There’s still the trap to deal with, and I’ve no idea how to prevent it from triggering once you open the door.”</i>", parse);
+						Text.Flush();
+						outlaws.BT.unlockedSafe = true;
+						
+						BullTowerScenes.SafePrompt();
+					}, enabled : true,
+					tooltip : "Open the safe with the key you acquired from the lieutenant."
+				});
 			}
+		}
+		if(outlaws.BT.unlockedSafe && !(outlaws.flags["BT"] & OutlawsFlags.BullTower.SafeLooted)) {
+			options.push({ nameStr : "Disarm",
+				func : function() {
+					Text.Clear();
+					Text.Add("Crouching down so you’re level with the slot, you do your best to take stock of the workings of the trap. Both Cveta and Alaric stand a healthy distance back as you begin to work, the latter looking distinctly nervous as you begin your fiddling.", parse);
+					Text.NL();
+					Text.Add("<i>“Be careful, friend.”</i>", parse);
+					Text.NL();
+					Text.Add("As if you needed telling. After some inspection, you’re fairly certain that this indeed is a spring-loaded blade trap, which would explain the second click you heard when unlocking the safe; the blade is designed to whip out in an arc when released, slash the would-be thief opening the safe door across the thighs, then retreat into the slot once more. As for options… you <b>could</b> try taking apart the frame that surrounds the slot and try to see if you can disarm the mechanism inside - it’s the only obvious way you could get at the trap’s inner workings, anyway. Standing, you briefly explain your findings to Cveta and Alaric.", parse);
+					Text.NL();
+					Text.Add("<i>“Are you sure you want to risk this, [playername]?”</i> the songstress whispers. <i>“If you are incapacitated here…”</i>", parse);
+					Text.NL();
+					Text.Add("Yes, you’re willing to risk this, and tell her as much. Cveta tilts her head at your words, but says nothing and steps back to watch as you kneel once more and begin your work in earnest.", parse);
+					Text.NL();
+					
+					var check = (player.Int() + player.Dex())/2 + Math.random() * 20;
+					check += player.jobs['Rogue'].level * 5;
+					
+					if(GetDEBUG()) {
+						Text.Add("Int/Dex check (with bonuses for Rogue levels): [check] vs 80", {check: check}, 'bold');
+						Text.NL();
+					}
+					
+					if(check >= 80) {
+						Text.Add("Loosening the screws on the frame with a small knife Cveta provides, you carefully ease it off the wall, widening the slot considerably. You suspected that both safe and trap weren’t here when the tower was first built, and the rectangular recess that’s been revealed makes it all but certain.", parse);
+						Text.NL();
+						if(Jobs.Rogue.Master(player))
+							Text.Add("Your mastery of rogue skills serves you well here. ", parse);
+						Text.Add("You get as close a look at the trap as you dare. Even though you can see both spring and blade glinting in the dark recess, you still have no idea how long their reach is - you study the mechanisms before making your move. It’s a surprisingly simple system; opening the safe releases a catch which allows the springs holding the blade in place to whip outward. There’s also a deadbolt that prevents the trap from triggering and must be how the lieutenant safely accesses the safe’s contents, but you see no obvious way to set it in place.", parse);
+						Text.NL();
+						Text.Add("Well, as the saying goes, there’s more than one way to skin a cat. Holding your breath and willing your fingers not to shake, you reach in with your knife and cut away at the springs. The catch looks solid, and so long as it isn’t released, you should be safe… you cut through the springs one at a time, setting them off with audible twangs until you’re sure you’re done and the trap is wholly disarmed.", parse);
+						Text.NL();
+						
+						BullTowerScenes.SafeSuccess();
+					}
+					else {
+						Text.Add("Things don’t go quite as planned, though. You must’ve fumbled somewhere, made a mistake; there’s a glint of light, the faintest of swishing sounds, and sudden, terrible pain flares up on your shoulder and across your collarbone. Just a little higher, and the blade - now wet and glistening with your blood - would have removed your head from your shoulders.", parse);
+						Text.NL();
+						
+						BullTowerScenes.SafeFailure();
+					}
+				}, enabled : true,
+				tooltip : "Attempt to disarm the trap."
+			});
+			options.push({ nameStr : "Fake Out",
+				func : function() {
+					Text.Clear();
+					Text.Add("You think it better that you don’t actually attempt to disarm the trap and instead set it off safely.", parse);
+					Text.NL();
+					Text.Add("<i>“How do you intend to do that?”</i> Alaric whispers. <i>“Surely you don’t intend to just dance out of its path?”</i>", parse);
+					Text.NL();
+					Text.Add("Why, that <i>was</i> what you’d intended, save with a few extra precautions. While the desk is fixed to the floor and can’t be moved, the chair and drawers can - and no matter how sharp this blade is, surely they’d buy you some time at the very least.", parse);
+					Text.NL();
+					Text.Add("Alaric shakes his head and looks to Cveta, but the songstress has her all-too-familiar dispassionate face on, as readable as a brick wall. With a sigh, the bean-counter takes an unsteady step back. <i>“I’ll trust you to know what you’re doing, [playername]. It would be a horrible turn of fate if you ended up being the one needing rescuing.”</i>", parse);
+					Text.NL();
+					Text.Add("It’s a risk you’re willing to take, you assure him as you shift the small chest of drawers and chair up against the slot. With how long the slot is, the maximum arc of the blade would be this much, and you guess you’d need to be this far after the trap is sprung…", parse);
+					Text.NL();
+					Text.Add("Well, you’re as ready as you’ll ever be. Feeling both Cveta and Alaric’s gazes on the back of your neck and the tension building up in your muscles, you grasp the safe’s handle with both hands and heave. There’s a slight resistance which must be the triggering mechanism, a twang of released tension, and then a flash of light as a sharp blade slices through the air and sinks into the old furniture.", parse);
+					Text.NL();
+					
+					var check = player.Dex() + Math.random() * 20;
+					check += player.jobs['Rogue'].level * 5;
+					
+					if(GetDEBUG()) {
+						Text.Add("Dex check (with bonuses for Rogue levels): [check] vs 90", {check: check}, 'bold');
+						Text.NL();
+					}
+					
+					if(check >= 90) {
+						if(Jobs.Rogue.Master(player))
+							Text.Add("Your mastery of a rogue’s reflexes comes in handy here. ", parse);
+						Text.Add("Although the blade is fast, your movements are faster - by the time it’s cleaved through the dry rot of the old furniture you’ve placed in its path, you’re well out of its range. The drawer and chair were rickety to begin with, and they’re but so many splinters now, the blade having sheared them apart with its passage.", parse);
+						Text.NL();
+						Text.Add("<i>“Wow,”</i> Alaric says after the dust has settled. <i>“Impressive.”</i>", parse);
+						Text.NL();
+						Text.Add("<i>“Perhaps, but we should not be wasting time. With the amount of noise this has created and how well sound carries in this place, I am sure someone will be coming to investigate before long. Please, [playername], would you finish opening the safe with all due haste?”</i>", parse);
+						Text.NL();
+						
+						BullTowerScenes.SafeSuccess();
+					}
+					else {
+						Text.Add("Things don’t go quite as planned, though. Weakened with years of neglect and dry rot, the chair and drawers don’t hold up as long as you’d hoped they would, nor are you as quick as you imagined you’d be. Tearing through the old wood in a shower of splinters, the blade flashes in the dim light as it sings through the air, sharp and serrated. Numbness comes first, then pain flares up on your outer thigh just under your hips. You’re vaguely aware through the sudden surge of dizziness that hits you that there’s now blood on the edge of the sprung blade - blood that used to be in your body.", parse);
+						Text.NL();
+						
+						BullTowerScenes.SafeFailure();
+					}
+				}, enabled : true,
+				tooltip : "Attempt to set off the trap safely."
+			});
+		}
+		Gui.SetButtonsFromList(options, true, function() {
+			Text.Clear();
+			Text.Add("Taking one last look at the safe, you shake your head and turn your back on it. You decide to leave the steel-bound thing for later - it’s not as if it’ll be going anywhere should you change your mind, after all.", parse);
 			Text.Flush();
 			
 			Gui.NextPrompt();
-			
-			outlaws.mainQuestTimer = new Time(0,0,3,0,0);
 		});
+	}
+
+	export function SafeSuccess() {
+		let player = GAME().player;
+		let outlaws = GAME().outlaws;
+
+		var parse : any = {
+			playername : player.name
+		};
 		
-	});
-	
-}
-
-
-//#This will trigger three days after the event if the player saved Alaric.
-BullTowerScenes.AftermathAlaric = function() {
-	let player = GAME().player;
-	let outlaws = GAME().outlaws;
-
-	var parse : any = {
-		playername : player.name
-	};
-	
-	Text.Clear();
-	Text.Add("A curious sight greets you as you enter the outlaw camp. Standing by the drawbridge is Alaric, the little bean-counter all dressed and with a single sackcloth bag in hand. He’s healed up decently - though some of the lash marks are going to leave scars, alas - and looks up at you in surprise when he sees you.", parse);
-	Text.NL();
-	Text.Add("<i>“[playername].”</i>", parse);
-	Text.NL();
-	Text.Add("Leaving already?", parse);
-	Text.NL();
-	Text.Add("<i>“Well, yes,”</i> he replies, a little flustered. <i>“I wanted to see you, to thank you properly for getting me out of the Royal Guard’s hands, but couldn’t find you anywhere in camp. People said you move around a lot and didn’t know when you’d be back, so I thought of leaving a note…”</i>", parse);
-	Text.NL();
-	Text.Add("Well, it seems like that won’t be necessary.", parse);
-	Text.NL();
-	Text.Add("<i>“Um. Well. Thanks. I’ve already told Zenith what I know of the whole matter, and he seemed satisfied with just that, so…”</i>", parse);
-	Text.NL();
-	Text.Add("You don’t need anything from him. You aren’t going to press Alaric when he’s already unsure about his future. But would he mind sharing his story with you as well before he goes? There wasn’t time for much conversation back in Bull Tower, after all, and you’d like to know his side of the tale.", parse);
-	Text.NL();
-	Text.Add("<i>“Well, I suppose it can’t hurt. What’s going over it one more time?”</i> he sits down on his luggage and hunches over, putting his chin in his hands, then invites you to sit beside him. <i>“I think I mentioned back there that I worked for the Treasury. Not as anyone important, just a number adder doing the incoming taxes and tariffs I was assigned, and handling the monthly balance account statement for my department. Both eventually got me into trouble.</i>", parse);
-	Text.NL();
-	Text.Add("<i>“I was just too good at my job, I guess. The first thing I noticed was that some of the income statements submitted by a number of nobles just didn’t match up with what their businesses were reporting. It’s not that they hadn’t tried to cook the books, but at the end of the day who’s going to believe that a cartload of chickens was sold at four or five times market price on every Tuesday?”</i>", parse);
-	Text.NL();
-	Text.Add("An honest accountant? Will wonders never cease? Next thing you know, an honest advocate will pop up in this neck of the woods.", parse);
-	Text.Flush();
-	
-	TimeStep({minute: 10});
-	
-	Gui.NextPrompt(function() {
-		Text.Clear();
-		Text.Add("<i>“I’d rather you not belittle my profession,”</i> Alaric huffs. <i>“I know we don’t exactly have the best of reputations, there’s no need to press home the point.</i>", parse);
+		Text.Add("Wasting no time, you fling open the safe and reach greedily into its recesses. Alaric’s eyes grow wide at the sight of the small fortune stashed inside, and even Cveta is impressed enough to raise an eyebrow. No wonder the guards went to such lengths to secure the safe - and it also explains how Preston managed to afford the statue, amongst other things.", parse);
 		Text.NL();
-		Text.Add("<i>“Well, after a few pages’ worth of overpriced chickens, highly-valued fruit, and sweetmeats that must been gemstones the way they were priced, I went and reported my findings to my superiors. Sure, I was a little naive, but the Treasury is supposed to be under the direct purview of Rewyn himself and I had all the evidence down in black and white. All of it. He should have been happy to realize that he was been fleeced…”</i>", parse);
+		Text.Add("<i>“We should take these coin bags with us,”</i> Alaric says, grinning weakly. <i>“Shouldn’t leave valuables like that lying around. Someone might…uh, steal them.”</i>", parse);
 		Text.NL();
-		Text.Add("But it didn’t work out that way, did it?", parse);
+		Text.Add("<i>“If that was a jest, it failed to provoke much amusement on my part,”</i> Cveta replies dryly. <i>“However, I am in agreement that we should purloin the Royal Guard’s ill-gotten gains. It will be valuable evidence that they have been ‘on the take’, as I believe it is called.”</i>", parse);
 		Text.NL();
-		Text.Add("<i>“No, it didn’t. I was told to keep quiet and forget all about it. Naturally, that only spurred me to dig deeper - and I guess I must’ve dug too deep too visibly, because next thing I know, I’m hearing unsettling rumors about Majid taking an interest in our affairs at the counting-house. You know. Rewyn’s advisor. That strange man.”</i>", parse);
+		Text.Add("Even consider leaving the lot after you went to so much trouble to get at it? Perish the thought! The money bags are as heavy as they look, but you’re certain that you can get out with them in tow. Even Alaric, injured as he is, manages to summon up the strength to heft one of the smaller bags over his shoulder.", parse);
 		Text.NL();
-		Text.Add("And that was important because…?", parse);
+		Text.Add("Well then. There’s nothing left for you in this room - time to move along before someone thinks to check in on all the noise.", parse);
 		Text.NL();
-		Text.Add("<i>“Because while I had no concrete evidence, what I’d dug up strongly suggested that Majid had been siphoning off money from the treasury. His embezzlement was always careful - never too much at one time, and always attached to legitimate expenses. Nevertheless, a few hundred or thousand coins here and there, tacked onto the bills for many projects… it added up to a considerable sum.</i>", parse);
-		Text.NL();
-		Text.Add("<i>“Nevertheless, I got spooked. Thought I’d take an unpaid leave of absence, hide out at my sister’s in the countryside, lie low for a few weeks until this thing blew over. Then I got stopped on the King’s Road, and… well, you know the rest.”</i>", parse);
-		Text.NL();
-		Text.Add("Indeed, you do. Well then, what is he going to do now? It’s not as if he can waltz back into his old job at the treasury.", parse);
-		Text.NL();
-		Text.Add("Alaric turns away from you at your words. <i>“Yeah. I can’t go back. Zenith advised me against even trying to see any of my family - I’d only be putting them in danger, since the Royal Guard is likely to have someone watching them on the chance I turn up at their doorsteps. He said he’d sneak a message to them, though, so they aren’t left wondering what happened to me.", parse);
-		Text.NL();
-		Text.Add("<i>“I’m going to be shipped off near the Free Cities, where Zenith knows someone who needs a good accountant to do the bookkeeping and, more importantly, where Majid won’t be able to get at me.”</i>", parse);
-		Text.NL();
-		Text.Add("Is he certain it’s connected? That Majid set the Royal Guard on him, that is.", parse);
-		Text.NL();
-		Text.Add("Alaric shrugs. <i>“As I said, I don’t have any concrete evidence. But he had a motive, since I was snooping around his accounts, and he definitely has the authority to order around the Royal Guard and create the proclamations blaming the outlaws for my disappearance. It’s just a hunch, and yes, I could be wrong - but it were my hunches which led me to discovering the errors in both the nobles’ and Majid’s accounts.”</i>", parse);
-		Text.NL();
-		Text.Add("Hmm. Majid.", parse);
-		Text.NL();
-		Text.Add("<i>“Alaric!”</i> a rather gruff voice calls from the other side of the camp wall. <i>“You done? We’re about to set off!”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“Well, it looks like I should be going now.”</i> Gritting his teeth with the effort, Alaric stands and hefts his luggage over his shoulder. <i>“I’ll have an escort to the Free Cities and we won’t be taking the King’s Road, so don’t worry about me. If you ever find yourself there, don’t hesitate to find me at this address.”</i> He hands you a slip of paper. <i>“Well then, [playername]. Thanks again, and keep yourself safe. Or at least, safer than I’ve been.”</i>", parse);
-		Text.NL();
-		Text.Add("One last thing. The Lieutenant clearly expected Cveta and you, which would explain why all the guards in the fortress were on high alert that night. Does he know anything about that?", parse);
-		Text.NL();
-		Text.Add("<i>“Sadly, I don’t. But if the information got out… [playername], usually that means someone passed it on. A spy, if you will. Well, that’s all I’ve got. Please, if you ever find yourself in the Free Cities, I’d like to extend my welcome again. I owe my life to you, after all.”</i>", parse);
-		Text.NL();
-		Text.Add("With that, the little bean-counter gives you a final wave and hobbles off. The camp guards hurry to lower the drawbridge so he can cross, and after a moment, he turns and is out of sight.", parse);
+		Text.Add("You loot a few bags of coins from the safe.", parse, 'bold')
 		Text.Flush();
 		
-		TimeStep({minute: 20});
-		
-		outlaws.mainQuestTimer = new Time(0,0,1,0,0);
-		
-		outlaws.flags["BullTower"] = OutlawsFlags.BullTowerQuest.AlaricFollowup;
+		outlaws.flags["BT"] |= OutlawsFlags.BullTower.SafeLooted;
 		
 		Gui.NextPrompt();
-	});
-}
+	}
 
-
-//#Triggers one day after the Alaric scene if the player has at least stolen the goods and payoff.
-BullTowerScenes.AftermathZenith = function() {
-	let player = GAME().player;
-	let party : Party = GAME().party;
-	let outlaws = GAME().outlaws;
-
-	var parse : any = {
-		playername : player.name
-	};
-	
-	Text.Clear();
-	Text.Add("As you approaching the outlaw camp, something about it strikes you as odd. Is it just you, or do the guards look a little on edge today? You don’t have long to wonder, though - the moment you step over the drawbridge and into the camp, one of the guards, the fox-morph - comes marching up to you.", parse);
-	Text.NL();
-	Text.Add("<i>“[playername]?”</i>", parse);
-	Text.NL();
-	Text.Add("That would indeed be you, yes.", parse);
-	Text.NL();
-	Text.Add("<i>“The chief’s made it known that he wants a word with you. If we see so much as your shadow, we’re to let you know you ought to wait in his place.”</i>", parse);
-	Text.NL();
-	Text.Add("What about, though?", parse);
-	Text.NL();
-	parse["comp"] = party.Num() == 2 ? party.Get(1).name : "your companions";
-	parse["c"] = party.Num() > 1 ? Text.Parse(" and [comp]", parse) : "";
-	parse["c2"] = party.Num() > 1 ? "yourselves" : "yourself";
-	Text.Add("<i>“He didn’t say, although it sounded important. Guess you should go find out.”</i> With that, the fox-morph turns and heads back to his post, leaving you to find your own way to Zenith’s place. The building is easy to find - you’re not likely to forget the day you learned of the outlaws, after all - and no one stops you as you open the door and step inside. The table with the map is still there, the papers too; there are some chairs in a corner, and you[c] seat [c2] there, waiting for Zenith to turn up.", parse);
-	Text.NL();
-	Text.Add("You don’t have to wait long. The outlaw leader is in an uncharacteristically good mood, throwing the door open with a resounding slam as he enters the room. The grin on Zenith’s face grows even wider when he sees you, and he crosses the map room in a few easy strides to give you a generous, crushing hug.", parse);
-	Text.NL();
-	Text.Add("<i>“[playername]! I came the moment the guard told me you’d come visiting. I trust that you’ve not had too much adventure yet?”</i>", parse);
-	Text.NL();
-	Text.Add("Very nice, but if he’d let go of you…", parse);
-	Text.NL();
-	Text.Add("<i>“Right, right. Sorry about that.”</i> The hug is released as quickly as it’d engulfed you, and you feel good, clean air flowing into your lungs. <i>“I wanted you to know that we’ve managed to fence off a good number of the gemstones you brought back a few days ago. Combined with all the money you lifted off the Royal Guard, we’re definitely going to be able to purchase a number of much-needed supplies and maybe even make a few improvements to the camp.”</i>", parse);
-	Text.NL();
-	Text.Add("Well, that would explain why Zenith is feeling upbeat today. But why call you out?", parse);
-	Text.NL();
-	Text.Add("<i>“Well, you did a good job. Maria, Aquilius and I discussed it amongst ourselves and we’ve decided to give you a cut.”</i>", parse);
-	Text.NL();
-	Text.Add("A cut?", parse);
-	Text.NL();
-	Text.Add("<i>“Yes, a cut. A moment, please.”</i>", parse);
-	Text.NL();
-	Text.Add("Without another word, the badger-morph strides to the opposite corner of the room and reaches into the shadows, drawing out a rather large bundle wrapped in paper and cord. With much aplomb, he returns to you and thrusts the bundle into your hands. <i>“While Aquilius and I were out getting a good price for your gems from the fences, we spotted something you might like. Why don’t you open it and see?”</i>", parse);
-	Text.NL();
-	Text.Add("He’s so eager and expectant that it’d be a travesty to refuse. Carefully, you unwrap the cord and paper to draw out a small shortsword. It’s rather plain, save for the rubies set into either side of the crossguard. You peer into the gems’ depths, each ruby as large as an eyeball, and notice runes embedded in each.", parse);
-	if(Jobs.Mage.Unlocked(player))
-		Text.Add(" There’s little doubt about it; the sword is enchanted. It’s not a very potent spell, but it’s strong enough for you to sense the magical aura, concentrated about the gems and extending through the blade.", parse);
-	Text.NL();
-	
-	//#Gain jeweled mageblade.
-	party.Inv().AddItem(WeaponsItems.JeweledMageblade);
-	
-	Text.Add("<i>“I’d be careful with that, if I were you. All you need to do is to grab its hilt, think hard, and the blade bursts into flame. Then, think hard about it going out, and it does just that. The fence was going to charge us a pretty penny for it - with it being magic and all - but we haggled the price down to something more reasonable. I think you’ve earned that much.”</i>", parse);
-	Text.NL();
-	if(outlaws.flags["BT"] & OutlawsFlags.BullTower.PerfectScore) {
-		Text.Add("<i>“That’s not all, though.”</i> Zenith produces another wrapped package, flatter and rounder than the first, then presses it into your hands. <i>“We heard that Preston’s been in a terrible mood for the last few days, and it’s all thanks to our efforts. Thought we’d spread the extra cheer around. Go on, open it.”</i>", parse);
+	export function SafeFailure() {
+		let player = GAME().player;
+		
+		var parse : any = {
+			playername : player.name,
+			heshe : player.mfTrue("he", "she")
+		};
+		
+		Text.Add("With how hard you’re clenching your teeth in a bid not to scream, it’s only through good fortune that you don’t bite off your tongue. Staggering away from the safe, blood seeping into your clothing, you manage to stay upright just long enough for Alaric and Cveta to catch you before you slump to the ground.", parse);
 		Text.NL();
-		Text.Add("Tearing apart cord and paper, you find a small buckler inside, polished and gleaming. No doubt there’s supposed to be some kind of irony here…", parse);
+		Text.Add("<i>“[playername]! Alaric, your shirt.”</i> Is that Cveta speaking? It probably is, but it’s hard to be completely certain through the warm haze that’s creeping in around your senses. Everything feels lighter, fluffier…", parse);
 		Text.NL();
-		Text.Add("<i>“Oh, I’m sure you’ll scratch and dent it soon enough so it won’t hold a proper shine,”</i> the badger-morph says, grinning as he claps you on the shoulder.", parse);
+		Text.Add("<i>“Huh?”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Your clothing is already mostly rags, and we need to staunch the bleeding. Your shirt, now.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Right!”</i>", parse);
+		Text.NL();
+		Text.Add("What happens afterward is a bit of a blur. Bursts of pain lance through your consciousness, providing sharp moments of clarity that rapidly sink back into the dull haze that shrouds your mind. Something tight is tied about your wound, staunching the pain a little, and you’re grateful for that. Support comes by way of a gentle pressure under your arms, and you inch forward, one step at a time, seeking the music.", parse);
+		Text.NL();
+		Text.Add("The music. Where did it come from? Where is it leading you? Such questions melt away into insignificance; the music fills the world, <i>is</i> the world. A small bird of golden orange light flutters on in the darkness, its aura trailing behind it; you do your best to follow the warm melody, your steps faltering but never failing.", parse);
+		Text.NL();
+		Text.Add("<i>“Is [heshe] going to bleed out? I knew trying to open that safe was a bad idea!”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“…Hindsight… do not complain… keep moving…”</i>", parse);
+		Text.Flush();
+		
+		Gui.NextPrompt(function() {
+			BullTowerScenes.EndingInjured();
+		});
+	}
+
+	export function Coversations(outside : boolean) {
+		let outlaws = GAME().outlaws;
+
+		var parse : any = {
+			a : outlaws.flags["BT"] & OutlawsFlags.BullTower.AlaricFreed ? " and Alaric" : ""
+		};
+		
+		Text.Clear();
+		
+		var scenes = new EncounterTable();
+		scenes.AddEnc(function() {
+			Text.Add("Lurking about in the deep shadows cast by the walls, you hear snatches of conversation drifting down from the ramparts:", parse);
+		}, 1.0, function() { return outside; });
+		scenes.AddEnc(function() {
+			Text.Add("Crouched in the tall grass that surrounds the tower proper, you overhear two silhouettes chatting as they make their rounds:", parse);
+		}, 1.0, function() { return outside; });
+		scenes.AddEnc(function() {
+			Text.Add("The interior of Bull Tower might be solid stone, but sound echoes easily through the ancient hallways. Cveta quickly ducks into a shadowed alcove and you[a] follow suit as footsteps pass by, their owners unseen:", parse);
+		}, 1.0, function() { return !outside; });
+		
+		scenes.Get();
+		
 		Text.NL();
 		
-		//#Gain silvered buckler.		
-		party.Inv().AddItem(AccItems.SilverBuckler);
+		var scenes = new EncounterTable();
+		scenes.AddEnc(function() {
+			Text.Add("<i>“So… why’d you join up, anyway?”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“You want to know? You really want to know?”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Yeah.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“The outfit’s good, and it’s okay pay.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“What? That’s all?”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“What did you expect? Work is hard to come by these days…”</i>", parse);
+		}, 1.0, function() { return true; });
+		scenes.AddEnc(function() {
+			Text.Add("<i>“You think that blast down the road is what we were told to prepare for?”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“What else would it be? Bloody forest-dwelling outlaws.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“I dunno, I’m just glad I’m not the one who has to check it out.”</i>", parse);
+		}, 1.0, function() { return true; });
+		scenes.AddEnc(function() {
+			Text.Add("<i>“So what’s up with the statue they brought in earlier today?”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“I think it’s for his garden. That, and the blue roses, too. That second one came all the way from the Tree, I heard.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“I knew Preston can be full of it, but what sort of ass has a damned <b>statue</b> of himself made? He’s worse than my mother-in-law!”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“I wouldn’t let the lieutenant catch you saying that if I were you… he’ll take any excuse to use that whip of his.”</i>", parse);
+		}, 1.0, function() { return true; });
+		scenes.AddEnc(function() {
+			Text.Add("<i>“This isn’t right, you know.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“What isn’t?”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“This! We should be in the streets of Rigard, in the palace defending his Majesty and the rest of the royal family, not lurking about in this old dump. Calling it a ‘special assignment’ doesn’t change what it is. I feel like we’re just no-name bit-parters in some stage production. You know, the kind who’re just there to be a minor annoyance to the hero and are never remembered…”</i>", parse);
+		}, 1.0, function() { return true; });
+		scenes.AddEnc(function() {
+			Text.Add("<i>“Where’s the little guy?”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“In the cells. Lieutenant’s interrogating him right now.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Ooh, nasty.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Standing orders are for him not to be disturbed, no matter what we hear coming from inside.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Anyone told him about the explosion down the road yet?”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Fred went down earlier, although he took a lot of convincing.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“I don’t blame him - I don’t want to be down there, either. Well, you can’t deny that he gets results, especially with that odd venom he uses…”</i>", parse);
+		}, 1.0, function() { return true; });
+		scenes.AddEnc(function() {
+			Text.Add("<i>“You know that brothel we raided the other day? That one in the slums? You didn’t hear it from me, but I think someone high up was refused service and asked Preston to do something about it.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“You sure about that?”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Everyone gets that his whole ‘The Shining’ schtick is as fake as a strap-on, and you ought to know better.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Not saying that it isn’t - armor should be too battered and dented to take a good shine - but how do you know that <b>this</b> raid wasn’t legit? We did see some weird shit in there…”</i>", parse);
+		}, 1.0, function() { return true; });
+		scenes.AddEnc(function() {
+			Text.Add("<i>“I can’t believe we’re out here in the cold of night on some emergency. I was supposed to be off duty, damn it! Fuck Preston!”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“You shouldn’t speak of him that way.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Why not? He certainly deserves it, and you know as much. Why, you gonna snitch on me, old man?”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“It’s not that. He wasn’t always like that. His first assignment, during the rebellion... things didn’t go down the way it’s told in the books. Something happened to him… I was there when it happened, you know. Saw it with my own eyes. Preston was never the same man after that.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Ooh, tell me more…”</i>", parse);
+		}, 1.0, function() { return true; });
+		scenes.AddEnc(function() {
+			Text.Add("<i>“So, everything’s in the warehouse?”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Locked up tight; Jimmy has the key, and he’s on caravan duty. Spirits, my back aches, and it’s only going to get worse tomorrow.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Well, I said to lift with your knees, but would you listen?”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Shut up, Fred. I didn’t sign on with the Royal Guard to be a stevedore.”</i>", parse);
+		}, 1.0, function() { return true; });
+		scenes.AddEnc(function() {
+			Text.Add("<i>“…Taking down tough guys isn’t that bad. At least when you beat them, they’ve the brains to know when they’re beat. No, it’s the crazy ones you have to worry about.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Like that little guy we tried to pull for loitering the other day?”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Yeah, or like the Lieutenant when he’s hopped up on Gol venom. He’s bearable otherwise, but let him get at the stuff… ugh. I saw what happened to Randell - and just for fidgeting during parade. Five lashes in front of everyone.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Y’know, for someone who calls himself the Shining, I wonder why Preston puts up with someone like that.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“That’s ‘cause he does all the stuff Preston won’t dirty his hands with…”</i>", parse);
+		}, 1.0, function() { return true; });
+		scenes.AddEnc(function() {
+			Text.Add("<i>“Something is up tonight, and I don’t like it.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“You mean the explosion down the road?”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Not just that… something’s up inside the fort. Feels like there’s eyes watching me from the shadows...”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“You were always paranoid.”</i>", parse);
+		}, 3.0, function() { return outlaws.BT.Suspicion() >= 50; });
+
+		scenes.Get();
+		
+		Text.NL();
+		
+		Gui.PrintDefaultOptions(true);
 	}
-	Text.Add("Putting away the gifts, you thank Zenith.", parse);
-	Text.NL();
-	Text.Add("He brushes off your words with an easy wave. <i>“You’ve earned them. Back in the day, the Guilds rewarded those who had ability and worked hard. They may no longer exist, but I’ve kept that tradition alive.</i>", parse);
-	Text.NL();
-	Text.Add("<i>“So long as you continue to prove your worth, friend, I’ll be more than happy to reward you. Now, if there’s nothing else, might I trouble you to step out? We’re going to have a little meeting here at the turn of the hour, discuss our strategy in light of recent events. Terribly boring stuff, I assure you,”</i> he adds, evidently noticing the question on your face.", parse);
-	Text.NL();
-	Text.Add("You nod and stand, thanking the badger-morph once again. He simply shrugs, grins, and ushers you out with your new possessions, leaving you to take in the cool, fresh air of the outlaw camp.", parse);
-	Text.Flush();
-	
-	TimeStep({hour: 1});
-	
-	outlaws.flags["BullTower"] = OutlawsFlags.BullTowerQuest.ZenithFollowup;
-	
-	Gui.NextPrompt();
+
+	export function EndingSlipOut() {
+		let party : Party = GAME().party;
+		let outlaws = GAME().outlaws;
+
+		var parse : any = {
+			
+		};
+		
+		var stole = outlaws.BT.StoleSomething();
+		
+		party.LoadActiveParty();
+		
+		Text.Clear();
+		Text.Add("Well, there’s nothing left for you here. Time to get out and go home - without further ado, you urge Cveta and Alaric into position, the three of you walking abreast. Alaric helped along between the two of you. The little bean-counter looks unsure at the idea of just sauntering by the gate guards, but you reassure him that Cveta’s voice will hold.", parse);
+		Text.NL();
+		Text.Add("And indeed, it does. Tromping through the archway as if you have every right to be there, the three of you don’t raise a single objection from the spellbound men as you slip across the King’s Road and disappear into the nearby woods. From there, it’s a long, slow walk back to the outlaws’ camp - despite the fact that there was still fighting going on on the road when you left, Zenith is there to receive you as you cross the drawbridge into the camp proper, arms folded as he waits to receive your report. The badger-morph is positively scruffy and reeks of dirt, blood and sweat, but remains composed as he greets you.", parse);
+		Text.NL();
+		Text.Add("<i>“You’ve returned,”</i> he says. <i>“And it seems you’ve brought back our friend, although he could use some attention from Aquilius. Someone send him over, please.”</i>", parse);
+		Text.NL();
+		parse["stole"] = stole ? " who also unburden you of your purloined goods," : "";
+		Text.Add("As Alaric is led away by a couple of dog-morphs,[stole] you briefly recount the details of your little adventure, Cveta backing you up every so often with her version of events. Zenith listens intently to your story, then gives you a brisk nod when you’re done.", parse);
+		
+		BullTowerScenes.EndingDebrief(false);
+	}
+
+	export function EndingFailure() {
+		let party : Party = GAME().party;
+		let outlaws = GAME().outlaws;
+
+		var freed = outlaws.flags["BT"] & OutlawsFlags.BullTower.AlaricFreed;
+		var parse : any = {
+			two : freed ? "three" : "two",
+			al : freed ? " and Alaric" : ""
+		};
+		
+		var stole = outlaws.BT.StoleSomething();
+		
+		party.LoadActiveParty();
+		
+		Text.Add("Making a mad dash for the gates before someone has the chance to draw them shut, the [two] of you bowl past the gate guards. Fortunately, you take them by surprise and are out of reach before they can gather their senses enough to give pursuit; thankfully, the cover of night is deep, and the woods by the King’s Road close enough for you to slip between the trees and vanish into their shadows. A few minutes later, you hear the detachment of Royal Guards return, their lanterns lighting up the road as you watch from the treeline.", parse);
+		Text.NL();
+		Text.Add("<i>“That did not go as expected,”</i> Cveta mutters, finally able to stop and catch her breath.", parse);
+		Text.NL();
+		Text.Add("No, it didn’t.", parse);
+		if(freed) {
+			Text.Add(" You turn to Alaric - supported between the two of you, the little accountant has somehow managed to keep up on your flight out of the fortress and into the woods, despite his rapid, harried breathing on your run. Clearly unaccustomed to physical activity even at the best of times, Alaric wheezes and splutters as he gasps for breath, and it’s a good five minutes before he recovers enough to be able to speak. Some of his wounds have reopened from the exertion, and he rubs at them in a bid to staunch the blood trickling down his arms and back.", parse);
+			Text.NL();
+			Text.Add("<i>“Gah! First time I’ve had to run for my life, although knowing my luck, it won’t be the last.”</i>", parse);
+		}
+		Text.NL();
+		Text.Add("From your hiding spot amongst the trees, you take one last look back at Bull Tower. With it being rife with activity - no doubt caused by the discovery of your presence - it’s going to be impossible to head back anytime soon, not with search parties fanning out from the fortress and the ramparts lit up like a festival day. For better or worse, it’s time for you to head back and report to Zenith. Cveta[al] in tow, you turn and begin the long journey back to the outlaws’ camp.", parse);
+		Text.NL();
+		Text.Add("It’s nearly dawn by the time you return, and the camp guards let down the drawbridge for you to enter. Zenith is already waiting for you by the entrance, the badger-morph standing with his arms folded and looking at you expectantly. ", parse);
+		if(freed) {
+			parse["stole"] = stole ? " who also relieve you of your purloined goods," : "";
+			Text.Add("Alaric is led away by a couple of dog-morphs,[stole] and you", parse);
+		}
+		else {
+			parse["stole"] = stole ? "relieve you of your purloined goods, and you" : "stand ready to take the material proceeds of your infiltration, and are left looking at you in bemusement as they realize you’ve returned with nothing. You";
+			Text.Add("A couple of dog-morphs [stole]", parse);
+		}
+		Text.Add(" briefly recount the details of your little adventure, Cveta backing you up every so often with her version of events. Zenith listens intently to your story, then gives you a brisk nod when you’re done.", parse);
+		
+		BullTowerScenes.EndingDebrief(false);
+	}
+
+	export function EndingInjured() {
+		let player = GAME().player;
+		let party : Party = GAME().party;
+		let kiakai = GAME().kiakai;
+		
+		var parse : any = {
+			playername : player.name,
+			name : kiakai.name
+		};
+		
+		party.LoadActiveParty();
+		
+		TimeStep({hour: 6});
+		
+		Text.Clear();
+		Text.Add("When you eventually come to, you find yourself lying on a stretcher - no, it’s a cot - and at length the familiar hustle and bustle of the bandit camp comes to your ears. Muffled curses, the sounds of wood being chopped, a child laughing while dogs bark away; ah, it’s good to be back, even if you’re rather unclear on the how.", parse);
+		Text.NL();
+		Text.Add("<i>“Don’t sit up. I know you probably feel like you ought to, but with all the blood you’ve lost, you’ll probably just end up on the cot again. I don’t know what you did to earn that gash, and with it being as deep as it was, I don’t think I want to find out. Painfully close to a major artery there.”</i> The voice is gentle but distinctly masculine, and you turn your gaze to its source to find its owner: Aquillus.", parse);
+		Text.NL();
+		parse["k"] = party.InParty(kiakai) ? " with a little help from your elf friend there," : "";
+		Text.Add("<i>“Nevertheless,[k] I was able to pull you out of danger. You’ll be weak for a while yet, but at least you’re no longer in danger of bleeding out. Zenith will want to know that you’ve come to - why don’t you make yourself comfortable while I go get him?”</i>", parse);
+		Text.NL();
+		if(party.InParty(kiakai)) {
+			Text.Add("Scarcely has Aquilius left, though, than [name] comes practically bounding in through the flaps, coming to a stop by your bedside.", parse);
+			Text.NL();
+			Text.Add("<i>“[playername]! [playername]! You are awake!”</i>", parse);
+			Text.NL();
+			Text.Add("You reassure [name] that you’re still in one piece, and intend to stay that way for the foreseeable future. As for feeling fine… well, you’ve had better days, but you’ll be better once you’ve had a lie-down.", parse);
+			Text.NL();
+			Text.Add("<i>“I was shocked at the condition you were in when you were brought into the camp. Aquilius is a skilled surgeon, but his bedside manner leaves much to be desired. I had to plead with him at some length to persuade him to allow me to aid in your recovery.”</i>", parse);
+			Text.NL();
+			Text.Add("Your thoughts drift back to when you first arrived in Eden, and nod. Yes, you can definitely see Aquilius protesting [name]’s methods, regardless of their efficacy. After a few more reassurances and gently refused attempts of the poor elf to start fussing over you, you finally manage to convince [name] to give you some quiet time before Aquilius returns.", parse);
+			Text.NL();
+		}
+		Text.Add("Finally, you have a little time alone to examine yourself. You tilt your head forward to get a look at Aquilus’ handiwork. The safe’s blade trap definitely did a number on you, judging by the extensive coverage of the bandages that Aquilius has dressed your wound with, and you’re pretty sure you can feel the gentle pull of thread against flesh at your slight movement. The bandages themselves have been soaked in something that smells vaguely antiseptic and completely awful, and with how much of your blood has found its way into them, are going to need changing soon.", parse);
+		Text.NL();
+		Text.Add("Just how did you manage to make it all the way back from Bull Tower? Certainly neither Cveta nor Alaric could have carried you such a long way… that train of thought is interrupted when the tent flaps are drawn once more, and Aquilius returns with Zenith in tow. The outlaw leader passes his firm gaze over you a couple times, then purses his lips.", parse);
+		Text.NL();
+		Text.Add("<i>“Bad, but I’ve seen worse in my time. I’ll agree with Aquilius here - you’ll live.”</i>", parse);
+		Text.NL();
+		Text.Add("Aquilius shrugs. <i>“You won’t have to come back later to get those stitches removed. The thread I used is a rare plant fiber - just leave them in, and they’ll melt into your flesh as you heal.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Thank you, Aquilius. Now, while Cveta gets Alaric settled in with us, let’s review the events of your evening, shall we? I’ve heard most of the story from Cveta, but I’d like to get your version of events.”</i>", parse);
+		Text.NL();
+		Text.Add("Although you find yourself getting quickly tired from talking, you do your best to recount the events as you remember them, careful to not leave out any details.", parse);
+		
+		BullTowerScenes.EndingDebrief(true);
+	}
+
+	export function EndingDebrief(injured : boolean) {
+		let player = GAME().player;
+		let party : Party = GAME().party;
+		let outlaws = GAME().outlaws;
+
+		var parse : any = {
+			playername : player.name
+		};
+		
+		party.location = WORLD().loc.Outlaws.Camp;
+		TimeStep({hour: 3});
+		
+		Text.Flush();
+		
+		outlaws.flags["BullTower"] = OutlawsFlags.BullTowerQuest.Completed;
+		
+		var foundOut = outlaws.BT.Suspicion() >= 100;
+		if(outlaws.BT.foughtCorishev && !(outlaws.AlaricSaved()))
+			foundOut = true;
+		
+		var score = 0;
+		if(outlaws.flags["BT"] & OutlawsFlags.BullTower.AlaricFreed)      score += 2;
+		if(outlaws.flags["BT"] & OutlawsFlags.BullTower.ContrabandStolen) score += 1;
+		if(outlaws.flags["BT"] & OutlawsFlags.BullTower.BlueRoses)        score += 1;
+		if(outlaws.flags["BT"] & OutlawsFlags.BullTower.StatueDestroyed)  score += 1;
+		if(outlaws.flags["BT"] & OutlawsFlags.BullTower.AnimalsFreed)     score += 1;
+		if(outlaws.flags["BT"] & OutlawsFlags.BullTower.SafeLooted)       score += 1;
+		if(outlaws.flags["BT"] & OutlawsFlags.BullTower.CaravansIgnited)  score += 1;
+		if(outlaws.flags["BT"] & OutlawsFlags.BullTower.CaravansSearched) score += 1;
+		if(!foundOut) score += 1;
+		//TOTAL: 10
+		if(score >= 10) outlaws.flags["BT"] |= OutlawsFlags.BullTower.PerfectScore;
+		
+		var relevant = false;
+		if(outlaws.flags["BT"] & OutlawsFlags.BullTower.ContrabandStolen) relevant = true;
+		if(outlaws.flags["BT"] & OutlawsFlags.BullTower.StatueDestroyed) relevant = true;
+		if(outlaws.flags["BT"] & OutlawsFlags.BullTower.SafeLooted) relevant = true;
+		if(outlaws.flags["BT"] & OutlawsFlags.BullTower.CaravansSearched) relevant = true;
+		if(outlaws.flags["BT"] & OutlawsFlags.BullTower.CaravansIgnited) relevant = true;
+		
+		Gui.NextPrompt(function() {
+			Text.Clear();
+			Text.Add("<b>Final Score:</b><br>", parse);
+			Text.Add("Suspicion raised: " + outlaws.BT.Suspicion() + "/100<br>", parse);
+			Text.Add("Mayhem spread: " + score + "/10<br>", parse);
+			Text.Add("Alarm raised: " + (foundOut ? "yes" : "no"), parse);
+			Text.Flush();
+			
+			Gui.NextPrompt(function() {
+				Text.Clear();
+				if(outlaws.AlaricSaved()) {
+					Text.Add("<i>“Thank you for pulling this off without a hitch,”</i> Zenith says, a rare smile on the outlaw leader’s face. <i>“I confess that I had some doubts about your abilities and wondered if I should have sent Maria in your place, but it seems you and Cveta made a fine team and put Preston to shame. It’s not often that I’m glad to be proven wrong.</i>", parse);
+					Text.NL();
+					Text.Add("<i>“You don’t have to worry about Alaric. We’ll feed him, treat his wounds as best we can, and ask him to tell his tale. It’s unlikely that he’ll be able to go back to his old life now that he’s a wanted fugitive, but we should be able to set him up somewhere in the Free Cities. Honest accountants are hard to come by and in high demand.”</i>", parse);
+					Text.NL();
+					Text.Add("That makes sense. Even if there aren’t any official charges, it wouldn’t be hard for Preston to trump some up, you point out.", parse);
+					Text.NL();
+					parse["o"] = relevant ? " Now, let’s go over the other things you did…" : "";
+					Text.Add("<i>“Exactly,”</i> Zenith replies. <i>“Most of us didn’t choose to be outlaws; I think of us as exiles, thrown out on one flimsy charge or another. But we make the most of the hand we’ve been dealt.[o]</i>", parse);
+					Text.NL();
+					if(outlaws.flags["BT"] & OutlawsFlags.BullTower.StatueDestroyed) {
+						Text.Add("<i>“Smashing Preston’s statue was a very appropriate touch. I knew the man was pompous - we’re reminded of the fact every time we get news out of Rigard - but this is something else altogether. An entire marble statue… how much did it cost him, and how much of that money was earmarked for his underlings’ pay and equipment, I wonder?”</i>", parse);
+						Text.NL();
+						Text.Add("It was Cveta who thought to leave the outlaws’ mark on the plinth, you point out.", parse);
+						Text.NL();
+						Text.Add("<i>“So she did, and she gets credit for that. I wish I could have been there to help you topple the thing.”</i> Zenith sounds a little wistful. <i>“Still, it’s important to remember that Preston is merely Rewyn’s hand. So long as the head remains, the snake lives on.”</i>", parse);
+						Text.NL();
+					}
+					if(outlaws.flags["BT"] & OutlawsFlags.BullTower.CaravansSearched) {
+						Text.Add("<i>“If the invoices and receipts the two of you found are indeed what they seem, we have a potent weapon for proving to the people what Rigard’s nobles think of their own laws. To impose taxes on those who bake the very bread they stuff themselves with, while they evade their share… that’s unforgivable. It is just one of the ways they attempted to break the guilds back then… but I’m rambling.”</i>", parse);
+						Text.NL();
+						Text.Add("What does he intend to do with this knowledge, by the by? You get the feeling that reporting the lot to the guard isn’t going to do very much.", parse);
+						Text.NL();
+						Text.Add("<i>“Of course not,”</i> Zenith replies with a snort. <i>“I’ll go over the figures later and note down each and every one of the greedy pieces of filth. Then maybe we’ll have them copied, a few rumors spread in the right places… attacking or accusing them head-on isn’t going to do much, but the people of Rigard are already suspicious of their self-proclaimed leaders. It won’t take much effort on our part to turn that into hostility.”</i>", parse);
+						Text.NL();
+					}
+					if(outlaws.flags["BT"] & OutlawsFlags.BullTower.CaravansIgnited) {
+						Text.Add("<i>“With those caravans you burned… well, perhaps they will think twice about consorting with the corrupt and decadent. I suspect that our friends will be having trouble finding someone to run their goods for them for a little while.”</i>", parse);
+						Text.NL();
+					}
+					if(outlaws.flags["BT"] & OutlawsFlags.BullTower.SafeLooted) {
+						Text.Add("As he’s about to continue, a dog-morph comes running up to Zenith and salutes. <i>“Sir!”</i>", parse);
+						Text.NL();
+						Text.Add("<i>“Yes, Serana?”</i>", parse);
+						Text.NL();
+						Text.Add("<i>“We’ve counted the money [playername] brought back, as you requested.”</i>", parse);
+						Text.NL();
+						Text.Add("<i>“And the total is?”</i>", parse);
+						Text.NL();
+						Text.Add("<i>“I’d rather not say it in the open, sir.”</i>", parse);
+						Text.NL();
+						Text.Add("Zenith blinks, truly surprised, but leans in while the dog-morph whispers in his ear. His eyes grow wide for a second or two, until his features settle into a more composed, bemused expression.", parse);
+						Text.NL();
+						Text.Add("<i>“Thank you, Serana. You may take your leave now.”</i> As the dog-morph pads off, Zenith turns back to you and sighs. <i>“Well! It appears that our Royal Guards have been on the take for quite the sum. Ten thousand coins… considerable, but if caravans’ worth of goods are being regularly smuggled into Rigard, the price would have been worth it, from the nobles’ point of view.”</i>", parse);
+						Text.NL();
+						Text.Add("<i>“Just how deep does the corruption run, I wonder? And Rewyn is always complaining that the treasury is empty, using that as an excuse to squeeze the people…”</i>", parse);
+						Text.NL();
+						Text.Add("Ten thousand, hmm?", parse);
+						Text.NL();
+						Text.Add("<i>“At least that much,”</i> Zenith says. <i>“Serana says they’re recounting right now, but some sums of money are such that past a certain point, the exact number becomes meaningless. This is one of them. Good work, [playername]. This news will soon find its way onto the streets of Rigard, I promise you that.”</i>", parse);
+						Text.NL();
+					}
+					if(outlaws.flags["BT"] & OutlawsFlags.BullTower.ContrabandStolen) {
+						Text.Add("<i>“And finally, we come to the matter of the gemstones you brought back. Cut and polished, no less - we won’t be dumping these all at once, since even the best fences will have problems washing these clean. Still, it seems that we won’t be needing to worry about money for a while, and it’s all thanks to Preston and the incompetence of his little outfit. That’s what you get when you worry about polishing your armor more than how well your men are trained.”</i>", parse);
+						Text.NL();
+					}
+					Text.Add("<i>“Once more, I’ll congratulate you on your success. The blow you struck might be small, but it is nevertheless important - after all, Eden wasn’t settled in a day. ", parse);
+					if(score >= 10)
+						Text.Add("The two of you did a most excellent job in there - I couldn’t have done better myself. Causing that much mayhem and yet managing to escape undetected; Preston is going to throw a fit once word of this gets to him. I knew I made the right choice in picking you and Cveta for this task.”</i>", parse);
+					else if(score >= 6)
+						Text.Add("The two of you performed admirably tonight - you certainly had an eye for spotting opportunities while not losing track of what you were there for. I expect to see a lot of unhappy Royal Guards tomorrow.”</i>", parse);
+					else
+						Text.Add("You two performed well tonight, nothing less than I expected of you. Congratulations on getting Alaric out safely.”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“There is one more thing. They were prepared for us, [playername]. We still managed to pull off the diversion thanks to everyone’s grit and dedication, but the guards knew we were coming, even if the caravaneers didn’t. They turned up far sooner than we had expected them to. We didn’t get to claim much in the way of spoils from that attack, though since Alaric is free, I’ll nonetheless consider tonight a success. Still, it raises serious questions that I’ll have to look into later.</i>", parse);
+					Text.NL();
+					parse["comp"] = party.Num() == 2 ? party.Get(1).name : "your companions";
+					parse["c"] = party.Num() > 1 ? Text.Parse(", and perhaps reassure [comp] that you’re fine", parse) : "";
+					parse["injured"] = injured ? "and that gash will take time to heal" : "and I’d rather not see you worn out";
+					Text.Add("<i>“Now, I suggest that you get some rest[c]. You’ve had enough adventure for a single night, [injured].”</i> With that, Zenith gives you one final nod, then turns and stalks away, his wide, easy stride eating up distance until he disappears amidst the camp’s morning activity.", parse);
+					var inc = 10;
+					
+					if(outlaws.flags["BT"] & OutlawsFlags.BullTower.ContrabandStolen) inc += 2;
+					if(outlaws.flags["BT"] & OutlawsFlags.BullTower.SafeLooted) inc += 2;
+					if(outlaws.flags["BT"] & OutlawsFlags.BullTower.CaravansSearched) inc += 2;
+					if(outlaws.flags["BT"] & OutlawsFlags.BullTower.StatueDestroyed) inc += 2;
+					if(outlaws.flags["BT"] & OutlawsFlags.BullTower.BlueRoses) inc += 2;
+					if(outlaws.BT.Suspicion() < 100) inc += 2;
+					if(score >= 10) inc += 3;
+		
+					outlaws.relation.IncreaseStat(100, inc);
+				}
+				else {
+					Text.Add("<i>“Well. You failed,”</i> Zenith states bluntly. <i>“And through no fault of Cveta’s, either - since you were de facto leader of this foray, she did all she could to aid you in your decisions, even if she didn’t agree with all of them. She did her part as a follower, but did you do yours as a leader?”</i>", parse);
+					Text.NL();
+					parse["c"] = outlaws.BT.foughtCorishev ? " You tried your best in attempting to save him, but alas, your best was not enough, and I won’t mince words: I don’t give points for effort." : "";
+					Text.Add("The outlaw leader paces in a small circle, each step slow and measured. <i>“This is going to be troublesome. Yes, we have a contingency plan in case you should fail to bring Alaric to us, but clearing our name is going to be much harder without his testimony. That, and one can only wonder what the Royal Guard is going to do with the man; it’s likely that we’ll never see or hear of him again.[c]</i>", parse);
+					Text.NL();
+					Text.Add("<i>“Perhaps it would have been better if I’d sent Maria instead.”</i>", parse);
+					Text.NL();
+					if(score >= 4) {
+						Text.Add("<i>“In the future, I suggest that you focus on the task at hand. Doing more than what’s strictly needed is appreciated, but not if it is a detriment to the main task.”</i>", parse);
+						Text.NL();
+					}
+					Text.Add("<i>“There is one more thing. They were prepared for us, [playername]. We still managed to pull off the diversion thanks to everyone’s grit and dedication, but the guards knew we were coming, even if the caravaneers didn’t. They turned up far sooner than we had expected them to - we didn’t get to claim any spoils from that attack, which would at least have prevented this from being a complete loss.</i>", parse);
+					Text.NL();
+					Text.Add("<i>“All in all, [playername], we are a very fair people here in this camp. Your standing depends on the goods you bring to the table, and I’m afraid I may have to reconsider your help when it comes to other sensitive tasks. Not that I doubt your loyalty to us, but it’s better to match tasks to people by their abilities. Have a good rest - too much adventure in one night is bad for one’s health.”</i> With that, he turns on his heels and strides off, taking big, determined steps, leaving you to wallow in your failure.", parse);
+					
+					outlaws.relation.DecreaseStat(-100, 10);
+				}
+				Text.Flush();
+				
+				Gui.NextPrompt();
+				
+				outlaws.mainQuestTimer = new Time(0,0,3,0,0);
+			});
+			
+		});
+		
+	}
+
+
+	//#This will trigger three days after the event if the player saved Alaric.
+	export function AftermathAlaric() {
+		let player = GAME().player;
+		let outlaws = GAME().outlaws;
+
+		var parse : any = {
+			playername : player.name
+		};
+		
+		Text.Clear();
+		Text.Add("A curious sight greets you as you enter the outlaw camp. Standing by the drawbridge is Alaric, the little bean-counter all dressed and with a single sackcloth bag in hand. He’s healed up decently - though some of the lash marks are going to leave scars, alas - and looks up at you in surprise when he sees you.", parse);
+		Text.NL();
+		Text.Add("<i>“[playername].”</i>", parse);
+		Text.NL();
+		Text.Add("Leaving already?", parse);
+		Text.NL();
+		Text.Add("<i>“Well, yes,”</i> he replies, a little flustered. <i>“I wanted to see you, to thank you properly for getting me out of the Royal Guard’s hands, but couldn’t find you anywhere in camp. People said you move around a lot and didn’t know when you’d be back, so I thought of leaving a note…”</i>", parse);
+		Text.NL();
+		Text.Add("Well, it seems like that won’t be necessary.", parse);
+		Text.NL();
+		Text.Add("<i>“Um. Well. Thanks. I’ve already told Zenith what I know of the whole matter, and he seemed satisfied with just that, so…”</i>", parse);
+		Text.NL();
+		Text.Add("You don’t need anything from him. You aren’t going to press Alaric when he’s already unsure about his future. But would he mind sharing his story with you as well before he goes? There wasn’t time for much conversation back in Bull Tower, after all, and you’d like to know his side of the tale.", parse);
+		Text.NL();
+		Text.Add("<i>“Well, I suppose it can’t hurt. What’s going over it one more time?”</i> he sits down on his luggage and hunches over, putting his chin in his hands, then invites you to sit beside him. <i>“I think I mentioned back there that I worked for the Treasury. Not as anyone important, just a number adder doing the incoming taxes and tariffs I was assigned, and handling the monthly balance account statement for my department. Both eventually got me into trouble.</i>", parse);
+		Text.NL();
+		Text.Add("<i>“I was just too good at my job, I guess. The first thing I noticed was that some of the income statements submitted by a number of nobles just didn’t match up with what their businesses were reporting. It’s not that they hadn’t tried to cook the books, but at the end of the day who’s going to believe that a cartload of chickens was sold at four or five times market price on every Tuesday?”</i>", parse);
+		Text.NL();
+		Text.Add("An honest accountant? Will wonders never cease? Next thing you know, an honest advocate will pop up in this neck of the woods.", parse);
+		Text.Flush();
+		
+		TimeStep({minute: 10});
+		
+		Gui.NextPrompt(function() {
+			Text.Clear();
+			Text.Add("<i>“I’d rather you not belittle my profession,”</i> Alaric huffs. <i>“I know we don’t exactly have the best of reputations, there’s no need to press home the point.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Well, after a few pages’ worth of overpriced chickens, highly-valued fruit, and sweetmeats that must been gemstones the way they were priced, I went and reported my findings to my superiors. Sure, I was a little naive, but the Treasury is supposed to be under the direct purview of Rewyn himself and I had all the evidence down in black and white. All of it. He should have been happy to realize that he was been fleeced…”</i>", parse);
+			Text.NL();
+			Text.Add("But it didn’t work out that way, did it?", parse);
+			Text.NL();
+			Text.Add("<i>“No, it didn’t. I was told to keep quiet and forget all about it. Naturally, that only spurred me to dig deeper - and I guess I must’ve dug too deep too visibly, because next thing I know, I’m hearing unsettling rumors about Majid taking an interest in our affairs at the counting-house. You know. Rewyn’s advisor. That strange man.”</i>", parse);
+			Text.NL();
+			Text.Add("And that was important because…?", parse);
+			Text.NL();
+			Text.Add("<i>“Because while I had no concrete evidence, what I’d dug up strongly suggested that Majid had been siphoning off money from the treasury. His embezzlement was always careful - never too much at one time, and always attached to legitimate expenses. Nevertheless, a few hundred or thousand coins here and there, tacked onto the bills for many projects… it added up to a considerable sum.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Nevertheless, I got spooked. Thought I’d take an unpaid leave of absence, hide out at my sister’s in the countryside, lie low for a few weeks until this thing blew over. Then I got stopped on the King’s Road, and… well, you know the rest.”</i>", parse);
+			Text.NL();
+			Text.Add("Indeed, you do. Well then, what is he going to do now? It’s not as if he can waltz back into his old job at the treasury.", parse);
+			Text.NL();
+			Text.Add("Alaric turns away from you at your words. <i>“Yeah. I can’t go back. Zenith advised me against even trying to see any of my family - I’d only be putting them in danger, since the Royal Guard is likely to have someone watching them on the chance I turn up at their doorsteps. He said he’d sneak a message to them, though, so they aren’t left wondering what happened to me.", parse);
+			Text.NL();
+			Text.Add("<i>“I’m going to be shipped off near the Free Cities, where Zenith knows someone who needs a good accountant to do the bookkeeping and, more importantly, where Majid won’t be able to get at me.”</i>", parse);
+			Text.NL();
+			Text.Add("Is he certain it’s connected? That Majid set the Royal Guard on him, that is.", parse);
+			Text.NL();
+			Text.Add("Alaric shrugs. <i>“As I said, I don’t have any concrete evidence. But he had a motive, since I was snooping around his accounts, and he definitely has the authority to order around the Royal Guard and create the proclamations blaming the outlaws for my disappearance. It’s just a hunch, and yes, I could be wrong - but it were my hunches which led me to discovering the errors in both the nobles’ and Majid’s accounts.”</i>", parse);
+			Text.NL();
+			Text.Add("Hmm. Majid.", parse);
+			Text.NL();
+			Text.Add("<i>“Alaric!”</i> a rather gruff voice calls from the other side of the camp wall. <i>“You done? We’re about to set off!”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Well, it looks like I should be going now.”</i> Gritting his teeth with the effort, Alaric stands and hefts his luggage over his shoulder. <i>“I’ll have an escort to the Free Cities and we won’t be taking the King’s Road, so don’t worry about me. If you ever find yourself there, don’t hesitate to find me at this address.”</i> He hands you a slip of paper. <i>“Well then, [playername]. Thanks again, and keep yourself safe. Or at least, safer than I’ve been.”</i>", parse);
+			Text.NL();
+			Text.Add("One last thing. The Lieutenant clearly expected Cveta and you, which would explain why all the guards in the fortress were on high alert that night. Does he know anything about that?", parse);
+			Text.NL();
+			Text.Add("<i>“Sadly, I don’t. But if the information got out… [playername], usually that means someone passed it on. A spy, if you will. Well, that’s all I’ve got. Please, if you ever find yourself in the Free Cities, I’d like to extend my welcome again. I owe my life to you, after all.”</i>", parse);
+			Text.NL();
+			Text.Add("With that, the little bean-counter gives you a final wave and hobbles off. The camp guards hurry to lower the drawbridge so he can cross, and after a moment, he turns and is out of sight.", parse);
+			Text.Flush();
+			
+			TimeStep({minute: 20});
+			
+			outlaws.mainQuestTimer = new Time(0,0,1,0,0);
+			
+			outlaws.flags["BullTower"] = OutlawsFlags.BullTowerQuest.AlaricFollowup;
+			
+			Gui.NextPrompt();
+		});
+	}
+
+
+	//#Triggers one day after the Alaric scene if the player has at least stolen the goods and payoff.
+	export function AftermathZenith() {
+		let player = GAME().player;
+		let party : Party = GAME().party;
+		let outlaws = GAME().outlaws;
+
+		var parse : any = {
+			playername : player.name
+		};
+		
+		Text.Clear();
+		Text.Add("As you approaching the outlaw camp, something about it strikes you as odd. Is it just you, or do the guards look a little on edge today? You don’t have long to wonder, though - the moment you step over the drawbridge and into the camp, one of the guards, the fox-morph - comes marching up to you.", parse);
+		Text.NL();
+		Text.Add("<i>“[playername]?”</i>", parse);
+		Text.NL();
+		Text.Add("That would indeed be you, yes.", parse);
+		Text.NL();
+		Text.Add("<i>“The chief’s made it known that he wants a word with you. If we see so much as your shadow, we’re to let you know you ought to wait in his place.”</i>", parse);
+		Text.NL();
+		Text.Add("What about, though?", parse);
+		Text.NL();
+		parse["comp"] = party.Num() == 2 ? party.Get(1).name : "your companions";
+		parse["c"] = party.Num() > 1 ? Text.Parse(" and [comp]", parse) : "";
+		parse["c2"] = party.Num() > 1 ? "yourselves" : "yourself";
+		Text.Add("<i>“He didn’t say, although it sounded important. Guess you should go find out.”</i> With that, the fox-morph turns and heads back to his post, leaving you to find your own way to Zenith’s place. The building is easy to find - you’re not likely to forget the day you learned of the outlaws, after all - and no one stops you as you open the door and step inside. The table with the map is still there, the papers too; there are some chairs in a corner, and you[c] seat [c2] there, waiting for Zenith to turn up.", parse);
+		Text.NL();
+		Text.Add("You don’t have to wait long. The outlaw leader is in an uncharacteristically good mood, throwing the door open with a resounding slam as he enters the room. The grin on Zenith’s face grows even wider when he sees you, and he crosses the map room in a few easy strides to give you a generous, crushing hug.", parse);
+		Text.NL();
+		Text.Add("<i>“[playername]! I came the moment the guard told me you’d come visiting. I trust that you’ve not had too much adventure yet?”</i>", parse);
+		Text.NL();
+		Text.Add("Very nice, but if he’d let go of you…", parse);
+		Text.NL();
+		Text.Add("<i>“Right, right. Sorry about that.”</i> The hug is released as quickly as it’d engulfed you, and you feel good, clean air flowing into your lungs. <i>“I wanted you to know that we’ve managed to fence off a good number of the gemstones you brought back a few days ago. Combined with all the money you lifted off the Royal Guard, we’re definitely going to be able to purchase a number of much-needed supplies and maybe even make a few improvements to the camp.”</i>", parse);
+		Text.NL();
+		Text.Add("Well, that would explain why Zenith is feeling upbeat today. But why call you out?", parse);
+		Text.NL();
+		Text.Add("<i>“Well, you did a good job. Maria, Aquilius and I discussed it amongst ourselves and we’ve decided to give you a cut.”</i>", parse);
+		Text.NL();
+		Text.Add("A cut?", parse);
+		Text.NL();
+		Text.Add("<i>“Yes, a cut. A moment, please.”</i>", parse);
+		Text.NL();
+		Text.Add("Without another word, the badger-morph strides to the opposite corner of the room and reaches into the shadows, drawing out a rather large bundle wrapped in paper and cord. With much aplomb, he returns to you and thrusts the bundle into your hands. <i>“While Aquilius and I were out getting a good price for your gems from the fences, we spotted something you might like. Why don’t you open it and see?”</i>", parse);
+		Text.NL();
+		Text.Add("He’s so eager and expectant that it’d be a travesty to refuse. Carefully, you unwrap the cord and paper to draw out a small shortsword. It’s rather plain, save for the rubies set into either side of the crossguard. You peer into the gems’ depths, each ruby as large as an eyeball, and notice runes embedded in each.", parse);
+		if(Jobs.Mage.Unlocked(player))
+			Text.Add(" There’s little doubt about it; the sword is enchanted. It’s not a very potent spell, but it’s strong enough for you to sense the magical aura, concentrated about the gems and extending through the blade.", parse);
+		Text.NL();
+		
+		//#Gain jeweled mageblade.
+		party.Inv().AddItem(WeaponsItems.JeweledMageblade);
+		
+		Text.Add("<i>“I’d be careful with that, if I were you. All you need to do is to grab its hilt, think hard, and the blade bursts into flame. Then, think hard about it going out, and it does just that. The fence was going to charge us a pretty penny for it - with it being magic and all - but we haggled the price down to something more reasonable. I think you’ve earned that much.”</i>", parse);
+		Text.NL();
+		if(outlaws.flags["BT"] & OutlawsFlags.BullTower.PerfectScore) {
+			Text.Add("<i>“That’s not all, though.”</i> Zenith produces another wrapped package, flatter and rounder than the first, then presses it into your hands. <i>“We heard that Preston’s been in a terrible mood for the last few days, and it’s all thanks to our efforts. Thought we’d spread the extra cheer around. Go on, open it.”</i>", parse);
+			Text.NL();
+			Text.Add("Tearing apart cord and paper, you find a small buckler inside, polished and gleaming. No doubt there’s supposed to be some kind of irony here…", parse);
+			Text.NL();
+			Text.Add("<i>“Oh, I’m sure you’ll scratch and dent it soon enough so it won’t hold a proper shine,”</i> the badger-morph says, grinning as he claps you on the shoulder.", parse);
+			Text.NL();
+			
+			//#Gain silvered buckler.		
+			party.Inv().AddItem(AccItems.SilverBuckler);
+		}
+		Text.Add("Putting away the gifts, you thank Zenith.", parse);
+		Text.NL();
+		Text.Add("He brushes off your words with an easy wave. <i>“You’ve earned them. Back in the day, the Guilds rewarded those who had ability and worked hard. They may no longer exist, but I’ve kept that tradition alive.</i>", parse);
+		Text.NL();
+		Text.Add("<i>“So long as you continue to prove your worth, friend, I’ll be more than happy to reward you. Now, if there’s nothing else, might I trouble you to step out? We’re going to have a little meeting here at the turn of the hour, discuss our strategy in light of recent events. Terribly boring stuff, I assure you,”</i> he adds, evidently noticing the question on your face.", parse);
+		Text.NL();
+		Text.Add("You nod and stand, thanking the badger-morph once again. He simply shrugs, grins, and ushers you out with your new possessions, leaving you to take in the cool, fresh air of the outlaw camp.", parse);
+		Text.Flush();
+		
+		TimeStep({hour: 1});
+		
+		outlaws.flags["BullTower"] = OutlawsFlags.BullTowerQuest.ZenithFollowup;
+		
+		Gui.NextPrompt();
+	}
 }
 
-export { BullTowerScenes, BullTowerLoc };
+export { BullTowerLoc };
