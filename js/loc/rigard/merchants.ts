@@ -1,21 +1,25 @@
 
 import { Event, Link } from '../../event';
 import { EncounterTable } from '../../encountertable';
-import { OddShopLoc } from './sexstore';
-import { ArmorShopLoc } from './armorshop';
-import { MagicShopLoc } from './magicshop';
-import { ClothShopLoc } from './clothstore';
-import { WeaponShopLoc } from './weaponshop';
-import { WorldTime, MoveToLocation, GAME } from '../../GAME';
+import { OddShopLoc, OddShopScenes } from './sexstore';
+import { ArmorShopLoc, ArmorShopScenes } from './armorshop';
+import { MagicShopLoc, MagicShopScenes } from './magicshop';
+import { ClothShopLoc, ClothShopScenes } from './clothstore';
+import { WeaponShopLoc, WeaponShopScenes } from './weaponshop';
+import { WorldTime, MoveToLocation, GAME, WORLD, TimeStep } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { CvetaFlags } from '../../event/outlaws/cveta-flags';
 import { RigardFlags } from './rigard-flags';
 import { BurrowsFlags } from '../burrows-flags';
 import { Room69Flags } from '../../event/room69-flags';
+import { Party } from '../../party';
+import { QuestItems } from '../../items/quest';
+import { TerryScenes } from '../../event/terry-scenes';
+import { RigardScenes } from './rigard';
 
 
-let ShopStreetScenes = {}
+let ShopStreetScenes : any = {}
 
 //
 // Merchants
@@ -57,22 +61,22 @@ ShopStreetLoc.street.description = function() {
 }
 
 ShopStreetLoc.street.enc = new EncounterTable();
-ShopStreetLoc.street.enc.AddEnc(function() { return Scenes.Rigard.Chatter;});
-ShopStreetLoc.street.enc.AddEnc(function() { return Scenes.Rigard.Chatter2;});
+ShopStreetLoc.street.enc.AddEnc(function() { return RigardScenes.Chatter;});
+ShopStreetLoc.street.enc.AddEnc(function() { return RigardScenes.Chatter2;});
 ShopStreetLoc.street.enc.AddEnc(function() { return ShopStreetScenes.Speculate;}, 1.0, function() { return (WorldTime().hour >= 6 && WorldTime().hour < 18); });
-ShopStreetLoc.street.enc.AddEnc(function() { return Scenes.Rigard.CityHistory;}, 1.0, function() {
+ShopStreetLoc.street.enc.AddEnc(function() { return RigardScenes.CityHistory;}, 1.0, function() {
 	let rigard = GAME().rigard;
 	return rigard.flags["CityHistory"] == 0;
 });
-ShopStreetLoc.street.enc.AddEnc(function() { return Scenes.Terry.ExploreMerchants; }, 1000000.0, function() {
+ShopStreetLoc.street.enc.AddEnc(function() { return TerryScenes.ExploreMerchants; }, 1000000.0, function() {
 	let rigard = GAME().rigard;
 	return rigard.Krawitz["Q"] == RigardFlags.KrawitzQ.HuntingTerry;
 });
 ShopStreetLoc.street.onEntry = function() {
 	if(Math.random() < 0.15)
-		Scenes.Rigard.Chatter(true);
+		RigardScenes.Chatter(true);
 	else if(Math.random() < 0.3)
-		Scenes.Rigard.Chatter2(true);
+		RigardScenes.Chatter2(true);
 	else
 		Gui.PrintDefaultOptions();
 }
@@ -81,14 +85,14 @@ ShopStreetLoc.street.links.push(new Link(
 	"Gate", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Rigard.Gate, {minute: 10});
+		MoveToLocation(WORLD().loc.Rigard.Gate, {minute: 10});
 	}
 ));
 ShopStreetLoc.street.links.push(new Link(
 	"Residential", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Rigard.Residential.street, {minute: 20});
+		MoveToLocation(WORLD().loc.Rigard.Residential.street, {minute: 20});
 	}
 ));
 ShopStreetLoc.street.links.push(new Link(
@@ -98,16 +102,16 @@ ShopStreetLoc.street.links.push(new Link(
 	"Plaza", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Rigard.Plaza, {minute: 10});
+		MoveToLocation(WORLD().loc.Rigard.Plaza, {minute: 10});
 	}
 ));
 
 
 ShopStreetLoc.street.links.push(new Link(
-	"Armor", true, function() { return Scenes.Rigard.ArmorShop.IsOpen(); },
+	"Armor", true, function() { return ArmorShopScenes.IsOpen(); },
 	function() {
 		Text.Add("You catch sight of a ramshackle shop tucked away into a cul-de-sac. An old, weather-beaten sign swings over the entrance with “Twopenny's Used Protectives” printed on it in faded paint. ");
-		if(Scenes.Rigard.ArmorShop.IsOpen())
+		if(ArmorShopScenes.IsOpen())
 			Text.Add("The door leading in is open, although light doesn't get very far in.");
 		else
 			Text.Add("The shop is closed, its entrance securely padlocked and barred - perhaps the only part of the establishment that's relatively new.");
@@ -120,9 +124,9 @@ ShopStreetLoc.street.links.push(new Link(
 ));
 
 ShopStreetLoc.street.links.push(new Link(
-	"Weapons", true, function() { return Scenes.Rigard.WeaponShop.IsOpen(); },
+	"Weapons", true, function() { return WeaponShopScenes.IsOpen(); },
 	function() {
-		Scenes.Rigard.WeaponShop.StreetDesc();
+		WeaponShopScenes.StreetDesc();
 	},
 	function() {
 		MoveToLocation(ShopStreetLoc.WeaponShop, {minute: 5});
@@ -130,10 +134,10 @@ ShopStreetLoc.street.links.push(new Link(
 ));
 
 ShopStreetLoc.street.links.push(new Link(
-	"Tailor", true, function() { return Scenes.Rigard.ClothShop.IsOpen() },
+	"Tailor", true, function() { return ClothShopScenes.IsOpen() },
 	function() {
 		Text.Add("There is a large two floor shop in the center of the street, with two guards watching the large, well crafted doors. The fancy sign above the door reads <i>Silken Delights</i>, and there are many beautiful and intricately crafted articles of clothing on display in the windows. The clothing store seems large, and there are pretty decorations bordering the display windows. A decorated sign next to the door informs you that the shops business hours are from 9 to 20.");
-		if(!Scenes.Rigard.ClothShop.IsOpen())
+		if(!ClothShopScenes.IsOpen())
 			Text.Add(" The shop seems to be closed at the moment.");
 		Text.NL();
 	},
@@ -143,10 +147,10 @@ ShopStreetLoc.street.links.push(new Link(
 ));
 
 ShopStreetLoc.street.links.push(new Link(
-	"Magic", true, function() { return Scenes.Rigard.MagicShop.IsOpen(); },
+	"Magic", true, function() { return MagicShopScenes.IsOpen(); },
 	function() {
 		Text.Add("Off on a side street, a small, brightly lit building stands sandwiched between a barber shop and a bakery. The wide, glass-panelled shopfront has an impressive number of curios on display, and by the looks of it, there are many more on the shelves within. ");
-		if(Scenes.Rigard.MagicShop.IsOpen())
+		if(MagicShopScenes.IsOpen())
 			Text.Add("A small wooden sign in a slot in the door declares the shop to be open.");
 		else
 			Text.Add("The wooden sign has been turned over, declaring: “The shop is closed until it’s open once more.” Isn’t that kind of redundant?");
@@ -158,10 +162,10 @@ ShopStreetLoc.street.links.push(new Link(
 ));
 
 ShopStreetLoc.street.links.push(new Link(
-	"Odd shop", true, function() { return Scenes.Rigard.OddShop.IsOpen(); },
+	"Odd shop", true, function() { return OddShopScenes.IsOpen(); },
 	function() {
 		Text.Add("One particular shop catch your eye. A garish sign hanging outside announce it the 'Shoppe of oddities', though from just the exterior, it is a bit unclear what is actually on sale.");
-		if(!Scenes.Rigard.OddShop.IsOpen())
+		if(!OddShopScenes.IsOpen())
 			Text.Add(" A small paper stapled to the front door states that the shop is 'Cloosd' at the moment.");
 		Text.Add("<br>");
 	},
@@ -187,12 +191,17 @@ ShopStreetLoc.street.events.push(new Link(
 		let rigard = GAME().rigard;
 		let cveta = GAME().cveta;
 		return !rigard.UnderLockdown() && cveta.flags["Met"] == CvetaFlags.Met.ViolinQ;
-	}, function() { return party.coin >= 500; },
+	}, function() {
+		let party : Party = GAME().party;
+		return party.coin >= 500;
+	},
 	null,
 	function() {
 		let cveta = GAME().cveta;
+		let kiakai = GAME().kiakai;
 		let player = GAME().player;
 		let party : Party = GAME().party;
+
 		var parse : any = {
 			playername : player.name,
 			sirmadam : player.mfFem("sir", "madam")
@@ -275,7 +284,7 @@ ShopStreetLoc.street.events.push(new Link(
 			Text.Flush();
 			
 			party.coin -= 500;
-			party.Inv().AddItem(Items.Quest.Violin);
+			party.Inv().AddItem(QuestItems.Violin);
 			
 			Gui.NextPrompt();
 		});
@@ -387,6 +396,8 @@ ShopStreetScenes.Speculate = function() {
 	var buyingProb = 0.5 + buyingSkill * trueFalseDeal;
 	var buying = Math.random() < buyingProb;
 	
+	let waresExam : CallableFunction;
+
 	var scenes = new EncounterTable();
 	scenes.AddEnc(function() {
 		parse["wares"] = "cheeses";

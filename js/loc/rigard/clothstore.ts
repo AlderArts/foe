@@ -1,9 +1,13 @@
 
 import { Event, Link } from '../../event';
 import { Gender } from '../../body/gender';
-import { WorldTime, MoveToLocation, GAME } from '../../GAME';
+import { WorldTime, MoveToLocation, GAME, WORLD } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
+import { Party } from '../../party';
+import { RaceScore, Race } from '../../body/race';
+import { EncounterTable } from '../../encountertable';
+import { FeraScenes } from '../../event/fera';
 
 //
 // Sliken Delights
@@ -11,7 +15,7 @@ import { Gui } from '../../gui';
 
 let ClothShopLoc = new Event("Silken Delights");
 
-let ClothShopScenes = {};
+let ClothShopScenes : any = {};
 ClothShopScenes.IsOpen = function() {
 	let rigard = GAME().rigard;
 	return (WorldTime().hour >= 9 && WorldTime().hour < 20) && !rigard.UnderLockdown();
@@ -107,6 +111,7 @@ ClothShopLoc.events.push(new Link(
 	},
 	function() {
 		let player = GAME().player;
+		let fera = GAME().fera;
 		let rigard = GAME().rigard;
 
 		var nexellePrompt = function() {
@@ -114,7 +119,7 @@ ClothShopLoc.events.push(new Link(
 				Text.Add("The shop is closing, and you are asked to leave.");
 				Text.Flush();
 				Gui.NextPrompt(function() {
-					MoveToLocation(world.loc.Rigard.ShopStreet.street);
+					MoveToLocation(WORLD().loc.Rigard.ShopStreet.street);
 				});
 				return;
 			}
@@ -257,13 +262,13 @@ ClothShopLoc.events.push(new Link(
 
 		Text.NL();
 	},
-	function() { Scenes.Fera.Interact(); }
+	function() { FeraScenes.Interact(); }
 ));
 
 ClothShopLoc.events.push(new Link(
 	"Leave", true, true, null,
 	function() {
-		MoveToLocation(world.loc.Rigard.ShopStreet.street, {minute: 5});
+		MoveToLocation(WORLD().loc.Rigard.ShopStreet.street, {minute: 5});
 	}
 ));
 

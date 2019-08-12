@@ -304,10 +304,10 @@ export class Link {
 	visibleCondition : any;
 	enabledCondition : any;
 	print : any;
-	func : any;
+	func : CallableFunction;
 	tooltip : any;
 
-	constructor(name : any, visibleCondition : any, enabledCondition : any, print? : any, func? : any, tooltip? : any) {
+	constructor(name : any, visibleCondition : any, enabledCondition : any, print? : any, func? : CallableFunction, tooltip? : any) {
 		// String or function that returns string
 		this.name = name;
 		// This can be set to true, or to a function

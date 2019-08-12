@@ -3,16 +3,20 @@ import { Event, Link } from '../../event';
 import { EncounterTable } from '../../encountertable';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
-import { MoveToLocation} from '../../GAME';
+import { MoveToLocation, GAME, WORLD, TimeStep} from '../../GAME';
 import { MirandaFlags } from '../../event/miranda-flags';
 import { RigardFlags } from './rigard-flags';
 import { ZinaFlags } from '../../event/zina';
+import { Party } from '../../party';
+import { Sex } from '../../entity-sex';
+import { Cock } from '../../body/cock';
+import { Race } from '../../body/race';
 
 let TavernLoc = {
 	common   : new Event("Maidens' Bane")
 };
 
-let BarnabyScenes = {};
+let BarnabyScenes : any = {};
 //Barnaby variable kept in rigard.js
 
 
@@ -49,7 +53,7 @@ TavernLoc.common.links.push(new Link(
 	"Slums", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Rigard.Slums.gate, {minute: 10});
+		MoveToLocation(WORLD().loc.Rigard.Slums.gate, {minute: 10});
 	}
 ));
 
@@ -63,7 +67,7 @@ TavernLoc.common.DrunkHandler = function() {
 		phisher : player.mfTrue("his", "her")
 	};
 	
-	var first = !rigard.flags["Barnaby"] & RigardFlags.Barnaby.PassedOut;
+	var first = !(rigard.flags["Barnaby"] & RigardFlags.Barnaby.PassedOut);
 	rigard.flags["Barnaby"] |= RigardFlags.Barnaby.PassedOut;
 	
 	Text.Clear();
@@ -299,7 +303,7 @@ BarnabyScenes.Approach = function() {
 	BarnabyScenes.Prompt(false);
 }
 
-BarnabyScenes.Prompt = function(talkative) {
+BarnabyScenes.Prompt = function(talkative : boolean) {
 	let rigard = GAME().rigard;
 	let party : Party = GAME().party;
 	let player = GAME().player;
@@ -654,6 +658,7 @@ BarnabyScenes.Prompt = function(talkative) {
 BarnabyScenes.ChatPrompt = function() {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
+	let zina = GAME().zina;
 
 	var parse : any = {
 		
@@ -812,9 +817,10 @@ BarnabyScenes.ChatPrompt = function() {
 
 
 
-BarnabyScenes.BlowjobEntrypoint = function(func) {
+BarnabyScenes.BlowjobEntrypoint = function(func : CallableFunction) {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
+	let zina = GAME().zina;
 
 	var parse : any = {
 		playername : player.name,

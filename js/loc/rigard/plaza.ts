@@ -1,16 +1,24 @@
 
 import { Event, Link } from '../../event';
 import { EncounterTable } from '../../encountertable';
-import { WorldTime, MoveToLocation } from '../../GAME';
+import { WorldTime, MoveToLocation, GAME, WORLD, TimeStep } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { RigardFlags } from './rigard-flags';
 import { Room69Flags } from '../../event/room69-flags';
 import { LeiFlags } from '../../event/royals/lei-flags';
+import { RigardScenes } from './rigard';
+import { Party } from '../../party';
+import { KrawitzScenes } from './krawitz';
+import { TerryScenes } from '../../event/terry-scenes';
+import { LowerBodyType } from '../../body/body';
+import { Rand } from '../../utility';
+import { IngredientItems } from '../../items/ingredients';
+import { LeiScenes } from '../../event/royals/lei-scenes';
 
 let PlazaLoc = new Event("Plaza");
 
-let PlazaScenes = {}
+let PlazaScenes : any = {}
 
 //
 // Plaza
@@ -32,17 +40,17 @@ PlazaLoc.description = function() {
 
 PlazaLoc.onEntry = function() {
 	if(Math.random() < 0.15)
-		Scenes.Rigard.Chatter(true);
+		RigardScenes.Chatter(true);
 	else if(Math.random() < 0.3)
-		Scenes.Rigard.Chatter2(true);
+		RigardScenes.Chatter2(true);
 	else
 		Gui.PrintDefaultOptions();
 }
 
 PlazaLoc.enc = new EncounterTable();
-PlazaLoc.enc.AddEnc(function() { return Scenes.Rigard.Chatter;});
-PlazaLoc.enc.AddEnc(function() { return Scenes.Rigard.Chatter2;});
-PlazaLoc.enc.AddEnc(function() { return Scenes.Rigard.CityHistory;}, 1.0, function() {
+PlazaLoc.enc.AddEnc(function() { return RigardScenes.Chatter;});
+PlazaLoc.enc.AddEnc(function() { return RigardScenes.Chatter2;});
+PlazaLoc.enc.AddEnc(function() { return RigardScenes.CityHistory;}, 1.0, function() {
 	let rigard = GAME().rigard;
 	return rigard.flags["CityHistory"] == 0;
 });
@@ -53,11 +61,11 @@ PlazaLoc.enc.AddEnc(function() { return PlazaScenes.StatueInfo; }, 1.0, function
 	let kiakai = GAME().kiakai;
 	return (WorldTime().hour >= 6 && WorldTime().hour < 21) && (rigard.flags["TalkedStatue"] == 0 || (party.InParty(kiakai) && kiakai.flags["TalkedStatue"] == 0));
 });
-PlazaLoc.enc.AddEnc(function() { return Scenes.Krawitz.Duel;}, 3.0, function() {
+PlazaLoc.enc.AddEnc(function() { return KrawitzScenes.Duel;}, 3.0, function() {
 	let rigard = GAME().rigard;
 	return rigard.Krawitz["Q"] == 1 && rigard.Krawitz["Duel"] == 0 && (WorldTime().hour >= 10 && WorldTime().hour < 20);
 });
-PlazaLoc.enc.AddEnc(function() { return Scenes.Terry.ExplorePlaza; }, 1000000.0, function() {
+PlazaLoc.enc.AddEnc(function() { return TerryScenes.ExplorePlaza; }, 1000000.0, function() {
 	let rigard = GAME().rigard;
 	return rigard.Krawitz["Q"] == RigardFlags.KrawitzQ.HuntingTerry;
 });
@@ -66,21 +74,21 @@ PlazaLoc.links.push(new Link(
 	"Gate", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Rigard.Gate, {minute: 20});
+		MoveToLocation(WORLD().loc.Rigard.Gate, {minute: 20});
 	}
 ));
 PlazaLoc.links.push(new Link(
 	"Residential", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Rigard.Residential.street, {minute: 10});
+		MoveToLocation(WORLD().loc.Rigard.Residential.street, {minute: 10});
 	}
 ));
 PlazaLoc.links.push(new Link(
 	"Merchants", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Rigard.ShopStreet.street, {minute: 10});
+		MoveToLocation(WORLD().loc.Rigard.ShopStreet.street, {minute: 10});
 	}
 ));
 PlazaLoc.links.push(new Link(
@@ -97,7 +105,7 @@ PlazaLoc.links.push(new Link(
 		Text.Add("There is a large building bustling with the activity, apparently an inn. The sign over the entrance says “The Lady's Blessing”. ");
 	},
 	function() {
-		MoveToLocation(world.loc.Rigard.Inn.common);
+		MoveToLocation(WORLD().loc.Rigard.Inn.common);
 	}
 ));
 PlazaLoc.links.push(new Link(
@@ -112,6 +120,8 @@ PlazaLoc.links.push(new Link(
 		let player = GAME().player;
 		let rigard = GAME().rigard;
 		let lei = GAME().lei;
+		let rosalin = GAME().rosalin;
+		let world = WORLD();
 
 		var parse : any = {
 			stride : player.LowerBodyType() == LowerBodyType.Single ? "slither" : "stride"
@@ -243,13 +253,13 @@ PlazaLoc.links.push(new Link(
 		}
 	},
 	function() {
-		MoveToLocation(world.loc.Rigard.Krawitz.street, {minute: 10});
+		MoveToLocation(WORLD().loc.Rigard.Krawitz.street, {minute: 10});
 	}
 ));
 
 PlazaLoc.links.push(new Link(
 	"Orellos", function() {
-		return Scenes.Lei.Tasks.Escort.OnTask();
+		return LeiScenes.Tasks.Escort.OnTask();
 	}, function() {
 		let lei = GAME().lei;
 		var t = true;
@@ -258,13 +268,13 @@ PlazaLoc.links.push(new Link(
 		return t;
 	},
 	function() {
-		if(Scenes.Lei.Tasks.Escort.OnTask()) {
+		if(LeiScenes.Tasks.Escort.OnTask()) {
 			Text.Add("Ventos Orellos' estate is nearby.");
 			Text.NL();
 		}
 	},
 	function() {
-		Scenes.Lei.Tasks.Escort.Estate();
+		LeiScenes.Tasks.Escort.Estate();
 	}
 ));
 
@@ -666,7 +676,7 @@ PlazaScenes.LetterDelivery = function() {
 			Text.NL();
 			Text.Add("<b>You received a letter.</b>");
 
-			party.Inv().AddItem(Items.Letter);
+			party.Inv().AddItem(IngredientItems.Letter);
 
 			TimeStep({minute: 15});
 			Text.Flush();

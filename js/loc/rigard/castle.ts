@@ -2,15 +2,19 @@
 import { Event, Link } from '../../event';
 import { EncounterTable } from '../../encountertable';
 import { MageTowerLoc } from './magetower';
-import { WorldTime, MoveToLocation, TimeStep, GAME } from '../../GAME';
+import { WorldTime, MoveToLocation, TimeStep, GAME, WORLD } from '../../GAME';
 import { VaughnScenes } from '../../event/outlaws/vaughn-scenes';
-import { Season } from '../../time';
+import { Season, Time } from '../../time';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { VaughnFlags } from '../../event/outlaws/vaughn-flags';
 import { TerryFlags } from '../../event/terry-flags';
 import { RigardFlags } from './rigard-flags';
 import { AscheFlags } from '../../event/asche-flags';
+import { GlobalScenes } from '../../event/global';
+import { TerryScenes } from '../../event/terry-scenes';
+import { Party } from '../../party';
+import { RigardScenes } from './rigard';
 
 
 let CastleLoc = {
@@ -20,7 +24,7 @@ let CastleLoc = {
 	Dungeon   : new Event("Dungeons")
 };
 
-let NobleScenes = {};
+let NobleScenes : any = {};
 
 
 //
@@ -33,13 +37,13 @@ CastleLoc.Grounds.description = function() {
 
 //Random events for royal grounds
 CastleLoc.Grounds.enc = new EncounterTable();
-CastleLoc.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Chatter2;});
+CastleLoc.Grounds.enc.AddEnc(function() { return RigardScenes.Chatter2;});
 CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.Parkland;});
-CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.JeannesTower;}, 1.0, function() { return Scenes.Global.MetJeanne(); });
+CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.JeannesTower;}, 1.0, function() { return GlobalScenes.MetJeanne(); });
 CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.TheDistrict;});
 CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.MeetingMajid;}, 1.0, function() {
 	let rigard = GAME().rigard;
-	return !Scenes.Global.PortalsOpen() && !(rigard.flags["Nobles"] & RigardFlags.Nobles.MetMajid);
+	return !GlobalScenes.PortalsOpen() && !(rigard.flags["Nobles"] & RigardFlags.Nobles.MetMajid);
 });
 CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.GuardPatrol;}, 1.0, function() { return !WorldTime().IsDay(); });
 CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.AlmsForThePoor;}, 1.0, function() {
@@ -49,9 +53,9 @@ CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.AlmsForThePoor;}, 1
 CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.Elodie;}, 1.0, function() {
 	let vaughn = GAME().vaughn;
 	let rigard = GAME().rigard;
-	return !Scenes.Global.PortalsOpen() &&
+	return !GlobalScenes.PortalsOpen() &&
 		!(rigard.flags["Nobles"] & RigardFlags.Nobles.Elodie) &&
-		Scenes.Global.VisitedOutlaws() &&
+		GlobalScenes.VisitedOutlaws() &&
 		WorldTime().IsDay() &&
 		vaughn.flags["Met"] < VaughnFlags.Met.OnTaskLockpicks;
 });
@@ -72,7 +76,7 @@ CastleLoc.Grounds.enc.AddEnc(function() { return NobleScenes.Buns;}, 1.0, functi
 
 CastleLoc.Grounds.onEntry = function() {
 	if(Math.random() < 0.2)
-		Scenes.Rigard.Chatter2(true);
+		RigardScenes.Chatter2(true);
 	else
 		Gui.PrintDefaultOptions();
 }
@@ -84,7 +88,7 @@ CastleLoc.Grounds.links.push(new Link(
 		Text.NL();
 	},
 	function() {
-		MoveToLocation(world.loc.Rigard.Plaza);
+		MoveToLocation(WORLD().loc.Rigard.Plaza);
 	}
 ));
 CastleLoc.Grounds.links.push(new Link(
@@ -114,7 +118,7 @@ CastleLoc.Grounds.links.push(new Link(
 	}, true,
 	null,
 	function() {
-		Scenes.Terry.Release();
+		TerryScenes.Release();
 	}
 ));
 
@@ -207,6 +211,9 @@ NobleScenes.JeannesTower = function() {
 
 NobleScenes.TheDistrict = function() {
 	let player = GAME().player;
+	let terry = GAME().terry;
+	let kiakai = GAME().kiakai;
+	let cveta = GAME().cveta;
 	let party : Party = GAME().party;
 
 	var parse : any = {

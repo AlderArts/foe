@@ -2,26 +2,29 @@
 //
 // Armor Shop
 //
+import * as _ from 'lodash';
 
 import { Event, Link } from '../../event';
 import { EncounterTable } from '../../encountertable';
 import { Shop } from '../../shop';
 import { Items } from '../../items';
-import { WorldTime, MoveToLocation, GAME } from '../../GAME';
+import { WorldTime, MoveToLocation, GAME, WORLD } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
+import { Item } from '../../item';
+import { Party } from '../../party';
 
 let ArmorShopLoc = new Event("Twopenny's");
 
-let ArmorShopScenes = {};
+let ArmorShopScenes : any = {};
 ArmorShopScenes.IsOpen = function() {
-	return (WorldTime().hour >= 9 && WorldTime().hour < 20) && !rigard.UnderLockdown();
+	return (WorldTime().hour >= 9 && WorldTime().hour < 20) && !GAME().rigard.UnderLockdown();
 }
 
 ArmorShopScenes.CreateShop = function() {
 	let player = GAME().player;
 	
-	var buySuccessFunc = function(item, cost, num) {
+	var buySuccessFunc = function(item : Item, cost : number, num : number) {
 		var parse : any = {
 			sirmadam : player.mfTrue("sir", "madam")
 		};
@@ -36,7 +39,7 @@ ArmorShopScenes.CreateShop = function() {
 		
 		Text.NL();
 	};
-	var buyFailFunc = function(item, cost, bought) {
+	var buyFailFunc = function(item : Item, cost : number, bought : boolean) {
 		var parse : any = {
 			sirmadam : player.mfTrue("sir", "madam")
 		};
@@ -57,7 +60,7 @@ ArmorShopScenes.CreateShop = function() {
 	};
 	
 	var shop = new Shop({
-		buyPromptFunc : function(item, cost, bought) {
+		buyPromptFunc : function(item : Item, cost : number, bought : boolean) {
 			var coin = Text.NumToText(cost);
 			var parse : any = {
 				sirmadam : player.mfTrue("sir", "madam"),
@@ -78,7 +81,7 @@ ArmorShopScenes.CreateShop = function() {
 		},
 		buySuccessFunc : buySuccessFunc,
 		buyFailFunc : buyFailFunc,
-		sellPromptFunc : function(item, cost, sold) {
+		sellPromptFunc : function(item : Item, cost : number, sold: boolean) {
 			var coin = Text.NumToText(cost);
 			var parse : any = {
 				sirmadam : player.mfTrue("sir", "madam"),
@@ -113,7 +116,7 @@ ArmorShopScenes.CreateShop = function() {
 			
 			Text.NL();
 		},
-		sellSuccessFunc : function(item, cost, num) {
+		sellSuccessFunc : function(item : Item, cost : number, num : number) {
 			var parse : any = {
 				sirmadam : player.mfTrue("sir", "madam")
 			};
@@ -134,7 +137,7 @@ ArmorShopScenes.CreateShop = function() {
 			
 			Text.NL();
 		},
-		sellFailFunc : function(item, cost, sold) {
+		sellFailFunc : function(item : Item, cost : number, sold: boolean) {
 			var parse : any = {
 				sirmadam : player.mfTrue("sir", "madam"),
 				item : item.sDesc()
@@ -158,7 +161,7 @@ ArmorShopScenes.CreateShop = function() {
 	});
 	
 	var specialShop = new Shop({
-		buyPromptFunc : function(item, cost) {
+		buyPromptFunc : function(item : Item, cost : number) {
 			var coin = Text.NumToText(cost);
 			var parse : any = {
 				sirmadam : player.mfTrue("sir", "madam"),
@@ -242,7 +245,7 @@ ArmorShopLoc.events.push(new Link(
 ArmorShopLoc.events.push(new Link(
 	"Leave", true, true, null,
 	function() {
-		MoveToLocation(world.loc.Rigard.ShopStreet.street, {minute: 5});
+		MoveToLocation(WORLD().loc.Rigard.ShopStreet.street, {minute: 5});
 	}
 ));
 
@@ -266,6 +269,7 @@ ArmorShopLoc.onEntry = function() {
 ArmorShopScenes.FirstEntry = function() {
 	let party : Party = GAME().party;
 	let rigard = GAME().rigard;
+	let terry = GAME().terry;
 
 	var parse : any = {
 		
@@ -324,7 +328,7 @@ ArmorShopScenes.FirstEntry = function() {
 }
 
 
-ArmorShopScenes.RegularEntry = function(newStock) {
+ArmorShopScenes.RegularEntry = function(newStock : boolean) {
 	let rigard = GAME().rigard;
 
 	var parse : any = {
@@ -453,7 +457,7 @@ ArmorShopScenes.Prompt = function() {
 	prompt();
 }
 
-ArmorShopScenes.Talk = function(backFunc) {
+ArmorShopScenes.Talk = function(backFunc : any) {
 	let player = GAME().player;
 	let rigard = GAME().rigard;
 

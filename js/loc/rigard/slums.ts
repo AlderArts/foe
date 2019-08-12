@@ -1,9 +1,13 @@
 
 import { Event, Link } from '../../event';
 import { EncounterTable } from '../../encountertable';
-import { WorldTime, MoveToLocation, GAME } from '../../GAME';
+import { WorldTime, MoveToLocation, GAME, WORLD } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
+import { Season } from '../../time';
+import { RigardScenes } from './rigard';
+import { LeiScenes } from '../../event/royals/lei-scenes';
+import { MirandaScenes } from '../../event/miranda-scenes';
 
 let SlumsLoc = {
 	gate     : new Event("Peasants' Gate"),
@@ -22,7 +26,7 @@ SlumsLoc.gate.description = function() {
 	Text.NL();
 	
 	if(miranda.IsAtLocation()) {
-		Scenes.Miranda.RigardSlumGatesDesc();
+		MirandaScenes.RigardSlumGatesDesc();
 	}
 	else {
 		var fucked = miranda.flags["gBJ"] + miranda.flags["gAnal"];
@@ -39,18 +43,18 @@ SlumsLoc.gate.description = function() {
 }
 
 SlumsLoc.gate.enc = new EncounterTable();
-SlumsLoc.gate.enc.AddEnc(function() { return Scenes.Rigard.Chatter;});
-SlumsLoc.gate.enc.AddEnc(function() { return Scenes.Rigard.Chatter2;});
-SlumsLoc.gate.enc.AddEnc(function() { return Scenes.Rigard.CityHistory;}, 1.0, function() {
+SlumsLoc.gate.enc.AddEnc(function() { return RigardScenes.Chatter;});
+SlumsLoc.gate.enc.AddEnc(function() { return RigardScenes.Chatter2;});
+SlumsLoc.gate.enc.AddEnc(function() { return RigardScenes.CityHistory;}, 1.0, function() {
 	let rigard = GAME().rigard;
 	return rigard.flags["CityHistory"] == 0;
 });
-SlumsLoc.gate.enc.AddEnc(function() { return Scenes.Lei.GuardStalking; }, 3.0, function() { return Scenes.Lei.GuardStalkingApplicable(); });
+SlumsLoc.gate.enc.AddEnc(function() { return LeiScenes.GuardStalking; }, 3.0, function() { return LeiScenes.GuardStalkingApplicable(); });
 SlumsLoc.gate.onEntry = function() {
 	if(Math.random() < 0.15)
-		Scenes.Rigard.Chatter(true);
+		RigardScenes.Chatter(true);
 	else if(Math.random() < 0.3)
-		Scenes.Rigard.Chatter2(true);
+		RigardScenes.Chatter2(true);
 	else
 		Gui.PrintDefaultOptions();
 }
@@ -65,7 +69,7 @@ SlumsLoc.gate.links.push(new Link(
 		let miranda = GAME().miranda;
 		Text.Clear();
 		if(miranda.IsAtLocation()) {
-			Scenes.Miranda.RigardSlumGatesEnter();
+			MirandaScenes.RigardSlumGatesEnter();
 		}
 		else {
 			if(!rigard.GatesOpen()) {
@@ -75,7 +79,7 @@ SlumsLoc.gate.links.push(new Link(
 				Text.Add("The guards lazily check your papers before letting you through the gates into the city. They apparently found no issue, or simply didn’t want to bother with searching you, as the process is quick and painless.");
 				Text.Flush();
 				Gui.NextPrompt(function() {
-					MoveToLocation(world.loc.Rigard.Residential.street, {minute: 5});
+					MoveToLocation(WORLD().loc.Rigard.Residential.street, {minute: 5});
 				});
 				return;
 			}
@@ -93,7 +97,7 @@ SlumsLoc.gate.links.push(new Link(
 		Text.Add("Go to the main gate? ");
 	},
 	function() {
-		MoveToLocation(world.loc.Plains.Gate, {minute: 15});
+		MoveToLocation(WORLD().loc.Plains.Gate, {minute: 15});
 	}
 ));
 SlumsLoc.gate.links.push(new Link(
@@ -102,7 +106,7 @@ SlumsLoc.gate.links.push(new Link(
 		Text.Add("Go to the tavern? ");
 	},
 	function() {
-		MoveToLocation(world.loc.Rigard.Tavern.common, {minute: 10});
+		MoveToLocation(WORLD().loc.Rigard.Tavern.common, {minute: 10});
 	}
 ));
 SlumsLoc.gate.links.push(new Link(
@@ -111,7 +115,7 @@ SlumsLoc.gate.links.push(new Link(
 		Text.Add("Go to the lake? ");
 	},
 	function() {
-		MoveToLocation(world.loc.Lake.Shore, {minute: 45});
+		MoveToLocation(WORLD().loc.Lake.Shore, {minute: 45});
 	}
 ));
 
@@ -122,7 +126,7 @@ SlumsLoc.gate.events.push(new Link(
 	}, true,
 	null,
 	function() {
-		Scenes.Miranda.RigardGatesInteract();
+		MirandaScenes.RigardGatesInteract();
 	}
 ));
 
