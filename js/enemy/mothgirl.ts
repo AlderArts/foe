@@ -113,7 +113,7 @@ Mothgirl.prototype.DropTable = function() {
 	if(Math.random() < 0.05) drops.push({ it: IngredientItems.Lettuce });
 
 	if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Avia });
-	if(Math.random() < 0.02) drops.push({ it: IngredientItems.HoneyBrew });
+	if(Math.random() < 0.02) drops.push({ it: AlchemyItems.HoneyBrew });
 	return drops;
 }
 

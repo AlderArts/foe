@@ -6,7 +6,6 @@ import { EncounterTable } from '../../encountertable';
 import { IngredientItems } from '../../items/ingredients';
 import { AlchemyItems } from '../../items/alchemy';
 import { ToysItems } from '../../items/toys';
-import { Cock } from '../../body/cock';
 import { Sex } from '../../entity-sex';
 import { Race } from '../../body/race';
 import { LowerBodyType } from '../../body/body';

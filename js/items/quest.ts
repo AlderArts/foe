@@ -1,61 +1,71 @@
 
 import { Item, ItemType } from '../item';
 
-let QuestItems : any = {};
+let cactoid = new Item("quest0", "Cactoid", ItemType.Quest);
+cactoid.price = 0;
+cactoid.Short = function() { return "A live Cactoid"; }
+cactoid.Long  = function() { return "A small desert creature that looks like a turtle, but with spiny needles on its back."; }
 
-QuestItems.Cactoid = new Item("quest0", "Cactoid", ItemType.Quest);
-QuestItems.Cactoid.price = 0;
-QuestItems.Cactoid.Short = function() { return "A live Cactoid"; }
-QuestItems.Cactoid.Long  = function() { return "A small desert creature that looks like a turtle, but with spiny needles on its back."; }
+let redAlgae = new Item("quest1", "Red algae", ItemType.Quest);
+redAlgae.price = 0;
+redAlgae.Short = function() { return "A red algae"; }
+redAlgae.Long  = function() { return "A red algae, gathered from the lake."; }
 
-QuestItems.RedAlgae = new Item("quest1", "Red algae", ItemType.Quest);
-QuestItems.RedAlgae.price = 0;
-QuestItems.RedAlgae.Short = function() { return "A red algae"; }
-QuestItems.RedAlgae.Long  = function() { return "A red algae, gathered from the lake."; }
+let golHusk = new Item("quest2", "Gol husk", ItemType.Quest);
+golHusk.price = 0;
+golHusk.Short = function() { return "A Gol husk"; }
+golHusk.Long  = function() { return "The husk looks like it once belonged to a large insectoid creature."; }
 
-QuestItems.GolHusk = new Item("quest2", "Gol husk", ItemType.Quest);
-QuestItems.GolHusk.price = 0;
-QuestItems.GolHusk.Short = function() { return "A Gol husk"; }
-QuestItems.GolHusk.Long  = function() { return "The husk looks like it once belonged to a large insectoid creature."; }
+let scepter = new Item("quest3", "Scepter", ItemType.Quest);
+scepter.price = 0;
+scepter.Short = function() { return "Lagon's scepter"; }
+scepter.Long  = function() { return "There is a large gemstone set into the scepter, which looks to be of fine craftmanship."; }
 
-QuestItems.Scepter = new Item("quest3", "Scepter", ItemType.Quest);
-QuestItems.Scepter.price = 0;
-QuestItems.Scepter.Short = function() { return "Lagon's scepter"; }
-QuestItems.Scepter.Long  = function() { return "There is a large gemstone set into the scepter, which looks to be of fine craftmanship."; }
+let violin = new Item("quest4", "Violin", ItemType.Quest);
+violin.price = 0;
+violin.Short = function() { return "Cveta's Violin"; }
+violin.Long  = function() { return "An incredibly expensive instrument you bought from Dio Rintell in Rigard on the behest of Cveta."; }
 
-QuestItems.Violin = new Item("quest4", "Violin", ItemType.Quest);
-QuestItems.Violin.price = 0;
-QuestItems.Violin.Short = function() { return "Cveta's Violin"; }
-QuestItems.Violin.Long  = function() { return "An incredibly expensive instrument you bought from Dio Rintell in Rigard on the behest of Cveta."; }
+let ginseng = new Item("quest5", "Ginseng", ItemType.Quest);
+ginseng.price = 0;
+ginseng.Short = function() { return "Fresh Ginseng"; }
+ginseng.Long  = function() { return "A potent healing herb."; }
 
-QuestItems.Ginseng = new Item("quest5", "Ginseng", ItemType.Quest);
-QuestItems.Ginseng.price = 0;
-QuestItems.Ginseng.Short = function() { return "Fresh Ginseng"; }
-QuestItems.Ginseng.Long  = function() { return "A potent healing herb."; }
+let nightshade = new Item("quest6", "Nightshade", ItemType.Quest);
+nightshade.price = 0;
+nightshade.Short = function() { return "Nightshade"; }
+nightshade.Long  = function() { return "A potent poisonous plant."; }
 
-QuestItems.Nightshade = new Item("quest6", "Nightshade", ItemType.Quest);
-QuestItems.Nightshade.price = 0;
-QuestItems.Nightshade.Short = function() { return "Nightshade"; }
-QuestItems.Nightshade.Long  = function() { return "A potent poisonous plant."; }
+let outlawLetter = new Item("quest7", "Outlaws' letter", ItemType.Quest);
+outlawLetter.price = 0;
+outlawLetter.Short = function() { return "Outlaws' letter"; }
+outlawLetter.Long  = function() { return "The sealed letter that the Outlaws asked you to deliver to their contact in Rigard."; }
 
-QuestItems.OutlawLetter = new Item("quest7", "Outlaws' letter", ItemType.Quest);
-QuestItems.OutlawLetter.price = 0;
-QuestItems.OutlawLetter.Short = function() { return "Outlaws' letter"; }
-QuestItems.OutlawLetter.Long  = function() { return "The sealed letter that the Outlaws asked you to deliver to their contact in Rigard."; }
+let outlawLockpicks = new Item("quest8", "Outlaws' tools", ItemType.Quest);
+outlawLockpicks.price = 0;
+outlawLockpicks.Short = function() { return "Outlaws' tools"; }
+outlawLockpicks.Long  = function() { return "A set of odd tools the Outlaws sent you to deliver to Elodie, one of their contacts in Rigard."; }
 
-QuestItems.OutlawLockpicks = new Item("quest8", "Outlaws' tools", ItemType.Quest);
-QuestItems.OutlawLockpicks.price = 0;
-QuestItems.OutlawLockpicks.Short = function() { return "Outlaws' tools"; }
-QuestItems.OutlawLockpicks.Long  = function() { return "A set of odd tools the Outlaws sent you to deliver to Elodie, one of their contacts in Rigard."; }
+let outlawPoison = new Item("quest9", "Poison", ItemType.Quest);
+outlawPoison.price = 0;
+outlawPoison.Short = function() { return "Poison"; }
+outlawPoison.Long  = function() { return "A vial of nasty - though non-lethal - poison intended for the lady Katara Heydrich, on behalf of Vaughn."; }
 
-QuestItems.OutlawPoison = new Item("quest9", "Poison", ItemType.Quest);
-QuestItems.OutlawPoison.price = 0;
-QuestItems.OutlawPoison.Short = function() { return "Poison"; }
-QuestItems.OutlawPoison.Long  = function() { return "A vial of nasty - though non-lethal - poison intended for the lady Katara Heydrich, on behalf of Vaughn."; }
+let outlawAphrodisiac = new Item("quest10", "Aphrodisiac", ItemType.Quest);
+outlawAphrodisiac.price = 0;
+outlawAphrodisiac.Short = function() { return "Aphrodisiac"; }
+outlawAphrodisiac.Long  = function() { return "A vial of potent aphrodisiac intended for the lady Katara Heydrich, on behalf of Vaughn."; }
 
-QuestItems.OutlawAphrodisiac = new Item("quest10", "Aphrodisiac", ItemType.Quest);
-QuestItems.OutlawAphrodisiac.price = 0;
-QuestItems.OutlawAphrodisiac.Short = function() { return "Aphrodisiac"; }
-QuestItems.OutlawAphrodisiac.Long  = function() { return "A vial of potent aphrodisiac intended for the lady Katara Heydrich, on behalf of Vaughn."; }
-
-export { QuestItems };
+export namespace QuestItems {
+    export const Cactoid = cactoid;
+    export const RedAlgae = redAlgae;
+    export const GolHusk = golHusk;
+    export const Scepter = scepter;
+    export const Violin = violin;
+    export const Ginseng = ginseng;
+    export const Nightshade = nightshade;
+    export const OutlawLetter = outlawLetter;
+    export const OutlawLockpicks = outlawLockpicks;
+    export const OutlawPoison = outlawPoison;
+    export const OutlawAphrodisiac = outlawAphrodisiac;
+}

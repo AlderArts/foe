@@ -3,82 +3,81 @@ import { GAME } from '../GAME';
 import { Text } from '../text';
 import { Entity } from '../entity';
 
-let IngredientItems : any = {};
 
-IngredientItems.HorseHair = new Item("equin1", "Horse hair", ItemType.Ingredient);
-IngredientItems.HorseHair.price = 1;
-IngredientItems.HorseHair.sDesc = function() { return "horse hair"; }
-IngredientItems.HorseHair.Short = function() { return "Hair from a horse"; }
-IngredientItems.HorseHair.Long = function() { return "The hair of a horse, consisting of long fine strands."; }
+let horseHair = new Item("equin1", "Horse hair", ItemType.Ingredient);
+horseHair.price = 1;
+horseHair.sDesc = function() { return "horse hair"; }
+horseHair.Short = function() { return "Hair from a horse"; }
+horseHair.Long = function() { return "The hair of a horse, consisting of long fine strands."; }
 
-IngredientItems.HorseShoe = new Item("equin2", "Horseshoe", ItemType.Ingredient);
-IngredientItems.HorseShoe.price = 1;
-IngredientItems.HorseShoe.sDesc = function() { return "horseshoe"; }
-IngredientItems.HorseShoe.Short = function() { return "A horseshoe"; }
-IngredientItems.HorseShoe.Long = function() { return "A horseshoe, made of metal."; }
+let horseShoe = new Item("equin2", "Horseshoe", ItemType.Ingredient);
+horseShoe.price = 1;
+horseShoe.sDesc = function() { return "horseshoe"; }
+horseShoe.Short = function() { return "A horseshoe"; }
+horseShoe.Long = function() { return "A horseshoe, made of metal."; }
 
-IngredientItems.HorseCum = new Item("equin3", "E.Fluid", ItemType.Ingredient);
-IngredientItems.HorseCum.price = 2;
-IngredientItems.HorseCum.sDesc = function() { return "sticky equine fluids"; }
-IngredientItems.HorseCum.Long = function() { return "Sticky equine fluids of uncertain origin, contained in a bottle."; }
-
-
-
-IngredientItems.RabbitFoot = new Item("lago1", "Rabbit foot", ItemType.Ingredient);
-IngredientItems.RabbitFoot.price = 1;
-IngredientItems.RabbitFoot.sDesc = function() { return "lucky charm"; }
-IngredientItems.RabbitFoot.Short = function() { return "A lucky charm"; }
-IngredientItems.RabbitFoot.Long = function() { return "A lucky charm in the form of a rabbit's foot."; }
-
-IngredientItems.CarrotJuice = new Item("lago2", "Carrot juice", ItemType.Ingredient);
-IngredientItems.CarrotJuice.price = 1;
-IngredientItems.CarrotJuice.sDesc = function() { return "carrot juice"; }
-IngredientItems.CarrotJuice.Short = function() { return "A bottle of carrot juice"; }
-IngredientItems.CarrotJuice.Long = function() { return "A bottle containing a deeply orange juice, made from pressed carrots."; }
-
-IngredientItems.Lettuce = new Item("lago3", "Lettuce", ItemType.Ingredient);
-IngredientItems.Lettuce.price = 1;
-IngredientItems.Lettuce.sDesc = function() { return "lettuce"; }
-IngredientItems.Lettuce.Short = function() { return "A leaf of lettuce"; }
-IngredientItems.Lettuce.Long = function() { return "A leaf of lettuce, sweet, healthy and crunchy."; }
+let horseCum = new Item("equin3", "E.Fluid", ItemType.Ingredient);
+horseCum.price = 2;
+horseCum.sDesc = function() { return "sticky equine fluids"; }
+horseCum.Long = function() { return "Sticky equine fluids of uncertain origin, contained in a bottle."; }
 
 
 
-IngredientItems.Whiskers = new Item("felin1", "Whiskers", ItemType.Ingredient);
-IngredientItems.Whiskers.price = 1;
-IngredientItems.Whiskers.sDesc = function() { return "whiskers"; }
-IngredientItems.Whiskers.Short = function() { return "A cat's whiskers"; }
-IngredientItems.Whiskers.Long = function() { return "The whiskers from a cat of some kind."; }
+let rabbitFoot = new Item("lago1", "Rabbit foot", ItemType.Ingredient);
+rabbitFoot.price = 1;
+rabbitFoot.sDesc = function() { return "lucky charm"; }
+rabbitFoot.Short = function() { return "A lucky charm"; }
+rabbitFoot.Long = function() { return "A lucky charm in the form of a rabbit's foot."; }
 
-IngredientItems.HairBall = new Item("felin2", "Hair ball", ItemType.Ingredient);
-IngredientItems.HairBall.price = 1;
-IngredientItems.HairBall.sDesc = function() { return "hair ball"; }
-IngredientItems.HairBall.Short = function() { return "Eww..."; }
-IngredientItems.HairBall.Long = function() { return "Looks like something a cat coughed up."; }
+let carrotJuice = new Item("lago2", "Carrot juice", ItemType.Ingredient);
+carrotJuice.price = 1;
+carrotJuice.sDesc = function() { return "carrot juice"; }
+carrotJuice.Short = function() { return "A bottle of carrot juice"; }
+carrotJuice.Long = function() { return "A bottle containing a deeply orange juice, made from pressed carrots."; }
 
-IngredientItems.CatClaw = new Item("felin3", "Cat claw", ItemType.Ingredient);
-IngredientItems.CatClaw.price = 1;
-IngredientItems.CatClaw.sDesc = function() { return "cat claw"; }
-IngredientItems.CatClaw.Short = function() { return "A claw from a cat"; }
-IngredientItems.CatClaw.Long = function() { return "Sharp cat claws."; }
+let lettuce = new Item("lago3", "Lettuce", ItemType.Ingredient);
+lettuce.price = 1;
+lettuce.sDesc = function() { return "lettuce"; }
+lettuce.Short = function() { return "A leaf of lettuce"; }
+lettuce.Long = function() { return "A leaf of lettuce, sweet, healthy and crunchy."; }
 
 
 
-IngredientItems.SnakeOil = new Item("rept1", "Oil", ItemType.Ingredient);
-IngredientItems.SnakeOil.price = 1;
-IngredientItems.SnakeOil.sDesc = function() { return "snake oil"; }
-IngredientItems.SnakeOil.Long = function() { return "An oil that could perhaps be used by for massage."; }
+let whiskers = new Item("felin1", "Whiskers", ItemType.Ingredient);
+whiskers.price = 1;
+whiskers.sDesc = function() { return "whiskers"; }
+whiskers.Short = function() { return "A cat's whiskers"; }
+whiskers.Long = function() { return "The whiskers from a cat of some kind."; }
 
-IngredientItems.LizardScale = new Item("rept2", "L.Scale", ItemType.Ingredient);
-IngredientItems.LizardScale.price = 1;
-IngredientItems.LizardScale.sDesc = function() { return "lizard scale"; }
-IngredientItems.LizardScale.Long = function() { return "A brightly shining scale, polished by the desert sands."; }
+let hairBall = new Item("felin2", "Hair ball", ItemType.Ingredient);
+hairBall.price = 1;
+hairBall.sDesc = function() { return "hair ball"; }
+hairBall.Short = function() { return "Eww..."; }
+hairBall.Long = function() { return "Looks like something a cat coughed up."; }
 
-IngredientItems.LizardEgg = new Item("rept3", "L.Egg", ItemType.Ingredient);
-IngredientItems.LizardEgg.price = 2;
-IngredientItems.LizardEgg.sDesc = function() { return "lizard egg"; }
-IngredientItems.LizardEgg.Long = function() { return "An unfertilized lizard egg. Good for a snack."; }
-IngredientItems.LizardEgg.Use = function(target : Entity) {
+let catClaw = new Item("felin3", "Cat claw", ItemType.Ingredient);
+catClaw.price = 1;
+catClaw.sDesc = function() { return "cat claw"; }
+catClaw.Short = function() { return "A claw from a cat"; }
+catClaw.Long = function() { return "Sharp cat claws."; }
+
+
+
+let snakeOil = new Item("rept1", "Oil", ItemType.Ingredient);
+snakeOil.price = 1;
+snakeOil.sDesc = function() { return "snake oil"; }
+snakeOil.Long = function() { return "An oil that could perhaps be used by for massage."; }
+
+let lizardScale = new Item("rept2", "L.Scale", ItemType.Ingredient);
+lizardScale.price = 1;
+lizardScale.sDesc = function() { return "lizard scale"; }
+lizardScale.Long = function() { return "A brightly shining scale, polished by the desert sands."; }
+
+let lizardEgg = new Item("rept3", "L.Egg", ItemType.Ingredient);
+lizardEgg.price = 2;
+lizardEgg.sDesc = function() { return "lizard egg"; }
+lizardEgg.Long = function() { return "An unfertilized lizard egg. Good for a snack."; }
+lizardEgg.Use = function(target : Entity) {
 	target.AddHPFraction(0.02);
 	var parse : any = { name: target.NameDesc(), s: target == GAME().player ? "" : "s" };
 	Text.Add("[name] eat[s] a lizard egg. It is slightly invigorating.", parse);
@@ -87,23 +86,23 @@ IngredientItems.LizardEgg.Use = function(target : Entity) {
 	return {consume: true};
 }
 
-IngredientItems.SnakeFang = new Item("rept4", "S.Fang", ItemType.Ingredient);
-IngredientItems.SnakeFang.price = 1;
-IngredientItems.SnakeFang.sDesc = function() { return "snake fang"; }
-IngredientItems.SnakeFang.Long = function() { return "A sharp, venomous fang from some sort of reptile."; }
+let snakeFang = new Item("rept4", "S.Fang", ItemType.Ingredient);
+snakeFang.price = 1;
+snakeFang.sDesc = function() { return "snake fang"; }
+snakeFang.Long = function() { return "A sharp, venomous fang from some sort of reptile."; }
 
-IngredientItems.SnakeSkin = new Item("rept5", "S.Skin", ItemType.Ingredient);
-IngredientItems.SnakeSkin.price = 1;
-IngredientItems.SnakeSkin.sDesc = function() { return "snake skin"; }
-IngredientItems.SnakeSkin.Long = function() { return "The shed skin from a large snake."; }
+let snakeSkin = new Item("rept5", "S.Skin", ItemType.Ingredient);
+snakeSkin.price = 1;
+snakeSkin.sDesc = function() { return "snake skin"; }
+snakeSkin.Long = function() { return "The shed skin from a large snake."; }
 
 
 
-IngredientItems.GoatMilk = new Item("goat1", "G.Milk", ItemType.Ingredient);
-IngredientItems.GoatMilk.price = 2;
-IngredientItems.GoatMilk.sDesc = function() { return "goat milk"; }
-IngredientItems.GoatMilk.Long = function() { return "A bottle of goat milk."; }
-IngredientItems.GoatMilk.Use = function(target : Entity) {
+let goatMilk = new Item("goat1", "G.Milk", ItemType.Ingredient);
+goatMilk.price = 2;
+goatMilk.sDesc = function() { return "goat milk"; }
+goatMilk.Long = function() { return "A bottle of goat milk."; }
+goatMilk.Use = function(target : Entity) {
 	target.AddHPFraction(0.02);
 	var parse : any = { name: target.NameDesc(), s: target == GAME().player ? "" : "s" };
 	Text.Add("[name] drink[s] a bottle of milk. It is slightly invigorating.", parse);
@@ -112,17 +111,17 @@ IngredientItems.GoatMilk.Use = function(target : Entity) {
 	return {consume: true};
 }
 
-IngredientItems.GoatFleece = new Item("goat2", "Goat fleece", ItemType.Ingredient);
-IngredientItems.GoatFleece.price = 1;
-IngredientItems.GoatFleece.sDesc = function() { return "goat fleece"; }
-IngredientItems.GoatFleece.Long = function() { return "Fleece from a goat, tough and stringy."; }
+let goatFleece = new Item("goat2", "Goat fleece", ItemType.Ingredient);
+goatFleece.price = 1;
+goatFleece.sDesc = function() { return "goat fleece"; }
+goatFleece.Long = function() { return "Fleece from a goat, tough and stringy."; }
 
 
-IngredientItems.SheepMilk = new Item("ovis1", "S.Milk", ItemType.Ingredient);
-IngredientItems.SheepMilk.price = 2;
-IngredientItems.SheepMilk.sDesc = function() { return "sheep milk"; }
-IngredientItems.SheepMilk.Long = function() { return "A bottle of sheep milk."; }
-IngredientItems.SheepMilk.Use = function(target : Entity) {
+let sheepMilk = new Item("ovis1", "S.Milk", ItemType.Ingredient);
+sheepMilk.price = 2;
+sheepMilk.sDesc = function() { return "sheep milk"; }
+sheepMilk.Long = function() { return "A bottle of sheep milk."; }
+sheepMilk.Use = function(target : Entity) {
 	target.AddHPFraction(0.02);
 	var parse : any = { name: target.NameDesc(), s: target == GAME().player ? "" : "s" };
 	Text.Add("[name] drink[s] a bottle of milk. It is slightly invigorating.", parse);
@@ -130,18 +129,19 @@ IngredientItems.SheepMilk.Use = function(target : Entity) {
 	Text.Flush();
 	return {consume: true};
 }
-IngredientItems.Ramshorn = new Item("ovis2", "Ramshorn", ItemType.Ingredient);
-IngredientItems.Ramshorn.price = 1;
-IngredientItems.Ramshorn.sDesc = function() { return "ramshorn"; }
-IngredientItems.Ramshorn.Long = function() { return "A curled horn from a sheep."; }
+
+let ramshorn = new Item("ovis2", "Ramshorn", ItemType.Ingredient);
+ramshorn.price = 1;
+ramshorn.sDesc = function() { return "ramshorn"; }
+ramshorn.Long = function() { return "A curled horn from a sheep."; }
 
 
 
-IngredientItems.CowMilk = new Item("bov1", "Milk", ItemType.Ingredient);
-IngredientItems.CowMilk.price = 2;
-IngredientItems.CowMilk.sDesc = function() { return "cow milk"; }
-IngredientItems.CowMilk.Long = function() { return "A bottle of ordinary cow milk."; }
-IngredientItems.CowMilk.Use = function(target : Entity) {
+let cowMilk = new Item("bov1", "Milk", ItemType.Ingredient);
+cowMilk.price = 2;
+cowMilk.sDesc = function() { return "cow milk"; }
+cowMilk.Long = function() { return "A bottle of ordinary cow milk."; }
+cowMilk.Use = function(target : Entity) {
 	target.AddHPFraction(0.02);
 	var parse : any = { name: target.NameDesc(), s: target == GAME().player ? "" : "s" };
 	Text.Add("[name] drink[s] a bottle of milk. It is slightly invigorating.", parse);
@@ -149,38 +149,39 @@ IngredientItems.CowMilk.Use = function(target : Entity) {
 	Text.Flush();
 	return {consume: true};
 }
-IngredientItems.CowBell = new Item("bov2", "Cowbell", ItemType.Ingredient);
-IngredientItems.CowBell.price = 2;
-IngredientItems.CowBell.sDesc = function() { return "cowbell"; }
-IngredientItems.CowBell.Short = function() { return "A cowbell"; }
-IngredientItems.CowBell.Long = function() { return "A small bell on a string, used to call cows."; }
 
-IngredientItems.FreshGrass = new Item("bov3", "Grass", ItemType.Ingredient);
-IngredientItems.FreshGrass.price = 1;
-IngredientItems.FreshGrass.sDesc = function() { return "fresh grass"; }
-IngredientItems.FreshGrass.Short = function() { return "Fresh green grass"; }
-IngredientItems.FreshGrass.Long = function() { return "A handful of green grass."; }
+let cowBell = new Item("bov2", "Cowbell", ItemType.Ingredient);
+cowBell.price = 2;
+cowBell.sDesc = function() { return "cowbell"; }
+cowBell.Short = function() { return "A cowbell"; }
+cowBell.Long = function() { return "A small bell on a string, used to call cows."; }
+
+let freshGrass = new Item("bov3", "Grass", ItemType.Ingredient);
+freshGrass.price = 1;
+freshGrass.sDesc = function() { return "fresh grass"; }
+freshGrass.Short = function() { return "Fresh green grass"; }
+freshGrass.Long = function() { return "A handful of green grass."; }
 
 
 
-IngredientItems.CanisRoot = new Item("dog1", "Canis root", ItemType.Ingredient);
-IngredientItems.CanisRoot.price = 1;
-IngredientItems.CanisRoot.sDesc = function() { return "canis root"; }
-IngredientItems.CanisRoot.Short = function() { return "A root"; }
-IngredientItems.CanisRoot.Long = function() { return "A strange, knotty root."; }
+let canisRoot = new Item("dog1", "Canis root", ItemType.Ingredient);
+canisRoot.price = 1;
+canisRoot.sDesc = function() { return "canis root"; }
+canisRoot.Short = function() { return "A root"; }
+canisRoot.Long = function() { return "A strange, knotty root."; }
 
-IngredientItems.DogBone = new Item("dog2", "Dog bone", ItemType.Ingredient);
-IngredientItems.DogBone.price = 1;
-IngredientItems.DogBone.sDesc = function() { return "dog bone"; }
-IngredientItems.DogBone.Short = function() { return "A dog bone"; }
-IngredientItems.DogBone.Long = function() { return "A bone, chewed to the marrow. It looks like it has been buried at least once."; }
+let dogBone = new Item("dog2", "Dog bone", ItemType.Ingredient);
+dogBone.price = 1;
+dogBone.sDesc = function() { return "dog bone"; }
+dogBone.Short = function() { return "A dog bone"; }
+dogBone.Long = function() { return "A bone, chewed to the marrow. It looks like it has been buried at least once."; }
 
-IngredientItems.DogBiscuit = new Item("dog3", "Biscuit", ItemType.Ingredient);
-IngredientItems.DogBiscuit.price = 3;
-IngredientItems.DogBiscuit.sDesc = function() { return "dog biscuit"; }
-IngredientItems.DogBiscuit.Short = function() { return "A dog biscuit"; }
-IngredientItems.DogBiscuit.Long = function() { return "A biscuit, commonly given to dogs as a reward. It doesn't taste very good."; }
-IngredientItems.DogBiscuit.Use = function(target : Entity) {
+let dogBiscuit = new Item("dog3", "Biscuit", ItemType.Ingredient);
+dogBiscuit.price = 3;
+dogBiscuit.sDesc = function() { return "dog biscuit"; }
+dogBiscuit.Short = function() { return "A dog biscuit"; }
+dogBiscuit.Long = function() { return "A biscuit, commonly given to dogs as a reward. It doesn't taste very good."; }
+dogBiscuit.Use = function(target : Entity) {
 	target.AddHPFraction(0.02);
 	var parse : any = { name: target.NameDesc(), s: target == GAME().player ? "" : "s" };
 	Text.Add("[name] chew[s] on a dog biscuit. It is slightly invigorating.", parse);
@@ -191,56 +192,56 @@ IngredientItems.DogBiscuit.Use = function(target : Entity) {
 
 
 
-IngredientItems.WolfFang = new Item("wolf2", "Fang", ItemType.Ingredient);
-IngredientItems.WolfFang.price = 1;
-IngredientItems.WolfFang.sDesc = function() { return "canine fang"; }
-IngredientItems.WolfFang.Short = function() { return "A canid fang"; }
-IngredientItems.WolfFang.Long = function() { return "A fang from some form of canid predator."; }
+let wolfFang = new Item("wolf2", "Fang", ItemType.Ingredient);
+wolfFang.price = 1;
+wolfFang.sDesc = function() { return "canine fang"; }
+wolfFang.Short = function() { return "A canid fang"; }
+wolfFang.Long = function() { return "A fang from some form of canid predator."; }
 
-IngredientItems.Wolfsbane = new Item("wolf3", "Wolfsbane", ItemType.Ingredient);
-IngredientItems.Wolfsbane.price = 3;
-IngredientItems.Wolfsbane.sDesc = function() { return "wolfsbane"; }
-IngredientItems.Wolfsbane.Short = function() { return "A wolfsbane flower"; }
-IngredientItems.Wolfsbane.Long = function() { return "Wolfsbane, a poisonous flower."; }
-
-
-
-IngredientItems.FoxBerries = new Item("fox2", "Fox berries", ItemType.Ingredient);
-IngredientItems.FoxBerries.price = 1;
-IngredientItems.FoxBerries.sDesc = function() { return "fox berries"; }
-IngredientItems.FoxBerries.Short = function() { return "A handful of fox berries"; }
-IngredientItems.FoxBerries.Long = function() { return "A handful of fox berries. Possibly toxic."; }
-
-IngredientItems.Foxglove = new Item("fox3", "Foxglove", ItemType.Ingredient);
-IngredientItems.Foxglove.price = 1;
-IngredientItems.Foxglove.sDesc = function() { return "foxglove"; }
-IngredientItems.Foxglove.Short = function() { return "A foxglove flower"; }
-IngredientItems.Foxglove.Long = function() { return "A foxglove flower, commonly found on meadows."; }
+let wolfsbane = new Item("wolf3", "Wolfsbane", ItemType.Ingredient);
+wolfsbane.price = 3;
+wolfsbane.sDesc = function() { return "wolfsbane"; }
+wolfsbane.Short = function() { return "A wolfsbane flower"; }
+wolfsbane.Long = function() { return "Wolfsbane, a poisonous flower."; }
 
 
 
-IngredientItems.CorruptPlant = new Item("demon1", "Corrupt plant", ItemType.Ingredient);
-IngredientItems.CorruptPlant.price = 0;
-IngredientItems.CorruptPlant.sDesc = function() { return "strange plant"; }
-IngredientItems.CorruptPlant.Short = function() { return "A strange plant"; }
-IngredientItems.CorruptPlant.Long = function() { return "A strange plant, corrupted by some evil power."; }
+let foxBerries = new Item("fox2", "Fox berries", ItemType.Ingredient);
+foxBerries.price = 1;
+foxBerries.sDesc = function() { return "fox berries"; }
+foxBerries.Short = function() { return "A handful of fox berries"; }
+foxBerries.Long = function() { return "A handful of fox berries. Possibly toxic."; }
 
-IngredientItems.BlackGem = new Item("demon2", "Black gem", ItemType.Ingredient);
-IngredientItems.BlackGem.price = 20;
-IngredientItems.BlackGem.sDesc = function() { return "obsidian gem"; }
-IngredientItems.BlackGem.Short = function() { return "An obsidian gem"; }
-IngredientItems.BlackGem.Long = function() { return "A black gemstone. It is slightly warm to the touch."; }
+let foxglove = new Item("fox3", "Foxglove", ItemType.Ingredient);
+foxglove.price = 1;
+foxglove.sDesc = function() { return "foxglove"; }
+foxglove.Short = function() { return "A foxglove flower"; }
+foxglove.Long = function() { return "A foxglove flower, commonly found on meadows."; }
 
-IngredientItems.CorruptSeed = new Item("demon3", "Corrupt seed", ItemType.Ingredient);
-IngredientItems.CorruptSeed.price = 0;
-IngredientItems.CorruptSeed.sDesc = function() { return "corrupted seed"; }
-IngredientItems.CorruptSeed.Long = function() { return "The semen of some corrupted creature, stored in a vial."; }
 
-IngredientItems.DemonSeed = new Item("demon4", "Demon seed", ItemType.Ingredient);
-IngredientItems.DemonSeed.price = 0;
-IngredientItems.DemonSeed.sDesc = function() { return "demonic seed"; }
-IngredientItems.DemonSeed.Long = function() { return "A vial filled with demon cum."; }
-IngredientItems.DemonSeed.Use = function(target : Entity) {
+
+let corruptPlant = new Item("demon1", "Corrupt plant", ItemType.Ingredient);
+corruptPlant.price = 0;
+corruptPlant.sDesc = function() { return "strange plant"; }
+corruptPlant.Short = function() { return "A strange plant"; }
+corruptPlant.Long = function() { return "A strange plant, corrupted by some evil power."; }
+
+let blackGem = new Item("demon2", "Black gem", ItemType.Ingredient);
+blackGem.price = 20;
+blackGem.sDesc = function() { return "obsidian gem"; }
+blackGem.Short = function() { return "An obsidian gem"; }
+blackGem.Long = function() { return "A black gemstone. It is slightly warm to the touch."; }
+
+let corruptSeed = new Item("demon3", "Corrupt seed", ItemType.Ingredient);
+corruptSeed.price = 0;
+corruptSeed.sDesc = function() { return "corrupted seed"; }
+corruptSeed.Long = function() { return "The semen of some corrupted creature, stored in a vial."; }
+
+let demonSeed = new Item("demon4", "Demon seed", ItemType.Ingredient);
+demonSeed.price = 0;
+demonSeed.sDesc = function() { return "demonic seed"; }
+demonSeed.Long = function() { return "A vial filled with demon cum."; }
+demonSeed.Use = function(target : Entity) {
 	target.AddLustFraction(0.1);
 	target.RestoreCum(2);
 	var parse : any = {
@@ -256,12 +257,12 @@ IngredientItems.DemonSeed.Use = function(target : Entity) {
 
 
 
-IngredientItems.Hummus = new Item("human1", "Hummus", ItemType.Ingredient);
-IngredientItems.Hummus.price = 2;
-IngredientItems.Hummus.sDesc = function() { return "hummus"; }
-IngredientItems.Hummus.Short = function() { return "Hummus. Looks edible"; }
-IngredientItems.Hummus.Long = function() { return "Hummus: a foodlike substance."; }
-IngredientItems.Hummus.Use = function(target : Entity) {
+let hummus = new Item("human1", "Hummus", ItemType.Ingredient);
+hummus.price = 2;
+hummus.sDesc = function() { return "hummus"; }
+hummus.Short = function() { return "Hummus. Looks edible"; }
+hummus.Long = function() { return "Hummus: a foodlike substance."; }
+hummus.Use = function(target : Entity) {
 	target.AddHPFraction(0.03);
 	var parse : any = { name: target.NameDesc(), s: target == GAME().player ? "" : "s" };
 	Text.Add("[name] eat[s] some hummus. It is slightly invigorating.", parse);
@@ -270,107 +271,107 @@ IngredientItems.Hummus.Use = function(target : Entity) {
 	return {consume: true};
 }
 
-IngredientItems.SpringWater = new Item("human2", "Spring water", ItemType.Ingredient);
-IngredientItems.SpringWater.price = 1;
-IngredientItems.SpringWater.sDesc = function() { return "spring water"; }
-IngredientItems.SpringWater.Short = function() { return "A vial of clear water"; }
-IngredientItems.SpringWater.Long = function() { return "A vial of pure spring water."; }
+let springWater = new Item("human2", "Spring water", ItemType.Ingredient);
+springWater.price = 1;
+springWater.sDesc = function() { return "spring water"; }
+springWater.Short = function() { return "A vial of clear water"; }
+springWater.Long = function() { return "A vial of pure spring water."; }
 
-IngredientItems.Letter = new Item("human3", "Letter", ItemType.Ingredient);
-IngredientItems.Letter.price = 1;
-IngredientItems.Letter.sDesc = function() { return "letter"; }
-IngredientItems.Letter.Short = function() { return "A letter"; }
-IngredientItems.Letter.Long = function() { return "A miserable pile of secrets."; }
-
-
-
-IngredientItems.Feather = new Item("avian1", "Feather", ItemType.Ingredient);
-IngredientItems.Feather.price = 1;
-IngredientItems.Feather.sDesc = function() { return "bird feather"; }
-IngredientItems.Feather.Short = function() { return "A bird feather"; }
-IngredientItems.Feather.Long = function() { return "The feather of some kind of bird."; }
-
-IngredientItems.Trinket = new Item("avian2", "Trinket", ItemType.Ingredient);
-IngredientItems.Trinket.price = 1;
-IngredientItems.Trinket.sDesc = function() { return "shiny trinket"; }
-IngredientItems.Trinket.Short = function() { return "A shiny trinket"; }
-IngredientItems.Trinket.Long = function() { return "A shiny trinket, pretty but with little to no value."; }
-
-IngredientItems.FruitSeed = new Item("avian3", "Fruit seed", ItemType.Ingredient);
-IngredientItems.FruitSeed.price = 1;
-IngredientItems.FruitSeed.sDesc = function() { return "fruit seed"; }
-IngredientItems.FruitSeed.Short = function() { return "Seed from a fruit"; }
-IngredientItems.FruitSeed.Long = function() { return "The seed of a fruit or berry of some kind."; }
-
-IngredientItems.PipeLeaf = new Item("avian4", "Pipeleaf", ItemType.Ingredient);
-IngredientItems.PipeLeaf.price = 1;
-IngredientItems.PipeLeaf.sDesc = function() { return "pipeleaf"; }
-IngredientItems.PipeLeaf.Long = function() { return "A strong pipeleaf - a mixture of several dried herbs."; }
+let letter = new Item("human3", "Letter", ItemType.Ingredient);
+letter.price = 1;
+letter.sDesc = function() { return "letter"; }
+letter.Short = function() { return "A letter"; }
+letter.Long = function() { return "A miserable pile of secrets."; }
 
 
 
-IngredientItems.MFluff = new Item("moth1", "M.Fluff", ItemType.Ingredient);
-IngredientItems.MFluff.price = 1;
-IngredientItems.MFluff.sDesc = function() { return "moth fluff"; }
-IngredientItems.MFluff.Short = function() { return "A wad of moth fluff"; }
-IngredientItems.MFluff.Long = function() { return "The soft fluff from a moth."; }
+let feather = new Item("avian1", "Feather", ItemType.Ingredient);
+feather.price = 1;
+feather.sDesc = function() { return "bird feather"; }
+feather.Short = function() { return "A bird feather"; }
+feather.Long = function() { return "The feather of some kind of bird."; }
 
-IngredientItems.MDust = new Item("moth2", "M.Dust", ItemType.Ingredient);
-IngredientItems.MDust.price = 1;
-IngredientItems.MDust.sDesc = function() { return "moth dust"; }
-IngredientItems.MDust.Short = function() { return "A measure of moth dust"; }
-IngredientItems.MDust.Long = function() { return "A measure of sparkly moth dust."; }
+let trinket = new Item("avian2", "Trinket", ItemType.Ingredient);
+trinket.price = 1;
+trinket.sDesc = function() { return "shiny trinket"; }
+trinket.Short = function() { return "A shiny trinket"; }
+trinket.Long = function() { return "A shiny trinket, pretty but with little to no value."; }
 
+let fruitSeed = new Item("avian3", "Fruit seed", ItemType.Ingredient);
+fruitSeed.price = 1;
+fruitSeed.sDesc = function() { return "fruit seed"; }
+fruitSeed.Short = function() { return "Seed from a fruit"; }
+fruitSeed.Long = function() { return "The seed of a fruit or berry of some kind."; }
 
-
-IngredientItems.Stinger = new Item("scorp1", "Stinger", ItemType.Ingredient);
-IngredientItems.Stinger.price = 2;
-IngredientItems.Stinger.sDesc = function() { return "scorpion stinger"; }
-IngredientItems.Stinger.Short = function() { return "A stinger"; }
-IngredientItems.Stinger.Long = function() { return "The stinger from some kind of insect."; }
-
-IngredientItems.SVenom = new Item("scorp2", "S.Venom", ItemType.Ingredient);
-IngredientItems.SVenom.price = 3;
-IngredientItems.SVenom.sDesc = function() { return "scorpion venom"; }
-IngredientItems.SVenom.Short = function() { return "A vial of venom"; }
-IngredientItems.SVenom.Long = function() { return "A tiny vial of unprocessed scorpion venom."; }
-
-IngredientItems.SClaw = new Item("scorp3", "S.Claw", ItemType.Ingredient);
-IngredientItems.SClaw.price = 2;
-IngredientItems.SClaw.sDesc = function() { return "black claw"; }
-IngredientItems.SClaw.Short = function() { return "A black claw"; }
-IngredientItems.SClaw.Long = function() { return "A black, menacing-looking scorpion claw."; }
+let pipeLeaf = new Item("avian4", "Pipeleaf", ItemType.Ingredient);
+pipeLeaf.price = 1;
+pipeLeaf.sDesc = function() { return "pipeleaf"; }
+pipeLeaf.Long = function() { return "A strong pipeleaf - a mixture of several dried herbs."; }
 
 
 
-IngredientItems.TreeBark = new Item("deer1", "Tree bark", ItemType.Ingredient);
-IngredientItems.TreeBark.price = 1;
-IngredientItems.TreeBark.sDesc = function() { return "tree bark"; }
-IngredientItems.TreeBark.Short = function() { return "Some tree bark"; }
-IngredientItems.TreeBark.Long = function() { return "A chip of tough tree bark."; }
+let mFluff = new Item("moth1", "M.Fluff", ItemType.Ingredient);
+mFluff.price = 1;
+mFluff.sDesc = function() { return "moth fluff"; }
+mFluff.Short = function() { return "A wad of moth fluff"; }
+mFluff.Long = function() { return "The soft fluff from a moth."; }
 
-IngredientItems.AntlerChip = new Item("deer2", "Antler chip", ItemType.Ingredient);
-IngredientItems.AntlerChip.price = 1;
-IngredientItems.AntlerChip.sDesc = function() { return "antler chip"; }
-IngredientItems.AntlerChip.Short = function() { return "An antler chip"; }
-IngredientItems.AntlerChip.Long = function() { return "A small chip of an antler, probably from a deer."; }
-
-
-
-IngredientItems.FlowerPetal = new Item("plant1", "Flower petal", ItemType.Ingredient);
-IngredientItems.FlowerPetal.price = 1;
-IngredientItems.FlowerPetal.sDesc = function() { return "flower petal"; }
-IngredientItems.FlowerPetal.Short = function() { return "A flower petal"; }
-IngredientItems.FlowerPetal.Long = function() { return "A petal from a beautiful flower."; }
+let mDust = new Item("moth2", "M.Dust", ItemType.Ingredient);
+mDust.price = 1;
+mDust.sDesc = function() { return "moth dust"; }
+mDust.Short = function() { return "A measure of moth dust"; }
+mDust.Long = function() { return "A measure of sparkly moth dust."; }
 
 
 
-IngredientItems.RawHoney = new Item("bee1", "Raw honey", ItemType.Ingredient);
-IngredientItems.RawHoney.price = 5;
-IngredientItems.RawHoney.sDesc = function() { return "raw honey"; }
-IngredientItems.RawHoney.Short = function() { return "Raw honey"; }
-IngredientItems.RawHoney.Long = function() { return "A small jar of raw honey."; }
-IngredientItems.RawHoney.Use = function(target : Entity) {
+let stinger = new Item("scorp1", "Stinger", ItemType.Ingredient);
+stinger.price = 2;
+stinger.sDesc = function() { return "scorpion stinger"; }
+stinger.Short = function() { return "A stinger"; }
+stinger.Long = function() { return "The stinger from some kind of insect."; }
+
+let sVenom = new Item("scorp2", "S.Venom", ItemType.Ingredient);
+sVenom.price = 3;
+sVenom.sDesc = function() { return "scorpion venom"; }
+sVenom.Short = function() { return "A vial of venom"; }
+sVenom.Long = function() { return "A tiny vial of unprocessed scorpion venom."; }
+
+let sClaw = new Item("scorp3", "S.Claw", ItemType.Ingredient);
+sClaw.price = 2;
+sClaw.sDesc = function() { return "black claw"; }
+sClaw.Short = function() { return "A black claw"; }
+sClaw.Long = function() { return "A black, menacing-looking scorpion claw."; }
+
+
+
+let treeBark = new Item("deer1", "Tree bark", ItemType.Ingredient);
+treeBark.price = 1;
+treeBark.sDesc = function() { return "tree bark"; }
+treeBark.Short = function() { return "Some tree bark"; }
+treeBark.Long = function() { return "A chip of tough tree bark."; }
+
+let antlerChip = new Item("deer2", "Antler chip", ItemType.Ingredient);
+antlerChip.price = 1;
+antlerChip.sDesc = function() { return "antler chip"; }
+antlerChip.Short = function() { return "An antler chip"; }
+antlerChip.Long = function() { return "A small chip of an antler, probably from a deer."; }
+
+
+
+let flowerPetal = new Item("plant1", "Flower petal", ItemType.Ingredient);
+flowerPetal.price = 1;
+flowerPetal.sDesc = function() { return "flower petal"; }
+flowerPetal.Short = function() { return "A flower petal"; }
+flowerPetal.Long = function() { return "A petal from a beautiful flower."; }
+
+
+
+let rawHoney = new Item("bee1", "Raw honey", ItemType.Ingredient);
+rawHoney.price = 5;
+rawHoney.sDesc = function() { return "raw honey"; }
+rawHoney.Short = function() { return "Raw honey"; }
+rawHoney.Long = function() { return "A small jar of raw honey."; }
+rawHoney.Use = function(target : Entity) {
 	target.AddHPFraction(0.02);
 	var parse : any = { name: target.NameDesc(), s: target == GAME().player ? "" : "s" };
 	Text.Add("[name] eat[s] a small jar of sweet honey. It is slightly invigorating.", parse);
@@ -379,10 +380,60 @@ IngredientItems.RawHoney.Use = function(target : Entity) {
 	return {consume: true};
 }
 
-IngredientItems.BeeChitin = new Item("bee2", "Bee chitin", ItemType.Ingredient);
-IngredientItems.BeeChitin.price = 1;
-IngredientItems.BeeChitin.sDesc = function() { return "bee chitin"; }
-IngredientItems.BeeChitin.Short = function() { return "Some bee chitin"; }
-IngredientItems.BeeChitin.Long = function() { return "A small scrap of hard bee chitin."; }
+let beeChitin = new Item("bee2", "Bee chitin", ItemType.Ingredient);
+beeChitin.price = 1;
+beeChitin.sDesc = function() { return "bee chitin"; }
+beeChitin.Short = function() { return "Some bee chitin"; }
+beeChitin.Long = function() { return "A small scrap of hard bee chitin."; }
 
-export { IngredientItems };
+export namespace IngredientItems {
+	export const HorseHair = horseHair;
+	export const HorseShoe = horseShoe;
+	export const HorseCum = horseCum;
+	export const RabbitFoot = rabbitFoot;
+	export const CarrotJuice = carrotJuice;
+	export const Lettuce = lettuce;
+	export const Whiskers = whiskers;
+	export const HairBall = hairBall;
+	export const CatClaw = catClaw;
+	export const SnakeOil = snakeOil;
+	export const LizardScale = lizardScale;
+	export const LizardEgg = lizardEgg;
+	export const SnakeFang = snakeFang;
+	export const SnakeSkin = snakeSkin;
+	export const GoatMilk = goatMilk;
+	export const GoatFleece = goatFleece;
+	export const SheepMilk = sheepMilk;
+	export const Ramshorn = ramshorn;
+	export const CowMilk = cowMilk;
+	export const CowBell = cowBell;
+	export const FreshGrass = freshGrass;
+	export const CanisRoot = canisRoot;
+	export const DogBone = dogBone;
+	export const DogBiscuit = dogBiscuit;
+	export const WolfFang = wolfFang;
+	export const Wolfsbane = wolfsbane;
+	export const FoxBerries = foxBerries;
+	export const Foxglove = foxglove;
+	export const CorruptPlant = corruptPlant;
+	export const BlackGem = blackGem;
+	export const CorruptSeed = corruptSeed;
+	export const DemonSeed = demonSeed;
+	export const Hummus = hummus;
+	export const SpringWater = springWater;
+	export const Letter = letter;
+	export const Feather = feather;
+	export const Trinket = trinket;
+	export const FruitSeed = fruitSeed;
+	export const PipeLeaf = pipeLeaf;
+	export const MFluff = mFluff;
+	export const MDust = mDust;
+	export const Stinger = stinger;
+	export const SVenom = sVenom;
+	export const SClaw = sClaw;
+	export const TreeBark = treeBark;
+	export const AntlerChip = antlerChip;
+	export const FlowerPetal = flowerPetal;
+	export const RawHoney = rawHoney;
+	export const BeeChitin = beeChitin;
+}

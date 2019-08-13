@@ -11,7 +11,6 @@ import { Sex } from "../../entity-sex";
 import { Cock } from "../../body/cock";
 import { VenaScenes } from "./vena-scenes";
 import { AlchemyItems } from "../../items/alchemy";
-import { IngredientItems } from "../../items/ingredients";
 import { VenaFlags } from "./vena-flags";
 import { BodyPartType } from "../../body/bodypart";
 import { LowerBodyType } from '../../body/body';
@@ -1402,7 +1401,7 @@ export namespace OpheliaScenes {
                     burrows.flags["Lacertium"] = 1;
                     
                     OpheliaScenes.PotionsPrompt();
-                }, enabled : party.Inv().QueryNum(IngredientItems.Lacertium),
+                }, enabled : party.Inv().QueryNum(AlchemyItems.Lacertium),
                 tooltip : "Introduce Lacertium into the diet of the colony."
             });
         }
@@ -1454,7 +1453,7 @@ export namespace OpheliaScenes {
                         
                         OpheliaScenes.PotionsPrompt();
                     });
-                }, enabled : party.Inv().QueryNum(IngredientItems.Equinium),
+                }, enabled : party.Inv().QueryNum(AlchemyItems.Equinium),
                 tooltip : "Introduce Equinium into the diet of the colony."
             });
         }
