@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "build": "webpack",
+    "release": "node --max_old_space_size=4096 ./node_modules/webpack/bin/webpack.js --mode production",
     "start": "webpack-dev-server"
   },
   "author": "aldergames",

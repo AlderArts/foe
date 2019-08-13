@@ -11,6 +11,7 @@ const ZipPlugin = require('zip-webpack-plugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
 
 module.exports = {
+  mode: "development",
   entry: './index.ts',
   plugins: [
     new BundleAnalyzerPlugin(),
@@ -51,13 +52,13 @@ module.exports = {
       {
         test: /\.(png|svg|jpg|gif|webp)$/,
         use: [
-          'file-loader'
+          'file-loader?name=assets/img/[name].[ext]'
         ]
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
         use: [
-          'file-loader'
+          'file-loader?name=assets/fonts/[name].[ext]'
         ]
       }
     ]
@@ -71,7 +72,6 @@ module.exports = {
       new OptimizeCSSAssetsPlugin({})
     ]
   },
-  mode: "development",
   output: {
     filename: 'foe.js',
     path: path.resolve(__dirname, 'dist')
