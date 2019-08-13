@@ -29,6 +29,7 @@ import { KiakaiFlags } from './kiakai-flags';
 import { WeaponsItems } from '../items/weapons';
 import { ArmorItems } from '../items/armor';
 import { AccItems } from '../items/accessories';
+import { Images } from '../assets';
 
 let Intro : any = {};
 
@@ -1414,7 +1415,7 @@ Intro.UruAppears = function() {
 
 	Text.Add("A bored yawn from behind snaps you out of your dreary thoughts. A pair of high-heeled boots enters your vision - no, scratch that - a pair of feet with great spines sticking out of them. Feet, you notice, that support a pair of exceedingly well-shaped legs. Moving further up, your eyes feast on the most glorious butt you have ever seen. It is only in hindsight that you realize that the amazing creature in front of you has red-tinted skin and a tail ending in a heart-shaped tip, swaying tantalizingly in front of your nose.");
 	Text.NL();
-	Text.Say("assets/img/uru.png");
+	Text.Say(Images.uru);
 	Text.Add("<i>“Who controls this realm, again?”</i> the female demon purrs with a toss of her long black hair. The 100-foot tall monstrosity towering over the two of you hesitates for a moment, showing a sign of... fear? You have a short moment to register confusion before the succubus releases a jet black beam of energy from her outstretched hand, piercing a wide smoking hole in the surprised demon's chest. It tumbles backward and into the yawning abyss a dozen feet away. Slowly, its screams fade. After some time, you hear a distant booming crash, announcing its final meeting with the ground far below.");
 	Text.NL();
 	Text.Add("<i>“Now then,”</i> the succubus declares, as if nothing had happened. <i>“Who might you be?”</i> She twirls around and you get a good look at her. Piercing orange eyes gaze down at you from her perfect face, crowned by a pair of long, curved demon horns. Her knockers could knock you flat any day, and her hourglass figure is nothing but exquisite. Your eyes move further down to rest on her...");
@@ -2667,7 +2668,7 @@ LightAspect.Garden.links.push(new Link(
 		Text.Flush();
 		Gui.NextPrompt(function () {
 			Text.Clear();
-			Text.Say("assets/img/aria.png", "", "left");
+			Text.Say(Images.aria, "", "left");
 
 			Text.Add("There is no doubt in your mind that she is indeed a Goddess; the heartachingly beautiful woman before you stands by a fountain, a worried expression on her perfect face. She is clad in a long white dress that seems to almost float above the ground, as if it were underwater. The skin on her smooth limbs is fair and unblemished, and an expanse of golden locks falls to her waist in a mass of curls. She carries herself with regal composure and is well over six feet tall.");
 			Text.NL();
@@ -2880,7 +2881,7 @@ Intro.NomadsWakingUp = function() {
 	Text.NL();
 	Text.Add("As you muse on how you escaped death this time, you become aware of a warm shape pressing against you. Someone quite slim and scantily clad is lying on top of you, their hands lovingly caressing your body. A glimpse of very large purple eyes and long pointed ears peeking out under a silky mass of silver hair confirms that, whoever your bed mate is, it is no regular human.");
 	Text.NL();
-	Text.Say("assets/img/kiakai.png", "", "left");
+	Text.Say(Images.kiakai_full, "", "left");
 	Text.Add("The elfin creature starts to sensually suck on one of your nipples, spreading a tingling feeling through your entire body. Even so close, you are not quite sure if it is male or female, either due to the poor light or their very androgynous face. As your intimate visitor slowly grinds its crotch against one of your legs, their gender suddenly becomes <i>readily</i> apparent.");
 	Text.Flush();
 	// [Male][Female]

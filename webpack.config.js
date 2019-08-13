@@ -17,7 +17,7 @@ module.exports = {
     new BundleAnalyzerPlugin(),
     new CopyWebpackPlugin([
         './foe.html',
-        {from:'assets',to:'assets'}
+        {from:'assets/css',to:'assets/css'}
     ]),
     new MiniCssExtractPlugin({
       filename: "[name].css",
