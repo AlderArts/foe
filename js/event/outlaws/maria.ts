@@ -11,8 +11,8 @@ import { WorldTime, GAME, WORLD } from '../../GAME';
 import { Abilities } from '../../abilities';
 import { Text } from '../../text';
 import { StatusEffect } from '../../statuseffect';
-import { Items } from '../../items';
 import { OutlawsFlags } from './outlaws-flags';
+import { CombatItems } from '../../items/combatitems';
 
 export class Maria extends Entity {
 	DDtimer : Time;
@@ -128,7 +128,7 @@ export class Maria extends Entity {
 	
 		if(this.HPLevel() < 0.3 && this.pots > 0) {
 			this.pots--;
-			Items.Combat.HPotion.combat.Use(encounter, this, this);
+			CombatItems.HPotion.combat.Use(encounter, this, this);
 		}
 		else if(choice < 0.2 && Abilities.Physical.SetTrap.enabledCondition(encounter, this) && trap == null)
 			Abilities.Physical.SetTrap.Use(encounter, this);

@@ -8,7 +8,6 @@ import { Event, Link } from '../event';
 import { GameState, SetGameState } from '../gamestate';
 import { Gui } from '../gui';
 import { Gender } from '../body/gender';
-import { Items } from '../items';
 import { JobEnum, Jobs } from '../job';
 import { GAME, GameCache, MoveToLocation, TimeStep, WORLD } from '../GAME';
 import { Text } from '../text';
@@ -27,6 +26,9 @@ import { Race } from '../body/race';
 import { Sex } from '../entity-sex';
 import { BodyPartType } from '../body/bodypart';
 import { KiakaiFlags } from './kiakai-flags';
+import { WeaponsItems } from '../items/weapons';
+import { ArmorItems } from '../items/armor';
+import { AccItems } from '../items/accessories';
 
 let Intro : any = {};
 
@@ -3546,24 +3548,24 @@ Intro.Finalizing = function() {
 	Text.Add("<i>“The chief has provided you with some equipment, you can find it in that chest over there.”</i> [name] points to a large coffer near the back of the tent. Opening it reveals ", parse);
 	if(player.flags["startJob"] == JobEnum.Scholar) {
 		Text.Add("a simple but robust set of robes, and some dusty old books. Beside the chest is a long wooden staff, apparently part of the set.", parse);
-		player.weaponSlot   = Items.Weapons.WoodenStaff;
-		player.topArmorSlot = Items.Armor.SimpleRobes;
-		player.acc1Slot     = Items.Accessories.CrudeBook;
+		player.weaponSlot   = WeaponsItems.WoodenStaff;
+		player.topArmorSlot = ArmorItems.SimpleRobes;
+		player.acc1Slot     = AccItems.CrudeBook;
 		player.jobs["Scholar"].mult = 0.5;
 	}
 	else if(player.flags["startJob"] == JobEnum.Courtesan) {
 		Text.Add("practical yet provocative clothing, revealing without being slutty. On top of the neatly folded pile is a coiled leather whip.", parse);
-		player.weaponSlot   = Items.Weapons.LWhip;
-		player.topArmorSlot = Items.Armor.StylizedClothes;
-		player.acc1Slot     = Items.Accessories.SimpleCuffs;
+		player.weaponSlot   = WeaponsItems.LWhip;
+		player.topArmorSlot = ArmorItems.StylizedClothes;
+		player.acc1Slot     = AccItems.SimpleCuffs;
 		player.jobs["Courtesan"].mult = 0.5;
 	}
 	else {
 		Text.Add("a set of leather armor and a well maintained short sword.", parse);
-		player.weaponSlot   = Items.Weapons.ShortSword;
-		player.topArmorSlot = Items.Armor.LeatherChest;
-		player.botArmorSlot = Items.Armor.LeatherPants;
-		player.acc1Slot     = Items.Accessories.IronBangle;
+		player.weaponSlot   = WeaponsItems.ShortSword;
+		player.topArmorSlot = ArmorItems.LeatherChest;
+		player.botArmorSlot = ArmorItems.LeatherPants;
+		player.acc1Slot     = AccItems.IronBangle;
 		player.jobs["Fighter"].mult = 0.5;
 	}
 	player.Equip();

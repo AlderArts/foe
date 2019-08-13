@@ -7,12 +7,13 @@ import * as _ from 'lodash';
 import { Event, Link } from '../../event';
 import { EncounterTable } from '../../encountertable';
 import { Shop } from '../../shop';
-import { Items } from '../../items';
 import { WorldTime, MoveToLocation, GAME, WORLD } from '../../GAME';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { Item } from '../../item';
 import { Party } from '../../party';
+import { AccItems } from '../../items/accessories';
+import { ArmorItems } from '../../items/armor';
 
 let ArmorShopLoc = new Event("Twopenny's");
 
@@ -265,12 +266,12 @@ export namespace ArmorShopScenes {
 			buyFailFunc : buyFailFunc
 		});
 
-		shop.AddItem(Items.Armor.LeatherChest, 5);
-		shop.AddItem(Items.Armor.LeatherPants, 5);
-		shop.AddItem(Items.Armor.BronzeChest, 5);
-		shop.AddItem(Items.Armor.BronzeLeggings, 5);
-		shop.AddItem(Items.Accessories.IronBangle, 5);
-		shop.AddItem(Items.Accessories.IronBuckler, 5);
+		shop.AddItem(ArmorItems.LeatherChest, 5);
+		shop.AddItem(ArmorItems.LeatherPants, 5);
+		shop.AddItem(ArmorItems.BronzeChest, 5);
+		shop.AddItem(ArmorItems.BronzeLeggings, 5);
+		shop.AddItem(AccItems.IronBangle, 5);
+		shop.AddItem(AccItems.IronBuckler, 5);
 		
 		aShop = shop;
 		aSpecialShop = specialShop;

@@ -7,10 +7,13 @@ import { Entity } from '../../entity';
 import { Shop } from '../../shop';
 import { GetDEBUG } from '../../../app';
 import { Gender } from '../../body/gender';
-import { Items } from '../../items';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { GAME } from '../../GAME';
+import { CombatItems } from '../../items/combatitems';
+import { AlchemyItems } from '../../items/alchemy';
+import { IngredientItems } from '../../items/ingredients';
+import { ToysItems } from '../../items/toys';
 
 let PatchworkScenes : any = {};
 
@@ -41,40 +44,40 @@ export class Patchwork extends Entity {
 		*/
 		this.Shop = new Shop();
 		
-		this.Shop.AddItem(Items.Combat.HPotion, 5, null, PatchworkScenes.BuyFunc);
+		this.Shop.AddItem(CombatItems.HPotion, 5, null, PatchworkScenes.BuyFunc);
 		
-		this.Shop.AddItem(Items.Alchemy.Equinium, 5, null, PatchworkScenes.BuyFunc);
-		//this.Shop.AddItem(Items.Ingredients.HorseHair, 5, null, PatchworkScenes.BuyFunc);
-		this.Shop.AddItem(Items.Ingredients.HorseShoe, 5, null, PatchworkScenes.BuyFunc);
-		//this.Shop.AddItem(Items.Ingredients.HorseCum, 5, null, PatchworkScenes.BuyFunc);
+		this.Shop.AddItem(AlchemyItems.Equinium, 5, null, PatchworkScenes.BuyFunc);
+		//this.Shop.AddItem(IngredientItems.HorseHair, 5, null, PatchworkScenes.BuyFunc);
+		this.Shop.AddItem(IngredientItems.HorseShoe, 5, null, PatchworkScenes.BuyFunc);
+		//this.Shop.AddItem(IngredientItems.HorseCum, 5, null, PatchworkScenes.BuyFunc);
 		
-		this.Shop.AddItem(Items.Alchemy.Leporine, 5, null, PatchworkScenes.BuyFunc);
-		this.Shop.AddItem(Items.Ingredients.RabbitFoot, 5, null, PatchworkScenes.BuyFunc);
-		//this.Shop.AddItem(Items.Ingredients.CarrotJuice, 5, null, PatchworkScenes.BuyFunc);
-		//this.Shop.AddItem(Items.Ingredients.Lettuce, 5, null, PatchworkScenes.BuyFunc);
+		this.Shop.AddItem(AlchemyItems.Leporine, 5, null, PatchworkScenes.BuyFunc);
+		this.Shop.AddItem(IngredientItems.RabbitFoot, 5, null, PatchworkScenes.BuyFunc);
+		//this.Shop.AddItem(IngredientItems.CarrotJuice, 5, null, PatchworkScenes.BuyFunc);
+		//this.Shop.AddItem(IngredientItems.Lettuce, 5, null, PatchworkScenes.BuyFunc);
 		
-		this.Shop.AddItem(Items.Alchemy.Felinix, 5, null, PatchworkScenes.BuyFunc);
-		//this.Shop.AddItem(Items.Ingredients.Whiskers, 5, null, PatchworkScenes.BuyFunc);
-		this.Shop.AddItem(Items.Ingredients.HairBall, 5, null, PatchworkScenes.BuyFunc);
-		//this.Shop.AddItem(Items.Ingredients.CatClaw, 5, null, PatchworkScenes.BuyFunc);
+		this.Shop.AddItem(AlchemyItems.Felinix, 5, null, PatchworkScenes.BuyFunc);
+		//this.Shop.AddItem(IngredientItems.Whiskers, 5, null, PatchworkScenes.BuyFunc);
+		this.Shop.AddItem(IngredientItems.HairBall, 5, null, PatchworkScenes.BuyFunc);
+		//this.Shop.AddItem(IngredientItems.CatClaw, 5, null, PatchworkScenes.BuyFunc);
 		
-		this.Shop.AddItem(Items.Ingredients.CowBell, 5, null, PatchworkScenes.BuyFunc);
+		this.Shop.AddItem(IngredientItems.CowBell, 5, null, PatchworkScenes.BuyFunc);
 		
-		this.Shop.AddItem(Items.Ingredients.DogBiscuit, 5, null, PatchworkScenes.BuyFunc);
+		this.Shop.AddItem(IngredientItems.DogBiscuit, 5, null, PatchworkScenes.BuyFunc);
 		
-		this.Shop.AddItem(Items.Ingredients.Trinket, 5, null, PatchworkScenes.BuyFunc);
-		this.Shop.AddItem(Items.Ingredients.Feather, 5, null, PatchworkScenes.BuyFunc);
-		this.Shop.AddItem(Items.Ingredients.FruitSeed, 5, null, PatchworkScenes.BuyFunc);
+		this.Shop.AddItem(IngredientItems.Trinket, 5, null, PatchworkScenes.BuyFunc);
+		this.Shop.AddItem(IngredientItems.Feather, 5, null, PatchworkScenes.BuyFunc);
+		this.Shop.AddItem(IngredientItems.FruitSeed, 5, null, PatchworkScenes.BuyFunc);
 		
-		this.Shop.AddItem(Items.Ingredients.Hummus, 5, null, PatchworkScenes.BuyFunc);
+		this.Shop.AddItem(IngredientItems.Hummus, 5, null, PatchworkScenes.BuyFunc);
 		
-		this.Shop.AddItem(Items.Alchemy.Fertilium, 5, null, PatchworkScenes.BuyFunc);
-		this.Shop.AddItem(Items.Alchemy.FertiliumPlus, 5, null, PatchworkScenes.BuyFunc);
+		this.Shop.AddItem(AlchemyItems.Fertilium, 5, null, PatchworkScenes.BuyFunc);
+		this.Shop.AddItem(AlchemyItems.FertiliumPlus, 5, null, PatchworkScenes.BuyFunc);
 		
-		this.Shop.AddItem(Items.Alchemy.Infertilium, 5, null, PatchworkScenes.BuyFunc);
-		this.Shop.AddItem(Items.Alchemy.InfertiliumPlus, 5, null, PatchworkScenes.BuyFunc);
+		this.Shop.AddItem(AlchemyItems.Infertilium, 5, null, PatchworkScenes.BuyFunc);
+		this.Shop.AddItem(AlchemyItems.InfertiliumPlus, 5, null, PatchworkScenes.BuyFunc);
 		
-		this.Shop.AddItem(Items.Toys.SmallDildo, 5, null, PatchworkScenes.BuyFunc);
+		this.Shop.AddItem(ToysItems.SmallDildo, 5, null, PatchworkScenes.BuyFunc);
 		
 		this.flags = {};
 		this.flags["Met"] = PatchworkFlags.Met.NotMet;

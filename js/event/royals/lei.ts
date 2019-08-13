@@ -10,7 +10,7 @@ import { Images } from '../../assets';
 import { HairStyle } from '../../body/hair';
 import { Stat } from '../../stat';
 import { Time } from '../../time';
-import { WorldTime, NAV, WORLD } from '../../GAME';
+import { WorldTime, NAV, WORLD, GAME } from '../../GAME';
 import { Abilities } from '../../abilities';
 import { Text } from '../../text';
 import { Gui } from '../../gui';
@@ -137,17 +137,18 @@ export class Lei extends Entity {
 
 	// Party interaction
 	Interact() {
+		let lei = GAME().lei;
 		Text.Clear();
 		Text.Add("Rawr Imma stabbitystab.");
 
 
 		if(GetDEBUG()) {
 			Text.NL();
-			Text.Add("DEBUG: relation: " + this.relation.Get(), null, 'bold');
+			Text.Add("DEBUG: relation: " + lei.relation.Get(), null, 'bold');
 			Text.NL();
-			Text.Add("DEBUG: subDom: " + this.subDom.Get(), null, 'bold');
+			Text.Add("DEBUG: subDom: " + lei.subDom.Get(), null, 'bold');
 			Text.NL();
-			Text.Add("DEBUG: slut: " + this.slut.Get(), null, 'bold');
+			Text.Add("DEBUG: slut: " + lei.slut.Get(), null, 'bold');
 			Text.NL();
 		}
 

@@ -9,7 +9,12 @@ import { Text } from './text';
 import { Gui } from './gui';
 import { GAME, WORLD } from './GAME';
 import { KiakaiFlags } from './event/kiakai-flags';
-import { Items } from './items';
+import { IngredientItems } from './items/ingredients';
+import { AlchemyItems } from './items/alchemy';
+import { AlchemySpecial } from './items/alchemyspecial';
+import { ToysItems } from './items/toys';
+import { StrapOnItems } from './items/strapon';
+import { CombatItems } from './items/combatitems';
 
 export function InitCheats() {
 	let world = WORLD();
@@ -495,37 +500,37 @@ export function InitCheats() {
 			
 			SetDEBUG(false);
 
-			_(Items.Ingredients).pickBy(function(item) {
+			_(IngredientItems).pickBy(function(item) {
 				return item instanceof Item
 			}).forOwn(function(item) {
 				GAME().party.inventory.AddItem(item, 10);
 			});
 
-			_(Items.Alchemy).pickBy(function(item) {
+			_(AlchemyItems).pickBy(function(item) {
 				return item instanceof Item
 			}).forOwn(function(item) {
 				GAME().party.inventory.AddItem(item, 10);
 			});
 
-			_(Items.AlchemySp).pickBy(function(item) {
+			_(AlchemySpecial).pickBy(function(item) {
 				return item instanceof Item
 			}).forOwn(function(item) {
 				GAME().party.inventory.AddItem(item, 10);
 			});
 
-			_(Items.Toys).pickBy(function(item) {
+			_(ToysItems).pickBy(function(item) {
 				return item instanceof Item
 			}).forOwn(function(item) {
 				GAME().party.inventory.AddItem(item, 10);
 			});
 
-			_(Items.StrapOn).pickBy(function(item) {
+			_(StrapOnItems).pickBy(function(item) {
 				return item instanceof Item
 			}).forOwn(function(item) {
 				GAME().party.inventory.AddItem(item, 10);
 			});
 
-			_(Items.Combat).pickBy(function(item) {
+			_(CombatItems).pickBy(function(item) {
 				return item instanceof Item
 			}).forOwn(function(item) {
 				GAME().party.inventory.AddItem(item, 10);

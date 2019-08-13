@@ -5,7 +5,6 @@ import { Text } from '../../text';
 import { Gui } from '../../gui';
 import { Jobs } from '../../job';
 import { GlobalScenes } from '../global';
-import { Items } from '../../items';
 import { VaughnFlags } from './vaughn-flags';
 import { MirandaFlags } from '../miranda-flags';
 import { Time } from '../../time';
@@ -13,6 +12,8 @@ import { RigardFlags } from '../../loc/rigard/rigard-flags';
 import { Party } from '../../party';
 import { Room69Flags } from '../room69-flags';
 import { LeiFlags } from '../royals/lei-flags';
+import { QuestItems } from '../../items/quest';
+import { CombatItems } from '../../items/combatitems';
 
 export namespace VaughnTasksScenes {
 
@@ -170,7 +171,7 @@ export namespace VaughnTasksScenes {
 			
 			GAME().vaughn.taskTimer = new Time(0, 0, 3, 0, 0);
 			
-			party.Inv().AddItem(Items.Quest.OutlawLockpicks);
+			party.Inv().AddItem(QuestItems.OutlawLockpicks);
 			
 			GAME().vaughn.flags["Met"] = VaughnFlags.Met.OnTaskLockpicks;
 			
@@ -276,7 +277,7 @@ export namespace VaughnTasksScenes {
 			Text.Add("Seems like her evenings are quite busy… well, it’s none of your business. Time to head back and report in, then.", parse);
 			Text.Flush();
 			
-			party.Inv().RemoveItem(Items.Quest.OutlawLockpicks);
+			party.Inv().RemoveItem(QuestItems.OutlawLockpicks);
 			
 			GAME().vaughn.flags["Met"] = VaughnFlags.Met.LockpicksElodie;
 			
@@ -1049,8 +1050,8 @@ export namespace VaughnTasksScenes {
 			
 			Text.NL();
 			
-			party.Inv().AddItem(Items.Combat.EPotion, 5);
-			party.Inv().AddItem(Items.Combat.SpeedPotion, 5);
+			party.Inv().AddItem(CombatItems.EPotion, 5);
+			party.Inv().AddItem(CombatItems.SpeedPotion, 5);
 			
 			outlaws.relation.IncreaseStat(100, 3);
 			
@@ -1159,7 +1160,7 @@ export namespace VaughnTasksScenes {
 					Text.Add("<i>“Now, be careful with that thing. The glass shouldn’t shatter easily, but you don’t want to tempt fate any more than you need to. If you want to open it, just pull hard on the cork and it’ll pop free.</i>", parse);
 					
 					vaughn.flags["T3"] |= VaughnFlags.Poisoning.Poison;
-					party.Inv().AddItem(Items.Quest.OutlawPoison);
+					party.Inv().AddItem(QuestItems.OutlawPoison);
 					
 					Gui.PrintDefaultOptions();
 				}, enabled : true
@@ -1176,7 +1177,7 @@ export namespace VaughnTasksScenes {
 					Text.Add("<i>“The base recipe’s illegal, so I hear. Our good surgeon’s made a few additions of his own, some changes here and there, which should make it all the more amusing. When you’re ready to open this, just pull and twist hard on the cork, although I’d recommend holding your breath when you do so. Don’t want to accidentally sniff any of the fumes. This stuff will take effect almost immediately, but it need a couple of hours for the full effects to kick in. That should give you enough time to make a getaway before people start asking inconvenient questions.</i>", parse);
 					
 					vaughn.flags["T3"] |= VaughnFlags.Poisoning.Aphrodisiac;
-					party.Inv().AddItem(Items.Quest.OutlawAphrodisiac);
+					party.Inv().AddItem(QuestItems.OutlawAphrodisiac);
 					
 					Gui.PrintDefaultOptions();
 				}, enabled : true
@@ -1398,8 +1399,8 @@ export namespace VaughnTasksScenes {
 											
 											vaughn.flags["T3"] |= VaughnFlags.Poisoning.LeftItToLei;
 											
-											party.Inv().RemoveItem(Items.Quest.OutlawPoison);
-											party.Inv().RemoveItem(Items.Quest.OutlawAphrodisiac);
+											party.Inv().RemoveItem(QuestItems.OutlawPoison);
+											party.Inv().RemoveItem(QuestItems.OutlawAphrodisiac);
 											
 											vaughn.flags["Met"] = VaughnFlags.Met.PoisoningSucceed;
 											vaughn.flags["T3"] |= VaughnFlags.Poisoning.Success;
@@ -1575,8 +1576,8 @@ export namespace VaughnTasksScenes {
 							
 							vaughn.flags["T3"] |= VaughnFlags.Poisoning.LeftItToTwins;
 							
-							party.Inv().RemoveItem(Items.Quest.OutlawPoison);
-							party.Inv().RemoveItem(Items.Quest.OutlawAphrodisiac);
+							party.Inv().RemoveItem(QuestItems.OutlawPoison);
+							party.Inv().RemoveItem(QuestItems.OutlawAphrodisiac);
 							
 							vaughn.flags["Met"] = VaughnFlags.Met.PoisoningSucceed;
 							vaughn.flags["T3"] |= VaughnFlags.Poisoning.Success;
@@ -1669,8 +1670,8 @@ export namespace VaughnTasksScenes {
 						Text.Add("<i>“All right, all right, all right,”</i> Terry groans. <i>“Let’s just get it over with.”</i>", parse);
 						Text.NL();
 						
-						party.Inv().RemoveItem(Items.Quest.OutlawPoison);
-						party.Inv().RemoveItem(Items.Quest.OutlawAphrodisiac);
+						party.Inv().RemoveItem(QuestItems.OutlawPoison);
+						party.Inv().RemoveItem(QuestItems.OutlawAphrodisiac);
 						
 						Text.Add("Without another word, Terry slinks out the front door, leaving you alone to bide your time in the barroom while the [foxvixen] works [hisher] magic. You find an empty table to relax at, order a couple of drinks from a harried-looking waiter, and settle down to nurse it as moments tick by.", parse);
 						Text.NL();
@@ -1763,8 +1764,8 @@ export namespace VaughnTasksScenes {
 				Text.Add("The last course’s coming up, and it promises to be a good one. Hopefully, the [p] takes - with one last glance at the waiters pushing the carts back out through the kitchen’s steamy confines, you slip back to the front entrance and [c] the inn, although you don’t intend to stay long. Best to head back to Vaughn and report your success.", parse);
 				Text.Flush();
 				
-				party.Inv().RemoveItem(Items.Quest.OutlawPoison);
-				party.Inv().RemoveItem(Items.Quest.OutlawAphrodisiac);
+				party.Inv().RemoveItem(QuestItems.OutlawPoison);
+				party.Inv().RemoveItem(QuestItems.OutlawAphrodisiac);
 				
 				vaughn.flags["Met"] = VaughnFlags.Met.PoisoningSucceed;
 				vaughn.flags["T3"] |= VaughnFlags.Poisoning.Success;
@@ -1794,8 +1795,8 @@ export namespace VaughnTasksScenes {
 				Text.Add("It’s not very likely that they’re going to use those dishes which you tainted, so there’s nothing you can do but head back to Vaughn and report your failure.", parse);
 				Text.Flush();
 				
-				party.Inv().RemoveItem(Items.Quest.OutlawPoison);
-				party.Inv().RemoveItem(Items.Quest.OutlawAphrodisiac);
+				party.Inv().RemoveItem(QuestItems.OutlawPoison);
+				party.Inv().RemoveItem(QuestItems.OutlawAphrodisiac);
 				
 				vaughn.flags["Met"] = VaughnFlags.Met.PoisoningFail;
 				
@@ -2044,7 +2045,7 @@ export namespace VaughnTasksScenes {
 			
 			outlaws.relation.IncreaseStat(100, 3);
 			
-			party.Inv().AddItem(Items.Combat.GlassSword);
+			party.Inv().AddItem(CombatItems.GlassSword);
 			
 			Gui.NextPrompt();
 		}
@@ -2110,8 +2111,8 @@ export namespace VaughnTasksScenes {
 			Text.Add("Wordlessly, you hand over the vial to Vaughn, who storms away. Best not to talk to him again for a little while, or at least until he’s stopped fuming…", parse);
 			Text.Flush();
 			
-			party.Inv().RemoveItem(Items.Quest.OutlawPoison);
-			party.Inv().RemoveItem(Items.Quest.OutlawAphrodisiac);
+			party.Inv().RemoveItem(QuestItems.OutlawPoison);
+			party.Inv().RemoveItem(QuestItems.OutlawAphrodisiac);
 			
 			outlaws.relation.DecreaseStat(0, 5);
 			

@@ -10,7 +10,6 @@ import { Body } from '../body/body';
 import { Color } from '../body/color';
 import { Race } from '../body/race';
 import { Images } from '../assets';
-import { Items } from '../items';
 import { Text } from '../text';
 import { Gui } from '../gui';
 import { TimeStep, GAME, NAV } from '../GAME';
@@ -18,6 +17,8 @@ import { KiakaiFlags } from './kiakai-flags';
 import { Item } from '../item';
 import { RavenFlags } from './raven-flags';
 import { KiakaiScenes } from './kiakai-scenes';
+import { ArmorItems } from '../items/armor';
+import { WeaponsItems } from '../items/weapons';
 
 export class Kiakai extends Entity {
 	constructor(storage? : any) {
@@ -46,8 +47,8 @@ export class Kiakai extends Entity {
 		//Kiai can't be Warlock
 		this.jobs["Hypnotist"] = new JobDesc(Jobs.Hypnotist);
 		
-		this.weaponSlot   = Items.Weapons.WoodenStaff;
-		this.topArmorSlot = Items.Armor.SimpleRobes;
+		this.weaponSlot   = WeaponsItems.WoodenStaff;
+		this.topArmorSlot = ArmorItems.SimpleRobes;
 		
 		this.maxHp.base        = 80;
 		this.maxSp.base        = 50;

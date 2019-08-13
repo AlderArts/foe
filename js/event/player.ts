@@ -700,7 +700,7 @@ export class Player extends Entity {
 	// Party interaction
 	Interact(switchSpot : boolean) {
 		Text.Clear();
-		var player = this;
+		var player = GAME().player;
 		
 		player.PrintDescription();
 		

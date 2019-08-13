@@ -96,17 +96,18 @@ export class Roa extends Entity {
 
 	// Party interaction //TODO
 	Interact() {
+		let roa = GAME().roa;
 		Text.Clear();
 		Text.Add("Rawr Imma bunny.");
 		
 		
 		if(GetDEBUG()) {
 			Text.NL();
-			Text.Add("DEBUG: relation: " + this.relation.Get(), null, 'bold');
+			Text.Add("DEBUG: relation: " + roa.relation.Get(), null, 'bold');
 			Text.NL();
-			Text.Add("DEBUG: subDom: " + this.subDom.Get(), null, 'bold');
+			Text.Add("DEBUG: subDom: " + roa.subDom.Get(), null, 'bold');
 			Text.NL();
-			Text.Add("DEBUG: slut: " + this.slut.Get(), null, 'bold');
+			Text.Add("DEBUG: slut: " + roa.slut.Get(), null, 'bold');
 			Text.NL();
 		}
 		

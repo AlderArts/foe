@@ -1,5 +1,3 @@
-
-import { Items } from './items';
 import { GetDEBUG } from '../app';
 import { CaleFlags } from './event/nomads/cale-flags';
 import { TerryFlags } from './event/terry-flags';
@@ -18,6 +16,7 @@ import { AscheTasksScenes } from './event/asche-tasks';
 import { VaughnFlags } from './event/outlaws/vaughn-flags';
 import { VaughnTasksScenes } from './event/outlaws/vaughn-tasks';
 import { LeiTaskScenes } from './event/royals/lei-tasks';
+import { QuestItems } from './items/quest';
 
 export class Quest {
 	name : any;
@@ -612,7 +611,7 @@ Quests.quests.push(new Quest({
 	list: [
 		new QuestItem({
 			desc: function() {
-				var num = GAME().party.Inv().QueryNum(Items.Quest.Cactoid);
+				var num = GAME().party.Inv().QueryNum(QuestItems.Cactoid);
 				num = num || 0;
 				if(GAME().burrows.BruteActive())
 					return "Bring Ophelia cactoids from the desert: 3/3.";
@@ -629,7 +628,7 @@ Quests.quests.push(new Quest({
 		}),
 		new QuestItem({
 			desc: function() {
-				var num = GAME().party.Inv().QueryNum(Items.Quest.GolHusk);
+				var num = GAME().party.Inv().QueryNum(QuestItems.GolHusk);
 				num = num || 0;
 				if(GAME().burrows.HermActive())
 					return "Bring Ophelia Gol husks from the forest: 3/3.";
@@ -646,7 +645,7 @@ Quests.quests.push(new Quest({
 		}),
 		new QuestItem({
 			desc: function() {
-				var num = GAME().party.Inv().QueryNum(Items.Quest.RedAlgae);
+				var num = GAME().party.Inv().QueryNum(QuestItems.RedAlgae);
 				num = num || 0;
 				if(GAME().burrows.BrainyActive())
 					return "Bring Ophelia red algae from the lake: 3/3.";

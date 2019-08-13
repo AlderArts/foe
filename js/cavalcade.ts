@@ -3,12 +3,12 @@ import * as _ from 'lodash';
 import { GetDEBUG } from "../app";
 import { SetGameState, GameState } from "./gamestate";
 import { GAME, SetCavalcade } from './GAME';
-import { Items } from "./items";
 import { Gui } from "./gui";
 import { Text } from "./text";
 import { Rand } from "./utility";
 import { Input } from './input';
 import { Party } from './party';
+import { CardItems } from './items/cards';
 
 enum CScore {
 	Cavalcade = 0,
@@ -41,14 +41,14 @@ export class Cavalcade {
 		
 		this.Deck = [];
 		for(var i = 0; i < 5; i++)
-			this.Deck.push(Items.Cards.Light[i]);
+			this.Deck.push(CardItems.Light[i]);
 		for(var i = 0; i < 5; i++)
-			this.Deck.push(Items.Cards.Darkness[i]);
+			this.Deck.push(CardItems.Darkness[i]);
 		for(var i = 0; i < 5; i++)
-			this.Deck.push(Items.Cards.Shadow[i]);
+			this.Deck.push(CardItems.Shadow[i]);
 		
 		this.players   = players;
-		this.stag      = opts.stag      || Items.Cards.Shadow[3];
+		this.stag      = opts.stag      || CardItems.Shadow[3];
 		this.NextRound = opts.NextRound || this.CoinGameRound;
 		this.onPost    = opts.onPost    || Gui.NextPrompt;
 		

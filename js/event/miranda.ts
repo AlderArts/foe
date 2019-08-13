@@ -7,7 +7,6 @@ import { Entity } from '../entity';
 import { JobDesc, Jobs } from '../job';
 import { Time } from '../time';
 import { Images } from '../assets';
-import { Items } from '../items';
 import { Color } from '../body/color';
 import { Race } from '../body/race';
 import { WorldTime, TimeStep, GAME, NAV, WORLD } from '../GAME';
@@ -15,6 +14,8 @@ import { Text } from '../text';
 import { Gui } from '../gui';
 import { MirandaFlags } from './miranda-flags';
 import { Party } from '../party';
+import { WeaponsItems } from '../items/weapons';
+import { ArmorItems } from '../items/armor';
 
 export class Miranda extends Entity {
 	snitchTimer : Time;
@@ -66,8 +67,8 @@ export class Miranda extends Entity {
 		this.body.height.base      = 180;
 		this.body.weigth.base      = 75;
 		
-		this.weaponSlot   = Items.Weapons.GreatSword;
-		this.topArmorSlot = Items.Armor.WatchChest;
+		this.weaponSlot   = WeaponsItems.GreatSword;
+		this.topArmorSlot = ArmorItems.WatchChest;
 		
 		this.Equip();
 		this.SetLevelBonus();

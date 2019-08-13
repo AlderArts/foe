@@ -8,7 +8,6 @@ import { Entity } from '../entity';
 import { GetDEBUG } from '../../app';
 import { JobDesc, Jobs } from '../job';
 import { Gender } from '../body/gender';
-import { Items } from '../items';
 import { Images } from '../assets';
 import { Color } from '../body/color';
 import { Race } from '../body/race';
@@ -22,6 +21,8 @@ import { TerryScenes } from './terry-scenes';
 import { Abilities } from '../abilities';
 import { Gui } from '../gui';
 import { Item } from '../item';
+import { WeaponsItems } from '../items/weapons';
+import { CombatItems } from '../items/combatitems';
 
 export class Terry extends Entity {
 	sbombs : number;
@@ -82,7 +83,7 @@ export class Terry extends Entity {
 		this.body.height.base      = 157;
 		this.body.weigth.base      = 45;
 		
-		this.weaponSlot   = Items.Weapons.Dagger;
+		this.weaponSlot   = WeaponsItems.Dagger;
 		
 		this.Equip();
 		this.SetLevelBonus();
@@ -363,14 +364,14 @@ export class Terry extends Entity {
 		this.turnCounter++;
 		
 		if(first) {
-			Items.Combat.DecoyStick.combat.Use(encounter, this);
+			CombatItems.DecoyStick.combat.Use(encounter, this);
 			return;
 		}
 		
 		var choice = Math.random();
 		
 		if(this.turnCounter > 4 && this.sbombs > 0)
-			Items.Combat.SmokeBomb.combat.Use(encounter, this);
+			CombatItems.SmokeBomb.combat.Use(encounter, this);
 		else if(Abilities.Physical.Backstab.enabledCondition(encounter, this) && Abilities.Physical.Backstab.enabledTargetCondition(encounter, this, t))
 			Abilities.Physical.Backstab.Use(encounter, this, t);
 		else if(choice < 0.2 && Abilities.Physical.Kicksand.enabledCondition(encounter, this))
@@ -378,9 +379,9 @@ export class Terry extends Entity {
 		else if(choice < 0.4 && Abilities.Physical.Swift.enabledCondition(encounter, this))
 			Abilities.Physical.Swift.Use(encounter, this);
 		else if(choice < 0.6)
-			Items.Combat.PoisonDart.combat.Use(encounter, this, t);
+			CombatItems.PoisonDart.combat.Use(encounter, this, t);
 		else if(choice < 0.8)
-			Items.Combat.LustDart.combat.Use(encounter, this, t);
+			CombatItems.LustDart.combat.Use(encounter, this, t);
 		else if(Abilities.Physical.DirtyBlow.enabledCondition(encounter, this))
 			Abilities.Physical.DirtyBlow.Use(encounter, this, t);
 		else

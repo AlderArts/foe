@@ -1215,7 +1215,7 @@ export class TFItem extends Item {
 		this.isTF    = true;
 	}
 	
-	PushEffect(func : any, opts : any) {
+	PushEffect(func : any, opts? : any) {
 		this.effects.push({ func: func, opts: opts});
 	}
 

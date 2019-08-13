@@ -74,7 +74,6 @@ import { GAME, InitGAME, InitWorldTime, InitEntityStorage, EntityStorage, GameCa
 import { Race } from './body/race';
 import { Color } from './body/color';
 import { TF } from './tf';
-import { Items } from './items';
 import { Text } from './text';
 import { JobEnum, Jobs } from './job';
 import { Vagina } from './body/vagina';
@@ -89,6 +88,11 @@ import { DryadGladeFlags } from './loc/glade-flags';
 import { BurrowsFlags } from './loc/burrows-flags';
 import { GolemFlags } from './event/royals/golem-flags';
 import { LeiFlags } from './event/royals/lei-flags';
+
+import { WeaponsItems } from './items/weapons';
+import { ArmorItems } from './items/armor';
+import { AccItems } from './items/accessories';
+import { AlchemyItems } from './items/alchemy';
 
 let InitCache = function() {
 	// Reset exploration
@@ -340,8 +344,8 @@ let CacheToGame = function() {
 		GAME().rosalin.Eyes().color = Color.green;
 	}
 	if(gameCache.version < 11) {
-		GAME().kiakai.weaponSlot   = Items.Weapons.WoodenStaff;
-		GAME().kiakai.topArmorSlot = Items.Armor.SimpleRobes;
+		GAME().kiakai.weaponSlot   = WeaponsItems.WoodenStaff;
+		GAME().kiakai.topArmorSlot = ArmorItems.SimpleRobes;
 
 		Gui.Callstack.push(function() {
 			Text.Clear();
@@ -360,10 +364,10 @@ let CacheToGame = function() {
 					GAME().player.spirit.growth       += 0.1;
 					GAME().player.libido.growth       += 0.0;
 					GAME().player.charisma.growth     += 0.1;
-					GAME().player.weaponSlot   = Items.Weapons.ShortSword;
-					GAME().player.topArmorSlot = Items.Armor.LeatherChest;
-					GAME().player.botArmorSlot = Items.Armor.LeatherPants;
-					GAME().player.acc1Slot     = Items.Accessories.IronBangle;
+					GAME().player.weaponSlot   = WeaponsItems.ShortSword;
+					GAME().player.topArmorSlot = ArmorItems.LeatherChest;
+					GAME().player.botArmorSlot = ArmorItems.LeatherPants;
+					GAME().player.acc1Slot     = AccItems.IronBangle;
 					GAME().player.jobs["Fighter"].mult = 0.5;
 					GAME().player.Equip();
 					Gui.PrintDefaultOptions();
@@ -381,9 +385,9 @@ let CacheToGame = function() {
 					GAME().player.spirit.growth       += 0.3;
 					GAME().player.libido.growth       += 0.1;
 					GAME().player.charisma.growth     += 0.1;
-					GAME().player.weaponSlot   = Items.Weapons.WoodenStaff;
-					GAME().player.topArmorSlot = Items.Armor.SimpleRobes;
-					GAME().player.acc1Slot     = Items.Accessories.CrudeBook;
+					GAME().player.weaponSlot   = WeaponsItems.WoodenStaff;
+					GAME().player.topArmorSlot = ArmorItems.SimpleRobes;
+					GAME().player.acc1Slot     = AccItems.CrudeBook;
 					GAME().player.jobs["Scholar"].mult = 0.5;
 					GAME().player.jobs["Fighter"].mult = 1;
 					GAME().player.Equip();
@@ -402,9 +406,9 @@ let CacheToGame = function() {
 					GAME().player.spirit.growth       += 0.0;
 					GAME().player.libido.growth       += 0.5;
 					GAME().player.charisma.growth     += 0.5;
-					GAME().player.weaponSlot   = Items.Weapons.LWhip;
-					GAME().player.topArmorSlot = Items.Armor.StylizedClothes;
-					GAME().player.acc1Slot     = Items.Accessories.SimpleCuffs;
+					GAME().player.weaponSlot   = WeaponsItems.LWhip;
+					GAME().player.topArmorSlot = ArmorItems.StylizedClothes;
+					GAME().player.acc1Slot     = AccItems.SimpleCuffs;
 					GAME().player.jobs["Courtesan"].mult = 0.5;
 					GAME().player.jobs["Fighter"].mult   = 1;
 					GAME().player.Equip();
@@ -449,14 +453,14 @@ let CacheToGame = function() {
 	}
 	if(gameCache.version < 20) {
 		if(GAME().golem.flags["Met"] >= GolemFlags.State.Won_noLoss) {
-			GAME().party.Inv().AddItem(Items.Weapons.MageStaff);
-			GAME().party.Inv().AddItem(Items.Armor.MageRobes);
+			GAME().party.Inv().AddItem(WeaponsItems.MageStaff);
+			GAME().party.Inv().AddItem(ArmorItems.MageRobes);
 		}
 		if(GAME().glade.flags["Visit"] >= DryadGladeFlags.Visit.DefeatedOrchid) {
-			GAME().party.Inv().AddItem(Items.Weapons.VineWhip);
-			GAME().party.Inv().AddItem(Items.Armor.VineBra);
-			GAME().party.Inv().AddItem(Items.Armor.VinePanties);
-			GAME().party.Inv().AddItem(Items.Alchemy.Estros);
+			GAME().party.Inv().AddItem(WeaponsItems.VineWhip);
+			GAME().party.Inv().AddItem(ArmorItems.VineBra);
+			GAME().party.Inv().AddItem(ArmorItems.VinePanties);
+			GAME().party.Inv().AddItem(AlchemyItems.Estros);
 		}
 	}
 	if(gameCache.version < 21) {
