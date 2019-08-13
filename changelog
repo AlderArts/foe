@@ -5,12 +5,12 @@ CHANGELOG for Fall of Eden
                   CURRENT
 --------------------------------------------
 
-Version 0.4.25
+Version 0.5.0
 --------------
 * Fixed numerous typos.
 * Fixed a few Cavalcade parser errors.
 * Changed common measurment unit to imperial (inches, feet, yards) for consistency.
-* Adjusted a bunch of NPC cock sizes to account for this. Holler if you find discrepancies!
+ - Adjusted a bunch of NPC cock sizes to account for this. Holler if you find discrepancies or size evaluations that doesn't make sense!
 * Becoming a herm in the intro now starts you with a seven inch cock (bigger than before).
 * Added a slew of new cock size adjectives (and reduced their prevalence in scenes). The descriptors should be slightly less repetitive now.
 * Added a review/redo option to character creation in the intro.
@@ -21,6 +21,14 @@ Version 0.4.25
 * Streamlined Chief talk scenes (removed Next, now looks more in line with other NPC dialogue).
 * Adjusted pacing in the Equines win scenes. They are now split up into multiple pages rather than one long scene.
 * Adjusted pacing in Barnaby's blowjob scenes (the bartender of the Maidens' Bane) by splitting the scene in multiple pages.
+
+* Major update to the structure of the code base (hence the update from 0.4 to 0.5).
+ - The entire code base has been converted to ES6 modules and TypeScript instead of JavaScript, making much of the code strictly type checked (finding/fixing a fair number of obscure bugs), and preventing pollution of the global namespace.
+ - The build system has been changed from gulp to webpack.
+ - Nodejs is used to get the latest versions of all vendor packages.
+* What does this update mean for you as a player? It shouldn't change anything, but due to the magnitude of the changes, it's possible that some errors have sneaked their way through. I'll be releasing a slightly bigger, non-uglified development version that contains some more backtrace information until things stabilize, please report any issues that show up.
+ - For those that used the player object in the console to cheat, this method is unfortunately not available anymore. If there's requests for that kind of thing, I might consider making the objects accessible in some way.
+ - The application has been tested on the latest versions of Chrome and Firefox and seem to work fine on them. If you run into any issues starting the game, please append what browser/version you are using. 
 
 --------------------------------------------
              PREVIOUS VERSIONS
