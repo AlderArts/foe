@@ -1,21 +1,21 @@
 
-let Element = {
-	pSlash   : 0,
-	pBlunt   : 1,
-	pPierce  : 2,
-	mVoid    : 3,
-	mFire    : 4,
-	mIce     : 5,
-	mThunder : 6,
-	mEarth   : 7,
-	mWater   : 8,
-	mWind    : 9,
-	mLight   : 10,
-	mDark    : 11,
-	mNature  : 12,
-	lust     : 13,
+export enum Element {
+	pSlash      = 0,
+	pBlunt      = 1,
+	pPierce     = 2,
+	mVoid       = 3,
+	mFire       = 4,
+	mIce        = 5,
+	mThunder    = 6,
+	mEarth      = 7,
+	mWater      = 8,
+	mWind       = 9,
+	mLight      = 10,
+	mDark       = 11,
+	mNature     = 12,
+	lust        = 13,
 
-	numElements : 14
+	numElements = 14
 }
 
 export class DamageType {
@@ -54,5 +54,3 @@ export class DamageType {
 		return ret;
 	}
 }
-
-export { Element };

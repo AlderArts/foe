@@ -4,7 +4,7 @@ import { Input } from './input';
 import { SetGameState, GameState } from './gamestate';
 import { Text } from './text';
 
-let CreditsScreen = function(SplashScreen : CallableFunction) {
+export function CreditsScreen(SplashScreen : CallableFunction) {
 	SetGameState(GameState.Credits, Gui);
 	Text.Clear();
 	Gui.ClearButtons();
@@ -81,5 +81,3 @@ let CreditsScreen = function(SplashScreen : CallableFunction) {
 	
 	Input.buttons[0].Setup("Back", SplashScreen, true);
 }
-
-export { CreditsScreen };
