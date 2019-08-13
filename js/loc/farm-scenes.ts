@@ -1191,7 +1191,7 @@ FarmLoc.Loft.SleepFunc = function() {
 		TimeStep({hour: 8});
 		party.Sleep();
 
-		if(LaylaScenes.FarmMeetingTrigger()) return;
+		if(LaylaScenes.FarmMeetingTrigger(false)) return;
 
 		//TODO
 		Text.Add("You wake up, feeling rested and refreshed.", parse);
