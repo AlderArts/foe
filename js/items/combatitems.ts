@@ -16,12 +16,12 @@ export class CombatItemAbility extends Ability {
 		this.item = item;
 	}
 	
-	Use(encounter : Encounter, caster : Entity, target : Entity, inv : Inventory) {
+	Use(encounter : Encounter, caster : Entity, target? : Entity, inv? : Inventory) {
 		if(inv && this.item.consume) {
 			inv.RemoveItem(this.item);
 		}
 		
-		Ability.prototype.Use.call(this, encounter, caster, target);
+		super.Use(encounter, caster, target);
 	}
 }
 
@@ -57,15 +57,14 @@ export class CombatItem extends Item {
 
 
 
-let CombatItems : any = {};
 
-CombatItems.HPotion = new CombatItem("pot0", "Health Pot");
-CombatItems.HPotion.price = 20;
-CombatItems.HPotion.sDesc = function() { return "health potion"; }
-CombatItems.HPotion.lDesc = function() { return "a weak health potion"; }
-CombatItems.HPotion.Short = function() { return "A health potion."; }
-CombatItems.HPotion.Long = function() { return "A weak health potion."; }
-CombatItems.HPotion.combat.castTree.push(function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
+let hPotion = new CombatItem("pot0", "Health Pot");
+hPotion.price = 20;
+hPotion.sDesc = function() { return "health potion"; }
+hPotion.lDesc = function() { return "a weak health potion"; }
+hPotion.Short = function() { return "A health potion."; }
+hPotion.Long = function() { return "A weak health potion."; }
+hPotion.combat.castTree.push(function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
 	var parse = AbilityNode.DefaultParser(caster, target);
 	Text.Add("[Name] use[notS] a potion.", parse);
 	Text.NL();
@@ -75,13 +74,13 @@ CombatItems.HPotion.combat.castTree.push(function(ability : Ability, encounter :
 });
 
 
-CombatItems.EPotion = new CombatItem("pot1", "Energy Pot");
-CombatItems.EPotion.price = 40;
-CombatItems.EPotion.sDesc = function() { return "energy potion"; }
-CombatItems.EPotion.lDesc = function() { return "a weak energy potion"; }
-CombatItems.EPotion.Short = function() { return "An energy potion."; }
-CombatItems.EPotion.Long = function() { return "A weak energy potion."; }
-CombatItems.EPotion.combat.castTree.push(function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
+let ePotion = new CombatItem("pot1", "Energy Pot");
+ePotion.price = 40;
+ePotion.sDesc = function() { return "energy potion"; }
+ePotion.lDesc = function() { return "a weak energy potion"; }
+ePotion.Short = function() { return "An energy potion."; }
+ePotion.Long = function() { return "A weak energy potion."; }
+ePotion.combat.castTree.push(function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
 	var parse = AbilityNode.DefaultParser(caster, target);
 	Text.Add("[Name] use[notS] an energy potion.", parse);
 	Text.NL();
@@ -91,14 +90,14 @@ CombatItems.EPotion.combat.castTree.push(function(ability : Ability, encounter :
 });
 
 
-CombatItems.SpeedPotion = new CombatItem("pot2", "Speed Pot");
-CombatItems.SpeedPotion.price = 100;
-CombatItems.SpeedPotion.sDesc = function() { return "speed potion"; }
-CombatItems.SpeedPotion.lDesc = function() { return "a speed potion"; }
-CombatItems.SpeedPotion.Short = function() { return "A speed potion."; }
-CombatItems.SpeedPotion.Long = function() { return "A speed potion."; }
-CombatItems.SpeedPotion.combat.targetMode = TargetMode.Self;
-CombatItems.SpeedPotion.combat.castTree.push(function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
+let speedPotion = new CombatItem("pot2", "Speed Pot");
+speedPotion.price = 100;
+speedPotion.sDesc = function() { return "speed potion"; }
+speedPotion.lDesc = function() { return "a speed potion"; }
+speedPotion.Short = function() { return "A speed potion."; }
+speedPotion.Long = function() { return "A speed potion."; }
+speedPotion.combat.targetMode = TargetMode.Self;
+speedPotion.combat.castTree.push(function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
 	var parse = AbilityNode.DefaultParser(caster);
 
 	Status.Haste(caster, { turns : 3, turnsR : 3, factor : 2 });
@@ -107,15 +106,15 @@ CombatItems.SpeedPotion.combat.castTree.push(function(ability : Ability, encount
 });
 
 
-CombatItems.SmokeBomb = new CombatItem("esc0", "S.Bomb");
-CombatItems.SmokeBomb.price = 100;
-CombatItems.SmokeBomb.Short = function() { return "A smoke bomb."; }
-CombatItems.SmokeBomb.Long = function() { return "A glass sphere containing an alchemical concoction that disperses in thick, oily smoke when mixed with air. Smashing the bomb creates instant cover."; }
-CombatItems.SmokeBomb.combat.enabledCondition = function(encounter : Encounter, caster : Entity) {
+let smokeBomb = new CombatItem("esc0", "S.Bomb");
+smokeBomb.price = 100;
+smokeBomb.Short = function() { return "A smoke bomb."; }
+smokeBomb.Long = function() { return "A glass sphere containing an alchemical concoction that disperses in thick, oily smoke when mixed with air. Smashing the bomb creates instant cover."; }
+smokeBomb.combat.enabledCondition = function(encounter : Encounter, caster : Entity) {
 	return encounter.canRun;
 }
-CombatItems.SmokeBomb.combat.targetMode = TargetMode.Self;
-CombatItems.SmokeBomb.combat.CastInternal = function(encounter : Encounter, caster : Entity) {
+smokeBomb.combat.targetMode = TargetMode.Self;
+smokeBomb.combat.CastInternal = function(encounter : Encounter, caster : Entity) {
 	var parse = AbilityNode.DefaultParser(caster);
 	Text.Clear();
 	Text.Add("[Name] toss[notEs] a smoke bomb at the ground. It explodes in a cloud of smoke, covering for [hisher] escape!", parse);
@@ -126,12 +125,12 @@ CombatItems.SmokeBomb.combat.CastInternal = function(encounter : Encounter, cast
 }
 
 
-CombatItems.DecoyStick = new CombatItem("decoy0", "Decoy");
-CombatItems.DecoyStick.price = 250;
-CombatItems.DecoyStick.Short = function() { return "A decoy stick."; }
-CombatItems.DecoyStick.Long = function() { return "A stick containing the shards of an enchanted mirror, when broken it will generate illusory copies of the user, confusing targets."; }
-CombatItems.DecoyStick.combat.targetMode = TargetMode.Self;
-CombatItems.DecoyStick.combat.castTree.push(function(ability : Ability, encounter : Encounter, caster : Entity) {
+let decoyStick = new CombatItem("decoy0", "Decoy");
+decoyStick.price = 250;
+decoyStick.Short = function() { return "A decoy stick."; }
+decoyStick.Long = function() { return "A stick containing the shards of an enchanted mirror, when broken it will generate illusory copies of the user, confusing targets."; }
+decoyStick.combat.targetMode = TargetMode.Self;
+decoyStick.combat.castTree.push(function(ability : Ability, encounter : Encounter, caster : Entity) {
 	var parse = AbilityNode.DefaultParser(caster);
 	
 	Text.Add("[Name] grab[notS] a decoy stick and break[notS] it. A flash of light emanates, and when it subsides, [heshe] [has] split into four copies.", parse);
@@ -140,12 +139,12 @@ CombatItems.DecoyStick.combat.castTree.push(function(ability : Ability, encounte
 });
 
 
-CombatItems.LustDart = new CombatItem("dart0", "Lust darts");
-CombatItems.LustDart.price = 25;
-CombatItems.LustDart.Short = function() { return "Aphrodisiac-tipped darts."; }
-CombatItems.LustDart.Long = function() { return "Throwing darts smeared in potent aphrodisiacs. On a hit, they will charm an enemy."; }
-CombatItems.LustDart.combat.targetMode = TargetMode.Enemy;
-CombatItems.LustDart.combat.castTree.push(AbilityNode.Template.Physical({
+let lustDart = new CombatItem("dart0", "Lust darts");
+lustDart.price = 25;
+lustDart.Short = function() { return "Aphrodisiac-tipped darts."; }
+lustDart.Long = function() { return "Throwing darts smeared in potent aphrodisiacs. On a hit, they will charm an enemy."; }
+lustDart.combat.targetMode = TargetMode.Enemy;
+lustDart.combat.castTree.push(AbilityNode.Template.Physical({
 	toDamage : null,
 	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
 		var parse = AbilityNode.DefaultParser(caster, target);
@@ -172,12 +171,12 @@ CombatItems.LustDart.combat.castTree.push(AbilityNode.Template.Physical({
 }));
 
 
-CombatItems.PoisonDart = new CombatItem("dart1", "Poison darts");
-CombatItems.PoisonDart.price = 40;
-CombatItems.PoisonDart.Short = function() { return "Poison-tipped darts."; }
-CombatItems.PoisonDart.Long = function() { return "Throwing darts smeared in a fast-acting venom, making them quite dangerous."; }
-CombatItems.PoisonDart.combat.targetMode = TargetMode.Enemy;
-CombatItems.PoisonDart.combat.castTree.push(AbilityNode.Template.Physical({
+let poisonDart = new CombatItem("dart1", "Poison darts");
+poisonDart.price = 40;
+poisonDart.Short = function() { return "Poison-tipped darts."; }
+poisonDart.Long = function() { return "Throwing darts smeared in a fast-acting venom, making them quite dangerous."; }
+poisonDart.combat.targetMode = TargetMode.Enemy;
+poisonDart.combat.castTree.push(AbilityNode.Template.Physical({
 	toDamage : null,
 	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
 		var parse = AbilityNode.DefaultParser(caster, target);
@@ -204,12 +203,12 @@ CombatItems.PoisonDart.combat.castTree.push(AbilityNode.Template.Physical({
 }));
 
 
-CombatItems.GlassSword = new CombatItem("glass0", "Glass sword");
-CombatItems.GlassSword.price = 1000;
-CombatItems.GlassSword.Short = function() { return "A glass sword, shatters on use."; }
-CombatItems.GlassSword.Long = function() { return "A razor-sharp glass sword. A fragile but very powerful blade."; }
-CombatItems.GlassSword.combat.targetMode = TargetMode.Enemy;
-CombatItems.GlassSword.combat.castTree.push(AbilityNode.Template.Physical({
+let glassSword = new CombatItem("glass0", "Glass sword");
+glassSword.price = 1000;
+glassSword.Short = function() { return "A glass sword, shatters on use."; }
+glassSword.Long = function() { return "A razor-sharp glass sword. A fragile but very powerful blade."; }
+glassSword.combat.targetMode = TargetMode.Enemy;
+glassSword.combat.castTree.push(AbilityNode.Template.Physical({
 	atkMod: 7,
 	hitMod: 2,
 	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
@@ -222,4 +221,14 @@ CombatItems.GlassSword.combat.castTree.push(AbilityNode.Template.Physical({
 	onAbsorb: [Defaults.Physical._onAbsorb]
 }));
 
-export { CombatItems };
+
+export namespace CombatItems {
+	export const HPotion = hPotion;
+	export const EPotion = ePotion;
+	export const SpeedPotion = speedPotion;
+	export const SmokeBomb = smokeBomb;
+	export const DecoyStick = decoyStick;
+	export const LustDart = lustDart;
+	export const PoisonDart = poisonDart;
+	export const GlassSword = glassSword;
+}

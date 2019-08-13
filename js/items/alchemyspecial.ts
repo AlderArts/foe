@@ -114,26 +114,6 @@ tigris.PushEffect(TF.ItemEffects.IncStr, {odds: 0.5, ideal: 45, max: 2});
 tigris.PushEffect(TF.ItemEffects.IncCha, {odds: 0.3, ideal: 25, max: 2});
 tigris.PushEffect(TF.ItemEffects.IncSta, {odds: 0.2, ideal: 40, max: 2});
 tigris.PushEffect(TF.ItemEffects.DecInt, {odds: 0.1, ideal: 25, max: 1});
-tigris.PushEffect(function(target : Entity) {
-	var parse : any = {
-		name: target.NameDesc(),
-		s: target == GAME().player ? "" : "s",
-		possessive: target.possessive(),
-		Possessive: target.Possessive()
-	};
-	var cocks = target.AllCocks();
-	/* TODO
-	for(var i = 0; i < cocks.length; i++) {
-		var cock = cocks[i];
-		if(cock.sheath == 0 && Math.random() < 0.4) {
-			parse["cock"] = cock.Short();
-			Text.Add("[Possessive] [cock] is encased in a soft, furry sheath!", parse);
-			Text.NL();
-		}
-	}
-	*/
-	Text.Flush();
-});
 tigris.PushEffect(TF.ItemEffects.DecFem, {odds: 0.2, ideal: -.7, max: .1, male: true});
 tigris.PushEffect(TF.ItemEffects.IncTone, {odds: 0.2, ideal: .9, max: .1 });
 tigris.PushEffect(TF.ItemEffects.DecHips, {odds: 0.3, ideal: HipSize.Medium, max: 1});

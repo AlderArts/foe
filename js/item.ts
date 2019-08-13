@@ -7,43 +7,43 @@ import { Text } from './text';
 
 let ItemIds : any = {};
 //Represents the overall category an item falls under.
-let ItemType : {[index:string] : string } = {
-	Weapon     : "Weapons",
-	Armor      : "Armors",
-	Accessory  : "Accessories",
-	Potion     : "Potions",
-	Card       : "Cards",
-	Ingredient : "Ingredients",
-	Quest      : "Quest Items",
-	Toy        : "Toys",
-	Misc       : "Misc", //Default catch all for all items. Should strive to not have this on any items though.
-};
+export enum ItemType {
+	Weapon     = "Weapons",
+	Armor      = "Armors",
+	Accessory  = "Accessories",
+	Potion     = "Potions",
+	Card       = "Cards",
+	Ingredient = "Ingredients",
+	Quest      = "Quest Items",
+	Toy        = "Toys",
+	Misc       = "Misc", //Default catch all for all items. Should strive to not have this on any items though.
+}
 //Represents a second level of categorization for items.
 //FIXME Attempt to remove Acc1/Acc2 from here. They can exist on entity, but shouldn't exist as a type in items.
-let ItemSubtype : {[index:string] : any } = {
-	FullArmor : "Full Armors",
-	TopArmor  : "Top Armors",
-	BotArmor  : "Bottom Armors",
-	Acc1      : 5,
-	Acc2      : 6,
-	StrapOn   : "Strapons",
-	Dildo	  : "Dildos",
-	None	  : "None", //Should be default case for all items
-};
+export enum ItemSubtype {
+	FullArmor = "Full Armors",
+	TopArmor  = "Top Armors",
+	BotArmor  = "Bottom Armors",
+	Acc1      = 5,
+	Acc2      = 6,
+	StrapOn   = "Strapons",
+	Dildo	  = "Dildos",
+	None	  = "None", //Should be default case for all items
+}
 
 export class Item {
 	id : string;
 	name : string;
-	type : any;
+	type : ItemType;
 	image : any;
 	price : number;
-	subtype : any;
+	subtype : ItemSubtype;
 	recipe : any[];
 	Use : any;
 	effect : any;
 	isTF : boolean;
 
-	constructor(id : string, name : string, type : any) {
+	constructor(id : string, name : string, type : ItemType) {
 		//Required (An item will always have these)
 		this.id     = id;
 		this.name   = name;
@@ -228,4 +228,4 @@ function compareItemByProp(p : any){
 	}
 }
 
-export { ItemType, ItemSubtype, ItemIds, compareItemByProp };
+export { ItemIds, compareItemByProp };

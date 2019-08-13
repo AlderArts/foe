@@ -327,7 +327,6 @@ FelinesScenes.JaguarEnc = function(levelbonus : number) {
 export class Lynx extends Wildcat {
 	constructor(gender : Gender, levelbonus? : number) {
 		super(gender, levelbonus);
-		Wildcat.call(this, gender, levelbonus);
 		this.ID = "lynx";
 
 		this.race = Race.Lynx;
@@ -451,8 +450,8 @@ FelinesScenes.IntroRegular = function() {
 	let party : Party = GAME().party;
 	var enc     = this;
 	var enemy   = enc.enemy;
-	var group   = enemy.Num() > 1;
-	var mainCat = enemy.Get(0);
+	var group   : boolean = enemy.Num() > 1;
+	var mainCat : Wildcat = enemy.Get(0);
 
 	var parse : any = {
 		groupof    : group ? " group of" : "",
