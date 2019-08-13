@@ -3,6 +3,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const TerserJSPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const ZipPlugin = require('zip-webpack-plugin');
@@ -12,6 +13,7 @@ const CircularDependencyPlugin = require('circular-dependency-plugin');
 module.exports = {
   entry: './index.ts',
   plugins: [
+    new BundleAnalyzerPlugin(),
     new CopyWebpackPlugin([
         './foe.html',
         {from:'assets',to:'assets'}
