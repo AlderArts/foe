@@ -1,16 +1,14 @@
-let LucilleFlags = {
-	Buy : {
-		No    : 0,
-		First : 1,
-		Deal  : 2
-	},
+export namespace LucilleFlags {
+	export enum Buy {
+		No    = 0,
+		First = 1,
+		Deal  = 2
+	}
 
 	//TODO
-	Themeroom : { //Bitmask
-		CatDynasty : 1,
-		Gryphons : 2,
-		Fireblossom : 4
-	},
-};
-
-export { LucilleFlags };
+	export enum Themeroom { //Bitmask
+		CatDynasty  = 1,
+		Gryphons    = 2,
+		Fireblossom = 4
+	}
+}

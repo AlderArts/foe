@@ -5,24 +5,26 @@ import { Gui } from '../../gui';
 import { LucilleFlags } from './lucille-flags';
 import { GAME, TimeStep } from '../../GAME';
 
-let FireblossomFlags = {
-	State : {
-		S1Journey   : 0,
-		S2DraxenPet : 1,
-		S2RakkatPet : 2,
-		S2GrexPet   : 3,
-	},
-	Outset : {
-		Draxen       : 0,
-		Rakkat       : 1,
-		RakkatToGrex : 2,
-		Grex         : 3,
-	},
-	Rakkat : {
-		Lover   : 1,
-		Seduced : 2,
-	},
-};
+namespace FireblossomFlags {
+	export enum State {
+		S1Journey   = 0,
+		S2DraxenPet = 1,
+		S2RakkatPet = 2,
+		S2GrexPet   = 3,
+	}
+
+	export enum Outset {
+		Draxen       = 0,
+		Rakkat       = 1,
+		RakkatToGrex = 2,
+		Grex         = 3,
+	}
+
+	export enum Rakkat {
+		Lover   = 1,
+		Seduced = 2,
+	}
+}
 
 export class Fireblossom extends Entity {
 	xariRel : number;

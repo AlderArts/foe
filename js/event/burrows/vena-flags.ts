@@ -1,15 +1,13 @@
-let VenaFlags = {
-    Met : {
-        PitFirst  : 1,
-        Restored  : 2,
-        Judgement : 4
-    },
+export namespace VenaFlags {
+    export enum Met {
+        PitFirst  = 1,
+        Restored  = 2,
+        Judgement = 4
+    }
 
-    Sex : {
-        Fucked   : 1,
-        FuckedBy : 2,
-        Forced   : 4
-    },
-};
-
-export { VenaFlags };
+    export enum Sex {
+        Fucked   = 1,
+        FuckedBy = 2,
+        Forced   = 4
+    }
+}

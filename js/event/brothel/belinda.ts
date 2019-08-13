@@ -8,11 +8,11 @@ import { Race } from '../../body/race';
 import { Color } from '../../body/color';
 import { WorldTime, GAME, WORLD } from '../../GAME';
 
-let BelindaFlags = {
-	Met : {
-		NotMet : 0,
-		Met    : 1
-	},
+export namespace BelindaFlags {
+	export enum Met {
+		NotMet = 0,
+		Met    = 1
+	}
 }
 
 export class Belinda extends Entity {

@@ -5,11 +5,11 @@
  */
 import { Entity } from '../../entity';
 
-let ChesFlags = {
-	Met : {
-		NotMet : 0
-	},
-};
+export namespace ChesFlags {
+	export enum Met {
+		NotMet = 0,
+	}
+}
 
 export class Ches extends Entity {
 	constructor(storage? : any) {
@@ -57,5 +57,5 @@ export class Ches extends Entity {
 }
 
 export namespace ChesScenes {
-	
+
 };
