@@ -2,7 +2,6 @@ import * as _ from 'lodash';
 
 import { Gui } from "./gui";
 import { Images } from "./assets";
-import { isFunction } from "./utility";
 import { GameState, SetGameState } from "./gamestate";
 import { GAME, TimeStep, WORLD, StepToHour } from "./GAME";
 import { Text } from "./text";
@@ -239,10 +238,10 @@ export class Event {
 		for(var i = 0; i < links.length; i++) {
 			var link = links[i];
 
-			var visible = isFunction(link.visibleCondition) ? link.visibleCondition() : link.visibleCondition;
+			var visible = _.isFunction(link.visibleCondition) ? link.visibleCondition() : link.visibleCondition;
 			if(!visible) continue;
-			var enabled = isFunction(link.enabledCondition) ? link.enabledCondition() : link.enabledCondition;
-			var nameStr = isFunction(link.name) ? link.name() : link.name;
+			var enabled = _.isFunction(link.enabledCondition) ? link.enabledCondition() : link.enabledCondition;
+			var nameStr = _.isFunction(link.name) ? link.name() : link.name;
 
 			list.push({nameStr: nameStr, func: link.func, enabled: enabled, tooltip: link.tooltip, image: link.image});
 			//Input.buttons[i].Setup(nameStr, link.func, enabled);
@@ -255,7 +254,7 @@ export class Event {
 	// Shows
 	PrintDesc() {
 		if(this.description) {
-			if(isFunction(this.description))
+			if(_.isFunction(this.description))
 				this.description();
 			else
 				Text.Add(this.description);
@@ -264,7 +263,7 @@ export class Event {
 		for(var i = 0; i < this.links.length; i++) {
 			var link = this.links[i];
 			if(link.print) {
-				if(isFunction(link.print))
+				if(_.isFunction(link.print))
 					link.print();
 				else
 					Text.Add(link.print);
@@ -274,7 +273,7 @@ export class Event {
 		for(var i = 0; i < this.events.length; i++) {
 			var e = this.events[i];
 			if(e.print) {
-				if(isFunction(e.print))
+				if(_.isFunction(e.print))
 					e.print();
 				else
 					Text.Add(e.print);
@@ -282,7 +281,7 @@ export class Event {
 		}
 
 		if(this.endDescription) {
-			if(isFunction(this.endDescription))
+			if(_.isFunction(this.endDescription))
 				this.endDescription();
 			else
 				Text.Add(this.endDescription);

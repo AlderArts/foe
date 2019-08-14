@@ -4,10 +4,10 @@
  *
  */
 import * as $ from 'jquery';
+import * as _ from 'lodash';
 
 import { BUTTON_FONT } from '../app';
 import { gameState, GameState, SetGameState } from './gamestate';
-import { isFunction } from './utility';
 import { Text } from './text';
 import { Images } from './assets';
 
@@ -130,7 +130,7 @@ export class Button {
 	
 	HoverIn() {
 		if(this.visible && this.enabled && this.tooltip) {
-			if(isFunction(this.tooltip))
+			if(_.isFunction(this.tooltip))
 				this.tooltip(this.obj);
 			else
 				Text.SetTooltip(this.tooltip);

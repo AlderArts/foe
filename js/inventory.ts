@@ -484,11 +484,11 @@ export class Inventory {
 			}
 
 			//remove empty types
-			if(itemsByType && Object.keys(itemsByType[itemType]).length == 0)
+			if(itemsByType && _.keys(itemsByType[itemType]).length == 0)
 				delete itemsByType[itemType];
-			if(usableItemsByType && Object.keys(usableItemsByType[itemType]).length == 0)
+			if(usableItemsByType && _.keys(usableItemsByType[itemType]).length == 0)
 				delete usableItemsByType[itemType];
-			if(combatItemsByType && Object.keys(combatItemsByType[itemType]).length == 0)
+			if(combatItemsByType && _.keys(combatItemsByType[itemType]).length == 0)
 				delete combatItemsByType[itemType];
 		}
 	}

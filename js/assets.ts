@@ -1,5 +1,6 @@
 let preloader = require('preloader');
 
+import * as _ from 'lodash';
 import * as $ from 'jquery';
 
 import { StatusEffect } from './statuseffect';
@@ -100,7 +101,7 @@ var LoadImages = function(onComplete : CallableFunction) {
 	//Fill image array
 	let imageArray = [];
 	for(let image in Images) {
-		if(Array.isArray(Images[image])) continue;
+		if(_.isArray(Images[image])) continue;
 		imageArray.push(Images[image]);
 	}
 	LoadCardImages(imageArray);

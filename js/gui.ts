@@ -1,5 +1,6 @@
 import * as Raphael from 'raphael';
 import * as $ from 'jquery';
+import * as _ from 'lodash';
 
 import { Images } from './assets';
 import { SMALL_FONT, DEFAULT_FONT, GetRenderPictures } from '../app';
@@ -11,7 +12,6 @@ import { ExploreButtonIndex } from './explorestate';
 import { Text } from './text';
 import { GAME, WorldTime, GetCavalcade, NAV } from './GAME';
 import { StatusList } from './statuslist';
-import { isFunction } from './utility';
 import { EnemyParty, CurrentActiveChar } from './combat-data';
 
 let Gui : any = {};
@@ -678,7 +678,7 @@ Gui.RenderEntity = function(entity : any, set : RaphaelSet, obj : any) {
 
 Gui.RenderLocation = function(name : any) {
 	var nameStr;
-	if(isFunction(name))
+	if(_.isFunction(name))
 		nameStr = name();
 	else if(name)
 		nameStr = name;

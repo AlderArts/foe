@@ -2,7 +2,7 @@ import * as $ from 'jquery';
 import * as _ from 'lodash';
 
 import { GetRenderPictures } from '../app';
-import { isFunction, Rand } from './utility';
+import { Rand } from './utility';
 
 export namespace Text {
 
@@ -42,7 +42,7 @@ export namespace Text {
 					var replaceStr;
 					if(parseStrings[code] != null) {
 						replaceStr = parseStrings[code];
-						if(isFunction(replaceStr))
+						if(_.isFunction(replaceStr))
 							replaceStr = replaceStr();
 						if(_.isUndefined(replaceStr))
 							replaceStr = ApplyStyle("['" + code + "' is undefined]", "error");

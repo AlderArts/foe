@@ -28,7 +28,7 @@ export namespace TF {
 	export function SetRaceOne(bodypart : any, race : RaceDesc, ret? : any) {
 		ret = ret || {};
 		var changed = Effect.Unchanged;
-		if(Array.isArray(bodypart)) {
+		if(_.isArray(bodypart)) {
 			var list = [];
 			for(var i = 0; i < bodypart.length; i++) {
 				if(bodypart[i].race != race)
@@ -51,7 +51,7 @@ export namespace TF {
 	
 	export function SetRaceAll(bodypart : any, race : RaceDesc) {
 		let changed : any = Effect.Unchanged;
-		if(Array.isArray(bodypart)) {
+		if(_.isArray(bodypart)) {
 			var list = [];
 			for(var i = 0; i < bodypart.length; i++) {
 				if(bodypart[i].race != race)

@@ -1,7 +1,8 @@
+import * as _ from 'lodash';
+
 import { GetDEBUG } from '../app';
 import { CaleFlags } from './event/nomads/cale-flags';
 import { TerryFlags } from './event/terry-flags';
-import { isFunction } from './utility';
 import { Text } from './text';
 import { Gui } from './gui';
 import { GlobalScenes } from './event/global';
@@ -33,10 +34,10 @@ export class Quest {
 	}
 	
 	Print() {
-		var name = isFunction(this.name) ? this.name() : this.name;
+		var name = _.isFunction(this.name) ? this.name() : this.name;
 		Text.Add("<b>"+name+"</b>");
 		Text.NL();
-		var desc = isFunction(this.desc) ? this.desc() : this.desc;
+		var desc = _.isFunction(this.desc) ? this.desc() : this.desc;
 		Text.Add(desc);
 		Text.NL();
 		var list = this.list;
@@ -73,8 +74,8 @@ export class QuestItem {
 			if(active & Quests.Type.Failed)
 				Text.Add("<font color ='red'><del>");
 			
-			var desc = isFunction(this.desc) ? this.desc() : this.desc;
-			if(isFunction(desc))
+			var desc = _.isFunction(this.desc) ? this.desc() : this.desc;
+			if(_.isFunction(desc))
 				desc();
 			else
 				Text.Add(desc);

@@ -1,6 +1,7 @@
 /**
  * @author alder
  */
+import * as _ from 'lodash';
 
 import { DamageType } from './damagetype';
 import { CurEncounter } from './combat-data';
@@ -39,7 +40,7 @@ export enum StatusEffect {
 	LAST     = 27
 };
 
-Status.Keys = Object.keys(StatusEffect);
+Status.Keys = _.keys(StatusEffect);
 
 Status.Venom = function(target : any, opts? : any) {
 	if(!target) return;

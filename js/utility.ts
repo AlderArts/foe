@@ -1,41 +1,3 @@
-
-// Borrowed from Underscore.js
-let isFunction = function(obj : any) {
-	return !!(obj && obj.constructor && obj.call && obj.apply);
-};
-
-if(!Array.isArray) {
-	Array.isArray = function(arg : any) : arg is any[] {
-		return (Object.prototype.toString.call(arg) === "[object Array]");
-	};
-}
-
-// Polyfill for Object.assign
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
-if (typeof Object.assign != 'function') {
-  Object.assign = function(target : any, ...varArgs : any) { // .length of function is 2
-    if (target == null) { // TypeError if undefined or null
-      throw new TypeError('Cannot convert undefined or null to object');
-    }
-
-    var to = Object(target);
-
-    for (var index = 1; index < arguments.length; index++) {
-      var nextSource = arguments[index];
-
-      if (nextSource != null) { // Skip over if undefined or null
-        for (var nextKey in nextSource) {
-          // Avoid bugs when hasOwnProperty is shadowed
-          if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
-            to[nextKey] = nextSource[nextKey];
-          }
-        }
-      }
-    }
-    return to;
-  };
-}
-
 let Rand = function(max : number) {
 	var r = Math.floor(Math.random() * max);
 	return (r < max) ? r : max - 1;
@@ -147,4 +109,4 @@ GenerateFile.canSaveOffline = false;
 	GenerateFile.canSaveOffline = true;
 })();
 
-export { isFunction, Unit, GenerateFile, Rand };
+export { Unit, GenerateFile, Rand };

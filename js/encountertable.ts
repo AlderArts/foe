@@ -1,4 +1,4 @@
-import { isFunction } from "./utility";
+import * as _ from 'lodash';
 
 // Encounter table for combat
 export class EncounterTable {
@@ -33,11 +33,11 @@ export class EncounterTable {
 			var canFind = e.cond;
 			if(canFind === undefined) canFind = true;
 			if(canFind) {
-				if(isFunction(canFind)) canFind = canFind();
+				if(_.isFunction(canFind)) canFind = canFind();
 				if(canFind) {
 					var odds = e.odds;
 					if(odds === undefined) odds = 1.0;
-					if(isFunction(odds)) odds = odds();
+					if(_.isFunction(odds)) odds = odds();
 					scenes.push({func: e.func, odds: odds, obj: e.obj});
 					sum += odds;
 				}

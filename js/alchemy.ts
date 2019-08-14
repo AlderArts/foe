@@ -166,12 +166,12 @@ function CountBrewable(it : Item, inventory : Inventory, alchemist : Entity) {
 	while(!_.isEmpty(recipeDict)) {
 		var limitingQuota = Infinity;
 
-		Object.keys(recipeDict).forEach(function(ingredient) {
+		_.keys(recipeDict).forEach(function(ingredient) {
 			// Might cause divisions by zero otherwise.
 			if(recipeDict[ingredient] === 0) delete recipeDict[ingredient];
 		});
 
-		Object.keys(recipeDict).forEach(function(ingredient) {
+		_.keys(recipeDict).forEach(function(ingredient) {
 			var available = invDict[ingredient];
 			// FIXME : Unavailable items may be listed as "NaN" when building the dict, workaround
 			if (!_.isFinite(available)) {
@@ -183,7 +183,7 @@ function CountBrewable(it : Item, inventory : Inventory, alchemist : Entity) {
 			if(quota < limitingQuota) limitingQuota = quota;
 		});
 
-		Object.keys(recipeDict).forEach(function(ingredient) {
+		_.keys(recipeDict).forEach(function(ingredient) {
 			invDict[ingredient] -= recipeDict[ingredient] * limitingQuota;
 		});
 		
@@ -207,7 +207,7 @@ function CountBrewable(it : Item, inventory : Inventory, alchemist : Entity) {
 			productionSteps.some(function(step) {
 				var qty = Math.min(batchSize - amountProduced, step.qty);
 				if(!mockRemove) {
-					Object.keys(step.recipe).forEach(function(componentId) {
+					_.keys(step.recipe).forEach(function(componentId) {
 						inventory.RemoveItem(ItemIds[componentId], step.recipe[componentId] * qty);
 					});
 				}
@@ -223,9 +223,9 @@ function CountBrewable(it : Item, inventory : Inventory, alchemist : Entity) {
 
 function AdaptRecipe(recipeDict : any, invDict : any, alchemist : Entity) : any {
 	var origRecipeDict = recipeDict;
-	recipeDict = Object.assign({}, recipeDict);
+	recipeDict = _.assign({}, recipeDict);
 
-	var keys = Object.keys(recipeDict);
+	var keys = _.keys(recipeDict);
 	for(var i = 0; i < keys.length; i++) {
 		var ingredient = keys[i];
 		if(recipeDict[ingredient] == 0) continue;
@@ -241,7 +241,7 @@ function AdaptRecipe(recipeDict : any, invDict : any, alchemist : Entity) : any 
 			var missingAmount = recipeDict[ingredient] - invDict[ingredient];
 			recipeDict[ingredient] = invDict[ingredient]; // Most likely 0
 
-			Object.keys(ingredientRecipe).forEach(function(ingredientComponent) {
+			_.keys(ingredientRecipe).forEach(function(ingredientComponent) {
 				if(!recipeDict[ingredientComponent]) recipeDict[ingredientComponent] = 0;
 
 				// If item X is needed 3 times for a recipe, all of its ingredients are also needed 3 times.
