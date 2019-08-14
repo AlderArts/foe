@@ -10,6 +10,7 @@ import { LowerBodyType } from '../../body/body';
 import { Jobs } from '../../job';
 import { Party } from '../../party';
 import { RosalinFlags } from './rosalin-flags';
+import { Cale } from './cale';
 
 let CaleScenes : any = {
     Sex : CaleSexScenes,
@@ -19,7 +20,7 @@ let CaleScenes : any = {
 CaleScenes.Interact = function() {
 	let player = GAME().player;
 	let rosalin = GAME().rosalin;
-	let cale = GAME().cale;
+	let cale : Cale = GAME().cale;
 	var parse : any = {
 		playername : player.name
 	};
@@ -92,7 +93,7 @@ CaleScenes.Interact = function() {
 }
 
 CaleScenes.Desc = function() {
-	let cale = GAME().cale;
+	let cale : Cale = GAME().cale;
 	var parse : any = {
 		
 	};
@@ -112,7 +113,7 @@ CaleScenes.Desc = function() {
 
 CaleScenes.FirstApproach = function() {
 	let player = GAME().player;
-	let cale = GAME().cale;
+	let cale : Cale = GAME().cale;
 	var parse : any = {
 		playername : player.name,
 		guyGal     : player.mfTrue("guy", "gal")
@@ -404,7 +405,7 @@ CaleScenes.TalkSlut = function() {
 }
 
 CaleScenes.Prompt = function() {
-	let cale = GAME().cale;
+	let cale : Cale = GAME().cale;
 	var parse : any = {
 		
 	};
@@ -464,7 +465,7 @@ CaleScenes.Prompt = function() {
 }
 
 CaleScenes.Shop = function() {
-	let cale = GAME().cale;
+	let cale : Cale = GAME().cale;
 	var parse : any = {
 		
 	};
@@ -516,7 +517,7 @@ CaleScenes.TalkPrompt = function() {
 	let player = GAME().player;
 	let party : Party = GAME().party;
 	let rosalin = GAME().rosalin;
-	let cale = GAME().cale;
+	let cale : Cale = GAME().cale;
 	var parse : any = {
 		playername : player.name
 	};
@@ -807,7 +808,7 @@ CaleScenes.TalkPrompt = function() {
 
 CaleScenes.TalkPast = function() {
 	let player = GAME().player;
-	let cale = GAME().cale;
+	let cale : Cale = GAME().cale;
 	var parse : any = {
 		playername : player.name
 	};
@@ -970,7 +971,7 @@ CaleScenes.TalkPast = function() {
 
 CaleScenes.Rogue = function() {
 	let player = GAME().player;
-	let cale = GAME().cale;
+	let cale : Cale = GAME().cale;
 	var parse : any = {
 		playername : player.name
 	};
@@ -1110,7 +1111,7 @@ CaleScenes.Rogue = function() {
 }
 
 CaleScenes.RogueTeach = function() {
-	let cale = GAME().cale;
+	let cale : Cale = GAME().cale;
 	var parse : any = {
 		
 	};

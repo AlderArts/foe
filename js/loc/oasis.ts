@@ -17,9 +17,11 @@ export class Oasis {
 	flags : any;
 	shop : Shop;
 	shopItems : Item[];
+	Shopbought : boolean;
 
 	constructor(storage? : any) {
 		this.flags = {};
+		this.Shopbought = false;
 		
 		// Caravan Shop
 		this.shop = new Shop();
@@ -99,7 +101,7 @@ export class Oasis {
 
 
 OasisScenes.CaravanShop = function(back : any) {
-	let oasis = GAME().oasis;
+	let oasis : Oasis = GAME().oasis;
 	var parse : any = {
 		
 	};
@@ -151,7 +153,7 @@ OasisScenes.CaravanShop = function(back : any) {
 OasisScenes.DesertCaravanEncounter = function() {
 	let player = GAME().player;
 	let party : Party = GAME().party;
-	let oasis = GAME().oasis;
+	let oasis : Oasis = GAME().oasis;
 	var parse : any = {
 		
 	};
