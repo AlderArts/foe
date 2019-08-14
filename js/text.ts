@@ -10,17 +10,13 @@ export namespace Text {
 	//A div that contains 'groups' of inputs. Each group is on a new line (so you can basically have multiple toolbars).
 	let toolbars = $('<div></div>');
 
-	export function InsertImage(imgSrc : string, align? : string) {
+	export function InsertImage(imgSrc : string, align : string = 'left') {
 		if(!GetRenderPictures()) return "";
-
-		align = align || 'left';
 		return "<img src='" + imgSrc + "' align='" + align + "' alt='MISSING IMAGE: " + imgSrc + "' style='margin: 1px 8px;'/>";
 	}
 
-	export function Say(imgSrc : string, text? : string, align? : string) {
+	export function Say(imgSrc : string, text : string = "", align : string = 'left') {
 		var textbox = document.getElementById("mainTextArea");
-		align = align || 'left';
-		text = text || "";
 
 		if(GetRenderPictures())
 			textbox.innerHTML += "<img src='" + imgSrc + "' align='" + align + "' alt='MISSING IMAGE: " + imgSrc + "' style='margin: 1px 8px;'>" + text + "</img>";
@@ -97,8 +93,7 @@ export namespace Text {
 	//This is used internally by Add and the helper methods below.
 	//This should be used for styling any text that should 
 	//not be passed through Text.Parse
-	function ApplyStyle(text : string|number, cssClasses? : string, tag? : string) {
-		tag = tag || "span";
+	function ApplyStyle(text : string|number, cssClasses? : string, tag : string = "span") {
 		return '<' + tag + (cssClasses ? (' class ="' + cssClasses + '">') : '>') + text + '</' + tag + '>';
 	}
 
@@ -293,10 +288,7 @@ export namespace Text {
 	}
 
 
-	export function ParserPlural(parse? : any, condition? : any, prefix? : string, postfix? : string|number) {
-		parse   = parse   || {};
-		prefix  = prefix  || "";
-		postfix = postfix || "";
+	export function ParserPlural(parse : any = {}, condition? : any, prefix : string = "", postfix : string|number = "") {
 		parse[prefix + "a" + postfix]      = condition ? "" : " a";
 		parse[prefix + "s" + postfix]      = condition ? "s" : "";
 		parse[prefix + "notS" + postfix]   = condition ? "" : "s";
@@ -352,7 +344,7 @@ export namespace Text {
 	function createInput(inputOptions : any, cssClasses? : any) {
 		var input;
 		var type = inputOptions.type || 'button';
-		var classesStr = (cssClasses || "") +" "+ (inputOptions.classes || "");
+		var classesStr = (cssClasses || "") + " " + (inputOptions.classes || "");
 		if(type.toLowerCase() == 'button') {
 			var btnName = inputOptions.nameStr;
 			var onclick = inputOptions.func;
