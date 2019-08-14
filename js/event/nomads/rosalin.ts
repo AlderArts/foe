@@ -272,7 +272,7 @@ RosalinScenes.Interact = function() {
 				Text.Add("The alchemist shows you a list of ingredients that [heshe] could turn into a potion of some sort. You could show Rosalin some ingredients that you have found on your travels.", parse);
 				Text.NL();
 
-				Alchemy.AlchemyPrompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback, true);
+				Alchemy.Prompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback, true);
 			}, enabled : true
 		});
 	}
@@ -1377,7 +1377,7 @@ RosalinScenes.CombineCallback = function(item : TFItem) {
 				Text.Add("<i>“Rather nice taste huh?”</i> Rosalin smiles at you, <i>“This time, I added some [seasoning], what do you think?”</i> Not quite trusting yourself to answer that, you prepare to leave.", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
-					Alchemy.AlchemyPrompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
+					Alchemy.Prompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
 				});
 			}, enabled : true,
 			tooltip : "Drink the potion yourself."
@@ -1412,7 +1412,7 @@ RosalinScenes.CombineCallback = function(item : TFItem) {
 				Text.Add("Shaking your head, you decide to discard the results of the experiment. The vegetation around Rosalin's workbench takes on a slightly fuzzy look, and you swear you spot one of the flowers growing whiskers.", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
-					Alchemy.AlchemyPrompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
+					Alchemy.Prompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
 				});
 			}, enabled : true,
 			tooltip : "Pour out the potion."
@@ -1441,7 +1441,7 @@ RosalinScenes.CombineCallback = function(item : TFItem) {
 				Text.Add("<i>“Never was one for vegetable dishes,”</i> Rosalin notes, <i>“but the carrot juice does make it rather refreshing!”</i>", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
-					Alchemy.AlchemyPrompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
+					Alchemy.Prompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
 				});
 			}, enabled : true,
 			tooltip : "Drink the potion yourself."
@@ -1505,7 +1505,7 @@ RosalinScenes.CombineCallback = function(item : TFItem) {
 				Text.Add("Shaking your head, you decide to discard the results of the experiment. The plants around Rosalin's workbench suddenly look a little fluffier.", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
-					Alchemy.AlchemyPrompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
+					Alchemy.Prompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
 				});
 			}, enabled : true,
 			tooltip : "Pour out the potion."
@@ -1657,7 +1657,7 @@ RosalinScenes.CombineCallback = function(item : TFItem) {
 				Text.Add("Shaking your head, you decide to discard the results of the experiment. Perhaps that was for the best too, you decide, as the plant you pour it over suddenly springs to life, a dozen thick tentacles sprouting from it.", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
-					Alchemy.AlchemyPrompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
+					Alchemy.Prompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
 				});
 			}, enabled : true,
 			tooltip : "Pour out the potion."
@@ -1689,7 +1689,7 @@ RosalinScenes.CombineCallback = function(item : TFItem) {
 				Text.Add("<i>“Good one, isn't it?”</i> Rosalin smiles, <i>“I added some extra toppings, just for you!”</i>", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
-					Alchemy.AlchemyPrompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
+					Alchemy.Prompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
 				});
 			}, enabled : true,
 			tooltip : "Drink the potion yourself."
@@ -1755,7 +1755,7 @@ RosalinScenes.CombineCallback = function(item : TFItem) {
 				Text.Add("Shaking your head, you decide to discard the results of the experiment. Rosalin looks slightly disappointed as you pour the contents of the bottle on the ground. As you prepare to leave, you could swear you hear a quiet neigh from behind the workbench.", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
-					Alchemy.AlchemyPrompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
+					Alchemy.Prompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
 				});
 			}, enabled : true,
 			tooltip : "Pour out the potion."
@@ -1794,7 +1794,7 @@ RosalinScenes.CombineCallback = function(item : TFItem) {
 					Text.Add("<i>“It might leave a bit of an aftertaste,”</i> Rosalin looks thoughtful. <i>“Nothing I've tried so far works to hide it I'm afraid.”</i>", parse);
 					Text.Flush();
 					Gui.NextPrompt(function() {
-						Alchemy.AlchemyPrompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
+						Alchemy.Prompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
 					});
 				}
 			}, enabled : true,
@@ -1845,7 +1845,7 @@ RosalinScenes.CombineCallback = function(item : TFItem) {
 				Text.Add("Shaking your head, you decide to discard the results of the experiment. The vegetation around Rosalin's workbench takes on a bright, almost metallic sheen. Some of the plants split into two identical ones, for no particular reason.", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
-					Alchemy.AlchemyPrompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
+					Alchemy.Prompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
 				});
 			}, enabled : true,
 			tooltip : "Pour out the potion."
@@ -1884,7 +1884,7 @@ RosalinScenes.CombineCallback = function(item : TFItem) {
 					Text.Add("<i>“Quite refreshing, isn't it? I wonder if you could make it even more potent somehow...”</i> Rosalin muses.", parse);
 					Text.Flush();
 					Gui.NextPrompt(function() {
-						Alchemy.AlchemyPrompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
+						Alchemy.Prompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
 					});
 				}
 			}, enabled : true,
@@ -1940,7 +1940,7 @@ RosalinScenes.CombineCallback = function(item : TFItem) {
 				Text.Add("Shaking your head, you decide to discard the results of the experiment. Doused with the concoction, the nearby vegetation starts to seep a strange white liquid.", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
-					Alchemy.AlchemyPrompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
+					Alchemy.Prompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
 				});
 			}, enabled : true,
 			tooltip : "Pour out the potion."
@@ -1984,7 +1984,7 @@ RosalinScenes.CombineCallback = function(item : TFItem) {
 					Text.Add("<i>“Disgusting, isn’t it?”</i> Rosalin shudders. You burp loudly, your throat burning.", parse);
 					Text.Flush();
 					Gui.NextPrompt(function() {
-						Alchemy.AlchemyPrompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
+						Alchemy.Prompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
 					});
 				}
 			}, enabled : true,
@@ -2004,7 +2004,7 @@ RosalinScenes.CombineCallback = function(item : TFItem) {
 				Text.Add("This… doesn’t look healthy. You decide to discard the concoction, pouring it out on the ground. The nearby vegetation wriggles unsettlingly.", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
-					Alchemy.AlchemyPrompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
+					Alchemy.Prompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
 				});
 			}, enabled : true,
 			tooltip : "Pour out the potion."
@@ -2034,7 +2034,7 @@ RosalinScenes.CombineCallback = function(item : TFItem) {
 				Text.Add("<i>“Who’s a good [boyGirl], yeees!”</i> Rosalin cheers, patting you.", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
-					Alchemy.AlchemyPrompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
+					Alchemy.Prompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
 				});
 			}, enabled : true,
 			tooltip : "Drink the potion yourself."
@@ -2106,7 +2106,7 @@ RosalinScenes.CombineCallback = function(item : TFItem) {
 				Text.Add("You don’t quite like the smell of this… let’s just pour it out. A small puff of smoke rises from the puddle of reddish liquid as it spreads over the ground. The plants around you look decidedly furrier than before. Some of them bark at you.", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
-					Alchemy.AlchemyPrompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
+					Alchemy.Prompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
 				});
 			}, enabled : true,
 			tooltip : "Pour out the potion."
@@ -2139,7 +2139,7 @@ RosalinScenes.CombineCallback = function(item : TFItem) {
 				Text.Add("<i>“Hmm,”</i> Rosalin mutters, jotting down a few observations in [hisher] notebook. <i>“Tell me, do you feel more inclined to… howl?”</i>", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
-					Alchemy.AlchemyPrompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
+					Alchemy.Prompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
 				});
 			}, enabled : true,
 			tooltip : "Drink the potion yourself."
@@ -2211,7 +2211,7 @@ RosalinScenes.CombineCallback = function(item : TFItem) {
 				Text.Add("The surrounding vegetation doesn’t seem to have any problem absorbing the solution. Some of the flowers take on a gray tint, but remain perky. Feral, in fact. You can swear that one dandelion is looking hungry.", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
-					Alchemy.AlchemyPrompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
+					Alchemy.Prompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
 				});
 			}, enabled : true,
 			tooltip : "Pour out the potion."
@@ -2244,7 +2244,7 @@ RosalinScenes.CombineCallback = function(item : TFItem) {
 				Text.Add("...That’d certainly be an interesting - possibly lethal - venture.", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
-					Alchemy.AlchemyPrompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
+					Alchemy.Prompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
 				});
 			}, enabled : true,
 			tooltip : "Drink the potion yourself."
@@ -2316,7 +2316,7 @@ RosalinScenes.CombineCallback = function(item : TFItem) {
 				Text.Add("On second thought, probably best to pass on this one. That much veggies can’t be healthy. The vegetation around the alchemist’s workbench perks up as you pour out the red liquid, some of them suddenly sprouting fat red berries.", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
-					Alchemy.AlchemyPrompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
+					Alchemy.Prompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
 				});
 			}, enabled : true,
 			tooltip : "Pour out the potion."
@@ -2348,7 +2348,7 @@ RosalinScenes.CombineCallback = function(item : TFItem) {
 				Text.Add("<i>“Alright, if there aren’t any bad symptoms by now, you’re probably fine.”</i>", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
-					Alchemy.AlchemyPrompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
+					Alchemy.Prompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
 				});
 			}, enabled : true,
 			tooltip : "Drink the potion yourself."
@@ -2385,7 +2385,7 @@ RosalinScenes.CombineCallback = function(item : TFItem) {
 				Text.Add("...No. Drinking this might actually kill you. You pour out the vile concoction - most likely a wise move, as some of the plants right up shrivel and die.", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
-					Alchemy.AlchemyPrompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
+					Alchemy.Prompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
 				});
 			}, enabled : true,
 			tooltip : "Pour out the potion."
@@ -2415,7 +2415,7 @@ RosalinScenes.CombineCallback = function(item : TFItem) {
 				Text.Add("Rosalin jots down some notes on a piece of paper as [heshe] observes the potion’s effect on you.", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
-					Alchemy.AlchemyPrompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
+					Alchemy.Prompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
 				});
 			}, enabled : true,
 			tooltip : "Drink the potion yourself."
@@ -2472,7 +2472,7 @@ RosalinScenes.CombineCallback = function(item : TFItem) {
 				Text.Add("You pour the glittering liquid on the plants around Rosalin’s workbench. Some of them seem to absorb the concoction, changing in color and letting out small puffs of glittering powder.", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
-					Alchemy.AlchemyPrompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
+					Alchemy.Prompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
 				});
 			}, enabled : true,
 			tooltip : "Pour out the potion."
@@ -2506,7 +2506,7 @@ RosalinScenes.CombineCallback = function(item : TFItem) {
 				Text.Add("Rosalin notes the effects of the potion on your body, humming to [himher]self happily.", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
-					Alchemy.AlchemyPrompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
+					Alchemy.Prompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
 				});
 			}, enabled : true,
 			tooltip : "Drink the potion yourself."
@@ -2553,7 +2553,7 @@ RosalinScenes.CombineCallback = function(item : TFItem) {
 				Text.Add("Better skip this one. You pour out the contents next to Rosalin’s workbench, warily eyeing the now much fluffier plants around it. They tweet innocently, but seem to be largely harmless.", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
-					Alchemy.AlchemyPrompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
+					Alchemy.Prompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
 				});
 			}, enabled : true,
 			tooltip : "Pour out the potion."
@@ -2585,7 +2585,7 @@ RosalinScenes.CombineCallback = function(item : TFItem) {
 					Text.Add("<i>“Do you feel any… different?”</i> the alchemist asks you, notepad at the ready. <i>“Any urge to give up your quest and follow the masses?”</i>", parse);
 					Text.Flush();
 					Gui.NextPrompt(function() {
-						Alchemy.AlchemyPrompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
+						Alchemy.Prompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
 					});
 				}, enabled : true,
 				tooltip : "Drink the potion yourself."
@@ -2608,7 +2608,7 @@ RosalinScenes.CombineCallback = function(item : TFItem) {
 					Text.Add("You pour out the potion into the vegetation around Rosalin’s workbench. The mindless baa-h of the wooly plants are kind of soothing, believe it or not.", parse);
 					Text.Flush();
 					Gui.NextPrompt(function() {
-						Alchemy.AlchemyPrompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
+						Alchemy.Prompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
 					});
 				}, enabled : true,
 				tooltip : "Pour out the potion."
@@ -2640,7 +2640,7 @@ RosalinScenes.CombineCallback = function(item : TFItem) {
 				Text.NL();
 				Text.Flush();
 				Gui.NextPrompt(function() {
-					Alchemy.AlchemyPrompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
+					Alchemy.Prompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
 				});
 			}, enabled : true,
 			tooltip : "Drink the potion yourself."
@@ -2688,7 +2688,7 @@ RosalinScenes.CombineCallback = function(item : TFItem) {
 				Text.Add("Shaking your head, you decide to discard the results of the experiment. Rosalin looks slightly disappointed as you pour the contents of the bottle on the ground. The plants around her lab open wide, pink-red blooms, leaking visible rivers of nectar as the potion is soaked up into them.", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
-					Alchemy.AlchemyPrompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
+					Alchemy.Prompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
 				});
 			}, enabled : true,
 			tooltip : "Pour out the potion."
@@ -2724,7 +2724,7 @@ RosalinScenes.CombineCallback = function(item : TFItem) {
 				Text.NL();
 				Text.Flush();
 				Gui.NextPrompt(function() {
-					Alchemy.AlchemyPrompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
+					Alchemy.Prompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
 				});
 			}, enabled : true,
 			tooltip : "Drink the potion yourself."
@@ -2748,7 +2748,7 @@ RosalinScenes.CombineCallback = function(item : TFItem) {
 				Text.NL();
 				Text.Flush();
 				Gui.NextPrompt(function() {
-					Alchemy.AlchemyPrompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
+					Alchemy.Prompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
 				});
 			}, enabled : true,
 			tooltip : "Pour out the potion."
@@ -2762,7 +2762,7 @@ RosalinScenes.CombineCallback = function(item : TFItem) {
 	else {
 		party.inventory.AddItem(item);
 		Gui.NextPrompt(function() {
-			Alchemy.AlchemyPrompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
+			Alchemy.Prompt(rosalin, party.inventory, RosalinScenes.Interact, RosalinScenes.CombineCallback);
 		});
 	}
 }

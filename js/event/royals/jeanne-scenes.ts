@@ -69,7 +69,7 @@ export namespace JeanneScenes {
                 }
                 Text.NL();
                 
-                Alchemy.AlchemyPrompt(jeanne, party.inventory, JeanneScenes.AlchemyBack, JeanneScenes.AlchemyCallback, true);
+                Alchemy.Prompt(jeanne, party.inventory, JeanneScenes.AlchemyBack, JeanneScenes.AlchemyCallback, true);
             }, enabled : true,
             tooltip : "Ask to make use of Jeanne’s services as an alchemist."
         });
@@ -122,7 +122,7 @@ export namespace JeanneScenes {
         
         party.Inv().AddItem(item);
         
-        Alchemy.AlchemyPrompt(jeanne, party.inventory, JeanneScenes.AlchemyBack, JeanneScenes.AlchemyCallback, true);
+        Alchemy.Prompt(jeanne, party.inventory, JeanneScenes.AlchemyBack, JeanneScenes.AlchemyCallback, true);
     }
 
     export function AlchemyBack() {

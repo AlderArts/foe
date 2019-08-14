@@ -278,7 +278,7 @@ let ShowAlchemy = function(preventClear? : boolean) {
 		Text.Clear();
 	Gui.ClearButtons();
 
-	Alchemy.AlchemyPrompt(player, party.inventory);
+	Alchemy.Prompt(player, party.inventory);
 	Gui.SetLastSubmenu(Input.exploreButtons[ExploreButtonIndex.Alchemy]);
 
 	SetExploreButtons();
