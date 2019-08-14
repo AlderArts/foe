@@ -2118,7 +2118,7 @@ export namespace LagonScenes {
             
             Gui.NextPrompt(function() {
                 var enemy = new Party();
-                enemy.AddMember(new LagonBrute(scepter));
+                enemy.AddMember(new LagonBrute(scepter != 0));
                 var enc = new Encounter(enemy);
                 
                 enc.canRun = false;

@@ -13,7 +13,7 @@ import { Status } from '../statuseffect';
 import { Time } from '../time';
 import { GetDEBUG } from '../../app';
 import { HipSize } from '../body/body';
-import { CassidySpar } from './cassidy';
+import { CassidySpar, Cassidy } from './cassidy';
 
 let CassidyScenes : any = {
 	Sex     : SexScenes,
@@ -25,7 +25,7 @@ let CassidyScenes : any = {
 
 CassidyScenes.First = function() {
 	let player = GAME().player;
-	let cassidy = GAME().cassidy;
+	let cassidy : Cassidy = GAME().cassidy;
 	var parse : any = {
 		playername : player.name
 	};
@@ -78,7 +78,7 @@ CassidyScenes.First = function() {
 // The Pale Flame interior
 CassidyScenes.ShopDesc = function() {
 	let player = GAME().player;
-	let cassidy = GAME().cassidy;
+	let cassidy : Cassidy = GAME().cassidy;
 	let miranda = GAME().miranda;
 	var parse : any = {};
 	
@@ -196,7 +196,7 @@ CassidyScenes.ShopDesc = function() {
 }
 
 CassidyScenes.Approach = function() {
-    let cassidy = GAME().cassidy;
+    let cassidy : Cassidy = GAME().cassidy;
 
 	var parse : any = {
 		
@@ -242,7 +242,7 @@ CassidyScenes.Approach = function() {
 
 CassidyScenes.Prompt = function() {
 	let player = GAME().player;
-    let cassidy = GAME().cassidy;
+    let cassidy : Cassidy = GAME().cassidy;
 
 	var parse : any = {
 		playername : player.name
@@ -384,7 +384,7 @@ CassidyScenes.Prompt = function() {
 }
 
 CassidyScenes.Appearance = function() {
-	let cassidy = GAME().cassidy;
+	let cassidy : Cassidy = GAME().cassidy;
 
 	var parse : any = {
 		
@@ -441,7 +441,7 @@ CassidyScenes.Appearance = function() {
 
 CassidyScenes.TalkPrompt = function() {
 	let player = GAME().player;
-    let cassidy = GAME().cassidy;
+    let cassidy : Cassidy = GAME().cassidy;
 
 	var parse : any = {
 		
@@ -566,7 +566,7 @@ CassidyScenes.TalkPrompt = function() {
 //[Forge] - Ask Cass about firing up that forge and making a special order for you.
 //TODO
 CassidyScenes.ForgeFirst = function() {
-	let cassidy = GAME().cassidy;
+	let cassidy : Cassidy = GAME().cassidy;
 
 	var parse : any = {
 		
@@ -611,7 +611,7 @@ CassidyScenes.ForgeFirst = function() {
 }
 
 CassidyScenes.ShopBuy = function() {
-	let cassidy = GAME().cassidy;
+	let cassidy : Cassidy = GAME().cassidy;
 
 	var parse : any = {};
 	
@@ -656,7 +656,7 @@ CassidyScenes.ShopBuy = function() {
 }
 
 CassidyScenes.ShopSell = function() {
-	let cassidy = GAME().cassidy;
+	let cassidy : Cassidy = GAME().cassidy;
 
 	var parse : any = {};
 	parse = cassidy.ParserPronouns(parse);
@@ -687,7 +687,7 @@ CassidyScenes.ShopSell = function() {
 
 CassidyScenes.HeadInside = function() {
 	let player = GAME().player;
-	let cassidy = GAME().cassidy;
+	let cassidy : Cassidy = GAME().cassidy;
 
 	var parse : any = {
 		playername : player.name
@@ -839,7 +839,7 @@ CassidyScenes.HeadInside = function() {
 
 CassidyScenes.InsidePrompt = function() {
 	let player = GAME().player;
-	let cassidy = GAME().cassidy;
+	let cassidy : Cassidy = GAME().cassidy;
 
 	var parse : any = {
 		playername : player.name
@@ -923,7 +923,7 @@ CassidyScenes.InsidePrompt = function() {
 
 CassidyScenes.InsideMeal = function() {
 	let player = GAME().player;
-	let cassidy = GAME().cassidy;
+	let cassidy : Cassidy = GAME().cassidy;
 	var parse : any = {
 		playername : player.name
 	};
@@ -1137,7 +1137,7 @@ CassidyScenes.InsideMeal = function() {
 
 CassidyScenes.InsideTalkPrompt = function() {
 	let player = GAME().player;
-	let cassidy = GAME().cassidy;
+	let cassidy : Cassidy = GAME().cassidy;
 
 	var parse : any = {
 		playername : player.name
@@ -1540,7 +1540,7 @@ CassidyScenes.InsideTalkPrompt = function() {
 
 CassidyScenes.ManagingShop = function() {
 	let player = GAME().player;
-	let cassidy = GAME().cassidy;
+	let cassidy : Cassidy = GAME().cassidy;
 	var parse : any = {
 		playername : player.name
 	};
@@ -1642,7 +1642,7 @@ CassidyScenes.ManagingShop = function() {
 
 CassidyScenes.ManagingShopAccept = function() {
 	let player = GAME().player;
-	let cassidy = GAME().cassidy;
+	let cassidy : Cassidy = GAME().cassidy;
 	var parse : any = {
 		playername : player.name
 	};
@@ -1812,7 +1812,7 @@ CassidyScenes.ManagingShop2 = function(score : number) {
 }
 
 CassidyScenes.ManagingShop3 = function(score : number) {
-	let cassidy = GAME().cassidy;
+	let cassidy : Cassidy = GAME().cassidy;
 	var parse : any = {
 		
 	};
@@ -1993,7 +1993,7 @@ CassidyScenes.ManagingShop5 = function(score : number) {
 }
 
 CassidyScenes.ManagingShop6 = function(score : number) {
-	let cassidy = GAME().cassidy;
+	let cassidy : Cassidy = GAME().cassidy;
 
 	var parse : any = {
 		
@@ -2153,7 +2153,7 @@ CassidyScenes.ManagingShop6 = function(score : number) {
 }
 
 CassidyScenes.ManagingShopCookies = function() {
-	let cassidy = GAME().cassidy;
+	let cassidy : Cassidy = GAME().cassidy;
 
 	var parse : any = {
 		
@@ -2230,7 +2230,7 @@ CassidyScenes.ManagingShopCookies = function() {
 
 CassidyScenes.BigReveal = function() {
 	let player = GAME().player;
-	let cassidy = GAME().cassidy;
+	let cassidy : Cassidy = GAME().cassidy;
 
 	var parse : any = {
 		playername : player.name
@@ -2440,7 +2440,7 @@ CassidyScenes.BigReveal = function() {
 CassidyScenes.Model = function() {
 	let party : Party = GAME().party;
 	let player = GAME().player;
-	let cassidy = GAME().cassidy;
+	let cassidy : Cassidy = GAME().cassidy;
 
 	var parse : any = {
 		playername : player.name
@@ -2772,7 +2772,7 @@ CassidyScenes.Model = function() {
 //FEMINIZING
 CassidyScenes.FemTalk2 = function() {
 	let player = GAME().player;
-	let cassidy = GAME().cassidy;
+	let cassidy : Cassidy = GAME().cassidy;
 
 	var parse : any = {
 		playername : player.name
@@ -2833,7 +2833,7 @@ CassidyScenes.FemTalk2 = function() {
 }
 
 CassidyScenes.FemFinal = function() {
-	let cassidy = GAME().cassidy;
+	let cassidy : Cassidy = GAME().cassidy;
 
 	var parse : any = {
 		
@@ -2906,7 +2906,7 @@ CassidyScenes.FemFinal = function() {
 
 //Trigger this at 30 or more rel upon entering the back room and having saved her from her drunkenness.
 CassidyScenes.SparFirst = function() {
-	let cassidy = GAME().cassidy;
+	let cassidy : Cassidy = GAME().cassidy;
 
 	var parse : any = {
 		

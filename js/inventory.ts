@@ -9,9 +9,14 @@ import { Entity } from "./entity";
 import { Encounter } from './combat';
 import { GAME } from './GAME';
 
+interface ItemQuantity {
+	it : Item;
+	num : number;
+}
+
 // Inventory
 export class Inventory {
-	items : any[];
+	items : ItemQuantity[];
 	
 	constructor() {
 		this.items = []; // {it : Item, num : 1} pair
@@ -266,26 +271,26 @@ export class Inventory {
 	ShowEquippable(entity : Entity, type : any, backPrompt? : any) {
 		var inv = this;
 		// Populate item list
-		var items : any[] = [];
+		var items : Item[] = [];
 		_.each(this.items, function(it) {
-			it = it.it;
+			let item = it.it;
 			switch(type) {
 				case ItemType.Weapon:
-					if(it.type == ItemType.Weapon) items.push(it);
+					if(item.type == ItemType.Weapon) items.push(item);
 					break;
 				case ItemSubtype.TopArmor:
-					if     (it.subtype == ItemSubtype.TopArmor)  items.push(it);
-					else if(it.subtype == ItemSubtype.FullArmor) items.push(it);
+					if     (item.subtype == ItemSubtype.TopArmor)  items.push(item);
+					else if(item.subtype == ItemSubtype.FullArmor) items.push(item);
 					break;
 				case ItemSubtype.BotArmor:
-					if(it.subtype == ItemSubtype.BotArmor) items.push(it);
+					if(item.subtype == ItemSubtype.BotArmor) items.push(item);
 					break;
 				case ItemSubtype.Acc1:
 				case ItemSubtype.Acc2:
-					if(it.type == ItemType.Accessory) items.push(it);
+					if(item.type == ItemType.Accessory) items.push(item);
 					break;
 				case ItemSubtype.StrapOn:
-					if(it.subtype == ItemSubtype.StrapOn) items.push(it);
+					if(item.subtype == ItemSubtype.StrapOn) items.push(item);
 					break;
 			}
 		});
@@ -399,7 +404,7 @@ export class Inventory {
 
 	
 	//Divides items by their 'type'
-	static ItemByType(inv : any, itemsByType? : any, usableItemsByType? : any, combatItemsByType? : any) {
+	static ItemByType(inv : ItemQuantity[], itemsByType? : any, usableItemsByType? : any, combatItemsByType? : any) {
 		//Add all keys first. Ensures item output will be in whatever order our ItemType enum is in
 		for(var type in ItemType){
 			var itemType = ItemType[type];
@@ -417,7 +422,8 @@ export class Inventory {
 			itemsByType[it.type].push(inv[i]);
 		if(usableItemsByType && it.Use)
 			usableItemsByType[it.type].push(inv[i]);
-		if(combatItemsByType && it.UseCombat)
+		let itC = it as CombatItem;
+		if(combatItemsByType && itC.combat)
 			combatItemsByType[it.type].push(inv[i]);
 		}
 		//Clear empty arrays

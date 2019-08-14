@@ -1,37 +1,34 @@
 import { GetDEBUG } from "../app";
 import { Gui } from "./gui";
 import { Text } from "./text";
-import { ItemType, ItemSubtype } from "./item";
+import { ItemType, ItemSubtype, Item } from "./item";
 import { Inventory } from "./inventory";
 import { GAME } from "./GAME";
 import { Party } from "./party";
 
+interface ShopInventory {
+	it : Item;
+	num : number;
+	enabled : CallableFunction;
+	func : CallableFunction;
+	price : number;
+}
 
-/*
- * opts: {
- *  buyPromptFunc : func(item, cost, bought)
- *  buySuccessFunc : func(item, cost, num)
- *  buyFailFunc : func(item, cost, sold)
- *  sellPromptFunc : func(item, cost, sold)
- *  sellSuccessFunc : func(item, cost, num)
- *  sellFailFunc : func(item, cost, sold)
- * }
- */
 export class Shop {
-	inventory : any[];
+	inventory : ShopInventory[];
 	totalBought : number;
 	totalSold : number;
+
+	//opts
 	sellPrice : number;
-
-	//TODO
 	buyPromptFunc : (it: any, cost: number, bought: boolean) => void;
-	buySuccessFunc : CallableFunction;
-	buyFailFunc : CallableFunction;
-	sellPromptFunc : CallableFunction;
-	sellSuccessFunc : CallableFunction;
-	sellFailFunc : CallableFunction;
+	buySuccessFunc : (it: any, cost: number, num: number) => void;
+	buyFailFunc : (it: any, cost: number, bought: boolean) => void;
+	sellPromptFunc : (it: any, cost: number, sold: boolean) => void;
+	sellSuccessFunc : (it: any, cost: number, num: number) => void;
+	sellFailFunc : (it: any, cost: number, sold: boolean) => void;
 
-	constructor(opts? : any) {
+	constructor(opts : any = {}) {
 		// Contains {it: Item, [num: Number], [enabled: Function], [func: Function], [price: Number]}
 		// Set num to null for infinite stock
 		// Set enabled to null for unconditional
@@ -44,7 +41,6 @@ export class Shop {
 		this.totalBought = 0;
 		this.totalSold = 0;
 
-		opts = opts || {};
 		this.sellPrice       = opts.sellPrice || 1;
 		this.buyPromptFunc   = opts.buyPromptFunc;
 		this.buySuccessFunc  = opts.buySuccessFunc;
@@ -61,13 +57,12 @@ export class Shop {
 		return storage;
 	}
 
-	FromStorage(storage : any) {
-		storage = storage || {};
+	FromStorage(storage : any = {}) {
 		this.totalBought = !isNaN(parseInt(storage.tb)) ? parseInt(storage.tb) : this.totalBought;
 		this.totalSold   = !isNaN(parseInt(storage.ts)) ? parseInt(storage.ts) : this.totalSold;
 	}
 
-	AddItem(item : any, price : number, enabled? : boolean, func? : CallableFunction, num? : number) {
+	AddItem(item : any, price : number, enabled? : CallableFunction, func? : CallableFunction, num? : number) {
 		this.inventory.push({
 			it      : item,
 			price   : price,
@@ -77,11 +72,10 @@ export class Shop {
 		});
 	}
 
-	Buy(back? : CallableFunction, preventClear? : boolean) {
+	Buy(back : CallableFunction = Gui.PrintDefaultOptions, preventClear? : boolean) {
 		let party : Party = GAME().party;
 
 		var shop = this;
-		back = back || Gui.PrintDefaultOptions;
 
 		if(!preventClear)
 			Text.Clear();
@@ -188,11 +182,10 @@ export class Shop {
 		Gui.SetButtonsFromList(options, true, back);
 	}
 
-	Sell(back? : CallableFunction, preventClear? : boolean, customSellFunc? : CallableFunction) {
+	Sell(back : CallableFunction = Gui.PrintDefaultOptions, preventClear? : boolean, customSellFunc? : CallableFunction) {
 		let party : Party = GAME().party;
 
 		var shop = this;
-		back = back || Gui.PrintDefaultOptions;
 
 		if(!preventClear)
 			Text.Clear();
