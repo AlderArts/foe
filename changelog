@@ -26,6 +26,7 @@ Version 0.5.0
  - The entire code base has been converted to ES6 modules and TypeScript instead of JavaScript, making much of the code strictly type checked (finding/fixing a fair number of obscure bugs), and preventing pollution of the global namespace.
  - The build system has been changed from gulp to webpack.
  - Nodejs is used to get the latest versions of all vendor packages.
+ - More than anything else, this gives me a more stable platform to add content to. 
 * What does this update mean for you as a player? It shouldn't change anything, but due to the magnitude of the changes, it's possible that some errors have sneaked their way through. I'll be releasing a slightly bigger, non-uglified development version that contains some more backtrace information until things stabilize, please report any issues that show up.
  - For those that used the player object in the console to cheat, this method is unfortunately not available anymore. If there's requests for that kind of thing, I might consider making the objects accessible in some way.
  - The application has been tested on the latest versions of Chrome and Firefox and seem to work fine on them. If you run into any issues starting the game, please append what browser/version you are using. 
