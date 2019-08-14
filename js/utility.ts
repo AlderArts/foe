@@ -1,13 +1,13 @@
-let Rand = function(max : number) {
-	var r = Math.floor(Math.random() * max);
+export function Rand(max : number) {
+	let r = Math.floor(Math.random() * max);
 	return (r < max) ? r : max - 1;
 }
 
-const Unit = {
-	CmToInch   : function(cm : number) { return cm / 2.54; },
-	InchToFoot : function(inch : number) { return inch / 12; },
-	MToFoot    : function(m : number) { return m * 3.28; },
-	KgToPound  : function(kg : number) { return kg * 2.2; },
+export namespace Unit {
+	export function CmToInch(cm : number) { return cm / 2.54; }
+	export function InchToFoot(inch : number) { return inch / 12; }
+	export function MToFoot(m : number) { return m * 3.28; }
+	export function KgToPound(kg : number) { return kg * 2.2; }
 }
 
 /*
@@ -18,8 +18,7 @@ const Unit = {
 	});
  */
 // Download script, used for save to file. Calls download.php
-let GenerateFile : any = function(options? : any) {
-	options = options || {};
+let GenerateFile : any = function(options : any) {
 	options.script = options.script || "download.php";
 
 	if(!options.filename || !options.content){
@@ -109,4 +108,4 @@ GenerateFile.canSaveOffline = false;
 	GenerateFile.canSaveOffline = true;
 })();
 
-export { Unit, GenerateFile, Rand };
+export { GenerateFile };
