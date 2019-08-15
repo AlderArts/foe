@@ -15,6 +15,8 @@ import { PatchworkScenes } from '../event/nomads/patchwork';
 import { GameCache, WorldTime, MoveToLocation, WORLD, GAME } from '../GAME';
 import { Text } from '../text';
 import { Gui } from '../gui';
+import { NCavalcadeScenes } from '../event/nomads/cavalcade';
+import { EstevanFlags } from '../event/nomads/estevan-flags';
 
 //
 // Nomads
@@ -151,6 +153,58 @@ NomadsLoc.Fireplace.links.push(new Link(
 		NurseryScenes.Nomads();
 	}
 ));
+// TODO TEMP CAVALCADE
+NomadsLoc.Fireplace.events.push(new Link(
+	"Cavalcade", function() { return NCavalcadeScenes.Enabled(); }, function() { return GAME().party.coin >= NCavalcadeScenes.Bet(); },
+	function() {
+		let estevan = GAME().estevan;
+		if(NCavalcadeScenes.Enabled()) {
+			Text.Add("Both Rosalin, Cale and Estevan seem to be around. Perhaps they are up for a game of Cavalcade?");
+			if(estevan.flags["Cheat"] == EstevanFlags.Cheat.Setup)
+				Text.Add(" You remind yourself that you’ve rigged this coming game together with Estevan in order to play a prank on Cale.");
+			Text.NL();
+			Text.Flush();
+		}
+	},
+	function() {
+		let estevan = GAME().estevan;
+		/* Old explanation
+		Text.Add("PLACEHOLDER TEXT");
+		Text.NL();
+		Text.Add("You start up a game of Cavalcade with Rosalin and Wolfie.");
+		Text.NL();
+		Text.Add("The game works similarily to Texas Hold'Em, but with fewer cards.");
+		Text.NL();
+		Text.Add("There is a total of three suits: Light, Shadow and Darkness. Each suit contains five named cards numbered from 1 to 5. The <b>lower</b> the number, the <b>better</b> the card is. In other words, there is a total of 15 cards to a deck.");
+		Text.NL();
+		Text.Add("There are three players to a game. Each player gets two cards, and the house gets three cards, placed down face. Each round of betting, the house reveals another card. The person with the best hand of five cards win. Each round of betting, you may call, raise the bet or fold your hand.");
+		Text.NL();
+		Text.Add("The hands, in increasing order of value, are as follows: pair, two pairs, three of a kind, mixed Cavalcade (the cards 1 through 5, different suits), full house, partial flush (four cards of the same suit), four of a kind (requires the joker), and full Cavalcade (the cards 1 through 5 of a single suit).");
+		Text.NL();
+		Text.Add("4 of Shadow, the Shadow Stag, is considered a joker, and can become anything to improve your hand. If the house draws the Stag, the card is discarded and a new one is drawn from the deck, to prevent draws.");
+		Text.NL();
+		Text.Add("The game is currently very new, so no one plays it very well yet, and you may find your opponents kind of dull-witted.");
+		Text.NL();
+		Text.Add("The game can currently be abused for cash, since debug mode allows you to see the down-face cards as well.");
+		Text.NL();
+		Text.Add("END PLACEHOLDER TEXT");
+		Text.NL();
+
+		var players = [player, rosalin, cale];
+		var g = new Cavalcade(players, {bet: 5});
+		g.PrepGame();
+		*/
+
+		Text.Clear();
+		Text.Add("You round up the mismatched trio and ask them if they are up for a game of Cavalcade.");
+		Text.NL();
+		if(estevan.flags["Cheat"] == EstevanFlags.Cheat.Setup)
+			NCavalcadeScenes.CheatGame();
+		else
+			NCavalcadeScenes.RegularGame();
+	}
+));
+
 
 NomadsLoc.Fireplace.events.push(new Link(
 	"Chief", function() { return (WorldTime().hour >= 8 && WorldTime().hour < 22); }, true,

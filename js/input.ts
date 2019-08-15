@@ -2,113 +2,6 @@ import { Button } from './button';
 import { Images } from './assets';
 import { gameState, GameState } from './gamestate';
 
-let Input : any = {
-
-	//TODO: Raphael sets?
-	buttons        : new Array(),
-	navButtons     : new Array(),
-	exploreButtons : new Array(),
-	menuButtons    : new Array(),
-	// Input array that holds the inputs keys as true/false values
-	keyinput       : new Array(),
-
-	keyDownValid   : true,
-
-	// Mouse button states and mouse position
-	mousebutton    : false,
-	MousePos       : {x: 0, y: 0}
-};
-
-let Gui : any = null;
-
-// Initialize input callbacks
-Input.Init = function(gui : any) {
-	Gui = gui;
-	var canvas = document.getElementById("canvas");
-
-	window.onkeydown   = Input.Keydown;
-	window.onkeyup     = Input.Keyup;
-	/*
-	canvas.onmousedown = Mousedown;
-	canvas.onmouseup   = Mouseup;
-	canvas.onmousemove = Mousemove;
-	*/
-
-	Input.buttonSet        = Gui.canvas.set();
-	Input.navButtonSet     = Gui.canvas.set();
-	Input.exploreButtonSet = Gui.canvas.set();
-	Input.menuButtonSet    = Gui.canvas.set();
-
-	Input.InitButtons();
-
-	Input.InitMenuButtons();
-}
-
-// Init functions for the button sets
-Input.InitButtons = function() {
-	var offset = {x: 270, y:600};
-
-	var x, y, button;
-	for(y = 0; y < 3; y++) {
-		for(x = 0; x < 4; x++) {
-			button = new Button(Gui, {x : offset.x + 162*x, y : offset.y + 40*y, w : 155, h : 35}, "Button" + (x + y*5), null, true, Images.imgButtonEnabled, Images.imgButtonDisabled);
-			Input.buttons.push(button);
-			Input.buttonSet.push(button.set);
-		}
-
-		button = new Button(Gui, {x : offset.x + 162*4, y : offset.y + 40*y, w : 75, h : 35}, "Nav" + y, null, true, Images.imgNavButtonEnabled, Images.imgNavButtonDisabled);
-		Input.navButtons.push(button);
-		Input.navButtonSet.push(button.set);
-	}
-	for(y = 0; y < 8; y++) {
-		button = new Button(Gui, {x : 1100, y : 375 + 40 * y, w : 155, h : 35}, "Exp"+y, null, true, Images.imgButtonEnabled, Images.imgButtonDisabled, true);
-		Input.exploreButtons.push(button);
-		Input.exploreButtonSet.push(button.set);
-	}
-	button = new Button(Gui, {x : 150, y : 590, w : 50, h : 50}, "", null, true, Images.imgWaitEnabled, Images.imgWaitDisabled);
-	Input.exploreButtons.push(button);
-	Input.exploreButtonSet.push(button.set);
-	button = new Button(Gui, {x : 150, y : 590, w : 50, h : 50}, "", null, true, Images.imgSleepEnabled, Images.imgSleepDisabled);
-	Input.exploreButtons.push(button);
-	Input.exploreButtonSet.push(button.set);
-	button = new Button(Gui, {x : 210, y : 590, w : 50, h : 50}, "", null, true, Images.imgSearchEnabled, Images.imgSearchDisabled);
-	Input.exploreButtons.push(button);
-	Input.exploreButtonSet.push(button.set);
-}
-
-Input.InitMenuButtons = function() {
-	var offset = {x: 15, y:620};
-
-	// TOP, Data menu
-	var button = new Button(Gui, {x : 10, y : 10, w : 155, h : 35}, "DATA", null, true, Images.imgButtonEnabled, Images.imgButtonDisabled);
-	Input.menuButtons.push(button);
-	Input.menuButtonSet.push(button.set);
-};
-
-Input.RenderExploreButtonGlow = function() {
-	/*
-	//TODO keybind tooltip
-	var keybinding = KeyToText[this.key];
-	if(Gui.ShortcutsVisible && keybinding) {
-		// Render the text centered
-		context.font = TINY_FONT;
-		context.strokeStyle = "rgba(255,0,0,0.8)";
-		context.strokeText(keybinding, this.rect.w/2-8, this.rect.h/2-2);
-		context.fillStyle = "rgba(255,255,255,0.8)";
-		context.fillText(keybinding, this.rect.w/2-8, this.rect.h/2-2);
-	}
-	*/
-	// Add a glow effect if this button is the currently choosen exploration option
-	for(let i = 0; i < Input.exploreButtons.length; i++) {
-		if(!Input.exploreButtons[i].image.is_visible()) continue;
-		if(!Input.exploreButtons[i].glow) continue;
-		if(Input.exploreButtons[i] == Gui.GetLastSubmenu())
-			Input.exploreButtons[i].glow.show();
-		else
-			Input.exploreButtons[i].glow.hide();
-	}
-}
-
 // TODO this is actually wrong
 let Keys = {
 	KEY_CONSOLE : 0,
@@ -199,54 +92,170 @@ let RIGHT_ARROW = 1;
 let UP_ARROW    = 2;
 let DOWN_ARROW  = 3;
 
-// Catches keypresses
-Input.Keydown = function(event : any) {
-	// Used for text input, when we don't want to have shortcut keys active
-	if(!Input.keyDownValid)
-		return true;
+let Gui : any;
+let buttonSet        : RaphaelSet;
+let navButtonSet     : RaphaelSet;
+let exploreButtonSet : RaphaelSet;
+let menuButtonSet    : RaphaelSet;
+let buttons        : Button[] = [];
+let navButtons     : Button[] = [];
+let exploreButtons : Button[] = [];
+let menuButtons    : Button[] = [];
 
-	//event.preventDefault();
+let keyDownValid   : boolean;
 
-	// TODO: Prioritze layers
-	switch(gameState) {
-		case GameState.Game:
-			for(let i = 0; i < Input.menuButtons.length; i++)
-				Input.menuButtons[i].HandleKeydown(event.keyCode);
-			for(let i = 0; i < Input.exploreButtons.length; i++)
-				Input.exploreButtons[i].HandleKeydown(event.keyCode);
-		case GameState.Event:
-		case GameState.Credits:
-		case GameState.Combat:
-		case GameState.Cavalcade:
-			for(let i = 0; i < Input.buttons.length; i++)
-				Input.buttons[i].HandleKeydown(event.keyCode);
-			for(let i = 0; i < Input.navButtons.length; i++)
-				Input.navButtons[i].HandleKeydown(event.keyCode);
-		break;
+export class Input {
+
+	constructor() {}
+
+	static get keyDownValid() { return keyDownValid; }
+	static set keyDownValid(valid) { keyDownValid = valid; }
+
+	static get buttons() { return buttons; }
+	static get navButtons() { return navButtons; }
+	static get exploreButtons() { return exploreButtons; }
+	static get menuButtons() { return menuButtons; }
+
+	static get exploreButtonSet() { return exploreButtonSet; }
+	static get menuButtonSet() { return menuButtonSet; }
+
+	static Init(gui : any) {
+		Gui = gui;
+		//let canvas = document.getElementById("canvas");
+
+		window.onkeydown   = Input.Keydown;
+		window.onkeyup     = Input.Keyup;
+		/*
+		canvas.onmousedown = Mousedown;
+		canvas.onmouseup   = Mouseup;
+		canvas.onmousemove = Mousemove;
+		*/
+
+		keyDownValid     = true
+
+		buttonSet        = Gui.canvas.set();
+		navButtonSet     = Gui.canvas.set();
+		exploreButtonSet = Gui.canvas.set();
+		menuButtonSet    = Gui.canvas.set();
+
+		Input.InitButtons();
+
+		Input.InitMenuButtons();
+	}
+	
+	// Init functions for the button sets
+	static InitButtons() {
+		var offset = {x: 270, y:600};
+
+		let button : Button;
+		for(let y = 0; y < 3; y++) {
+			for(let x = 0; x < 4; x++) {
+				button = new Button(Gui, {x : offset.x + 162*x, y : offset.y + 40*y, w : 155, h : 35}, "Button" + (x + y*5), null, true, Images.imgButtonEnabled, Images.imgButtonDisabled);
+				buttons.push(button);
+				buttonSet.push(button.set);
+			}
+
+			button = new Button(Gui, {x : offset.x + 162*4, y : offset.y + 40*y, w : 75, h : 35}, "Nav" + y, null, true, Images.imgNavButtonEnabled, Images.imgNavButtonDisabled);
+			navButtons.push(button);
+			navButtonSet.push(button.set);
+		}
+		for(let y = 0; y < 8; y++) {
+			button = new Button(Gui, {x : 1100, y : 375 + 40 * y, w : 155, h : 35}, "Exp"+y, null, true, Images.imgButtonEnabled, Images.imgButtonDisabled, true);
+			exploreButtons.push(button);
+			exploreButtonSet.push(button.set);
+		}
+		button = new Button(Gui, {x : 150, y : 590, w : 50, h : 50}, "", null, true, Images.imgWaitEnabled, Images.imgWaitDisabled);
+		exploreButtons.push(button);
+		exploreButtonSet.push(button.set);
+		button = new Button(Gui, {x : 150, y : 590, w : 50, h : 50}, "", null, true, Images.imgSleepEnabled, Images.imgSleepDisabled);
+		exploreButtons.push(button);
+		exploreButtonSet.push(button.set);
+		button = new Button(Gui, {x : 210, y : 590, w : 50, h : 50}, "", null, true, Images.imgSearchEnabled, Images.imgSearchDisabled);
+		exploreButtons.push(button);
+		exploreButtonSet.push(button.set);
 	}
 
-	/* TODO Not really used atm
-	switch(event.keyCode) {
-		case Keys.KEY_A: Input.keyinput[LEFT_ARROW]  = true; break;
-		case Keys.KEY_D: Input.keyinput[RIGHT_ARROW] = true; break;
-		case Keys.KEY_W: Input.keyinput[UP_ARROW]    = true; break;
-		case Keys.KEY_S: Input.keyinput[DOWN_ARROW]  = true; break;
-	} */
-	return true;
-}
+	static InitMenuButtons() {
+		var offset = {x: 15, y:620};
 
-// Catches key releases
-Input.Keyup = function(event : any) {
-	/* TODO Not really used atm
-	switch(event.keyCode) {
-		case Keys.KEY_A: Input.keyinput[LEFT_ARROW]  = false; break;
-		case Keys.KEY_D: Input.keyinput[RIGHT_ARROW] = false; break;
-		case Keys.KEY_W: Input.keyinput[UP_ARROW]    = false; break;
-		case Keys.KEY_S: Input.keyinput[DOWN_ARROW]  = false; break;
-	} */
-	return true;
-}
+		// TOP, Data menu
+		var button = new Button(Gui, {x : 10, y : 10, w : 155, h : 35}, "DATA", null, true, Images.imgButtonEnabled, Images.imgButtonDisabled);
+		menuButtons.push(button);
+		menuButtonSet.push(button.set);
+	};
 
-Input.tooltip = false;
+	static RenderExploreButtonGlow() {
+		/*
+		//TODO keybind tooltip
+		var keybinding = KeyToText[this.key];
+		if(Gui.ShortcutsVisible && keybinding) {
+			// Render the text centered
+			context.font = TINY_FONT;
+			context.strokeStyle = "rgba(255,0,0,0.8)";
+			context.strokeText(keybinding, this.rect.w/2-8, this.rect.h/2-2);
+			context.fillStyle = "rgba(255,255,255,0.8)";
+			context.fillText(keybinding, this.rect.w/2-8, this.rect.h/2-2);
+		}
+		*/
+		// Add a glow effect if this button is the currently choosen exploration option
+		for(let button of exploreButtons) {
+			if(!button.image.is_visible()) continue;
+			if(!button.glow) continue;
+			if(button == Gui.GetLastSubmenu())
+				button.glow.show();
+			else
+				button.glow.hide();
+		}
+	}
+	
+	// Catches keypresses
+	static Keydown(event : any) {
+		// Used for text input, when we don't want to have shortcut keys active
+		if(!Input.keyDownValid)
+			return true;
 
-export { Input, Keys };
+		//event.preventDefault();
+
+		// TODO: Prioritze layers
+		switch(gameState) {
+			case GameState.Game:
+				for(let button of menuButtons)
+					button.HandleKeydown(event.keyCode);
+				for(let button of exploreButtons)
+					button.HandleKeydown(event.keyCode);
+			case GameState.Event:
+			case GameState.Credits:
+			case GameState.Combat:
+			case GameState.Cavalcade:
+				for(let button of buttons)
+					button.HandleKeydown(event.keyCode);
+				for(let button of navButtons)
+					button.HandleKeydown(event.keyCode);
+			break;
+		}
+
+		/* TODO Not really used atm
+		switch(event.keyCode) {
+			case Keys.KEY_A: Input.keyinput[LEFT_ARROW]  = true; break;
+			case Keys.KEY_D: Input.keyinput[RIGHT_ARROW] = true; break;
+			case Keys.KEY_W: Input.keyinput[UP_ARROW]    = true; break;
+			case Keys.KEY_S: Input.keyinput[DOWN_ARROW]  = true; break;
+		} */
+		return true;
+	}
+
+	// Catches key releases
+	static Keyup(event : any) {
+		/* TODO Not really used atm
+		switch(event.keyCode) {
+			case Keys.KEY_A: Input.keyinput[LEFT_ARROW]  = false; break;
+			case Keys.KEY_D: Input.keyinput[RIGHT_ARROW] = false; break;
+			case Keys.KEY_W: Input.keyinput[UP_ARROW]    = false; break;
+			case Keys.KEY_S: Input.keyinput[DOWN_ARROW]  = false; break;
+		} */
+		return true;
+	}
+
+};
+
+export { Keys };

@@ -15,6 +15,7 @@ import { Gui } from './gui';
 import { GAME, WORLD } from './GAME';
 import { SetGameState, GameState } from './gamestate';
 import { Entity } from './entity';
+import { Images } from './assets';
 
 export class Party {
 	members : any[];
@@ -406,7 +407,7 @@ export class Party {
 				func: member.Interact,
 				obj: switchSpot,
 				enabled: true,
-				image: Input.imgButtonEnabled2
+				image: Images.imgButtonEnabled2
 			});
 		}
 		Text.Add("</tr>");
