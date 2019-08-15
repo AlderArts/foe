@@ -52,7 +52,7 @@ export class Belinda extends Entity {
 	}
 	
 	ToStorage() {
-		var storage : any = {
+		let storage : any = {
 			
 		};
 		

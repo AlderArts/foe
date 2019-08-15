@@ -46,7 +46,7 @@ export class Asche extends Entity {
 	}
 
 	ToStorage() {
-		var storage : any = {};
+		let storage : any = {};
 		
 		this.SavePersonalityStats(storage);
 		

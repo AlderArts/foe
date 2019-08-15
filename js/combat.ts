@@ -88,7 +88,7 @@ export class Encounter {
 
 		SetEnemyParty(this.enemy);
 		//Add a unique name property to each enemy entity
-		for(var i=0; i < EnemyParty().NumTotal(); i++) {
+		for(let i=0; i < EnemyParty().NumTotal(); i++) {
 			this.GenerateUniqueName(EnemyParty().Get(i));
 		}
 		
@@ -112,7 +112,7 @@ export class Encounter {
 
 
 	GetLiveEnemyArray() {
-		var e = new Array();
+		let e = new Array();
 		for(let ent of this.enemy.members) {
 			if(!ent.Incapacitated())
 				e.push(ent);
@@ -121,7 +121,7 @@ export class Encounter {
 	}
 
 	GetDownedEnemyArray() {
-		var e = new Array();
+		let e = new Array();
 		for(let ent of this.enemy.members) {
 			if(ent.Incapacitated())
 				e.push(ent);
@@ -130,7 +130,7 @@ export class Encounter {
 	}
 
 	GetLivePartyArray() {
-		var p = new Array();
+		let p = new Array();
 		for(let ent of GAME().party.members) {
 			if(!ent.Incapacitated())
 				p.push(ent);
@@ -139,7 +139,7 @@ export class Encounter {
 	}
 
 	GetDownedPartyArray() {
-		var p = new Array();
+		let p = new Array();
 		for(let ent of GAME().party.members) {
 			if(ent.Incapacitated())
 				p.push(ent);
@@ -148,14 +148,14 @@ export class Encounter {
 	}
 
 	GetEnemyArray() {
-		var e = new Array();
+		let e = new Array();
 		for(let ent of this.enemy.members)
 			e.push(ent);
 		return e;
 	}
 
 	GetPartyArray() {
-		var p = new Array();
+		let p = new Array();
 		for(let ent of GAME().party.members)
 			p.push(ent);
 		return p;
@@ -163,10 +163,10 @@ export class Encounter {
 
 	// TODO
 	SetButtons(activeChar : any, combatScreen : any) {
-		var entity = activeChar.entity;
-		var encounter = this;
+		let entity = activeChar.entity;
+		let encounter = this;
 		
-		var BasePrompt = function() {
+		let BasePrompt = function() {
 			Gui.ClearButtons();
 			Input.buttons[0].SetFromAbility(encounter, entity, Abilities.Attack, BasePrompt);
 
@@ -233,7 +233,7 @@ export class Encounter {
 
 	// Default loss condition: party is downed
 	LossCondition() {
-		var downed = true;
+		let downed = true;
 		for(let ent of GAME().party.members) {
 			if(ent.Incapacitated() == false) downed = false;
 		}
@@ -259,7 +259,7 @@ export class Encounter {
 
 	// Default win condition: enemy party is downed
 	VictoryCondition() {
-		var downed = true;
+		let downed = true;
 		for(let ent of this.enemy.members) {
 			if(ent.Incapacitated() == false) downed = false;
 		}
@@ -271,16 +271,16 @@ export class Encounter {
 		Text.Add("Victory!");
 		Text.NL();
 
-		var exp = 0, coin = 0;
-		for(var i = 0; i < this.enemy.NumTotal(); i++) {
-			var e = this.enemy.Get(i);
+		let exp = 0, coin = 0;
+		for(let i = 0; i < this.enemy.NumTotal(); i++) {
+			let e = this.enemy.Get(i);
 			exp  += e.combatExp;
 			coin += e.coinDrop;
 			
-			var drops = e.DropTable();
+			let drops = e.DropTable();
 			for(let drop of drops) {
-				var it  = drop.it;
-				var num = drop.num || 1;
+				let it  = drop.it;
+				let num = drop.num || 1;
 				
 				Text.Add("The party finds " + num + "x " + it.name + ".<br>");
 				GAME().party.inventory.AddItem(it, num);
@@ -316,7 +316,7 @@ export class Encounter {
 
 	OnIncapacitate(entity : Entity) {
 		for(let ent of this.combatOrder){
-			var e = ent.entity;
+			let e = ent.entity;
 			if(e == entity) {
 				// Check for sleep
 				if(e.combatStatus.stats[StatusEffect.Sleep] != null) {
@@ -332,9 +332,9 @@ export class Encounter {
 	}
 
 	CombatTick() {
-		var enc = this;
+		let enc = this;
 		
-		var e = enc.Callstack.pop();
+		let e = enc.Callstack.pop();
 		if(e) {
 			e(enc);
 			return;
@@ -354,20 +354,20 @@ export class Encounter {
 		}
 		else {
 			/*
-			var maxIni = 1;
+			let maxIni = 1;
 			// Sort the list after initiative
-			for(var i=0,j=this.combatOrder.length; i<j; i++){
-				var c = this.combatOrder[i];
+			for(let i=0,j=this.combatOrder.length; i<j; i++){
+				let c = this.combatOrder[i];
 				
 				if(!c.entity.Incapacitated()) {
-					var ini = c.entity.Initiative();
+					let ini = c.entity.Initiative();
 					c.initiative += ini;
 					if(maxIni < ini) maxIni = ini;
 				}
 			}
 			*/
 			
-			var found = false;
+			let found = false;
 			while(!found) {
 				_.each(enc.combatOrder, function(c) {
 					if(!c.entity.Incapacitated()) {
@@ -387,17 +387,17 @@ export class Encounter {
 			}
 			
 			enc.combatOrder.sort(Encounter.InitiativeSorter);
-			var activeChar = enc.combatOrder[0];
+			let activeChar = enc.combatOrder[0];
 			
 			SetCurrentActiveChar(activeChar.entity);
 			
-			var casting = activeChar.casting;
+			let casting = activeChar.casting;
 			activeChar.casting = null;
 			
-			var ini = 100;
+			let ini = 100;
 			
 			// Freeze, slow down character
-			var freeze = CurrentActiveChar().combatStatus.stats[StatusEffect.Freeze];
+			let freeze = CurrentActiveChar().combatStatus.stats[StatusEffect.Freeze];
 			if(freeze) {
 				if(Math.random() < freeze.proc) {
 					ini *= freeze.str;
@@ -420,7 +420,7 @@ export class Encounter {
 			}
 			
 			// Numb, stun character
-			var numb = CurrentActiveChar().combatStatus.stats[StatusEffect.Numb];
+			let numb = CurrentActiveChar().combatStatus.stats[StatusEffect.Numb];
 			if(numb) {
 				if(Math.random() < numb.proc) {
 					Text.Add("[name] [is] stunned and cannot move!",
@@ -434,7 +434,7 @@ export class Encounter {
 			}
 			
 			// Sleep
-			var sleep = CurrentActiveChar().combatStatus.stats[StatusEffect.Sleep];
+			let sleep = CurrentActiveChar().combatStatus.stats[StatusEffect.Sleep];
 			if(sleep) {
 				Text.Add("[name] [is] asleep and cannot act!",
 					{name: CurrentActiveChar().NameDesc(), is: CurrentActiveChar().is()});
@@ -445,14 +445,14 @@ export class Encounter {
 				return;
 			}
 
-			var combatScreen = function() {
+			let combatScreen = function() {
 				Text.Clear();
 				// TODO: DEBUG ?
-				var entityName = CurrentActiveChar().uniqueName ? CurrentActiveChar().uniqueName : CurrentActiveChar().name;
+				let entityName = CurrentActiveChar().uniqueName ? CurrentActiveChar().uniqueName : CurrentActiveChar().name;
 				Text.Add("Turn order:<br>", null, 'bold');
 				Text.Add(entityName + "<br>", null, 'bold');
 				
-				var tempParty : any[] = [];
+				let tempParty : any[] = [];
 				_.each(enc.combatOrder, function(c) {
 					if(!c.entity.Incapacitated()) {
 						entityName = c.entity.uniqueName ? c.entity.uniqueName : c.entity.name;
@@ -461,7 +461,7 @@ export class Encounter {
 				});
 				
 				_.times(8, function() {
-					var found : any = null;
+					let found : any = null;
 					while(!found) {
 						_.each(tempParty, function(c) {
 							if(c.ini >= 100) {
@@ -476,7 +476,7 @@ export class Encounter {
 					}
 					
 					found.ini -= 100; //TODO cast time for predict
-					var tempCasting = found.entry.casting ? " (casting...)" : "";
+					let tempCasting = found.entry.casting ? " (casting...)" : "";
 					Text.Add(found.name + tempCasting + "<br>");
 				});
 				Text.NL();
@@ -492,7 +492,7 @@ export class Encounter {
 			combatScreen();
 
 			if(casting) {
-				var ability = casting.ability;
+				let ability = casting.ability;
 				ability.CastInternal(enc, activeChar.entity, casting.target);
 			}
 			else {
@@ -520,7 +520,7 @@ export class Encounter {
 					}
 					else {
 						// Confuse
-						var confuse = CurrentActiveChar().combatStatus.stats[StatusEffect.Confuse];
+						let confuse = CurrentActiveChar().combatStatus.stats[StatusEffect.Confuse];
 						if(confuse) {
 							if(confuse.func)
 								confuse.func(enc, activeChar);

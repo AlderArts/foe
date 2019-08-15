@@ -15,7 +15,7 @@ KiakaiScenes.RavenDreams = function() {
 	let player = GAME().player;
 	let kiakai = GAME().kiakai;
 	
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		name   : kiakai.name
 	};
@@ -40,7 +40,7 @@ KiakaiScenes.TalkQuest = function() {
 	let rosalin = GAME().rosalin;
 	let rigard = GAME().rigard;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		name   : kiakai.name
 	};
@@ -96,7 +96,7 @@ KiakaiScenes.TalkAria = function() {
 	let player = GAME().player;
 	let kiakai = GAME().kiakai;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		name   : kiakai.name
 	};
@@ -140,7 +140,7 @@ KiakaiScenes.TalkAria = function() {
 	}
 	Text.Flush();
 	
-	var options = [];
+	let options = [];
 	// TALK ABOUT ARIA'S GOALS
 	options.push({ nameStr: "Goals",
 		func : function() {
@@ -174,7 +174,7 @@ KiakaiScenes.TalkUru = function() {
 	let player = GAME().player;
 	let kiakai = GAME().kiakai;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		name   : kiakai.name
 	};
@@ -206,7 +206,7 @@ KiakaiScenes.TalkUru = function() {
 	
 	Text.Flush();
 	
-	var options = [];
+	let options = [];
 	// TALK ABOUT CONFLICT WITH ARIA
 	options.push({ nameStr: "Conflict",
 		func : function() {
@@ -245,7 +245,7 @@ KiakaiScenes.TalkUru = function() {
 				Text.Flush();
 				
 				// [Comfort][Boast][Who cares]
-				var options = [];
+				let options = [];
 				options.push({ nameStr: "Comfort",
 					func : function() {
 						if(kiakai.flags["Attitude"] < KiakaiFlags.Attitude.Neutral) {
@@ -363,7 +363,7 @@ KiakaiScenes.TalkEden = function() {
 	let player = GAME().player;
 	let kiakai = GAME().kiakai;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		name   : kiakai.name
 	};
@@ -372,13 +372,13 @@ KiakaiScenes.TalkEden = function() {
 	Text.Add("<i>“What would you like to know about Eden, [playername]?”</i>", parse);
 	Text.Flush();
 	
-	var options = [];
+	let options = [];
 	// TALK ABOUT GEOGRAPHY
 	options.push({ nameStr: "Geography",
 		func : function() {
 			Text.Clear();
 			
-			var scenes = [];
+			let scenes = [];
 			// TREE
 			scenes.push(function() {
 				Text.Add("You ask about the most prominent aspect of the realm: the giant tree rising thousands of feet into the air, covering large parts of Eden in the shadow its foliage.", parse);
@@ -431,7 +431,7 @@ KiakaiScenes.TalkEden = function() {
 				Text.Add("<i>“I know not,”</i> [name] admits.", parse);
 			});
 			
-			var sceneId = kiakai.flags["RotGeo"];
+			let sceneId = kiakai.flags["RotGeo"];
 			if(sceneId >= scenes.length) {
 				sceneId = 0;
 				kiakai.relation.IncreaseStat(30, 1);
@@ -453,7 +453,7 @@ KiakaiScenes.TalkEden = function() {
 		func : function() {
 			Text.Clear();
 			
-			var scenes = [];
+			let scenes = [];
 			// HUMANS
 			scenes.push(function() {
 				Text.Add("<i>“Pure humans used to be the most numerous race on Eden, but interbreeding with the various other races arriving through portals has dwindled their numbers,”</i> [name] explains, <i>“They still account for the majority of the population in the capital, and with a few exceptions, only humans are allowed into the royal palace.”</i>", parse);
@@ -520,7 +520,7 @@ KiakaiScenes.TalkEden = function() {
 			});
 			*/
 	
-			var sceneId = kiakai.flags["RotPeople"];
+			let sceneId = kiakai.flags["RotPeople"];
 			if(sceneId >= scenes.length) {
 				sceneId = 0;
 				kiakai.relation.IncreaseStat(30, 1);
@@ -573,7 +573,7 @@ KiakaiScenes.TalkFactions = function() {
 	let player = GAME().player;
 	let kiakai = GAME().kiakai;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		name   : kiakai.name
 	};
@@ -581,7 +581,7 @@ KiakaiScenes.TalkFactions = function() {
 	
 	Text.Clear();
 	
-	var scenes = [];
+	let scenes = [];
 	// KINGDOM
 	scenes.push(function() {
 		Text.Add("<i>“The royal family rules over the largest city on Eden, and a good portion of the plains is under their control. They are purebred humans, and they have a strong distaste for other races. Non-humans and mixed races do best in staying far away from the castle and the Royal Guard, though the city itself is fine.”</i>", parse);
@@ -627,7 +627,7 @@ KiakaiScenes.TalkFactions = function() {
 		Text.Add("[name] frowns a bit, <i>“There have been rumors about people disappearing without a trace while traversing the desert, not even leaving bones behind. If you plan to head there, be very careful.”</i>", parse);
 	});
 	
-	var sceneId = kiakai.flags["RotFactions"];
+	let sceneId = kiakai.flags["RotFactions"];
 	if(sceneId >= scenes.length) {
 		sceneId = 0;
 		kiakai.relation.IncreaseStat(30, 1);
@@ -649,7 +649,7 @@ KiakaiScenes.TalkElves = function() {
 	let player = GAME().player;
 	let kiakai = GAME().kiakai;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		name   : kiakai.name
 	};
@@ -674,12 +674,12 @@ KiakaiScenes.TalkElves = function() {
 	Text.Flush();
 	
 	//[Culture][Parents][Childhood][Why Leave]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Culture",
 		func : function() {
 			Text.Clear();
 			
-			var scenes = [];
+			let scenes = [];
 			// Long life
 			scenes.push(function() {
 				Text.Add("<i>“One of the biggest differences between elves and humans is how long we live,”</i> [name] tells you. <i>“Where humans live only a few score years, elves' lifetimes are measured in hundreds. The elders of my village were all past their fourth century when I left.”</i>", parse);
@@ -714,7 +714,7 @@ KiakaiScenes.TalkElves = function() {
 				Text.Add("<i>“If one read all the scrolls, I believe that would tell you more of the history of the world than you could learn from all the libraries in the human lands.”</i> The elf smiles with pride and obvious curiosity.", parse);
 			});
 			
-			var sceneId = kiakai.flags["RotElfCulture"];
+			let sceneId = kiakai.flags["RotElfCulture"];
 			if(sceneId >= scenes.length) {
 				sceneId = 0;
 				kiakai.relation.IncreaseStat(30, 1);
@@ -735,7 +735,7 @@ KiakaiScenes.TalkElves = function() {
 		func : function() {
 			Text.Clear();
 			
-			var scenes = [];
+			let scenes = [];
 			// Raised by community
 			scenes.push(function() {
 				Text.Add("<i>“You have to understand that elves have very few children. An elvish woman usually has a child less than once every fifty years, even in her prime. As such, when a child is born, [heshe] is extremely important to all elves.”</i>", parse);
@@ -757,7 +757,7 @@ KiakaiScenes.TalkElves = function() {
 				Text.Add("<i>“Oh, no, not at all,”</i> [name] tells you. <i>“Elves do not feel lonely just because of that. After all, we have the entire community to support us. This is how elves have lived as far back as our lore reaches, so it must be a way of living that is comfortable for us...”</i> [name] trails off, sounding a little sad.", parse);
 			});
 			
-			var sceneId = kiakai.flags["RotElfParents"];
+			let sceneId = kiakai.flags["RotElfParents"];
 			if(sceneId >= scenes.length) {
 				sceneId = 0;
 				kiakai.relation.IncreaseStat(30, 1);
@@ -778,7 +778,7 @@ KiakaiScenes.TalkElves = function() {
 		func : function() {
 			Text.Clear();
 			
-			var scenes = [];
+			let scenes = [];
 			
 			// Freedom
 			scenes.push(function() {
@@ -806,7 +806,7 @@ KiakaiScenes.TalkElves = function() {
 						Text.Flush();
 
 						//[Comfort][Explain][You're Weird!]
-						var options = new Array();
+						let options = new Array();
 						options.push({ nameStr : "Comfort",
 							func : function() {
 								kiakai.relation.IncreaseStat(100, 5);
@@ -871,7 +871,7 @@ KiakaiScenes.TalkElves = function() {
 				KiakaiScenes.TalkElves();
 			});
 			
-			var sceneId = kiakai.flags["RotElfChild"];
+			let sceneId = kiakai.flags["RotElfChild"];
 			if(sceneId >= scenes.length) {
 				sceneId = 0;
 				kiakai.relation.IncreaseStat(30, 1);
@@ -907,7 +907,7 @@ KiakaiScenes.TalkElves = function() {
 						Text.Add("You see pain in the elf's eyes and sense that there's much [heshe]'s not telling you.", parse);
 						Text.Flush();
 						//[Demand answer][Let it go]
-						var options = new Array();
+						let options = new Array();
 						options.push({ nameStr : "Demand answer",
 							func : function() {
 								kiakai.flags["TalkedWhyLeaveForce"] = 1;
@@ -964,7 +964,7 @@ KiakaiScenes.TalkDimensionalViolation = function() {
 	let player = GAME().player;
 	let kiakai = GAME().kiakai;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		name   : kiakai.name
 	};
@@ -1011,7 +1011,7 @@ KiakaiScenes.TalkDimensionalViolation = function() {
 		Text.Flush();
 		
 		//[Go on...][Later]
-		var options = new Array();
+		let options = new Array();
 		options.push({ nameStr : "Go on...",
 			func : function() {
 				Text.Clear();
@@ -1044,7 +1044,7 @@ KiakaiScenes.TalkDimensionalViolationCont = function() {
 	let player = GAME().player;
 	let kiakai = GAME().kiakai;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		name   : kiakai.name
 	};
@@ -1071,7 +1071,7 @@ KiakaiScenes.TalkDimensionalViolationCont = function() {
 	if(kiakai.flags["TalkedWhyLeaveLongReact"] == 0) {
 		Text.Flush();
 		//[Hug][Thank][Dismiss]
-		var options = new Array();
+		let options = new Array();
 		options.push({ nameStr : "Hug",
 			func : function() {
 				Text.Clear();
@@ -1144,7 +1144,7 @@ KiakaiScenes.TalkPriest = function() {
 	let player = GAME().player;
 	let kiakai = GAME().kiakai;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		name   : kiakai.name
 	};
@@ -1177,7 +1177,7 @@ KiakaiScenes.TalkPriest = function() {
 	
 	Text.Flush();
 	//[Hierarchy][Disciplines][Activities][Yrissa][Aria][Meeting]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Hierarchy",
 		func : KiakaiScenes.TalkPriestHierarchy, enabled : true,
 		tooltip : "Ask about the organization of the priesthood."
@@ -1215,7 +1215,7 @@ KiakaiScenes.TalkPriestHierarchy = function() {
 	let player = GAME().player;
 	let kiakai = GAME().kiakai;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		name   : kiakai.name
 	};
@@ -1223,7 +1223,7 @@ KiakaiScenes.TalkPriestHierarchy = function() {
 	
 	Text.Clear();
 	
-	var scenes = [];
+	let scenes = [];
 	
 	// Overview
 	scenes.push(function() {
@@ -1250,7 +1250,7 @@ KiakaiScenes.TalkPriestHierarchy = function() {
 		Text.Add("<i>“The current High Priestess is Yrissa, and everyone acknowledges her beauty and wisdom,”</i> the elf blushes slightly. <i>“She is thoughtful and kind, and has moved the priesthood to focus on helping the people of the land.”</i>", parse);
 	});
 	
-	var sceneId = kiakai.flags["RotPrHier"];
+	let sceneId = kiakai.flags["RotPrHier"];
 	if(sceneId >= scenes.length) {
 		sceneId = 0;
 		kiakai.relation.IncreaseStat(30, 1);
@@ -1271,7 +1271,7 @@ KiakaiScenes.TalkPriestDisciplines = function() {
 	let player = GAME().player;
 	let kiakai = GAME().kiakai;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		name   : kiakai.name,
 		virg   : kiakai.FirstCock() ? "p-penis has not entered a vagina" : "v-vagina has not felt the touch of a penis"
@@ -1281,7 +1281,7 @@ KiakaiScenes.TalkPriestDisciplines = function() {
 	Text.Clear();
 	
 	
-	var scenes = [];
+	let scenes = [];
 	
 	// Celibacy1
 	if(kiakai.flags["TalkedSex"] < 2) {
@@ -1293,7 +1293,7 @@ KiakaiScenes.TalkPriestDisciplines = function() {
 			
 			if(kiakai.flags["Sexed"] != 0) {
 				//[But...][Okay]
-				var options = new Array();
+				let options = new Array();
 				options.push({ nameStr : "But...",
 					func : function() {
 						Text.NL();
@@ -1409,7 +1409,7 @@ KiakaiScenes.TalkPriestDisciplines = function() {
 		KiakaiScenes.TalkPriest();
 	});
 	
-	var sceneId = kiakai.flags["RotPrDisc"];
+	let sceneId = kiakai.flags["RotPrDisc"];
 	if(sceneId >= scenes.length) {
 		sceneId = 0;
 		kiakai.relation.IncreaseStat(30, 1);
@@ -1427,7 +1427,7 @@ KiakaiScenes.TalkPriestActivities = function() {
 	let player = GAME().player;
 	let kiakai = GAME().kiakai;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		name   : kiakai.name
 	};
@@ -1436,7 +1436,7 @@ KiakaiScenes.TalkPriestActivities = function() {
 	Text.Clear();
 	
 	
-	var scenes = [];
+	let scenes = [];
 	
 	// Chores
 	scenes.push(function() {
@@ -1492,7 +1492,7 @@ KiakaiScenes.TalkPriestActivities = function() {
 		Text.Add("<i>“In addition, once every season there is a bigger celebration. It is a wondrous occasion, to which many come from the outlying villages, with patrols going out from the shrine and from the kingdom to help guide those who wish it past the beasts in the woods. Many in the priesthood play beautiful music, candles illuminate the grand hall deep into the night like a myriad of stars, and the kitchens labor day and night to provide food for any who wish it at the gathering.”</i> [name] speaks wistfully, a relaxed smile on [hisher] face, and you tell [himher] you'd like to see this celebration sometime.", parse);
 	});
 	
-	var sceneId = kiakai.flags["RotPrAct"];
+	let sceneId = kiakai.flags["RotPrAct"];
 	if(sceneId >= scenes.length) {
 		sceneId = 0;
 		kiakai.relation.IncreaseStat(30, 1);
@@ -1513,7 +1513,7 @@ KiakaiScenes.TalkPriestYrissa = function() {
 	let player = GAME().player;
 	let kiakai = GAME().kiakai;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		name   : kiakai.name
 	};
@@ -1522,7 +1522,7 @@ KiakaiScenes.TalkPriestYrissa = function() {
 	Text.Clear();
 	
 	
-	var scenes = [];
+	let scenes = [];
 	
 	// General
 	scenes.push(function() {
@@ -1558,7 +1558,7 @@ KiakaiScenes.TalkPriestYrissa = function() {
 		});
 	}
 	
-	var sceneId = kiakai.flags["RotPrYrissa"];
+	let sceneId = kiakai.flags["RotPrYrissa"];
 	if(sceneId >= scenes.length) {
 		sceneId = 0;
 		kiakai.relation.IncreaseStat(20, 1);
@@ -1579,7 +1579,7 @@ KiakaiScenes.TalkPriestAria = function() {
 	let player = GAME().player;
 	let kiakai = GAME().kiakai;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		name   : kiakai.name
 	};
@@ -1588,7 +1588,7 @@ KiakaiScenes.TalkPriestAria = function() {
 	Text.Clear();
 	
 	
-	var scenes = [];
+	let scenes = [];
 	
 	// Long
 	scenes.push(function() {
@@ -1602,7 +1602,7 @@ KiakaiScenes.TalkPriestAria = function() {
 		}
 	});
 	
-	var sceneId = kiakai.flags["RotPrAria"];
+	let sceneId = kiakai.flags["RotPrAria"];
 	if(sceneId >= scenes.length) {
 		sceneId = 0;
 		kiakai.relation.IncreaseStat(20, 1);
@@ -1622,7 +1622,7 @@ KiakaiScenes.TalkPriestMeeting = function() {
 	let player = GAME().player;
 	let kiakai = GAME().kiakai;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		name   : kiakai.name
 	};
@@ -1630,7 +1630,7 @@ KiakaiScenes.TalkPriestMeeting = function() {
 	
 	Text.Clear();
 	
-	var scenes = [];
+	let scenes = [];
 	
 	// Short version
 	scenes.push(function() {
@@ -1661,7 +1661,7 @@ KiakaiScenes.TalkPriestMeeting = function() {
 		});
 	}
 	
-	var sceneId = kiakai.flags["RotPrMeeting"];
+	let sceneId = kiakai.flags["RotPrMeeting"];
 	if(sceneId >= scenes.length) {
 		sceneId = 0;
 		kiakai.relation.IncreaseStat(20, 1);

@@ -25,17 +25,17 @@ equiniumPlus.recipe = [{it: AlchemyItems.Equinium, num: 3}, {it: IngredientItems
 equiniumPlus.PushEffect(TF.ItemEffects.SetEars, {odds: 0.8, race: Race.Horse, str: "equine ears"});
 equiniumPlus.PushEffect(TF.ItemEffects.SetTail, {odds: 0.8, race: Race.Horse, color: Color.brown, str: "a brown, bushy horse tail"});
 equiniumPlus.PushEffect(function(target : Entity) {
-	var parse : any = {
+	let parse : any = {
 		name: target.NameDesc(),
 		s: target == GAME().player ? "" : "s",
 		possessive: target.possessive(),
 		Possessive: target.Possessive(),
 		multiCockDesc : function() { return target.MultiCockDesc(); }
 	};
-	var cocks = target.AllCocks();
+	let cocks = target.AllCocks();
 	// Create new cock
 	if(cocks.length == 0) {
-		var cock = new Cock(Race.Horse, Color.pink);
+		let cock = new Cock(Race.Horse, Color.pink);
 		cock.length.base    = 25;
 		cock.thickness.base = 7;
 		cocks.push(cock);
@@ -49,11 +49,11 @@ equiniumPlus.PushEffect(function(target : Entity) {
 			Text.Add("[Possessive] cock turns into a horsecock!", parse);
 		Text.NL();
 	}
-	var len = false, thk = false;
-	for(var i = 0; i < cocks.length; i++) {
+	let len = false, thk = false;
+	for(let i = 0; i < cocks.length; i++) {
 		// Base size
-		var inc  = cocks[i].length.IncreaseStat(25, 100);
-		var inc2 = cocks[i].thickness.IncreaseStat(7, 100);
+		let inc  = cocks[i].length.IncreaseStat(25, 100);
+		let inc2 = cocks[i].thickness.IncreaseStat(7, 100);
 		if(inc == null)
 			inc = cocks[i].length.IncreaseStat(50, 5);
 		if(inc2 == null)
@@ -129,17 +129,17 @@ infernumPlus.Long = function() { return "A bottle of extra potent Infernum, with
 infernumPlus.recipe = [{it: AlchemyItems.Infernum}, {it: IngredientItems.BlackGem}, {it: IngredientItems.DemonSeed, num: 3}];
 // Effects
 infernumPlus.PushEffect(function(target : Entity) {
-	var parse : any = {
+	let parse : any = {
 		name: target.NameDesc(),
 		s: target == GAME().player ? "" : "s",
 		possessive: target.possessive(),
 		Possessive: target.Possessive(),
 		multiCockDesc : function() { return target.MultiCockDesc(); }
 	};
-	var cocks = target.AllCocks();
+	let cocks = target.AllCocks();
 	// Create new cock
 	if(Math.random() < 0.5 && target.NumCocks() < 5) {
-		var cock = new Cock(Race.Demon, Color.red);
+		let cock = new Cock(Race.Demon, Color.red);
 		cock.length.base    = 20;
 		cock.thickness.base = 4;
 		cocks.push(cock);
@@ -154,11 +154,11 @@ infernumPlus.PushEffect(function(target : Entity) {
 		Text.NL();
 	}
 	if(cocks.length > 0) {
-		var size = false;
-		for(var i = 0; i < cocks.length; i++) {
+		let size = false;
+		for(let i = 0; i < cocks.length; i++) {
 			// Base size
-			var inc  = cocks[i].length.IncreaseStat(20, 100);
-			var inc2 = cocks[i].thickness.IncreaseStat(4, 100);
+			let inc  = cocks[i].length.IncreaseStat(20, 100);
+			let inc2 = cocks[i].thickness.IncreaseStat(4, 100);
 			if(inc == null)
 				inc  = cocks[i].length.IncreaseStat(30, 2);
 			if(inc2 == null)
@@ -196,7 +196,7 @@ nagazm.Long  = function() { return "A bottle with a pink, bubbly liquid, labeled
 nagazm.recipe = [{it: IngredientItems.SnakeOil}, {it: IngredientItems.SnakeFang}, {it: IngredientItems.SnakeSkin}];
 // Effects
 nagazm.PushEffect(function(target : Entity) {
-	var parse : any = {
+	let parse : any = {
 		Poss : target.Possessive(),
 		legsDesc : function() { return target.LegsDesc(); },
 		s : target.body.legs.count > 1 ? "" : "s"
@@ -217,11 +217,11 @@ nagazm.PushEffect(function(target : Entity) {
 });
 nagazm.PushEffect(TF.ItemEffects.RemBalls, {odds: 0.5, ideal: 0, count: 2});
 nagazm.PushEffect(function(target : Entity) {
-	var parse : any = { Name: target.NameDesc(), s: target.plural() ? "" : "s" };
+	let parse : any = { Name: target.NameDesc(), s: target.plural() ? "" : "s" };
 	
 	if (Math.random() < 0.5) {
-		var vags  = target.AllVags();
-		var cocks = target.AllCocks();
+		let vags  = target.AllVags();
+		let cocks = target.AllCocks();
 		if (vags.length < 1 && !target.HasBalls()) {
 			vags.push(new Vagina());
 			parse["vag"] = vags[0].Short();
@@ -240,9 +240,9 @@ nagazm.PushEffect(function(target : Entity) {
 nagazm.PushEffect(function(target : Entity) {
 	// TODO: Race check like in Lacertium? What race are Naga penises?
 	// TODO: Other prerequisites? No testicles? Hermaphroditism?
-	var cocks = target.AllCocks();
+	let cocks = target.AllCocks();
 	if(cocks.length == 1 && Math.random() < 0.1) {
-		var parse : any = { Poss: target.Possessive(), cockDesc: cocks[0].Short()};
+		let parse : any = { Poss: target.Possessive(), cockDesc: cocks[0].Short()};
 		cocks.push(cocks[0].Clone());
 		Text.Add("[Poss] [cockDesc] splits in two identical dicks!", parse);
 		Text.NL();
@@ -275,7 +275,7 @@ taurico.Long  = function() { return "A bottle filled with a strange, jelly-like 
 taurico.recipe = [{it: IngredientItems.HorseShoe}, {it: IngredientItems.CanisRoot}, {it: IngredientItems.Ramshorn}];
 // Effects
 taurico.PushEffect(function(target : Entity) {
-	var parse : any = {
+	let parse : any = {
 		Poss : target.Possessive(),
 		legsDesc : function() { return target.LegsDesc(); },
 		race : function() { return target.body.legs.race.qShort(); },
@@ -286,7 +286,7 @@ taurico.PushEffect(function(target : Entity) {
 		if(target.body.legs.count <= 4) {
 			target.body.legs.count = 4;
 			
-			var scenes = new EncounterTable();
+			let scenes = new EncounterTable();
 			scenes.AddEnc(function() {
 				target.body.legs.race = Race.Horse;
 			}, 2.0, function() { return true; });
@@ -329,20 +329,20 @@ anusol.Long  = function() { return "A bottle labeled Anusol, filled with an oily
 anusol.recipe = [{it: IngredientItems.SnakeOil}, {it: IngredientItems.SpringWater}, {it: IngredientItems.FruitSeed}];
 // Effects
 anusol.PushEffect(function(target : Entity) {
-	var parse : any = {
+	let parse : any = {
 		botArmor : target.LowerArmorDesc(),
 		Poss : target.Possessive()
 	};
 	parse = target.ParserTags(parse);
 	
-	var cum = target.OrgasmCum();
+	let cum = target.OrgasmCum();
 	
 	if(target == GAME().player) {
 		Text.Add("You raise the bottle to your lips and tip the contents down your throat. The oily green elixir disappears smoothly enough, leaving behind a somewhat greasy aftertaste and a lingering taste of sweetness.", parse);
 		Text.NL();
 		Text.Add("A quivering sensation erupts from your [anus], and you moan despite yourself, feeling your pucker wrinkle and flex as if it were being stretched by some ethereal phallus.", parse);
 		
-		var scenes = new EncounterTable();
+		let scenes = new EncounterTable();
 		scenes.AddEnc(function() {
 			Text.NL();
 			Text.Add("You can feel yourself stretching wider than ever before, and with an ease you previously lacked. You just know that your ass can take bigger insertions now than it could before.", parse);
@@ -378,7 +378,7 @@ anusol.PushEffect(function(target : Entity) {
 		Text.Add("After a few moments of this show, [heshe] cries out, arching [hisher] back as [heshe] visibly climaxes, staining [hisher] [botArmor] and the ground beneath with sexual fluids. Eventually, [heshe] runs dry and shudders to a stop, panting for breath.", parse);
 		Text.NL();
 		
-		var scenes = new EncounterTable();
+		let scenes = new EncounterTable();
 		scenes.AddEnc(function() {
 			Text.Add("[Poss] butt swells out, gaining a bit in size.", parse);
 			target.Butt().buttSize.IncreaseStat(10, 1);
@@ -404,7 +404,7 @@ anusolPlus.Long  = function() { return "A bottle labled Anusol+, filled with a t
 anusolPlus.recipe = [{it: IngredientItems.SnakeOil}, {it: IngredientItems.SpringWater}, {it: AlchemyItems.Gestarium}];
 // Effects
 anusolPlus.PushEffect(function(target : Entity) {
-	var parse : any = {
+	let parse : any = {
 		botArmor : target.LowerArmorDesc(),
 		Poss : target.Possessive()
 	};
@@ -421,11 +421,11 @@ Increase Anal wetness (65%)
 Trigger heat (10%)
 #converge
 	 */
-	var mpreg = target.pregHandler.MPregEnabled();
+	let mpreg = target.pregHandler.MPregEnabled();
 	
 	if(target == GAME().player) {
 		Text.Add("The potion is just as thick and slimy as it looks; it flows down your throat like drinking blue custard, practically thick enough to chew. But you persist and eventually the last drop disappears down your gullet. With a sigh of relief, you wipe your lips, feeling a tingling in your belly.", parse);
-		var scenes = new EncounterTable();
+		let scenes = new EncounterTable();
 		scenes.AddEnc(function() {
 			Text.NL();
 			Text.Add("Prickling erupts in your [anus], and you moan unthinkingly at the sensation. Your anus flexes and clenches uncontrollably, as if stretching to wrap itself around some phantasmal phallus. You can feel yourself stretching wider, and wider, a sensation that isn’t painful as you’d expect. When the prickling fades away, the stretched feeling remains, and you just know you’re more elastic now.", parse);
@@ -448,7 +448,7 @@ Trigger heat (10%)
 		parse = target.ParserPronouns(parse);
 		
 		Text.Add("[name] takes the vial and chugs it down, visibly struggling to swallow the near-gelatinous potion. When [heshe] is done, [heshe] wipes [hisher] mouth with a grimace.", parse);
-		var scenes = new EncounterTable();
+		let scenes = new EncounterTable();
 		scenes.AddEnc(function() {
 			Text.NL();
 			Text.Add("[name] groans suddenly, hands flying back to clap over [hisher] [butt], shaking [hisher] hips and thrusting backwards as if responding to the thrusts of some ethereal lover.", parse);

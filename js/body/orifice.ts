@@ -35,7 +35,7 @@ export class Orifice {
 	static get Tightness() { return TightnessEnum; }
 
 	ToStorage(full? : boolean) {
-		var storage : any = {
+		let storage : any = {
 			cap    : this.capacity.base.toFixed(2),
 			str    : this.stretch.base.toFixed(2),
 			virgin : this.virgin ? 1 : 0
@@ -77,15 +77,15 @@ export class Orifice {
 	}
 
 	StretchOrifice(entity : any, cock : Cock, silent? : boolean) {
-		var parse : any = {
+		let parse : any = {
 			poss : entity.Possessive(),
 			or   : this.holeDesc()
 		};
 		
-		var stretch = this.Tightness();
-		var thk     = cock.Thickness();
-		var cap     = this.Cap();
-		var ratio   = thk / cap;
+		let stretch = this.Tightness();
+		let thk     = cock.Thickness();
+		let cap     = this.Cap();
+		let ratio   = thk / cap;
 		
 		if(ratio < 0.5)
 			this.stretch.IncreaseStat(Orifice.Tightness.flexible, 0.25);
@@ -95,7 +95,7 @@ export class Orifice {
 			this.stretch.IncreaseStat(Orifice.Tightness.gaping, 0.75);
 		
 		if(!silent) {
-			var stretch2 = this.Tightness();
+			let stretch2 = this.Tightness();
 			if(stretch < Orifice.Tightness.flexible && stretch2 >= Orifice.Tightness.flexible) {
 				Text.Add("<b>[poss] [or] has become loose.</b>", parse);
 				Text.NL();

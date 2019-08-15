@@ -147,7 +147,7 @@ export class Player extends Entity {
 	}
 
 	HandleDrunknessOverTime(hours : number, suppressText? : boolean) {
-		var oldLevel = this.drunkLevel;
+		let oldLevel = this.drunkLevel;
 		this.drunkLevel -= this.DrunkRecoveryRate() * hours;
 		if(this.drunkLevel < 0) this.drunkLevel = 0;
 		
@@ -172,7 +172,7 @@ export class Player extends Entity {
 
 	// Return true if passed out
 	Drink(drink : number, suppressText : boolean) {
-		var oldLevel = this.drunkLevel;
+		let oldLevel = this.drunkLevel;
 		this.drunkLevel += drink / Math.log(this.Sta());
 		
 		if(!suppressText) {
@@ -182,8 +182,8 @@ export class Player extends Entity {
 				Text.Add("That last drink was a bit too much for you. You feel your vision narrowing, darkness creeping in from the corners, and desperately try to grab on to something as your consciousness fades.");
 				Text.Flush();
 				
-				var remaining = this.drunkLevel - 0.8;
-				var minutes   = Math.floor(remaining / this.DrunkRecoveryRate() * 60);
+				let remaining = this.drunkLevel - 0.8;
+				let minutes   = Math.floor(remaining / this.DrunkRecoveryRate() * 60);
 				
 				TimeStep({minute: minutes});
 				
@@ -213,7 +213,7 @@ export class Player extends Entity {
 
 		if(oldMilk < 0.5 && newMilk >= 0.5) {
 			Gui.Callstack.unshift(function() {
-				var parse : any = {
+				let parse : any = {
 					breasts : player.FirstBreastRow().Short()
 				};
 				Text.Clear();
@@ -224,7 +224,7 @@ export class Player extends Entity {
 		}
 		if(oldMilk < 0.9 && newMilk >= 0.9) {
 			Gui.Callstack.unshift(function() {
-				var parse : any = {
+				let parse : any = {
 					breasts : function() { return player.FirstBreastRow().Short(); },
 					nips: player.FirstBreastRow().NipsShort()
 				};
@@ -238,7 +238,7 @@ export class Player extends Entity {
 		// Trigger start of lactation
 		if(oldMilk < 1 && newMilk >= 1 && lactationRate != 0) {
 			Gui.Callstack.unshift(function() {
-				var parse : any = {
+				let parse : any = {
 					breasts : function() { return player.FirstBreastRow().Short(); },
 					nips: player.FirstBreastRow().NipsShort()
 				};
@@ -270,7 +270,7 @@ export class Player extends Entity {
 		// Trigger end of lactaction
 		if(oldMilk > 0 && newMilk <= 0) {
 			Gui.Callstack.unshift(function() {
-				var parse : any = {
+				let parse : any = {
 					nips: player.FirstBreastRow().NipsShort()
 				};
 				
@@ -289,7 +289,7 @@ export class Player extends Entity {
 		
 		parse["nips"] = this.FirstBreastRow().NipsShort();
 		parse["breasts"] = this.FirstBreastRow().Short();
-		var rate = this.lactHandler.Rate();
+		let rate = this.lactHandler.Rate();
 		
 		if(this.Lactation()) {
 			parse["toparmor"] = this.ArmorDesc();
@@ -306,7 +306,7 @@ export class Player extends Entity {
 			}
 		}
 		else if(rate > 0) {
-			var level = this.lactHandler.MilkLevel();
+			let level = this.lactHandler.MilkLevel();
 			if(level >= 0.9)
 				Text.Add(" Your [breasts] are fat and full, a distinct sensation of pressure behind your [nips] as they approach their capacity. Distinctly tender from their engorged state, they jiggle slightly with each step you take, a side-effect of holding all that weight.", parse);
 			else if(level >= 0.5)
@@ -318,16 +318,16 @@ export class Player extends Entity {
 		let player = this;
 
 		if(!womb) return;
-		var num = womb.litterSize;
-		var breasts = player.FirstBreastRow().Size() >= 2;
+		let num = womb.litterSize;
+		let breasts = player.FirstBreastRow().Size() >= 2;
 		
-		var parse : any = {};
+		let parse : any = {};
 		parse["belly"] = player.StomachDesc();
 		
 		if(progress > PregnancyLevel.Level1 && oldProgress <= PregnancyLevel.Level1) {
 			Gui.Callstack.unshift(function() {
 				Text.Clear();
-				var scenes = new EncounterTable();
+				let scenes = new EncounterTable();
 				scenes.AddEnc(function() {
 					Text.Add("Ugh, you feel nauseous and a little dizzy.", parse);
 				}, 1.0, function() { return true; });
@@ -367,7 +367,7 @@ export class Player extends Entity {
 		if(progress > PregnancyLevel.Level2 && oldProgress <= PregnancyLevel.Level2) {
 			Gui.Callstack.unshift(function() {
 				Text.Clear();
-				var scenes = new EncounterTable();
+				let scenes = new EncounterTable();
 				scenes.AddEnc(function() {
 					Text.Add("You put your hands on the gentle swell of your pregnancy and feel content.", parse);
 				}, 1.0, function() { return true; });
@@ -419,7 +419,7 @@ export class Player extends Entity {
 			Gui.Callstack.unshift(function() {
 				Text.Clear();
 				
-				var scenes = new EncounterTable();
+				let scenes = new EncounterTable();
 				scenes.AddEnc(function() {
 					Text.Add("You have a sudden urge to cradle your [belly].", parse);
 				}, 1.0, function() { return true; });
@@ -460,7 +460,7 @@ export class Player extends Entity {
 			Gui.Callstack.unshift(function() {
 				Text.Clear();
 				
-				var scenes = new EncounterTable();
+				let scenes = new EncounterTable();
 				scenes.AddEnc(function() {
 					Text.Add("Rubbing your [belly] gently, you’re made distinctly aware of the fact that your pregnancy is approaching its end.", parse);
 				}, 1.0, function() { return true; });
@@ -506,7 +506,7 @@ export class Player extends Entity {
 			Gui.Callstack.unshift(function() {
 				Text.Clear();
 				
-				var scenes = new EncounterTable();
+				let scenes = new EncounterTable();
 				scenes.AddEnc(function() {
 					Text.Add("Out of nowhere, your [belly] squeezes down hard, the motion causing it to visibly contract and sending you huffing for breath. While there aren’t any follow-up contractions, it’s still a sign that you should probably get yourself somewhere safe… ", parse);
 				}, 1.0, function() { return true; });
@@ -551,15 +551,15 @@ export class Player extends Entity {
 		// Use unshift instead of push to make sure pregnancy doesn't interfere with scene progression
 		Gui.Callstack.unshift(function() {
 			womb.pregnant = false;
-			var parse : any = {
+			let parse : any = {
 				
 			};
 			parse = player.ParserTags(parse);
 			
-			var num  = womb.litterSize;
-			var race = womb.race;
-			var egg  = womb.IsEgg();
-			var lact = player.FirstBreastRow().Size() >= 2;
+			let num  = womb.litterSize;
+			let race = womb.race;
+			let egg  = womb.IsEgg();
+			let lact = player.FirstBreastRow().Size() >= 2;
 			
 			parse = Text.ParserPlural(parse, num > 1);
 			
@@ -582,7 +582,7 @@ export class Player extends Entity {
 			Text.Add("All of a sudden, a warm trickle of fluid erupts from your [v] and runs down your [thighs], followed by a sharp pain in your lower belly.", parse);
 			Text.NL();
 			
-			var scenes = new EncounterTable();
+			let scenes = new EncounterTable();
 			scenes.AddEnc(function() {
 				Text.Add("<b>You’ve gone into labor!</b>", parse);
 			}, 1.0, function() { return true; });
@@ -594,8 +594,8 @@ export class Player extends Entity {
 			Text.NL();
 			Text.Add("Even as the first contractions grip your womb and you feel its contents descend ever lower, you hurriedly find a place to settle down and do the deed, clearing a spot for your progeny to safely enter the world.", parse);
 			
-			var partynum = GAME().party.location.switchSpot() ? party.NumTotal() : party.Num();
-			var comp = party.Get(1);
+			let partynum = GAME().party.location.switchSpot() ? party.NumTotal() : party.Num();
+			let comp = party.Get(1);
 			
 			if(partynum == 2 && comp) {
 				parse["comp"] = comp.name;
@@ -608,7 +608,7 @@ export class Player extends Entity {
 			Text.NL();
 			
 			// #Labour block (Birthsize comes into play here)
-			var birthsize = player.body.torso.hipSize.Get() / 4;
+			let birthsize = player.body.torso.hipSize.Get() / 4;
 			birthsize /= womb.Size() || 1;
 			if(player.HasPerk(Perks.Breeder)) birthsize *= 1.5;
 			
@@ -662,7 +662,7 @@ export class Player extends Entity {
 			//#Nursing block - fallback
 			// else if TODO
 			if(!egg && lact) {
-				var milk = player.Milk();
+				let milk = player.Milk();
 				
 				parse["m"] = num > 1 ? " one at a time" : "";
 				parse["ren"] = num > 1 ? "ren" : "";
@@ -700,11 +700,11 @@ export class Player extends Entity {
 	// Party interaction
 	Interact(switchSpot : boolean) {
 		Text.Clear();
-		var player = GAME().player;
+		let player = GAME().player;
 		
 		player.PrintDescription();
 		
-		var options = new Array();
+		let options = new Array();
 		options.push({ nameStr: "Fantasize",
 			func : function() {
 				Text.Clear();

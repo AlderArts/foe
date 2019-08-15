@@ -77,7 +77,7 @@ export class Scorpion extends Entity {
 	}
 
 	DropTable = function() {
-		var drops = [];
+		let drops = [];
 		if(Math.random() < 0.05) drops.push({ it: AlchemyItems.Scorpius });
 		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.Stinger });
 		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.SVenom });
@@ -104,15 +104,15 @@ export class Scorpion extends Entity {
 		Text.NL();
 
 		// Pick a random target
-		var t = this.GetSingleTarget(encounter, activeChar);
+		let t = this.GetSingleTarget(encounter, activeChar);
 
-		var parseVars = {
+		let parseVars = {
 			name   : this.name,
 			hisher : this.hisher(),
 			tName  : t.name
 		};
 
-		var choice = Math.random();
+		let choice = Math.random();
 		if(choice < 0.4)
 			Abilities.Attack.Use(encounter, this, t);
 		else if(choice < 0.7 && Abilities.EnemySkill.Sting.enabledCondition(encounter, this))
@@ -127,9 +127,9 @@ export class Scorpion extends Entity {
 
 // FEMALE ENCOUNTER
 ScorpionScenes.LoneEnc = function() {
-	var enemy    = new Party();
+	let enemy    = new Party();
 	enemy.AddMember(new Scorpion());
-	var enc      = new Encounter(enemy);
+	let enc      = new Encounter(enemy);
 
 	/*
 	enc.canRun = false;

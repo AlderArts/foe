@@ -43,7 +43,7 @@ let PlainsLoc = {
 // Crossroads
 //
 PlainsLoc.Crossroads.description = function() {
-	var parse : any = {
+	let parse : any = {
 		TreeFar : WORLD().TreeFarDesc(),
 		Rigard : GAME().rigard.Visited() ? "Rigard" : "a big city in the distance"
 	};
@@ -140,7 +140,7 @@ PlainsLoc.Crossroads.enc.AddEnc(function() {
 		let party : Party = GAME().party;
 		let kiakai = GAME().kiakai;
 
-		var parse : any = {
+		let parse : any = {
 			playername : player.name,
 			name : kiakai.name
 		};
@@ -154,7 +154,7 @@ PlainsLoc.Crossroads.enc.AddEnc(function() {
 		Text.Flush();
 		
 		//[Coins][Luck]
-		var options = new Array();
+		let options = new Array();
 		options.push({ nameStr : "Coins",
 			func : function() {
 				Text.Clear();
@@ -216,9 +216,9 @@ PlainsLoc.Crossroads.links.push(new Link(
 
 		if(miranda.flags["Met"] != 0 && Math.random() < 0.1) {
 			Text.Clear();
-			var parse : any = {};
+			let parse : any = {};
 			Text.Add("As you make your way, a farmers’ wagon catches up to you from behind. ", parse);
-			var scenes = new EncounterTable();
+			let scenes = new EncounterTable();
 			scenes.AddEnc(function() {
 				Text.Add("The friendly couple offers you a ride in the back, and you get to watch the man groping his companion the whole way, while she returns occasional strokes of his trouser leg. Once in a while, you notice them alternatively smirking and blushing in your direction.", parse);
 			}, 1.0, function() { return true; });
@@ -296,7 +296,7 @@ PlainsLoc.Crossroads.links.push(new Link(
 //
 
 PlainsLoc.Portals.description = function() {
-	var parse : any = {};
+	let parse : any = {};
 	
 	Text.Add("Located near the crossroads at the center of the great plains lies a lone hill, visible for miles around. ", parse);
 	if(GlobalScenes.PortalsOpen())

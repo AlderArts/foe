@@ -48,7 +48,7 @@ export class Footman extends Entity {
 		
 		this.body.SetRace(Race.Human);
 		
-		var col = Math.random();
+		let col = Math.random();
 		if(col < 0.6)
 			this.body.SetBodyColor(Color.white);
 		else if(col < 0.7)
@@ -60,7 +60,7 @@ export class Footman extends Entity {
 		else
 			this.body.SetBodyColor(Color.black);
 		
-		var hairCol = Math.random();
+		let hairCol = Math.random();
 		if(hairCol < 0.4)
 			this.body.SetHairColor(Color.black);
 		else if(hairCol < 0.7)
@@ -79,7 +79,7 @@ export class Footman extends Entity {
 
 	//TODO drops
 	DropTable() {
-		var drops = [];
+		let drops = [];
 		if(Math.random() < 0.05) drops.push({ it: AlchemyItems.Homos });
 		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.Hummus });
 		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.SpringWater });
@@ -104,15 +104,15 @@ export class Footman extends Entity {
 		Text.NL();
 		
 		// Pick a random target
-		var t = this.GetSingleTarget(encounter, activeChar);
+		let t = this.GetSingleTarget(encounter, activeChar);
 
-		var parseVars = {
+		let parseVars = {
 			name   : this.name,
 			hisher : this.hisher(),
 			tName  : t.name
 		};
 
-		var choice = Math.random();
+		let choice = Math.random();
 		if(choice < 0.4 && Abilities.Physical.DAttack.enabledCondition(encounter, this))
 			Abilities.Physical.Attack.CastInternal(encounter, this, t);
 		else if(choice < 0.6 && Abilities.Physical.CrushingStrike.enabledCondition(encounter, this))

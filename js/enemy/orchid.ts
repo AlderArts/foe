@@ -80,7 +80,7 @@ export class OrchidBoss extends BossEntity {
 
 	//TODO
 	DropTable() {
-		var drops = [];
+		let drops = [];
 		drops.push({ it: WeaponsItems.VineWhip });
 		drops.push({ it: ArmorItems.VinePanties });
 		drops.push({ it: ArmorItems.VineBra });
@@ -105,7 +105,7 @@ export class OrchidBoss extends BossEntity {
 	}
 
 	ToStorage() {
-		var storage = {};
+		let storage = {};
 		this.SavePersonalityStats(storage);
 		this.SaveFlags(storage);
 		
@@ -117,7 +117,7 @@ export class OrchidBoss extends BossEntity {
 
 		Text.Add("Orchid squirms and sways her hips.");
 		Text.NL();
-		var scenes = new EncounterTable();
+		let scenes = new EncounterTable();
 		scenes.AddEnc(function() {
 			Text.Add("<i>“Wouldn’t it be easier to just give in?”</i>");
 		}, 1.0, function() { return true; });
@@ -137,10 +137,10 @@ export class OrchidBoss extends BossEntity {
 		Text.Flush();
 		
 		// Pick a random target
-		var t = this.GetSingleTarget(encounter, activeChar);
-		var highlust = null;
-		for(var i = 0; i < party.Num(); i++) {
-			var c = party.Get(i);
+		let t = this.GetSingleTarget(encounter, activeChar);
+		let highlust = null;
+		for(let i = 0; i < party.Num(); i++) {
+			let c = party.Get(i);
 			if(c.Incapacitated()) continue;
 			
 			if(c.LustLevel() >= 0.9) {
@@ -149,7 +149,7 @@ export class OrchidBoss extends BossEntity {
 			}
 		}
 		
-		var choice = Math.random();
+		let choice = Math.random();
 		
 		if(highlust) { // Violate
 			Abilities.EnemySkill.TViolate.Use(encounter, this, highlust);
@@ -163,15 +163,15 @@ export class OrchidBoss extends BossEntity {
 		else if(choice < 0.4 && Abilities.EnemySkill.TRavage.enabledCondition(encounter, this))
 			Abilities.EnemySkill.TRavage.Use(encounter, this, t);
 		else if(choice < 0.6) { // Tease
-			var parse : any = {
+			let parse : any = {
 				
 			};
 			
-			var scenes = new EncounterTable();
+			let scenes = new EncounterTable();
 			scenes.AddEnc(function() {
 				Text.Add("Orchid dances back lithely, quickly escaping your reach. Her tentacles writhe and thresh about, dragging the helpless centauress close to the corrupted dryad.", parse);
 				Text.NL();
-				var scenes = new EncounterTable();
+				let scenes = new EncounterTable();
 				scenes.AddEnc(function() {
 					Text.Add("Seemingly without effort, Orchid hoists the larger deertaur into the air, roughly impaling her every hole with multiple tentacles. The four-footed forest creature moans around the plant-cocks shoved down her throat, her eyes rolling into the back of her head as the tentacles pump her full of corrupted cum, bloating her stomach.", parse);
 				}, 1.0, function() { return true; });
@@ -213,8 +213,8 @@ export class OrchidBoss extends BossEntity {
 			
 			scenes.Get();
 			
-			for(var i = 0; i < party.Num(); i++) {
-				var c = party.Get(i);
+			for(let i = 0; i < party.Num(); i++) {
+				let c = party.Get(i);
 				if(c.Incapacitated()) continue;
 				c.AddLustFraction(0.2);
 			}

@@ -13,7 +13,7 @@ export class Butt extends Orifice {
 	}
 	
 	ToStorage(full? : boolean) {
-		var storage : any = super.ToStorage(full);
+		let storage : any = super.ToStorage(full);
 		if(full) {
 			storage.size = this.buttSize.base.toFixed(2);
 		}
@@ -31,8 +31,8 @@ export class Butt extends Orifice {
 	}
 
 	noun() {
-		var size = this.buttSize.Get();
-		var nouns = new Array();
+		let size = this.buttSize.Get();
+		let nouns = new Array();
 		nouns.push("butt");
 		nouns.push("rear");
 		nouns.push("rump");
@@ -42,8 +42,8 @@ export class Butt extends Orifice {
 		return _.sample(nouns);
 	}
 	adj() {
-		var size = this.buttSize.Get();
-		var adjs = [];
+		let size = this.buttSize.Get();
+		let adjs = [];
 		if(size < 2) {
 			adjs.push("flat");
 			adjs.push("non-existent");
@@ -82,7 +82,7 @@ export class Butt extends Orifice {
 		return _.sample(adjs);
 	}
 	analNoun() {
-		var nouns = [];
+		let nouns = [];
 		nouns.push("pucker");
 		nouns.push("anus");
 		nouns.push("anal opening");
@@ -94,7 +94,7 @@ export class Butt extends Orifice {
 	}
 	AnalDesc() {
 		let ret = null;
-		var area = this.capacity.Get() * this.stretch.Get();
+		let area = this.capacity.Get() * this.stretch.Get();
 		if     (area <= 2 ) ret = {a:"an", adj: "extremely tight"};
 		else if(area <= 3 ) ret = {a:"a", adj: "very tight"};
 		else if(area <= 4 ) ret = {a:"a", adj: "tight"};
@@ -115,13 +115,13 @@ export class Butt extends Orifice {
 		return Text.Parse("a [adj] [noun]", {adj: this.adj(), noun: this.noun()});
 	}
 	AnalShort() {
-		var desc = this.AnalDesc();
-		var v = this.virgin ? " virgin " : " ";
+		let desc = this.AnalDesc();
+		let v = this.virgin ? " virgin " : " ";
 		return desc.adj + v + this.analNoun();
 	}
 	AnalLong() {
-		var desc = this.AnalDesc();
-		var v = this.virgin ? " virgin " : " ";
+		let desc = this.AnalDesc();
+		let v = this.virgin ? " virgin " : " ";
 		return desc.a + " " + desc.adj + v + this.analNoun();
 	}
 

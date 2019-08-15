@@ -71,7 +71,7 @@ export class Uru extends Entity {
 	}
 
 	ToStorage() {
-		var storage = {};
+		let storage = {};
 		
 		this.SavePersonalityStats(storage);
 		

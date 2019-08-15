@@ -52,7 +52,7 @@ export class Imp extends Entity {
 		TF.SetAppendage(this.Back(), AppendageType.tail, Race.Demon, Color.red);
 		TF.SetAppendage(this.Appendages(), AppendageType.horn, Race.Demon, Color.red);
 		
-		var col = Math.random();
+		let col = Math.random();
 		if(col < 0.3)
 			this.body.SetBodyColor(Color.red);
 		else if(col < 0.7)

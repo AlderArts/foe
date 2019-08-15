@@ -29,9 +29,9 @@ function SetExploreButtons() {
 	let player = GAME().player;
 	let party : Party = GAME().party;
 
-	var waitLocation = party.location.wait();
+	let waitLocation = party.location.wait();
 	// At safe locations you can sleep and save
-	var safeLocation = party.location.safe();
+	let safeLocation = party.location.safe();
 
 	Input.exploreButtons[ExploreButtonIndex.Explore].Setup("Explore", Explore, true);
 
@@ -81,8 +81,8 @@ function LimitedDataPrompt(backFunc : any) {
 
 	Input.buttons[6].Setup("Save text", function() {
 		GameToCache();
-		var seen : any[] = [];
-		var data = JSON.stringify(GameCache(),
+		let seen : any[] = [];
+		let data = JSON.stringify(GameCache(),
 			function(key, val) {
 				if (typeof val == "object") {
 					if (seen.indexOf(val) >= 0)
@@ -107,7 +107,7 @@ function DataPrompt() {
 	let party : Party = GAME().party;
 	SetGameState(GameState.Event, Gui);
 	// At safe locations you can sleep and save
-	var safeLocation = party.location.safe();
+	let safeLocation = party.location.safe();
 
 	Gui.ClearButtons();
 
@@ -130,7 +130,7 @@ function DataPrompt() {
 	Input.buttons[4].Setup("Toggle debug", function() {
 		SetDEBUG(!GetDEBUG());
 		if(GetDEBUG()) Gui.debug.show(); else Gui.debug.hide();
-		for(var i = 0; i < party.members.length; i++) {
+		for(let i = 0; i < party.members.length; i++) {
 			party.members[i].DebugMode(GetDEBUG());
 		}
 	}, true);
@@ -139,8 +139,8 @@ function DataPrompt() {
 
 	Input.buttons[6].Setup("Save text", function() {
 		GameToCache();
-		var seen : any[] = [];
-		var data = JSON.stringify(GameCache(),
+		let seen : any[] = [];
+		let data = JSON.stringify(GameCache(),
 			function(key, val) {
 				if (typeof val == "object") {
 					if (seen.indexOf(val) >= 0)
@@ -224,7 +224,7 @@ let Fight = function(preventClear : boolean) {
 		return;
 	}
 
-	var enc = party.location.enc.Get();
+	let enc = party.location.enc.Get();
 
 	if(enc) {
 		if(enc.Start)

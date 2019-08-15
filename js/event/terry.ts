@@ -159,7 +159,7 @@ export class Terry extends Entity {
 	}
 	
 	ToStorage() {
-		var storage : any = {};
+		let storage : any = {};
 		this.SaveBodyPartial(storage, {ass: true, vag: true, balls: true});
 		this.SaveLactation(storage);
 		this.SavePregnancy(storage);
@@ -212,7 +212,7 @@ export class Terry extends Entity {
 		return this.flags["lact"] != 0;
 	}
 	SetPussy() {
-		var vag = this.flags["vag"];
+		let vag = this.flags["vag"];
 		if(vag == TerryFlags.Pussy.None) {
 			if(this.FirstVag())
 				this.body.vagina = [];
@@ -256,42 +256,42 @@ export class Terry extends Entity {
 	}
 	
 	heshe() {
-		var gender = this.flags["PrefGender"];
+		let gender = this.flags["PrefGender"];
 		if(gender == Gender.male) return "he";
 		else return "she";
 	}
 	HeShe() {
-		var gender = this.flags["PrefGender"];
+		let gender = this.flags["PrefGender"];
 		if(gender == Gender.male) return "He";
 		else return "She";
 	}
 	himher() {
-		var gender = this.flags["PrefGender"];
+		let gender = this.flags["PrefGender"];
 		if(gender == Gender.male) return "him";
 		else return "her";
 	}
 	HimHer() {
-		var gender = this.flags["PrefGender"];
+		let gender = this.flags["PrefGender"];
 		if(gender == Gender.male) return "Him";
 		else return "Her";
 	}
 	hisher() {
-		var gender = this.flags["PrefGender"];
+		let gender = this.flags["PrefGender"];
 		if(gender == Gender.male) return "his";
 		else return "her";
 	}
 	HisHer() {
-		var gender = this.flags["PrefGender"];
+		let gender = this.flags["PrefGender"];
 		if(gender == Gender.male) return "His";
 		else return "Her";
 	}
 	hishers() {
-		var gender = this.flags["PrefGender"];
+		let gender = this.flags["PrefGender"];
 		if(gender == Gender.male) return "his";
 		else return "hers";
 	}
 	mfPronoun(male : any, female : any) {
-		var gender = this.flags["PrefGender"];
+		let gender = this.flags["PrefGender"];
 		if(gender == Gender.male) return male;
 		else return female;
 	}
@@ -316,7 +316,7 @@ export class Terry extends Entity {
 	Interact(switchSpot : boolean) {
 		let terry = GAME().terry;
 	
-		var parse : any = {
+		let parse : any = {
 			foxvixen : terry.mfPronoun("fox", "vixen"),
 			HeShe   : terry.HeShe(),
 			heshe   : terry.heshe(),
@@ -358,9 +358,9 @@ export class Terry extends Entity {
 		Text.NL();
 		
 		// Pick a random target
-		var t = this.GetSingleTarget(encounter, activeChar);
+		let t = this.GetSingleTarget(encounter, activeChar);
 		
-		var first = this.turnCounter == 0;
+		let first = this.turnCounter == 0;
 		this.turnCounter++;
 		
 		if(first) {
@@ -368,7 +368,7 @@ export class Terry extends Entity {
 			return;
 		}
 		
-		var choice = Math.random();
+		let choice = Math.random();
 		
 		if(this.turnCounter > 4 && this.sbombs > 0)
 			CombatItems.SmokeBomb.combat.Use(encounter, this);
@@ -398,7 +398,7 @@ export class Terry extends Entity {
 		let terry = GAME().terry;
 
 		if(item.isTF) {
-			var parse : any = {
+			let parse : any = {
 				item : item.sDesc(),
 				aItem : item.lDesc(),
 				foxvixen : terry.mfPronoun("fox", "vixen")

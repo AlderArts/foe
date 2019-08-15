@@ -26,7 +26,7 @@ export namespace Alchemy {
 		
 		let list : any[] = [];
 
-		var Brew = function(brewable : any) {
+		let Brew = function(brewable : any) {
 			if (alchemist == GAME().player) {
 				ItemDetails(brewable, inventory);
 			} else {
@@ -35,18 +35,18 @@ export namespace Alchemy {
 		}
 
 		alchemist.recipes.forEach(function(item) {
-			var knownRecipe = false;
+			let knownRecipe = false;
 
-			var brewable = CountBrewable(item, inventory, alchemist);
-			var shallowQty = brewable.steps[0].qty;
-			var deepExtra = brewable.qty - shallowQty;
-			var enabled  = !(!brewable.qty);
+			let brewable = CountBrewable(item, inventory, alchemist);
+			let shallowQty = brewable.steps[0].qty;
+			let deepExtra = brewable.qty - shallowQty;
+			let enabled  = !(!brewable.qty);
 
-			var str = Text.Bold(item.name);
+			let str = Text.Bold(item.name);
 			str += " ("+ shallowQty + ((deepExtra) ? " + " + deepExtra : "") +")"  + ": ";
 			item.recipe.forEach(function(component, idx) {
-				var available = inventory.QueryNum(component.it) || 0;
-				var enough = (available >= (component.num || 1));
+				let available = inventory.QueryNum(component.it) || 0;
+				let enough = (available >= (component.num || 1));
 				if(idx > 0) str += ", ";
 				if(!enough) str += "<b>";
 				str += (component.num || 1) + "/" + available + "x " + component.it.name;
@@ -102,12 +102,12 @@ function MakeItem(it : Item, qty : number, alchemist : Entity, inventory : Inven
 };
 
 function ItemDetails(brewable : any, inventory : Inventory) {
-	var batchFormats = [1, 5, 10, 25];
-	var list = [];
-	var BrewBatch = brewable.brewFn;
-	var inInventory = inventory.QueryNum(brewable.it);
+	let batchFormats = [1, 5, 10, 25];
+	let list = [];
+	let BrewBatch = brewable.brewFn;
+	let inInventory = inventory.QueryNum(brewable.it);
 
-	var parser = {
+	let parser = {
 		item: brewable.it.name,
 		maxQty: brewable.qty,
 		upTo: (brewable.qty > 1) ? "up to" : "",
@@ -122,10 +122,10 @@ function ItemDetails(brewable : any, inventory : Inventory) {
 	if (inInventory) Text.Add("You are already carrying [inInv].", parser);
 	Text.NL();
 
-	for(var i = 0; i < batchFormats.length; i++) {
-		var format = batchFormats[i];
-		var enabled = format <= brewable.qty;
-		var btnTxt = "x" + format;
+	for(let i = 0; i < batchFormats.length; i++) {
+		let format = batchFormats[i];
+		let enabled = format <= brewable.qty;
+		let btnTxt = "x" + format;
 		list.push({
 			nameStr: btnTxt,
 			enabled: enabled,
@@ -146,8 +146,8 @@ function ItemDetails(brewable : any, inventory : Inventory) {
 }
 
 function GetRecipeDict(it : Item) {
-	var recipe = it.recipe;
-	var recipeDict : any = {};
+	let recipe = it.recipe;
+	let recipeDict : any = {};
 
 	// There's always the possibility of some items being required more than once
 	recipe.forEach(function(ingredient) {
@@ -159,12 +159,12 @@ function GetRecipeDict(it : Item) {
 }
 
 function CountBrewable(it : Item, inventory : Inventory, alchemist : Entity) {
-	var recipeDict = GetRecipeDict(it);
-	var invDict = _.chain(inventory.ToStorage()).keyBy('it').mapValues('num').value();
-	var productionSteps : any[] = []; // [{qty: 5, recipe: [...]}]
+	let recipeDict = GetRecipeDict(it);
+	let invDict = _.chain(inventory.ToStorage()).keyBy('it').mapValues('num').value();
+	let productionSteps : any[] = []; // [{qty: 5, recipe: [...]}]
 
 	while(!_.isEmpty(recipeDict)) {
-		var limitingQuota = Infinity;
+		let limitingQuota = Infinity;
 
 		_.keys(recipeDict).forEach(function(ingredient) {
 			// Might cause divisions by zero otherwise.
@@ -172,13 +172,13 @@ function CountBrewable(it : Item, inventory : Inventory, alchemist : Entity) {
 		});
 
 		_.keys(recipeDict).forEach(function(ingredient) {
-			var available = invDict[ingredient];
+			let available = invDict[ingredient];
 			// FIXME : Unavailable items may be listed as "NaN" when building the dict, workaround
 			if (!_.isFinite(available)) {
 				available = 0;
 				invDict[ingredient] = 0;
 			}
-			var quota = Math.floor(available/recipeDict[ingredient]);
+			let quota = Math.floor(available/recipeDict[ingredient]);
 
 			if(quota < limitingQuota) limitingQuota = quota;
 		});
@@ -203,9 +203,9 @@ function CountBrewable(it : Item, inventory : Inventory, alchemist : Entity) {
 		}, 0),
 		steps: productionSteps,
 		brewFn: function(batchSize : number, backPrompt : any, callback : any, mockRemove : boolean) {
-			var amountProduced = 0;
+			let amountProduced = 0;
 			productionSteps.some(function(step) {
-				var qty = Math.min(batchSize - amountProduced, step.qty);
+				let qty = Math.min(batchSize - amountProduced, step.qty);
 				if(!mockRemove) {
 					_.keys(step.recipe).forEach(function(componentId) {
 						inventory.RemoveItem(ItemIds[componentId], step.recipe[componentId] * qty);
@@ -222,23 +222,23 @@ function CountBrewable(it : Item, inventory : Inventory, alchemist : Entity) {
 }
 
 function AdaptRecipe(recipeDict : any, invDict : any, alchemist : Entity) : any {
-	var origRecipeDict = recipeDict;
+	let origRecipeDict = recipeDict;
 	recipeDict = _.assign({}, recipeDict);
 
-	var keys = _.keys(recipeDict);
-	for(var i = 0; i < keys.length; i++) {
-		var ingredient = keys[i];
+	let keys = _.keys(recipeDict);
+	for(let i = 0; i < keys.length; i++) {
+		let ingredient = keys[i];
 		if(recipeDict[ingredient] == 0) continue;
 
-		var ingredientObj = ItemIds[ingredient];
+		let ingredientObj = ItemIds[ingredient];
 
 		if(invDict[ingredient] >= recipeDict[ingredient]) {
 			// All is well, do nothing
 		} else if (_.includes(alchemist.recipes, ingredientObj)) {
-			var ingredientRecipe = GetRecipeDict(ingredientObj);
+			let ingredientRecipe = GetRecipeDict(ingredientObj);
 
 			// Set the amount for that ingredient to however many we have left
-			var missingAmount = recipeDict[ingredient] - invDict[ingredient];
+			let missingAmount = recipeDict[ingredient] - invDict[ingredient];
 			recipeDict[ingredient] = invDict[ingredient]; // Most likely 0
 
 			_.keys(ingredientRecipe).forEach(function(ingredientComponent) {
@@ -259,6 +259,6 @@ function AdaptRecipe(recipeDict : any, invDict : any, alchemist : Entity) : any 
 	// unchanged or not at all
 	if (_.isEqual(recipeDict, origRecipeDict)) return recipeDict;
 
-	var checkedRecipe = AdaptRecipe(recipeDict, invDict, alchemist);
+	let checkedRecipe = AdaptRecipe(recipeDict, invDict, alchemist);
 	return checkedRecipe;
 }

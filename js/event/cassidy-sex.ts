@@ -17,12 +17,12 @@ SexScenes.Indoors = function() {
 	let player = GAME().player;
 	let cassidy = GAME().cassidy;
 
-	var parse : any = {
+	let parse : any = {
 		armor : function() { return player.ArmorDesc(); }
 	};
 	
 	
-	var first = !(cassidy.flags["Talk"] & CassidyFlags.Talk.SexIndoor);
+	let first = !(cassidy.flags["Talk"] & CassidyFlags.Talk.SexIndoor);
 	cassidy.flags["Talk"] |= CassidyFlags.Talk.SexIndoor;
 	
 	Text.Clear();
@@ -74,16 +74,16 @@ SexScenes.IndoorPrompt = function(opts? : any) {
 	let player = GAME().player;
 	let cassidy = GAME().cassidy;
 
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	
 	opts = opts || {};
 	
-	var cocksInVag = player.CocksThatFit(cassidy.FirstVag());
-	var cocksInAss = player.CocksThatFit(cassidy.Butt());
+	let cocksInVag = player.CocksThatFit(cassidy.FirstVag());
+	let cocksInAss = player.CocksThatFit(cassidy.Butt());
 	
-	var options = [];
+	let options = [];
 	options.push({nameStr : "Savor",
 		tooltip : Text.Parse("No need to rush things. You’ll look her over first.", parse),
 		enabled : !opts.savor,
@@ -125,11 +125,11 @@ SexScenes.Savor = function(opts : any) {
 	let cassidy = GAME().cassidy;
 	opts.savor = true;
 	
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	
-	var fem = cassidy.Feminized();
+	let fem = cassidy.Feminized();
 	
 	Text.Clear();
 	Text.Add("<i>“You wanna look around, ace? Go right ahead! Like I told you before, I’ve got nothing to hide.”</i> Smirking at you, Cassidy lounges out on the bed before you like the lizard she is, instinctively pushing herself forth to accentuate her little display.", parse);
@@ -182,7 +182,7 @@ SexScenes.Savor = function(opts : any) {
 SexScenes.Tail = function() {
 	let player = GAME().player;
 
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	parse = player.ParserTags(parse);
@@ -204,7 +204,7 @@ SexScenes.Tail = function() {
 		Text.Add("Yeah… that’s a reasonable question; after all, you didn’t specify which hole you wanted it in when you got started. So… where exactly <i>do</i> you want it, anyway?", parse);
 		Text.Flush();
 		
-		var options = [];
+		let options = [];
 		options.push({nameStr : "Fuck",
 			tooltip : Text.Parse("In your cunt!", parse),
 			enabled : true,
@@ -264,7 +264,7 @@ SexScenes.Tail = function() {
 SexScenes.Tailfuck = function() {
 	let player = GAME().player;
 	let cassidy = GAME().cassidy;
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	parse = player.ParserTags(parse);
@@ -286,7 +286,7 @@ SexScenes.Tailfuck = function() {
 		Text.Add(", and you shudder and tremble as a second surge of pleasure washes through your body, finally cumulating in blessed release as your [cocks] spew[notS] wad after wad of sperm in burning ecstasy", parse);
 	Text.Add(".", parse);
 	
-	var cum = player.OrgasmCum();
+	let cum = player.OrgasmCum();
 	
 	Text.NL();
 	Text.Add("With a final groan and shudder, you’re unable to keep yourself upright anymore and collapse readily onto your own mess of love-juices, a soft squelch rising from the bed as the aftershocks die out and leave you wriggling and gasping for breath.", parse);
@@ -305,7 +305,7 @@ SexScenes.Tailfuck = function() {
 SexScenes.Tailpeg = function() {
 	let player = GAME().player;
 	let cassidy = GAME().cassidy;
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	parse = player.ParserTags(parse);
@@ -343,7 +343,7 @@ SexScenes.Tailpeg = function() {
 	Text.Add("Faster and faster she goes, and you can feel the pricking of Cassidy’s claws starting to sink ever so slightly into your flesh as she ramps up in ferocity, threatening to tear apart your tender insides with the brutal fucking she’s giving you. Despite her lack of bulk, all the energy she usually expends in hammering metal has been redirected into hammering your ass instead; reduced to a helpless, whimpering mass, you’re pretty much putty in Cass’ hands.", parse);
 	Text.NL();
 	
-	var cum = player.OrgasmCum();
+	let cum = player.OrgasmCum();
 	
 	Text.Add("At last, you can’t take any more. Even if you had the strength to hold back your climax, you don’t think you would have wanted to, and it wells up in you like a dam about to burst. Somehow sensing this, Cassidy tightens her hold on you and rams as much of her tail into you as far as it’ll go - that’s far more than enough to send you over the edge, and you yowl with what little breath’s still in your body as love-juices gush out of you like an open faucet.", parse);
 	if(player.FirstCock()) {
@@ -375,10 +375,10 @@ SexScenes.FuckHer = function(cocksInVag : Cock[]) {
 	let player = GAME().player;
 	let cassidy = GAME().cassidy;
 
-	var p1cock = player.BiggestCock(cocksInVag);
-	var realcock = !p1cock.isStrapon;
+	let p1cock = player.BiggestCock(cocksInVag);
+	let realcock = !p1cock.isStrapon;
 	
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	parse = player.ParserTags(parse, "", p1cock);
@@ -443,7 +443,7 @@ SexScenes.FuckHer = function(cocksInVag : Cock[]) {
 	Text.Add("Oh, she liked that, then? Even with her on top, you’ll be sure to give as good as you get! Feeling about her hips for what purchase you can get, you squeeze and push her back down onto your shaft with all your might, soundly impaling her all the way again. She tries to escape again, only to have you pull her back down; this goes on a few times even as both of your movements grow increasingly frenzied. Trusting you to keep ahold of her, Cass lets go of your shoulders and begins to knead her small breasts like a two-coin whore, shamelessly and clumsily groping her own boobflesh and nipples even as you fuck her silly. It’s true that she lacks technique, but she more than makes up for it with enthusiasm.", parse);
 	Text.NL();
 	
-	var cum = player.OrgasmCum();
+	let cum = player.OrgasmCum();
 	
 	if(realcock) {
 		Text.Add("Finally, you can’t take it much longer. A lewd groan escapes your lips involuntarily, and you tighten your grip on Cassidy’s waist and hips as you pull her close and hilt yourself into her", parse);
@@ -474,13 +474,13 @@ SexScenes.Pet = function() {
 	let player = GAME().player;
 	let cassidy = GAME().cassidy;
 
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	
-	var fem = cassidy.Feminized();
+	let fem = cassidy.Feminized();
 	
 	Text.Clear();
 	Text.Add("Hmm. How would she like a full-body massage? It’s been a long day, and surely standing at the forge for so long means she’s sore all over.", parse);
@@ -505,7 +505,7 @@ SexScenes.Pet = function() {
 	Text.Flush();
 	
 	//[Breasts][Cunt][Tail]
-	var options = [];
+	let options = [];
 	options.push({nameStr : "Breasts",
 		tooltip : Text.Parse("They’re not small, they’re fun-sized!", parse),
 		enabled : true,
@@ -605,7 +605,7 @@ SexScenes.Pet = function() {
 		Text.Add("Another tug of her strong tail, and she has you on your back and is on you, pinning you to the mattress - or would be if she were heavy enough for it. Once she’s certain she’s got you subdued and prone on the sheets belly-up, she secures your shoulders with her hands and your [thigh] with her feet, then uncoils her appendage from around you. You just go along with the game, feigning helplessness at your predicament, then almost double-take as Cassidy gives you an evil grin and gets down to work.", parse);
 		Text.NL();
 		
-		var scenes = new EncounterTable();
+		let scenes = new EncounterTable();
 		scenes.AddEnc(function() {
 			Text.Add("Still keeping you pinned down as best as she can, Cass slithers her tail under and between her spread legs, and lets it work its way towards you. You can’t see where it’s going, but you can definitely <i>feel</i> it as the salamander’s tail-tip worms its way toward your crotch like some tentacle, leaving a trail of heat in its wake. It pauses a moment to ", parse);
 			if(player.NumCocks() > 1)
@@ -629,7 +629,7 @@ SexScenes.Pet = function() {
 			Text.Add(" until you feel a terrible, mounting surge of warmth build up in [itsTheir] base. Sensing your imminent release, Cass tightens her grip along your shaft[s], grinning cheerily at you as she tries to deny you your much-needed release.", parse);
 			Text.NL();
 			
-			var cum = player.OrgasmCum();
+			let cum = player.OrgasmCum();
 			
 			if(cum >= 4) {
 				Text.Add("Try as she might, though, the sheer amount of sperm you’ve got stored in you is simply too much to be contained. The constriction Cassidy’s tail is applying to your [cocks] only serves to ensure that your cum blasts forth in a pressurized jet, blasting against and painting her entire underside before raining down on you in a lewd drizzle. Cass just squeals and laughs as more and more jizz stains the sheets, lasting for a good while before her slick appendage manages to shut off the flow.", parse);
@@ -750,10 +750,10 @@ SexScenes.Anal = function(cocksInAss : Cock[]) {
 	let player = GAME().player;
 	let cassidy = GAME().cassidy;
 
-	var p1cock = player.BiggestCock(cocksInAss);
-	var realcock = !p1cock.isStrapon;
+	let p1cock = player.BiggestCock(cocksInAss);
+	let realcock = !p1cock.isStrapon;
 	
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	parse = player.ParserTags(parse, "", p1cock);
@@ -762,7 +762,7 @@ SexScenes.Anal = function(cocksInAss : Cock[]) {
 	if(!realcock)
 		parse["toy"] = player.Strapon().sDesc();
 	
-	var fem = cassidy.Feminized();
+	let fem = cassidy.Feminized();
 	
 	Text.Clear();
 	Text.Add("Ah… while you feel like blowing off some steam, you also don’t feel like doing it in the most orthodox of fashions. Maybe somewhere in-between… An idea hits you, and you tell Cass to get onto all fours on the mattress.", parse);
@@ -789,7 +789,7 @@ SexScenes.Anal = function(cocksInAss : Cock[]) {
 	Text.Add(", then drop down on the mattress and get your shaft lined up with Cass’ back door. Your [cockTip] brushes against it a few times, testing the waters as it were, and you see the salamander’s sphincter tighten in response to the stimulation.", parse);
 	Text.NL();
 	
-	var mage = Jobs["Mage"].Unlocked(player);
+	let mage = Jobs["Mage"].Unlocked(player);
 	
 	if(mage) {
 		Text.Add("Well, guess that means she’s volunteered to come up and participate in your magic show.", parse);
@@ -853,7 +853,7 @@ SexScenes.Anal = function(cocksInAss : Cock[]) {
 	Text.Add("and let things cool off a bit. Cass tries to say something, but is pretty much too breathless at the moment to do so and eventually just gives up. Moments tick by, and at last you’ve softened enough to extract yourself from her without <i>too</i> much trouble, which you do.", parse);
 	Text.NL();
 	
-	var cum = player.OrgasmCum();
+	let cum = player.OrgasmCum();
 	
 	Text.Add("<i>“Right,”</i> Cass groans, flopping onto her belly. <i>“Thanks, champ.”</i>", parse);
 	Text.NL();
@@ -874,7 +874,7 @@ SexScenes.Outro = function() {
 	let cassidy = GAME().cassidy;
 	let world = WORLD();
 
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	
@@ -905,13 +905,13 @@ SparSexScenes.Win = function() {
 	let cassidy = GAME().cassidy;
 	let world = WORLD();
 
-	var enc  = this;
+	let enc  = this;
 	enc.Cleanup();
 	SetGameState(GameState.Event, Gui);
 	
 	party.LoadActiveParty();
 	
-	var parse : any = {
+	let parse : any = {
 		playername : player.name
 	};
 	parse = player.ParserTags(parse);
@@ -941,7 +941,7 @@ SparSexScenes.Win = function() {
 		Text.Add("Even if she doesn’t want to admit it, she really does get off on violence, doesn’t she? If she’s willing and you are too, what’s to stop you from taking things a little further? That is, of course, assuming that you’re willing… are you?", parse);
 		Text.Flush();
 
-		var options = [];
+		let options = [];
 		options.push({nameStr : "Yes",
 			tooltip : Text.Parse("Why not? Your blood’s still up from all that fighting.", parse),
 			enabled : true,
@@ -952,7 +952,7 @@ SparSexScenes.Win = function() {
 				Text.Add("Eventually, though, the two of you have to break for air, and you do so with a soft groan. By now, Cass seems <i>really</i> hot under the collar - you don’t think she’d mind if you just took her right here and now, although with both your blood heated and pounding, the result would probably be quite rough, if nothing else. Alternatively, if you’ve the self restraint, you could lead or carry her into a more private setting…", parse);
 				Text.Flush();
 
-				var options = [];
+				let options = [];
 				//[Outside][Inside]
 				options.push({nameStr : "Outside",
 					tooltip : Text.Parse("Strike while the iron is hot! Take Cass here, right in the back yard.", parse),
@@ -1046,12 +1046,12 @@ SparSexScenes.Win = function() {
 SparSexScenes.WinPrompt = function() {
 	let player = GAME().player;
 
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	
 	//[All fours][Get blown][Get licked][Spank]
-	var options = [];
+	let options = [];
 	if(player.FirstCock()) {
 		options.push({nameStr : "All fours",
 			tooltip : Text.Parse("Take Cassidy doggy-style in the back yard.", parse),
@@ -1083,16 +1083,16 @@ SparSexScenes.AllFours = function() {
 	let player = GAME().player;
 	let cassidy = GAME().cassidy;
 
-	var p1cock = player.BiggestCock();
+	let p1cock = player.BiggestCock();
 	
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	parse = player.ParserTags(parse, "", p1cock);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
 	
-	var fem = cassidy.Feminized();
+	let fem = cassidy.Feminized();
 	
 	Text.Clear();
 	Text.Add("Trying not to grin too much - after all, Cass has more than enough good humor for the both of you - you instruct the salamander to get on all fours. Clearly enthusiastic at any proposition which has her getting closer to your groin, she obeys happily, though not without putting up a bit of token resistance.", parse);
@@ -1124,7 +1124,7 @@ SparSexScenes.AllFours = function() {
 	Text.Flush();
 	
 	//[Vag][Ass][DP]
-	var options = [];
+	let options = [];
 	options.push({nameStr : "Vag",
 		tooltip : Text.Parse("Stick it to her the tried and true way.", parse),
 		enabled : true,
@@ -1173,7 +1173,7 @@ SparSexScenes.AllFours = function() {
 			Text.Add("<i>“Ah! AH! DAMN IT!”</i> Cassidy screams, the coils of her tail squeezing you tightly as your release becomes imminent, boiling and bubbling in your loins with the most queer sensation - probably one instigated by the salamander’s close presence. Her claws scrabble at the earth, throwing up clods of dirt; her hips buck against you as you release a vicious load of baby batter just as hot and sticky as her depths into her. With a loud woosh, Cassidy’s scaly tail erupts into life; although none of the flames actually hurt you, it’s still unnerving.", parse);
 			Text.NL();
 			
-			var cum = player.OrgasmCum();
+			let cum = player.OrgasmCum();
 			
 			parse["b"] = player.HasBalls() ? "r balls gradually empty of their load" : " finally run out";
 			
@@ -1232,7 +1232,7 @@ SparSexScenes.AllFours = function() {
 				Text.Add(" Not to be left out, your other dick[s2] blast[notS2] considerable portions of your load all over her pert, lovable ass, leaving it all warm and sticky.", parse);
 			Text.NL();
 			
-			var cum = player.OrgasmCum();
+			let cum = player.OrgasmCum();
 			
 			Text.Add("Having her burning insides filled with warm, gooey cream is just too much for poor Cass. Unable to keep up the strength required to continue tailfucking herself, the salamander’s cum-slick tail falls out of her cunt as she makes desperate little noises in the back of her throat, fighting not to scream out loud as the shock of orgasm ravages her body. Glob upon glob of spunk sinks deep into her, backing up and oozing out from about your shaft - both your minds are pretty much black with pleasure, the two of you reduced to rutting animals from the burning heat of your copulation.", parse);
 			Text.NL();
@@ -1289,7 +1289,7 @@ SparSexScenes.AllFours = function() {
 				Text.Add("That’s right, no need to bottle it up. Just let it out… let it all out - and that includes her girl-cum, too, blasting out from around the girth stuck in her pussy and dripping onto the grass. Both her inner walls and sphincter clamp down hard on your cocks, which in turn sets you off. You howl as you pump away with wanton abandon - no matter how much seed you might actually have, it still <i>feels</i> like a whole ton thanks to how tight she is and how your sperm is actually spurting out from around your shafts, mixing in with the nectar from her honeypot as the two of you ride out the aftermath of your heated, explosive lovemaking.", parse);
 				Text.NL();
 				
-				var cum = player.OrgasmCum();
+				let cum = player.OrgasmCum();
 				
 				Text.Add("<i>“Shit,”</i> Cass moans weakly. <i>“Hope the neighbors don’t complain tomorrow, heh, but damn, it was worth it.”</i>", parse);
 				Text.NL();
@@ -1311,16 +1311,16 @@ SparSexScenes.GetBlown = function() {
 	let player = GAME().player;
 	let cassidy = GAME().cassidy;
 
-	var p1cock = player.BiggestCock();
+	let p1cock = player.BiggestCock();
 	
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	parse = player.ParserTags(parse, "", p1cock);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
 	
-	var fem = cassidy.Feminized();
+	let fem = cassidy.Feminized();
 	
 	Text.Clear();
 	Text.Add("<i>“Heh,”</i> Cassidy says, dropping to her knees on the soft grass and resting her head against your hips. A noise not too unlike a low, gentle hiss sounds in the back of her throat as she rubs a cheek against you. <i>“Guessed you’d ask for that sooner or later.”</i>", parse);
@@ -1360,7 +1360,7 @@ SparSexScenes.GetBlown = function() {
 	Text.Add("Speaking of her tail, it hasn’t been idle, either. Since Cass needs her hands to steady herself against you, it’s up to the prehensile appendage to pick up the slack - it slithers over to her needy, untouched cunt and begins to gleefully tailfuck herself with practiced motions. Heh, guess she’s no stranger to <i>that</i>, then. With the speed at which she’s pleasuring herself, Cass can’t help but follow up in front, and soon you’re being treated to a veritable symphony of sensations.", parse);
 	Text.NL();
 	
-	var cum = player.OrgasmCum();
+	let cum = player.OrgasmCum();
 	
 	Text.Add("Subjected to such pleasure, you can contain yourself no longer despite your best efforts. A mighty tremble runs down the length of your body and leaves you feeling weak as you throw your head back and let loose mighty ", parse);
 	if(cum > 6)
@@ -1390,14 +1390,14 @@ SparSexScenes.GetLicked = function() {
 	let player = GAME().player;
 	let cassidy = GAME().cassidy;
 
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
 	
-	var fem = cassidy.Feminized();
+	let fem = cassidy.Feminized();
 	
 	Text.Clear();
 	Text.Add("Placing a hand on Cassidy’s shoulder, you apply gentle pressure downwards. The salamander quickly realizes what you want of her, and gets down on her knees. ", parse);
@@ -1438,7 +1438,7 @@ SparSexScenes.GetLicked = function() {
 	Text.Add("Unsurprisingly, the spirit is willing but the flesh is weak; you can’t take very much of this before your body gives way to the furious, pounding urges directed at it and writhes in orgasm at Cassidy’s energetic licking. Throwing your head back, you grit your teeth and jackhammer your cunt into the salamander’s face over and over again, loud squelching noises rising from your messy finish even as strands of feminine nectar ooze down to the ground, joining the two of you.", parse);
 	Text.NL();
 	
-	var cum = player.OrgasmCum();
+	let cum = player.OrgasmCum();
 	
 	if(player.FirstCock()) {
 		Text.Add("Not to be left out, your [cocks] pour[notS] out [itsTheir] unrequited love in the form of ", parse);
@@ -1469,14 +1469,14 @@ SparSexScenes.Spank = function() {
 	let player = GAME().player;
 	let cassidy = GAME().cassidy;
 
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
 	
-	var fem = cassidy.Feminized();
+	let fem = cassidy.Feminized();
 	
 	Text.Clear();
 	Text.Add("Right. Since the poor sally-mander gets off on violence, you might as well give her a treat. A bit one-sided, perhaps, but there’s more to this than getting off yourself. A small woodpile in the corner of the yard beckons - Cass must use it for feeding fireplace and stove alike - and you have to practically drag her over to it before finding a seat and bending her over your knee in the traditional fashion. Cass complies happily, her tail swaying from side to side as she assumes the proper position for such… ah… matters.", parse);
@@ -1532,7 +1532,7 @@ SparSexScenes.Outro = function() {
 	let cassidy = GAME().cassidy;
 	let world = WORLD();
 
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	
@@ -1562,18 +1562,18 @@ SparSexScenes.Loss = function() {
 	let cassidy = GAME().cassidy;
 	let world = WORLD();
 
-	var enc  = this;
+	let enc  = this;
 	enc.Cleanup();
 	SetGameState(GameState.Event, Gui);
 	
 	party.LoadActiveParty();
 	
-	var parse : any = {
+	let parse : any = {
 		playername : player.name
 	};
 	parse = player.ParserTags(parse);
 	
-	var fem = cassidy.Feminized();
+	let fem = cassidy.Feminized();
 	
 	Text.Clear();
 	
@@ -1615,7 +1615,7 @@ SparSexScenes.Loss = function() {
 		Text.NL();
 		Text.Add("<i>“Fuck.”</i> Still straddling you, Cass fumbles with her belt and pulls it off, then rises ever so slightly to get rid of her shorts and panties, her movements growing ever so more erratic and desperate. <i>“C’mon, champ. You can’t just collapse in the heat of the moment and leave a girl hanging like that, all empty and unfulfilled. I know you’re capable of more than that.”</i>", parse);
 		Text.NL();
-		var armor = "";
+		let armor = "";
 		if(player.Armor() || !player.LowerArmor()) armor += "[armor]";
 		if(player.Armor() && player.LowerArmor()) armor += " and ";
 		if(player.LowerArmor()) armor += "[botarmor]";
@@ -1630,7 +1630,7 @@ SparSexScenes.Loss = function() {
 		Text.Flush();
 
 		Gui.NextPrompt(function() {
-			var scenes = new EncounterTable();
+			let scenes = new EncounterTable();
 			scenes.AddEnc(function() {
 				SparSexScenes.DomRide();
 			}, 1.0, function() { return player.FirstCock(); });
@@ -1671,9 +1671,9 @@ SparSexScenes.DomRide = function() {
 	let player = GAME().player;
 	let cassidy = GAME().cassidy;
 
-	var p1cock = player.BiggestCock();
+	let p1cock = player.BiggestCock();
 	
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	parse = player.ParserTags(parse);
@@ -1732,7 +1732,7 @@ SparSexScenes.DomRide = function() {
 		Text.Add(" grows, whether you like it or not.", parse);
 		Text.NL();
 		
-		var hipsize = player.HipSize();
+		let hipsize = player.HipSize();
 		
 		if(hipsize >= HipSize.VeryWide) {
 			Text.Add("Eventually, though, Cass has to stop - your cunt has stretched to the point where your [hips] have swallowed as much tail as the salamander has to offer, having buried almost everything up to the base inside you. Cass looks over her shoulder at the impressive sight and sighs, releasing a blast of hot air over your [skin].", parse);
@@ -1767,7 +1767,7 @@ SparSexScenes.DomRide = function() {
 		Text.Add("You squirm under Cass as more and more jizz begins to pool in your loins, the wondrous sensation gathering at the base of your man-meat, ready to blast off into the world.", parse);
 	Text.NL();
 	
-	var cum = player.OrgasmCum();
+	let cum = player.OrgasmCum();
 	
 	parse["cum"] = cum >= 3 ? ", filling her up in no time and causing her to overflow from the sides of her snatch" : "";
 	Text.Add("As Cassidy’s pussy walls grip and squeeze you one last time, rippling in their effort to milk you for every last drop of seed you’re worth, you throw your head back and roar out your orgasm for the whole of Rigard’s merchant district to hear. Hot, liquid fire shoots up your [cock] and blasts out into Cass’ cunt[cum].", parse);
@@ -1808,7 +1808,7 @@ SparSexScenes.DomRide = function() {
 SparSexScenes.SuckOnBreasts = function() {
 	let player = GAME().player;
 
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	parse = player.ParserTags(parse);
@@ -1862,14 +1862,14 @@ SparSexScenes.Tribbing = function() {
 	let player = GAME().player;
 	let cassidy = GAME().cassidy;
 
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
 	
-	var fem = cassidy.Feminized();
+	let fem = cassidy.Feminized();
 	
 	Text.Clear();
 	Text.Add("Grinning like a madman, Cassidy disrobes herself, so eager to get started that she practically tears the garment apart removing it. Carelessly, she flings it over her shoulder then does the same with her shorts and your garments. The lot land in a messy heap on the moist grass, leaving the both of you in your birthday suits; Cass looks down at you with the eyes of a shark sizing up a particularly fat, lazy fish, and gives you an equally predatory leer.", parse);
@@ -1937,7 +1937,7 @@ SparSexScenes.Tribbing = function() {
 	Text.Add("Time passes in a mindless whirl of burning desire, barely quenched by your desperate attempts at dousing it; as your mindless girl-fucking continues, Cassidy’s presence seems to grow to encompass you, her weight straddled upon your hips spreading across your whole body.", parse);
 	Text.NL();
 	
-	var cum = player.OrgasmCum();
+	let cum = player.OrgasmCum();
 	
 	Text.Add("With such exquisite stimulation, her entire body heaving against yours with each of her powerful thrusts, you’re finally broken and give in to your body’s demands. Juices gush forth from your [vag] as a slutty moan escapes your lips, your body pressing against Cassidy’s with wanton lust as your netherlips kiss a final time.", parse);
 	if(player.FirstCock()) {
@@ -1976,7 +1976,7 @@ SparSexScenes.LossOutro = function() {
 	let cassidy = GAME().cassidy;
 	let world = WORLD();
 
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	

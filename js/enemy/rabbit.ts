@@ -81,7 +81,7 @@ export class Lagomorph extends Entity {
 	}
 	
 	DropTable() {
-		var drops = [];
+		let drops = [];
 		if(Math.random() < 0.05) drops.push({ it: AlchemyItems.Leporine });
 		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.RabbitFoot });
 		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.CarrotJuice });
@@ -106,15 +106,15 @@ export class Lagomorph extends Entity {
 
 	Act(encounter : any, activeChar : any) {
 		// Pick a random target
-		var t = this.GetSingleTarget(encounter, activeChar);
+		let t = this.GetSingleTarget(encounter, activeChar);
 
-		var parseVars = {
+		let parseVars = {
 			name   : this.name,
 			hisher : this.hisher(),
 			tName  : t.name
 		};
 
-		var choice = Math.random();
+		let choice = Math.random();
 		if(choice < 0.6)
 			Abilities.Attack.Use(encounter, this, t);
 		else if(choice < 0.8 && Abilities.Physical.DAttack.enabledCondition(encounter, this))
@@ -235,15 +235,15 @@ export class LagomorphBrute extends Lagomorph {
 	// TODO: Drop table
 	Act(encounter : any, activeChar : any) {
 		// Pick a random target
-		var t = this.GetSingleTarget(encounter, activeChar);
+		let t = this.GetSingleTarget(encounter, activeChar);
 
-		var parseVars = {
+		let parseVars = {
 			name   : this.name,
 			hisher : this.hisher(),
 			tName  : t.name
 		};
 
-		var choice = Math.random();
+		let choice = Math.random();
 		if(choice < 0.4)
 			Abilities.Attack.Use(encounter, this, t);
 		else if(choice < 0.6 && Abilities.Physical.CrushingStrike.enabledCondition(encounter, this))
@@ -297,15 +297,15 @@ export class LagomorphWizard extends Lagomorph {
 
 	Act(encounter : any, activeChar : any) {
 		// Pick a random target
-		var t = this.GetSingleTarget(encounter, activeChar);
+		let t = this.GetSingleTarget(encounter, activeChar);
 
-		var parseVars = {
+		let parseVars = {
 			name   : this.name,
 			hisher : this.hisher(),
 			tName  : t.name
 		};
 
-		var choice = Math.random();
+		let choice = Math.random();
 		if(choice < 0.1)
 			Abilities.Attack.Use(encounter, this, t);
 		else if(choice < 0.3 && Abilities.Black.Fireball.enabledCondition(encounter, this))

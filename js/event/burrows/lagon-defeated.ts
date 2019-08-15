@@ -15,7 +15,7 @@ export namespace LagonDScenes {
 		let party : Party = GAME().party;
 		let lagon = GAME().lagon;
 		
-		var parse : any = {
+		let parse : any = {
 			
 		};
 		
@@ -39,7 +39,7 @@ export namespace LagonDScenes {
 		if(lagon.flags["Usurp"] & LagonFlags.Usurp.NiceFlag) {
 			//Remove nice flag
 			lagon.flags["Usurp"] &= ~LagonFlags.Usurp.NiceFlag;
-			var first = !(lagon.flags["Usurp"] & LagonFlags.Usurp.NiceReact);
+			let first = !(lagon.flags["Usurp"] & LagonFlags.Usurp.NiceReact);
 			lagon.flags["Usurp"] |= LagonFlags.Usurp.NiceReact;
 			if(first) {
 				Text.NL();
@@ -62,11 +62,11 @@ export namespace LagonDScenes {
 		let party : Party = GAME().party;
 		let lagon = GAME().lagon;
 		
-		var parse : any = {
+		let parse : any = {
 			scepter : "scepter" //TODO
 		};
 		
-		var options = [];
+		let options = [];
 		options.push({nameStr : "Sex",
 			tooltip : Text.Parse("Put an end to Lagon's boredom and take him for a little romp in the hay.", parse),
 			enabled : true,
@@ -74,7 +74,7 @@ export namespace LagonDScenes {
 				LagonDScenes.SexPrompt();
 			}
 		});
-		var first = !(lagon.flags["Usurp"] & LagonFlags.Usurp.NiceFirst);
+		let first = !(lagon.flags["Usurp"] & LagonFlags.Usurp.NiceFirst);
 		options.push({nameStr : "Scepter", //TODO
 			tooltip : Text.Parse(first ? "If this [scepter] can affect minds so much, maybe it can give Lagon a little attitude adjustment? It's worth a shot." : "Time to give Lagon a little time with his inner feelings.", parse),
 			enabled : true,
@@ -121,12 +121,12 @@ export namespace LagonDScenes {
 		let player = GAME().player;
 		let lagon = GAME().lagon;
 		
-		var parse : any = {
+		let parse : any = {
 			
 		};
 		parse = player.ParserTags(parse);
 		
-		var first = !(lagon.flags["Usurp"] & LagonFlags.Usurp.JailSexFirst);
+		let first = !(lagon.flags["Usurp"] & LagonFlags.Usurp.JailSexFirst);
 		lagon.flags["Usurp"] |= LagonFlags.Usurp.JailSexFirst;
 		
 		Text.Clear();
@@ -174,7 +174,7 @@ export namespace LagonDScenes {
 		Text.Add("With Lagon now safely settled in his bed, you quickly remove your [armor] and cast it onto the table in the center of the room. Now naked, you look over the nude form of the fallen tyrant and lick your lips, trying to decide what you’re going to do with him.", parse);
 		Text.Flush();
 		
-		var options = [];
+		let options = [];
 		
 		options.push({nameStr : "Pitch anal",
 			tooltip : Text.Parse("He’s just begging for your [cock] up his tight little bunny-butt.", parse),
@@ -221,17 +221,17 @@ export namespace LagonDScenes {
 		let party : Party = GAME().party;
 		let lagon = GAME().lagon;
 		
-		var p1cock = player.BiggestCock(null, true);
-		var strapon = p1cock.isStrapon;
+		let p1cock = player.BiggestCock(null, true);
+		let strapon = p1cock.isStrapon;
 		
-		var parse : any = {
+		let parse : any = {
 			
 		};
 		parse = player.ParserTags(parse);
 		parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 		parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
 		
-		var first = !(lagon.flags["JSex"] & LagonFlags.JailSex.PitchAnal);
+		let first = !(lagon.flags["JSex"] & LagonFlags.JailSex.PitchAnal);
 		lagon.flags["JSex"] |= LagonFlags.JailSex.PitchAnal;
 		
 		Text.Clear();
@@ -306,7 +306,7 @@ export namespace LagonDScenes {
 		Text.Add("Assured of your lubrication, you align your [cockTip] with Lagon’s tailhole again and start to push yourself inside.", parse);
 		Text.NL();
 		
-		var timesFucked = lagon.sex.rAnal || 0;
+		let timesFucked = lagon.sex.rAnal || 0;
 		
 		Sex.Anal(player, lagon);
 		lagon.FuckAnal(lagon.Butt(), p1cock, 3);
@@ -430,7 +430,7 @@ export namespace LagonDScenes {
 			Text.Add("Huffing and panting, your control rapidly fraying, you squeeze Lagon tight and thrust home as deeply as you can[k]. A wordless cry of pleasure echoes through Lagon’s chamber as you let yourself fly into the welcoming warmth of his tailhole, spilling your seed with abandon.", parse);
 			Text.NL();
 			
-			var cum = player.OrgasmCum();
+			let cum = player.OrgasmCum();
 			
 			if(cum > 9) {
 				if(p1cock.Knot())
@@ -545,12 +545,12 @@ export namespace LagonDScenes {
 		let player = GAME().player;
 		let lagon = GAME().lagon;
 		
-		var parse : any = {
+		let parse : any = {
 			playername : player.name,
 			scepter : "scepter" //TODO
 		};
 		
-		var first = !(lagon.flags["Usurp"] & LagonFlags.Usurp.NiceFirst);
+		let first = !(lagon.flags["Usurp"] & LagonFlags.Usurp.NiceFirst);
 		lagon.flags["Usurp"] |= LagonFlags.Usurp.NiceFirst;
 		// Set flag
 		lagon.flags["Usurp"] |= LagonFlags.Usurp.NiceFlag;
@@ -565,8 +565,8 @@ export namespace LagonDScenes {
 			Text.NL();
 			Text.Add("Lagon just glares at you and gets ready to bolt, even though he has nowhere to run to in this cell, it seems he’s not above giving you a proper chase.", parse);
 			Text.NL();
-			var dex = player.Dex();
-			var goal = 40;
+			let dex = player.Dex();
+			let goal = 40;
 			if(GetDEBUG()) {
 				Text.Add("Dex check: [dex] (vs [goal])", {dex:dex, goal:goal}, 'bold');
 				Text.NL();
@@ -646,12 +646,12 @@ export namespace LagonDScenes {
 		let player = GAME().player;
 		let lagon = GAME().lagon;
 		
-		var parse : any = {
+		let parse : any = {
 			manwoman : player.mfTrue("man", "woman"),
 			playername : player.name
 		};
 		
-		var options = [];
+		let options = [];
 		options.push({nameStr : "Sex",
 			tooltip : Text.Parse("Since he’s so eager to please, how about the two of you spend some quality time together?", parse),
 			enabled : true,
@@ -706,7 +706,7 @@ export namespace LagonDScenes {
 			Text.NL();
 			Text.Add("Amused, you salute him in return, and turn to leave. You haven’t gotten far down the tunnel when lapine moaning echoes back to you from Lagon’s chamber. Looking back over your shoulder, you see the other guard looking through the window in Lagon’s door, an expression of surprise giving way to one of envy. You chuckle to yourself in amusement and keep heading to the throne room.", parse);
 			
-			var guard : any = new LagomorphElite(Gender.male);
+			let guard : any = new LagomorphElite(Gender.male);
 			
 			Sex.Anal(guard, lagon);
 			lagon.FuckAnal(lagon.Butt(), guard.FirstCock(), 0);
@@ -723,11 +723,11 @@ export namespace LagonDScenes {
 	export function ScepterSexPrompt() {
 		let player = GAME().player;
 
-		var parse : any = {
+		let parse : any = {
 			
 		};
 		
-		var options = [];
+		let options = [];
 		options.push({nameStr : "Pitch anal",
 			tooltip : Text.Parse("If he’s that eager to get his ass tapped, why not oblige him?", parse),
 			enabled : player.BiggestCock(null, true),
@@ -761,9 +761,9 @@ export namespace LagonDScenes {
 		let party : Party = GAME().party;
 		let lagon = GAME().lagon;
 
-		var p1cock = player.BiggestCock(null, true);
-		var strapon = p1cock.isStrapon;
-		var parse : any = {
+		let p1cock = player.BiggestCock(null, true);
+		let strapon = p1cock.isStrapon;
+		let parse : any = {
 			playername : player.name,
 			stuttername : player.name[0] + "-" + player.name
 		};
@@ -927,7 +927,7 @@ export namespace LagonDScenes {
 		lagon.FuckAnal(lagon.Butt(), p1cock, 3);
 		player.Fuck(p1cock, 3);
 		
-		var timesFucked = lagon.sex.rAnal;
+		let timesFucked = lagon.sex.rAnal;
 		
 		parse["knotbase"] = p1cock.Knot() ? "knot" : "base";
 		
@@ -1124,7 +1124,7 @@ export namespace LagonDScenes {
 			}
 			Text.NL();
 			
-			var cum = player.OrgasmCum();
+			let cum = player.OrgasmCum();
 			
 			if(cum > 9) {
 				if(p1cock.Knot())
@@ -1205,7 +1205,7 @@ export namespace LagonDScenes {
 			Text.Add("Chuckling, you confess that you would have settled for just those adorable little noises he makes as you give him a proper reaming. But since he’s offering...", parse);
 			Text.NL();
 			Text.Add("You slide a little closer, allowing you to lean over him, bringing your [breasts] within reach. ", parse);
-			var size = player.FirstBreastRow().Size();
+			let size = player.FirstBreastRow().Size();
 			if(size <= 5) {
 				parse["nearly"] = size <= 3 ? "" : " nearly";
 				Text.Add("Your chest might be[nearly] flat, but Lagon still stares up at it as if hypnotized, his eyes locked onto your [nips] and his cock dribbling in excitement.", parse);
@@ -1255,7 +1255,7 @@ export namespace LagonDScenes {
 			Text.Add("Reaching beneath your strap-on, your fingers dive for your quivering quim, plunging between your sopping wet folds as you eagerly reach for your g-spots. Spots dance in your vision as your digits close around your [clit], your body so primed that you just can’t...", parse);
 			Text.NL();
 			
-			var cum = player.OrgasmCum();
+			let cum = player.OrgasmCum();
 			
 			Text.Add("Arching your back, you squeal in pleasure as femcum gushes from between your folds, a river of perverse juices that runs down your [legs] and patters like raindrops as it puddles on Lagon’s floor. The world flickers, your mind unable to focus on what’s around you as pure pleasure storms through your brain, leaving you reeling as you struggle to ride out the wave.", parse);
 			Text.NL();
@@ -1284,7 +1284,7 @@ export namespace LagonDScenes {
 		let player = GAME().player;
 		let party : Party = GAME().party;
 
-		var parse : any = {
+		let parse : any = {
 			playername : player.name
 		};
 		parse = player.ParserTags(parse);
@@ -1379,7 +1379,7 @@ export namespace LagonDScenes {
 		Text.Add("Lagon can barely contain his laughter once you give him his sentence. <i>“A public fucking!? Really!? This is hilarious!”</i> He laughs out loud. <i>“Fine then! Who do I have to fuck?”</i> he asks, still laughing.", parse);
 		Text.NL();
 		
-		var p1cock = player.BiggestCock(null, true);
+		let p1cock = player.BiggestCock(null, true);
 		player.subDom.IncreaseStat(10, 5);
 		
 		if(p1cock) {
@@ -1399,7 +1399,7 @@ export namespace LagonDScenes {
 			}
 			Text.Flush();
 			
-			var options = [];
+			let options = [];
 			//[PC fuck] [Vena fuck]
 			options.push({nameStr : "PC fuck",
 				tooltip : Text.Parse("How can you pass up the chance to humiliate Lagon again?", parse),
@@ -1457,10 +1457,10 @@ export namespace LagonDScenes {
 		let player = GAME().player;
 		let vena = GAME().vena;
 
-		var p1cock = player.BiggestCock(null, true);
-		var strapon = p1cock.isStrapon;
+		let p1cock = player.BiggestCock(null, true);
+		let strapon = p1cock.isStrapon;
 		
-		var parse : any = {
+		let parse : any = {
 			playername : player.name
 		};
 		parse = player.ParserTags(parse);
@@ -1558,7 +1558,7 @@ export namespace LagonDScenes {
 			Text.Add("Decisions, decisions... but you better make your choice fast; you can’t hold it off much longer!", parse);
 			Text.Flush();
 			
-			var options = [];
+			let options = [];
 			//[Cum] [Don’t cum]
 			parse["guygirl"] = player.mfTrue("guy", "girl");
 			options.push({nameStr : "Cum",
@@ -1571,7 +1571,7 @@ export namespace LagonDScenes {
 					Text.Add("Caught up in your need to breed, you bury yourself as deeply into Vena as you possibly can and let yourself go. Sparks fill your vision, nerves afire with pleasure as you allow yourself to erupt into her waiting snatch, thick jets of seed pouring towards her greedy womb.", parse);
 					Text.NL();
 					
-					var cum = player.OrgasmCum();
+					let cum = player.OrgasmCum();
 					
 					if(player.Slut() < 30)
 						Text.Add("In between the shudders of pleasure, you manage to muster a spark of concern; what if you get her pregnant? Then you brush it aside as meaningless; Vena wouldn’t care if you did, and really, what are a few more bunnies? Besides, a little freshening to the gene pool will do them some good.", parse);
@@ -1632,10 +1632,10 @@ export namespace LagonDScenes {
 		let player = GAME().player;
 		let lagon = GAME().lagon;
 		
-		var p1cock = player.BiggestCock(null, true);
-		var strapon = p1cock.isStrapon;
+		let p1cock = player.BiggestCock(null, true);
+		let strapon = p1cock.isStrapon;
 		
-		var parse : any = {
+		let parse : any = {
 			playername : player.name
 		};
 		parse = player.ParserTags(parse);
@@ -1758,7 +1758,7 @@ export namespace LagonDScenes {
 		Text.NL();
 		Text.Add("You pump and you thrust, grunting heavily as you work away at the bunny’s tight little butt. Lagon moans and mewls involuntarily, the cutest little noises of pleasure being forced from his throat as you work his ass, mercilessly grinding his prostate.", parse);
 		Text.NL();
-		var cum;
+		let cum;
 		if(!strapon) {
 			Text.Add("You can feel your control fraying, the pleasure building up inside of you with each plunge of your hips. Your voice rough and grunting, you ask how Lagon feels to be taking the dick for once. Does it feel as good as when he was fucking his son? Does he enjoy being stuffed full of cock, knowing that there’s only one way this is going to end - with a thick, hot batch of baby batter stuffed up his rabbit hole?", parse);
 			Text.NL();
@@ -1943,7 +1943,7 @@ export namespace LagonDScenes {
 	export function PunishmentVena() {
 		let player = GAME().player;
 		
-		var parse : any = {
+		let parse : any = {
 			playername : player.name
 		};
 		
@@ -2078,7 +2078,7 @@ export namespace LagonDScenes {
 		Text.Flush();
 		TimeStep({hour: 1});
 		
-		var options = [];
+		let options = [];
 		//[Cum inside] [Cum bath]
 		options.push({nameStr : "Cum inside",
 			tooltip : Text.Parse("Best way to humiliate Lagon is to show him what it’s like to be bred like a bitch.", parse),
@@ -2142,7 +2142,7 @@ export namespace LagonDScenes {
 	export function PunishmentVenaCont() {
 		let player = GAME().player;
 		
-		var parse : any = {
+		let parse : any = {
 			playername : player.name
 		};
 		

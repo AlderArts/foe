@@ -300,7 +300,7 @@ Intro.JobSelect = function() {
 	Text.Flush();
 
 	//[Fighter][Scholar][Courtesan]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Fighter",
 		func : function() {
 			Text.NL();
@@ -544,17 +544,17 @@ Intro.ImpsWinPrompt = function() {
 	Text.Add("The words of the demon return to you... why should you not claim your rightful price? You thoughtfully consider the fallen group of scrawny imps - hardly an appealing lot, but maybe they can relieve that itch in your loins?");
 	Text.NL();
 	
-	var imp = new Imp();
+	let imp = new Imp();
 	
-	var genDesc = (player.Gender() == Gender.male) ?
+	let genDesc = (player.Gender() == Gender.male) ?
 		function() { return player.FirstCock().Short(); } :
 		function() { return player.FirstVag().Short(); };
 		
-	var parse : any = {genDesc: genDesc};
+	let parse : any = {genDesc: genDesc};
 	
 	Text.Flush();
 	//[No][Use][Ride][Group]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "No",
 		func : function() {
 			Text.Add("With a shake of your head, you regain your composure, leaving the pile of imps to their own devices. You catch the demon throwing you a disappointed glance before he returns to his own thoughts.");
@@ -586,9 +586,9 @@ Intro.ImpsWinPrompt = function() {
 Intro.ImpsWinUseMale = function() {
 	let player = GAME().player;
 
-	var imp = new Imp();
+	let imp = new Imp();
 	
-	var parse : any = {
+	let parse : any = {
 		cockDesc : function() { return player.FirstCock().Short(); },
 		cockLen  : function() { return player.FirstCock().Desc().len; }
 	};
@@ -603,7 +603,7 @@ Intro.ImpsWinUseMale = function() {
 	Text.Flush();
 	
 	//[Gentle][Rough][Anal]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Gentle",
 		func : function() {
 			Text.Clear();
@@ -692,9 +692,9 @@ Intro.ImpsCuntBlock = function(parse : any) {
 Intro.ImpsWinUseFemale = function() {
 	let player = GAME().player;
 	
-	var imp = new Imp();
+	let imp = new Imp();
 	
-	var parse : any = {
+	let parse : any = {
 		cuntDesc   : function() { return player.FirstVag().Short(); },
 		breastDesc : function() { return player.FirstBreastRow().Short(); },
 		clitDesc   : function() { return player.FirstVag().ClitShort(); },
@@ -714,7 +714,7 @@ Intro.ImpsWinUseFemale = function() {
 	// Intro.cuntBlocked
 
 	//[No][Use][Ride][Group]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Oral ride",
 		func : function() {
 			Text.Clear();
@@ -790,9 +790,9 @@ Intro.ImpsWinUseFemale = function() {
 
 Intro.ImpsWinRide = function() {
 	let player = GAME().player;
-	var imp = new Imp();
+	let imp = new Imp();
 	
-	var parse : any = {
+	let parse : any = {
 		cuntDesc    : function() { return player.FirstVag().Short(); },
 		breastDesc  : function() { return player.FirstBreastRow().Short(); },
 		clitDesc    : function() { return player.FirstVag().ClitShort(); },
@@ -825,9 +825,9 @@ Intro.ImpsWinRide = function() {
 
 Intro.ImpsWinRideEntrypoint = function() {
 	let player = GAME().player;
-	var imp = new Imp();
+	let imp = new Imp();
 	
-	var parse : any = {
+	let parse : any = {
 		cuntDesc    : function() { return player.FirstVag().Short(); },
 		breastDesc  : function() { return player.FirstBreastRow().Short(); },
 		clitDesc    : function() { return player.FirstVag().ClitShort(); },
@@ -866,9 +866,9 @@ Intro.ImpsWinRideEntrypoint = function() {
 
 Intro.ImpsWinGroup = function() {
 	let player = GAME().player;
-	var imp = new Imp();
+	let imp = new Imp();
 	
-	var parse : any = {
+	let parse : any = {
 		cuntDesc    : function() { return player.FirstVag().Short(); },
 		breastDesc  : function() { return player.FirstBreastRow().Short(); },
 		clitDesc    : function() { return player.FirstVag().ClitShort(); },
@@ -931,7 +931,7 @@ Intro.ImpsWinGroup = function() {
 	Text.Flush();
 	
 	//[Yourself][Imp]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Yourself",
 		func : function() {
 			Text.Clear();
@@ -960,7 +960,7 @@ Intro.ImpsLossPrompt = function() {
 	Text.Flush();
 	
 	//[No][Oral][Get fucked]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "No",
 		func : function() {
 			Text.NL();
@@ -983,9 +983,9 @@ Intro.ImpsLossPrompt = function() {
 			
 Intro.ImpsLossOral = function() {
 	let player = GAME().player;
-	var imp = new Imp();
+	let imp = new Imp();
 	
-	var parse : any = {
+	let parse : any = {
 		cuntDesc    : function() { return player.FirstVag().Short(); },
 		breastDesc  : function() { return player.FirstBreastRow().Short(); },
 		clitDesc    : function() { return player.FirstVag().ClitShort(); },
@@ -1023,9 +1023,9 @@ Intro.ImpsLossOral = function() {
 
 Intro.ImpsLossFucked = function() {
 	let player = GAME().player;
-	var imp = new Imp();
+	let imp = new Imp();
 	
-	var parse : any = {
+	let parse : any = {
 		cuntDesc    : function() { return player.FirstVag().Short(); },
 		breastDesc  : function() { return player.FirstBreastRow().Short(); },
 		clitDesc    : function() { return player.FirstVag().ClitShort(); },
@@ -1095,7 +1095,7 @@ Intro.DemonGift = function() {
 		return;
 	}
 	
-	var parse : any = {
+	let parse : any = {
 		msmr        : (player.Gender() == Gender.male) ? "MISTER" : "MISS",
 		hisher      : (player.Gender() == Gender.male) ? "HIS" : "HER",
 		cuntDesc    : function() { return player.FirstVag().Short(); },
@@ -1113,7 +1113,7 @@ Intro.DemonGift = function() {
 	Text.Flush();
 	
 	//[No][Big breasts][Vaginal cap][Bigger load][Larger cock][Anal cap]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "No",
 		func : function() {
 			Text.Add("You shake your head, refusing the demon's temptations.");
@@ -1207,7 +1207,7 @@ Intro.DemonFight = function() {
 	let player = GAME().player;
 	let uru = GAME().uru;
 
-	var parse : any = {
+	let parse : any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -1218,11 +1218,11 @@ Intro.DemonFight = function() {
 	Text.Add("You are facing the giant demon and two smaller imps.");
 	Text.Flush();
 	Gui.NextPrompt(function() {
-		var enemy = new Party();
+		let enemy = new Party();
 		enemy.AddMember(new IntroDemon());
 		enemy.AddMember(new Imp());
 		enemy.AddMember(new Imp());
-		var enc = new Encounter(enemy);
+		let enc = new Encounter(enemy);
 		enc.canRun = false;
 		// Set a custom loss scene (imp rape)
 		enc.onLoss = function() {
@@ -1232,12 +1232,12 @@ Intro.DemonFight = function() {
 			Text.Add("Exhausted from the fight, you fall to your knees, your body hurting too much to keep up. The great demon looks down on you incredulously and laughs, a grotesque hissing and thundering sound. <b>HAHAHA! YOU THOUGHT THAT YOU COULD STAND UP TO ME? YET YOU CAN'T EVEN BEAT A BUNCH OF IMPS!</b> The demon seems greatly amused by your plight, but only observes you as you squirm around, trying to get away.");
 			Text.NL();
 			// Count imps
-			var imps = this.GetEnemyArray();
-			var numImps = imps.length - 1;
-			var impPlural = (numImps > 1) ? "imps" : "imp";
+			let imps = this.GetEnemyArray();
+			let numImps = imps.length - 1;
+			let impPlural = (numImps > 1) ? "imps" : "imp";
 
 			// Raise downed imps
-			var numDowned = enc.GetDownedEnemyArray().length;
+			let numDowned = enc.GetDownedEnemyArray().length;
 			if(numDowned > 0) {
 				Text.Add("With a flick of his hand, the demon revitalizes the fallen " + impPlural + ".");
 				Text.NL();
@@ -1294,9 +1294,9 @@ Intro.DemonFight = function() {
 			}
 
 			impPlural = (numImps > 1) ? "imps" : "imp";
-			var growsPlural = (numImps > 1) ? "grow" : "grows";
-			var impPossesive = (numImps > 1) ? "imps" : "imp's";
-			var impThey = (numImps > 1) ? "they are" : "he is";
+			let growsPlural = (numImps > 1) ? "grow" : "grows";
+			let impPossesive = (numImps > 1) ? "imps" : "imp's";
+			let impThey = (numImps > 1) ? "they are" : "he is";
 			Text.Add("The " + impPossesive + " rutting " + growsPlural + " more insistent, and you can tell "
 			+ impThey + " ready to blow. Any other thoughts are wiped clear as your senses - and body - are filled to the brim with imp ejaculate. The " + impPlural + " withdraw, leaving you leaking cum on the ground.");
 			Text.Flush();
@@ -1317,9 +1317,9 @@ Intro.DemonFight = function() {
 		}
 		// Set a custom victory condition
 		enc.VictoryCondition = function() {
-			var downed = true;
-			for(var i = 0; i < this.enemy.members.length; i++) {
-				var e = this.enemy.members[i];
+			let downed = true;
+			for(let i = 0; i < this.enemy.members.length; i++) {
+				let e = this.enemy.members[i];
 				if(e.name == "Demon") continue; // Don't count the demon
 				if(e.Incapacitated() == false) downed = false;
 			}
@@ -1437,7 +1437,7 @@ Intro.ChooseName = function() {
 	Text.Add("What is your name?");
 	Text.Flush();
 
-	var textBox : any = document.getElementById("textInputArea");
+	let textBox : any = document.getElementById("textInputArea");
 	textBox.value = "";
 	textBox.style.visibility = "visible";
 	textBox.focus();
@@ -1512,7 +1512,7 @@ DarkAspect.Peak.events.push(new Link(
 		Text.Add("<i>“You don't belong here!”</i> she announces, proud of her discovery. <i>“What are you and how did you get here?”</i>");
 		Text.Flush();
 		
-		var options = new Array();
+		let options = new Array();
 		options.push({ nameStr: "Demon",
 			func : function() {
 				Text.Clear();
@@ -1521,7 +1521,7 @@ DarkAspect.Peak.events.push(new Link(
 				Text.Add("Do you tell her about the mirror or not? She did kind of save your life back there.");
 				Text.Flush();
 
-				var options = new Array();
+				let options = new Array();
 				options.push({ nameStr: "Mirror",
 					func : function() {
 						Text.Clear();
@@ -1566,7 +1566,7 @@ Intro.UruGift = function() {
 
 	//TODO no impact?
 	//[Power][Love][Peace]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Power",
 		func : function() {
 			Text.NL();
@@ -1636,7 +1636,7 @@ Intro.UruGen = function() {
 	// TODO: SEXUAL PREFERENCE INITIAL VALUES
 	Text.Flush();
 
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Cock",
 		func : function() {
 			Text.Add("Uru closes in on you, a wicked smile on her face. <i>“Really now, is that so?”</i> As you nod, the object of your admiration rises to full mast. It is certainly the biggest one you've ever seen");
@@ -1691,7 +1691,7 @@ Intro.UruSexChoice = function() {
 
 	Text.Flush();
 
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Fuck vagina",
 		func : function() {
 			uru.flags["Intro"] |= UruFlags.Intro.FuckedUru;
@@ -1748,11 +1748,11 @@ Intro.UruGiveClitcock = function() {
 	uru.flags["Intro"] |= UruFlags.Intro.GotClitcock;
 
 	// Gain clit cock
-	var cc = player.FirstVag().CreateClitcock();
+	let cc = player.FirstVag().CreateClitcock();
 	cc.length.base = 14;
 	player.body.cock.push(cc);
 
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Spit",
 		func : function() {
 			Text.Clear();
@@ -1791,7 +1791,7 @@ Intro.UruSexFuckVagina = function() {
 	let player = GAME().player;
 	let uru = GAME().uru;
 
-	var parse : any = {
+	let parse : any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -1810,7 +1810,7 @@ Intro.UruSexFuckVagina = function() {
 	Text.Add("Gathering yourself, you get down to business and start pounding the slutty hermaphrodite as hard as your hips will let you. Her tight passage is a marvel, her insides feeling as if they are moving on their own, stroking and squeezing your length. The way things are going, you are not going to last long.");
 	Text.Flush();
 
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Deeper",
 		func : function() {
 			Text.Clear();
@@ -1870,7 +1870,7 @@ Intro.UruSexFuckVagina = function() {
 
 		Text.Flush();
 
-		var options = new Array();
+		let options = new Array();
 		options.push({ nameStr : "Nope",
 			func : function() {
 				Text.Clear();
@@ -1902,7 +1902,7 @@ Intro.UruSexFuckAnal = function() {
 	let player = GAME().player;
 	let uru = GAME().uru;
 
-	var parse : any = {
+	let parse : any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -1917,8 +1917,8 @@ Intro.UruSexFuckAnal = function() {
 	Text.Flush();
 
 	// [Spit][Cunt][Suck]
-	var suckeddick = false;
-	var options = new Array();
+	let suckeddick = false;
+	let options = new Array();
 	options.push({ nameStr : "Spit",
 		func : function() {
 			Text.Clear();
@@ -2003,9 +2003,9 @@ Intro.UruSexFuckAnal = function() {
 		Text.Add("Biting your lip, you start to move, hips thrusting back and forth. Her tight tunnel is gripping like a vice, yet you can move in and out of her with ease. After a few minutes of intensely ass-fucking the demon, you feel her tail curling up around one of your legs and gasp as the tip brushes against your own back door. How do you react? Ignore it, eagerly accept it or firmly deny it?");
 		Text.Flush();
 
-		var buttfucked = false;
+		let buttfucked = false;
 		// [Eager][Let be][Deny]
-		var options = new Array();
+		let options = new Array();
 		options.push({ nameStr : "Eager",
 			func : function() {
 				Text.Clear();
@@ -2052,7 +2052,7 @@ Intro.UruSexFuckAnal = function() {
 			Text.Flush();
 
 			// [Get fucked][Nope]
-			var options = new Array();
+			let options = new Array();
 			options.push({ nameStr : "Get fucked",
 				func : function() {
 					uru.flags["Intro"] |= UruFlags.Intro.FuckedByUru;
@@ -2085,7 +2085,7 @@ Intro.UruSexFuckAnal = function() {
 Intro.UruSexFuckAnal2 = function() {
 	let player = GAME().player;
 
-	var parse : any = {
+	let parse : any = {
 		cock : function() { return player.FirstCock().Short(); }
 	};
 
@@ -2127,7 +2127,7 @@ Intro.UruSexGetFucked = function() {
 		Text.NL();
 		Text.Flush();
 		//[Anal][Vaginal]
-		var options = new Array();
+		let options = new Array();
 		options.push({ nameStr : "Anal",
 			func : function() {
 				Intro.fuckedTarget = BodyPartType.ass;
@@ -2168,7 +2168,7 @@ Intro.UruSexGetFuckedPrep = function() {
 	Text.Flush();
 
 	//[Suck her][Lead][Passive]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Suck her",
 		func : function() {
 			Text.NL();
@@ -2230,7 +2230,7 @@ Intro.UruSexGetFuckedSuck = function() {
 	Intro.lubedFlag = true;
 
 	//[Suck her (again)][Lead][Passive]
-	var options = new Array();
+	let options = new Array();
 
 	if(Intro.timesSuckedUru >= 3) {
 		Text.Add("A bit overwhelmed by the sheer cum production of the hermaphrodite demon, you worriedly caress your swelling stomach. Perhaps enough is enough.");
@@ -2267,14 +2267,14 @@ Intro.UruSexGetFuckedLead = function() {
 	let player = GAME().player;
 	let uru = GAME().uru;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name
 	};
 	parse = player.ParserTags(parse);
 
 	Text.Clear();
 
-	var uruCockDesc = function() { return uru.FirstCock().Short(); }
+	let uruCockDesc = function() { return uru.FirstCock().Short(); }
 	if(Intro.fuckedTarget == BodyPartType.vagina)
 		parse["target"] = function() { return player.FirstVag().Short(); }
 	else
@@ -2341,8 +2341,8 @@ Intro.UruSexGetFuckedLead2 = function() {
 	let player = GAME().player;
 	let uru = GAME().uru;
 
-	var uruCockDesc = function() { return uru.FirstCock().Short(); }
-	var targetDesc;
+	let uruCockDesc = function() { return uru.FirstCock().Short(); }
+	let targetDesc;
 	if(Intro.fuckedTarget == BodyPartType.vagina)
 		targetDesc = function() { return player.FirstVag().Short(); }
 	else
@@ -2375,7 +2375,7 @@ Intro.UruSexGetFuckedPassive2 = function() {
 	let player = GAME().player;
 	let uru = GAME().uru;
 
-	var parse : any = {
+	let parse : any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -2383,10 +2383,10 @@ Intro.UruSexGetFuckedPassive2 = function() {
 	// If target is not already set, set it to ass for males and vagina for females
 	Intro.fuckedTarget = Intro.fuckedTarget || ((player.Gender() == Gender.male) ? BodyPartType.ass : BodyPartType.vagina);
 
-	var uruCockDesc = function() { return uru.FirstCock().Short(); }
-	var targetDesc;
-	var notTargetDesc;
-	var target;
+	let uruCockDesc = function() { return uru.FirstCock().Short(); }
+	let targetDesc;
+	let notTargetDesc;
+	let target;
 	if(Intro.fuckedTarget == BodyPartType.vagina) {
 		target = player.FirstVag();
 		targetDesc = function() { return player.FirstVag().Short(); }
@@ -2512,7 +2512,7 @@ Intro.UruSexAftermath = function() {
 	let player = GAME().player;
 	let uru = GAME().uru;
 
-	var parse : any = {
+	let parse : any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -2699,19 +2699,19 @@ Intro.AriaPurification = function() {
 	Text.NL();
 
 	// Clitcock TODO
-	var ccIdx = player.FirstClitCockIdx();
+	let ccIdx = player.FirstClitCockIdx();
 	if(ccIdx != -1) {
 		Text.Add("<i>Uhm, what about... that?</i> Aria blushes as her gaze briefly flicker to your oversized, engorged clitoris.");
 		Text.NL();
 
 		//[Remove][Keep]
-		var options = new Array();
+		let options = new Array();
 		options.push({ nameStr : "Remove",
 			func : function() {
 				Text.Add("After a brief moment of hesitation, you nod. Her cheeks flushed, the Goddess trails her finger down the cleft between your breasts, before uncertainly giving your clit an experimental prod. Barely stifling a moan from the touch, a twinge of regret flits through you as the appendage is enveloped in a soft glow, shrinking down to its original size.");
 				Text.NL();
 				Text.Add("Aria gives her head a quick shake, clearing her thoughts.");
-				var cocks = player.AllCocks();
+				let cocks = player.AllCocks();
 				cocks[ccIdx].vag.clitCock = null;
 				cocks.splice(ccIdx, 1);
 				Text.Flush();
@@ -2755,7 +2755,7 @@ Intro.AriaTalk = function() {
 Intro.AriaQnA = function() {
 	Text.Flush();
 	// [Aria][Uru][Portals]([Bird])
-	var options = new Array();
+	let options = new Array();
 	if(!Intro.AriaTalkedAboutAria) {
 		options.push({ nameStr : "Aria",
 			func : function() {
@@ -2885,7 +2885,7 @@ Intro.NomadsWakingUp = function() {
 	Text.Add("The elfin creature starts to sensually suck on one of your nipples, spreading a tingling feeling through your entire body. Even so close, you are not quite sure if it is male or female, either due to the poor light or their very androgynous face. As your intimate visitor slowly grinds its crotch against one of your legs, their gender suddenly becomes <i>readily</i> apparent.");
 	Text.Flush();
 	// [Male][Female]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Male",
 		func : function() {
 			kiakai.flags["InitialGender"] = Gender.male;
@@ -2908,7 +2908,7 @@ Intro.NomadsWakingUp = function() {
 Intro.MeetingKia = function() {
 	let kiakai = GAME().kiakai;
 
-	var parse : any = {
+	let parse : any = {
 		name : kiakai.name
 	};
 	parse = kiakai.ParserPronouns(parse);
@@ -2937,7 +2937,7 @@ Intro.MeetingKia = function() {
 Intro.KiaQnA = function() {
 	let kiakai = GAME().kiakai;
 
-	var parse : any = {
+	let parse : any = {
 		name : kiakai.name,
 		boygirl : kiakai.mfTrue("boy", "girl")
 	};
@@ -2945,7 +2945,7 @@ Intro.KiaQnA = function() {
 
 	Text.Flush();
 	// [Aria][Eden][Kia/Kai]["Healing"]
-	var options = new Array();
+	let options = new Array();
 	if(!Intro.KiaTalkedAboutAria) {
 		options.push({ nameStr : "Aria",
 			func : function() {
@@ -3033,7 +3033,7 @@ Intro.KiaQnA = function() {
 Intro.KiaSurroundings = function() {
 	let kiakai = GAME().kiakai;
 
-	var parse : any = {
+	let parse : any = {
 		name : kiakai.name
 	}
 	Text.Clear();
@@ -3067,7 +3067,7 @@ Intro.KiaDecideOutset = function() {
 	let kiakai = GAME().kiakai;
 	let party : Party = GAME().party;
 
-	var parse : any = {
+	let parse : any = {
 		name : kiakai.name
 	};
 	parse = kiakai.ParserPronouns(parse);
@@ -3083,7 +3083,7 @@ Intro.KiaDecideOutset = function() {
 	Text.Flush();
 
 	// [Save world][Go Home][Gain Power]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Save world",
 		tooltip : "The elf seems to be earnest and the cause good, why not join each other?",
 		func : function() {
@@ -3116,7 +3116,7 @@ Intro.KiaDecideOutset = function() {
 			Text.Flush();
 
 			// [Accept][I'm the boss][Decline]
-			var options = new Array();
+			let options = new Array();
 			options.push({ nameStr : "Accept",
 				tooltip : "A friend on the road could certainly help.",
 				func : function() {
@@ -3178,7 +3178,7 @@ Intro.KiaDecideOutset = function() {
 			Text.Flush();
 
 			// [I'm the boss][Decline]
-			var options = new Array();
+			let options = new Array();
 			options.push({ nameStr : "I'm the boss",
 				tooltip : Text.Parse("The elf could be useful to you, but [heshe] needs to be put in [hisher] place.", parse),
 				func : function() {
@@ -3212,7 +3212,7 @@ Intro.KiaNiceSex = function() {
 	let player = GAME().player;
 	let kiakai = GAME().kiakai;
 
-	var parse : any = {
+	let parse : any = {
 		name : kiakai.name,
 		boygirl : kiakai.mfTrue("boy", "girl")
 	};
@@ -3227,7 +3227,7 @@ Intro.KiaNiceSex = function() {
 	Text.Flush();
 
 	// [Male][Female]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : kiakai.name,
 		tooltip : Text.Parse("How about asking [name] to finish [hisher] healing session, you could use some release.", parse),
 		func : function() {
@@ -3297,7 +3297,7 @@ Intro.KiaNiceSex69 = function() {
 	let player = GAME().player;
 	let kiakai = GAME().kiakai;
 
-	var parse : any = {
+	let parse : any = {
 		name : kiakai.name
 	};
 	parse = kiakai.ParserPronouns(parse);
@@ -3306,11 +3306,11 @@ Intro.KiaNiceSex69 = function() {
 
 	player.AddLustFraction(1);
 
-	var sucking = true;
-	var fingering = false;
+	let sucking = true;
+	let fingering = false;
 
 	Text.Flush();
-	var options = new Array();
+	let options = new Array();
 	if(kiakai.NumVags() > 0) {
 		options.push({ nameStr : "Vagina",
 			tooltip : Text.Parse("[name] deserves some attention too, how about eating [himher] out?", parse),
@@ -3408,7 +3408,7 @@ Intro.KiaNaughtySex = function() {
 	let player = GAME().player;
 	let kiakai = GAME().kiakai;
 
-	var parse : any = {
+	let parse : any = {
 		name : kiakai.name,
 		stutterName : player.name[0] + "-" + player.name
 	};
@@ -3423,7 +3423,7 @@ Intro.KiaNaughtySex = function() {
 	Text.NL();
 	Text.Flush();
 
-	var options = new Array();
+	let options = new Array();
 	if(player.FirstCock()) {
 		options.push({ nameStr : "Blowjob",
 			tooltip : Text.Parse("Your cock needs release, and [name] looks like [heshe] has the perfect mouth to provide it.", parse),
@@ -3522,7 +3522,7 @@ Intro.Finalizing = function() {
 
 	Text.Clear();
 
-	var parse : any = {
+	let parse : any = {
 		name  : kiakai.name,
 		HeShe : kiakai.HeShe(),
 		i     : party.InParty(kiakai) ? "we" : "I"

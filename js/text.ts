@@ -7,16 +7,16 @@ import { Rand } from './utility';
 export namespace Text {
 
 	let buffer = "";
-	//A div that contains 'groups' of inputs. Each group is on a new line (so you can basically have multiple toolbars).
+	// A div that contains 'groups' of inputs. Each group is on a new line (so you can basically have multiple toolbars).
 	let toolbars = $('<div></div>');
 
 	export function InsertImage(imgSrc : string, align : string = 'left') {
-		if(!GetRenderPictures()) return "";
+		if(!GetRenderPictures()) { return ""; }
 		return "<img src='" + imgSrc + "' align='" + align + "' alt='MISSING IMAGE: " + imgSrc + "' style='margin: 1px 8px;'/>";
 	}
 
 	export function Say(imgSrc : string, text : string = "", align : string = 'left') {
-		var textbox = document.getElementById("mainTextArea");
+		let textbox = document.getElementById("mainTextArea");
 
 		if(GetRenderPictures())
 			textbox.innerHTML += "<img src='" + imgSrc + "' align='" + align + "' alt='MISSING IMAGE: " + imgSrc + "' style='margin: 1px 8px;'>" + text + "</img>";
@@ -26,7 +26,7 @@ export namespace Text {
 
 
 	export function SetTooltip(text : string, parseStrings? : any) {
-		var textbox = document.getElementById("tooltipTextArea");
+		let textbox = document.getElementById("tooltipTextArea");
 		textbox.innerHTML = Text.Parse(text, parseStrings);
 	}
 
@@ -34,26 +34,28 @@ export namespace Text {
 		try {
 			// Simple parser
 			if(parseStrings) {
-				var start = text.indexOf("[");
-				var stop = text.indexOf("]", start);
-				while(start != -1 && stop != -1) {
-					var code = text.slice(start+1,stop);
+				let start = text.indexOf("[");
+				let stop = text.indexOf("]", start);
+				while(start !== -1 && stop !== -1) {
+					const code = text.slice(start + 1, stop);
 
-					var replaceStr;
+					let replaceStr;
 					if(parseStrings[code] != null) {
 						replaceStr = parseStrings[code];
-						if(_.isFunction(replaceStr))
+						if(_.isFunction(replaceStr)) {
 							replaceStr = replaceStr();
-						if(_.isUndefined(replaceStr))
+						}
+						if(_.isUndefined(replaceStr)) {
 							replaceStr = ApplyStyle("['" + code + "' is undefined]", "error");
+						}
 					} else {
 						replaceStr = ApplyStyle("['" + code + "' couldn't be parsed]", "error");
 					}
 
-					text = text.slice(0, start) + replaceStr + text.slice(stop+1);
+					text = text.slice(0, start) + replaceStr + text.slice(stop + 1);
 
-					var start = text.indexOf("[", start + replaceStr.length);
-					var stop = text.indexOf("]", start);
+					start = text.indexOf("[", start + replaceStr.length);
+					stop = text.indexOf("]", start);
 				}
 			}
 
@@ -66,7 +68,7 @@ export namespace Text {
 	}
 
 	export function Clear() {
-		var textbox = document.getElementById("mainTextArea");
+		const textbox = document.getElementById("mainTextArea");
 		textbox.innerHTML = "";
 		textbox.scrollTop = 0;
 		buffer = "";
@@ -103,7 +105,7 @@ export namespace Text {
 	// but AddSpan and AddDiv both call it, since this would make
 	// testing easier in the future, as only this needs unit testing
 	export function Add(text : string, parse? : any, cssClasses? : string, tag? : string) {
-		var parsed = Text.Parse(text, parse);
+		let parsed = Text.Parse(text, parse);
 		if (cssClasses) {
 			buffer += ApplyStyle(parsed, cssClasses, tag);
 		} else {
@@ -128,17 +130,17 @@ export namespace Text {
 	* cssClasses : A string of css classes that will be added to every input in the 'list' parameter.
 	*/
 	export function AddToolbar(list : any[], toolbarLabel? : string, cssClasses? : string) {
-		var toolbar = $("<div>");
+		let toolbar = $("<div>");
 		//Add toolbar label if specified
 		if(toolbarLabel) {
-			var label= $('<span>', {
+			let label= $('<span>', {
 				"class" : 'tbarLbl',
 				text : toolbarLabel
 			});
 			toolbar.append(label);
 		}
 		//Add inputs to new toolbar
-		for(var i=0; i < list.length; i++) {
+		for(let i=0; i < list.length; i++) {
 			toolbar.append(createInput(list[i], cssClasses));
 		}
 		toolbars.append(toolbar);
@@ -153,10 +155,10 @@ export namespace Text {
 	}
 
 	export function Flush(textCssClasses? : string, toolbarCssClasses? : string) {
-		//var textbox = document.getElementById("mainTextArea");
-		var textBox = $("#mainTextArea");
-		var textClasses = (textCssClasses) ? textCssClasses : "";
-		var toolbarClasses = (toolbarCssClasses) ? toolbarCssClasses : "";
+		//let textbox = document.getElementById("mainTextArea");
+		let textBox = $("#mainTextArea");
+		let textClasses = (textCssClasses) ? textCssClasses : "";
+		let toolbarClasses = (toolbarCssClasses) ? toolbarCssClasses : "";
 		//textbox.innerHTML += "<div class=\""+toolbarClasses+"\">"+Text.toolbar+"</div>";
 		if(toolbars) {
 			textBox.append(toolbars);
@@ -202,11 +204,11 @@ export namespace Text {
 			return DigitToText(num);
 		// TODO: thousands
 		else if(num < 1000) {
-			var ones = num % 10;
-			var tens = Math.floor(num / 10) % 10;
-			var hundreds = Math.floor(num / 100) % 10;
+			let ones = num % 10;
+			let tens = Math.floor(num / 10) % 10;
+			let hundreds = Math.floor(num / 100) % 10;
 
-			var str = "";
+			let str = "";
 
 			if(hundreds != 0)
 				str += DigitToText(hundreds) + " hundred";
@@ -245,7 +247,7 @@ export namespace Text {
 		num = Math.floor(num);
 		if(num < 0)
 			return num.toString();
-		var r;
+		let r;
 		switch(num) {
 			case 0: return "lack";
 			case 1: r = Rand(4);
@@ -320,7 +322,7 @@ export namespace Text {
 	}
 
 	export function Enumerate(list : any[], conjunction : any) {
-		var output = "";
+		let output = "";
 		list.reverse(); // We're assuming that the order matters
 		list.forEach(function(elem, idx) {
 			if (idx == 0) {
@@ -342,21 +344,21 @@ export namespace Text {
 	*   radio   ::: TODO
 	*/
 	function createInput(inputOptions : any, cssClasses? : any) {
-		var input;
-		var type = inputOptions.type || 'button';
-		var classesStr = (cssClasses || "") + " " + (inputOptions.classes || "");
+		let input;
+		let type = inputOptions.type || 'button';
+		let classesStr = (cssClasses || "") + " " + (inputOptions.classes || "");
 		if(type.toLowerCase() == 'button') {
-			var btnName = inputOptions.nameStr;
-			var onclick = inputOptions.func;
-			var clickParam = inputOptions.param;
+			let btnName = inputOptions.nameStr;
+			let onclick = inputOptions.func;
+			let clickParam = inputOptions.param;
 			input = $('<input />', {
 				type  : 'button',
 				"class" : 'tbarInput '+classesStr,
 				value : btnName,
 				on    : {
 					click: function() {
-						var data = $(this).data()
-						var func = data.func;
+						let data = $(this).data()
+						let func = data.func;
 						func(data.param);
 					}
 				}
@@ -367,15 +369,15 @@ export namespace Text {
 
 		} else if(type.toLowerCase() == 'select') {
 			//TODO Will finish when I need it later
-			/*var onSelect = inputOptions.func;
-			var selectParam = inputOptions.param;
+			/*let onSelect = inputOptions.func;
+			let selectParam = inputOptions.param;
 			input = $('<input />', {
 			type  : 'select',
 			class : 'tbarInput '+classesStr,
 			on    : {
 			select: function() {
-			var data = $(this).data()
-			var func = data.func;
+			let data = $(this).data()
+			let func = data.func;
 			func(data.param);
 			}
 			}
@@ -392,7 +394,7 @@ export namespace Text {
 	}
 	/*
 		// REGULAR TEXT (NEW METHOD)
-		var parse : any = {
+		let parse : any = {
 
 		};
 
@@ -405,7 +407,7 @@ export namespace Text {
 		// CHOICE
 
 		//[Sure][Nah]
-		var options = new Array();
+		let options = new Array();
 		options.push({ nameStr : "Sure",
 			func : function() {
 				Text.Clear();
@@ -429,7 +431,7 @@ export namespace Text {
 
 		// SCENE ROTATION
 
-		var scenes = [];
+		let scenes = [];
 
 		// Long
 		scenes.push(function() {
@@ -450,7 +452,7 @@ export namespace Text {
 			Gui.NextPrompt(Scenes.Kiakai.TalkElves);
 		});
 
-		var sceneId = kiakai.flags["RotElfChild"];
+		let sceneId = kiakai.flags["RotElfChild"];
 		if(sceneId >= scenes.length) sceneId = 0;
 
 		kiakai.flags["RotElfChild"] = sceneId + 1;
@@ -463,7 +465,7 @@ export namespace Text {
 
 		// RANDOM SCENE (USING ENCOUNTER TABLE)
 
-		var scenes = new EncounterTable();
+		let scenes = new EncounterTable();
 		scenes.AddEnc(function() {
 			Text.Add("", parse);
 			Text.NL();

@@ -102,7 +102,7 @@ export class Momo extends Entity {
 	}
 	
 	ToStorage() {
-		var storage : any = {};
+		let storage : any = {};
 		
 		this.SavePersonalityStats(storage);
 		this.SaveBodyPartial(storage, {ass: true, vag: true});
@@ -138,7 +138,7 @@ MomoScenes.FindingMomo = function() {
 	let momo = GAME().momo;
 	let world = WORLD();
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name
 	};
 	
@@ -172,7 +172,7 @@ MomoScenes.FindingMomo = function() {
 	Text.Flush();
 	
 	//[HelpHer][LeaveHer]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Help her",
 		func : function() {
 			Text.Clear();
@@ -232,7 +232,7 @@ MomoScenes.WanderingMomo = function() {
 	let player = GAME().player;
 	let momo = GAME().momo;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name
 	};
 	
@@ -241,7 +241,7 @@ MomoScenes.WanderingMomo = function() {
 	Text.Flush();
 	
 	//[HelpHer][Leave]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Help her",
 		func : function() {
 			Text.Clear();
@@ -297,7 +297,7 @@ MomoScenes.Interact = function() {
 	let player = GAME().player;
 	let momo = GAME().momo;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name
 	};
 	
@@ -372,7 +372,7 @@ MomoScenes.Interact = function() {
 		Gui.NextPrompt();
 	}
 	else {
-		var scenes = new EncounterTable();
+		let scenes = new EncounterTable();
 		scenes.AddEnc(function() {
 			Text.Add("Momo is lounging on a spare blanket, laid out in an out-of-the-way patch of sunlight, basking in the sunlight like a great lizard. As she hears you approach, though, she sits up and rises to her feet, smiling as she does.", parse);
 		}, 1.0, function() { return true; });
@@ -413,12 +413,12 @@ MomoScenes.Interact = function() {
 //TODO
 MomoScenes.Prompt = function() {
 	let player = GAME().player;
-	var parse : any = {
+	let parse : any = {
 		playername : player.name
 	};
 	
 	//[Talk] [Cook] [Flirt]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Talk",
 		func : function() {
 			Text.Clear();
@@ -458,7 +458,7 @@ MomoScenes.CookPrompt = function() {
 	let momo = GAME().momo;
 	let party : Party = GAME().party;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		girlMorph  : momo.Ascended() ? "morph" : "girl",
 		dragonette : momo.Ascended() ? "dragon" : "dragonette",
@@ -466,17 +466,17 @@ MomoScenes.CookPrompt = function() {
 	};
 	
 	//[Nice Meal][Gastroalchemy][Experiment]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Nice Meal",
 		func : function() {
 			Text.Clear();
 			Text.Add("<i>“One hearty, wholesome, filling meal coming right up,”</i> the chef declares proudly, puffing out her ample chest for emphasis. <i>“Just take a seat over there and be patient, I’ll have something whipped up for you in a jiffy,”</i> she assures you, already starting to gather ingredients and utensils for her latest dish.", parse);
 			Text.NL();
 			
-			var tempParty = [player];
-			var num = 2;
-			for(var i=1, j=party.Num(); i<j; ++i) {
-				var c = party.Get(i);
+			let tempParty = [player];
+			let num = 2;
+			for(let i=1, j=party.Num(); i<j; ++i) {
+				let c = party.Get(i);
 				if(c == momo)
 					num = 3;
 				else
@@ -519,8 +519,8 @@ MomoScenes.CookPrompt = function() {
 			
 			TimeStep({hour: 1});
 			
-			for(var i = 0; i < tempParty.length; ++i) {
-				var c : Entity = tempParty[i];
+			for(let i = 0; i < tempParty.length; ++i) {
+				let c : Entity = tempParty[i];
 				c.AddHPFraction(0.3);
 				c.AddSPFraction(0.3);
 				Status.Full(c, {hours: 8, exp: 1.1});
@@ -547,18 +547,18 @@ MomoScenes.CookPrompt = function() {
 MomoScenes.TalkPrompt = function() {
 	let player = GAME().player;
 	let momo = GAME().momo;
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		girlMorph  : momo.Ascended() ? "morph" : "girl",
 		dragonette : momo.Ascended() ? "dragon" : "dragonette"
 	};
 	parse = player.ParserTags(parse);
 	//[Chat] [Herself] [Family] [Cooking] [Skills]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Chat",
 		func : function() {
 			Text.Clear();
-			var scenes = new EncounterTable();
+			let scenes = new EncounterTable();
 			scenes.AddEnc(function() {
 				Text.Add("<i>“The oddest thing I encountered on my travels? Hmm...”</i> Momo trails off, looking thoughtful as she rubs under her chin with one hand.  <i>“Well, a lot of places I went to recently had these great big signs scattered all over the place. They all looked important, but they all said the same thing. In big block-print letters, they all said 'Placeholder'... now, whyever would someone be running around sticking up signs like that? What's supposed to be there? ”</i> Momo wonders, giving you a quizzical expression as if hoping you might know the answer.", parse);
 			}, 1.0, function() { return true; });
@@ -690,7 +690,7 @@ MomoScenes.TalkPrompt = function() {
 				momo.relation.IncreaseStat(25, 2);
 				
 				//[Flirt][Nope]
-				var options = new Array();
+				let options = new Array();
 				options.push({ nameStr : "Flirt",
 					func : function() {
 						Text.Clear();
@@ -799,7 +799,7 @@ MomoScenes.TalkPrompt = function() {
 				Text.Flush();
 				
 				//[Big family][Small family][Only Child]
-				var options = new Array();
+				let options = new Array();
 				options.push({ nameStr : "Big family",
 					func : function() {
 						Text.Clear();
@@ -943,7 +943,7 @@ MomoScenes.TalkPrompt = function() {
 }
 /*
 MomoScenes.FindingMomo = function() {
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	

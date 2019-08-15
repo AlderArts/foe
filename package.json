@@ -29,6 +29,8 @@
     "raphael": "^2.2.8",
     "style-loader": "^0.23.1",
     "ts-loader": "^6.0.4",
+    "tslint": "^5.18.0",
+    "tslint-webpack-plugin": "^2.1.0",
     "typescript": "^3.5.3",
     "webpack": "^4.35.3",
     "webpack-bundle-analyzer": "^3.4.1",

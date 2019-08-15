@@ -34,7 +34,7 @@ export class PrisonMinigame {
 
 		party.SaveActiveParty();
 		party.ClearActiveParty();
-		for(var i = 0; i < this.party.length; i++)
+		for(let i = 0; i < this.party.length; i++)
 			party.SwitchIn(this.party[i]);
 
 		//TODO maybe use a new one, check rendering
@@ -45,13 +45,13 @@ export class PrisonMinigame {
 	Cleanup() {
 		let party : Party = GAME().party;
 
-		for(var i = 0; i < this.enemy.members.length; i++) {
-			var e = this.enemy.members[i];
+		for(let i = 0; i < this.enemy.members.length; i++) {
+			let e = this.enemy.members[i];
 			e.ClearCombatBonuses();
 			e.combatStatus.EndOfCombat();
 		}
-		for(var i = 0; i < party.members.length; i++) {
-			var e = party.members[i];
+		for(let i = 0; i < party.members.length; i++) {
+			let e = party.members[i];
 			e.ClearCombatBonuses();
 			e.combatStatus.EndOfCombat();
 		}
@@ -63,7 +63,7 @@ export class PrisonMinigame {
 
 	//TODO
 	Tick() {
-		var parse : any = {
+		let parse : any = {
 
 		};
 

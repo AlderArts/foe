@@ -47,7 +47,7 @@ export class Lucille extends Entity {
 	}
 	
 	ToStorage() {
-		var storage = {};
+		let storage = {};
 		
 		this.SavePersonalityStats(storage);
 		
@@ -73,13 +73,13 @@ export namespace LucilleScenes {
 		let fireblossom = GAME().fireblossom;
 		let lucille = GAME().lucille;
 
-		var parse : any = {
+		let parse : any = {
 			playername: player.name,
 			sirmadam: player.mfFem("sir", "madam")
 		};
 		
-		var lucilleFirst = lucille.ThemeroomFirst();
-		var lucillePresent = lucilleFirst || lucille.IsAtLocation();
+		let lucilleFirst = lucille.ThemeroomFirst();
+		let lucillePresent = lucilleFirst || lucille.IsAtLocation();
 		
 		Text.Clear();
 		Text.Add("You make your way toward a billboard of sorts in the back of the main hall, where a set of garish posters proclaim the fabulous experiences one might have in the themed rooms.", parse);
@@ -126,7 +126,7 @@ export namespace LucilleScenes {
 		*/
 		Text.Flush();
 		
-		var selection = function(func : any) {
+		let selection = function(func : any) {
 			Text.Clear();
 			if(lucillePresent) {
 				Text.Add("<i>“A wise choice,”</i> Lucille affirms, leading you toward the back. The two of you enter a narrow corridor with a long line of doors, each marked by a small symbol indicating what is inside. Some of the rooms are marked as occupied, and you hear strange noises from inside them.", parse);
@@ -144,7 +144,7 @@ export namespace LucilleScenes {
 				}
 				else {
 					Text.Add("<i>“This is it,”</i> the hostess stops in front of one of the doors, unlocking it. ", parse);
-					var scenes = new EncounterTable();
+					let scenes = new EncounterTable();
 					scenes.AddEnc(function() {
 						Text.Add("<i>“Sometime, you must tell me of your experiences,”</i> Lucille eyes you suggestively. <i>“Perhaps in my room, over a bottle of wine.”</i>", parse);
 					}, 1.0, function() { return true; });
@@ -171,7 +171,7 @@ export namespace LucilleScenes {
 			Gui.NextPrompt(func);
 		};
 		
-		var options = new Array();
+		let options = new Array();
 		options.push({ nameStr : "Cat Dynasty",
 			tooltip : "Choose the Cat Dynasty and enter the role of Bastet, the hermaphrodite feline Goddess.",
 			func : function() {
@@ -213,14 +213,14 @@ export namespace LucilleScenes {
 
 		cost = cost || 0;
 		
-		var parse : any = {
+		let parse : any = {
 			name       : name,
 			playername : player.name,
 			skinDesc   : function() { return player.SkinDesc(); },
 			coin       : Text.NumToText(cost)
 		};
 		
-		var payFunc = function() {
+		let payFunc = function() {
 			Text.Add("You reach for your coin purse and count how many coins you owe her.", parse);
 			Text.NL();
 			Text.Add("<i>“Pleasure doing business with you, [playername].”</i> Lucille accepts the money and somehow vanishes it in her bodice. <i>“I will look forward to your continued patronage.”</i>", parse);
@@ -309,7 +309,7 @@ export namespace LucilleScenes {
 			Text.Flush();
 			
 			//[Pay][Shark]
-			var options = new Array();
+			let options = new Array();
 			options.push({ nameStr : "Pay",
 				func : function() {
 					Text.Clear();

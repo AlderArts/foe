@@ -155,7 +155,7 @@ HighlandsLoc.Spring.onEntry = function() {
 		Gui.PrintDefaultOptions();
 }
 HighlandsLoc.Spring.description = function() {
-	var parse : any = {};
+	let parse : any = {};
 	
 	Text.Add("You’re standing on the spring plateau. Nestled away against the mountainside with only an obscure, treacherous trail leading upwards from the foot, the place is usually empty save for the few signs of life which mark the fact that Isla’s made her home here, no matter how temporary.");
 	Text.NL();

@@ -147,7 +147,7 @@ export class Miranda extends Entity {
 	}
 
 	ToStorage() {
-		var storage : any = {};
+		let storage : any = {};
 		
 		this.SaveCombatStats(storage);
 		this.SavePersonalityStats(storage);
@@ -175,12 +175,12 @@ export class Miranda extends Entity {
 		let miranda = GAME().miranda;
 
 		Text.Clear();
-		var that = miranda;
+		let that = miranda;
 		
 		that.PrintDescription();
 		Text.Flush();
 		
-		var options = new Array();
+		let options = new Array();
 		options.push({ nameStr: "Release",
 			func : function() {
 				Text.Clear();

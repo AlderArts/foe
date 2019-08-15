@@ -33,7 +33,7 @@ export class Cock extends BodyPart {
 	}
 
 	ToStorage(full : boolean) {
-		var storage : any = {
+		let storage : any = {
 			len    : this.length.base.toFixed(2),
 			thk    : this.thickness.base.toFixed(2)
 		};
@@ -57,7 +57,7 @@ export class Cock extends BodyPart {
 	}
 
 	Clone() {
-		var cock            = new Cock(this.race, this.color);
+		let cock            = new Cock(this.race, this.color);
 		cock.thickness.base = this.thickness.base;
 		cock.length.base    = this.length.base;
 		cock.knot           = this.knot;
@@ -74,7 +74,7 @@ export class Cock extends BodyPart {
 		return this.thickness.Get() * this.length.Get();
 	}
 	Volume() {
-		var r = this.thickness.Get() / 2;
+		let r = this.thickness.Get() / 2;
 		return Math.PI * r * r * this.length.Get();
 	}
 	Knot() {
@@ -96,7 +96,7 @@ export class Cock extends BodyPart {
 	}
 
 	noun() {
-		var noun = [];
+		let noun = [];
 		if(this.vag) {
 			noun.push("clit-cock");
 			noun.push("girl-cock");
@@ -125,7 +125,7 @@ export class Cock extends BodyPart {
 		return _.sample(noun);
 	}
 	nounPlural() {
-		var noun = [];
+		let noun = [];
 		noun.push("cocks");
 		noun.push("dicks");
 		noun.push("manhoods");
@@ -140,8 +140,8 @@ export class Cock extends BodyPart {
 		return _.sample(noun);
 	}
 	Desc() {
-		var ret : any;
-		var cockArea = this.thickness.Get() * this.length.Get();
+		let ret : any;
+		let cockArea = this.thickness.Get() * this.length.Get();
 		if     (cockArea <= 10 ) ret = _.sample([{a:"a", adj: "tiny"}, {a:"a", adj: "pathetic"}, {a:"a", adj: "micro"}, {a:"an", adj: "undersized"}]);
 		else if(cockArea <= 20 ) ret = _.sample([{a:"a", adj: "small"}, {a:"a", adj: "petite"}]);
 		else if(cockArea <= 30 ) ret = _.sample([{a:"a", adj: "below average"}, {a:"a", adj: "modest"}]);
@@ -161,38 +161,38 @@ export class Cock extends BodyPart {
 		return ret;
 	}
 	Short() {
-		var desc = this.Desc();
-		var noun = this.noun();
-		var adj = (Math.random() < 0.5) ? desc.adj : "";
-		var knotted = "";
+		let desc = this.Desc();
+		let noun = this.noun();
+		let adj = (Math.random() < 0.5) ? desc.adj : "";
+		let knotted = "";
 		if(this.Knot() && (Math.random() < 0.5)) {
 			if(adj) knotted += ", ";
 			knotted += "knotted";
 		}
-		var sheath = "";
+		let sheath = "";
 		if(this.Sheath() && (Math.random() < 0.5)) {
 			if(adj || knotted) sheath += ", ";
 			sheath += "sheathed";
 		}
-		var race = "";
+		let race = "";
 		if((this.race != Race.Human) && (Math.random() < 0.5)) race += " " + this.race.Short(Gender.male);
-		var ret = adj + knotted + sheath + race;
+		let ret = adj + knotted + sheath + race;
 		if(ret) ret += " ";
 		return ret + noun;
 	}
 	// TODO
 	TipShort() {
-		var adj = "";
+		let adj = "";
 		
 		if(this.race.isRace(Race.Horse)) adj = "flared ";
 		else if(this.race.isRace(Race.Canine, Race.Reptile)) adj = "tapered ";
 		else if(this.race.isRace(Race.Feline)) adj = "barbed ";
 		
-		var nouns = [
+		let nouns = [
 		"tip",
 		"head"
 		];
-		var noun = _.sample(nouns);
+		let noun = _.sample(nouns);
 		
 		return adj + noun;
 	}
@@ -202,11 +202,11 @@ export class Cock extends BodyPart {
 	}
 	// TODO: Better descriptions
 	aLong() {
-		var desc    = this.Desc();
-		var noun    = this.noun();
-		var knotted = this.Knot() ? ", knotted" : "";
-		var sheath  = this.Sheath() ? ", sheathed" : "";
-		var race = "";
+		let desc    = this.Desc();
+		let noun    = this.noun();
+		let knotted = this.Knot() ? ", knotted" : "";
+		let sheath  = this.Sheath() ? ", sheathed" : "";
+		let race = "";
 		if(this.race != Race.Human) {
 			race += " " + this.race.Short(Gender.male);
 		}
@@ -214,10 +214,10 @@ export class Cock extends BodyPart {
 	}
 	// TODO: Better descriptions
 	Long() {
-		var desc    = this.Desc();
-		var noun    = this.noun();
-		var knotted = this.Knot() ? ", knotted" : "";
-		var sheath  = this.Sheath() ? ", sheathed" : "";
+		let desc    = this.Desc();
+		let noun    = this.noun();
+		let knotted = this.Knot() ? ", knotted" : "";
+		let sheath  = this.Sheath() ? ", sheathed" : "";
 		return desc.adj + knotted + sheath + " " + this.race.Short(Gender.male) + " " + this.noun() + ", " + desc.len + " long and " + desc.thickness + " thick";
 	}
 

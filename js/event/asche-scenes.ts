@@ -22,7 +22,7 @@ export namespace AscheScenes {
         let player = GAME().player;
         let asche = GAME().asche;
 
-        var parse : any = {
+        let parse : any = {
             heshe : player.mfFem("he","she"),
             handsomepretty : player.mfFem("handsome", "pretty")
         };
@@ -60,14 +60,14 @@ export namespace AscheScenes {
         let asche = GAME().asche;
         let rigard = GAME().rigard;
 
-        var parse : any = {
+        let parse : any = {
             handsomepretty : player.mfFem("handsome", "pretty"),
             heshe: player.mfFem("he", "she"),
             hisher: player.mfFem("his", "her"),
             himher: player.mfFem("him", "her")
         };
         
-        var options = new Array();
+        let options = new Array();
         options.push({ nameStr : "Appearance",
             tooltip : "Study the jackal-morph.",
             func : AscheScenes.Appearance,
@@ -94,7 +94,7 @@ export namespace AscheScenes {
                 rigard.MagicShop.Buy(function() {
                     Text.Clear();
                     
-                    var scenes = new EncounterTable();
+                    let scenes = new EncounterTable();
                     scenes.AddEnc(function() {
                         Text.Add("<i>“Oh? There is being nothing here that is interesting customer?”</i> Heaving a small sigh, Asche shrugs and spreads her hands, palms upward. <i>“Well, it is being what it is, so maybe customer should be looking at something else?”</i>", parse);
                     }, 1.0, function() { return true; });
@@ -163,7 +163,7 @@ export namespace AscheScenes {
         Gui.SetButtonsFromList(options, true, function() {
             Text.Clear();
             
-            var scenes = new EncounterTable();
+            let scenes = new EncounterTable();
             scenes.AddEnc(function() {
                 Text.Add("<i>“Bye bye now,”</i> Asche says, flicking a softly-furred ear in your direction. <i>“Asche is hoping that customer is being in one piece when [heshe] is next returning to her shop… but if not, there are things she has which can be solving that little problem, too…”</i>", parse);
             }, 1.0, function() { return true; });
@@ -185,7 +185,7 @@ export namespace AscheScenes {
 
     export function Appearance() {
         let player = GAME().player;
-        var parse : any = {
+        let parse : any = {
             handsomepretty : player.mfFem("handsome", "pretty")
         };
         
@@ -204,7 +204,7 @@ export namespace AscheScenes {
         let player = GAME().player;
         let asche = GAME().asche;
 
-        var parse : any = {
+        let parse : any = {
             handsomepretty : player.mfFem("handsome", "pretty"),
             heshe: player.mfFem("he", "she"),
             hisher: player.mfFem("his", "her"),
@@ -212,7 +212,7 @@ export namespace AscheScenes {
         };
         
         //[Shop][Magic][Herself][Sister][Stock][Tasks][Back]
-        var options = new Array();
+        let options = new Array();
         options.push({ nameStr : "Shop",
             tooltip : "That’s a nice shop she has there.",
             func : function() {
@@ -365,7 +365,7 @@ export namespace AscheScenes {
         let player = GAME().player;
         let asche = GAME().asche;
 
-        var parse : any = {
+        let parse : any = {
             handsomepretty : player.mfFem("handsome", "pretty"),
             heshe: player.mfFem("he", "she"),
             hisher: player.mfFem("his", "her"),
@@ -532,7 +532,7 @@ export namespace AscheScenes {
         let rigard = GAME().rigard;
         let glade = GAME().glade;
 
-        var parse : any = {
+        let parse : any = {
             handsomepretty : player.mfFem("handsome", "pretty"),
             HeShe: player.mfFem("He", "She"),
             heshe: player.mfFem("he", "she"),
@@ -540,10 +540,10 @@ export namespace AscheScenes {
             himher : player.mfFem("him", "her")
         };
         
-        var cost = AscheScenes.FortuneCost();
+        let cost = AscheScenes.FortuneCost();
         
         //[Fortune][Fate][Explain][Never Mind]
-        var options = new Array();
+        let options = new Array();
         options.push({ nameStr : "Fortune",
             tooltip : "Ask for a quick, light and easy reading.",
             func : function() {
@@ -553,7 +553,7 @@ export namespace AscheScenes {
                 Text.Add("Obediently, you do as Asche requests. Her fingers tickle as they ply along the contours of your palm, while she mumbles all the while. There’s no obvious indication of worked magic, but she seems to be concentrating furiously, her eyes narrowed and face set; it’s a minute or so before she finally relaxes her grip on your hand.", parse);
                 Text.NL();
                 
-                var scenes = new EncounterTable();
+                let scenes = new EncounterTable();
                 scenes.AddEnc(function() {
                     Text.Add("<i>“Hmm. Asche is thinking that you are being having romantic problems in near future.”</i> The jackaless looks up from your palm, her expression serious. <i>”Maybe is being a bit of a headache.”</i>", parse);
                     Text.NL();
@@ -642,7 +642,7 @@ export namespace AscheScenes {
                 Text.Add("<i>“Asche is ready to be telling you what she is seeing in your fate.</i>", parse);
                 Text.NL();
                 
-                var scenes = new EncounterTable();
+                let scenes = new EncounterTable();
                 
                 //Fate readings for first phase of game
                 
@@ -786,14 +786,14 @@ export namespace AscheScenes {
         let player = GAME().player;
         let asche = GAME().asche;
 
-        var parse : any = {
+        let parse : any = {
             coin : Text.NumToText(asche.MagicBoxCost()),
             heshe : player.mfFem("he", "she"),
             himher : player.mfFem("him", "her")
         };
         
         //[Explanation][Grab][Back]
-        var options = new Array();
+        let options = new Array();
         if(asche.flags["Talk"] & AscheFlags.Talk.Box) {
             options.push({ nameStr : "Grab",
                 tooltip : "Stick your hand into limbo and see what you can draw out.",
@@ -831,11 +831,11 @@ export namespace AscheScenes {
         let asche = GAME().asche;
         let rigard = GAME().rigard;
 
-        var parse : any = {
+        let parse : any = {
             
         };
         
-        var cost = asche.MagicBoxCost();
+        let cost = asche.MagicBoxCost();
         
         GAME().party.coin -= cost;
         rigard.MagicShop.totalBought += cost;
@@ -844,7 +844,7 @@ export namespace AscheScenes {
         Text.Add("You slide the coins across the counter to Asche, who nods and waves you on. Stepping up to the large wooden box, you stick your hand into the swirling darkness. It’s cool to the touch and there’s a vaguely sticky sensation as you waggle your fingers about, but you’re otherwise fine. Now to see what you can find…", parse);
         Text.NL();
         
-        var scenes = new EncounterTable();
+        let scenes = new EncounterTable();
         scenes.AddEnc(AscheScenes.MagicBoxLoss, 1.0, function() { return true; });
         scenes.AddEnc(AscheScenes.MagicBoxWin, 1.0, function() { return true; });
         
@@ -856,17 +856,17 @@ export namespace AscheScenes {
         let party : Party = GAME().party;
         let asche = GAME().asche;
 
-        var parse : any = {
+        let parse : any = {
             himher : player.mfFem("him", "her"),
             heshe : player.mfFem("he", "she")
         };
         
-        var scenes = new EncounterTable();
+        let scenes = new EncounterTable();
         scenes.AddEnc(function() {
             Text.Add("Your hand closes around something distinctly bottle-shaped - pulling it out, you find that it is indeed a bottle. Inside, you find a potion, and though the bottle looks old and dusty, it should still be drinkable. You stow it away with your other belongings.", parse);
             Text.NL();
             
-            var item = _.sample(MagicShopScenes.MShop().potions);
+            let item = _.sample(MagicShopScenes.MShop().potions);
             
             party.Inv().AddItem(item);
             
@@ -882,7 +882,7 @@ export namespace AscheScenes {
             Text.Add("It seems a little ironic that you could’ve bought her stock off the shelves instead of going to such trouble. Still, you guess that it could have been a worse deal, and stow away your new acquisition.", parse);
             Text.NL();
             
-            var item = _.sample(MagicShopScenes.MShop().consumables);
+            let item = _.sample(MagicShopScenes.MShop().consumables);
             
             party.Inv().AddItem(item);
             
@@ -895,7 +895,7 @@ export namespace AscheScenes {
             Text.NL();
             Text.Add("Putting away the reagents and throwing the pouch back into the bin, you turn to other matters.<br>", parse);
             _.times(_.random(4,10), function() {
-                var item = _.sample(MagicShopScenes.MShop().ingredients);
+                let item = _.sample(MagicShopScenes.MShop().ingredients);
                 
                 party.Inv().AddItem(item);
                 
@@ -930,7 +930,7 @@ export namespace AscheScenes {
             Text.Flush();
             
             //[Yes][No]
-            var options = new Array();
+            let options = new Array();
             options.push({ nameStr : "Yes",
                 tooltip : "What could go wrong?",
                 func : function() {
@@ -939,7 +939,7 @@ export namespace AscheScenes {
                     Text.NL();
                     Text.Add("Nothing happens for a few seconds, but then ", parse);
                     
-                    var scenes = new EncounterTable();
+                    let scenes = new EncounterTable();
                     scenes.AddEnc(function() {
                         Text.Add("you feel a lot more calm and alert, your body cool and mind ready to focus. Hey, that wasn’t so bad, even if the potion was well past its use-by date. Handing the empty vial over the counter to Asche, you turn your refreshed mind to the matters at hand.", parse);
                         
@@ -990,7 +990,7 @@ export namespace AscheScenes {
             Text.Flush();
             
             //[Keep][Toss]
-            var options = new Array();
+            let options = new Array();
             options.push({ nameStr : "Keep",
                 tooltip : "It might be pulp fiction, but it’s still a read, right?",
                 func : function() {
@@ -1041,11 +1041,11 @@ export namespace AscheScenes {
     }
 
     export function MagicBoxLoss() {
-        var parse : any = {
+        let parse : any = {
             
         };
         
-        var scenes = new EncounterTable();
+        let scenes = new EncounterTable();
         scenes.AddEnc(function() {
             Text.Add("Something stiff hooks itself around your wrist, and as you pull it out, you find that it’s a perfectly ordinary-looking umbrella. Certainly nothing magical about this - or so you think, up to the point where you open it and a light drizzle comes pouring out of its underside.", parse);
             Text.NL();
@@ -1103,7 +1103,7 @@ export namespace AscheScenes {
         let party : Party = GAME().party;
         let asche = GAME().asche;
 
-        var parse : any = {
+        let parse : any = {
             coin : Text.NumToText(asche.MagicBoxCost())
         };
         
@@ -1112,7 +1112,7 @@ export namespace AscheScenes {
         Text.Flush();
         
         //[Yes][No]
-        var options = new Array();
+        let options = new Array();
         options.push({ nameStr : "Yes",
             tooltip : "Why not? Another go it is!",
             func : function() {

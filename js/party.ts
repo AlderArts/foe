@@ -70,7 +70,7 @@ export class Party {
 	}
 
 	LoadMember(storage : any, entity : Entity) {
-		var str = entity.ID;
+		let str = entity.ID;
 		if(storage["members"].indexOf(str) != -1) this.AddMember(entity);
 		if(storage["reserve"].indexOf(str) != -1) this.AddReserve(entity);
 		if(storage["saved"].indexOf(str)   != -1) this.saved.push(entity);
@@ -120,7 +120,7 @@ export class Party {
 	}
 
 	InParty(member : Entity, reserve? : boolean) {
-		var idx = this.members.indexOf(member); // Find the index
+		let idx = this.members.indexOf(member); // Find the index
 		if(idx!=-1) return true;
 
 		if(reserve) {
@@ -137,7 +137,7 @@ export class Party {
 	SaveActiveParty() {
 		this.temp = [];
 		this.saved = [];
-		for(var i = 0; i < this.members.length; ++i)
+		for(let i = 0; i < this.members.length; ++i)
 			this.saved.push(this.members[i]);
 	}
 
@@ -147,10 +147,10 @@ export class Party {
 	}
 	LoadActiveParty() {
 		this.ClearActiveParty();
-		for(var i = 0; i < this.saved.length; ++i)
+		for(let i = 0; i < this.saved.length; ++i)
 			this.SwitchIn(this.saved[i]);
 		this.saved = [];
-		for(var i = 0; i < this.temp.length; i++)
+		for(let i = 0; i < this.temp.length; i++)
 			this.RemoveMember(this.temp[i]);
 		this.temp = [];
 	}
@@ -179,23 +179,23 @@ export class Party {
 		if(num < this.members.length) return this.members[num];
 	}
 	GetSlot(member : Entity) : number {
-		for(var i=0; i < this.members.length; ++i) {
+		for(let i=0; i < this.members.length; ++i) {
 			if(this.members[i] == member) return i;
 		}
-		for(var i=0; i < this.reserve.length; ++i) {
+		for(let i=0; i < this.reserve.length; ++i) {
 			if(this.reserve[i] == member) return i + this.members.length;
 		}
 		return -1;
 	}
 	GetRandom(incReserve? : boolean, includePlayer? : boolean) : Entity {
-		var len = this.members.length;
+		let len = this.members.length;
 		if(incReserve)
 			len += this.reserve.length;
 		if(!includePlayer) {
 			len--;
 			if(len <= 0) return null;
 		}
-		var num = Math.random() * len;
+		let num = Math.random() * len;
 		num = Math.floor(num);
 		// Assume player is always first pos
 		if(!includePlayer) num++;
@@ -204,20 +204,20 @@ export class Party {
 	}
 
 	InReserve(member : Entity) : boolean {
-		var idx = this.reserve.indexOf(member); // Find the index
+		let idx = this.reserve.indexOf(member); // Find the index
 		return (idx!=-1);
 	}
 	InSaved(member : Entity) : boolean {
-		var idx = this.saved.indexOf(member); // Find the index
+		let idx = this.saved.indexOf(member); // Find the index
 		return (idx!=-1);
 	}
 	InTemp(member : Entity) : boolean {
-		var idx = this.temp.indexOf(member); // Find the index
+		let idx = this.temp.indexOf(member); // Find the index
 		return (idx!=-1);
 	}
 
 	AddMember(member : Entity, temporary? : boolean) {
-		var idx = this.members.indexOf(member); // Find the index
+		let idx = this.members.indexOf(member); // Find the index
 		if(idx==-1) {
 			if(this.members.length >= 4)
 				this.AddReserve(member);
@@ -229,33 +229,33 @@ export class Party {
 	}
 
 	AddReserve(member : Entity) {
-		var idx = this.reserve.indexOf(member); // Find the index
+		let idx = this.reserve.indexOf(member); // Find the index
 		if(idx==-1) this.reserve.push(member); // Only add if not already added
 		if(this == GAME().party) member.DebugMode(GetDEBUG());
 	}
 
 	RemoveMember(member : Entity) {
-		var idx = this.members.indexOf(member);  // Find the index
+		let idx = this.members.indexOf(member);  // Find the index
 		if(idx!=-1) this.members.splice(idx, 1); // Remove it if really found!
-		var idx = this.reserve.indexOf(member);  // Find the index
+		idx = this.reserve.indexOf(member);  // Find the index
 		if(idx!=-1) this.reserve.splice(idx, 1); // Remove it if really found!
 		if(this == GAME().party) member.DebugMode(false);
 	}
 
 	SwitchPrompt(member : Entity) {
-		var parse : any = {
+		let parse : any = {
 			name:   member.name,
 			himher: member.himher(),
 			HeShe:  member.HeShe()
 		};
-		var active = this.InParty(member);
-		var that = this;
+		let active = this.InParty(member);
+		let that = this;
 		Text.Clear();
 		Text.Add("Switch [name] with who?", parse);
 		Text.Flush();
 
 		if(active) {
-			var options = [];
+			let options = [];
 			options.push({ nameStr : "---",
 				func : function() {
 					that.SwitchOut(member);
@@ -263,8 +263,8 @@ export class Party {
 				}, enabled : true,
 				tooltip: Text.Parse("Send [name] to the reserve.", parse)
 			});
-			for(var i = 0; i < this.reserve.length; i++) {
-				var e = this.reserve[i];
+			for(let i = 0; i < this.reserve.length; i++) {
+				let e = this.reserve[i];
 				parse["name2"] = e.name;
 				options.push({ nameStr : e.name,
 					obj  : e,
@@ -284,9 +284,9 @@ export class Party {
 				Gui.SetButtonsFromList(options);
 		}
 		else {
-			var options = [];
-			for(var i = 0; i < this.members.length; i++) {
-				var e = this.members[i];
+			let options = [];
+			for(let i = 0; i < this.members.length; i++) {
+				let e = this.members[i];
 				options.push({ nameStr : e.name,
 					obj  : e,
 					func : function(obj : Entity) {
@@ -327,21 +327,21 @@ export class Party {
 	}
 
 	RestFull() {
-		for (var i=0; i < this.members.length; i++)
+		for (let i=0; i < this.members.length; i++)
 			this.members[i].RestFull();
-		for (var i=0; i < this.reserve.length; i++)
+		for (let i=0; i < this.reserve.length; i++)
 			this.reserve[i].RestFull();
 	}
 
 	Sleep() {
-		for (var i=0; i < this.members.length; i++)
+		for (let i=0; i < this.members.length; i++)
 			this.members[i].Sleep();
-		for (var i=0; i < this.reserve.length; i++)
+		for (let i=0; i < this.reserve.length; i++)
 			this.reserve[i].Sleep();
 	}
 
 	Interact(preventClear? : boolean, switchSpot? : boolean, back? : any) {
-		var parse : any = {
+		let parse : any = {
 
 		};
 
@@ -349,13 +349,13 @@ export class Party {
 			Text.Clear();
 
 		SetGameState(GameState.Game, Gui);
-		var list = new Array();
+		let list = new Array();
 
 		// Interacting with self opens options for masturbation etc
 		Text.Add("<table class='party' style='width:[w]%'>", {w: this.members.length > 1 ? "100" : "50"});
 		Text.Add("<tr>");
-		for(var i = 0; i < this.members.length; i++) {
-			var member = this.members[i];
+		for(let i = 0; i < this.members.length; i++) {
+			let member = this.members[i];
 			Text.Add("<td>");
 			Text.Add("<p><center style='font-size: x-large'><b>" + member.name + "</b></center></p>");
 			Text.Add("<table class='party' style='width:100%'>");
@@ -367,7 +367,7 @@ export class Party {
 				Text.Add("<tr><td><b>SexLevel:</b></td><td>" + member.sexlevel + "</td></tr>", parse);
 				Text.Add("<tr><td><b>S.Exp:</b></td><td>"     + Math.floor(member.sexperience) + "/" + Math.floor(member.sexpToLevel) + "</td></tr>");
 				if(member.currentJob) {
-					var jd  = member.jobs[member.currentJob.name];
+					let jd  = member.jobs[member.currentJob.name];
 					if(jd) {
 						let parse : any = {
 							job        : jd.job.Short(this),
@@ -376,10 +376,10 @@ export class Party {
 						};
 
 						// Check for maxed out job
-						var master   = jd.job.Master(member);
-						var toLevel;
+						let master   = jd.job.Master(member);
+						let toLevel;
 						if(!master) {
-							var newLevel = jd.job.levels[jd.level-1];
+							let newLevel = jd.job.levels[jd.level-1];
 							toLevel      = newLevel.expToLevel * jd.mult;
 						}
 
@@ -414,8 +414,8 @@ export class Party {
 		Text.Add("</table>");
 		if(switchSpot) {
 			// Add reserve too
-			for(var i = 0; i < this.reserve.length; i++) {
-				var member = this.reserve[i];
+			for(let i = 0; i < this.reserve.length; i++) {
+				let member = this.reserve[i];
 				list.push({
 					nameStr: member.name,
 					func: member.Interact,
@@ -433,25 +433,25 @@ export class Party {
 	}
 
 	ShowAbilities() {
-		var list : any[] = [];
-		var that = this;
+		let list : any[] = [];
+		let that = this;
 
-		var ents = [];
-		for(var i = 0; i < this.members.length; i++)
+		let ents = [];
+		for(let i = 0; i < this.members.length; i++)
 			ents.push(this.members[i]);
 
 		// Go through each member, add available abilities to list
-		for(var i = 0; i < ents.length; i++) {
-			var entity = ents[i];
-			var abilities = entity.abilities;
+		for(let i = 0; i < ents.length; i++) {
+			let entity = ents[i];
+			let abilities = entity.abilities;
 
-			var pushAbilities = function(coll : any, jobAbilities? : any) {
-				for(var ab = 0; ab < coll.AbilitySet.length; ab++) {
-					var ability = coll.AbilitySet[ab];
+			let pushAbilities = function(coll : any, jobAbilities? : any) {
+				for(let ab = 0; ab < coll.AbilitySet.length; ab++) {
+					let ability = coll.AbilitySet[ab];
 					if(jobAbilities && jobAbilities.HasAbility(ability)) continue;
 
 					if(ability.OOC) {
-						var en = ability.enabledCondition(null, entity);
+						let en = ability.enabledCondition(null, entity);
 
 						Text.Add("[name] can use [ability] for [cost]: [desc]<br>",
 							{name: Text.Bold(entity.name), ability: ability.name, cost: ability.CostStr(), desc: ability.Short()});
@@ -467,9 +467,9 @@ export class Party {
 								Text.NL();
 								Text.Flush();
 
-								var target = new Array();
-								for(var i=0,j=that.members.length; i<j; i++){
-									var t = that.members[i];
+								let target = new Array();
+								for(let i=0,j=that.members.length; i<j; i++){
+									let t = that.members[i];
 									target.push({
 										nameStr : t.name,
 										func    : function(t : Entity) {
@@ -486,10 +486,10 @@ export class Party {
 					}
 				}
 			}
-			var jobAbilities = entity.currentJob ? entity.currentJob.abilities : null;
+			let jobAbilities = entity.currentJob ? entity.currentJob.abilities : null;
 			if(jobAbilities)
 				pushAbilities(jobAbilities);
-			for(var coll in abilities)
+			for(let coll in abilities)
 				pushAbilities(abilities[coll], jobAbilities);
 		}
 		Text.Flush();

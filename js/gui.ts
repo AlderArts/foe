@@ -94,7 +94,7 @@ export class Gui {
 		bg.node.ondragstart = function() {
 			return false;
 		}
-		var svg = document.querySelector("svg");
+		let svg = document.querySelector("svg");
 		svg.removeAttribute("width");
 		svg.removeAttribute("height");
 
@@ -108,11 +108,11 @@ export class Gui {
 
 		party = Gui.canvas.set();
 		partyObj = [];
-		for(var i = 0; i < 4; ++i)
+		for(let i = 0; i < 4; ++i)
 			Gui.SetupPortrait(20, 75+120*i, party, partyObj, true, i);
 		enemy = Gui.canvas.set();
 		enemyObj = [];
-		for(var i = 0; i < 4; ++i)
+		for(let i = 0; i < 4; ++i)
 			Gui.SetupPortrait(1020, 75+120*i, enemy, enemyObj, false, i);
 
 		// Cavalcade
@@ -124,9 +124,9 @@ export class Gui {
 		Gui.SetupCavalcadeHand(1020, 75+200*1, cavalcadeSet, cavalcadeObj.p);
 		Gui.SetupCavalcadeHand(1020, 75+200*2, cavalcadeSet, cavalcadeObj.p);
 
-		var houseObj = [];
-		for(var i = 0; i < 3; ++i) {
-			var card = Gui.canvas.image(Images.card_back, 25+60*i, 380+25*i, 106, 150);
+		let houseObj = [];
+		for(let i = 0; i < 3; ++i) {
+			let card = Gui.canvas.image(Images.card_back, 25+60*i, 380+25*i, 106, 150);
 			houseObj.push(card);
 			cavalcadeSet.push(card);
 		}
@@ -157,11 +157,11 @@ export class Gui {
 		clock.r = 25;
 		overlay.push(Gui.canvas.circle(clock.x, clock.y, clock.r).attr({"fill": "#000"}));
 		overlay.push(Gui.canvas.circle(clock.x, clock.y, clock.r*0.97).attr({fill: "rhsb(.1 , .5, .95)-hsb(.1 , 1, .45)"}));
-		for(var i = 0; i < 12; i++) {
-			var start_x = clock.x+Math.round(clock.r*0.8*Math.cos(30*i*Math.PI/180));
-			var start_y = clock.y+Math.round(clock.r*0.8*Math.sin(30*i*Math.PI/180));
-			var end_x   = clock.x+Math.round(clock.r*Math.cos(30*i*Math.PI/180));
-			var end_y   = clock.y+Math.round(clock.r*Math.sin(30*i*Math.PI/180));
+		for(let i = 0; i < 12; i++) {
+			let start_x = clock.x+Math.round(clock.r*0.8*Math.cos(30*i*Math.PI/180));
+			let start_y = clock.y+Math.round(clock.r*0.8*Math.sin(30*i*Math.PI/180));
+			let end_x   = clock.x+Math.round(clock.r*Math.cos(30*i*Math.PI/180));
+			let end_y   = clock.y+Math.round(clock.r*Math.sin(30*i*Math.PI/180));
 			overlay.push(Gui.canvas.path("M"+start_x+" "+start_y+"L"+end_x+" "+end_y).attr({stroke: "#000", "stroke-width": 3}));
 		}
 		clock.hour   = Gui.canvas.path("M"+clock.x+" "+clock.y+"L"+clock.x+" "+(clock.y-clock.r/2)).attr({stroke: "#000", "stroke-width": 5});
@@ -222,8 +222,8 @@ export class Gui {
 
 	static Print(x : number, y : number, text : string, font : RaphaelFont, size : number, align? : string) {
 		align = align || "start";
-		var t = Gui.canvas.print(x, y, text, font, size);
-		var bb = t.getBBox();
+		let t = Gui.canvas.print(x, y, text, font, size);
+		let bb = t.getBBox();
 		if(align == "middle")
 			t.translate(-bb.width/2, 0);
 		else if(align == "end")
@@ -257,22 +257,22 @@ export class Gui {
 	}
 
 	static SetupPortrait(xoffset : number, yoffset : number, set : RaphaelSet, obj : any, isParty : boolean, index : number) {
-		var barStart   = 85;
-		var barWidth   = Gui.barWidth;
-		var barHeigth  = 30;
-		var border     = 6;
-		var barOffsetX = 6;
-		var barOffsetY = 30;
+		let barStart   = 85;
+		let barWidth   = Gui.barWidth;
+		let barHeigth  = 30;
+		let border     = 6;
+		let barOffsetX = 6;
+		let barOffsetY = 30;
 
-		var glowColor = (isParty) ? "#00FF00" : "#FF1111";
+		let glowColor = (isParty) ? "#00FF00" : "#FF1111";
 
-		var charSet   = Gui.canvas.set();
-		var statusSet = Gui.canvas.set();
-		var portrait  = Gui.canvas.image(Images.pc_male, xoffset, yoffset, 100, 100);
+		let charSet   = Gui.canvas.set();
+		let statusSet = Gui.canvas.set();
+		let portrait  = Gui.canvas.image(Images.pc_male, xoffset, yoffset, 100, 100);
 		portrait.node.ondragstart = function() {
 			return false;
 		}
-		var local : any = {
+		let local : any = {
 			xoffset : xoffset,
 			yoffset : yoffset,
 			portrait: portrait,
@@ -291,7 +291,7 @@ export class Gui {
 			lpStr   : Gui.canvas.text(xoffset+barStart+barWidth-5+2*barOffsetX, yoffset+25+2*barOffsetY, "9999/9999").attr({"text-anchor": "end", fill:"#fff", font: DEFAULT_FONT})
 		};
 
-		for(var i = 0; i < StatusList.NumStatus; i++) {
+		for(let i = 0; i < StatusList.NumStatus; i++) {
 			local.status[i] = Gui.canvas.image(Images.status[StatusEffect.Burn], xoffset + 16*i + 2, yoffset + 70, 15, 15);
 			statusSet.push(local.status[i]);
 		}
@@ -321,7 +321,7 @@ export class Gui {
 	static HandlePortraitClick = function(index : number, isParty : boolean) {
 		if(gameState == GameState.Game && !GAME().IntroActive) {
 			if(isParty) {
-				var character = GAME().party.Get(index);
+				let character = GAME().party.Get(index);
 				if(character) {
 					Gui.SetLastSubmenu(Input.exploreButtons[ExploreButtonIndex.Party]);
 					character.Interact(GAME().party.location.switchSpot());
@@ -331,14 +331,14 @@ export class Gui {
 	}
 
 	static SetupCavalcadeHand(xoffset : number, yoffset : number, set : RaphaelSet, obj : any) {
-		var charSet = Gui.canvas.set();
+		let charSet = Gui.canvas.set();
 
-		//var portrait = Gui.canvas.image(Images.pc_male, xoffset, yoffset, 100, 100);
-		var cards = [];
+		//let portrait = Gui.canvas.image(Images.pc_male, xoffset, yoffset, 100, 100);
+		let cards = [];
 		cards.push(Gui.canvas.image(Images.card_back, xoffset, yoffset, 106, 150));
 		cards.push(Gui.canvas.image(Images.card_back, 110+xoffset, yoffset, 106, 150));
 
-		var local = {
+		let local = {
 			xoffset  : xoffset,
 			yoffset  : yoffset,
 			name     : {},
@@ -355,11 +355,11 @@ export class Gui {
 	}
 
 	static Resize = function() {
-		var w = $(window).width();
-		var h = $(window).height();
-		var ratioW = w/width;
-		var ratioH = h/height;
-		var xpos = 0, ypos = 0, ratio = 1;
+		let w = $(window).width();
+		let h = $(window).height();
+		let ratioW = w/width;
+		let ratioH = h/height;
+		let xpos = 0, ypos = 0, ratio = 1;
 		//alert("R:" + ratio + " RW:" + ratioW + " RH:" + ratioH);
 		if(ratioW / ratioH > 1) {
 			xpos  = (w-ratioH*width) / 2;
@@ -370,17 +370,17 @@ export class Gui {
 			ratio = ratioW;
 		}
 
-		var textarea = document.getElementById("mainTextWrapper");
+		let textarea = document.getElementById("mainTextWrapper");
 		textarea.style.left   = xpos + ratio * (textArea.inset/2+textArea.x) +"px";
 		textarea.style.top    = ypos + ratio * (textArea.inset/2+textArea.y) +"px";
 		textarea.style.width  = -2*textArea.pad.x + ratio * (-textArea.inset+textArea.w) +"px";
 		textarea.style.height = -2*textArea.pad.y + ratio * (-textArea.inset+textArea.h) +"px";
 
-		var inputtext = document.getElementById("textInputArea");
+		let inputtext = document.getElementById("textInputArea");
 		inputtext.style.left   = xpos + ratio * inputtextArea.x +"px";
 		inputtext.style.top    = ypos + ratio * inputtextArea.y +"px";
 
-		var tooltip = document.getElementById("tooltipTextArea");
+		let tooltip = document.getElementById("tooltipTextArea");
 		tooltip.style.left   = xpos + ratio * tooltipArea.x +"px";
 		tooltip.style.top    = ypos + ratio * tooltipArea.y +"px";
 		tooltip.style.width  =        ratio * tooltipArea.w +"px";
@@ -399,7 +399,7 @@ export class Gui {
 		Text.Add("Integer posuere quam at odio pharetra dignissim sollicitudin leo accumsan. Curabitur eu pharetra urna. Vivamus et gravida tortor. Morbi vel porttitor urna. Donec vitae rutrum urna. Integer elit orci, gravida eget viverra et, tincidunt quis est. Aliquam erat volutpat. Sed euismod rutrum lectus, nec vehicula turpis volutpat et. Nulla mauris felis, eleifend a fringilla id, faucibus eget purus. Donec in neque in ligula condimentum lobortis.");
 		Text.Flush();
 
-		var options = new Array();
+		let options = new Array();
 		options.push({ nameStr : "Reset",
 			func : function() {
 				FontFamily = "Georgia, sans-serif, \"Arial\", \"Helvetica\"";
@@ -414,7 +414,7 @@ export class Gui {
 		});
 		options.push({ nameStr : "Font",
 			func : function() {
-				var font = prompt("Please enter fonts (css: font-families) to use, in order of priority.", FontFamily || "sans-serif, Georgia")
+				let font = prompt("Please enter fonts (css: font-families) to use, in order of priority.", FontFamily || "sans-serif, Georgia")
 				if(font != null && font != "") {
 					FontFamily = font;
 					if(isOnline())
@@ -425,7 +425,7 @@ export class Gui {
 		});
 		options.push({ nameStr : "Size",
 			func : function() {
-				var size = prompt("Please enter desired font size (css: font-size). For example: small, medium, large.", FontSize || "large")
+				let size = prompt("Please enter desired font size (css: font-size). For example: small, medium, large.", FontSize || "large")
 				if(size != null && size != "") {
 					FontSize = size;
 					if(isOnline())
@@ -444,7 +444,7 @@ export class Gui {
 		Text.Add("Set a new background color?");
 		Text.Flush();
 
-		var options = new Array();
+		let options = new Array();
 		options.push({ nameStr : "Light",
 			func : function() {
 				BgColor = "rgba(255, 255, 255, 0.2)";
@@ -511,7 +511,7 @@ export class Gui {
 		});
 		options.push({ nameStr : "Custom",
 			func : function() {
-				var col = prompt("Please enter desired background color. Format is rgba(R,G,B,A). Colors are in the range 0-255. Opacity is in the range 0-1.", BgColor || "rgba(255,255,255,1.0)")
+				let col = prompt("Please enter desired background color. Format is rgba(R,G,B,A). Colors are in the range 0-255. Opacity is in the range 0-1.", BgColor || "rgba(255,255,255,1.0)")
 				if(col != null && col != "") {
 					BgColor = col;
 					if(isOnline())
@@ -525,18 +525,18 @@ export class Gui {
 	}
 
 	static ClearChoiceButtons() {
-		for(var i = 0; i < Input.buttons.length; i++)
+		for(let i = 0; i < Input.buttons.length; i++)
 			Input.buttons[i].SetVisible(false);
 	}
 
 	static ClearButtons() {
-		for(var i = 0; i < Input.buttons.length; i++) {
+		for(let i = 0; i < Input.buttons.length; i++) {
 			Input.buttons[i].enabledImage = Images.imgButtonEnabled;
 			Input.buttons[i].SetVisible(false);
 		}
-		for(var i = 0; i < Input.navButtons.length; i++)
+		for(let i = 0; i < Input.navButtons.length; i++)
 			Input.navButtons[i].SetVisible(false);
-		for(var i = 0; i < Input.exploreButtons.length; i++)
+		for(let i = 0; i < Input.exploreButtons.length; i++)
 			Input.exploreButtons[i].SetVisible(false);
 	}
 
@@ -548,10 +548,10 @@ export class Gui {
 
 	static SetButtonPage(list : any[], page : number, state : GameState) {
 		Gui.ClearChoiceButtons();
-		for(var i=0, j=page*Input.buttons.length; i<Input.buttons.length && j<list.length; i++, j++) {
-			var name = list[j].nameStr || "NULL";
-			var func = list[j].func;
-			var en = list[j].enabled || false;
+		for(let i=0, j=page*Input.buttons.length; i<Input.buttons.length && j<list.length; i++, j++) {
+			let name = list[j].nameStr || "NULL";
+			let func = list[j].func;
+			let en = list[j].enabled || false;
 			Input.buttons[i].enabledImage = list[j].image || Images.imgButtonEnabled;
 			Input.buttons[i].Setup(name, func, en, list[j].obj, list[j].tooltip, state);
 		}
@@ -559,11 +559,11 @@ export class Gui {
 
 	static SetButtonsFromList(list : any[], backEnabled? : boolean, backFunc : any = Gui.PrintDefaultOptions, state? : GameState, backState? : GameState) {
 		Gui.ClearButtons();
-		var currentPage = 0;
+		let currentPage = 0;
 
 		Gui.SetButtonPage(list, currentPage, state);
 
-		var updateNav = function()
+		let updateNav = function()
 		{
 			Input.navButtons[0].Setup(">>",
 				function() {
@@ -596,18 +596,18 @@ export class Gui {
 
 	static SetButtonCollectionPage(encounter : any, caster : any, list : any[], ret : any, page : number) {
 		Gui.ClearChoiceButtons();
-		for(var i=0, j=page*Input.buttons.length; i<Input.buttons.length && j<list.length; i++, j++) {
+		for(let i=0, j=page*Input.buttons.length; i<Input.buttons.length && j<list.length; i++, j++) {
 			Input.buttons[i].SetFromAbility(encounter, caster, list[j], ret);
 		}
 	}
 
 	static SetButtonsFromCollection = function(encounter : any, caster : any, list : any[], ret : any, backFunc : any) {
 		Gui.ClearButtons();
-		var currentPage = 0;
+		let currentPage = 0;
 
 		Gui.SetButtonCollectionPage(encounter, caster, list, ret, currentPage);
 
-		var updateNav = function()
+		let updateNav = function()
 		{
 			Input.navButtons[0].Setup(">>",
 				function() {
@@ -638,9 +638,9 @@ export class Gui {
 
 	static RenderParty(p : any, set : RaphaelSet, obj : any, max? : number) {
 		max = max || 4;
-		var i = 0;
+		let i = 0;
 		for(; i < p.Num() && i < max; ++i) {
-			var c = p.Get(i);
+			let c = p.Get(i);
 			set[i].show();
 			Gui.RenderEntity(c, set[i], obj[i]);
 			if(gameState != GameState.Combat || c != CurrentActiveChar())
@@ -651,7 +651,7 @@ export class Gui {
 	}
 	static RenderEntity(entity : any, set : RaphaelElement|any, obj : any) {
 		/*
-		var local = {
+		let local = {
 			portrait: Gui.canvas.image(Images.pc_male, xoffset, yoffset, 100, 100),
 			hpBack  : Gui.canvas.rect(xoffset+barStart, yoffset+10, barWidth, barHeigth).attr({"stroke-width": border, stroke: "#000", fill: "#fff"}),
 			hpBar   : Gui.canvas.rect(xoffset+barStart, yoffset+10, barWidth, barHeigth).attr({fill: "#f00"}),
@@ -679,25 +679,25 @@ export class Gui {
 
 		Gui.PrintGlow(set, obj.name, obj.xoffset-5, obj.yoffset, entity.uniqueName || entity.name, fonts.Kimberley, 30, "start", {opacity: 1});
 
-		var hp = Math.floor(entity.curHp) / Math.floor(entity.HP());
-		var hpText = Math.floor(entity.curHp) + "/" + Math.floor(entity.HP());
+		let hp = Math.floor(entity.curHp) / Math.floor(entity.HP());
+		let hpText = Math.floor(entity.curHp) + "/" + Math.floor(entity.HP());
 		obj.hpStr.attr({text: hpText});
 		obj.hpBar.stop().animate({width: hp*Gui.barWidth}, 500, "<>");
-		var sp = Math.floor(entity.curSp) / Math.floor(entity.SP());
-		var spText = Math.floor(entity.curSp) + "/" + Math.floor(entity.SP());
+		let sp = Math.floor(entity.curSp) / Math.floor(entity.SP());
+		let spText = Math.floor(entity.curSp) + "/" + Math.floor(entity.SP());
 		obj.spStr.attr({text: spText});
 		obj.spBar.stop().animate({width: sp*Gui.barWidth}, 500, "<>");
-		var lust = Math.floor(entity.curLust) / Math.floor(entity.Lust());
-		var lustText = Math.floor(entity.curLust) + "/" + Math.floor(entity.Lust());
+		let lust = Math.floor(entity.curLust) / Math.floor(entity.Lust());
+		let lustText = Math.floor(entity.curLust) + "/" + Math.floor(entity.Lust());
 		obj.lpStr.attr({text: lustText});
 		obj.lpBar.stop().animate({width: lust*Gui.barWidth}, 500, "<>");
 
-		var levelText = "Lvl " + entity.level + "/" + entity.sexlevel;
+		let levelText = "Lvl " + entity.level + "/" + entity.sexlevel;
 		if(entity.currentJob) {
-			var jd  = entity.jobs[entity.currentJob.name];
+			let jd  = entity.jobs[entity.currentJob.name];
 			if(jd) {
 				// Check for maxed out job
-				var master   = jd.job.Master(entity);
+				let master   = jd.job.Master(entity);
 				if(master) levelText += "/*";
 				else       levelText += "/" + jd.level;
 			}
@@ -711,7 +711,7 @@ export class Gui {
 	}
 
 	static RenderLocation(name : any) {
-		var nameStr;
+		let nameStr;
 		if(_.isFunction(name))
 			nameStr = name();
 		else if(name)
@@ -723,17 +723,17 @@ export class Gui {
 	}
 
 	static RenderTime() {
-		var coinStr = GAME().party.coin;
+		let coinStr = GAME().party.coin;
 		Gui.PrintGlow(overlay, coin, 250, 690, coinStr, fonts.Kimberley, 20, "end", {opacity: 1});
 
-		var dateStr = WorldTime().DateString();
+		let dateStr = WorldTime().DateString();
 		Gui.PrintGlow(overlay, date, 1245, 15, dateStr, fonts.Kimberley, 20, "end", {opacity: 1});
 
-		var timeStr = WorldTime().TimeString();
+		let timeStr = WorldTime().TimeString();
 		Gui.PrintGlow(overlay, time, 1245, 45, timeStr, fonts.Kimberley, 20, "end", {opacity: 1});
 
-		var hour   = WorldTime().ToHours();
-		var minute = WorldTime().ToMinutes();
+		let hour   = WorldTime().ToHours();
+		let minute = WorldTime().ToMinutes();
 
 		if(clock.hourNum) {
 			clock.hour.stop().animate({transform:"r"+(hour/12*360)+","+clock.x+","+clock.y}, 2000, "<>");
@@ -750,9 +750,9 @@ export class Gui {
 	static SetGameState(state : GameState) {
 		switch(gameState) { // TODO?
 			case GameState.Game:
-				for(var i = 0; i < Input.menuButtons.length; i++)
+				for(let i = 0; i < Input.menuButtons.length; i++)
 					Input.menuButtons[i].SetVisibility();
-				for(var i = 0; i < Input.exploreButtons.length; i++)
+				for(let i = 0; i < Input.exploreButtons.length; i++)
 					Input.exploreButtons[i].SetVisibility();
 				break;
 			case GameState.Event:
@@ -763,9 +763,9 @@ export class Gui {
 				Input.exploreButtonSet.hide();
 			break;
 		}
-		for(var i = 0; i < Input.buttons.length; i++)
+		for(let i = 0; i < Input.buttons.length; i++)
 			Input.buttons[i].SetVisibility();
-		for(var i = 0; i < Input.navButtons.length; i++)
+		for(let i = 0; i < Input.navButtons.length; i++)
 			Input.navButtons[i].SetVisibility();
 	}
 
@@ -808,9 +808,9 @@ export class Gui {
 				enemy.hide();
 				let cavalcade = GetCavalcade();
 
-				for(var i=0,j=cavalcade.players.length; i<j; i++) {
-					var p    = cavalcade.players[i];
-					var obj  = cavalcadeObj.p[i];
+				for(let i=0,j=cavalcade.players.length; i<j; i++) {
+					let p    = cavalcade.players[i];
+					let obj  = cavalcadeObj.p[i];
 					/*
 					if(p.avatar.combat) {
 						obj.portrait.attr({src: p.avatar.combat, opacity: p.folded ? .5 : 1}).show();
@@ -822,11 +822,11 @@ export class Gui {
 						p.out ? "Out" : p.purse.coin,
 						fonts.Kimberley, 30, "end", {opacity: 1});
 
-					var cards = obj.cards;
+					let cards = obj.cards;
 
-					for(var k=0; k < 2; k++) {
+					for(let k=0; k < 2; k++) {
 						// Show cards when game is complete
-						var showCard = cavalcade.round > 4;
+						let showCard = cavalcade.round > 4;
 						// don't show folded opponents
 						if(p.folded) showCard = false;
 						showCard = showCard || (p == GAME().player); // always show own
@@ -838,18 +838,18 @@ export class Gui {
 					}
 				}
 
-				for(var i=0,j=cavalcade.house.length; i<j; i++) {
-					var card = cavalcadeObj.house[i];
+				for(let i=0,j=cavalcade.house.length; i<j; i++) {
+					let card = cavalcadeObj.house[i];
 					// Show cards when game is complete
-					var showCard = cavalcade.round > i + 1;
+					let showCard = cavalcade.round > i + 1;
 					if(showCard)
 						card.attr({src: cavalcade.house[i].Img}).show();
 					else
 						card.attr({src: Images.card_back}).show();
 				}
 
-				var potStr   = cavalcade.pot;
-				var roundStr = cavalcade.round - 1;
+				let potStr   = cavalcade.pot;
+				let roundStr = cavalcade.round - 1;
 				if(roundStr < 1) roundStr = 1;
 				if(roundStr > 3) roundStr = 3;
 				Gui.PrintGlow(cavalcadeSet, cavalcadeObj.round, 850, 620, roundStr, fonts.Kimberley, 20, "end", {opacity: 1});
@@ -933,7 +933,7 @@ export class Gui {
 	}
 
 	static PrintDefaultOptions(preventClear? : boolean) {
-		var e = Gui.Callstack.pop();
+		let e = Gui.Callstack.pop();
 		if(e) {
 			e();
 			return;

@@ -4,6 +4,7 @@ const TerserJSPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const TSLintPlugin = require('tslint-webpack-plugin');
 
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const ZipPlugin = require('zip-webpack-plugin');
@@ -14,6 +15,9 @@ module.exports = {
   mode: "development",
   entry: './index.ts',
   plugins: [
+    new TSLintPlugin({
+      files: ['./**/*.ts']
+    }),
     new BundleAnalyzerPlugin(),
     new CopyWebpackPlugin([
         './foe.html',

@@ -47,15 +47,15 @@ export class Maze {
 			return this.map[x][y];
 	}
 	Print(room : MazeRoom) {
-		var maze = this;
+		let maze = this;
 		//TODO TEMP
 		Text.Add("<table class='party'>");
 		_.times(maze.yMax+1, function(y) {
 			Text.Add("<tr>");
 			_.times(maze.xMax+1, function(x) {
 				Text.Add("<td>");
-				var img = "";
-				var r = maze.GetRoom(x, y);
+				let img = "";
+				let r = maze.GetRoom(x, y);
 				if(r == room) img = "Player";
 				else if(r) img = "Room";
 				Text.Add(img);
@@ -85,10 +85,10 @@ export class MazeRoom extends Event {
 		//Set up regular events
 		super.SetButtons(links);
 		
-		var north = this.maze.GetRoom(this.x, this.y-1);
-		var west  = this.maze.GetRoom(this.x-1, this.y);
-		var south = this.maze.GetRoom(this.x, this.y+1);
-		var east  = this.maze.GetRoom(this.x+1, this.y);
+		let north = this.maze.GetRoom(this.x, this.y-1);
+		let west  = this.maze.GetRoom(this.x-1, this.y);
+		let south = this.maze.GetRoom(this.x, this.y+1);
+		let east  = this.maze.GetRoom(this.x+1, this.y);
 		
 		//Set up special interface
 		Input.buttons[5].enabledImage = Images.imgButtonEnabled2;

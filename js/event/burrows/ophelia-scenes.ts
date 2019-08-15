@@ -33,7 +33,7 @@ export namespace OpheliaScenes {
     export function LabDesc() {
         let ophelia = GAME().ophelia;
         let burrows = GAME().burrows;
-        var parse : any = {
+        let parse : any = {
             old  : ophelia.flags["Met"] != 0 ? " old" : "",
             camp : GlobalScenes.PortalsOpen() ? "the gemstead" : "camp"
         };
@@ -78,7 +78,7 @@ export namespace OpheliaScenes {
 
     export function LabApproach() {
         let player = GAME().player;
-        var parse : any = {
+        let parse : any = {
             playername : player.name
         };
         
@@ -91,7 +91,7 @@ export namespace OpheliaScenes {
 
     export function TraitPrompt(options : any) {
         let burrows = GAME().burrows;
-        var parse : any = {
+        let parse : any = {
             
         };
         
@@ -196,12 +196,12 @@ export namespace OpheliaScenes {
         let player = GAME().player;
         let ophelia = GAME().ophelia;
         let burrows = GAME().burrows;
-        var parse : any = {
+        let parse : any = {
             playername : player.name
         };
         
         //[Herself] [Her lab] [Sex] [Vena] [Lagon]
-        var options = new Array();
+        let options = new Array();
         options.push({ nameStr : "Herself",
             func : function() {
                 Text.Clear();
@@ -368,7 +368,7 @@ export namespace OpheliaScenes {
                         Text.Flush();
                         
                         //[Yes] [No]
-                        var options = new Array();
+                        let options = new Array();
                         options.push({ nameStr : "Yes",
                             func : function() {
                                 OpheliaScenes.TurnInScepter();
@@ -406,7 +406,7 @@ export namespace OpheliaScenes {
                     Text.Add("<i>“I know, I just can’t believe you actually did it,”</i> she smiles. <i>“Father was so powerful, and he even had my potion. You must be some kind of hero to have accomplished this.”</i>", parse);
                     Text.Flush();
                     
-                    var options = new Array();
+                    let options = new Array();
                     options.push({ nameStr : "Be modest",
                         func : function() {
                             Text.Clear();
@@ -461,7 +461,7 @@ export namespace OpheliaScenes {
                     Text.Flush();
                     
                     //[Come with me] [Stay silent]
-                    var options = new Array();
+                    let options = new Array();
                     options.push({ nameStr : "Come with me",
                         func : function() {
                             Text.Clear();
@@ -531,7 +531,7 @@ export namespace OpheliaScenes {
         let rosalin = GAME().rosalin;
         let burrows = GAME().burrows;
         
-        var parse : any = {
+        let parse : any = {
             playername : player.name
         };
         
@@ -546,7 +546,7 @@ export namespace OpheliaScenes {
             OpheliaScenes.TalkPrompt();
         }
         else {
-            var first = !(ophelia.flags["Talk"] & OpheliaFlags.Talk.Roa);
+            let first = !(ophelia.flags["Talk"] & OpheliaFlags.Talk.Roa);
             ophelia.flags["Talk"] |= OpheliaFlags.Talk.Roa;
             if(first) {
                 Text.Add("<i>“You’ve found my brother? It’s great to know he’s safe. Tell me, how is he?”</i> she asks enthusiastically, grasping your arm.", parse);
@@ -590,12 +590,12 @@ export namespace OpheliaScenes {
             Text.Flush();
             
             //[Experiments][Sex]
-            var options = new Array();
+            let options = new Array();
             options.push({ nameStr : "Experiments",
                 func : function() {
                     Text.Clear();
                     
-                    var scenes = [];
+                    let scenes = [];
                     
                     scenes.push(function() {
                         Text.Add("<i>“At first, I just mixed things together at random, just to see what I could get. A lot of my experiments didn’t do very much; some just had Roa complaining about the taste. Thankfully, he has an iron stomach.”</i> Ophelia smiles fondly at the memory, flipping through the pages of her old journal. <i>“We kept at it though, and I gradually started to understand the workings of alchemy, and how to decipher the recipes brought in from outside.”</i>", parse);
@@ -630,7 +630,7 @@ export namespace OpheliaScenes {
                         Text.NL();
                         Text.Add("<i>“Here, for example,”</i> she reads from the journal: ", parse);
                         
-                        var scenes = new EncounterTable();
+                        let scenes = new EncounterTable();
                         scenes.AddEnc(function() {
                             Text.Add("<i>“Roa, experiment nr.23: Green stuff. Goal: test herbs found outside. Prepared plants, tried making salad. No effect on subject. Tried grinding and mixing with liquids. Result: gruel. No effect on subject, icky texture. Found strange weed with purple flowers. Subject fell asleep. Cancelling trials.”</i>", parse);
                         }, 1.0, function() { return true; });
@@ -663,7 +663,7 @@ export namespace OpheliaScenes {
                         Text.Add("<i>“Let’s see, let me find some examples,”</i> the alchemist muses, flipping through her journal.", parse);
                         Text.NL();
                         
-                        var scenes = new EncounterTable();
+                        let scenes = new EncounterTable();
                         scenes.AddEnc(function() {
                             Text.Add("<i>“Roa, experiment nr.213: Minotaur. Goal: study the effects of ingredients salvaged from bull-morphs. I’ve made earlier experiments focused on strengthening the body - see nr.84 (failed), nr.118, nr.162-165 - and I think that ingredients gathered from the minotaur could prove useful in this endeavor. Previous experiments suggest that hooves, horns, fur, semen and blood could be tested. Unable to find live specimen, but gatherers have brought back what seems to be a broken horn from a bull.”</i>", parse);
                             Text.NL();
@@ -706,7 +706,7 @@ export namespace OpheliaScenes {
                         });
                     }
                     
-                    var sceneId = ophelia.flags["rotRExp"];
+                    let sceneId = ophelia.flags["rotRExp"];
                     if(sceneId >= scenes.length) sceneId = 0;
                     
                     ophelia.flags["rotRExp"] = sceneId + 1;
@@ -725,7 +725,7 @@ export namespace OpheliaScenes {
                 func : function() {
                     Text.Clear();
                     
-                    var scenes = [];
+                    let scenes = [];
                     
                     scenes.push(function() {
                         Text.Add("Just why is he so horny all the time?", parse);
@@ -798,7 +798,7 @@ export namespace OpheliaScenes {
                         });
                     }
                     
-                    var sceneId = ophelia.flags["rotRSex"];
+                    let sceneId = ophelia.flags["rotRSex"];
                     if(sceneId >= scenes.length) sceneId = 0;
                     
                     ophelia.flags["rotRSex"] = sceneId + 1;
@@ -818,7 +818,7 @@ export namespace OpheliaScenes {
         let player = GAME().player;
         let ophelia = GAME().ophelia;
         let burrows = GAME().burrows;
-        var parse : any = {
+        let parse : any = {
             playername : player.name
         };
         parse = player.ParserTags(parse);
@@ -906,12 +906,12 @@ export namespace OpheliaScenes {
     export function SexEntryPoint() {
         let player = GAME().player;
         let ophelia = GAME().ophelia;
-        var parse : any = {
+        let parse : any = {
             
         };
         
         //[name]
-        var options = new Array();
+        let options = new Array();
         if(player.FirstCock()) {
             options.push({ nameStr : "Vaginal",
                 func : function() {
@@ -945,10 +945,10 @@ export namespace OpheliaScenes {
         let player = GAME().player;
         let ophelia = GAME().ophelia;
         let burrows = GAME().burrows;
-        var p1cock = player.BiggestCock();
-        var knotted = p1cock ? p1cock.knot != 0 : false;
+        let p1cock = player.BiggestCock();
+        let knotted = p1cock ? p1cock.knot != 0 : false;
         
-        var parse : any = {
+        let parse : any = {
             playername : player.name
         };
         parse = Text.ParserPlural(parse, player.NumCocks() > 1);
@@ -965,7 +965,7 @@ export namespace OpheliaScenes {
         Text.Flush();
         
         //[Slowly] [Don’t bother]
-        var options = new Array();
+        let options = new Array();
         options.push({ nameStr : "Slowly",
             func : function() {
                 Text.Clear();
@@ -1022,10 +1022,10 @@ export namespace OpheliaScenes {
                 Text.Add("<i>“Ah, yes!”</i> Ophelia cries, legs wrapping around your waist as she tries to bring you deeper inside her.", parse);
                 Text.NL();
                 Text.Add("With Ophelia’s encouragement, you push on into her sodden depths, not stopping until she has taken you to the very hilt. ", parse);
-                var lCock = new Cock();
+                let lCock = new Cock();
                 lCock.thickness.base = 7;
                 lCock.length.base = 38;
-                var asBigAsLagon = p1cock.Volume() >= lCock.Volume();
+                let asBigAsLagon = p1cock.Volume() >= lCock.Volume();
                 if(asBigAsLagon) {
                     Text.Add("Her stomach bulges visibly around the sheer quantity of man-meat crammed inside her snatch, but the distension only seems to arouse her further.", parse);
                     Text.NL();
@@ -1075,7 +1075,7 @@ export namespace OpheliaScenes {
                 Text.Add("Hearing the wanton words spilling from her mouth is the final straw. With a cry of pleasure, you bury your [cock] as deep into her willing cunt as you possibly can[k] and let fly[c].", parse);
                 Text.NL();
                 
-                var cum = player.OrgasmCum();
+                let cum = player.OrgasmCum();
                 
                 if(cum > 6) {
                     Text.Add("You can almost see Ophelia’s stomach explode outwards as your first titanic shot erupts into her waiting cunt. A cascade of cream surges inside of the lusty lapin, making her belly swell enormously as you continue pouring inside. By the time you finally finish, Ophelia is sporting a huge potbelly, nearly as big as Vena’s ", parse);
@@ -1183,7 +1183,7 @@ export namespace OpheliaScenes {
                 Text.Add("<i>“Ahn! Ophelia can feel the cream!”</i>", parse);
                 Text.NL();
                 
-                var cum = player.OrgasmCum();
+                let cum = player.OrgasmCum();
                 
                 if(cum > 6) {
                     Text.Add("Underneath your bodies, Ophelia’s stomach begins to bulge and swell. Like a ripening fruit, it grows rounder and fuller, hanging down under its new weight. It sways slightly as the two of you shift, full to the point that rivers of seed keep backwashing out around your [cock], but still it grows. Her belly button begins to drag along the ground, forcing her to grow several inches outward rather than downward before you finally stop.", parse);
@@ -1244,12 +1244,12 @@ export namespace OpheliaScenes {
         let ophelia = GAME().ophelia;
         let burrows = GAME().burrows;
         
-        var parse : any = {
+        let parse : any = {
             
         };
         
         //[name]
-        var options = new Array();
+        let options = new Array();
         
         options.push({ nameStr : "Talk",
             func : function() {
@@ -1284,7 +1284,7 @@ export namespace OpheliaScenes {
         options.push({ nameStr : "Sex",
             func : function() {
                 Text.Clear();
-                var first = !(ophelia.flags["Talk"] & OpheliaFlags.Talk.Sex);
+                let first = !(ophelia.flags["Talk"] & OpheliaFlags.Talk.Sex);
                 if(first) {
                     Text.Add("The lapin alchemist looks you over for a moment, then breaks into a soft smile. <i>“Okay, I’ll admit I haven’t had any experience with outsiders. I’m curious about how you’d perform...”</i> she trails off tapping her chin in thought.", parse);
                     Text.NL();
@@ -1331,7 +1331,7 @@ export namespace OpheliaScenes {
     }
 
     export function TurnInScepter() {
-        var parse : any = {
+        let parse : any = {
             
         };
         
@@ -1352,11 +1352,11 @@ export namespace OpheliaScenes {
         let party : Party = GAME().party;
         let burrows = GAME().burrows;
         
-        var parse : any = {
+        let parse : any = {
             playername : player.name
         };
         
-        var options = new Array();
+        let options = new Array();
         if(burrows.flags["Felinix"] == 0) {
             options.push({ nameStr : "Felinix",
                 func : function() {
@@ -1466,7 +1466,7 @@ export namespace OpheliaScenes {
         let party : Party = GAME().party;
         let burrows = GAME().burrows;
         
-        var parse : any = {
+        let parse : any = {
             playername : player.name
         };
         
@@ -1528,7 +1528,7 @@ export namespace OpheliaScenes {
         let party : Party = GAME().party;
         let burrows = GAME().burrows;
 
-        var parse : any = {
+        let parse : any = {
             playername : player.name
         };
         
@@ -1580,7 +1580,7 @@ export namespace OpheliaScenes {
         let party : Party = GAME().party;
         let burrows = GAME().burrows;
         
-        var parse : any = {
+        let parse : any = {
             playername : player.name
         };
         
@@ -1622,7 +1622,7 @@ export namespace OpheliaScenes {
         let ophelia = GAME().ophelia;
         let burrows = GAME().burrows;
         
-        var parse : any = {
+        let parse : any = {
             playername : player.name,
             himher : player.mfFem("him", "her")
         };
@@ -1691,7 +1691,7 @@ export namespace OpheliaScenes {
             WatchedOphelia = false;
             
             //[Stop him][Divert][Watch]
-            var options = new Array();
+            let options = new Array();
             options.push({ nameStr : "Stop him",
                 func : function() {
                     Text.Clear();
@@ -1785,7 +1785,7 @@ export namespace OpheliaScenes {
     export function DeliverVena(trait : number) {
         let player = GAME().player;
         let burrows = GAME().burrows;
-        var parse : any = {
+        let parse : any = {
             playername : player.name
         };
         
@@ -1845,7 +1845,7 @@ export namespace OpheliaScenes {
         let ophelia = GAME().ophelia;
         let burrows = GAME().burrows;
 
-        var parse : any = {
+        let parse : any = {
             playername : player.name,
             softToned : burrows.BruteActive() ? "toned" : "soft"
         };
@@ -1941,7 +1941,7 @@ export namespace OpheliaScenes {
             stoppedVena  = false;
             
             //[Stop Vena][Watch][Offer][Attack]
-            var options = new Array();
+            let options = new Array();
             options.push({ nameStr : "Stop Vena",
                 func : function() {
                     stoppedVena = true;
@@ -1972,7 +1972,7 @@ export namespace OpheliaScenes {
                 }, enabled : true,
                 tooltip : "Just watch by the sidelines, trying to keep an eye on Lagon."
             });
-            var tooltip = "Take Ophelia’s place - offer yourself to be bred by Vena.";
+            let tooltip = "Take Ophelia’s place - offer yourself to be bred by Vena.";
             if(player.sexlevel < 5)
                 tooltip += " You are not sure you’ll be able to take it, but you can’t just let the alchemist be raped in front of your eyes.";
             options.push({ nameStr : "Offer",
@@ -1991,8 +1991,8 @@ export namespace OpheliaScenes {
                     Text.Add("<i>“Hah, this is an unexpected treat!”</i> Lagon strides over to the three of you, grinning sadistically as he plants a hearty slap on Vena’s butt, causing the matriarch to grind against you. <i>“The noble hero saves the fair princess, was that your intention?”</i> The king puts a possessive arm around his daughter’s shoulders. <i>“Too bad that isn’t how this is going to work out.”</i>", parse);
                     Text.NL();
                     
-                    var target = BodyPartType.ass;
-                    var cap = player.Butt().capacity.Get();
+                    let target = BodyPartType.ass;
+                    let cap = player.Butt().capacity.Get();
                     if(player.FirstVag()) {
                         target = BodyPartType.vagina;
                         cap = player.FirstVag().capacity.Get();
@@ -2080,7 +2080,7 @@ export namespace OpheliaScenes {
                         Text.Add("You give Ophelia an encouraging smile, returning her faux kiss in earnest. Together, you’ll get through this, and while you’re at it, you might as well enjoy it, right?", parse);
                         Text.NL();
                         
-                        var cum = player.OrgasmCum(3);
+                        let cum = player.OrgasmCum(3);
                         
                         Text.Flush();
                         
@@ -2129,13 +2129,13 @@ export namespace OpheliaScenes {
                     Text.Flush();
                     
                     Gui.NextPrompt(function() {
-                        var enemy = new Party();
-                        var lagonMob = new LagonRegular(false);
+                        let enemy = new Party();
+                        let lagonMob = new LagonRegular(false);
                         enemy.AddMember(lagonMob);
                         enemy.AddMember(new LagomorphAlpha(Gender.Random()));
                         enemy.AddMember(new Lagomorph(Gender.Random()));
                         enemy.AddMember(new Lagomorph(Gender.Random()));
-                        var enc = new Encounter(enemy);
+                        let enc = new Encounter(enemy);
                         
                         enc.canRun = true;
                         enc.VictoryCondition = function() {
@@ -2194,7 +2194,7 @@ export namespace OpheliaScenes {
     export function ScepterRequest(fight : boolean) {
         let player = GAME().player;
         
-        var parse : any = {
+        let parse : any = {
             playername : player.name,
             again : fight ? " again" : "",
             haggardDetermined : fight ? "determined" : "haggard"
@@ -2226,7 +2226,7 @@ export namespace OpheliaScenes {
     }
 
     export function WatchVenaEntry() {
-        var parse : any = {
+        let parse : any = {
             
         };
         
@@ -2263,12 +2263,12 @@ export namespace OpheliaScenes {
 
     export function RewardAftermathStage2Prompt() {
         let ophelia = GAME().ophelia;
-        var parse : any = {
+        let parse : any = {
             
         };
         
         //[Sorry][Encourage][Rebuke]
-        var options = new Array();
+        let options = new Array();
         if(WatchedOphelia) {
             options.push({ nameStr : "Sorry",
                 func : function() {
@@ -2317,7 +2317,7 @@ export namespace OpheliaScenes {
         let party : Party = GAME().party;
         let lagon = GAME().lagon;
         
-        var parse : any = {
+        let parse : any = {
         };
         parse = player.ParserTags(parse);
         
@@ -2327,7 +2327,7 @@ export namespace OpheliaScenes {
         party.location = WORLD().loc.Burrows.Throne;
         
         //[Virility][Fertility][Breeder][Gold][Sex]
-        var options = new Array();
+        let options = new Array();
         if(!player.HasPerk(Perks.Virility)) {
             options.push({ nameStr : "Virility",
                 func : function() {

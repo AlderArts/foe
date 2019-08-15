@@ -146,8 +146,8 @@ export class Item {
 		}));
 		
 		if(this.effect.statusDef.length > 0) {
-			for(var i = 0; i < StatusEffect.LAST; i++) {
-				var inc = this.effect.statusDef[i];
+			for(let i = 0; i < StatusEffect.LAST; i++) {
+				let inc = this.effect.statusDef[i];
 				if(inc) {
 					if(target.statusDefGear[i]) {
 						target.statusDefGear[i] += inc;
@@ -207,7 +207,7 @@ export class Item {
 		if(this.effect.libido)       Text.AddDiv("Lib: " + this.effect.libido,       null, "itemName");
 		if(this.effect.charisma)     Text.AddDiv("Cha: " + this.effect.charisma,     null, "itemName");
 		
-		for(var i = 0; i < StatusEffect.LAST; i++) {
+		for(let i = 0; i < StatusEffect.LAST; i++) {
 			if(this.effect.statusDef[i]) {
 				Text.AddDiv(Status.Keys[i] + ".Def: " + this.effect.statusDef[i], null, "itemName");
 			}

@@ -89,7 +89,7 @@ lacertium.recipe = [{it: IngredientItems.SnakeOil}, {it: IngredientItems.LizardS
 lacertium.PushEffect(TF.ItemEffects.SetTongue, {odds: 0.3, race: Race.Lizard, str: "long, serpentine tongue"});
 lacertium.PushEffect(TF.ItemEffects.SetCock, {odds: 0.4, race: Race.Lizard, str: "a lizard cock"});
 lacertium.PushEffect(function(target : Entity) {
-	var cocks = target.AllCocks();
+	let cocks = target.AllCocks();
 	if(cocks.length == 1 && cocks[0].race == Race.Lizard && Math.random() < 0.1) {
 		cocks.push(cocks[0].Clone());
 		Text.Add("[Poss] reptilian cock splits in two identical dicks!", { Poss: target.Possessive() });
@@ -144,11 +144,11 @@ bovia.PushEffect(TF.ItemEffects.SetEars, {odds: 0.4, race: Race.Cow, str: "bovin
 bovia.PushEffect(TF.ItemEffects.SetTail, {odds: 0.4, race: Race.Cow, color: Color.black, str: "a long bovine tail, ending in a tuft of black hair"});
 bovia.PushEffect(TF.ItemEffects.SetHorn, {odds: 0.4, race: Race.Cow, color: Color.black, str: "a pair of strong bovine horns!", count: 2});
 bovia.PushEffect(function(target : Entity) {
-	var parse : any = { Poss: target.Possessive() };
-	var breasts = target.BiggestBreasts();
+	let parse : any = { Poss: target.Possessive() };
+	let breasts = target.BiggestBreasts();
 	if(target.FirstVag() || (breasts && breasts.size.Get() > 5)) {
 		if(Math.random() < 0.5) {
-			var diff = target.lactHandler.lactationRate.IdealStat(10, 1);
+			let diff = target.lactHandler.lactationRate.IdealStat(10, 1);
 			if(diff) {
 				Text.Add("[Poss] breasts start to lactate more than before.", parse);
 				Text.NL();
@@ -156,7 +156,7 @@ bovia.PushEffect(function(target : Entity) {
 		}
 		
 		if(Math.random() < 0.5) {
-			var diff = target.lactHandler.milkProduction.IncreaseStat(5, 1);
+			let diff = target.lactHandler.milkProduction.IncreaseStat(5, 1);
 			if(diff) {
 				Text.Add("[Poss] breasts swell, as they become able to produce milk at a quicker rate.", parse);
 				Text.NL();
@@ -463,7 +463,7 @@ homos.PushEffect(TF.ItemEffects.RemWings, {odds: 0.6, count: 2});
 homos.PushEffect(TF.ItemEffects.RemAntenna, {odds: 0.6, count: 2});
 homos.PushEffect(TF.ItemEffects.RemAbdomen, {odds: 0.6, count: 1});
 homos.PushEffect(function(target : Entity) {
-	var parse : any = {
+	let parse : any = {
 		Poss : target.Possessive(),
 		legsDesc : function() { return target.LegsDesc(); },
 		notS : target.body.legs.count > 1 ? "s" : "",
@@ -495,7 +495,7 @@ virilium.PushEffect(TF.ItemEffects.IncLib, {odds: 0.3, ideal: 40, max: 2});
 virilium.PushEffect(TF.ItemEffects.IncCha, {odds: 0.2, ideal: 40, max: 2});
 virilium.PushEffect(TF.ItemEffects.SetBalls, {odds: 0.1, ideal: 2, count: 2});
 virilium.PushEffect(function(target : Entity) {
-	var parse : any = {
+	let parse : any = {
 		name  : target.nameDesc(),
 		heshe : target.heshe(),
 		is    : target.is()
@@ -507,7 +507,7 @@ virilium.PushEffect(function(target : Entity) {
 	Text.NL();
 });
 virilium.PushEffect(function(target : Entity) {
-	var parse : any = {
+	let parse : any = {
 		Poss: target.Possessive(),
 		ballsDesc : function() { return target.BallsDesc(); },
 		s      : target.HasBalls() ? "s" : "",
@@ -515,21 +515,21 @@ virilium.PushEffect(function(target : Entity) {
 		itThey : target.HasBalls() ? "they" : "it"
 	};
 	if(target.HasBalls() && Math.random() < 0.4) {
-		var res = target.Balls().size.IncreaseStat(14, 1);
+		let res = target.Balls().size.IncreaseStat(14, 1);
 		if(res > 0) {
 			Text.Add("[Poss] balls have grown in size to [ballsDesc]!", parse);
 			Text.NL();
 		}
 	}
 	if((target.HasBalls() || target.FirstCock()) && Math.random() < 0.4) {
-		var res = target.Balls().cumCap.IncreaseStat(30, 1);
+		let res = target.Balls().cumCap.IncreaseStat(30, 1);
 		if(res > 0) {
 			Text.Add("[Poss] [ballsDesc] churn[notS] as [itThey] adjust[notS] to accomodate more cum.", parse);
 			Text.NL();
 		}
 	}
 	if((target.HasBalls() || target.FirstCock()) && Math.random() < 0.3) {
-		var res = target.Balls().cumProduction.IncreaseStat(3, .5, true);
+		let res = target.Balls().cumProduction.IncreaseStat(3, .5, true);
 		if(res > 0) {
 			Text.Add("[Poss] [ballsDesc] churn[notS] as [itThey] become[s] able to produce more cum!", parse);
 			Text.NL();
@@ -537,7 +537,7 @@ virilium.PushEffect(function(target : Entity) {
 	}
 	// TODO: parse
 	if((target.HasBalls() || target.FirstCock()) && Math.random() < 0.2) {
-		var res = target.Balls().fertility.IncreaseStat(.7, .1, true);
+		let res = target.Balls().fertility.IncreaseStat(.7, .1, true);
 	}
 	Text.Flush();
 });
@@ -556,7 +556,7 @@ testos.PushEffect(TF.ItemEffects.IncTone, {odds: 0.3, ideal: .7, max: .1});
 testos.PushEffect(TF.ItemEffects.DecFem, {odds: 0.4, ideal: -1, max: .1});
 testos.PushEffect(TF.ItemEffects.DecBreastSize, {odds: 0.7, ideal: 0, max: 6 });
 testos.PushEffect(function(target : Entity) {
-	var parse : any = {
+	let parse : any = {
 		Name: target.NameDesc(),
 		Poss: target.Possessive(),
 		ballsDesc : function() { return target.BallsDesc(); },
@@ -566,7 +566,7 @@ testos.PushEffect(function(target : Entity) {
 		itThey : target.HasBalls() ? "they" : "it"
 	};
 	if(target.HasBalls() && Math.random() < 0.6) {
-		var res = target.Balls().size.IncreaseStat(14, 1);
+		let res = target.Balls().size.IncreaseStat(14, 1);
 		if(res > 0) {
 			Text.Add("[Poss] balls have grown in size!", parse);
 			Text.NL();
@@ -581,7 +581,7 @@ testos.PushEffect(function(target : Entity) {
 	Text.Flush();
 });
 testos.PushEffect(function(target : Entity) {
-	var parse : any = {
+	let parse : any = {
 		Name : target.NameDesc(),
 		poss : target.possessive(),
 		Poss : target.Possessive(),
@@ -589,11 +589,11 @@ testos.PushEffect(function(target : Entity) {
 	};
 	parse = target.ParserPronouns(parse);
 	
-	var vags  = target.AllVags();
-	var cocks = target.AllCocks();
+	let vags  = target.AllVags();
+	let cocks = target.AllCocks();
 	if(vags.length > 0 && Math.random() < 0.4) {
-		var randVag = Math.floor(Math.random() * vags.length);
-		var vag = vags[randVag];
+		let randVag = Math.floor(Math.random() * vags.length);
+		let vag = vags[randVag];
 		
 		if(!vag.womb.pregnant) {
 			vag.capacity.DecreaseStat(1, 1);
@@ -625,8 +625,8 @@ testos.PushEffect(function(target : Entity) {
 		}
 	}
 	if(Math.random() < 0.75) {
-		var len = false, thk = false;
-		for(var i = 0; i < cocks.length; i++) {
+		let len = false, thk = false;
+		for(let i = 0; i < cocks.length; i++) {
 			// Base size
 			len = len || (cocks[i].length.IncreaseStat(35, 1) > 0);
 			thk = thk || (cocks[i].thickness.IncreaseStat(10, .5) > 0);
@@ -658,12 +658,12 @@ estros.PushEffect(TF.ItemEffects.DecTone, {odds: 0.2, ideal: 0, max: .1});
 estros.PushEffect(TF.ItemEffects.IncFem, {odds: 0.8, ideal: 1, max: .1});
 estros.PushEffect(TF.ItemEffects.IncBreastSize, {odds: 0.4, ideal: 20, max: 3 });
 estros.PushEffect(function(target : Entity) {
-	var parse : any = {
+	let parse : any = {
 		Poss: target.Possessive(),
 		notS: target.plural() ? "" : "s"
 	};
 	if(target.HasBalls() && Math.random() < 0.6) {
-		var res = target.Balls().size.DecreaseStat(1, 1);
+		let res = target.Balls().size.DecreaseStat(1, 1);
 		if(target.Balls().size.Get() <= 1) {
 			target.Balls().count.base = 0;
 			Text.Add("[Poss] balls shrivel and disappear completely!", parse);
@@ -677,18 +677,18 @@ estros.PushEffect(function(target : Entity) {
 	Text.Flush();
 });
 estros.PushEffect(function(target : Entity) {
-	var parse : any = {
+	let parse : any = {
 		Name : target.NameDesc(),
 		Poss : target.Possessive(),
 		multiCockDesc : function() { return target.MultiCockDesc(); }
 	};
 	parse = target.ParserPronouns(parse);
 	
-	var cocks = target.AllCocks();
-	var vags  = target.AllVags();
+	let cocks = target.AllCocks();
+	let vags  = target.AllVags();
 	if(cocks.length > 0 && Math.random() < 0.4) {
-		var randCock = Math.floor(Math.random() * cocks.length);
-		var cock = cocks[randCock];
+		let randCock = Math.floor(Math.random() * cocks.length);
+		let cock = cocks[randCock];
 		
 		cock.length.DecreaseStat(5, 1);
 		cock.thickness.DecreaseStat(1, .5);
@@ -717,8 +717,8 @@ estros.PushEffect(function(target : Entity) {
 		Text.Flush();
 	}
 	if(Math.random() < 0.75) {
-		var growth = false;
-		for(var i = 0; i < vags.length; i++) {
+		let growth = false;
+		for(let i = 0; i < vags.length; i++) {
 			growth = growth || (vags[i].capacity.IncreaseStat(10, .5) > 0);
 		}
 		if(growth) {
@@ -738,7 +738,7 @@ infertilium.Short = function() { return "A bottle of Infertilium"; }
 infertilium.Long = function() { return "A small, unmarked glass vial that feels cool to the touch. Drinking this will render the drinker practically sterile for one day."; }
 //TODO infertilium.recipe = [{it: felinix}, {it: leporine}, {it: bovia}];
 infertilium.useStr = function(target : Entity) {
-	var parse : any = {
+	let parse : any = {
 		Name: target.NameDesc(),
 		name: target.nameDesc()
 	};
@@ -748,7 +748,7 @@ infertilium.useStr = function(target : Entity) {
 	Text.Add("[Name] uncork[notS] the vial and drink[notS] down the liquid within. It’s surprisingly clear and refreshing, and goes down without a hitch. ", parse);
 	if(target.FirstCock() || target.FirstVag()) {
 		Text.Add("Quickly, [name] feel[notS] [hisher] loins cooling down. Seems like [heshe] ", parse);
-		var preg = target.PregHandler().IsPregnant();
+		let preg = target.PregHandler().IsPregnant();
 		if(target.FirstVag() || target.PregHandler().MPregEnabled()) {
 			if(preg)
 				Text.Add("is a little too late, though - since [heshe] [isAre] already pregnant, the potion has no effect on [hisher] womb.", parse);
@@ -787,7 +787,7 @@ infertiliumPlus.Short = function() { return "A bottle of Infertilium+"; }
 infertiliumPlus.Long = function() { return "A small, unmarked glass vial with a thin sheen of frost clinging to its sides. Drinking this will render the drinker practically sterile for five days."; }
 //TODO infertiliumPlus.recipe = [{it: felinix}, {it: leporine}, {it: bovia}];
 infertiliumPlus.useStr = function(target : Entity) {
-	var parse : any = {
+	let parse : any = {
 		Name: target.NameDesc(),
 		name: target.nameDesc()
 	};
@@ -797,7 +797,7 @@ infertiliumPlus.useStr = function(target : Entity) {
 	Text.Add("[Name] uncork[notS] the vial and drink[notS] down the liquid within. It’s so cold that it numbs the tongue and throat as it goes down, but [name] manage[notS] to swallow it all, albeit with a little difficulty. ", parse);
 	if(target.FirstCock() || target.FirstVag()) {
 		Text.Add("Quickly, [name] feel[notS] [hisher] loins cooling down, lustful thoughts rapidly leaving [himher]. Seems like [heshe] ", parse);
-		var preg = target.PregHandler().IsPregnant();
+		let preg = target.PregHandler().IsPregnant();
 		if(target.FirstVag() || target.PregHandler().MPregEnabled()) {
 			if(preg)
 				Text.Add("is a little too late, though - since [heshe] [isAre] already pregnant, the potion has no effect on [hisher] womb, however strong it might be.", parse);
@@ -832,7 +832,7 @@ infertiliumPlus.PushEffect(TF.ItemEffects.DecLib, {odds: 0.75, ideal: 15, max: 2
 
 let fertilium = new TFItem("sex6", "Fertilium");
 let fertiliumcommonUse = function(target : Entity) {
-	var parse : any = {
+	let parse : any = {
 		name: target.nameDesc(),
 		lowerArmor: target.LowerArmorDesc()
 	};
@@ -840,10 +840,10 @@ let fertiliumcommonUse = function(target : Entity) {
 	parse = target.ParserTags(parse);
 	parse = Text.ParserPlural(parse, target.NumCocks() > 1);
 	
-	var ret = true; // Set to false if the pot is refused
+	let ret = true; // Set to false if the pot is refused
 	
 	if(target == GAME().player) {
-		var gen = "";
+		let gen = "";
 		if(target.FirstCock()) gen += "[cocks]";
 		if(target.FirstCock() && target.FirstVag()) gen += " and ";
 		if(target.FirstVag()) gen += "[vag]";
@@ -928,7 +928,7 @@ gestarium.Long  = function() { return "A small vial of thick, clear liquid. Drin
 gestarium.recipe = [{it: fertilium}, {it: estros}, {it: bovia}];
 // Effects
 gestarium.PushEffect(function(target : Entity) {
-	var parse : any = {
+	let parse : any = {
 		Name : target.NameDesc(),
 		name : target.nameDesc(),
 		Poss : target.Possessive(),
@@ -940,8 +940,8 @@ gestarium.PushEffect(function(target : Entity) {
 	
 	Text.Add("Unstoppering the vial, [name] drink[notS] the viscous liquid in one gulp. It tastes faintly of raw egg yolk with a texture to match, but goes down smoothly without a hitch.", parse);
 	Text.NL();
-	var isPreg = target.pregHandler.PregnantWombs();
-	var wombs = _.filter(isPreg, function(w) {
+	let isPreg = target.pregHandler.PregnantWombs();
+	let wombs = _.filter(isPreg, function(w) {
 		return w.progress < 1;
 	});
 	if(isPreg.length > 0) {
@@ -963,7 +963,7 @@ gestarium.PushEffect(function(target : Entity) {
 });
 
 let gestariumBellyGrowth = function(target : Entity, wombs : Womb[], parse : any) {
-	var size = target.pregHandler.BellySize();
+	let size = target.pregHandler.BellySize();
 	
 	if(size < 0.1)
 		Text.Add("Gradually, [name] become[notS] aware of a faint pressure deep within [hisher] lower belly, palpable waves of contentment radiating from within even as the skin quavers and pulses to reflect the changes taking place within.", parse);
@@ -985,15 +985,15 @@ let gestariumBellyGrowth = function(target : Entity, wombs : Womb[], parse : any
 		Text.Add("It seems impossible that [name] could get any larger, yet that’s exactly what happens. Lost in the sheer bliss of warmth and growth, [name] [isAre] certainly in a motherly way as the potion takes hold on [hisher] burgeoning womb. Tightly stretched skin creaks as [poss] growth accelerates, and you can’t help but wonder if [name] [isAre] about to burst…", parse);
 	Text.Add(" ");
 	
-	var womb = _.sample(wombs);
-	var oldProgress = womb.progress;
+	let womb = _.sample(wombs);
+	let oldProgress = womb.progress;
 
 	// growth
 	womb.progress     += 0.2;
-	var hours = 0.2 * womb.hoursToBirth / (1-oldProgress);
+	let hours = 0.2 * womb.hoursToBirth / (1-oldProgress);
 	womb.hoursToBirth -= hours;
 	
-	var newSize = target.pregHandler.BellySize();
+	let newSize = target.pregHandler.BellySize();
 	
 	if(newSize < 0.3)
 		Text.Add("When the sensation passes, [poss] belly has grown ever so slightly outward, the barest of bumps to mark [poss] pregnancy. Even with the potion’s help, it’ll probably be a little while before the new life within is ready to emerge into the world.", parse);
@@ -1021,7 +1021,7 @@ let gestariumBellyGrowth = function(target : Entity, wombs : Womb[], parse : any
 	//PC only, since these are more internal feelings than anything else. Play these if the player progresses from one stage to another. I believe it’s impossible for the PC to jump any more than 1 stage from a potion, so things should be fine.
 	//Could a separate one be made for followers?
 	if(target == GAME().player) {
-		var newProgress = womb.progress;
+		let newProgress = womb.progress;
 		
 		if(oldProgress < PregnancyLevel.Level2 && newProgress >= PregnancyLevel.Level2) {
 			Text.NL();
@@ -1056,18 +1056,18 @@ let gestariumBellyGrowth = function(target : Entity, wombs : Womb[], parse : any
 	}
 	
 	if(Math.random() < 0.5) {
-		var breasts = target.FirstBreastRow();
-		var hipSize = target.body.HipSize();
-		var buttSize = target.Butt().Size();
-		var lact = target.LactHandler().Rate();
-		var production = target.LactHandler().Production();
+		let breasts = target.FirstBreastRow();
+		let hipSize = target.body.HipSize();
+		let buttSize = target.Butt().Size();
+		let lact = target.LactHandler().Rate();
+		let production = target.LactHandler().Production();
 		
-		var scenes = new EncounterTable();
+		let scenes = new EncounterTable();
 		scenes.AddEnc(function() {
 			Text.NL();
 			Text.Add("[Poss] baby bump isn’t the only thing that’s growing, changing. With the sudden surge of hormones and fertile energy coursing through [name], [poss] [breasts] begin to tingle and turn tender.", parse);
 			
-			var growth = breasts.Size() < 12.5;
+			let growth = breasts.Size() < 12.5;
 			
 			if(growth) {
 				Text.Add(" Without further warning, they suddenly balloon outwards, maturing in a potion-induced growth spurt!");
@@ -1124,12 +1124,12 @@ gestariumPlus.recipe = [{it: felinix}, {it: leporine}, {it: bovia}];
 gestariumPlus.PushEffect(TF.ItemEffects.IncLib, {odds: 0.3, ideal: 40, max: 2});
 gestariumPlus.PushEffect(TF.ItemEffects.IncCha, {odds: 0.2, ideal: 40, max: 2});
 gestariumPlus.PushEffect(function(target : Entity) {
-	var parse : any = {
+	let parse : any = {
 		Poss: target.Possessive(),
 		notS: target.plural() ? "" : "s"
 	};
 	if(target.HasBalls() && Math.random() < 0.6) {
-		var res = target.Balls().size.DecreaseStat(1, 1);
+		let res = target.Balls().size.DecreaseStat(1, 1);
 		if(target.Balls().size.Get() <= 1) {
 			target.Balls().count.base = 0;
 			Text.Add("[Poss] balls shrivel and disappear completely!", parse);
@@ -1143,7 +1143,7 @@ gestariumPlus.PushEffect(function(target : Entity) {
 	Text.Flush();
 });
 gestariumPlus.PushEffect(function(target : Entity) {
-	var parse : any = {
+	let parse : any = {
 		name  : target.nameDesc(),
 		heshe : target.heshe(),
 		is    : target.is()
@@ -1154,7 +1154,7 @@ gestariumPlus.PushEffect(function(target : Entity) {
 	Text.NL();
 });
 gestariumPlus.PushEffect(function(target : Entity) {
-	var parse : any = {
+	let parse : any = {
 		name : target.nameDesc(),
 		poss : target.possessive()
 	};
@@ -1167,14 +1167,14 @@ gestariumPlus.PushEffect(function(target : Entity) {
 	}
 	else {
 		if(Math.random() < 0.3) {
-			var res = target.pregHandler.gestationRate.IncreaseStat(3, .2, true);
+			let res = target.pregHandler.gestationRate.IncreaseStat(3, .2, true);
 			if(res) {
 				Text.Add("A rumble runs through [poss] belly as [hisher] womb quickens. From now on, pregnancies are going to be quicker for [name]!", parse);
 				Text.NL();
 			}
 		}
 		if(Math.random() < 0.4) {
-			var res = target.pregHandler.fertility.IncreaseStat(.8, .1, true);
+			let res = target.pregHandler.fertility.IncreaseStat(.8, .1, true);
 			if(res) {
 				Text.Add("A rumble runs through [poss] belly as [hisher] womb quickens. From now on, [name] [isAre] going to be more receptive to impregnation!", parse);
 				Text.NL();

@@ -181,9 +181,9 @@ export class Kiakai extends Entity {
 		let kiakai = GAME().kiakai;
 	
 		Text.Clear();
-		var that = kiakai;
+		let that = kiakai;
 		
-		var parse : any = {
+		let parse : any = {
 			playername : player.name,
 			name       : kiakai.name,
 			hisher     : kiakai.hisher()
@@ -204,7 +204,7 @@ export class Kiakai extends Entity {
 		
 		Text.Flush();
 		
-		var options = [];
+		let options = [];
 		
 		options.push({ nameStr: "Talk",
 			func : function() {
@@ -264,13 +264,13 @@ export class Kiakai extends Entity {
 		let kiakai = GAME().kiakai;
 		let ravenmother = GAME().ravenmother;
 		
-		var parse : any = {
+		let parse : any = {
 			playername : player.name,
 			name   : kiakai.name
 		};
 		parse = kiakai.ParserPronouns(parse);
 		
-		var options = [];
+		let options = [];
 		// TALK ABOUT MAIN QUEST
 		options.push({ nameStr: "Quest",
 			func : KiakaiScenes.TalkQuest, enabled : true,
@@ -317,7 +317,7 @@ export class Kiakai extends Entity {
 			tooltip : "Ask about the priests of Aria."
 		});
 		// TALK RAVENS
-		var r = ravenmother.Ravenness();
+		let r = ravenmother.Ravenness();
 		if(r >= RavenFlags.Stage.ravenstage2 + 2 &&
 		   ravenmother.flags["Met"] == 0) {
 			options.push({ nameStr : "Ravens",

@@ -15,7 +15,7 @@ export class Vagina extends Orifice {
 	}
 
 	ToStorage(full : any) {
-		var storage = super.ToStorage(full);
+		let storage = super.ToStorage(full);
 		if(full) {
 			storage.clit = this.clit.base.toFixed(2);
 		}
@@ -31,14 +31,14 @@ export class Vagina extends Orifice {
 	// Create a clitcock from a vagina
 	// Returns the cock
 	CreateClitcock() {
-		var cc = new Cock();
+		let cc = new Cock();
 		this.clitCock = cc;
 		cc.vag = this;
 		return cc;
 	}
 
 	noun() {
-		var nouns = [];
+		let nouns = [];
 		nouns.push("pussy");
 		nouns.push("box");
 		nouns.push("crevice");
@@ -52,7 +52,7 @@ export class Vagina extends Orifice {
 		return _.sample(nouns);
 	}
 	nounPlural() {
-		var nouns = [];
+		let nouns = [];
 		nouns.push("pussies");
 		nouns.push("boxes");
 		nouns.push("crevices");
@@ -66,7 +66,7 @@ export class Vagina extends Orifice {
 	}
 	Desc() {
 		let ret = null;
-		var vagArea = this.capacity.Get() * this.stretch.Get();
+		let vagArea = this.capacity.Get() * this.stretch.Get();
 		if     (vagArea <= 3 ) ret = {a:"an", adj: "extremely tight"};
 		else if(vagArea <= 4 ) ret = {a:"a", adj: "very tight"};
 		else if(vagArea <= 5 ) ret = {a:"a", adj: "tight"};
@@ -80,8 +80,8 @@ export class Vagina extends Orifice {
 	}
 	// TODO
 	Short() {
-		var desc = this.Desc();
-		var v = this.virgin ? " virgin " : " ";
+		let desc = this.Desc();
+		let v = this.virgin ? " virgin " : " ";
 		return desc.adj + v + this.noun();
 	}
 	// TODO

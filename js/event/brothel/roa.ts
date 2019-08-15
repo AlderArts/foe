@@ -79,7 +79,7 @@ export class Roa extends Entity {
 	}
 
 	ToStorage() {
-		var storage : any = {};
+		let storage : any = {};
 		
 		this.SavePersonalityStats(storage);
 		

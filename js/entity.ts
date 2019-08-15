@@ -182,7 +182,7 @@ export class Entity {
 		this.sexpToLevel  = this.SexpToLevel;
 
 		// Base stats
-		var that = this;
+		let that = this;
 		
 		// Health stat and functions
 		this.curHp        = 0;
@@ -286,7 +286,7 @@ export class Entity {
 	}
 	
 	HasPerk(perk : Perk) {
-		for(var i = 0; i < this.perks.length; ++i) {
+		for(let i = 0; i < this.perks.length; ++i) {
 			if(this.perks[i] == perk)
 				return true;
 		}
@@ -294,7 +294,7 @@ export class Entity {
 	}
 	
 	AddPerk(perk : Perk) {
-		for(var i = 0; i < this.perks.length; ++i) {
+		for(let i = 0; i < this.perks.length; ++i) {
 			if(this.perks[i] == perk)
 				return;
 		}
@@ -302,12 +302,12 @@ export class Entity {
 	}
 	
 	KnowsRecipe(item : Item) {
-		var idx = this.recipes.indexOf(item); // Find the index
+		let idx = this.recipes.indexOf(item); // Find the index
 		return (idx != -1);
 	}
 	
 	AddAlchemy(item : Item) {
-		var idx = this.recipes.indexOf(item); // Find the index
+		let idx = this.recipes.indexOf(item); // Find the index
 		if(idx==-1)
 			this.recipes.push(item);
 	}
@@ -368,7 +368,7 @@ export class Entity {
 	}
 	
 	AddExp(exp : number, reserve? : boolean) {
-		var buff = this.combatStatus.stats[StatusEffect.Full];
+		let buff = this.combatStatus.stats[StatusEffect.Full];
 		if(buff && buff.exp) {
 			exp = Math.ceil(buff.exp * exp);
 		}
@@ -431,9 +431,9 @@ export class Entity {
 	SetExpToLevel() {
 		this.sexpToLevel  = this.SexpToLevel;
 		this.expToLevel   = this.ExpToLevel;
-		for(var i = 1; i < this.level; i++)
+		for(let i = 1; i < this.level; i++)
 			this.expToLevel  = Math.floor(this.expToLevel * 1.2);
-		for(var i = 1; i < this.sexlevel; i++)
+		for(let i = 1; i < this.sexlevel; i++)
 			this.sexpToLevel = Math.floor(this.sexpToLevel * 2);
 	}
 	
@@ -448,10 +448,10 @@ export class Entity {
 	
 	Update(step? : number) {
 		if(step) {
-			var time = new Time();
+			let time = new Time();
 			time.Inc(step);
 			
-			var hours = time.ToHours();
+			let hours = time.ToHours();
 			
 			this.AddLustOverTime(hours);
 			this.AccumulateCumOverTime(hours);
@@ -470,9 +470,9 @@ export class Entity {
 	
 	//TODO
 	AccumulateCumOverTime(hours : number) {
-		var balls = this.Balls();
+		let balls = this.Balls();
 		
-		var inc = balls.cumProduction.Get() * hours;
+		let inc = balls.cumProduction.Get() * hours;
 	
 		// Max out
 		balls.cum.IncreaseStat(balls.CumCap(), inc);
@@ -517,7 +517,7 @@ export class Entity {
 			womb.pregnant = false;
 			
 			if(GetDEBUG()) {
-				var parse : any = {
+				let parse : any = {
 					name : this.name
 				};
 				
@@ -535,12 +535,12 @@ export class Entity {
 	}
 	
 	DrunkRecoveryRate() {
-		var sta = this.Sta();
+		let sta = this.Sta();
 		if(sta < Math.E) sta = Math.E;
 		return Math.log(sta) / 25;
 	}
 	HandleDrunknessOverTime(hours : number, suppressText? : boolean) {
-		var oldLevel = this.drunkLevel;
+		let oldLevel = this.drunkLevel;
 		this.drunkLevel -= this.DrunkRecoveryRate() * hours;
 		if(this.drunkLevel < 0) this.drunkLevel = 0;
 	}
@@ -548,7 +548,7 @@ export class Entity {
 		return this.drunkLevel;
 	}
 	DrunkStr() {
-		var parse : any = {
+		let parse : any = {
 			name : this.NameDesc(),
 			isAre : this.is()
 		};
@@ -563,9 +563,9 @@ export class Entity {
 		return false;
 	}
 	Drink(drink : number, suppressText : boolean) {
-		var sta = this.Sta();
+		let sta = this.Sta();
 		if(sta < Math.E) sta = Math.E;
-		var oldLevel = this.drunkLevel;
+		let oldLevel = this.drunkLevel;
 		this.drunkLevel += drink / Math.log(sta);
 	}
 	// TODO: Implement for companions
@@ -588,7 +588,7 @@ export class Entity {
 	}
 	
 	DebugMode(debug : boolean) {
-		var value = debug ? 50 : 0;
+		let value = debug ? 50 : 0;
 		
 		this.maxHp.cheat        = value * 10;
 		this.maxSp.cheat        = value * 10;
@@ -614,7 +614,7 @@ export class Entity {
 		Text.Flush();
 		
 		// Pick a random target
-		var t = this.GetSingleTarget(encounter, activeChar);
+		let t = this.GetSingleTarget(encounter, activeChar);
 
 		Abilities.Attack.Use(encounter, this, t);
 	}
@@ -638,8 +638,8 @@ export class Entity {
 
 
 	GetCombatEntry(encounter : any) {
-		var ent = this;
-		var found : any;
+		let ent = this;
+		let found : any;
 		_.each(encounter.combatOrder, function(it) {
 			if(it.entity == ent) {
 				found = it;
@@ -651,8 +651,8 @@ export class Entity {
 
 
 	GetPartyTarget(encounter : any, activeChar : any, ally? : any) {
-		var isEnemy = activeChar.isEnemy;
-		var confuse = activeChar.entity.combatStatus.stats[StatusEffect.Confuse];
+		let isEnemy = activeChar.isEnemy;
+		let confuse = activeChar.entity.combatStatus.stats[StatusEffect.Confuse];
 		if(confuse)
 			isEnemy = !isEnemy;
 		if(ally)
@@ -665,15 +665,15 @@ export class Entity {
 	}
 
 	GetSingleTarget(encounter : any, activeChar : any, strategy? : TargetStrategy, ally? : boolean) {
-		var isEnemy = activeChar.isEnemy;
-		var confuse = activeChar.entity.combatStatus.stats[StatusEffect.Confuse];
+		let isEnemy = activeChar.isEnemy;
+		let confuse = activeChar.entity.combatStatus.stats[StatusEffect.Confuse];
 		if(confuse)
 			isEnemy = !isEnemy;
 		if(ally)
 			isEnemy = !isEnemy;
 		
 		// Fetch all potential targets
-		var targets;
+		let targets;
 		if(isEnemy)
 			targets = encounter.GetLivePartyArray();
 		else
@@ -681,7 +681,7 @@ export class Entity {
 		
 		strategy = strategy || TargetStrategy.None;
 		
-		var aggro;
+		let aggro;
 		if(ally) {
 			// cleanup
 			activeChar.aggroAllies = _.reject(activeChar.aggroAllies, function(it) {
@@ -716,43 +716,43 @@ export class Entity {
 		// Strategies
 		if(strategy & TargetStrategy.NearDeath) {
 			_.each(aggro, function(a) {
-				var hp  = 1 - a.entity.HPLevel();
+				let hp  = 1 - a.entity.HPLevel();
 				hp *= hp;
 				a.aggro *= hp;
 			});
 		}
 		if(strategy & TargetStrategy.LowHp) {
 			_.each(aggro, function(a) {
-				var hp  = 1 - a.entity.HPLevel();
+				let hp  = 1 - a.entity.HPLevel();
 				a.aggro *= hp;
 			});
 		}
 		if(strategy & TargetStrategy.HighHp) {
 			_.each(aggro, function(a) {
-				var hp  = a.entity.HPLevel();
+				let hp  = a.entity.HPLevel();
 				a.aggro *= hp;
 			});
 		}
 		
 		// Normalize hp
-		var min = _.minBy(aggro.length, function(a : any) {
+		let min = _.minBy(aggro.length, function(a : any) {
 			return a.entity.curHp;
 		});
-		var max = _.maxBy(aggro.length, function(a : any) {
+		let max = _.maxBy(aggro.length, function(a : any) {
 			return a.entity.curHp;
 		});
 		
-		var span = max - min;
+		let span = max - min;
 		if(strategy & TargetStrategy.LowAbsHp) {
 			_.each(aggro, function(a) {
-				var hp = (a.entity.curHp - min) / span;
-				var hp  = 1 - hp;
+				let hp = (a.entity.curHp - min) / span;
+				hp  = 1 - hp;
 				a.aggro *= hp;
 			});
 		}
 		if(strategy & TargetStrategy.HighAbsHp) {
 			_.each(aggro, function(a) {
-				var hp = (a.entity.curHp - min) / span;
+				let hp = (a.entity.curHp - min) / span;
 				a.aggro *= hp;
 			});
 		}
@@ -762,14 +762,14 @@ export class Entity {
 				aggro[0].aggro *= 5;
 		}
 		if(strategy & TargetStrategy.SPHunt) {
-			for(var i = 0; i < aggro.length; i++) {
-				var sp = Math.log(aggro[i].entity.SP());
+			for(let i = 0; i < aggro.length; i++) {
+				let sp = Math.log(aggro[i].entity.SP());
 				aggro[i].aggro *= sp;
 			}
 		}
 		if(strategy & TargetStrategy.LPHunt) {
-			for(var i = 0; i < aggro.length; i++) {
-				var lp = Math.log(aggro[i].entity.Lust());
+			for(let i = 0; i < aggro.length; i++) {
+				let lp = Math.log(aggro[i].entity.Lust());
 				aggro[i].aggro *= lp;
 			}
 		}
@@ -777,22 +777,22 @@ export class Entity {
 		// TODO: more complex targetting
 		/*
 		if(strategy & TargetStrategy.None) {
-			var val = this.effect.statusDef[i];
+			let val = this.effect.statusDef[i];
 			val
-				var mod = "+";
+				let mod = "+";
 				if(val < 0) mod = "-"; 
 		}val*100 + ""% + mod
 		*/
 		
 		// Weigthed random selection
-		var sum = _.sumBy(aggro, function(a : any) {
+		let sum = _.sumBy(aggro, function(a : any) {
 			return a.aggro;
 		});
 		
 		// Pick a target
-		var step = Math.random() * sum;
+		let step = Math.random() * sum;
 		
-		for(var i = 0; i < aggro.length; i++) {
+		for(let i = 0; i < aggro.length; i++) {
 			step -= aggro[i].aggro;
 			if(step <= 0.0) return aggro[i].entity;
 		}
@@ -802,20 +802,20 @@ export class Entity {
 
 	//STATS
 	HP() {
-		var buff = this.combatStatus.stats[StatusEffect.Buff];
-		var mod = (buff && buff.HP) ? buff.HP : 1;
+		let buff = this.combatStatus.stats[StatusEffect.Buff];
+		let mod = (buff && buff.HP) ? buff.HP : 1;
 		return Math.ceil((this.maxHp.Get() + Math.pow((this.strength.Get() + this.stamina.Get())/2, 1.3)) * mod);
 	}
 
 	SP() {
-		var buff = this.combatStatus.stats[StatusEffect.Buff];
-		var mod = (buff && buff.SP) ? buff.SP : 1;
+		let buff = this.combatStatus.stats[StatusEffect.Buff];
+		let mod = (buff && buff.SP) ? buff.SP : 1;
 		return Math.ceil((this.maxSp.Get() + Math.pow((this.spirit.Get() + this.intelligence.Get() + this.stamina.Get())/3, 1.3)) * mod);
 	}
 
 	Lust() {
-		var buff = this.combatStatus.stats[StatusEffect.Buff];
-		var mod = (buff && buff.LP) ? buff.LP : 1;
+		let buff = this.combatStatus.stats[StatusEffect.Buff];
+		let mod = (buff && buff.LP) ? buff.LP : 1;
 		return Math.ceil((this.maxLust.Get() + Math.pow(this.libido.Get(), 1.3)) * mod);
 	}
 
@@ -825,49 +825,49 @@ export class Entity {
 
 	// STATS
 	Str() {
-		var buff = this.combatStatus.stats[StatusEffect.Buff];
+		let buff = this.combatStatus.stats[StatusEffect.Buff];
 		if(buff && buff.Str)
 			return this.strength.Get() * buff.Str;
 		else
 			return this.strength.Get();
 	}
 	Sta() {
-		var buff = this.combatStatus.stats[StatusEffect.Buff];
+		let buff = this.combatStatus.stats[StatusEffect.Buff];
 		if(buff && buff.Sta)
 			return this.stamina.Get() * buff.Sta;
 		else
 			return this.stamina.Get();
 	}
 	Dex() {
-		var buff = this.combatStatus.stats[StatusEffect.Buff];
+		let buff = this.combatStatus.stats[StatusEffect.Buff];
 		if(buff && buff.Dex)
 			return this.dexterity.Get() * buff.Dex;
 		else
 			return this.dexterity.Get();
 	}
 	Int() {
-		var buff = this.combatStatus.stats[StatusEffect.Buff];
+		let buff = this.combatStatus.stats[StatusEffect.Buff];
 		if(buff && buff.Int)
 			return this.intelligence.Get() * buff.Int;
 		else
 			return this.intelligence.Get();
 	}
 	Spi() {
-		var buff = this.combatStatus.stats[StatusEffect.Buff];
+		let buff = this.combatStatus.stats[StatusEffect.Buff];
 		if(buff && buff.Spi)
 			return this.spirit.Get() * buff.Spi;
 		else
 			return this.spirit.Get();
 	}
 	Lib() {
-		var buff = this.combatStatus.stats[StatusEffect.Buff];
+		let buff = this.combatStatus.stats[StatusEffect.Buff];
 		if(buff && buff.Lib)
 			return this.libido.Get() * buff.Lib;
 		else
 			return this.libido.Get();
 	}
 	Cha() {
-		var buff = this.combatStatus.stats[StatusEffect.Buff];
+		let buff = this.combatStatus.stats[StatusEffect.Buff];
 		if(buff && buff.Cha)
 			return this.charisma.Get() * buff.Cha;
 		else
@@ -893,7 +893,7 @@ export class Entity {
 
 	AddHPFraction(fraction : number) {
 		fraction = fraction || 0;
-		var old = this.curHp;
+		let old = this.curHp;
 		this.curHp += fraction * this.HP();
 		if(this.curHp > this.HP()) this.curHp = this.HP();
 		if(this.curHp < 0) {
@@ -908,7 +908,7 @@ export class Entity {
 	}
 	AddSPFraction(fraction : number) {
 		fraction = fraction || 0;
-		var old = this.curSp;
+		let old = this.curSp;
 		this.curSp += fraction * this.SP();
 		if(this.curSp > this.SP()) this.curSp = this.SP();
 		if(this.curSp < 0) this.curSp = 0;
@@ -916,7 +916,7 @@ export class Entity {
 	}
 	AddLustFraction(fraction : number) { // 0..1
 		fraction = fraction || 0;
-		var old = this.curLust;
+		let old = this.curLust;
 		this.curLust += fraction * this.Lust();
 		if(this.curLust > this.Lust()) this.curLust = this.Lust();
 		if(this.curLust < 0) this.curLust = 0;
@@ -924,10 +924,10 @@ export class Entity {
 	}
 
 	PhysDmgHP(encounter : any, caster : any, val : number) {
-		var parse : any = {
+		let parse : any = {
 			possessive : this.possessive()
 		};
-		var ent = this;
+		let ent = this;
 		
 		//Healing
 		if(val >= 0) return true;
@@ -943,27 +943,27 @@ export class Entity {
 		
 		// Check for counter
 		if(this.combatStatus.stats[StatusEffect.Counter] != null) {
-			var onhit = this.combatStatus.stats[StatusEffect.Counter].OnHit;
+			let onhit = this.combatStatus.stats[StatusEffect.Counter].OnHit;
 			
 			this.combatStatus.stats[StatusEffect.Counter].hits--;
 			if(this.combatStatus.stats[StatusEffect.Counter].hits <= 0)
 				this.combatStatus.stats[StatusEffect.Counter] = null;
 
-			var ret;
+			let ret;
 			if(onhit)
 				ret = onhit(encounter, this, caster, val);
 
 			return ret;
 		}
 		// Check for decoy
-		var decoy = this.combatStatus.stats[StatusEffect.Decoy];
+		let decoy = this.combatStatus.stats[StatusEffect.Decoy];
 		if(decoy != null) {
-			var num  = decoy.copies;
-			var toHit = 1 / (num + 1);
+			let num  = decoy.copies;
+			let toHit = 1 / (num + 1);
 			if(Math.random() < toHit)
 				return true;
 			
-			var func = decoy.func || function() {
+			let func = decoy.func || function() {
 				parse["oneof"] = num > 1 ? " one of" : "";
 				parse["copy"]  = num > 1 ? "copies" : "copy";
 				Text.Add("The attack is absorbed by[oneof] [possessive] [copy]!", parse);
@@ -981,7 +981,7 @@ export class Entity {
 	}
 	AddHPAbs(val : number) {
 		val = val || 0;
-		var old = this.curHp;
+		let old = this.curHp;
 		this.curHp += val;
 		if(this.curHp > this.HP()) this.curHp = this.HP();
 		if(this.curHp < 0) {
@@ -996,7 +996,7 @@ export class Entity {
 	}
 	AddSPAbs(val : number) {
 		val = val || 0;
-		var old = this.curSp;
+		let old = this.curSp;
 		this.curSp += val;
 		if(this.curSp > this.SP()) this.curSp = this.SP();
 		if(this.curSp < 0) this.curSp = 0;
@@ -1004,7 +1004,7 @@ export class Entity {
 	}
 	AddLustAbs(val : number) {
 		val = val || 0;
-		var old = this.curLust;
+		let old = this.curLust;
 		this.curLust += val;
 		if(this.curLust > this.Lust()) this.curLust = this.Lust();
 		if(this.curLust < 0) this.curLust = 0;
@@ -1078,31 +1078,31 @@ export class Entity {
 
 	AddLustOverTime(hours : number) {
 		// TODO: Function
-		var lustRate = this.libido.Get() / this.spirit.Get();
+		let lustRate = this.libido.Get() / this.spirit.Get();
 		lustRate /= 48;
-		var slutFactor = ((this.slut.Get()/100) + 1);
+		let slutFactor = ((this.slut.Get()/100) + 1);
 		
 		this.AddLustFraction(hours * lustRate * slutFactor);
 	}
 
 	LustCombatEfficiencyLevel() {
-		var lustFactor = (this.LustLevel() - 0.5) * 2;
+		let lustFactor = (this.LustLevel() - 0.5) * 2;
 		if(lustFactor < 0) lustFactor = 0;
 		// linear for now
 		return 1.0 - 0.25 * lustFactor;
 	}
 
 	LustCombatTurnLossChance() {
-		var lustFactor = this.LustLevel() - 0.5;
+		let lustFactor = this.LustLevel() - 0.5;
 		if(lustFactor < 0) lustFactor = 0;
 		return lustFactor; // linear for now
 	}
 
 	Initiative() {
-		var ini = Math.sqrt(2 * this.Dex() + this.Int());
-		var haste = this.combatStatus.stats[StatusEffect.Haste];
+		let ini = Math.sqrt(2 * this.Dex() + this.Int());
+		let haste = this.combatStatus.stats[StatusEffect.Haste];
 		if(haste) ini *= haste.factor;
-		var slow  = this.combatStatus.stats[StatusEffect.Slow];
+		let slow  = this.combatStatus.stats[StatusEffect.Slow];
 		if(slow)  ini /= slow.factor;
 		return ini;
 	}
@@ -1110,12 +1110,12 @@ export class Entity {
 	// Combat functions (calculated)
 	PAttack() {
 		// Stat based
-		var atkStat = (this.Str() * 3 + this.Sta() + this.Dex()) / 2;
+		let atkStat = (this.Str() * 3 + this.Sta() + this.Dex()) / 2;
 		// Weapon strength based
-		var atkWep = this.atkMod;
+		let atkWep = this.atkMod;
 		
 		// Currently range the attack between 0.9 and 1.1
-		var atkRand = _.random(0.9, 1.1);
+		let atkRand = _.random(0.9, 1.1);
 		
 		return atkStat * atkWep * atkRand;
 	}
@@ -1123,14 +1123,14 @@ export class Entity {
 	// TODO: Add perk/elemental/special effects
 	PDefense() {
 		// Stat based
-		var defStat = this.Sta() * 3 + this.Spi();
+		let defStat = this.Sta() * 3 + this.Spi();
 		if(defStat < 0) defStat = 0;
 		// Defense based on armor
-		var defArmor = this.defMod;
+		let defArmor = this.defMod;
 		// Reduce effect of armor due to armor penetration (TODO)
 		
 		// Currently range the attack between 0.9 and 1.1
-		var defRand = _.random(0.9, 1.1);
+		let defRand = _.random(0.9, 1.1);
 		
 		// Combine the result
 		return defStat * defArmor * defRand;
@@ -1138,9 +1138,9 @@ export class Entity {
 
 	// TODO temp
 	PHit() {
-		var hitStat = 3 * this.Dex() + this.Int() + this.Cha();
+		let hitStat = 3 * this.Dex() + this.Int() + this.Cha();
 		
-		var blind = this.combatStatus.stats[StatusEffect.Blind];
+		let blind = this.combatStatus.stats[StatusEffect.Blind];
 		if(blind) {
 			hitStat *= (1 - blind.str);
 		}
@@ -1150,85 +1150,85 @@ export class Entity {
 
 	// TODO temp
 	PEvade(attack? : number) {
-		var evadeStat = 3 * this.Dex() + this.Int() + this.Cha();
+		let evadeStat = 3 * this.Dex() + this.Int() + this.Cha();
 		
 		return evadeStat;
 	}
 
 	// TODO temp
 	MAttack() {
-		var magStat = (3 * this.Int() + this.Spi() + this.Cha()) / 2;
+		let magStat = (3 * this.Int() + this.Spi() + this.Cha()) / 2;
 		
-		var magRand = _.random(0.9, 1.1);
+		let magRand = _.random(0.9, 1.1);
 		
 		return magStat * magRand;
 	}
 
 	// TODO temp
 	MDefense() {
-		var magDef = this.Sta() + 3 * this.Spi();
+		let magDef = this.Sta() + 3 * this.Spi();
 		if(magDef < 0) magDef = 0;
 		
-		var magRand = _.random(0.9, 1.1);
+		let magRand = _.random(0.9, 1.1);
 		
 		return magDef * magRand;
 	}
 
 	MHit() {
-		var hitStat = 3 * this.Int() + this.Spi() + this.Cha();
+		let hitStat = 3 * this.Int() + this.Spi() + this.Cha();
 		
 		return hitStat;
 	}
 
 	// TODO temp
 	MEvade(attack? : number) {
-		var evadeStat = 3 * this.Spi() + this.Int() + this.Dex();
+		let evadeStat = 3 * this.Spi() + this.Int() + this.Dex();
 		
 		return evadeStat;
 	}
 
 	LAttack() {
 		// Stat based
-		var sedStat = (this.Dex() + 2 * this.Lib() + 2 * this.Cha()) / 2;
+		let sedStat = (this.Dex() + 2 * this.Lib() + 2 * this.Cha()) / 2;
 		/*
-		var sedLust = this.LustLevel();
+		let sedLust = this.LustLevel();
 		*/
 		// Armor sluttiness based (TODO)
-		var sedArmor = 1;
+		let sedArmor = 1;
 		
 		// Currently range the attack between 0.9 and 1.1
-		var sedRand = _.random(0.9, 1.1);
+		let sedRand = _.random(0.9, 1.1);
 		
 		return sedStat /* * sedLust*/ * sedArmor * sedRand;
 	}
 
 	LDefense() {
 		// Stat based
-		var comStat = 2 * this.Sta() + this.Spi() + this.Cha();
+		let comStat = 2 * this.Sta() + this.Spi() + this.Cha();
 		if(comStat < 0) comStat = 0;
 
 		// Lust and libido based
-	//	var comLust = this.libido.Get() + this.LustLevel();
+	//	let comLust = this.libido.Get() + this.LustLevel();
 		
 		
 		// Currently range the attack between 0.9 and 1.1
-		var comRand = _.random(0.9, 1.1);
+		let comRand = _.random(0.9, 1.1);
 		
 		return comStat /* * comLust*/ * comRand;
 	}
 
 	// TODO temp
 	LHit() {
-		var hitStat = 3 * this.Lib() + 2 * this.Cha();
+		let hitStat = 3 * this.Lib() + 2 * this.Cha();
 		
 		return hitStat;
 	}
 
 	// TODO temp
 	LEvade(attack? : number) {
-		var evadeStat = 3 * this.Spi() + this.Sta() + this.Int();
+		let evadeStat = 3 * this.Spi() + this.Sta() + this.Int();
 		
-		var blind = this.combatStatus.stats[StatusEffect.Blind];
+		let blind = this.combatStatus.stats[StatusEffect.Blind];
 		if(blind) {
 			evadeStat *= (1 + blind.str);
 		}
@@ -1240,11 +1240,11 @@ export class Entity {
 
 
 	Resistance(type : number) {
-		var res   = this.statusDef[type]     || 0;
-		var gear  = this.statusDefGear[type] || 0;
-		var wear  = this.statusWear[type]    || 0;
-		var curse = this.combatStatus.stats[StatusEffect.Curse];
-		var total = res + gear - wear;
+		let res   = this.statusDef[type]     || 0;
+		let gear  = this.statusDefGear[type] || 0;
+		let wear  = this.statusWear[type]    || 0;
+		let curse = this.combatStatus.stats[StatusEffect.Curse];
+		let total = res + gear - wear;
 		if(curse) {
 			total -= curse.str;
 		}
@@ -1271,7 +1271,7 @@ export class Entity {
 	/* ENTITY SAVE */
 	
 	SaveSexFlags(storage : any) {
-		var sex : any = {};
+		let sex : any = {};
 		if(this.sex.rBlow != 0) sex.rBlow = this.sex.rBlow;
 		if(this.sex.gBlow != 0) sex.gBlow = this.sex.gBlow;
 		if(this.sex.rCunn != 0) sex.rCunn = this.sex.rCunn;
@@ -1328,7 +1328,7 @@ export class Entity {
 	}
 
 	SaveStatusEffects(storage : any) {
-		var s = this.combatStatus.ToStorage();
+		let s = this.combatStatus.ToStorage();
 		if(s)
 			storage.stat = s;
 	}
@@ -1342,8 +1342,8 @@ export class Entity {
 	}
 
 	SaveFlags(storage : any) {
-		var flags : any = {};
-		for(var flag in this.flags) {
+		let flags : any = {};
+		for(let flag in this.flags) {
 			if(this.flags[flag] != 0)
 				flags[flag] = this.flags[flag];
 		}
@@ -1351,8 +1351,8 @@ export class Entity {
 	}
 
 	SavePerks(storage : any) {
-		var perks = [];
-		for(var i = 0; i < this.perks.length; ++i) {
+		let perks = [];
+		for(let i = 0; i < this.perks.length; ++i) {
 			perks.push(this.perks[i].id);
 		}
 		storage.perks = perks;
@@ -1361,16 +1361,16 @@ export class Entity {
 	SaveRecipes(storage : any) {
 		if(this.recipes) {
 			storage.recipes = [];
-			for(var i = 0; i < this.recipes.length; i++)
+			for(let i = 0; i < this.recipes.length; i++)
 				storage.recipes.push(this.recipes[i].id);
 		}
 	}
 
 	SaveJobs(storage : any) {
 		storage.jobs = {};
-		for(var job in this.jobs) {
-			var jd = this.jobs[job];
-			var jobStorage = jd.ToStorage();
+		for(let job in this.jobs) {
+			let jd = this.jobs[job];
+			let jobStorage = jd.ToStorage();
 			if(jobStorage)
 				storage.jobs[job] = jobStorage;
 		}
@@ -1412,7 +1412,7 @@ export class Entity {
 
 	// Convert to a format easy to write to/from memory
 	ToStorage() {
-		var storage : any = {};
+		let storage : any = {};
 		
 		storage.body = this.body.ToStorage();
 		
@@ -1490,15 +1490,15 @@ export class Entity {
 	LoadRecipes(storage : any) {
 		if(storage.recipes) {
 			this.recipes = [];
-			for(var i = 0; i < storage.recipes.length; i++)
+			for(let i = 0; i < storage.recipes.length; i++)
 				this.recipes.push(ItemIds[storage.recipes[i]]);
 		}
 	}
 
 	LoadJobs(storage : any) {
 		if(storage.jobs) {
-			for(var job in this.jobs) {
-				var jd = this.jobs[job];
+			for(let job in this.jobs) {
+				let jd = this.jobs[job];
 				jd.FromStorage(storage.jobs[jd.job.name]);
 			}
 		}
@@ -1517,19 +1517,19 @@ export class Entity {
 	}
 
 	LoadFlags(storage : any) {
-		for(var flag in storage.flags)
+		for(let flag in storage.flags)
 			this.flags[flag] = parseInt(storage.flags[flag]);
 	}
 
 	LoadSexFlags(storage : any) {
-		for(var flag in storage.sex)
+		for(let flag in storage.sex)
 			this.sex[flag] = parseInt(storage.sex[flag]);
 	}
 
 	LoadPerks(storage : any) {
 		if(storage.perks) {
 			this.perks = [];
-			for(var i = 0; i < storage.perks.length; i++) {
+			for(let i = 0; i < storage.perks.length; i++) {
 				this.perks.push(PerkIds[storage.perks[i]]);
 			}
 		}
@@ -1570,18 +1570,18 @@ export class Entity {
 	}
 
 	RecallAbilities() {
-		for(var job in this.jobs) {
-			var jd = this.jobs[job];
-			for(var i = 0; i < jd.level - 1; i++) {
+		for(let job in this.jobs) {
+			let jd = this.jobs[job];
+			for(let i = 0; i < jd.level - 1; i++) {
 				if(i >= jd.job.levels.length) break;
-				var skills = jd.job.levels[i].skills;
+				let skills = jd.job.levels[i].skills;
 				// Teach new skills
 				if(skills) {
 					// [ { ab: Ablities.Black.Fireball, set: "Spells" }, ... ]
-					for(var j = 0; j < skills.length; j++) {
-						var sd      = skills[j];
-						var ability = sd.ab;
-						var set     = sd.set;
+					for(let j = 0; j < skills.length; j++) {
+						let sd      = skills[j];
+						let ability = sd.ab;
+						let set     = sd.set;
 						this.abilities[set].AddAbility(ability);
 					}
 				}
@@ -1594,7 +1594,7 @@ export class Entity {
 	
 	/* ENTITY DESC */
 	PrintDescription(partial? : boolean) {
-		var parse : any = {
+		let parse : any = {
 			name     : this.NameDesc(),
 			possesive: this.possessive(),
 			weigth   : Math.floor(this.body.weigth.Get() * 2),
@@ -1616,9 +1616,9 @@ export class Entity {
 		};
 		parse = this.ParserTags(parse);
 		parse = this.ParserPronouns(parse);
-		var height = Math.floor(Unit.CmToInch(this.body.height.Get()));
-		var height_feet = Math.floor(height / 12);
-		var height_inches = Math.floor(height % 12);
+		let height = Math.floor(Unit.CmToInch(this.body.height.Get()));
+		let height_feet = Math.floor(height / 12);
+		let height_inches = Math.floor(height % 12);
 		parse["height"] = height_feet + " feet";
 		if(height_inches > 0) {
 			parse["height"] += " and " + height_inches + " inch";
@@ -1636,17 +1636,17 @@ export class Entity {
 		Text.Add("[HeShe] [has] [faceDesc]. [HisHer] [eyeCount] [eyeColor] [eye][eyeS] observe the surroundings. ", parse);
 		Text.Add("A pair of [ears] sticks out from [possesive] [hairDesc]. ", parse);
 		
-		for(var i = 0; i < this.body.head.appendages.length; i++) {
-			var a = this.body.head.appendages[i];
+		for(let i = 0; i < this.body.head.appendages.length; i++) {
+			let a = this.body.head.appendages[i];
 			parse.appDesc = a.Long();
 			Text.Add("On [hisher] head, [heshe] [has] a [appDesc]. ", parse);
 		}
 		
 		Text.NL();
-		var bs = false;
+		let bs = false;
 		// Back slots
-		for(var i = 0; i < this.body.backSlots.length; i++) {
-			var b = this.body.backSlots[i];
+		for(let i = 0; i < this.body.backSlots.length; i++) {
+			let b = this.body.backSlots[i];
 			parse.appDesc = b.Long();
 			Text.Add("On [hisher] back, [heshe] [has] a [appDesc]. ", parse);
 			bs = true;
@@ -1673,18 +1673,18 @@ export class Entity {
 		Text.NL();
 		
 		// TODO: Breasts
-		var breasts = this.body.breasts;
+		let breasts = this.body.breasts;
 		if(breasts.length == 1) {
 			parse.breastDesc = breasts[0].Long();
 			Text.Add("[HeShe] [has] [breastDesc].", parse);
 		}
 		else if(breasts.length > 1) {
-			var breast = breasts[0];
-			var breastDesc = breast.Desc();
+			let breast = breasts[0];
+			let breastDesc = breast.Desc();
 			parse.breastDesc = breasts[0].Short();
 			parse.breastSize = breastDesc.size;
 			Text.Add("Multiple rows of " + breast.nounPlural() + " sprout from [hisher] chest. [HisHer] first pair of [breastDesc] are [breastSize] in circumference.", parse);
-			for(var i = 1; i < breasts.length; i++) {
+			for(let i = 1; i < breasts.length; i++) {
 				Text.Add("<br>Another two breasts.");
 			}
 		}
@@ -1696,21 +1696,21 @@ export class Entity {
 		Text.NL();
 		
 		// Genetalia
-		var cocks = this.body.cock;
-		var vags = this.body.vagina;
+		let cocks = this.body.cock;
+		let vags = this.body.vagina;
 		
 		if(cocks.length == 1) {
-			var cock = cocks[0];
+			let cock = cocks[0];
 			parse.cockDesc = cock.aLong();
 			Text.Add("[name] [has] [cockDesc].", parse);
 		}
 		else if(cocks.length > 1) {
-			var cock = cocks[0];
+			let cock = cocks[0];
 			parse.cockDesc = cock.aLong();
 			parse.numCocks = Text.NumToText(cocks.length);
 			Text.Add("[name] [has] a brace of [numCocks] " + cock.nounPlural() + ".", parse);
-			for(var i = 0; i < cocks.length; i++) {
-				var cock = cocks[i];
+			for(let i = 0; i < cocks.length; i++) {
+				let cock = cocks[i];
 				parse.cockDesc = cock.aLong();
 				Text.NL();
 				Text.Add("[name] [has] [cockDesc].", parse);
@@ -1739,14 +1739,14 @@ export class Entity {
 		
 		// TODO: vagina
 		if(vags.length == 1) {
-			var vag = vags[0];
-			var vagDesc = vag.Desc();
+			let vag = vags[0];
+			let vagDesc = vag.Desc();
 			Text.Add("[name] [has] " + vagDesc.a + " " + vagDesc.adj + " " + vag.noun() + ".", parse);
 		}
 		else if(vags.length > 1) {
-			var vag = vags[0];
+			let vag = vags[0];
 			Text.Add("[name] [has] multiple " + vag.nounPlural() + ". [HisHer] first " + vag.noun() + " is slutty.<br>", parse);
-			for(var i = 1; i < vags.length; i++) {
+			for(let i = 1; i < vags.length; i++) {
 				Text.Add("<br>Another of [hisher] " + vag.nounPlural() + " is slutty.", parse);
 			}
 		}
@@ -1758,14 +1758,14 @@ export class Entity {
 		}
 		
 		// TODO TEMP
-		var balls = this.Balls();
+		let balls = this.Balls();
 		Text.Add("Cum: " + balls.cum.Get().toFixed(2) + " / " + balls.CumCap().toFixed(2));
 		Text.NL();
 		Text.Add("Milk: " + this.Milk().toFixed(2) + " / " + this.MilkCap().toFixed(2));
 		Text.NL();
 		
 		// TODO: Pregnancy
-		var womb = this.pregHandler.Womb({slot: PregnancyHandler.Slot.Vag});
+		let womb = this.pregHandler.Womb({slot: PregnancyHandler.Slot.Vag});
 		if(womb && womb.pregnant) {
 			parse["proc"] = (womb.progress * 100).toFixed(1);
 			parse["hour"] = womb.hoursToBirth.toFixed(1);
@@ -1794,7 +1794,7 @@ export class Entity {
 			Text.NL();
 		}
 		
-		var drunk = this.DrunkStr();
+		let drunk = this.DrunkStr();
 		if(drunk) {
 			Text.NL();
 			Text.Add(drunk);
@@ -1836,13 +1836,13 @@ export class Entity {
 	}
 	
 	Humanity() {
-		var racescore = new RaceScore(this.body);
-		var humanScore = new RaceScore();
+		let racescore = new RaceScore(this.body);
+		let humanScore = new RaceScore();
 		humanScore.score[Race.Human.id] = 1;
 		return racescore.Compare(humanScore);
 	}
 	RaceCompare(race : RaceDesc) {
-		var racescore = new RaceScore(this.body);
+		let racescore = new RaceScore(this.body);
 		return racescore.SumScore(race);
 	}
 	Femininity() {
@@ -1973,7 +1973,7 @@ export class Entity {
 		
 	}
 	StomachDesc() {
-		var bellysize = this.pregHandler.BellySize();
+		let bellysize = this.pregHandler.BellySize();
 		return this.body.StomachDesc(bellysize);
 	}
 	HipDesc() {
@@ -2026,13 +2026,13 @@ export class Entity {
 		return this.body.HasNightvision();
 	}
 	HasHorns() {
-		for(var i = 0; i < this.body.head.appendages.length; i++)
+		for(let i = 0; i < this.body.head.appendages.length; i++)
 			if(this.body.head.appendages[i].type == AppendageType.horn)
 				return this.body.head.appendages[i];
 		return null;
 	}
 	HasAntenna() {
-		for(var i = 0; i < this.body.head.appendages.length; i++)
+		for(let i = 0; i < this.body.head.appendages.length; i++)
 			if(this.body.head.appendages[i].type == AppendageType.antenna)
 				return this.body.head.appendages[i];
 		return null;
@@ -2041,20 +2041,20 @@ export class Entity {
 		return this.body.backSlots;
 	}
 	HasTail() {
-		for(var i = 0; i < this.body.backSlots.length; i++)
+		for(let i = 0; i < this.body.backSlots.length; i++)
 			if(this.body.backSlots[i].type == AppendageType.tail)
 				return this.body.backSlots[i];
 		return null;
 	}
 	HasPrehensileTail() {
-		var found = false;
-		for(var i = 0; i < this.body.backSlots.length; i++)
+		let found = false;
+		for(let i = 0; i < this.body.backSlots.length; i++)
 			if(this.body.backSlots[i].type == AppendageType.tail)
 				found = found || this.body.backSlots[i].Prehensile();
 		return found;
 	}
 	HasWings() {
-		for(var i = 0; i < this.body.backSlots.length; i++)
+		for(let i = 0; i < this.body.backSlots.length; i++)
 			if(this.body.backSlots[i].type == AppendageType.wing)
 				return this.body.backSlots[i];
 		return null;
@@ -2111,69 +2111,69 @@ export class Entity {
 		return this.MonsterName || this.name;
 	}
 	possessive() {
-		var name = this.monsterName || this.name || "the entity";
-		var letter = name[name.length-1];
-		var s = (letter == 's' || letter == 'x') ? "'" : "'s";
+		let name = this.monsterName || this.name || "the entity";
+		let letter = name[name.length-1];
+		let s = (letter == 's' || letter == 'x') ? "'" : "'s";
 		return name + s;
 	}
 	Possessive() {
-		var name = this.MonsterName || this.name || "The entity";
-		var letter = name[name.length-1];
-		var s = (letter == 's' || letter == 'x') ? "'" : "'s";
+		let name = this.MonsterName || this.name || "The entity";
+		let letter = name[name.length-1];
+		let s = (letter == 's' || letter == 'x') ? "'" : "'s";
 		return name + s;
 	}
 	possessivePlural() {
-		var name = this.groupName || this.name || "the entities";
+		let name = this.groupName || this.name || "the entities";
 		return name + "'";
 	}
 	PossessivePlural() {
-		var name = this.GroupName || this.name || "The entities";
+		let name = this.GroupName || this.name || "The entities";
 		return name + "'";
 	}
 	heshe(forcegender? : Gender) : string {
-		var gender = forcegender ? forcegender : this.body.Gender();
+		let gender = forcegender ? forcegender : this.body.Gender();
 		if(gender == Gender.male) return "he";
 		else if(gender == Gender.female) return "she";
 		else if(gender == Gender.herm) return "she";
 		else return "they";
 	}
 	HeShe(forcegender? : Gender) : string {
-		var gender = forcegender ? forcegender : this.body.Gender();
+		let gender = forcegender ? forcegender : this.body.Gender();
 		if(gender == Gender.male) return "He";
 		else if(gender == Gender.female) return "She";
 		else if(gender == Gender.herm) return "She";
 		else return "They";
 	}
 	himher(forcegender? : Gender) : string {
-		var gender = forcegender ? forcegender : this.body.Gender();
+		let gender = forcegender ? forcegender : this.body.Gender();
 		if(gender == Gender.male) return "him";
 		else if(gender == Gender.female) return "her";
 		else if(gender == Gender.herm) return "her";
 		else return "them";
 	}
 	HimHer(forcegender? : Gender) : string {
-		var gender = forcegender ? forcegender : this.body.Gender();
+		let gender = forcegender ? forcegender : this.body.Gender();
 		if(gender == Gender.male) return "Him";
 		else if(gender == Gender.female) return "Her";
 		else if(gender == Gender.herm) return "Her";
 		else return "Them";
 	}
 	hisher(forcegender? : Gender) : string {
-		var gender = forcegender ? forcegender : this.body.Gender();
+		let gender = forcegender ? forcegender : this.body.Gender();
 		if(gender == Gender.male) return "his";
 		else if(gender == Gender.female) return "her";
 		else if(gender == Gender.herm) return "her";
 		else return "their";
 	}
 	HisHer(forcegender? : Gender) : string {
-		var gender = forcegender ? forcegender : this.body.Gender();
+		let gender = forcegender ? forcegender : this.body.Gender();
 		if(gender == Gender.male) return "His";
 		else if(gender == Gender.female) return "Her";
 		else if(gender == Gender.herm) return "Her";
 		else return "Their";
 	}
 	hishers(forcegender? : Gender) : string {
-		var gender = forcegender ? forcegender : this.body.Gender();
+		let gender = forcegender ? forcegender : this.body.Gender();
 		if(gender == Gender.male) return "his";
 		else if(gender == Gender.female) return "hers";
 		else if(gender == Gender.herm) return "hers";
@@ -2213,7 +2213,7 @@ export class Entity {
 	}
 
 	ParserTags(parse? : any, prefix? : string, p1cock? : Cock) {
-		var ent = this;
+		let ent = this;
 		parse  = parse  || {};
 		prefix = prefix || "";
 		
@@ -2253,9 +2253,9 @@ export class Entity {
 		parse[prefix + "foot"]      = function() { return ent.FootDesc(); }
 		parse[prefix + "feet"]      = function() { return ent.FeetDesc(); }
 		parse[prefix + "belly"]     = function() { return ent.StomachDesc(); }
-		parse[prefix + "tail"]      = function() { var tail = ent.HasTail(); return tail ? tail.Short() : ""; }
-		parse[prefix + "wings"]     = function() { var wings = ent.HasWings(); return wings ? wings.Short() : ""; }
-		parse[prefix + "horns"]     = function() { var horns = ent.HasHorns(); return horns ? horns.Short() : ""; }
+		parse[prefix + "tail"]      = function() { let tail = ent.HasTail(); return tail ? tail.Short() : ""; }
+		parse[prefix + "wings"]     = function() { let wings = ent.HasWings(); return wings ? wings.Short() : ""; }
+		parse[prefix + "horns"]     = function() { let horns = ent.HasHorns(); return horns ? horns.Short() : ""; }
 		
 		parse[prefix + "weapon"]    = function() { return ent.WeaponDesc(); }
 		parse[prefix + "armor"]     = function() { return ent.ArmorDesc(); }
@@ -2292,8 +2292,8 @@ export class Entity {
 
 	ResetVirgin() {
 		this.Butt().virgin = true;
-		var vags = this.AllVags();
-		for(var i = 0; i < vags.length; i++)
+		let vags = this.AllVags();
+		for(let i = 0; i < vags.length; i++)
 			vags[i].virgin = true;
 	}
 
@@ -2305,8 +2305,8 @@ export class Entity {
 		return this.body.cock[0];
 	}
 	FirstClitCockIdx() {
-		for(var i=0,j=this.body.cock.length; i<j; i++) {
-			var c = this.body.cock[i];
+		for(let i=0,j=this.body.cock.length; i<j; i++) {
+			let c = this.body.cock[i];
 			if(c.vag)
 				return i;
 		}
@@ -2314,11 +2314,11 @@ export class Entity {
 	}
 	BiggestCock(cocks? : Cock[], incStrapon? : boolean) {
 		cocks = cocks || this.body.cock;
-		var c = cocks[0];
+		let c = cocks[0];
 		if(c) {
-			var cSize = cocks[0].length.Get() * cocks[0].thickness.Get();
-			for(var i=1,j=cocks.length; i<j; i++) {
-				var newSize = cocks[i].length.Get() * cocks[i].thickness.Get();
+			let cSize = cocks[0].length.Get() * cocks[0].thickness.Get();
+			for(let i=1,j=cocks.length; i<j; i++) {
+				let newSize = cocks[i].length.Get() * cocks[i].thickness.Get();
 				if(newSize > cSize) {
 					cSize = newSize;
 					c = cocks[i];
@@ -2331,23 +2331,23 @@ export class Entity {
 			return this.strapOn.cock;
 	}
 	CocksThatFit(orifice? : Orifice, onlyRealCocks? : boolean, extension? : any) {
-		var ret = [];
-		for(var i=0,j=this.body.cock.length; i<j; i++) {
-			var c = this.body.cock[i];
+		let ret = [];
+		for(let i=0,j=this.body.cock.length; i<j; i++) {
+			let c = this.body.cock[i];
 			if(!orifice || orifice.Fits(c, extension))
 				ret.push(c);
 		};
 		if(ret.length == 0 && !onlyRealCocks && this.strapOn) {
-			var c : Cock = this.strapOn.cock;
+			let c : Cock = this.strapOn.cock;
 			if(!orifice || orifice.Fits(c, extension))
 				ret.push(c);
 		}
 		return ret;
 	}
 	AllCocksCopy() {
-		var ret = [];
-		for(var i=0,j=this.body.cock.length; i<j; i++) {
-			var c = this.body.cock[i];
+		let ret = [];
+		for(let i=0,j=this.body.cock.length; i<j; i++) {
+			let c = this.body.cock[i];
 				ret.push(c);
 		};
 		return ret;
@@ -2380,10 +2380,10 @@ export class Entity {
 		return this.body.vagina[0];
 	}
 	VagsThatFit(capacity : number) {
-		var ret : Vagina[] = [];
-		for(var i=0; i<this.body.vagina.length; i++) {
+		let ret : Vagina[] = [];
+		for(let i=0; i<this.body.vagina.length; i++) {
 			let vag = this.body.vagina[i];
-			var size = vag.capacity.Get();
+			let size = vag.capacity.Get();
 			if(size >= capacity) {
 				ret.push(vag);
 			}
@@ -2394,9 +2394,9 @@ export class Entity {
 		return this.body.vagina;
 	}
 	UnfertilezedWomb() {
-		var ret : Womb[] = [];
-		for(var i=0,j=this.body.vagina.length; i<j; i++){
-			var womb = this.body.vagina[i].womb;
+		let ret : Womb[] = [];
+		for(let i=0,j=this.body.vagina.length; i<j; i++){
+			let womb = this.body.vagina[i].womb;
 			if(womb.pregnant == false)
 				ret.push(womb);
 		};
@@ -2415,11 +2415,11 @@ export class Entity {
 		return this.body.breasts;
 	}
 	BiggestBreasts() {
-		var breasts = this.body.breasts;
-		var c = breasts[0];
-		var cSize = breasts[0].Size();
-		for(var i=1,j=breasts.length; i<j; i++) {
-			var newSize = breasts[i].Size();
+		let breasts = this.body.breasts;
+		let c = breasts[0];
+		let cSize = breasts[0].Size();
+		for(let i=1,j=breasts.length; i<j; i++) {
+			let newSize = breasts[i].Size();
 			if(newSize > cSize) {
 				cSize = newSize;
 				c = breasts[i];
@@ -2428,11 +2428,11 @@ export class Entity {
 		return c;
 	}
 	SmallestBreasts() {
-		var breasts = this.body.breasts;
-		var c = breasts[0];
-		var cSize = breasts[0].Size();
-		for(var i=1,j=breasts.length; i<j; i++) {
-			var newSize = breasts[i].Size();
+		let breasts = this.body.breasts;
+		let c = breasts[0];
+		let cSize = breasts[0].Size();
+		for(let i=1,j=breasts.length; i<j; i++) {
+			let newSize = breasts[i].Size();
 			if(newSize < cSize) {
 				cSize = newSize;
 				c = breasts[i];
@@ -2441,11 +2441,11 @@ export class Entity {
 		return c;
 	}
 	BiggestNips() {
-		var breasts = this.body.breasts;
-		var c = breasts[0];
-		var cSize = breasts[0].NipSize();
-		for(var i=1,j=breasts.length; i<j; i++) {
-			var newSize = breasts[i].NipSize();
+		let breasts = this.body.breasts;
+		let c = breasts[0];
+		let cSize = breasts[0].NipSize();
+		for(let i=1,j=breasts.length; i<j; i++) {
+			let newSize = breasts[i].NipSize();
 			if(newSize > cSize) {
 				cSize = newSize;
 				c = breasts[i];
@@ -2454,11 +2454,11 @@ export class Entity {
 		return c;
 	}
 	SmallestNips() {
-		var breasts = this.body.breasts;
-		var c = breasts[0];
-		var cSize = breasts[0].NipSize();
-		for(var i=1,j=breasts.length; i<j; i++) {
-			var newSize = breasts[i].NipSize();
+		let breasts = this.body.breasts;
+		let c = breasts[0];
+		let cSize = breasts[0].NipSize();
+		for(let i=1,j=breasts.length; i<j; i++) {
+			let newSize = breasts[i].NipSize();
 			if(newSize < cSize) {
 				cSize = newSize;
 				c = breasts[i];
@@ -2467,9 +2467,9 @@ export class Entity {
 		return c;
 	}
 	NipplesThatFitLen(capacity : number) {
-		var ret = new Array();
-		for(var i=0,j=this.body.breasts.length; i<j; i++) {
-			var row = this.body.breasts[i];
+		let ret = new Array();
+		for(let i=0,j=this.body.breasts.length; i<j; i++) {
+			let row = this.body.breasts[i];
 			if(row.nippleType == NippleType.lipple ||
 				row.nippleType == NippleType.cunt) {
 				if(row.NipSize() >= capacity)
@@ -2482,13 +2482,13 @@ export class Entity {
 
 	AllOrfices(capacity? : number) {
 		capacity = capacity || 0;
-		var ret = new Array();
+		let ret = new Array();
 		
 		let vags = this.VagsThatFit(capacity);
-		for(var i=0,j=vags.length; i<j; i++)
+		for(let i=0,j=vags.length; i<j; i++)
 			ret.push({type: BodyPartType.vagina, obj: vags[i]});
-		var nips = this.NipplesThatFitLen(capacity);
-		for(var i=0,j=nips.length; i<j; i++)
+		let nips = this.NipplesThatFitLen(capacity);
+		for(let i=0,j=nips.length; i<j; i++)
 			ret.push({type: BodyPartType.nipple, obj: nips[i]});
 		if(this.body.ass.capacity.Get() >= capacity)
 			ret.push({type: BodyPartType.ass, obj: this.body.ass});
@@ -2499,10 +2499,10 @@ export class Entity {
 	}
 
 	AllPenetrators(orifice : Orifice) {
-		var ret = new Array();
+		let ret = new Array();
 		
-		var cocks = this.CocksThatFit(orifice);
-		for(var i=0,j=cocks.length; i<j; i++)
+		let cocks = this.CocksThatFit(orifice);
+		for(let i=0,j=cocks.length; i<j; i++)
 			ret.push({type: BodyPartType.cock, obj: cocks[i]});
 		// TODO: Tongue, Nipple-cock, Clitcock
 		
@@ -2525,7 +2525,7 @@ export class Entity {
 
 	// Fuck entitys anus (anus, cock)
 	FuckAnal(butt : Butt, cock? : Cock, expMult? : number) {
-		var parse : any = {
+		let parse : any = {
 			name   : this.NameDesc(),
 			has    : this.has(),
 			hisher : this.hisher()
@@ -2548,7 +2548,7 @@ export class Entity {
 
 	// Fuck entitys vagina (vag, cock)
 	FuckVag(vag : Vagina, cock? : Cock, expMult? : number) {
-		var parse : any = {
+		let parse : any = {
 			name   : this.NameDesc(),
 			has    : this.has(),
 			hisher : this.hisher()
@@ -2572,7 +2572,7 @@ export class Entity {
 	Sexed() {
 		if(this.flags["Sexed"] && this.flags["Sexed"] != 0)
 			return true;
-		for(var flag in this.sex)
+		for(let flag in this.sex)
 			if(this.sex[flag] != 0)
 				return true;
 		return false;
@@ -2580,7 +2580,7 @@ export class Entity {
 
 	RestoreCum(quantity? : number) {
 		quantity = quantity || 1;
-		var balls = this.Balls();
+		let balls = this.Balls();
 		return balls.cum.IncreaseStat(balls.CumCap(), quantity);
 	}
 	// TODO
@@ -2589,8 +2589,8 @@ export class Entity {
 	}
 	CumOutput(mult? : number) {
 		mult = mult || 1;
-		var balls = this.Balls();
-		var cum = mult * balls.CumCap() / 4;
+		let balls = this.Balls();
+		let cum = mult * balls.CumCap() / 4;
 		cum *= this.LustLevel() + 0.5;
 		
 		cum = Math.min(cum, this.Cum());
@@ -2599,8 +2599,8 @@ export class Entity {
 	// TODO test
 	OrgasmCum(mult? : number) {
 		mult = mult || 1;
-		var balls = this.Balls();
-		var cumQ  = this.CumOutput(mult);
+		let balls = this.Balls();
+		let cumQ  = this.CumOutput(mult);
 		
 		this.AddLustFraction(-1);
 		

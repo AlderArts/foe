@@ -10,7 +10,7 @@ enum Gender {
 
 namespace Gender {
 	export function Desc(gender : Gender) {
-		var r;
+		let r;
 		switch(gender) {
 		case Gender.male: return "male";
 		case Gender.female: return "female";
@@ -21,7 +21,7 @@ namespace Gender {
 		}
 	}
 	export function Noun(gender : Gender) {
-		var r;
+		let r;
 		switch(gender) {
 		case Gender.male: return "man";
 		case Gender.female: return "woman";
@@ -32,7 +32,7 @@ namespace Gender {
 		}
 	}
 	export function Short(gender : Gender) {
-		var r;
+		let r;
 		switch(gender) {
 		case Gender.male: return "M";
 		case Gender.female: return "F";
@@ -42,14 +42,14 @@ namespace Gender {
 	}
 	export function Random(odds? : any[]) {
 		odds = odds || [1, 1, 1];
-		var sum = 0;
-		for(var i = 0; i < Gender.LAST; i++) {
+		let sum = 0;
+		for(let i = 0; i < Gender.LAST; i++) {
 			if(odds[i]) sum += odds[i];
 		}
 		
-		var step = Math.random() * sum;
+		let step = Math.random() * sum;
 		
-		for(var i = 0; i < Gender.LAST; i++) {
+		for(let i = 0; i < Gender.LAST; i++) {
 			if(odds[i])
 				step -= odds[i];
 			if(step <= 0.0)

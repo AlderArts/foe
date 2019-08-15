@@ -9,13 +9,13 @@ export namespace VenaRScenes {
 
 	export function Approach() {
 		let player = GAME().player;
-		var parse : any = {
+		let parse : any = {
 			playername : player.name
 		};
 		
 		Text.Clear();
 		
-		var scenes = new EncounterTable();
+		let scenes = new EncounterTable();
 		
 		scenes.AddEnc(function() {
 			Text.Add("Vena is currently on her knees in front of her throne, with two of her many sons standing before her. Even from your angle, it is easy to see that the lucky lapins are receiving an enthusiastic blowjob from their mother. Vena alternates between each throbbing cock with blatant appreciation, sometimes even sucking on both dicks at the same time.", parse);
@@ -130,13 +130,13 @@ export namespace VenaRScenes {
 
 	export function Prompt() {
 		let vena = GAME().vena;
-		var parse : any = {
+		let parse : any = {
 			
 		};
 		
-		var options = [];
+		let options = [];
 		
-		var judged = vena.flags["Met"] & VenaFlags.Met.Judgement;
+		let judged = vena.flags["Met"] & VenaFlags.Met.Judgement;
 		if(!judged) {
 			options.push({nameStr : "Lagon’s fate",
 				tooltip : Text.Parse("You want to talk about what’s going to happen to Lagon.", parse),
@@ -194,11 +194,11 @@ export namespace VenaRScenes {
 
 	export function LagonsFate(opts : any) {
 		let player = GAME().player;
-		var parse : any = {
+		let parse : any = {
 			playername : player.name
 		};
 		
-		var options = [];
+		let options = [];
 		//[Public Fuck][Kill Him][Exile][Drug Him]
 		
 		options.push({nameStr : "Public Fuck",

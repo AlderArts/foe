@@ -36,13 +36,13 @@ export class DryadGlade {
 	}
 
 	ToStorage() {
-		var storage : any = {};
+		let storage : any = {};
 		storage.flags = this.flags;
 		return storage;
 	}
 
 	FromStorage(storage : any) {
-		for(var flag in storage.flags)
+		for(let flag in storage.flags)
 			this.flags[flag] = parseInt(storage.flags[flag]);
 	}
 
@@ -63,7 +63,7 @@ GladeLoc.SaveSpot = "Dryads";
 GladeLoc.safe = function() { return true; };
 GladeLoc.description = function() {
 	let orchid = GAME().orchid;
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	
@@ -107,7 +107,7 @@ GladeLoc.onEntry = function() {
 		return;
 	}
 	
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	
@@ -128,7 +128,7 @@ GladeLoc.onEntry = function() {
 	Text.Flush();
 	
 	//[Enter][Leave]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Enter",
 		func : DryadGladeScenes.First, enabled : true,
 		tooltip : "There is no time to lose. Go forth, steeling yourself against whatever danger awaits."
@@ -153,7 +153,7 @@ DryadGladeScenes.First = function() {
 	let party : Party = GAME().party;
 	let orchid = GAME().orchid;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name
 	};
 	
@@ -211,9 +211,9 @@ DryadGladeScenes.First = function() {
 		Text.Add("It’s a fight!", parse);
 		Text.Flush();
 		
-		var enemy = new Party();
+		let enemy = new Party();
 		enemy.AddMember(orchid);
-		var enc = new Encounter(enemy);
+		let enc = new Encounter(enemy);
 		
 		orchid.RestFull();
 		
@@ -238,7 +238,7 @@ DryadGladeScenes.FirstLoss = function() {
 	let momo = GAME().momo;
 	SetGameState(GameState.Event, Gui);
 	
-	var parse : any = {
+	let parse : any = {
 		armor : function() { return player.ArmorDesc(); }
 	};
 	
@@ -263,8 +263,8 @@ DryadGladeScenes.FirstLoss = function() {
 	Text.NL();
 	
 	if(party.Num() > 1) {
-		var count = 1;
-		var total = party.Num();
+		let count = 1;
+		let total = party.Num();
 		
 		if(party.Num() == 2)
 			parse["comp"] = party.Get(1).name;
@@ -450,9 +450,9 @@ DryadGladeScenes.FirstLoss = function() {
 		
 		// Fallback
 		if(count < total) {
-			var plural = total - count > 1;
-			var rest   = plural && count > 1;
-			var p1     = party.Get(count);
+			let plural = total - count > 1;
+			let rest   = plural && count > 1;
+			let p1     = party.Get(count);
 			parse = {
 				bodyBodies : plural ? "bodies" : "body",
 				hisher     : plural ? "their" : p1.hisher()
@@ -520,7 +520,7 @@ DryadGladeScenes.FirstLoss = function() {
 	Text.Add("At this point, you’ve all but given in. You dutifully lap up the corrupted semen, feeling it burning as it goes down your throat. You find one of the older dryad’s nipples and suckle on it, hungrily drinking up her sweet sap. The three of you continue rocking against each other in intense coitus, though there is no question about who is in charge of the situation.", parse);
 	Text.NL();
 	
-	var cum = player.OrgasmCum();
+	let cum = player.OrgasmCum();
 	parse["cum"] = cum > 6 ? "exploding" :
 	               cum > 3 ? "pouring" :
 	               "shooting";
@@ -573,7 +573,7 @@ DryadGladeScenes.FirstWin = function(enc : Encounter) {
 	
 	enc = this;
 	
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		name       : kiakai.name
 	};
@@ -653,7 +653,7 @@ DryadGladeScenes.FirstWin = function(enc : Encounter) {
 }
 
 DryadGladeScenes.MotherTree = function() {
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	
@@ -671,7 +671,7 @@ DryadGladeScenes.MotherTree = function() {
 DryadGladeScenes.MotherTreePrompt = function() {
 	let player = GAME().player;
 	let party : Party = GAME().party;
-	var parse : any = {
+	let parse : any = {
 		playername : player.name
 	};
 	if(party.Num() == 2)
@@ -682,7 +682,7 @@ DryadGladeScenes.MotherTreePrompt = function() {
 		parse["comp"] = "";
 	
 	//[Talk][Sex][Healing]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Talk",
 		func : function() {
 			Text.Clear();
@@ -722,12 +722,12 @@ DryadGladeScenes.MotherTreePrompt = function() {
 
 DryadGladeScenes.MotherTreeTalk = function() {
 	let player = GAME().player;
-	var parse : any = {
+	let parse : any = {
 		playername : player.name
 	};
 	
 	//[Herself][Orchid][Spirit][Lifegiver]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Herself",
 		func : function() {
 			Text.Clear();

@@ -101,7 +101,7 @@ OutlawsLoc.Camp.links.push(new Link(
 OutlawsLoc.Camp.events.push(new Link(
 	"Maria", function() {
 		let maria = GAME().maria;
-		var time = maria.IsAtLocation();
+		let time = maria.IsAtLocation();
 		return time;
 	}, true,
 	function() {
@@ -115,7 +115,7 @@ OutlawsLoc.Camp.events.push(new Link(
 OutlawsLoc.Camp.events.push(new Link(
 	"Vaughn", function() {
 		let vaughn = GAME().vaughn;
-		var time = vaughn.IsAtLocation();
+		let time = vaughn.IsAtLocation();
 		return time && vaughn.Met();
 	}, true,
 	function() {
@@ -131,8 +131,8 @@ OutlawsLoc.Camp.events.push(new Link(
 OutlawsLoc.Camp.events.push(new Link(
 	"Cveta", function() {
 		let cveta = GAME().cveta;
-		var met  = cveta.flags["Met"] >= CvetaFlags.Met.Available;
-		var time = cveta.WakingTime();
+		let met  = cveta.flags["Met"] >= CvetaFlags.Met.Available;
+		let time = cveta.WakingTime();
 		return met && time;
 	}, true,
 	function() {
@@ -148,8 +148,8 @@ OutlawsLoc.Camp.events.push(new Link(
 OutlawsLoc.Camp.events.push(new Link(
 	"Performance", function() {
 		let cveta = GAME().cveta;
-		var met  = cveta.flags["Met"] >= CvetaFlags.Met.FirstMeeting;
-		var time = cveta.PerformanceTime();
+		let met  = cveta.flags["Met"] >= CvetaFlags.Met.FirstMeeting;
+		let time = cveta.PerformanceTime();
 		return met && time;
 	}, true,
 	null,
@@ -195,13 +195,13 @@ OutlawsLoc.Camp.enc.AddEnc(function() {
 OutlawsLoc.Infirmary.description = function() {
 	let terry = GAME().terry;
 	let party : Party = GAME().party;
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	
 	Text.Add("This large tent is what passes for an infirmary in the outlaws’ camp. As soon as you step through the open flaps, three rows of simple wooden cots - no more than tough cloth stretched out on wooden frames - greet your eyes; thankfully, only a few of them are filled at any one time. Further to the back, makeshift workbenches and shelves for storing herbs, minerals and medications; besides that, a burner that works away without rest. You note that ", parse);
 	
-	var scenes = new EncounterTable();
+	let scenes = new EncounterTable();
 	scenes.AddEnc(function() {
 		Text.Add("it’s currently boiling water in a large tin pot, in which the good surgeon’s scalpel, tweezers and a host of other disturbingly sharp tools are immersed.", parse);
 	});

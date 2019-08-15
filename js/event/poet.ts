@@ -7,11 +7,11 @@ import { TimeStep } from '../GAME';
 let PoetScenes : any = {};
 
 PoetScenes.Entry = function() {
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	
-	var scenes = new EncounterTable();
+	let scenes = new EncounterTable();
 	scenes.AddEnc(PoetScenes.ToDragonOrLizard, 1.0, function() { return true; });
 	
 	Text.Clear();
@@ -30,7 +30,7 @@ PoetScenes.Entry = function() {
 }
 
 PoetScenes.ToDragonOrLizard = function() {
-	var parse : any = {};
+	let parse : any = {};
 	
 	Text.Add("To be dragon or lizard, that is the question–<br>", parse);
 	Text.Add("Whether ’tis nobler in the mind to suffer<br>", parse);

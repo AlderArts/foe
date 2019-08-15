@@ -18,15 +18,15 @@ export namespace Saver {
 		Text.Add("Save game:");
 		Text.NL();
 
-		var options = new Array();
-		for(var i=0; i<Saver.slots; i++) {
+		let options = new Array();
+		for(let i=0; i<Saver.slots; i++) {
 			Text.Add("Game " + i + ": ");
-			var name = localStorage["save" + i];
+			let name = localStorage["save" + i];
 			if(name) {
 				Text.Add(name);
 				options.push({ nameStr : "Game " + i,
 					func : function(obj : number) {
-						var prmpt = prompt("This will overwrite save slot " + obj + ", continue? \n\n Comment:");
+						let prmpt = prompt("This will overwrite save slot " + obj + ", continue? \n\n Comment:");
 						if(prmpt != null) SaveGame(obj, prmpt);
 					}, enabled : true, obj : i
 				});
@@ -35,7 +35,7 @@ export namespace Saver {
 				Text.Add("EMPTY");
 				options.push({ nameStr : "Game " + i,
 					func : function(obj : number) {
-						var prmpt = prompt("This will save to slot " + obj + ", continue? \n\n Comment:");
+						let prmpt = prompt("This will save to slot " + obj + ", continue? \n\n Comment:");
 						if(prmpt != null) SaveGame(obj, prmpt);
 					}, enabled : true, obj : i
 				});
@@ -46,8 +46,8 @@ export namespace Saver {
 
 		Text.NL();
 		if (HasSaves()) {
-			var storageLength = 0;
-			for (var key in localStorage) {
+			let storageLength = 0;
+			for (let key in localStorage) {
 				if (localStorage.hasOwnProperty(key) && localStorage[key].length) {
 					storageLength += localStorage[key].length;
 				}
@@ -59,8 +59,8 @@ export namespace Saver {
 
 	function SaveGame(slot : number, comment : string) {
 		GameToCache();
-		var seen : any[] = [];
-		var saveData = JSON.stringify(GameCache(), function(key, value) {
+		let seen : any[] = [];
+		let saveData = JSON.stringify(GameCache(), function(key, value) {
 			if (typeof value === "object" && value !== null) {
 				if (seen.indexOf(value) !== -1) {
 					console.error("Circular reference found in the gameCache!\n" + key + ":", value);
@@ -71,7 +71,7 @@ export namespace Saver {
 			return value;
 		});
 
-		var saveName = GameCache().name;
+		let saveName = GameCache().name;
 		if (comment) {
 			saveName += " :: Comment: " + comment;
 		}
@@ -85,7 +85,7 @@ export namespace Saver {
 	}
 
 	export function SaveToFile() {
-		var filename;
+		let filename;
 		if(GenerateFile.canSaveOffline) {
 			filename = prompt("SAVE TO FILE MIGHT NOT WORK IN OFFLINE MODE!\n\n Enter name of save file.");
 		}
@@ -94,7 +94,7 @@ export namespace Saver {
 		}
 		if(filename && filename != "") {
 			GameToCache();
-			var seen : any[] = [];
+			let seen : any[] = [];
 			GenerateFile({filename: filename, content: JSON.stringify(GameCache(),
 				function(key, val) {
 					if (typeof val == "object") {
@@ -116,7 +116,7 @@ export namespace Saver {
 	// Returns true if there are any saves
 	export function HasSaves() {
 		if(!isOnline()) return false;
-		for(var i=0; i<Saver.slots; i++)
+		for(let i=0; i<Saver.slots; i++)
 			if(SaveHeader(i)) return true;
 		return false;
 	}
@@ -127,10 +127,10 @@ export namespace Saver {
 		Text.Add("Load game:");
 		Text.NL();
 
-		var options = new Array();
-		for(var i=0; i<Saver.slots; i++) {
+		let options = new Array();
+		for(let i=0; i<Saver.slots; i++) {
 			Text.Add("Game " + i + ": ");
-			var name = localStorage["save" + i];
+			let name = localStorage["save" + i];
 			if(name)
 				Text.Add(name);
 			else
@@ -144,8 +144,8 @@ export namespace Saver {
 
 		Text.NL();
 		if (HasSaves()) {
-			var storageLength = 0;
-			for (var key in localStorage) {
+			let storageLength = 0;
+			for (let key in localStorage) {
 				if (localStorage.hasOwnProperty(key) && localStorage[key].length) {
 					storageLength += localStorage[key].length;
 				}
@@ -157,7 +157,7 @@ export namespace Saver {
 
 	function LoadGame(slot : number) {
 		if (localStorage["saveDataLZ" + slot]) {
-			var saveData = LZString.decompressFromUTF16(localStorage["saveDataLZ" + slot]);
+			let saveData = LZString.decompressFromUTF16(localStorage["saveDataLZ" + slot]);
 			SetGameCache(JSON.parse(saveData));
 		} else {
 			// Load from legacy storage.
@@ -179,9 +179,9 @@ export namespace Saver {
 
 	export function Clear() {
 		//localStorage.clear();
-		var conf = confirm("This will remove all local saves and settings, do you really want to continue?");
+		let conf = confirm("This will remove all local saves and settings, do you really want to continue?");
 		if(conf == true) {
-			for(var i=0; i<Saver.slots; i++) {
+			for(let i=0; i<Saver.slots; i++) {
 				delete localStorage["save" + i];
 				delete localStorage["savedata" + i];
 			}
@@ -198,7 +198,7 @@ export namespace Saver {
 
 		loadfileOverlay();
 
-		var file = files[0];
+		let file = files[0];
 
 		LoadFromFile(file);
 	}
@@ -207,7 +207,7 @@ export namespace Saver {
 	function LoadFromFile(file : any) {
 		if(!file) return;
 
-		var reader = new FileReader();
+		let reader = new FileReader();
 
 		reader.onload = function(e) {
 			let target : any = e.target;

@@ -40,11 +40,11 @@ export class Cavalcade {
 		opts = opts || {};
 		
 		this.Deck = [];
-		for(var i = 0; i < 5; i++)
+		for(let i = 0; i < 5; i++)
 			this.Deck.push(CardItems.Light[i]);
-		for(var i = 0; i < 5; i++)
+		for(let i = 0; i < 5; i++)
 			this.Deck.push(CardItems.Darkness[i]);
-		for(var i = 0; i < 5; i++)
+		for(let i = 0; i < 5; i++)
 			this.Deck.push(CardItems.Shadow[i]);
 		
 		this.players   = players;
@@ -97,8 +97,8 @@ export class Cavalcade {
 	}
 
 	PullCard() {
-		var cIdx = Rand(this.Deck.length);
-		var card = this.Deck[cIdx];
+		let cIdx = Rand(this.Deck.length);
+		let card = this.Deck[cIdx];
 		this.Deck.splice(cIdx, 1);
 		return card;
 	}
@@ -131,7 +131,7 @@ export class Cavalcade {
 	}
 	
 	Finish() {
-		var cav = this;
+		let cav = this;
 		_.each(cav.players, function(p) {
 			if(p.folded) return;
 			_.each(cav.house, function(h) {
@@ -158,8 +158,8 @@ export class Cavalcade {
 		// Evaluate cards from best to worst hand
 		
 		// stag
-		var hasStag = false;
-		for(var i = 0; i < 5; i++) {
+		let hasStag = false;
+		for(let i = 0; i < 5; i++) {
 			if(hand[i] == this.stag) {
 				hasStag = true;
 				break;
@@ -167,14 +167,14 @@ export class Cavalcade {
 		}
 		
 		// Count similar cards, ignore stag
-		var counts = [];
-		for(var i = 0; i < 5; i++) {
+		let counts = [];
+		for(let i = 0; i < 5; i++) {
 			if(hand[i] == this.stag)
 				continue;
 			
-			var cardVal = hand[i].val;
-			var foundVal = false;
-			for(var j = 0; j < counts.length; j++) {
+			let cardVal = hand[i].val;
+			let foundVal = false;
+			for(let j = 0; j < counts.length; j++) {
 				if(cardVal == counts[j].val) {
 					counts[j].num++;
 					foundVal = true;
@@ -188,14 +188,14 @@ export class Cavalcade {
 		counts.sort(Cavalcade.CardCountSorter);
 		
 		// Count cards of the same suit, ignore stag
-		var suits = [];
-		for(var i = 0; i < 5; i++) {
+		let suits = [];
+		for(let i = 0; i < 5; i++) {
 			if(hand[i] == this.stag)
 				continue;
 			
-			var cardSuit = hand[i].suit;
-			var foundSuit = false;
-			for(var j = 0; j < suits.length; j++) {
+			let cardSuit = hand[i].suit;
+			let foundSuit = false;
+			for(let j = 0; j < suits.length; j++) {
 				if(cardSuit == suits[j].suit) {
 					suits[j].num++;
 					foundSuit = true;
@@ -258,7 +258,7 @@ export class Cavalcade {
 	}
 	
 	ResultStr(res : any) {
-		var str;
+		let str;
 		switch(res.score) {
 			case Cavalcade.Score.Cavalcade: str = "Full Cavalcade of " + this.SuitStr(res.suit); break;
 			case Cavalcade.Score.Fourkind:  str = "Fourkind of " + (res.high+1); break;
@@ -279,8 +279,8 @@ export class Cavalcade {
 	// If the Stag is revealed in the house hand, replace it with a new card
 	CoinGameRound() {
 		let party : Party = GAME().party;
-		var that : any = this;
-		var parse : any = {
+		let that : any = this;
+		let parse : any = {
 			token : that.token,
 			bet : that.bet,
 			pot : function() { return that.pot; }
@@ -289,7 +289,7 @@ export class Cavalcade {
 		Gui.ClearButtons();
 		
 		//[Sure][Nah]
-		var options = [];
+		let options = [];
 		
 		switch(that.round) {
 		case 0:
@@ -315,7 +315,7 @@ export class Cavalcade {
 			}
 			else {
 				Text.Add("Your cards are ");
-				var card = GAME().player.hand[0];
+				let card = GAME().player.hand[0];
 				if(card == that.stag)
 					Text.Add(card.name + " (*)", null, 'bold');
 				else
@@ -348,14 +348,14 @@ export class Cavalcade {
 			}
 			
 			Text.Add("The house hand is: ");
-			var i;
+			let i;
 			for(i = 0; i < that.round; i++) {
-				var card = that.house[i];
+				let card = that.house[i];
 				Text.Add(card.name);
 				if(i < 2) Text.Add(", ");
 			}
 			for(; i < 3; i++) {
-				var card = that.house[i];
+				let card = that.house[i];
 				if(GetDEBUG())
 					Text.Add(card.name);
 				Text.Add("(hidden)");
@@ -421,8 +421,8 @@ export class Cavalcade {
 	
 			that.winners.sort(Cavalcade.EvaluateWinnerSorter);
 			
-			var winner = that.winners[0];
-			var idx = 1;
+			let winner = that.winners[0];
+			let idx = 1;
 			// Check how many are in a draw position
 			for(; idx < that.winners.length; idx++) {
 				if(Cavalcade.EvaluateWinnerSorter(winner, that.winners[idx]) != 0) break;

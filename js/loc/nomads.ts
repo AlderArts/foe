@@ -34,7 +34,7 @@ let NomadsLoc = {
 NomadsLoc.Tent.SaveSpot = "NomadsTent";
 NomadsLoc.Tent.safe = function() { return true; };
 NomadsLoc.Tent.description = function() {
-	var light;
+	let light;
 	if     (WorldTime().hour >= 6 && WorldTime().hour < 19) light = "sunlight";
 	else if(WorldTime().hour >= 19 || WorldTime().hour < 2) light = "firelight";
 	else light = "moonlight";
@@ -46,7 +46,7 @@ NomadsLoc.Tent.description = function() {
 NomadsLoc.Tent.links.push(new Link(
 	"Outside", true, true,
 	function() {
-		var light;
+		let light;
 		if     (WorldTime().hour >= 6 && WorldTime().hour < 19) light = "sunlight";
 		else if(WorldTime().hour >= 19 || WorldTime().hour < 2) light = "firelight";
 		else light = "moonlight";
@@ -69,7 +69,7 @@ MazeTest.AddRoom(2,5);
 MazeTest.AddRoom(4,5);
 MazeTest.AddRoom(5,5);
 MazeTest.GetRoom(5,5).description = function() {
-	var parse : any = {};
+	let parse : any = {};
 	
 	Text.Add("Sample desc", parse);
 	Text.NL();
@@ -190,8 +190,8 @@ NomadsLoc.Fireplace.events.push(new Link(
 		Text.Add("END PLACEHOLDER TEXT");
 		Text.NL();
 
-		var players = [player, rosalin, cale];
-		var g = new Cavalcade(players, {bet: 5});
+		let players = [player, rosalin, cale];
+		let g = new Cavalcade(players, {bet: 5});
 		g.PrepGame();
 		*/
 

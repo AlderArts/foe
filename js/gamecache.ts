@@ -284,7 +284,7 @@ let CacheToGame = function() {
 	let gameCache : any = GameCache();
 
 	// Load flags
-	for(var flag in gameCache.flags)
+	for(let flag in gameCache.flags)
 		gameCache.flags[flag] = parseInt(gameCache.flags[flag]);
 
 	InitWorldTime(
@@ -352,7 +352,7 @@ let CacheToGame = function() {
 			Text.Add("What profession do you wish to start as?");
 			Text.Flush();
 
-			var options = new Array();
+			let options = new Array();
 			options.push({ nameStr : "Fighter",
 				func : function() {
 					GAME().player.flags["startJob"] = JobEnum.Fighter;
@@ -475,7 +475,7 @@ let CacheToGame = function() {
 		GAME().rosalin.body.ass.capacity.base = 4;
 	}
 	if(gameCache.version < 22) {
-		var vag = GAME().terry.flags["vag"];
+		let vag = GAME().terry.flags["vag"];
 		if(vag != TerryFlags.Pussy.None) {
 			GAME().terry.body.vagina = [];
 			GAME().terry.body.vagina.push(new Vagina());
@@ -599,7 +599,7 @@ let GameToCache = function() {
 	gameCache.party   = GAME().party.ToStorage();
 
 
-	var parse : any = {
+	let parse : any = {
 		name   : gameCache.player.name,
 		gender : Gender.Short(GAME().player.body.Gender()),
 		lvl    : gameCache.player.lvl,

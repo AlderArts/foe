@@ -24,18 +24,18 @@ export class EncounterTable {
 
 	// Get a fight
 	Get() {
-		var scenes = [];
+		let scenes = [];
 
 		// Calculate total scale of odds
-		var sum = 0;
-		for(var i = 0; i < this.encounters.length; i++) {
-			var e = this.encounters[i];
-			var canFind = e.cond;
+		let sum = 0;
+		for(let i = 0; i < this.encounters.length; i++) {
+			let e = this.encounters[i];
+			let canFind = e.cond;
 			if(canFind === undefined) canFind = true;
 			if(canFind) {
 				if(_.isFunction(canFind)) canFind = canFind();
 				if(canFind) {
-					var odds = e.odds;
+					let odds = e.odds;
 					if(odds === undefined) odds = 1.0;
 					if(_.isFunction(odds)) odds = odds();
 					scenes.push({func: e.func, odds: odds, obj: e.obj});
@@ -45,10 +45,10 @@ export class EncounterTable {
 		}
 
 		// Pick an encounter
-		var step = Math.random() * sum;
+		let step = Math.random() * sum;
 
-		for(var i = 0; i < scenes.length; i++) {
-			var enc = scenes[i];
+		for(let i = 0; i < scenes.length; i++) {
+			let enc = scenes[i];
 			step -= enc.odds;
 			// If chosen, create an encounter from the supplied function
 			if(step <= 0.0)
@@ -63,11 +63,11 @@ export class EncounterTable {
  Example code for adding encounters:
 
  encs.AddEnc(function() {
-	var enemy = new Party();
+	let enemy = new Party();
 	enemy.AddMember(new IntroDemon());
 	enemy.AddMember(new Imp());
 	enemy.AddMember(new Imp());
-	var enc = new Encounter(enemy);
+	let enc = new Encounter(enemy);
 
 	enc.canRun = false;
 	enc.onEncounter = ...

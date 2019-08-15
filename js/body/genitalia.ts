@@ -24,7 +24,7 @@ export class Genitalia {
 	static get Cover() { return GCover; }
 	
 	ToStorage() {
-		var storage = {
+		let storage = {
 			c : this.cover.toFixed()
 		}
 		return storage;

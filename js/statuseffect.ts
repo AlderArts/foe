@@ -46,14 +46,14 @@ export namespace Status {
 		opts = opts || {};
 
 		// Check for poison resist
-		var odds = (opts.hit || 1) * (1 - target.Resistance(StatusEffect.Venom));
+		let odds = (opts.hit || 1) * (1 - target.Resistance(StatusEffect.Venom));
 		if(Math.random() > odds) {
 			target.AddResistanceWear(StatusEffect.Venom, opts.hit);
 			return false;
 		}
 		target.statusWear[StatusEffect.Venom] = 0;
 		// Number of turns effect lasts (static + random factor)
-		var turns = opts.turns || 0;
+		let turns = opts.turns || 0;
 		turns += Math.random() * (opts.turnsR || 0);
 		// Apply poison
 		target.combatStatus.stats[StatusEffect.Venom] = {
@@ -68,9 +68,9 @@ export namespace Status {
 	}
 	//TODO fix formula
 	Venom.Tick = function(target : any) {
-		var damageType = new DamageType({mNature : this.str});
-		var atkRand = 0.05 * (Math.random() - 0.5) + 1;
-		var dmg = this.dmg * atkRand * target.HP();
+		let damageType = new DamageType({mNature : this.str});
+		let atkRand = 0.05 * (Math.random() - 0.5) + 1;
+		let dmg = this.dmg * atkRand * target.HP();
 		dmg = damageType.ApplyDmgType(target.elementDef, dmg);
 		dmg = Math.floor(dmg);
 
@@ -89,14 +89,14 @@ export namespace Status {
 		opts = opts || {};
 
 		// Check for burn resist
-		var odds = (opts.hit || 1) * (1 - target.Resistance(StatusEffect.Burn));
+		let odds = (opts.hit || 1) * (1 - target.Resistance(StatusEffect.Burn));
 		if(Math.random() > odds) {
 			target.AddResistanceWear(StatusEffect.Burn, opts.hit);
 			return false;
 		}
 		target.statusWear[StatusEffect.Burn] = 0;
 		// Number of turns effect lasts (static + random factor)
-		var turns = opts.turns || 0;
+		let turns = opts.turns || 0;
 		turns += Math.random() * (opts.turnsR || 0);
 		// Apply effect
 		target.combatStatus.stats[StatusEffect.Burn] = {
@@ -111,9 +111,9 @@ export namespace Status {
 	}
 	//TODO fix formula
 	Burn.Tick = function(target : any) {
-		var damageType = new DamageType({mFire : this.str});
-		var atkRand = 0.05 * (Math.random() - 0.5) + 1;
-		var dmg = this.dmg * atkRand * target.HP();
+		let damageType = new DamageType({mFire : this.str});
+		let atkRand = 0.05 * (Math.random() - 0.5) + 1;
+		let dmg = this.dmg * atkRand * target.HP();
 		dmg = damageType.ApplyDmgType(target.elementDef, dmg);
 		dmg = Math.floor(dmg);
 
@@ -132,14 +132,14 @@ export namespace Status {
 		opts = opts || {};
 
 		// Check for freeze resist
-		var odds = (opts.hit || 1) * (1 - target.Resistance(StatusEffect.Freeze));
+		let odds = (opts.hit || 1) * (1 - target.Resistance(StatusEffect.Freeze));
 		if(Math.random() > odds) {
 			target.AddResistanceWear(StatusEffect.Freeze, opts.hit);
 			return false;
 		}
 		target.statusWear[StatusEffect.Freeze] = 0;
 		// Number of turns effect lasts (static + random factor)
-		var turns = opts.turns || 0;
+		let turns = opts.turns || 0;
 		turns += Math.random() * (opts.turnsR || 0);
 		// Apply effect
 		target.combatStatus.stats[StatusEffect.Freeze] = {
@@ -165,14 +165,14 @@ export namespace Status {
 		opts = opts || {};
 
 		// Check for numb resist
-		var odds = (opts.hit || 1) * (1 - target.Resistance(StatusEffect.Numb));
+		let odds = (opts.hit || 1) * (1 - target.Resistance(StatusEffect.Numb));
 		if(Math.random() > odds) {
 			target.AddResistanceWear(StatusEffect.Numb, opts.hit);
 			return false;
 		}
 		target.statusWear[StatusEffect.Numb] = 0;
 		// Number of turns effect lasts (static + random factor)
-		var turns = opts.turns || 0;
+		let turns = opts.turns || 0;
 		turns += Math.random() * (opts.turnsR || 0);
 		// Apply effect
 		target.combatStatus.stats[StatusEffect.Numb] = {
@@ -197,16 +197,16 @@ export namespace Status {
 		opts = opts || {};
 
 		// Check for blind resist
-		var odds = (opts.hit || 1) * (1 - target.Resistance(StatusEffect.Blind));
+		let odds = (opts.hit || 1) * (1 - target.Resistance(StatusEffect.Blind));
 		if(Math.random() > odds) {
 			target.AddResistanceWear(StatusEffect.Blind, opts.hit);
 			return false;
 		}
 		target.statusWear[StatusEffect.Blind] = 0;
 		// Number of turns effect lasts (static + random factor)
-		var turns = opts.turns || 0;
+		let turns = opts.turns || 0;
 		turns += Math.random() * (opts.turnsR || 0);
-		var str = opts.str || 0;
+		let str = opts.str || 0;
 		// Apply effect
 		target.combatStatus.stats[StatusEffect.Blind] = {
 			turns   : turns,
@@ -230,14 +230,14 @@ export namespace Status {
 		opts = opts || {};
 
 		// Check for siphon resist
-		var odds = (opts.hit || 1) * (1 - target.Resistance(StatusEffect.Siphon));
+		let odds = (opts.hit || 1) * (1 - target.Resistance(StatusEffect.Siphon));
 		if(Math.random() > odds) {
 			target.AddResistanceWear(StatusEffect.Siphon, opts.hit);
 			return false;
 		}
 		target.statusWear[StatusEffect.Siphon] = 0;
 		// Number of turns effect lasts (static + random factor)
-		var turns = opts.turns || 0;
+		let turns = opts.turns || 0;
 		turns += Math.random() * (opts.turnsR || 0);
 		// Apply effect
 		target.combatStatus.stats[StatusEffect.Siphon] = {
@@ -254,9 +254,9 @@ export namespace Status {
 	Siphon.Tick = function(target : any) {
 		this.turns--;
 
-		var hp = target.AddHPAbs(-this.hp);
-		var sp = target.AddSPAbs(-this.sp);
-		var lp = target.AddLustAbs(-this.lp);
+		let hp = target.AddHPAbs(-this.hp);
+		let sp = target.AddSPAbs(-this.sp);
+		let lp = target.AddLustAbs(-this.lp);
 		if(this.caster) {
 			this.caster.AddHPAbs(-hp);
 			this.caster.AddSPAbs(-sp);
@@ -274,14 +274,14 @@ export namespace Status {
 		opts = opts || {};
 
 		// Check for sleep resist
-		var odds = (opts.hit || 1) * (1 - target.Resistance(StatusEffect.Sleep));
+		let odds = (opts.hit || 1) * (1 - target.Resistance(StatusEffect.Sleep));
 		if(Math.random() > odds) {
 			target.AddResistanceWear(StatusEffect.Sleep, opts.hit);
 			return false;
 		}
 		target.statusWear[StatusEffect.Sleep] = 0;
 		// Number of turns effect lasts (static + random factor)
-		var turns = opts.turns || 0;
+		let turns = opts.turns || 0;
 		turns += Math.random() * (opts.turnsR || 0);
 		// Apply effect
 		target.combatStatus.stats[StatusEffect.Sleep] = {
@@ -305,14 +305,14 @@ export namespace Status {
 		opts = opts || {};
 
 		// Check for poison resist
-		var odds = (opts.hit || 1) * (1 - target.Resistance(StatusEffect.Bleed));
+		let odds = (opts.hit || 1) * (1 - target.Resistance(StatusEffect.Bleed));
 		if(Math.random() > odds) {
 			target.AddResistanceWear(StatusEffect.Bleed, opts.hit);
 			return false;
 		}
 		target.statusWear[StatusEffect.Bleed] = 0;
 		// Number of turns effect lasts (static + random factor)
-		var turns = opts.turns || 0;
+		let turns = opts.turns || 0;
 		turns += Math.random() * (opts.turnsR || 0);
 		// Apply poison
 		target.combatStatus.stats[StatusEffect.Bleed] = {
@@ -326,8 +326,8 @@ export namespace Status {
 	}
 	//TODO fix formula
 	Bleed.Tick = function(target : any) {
-		var atkRand = 0.05 * (Math.random() - 0.5) + 1;
-		var dmg = this.dmg * atkRand * target.HP();
+		let atkRand = 0.05 * (Math.random() - 0.5) + 1;
+		let dmg = this.dmg * atkRand * target.HP();
 		dmg = Math.floor(dmg);
 
 		target.AddHPAbs(-dmg);
@@ -346,9 +346,9 @@ export namespace Status {
 		opts = opts || {};
 
 		// Number of turns effect lasts (static + random factor)
-		var turns = opts.turns || 0;
+		let turns = opts.turns || 0;
 		turns += Math.random() * (opts.turnsR || 0);
-		var factor = opts.factor || 2;
+		let factor = opts.factor || 2;
 		// Apply effect
 		target.combatStatus.stats[StatusEffect.Haste] = {
 			turns   : turns,
@@ -373,7 +373,7 @@ export namespace Status {
 		opts = opts || {};
 
 		// Check for slow resist
-		var odds = (opts.hit || 1) * (1 - target.Resistance(StatusEffect.Slow));
+		let odds = (opts.hit || 1) * (1 - target.Resistance(StatusEffect.Slow));
 		if(Math.random() > odds) {
 			target.AddResistanceWear(StatusEffect.Slow, opts.hit);
 			return false;
@@ -381,9 +381,9 @@ export namespace Status {
 		target.statusWear[StatusEffect.Slow] = 0;
 
 		// Number of turns effect lasts (static + random factor)
-		var turns = opts.turns || 0;
+		let turns = opts.turns || 0;
 		turns += Math.random() * (opts.turnsR || 0);
-		var factor = opts.factor || 2;
+		let factor = opts.factor || 2;
 		// Apply effect
 		target.combatStatus.stats[StatusEffect.Slow] = {
 			turns   : turns,
@@ -407,14 +407,14 @@ export namespace Status {
 		opts = opts || {};
 
 		// Check for horny resist
-		var odds = (opts.hit || 1) * (1 - target.Resistance(StatusEffect.Horny));
+		let odds = (opts.hit || 1) * (1 - target.Resistance(StatusEffect.Horny));
 		if(Math.random() > odds) {
 			target.AddResistanceWear(StatusEffect.Horny, opts.hit);
 			return false;
 		}
 		target.statusWear[StatusEffect.Horny] = 0;
 		// Number of turns effect lasts (static + random factor)
-		var turns = opts.turns || 0;
+		let turns = opts.turns || 0;
 		turns += Math.random() * (opts.turnsR || 0);
 		// Apply horny (lust poison)
 		target.combatStatus.stats[StatusEffect.Horny] = {
@@ -429,9 +429,9 @@ export namespace Status {
 	}
 	//TODO fix formula?
 	Horny.Tick = function(target : any) {
-		var damageType = new DamageType({lust : this.str});
-		var atkRand = 0.05 * (Math.random() - 0.5) + 1;
-		var dmg = this.dmg * atkRand * target.Lust();
+		let damageType = new DamageType({lust : this.str});
+		let atkRand = 0.05 * (Math.random() - 0.5) + 1;
+		let dmg = this.dmg * atkRand * target.Lust();
 		dmg = damageType.ApplyDmgType(target.elementDef, dmg);
 		dmg = Math.floor(dmg);
 		target.AddLustAbs(dmg);
@@ -448,10 +448,10 @@ export namespace Status {
 		if(!target) return;
 		opts = opts || {};
 
-		var old = target.combatStatus.stats[StatusEffect.Aroused];
+		let old = target.combatStatus.stats[StatusEffect.Aroused];
 
-		var hours = opts.hours || 0;
-		var fer   = opts.fer   || 0;
+		let hours = opts.hours || 0;
+		let fer   = opts.fer   || 0;
 
 		if(old) {
 			hours = Math.max(old.hours, hours);
@@ -479,7 +479,7 @@ export namespace Status {
 		}
 	}
 	Aroused.ToStorage = function() {
-		var ret : any = {};
+		let ret : any = {};
 		if(this.hours) ret["hours"] = this.hours.toFixed(2);
 
 		if(this.fer != 0) ret["fer"] = this.fer.toFixed(2);
@@ -488,7 +488,7 @@ export namespace Status {
 	}
 	Aroused.FromStorage = function(storage : any) {
 		storage = storage || {};
-		var obj : any = {};
+		let obj : any = {};
 		if(storage["hours"]) obj.hours = parseFloat(storage["hours"]);
 
 		if(storage["fer"]) obj.fer = parseFloat(storage["fer"]);
@@ -505,10 +505,10 @@ export namespace Status {
 		if(!target) return;
 		opts = opts || {};
 
-		var old = target.combatStatus.stats[StatusEffect.Limp];
+		let old = target.combatStatus.stats[StatusEffect.Limp];
 
-		var hours = opts.hours || 0;
-		var fer   = opts.fer   || 0;
+		let hours = opts.hours || 0;
+		let fer   = opts.fer   || 0;
 
 		if(old) {
 			hours = Math.max(old.hours, hours);
@@ -537,7 +537,7 @@ export namespace Status {
 		}
 	}
 	Limp.ToStorage = function() {
-		var ret : any = {};
+		let ret : any = {};
 		if(this.hours) ret["hours"] = this.hours.toFixed(2);
 
 		if(this.fer != 0) ret["fer"] = this.fer.toFixed(2);
@@ -546,7 +546,7 @@ export namespace Status {
 	}
 	Limp.FromStorage = function(storage : any) {
 		storage = storage || {};
-		var obj : any = {};
+		let obj : any = {};
 		if(storage["hours"]) obj.hours = parseFloat(storage["hours"]);
 
 		if(storage["fer"]) obj.fer = parseFloat(storage["fer"]);
@@ -578,9 +578,9 @@ export namespace Status {
 		if(!target) return;
 		opts = opts || {};
 
-		var turns = opts.turns || 0;
+		let turns = opts.turns || 0;
 		turns += Math.random() * (opts.turnsR || 0);
-		var hits  = opts.hits || 0;
+		let hits  = opts.hits || 0;
 		// Apply counter
 		target.combatStatus.stats[StatusEffect.Counter] = {
 			turns : turns,
@@ -623,7 +623,7 @@ export namespace Status {
 		}
 	}
 	Full.ToStorage = function() {
-		var ret : any = {};
+		let ret : any = {};
 		if(this.hours) ret["hours"] = this.hours.toFixed(2);
 		if(this.exp)   ret["exp"]   = this.exp.toFixed(2);
 
@@ -631,7 +631,7 @@ export namespace Status {
 	}
 	Full.FromStorage = function(storage : any) {
 		storage = storage || {};
-		var obj : any = {};
+		let obj : any = {};
 		if(storage["hours"]) obj.hours = parseFloat(storage["hours"]);
 		if(storage["exp"])   obj.exp   = parseFloat(storage["exp"]);
 
@@ -648,14 +648,14 @@ export namespace Status {
 		opts = opts || {};
 
 		// Check for confuse resist
-		var odds = (opts.hit || 1) * (1 - target.Resistance(StatusEffect.Confuse));
+		let odds = (opts.hit || 1) * (1 - target.Resistance(StatusEffect.Confuse));
 		if(Math.random() > odds) {
 			target.AddResistanceWear(StatusEffect.Confuse, opts.hit);
 			return false;
 		}
 		target.statusWear[StatusEffect.Confuse] = 0;
 
-		var turns = opts.turns || 0;
+		let turns = opts.turns || 0;
 		turns += Math.random() * (opts.turnsR || 0);
 		// Apply confuse
 		target.combatStatus.stats[StatusEffect.Confuse] = {
@@ -666,8 +666,8 @@ export namespace Status {
 		};
 
 		// cleanup
-		for(var i=0,j=CurEncounter().combatOrder.length; i<j; i++){
-			var c = CurEncounter().combatOrder[i];
+		for(let i=0,j=CurEncounter().combatOrder.length; i<j; i++){
+			let c = CurEncounter().combatOrder[i];
 			if(c.entity == target) {
 				c.aggro = [];
 				break;
@@ -685,8 +685,8 @@ export namespace Status {
 	}
 	Confuse.OnFade = function(encounter : any, entity : any) {
 		// cleanup
-		for(var i=0,j=encounter.combatOrder.length; i<j; i++){
-			var c = encounter.combatOrder[i];
+		for(let i=0,j=encounter.combatOrder.length; i<j; i++){
+			let c = encounter.combatOrder[i];
 			if(c.entity == entity) {
 				c.aggro = [];
 				break;
@@ -701,14 +701,14 @@ export namespace Status {
 		opts = opts || {};
 
 		// Check for weakness resist
-		var odds = (opts.hit || 1) * (1 - target.Resistance(StatusEffect.Weakness));
+		let odds = (opts.hit || 1) * (1 - target.Resistance(StatusEffect.Weakness));
 		if(Math.random() > odds) {
 			target.AddResistanceWear(StatusEffect.Weakness, opts.hit);
 			return false;
 		}
 		target.statusWear[StatusEffect.Weakness] = 0;
 
-		var turns = opts.turns || 0;
+		let turns = opts.turns || 0;
 		turns += Math.random() * (opts.turnsR || 0);
 		// Apply weakness
 		target.combatStatus.stats[StatusEffect.Weakness] = {
@@ -732,7 +732,7 @@ export namespace Status {
 		if(!target) return;
 		opts = opts || {};
 
-		var hours = opts.hours || 0;
+		let hours = opts.hours || 0;
 		// Apply buff
 		target.combatStatus.stats[StatusEffect.Buff] = {
 			hours     : hours,
@@ -761,7 +761,7 @@ export namespace Status {
 		}
 	}
 	Buff.ToStorage = function() {
-		var ret : any = {};
+		let ret : any = {};
 		if(this.hours) ret["hours"] = this.hours.toFixed(2);
 
 		if(this.Str) ret["Str"] = this.Str.toFixed(2);
@@ -778,7 +778,7 @@ export namespace Status {
 	}
 	Buff.FromStorage = function(storage : any) {
 		storage = storage || {};
-		var obj : any = {};
+		let obj : any = {};
 		if(storage["hours"]) obj.hours = parseFloat(storage["hours"]);
 
 		if(storage["Str"]) obj.Str = parseFloat(storage["Str"]);
@@ -804,14 +804,14 @@ export namespace Status {
 		opts = opts || {};
 
 		// Check for curse resist
-		var odds = (opts.hit || 1) * (1 - target.Resistance(StatusEffect.Curse));
+		let odds = (opts.hit || 1) * (1 - target.Resistance(StatusEffect.Curse));
 		if(Math.random() > odds) {
 			target.AddResistanceWear(StatusEffect.Curse, opts.hit);
 			return false;
 		}
 		target.statusWear[StatusEffect.Curse] = 0;
 		// Number of turns effect lasts (static + random factor)
-		var turns = opts.turns || 0;
+		let turns = opts.turns || 0;
 		turns += Math.random() * (opts.turnsR || 0);
 		// Apply effect
 		target.combatStatus.stats[StatusEffect.Curse] = {

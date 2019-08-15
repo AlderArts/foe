@@ -31,7 +31,7 @@ export class Breasts extends BodyPart {
 	}
 
 	ToStorage(full : boolean) {
-		var storage : any = {
+		let storage : any = {
 			size    : this.size.base.toFixed(2)
 		};
 		if(full) {
@@ -63,8 +63,8 @@ export class Breasts extends BodyPart {
 		return this.nippleThickness.Get() * this.nippleLength.Get();
 	}
 	noun() {
-		var size = this.size.Get();
-		var nouns = new Array();
+		let size = this.size.Get();
+		let nouns = new Array();
 		if(size <= 2) nouns.push("pec");
 		nouns.push("breast");
 		if(size >= 3) {
@@ -85,8 +85,8 @@ export class Breasts extends BodyPart {
 		return nouns[Rand(nouns.length)];
 	}
 	nounPlural() {
-		var size = this.size.Get();
-		var nouns = new Array();
+		let size = this.size.Get();
+		let nouns = new Array();
 		if(size <= 2) nouns.push("pecs");
 		nouns.push("breasts");
 		if(size >= 3) {
@@ -107,9 +107,9 @@ export class Breasts extends BodyPart {
 		return nouns[Rand(nouns.length)];
 	}
 	Desc() {
-		var size = this.size.Get();
+		let size = this.size.Get();
 		
-		var adjs = [];
+		let adjs = [];
 		if(size <= 2) {
 			adjs.push("manly");
 			adjs.push("flat");
@@ -149,9 +149,9 @@ export class Breasts extends BodyPart {
 			adjs.push("monstrous");
 			adjs.push("Jacques-sized");
 		}
-		var adj = adjs[Rand(adjs.length)];
+		let adj = adjs[Rand(adjs.length)];
 		
-		var cup;
+		let cup;
 		if     (size <= 1    ) cup = "manly";
 		else if(size <= 2    ) cup = "AA-cup";
 		else if(size <= 3    ) cup = "A-cup";
@@ -187,7 +187,7 @@ export class Breasts extends BodyPart {
 		else if(size <= 130  ) cup = "ZZ-cup";
 		else                   cup = "ZZZ-cup";
 		
-		var sizeStr = size / 2 + " inches";
+		let sizeStr = size / 2 + " inches";
 		
 		return {a:"a pair of", adj: adj, cup: cup, size: sizeStr};
 	}
@@ -201,32 +201,32 @@ export class Breasts extends BodyPart {
 	}
 	nipDesc() {
 		// TODO
-		var adj = "perky";
+		let adj = "perky";
 		
-		var nipLen = this.nippleLength.Get() / 2 + " inches";
-		var nipThickness = this.nippleThickness.Get() / 2 + " inches";
+		let nipLen = this.nippleLength.Get() / 2 + " inches";
+		let nipThickness = this.nippleThickness.Get() / 2 + " inches";
 		
 		return {a: "a", adj: adj, len: nipLen, thickness: nipThickness};
 	}
 	NipShort() {
-		var desc = this.nipDesc();
+		let desc = this.nipDesc();
 		return desc.adj + " " + this.nipNoun();
 	}
 	NipsShort() {
-		var desc = this.nipDesc();
+		let desc = this.nipDesc();
 		return desc.adj + " " + this.nipNounPlural();
 	}
 	Short() {
-		var desc = this.Desc();
+		let desc = this.Desc();
 		return desc.adj + " " + this.nounPlural();
 	}
 	ShortCup() {
-		var desc = this.Desc();
+		let desc = this.Desc();
 		return desc.cup + " " + this.nounPlural();
 	}
 	// TODO: lactation
 	Long() {
-		var desc = this.Desc();
+		let desc = this.Desc();
 		return desc.a + " " + desc.adj + " " + this.nounPlural();
 	}
 

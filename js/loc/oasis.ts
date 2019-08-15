@@ -77,7 +77,7 @@ export class Oasis {
 	}	
 
 	ToStorage() {
-		var storage : any = {};
+		let storage : any = {};
 		
 		storage.flags   = this.flags;
 		
@@ -86,7 +86,7 @@ export class Oasis {
 
 	FromStorage(storage : any) {
 		// Load flags
-		for(var flag in storage.flags)
+		for(let flag in storage.flags)
 			this.flags[flag] = parseInt(storage.flags[flag]);
 	}
 
@@ -102,13 +102,13 @@ export class Oasis {
 
 OasisScenes.CaravanShop = function(back : any) {
 	let oasis : Oasis = GAME().oasis;
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	
 	oasis.Shopbought = false;
 	
-	var backPrompt = function() {
+	let backPrompt = function() {
 		Text.Clear();
 		if(oasis.Shopbought)
 			Text.Add("<i>“Thank you for your patronage!”</i>", parse);
@@ -119,21 +119,21 @@ OasisScenes.CaravanShop = function(back : any) {
 		back();
 	}
 	
-	var buyFunc = function() {
+	let buyFunc = function() {
 		oasis.Shopbought = true;
 		return false;
 	}
 	
-	var timestamp = Math.floor(WorldTime().ToDays());
+	let timestamp = Math.floor(WorldTime().ToDays());
 	if(oasis.flags["shop"] < timestamp || oasis.shop.inventory.length == 0) {
 		// Randomize inventory
 		oasis.shop.inventory = [];
 		
-		var num = Math.round(4 + 8 * Math.random());
-		for(var i = 0; i < num; i++) {
-			var it = oasis.shopItems[Math.floor(Math.random() * oasis.shopItems.length)];
-			var found = false;
-			for(var j = 0; j < oasis.shop.inventory.length; j++) {
+		let num = Math.round(4 + 8 * Math.random());
+		for(let i = 0; i < num; i++) {
+			let it = oasis.shopItems[Math.floor(Math.random() * oasis.shopItems.length)];
+			let found = false;
+			for(let j = 0; j < oasis.shop.inventory.length; j++) {
 				if(it == oasis.shop.inventory[j].it) {
 					found = true;
 					break;
@@ -154,13 +154,13 @@ OasisScenes.DesertCaravanEncounter = function() {
 	let player = GAME().player;
 	let party : Party = GAME().party;
 	let oasis : Oasis = GAME().oasis;
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	parse = player.ParserTags(parse);
 	
-	var lizan = new Entity();
-	var rand = Math.random();
+	let lizan = new Entity();
+	let rand = Math.random();
 	if(rand < 0.4)
 		lizan.body.DefFemale();
 	else if(rand < 0.8)
@@ -170,8 +170,8 @@ OasisScenes.DesertCaravanEncounter = function() {
 	parse = lizan.ParserPronouns(parse, "r");
 	parse["rmanwoman"] = lizan.mfTrue("man", "woman");
 	
-	var lizan2 = new Entity();
-	var rand = Math.random();
+	let lizan2 = new Entity();
+	rand = Math.random();
 	if(rand < 0.4)
 		lizan2.body.DefFemale();
 	else if(rand < 0.8)
@@ -184,10 +184,10 @@ OasisScenes.DesertCaravanEncounter = function() {
 	parse["masterdesc"] = lizan.Gender() == Gender.male ? "an attractive" : "a pretty";
 	parse["masterdesc"] += " lizan with ";
 	
-	var tattoos = false;
-	var piercings = false;
+	let tattoos = false;
+	let piercings = false;
 	
-	var scenes = new EncounterTable();
+	let scenes = new EncounterTable();
 	scenes.AddEnc(function() {
 		parse["masterdesc"] += "messy dark hair.";
 	}, 1.0, function() { return true; });
@@ -206,13 +206,13 @@ OasisScenes.DesertCaravanEncounter = function() {
 	if(lizan.Gender() == Gender.herm)
 		parse["masterdesc"] += " There’s something slightly… off about her, though. There is an alarmingly large bulge in her pants, hinting at something extra not usually present on girls.";
 	
-	var Direction = {
+	let Direction = {
 		Kingdom : 0,
 		Oasis   : 1
 	};
-	var direction = Math.random() > 0.5 ? Direction.Kingdom : Direction.Oasis;
+	let direction = Math.random() > 0.5 ? Direction.Kingdom : Direction.Oasis;
 	
-	var day = WorldTime().IsDay();
+	let day = WorldTime().IsDay();
 	Text.Clear();
 	
 	if(day) {
@@ -253,11 +253,11 @@ OasisScenes.DesertCaravanEncounter = function() {
 	Text.Add("You chat a bit about what brought you here, and [rheshe] tells you a little about [rhisher] work planning the expedition and selecting goods to carry. <i>“We’re always happy to trade with a fellow traveler,”</i> [rheshe] says. <i>“We obviously can’t just unpack everything, but I’ve got a few select things set aside for occasions like these. Or if there’s anything else you need, I’d be happy to help out,”</i> [rheshe] adds with a wink, [rhisher] tail swaying back and forth in interest.", parse);
 	Text.Flush();
 	
-	var busy   = false;
-	var rumors = true;
-	var fun    = true;
+	let busy   = false;
+	let rumors = true;
+	let fun    = true;
 	
-	var busyFunc = function() {
+	let busyFunc = function() {
 		Text.Add("It takes some time for the caravan master to calm the angry Rakh, but eventually the beast is settled, and returns to its spot, looking a little guilty. Your would-be lover heads over to you, looking physically and emotionally drained.", parse);
 		Text.NL();
 		Text.Add("<i>“The damned creatures are practically wild,”</i> [rheshe] tells you. <i>“They’d be too much trouble to deal with if there were any other options.”</i>", parse);
@@ -269,9 +269,9 @@ OasisScenes.DesertCaravanEncounter = function() {
 		TimeStep({minute: 15});
 	};
 	
-	var prompt = function() {
+	let prompt = function() {
 		//[Trade][Rumors][Fun][Leave]
-		var options = new Array();
+		let options = new Array();
 		options.push({ nameStr : "Trade",
 			func : function() {
 				Text.Clear();
@@ -289,7 +289,7 @@ OasisScenes.DesertCaravanEncounter = function() {
 				if(busy) busyFunc();
 				Text.Add("You ask the caravan master if [rheshe]’s heard anything interesting lately.", parse);
 				Text.NL();
-				var scenes = new EncounterTable();
+				let scenes = new EncounterTable();
 				scenes.AddEnc(function() {
 					parse["dir"] = direction == Direction.Kingdom ? "Rigard" : "the Oasis";
 					Text.Add("<i>“Everyone’s worried about the disappearances,”</i> [rheshe] says, looking down in concern. <i>“When we were leaving, there were at least two merchants I’d heard of whose caravans were overdue. And who knows how many were keeping quiet to try to conceal their losses.”</i> [rHeShe] sighs. <i>“Let me tell you, it’s not easy to set out knowing you might not make it. I swear everyone kept staring at [dir] like it was their dying mother till it was out of sight.”</i>", parse);
@@ -327,7 +327,7 @@ OasisScenes.DesertCaravanEncounter = function() {
 			}, enabled : rumors,
 			tooltip : Text.Parse("Ask if there are any interesting rumors [rheshe] can share.", parse)
 		});
-		var tooltip = "It sounds like the caravan master is up for more than just trade.";
+		let tooltip = "It sounds like the caravan master is up for more than just trade.";
 		if(lizan.Gender() == Gender.herm)
 			tooltip += " Besides, you want to play with that intriguing bulge of [rhishers]..."
 		options.push({ nameStr : "Fun",
@@ -376,7 +376,7 @@ OasisScenes.DesertCaravanEncounter = function() {
 				Text.Add(" leans in, [rhisher] mouth pressing hungrily against yours. You wrap your arms around [rhimher], pressing your bodies tighter together, your lips parting eagerly to admit [rhisher] long, flexible tongue into your mouth.", parse);
 				Text.NL();
 				Text.Add("The caravan master moans in pleasure as you return the favor, tracing [rhisher] teeth with your [tongue] before pushing inside. The two of you stand locked in breathless arousal for a long minute. Your hands move down [rhisher] body, settling on [rhisher] butt and giving a firm squeeze. ", parse);
-				var tail = player.HasTail();
+				let tail = player.HasTail();
 				if(tail) {
 					Text.Add("You feel the lizan’s scaled tail brushing against your leg, and instinctively your own [tail] reaches out to meet it, twining together with it.", parse);
 				}

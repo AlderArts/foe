@@ -92,17 +92,17 @@ export class Ability {
 
 	// Used as entrypoint for PC/Party (active selection)
 	OnSelect(encounter : Encounter, caster : Entity, backPrompt? : CallableFunction, ext? : any) {
-		var ability = this;
+		let ability = this;
 		// TODO: Buttons (use portraits for target?)
 
-		var target : any[] = [];
+		let target : any[] = [];
 		let party : Party = GAME().party;
 
 		switch(ability.targetMode) {
 			case TargetMode.All:
 				_.each(party.members, function(t) {
 					// Don't add incapacitated
-					var incap = t.Incapacitated();
+					let incap = t.Incapacitated();
 					if(incap) return;
 
 					target.push({
@@ -116,7 +116,7 @@ export class Ability {
 				});
 				_.each(encounter.enemy.members, function(t) {
 					// Don't add incapacitated
-					var incap = t.Incapacitated();
+					let incap = t.Incapacitated();
 					if(incap) return;
 
 					target.push({
@@ -143,7 +143,7 @@ export class Ability {
 					// Don't add self unless allowed
 					if(ability.targetMode == TargetMode.AllyNotSelf && t == caster) return;
 					// Don't add incapacitated unless allowed
-					var incap = t.Incapacitated();
+					let incap = t.Incapacitated();
 					if(ability.targetMode == TargetMode.AllyFallen && !t.incap()) return;
 					else if(incap) return;
 
@@ -163,7 +163,7 @@ export class Ability {
 			case TargetMode.Enemy:
 				_.each(encounter.enemy.members, function(t) {
 					// Don't add incapacitated
-					var incap = t.Incapacitated();
+					let incap = t.Incapacitated();
 					if(incap) return;
 
 					target.push({
@@ -194,7 +194,7 @@ export class Ability {
 		Ability.ApplyCost(this, caster);
 		this.StartCast(encounter, caster, target);
 
-		var entry : any = caster.GetCombatEntry(encounter);
+		let entry : any = caster.GetCombatEntry(encounter);
 
 		// Set cooldown
 		if(this.cooldown) {
@@ -229,14 +229,14 @@ export class Ability {
 	}
 
 	enabledCondition(encounter : Encounter, caster : Entity) {
-		var onCooldown = encounter ? this.OnCooldown(caster.GetCombatEntry(encounter)) : false;
+		let onCooldown = encounter ? this.OnCooldown(caster.GetCombatEntry(encounter)) : false;
 
 		return Ability.EnabledCost(this, caster) && !onCooldown;
 	}
 
 	OnCooldown(casterEntry : any) {
-		var ability = this;
-		var onCooldown = false;
+		let ability = this;
+		let onCooldown = false;
 		_.each(casterEntry.cooldown, function(c) {
 			if(ability == c.ability) {
 				onCooldown = c.cooldown;
@@ -251,7 +251,7 @@ export class Ability {
 	}
 
 	CostStr() {
-		var str = "";
+		let str = "";
 		if(this.cost.hp || this.cost.sp || this.cost.lp) {
 			if(this.cost.hp) str += Text.Damage(this.cost.hp + "HP ");
 			if(this.cost.sp) str += Text.Mana(this.cost.sp + "SP ");
@@ -285,12 +285,12 @@ export class Ability {
 	}
 
 	static Damage(atk : number, def : number, casterLvl : number = 1, targetLvl : number = 1) {
-		var maxDefense = (2+Stat.growthPerPoint*Stat.growthPointsPerLevel*(targetLvl-1)) * (targetLvl+9)*2 + 100;
-		var modRatio = Math.pow(maxDefense/def, 1.3);
-		var logistics = 1/(1+Math.exp(-1*modRatio));
-		var defFactor = 2*logistics-1;
+		let maxDefense = (2+Stat.growthPerPoint*Stat.growthPointsPerLevel*(targetLvl-1)) * (targetLvl+9)*2 + 100;
+		let modRatio = Math.pow(maxDefense/def, 1.3);
+		let logistics = 1/(1+Math.exp(-1*modRatio));
+		let defFactor = 2*logistics-1;
 
-		var levelFactor = 1.8 - 16/(5*Math.PI) * Math.atan((targetLvl+10)/(casterLvl+10));
+		let levelFactor = 1.8 - 16/(5*Math.PI) * Math.atan((targetLvl+10)/(casterLvl+10));
 
 		return defFactor * atk * levelFactor;
 	}
@@ -308,12 +308,12 @@ export class AbilityCollection {
 	}
 	
 	HasAbility(ability : Ability) {
-		var idx = this.AbilitySet.indexOf(ability); // Is the ability already part of the set?
+		let idx = this.AbilitySet.indexOf(ability); // Is the ability already part of the set?
 		return (idx!=-1);
 	}
 
 	AddAbility(ability : Ability) {
-		var idx = this.AbilitySet.indexOf(ability); // Is the ability already part of the set?
+		let idx = this.AbilitySet.indexOf(ability); // Is the ability already part of the set?
 		if(idx==-1)
 			this.AbilitySet.push(ability);
 	}
@@ -323,14 +323,14 @@ export class AbilityCollection {
 	}
 
 	OnSelect(encounter : Encounter, caster : Entity, backPrompt? : CallableFunction) {
-		var collection = this;
-		var entry = caster.GetCombatEntry(encounter);
-		var prompt = function() {
+		let collection = this;
+		let entry = caster.GetCombatEntry(encounter);
+		let prompt = function() {
 			Text.Clear();
 			_.each(collection.AbilitySet, function(ability) {
-				var castTime = ability.castTime != 0 ? ability.castTime : "instant";
-				var cooldown = ability.OnCooldown(entry);
-				var plural   = (cooldown > 1 ? "s" : "");
+				let castTime = ability.castTime != 0 ? ability.castTime : "instant";
+				let cooldown = ability.OnCooldown(entry);
+				let plural   = (cooldown > 1 ? "s" : "");
 				Text.Add("[ability] (Cost: [cost], Cast time: [time][cd]): [desc]<br>",
 					{
 						ability: ability.name,
@@ -343,7 +343,7 @@ export class AbilityCollection {
 			Text.Flush();
 		};
 
-		var ret = function() {
+		let ret = function() {
 			collection.OnSelect(encounter, caster, backPrompt);
 			prompt();
 		}

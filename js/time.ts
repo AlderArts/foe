@@ -170,14 +170,14 @@ class Time {
 	}
 
 	DateString() : string {
-		var season;
+		let season;
 		if(this.season == Season.Spring) season = "Spring";
 		else if(this.season == Season.Summer) season = "Summer";
 		else if(this.season == Season.Autumn) season = "Autumn";
 		else season = "Winter";
 		
-		var day = this.day + 1;
-		var dateExtension = "th";
+		let day = this.day + 1;
+		let dateExtension = "th";
 		if(day < 10 || day > 20) {
 			if     (day % 10 == 1) dateExtension = "st";
 			else if(day % 10 == 2) dateExtension = "nd";
@@ -188,14 +188,14 @@ class Time {
 	}
 
 	DateStringShort() : string {
-		var season;
+		let season;
 		if(this.season == Season.Spring) season = "Spring";
 		else if(this.season == Season.Summer) season = "Summer";
 		else if(this.season == Season.Autumn) season = "Autumn";
 		else season = "Winter";
 		
-		var day = this.day + 1;
-		var dateExtension = "th";
+		let day = this.day + 1;
+		let dateExtension = "th";
 		if(day < 10 || day > 20) {
 			if     (day % 10 == 1) dateExtension = "st";
 			else if(day % 10 == 2) dateExtension = "nd";
@@ -229,20 +229,20 @@ class Time {
 	}
 
 	ToDays() : number {
-		var day = this.day + this.hour/24 + this.minute/24/60;
+		let day = this.day + this.hour/24 + this.minute/24/60;
 		day += this.season * 30;
 		day += this.year * Season.LAST * 30;
 		return day;
 	}
 	ToHours() : number {
-		var hour = this.hour + this.minute/60;
+		let hour = this.hour + this.minute/60;
 		hour += this.day * 24;
 		hour += this.season * 30 * 24;
 		hour += this.year * Season.LAST * 30 * 24;
 		return hour;
 	}
 	ToMinutes() : number {
-		var minute = this.minute;
+		let minute = this.minute;
 		minute += this.hour * 60;
 		minute += this.day * 24 * 60;
 		minute += this.season * 30 * 24 * 60;

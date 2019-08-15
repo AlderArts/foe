@@ -197,15 +197,15 @@ let DefBody = {
 		// Skip backSlots array
 		
 		// Genetalia
-		for(var i=0,j=this.cock.length; i<j; i++) {
+		for(let i=0,j=this.cock.length; i<j; i++) {
 			if(race.isRace(Race.Canine))
 				this.cock[i].knot = 1;
 			this.cock[i].race = race;
 		}
 		this.balls.race = race;
-		for(var i=0,j=this.vagina.length; i<j; i++)
+		for(let i=0,j=this.vagina.length; i<j; i++)
 			this.vagina[i].race = race;
-		for(var i=0,j=this.breasts.length; i<j; i++)
+		for(let i=0,j=this.breasts.length; i<j; i++)
 			this.breasts[i].race = race;
 			
 		this.arms.race = race;
@@ -225,19 +225,19 @@ let DefBody = {
 		
 		// Torso
 		this.torso.color = color;
-		for(var i=0,j=this.backSlots.length; i<j; i++)
+		for(let i=0,j=this.backSlots.length; i<j; i++)
 			this.backSlots[i].color = color;
 		
 		// Genetalia
-		for(var i=0,j=this.cock.length; i<j; i++)
+		for(let i=0,j=this.cock.length; i<j; i++)
 			this.cock[i].color = color;
 		this.balls.color = color;
 		// Skip vagina
-		for(var i=0,j=this.breasts.length; i<j; i++)
+		for(let i=0,j=this.breasts.length; i<j; i++)
 			this.breasts[i].color = color;
-		for(var i=0,j=this.arms.length; i<j; i++)
+		for(let i=0,j=this.arms.length; i<j; i++)
 			this.arms[i].color = color;
-		for(var i=0,j=this.legs.length; i<j; i++)
+		for(let i=0,j=this.legs.length; i<j; i++)
 			this.legs[i].color = color;
 	},
 

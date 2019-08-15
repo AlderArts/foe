@@ -93,7 +93,7 @@ Images.imgWaitDisabled      = require('../assets/img/gui/wait_disabled.png');
 Images.imgSleepEnabled      = require('../assets/img/gui/sleep_enabled.png');
 Images.imgSleepDisabled     = require('../assets/img/gui/sleep_disabled.png');
 
-var LoadImages = function(onComplete : CallableFunction) {
+let LoadImages = function(onComplete : CallableFunction) {
 	let loader = preloader({
 		xhrImages: false
 	});
@@ -169,12 +169,12 @@ let LoadCardImages = function(imageArray : any[]) {
 		Images.card_back
 	];
 
-	for(var i = 0; i < cards.length; i++)
+	for(let i = 0; i < cards.length; i++)
 		imageArray.push(cards[i]);
 }
 
 function LoadStatusImages(imageArray : any[]) {
-	for(var i = 0; i < StatusEffect.LAST; i++) {
+	for(let i = 0; i < StatusEffect.LAST; i++) {
 		Images.status[i]  = "";
 	}
 
@@ -200,7 +200,7 @@ function LoadStatusImages(imageArray : any[]) {
 	Images.status[StatusEffect.Buff]     = require('../assets/img/status/buff.png');
 	Images.status[StatusEffect.Curse]    = require('../assets/img/status/curse.png');
 	
-	for(var i = 0; i < StatusEffect.LAST; i++) {
+	for(let i = 0; i < StatusEffect.LAST; i++) {
 		if(Images.status[i] == "") continue;
 		imageArray.push(Images.status[i]);
 	}

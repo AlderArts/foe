@@ -46,7 +46,7 @@ export class Bastet extends Entity {
 	}
 	
 	ToStorage() {
-		var storage = {};
+		let storage = {};
 		
 		this.SaveFlags(storage);
 		
@@ -63,13 +63,13 @@ export namespace BastetScenes {
 	export function IntroEntryPoint() {
 		let player = GAME().player;
 		let bastet = GAME().bastet;
-		var parse : any = {
+		let parse : any = {
 			armor : player.ArmorDesc()
 		};
 		
-		var choice = BastetState.NotViewed;
+		let choice = BastetState.NotViewed;
 		
-		var func = function(c : BastetState) {
+		let func = function(c : BastetState) {
 			return function() {
 				choice = c;
 				Text.Clear();
@@ -88,7 +88,7 @@ export namespace BastetScenes {
 		
 		//TODO
 		//[Birth][Life][Anubis][Drought][Trouble]
-		var options = new Array();
+		let options = new Array();
 		options.push({ nameStr : "Birth",
 			tooltip : "“Enjoy life as the avatar of a cat Goddess.” Says the poster beside the door.",
 			func : func(BastetState.S1Birth), enabled : true
@@ -129,18 +129,18 @@ export namespace BastetScenes {
 	export function TFBlock() {
 		let player = GAME().player;
 
-		var parse : any = {};
+		let parse : any = {};
 		parse = player.ParserTags(parse);
 		parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 		
 		Text.Add("Stretching, you take a few moments to check yourself over, getting used to having your real body back.", parse);
 		Text.NL();
 		
-		var TFapplied = false;
+		let TFapplied = false;
 		
-		var scenes = new EncounterTable();
+		let scenes = new EncounterTable();
 		
-		var incompleteCatTF = function() {
+		let incompleteCatTF = function() {
 			if(!player.Ears().race.isRace(Race.Feline)) return true;
 			if(player.HasTail() && !player.HasTail().race.isRace(Race.Feline)) return true;
 			if(!player.Eyes().race.isRace(Race.Feline)) return true;
@@ -153,7 +153,7 @@ export namespace BastetScenes {
 			return false;
 		};
 		
-		var func = function(obj : any) {
+		let func = function(obj : any) {
 			scenes.AddEnc(function() {
 				TFapplied = true;
 				return _.isFunction(obj.tf) ? obj.tf() : "";
@@ -162,8 +162,8 @@ export namespace BastetScenes {
 		
 		func({
 			tf: function() {
-				var breasts = player.AllBreastRows();
-				for(var i = 0; i < breasts.length; i++) {
+				let breasts = player.AllBreastRows();
+				for(let i = 0; i < breasts.length; i++) {
 					breasts[i].size.IncreaseStat(40, 2);
 				}
 				return "Your [breasts] feel a bit heavier. It seems like your [breasts] have increased in size.";
@@ -173,8 +173,8 @@ export namespace BastetScenes {
 		});
 		func({
 			tf: function() {
-				var breasts = player.AllBreastRows();
-				for(var i = 0; i < breasts.length; i++) {
+				let breasts = player.AllBreastRows();
+				for(let i = 0; i < breasts.length; i++) {
 					breasts[i].nippleThickness.IncreaseStat(2, 0.5);
 					breasts[i].nippleLength.IncreaseStat(2, 0.5);
 				}
@@ -184,7 +184,7 @@ export namespace BastetScenes {
 		});
 		func({
 			tf: function() {
-				var ret = player.Lactation();
+				let ret = player.Lactation();
 				player.lactHandler.lactating = true;
 				player.lactHandler.FillMilk(1);
 				player.lactHandler.milkProduction.IncreaseStat(5, 1);
@@ -203,7 +203,7 @@ export namespace BastetScenes {
 		});
 		func({
 			tf: function() {
-				var ret = player.HasBalls();
+				let ret = player.HasBalls();
 				TF.SetBalls(player.Balls(), 2, 2);
 				player.Balls().size.IncreaseStat(6, 1);
 				player.Balls().cumProduction.IncreaseStat(3, 0.25);
@@ -247,7 +247,7 @@ export namespace BastetScenes {
 				}
 				else if(player.HasTail() && !player.HasTail().race.isRace(Race.Feline)) {
 					t = "A strange sensation on your lower back makes itself known, and you reach back to check what is it. A gasp escapes your lips as you grasp the source of the discomfort, and feel a light tug. Looking back, it seems you have grown a cat tail.";
-					var tail = player.HasTail();
+					let tail = player.HasTail();
 					if(tail) {
 						parse["tail"] = tail.Short();
 						t = Text.Parse("Something feels different with your [tail]. Looking back, you realize that your [tail] has turned into a thin feline tail.", parse);
@@ -297,7 +297,7 @@ export namespace BastetScenes {
 			cond: function() { return incompleteCatTF(); }
 		});
 		
-		var text : string[] = [];
+		let text : string[] = [];
 		_.times(_.random(0, 3), function() {
 			text.push(scenes.Get());
 		});
@@ -321,7 +321,7 @@ export namespace BastetScenes {
 		let player = GAME().player;
 		let lucille = GAME().lucille;
 
-		var parse : any = {
+		let parse : any = {
 			
 		};
 		
@@ -424,7 +424,7 @@ export namespace BastetScenes {
 			Text.Flush();
 			
 			//[Correct][Nevermind]
-			var options = new Array();
+			let options = new Array();
 			options.push({ nameStr : "Correct",
 				tooltip : "You’re pretty sure you heard her refer to you as “Her Ladyship”. But you’re a man! Maybe you should correct her.",
 				func : function() {
@@ -476,7 +476,7 @@ export namespace BastetScenes {
 	}
 
 	export function Birth2() {
-		var parse : any = {
+		let parse : any = {
 			
 		};
 		
@@ -553,7 +553,7 @@ export namespace BastetScenes {
 		Text.Flush();
 		
 		//[Masturbate][Meditate]
-		var options = new Array();
+		let options = new Array();
 		options.push({ nameStr : "Masturbate",
 			tooltip : "You’re sure no one will mind if you take the opportunity to relieve some tension. Adala did tell that you could relax if you wanted...",
 			func : function() {
@@ -591,7 +591,7 @@ export namespace BastetScenes {
 			Text.Flush();
 			
 			//[Explain][Wait][Ready]
-			var options = new Array();
+			let options = new Array();
 			options.push({ nameStr : "Explain",
 				tooltip : "You don’t feel ready just yet. Why not ask her to explain the ritual while you wait?",
 				func : function() {
@@ -616,7 +616,7 @@ export namespace BastetScenes {
 					Text.Flush();
 					
 					//[Yes!][Hot][No…]
-					var options = new Array();
+					let options = new Array();
 					options.push({ nameStr : "Yes!",
 						tooltip : "I mean, this your manhood that we’re talking about! And if what she said is true, you’re going to lose it!",
 						func : function() {
@@ -808,7 +808,7 @@ export namespace BastetScenes {
 				Text.Flush();
 				
 				//[Mischievous][Matron][Protector][Lover]
-				var options = new Array();
+				let options = new Array();
 				options.push({ nameStr : "Mischievous",
 					tooltip : "She’s the mischievous lover, of course. Flirtatious and playful, a good-hearted tease who wants your heart and as much fun as she can get.",
 					func : BastetScenes.Birth3, enabled : true
@@ -836,7 +836,7 @@ export namespace BastetScenes {
 
 	export function Birth3() {
 		let bastet = GAME().bastet;
-		var parse : any = {
+		let parse : any = {
 			
 		};
 		
@@ -855,7 +855,7 @@ export namespace BastetScenes {
 		Text.Flush();
 		
 		//[Yes!][Definitely!][Absolutely!]
-		var options = new Array();
+		let options = new Array();
 		options.push({ nameStr : "Yes!",
 			tooltip : "If that’s what she wants, who are you to say no? She can go right ahead and play to her heart’s content!",
 			func : Gui.PrintDefaultOptions, enabled : true

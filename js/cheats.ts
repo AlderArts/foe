@@ -49,9 +49,9 @@ export function InitCheats() {
 			Text.Add(Text.Bold("DEBUG: This is a cheat-shop, where you can change your characters body."));
 			Text.NL();
 			
-			var CockSmith = function() {
+			let CockSmith = function() {
 				Text.Flush();
-				var options = new Array();
+				let options = new Array();
 				options.push({ nameStr : "Add cock",
 					func : function() {
 						GAME().player.body.cock.push(new Cock());
@@ -70,10 +70,10 @@ export function InitCheats() {
 				});
 				options.push({ nameStr : "Cock+L",
 					func : function() {
-						var cocks = GAME().player.AllCocks();
-						for(var i = 0; i < cocks.length; i++) {
-							var cock = cocks[i];
-							var inc = 30;
+						let cocks = GAME().player.AllCocks();
+						for(let i = 0; i < cocks.length; i++) {
+							let cock = cocks[i];
+							let inc = 30;
 							if(cock.length.Get() <= 50) inc = 10;
 							if(cock.length.Get() <= 20) inc = 5;
 							if(cock.length.Get() <= 10) inc = 1;
@@ -86,10 +86,10 @@ export function InitCheats() {
 				});
 				options.push({ nameStr : "Cock-L",
 					func : function() {
-						var cocks = GAME().player.AllCocks();
-						for(var i = 0; i < cocks.length; i++) {
-							var cock = cocks[i];
-							var inc = 30;
+						let cocks = GAME().player.AllCocks();
+						for(let i = 0; i < cocks.length; i++) {
+							let cock = cocks[i];
+							let inc = 30;
 							if(cock.length.Get() <= 50) inc = 10;
 							if(cock.length.Get() <= 20) inc = 5;
 							if(cock.length.Get() <= 10) inc = 1;
@@ -102,10 +102,10 @@ export function InitCheats() {
 				});
 				options.push({ nameStr : "Cock+T",
 					func : function() {
-						var cocks = GAME().player.AllCocks();
-						for(var i = 0; i < cocks.length; i++) {
-							var cock = cocks[i];
-							var inc = 10;
+						let cocks = GAME().player.AllCocks();
+						for(let i = 0; i < cocks.length; i++) {
+							let cock = cocks[i];
+							let inc = 10;
 							if(cock.thickness.Get() <= 25) inc = 5;
 							if(cock.thickness.Get() <= 10) inc = 3;
 							if(cock.thickness.Get() <= 5)  inc = 1;
@@ -118,10 +118,10 @@ export function InitCheats() {
 				});
 				options.push({ nameStr : "Cock-T",
 					func : function() {
-						var cocks = GAME().player.AllCocks();
-						for(var i = 0; i < cocks.length; i++) {
-							var cock = cocks[i];
-							var inc = 10;
+						let cocks = GAME().player.AllCocks();
+						for(let i = 0; i < cocks.length; i++) {
+							let cock = cocks[i];
+							let inc = 10;
 							if(cock.thickness.Get() <= 25) inc = 5;
 							if(cock.thickness.Get() <= 10) inc = 3;
 							if(cock.thickness.Get() <= 5) inc = 1;
@@ -166,7 +166,7 @@ export function InitCheats() {
 				});
 				options.push({ nameStr : "Breasts+",
 					func : function() {
-						var inc = 30;
+						let inc = 30;
 						if(GAME().player.FirstBreastRow().size.Get() <= 50) inc = 10;
 						if(GAME().player.FirstBreastRow().size.Get() <= 20) inc = 5;
 						if(GAME().player.FirstBreastRow().size.Get() <= 10) inc = 1;
@@ -178,7 +178,7 @@ export function InitCheats() {
 				});
 				options.push({ nameStr : "Breasts-",
 					func : function() {
-						var inc = 30;
+						let inc = 30;
 						if(GAME().player.FirstBreastRow().size.Get() <= 50) inc = 10;
 						if(GAME().player.FirstBreastRow().size.Get() <= 20) inc = 5;
 						if(GAME().player.FirstBreastRow().size.Get() <= 10) inc = 1;
@@ -248,12 +248,12 @@ export function InitCheats() {
 			Text.Add("DEBUG: This is a cheat-shop, where you can modify [name].", parse, "bold");
 			Text.NL();
 			
-			var ElfSmith = function() {
+			let ElfSmith = function() {
 				Text.Flush();
-				var options = [];
+				let options = [];
 				options.push({ nameStr : "Attitude",
 					func : function() {
-						var options = new Array();
+						let options = new Array();
 						options.push({ nameStr : "Nice",
 							func : function() {
 								GAME().party.SwitchIn(kiakai);
@@ -283,7 +283,7 @@ export function InitCheats() {
 				});
 				options.push({ nameStr : "Relation",
 					func : function() {
-						var options = new Array();
+						let options = new Array();
 						options.push({ nameStr : "Rel+10",
 							func : function() {
 								kiakai.relation.IncreaseStat(100, 10);
@@ -319,9 +319,9 @@ export function InitCheats() {
 				});
 				options.push({ nameStr : "Body mods",
 					func : function() {
-						var ElfSmithBody = function() {
+						let ElfSmithBody = function() {
 							Text.Flush();
-							var options = new Array();
+							let options = new Array();
 							options.push({ nameStr : "Add cock",
 								func : function() {
 									kiakai.body.cock.push(new Cock());
@@ -340,10 +340,10 @@ export function InitCheats() {
 							});
 							options.push({ nameStr : "Cock+L",
 								func : function() {
-									var cocks = kiakai.AllCocks();
-									for(var i = 0; i < cocks.length; i++) {
-										var cock = cocks[i];
-										var inc = 30;
+									let cocks = kiakai.AllCocks();
+									for(let i = 0; i < cocks.length; i++) {
+										let cock = cocks[i];
+										let inc = 30;
 										if(cock.length.Get() <= 50) inc = 10;
 										if(cock.length.Get() <= 20) inc = 5;
 										if(cock.length.Get() <= 10) inc = 1;
@@ -356,10 +356,10 @@ export function InitCheats() {
 							});
 							options.push({ nameStr : "Cock-L",
 								func : function() {
-									var cocks = kiakai.AllCocks();
-									for(var i = 0; i < cocks.length; i++) {
-										var cock = cocks[i];
-										var inc = 30;
+									let cocks = kiakai.AllCocks();
+									for(let i = 0; i < cocks.length; i++) {
+										let cock = cocks[i];
+										let inc = 30;
 										if(cock.length.Get() <= 50) inc = 10;
 										if(cock.length.Get() <= 20) inc = 5;
 										if(cock.length.Get() <= 10) inc = 1;
@@ -372,10 +372,10 @@ export function InitCheats() {
 							});
 							options.push({ nameStr : "Cock+T",
 								func : function() {
-									var cocks = kiakai.AllCocks();
-									for(var i = 0; i < cocks.length; i++) {
-										var cock = cocks[i];
-										var inc = 10;
+									let cocks = kiakai.AllCocks();
+									for(let i = 0; i < cocks.length; i++) {
+										let cock = cocks[i];
+										let inc = 10;
 										if(cock.thickness.Get() <= 25) inc = 5;
 										if(cock.thickness.Get() <= 10) inc = 3;
 										if(cock.thickness.Get() <= 5)  inc = 1;
@@ -388,10 +388,10 @@ export function InitCheats() {
 							});
 							options.push({ nameStr : "Cock-T",
 								func : function() {
-									var cocks = kiakai.AllCocks();
-									for(var i = 0; i < cocks.length; i++) {
-										var cock = cocks[i];
-										var inc = 10;
+									let cocks = kiakai.AllCocks();
+									for(let i = 0; i < cocks.length; i++) {
+										let cock = cocks[i];
+										let inc = 10;
 										if(cock.thickness.Get() <= 25) inc = 5;
 										if(cock.thickness.Get() <= 10) inc = 3;
 										if(cock.thickness.Get() <= 5) inc = 1;
@@ -436,7 +436,7 @@ export function InitCheats() {
 							});
 							options.push({ nameStr : "Breasts+",
 								func : function() {
-									var inc = 30;
+									let inc = 30;
 									if(kiakai.FirstBreastRow().size.Get() <= 50) inc = 10;
 									if(kiakai.FirstBreastRow().size.Get() <= 20) inc = 5;
 									if(kiakai.FirstBreastRow().size.Get() <= 10) inc = 1;
@@ -448,7 +448,7 @@ export function InitCheats() {
 							});
 							options.push({ nameStr : "Breasts-",
 								func : function() {
-									var inc = 30;
+									let inc = 30;
 									if(kiakai.FirstBreastRow().size.Get() <= 50) inc = 10;
 									if(kiakai.FirstBreastRow().size.Get() <= 20) inc = 5;
 									if(kiakai.FirstBreastRow().size.Get() <= 10) inc = 1;

@@ -33,7 +33,7 @@ export namespace RoaScenes {
     export function BrothelApproach() {
         let player = GAME().player;
         let roa = GAME().roa;
-        var parse : any = {
+        let parse : any = {
             playername : player.name
         };
         
@@ -81,13 +81,13 @@ export namespace RoaScenes {
     export function BrothelPrompt() {
         let player = GAME().player;
         let roa = GAME().roa;
-        var parse : any = {
+        let parse : any = {
             cost : Text.NumToText(roa.Cost())
         };
         parse = player.ParserTags(parse);
         
         //[name]
-        var options = new Array();
+        let options = new Array();
         options.push({ nameStr : "Buy",
             func : function() {
                 Text.Clear();
@@ -118,7 +118,7 @@ export namespace RoaScenes {
                     Text.Add(" Roa has already sunk to his knees, clearly expecting you to want him to put his mouth to work lubing up your [cock] before you bury it into his willing ass.", parse);
                 Text.Flush();
                 
-                var options = new Array();
+                let options = new Array();
                 options.push({ nameStr : "Fuck him",
                     func : RoaScenes.TSLPitchAnal, enabled : true,
                     tooltip : "Well he does have a nice-looking butt. So why not do as he wishes and plug it for him?"
@@ -168,12 +168,12 @@ export namespace RoaScenes {
         let rigard = GAME().rigard;
         let ches = GAME().ches;
 
-        var parse : any = {
+        let parse : any = {
             
         };
         
         //[name]
-        var options = new Array();
+        let options = new Array();
         /*
         options.push({ nameStr : "name",
             func : function() {
@@ -327,7 +327,7 @@ export namespace RoaScenes {
 
     export function RestoredVenaTalk() {
         let roa = GAME().roa;
-        var parse : any = {
+        let parse : any = {
             
         };
         
@@ -345,10 +345,10 @@ export namespace RoaScenes {
         let burrows = GAME().burrows;
         let roa = GAME().roa;
 
-        var cost   = roa.Cost();
-        var p1cock = player.BiggestCock();
+        let cost   = roa.Cost();
+        let p1cock = player.BiggestCock();
         
-        var parse : any = {
+        let parse : any = {
             cost : Text.NumToText(cost)
         };
         parse = player.ParserTags(parse);
@@ -401,7 +401,7 @@ export namespace RoaScenes {
         Text.Flush();
         
         //[Buy] [Leave]
-        var options = new Array();
+        let options = new Array();
         options.push({ nameStr : "Buy",
             func : function() {
                 Text.Clear();
@@ -423,9 +423,9 @@ export namespace RoaScenes {
                 Text.NL();
                 Text.Add("<i>“There, all done,”</i> he declares, tucking your clothes inside the wardrobe.", parse);
                 
-                var herm = player.FirstCock() && player.FirstVag();
+                let herm = player.FirstCock() && player.FirstVag();
                 
-                var options = new Array();
+                let options = new Array();
                 
                 if(player.NumCocks() > 1) {
                     Text.NL();
@@ -471,7 +471,7 @@ export namespace RoaScenes {
                     Text.Add("You lick your lips idly as you consider your answer. Do you want to peg the willing little bunny-slut? Or would you rather enjoy a nice bunny-cock in your needy cunt?", parse);
                     Text.Flush();
                     //[Peg]
-                    var tooltip = player.Strapon() ? "He’s just begging to get pegged, and you have the proper equipment to give him what he wants. So why not give this bunny-boy a good butt-fucking?" : "Come on, he’s begging for it; have him call in a toy for you so you can ream his ass.";
+                    let tooltip = player.Strapon() ? "He’s just begging to get pegged, and you have the proper equipment to give him what he wants. So why not give this bunny-boy a good butt-fucking?" : "Come on, he’s begging for it; have him call in a toy for you so you can ream his ass.";
                     options.push({ nameStr : "Peg",
                         func : RoaScenes.TSLPitchAnal, enabled : true,
                         tooltip : tooltip
@@ -508,17 +508,17 @@ export namespace RoaScenes {
         if(roa.flags["Met"] < RoaFlags.Met.Sexed)
             roa.flags["Met"] = RoaFlags.Met.Sexed;
         
-        var p1cock = player.BiggestCock(null, true);
+        let p1cock = player.BiggestCock(null, true);
         
-        var parse : any = {
+        let parse : any = {
             playername : player.name
         };
         parse = Text.ParserPlural(parse, player.NumCocks() > 1);
         parse = player.ParserTags(parse);
         
-        var mStrap  = false;
-        var strapon = p1cock ? p1cock.isStrapon    : false; //Regular
-        var knot    = p1cock ? p1cock.knotted != 0 : false;
+        let mStrap  = false;
+        let strapon = p1cock ? p1cock.isStrapon    : false; //Regular
+        let knot    = p1cock ? p1cock.knotted != 0 : false;
         
         Text.Clear();
         if(player.FirstCock()) {
@@ -705,7 +705,7 @@ export namespace RoaScenes {
             Text.Add("Finally, with a cry of pleasure, you slam yourself as deeply into Roa’s guts as you can and let fly, practically exploding in his ass as spurts of seed gush forth from your [cock]. Your hand abandons Roa’s cock to hold him close, ensuring he can’t escape your efforts at flooding his stomach with seed.", parse);
             Text.NL();
             
-            var cum = player.OrgasmCum();
+            let cum = player.OrgasmCum();
             
             if(cum > 6) {
                 Text.Add("Roa moans plaintively as your creamy cascade erupts inside him. The little bunny’s stomach grows like a watermelon in fast forward, bloating up and out with each heartbeat as you fire shot after gushing shot into his ass. Rivers of seed flow out around your shaft, soaking his thighs, and still he balloons, lifting clear off the bed from the sheer volume of cum crammed inside him. By the time you finish, you feel certain he’d be the envy of any female broodmother wannabe among his own kind with how swollen he is.", parse);
@@ -753,7 +753,7 @@ export namespace RoaScenes {
             Text.Add("You make a show of looking yourself over, then slowly shake your head, proclaiming your satisfaction with what Roa has done.", parse);
         }
         else if(strapon) {
-            var first = 
+            let first = 
             
             Text.Add("Your hand abandons its place at the bunny’s cock to instead trail down lower. As your other hand toys with Roa’s nipples, you bend closer to his ear and whisper to him, telling him to cum, then. As you do so, you plunge your [cock] ", parse);
             if(knot)
@@ -842,14 +842,14 @@ export namespace RoaScenes {
         if(roa.flags["Met"] < RoaFlags.Met.Sexed)
             roa.flags["Met"] = RoaFlags.Met.Sexed;
         
-        var parse : any = {
+        let parse : any = {
             playername : player.name,
             lipsDesc   : function() { return player.LipsDesc(); }
         };
         parse = player.ParserTags(parse);
         
-        var first  = (roa.sex["gVag"]  == 0);
-        var noanal = (roa.sex["rAnal"] == 0);
+        let first  = (roa.sex["gVag"]  == 0);
+        let noanal = (roa.sex["rAnal"] == 0);
         
         parse = Text.ParserPlural(parse, player.NumCocks() > 1);
         
@@ -886,7 +886,7 @@ export namespace RoaScenes {
         Text.NL();
         Text.Add("When you are satisfied with your impromptu lubing, you shift your position to straddle his hips, raising yourself aloft to align your [vag] with his cock. Your hand brushes itself tenderly against his cheek, a single stroke of comfort, and then you allow yourself to descend.", parse);
         Text.NL();
-        var virgin = player.FirstVag().virgin;
+        let virgin = player.FirstVag().virgin;
         if(virgin) {
             Text.Add("You try to show no hesitation, even though this will be your first time. As Roa’s impressively sized cock begins spearing inside you, the unfamiliar sensations washing over you, you bite your lip to keep from betraying anything.", parse);
             Text.NL();
@@ -953,10 +953,10 @@ export namespace RoaScenes {
         Text.Add("<i>“Gonna cum!”</i> he warns. You feel as his cock appears to grow bigger and harder inside you. It’s clear that the rabbit is teetering on the edge of climax, what should you do?", parse);
         Text.Flush();
         
-        var cameinside = 0;
+        let cameinside = 0;
         
         //[Inside] [Outside]
-        var options = new Array();
+        let options = new Array();
         options.push({ nameStr : "Inside",
             func : function() {
                 cameinside++;
@@ -965,7 +965,7 @@ export namespace RoaScenes {
                 Text.NL();
                 Text.Add("By the time Roa shudders and sighs long and low in pleasure, you feel distinctly full, jampacked with thick sloppy bunny-cream. As he goes limp under you, you slowly pry your fingers free of his ass, which attempts to cling to them even despite his sated state. Once they are free, you slide your weight off of the panting lagomorph, letting his semen-stained shaft slide slowly from your well-used [vag] before hopping off of the bed entirely.", parse);
                 
-                var cum = roa.OrgasmCum();
+                let cum = roa.OrgasmCum();
                 //Impreg
                 RoaScenes.Impregnate(player, cameinside, PregnancyHandler.Slot.Vag);
                 
@@ -984,7 +984,7 @@ export namespace RoaScenes {
                 Text.NL();
                 Text.Add("When the panting lagomorph slumps back across the bed, you release his cock and pull your fingers free of his ass.", parse);
                 
-                var cum = roa.OrgasmCum();
+                let cum = roa.OrgasmCum();
                 
                 Gui.PrintDefaultOptions();
             }, enabled : true,
@@ -1006,7 +1006,7 @@ export namespace RoaScenes {
             Text.Flush();
             
             //[Help] [Don’t help]
-            var options = new Array();
+            let options = new Array();
             options.push({ nameStr : "Help",
                 func : function() {
                     Text.Clear();
@@ -1085,7 +1085,7 @@ export namespace RoaScenes {
                 Text.Add("Your climax stretches on for what feels like a blissful eternity... then seeps away, leaving you panting with exertion atop of your lapin lover.", parse);
                 Text.NL();
                 
-                var cum = player.OrgasmCum();
+                let cum = player.OrgasmCum();
                 
                 Text.Add("The bunny-whore moans lavishly as your tunnel constricts him, but shows no sign of slowing down despite your vice-like grip. He continues to pump into you as you ride out your climax, trying your best to milk his shaft as your walls contract.", parse);
                 Text.NL();
@@ -1096,7 +1096,7 @@ export namespace RoaScenes {
                 Text.Flush();
                 
                 //[Inside] [Outside]
-                var options = new Array();
+                let options = new Array();
                 options.push({ nameStr : "Inside",
                     func : function() {
                         cameinside++;
@@ -1106,7 +1106,7 @@ export namespace RoaScenes {
                         Text.NL();
                         Text.Add("After a few moments of adding molten heat to your cunt, Roa sighs and goes limp, clearly spent from his climax. Affectionately petting his head, you slowly lift yourself from his body. A thick stream of off-white flows from your loins as you pull out and slide out of the bed.", parse);
                         
-                        var cum = roa.OrgasmCum();
+                        let cum = roa.OrgasmCum();
                         RoaScenes.Impregnate(player, cameinside, PregnancyHandler.Slot.Vag);
                         
                         Gui.PrintDefaultOptions();
@@ -1118,7 +1118,7 @@ export namespace RoaScenes {
                         Text.Clear();
                         Text.Add("You all but throw yourself backward, nearly rolling yourself off of the bed to escape Roa’s impending orgasm. Unbothered by your departure, Roa squeals in pleasure, arcing his back until he almost lifts himself off the bed before firing great spurts of semen toward the ceiling. They make a valiant effort, but he just can’t reach that far, and so they simply curl back down, splattering heavily across his belly, his chest, even his face. By the time he goes limp, panting heavily, he’s visibly painted with his own juices, and you are watching him from the bedside, having slid off to avoid being painted yourself.", parse);
                         
-                        var cum = roa.OrgasmCum();
+                        let cum = roa.OrgasmCum();
                         
                         Gui.PrintDefaultOptions();
                     }, enabled : true,
@@ -1130,7 +1130,7 @@ export namespace RoaScenes {
                     Text.NL();
                     Text.Add("As Roa labors to catch his breath, you decide to occupy yourself with a little stretching exercise. Just to work out all of the little kinks this last go built up in your body. Not that it wasn’t worth it, you amend to yourself, smiling as you do.", parse);
                     Text.NL();
-                    var wings = player.HasWings();
+                    let wings = player.HasWings();
                     parse["wingsDesc"] = wings ? wings.Short() : "";
                     parse["wings"] = wings ? Text.Parse(", and spread your [wingsDesc] as far as they can go", parse) : "";
                     Text.Add("You stretch out your arms over your head, rotate your shoulders[wings]. ", parse);
@@ -1171,7 +1171,7 @@ export namespace RoaScenes {
         let player = GAME().player;
         let roa = GAME().roa;
 
-        var parse : any = {
+        let parse : any = {
             playername  : player.name,
             lipsDesc    : function() { return player.LipsDesc(); }
         };
@@ -1179,10 +1179,10 @@ export namespace RoaScenes {
         parse["fem"] = roa.Relation() >= 40 ? player.name : player.mfFem("sir", "ma’am");
         
         //[Snuggle] [Bathe] [Kiss] [Dismiss]
-        var options = new Array();
+        let options = new Array();
         options.push({ nameStr : "Snuggle",
             func : function() {
-                var first = roa.flags["snug"] == 0;
+                let first = roa.flags["snug"] == 0;
                 roa.flags["snug"]++;
                 
                 parse["own"] = player.HasFur() ? " own" : "";

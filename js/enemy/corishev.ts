@@ -62,7 +62,7 @@ export class Corishev extends BossEntity {
 	}
 
 	DropTable() {
-		var drops = [];
+		let drops = [];
 		drops.push({ it: WeaponsItems.GolWhip });
 		drops.push({ it: CombatItems.LustDart });
 		drops.push({ it: AccItems.SimpleCuffs });
@@ -78,13 +78,13 @@ export class Corishev extends BossEntity {
 	Act(encounter : any, activeChar : any) {
 		let party : Party = GAME().party;
 		
-		var parse : any = {
+		let parse : any = {
 			
 		};
 		
 		// Banter
 		if(Math.random() < 0.5) {
-			var scenes = new EncounterTable();
+			let scenes = new EncounterTable();
 			scenes.AddEnc(function() {
 				Text.Add("<i>“I could’ve simply locked the door and let those useless fools sort you out while you tried to break it down,”</i> Corishev says, a giggle escaping his lips. <i>“But this little wimp here is most unsatisfying - he can’t take even the slightest pain before passing out on me. You two should be much more fun.”</i>", parse);
 			}, 1.0, function() { return true; });
@@ -108,10 +108,10 @@ export class Corishev extends BossEntity {
 		}
 		
 		// Pick a random target
-		var t = this.GetSingleTarget(encounter, activeChar);
-		var highlust = null;
-		for(var i = 0; i < party.Num(); i++) {
-			var c = party.Get(i);
+		let t = this.GetSingleTarget(encounter, activeChar);
+		let highlust = null;
+		for(let i = 0; i < party.Num(); i++) {
+			let c = party.Get(i);
 			if(c.Incapacitated()) continue;
 			
 			if(c.LustLevel() >= 0.7) {
@@ -120,7 +120,7 @@ export class Corishev extends BossEntity {
 			}
 		}
 		
-		var choice = Math.random();
+		let choice = Math.random();
 		
 		if(highlust && Abilities.EnemySkill.Corishev.Punish.enabledCondition(encounter, this)) { // Violate
 			Abilities.EnemySkill.Corishev.Punish.Use(encounter, this, highlust);

@@ -8,7 +8,7 @@ import { Stat } from "./stat";
 
 let EntityMenu = {
 	InteractDefault : function(options : any[], switchSpot : boolean, enableEquip : any, enableStats : any, enableJob : any, enableSwitch : boolean) {
-		var that = this;
+		let that = this;
 		options.push({ nameStr: "Equip",
 			func : function() {
 				that.EquipPrompt(that.Interact);
@@ -52,19 +52,19 @@ let EntityMenu = {
 		Text.Add("<tr><td><b>Sex level:</b></td><td>" + Math.floor(this.sexlevel) + "</td></tr>");
 		Text.Add("<tr><td><b>S.Exp:</b></td><td>"     + Math.floor(this.sexperience) + "/" + Math.floor(this.sexpToLevel) + "</td></tr>");
 		if(this.currentJob) {
-			var jd  = this.jobs[this.currentJob.name];
+			let jd  = this.jobs[this.currentJob.name];
 			if(jd) {
-				var parse : any = {
+				let parse : any = {
 					job        : jd.job.Short(this),
 					lvl        : jd.level,
 					maxlvl     : jd.job.levels.length + 1
 				};
 
 				// Check for maxed out job
-				var master   = jd.job.Master(this);
-				var toLevel;
+				let master   = jd.job.Master(this);
+				let toLevel;
 				if(!master) {
-					var newLevel = jd.job.levels[jd.level-1];
+					let newLevel = jd.job.levels[jd.level-1];
 					toLevel      = newLevel.expToLevel * jd.mult;
 				}
 
@@ -91,21 +91,21 @@ let EntityMenu = {
 
 		if(this.currentJob) {
 			Text.Add("Job abilities:<br>", null, 'bold');
-			var abSet = this.currentJob.abilities;
+			let abSet = this.currentJob.abilities;
 
-			for(var i = 0; i < abSet.AbilitySet.length; i++) {
-				var ability = abSet.AbilitySet[i];
+			for(let i = 0; i < abSet.AbilitySet.length; i++) {
+				let ability = abSet.AbilitySet[i];
 				Text.Add("[ability] ([cost]): [desc]<br>",
 					{ability: ability.name, cost: ability.CostStr(), desc: ability.Short()});
 			}
 			Text.Add("<br>");
 		}
 		Text.Add("Known abilities:<br>", null, 'bold');
-		for(var set in this.abilities) {
-			var abSet = this.abilities[set];
+		for(let set in this.abilities) {
+			let abSet = this.abilities[set];
 
-			for(var i = 0; i < abSet.AbilitySet.length; i++) {
-				var ability = abSet.AbilitySet[i];
+			for(let i = 0; i < abSet.AbilitySet.length; i++) {
+				let ability = abSet.AbilitySet[i];
 				Text.Add("[ability] ([cost]): [desc]<br>",
 					{ability: ability.name, cost: ability.CostStr(), desc: ability.Short()});
 			}
@@ -113,14 +113,14 @@ let EntityMenu = {
 
 		Text.Flush();
 
-		var that = this;
+		let that = this;
 
 		if(this.pendingStatPoints <= 0) {
 			Gui.NextPrompt(backFunc);
 			return;
 		}
 
-		var options = new Array();
+		let options = new Array();
 		options.push({ nameStr: "Strength",
 			func : function() {
 				that.strength.growth += Stat.growthPerPoint;
@@ -182,8 +182,8 @@ let EntityMenu = {
 
 	EquipPrompt : function(backfunc : any) {
 		let party = GAME().party;
-		var that = this;
-		var parse : any = {
+		let that = this;
+		let parse : any = {
 			name    : that.NameDesc(),
 			isAre   : that.is(),
 			HeShe   : function() { return that.HeShe(); },
@@ -195,10 +195,10 @@ let EntityMenu = {
 			es      : function() { return that.plural() ? "" : "es"; }
 		};
 
-		var equipFunc = function() {
+		let equipFunc = function() {
 			Text.Clear();
 
-			var slotFunc = function(slotname : string, slot : Item) {
+			let slotFunc = function(slotname : string, slot : Item) {
 				//Text.AddDiv("<hr>");
 				Text.AddDiv(slotname, null, "itemTypeHeader");
 				//Text.AddDiv("<hr>");
@@ -220,7 +220,7 @@ let EntityMenu = {
 			slotFunc("Toy", that.strapOn);
 			Text.Flush();
 
-			var slotFunc2 = function(slotname : string, slot? : Item) {
+			let slotFunc2 = function(slotname : string, slot? : Item) {
 				Text.AddDiv(slotname, null, "itemTypeHeader");
 				Text.AddDiv("<hr>");
 				Text.Add("[name] [isAre] currently equipped with:", parse);
@@ -231,7 +231,7 @@ let EntityMenu = {
 					Text.AddDiv("None", null, "itemSubtypeHeader");
 			}
 
-			var options = new Array();
+			let options = new Array();
 			options.push({ nameStr : "Weapon",
 				func : function() {
 					Text.Clear();
@@ -256,7 +256,7 @@ let EntityMenu = {
 				}, enabled : true,
 				tooltip : ""
 			});
-			var enabled = that.topArmorSlot ? (that.topArmorSlot.subtype != ItemSubtype.FullArmor) : true;
+			let enabled = that.topArmorSlot ? (that.topArmorSlot.subtype != ItemSubtype.FullArmor) : true;
 			options.push({ nameStr : "Bottom",
 				func : function() {
 					Text.Clear();
@@ -311,7 +311,7 @@ let EntityMenu = {
 	},
 
 	JobPrompt : function(backfunc : any) {
-		var that = this;
+		let that = this;
 		Text.Clear();
 		// Fallback for bugs
 		if(this.currentJob == null) {
@@ -321,7 +321,7 @@ let EntityMenu = {
 			return;
 		}
 
-		var jd  = this.jobs[this.currentJob.name];
+		let jd  = this.jobs[this.currentJob.name];
 		if(jd == null) {
 			Text.Add("ERROR, NO JOB DESCRIPTOR");
 			Text.Flush();
@@ -329,7 +329,7 @@ let EntityMenu = {
 			return;
 		}
 
-		var parse : any = {
+		let parse : any = {
 			name       : this.NameDesc(),
 			has        : this.has(),
 			Possessive : this.Possessive(),
@@ -339,10 +339,10 @@ let EntityMenu = {
 		};
 
 		// Check for maxed out job
-		var master   = jd.job.Master(this);
-		var toLevel;
+		let master   = jd.job.Master(this);
+		let toLevel;
 		if(!master) {
-			var newLevel = jd.job.levels[jd.level-1];
+			let newLevel = jd.job.levels[jd.level-1];
 			toLevel      = newLevel.expToLevel * jd.mult;
 		}
 
@@ -359,20 +359,20 @@ let EntityMenu = {
 		Text.NL();
 		Text.Add("Available jobs:<br>");
 
-		var options = [];
+		let options = [];
 
-		for(var jobName in this.jobs) {
-			var jd = this.jobs[jobName];
+		for(let jobName in this.jobs) {
+			let jd = this.jobs[jobName];
 
 			if(!jd.job.Unlocked(this)) continue;
 
 			parse.job = jd.job.Short(this);
 			parse.lvl = jd.level;
 			// Check for maxed out job
-			var master   = jd.job.Master(this);
-			var toLevel;
+			let master   = jd.job.Master(this);
+			let toLevel;
 			if(!master) {
-				var newLevel = jd.job.levels[jd.level-1];
+				let newLevel = jd.job.levels[jd.level-1];
 				toLevel      = newLevel.expToLevel * jd.mult;
 			}
 
@@ -385,10 +385,10 @@ let EntityMenu = {
 			else
 			{
 				Text.Add("[job]: Requires", parse);
-				for(var i = 0; i < jd.job.preqs.length; i++) {
-					var preq = jd.job.preqs[i];
-					var job  = preq.job;
-					var lvl  = preq.lvl || 1;
+				for(let i = 0; i < jd.job.preqs.length; i++) {
+					let preq = jd.job.preqs[i];
+					let job  = preq.job;
+					let lvl  = preq.lvl || 1;
 					Text.Add(" [job2] lvl [lvl2]", {job2: job.Short(this), lvl2: lvl});
 				}
 				Text.Add(".<br>");

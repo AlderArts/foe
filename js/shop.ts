@@ -75,21 +75,21 @@ export class Shop {
 	Buy(back : CallableFunction = Gui.PrintDefaultOptions, preventClear? : boolean) {
 		let party : Party = GAME().party;
 
-		var shop = this;
+		let shop = this;
 
 		if(!preventClear)
 			Text.Clear();
 		else
 			Text.NL();
 
-		var buyFunc = function(obj : any, bought : boolean) {
+		let buyFunc = function(obj : any, bought : boolean) {
 			if(obj.func) {
-				var res = obj.func();
+				let res = obj.func();
 				if(res) return;
 			}
 
-			var cost = obj.cost;
-			var num  = party.Inv().QueryNum(obj.it) || 0;
+			let cost = obj.cost;
+			let num  = party.Inv().QueryNum(obj.it) || 0;
 
 			if(shop.buyPromptFunc) shop.buyPromptFunc(obj.it, cost, bought);
 			else Text.Clear();
@@ -97,7 +97,7 @@ export class Shop {
 			Text.Flush();
 
 			//[name]
-			var options = new Array();
+			let options = new Array();
 			options.push({ nameStr : "Buy 1",
 				func : function() {
 					if(shop.buySuccessFunc) shop.buySuccessFunc(obj.it, cost, 1);
@@ -146,23 +146,23 @@ export class Shop {
 		Inventory.ItemByBothTypes(this.inventory, itemsByType);
 
 		let options = [];
-		for(var typeKey in itemsByType) {
+		for(let typeKey in itemsByType) {
 			//Add main types
 			Text.AddDiv("<hr>");
 			Text.AddDiv(typeKey, null, "itemTypeHeader");
 			Text.AddDiv("<hr>");
-			for(var subtypeKey in itemsByType[typeKey]){
+			for(let subtypeKey in itemsByType[typeKey]){
 				//Add subtypes (except None type)
 				if(subtypeKey != ItemSubtype.None)
 					Text.AddDiv(subtypeKey, null, "itemSubtypeHeader");
-				var items = itemsByType[typeKey][subtypeKey];
+				let items = itemsByType[typeKey][subtypeKey];
 				if(items) {
-					for(var i=0; i < items.length; i++) {
-						var it       = items[i].it;
-						var num      = items[i].num;
-						var enabled  = items[i].enabled ? items[i].enabled() : true;
-						var cost     = GetDEBUG() ? 0 : Math.floor(items[i].price * it.price);
-						var func     = items[i].func;
+					for(let i=0; i < items.length; i++) {
+						let it       = items[i].it;
+						let num      = items[i].num;
+						let enabled  = items[i].enabled ? items[i].enabled() : true;
+						let cost     = GetDEBUG() ? 0 : Math.floor(items[i].price * it.price);
+						let func     = items[i].func;
 
 						enabled = enabled && (party.coin >= cost);
 						Text.AddDiv("<b>" + cost + "g - </b>" + it.name + " - " + it.Short(), null, "itemName");
@@ -185,7 +185,7 @@ export class Shop {
 	Sell(back : CallableFunction = Gui.PrintDefaultOptions, preventClear? : boolean, customSellFunc? : CallableFunction) {
 		let party : Party = GAME().party;
 
-		var shop = this;
+		let shop = this;
 
 		if(!preventClear)
 			Text.Clear();
@@ -196,21 +196,21 @@ export class Shop {
 			Text.Add("You have nothing to sell.");
 		}
 
-		var sellFunc = function(obj : any, havesold : boolean) {
+		let sellFunc = function(obj : any, havesold : boolean) {
 			if(obj.func) {
-				var res = obj.func();
+				let res = obj.func();
 				if(res) return;
 			}
 
-			var num = obj.num;
-			var cost = Math.floor(shop.sellPrice * obj.it.price);
+			let num = obj.num;
+			let cost = Math.floor(shop.sellPrice * obj.it.price);
 
 			if(shop.sellPromptFunc) shop.sellPromptFunc(obj.it, cost, havesold);
 			else Text.Clear();
 			Text.Add("Sell " + obj.it.name + " for " + cost + " coin? You are carrying " + num + ".");
 			Text.Flush();
 
-			var options = new Array();
+			let options = new Array();
 			options.push({ nameStr : "Sell 1",
 				func : function() {
 					if(shop.sellSuccessFunc) shop.sellSuccessFunc(obj.it, cost, 1);
@@ -234,7 +234,7 @@ export class Shop {
 			});
 			options.push({ nameStr : "Sell 5",
 				func : function() {
-					var sold = Math.min(num, 5);
+					let sold = Math.min(num, 5);
 					if(shop.sellSuccessFunc) shop.sellSuccessFunc(obj.it, cost, sold);
 					// Add cash
 					party.coin += cost * sold;
@@ -285,23 +285,23 @@ export class Shop {
 
 
 		let options = [];
-		for(var typeKey in itemsByType) {
+		for(let typeKey in itemsByType) {
 			//Add main types, exclude quest items (can't sell quest items at shop)
 			if(typeKey != ItemType.Quest){
 				Text.AddDiv("<hr>");
 				Text.AddDiv(typeKey, null, "itemTypeHeader");
 				Text.AddDiv("<hr>");
 			}
-			for(var subtypeKey in itemsByType[typeKey]){
+			for(let subtypeKey in itemsByType[typeKey]){
 				//Add subtypes (except None type)
 				if(subtypeKey != ItemSubtype.None)
 					Text.AddDiv(subtypeKey, null, "itemSubtypeHeader");
-				var items = itemsByType[typeKey][subtypeKey];
+				let items = itemsByType[typeKey][subtypeKey];
 				if(items) {
-					for(var i=0; i < items.length; i++) {
-						var it       = items[i].it;
-						var num      = items[i].num;
-						var price    = Math.floor(shop.sellPrice * it.price);
+					for(let i=0; i < items.length; i++) {
+						let it       = items[i].it;
+						let num      = items[i].num;
+						let price    = Math.floor(shop.sellPrice * it.price);
 
 						if(price <= 0) continue;
 						//TODO Could look better. Perhaps add 'table' functionality to text.js and use it here

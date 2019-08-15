@@ -67,7 +67,7 @@ export class FeralWolf extends Entity {
 	}
 
 	DropTable() {
-		var drops = [];
+		let drops = [];
 		if(Math.random() < 0.05) drops.push({ it: AlchemyItems.Lobos });
 		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.WolfFang });
 		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.Wolfsbane });
@@ -92,15 +92,15 @@ export class FeralWolf extends Entity {
 		Text.Flush();
 
 		// Pick a random target
-		var t = this.GetSingleTarget(encounter, activeChar);
+		let t = this.GetSingleTarget(encounter, activeChar);
 
-		var parseVars = {
+		let parseVars = {
 			name   : this.name,
 			hisher : this.hisher(),
 			tName  : t.name
 		};
 
-		var choice = Math.random();
+		let choice = Math.random();
 		if(choice < 0.5)
 			Abilities.Attack.Use(encounter, this, t);
 		else if(choice < 0.7 && Abilities.Physical.DAttack.enabledCondition(encounter, this))
@@ -114,9 +114,9 @@ export class FeralWolf extends Entity {
 }
 
 FeralWolfScenes.LoneEnc = function() {
-	var enemy = new Party();
+	let enemy = new Party();
 	enemy.AddMember(new FeralWolf());
-	var enc = new Encounter(enemy);
+	let enc = new Encounter(enemy);
 	/*
 	enc.canRun = false;
 	enc.onEncounter = ...

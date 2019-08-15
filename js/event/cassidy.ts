@@ -91,7 +91,7 @@ export class Cassidy extends Entity {
 	}
 	
 	ToStorage() {
-		var storage : any = {
+		let storage : any = {
 			avirgin : this.Butt().virgin ? 1 : 0,
 			virgin  : this.FirstVag().virgin ? 1 : 0
 		};
@@ -178,12 +178,12 @@ export class CassidySpar extends Entity {
 		this.libido.base       = 17; this.libido.growth       = 1.2;
 		this.charisma.base     = 14; this.charisma.growth     = 1.2;
 		
-		var levelLimit = 6 + cassidy.flags["SparL"] * 2;
+		let levelLimit = 6 + cassidy.flags["SparL"] * 2;
 		// In act 1, max out at level 14
 		if(!GlobalScenes.PortalsOpen())
 			levelLimit = Math.min(levelLimit, 14);
 		
-		var level = Math.min(levelLimit, GAME().player.level);
+		let level = Math.min(levelLimit, GAME().player.level);
 		
 		this.level    = level;
 		this.sexlevel = 3;
@@ -211,16 +211,16 @@ export class CassidySpar extends Entity {
 	}
 
 	Act(encounter : any, activeChar : any) {
-		var that = this;
+		let that = this;
 		// TODO: Very TEMP
 		Text.Add(this.name + " acts! Rawr!");
 		Text.NL();
 		Text.Flush();
 		
 		// Pick a random target
-		var t = this.GetSingleTarget(encounter, activeChar);
+		let t = this.GetSingleTarget(encounter, activeChar);
 		
-		var scenes = new EncounterTable();
+		let scenes = new EncounterTable();
 		scenes.AddEnc(function() {
 			Abilities.Attack.Use(encounter, that, t);
 		}, 1.0, function() { return true; });
@@ -260,7 +260,7 @@ export class CassidySpar extends Entity {
 	}
 	
 	PhysDmgHP(encounter : any, caster : Entity, val : number) {
-		var parse : any = {};
+		let parse : any = {};
 		
 		if(this.reflexFlag) {
 			Text.Add("Before your attack connects, Cassidy dances out of the way so quickly that the salamander smith is practically a blur. Your wasted attack goes wide, and she gives you one of her trademark shit-eating grins.", parse);
@@ -285,8 +285,8 @@ let CreateShop = function() {
 
 	return new Shop({
 		buyPromptFunc : function(item : Item, cost : number, bought : boolean) {
-			var coin = Text.NumToText(cost);
-			var parse : any = {
+			let coin = Text.NumToText(cost);
+			let parse : any = {
 				item : item.sDesc(),
 				coin : coin
 			};
@@ -295,7 +295,7 @@ let CreateShop = function() {
 				Text.Clear();
 				Text.Add("Right. Stepping up to Cassidy, you inquire about buying the [item] for yourself, if it’s not too much of a bother. ", parse);
 				
-				var scenes = new EncounterTable();
+				let scenes = new EncounterTable();
 				scenes.AddEnc(function() {
 					Text.Add("<i>“Nah, it’s no bother - always happy to serve a reasonable customer. For you, that’ll be [coin] coins.”</i>", parse);
 					Text.NL();
@@ -318,7 +318,7 @@ let CreateShop = function() {
 			}
 		},
 		buySuccessFunc : function(item : Item, cost : number, num : number) {
-			var parse : any = {
+			let parse : any = {
 				num : num > 1 ? "them" : "it",
 				her : num > 1 ? "them" : "her",
 				y   : num > 1 ? "ies" : "y"
@@ -342,7 +342,7 @@ let CreateShop = function() {
 			cassidy.relation.IncreaseStat(30, 2);
 		},
 		buyFailFunc : function(item : Item, cost : number, bought : boolean) {
-			var parse : any = {
+			let parse : any = {
 				
 			};
 			parse = cassidy.ParserPronouns(parse);
@@ -358,8 +358,8 @@ let CreateShop = function() {
 			Text.NL();
 		},
 		sellPromptFunc : function(item : Item, cost : number, sold : boolean) {
-			var coin = Text.NumToText(cost);
-			var parse : any = {
+			let coin = Text.NumToText(cost);
+			let parse : any = {
 				item : item.sDesc(),
 				coin : coin
 			};
@@ -367,7 +367,7 @@ let CreateShop = function() {
 			
 			if(!sold) {
 				Text.Clear();
-				var scenes = new EncounterTable();
+				let scenes = new EncounterTable();
 				scenes.AddEnc(function() {
 					Text.Add("Cass throws your proffered item a quick glance of [hisher] expert eye. <i>“Yeah, ace. For that, I’ll do [coin] coins, perfectly reasonable price to me. Sound good to you?”</i>", parse);
 				}, 1.0, function() { return true; });
@@ -387,7 +387,7 @@ let CreateShop = function() {
 			}
 		},
 		sellSuccessFunc : function(item : Item, cost : number, num : number) {
-			var parse : any = {
+			let parse : any = {
 				
 			};
 			parse = cassidy.ParserPronouns(parse);
@@ -399,7 +399,7 @@ let CreateShop = function() {
 			Text.NL();
 		},
 		sellFailFunc : function(item : Item, cost : number, sold : boolean) {
-			var parse : any = {
+			let parse : any = {
 				item : item.sDesc()
 			};
 			parse = cassidy.ParserPronouns(parse);

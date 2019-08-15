@@ -40,7 +40,7 @@ export class StreetUrchin extends Entity{
 		this.combatExp         = 1;
 		this.coinDrop          = 2;
 		
-		var gender = Math.random();
+		let gender = Math.random();
 		if(gender < 0.6)
 			this.body.DefMale();
 		else if(gender < 0.95) {
@@ -56,7 +56,7 @@ export class StreetUrchin extends Entity{
 		
 		this.body.SetRace(Race.Human);
 		
-		var col = Math.random();
+		let col = Math.random();
 		if(col < 0.6)
 			this.body.SetBodyColor(Color.white);
 		else if(col < 0.7)
@@ -68,7 +68,7 @@ export class StreetUrchin extends Entity{
 		else
 			this.body.SetBodyColor(Color.black);
 		
-		var hairCol = Math.random();
+		let hairCol = Math.random();
 		if(hairCol < 0.4)
 			this.body.SetHairColor(Color.black);
 		else if(hairCol < 0.7)
@@ -78,7 +78,7 @@ export class StreetUrchin extends Entity{
 		
 		this.body.SetEyeColor(Rand(Color.numColors));
 		
-		var r = Math.random();
+		let r = Math.random();
 		if(r < 0.7) {
 			
 		}
@@ -154,7 +154,7 @@ export class Bandit extends Entity {
 		
 		this.body.SetRace(Race.Human);
 		
-		var col = Math.random();
+		let col = Math.random();
 		if(col < 0.6)
 			this.body.SetBodyColor(Color.white);
 		else if(col < 0.7)
@@ -166,7 +166,7 @@ export class Bandit extends Entity {
 		else
 			this.body.SetBodyColor(Color.black);
 		
-		var hairCol = Math.random();
+		let hairCol = Math.random();
 		if(hairCol < 0.4)
 			this.body.SetHairColor(Color.black);
 		else if(hairCol < 0.7)
@@ -183,7 +183,7 @@ export class Bandit extends Entity {
 
 		
 	DropTable() {
-		var drops = [];
+		let drops = [];
 		if(Math.random() < 0.05) drops.push({ it: AlchemyItems.Homos });
 		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.Hummus });
 		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.SpringWater });
@@ -212,15 +212,15 @@ export class Bandit extends Entity {
 		Text.NL();
 		
 		// Pick a random target
-		var t = this.GetSingleTarget(encounter, activeChar);
+		let t = this.GetSingleTarget(encounter, activeChar);
 
-		var parseVars = {
+		let parseVars = {
 			name   : this.name,
 			hisher : this.hisher(),
 			tName  : t.name
 		};
 
-		var choice = Math.random();
+		let choice = Math.random();
 		if(choice < 0.7)
 			Abilities.Attack.CastInternal(encounter, this, t);
 		else if(choice < 0.9 && Abilities.Physical.Pierce.enabledCondition(encounter, this))

@@ -43,7 +43,7 @@ LakeLoc.Shore.enc.AddEnc(function() {
 	return function() {
 		let party : Party = GAME().party;
 		let burrows = GAME().burrows;
-		var parse : any = {
+		let parse : any = {
 			
 		};
 		

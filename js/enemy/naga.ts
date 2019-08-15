@@ -94,7 +94,7 @@ export class Naga extends Entity {
 	}
 		
 	DropTable() {
-		var drops = [];
+		let drops = [];
 		if(Math.random() < 0.05) drops.push({ it: AlchemySpecial.Nagazm });
 		if(Math.random() < 0.05) drops.push({ it: AlchemyItems.Lacertium });
 		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.SnakeOil });
@@ -118,15 +118,15 @@ export class Naga extends Entity {
 		Text.NL();
 
 		// Pick a random target
-		var t = this.GetSingleTarget(encounter, activeChar);
+		let t = this.GetSingleTarget(encounter, activeChar);
 
-		var parseVars = {
+		let parseVars = {
 			name   : this.name,
 			hisher : this.hisher(),
 			tName  : t.name
 		};
 
-		var choice = Math.random();
+		let choice = Math.random();
 		if(choice < 0.4)
 			Abilities.Attack.Use(encounter, this, t);
 		else if(choice < 0.6 && Abilities.Physical.Ensnare.enabledCondition(encounter, this))
@@ -155,8 +155,8 @@ NagaScenes.Impregnate = function(mother : Entity, father : Naga, slot? : number)
 }
 
 NagaScenes.LoneEnc = function() {
-	var enemy = new Party();
-	var enc : any = new Encounter(enemy);
+	let enemy = new Party();
+	let enc : any = new Encounter(enemy);
 
 	enc.naga = new Naga();
 
@@ -171,17 +171,17 @@ NagaScenes.LoneEnc = function() {
 
 NagaScenes.DesertEncounter = function() {
 	let player = GAME().player;
-	var enc  = this;
-	var naga : Naga = enc.naga;
-	var parse : any = {
+	let enc  = this;
+	let naga : Naga = enc.naga;
+	let parse : any = {
 
 	};
 
 	parse = player.ParserTags(parse);
-	var nagaMate =  false;
+	let nagaMate =  false;
 
 	Text.Clear();
-	var scenes = new EncounterTable();
+	let scenes = new EncounterTable();
 	scenes.AddEnc(function() {
 		Text.Add("You crest yet another sand dune and discover a large rocky outcrop. Spotting a cave entrance, you decide to look inside and seek shelter from the unforgiving desert climate. You reach the cave entrance and peek inside. The cave is dark, but you feel cool air and hear the sound of dripping water.", parse);
 		Text.NL();
@@ -210,7 +210,7 @@ NagaScenes.DesertEncounter = function() {
 
 	if(nagaMate) {
 		//[Fuck][Fight]
-		var options = new Array();
+		let options = new Array();
 		options.push({ nameStr : "Fuck",
 			func : function() {
 				Text.Clear();
@@ -218,7 +218,7 @@ NagaScenes.DesertEncounter = function() {
 				Text.NL();
 				Text.Flush();
 
-				var ret = NagaScenes.DesertLossScenes(enc);
+				let ret = NagaScenes.DesertLossScenes(enc);
 
 				if(!ret) {
 					Text.Add("PLACEHOLDER...");
@@ -261,11 +261,11 @@ NagaScenes.DesertEncounter = function() {
 NagaScenes.DesertLoss = function() {
 	let player = GAME().player;
 	let party : Party = GAME().party;
-	var enc  = this;
-	var naga : Naga = enc.naga;
+	let enc  = this;
+	let naga : Naga = enc.naga;
 	SetGameState(GameState.Event, Gui);
 
-	var parse : any = {
+	let parse : any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -295,7 +295,7 @@ NagaScenes.DesertLoss = function() {
 			Text.Add(" You feel your [vag] moisten as you stare into your captor’s eyes, lubricating you liberally for the impending penetration.", parse);
 		Text.NL();
 
-		var ret = NagaScenes.DesertLossScenes(enc);
+		let ret = NagaScenes.DesertLossScenes(enc);
 
 		if(!ret) {
 			Text.Add("PLACEHOLDER...");
@@ -308,7 +308,7 @@ NagaScenes.DesertLoss = function() {
 
 NagaScenes.DesertLossScenes = function(enc : any) {
 	let player = GAME().player;
-	var scenes = new EncounterTable();
+	let scenes = new EncounterTable();
 	scenes.AddEnc(function() {
 		NagaScenes.DesertLossGetDPd(enc);
 		return true;
@@ -336,10 +336,10 @@ NagaScenes.DesertLossScenes = function(enc : any) {
 NagaScenes.DesertLossGetDPd = function(enc : any) {
 	let player = GAME().player;
 	let party : Party = GAME().party;
-	var naga : Naga = enc.naga;
+	let naga : Naga = enc.naga;
 	SetGameState(GameState.Event, Gui);
 
-	var parse : any = {
+	let parse : any = {
 
 	};
 
@@ -390,7 +390,7 @@ NagaScenes.DesertLossGetDPd = function(enc : any) {
 	Text.Add("<i>The real fun begins… <b>now!</b>”</i> the she-serpent shouts, grabbing your [nips] and twisting as she thrusts her hips forward once again, this time ramming her cocks in to the hilt in one savage motion. Both you and your lover scream in delight, your raw cries of uncontrolled pleasure creating an excellent harmony with the naga’s dominant exclamation of control and power. Brought over the edge, you cum, your [vag] squirting fem-spunk all over the naga’s bare midriff.", parse);
 	Text.NL();
 
-	var cum = player.OrgasmCum();
+	let cum = player.OrgasmCum();
 
 	if(player.FirstCock()) {
 		Text.Add("Your [cocks] begin[notS] to spasm, sympathetically climaxing with your [vag]. ", parse);
@@ -443,7 +443,7 @@ NagaScenes.DesertLossGetDPd = function(enc : any) {
 	Text.Add("The tip of the snake’s long tail is pushing its way into your maw, pressing your tongue down and poking at the back of your throat. The naga forces a length of her scaly appendage into your gullet and begins to slide it in and out in time with her cunt and ass destroyers. Effectively being triple penetrated now in this two-member gangbang, you lose control, your body shaking as another orgasm begins.", parse);
 	Text.NL();
 
-	var cum = player.OrgasmCum();
+	cum = player.OrgasmCum();
 
 	Text.Add("You feel your [anus] and [vag]’s muscles spasm and clench, beginning to milk the enormous invaders for all they’re worth. You don’t want a cum bath this time… you want to be <b>filled</b> with your mistress’ seed. As she once again picks up the pace, thrusting fast and deep, hilting with an audible slap of flesh on flesh at the end of each, you feel the thick shafts inside you throb faster. The naga is close as well, and she kneads and slaps your [butt] savagely between thrusts, clearly getting off even more on her dominance.", parse);
 	Text.NL();
@@ -478,19 +478,19 @@ NagaScenes.DesertLossGetDPd = function(enc : any) {
 NagaScenes.DesertLossUseCock = function(enc : any) {
 	let player = GAME().player;
 	let party : Party = GAME().party;
-	var naga : Naga = enc.naga;
+	let naga : Naga = enc.naga;
 	SetGameState(GameState.Event, Gui);
 
-	var p1cock = player.BiggestCock();
-	var allCocks = player.AllCocksCopy();
-	for(var i = 0; i < allCocks.length; i++) {
+	let p1cock = player.BiggestCock();
+	let allCocks = player.AllCocksCopy();
+	for(let i = 0; i < allCocks.length; i++) {
 		if(allCocks[i] == p1cock) {
 			allCocks.splice(i, 1);
 			break;
 		}
 	}
 
-	var parse : any = {
+	let parse : any = {
 		cocks2 : function() { return player.MultiCockDesc(allCocks); }
 	};
 
@@ -539,7 +539,7 @@ NagaScenes.DesertLossUseCock = function(enc : any) {
 	Text.Add("Soon, the majority of your [cock] escapes the naga’s mouth, although still being stimulated by her prehensile penis-licker. You moan as she lowers herself again, returning your shaft to the warmth inside of her with the speed you’d expect from a snake’s bite. Without stopping at the base this time, she blows you with increasing speed, waves of ecstasy from your [cock] wracking your body[b].", parse);
 	Text.NL();
 
-	var cum = player.OrgasmCum();
+	let cum = player.OrgasmCum();
 	parse["cum"] = cum > 6 ? "explode" :
 	               cum > 3 ? "erupt" :
 	               "burst";
@@ -555,7 +555,7 @@ NagaScenes.DesertLossUseCock = function(enc : any) {
 	Text.Add("Your eyes widen as the naga pulls her lips back in a wicked grin, exposing a pair of fangs protruding from her upper jaw. With no further warning, she sinks them into your crotch. You feel searing pain for a split-second, but it subsides immediately, replaced by a warm, tingling sensation as the naga pumps venom into your body. You gasp, losing your breath as your [cocks] surge[notS] with renewed vigor, swelling beyond [itsTheir] normal limit[s] while bobbing wildly and squirting pre-cum. You realize [itsTheyve] actually grown longer and thicker than [itThey] [wasWere] moments ago! A haze of lust fills your mind as your libido goes into overdrive almost like if you hadn’t felt release in months.", parse);
 	Text.NL();
 
-	var first = GameCache().flags["NagaVenom"] == 0;
+	let first = GameCache().flags["NagaVenom"] == 0;
 	GameCache().flags["NagaVenom"]++;
 
 	if(player.HasBalls()) {
@@ -624,7 +624,7 @@ NagaScenes.DesertLossUseCock = function(enc : any) {
 	Text.Add("Geysers of alabaster jizz stream from her massive pricks, most of it soaring over you onto the desert sands with the force of her climax, but some lands on your [breasts], covering them in a thick coat of hot, sticky cum. A flood of femcum bursts from the naga’s slit, and as you feel it seep into the skin of your [cock] and crotch, your body convulses, your denied orgasms coming back to you with a vengeance and bringing you to a furious double climax.", parse);
 	Text.NL();
 
-	var cum = player.OrgasmCum(3);
+	cum = player.OrgasmCum(3);
 
 	if(player.HasBalls()) {
 		Text.Add("Your [balls] tighten and you feel the need within them overflow as your climax begins. ", parse);
@@ -655,15 +655,15 @@ NagaScenes.DesertLossUseCock = function(enc : any) {
 
 	TimeStep({hour: 2});
 
-	var cocks = player.AllCocks();
-	var len = false, thk = false;
-	for(var i = 0; i < cocks.length; i++) {
-		var inc  = cocks[i].length.IncreaseStat(50, 3);
-		var inc2 = cocks[i].thickness.IncreaseStat(12, 1);
+	let cocks = player.AllCocks();
+	let len = false, thk = false;
+	for(let i = 0; i < cocks.length; i++) {
+		let inc  = cocks[i].length.IncreaseStat(50, 3);
+		let inc2 = cocks[i].thickness.IncreaseStat(12, 1);
 		len = len || inc;
 		thk = thk || inc2;
 	}
-	var grown = len || thk;
+	let grown = len || thk;
 
 	Gui.NextPrompt(function() {
 		Text.Clear();
@@ -696,11 +696,11 @@ NagaScenes.DesertLossUseCock = function(enc : any) {
 NagaScenes.DesertWinPrompt = function() {
 	let player = GAME().player;
 	let party : Party = GAME().party;
-	var enc  = this;
-	var naga : Naga = enc.naga;
+	let enc  = this;
+	let naga : Naga = enc.naga;
 	SetGameState(GameState.Event, Gui);
 
-	var parse : any = {
+	let parse : any = {
 		master : player.mfFem("master", "mistress")
 	};
 
@@ -729,12 +729,12 @@ NagaScenes.DesertWinPrompt = function() {
 NagaScenes.DesertWinPrompt2 = function(enc : any, hypno : boolean) {
 	let player = GAME().player;
 	let party : Party = GAME().party;
-	var naga : Naga = enc.naga;
+	let naga : Naga = enc.naga;
 
-	var parse : any = {};
+	let parse : any = {};
 
 	//[Fuck][Hypnotize][Leave]
-	var options = new Array();
+	let options = new Array();
 	if(player.FirstCock()) {
 		options.push({ nameStr : "Fuck & Jerk",
 			func : function() {
@@ -786,7 +786,7 @@ NagaScenes.DesertWinPrompt2 = function(enc : any, hypno : boolean) {
 				Text.Add(" You turn and walk away from the entranced naga.", parse);
 			Text.NL();
 
-			var scenes = new EncounterTable();
+			let scenes = new EncounterTable();
 			scenes.AddEnc(function() {
 				Text.Add("Whimpering, she starts to follow you, clearly still hoping for release at your hands. You notice her pursuit and tell her in no uncertain terms that you’re done with her. Just before you turn away again, you notice her slither off, no doubt to look for something else to satisfy her heated loins.", parse);
 			}, 1.0, function() { return true; });
@@ -815,9 +815,9 @@ NagaScenes.DesertWinPrompt2 = function(enc : any, hypno : boolean) {
 
 NagaScenes.DesertWinHypnotize = function(enc : any) {
 	let player = GAME().player;
-	var naga : Naga = enc.naga;
+	let naga : Naga = enc.naga;
 
-	var parse : any = {};
+	let parse : any = {};
 
 	parse = player.ParserTags(parse);
 	parse = naga.ParserTags(parse, "n");
@@ -840,9 +840,9 @@ NagaScenes.DesertWinHypnotize = function(enc : any) {
 
 NagaScenes.DesertWinHypnotizeOwn = function(enc : any) {
 	let player = GAME().player;
-	var naga : Naga = enc.naga;
+	let naga : Naga = enc.naga;
 
-	var parse : any = {
+	let parse : any = {
 		master : player.mfFem("master", "mistress")
 	};
 
@@ -866,11 +866,11 @@ NagaScenes.DesertWinHypnotizeOwn = function(enc : any) {
 
 NagaScenes.DesertWinFuckJerk = function(enc : any, hypno : boolean) {
 	let player = GAME().player;
-	var naga : Naga = enc.naga;
+	let naga : Naga = enc.naga;
 
-	var p1cock = player.BiggestCock();
+	let p1cock = player.BiggestCock();
 
-	var parse : any = {
+	let parse : any = {
 		master  : player.mfFem("master", "mistress"),
 		biggest : player.NumCocks() > 1 ? " biggest" : ""
 	};
@@ -916,7 +916,7 @@ NagaScenes.DesertWinFuckJerk = function(enc : any, hypno : boolean) {
 	Text.Add("Glancing upward, you notice the naga is now vigorously kneading her [nbreasts], pausing only briefly to twist and tweak her [nnips], biting her lower lip each time she does. Her tongue slips out of her mouth to assist her hands in pleasuring her chest. The snake-slut’s wanton display only serves to further fuel your sex drive, and you take the opportunity to shove the first three inches of your rock-hard shaft into her tight, rippling cunt. The naga screams in pleasure as your maleness penetrates her, the walls of her pussy practically vibrating against your [cock].", parse);
 	Text.NL();
 
-	var exp = hypno ? 4 : 3;
+	let exp = hypno ? 4 : 3;
 
 	Sex.Vaginal(player, naga);
 	naga.FuckVag(naga.FirstVag(), p1cock, exp);
@@ -955,7 +955,7 @@ NagaScenes.DesertWinFuckJerk = function(enc : any, hypno : boolean) {
 	Text.NL();
 	Text.Add("The tight, milking sensations on your [cock] build to a fever pitch, and you feel pleasure flooding your loins. ", parse);
 	if(player.HasBalls()) {
-		var sacksize = player.Balls().SackSize();
+		let sacksize = player.Balls().SackSize();
 		parse["sack"] = sacksize < 4 ? "tight pouch" :
 		                sacksize < 8 ? "plump sack" : "heaving nutsack";
 		Text.Add("Your [sack] clenches around your [balls] as you practically feel your spunk surging to your buried prick. ", parse);
@@ -966,7 +966,7 @@ NagaScenes.DesertWinFuckJerk = function(enc : any, hypno : boolean) {
 		Text.Add(" Your clit presses against her scaly tail and you grind your hips, sending jolts of ecstasy to your unused [vag], inviting it to the pleasure party your cock[s] [isAre] about to throw.", parse);
 	Text.NL();
 
-	var cum = player.OrgasmCum();
+	let cum = player.OrgasmCum();
 
 	Text.Add("The snake screams, her twin shafts bulging obscenely as they erupt; thick globs of her off-white jizz soar through the desert air to either side of her. You feel your [cock] following suit, injecting your own steaming seed deep inside the naga’s love tunnel. ", parse);
 	if(player.NumCocks() > 1) {
@@ -1000,12 +1000,12 @@ NagaScenes.DesertWinGetFuckedVag = function(enc : any, hypno : boolean) {
 	let party : Party = GAME().party;
 	Text.Clear();
 
-	var naga : Naga = enc.naga;
+	let naga : Naga = enc.naga;
 
-	var p1cock = player.BiggestCock();
-	var vag = player.FirstVag();
+	let p1cock = player.BiggestCock();
+	let vag = player.FirstVag();
 
-	var parse : any = {
+	let parse : any = {
 		master  : player.mfFem("master", "mistress"),
 		biggest : player.NumCocks() > 1 ? " biggest" : ""
 	};
@@ -1063,7 +1063,7 @@ NagaScenes.DesertWinGetFuckedVag = function(enc : any, hypno : boolean) {
 	if(player.FirstCock()) {
 		parse["y"] = player.NumCocks() > 1 ? "One of y" : "Y";
 		parse["c"] = player.NumCocks() > 1 ? " biggest" : "";
-		var len = p1cock.Len();
+		let len = p1cock.Len();
 		parse["len"] = len < 13 ? "completely dwarfed by" :
 		               len < 23 ? "barely comparing to" :
 		               len < 38 ? "competing nicely with" : "dominating";
@@ -1099,7 +1099,7 @@ NagaScenes.DesertWinGetFuckedVag = function(enc : any, hypno : boolean) {
 
 	NagaScenes.DesertWinTailpeg({naga : naga, hypno : hypno,
 		next : function(tailPeg : boolean) {
-			var sens = 0;
+			let sens = 0;
 			if(tailPeg) sens++;
 			if(player.FirstCock()) sens++;
 
@@ -1113,7 +1113,7 @@ NagaScenes.DesertWinGetFuckedVag = function(enc : any, hypno : boolean) {
 			Text.Add("Your [vag]’s orgasm wracks your form, and your upper body curves backward from your [hips] to your head, your spasming muscles locking you into a crescent shape. The naga screams in delight as your fingers, still locked around her [nnips], pull roughly on her [nbreasts], adding to her own overflowing pleasure. You feel long, intense surges of warmth travel through the cock lodged inside your cunt, the snake-slut pumping a huge amount of her cum straight into your welcoming tunnel.", parse);
 			Text.NL();
 
-			var cum = player.OrgasmCum();
+			let cum = player.OrgasmCum();
 
 			if(player.FirstCock()) {
 				parse["c"] = player.NumCocks() > 1 ? "Each of y" : "Y";
@@ -1144,17 +1144,17 @@ NagaScenes.DesertWinGetFuckedVag = function(enc : any, hypno : boolean) {
 
 NagaScenes.DesertWinTailpeg = function(opts : any) {
 	let player = GAME().player;
-	var parse : any = {
+	let parse : any = {
 
 	};
 
 	parse = player.ParserTags(parse);
-	var next  = opts.next || Gui.PrintDefaultOptions;
-	var naga : Naga = opts.naga || new Naga();
-	var hypno : boolean = opts.hypno || false;
+	let next  = opts.next || Gui.PrintDefaultOptions;
+	let naga : Naga = opts.naga || new Naga();
+	let hypno : boolean = opts.hypno || false;
 
 	//[Tailpeg][No]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Tailpeg",
 		func : function() {
 			Text.Clear();
@@ -1195,9 +1195,9 @@ NagaScenes.DesertWinTailpeg = function(opts : any) {
 NagaScenes.DesertNagaMating = function(naga : Naga) {
 	let player = GAME().player;
 	let party : Party = GAME().party;
-	var p1cock = player.BiggestCock();
+	let p1cock = player.BiggestCock();
 
-	var parse : any = {
+	let parse : any = {
 		boyGirl : player.mfTrue("boy", "girl")
 	};
 	parse = player.ParserTags(parse);
@@ -1226,7 +1226,7 @@ NagaScenes.DesertNagaMating = function(naga : Naga) {
 	Text.Add("Gasping as she breaks the kiss, the naga smiles, your lips connected momentarily by a thin strand of saliva. Her full, supple breasts rub gently against your [breasts], their nipples tickling your [skin]. <i>“It’s time, pet. From now on, you’ll be my mate!”</i> the naga informs you, her tone somehow both commanding and loving.", parse);
 	Text.NL();
 
-	var scenes = new EncounterTable();
+	let scenes = new EncounterTable();
 	scenes.AddEnc(function() {
 		Text.Add("Your dominant lover slides her thick, pre-cum drooling shafts into position, lining up the tip of one against the entrance of your [vag] while the other angles upward along your torso. The naga presses her lips to yours, kissing you passionately as she pushes her pulsating cock into you, its counterpart sliding against you pleasantly, smearing her sticky, fragrant musk up your midsection. She wraps her tongue around yours - coiling it to match your intertwined tails - as she penetrates you, her member filling you with heat and setting your pussy alight with pleasure.", parse);
 		Text.NL();
@@ -1248,7 +1248,7 @@ NagaScenes.DesertNagaMating = function(naga : Naga) {
 
 		NagaScenes.Impregnate(player, naga, PregnancyHandler.Slot.Vag);
 
-		var cum = player.OrgasmCum();
+		let cum = player.OrgasmCum();
 
 		if(player.FirstCock()) {
 			Text.Add("Your own neglected [cocks] take[notS] the match of your lover’s climax with your kitty’s as invitation to join the jism-party. [ItThey] sympathetically spray[notS] your own cum into the sticky mess between your torso and your mate’s. Your body is completely wracked with orgasmic pleasure as you’re pleased in so many ways at once. Your mind goes blank for a few seconds, so completely overloaded by ecstasy that you can’t even begin to think about anything else.", parse);
@@ -1282,7 +1282,7 @@ NagaScenes.DesertNagaMating = function(naga : Naga) {
 		parse["c3"] = player.NumCocks() > 1 ? " and your own" : "";
 
 		Text.Add("Your mistress’ thick, oozing cocks press between both your midsections and slide up along your [skin][c], coaxing gentle moans of ecstasy from[c2] her lips[c3]. The soft, bountiful globes of the naga’s breasts glide across the surface of your [breasts], tickling your flesh pleasantly.", parse);
-		var size = player.FirstBreastRow().Size();
+		let size = player.FirstBreastRow().Size();
 		if(size > 3) {
 			Text.Add(" Your own soft bosom smooshes against your mate’s, forming a delicious vise of flesh and stimulating your [nips] as they brush against hers. You both moan as your nubs pop free on each slippery body-on-body movement, tugged on by flesh until they finally slip free.", parse);
 		}
@@ -1298,7 +1298,7 @@ NagaScenes.DesertNagaMating = function(naga : Naga) {
 		Text.Add("After what seems an eternity of entwined rapture, you and your mate cry out in fervent passion as her slit swallows you to the hilt one last time. You feel her pussy quake and tremble even as it milks your [cock] with machine-like ardor. Her reptilian cunt gushes around your engulfed member, spewing femcum out to soak the upper region of your own serpentine tail. Meanwhile, her pair of massive cocks throbs and pulsates, unleashing a deluge of her seed upward to splatter against[b] your [breasts], your collarbone and face. Your whole upper body is bathed in serpent spunk in short order, even your [hair] gets its share of thick naga cum to soak in.", parse);
 		Text.NL();
 
-		var cum = player.OrgasmCum();
+		let cum = player.OrgasmCum();
 
 		Text.Add("With such intense stimulation, not to mention the intense cumbath, your cock finally succumbs to the pleasure, a torrential surge of cum flooding the naga’s cunt, painting her walls white. Her moans intensify with the surge of heat inside her, and she quivers in delight at the cream filling you’re giving her.", parse);
 		if(player.NumCocks() > 1)

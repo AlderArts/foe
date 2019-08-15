@@ -76,9 +76,9 @@ export class CatboyMage extends Entity {
 
 		this.elementDef.dmg[Element.mWater]  = -0.5;
 
-		var level = 0;
+		let level = 0;
 
-		var scenes = new EncounterTable();
+		let scenes = new EncounterTable();
 		scenes.AddEnc(function() {
 			level = 9;
 		}, 4.0, function() { return true; });
@@ -121,7 +121,7 @@ export class CatboyMage extends Entity {
 	}
 
 	DropTable() {
-		var drops = [];
+		let drops = [];
 		if(Math.random() < 0.1)  drops.push({ it: AlchemyItems.Felinix });
 		if(Math.random() < 0.02) drops.push({ it: AlchemySpecial.Tigris });
 		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.Whiskers });
@@ -159,12 +159,12 @@ export class CatboyMage extends Entity {
 		Text.Flush();
 
 		// Pick a random target
-		var targets = this.GetPartyTarget(encounter, activeChar);
-		var t = this.GetSingleTarget(encounter, activeChar);
+		let targets = this.GetPartyTarget(encounter, activeChar);
+		let t = this.GetSingleTarget(encounter, activeChar);
 
 		this.turnCounter = this.turnCounter || 0;
 
-		var first = (this.turnCounter == 0);
+		let first = (this.turnCounter == 0);
 		this.turnCounter++;
 
 		if(first) {
@@ -172,9 +172,9 @@ export class CatboyMage extends Entity {
 			return;
 		}
 
-		var that = this;
+		let that = this;
 
-		var scenes = new EncounterTable();
+		let scenes = new EncounterTable();
 		scenes.AddEnc(function() {
 			Abilities.Attack.Use(encounter, that, t);
 		}, 1.0, function() { return true; });
@@ -245,9 +245,9 @@ export class CentaurMare extends Entity {
 
 		this.elementDef.dmg[Element.mEarth]  = 0.5;
 
-		var level = 0;
+		let level = 0;
 
-		var scenes = new EncounterTable();
+		let scenes = new EncounterTable();
 		scenes.AddEnc(function() {
 			level = 9;
 		}, 4.0, function() { return true; });
@@ -291,7 +291,7 @@ export class CentaurMare extends Entity {
 	}
 
 	DropTable() {
-		var drops = [];
+		let drops = [];
 	
 		if(Math.random() < 0.1)  drops.push({ it: AlchemyItems.Equinium });
 		if(Math.random() < 0.05) drops.push({ it: AlchemySpecial.Taurico });
@@ -328,11 +328,11 @@ export class CentaurMare extends Entity {
 		Text.Flush();
 	
 		// Pick a random target
-		var t = this.GetSingleTarget(encounter, activeChar);
+		let t = this.GetSingleTarget(encounter, activeChar);
 	
-		var that = this;
+		let that = this;
 	
-		var scenes = new EncounterTable();
+		let scenes = new EncounterTable();
 	
 		scenes.AddEnc(function() {
 			Abilities.Attack.Use(encounter, that, t);
@@ -393,9 +393,9 @@ export class GoatAlchemist extends Entity {
 		this.elementDef.dmg[Element.mIce]  =  0.5;
 		this.elementDef.dmg[Element.mFire] = -0.5;
 
-		var level = 0;
+		let level = 0;
 
-		var scenes = new EncounterTable();
+		let scenes = new EncounterTable();
 		scenes.AddEnc(function() {
 			level = 9;
 		}, 4.0, function() { return true; });
@@ -438,7 +438,7 @@ export class GoatAlchemist extends Entity {
 
 
 	DropTable() {
-		var drops = [];
+		let drops = [];
 		if(Math.random() < 0.1)  drops.push({ it: AlchemyItems.Caprinium });
 		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.Ramshorn });
 		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.GoatMilk });
@@ -473,15 +473,15 @@ export class GoatAlchemist extends Entity {
 		Text.Flush();
 	
 		// Pick a random target
-		var targets = this.GetPartyTarget(encounter, activeChar);
-		var t = this.GetSingleTarget(encounter, activeChar);
+		let targets = this.GetPartyTarget(encounter, activeChar);
+		let t = this.GetSingleTarget(encounter, activeChar);
 		
-		var allies = this.GetPartyTarget(encounter, activeChar, true);
-		var ally = this.GetSingleTarget(encounter, activeChar, TargetStrategy.LowHp, true);
+		let allies = this.GetPartyTarget(encounter, activeChar, true);
+		let ally = this.GetSingleTarget(encounter, activeChar, TargetStrategy.LowHp, true);
 	
-		var that = this;
+		let that = this;
 	
-		var scenes = new EncounterTable();
+		let scenes = new EncounterTable();
 		//Offensive
 		scenes.AddEnc(function() {
 			Abilities.Attack.Use(encounter, that, t);
@@ -516,14 +516,14 @@ export class GoatAlchemist extends Entity {
 MaliceScoutsScenes.Catboy.LoneEncounter = function(levelbonus : number) {
 	let player = GAME().player;
 	let party : Party = GAME().party;
-	var enemy    = new Party();
-	var catboy   = new CatboyMage(levelbonus);
+	let enemy    = new Party();
+	let catboy   = new CatboyMage(levelbonus);
 	enemy.AddMember(catboy);
-	var enc : any = new Encounter(enemy);
+	let enc : any = new Encounter(enemy);
 	enc.catboy   = catboy;
 
 	enc.onEncounter = function() {
-		var parse : any = {
+		let parse : any = {
 			day : WorldTime().LightStr("sun beats down warmly", "moon shines softly")
 		};
 		parse = player.ParserTags(parse);
@@ -577,10 +577,10 @@ MaliceScoutsScenes.Catboy.LoneEncounter = function(levelbonus : number) {
 MaliceScoutsScenes.Catboy.WinPrompt = function() {
 	let player = GAME().player;
 	let party : Party = GAME().party;
-	var enc  = this;
+	let enc  = this;
 	SetGameState(GameState.Event, Gui);
 
-	var parse : any = {
+	let parse : any = {
 
 	};
 
@@ -617,7 +617,7 @@ MaliceScoutsScenes.Catboy.WinPrompt = function() {
 		Text.Add("Yeah, hopeless. What’re you going to do with this poor sop?", parse);
 		Text.Flush();
 
-		var options = [];
+		let options = [];
 
 		options.push({nameStr : "Petting",
 			tooltip : Text.Parse("Aww, what a pathetic little kitty. Why don’t you give him a scratch?", parse),
@@ -671,9 +671,9 @@ MaliceScoutsScenes.Catboy.WinPrompt = function() {
 MaliceScoutsScenes.Catboy.PityFuck = function(enc : any, win : boolean) {
 	let player = GAME().player;
 	let party : Party = GAME().party;
-	var catboy = enc.catboy;
-	var p1cock = player.BiggestCock();
-	var parse : any = {
+	let catboy = enc.catboy;
+	let p1cock = player.BiggestCock();
+	let parse : any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -868,9 +868,9 @@ MaliceScoutsScenes.Catboy.PityFuck = function(enc : any, win : boolean) {
 
 MaliceScoutsScenes.Catboy.PetPlay = function(enc : any) {
 	let player = GAME().player;
-	var catboy = enc.catboy;
-	var p1cock = player.BiggestCock();
-	var parse : any = {
+	let catboy = enc.catboy;
+	let p1cock = player.BiggestCock();
+	let parse : any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -927,7 +927,7 @@ MaliceScoutsScenes.Catboy.PetPlay = function(enc : any) {
 	Text.Add(".", parse);
 	Text.NL();
 
-	var scenes = new EncounterTable();
+	let scenes = new EncounterTable();
 	scenes.AddEnc(function() {
 		Text.Add("At the sight of your womanly flower, the catboy’s eyes go wide to sickeningly sweet proportions. The entirety of his body trembles with repressed need - he’s clearly fighting it, trying to be an obedient, good kitty in the face of your commands, but it’s a losing battle that he’s waging against his treacherous body.", parse);
 		Text.NL();
@@ -1062,7 +1062,7 @@ MaliceScoutsScenes.Catboy.PetPlay = function(enc : any) {
 			Text.Add(" Not to be left out, your other dick[s2] [isAre2] quick to add [itsTheir2] generous addition[s2] to his already tasty treat.", parse);
 		Text.NL();
 
-		var cum = player.OrgasmCum();
+		let cum = player.OrgasmCum();
 
 		if(cum > 7) {
 			Text.Add("Try as you might to hold back, you can’t slow, let alone stifle the deluge of thick, gooey cum that’s built up in ", parse);
@@ -1140,7 +1140,7 @@ MaliceScoutsScenes.Catboy.PetPlay = function(enc : any) {
 
 MaliceScoutsScenes.Catboy.Petting = function(enc : any) {
 	let player = GAME().player;
-	var parse : any = {
+	let parse : any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -1178,7 +1178,7 @@ MaliceScoutsScenes.Catboy.Petting = function(enc : any) {
 	Text.Flush();
 
 	//[Handjob][Tease]
-	var options = [];
+	let options = [];
 	options.push({nameStr : "Handjob",
 		tooltip : Text.Parse("Why not give the poor pent-up kitty a hand?", parse),
 		enabled : true,
@@ -1264,9 +1264,9 @@ MaliceScoutsScenes.Catboy.LossPrompt = function() {
 	Text.Clear();
 
 	// this = encounter
-	var enc = this;
+	let enc = this;
 
-	var parse : any = {
+	let parse : any = {
 
 	};
 
@@ -1281,7 +1281,7 @@ MaliceScoutsScenes.Catboy.LossPrompt = function() {
 				parse["hasHave"] = "have";
 			}
 			else {
-				var p1 = party.Get(1);
+				let p1 = party.Get(1);
 				parse["comp"]    = p1.name;
 				parse["notS"]    = "s";
 				parse["heshe"]   = p1.heshe();
@@ -1300,7 +1300,7 @@ MaliceScoutsScenes.Catboy.LossPrompt = function() {
 		//TODO Scenes
 		//Return true for valid scenes, indicating successful scene proc
 
-		var scenes = new EncounterTable();
+		let scenes = new EncounterTable();
 
 		scenes.AddEnc(function() {
 			MaliceScoutsScenes.Catboy.PityFuck(enc, false);
@@ -1318,7 +1318,7 @@ MaliceScoutsScenes.Catboy.LossPrompt = function() {
 			return true;
 		}, 1.0, function() { return true; });
 		*/
-		var ret = scenes.Get();
+		let ret = scenes.Get();
 
 		// Default fallback
 		if(!ret) {
@@ -1334,8 +1334,8 @@ MaliceScoutsScenes.Catboy.LossPrompt = function() {
 
 MaliceScoutsScenes.Catboy.GetMilked = function(enc : any) {
 	let player = GAME().player;
-	var catboy = enc.catboy;
-	var parse : any = {
+	let catboy = enc.catboy;
+	let parse : any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -1363,7 +1363,7 @@ MaliceScoutsScenes.Catboy.GetMilked = function(enc : any) {
 	Text.NL();
 	Text.Add("Pleasant tingles run through the lady lump in question, spreading out into the rest of your chest as his warm lips begin applying pressure to get your milk flowing; it’s clear he’s no stranger to this. Try as you might, you can’t help but grin and take the chance to run your fingers through his white hair and large, fluffy ears; he purrs gloriously, eyes closing in pure bliss as you tuck him against your breast while he nurses.", parse);
 	Text.NL();
-	var lactation = player.LactHandler().Rate();
+	let lactation = player.LactHandler().Rate();
 	if(lactation <= 1) {
 		Text.Add("Continuing to mewl to himself, the catboy suckles harder and harder until your feel your milk let down in a flush of warmth from the base of your breast; a pleasant trickle of your milky goodness runs from your nipple into his mouth. Although there’s not that much to be had, his rough, sandpapery tongue rubs against your [nip] until you’re a moaning wreck, coaxing every last drop of nourishing cream that you’ve to spare.", parse);
 		Text.NL();
@@ -1434,14 +1434,14 @@ MaliceScoutsScenes.Catboy.GetMilked = function(enc : any) {
 
 MaliceScoutsScenes.Mare.LoneEncounter = function(levelbonus : number) {
 	let player = GAME().player;
-	var enemy    = new Party();
-	var mare     = new CentaurMare(levelbonus);
+	let enemy    = new Party();
+	let mare     = new CentaurMare(levelbonus);
 	enemy.AddMember(mare);
-	var enc : any = new Encounter(enemy);
+	let enc : any = new Encounter(enemy);
 	enc.mare     = mare;
 
 	enc.onEncounter = function() {
-		var parse : any = {
+		let parse : any = {
 
 		};
 		parse = player.ParserTags(parse);
@@ -1472,7 +1472,7 @@ MaliceScoutsScenes.Mare.LoneEncounter = function(levelbonus : number) {
 		Text.Flush();
 
 		//[Yes][No]
-		var options = [];
+		let options = [];
 		options.push({nameStr : "Yes",
 			tooltip : Text.Parse("Oh, why not? She’s clearly in a bad spot.", parse),
 			enabled : true,
@@ -1531,10 +1531,10 @@ MaliceScoutsScenes.Mare.LoneEncounter = function(levelbonus : number) {
 
 MaliceScoutsScenes.Mare.WinPrompt = function() {
 	let player = GAME().player;
-	var enc  = this;
+	let enc  = this;
 	SetGameState(GameState.Event, Gui);
 
-	var parse : any = {
+	let parse : any = {
 
 	};
 
@@ -1548,10 +1548,10 @@ MaliceScoutsScenes.Mare.WinPrompt = function() {
 		Text.Flush();
 
 		//[Walk away][Fuck][Fist]
-		var options = [];
+		let options = [];
 
 		if(player.FirstCock()) {
-			var p1cock = player.BiggestCock();
+			let p1cock = player.BiggestCock();
 			options.push({nameStr : "Fuck",
 				tooltip : Text.Parse("Give her what she wants - but on your terms.", parse),
 				enabled : function() { return player.HasLegs() && p1cock.Len() >= 25; }, //Gotta have legs and a 10" cock
@@ -1604,9 +1604,9 @@ MaliceScoutsScenes.Mare.WinPrompt = function() {
 
 MaliceScoutsScenes.Mare.WinFuck = function(enc : any) {
 	let player = GAME().player;
-	var mare   = enc.mare;
-	var p1cock = player.BiggestCock();
-	var parse : any = {
+	let mare   = enc.mare;
+	let p1cock = player.BiggestCock();
+	let parse : any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -1690,7 +1690,7 @@ MaliceScoutsScenes.Mare.WinFuck = function(enc : any) {
 		Text.Add("Sensing the first signs that you’re about to blow, the centaur mare’s body reacts just as quickly, driving her mind over the edge with a loud whinny of delight that echoes about the hilly countryside. Her body tenses in preparation to receive your load, and so you dump it all into her in a wonderfully glorious fashion. Her cunt squeezes about your shaft, desperately milking you for all you’re worth, but it’s not as if you need any extra encouragement to do your best.", parse);
 		Text.NL();
 
-		var cum = player.OrgasmCum();
+		let cum = player.OrgasmCum();
 
 		if(cum >= 8) {
 			Text.Add("You’re not exactly sure how long you spend unloading your seed into the centaur mare, but you know what they say - time flies when you’re having fun. As the first rush of spunk floods the mare’s tunnel, she gasps orgasmically and writhes in your grasp, thrown into ecstasy by the sheer sensation of being filled with baby batter like this.", parse);
@@ -1845,7 +1845,7 @@ MaliceScoutsScenes.Mare.WinFuck = function(enc : any) {
 			Text.Add(" Even now, you feel your knot swelling and growing, greedily tying the two of you together, corking her cunt to make sure that as little of your sperm escapes as possible.", parse);
 		Text.NL();
 
-		var cum = player.OrgasmCum();
+		let cum = player.OrgasmCum();
 
 		if(cum >= 8) {
 			Text.Add("And what a load this one is. The deluge of spunk that’s been kept in reserve within you jets from your [cockTip] like water from a fire hose, an overwhelming sensation of delight washing over your entire body as you feel thick, hot jism run down the entirety of your shaft, down, down, down -", parse);
@@ -1919,9 +1919,9 @@ MaliceScoutsScenes.Mare.WinFuck = function(enc : any) {
 
 MaliceScoutsScenes.Mare.WinFist = function(enc : any) {
 	let player = GAME().player;
-	var mare   = enc.mare;
-	var p1cock = player.BiggestCock();
-	var parse : any = {
+	let mare   = enc.mare;
+	let p1cock = player.BiggestCock();
+	let parse : any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -2035,7 +2035,7 @@ MaliceScoutsScenes.Mare.LossPrompt = function() {
 	// this = encounter
 	let enc = this;
 
-	var parse : any = {
+	let parse : any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -2056,7 +2056,7 @@ MaliceScoutsScenes.Mare.LossPrompt = function() {
 		Text.Add("The centaur mare licks her lips. <i>“Then like it or not, I will take whatever I want from you anyway.”</i>", parse);
 		Text.NL();
 
-		var armor = "";
+		let armor = "";
 		if(player.Armor() || !player.LowerArmor()) armor += "[armor]";
 		if(player.Armor() && player.LowerArmor()) armor += " followed by your ";
 		if(player.LowerArmor()) armor += "[botarmor]";
@@ -2071,7 +2071,7 @@ MaliceScoutsScenes.Mare.LossPrompt = function() {
 
 MaliceScoutsScenes.Mare.LossEntry = function(enc : any) {
 	//TODO More Loss Scenes
-	var scenes = new EncounterTable();
+	let scenes = new EncounterTable();
 
 	scenes.AddEnc(function() {
 		MaliceScoutsScenes.Mare.LossFacesit(enc);
@@ -2088,7 +2088,7 @@ MaliceScoutsScenes.Mare.LossEntry = function(enc : any) {
 
 MaliceScoutsScenes.Mare.LossFacesit = function(enc : any) {
 	let player = GAME().player;
-	var parse : any = {
+	let parse : any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -2142,7 +2142,7 @@ MaliceScoutsScenes.Mare.LossFacesit = function(enc : any) {
 	Text.Add("And just like that, it’s over. It’s clear that the centaur mare has gotten some much-needed relief for her heat-filled cunt - hopefully by taking one for the team, she won’t be harassing travelers on the Highlands roads for some time now. Quick and dirty, with perhaps no real pleasure from the deed, but what needs to be done has been done.", parse);
 	Text.NL();
 
-	var armor = "";
+	let armor = "";
 	if(player.Armor() || !player.LowerArmor()) armor += "[armor]";
 	if(player.Armor() && player.LowerArmor()) armor += " followed by your ";
 	if(player.LowerArmor()) armor += "[botarmor]";
@@ -2165,14 +2165,14 @@ MaliceScoutsScenes.Mare.LossFacesit = function(enc : any) {
 MaliceScoutsScenes.Goat.LoneEncounter = function(levelbonus : number) {
 	let player = GAME().player;
 	let party : Party = GAME().party;
-	var enemy    = new Party();
-	var goat     = new GoatAlchemist(levelbonus);
+	let enemy    = new Party();
+	let goat     = new GoatAlchemist(levelbonus);
 	enemy.AddMember(goat);
-	var enc : any = new Encounter(enemy);
+	let enc : any = new Encounter(enemy);
 	enc.goat     = goat;
 
 	enc.onEncounter = function() {
-		var parse : any = {
+		let parse : any = {
 
 		};
 		parse = player.ParserTags(parse);
@@ -2225,10 +2225,10 @@ MaliceScoutsScenes.Goat.LoneEncounter = function(levelbonus : number) {
 }
 
 MaliceScoutsScenes.Goat.WinPrompt = function() {
-	var enc  = this;
+	let enc  = this;
 	SetGameState(GameState.Event, Gui);
 
-	var parse : any = {
+	let parse : any = {
 
 	};
 
@@ -2242,7 +2242,7 @@ MaliceScoutsScenes.Goat.WinPrompt = function() {
 		Text.Flush();
 		
 		//
-		var options = [];
+		let options = [];
 		options.push({nameStr : "Turn Tables",
 			tooltip : Text.Parse("So, he was planning to experiment on you? Turnabout is fair play.", parse),
 			enabled : true,
@@ -2280,8 +2280,8 @@ MaliceScoutsScenes.Goat.WinPrompt = function() {
 
 MaliceScoutsScenes.Goat.WinTurnTables = function(enc : any) {
 	let player = GAME().player;
-	var goat = enc.goat;
-	var parse : any = {
+	let goat = enc.goat;
+	let parse : any = {
 		
 	};
 	parse = player.ParserTags(parse);
@@ -2295,7 +2295,7 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc : any) {
 	Text.Add("Taking a deep breath, you reach into one of the belt’s many pockets and pull out the first thing your fingers close down upon, which just so happens to be ", parse);
 	
 	//Pick one random option from the below, and follow on from there:
-	var scenes = new EncounterTable();
+	let scenes = new EncounterTable();
 	//Grow-it-big cream
 	scenes.AddEnc(function() {
 		Text.Add("a large, solid ceramic tub sealed with plenty of wax. It takes a little bit of tugging for you to finally get the seal open - it’s <i>almost</i> as bad as a pickle jar. Not exactly as bad, but pretty darn close - and it parts with a pop. The heavy scent of cherries rises from the tub’s contents - a light, rosy-pink salve that looks as light and fluffy as whipped cream.", parse);
@@ -2332,8 +2332,8 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc : any) {
 		
 		//Structure this as such: random opening for each of the four body parts, followed by body-part specific portion. Alchemist and leave have their own blocks altogether.
 		
-		var intro = function() {
-			var scenes = new EncounterTable();
+		let intro = function() {
+			let scenes = new EncounterTable();
 			scenes.AddEnc(function() {
 				Text.Add("An idea begins forming in your mind, but your better sense grabs hold of you and shakes your consciousness silly until it’s sure you’re paying attention. Do you really want to do this? Apply to yourself the completely unverified and unvouched-for product of an old, nasty-smelling ruminant who in all probability hasn’t bathed for days?", parse);
 				Text.NL();
@@ -2380,7 +2380,7 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc : any) {
 		};
 		
 		//[Cock][Balls][Breasts][Vag][Alchemist][Leave]
-		var options = [];
+		let options = [];
 		if(player.FirstCock()) {
 			options.push({nameStr : "Cock",
 				tooltip : Text.Parse("Do you really have to think twice about this? Swab a batch on your [cocks].", parse),
@@ -2405,7 +2405,7 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc : any) {
 					}
 					Text.NL();
 
-					var cum = player.OrgasmCum();
+					let cum = player.OrgasmCum();
 
 					Text.Add("The alchemist moans weakly and tries to shield his face with his hands, but that’s pretty much all that he can do in his current state besides sputter and cough. Rope upon rope of steaming spunk splatters down upon him, getting in his tattered smock, in his hair, and even in his freshly formed cleavage.", parse);
 					Text.NL();
@@ -2447,8 +2447,8 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc : any) {
 					
 					TimeStep({hour: 1});
 					
-					var cocks = player.AllCocks();
-					for(var i = 0; i < cocks.length; i++) {
+					let cocks = player.AllCocks();
+					for(let i = 0; i < cocks.length; i++) {
 						cocks[i].length.IncreaseStat(80, 2);
 						cocks[i].thickness.IncreaseStat(15, 0.5);
 					}
@@ -2562,7 +2562,7 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc : any) {
 					Text.Add("Now comes the hard part - actually applying the stuff where it’s needed. Taking a deep breath, you mentally go through the steps of what you need to do next, then go ahead and bend over. ", parse);
 					Text.NL();
 					//TODO GROWTHRATE RANK
-					var dexrank = player.dexterity.GrowthRank();
+					let dexrank = player.dexterity.GrowthRank();
 					if(player.IsFlexible() || dexrank >= 15) {
 						Text.Add("Fortunately for you, you’re the fairly limber kind of person, so going through the contortions needed in order to get into position to fist yourself is no problem. As your gloved hands come into contact with your pussy lips, you feel a tingle of warmth emanate from them, worming its way up into your lower belly and sending shivers down your spine.", parse);
 						Text.NL();
@@ -2590,7 +2590,7 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc : any) {
 					Text.Add("That’s a very convincing reply - not. You’d pursue the matter further, if not for the distracting fact that you’ve got a lubed-up, gloved hand stuck in your cooch. That, and you’re starting to <i>really</i> feel the cream starting to do its work, tiny electric tingles working their way into your inner walls and traveling outwards into your hips.", parse);
 					Text.NL();
 
-					var cap = player.FirstVag().Capacity();
+					let cap = player.FirstVag().Capacity();
 
 					if(cap >= Capacity.gaping) {
 						Text.Add("The transformative takes hold almost immediately after, spreading outwards to fill the entirety of your stretchy womanhood. You’re unable to hold back a lewd moan as your cunt becomes ever more prominent and defined, the petals of your womanly flower swelling and thickening, glistening with arousal and need. They’re so plump and thick, they’re beginning to look almost kissable… you hold that thought in mind for a little longer, then lose it as yet more orgasmic sensations crash into you. Flowing ever further into your flesh, you can’t help but start feeling quite literally hollow as your mound protrudes ever further, growing more and more prominent as it struggles to hide all the excess vaginal flesh that you’re gaining.", parse);
@@ -2744,7 +2744,7 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc : any) {
 		Text.Add("What do you do now?", parse);
 		Text.Flush();
 		
-		var options = [];
+		let options = [];
 		//[Use][Don’t Use]
 		options.push({nameStr : "Use on him",
 			tooltip : Text.Parse("You really DO want to know just how this works…", parse),
@@ -2866,7 +2866,7 @@ MaliceScoutsScenes.Goat.LossPrompt = function() {
 	// this = encounter
 	let enc = this;
 
-	var parse : any = {
+	let parse : any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -2887,18 +2887,18 @@ MaliceScoutsScenes.Goat.LossPrompt = function() {
 
 MaliceScoutsScenes.Goat.LossEntry = function(enc : any) {
 	let player = GAME().player;
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	
 	//TODO More Loss Scenes
-	var scenes = new EncounterTable();
+	let scenes = new EncounterTable();
 
 	// Tentacle Pet
 	scenes.AddEnc(function() {
-		var tentacock = new Cock();
+		let tentacock = new Cock();
 		tentacock.type = CockType.tentacle;
 		tentacock.length.base = 50;
 		tentacock.thickness.base = 8;
@@ -2963,7 +2963,7 @@ MaliceScoutsScenes.Goat.LossEntry = function(enc : any) {
 			Text.NL();
 			player.AddSexExp(1);
 		}
-		//mouth block
+		// mouth block
 		Text.Add("Without you noticing, one of the moist, slimy tentacles has worked its way to mouth, taking advantage of your distraction in resisting your bindings to creep up on you. Before you know it, one of the thick, phallic tentacles has forced its way between your lips and pushed aside your tongue, quickly numbing your gag reflex and slipping down your throat.", parse);
 		Text.NL();
 		Text.Add("For some reason… it tastes like mint. Well, mint isn’t so bad - for a mysterious, slime-coated tentacle, it could have had a much worse flavor. Strawberries, perhaps.", parse);
@@ -2975,11 +2975,12 @@ MaliceScoutsScenes.Goat.LossEntry = function(enc : any) {
 		Text.Add("By now, even more clear blue tentacles have emerged from the box, writhing and pumping in the air in fits of excitement as they slither towards you, eager to join their fellows. Seems like you’re in for yet more fun…", parse);
 		Text.NL();
 		player.AddSexExp(1);
-		//breast block
+
+		let womb = player.PregHandler().Womb();
+		let preg = womb && womb.pregnant;
+
+		// breast block
 		if(player.FirstBreastRow().Size() > 7.5) { //D
-			var womb = player.PregHandler().Womb();
-			var preg = womb && womb.pregnant;
-			
 			Text.Add("Indeed, you steadily become aware of yet another cool slickness wrapping itself about your ", parse);
 			if(preg && womb.progress >= 0.4) {
 				Text.Add("pregnant, bulging", parse);
@@ -3104,7 +3105,7 @@ MaliceScoutsScenes.Goat.LossEntry = function(enc : any) {
 		Text.Add("Every bit as cool and slick as the moment they first grabbed you, the tentacles slither across your [skin], and you feel… <i>something</i> shift within their depths. All of a sudden, all that pent up need and hunger come rushing to the fore, swamping your brain with a mind-blowing blast of orgiastic pleasure. Spots swim before your eyes as white-hot flashes erupt in their sockets, and you feel faint and dizzy as your body is gripped by automatic instinct to fulfil its primal desires.", parse);
 		Text.NL();
 		
-		var cum = player.OrgasmCum(2);
+		let cum = player.OrgasmCum(2);
 		
 		if(player.FirstCock()) {
 			Text.Add("The first part of you to give way is your [cock]. Painfully erect and unyielding, it ", parse);
@@ -3236,7 +3237,7 @@ MaliceScoutsScenes.Goat.LossEntry = function(enc : any) {
 		Text.NL();
 		Text.Add("Have you heard that incantation before? It sounds distinctly familiar, a lingering recollection on the edge of your memory… your train of thought of halted in the middle of the line, though, by a distinct tingling sensation in your [breasts], followed by a steadily mounting pressure from within that begins to push outwards without regard for your [armor]. ", parse);
 		
-		var breastsize = player.FirstBreastRow().Size();
+		let breastsize = player.FirstBreastRow().Size();
 		
 		if(breastsize < 2) {
 			Text.Add("Groaning, you throw your head back and stare up stupidly at the sky as firm flesh gathers on your chest, warm pressure causing two gently raised points to bud outwards before the sensation turns upon itself and washes back into the rest of your body. Rubbing the afflicted area only seems to amplify the pleasure further, and that’s what you end up doing - just unthinkingly rubbing away like a trained monkey while the perverted old goat takes notes.", parse);
@@ -3344,20 +3345,20 @@ MaliceScoutsScenes.Goat.LossEntry = function(enc : any) {
 MaliceScoutsScenes.Group.Encounter = function(levelbonus : number) {
 	let player = GAME().player;
 	let party : Party = GAME().party;
-	var enemy    = new Party();
-	var catboy   = new CatboyMage(levelbonus);
-	var goat     = new GoatAlchemist(levelbonus);
-	var mare     = new CentaurMare(levelbonus);
+	let enemy    = new Party();
+	let catboy   = new CatboyMage(levelbonus);
+	let goat     = new GoatAlchemist(levelbonus);
+	let mare     = new CentaurMare(levelbonus);
 	enemy.AddMember(catboy);
 	enemy.AddMember(goat);
 	enemy.AddMember(mare);
-	var enc : any = new Encounter(enemy);
+	let enc : any = new Encounter(enemy);
 	enc.catboy   = catboy;
 	enc.goat     = goat;
 	enc.mare     = mare;
 
 	enc.onEncounter = function() {
-		var parse : any = {
+		let parse : any = {
 			himher : player.mfFem("him", "her")
 		};
 
@@ -3418,10 +3419,10 @@ MaliceScoutsScenes.Group.Encounter = function(levelbonus : number) {
 
 MaliceScoutsScenes.Group.WinPrompt = function() {
 	let player = GAME().player;
-	var enc  = this;
+	let enc  = this;
 	SetGameState(GameState.Event, Gui);
 
-	var parse : any = {
+	let parse : any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -3435,7 +3436,7 @@ MaliceScoutsScenes.Group.WinPrompt = function() {
 		Text.Add("What do you do?", parse);
 		Text.Flush();
 
-		var options : any[] = [];
+		let options : any[] = [];
 		/* TODO
 		options.push({nameStr : "",
 			tooltip : Text.Parse("", parse),
@@ -3476,9 +3477,9 @@ MaliceScoutsScenes.Group.LossPrompt = function() {
 	Text.Clear();
 
 	// this = encounter
-	var enc = this;
+	let enc = this;
 
-	var parse : any = {
+	let parse : any = {
 
 	};
 
@@ -3492,7 +3493,7 @@ MaliceScoutsScenes.Group.LossPrompt = function() {
 				parse["himher"]  = "they";
 			}
 			else {
-				var p1 = party.Get(1);
+				let p1 = party.Get(1);
 				parse["comp"]    = p1.name;
 				parse["isAre"]   = "is";
 				parse["himher"]  = p1.himher();
@@ -3509,9 +3510,9 @@ MaliceScoutsScenes.Group.LossPrompt = function() {
 		//#randomly go to one of the below options
 		
 		
-		var catlike = player.RaceCompare(Race.Feline);
+		let catlike = player.RaceCompare(Race.Feline);
 
-		var scenes = new EncounterTable();
+		let scenes = new EncounterTable();
 		scenes.AddEnc(function() {
 			MaliceScoutsScenes.Group.LossCatboyForcedTF(enc);
 		}, 1.0, function() { return true; });
@@ -3536,9 +3537,9 @@ MaliceScoutsScenes.Group.LossPrompt = function() {
 
 MaliceScoutsScenes.Group.LossCatboyForcedTF = function(enc : any) {
 	let player = GAME().player;
-	var catboy = enc.catboy;
+	let catboy = enc.catboy;
 	
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	parse = player.ParserTags(parse);
@@ -3571,7 +3572,7 @@ MaliceScoutsScenes.Group.LossCatboyForcedTF = function(enc : any) {
 	Text.Add("<i>“Hey!”</i> the mare shouts as the transformed catboy’s thick, meaty arm wraps about her waist. <i>“Not me, you doofus!”</i> She looks about for the alchemist, but he’s long since vanished, perhaps headed for a safe vantage point from which to view the fruits of his work. <i>“Come back and tell this brute to let go of me! You didn’t say that he would -”</i>", parse);
 	Text.NL();
 	
-	var armor = "";
+	let armor = "";
 	if(player.Armor() || !player.LowerArmor()) armor += "[armor]";
 	if(player.Armor() && player.LowerArmor()) armor += " and ";
 	if(player.LowerArmor()) armor += "[botarmor]";
@@ -3614,8 +3615,8 @@ MaliceScoutsScenes.Group.LossCatboyForcedTF = function(enc : any) {
 			Text.Add("Time passes in a blur as your head swims and vision dims, your senses overwhelmed by the catboy’s forceful fucking. At last, though, an ominous twitching deep within your body jerks you back to groggy awareness just in time for the catboy to unleash the contents of his balls straight into your womb. Throwing his head back, the feline lets out a bestial roar not too unlike that of a lion’s, and then a torrential surge of spunk flows straight into you.", parse);
 			Text.NL();
 			
-			var womb = player.PregHandler().Womb();
-			var preg = womb && womb.pregnant;
+			let womb = player.PregHandler().Womb();
+			let preg = womb && womb.pregnant;
 			
 			if(preg && womb.progress >= 0.2) {
 				Text.Add("Being already knocked up, you can’t get any <i>more</i> pregnant than you already are - that sort of thing’s reserved for broody birds - but neither the catboy nor his cum care one whit for what you or your body wants. Another roar rends the air about the standing stones, and you can only groan and hang limply as your already swollen womb grows ever bigger as it’s pumped full of seed.", parse);
@@ -3623,8 +3624,8 @@ MaliceScoutsScenes.Group.LossCatboyForcedTF = function(enc : any) {
 				Text.Add("Bigger and bigger, rounder and rounder - you can <i>feel</i> your unborn progeny being bathed in the catboy’s thick spunk, and the roaring deluge only serves to make you even more aroused. Unable to retain its shape with cock, child and cum all weighing down upon it, your glistening, stretched belly distends and drops, producing a delightful oblong shape.", parse);
 			}
 			else {
-				var womb = player.PregHandler().Womb({slot: PregnancyHandler.Slot.Butt});
-				var preg = womb && womb.pregnant;
+				let womb = player.PregHandler().Womb({slot: PregnancyHandler.Slot.Butt});
+				let preg = womb && womb.pregnant;
 				parse["swollen"] = (preg && womb.progress >= 0.4) ? "already-swollen" : "still-relatively-flat";
 				Text.Add("Unable to withstand the deluge of baby batter racing into it, your [swollen] belly rapidly swells and distends as if the catboy’s seed had already taken root and was quickening into a batch of kittens at an inhuman rate. You can practically <i>feel</i> muscles stretching and organs giving way to make room for the growing reservoir of spunk within you - first looking to be four months along, then nine, then heavily overdue… and you’re still growing.", parse);
 				Text.NL();
@@ -3761,7 +3762,7 @@ MaliceScoutsScenes.Group.LossCatboyForcedTF = function(enc : any) {
 MaliceScoutsScenes.Group.LossMagicalBondage = function(enc : any) {
 	let player = GAME().player;
 	let party : Party = GAME().party;
-	var parse : any = {
+	let parse : any = {
 		hisher : player.mfTrue("his", "her"),
 		himher : player.mfTrue("him", "her")
 	};
@@ -3885,7 +3886,7 @@ MaliceScoutsScenes.Group.LossMagicalBondage = function(enc : any) {
 		else if(player.SubDom() >= -30) {
 			Text.Add("You have no good answer for the alchemist, instead deciding to hold on as long as possible and hope that the alchemist’s perverted research will be done before your strength finally gives out.", parse);
 			Text.NL();
-			var gen = "";
+			let gen = "";
 			if(player.FirstCock()) gen += "[cocks]";
 			if(player.FirstCock() && player.FirstVag()) gen += " and ";
 			if(player.FirstVag()) gen += "[vag]";
@@ -3893,7 +3894,7 @@ MaliceScoutsScenes.Group.LossMagicalBondage = function(enc : any) {
 			Text.Add("Smack after smack lands on your slight rump, and perhaps out of desperation or a bid to get <i>something</i> useful out of this, your body starts to feel a bit horny despite the constant stinging pain from the machine’s repeated smackings. The heat of arousal blossoms in your loins, briefly creeping into your lower belly before concentrating in your [gen]. Running on automatic, you moan softly into the bit in your mouth and squirm against the magical bonds keeping you trussed up in the air, trying to work off the lust your traitorous body is accumulating.", parse);
 		}
 		else {
-			var gen = "";
+			let gen = "";
 			if(player.FirstCock()) gen += "your manhood[s] to stiffening, rapidly swelling with arousal and beads of pre gathering on your [cockTip][s]";
 			if(player.FirstCock() && player.FirstVag()) gen += " even as your lustful thoughts get the better of you. You moan as tingles run from your manhood[s] into your femininity, turning ";
 			if(player.FirstVag()) gen += "your honeypot into a sweltering heat, and you squirm about in your magical bonds as the sudden flush of desire that makes you need to be filled";
@@ -3926,7 +3927,7 @@ MaliceScoutsScenes.Group.LossMagicalBondage = function(enc : any) {
 			Text.NL();
 			Text.Add("<i>“Oh, I guess you sure look mad, but the rest of you isn’t. Look at it, eh? Pretty turned on, I’d say.”</i>", parse);
 			Text.NL();
-			var gen = "";
+			let gen = "";
 			if(player.FirstCock()) gen += "your [cocks] start[notS] to twitch and throb";
 			if(player.FirstCock() && player.FirstVag()) gen += " and ";
 			if(player.FirstVag()) gen += "your gash grows slick";
@@ -3939,7 +3940,7 @@ MaliceScoutsScenes.Group.LossMagicalBondage = function(enc : any) {
 			Text.Add("You butt cheeks aren’t the only cheeks that’re flushed - heat is creeping into your face and blossoming in your breast, and you wiggle with increased agitation against the magical bonds keeping you suspended in the air. Not that you would be doing much even if you managed to break free, of course, not with the alchemist and his cronies but a few feet away. Like it or not, you’re utterly helpless and at their mercy… and it’s more than a little arousing.", parse);
 		}
 		else {
-			var catlike = player.RaceCompare(Race.Feline);
+			let catlike = player.RaceCompare(Race.Feline);
 			
 			Text.Add("Reveling in the luxurious glow of being beaten and punished, you let out a low, muffled moan, practically purring in delight ", parse);
 			if(catlike >= 0.4)
@@ -3990,7 +3991,7 @@ MaliceScoutsScenes.Group.LossMagicalBondage = function(enc : any) {
 		Text.NL();
 	}
 
-	var cum = player.OrgasmCum();
+	let cum = player.OrgasmCum();
 
 	Text.Add("Another glance at your captors. The centauress is decidedly not looking at you, while the catboy is doing the same, only with a bright blush on his face. Yeah, you’re not going to get anything out of them.", parse);
 	Text.NL();
@@ -4088,15 +4089,15 @@ MaliceScoutsScenes.Group.LossMagicalBondage = function(enc : any) {
 
 MaliceScoutsScenes.Group.LossCatRape = function(enc : any) {
 	let player = GAME().player;
-	var catboy = enc.catboy;
+	let catboy = enc.catboy;
 	
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	
-	var virgin = player.FirstVag().virgin;
+	let virgin = player.FirstVag().virgin;
 	
 	Text.Add("<i>“Yes?”</i>", parse);
 	Text.NL();
@@ -4241,7 +4242,7 @@ MaliceScoutsScenes.Group.LossCatRape = function(enc : any) {
 	
 	MaliceScoutsScenes.Catboy.Impregnate(player, catboy);
 	
-	var cum = player.OrgasmCum();
+	let cum = player.OrgasmCum();
 	
 	Text.Add("He yowls again and thrusts again furiously, those cartilaginous pleasure-barbs rubbing against your insides and sending your body to quaking. ", parse);
 	if(player.FirstCock()) {

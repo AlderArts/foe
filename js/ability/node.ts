@@ -11,7 +11,7 @@ import { Party } from '../party';
 let AbilityNode : any = {};
 
 AbilityNode.DefaultParser = function(caster : Entity, target : Entity) {
-	var parse : any = {};
+	let parse : any = {};
 	
 	if(caster) {
 		parse         = caster.ParserPronouns(parse);
@@ -47,23 +47,21 @@ AbilityNode.DefaultParser = function(caster : Entity, target : Entity) {
 
 AbilityNode.Template = {};
 
-AbilityNode.Template.Blank = function(node : any) {
-	node = node || {};
-	
+AbilityNode.Template.Blank = function(node : any = {}) {
 	node.damageType = node.damageType ? new DamageType(node.damageType) : null;
-	
+
 	node.cost       = node.cost     || { hp: null, sp: null, lp: null};
 
-	/*	
+	/*
 	node.onCast     = node.onCast   || [];
 	node.onHit      = node.onHit    || [];
 	node.onMiss     = node.onMiss   || [];
 	node.onDamage   = node.onDamage || [];
 	node.onAbsorb   = node.onAbsorb || [];
-	
+
 	node.hitFallen  = node.hitFallen;
 	node.retarget   = node.retarget;
-	
+
 	node.hitMod     = node.hitMod;
 	node.atkMod     = node.atkMod;
 	node.defMod     = node.defMod;
@@ -71,17 +69,16 @@ AbilityNode.Template.Blank = function(node : any) {
 	node.toHit      = _.has(node, 'toHit')    ? node.toHit    : AbilityNode.ToHit.Regular;
 	node.toDamage   = _.has(node, 'toDamage') ? node.toDamage : AbilityNode.ToDamage.Regular;
 	node.damagePool = node.damagePool || [];
-	
+
 	node.hitFunc    = node.hitFunc    || AbilityNode.HitFunc.Physical;
 	node.evadeFunc  = node.evadeFunc  || AbilityNode.EvadeFunc.Physical;
 	node.atkFunc    = node.atkFunc    || AbilityNode.AtkFunc.Physical;
 	node.defFunc    = node.defFunc    || AbilityNode.DefFunc.Physical;
 	node.damageFunc = node.damageFunc || AbilityNode.DamageFunc.Physical;
-	
+
 	return _.bind(AbilityNode.Run, node);
 }
-AbilityNode.Template.Physical = function(node : any) {
-	var node = node || {};
+AbilityNode.Template.Physical = function(node : any = {}) {
 	/*
 	node.hitFallen = node.hitFallen;
 	node.retarget  = node.retarget;
@@ -100,8 +97,7 @@ AbilityNode.Template.Physical = function(node : any) {
 	
 	return _.bind(AbilityNode.Run, node);
 }
-AbilityNode.Template.Magical = function(node : any) {
-	var node = node || {};
+AbilityNode.Template.Magical = function(node : any = {}) {
 	/*
 	node.hitFallen = node.hitFallen;
 	node.retarget  = node.retarget;
@@ -120,8 +116,7 @@ AbilityNode.Template.Magical = function(node : any) {
 	
 	return _.bind(AbilityNode.Run, node);
 }
-AbilityNode.Template.Lust = function(node : any) {
-	var node = node || {};
+AbilityNode.Template.Lust = function(node : any = {}) {
 	/*
 	node.hitFallen = node.hitFallen;
 	node.retarget  = node.retarget;
@@ -140,8 +135,7 @@ AbilityNode.Template.Lust = function(node : any) {
 	
 	return _.bind(AbilityNode.Run, node);
 }
-AbilityNode.Template.Heal = function(node : any) {
-	var node = node || {};
+AbilityNode.Template.Heal = function(node : any = {}) {
 	/*
 	node.hitFallen = node.hitFallen;
 	node.retarget  = node.retarget;
@@ -159,9 +153,7 @@ AbilityNode.Template.Heal = function(node : any) {
 	
 	return _.bind(AbilityNode.Run, node);
 }
-AbilityNode.Template.Fallthrough = function(node : any) {
-	var node = node || {};
-
+AbilityNode.Template.Fallthrough = function(node : any = {}) {
 	node.onDamage  = node.onDamage || [];
 	node.onAbsorb  = node.onAbsorb || [];
 
@@ -172,12 +164,12 @@ AbilityNode.Template.Fallthrough = function(node : any) {
 	return _.bind(AbilityNode.RunFallthrough, node);
 }
 AbilityNode.RunFallthrough = function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity, result : any) {
-	var that = this;
-	var fraction = that.fraction || 1;
+	let that = this;
+	let fraction = that.fraction || 1;
 	
-	var dmg = fraction * result;
+	let dmg = fraction * result;
 	
-	var onattack = that.damageFunc(caster, target, dmg);
+	let onattack = that.damageFunc(caster, target, dmg);
 	
 	if(onattack) {
 		// On dealing damage (dmg is negative)
@@ -195,25 +187,23 @@ AbilityNode.RunFallthrough = function(ability : Ability, encounter : Encounter, 
 	}
 }
 
-AbilityNode.Template.AddSpellstack = function(node : any) {
-	var node = node || {};
+AbilityNode.Template.AddSpellstack = function(node : any = {}) {
 	/*
 	node.value = node.value;
 	*/
 	return _.bind(AbilityNode.RunAddSpellstack, node);
 }
 AbilityNode.RunAddSpellstack = function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity, result : any) {
-	var that = this;
+	let that = this;
 	
-	var value = _.isFunction(that.value) ? that.value() : that.value;
+	let value = _.isFunction(that.value) ? that.value() : that.value;
 	
-	var entry = target.GetCombatEntry(encounter);
+	let entry = target.GetCombatEntry(encounter);
 	entry.spellstack = entry.spellstack || [];
 	entry.spellstack.push(value);
 }
 
-AbilityNode.Template.MatchSpellstack = function(node : any) {
-	var node = node || {};
+AbilityNode.Template.MatchSpellstack = function(node : any = {}) {
 	/*
 	node.consume = node.consume;
 	 */
@@ -227,15 +217,15 @@ AbilityNode.Template.MatchSpellstack = function(node : any) {
 	return _.bind(AbilityNode.RunMatchSpellstack, node);
 }
 AbilityNode.RunMatchSpellstack = function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity, result : any) {
-	var that = this;
+	let that = this;
 	
-	var consume = that.consume;
-	var entry = target.GetCombatEntry(encounter);
-	var spellstack = entry.spellstack || [];
-	var stack = that.stack;
-	var match = true;
+	let consume = that.consume;
+	let entry = target.GetCombatEntry(encounter);
+	let spellstack = entry.spellstack || [];
+	let stack = that.stack;
+	let match = true;
 	if(spellstack.length >= stack.length) {
-		var first = 0;
+		let first = 0;
 		_.each(stack, function(spell) {
 			first = _.indexOf(spellstack, spell, first);
 			if(first == -1) {
@@ -263,8 +253,7 @@ AbilityNode.RunMatchSpellstack = function(ability : Ability, encounter : Encount
 	}
 }
 
-AbilityNode.Template.Cancel = function(node : any) {
-	var node = node || {};
+AbilityNode.Template.Cancel = function(node : any = {}) {
 	/*
 	node.result = node.result;
 	*/
@@ -273,20 +262,20 @@ AbilityNode.Template.Cancel = function(node : any) {
 	return _.bind(AbilityNode.RunCancel, node);
 }
 AbilityNode.RunCancel = function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity, result : any) {
-	var that = this;
-	var entry = target.GetCombatEntry(encounter);
+	let that = this;
+	let entry = target.GetCombatEntry(encounter);
 	// Only trigger if target is casting
 	if(entry && entry.casting) {
 		// Override result
 		result = that.result || result;
 		// Is casted ability cancellable?
-		var cancellable = entry.casting.ability.cancellable;
+		let cancellable = entry.casting.ability.cancellable;
 		// Check if applicable in this situation (for super special cancels)
 		if(_.isFunction(cancellable))
 			cancellable = cancellable(ability, encounter, caster, target, result);
 		// When all is said and done, proceed?
 		if(cancellable && target.CanBeInterrupted(ability, encounter, caster, result)) {
-			var parse = AbilityNode.DefaultParser(caster, target);
+			let parse = AbilityNode.DefaultParser(caster, target);
 			Text.NL();
 			Text.Add("[tPoss] concentration is broken!", parse, 'bold');
 			Text.NL();
@@ -311,9 +300,9 @@ AbilityNode.ToHit.StrikeThrough = function(caster : Entity, target : Entity) {
 	return true;
 }
 AbilityNode.ToHit.Regular = function(caster : Entity, target : Entity) {
-	var hitMod = this.hitMod || 1;
-	var hit    = hitMod * this.hitFunc(caster, target);
-	var evade  = this.evadeFunc(caster, target);
+	let hitMod = this.hitMod || 1;
+	let hit    = hitMod * this.hitFunc(caster, target);
+	let evade  = this.evadeFunc(caster, target);
 	
 	return Ability.ToHit(hit, evade);
 }
@@ -342,15 +331,15 @@ AbilityNode.EvadeFunc.Lust = function(caster : Entity, target : Entity) {
 
 AbilityNode.ToDamage = {};
 AbilityNode.ToDamage.Regular = function(caster : Entity, target : Entity) {
-	var damageType = this.damageType ? this.damageType : caster.elementAtk;
-	var atkMod     = this.atkMod || 1;
-	var defMod     = this.defMod || 1;
+	let damageType = this.damageType ? this.damageType : caster.elementAtk;
+	let atkMod     = this.atkMod || 1;
+	let defMod     = this.defMod || 1;
 	
-	var atkDmg     = atkMod * this.atkFunc(caster, target);
-	var def        = defMod * this.defFunc(caster, target);
+	let atkDmg     = atkMod * this.atkFunc(caster, target);
+	let def        = defMod * this.defFunc(caster, target);
 	
-	//var dmg = atkDmg - def;
-	var dmg = Ability.Damage(atkDmg, def, caster.level, target.level);
+	//let dmg = atkDmg - def;
+	let dmg = Ability.Damage(atkDmg, def, caster.level, target.level);
 	if(dmg < 0) dmg = 0;
 	
 	dmg = damageType.ApplyDmgType(target.elementDef, dmg);
@@ -359,9 +348,9 @@ AbilityNode.ToDamage.Regular = function(caster : Entity, target : Entity) {
 	return -dmg;
 }
 AbilityNode.ToDamage.Heal = function(caster : Entity, target : Entity) {
-	var atkMod  = this.atkMod || 1;
+	let atkMod  = this.atkMod || 1;
 	
-	var healing = atkMod * this.atkFunc(caster, target);
+	let healing = atkMod * this.atkFunc(caster, target);
 	
 	if(healing < 0) healing = 0;
 	healing = Math.floor(healing);
@@ -395,9 +384,9 @@ AbilityNode.DamageFunc = {};
 AbilityNode.DamageFunc.Physical = function(encounter : Encounter, caster : Entity, target : Entity, dmg: number) {
 	if(target.PhysDmgHP(encounter, caster, dmg)) {
 		// Reduce defense due to bad status effect
-		var weakness = target.combatStatus.stats[StatusEffect.Weakness];
+		let weakness = target.combatStatus.stats[StatusEffect.Weakness];
 		if(weakness) {
-			var reduction = target.LustLevel() * weakness.str;
+			let reduction = target.LustLevel() * weakness.str;
 			dmg += dmg * reduction;
 			dmg = Math.floor(dmg);
 		}
@@ -428,9 +417,9 @@ AbilityNode.DamagePool.Lust = function(ability : Ability, encounter : Encounter,
 AbilityNode.Retarget = {};
 AbilityNode.Retarget.Fallen = function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity, result : any) {
 	if(!_.has(target, 'members') && target.Incapacitated()) {
-		var entry = target.GetCombatEntry(encounter);
+		let entry = target.GetCombatEntry(encounter);
 		if(entry) {
-			var group = GAME().party.members;
+			let group = GAME().party.members;
 			if(entry.isEnemy)
 				group = encounter.enemy.members;
 			target = _.sample(_.filter(group, function(e) {
@@ -443,7 +432,7 @@ AbilityNode.Retarget.Fallen = function(ability : Ability, encounter : Encounter,
 }
 
 AbilityNode.Run = function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity|Party|any, result : any) {
-	var that = this;
+	let that = this;
 	
 	if(that.retarget) {
 		target = that.retarget(ability, encounter, caster, target, result);
@@ -459,9 +448,9 @@ AbilityNode.Run = function(ability : Ability, encounter : Encounter, caster : En
 	// Drain cost	
 	Ability.ApplyCost(that, caster);
 	
-	var targets = _.has(target, 'members') ? target.members : [target];
+	let targets = _.has(target, 'members') ? target.members : [target];
 	
-	var nrAttacks = that.nrAttacks;
+	let nrAttacks = that.nrAttacks;
 	if(_.isFunction(nrAttacks))
 		nrAttacks = nrAttacks(ability, encounter, caster, target, result);
 	else if(!_.isNumber(nrAttacks))
@@ -473,12 +462,12 @@ AbilityNode.Run = function(ability : Ability, encounter : Encounter, caster : En
 		if(!that.hitFallen && e.Incapacitated()) return;
 		// For x number of strikes
 		_.times(nrAttacks, function() {
-			var hit = that.toHit ? Math.random() < that.toHit(caster, e) : true;
+			let hit = that.toHit ? Math.random() < that.toHit(caster, e) : true;
 			// Check if it hits
 			if(hit) {
 				// If it can damage
 				if(that.toDamage) {
-					var dmg = that.toDamage(caster, e);
+					let dmg = that.toDamage(caster, e);
 					
 					if(that.damageFunc)
 						dmg = that.damageFunc(encounter, caster, e, dmg);

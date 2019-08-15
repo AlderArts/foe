@@ -25,12 +25,12 @@ export class Farm {
 	FromStorage(storage : any) {
 		this.coin = parseInt(storage.coin) || this.coin;
 		// Load flags
-		for(var flag in storage.flags)
+		for(let flag in storage.flags)
 			this.flags[flag] = parseInt(storage.flags[flag]);
 	}
 
 	ToStorage() {
-		var storage : any = {};
+		let storage : any = {};
 		storage.coin  = this.coin;
 		storage.flags = this.flags;
 

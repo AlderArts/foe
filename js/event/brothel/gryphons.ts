@@ -46,7 +46,7 @@ export class Gryphons extends Entity {
 	}
 	
 	ToStorage() {
-		var storage = {};
+		let storage = {};
 		
 		this.SaveFlags(storage);
 		
@@ -67,15 +67,15 @@ export namespace GryphonsScenes {
 		let gryphons = GAME().gryphons;
 		let lucille = GAME().lucille;
 
-		var parse : any = {
+		let parse : any = {
 			armor : player.ArmorDesc(),
 			skin : player.SkinDesc()
 		};
 		
-		var choice = GryphonsState.NotViewed;
-		var gender = Gender.male;
+		let choice = GryphonsState.NotViewed;
+		let gender = Gender.male;
 		
-		var func = function(c : GryphonsState, gen : Gender) {
+		let func = function(c : GryphonsState, gen : Gender) {
 			return function() {
 				choice = c;
 				gender = gen;
@@ -136,7 +136,7 @@ export namespace GryphonsScenes {
 		Text.Clear();
 		
 		//TODO
-		var options = new Array();
+		let options = new Array();
 		options.push({ nameStr : "World's Edge",
 			tooltip : "",
 			func : func(GryphonsState.S1WorldsEdge, Gender.male), enabled : true
@@ -198,25 +198,25 @@ export namespace GryphonsScenes {
 	export function Outro(gender : Gender, preg? : number) {
 		let player = GAME().player;
 		let gryphons = GAME().gryphons;
-		var parse : any = {
+		let parse : any = {
 			
 		};
 		
 		parse = player.ParserTags(parse);
 		parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 		
-		var TFapplied = false;
+		let TFapplied = false;
 		
 		Text.Clear();
 		Text.Add("As the illusion fades, you feel… odd, your gem pulsing with a strange light. A quick examination of yourself reveals that you have indeed changed, perhaps some effect of the mirror’s magic.", parse);
 		Text.NL();
 		
-		var scenes = new EncounterTable();
+		let scenes = new EncounterTable();
 		
-		var incompleteGryphonCockTF = function() {
+		let incompleteGryphonCockTF = function() {
 			if(!player.FirstCock()) return false;
 			if(!player.Genitalia().Sheath()) return true;
-			var change = false;
+			let change = false;
 			_.each(player.AllCocks(), function(c) {
 				if(!c.Knot()) change = true;
 				if(!c.race.isRace(Race.Gryphon)) change = true;
@@ -225,7 +225,7 @@ export namespace GryphonsScenes {
 			return change;
 		}
 		
-		var incompleteGryphonFaceTF = function() {
+		let incompleteGryphonFaceTF = function() {
 			if(!player.Ears().race.isRace(Race.Gryphon)) return true;
 			if(!player.Eyes().race.isRace(Race.Gryphon)) return true;
 			if(player.HasAntenna()) return true;
@@ -234,9 +234,9 @@ export namespace GryphonsScenes {
 			return false;
 		};
 		
-		var incompleteGryphonTF = function() {
-			var wings = player.HasWings();
-			var tail = player.HasTail();
+		let incompleteGryphonTF = function() {
+			let wings = player.HasWings();
+			let tail = player.HasTail();
 			if(!wings || (wings && !wings.race.isRace(Race.Gryphon))) return true;
 			if(tail && !tail.race.isRace(Race.Lion)) return true;
 			if(!player.Race().isRace(Race.Gryphon)) return true;
@@ -247,7 +247,7 @@ export namespace GryphonsScenes {
 			return false;
 		};
 		
-		var func = function(obj : any) {
+		let func = function(obj : any) {
 			scenes.AddEnc(function() {
 				TFapplied = true;
 				return _.isFunction(obj.tf) ? obj.tf() : "";
@@ -257,8 +257,8 @@ export namespace GryphonsScenes {
 		func({
 			tf: function() {
 				let t : string;
-				var wings = player.HasWings();
-				var tail = player.HasTail();
+				let wings = player.HasWings();
+				let tail = player.HasTail();
 				if(!wings || (wings && !wings.race.isRace(Race.Gryphon))) {
 					t = "You feel a strange new weight on your back, a sensation of heaviness and resistance, and to your surprise, you find you’ve grown a pair of wide, powerful wings tipped with white feathers.";
 					if(wings) {
@@ -302,9 +302,9 @@ export namespace GryphonsScenes {
 					return t;
 				}
 				else if(incompleteGryphonCockTF()) {
-					var parse2 : any = {};
+					let parse2 : any = {};
 					parse2 = Text.ParserPlural(parse2, player.NumCocks() > 1);
-					var cscenes = new EncounterTable();
+					let cscenes = new EncounterTable();
 					_.each(player.AllCocks(), function(c) {
 						parse2["cock"] = c.Short();
 						
@@ -345,16 +345,16 @@ export namespace GryphonsScenes {
 		});
 		
 		if(gender == Gender.male && player.FirstCock()) {
-			var parse2 : any = {};
+			let parse2 : any = {};
 			parse2 = Text.ParserPlural(parse2, player.NumCocks() > 1);
 			
-			var incompleteCockSizeOne = function(c : Cock) {
+			let incompleteCockSizeOne = function(c : Cock) {
 				if(c.Len() < 28) return true;
 				if(c.Thickness() < 5) return true;
 				return false;
 			};
-			var incompleteCockSize = function() {
-				var changed = false;
+			let incompleteCockSize = function() {
+				let changed = false;
 				_.each(player.AllCocks(), function(c) {
 					changed = incompleteCockSizeOne(c);
 					if(changed) return false; //break
@@ -364,7 +364,7 @@ export namespace GryphonsScenes {
 		
 			func({
 				tf: function() {
-					var scenes = new EncounterTable();
+					let scenes = new EncounterTable();
 					_.each(player.AllCocks(), function(c) {
 						scenes.AddEnc(function() {
 							if(c.Len() < 28)
@@ -416,11 +416,11 @@ export namespace GryphonsScenes {
 			});
 		}
 		else if(gender == Gender.female && player.FirstVag()) { //female
-			var parse2 : any = {
+			let parse2 : any = {
 				breasts : player.FirstBreastRow().Short()
 			};
-			var incompleteVagSize = function() {
-				var changed = false;
+			let incompleteVagSize = function() {
+				let changed = false;
 				_.each(player.AllVags(), function(v) {
 					if(v.capacity.Get() < 10) changed = true;
 					if(v.minStretch.Get() < Capacity.loose) changed = true;
@@ -428,16 +428,16 @@ export namespace GryphonsScenes {
 				});
 				return changed;
 			};
-			var incompleteBreastSize = function() {
-				var changed = false;
+			let incompleteBreastSize = function() {
+				let changed = false;
 				_.each(player.AllBreastRows(), function(b) {
 					if(b.size.Get() < 10) changed = true;
 					if(changed) return false; //break
 				});
 				return changed;
 			};
-			var incompleteNipSize = function() {
-				var changed = false;
+			let incompleteNipSize = function() {
+				let changed = false;
 				_.each(player.AllBreastRows(), function(b) {
 					if(b.nippleThickness.Get() < 2) changed = true;
 					if(b.nippleLength.Get() < 2) changed = true;
@@ -494,7 +494,7 @@ export namespace GryphonsScenes {
 			});
 			func({
 				tf: function() {
-					var ret = player.Lactation();
+					let ret = player.Lactation();
 					player.lactHandler.lactating = true;
 					player.lactHandler.FillMilk(1);
 					player.lactHandler.milkProduction.IncreaseStat(5, 1);
@@ -542,7 +542,7 @@ export namespace GryphonsScenes {
 			});
 		}
 		
-		var text : string[] = [];
+		let text : string[] = [];
 		_.times(_.random(1, 4), function() {
 			text.push(scenes.Get());
 		});
@@ -571,7 +571,7 @@ export namespace GryphonsScenes {
 
 	//Chapter one - World’s Edge
 	export function WorldsEdge() {
-		var parse : any = {
+		let parse : any = {
 			
 		};
 		
@@ -630,7 +630,7 @@ export namespace GryphonsScenes {
 				Text.Flush();
 				
 				//[Undergrowth][Waterfall][Sky]
-				var options = new Array();
+				let options = new Array();
 				options.push({ nameStr : "Undergrowth",
 					tooltip : "Move from the cover of vegetation, and strike when the time is right.",
 					func : function() {
@@ -700,7 +700,7 @@ export namespace GryphonsScenes {
 	}
 
 	export function WorldsEdgeCaught() {
-		var parse : any = {
+		let parse : any = {
 			
 		};
 		
@@ -803,12 +803,12 @@ export namespace GryphonsScenes {
 	}
 
 	export function WorldsEdgeQuestions(opts : any) {
-		var parse : any = {
+		let parse : any = {
 			
 		};
 		
 		//[Name][Others][Land]
-		var options = new Array();
+		let options = new Array();
 		if(!opts.Name) {
 			options.push({ nameStr : "Name",
 				tooltip : "What’s her name?",
@@ -861,7 +861,7 @@ export namespace GryphonsScenes {
 	}
 
 	export function WorldsEdgeSexytimes() {
-		var parse : any = {
+		let parse : any = {
 			
 		};
 		
@@ -968,7 +968,7 @@ export namespace GryphonsScenes {
 
 	// Chapter two - Pasts
 	export function Pasts() {
-		var parse : any = {
+		let parse : any = {
 			
 		};
 		
@@ -1043,7 +1043,7 @@ export namespace GryphonsScenes {
 				Text.Flush();
 				
 				//[Wash][Help Out]
-				var options = new Array();
+				let options = new Array();
 				options.push({ nameStr : "Wash",
 					tooltip : "Well, if he’s willing to do all the work, you’ll just enjoy a little soak.",
 					func : function() {
@@ -1094,7 +1094,7 @@ export namespace GryphonsScenes {
 	}
 
 	export function PastsWashed() {
-		var parse : any = {
+		let parse : any = {
 			
 		};
 		
@@ -1227,7 +1227,7 @@ export namespace GryphonsScenes {
 					Text.Flush();
 					
 					//[Ask][Watch]
-					var options = new Array();
+					let options = new Array();
 					options.push({ nameStr : "Ask",
 						tooltip : "Ask him what he’s up to.",
 						func : function() {
@@ -1263,7 +1263,7 @@ export namespace GryphonsScenes {
 	}
 
 	export function PastsRemembrance() {
-		var parse : any = {
+		let parse : any = {
 			
 		};
 		
@@ -1324,7 +1324,7 @@ export namespace GryphonsScenes {
 			Text.Flush();
 			
 			//[Hot][Content][Worried]
-			var options = new Array();
+			let options = new Array();
 			options.push({ nameStr : "Hot",
 				tooltip : "",
 				func : function() {
@@ -1365,7 +1365,7 @@ export namespace GryphonsScenes {
 	}
 
 	export function PastsSexytimes(preg : number) {
-		var parse : any = {
+		let parse : any = {
 			
 		};
 		
@@ -1441,7 +1441,7 @@ export namespace GryphonsScenes {
 		Text.Flush();
 		
 		//[Proud][Pleased][Shy]
-		var options = new Array();
+		let options = new Array();
 		options.push({ nameStr : "Proud",
 			tooltip : "",
 			func : function() {
@@ -1495,7 +1495,7 @@ export namespace GryphonsScenes {
 	}
 
 	export function PastsSexytimes2(preg : number) {
-		var parse : any = {
+		let parse : any = {
 			
 		};
 		
@@ -1558,7 +1558,7 @@ export namespace GryphonsScenes {
 	}
 
 	export function Building() {
-		var parse : any = {
+		let parse : any = {
 			
 		};
 		
@@ -1672,7 +1672,7 @@ export namespace GryphonsScenes {
 			Text.Flush();
 			
 			//[Satisfied][Dissatisfied]
-			var options = new Array();
+			let options = new Array();
 			options.push({ nameStr : "Satisfied",
 				tooltip : "It’s not much, but it’s the best you could do under these circumstances.",
 				func : function() {
@@ -1714,7 +1714,7 @@ export namespace GryphonsScenes {
 				Text.Flush();
 				
 				//[Aggressive][Diplomatic][Thoughtful]
-				var options = new Array();
+				let options = new Array();
 				options.push({ nameStr : "Aggressive",
 					tooltip : "Make it clear that if they’re here to cause trouble, you’re more than willing to fight.",
 					func : function() {
@@ -1830,11 +1830,11 @@ export namespace GryphonsScenes {
 
 	export function NewLife() {
 		let player = GAME().player;
-		var parse : any = {
+		let parse : any = {
 			
 		};
 		
-		var preg = 0;
+		let preg = 0;
 		
 		Text.Clear();
 		Text.Add("You are so <i>heavy</i>.", parse);
@@ -1851,7 +1851,7 @@ export namespace GryphonsScenes {
 		Text.Flush();
 		
 		//[Fulfilled][Calm][Frustrated]
-		var options = new Array();
+		let options = new Array();
 		options.push({ nameStr : "Fulfilled",
 			tooltip : "",
 			func : function() {
@@ -2035,7 +2035,7 @@ export namespace GryphonsScenes {
 					Text.Flush();
 					
 					//[Comfort][Hug][Watch]
-					var options = new Array();
+					let options = new Array();
 					options.push({ nameStr : "Comfort",
 						tooltip : "Comfort him in the way you know he likes most.",
 						func : function() {
@@ -2157,7 +2157,7 @@ export namespace GryphonsScenes {
 	}
 
 	export function NewLifeHugEnding() {
-		var parse : any = {
+		let parse : any = {
 			
 		};
 		

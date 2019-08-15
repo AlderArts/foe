@@ -54,7 +54,7 @@ export class Ophelia extends Entity {
 	}
 
 	ToStorage() {
-		var storage : any = {};
+		let storage : any = {};
 		
 		this.SavePersonalityStats(storage);
 		this.SaveFlags(storage);
@@ -140,7 +140,7 @@ export class OpheliaBrute extends BossEntity {
 	}
 
 	DropTable() {
-		var drops = [];
+		let drops = [];
 		drops.push({ it: AlchemyItems.Leporine });
 		drops.push({ it: AlchemySpecial.EquiniumPlus });
 		drops.push({ it: AlchemyItems.Estros });
@@ -151,16 +151,16 @@ export class OpheliaBrute extends BossEntity {
 	//TODO
 	Act(encounter : any, activeChar : any) {
 		// Pick a random target
-		var targets = this.GetPartyTarget(encounter, activeChar);
-		var t = this.GetSingleTarget(encounter, activeChar);
+		let targets = this.GetPartyTarget(encounter, activeChar);
+		let t = this.GetSingleTarget(encounter, activeChar);
 
-		var parseVars = {
+		let parseVars = {
 			name   : this.name,
 			hisher : this.hisher(),
 			tName  : t.name
 		};
 
-		var choice = Math.random();
+		let choice = Math.random();
 		if(choice < 0.2 && Abilities.Physical.Bash.enabledCondition(encounter, this))
 			Abilities.Physical.Bash.Use(encounter, this, t);
 		else if(choice < 0.4 && Abilities.Physical.Frenzy.enabledCondition(encounter, this))

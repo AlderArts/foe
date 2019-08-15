@@ -35,12 +35,12 @@ LagomorphScenes.Impregnate = function(mother : Entity, father : Entity, slot? : 
 
 LagomorphScenes.GroupEnc = function() {
     let burrows = GAME().burrows;
-	var enemy = new Party();
-	var enc : any = new Encounter(enemy);
+	let enemy = new Party();
+	let enc : any = new Encounter(enemy);
 	
-	var scenes = new EncounterTable();
+	let scenes = new EncounterTable();
 	scenes.AddEnc(function() {
-		var alpha = burrows.GenerateLagomorphAlpha();
+		let alpha = burrows.GenerateLagomorphAlpha();
 		enc.alpha = alpha;
 		enemy.AddMember(alpha);
 		enemy.AddMember(burrows.GenerateLagomorph());
@@ -48,7 +48,7 @@ LagomorphScenes.GroupEnc = function() {
 		enemy.AddMember(burrows.GenerateLagomorph());
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
-		var brute = new LagomorphBrute(Gender.male);
+		let brute = new LagomorphBrute(Gender.male);
 		enc.brute = brute;
 		enemy.AddMember(brute);
 		enemy.AddMember(burrows.GenerateLagomorph());
@@ -56,7 +56,7 @@ LagomorphScenes.GroupEnc = function() {
 		enemy.AddMember(burrows.GenerateLagomorph());
 	}, 1.0, function() { return burrows.BruteActive(); });
 	scenes.AddEnc(function() {
-		var brainy = new LagomorphWizard(Gender.female);
+		let brainy = new LagomorphWizard(Gender.female);
 		enc.brainy = brainy;
 		enemy.AddMember(brainy);
 		enemy.AddMember(burrows.GenerateLagomorph());
@@ -64,7 +64,7 @@ LagomorphScenes.GroupEnc = function() {
 		enemy.AddMember(burrows.GenerateLagomorph());
 	}, 1.0, function() { return burrows.BrainyActive(); });
 	scenes.AddEnc(function() {
-		var herm = new Lagomorph(Gender.herm);
+		let herm = new Lagomorph(Gender.herm);
 		enc.herm = herm;
 		enemy.AddMember(herm);
 		enemy.AddMember(burrows.GenerateLagomorph());
@@ -91,16 +91,16 @@ LagomorphScenes.PlainsEncounter = function() {
 	let party : Party = GAME().party;
     let burrows = GAME().burrows;
     
-	var enc = this;
+	let enc = this;
 	
-	var parse : any = {
+	let parse : any = {
 		himherthem : party.Num() > 1 ? "them" : player.mfFem("him", "her")
 	};
 	
 	parse = player.ParserTags(parse);
 	
 	Text.Clear();
-	var scenes = new EncounterTable();
+	let scenes = new EncounterTable();
 	scenes.AddEnc(function() {
 		Text.Add("As you wander about, your [ears] twitch as familiar sounds reach them: soft, high-pitched moans and groans, lewd squelches and slurps, a perverse chorus that compels you to investigate. The sounds grow louder and louder as you follow them, and it doesn’t take more than a few minutes before you have uncovered the source.", parse);
 		Text.NL();
@@ -145,7 +145,7 @@ LagomorphScenes.PlainsEncounter = function() {
 	else {
 		parse = enc.enemy.Get(0).ParserPronouns(parse);
 		
-		var scenes = new EncounterTable();
+		let scenes = new EncounterTable();
 		scenes.AddEnc(function() {
 			Text.Add("<i>“New catch! Reward!”</i> exclaims one of the rabbits just returning from scouting. [HeShe] rushes toward you, followed by [hisher] siblings.", parse);
 			Text.NL();
@@ -176,10 +176,10 @@ LagomorphScenes.GroupLossOnPlains = function() {
     let burrows = GAME().burrows;
 	SetGameState(GameState.Event, Gui);
 	
-	var enc = this;
+	let enc = this;
 	Gui.Callstack.push(function() {
 		Text.Clear();
-		var scenes = new EncounterTable();
+		let scenes = new EncounterTable();
 	
 		// TODO: Add alternate loss scene that 
 		scenes.AddEnc(function() {
@@ -216,10 +216,10 @@ LagomorphScenes.GroupLossOnPlains = function() {
 LagomorphScenes.GroupLossOnPlainsBrainy = function(enc : any) {
 	let player = GAME().player;
 	let party : Party = GAME().party;
-	var p1cock = player.BiggestCock();
+	let p1cock = player.BiggestCock();
 
-	var brainy = enc.brainy;
-	var parse : any = {
+	let brainy = enc.brainy;
+	let parse : any = {
 		
 	};
 	
@@ -282,11 +282,11 @@ LagomorphScenes.GroupLossOnPlainsBrainy = function(enc : any) {
 	Text.Add("<i>“Mmm, good [boygirl]... I think a special - yeep! - treat is in order,”</i> she coos, squeaking in delight as your tongue hits a particularly sensitive spot inside her. As best she can, she leans forward, hands stretching down your body toward your nethers.", parse);
 	Text.NL();
 	
-	var scenes = new EncounterTable();
+	let scenes = new EncounterTable();
 	
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	
-	var usecock = false;
+	let usecock = false;
 	scenes.AddEnc(function() {
 		Text.Add("Like iron filings to a magnet, her fingers are drawn to[oneof] your [cocks], wrapping themselves around the half-turgid flesh as best they can. With surprising expertise, she grips you - not so hard as to hurt, but with plenty of pressure that you can feel her - and begins to stroke. Up and down, she alternates, squeezing and releasing with each passage, kneading the flesh with dexterous ripples of her digits, coaxing you to erection.", parse);
 		Text.NL();
@@ -358,9 +358,9 @@ LagomorphScenes.GroupLossOnPlainsToBurrows = function(enc : any) {
 	let player = GAME().player;
 	let party : Party = GAME().party;
     let burrows = GAME().burrows;
-    var alpha = enc.alpha;
+    let alpha = enc.alpha;
     
-	var parse : any = {
+	let parse : any = {
 		p1name     : function() { return party.members[1].name; },
 		m1HeShe    : function() { return alpha.HeShe(); },
 		m1heshe    : function() { return alpha.heshe(); },
@@ -458,9 +458,9 @@ LagomorphScenes.GroupWinOnPlainsPrompt = function() {
 	let burrows = GAME().burrows;
 	SetGameState(GameState.Event, Gui);
 	
-	var enc = this;
+	let enc = this;
 	
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	
@@ -485,7 +485,7 @@ LagomorphScenes.GroupWinOnPlainsPrompt = function() {
 			Text.Add("The last of the rabbits fall before you, unable to fight on anymore. The critters still look like they want to fuck you though, so maybe - just maybe - you’ll humor them? You could deal with this group here, or have them drag out some of their comrades from the pile that are more to your liking.", parse);
 		}
 		
-		var options = new Array();
+		let options = new Array();
 		
 		if(burrows.flags["Access"] == BurrowsFlags.AccessFlags.Unknown) {
 			Text.NL();
@@ -501,12 +501,12 @@ LagomorphScenes.GroupWinOnPlainsPrompt = function() {
 		Text.Flush();
 		
 		
-		var group : any = {};
+		let group : any = {};
 		
 		group.males   = 0;
 		group.females = 0;
-		for(var i=0,j=enc.enemy.Num(); i<j; ++i) {
-			var mob = enc.enemy.Get(i);
+		for(let i=0,j=enc.enemy.Num(); i<j; ++i) {
+			let mob = enc.enemy.Get(i);
 			if(mob.Gender() == Gender.male)   group.males++;
 			if(mob.Gender() == Gender.female) group.females++;
 		}
@@ -576,7 +576,7 @@ LagomorphScenes.GroupWinOnPlainsPrompt = function() {
 		}
 		
 		//[Get fucked (M)]
-		var tooltip = "You want to put all that bunny cock to good use and get a nice fuck. As the saying goes, they ‘fuck like rabbits’, and when one goes down, there are plenty to take his place.";
+		let tooltip = "You want to put all that bunny cock to good use and get a nice fuck. As the saying goes, they ‘fuck like rabbits’, and when one goes down, there are plenty to take his place.";
 		if(party.Num() > 1)
 			tooltip += " They probably won’t discriminate though, so hopefully [comp] okay with getting a thorough reaming.";
 		
@@ -588,7 +588,7 @@ LagomorphScenes.GroupWinOnPlainsPrompt = function() {
 		});
 		
 		//[Fuck (M)]
-		var tooltip = "Sure are plenty of cocky bucks around… time to put them in their place for attacking you.";
+		tooltip = "Sure are plenty of cocky bucks around… time to put them in their place for attacking you.";
 		if(party.Num() > 1)
 			tooltip += " Who knows, perhaps [comp] will join you as well.";
 		options.push({ nameStr : "Fuck (M)",
@@ -625,10 +625,10 @@ LagomorphScenes.GroupWinOnPlainsPrompt = function() {
 LagomorphScenes.GroupWinOnPlainsFuckBrute = function(enc : any) {
 	let player = GAME().player;
 	let party : Party = GAME().party;
-	var p1cock  = player.BiggestCock(null, true);
-	var strapon = p1cock ? p1cock.isStrapon : null;
+	let p1cock  = player.BiggestCock(null, true);
+	let strapon = p1cock ? p1cock.isStrapon : null;
 	
-	var parse : any = {
+	let parse : any = {
 		playername : player.name
 		
 	};
@@ -636,7 +636,7 @@ LagomorphScenes.GroupWinOnPlainsFuckBrute = function(enc : any) {
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	
-	var brute = enc.brute;
+	let brute = enc.brute;
 	
 	Text.Clear();
 	
@@ -741,7 +741,7 @@ LagomorphScenes.GroupWinOnPlainsFuckBrute = function(enc : any) {
 	Text.Add("Seeing the brute comply you resume fucking his butt. You’re so close now… you can almost feel it. All you need is one more thrust… With an audible slap on his muscular buttocks, you yell at him to tighten up and push yourself in as deep as you can[knot].", parse);
 	Text.NL();
 	if(!strapon) {
-		var cum = player.OrgasmCum();
+		let cum = player.OrgasmCum();
 		
 		if(cum > 6) {
 			Text.Add("A veritable flood of semen erupts from your [cock] into the helpless lapin’s bowels, the once-proud alpha brute’s belly bulging obscenely as you fill him with your seed. Sheer pressure forces more sperm to spurt out around your cock, spattering across your [legs] in thick white rivers, but even so, he balloons under the deluge. By the time you finally finish, his gut hangs almost to the ground, a perverse reflection of the pregnancies he has doubtlessly inflicted on countless females in his warren.", parse);
@@ -803,7 +803,7 @@ LagomorphScenes.GroupWinOnPlainsFuckBrute = function(enc : any) {
 		Text.Add("You can feel his jaws stretch, trying to suck your folds inside, nursing perversely in an effort to gulp down as much of your fluids as possible, tongue still lavishing attentions on your cunny.", parse);
 		Text.NL();
 		
-		var cum = player.OrgasmCum();
+		let cum = player.OrgasmCum();
 		
 		Text.Add("Were you not holding onto the brute’s head, you’re pretty sure you’d have lost your balance. You cry out as your orgasm rocks throughout your body, femcum flooding from your [vag] and into the lapin’s hungry maw.", parse);
 		Text.NL();
@@ -843,10 +843,10 @@ LagomorphScenes.GroupWinOnPlainsFuckBrute = function(enc : any) {
 
 LagomorphScenes.GroupWinOnPlainsBruteIntro = function() {
 	let party : Party = GAME().party;
-	var parse : any = {};
+	let parse : any = {};
 	
 	if(party.Num() > 1) {
-		var p1 = party.Get(1);
+		let p1 = party.Get(1);
 		parse["name"]  = party.Num() == 2 ? p1.name : "your companions";
 		parse["heshe"] = party.Num() == 2 ? p1.heshe() : "they";
 		parse["Name"]  = party.Num() == 2 ? p1.name : "They";
@@ -862,7 +862,7 @@ LagomorphScenes.GroupWinOnPlainsBruteIntro = function() {
 }
 
 LagomorphScenes.GroupWinOnPlainsBruteCums = function() {
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	
@@ -878,12 +878,12 @@ LagomorphScenes.GroupWinOnPlainsFuckM = function(enc : any, group : any) {
 	let party : Party = GAME().party;
 	let kiakai = GAME().kiakai;
 	let terry = GAME().terry;
-	var male = new Lagomorph(Gender.male);
+	let male = new Lagomorph(Gender.male);
 	
-	var p1cock  = player.BiggestCock();
-	var strapon = p1cock ? p1cock.isStrapon : null;
+	let p1cock  = player.BiggestCock();
+	let strapon = p1cock ? p1cock.isStrapon : null;
 	
-	var parse : any = {
+	let parse : any = {
 		playername : player.name
 		
 	};
@@ -974,13 +974,13 @@ LagomorphScenes.GroupWinOnPlainsFuckM = function(enc : any, group : any) {
 	Text.Add("The others, loath to wait around, have already started busying themselves, pairing up in groups of twos or threes - you can swear that more of the rabbits have separated from the larger pile in order to join you. The horny lagomorphs seem content with fucking whatever hole is presented to them, just as long as they get off.", parse);
 	Text.NL();
 	
-	var beingFucked = false;
+	let beingFucked = false;
 	// COMPANION SECTION BEGIN
 	//TODO Miranda
 	
-	var compsJoining : Entity[] = [];
+	let compsJoining : Entity[] = [];
 	
-	var blockKiai = false;
+	let blockKiai = false;
 	
 	if(party.InParty(kiakai) && Math.random() < 0.5) { //TODO cond
 		blockKiai = true;
@@ -1007,7 +1007,7 @@ LagomorphScenes.GroupWinOnPlainsFuckM = function(enc : any, group : any) {
 		Text.Flush();
 		
 		// [Fuck them][Fuck you][Service them][Sit it out]
-		var options = new Array();
+		let options = new Array();
 		if(kiakai.FirstCock()) {
 			options.push({ nameStr : "Fuck them",
 				func : function() {
@@ -1040,7 +1040,7 @@ LagomorphScenes.GroupWinOnPlainsFuckM = function(enc : any, group : any) {
 					Text.Add("Looks like [name] made some new friends.", parse);
 					Text.NL();
 					
-					var cum = kiakai.OrgasmCum();
+					let cum = kiakai.OrgasmCum();
 					kiakai.slut.IncreaseStat(75, 2);
 					
 					Gui.PrintDefaultOptions();
@@ -1108,7 +1108,7 @@ LagomorphScenes.GroupWinOnPlainsFuckM = function(enc : any, group : any) {
 					Text.Add("Turning your head around, you give [name] a kiss before returning to the task at hand, thanking [himher] for being there.", parse);
 					Text.NL();
 					
-					var cum = kiakai.OrgasmCum();
+					let cum = kiakai.OrgasmCum();
 					kiakai.relation.IncreaseStat(50, 1);
 					
 					Gui.PrintDefaultOptions();
@@ -1171,7 +1171,7 @@ LagomorphScenes.GroupWinOnPlainsFuckM = function(enc : any, group : any) {
 	}
 	
 	Gui.Callstack.push(function() {
-		var blockTerry = false;
+		let blockTerry = false;
 		
 		if(party.InParty(terry) && Math.random() < 0.5) {
 			parse = terry.ParserPronouns(parse);
@@ -1191,7 +1191,7 @@ LagomorphScenes.GroupWinOnPlainsFuckM = function(enc : any, group : any) {
 			blockTerry = true;
 			
 			//[Fuck] [Get Fucked] [Don’t Fuck]
-			var options = new Array();
+			let options = new Array();
 			if(terry.FirstCock()) {
 				options.push({ nameStr : "Fuck",
 					func : function() {
@@ -1296,7 +1296,7 @@ LagomorphScenes.GroupWinOnPlainsFuckM = function(enc : any, group : any) {
 							Text.Add("As one, the bunny-boys noisily kiss Terry’s cock, nibbling gently at [hisher] flare with their teeth. This is the last straw for Terry; the [foxvixen] arches [hisher] back and cries out throatily as [hisher] flare bulges to its full length and erupts in a great shower of pearly white. Streams of cum pour from [hisher] shaft, flowing wetly across the lower bunny’s face, his envious brother dipping [hisher] face down to slurp at the gushing seed like a youth at a fountain.", parse);
 							Text.NL();
 							
-							var cum = terry.OrgasmCum();
+							let cum = terry.OrgasmCum();
 							
 							Text.Add("By the time Terry finishes, the lower bunny is totally soaked in spunk, lying on his back in a great puddle of [foxvixen] seed, whilst his upper brother is dripping from the face from his efforts at drinking. Despite this, both bunny-sluts are grinning happily.", parse);
 							Text.NL();
@@ -1343,7 +1343,7 @@ LagomorphScenes.GroupWinOnPlainsFuckM = function(enc : any, group : any) {
 							Text.Add("Seems like they’re gonna be a while...", parse);
 							Text.NL();
 							
-							var cum = terry.OrgasmCum();
+							let cum = terry.OrgasmCum();
 							
 							Gui.PrintDefaultOptions();
 						}
@@ -1385,7 +1385,7 @@ LagomorphScenes.GroupWinOnPlainsFuckM = function(enc : any, group : any) {
 			Gui.NextPrompt(function() {
 				Text.Clear();
 				
-				var cum = player.OrgasmCum(2);
+				let cum = player.OrgasmCum(2);
 				
 				if(compsJoining.length == 1) {
 					parse["comp"]  = " and " + compsJoining[0].name;
@@ -1424,7 +1424,7 @@ LagomorphScenes.GroupWinOnPlainsGetFuckedM = function(enc : any, group : any) {
 	let kiakai = GAME().kiakai;
     let terry = GAME().terry;
     
-	var parse : any = {
+	let parse : any = {
 		playername : player.name
 		
 	};
@@ -1455,7 +1455,7 @@ LagomorphScenes.GroupWinOnPlainsGetFuckedM = function(enc : any, group : any) {
 	Text.Add("You briefly survey the strapping young bucks lined up in front of you. The bunnies are lithe in build and covered in white fur, their heads topped by long floppy ears[be]. Thanks to their short stature, their rigid dicks are quite large in proportion to their body-size. You plan to study those delicious-looking things in much closer detail in the coming hour.", parse);
 	Text.NL();
 	
-	var comp = party.Num() > 1;
+	let comp = party.Num() > 1;
 	
 	if(party.Num() == 2)
 		parse["comp"] = party.Get(1).name;
@@ -1470,7 +1470,7 @@ LagomorphScenes.GroupWinOnPlainsGetFuckedM = function(enc : any, group : any) {
 	Text.Add("The lagomorphs are not creatures that waste much time on foreplay - seeing as they spend much of their waking time fucking, you are not sure that they’ve even considered the concept - something that becomes readily apparent as two of them jump you, shoving their cocks into your mouth, filling the first hole available to them.", parse);
 	Text.NL();
 	
-	var male = new Lagomorph(Gender.male);
+	let male = new Lagomorph(Gender.male);
 	
 	Sex.Blowjob(player, male);
 	player.FuckOral(player.Mouth(), male.FirstCock(), 1);
@@ -1484,8 +1484,8 @@ LagomorphScenes.GroupWinOnPlainsGetFuckedM = function(enc : any, group : any) {
 	}
 	Text.NL();
 	
-	var target;
-	var scenes = new EncounterTable();
+	let target;
+	let scenes = new EncounterTable();
 	scenes.AddEnc(function() {
 		target = BodyPartType.vagina;
 		parse["target"] = function() { return player.FirstVag().Short(); }
@@ -1586,7 +1586,7 @@ LagomorphScenes.GroupWinOnPlainsGetFuckedM = function(enc : any, group : any) {
 			
 			kiakai.slut.IncreaseStat(60, 3);
 			
-			var cum = kiakai.OrgasmCum();
+			let cum = kiakai.OrgasmCum();
 						
 			Text.Add("Soon, [name]’s moans join with yours as they echo across the plains. Looks like your elf has grown to like getting fucked; you should make sure [heshe] gets [hisher] fill more often...", parse);
 		}
@@ -1641,7 +1641,7 @@ LagomorphScenes.GroupWinOnPlainsGetFuckedM = function(enc : any, group : any) {
 	Gui.NextPrompt(function() {
 		Text.Clear();
 		
-		var cum = player.OrgasmCum(2);
+		let cum = player.OrgasmCum(2);
 		
 		Text.Add("A significant amount of time later, it seems like the rabbits are finally running out of steam. Your belly is bloated with their numerous loads, cum seeping out of every orifice. Each of your lovers give you one final go before they hop off to rejoin their friends in the pile, though in their exhausted state they’ll most likely spend some time as bottoms.", parse);
 		Text.NL();
@@ -1665,9 +1665,9 @@ LagomorphScenes.GroupWinInterrorigate = function(enc : any) {
 	let player = GAME().player;
 	let party : Party = GAME().party;
 	let burrows = GAME().burrows;
-    var alpha = enc.alpha;
+    let alpha = enc.alpha;
     
-	var parse : any = {
+	let parse : any = {
 		meUs       : party.Alone() ? "me" : "us",
 		p1name     : function() { return party.members[1].name; }
 	};
@@ -1689,7 +1689,7 @@ LagomorphScenes.GroupWinInterrorigate = function(enc : any) {
 	Text.Flush();
 	
 	//[Leave][Intimidate][Seduce]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Leave",
 		func : function() {
 			Text.Clear();
@@ -1767,7 +1767,7 @@ LagomorphScenes.GroupWinInterrorigate = function(enc : any) {
 			Text.Flush();
 			
 			//[Follow][Ditch]
-			var options = new Array();
+			let options = new Array();
 			options.push({ nameStr : "Follow",
 				func : function() {
 					Text.Clear();

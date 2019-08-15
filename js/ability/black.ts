@@ -20,7 +20,7 @@ BlackAb.Surge.cost = { hp: null, sp: 5, lp: null};
 BlackAb.Surge.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mVoid: 1},
 	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster, target);
+		let parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] call[notS] on a surge of pure magical energy which bursts forth in a flash of light from [hisher] outstretched [hand]s. ", parse);
 	}],
 	onMiss: [Defaults.Black._onMiss],
@@ -37,17 +37,17 @@ BlackAb.Fireball.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mFire: 1},
 	atkMod: 2,
 	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster, target);
+		let parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] make[notS] mystic incantations, waving [hisher] [hand]s in the air. Fiery glyphs appear in front of [himher], coalescing in a large fireball forming between [hisher] outstretched [hand]s. With a great roar, the molten ball of magic surges toward [tname]! ", parse);
 	}],
 	onMiss: [Defaults.Black._onMiss],
 	onDamage: [Defaults.Black._onDamage],
 	onAbsorb: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity, dmg : number) {
-		var parse = AbilityNode.DefaultParser(caster, target);
+		let parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[tName] absorb[tnotS] the flames, gaining " + Text.Heal(dmg) + " health!", parse);
 	}],
 	onHit: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster, target);
+		let parse = AbilityNode.DefaultParser(caster, target);
 		if(Status.Burn(target, { hit : 0.2, turns : 3, turnsR : 5, str : 1, dmg : 0.2 })) {
 			Text.NL();
 			Text.Add("[tName] [thas] been burned!", parse);
@@ -64,14 +64,14 @@ BlackAb.Freeze.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mIce: 1},
 	atkMod: 1.9,
 	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster, target);
+		let parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("The temperature drops in the air around [tname] as [name] call[notS] on the power of ice. There is a loud crackle as the cold snap hits, forming icicles on [tname]! ", parse);
 	}],
 	onMiss: [Defaults.Black._onMiss],
 	onDamage: [Defaults.Black._onDamage],
 	onAbsorb: [Defaults.Black._onAbsorb],
 	onHit: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster, target);
+		let parse = AbilityNode.DefaultParser(caster, target);
 		if(Status.Freeze(target, { hit : 0.2, turns : 3, turnsR : 5, proc : 0.5, str : 1.2 })) {
 			Text.NL();
 			Text.Add("[tName] [thas] been afflicted with freeze!", parse);
@@ -88,17 +88,17 @@ BlackAb.Bolt.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mThunder: 1},
 	atkMod: 1.8,
 	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster, target);
+		let parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("The air tingles as [name] call[notS] on the power of thunder. There is a great crackle and a blinding flash of light as a bolt of lightning strikes [tname]! ", parse);
 	}],
 	onMiss: [Defaults.Black._onMiss],
 	onDamage: [Defaults.Black._onDamage],
 	onAbsorb: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity, dmg : number) {
-		var parse = AbilityNode.DefaultParser(caster, target);
+		let parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[tName] absorb[tnotS] the shock, gaining " + Text.Heal(dmg) + " health!", parse);
 	}],
 	onHit: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster, target);
+		let parse = AbilityNode.DefaultParser(caster, target);
 		if(Status.Numb(target, { hit : 0.2, turns : 3, turnsR : 5, proc : 0.25 })) {
 			Text.NL();
 			Text.Add("[tName] [thas] been afflicted with numb!", parse);
@@ -115,7 +115,7 @@ BlackAb.Gust.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mWind: 0.7, pSlash: 0.3},
 	atkMod: 1.5,
 	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster, target);
+		let parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] make[notS] a sweeping gesture, calling on the power of wind to do [hisher] bidding. Erratic gusts of wind dance around, focusing into a single burst homing in on [tname]! ", parse);
 	}],
 	onMiss: [Defaults.Black._onMiss],
@@ -132,7 +132,7 @@ BlackAb.Spire.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mEarth: 0.7, pBlunt: 0.3},
 	atkMod: 1.9,
 	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster, target);
+		let parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("There is a loud rumble as the ground shakes, forced from its natural state by the power of [poss] magic. A pillar of rock bursts from the earth below, slamming into [tname]! ", parse);
 	}],
 	onMiss: [Defaults.Black._onMiss],
@@ -149,7 +149,7 @@ BlackAb.Spray.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mWater: 1},
 	atkMod: 1.9,
 	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster, target);
+		let parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("Moisture from the air coalesce into a sphere of water between [poss] [hand]s, summoned by the power of [hisher] magic. In a rapid surge, the water slams into [tname]! ", parse);
 	}],
 	onMiss: [Defaults.Black._onMiss],
@@ -166,14 +166,14 @@ BlackAb.Shimmer.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mLight: 1},
 	atkMod: 1.9,
 	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster, target);
+		let parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("A brilliant sphere of blinding light forms between [poss] [hand]s, summoned by the power of [hisher] magic. At the uttering of a single word, it speeds toward [tname]! ", parse);
 	}],
 	onMiss: [Defaults.Black._onMiss],
 	onDamage: [Defaults.Black._onDamage],
 	onAbsorb: [Defaults.Black._onAbsorb],
 	onHit: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster, target);
+		let parse = AbilityNode.DefaultParser(caster, target);
 		if(Status.Blind(target, { hit : 0.8, str : 0.5, turns : 3, turnsR : 3 })) {
 			Text.Add("[tName] become[tnotS] blinded by the light!", parse);
 		}
@@ -189,14 +189,14 @@ BlackAb.Shade.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mDark: 1},
 	atkMod: 2.2,
 	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster, target);
+		let parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Poss] [hand]s are wreathed in shadow, summoned by the power of [hisher] dark magic. Quick as lightning, the shade darts across the ground, wrapping itself around [tname]! ", parse);
 	}],
 	onMiss: [Defaults.Black._onMiss],
 	onDamage: [Defaults.Black._onDamage],
 	onAbsorb: [Defaults.Black._onAbsorb],
 	onHit: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster, target);
+		let parse = AbilityNode.DefaultParser(caster, target);
 		if(Status.Weakness(target, { hit : 0.2, turns : 2, turnsR : 2, str: 0.15 })) {
 			Text.NL();
 			Text.Add("[tName] [thas] been weakened!", parse);
@@ -213,7 +213,7 @@ BlackAb.Thorn.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mNature: 1},
 	atkMod: 2.0,
 	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster, target);
+		let parse = AbilityNode.DefaultParser(caster, target);
 		parse["skin"] = target.SkinDesc();
 		Text.Add("[Name] call[notS] on the power of nature, summoning prickly vines that snake around [tname], the sharp thorns raking [thisher] [skin]! ", parse);
 	}],
@@ -221,7 +221,7 @@ BlackAb.Thorn.castTree.push(AbilityNode.Template.Magical({
 	onDamage: [Defaults.Black._onDamage],
 	onAbsorb: [Defaults.Black._onAbsorb],
 	onHit: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster, target);
+		let parse = AbilityNode.DefaultParser(caster, target);
 		if(Status.Slow(target, { hit : 0.6, factor : 2, turns : 3, turnsR : 3 })) {
 			Text.Add("[tName] get[tnotS] tangled by the vines, slowing [thimher]!", parse);
 		}
@@ -237,7 +237,7 @@ BlackAb.WindShear.castTree.push(AbilityNode.Template.Magical({
 	damageType: {pSlash: 1, mWind: 1},
 	atkMod: 1.5,
 	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster, target);
+		let parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Poss] [hand]s weave back and forth, summoning a powerful gale of shrieking winds. A frenzy of cutting and slicing air surges toward [tname]! ", parse);
 	}],
 	onMiss: [Defaults.Black._onMiss],
@@ -255,14 +255,14 @@ BlackAb.Stalagmite.castTree.push(AbilityNode.Template.Magical({
 	atkMod: 2.5,
 	defMod: 0.8,
 	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster, target);
+		let parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("The earth rumbles as a large pillar of rock bursts from the ground, raised with [poss] magic. ", parse);
 	}],
 	onMiss: [Defaults.Black._onMiss],
 	onDamage: [Defaults.Black._onDamage],
 	onAbsorb: [Defaults.Black._onAbsorb],
 	onHit: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster, target);
+		let parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("The great stalagmite throws [tname] to the ground! ", parse);
 	}, AbilityNode.Template.Cancel()]
 }));
@@ -277,7 +277,7 @@ BlackAb.Whirlwind.castTree.push(AbilityNode.Template.Magical({
 	damageType: {pSlash: 0.3, mWind: 1},
 	atkMod: 1.9,
 	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster);
+		let parse = AbilityNode.DefaultParser(caster);
 		Text.Add("[Poss] [hand]s raise a large torrent of wind, throwing things every which way. The huge whirlwind envelops the opposing party, cutting and slashing! ", parse);
 	}],
 	onMiss: [Defaults.Black._onMiss],
@@ -295,7 +295,7 @@ BlackAb.Eruption.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mFire: 1.2},
 	atkMod: 2.1,
 	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster);
+		let parse = AbilityNode.DefaultParser(caster);
 		Text.Add("[Name] summon[notS] a wave of fire and smoke, boiling forth from the ground. The flames envelop the opposing party! ", parse);
 	}],
 	onMiss: [Defaults.Black._onMiss],
@@ -313,7 +313,7 @@ BlackAb.Spread.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mWater: 1.3},
 	atkMod: 2.1,
 	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster);
+		let parse = AbilityNode.DefaultParser(caster);
 		Text.Add("[Name] summon[notS] a wave of rushing water, sprouting forth from the ground. The great torrent sweeps over the opposing party! ", parse);
 	}],
 	onMiss: [Defaults.Black._onMiss],
@@ -330,18 +330,18 @@ BlackAb.Shock.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mThunder: 1},
 	atkMod: 3.0,
 	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster, target);
+		let parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("The air tingles as [name] call[notS] on the power of thunder. There is a great crackle and a blinding flash of light as a surge of electricity flows through [tname]!", parse);
 		Text.NL();
 	}],
 	onMiss: [Defaults.Black._onMiss],
 	onDamage: [Defaults.Black._onDamage],
 	onAbsorb: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity, dmg : number) {
-		var parse = AbilityNode.DefaultParser(caster, target);
+		let parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[tName] absorb[tnotS] the shock, gaining " + Text.Heal(dmg) + " health!", parse);
 	}],
 	onHit: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster, target);
+		let parse = AbilityNode.DefaultParser(caster, target);
 		if(Math.random() < 0.5) {
 			target.GetCombatEntry(encounter).initiative -= 25;
 			Text.NL();
@@ -360,19 +360,19 @@ BlackAb.ThunderStorm.castTree.push(AbilityNode.Template.Magical({
 	atkMod: 2.2,
 	damageType: {mThunder: 1},
 	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster);
+		let parse = AbilityNode.DefaultParser(caster);
 		Text.Add("The air tingles as [name] call[notS] on the power of thunder. Great stormclouds gather, as nature unleashes an enormous amount of pent-up energy, enveloping the opposing party in a jagged cage of electricity!", parse);
 		Text.NL();
 	}],
 	onMiss: [Defaults.Black._onMiss],
 	onDamage: [Defaults.Black._onDamage],
 	onAbsorb: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity, dmg : number) {
-		var parse = AbilityNode.DefaultParser(caster, target);
+		let parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[tName] absorb[tnotS] the shock, gaining " + Text.Heal(dmg) + " health!", parse);
 		Text.NL();
 	}],
 	onHit: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster, target);
+		let parse = AbilityNode.DefaultParser(caster, target);
 		if(Math.random() < 0.5) {
 			target.GetCombatEntry(encounter).initiative -= 25;
 			Text.Add(" The shock slightly stuns [thimher]!", parse);
@@ -388,12 +388,12 @@ BlackAb.Venom.cost = { hp: null, sp: 15, lp: null};
 BlackAb.Venom.castTime = 50;
 BlackAb.Venom.castTree.push(AbilityNode.Template.Magical({
 	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster, target);
+		let parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("Toxic slime drips from [poss] [hand]s as [heshe] point[notS] them toward [tname]. ", parse);
 	}],
 	onMiss: [Defaults.Black._onMiss],
 	onHit: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster, target);
+		let parse = AbilityNode.DefaultParser(caster, target);
 		if(Status.Venom(target, { hit : 0.9, turns : 3, turnsR : 5, str : 1, dmg : 0.2 })) {
 			Text.Add("[tName] [thas] been poisoned!", parse);
 		}
@@ -414,7 +414,7 @@ BlackAb.Ivy.castTree.push(AbilityNode.Template.Magical({
 	atkMod: 2,
 	damageType: {mNature: 1.3},
 	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster);
+		let parse = AbilityNode.DefaultParser(caster);
 		Text.Add("[Name] summon[notS] a mass of writhing thorn and ivy, sprouting forth from the ground to entangle the opposing party!", parse);
 		Text.NL();
 	}],
@@ -434,7 +434,7 @@ BlackAb.Hellfire.castTree.push(AbilityNode.Template.Magical({
 	atkMod: 3,
 	damageType: {mFire: 3, mDark: 3},
 	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster);
+		let parse = AbilityNode.DefaultParser(caster);
 		Text.Add("[Name] summon[notS] the most vile of magic, unleashing a sea of dark fire on [hisher] enemies!", parse);
 		Text.NL();
 	}],
@@ -452,18 +452,18 @@ BlackAb.Scream.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mWind: 0.5, pBlunt: 0.5},
 	atkMod: 2,
 	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster);
+		let parse = AbilityNode.DefaultParser(caster);
 		Text.Add("[Poss] let[notS] out a ear-splitting shriek, the sheer force of [hisher] voice rippling through the air.", parse);
 		Text.NL();
 	}],
 	onDamage: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity, dmg : number) {
-		var parse = AbilityNode.DefaultParser(caster, target);
+		let parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[tName] [tis] severely buffeted by the sudden burst of sound, taking " + Text.Damage(-dmg) + " damage!", parse);
 		Text.NL();
 	}],
 	onAbsorb: [Defaults.Black._onAbsorb],
 	onMiss: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity, dmg : number) {
-		var parse = AbilityNode.DefaultParser(caster, target);
+		let parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[tName] [tis] struck by the sudden piercing screech, but manage[tnotS] to resist its effects.", parse);
 		Text.NL();
 	}]
@@ -474,17 +474,17 @@ BlackAb.Dischord = new Ability("Dischord");
 BlackAb.Dischord.Short = function() { return "Attempt to unnerve a foe with your music, hampering their ability to defend themselves. Effectiveness increases with the target’s lust, which is drained in the process."; }
 BlackAb.Dischord.cost = { hp: null, sp: 20, lp: 30 };
 BlackAb.Dischord._onMiss = function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-	var parse = AbilityNode.DefaultParser(caster, target);
+	let parse = AbilityNode.DefaultParser(caster, target);
 	Text.Add("[tName] manage[tnotS] to resist the chaotic discordance of [poss] song.", parse);
 }
 BlackAb.Dischord.castTree.push(AbilityNode.Template.Magical({
 	toDamage: null,
 	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster, target);
+		let parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] direct[notS] [hisher] voice at [tname], singing a verse rich with dark, subtle undertones. ", parse);
 	}],
 	onHit: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster, target);
+		let parse = AbilityNode.DefaultParser(caster, target);
 		if(Status.Weakness(target, { hit : 0.8, turns : 3, turnsR : 3, str: 0.25 })) {
 			Text.Add("The sheer discordance of [poss] voice grips [tname], crippling [thisher] ability to defend [thimher]self!", parse);
 		}
@@ -504,13 +504,13 @@ BlackAb.DrainingTouch.castTree.push(AbilityNode.Template.Magical({
 	atkMod: 1,
 	damageType: {mDark: 1},
 	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster, target);
+		let parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] conjure[notS] up a wreath of shadowy tendrils that race towards [tname]!", parse);
 		Text.NL();
 	}],
 	onMiss: [Defaults.Black._onMiss],
 	onDamage: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity, dmg : number) {
-		var parse = AbilityNode.DefaultParser(caster, target);
+		let parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("The tendrils wrap themselves about [tname], leeching " + Text.Damage(-dmg) + " health from [thimher]!", parse);
 		Text.NL();
 		caster.AddHPAbs(-dmg);
@@ -528,7 +528,7 @@ BlackAb.Hailstorm.castTree.push(AbilityNode.Template.Magical({
 	atkMod: 2.2,
 	damageType: {mIce: 1},
 	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster);
+		let parse = AbilityNode.DefaultParser(caster);
 		Text.Add("[Name] conjure[notS] up a cone of icy wind and pointed hailstones, directing it towards the enemy party!", parse);
 		Text.NL();
 	}],
@@ -536,7 +536,7 @@ BlackAb.Hailstorm.castTree.push(AbilityNode.Template.Magical({
 	onDamage: [Defaults.Black._onDamage],
 	onAbsorb: [Defaults.Black._onAbsorb],
 	onHit: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster, target);
+		let parse = AbilityNode.DefaultParser(caster, target);
 		if(Status.Freeze(target, { hit : 0.2, turns : 3, turnsR : 2, proc : 0.5, str : 1.2 })) {
 			Text.NL();
 			Text.Add("[tName] [thas] been afflicted with freeze!", parse);
@@ -554,7 +554,7 @@ BlackAb.Quake.castTree.push(AbilityNode.Template.Magical({
 	atkMod: 2,
 	damageType: {mEarth: 1},
 	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster);
+		let parse = AbilityNode.DefaultParser(caster);
 		Text.Add("Muttering under [hisher] breath and gesturing at the ground, [name] suddenly summon[notS] a small earthquake under the enemy party!", parse);
 		Text.NL();
 	}],
@@ -573,7 +573,7 @@ BlackAb.PrismaticBurst.castTree.push(AbilityNode.Template.Magical({
 	atkMod: 1.5,
 	damageType: {mEarth: 0.5, mFire: 0.5, mIce: 0.5, mThunder: 0.5},
 	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster);
+		let parse = AbilityNode.DefaultParser(caster);
 		Text.Add("[Name] weave[notS] [hisher] [hand]s about, summoning streamers of colored light that dart towards the enemy party!", parse);
 		Text.NL();
 	}],
@@ -589,9 +589,9 @@ BlackAb.Lifetap.cost = { hp: null, sp: null, lp: null};
 BlackAb.Lifetap.targetMode = TargetMode.Self;
 BlackAb.Lifetap.cooldown = 2;
 BlackAb.Lifetap.castTree.push(function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-	var parse = AbilityNode.DefaultParser(caster);
+	let parse = AbilityNode.DefaultParser(caster);
 	
-	var hp = Math.floor(Math.min(caster.HP() / 5, caster.curHp-1));
+	let hp = Math.floor(Math.min(caster.HP() / 5, caster.curHp-1));
 	
 	caster.AddHPAbs(-hp);
 	caster.AddSPAbs(hp);
@@ -607,13 +607,13 @@ BlackAb.EntropicFortune.cost = { hp: null, sp: 35, lp: null};
 BlackAb.EntropicFortune.cooldown = 2;
 BlackAb.EntropicFortune.castTree.push(AbilityNode.Template.Magical({
 	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster, target);
+		let parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("Gathering thoughts of malice and ill-will, [name] begin[notS] to weave a hex directed at [tname]!", parse);
 		Text.NL();
 	}],
 	onMiss: [Defaults.Black._onMiss],
 	onHit: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster, target);
+		let parse = AbilityNode.DefaultParser(caster, target);
 		if(Status.Curse(target, { hit : 1.0, str : 0.5, turns : 15, turnsR : 5 })) {
 			Text.Add("[tName] [tis] gripped by the curse, rendering [thimher] far more susceptible to misfortune!", parse);
 		}
@@ -628,17 +628,17 @@ BlackAb.TaintedVitality.cost = { hp: null, sp: 35, lp: null};
 BlackAb.TaintedVitality.cooldown = 3;
 BlackAb.TaintedVitality.castTree.push(AbilityNode.Template.Magical({
 	onCast: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster, target);
+		let parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("Focusing dark power, [name] direct[notS] a stream of twisted, malicious energy at [tname]!", parse);
 		Text.NL();
 	}],
 	onMiss: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster, target);
+		let parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[tName] shrug[tnotS] off the malicious influence.", parse);
 	}],
 	onHit: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		var parse = AbilityNode.DefaultParser(caster, target);
-		var sick, weak;
+		let parse = AbilityNode.DefaultParser(caster, target);
+		let sick, weak;
 		if(Status.Venom(target, { hit : 0.6, turns : 1, str : 1, dmg : 0.35 })) {
 			sick = true;
 		}
@@ -646,7 +646,7 @@ BlackAb.TaintedVitality.castTree.push(AbilityNode.Template.Magical({
 			weak = true;
 		}
 		if(sick || weak) {
-			var w = "";
+			let w = "";
 			if(sick) w += "sicker";
 			if(sick && weak) w += " and ";
 			if(weak) w += "weaker";

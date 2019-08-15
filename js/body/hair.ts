@@ -24,7 +24,7 @@ export class Hair extends BodyPart {
 	}
 	
 	ToStorage() {
-		var storage = {
+		let storage = {
 			race  : this.race.id.toFixed(),
 			col   : this.color.toFixed(),
 			len   : this.length.base.toFixed(2),
@@ -56,11 +56,11 @@ export class Hair extends BodyPart {
 		else return Color.Desc(this.color) + " hair";
 	}
 	Long() {
-		var len = this.length.Get();
+		let len = this.length.Get();
 		if(len == 0) return "bald scalp";
 		else {
-			var color = Color.Desc(this.color);
-			var style;
+			let color = Color.Desc(this.color);
+			let style;
 			switch(this.style) {
 				case HairStyle.straight: style = "straight " + color + " hair"; break;
 				case HairStyle.wavy:     style = "wavy " + color + " hair"; break;

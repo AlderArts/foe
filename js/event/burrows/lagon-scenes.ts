@@ -45,7 +45,7 @@ export namespace LagonScenes {
     export function InteractRuler() {
         let lagon = GAME().lagon;
         let burrows = GAME().burrows;
-        var parse : any = {
+        let parse : any = {
             
         };
         
@@ -78,13 +78,13 @@ export namespace LagonScenes {
         let player = GAME().player;
         let lagon = GAME().lagon;
         let burrows = GAME().burrows;
-        var parse : any = {
+        let parse : any = {
             playername : player.name
         };
         parse["stuttername"] = player.name[0] +"-"+ player.name;
         
         //[Talk][Sex] ( [Usurp] )
-        var options = new Array();
+        let options = new Array();
         options.push({ nameStr : "Talk",
             func : function() {
                 Text.Clear();
@@ -103,7 +103,7 @@ export namespace LagonScenes {
         options.push({ nameStr : "Sex",
             func : function() {
                 Text.Clear();
-                var first = !(lagon.flags["Talk"] & LagonFlags.Talk.RegularSex);
+                let first = !(lagon.flags["Talk"] & LagonFlags.Talk.RegularSex);
                 if(first) {
                     Text.Add("Feeling a bit apprehensive, you ask the king if he might be interested in having sex with you.", parse);
                     Text.NL();
@@ -150,7 +150,7 @@ export namespace LagonScenes {
                     Text.Add("Uh... are you sure that you’re ready for this? Once you go up against Lagon, there’s no turning back.", parse);
                     Text.Flush();
                     
-                    var options = new Array();
+                    let options = new Array();
                     options.push({ nameStr : "Do it!",
                         func : function() {Text.Clear();
                             Text.Add("<i>“And what can I do for you today, traveler?”</i> Lagon leisurely regards you with a bored expression. <i>“I believe that you already bought all the needed ingredients to Ophelia; I do not have any further requests for your currently.”</i> He shakes his head. <i>“I feel the girl grows rebellious. Perhaps it’s time to throw her in the Pit together with her mother, as I should have done long ago.”</i>", parse);
@@ -196,12 +196,12 @@ export namespace LagonScenes {
     //TODO
     export function RulerSexPrompt() {
         let lagon = GAME().lagon;
-        var parse : any = {
+        let parse : any = {
             
         };
         
         //[Blowjob][Get fucked][The Pit][(Back)]
-        var options = new Array();
+        let options = new Array();
         options.push({ nameStr : "Blowjob",
             func : function() {
                 lagon.flags["Talk"] |= LagonFlags.Talk.RegularSex;
@@ -256,7 +256,7 @@ export namespace LagonScenes {
     export function RulerBlowjob() {
         let player = GAME().player;
         let lagon = GAME().lagon;
-        var parse : any = {
+        let parse : any = {
             
         };
         
@@ -268,7 +268,7 @@ export namespace LagonScenes {
         else
             Text.Add("You can’t wait to wrap your lips around the lapin king’s magnificent cock and drink up every drop of his royal seed. Trying to make your voice as sultry as you can, you beg Lagon for permission to relieve his stress with your mouth, your eyes locked on your prize.", parse);
         Text.NL();
-        var messy = false;
+        let messy = false;
         if(lagon.Relation() < 0) {
             Text.Add("<i>“By all means,”</i> he replies in a bored voice. <i>“You’ll have to wait your turn though.”</i> He caresses his daughter’s head fondly, coaxing her to swallow more and more of his length. <i>“Come here,”</i> he idly waves you over, pointing at the base of his throne. <i>“Kneel while in attendance to your king.”</i>", parse);
             Text.NL();
@@ -308,9 +308,9 @@ export namespace LagonScenes {
         let player = GAME().player;
         let lagon = GAME().lagon;
         let burrows = GAME().burrows;
-        var p1cock = player.BiggestCock();
+        let p1cock = player.BiggestCock();
         
-        var parse : any = {
+        let parse : any = {
             playername : player.name
         };
         
@@ -333,7 +333,7 @@ export namespace LagonScenes {
         Text.NL();
         Text.Add("You tense up as you feel a massive paw on the back of your head, but for now, the lapin seems content with letting you do your thing, merely caressing your [hair]. It’s an agonizingly slow process to get used to his jaw-straining girth, but the king is in no hurry. No doubt, he could keep you here all day for no other reason than to flaunt his dominance over you.", parse);
         Text.NL();
-        var opheliaPresent = false;
+        let opheliaPresent = false;
         if((burrows.LagonAlly() == false) && (Math.random() < 0.3)) {
             Text.Add("Some indeterminate time later you hear a polite cough behind you, rousing the king from his reverie. You try to turn your head to see who it is, but Lagon’s hand keeps you right where he wants you to be, between his legs and with ten inches of cock jammed down your throat.", parse);
             Text.NL();
@@ -344,7 +344,7 @@ export namespace LagonScenes {
             Text.Add("<i>“Indeed it is. We have such a good deal worked out, haven’t we, pet?”</i> Lagon continues relentlessly. <i>“You go out into the world and fetch me things, and I allow you to worship at the altar of my cock. Everyone is happy.”</i> He stretches, shuffling on his seat and inadvertently - scratch that, considering who it is, probably advertently - jamming the rest of his shaft down your protesting throat. <i>“Now, what did you want?”</i>", parse);
             Text.NL();
             
-            var scenes = new EncounterTable();
+            let scenes = new EncounterTable();
             scenes.AddEnc(function() {
                 Text.Add("<i>“I- uh, I had new potion I wanted to show, the effects are quite interesting-”</i>", parse);
             }, 1.0, function() { return true; });
@@ -427,7 +427,7 @@ export namespace LagonScenes {
         Text.Flush();
         
         //[Swallow][Shower][Finger][Beg]
-        var options = new Array();
+        let options = new Array();
         options.push({ nameStr : "Swallow",
             func : function() {
                 Text.Clear();
@@ -462,8 +462,8 @@ export namespace LagonScenes {
             tooltip : "Let the powerful male show you just how much cum he has backed up for you."
         });
         if(player.sex.gBlow >= 25) {
-            var first = !(lagon.flags["Talk"] & LagonFlags.Talk.BJfinger);
-            var tooltip = first ? "Let’s see just how far you can push him. You’re interested to find out how the lagomorph king would react to a prostate massage… and who knows, perhaps it’ll lead to even more fun." : "You know what will happen, but you can’t resist the urge to tease the lagomorph king further. Him getting rougher only turns you on even more, and your loins ache, longing for his cock."
+            let first = !(lagon.flags["Talk"] & LagonFlags.Talk.BJfinger);
+            let tooltip = first ? "Let’s see just how far you can push him. You’re interested to find out how the lagomorph king would react to a prostate massage… and who knows, perhaps it’ll lead to even more fun." : "You know what will happen, but you can’t resist the urge to tease the lagomorph king further. Him getting rougher only turns you on even more, and your loins ache, longing for his cock."
             options.push({ nameStr : "Finger",
                 func : function() {
                     Text.Clear();
@@ -484,7 +484,7 @@ export namespace LagonScenes {
                         Text.NL();
                         Text.Add("Suddenly, there is a lapin foot on your chest, the pawpads resting right over your heart. The air is driven from you body as you’re violently kicked back, tumbling around haplessly only to land in a crumpled heap. Before you have had the time to recover, Lagon is stalking up to angrily, grabbing you by the scruff of your neck and hoisting you into the air as if you were a ragdoll.", parse);
                         Text.NL();
-                        var tail = player.HasTail();
+                        let tail = player.HasTail();
                         parse["t"] = tail ? tail.Short() : player.Butt().Short();
                         Text.Add("<i>“WHAT THE FUCK DO YOU THINK YOU’RE DOING, YOU LITTLE BITCH?!”</i> he screams at you, baring his teeth in rage. He hurls you bodily across the room, crashing on your back near the throne. <i>“THE FUCKING NERVE!”</i> he roars. <i>“When I’m done with you, you’re going to walk funny for MONTHS!”</i> Before you can get up, he’s on you again, ripping the clothes and gear off your body like wrapping paper. You try to grapple with him, but the enraged king is far too strong. He throws you face-first onto the throne, grabbing you by your [t] and holding you down.", parse);
                         Text.NL();
@@ -540,7 +540,7 @@ export namespace LagonScenes {
     }
 
     export function RulerBlowjobSwallowEntrypoint(opheliaPresent : boolean) {
-        var parse : any = {
+        let parse : any = {
             
         };
         
@@ -559,7 +559,7 @@ export namespace LagonScenes {
         let player = GAME().player;
         let lagon = GAME().lagon;
 
-        var parse : any = {
+        let parse : any = {
             
         };
         
@@ -584,9 +584,9 @@ export namespace LagonScenes {
         let player = GAME().player;
         let lagon = GAME().lagon;
 
-        var p1cock = player.BiggestCock();
-        var lagonSize = lagon.FirstCock().Size();
-        var parse : any = {
+        let p1cock = player.BiggestCock();
+        let lagonSize = lagon.FirstCock().Size();
+        let parse : any = {
             armor : function() { return player.ArmorDesc(); },
             pheshe : player.mfTrue("he", "she")
         };
@@ -613,7 +613,7 @@ export namespace LagonScenes {
             Text.Add("Blushing, you hurry on downward.", parse);
             Text.NL();
             if(p1cock) {
-                var size = p1cock.Size();
+                let size = p1cock.Size();
                 Text.Add("You pause as you reach your [cocks], but after a brief moment of hesitation, you grasp[oneof] [itThem] and give it a tug. ", parse);
                 if(size * 2 < lagonSize)
                     Text.Add("<i>“Bet the ladies just gush when they see that little clit of yours,”</i> the king taunts. <i>“If they notice it at all.”</i>", parse);
@@ -651,7 +651,7 @@ export namespace LagonScenes {
             Text.Add(" Swaying your [hips] sensually, you slowly move your hands down your body, closing in on your loins.", parse);
             Text.NL();
             if(p1cock) {
-                var size = p1cock.Size();
+                let size = p1cock.Size();
                 parse["l"] = player.HasLegs() ? "Between your legs" : "In the valley of your crotch";
                 Text.Add("[l], your [cocks] [isAre] jutting out proudly, a clear sign of your arousal. Biting your lip, you caress [itThem] from tip to root, letting out a faint moan as a pleasurable shiver runs down your spine. ", parse);
                 if(size * 2 < lagonSize) {
@@ -688,7 +688,7 @@ export namespace LagonScenes {
             Text.NL();
             Text.Add("Lets see what he thinks of <i>this</i>. Giving his cock a last peck, you move in for a kiss, rubbing your body against his. ", parse);
             if(p1cock) {
-                var size = p1cock.Size();
+                let size = p1cock.Size();
                 Text.Add("The close proximity and your arousal incidentally brings your own [cocks] to bear, grinding [itThem] together with Lagon’s. ", parse);
                 if(size * 2 < lagonSize)
                     Text.Add("<i>“You naughty little bitch,”</i> the king hisses. <i>“[ThatThose] pitiful little clit[s] of yours speak[notS] volumes… you’re <b>really</b> looking forward to this, aren’t you?”</i>", parse);
@@ -705,7 +705,7 @@ export namespace LagonScenes {
             if(player.FirstVag()) {
                 Text.Add("You hear an appreciative moan from the lapin as you spread your pussy lips, grinding them along his shaft. ", parse);
                 if(p1cock) {
-                    var size = p1cock.Size();
+                    let size = p1cock.Size();
                     if(size * 2 >= lagonSize) {
                         Text.Add("Your [cocks] smear[notS] [itsTheir] sticky pre all over his chest, but he’s beyond caring at this point. ", parse);
                         if(size >= lagonSize)
@@ -721,8 +721,8 @@ export namespace LagonScenes {
         }
         Text.NL();
         
-        var target;
-        var scenes = new EncounterTable();
+        let target;
+        let scenes = new EncounterTable();
         scenes.AddEnc(function() {
             target = BodyPartType.ass;
             parse["target"] = player.Butt().AnalShort();
@@ -746,16 +746,16 @@ export namespace LagonScenes {
         let lagon = GAME().lagon;
         let burrows = GAME().burrows;
 
-        var parse : any = {
+        let parse : any = {
             
         };
         parse = player.ParserTags(parse);
         parse = Text.ParserPlural(parse, player.NumCocks() > 1);
         
-        var lagonGirth = lagon.FirstCock().Thickness();
+        let lagonGirth = lagon.FirstCock().Thickness();
         target = target || BodyPartType.ass;
-        var pussy = target == BodyPartType.vagina;
-        var cap;
+        let pussy = target == BodyPartType.vagina;
+        let cap;
         if(pussy) {
             parse["target"] = function() { return player.FirstVag().Short(); }
             cap = player.FirstVag().Cap();
@@ -822,9 +822,9 @@ export namespace LagonScenes {
         if(opheliaPresent)
             Text.Add("At the back, you can see Ophelia hovering uncertainly, perhaps deciding if she’s going to dare to approach. ", parse);
         
-        var blownbyophelia = false;
+        let blownbyophelia = false;
         
-        var scenes = new EncounterTable();
+        let scenes = new EncounterTable();
         scenes.AddEnc(function() {
             Text.Add("<i>“Look but don’t touch,”</i> the king admonishes them, waving them away. <i>“Once I’m done, perhaps you can have the leftovers.”</i>", parse);
             Text.NL();
@@ -835,7 +835,7 @@ export namespace LagonScenes {
             Text.NL();
             Text.Add("In your aroused state, you don’t need much coaxing to wrap your lips around the middle one - a respectable seven inch bunny-pecker - simultaneously grabbing the other two and stroking them off. Unlike their father, these ones are quick to shoot, relatively soon blasting their seed all over your face and down your gullet. <i>“Good work,”</i> Lagon purrs, scratching you on the back.", parse);
             
-            var bunny : any = new Lagomorph(Gender.male);
+            let bunny : any = new Lagomorph(Gender.male);
             Sex.Blowjob(player, bunny);
             player.FuckOral(player.Mouth(), bunny.FirstCock(), 1);
             bunny.Fuck(bunny.FirstCock(), 1);
@@ -865,7 +865,7 @@ export namespace LagonScenes {
                 Text.Add(" On each thrust, your [cock] is driven all the way down Ophelia’s throat, pushing you even further.", parse);
                 Text.NL();
                 
-                var cum = player.OrgasmCum();
+                let cum = player.OrgasmCum();
                 parse["cum"] = cum > 6 ? "massive" :
                             cum > 3 ? "impressive" : "meager";
                 parse["c"] = player.NumCocks() > 1 ? " and all over her sisters" : "";
@@ -878,7 +878,7 @@ export namespace LagonScenes {
             else {
                 Text.Add("<i>“Good girls, aren’t they?”</i> Lagon murmurs fondly, giving you another bounce. You can only moan in response, a wordless cry of agreement. ", parse);
                 
-                var scenes = new EncounterTable();
+                let scenes = new EncounterTable();
                 scenes.AddEnc(function() {
                     Text.Add("One of them move further down and suck on your [balls], while the other lavishes[oneof] your shaft[s].", parse);
                 }, 1.0, function() { return player.HasBalls(); });
@@ -894,7 +894,7 @@ export namespace LagonScenes {
                 Text.Add(" <i>“Why don’t you sate their desires?”</i>", parse);
                 Text.NL();
                 
-                var bunny : any = new Lagomorph(Gender.female);
+                let bunny : any = new Lagomorph(Gender.female);
                 
                 Sex.Blowjob(bunny, player);
                 bunny.FuckOral(bunny.Mouth(), player.FirstCock(), 1);
@@ -903,7 +903,7 @@ export namespace LagonScenes {
                 Text.Add("The king doesn’t wait for your response; rather, he seems intent on forcing your orgasm, starting to pound into you at breakneck speed. The combined stimulation from all three lagomorphs has you seeing stars, each rapid thrust of Lagon’s monster cock battering your prostate into submission.", parse);
                 Text.NL();
                 
-                var cum = player.OrgasmCum();
+                let cum = player.OrgasmCum();
                 parse["cum"] = cum > 6 ? "massive" :
                             cum > 3 ? "impressive" : "meager";
                 
@@ -938,7 +938,7 @@ export namespace LagonScenes {
             Text.NL();
             
             player.OrgasmCum(2);
-            var cum = player.OrgasmCum(2);
+            let cum = player.OrgasmCum(2);
             
             if(player.FirstCock()) {
                 Text.Add("The intense pressure once again forces an orgasm from your battered [balls], causing yet more sticky cum to leak from your [cocks]. ", parse);
@@ -1006,7 +1006,7 @@ export namespace LagonScenes {
 
     //TODO
     export function RulerPitEntrypoint() {
-        var parse : any = {
+        let parse : any = {
             
         };
         
@@ -1023,7 +1023,7 @@ export namespace LagonScenes {
         let player = GAME().player;
         let lagon = GAME().lagon;
 
-        var parse : any = {
+        let parse : any = {
             
         };
         
@@ -1041,7 +1041,7 @@ export namespace LagonScenes {
         
         lagon.relation.IncreaseStat(40, 100);
         //[Blowjob][Get fucked][The Pit][Decline]
-        var options = new Array();
+        let options = new Array();
         options.push({ nameStr : "Blowjob",
             func : function() {
                 Text.Clear();
@@ -1097,12 +1097,12 @@ export namespace LagonScenes {
         let lagon = GAME().lagon;
         let burrows = GAME().burrows;
 
-        var parse : any = {
+        let parse : any = {
             tongue : function() { return player.TongueDesc(); }
         };
         
         //[Burrows][Lagon][Vena][Ophelia] { [Scepter][Roa] }
-        var options = new Array();
+        let options = new Array();
         options.push({ nameStr : "Burrows",
             func : function() {
                 Text.Clear();
@@ -1225,7 +1225,7 @@ export namespace LagonScenes {
                 Text.Flush();
                 
                 //[Fair][Admirable][Questionable]
-                var options = new Array();
+                let options = new Array();
                 options.push({ nameStr : "Fair",
                     func : function() {
                         Text.Clear();
@@ -1361,7 +1361,7 @@ export namespace LagonScenes {
                         Text.Flush();
                         
                         //[Silence][Request]
-                        var options = new Array();
+                        let options = new Array();
                         options.push({ nameStr : "Silence",
                             func : function() {
                                 Text.Clear();
@@ -1410,7 +1410,7 @@ export namespace LagonScenes {
                                 Text.Flush();
                                 
                                 //[Refuse][Accept]
-                                var options = new Array();
+                                let options = new Array();
                                 options.push({ nameStr : "Refuse",
                                     func : function() {
                                         Text.Clear();
@@ -1502,8 +1502,8 @@ export namespace LagonScenes {
         let lagon = GAME().lagon;
 
         SetGameState(GameState.Event, Gui);
-        var enc = this;
-        var parse : any = {
+        let enc = this;
+        let parse : any = {
             
         };
         
@@ -1548,7 +1548,7 @@ export namespace LagonScenes {
         let lagon = GAME().lagon;
 
         SetGameState(GameState.Event, Gui);
-        var parse : any = {
+        let parse : any = {
             face : function() { return player.FaceDesc(); },
             tongue : function() { return player.TongueDesc(); },
             anusDesc : function() { return player.Butt().AnalShort(); },
@@ -1598,7 +1598,7 @@ export namespace LagonScenes {
             Text.Add("<i>“I’ve barely even gotten started with you, little bitch,”</i> Lagon growls, his hips a blur as he goes to town on your ass, <i>“and once I’m satisfied, once I’ve put enough loads in you to make your belly swell even larger than Vena’s, then I’ll let the rest of the Pit have you. Hundreds of bunnies fucking you without rest for days on end, and each time one of them cums in you, you’ll be reminded of your mistake; the day that you dared raise your hand against me.”</i>", parse);
             Text.NL();
             if(party.Num() > 1) {
-                var p1 = party.Get(1);
+                let p1 = party.Get(1);
                 parse["s"]      = party.Num() > 2 ? "s" : "";
                 parse["heshe"]  = party.Num() > 2 ? "they" : p1.heshe();
                 parse["hisher"] = party.Num() > 2 ? "their" : p1.hisher();
@@ -1636,7 +1636,7 @@ export namespace LagonScenes {
         let player = GAME().player;
         let party : Party = GAME().party;
 
-        var parse : any = {
+        let parse : any = {
             
         };
         
@@ -1675,10 +1675,10 @@ export namespace LagonScenes {
 
         SetGameState(GameState.Event, Gui);
         
-        var scepter = party.Inv().QueryNum(QuestItems.Scepter);
+        let scepter = party.Inv().QueryNum(QuestItems.Scepter);
 
         SetGameState(GameState.Event, Gui);
-        var parse : any = {
+        let parse : any = {
             
         };
         
@@ -1748,7 +1748,7 @@ export namespace LagonScenes {
         let party : Party = GAME().party;
         let ophelia = GAME().ophelia;
 
-        var parse : any = {
+        let parse : any = {
             playername : player.name
         };
         
@@ -1757,7 +1757,7 @@ export namespace LagonScenes {
         Text.Flush();
         
         //[Enter][Leave]
-        var options = new Array();
+        let options = new Array();
         options.push({ nameStr : "Leave",
             func : function() {
                 Text.Clear();
@@ -1776,7 +1776,7 @@ export namespace LagonScenes {
         options.push({ nameStr : "Enter",
             func : function() {
                 Text.Clear();
-                var toolate = ophelia.CountdownExpired();
+                let toolate = ophelia.CountdownExpired();
                 
                 parse["comp"] = party.Num() == 2 ? party.Get(1).name :
                                 party.Num() >  2 ? "your companions" : "";
@@ -1836,7 +1836,7 @@ export namespace LagonScenes {
         let burrows = GAME().burrows;
         let kiakai = GAME().kiakai;
 
-        var parse : any = {
+        let parse : any = {
             playername : player.name
         };
         
@@ -1845,7 +1845,7 @@ export namespace LagonScenes {
         Text.Flush();
         
         //[Enter][Leave]
-        var options = new Array();
+        let options = new Array();
         options.push({ nameStr : "Leave",
             func : function() {
                 Text.Clear();
@@ -1902,7 +1902,7 @@ export namespace LagonScenes {
                 Text.Flush();
                 
                 //[Oppose][Stand down]
-                var options = new Array();
+                let options = new Array();
                 options.push({ nameStr : "Oppose",
                     func : function() {
                         Text.Clear();
@@ -1964,17 +1964,17 @@ export namespace LagonScenes {
     }
 
     export function Usurp(toolate : boolean) {
-        var parse : any = {
+        let parse : any = {
             
         };
         
-        var enemy = new Party();
-        var lagonMob = new LagonRegular(true);
+        let enemy = new Party();
+        let lagonMob = new LagonRegular(true);
         enemy.AddMember(lagonMob);
         enemy.AddMember(new LagomorphBrute());
         enemy.AddMember(new LagomorphWizard());
         enemy.AddMember(new LagomorphElite(Gender.Random()));
-        var enc : any = new Encounter(enemy);
+        let enc : any = new Encounter(enemy);
         enc.toolate = toolate;
         
         enc.canRun = false;
@@ -1995,11 +1995,11 @@ export namespace LagonScenes {
         
         SetGameState(GameState.Event, Gui);
         
-        var enc = this;
-        var toolate = enc.toolate;
-        var scepter = party.Inv().QueryNum(QuestItems.Scepter);
+        let enc = this;
+        let toolate = enc.toolate;
+        let scepter = party.Inv().QueryNum(QuestItems.Scepter);
         
-        var parse : any = {
+        let parse : any = {
             tongue : function() { return player.TongueDesc(); },
             breasts : function() { return player.FirstBreastRow().Short(); }
         };
@@ -2091,11 +2091,11 @@ export namespace LagonScenes {
         
         SetGameState(GameState.Event, Gui);
         
-        var enc = this;
-        var toolate = enc.toolate;
-        var scepter = party.Inv().QueryNum(QuestItems.Scepter);
+        let enc = this;
+        let toolate = enc.toolate;
+        let scepter = party.Inv().QueryNum(QuestItems.Scepter);
         
-        var parse : any = {
+        let parse : any = {
             
         };
         
@@ -2117,9 +2117,9 @@ export namespace LagonScenes {
             Text.Flush();
             
             Gui.NextPrompt(function() {
-                var enemy = new Party();
+                let enemy = new Party();
                 enemy.AddMember(new LagonBrute(scepter != 0));
-                var enc = new Encounter(enemy);
+                let enc = new Encounter(enemy);
                 
                 enc.canRun = false;
                 
@@ -2140,11 +2140,11 @@ export namespace LagonScenes {
         
         SetGameState(GameState.Event, Gui);
         
-        var enc = this;
-        var toolate = enc.toolate;
-        var scepter = party.Inv().QueryNum(QuestItems.Scepter);
+        let enc = this;
+        let toolate = enc.toolate;
+        let scepter = party.Inv().QueryNum(QuestItems.Scepter);
         
-        var parse : any = {
+        let parse : any = {
             playername : player.name
         };
         
@@ -2221,9 +2221,9 @@ export namespace LagonScenes {
     }
 
     export function OpheliaFight() {
-        var enemy = new Party();
+        let enemy = new Party();
         enemy.AddMember(new OpheliaBrute());
-        var enc = new Encounter(enemy);
+        let enc = new Encounter(enemy);
         
         enc.canRun = false;
         
@@ -2237,9 +2237,9 @@ export namespace LagonScenes {
         let player = GAME().player;
         
         SetGameState(GameState.Event, Gui);
-        var enc = this;
+        let enc = this;
         
-        var parse : any = {
+        let parse : any = {
             cocks : function() { return player.MultiCockDesc(); }
         };
         
@@ -2255,7 +2255,7 @@ export namespace LagonScenes {
         Text.Add("<i>“Now, this one is for you.”</i> Lagon grins maliciously as he hops over onto your chest, driving the air out of your lungs. As you gasp for air, he forces a thick and sickly sweet liquid into your mouth, and you have no choice but to swallow. <i>“Good girl,”</i> he cheers you on. ", parse);
         if(!player.FirstVag())
             Text.Add("You try to shake your head; you’re not a girl! ", parse);
-        var gen = "";
+        let gen = "";
         if(player.FirstCock())
             gen += ", your gushing pussy overflowing with juices";
         if(player.FirstCock() && player.FirstVag())
@@ -2292,9 +2292,9 @@ export namespace LagonScenes {
         let lagon = GAME().lagon;
         
         SetGameState(GameState.Event, Gui);
-        var enc = this;
+        let enc = this;
         
-        var parse : any = {
+        let parse : any = {
             playername : player.name,
             stuttername : player.name[0] +"-"+ player.name,
             pheshe : player.mfFem("he", "she")

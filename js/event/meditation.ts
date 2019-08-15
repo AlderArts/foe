@@ -15,15 +15,15 @@ MeditationScenes.Entry = function() {
 	let party : Party = GAME().party;
 	let kiakai = GAME().kiakai;
 	let miranda = GAME().miranda;
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		Kiai : kiakai.name
 	};
 	parse = kiakai.ParserTags(parse);
 	parse = kiakai.ParserPronouns(parse);
 	
-	var lust = player.LustLevel();
-	var switchSpot = party.location.switchSpot();
+	let lust = player.LustLevel();
+	let switchSpot = party.location.switchSpot();
 	
 	Text.Clear();
 	if(lust >= 0.7) {
@@ -83,7 +83,7 @@ MeditationScenes.Entry = function() {
 	
 	//Scene selection
 	
-	var scenes = new EncounterTable();
+	let scenes = new EncounterTable();
 	//Breathing exercises (with Kiai). Requires that Kiai be present in the party.
 	scenes.AddEnc(function() {
 		Text.Add("<i>“I have an idea, [playername]. Shall we go through some simple breathing exercises? They used to help me a lot when I was back at the temple and I needed to clear my mind of… uh… wayward thoughts.”</i>", parse);
@@ -199,7 +199,7 @@ MeditationScenes.Entry = function() {
 		Text.Add(" The gem in your hands starts to grow warm, a gentle, pulsating heat, and you feel that you’re as ready as you’ll ever be.", parse);
 		Text.NL();
 		
-		var scenes = new EncounterTable();
+		let scenes = new EncounterTable();
 		//Astral Projection
 		scenes.AddEnc(function() {
 			Text.Add("Keeping your eyes closed, you visualize yourself somewhere outside your body, perhaps a few feet ahead", parse);

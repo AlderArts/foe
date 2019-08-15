@@ -10,7 +10,7 @@ export class BossEntity extends Entity {
 		super();
 
 		// Status resistance
-		for(var i = 0; i < StatusEffect.LAST; i++) {
+		for(let i = 0; i < StatusEffect.LAST; i++) {
 			this.statusDef[i] = 1;
 		}
 	}

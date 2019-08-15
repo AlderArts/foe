@@ -72,7 +72,7 @@ export class Drake extends Entity {
 	}
 
 	DropTable() {
-		var drops = [];
+		let drops = [];
 		/*
 		if(Math.random() < 0.05) drops.push({ it: IngredientItems.Stinger });
 		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.Stinger });
@@ -101,10 +101,10 @@ export class Drake extends Entity {
 		Text.NL();
 
 		// Pick a random target
-		var targets = this.GetPartyTarget(encounter, activeChar);
-		var t = this.GetSingleTarget(encounter, activeChar);
+		let targets = this.GetPartyTarget(encounter, activeChar);
+		let t = this.GetSingleTarget(encounter, activeChar);
 
-		var choice = Math.random();
+		let choice = Math.random();
 		if(choice < 0.2)
 			Abilities.Attack.CastInternal(encounter, this, t);
 		else if(choice < 0.3 && Abilities.Black.ThunderStorm.enabledCondition(encounter, this))
@@ -126,9 +126,9 @@ export class Drake extends Entity {
 }
 
 DrakeScenes.DrakeEnc = function() {
-	var enemy    = new Party();
+	let enemy    = new Party();
 	enemy.AddMember(new Drake());
-	var enc      = new Encounter(enemy);
+	let enc      = new Encounter(enemy);
 
 	/*
 	enc.canRun = false;

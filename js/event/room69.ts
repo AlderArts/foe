@@ -53,7 +53,7 @@ export class Room69 extends Entity {
 	}
 
 	ToStorage() {
-		var storage = {};
+		let storage = {};
 		
 		this.SavePersonalityStats(storage);
 		
@@ -92,7 +92,7 @@ Room69Scenes.Interact = function() {
 Room69Scenes.Discovering69 = function() {
 	let player = GAME().player;
 
-	var parse : any = {
+	let parse : any = {
 	};
 	
 	Text.Clear();
@@ -126,11 +126,11 @@ Room69Scenes.Discovering69Prompt = function() {
 	let room69 = GAME().room69;
 	let player = GAME().player;
 
-	var parse : any = {
+	let parse : any = {
 	};
 	
 	//[Sentience][What now][Leave]
-	var options = new Array();
+	let options = new Array();
 	if(Room69Scenes.introTalkedSentience == false) {
 		options.push({ nameStr : "Sentience",
 			func : function() {
@@ -201,12 +201,12 @@ Room69Scenes.Discovering69WhatNow = function() {
 	let player = GAME().player;
 	let world = WORLD();
 
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	
 	//[Agree][Argue][Force]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Agree",
 		func : Room69Scenes.Discovering69Sex, enabled : true,
 		tooltip : "Maybe having some fun with Sixtynine won’t be so bad."
@@ -337,7 +337,7 @@ Room69Scenes.Discovering69WhatNow = function() {
 Room69Scenes.Discovering69OrvinRant = function() {
 	let party : Party = GAME().party;
 
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	parse["IkName"] = !RigardFlags.LB.KnowsOrvin() ? "The innkeeper" : "Orvin";
@@ -367,7 +367,7 @@ Room69Scenes.Discovering69ForceOutro = function() {
 	let party : Party = GAME().party;
 	let world = WORLD();
 
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	parse["IkName"] = !RigardFlags.LB.KnowsOrvin() ? "The innkeeper" : "Orvin";
@@ -426,7 +426,7 @@ Room69Scenes.Discovering69Sex = function() {
 	let roa = GAME().roa;
 	let world = WORLD();
 
-	var parse : any = {
+	let parse : any = {
 		playername      : function() { return player.name; },
 		topArmorDesc    : function() { return player.ArmorDesc(); },
 		topitthem       : function() { return player.Armor() ? "it" : "them"; },
@@ -556,7 +556,7 @@ Room69Scenes.Discovering69Sex = function() {
 		}
 		Text.NL();
 		parse["first"] = player.NumCocks() > 2 ? " first" : "";
-		var largeCock = player.BiggestCock();
+		let largeCock = player.BiggestCock();
 		parse["cockTipDesc"] = function() { return largeCock.TipShort(); };
 		parse["cockDesc"]    = function() { return largeCock.Short(); };
 		Text.Add("When the[first] tentacle reaches the tip, it curls around your [cockTipDesc], playing with the underside of your [cockDesc] until you’re nearly panting with excitement. It pauses and circles back, teasing the opening of your penis, pressing the tiniest way in before withdrawing, watching your reaction. <i>“Perhaps another time...”</i>", parse);
@@ -588,7 +588,7 @@ Room69Scenes.Discovering69Sex = function() {
 			Text.Add("soaking into them, and leaking down over them, to be absorbed into the mass of cloth that is refusing to release you. <i>“Mm, making my sheets all nice and gooey. I wonder if that will make them feel even better...”</i>", parse);
 		Text.NL();
 		parse["clit"] = (player.FirstVag() && !player.FirstVag().clitCock) ? Text.Parse(" and your [clitDesc]", parse) : "";
-		var numThings = player.NumCocks();
+		let numThings = player.NumCocks();
 		if(player.FirstVag() && !player.FirstVag().clitCock) numThings++;
 		parse["isAre"]     = numThings > 1 ? "are" : "is";
 		parse["ts"]        = numThings > 1 ? "s" : "";
@@ -695,7 +695,7 @@ Room69Scenes.Discovering69Sex = function() {
 					parse["internal"]  = "";
 				}
 				else { //if(party.Num() == 2)
-					var p1 = party.Get(1);
+					let p1 = party.Get(1);
 					parse["comp"] = p1.name;
 					parse["himher"] = p1.himher();
 					parse["hisher"] = p1.hisher();
@@ -708,7 +708,7 @@ Room69Scenes.Discovering69Sex = function() {
 				Text.Add("You nod at the explanation, only to be met with inquisitive eyes looking across the table at you. Turning a little red, you tell [himher] that you were indeed fine. More than fine, really.", parse);
 				Text.NL();
 				
-				var scenes = new EncounterTable();
+				let scenes = new EncounterTable();
 				scenes.AddEnc(function() {
 					parse["name"] = kiakai.name;
 					if(kiakai.flags["Attitude"] >= KiakaiFlags.Attitude.Neutral)
@@ -755,7 +755,7 @@ Room69Scenes.ApologizeTo69ForBreakingDoor = function() {
 	let room69 = GAME().room69;
 	let player = GAME().player;
 
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	Text.Clear();
@@ -771,7 +771,7 @@ Room69Scenes.ApologizeTo69ForBreakingDoor = function() {
 		Text.Flush();
 		
 		//[Apologize][Leave]
-		var options = new Array();
+		let options = new Array();
 		options.push({ nameStr : "Apologize",
 			func : function() {
 				Text.Clear();
@@ -841,7 +841,7 @@ Room69Scenes.ApologizeTo69ForBeingMean = function() {
 	let room69 = GAME().room69;
 	let player = GAME().player;
 
-	var parse : any = {
+	let parse : any = {
 		hisher : player.mfTrue("his", "her")
 	};
 	
@@ -859,16 +859,16 @@ Room69Scenes.ApologizeTo69ForBeingMean = function() {
 	
 	
 	//[Apologize][Insult Fight][Leave]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Apologize",
 		func : function() {
 			Text.Clear();
 			Text.Add("It feels silly to speak to the empty air, even though you know a sentient room is listening, but you persevere and tell Sixtynine that you are sorry about what happened earlier. You just felt trapped, and it was the only way out you saw...", parse);
 			Text.NL();
 			
-			var racescore = new RaceScore(player.body);
-			var majorRace = RaceDesc.IdToRace[racescore.Sorted()[0]];
-			var undef = false;
+			let racescore = new RaceScore(player.body);
+			let majorRace = RaceDesc.IdToRace[racescore.Sorted()[0]];
+			let undef = false;
 			if(majorRace.isRace(Race.Human)) parse["race"] = " monkeys";
 			else if(majorRace.isRace(Race.Horse)) parse["race"] = " horsies";
 			else if(majorRace.isRace(Race.Dog)) parse["race"] = " doggies";
@@ -953,7 +953,7 @@ Room69Scenes.ApologizeTo69ForBeingMean = function() {
 
 // TODO: PLACEHOLDER
 Room69Scenes.Normal69 = function() {
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	
@@ -978,7 +978,7 @@ Room69Scenes.Normal69 = function() {
 
 /*
 Room69Scenes.Discovering69 = function() {
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	

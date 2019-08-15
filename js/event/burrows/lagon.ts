@@ -64,7 +64,7 @@ export class Lagon extends Entity {
 	}
 
 	ToStorage() {
-		var storage = {};
+		let storage = {};
 		
 		this.SavePersonalityStats(storage);
 		this.SaveBodyPartial(storage, {ass: true});
@@ -153,7 +153,7 @@ export class LagonRegular extends BossEntity {
 	}
 
 	DropTable() {
-		var drops = [];
+		let drops = [];
 		drops.push({ it: AlchemyItems.Leporine });
 		if(this.tougher)
 			drops.push({ it: AlchemyItems.Leporine });
@@ -161,12 +161,12 @@ export class LagonRegular extends BossEntity {
 	}
 
 	PhysDmgHP(encounter : any, caster : Entity, val : number) {
-		var parse : any = {
+		let parse : any = {
 			poss : caster.possessive()
 		};
 		
 		if(Math.random() < 0.1) {
-			var scenes = new EncounterTable();
+			let scenes = new EncounterTable();
 			scenes.AddEnc(function() {
 				Text.Add("Before [poss] blow connects, a wall of bunnies interpose themselves, absorbing the damage for their king!", parse);
 				Text.NL();
@@ -189,24 +189,24 @@ export class LagonRegular extends BossEntity {
 	Act(enc : any, activeChar : any) {
 		let player = GAME().player;
 		// Pick a random target
-		var t = this.GetSingleTarget(enc, activeChar);
+		let t = this.GetSingleTarget(enc, activeChar);
 
-		var parse : any = {
+		let parse : any = {
 			name   : this.name,
 			hisher : this.hisher(),
 			tName  : t.name,
 			phisher : player.mfFem("his", "her")
 		};
 
-		var tougher = this.tougher;
-		var enemy  = enc.enemy;
-		var fallen = [];
-		for(var i = 1; i < enemy.members.length; i++) {
+		let tougher = this.tougher;
+		let enemy  = enc.enemy;
+		let fallen = [];
+		for(let i = 1; i < enemy.members.length; i++) {
 			if(enemy.members[i].Incapacitated())
 				fallen.push(enemy.members[i]);
 		}
 		if(fallen.length > 0 && Math.random() < 0.5) {
-			var scenes = new EncounterTable();
+			let scenes = new EncounterTable();
 			scenes.AddEnc(function() {
 				Text.Add("<i>“Come to me, my children!”</i> Lagon shouts, rallying additional troops to his side.", parse);
 			}, 1.0, function() { return true; });
@@ -221,11 +221,11 @@ export class LagonRegular extends BossEntity {
 			Text.NL();
 			Text.Flush();
 			
-			for(var i = 0; i < fallen.length; i++) {
+			for(let i = 0; i < fallen.length; i++) {
 				enemy.SwitchOut(fallen[i]);
-				var entity;
+				let entity;
 				if(tougher) {
-					var r = Math.random();
+					let r = Math.random();
 					if(r < 0.3)
 						entity = new LagomorphBrute();
 					else if(r < 0.6)
@@ -241,7 +241,7 @@ export class LagonRegular extends BossEntity {
 				}
 				enemy.AddMember(entity);
 				
-				var ent : any = {
+				let ent : any = {
 					entity     : entity,
 					isEnemy    : true,
 					initiative : 0,
@@ -253,7 +253,7 @@ export class LagonRegular extends BossEntity {
 			}
 		}
 
-		var choice = Math.random();
+		let choice = Math.random();
 		if(choice < 0.2 && Abilities.Physical.DirtyBlow.enabledCondition(enc, this))
 			Abilities.Physical.DirtyBlow.Use(enc, this, t);
 		else if(choice < 0.4 && Abilities.Physical.FocusStrike.enabledCondition(enc, this))
@@ -317,7 +317,7 @@ export class LagonBrute extends BossEntity {
 	}
 
 	DropTable() {
-		var drops = [];
+		let drops = [];
 		drops.push({ it: AlchemyItems.Leporine });
 		drops.push({ it: AlchemyItems.Testos });
 		drops.push({ it: AlchemyItems.Virilium });
@@ -329,16 +329,16 @@ export class LagonBrute extends BossEntity {
 	Act(encounter : any, activeChar : any) {
 		let party : Party = GAME().party;
 		// Pick a random target
-		var targets = this.GetPartyTarget(encounter, activeChar);
-		var t = this.GetSingleTarget(encounter, activeChar);
+		let targets = this.GetPartyTarget(encounter, activeChar);
+		let t = this.GetSingleTarget(encounter, activeChar);
 
-		var parse : any = {
+		let parse : any = {
 			
 		};
 
-		var first = this.turns == 0;
+		let first = this.turns == 0;
 		this.turns++;
-		var scepter = party.Inv().QueryNum(QuestItems.Scepter);
+		let scepter = party.Inv().QueryNum(QuestItems.Scepter);
 		
 		if(scepter) {
 			if(first) {
@@ -354,7 +354,7 @@ export class LagonBrute extends BossEntity {
 				return;
 			}
 			else if(Math.random() < 0.1) {
-				var scenes = new EncounterTable();
+				let scenes = new EncounterTable();
 				scenes.AddEnc(function() {
 					Text.Add("<i>“T-there, I have it!”</i> Ophelia yelps as she manages to fiddle the rod again, causing Lagon to shake his head in confusion.", parse);
 				}, 1.0, function() { return true; });
@@ -378,7 +378,7 @@ export class LagonBrute extends BossEntity {
 			}
 		}
 		
-		var choice = Math.random();
+		let choice = Math.random();
 		if(choice < 0.2 && Abilities.Physical.Bash.enabledCondition(encounter, this))
 			Abilities.Physical.Bash.Use(encounter, this, t);
 		else if(choice < 0.4 && Abilities.Physical.Frenzy.enabledCondition(encounter, this))

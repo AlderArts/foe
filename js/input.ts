@@ -145,7 +145,7 @@ export class Input {
 	
 	// Init functions for the button sets
 	static InitButtons() {
-		var offset = {x: 270, y:600};
+		let offset = {x: 270, y:600};
 
 		let button : Button;
 		for(let y = 0; y < 3; y++) {
@@ -176,10 +176,10 @@ export class Input {
 	}
 
 	static InitMenuButtons() {
-		var offset = {x: 15, y:620};
+		let offset = {x: 15, y:620};
 
 		// TOP, Data menu
-		var button = new Button(Gui, {x : 10, y : 10, w : 155, h : 35}, "DATA", null, true, Images.imgButtonEnabled, Images.imgButtonDisabled);
+		let button = new Button(Gui, {x : 10, y : 10, w : 155, h : 35}, "DATA", null, true, Images.imgButtonEnabled, Images.imgButtonDisabled);
 		menuButtons.push(button);
 		menuButtonSet.push(button.set);
 	};
@@ -187,7 +187,7 @@ export class Input {
 	static RenderExploreButtonGlow() {
 		/*
 		//TODO keybind tooltip
-		var keybinding = KeyToText[this.key];
+		let keybinding = KeyToText[this.key];
 		if(Gui.ShortcutsVisible && keybinding) {
 			// Render the text centered
 			context.font = TINY_FONT;

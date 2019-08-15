@@ -76,7 +76,7 @@ export class Fireblossom extends Entity {
 	}
 	
 	ToStorage() {
-		var storage : any = {};
+		let storage : any = {};
 		
 		this.SaveFlags(storage);
 		
@@ -103,14 +103,14 @@ export namespace FireblossomScenes {
 		let fireblossom = GAME().fireblossom;
 		let lucille = GAME().lucille;
 
-		var parse : any = {
+		let parse : any = {
 			armor : player.ArmorDesc(),
 			skin  : player.SkinDesc(),
 			name  : kiakai.name,
 			heshe : kiakai.heshe()
 		};
 		
-		var first = fireblossom.First();
+		let first = fireblossom.First();
 		
 		lucille.flags["Theme"] |= LucilleFlags.Themeroom.Fireblossom;
 		
@@ -142,7 +142,7 @@ export namespace FireblossomScenes {
 			Text.Flush();
 			
 			//[Enter][Reset]
-			var options = new Array();
+			let options = new Array();
 			options.push({ nameStr : "Enter",
 				tooltip : "Continue exploring Fireblossom’s world from where you left off.",
 				func : function() {
@@ -185,7 +185,7 @@ export namespace FireblossomScenes {
 	export function Outro() {
 		let player = GAME().player;
 		let fireblossom = GAME().fireblossom;
-		var parse : any = {
+		let parse : any = {
 			armor : player.ArmorDesc()
 		};
 		
@@ -202,7 +202,7 @@ export namespace FireblossomScenes {
 	export function S1TheJourney() {
 		let player = GAME().player;
 		let fireblossom = GAME().fireblossom;
-		var parse : any = {
+		let parse : any = {
 			
 		};
 		
@@ -282,7 +282,7 @@ export namespace FireblossomScenes {
 			Text.Flush();
 			
 			//[Protest][Don’t][Encourage]
-			var options = new Array();
+			let options = new Array();
 			options.push({ nameStr : "Protest",
 				tooltip : "Give this grabby maid a harsh telling off. She clearly doesn’t know her place!",
 				func : function() {
@@ -425,7 +425,7 @@ export namespace FireblossomScenes {
 					Text.Flush();
 					
 					//[Give in][Scheme][Protest]
-					var options = new Array();
+					let options = new Array();
 					options.push({ nameStr : "Give in",
 						tooltip : "It’s no use, you can’t fight him.",
 						func : function() {
@@ -461,7 +461,7 @@ export namespace FireblossomScenes {
 	export function S1Draxen() {
 		let player = GAME().player;
 		let fireblossom = GAME().fireblossom;
-		var parse : any = {
+		let parse : any = {
 			
 		};
 		
@@ -585,7 +585,7 @@ export namespace FireblossomScenes {
 	export function S1Rakkat() {
 		let player = GAME().player;
 		let fireblossom = GAME().fireblossom;
-		var parse : any = {
+		let parse : any = {
 			
 		};
 		
@@ -643,7 +643,7 @@ export namespace FireblossomScenes {
 			Text.Flush();
 			
 			//[Wait for him][Seduce][Kill him]
-			var options = new Array();
+			let options = new Array();
 			options.push({ nameStr : "Wait for him",
 				tooltip : "For now, do as he says. Wait and observe.",
 				func : function() {
@@ -778,13 +778,13 @@ export namespace FireblossomScenes {
 
 	export function S1RakkatCont() {
 		let fireblossom = GAME().fireblossom;
-		var parse : any = {
+		let parse : any = {
 			
 		};
 		
 		fireblossom.flags["Rakkat"] |= FireblossomFlags.Rakkat.Lover;
 		
-		var seduced = fireblossom.flags["Rakkat"] & FireblossomFlags.Rakkat.Seduced;
+		let seduced = fireblossom.flags["Rakkat"] & FireblossomFlags.Rakkat.Seduced;
 		
 		Text.Clear();
 		Text.Add("<i>“Get ready to be plucked, my pretty little flower,”</i> the General huffs, leaning in for a kiss. Your tongues intermingle and wrestle, his long and sinuous. ", parse);
@@ -860,7 +860,7 @@ export namespace FireblossomScenes {
 
 	export function S1Grex() {
 		let fireblossom = GAME().fireblossom;
-		var parse : any = {
+		let parse : any = {
 			
 		};
 		
@@ -897,7 +897,7 @@ export namespace FireblossomScenes {
 
 	export function S1GrexEntrypoint() {
 		let fireblossom = GAME().fireblossom;
-		var parse : any = {
+		let parse : any = {
 			
 		};
 		
@@ -942,12 +942,12 @@ export namespace FireblossomScenes {
 	export function S1GrexRoom(opts : any) {
 		let player = GAME().player;
 		let fireblossom = GAME().fireblossom;
-		var parse : any = {
+		let parse : any = {
 			
 		};
 		
 		//[Survey][Explore][Wait]
-		var options = new Array();
+		let options = new Array();
 		options.push({ nameStr : "Survey",
 			tooltip : "Look through Grex’s chambers.",
 			func : function() {
@@ -1014,11 +1014,11 @@ export namespace FireblossomScenes {
 	export function S1GrexPens(opts : any) {
 		let player = GAME().player;
 		let fireblossom = GAME().fireblossom;
-		var parse : any = {
+		let parse : any = {
 			
 		};
 		
-		var fromRakkat = fireblossom.flags["Outset"] == FireblossomFlags.Outset.RakkatToGrex;
+		let fromRakkat = fireblossom.flags["Outset"] == FireblossomFlags.Outset.RakkatToGrex;
 		
 		Text.Add("Qin opens her satchel and brings out several vials and jars containing strange fluids and salves. You look at her bewildered and ask her how these are going to aid in your escape. The maid blinks at you.", parse);
 		Text.NL();

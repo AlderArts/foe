@@ -41,7 +41,7 @@ export namespace BurrowsScenes {
 
     export function FirstApproach() {
         let party : Party = GAME().party;
-        var parse : any = {};
+        let parse : any = {};
             
         if(party.Two())
             parse["comp"] = " and " + party.Get(1).name;
@@ -58,7 +58,7 @@ export namespace BurrowsScenes {
         Text.Flush();
         
         //[Leave][Approach]
-        var options = new Array();
+        let options = new Array();
         options.push({ nameStr : "Leave",
             func : function() {
                 Text.NL();
@@ -80,7 +80,7 @@ export namespace BurrowsScenes {
                 Text.NL();
                 
                 // Create a new alpha
-                var alpha : any = new LagomorphAlpha(Gender.Random());
+                let alpha : any = new LagomorphAlpha(Gender.Random());
                 parse["m1HeShe"]  = function() { return alpha.HeShe(); };
                 parse["m1heshe"]  = function() { return alpha.heshe(); };
                 parse["m1HisHer"] = function() { return alpha.HisHer(); };
@@ -119,7 +119,7 @@ export namespace BurrowsScenes {
         let player = GAME().player;
         let party : Party = GAME().party;
         let burrows = GAME().burrows;
-        var parse : any = {
+        let parse : any = {
             skinDesc   : function() { return player.SkinDesc(); },
             p1name     : function() { return party.Get(1).name; },
             m1HeShe    : function() { return alpha.HeShe(); },
@@ -192,7 +192,7 @@ export namespace BurrowsScenes {
 
     export function ArrivalOphelia() {
         let player = GAME().player;
-        var parse : any = {
+        let parse : any = {
             playername : player.name
         };
         
@@ -221,7 +221,7 @@ export namespace BurrowsScenes {
         let party : Party = GAME().party;
         let rosalin = GAME().rosalin;
         
-        var parse : any = {
+        let parse : any = {
             playername : player.name
         };
         if(party.Two())
@@ -233,7 +233,7 @@ export namespace BurrowsScenes {
         
         
         //[Burrows][Ophelia][Vena][Lab]
-        var options = new Array();
+        let options = new Array();
         if(!OpheliaTalkBurrows) {
             options.push({ nameStr : "Burrows",
                 func : function() {
@@ -340,7 +340,7 @@ export namespace BurrowsScenes {
                 Text.Flush();
                 
                 //[Go along][Resist]
-                var options = new Array();
+                let options = new Array();
                 options.push({ nameStr : "Go along",
                     func : function() {
                         Text.Clear();
@@ -385,7 +385,7 @@ export namespace BurrowsScenes {
 
     export function ArrivalLagon() {
         let player = GAME().player;
-        var parse : any = {
+        let parse : any = {
             playername : player.name,
             heshe      : player.mfFem("he", "she")
         };
@@ -430,7 +430,7 @@ export namespace BurrowsScenes {
     export function ArrivalLagonTalk() {
         let party : Party = GAME().party;
         let lagon = GAME().lagon;
-        var parse : any = {
+        let parse : any = {
             
         };
         if(party.Two())
@@ -441,7 +441,7 @@ export namespace BurrowsScenes {
             parse["comp"] = "";
         
         //[Assault][Job]
-        var options = new Array();
+        let options = new Array();
         if(!ArrivalLagonTalkAssault) {
             options.push({ nameStr : "Assault",
                 func : function() {
@@ -515,7 +515,7 @@ export namespace BurrowsScenes {
 //
 BurrowsLoc.Entrance.description = function() {
 	let burrows = GAME().burrows;
-	var parse : any = {
+	let parse : any = {
 		TreeFar : WORLD().TreeFarDesc(),
 		l : burrows.LagonDefeated() ? "the lagomorph" : "Lagon’s"
 	};
@@ -524,7 +524,7 @@ BurrowsLoc.Entrance.description = function() {
 	Text.NL();
 	Text.Add("The burrows are located in a group of low hills on the plains, still quite a ways from the forest. [TreeFar]", parse);
 	Text.NL();
-	var scenes = new EncounterTable();
+	let scenes = new EncounterTable();
 	scenes.AddEnc(function() {
 		Text.Add("There is a curious group of rabbits gathered a short distance from the main tunnel. They are carrying what looks like makeshift farming tools, poking at a patch of ground haphazardly. It looks like they are trying to plant carrots.", parse);
 		if(WorldTime().season == Season.Winter) {
@@ -633,7 +633,7 @@ BurrowsLoc.Tunnels.enc = new EncounterTable();
 //
 BurrowsLoc.Throne.description = function() {
 	let burrows = GAME().burrows;
-	var parse : any = {
+	let parse : any = {
 		Lagon : burrows.VenaRestored() ? "Vena" : "Lagon"
 	};
 	
@@ -701,7 +701,7 @@ BurrowsLoc.Throne.events.push(new Link(
 BurrowsLoc.Pit.description = function() {
 	let player = GAME().player;
 	let burrows = GAME().burrows;
-	var parse : any = {
+	let parse : any = {
 		Lagon : burrows.VenaRestored() ? "Vena" : "Lagon"
 	};
 	

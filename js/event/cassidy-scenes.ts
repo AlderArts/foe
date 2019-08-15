@@ -26,7 +26,7 @@ let CassidyScenes : any = {
 CassidyScenes.First = function() {
 	let player = GAME().player;
 	let cassidy : Cassidy = GAME().cassidy;
-	var parse : any = {
+	let parse : any = {
 		playername : player.name
 	};
 	
@@ -80,7 +80,7 @@ CassidyScenes.ShopDesc = function() {
 	let player = GAME().player;
 	let cassidy : Cassidy = GAME().cassidy;
 	let miranda = GAME().miranda;
-	var parse : any = {};
+	let parse : any = {};
 	
 	Text.Add("You’re standing on the shop floor of The Pale Flame. Racks upon racks of implements of assorted death stand in lines and hang on the walls, each and every one of them dust-free and labeled with their name and make. Stabbing, impaling, bludgeoning, crushing, bleeding out, slashing - you name it, and it’s likely Cassidy that has it on display on the floor.", parse);
 	Text.NL();
@@ -93,7 +93,7 @@ CassidyScenes.ShopDesc = function() {
 	Text.NL();
 	Text.Add("The shop itself is kept impeccably neat and organized. Walls of white, faded brick have been kept absolutely spotless, giving the shop a simple charm of its own; no additional decorations are required, for Cassidy’s creations are works of art in and of themselves. You catch sight of a ", parse);
 	
-	var scenes = new EncounterTable();
+	let scenes = new EncounterTable();
 	
 	scenes.AddEnc(function() {
 		Text.Add("shining steel sword upon one of the display racks - but the love with which it’s been fashioned is evident. The grip‘s been wrapped in quality leather, the crossguard’s been embossed with a fine floral pattern, but you get the impression that for the modicum of refinement that’s been imparted to it, this is still a very functional weapon.", parse);
@@ -183,7 +183,7 @@ CassidyScenes.ShopDesc = function() {
 	Text.NL();
 	Text.Add("You pause a moment, and weigh your options.", parse);
 	
-	var orderReady = (cassidy.flags["Order"] != CassidyFlags.Order.None) && cassidy.orderTimer.Expired();
+	let orderReady = (cassidy.flags["Order"] != CassidyFlags.Order.None) && cassidy.orderTimer.Expired();
 	
 	if(orderReady) {
 		parse = cassidy.ParserPronouns(parse);
@@ -198,7 +198,7 @@ CassidyScenes.ShopDesc = function() {
 CassidyScenes.Approach = function() {
     let cassidy : Cassidy = GAME().cassidy;
 
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	parse = cassidy.ParserPronouns(parse);
@@ -206,7 +206,7 @@ CassidyScenes.Approach = function() {
 	Text.Clear();
 	Text.Add("Approaching the shop counter, you call for Cassidy. ", parse);
 	
-	var scenes = new EncounterTable();
+	let scenes = new EncounterTable();
 	
 	scenes.AddEnc(function() {
 		Text.Add("[HeShe]’s currently mounting another one of the shop’s impressive displays - looking at [himher], if [heshe] were human [heshe] wouldn’t be able to lift <i>that</i> over [hisher] head like that.", parse);
@@ -244,12 +244,12 @@ CassidyScenes.Prompt = function() {
 	let player = GAME().player;
     let cassidy : Cassidy = GAME().cassidy;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name
 	};
 	parse = cassidy.ParserPronouns(parse);
 	
-	var options = new Array();
+	let options = new Array();
 	
 	options.push({ nameStr : "Appearance",
 		tooltip : "Give the salamander a once-over.",
@@ -386,7 +386,7 @@ CassidyScenes.Prompt = function() {
 CassidyScenes.Appearance = function() {
 	let cassidy : Cassidy = GAME().cassidy;
 
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	parse = cassidy.ParserPronouns(parse);
@@ -443,13 +443,13 @@ CassidyScenes.TalkPrompt = function() {
 	let player = GAME().player;
     let cassidy : Cassidy = GAME().cassidy;
 
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	parse = cassidy.ParserPronouns(parse);
 	
 	//[What’s Up?][Shop][Back]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "What’s Up?",
 		tooltip : Text.Parse("So… has [heshe] heard anything new?", parse),
 		func : function() {
@@ -457,7 +457,7 @@ CassidyScenes.TalkPrompt = function() {
 			Text.Add("<i>“New? New? Lemme think…”</i> Cassidy drums [hisher] claws on the counter and taps [hisher] tail on the floor - both of them in time - as [heshe] furrows [hisher] brow in thought.", parse);
 			Text.NL();
 			
-			var scenes = new EncounterTable();
+			let scenes = new EncounterTable();
 			
 			// ACT 1 STUFF
 			scenes.AddEnc(function() {
@@ -568,7 +568,7 @@ CassidyScenes.TalkPrompt = function() {
 CassidyScenes.ForgeFirst = function() {
 	let cassidy : Cassidy = GAME().cassidy;
 
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	parse = cassidy.ParserPronouns(parse);
@@ -613,11 +613,11 @@ CassidyScenes.ForgeFirst = function() {
 CassidyScenes.ShopBuy = function() {
 	let cassidy : Cassidy = GAME().cassidy;
 
-	var parse : any = {};
+	let parse : any = {};
 	
 	CassidyScenes.Shopbought = false;
 	
-	var backPrompt = function() {
+	let backPrompt = function() {
 		Text.Clear();
 		if(CassidyScenes.Shopbought)
 			Text.Add("Nah, that’ll be all. You’ve made enough purchases for right now.", parse);
@@ -628,21 +628,21 @@ CassidyScenes.ShopBuy = function() {
 		CassidyScenes.Prompt();
 	}
 	
-	var buyFunc = function() {
+	let buyFunc = function() {
 		CassidyScenes.Shopbought = true;
 		return false;
 	}
 	
-	var timestamp = Math.floor(WorldTime().ToDays());
+	let timestamp = Math.floor(WorldTime().ToDays());
 	if(cassidy.flags["shop"] < timestamp || cassidy.shop.inventory.length == 0) {
 		// Randomize inventory
 		cassidy.shop.inventory = [];
 		
-		var shopPool = _.clone(cassidy.shopItems);
+		let shopPool = _.clone(cassidy.shopItems);
 		
-		var num = _.random(4, 7);
+		let num = _.random(4, 7);
 		_.times(num, function() {
-			var it = _.sample(shopPool);
+			let it = _.sample(shopPool);
 			if(!it) return false;
 			_.pull(shopPool, it);
 			
@@ -658,12 +658,12 @@ CassidyScenes.ShopBuy = function() {
 CassidyScenes.ShopSell = function() {
 	let cassidy : Cassidy = GAME().cassidy;
 
-	var parse : any = {};
+	let parse : any = {};
 	parse = cassidy.ParserPronouns(parse);
 	
 	CassidyScenes.Shopsold = false;
 	
-	var backPrompt = function() {
+	let backPrompt = function() {
 		Text.Clear();
 		if(CassidyScenes.Shopsold) {
 			Text.Add("That’s all you’ve got at the moment.", parse);
@@ -677,7 +677,7 @@ CassidyScenes.ShopSell = function() {
 		CassidyScenes.Prompt();
 	}
 	
-	var sellFunc = function() {
+	let sellFunc = function() {
 		CassidyScenes.Shopsold = true;
 		return false;
 	}
@@ -689,7 +689,7 @@ CassidyScenes.HeadInside = function() {
 	let player = GAME().player;
 	let cassidy : Cassidy = GAME().cassidy;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name
 	};
 	parse = cassidy.ParserPronouns(parse);
@@ -719,7 +719,7 @@ CassidyScenes.HeadInside = function() {
 	Text.Add("Without another word, Cassidy heads for the little door in the back of the shop, grasping the handle in a scaly hand and yanking it open. [HeShe] steps inside, then grins and gestures for you to follow.", parse);
 	Text.NL();
 	
-	var scenes = new EncounterTable();
+	let scenes = new EncounterTable();
 	
 	scenes.AddEnc(function() {
 		Text.Add("<i>“Come on in,”</i> [heshe] says. <i>“I won’t bite. Or maybe I will, but not very hard. Don’t worry about it.”</i>", parse);
@@ -735,7 +735,7 @@ CassidyScenes.HeadInside = function() {
 	
 	Text.NL();
 	
-	var first = cassidy.flags["Met"] < CassidyFlags.Met.WentBack;
+	let first = cassidy.flags["Met"] < CassidyFlags.Met.WentBack;
 	
 	if(first) {
 		cassidy.flags["Met"] = CassidyFlags.Met.WentBack;
@@ -782,7 +782,7 @@ CassidyScenes.HeadInside = function() {
 	}
 	Text.NL();
 	
-	var scenes = new EncounterTable();
+	scenes = new EncounterTable();
 	scenes.AddEnc(function() {
 		Text.Add("<i>“Just make yourself comfortable at the table,”</i>", parse);
 	}, 1.0, function() { return true; });
@@ -841,12 +841,12 @@ CassidyScenes.InsidePrompt = function() {
 	let player = GAME().player;
 	let cassidy : Cassidy = GAME().cassidy;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name
 	};
 	parse = cassidy.ParserPronouns(parse);
 	
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Talk",
 		tooltip : "Have a chat.",
 		func : function() {
@@ -878,7 +878,7 @@ CassidyScenes.InsidePrompt = function() {
 					Text.NL();
 					Text.Add("It doesn’t take long for Cass to grab her warhammer and lead you out to the back yard. <i>“All right, I’ve been practicing really hard myself! ", parse);
 					
-					var scenes = new EncounterTable();
+					let scenes = new EncounterTable();
 					scenes.AddEnc(function() {
 						Text.Add("Don’t hold back, because I won’t!", parse);
 					}, 1.0, function() { return true; });
@@ -924,7 +924,7 @@ CassidyScenes.InsidePrompt = function() {
 CassidyScenes.InsideMeal = function() {
 	let player = GAME().player;
 	let cassidy : Cassidy = GAME().cassidy;
-	var parse : any = {
+	let parse : any = {
 		playername : player.name
 	};
 	parse = cassidy.ParserPronouns(parse);
@@ -952,7 +952,7 @@ CassidyScenes.InsideMeal = function() {
 	Text.NL();
 	Text.Add("Right. Picking up fork and spoon, you can’t wait to dig into Cassidy’s offering this evening. This so happens to be ", parse);
 	
-	var scenes = new EncounterTable();
+	let scenes = new EncounterTable();
 	
 	scenes.AddEnc(function() {
 		Text.Add("a heap of curried vegetables - you recognize carrots, potatoes, long beans, okra and shredded cabbage in the mix, and alongside that, another pot, this time holding plenty of steaming white rice. Cassidy serves the both of you, first scooping out the rice and then heaping the vegetables on top of that, letting the curry seep into the fluffy grains.", parse);
@@ -1030,7 +1030,7 @@ CassidyScenes.InsideMeal = function() {
 	Text.Add(" Come to think of it, though, there’s a lot of food. Cass can’t be expecting you to help eat all that, right? Either that, or [heshe] really has a huge appetite for someone as thin as [heshe] is - well, one supposes working at the forge all day must take a huge amount of energy. You eye Cass as [heshe] refills the water pitcher, takes a seat, and starts digging in heartily.", parse);
 	Text.NL();
 	
-	var scenes = new EncounterTable();
+	scenes = new EncounterTable();
 	scenes.AddEnc(function() {
 		Text.Add("<i>“Hope you aren’t thinking of getting up to any hanky-panky after this,”</i> Cass says with a contented sigh. <i>“Got a few other things I need to take care of tonight, and I’ve got to keep focused.”</i>", parse);
 		Text.NL();
@@ -1139,7 +1139,7 @@ CassidyScenes.InsideTalkPrompt = function() {
 	let player = GAME().player;
 	let cassidy : Cassidy = GAME().cassidy;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name
 	};
 	parse = cassidy.ParserPronouns(parse);
@@ -1159,7 +1159,7 @@ CassidyScenes.InsideTalkPrompt = function() {
 	}
 	
 	//[Smithing][Salamanders][Family][Loner][Tomboy]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Smithing",
 		tooltip : "Is blacksmithing the official family trade?",
 		func : function() {
@@ -1189,7 +1189,7 @@ CassidyScenes.InsideTalkPrompt = function() {
 		func : function() {
 			Text.Clear();
 			
-			var first = !(cassidy.flags["Talk"] & CassidyFlags.Talk.Salamanders);
+			let first = !(cassidy.flags["Talk"] & CassidyFlags.Talk.Salamanders);
 			cassidy.flags["Talk"] |= CassidyFlags.Talk.Salamanders;
 			
 			if(first) {
@@ -1290,7 +1290,7 @@ CassidyScenes.InsideTalkPrompt = function() {
 		func : function() {
 			Text.Clear();
 			
-			var first = !(cassidy.flags["Talk"] & CassidyFlags.Talk.Family);
+			let first = !(cassidy.flags["Talk"] & CassidyFlags.Talk.Family);
 			cassidy.flags["Talk"] |= CassidyFlags.Talk.Family;
 			
 			if(first) {
@@ -1363,7 +1363,7 @@ CassidyScenes.InsideTalkPrompt = function() {
 		func : function() {
 			Text.Clear();
 			
-			var first = !(cassidy.flags["Talk"] & CassidyFlags.Talk.Loner);
+			let first = !(cassidy.flags["Talk"] & CassidyFlags.Talk.Loner);
 			cassidy.flags["Talk"] |= CassidyFlags.Talk.Loner;
 			
 			if(first) {
@@ -1428,7 +1428,7 @@ CassidyScenes.InsideTalkPrompt = function() {
 					
 					TimeStep({minute: 10});
 
-					var options = new Array();
+					let options = new Array();
 					options.push({ nameStr : "Yes",
 						tooltip : "Yeah, it really would help.",
 						func : function() {
@@ -1541,7 +1541,7 @@ CassidyScenes.InsideTalkPrompt = function() {
 CassidyScenes.ManagingShop = function() {
 	let player = GAME().player;
 	let cassidy : Cassidy = GAME().cassidy;
-	var parse : any = {
+	let parse : any = {
 		playername : player.name
 	};
 	parse = cassidy.ParserPronouns(parse);
@@ -1576,8 +1576,8 @@ CassidyScenes.ManagingShop = function() {
 	
 	TimeStep({minute: 15});
 	
-	var askprompt = function(asked? : boolean) {
-		var options = new Array();
+	let askprompt = function(asked? : boolean) {
+		let options = new Array();
 		//[What Do?][Yes][No]
 		if(!asked) {
 			options.push({ nameStr : "What Do?",
@@ -1643,7 +1643,7 @@ CassidyScenes.ManagingShop = function() {
 CassidyScenes.ManagingShopAccept = function() {
 	let player = GAME().player;
 	let cassidy : Cassidy = GAME().cassidy;
-	var parse : any = {
+	let parse : any = {
 		playername : player.name
 	};
 	parse = cassidy.ParserPronouns(parse);
@@ -1686,7 +1686,7 @@ CassidyScenes.ManagingShopAccept = function() {
 
 CassidyScenes.ManagingShop1 = function(score : number) {
 	let player = GAME().player;
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	
@@ -1704,7 +1704,7 @@ CassidyScenes.ManagingShop1 = function(score : number) {
 	
 	parse["mistermiss"] = player.mfFem("mister", "miss");
 	
-	var wrong = function() {
+	let wrong = function() {
 		Text.Clear();
 		Text.Add("You hand the little guy your weapon of choice and watch with growing dread as he struggles with it. Eventually, he gives up trying and hands it back to you.", parse);
 		Text.NL();
@@ -1719,7 +1719,7 @@ CassidyScenes.ManagingShop1 = function(score : number) {
 	}
 	
 	//[name]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Rapier",
 		tooltip : "He doesn't look very strong... perhaps a light weapon would be good for him?",
 		func : wrong, enabled : true
@@ -1748,7 +1748,7 @@ CassidyScenes.ManagingShop1 = function(score : number) {
 }
 
 CassidyScenes.ManagingShop2 = function(score : number) {
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	
@@ -1766,14 +1766,14 @@ CassidyScenes.ManagingShop2 = function(score : number) {
 	
 	TimeStep({minute: 15});
 	
-	var wrong = function() {
+	let wrong = function() {
 		Text.Clear();
 		Text.Add("<i>“Hmm? That doesn’t sound quite right… but I suppose it’s just my memory playing tricks on me. You’re the shopkeep, after all.”</i>", parse);
 		Gui.PrintDefaultOptions();
 	}
 	
 	//[325 coins][375 coins][425 coins]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "325 coins",
 		tooltip : "",
 		func : wrong, enabled : true
@@ -1813,7 +1813,7 @@ CassidyScenes.ManagingShop2 = function(score : number) {
 
 CassidyScenes.ManagingShop3 = function(score : number) {
 	let cassidy : Cassidy = GAME().cassidy;
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	parse = cassidy.ParserPronouns(parse);
@@ -1830,7 +1830,7 @@ CassidyScenes.ManagingShop3 = function(score : number) {
 	
 	TimeStep({minute: 15});
 	
-	var wrong = function() {
+	let wrong = function() {
 		Text.Clear();
 		Text.Add("<i>“Eh… that’s not really what I was looking for.”</i>", parse);
 		Text.NL();
@@ -1845,7 +1845,7 @@ CassidyScenes.ManagingShop3 = function(score : number) {
 	}
 	
 	//[Oak Spear][Greatsword][Halberd]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Oak Spear",
 		tooltip : "The oak spear is the cheapest thing that you have that could fit that bill... and this guy doesn't really look like he's swimming in coins.",
 		func : wrong, enabled : true
@@ -1876,7 +1876,7 @@ CassidyScenes.ManagingShop4 = function(score : number) {
 	let rigard = GAME().rigard;
 	let lei = GAME().lei;
 
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	
@@ -1915,7 +1915,7 @@ CassidyScenes.ManagingShop4 = function(score : number) {
 }
 
 CassidyScenes.ManagingShop5 = function(score : number) {
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	
@@ -1935,7 +1935,7 @@ CassidyScenes.ManagingShop5 = function(score : number) {
 	
 	TimeStep({minute: 30});
 	
-	var wrong = function() {
+	let wrong = function() {
 		Text.Clear();
 		Text.Add("The minotaur grunts as he takes your choice into those huge hands of his and tests its weight and balance. <i>“It’s big,”</i> he admits. <i>“And heavy. But it can’t be doing much in the way of pounding. Think it’s better for people who want some more control. Me, I just want to pound things.”</i>", parse);
 		Text.NL();
@@ -1948,7 +1948,7 @@ CassidyScenes.ManagingShop5 = function(score : number) {
 	}
 	
 	//[Halberd][Greatsword][Warhammer]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Halberd",
 		tooltip : "Surely a big halberd will do the trick?",
 		func : wrong, enabled : true
@@ -1995,7 +1995,7 @@ CassidyScenes.ManagingShop5 = function(score : number) {
 CassidyScenes.ManagingShop6 = function(score : number) {
 	let cassidy : Cassidy = GAME().cassidy;
 
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	parse = cassidy.ParserPronouns(parse);
@@ -2025,7 +2025,7 @@ CassidyScenes.ManagingShop6 = function(score : number) {
 	TimeStep({minute: 15});
 	
 	//[Yes][No]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Yes",
 		tooltip : "",
 		func : function() {
@@ -2155,7 +2155,7 @@ CassidyScenes.ManagingShop6 = function(score : number) {
 CassidyScenes.ManagingShopCookies = function() {
 	let cassidy : Cassidy = GAME().cassidy;
 
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	parse = cassidy.ParserPronouns(parse);
@@ -2181,7 +2181,7 @@ CassidyScenes.ManagingShopCookies = function() {
 	TimeStep({hour: 1});
 	
 	//[Yes][No]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Yes",
 		tooltip : "Sure, you’d love some cookies.",
 		func : function() {
@@ -2232,7 +2232,7 @@ CassidyScenes.BigReveal = function() {
 	let player = GAME().player;
 	let cassidy : Cassidy = GAME().cassidy;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name
 	};
 	
@@ -2442,7 +2442,7 @@ CassidyScenes.Model = function() {
 	let player = GAME().player;
 	let cassidy : Cassidy = GAME().cassidy;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name
 	};
 	parse = player.ParserTags(parse);
@@ -2469,7 +2469,7 @@ CassidyScenes.Model = function() {
 	Text.Add("<i>“Sorry, ace; customer confidentiality and all. Wouldn’t run my mouth to someone else about something I was making for you, so gotta do the same for others, right? Now… gonna cut back to the chase - you want to model for me, or not?”</i>", parse);
 	Text.Flush();
 	
-	var options = [];
+	let options = [];
 	// [Sure!][No Thanks]
 	options.push({nameStr : "Sure!",
 		tooltip : Text.Parse("Modeling for Cass sounds like fun!", parse),
@@ -2493,7 +2493,7 @@ CassidyScenes.Model = function() {
 			Text.Add("<i>“Oh, and I’ll also need you to strip to your undies, if you don’t mind.”</i>", parse);
 			Text.NL();
 			
-			var slut = player.Slut() >= 50;
+			let slut = player.Slut() >= 50;
 			
 			if(slut)
 				Text.Add("Hey, you’ve no problem with that. Come to think of it, this whole modeling thing is sounding better by the moment.", parse);
@@ -2502,7 +2502,7 @@ CassidyScenes.Model = function() {
 			Text.NL();
 			Text.Add("<i>“I <b>did</b> say I’d need to get a good look at your figure and muscles, ace. See what makes you tick inside and all. That’s where the inspiration comes from - at least, when it comes to people.”</i>", parse);
 			Text.NL();
-			var armor = "";
+			let armor = "";
 			if(player.Armor() || !player.LowerArmor()) armor += "[armor]";
 			if(player.Armor() && player.LowerArmor()) armor += " followed by your ";
 			if(player.LowerArmor()) armor += "[botarmor]";
@@ -2525,7 +2525,7 @@ CassidyScenes.Model = function() {
 			Text.Add("All right, then; time for the big decision. What kind of pose do you want to strike?", parse);
 			Text.Flush();
 			
-			var options = [];
+			let options = [];
 			options.push({nameStr : "Heroic",
 				tooltip : Text.Parse("Brave and dashing! A traditional favorite!", parse),
 				enabled : true,
@@ -2626,7 +2626,7 @@ CassidyScenes.Model = function() {
 					Text.Add(" sure, it’s ostensibly for art and completely platonic, but your body still can’t help but feel a little thrill run through it, especially with the heat of the forge bare against you.", parse);
 				Text.NL();
 				Text.Add("The first thing you feel are Cassidy’s fingers, wrapping from behind you and encircling your wrist. Her tiny claws prickle your skin, and you feel them wandering up and down your forearm and shoulder, probing and testing as if you were a prime cut of beef at market. ", parse);
-				var tone = player.MuscleTone() > 0.5;
+				let tone = player.MuscleTone() > 0.5;
 				if(tone) {
 					if(player.dexterity.GrowthRank() >= 10)
 						Text.Add("<i>“Lean. Defined. No excess space. Quick too, I see.”</i> You’re not sure if Cass’ murmuring is meant for you or for herself, but her tail swishes against the floor gaily. <i>“Very nice; I approve. There are a bunch of things I can see you swinging.”</i>", parse);
@@ -2640,7 +2640,7 @@ CassidyScenes.Model = function() {
 				Text.Add("With a final appreciative squeeze of your biceps, Cass runs her fingers across your shoulder and collarbone, down to your chest. The salamander smith takes a step back to take you in from a few different angles, her eyes hard and lips thin, then her gaze softens as she returns to poking and prodding you.", parse);
 				Text.NL();
 				
-				var size = player.FirstBreastRow().Size();
+				let size = player.FirstBreastRow().Size();
 				
 				if(size > 10) { //E
 					Text.Add("<i>“Ah yes, the old two saucepans and tin bath, as Dad used to put it. For putting the ‘breast’ in breastplate.”</i> Shaking her head, Cassidy reaches out and gives them each a squeeze, as if a little hesitant to believe they’re real. <i>“How do you actually manage with those things, anyway? Don’t they ever get in your way? Or do you somehow manage to adjust your style to their bulk?”</i>", parse);
@@ -2677,7 +2677,7 @@ CassidyScenes.Model = function() {
 				Text.Add("Oh, you can definitely see - and feel - that she’s got skilled hands indeed.", parse);
 				Text.NL();
 				Text.Add("Cass just snickers", parse);
-				var buttsize = player.Butt().Size();
+				let buttsize = player.Butt().Size();
 				if(buttsize >= 5) {
 					Text.Add(" and gives you a good pinch on the butt", parse);
 					if(buttsize >= 9)
@@ -2688,7 +2688,7 @@ CassidyScenes.Model = function() {
 				Text.Add("<i>“Whoa whoa whoa there. Don’t lead a good girl like me down along those paths.”</i> Her voice drips sarcasm, and she brushes her fingers across your waist, her claws leaving tiny flushes of heat in their wake. <i>“I’m just here to get your measure and proportions, remember? Now pipe down and let me finish conceptualizing, yeah?”</i>", parse);
 				Text.NL();
 				Text.Add("Her gaze then sweeps down your hips and [thighs], and ", parse);
-				var hipsize = player.HipSize();
+				let hipsize = player.HipSize();
 				if(!player.Humanoid()) {
 					Text.Add("shakes her head in an exasperated manner. <i>“I, uh, think I’ll have to use my imagination for this part,”</i> she grumbles. <i>“As much as I’d like to run wild with this, I think it would get me a bit off topic.”</i>", parse);
 				}
@@ -2707,7 +2707,7 @@ CassidyScenes.Model = function() {
 					Text.Add("Cass holds up a hand. <i>“I’m trying to think here, ace. Got some really good ideas going…”</i>", parse);
 				}
 				Text.NL();
-				var cock = player.BiggestCock();
+				let cock = player.BiggestCock();
 				if(cock && cock.Len() >= 30) {
 					Text.Add("Her eyes then sweep upwards to your groin, and she snickers, snapping her fingers. <i>“Ah, good times. You’d be amazed at the demand for custom-made reinforced codpieces. With such a large package, I’m sure it makes for a very tempting target - only anyone stupid enough to try kicking it ends up with a sprained ankle.”</i>", parse);
 					Text.NL();
@@ -2774,7 +2774,7 @@ CassidyScenes.FemTalk2 = function() {
 	let player = GAME().player;
 	let cassidy : Cassidy = GAME().cassidy;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name
 	};
 	
@@ -2835,7 +2835,7 @@ CassidyScenes.FemTalk2 = function() {
 CassidyScenes.FemFinal = function() {
 	let cassidy : Cassidy = GAME().cassidy;
 
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	
@@ -2908,7 +2908,7 @@ CassidyScenes.FemFinal = function() {
 CassidyScenes.SparFirst = function() {
 	let cassidy : Cassidy = GAME().cassidy;
 
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	
@@ -2944,7 +2944,7 @@ CassidyScenes.SparFirst = function() {
 	Text.Add("<i>“We don’t have to do it now; we can always put it off till later, when you’re ready. But if you want to get to it right now, I wouldn’t say no to that.”</i> She winks at you and grins, thumping a fist on the table. <i>“So… what do you say? I will admit, it <b>will</b> take up most of the night, so if you want to do anything else, we can move it to another date.”</i>", parse);
 	Text.Flush();
 	
-	var options = [];
+	let options = [];
 	options.push({nameStr : "Yeah",
 		tooltip : Text.Parse("Sure, a bit of sparring wouldn’t hurt.", parse),
 		enabled : true,
@@ -2990,15 +2990,15 @@ CassidyScenes.SparFirst = function() {
 CassidyScenes.Spar = function() {
 	let party : Party = GAME().party;
 
-	var cass = new CassidySpar();
+	let cass = new CassidySpar();
 	
 	party.SaveActiveParty();
 	party.ClearActiveParty();
 	party.SwitchIn(GAME().player);
 
-	var enemy = new Party();
+	let enemy = new Party();
 	enemy.AddMember(cass);
-	var enc = new Encounter(enemy);
+	let enc = new Encounter(enemy);
 
 	enc.canRun = false;
 

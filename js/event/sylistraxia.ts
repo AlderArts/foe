@@ -61,7 +61,7 @@ export class Sylistraxia extends Entity {
 	}
 	
 	ToStorage() {
-		var storage = {};
+		let storage = {};
 		
 		this.SavePersonalityStats(storage);
 		

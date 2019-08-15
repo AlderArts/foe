@@ -26,7 +26,7 @@ OrchidScenes.Impregnate = function(mother : Entity, slot : number) {
 OrchidScenes.Interact = function() {
 	let player = GAME().player;
 	let orchid = GAME().orchid;
-	var parse : any = {
+	let parse : any = {
 		playername : player.name
 	};
 	
@@ -42,7 +42,7 @@ OrchidScenes.Interact = function() {
 	Text.NL();
 	Text.Add("<i>“A-ah, hello [playername]!”</i>", parse);
 	
-	var first = !(orchid.flags["Talk"] & OrchidFlags.Talk.First);
+	let first = !(orchid.flags["Talk"] & OrchidFlags.Talk.First);
 	orchid.flags["Talk"] |= OrchidFlags.Talk.First;
 	
 	if(first) {
@@ -56,12 +56,12 @@ OrchidScenes.Interact = function() {
 }
 
 OrchidScenes.Prompt = function() {
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	
 	//[name]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Talk",
 		tooltip : "Ask her if she has time to chat for a bit.",
 		func : function() {
@@ -90,12 +90,12 @@ OrchidScenes.Prompt = function() {
 OrchidScenes.TalkPrompt = function() {
 	let player = GAME().player;
 	let orchid = GAME().orchid;
-	var parse : any = {
+	let parse : any = {
 		playername : player.name
 	};
 	
 	//[name]
-	var options = new Array();
+	let options = new Array();
 	if(false) //TODO
 	options.push({ nameStr : "Spring",
 		tooltip : "Maybe Orchid knows of a way to get past the thorns?",
@@ -129,7 +129,7 @@ OrchidScenes.TalkPrompt = function() {
 		tooltip : "She’s been through a lot, and you’re still concerned for her wellbeing… ask her how she’s holding up.",
 		func : function() {
 			Text.Clear();
-			var slut = orchid.Slut();
+			let slut = orchid.Slut();
 			if(slut < 5) {
 				Text.Add("<i>“I’m… fine.”</i>", parse);
 				Text.NL();
@@ -315,7 +315,7 @@ OrchidScenes.TalkPrompt = function() {
 OrchidScenes.FirstTalk = function() {
 	let kiakai = GAME().kiakai;
 	let party : Party = GAME().party;
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	
@@ -354,13 +354,13 @@ OrchidScenes.FirstTalkPrompt = function(opts : any) {
     let layla = GAME().layla;
     let oasis = GAME().oasis;
     
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		name : kiakai.name
 	};
 	
 	//[Attackers] - [Elves][Spring][Lizard?] - [Tentacles] 
-	var options = new Array();
+	let options = new Array();
 	if(!opts.attacker) {
 		options.push({ nameStr : "Attackers",
 			tooltip : "First, how about she recounts what she remembers from the attackers? You can discuss the details afterwards.",
@@ -608,7 +608,7 @@ OrchidScenes.FirstTalkPrompt = function(opts : any) {
 				Text.Flush();
 				
 				//[Sex][Later]
-				var options = new Array();
+				let options = new Array();
 				options.push({ nameStr : "Sex",
 					tooltip : "Well, the best way to do this is to show her.",
 					func : function() {

@@ -40,13 +40,13 @@ export namespace FarmScenesIntro {
         TimeStep({minute: 15});
         Text.Clear();
 
-        var parse : any = {};
+        let parse : any = {};
 
         Text.Add("While trekking along the rolling grasslands of the plains, you briefly wonder what else might lie out here, until you spot a foreign structure with a muddy pathway leading toward it. In the distance, you see what appears to be an old and worn building. Although from here you are not sure what it is, you feel compelled to go out there and have a look.", parse);
         Text.Flush();
 
         //[Approach][Nah]
-        var options = new Array();
+        let options = new Array();
         options.push({ nameStr : "Approach",
             func : FarmScenesIntro.Approach, enabled : true,
             tooltip : "Approach the building and try to find out what it is."
@@ -74,7 +74,7 @@ export namespace FarmScenesIntro {
 
         gwendy.flags["Met"] = 1;
 
-        var parse : any = {
+        let parse : any = {
             handsomecute : player.body.femininity.Get() > 0 ? "cute" : "handsome",
             playername   : player.name
         };
@@ -92,7 +92,7 @@ export namespace FarmScenesIntro {
         Text.NL();
         Text.Add("To its sides, you see a variety of animals quietly grazing on the rather fertile-looking fields. Another look reveals various other life around as well. The occasional equine and dog-morph tend to menial tasks, such as moving hay and sheaf, or watering cattle.", parse);
         if(party.Two()) {
-            var member = party.Get(1);
+            let member = party.Get(1);
             Text.Add(" You decide to split up for a while, and [name] heads off to explore the farm for [himher]self, leaving you alone.", { name: member.name, himher : member.himher() });
         }
         else if(!party.Alone()) {
@@ -109,7 +109,7 @@ export namespace FarmScenesIntro {
         Text.Flush();
 
         //[Sure][Guess so][Nah]
-        var options = new Array();
+        let options = new Array();
         options.push({ nameStr : "Sure",
             func : function() {
                 Text.Clear();
@@ -165,7 +165,7 @@ export namespace FarmScenesIntro {
         party.location = FarmLoc.Barn;
         TimeStep({minute: 10});
 
-        var parse : any = {};
+        let parse : any = {};
 
         Text.Clear();
 
@@ -192,7 +192,7 @@ export namespace FarmScenesIntro {
         TimeStep({minute: 5});
         Text.Clear();
 
-        var parse : any = {};
+        let parse : any = {};
 
         Text.Add("Upon reaching the top, you are greeted with the homely sight of furniture spread somewhat clumsily around the place. There is a simple unmade bed with a rather worn, but comfy-looking, quilt resting atop it, and two pillows at the head. A pair of simple wooden drawers lie under the bed, and what looks to be the strap of a bra juts out from one of them. A dresser with a mirror sits close to a round wooden table with two chairs, and a small washtub is under the table filled with dirty dishes. A few essentials that come to mind, like a toilet, are missing, but you believe you saw an outhouse on the way here.", parse);
         Text.NL();
@@ -211,14 +211,14 @@ export namespace FarmScenesIntro {
     export function GwendyQuestions1() {
         let player = GAME().player;
 
-        var parse : any = {
+        let parse : any = {
             race : function() { return player.body.Race().Short(player.Gender()); }
         };
 
         Text.Flush();
 
         //[Sure][Guess so][Nah]
-        var options = new Array();
+        let options = new Array();
         if(!talkedAboutGwendy) {
             options.push({ nameStr : "Gwendy",
                 func : function() {
@@ -281,7 +281,7 @@ export namespace FarmScenesIntro {
         let danie = GAME().danie;
         let adrian = GAME().adrian;
 
-        var parse : any = {
+        let parse : any = {
             playername : player.name,
             breastDesc : function() { return player.FirstBreastRow().Short(); }
         }
@@ -289,7 +289,7 @@ export namespace FarmScenesIntro {
         Text.Flush();
 
         //[Flirt][Help][Leave]
-        var options = new Array();
+        let options = new Array();
         if(!flirtGwendy) {
             options.push({ nameStr : "Flirt",
                 func : function() {
@@ -306,7 +306,7 @@ export namespace FarmScenesIntro {
                     * Options
                     */
                     //[Breasts][Hair][Ass][Lips][Body]
-                    var options = new Array();
+                    let options = new Array();
                     options.push({ nameStr : "Breasts",
                         func : function() {
                             Text.Clear();
@@ -378,8 +378,8 @@ export namespace FarmScenesIntro {
             func : function() {
                 Text.Clear();
                 // Boons!
-                for(var i = 0; i < party.members.length; i++) {
-                    var c = party.members[i];
+                for(let i = 0; i < party.members.length; i++) {
+                    let c = party.members[i];
                     c.strength.IncreaseStat(30, 2);
                     c.stamina.IncreaseStat(30, 2);
                     c.dexterity.IncreaseStat(30, 2);
@@ -406,7 +406,7 @@ export namespace FarmScenesIntro {
                 Text.NL();
 
                 if(party.Two()) {
-                    var member = party.Get(1);
+                    let member = party.Get(1);
 
                     Text.Add("You call [name] back, telling [himher] it's time to go. [HeShe] returns swiftly, already looking forward to the next visit.", { name: member.name, himher : member.himher(), HeShe : member.HeShe() });
                     Text.NL();
@@ -456,7 +456,7 @@ export namespace FarmScenesIntro {
 
         adrian.flags["Met"] = 1;
 
-        var parse : any = {
+        let parse : any = {
             playername : player.name,
             buttDesc   : function() { return player.Butt().Short(); }
         };
@@ -467,7 +467,7 @@ export namespace FarmScenesIntro {
         Text.NL();
 
         if(party.Two()) {
-            var member = party.Get(1);
+            let member = party.Get(1);
 
             Text.Add("You call out to [name], hoping [heshe] will lend a hand with the coming chores. When [heshe] arrives in response to your call, you explain to [himher] you need [himher] to help around the farm and direct [himher] to Gwendy for instructions. She gives [name] a task and sends [himher] on [hisher] way, leaving Gwendy with a happy smile on her face.",
             {
@@ -489,7 +489,7 @@ export namespace FarmScenesIntro {
         Text.Flush();
 
         //[Talk][Flirt][Gwendy][Just work]
-        var options = new Array();
+        let options = new Array();
         options.push({ nameStr : "Talk",
             func : function() {
                 Text.Clear();
@@ -548,7 +548,7 @@ export namespace FarmScenesIntro {
         Text.Clear();
         TimeStep({hour: 1});
 
-        var parse : any = {
+        let parse : any = {
             playername : player.name,
             buttDesc   : function() { return player.Butt().Short(); }
         };
@@ -586,7 +586,7 @@ export namespace FarmScenesIntro {
 
         danie.flags["Met"] = 1;
 
-        var parse : any = {
+        let parse : any = {
             playername : player.name,
             eyeColor   : Color.Desc(player.Eyes().color),
             mistermiss : player.body.Gender() == Gender.male ? "mister" : "miss",
@@ -611,7 +611,7 @@ export namespace FarmScenesIntro {
         fuckedDanie = false;
         Text.Flush();
         //[Yes][No]
-        var options = new Array();
+        let options = new Array();
         options.push({ nameStr : "Yes",
             func : function() {
                 Text.Clear();
@@ -665,7 +665,7 @@ export namespace FarmScenesIntro {
         Text.Clear();
         player.AddLustFraction(0.5);
 
-        var parse : any = {
+        let parse : any = {
             playername      : player.name,
             erectionwetness : player.FirstCock() ? "erection" :
                             player.FirstVag()  ? "wetness" : "arousal"
@@ -677,7 +677,7 @@ export namespace FarmScenesIntro {
         Text.Flush();
 
         //[Talk][Leave]
-        var options = new Array();
+        let options = new Array();
         options.push({ nameStr : "Talk",
             func : function() {
                 Text.Clear();
@@ -717,15 +717,15 @@ export namespace FarmScenesIntro {
         let player = GAME().player;
         let danie = GAME().danie;
 
-        var cocksInVag = player.CocksThatFit(danie.FirstVag());
-        var cocksInAss = player.CocksThatFit(danie.Butt());
+        let cocksInVag = player.CocksThatFit(danie.FirstVag());
+        let cocksInAss = player.CocksThatFit(danie.Butt());
 
-        var parse : any = {
+        let parse : any = {
             playername : player.name
         };
 
         //[Sure][Guess so][Nah]
-        var options = new Array();
+        let options = new Array();
         if(player.FirstCock()) {
             options.push({ nameStr : "Blowjob",
                 func : FarmScenesIntro.DanieOralSex,
@@ -776,7 +776,7 @@ export namespace FarmScenesIntro {
 
         // IF bits == true, cock, else vag
 
-        var parse : any = {
+        let parse : any = {
             playername : player.name,
             cockDesc   : function() { return player.FirstCock().Short(); },
             cuntDesc   : function() { return player.FirstVag().Short(); },
@@ -867,11 +867,11 @@ export namespace FarmScenesIntro {
         danie.slut.IncreaseStat(100, 5);
         fuckedDanie = true;
 
-        var cocksInVag = player.CocksThatFit(danie.FirstVag());
+        let cocksInVag = player.CocksThatFit(danie.FirstVag());
 
-        var p1Cock = player.BiggestCock(cocksInVag);
+        let p1Cock = player.BiggestCock(cocksInVag);
 
-        var parse : any = {
+        let parse : any = {
             playername : player.name,
             cockDesc   : function() { return p1Cock.Short(); },
             cuntDesc   : function() { return danie.FirstVag().Short(); },
@@ -913,11 +913,11 @@ export namespace FarmScenesIntro {
         danie.slut.IncreaseStat(100, 10);
         fuckedDanie = true;
 
-        var cocksInAss = player.CocksThatFit(danie.Butt());
+        let cocksInAss = player.CocksThatFit(danie.Butt());
 
-        var p1Cock = player.BiggestCock(cocksInAss);
+        let p1Cock = player.BiggestCock(cocksInAss);
 
-        var parse : any = {
+        let parse : any = {
             playername : player.name,
             cockDesc   : function() { return p1Cock.Short(); },
             anusDesc   : function() { return danie.Butt().AnalShort(); },
@@ -959,7 +959,7 @@ export namespace FarmScenesIntro {
         Text.Clear();
         TimeStep({hour: 2});
 
-        var parse : any = {
+        let parse : any = {
             playername : player.name
         };
 
@@ -981,7 +981,7 @@ export namespace FarmScenesIntro {
         Text.NL();
 
         if(party.Two()) {
-            var member = party.Get(1);
+            let member = party.Get(1);
 
             Text.Add("You call for [name], telling [himher] you are heading back out.", { name: member.name, himher : member.himher() });
             Text.NL();
@@ -1170,7 +1170,7 @@ FarmLoc.Loft.links.push(new Link(
 FarmLoc.Loft.SleepFunc = function() {
 	let party : Party = GAME().party;
 
-	var parse : any = {
+	let parse : any = {
 
 	};
 
@@ -1187,7 +1187,7 @@ FarmLoc.Loft.SleepFunc = function() {
 
 	Text.Flush();
 
-	var func = function(dream : any) {
+	let func = function(dream : any) {
 		TimeStep({hour: 8});
 		party.Sleep();
 

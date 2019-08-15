@@ -33,16 +33,16 @@ export class Nursery {
 	}
 
 	ToStorage() {
-		var storage : any = {};
+		let storage : any = {};
 		if(this.TotalKids() > 0) {
-			var kids : any[] = [];
+			let kids : any[] = [];
 			_.each(this.kids, function(kid) {
 				kids.push(kid.ToStorage());
 			});
 			storage.kids = kids;
 		}
-		var flags : any = {};
-		for(var flag in this.flags) {
+		let flags : any = {};
+		for(let flag in this.flags) {
 			if(this.flags[flag] != 0)
 				flags[flag] = this.flags[flag];
 		}
@@ -52,26 +52,26 @@ export class Nursery {
 	}
 	
 	FromStorage(storage : any) {
-		var that = this;
+		let that = this;
 		storage = storage || {};
-		var kids = storage.kids;
+		let kids = storage.kids;
 		_.each(kids, function(kid) {
-			var k = new NurseryKid(kid);
+			let k = new NurseryKid(kid);
 			that.kids.push(k);
 		});
-		for(var flag in storage.flags)
+		for(let flag in storage.flags)
 			this.flags[flag] = parseInt(storage.flags[flag]);
 	}
 	
 	BirthedBy(mother : Entity) {
-		var ret : any[] = [];
+		let ret : any[] = [];
 		_.each(this.kids, function(kid) {
 			if(kid.mother == mother) ret.push(kid);
 		});
 		return ret;
 	}
 	FatheredBy(father : Entity) {
-		var ret : any[] = [];
+		let ret : any[] = [];
 		_.each(this.kids, function(kid) {
 			if(kid.father == father) ret.push(kid);
 		});
@@ -79,7 +79,7 @@ export class Nursery {
 	}
 	TotalKids(person? : Entity) {
 		if(person) {
-			var num = 0;
+			let num = 0;
 			_.each(this.BirthedBy(person), function(kid) {
 				num += kid.num;
 			});
@@ -89,7 +89,7 @@ export class Nursery {
 			return num;
 		}
 		//Default to all
-		var num = 0;
+		let num = 0;
 		_.each(this.kids, function(kid) {
 			num += kid.num;
 		});
@@ -99,7 +99,7 @@ export class Nursery {
 	AddKid(newkid : NurseryKid) {
 		if(!newkid) return; //Shouldn't happen
 		
-		var found = false;
+		let found = false;
 		_.each(this.kids, function(kid) {
 			if(kid.SameType(newkid)) {
 				kid.num += newkid.num;
@@ -132,7 +132,7 @@ export class NurseryKid {
 	}
 
 	ToStorage() {
-		var storage : any = {};
+		let storage : any = {};
 		if(this.mother) storage.m  = this.mother;
 		if(this.father) storage.f  = this.father;
 		if(this.num)    storage.nr = this.num.toFixed();
@@ -159,11 +159,11 @@ export class NurseryKid {
 NurseryScenes.PrintPCbirthed = function() {
 	let player = GAME().player;
 	let nursery : Nursery = GAME().nursery;
-	var kids = nursery.BirthedBy(player.ID);
+	let kids = nursery.BirthedBy(player.ID);
 	
-	var parse : any = {};
+	let parse : any = {};
 	
-	var num = 0;
+	let num = 0;
 	if(kids.length > 0) {
 		Text.Add("<b>You’ve given birth to:</b>", parse);
 		Text.NL();
@@ -172,7 +172,7 @@ NurseryScenes.PrintPCbirthed = function() {
 			parse["ren"]  = kid.num > 1 ? "ren" : "";
 			parse["race"] = kid.race.qShort()
 			Text.Add("[Num] [race] child[ren]", parse);
-			var father = Entity.IdToEntity(kid.father);
+			let father = Entity.IdToEntity(kid.father);
 			if(father) {
 				Text.Add(", fathered by " + father.name);
 			}
@@ -190,11 +190,11 @@ NurseryScenes.PrintPCfathered = function() {
 	let player = GAME().player;
 	let nursery : Nursery = GAME().nursery;
 	
-	var kids = nursery.FatheredBy(player.ID);
+	let kids = nursery.FatheredBy(player.ID);
 	
 	let parse : any = {};
 
-	var num = 0;
+	let num = 0;
 	if(kids.length > 0) {
 		Text.Add("<b>You’ve fathered:</b>", parse);
 		Text.NL();
@@ -203,7 +203,7 @@ NurseryScenes.PrintPCfathered = function() {
 			parse["ren"]  = kid.num > 1 ? "ren" : "";
 			parse["race"] = kid.race.qShort()
 			Text.Add("[Num] [race] child[ren]", parse);
-			var mother = Entity.IdToEntity(kid.mother);
+			let mother = Entity.IdToEntity(kid.mother);
 			if(mother) {
 				Text.Add(", birthed by " + mother.name);
 			}
@@ -223,33 +223,33 @@ NurseryScenes.CareBlock = function(womb : Womb) {
 	let nursery : Nursery = GAME().nursery;
 	let world = WORLD();
 
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	
-	var num  = womb.litterSize;
-	var race = womb.race;
-	var egg  = womb.IsEgg();
+	let num  = womb.litterSize;
+	let race = womb.race;
+	let egg  = womb.IsEgg();
 	
 	parse = Text.ParserPlural(parse, num > 1);
 	parse["infant"] = egg ? "egg" : "infant";
 	parse["ren"]    = num > 1 ? "ren" : "";
 	
-	var father = Entity.IdToEntity(womb.father);
-	var mother = Entity.IdToEntity(womb.mother);
+	let father = Entity.IdToEntity(womb.father);
+	let mother = Entity.IdToEntity(womb.mother);
 	
-	var PCmother = mother == player;
-	var PCfather = father == player;
-	var yours = PCmother || PCfather;
+	let PCmother = mother == player;
+	let PCfather = father == player;
+	let yours = PCmother || PCfather;
 	parse["your"] = yours ? "your" : "the";
 	
 	if(!GlobalScenes.PortalsOpen()) { // ACT 1
 		
-		var first = nursery.flags["Met"] < NurseryFlags.Met.Visited;
+		let first = nursery.flags["Met"] < NurseryFlags.Met.Visited;
 		if(nursery.flags["Met"] < NurseryFlags.Met.Visited)
 			nursery.flags["Met"] = NurseryFlags.Met.Visited;
 		
-		var atNomads = party.location == world.loc.Plains.Nomads.Tent;
+		let atNomads = party.location == world.loc.Plains.Nomads.Tent;
 		party.location = world.loc.Plains.Nomads.Fireplace;
 		
 		if(first) {
@@ -285,7 +285,7 @@ NurseryScenes.CareBlock = function(womb : Womb) {
 			}
 			Text.NL();
 
-			var itsComplicated = !yours || (PCfather && player.FirstVag());
+			let itsComplicated = !yours || (PCfather && player.FirstVag());
 
 			if(itsComplicated) //#if not yours, or (you are a herm and the father)
 				Text.Add("Well… technically not the case, but you don’t think you need to worry him about the details. You still need to take care of them, so you decide to just play along for now. Nodding, you confirm his suspicions, wondering how he knew.", parse);
@@ -324,7 +324,7 @@ NurseryScenes.CareBlock = function(womb : Womb) {
 	}
 	
 	// Add to nursery
-	var kid = new NurseryKid();
+	let kid = new NurseryKid();
 	kid.mother = womb.mother;
 	kid.father = womb.father;
 	kid.num    = num;
@@ -342,8 +342,8 @@ NurseryScenes.Nomads = function() {
 	let nursery : Nursery = GAME().nursery;
 	let world = WORLD();
 
-	var num = nursery.TotalKids();
-	var parse : any = {
+	let num = nursery.TotalKids();
+	let parse : any = {
 		ren   : num > 1 ? "ren" : "",
 		isAre : num > 1 ? "are" : "is"
 	};
@@ -365,7 +365,7 @@ NurseryScenes.Nomads = function() {
 	Text.Flush();
 	
 	//[name]
-	var options = new Array();
+	let options = new Array();
 	/* TODO Interactions
 	options.push({ nameStr : "name",
 		tooltip : "",

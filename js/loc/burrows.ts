@@ -73,7 +73,7 @@ export class Burrows {
 	}
 
 	ToStorage() {
-		var storage : any = {};
+		let storage : any = {};
 		
 		storage.flags = this.flags;
 		
@@ -82,13 +82,13 @@ export class Burrows {
 
 	FromStorage(storage : any) {
 		// Load flags
-		for(var flag in storage.flags)
+		for(let flag in storage.flags)
 			this.flags[flag] = parseInt(storage.flags[flag]);
 	}
 
 	GenerateLagomorph(gender? : Gender) {
 		if(gender == null) {
-			var scenes = new EncounterTable();
+			let scenes = new EncounterTable();
 			scenes.AddEnc(function() {
 				gender = Gender.male;
 			}, 1.0, function() { return true; });
@@ -103,7 +103,7 @@ export class Burrows {
 	
 	GenerateLagomorphAlpha(gender? : Gender) {
 		if(gender == null) {
-			var scenes = new EncounterTable();
+			let scenes = new EncounterTable();
 			scenes.AddEnc(function() {
 				gender = Gender.male;
 			}, 3.0, function() { return true; });

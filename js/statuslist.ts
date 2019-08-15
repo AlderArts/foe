@@ -19,9 +19,9 @@ export class StatusList {
 
 	FromStorage = function(storage : any) {
 		if(!_.isArray(storage)) return;
-		var that = this;
+		let that = this;
 		_.each(storage, function(stat) {
-			var idx = (stat.idx === undefined) ? 0 : parseInt(stat.idx);
+			let idx = (stat.idx === undefined) ? 0 : parseInt(stat.idx);
 
 			switch(idx) {
 				//TODO Add permanent status effects here
@@ -44,11 +44,11 @@ export class StatusList {
 		});
 	}
 	ToStorage = function() {
-		var storage = [];
-		for(var i = 0; i < StatusEffect.LAST; i++) {
-			var stat = this.stats[i];
+		let storage = [];
+		for(let i = 0; i < StatusEffect.LAST; i++) {
+			let stat = this.stats[i];
 			if(stat && stat.ToStorage) {
-				var s = stat.ToStorage() || {};
+				let s = stat.ToStorage() || {};
 				s["idx"] = i.toFixed();
 				storage.push(s);
 			}
@@ -69,14 +69,14 @@ export class StatusList {
 	}
 
 	Clear = function() {
-		for(var i = 0; i < StatusEffect.LAST; i++)
+		for(let i = 0; i < StatusEffect.LAST; i++)
 			this.stats[i] = null;
 	}
 
 	Render = function(obj : any) {
-		var j = 0;
+		let j = 0;
 
-		for(var i = 0; i < StatusEffect.LAST; i++) {
+		for(let i = 0; i < StatusEffect.LAST; i++) {
 			if(this.stats[i]) {
 				if(Images.status[i]) obj[j].attr({src: Images.status[i]});
 				j++;
@@ -91,7 +91,7 @@ export class StatusList {
 	}
 
 	Tick = function(target : any) {
-		for(var i = 0; i < StatusEffect.LAST; i++) {
+		for(let i = 0; i < StatusEffect.LAST; i++) {
 			if(this.stats[i] && this.stats[i].Tick)
 				this.stats[i].Tick(target);
 		}

@@ -21,7 +21,7 @@ export namespace MarketScenes {
         let party : Party = GAME().party;
         let gwendy = GAME().gwendy;
 
-        var parse : any = {
+        let parse : any = {
             playername : player.name
         };
 
@@ -39,7 +39,7 @@ export namespace MarketScenes {
         Text.Add("<i>“Looks like that’ll be all,”</i> the buxom farmer affirms, after a final check. <i>“Ready to go?”</i> she asks you with a smile.", parse);
         Text.NL();
         if(party.Num() > 1) {
-            var p1 = party.Get(1);
+            let p1 = party.Get(1);
             parse["comp"]  = party.Num() > 2 ? "your companions" : p1.name;
             parse["HeShe"] = party.Num() > 2 ? "they" : p1.HeShe();
             parse["notS"]  = party.Num() > 2 ? "" : "s";
@@ -90,12 +90,12 @@ export namespace MarketScenes {
             Text.Add("<i>“You guys take care of that one, Gwendy is mine,”</i> the leader growls a short order, pulling his blade.", parse);
             Text.Flush();
 
-            var enemy = new Party();
+            let enemy = new Party();
             enemy.AddMember(new Bandit(Gender.male));
             enemy.AddMember(new Bandit(Gender.male));
             enemy.AddMember(new Bandit(Gender.male));
             enemy.AddMember(new Bandit(Gender.female));
-            var enc = new Encounter(enemy);
+            let enc = new Encounter(enemy);
 
             enc.onVictory   = function() {
                 SetGameState(GameState.Event, Gui);
@@ -184,7 +184,7 @@ export namespace MarketScenes {
         let rigard = GAME().rigard;
         let miranda = GAME().miranda;
 
-        var parse : any = {
+        let parse : any = {
             playername : player.name
         };
 
@@ -251,7 +251,7 @@ export namespace MarketScenes {
                 Text.Add("<i>“Well, this sucks,”</i> Gwendy sighs, surveying the wares still left. <i>“This is going to take a whole lot of convincing to get rid of, and even if we manage to sell it all, we’ll still leave with light pockets. Let’s just make the best we can of the situation.”</i>", parse);
             Text.NL();
 
-            var haul = {
+            let haul = {
                 quantity : 1,
                 quality  : 0.5,
                 badenc   : "bandits",
@@ -277,16 +277,16 @@ export namespace MarketScenes {
         let gwendy = GAME().gwendy;
         let farm = GAME().farm;
 
-        var parse : any = {
+        let parse : any = {
             playername : player.name,
             enemy      : haul.badenc,
             ear        : function() { return player.EarDesc(); }
         };
 
-        var humanity = player.Humanity();
+        let humanity = player.Humanity();
 
         party.location = WORLD().loc.Rigard.ShopStreet.Street;
-        var score = 0;
+        let score = 0;
 
         Text.Add("<i>“Alright, [playername]. Put on your best smile and let’s get this gig started,”</i> Gwendy declares with a smile of her own. ", parse);
         if(haul.badenc)
@@ -294,7 +294,7 @@ export namespace MarketScenes {
         Text.Add("Encouraged by her cheerful attitude, you join her in shouting to get the attention of the masses.", parse);
         Text.NL();
 
-        var chacheck = player.Cha() + (20 * humanity) + Math.random() * 20;
+        let chacheck = player.Cha() + (20 * humanity) + Math.random() * 20;
         if(chacheck < 40) {
             Text.Add("Unfortunately, your best efforts aren't good enough. Your statements lack any conviction, your presentation is awful, and you frankly insult more than one person, which only furthers their reluctance to approach the cart and start dealing with you.", parse);
             if(humanity < 0.95)
@@ -321,7 +321,7 @@ export namespace MarketScenes {
         }
         Text.NL();
 
-        var intcheck = player.Int() + (20 * humanity) + Math.random() * 20;
+        let intcheck = player.Int() + (20 * humanity) + Math.random() * 20;
 
         if(intcheck < 40) {
             Text.Add("You find yourself struggling to handle yourself in the resulting haggling sessions. In the end, you're lucky to make even, never mind making a profit! You can't bring yourself to look at Gwendy, but you can feel her disappointment all the same.", parse);
@@ -396,12 +396,12 @@ export namespace MarketScenes {
         // Translate score into coins
         haul.quantity = haul.quantity || 0;
         haul.quality  = haul.quality || 0;
-        var produce = haul.quantity * haul.quality;
+        let produce = haul.quantity * haul.quality;
         if(haul.enclost)
             produce *= (1-(Math.random() * 0.5));
-        var total = Math.floor(produce * (1+score) * 5000);
-        var coin  = Math.floor(Math.min(total * 0.1, 300));
-        var gcoin = Math.floor(total - coin);
+        let total = Math.floor(produce * (1+score) * 5000);
+        let coin  = Math.floor(Math.min(total * 0.1, 300));
+        let gcoin = Math.floor(total - coin);
 
         parse["gcoin"] = gcoin;
         parse["coin"]  = coin;
@@ -425,7 +425,7 @@ export namespace MarketScenes {
         let gwendy = GAME().gwendy;
         let rigard = GAME().rigard;
 
-        var parse : any = {
+        let parse : any = {
             playername : player.name
         };
 
@@ -460,7 +460,7 @@ export namespace MarketScenes {
         gwendy.relation.IncreaseStat(100, 5);
 
         //[Sleep][Decline]
-        var options = new Array();
+        let options = new Array();
         options.push({ nameStr : "Sleep",
             func : function() {
                 Text.Clear();
@@ -481,7 +481,7 @@ export namespace MarketScenes {
                 Text.Add("<i>“It’s alright, I understand,”</i> Gwendy says, though she looks a bit lonely. <i>“See you around, I suppose?”</i> You nod, promising you’ll return later.", parse);
                 if(party.Num() > 1) {
                     Text.NL();
-                    var p1 = party.Get(1);
+                    let p1 = party.Get(1);
                     parse["comp"] = party.Num() > 2 ? "your companions" : p1.name;
                     parse["himher"] = party.Num() > 2 ? "them" : p1.himher();
                     Text.Add("You call for [comp], telling [himher] that it is time for you to leave. As you walk, you explain the events of the day to [himher].", parse);

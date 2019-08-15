@@ -38,11 +38,11 @@ export class Stat {
 	IdealStat(ideal : number, maxChange? : number, fraction? : boolean) {
 		ideal = ideal || 0;
 		maxChange = maxChange || 1;
-		var diff = ideal - this.base;
+		let diff = ideal - this.base;
 		if(diff < 0) maxChange *= -1;
 		diff = (Math.abs(diff) <= Math.abs(maxChange)) ? diff : maxChange;
 		
-		var old = this.base;
+		let old = this.base;
 		this.base += diff;
 		if(GetDEBUG() && this.debug) {
 			Text.NL();
@@ -66,11 +66,11 @@ export class Stat {
 	IncreaseStat(ideal : number, maxChange? : number, fraction? : boolean) {
 		ideal = ideal || 0;
 		maxChange = maxChange || 1;
-		var diff = ideal - this.base;
+		let diff = ideal - this.base;
 		if(diff < 0) return null;
 		diff = (diff <= maxChange) ? diff : maxChange;
 		
-		var old = this.base;
+		let old = this.base;
 		this.base += diff;
 		if(GetDEBUG() && this.debug) {
 			Text.NL();
@@ -92,11 +92,11 @@ export class Stat {
 	DecreaseStat(ideal : number, maxChange? : number, fraction? : boolean) {
 		ideal = ideal || 0;
 		maxChange = maxChange || 1;
-		var diff = this.base - ideal;
+		let diff = this.base - ideal;
 		if(diff < 0) return null; 
 		diff = (diff <= maxChange) ? diff : maxChange;
 		
-		var old = this.base;
+		let old = this.base;
 		this.base -= diff;
 		if(GetDEBUG() && this.debug) {
 			Text.NL();

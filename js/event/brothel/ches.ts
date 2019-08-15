@@ -39,7 +39,7 @@ export class Ches extends Entity {
 	}
 
 	ToStorage() {
-		var storage : any = {};
+		let storage : any = {};
 		
 		this.SavePersonalityStats(storage);
 		

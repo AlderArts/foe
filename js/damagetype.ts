@@ -40,14 +40,14 @@ export class DamageType {
 	}
 	
 	Add(other : any) {
-		for(var i = 0; i < Element.numElements; i++)
+		for(let i = 0; i < Element.numElements; i++)
 			this.dmg[i] += other.dmg[i];
 	}
 
 	ApplyDmgType(def : any, atkDmg : number) {
-		var ret = 0;
-		for(var i = 0; i < Element.numElements; i++) {
-			var dmg = this.dmg[i] * atkDmg;
+		let ret = 0;
+		for(let i = 0; i < Element.numElements; i++) {
+			let dmg = this.dmg[i] * atkDmg;
 			dmg -= dmg * def.dmg[i];
 			ret += dmg;
 		}

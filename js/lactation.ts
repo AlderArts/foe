@@ -15,7 +15,7 @@ export class LactationHandler {
 	constructor(entity : any, storage? : any) {
 		this.entity = entity;
 		
-		var debugName = function() { return entity.name + ".body"; };
+		let debugName = function() { return entity.name + ".body"; };
 		
 		this.lactating      = false;
 		this.lactationRate  = new Stat(0);
@@ -30,7 +30,7 @@ export class LactationHandler {
 	}
 
 	ToStorage() {
-		var storage : any = {};
+		let storage : any = {};
 		
 		storage.lact  = this.lactating ? 1 : 0;
 		storage.lactR = this.lactationRate.base;
@@ -52,7 +52,7 @@ export class LactationHandler {
 	}
 
 	CanLactate() {
-		var body = this.entity.body;
+		let body = this.entity.body;
 		if(body.breasts.length == 0)
 			return false;
 		else if(body.breasts[0].Size() < 2)
@@ -74,15 +74,15 @@ export class LactationHandler {
 	}
 	//TODO Balance
 	MilkCap() {
-		var body = this.entity.body;
-		var cap  = this.milkCap.Get();
-		for(var i = 0; i < body.breasts.length; i++) {
+		let body = this.entity.body;
+		let cap  = this.milkCap.Get();
+		for(let i = 0; i < body.breasts.length; i++) {
 			cap += body.breasts[i].Size();
 		}
 		return cap;
 	}
 	MilkLevel() {
-		var cap = this.MilkCap();
+		let cap = this.MilkCap();
 		if(cap != 0)
 			return this.Milk() / cap;
 		else
@@ -90,11 +90,11 @@ export class LactationHandler {
 	}
 
 	Update(hours : number) {
-		var inc = this.milkProduction.Get() * hours;
+		let inc = this.milkProduction.Get() * hours;
 		if(this.Lactation())
 			inc -= this.lactationRate.Get() * hours;
 		
-		var oldMilk = this.MilkLevel();
+		let oldMilk = this.MilkLevel();
 		if(inc > 0) {
 			this.milk.IncreaseStat(this.MilkCap(), inc, true);
 			
@@ -102,7 +102,7 @@ export class LactationHandler {
 		else if(inc < 0) {
 			this.milk.DecreaseStat(0, -inc, true);
 		}
-		var newMilk = this.MilkLevel();
+		let newMilk = this.MilkLevel();
 		
 		if(this.Milk() >= this.MilkCap()) {
 			this.entity.MilkFull();

@@ -32,7 +32,7 @@ export class Balls extends BodyPart {
 	}
 
 	ToStorage(full : boolean) {
-		var storage : any = {
+		let storage : any = {
 			size  : this.size.base.toFixed(2),
 			cum   : this.cum.base.toFixed(2),
 			cumP  : this.cumProduction.base.toFixed(2),
@@ -60,15 +60,15 @@ export class Balls extends BodyPart {
 	}
 
 	CumCap() {
-		var num = this.count.Get();
-		var cap = this.cumCap.Get();
+		let num = this.count.Get();
+		let cap = this.cumCap.Get();
 		cap += num * this.size.Get();
 		return cap;
 	}
 
 	noun() {
-		var count = this.count.Get();
-		var nouns = new Array();
+		let count = this.count.Get();
+		let nouns = new Array();
 		if(Math.random() < 0.5) {
 			nouns.push("ball");
 			if(count == 4)
@@ -80,14 +80,14 @@ export class Balls extends BodyPart {
 			nouns.push("nut");
 			nouns.push("testicle");
 		}
-		var noun = nouns[Rand(nouns.length)];
+		let noun = nouns[Rand(nouns.length)];
 		if(count > 1) noun += "s";
 		return noun;
 	}
 
 	adj() {
-		var size = this.size.Get();
-		var adjs = [];
+		let size = this.size.Get();
+		let adjs = [];
 		if(size < 2) {
 			adjs.push("small");
 			adjs.push("diminitive");
@@ -127,7 +127,7 @@ export class Balls extends BodyPart {
 	}
 
 	adj2() {
-		var adjs = [];
+		let adjs = [];
 		if(this.cum.Get() / this.CumCap() > 0.8) {
 			adjs.push("overflowing ");
 			adjs.push("swollen ");
@@ -148,10 +148,10 @@ export class Balls extends BodyPart {
 	}
 
 	Short() {
-		var count = this.count.Get();
+		let count = this.count.Get();
 		if(count == 0) return "prostate";
 		
-		var str = "";
+		let str = "";
 		if(Math.random() > 0.5) {
 			str += Text.Quantify(count);
 			if(count > 1) str += " of ";
@@ -167,10 +167,10 @@ export class Balls extends BodyPart {
 	}
 
 	Long() {
-		var count = this.count.Get();
+		let count = this.count.Get();
 		if(count == 0) return "prostate";
 		
-		var str = "";
+		let str = "";
 		str += "a " + Text.Quantify(count);
 		if(count > 1) str += " of ";
 		else          str += " ";

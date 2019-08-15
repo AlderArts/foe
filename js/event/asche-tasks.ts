@@ -32,7 +32,7 @@ export namespace AscheTasksScenes {
 	}
 
 	export function Default() {
-		var parse : any = {};
+		let parse : any = {};
 		
 		//Play this if the player isn’t eligible for a new task at the moment.
 		Text.Clear();
@@ -80,7 +80,7 @@ export namespace AscheTasksScenes {
 			let player = GAME().player;
 			let asche = GAME().asche;
 
-			var parse : any = {
+			let parse : any = {
 				heshe : player.mfFem("he", "she"),
 				handsomepretty : player.mfFem("handsome", "pretty")
 			};
@@ -127,7 +127,7 @@ export namespace AscheTasksScenes {
 		export function OnTask() {
 			let player = GAME().player;
 
-			var parse : any = {
+			let parse : any = {
 				handsomepretty : player.mfFem("handsome", "pretty")
 			};
 			
@@ -146,7 +146,7 @@ export namespace AscheTasksScenes {
 			let player = GAME().player;
 			let asche = GAME().asche;
 
-			var parse : any = {
+			let parse : any = {
 				himher : player.mfFem("him", "her")
 			};
 			
@@ -164,7 +164,7 @@ export namespace AscheTasksScenes {
 			let party : Party = GAME().party;
 			let asche = GAME().asche;
 
-			var parse : any = {
+			let parse : any = {
 				
 			};
 			
@@ -189,7 +189,7 @@ export namespace AscheTasksScenes {
 			Text.Flush();
 			
 			//[Approach][Sneak][Fight]
-			var options = new Array();
+			let options = new Array();
 			options.push({ nameStr : "Approach",
 				tooltip : "See if you can negotiate with the shamans. Maybe you can come to an agreement of some sort.",
 				func : function() {
@@ -206,7 +206,7 @@ export namespace AscheTasksScenes {
 					Text.Flush();
 					
 					//[Bribe][Whore]
-					var options = new Array();
+					let options = new Array();
 					options.push({ nameStr : "Bribe",
 						tooltip : "See if you can buy off the zebras.",
 						func : AscheTasksScenes.Ginseng.Bribe, enabled : true
@@ -218,13 +218,13 @@ export namespace AscheTasksScenes {
 					Gui.SetButtonsFromList(options, false, null);
 				}, enabled : true
 			});
-			var tooltip = Text.Parse("Try to slip past the zebras and enter the spring basin while they’re [day].", {day: WorldTime().IsDay() ? "distracted" : "out of it"});
+			let tooltip = Text.Parse("Try to slip past the zebras and enter the spring basin while they’re [day].", {day: WorldTime().IsDay() ? "distracted" : "out of it"});
 			options.push({ nameStr : "Sneak",
 				tooltip : tooltip,
 				func : function() {
 					// Make a dex check. If success, PC sneaks by and digs one up, else, fail and fight.
 					
-					var dex = Math.floor(player.Dex() + Math.random() * 20);
+					let dex = Math.floor(player.Dex() + Math.random() * 20);
 					
 					Text.Clear();
 					Text.Add("Steeling yourself, you try to plot a path into the basin that’ll get you around the zebras encamped out front - the ravine walls are thickly wooded, and if you climbed high enough and stuck close to the trees, you might be able to get through unseen. It’s as good a plan as any; sticking to the path at the bottom isn’t an option, at any rate. ", parse);
@@ -232,14 +232,14 @@ export namespace AscheTasksScenes {
 					Text.Add("Gritting your teeth, you begin the ascent, trying to gain some height on the steep walls; hopefully the vegetation will break your fall if you happen to tumble. It feels like it takes forever, but you manage to climb to a decent height - about four stories above the ravine floor - and finally begin the task of edging your way through the vegetation and around the small encampment.", parse);
 					Text.NL();
 					
-					var goal = 40;
+					let goal = 40;
 					
 					if(GetDEBUG()) {
 						Text.Add("Dex check: [dex] (vs [goal])", {dex: dex, goal: goal}, 'bold');
 						Text.NL();
 					}
 					if(dex >= goal) {
-						var day = WorldTime().IsDay();
+						let day = WorldTime().IsDay();
 						parse["day1"] = day ? "the zebras are too focused on their fire to look up" : "the weary zebra shaman doesn’t lift his eyes from the path in front of his post";
 						parse["day2"] = day ? "" : ", thanks to the bright moon";
 						parse["day3"] = day ? "the shaman and his companions haven’t moved from their fire, and don’t even look up as you slip by them" : "the only thing you hear from the braves is their snores, and the shaman looks on the verge of joining them, letting you slip by easily";
@@ -271,7 +271,7 @@ export namespace AscheTasksScenes {
 				tooltip : "Since you have the initiative, it’s probably best to get the jump on them while you can.",
 				func : function() {
 					Text.Clear();
-					var day = WorldTime().IsDay();
+					let day = WorldTime().IsDay();
 					Text.Add("You decide that force is probably going to be the easiest solution to this quandary, and prepare to do battle. It might cause problems for Asche to march in and start bashing skulls, but you’re a filthy, filthy outsider and you doing so probably won’t cause much of a stir.", parse);
 					Text.NL();
 					if(day)
@@ -288,11 +288,11 @@ export namespace AscheTasksScenes {
 		}
 
 		export function Fight() {
-			var enemy = new Party();
+			let enemy = new Party();
 			enemy.AddMember(new ZebraShaman(2));
 			enemy.AddMember(new ZebraBrave(2));
 			enemy.AddMember(new ZebraBrave(2));
-			var enc = new Encounter(enemy);
+			let enc = new Encounter(enemy);
 			
 			enc.canRun = false;
 			enc.onLoss = AscheTasksScenes.Ginseng.FightLoss;
@@ -307,7 +307,7 @@ export namespace AscheTasksScenes {
 			let party : Party = GAME().party;
 			let asche = GAME().asche;
 
-			var parse : any = {
+			let parse : any = {
 				
 			};
 			
@@ -328,7 +328,7 @@ export namespace AscheTasksScenes {
 			Text.Flush();
 			
 			//[Pay][Whore][Fight]
-			var options = new Array();
+			let options = new Array();
 			options.push({ nameStr : "Pay",
 				tooltip : "Pay what they want and be done with it.",
 				func : function() {
@@ -384,7 +384,7 @@ export namespace AscheTasksScenes {
 			let party : Party = GAME().party;
 			let asche = GAME().asche;
 
-			var parse : any = {
+			let parse : any = {
 				
 			};
 			parse = player.ParserTags(parse);
@@ -420,7 +420,7 @@ export namespace AscheTasksScenes {
 				Text.Add("Your thoughts are cut short by the shaman yanking your legs apart. There’s a brief burst of sensation as he lines up that throbbing, veined horsecock with your [vag], then pain as he begins to violate you, pounding like a maddened beast with months’ and months’ worth of pent-up sexual frustration. Ignoring your predicament, the first brave in line yanks your head back and forces his massive shaft down your throat.", parse);
 				Text.NL();
 				
-				var zebra = new ZebraShaman();
+				let zebra = new ZebraShaman();
 				
 				Sex.Vaginal(zebra, player);
 				player.FuckVag(player.FirstVag(), zebra.FirstCock(), 4);
@@ -443,7 +443,7 @@ export namespace AscheTasksScenes {
 				
 				ZebraShamanScenes.Impregnate(player, zebra);
 				
-				var cum = player.OrgasmCum();
+				let cum = player.OrgasmCum();
 				
 				Text.Add("Hell, you don’t even remember if you came yourself. What you <i>do</i> remember, though, is all of them pulling out of and away from you, finally having had some relief for their… ah, aches and pains. You’re dropped in the most ignoble fashion in the puddle of cum you helped with creating, trickles of the sticky fluid running from your mouth and cunt.", parse);
 				Text.NL();
@@ -470,7 +470,7 @@ export namespace AscheTasksScenes {
 				Text.Flush();
 				
 				//[Bribe][Fight]
-				var options = new Array();
+				let options = new Array();
 				options.push({ nameStr : "Bribe",
 					tooltip : "If sex won’t sway them, maybe money will…",
 					func : AscheTasksScenes.Ginseng.Bribe, enabled : true
@@ -495,15 +495,15 @@ export namespace AscheTasksScenes {
 			let party : Party = GAME().party;
 			let asche = GAME().asche;
 
-			var enc = this;
+			let enc = this;
 			SetGameState(GameState.Event, Gui);
 			
-			var parse : any = {
+			let parse : any = {
 				
 			};
 			
 			Gui.Callstack.push(function() {
-				var day = WorldTime().IsDay()
+				let day = WorldTime().IsDay()
 				
 				parse["day"] = day ? "" : " thanks to the bright moon";
 				Text.Clear();
@@ -527,10 +527,10 @@ export namespace AscheTasksScenes {
 			let party : Party = GAME().party;
 			let asche = GAME().asche;
 
-			var enc = this;
+			let enc = this;
 			SetGameState(GameState.Event, Gui);
 			
-			var parse : any = {
+			let parse : any = {
 				
 			};
 			
@@ -554,7 +554,7 @@ export namespace AscheTasksScenes {
 			let party : Party = GAME().party;
 			let asche = GAME().asche;
 
-			var parse : any = {
+			let parse : any = {
 				himher : player.mfFem("him", "her"),
 				hisher : player.mfFem("his", "her"),
 				heshe : player.mfFem("he", "she"),
@@ -600,7 +600,7 @@ export namespace AscheTasksScenes {
 			Text.Flush();
 			
 			//[Yes][No]
-			var options = new Array();
+			let options = new Array();
 			options.push({ nameStr : "Yes",
 				tooltip : "Why not? The mystical shopkeeper is definitely willing and able.",
 				func : function() {
@@ -626,7 +626,7 @@ export namespace AscheTasksScenes {
 					Text.Add("<i>“Asche shall now paint herself and customer with special concoction to help [himher] better feel and understand sensations,”</i> the jackaless explains as she unscrews the lid of the ointment pot. <i>“Ingredients of ointment are important, but so is pattern; mistake means it is not working, or worse, not having intended effect. To be observing closely.”</i>", parse);
 					Text.NL();
 					parse = player.ParserTags(parse);
-					var gen = "";
+					let gen = "";
 					if(player.FirstCock()) gen += " [cocks] stiffening";
 					if(player.FirstCock() && player.FirstVag()) gen += " and your";
 					if(player.FirstVag()) gen += " [vag] growing damp";
@@ -651,7 +651,7 @@ export namespace AscheTasksScenes {
 					Text.NL();
 					Text.Add("With that, the jackaless pulls out a coin purse from the folds of her sari and sets it on the counter with a satisfying clink. As you scoop up your well-deserved reward, she shakes her head and grins slyly. <i>“Asche is hoping that customer is making right choice and does not regret it later. To be having good day, then.”</i>", parse);Text.NL();
 					
-					var coin = 500;
+					let coin = 500;
 					
 					party.coin += coin;
 					Text.Add("You recieved [coin] coins.", {coin: Text.NumToText(coin)}, 'bold');
@@ -705,7 +705,7 @@ export namespace AscheTasksScenes {
 			let player = GAME().player;
 			let asche = GAME().asche;
 
-			var parse : any = {
+			let parse : any = {
 				heshe : player.mfFem("he", "she")
 			};
 			
@@ -734,7 +734,7 @@ export namespace AscheTasksScenes {
 
 		export function OnTask() {
 			let player = GAME().player;
-			var parse : any = {
+			let parse : any = {
 				hisher : player.mfFem("his", "her")
 			};
 			
@@ -752,7 +752,7 @@ export namespace AscheTasksScenes {
 			let player = GAME().player;
 			let asche = GAME().asche;
 
-			var parse : any = {
+			let parse : any = {
 				playername : player.name
 			};
 			
@@ -783,7 +783,7 @@ export namespace AscheTasksScenes {
 		export function BlindStart() {
 			let player = GAME().player;
 
-			var parse : any = {
+			let parse : any = {
 				
 			};
 			
@@ -791,7 +791,7 @@ export namespace AscheTasksScenes {
 			Text.Add("Setting out into the forest on your hunt for a specimen of nightshade for Asche, you do your best to get this little flower-picking task done with a minimum of fuss. Keeping your eyes trained on the forest undergrowth and peeled for anything that might look like the herb you’re after, you set off along one of the myriad trails that wind their way through the forest, wandering where your feet will take you.", parse);
 			Text.NL();
 			
-			var rangerBonus = 0;
+			let rangerBonus = 0;
 			if(Jobs.Ranger.Unlocked(player))
 				rangerBonus += 1;
 			if(Jobs.Ranger.Master(player)) {
@@ -800,7 +800,7 @@ export namespace AscheTasksScenes {
 				Text.NL();
 			}
 			
-			var scenes = new EncounterTable();
+			let scenes = new EncounterTable();
 			scenes.AddEnc(function() {
 				Text.Add("Unfortunately, after half an hour you’re still as empty-handed as you were when you set out, the only thing you’ve gained being an ache in your back and crick in your neck from staring at the forest floor for so long. In a decidedly more sour mood than before, you rub your various sore spots and decide that this wasn’t exactly your lucky day. Maybe you’ll try again later when you’ve made yourself a little more comfortable… or at least, a little less tender.", parse);
 				Text.Flush();
@@ -824,7 +824,7 @@ export namespace AscheTasksScenes {
 
 		//Use this if asked Aquilius for help
 		export function FollowAquilius() {
-			var parse : any = {
+			let parse : any = {
 				
 			};
 			
@@ -845,7 +845,7 @@ export namespace AscheTasksScenes {
 			let party : Party = GAME().party;
 			let asche = GAME().asche;
 
-			var parse : any = {
+			let parse : any = {
 				feet : player.FeetDesc()
 			};
 			
@@ -868,9 +868,9 @@ export namespace AscheTasksScenes {
 				Text.Add("With nothing better coming to mind, you decide that finding a proper route with plenty of hand and footholds is the best you can do here. You take your time, trying to choose the most easily reached plant, and finally decide on one particular specimen before starting to climb.", parse);
 				Text.NL();
 				
-				var goal = 60; // #make a combined stamina, dex and int check here. Maybe sum the three, make an average, and go for a check that’s suitable for a level 7 or 8 character?
+				let goal = 60; // #make a combined stamina, dex and int check here. Maybe sum the three, make an average, and go for a check that’s suitable for a level 7 or 8 character?
 				
-				var check = Math.floor((player.Dex() + player.Sta() + player.Int()) / 3.0 + Math.random() * 20);
+				let check = Math.floor((player.Dex() + player.Sta() + player.Int()) / 3.0 + Math.random() * 20);
 				
 				if(GetDEBUG()) {
 					Text.Add("(Dex+Sta+Int)/3 test: [val] (vs [goal])", {val: check, goal: goal}, 'bold');
@@ -910,7 +910,7 @@ export namespace AscheTasksScenes {
 			let party : Party = GAME().party;
 			let asche = GAME().asche;
 
-			var parse : any = {
+			let parse : any = {
 				handsomepretty : player.mfFem("handsome", "pretty"),
 				himher : player.mfFem("him", "her"),
 				hisher : player.mfFem("his", "her"),
@@ -969,7 +969,7 @@ export namespace AscheTasksScenes {
 			Text.Flush();
 			
 			//[Money][Lesson]
-			var options = new Array();
+			let options = new Array();
 			options.push({ nameStr : "Lesson",
 				tooltip : "Well, you aren’t the kind to pass up a very educational experience…",
 				func : function() {
@@ -1041,7 +1041,7 @@ export namespace AscheTasksScenes {
 					Text.NL();
 					Text.Add("You nod, taking your candle and the purse. Counting the contents, you decide it’s not too bad of a sum for the work you’ve put in.", parse);
 					
-					var coin = 500;
+					let coin = 500;
 					
 					party.coin += coin;
 					Text.Add("You recieved [coin] coins.", {coin: Text.NumToText(coin)}, 'bold');
@@ -1085,7 +1085,7 @@ export namespace AscheTasksScenes {
 			let player = GAME().player;
 			let asche = GAME().asche;
 
-			var parse : any = {
+			let parse : any = {
 				HandsomePretty: player.mfFem("Handsome", "Pretty"),
 				handsomepretty: player.mfFem("handsome", "pretty"),
 				hisher : player.mfFem("his", "her"),
@@ -1141,7 +1141,7 @@ export namespace AscheTasksScenes {
 			let party : Party = GAME().party;
 			let asche = GAME().asche;
 
-			var parse : any = {
+			let parse : any = {
 				feet : player.FeetDesc()
 			};
 			
@@ -1168,7 +1168,7 @@ export namespace AscheTasksScenes {
 			TimeStep({minute: 30});
 			
 			//[Step Out][Hide]
-			var options = new Array();
+			let options = new Array();
 			options.push({ nameStr : "Step out",
 				tooltip : "Taking the initiative might help if you need to get physical.",
 				func : function() {
@@ -1245,7 +1245,7 @@ export namespace AscheTasksScenes {
 		export function OnTask() {
 			let player = GAME().player;
 
-			var parse : any = {
+			let parse : any = {
 				heshe  : player.mfFem("he","she"),
 				himher : player.mfFem("him","her")
 			};
@@ -1260,7 +1260,7 @@ export namespace AscheTasksScenes {
 			let party : Party = GAME().party;
 			let asche = GAME().asche;
 
-			var parse : any = {
+			let parse : any = {
 				himher : player.mfFem("him", "her"),
 				hisher : player.mfFem("his", "her"),
 				heshe : player.mfFem("he", "she"),
@@ -1292,7 +1292,7 @@ export namespace AscheTasksScenes {
 			TimeStep({minute: 15});
 			
 			//[Reward][Education][Adventure]
-			var options = new Array();
+			let options = new Array();
 			options.push({ nameStr : "Reward",
 				tooltip : "You’ll just take the goods, thank you very much.",
 				func : function() {

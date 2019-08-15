@@ -4,10 +4,10 @@ export function Rand(max : number) {
 }
 
 export namespace Unit {
-	export function CmToInch(cm : number) { return cm / 2.54; }
-	export function InchToFoot(inch : number) { return inch / 12; }
-	export function MToFoot(m : number) { return m * 3.28; }
-	export function KgToPound(kg : number) { return kg * 2.2; }
+	export function CmToInch(cm: number) { return cm / 2.54; }
+	export function InchToFoot(inch: number) { return inch / 12; }
+	export function MToFoot(m: number) { return m * 3.28; }
+	export function KgToPound(kg: number) { return kg * 2.2; }
 }
 
 /*
@@ -18,7 +18,7 @@ export namespace Unit {
 	});
  */
 // Download script, used for save to file. Calls download.php
-let GenerateFile : any = function(options : any) {
+let GenerateFile: any = (options: any) => {
 	options.script = options.script || "download.php";
 
 	if(!options.filename || !options.content){
@@ -27,7 +27,7 @@ let GenerateFile : any = function(options : any) {
 
 	// Creating a 1 by 1 px invisible iframe:
 
-	var iframe = $('<iframe>',{
+	let iframe = $('<iframe>',{
 		width:1,
 		height:1,
 		frameborder:0,
@@ -36,7 +36,7 @@ let GenerateFile : any = function(options : any) {
 		}
 	}).appendTo('body');
 
-	var formHTML = '<form action="" method="post">'+
+	let formHTML = '<form action="" method="post">'+
 		'<input type="hidden" name="filename" />'+
 		'<input type="hidden" name="content" />'+
 		'</form>';
@@ -48,7 +48,7 @@ let GenerateFile : any = function(options : any) {
 
 		// The body element of the iframe document:
 
-		var body = (iframe.prop('contentDocument') !== undefined) ?
+		let body = (iframe.prop('contentDocument') !== undefined) ?
 					iframe.prop('contentDocument').body :
 					iframe.prop('document').body;	// IE
 
@@ -57,7 +57,7 @@ let GenerateFile : any = function(options : any) {
 		// Adding the form to the body:
 		body.html(formHTML);
 
-		var form = body.find('form');
+		let form = body.find('form');
 
 		form.attr('action',options.script);
 		form.find('input[name=filename]').val(options.filename);
@@ -73,15 +73,15 @@ GenerateFile.canSaveOffline = false;
 
 (function(){
 	// calling convention for destroying local variables instead of keeping them in global namespace
-	var lnk : HTMLAnchorElement;
+	let lnk : HTMLAnchorElement;
 	try {
 		new Blob([JSON.stringify({"obj":"discarded"})],{"type":"application/json"});
-		var fl = new File([JSON.stringify({"obj":"discarded"})],"FoE.json",{"type":"application/json"});
+		let fl = new File([JSON.stringify({"obj":"discarded"})],"FoE.json",{"type":"application/json"});
 		lnk = document.createElement("a");
 		if (typeof lnk.hidden !== "boolean" || typeof lnk.href !== "string" || typeof lnk.download !== "string" || typeof lnk.click !== "function") {
 			throw 'Anchor element does not support all necessary features';
 		}
-		var url = URL.createObjectURL(fl);
+		let url = URL.createObjectURL(fl);
 		URL.revokeObjectURL(url);
 		lnk.hidden = true;
 		lnk.download = "application/json";
@@ -100,7 +100,7 @@ GenerateFile.canSaveOffline = false;
 			// remove any old data from lingering system resources
 			URL.revokeObjectURL(lnk.href);
 		}
-		var fl = new File([options.content], options.filename, {"type":"application/json"});
+		let fl = new File([options.content], options.filename, {"type":"application/json"});
 		lnk.href = URL.createObjectURL(fl);
 		lnk.download = options.filename;
 		lnk.click();

@@ -46,7 +46,7 @@ export function WorldTime() {
 }
 
 export function MoveToLocation(location : any, timestep? : any, preventClear? : boolean) {
-	var oldLocation = game.party.location;
+	let oldLocation = game.party.location;
 	game.party.location = location;
 
 	// Step time

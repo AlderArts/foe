@@ -31,7 +31,7 @@ export class Button {
 	glow : any;
 
 	constructor(Gui : any, rect : any, text : string, func : CallableFunction, enabled : boolean, image : any, disabledImage : any, glow? : boolean) {
-		var that = this;
+		let that = this;
 
 		this.Gui = Gui;
 		
@@ -204,7 +204,7 @@ export class Button {
 		this.SetText(ability.name);
 		this.tooltip = ability.tooltip;
 		this.SetVisible(true);
-		var enabled = ability.enabledCondition ? ability.enabledCondition(encounter, caster) : true;
+		let enabled = ability.enabledCondition ? ability.enabledCondition(encounter, caster) : true;
 		
 		this.SetEnabled(enabled);
 		

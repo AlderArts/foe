@@ -6,7 +6,7 @@ import { GAME, TimeStep } from "../GAME";
 export namespace AscheSexScenes {
 	export function Prompt() {
 		let player = GAME().player;
-		var options = new Array();
+		let options = new Array();
 		options.push({ nameStr : "Fuck her",
 			tooltip : "You’ve long waited for the chance to have a go at the exotic shopkeeper.",
 			func : function() {
@@ -54,13 +54,13 @@ export namespace AscheSexScenes {
 		let player = GAME().player;
 		let asche = GAME().asche;
 
-		var p1cock = player.BiggestCock(null, true);
-		var real = !p1cock.isStrapon;
-		var knotted = p1cock.Knot();
-		var longCock = p1cock.Len() > 18;
-		var massiveCock = p1cock.Volume() > 750;
+		let p1cock = player.BiggestCock(null, true);
+		let real = !p1cock.isStrapon;
+		let knotted = p1cock.Knot();
+		let longCock = p1cock.Len() > 18;
+		let massiveCock = p1cock.Volume() > 750;
 		
-		var parse : any = {};
+		let parse : any = {};
 		
 		parse = player.ParserTags(parse);
 		
@@ -130,7 +130,7 @@ export namespace AscheSexScenes {
 		}
 		Text.NL();
 		
-		var cum = player.OrgasmCum();
+		let cum = player.OrgasmCum();
 		
 		if(real) {
 			Text.Add("You can’t hold back any longer yourself, not with you being pressed on one side by the intensity of Asche’s orgasm and by your own immense pleasure on the other, and send blast after blast of hot sperm flooding her insides.", parse);
@@ -153,7 +153,7 @@ export namespace AscheSexScenes {
 		let player = GAME().player;
 		let asche = GAME().asche;
 
-		var parse : any = {
+		let parse : any = {
 			handsomepretty : player.mfFem("handsome", "pretty"),
 			heshe : player.mfFem("he", "she"),
 			himher : player.mfFem("him", "her"),
@@ -201,9 +201,9 @@ export namespace AscheSexScenes {
 		let player = GAME().player;
 		let asche = GAME().asche;
 
-		var p1cock = player.BiggestCock();
+		let p1cock = player.BiggestCock();
 		
-		var parse : any = {
+		let parse : any = {
 			
 		};
 		parse = player.ParserTags(parse);
@@ -219,9 +219,9 @@ export namespace AscheSexScenes {
 		Text.Add("<i>“Mm, that is right,”</i> the jackaless croons. <i>“Just to be relaxing and letting Asche work her magic on you…“</i>", parse);
 		Text.NL();
 		if(p1cock) {
-			var volume = p1cock.Volume();
-			var knotted = p1cock.Knot();
-			var longCock = p1cock.Len() > 18;
+			let volume = p1cock.Volume();
+			let knotted = p1cock.Knot();
+			let longCock = p1cock.Len() > 18;
 			
 			Text.Add("Slinking up to you, Asche grabs hold of your thighs, one in each hand, and pulls them apart with surprising strength. The jackaless eyes your crotch and the [cocks] on offer, kneading the gentle flesh of your inner thighs as her fingers creep ever closer to your shaft[s].", parse);
 			Text.NL();
@@ -267,7 +267,7 @@ export namespace AscheSexScenes {
 			Text.Add("No, you have to remember, it’s Asche who’s blowing you, not the other way round, but it’s hard to tell the difference with whatever magic Asche’s worked to join you two. The exotic shopkeeper is definitely enjoying the sensations she’s deriving from you; her whorish moans of delight may be muffled by your [cock] in her maw, but the way her body trembles doesn’t lie; she feels coiled like a spring, pressed tight and ready to release. Another wave of exquisite sensations crashes into your being, your shaft so attuned to receiving pleasure that you can <i>feel</i> the jackaless’ breath huffing and whistling around it[c].", parse);
 			Text.NL();
 			
-			var cum = player.OrgasmCum();
+			let cum = player.OrgasmCum();
 			
 			Text.Add("It’s not long before your pleasure reaches its peak. Despite your best efforts to hold on, you can feel your cum welling up, a hot, sticky geyser ready to blow. ", parse);
 			if(cum > 4) {
@@ -317,15 +317,15 @@ export namespace AscheSexScenes {
 	export function Titfuck() {
 		let player = GAME().player;
 
-		var p1cock = player.BiggestCock();
-		var longCock = p1cock.Len() > 28;
+		let p1cock = player.BiggestCock();
+		let longCock = p1cock.Len() > 28;
 		
-		var parse : any = {
+		let parse : any = {
 			heshe : player.mfFem("he", "she")
 		};
 		parse = player.ParserTags(parse);
 		
-		var mc = player.NumCocks() > 1;
+		let mc = player.NumCocks() > 1;
 		
 		Text.Clear();
 		Text.Add("<i>“Ooh, customer is wishing to have fun with these things, yes?”</i> Asche coos as she cups her breasts, each hand almost - the key word here being almost - able to engulf her firm and perky lady lumps. <i>“Is good thing that [heshe] just made them all better just before using them, yes. Feeling like this, Asche is reminded of time when she is just becoming woman, yes.”</i>", parse);
@@ -348,7 +348,7 @@ export namespace AscheSexScenes {
 		Text.Add("It’s an unreal sensation, the way the golden patterns on your bodies help amplify the pleasure that you’re receiving from Asche. Flares of heat and orgasmic pleasure send shivers through your flesh as they run from your nipples and down the entire length of your body. With such stimulation, it’s not long before you begin to feel yourself give in[sl]. With a cry that rings in the small back room, you buck your hips one last time and release your sweet, sweet seed, feeling it course through your [cock] before finally bursting into the world.", parse);
 		Text.NL();
 		
-		var cum = player.OrgasmCum();
+		let cum = player.OrgasmCum();
 		
 		if(cum > 4) {
 			Text.Add("A veritable geyser of cum blasts from your [cockTip], the torrential stream of hot sperm enough to make Asche yip in surprise and pleasure. Thanks to the jackaless’ magic, you both share the orgasm, and you’re reduced to a writhing, mewling wreck; your cum arcs beautifully in the air before raining down on the two of you, splattering Asche’s face, breasts, back - all of her, really - with warm globs of seed.", parse);
@@ -368,7 +368,7 @@ export namespace AscheSexScenes {
 	export function MilkHer() {
 		let player = GAME().player;
 
-		var parse : any = {
+		let parse : any = {
 			heshe : player.mfFem("he", "she"),
 			nips : player.FirstBreastRow().NipsShort(),
 			handsomepretty : player.mfFem("handsome", "pretty"),
@@ -412,7 +412,7 @@ export namespace AscheSexScenes {
 	export function Tribbing() {
 		let player = GAME().player;
 
-		var parse : any = {
+		let parse : any = {
 			heshe : player.mfFem("he", "she"),
 			hisher : player.mfFem("his", "her")
 		};
@@ -455,7 +455,7 @@ export namespace AscheSexScenes {
 	export function Ending() {
 		let player = GAME().player;
 
-		var parse : any = {
+		let parse : any = {
 			
 		};
 		
@@ -485,9 +485,9 @@ export namespace AscheSexScenes {
 		let player = GAME().player;
 		let asche = GAME().asche;
 
-		var p1cock = player.BiggestCock();
+		let p1cock = player.BiggestCock();
 		
-		var parse : any = {
+		let parse : any = {
 			lowerarmordesc : player.LowerArmorDesc(),
 			upperarmordesc : player.ArmorDesc(),
 			handsomepretty : player.mfFem("handsome", "pretty")
@@ -566,7 +566,7 @@ export namespace AscheSexScenes {
 		Text.Add("The excited, pulsing warmth deep within you is writhing, seeking release, and comes dangerously close when you feel bottom-Asche’s fingers work their way between you and the mattress, probing your ass cheeks for your back door. They find it soon enough, and you shudder as she slides a furry digit in, your sphincter clenching tight about the welcome intruder.", parse);
 		Text.NL();
 		
-		var cum = player.OrgasmCum();
+		let cum = player.OrgasmCum();
 		
 		Text.Add("Time to up the ante yourself. Withdrawing momentarily from top-Asche, you run the tip of your [tongue] across her outer lips, seeking that tiny nub of flesh you know is there - and when you do find it, giving it a flick with your [tongueTip]. That’s enough to push Asche over the edge - with a loud howl, top-Asche throws back her head and grabs at your neck as she convulses atop you, pussy juice squirting from her love-hole as orgasm wracks her body. Bottom-Asche ", parse);
 		if(player.FirstCock()) {

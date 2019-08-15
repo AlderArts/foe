@@ -74,9 +74,9 @@ export class RavenMother extends Entity {
 	
 	// Increase ravenness and return trigger
 	RavenTrigger() {
-		var oldVal = this.Ravenness();
+		let oldVal = this.Ravenness();
 		this.flags["Stage"] += Math.floor(10 + Math.random() * 70);
-		var newVal = this.Ravenness();
+		let newVal = this.Ravenness();
 		
 		return newVal > oldVal;
 	}
@@ -89,7 +89,7 @@ export class RavenMother extends Entity {
 	}
 	
 	ToStorage() {
-		var storage = {};
+		let storage = {};
 		
 		this.SavePersonalityStats(storage);
 		
@@ -102,7 +102,7 @@ export class RavenMother extends Entity {
 RavenMotherScenes.TheHunt = function(func : any) {
 	let ravenmother = GAME().ravenmother;
 	let party : Party = GAME().party;
-	var parse : any = {};
+	let parse : any = {};
 	
 	RavenMotherScenes.theHuntWakeup = func;
 	
@@ -118,7 +118,7 @@ RavenMotherScenes.TheHunt = function(func : any) {
 		}
 	}
 	else {
-		var person = party.GetRandom(true);
+		let person = party.GetRandom(true);
 		parse["person"]  = person.name;
 		parse["pheshe"]  = person.heshe();
 		parse["phisher"] = person.hisher();
@@ -145,9 +145,9 @@ RavenMotherScenes.TheHunt = function(func : any) {
 		Text.Add("You’re unsure what to do next, but the bird is not so uncertain. With an outraged croak, it flies straight at the corner of the room, but instead of crashing into the wall, it somehow shifts through it, and with a blur in the air it is gone.", parse);
 		Text.Flush();
 		
-		var prompt = function(asked : boolean) {
+		let prompt = function(asked : boolean) {
 			//[Ask][Investigate]
-			var options = new Array();
+			let options = new Array();
 			options.push({ nameStr : "Ask",
 				func : function() {
 					Text.Clear();
@@ -185,7 +185,7 @@ RavenMotherScenes.TheHunt = function(func : any) {
 
 
 RavenMotherScenes.TheHuntWolf = function() {
-	var parse : any = {};
+	let parse : any = {};
 	
 	Text.Clear();
 	Text.Add("...You run on all fours, as a hunter, chasing a deer. This time, however, you’re prepared, and slow to a walk, looking around at the trees above. You feel more in control of the dream now. You think you could change into a human if you tried, but there’s no need.", parse);
@@ -234,7 +234,7 @@ RavenMotherScenes.TheHuntGlade = function() {
 	let ravenmother = GAME().ravenmother;
 	let player = GAME().player;
 
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	
@@ -252,7 +252,7 @@ RavenMotherScenes.TheHuntGlade = function() {
 	Text.Flush();
 	
 	//[Comply][Don’t]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Comply",
 		func : function() {
 			Text.Clear();
@@ -287,7 +287,7 @@ RavenMotherScenes.TheHuntGlade = function() {
 RavenMotherScenes.TheHuntGladeCont = function() {
 	let player = GAME().player;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name
 	};
 	
@@ -311,7 +311,7 @@ RavenMotherScenes.TheHuntGladeCont = function() {
 	Text.Flush();
 	
 	//[Rephrase][Keep going]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Rephrase",
 		func : function() {
 			Text.Clear();
@@ -388,7 +388,7 @@ RavenMotherScenes.TheHuntGladeCont = function() {
 RavenMotherScenes.TheHuntTalk = function() {
 	let ravenmother = GAME().ravenmother;
 
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	
@@ -398,9 +398,9 @@ RavenMotherScenes.TheHuntTalk = function() {
 	Text.Add("It seems like she’s told you everything she’s willing to tell about this. Maybe everything she can tell. It’s time to decide your next step.", parse);
 	Text.Flush();
 	
-	var prompt = function() {
+	let prompt = function() {
 		//[Questions][Nah]
-		var options = new Array();
+		let options = new Array();
 		options.push({ nameStr : "Questions",
 			func : function() {
 				RavenMotherScenes.TheHuntQuestions(prompt);
@@ -446,12 +446,12 @@ RavenMotherScenes.TheHuntTalk = function() {
 }
 
 RavenMotherScenes.TheHuntQuestions = function(back : any) {
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	
 	//[Herself][Ravens][Dreams]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Herself",
 		func : function() {
 			Text.Clear();
@@ -517,7 +517,7 @@ RavenMotherScenes.TheHuntQuestions = function(back : any) {
 RavenMotherScenes.RavenPrompt = function(back : any) {
 	let ravenmother = GAME().ravenmother;
 
-	var parse : any = {};
+	let parse : any = {};
 	
 	Text.Clear();
 	
@@ -528,7 +528,7 @@ RavenMotherScenes.RavenPrompt = function(back : any) {
 	Text.Flush();
 	
 	//[Stop][Send them]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Stop",
 		func : function() {
 			Text.Clear();

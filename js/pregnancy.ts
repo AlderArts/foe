@@ -44,7 +44,7 @@ export class Womb {
 	}
 
 	ToStorage() {
-		var storage : any = {
+		let storage : any = {
 			litS : this.litterSize.toFixed(),
 			hour : this.hoursToBirth.toFixed(2),
 			prog : this.progress.toFixed(4)
@@ -84,7 +84,7 @@ export class Womb {
 
 	}
 	Size() {
-		var geneSize = this.race.GeneSize();
+		let geneSize = this.race.GeneSize();
 
 		return this.progress * geneSize * Math.sqrt(this.litterSize);
 	}
@@ -117,26 +117,26 @@ export class PregnancyHandler {
 	static get Slot() { return PHSlot; }
 
 	ToStorage() {
-		var storage : any = {
+		let storage : any = {
 			gr : this.gestationRate.base.toFixed(2),
 			f  : this.fertility.base.toFixed(2)
 		};
 		if(this.mpreg)
 			storage.mpreg = "on";
 
-		var womb = [];
-		var vags = this.entity.AllVags();
-		for(var i = 0; i < vags.length; ++i) {
-			var w = vags[i].womb;
+		let womb = [];
+		let vags = this.entity.AllVags();
+		for(let i = 0; i < vags.length; ++i) {
+			let w = vags[i].womb;
 			if(w && w.pregnant) {
-				var s = w.ToStorage();
+				let s = w.ToStorage();
 				s.slot = PregnancyHandler.Slot.Vag + i;
 				womb.push(s);
 			}
 		}
-		var w = this.entity.Butt().womb;
+		let w = this.entity.Butt().womb;
 		if(w && w.pregnant) {
-			var s = w.ToStorage();
+			let s = w.ToStorage();
 			s.slot = PregnancyHandler.Slot.Butt;
 			womb.push(s);
 		}
@@ -154,14 +154,14 @@ export class PregnancyHandler {
 		if(storage.mpreg) this.mpreg = true;
 
 		if(storage.womb) {
-			var vags = this.entity.AllVags();
+			let vags = this.entity.AllVags();
 
-			for(var i = 0; i < storage.womb.length; ++i) {
-				var w    = storage.womb[i];
-				var slot = parseInt(w.slot);
-				var wPtr = null;
+			for(let i = 0; i < storage.womb.length; ++i) {
+				let w    = storage.womb[i];
+				let slot = parseInt(w.slot);
+				let wPtr = null;
 				if(slot >= PregnancyHandler.Slot.Vag && slot < PregnancyHandler.Slot.Butt) {
-					var idx = slot - PregnancyHandler.Slot.Vag;
+					let idx = slot - PregnancyHandler.Slot.Vag;
 					if((idx >= 0) && (idx < vags.length)) {
 						wPtr = vags[idx].womb;
 					}
@@ -182,10 +182,10 @@ export class PregnancyHandler {
 	*/
 	Womb(opts? : any) {
 		opts = opts || {};
-		var slot = opts.slot || PregnancyHandler.Slot.Vag;
-		var womb = null;
+		let slot = opts.slot || PregnancyHandler.Slot.Vag;
+		let womb = null;
 		if     (slot <  PregnancyHandler.Slot.Butt) {
-			var vag = this.entity.AllVags()[slot];
+			let vag = this.entity.AllVags()[slot];
 			if(vag)
 				womb = vag.womb;
 		}
@@ -200,11 +200,11 @@ export class PregnancyHandler {
 	* Returns an array of pregnant wombs
 	*/
 	PregnantWombs() {
-		var ret = [];
+		let ret = [];
 
-		var ent = this.entity;
+		let ent = this.entity;
 
-		var womb = null;
+		let womb = null;
 		_.each(ent.AllVags(), function(vag) {
 			womb = vag.womb;
 			if(womb.pregnant)
@@ -223,7 +223,7 @@ export class PregnancyHandler {
 	*/
 	IsPregnant(opts? : any) {
 		opts = opts || {};
-		var slot = opts.slot;
+		let slot = opts.slot;
 		if(_.isNumber(slot)) {
 			return this.Womb(slot).pregnant;
 		}
@@ -235,7 +235,6 @@ export class PregnancyHandler {
 	MPregEnabled() {
 		return this.mpreg;
 	}
-
 
 	/*
 	* opts:
@@ -249,45 +248,48 @@ export class PregnancyHandler {
 	*  force  := [optional], bypass fertility
 	*  load   := [optional], multiply chances of preg
 	*/
-	Impregnate(opts? : any) {
+	Impregnate(opts?: any) {
 		opts = opts || {};
-		var mother = opts.mother || this.entity;
-		var father = opts.father; //TODO Potential fallback needed
-		var race = opts.race || Race.Human;
+		const mother = opts.mother || this.entity;
+		const father = opts.father; // TODO Potential fallback needed
+		const race = opts.race || Race.Human;
 
-		var slot = opts.slot || PregnancyHandler.Slot.Vag;
-		var womb = null;
+		const slot = opts.slot || PregnancyHandler.Slot.Vag;
+		let womb = null;
 		if     (slot <  PregnancyHandler.Slot.Butt) {
-			var vag = mother.AllVags()[slot];
-			if(vag)
+			const vag = mother.AllVags()[slot];
+			if (vag) {
 				womb = vag.womb;
+			}
+		} else if (slot === PregnancyHandler.Slot.Butt) {
+			womb = mother.Butt().womb;
 		}
-		else if(slot == PregnancyHandler.Slot.Butt) womb = mother.Butt().womb;
 
-		if(womb == null)  return false;
-		if(womb.pregnant) return false;
-		if(slot == PregnancyHandler.Slot.Butt && !this.MPregEnabled()) return false;
+		if (womb == null) { return false; }
+		if (womb.pregnant) { return false; }
+		if (slot === PregnancyHandler.Slot.Butt && !this.MPregEnabled()) { return false; }
 
 		// TODO: Check for sterility, herbs etc
 
-		var fertility = (this.fertility.Get() * father.Virility() * Math.sqrt(opts.load || 1));
+		let fertility = (this.fertility.Get() * father.Virility() * Math.sqrt(opts.load || 1));
 		// Perks etc for mother
-		if(mother.HasPerk(Perks.Fertility))
+		if (mother.HasPerk(Perks.Fertility)) {
 			fertility *= 1.5;
-		var limp = mother.combatStatus.stats[StatusEffect.Limp];
+		}
+		let limp = mother.combatStatus.stats[StatusEffect.Limp];
 		if(limp) fertility *= limp.fer;
-		var aroused = mother.combatStatus.stats[StatusEffect.Aroused];
+		let aroused = mother.combatStatus.stats[StatusEffect.Aroused];
 		if(aroused) fertility *= aroused.fer;
 		// Perks etc for father
 		if(father.HasPerk(Perks.Virility))
 			fertility *= 1.5;
-		var limp = father.combatStatus.stats[StatusEffect.Limp];
+		limp = father.combatStatus.stats[StatusEffect.Limp];
 		if(limp) fertility *= limp.fer;
-		var aroused = father.combatStatus.stats[StatusEffect.Aroused];
+		aroused = father.combatStatus.stats[StatusEffect.Aroused];
 		if(aroused) fertility *= aroused.fer;
 
-		var chance = Math.random();
-		var parse : any = {
+		let chance = Math.random();
+		let parse : any = {
 			mother : mother.name,
 			father : father.name,
 			odds   : fertility,
@@ -297,8 +299,8 @@ export class PregnancyHandler {
 		if(opts.force || (chance < fertility)) {
 
 			// Adjust litterSize
-			var litterSize = opts.num || 1;
-			var litterCap = opts.numCap || 0;
+			let litterSize = opts.num || 1;
+			let litterCap = opts.numCap || 0;
 
 			if(mother.HasPerk(Perks.Breeder) && Math.random() < 0.3)
 				litterSize *= 2;
@@ -311,7 +313,7 @@ export class PregnancyHandler {
 			if(_.isNumber(litterCap) && litterCap > 0 )
 				litterSize = Math.max(litterSize, litterCap);
 
-			var gestationPeriod = opts.time || 24; //TODO TEMP
+			let gestationPeriod = opts.time || 24; //TODO TEMP
 
 
 			Sex.Preg(father, mother, litterSize);
@@ -352,13 +354,13 @@ export class PregnancyHandler {
 		hours = hours || 0;
 		hours *= this.gestationRate.Get();
 		
-		var ent = this.entity;
+		let ent = this.entity;
 		
-		var wombs = this.PregnantWombs();
+		let wombs = this.PregnantWombs();
 		_.each(wombs, function(womb) {
-			var slot = ent.Butt().womb == womb ? PregnancyHandler.Slot.Butt : PregnancyHandler.Slot.Vag;
+			let slot = ent.Butt().womb == womb ? PregnancyHandler.Slot.Butt : PregnancyHandler.Slot.Vag;
 			
-			var oldProgress = womb.progress;
+			let oldProgress = womb.progress;
 			if(!womb.triggered) {
 				womb.progress     += (1-womb.progress) * hours / womb.hoursToBirth;
 				womb.hoursToBirth -= hours;
@@ -376,8 +378,8 @@ export class PregnancyHandler {
 	}
 
 	BellySize() {
-		var size = 0;
-		var wombs = this.PregnantWombs();
+		let size = 0;
+		let wombs = this.PregnantWombs();
 		
 		_.each(wombs, function(womb) {
 			size += womb.Size();

@@ -23,20 +23,20 @@ export namespace TF {
 		Added     = 2,
 		Removed   = 3,
 	};
-	
+
 	// Change of bodyparts, return if something was changed
 	export function SetRaceOne(bodypart : any, race : RaceDesc, ret? : any) {
 		ret = ret || {};
-		var changed = Effect.Unchanged;
+		let changed = Effect.Unchanged;
 		if(_.isArray(bodypart)) {
-			var list = [];
-			for(var i = 0; i < bodypart.length; i++) {
+			let list = [];
+			for(let i = 0; i < bodypart.length; i++) {
 				if(bodypart[i].race != race)
 					list.push(bodypart[i]);
 			}
 			if(list.length > 0) {
 				changed = Effect.Changed;
-				var idx = Rand(list.length);
+				let idx = Rand(list.length);
 				list[idx].race = race;
 				ret.bodypart   = list[idx];
 			}
@@ -52,12 +52,12 @@ export namespace TF {
 	export function SetRaceAll(bodypart : any, race : RaceDesc) {
 		let changed : any = Effect.Unchanged;
 		if(_.isArray(bodypart)) {
-			var list = [];
-			for(var i = 0; i < bodypart.length; i++) {
+			let list = [];
+			for(let i = 0; i < bodypart.length; i++) {
 				if(bodypart[i].race != race)
 					list.push(bodypart[i]);
 			}
-			for(var i = 0; i < list.length; i++) {
+			for(let i = 0; i < list.length; i++) {
 				changed      = true;
 				list[i].race = race;
 			}
@@ -76,10 +76,10 @@ export namespace TF {
 		if(!_.isNumber(count))
 			count = 1;
 		
-		for(var i = 0; i < slots.length; i++) {
-			var app = slots[i];
+		for(let i = 0; i < slots.length; i++) {
+			let app = slots[i];
 			if(app.type == type) {
-				var changed    = 
+				let changed    = 
 				   ((app.race  != race)  || 
 					(app.count != count) ||
 					(app.color != color)) ? Effect.Changed : Effect.Unchanged;
@@ -96,14 +96,14 @@ export namespace TF {
 	}
 	
 	export function RemoveAppendage(slots : any, type : any, count : number) {
-		var all = false;
+		let all = false;
 		if(count < 0)
 			all = true;
 		else if(!_.isNumber(count))
 			count = 1;
 		
-		for(var i = 0; i < slots.length; i++) {
-			var app = slots[i];
+		for(let i = 0; i < slots.length; i++) {
+			let app = slots[i];
 			if(app.type == type) {
 				if(all)
 					app.count = 0;
@@ -124,8 +124,8 @@ export namespace TF {
 		count = count || 2;
 		ideal = ideal || 2;
 		
-		var orig = balls.count.Get();
-		var res = balls.count.IncreaseStat(ideal, count);
+		let orig = balls.count.Get();
+		let res = balls.count.IncreaseStat(ideal, count);
 		if(res > 0) {
 			if(orig == 0)
 				return Effect.Added;
@@ -140,7 +140,7 @@ export namespace TF {
 		count = count || 2;
 		ideal = ideal || 0;
 		
-		var res = balls.count.DecreaseStat(ideal, count);
+		let res = balls.count.DecreaseStat(ideal, count);
 		if(res != 0) {
 			if(balls.count.Get() == 0)
 				return Effect.Removed;
@@ -155,13 +155,13 @@ export namespace TF {
 	/* ITEM EFFECTS */
 	
 	export function UseItem(target : Entity, suppressUse? : boolean) {
-		var changed = Effect.Unchanged;
+		let changed = Effect.Unchanged;
 		if(!suppressUse && this.useStr)
 			this.useStr(target);
-		for(var i = 0; i < this.effects.length; i++) {
-			var effect = this.effects[i];
+		for(let i = 0; i < this.effects.length; i++) {
+			let effect = this.effects[i];
 			if(effect.func) {
-				var ret = effect.func(target, effect.opts);
+				let ret = effect.func(target, effect.opts);
 				if(ret != Effect.Unchanged)
 					changed = ret;
 			}
@@ -170,7 +170,7 @@ export namespace TF {
 	}
 
 	export function UseItemDesc(target : Entity) {
-		var parse : any = { name: target.NameDesc(), s: target == GAME().player ? "" : "s", item: this.name };
+		let parse : any = { name: target.NameDesc(), s: target == GAME().player ? "" : "s", item: this.name };
 		Text.Add("[name] chug[s] down a bottle of [item].", parse);
 		Text.NL();
 		Text.Flush();
@@ -186,10 +186,10 @@ export namespace TF {
 		
 		// odds, race, str
 		export function SetBody(target : Entity, opts : any) {
-			var changed = Effect.Unchanged;
-			var parse   = { Poss: target.Possessive(), str: opts.str };
-			var odds    = opts.odds || 1;
-			var body    = target.body.torso;
+			let changed = Effect.Unchanged;
+			let parse   = { Poss: target.Possessive(), str: opts.str };
+			let odds    = opts.odds || 1;
+			let body    = target.body.torso;
 			if(Math.random() < odds) {
 				changed = TF.SetRaceOne(body, opts.race);
 				if(changed != Effect.Unchanged) {
@@ -202,10 +202,10 @@ export namespace TF {
 		}
 
 		export function SetFace(target : Entity, opts : any) {
-			var changed = Effect.Unchanged;
-			var parse   = { Poss: target.Possessive(), str: opts.str };
-			var odds    = opts.odds || 1;
-			var head    = target.body.head;
+			let changed = Effect.Unchanged;
+			let parse   = { Poss: target.Possessive(), str: opts.str };
+			let odds    = opts.odds || 1;
+			let head    = target.body.head;
 			if(Math.random() < odds) {
 				changed = TF.SetRaceOne(head, opts.race);
 				if(changed != Effect.Unchanged) {
@@ -218,10 +218,10 @@ export namespace TF {
 		}
 
 		export function SetTongue(target : Entity, opts : any) {
-			var changed = Effect.Unchanged;
-			var parse   = { Poss: target.Possessive(), str: opts.str };
-			var odds    = opts.odds || 1;
-			var head    = target.body.head;
+			let changed = Effect.Unchanged;
+			let parse   = { Poss: target.Possessive(), str: opts.str };
+			let odds    = opts.odds || 1;
+			let head    = target.body.head;
 			if(Math.random() < odds) {
 				changed = TF.SetRaceOne(head.mouth.tongue, opts.race);
 				if(changed != Effect.Unchanged) {
@@ -235,10 +235,10 @@ export namespace TF {
 
 		// odds, race, str
 		export function SetArms(target : Entity, opts : any) {
-			var changed = Effect.Unchanged;
-			var parse   = { Poss: target.Possessive(), str: opts.str };
-			var odds    = opts.odds || 1;
-			var body    = target.body.arms;
+			let changed = Effect.Unchanged;
+			let parse   = { Poss: target.Possessive(), str: opts.str };
+			let odds    = opts.odds || 1;
+			let body    = target.body.arms;
 			if(Math.random() < odds) {
 				changed = TF.SetRaceOne(body, opts.race);
 				if(changed != Effect.Unchanged) {
@@ -252,11 +252,11 @@ export namespace TF {
 
 		// odds, race, str, count
 		export function SetLegs(target : Entity, opts : any) {
-			var changed = Effect.Unchanged;
-			var parse   = { Poss: target.Possessive(), str: opts.str };
-			var odds    = opts.odds || 1;
-			var count   = opts.count || 2;
-			var legs    = target.body.legs;
+			let changed = Effect.Unchanged;
+			let parse   = { Poss: target.Possessive(), str: opts.str };
+			let odds    = opts.odds || 1;
+			let count   = opts.count || 2;
+			let legs    = target.body.legs;
 			if(legs.count >= 2 && Math.random() < odds) {
 				changed = TF.SetRaceOne(legs, opts.race);
 				if(changed != Effect.Unchanged) {
@@ -270,10 +270,10 @@ export namespace TF {
 
 		// odds, race, str
 		export function SetCock(target : Entity, opts : any) {
-			var changed = Effect.Unchanged;
-			var parse   = { poss: target.possessive(), Poss: target.Possessive(), str: opts.str };
-			var odds    = opts.odds || 1;
-			var cocks   = target.AllCocks();
+			let changed = Effect.Unchanged;
+			let parse   = { poss: target.possessive(), Poss: target.Possessive(), str: opts.str };
+			let odds    = opts.odds || 1;
+			let cocks   = target.AllCocks();
 			if(Math.random() < odds) {
 				changed = TF.SetRaceOne(cocks, opts.race);
 				if(changed != Effect.Unchanged) {
@@ -290,10 +290,10 @@ export namespace TF {
 
 		// odds, race, str
 		export function SetEars(target : Entity, opts : any) {
-			var changed = Effect.Unchanged;
-			var parse   = { Poss: target.Possessive(), str: opts.str };
-			var odds    = opts.odds || 1;
-			var ears    = target.Ears();
+			let changed = Effect.Unchanged;
+			let parse   = { Poss: target.Possessive(), str: opts.str };
+			let odds    = opts.odds || 1;
+			let ears    = target.Ears();
 			if(Math.random() < odds) {
 				changed = TF.SetRaceOne(ears, opts.race);
 				if(changed != Effect.Unchanged) {
@@ -307,11 +307,11 @@ export namespace TF {
 
 		// odds, value, num
 		export function SetKnot(target : Entity, opts : any) {
-			var parse : any = { Poss: target.Possessive(), poss: target.possessive() };
-			var odds  = opts.odds || 1;
-			var num   = opts.num || 1;
-			var cocks = target.AllCocks();
-			for(var i = 0; i < cocks.length; i++) {
+			let parse : any = { Poss: target.Possessive(), poss: target.possessive() };
+			let odds  = opts.odds || 1;
+			let num   = opts.num || 1;
+			let cocks = target.AllCocks();
+			for(let i = 0; i < cocks.length; i++) {
 				if(Math.random() < odds) {
 					parse["cockDesc"] = cocks[i].Short();
 					if(opts.value) {
@@ -338,15 +338,15 @@ export namespace TF {
 
 		// odds, value
 		export function SetCover(target : Entity, opts : any) {
-			var odds  = opts.odds  || 1;
-			var value = opts.value || Genitalia.Cover.NoCover;
+			let odds  = opts.odds  || 1;
+			let value = opts.value || Genitalia.Cover.NoCover;
 			
 			if(!target.FirstCock()) return Effect.Unchanged;
 			
-			var gen = target.Genitalia();
+			let gen = target.Genitalia();
 			if(Math.random() < odds) {
 				if(gen.cover != value) {
-					var parse : any = {
+					let parse : any = {
 						Poss: target.Possessive(),
 						poss: target.possessive(),
 						cocks: target.MultiCockDesc(),
@@ -383,10 +383,10 @@ export namespace TF {
 
 		// odds, race, str, color
 		export function SetTail(target : Entity, opts : any) {
-			var changed = Effect.Unchanged;
-			var parse   = { name: target.NameDesc(), Poss: target.Possessive(), s: target == GAME().player ? "" : "s", str: opts.str };
+			let changed = Effect.Unchanged;
+			let parse   = { name: target.NameDesc(), Poss: target.Possessive(), s: target == GAME().player ? "" : "s", str: opts.str };
 			
-			var odds    = opts.odds || 1;
+			let odds    = opts.odds || 1;
 			if(Math.random() < odds) {
 				changed = SetAppendage(target.Back(), AppendageType.tail, opts.race, opts.color);
 				switch(changed) {
@@ -406,11 +406,11 @@ export namespace TF {
 
 		// odds, count
 		export function RemTail(target : Entity, opts : any) {
-			var changed = Effect.Unchanged;
-			var tail    = target.HasTail();
-			var parse : any = { name: target.NameDesc(), Poss: target.Possessive(), count: Text.NumToText(opts.count), hisher: target.hisher() };
+			let changed = Effect.Unchanged;
+			let tail    = target.HasTail();
+			let parse : any = { name: target.NameDesc(), Poss: target.Possessive(), count: Text.NumToText(opts.count), hisher: target.hisher() };
 			parse["s"] = tail && tail.count > 1 ? "s" : "";
-			var odds    = opts.odds || 1;
+			let odds    = opts.odds || 1;
 			if(Math.random() < odds) {
 				changed = TF.RemoveAppendage(target.Back(), AppendageType.tail, opts.count);
 				switch(changed) {
@@ -430,10 +430,10 @@ export namespace TF {
 
 		// odds, race, str, color, count
 		export function SetHorn(target : Entity, opts : any) {
-			var changed = Effect.Unchanged;
-			var parse   = { name: target.NameDesc(), Poss: target.Possessive(), s: target == GAME().player ? "" : "s", str: opts.str };
+			let changed = Effect.Unchanged;
+			let parse   = { name: target.NameDesc(), Poss: target.Possessive(), s: target == GAME().player ? "" : "s", str: opts.str };
 			
-			var odds    = opts.odds || 1;
+			let odds    = opts.odds || 1;
 			if(Math.random() < odds) {
 				changed = TF.SetAppendage(target.Appendages(), AppendageType.horn, opts.race, opts.color, opts.count);
 				switch(changed) {
@@ -453,9 +453,9 @@ export namespace TF {
 
 		// odds, count
 		export function RemHorn(target : Entity, opts : any) {
-			var changed = Effect.Unchanged;
-			var parse   = { name: target.NameDesc(), Poss: target.Possessive(), count: Text.NumToText(opts.count), hisher: target.hisher() };
-			var odds    = opts.odds || 1;
+			let changed = Effect.Unchanged;
+			let parse   = { name: target.NameDesc(), Poss: target.Possessive(), count: Text.NumToText(opts.count), hisher: target.hisher() };
+			let odds    = opts.odds || 1;
 			if(Math.random() < odds) {
 				changed = TF.RemoveAppendage(target.Appendages(), AppendageType.horn, opts.count);
 				switch(changed) {
@@ -475,11 +475,11 @@ export namespace TF {
 
 		// odds, race, str, color, count
 		export function SetAntenna(target : Entity, opts : any) {
-			var changed = Effect.Unchanged;
-			var parse   = { name: target.NameDesc(), Poss: target.Possessive(), s: target == GAME().player ? "" : "s", str: opts.str };
+			let changed = Effect.Unchanged;
+			let parse   = { name: target.NameDesc(), Poss: target.Possessive(), s: target == GAME().player ? "" : "s", str: opts.str };
 			
-			var odds    = opts.odds  || 1;
-			var count   = opts.count || 2;
+			let odds    = opts.odds  || 1;
+			let count   = opts.count || 2;
 			if(Math.random() < odds) {
 				changed = TF.SetAppendage(target.Appendages(), AppendageType.antenna, opts.race, opts.color, count);
 				switch(changed) {
@@ -499,9 +499,9 @@ export namespace TF {
 
 		// odds, count
 		export function RemAntenna(target : Entity, opts : any) {
-			var changed = Effect.Unchanged;
-			var parse   = { name: target.NameDesc(), Poss: target.Possessive(), count: Text.NumToText(opts.count), hisher: target.hisher() };
-			var odds    = opts.odds || 1;
+			let changed = Effect.Unchanged;
+			let parse   = { name: target.NameDesc(), Poss: target.Possessive(), count: Text.NumToText(opts.count), hisher: target.hisher() };
+			let odds    = opts.odds || 1;
 			if(Math.random() < odds) {
 				changed = TF.RemoveAppendage(target.Appendages(), AppendageType.antenna, opts.count);
 				switch(changed) {
@@ -521,11 +521,11 @@ export namespace TF {
 
 		// odds, race, str, color, count
 		export function SetWings(target : Entity, opts : any) {
-			var changed = Effect.Unchanged;
-			var parse   = { name: target.NameDesc(), Poss: target.Possessive(), s: target == GAME().player ? "" : "s", str: opts.str };
+			let changed = Effect.Unchanged;
+			let parse   = { name: target.NameDesc(), Poss: target.Possessive(), s: target == GAME().player ? "" : "s", str: opts.str };
 			
-			var odds    = opts.odds  || 1;
-			var count   = opts.count || 2;
+			let odds    = opts.odds  || 1;
+			let count   = opts.count || 2;
 			if(Math.random() < odds) {
 				changed = TF.SetAppendage(target.Back(), AppendageType.wing, opts.race, opts.color, count);
 				switch(changed) {
@@ -545,9 +545,9 @@ export namespace TF {
 
 		// odds, count
 		export function RemWings(target : Entity, opts : any) {
-			var changed = Effect.Unchanged;
-			var parse   = { name: target.NameDesc(), Poss: target.Possessive(), count: Text.NumToText(opts.count), hisher: target.hisher() };
-			var odds    = opts.odds || 1;
+			let changed = Effect.Unchanged;
+			let parse   = { name: target.NameDesc(), Poss: target.Possessive(), count: Text.NumToText(opts.count), hisher: target.hisher() };
+			let odds    = opts.odds || 1;
 			if(Math.random() < odds) {
 				changed = TF.RemoveAppendage(target.Back(), AppendageType.wing, opts.count);
 				switch(changed) {
@@ -567,11 +567,11 @@ export namespace TF {
 
 		// odds, race, str, color, count
 		export function SetAbdomen(target : Entity, opts : any) {
-			var changed = Effect.Unchanged;
-			var parse   = { name: target.NameDesc(), Poss: target.Possessive(), s: target == GAME().player ? "" : "s", str: opts.str };
+			let changed = Effect.Unchanged;
+			let parse   = { name: target.NameDesc(), Poss: target.Possessive(), s: target == GAME().player ? "" : "s", str: opts.str };
 			
-			var odds    = opts.odds  || 1;
-			var count   = opts.count || 2;
+			let odds    = opts.odds  || 1;
+			let count   = opts.count || 2;
 			if(Math.random() < odds) {
 				changed = TF.SetAppendage(target.Back(), AppendageType.abdomen, opts.race, opts.color, count);
 				switch(changed) {
@@ -591,9 +591,9 @@ export namespace TF {
 
 		// odds, count
 		export function RemAbdomen(target : Entity, opts : any) {
-			var changed = Effect.Unchanged;
-			var parse   = { name: target.NameDesc(), Poss: target.Possessive(), count: Text.NumToText(opts.count), hisher: target.hisher() };
-			var odds    = opts.odds || 1;
+			let changed = Effect.Unchanged;
+			let parse   = { name: target.NameDesc(), Poss: target.Possessive(), count: Text.NumToText(opts.count), hisher: target.hisher() };
+			let odds    = opts.odds || 1;
 			if(Math.random() < odds) {
 				changed = TF.RemoveAppendage(target.Back(), AppendageType.abdomen, opts.count);
 				switch(changed) {
@@ -613,11 +613,11 @@ export namespace TF {
 
 		// odds, race, color, ideal, count
 		export function SetBalls(target : Entity, opts : any) {
-			var changed = Effect.Unchanged;
-			var parse   = { name: target.NameDesc(), s: target == GAME().player ? "" : "s", count: Text.NumToText(opts.count), ballsDesc: function() { return target.BallsDesc(); } };
-			var odds    = opts.odds  || 1;
-			var count   = opts.count || 2;
-			var ideal   = opts.ideal || 2;
+			let changed = Effect.Unchanged;
+			let parse   = { name: target.NameDesc(), s: target == GAME().player ? "" : "s", count: Text.NumToText(opts.count), ballsDesc: function() { return target.BallsDesc(); } };
+			let odds    = opts.odds  || 1;
+			let count   = opts.count || 2;
+			let ideal   = opts.ideal || 2;
 			if(Math.random() < odds) {
 				changed = TF.SetBalls(target.body.balls, ideal, count);
 				switch(changed) {
@@ -637,11 +637,11 @@ export namespace TF {
 
 		// odds, ideal, count
 		export function RemBalls(target : Entity, opts : any) {
-			var changed = Effect.Unchanged;
-			var parse   = { name: target.NameDesc(), count: Text.NumToText(opts.count), hisher: target.hisher(), ballsDesc: target.BallsDesc() };
-			var odds    = opts.odds || 1;
-			var count   = opts.count || 2;
-			var ideal   = opts.ideal;
+			let changed = Effect.Unchanged;
+			let parse   = { name: target.NameDesc(), count: Text.NumToText(opts.count), hisher: target.hisher(), ballsDesc: target.BallsDesc() };
+			let odds    = opts.odds || 1;
+			let count   = opts.count || 2;
+			let ideal   = opts.ideal;
 			if(Math.random() < odds) {
 				changed = TF.RemBalls(target.body.balls, ideal, count);
 				switch(changed) {
@@ -661,8 +661,8 @@ export namespace TF {
 
 		// odds, ideal, max
 		export function IncBallSize(target : Entity, opts : any) {
-			var odds  = opts.odds || 1;
-			var parse : any = { Poss: target.Possessive() };
+			let odds  = opts.odds || 1;
+			let parse : any = { Poss: target.Possessive() };
 			if(Math.random() < odds &&
 				target.Balls().size.IncreaseStat(opts.ideal, opts.max)) {
 				if(!target.HasBalls()) return;
@@ -674,8 +674,8 @@ export namespace TF {
 
 		// odds, ideal, max
 		export function DecBallSize(target : Entity, opts : any) {
-			var odds  = opts.odds || 1;
-			var parse : any = { Poss: target.Possessive() };
+			let odds  = opts.odds || 1;
+			let parse : any = { Poss: target.Possessive() };
 			if(Math.random() < odds &&
 				target.Balls().size.DecreaseStat(opts.ideal, opts.max)) {
 				if(!target.HasBalls()) return;
@@ -687,11 +687,11 @@ export namespace TF {
 
 		// odds, rangeMin, rangeMax, max
 		export function IdealBallSize(target : Entity, opts : any) {
-			var odds  = opts.odds || 1;
-			var parse : any = { Poss: target.Possessive() };
+			let odds  = opts.odds || 1;
+			let parse : any = { Poss: target.Possessive() };
 			if(Math.random() < odds) {
-				var ideal = _.random(opts.rangeMin || 0, opts.rangeMax || 0, true);
-				var diff = target.Balls().size.IdealStat(ideal, opts.max);
+				let ideal = _.random(opts.rangeMin || 0, opts.rangeMax || 0, true);
+				let diff = target.Balls().size.IdealStat(ideal, opts.max);
 				if(!target.HasBalls()) return;
 				if(diff > 0) {
 					Text.Add("[Poss] balls have grown in size!", parse);
@@ -707,16 +707,16 @@ export namespace TF {
 
 		// odds, ideal, max, female
 		export function IncBreastSize(target : Entity, opts : any) {
-			var parse : any = { Poss: target.Possessive() };
+			let parse : any = { Poss: target.Possessive() };
 			
-			var odds  = opts.odds || 1;
-			var multi = opts.multi;
+			let odds  = opts.odds || 1;
+			let multi = opts.multi;
 			if(opts.female) {
 				if(!target.FirstVag()) return;
 			}
 			_.each(target.AllBreastRows(), function(breasts) {
 				if(Math.random() < odds) {
-					var diff = breasts.size.IncreaseStat(opts.ideal, opts.max);
+					let diff = breasts.size.IncreaseStat(opts.ideal, opts.max);
 					if(diff) {
 						Text.Add("[Poss] breasts grows bigger!", parse);
 						Text.NL();
@@ -728,13 +728,13 @@ export namespace TF {
 		}
 		// odds, ideal, max
 		export function DecBreastSize(target : Entity, opts : any) {
-			var parse : any = { Poss: target.Possessive() };
+			let parse : any = { Poss: target.Possessive() };
 			
-			var odds  = opts.odds || 1;
-			var multi = opts.multi;
+			let odds  = opts.odds || 1;
+			let multi = opts.multi;
 			_.each(target.AllBreastRows(), function(breasts) {
 				if(Math.random() < odds) {
-					var diff = breasts.size.DecreaseStat(opts.ideal, opts.max);
+					let diff = breasts.size.DecreaseStat(opts.ideal, opts.max);
 					if(diff) {
 						Text.Add("[Poss] breasts become smaller!", parse);
 						Text.NL();
@@ -746,16 +746,16 @@ export namespace TF {
 		}
 		// odds, ideal, max, female
 		export function SetIdealBreastSize(target : Entity, opts : any) {
-			var parse : any = { Poss: target.Possessive() };
+			let parse : any = { Poss: target.Possessive() };
 			
-			var odds  = opts.odds || 1;
-			var multi = opts.multi;
+			let odds  = opts.odds || 1;
+			let multi = opts.multi;
 			if(opts.female) {
 				if(!target.FirstVag()) return;
 			}
 			_.each(target.AllBreastRows(), function(breasts) {
 				if(Math.random() < odds) {
-					var diff = breasts.size.IdealStat(opts.ideal, opts.max);
+					let diff = breasts.size.IdealStat(opts.ideal, opts.max);
 					if(diff > 0) {
 						Text.Add("[Poss] breasts grows bigger!", parse);
 						Text.NL();
@@ -773,13 +773,13 @@ export namespace TF {
 
 		// odds, ideal, max
 		export function IncCockLen(target : Entity, opts : any) {
-			var parse : any = { Poss: target.Possessive() };
+			let parse : any = { Poss: target.Possessive() };
 			
-			var odds  = opts.odds || 1;
-			var multi = opts.multi;
+			let odds  = opts.odds || 1;
+			let multi = opts.multi;
 			_.each(target.AllCocks(), function(cock) {
 				if(Math.random() < odds) {
-					var diff = cock.length.IncreaseStat(opts.ideal, opts.max);
+					let diff = cock.length.IncreaseStat(opts.ideal, opts.max);
 					if(diff) {
 						Text.Add("[Poss] cock grows longer!", parse);
 						Text.NL();
@@ -791,13 +791,13 @@ export namespace TF {
 		}
 		// odds, ideal, max
 		export function DecCockLen(target : Entity, opts : any) {
-			var parse : any = { Poss: target.Possessive() };
+			let parse : any = { Poss: target.Possessive() };
 			
-			var odds  = opts.odds || 1;
-			var multi = opts.multi;
+			let odds  = opts.odds || 1;
+			let multi = opts.multi;
 			_.each(target.AllCocks(), function(cock) {
 				if(Math.random() < odds) {
-					var diff = cock.length.DecreaseStat(opts.ideal, opts.max);
+					let diff = cock.length.DecreaseStat(opts.ideal, opts.max);
 					if(diff) {
 						Text.Add("[Poss] cock becomes shorter!", parse);
 						Text.NL();
@@ -809,13 +809,13 @@ export namespace TF {
 		}
 		// odds, ideal, max
 		export function SetIdealCockLen(target : Entity, opts : any) {
-			var parse : any = { Poss: target.Possessive() };
+			let parse : any = { Poss: target.Possessive() };
 			
-			var odds  = opts.odds || 1;
-			var multi = opts.multi;
+			let odds  = opts.odds || 1;
+			let multi = opts.multi;
 			_.each(target.AllCocks(), function(cock) {
 				if(Math.random() < odds) {
-					var diff = cock.length.IdealStat(opts.ideal, opts.max);
+					let diff = cock.length.IdealStat(opts.ideal, opts.max);
 					if(diff > 0) {
 						Text.Add("[Poss] cock grows longer!", parse);
 						Text.NL();
@@ -833,13 +833,13 @@ export namespace TF {
 
 		// odds, ideal, max
 		export function IncCockThk(target : Entity, opts : any) {
-			var parse : any = { Poss: target.Possessive() };
+			let parse : any = { Poss: target.Possessive() };
 			
-			var odds  = opts.odds || 1;
-			var multi = opts.multi;
+			let odds  = opts.odds || 1;
+			let multi = opts.multi;
 			_.each(target.AllCocks(), function(cock) {
 				if(Math.random() < odds) {
-					var diff = cock.thickness.IncreaseStat(opts.ideal, opts.max);
+					let diff = cock.thickness.IncreaseStat(opts.ideal, opts.max);
 					if(diff) {
 						Text.Add("[Poss] cock grows thicker!", parse);
 						Text.NL();
@@ -851,13 +851,13 @@ export namespace TF {
 		}
 		// odds, ideal, max
 		export function DecCockThk(target : Entity, opts : any) {
-			var parse : any = { Poss: target.Possessive() };
+			let parse : any = { Poss: target.Possessive() };
 			
-			var odds  = opts.odds || 1;
-			var multi = opts.multi;
+			let odds  = opts.odds || 1;
+			let multi = opts.multi;
 			_.each(target.AllCocks(), function(cock) {
 				if(Math.random() < odds) {
-					var diff = cock.thickness.DecreaseStat(opts.ideal, opts.max);
+					let diff = cock.thickness.DecreaseStat(opts.ideal, opts.max);
 					if(diff) {
 						Text.Add("[Poss] cock grows thinner!", parse);
 						Text.NL();
@@ -869,13 +869,13 @@ export namespace TF {
 		}
 		// odds, ideal, max
 		export function SetIdealCockThk(target : Entity, opts : any) {
-			var parse : any = { Poss: target.Possessive() };
+			let parse : any = { Poss: target.Possessive() };
 			
-			var odds  = opts.odds || 1;
-			var multi = opts.multi;
+			let odds  = opts.odds || 1;
+			let multi = opts.multi;
 			_.each(target.AllCocks(), function(cock) {
 				if(Math.random() < odds) {
-					var diff = cock.thickness.IdealStat(opts.ideal, opts.max);
+					let diff = cock.thickness.IdealStat(opts.ideal, opts.max);
 					if(diff > 0) {
 						Text.Add("[Poss] cock grows thicker!", parse);
 						Text.NL();
@@ -893,10 +893,10 @@ export namespace TF {
 
 		// odds, ideal, max, female
 		export function IncFem(target : Entity, opts : any) {
-			var odds  = opts.odds || 1;
-			var female = target.FirstVag();
+			let odds  = opts.odds || 1;
+			let female = target.FirstVag();
 			if(opts.female && !female) return;
-			var parse : any = { name: target.NameDesc(), notS: target.plural() ? "" : "s" };
+			let parse : any = { name: target.NameDesc(), notS: target.plural() ? "" : "s" };
 			if(Math.random() < odds &&
 				target.body.femininity.IncreaseStat(opts.ideal, opts.max, true)) {
 				Text.Add("[name] become[notS] more feminine!", parse);
@@ -907,10 +907,10 @@ export namespace TF {
 
 		// odds, ideal, max, male
 		export function DecFem(target : Entity, opts : any) {
-			var odds  = opts.odds || 1;
-			var female = target.FirstVag();
+			let odds  = opts.odds || 1;
+			let female = target.FirstVag();
 			if(opts.male && female) return;
-			var parse : any = { name: target.NameDesc(), notS: target.plural() ? "" : "s" };
+			let parse : any = { name: target.NameDesc(), notS: target.plural() ? "" : "s" };
 			if(Math.random() < odds &&
 				target.body.femininity.DecreaseStat(opts.ideal, opts.max, true)) {
 				Text.Add("[name] become[notS] more masculine!", parse);
@@ -921,11 +921,11 @@ export namespace TF {
 
 		// odds, rangeMin, rangeMax, max
 		export function IdealFem(target : Entity, opts : any) {
-			var odds  = opts.odds || 1;
-			var parse : any = { name: target.NameDesc(), notS: target.plural() ? "" : "s" };
+			let odds  = opts.odds || 1;
+			let parse : any = { name: target.NameDesc(), notS: target.plural() ? "" : "s" };
 			if(Math.random() < odds) {
-				var ideal = _.random(opts.rangeMin || 0, opts.rangeMax || 0, true);
-				var diff = target.body.femininity.IdealStat(ideal, opts.max, true);
+				let ideal = _.random(opts.rangeMin || 0, opts.rangeMax || 0, true);
+				let diff = target.body.femininity.IdealStat(ideal, opts.max, true);
 				if(diff > 0) {
 					Text.Add("[name] become[notS] more feminine!", parse);
 					Text.NL();
@@ -940,8 +940,8 @@ export namespace TF {
 
 		// odds, ideal, max
 		export function IncTone(target : Entity, opts : any) {
-			var odds  = opts.odds || 1;
-			var parse : any = { name: target.NameDesc(), notS: target.plural() ? "" : "s" };
+			let odds  = opts.odds || 1;
+			let parse : any = { name: target.NameDesc(), notS: target.plural() ? "" : "s" };
 			if(Math.random() < odds &&
 				target.body.muscleTone.IncreaseStat(opts.ideal, opts.max, true)) {
 				Text.Add("[name] become[notS] more muscular!", parse);
@@ -952,8 +952,8 @@ export namespace TF {
 
 		// odds, ideal, min
 		export function DecTone(target : Entity, opts : any) {
-			var odds  = opts.odds || 1;
-			var parse : any = { name: target.NameDesc(), notS: target.plural() ? "" : "s" };
+			let odds  = opts.odds || 1;
+			let parse : any = { name: target.NameDesc(), notS: target.plural() ? "" : "s" };
 			if(Math.random() < odds &&
 				target.body.muscleTone.DecreaseStat(opts.ideal, opts.max, true)) {
 				Text.Add("[name] become[notS] less muscular!", parse);
@@ -964,11 +964,11 @@ export namespace TF {
 
 		// odds, rangeMin, rangeMax, max
 		export function IdealTone(target : Entity, opts : any) {
-			var odds  = opts.odds || 1;
-			var parse : any = { name: target.NameDesc(), notS: target.plural() ? "" : "s" };
+			let odds  = opts.odds || 1;
+			let parse : any = { name: target.NameDesc(), notS: target.plural() ? "" : "s" };
 			if(Math.random() < odds) {
-				var ideal = _.random(opts.rangeMin || 0, opts.rangeMax || 0, true);
-				var diff = target.body.muscleTone.IdealStat(ideal, opts.max, true);
+				let ideal = _.random(opts.rangeMin || 0, opts.rangeMax || 0, true);
+				let diff = target.body.muscleTone.IdealStat(ideal, opts.max, true);
 				if(diff > 0) {
 					Text.Add("[name] become[notS] more muscular!", parse);
 					Text.NL();
@@ -984,8 +984,8 @@ export namespace TF {
 
 		// odds, ideal, max
 		export function IncHips(target : Entity, opts : any) {
-			var odds  = opts.odds || 1;
-			var parse : any = { Poss: target.Possessive() };
+			let odds  = opts.odds || 1;
+			let parse : any = { Poss: target.Possessive() };
 			if(Math.random() < odds &&
 				target.body.torso.hipSize.IncreaseStat(opts.ideal, opts.max)) {
 				Text.Add("[Poss] hips widen!", parse);
@@ -995,8 +995,8 @@ export namespace TF {
 		}
 		// odds, ideal, min
 		export function DecHips(target : Entity, opts : any) {
-			var odds  = opts.odds || 1;
-			var parse : any = { Poss: target.Possessive() };
+			let odds  = opts.odds || 1;
+			let parse : any = { Poss: target.Possessive() };
 			if(Math.random() < odds &&
 				target.body.torso.hipSize.DecreaseStat(opts.ideal, opts.max)) {
 				Text.Add("[Poss] hips narrow!", parse);
@@ -1006,11 +1006,11 @@ export namespace TF {
 		}
 		// odds, rangeMin, rangeMax, max
 		export function IdealHips(target : Entity, opts : any) {
-			var odds  = opts.odds || 1;
-			var parse : any = { Poss: target.Possessive() };
+			let odds  = opts.odds || 1;
+			let parse : any = { Poss: target.Possessive() };
 			if(Math.random() < odds) {
-				var ideal = _.random(opts.rangeMin || 0, opts.rangeMax || 0, true);
-				var diff = target.body.torso.hipSize.IdealStat(ideal, opts.max);
+				let ideal = _.random(opts.rangeMin || 0, opts.rangeMax || 0, true);
+				let diff = target.body.torso.hipSize.IdealStat(ideal, opts.max);
 				if(diff > 0) {
 					Text.Add("[Poss] hips widen!", parse);
 					Text.NL();
@@ -1027,8 +1027,8 @@ export namespace TF {
 
 		// odds, ideal, max
 		export function IncStr(target : Entity, opts : any) {
-			var odds  = opts.odds || 1;
-			var parse : any = { name: target.NameDesc(), is: target.is() };
+			let odds  = opts.odds || 1;
+			let parse : any = { name: target.NameDesc(), is: target.is() };
 			if(Math.random() < odds &&
 				target.strength.IncreaseStat(opts.ideal, opts.max)) {
 				Text.Add("[name] [is] suddenly a bit stronger!", parse);
@@ -1039,8 +1039,8 @@ export namespace TF {
 
 		// odds, ideal, max
 		export function IncSta(target : Entity, opts : any) {
-			var odds  = opts.odds || 1;
-			var parse : any = { name: target.NameDesc(), is: target.is() };
+			let odds  = opts.odds || 1;
+			let parse : any = { name: target.NameDesc(), is: target.is() };
 				if(Math.random() < odds &&
 				target.stamina.IncreaseStat(opts.ideal, opts.max)) {
 				Text.Add("[name] [is] suddenly a bit tougher!", parse);
@@ -1051,8 +1051,8 @@ export namespace TF {
 
 		// odds, ideal, max
 		export function IncDex(target : Entity, opts : any) {
-			var odds  = opts.odds || 1;
-			var parse : any = { name: target.NameDesc(), is: target.is() };
+			let odds  = opts.odds || 1;
+			let parse : any = { name: target.NameDesc(), is: target.is() };
 			if(Math.random() < odds &&
 				target.dexterity.IncreaseStat(opts.ideal, opts.max)) {
 				Text.Add("[name] [is] suddenly a bit swifter!", parse);
@@ -1063,8 +1063,8 @@ export namespace TF {
 
 		// odds, ideal, max
 		export function IncInt(target : Entity, opts : any) {
-			var odds  = opts.odds || 1;
-			var parse : any = { name: target.NameDesc(), is: target.is() };
+			let odds  = opts.odds || 1;
+			let parse : any = { name: target.NameDesc(), is: target.is() };
 			if(Math.random() < odds &&
 				target.intelligence.IncreaseStat(opts.ideal, opts.max)) {
 				Text.Add("[name] [is] suddenly a bit smarter!", parse);
@@ -1075,8 +1075,8 @@ export namespace TF {
 
 		// odds, ideal, max
 		export function IncSpi(target : Entity, opts : any) {
-			var odds  = opts.odds || 1;
-			var parse : any = { name: target.NameDesc(), is: target.is() };
+			let odds  = opts.odds || 1;
+			let parse : any = { name: target.NameDesc(), is: target.is() };
 			if(Math.random() < odds &&
 				target.spirit.IncreaseStat(opts.ideal, opts.max)) {
 				Text.Add("[name] [is] suddenly a bit more stoic!", parse);
@@ -1087,8 +1087,8 @@ export namespace TF {
 
 		// odds, ideal, max
 		export function IncLib(target : Entity, opts : any) {
-			var odds  = opts.odds || 1;
-			var parse : any = { name: target.NameDesc(), is: target.is() };
+			let odds  = opts.odds || 1;
+			let parse : any = { name: target.NameDesc(), is: target.is() };
 			if(Math.random() < odds &&
 				target.libido.IncreaseStat(opts.ideal, opts.max)) {
 				Text.Add("[name] [is] suddenly a bit hornier!", parse);
@@ -1099,8 +1099,8 @@ export namespace TF {
 
 		// odds, ideal, max
 		export function IncCha(target : Entity, opts : any) {
-			var odds  = opts.odds || 1;
-			var parse : any = { name: target.NameDesc(), is: target.is() };
+			let odds  = opts.odds || 1;
+			let parse : any = { name: target.NameDesc(), is: target.is() };
 			if(Math.random() < odds &&
 				target.charisma.IncreaseStat(opts.ideal, opts.max)) {
 				Text.Add("[name] [is] suddenly a bit more charming!", parse);
@@ -1113,8 +1113,8 @@ export namespace TF {
 
 		// odds, ideal, max
 		export function DecStr(target : Entity, opts : any) {
-			var odds  = opts.odds || 1;
-			var parse : any = { name: target.NameDesc(), is: target.is() };
+			let odds  = opts.odds || 1;
+			let parse : any = { name: target.NameDesc(), is: target.is() };
 			if(Math.random() < odds &&
 				target.strength.DecreaseStat(opts.ideal, opts.max)) {
 				Text.Add("[name] [is] suddenly a bit weaker!", parse);
@@ -1125,8 +1125,8 @@ export namespace TF {
 
 		// odds, ideal, max
 		export function DecSta(target : Entity, opts : any) {
-			var odds  = opts.odds || 1;
-			var parse : any = { name: target.NameDesc(), is: target.is() };
+			let odds  = opts.odds || 1;
+			let parse : any = { name: target.NameDesc(), is: target.is() };
 			if(Math.random() < odds &&
 				target.stamina.DecreaseStat(opts.ideal, opts.max)) {
 				Text.Add("[name] [is] suddenly a bit less tough!", parse);
@@ -1137,8 +1137,8 @@ export namespace TF {
 
 		// odds, ideal, max
 		export function DecDex(target : Entity, opts : any) {
-			var odds  = opts.odds || 1;
-			var parse : any = { name: target.NameDesc(), is: target.is() };
+			let odds  = opts.odds || 1;
+			let parse : any = { name: target.NameDesc(), is: target.is() };
 			if(Math.random() < odds &&
 				target.dexterity.DecreaseStat(opts.ideal, opts.max)) {
 				Text.Add("[name] [is] suddenly a bit clumsier!", parse);
@@ -1149,8 +1149,8 @@ export namespace TF {
 
 		// odds, ideal, max
 		export function DecInt(target : Entity, opts : any) {
-			var odds  = opts.odds || 1;
-			var parse : any = { name: target.NameDesc(), is: target.is() };
+			let odds  = opts.odds || 1;
+			let parse : any = { name: target.NameDesc(), is: target.is() };
 			if(Math.random() < odds &&
 				target.intelligence.DecreaseStat(opts.ideal, opts.max)) {
 				Text.Add("[name] [is] suddenly a bit dumber!", parse);
@@ -1161,8 +1161,8 @@ export namespace TF {
 
 		// odds, ideal, max
 		export function DecSpi(target : Entity, opts : any) {
-			var odds  = opts.odds || 1;
-			var parse : any = { name: target.NameDesc(), is: target.is() };
+			let odds  = opts.odds || 1;
+			let parse : any = { name: target.NameDesc(), is: target.is() };
 			if(Math.random() < odds &&
 				target.spirit.DecreaseStat(opts.ideal, opts.max)) {
 				Text.Add("[name] [is] suddenly a bit less stoic!", parse);
@@ -1173,8 +1173,8 @@ export namespace TF {
 
 		// odds, ideal, max
 		export function DecLib(target : Entity, opts : any) {
-			var odds  = opts.odds || 1;
-			var parse : any = { name: target.NameDesc(), is: target.is() };
+			let odds  = opts.odds || 1;
+			let parse : any = { name: target.NameDesc(), is: target.is() };
 			if(Math.random() < odds &&
 				target.libido.DecreaseStat(opts.ideal, opts.max)) {
 				Text.Add("[name] [is] suddenly a bit more composed!", parse);
@@ -1185,8 +1185,8 @@ export namespace TF {
 
 		// odds, ideal, max
 		export function DecCha(target : Entity, opts : any) {
-			var odds  = opts.odds || 1;
-			var parse : any = { name: target.NameDesc(), is: target.is() };
+			let odds  = opts.odds || 1;
+			let parse : any = { name: target.NameDesc(), is: target.is() };
 			if(Math.random() < odds &&
 				target.charisma.DecreaseStat(opts.ideal, opts.max)) {
 				Text.Add("[name] [is] suddenly a bit less charming!", parse);

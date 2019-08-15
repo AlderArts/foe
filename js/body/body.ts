@@ -71,7 +71,7 @@ export class Body {
 
 	constructor(ent : any) {
 		this.entity = ent;
-		var debugName = function() { return ent.name + ".body"; };
+		let debugName = function() { return ent.name + ".body"; };
 		// Body stats
 		this.muscleTone = new Stat(0);
 		this.muscleTone.debug = function() { return debugName() + ".muscleTone"; }
@@ -112,7 +112,7 @@ export class Body {
 	}
 	
 	ToStorage() {
-		var storage : any = {
+		let storage : any = {
 			tone   : this.muscleTone.base.toFixed(2),
 			mass   : this.bodyMass.base.toFixed(2),
 			height : this.height.base.toFixed(2),
@@ -129,7 +129,7 @@ export class Body {
 		};
 		if(this.backSlots.length > 0) {
 			storage.back = new Array();
-			for(var i = 0; i < this.backSlots.length; i++) {
+			for(let i = 0; i < this.backSlots.length; i++) {
 				storage.back.push(this.backSlots[i].ToStorage());
 			}
 		}
@@ -137,9 +137,9 @@ export class Body {
 		storage.gen = this.gen.ToStorage();
 		if(this.cock.length > 0) {
 			storage.cock = new Array();
-			for(var i = 0; i < this.cock.length; i++) {
-				var a = this.cock[i];
-				var c = a.ToStorage(true);
+			for(let i = 0; i < this.cock.length; i++) {
+				let a = this.cock[i];
+				let c = a.ToStorage(true);
 				if(a.vag)
 					c.ccIdx = this.vagina.indexOf(a.vag);
 				storage.cock.push(c);
@@ -149,7 +149,7 @@ export class Body {
 		
 		if(this.vagina.length > 0) {
 			storage.vag = new Array();
-			for(var i = 0; i < this.vagina.length; i++) {
+			for(let i = 0; i < this.vagina.length; i++) {
 				storage.vag.push(this.vagina[i].ToStorage(true));
 			}
 		}
@@ -158,7 +158,7 @@ export class Body {
 		
 		if(this.breasts.length > 0) {
 			storage.breasts = new Array();
-			for(var i = 0; i < this.breasts.length; i++) {
+			for(let i = 0; i < this.breasts.length; i++) {
 				storage.breasts.push(this.breasts[i].ToStorage(true));
 			}
 		}
@@ -180,10 +180,10 @@ export class Body {
 	}
 
 	ToStoragePartial(opts : any) {
-		var storage : any = {};
+		let storage : any = {};
 		if(opts.cock && this.cock.length > 0) {
-			var cock = [];
-			for(var i = 0; i < this.cock.length; ++i) {
+			let cock = [];
+			for(let i = 0; i < this.cock.length; ++i) {
 				cock.push(this.cock[i].ToStorage(opts.full));
 			}
 			storage.cock = cock;
@@ -192,8 +192,8 @@ export class Body {
 			storage.balls = this.balls.ToStorage(opts.full);
 		}
 		if(opts.vag && this.vagina.length > 0) {
-			var vag = [];
-			for(var i = 0; i < this.vagina.length; ++i) {
+			let vag = [];
+			for(let i = 0; i < this.vagina.length; ++i) {
 				vag.push(this.vagina[i].ToStorage(opts.full));
 			}
 			storage.vag = vag;
@@ -202,8 +202,8 @@ export class Body {
 			storage.ass = this.ass.ToStorage(opts.full);
 		}
 		if(opts.breasts && this.breasts.length > 0) {
-			var breasts = [];
-			for(var i = 0; i < this.breasts.length; ++i) {
+			let breasts = [];
+			for(let i = 0; i < this.breasts.length; ++i) {
 				breasts.push(this.breasts[i].ToStorage(opts.full));
 			}
 			storage.breasts = breasts;
@@ -230,8 +230,8 @@ export class Body {
 		
 		if(storage.back) {
 			this.backSlots = new Array();
-			for(var i = 0; i < storage.back.length; i++) {
-				var newApp = new Appendage();
+			for(let i = 0; i < storage.back.length; i++) {
+				let newApp = new Appendage();
 				newApp.FromStorage(storage.back[i]);
 				this.backSlots.push(newApp);
 			}
@@ -241,8 +241,8 @@ export class Body {
 		
 		if(storage.cock) {
 			this.cock = new Array();
-			for(var i = 0; i < storage.cock.length; i++) {
-				var c = new Cock();
+			for(let i = 0; i < storage.cock.length; i++) {
+				let c = new Cock();
 				c.FromStorage(storage.cock[i]);
 				this.cock.push(c);
 			}
@@ -252,8 +252,8 @@ export class Body {
 		
 		if(storage.vag) {
 			this.vagina = new Array();
-			for(var i = 0; i < storage.vag.length; i++) {
-				var v = new Vagina();
+			for(let i = 0; i < storage.vag.length; i++) {
+				let v = new Vagina();
 				v.FromStorage(storage.vag[i]);
 				this.vagina.push(v);
 			}
@@ -261,12 +261,12 @@ export class Body {
 		
 		// Restore clitcocks
 		if(storage.cock) {
-			for(var i = 0; i < storage.cock.length; i++) {
-				var a     = storage.cock[i];
-				var ccIdx = parseInt(a.ccIdx);
+			for(let i = 0; i < storage.cock.length; i++) {
+				let a     = storage.cock[i];
+				let ccIdx = parseInt(a.ccIdx);
 				
 				if(ccIdx >= 0 && ccIdx < this.vagina.length) {
-					var v      = this.vagina[ccIdx];
+					let v      = this.vagina[ccIdx];
 					v.clitCock = this.cock[i];
 					this.cock[i].vag = v;
 				}
@@ -277,15 +277,15 @@ export class Body {
 		
 		if(storage.breasts) {
 			this.breasts = new Array();
-			for(var i = 0; i < storage.breasts.length; i++) {
-				var b = new Breasts();
+			for(let i = 0; i < storage.breasts.length; i++) {
+				let b = new Breasts();
 				b.FromStorage(storage.breasts[i]);
 				this.breasts.push(b);
 			}
 		}
 		if(storage.arms) {
 			this.arms = new Limbs();
-			var a = storage.arms;
+			let a = storage.arms;
 			this.arms.race  = (a.race === undefined) ? this.torso.race : RaceDesc.IdToRace[parseInt(a.race)];
 			this.arms.color = (a.col === undefined) ? this.torso.color : parseInt(a.col);
 			this.arms.count = (a.count === undefined) ? 2 : parseInt(a.count);
@@ -293,7 +293,7 @@ export class Body {
 		
 		if(storage.legs) {
 			this.legs = new Limbs();
-			var a = storage.legs;
+			let a = storage.legs;
 			this.legs.race  = (a.race === undefined) ? this.torso.race : RaceDesc.IdToRace[parseInt(a.race)];
 			this.legs.color = (a.col === undefined) ? this.torso.color : parseInt(a.col);
 			this.legs.count = (a.count === undefined) ? 2 : parseInt(a.count);
@@ -301,21 +301,21 @@ export class Body {
 	}
 
 	NumAttributes(race : RaceDesc) {
-		var sum = 0;
+		let sum = 0;
 		sum += this.head.NumAttributes(race);
 		if(this.torso.race == race)             sum++;
 		if(this.arms.race == race)              sum++;
 		if(this.legs.race == race)              sum++;
-		for(var i = 0; i < this.cock.length; i++)
+		for(let i = 0; i < this.cock.length; i++)
 			if(this.cock[i].race == race) sum++;
 		if(this.balls.race == race && this.balls.count.Get() > 0) sum++;
-		for(var i = 0; i < this.backSlots.length; i++)
+		for(let i = 0; i < this.backSlots.length; i++)
 			if(this.backSlots[i].race == race) sum++;
 		return sum;
 	}
 
 	HandleStretchOverTime(hours : number) {
-		for(var i = 0; i < this.vagina.length; i++)
+		for(let i = 0; i < this.vagina.length; i++)
 			this.vagina[i].HandleStretchOverTime(hours);
 		this.ass.HandleStretchOverTime(hours);
 	}
@@ -330,8 +330,8 @@ export class Body {
 		return this.breasts.length;
 	}
 	Gender() {
-		var cocks = this.cock.length;
-		var vags  = this.vagina.length;
+		let cocks = this.cock.length;
+		let vags  = this.vagina.length;
 		
 		if(cocks > 0 && vags == 0)
 			return Gender.male;
@@ -356,9 +356,9 @@ export class Body {
 	}
 
 	SkinDesc(part? : BodyPart) {
-		var ret = "";
+		let ret = "";
 		
-		var col = Color.Desc(this.torso.color);
+		let col = Color.Desc(this.torso.color);
 		if(Math.random() < 0.3 && this.HasSkin()) ret += "bare ";
 		if(Math.random() < 0.3) ret += col + " ";
 		let race = part ? part.race : this.torso.race;
@@ -388,7 +388,7 @@ export class Body {
 
 	// TODO
 	FaceDesc() {
-		var desc = this.head.race.qShort();
+		let desc = this.head.race.qShort();
 		if(this.head.race.isRace(Race.Human)) return "face";
 		else return desc + " face";
 	}
@@ -396,13 +396,13 @@ export class Body {
 		return this.head.race.aqShort() + " face";
 	}
 	EyeDesc() {
-		var eyes = this.head.eyes.race;
+		let eyes = this.head.eyes.race;
 		return eyes.qShort() + " eye";
 	}
 
 	EarDesc(plural? : boolean) {
-		var ret;
-		var ears = this.head.ears.race;
+		let ret;
+		let ears = this.head.ears.race;
 		if(ears.isRace(Race.Reptile)) ret = "pointed, scaled ear";
 		else if(ears.isRace(Race.Elf, Race.Dryad, Race.Demon)) ret = "pointed elfin ear";
 		else if(ears.isRace(Race.Rabbit))  ret = "floppy rabbit ear";
@@ -414,7 +414,7 @@ export class Body {
 	}
 
 	HasFlexibleEars() {
-		var ears = this.head.ears.race;
+		let ears = this.head.ears.race;
 		return ears.isRace(
 			Race.Horse,
 			Race.Feline,
@@ -462,7 +462,7 @@ export class Body {
 	}
 
 	SoftFeet() {
-		var legs = this.legs;
+		let legs = this.legs;
 		if(!legs || legs.count < 2) return false;
 		
 		return !legs.race.isRace(
@@ -475,7 +475,7 @@ export class Body {
 	}
 
 	FeetDesc() {
-		var legs = this.legs;
+		let legs = this.legs;
 		if(!legs || legs.count < 2) {
 			if(legs.race.isRace(Race.Snake))
 				return "tail";
@@ -491,7 +491,7 @@ export class Body {
 		return "feet";
 	}
 	FootDesc() {
-		var legs = this.legs;
+		let legs = this.legs;
 		if(!legs || legs.count < 2) {
 			if(legs.race.isRace(Race.Snake))
 				return "tail";
@@ -508,7 +508,7 @@ export class Body {
 
 	// TODO
 	LegDesc() {
-		var legs = this.legs;
+		let legs = this.legs;
 		if(!legs || legs.count < 2) {
 			if(legs.race.isRace(Race.Snake))
 				return "tail";
@@ -520,7 +520,7 @@ export class Body {
 	}
 	// TODO
 	LegsDesc() {
-		var legs = this.legs;
+		let legs = this.legs;
 		if(!legs || legs.count < 2) {
 			if(legs.race.isRace(Race.Snake))
 				return "tail";
@@ -532,21 +532,21 @@ export class Body {
 	}
 	// TODO
 	ThighDesc() {
-		var legs = this.legs;
+		let legs = this.legs;
 		if(!legs || legs.count < 2) return "body";
 		
 		return "thigh";
 	}
 	// TODO
 	ThighsDesc() {
-		var legs = this.legs;
+		let legs = this.legs;
 		if(!legs || legs.count < 2) return "body";
 		
 		return "thighs";
 	}
 	// TODO
 	KneesDesc(plural? : boolean) {
-		var legs = this.legs;
+		let legs = this.legs;
 		if(!legs) return "body";
 		if(legs.count == 0) {
 			if(legs.race.isRace(Race.Reptile))
@@ -554,7 +554,7 @@ export class Body {
 			return "body";
 		}
 		
-		var adj = "";
+		let adj = "";
 		if(BodyPart.HasScales(legs.race)) adj += "scaled ";
 		else if(BodyPart.HasFur(legs.race)) adj += "furred ";
 		
@@ -562,7 +562,7 @@ export class Body {
 	}
 	// TODO
 	ArmDesc() {
-		var arm = this.arms;
+		let arm = this.arms;
 		if(!arm) return "body";
 		
 		return "arm";
@@ -570,7 +570,7 @@ export class Body {
 
 	// TODO
 	HandDesc() {
-		var arm = this.arms;
+		let arm = this.arms;
 		if(!arm) return "body";
 		
 		if(arm.race.isRace(
@@ -582,7 +582,7 @@ export class Body {
 	}
 	// TODO
 	PalmDesc() {
-		var arm = this.arms;
+		let arm = this.arms;
 		if(!arm) return "body";
 		
 		if(arm.race.isRace(
@@ -600,7 +600,7 @@ export class Body {
 
 	// TODO: Color, variation
 	TongueDesc() {
-		var tongue = this.head.mouth.tongue;
+		let tongue = this.head.mouth.tongue;
 		if(tongue.race.isRace(Race.Cow, Race.Horse)) return "broad tongue";
 		if(tongue.race.isRace(Race.Reptile, Race.Demon)) return "forked tongue";
 		if(tongue.race.isRace(Race.Canine)) return "animalistic tongue";
@@ -612,7 +612,7 @@ export class Body {
 
 	// TODO: Color
 	TongueTipDesc() {
-		var tongue = this.head.mouth.tongue;
+		let tongue = this.head.mouth.tongue;
 		if(tongue.race.isRace(Race.Canine, Race.Cow, Race.Horse)) return "broad tip";
 		if(tongue.race.isRace(Race.Demon, Race.Reptile)) return "forked tip";
 		if(tongue.race.isRace(Race.Feline)) return "barbed tip";
@@ -622,7 +622,7 @@ export class Body {
 	}
 
 	LongTongue() {
-		var tongue = this.head.mouth.tongue;
+		let tongue = this.head.mouth.tongue;
 		if(tongue.race.isRace(
 			Race.Demon,
 			Race.Reptile,
@@ -638,9 +638,9 @@ export class Body {
 
 	// TODO
 	HipsDesc(plural? : boolean) {
-		var size = this.HipSize();
+		let size = this.HipSize();
 		
-		var adjs = [];
+		let adjs = [];
 		if(size < HipSize.Thin) {
 			adjs.push("bony");
 			adjs.push("thin");
@@ -677,25 +677,25 @@ export class Body {
 			if(this.femininity.Get() > 0)
 				adjs.push("broodmother");
 		}
-		var adj = Math.random() < 0.5 ? (_.sample(adjs) + " ") : "";
+		let adj = Math.random() < 0.5 ? (_.sample(adjs) + " ") : "";
 		
 		return adj + (plural ? "hips" : "hip");
 	}
 
 	StomachDesc(bellysize : number) {
-		var nouns = [];
+		let nouns = [];
 		
 		nouns.push("belly");
 		nouns.push("stomach");
 		nouns.push("tummy");
 		if(this.muscleTone.Get() > 0.5)
 			nouns.push("abs");
-		var noun = _.sample(nouns);
+		let noun = _.sample(nouns);
 		
 		// Belly size
-		var adjs = [];
+		let adjs = [];
 		if(this.entity) {
-			var size = this.entity.PregHandler().BellySize();
+			let size = this.entity.PregHandler().BellySize();
 			
 			if(size < 0.2) {
 				adjs.push("flat");
@@ -742,7 +742,7 @@ export class Body {
 				adjs.push("almost immobilizing");
 			}
 			
-			var adj = _.sample(adjs) + " ";
+			let adj = _.sample(adjs) + " ";
 			if(size < 0.2) {
 				if(Math.random() < 0.2) noun = adj + noun;
 			}

@@ -87,7 +87,7 @@ export class Fera extends Entity {
 	}
 	
 	ToStorage() {
-		var storage : any = {
+		let storage : any = {
 			avirgin : this.Butt().virgin ? 1 : 0,
 			virgin  : this.FirstVag().virgin ? 1 : 0
 		};
@@ -127,11 +127,11 @@ FeraScenes.Interact = function() {
 		return;
 	}
 	
-	var cat = new RaceScore();
+	let cat = new RaceScore();
 	cat.score[Race.Feline] = 1;
-	var catScore = cat.Compare(new RaceScore(player.body));
+	let catScore = cat.Compare(new RaceScore(player.body));
 	
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		sirmiss    : player.body.Gender() == Gender.male ? "sir" : "miss"
 	};
@@ -169,7 +169,7 @@ FeraScenes.Interact = function() {
 	}
 	Text.Flush();
 	//[Nexelle] [Fera] [Mother] [Shop] [City] [Touch] [Assistance] [Back]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Nexelle",
 		func : function() {
 			// Set timer
@@ -183,7 +183,7 @@ FeraScenes.Interact = function() {
 			Text.Flush();
 					
 			//[Encourage][Scold][Ignore]
-			var options = new Array();
+			let options = new Array();
 			options.push({ nameStr : "Encourage",
 				func : function() {
 					Text.Add("You pat Fera on the head and tell her she does a good job and just needs to be more careful. Her face lights up in response to your praise.", parse);
@@ -240,7 +240,7 @@ FeraScenes.Interact = function() {
 				Text.Flush();
 				
 				//[Hold her] [Apologize] [Scoff] [Ignore]
-				var options = new Array();
+				let options = new Array();
 				options.push({ nameStr : "Hold her",
 					func : function() {
 						Text.Add("You put an arm around Fera and stroke her head with your other hand. She winces slightly as you brush against a bruise on her scalp, but seems to relax as you pat her hair, soothing the pain. Her sobbing stops after a while and she looks up at you. <i>“Thank you... I'm so sorry about this. I just get so lonely...”</i>", parse);
@@ -294,7 +294,7 @@ FeraScenes.Interact = function() {
 			Text.Flush();
 			
 			//[Encourage] [Realistic] [Ignore]
-			var options = new Array();
+			let options = new Array();
 			options.push({ nameStr : "Encourage",
 				func : function() {
 					Text.Add("You smile and tell her that she could be that good if she works at it really hard. <i>“Really? You really think so, [playername]?”</i> She smiles and seems very happy that you believe in her.", parse);
@@ -334,7 +334,7 @@ FeraScenes.Interact = function() {
 			Text.Flush();
 			
 			//[Agree] [Disagree] [Ignore]
-			var options = new Array();
+			let options = new Array();
 			options.push({ nameStr : "Agree",
 				func : function() {
 					Text.Add("You tell the cute catgirl that you agree with her that morphs should be treated better. <i>“I'm so glad you agree, [playername],”</i> she says with a smile.", parse);
@@ -388,14 +388,14 @@ FeraScenes.TouchPrompt = function() {
 	let player = GAME().player;
 	let fera = GAME().fera;
 
-	var parse : any = {
+	let parse : any = {
 		against        : (player.FirstBreastRow().size.Get() > 3) ? "between" : "against"
 	};
 	parse = player.ParserTags(parse);
 	parse = fera.ParserTags(parse, "f");
 	
 	//[Cuddle][Fondle]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Cuddle",
 		func : function() {
 			Text.Clear();
@@ -428,7 +428,7 @@ FeraScenes.TouchPrompt = function() {
 			if(fera.relation.Get() >= 8) {
 				Text.Add("Taking Fera's hand, you lead her behind a large rack of clothes and have her turn around. Pulling down her dress, you pop out her [fbreasts]. You cup one of her mounds in each hand and proceed to massage them from behind. Fera purrs and moans as you squeeze her breasts. Shifting your [hand]s up a bit, you rub her [fnips] with your fingers.", parse);
 				Text.NL();
-				var noble = false;
+				let noble = false;
 				if(Math.random() < 0.25 && (WorldTime().hour >= 13 && WorldTime().hour < 17)) {
 					noble = true;
 					Text.Add("A young noblewoman walks around the rack you are hiding behind and sees what you two are doing. She gasps quietly and quickly walks back the way she came. Before she gets very far, however, you hear her footsteps stop, and spot her head barely poking around the corner. Clearly, she wants to watch the rest and you have no intention of disappointing her.", parse);
@@ -481,12 +481,12 @@ FeraScenes.SexPrompt = function() {
 	let player = GAME().player;
 	let fera = GAME().fera;
 
-	var cocksInVag = player.CocksThatFit(fera.FirstVag());
-	var cocksInAss = player.CocksThatFit(fera.Butt());
+	let cocksInVag = player.CocksThatFit(fera.FirstVag());
+	let cocksInAss = player.CocksThatFit(fera.Butt());
 	
-	var p1Cock = player.BiggestCock(cocksInVag);
+	let p1Cock = player.BiggestCock(cocksInVag);
 	
-	var parse : any = {
+	let parse : any = {
 		playername     : player.name,
 		cockDesc2      : function() { return player.AllCocks()[1].Short(); }
 	};
@@ -501,10 +501,10 @@ FeraScenes.SexPrompt = function() {
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
 	
-	var breasts = player.FirstBreastRow().size.Get() > 3;
+	let breasts = player.FirstBreastRow().size.Get() > 3;
 	parse["ballsD"] = player.HasBalls() ? function() { return Text.Parse(" and [balls]", parse); } : "";
 	
-	var armor = "";
+	let armor = "";
 	if(player.Armor() || !player.LowerArmor()) armor += "[armor]";
 	if(player.Armor() && player.LowerArmor()) armor += " and ";
 	if(player.LowerArmor()) armor += "[botarmor]";
@@ -530,7 +530,7 @@ FeraScenes.SexPrompt = function() {
 	Text.Flush();
 	
 	//[Try on][Give oral][Get oral][Titfuck][Sex][Standing][Behind][Anal][Sitting]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Try on",
 		func : function() {
 			p1Cock = player.BiggestCock();
@@ -706,7 +706,7 @@ FeraScenes.SexPrompt = function() {
 						Text.NL();
 					}
 					
-					var scenes = new EncounterTable();
+					let scenes = new EncounterTable();
 					scenes.AddEnc(function() {
 						Text.Add("Realizing she's been neglecting your other parts, she takes your [balls] into her hand and begins to massage them firmly. She continues to lovingly suck your [cock], using her tongue to stimulate the [cockTip]. Squeezing your balls tightly, Fera makes you shudder from the combined stimulation.", parse);
 						Text.NL();

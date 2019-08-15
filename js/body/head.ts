@@ -28,7 +28,7 @@ export class Head extends BodyPart {
 	}
 
 	ToStorage() {
-		var storage : any = {
+		let storage : any = {
 			race : this.race.id.toFixed(),
 			col  : this.color.toFixed()
 		};
@@ -48,7 +48,7 @@ export class Head extends BodyPart {
 		};
 		if(this.appendages.length > 0) {
 			storage.app = new Array();
-			for(var i = 0; i < this.appendages.length; i++) {
+			for(let i = 0; i < this.appendages.length; i++) {
 				storage.app.push(this.appendages[i].ToStorage());
 			}
 		}
@@ -82,8 +82,8 @@ export class Head extends BodyPart {
 		
 		if(storage.app) {
 			this.appendages = new Array();
-			for(var i = 0; i < storage.app.length; i++) {
-				var newApp = new Appendage();
+			for(let i = 0; i < storage.app.length; i++) {
+				let newApp = new Appendage();
 				newApp.FromStorage(storage.app[i]);
 				this.appendages.push(newApp);
 			}
@@ -98,12 +98,12 @@ export class Head extends BodyPart {
 	}
 
 	NumAttributes(race : RaceDesc) {
-		var sum = 0;
+		let sum = 0;
 		if(this.race == race)              sum++;
 		if(this.mouth.tongue.race == race) sum++;
 		if(this.eyes.race == race)         sum++;
 		if(this.ears.race == race)         sum++;
-		for(var i = 0; i < this.appendages.length; i++)
+		for(let i = 0; i < this.appendages.length; i++)
 			if(this.appendages[i].race == race) sum++;
 		return sum;
 	}

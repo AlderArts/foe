@@ -18,7 +18,7 @@ RunAb.enabledCondition = function(encounter, caster) {
 	return encounter.canRun;
 }
 RunAb.CastInternal = function(encounter, caster) {
-	var parse : any = {
+	let parse : any = {
 		Name : caster.NameDesc(),
 		y : caster.plural() ? "y" : "ies",
 		was : caster.plural() ? "were" : "was"
@@ -29,8 +29,8 @@ RunAb.CastInternal = function(encounter, caster) {
 	Text.Flush();
 	if(encounter.canRun) {
 		// TODO: random chance on success (more complex)
-		var runlevel = encounter.RunLevel();
-		var goal = caster.level / (caster.level + runlevel);
+		let runlevel = encounter.RunLevel();
+		let goal = caster.level / (caster.level + runlevel);
 		if(caster.HasPerk(Perks.Fleetfoot)) goal *= 1.5;
 		
 		if((Math.random() < goal) || GetDEBUG()) {

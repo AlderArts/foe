@@ -23,7 +23,7 @@ export class Appendage extends BodyPart {
 	}
 
 	ToStorage() {
-		var storage = {
+		let storage = {
 			race  : this.race.id.toFixed(),
 			col   : this.color.toFixed(),
 			type  : this.type.toFixed(),
@@ -41,7 +41,7 @@ export class Appendage extends BodyPart {
 	}
 	
 	Short() {
-		var noun;
+		let noun;
 		if(this.count > 1) {
 			if     (this.type == AppendageType.horn) {
 				if(this.race.isRace(Race.Deer))
@@ -78,8 +78,8 @@ export class Appendage extends BodyPart {
 	}
 	
 	Long() {
-		var count = Text.Quantify(this.count);
-		var desc = this.race.qShort();
+		let count = Text.Quantify(this.count);
+		let desc = this.race.qShort();
 		if     (this.type == AppendageType.horn) {
 			switch(this.race.id) {
 				case Race.Deer.id: return count + " of antlers";

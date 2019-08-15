@@ -66,7 +66,7 @@ export class IntroDemon extends BossEntity {
 		
 		this.turnCounter++;
 		
-		var enemies = encounter.GetLiveEnemyArray();
+		let enemies = encounter.GetLiveEnemyArray();
 
 		// Kill off an imp now and then (cannot end the fight)
 		if(this.turnCounter % 6 == 0 && enemies.length > 2) {
@@ -74,11 +74,11 @@ export class IntroDemon extends BossEntity {
 			enemies[enemies.length - 1].curHp = 0;
 		}
 		else {
-			var r = Rand(7);
+			let r = Rand(7);
 			if(r == 0) { // Boost imp
 				Text.Add("As you fight, the demon has been idly scratching the ground, forming an intricate design with its clawed finger. With a menacing grin, the demon flicks his finger in the direction of one of the imps. The tiny creature screams as a surge of magic energy originating from the mark hits it. A strange light enters his eyes, it seems he has powered up. In more ways than one, you realize, as you notice his swelling member, growing to an obscene size for his body.");
 				// Pick a random imp
-				var t = enemies[Rand(enemies.length - 1) + 1];
+				let t = enemies[Rand(enemies.length - 1) + 1];
 				t.maxHp.bonus = 20;
 				t.maxSp.bonus = 20;
 				t.strength.bonus = 4;
@@ -94,10 +94,10 @@ export class IntroDemon extends BossEntity {
 			}
 			else if(r == 2 && encounter.enemy.members.length < 4) { // Summon imp (if less than four imps)
 				Text.Add("<b>...I GROW BORED,</b> the demon snaps his fingers and another imp materializes in a puff of smoke, running up to join the others.");
-				var newImp = new Imp();
+				let newImp = new Imp();
 				encounter.enemy.AddMember(newImp);
 				
-				var ent : any = {
+				let ent : any = {
 					entity     : newImp,
 					isEnemy    : true,
 					initiative : 0,

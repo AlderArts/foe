@@ -37,7 +37,7 @@ TerryScenes.JeanneTFCost = function() {
 TerryScenes.Appearance = function() {
 	let terry = GAME().terry;
 
-	var parse : any = {
+	let parse : any = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		HeShe   : terry.HeShe(),
 		heshe   : terry.heshe(),
@@ -161,9 +161,9 @@ TerryScenes.Appearance = function() {
 	Text.NL();
 	Text.Add("Your gaze sweeps down Terry’s form, toward [hisher] waist. ", parse);
 	// Pregnancy
-	var womb = terry.PregHandler().Womb();
-	var preg = womb && womb.pregnant;
-	var stage = preg ? womb.progress : null;
+	let womb = terry.PregHandler().Womb();
+	let preg = womb && womb.pregnant;
+	let stage = preg ? womb.progress : null;
 	if     (preg && stage > 0.8)
 		Text.Add("Seems like Terry’s pregnancy is in its final stages. The [foxvixen]’s belly is nice and round. When you put your hand on [hisher] belly, you can feel the baby inside kick you. The big belly coupled with the [foxvixen]’s sometimes distant gaze make [himher] look very attractive...", parse);
 	else if(preg && stage > 0.6)
@@ -206,7 +206,7 @@ TerryScenes.Prompt = function() {
 	let party : Party = GAME().party;
 	let player = GAME().player;
 
-	var parse : any = {
+	let parse : any = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		HeShe   : terry.HeShe(),
 		heshe   : terry.heshe(),
@@ -216,10 +216,10 @@ TerryScenes.Prompt = function() {
 		hishers : terry.hishers()
 	};
 	
-	var that = terry;
-	var switchSpot = party.location.switchSpot();
+	let that = terry;
+	let switchSpot = party.location.switchSpot();
 	
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Appearance",
 		func : TerryScenes.Appearance, enabled : true,
 		tooltip : "Take a closer look."
@@ -279,7 +279,7 @@ TerryScenes.Prompt = function() {
 TerryScenes.ExploreGates = function() {
 	let terry = GAME().terry;
 
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	
@@ -315,7 +315,7 @@ TerryScenes.ExploreGates = function() {
 TerryScenes.ExploreResidential = function() {
 	let terry = GAME().terry;
 
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	
@@ -354,7 +354,7 @@ TerryScenes.ExploreMerchants = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse : any = {
+	let parse : any = {
 		weapon : player.WeaponDesc()
 	};
 	
@@ -428,7 +428,7 @@ TerryScenes.ExplorePlaza = function() {
 	let player = GAME().player;
 	let miranda = GAME().miranda;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name
 	};
 	
@@ -476,9 +476,9 @@ TerryScenes.CombatVsMiranda = function() {
     let party : Party = GAME().party;
     let world = WORLD();
 
-	var enemy = new Party();
+	let enemy = new Party();
 	enemy.AddMember(terry);
-	var enc = new Encounter(enemy);
+	let enc = new Encounter(enemy);
 	
 	terry.RestFull();
 	terry.turnCounter = 0;
@@ -487,7 +487,7 @@ TerryScenes.CombatVsMiranda = function() {
 	enc.canRun = false;
 	
 	enc.onLoss = function() {
-		var parse : any = {
+		let parse : any = {
 			
 		};
 		
@@ -506,7 +506,7 @@ TerryScenes.CombatVsMiranda = function() {
 		party.RestFull();
 		
 		// Move Terry
-		var scenes = new EncounterTable();
+		let scenes = new EncounterTable();
 		scenes.AddEnc(function() {
 			terry.hidingSpot = world.loc.Rigard.Gate;
 		}, 1.0, function() { return terry.hidingSpot != world.loc.Rigard.Gate; });
@@ -525,7 +525,7 @@ TerryScenes.CombatVsMiranda = function() {
 		Gui.NextPrompt();
 	}
 	enc.onRun = function() {
-		var parse : any = {
+		let parse : any = {
 			
 		};
 		terry.sbombs--;
@@ -541,7 +541,7 @@ TerryScenes.CombatVsMiranda = function() {
 		TimeStep({minute: 30});
 		
 		// Move Terry
-		var scenes = new EncounterTable();
+		let scenes = new EncounterTable();
 		scenes.AddEnc(function() {
 			terry.hidingSpot = world.loc.Rigard.Gate;
 		}, 1.0, function() { return terry.hidingSpot != world.loc.Rigard.Gate; });
@@ -577,7 +577,7 @@ TerryScenes.CaughtTheThief = function() {
     let rigard = GAME().rigard;
     let world = WORLD();
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		masterMistress : player.mfTrue("master", "mistress")
 	};
@@ -587,7 +587,7 @@ TerryScenes.CaughtTheThief = function() {
 	
 	terry.flags["PrefGender"] = Gender.male;
 	
-	var dom = player.SubDom() - miranda.SubDom();
+	let dom = player.SubDom() - miranda.SubDom();
 	
 	Text.Clear();
 	Text.Add("As soon as the vixen is down, Miranda strides over to her and roughly pins her down on the floor. <i>“Got you now, thief!”</i>", parse);
@@ -635,7 +635,7 @@ TerryScenes.CaughtTheThief = function() {
 		TimeStep({minute: 30});
 		
 		//[LetHer][StopHer][TakeHim]
-		var options = new Array();
+		let options = new Array();
 		options.push({ nameStr : "Let her",
 			func : function() {
 				Text.Clear();
@@ -818,7 +818,7 @@ TerryScenes.CaughtTheThief = function() {
 				Text.Flush();
 				
 				//[Comfort][Leave]
-				var options = new Array();
+				let options = new Array();
 				options.push({ nameStr : "Comfort",
 					func : function() {
 						Text.Clear();
@@ -908,7 +908,7 @@ TerryScenes.Release = function() {
 	let party : Party = GAME().party;
     let world = WORLD();
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		masterMistress : player.mfTrue("master", "mistress"),
 		armorTopDesc : function() { return player.ArmorDesc(); }
@@ -1049,7 +1049,7 @@ TerryScenes.Release = function() {
 		party.SwitchIn(terry);
 		
 		if(party.InParty(miranda)) {
-			var dom = player.SubDom() - miranda.SubDom();
+			let dom = player.SubDom() - miranda.SubDom();
 			
 			Text.NL();
 			Text.Add("Terry looks a bit nervous as you set out, constantly looking around as if he was being watched. His fears turn out to be justified, as Miranda steps out from a side street, a wide grin on her face.", parse);
@@ -1073,7 +1073,7 @@ TerryScenes.Release = function() {
 			Text.Flush();
 			
 			//[Let her][Nope]
-			var options = new Array();
+			let options = new Array();
 			options.push({ nameStr : "Let her",
 				func : function() {
 					Text.Clear();
@@ -1129,7 +1129,7 @@ TerryScenes.Release = function() {
 TerryScenes.TalkPrompt = function() {
 	let terry = GAME().terry;
 
-	var parse : any = {
+	let parse : any = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		HeShe   : terry.HeShe(),
 		heshe   : terry.heshe(),
@@ -1139,7 +1139,7 @@ TerryScenes.TalkPrompt = function() {
 		hishers : terry.hishers()
 	};
 
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Feelings",
 		func : TerryScenes.TalkFeelings, enabled : true,
 		tooltip : Text.Parse("Ask your pet [foxvixen] how [heshe]’s doing.", parse)
@@ -1165,7 +1165,7 @@ TerryScenes.TalkFeelings = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse : any = {
+	let parse : any = {
 		playername: player.name,
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		breasts : function() { return terry.FirstBreastRow().Short(); },
@@ -1193,7 +1193,7 @@ TerryScenes.TalkFeelings = function() {
 			}
 			Text.Flush();
 			
-			var options = new Array();
+			let options = new Array();
 			options.push({ nameStr : "Yes",
 				func : function() {
 					Text.Clear();
@@ -1241,7 +1241,7 @@ TerryScenes.TalkFeelings = function() {
 			Text.Add("Looks like your pet is opening up to you more, if [heshe]’s willing to admit to wanting you. Maybe you should help [himher] get some release...", parse);
 			Text.Flush();
 			
-			var options = new Array();
+			let options = new Array();
 			options.push({ nameStr : "Yes",
 				func : function() {
 					Text.Clear();
@@ -1298,9 +1298,9 @@ TerryScenes.TalkPronoun = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse : any = {
+	let parse : any = {
 		breasts : function() {
-			var desc = terry.FirstBreastRow().Desc();
+			let desc = terry.FirstBreastRow().Desc();
 			return desc.cup + "s";
 		},
 		foxvixen : terry.mfPronoun("fox", "vixen"),
@@ -1382,7 +1382,7 @@ TerryScenes.TalkPast = function(force : boolean) {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse : any = {
+	let parse : any = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		mastermistress : player.mfTrue("master", "mistress"),
 		playername : player.name
@@ -1390,12 +1390,12 @@ TerryScenes.TalkPast = function(force : boolean) {
 	
 	parse = terry.ParserPronouns(parse);
 	
-	var max = terry.flags["maxPast"];
-	var cur = terry.flags["rotPast"];
+	let max = terry.flags["maxPast"];
+	let cur = terry.flags["rotPast"];
 	
-	var scenes = [];
+	let scenes = [];
 	
-	var BlockScene = function() {
+	let BlockScene = function() {
 		Text.Add("The [foxvixen] looks like [heshe]’s contemplating what to tell you. Finally, [heshe] says:", parse);
 		Text.NL();
 		Text.Add("<i>“...Listen, I don’t really feel comfortable talking about more just yet. I… well, can we do this later?”</i> [heshe] asks.", parse);
@@ -1690,7 +1690,7 @@ TerryScenes.TalkPast = function(force : boolean) {
 			Text.Flush();
 			
 			//[HearAgain][Nevermind]
-			var options = new Array();
+			let options = new Array();
 			options.push({ nameStr : "Hear again",
 				func : function() {
 					Text.Clear();
@@ -1719,7 +1719,7 @@ TerryScenes.TalkPast = function(force : boolean) {
 	}
 	
 	// Play scene
-	var block = scenes[cur]();
+	let block = scenes[cur]();
 	
 	if(!block) {
 		terry.flags["rotPast"] = cur + 1;
@@ -1734,7 +1734,7 @@ TerryScenes.TalkCompliment = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse : any = {
+	let parse : any = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		HeShe   : terry.HeShe(),
 		heshe   : terry.heshe(),
@@ -1759,7 +1759,7 @@ TerryScenes.TalkCompliment = function() {
 		Text.Flush();
 		
 		//[Yes][No]
-		var options = new Array();
+		let options = new Array();
 		options.push({ nameStr : "Yes",
 			func : function() {
 				Text.Clear();
@@ -1830,7 +1830,7 @@ TerryScenes.SkinshipRummagePack = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse : any = {
+	let parse : any = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		boygirl : terry.mfTrue("boy", "girl"),
 		HeShe   : terry.HeShe(),
@@ -1876,7 +1876,7 @@ TerryScenes.SkinshipPrompt = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse : any = {
+	let parse : any = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		HeShe   : terry.HeShe(),
 		heshe   : terry.heshe(),
@@ -1942,7 +1942,7 @@ TerryScenes.SkinshipPromptChoices = function() {
 	let player = GAME().player;
 	let party : Party = GAME().party;
 
-	var parse : any = {
+	let parse : any = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		breasts : function() { return terry.FirstBreastRow().Short(); },
 		boygirl : terry.mfTrue("boy", "girl"),
@@ -1954,13 +1954,13 @@ TerryScenes.SkinshipPromptChoices = function() {
 	parse = terry.ParserPronouns(parse);
 	
 	//[Hug]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Hug",
 		func : function() {
 			terry.flags["Skin"]++;
 
-			var pbreasts = player.FirstBreastRow().Size() > 2;
-			var tbreasts = terry.FirstBreastRow().Size() > 2;
+			let pbreasts = player.FirstBreastRow().Size() > 2;
+			let tbreasts = terry.FirstBreastRow().Size() > 2;
 			Text.Clear();
 			Text.Add("You close the distance between you and your pet [foxvixen], arms spreading wide before folding around [hisher] shoulders and drawing [himher] into your chest. ", parse);
 			if(pbreasts && tbreasts)
@@ -2135,7 +2135,7 @@ TerryScenes.SkinshipPromptChoices = function() {
 				Text.Add("Terry is looking at you expectantly; what are you going to suggest?", parse);
 				
 				//[Intimacy] [Sex]
-				var options = new Array();
+				let options = new Array();
 				options.push({ nameStr : "Intimacy",
 					func : function() {
 						Text.Clear();
@@ -2174,7 +2174,7 @@ TerryScenes.SkinshipPromptChoices = function() {
 				Text.Add("Looks like <i>somebody</i> really got excited with your little kiss. Perhaps you should offer to ‘help out’, as it were?", parse);
 				
 				//[Yes] [No]
-				var options = new Array();
+				let options = new Array();
 				options.push({ nameStr : "Yes",
 					func : function() {
 						Text.Clear();
@@ -2243,7 +2243,7 @@ TerryScenes.BrushTail = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse : any = {
+	let parse : any = {
 		foxvixen       : terry.mfPronoun("fox", "vixen"),
 		boygirl        : terry.mfPronoun("boy", "girl"),
 		tarmorDesc     : function() { return terry.ArmorDesc(); },
@@ -2281,7 +2281,7 @@ TerryScenes.BrushTail = function() {
 	Text.Add("Now that you have the brush, you make yourself comfortable and tell Terry that [heshe] should bend over your lap so that you can start properly brushing [hisher] tail.", parse);
 	Text.NL();
 	Text.Add("<i>“Alright.”</i> ", parse);
-	var naked = false;
+	let naked = false;
 	if(terry.Slut() >= 60) {
 		Text.Add("Terry begins undressing [himher]self, removing each piece of [hisher] [tarmorDesc].", parse);
 		Text.NL();
@@ -2329,8 +2329,8 @@ TerryScenes.BrushTail = function() {
 	Text.Flush();
 	
 	//[Grope] [Pet] [Nope]
-	var options = new Array();
-	var tooltip = naked ? Text.Parse("[HeShe]’s just asking for it, flaunting that sweet ass without even the slightest stitch for modesty. Go on and give it a big squeeze...", parse) : Text.Parse("Even through [hisher] [tlowerArmor], Terry’s got a sweet ass. Why not cop a feel while you can?", parse);
+	let options = new Array();
+	let tooltip = naked ? Text.Parse("[HeShe]’s just asking for it, flaunting that sweet ass without even the slightest stitch for modesty. Go on and give it a big squeeze...", parse) : Text.Parse("Even through [hisher] [tlowerArmor], Terry’s got a sweet ass. Why not cop a feel while you can?", parse);
 	options.push({ nameStr : "Grope",
 		func : function() {
 			Text.Clear();
@@ -2407,7 +2407,7 @@ TerryScenes.BrushTail = function() {
 				Text.Add("A soft moan escapes the [foxvixen]-morph’s lips. Looking over at [hisher] face, you can see a mixture of pleasure and satisfaction.", parse);
 				Text.NL();
 			}
-			var lubed = false;
+			let lubed = false;
 			if(terry.FirstVag()) {
 				Text.Add("A scent tickles at your nostrils and you sniff, trying to figure out what it is. After a few moments, you recognize it as the distinctive scent of female arousal - and it’s coming from between Terry’s legs, no matter how [heshe] squeezes [hisher] thighs together to try and hide it. With a grin, your hand snakes down, worming its way between the [foxvixen]’s clenched thighs to try and touch the dampness of [hisher] cunt.", parse);
 				Text.NL();
@@ -2444,7 +2444,7 @@ TerryScenes.BrushTail = function() {
 			Text.Flush();
 			
 			//[Sex][No Sex]
-			var options = new Array();
+			let options = new Array();
 			options.push({ nameStr : "Sex",
 				func : function() {
 					Text.Clear();
@@ -2456,7 +2456,7 @@ TerryScenes.BrushTail = function() {
 					Text.Add("With a grin, you extract your finger from Terry’s tailhole, petting [hisher] butt affectionately before giving [himher] a helping hand to push out of your lap and stand up.", parse);
 					Text.NL();
 					
-					var scenes = new EncounterTable();
+					let scenes = new EncounterTable();
 					scenes.AddEnc(function() {
 						parse["fox"] = terry.HorseCock() ? "horse" : "fox";
 						Text.Add("<i>“So what are we doing? I’m already rock-hard. Maybe you’d like to add some [fox]-meat to your diet? Or maybe you just need something to fill you up?”</i> [heshe] suggests with a lusty grin.", parse);
@@ -2627,7 +2627,7 @@ TerryScenes.CheckFluids = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse : any = {
+	let parse : any = {
 		foxvixen       : terry.mfPronoun("fox", "vixen"),
 		boygirl        : terry.mfPronoun("boy", "girl"),
 		armorDesc      : function() { return terry.ArmorDesc(); },
@@ -2757,7 +2757,7 @@ TerryScenes.CheckFluids = function() {
 		parse["petitebulging"] = terry.HorseCock() ? "bulging" : "petite";
 		Text.Add("Your hands continue to stroke and caress the [foxvixen]’s [petitebulging] balls, gently kneading them and rolling them around on your palms as you try to gauge their weight and firmness, and from that the amount of semen stored within.", parse);
 		Text.NL();
-		var cum = terry.Cum();
+		let cum = terry.Cum();
 		if(cum >= TerryFlags.CumLevel.High)
 			Text.Add("It goes without saying that Terry’s balls are full of cum; you can practically see the difference in size even before you touch them. In your hands, the seed-bloated orbs have a substantial amount of weight to them, straining over their liquid contents to the point the tension is palpable with the slightest touch. The [foxvixen] can’t hold back a plaintive moan, a bead of precum visibly welling from [hisher] shaft at the gentle pressure you inflict. You really doubt Terry would object to getting some venting, if you were of a mind.", parse);
 		else if(cum >= TerryFlags.CumLevel.Mid)
@@ -2786,7 +2786,7 @@ TerryScenes.CheckFluids = function() {
 		Text.Add("You make a show of it, but you really are considering the question. [HeShe] <b>is</b> right there, and clearly ready to play... it’d honestly be kind of a shame to waste it... ", parse);
 		Text.Flush();
 		
-		var backFunc = function() {
+		let backFunc = function() {
 			Text.Clear();
 			Text.Add("<i>“Alright then, but maybe later?”</i>", parse);
 			Text.NL();
@@ -2799,7 +2799,7 @@ TerryScenes.CheckFluids = function() {
 		};
 		
 		//[Sex] [No Sex]
-		var options = new Array();
+		let options = new Array();
 		options.push({ nameStr : "Sex",
 			func : function() {
 				Text.Clear();
@@ -2835,7 +2835,7 @@ TerryScenes.RosalinTF = function() {
 	let player = GAME().player;
 	let rosalin = GAME().rosalin;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		rearsDesc  : function() { return rosalin.EarDesc(true); },
 		foxvixen   : terry.mfPronoun("fox", "vixen")
@@ -2867,7 +2867,7 @@ TerryScenes.RosalinTF = function() {
 TerryScenes.JeanneTFFirst = function() {
 	let terry = GAME().terry;
 
-	var parse : any = {
+	let parse : any = {
 		foxvixen : terry.mfPronoun("fox", "vixen")
 	};
 	parse = terry.ParserPronouns(parse);
@@ -2913,19 +2913,19 @@ TerryScenes.JeanneTFPrompt = function() {
 	let player = GAME().player;
 	let party : Party = GAME().party;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name
 	};
 	parse = terry.ParserPronouns(parse);
 	
 	//[name]
-	var options = new Array();
+	let options = new Array();
 	
-	var AddItem = function(item : TFItem, scene : any, name : string, tooltip : string, costmult : number, horseTF? : boolean) {
+	let AddItem = function(item : TFItem, scene : any, name : string, tooltip : string, costmult : number, horseTF? : boolean) {
 		options.push({ nameStr : name || item.name,
 			func : function(obj : any) {
 				parse["item"] = obj.str;
-				var coin = obj.mult * TerryScenes.JeanneTFCost();
+				let coin = obj.mult * TerryScenes.JeanneTFCost();
 				parse["coin"] = Text.NumToText(coin);
 				
 				Text.Clear();
@@ -2941,7 +2941,7 @@ TerryScenes.JeanneTFPrompt = function() {
 				else {
 					Text.Flush();
 					
-					var options = new Array();
+					let options = new Array();
 					options.push({ nameStr : "Craft",
 						func : function() {
 							TimeStep({hour: 1});
@@ -2982,7 +2982,7 @@ TerryScenes.JeanneTFCraft = function(item : TFItem, scene : any, horseTF : boole
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		lowerArmorDesc : function() { return player.LowerArmorDesc(); },
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
@@ -3104,7 +3104,7 @@ TerryScenes.JeanneTFCraft = function(item : TFItem, scene : any, horseTF : boole
 			Text.Add("Seems like you found a weak spot, you think to yourself. ", parse);
 		}
 		else {
-			var scenes = new EncounterTable();
+			let scenes = new EncounterTable();
 			scenes.AddEnc(function() {
 				Text.Add("Unable to resist yourself, you poke [himher] playfully right in the center of the heart-shape, feeling [hisher] buttflesh giving under the pressure of your finger.", parse);
 			}, 1.0, function() { return true; });
@@ -3166,8 +3166,8 @@ TerryScenes.JeanneTFCraft = function(item : TFItem, scene : any, horseTF : boole
 			Text.NL();
 			Text.Add("Sighing, you stop for a moment, considering your options. Finally, an idea pops in your head. This should stretch [himher] nicely. ", parse);
 			
-			var cocksInAss = player.CocksThatFit(terry.Butt());
-			var p1Cock     = player.BiggestCock(cocksInAss);
+			let cocksInAss = player.CocksThatFit(terry.Butt());
+			let p1Cock     = player.BiggestCock(cocksInAss);
 			
 			parse["multiCockDesc"] = function() { return player.MultiCockDesc(); }
 			parse["cockDesc"]      = function() { return p1Cock.Short(); }
@@ -3305,7 +3305,7 @@ TerryScenes.JeanneTFGrowBoobs = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
 		terrycock  : function() { return terry.MultiCockDesc(); }
@@ -3418,7 +3418,7 @@ TerryScenes.JeanneTFShrinkBoobs = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen")
 	};
@@ -3486,7 +3486,7 @@ TerryScenes.JeanneTFStartLactate = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
 		terrybreasts : function() { return terry.FirstBreastRow().Short(); }
@@ -3549,7 +3549,7 @@ TerryScenes.JeanneTFStopLactate = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
 		terrybreasts : function() { return terry.FirstBreastRow().Short(); }
@@ -3585,7 +3585,7 @@ TerryScenes.JeanneTFGrowVag = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
 		tcockDesc  : function() { return terry.MultiCockDesc(); },
@@ -3621,7 +3621,7 @@ TerryScenes.JeanneTFGrowVag = function() {
 	
 	terry.SetPussy();
 	
-	var cum = terry.OrgasmCum();
+	let cum = terry.OrgasmCum();
 	
 	JeanneScenes.InteractPrompt();
 }
@@ -3630,7 +3630,7 @@ TerryScenes.JeanneTFRemVag = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
 		tcockDesc  : function() { return terry.MultiCockDesc(); },
@@ -3680,7 +3680,7 @@ TerryScenes.JeanneTFGrowCockEntrypoint = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen")
 	};
@@ -3695,7 +3695,7 @@ TerryScenes.JeanneTFHorsegasmEntrypoint = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
 		tcockDesc  : function() { return terry.MultiCockDesc(); },
@@ -3720,7 +3720,7 @@ TerryScenes.JeanneTFGrowCock = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
 		tcockDesc  : function() { return terry.MultiCockDesc(); }
@@ -3760,7 +3760,7 @@ TerryScenes.JeanneTFGrowCock = function() {
 	}
 	Text.Flush();
 	
-	var cum = terry.OrgasmCum();
+	let cum = terry.OrgasmCum();
 	
 	JeanneScenes.InteractPrompt();
 }
@@ -3770,7 +3770,7 @@ TerryScenes.JeanneTFRemCock = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen")
 	};
@@ -3817,7 +3817,7 @@ TerryScenes.JeanneTFRemCock = function() {
 			terry.SetPussy();
 		}
 		
-		var cum = terry.OrgasmCum();
+		let cum = terry.OrgasmCum();
 	}
 	else {
 		parse["lust"] = (terry.LustLevel() >= 0.5 || terry.Slut() >= 60) ? " beyond usual" : "";
@@ -3832,7 +3832,7 @@ TerryScenes.JeanneTFGrowHorsecock = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		pheshe     : player.heshe(),
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
@@ -3845,7 +3845,7 @@ TerryScenes.JeanneTFGrowHorsecock = function() {
 		TerryScenes.JeanneTFHorsegasmEntrypoint();
 		
 		Text.Flush();
-		var cum = terry.OrgasmCum();
+		let cum = terry.OrgasmCum();
 		
 		JeanneScenes.InteractPrompt();
 		return;
@@ -3943,7 +3943,7 @@ TerryScenes.JeanneTFGrowHorsecock = function() {
 	terry.SetCock();
 	
 	TimeStep({hour: 1});
-	var cum = terry.OrgasmCum();
+	let cum = terry.OrgasmCum();
 	
 	JeanneScenes.InteractPrompt();
 }
@@ -3970,7 +3970,7 @@ TerryScenes.SexPrompt = function(backPrompt : any) {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse : any = {
+	let parse : any = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		master : player.mfTrue("master", "mistress"),
 		playername : player.name
@@ -3998,7 +3998,7 @@ TerryScenes.SexPrompt = function(backPrompt : any) {
 	}
 	Text.NL();
 	
-	var scenes = new EncounterTable();
+	let scenes = new EncounterTable();
 	scenes.AddEnc(function() {
 		Text.Add("<i>“How’s this?”</i> [heshe] asks, puffing [hisher] chest and proudly displaying [himher]self before you. <i>“Ready for the taking?”</i>", parse);
 	}, 1.0, function() { return true; });
@@ -4031,7 +4031,7 @@ TerryScenes.SexPrompt = function(backPrompt : any) {
 		Text.Flush();
 		
 		//[Tease][Praise]
-		var options = new Array();
+		let options = new Array();
 		options.push({ nameStr : "Tease",
 			func : function() {
 				Text.Clear();
@@ -4075,7 +4075,7 @@ TerryScenes.SexPrompt = function(backPrompt : any) {
 		return;
 	}
 	else {
-		var scenes = new EncounterTable();
+		let scenes = new EncounterTable();
 		
 		scenes.AddEnc(function() {
 			Text.Add("You thrust your tenting bulge against the golden heart, grinding your fabric clad erection against your [foxvixen]’s birthmark and letting [himher] feel your appreciation of it through your [botarmor].", parse);
@@ -4108,18 +4108,18 @@ TerryScenes.SexPromptChoice = function(backPrompt : any, haveadrink : boolean) {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		master : player.mfTrue("master", "mistress")
 	};
 	parse = terry.ParserPronouns(parse);
 	
-	var cocksInAss = player.CocksThatFit(terry.Butt());
+	let cocksInAss = player.CocksThatFit(terry.Butt());
 	
-	var options = new Array();
+	let options = new Array();
 	if(terry.FirstVag()) {
-		var cocksInVag = player.CocksThatFit(terry.FirstVag());
+		let cocksInVag = player.CocksThatFit(terry.FirstVag());
 		options.push({ nameStr : "Pitch vaginal",
 			func : function() {
 				TerryScenes.SexPitchVaginal(cocksInVag);
@@ -4135,7 +4135,7 @@ TerryScenes.SexPromptChoice = function(backPrompt : any, haveadrink : boolean) {
 	});
 	if(terry.FirstCock()) {
 		if(player.FirstVag()) {
-			var tooltip = terry.HorseCock() ? "With that great big monster between [hisher] legs, you just know [heshe] can give you a ride to remember." : "It’s not size that matters, it’s skill. Let’s see just how well your pet [foxvixen] can use that cock of [hishers].";
+			let tooltip = terry.HorseCock() ? "With that great big monster between [hisher] legs, you just know [heshe] can give you a ride to remember." : "It’s not size that matters, it’s skill. Let’s see just how well your pet [foxvixen] can use that cock of [hishers].";
 			options.push({ nameStr : "Catch vaginal",
 				func : function() {
 					TerryScenes.SexCatchVaginal();
@@ -4143,7 +4143,7 @@ TerryScenes.SexPromptChoice = function(backPrompt : any, haveadrink : boolean) {
 				tooltip : Text.Parse(tooltip, parse)
 			});
 		}
-		var tooltip = terry.HorseCock() ? "You went through the trouble of giving Terry that big stallionhood of [hishers] for a reason." : "Why not let the [foxvixen] catch a break and let [himher] do you for a change of pace?";
+		let tooltip = terry.HorseCock() ? "You went through the trouble of giving Terry that big stallionhood of [hishers] for a reason." : "Why not let the [foxvixen] catch a break and let [himher] do you for a change of pace?";
 		options.push({ nameStr : "Catch anal",
 			func : function() {
 				TerryScenes.SexCatchAnal();
@@ -4180,10 +4180,10 @@ TerryScenes.SexPromptChoice = function(backPrompt : any, haveadrink : boolean) {
 				Text.Add("With a mischievous grin, you make a show of contemplating your answer.", parse);
 			}
 			
-			var options = new Array();
+			let options = new Array();
 			if(player.FirstCock()) {
 				parse["cock"] = player.BiggestCock().Short();
-				var tooltip = terry.Relation() < 60 ? "Terry can start by sucking your [cock]." : "Well, how about a fresh serving of warm, gooey cream?";
+				let tooltip = terry.Relation() < 60 ? "Terry can start by sucking your [cock]." : "Well, how about a fresh serving of warm, gooey cream?";
 				options.push({ nameStr : "Cock",
 					func : function() {
 						Text.Clear();
@@ -4194,7 +4194,7 @@ TerryScenes.SexPromptChoice = function(backPrompt : any, haveadrink : boolean) {
 			}
 			if(player.FirstVag()) {
 				parse["vag"] = player.FirstVag().Short();
-				var tooltip = terry.Relation() < 60 ? "Terry can start by licking your [vag]." : "Well, how about a nice dose of honey straight from your own pretty little flower?";
+				let tooltip = terry.Relation() < 60 ? "Terry can start by licking your [vag]." : "Well, how about a nice dose of honey straight from your own pretty little flower?";
 				options.push({ nameStr : "Pussy",
 					func : function() {
 						Text.Clear();
@@ -4243,7 +4243,7 @@ TerryScenes.SexGetOralPussy = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
 		master     : player.mfTrue("master", "mistress")
@@ -4275,7 +4275,7 @@ TerryScenes.SexGetOralPussy = function() {
 		Text.Add("spread your [legs] to give Terry easy access to your [vag].", parse);
 	else
 		Text.Add("adjust your [legs] to ensure Terry can easily access your [vag].", parse);
-	var c = "";
+	let c = "";
 	if(player.FirstCock()) c += ", carefully moving your [cocks]";
 	if(player.FirstCock() && player.HasBalls()) c += " and [balls]";
 	if(player.FirstCock()) c += " out of the way";
@@ -4284,7 +4284,7 @@ TerryScenes.SexGetOralPussy = function() {
 	Text.Add(" You spread your pussy lips with a pair of digits and beckon the [foxvixen] over with a crooked finger[c].", parse);
 	Text.NL();
 	
-	var relslut = terry.Relation() + terry.Slut();
+	let relslut = terry.Relation() + terry.Slut();
 	
 	if(relslut < 45)
 		Text.Add("Terry swallows audibly as [heshe] watches your lewd display, but [heshe] doesn’t shy away. Instead, [heshe] approaches and kneels before you with some reluctance, extending a pair of fingers to gently massage your opened slit.", parse);
@@ -4369,7 +4369,7 @@ TerryScenes.SexGetOralPussy = function() {
 	Text.Add("Shivers race along your spine, your brain clouded by a fog of pleasure. A hot pressure wells within your belly, your body quivering as the sensation grows stronger. You’re close... oh, so close...", parse);
 	Text.NL();
 	
-	var cum = player.OrgasmCum();
+	let cum = player.OrgasmCum();
 	
 	Text.Add("A cry of pleasure rips its way out of your throat as the dam breaks within you. Juices sluice forth and splatter onto Terry’s muzzle, washing over [hisher] tongue in your orgasm.", parse);
 	if(player.FirstCock())
@@ -4419,9 +4419,9 @@ TerryScenes.SexGetOralCock = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var p1cock = player.BiggestCock();
+	let p1cock = player.BiggestCock();
 	
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
 		boygirl    : terry.mfPronoun("boy", "girl"),
@@ -4433,7 +4433,7 @@ TerryScenes.SexGetOralCock = function() {
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
 	
-	var relslut = terry.Relation() + terry.Slut();
+	let relslut = terry.Relation() + terry.Slut();
 	
 	if(relslut < 45) {
 		Text.Add("Terry clicks [hisher] tongue, looking disgusted at what you’ve asked of [himher].", parse);
@@ -4461,9 +4461,9 @@ TerryScenes.SexGetOralCock = function() {
 		Text.Flush();
 		
 		//[name]
-		var options = new Array();
+		let options = new Array();
 		
-		var cockFunc = function(c : Cock, idx : number) {
+		let cockFunc = function(c : Cock, idx : number) {
 			options.push({ nameStr : Text.Ordinal(idx+1, true),
 				func : function() {
 					Text.Clear();
@@ -4492,7 +4492,7 @@ TerryScenes.SexGetOralCockCont = function(parse : any, p1cock : Cock) {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var isLarge = p1cock.Volume() >= 100;
+	let isLarge = p1cock.Volume() >= 100;
 	
 	if(!isLarge) {
 		if(terry.Relation() < 60)
@@ -4603,7 +4603,7 @@ TerryScenes.SexGetOralCockCont = function(parse : any, p1cock : Cock) {
 	Text.Flush();
 	
 	//[Inside Mouth][Paint [HimHer]]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Inside Mouth",
 		func : function() {
 			Text.Clear();
@@ -4613,9 +4613,9 @@ TerryScenes.SexGetOralCockCont = function(parse : any, p1cock : Cock) {
 			Text.Add("Something inside of you breaks, and in a powerful thrust you push your [cock] as far down Terry’s throat as you can reach. Back arched and head flung back, you cry out as you explode inside of Terry’s gullet[c].", parse);
 			Text.NL();
 			
-			var cum = player.OrgasmCum();
+			let cum = player.OrgasmCum();
 			
-			var clean = false;
+			let clean = false;
 			
 			if(cum < 3) {
 				parse["b"] = player.HasBalls() ? Text.Parse("r [balls]", parse) : "";
@@ -4712,7 +4712,7 @@ TerryScenes.SexGetOralCockCont = function(parse : any, p1cock : Cock) {
 			
 			terry.AddLustFraction(0.3);
 			
-			var relslut = terry.Relation() + terry.Slut();
+			let relslut = terry.Relation() + terry.Slut();
 			if(relslut < 45)
 				terry.relation.DecreaseStat(0, 1);
 			else if(terry.Relation() >= 30)
@@ -4773,7 +4773,7 @@ TerryScenes.SexGetOralCockCont = function(parse : any, p1cock : Cock) {
 			Text.Add("At that, you make your move. As Terry glides back along your [cock], you grab [hisher] shoulders and push [himher] off your throbbing cock. The cold air on your hot, wet flesh is the last straw, and a shudder wracks your body as you climax. Your [cock] launches its hot, steaming load squarely at the [foxvixen]’s face[c].", parse);
 			Text.NL();
 			
-			var cum = player.OrgasmCum();
+			let cum = player.OrgasmCum();
 			
 			if(cum < 3) {
 				if(player.NumCocks() > 1)
@@ -4899,9 +4899,9 @@ TerryScenes.SexPitchAnal = function(cocksInAss : Cock[]) {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var p1Cock = player.BiggestCock(cocksInAss);
+	let p1Cock = player.BiggestCock(cocksInAss);
 	
-	var parse : any = {
+	let parse : any = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		boygirl : terry.mfPronoun("boy", "girl"),
 		master  : player.mfTrue("master", "mistress"),		
@@ -4911,8 +4911,8 @@ TerryScenes.SexPitchAnal = function(cocksInAss : Cock[]) {
 	parse = terry.ParserPronouns(parse);
 	parse = terry.ParserTags(parse, "t");
 	
-	var virgin = terry.Butt().virgin;
-	var promise : boolean;
+	let virgin = terry.Butt().virgin;
+	let promise : boolean;
 	
 	Gui.Callstack.push(function() {
 		
@@ -5023,11 +5023,11 @@ TerryScenes.SexPitchAnal = function(cocksInAss : Cock[]) {
 					}
 					Text.NL();
 					
-					var knotted = p1Cock.knot != 0;
+					let knotted = p1Cock.knot != 0;
 					
-					var fTooltip;
-					var kTooltip;
-					var pTooltip;
+					let fTooltip;
+					let kTooltip;
+					let pTooltip;
 					
 					if(terry.Relation() < 30) {
 						Text.Add("<i>“Thanks a lot for the the great sex, but I think I’ll need a rest now...”</i>", parse);
@@ -5054,7 +5054,7 @@ TerryScenes.SexPitchAnal = function(cocksInAss : Cock[]) {
 					Text.Flush();
 					
 					//[Finish][Knot][PullOut] 
-					var options = new Array();
+					let options = new Array();
 					if(!p1Cock.isStrapon) {
 						options.push({ nameStr : "Finish",
 							func : function() {
@@ -5062,7 +5062,7 @@ TerryScenes.SexPitchAnal = function(cocksInAss : Cock[]) {
 								Text.Add("You wrap your arms tightly around Terry’s chest, as much for support as ensuring [heshe] can’t hope to wriggle free of your embrace, and resume thrusting, faster and rougher than before. [HeShe] grunts and moans softly as you fuck the [foxvixen]’s ass harder, the orgasm-softened flesh doing its best to clench down around your intruding girth. Moments later, you cry out in pleasure as your own climax washes through you, erupting inside Terry’s tailhole.", parse);
 								Text.NL();
 								
-								var cum = player.OrgasmCum();
+								let cum = player.OrgasmCum();
 								
 								if(cum > 6) {
 									Text.Add("Terry cries out as your tremendous load erupts inside of [himher], pressurized jets of spunk erupting backwards and washing over your [legs], matting them both in fluid. Still, even with the compression forcing so much of it out, more still finds its way into the [foxvixen]’s stomach which bloats into a massive swell. Finally, your climax finishes and you go soft, panting for breath. Terry shifts restlessly, trying to get more comfortable with [hisher] newly enhanced girth, wetly belching as the semen audibly sloshes around inside [hisher] gut.", parse);
@@ -5120,7 +5120,7 @@ TerryScenes.SexPitchAnal = function(cocksInAss : Cock[]) {
 									Text.Add("You wrap your arms tightly around Terry’s chest, ensuring you are well supported - and that the [foxvixen] can’t get away - before you draw your hips back and then give them a firm thrust forward. Your knot isn’t fully inflated yet, but it already markedly increases your girth, meaning you have to push with strong, insistent strokes to try and squeeze inside of Terry’s tailhole. Terry gasps and wriggles, scratching at the ground as [heshe] tries to loosen up enough to let your bulging dick-root inside. Finally, amazingly, you manage to force your way in, the texture, the heat and the feeling of Terry’s asshole crushing your knot with its vice-like grip driving you over the edge; you throw back your head and cry out as you climax in turn.", parse);
 									Text.NL();
 									
-									var cum = player.OrgasmCum();
+									let cum = player.OrgasmCum();
 									
 									if(cum > 6) {
 										Text.Add("Terry whimpers and mewls as gush after inhuman gush of seed floods inside of [himher], belly veritably exploding outwards under the titanic influx of semen. Though some thin spurts spray out around the rim of your knot, the seal is tight enough that the vast majority goes directly to Terry’s stomach. By the time you finish, Terry is wallowing atop a tummy like a beachball full of water, moaning softly. [HeShe] lets out a gurgled belch, expelling a mouthful of cum down [hisher] front.", parse);
@@ -5266,7 +5266,7 @@ TerryScenes.SexPitchAnal = function(cocksInAss : Cock[]) {
 		Text.Flush();
 		
 		//[Finger][Lick]
-		var options = new Array();
+		let options = new Array();
 		options.push({ nameStr : "Finger",
 			func : function() {
 				Text.Clear();
@@ -5414,7 +5414,7 @@ TerryScenes.SexPitchAnal = function(cocksInAss : Cock[]) {
 			Text.Flush();
 			
 			//[Promise][Can’t]
-			var options = new Array();
+			let options = new Array();
 			options.push({ nameStr : "Promise",
 				func : function() {
 					Text.Clear();
@@ -5487,10 +5487,10 @@ TerryScenes.SexFuckButtEntrypoint = function(p1Cock : Cock, promise : boolean, r
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var virgin = terry.Butt().virgin;
-	var knotted = p1Cock.knot != 0;
+	let virgin = terry.Butt().virgin;
+	let knotted = p1Cock.knot != 0;
 
-	var parse : any = {
+	let parse : any = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		boygirl  : terry.mfPronoun("boy", "girl"),
 		master  : player.mfTrue("master", "mistress"),
@@ -5509,7 +5509,7 @@ TerryScenes.SexFuckButtEntrypoint = function(p1Cock : Cock, promise : boolean, r
 	Text.Flush();
 	
 	//[Gentle] [Rough]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Gentle",
 		func : function() {
 			Text.Clear();
@@ -5601,7 +5601,7 @@ TerryScenes.SexFuckButtEntrypoint = function(p1Cock : Cock, promise : boolean, r
 				Text.Add(" Terry’s cock throbs in your grasp. You can feel [hisher] knot inflating as [heshe] spews jet after jet of fox-seed below, emptying [hisher] balls of their liquid load.", parse);
 			Text.NL();
 			
-			var cum = terry.OrgasmCum();
+			let cum = terry.OrgasmCum();
 			
 			Text.Add("You stop for a moment to admire the shuddering [foxvixen] below you, barely managing to remain on all fours as [hisher] trembling arms and knees threaten to give at any moment. You hug [himher] from behind, supporting [himher] as you turn to give [hisher] cheek a kiss.", parse);
 			Text.NL();
@@ -5663,7 +5663,7 @@ TerryScenes.SexFuckButtEntrypoint = function(p1Cock : Cock, promise : boolean, r
 			Text.Add("You decide to silence [himher] by going at it even harder than before, violently bouncing Terry up and down in your lap to give [himher] the hardest fucking you can possibly manage. Obscene noises echo around you, a perverse chorus of fleshy slapping, squelching as your cock slurps through Terry’s pre-filled anus, and the whimpers, mewls and salacious moans of your pleasure delirious fucktoy.", parse);
 			Text.NL();
 			
-			var cum = terry.OrgasmCum();
+			let cum = terry.OrgasmCum();
 			
 			Text.Add("There is no warning when the [foxvixen]’s butt suddenly clenches, grasping your [cock] mid-thrust. ", parse);
 			if(terry.FirstVag()) {
@@ -5694,7 +5694,7 @@ TerryScenes.SexFuckButtEntrypoint = function(p1Cock : Cock, promise : boolean, r
 					Text.Add("You put the used toy aside, working to better adjust the pleasure-addled pet in your lap for greater comfort.", parse);
 				}
 				else {
-					var cum = player.OrgasmCum();
+					let cum = player.OrgasmCum();
 					
 					Text.Add("The sensation as [hisher] ass sucks your bulb down is the final straw; you arch your back and cry out in your pleasure as your orgasm washes through you, erupting into Terry’s [tanus]. ", parse);
 					if(cum > 6) {
@@ -5724,13 +5724,13 @@ TerryScenes.SexFuckButtEntrypoint = function(p1Cock : Cock, promise : boolean, r
 					parse["v"] = player.FirstVag() ? " The sudden shudders that ripple through you as your own orgasm hits don’t help." : "";
 					Text.Add("The impact nearly knocks you over, and does make you drop the toy you were so busily plumbing [hisher] ass with before.[v] The two of you lie there for the moment, panting for breath, even as you mindlessly adjust Terry in your lap to be a little more comfortable.", parse);
 					
-					var cum = player.OrgasmCum();
+					let cum = player.OrgasmCum();
 				}
 				else {
 					Text.Add("You cry out in pleasure as your resistance breaks and orgasm washes through you, fountaining your sperm into Terry’s waiting ass.", parse);
 					Text.NL();
 					
-					var cum = player.OrgasmCum();
+					let cum = player.OrgasmCum();
 					
 					if(cum > 6) {
 						Text.Add("Seed pours back out over your lap as Terry’s body tries to reject the inhuman flood you are filling [himher] with, but so great is your geyser of semen that [hisher] stomach still bloats like a filled condom, swelling into a huge pregnant-looking swell. Even when you are finished, excess spunk seeping out and smearing your legs, Terry remains bloated like a mother about to give birth.", parse);
@@ -5756,7 +5756,7 @@ TerryScenes.SexWorship = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
 		boygirl    : terry.mfPronoun("boy", "girl"),
@@ -5892,7 +5892,7 @@ TerryScenes.SexWorship = function() {
 	TimeStep({hour: 1});
 	
 	//[HoseTerry] [Bukkake] [AnalCatch]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Hose Terry",
 		func : function() {
 			Text.Clear();
@@ -5963,7 +5963,7 @@ TerryScenes.SexWorship = function() {
 			Text.Add("Overwhelmed by pleasure, Terry involuntarily thrusts into your mouth. [HisHer] fingers and toes dig into the ground. Seems like [heshe]’s gonna blow anytime now... ", parse);
 			Text.NL();
 			
-			var cum = terry.OrgasmCum();
+			let cum = terry.OrgasmCum();
 			
 			Text.Add("Deeming the [foxvixen] finally stimulated to your liking, you close your eyes and wetly pop your mouth free. A trail of saliva links your gaping lips to [hisher] flaring glans for a moment before [heshe] howls in pleasure and veritably explodes in orgasm.", parse);
 			Text.NL();
@@ -6065,7 +6065,7 @@ TerryScenes.SexWorship = function() {
 			Text.Add("Terry cries out as [heshe] throbs inside you, [hisher] knot growing as big as it can. You feel [hisher] balls churn, almost vibrating with the effort of pumping all of [hisher] load up [hisher] footlong mast. The last signal you get is [hisher] tip flaring out as a veritable eruption of fox-seed heralds Terry’s climax.", parse);
 			Text.NL();
 			
-			var cum = terry.OrgasmCum();
+			let cum = terry.OrgasmCum();
 			
 			TerryScenes.Impregnate(player, terry, cum, PregnancyHandler.Slot.Butt);
 			
@@ -6096,7 +6096,7 @@ TerryScenes.SexWorship = function() {
 			}
 			Text.NL();
 			
-			var cock = player.BiggestCock();
+			let cock = player.BiggestCock();
 			
 			if(cock && (cock.length.Get() > 30) && (terry.Slut() + terry.Relation() >= 90)) { //30cm ~ 1 foot
 				Text.Add("The two of you sit in silence for a while, but eventually the [foxvixen] eyes settles on[oneof] your [cocks].", parse);
@@ -6155,14 +6155,14 @@ TerryScenes.SexWorship = function() {
 				Text.Add("You were on thin ice already, but this final perverse trick of Terry’s is all you can take. Arching your back, anus squeezing down viciously on Terry’s knot in orgasmic bliss, your whole body shudders as you climax, exploding into the [foxvixen]’s mouth with a cry of pleasure.", parse);
 				Text.NL();
 				
-				var cum = player.OrgasmCum();
+				let cum = player.OrgasmCum();
 				
-				var CumCoat = {
+				let CumCoat = {
 					None  : 0,
 					Gut   : 1,
 					Cummy : 2
 				};
-				var cumCoat = CumCoat.None;
+				let cumCoat = CumCoat.None;
 				
 				if(cum > 6) {
 					Text.Add("Your seed erupts from your shaft like a perverse volcano, a cascade of salty goo pouring down Terry’s hungry gullet. Bravely, [heshe] sucks and slurps, swallowing each cheek-bulging mouthful as it comes, [hisher] belly thrusting itself boldly into your own as it stretches over your titanic output. ", parse);
@@ -6310,7 +6310,7 @@ TerryScenes.PCCleansTerry = function(func : any, opts : any) {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),		
 	};
@@ -6327,7 +6327,7 @@ TerryScenes.PCCleansTerry = function(func : any, opts : any) {
 	};
 	
 	//[Towel][Lick Clean]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Towel",
 		func : function() {
 			Text.Clear();
@@ -6355,7 +6355,7 @@ TerryScenes.PCCleansTerry = function(func : any, opts : any) {
 				Text.Add("Terry’s femininely flat chest is easy enough to clean; you can easily wrap the whole towel around [hisher] upper torso and rub it back and forth, sopping up the excess semen as best you possibly can. [HeShe] arches [hisher] back, leaning into the impromptu massage, and you soon have [himher] fairly clean.", parse);
 			}
 			Text.NL();
-			var preg = terry.PregHandler().IsPregnant();
+			let preg = terry.PregHandler().IsPregnant();
 			parse["swollen"] = preg ? " swollen" : "";
 			Text.Add("With Terry’s chest clean, you move down toward [hisher][swollen] belly next. ", parse);
 			if(preg)
@@ -6380,12 +6380,12 @@ TerryScenes.PCCleansTerry = function(func : any, opts : any) {
 		}, enabled : true,
 		tooltip : Text.Parse("Grab a towel or something and help rub [himher] down.", parse)
 	});
-	var tooltip = player.Slut() < 30 ? "It's icky and gross, but you probably could lick [himher] clean... you think [heshe]'d like that... Honestly, it's kind of hot, too." :
+	let tooltip = player.Slut() < 30 ? "It's icky and gross, but you probably could lick [himher] clean... you think [heshe]'d like that... Honestly, it's kind of hot, too." :
 	              player.Slut() < 60 ? "Why waste all that tasty [foxvixen] spunk? Bon appetite..." : "Like you're really going to waste yummy nutbutter on a towel! Time to eat!";
 	options.push({ nameStr : "Lick Clean",
 		func : function() {
 			Text.Clear();
-			var preg = terry.PregHandler().IsPregnant();
+			let preg = terry.PregHandler().IsPregnant();
 			Text.Add("Licking your lips unconsciously, you place a hand on each of the [foxvixen]’s thighs for support and wriggle in closer. Your lips sink forward until you are hovering over the underside of [hisher] [tbelly], then part to allow your [tongue] to slide outwards. Carefully, you glide over the cum-caked fur, heavy enough to lap the off-white smears from its surface, but not enough to coat your tongue in fur. The thick taste of salt and musk washes over your senses, and you swallow hard, squeezing the semen down your throat before starting to lick again.", parse);
 			Text.NL();
 			Text.Add("Painstakingly, you wash your way up Terry’s belly, pausing at its peak to ", parse);
@@ -6472,7 +6472,7 @@ TerryScenes.TCleansPC = function(func : any, opts : any) {
 	let player = GAME().player;
 	let party : Party = GAME().party;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),		
 	};
@@ -6489,8 +6489,8 @@ TerryScenes.TCleansPC = function(func : any, opts : any) {
 	};
 	
 	//[Let Be][Clean Up]
-	var options = new Array();
-	var tooltip = terry.Relation() < 30 ? Text.Parse("No, you don’t want anything more from [himher] at the moment. [HeShe]’s free to go.", parse) :
+	let options = new Array();
+	let tooltip = terry.Relation() < 30 ? Text.Parse("No, you don’t want anything more from [himher] at the moment. [HeShe]’s free to go.", parse) :
 	              terry.Relation() < 60 ? Text.Parse("No, you don’t need [hisher] help; you’ll go and clean yourself off.", parse) :
 	              Text.Parse("That’s not necessary; you’re happy to walk around wearing your lover on your [skin] like this.", parse);
 	options.push({ nameStr : "Let Be",
@@ -6526,13 +6526,13 @@ TerryScenes.TCleansPC = function(func : any, opts : any) {
 		}, enabled : true,
 		tooltip : tooltip
 	});
-	var tooltip = terry.Relation() < 30 ? Text.Parse("No, this is [hisher] mess and you want [himher] to clean up. That’s an order.", parse) :
+	tooltip = terry.Relation() < 30 ? Text.Parse("No, this is [hisher] mess and you want [himher] to clean up. That’s an order.", parse) :
 	              terry.Relation() < 60 ? Text.Parse("Yes, you’d appreciate [hisher] help getting cleaned up.", parse) :
 	              Text.Parse("If your lovely [foxvixen] is offering to help you clean up, you wouldn’t dream of saying no.", parse);
 	options.push({ nameStr : "Clean Up",
 		func : function() {
 			Text.Clear();
-			var towel = false;
+			let towel = false;
 			if(terry.Relation() < 30) {
 				Text.Add("The moment [foxvixen] thinks to protest, [hisher] collar begins flashing faintly. You watch as [heshe] gasps, growing a bit flushed at the influences of the collar. <i>“Dammit, alright, alright. I’ll help you clean up. Let me just get a towel...”</i>", parse);
 				towel = true;
@@ -6727,8 +6727,8 @@ TerryScenes.TCleansPC = function(func : any, opts : any) {
 				Text.Add("You shudder and cry out, wriggling under the vulpine form pinning you as a warm, wet tongue glides ticklishly over your navel. Mischievously, Terry slurps and laps at your belly button, as if trying to nurse it, the ticklish feeling leaving you writhing beneath [himher]. You try to hold out, but soon [heshe] has you laughing at the sensation, trying your best to beg [himher] for mercy in between giggling fits.", parse);
 				Text.NL();
 				Text.Add("But Terry shows you no remorse, [hisher] [ttongue] steadily gliding out to lap circles around your belly. ", parse);
-				var womb = player.PregHandler().Womb();
-				var preg = womb && womb.pregnant;
+				let womb = player.PregHandler().Womb();
+				let preg = womb && womb.pregnant;
 				if(preg && womb.progress > 0.3) {
 					if(womb.progress > 0.6) {
 						parse["babyCheck"] = womb.litterSize > 1 ? "babies" : "baby";
@@ -6758,7 +6758,7 @@ TerryScenes.TCleansPC = function(func : any, opts : any) {
 					Text.Add("Terry’s become pretty good at this. [HisHer] tongue massages you in all the key spots [heshe]’s come to know so well. As you facefuck your pet [foxvixen], you come to realize that your hips are moving of their own accord - not that either of you are complaining at this point. Suddenly, you feel [himher] take you all the way, as deep into [hisher] muzzle as [heshe] can. The feeling of [hisher] throat closing down on your shaft is the last straw.", parse);
 					Text.NL();
 					
-					var cum = player.OrgasmCum();
+					let cum = player.OrgasmCum();
 					
 					Text.Add("With a jubilant howl of pleasure, you empty yourself into Terry’s waiting belly, shedding a nice sized gush of seed down [hisher] throat. [HeShe] sucks hungrily, gulping down each shot, until you finally finish, confident that you have given [hisher] stomach a nice whitewash.", parse);
 					Text.NL();
@@ -6780,7 +6780,7 @@ TerryScenes.TCleansPC = function(func : any, opts : any) {
 					Text.Add("Terry engulfs your [vag], letting [hisher] tongue drill into your muff, draining it of your precious juices which you’re only too glad to give [himher]. ", parse);
 					Text.NL();
 					
-					var cum = player.OrgasmCum();
+					let cum = player.OrgasmCum();
 					
 					Text.Add("With a shriek of ecstasy, your whole body shudders in climax, gushing your feminine juices into the [foxvixen]’s ever-hungry mouth. [HeShe] practically inhales your honey, gulping it down until every last drop is gone, then carefully licks around to remove the last vestiges from your flower. You can only moan weakly in bliss until [heshe] finally deigns to lift [hisher] face from your folds.", parse);
 					Text.NL();
@@ -6862,9 +6862,9 @@ TerryScenes.FuckedByBunnyMob = function(male : Entity, parse : any) {
 		male.FuckOral(male.Mouth(), terry.FirstCock(), 2);
 		terry.Fuck(terry.FirstCock(), 2);
 	}
-	var pussy = false;
+	let pussy = false;
 	if(terry.FirstVag()) {
-		var virgin = terry.FirstVag().virgin;
+		let virgin = terry.FirstVag().virgin;
 		parse["virgin"] = virgin ? " virgin" : "";
 		Text.Add("Lifting one of the [foxvixen]’s legs, one of the bunnies easily finds Terry’s[virgin] pussy. He thrusts mercilessly, plunging his small pecker into Terry’s depths. ", parse);
 		if(virgin)
@@ -6881,7 +6881,7 @@ TerryScenes.FuckedByBunnyMob = function(male : Entity, parse : any) {
 	Text.Add("The rabbit kissing Terry decides he’s had enough, and replaces his mouth with a cock, already erect and dripping pre for the [foxvixen] to suckle. Overcome by lust, Terry wastes no time in opening [hisher] muzzle invitingly and letting the rabbit plunge his petite shaft into the [foxvixen]’s maw.", parse);
 	Text.NL();
 	if(!pussy) {
-		var avirgin = terry.Butt().virgin;
+		let avirgin = terry.Butt().virgin;
 		Text.Add("Terry moans as another bunny decides to play with [hisher] butt, lubing it up with tiny laps of his tongue. ", parse);
 		if(avirgin) {
 			Text.Add("As the lagomorph aligns his shaft, Terry immediately pushes the rabbit on top of [himher] away.", parse);
@@ -6901,7 +6901,7 @@ TerryScenes.FuckedByBunnyMob = function(male : Entity, parse : any) {
 	Text.Add("You watch as the bunnies have their fun with your pet [foxvixen] before you decide to leave them to their own devices.", parse);
 	Text.NL();
 	
-	var cum = terry.OrgasmCum();
+	let cum = terry.OrgasmCum();
 }
 
 TerryScenes.SexPitchVaginal = function(cocks : Cock[]) {
@@ -6909,10 +6909,10 @@ TerryScenes.SexPitchVaginal = function(cocks : Cock[]) {
 	let player = GAME().player;
 	let party : Party = GAME().party;
 
-	var p1cock  = player.BiggestCock(cocks);
-	var strapon = p1cock.isStrapon;
+	let p1cock  = player.BiggestCock(cocks);
+	let strapon = p1cock.isStrapon;
 	
-	var parse : any = {
+	let parse : any = {
 		playername  : player.name,
 		master      : player.mfTrue("master", "mistress"),
 		foxvixen    : terry.mfPronoun("fox", "vixen"),
@@ -6922,10 +6922,10 @@ TerryScenes.SexPitchVaginal = function(cocks : Cock[]) {
 	parse = player.ParserTags(parse);
 	parse = terry.ParserTags(parse, "t");
 	
-	var p2cock : Cock;
+	let p2cock : Cock;
 	if(player.NumCocks() > 1) {
-		var allCocks = player.AllCocksCopy();
-		for(var i = 0; i < allCocks.length; i++) {
+		let allCocks = player.AllCocksCopy();
+		for(let i = 0; i < allCocks.length; i++) {
 			if(allCocks[i] == p1cock) {
 				allCocks.splice(i, 1);
 				break;
@@ -6936,8 +6936,8 @@ TerryScenes.SexPitchVaginal = function(cocks : Cock[]) {
 		parse["cocks2"] = player.MultiCockDesc(allCocks);
 	}
 	
-	var virgin = terry.FirstVag().virgin;
-	var virginFirst = terry.PussyVirgin();
+	let virgin = terry.FirstVag().virgin;
+	let virginFirst = terry.PussyVirgin();
 	
 	parse = terry.ParserPronouns(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
@@ -7007,7 +7007,7 @@ TerryScenes.SexPitchVaginal = function(cocks : Cock[]) {
 	Text.Flush();
 	
 	//[Kiss][Hands][Lick][Dildo]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Kiss",
 		func : function() {
 			Text.Clear();
@@ -7159,13 +7159,13 @@ TerryScenes.SexPitchVaginal = function(cocks : Cock[]) {
 		tooltip : Text.Parse("Show Terry just how good you are with your hands by getting [himher] all hot and ready.", parse)
 	});
 	
-	var TerryBlowjob = {
+	let TerryBlowjob = {
 		No   : 0,
 		Yes  : 1,
 		Came : 2
 	}
-	var blowjob = TerryBlowjob.No;
-	var pleasuredPC = false;
+	let blowjob = TerryBlowjob.No;
+	let pleasuredPC = false;
 	
 	//TODO
 	options.push({ nameStr : "Lick",
@@ -7278,7 +7278,7 @@ TerryScenes.SexPitchVaginal = function(cocks : Cock[]) {
 					Text.Flush();
 					
 					//[Blow [himher]][Push away]
-					var options = new Array();
+					let options = new Array();
 					options.push({ nameStr : Text.Parse("Blow [himher]", parse),
 						func : function() {
 							blowjob = TerryBlowjob.Yes;
@@ -7394,7 +7394,7 @@ TerryScenes.SexPitchVaginal = function(cocks : Cock[]) {
 		tooltip : Text.Parse("Let’s see how your [foxvixen] likes being licked instead.", parse)
 	});
 	
-	var dildoScene = function(toy : any) {
+	let dildoScene = function(toy : any) {
 		parse["toy"]     = toy.sDesc();
 		parse["toyHead"] = toy.cock.TipShort();
 		
@@ -7456,7 +7456,7 @@ TerryScenes.SexPitchVaginal = function(cocks : Cock[]) {
 		Text.Add("Terry pants as you continue to tease [himher]. [HeShe] cries out whenever you pinch [hisher] nipples, moaning whorishly soon after. You’ve no doubt [heshe]’s already sopping wet by now.", parse);
 		Text.NL();
 		Text.Add("Though your hand remains pressed against [hisher] breast, you move the [toy] away from the other nipple. ", parse);
-		var belly = terry.PregHandler().BellySize();
+		let belly = terry.PregHandler().BellySize();
 		if(belly < 0.2)
 			Text.Add("Down over Terry’s stomach it sinks, though you can’t resist stopping at [hisher] belly button, playfully rubbing the [toyHead] back and forth inside of it, trailing a circle before dropping lower.", parse);
 		else if(belly < 0.6)
@@ -7496,7 +7496,7 @@ TerryScenes.SexPitchVaginal = function(cocks : Cock[]) {
 		Gui.NextPrompt();
 	};
 	
-	var addDildoScene = function(toy : Item) {
+	let addDildoScene = function(toy : Item) {
 		if(party.Inv().QueryNum(toy) < 1) return;
 		
 		parse["toy"] = toy.sDesc();
@@ -7581,7 +7581,7 @@ TerryScenes.SexPitchVaginal = function(cocks : Cock[]) {
 		Text.Add("Lips still locked together, you start to rock your hips, grinding against and into the [foxvixen] atop you. Your [hand]s eagerly begin to roam across Terry’s form, reaching for the softest, tenderest places that you can think of. Your [b] fingers reach for Terry’s perky nipples, tweaking and twiddling them between forefinger and thumb before exploring lower.", parse);
 		Text.NL();
 		Text.Add("<i>“Mmmmnf!”</i> Terry moans into the kiss, [hisher] own arms moving to embrace you, handpaws scratching your back a little as [heshe] grips your shoulders momentarily.", parse);
-		var wings = player.HasWings();
+		let wings = player.HasWings();
 		if(wings) {			
 			Text.Add(" You instinctively adjust your [wings] to allow the [foxvixen] to properly caress your back.", parse);
 		}
@@ -7634,7 +7634,7 @@ TerryScenes.SexPitchVaginal = function(cocks : Cock[]) {
 		else
 			Text.Add("little nipples, hardened in excitement, begging to be pressed like tiny pleasure buzzers. ", parse);
 		
-		var belly = terry.PregHandler().BellySize();
+		let belly = terry.PregHandler().BellySize();
 		if(belly < 0.2)
 			Text.Add("That lean belly of [hishers]...", parse);
 		else if(belly < 0.6)
@@ -7661,8 +7661,8 @@ TerryScenes.SexPitchVaginal = function(cocks : Cock[]) {
 		
 		let cumbath : boolean = false;
 		
-		var knotted = p1cock.knot != 0;
-		var doubleKnot = knotted;
+		let knotted = p1cock.knot != 0;
+		let doubleKnot = knotted;
 		if(p2cock) knotted = knotted || p2cock.knot != 0;
 		if(p2cock) doubleKnot = doubleKnot && p2cock.knot != 0;
 		
@@ -7672,7 +7672,7 @@ TerryScenes.SexPitchVaginal = function(cocks : Cock[]) {
 			Text.Flush();
 			
 			//[Cum inside][Cum outside][Breed][Tittyjob]
-			var options = new Array();
+			let options = new Array();
 			options.push({ nameStr : "Cum inside",
 				func : function() {
 					Text.Clear();
@@ -7682,12 +7682,12 @@ TerryScenes.SexPitchVaginal = function(cocks : Cock[]) {
 					Text.Add("It feels like barely three heartbeats before your precious willpower crumbles like a collapsing wall. Ramming in as deeply as you possibly can, you cry out to the heavens above as you release yourself into Terry’s waiting depths.", parse);
 					Text.NL();
 					
-					var cum = player.OrgasmCum();
+					let cum = player.OrgasmCum();
 					
 					TerryScenes.Impregnate(terry, player, cum);
 					
 					if(p1cock.knot != 0) {
-						var knot2 = p2cock && p2cock.knot != 0;
+						let knot2 = p2cock && p2cock.knot != 0;
 						parse = Text.ParserPlural(parse, knot2, null, "3");
 						parse["andguts"] = knot2 ? " and guts" : ""; 
 						if(cum > 6) {
@@ -8077,7 +8077,7 @@ TerryScenes.SexPitchVaginal = function(cocks : Cock[]) {
 					Text.Add("You cry out in response, shouting Terry’s own name back to [himher].", parse);
 					Text.NL();
 					
-					var cum = player.OrgasmCum();
+					let cum = player.OrgasmCum();
 					
 					TerryScenes.Impregnate(terry, player, cum * 3);
 					
@@ -8202,7 +8202,7 @@ TerryScenes.SexPitchVaginal = function(cocks : Cock[]) {
 						Text.Add("With Terry busy for the moment, you decide that you should reward the [foxvixen] for [hisher][eager] compliance.", parse);
 						Text.NL();
 						
-						var tail = player.IsNaga() || player.HasPrehensileTail();
+						let tail = player.IsNaga() || player.HasPrehensileTail();
 						if(tail) {
 							parse["ti"] = player.IsNaga() ? function() { return player.LegsDesc(); } : player.HasTail().Short();
 							parse["tailSkinDesc"] = player.IsNaga() ? player.body.SkinDesc(player.Legs()) : player.body.SkinDesc(player.HasTail());
@@ -8246,7 +8246,7 @@ TerryScenes.SexPitchVaginal = function(cocks : Cock[]) {
 						Text.Add("The two of you writhe together, mutually pleasuring each other as best you can. With your earlier efforts, you don’t last much longer. Huffing as you try to hold it back, you cry out a warning to Terry that you’re cumming. Seconds later, you arch your back and cry out as your [cock] erupts right into Terry’s face.", parse);
 						Text.NL();
 						
-						var cum = player.OrgasmCum();
+						let cum = player.OrgasmCum();
 						
 						if(player.NumCocks() > 1) {
 							Text.Add("You dimly note your other neglected cock[s2] erupting in turn; some of it catches Terry right in the face, but most of it simply flies right over [hisher] head.", parse);
@@ -8278,7 +8278,7 @@ TerryScenes.SexPitchVaginal = function(cocks : Cock[]) {
 						}
 						Text.NL();
 						
-						var cum = terry.OrgasmCum();
+						cum = terry.OrgasmCum();
 						
 						Text.Add("<i>“Haah, haah, that was… pretty good,”</i> Terry says, collapsing on the ground.", parse);
 						Text.NL();
@@ -8370,7 +8370,7 @@ TerryScenes.SexPitchVaginal = function(cocks : Cock[]) {
 			Text.Add("Despite [hisher] climax, Terry never stops licking you, nor kissing your [clit]. With the scent of Terry’s climax hanging in your nostrils and such attention, it is little wonder that moments later, you are crying out in ecstasy. Your whole body quivers with pleasure as orgasm ripples through your body, pussy trying to clamp on Terry’s intruding tongue but spasming too fiercely to hold it.", parse);
 			Text.NL();
 			
-			var cum = player.OrgasmCum();
+			let cum = player.OrgasmCum();
 			
 			Text.Add("When your climax washes through you, you are left weak and spent. Panting for breath, you slowly topple from your perch atop Terry onto the ground beside [himher], flopping bonelessly onto your back as you continue to gulp air.", parse);
 			Text.NL();
@@ -8431,9 +8431,9 @@ TerryScenes.SexCatchVaginal = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var p1cock = player.BiggestCock();
+	let p1cock = player.BiggestCock();
 	
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
 		FoxVixen   : terry.mfPronoun("Fox", "Vixen"),
@@ -8458,7 +8458,7 @@ TerryScenes.SexCatchVaginal = function() {
 		Text.Add("<i>“You sure about this? I won’t be gentle,”</i> [heshe] says, a predatory smile playing on [hisher] face.", parse);
 		Text.NL();
 		Text.Add("You just return the smile and state that you’re sure. You can handle a little roughness.", parse);
-		var nFucked = terry.sex.rAnal + terry.sex.rVag;
+		let nFucked = terry.sex.rAnal + terry.sex.rVag;
 		if(nFucked >= 5)
 			Text.Add(" Besides, it’ll be fun to let [himher] do the fucking this time.", parse);
 		if(player.Slut() < 15)
@@ -8508,7 +8508,7 @@ TerryScenes.SexCatchVaginal = function() {
 	Text.Add("The [foxvixen] whistles at the sight. <i>“Can’t complain about the view, nor your eagerness.”</i> [HeShe] grins.", parse);
 	Text.NL();
 	
-	var cap = player.FirstVag().Cap();
+	let cap = player.FirstVag().Cap();
 	
 	if(terry.HorseCock()) {
 		Text.Add("<i>“Think I should probably prepare you a little,”</i> [heshe] suggests, gently stroking your outer lips.", parse);
@@ -8565,7 +8565,7 @@ TerryScenes.SexCatchVaginal = function() {
 				Text.Add("Even as you gasp, grunt and groan, Terry hungrily slaves away at your dick. Caught off-guard like this, your attempts to hold out against the feelings assaulting you are in vain. You can’t... you’re going to...", parse);
 				Text.NL();
 				
-				var cum = player.OrgasmCum();
+				let cum = player.OrgasmCum();
 				
 				Text.Add("Terry greedily gulps down your cum like a baby suckling on a teat. Even though this wasn’t such a powerful orgasm, you still produce enough seed to give the [foxvixen] the equivalent of a hearty meal, and only when your flow has slowed to a trickle does Terry release you.", parse);
 				Text.NL();
@@ -8646,7 +8646,7 @@ TerryScenes.SexCatchVaginal = function() {
 		Text.NL();
 		Text.Add("Back and forth, the two of you glide, your hips smacking together with the deliciously meaty impact of lovemaking.", parse);
 		
-		var preg = terry.PregHandler().IsPregnant();
+		let preg = terry.PregHandler().IsPregnant();
 
 		if(terry.Cup() >= TerryFlags.Breasts.Bcup)
 			Text.Add(" [HisHer] [tbreasts] jiggle each time you slap together, adding a delightful visual to the affair.", parse);
@@ -8668,7 +8668,7 @@ TerryScenes.SexCatchVaginal = function() {
 		Text.Flush();
 		
 		//[[HeShe] decides][Inside] [Outside]
-		var options = [];
+		let options = [];
 		options.push({nameStr : "Inside",
 			tooltip : Text.Parse("You want [himher] to fill you up with [hisher] fox-seed, tell [himher] to cum inside!", parse),
 			enabled : true,
@@ -8681,7 +8681,7 @@ TerryScenes.SexCatchVaginal = function() {
 				TerryScenes.SexCatchVaginalInsideHorseCock(parse);
 			}
 		});
-		var preg = player.PregHandler().IsPregnant();
+		preg = player.PregHandler().IsPregnant();
 		parse["p"] = preg ? "" : " You don’t want to risk getting pregnant.";
 		options.push({nameStr : "Outside",
 			tooltip : Text.Parse("Tell [himher] to cum outside.[p]", parse),
@@ -8701,7 +8701,7 @@ TerryScenes.SexCatchVaginal = function() {
 			tooltip : Text.Parse("Stay quiet and let [himher] cum wherever [heshe] wants; you don’t mind it one way or another.", parse),
 			enabled : true,
 			func : function() {
-				var inside = TerryScenes.SexCatchVaginalHeChooses();
+				let inside = TerryScenes.SexCatchVaginalHeChooses();
 				
 				Text.Clear();
 				if(inside) {
@@ -8818,7 +8818,7 @@ TerryScenes.SexCatchVaginal = function() {
 		Text.Flush();
 		
 		//[[HeShe] decides][Inside] [Outside]
-		var options = [];
+		let options = [];
 		options.push({nameStr : "Inside",
 			tooltip : Text.Parse("Let [himher] tie you for good and fill you up with [hisher] fox-seed! Tell [himher] to cum inside!", parse),
 			enabled : true,
@@ -8835,7 +8835,7 @@ TerryScenes.SexCatchVaginal = function() {
 				TerryScenes.SexCatchVaginalInsideFoxCock(parse);
 			}
 		});
-		var preg = player.PregHandler().IsPregnant();
+		let preg = player.PregHandler().IsPregnant();
 		parse["p"] = preg ? "" : " You don’t want to risk getting pregnant.";
 		options.push({nameStr : "Outside",
 			tooltip : Text.Parse("Tell [himher] to cum outside.[p]", parse),
@@ -8857,7 +8857,7 @@ TerryScenes.SexCatchVaginal = function() {
 				Text.Add("Terry works [himher]self out of your [vag] and begins furiously stroking [hisher] foxhood. Moments later, [heshe] moans as ropes of fox-seed erupts from [hisher] overworked shaft to splatter on the two of you.", parse);
 				Text.NL();
 				
-				var cum = terry.OrgasmCum();
+				let cum = terry.OrgasmCum();
 				
 				Text.Add("You watch as Terry groans and slumps forward, whole body going limp in the wake of [hisher] climax. ", parse);
 				if(terry.Relation() < 60) {
@@ -8880,7 +8880,7 @@ TerryScenes.SexCatchVaginal = function() {
 			tooltip : Text.Parse("Stay quiet and let [himher] cum wherever [heshe] wants; you don’t mind it one way or another.", parse),
 			enabled : true,
 			func : function() {
-				var inside = TerryScenes.SexCatchVaginalHeChooses();
+				let inside = TerryScenes.SexCatchVaginalHeChooses();
 				
 				Text.Clear();
 				if(inside) {
@@ -8892,7 +8892,7 @@ TerryScenes.SexCatchVaginal = function() {
 					Text.Add("Terry suddenly pulls out and furiously strokes [himher]self, moaning as [heshe] reaches [hisher] climax, sending a few ropes of fox-seed arcing through the air to splatter on the both of you.", parse);
 					Text.NL();
 					
-					var cum = terry.OrgasmCum();
+					let cum = terry.OrgasmCum();
 					
 					Text.Add("Even though you left it up to [himher], you can't hold back a sigh of disappointment. You gaze at the [foxvixen] with obvious frustration, and [heshe] replies before you even have a chance to speak.", parse);
 					Text.NL();
@@ -8924,8 +8924,8 @@ TerryScenes.SexCatchVaginalHeChooses = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var tpreg = terry.PregHandler().IsPregnant();
-	var preg = player.PregHandler().IsPregnant();
+	let tpreg = terry.PregHandler().IsPregnant();
+	let preg = player.PregHandler().IsPregnant();
 	if(terry.Relation() < 30) {
 		return false;
 	}
@@ -8972,10 +8972,10 @@ TerryScenes.SexCatchVaginalInsideHorseCock = function(parse : any) {
 	Text.Add("The sensation is just too much for both of you, your ecstatic howls forming a lewd love-duet as you hit a mutual climax.", parse);
 	Text.NL();
 	
-	var cum = terry.OrgasmCum();
+	let cum = terry.OrgasmCum();
 	TerryScenes.Impregnate(player, terry, cum, PregnancyHandler.Slot.Vag);
 	
-	var cum = player.OrgasmCum();
+	cum = player.OrgasmCum();
 	
 	Text.Add("Thick jets of [foxvixen]-seed pour into your defenseless cunt, swirling around your depths and mixing into a thick stew as your own feminine honey meets it from above. Trapped with nowhere to go by the seal of [hisher] knot, Terry’s cum just keeps on gushing inside of you. Your hands slap themselves over your midriff, moaning like a whore as you feel yourself swell up like a perverse balloon as [heshe] just keeps on cumming, and cumming...", parse);
 	Text.NL();
@@ -9058,7 +9058,7 @@ TerryScenes.SexCatchVaginalOutsideHorseCock = function(parse : any) {
 	Text.Add("You can feel [himher] grinding deliberately against your most sensitive spots, substituting attentiveness for vigor. As aroused as you were to begin with, this skillful application of [hisher] dick is the last straw for you.", parse);
 	Text.NL();
 	
-	var cum = player.OrgasmCum();
+	let cum = player.OrgasmCum();
 	
 	Text.Add("You arch your back and cry out in pleasure, fingers clawing at the ground as your orgasm rocks your whole body. Thick femcum surges from your netherlips, a tidal wave of nectar that soaks your petals and Terry's prick with equal thoroughness, rolling over [hisher] balls and puddling on the ground beneath you.", parse);
 	Text.NL();
@@ -9075,7 +9075,7 @@ TerryScenes.SexCatchVaginalOutsideHorseCock = function(parse : any) {
 	Text.Add("An answer swiftly comes as Terry leans back on [hisher] haunches, pawing roughly at [hisher] throbbing dick. The knot bulges, so large you can hardly believe you would have been able to fit it, and the shaft's underside distends obscenely. A bulge races up its length, like a snake eating an egg in reverse, until an enormous gout of [foxvixen]-cum comes gushing out of [hisher] flared glans!", parse);
 	Text.NL();
 	
-	var cum = terry.OrgasmCum();
+	cum = terry.OrgasmCum();
 	
 	if(player.Slut() < 30)
 		Text.Add("You can't help but squeal as Terry's seed comes raining down on you, instinctively raising your arms to try and shield your face from the lewd deluge about to wash you down.", parse);
@@ -9135,12 +9135,12 @@ TerryScenes.SexCatchVaginalInsideFoxCock = function(parse : any) {
 	Text.Add("[HeShe] grunts with effort as [heshe] pushes inside you, driving [himher]self as far as [heshe] can into your pliable cunt, then [heshe] tries to pull away once more. The two of your repeat this back and forth until you can’t take it anymore and you clamp down on your willing partner’s shaft.", parse);
 	Text.NL();
 	
-	var cum = player.OrgasmCum();
+	let cum = player.OrgasmCum();
 	
 	Text.Add("You cry out in pleasure as your pussy spasms and your juices flood your passage; your walls contract, working to milk the member embedded deep within you. Terry grips your hips extra-hard, but not hard enough to hurt you, as [heshe] grinds [himher]self against you, gyrating [hisher] hips to grant you maximum pleasure before [heshe] climaxes [himher]self.", parse);
 	Text.NL();
 	
-	var cum = terry.OrgasmCum();
+	cum = terry.OrgasmCum();
 	TerryScenes.Impregnate(player, terry, cum, PregnancyHandler.Slot.Vag);
 	
 	Text.Add("You can feel the warmth spreading throughout your nethers mixing with your juices. With the [foxvixen]’s knot holding you shut, the mixture has nowhere to go but into your womb. Terry’s load isn’t exactly prodigious, but all things considered, you’d still say [heshe] came buckets. The two of you grind into each other as you come off your orgasmic high. The [foxvixen] collapses atop you and you move to embrace your lover as you feel the heat in your [vag] die out into an ember that spreads pleasantly through your body.", parse);
@@ -9186,7 +9186,7 @@ TerryScenes.SexCatchVaginalInsideFoxCock = function(parse : any) {
 		Text.Add("<i>“Or perhaps you’d like me to do something different?”</i>", parse);
 		Text.NL();
 		
-		var scenes = new EncounterTable();
+		let scenes = new EncounterTable();
 		scenes.AddEnc(function() {
 			Text.Add("[HisHer] hands move up to tweak your nipples, gently caressing your breasts.", parse);
 			Text.NL();
@@ -9277,7 +9277,7 @@ TerryScenes.SexCatchVaginalOutsideFoxCock = function(parse : any) {
 	Text.Add("<i>“Well then, how’s this for some help?”</i> [HeShe] pumps [hisher] fingers in whilst simultaneously giving your [clit] a [c].", parse);
 	Text.NL();
 	
-	var cum = player.OrgasmCum();
+	let cum = player.OrgasmCum();
 	
 	Text.Add("Oh, that did it! You can't even try to hold back an ecstatic shriek as you cum right there on the spot. Spots dance in front of your eyes as your whole body quivers with the effort of climax, squeezing down on Terry's fingers with a death grip. Your [legs] quiver[lnotS] and twitch[lnotEs], feminine honey spurting from your folds and spraying all over Terry's chin.", parse);
 	Text.NL();
@@ -9312,9 +9312,9 @@ TerryScenes.SexCatchAnal = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var p1cock = player.BiggestCock();
+	let p1cock = player.BiggestCock();
 	
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
 		fox        : terry.HorseCock() ? "stallion" : "fox-",		
@@ -9323,15 +9323,15 @@ TerryScenes.SexCatchAnal = function() {
 	parse = player.ParserTags(parse);
 	parse = terry.ParserTags(parse, "t");
 	
-	var first = terry.flags["caFirst"] == 0;
+	let first = terry.flags["caFirst"] == 0;
 	terry.flags["caFirst"]++;
 	
 	parse = terry.ParserPronouns(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
 
-	var tail = player.HasTail();
-	var wing = player.HasWings();
+	let tail = player.HasTail();
+	let wing = player.HasWings();
 	
 	Text.Clear();
 	Text.Add("Grinning smugly to yourself, your gaze drifts toward Terry’s crotch and the delightful toy hanging there, already protruding from its protective sheath. With a lick of your lips, you step closer to Terry, cooing that this is going to be [hisher] lucky day.", parse);
@@ -9369,7 +9369,7 @@ TerryScenes.SexCatchAnal = function() {
 	Text.Add("<i>“Let’s not waste time then,”</i> [heshe] says.", parse);
 	
 	//[Suck][Vagina][Grind][[HeShe] decides]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Suck",
 		func : function() {
 			Text.Clear();
@@ -9513,7 +9513,7 @@ TerryScenes.SexCatchAnal = function() {
 			Text.Clear();
 			Text.Add("<i>“If that’s what you want, I’m happy to oblige!”</i>", parse);
 			Text.NL();
-			var next = options[Math.floor(Math.random() * (options.length-1))].func;
+			let next = options[Math.floor(Math.random() * (options.length-1))].func;
 			next(true);
 		}, enabled : true,
 		tooltip : Text.Parse("You want Terry to really cut loose on you; [heshe] can do whatever [heshe] wants to you.", parse)
@@ -9525,7 +9525,7 @@ TerryScenes.SexCatchAnal = function() {
 		Gui.SetButtonsFromList(options, false, null);
 	}
 	else {
-		var next = options[Math.floor(Math.random() * (options.length-1))].func;
+		let next = options[Math.floor(Math.random() * (options.length-1))].func;
 		Text.Flush();
 		Gui.NextPrompt(function() {
 			next(true);
@@ -9650,7 +9650,7 @@ TerryScenes.SexCatchAnal = function() {
 			Text.NL();
 			Text.Add("You purr in pleasure as Terry thrusts into you, matching the rhythm with ease. You clench and squeeze with your anus, flexing the rippling walls of flesh in time with Terry’s efforts to better stroke and manipulate [himher] as [heshe] slides in and out. Your whole body trembles with desire, but you make yourself settle for matching the pace [heshe] is setting; you are leaving [himher] in charge, this time.", parse);
 			Text.NL();
-			var tw = "";
+			let tw = "";
 			if(tail)
 				tw += ", curling your [tail] out of the way";
 			if(tail && wing)
@@ -9683,11 +9683,11 @@ TerryScenes.SexCatchAnal = function() {
 			Text.Add("The sound of flesh slapping against flesh competes with the sound of your heartbeat racing in your [ears], drowning out the world around you. There is only you and Terry, connected by the [tcock] ravaging your [anus]. Finally, in one definitive thrust, Terry slams [himher]self home, bulging knot stretching your asshole to its breaking point before gliding inside.", parse);
 			Text.NL();
 			
-			var cum = terry.OrgasmCum();
+			let cum = terry.OrgasmCum();
 			
 			TerryScenes.Impregnate(player, terry, cum, PregnancyHandler.Slot.Butt);
 					
-			var cum = player.OrgasmCum();
+			cum = player.OrgasmCum();
 			
 			Text.Add("As your pucker grinds shut, Terry howls like the fox [heshe] resembles, firing ropes of hot cum into your sealed tight hole, the feel of liquid warmth splashing around inside of you the final thing you needed to push you over the edge. Your own cry of ecstasy rises to match your partner’s as your body quakes in orgasm.", parse);
 			if(player.FirstCock())
@@ -9763,7 +9763,7 @@ TerryScenes.SexCatchAnal = function() {
 			Text.Add("Faster than you can follow, Terry pulls you backwards as [heshe] falls onto [hisher] shapely behind, the sudden shift in position bringing gravity to play. Your own weight means you fall down hard on Terry’s shaft, the [tcock] spearing upward with such force that [hisher] knot proves no obstacle. Instead, you feel your anal ring stretching with all its might as it envelops the proud bulb of [foxvixen] flesh, driving it completely inside before you wetly slurp shut around it.", parse);
 			Text.NL();
 			
-			var cum = terry.OrgasmCum();
+			let cum = terry.OrgasmCum();
 			
 			TerryScenes.Impregnate(player, terry, 2*cum, PregnancyHandler.Slot.Butt);
 			
@@ -9792,7 +9792,7 @@ TerryScenes.SexCatchAnal = function() {
 			Text.Add("If Terry says anything, it’s drowned out by your own cry of ecstasy as [heshe] provides the last bits of stimulation you need. In your mind, the metaphorical dam breaks, drowning you in a sea of pleasure. Your nerves spark and your blood sings as you arch your back, shuddering violently in climax.", parse);
 			Text.NL();
 			
-			var cum = player.OrgasmCum();
+			cum = player.OrgasmCum();
 			
 			if(player.FirstCock()) {
 				Text.Add("Your [cocks], painfully erect and throbbing by this point, finally erupt[s] under Terry’s nimble fingers. Ropes of seed fly from your loins, drenching the [foxvixen]’s hands and painting the ground before you with the fruits of your pleasure.", parse);
@@ -9906,7 +9906,7 @@ TerryScenes.SexCatchAnal = function() {
 			Text.NL();
 			Text.Add("The two of you wrestle together willingly, Terry’s [tcock] rutting your [anus] in counterpoint to the wrestling of your tongues. Your fingers knead and squeeze [hisher] balls, compelling [himher] to thrust deeper. [HisHer] arms crush you tight, [breasts] to [tbreasts], fingers scraping across the [skin] of your back.", parse);
 			Text.NL();
-			var gen = "";
+			let gen = "";
 			if(player.FirstCock())
 				gen += "[cocks] slap meatily against [hisher] belly";
 			if(player.FirstCock() && player.FirstVag())
@@ -9926,11 +9926,11 @@ TerryScenes.SexCatchAnal = function() {
 				Text.Add("[HisHer] eyes home in on your [cocks], and in one fell swoop [heshe] takes[oneof] your cock[s] into [hisher] mouth, sucking on the [cockTip] in an effort to grant you that last spike you need to orgasm yourself.", parse);
 				Text.NL();
 				
-				var cum = terry.OrgasmCum();
+				let cum = terry.OrgasmCum();
 				
 				TerryScenes.Impregnate(player, terry, cum, PregnancyHandler.Slot.Butt);
 				
-				var cum = player.OrgasmCum();
+				cum = player.OrgasmCum();
 				
 				Text.Add("You fling your head back and cry out as you explode into the [foxvixen]’s suckling mouth. Terry valiantly swallows and gulps, drinking every last drop you have to give [himher].", parse);
 				Text.NL();
@@ -9947,11 +9947,11 @@ TerryScenes.SexCatchAnal = function() {
 				Text.Add("[HisHer] eyes home in on your [vag], and in a moment of desperation [heshe] shuffles to finger your moist entrance. Two digits are crammed inside your pussy, while [hisher] thumb teases your [clit]. This is the last straw - you can’t hold back anymore!", parse);
 				Text.NL();
 				
-				var cum = terry.OrgasmCum();
+				let cum = terry.OrgasmCum();
 				
 				TerryScenes.Impregnate(player, terry, cum, PregnancyHandler.Slot.Butt);
 				
-				var cum = player.OrgasmCum();
+				cum = player.OrgasmCum();
 				
 				Text.Add("You cry out in pleasure, quaking violently against your vulpine lover. Your [vag] clasps shut, trying to squeeze [hisher] fingers like the cock they have pretended to be, drenching [hisher] wrist in your feminine honey.", parse);
 				Text.NL();
@@ -10001,7 +10001,7 @@ TerryScenes.SexCatchAnal = function() {
 TerryScenes.SexHaveADrink = function(back : any) {
 	let terry = GAME().terry;
 
-	var parse : any = {
+	let parse : any = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		tbreasts : terry.FirstBreastRow().Short()
 	};
@@ -10047,7 +10047,7 @@ TerryScenes.SexHaveADrink = function(back : any) {
 	TimeStep({minute: 10});
 	
 	//[Breasts] [Pussy] [Cock]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Breasts",
 		tooltip : Text.Parse("Those yummy [tbreasts] and their sweet milk are calling to you.", parse),
 		func : TerryScenes.SexHaveADrinkBreasts, enabled : terry.Lactation()
@@ -10094,7 +10094,7 @@ TerryScenes.SexHaveADrinkPussy = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		foxxyvixxy : terry.mfPronoun("foxxy", "vixxy"),
@@ -10112,7 +10112,7 @@ TerryScenes.SexHaveADrinkPussy = function() {
 	parse = terry.ParserTags(parse, "t");
 	parse = player.ParserTags(parse);
 	
-	var rel = terry.Relation() + terry.Slut();
+	let rel = terry.Relation() + terry.Slut();
 	
 	Text.Clear();
 	parse["c"] = terry.FirstCock() ? Text.Parse(", behind [hisher] cock", parse) : "";
@@ -10187,9 +10187,9 @@ TerryScenes.SexHaveADrinkPussy = function() {
 	Text.Add("Terry arches [hisher] back, moaning profusely at your ministrations. That’s a good [boygirl]; now, let’s see how close [heshe] is to being ready...", parse);
 	Text.NL();
 	
-	var womb = terry.PregHandler().Womb();
-	var preg = womb && womb.pregnant;
-	var stage = womb && womb.progress;
+	let womb = terry.PregHandler().Womb();
+	let preg = womb && womb.pregnant;
+	let stage = womb && womb.progress;
 	
 	Text.Add("Leaving Terry’s tail alone, you reach around to [hisher] belly. ", parse);
 	
@@ -10311,7 +10311,7 @@ TerryScenes.SexHaveADrinkPussy = function() {
 	player.AddLustFraction(0.25);
 	
 	//[LickNtease] [LickNass] [LickNdick]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "LickNtease",
 		tooltip : "As much as you’d like to get on with your business, you can’t just ignore Terry’s birthmark...",
 		func : function() {
@@ -10400,7 +10400,7 @@ TerryScenes.SexHaveADrinkPussy = function() {
 			Text.Add("A thrill runs through you, and you change tack. Your mouth moves up, passionately making out with Terry’s netherlips, suckling and lapping. With your free hand, you resume playing with [hisher] clitoris, tweaking it expertly between your fingertips. Your thirst for [hisher] nectar is overwhelming, driving you to push [himher] over the edge.", parse);
 			Text.NL();
 			
-			var cum = terry.OrgasmCum();
+			let cum = terry.OrgasmCum();
 			
 			Text.Add("Terry’s whole body shakes and [heshe] virtually howls in ecstasy as climax washes through [himher]. A flood of feminine honey pours into your mouth and you avidly gulp it down, swallowing mouthful after mouthful as excess runs down your chin. [HisHer] spicy-sweet flavor caresses your tongue and sets your stomach afire, making you thirst for more and more.", parse);
 			Text.NL();
@@ -10580,7 +10580,7 @@ TerryScenes.SexHaveADrinkPussy = function() {
 			Text.Add("With thumb and tongue, you double-stuff Terry, working both holes in sync and with no mercy. The [foxvixen]’s cries grow louder and higher, the strain building inside of [himher] as you play [himher] like an instrument.", parse);
 			Text.NL();
 			
-			var cum = terry.OrgasmCum();
+			let cum = terry.OrgasmCum();
 			
 			Text.Add("Inevitably, under your careful ministrations, Terry reaches [hisher] limits. With a vulpine howl of ecstasy, [heshe] cums, and you plunge your face into [hisher] thighs to drink your fill.", parse);
 			if(terry.FirstCock())
@@ -10774,7 +10774,7 @@ TerryScenes.SexHaveADrinkPussy = function() {
 					Text.Add("You nibble at [hisher] clit, pump [hisher] cock, lick and suckle and stroke for all you’re worth...", parse);
 					Text.NL();
 					
-					var cum = terry.OrgasmCum();
+					let cum = terry.OrgasmCum();
 					
 					Text.Add("With a suddenness that shocks you, Terry arches [hisher] back and howls in ecstasy. You can feel [hisher] mighty horsemeat bulging almost double its girth as the first huge wave of cum erupts from [hisher] overstuffed balls, forcing your clasping fingers apart as it rushes out of [hisher] cumslit. Your stray hand, busily teasing the jutting flare, is too close to the liquid explosion, and you can feel thick wet warmth washing over your [skin] as it is soaked in this first eruption - the first of many, judging by the way you can feel [hisher] shaft bulging again...", parse);
 					Text.NL();
@@ -10920,7 +10920,7 @@ TerryScenes.SexHaveADrinkPussy = function() {
 					Text.Add("Terry convulses in your grip, grunting and moaning as [hisher] balls draw tight. <i>“Aaaahn!”</i> [heshe] cries out lasciviously.", parse);
 					Text.NL();
 					
-					var cum = terry.OrgasmCum();
+					let cum = terry.OrgasmCum();
 					
 					Text.Add("The [foxvixen]’s ecstatic howl has barely begun to resound in your ears before you move. Impatiently, you spit out [hisher] ball so you can plunge your face into [hisher] cunt, greedily guzzling the small wave of female nectar that pours down your gullet. Still held tight in your hand, Terry’s cock spits seed onto the uncaring ground below, a small puddle forming lonely and ignored under [hisher] belly. You don’t allow a single drop of [hisher] precious pussy-juice to escape your lips, greedily swallowing all of it down your throat.", parse);
 					Text.NL();
@@ -10980,7 +10980,7 @@ TerryScenes.SexHaveADrinkCock = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		handsomebeautiful : terry.mfPronoun("handsome", "beautiful"),
@@ -11103,7 +11103,7 @@ TerryScenes.SexHaveADrinkCock = function() {
 			Text.Add("Patience, you chide, grinning widely as you playfully wave a finger at the [foxvixen].", parse);
 		}
 		Text.NL();
-		var wings = player.HasWings();
+		let wings = player.HasWings();
 		if(wings) parse["wings"] = wings.Short();
 		parse["w"] = wings ? Text.Parse(", taking a moment or two to get your [wings] properly positioned", parse) : "";
 		Text.Add("Decision made, you lie down flat on your back[w]. Once comfortable, you smile up at your vulpine partner and beckon [himher] to approach.", parse);
@@ -11166,7 +11166,7 @@ TerryScenes.SexHaveADrinkCock = function() {
 			Text.Add("<i>“Ack! I can- cumming!”</i> [heshe] exclaims as [hisher] cock throbs one last time and tenses in preparation for the first blow.", parse);
 			Text.NL();
 			
-			var cum = terry.OrgasmCum();
+			let cum = terry.OrgasmCum();
 			
 			Text.Add("Almost like a teaser as to what’s to come, a thick gobbet of cum spatters across your tongue, making your senses reel with its rich, salty taste. Avidly, you suck all the harder, determined to feed to your heart’s content as Terry cries out and erupts inside of your mouth.", parse);
 			Text.NL();
@@ -11490,7 +11490,7 @@ TerryScenes.SexHaveADrinkCock = function() {
 			}
 			Text.NL();
 			
-			var cum = terry.OrgasmCum();
+			let cum = terry.OrgasmCum();
 			
 			Text.Add("The torrential flood of white, hot, creamy fox-cum that follows fills your jaws in no time. Terry is absolutely delirious with pleasure, unable to do anything but thrust [himher]self as deep into your maw as [heshe] can.", parse);
 			Text.NL();
@@ -11853,7 +11853,7 @@ TerryScenes.SexHaveADrinkCock = function() {
 			Text.Add("Opening your mouth as wide as you can and pulling backwards, you manage to wriggle free. Terry’s shaft throbs in your vision, deep red in its engorgement. You grasp it just below the knot with your free [hand], holding it steady as you open your mouth and extend your tongue beneath it.", parse);
 			Text.NL();
 			
-			var cum = terry.OrgasmCum();
+			let cum = terry.OrgasmCum();
 			
 			Text.Add("With your fingers, you thrust firmly into the mewling vulpine’s ass, ruthlessly stroking [hisher] prostate until, with a howl, [heshe] cums. [HisHer] glans distends before spurting forth a long, thick rope of seed that splatters onto your tongue and rolls down your throat. You gulp it down eagerly and keep milking [himher], coaxing another rope, and another.", parse);
 			Text.NL();
@@ -11952,7 +11952,7 @@ TerryScenes.SexHaveADrinkBreasts = function() {
 	let terry = GAME().terry;
 	let player = GAME().player;
 
-	var parse : any = {
+	let parse : any = {
 		playername : player.name,
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		foxxyvixxy : terry.mfPronoun("foxxy", "vixxy"),
@@ -12199,7 +12199,7 @@ TerryScenes.SexHaveADrinkBreastsMilk = function(parse : any) {
 	//#Milk quantity block
 	Text.Clear();
 	
-	var milk = terry.Milk();
+	let milk = terry.Milk();
 	terry.MilkDrain(3);
 	
 	if(milk >= TerryFlags.MilkLevel.VeryHigh) {
@@ -12351,9 +12351,9 @@ TerryScenes.SexHaveADrinkBreastsArousal = function(parse : any) {
 	//#arousal check block
 	
 	//[Cock][Pussy]
-	var options = new Array();
+	let options = new Array();
 	if(terry.FirstCock()) {
-		var tooltip = "What better way to show your appreciation than with a nice massage on Terry’s ";
+		let tooltip = "What better way to show your appreciation than with a nice massage on Terry’s ";
 		if(terry.HorseCock()) tooltip += "fat stallionhood?";
 		else tooltip += "dainty foxhood?";
 		options.push({ nameStr : "Cock",
@@ -12386,7 +12386,7 @@ TerryScenes.SexHaveADrinkBreastsArousalHorsecock = function(parse : any) {
 
 	Text.Clear();
 	Text.Add("You suddenly feel something poking against ", parse);
-	var tail = player.HasTail();
+	let tail = player.HasTail();
 	if(tail) {
 		parse["tail"] = tail.Short();
 		Text.Add("the base of your [tail].", parse);
@@ -12527,7 +12527,7 @@ TerryScenes.SexHaveADrinkBreastsArousalHorsecock = function(parse : any) {
 	Text.Add("Then [heshe] should just let it all out...", parse);
 	Text.NL();
 	
-	var cum = terry.OrgasmCum();
+	let cum = terry.OrgasmCum();
 	
 	Text.Add("The [foxvixen] arches [hisher] back and does [hisher] best to howl as climax wracks [hisher] body. Hand clenched just above [hisher] turgid knot, you can feel [hisher] shaft distend as the first torrent of seed wells up from [hisher] groaning nuts.", parse);
 	Text.NL();
@@ -12557,7 +12557,7 @@ TerryScenes.SexHaveADrinkBreastsArousalHorsecock = function(parse : any) {
 		Text.Flush();
 		
 		//[Ask for sex] [Finished]
-		var options = new Array();
+		let options = new Array();
 		options.push({ nameStr : "Ask for sex",
 			tooltip : "You’re having too much fun to stop now.",
 			func : function() {
@@ -12607,7 +12607,7 @@ TerryScenes.SexHaveADrinkBreastsArousalHorsecock = function(parse : any) {
 		Text.Flush();
 		
 		//[Yes] [No]
-		var options = new Array();
+		let options = new Array();
 		options.push({ nameStr : "Yes",
 			tooltip : "Terry’s offering, you’re horny, so why pass it up?",
 			func : function() {
@@ -12645,7 +12645,7 @@ TerryScenes.SexHaveADrinkBreastsArousalHorsecock = function(parse : any) {
 		Text.Flush();
 		
 		//[Fuck] [Don’t fuck]
-		var options = new Array();
+		let options = new Array();
 		options.push({ nameStr : "Fuck",
 			tooltip : "If Terry wants you this badly, why not oblige?",
 			func : function() {
@@ -12668,7 +12668,7 @@ TerryScenes.SexHaveADrinkBreastsArousalHorsecock = function(parse : any) {
 				Text.Flush();
 				
 				//[Submit] [Resist]
-				var options = new Array();
+				let options = new Array();
 				options.push({ nameStr : "Submit",
 					tooltip : Text.Parse("How can you possibly say no to [himher] in the face of that?", parse),
 					func : function() {
@@ -12808,7 +12808,7 @@ TerryScenes.SexHaveADrinkBreastsArousalFoxcock = function(parse : any) {
 	Text.Add("You give Terry no quarter, massaging [hisher] prostate throughout [hisher] orgasm, pulling [himher] close in an attempt to encompass [himher] as the [foxvixen] shivers with the effort of pushing [hisher] cum out into the air.", parse);
 	Text.NL();
 	
-	var cum = terry.OrgasmCum();
+	let cum = terry.OrgasmCum();
 	
 	Text.Add("Your pet [foxvixen] isn’t terribly productive, so you’re not surprised when the flow of [hisher] seed tapers after only a few shots. You give [hisher] prostate one more push to draw the last stubborn rope from [himher] and then pull your fingers out.", parse);
 	Text.NL();
@@ -12840,7 +12840,7 @@ TerryScenes.SexHaveADrinkBreastsArousalFoxcock = function(parse : any) {
 		Text.Flush();
 		
 		//[Yes][No]
-		var options = new Array();
+		let options = new Array();
 		options.push({ nameStr : "Yes",
 			tooltip : Text.Parse("After that display of [hishers], you sure could use some help getting off yourself.", parse),
 			func : function() {
@@ -12886,7 +12886,7 @@ TerryScenes.SexHaveADrinkBreastsArousalFoxcock = function(parse : any) {
 		Text.Flush();
 		
 		//[Yes][No]
-		var options = new Array();
+		let options = new Array();
 		options.push({ nameStr : "Yes",
 			tooltip : Text.Parse("Since [heshe]’s offering, why not? After all, you’ve got an itch that could use some scratching...", parse),
 			func : function() {
@@ -12958,7 +12958,7 @@ TerryScenes.SexHaveADrinkBreastsArousalFoxcock = function(parse : any) {
 		Text.Flush();
 		
 		//[Sure][Later]
-		var options = new Array();
+		let options = new Array();
 		options.push({ nameStr : "Sure",
 			tooltip : "Sounds like a wonderful idea.",
 			func : function() {
@@ -12977,7 +12977,7 @@ TerryScenes.SexHaveADrinkBreastsArousalFoxcock = function(parse : any) {
 				Text.Flush();
 				
 				//[Give in][Don’t]
-				var options = new Array();
+				let options = new Array();
 				options.push({ nameStr : "Give in",
 					tooltip : Text.Parse("Well if [heshe]’s <i>that</i> thankful, you see no point in denying the [foxvixen] [hisher] fun.", parse),
 					func : function() {
@@ -13070,9 +13070,9 @@ TerryScenes.SexHaveADrinkBreastsArousalPussy = function(parse : any) {
 	Text.NL();
 	Text.Add("Tucking your head into the crook of the [foxvixen]’s neck, your arm gently snakes around [hisher] waist and rests itself upon [hisher] midriff. ", parse);
 	
-	var womb = terry.PregHandler().Womb();
-	var preg = womb && womb.pregnant;
-	var stage = womb && womb.progress;
+	let womb = terry.PregHandler().Womb();
+	let preg = womb && womb.pregnant;
+	let stage = womb && womb.progress;
 	
 	if(preg) {
 		if(stage > 0.75) {
@@ -13180,7 +13180,7 @@ TerryScenes.SexHaveADrinkBreastsArousalPussy = function(parse : any) {
 	Text.Add("<i>“[playername]! I think I’m about to- Ah!”</i>", parse);
 	Text.NL();
 	
-	var cum = terry.OrgasmCum();
+	let cum = terry.OrgasmCum();
 	
 	Text.Add("You can feel the [foxvixen]’s spine flexing as [heshe] arches [hisher] back, head turned skyward as if baying at some unseen moon. Thick femcum sprays from [hisher] pussy, squirting between its quenched lips and smearing over your dangling fingers.", parse);
 	Text.NL();
@@ -13211,7 +13211,7 @@ TerryScenes.SexHaveADrinkBreastsArousalPussy = function(parse : any) {
 		Text.NL();
 		Text.Add("That said, you adjust the weary [foxvixen] in your arms, cradling [himher] so that [heshe] can rest up. Despite [himher]self, Terry looks a little surprised at your generosity, but quietly accepts the offer.", parse);
 		Text.NL();
-		var gen = "";
+		let gen = "";
 		if(player.FirstCock()) gen += "your [cocks] starting to stiffen beneath [hisher] thighs";
 		if(player.FirstCock() && player.FirstVag()) gen += " and ";
 		if(player.FirstVag()) gen += "your [vag] starting to tingle with anticipation";
@@ -13222,7 +13222,7 @@ TerryScenes.SexHaveADrinkBreastsArousalPussy = function(parse : any) {
 		Text.Flush();
 		
 		//[Yes] [No]
-		var options = new Array();
+		let options = new Array();
 		options.push({ nameStr : "Yes",
 			tooltip : Text.Parse("Fair is fair; let your [foxvixen] pay you back, an orgasm for an orgasm.", parse),
 			func : function() {
@@ -13279,7 +13279,7 @@ TerryScenes.SexHaveADrinkBreastsArousalPussy = function(parse : any) {
 		Text.Flush();
 		
 		//[Yes] [No]
-		var options = new Array();
+		let options = new Array();
 		options.push({ nameStr : "Yes",
 			tooltip : Text.Parse("Why in the world would you turn [himher] down?", parse),
 			func : function() {
@@ -13325,7 +13325,7 @@ TerryScenes.SexHaveADrinkBreastsArousalPussy = function(parse : any) {
 		Text.Flush();
 		
 		//[Yes] [No]
-		var options = new Array();
+		let options = new Array();
 		options.push({ nameStr : "Yes",
 			tooltip : Text.Parse("Well, if [heshe] insists, why not?", parse),
 			func : function() {
@@ -13350,7 +13350,7 @@ TerryScenes.SexHaveADrinkBreastsArousalPussy = function(parse : any) {
 				Text.Flush();
 				
 				//[Give in] [Stay strong]
-				var options = new Array();
+				let options = new Array();
 				options.push({ nameStr : "Give in",
 					tooltip : Text.Parse("If [heshe]’s really so eager, why fight it?", parse),
 					func : function() {

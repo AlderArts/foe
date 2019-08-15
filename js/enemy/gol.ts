@@ -92,7 +92,7 @@ export class GolQueen extends BossEntity {
 	}
 
 	DropTable() {
-		var drops = [];
+		let drops = [];
 		drops.push({ it: QuestItems.Scepter });
 		drops.push({ it: WeaponsItems.GolClaw });
 		drops.push({ it: AlchemyItems.GestariumPlus });
@@ -121,15 +121,15 @@ export class GolQueen extends BossEntity {
 		Text.NL();
 		
 		// Pick a random target
-		var t = this.GetSingleTarget(encounter, activeChar);
+		let t = this.GetSingleTarget(encounter, activeChar);
 
-		var parseVars = {
+		let parseVars = {
 			name   : this.name,
 			hisher : this.hisher(),
 			tName  : t.name
 		};
 
-		var choice = Math.random();
+		let choice = Math.random();
 		if(choice < 0.2) //TODO
 			Abilities.Attack.CastInternal(encounter, this, t);
 		else if(choice < 0.4 && Abilities.EnemySkill.GolPollen.enabledCondition(encounter, this))
@@ -151,7 +151,7 @@ export class GolQueen extends BossEntity {
 GolScenes.SearchForScepter = function() {
 	let player = GAME().player;
 	let party : Party = GAME().party;
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	
@@ -166,7 +166,7 @@ GolScenes.SearchForScepter = function() {
 	TimeStep({minute: 30});
 	
 	//[Leave][Explore]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Leave",
 		func : function() {
 			Text.Clear();
@@ -208,10 +208,10 @@ GolScenes.SearchForScepter = function() {
 			Text.Flush();
 			
 			Gui.NextPrompt(function() {
-				var enemy = new Party();
-				var gol = new GolQueen();
+				let enemy = new Party();
+				let gol = new GolQueen();
 				enemy.AddMember(gol);
-				var enc : any = new Encounter(enemy);
+				let enc : any = new Encounter(enemy);
 				enc.gol = gol;
 				
 				enc.canRun = false;
@@ -229,11 +229,11 @@ GolScenes.SearchForScepter = function() {
 //TODO
 GolScenes.CombatLoss = function() {
 	let player = GAME().player;
-	var enc = this;
-	var gol = enc.gol;
+	let enc = this;
+	let gol = enc.gol;
 	SetGameState(GameState.Event, Gui);
 	
-	var parse : any = {
+	let parse : any = {
 		foot : function() { return player.FootDesc(); }
 	};
 	
@@ -250,9 +250,9 @@ GolScenes.CombatLoss = function() {
 	Text.Add("You're not going to give her the chance[lust]! You twist to the side and claw forward, giving yourself a half-dozen splinters in the process. The pain is nothing next to the fear[lust2] coursing through you.", parse);
 	Text.NL();
 	
-	var incubator : boolean;
+	let incubator : boolean;
 	
-	var scenes = new EncounterTable();
+	let scenes = new EncounterTable();
 	scenes.AddEnc(function() {
 		incubator = true;
 	}, 1.0, function() { return player.FirstVag(); });
@@ -285,7 +285,7 @@ GolScenes.CombatLoss = function() {
 
 GolScenes.CombatLossIncubator = function(gol : GolQueen) {
 	let player = GAME().player;
-	var parse : any = {
+	let parse : any = {
 		skinDesc : function() { return player.SkinDesc(); },
 		armor : function() { return player.ArmorDesc(); },
 		legs : function() { return player.LegsDesc(); },
@@ -324,9 +324,9 @@ GolScenes.CombatLossIncubator = function(gol : GolQueen) {
 
 GolScenes.CombatLossIncEntry = function(gol : GolQueen) {
 	let player = GAME().player;
-	var p1cock = player.BiggestCock();
+	let p1cock = player.BiggestCock();
 	
-	var parse : any = {
+	let parse : any = {
 		vagina : function() { return player.FirstVag().Short(); },
 		cocks : function() { return player.MultiCockDesc(); },
 		cock : function() { return p1cock.Short(); }
@@ -374,7 +374,7 @@ GolScenes.CombatLossIncEntry = function(gol : GolQueen) {
 		Text.Add("The Gol queen, your Queen, you realize, shoves harder, slamming her lengthy organ in to the hilt. You feel it slip past some obstruction inside you. Your womb, you realize through the haze of pleasure. Then she pulls back, waits a moment, and slams herself home, fully seating her egg-laying she-dick within your moist accommodations, forcing your cervix to dilate wide as its tip nuzzles at your fallopian tubes.", parse);
 		Text.NL();
 		
-		var cum = player.OrgasmCum();
+		let cum = player.OrgasmCum();
 		
 		parse["woman"] = player.mfFem("man", "woman");
 		Text.Add("You cum to the feeling of utter violation. If it weren’t for the steel-strong silk binding you in place, you’d be thrashing like a wild [woman]. ", parse);
@@ -426,9 +426,9 @@ GolScenes.CombatLossIncEntry = function(gol : GolQueen) {
 
 GolScenes.CombatLossDrone = function(gol : GolQueen) {
 	let player = GAME().player;
-	var p1cock = player.BiggestCock();
+	let p1cock = player.BiggestCock();
 	
-	var parse : any = {
+	let parse : any = {
 		vagina : function() { return player.FirstVag().Short(); },
 		cocks : function() { return player.MultiCockDesc(); },
 		cock : function() { return p1cock.Short(); },
@@ -440,7 +440,7 @@ GolScenes.CombatLossDrone = function(gol : GolQueen) {
 		butt : function() { return player.Butt().Short(); }
 	};
 	
-	var growcock = p1cock.Len() < 90;
+	let growcock = p1cock.Len() < 90;
 	
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	
@@ -484,7 +484,7 @@ GolScenes.CombatLossDrone = function(gol : GolQueen) {
 	player.Fuck(null, 4);
 	gol.Fuck(null, 4);
 	
-	var cum = player.OrgasmCum();
+	let cum = player.OrgasmCum();
 	
 	Text.Add("The Gol chitters in enthusiastic delight, stroking a humanoid hand through your [hair]. <i>“There there. Isn't it wonderful, drone? You're tasting your very purpose - nursing on the nectar of your new life. ", parse);
 	if(growcock)
@@ -546,11 +546,11 @@ GolScenes.CombatLossDrone = function(gol : GolQueen) {
 
 GolScenes.CombatWin = function() {
 	let player = GAME().player;
-	var enc = this;
-	var gol = enc.gol;
+	let enc = this;
+	let gol = enc.gol;
 	SetGameState(GameState.Event, Gui);
 	
-	var parse : any = {
+	let parse : any = {
 		feet : function() { return player.FeetDesc(); },
 		foot : function() { return player.FootDesc(); }
 	};
@@ -575,12 +575,12 @@ GolScenes.CombatWin = function() {
 		Text.Flush();
 		
 		//[Hyper fuck][Tailfuck][Cunnilingus][Scepter]
-		var options = new Array();
+		let options = new Array();
 		if(player.FirstCock()) {
-			var p1cock = player.BiggestCock();
+			let p1cock = player.BiggestCock();
 			
-			var cocksInTail = player.CocksThatFit(gol.FirstVag(), true);
-			var p2cock = player.BiggestCock(cocksInTail);
+			let cocksInTail = player.CocksThatFit(gol.FirstVag(), true);
+			let p2cock = player.BiggestCock(cocksInTail);
 			
 			options.push({ nameStr : "Hyper fuck",
 				func : function() {
@@ -631,10 +631,10 @@ GolScenes.CombatWin = function() {
 
 GolScenes.CombatWinHyperFuck = function(enc : any, p1cock : Cock) {
 	let player = GAME().player;
-	var gol = enc.gol;
-	var lusty = gol.LustLevel() >= 0.5;
+	let gol = enc.gol;
+	let lusty = gol.LustLevel() >= 0.5;
 	
-	var parse : any = {
+	let parse : any = {
 		cocks : function() { return player.MultiCockDesc(); },
 		cock  : function() { return p1cock.Short(); },
 		cockTip : function() { return p1cock.TipShort(); },
@@ -710,7 +710,7 @@ GolScenes.CombatWinHyperFuck = function(enc : any, p1cock : Cock) {
 	Text.Add("You feel the coiled tension of bubbling potentiality welling up from within, almost unbearable at this point. You can't say if you were close from the constant, rutting fuck you were giving her or if the honest, plaintive tone of the monstrous woman's request pushed you past your limits, but you are sure of one thing: you're going to cum, and cum hard. The coil inside you twists into an overtensioned spring, and then it releases - you release, arching your back as your [b], pumping thick wads of goo through your plus-sized tool. You feel like a living bolt of white-hot lightning, grounding through the pulsating walls of your mantis lover.", parse);
 	Text.NL();
 	
-	var cum = player.OrgasmCum();
+	let cum = player.OrgasmCum();
 	
 	if(cum > 6) {
 		Text.Add("You erupt into her cavern, flooding it with spurts that could easily fill buckets. Alabaster cream froths around from her lips, cascading down her abdomen. Every inch of her alien vagina is painted white, marinated in fuck-juice.", parse);
@@ -737,10 +737,10 @@ GolScenes.CombatWinHyperFuck = function(enc : any, p1cock : Cock) {
 
 GolScenes.CombatWinTailfuck = function(enc : any, p1cock : Cock) {
 	let player = GAME().player;
-	var gol = enc.gol;
-	var lusty = gol.LustLevel() >= 0.5;
+	let gol = enc.gol;
+	let lusty = gol.LustLevel() >= 0.5;
 	
-	var parse : any = {
+	let parse : any = {
 		cocks : function() { return player.MultiCockDesc(); },
 		cock  : function() { return p1cock.Short(); },
 		cockTip : function() { return p1cock.TipShort(); },
@@ -788,14 +788,14 @@ GolScenes.CombatWinTailfuck = function(enc : any, p1cock : Cock) {
 	TimeStep({hour: 1});
 	
 	//[Inside] [Outside]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Outside",
 		func : function() {
 			Text.Clear();
 			Text.Add("Not seeing any point in giving her any bastards to remember you by, you yank your hips backward as pleasure overwhelms you. Your [cocks] give[notS] one last fitful pulse before finally releasing, throwing long ropes of seed into the air.", parse);
 			Text.NL();
 			
-			var cum = player.OrgasmCum();
+			let cum = player.OrgasmCum();
 			
 			if(cum > 6) {
 				Text.Add("They splatter so heavily that the first two effectively glaze her emerald chitin, and the cummy bursts that follow cause a rain of spunk to fall on the ground below.", parse);
@@ -827,7 +827,7 @@ GolScenes.CombatWinTailfuck = function(enc : any, p1cock : Cock) {
 			Text.Add("The realization that she's orgasming hits you about the same time as your own.", parse);
 			Text.NL();
 			
-			var cum = player.OrgasmCum();
+			let cum = player.OrgasmCum();
 			
 			if(cum > 6) {
 				Text.Add("Your first blast feels more like releasing a pressurized vessel than firing a rope of cum, and it floods her passage to capacity in short order. You gasp a quick breath just before the second starts, bracing yourself for the onslaught of white-hot pleasure that accompanies the feeling of flooding the mantis's middle. Cascades of jism flow out of her tailcunt's entrance, but nowhere near the volume that you're putting in. You swear that her insectile abdomen is actually inflating with the immense, virile load. She doesn't offer comment, too busy looking at you with a kind of sated wonder on her face.", parse);
@@ -857,11 +857,11 @@ GolScenes.CombatWinTailfuck = function(enc : any, p1cock : Cock) {
 
 GolScenes.CombatWinCunn = function(enc : any) {
 	let player = GAME().player;
-	var gol = enc.gol;
-	var lusty = gol.LustLevel() >= 0.5;
-	var p1cock = player.BiggestCock();
+	let gol = enc.gol;
+	let lusty = gol.LustLevel() >= 0.5;
+	let p1cock = player.BiggestCock();
 	
-	var parse : any = {
+	let parse : any = {
 		cocks : function() { return player.MultiCockDesc(); },
 		cock  : function() { return p1cock.Short(); },
 		cockTip : function() { return p1cock.TipShort(); },
@@ -908,7 +908,7 @@ GolScenes.CombatWinCunn = function(enc : any) {
 	Text.Add("The air is redolent with the sounds of gushing-wet vaginas being serviced. With the heated tongue lodged deep inside you, licking at your cervix as it contorts, you feel like you're more red-hot furnace than girl. If it rained, you'd probably kick up a cloud of steam. Everything smells muggy with the scent of need and fuck. The Gol's pheromone charged cunt may hang thick in the air, but the scent of your [vagina] is there too. It's a lighter note in a bouquet of sexual perfume. Riding high in the scents and sounds of your victory tryst, you thrust your mound harder against the bug slut's face, grinding your way to an orgasm you couldn't have avoided if you wanted to.", parse);
 	Text.NL();
 	
-	var cum = player.OrgasmCum();
+	let cum = player.OrgasmCum();
 	
 	if(player.FirstCock()) {
 		parse["ItThey"] = player.NumCocks() > 1 ? "They" : "It";
@@ -944,7 +944,7 @@ GolScenes.CombatWinCunn = function(enc : any) {
 	player.AddLustFraction(1);
 	
 	//[Stick It In] [Scepter]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Stick it in",
 		func : function() {
 			Text.Clear();
@@ -974,7 +974,7 @@ GolScenes.CombatWinCunn = function(enc : any) {
 }
 
 GolScenes.CombatAftermath = function(enc : any) {
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	

@@ -49,14 +49,14 @@ export class Event {
 	
 	AddEncounter(opts? : any) {
 		opts = opts || {};
-		var nameStr = opts.nameStr || "";
-		var desc    = opts.desc;
-		var func    = opts.func;
-		var cond    = opts.cond;
-		var visible = opts.visible;
-		var enabled = opts.enabled;
-		var odds    = opts.odds;
-		var obj     = opts.obj;
+		let nameStr = opts.nameStr || "";
+		let desc    = opts.desc;
+		let func    = opts.func;
+		let cond    = opts.cond;
+		let visible = opts.visible;
+		let enabled = opts.enabled;
+		let odds    = opts.odds;
+		let obj     = opts.obj;
 
 		if(opts.enc)
 			this.enc.AddEnc(func, odds, cond, obj);
@@ -65,7 +65,7 @@ export class Event {
 				nameStr, visible, enabled,
 				desc,
 				function() {
-					var enc = func();
+					let enc = func();
 					if(enc) {
 						if(enc.Start)
 							enc.Start();
@@ -94,7 +94,7 @@ export class Event {
 		Text.Flush();
 		Gui.NextPrompt(function() {
 			Text.Clear();
-			var func = function() {
+			let func = function() {
 				TimeStep({hour: 8});
 				GAME().party.Sleep();
 
@@ -111,7 +111,7 @@ export class Event {
 		Text.Add("How long do you want to wait?");
 		Text.Flush();
 
-		var options = new Array();
+		let options = new Array();
 		options.push({ nameStr : "Half hour",
 			tooltip : "Wait for half an hour.",
 			func : function() {
@@ -202,8 +202,8 @@ export class Event {
 	}
 
 	DrunkHandler = function() {
-		var parse : any = {};
-		var comp = GAME().party.GetRandom();
+		let parse : any = {};
+		let comp = GAME().party.GetRandom();
 		Text.Clear();
 		if(comp) {
 			parse["name"]  = comp.name;
@@ -222,7 +222,7 @@ export class Event {
 	}
 
 	SetButtons(links : any[]) {
-		var list = [];
+		let list = [];
 
 		if(!links) {
 			links = [];
@@ -235,13 +235,13 @@ export class Event {
 			});
 		}
 
-		for(var i = 0; i < links.length; i++) {
-			var link = links[i];
+		for(let i = 0; i < links.length; i++) {
+			let link = links[i];
 
-			var visible = _.isFunction(link.visibleCondition) ? link.visibleCondition() : link.visibleCondition;
+			let visible = _.isFunction(link.visibleCondition) ? link.visibleCondition() : link.visibleCondition;
 			if(!visible) continue;
-			var enabled = _.isFunction(link.enabledCondition) ? link.enabledCondition() : link.enabledCondition;
-			var nameStr = _.isFunction(link.name) ? link.name() : link.name;
+			let enabled = _.isFunction(link.enabledCondition) ? link.enabledCondition() : link.enabledCondition;
+			let nameStr = _.isFunction(link.name) ? link.name() : link.name;
 
 			list.push({nameStr: nameStr, func: link.func, enabled: enabled, tooltip: link.tooltip, image: link.image});
 			//Input.buttons[i].Setup(nameStr, link.func, enabled);
@@ -260,8 +260,8 @@ export class Event {
 				Text.Add(this.description);
 		}
 
-		for(var i = 0; i < this.links.length; i++) {
-			var link = this.links[i];
+		for(let i = 0; i < this.links.length; i++) {
+			let link = this.links[i];
 			if(link.print) {
 				if(_.isFunction(link.print))
 					link.print();
@@ -270,8 +270,8 @@ export class Event {
 			}
 		}
 
-		for(var i = 0; i < this.events.length; i++) {
-			var e = this.events[i];
+		for(let i = 0; i < this.events.length; i++) {
+			let e = this.events[i];
 			if(e.print) {
 				if(_.isFunction(e.print))
 					e.print();

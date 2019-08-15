@@ -107,7 +107,7 @@ export class Equine extends Entity {
 	}
 
 	DropTable() {
-		var drops = [];
+		let drops = [];
 		if(Math.random() < 0.05) drops.push({ it: AlchemyItems.Equinium });
 		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HorseHair });
 		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HorseShoe });
@@ -135,15 +135,15 @@ export class Equine extends Entity {
 		Text.Flush();
 
 		// Pick a random target
-		var t = this.GetSingleTarget(encounter, activeChar);
+		let t = this.GetSingleTarget(encounter, activeChar);
 
-		var parseVars = {
+		let parseVars = {
 			name   : this.name,
 			hisher : this.hisher(),
 			tName  : t.name
 		};
 
-		var choice = Math.random();
+		let choice = Math.random();
 		if(choice < 0.6)
 			Abilities.Attack.Use(encounter, this, t);
 		else if(choice < 0.8 && Abilities.Physical.Bash.enabledCondition(encounter, this))
@@ -167,17 +167,17 @@ EquineScenes.StallionImpregnate = function(mother : Entity, father : Equine, slo
 }
 
 EquineScenes.PairEnc = function(levelbonus : number) {
-	var enemy    = new Party();
-	var stallion = new Equine(Gender.male, levelbonus);
-	var mare     = new Equine(Gender.female, levelbonus);
+	let enemy    = new Party();
+	let stallion = new Equine(Gender.male, levelbonus);
+	let mare     = new Equine(Gender.female, levelbonus);
 	enemy.AddMember(stallion);
 	enemy.AddMember(mare);
-	var enc : any = new Encounter(enemy);
+	let enc : any = new Encounter(enemy);
 	enc.stallion = stallion;
 	enc.mare     = mare;
 
 	enc.onEncounter = function() {
-		var parse : any = {
+		let parse : any = {
 			party         : !GAME().party.Alone() ? " and your party" : "",
 			breastCup : enc.mare.FirstBreastRow().ShortCup()
 		};
@@ -216,9 +216,9 @@ EquineScenes.LossPrompt = function() {
 	SetGameState(GameState.Event, Gui);
 	
 	// this = encounter
-	var enc = this;
+	let enc = this;
 
-	var parse : any = {
+	let parse : any = {
 		party         : !party.Alone() ? " and your party" : "",
 		hisher1       : enc.stallion.hisher(),
 		heshe1        : enc.stallion.heshe(),
@@ -232,12 +232,12 @@ EquineScenes.LossPrompt = function() {
 	};
 	enc.parse = parse;
 	
-	var lustBonus = enc.mare.LustLevel() + enc.stallion.LustLevel();
+	let lustBonus = enc.mare.LustLevel() + enc.stallion.LustLevel();
 
 	Gui.Callstack.push(function() {
 		Text.Clear();
 		
-		var scenes = new EncounterTable();
+		let scenes = new EncounterTable();
 		scenes.AddEnc(function() {
 			Text.Add("You[party] collapse, unable to dispute the equine couple's victory. The two approach you, the stallion eyeing your crumpled figure with desire.", parse);
 			Text.NL();
@@ -289,7 +289,7 @@ EquineScenes.LossPrompt = function() {
 			// SET UP CHOICES
 
 			//[Fuck her][Get fucked][Threesome][No]
-			var options = new Array();
+			let options = new Array();
 			if(player.NumCocks() > 0) {
 				options.push({ nameStr : "Fuck her",
 					func : function() {
@@ -351,7 +351,7 @@ EquineScenes.LossPrompt = function() {
 EquineScenes.FuckFemale = function(enc : any) {
 	let player = GAME().player;
 	let party : Party = GAME().party;
-	var parse : any = {		
+	let parse : any = {		
 		mobVag : function() { return enc.mare.FirstVag().Short(); }
 	};
 	
@@ -396,7 +396,7 @@ EquineScenes.FuckFemale = function(enc : any) {
 	Text.Flush();
 
 	//[Inside][Tits][Face]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Inside",
 		func : function() {
 			Text.Clear();
@@ -459,7 +459,7 @@ EquineScenes.FuckFemale = function(enc : any) {
 
 EquineScenes.GetFucked = function(enc : any) {
 	let player = GAME().player;
-	var parse : any = {		
+	let parse : any = {		
 		ifArmor    : player.Armor() ? "strips you down to full nudity" : "runs them down your naked body"
 	};
 	
@@ -522,7 +522,7 @@ EquineScenes.GetFucked = function(enc : any) {
 // SCENE FOR MALES/HERMS
 EquineScenes.Threesome1 = function(enc : any) {
 	let player = GAME().player;
-	var parse : any = {		
+	let parse : any = {		
 		mobVag : function() { return enc.mare.FirstVag().Short(); },		
 		ifBalls  : function() { return player.HasBalls() ? "r balls" : ""; }
 	};
@@ -597,7 +597,7 @@ EquineScenes.Threesome1 = function(enc : any) {
 
 EquineScenes.Threesome2 = function(enc : any) {
 	let player = GAME().player;
-	var parse : any = {		
+	let parse : any = {		
 		mobVag : function() { return enc.mare.FirstVag().Short(); }
 	};
 	
@@ -648,10 +648,10 @@ EquineScenes.Threesome2 = function(enc : any) {
 EquineScenes.WinPrompt = function() {
 	let player = GAME().player;
 	let party : Party = GAME().party;
-	var enc  = this;
+	let enc  = this;
 	SetGameState(GameState.Event, Gui);
 
-	var parse : any = {
+	let parse : any = {
 
 	};
 
@@ -668,7 +668,7 @@ EquineScenes.WinPrompt = function() {
 		Text.Flush();
 
 		//[name]
-		var options = new Array();
+		let options = new Array();
 		if(player.FirstCock()) {
 			options.push({ nameStr : "Fuck her",
 				func : function() {
@@ -715,19 +715,19 @@ EquineScenes.WinPrompt = function() {
 EquineScenes.WinFuckHim = function(enc : any) {
 	let player = GAME().player;
 	let party : Party = GAME().party;
-	var mare     = enc.mare;
-	var stallion = enc.stallion;
+	let mare     = enc.mare;
+	let stallion = enc.stallion;
 
-	var p1cock = player.BiggestCock();
-	var allCocks = player.AllCocksCopy();
-	for(var i = 0; i < allCocks.length; i++) {
+	let p1cock = player.BiggestCock();
+	let allCocks = player.AllCocksCopy();
+	for(let i = 0; i < allCocks.length; i++) {
 		if(allCocks[i] == p1cock) {
 			allCocks.splice(i, 1);
 			break;
 		}
 	}
 
-	var parse : any = {		
+	let parse : any = {		
 		cocks2 : function() { return player.MultiCockDesc(allCocks); }
 	};
 
@@ -742,7 +742,7 @@ EquineScenes.WinFuckHim = function(enc : any) {
 	else
 		parse["party"] = "";
 
-	var longCock = p1cock.Len() > 25;
+	let longCock = p1cock.Len() > 25;
 
 	Text.Clear();
 	Text.Add("As you[party] stand down, you can't help but glare at the prone stallion. Throughout the skirmish, something about his overconfident demeanor rubbed you the wrong way. It might behoove him to experience a dose of humility, lest that inflated sense of superiority leads him into trouble someday - or trouble into him, as it were. A sly grin creases your lips at this as you decide that the only fitting recompense would be for him to rub you the <i>right</i> way... and not with his hands, either.", parse);
@@ -777,7 +777,7 @@ EquineScenes.WinFuckHim = function(enc : any) {
 	TimeStep({minute: 10});
 
 	//[Get blown] [Fuck his ass]
-	var options = new Array();
+	let options = new Array();
 	options.push({ nameStr : "Get blown",
 		tooltip : "Time to put a cock in that cocky mouth of his.",
 		func : function() {
@@ -857,7 +857,7 @@ EquineScenes.WinFuckHim = function(enc : any) {
 						TimeStep({minute: 20});
 
 						//[Cum Inside] [Cum Outside]
-						var options = new Array();
+						let options = new Array();
 						options.push({ nameStr : "Cum inside",
 							tooltip : "Down the hatch!",
 							func : function() {
@@ -867,7 +867,7 @@ EquineScenes.WinFuckHim = function(enc : any) {
 								Text.Add("With a guttural roar, you shove the stallion's nose against your pelvis with brutal force, burying your length firmly in his [throatMuzzle] as white-hot cream explodes from your tip. You shudder as waves of ecstasy overtake you, your whole body shaking with each gush of sperm that blasts its way directly into your new cockslut's waiting [stomachMouth].", parse);
 								Text.NL();
 
-								var cum = player.OrgasmCum();
+								let cum = player.OrgasmCum();
 
 								if(player.NumCocks() > 2)
 									Text.Add("The rest of your [cocks2] do a splendid job of glazing his face, his chest, and most everything else in the immediate vicinity. It quickly becomes a rather large mess. ", parse);
@@ -915,7 +915,7 @@ EquineScenes.WinFuckHim = function(enc : any) {
 								Text.Add("You pull back sharply so that your rigid shaft frees itself from the stallion's lips with an audible pop. Surprised by the sudden action, the stallion emits something between a grunt and a frustrated groan; but he can tell you are on the verge of orgasm, so he opens his mouth and lets his tongue hang out expectantly. All at once, your climax crashes over you like a tidal wave, and you cannot contain your load as it explodes from your [cocks] and arcs through the air, directly at the equine's upturned face.", parse);
 								Text.NL();
 
-								var cum = player.OrgasmCum();
+								let cum = player.OrgasmCum();
 
 								if(cum > 3) {
 									Text.Add("A veritable tsunami of spooge hits the poor stud full in the mouth with such force that it rocks him backward slightly, causing him to sputter and cough. He doesn't get much respite as another blast quickly follows the first, catching him in the chin and painting his neck and chest white.", parse);
@@ -1049,7 +1049,7 @@ EquineScenes.WinFuckHim = function(enc : any) {
 						TimeStep({minute: 30});
 
 						//[CumInside][CumOutside]
-						var options = new Array();
+						let options = new Array();
 						options.push({ nameStr : "Cum inside",
 							tooltip : "Pump the slut full of cum!",
 							func : function() {
@@ -1057,7 +1057,7 @@ EquineScenes.WinFuckHim = function(enc : any) {
 								Text.Add("The submissive display sends you over the edge; you plant your hands over his and pull him forcefully back against you as you thrust forward with pelvis-bruising force, burying your [cock] to the hilt inside his pliant hole. You cry out as a blast of hot cum travels up your shaft to explode in the equine’s bowels.", parse);
 								Text.NL();
 
-								var cum = player.OrgasmCum();
+								let cum = player.OrgasmCum();
 
 								if(cum > 3) {
 									Text.Add("A veritable tsunami of spooge catches the stallion off guard, and he emits a loud grunt as the flood fills him to capacity in an instant. The feeling of your seed gushing inside him makes the equine’s prick jump, his anus squeezing you tightly as a minigasm ripples through his frame. The additional stimulation just cranks your loins into overdrive, and the stallion’s grunt becomes a wail as more and more of your thick spunk swells his gut like a balloon. But rather than pull away, the stud seems intent on proving himself to you; his hands beneath yours pull his ass even wider, and he pushes his rump against you to keep your shaft lodged all the way to the hilt. You feel him clamp down, determined not to let a drop of your load escape until you are completely spent even as his stomach expands to a dangerous level.", parse);
@@ -1100,7 +1100,7 @@ EquineScenes.WinFuckHim = function(enc : any) {
 								Text.Add("The submissive display sends you over the edge; you plant your hands over his and pull out of him forcefully, leaving his pliant hole gaped and spasming as if begging for more cock. You cry out as a blast of hot cum travels up your shaft[s], exploding from your tip[s] in a white, creamy rain.", parse);
 								Text.NL();
 
-								var cum = player.OrgasmCum();
+								let cum = player.OrgasmCum();
 
 								if(cum > 3) {
 									Text.Add("The stallion is unprepared for the gallons of spooge pouring down upon him. He gasps as the first deluge crashes over his ass and back, then moans as the sticky shower continues to drench him in pulses of your heated seed. He continues spreading his ass wide open for you, ensuring that a sizable amount still gets deep inside him. He tries to turn his head to watch as you finish, and ends up getting a mouthful of sperm for his trouble - which he swallows without complaint. Apparently, he's fully resigned himself to be your bitch, what dignity he had eroded to nothing by the pleasure you have bestowed. Were your mind not occupied with the thrill of orgasm rocking your body, you would offer him more praise. For now, gratuitous amounts of sperm will have to serve as a reward until you can think straight again.", parse);
@@ -1151,10 +1151,10 @@ EquineScenes.WinFuckHim = function(enc : any) {
 EquineScenes.WinFuckHer = function(enc : any) {
 	let player = GAME().player;
 	let party : Party = GAME().party;
-	var mare     = enc.mare;
-	var stallion = enc.stallion;
+	let mare     = enc.mare;
+	let stallion = enc.stallion;
 
-	var parse : any = {
+	let parse : any = {
 		
 	};
 
@@ -1260,7 +1260,7 @@ EquineScenes.WinFuckHer = function(enc : any) {
 				Text.Add("The telling warmth begins to spread across your nethers and you concentrate on cramming your [cocks] as hard and deep into the equine woman's unresisting hole[s] as possible. Each thrust sends her plush breasts bouncing, the sight bringing you that much closer to unleashing your essence within her. Suddenly, you hear the sound of the stallion's almost apologetic groan of pleasure as cum fountains from his equine dong, raining down upon him and coating him in a thick film of his own pathetic seed. That is all it takes to finally push you over the edge.", parse);
 				Text.NL();
 
-				var cum = player.OrgasmCum();
+				let cum = player.OrgasmCum();
 
 				if(cum > 3) {
 					Text.Add("You ram your crotch into the mare and roar as a flood of cum bursts from your [cocks], whitewashing her orifice[s] and filling [itThem] beyond capacity. Despite the size of her equine tunnel[s], you manage to make her gut swell outward a bit as you fire copious loads of spunk into her waiting canal[s].", parse);
@@ -1292,10 +1292,10 @@ EquineScenes.WinFuckHer = function(enc : any) {
 
 EquineScenes.WinRideHimVag = function(enc : any) {
 	let player = GAME().player;
-	var mare     = enc.mare;
-	var stallion = enc.stallion;
+	let mare     = enc.mare;
+	let stallion = enc.stallion;
 
-	var parse : any = {
+	let parse : any = {
 		
 	};
 	
@@ -1412,7 +1412,7 @@ EquineScenes.WinRideHimVag = function(enc : any) {
 					Text.Add("Out of reflex, the stallion bucks his hips upward just as you happen to be descending. The slight change in angle is enough to rub the top of his shaft against a very special spot, while the extra force pushes the flared head fractionally deeper inside your aching chasm. Lightning shoots up your spine and back down to your groin, followed by an explosion of white-hot pleasure that causes every muscle in your body to contract. Your [vag] clamps down on the stallion's prick with a death grip – tight enough to be painful, if his low whine is any indication – and you scream your climax to the heavens, clutching at your [breasts] as tremors wrack your frame from top to bottom.", parse);
 					Text.NL();
 
-					var cum = player.OrgasmCum();
+					let cum = player.OrgasmCum();
 
 					if(player.FirstCock()) {
 						if(cum > 6) {

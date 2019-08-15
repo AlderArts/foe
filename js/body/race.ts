@@ -60,7 +60,7 @@ export class RaceDesc {
 	}
 
 	Desc(gender? : Gender) {
-		var desc = this.desc;
+		let desc = this.desc;
 		if(_.isNumber(gender)) {
 			if(gender == Gender.male)
 				desc = desc.concat(this.descMale);
@@ -73,33 +73,33 @@ export class RaceDesc {
 
 	// Checks if this race (or any of its parents)
 	isRace(...args : RaceDesc[]) {
-		for(var i = 0; i < args.length; ++i)
+		for(let i = 0; i < args.length; ++i)
 			if(this == args[i]) return true;
 		if(this.superclass) return RaceDesc.prototype.isRace.apply(this.superclass, args);
 		return false;
 	}
 	// Checks if this race (not parents)
 	isRaceNotParent(...args : RaceDesc[]) {
-		for(var i = 0; i < args.length; ++i)
+		for(let i = 0; i < args.length; ++i)
 			if(this == args[i]) return true;
 		return false;
 	}
 
 	Short(gender? : Gender) {
-		var desc = _.sample(this.Desc(gender));
+		let desc = _.sample(this.Desc(gender));
 		return desc ? desc.noun : ("ERROR in " + this.name + ".Short()");
 	}
 	CShort(gender? : Gender) {
-		var desc = _.sample(this.Desc(gender));
+		let desc = _.sample(this.Desc(gender));
 		return desc ? _.capitalize(desc.noun) : ("ERROR in " + this.name + ".CShort()");
 	}
 	aShort(gender? : Gender) {
-		var desc = _.sample(this.Desc(gender));
+		let desc = _.sample(this.Desc(gender));
 		return desc ? (desc.a + " " + desc.noun) : ("ERROR in " + this.name + ".aShort()");
 	}
 
 	Quantifier(gender? : Gender) {
-		var quantify = this.quantify;
+		let quantify = this.quantify;
 		if(_.isNumber(gender)) {
 			if(gender == Gender.male)
 				quantify = quantify.concat(this.quantifyMale);
@@ -111,15 +111,15 @@ export class RaceDesc {
 	}
 
 	qShort(gender? : Gender) {
-		var desc = _.sample(this.Quantifier(gender));
+		let desc = _.sample(this.Quantifier(gender));
 		return desc ? desc.noun : ("ERROR in " + this.name + ".qShort()");
 	}
 	qCShort(gender? : Gender) {
-		var desc = _.sample(this.Quantifier(gender));
+		let desc = _.sample(this.Quantifier(gender));
 		return desc ? _.capitalize(desc.noun) : ("ERROR in " + this.name + ".qCShort()");
 	}
 	aqShort(gender? : Gender) {
-		var desc = _.sample(this.Quantifier(gender));
+		let desc = _.sample(this.Quantifier(gender));
 		return desc ? (desc.a + " " + desc.noun) : ("ERROR in " + this.name + ".aqShort()");
 	}
 
@@ -132,7 +132,7 @@ export class RaceScore {
 	constructor(body? : any) {
 		this.score = [];
 		// Init
-		for(var race = 0; race < RaceDesc.Num; race++)
+		for(let race = 0; race < RaceDesc.Num; race++)
 			this.score[race] = 0;
 		
 		this.len = 1;
@@ -149,17 +149,17 @@ export class RaceScore {
 			this.score[body.arms.race.id]++;
 			this.score[body.legs.race.id]++;
 			
-			for(var i = 0; i < body.cock.length; i++)
+			for(let i = 0; i < body.cock.length; i++)
 				this.score[body.cock[i].race.id]++;
 			if(body.balls.count.Get() > 0) this.score[body.balls.race.id]++;
-			for(var i = 0; i < body.backSlots.length; i++)
+			for(let i = 0; i < body.backSlots.length; i++)
 				this.score[body.backSlots[i].race.id]++;
-			for(var i = 0; i < body.head.appendages.length; i++)
+			for(let i = 0; i < body.head.appendages.length; i++)
 				this.score[body.head.appendages[i].race.id]++;
 			
 			// Specific attributes
 			// KNOT (CANID)
-			for(var i = 0; i < body.cock.length; i++) {
+			for(let i = 0; i < body.cock.length; i++) {
 				if(body.cock[i].knot) {
 					this.score[Race.Canine.id]++;
 				}
@@ -175,7 +175,7 @@ export class RaceScore {
 			
 			this.len = 0;
 			// EQUALIZE
-			for(var race = 0; race < RaceDesc.Num; race++)
+			for(let race = 0; race < RaceDesc.Num; race++)
 				this.len += Math.pow(this.score[race], 2);
 			this.len = Math.sqrt(this.len);
 		}
@@ -184,8 +184,8 @@ export class RaceScore {
 
 	// Produces a value between 0 and 1 for how similar the vectors are
 	Compare(racescore : RaceScore) {
-		var dot = 0;
-		for(var race = 0; race < RaceDesc.Num; race++) {
+		let dot = 0;
+		for(let race = 0; race < RaceDesc.Num; race++) {
 			dot += this.score[race] * racescore.score[race];
 		};
 		// Euclidian dot product
@@ -193,8 +193,8 @@ export class RaceScore {
 	}
 
 	SumRace(race : RaceDesc) {
-		var that = this;
-		var sum = that.score[race.id];
+		let that = this;
+		let sum = that.score[race.id];
 		_.each(race.children, function(r) {
 			sum += that.SumRace(r);
 		});
@@ -208,15 +208,15 @@ export class RaceScore {
 	}
 
 	Sorted() {
-		var copiedScore = [];
-		var sorted = [];
-		for(var i = 0; i < RaceDesc.Num; i++)
+		let copiedScore = [];
+		let sorted = [];
+		for(let i = 0; i < RaceDesc.Num; i++)
 			copiedScore[i] = this.score[i];
 		
-		for(var num = 0; num < RaceDesc.Num; num++) {	
-			var highest    = -1;
-			var highestIdx =  0;
-			for(var i = 0; i < RaceDesc.Num; i++) {
+		for(let num = 0; num < RaceDesc.Num; num++) {	
+			let highest    = -1;
+			let highestIdx =  0;
+			for(let i = 0; i < RaceDesc.Num; i++) {
 				if(copiedScore[i] > highest) {
 					highest    = copiedScore[i];
 					highestIdx = i;
