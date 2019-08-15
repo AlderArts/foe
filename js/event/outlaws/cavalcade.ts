@@ -18,7 +18,7 @@ export namespace OCavalcadeScenes {
 		const player = GAME().player;
 		const party: Party = GAME().party;
 
-		const onEnd = function() {
+		const onEnd = () => {
 			const parse: any = {
 				playername : player.name,
 			};

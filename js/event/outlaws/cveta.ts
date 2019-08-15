@@ -83,8 +83,8 @@ export class Cveta extends Entity {
 	}
 
 	public FromStorage(storage: any) {
-		this.FirstVag().virgin   = parseInt(storage.virgin) == 1;
-		this.Butt().virgin       = parseInt(storage.avirgin) == 1;
+		this.FirstVag().virgin   = parseInt(storage.virgin, 10) === 1;
+		this.Butt().virgin       = parseInt(storage.avirgin, 10) === 1;
 
 		this.violinTimer.FromStorage(storage.Vtime);
 		this.flirtTimer.FromStorage(storage.Ftime);
@@ -98,7 +98,7 @@ export class Cveta extends Entity {
 	}
 
 	public ToStorage() {
-		let storage: any = {
+		const storage: any = {
 			virgin  : this.FirstVag().virgin ? 1 : 0,
 			avirgin : this.Butt().virgin ? 1 : 0,
 		};

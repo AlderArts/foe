@@ -90,7 +90,7 @@ export class Aquilius extends Entity {
 	// Schedule TODO
 	public IsAtLocation(location?: any) {
 		location = location || GAME().party.location;
-		if (location == WORLD().loc.Outlaws.Infirmary) {
+		if (location === WORLD().loc.Outlaws.Infirmary) {
 			return (WorldTime().hour >= 7 && WorldTime().hour < 22);
 		}
 		return false;
@@ -280,28 +280,28 @@ export namespace AquiliusScenes {
 			const day = WorldTime().hour < 17;
 
 			if (day) {
-				scenes.AddEnc(function() {
+				scenes.AddEnc(() => {
 					Text.Add("He’s currently busy with mortar and pestle, pounding away at a mixture of various grasses. As you watch, he mixes the lot with a cupful of warm water, then strains the lot with a fine cloth; the resultant foul-smelling mixture is then poured into a basin of water in which several bandages have been left to soak. Done with this task, he finally turns and pays attention to you.", parse);
 				});
-				scenes.AddEnc(function() {
+				scenes.AddEnc(() => {
 					Text.Add("Aquilius is enjoying a quick smoke break, his pipe clenched in his beak as he stares out a window at the rest of the camp. Noticing you watching him, the surgeon removes his pipe and knocks out the ashes with a quick swat of his hand.", parse);
 				});
-				scenes.AddEnc(function() {
+				scenes.AddEnc(() => {
 					Text.Add("<i>“You’re not ill. You just overstuffed yourself and lazed about too much, and it’s gotten to you. Eat less and do more useful work, and you’ll be fine.”</i> With a shake of his head, the surgeon sends his current patient storming out of the tent, then turns to you.", parse);
 				});
-				scenes.AddEnc(function() {
+				scenes.AddEnc(() => {
 					Text.Add("He’s currently swabbing the operating table with a harsh-smelling mixture, based in alcohol if your nose isn’t wrong. Eyes furrowed and face grim, he doesn’t notice your approach at all, not until the last square inch has been scrubbed to satisfaction. It’s a good fifteen minutes before he’s done, but when he is, he lets out a slow sigh and turns to you.", parse);
 				});
 			} else {
-				scenes.AddEnc(function() {
+				scenes.AddEnc(() => {
 					Text.Add("He’s currently cloistered himself in the back of the tent, leaning back in a chair with his eyes closed and wings folded as he draws deeply from a large, ornate pipe carved from hardwood. Even at this distance, you can smell the psychedelic smoke rising from it - whatever’s in there, it certainly isn’t tobacco. As you approach, though, he opens an eye to regard you, although his gaze is clearly more than a little glazed.", parse);
 				});
-				scenes.AddEnc(function() {
+				scenes.AddEnc(() => {
 					Text.Add("Even at this late hour, the surgeon is at work, having picked a handful of yellow mushrooms from the log and drying them on a grill over the low heat of the burner. Odd… come to think of it, you’ve never seen him <i>use</i> the mushrooms for anything.", parse);
 					Text.NL();
 					Text.Add("He tilts his head to regard you as you draw close.", parse);
 				});
-				scenes.AddEnc(function() {
+				scenes.AddEnc(() => {
 					Text.Add("He’s seated in the back, puffing away at a fragrant mix of various flowers and leaves in his pipe, a half-eaten dinner cooling on a small folding table at his side. Perched in his lap is a book - one filled with thin, spidery writing and many sketched diagrams - and it’s from this that he peers up as you approach.", parse);
 				});
 			}
@@ -378,7 +378,7 @@ export namespace AquiliusScenes {
 			/* TODO
 			options.push({ nameStr : "Talk",
 				tooltip : "",
-				func : function() {
+				func : () => {
 					Text.Clear();
 					Text.Add("", parse);
 					Text.NL();
@@ -388,7 +388,7 @@ export namespace AquiliusScenes {
 			});
 			*/
 		}
-		Gui.SetButtonsFromList(options, true, function() {
+		Gui.SetButtonsFromList(options, true, () => {
 			if (WorldTime().hour < 17) {
 				Gui.PrintDefaultOptions();
 				return;
@@ -442,7 +442,7 @@ export namespace AquiliusScenes {
 		*
 		options.push({ nameStr : "name",
 			tooltip : "",
-			func : function() {
+			func : () => {
 				Text.Clear();
 				Text.Add("", parse);
 				Text.NL();
@@ -451,7 +451,7 @@ export namespace AquiliusScenes {
 			}, enabled : true
 		});
 		*/
-		Gui.SetButtonsFromList(options, true, function() {
+		Gui.SetButtonsFromList(options, true, () => {
 			Text.Clear();
 			Text.Add("<i>“Hm, sure. Let’s just take a moment to relax, then.”</i>", parse);
 			Text.Flush();
@@ -609,36 +609,36 @@ export namespace AquiliusScenes {
 		Text.NL();
 
 		let scenes = new EncounterTable();
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			Text.Add("<i>“Running an infirmary is a little like running a circus,”</i> he says. <i>“You’ve got to keep everything perfectly balanced, else the whole house of cards comes tumbling down. If you can keep it up, though, you get to see all sorts of hilarious things.”</i>", parse);
 			Text.NL();
 			Text.Add("Such as?", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("<i>“Mostly okay. A bit of this, a bit of that. Honestly nothing I haven’t seen for the past twenty years.”</i>", parse);
 			Text.NL();
 			Text.Add("Well, he might have seen it all, but you haven’t, so if he wouldn’t mind humoring you…?", parse);
 			Text.NL();
 			Text.Add("<i>“Oh, all right.”</i> Aquilius blows a smoke ring from his pipe and watches it vanish into thin air. <i>“Let’s see, now…”</i>", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("<i>“Droll and boring, but that’s a good thing. Boring means that you’ll get to live through the day; it’s when your life gets full of excitement and other interesting events that you have to be on your toes.”</i>", parse);
 			Text.NL();
 			Text.Add("So, what kinds of things does he find boring, anyway? Knowing Aquilius, his definition of “boring” is probably very much different from yours.", parse);
 			Text.NL();
 			Text.Add("<i>“Well, for example…”</i>", parse);
-		}, 1.0, function() { return true; });
+		}, 1.0, () => true);
 		scenes.Get();
 
 		Text.NL();
 
 		scenes = new EncounterTable();
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			Text.Add("<i>“So today a new face - bit of a scruffy lass - came in to report sick with a mild fever and chills. Of course, she wasn’t <b>really</b> ill, nor was the acting very convincing. I gave her the talk that I give everyone who tries to pull this crap off on me: first time, you get a warning. Second time, your name gets sent straight to Maria, and she’ll deal with you from there on out.</i>", parse);
 			Text.NL();
 			Text.Add("<i>“I don’t have time to deal with malingerers here, and neither am I going to cover for them. Zenith has made it very clear: if you’re not going to make yourself useful in some fashion, then you don’t get to eat. If you ask me to not just help you skive, but waste my precious time, credibility and resources in doing so, I’m going to turn you straight in.”</i>", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("<i>“Potions have their uses, but the way people seem to think they work is hilarious,”</i> Aquilius says, shaking his head. <i>“They imagine I can just run out, pick a handful of grass, throw it into boiling water and ten minutes later - bam! A potion to cure all their ills!</i>", parse);
 			Text.NL();
 			Text.Add("<i>“Let me tell you, if such miracle ‘herbs’ really did exist, they wouldn’t for long, because everyone would promptly pick them straight out of existence. Then there’s the problem of preservation, of compounding, of all the other preparations… how should you administer your medication? Pour it on a wound? Steep bandages in the distillate and let it seep through the skin? Or just throw it down the hatch?”</i>", parse);
@@ -646,20 +646,20 @@ export namespace AquiliusScenes {
 			Text.Add("You pat the good surgeon on his shoulder and tell him you know of his pain.", parse);
 			Text.NL();
 			Text.Add("<i>“It’s cute the first couple of times, that irrational confidence in my abilities, then it starts getting annoying.”</i>", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("<i>“Couple of weeks back, we had this fellow who insisted he was fine less than a day after I’d finished setting his bones. Good work ethic, but an absolute idiot - I tried to explain to him that if something stupid happened to him or his splint and the bones healed wrong, I’d have to break them again and set them right once more.</i>", parse);
 			Text.NL();
 			Text.Add("<i>“He wouldn’t be reasonable about it, so I ordered him tied to the bed for the next few days. Some harm done, yes, but not as much as he’d have done to himself if I’d let him go on his merry way. I’m not going to lose any sleep over what I did - it was for his own good.”</i>", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("Aquilius leans towards you conspiratorially. <i>“Want to know the fastest-moving item in my inventory?”</i>", parse);
 			Text.NL();
 			Text.Add("Yes? What is it?", parse);
 			Text.NL();
 			Text.Add("<i>“Preventatives. I’m telling you, scarcely have I gone and cooked up a new batch that they’re all gone before the day is out. Which makes sense - a goodly number of folks here are already of the less savory kind. We don’t need more children here than what we already have, do we?”</i>", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("<i>“Back in the day, there was only one thing to do if someone had a gut wound.”</i>", parse);
 			Text.NL();
 			Text.Add("That would be?", parse);
@@ -671,7 +671,7 @@ export namespace AquiliusScenes {
 			Text.Add("And has he?", parse);
 			Text.NL();
 			Text.Add("Aquilius squints at you. <i>“I have always been honest in this regard, even if at first glance it’d be better to lie. People need time to make peace with the spirits, [playername]. Settle their affairs in this world and make preparations for the next.  And if they don’t do that… well, then they won’t be able to claim ignorance.”</i>", parse);
-		}, 1.0, function() { return true; });
+		}, 1.0, () => true);
 		scenes.Get();
 
 		Text.Flush();
@@ -774,7 +774,7 @@ export namespace AquiliusScenes {
 				TimeStep({minute: 30});
 			}, enabled : true,
 		});
-		Gui.SetButtonsFromList(options, true, function() {
+		Gui.SetButtonsFromList(options, true, () => {
 			Text.Clear();
 			Text.Add("Aquilius shrugs. He doesn’t say anything, but it’s clear he’s glad to be free of the weighty subject. <i>“Anything else you’d like to discuss, [playername]?”</i>", parse);
 			Text.Flush();
@@ -814,14 +814,14 @@ export namespace AquiliusScenes {
 		Text.NL();
 
 		const scenes = new EncounterTable();
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			Text.Add("Curiosity piqued, you ask him what actually goes into the stuff you’re smoking, knowing full well that he won’t give you a straight answer. As expected, Aquilius scratches his beak and looks thoughtful for a moment.", parse);
 			Text.NL();
 			Text.Add("<i>“Oh, a bit of this and that,”</i> he replies in a lazy drawl. <i>“Pinch of mint for flavor… most of the stuff’s from the forest… some of those yellow-spotted mushrooms, cut and dried, though the spores are the most potent part. I suppose I should pass on the recipe before I croak, although I haven’t found someone worth giving it to yet. Worst comes to worst, I’ll write it down somewhere and let whichever lucky bastard finds it reap the spoils.</i>", parse);
 			Text.NL();
 			Text.Add("<i>“Don’t worry, it’s not physically addictive, though you could end up like me.”</i> He lets out a dry chuckle. <i>“Although that’s not the worst that could happen, is it?”</i>", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("The smoke is relaxing… perhaps a little too much so, and the incense-like scent - is that jasmine? Sandalwood? Citrus? - has an almost mystical quality to it. You’re aware that you’re in the infirmary tent, and yet the smell - it belongs in a temple, perhaps a museum, or somesuch…", parse);
 			Text.NL();
 			Text.Add("The world swirls and grows blurry before your eyes, spots of colour blossoming in your vision…", parse);
@@ -833,13 +833,13 @@ export namespace AquiliusScenes {
 			Text.Add("<i>“Don’t let it get to your head too much. Back in the day, there were those who were a bit touched in the head. Let them get at a few mushrooms or smoke a handful of leaves, and suddenly they’re seeing demons and spirits coming out of the walls where other folk just get a little buzz.”</i>", parse);
 			Text.NL();
 			Text.Add("You promise to be careful, and settle back to enjoy the rest of the cigarette.", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("The two of you are content to just lean back and savor the smoke, letting your worldly cares slip away for a little bit. Oh, you’ll have to deal with them once your cigarette burns down, but a moment’s respite can’t hurt, can it? Aquilius has carefully poised himself in his seat, eyes half-lidded, head nodding a little as he partakes of the nightly ritual that gives order to his life.", parse);
 			Text.NL();
 			Text.Add("Silence, save for the snores and murmurs of the injured out front, watching wisps of smoke curl upward and eventually vanish - ah, this is the life.", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("Taking a long drag from your cigarette, you relish in the cool taste and wonder aloud how Aquilius managed to figure out this particular blend.", parse);
 			Text.NL();
 			Text.Add("<i>“You like it?”</i>", parse);
@@ -849,7 +849,7 @@ export namespace AquiliusScenes {
 			Text.Add("<i>“Don’t buy crap from folks off the streets of Rigard - they cut their tobacco with all sorts of fillers to stretch it as thin as possible, and those do a number on your lungs. The only way to be sure you’re getting a good smoke is to do it all by yourself - from the growing and picking to the drying and mixing and finally to the point where you light up. It takes work, but by Aria’s tits, it’s worth it. It is so worth it.</i>", parse);
 			Text.NL();
 			Text.Add("<i>“As to how I figured it out… I had a lot of time in the war, and plenty of others had their own particular mixes they liked to roll. Being a lad like any other, I decided to experiment; those were hard days, and we draftees would smoke anything to pass the time. It’s been a while since then, but I’m still working on improving the blend.”</i>", parse);
-		}, 1.0, function() { return true; });
+		}, 1.0, () => true);
 		scenes.Get();
 
 		Text.NL();
@@ -984,7 +984,7 @@ export namespace AquiliusScenes {
 		/* TODO
 		options.push({ nameStr : "name",
 			tooltip : "",
-			func : function() {
+			func : () => {
 				Text.Clear();
 				Text.Add("", parse);
 				Text.NL();
@@ -993,7 +993,7 @@ export namespace AquiliusScenes {
 			}, enabled : true
 		});
 		*/
-		Gui.SetButtonsFromList(options, true, function() {
+		Gui.SetButtonsFromList(options, true, () => {
 			Text.Clear();
 			Text.Add("On second thought, you’ll have to abstain for now.", parse);
 			Text.NL();
@@ -1023,7 +1023,7 @@ export namespace AquiliusScenes {
 		Text.NL();
 		Text.Add("Unseen, things rustle about and above you; you do your best to ignore them and focus on the task at hand. By and large, the task proceeds at a smooth pace - while the forest does not freely give away its treasures, neither is it overly stingy to those who work hard.", parse);
 		if (party.Num() > 1) {
-			parse.comp = party.Num() == 2 ? party.Get(1).name :
+			parse.comp = party.Num() === 2 ? party.Get(1).name :
 							"your companions";
 			Text.Add(" The fact that you have [comp] around to help doesn’t hurt, either.", parse);
 		}
@@ -1077,7 +1077,7 @@ export namespace AquiliusScenes {
 		Text.NL();
 
 		const scenes = new EncounterTable();
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			Text.Add("Today’s job is disgusting, but a daily necessity - taking out the trash. The “trash” to be disposed of is a medley of utter vileness - used bandages, cloth stained with various bodily fluids, cracked potion vials and an assortment of used sharp implements. These are carefully sealed within three sacks of rough cloth to prevent any of the fluids from seeping out, and then tied securely with cord.", parse);
 			Text.NL();
 			Text.Add("Wait, didn’t Aquilius say that he didn’t want anyone doing menial work?", parse);
@@ -1094,18 +1094,18 @@ export namespace AquiliusScenes {
 			Text.Add("The pit Aquilius mentioned is some distance from the gates, but at least the camp is still within sight and you don’t run into any trouble on the way there. Pouring the oil on the lot, you toss a lit match onto the sack, and it lights up nicely with an intense, clean-burning flame. When the lot is reduced to a mess of foul-smelling ashes you shovel all of it into the pit, then take a moment to savor your handiwork before heading back to camp.", parse);
 
 			const scenes = new EncounterTable();
-			scenes.AddEnc(function() {
+			scenes.AddEnc(() => {
 				// Nothing
-			}, 3.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 3.0, () => true);
+			scenes.AddEnc(() => {
 				player.strength.IncreaseStat(35, 1);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => true);
+			scenes.AddEnc(() => {
 				player.spirit.IncreaseStat(35, 1);
-			}, 1.0, function() { return true; });
+			}, 1.0, () => true);
 			scenes.Get();
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("After some thought, Aquilius sets you to work with the rest of his assistants caring for the ill and injured on the cots. Moving the poor bastards so they don’t get bedsores from lying in one spot for too long, changing bandages, making sure everyone gets enough water, and daubing down the fevered with a thick, cool solution of his own concoction. There are a number of other tasks involved, but they all have one goal: make sure everyone makes a full recovery as quickly as possible. ", parse);
 			if (Jobs.Healer.Master(player)) {
 				Text.Add("Your profound knowledge of medicine helps you through the tasks as you quickly soothe hurts and ease discomforts, going about your rounds with utmost speed.", parse);
@@ -1131,17 +1131,17 @@ export namespace AquiliusScenes {
 			Text.Add("Eventually, though, all the infirm are tended to and made comfortable, and you return to the good surgeon for him to assess your work.", parse);
 
 			const scenes = new EncounterTable();
-			scenes.AddEnc(function() {
+			scenes.AddEnc(() => {
 				// Nothing
-			}, 3.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 3.0, () => true);
+			scenes.AddEnc(() => {
 				player.intelligence.IncreaseStat(35, 1);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => true);
+			scenes.AddEnc(() => {
 				player.spirit.IncreaseStat(35, 1);
-			}, 1.0, function() { return true; });
+			}, 1.0, () => true);
 			scenes.Get();
-		}, 1.0, function() { return true; });
+		}, 1.0, () => true);
 		scenes.Get();
 
 		Text.NL();
@@ -1197,14 +1197,14 @@ export namespace AquiliusScenes {
 		Text.NL();
 
 		const scenes = new EncounterTable();
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			Text.Add("Today’s task is relatively simple: the distillation of alcohol from spirits. It seems like Aquilius had been just about to get started before you came in; the reservoir is full and the burner positioned under it; all that’s required to get things started is to light the burner, which the good surgeon does posthaste.", parse);
 			Text.NL();
 			Text.Add("<i>“Alcohol dissolves many things that plain water can’t, so that makes it important for cleaning and as a potion base,”</i> Aquilius explains. <i>“Some potions that call for a measure of alcohol won’t work if you just use water.</i>", parse);
 			Text.NL();
 			Text.Add("<i>“Now, all I need you to do is to watch the mixture, and snuff out the flame once most of what we’re after has been distilled away. That, and watch the condenser, too - since I can’t get flowing water in here, you’ll need to top up the canister every now and then with cool water.”</i> He points down at a large bucket at the foot of the table. <i>“Well, I’ll leave you to it. Please don’t do anything stupid, there are sick people in here.”</i>", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("Today’s task is a mundane one: stirring. Leading you out of the infirmary tent and around the back, Aquilius points you at a large cauldron. Contained within is a clear, viscous liquid, and he picks up a long wooden stirrer and hands it to you without further comment.", parse);
 			Text.NL();
 			Text.Add("You ask him what’s inside.", parse);
@@ -1216,7 +1216,7 @@ export namespace AquiliusScenes {
 			Text.Add("<i>“Right. Slowly and evenly does the trick; no point tiring yourself out early on.”</i> Aquilius lights the fire under the cauldron with a snap of his fingers, then passes you a few wax-paper packages. <i>“Just watch out for the color changes in the mixture - they’ll be pretty obvious - and add these reagents one at a time. It’s pretty hard to mess up.</i>", parse);
 			Text.NL();
 			Text.Add("<i>“Well, don’t let me get in your way. I’ll see you in a couple of hours.”</i>", parse);
-		}, 1.0, function() { return true; });
+		}, 1.0, () => true);
 
 		// TODO More scenes later?
 

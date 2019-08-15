@@ -38,7 +38,7 @@ export class BullTowerStats {
 
 	constructor() {
 		this.suspicion       = new Stat(0);
-		this.suspicion.debug = function() { return "Suspicion"; };
+		this.suspicion.debug = () => "Suspicion";
 
 		this.stoleLantern    = false;
 		this.guardsDown      = false;
@@ -72,7 +72,7 @@ export class BullTowerStats {
 		const newSuspicion = this.Suspicion();
 
 		if (newSuspicion >= 100 && oldSuspicion < 100) {
-			Gui.Callstack.push(function() {
+			Gui.Callstack.push(() => {
 				if (outlaws.flags.BullTower >= OutlawsFlags.BullTowerQuest.Completed) {
 					Gui.PrintDefaultOptions();
 					return;
@@ -87,7 +87,7 @@ export class BullTowerStats {
 				BullTowerScenes.EndingFailure();
 			});
 		} else if (newSuspicion >= 75 && oldSuspicion < 75) {
-			Gui.Callstack.push(function() {
+			Gui.Callstack.push(() => {
 				if (outlaws.flags.BullTower >= OutlawsFlags.BullTowerQuest.Completed) {
 					Gui.PrintDefaultOptions();
 					return;
@@ -98,7 +98,7 @@ export class BullTowerStats {
 				Gui.PrintDefaultOptions(true);
 			});
 		} else if (newSuspicion >= 50 && oldSuspicion < 50) {
-			Gui.Callstack.push(function() {
+			Gui.Callstack.push(() => {
 				if (outlaws.flags.BullTower >= OutlawsFlags.BullTowerQuest.Completed) {
 					Gui.PrintDefaultOptions();
 					return;
@@ -109,7 +109,7 @@ export class BullTowerStats {
 				Gui.PrintDefaultOptions(true);
 			});
 		} else if (newSuspicion >= 25 && oldSuspicion < 25) {
-			Gui.Callstack.push(function() {
+			Gui.Callstack.push(() => {
 				if (outlaws.flags.BullTower >= OutlawsFlags.BullTowerQuest.Completed) {
 					Gui.PrintDefaultOptions();
 					return;
@@ -151,42 +151,42 @@ const BullTowerLoc = {
 };
 
 // Disable wait for all locations
-BullTowerLoc.Courtyard.Yard.wait = function() { return false; };
-BullTowerLoc.Courtyard.Pens.wait = function() { return false; };
-BullTowerLoc.Courtyard.Caravans.wait = function() { return false; };
-BullTowerLoc.Building.Hall.wait = function() { return false; };
-BullTowerLoc.Building.Cell.wait = function() { return false; };
-BullTowerLoc.Building.Office.wait = function() { return false; };
-BullTowerLoc.Building.Warehouse.wait = function() { return false; };
-BullTowerLoc.Building.Watchtower.wait = function() { return false; };
+BullTowerLoc.Courtyard.Yard.wait = () => false;
+BullTowerLoc.Courtyard.Pens.wait = () => false;
+BullTowerLoc.Courtyard.Caravans.wait = () => false;
+BullTowerLoc.Building.Hall.wait = () => false;
+BullTowerLoc.Building.Cell.wait = () => false;
+BullTowerLoc.Building.Office.wait = () => false;
+BullTowerLoc.Building.Warehouse.wait = () => false;
+BullTowerLoc.Building.Watchtower.wait = () => false;
 
 // Add onEntry, conversations to all locations (not Cell)
-BullTowerLoc.Courtyard.Yard.onEntry = function() {
+BullTowerLoc.Courtyard.Yard.onEntry = () => {
 	if (Math.random() < 0.7) { BullTowerScenes.Coversations(true); } else { Gui.PrintDefaultOptions(); }
 };
-BullTowerLoc.Courtyard.Pens.onEntry = function() {
+BullTowerLoc.Courtyard.Pens.onEntry = () => {
 	if (Math.random() < 0.7) { BullTowerScenes.Coversations(true); } else { Gui.PrintDefaultOptions(); }
 };
-BullTowerLoc.Courtyard.Caravans.onEntry = function() {
+BullTowerLoc.Courtyard.Caravans.onEntry = () => {
 	if (Math.random() < 0.7) { BullTowerScenes.Coversations(true); } else { Gui.PrintDefaultOptions(); }
 };
-BullTowerLoc.Building.Hall.onEntry = function() {
+BullTowerLoc.Building.Hall.onEntry = () => {
 	if (Math.random() < 0.7) { BullTowerScenes.Coversations(false); } else { Gui.PrintDefaultOptions(); }
 };
-BullTowerLoc.Building.Office.onEntry = function() {
+BullTowerLoc.Building.Office.onEntry = () => {
 	if (Math.random() < 0.7) { BullTowerScenes.Coversations(false); } else { Gui.PrintDefaultOptions(); }
 };
-BullTowerLoc.Building.Warehouse.onEntry = function() {
+BullTowerLoc.Building.Warehouse.onEntry = () => {
 	if (Math.random() < 0.7) { BullTowerScenes.Coversations(false); } else { Gui.PrintDefaultOptions(); }
 };
-BullTowerLoc.Building.Watchtower.onEntry = function() {
+BullTowerLoc.Building.Watchtower.onEntry = () => {
 	if (Math.random() < 0.7) { BullTowerScenes.Coversations(false); } else { Gui.PrintDefaultOptions(); }
 };
 
 /*
  * Dungeon starts here
  */
-BullTowerLoc.Courtyard.Yard.description = function() {
+BullTowerLoc.Courtyard.Yard.description = () => {
 	const outlaws = GAME().outlaws;
 
 	Text.Add("You are standing in the main courtyard of Bull Tower, flanked by high walls on three sides and the old watchtower to the north. The gates - the only way in or out of the old fortress - lie to the south, watched over by the two guards whom Cveta ‘persuaded’ to let you in. The effects of age and neglect are clearly visible in the appearance of the grounds  - the old training field is overgrown with weeds and wildflowers, and while the walls are still solid, bits of crumbling masonry lie at the base.");
@@ -212,7 +212,7 @@ BullTowerLoc.Courtyard.Yard.description = function() {
 BullTowerLoc.Courtyard.Yard.links.push(new Link(
 	"Enter tower", true, true,
 	null,
-	function() {
+	() => {
 		const outlaws = GAME().outlaws;
 		MoveToLocation(BullTowerLoc.Building.Hall, {minute: 5});
 		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
@@ -221,7 +221,7 @@ BullTowerLoc.Courtyard.Yard.links.push(new Link(
 BullTowerLoc.Courtyard.Yard.links.push(new Link(
 	"Caravans", true, true,
 	null,
-	function() {
+	() => {
 		const outlaws = GAME().outlaws;
 		MoveToLocation(BullTowerLoc.Courtyard.Caravans, {minute: 5});
 		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
@@ -230,7 +230,7 @@ BullTowerLoc.Courtyard.Yard.links.push(new Link(
 BullTowerLoc.Courtyard.Yard.links.push(new Link(
 	"Animal Pens", true, true,
 	null,
-	function() {
+	() => {
 		const outlaws = GAME().outlaws;
 		MoveToLocation(BullTowerLoc.Courtyard.Pens, {minute: 5});
 		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
@@ -238,12 +238,12 @@ BullTowerLoc.Courtyard.Yard.links.push(new Link(
 ));
 
 BullTowerLoc.Courtyard.Yard.events.push(new Link(
-	"Statue", function() {
+	"Statue", () => {
 		const outlaws = GAME().outlaws;
 		return !(outlaws.flags.BT & OutlawsFlags.BullTower.StatueDestroyed);
 	}, true,
 	null,
-	function() {
+	() => {
 		const player = GAME().player;
 		const outlaws = GAME().outlaws;
 
@@ -326,7 +326,7 @@ BullTowerLoc.Courtyard.Yard.events.push(new Link(
 BullTowerLoc.Courtyard.Yard.links.push(new Link(
 	"Slip out", true, true,
 	null,
-	function() {
+	() => {
 		const outlaws = GAME().outlaws;
 
 		const parse: any = {
@@ -368,7 +368,7 @@ BullTowerLoc.Courtyard.Yard.links.push(new Link(
 	},
 ));
 
-BullTowerLoc.Courtyard.Caravans.description = function() {
+BullTowerLoc.Courtyard.Caravans.description = () => {
 	const outlaws = GAME().outlaws;
 	Text.Add("Off to the east of the main tower building, this small courtyard is roofed, presumably to keep the wind and rain off carts, carriages and wagons parked in it. However, age has caused the roof to fall apart in places, allowing moonlight to shine through holes in the old masonry work.");
 	Text.NL();
@@ -390,7 +390,7 @@ BullTowerLoc.Courtyard.Caravans.description = function() {
 BullTowerLoc.Courtyard.Caravans.links.push(new Link(
 	"Courtyard", true, true,
 	null,
-	function() {
+	() => {
 		const outlaws = GAME().outlaws;
 		MoveToLocation(BullTowerLoc.Courtyard.Yard, {minute: 5});
 		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
@@ -398,12 +398,12 @@ BullTowerLoc.Courtyard.Caravans.links.push(new Link(
 ));
 
 BullTowerLoc.Courtyard.Caravans.events.push(new Link(
-	"Guards", function() {
+	"Guards", () => {
 		const outlaws = GAME().outlaws;
 		return !(outlaws.BT.guardsDown);
 	}, true,
 	null,
-	function() {
+	() => {
 		const player = GAME().player;
 		const outlaws = GAME().outlaws;
 
@@ -451,7 +451,7 @@ BullTowerLoc.Courtyard.Caravans.events.push(new Link(
 				enc.onLoss = BullTowerScenes.GuardsLoss;
 				enc.onVictory = BullTowerScenes.GuardsWin;
 
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					enc.Start();
 				});
 			}, enabled : true,
@@ -502,7 +502,7 @@ BullTowerLoc.Courtyard.Caravans.events.push(new Link(
 				enc.onLoss = BullTowerScenes.GuardsLoss;
 				enc.onVictory = BullTowerScenes.GuardsWin;
 
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					enc.Start();
 				});
 			}, enabled : true,
@@ -543,13 +543,13 @@ BullTowerLoc.Courtyard.Caravans.events.push(new Link(
 				enc.onLoss = BullTowerScenes.GuardsLoss;
 				enc.onVictory = BullTowerScenes.GuardsWin;
 
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					enc.Start();
 				});
 			}, enabled : true,
 			tooltip : "Have Cveta attempt to lull the guards to slumber with a song.",
 		});
-		Gui.SetButtonsFromList(options, true, function() {
+		Gui.SetButtonsFromList(options, true, () => {
 			Text.Clear();
 			Text.Add("You decide that messing with these guards isn’t worth it right now. With that thought in mind, you slink back into the safety of the shadows, Cveta in tow.", parse);
 			Text.NL();
@@ -560,16 +560,16 @@ BullTowerLoc.Courtyard.Caravans.events.push(new Link(
 ));
 
 BullTowerLoc.Courtyard.Caravans.events.push(new Link(
-	"Search Caravans", function() {
+	"Search Caravans", () => {
 		const outlaws = GAME().outlaws;
 		return !(outlaws.flags.BT & OutlawsFlags.BullTower.CaravansSearched) &&
 		       !(outlaws.flags.BT & OutlawsFlags.BullTower.CaravansIgnited);
-	}, function() {
+	}, () => {
 		const outlaws = GAME().outlaws;
 		return outlaws.BT.guardsDown;
 	},
 	null,
-	function() {
+	() => {
 		const player = GAME().player;
 		const outlaws = GAME().outlaws;
 		const parse: any = {
@@ -598,12 +598,12 @@ BullTowerLoc.Courtyard.Caravans.events.push(new Link(
 ));
 
 BullTowerLoc.Courtyard.Caravans.events.push(new Link(
-	"Burn Caravans", function() {
+	"Burn Caravans", () => {
 		const outlaws = GAME().outlaws;
 		return outlaws.BT.guardsDown && !(outlaws.flags.BT & OutlawsFlags.BullTower.CaravansIgnited);
 	}, true,
 	null,
-	function() {
+	() => {
 		const player = GAME().player;
 		const outlaws = GAME().outlaws;
 
@@ -667,7 +667,7 @@ BullTowerLoc.Courtyard.Caravans.events.push(new Link(
 	},
 ));
 
-BullTowerLoc.Courtyard.Pens.description = function() {
+BullTowerLoc.Courtyard.Pens.description = () => {
 	const outlaws = GAME().outlaws;
 	Text.Add("These pens look like they used to be proper stables, but time and neglect have eaten away at the supporting timbers. A few serviceable stalls remain, but… well, it wouldn’t be right to call them stables without a single horse in it.");
 	Text.NL();
@@ -687,7 +687,7 @@ BullTowerLoc.Courtyard.Pens.description = function() {
 BullTowerLoc.Courtyard.Pens.links.push(new Link(
 	"Courtyard", true, true,
 	null,
-	function() {
+	() => {
 		const outlaws = GAME().outlaws;
 		MoveToLocation(BullTowerLoc.Courtyard.Yard, {minute: 5});
 		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
@@ -695,12 +695,12 @@ BullTowerLoc.Courtyard.Pens.links.push(new Link(
 ));
 
 BullTowerLoc.Courtyard.Pens.events.push(new Link(
-	"Free Animals", function() {
+	"Free Animals", () => {
 		const outlaws = GAME().outlaws;
 		return !(outlaws.flags.BT & OutlawsFlags.BullTower.AnimalsFreed);
 	}, true,
 	null,
-	function() {
+	() => {
 		const outlaws = GAME().outlaws;
 		const parse: any = {
 
@@ -745,7 +745,7 @@ BullTowerLoc.Courtyard.Pens.events.push(new Link(
 	},
 ));
 
-BullTowerLoc.Building.Hall.description = function() {
+BullTowerLoc.Building.Hall.description = () => {
 	Text.Add("The main hall of Bull Tower is just inside the archway of the main entrance. Walls where banners and tapestries once hung now lie bare, their only adornment dust gathering in the cracks between the stones. Built to accommodate the hundreds who were once garrisoned here, it now lies empty, its expansiveness causing even the lightest of your footsteps to echo in the darkness.");
 	Text.NL();
 	Text.Add("While most of the staircases are too precarious to navigate, you do note that there are footprints on two sets of steps: one spiraling upward into the darkness of the main watchtower, and one leading downward below ground level. Similarly, most of the doors have been boarded up and nailed shut, but there are a few which look like they’ve seen some use of late.");
@@ -757,7 +757,7 @@ BullTowerLoc.Building.Hall.description = function() {
 BullTowerLoc.Building.Hall.links.push(new Link(
 	"Courtyard", true, true,
 	null,
-	function() {
+	() => {
 		const outlaws = GAME().outlaws;
 		MoveToLocation(BullTowerLoc.Courtyard.Yard, {minute: 5});
 		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
@@ -766,7 +766,7 @@ BullTowerLoc.Building.Hall.links.push(new Link(
 BullTowerLoc.Building.Hall.links.push(new Link(
 	"Warehouse", true, true,
 	null,
-	function() {
+	() => {
 		const party: Party = GAME().party;
 		const outlaws = GAME().outlaws;
 		const terry = GAME().terry;
@@ -800,7 +800,7 @@ BullTowerLoc.Building.Hall.links.push(new Link(
 BullTowerLoc.Building.Hall.links.push(new Link(
 	"Office", true, true,
 	null,
-	function() {
+	() => {
 		const outlaws = GAME().outlaws;
 		MoveToLocation(BullTowerLoc.Building.Office, {minute: 5});
 		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
@@ -809,7 +809,7 @@ BullTowerLoc.Building.Hall.links.push(new Link(
 BullTowerLoc.Building.Hall.links.push(new Link(
 	"Cell", true, true,
 	null,
-	function() {
+	() => {
 		const outlaws = GAME().outlaws;
 		MoveToLocation(BullTowerLoc.Building.Cell, {minute: 5});
 		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
@@ -818,14 +818,14 @@ BullTowerLoc.Building.Hall.links.push(new Link(
 BullTowerLoc.Building.Hall.links.push(new Link(
 	"Tower", true, true,
 	null,
-	function() {
+	() => {
 		const outlaws = GAME().outlaws;
 		MoveToLocation(BullTowerLoc.Building.Watchtower, {minute: 5});
 		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	},
 ));
 
-BullTowerLoc.Building.Cell.onEntry = function() {
+BullTowerLoc.Building.Cell.onEntry = () => {
 	const player = GAME().player;
 	const outlaws = GAME().outlaws;
 	const burrows = GAME().burrows;
@@ -842,7 +842,7 @@ BullTowerLoc.Building.Cell.onEntry = function() {
 		Text.Add("Best to let sleeping dog-morphs lie, as the saying goes. Quietly, you slip back to the main hall.", parse);
 		Text.Flush();
 
-		Gui.NextPrompt(function() {
+		Gui.NextPrompt(() => {
 			MoveToLocation(BullTowerLoc.Building.Hall, {minute: 5});
 			outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 		});
@@ -876,7 +876,7 @@ BullTowerLoc.Building.Cell.onEntry = function() {
 				Text.Add("With that in mind, you head back up the stairs to the main hall.", parse);
 				Text.Flush();
 
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					MoveToLocation(BullTowerLoc.Building.Hall, {minute: 5});
 					outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 				});
@@ -902,7 +902,7 @@ BullTowerLoc.Building.Cell.onEntry = function() {
 				Text.Add("This, you presume, must be Alaric.", parse);
 				Text.Flush();
 
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					Text.Clear();
 					Text.Add("Though he hangs limply in the midst of the mess, he lifts his head weakly as Cveta and you enter, eyes widening in equal parts hope and fear. He looks frantic, and his lips move, the man clearly trying to mouth some words, but you don’t get what he’s trying to tell you.", parse);
 					Text.NL();
@@ -928,7 +928,7 @@ BullTowerLoc.Building.Cell.onEntry = function() {
 					Text.Add("It’s a fight!", parse);
 					Text.Flush();
 
-					Gui.NextPrompt(function() {
+					Gui.NextPrompt(() => {
 						const enemy = new Party();
 						const corishev = new Corishev();
 						enemy.AddMember(corishev);
@@ -950,7 +950,7 @@ BullTowerLoc.Building.Cell.onEntry = function() {
 	}
 };
 
-BullTowerLoc.Building.Warehouse.description = function() {
+BullTowerLoc.Building.Warehouse.description = () => {
 	const outlaws = GAME().outlaws;
 
 	Text.Add("This must be where the guards are keeping the contraband until it’s eventually passed on to the high society of Rigard. Stacked in whatever open space is available, the Royal Guard has turned what was once a mess or meeting hall into a makeshift warehouse that’s surprisingly neat and orderly. There’s far too much in the way of ill-gotten gains for it to have come in with a single caravan - this has clearly been going on for some time.");
@@ -967,7 +967,7 @@ BullTowerLoc.Building.Warehouse.description = function() {
 BullTowerLoc.Building.Warehouse.links.push(new Link(
 	"Hall", true, true,
 	null,
-	function() {
+	() => {
 		const outlaws = GAME().outlaws;
 		MoveToLocation(BullTowerLoc.Building.Hall, {minute: 5});
 		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
@@ -975,12 +975,12 @@ BullTowerLoc.Building.Warehouse.links.push(new Link(
 ));
 
 BullTowerLoc.Building.Warehouse.events.push(new Link(
-	"Contraband", function() {
+	"Contraband", () => {
 		const outlaws = GAME().outlaws;
 		return !(outlaws.flags.BT & OutlawsFlags.BullTower.ContrabandStolen);
 	}, true,
 	null,
-	function() {
+	() => {
 		const outlaws = GAME().outlaws;
 
 		const parse: any = {
@@ -1001,12 +1001,12 @@ BullTowerLoc.Building.Warehouse.events.push(new Link(
 ));
 
 BullTowerLoc.Building.Warehouse.events.push(new Link(
-	"Roses", function() {
+	"Roses", () => {
 		const outlaws = GAME().outlaws;
 		return !(outlaws.flags.BT & OutlawsFlags.BullTower.BlueRoses);
 	}, true,
 	null,
-	function() {
+	() => {
 		const player = GAME().player;
 		const outlaws = GAME().outlaws;
 
@@ -1039,7 +1039,7 @@ BullTowerLoc.Building.Warehouse.events.push(new Link(
 	},
 ));
 
-BullTowerLoc.Building.Watchtower.description = function() {
+BullTowerLoc.Building.Watchtower.description = () => {
 	const outlaws = GAME().outlaws;
 
 	Text.Add("From the outside, the ancient watchtower of Bull Tower looks proud and strong in spite of its age. On the inside, it’s just dusty and claustrophobic. The long, spiral staircase up to the top is enough to take the wind out of anyone, and leads to a landing and a ladder that in turn leads up to the belfry. Flickering light filters down from above. A peek upward through the hatch reveals that ");
@@ -1055,7 +1055,7 @@ BullTowerLoc.Building.Watchtower.description = function() {
 BullTowerLoc.Building.Watchtower.links.push(new Link(
 	"Hall", true, true,
 	null,
-	function() {
+	() => {
 		const outlaws = GAME().outlaws;
 		MoveToLocation(BullTowerLoc.Building.Hall, {minute: 5});
 		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
@@ -1063,12 +1063,12 @@ BullTowerLoc.Building.Watchtower.links.push(new Link(
 ));
 
 BullTowerLoc.Building.Watchtower.events.push(new Link(
-	"Guard", function() {
+	"Guard", () => {
 		const outlaws = GAME().outlaws;
 		return !outlaws.BT.towerGuardDown;
 	}, true,
 	null,
-	function() {
+	() => {
 		const player = GAME().player;
 		const outlaws = GAME().outlaws;
 
@@ -1131,7 +1131,7 @@ BullTowerLoc.Building.Watchtower.events.push(new Link(
 			}, enabled : true,
 			tooltip : "Have Cveta lull the guard to sleep where he stands.",
 		});
-		Gui.SetButtonsFromList(options, true, function() {
+		Gui.SetButtonsFromList(options, true, () => {
 			Text.Clear();
 			Text.Add("Looking at how close the guard and the bell are, you decide against taking him on for now. Maybe when you’re feeling more confident about it, or if the situation’s changed…", parse);
 			Text.Flush();
@@ -1142,12 +1142,12 @@ BullTowerLoc.Building.Watchtower.events.push(new Link(
 ));
 
 BullTowerLoc.Building.Watchtower.events.push(new Link(
-	"Lantern", function() {
+	"Lantern", () => {
 		const outlaws = GAME().outlaws;
 		return outlaws.BT.towerGuardDown && !outlaws.BT.stoleLantern;
 	}, true,
 	null,
-	function() {
+	() => {
 		const outlaws = GAME().outlaws;
 		const parse: any = {
 
@@ -1163,7 +1163,7 @@ BullTowerLoc.Building.Watchtower.events.push(new Link(
 	},
 ));
 
-BullTowerLoc.Building.Office.description = function() {
+BullTowerLoc.Building.Office.description = () => {
 	const outlaws = GAME().outlaws;
 	const terry = GAME().terry;
 
@@ -1184,7 +1184,7 @@ BullTowerLoc.Building.Office.description = function() {
 BullTowerLoc.Building.Office.links.push(new Link(
 	"Hall", true, true,
 	null,
-	function() {
+	() => {
 		const outlaws = GAME().outlaws;
 		MoveToLocation(BullTowerLoc.Building.Hall, {minute: 5});
 		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
@@ -1192,12 +1192,12 @@ BullTowerLoc.Building.Office.links.push(new Link(
 ));
 
 BullTowerLoc.Building.Office.events.push(new Link(
-	"Safe", function() {
+	"Safe", () => {
 		const outlaws = GAME().outlaws;
 		return !(outlaws.flags.BT & OutlawsFlags.BullTower.SafeLooted);
 	}, true,
 	null,
-	function() {
+	() => {
 		const parse: any = {
 
 		};
@@ -1259,7 +1259,7 @@ export namespace BullTowerScenes {
 
 		TimeStep({ minute : 30 });
 
-		Gui.NextPrompt(function() {
+		Gui.NextPrompt(() => {
 			Text.Clear();
 			Text.Add("Rising from her seat, Maria glances about the tent before speaking. <i>“I gathered my team and went to take a look around the place where he supposedly disappeared, close to the King’s Road. To make a long story short, we did find some leads… which brought us straight to Bull Tower. It’s supposed to have been abandoned for decades, but the place is crawling with guards. They seem to be trying to keep a low profile, but there’s no hiding that many men.”</i>", parse);
 			Text.NL();
@@ -1286,7 +1286,7 @@ export namespace BullTowerScenes {
 
 			TimeStep({ minute : 10 });
 
-			Gui.NextPrompt(function() {
+			Gui.NextPrompt(() => {
 				Text.Clear();
 				Text.Add("As you stand and make to leave with the small crowd flowing out of Zenith’s tent, though, another hand falls on your shoulder - smaller and lighter this time, but no less firm.", parse);
 				Text.NL();
@@ -1298,10 +1298,10 @@ export namespace BullTowerScenes {
 				Text.Add("Well, it makes sense. He wouldn’t go to all the trouble of seeking you out just to have you hear him speak, right? A faint sense of foreboding welling up in the pit of your stomach, you sit back down and wait for the tent to empty of everyone save you, Zenith, Maria, and oddly enough, Cveta, who’s been seated near the back all the while, unruffled as always.", parse);
 				if (party.Num() > 1) {
 					const p1 = party.Get(1);
-					parse.comp  = party.Num() == 2 ? p1.name : "Your companions";
-					parse.s     = party.Num() == 2 ? "s" : "";
-					parse.has   = party.Num() == 2 ? "has" : "have";
-					parse.heshe = party.Num() == 2 ? p1.heshe() : "they";
+					parse.comp  = party.Num() === 2 ? p1.name : "Your companions";
+					parse.s     = party.Num() === 2 ? "s" : "";
+					parse.has   = party.Num() === 2 ? "has" : "have";
+					parse.heshe = party.Num() === 2 ? p1.heshe() : "they";
 
 					Text.Add(" [comp] look[s] about, clearly wondering if [heshe] should be here, then come[s] to the conclusion that if you’ve been invited, then so [has] [heshe].", parse);
 				}
@@ -1372,7 +1372,7 @@ export namespace BullTowerScenes {
 					Text.Clear();
 					Text.Add("Zenith nods at your question. <i>“Our eyes and ears have informed us that there are a number of shipments slated to come in that night; we’ll divert the guards by attacking the last of the convoys along the King’s Road within sight of the tower. ", parse);
 					if (party.Num() > 1) {
-						parse.s = party.Num() == 2 ? "" : "s";
+						parse.s = party.Num() === 2 ? "" : "s";
 						Text.Add("Your companion[s] can join in if they like; we could use the help, especially if we’re to effect a good fighting retreat. ", parse);
 					}
 					Text.Add("The fact that it’s a diversion is something only Maria, I, and a few others know; everyone else will be informed it’s a raid - which it is as well.</i>", parse);
@@ -1508,9 +1508,9 @@ export namespace BullTowerScenes {
 				Text.NL();
 				if (party.Num() > 1) {
 					const p1 = party.Get(1);
-					parse.comp   = party.Num() == 2 ? p1.name     : "your companions";
-					parse.himher = party.Num() == 2 ? p1.himher() : "them";
-					parse.heshe  = party.Num() == 2 ? p1.heshe()  : "they";
+					parse.comp   = party.Num() === 2 ? p1.name     : "your companions";
+					parse.himher = party.Num() === 2 ? p1.himher() : "them";
+					parse.heshe  = party.Num() === 2 ? p1.heshe()  : "they";
 					Text.Add("Just one more thing, you tell Cveta, then turn to [comp], asking [himher] to wait for you here in the outlaws’ camp; if [heshe]’d like, [heshe] can ask Zenith to join in on the raid. Sneaking around alone is already hard enough, two is a crowd, and any more would be impossible. With that out of the way, you turn back to the songstress.", parse);
 					Text.NL();
 				}
@@ -1521,7 +1521,7 @@ export namespace BullTowerScenes {
 
 				TimeStep({hour: 1});
 
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					Text.Clear();
 					Text.Add("The trip to the King’s Road is uneventful; the two of you slip through the thick undergrowth out of the forest. The road is clear, largely devoid of travelers, and well-lit under the clear, cloudless sky. Off in the distance, the many lights of Rigard flicker and twinkle, the city drowsy but never quite falling asleep.", parse);
 					Text.NL();
@@ -1598,7 +1598,7 @@ export namespace BullTowerScenes {
 
 		};
 
-		Gui.Callstack.push(function() {
+		Gui.Callstack.push(() => {
 			Text.Clear();
 			Text.Add("The last of the sentries guarding the caravans collapses to the ground, succumbing to his wounds. Wasting no time, you hurry to hide your unconscious adversaries in an overgrown patch of weeds - the thigh-height grass conceals them nicely, and they should stay out cold for a good while.", parse);
 			Text.NL();
@@ -1666,7 +1666,7 @@ export namespace BullTowerScenes {
 
 		outlaws.flags.BT |= OutlawsFlags.BullTower.AlaricFreed;
 
-		Gui.Callstack.push(function() {
+		Gui.Callstack.push(() => {
 			Text.Clear();
 			Text.Add("That last blow did the trick. Still grinning madly - whether it’s the venom, or whether he’s just plain unhinged by now is anyone’s guess - Corishev staggers backward a few steps, perhaps to give himself a little breathing space. His wide, maniacal gaze darts this way and that, his breathing labored as you advance on him. Too bad there’s nowhere for him to run.", parse);
 			Text.NL();
@@ -1721,7 +1721,7 @@ export namespace BullTowerScenes {
 					Text.Add("You find yourself in total agreement with the little bean counter. Not wishing to spend one moment longer in the cell, you help Alaric to his feet, you and Cveta each grabbing him under a shoulder and lifting. Before stepping onto the stairs, you relieve the lieutenant of his venom-coated whip, which could make a good weapon. The little bean-counter is still bleeding from his lashes, but he summons the strength to keep pace with both of you. Together, the three of you hobble up the steps and to the main hall, but not before you lock the cell door with the keys you found. On the off-chance that the lieutenant comes to before dawn, he can stew there until his underlings come and get him out.", parse);
 					Text.Flush();
 
-					Gui.NextPrompt(function() {
+					Gui.NextPrompt(() => {
 						MoveToLocation(BullTowerLoc.Building.Hall, {minute: 5});
 					});
 				}, enabled : true,
@@ -1826,7 +1826,7 @@ export namespace BullTowerScenes {
 				Text.Add("Well. That should quite thoroughly humiliate Preston’s lapdog. Doing your best - which, admittedly, isn’t very good - to clean yourself up, you get up on shaky feet and hurriedly dress yourself, trying to hide the worst of the cum stains. Once you’re certain you’re not going to slip on the slick floor, you stash the venom-coated whip with the rest of your belongings and hobble up the stairs to catch up with Cveta and Alaric, but not before locking the cell door behind you. Corishev will certainly be an interesting sight for his men when they get the door open and find him.", parse);
 				Text.Flush();
 
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					MoveToLocation(BullTowerLoc.Building.Hall, {minute: 20});
 				});
 			}, enabled : true,
@@ -1880,7 +1880,7 @@ export namespace BullTowerScenes {
 
 				Text.Flush();
 
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					MoveToLocation(BullTowerLoc.Building.Hall, {minute: 20});
 				});
 			}, enabled : true,
@@ -1913,7 +1913,7 @@ export namespace BullTowerScenes {
 				Text.Add("Finally, done! You clean yourself up as best you can[la] and head for the exit, stopping along the way to pick up Corishev’s whip, still on the floor where it had been dropped. Taking care, you lock the cell behind you - best to make sure he stays in there until the rest of the guards have a chance to find him - and hurry to rejoin Cveta and Alaric. Hopefully you haven’t taken too long in administering that much-needed dose of discipline.", parse);
 				Text.Flush();
 
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					MoveToLocation(BullTowerLoc.Building.Hall, {minute: 20});
 				});
 			}, enabled : p1cock,
@@ -1927,7 +1927,7 @@ export namespace BullTowerScenes {
 				Text.Add("With that done, you hurry up the steps to rejoin Cveta and Alaric in the main hall.", parse);
 				Text.Flush();
 
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					MoveToLocation(BullTowerLoc.Building.Hall, {minute: 5});
 				});
 			}, enabled : true,
@@ -2072,7 +2072,7 @@ export namespace BullTowerScenes {
 				tooltip : "Attempt to set off the trap safely.",
 			});
 		}
-		Gui.SetButtonsFromList(options, true, function() {
+		Gui.SetButtonsFromList(options, true, () => {
 			Text.Clear();
 			Text.Add("Taking one last look at the safe, you shake your head and turn your back on it. You decide to leave the steel-bound thing for later - it’s not as if it’ll be going anywhere should you change your mind, after all.", parse);
 			Text.Flush();
@@ -2134,7 +2134,7 @@ export namespace BullTowerScenes {
 		Text.Add("<i>“…Hindsight… do not complain… keep moving…”</i>", parse);
 		Text.Flush();
 
-		Gui.NextPrompt(function() {
+		Gui.NextPrompt(() => {
 			BullTowerScenes.EndingInjured();
 		});
 	}
@@ -2149,22 +2149,22 @@ export namespace BullTowerScenes {
 		Text.Clear();
 
 		let scenes = new EncounterTable();
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			Text.Add("Lurking about in the deep shadows cast by the walls, you hear snatches of conversation drifting down from the ramparts:", parse);
-		}, 1.0, function() { return outside; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => outside);
+		scenes.AddEnc(() => {
 			Text.Add("Crouched in the tall grass that surrounds the tower proper, you overhear two silhouettes chatting as they make their rounds:", parse);
-		}, 1.0, function() { return outside; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => outside);
+		scenes.AddEnc(() => {
 			Text.Add("The interior of Bull Tower might be solid stone, but sound echoes easily through the ancient hallways. Cveta quickly ducks into a shadowed alcove and you[a] follow suit as footsteps pass by, their owners unseen:", parse);
-		}, 1.0, function() { return !outside; });
+		}, 1.0, () => !outside);
 
 		scenes.Get();
 
 		Text.NL();
 
 		scenes = new EncounterTable();
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			Text.Add("<i>“So… why’d you join up, anyway?”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“You want to know? You really want to know?”</i>", parse);
@@ -2176,15 +2176,15 @@ export namespace BullTowerScenes {
 			Text.Add("<i>“What? That’s all?”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“What did you expect? Work is hard to come by these days…”</i>", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("<i>“You think that blast down the road is what we were told to prepare for?”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“What else would it be? Bloody forest-dwelling outlaws.”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“I dunno, I’m just glad I’m not the one who has to check it out.”</i>", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("<i>“So what’s up with the statue they brought in earlier today?”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“I think it’s for his garden. That, and the blue roses, too. That second one came all the way from the Tree, I heard.”</i>", parse);
@@ -2192,15 +2192,15 @@ export namespace BullTowerScenes {
 			Text.Add("<i>“I knew Preston can be full of it, but what sort of ass has a damned <b>statue</b> of himself made? He’s worse than my mother-in-law!”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“I wouldn’t let the lieutenant catch you saying that if I were you… he’ll take any excuse to use that whip of his.”</i>", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("<i>“This isn’t right, you know.”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“What isn’t?”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“This! We should be in the streets of Rigard, in the palace defending his Majesty and the rest of the royal family, not lurking about in this old dump. Calling it a ‘special assignment’ doesn’t change what it is. I feel like we’re just no-name bit-parters in some stage production. You know, the kind who’re just there to be a minor annoyance to the hero and are never remembered…”</i>", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("<i>“Where’s the little guy?”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“In the cells. Lieutenant’s interrogating him right now.”</i>", parse);
@@ -2214,8 +2214,8 @@ export namespace BullTowerScenes {
 			Text.Add("<i>“Fred went down earlier, although he took a lot of convincing.”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“I don’t blame him - I don’t want to be down there, either. Well, you can’t deny that he gets results, especially with that odd venom he uses…”</i>", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("<i>“You know that brothel we raided the other day? That one in the slums? You didn’t hear it from me, but I think someone high up was refused service and asked Preston to do something about it.”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“You sure about that?”</i>", parse);
@@ -2223,8 +2223,8 @@ export namespace BullTowerScenes {
 			Text.Add("<i>“Everyone gets that his whole ‘The Shining’ schtick is as fake as a strap-on, and you ought to know better.”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“Not saying that it isn’t - armor should be too battered and dented to take a good shine - but how do you know that <b>this</b> raid wasn’t legit? We did see some weird shit in there…”</i>", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("<i>“I can’t believe we’re out here in the cold of night on some emergency. I was supposed to be off duty, damn it! Fuck Preston!”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“You shouldn’t speak of him that way.”</i>", parse);
@@ -2234,8 +2234,8 @@ export namespace BullTowerScenes {
 			Text.Add("<i>“It’s not that. He wasn’t always like that. His first assignment, during the rebellion... things didn’t go down the way it’s told in the books. Something happened to him… I was there when it happened, you know. Saw it with my own eyes. Preston was never the same man after that.”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“Ooh, tell me more…”</i>", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("<i>“So, everything’s in the warehouse?”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“Locked up tight; Jimmy has the key, and he’s on caravan duty. Spirits, my back aches, and it’s only going to get worse tomorrow.”</i>", parse);
@@ -2243,8 +2243,8 @@ export namespace BullTowerScenes {
 			Text.Add("<i>“Well, I said to lift with your knees, but would you listen?”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“Shut up, Fred. I didn’t sign on with the Royal Guard to be a stevedore.”</i>", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("<i>“…Taking down tough guys isn’t that bad. At least when you beat them, they’ve the brains to know when they’re beat. No, it’s the crazy ones you have to worry about.”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“Like that little guy we tried to pull for loitering the other day?”</i>", parse);
@@ -2254,8 +2254,8 @@ export namespace BullTowerScenes {
 			Text.Add("<i>“Y’know, for someone who calls himself the Shining, I wonder why Preston puts up with someone like that.”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“That’s ‘cause he does all the stuff Preston won’t dirty his hands with…”</i>", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("<i>“Something is up tonight, and I don’t like it.”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“You mean the explosion down the road?”</i>", parse);
@@ -2263,7 +2263,7 @@ export namespace BullTowerScenes {
 			Text.Add("<i>“Not just that… something’s up inside the fort. Feels like there’s eyes watching me from the shadows...”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“You were always paranoid.”</i>", parse);
-		}, 3.0, function() { return outlaws.BT.Suspicion() >= 50; });
+		}, 3.0, () => outlaws.BT.Suspicion() >= 50);
 
 		scenes.Get();
 
@@ -2427,7 +2427,7 @@ export namespace BullTowerScenes {
 		if (outlaws.flags.BT & OutlawsFlags.BullTower.CaravansSearched) { relevant = true; }
 		if (outlaws.flags.BT & OutlawsFlags.BullTower.CaravansIgnited) { relevant = true; }
 
-		Gui.NextPrompt(function() {
+		Gui.NextPrompt(() => {
 			Text.Clear();
 			Text.Add("<b>Final Score:</b><br>", parse);
 			Text.Add("Suspicion raised: " + outlaws.BT.Suspicion() + "/100<br>", parse);
@@ -2435,7 +2435,7 @@ export namespace BullTowerScenes {
 			Text.Add("Alarm raised: " + (foundOut ? "yes" : "no"), parse);
 			Text.Flush();
 
-			Gui.NextPrompt(function() {
+			Gui.NextPrompt(() => {
 				Text.Clear();
 				if (outlaws.AlaricSaved()) {
 					Text.Add("<i>“Thank you for pulling this off without a hitch,”</i> Zenith says, a rare smile on the outlaw leader’s face. <i>“I confess that I had some doubts about your abilities and wondered if I should have sent Maria in your place, but it seems you and Cveta made a fine team and put Preston to shame. It’s not often that I’m glad to be proven wrong.</i>", parse);
@@ -2504,7 +2504,7 @@ export namespace BullTowerScenes {
 					Text.NL();
 					Text.Add("<i>“There is one more thing. They were prepared for us, [playername]. We still managed to pull off the diversion thanks to everyone’s grit and dedication, but the guards knew we were coming, even if the caravaneers didn’t. They turned up far sooner than we had expected them to. We didn’t get to claim much in the way of spoils from that attack, though since Alaric is free, I’ll nonetheless consider tonight a success. Still, it raises serious questions that I’ll have to look into later.</i>", parse);
 					Text.NL();
-					parse.comp = party.Num() == 2 ? party.Get(1).name : "your companions";
+					parse.comp = party.Num() === 2 ? party.Get(1).name : "your companions";
 					parse.c = party.Num() > 1 ? Text.Parse(", and perhaps reassure [comp] that you’re fine", parse) : "";
 					parse.injured = injured ? "and that gash will take time to heal" : "and I’d rather not see you worn out";
 					Text.Add("<i>“Now, I suggest that you get some rest[c]. You’ve had enough adventure for a single night, [injured].”</i> With that, Zenith gives you one final nod, then turns and stalks away, his wide, easy stride eating up distance until he disappears amidst the camp’s morning activity.", parse);
@@ -2581,7 +2581,7 @@ export namespace BullTowerScenes {
 
 		TimeStep({minute: 10});
 
-		Gui.NextPrompt(function() {
+		Gui.NextPrompt(() => {
 			Text.Clear();
 			Text.Add("<i>“I’d rather you not belittle my profession,”</i> Alaric huffs. <i>“I know we don’t exactly have the best of reputations, there’s no need to press home the point.</i>", parse);
 			Text.NL();
@@ -2651,7 +2651,7 @@ export namespace BullTowerScenes {
 		Text.NL();
 		Text.Add("What about, though?", parse);
 		Text.NL();
-		parse.comp = party.Num() == 2 ? party.Get(1).name : "your companions";
+		parse.comp = party.Num() === 2 ? party.Get(1).name : "your companions";
 		parse.c = party.Num() > 1 ? Text.Parse(" and [comp]", parse) : "";
 		parse.c2 = party.Num() > 1 ? "yourselves" : "yourself";
 		Text.Add("<i>“He didn’t say, although it sounded important. Guess you should go find out.”</i> With that, the fox-morph turns and heads back to his post, leaving you to find your own way to Zenith’s place. The building is easy to find - you’re not likely to forget the day you learned of the outlaws, after all - and no one stops you as you open the door and step inside. The table with the map is still there, the papers too; there are some chairs in a corner, and you[c] seat [c2] there, waiting for Zenith to turn up.", parse);

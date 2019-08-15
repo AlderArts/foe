@@ -148,9 +148,9 @@ export class Equine extends Entity {
 			Abilities.Attack.Use(encounter, this, t);
 		} else if (choice < 0.8 && Abilities.Physical.Bash.enabledCondition(encounter, this)) {
 			Abilities.Physical.Bash.Use(encounter, this, t);
- } else {
+ 		} else {
 			Abilities.Seduction.Tease.Use(encounter, this, t);
- }
+		}
 	}
 
 }
@@ -663,9 +663,9 @@ EquineScenes.WinPrompt = function() {
 		parse.party = " and " + party.Get(1).name;
 	} else if (party.Num() > 2) {
 		parse.party = " and your companions";
- } else {
+ 	} else {
 		parse.party = "";
- }
+ 	}
 
 	Gui.Callstack.push(() => {
 		Text.Clear();
@@ -744,9 +744,9 @@ EquineScenes.WinFuckHim = (enc: any) => {
 		parse.party = " and " + party.Get(1).name;
 	} else if (party.Num() > 2) {
 		parse.party = " and your companions";
- } else {
+	} else {
 		parse.party = "";
- }
+ 	}
 
 	const longCock = p1cock.Len() > 25;
 
@@ -774,9 +774,9 @@ EquineScenes.WinFuckHim = (enc: any) => {
 		Text.Add("it looks like the stallion tried to literally eat a bag of dicks - and failed.", parse);
 	} else if (player.NumCocks() === 2) {
 		Text.Add("they seem to be pointing accusingly at the stallion's eyes, as though trying to stare him down.", parse);
- } else {
+ 	} else {
 		Text.Add("it appears as though the stallion is growing a dick from the end of his nose like a perverse rhino horn.", parse);
- }
+ 	}
 	Text.NL();
 	Text.Add("You giggle at the sight, but another hot breath against your crotch and the equine's irritated squirming brings you back to the task at hand. You release the horse's head and he pulls away as fast as he can, allowing you to admire his humiliated fluster and the confused erection jutting upward from between his muscled thighs. Satisfied that you have established the pecking order around here, you gesture at your [cocks] with a flourish.", parse);
 	Text.NL();
@@ -883,9 +883,9 @@ EquineScenes.WinFuckHim = (enc: any) => {
 
 								if (player.NumCocks() > 2) {
 									Text.Add("The rest of your [cocks2] do a splendid job of glazing his face, his chest, and most everything else in the immediate vicinity. It quickly becomes a rather large mess. ", parse);
-								} else if (player.NumCocks() == 2) {
+								} else if (player.NumCocks() === 2) {
 									Text.Add("Your other cock fires additional loads indiscriminately about you, shooting wads of your spunk all over the stallion’s face and back. A particularly large pulse makes your shaft twitch back toward you, splattering your chest with a sizable splotch of your own juices. It quickly becomes a rather large mess. ", parse);
- }
+								}
 
 								if (longCock) {
 									if (cum > 3) {
@@ -1031,9 +1031,9 @@ EquineScenes.WinFuckHim = (enc: any) => {
 						Text.Add("your smooth scales.", parse);
 					} else if (player.HasBalls()) {
 						Text.Add("your own.", parse);
- } else {
+ 					} else {
 						Text.Add("your groin.", parse);
- }
+ 					}
 					Text.NL();
 					Text.Add("Seeing him in such a state makes you lose what's left of your restraint, and you drop the foreplay with all haste. Taking[oneof] your shaft[s] in one hand, you use your free hand to spread the equine's tight hole as much as you can as you guide your tip to prod it open. Rubbing and pushing a little at a time, you start to ease your cockhead into the virginal opening, biting your lip with the effort. The sensation is almost too much for you; the stallion's ass is deliciously tight, and his sphincter is spasming madly around the leading edge of your intruding member. Slowly but surely, you force yourself deeper and deeper into his rump. By now, the stallion has recovered from his daze enough to realize that something is amiss, but there is little he can do to stop your relentless penetration. He digs his fingers into the grassy loam beneath him, gritting his teeth as he feels his insides being violated one inch at a time.", parse);
 					Text.NL();
@@ -1180,9 +1180,9 @@ EquineScenes.WinFuckHer = (enc: any) => {
 		parse.party = party.Get(1).name;
 	} else if (party.Num() > 2) {
 		parse.party = "your companions";
- } else {
+ 	} else {
 		parse.party = "";
- }
+ 	}
 
 	Text.Clear();
 	parse.l = player.LowerBodyType() !== LowerBodyType.Single ? " between your legs" : "";
@@ -1198,7 +1198,7 @@ EquineScenes.WinFuckHer = (enc: any) => {
 		Text.Add("to all fours and stalk ", parse);
 	} else if (player.LowerBodyType() === LowerBodyType.Single) {
 		Text.Add("onto your belly and slither ", parse);
- }
+ 	}
 	Text.Add("between her legs, not stopping until your [face] is suspended over hers and you are staring down into her wide, somewhat apprehensive eyes. Your [cocks] twitch[notEs] over her mons, and you enjoy the radiant heat that pulses between your respective genitals as you watch her expression grows more lustful and needy with each passing moment. Her eyes repeatedly dart down toward your crotch and then back up to meet your gaze, not understanding the lack of penetration or your reason behind it.", parse);
 	Text.Flush();
 

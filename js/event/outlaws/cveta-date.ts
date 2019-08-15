@@ -10,7 +10,7 @@ import { CvetaFlags } from "./cveta-flags";
 
 export namespace CvetaDateScenes {
 
-	export function Prompt(Prompt: any) {
+	export function Prompt(prompt: any) {
 		const player = GAME().player;
 		const party: Party = GAME().party;
 		const cveta = GAME().cveta;
@@ -23,7 +23,7 @@ export namespace CvetaDateScenes {
 		Text.Clear();
 		Text.Add("You ask Cveta if she’d like to go somewhere with you.", parse);
 		if (party.Num() > 1) {
-			parse.comp = party.Num() == 2 ? party.Get(1).name : "everyone else";
+			parse.comp = party.Num() === 2 ? party.Get(1).name : "everyone else";
 			Text.Add(" You have some free time, and if it’s to be just the two of you, you could always ask [comp] to hang back for the rest of the day and wait for you in camp.", parse);
 		}
 		Text.NL();
@@ -35,7 +35,7 @@ export namespace CvetaDateScenes {
 			Text.Add("<i>“Could you perhaps ask again tomorrow, before noon?”</i>", parse);
 			Text.Flush();
 
-			Prompt();
+			prompt();
 		} else {
 			Text.Add("<i>“I would not mind, [playername]. I have some spare time, and perhaps a change in scenery would help inspire my practice. Was there a place you had in mind?”<i/>", parse);
 			Text.NL();
@@ -63,13 +63,13 @@ export namespace CvetaDateScenes {
 			/* TODO
 			options.push({ nameStr : "name",
 				tooltip : "",
-				func : function() {
+				func : () => {
 					Text.Clear();
 					CvetaDateScenes.DryadGlade();
 				}, enabled : true
 			});
 			*/
-			if (cveta.flags.Date != 0) {
+			if (cveta.flags.Date !== 0) {
 				options.push({ nameStr : "Up to her",
 					tooltip : "Well, where does she fancy going?",
 					func() {
@@ -91,14 +91,14 @@ export namespace CvetaDateScenes {
 				});
 			}
 
-			Gui.SetButtonsFromList(options, true, function() {
+			Gui.SetButtonsFromList(options, true, () => {
 				Text.Clear();
 				Text.Add("Hmm… you have to give it some more thought.", parse);
 				Text.NL();
 				Text.Add("<i>“You know where to find me,”</i> Cveta replies amiably.", parse);
 				Text.Flush();
 
-				Prompt();
+				prompt();
 			});
 		}
 	}
@@ -116,7 +116,7 @@ export namespace CvetaDateScenes {
 		party.AddMember(cveta, true);
 
 		// Set up restore party at the bottom of the callstack, fallthrough
-		Gui.Callstack.push(function() {
+		Gui.Callstack.push(() => {
 			party.LoadActiveParty();
 			Gui.PrintDefaultOptions();
 		});
@@ -152,18 +152,18 @@ export namespace CvetaDateScenes {
 			Text.Add("The denizens of the glade frolic about, oblivious to your familiar presence. A few of the braver dryads and centaurs greet you warmly, and you give them a friendly wave back. ", parse);
 
 			const scenes = new EncounterTable();
-			scenes.AddEnc(function() {
+			scenes.AddEnc(() => {
 				Text.Add("Orchid and her friends are hard at play, the be-tentacled dryad chasing after the others and trying to ensnare them with her plant-like limbs, much to everyone’s glee.", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => true);
+			scenes.AddEnc(() => {
 				Text.Add("Orchid is cuddling with some of her friends, their afterglow a clear sign of recent carnal activities. The dryads tentacles possessively caress the swollen stomach of a centauress doe, more than likely a recent victim of the playful forest creature.", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => true);
+			scenes.AddEnc(() => {
 				Text.Add("Nearby, you spot Orchid with a few of her friends. It seems like their game of tag has ended, with the be-tentacled dryad the clear winner, and she’s just now claiming her prize. The assorted dryads and centaurs stuck in her web moan and whimper in delight as she ravages their bodies, caught in a lustful frenzy. The bird at your side averts her gaze, a slight blush on her cheek.", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => true);
+			scenes.AddEnc(() => {
 				Text.Add("Orchid and her friends are napping together in a large pile of dryads, centaurs and tentacles. It’s an uneasy rest, as the tentacles seem to have a mind of their own, much to the delight of the dozing forest creatures.", parse);
-			}, 1.0, function() { return true; });
+			}, 1.0, () => true);
 
 			scenes.Get();
 		} else {
@@ -208,12 +208,12 @@ export namespace CvetaDateScenes {
 		Text.NL();
 
 		let scenes = new EncounterTable();
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			Text.Add("The improvised piece that drifts from her fingers is slow and serene to match the glade’s calm atmosphere. Every plucked note a drip of water in a still pool, Cveta is absolutely calm, her movements slow and measured. Gentle music, to match the dryad glade’s gentle atmosphere. The songstress’ bosom heaves as she breathes deeply of the rich floral scent that pervades the air - no doubt part of the atmosphere she finds so wonderfully inspiring - as if she were about to burst into song, but she doesn’t and concentrates on the strings instead.", parse);
 			Text.NL();
 			Text.Add("Gradually, you find your eyelids drooping and growing heavy; most of the forest creatures have already given in to the calming melody and are snoozing away, curled up against each other. Noticing that the better part of her audience has dozed off, Cveta finishes up her ditty by way of a broken chord, then stands to survey her handiwork.", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("You know that Cveta doesn’t really like improv, but she doesn’t seem to mind it this time around. Maybe it’s how eager her audience is, perhaps the glade’s tranquil aura does wonders for the creative soul, or perhaps she just likes being around all these flowers. Whatever the reason, the songstress simply plays, fingers gliding along the strings of her lyre, her music a window into her mood.", parse);
 			Text.NL();
 			Text.Add("The melody that ensues is a perfect fit for the rolling spread of wildflowers that encircle the both of you; vivid and bright, conjuring images of people frolicking about in colorful dress and… um… ", parse);
@@ -223,7 +223,7 @@ export namespace CvetaDateScenes {
 			Text.Add("Cveta’s ditty doesn’t last too long - or perhaps it’s you who lost track of time. A few chords mark the end of her improvised piece, and the music eventually fades to a stop, leaving the songstress perfectly poised in her seat, a gentle breeze caressing her feathers and hair.", parse);
 			Text.NL();
 			Text.Add("<i>“That will be all for today,”</i> she announces, standing and giving the assembled forest creatures a small curtsey. There’re a few moans of disappointment, but by and large the audience disperses, leaving just you and Cveta in the midst of the flower field.", parse);
-		}, 1.0, function() { return true; });
+		}, 1.0, () => true);
 
 		scenes.Get();
 
@@ -236,7 +236,7 @@ export namespace CvetaDateScenes {
 		Text.NL();
 
 		scenes = new EncounterTable();
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			Text.Add("<i>“Mmmh,”</i> the songstress says, her voice a soft, warm hum in her breast. You can practically feel every muscle in her body relax as she leans her head on your shoulder, the crimson waterfall of her hair spilling down your back.  <i>“I feel safe.”</i>", parse);
 			Text.NL();
 			Text.Add("Well, that’s kind of the point of the glade, you reply.", parse);
@@ -250,8 +250,8 @@ export namespace CvetaDateScenes {
 			Text.Add("She presses herself even closer, wrapping a feathery wing about you even as the fingers of her free hand wander lazily along your thigh. <i>“Yes, you are a lot like him. Maybe just as good.”</i>", parse);
 			Text.NL();
 			Text.Add("Yes… really awkward. Still, you play along, nosing Cveta’s hair and telling her what a good little bird she is and how wonderfully she played today. It’s a simple compliment, but the songstress practically preens at receiving it - you can actually feel her pulse quicken beneath all those layers of cloth, feathers and skin. And it <i>is</i> nice to have Cveta let her hair down for once, both literally and figuratively; she’s so uptight at most times.", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("<i>“These are rather exquisite flowers,”</i> Cveta says with a small sigh. <i>“It feels like a dream, strangely familiar yet very much different. Highland wildflowers are quite unlike these.”</i>", parse);
 			Text.NL();
 			Text.Add("How so?", parse);
@@ -261,8 +261,8 @@ export namespace CvetaDateScenes {
 			Text.Add("Hmm…", parse);
 			Text.NL();
 			Text.Add("<i>“The best, of course, are rose gardens back home. Generations upon generations of careful tending by my ancestors, a duty passed on from parent to child. If I ever get the chance, I will have to bring you there someday,”</i> she adds with a sigh.", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("Is it just you, or did she seem just a little jealous of Mother Tree when you were coming in?", parse);
 			Text.NL();
 			Text.Add("Cveta huffs, wriggling in your grasp. <i>“I am not jealous!”</i>", parse);
@@ -276,7 +276,7 @@ export namespace CvetaDateScenes {
 			Text.Add("<i>“As opposed to my own. Oh, there were the servants, and I always made sure to treat them as their station accorded right down to memorizing the each and every proper title, but blood is thicker than water, is it not?”</i>", parse);
 			Text.NL();
 			Text.Add("Hmm…", parse);
-		}, 1.0, function() { return true; });
+		}, 1.0, () => true);
 
 		scenes.Get();
 
@@ -424,7 +424,7 @@ export namespace CvetaDateScenes {
 			}, enabled : true,
 		});
 
-		Gui.Callstack.push(function() {
+		Gui.Callstack.push(() => {
 			Text.NL();
 			Text.Add("<i>“I think that is enough for now, is it not? Come on, [playername]. Let us eat.”</i>", parse);
 			Text.NL();
@@ -496,7 +496,7 @@ export namespace CvetaDateScenes {
 				}, enabled : true,
 			});
 
-			Gui.Callstack.push(function() {
+			Gui.Callstack.push(() => {
 				Text.NL();
 				Text.Add("The rest of the meal passes quickly, helped along by the fact that there wasn’t much to begin with. Nevertheless, it should keep hunger at bay until you can get a proper meal. Cveta finishes herself, wiping her beak on a small handkerchief, then begins packing up the hamper once more.", parse);
 				Text.NL();

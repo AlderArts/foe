@@ -2556,7 +2556,7 @@ LizardsScenes.LossFemale = function() {
 			Text.NL();
 		}
 		if (player.FirstVag()) {
-			parse.l = player.LowerBodyType() != LowerBodyType.Single ? Text.Parse("up the inside of your [thigh]", parse) : "from your stomach down into the valley of your crotch";
+			parse.l = player.LowerBodyType() !== LowerBodyType.Single ? Text.Parse("up the inside of your [thigh]", parse) : "from your stomach down into the valley of your crotch";
 			Text.Add("<i>“Now <b>this</b> is a treat,”</i> the lizan licks her lips appreciatively as her finger traces a line [l]. After teasing your outer lips for a bit, she sinks two digits into your [vag], watching your face closely as she does. If you weren’t wet before, the sensual lizard sure does her best to push your buttons… but to what end? A tiny gasp slips out from your lips, much to her mirth.", parse);
 			Text.NL();
 			parse.c = player.FirstCock() ? Text.Parse(" removing her foot from your [cocks] as she gets down on all fours,", parse) : "";
