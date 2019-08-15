@@ -1,9 +1,8 @@
 import { Abilities } from "../../abilities";
-import { Entity, TargetStrategy } from "../../entity";
 import { Images } from "../../assets";
-import { Text } from "../../text";
 import { Color } from "../../body/color";
-
+import { Entity, TargetStrategy } from "../../entity";
+import { Text } from "../../text";
 
 /* TODO
  * Act AI
@@ -17,9 +16,9 @@ export class LaylaMob extends Entity {
 		this.name = "Creature";
 		this.monsterName       = "the creature";
 		this.MonsterName       = "The creature";
-		
+
 		this.avatar.combat = Images.layla_f;
-		
+
 		// TODO
 		this.maxHp.base        = 1000;
 		this.maxSp.base        = 200;
@@ -32,41 +31,42 @@ export class LaylaMob extends Entity {
 		this.spirit.base       = 40;
 		this.libido.base       = 34;
 		this.charisma.base     = 25;
-		
+
 		this.level = 12;
 		this.sexlevel = 1;
-		
+
 		this.body.DefHerm();
 		this.FirstBreastRow().size.base = 12.5;
 		this.Butt().buttSize.base = 5;
 		this.SetSkinColor(Color.blue);
 		this.SetHairColor(Color.black);
 		this.SetEyeColor(Color.red);
-		
+
 		this.SetLevelBonus();
 		this.RestFull();
 	}
-		
-	Act(encounter : any, activeChar : any) {
+
+	public Act(encounter: any, activeChar: any) {
 		// TODO: Very TEMP
 		Text.Add(this.MonsterName + " acts! Rawr!");
 		Text.NL();
 		Text.Flush();
-		
-		// Pick a random target (go for lowest abs HP)
-		var t = this.GetSingleTarget(encounter, activeChar, TargetStrategy.LowAbsHp);
 
-		var parseVars = {
+		// Pick a random target (go for lowest abs HP)
+		const t = this.GetSingleTarget(encounter, activeChar, TargetStrategy.LowAbsHp);
+
+		const parseVars = {
 			name   : this.name,
 			hisher : this.hisher(),
-			tName  : t.name
+			tName  : t.name,
 		};
 
-		var choice = Math.random();
-		if(choice < 0.6)
+		const choice = Math.random();
+		if (choice < 0.6) {
 			Abilities.Attack.Use(encounter, this, t);
-		else if(choice < 0.8 && Abilities.Physical.Bash.enabledCondition(encounter, this))
+		} else if (choice < 0.8 && Abilities.Physical.Bash.enabledCondition(encounter, this)) {
 			Abilities.Physical.Bash.Use(encounter, this, t);
+ 		}
 	}
 
 }

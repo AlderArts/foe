@@ -1,59 +1,59 @@
 /*
- * 
+ *
  * Define Cale
- * 
+ *
  */
-import { Entity } from '../../entity';
-import { Shop } from '../../shop';
-import { IngredientItems } from '../../items/ingredients';
-import { Race } from '../../body/race';
-import { Color } from '../../body/color';
-import { AppendageType } from '../../body/appendage';
-import { TF } from '../../tf';
-import { WorldTime, GAME, WORLD } from '../../GAME';
-import { CaleFlags } from './cale-flags';
-import { Item } from '../../item';
+import { AppendageType } from "../../body/appendage";
+import { Color } from "../../body/color";
+import { Race } from "../../body/race";
+import { Entity } from "../../entity";
+import { GAME, WORLD, WorldTime } from "../../GAME";
+import { Item } from "../../item";
+import { IngredientItems } from "../../items/ingredients";
+import { Shop } from "../../shop";
+import { TF } from "../../tf";
+import { CaleFlags } from "./cale-flags";
 
 export class Cale extends Entity {
-	shop : Shop;
-	shopItems : Item[];
+	public shop: Shop;
+	public shopItems: Item[];
 
-	constructor(storage? : any) {
+	constructor(storage?: any) {
 		super();
 
 		this.ID = "cale";
-		
+
 		// Character stats
 		this.name = "Wolfie";
-		
+
 		this.shop = new Shop();
-		
+
 		this.body.DefMale();
 		this.body.SetRace(Race.Wolf);
 		this.SetSkinColor(Color.gray);
 		TF.SetAppendage(this.Back(), AppendageType.tail, Race.Wolf, Color.gray);
 		this.FirstCock().length.base = 20;
 		this.FirstCock().thickness.base = 4;
-		
-		this.flags["Met"]      = CaleFlags.Met.NotMet;
-		this.flags["Met2"]     = 0;
-		this.flags["Sexed"]    = 0;
-		this.flags["Rogue"]    = 0;
-		this.flags["sneakAtk"] = 0;
-		this.flags["trickBJ"]  = 0;
-		
-		this.flags["xOut"]     = 0;
-		this.flags["xedOut"]   = 0;
-		this.flags["cLoss"]    = 0; // cavalcade loss
-		this.flags["cCheat"]   = 0; // cavalcade cheat
-		this.flags["eBlow"]    = 0;
-		
-		this.flags["rotPast"]  = 0;
-		this.flags["maxPast"]  = 0;
-		this.flags["rosPast"]  = 0;
-		
+
+		this.flags.Met      = CaleFlags.Met.NotMet;
+		this.flags.Met2     = 0;
+		this.flags.Sexed    = 0;
+		this.flags.Rogue    = 0;
+		this.flags.sneakAtk = 0;
+		this.flags.trickBJ  = 0;
+
+		this.flags.xOut     = 0;
+		this.flags.xedOut   = 0;
+		this.flags.cLoss    = 0; // cavalcade loss
+		this.flags.cCheat   = 0; // cavalcade cheat
+		this.flags.eBlow    = 0;
+
+		this.flags.rotPast  = 0;
+		this.flags.maxPast  = 0;
+		this.flags.rosPast  = 0;
+
 		// Shop
-		this.flags["shop"]     = 0;
+		this.flags.shop     = 0;
 		this.shopItems = [];
 		this.shopItems.push(IngredientItems.HorseHair);
 		this.shopItems.push(IngredientItems.HorseShoe);
@@ -97,60 +97,61 @@ export class Cale extends Entity {
 		this.shopItems.push(IngredientItems.FlowerPetal);
 		this.shopItems.push(IngredientItems.RawHoney);
 		this.shopItems.push(IngredientItems.BeeChitin);
-		//TODO: More item ingredientss
-		
+		// TODO: More item ingredientss
+
 		this.SetLevelBonus();
 		this.RestFull();
-		
-		if(storage) this.FromStorage(storage);
-		
-		if(this.Slut() >= 60) {
+
+		if (storage) { this.FromStorage(storage); }
+
+		if (this.Slut() >= 60) {
 			this.Butt().capacity.base = 15;
-		}
-		else {
+		} else {
 			this.Butt().capacity.base = 5;
 		}
 	}
 
-	Met() {
-		return this.flags["Met2"] >= CaleFlags.Met2.Talked;
+	public Met() {
+		return this.flags.Met2 >= CaleFlags.Met2.Talked;
 	}
-	
-	Buttslut() {
-		return this.flags["Met2"] >= CaleFlags.Met2.Goop;
+
+	public Buttslut() {
+		return this.flags.Met2 >= CaleFlags.Met2.Goop;
 	}
-	
-	FromStorage(storage : any) {
-		this.Butt().virgin       = parseInt(storage.virgin) == 1;
-		
+
+	public FromStorage(storage: any) {
+		this.Butt().virgin       = parseInt(storage.virgin, 10) === 1;
+
 		this.LoadPersonalityStats(storage);
-		
+
 		// Load flags
 		this.LoadFlags(storage);
 		this.LoadSexFlags(storage);
-		
-		if(this.flags["Met2"] != CaleFlags.Met2.NotMet)
+
+		if (this.flags.Met2 !== CaleFlags.Met2.NotMet) {
 			this.name = "Cale";
+		}
 	}
-	
-	ToStorage() {
-		var storage : any = {
-			virgin : this.Butt().virgin ? 1 : 0
+
+	public ToStorage() {
+		const storage: any = {
+			virgin : this.Butt().virgin ? 1 : 0,
 		};
-		
+
 		this.SavePersonalityStats(storage);
-		
+
 		this.SaveFlags(storage);
 		this.SaveSexFlags(storage);
-		
+
 		return storage;
 	}
-	
+
 	// Schedule
-	IsAtLocation(location : any) {
+	public IsAtLocation(location: any) {
 		location = location || GAME().party.location;
-		if(location == WORLD().loc.Plains.Nomads.Fireplace)
-			return GAME().cale.flags["Met"] != 0 && (WorldTime().hour >= 15 || WorldTime().hour < 3);
+		if (location === WORLD().loc.Plains.Nomads.Fireplace) {
+			return GAME().cale.flags.Met !== 0 && (WorldTime().hour >= 15 || WorldTime().hour < 3);
+		}
 		return false;
-	}	
+	}
 }

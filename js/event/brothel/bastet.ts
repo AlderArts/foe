@@ -1,18 +1,18 @@
-import * as _ from 'lodash';
+import * as _ from "lodash";
 
-import { Entity } from '../../entity';
-import { Text } from '../../text';
-import { Gui } from '../../gui';
-import { GAME, TimeStep } from '../../GAME';
-import { LucilleFlags } from './lucille-flags';
-import { EncounterTable } from '../../encountertable';
-import { Race } from '../../body/race';
-import { TF } from '../../tf';
-import { Cock } from '../../body/cock';
-import { Capacity } from '../../body/orifice';
-import { Vagina } from '../../body/vagina';
-import { AppendageType } from '../../body/appendage';
-import { Color } from '../../body/color';
+import { AppendageType } from "../../body/appendage";
+import { Cock } from "../../body/cock";
+import { Color } from "../../body/color";
+import { Capacity } from "../../body/orifice";
+import { Race } from "../../body/race";
+import { Vagina } from "../../body/vagina";
+import { EncounterTable } from "../../encountertable";
+import { Entity } from "../../entity";
+import { GAME, TimeStep } from "../../GAME";
+import { Gui } from "../../gui";
+import { Text } from "../../text";
+import { TF } from "../../tf";
+import { LucilleFlags } from "./lucille-flags";
 
 enum BastetState {
 	NotViewed = 0,
@@ -20,314 +20,304 @@ enum BastetState {
 	S2Life    = 2,
 	S3Anubis  = 3,
 	S4Drought = 4,
-	S5Trouble = 5
-};
+	S5Trouble = 5,
+}
 
 export class Bastet extends Entity {
-	constructor(storage? : any) {
+	constructor(storage?: any) {
 		super();
-		
-		this.flags["State"] = BastetState.NotViewed;
-		
-		if(storage) this.FromStorage(storage);
+
+		this.flags.State = BastetState.NotViewed;
+
+		if (storage) { this.FromStorage(storage); }
 	}
 
-	Cost() {
+	public Cost() {
 		return 250;
 	}
-	First() {
-		return this.flags["State"] == BastetState.NotViewed;
+	public First() {
+		return this.flags.State === BastetState.NotViewed;
 	}
-	
-	
-	FromStorage(storage : any) {
+
+	public FromStorage(storage: any) {
 		// Load flags
 		this.LoadFlags(storage);
 	}
-	
-	ToStorage() {
-		let storage = {};
-		
+
+	public ToStorage() {
+		const storage = {};
+
 		this.SaveFlags(storage);
-		
+
 		return storage;
-	}	
+	}
 }
 
 export namespace BastetScenes {
-	let LucilleScenes : any;
-	export function INIT(lucilleScenes : any) {
+	let LucilleScenes: any;
+	export function INIT(lucilleScenes: any) {
 		LucilleScenes = lucilleScenes;
 	}
 
 	export function IntroEntryPoint() {
-		let player = GAME().player;
-		let bastet = GAME().bastet;
-		let parse : any = {
-			armor : player.ArmorDesc()
+		const player = GAME().player;
+		const bastet = GAME().bastet;
+		const parse: any = {
+			armor : player.ArmorDesc(),
 		};
-		
+
 		let choice = BastetState.NotViewed;
-		
-		let func = function(c : BastetState) {
-			return function() {
+
+		const func = (c: BastetState) => {
+			return () => {
 				choice = c;
 				Text.Clear();
 				Gui.PrintDefaultOptions();
-			}
+			};
 		};
-		
-		Gui.Callstack.push(function() {
+
+		Gui.Callstack.push(() => {
 			Text.Add("Without cause for delay, you begin removing your [armor], hanging it up out of the way on the hangers provided. Once you are totally naked, you move past the stool and enter the magical circle. Then you close your eyes, take a deep breath to steel yourself, and say, <i>'enter'</i> as instructed.", parse);
 			Text.NL();
-			
+
 			BastetScenes.SceneSelect(choice);
 		});
-		
+
 		Text.Clear();
-		
-		//TODO
-		//[Birth][Life][Anubis][Drought][Trouble]
-		let options = new Array();
+
+		// TODO
+		// [Birth][Life][Anubis][Drought][Trouble]
+		const options = new Array();
 		options.push({ nameStr : "Birth",
 			tooltip : "“Enjoy life as the avatar of a cat Goddess.” Says the poster beside the door.",
-			func : func(BastetState.S1Birth), enabled : true
+			func : func(BastetState.S1Birth), enabled : true,
 		});
-		
-		if(bastet.First()) {
+
+		if (bastet.First()) {
 			Text.Add("As the door clicks shut behind you, you cast a brief observatory glance around the room you’re inside of. It’s fairly small - little more than a glorified closet, really - and simply done. The walls are covered in wallpaper printed with the images of rolling sand dunes underneath a clear sky. A few hangers are provided for putting things up on, but other than that, there’re only four things of note: A simple three-legged stool, a full-body mirror against the furthest wall, a small switch, and an ornate magic circle on the floor in front of the mirror, just waiting to be activated.", parse);
 			Text.NL();
 			Text.Add("As you examine the switch, you note what appears to be a selection of chapters within this theme room. You try to move the switch experimentally, but it seems to be locked in the first choice for now. Looks like you’re supposed to experience these in order...", parse);
 			Text.NL();
 			choice = BastetState.S1Birth;
-			
+
 			Gui.PrintDefaultOptions();
-		}
-		else {
+		} else {
 			Text.Add("As the door shuts behind you, you take glance at the familiar desert-themed closet. Well, you know the drill. Choose a chapter, get naked and enter the fantasy.", parse);
 			Text.Flush();
 			Gui.SetButtonsFromList(options, false, null);
 		}
 	}
 
-	export function SceneSelect(choice : BastetState) {
-		let bastet = GAME().bastet;
-		
-		Gui.Callstack.push(function() {
-			if(bastet.flags["State"] < choice)
-				bastet.flags["State"] = choice;
+	export function SceneSelect(choice: BastetState) {
+		const bastet = GAME().bastet;
+
+		Gui.Callstack.push(() => {
+			if (bastet.flags.State < choice) {
+				bastet.flags.State = choice;
+			}
 			Gui.PrintDefaultOptions();
 		});
-		
-		switch(choice) {
+
+		switch (choice) {
 			default:
 			case BastetState.S1Birth: BastetScenes.Birth(); break;
-			//TODO new scenes
+			// TODO new scenes
 		}
 	}
 
 	export function TFBlock() {
-		let player = GAME().player;
+		const player = GAME().player;
 
-		let parse : any = {};
+		let parse: any = {};
 		parse = player.ParserTags(parse);
 		parse = Text.ParserPlural(parse, player.NumCocks() > 1);
-		
+
 		Text.Add("Stretching, you take a few moments to check yourself over, getting used to having your real body back.", parse);
 		Text.NL();
-		
+
 		let TFapplied = false;
-		
-		let scenes = new EncounterTable();
-		
-		let incompleteCatTF = function() {
-			if(!player.Ears().race.isRace(Race.Feline)) return true;
-			if(player.HasTail() && !player.HasTail().race.isRace(Race.Feline)) return true;
-			if(!player.Eyes().race.isRace(Race.Feline)) return true;
-			if(!player.Tongue().race.isRace(Race.Feline)) return true;
-			if(player.FirstCock() && !player.BiggestCock().race.isRace(Race.Feline)) return true;
-			if(!player.Arms().race.isRace(Race.Feline)) return true;
-			if(!player.Legs().race.isRace(Race.Feline)) return true;
-			if(!player.Race().isRace(Race.Feline)) return true;
-			if(!player.Face().race.isRace(Race.Feline)) return true;
+
+		const scenes = new EncounterTable();
+
+		const incompleteCatTF = () => {
+			if (!player.Ears().race.isRace(Race.Feline)) { return true; }
+			if (player.HasTail() && !player.HasTail().race.isRace(Race.Feline)) { return true; }
+			if (!player.Eyes().race.isRace(Race.Feline)) { return true; }
+			if (!player.Tongue().race.isRace(Race.Feline)) { return true; }
+			if (player.FirstCock() && !player.BiggestCock().race.isRace(Race.Feline)) { return true; }
+			if (!player.Arms().race.isRace(Race.Feline)) { return true; }
+			if (!player.Legs().race.isRace(Race.Feline)) { return true; }
+			if (!player.Race().isRace(Race.Feline)) { return true; }
+			if (!player.Face().race.isRace(Race.Feline)) { return true; }
 			return false;
 		};
-		
-		let func = function(obj : any) {
-			scenes.AddEnc(function() {
+
+		const func = (obj: any) => {
+			scenes.AddEnc(() => {
 				TFapplied = true;
 				return _.isFunction(obj.tf) ? obj.tf() : "";
 			}, obj.odds || 1, obj.cond);
 		};
-		
+
 		func({
-			tf: function() {
-				let breasts = player.AllBreastRows();
-				for(let i = 0; i < breasts.length; i++) {
-					breasts[i].size.IncreaseStat(40, 2);
+			tf() {
+				for (const breasts of player.AllBreastRows()) {
+					breasts.size.IncreaseStat(40, 2);
 				}
 				return "Your [breasts] feel a bit heavier. It seems like your [breasts] have increased in size.";
 			},
 			odds: 2,
-			cond: function() { return player.SmallestBreasts().Size() < 40; }
+			cond() { return player.SmallestBreasts().Size() < 40; },
 		});
 		func({
-			tf: function() {
-				let breasts = player.AllBreastRows();
-				for(let i = 0; i < breasts.length; i++) {
-					breasts[i].nippleThickness.IncreaseStat(2, 0.5);
-					breasts[i].nippleLength.IncreaseStat(2, 0.5);
+			tf() {
+				for (const breasts of player.AllBreastRows()) {
+					breasts.nippleThickness.IncreaseStat(2, 0.5);
+					breasts.nippleLength.IncreaseStat(2, 0.5);
 				}
 				return "Your [nips] feel tingly, and upon closer examination, you realize they have grown bigger.";
 			},
-			cond: function() { return player.SmallestNips().NipSize() < 4; }
+			cond() { return player.SmallestNips().NipSize() < 4; },
 		});
 		func({
-			tf: function() {
-				let ret = player.Lactation();
+			tf() {
+				const ret = player.Lactation();
 				player.lactHandler.lactating = true;
 				player.lactHandler.FillMilk(1);
 				player.lactHandler.milkProduction.IncreaseStat(5, 1);
 				player.lactHandler.lactationRate.IncreaseStat(10, 1);
 				return ret ? "Your breasts feel fuller. Somehow you know you’re producing more milk now." : "Milk begins seeping from your [nips]. Seems like you’re lactating now.";
 			},
-			odds: 2
+			odds: 2,
 		});
 		func({
-			tf: function() {
+			tf() {
 				player.body.femininity.IncreaseStat(1, 0.1);
 				return "Your reflection looks more… feminine than before.";
 			},
 			odds: 1,
-			cond: function() { return player.body.femininity.Get() < 1; }
+			cond() { return player.body.femininity.Get() < 1; },
 		});
 		func({
-			tf: function() {
-				let ret = player.HasBalls();
+			tf() {
+				const ret = player.HasBalls();
 				TF.SetBalls(player.Balls(), 2, 2);
 				player.Balls().size.IncreaseStat(6, 1);
 				player.Balls().cumProduction.IncreaseStat(3, 0.25);
 				return ret ? "Your balls feel heavier somehow, and you just know it isn’t just more cum that you’re producing. Your balls have actually gotten bigger." : "You note the addition of a nutsack below your [cocks]. This wasn’t here before...";
 			},
 			odds: 3,
-			cond: function() { return player.FirstCock(); }
+			cond() { return player.FirstCock(); },
 		});
 		func({
-			tf: function() {
+			tf() {
 				player.body.cock.push(new Cock(Race.Feline));
 				parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 				return "Looking between your legs, you notice that you seem to have acquired a feline pecker. Much like the one you had in the world beyond the mirror. Although it lacks a sheath, and isn’t nearly as big as the one you had as Bastet.";
 			},
 			odds: 1,
-			cond: function() { return !player.FirstCock(); }
+			cond() { return !player.FirstCock(); },
 		});
 		func({
-			tf: function() {
+			tf() {
 				player.FirstVag().minStretch.IncreaseStat(Capacity.loose, 0.5);
 				return "Your [vag] tingles for some reason. Spreading your nethers to examine yourself, you note that you feel much more stretchy than before. This should let you take bigger cocks than you could before.";
 			},
 			odds: 1,
-			cond: function() { return player.FirstVag() && player.FirstVag().Tightness() < Capacity.loose; }
+			cond() { return player.FirstVag() && player.FirstVag().Tightness() < Capacity.loose; },
 		});
 		func({
-			tf: function() {
+			tf() {
 				player.body.vagina.push(new Vagina());
 				return "A tingling between your legs bothers you, and you move to scratch it. A gasp of pleasure escapes you as you unwittingly touch a pair of pussy lips between your legs. It seems that you have grown a new pussy.";
 			},
 			odds: 1,
-			cond: function() { return !player.FirstVag(); }
+			cond() { return !player.FirstVag(); },
 		});
 		func({
-			tf: function() {
-				let t : string;
-				if(!player.Ears().race.isRace(Race.Feline)) {
+			tf() {
+				let t: string;
+				if (!player.Ears().race.isRace(Race.Feline)) {
 					t = Text.Parse("You hadn’t realized before, but it seems your [ears] have have turned into triangular cat-ears. You twitch them experimentally and reach up to touch them. These are no illusion...", parse);
 					player.Ears().race = Race.Feline;
 					return t;
-				}
-				else if(player.HasTail() && !player.HasTail().race.isRace(Race.Feline)) {
+				} else if (player.HasTail() && !player.HasTail().race.isRace(Race.Feline)) {
 					t = "A strange sensation on your lower back makes itself known, and you reach back to check what is it. A gasp escapes your lips as you grasp the source of the discomfort, and feel a light tug. Looking back, it seems you have grown a cat tail.";
-					let tail = player.HasTail();
-					if(tail) {
-						parse["tail"] = tail.Short();
+					const tail = player.HasTail();
+					if (tail) {
+						parse.tail = tail.Short();
 						t = Text.Parse("Something feels different with your [tail]. Looking back, you realize that your [tail] has turned into a thin feline tail.", parse);
 						tail.race = Race.Feline;
-					}
-					else {
+					} else {
 						TF.SetAppendage(player.Back(), AppendageType.tail, Race.Feline, Color.black);
 					}
 					return t;
-				}
-				else if(!player.Eyes().race.isRace(Race.Feline)) {
+				} else if (!player.Eyes().race.isRace(Race.Feline)) {
 					player.Eyes().race = Race.Feline;
 					return "Your vision feels a little different, and looking closely at yourself in the mirror, you realize that your eyes have become slitted feline eyes.";
-				}
-				else if(!player.Tongue().race.isRace(Race.Feline)) {
+				} else if (!player.Tongue().race.isRace(Race.Feline)) {
 					player.Tongue().race = Race.Feline;
 					return "A tingle inside your mouth causes you some discomfort, and when you examine your tongue you realize that it has changed into a rough feline tongue.";
-				}
-				else if(player.FirstCock() && !player.BiggestCock().race.isRace(Race.Feline)) {
+				} else if (player.FirstCock() && !player.BiggestCock().race.isRace(Race.Feline)) {
 					t = Text.Parse("Something feels different on your [cocks]. Examining [itThem], you realise[oneof] your [cocks] has changed into a feline pecker, complete with a barbed tip.", parse);
 					player.BiggestCock().race = Race.Feline;
 					return t;
-				}
-				else if(!player.Arms().race.isRace(Race.Feline)) {
+				} else if (!player.Arms().race.isRace(Race.Feline)) {
 					player.Arms().race = Race.Feline;
 					return "You notice a strange feeling on the tips of your fingers, and upon close inspection, you realize that you have pads on your hands now. Flexing them, you gasp as a sharp feline claw emerges from the tips of your fingers.";
-				}
-				else if(!player.Legs().race.isRace(Race.Feline)) {
+				} else if (!player.Legs().race.isRace(Race.Feline)) {
 					t = Text.Parse("You hadn’t even realized, but your [legs] have changed. It felt so natural to walk like this in the illusion that you hadn’t even paid attention to it. Sitting down on the stool you examine your new legs. They look like cat-legs, tipped with cat-paws for feet.", parse);
-					if(player.HasLegs())
+					if (player.HasLegs()) {
 						t = Text.Parse("You shift your stance a little. Your [legs] feel different. Sitting on the stool, you take a closer look. Seems like your legs have changed into feline legs, capped with cat footpaws.", parse);
+					}
 					player.Legs().race = Race.Feline;
-					if(player.Legs().count < 2)
+					if (player.Legs().count < 2) {
 						player.Legs().count = 2;
+					}
 					return t;
-				}
-				else if(!player.Race().isRace(Race.Feline)) {
+				} else if (!player.Race().isRace(Race.Feline)) {
 					player.body.torso.race = Race.Feline;
 					return "You were too worried to realize, but you’re now covered in short cat fur.";
-				}
-				else if(!player.Face().race.isRace(Race.Feline)) {
+				} else if (!player.Face().race.isRace(Race.Feline)) {
 					player.Face().race = Race.Feline;
 					return "You don’t know how you hadn’t realized before, but your face has changed to that of a cat. It seems that now you truly are a cat-morph. Complete with every bit and piece that begets the title.";
 				}
 			},
 			odds: 3,
-			cond: function() { return incompleteCatTF(); }
+			cond() { return incompleteCatTF(); },
 		});
-		
-		let text : string[] = [];
-		_.times(_.random(0, 3), function() {
+
+		const text: string[] = [];
+		_.times(_.random(0, 3), () => {
 			text.push(scenes.Get());
 		});
-		
-		if(TFapplied) {
+
+		if (TFapplied) {
 			Text.Add("As you check yourself out, you realise that your body has changed! It must be some sort of side effect from the magic used in the mirror...", parse);
-			_.each(text, function(t) {
-				if(t) {
+			_.each(text, (t) => {
+				if (t) {
 					Text.NL();
 					Text.Add(t, parse);
 				}
 			});
-		}
-		else {
+		} else {
 			Text.Add("Everything checks out, you were just a little disorientated.", parse);
 		}
 		Text.NL();
 	}
 
 	export function Birth() {
-		let player = GAME().player;
-		let lucille = GAME().lucille;
+		const player = GAME().player;
+		const lucille = GAME().lucille;
 
-		let parse : any = {
-			
+		const parse: any = {
+
 		};
-		
+
 		Text.Add("For a moment, you are overcome with a sense of vertigo, as if you were free-falling. Just as quickly as it happened, it passes, and you open your eyes. Before you lies the image of a cat-morph.", parse);
-		if(player.RaceCompare(Race.Feline) >= 0.4)
+		if (player.RaceCompare(Race.Feline) >= 0.4) {
 			Text.Add(" Not a surprising development since you already were a cat-morph to begin with. But you do note a few differences here and there.", parse);
+		}
 		Text.NL();
 		Text.Add("You are a male cat-morph, with sandy-beige fur and brown short hair covering your head. Emerald slitted eyes look back at you through the reflection in the mirror. You’re fairly well-built, with muscles showing on your naked pecs, a trim belly, and strong-looking legs. Your padded hands end in claw-tipped fingers, flexing them will expose the claws, while relaxing will cause them to retract inside your finger. Your cat-like feet are the same. Behind you sways a thin cat-tail, it sways to and fro as you look at yourself with curiosity.", parse);
 		Text.NL();
@@ -335,13 +325,12 @@ export namespace BastetScenes {
 		Text.NL();
 		Text.Add("Overall, you’d say you look pretty attractive, but let’s not linger. As instructed, you approach the mirror and watch as your reflection is replaced by the image of endless sandy dunes before you. Taking a deep breath, you steel yourself and step through.", parse);
 		Text.NL();
-		if(lucille.ThemeroomFirst()) {
+		if (lucille.ThemeroomFirst()) {
 			Text.Add("It’s a strange feeling stepping through the mirror. Like entering a pool, but without getting wet.", parse);
-		}
-		else {
+		} else {
 			Text.Add("You’ll never get used to the feeling of stepping through the mirror...", parse);
 		}
-		lucille.flags["Theme"] |= LucilleFlags.Themeroom.CatDynasty;
+		lucille.flags.Theme |= LucilleFlags.Themeroom.CatDynasty;
 		Text.NL();
 		Text.Add("You look back and see that the doorway has vanished; you’re left standing in the middle of the desert. At least you’re no longer naked, or not as naked as before anyway. Looking over yourself, you see that you’re clad in a simple loincloth with another piece of cloth over your head to protect you from the oppressive heat of the desert.", parse);
 		Text.NL();
@@ -357,8 +346,8 @@ export namespace BastetScenes {
 		Text.NL();
 		Text.Add("Usually, the honor of serving the Goddess would be reserved for a female - but this century, you were the only living cat-morph in the village, so you were chosen despite being male.", parse);
 		Text.Flush();
-		
-		Gui.NextPrompt(function() {
+
+		Gui.NextPrompt(() => {
 			Text.Clear();
 			Text.Add("The blazing sun beats on you like a tyrant. You feel tired, sweaty and dusty. There’s so much sand clinging to your fur that you wouldn’t be surprised if you’d gained weight. Your footpaws ache with each strenuous step. By now, you’d have given up, were it not for the temple located a couple feet away. Honestly, you feel as if you’re about to pass out… but if you’re going to collapse, might as well as do it when you’re inside.", parse);
 			Text.NL();
@@ -422,12 +411,12 @@ export namespace BastetScenes {
 			Text.NL();
 			Text.Add("...Ladyship?", parse);
 			Text.Flush();
-			
-			//[Correct][Nevermind]
-			let options = new Array();
+
+			// [Correct][Nevermind]
+			const options = new Array();
 			options.push({ nameStr : "Correct",
 				tooltip : "You’re pretty sure you heard her refer to you as “Her Ladyship”. But you’re a man! Maybe you should correct her.",
-				func : function() {
+				func() {
 					Text.Clear();
 					Text.Add("You try not to sound too affronted, lest you anger the high priestess, as you gently correct her. She referred to you as “Ladyship”, but you’re male.", parse);
 					Text.NL();
@@ -453,13 +442,13 @@ export namespace BastetScenes {
 					Text.NL();
 					Text.Add("<i>“That’s all I could ask for, Your Ladyship. Now please, follow me to the bathing pool,”</i> she says, tugging you along towards the end of the hallway.", parse);
 					Text.Flush();
-					
+
 					Gui.NextPrompt(BastetScenes.Birth2);
-				}, enabled : true
+				}, enabled : true,
 			});
 			options.push({ nameStr : "Nevermind",
 				tooltip : "Maybe you heard it wrong? Though you feel compelled to correct her, you’re not sure if someone as important as her would take it well if a mere peasant like you corrected her.",
-				func : function() {
+				func() {
 					Text.Clear();
 					Text.Add("It’s probably for the best if you don’t say anything and simply follow her in silence.", parse);
 					Text.NL();
@@ -467,19 +456,19 @@ export namespace BastetScenes {
 					Text.NL();
 					Text.Add("You look around in wonder, admiring the lavish decor as she leads you away. Gradually, you begin to notice a scent. The scent of greenery and water. When you look ahead, you realize that she’s taken you to a large bathing pool.", parse);
 					Text.Flush();
-					
+
 					Gui.NextPrompt(BastetScenes.Birth2);
-				}, enabled : true
+				}, enabled : true,
 			});
 			Gui.SetButtonsFromList(options, false, null);
 		});
 	}
 
 	export function Birth2() {
-		let parse : any = {
-			
+		const parse: any = {
+
 		};
-		
+
 		Text.Clear();
 		Text.Add("You stare in marvel at your surroundings; the hallway is given over to a huge pool of crystal clear water, something that was clearly a natural spring, once. Though stones have been sunk into the mud to create rudimentary steps and seats, its origins are still perfectly clear to you. Images of Bastet have been placed around, both statues and carvings upon the trunks of still-thriving trees, adding to the spring’s feeling of holiness.", parse);
 		Text.NL();
@@ -549,14 +538,14 @@ export namespace BastetScenes {
 		Text.NL();
 		Text.Add("Aware of your hand wrapping itself around your cock, you snap back to reality with a start. A flush of shame sours your belly, making your hand withdraw. You can’t do that here!", parse);
 		Text.NL();
-		Text.Add("...But, Lady Bastet <b>is</b> a Goddess of love and pleasure, whispers a treacherous little voice in the back of your head. Surely, there is nothing <b>wrong</b> with a little self-pleasure in her temple...?", parse)
+		Text.Add("...But, Lady Bastet <b>is</b> a Goddess of love and pleasure, whispers a treacherous little voice in the back of your head. Surely, there is nothing <b>wrong</b> with a little self-pleasure in her temple...?", parse);
 		Text.Flush();
-		
-		//[Masturbate][Meditate]
-		let options = new Array();
+
+		// [Masturbate][Meditate]
+		const options = new Array();
 		options.push({ nameStr : "Masturbate",
 			tooltip : "You’re sure no one will mind if you take the opportunity to relieve some tension. Adala did tell that you could relax if you wanted...",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("Mind made up, you push out of your impromptu seat and slink behind one of the palms that grows upon the pool’s banks, using it as a cover for what you are about to do. Need for privacy sated, you empty your mind of anything other than visions of the voluptuous loveliness that is the high priestess.", parse);
 				Text.NL();
@@ -570,31 +559,31 @@ export namespace BastetScenes {
 				Text.NL();
 				Text.Add("Sitting here, basking in the afterglow of sexual climax, listening to wind gently graze the water of the pool... it’s a wonderfully serene experience. Your ears twitch almost in time with the hypnotic sound of water rippling, and a dreamy smile crosses your lips as you allow your eyes to start sinking closed.", parse);
 				Gui.PrintDefaultOptions();
-			}, enabled : true
+			}, enabled : true,
 		});
 		options.push({ nameStr : "Meditate",
 			tooltip : "No, you shouldn’t. This is a sacred place. It wouldn’t be right. Maybe you should meditate, try to calm your body...",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("Closing your eyes, you inhale deeply, holding your breath as you try to think of nothing. Though the lust continues to rage inside of you, it slowly ebbs away as you focus on nothing but breathing. In, out, in, out.", parse);
 				Text.NL();
 				Text.Add("With each exhalation, it feels as if the fire in your loins dwindle and die. Slowly, your cock grows limper and limper, until it begins to shrink back inside of your sheath. A feeling of deep tranquility washes over you, and you smile absently to yourself. It’s rare you get a feeling to just relax like this, and you willingly give yourself over to it, even though the flames within are well-quenched now.", parse);
 				Gui.PrintDefaultOptions();
-			}, enabled : true
+			}, enabled : true,
 		});
-		
-		Gui.Callstack.push(function() {
+
+		Gui.Callstack.push(() => {
 			Text.NL();
 			Text.Add("<i>“Your Ladyship?”</i> You nearly jump out of your skin. You were so relaxed that you didn’t even hear Adala approach.", parse);
 			Text.NL();
 			Text.Add("<i>“Forgive me for startling you, Your Ladyship, but the preparations for the ritual are complete. Shall we go?”</i>", parse);
 			Text.Flush();
-			
-			//[Explain][Wait][Ready]
-			let options = new Array();
+
+			// [Explain][Wait][Ready]
+			const options = new Array();
 			options.push({ nameStr : "Explain",
 				tooltip : "You don’t feel ready just yet. Why not ask her to explain the ritual while you wait?",
-				func : function() {
+				func() {
 					Text.Clear();
 					Text.Add("<i>“Of course, Your Ladyship,”</i> she replies, bowing in reverence.", parse);
 					Text.NL();
@@ -614,12 +603,12 @@ export namespace BastetScenes {
 					Text.NL();
 					Text.Add("...Well, that explains how your gender is of no object. For a moment, a flash of panic ripples through you, demanding that you flee now. But... this is a holy obligation. The Goddess has blessed your people for so long; is it really so great a sacrifice?", parse);
 					Text.Flush();
-					
-					//[Yes!][Hot][No…]
-					let options = new Array();
+
+					// [Yes!][Hot][No…]
+					const options = new Array();
 					options.push({ nameStr : "Yes!",
 						tooltip : "I mean, this your manhood that we’re talking about! And if what she said is true, you’re going to lose it!",
-						func : function() {
+						func() {
 							Text.Clear();
 							Text.Add("Panic races through your veins, your whole body trembling with the desire to run. From somewhere deep within your bones, a primal urge to flee this place and never look back rises...", parse);
 							Text.NL();
@@ -627,28 +616,28 @@ export namespace BastetScenes {
 							Text.NL();
 							Text.Add("With those thoughts ringing in your head, the panic leaks from your pores, washed away in the icy deluge of resignation. Shoulders slumping, you sigh and quietly thank Adala for at least being honest with you about what your fate will be.", parse);
 							Gui.PrintDefaultOptions();
-						}, enabled : true
+						}, enabled : true,
 					});
 					options.push({ nameStr : "Hot",
 						tooltip : "Yes, you might lose your manhood… but then again? Would be it be so bad? Especially when you’re going to be a woman as pretty as Lady Bastet.",
-						func : function() {
+						func() {
 							Text.Clear();
 							Text.Add("Your tail sticks as if you had been electrified, ears perked up. Shivers race across your body, prickles of delight dancing under your skin. That sounds... that sounds so <b>hot!</b> Your mind’s eye flashes before you, teasing you of images of yourself remade to fit the Goddess. Unthinkingly, you cup the imaginary bulge of your prodigious breasts, trembling with fantasized pleasure.", parse);
 							Text.NL();
 							Text.Add("Opening your eyes, lips curled into an eager smile, you purr avidly to Adala that you wish she’d told you this sooner. You can’t wait to begin now...", parse);
 							Gui.PrintDefaultOptions();
-						}, enabled : true
+						}, enabled : true,
 					});
 					options.push({ nameStr : "No…",
 						tooltip : "...This is but a small sacrifice for the many blessings Lady Bastet has granted you and your village.",
-						func : function() {
+						func() {
 							Text.Clear();
 							Text.Add("You inhale deeply, letting your raging emotions still, exhaling softly to expel your doubts. Humbly, you thank Adala for being honest with you about what will happen. You promise her that you will do whatever she asks so that you may fulfill your role.", parse);
 							Gui.PrintDefaultOptions();
-						}, enabled : true
+						}, enabled : true,
 					});
-					
-					Gui.Callstack.push(function() {
+
+					Gui.Callstack.push(() => {
 						Text.NL();
 						Text.Add("<i>“Of course, Your Ladyship. Never forget that we’re here to serve you. We’ll do our best to make sure you’re comfortable and want for nothing,”</i> she says, bowing reverently.", parse);
 						Text.NL();
@@ -658,16 +647,16 @@ export namespace BastetScenes {
 						Text.NL();
 						Text.Add("You take her hand and follow her as she leads you away.", parse);
 						Text.Flush();
-						
+
 						Gui.NextPrompt();
 					});
-					
+
 					Gui.SetButtonsFromList(options, false, null);
-				}, enabled : true
+				}, enabled : true,
 			});
 			options.push({ nameStr : "Wait",
 				tooltip : "You’re not ready yet. Ask her for a few moments so you can steel yourself.",
-				func : function() {
+				func() {
 					Text.Clear();
 					Text.Add("<i>“Of course, Your Ladyship. We have time, but please try not to delay for too long. The ritual is ready and we are waiting for you.”</i>", parse);
 					Text.NL();
@@ -675,24 +664,24 @@ export namespace BastetScenes {
 					Text.NL();
 					Text.Add("The high priestess gives you a gentle smile, understanding shimmering in her eyes as she holds her hand out in invitation. Your own fingers curl softly around hers, and she patiently begins leading you to your destiny.", parse);
 					Text.Flush();
-					
+
 					Gui.NextPrompt();
-				}, enabled : true
+				}, enabled : true,
 			});
 			options.push({ nameStr : "Ready",
 				tooltip : "You’re as ready as you’ll ever be. Time to go and assume your role as Bastet’s new avatar.",
-				func : function() {
+				func() {
 					Text.Clear();
 					Text.Add("<i>“Excellent, then please follow me,”</i> she says, extending her hand welcomingly.", parse);
 					Text.NL();
 					Text.Add("Without hesitation, you accept her invitation, fingers twining firmly around her own. The high priestess gives you a maternal smile and the two of you set off, hand in hand, to meet your destiny.", parse);
 					Text.Flush();
-					
+
 					Gui.NextPrompt();
-				}, enabled : true
+				}, enabled : true,
 			});
-			
-			Gui.Callstack.push(function() {
+
+			Gui.Callstack.push(() => {
 				Text.Clear();
 				Text.Add("It takes several minutes of walking for you to reach the holy chamber that Adala wishes to find, leaving you wondering just how large the temple truly is. Then, Adala triumphantly pushes open the door and you are too awestruck to think about such things anymore.", parse);
 				Text.NL();
@@ -806,40 +795,40 @@ export namespace BastetScenes {
 				Text.NL();
 				Text.Add("<i>“Lady Bastet is the Goddess of love, and as such, she has many aspects. Some see Her Ladyship as a mischievous lover, who takes what she wants and makes you love her all the more for it. Some see her as a gentle matron, happy to provide for her children and her faithful. There are those who see her as a protector, defending them and their loved ones. And others simply see her as a gentle lover, bringing comfort and happiness. Tell me, Your Ladyship, which aspect do believe to be your true aspect?”</i>", parse);
 				Text.Flush();
-				
-				//[Mischievous][Matron][Protector][Lover]
-				let options = new Array();
+
+				// [Mischievous][Matron][Protector][Lover]
+				const options = new Array();
 				options.push({ nameStr : "Mischievous",
 					tooltip : "She’s the mischievous lover, of course. Flirtatious and playful, a good-hearted tease who wants your heart and as much fun as she can get.",
-					func : BastetScenes.Birth3, enabled : true
+					func : BastetScenes.Birth3, enabled : true,
 				});
 				options.push({ nameStr : "Matron",
 					tooltip : "She’s the matron, naturally. She’s the warm heart who brings children into the world and soothes the troubled hearts of those in need. She is the heart of the family, and all are her children.",
-					func : BastetScenes.Birth3, enabled : true
+					func : BastetScenes.Birth3, enabled : true,
 				});
 				options.push({ nameStr : "Protector",
 					tooltip : "Lady Bastet is the protector, she who prefers peace but whose hand will take up the spear and the shield when danger threatens. Someone must be strong when evil is near, and so it falls to her.",
-					func : BastetScenes.Birth3, enabled : true
+					func : BastetScenes.Birth3, enabled : true,
 				});
 				options.push({ nameStr : "Lover",
 					tooltip : "The source of all that is comforting, the bringer of joy, the queen of happiness and the granter of desire. What else can be she be but the truest incarnation of the lover?",
-					func : BastetScenes.Birth3, enabled : true
+					func : BastetScenes.Birth3, enabled : true,
 				});
 				Gui.SetButtonsFromList(options, false, null);
 			});
-			
+
 			Gui.SetButtonsFromList(options, false, null);
 		});
-		
+
 		Gui.SetButtonsFromList(options, false, null);
 	}
 
 	export function Birth3() {
-		let bastet = GAME().bastet;
-		let parse : any = {
-			
+		const bastet = GAME().bastet;
+		const parse: any = {
+
 		};
-		
+
 		Text.Clear();
 		Text.Add("Adala simply shakes her head. <i>“No, Your Ladyship. You’re all of them. No artist in this world is capable of representing all that you are, for you are the sum of all that and more. So they just pick one of your many aspects, Your Ladyship. You are love and joy incarnate. And like a loving mother, you extend your reach to protect us all. But as the Goddess of love, you must also have the means to show your faithful that you love them, and could you do that if you were not properly equipped to do so?”</i>", parse);
 		Text.NL();
@@ -853,23 +842,23 @@ export namespace BastetScenes {
 		Text.NL();
 		Text.Add("The beautiful high priestess wants to play with your cock? Well, what else could you say, but ...?", parse);
 		Text.Flush();
-		
-		//[Yes!][Definitely!][Absolutely!]
-		let options = new Array();
+
+		// [Yes!][Definitely!][Absolutely!]
+		const options = new Array();
 		options.push({ nameStr : "Yes!",
 			tooltip : "If that’s what she wants, who are you to say no? She can go right ahead and play to her heart’s content!",
-			func : Gui.PrintDefaultOptions, enabled : true
+			func : Gui.PrintDefaultOptions, enabled : true,
 		});
 		options.push({ nameStr : "Definitely!",
 			tooltip : "She wants to play with your dick, and you’ve been wanting her to play with it since you laid eyes on her sexy body. Of course she can!",
-			func : Gui.PrintDefaultOptions, enabled : true
+			func : Gui.PrintDefaultOptions, enabled : true,
 		});
 		options.push({ nameStr : "Absolutely!",
 			tooltip : "You’re so horny right now, you’d have to be crazy to deny her. You expect her to play with it like she plays with her favorite toy.",
-			func : Gui.PrintDefaultOptions, enabled : true
+			func : Gui.PrintDefaultOptions, enabled : true,
 		});
-		
-		Gui.Callstack.push(function() {
+
+		Gui.Callstack.push(() => {
 			Text.Clear();
 			Text.Add("<i>“You honor me, Your Ladyship,”</i> Adala says with a grin, fetching a small vial of oil and what looks like a small funnel. The twins simply pout in obvious jealousy.", parse);
 			Text.NL();
@@ -1045,8 +1034,8 @@ export namespace BastetScenes {
 			Text.NL();
 			Text.Add("<i>“Here, Your Ladyship,”</i> announces Adala, carrying a full-body mirror. She sets it down, bows reverently, then moves away so that you may inspect yourself.", parse);
 			Text.Flush();
-			
-			Gui.NextPrompt(function() {
+
+			Gui.NextPrompt(() => {
 				Text.Clear();
 				Text.Add("Pushing gently against the altar’s surface, you drop lightly to the floor, rising in a single smooth motion. You feel so powerful and graceful now, more than you ever have before. A smile crosses your lips at the thought, and you stare deeply into the mirror to see who you have become.", parse);
 				Text.NL();
@@ -1068,19 +1057,19 @@ export namespace BastetScenes {
 				Text.NL();
 				Text.Add("And then, when you open your eyes, you are back in the Shadow Lady again, the experience being over.", parse);
 				Text.NL();
-				
+
 				BastetScenes.TFBlock();
-				
+
 				Text.Add("Once you feel ready to leave, you dress yourself and leave the room, heading for the main area.", parse);
 				Text.Flush();
-				
-				Gui.NextPrompt(function() {
+
+				Gui.NextPrompt(() => {
 					TimeStep({hour: 3});
 					LucilleScenes.WhoreAftermath(null, bastet.Cost());
 				});
 			});
 		});
-		
+
 		Gui.SetButtonsFromList(options, false, null);
 	}
 

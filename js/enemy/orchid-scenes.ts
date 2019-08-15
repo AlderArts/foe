@@ -11,7 +11,7 @@ import { OrchidFlags } from "./orchid-flags";
 
 const OrchidScenes: any = {};
 
-OrchidScenes.Impregnate = function(mother: Entity, slot: number) {
+OrchidScenes.Impregnate = (mother: Entity, slot: number) => {
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother,
@@ -23,7 +23,7 @@ OrchidScenes.Impregnate = function(mother: Entity, slot: number) {
 	});
 };
 
-OrchidScenes.Interact = function() {
+OrchidScenes.Interact = () => {
 	const player = GAME().player;
 	const orchid = GAME().orchid;
 	const parse: any = {
@@ -55,7 +55,7 @@ OrchidScenes.Interact = function() {
 	}
 };
 
-OrchidScenes.Prompt = function() {
+OrchidScenes.Prompt = () => {
 	const parse: any = {
 
 	};
@@ -87,7 +87,7 @@ OrchidScenes.Prompt = function() {
 	Gui.SetButtonsFromList(options, true, Gui.PrintDefaultOptions);
 };
 
-OrchidScenes.TalkPrompt = function() {
+OrchidScenes.TalkPrompt = () => {
 	const player = GAME().player;
 	const orchid = GAME().orchid;
 	const parse: any = {
@@ -301,7 +301,7 @@ OrchidScenes.TalkPrompt = function() {
 	});
 	*/
 
-	Gui.SetButtonsFromList(options, true, function() {
+	Gui.SetButtonsFromList(options, true, () => {
 		Text.Clear();
 		Text.Add("<i>“Oh? Okay, I guess. Want to do something else then?”</i>", parse);
 		Text.Flush();
@@ -310,7 +310,7 @@ OrchidScenes.TalkPrompt = function() {
 	});
 };
 
-OrchidScenes.FirstTalk = function() {
+OrchidScenes.FirstTalk = () => {
 	const kiakai = GAME().kiakai;
 	const party: Party = GAME().party;
 	const parse: any = {
@@ -345,7 +345,7 @@ OrchidScenes.FirstTalk = function() {
 	OrchidScenes.FirstTalkPrompt({});
 };
 
-OrchidScenes.FirstTalkPrompt = function(opts: any) {
+OrchidScenes.FirstTalkPrompt = (opts: any) => {
 	const player = GAME().player;
 	const kiakai = GAME().kiakai;
  const party: Party = GAME().party;

@@ -47,10 +47,10 @@ export class Lagomorph extends Entity {
 		this.combatExp         = this.level;
 		this.coinDrop          = this.level * 3;
 
-		if (gender == Gender.male) {
+		if (gender === Gender.male) {
 			this.body.DefMale();
 			this.avatar.combat     = Images.lago_male;
-		} else if (gender == Gender.female) {
+		} else if (gender === Gender.female) {
 			this.body.DefFemale();
 			this.avatar.combat     = Images.lago_fem;
 			this.FirstBreastRow().size.base = 5;
@@ -117,11 +117,10 @@ export class Lagomorph extends Entity {
 			Abilities.Attack.Use(encounter, this, t);
 		} else if (choice < 0.8 && Abilities.Physical.DAttack.enabledCondition(encounter, this)) {
 			Abilities.Physical.DAttack.Use(encounter, this, t);
- } else {
+ 		} else {
 			Abilities.Seduction.Tease.Use(encounter, this, t);
- }
+ 		}
 	}
-
 }
 
 export class LagomorphAlpha extends Lagomorph {
@@ -246,15 +245,14 @@ export class LagomorphBrute extends Lagomorph {
 			Abilities.Attack.Use(encounter, this, t);
 		} else if (choice < 0.6 && Abilities.Physical.CrushingStrike.enabledCondition(encounter, this)) {
 			Abilities.Physical.CrushingStrike.Use(encounter, this, t);
- } else if (choice < 0.8 && Abilities.Physical.Bash.enabledCondition(encounter, this)) {
+ 		} else if (choice < 0.8 && Abilities.Physical.Bash.enabledCondition(encounter, this)) {
 			Abilities.Physical.Bash.Use(encounter, this, t);
- } else if (choice < 0.9 && Abilities.Physical.Frenzy.enabledCondition(encounter, this)) {
+ 		} else if (choice < 0.9 && Abilities.Physical.Frenzy.enabledCondition(encounter, this)) {
 			Abilities.Physical.Frenzy.Use(encounter, this, t);
- } else {
+ 		} else {
 			Abilities.Seduction.Tease.Use(encounter, this, t);
- }
+ 		}
 	}
-
 }
 
 export class LagomorphWizard extends Lagomorph {
@@ -308,15 +306,14 @@ export class LagomorphWizard extends Lagomorph {
 			Abilities.Attack.Use(encounter, this, t);
 		} else if (choice < 0.3 && Abilities.Black.Fireball.enabledCondition(encounter, this)) {
 			Abilities.Black.Fireball.Use(encounter, this, t);
- } else if (choice < 0.5 && Abilities.Black.Freeze.enabledCondition(encounter, this)) {
+ 		} else if (choice < 0.5 && Abilities.Black.Freeze.enabledCondition(encounter, this)) {
 			Abilities.Black.Freeze.Use(encounter, this, t);
- } else if (choice < 0.7 && Abilities.Black.Bolt.enabledCondition(encounter, this)) {
+ 		} else if (choice < 0.7 && Abilities.Black.Bolt.enabledCondition(encounter, this)) {
 			Abilities.Black.Bolt.Use(encounter, this, t);
- } else if (choice < 0.9 && Abilities.Black.Venom.enabledCondition(encounter, this)) {
+ 		} else if (choice < 0.9 && Abilities.Black.Venom.enabledCondition(encounter, this)) {
 			Abilities.Black.Venom.Use(encounter, this, t);
- } else {
+ 		} else {
 			Abilities.Seduction.Tease.Use(encounter, this, t);
- }
+ 		}
 	}
-
 }

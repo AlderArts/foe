@@ -1,14 +1,14 @@
-let MariaFlags = {
+const MariaFlags = {
     Met : {
         ForestMeeting : 1,
         Fight         : 2,
         FightSexed    : 4,
-        FightLost     : 8
+        FightLost     : 8,
     },
 
     Ranger : {
         NotTaught : 0,
-        Taught    : 1
+        Taught    : 1,
     },
 
     DeadDrops : {
@@ -17,8 +17,8 @@ let MariaFlags = {
         Completed : 4,
         PaidKid   : 8,
         SexedGuards : 16,
-        ShowedRoyal : 32
-        //TODO flag for repeat, specific things
+        ShowedRoyal : 32,
+        // TODO flag for repeat, specific things
     },
 };
 

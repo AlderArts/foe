@@ -1,44 +1,44 @@
 
-let VaughnFlags = {
+const VaughnFlags = {
     Met : {
         NotAvailable : 0,
         Met : 1,
-        //Task 1
+        // Task 1
         OnTaskLockpicks : 2,
         LockpicksElodie : 3,
         CompletedLockpicks : 4,
-        //Task 2
+        // Task 2
         OnTaskSnitch : 5,
         SnitchMirandaSuccess : 6,
         SnitchWatchhousFail : 7,
         SnitchWatchhousSuccess : 8,
         CompletedSnitch : 10,
-        //Task 3
+        // Task 3
         OnTaskPoisoning : 11,
         PoisoningFail : 12,
         PoisoningSucceed : 13,
-        CompletedPoisoning : 14
-        //TODO: tasks
+        CompletedPoisoning : 14,
+        // TODO: tasks
     },
-    Talk : { //Bitmask
+    Talk : { // Bitmask
         Himself : 1,
         Past    : 2,
         Fiancee : 4,
         Sex     : 8,
         Confront : 16,
-        ConfrontFollowup : 32
+        ConfrontFollowup : 32,
     },
     TalkWar : {
         Beginnings : 1,
         Wartime    : 2,
         Desertion  : 3,
-        Afterwards : 4
+        Afterwards : 4,
     },
     Sex : {
-        Titfuck : 1
+        Titfuck : 1,
     },
-    
-    //Bitmask
+
+    // Bitmask
     Poisoning : {
         Poison : 1,
         Aphrodisiac : 2,
@@ -47,7 +47,7 @@ let VaughnFlags = {
         LeftItToTwins : 16,
         JoinedOrgy : 32,
         Used69 : 64,
-        LeftItToLei : 128
+        LeftItToLei : 128,
     },
 
 };

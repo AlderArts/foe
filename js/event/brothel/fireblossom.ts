@@ -1,9 +1,9 @@
 
-import { Entity } from '../../entity';
-import { Text } from '../../text';
-import { Gui } from '../../gui';
-import { LucilleFlags } from './lucille-flags';
-import { GAME, TimeStep } from '../../GAME';
+import { Entity } from "../../entity";
+import { GAME, TimeStep } from "../../GAME";
+import { Gui } from "../../gui";
+import { Text } from "../../text";
+import { LucilleFlags } from "./lucille-flags";
 
 namespace FireblossomFlags {
 	export enum State {
@@ -27,104 +27,103 @@ namespace FireblossomFlags {
 }
 
 export class Fireblossom extends Entity {
-	xariRel : number;
-	draxenRel : number;
-	rakkatRel : number;
-	grexRel : number;
-	qinRel : number;
+	public xariRel: number;
+	public draxenRel: number;
+	public rakkatRel: number;
+	public grexRel: number;
+	public qinRel: number;
 
-	constructor(storage? : any) {
+	constructor(storage?: any) {
 		super();
-		
-		this.flags["State"]  = FireblossomFlags.State.S1Journey;
-		this.flags["Outset"] = 0;
-		this.flags["Rakkat"] = 0; //Bitmask
-		
+
+		this.flags.State  = FireblossomFlags.State.S1Journey;
+		this.flags.Outset = 0;
+		this.flags.Rakkat = 0; // Bitmask
+
 		this.xariRel   = 0;
 		this.draxenRel = 0;
 		this.rakkatRel = 0;
 		this.grexRel   = 0;
 		this.qinRel    = 0;
-		
-		if(storage) this.FromStorage(storage);
+
+		if (storage) { this.FromStorage(storage); }
 	}
 
-	Cost() {
+	public Cost() {
 		return 250;
 	}
-	First() {
-		return !(GAME().lucille.flags["Theme"] & LucilleFlags.Themeroom.Fireblossom);
+	public First() {
+		return !(GAME().lucille.flags.Theme & LucilleFlags.Themeroom.Fireblossom);
 	}
-	ResetState() {
+	public ResetState() {
 		GAME().fireblossom = new Fireblossom();
 	}
-	//TODO Update as new episodes are added
-	ReachedEnd() {
-		return this.flags["State"] > FireblossomFlags.State.S1Journey;
+	// TODO Update as new episodes are added
+	public ReachedEnd() {
+		return this.flags.State > FireblossomFlags.State.S1Journey;
 	}
-	
-	
-	FromStorage(storage : any) {
+
+	public FromStorage(storage: any) {
 		// Load flags
 		this.LoadFlags(storage);
-		
-		this.xariRel = !isNaN(parseInt(storage.xariRel)) ? parseInt(storage.xariRel) : this.xariRel;
-		this.draxenRel = !isNaN(parseInt(storage.draxenRel)) ? parseInt(storage.draxenRel) : this.draxenRel;
-		this.rakkatRel = !isNaN(parseInt(storage.rakkatRel)) ? parseInt(storage.rakkatRel) : this.rakkatRel;
-		this.grexRel = !isNaN(parseInt(storage.grexRel)) ? parseInt(storage.grexRel) : this.grexRel;
-		this.qinRel = !isNaN(parseInt(storage.qinRel)) ? parseInt(storage.qinRel) : this.qinRel;
+
+		this.xariRel = !isNaN(parseInt(storage.xariRel, 10)) ? parseInt(storage.xariRel, 10) : this.xariRel;
+		this.draxenRel = !isNaN(parseInt(storage.draxenRel, 10)) ? parseInt(storage.draxenRel, 10) : this.draxenRel;
+		this.rakkatRel = !isNaN(parseInt(storage.rakkatRel, 10)) ? parseInt(storage.rakkatRel, 10) : this.rakkatRel;
+		this.grexRel = !isNaN(parseInt(storage.grexRel, 10)) ? parseInt(storage.grexRel, 10) : this.grexRel;
+		this.qinRel = !isNaN(parseInt(storage.qinRel, 10)) ? parseInt(storage.qinRel, 10) : this.qinRel;
 	}
-	
-	ToStorage() {
-		let storage : any = {};
-		
+
+	public ToStorage() {
+		const storage: any = {};
+
 		this.SaveFlags(storage);
-		
+
 		storage.xariRel   = this.xariRel.toFixed();
 		storage.draxenRel = this.draxenRel.toFixed();
 		storage.rakkatRel = this.rakkatRel.toFixed();
 		storage.grexRel   = this.grexRel.toFixed();
 		storage.qinRel    = this.qinRel.toFixed();
-		
+
 		return storage;
-	}	
+	}
 }
 
-
 export namespace FireblossomScenes {
-	let LucilleScenes : any;
-	export function INIT(lucilleScenes : any) {
+	let LucilleScenes: any;
+	export function INIT(lucilleScenes: any) {
 		LucilleScenes = lucilleScenes;
 	}
 
 	export function IntroEntryPoint() {
-		let player = GAME().player;
-		let kiakai = GAME().kiakai;
-		let fireblossom = GAME().fireblossom;
-		let lucille = GAME().lucille;
+		const player = GAME().player;
+		const kiakai = GAME().kiakai;
+		const fireblossom = GAME().fireblossom;
+		const lucille = GAME().lucille;
 
-		let parse : any = {
+		const parse: any = {
 			armor : player.ArmorDesc(),
 			skin  : player.SkinDesc(),
 			name  : kiakai.name,
-			heshe : kiakai.heshe()
+			heshe : kiakai.heshe(),
 		};
-		
-		let first = fireblossom.First();
-		
-		lucille.flags["Theme"] |= LucilleFlags.Themeroom.Fireblossom;
-		
+
+		const first = fireblossom.First();
+
+		lucille.flags.Theme |= LucilleFlags.Themeroom.Fireblossom;
+
 		Text.Clear();
 		Text.Add("The chamber beyond the door is sparsely furnished, containing a rack for clothing, a cushioned chair and a large, full-body mirror. There’s a small oil lamp hanging from the ceiling, casting a warm glow on the room. On the walls hang expensive-looking tapestries, showing images of ornate dragons. Drawn on the floor next to the mirror is a complex magic circle.", parse);
 		Text.NL();
-		if(first) {
+		if (first) {
 			Text.Add("The instructions are simple: remove your clothes and approach the mirror. The room will do the rest. Undonning your [armor], you nervously survey your surroundings. In the dim, flickering light, the dragons on the tapestries almost seem to be moving, their bodies writhing lazily, scales glimmering.", parse);
 			Text.NL();
 			Text.Add("As soon as you step into the magic circle, a tingle runs through your body. Sparks run across your naked [skin], changing you - or perhaps just your perception of yourself. Once the vertigo of stepping into the body of another has passed, you take a moment to look yourself over. The image is starting to turn a bit blurry, but you can make out the gist of it. Just as the poster promised, your body is that of a young human woman, fair of skin and hair and incredibly beautiful. ", parse);
-			if(player.Slut() < 30)
+			if (player.Slut() < 30) {
 				Text.Add("Your new form seems very pure and delicate, perhaps even innocent, and you almost instinctively cover your breasts.", parse);
-			else
+			} else {
 				Text.Add("Your new form seems pure and innocent, though you wonder how long that will last. You run your hands over your silken skin, shivering slightly as you brush over your pert nipples.", parse);
+			}
 			Text.NL();
 			Text.Add("It strikes you that were you a foot or so taller and didn’t have these deep blue eyes, you’d be the spitting image of Lady Aria. You idly wonder what [name] would think if [heshe] saw you now…", parse);
 			Text.NL();
@@ -132,80 +131,79 @@ export namespace FireblossomScenes {
 			Text.NL();
 			Text.Add("Taking a deep breath, you step through, entering not just the body but also the mind of the fair maiden Fireblossom...", parse);
 			Text.Flush();
-			
+
 			Gui.NextPrompt(FireblossomScenes.SceneSelect);
-		}
-		else {
+		} else {
 			Text.Add("You remove your [armor] and step into the magic circle, activating the spell that puts you inside the body of Fireblossom. She - you - is beautiful as always. Donning the white shift, you walk over to the mirror, its murky depths ready to take you into the lands of the dragon empire. The spell seems almost welcoming, recognizing someone who’s used it before and altering the world accordingly.", parse);
 			Text.NL();
 			Text.Add("On the top of the mirror, there’s a tiny, faintly glowing gemstone inlaid in the border. Next to it, you can see the words <i>‘Begin Anew’</i> engraved in stylized letters. It seems that you can use this to restart your experience from the beginning. Alternatively, you could just step through the mirror and continue where you last left off.", parse);
 			Text.Flush();
-			
-			//[Enter][Reset]
-			let options = new Array();
+
+			// [Enter][Reset]
+			const options = new Array();
 			options.push({ nameStr : "Enter",
 				tooltip : "Continue exploring Fireblossom’s world from where you left off.",
-				func : function() {
+				func() {
 					Text.Clear();
 					Gui.PrintDefaultOptions();
-				}, enabled : !fireblossom.ReachedEnd()
+				}, enabled : !fireblossom.ReachedEnd(),
 			});
 			options.push({ nameStr : "Reset",
 				tooltip : "Start over from the beginning. Now that you’ve seen part of it, perhaps you’ll act differently this time around.",
-				func : function() {
+				func() {
 					fireblossom.ResetState();
-					
+
 					Text.Clear();
 					Text.Add("You press the glowing gemstone with your delicate finger, and there’s a sudden swirl of activity in the mirror as the lands beyond rearrange themselves, the spell returning to its original form. Perhaps this time you’ll act a different way.", parse);
 					Text.NL();
 					Gui.PrintDefaultOptions();
-				}, enabled : true
+				}, enabled : true,
 			});
-			
-			Gui.Callstack.push(function() {
+
+			Gui.Callstack.push(() => {
 				Text.Add("You resolutely step through the mirror, entering the body and mind of Fireblossom. You wonder what you’ll experience, and shiver in anticipation...", parse);
 				Text.Flush();
-				
+
 				Gui.NextPrompt(FireblossomScenes.SceneSelect);
 			});
-			
+
 			Gui.SetButtonsFromList(options, false, null);
 		}
 	}
 
 	export function SceneSelect() {
-		let fireblossom = GAME().fireblossom;
-		switch(fireblossom.flags["State"]) {
+		const fireblossom = GAME().fireblossom;
+		switch (fireblossom.flags.State) {
 			default:
 			case FireblossomFlags.State.S1Journey: FireblossomScenes.S1TheJourney(); break;
-			//TODO new scenes
+			// TODO new scenes
 		}
 	}
 
 	export function Outro() {
-		let player = GAME().player;
-		let fireblossom = GAME().fireblossom;
-		let parse : any = {
-			armor : player.ArmorDesc()
+		const player = GAME().player;
+		const fireblossom = GAME().fireblossom;
+		const parse: any = {
+			armor : player.ArmorDesc(),
 		};
-		
+
 		Text.Clear();
 		Text.Add("When you open your eyes again, you’re back in the Shadow Lady. For a moment, you feel unfamiliar with your own body, but the feeling quickly passes. After you’ve rested for a bit on the chair, pondering your experiences, you redon your [armor] and exit the room, heading back to the main area.", parse);
 		Text.Flush();
-		
-		Gui.NextPrompt(function() {
+
+		Gui.NextPrompt(() => {
 			TimeStep({hour: 3});
 			LucilleScenes.WhoreAftermath(null, fireblossom.Cost());
 		});
 	}
 
 	export function S1TheJourney() {
-		let player = GAME().player;
-		let fireblossom = GAME().fireblossom;
-		let parse : any = {
-			
+		const player = GAME().player;
+		const fireblossom = GAME().fireblossom;
+		const parse: any = {
+
 		};
-		
+
 		Text.Clear();
 		Text.Add("You gradually come to, wincing as the carriage goes over another bump in the road. Sure, it makes sense for beings who can fly to not care about proper paving, but it still irks you, as if the fact were a personal affront. Not even the plush cushions strewn throughout your cabin are enough to completely shield you from the uncomfortable ride. If only you’d arrive soon…", parse);
 		Text.NL();
@@ -229,8 +227,8 @@ export namespace FireblossomScenes {
 		Text.NL();
 		Text.Add("<i>“Y-yes, Grex,”</i> she squeaks. <i>“G-goodnight, princess.”</i> You turn your gaze away, trying to hide your blush as the brute makes off with his prize for the night. Barbarians and beasts. The other Galentans avoid your accusing eyes, and you stomp off to your own carriage, trying to ignore the animalistic noises coming from just beyond the clearing. Something like this would never happen at home.", parse);
 		Text.Flush();
-		
-		Gui.NextPrompt(function() {
+
+		Gui.NextPrompt(() => {
 			Text.Clear();
 			Text.Add("A few days’ travel later, the land around you begins to change. You’ve travelled beyond the mountains encircling your father’s kingdom - impenetrable walls that had protected Galenta from invaders for centuries, but proved useless against foes that could fly. After that, weeks across strange hills and forests, stopping in towns where people spoke strange languages, or were more animal than human.", parse);
 			Text.NL();
@@ -280,12 +278,12 @@ export namespace FireblossomScenes {
 			Text.NL();
 			Text.Add("<i>“Good hips too… From what I hear, you are a virgin, yes?”</i> She throws the comment out matter-of-factly. <i>“The Envoy will be pleased, I believe.”</i>", parse);
 			Text.Flush();
-			
-			//[Protest][Don’t][Encourage]
-			let options = new Array();
+
+			// [Protest][Don’t][Encourage]
+			const options = new Array();
 			options.push({ nameStr : "Protest",
 				tooltip : "Give this grabby maid a harsh telling off. She clearly doesn’t know her place!",
-				func : function() {
+				func() {
 					Text.Clear();
 					Text.Add("Now <i>this</i> is going too far! Who does she think she is!?", parse);
 					Text.NL();
@@ -309,16 +307,16 @@ export namespace FireblossomScenes {
 					Text.NL();
 					Text.Add("<i>“Good, good.”</i> She nods to herself, satisfied at her skills of observation. <i>“I think I know just the one.”</i>", parse);
 					Text.NL();
-					
+
 					player.subDom.IncreaseStat(10, 1);
 					fireblossom.xariRel--;
-					
+
 					Gui.PrintDefaultOptions();
-				}, enabled : true
+				}, enabled : true,
 			});
 			options.push({ nameStr : "Don’t",
 				tooltip : "Stifle your protests. She might be a bit grabby, but she’s good with her hands.",
-				func : function() {
+				func() {
 					Text.Clear();
 					Text.Add("You glower, but nod faintly.", parse);
 					Text.NL();
@@ -328,16 +326,16 @@ export namespace FireblossomScenes {
 					Text.NL();
 					Text.Add("<i>“First, we’ll arrange your hair, then pick out the dress, yes?”</i>", parse);
 					Text.NL();
-					
+
 					player.slut.IncreaseStat(25, 1);
 					player.subDom.DecreaseStat(0, 1);
-					
+
 					Gui.PrintDefaultOptions();
-				}, enabled : true
+				}, enabled : true,
 			});
 			options.push({ nameStr : "Encourage",
 				tooltip : "That thing she did… can she do it again?",
-				func : function() {
+				func() {
 					Text.Clear();
 					Text.Add("You grudgingly admit that you’ve indeed never lain with a man. Nor a woman, you add, cheeks flushed, not quite sure what’s gotten over you. There’s a slight change in Xari’s movements; slight, but oh so noticeable to your sensitive skin. You shiver, biting your lip as you once again feel her fingers trailing lower down across your stomach to that most secret of spots, her other hand fondling your breast.", parse);
 					Text.NL();
@@ -355,17 +353,17 @@ export namespace FireblossomScenes {
 					Text.NL();
 					Text.Add("<i>“A maiden’s dress is different from that of a woman deflowered; thus is our tradition. We shall pick you a beautiful one that will please the Envoy.”</i>", parse);
 					Text.NL();
-					
+
 					player.slut.IncreaseStat(50, 2);
 					player.subDom.DecreaseStat(-50, 2);
-					
+
 					fireblossom.xariRel++;
-					
+
 					Gui.PrintDefaultOptions();
-				}, enabled : true
+				}, enabled : true,
 			});
-			
-			Gui.Callstack.push(function() {
+
+			Gui.Callstack.push(() => {
 				Text.Add("You don’t need a new dress, you protest. You’ve brought your own from Galenta, and a fine one at that!", parse);
 				Text.NL();
 				Text.Add("<i>“A bit provincial… no, it will not do.”</i> Xari shakes her head, clicking her tongue in disapproval while she towels you dry. <i>“The fabric is fine, but the style simply will not do. Perhaps if you stay here in the palace, I’ll adjust its cut to something more befitting. Now, this way.”</i> The bossy maid gestures for you to take a seat in front of a mirror, pulling out several combs and scissors.", parse);
@@ -386,8 +384,8 @@ export namespace FireblossomScenes {
 				Text.NL();
 				Text.Add("<i>“Now, you must go. Envoy Draxen awaits.”</i>", parse);
 				Text.Flush();
-				
-				Gui.NextPrompt(function() {
+
+				Gui.NextPrompt(() => {
 					Text.Clear();
 					Text.Add("Outside, Qin is waiting for you.", parse);
 					Text.NL();
@@ -412,10 +410,11 @@ export namespace FireblossomScenes {
 					Text.Add("It takes a while before understanding sets in - it is difficult to focus in Draxen’s presence - but when it does, it hits you like a rock. How could you have been so blind? All the evasive answers, this faux dress-up to make you pretty… this is indeed a diplomatic mission, but you are not the dignitary. You are the tribute. The slightly guilty look on ambassador Herod’s face confirms your unvoiced suspicion: you are here to be sold.", parse);
 					Text.NL();
 					Text.Add("You bite back a snappy reply, taking a moment to think over your situation, the vastness of the room pressing down on you. Here, a hundred miles from home, you have no allies. Herod and the others clearly have showed their intent - they are not to be trusted. You doubt that a single one of the multitude of drakes or the lizan nobles would lift a finger in your aid. ", parse);
-					if(fireblossom.xariRel > 0)
+					if (fireblossom.xariRel > 0) {
 						Text.Add("The only two people who’ve shown you any sort of kindness in this strange land is the kobold by your side, Qin, and the sultry lizan, Xari. Completely useless friendships. Even if they’d feel inclined to help you, they have no sway over anything here.", parse);
-					else
+					} else {
 						Text.Add("The only person who’ve shown you any form of kindness in this strange land is your maid Qin, but she has no power at all here.", parse);
+					}
 					Text.NL();
 					Text.Add("No, you are on your own.", parse);
 					Text.NL();
@@ -423,48 +422,48 @@ export namespace FireblossomScenes {
 					Text.NL();
 					Text.Add("Everyone is waiting for you to speak, but concentrating is so difficult with the dragon’s gaze burning into you. What do you do?", parse);
 					Text.Flush();
-					
-					//[Give in][Scheme][Protest]
-					let options = new Array();
+
+					// [Give in][Scheme][Protest]
+					const options = new Array();
 					options.push({ nameStr : "Give in",
 						tooltip : "It’s no use, you can’t fight him.",
-						func : function() {
-							fireblossom.flags["Outset"] = FireblossomFlags.Outset.Draxen;
-							
+						func() {
+							fireblossom.flags.Outset = FireblossomFlags.Outset.Draxen;
+
 							FireblossomScenes.S1Draxen();
-						}, enabled : true
+						}, enabled : true,
 					});
 					options.push({ nameStr : "Scheme",
 						tooltip : "You can’t fight back openly, not here and now - you can’t even think straight in Draxen’s presence. You must find a way to get away from him.",
-						func : function() {
-							fireblossom.flags["Outset"] = FireblossomFlags.Outset.Rakkat;
-							
+						func() {
+							fireblossom.flags.Outset = FireblossomFlags.Outset.Rakkat;
+
 							FireblossomScenes.S1Rakkat();
-						}, enabled : true
+						}, enabled : true,
 					});
 					options.push({ nameStr : "Protest",
 						tooltip : "Invoke your right as princess of Galenta, demand that this outrage is stopped!",
-						func : function() {
-							fireblossom.flags["Outset"] = FireblossomFlags.Outset.Grex;
-							
+						func() {
+							fireblossom.flags.Outset = FireblossomFlags.Outset.Grex;
+
 							FireblossomScenes.S1Grex();
-						}, enabled : true
+						}, enabled : true,
 					});
 					Gui.SetButtonsFromList(options, false, null);
 				});
 			});
-			
+
 			Gui.SetButtonsFromList(options, false, null);
 		});
 	}
 
 	export function S1Draxen() {
-		let player = GAME().player;
-		let fireblossom = GAME().fireblossom;
-		let parse : any = {
-			
+		const player = GAME().player;
+		const fireblossom = GAME().fireblossom;
+		const parse: any = {
+
 		};
-		
+
 		Text.Clear();
 		Text.Add("It’s all so overwhelming. The city, the drakes, all the strange sights and sounds, this entire situation… everything comes together, crashing down and crushing you completely. There is no way you can escape from this, no way that you can avoid your fate. All you can do is latch on to the calm eye at the center of the storm, the immovable Draxen.", parse);
 		Text.NL();
@@ -480,11 +479,11 @@ export namespace FireblossomScenes {
 		Text.NL();
 		Text.Add("Your heart skips a beat at those words, all of Xari’s talk of virginity showing itself in a new light. The kobold ushers you out of the hall, and you try to gather your conflicting emotions. Once again, to no one in particular, you whisper: <i>“I will serve and obey.”</i>", parse);
 		Text.Flush();
-		
+
 		player.subDom.DecreaseStat(-50, 2);
 		player.slut.IncreaseStat(25, 1);
-		
-		Gui.NextPrompt(function() {
+
+		Gui.NextPrompt(() => {
 			Text.Clear();
 			Text.Add("Qin is demure and quiet as she leads you to your new home, though you doubt that you’d have taken note even if she was screaming in your face right now. As you leave the intimidating presence of Draxen you gradually regain your senses; your blind adoration replaced with a nagging feeling of doubt. Did you do the right thing? What exactly have you gotten yourself into?", parse);
 			Text.NL();
@@ -532,8 +531,8 @@ export namespace FireblossomScenes {
 			Text.NL();
 			Text.Add("From then on, you are lost.", parse);
 			Text.Flush();
-			
-			Gui.NextPrompt(function() {
+
+			Gui.NextPrompt(() => {
 				Text.Clear();
 				Text.Add("The rest is a blur, a passionate storm of emotions and confused sensations. Now that you’re the full focus of the dragon’s attention, the intensity of him is breathtaking. His eyes are mesmerizing whirlpools that one could be lost in for days. His breath is nutmeg, cinnamon and clove, in addition to exotic spices you have no name for. His touch is fire, hot like a blazing furnace yet somehow leaving your skin intact.", parse);
 				Text.NL();
@@ -541,7 +540,7 @@ export namespace FireblossomScenes {
 				Text.NL();
 				Text.Add("The dragon tastes even better than he smells.", parse);
 				Text.NL();
-				parse["x"] = fireblossom.xariRel > 1 ? "; Xari’s sensual caress seems nothing but rough groping in comparison" : "";
+				parse.x = fireblossom.xariRel > 1 ? "; Xari’s sensual caress seems nothing but rough groping in comparison" : "";
 				Text.Add("Draxen doesn’t rush, he acts as if he has all the time in the world, playfully exploring your body and seeing how you react to his more and more intimate touches. In your entire life, you’ve never felt anything like this[x]. Wherever his lips or fingers touch your body, pleasure follows. When he finally leans down and tastes your quivering nethers, you cry out helplessly as the dam breaks, letting forth waves of unfamiliar and exhilarating sensations.", parse);
 				Text.NL();
 				Text.Add("The dragon allows you time to come down from your high, but he’s ignited a fire in your loins that refuses to go out. Looking deep into his eyes, you plead for him to take you, to mate with you. His swirling eyes are unreadable, but he allows you to undress him, your lithe hands seeming clumsy in comparison to his. You trail a finger in wonder down his chest, the smooth skin hiding powerful muscle beneath. A flash of blue draws your eye, a line of tiny azure scales that run along his collarbone. They seem to be a part of his skin, meshing with it seamlessly. When you look up, you notice similar scales on his brow, on his jaw, scales you could swear weren’t there a moment ago.", parse);
@@ -562,8 +561,8 @@ export namespace FireblossomScenes {
 				Text.NL();
 				Text.Add("When he finally spends his seed in you, you almost black out. Even when he’s retracted his member, the potent burning liquid flows within you, coaxing a massive, prolonged orgasm from your wrecked body. You don’t know how long it persists, but at last blissful darkness claims you.", parse);
 				Text.Flush();
-				
-				Gui.NextPrompt(function() {
+
+				Gui.NextPrompt(() => {
 					Text.Clear();
 					Text.Add("You slowly come to, the burning ache of Draxen’s seed still in your loins. Now that you are more used to it, it’s possible to at least move, though you feel weak at the knees. Above you, you can see the stars of night glimmering in the sky.", parse);
 					Text.NL();
@@ -571,11 +570,11 @@ export namespace FireblossomScenes {
 					Text.NL();
 					Text.Add("You slowly drift back to sleep in your lover’s embrace…", parse);
 					Text.Flush();
-					
+
 					fireblossom.draxenRel++;
-					
-					fireblossom.flags["State"] = FireblossomFlags.State.S2DraxenPet;
-					
+
+					fireblossom.flags.State = FireblossomFlags.State.S2DraxenPet;
+
 					Gui.NextPrompt(FireblossomScenes.Outro);
 				});
 			});
@@ -583,12 +582,12 @@ export namespace FireblossomScenes {
 	}
 
 	export function S1Rakkat() {
-		let player = GAME().player;
-		let fireblossom = GAME().fireblossom;
-		let parse : any = {
-			
+		const player = GAME().player;
+		const fireblossom = GAME().fireblossom;
+		const parse: any = {
+
 		};
-		
+
 		Text.Clear();
 		Text.Add("You lower your gaze from Draxen, instinctively sensing the strange influence he has over you. Perhaps it’s his eyes, those deep swirling azure pools that look like they could drown you… No! Focus! Here, tact is best. You need to get out of the dragon’s presence in order to formulate a plan. Perhaps humility will work.", parse);
 		Text.NL();
@@ -604,8 +603,8 @@ export namespace FireblossomScenes {
 		Text.NL();
 		Text.Add("Lost in your thoughts, you follow the tiny maid and the huge drake through the giant maze of the palace.", parse);
 		Text.Flush();
-		
-		Gui.NextPrompt(function() {
+
+		Gui.NextPrompt(() => {
 			Text.Clear();
 			Text.Add("As soon as you’re out of earshot of the court, Grex mouths up, guffawing. <i>“So yer going to be spreading your legs for the General, huh? Sounds like we’ll be seeing a lot more of each other in the future, little Fireblossom.”</i>", parse);
 			Text.NL();
@@ -641,12 +640,12 @@ export namespace FireblossomScenes {
 			Text.NL();
 			Text.Add("Well, that wasn’t quite what you expected. For the moment, you retire back into the bedroom, considering your next move. The General at least seems polite with you, something so far unfamiliar to you in the land of the dragons… but still, he is who he is. Many of your countrymen have died on the orders of this man.", parse);
 			Text.Flush();
-			
-			//[Wait for him][Seduce][Kill him]
-			let options = new Array();
+
+			// [Wait for him][Seduce][Kill him]
+			const options = new Array();
 			options.push({ nameStr : "Wait for him",
 				tooltip : "For now, do as he says. Wait and observe.",
-				func : function() {
+				func() {
 					Text.Clear();
 					Text.Add("Your stomach flutters as you shrug yourself out of Xari’s dress. Peeking out across the garden, you try to see if Rakkat is spying on you, but he seems to be completely absorbed in his maps and reports. You sigh and flop down on the bed, brooding over your situation. There’s need for careful observation and planning; before you can act and start twisting him to your liking, you must know how he thinks. An irksomely daunting task, thanks to the General’s polite, stony expression.", parse);
 					Text.NL();
@@ -668,16 +667,16 @@ export namespace FireblossomScenes {
 					Text.NL();
 					Text.Add("The intimate touch is all that Rakkat needs in order to gauge your willingness, and he pushes you down on the sheets, towering over you. His scales feel slick and oily against your skin, but not at all unpleasant. Ahh… far from it, in fact.", parse);
 					Text.Flush();
-					
+
 					player.subDom.DecreaseStat(-20, 1);
 					fireblossom.rakkatRel++;
-					
+
 					Gui.NextPrompt(FireblossomScenes.S1RakkatCont);
-				}, enabled : true
+				}, enabled : true,
 			});
 			options.push({ nameStr : "Seduce",
 				tooltip : "If you are ever going to hold any sway over this man, you are going to have to be the first one to move.",
-				func : function() {
+				func() {
 					Text.Clear();
 					Text.Add("You throw a thoughtful glance across the garden. No. There is no sense in antagonizing this man. He was only following orders, and truth be told, the conquest of Galenta was a lot less bloody than it could have been.", parse);
 					Text.NL();
@@ -721,19 +720,19 @@ export namespace FireblossomScenes {
 					Text.NL();
 					Text.Add("And now, he intends to make you his. Let him try, you tell yourself boldly, though you can’t quite shake your nervosity. This is, after all, the first time you’ll have such intimate contact with a man’s cock… let alone two at once. The lizan seems to have little sympathy for your unease, pushing you down on the sheets roughly. Now that you’ve lit the fire in him, it’s not about to go out before he’s sated. From the hungry look in his eyes, he can go on through the rest of the night.", parse);
 					Text.Flush();
-					
+
 					player.slut.IncreaseStat(50, 1);
 					player.subDom.IncreaseStat(50, 1);
 					fireblossom.rakkatRel += 2;
-					
-					fireblossom.flags["Rakkat"] |= FireblossomFlags.Rakkat.Seduced;
-					
+
+					fireblossom.flags.Rakkat |= FireblossomFlags.Rakkat.Seduced;
+
 					Gui.NextPrompt(FireblossomScenes.S1RakkatCont);
-				}, enabled : true
+				}, enabled : true,
 			});
 			options.push({ nameStr : "Kill him",
 				tooltip : "There’s no way this is going to end well… but Rakkat must pay for his crimes.",
-				func : function() {
+				func() {
 					Text.Clear();
 					Text.Add("A quick glance across the courtyard; Rakkat is busy in his studies, and doesn’t appear to be monitoring your movements. No matter how much you try, you can’t accept this man as your master. You retreat back into the common room, eyes alighting on the General’s weapon stand.", parse);
 					Text.NL();
@@ -759,39 +758,40 @@ export namespace FireblossomScenes {
 					Text.NL();
 					Text.Add("<i>“You are too kind, General.”</i> Grex bows, grinning down possessively at you. <i>“Me and the boys will give her a warm welcome to the ranks.”</i> Guffawing, the brute throws you over his shoulder and heads for the pens.", parse);
 					Text.Flush();
-					
+
 					player.subDom.IncreaseStat(100, 2);
 					fireblossom.rakkatRel--;
-					fireblossom.flags["Outset"] = FireblossomFlags.Outset.RakkatToGrex;
-					
-					Gui.NextPrompt(function() {
+					fireblossom.flags.Outset = FireblossomFlags.Outset.RakkatToGrex;
+
+					Gui.NextPrompt(() => {
 						Text.Clear();
 						Text.Add("Well, that didn’t work out as planned. ", parse);
-						
+
 						FireblossomScenes.S1GrexEntrypoint();
 					});
-				}, enabled : true
+				}, enabled : true,
 			});
 			Gui.SetButtonsFromList(options, false, null);
 		});
 	}
 
 	export function S1RakkatCont() {
-		let fireblossom = GAME().fireblossom;
-		let parse : any = {
-			
+		const fireblossom = GAME().fireblossom;
+		const parse: any = {
+
 		};
-		
-		fireblossom.flags["Rakkat"] |= FireblossomFlags.Rakkat.Lover;
-		
-		let seduced = fireblossom.flags["Rakkat"] & FireblossomFlags.Rakkat.Seduced;
-		
+
+		fireblossom.flags.Rakkat |= FireblossomFlags.Rakkat.Lover;
+
+		const seduced = fireblossom.flags.Rakkat & FireblossomFlags.Rakkat.Seduced;
+
 		Text.Clear();
 		Text.Add("<i>“Get ready to be plucked, my pretty little flower,”</i> the General huffs, leaning in for a kiss. Your tongues intermingle and wrestle, his long and sinuous. ", parse);
-		if(seduced)
+		if (seduced) {
 			Text.Add("You make sure you win the fight.", parse);
-		else
+		} else {
 			Text.Add("You close your eyes, leaning into the kiss and letting the powerful lizan take charge.", parse);
+		}
 		Text.Add(" The lower one of his twin shafts rubs against your nether lips, mirroring his other kiss and bringing promise of further pleasure.", parse);
 		Text.NL();
 		Text.Add("You let out a delighted yelp as he hoists you to the edge of the bed, spreading your legs and holding you by the knees. Rakkat drinks in the sight of you beneath him, flushed and willing, golden hair spreading out behind you like a waterfall. <i>“More beautiful than I first imagined,”</i> the lizan hisses as he roughly grinds your pussy, eliciting gasps from you. <i>“I didn't think I’d one day have the pleasure of fucking the spitting image of one of the Grand Spirits. I bet you were a much sought after prize in your homeland, but now, you’re <b>mine</b>.”</i>", parse);
@@ -800,15 +800,16 @@ export namespace FireblossomScenes {
 		Text.NL();
 		Text.Add("Rakkat fiercely makes love to you, pumping his cocks into you like a man possessed. Once you’ve grown accustomed to his girth, you begin to return his passion, gyrating your hips and leaning up to kiss his neck, his chin, his mouth. He grabs one of your heaving breasts, massaging it and twisting your sensitive nipple, causing you to whimper.", parse);
 		Text.NL();
-		if(seduced)
+		if (seduced) {
 			Text.Add("Not wanting to be outdone, you wrap your legs around your lover, putting one foot above and one beneath his tail. In time with his thrusts, you stroke him with your feet, drawing a gasping moan from the lizard. You give him a taunting smile, causing him to redouble his efforts.", parse);
-		else
+		} else {
 			Text.Add("It’s all you can do to hang on and wait out the storm, though it looks like it’s going to be quite some time before he’s done. The lizard’s hands are all over your body, tugging at your tits, caressing your hips and legs, cupping your chin when he leans in to tongue-wrestle with you.", parse);
+		}
 		Text.NL();
 		Text.Add("As the night goes on, your lovemaking turns more creative, making full use of his twin cocks. When he first puts both of them in at once, you clench your teeth and endure. When he puts one of them in your virgin ass and fucks both your holes at once, you cry out in pleasure. Before long, you’re leaking of his hot seed from both pussy and ass, aching for more.", parse);
 		Text.NL();
 		Text.Add("The General seems versed in both giving and taking, using his flexible tongue on you almost as much as his cocks. ", parse);
-		if(seduced) {
+		if (seduced) {
 			Text.Add("Locked in a loop of oral pleasure, your mouth around one of his cocks, his tongue plunged deeply in your cunt, a naughty idea comes to your mind. Time to see just how far you can push him.", parse);
 			Text.NL();
 			Text.Add("Throat clamped tight around his throbbing shaft, you begin to stroke his tail, using both of your hands to stroke it like a third cock. This seems to have a satisfactory response. The closer your prying hands come to the base of his tail, the more urgent his own licking becomes. You pull him out of your mouth to catch a breather, and survey your new target. Anal is already on the table, so he can hardly complain, can he?", parse);
@@ -816,21 +817,20 @@ export namespace FireblossomScenes {
 			Text.Add("Rakkat hisses in surprise when you instead of returning to suck on his cock plunge your tongue into his own unused hole, but at your nudging he continues to eat you out, enjoying this new sensation. Before long, you’re rewarded with a thick splatter of cum across your chest as you bring the lizan to an anal orgasm, smiling triumphantly to yourself.", parse);
 			Text.NL();
 			Text.Add("The experiment is not without its drawbacks; before the night is out, you’ve experienced what having two dicks shoved to the hilt into your ass feels like. It’s a pain that can be endured, if it means pulling one over on your new ‘master’.", parse);
-		}
-		else {
+		} else {
 			Text.Add("At first, you blanch at sucking his cocks, but the intensity with which he goes down on your cunt convinces you to give it a try. You’re promptly rewarded with a mouthful of hot, spicy cum. Enjoying your discomfort, Rakkat promptly has you repeat the exercise once more, smiling down at you possessively.", parse);
 			Text.NL();
 			Text.Add("Your night is just beginning.", parse);
 		}
 		Text.Flush();
-		
-		Gui.NextPrompt(function() {
+
+		Gui.NextPrompt(() => {
 			Text.Clear();
 			Text.Add("You frenzied love-making goes on through the night, with both of you testing out new positions and delighting in exploring the other’s body. Rakkat seems truly taken with you, commending you for your stamina. He’s hardly one to talk; it feels like the hardened soldier could keep at this for half a day more and still hit his morning drill with a spring in his step.", parse);
 			Text.NL();
 			Text.Add("When the two of you finally settle down, cuddled together in a heap of sweat and sexual fluids, you’ve lost count of the number of ways that he’s fucked you. Hot seed leaks out from both pussy and ass, and there’s a generous serving of the warming fluid settling in your stomach. Rakkat toys with your hair, nipping at your ear playfully.", parse);
 			Text.NL();
-			if(seduced) {
+			if (seduced) {
 				Text.Add("<i>“I thought I would have to teach you much, Fireblossom,”</i> he murmurs, <i>“yet your ingenuity never ceases to surprise me. The Galentans never knew what a horny little minx they’d been raising.”</i>", parse);
 				Text.NL();
 				Text.Add("You can’t refrain from blushing. In time, you may become more used to this, but this first night you were going on instinct alone, and you blanch at some of the memories of what you’ve done these past hours. Still…", parse);
@@ -838,8 +838,7 @@ export namespace FireblossomScenes {
 				Text.Add("Rubbing your sore butt back against him sultrily, you shoot back a question: are you perhaps too much for him to handle?", parse);
 				Text.NL();
 				Text.Add("<i>“Don’t fear, I was going easy on you,”</i> the General replies amiably. Seems like you still have work to do, but now you have an idea on how you can exert leverage on the lizan… there’re things you can give him that he perhaps doesn’t yet know he himself wants.", parse);
-			}
-			else {
+			} else {
 				Text.Add("<i>“We have many delightful nights ahead of us, Fireblossom,”</i> he murmurs. <i>“You have a gorgeous body, and a quick and playful mind to go with it. It will be most gratifying to school you in the carnal arts.”</i>", parse);
 				Text.NL();
 				Text.Add("Oh, he thinks you’re not adept?", parse);
@@ -851,19 +850,19 @@ export namespace FireblossomScenes {
 			Text.NL();
 			Text.Add("When at last you fall into exhausted sleep, it is with a satisfied smile on your lips.", parse);
 			Text.Flush();
-			
-			fireblossom.flags["State"] = FireblossomFlags.State.S2RakkatPet;
-			
+
+			fireblossom.flags.State = FireblossomFlags.State.S2RakkatPet;
+
 			Gui.NextPrompt(FireblossomScenes.Outro);
 		});
 	}
 
 	export function S1Grex() {
-		let fireblossom = GAME().fireblossom;
-		let parse : any = {
-			
+		const fireblossom = GAME().fireblossom;
+		const parse: any = {
+
 		};
-		
+
 		Text.Clear();
 		Text.Add("You are still a princess, and you will not be treated this way, sold off like a sack of wheat! There’s a worried look on ambassador Herod’s face, and you throw him a murderous glare.", parse);
 		Text.NL();
@@ -885,10 +884,10 @@ export namespace FireblossomScenes {
 		Text.NL();
 		Text.Add("It’s as if he’s swept away the floor from under your feet. Your head swims at how unreal this is; surely, you’ll wake up any moment in your bed. Surely he did not just say… It’s only thanks to Qin’s aid that your fall doesn’t harm you as dizziness takes over. The last thing you see is Grex’s stupid grin, and then everything turns black.", parse);
 		Text.Flush();
-		
+
 		fireblossom.draxenRel--;
-		
-		Gui.NextPrompt(function() {
+
+		Gui.NextPrompt(() => {
 			Text.Clear();
 			Text.Add("You come to, waking up from a dream of misery into real misery. Struggling, you take note of your current predicament. ", parse);
 			FireblossomScenes.S1GrexEntrypoint();
@@ -896,20 +895,21 @@ export namespace FireblossomScenes {
 	}
 
 	export function S1GrexEntrypoint() {
-		let fireblossom = GAME().fireblossom;
-		let parse : any = {
-			
+		const fireblossom = GAME().fireblossom;
+		const parse: any = {
+
 		};
-		
+
 		Text.Add("Grex is carrying you over his shoulder like a bag of flour, showing little care for your comfort. Exactly where he’s taking you, you know not, but this doesn’t look anything like the grand passageways of the palace. The walls are made from rougher stone, there’s more distance between the fires, and there are no windows anywhere to be seen. The dank smell suggests that you’re somewhere underground.", parse);
 		Text.NL();
 		Text.Add("Beside Grex, Qin is jogging as fast as she can, trying to keep up with the brute. <i>“G-Grex, wait!”</i> she yelps, gasping for air. <i>“Don’t do something rash now!”</i>", parse);
 		Text.NL();
 		Text.Add("<i>“What, you think I’ll get in trouble for a bit of rough and tumble?”</i> he growls. ", parse);
-		if(fireblossom.flags["Outset"] == FireblossomFlags.Outset.RakkatToGrex)
+		if (fireblossom.flags.Outset === FireblossomFlags.Outset.RakkatToGrex) {
 			Text.Add("<i>“Little Fireblossom isn’t exactly in favor at the moment. She made a mistake by trying to show steel while having too little of it.”</i>", parse);
-		else
+		} else {
 			Text.Add("<i>“Where you perhaps at a different audience than me?”</i>", parse);
+		}
 		Text.NL();
 		Text.Add("<i>“B-be that as it may, p-please don’t harm her!”</i> Qin begs him. <i>“She won’t survive the pens!”</i>", parse);
 		Text.NL();
@@ -935,40 +935,41 @@ export namespace FireblossomScenes {
 		Text.NL();
 		Text.Add("What’d you like to do?", parse);
 		Text.Flush();
-		
+
 		FireblossomScenes.S1GrexRoom({});
 	}
 
-	export function S1GrexRoom(opts : any) {
-		let player = GAME().player;
-		let fireblossom = GAME().fireblossom;
-		let parse : any = {
-			
+	export function S1GrexRoom(opts: any) {
+		const player = GAME().player;
+		const fireblossom = GAME().fireblossom;
+		const parse: any = {
+
 		};
-		
-		//[Survey][Explore][Wait]
-		let options = new Array();
+
+		// [Survey][Explore][Wait]
+		const options = new Array();
 		options.push({ nameStr : "Survey",
 			tooltip : "Look through Grex’s chambers.",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("The room is bigger than what you thought a regular soldier would have, even counting the size of the drakes; it really seems like Grex occupies some position of power here. That, or he’s murdered the previous owner of the quarters. Much of it is occupied by a low drake-sized bed lining one of the sides of the room. Plain, but at least it’s not a bale of hay. Along one side of the wall is Grex’s armory, containing a selection of various weapons.", parse);
-				if(fireblossom.flags["Outset"] == FireblossomFlags.Outset.RakkatToGrex)
+				if (fireblossom.flags.Outset === FireblossomFlags.Outset.RakkatToGrex) {
 					Text.Add(" You doubt you could lift any of them, so your last plan is even more hopeless here than it was with Rakkat. Probably best to drop that line of thought altogether; Grex doesn’t look like he’d take kindly to it.", parse);
+				}
 				Text.NL();
 				Text.Add("There’s a long table set in the side of one wall. At first you think it a shelf, but you realize that for Grex, it’d be on level with his torso; you can barely reach it if you stretch your arms up. The remaining fourth wall is covered by a drapery. Peering in behind it, you deem it some form of storage area, containing various articles of oversized clothing, a discarded tankard and a large chest. Further examination reveal that the chest is soundly locked. No luck there.", parse);
 				Text.NL();
 				Text.Add("Finding little else to do, you slump down on the bed. The smell is worse here, but at least it’s comfortable.", parse);
 				Text.Flush();
-				
+
 				opts.survey = true;
-				
+
 				FireblossomScenes.S1GrexRoom(opts);
-			}, enabled : !opts.survey
+			}, enabled : !opts.survey,
 		});
 		options.push({ nameStr : "Explore",
 			tooltip : "Slip out into the corridor and see what else there is around here.",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("Feeling a strange bravado - you’re pretty much already in the worst situation you could be, anyways - you slip back out into the corridor, peering around. Back the way you came, you see the backs of two drakes. Bad idea. The other way, you hear the sounds of carousing, but at least you don’t see anyone moving about. Deciding to chance it, you creep down the corridor.", parse);
 				Text.NL();
@@ -986,50 +987,50 @@ export namespace FireblossomScenes {
 				Text.NL();
 				Text.Add("<i>“That was a stupid thing to do,”</i> Qin admonishes you sharply. <i>“Right now you need to be brave, my lady, not rash.”</i> She leads you over to the bed, returning for a satchel that lies discarded by the door, presumably what she hurried away for in the first place.", parse);
 				Text.NL();
-				
+
 				player.subDom.IncreaseStat(25, 1);
-				
+
 				opts.explore = true;
-				
+
 				FireblossomScenes.S1GrexPens(opts);
-			}, enabled : true
+			}, enabled : true,
 		});
 		options.push({ nameStr : "Wait",
 			tooltip : "Best not get into even more trouble. Hopefully Qin will be back soon, then you can ask her how to get out of here.",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("You hate being cramped in here, the smell of Grex all around you, but going wandering is bound to end badly. Sighing dejectedly, you settle down and wait for Qin’s return. Minutes tick by, but they feel more like hours. Just when you are beginning to despair, the kobold returns. She’s walking a bit unsteadily, and there are stains of sticky white fluid dripping down from her maw.", parse);
 				Text.NL();
 				Text.Add("<i>“The guards gave me trouble on the way back,”</i> she explains her tardiness, wiping away the worst of it. <i>“They were adamant… but no matter. We have little time, my lady.”</i> The maid hurries over to you, carrying a satchel with her, presumably what she went to fetch in the first place.", parse);
 				Text.NL();
-				
+
 				player.subDom.DecreaseStat(-25, 1);
-				
+
 				FireblossomScenes.S1GrexPens(opts);
-			}, enabled : true
+			}, enabled : true,
 		});
 		Gui.SetButtonsFromList(options, false, null);
 	}
 
-	export function S1GrexPens(opts : any) {
-		let player = GAME().player;
-		let fireblossom = GAME().fireblossom;
-		let parse : any = {
-			
+	export function S1GrexPens(opts: any) {
+		const player = GAME().player;
+		const fireblossom = GAME().fireblossom;
+		const parse: any = {
+
 		};
-		
-		let fromRakkat = fireblossom.flags["Outset"] == FireblossomFlags.Outset.RakkatToGrex;
-		
+
+		const fromRakkat = fireblossom.flags.Outset === FireblossomFlags.Outset.RakkatToGrex;
+
 		Text.Add("Qin opens her satchel and brings out several vials and jars containing strange fluids and salves. You look at her bewildered and ask her how these are going to aid in your escape. The maid blinks at you.", parse);
 		Text.NL();
-		parse["e"] = fromRakkat ? "General" : "Envoy";
+		parse.e = fromRakkat ? "General" : "Envoy";
 		Text.Add("<i>“I… I’m sorry, my lady. There are limits to what I can do. Here, in the capital - no, anywhere in the empire - rebelling against the dragons and their followers is impossible. There is no escape.”</i> She hangs her head sadly. <i>“I… wish it wasn’t so, my lady, but this is the will of the [e].”</i>", parse);
 		Text.NL();
 		Text.Add("I-is there nothing she can do? Your lip trembles, showing your fear.", parse);
 		Text.NL();
 		Text.Add("<i>“I can reduce the strain on your body and prepare you.”</i> Qin gestures to her ointments. <i>“With so little time, it will still be rough… but you should be able to avoid permanent damage.”</i> She opens up one of the jars, taking out a generous glob of creamy salve. <i>“Remove your clothes. Do not argue, if you value your safety.”</i>", parse);
 		Text.NL();
-		parse["e"] = fromRakkat ? "shredded remains of your dress" : "flimsy maiden’s dress";
+		parse.e = fromRakkat ? "shredded remains of your dress" : "flimsy maiden’s dress";
 		Text.Add("There’s an urgency in her words that makes you heed her request. She might be acting out of line, but there’s no doubt that if you have even a single friend in this entire city, she’s standing in front of you right now. You hurriedly disrobe, shrugging off the [e] and seating yourself according to the kobold’s instruction.", parse);
 		Text.NL();
 		Text.Add("<i>“Lay back, my lady,”</i> Qin murmurs. <i>“I’m sorry if I must be a bit rough, but Grex might return any minute. Endure, and you’ll thank me in the end.”</i> Without further delay, the kobold maid begins to apply the cold substance between your legs, rubbing on your nether lips and your tight rosebud.", parse);
@@ -1072,13 +1073,14 @@ export namespace FireblossomScenes {
 		Text.NL();
 		Text.Add("Were you not so distraught, you’d put further thought to why the maid goes to such efforts to help you. Right now, all you can think about is the den of brutes waiting to ravage you. There’s a tug on the leash. Your master is calling. You start walking.", parse);
 		Text.Flush();
-		
-		Gui.NextPrompt(function() {
+
+		Gui.NextPrompt(() => {
 			Text.Clear();
-			if(opts.explore)
+			if (opts.explore) {
 				Text.Add("Your steps are heavy as you retrace to the edge of the feasting hall, all but dragged along by Grex. The collar chafes, but the band around your neck is merely a minor humiliation; you’d gladly wear it for the rest of your life it you could avoid the night ahead of you.", parse);
-			else
+			} else {
 				Text.Add("Your steps are heavy as you follow behind Grex, dragged along by the leash. He takes you toward the roaring revelry, emerging on the top level of a multi-tiered hall full of his ilk. Tables laden with platters of raw meat and tankards of foul-smelling ale line the hall. There’re two roaring fires, throwing giant shadows of the carousing drakes, making them seem like ancient creatures out of legend.", parse);
+			}
 			Text.NL();
 			Text.Add("Grex takes you down a step of stairs, descending into the pit below. The revelry gradually quietens down as all eyes turn to you. The scarred drake drags you along, pausing to let Qin help you regain your feet when you stumble. He brings you to a raised platform at the opposite end of the hall containing a stockade of sorts, and several chained lizan slaves.", parse);
 			Text.NL();
@@ -1106,14 +1108,14 @@ export namespace FireblossomScenes {
 			Text.NL();
 			Text.Add("The rest of the night is a confused jumble. You, Qin and the lizan slaves are fucked again and again by the horde of drakes, until you feel that your abused holes will never stop gaping. Finally, blissful darkness descends.", parse);
 			Text.Flush();
-			
+
 			player.slut.IncreaseStat(100, 5);
 			player.subDom.DecreaseStat(-100, 5);
 			fireblossom.grexRel++;
 			fireblossom.qinRel++;
-			
-			fireblossom.flags["State"] = FireblossomFlags.State.S2GrexPet;
-			
+
+			fireblossom.flags.State = FireblossomFlags.State.S2GrexPet;
+
 			Gui.NextPrompt(FireblossomScenes.Outro);
 		});
 	}

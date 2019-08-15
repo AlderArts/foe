@@ -1,65 +1,64 @@
-import * as _ from 'lodash';
+import * as _ from "lodash";
 
-import { WorldTime, GAME, StepToHour } from '../../GAME';
-import { Gui } from '../../gui';
-import { Text } from '../../text';
-import { EncounterTable } from '../../encountertable';
-import { DryadGladeFlags } from '../../loc/glade-flags';
-import { Party } from '../../party';
-import { CvetaFlags } from './cveta-flags';
+import { EncounterTable } from "../../encountertable";
+import { GAME, StepToHour, WorldTime } from "../../GAME";
+import { Gui } from "../../gui";
+import { DryadGladeFlags } from "../../loc/glade-flags";
+import { Party } from "../../party";
+import { Text } from "../../text";
+import { CvetaFlags } from "./cveta-flags";
 
 export namespace CvetaDateScenes {
 
-	export function Prompt(Prompt : any) {
-		let player = GAME().player;
-		let party : Party = GAME().party;
-		let cveta = GAME().cveta;
-		let glade = GAME().glade;
+	export function Prompt(Prompt: any) {
+		const player = GAME().player;
+		const party: Party = GAME().party;
+		const cveta = GAME().cveta;
+		const glade = GAME().glade;
 
-		var parse : any = {
-			playername : player.name
+		const parse: any = {
+			playername : player.name,
 		};
-		
+
 		Text.Clear();
 		Text.Add("You ask Cveta if she’d like to go somewhere with you.", parse);
-		if(party.Num() > 1) {
-			parse["comp"] = party.Num() == 2 ? party.Get(1).name : "everyone else";
+		if (party.Num() > 1) {
+			parse.comp = party.Num() == 2 ? party.Get(1).name : "everyone else";
 			Text.Add(" You have some free time, and if it’s to be just the two of you, you could always ask [comp] to hang back for the rest of the day and wait for you in camp.", parse);
 		}
 		Text.NL();
-		if(WorldTime().hour >= 12) {
+		if (WorldTime().hour >= 12) {
 			Text.Add("<i>“Not an entirely unpleasant prospect, [playername], but you should have come to me sooner. It is getting a bit late for wandering around outside, and I do have my duties here in camp.”</i>", parse);
 			Text.NL();
 			Text.Add("When, then?", parse);
 			Text.NL();
 			Text.Add("<i>“Could you perhaps ask again tomorrow, before noon?”</i>", parse);
 			Text.Flush();
-			
+
 			Prompt();
-		}
-		else {
+		} else {
 			Text.Add("<i>“I would not mind, [playername]. I have some spare time, and perhaps a change in scenery would help inspire my practice. Was there a place you had in mind?”<i/>", parse);
 			Text.NL();
 			Text.Add("Well, actually…", parse);
 			Text.Flush();
-			
-			//[Glade][Spring][Rigard][Up to her][Back]
-			var options = new Array();
-			if(glade.flags["Visit"] >= DryadGladeFlags.Visit.DefeatedOrchid) {
+
+			// [Glade][Spring][Rigard][Up to her][Back]
+			const options = new Array();
+			if (glade.flags.Visit >= DryadGladeFlags.Visit.DefeatedOrchid) {
 				options.push({ nameStr : "Glade",
 					tooltip : "Why not take her out to the dryads’ glade?",
-					func : function() {
+					func() {
 						Text.Clear();
 						CvetaDateScenes.DryadGlade();
-					}, enabled : true
+					}, enabled : true,
 				});
 			}
 			options.push({ nameStr : "Spring",
 				tooltip : "Take her to this forest spring you know…",
-				func : function() {
+				func() {
 					Text.Clear();
 					CvetaDateScenes.Spring();
-				}, enabled : true
+				}, enabled : true,
 			});
 			/* TODO
 			options.push({ nameStr : "name",
@@ -70,53 +69,53 @@ export namespace CvetaDateScenes {
 				}, enabled : true
 			});
 			*/
-			if(cveta.flags["Date"] != 0) {
+			if (cveta.flags.Date != 0) {
 				options.push({ nameStr : "Up to her",
 					tooltip : "Well, where does she fancy going?",
-					func : function() {
+					func() {
 						Text.Clear();
 						Text.Add("You tell Cveta that since you asked her out, she should decide where she wants to go this time around. The songstress looks a little surprised, her eyes growing wide, but she quickly recovers from the show of emotion and assumes her calm, pleasant demeanor once more. What was that all about?", parse);
 						Text.NL();
 						Text.Add("<i>“Very well then. Today, I would like to visit…”</i> she leans in and whispers into your ear.", parse);
 						Text.NL();
-						
-						var arr : CallableFunction[] = [];
-						
-						if(cveta.flags["Date"] & CvetaFlags.Dates.Glade) arr.push(CvetaDateScenes.DryadGlade);
-						if(cveta.flags["Date"] & CvetaFlags.Dates.Spring) arr.push(CvetaDateScenes.Spring);
-						
-						//TODO add
-						
+
+						const arr: CallableFunction[] = [];
+
+						if (cveta.flags.Date & CvetaFlags.Dates.Glade) { arr.push(CvetaDateScenes.DryadGlade); }
+						if (cveta.flags.Date & CvetaFlags.Dates.Spring) { arr.push(CvetaDateScenes.Spring); }
+
+						// TODO add
+
 						_.sample(arr)();
-					}, enabled : true
+					}, enabled : true,
 				});
 			}
-			
+
 			Gui.SetButtonsFromList(options, true, function() {
 				Text.Clear();
 				Text.Add("Hmm… you have to give it some more thought.", parse);
 				Text.NL();
 				Text.Add("<i>“You know where to find me,”</i> Cveta replies amiably.", parse);
 				Text.Flush();
-				
+
 				Prompt();
 			});
 		}
 	}
 
 	export function PartySetup() {
-		let player = GAME().player;
-		let party : Party = GAME().party;
-		let cveta = GAME().cveta;
+		const player = GAME().player;
+		const party: Party = GAME().party;
+		const cveta = GAME().cveta;
 
 		cveta.RestFull();
-		
+
 		party.SaveActiveParty();
 		party.ClearActiveParty();
 		party.SwitchIn(player);
 		party.AddMember(cveta, true);
-		
-		//Set up restore party at the bottom of the callstack, fallthrough
+
+		// Set up restore party at the bottom of the callstack, fallthrough
 		Gui.Callstack.push(function() {
 			party.LoadActiveParty();
 			Gui.PrintDefaultOptions();
@@ -124,19 +123,19 @@ export namespace CvetaDateScenes {
 	}
 
 	export function DryadGlade() {
-		let player = GAME().player;
-		let cveta = GAME().cveta;
-		let glade = GAME().glade;
+		const player = GAME().player;
+		const cveta = GAME().cveta;
+		const glade = GAME().glade;
 
-		var parse : any = {
-			playername : player.name
+		const parse: any = {
+			playername : player.name,
 		};
-		
+
 		CvetaDateScenes.PartySetup();
-		
-		var first = !(cveta.flags["Date"] & CvetaFlags.Dates.Glade);
-		cveta.flags["Date"] |= CvetaFlags.Dates.Glade;
-		
+
+		const first = !(cveta.flags.Date & CvetaFlags.Dates.Glade);
+		cveta.flags.Date |= CvetaFlags.Dates.Glade;
+
 		Text.Add("The glade, yes, that sounds like a good idea. Cveta would appreciate the flowers, and it would do her some good to see someone who isn’t an outlaw every now and then.", parse);
 		Text.NL();
 		Text.Add("<i>“It is settled, then,”</i> the songstress says with a clap of her hands. <i>“Allow me to get my instrument and I will be with you shortly.”</i>", parse);
@@ -149,10 +148,10 @@ export namespace CvetaDateScenes {
 		Text.NL();
 		Text.Add("It’s peaceful as always within the sanctuary, the air full of floral scents and clean smells. Hugging her lyre close to her, Cveta takes deep lungfuls of the blossoms’ fragrance, sighing in satisfaction each time she exhales, her bosom rising and falling with each happy chirp.", parse);
 		Text.NL();
-		if(glade.OrchidSlut()) {
+		if (glade.OrchidSlut()) {
 			Text.Add("The denizens of the glade frolic about, oblivious to your familiar presence. A few of the braver dryads and centaurs greet you warmly, and you give them a friendly wave back. ", parse);
-			
-			var scenes = new EncounterTable();
+
+			const scenes = new EncounterTable();
 			scenes.AddEnc(function() {
 				Text.Add("Orchid and her friends are hard at play, the be-tentacled dryad chasing after the others and trying to ensnare them with her plant-like limbs, much to everyone’s glee.", parse);
 			}, 1.0, function() { return true; });
@@ -165,14 +164,13 @@ export namespace CvetaDateScenes {
 			scenes.AddEnc(function() {
 				Text.Add("Orchid and her friends are napping together in a large pile of dryads, centaurs and tentacles. It’s an uneasy rest, as the tentacles seem to have a mind of their own, much to the delight of the dozing forest creatures.", parse);
 			}, 1.0, function() { return true; });
-			
+
 			scenes.Get();
-		}
-		else {
+		} else {
 			Text.Add("The denizens of the glade frolic about, giving the two of you a peaceful vista to enjoy. Dryads, centaurs and other forest creatures, at first daunted by the appearance of strangers, continue their play. Nearby, you spot Orchid conversing with some of her friends, her dormant tentacles twitching from time to time.", parse);
 		}
 		Text.NL();
-		if(first) {
+		if (first) {
 			Text.Add("<i>“This is a good place,”</i> Cveta murmurs to herself.", parse);
 			Text.NL();
 			Text.Add("<i>“Naturally. Would you raise your own daughters with anything less than the best you could give?”</i>", parse);
@@ -196,8 +194,7 @@ export namespace CvetaDateScenes {
 			Text.Add("<i>“Well…”</i> Cveta glances about her, at the flowers, at the spring, and finally back to Mother Tree herself. <i>“All right, great mother. Your home has a certain inspiring quality to it. Besides, which performer could resist a captive audience?”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“Thank you, child. And thank you, Lifegiver.”</i>", parse);
-		}
-		else {
+		} else {
 			Text.Add("Scarcely have you and Cveta entered the glade when the nymphs frolicking in the pool notice the two of you. Squealing with glee, they take off to tell the glade’s other inhabitants of your arrival.", parse);
 			Text.NL();
 			Text.Add("You ask Cveta if she’d rather not play this time, but the songstress simply shakes her head and laughs off the question.", parse);
@@ -209,8 +206,8 @@ export namespace CvetaDateScenes {
 		Text.NL();
 		Text.Add("Gathering up the skirts of her gown, Cveta makes herself comfortable, closes her eyes, and strums her lyre a few times…", parse);
 		Text.NL();
-		
-		var scenes = new EncounterTable();
+
+		let scenes = new EncounterTable();
 		scenes.AddEnc(function() {
 			Text.Add("The improvised piece that drifts from her fingers is slow and serene to match the glade’s calm atmosphere. Every plucked note a drip of water in a still pool, Cveta is absolutely calm, her movements slow and measured. Gentle music, to match the dryad glade’s gentle atmosphere. The songstress’ bosom heaves as she breathes deeply of the rich floral scent that pervades the air - no doubt part of the atmosphere she finds so wonderfully inspiring - as if she were about to burst into song, but she doesn’t and concentrates on the strings instead.", parse);
 			Text.NL();
@@ -227,9 +224,9 @@ export namespace CvetaDateScenes {
 			Text.NL();
 			Text.Add("<i>“That will be all for today,”</i> she announces, standing and giving the assembled forest creatures a small curtsey. There’re a few moans of disappointment, but by and large the audience disperses, leaving just you and Cveta in the midst of the flower field.", parse);
 		}, 1.0, function() { return true; });
-		
+
 		scenes.Get();
-		
+
 		Text.NL();
 		Text.Add("Cveta looks at you and tosses her head playfully. <i>“Why, [playername]. It looks like we have some time all to ourselves.”</i>", parse);
 		Text.NL();
@@ -237,8 +234,8 @@ export namespace CvetaDateScenes {
 		Text.NL();
 		Text.Add("Though Cveta doesn’t have much in the way of ass yet, if her attitude can improve with a little keeping, surely her body might eventually follow suit…", parse);
 		Text.NL();
-		
-		var scenes = new EncounterTable();
+
+		scenes = new EncounterTable();
 		scenes.AddEnc(function() {
 			Text.Add("<i>“Mmmh,”</i> the songstress says, her voice a soft, warm hum in her breast. You can practically feel every muscle in her body relax as she leans her head on your shoulder, the crimson waterfall of her hair spilling down your back.  <i>“I feel safe.”</i>", parse);
 			Text.NL();
@@ -280,9 +277,9 @@ export namespace CvetaDateScenes {
 			Text.NL();
 			Text.Add("Hmm…", parse);
 		}, 1.0, function() { return true; });
-		
+
 		scenes.Get();
-		
+
 		Text.NL();
 		Text.Add("At length, though - and not without a good helping of petting - it’s time to go back; Cveta still needs to prepare for this evening’s performance. You stop by Mother Tree to pay your respects to the ancient dryad on the way out, then begin the long walk back to camp. It’s almost evening by the time the two of you finish navigating through the thin forest trails and the walls of the outlaw camp draw into view.", parse);
 		Text.NL();
@@ -294,25 +291,25 @@ export namespace CvetaDateScenes {
 		Text.NL();
 		Text.Add("With that, she walks off, leaving you in the middle of camp.", parse);
 		Text.Flush();
-		
+
 		cveta.relation.IncreaseStat(100, 2);
 		StepToHour(18);
-		
+
 		Gui.NextPrompt();
 	}
 
 	export function Spring() {
-		let player = GAME().player;
-		let cveta = GAME().cveta;
+		const player = GAME().player;
+		const cveta = GAME().cveta;
 
-		var parse : any = {
-			playername : player.name
+		const parse: any = {
+			playername : player.name,
 		};
-		
+
 		CvetaDateScenes.PartySetup();
-		
-		cveta.flags["Date"] |= CvetaFlags.Dates.Spring;
-		
+
+		cveta.flags.Date |= CvetaFlags.Dates.Spring;
+
 		Text.Add("Hmm… well, there’s nothing against it. The spring’s probably a good place - unlikely that anyone’s bound to walk in on the two of you, it’s quiet and appropriately inspirational, and the water is clear if it comes to that. The more you consider it, the more of a good idea it promises to be. The change of scenery would probably help her music along, too.", parse);
 		Text.NL();
 		Text.Add("<i>”Allow me a moment, please,”</i> Cveta says before disappearing into her tent. <i>“I will be with you shortly.”</i>", parse);
@@ -333,12 +330,12 @@ export namespace CvetaDateScenes {
 		Text.NL();
 		Text.Add("Settling down on the grass yourself, you rest your back against a nearby tree and enjoy the music for a little bit. Come to think of it, since Cveta is in such a good mood today, maybe she’d be willing to answer some questions that she normally wouldn’t consider entertaining…", parse);
 		Text.Flush();
-		
-		//[Home][Hopes][Yourself][Listen]
-		var options = new Array();
+
+		// [Home][Hopes][Yourself][Listen]
+		const options = new Array();
 		options.push({ nameStr : "Home",
 			tooltip : "Ask her about home, and why she left.",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("<i>“I do not quite remember if I have told you this yet,”</i> Cveta replies. <i>“Suffice to say that I had an argument with my mother.</i>", parse);
 				Text.NL();
@@ -354,11 +351,11 @@ export namespace CvetaDateScenes {
 				Text.NL();
 				Text.Add("<i>“Yes, I know that I will have to return someday; duty demands it of me - such is inescapable. Become worthy, accept power and rule wisely, as Father is fond of saying. But someday is not today, and I do not wish to dwell on it further.”</i>", parse);
 				Gui.PrintDefaultOptions();
-			}, enabled : true
+			}, enabled : true,
 		});
 		options.push({ nameStr : "Hopes",
 			tooltip : "What does she hope to achieve with the outlaws?",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("Cveta considers your question a moment against the backdrop of her gentle music. <i>“I do not quite understand. What do you mean by ‘achieve’?”</i>", parse);
 				Text.NL();
@@ -374,15 +371,15 @@ export namespace CvetaDateScenes {
 				Text.NL();
 				Text.Add("<i>“It was, and perhaps too heavy a topic for today. Come now, are we not meant to be enjoying ourselves out here?”</i>", parse);
 				Gui.PrintDefaultOptions();
-			}, enabled : true
+			}, enabled : true,
 		});
 		options.push({ nameStr : "Yourself",
 			tooltip : "Ask the songstress what she thinks of you.",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("Cveta closes her eyes, and you note her breathing deepen, her music slowing to match. <i>“Hmm… why do you ask?”</i>", parse);
 				Text.NL();
-				if(cveta.Relation() >= 95) {
+				if (cveta.Relation() >= 95) {
 					Text.Add("<i>“Well, you are a definite source of inspiration. Perhaps not to the point where I could see myself composing bawdy ballads about your exploits in the traditional style, but enough that your presence is very much appreciated.”</i>", parse);
 					Text.NL();
 					Text.Add("Very much appreciated?", parse);
@@ -392,8 +389,7 @@ export namespace CvetaDateScenes {
 					Text.Add("Well, you’re glad to be able to help.", parse);
 					Text.NL();
 					Text.Add("<i>“As I said, it is appreciated.”</i> She looks at you thoughtfully. <i>“You know, you remind me a little of - actually, never mind. Shall we continue?”</i>", parse);
-				}
-				else if(cveta.Relation() >= 70) {
+				} else if (cveta.Relation() >= 70) {
 					Text.Add("<i>“You are rather pleasant company,”</i> Cveta replies, <i>“and are possessed of an appreciation for the finer things, which is important. Music reveals much about a person, a people, from a simple shepherd’s flute to a grand concert hall.”</i>", parse);
 					Text.NL();
 					Text.Add("And what does it tell her about you?", parse);
@@ -405,8 +401,7 @@ export namespace CvetaDateScenes {
 					Text.Add("The songstress hums a few notes, rolling her eyes good-naturedly. <i>“Maybe. Perhaps. That is within the realm of possibility.”</i>", parse);
 					Text.NL();
 					Text.Add("Oh great, now she’s being cheeky.", parse);
-				}
-				else {
+				} else {
 					Text.Add("<i>“Well, you are decent company, otherwise I would not have agreed to take off with you into the forest, would I?”</i>", parse);
 					Text.NL();
 					Text.Add("Well, that is true.", parse);
@@ -414,11 +409,11 @@ export namespace CvetaDateScenes {
 					Text.Add("<i>“There is no need to be so self-conscious, [playername]. Once you know you have reached a certain level of decorum and propriety, there is no need to constantly worry about the opinions of others towards you.”</i>", parse);
 				}
 				Gui.PrintDefaultOptions();
-			}, enabled : true
+			}, enabled : true,
 		});
 		options.push({ nameStr : "Listen",
 			tooltip : "Hold your silence and just listen to her play.",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("Not really wanting to spoil the mood by saying anything, you settle down and listen to Cveta play. The spring’s serene atmosphere is clearly having an effect on the songstress’ choice of music, the notes that rise from her fingers are slow and calm on the surface, but possessed of a deep, moving undercurrent that tugs gently at your mind, shifting it along a dark lakebed to parts unknown…", parse);
 				Text.NL();
@@ -426,9 +421,9 @@ export namespace CvetaDateScenes {
 				Text.NL();
 				Text.Add("You come to some moments later with Cveta closing the tune with a series of chords - with her music as gentle as it was, you must’ve dozed off sometime. The songstress either hasn’t noticed or doesn’t care, for she closes her music with a finishing flourish, the last notes lingering in the air before they fade into the dimly lit air.", parse);
 				Gui.PrintDefaultOptions();
-			}, enabled : true
+			}, enabled : true,
 		});
-		
+
 		Gui.Callstack.push(function() {
 			Text.NL();
 			Text.Add("<i>“I think that is enough for now, is it not? Come on, [playername]. Let us eat.”</i>", parse);
@@ -457,12 +452,12 @@ export namespace CvetaDateScenes {
 			Text.NL();
 			Text.Add("Hmm, does this give you any ideas?", parse);
 			Text.Flush();
-			
-			//[Wash][Lick][Watch]
-			var options = new Array();
+
+			// [Wash][Lick][Watch]
+			const options = new Array();
 			options.push({ nameStr : "Wash",
 				tooltip : "Get a little spring water in your cup and wash it off.",
-				func : function() {
+				func() {
 					Text.Clear();
 					Text.Add("Cveta is a little surprised when you take her hand in your own, but soon relaxes as she realizes what you’re about to do. You pour the water in your cup over the offending stain, scrubbing as best as you can; another soon follows when your attempts to remove the stain from the cloth are met with varying degrees of success.", parse);
 					Text.NL();
@@ -472,11 +467,11 @@ export namespace CvetaDateScenes {
 					Text.NL();
 					Text.Add("<i>“They are an important part of my image, thank you very much, and I am willing to give as much to sustain it. Come now, let us finish up and be off.”</i>", parse);
 					Gui.PrintDefaultOptions();
-				}, enabled : true
+				}, enabled : true,
 			});
 			options.push({ nameStr : "Lick",
 				tooltip : "Shouldn’t let good jam go to waste, it’s finger-licking good.",
-				func : function() {
+				func() {
 					Text.Clear();
 					Text.Add("Cveta looks a little surprised when you take her hand in your own, and is even more so when you give the stain a gentle lick. Even in the cloth of her gloves, the honey and jam taste pretty much as you’d expect, sweet and delicious. The songstress’ eyes widen as you engulf the entire fingertip in your mouth, suckling gently; she squirms, clearly flustered, but the resistance is no more than token.", parse);
 					Text.NL();
@@ -485,22 +480,22 @@ export namespace CvetaDateScenes {
 					Text.Add("You note that the stain should be much easier to wash out now.", parse);
 					Text.NL();
 					Text.Add("<i>“Um… yes.”</i> Slowly, Cveta upends her cup on her finger and gives it a good scrubbing; sure enough, the stain is gone.", parse);
-					
+
 					cveta.relation.IncreaseStat(100, 1);
 					Gui.PrintDefaultOptions();
-				}, enabled : true
+				}, enabled : true,
 			});
 			options.push({ nameStr : "Watch",
 				tooltip : "She can handle it by herself, she’s a capable girl.",
-				func : function() {
+				func() {
 					Text.Clear();
 					Text.Add("Grumbling to herself, Cveta pours the contents of her cup over the offending stain on her finger, then another when it refuses to wash out. You watch her with a faint smile - given her tiny frame, being sulky and angry only makes the songstress harder to take seriously.", parse);
 					Text.NL();
 					Text.Add("<i>“Well. It seems that my negligence has had some consequences,”</i> she says with a small sigh. <i>“Please, do not let my problems trouble you unduly. We are supposed to be enjoying ourselves here.”</i>", parse);
 					Gui.PrintDefaultOptions();
-				}, enabled : true
+				}, enabled : true,
 			});
-			
+
 			Gui.Callstack.push(function() {
 				Text.NL();
 				Text.Add("The rest of the meal passes quickly, helped along by the fact that there wasn’t much to begin with. Nevertheless, it should keep hunger at bay until you can get a proper meal. Cveta finishes herself, wiping her beak on a small handkerchief, then begins packing up the hamper once more.", parse);
@@ -515,19 +510,18 @@ export namespace CvetaDateScenes {
 				Text.NL();
 				Text.Add("<i>“I should be going,”</i> Cveta tells you, giving you a small curtsey before making for her tent. <i>“If you do have the time, please do stay for the evening performance. I would be thrilled to have you present.”</i>", parse);
 				Text.Flush();
-				
+
 				cveta.relation.IncreaseStat(100, 2);
 				StepToHour(18);
-				
+
 				Gui.NextPrompt();
 			});
-			
+
 			Gui.SetButtonsFromList(options, false, null);
 		});
-		
+
 		Gui.SetButtonsFromList(options, false, null);
 	}
-
 
 	/* TODO
 

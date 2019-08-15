@@ -1,122 +1,119 @@
 /*
- * 
+ *
  * Define Lucille
- * 
+ *
  */
 
-import { Entity } from '../../entity';
-import { Text } from '../../text';
-import { EncounterTable } from '../../encountertable';
-import { Gui } from '../../gui';
-import { GAME } from '../../GAME';
-import { Party } from '../../party';
-import { LucilleFlags } from './lucille-flags';
-import { BastetScenes } from './bastet';
-import { GryphonsScenes } from './gryphons';
-import { FireblossomScenes } from './fireblossom';
+import { EncounterTable } from "../../encountertable";
+import { Entity } from "../../entity";
+import { GAME } from "../../GAME";
+import { Gui } from "../../gui";
+import { Party } from "../../party";
+import { Text } from "../../text";
+import { BastetScenes } from "./bastet";
+import { FireblossomScenes } from "./fireblossom";
+import { GryphonsScenes } from "./gryphons";
+import { LucilleFlags } from "./lucille-flags";
 
 export class Lucille extends Entity {
-	constructor(storage? : any) {
+	constructor(storage?: any) {
 		super();
 
 		this.ID = "lucille";
-		
+
 		// Character stats
 		this.name = "Lucille";
-		
+
 		this.body.DefFemale();
-		
-		this.flags["buy"] = 0;
-		this.flags["Theme"] = 0; //Been to theme room. Bitmask
-		
-		if(storage) this.FromStorage(storage);
+
+		this.flags.buy = 0;
+		this.flags.Theme = 0; // Been to theme room. Bitmask
+
+		if (storage) { this.FromStorage(storage); }
 	}
 
-	ThemeroomOpen() {
-		return this.flags["buy"] >= LucilleFlags.Buy.First;
+	public ThemeroomOpen() {
+		return this.flags.buy >= LucilleFlags.Buy.First;
 	}
-	ThemeroomFirst() {
-		return this.flags["Theme"] == 0;
+	public ThemeroomFirst() {
+		return this.flags.Theme === 0;
 	}
-	
-	FromStorage(storage : any) {
+
+	public FromStorage(storage: any) {
 		this.LoadPersonalityStats(storage);
-		
+
 		// Load flags
 		this.LoadFlags(storage);
 	}
-	
-	ToStorage() {
-		let storage = {};
-		
+
+	public ToStorage() {
+		const storage = {};
+
 		this.SavePersonalityStats(storage);
-		
+
 		this.SaveFlags(storage);
-		
+
 		return storage;
 	}
-	
-	// Flags
-	
-	// Schedule TODO
-	IsAtLocation(location? : any) {
-		return true;
-	}	
-}
 
+	// Flags
+
+	// Schedule TODO
+	public IsAtLocation(location?: any) {
+		return true;
+	}
+}
 
 export namespace LucilleScenes {
 	export function Themerooms() {
-		let player = GAME().player;
-		let gryphons = GAME().gryphons;
-		let bastet = GAME().bastet;
-		let fireblossom = GAME().fireblossom;
-		let lucille = GAME().lucille;
+		const player = GAME().player;
+		const gryphons = GAME().gryphons;
+		const bastet = GAME().bastet;
+		const fireblossom = GAME().fireblossom;
+		const lucille = GAME().lucille;
 
-		let parse : any = {
+		const parse: any = {
 			playername: player.name,
-			sirmadam: player.mfFem("sir", "madam")
+			sirmadam: player.mfFem("sir", "madam"),
 		};
-		
-		let lucilleFirst = lucille.ThemeroomFirst();
-		let lucillePresent = lucilleFirst || lucille.IsAtLocation();
-		
+
+		const lucilleFirst = lucille.ThemeroomFirst();
+		const lucillePresent = lucilleFirst || lucille.IsAtLocation();
+
 		Text.Clear();
 		Text.Add("You make your way toward a billboard of sorts in the back of the main hall, where a set of garish posters proclaim the fabulous experiences one might have in the themed rooms.", parse);
-		if(lucilleFirst) {
+		if (lucilleFirst) {
 			Text.Add(" You’re still not quite certain what they actually entail - Lucille’s explanation made them sound like some form of elaborate roleplaying, and you can’t deny that you are at least a little bit intrigued.", parse);
 			Text.NL();
 			Text.Add("<i>“Ah, you have an interest in our themed rooms?”</i> You give a startled jump as you hear Lucille’s voice behind you. Absorbed in the lurid descriptions on the board, you must have missed noticing her approach.", parse);
 			Text.NL();
 			Text.Add("<i>“For a meager pouch of coins, we can make your dreams come true,”</i> the hostess purrs, sliding a hand around your waist. <i>“Now, what sort of experience would you like to have? I have heard good things about the Cat Dynasty one, perhaps that one would be good for a beginner?”</i>", parse);
-		}
-		else if(lucillePresent) {
+		} else if (lucillePresent) {
 			Text.Add(" As you ponder, Lucille slides up by your side, sensually placing a hand around your waist that sends shivers of anticipation up your spine.", parse);
 			Text.NL();
 			Text.Add("<i>“What sort of dream would you like to have this time, [playername]?”</i> Lucille murmurs at your side. <i>“Take your time deciding. Here, there are no opening or closing hours.”</i>", parse);
-		}
-		else {
+		} else {
 			Text.NL();
 			Text.Add("<i>“Anything to your liking?”</i> one of the attendants, a pretty young maid, approaches you. <i>“Take as much time as you like in making the choice, I will lead you to your dreams once you’re ready.”</i>", parse);
 		}
 		Text.NL();
 		Text.Add("Nodding, you turn to the board and survey your options.", parse);
 		Text.NL();
-		
-		//#room choice TODO
-		
+
+		// #room choice TODO
+
 		Text.Add("<i><b>The Cat Dynasty:</b> Experience life through the eyes of a young feline chosen by the fates to saddle the mantle of godhood. As the Goddess of love, Lady Bastet, how will your judgement change the lives of your adoring worshippers?</i>", parse);
 		Text.NL();
 		Text.Add("The poster shows a sultry, dark-skinned cat-morph reclining on a dias, fanned by her priestesses. Bastet seems to be a hermaphrodite with quite... impressive assets. The poster notes that each use is [coin] coins.", {coin: bastet.Cost()});
-		
+
 		Text.NL();
-		
+
 		Text.Add("<i><b>Birth of a Kingdom:</b> Travel back to the dawn of time, when the world and its people were wild and untamed. Witness the rise of a civilization as seen through the eyes of both its founders!</i>", parse);
 		Text.NL();
 		Text.Add("The poster depicts two gryphon-morphs: a muscle-bound, scarred male with a tribal, bestial air about him, and his very pregnant mate in his arms. Both are scantily clad, wearing little more than loincloths and leathers, and set against a backdrop of a lush, tropical valley. The poster notes that each use is [coin] coins.", {coin: gryphons.Cost()});
-		
+
 		Text.NL();
-		
+
 		Text.Add("<i><b>Under the Dragon’s Claw:</b> Live the life of Fireblossom, a princess brought low by her draconic conquerors. Experience the might of a dragon, first-hand!</i>", parse);
 		Text.NL();
 		Text.Add("There is a pale and incredibly beautiful young woman with long blonde hair on the poster. She’s completely nude, her naughty bits covered up by an immense serpentine tail that envelops her body possessively. The poster notes that each use is [coin] coins.", {coin: fireblossom.Cost()});
@@ -125,13 +122,13 @@ export namespace LucilleScenes {
 		Text.Add("", parse);
 		*/
 		Text.Flush();
-		
-		let selection = function(func : any) {
+
+		const selection = (func: any) => {
 			Text.Clear();
-			if(lucillePresent) {
+			if (lucillePresent) {
 				Text.Add("<i>“A wise choice,”</i> Lucille affirms, leading you toward the back. The two of you enter a narrow corridor with a long line of doors, each marked by a small symbol indicating what is inside. Some of the rooms are marked as occupied, and you hear strange noises from inside them.", parse);
 				Text.NL();
-				if(lucilleFirst) {
+				if (lucilleFirst) {
 					Text.Add("<i>“I’m not sure what sort of impression you have so far, and what your expectations going forward might be, but let me explain a bit about how the rooms work, so as to not startle you.”</i> The beauty leans against you reassuringly, her soft breasts squishing against your arm. <i>“This is not mere roleplay; what you see inside is a manifestation of a different reality, a space where you may freely explore and sate your desires.”</i>", parse);
 					Text.NL();
 					Text.Add("Is it some form of magic?", parse);
@@ -141,103 +138,101 @@ export namespace LucilleScenes {
 					Text.Add("Noting your lingering uncertainty, the madame gently caresses your cheek. <i>“Worry not. It might be frightening at first, but there are so many possibilities to explore, so much to see and do. I’ve heard it to be healthy to play out your fantasies in a safe space such as this, and see the world through a different lense. My explanation can’t give it justice though, you must experience it yourself. Will you take this leap of faith?”</i>", parse);
 					Text.NL();
 					Text.Add("Well, that is what you came here for, after all. It seems silly to turn back now. You nod, gaining an approving smile from Lucille that makes your heart skip a bit. <i>“Then enter, [playername].”</i> She steps aside, urging you inside the room. <i>“I assure you, it will be worth the price.”</i> You have the strange feeling that she’s not talking about money when she says the word price...", parse);
-				}
-				else {
+				} else {
 					Text.Add("<i>“This is it,”</i> the hostess stops in front of one of the doors, unlocking it. ", parse);
-					let scenes = new EncounterTable();
-					scenes.AddEnc(function() {
+					const scenes = new EncounterTable();
+					scenes.AddEnc(() => {
 						Text.Add("<i>“Sometime, you must tell me of your experiences,”</i> Lucille eyes you suggestively. <i>“Perhaps in my room, over a bottle of wine.”</i>", parse);
-					}, 1.0, function() { return true; });
-					scenes.AddEnc(function() {
+					}, 1.0, () => true);
+					scenes.AddEnc(() => {
 						Text.Add("<i>“Have a pleasant time, [playername].”</i> She smiles, batting her thick eyelashes at you. <i>“This particular room has seen a lot of use lately - it seems to be really popular.”</i>", parse);
-					}, 1.0, function() { return true; });
-					scenes.AddEnc(function() {
+					}, 1.0, () => true);
+					scenes.AddEnc(() => {
 						Text.Add("<i>“Remember, your choices inside does affect your unique experience. Feel free to explore any desires or urges that you usually would not.”</i>", parse);
-					}, 1.0, function() { return true; });
-					scenes.AddEnc(function() {
+					}, 1.0, () => true);
+					scenes.AddEnc(() => {
 						Text.Add("<i>“Ah… it seems that someone is eager to get started,”</i> Lucille smiles warmly, brushing her hand lightly over your taut clothing and tracing the outline of your [cocks]. <i>“I do so hope that the experience is up to your expectations… if not, perhaps you can come by my chambers afterward?”</i>", {cocks: player.MultiCockDesc()});
 						player.AddLustFraction(1);
-					}, 1.0, function() { return player.FirstCock(); });
+					}, 1.0, () => player.FirstCock());
 					scenes.Get();
 					Text.NL();
 					Text.Add("With that, she steps aside, allowing you to enter the room.", parse);
 				}
-			}
-			else {
+			} else {
 				Text.Add("<i>“As you wish,”</i> the attendant nods, leading you into the back. She unlocks one of the many doors, gesturing for you to step inside. <i>“I hope you have a pleasant time, [sirmadam].”</i>", parse);
 			}
 			Text.Flush();
-			
+
 			Gui.NextPrompt(func);
 		};
-		
-		let options = new Array();
+
+		const options = new Array();
 		options.push({ nameStr : "Cat Dynasty",
 			tooltip : "Choose the Cat Dynasty and enter the role of Bastet, the hermaphrodite feline Goddess.",
-			func : function() {
+			func() {
 				selection(BastetScenes.IntroEntryPoint);
-			}, enabled : true
+			}, enabled : true,
 		});
 		options.push({ nameStr : "Gryphons",
 			tooltip : "Choose Birth of a Kingdom and step back to the beginning of time, seeing history through the eyes of two gryphon-morphs.",
-			func : function() {
+			func() {
 				selection(GryphonsScenes.IntroEntryPoint);
-			}, enabled : true
+			}, enabled : true,
 		});
 		options.push({ nameStr : "Fireblossom",
 			tooltip : "Choose Under the Dragon’s Claw, and embody Fireblossom, the princess turned slave.",
-			func : function() {
+			func() {
 				selection(FireblossomScenes.IntroEntryPoint);
-			}, enabled : true
+			}, enabled : true,
 		});
 		/* TODO */
-		Gui.SetButtonsFromList(options, true, function() {
+		Gui.SetButtonsFromList(options, true, () => {
 			Text.Clear();
-			if(lucillePresent) {
+			if (lucillePresent) {
 				Text.Add("<i>“It can be so hard to decide sometimes, can’t it?”</i> Lucille murmurs sympathetically at your side. <i>“Why don’t you mingle for a bit, chat with some of the staff before you’re ready to make your choice?”</i>", parse);
 				Text.NL();
 				Text.Add("You disentangle yourself from the dark beauty, throwing one last glance at the enticing posters.", parse);
-			}
-			else
+			} else {
 				Text.Add("<i>“Please come back when you’ve made your decision.”</i> The attendant gives you a courtesy, leaving you to your thoughts.", parse);
+			}
 			Text.Flush();
-			
+
 			Gui.NextPrompt();
 		});
 	}
 
-	export function WhoreAftermath(name : string, cost : number) {
-		let player = GAME().player;
-		let party : Party = GAME().party;
-		let lucille = GAME().lucille;
+	export function WhoreAftermath(name: string, cost: number) {
+		const player = GAME().player;
+		const party: Party = GAME().party;
+		const lucille = GAME().lucille;
 
 		cost = cost || 0;
-		
-		let parse : any = {
-			name       : name,
+
+		const parse: any = {
+			name,
 			playername : player.name,
-			skinDesc   : function() { return player.SkinDesc(); },
-			coin       : Text.NumToText(cost)
+			skinDesc() { return player.SkinDesc(); },
+			coin       : Text.NumToText(cost),
 		};
-		
-		let payFunc = function() {
+
+		const payFunc = () => {
 			Text.Add("You reach for your coin purse and count how many coins you owe her.", parse);
 			Text.NL();
 			Text.Add("<i>“Pleasure doing business with you, [playername].”</i> Lucille accepts the money and somehow vanishes it in her bodice. <i>“I will look forward to your continued patronage.”</i>", parse);
 			Text.Flush();
-			
+
 			party.coin -= cost;
-			
+
 			Gui.NextPrompt();
-		}
-		
+		};
+
 		Text.Clear();
 		Text.Add("You make your way back into the main chamber of the brothel, where you are met up with madame Lucille.", parse);
-		if(lucille.flags["buy"] == LucilleFlags.Buy.No) {
+		if (lucille.flags.buy === LucilleFlags.Buy.No) {
 			Text.NL();
 			Text.Add("<i>“Did you have an enjoyable time, [playername]?”</i> the sultry raven-haired beauty asks you. <i>“You seem more relaxed than back when you came in here… did [name] help you relieve some stress?”</i>", parse);
 			Text.NL();
-			parse["c"] = party.coin < cost ? "; too late, you notice it’s too light to cover the expenses" : "";
+			parse.c = party.coin < cost ? "; too late, you notice it’s too light to cover the expenses" : "";
 			Text.Add("Realizing what she’s after, you stretch for your coin-purse[c]. Tittering, Lucille shakes her head.", parse);
 			Text.NL();
 			Text.Add("<i>“Here at the Shadow Lady, we value returning customers, so we take good care of our clientele. First time is on the house.”</i> She leans closer, whispering. <i>“Besides, I think [name] would be crushed if you didn’t come back for another visit.”</i>", parse);
@@ -254,21 +249,20 @@ export namespace LucilleScenes {
 			Text.Flush();
 
 			player.AddLustFraction(0.5);
-			
-			lucille.flags["buy"] = LucilleFlags.Buy.First;
-			
+
+			lucille.flags.buy = LucilleFlags.Buy.First;
+
 			Gui.NextPrompt();
-		}
-		else if(lucille.flags["buy"] == LucilleFlags.Buy.First) {
-			if(party.coin >= cost) {
+		} else if (lucille.flags.buy === LucilleFlags.Buy.First) {
+			if (party.coin >= cost) {
 				Text.NL();
 				payFunc();
-			}
-			else {
-				if(name)
+			} else {
+				if (name) {
 					Text.Add("She greets you and makes some small talk, asking for bedside gossip. You reach down into your pouch to retrieve the coin to pay for your time with [name]… only to realize that you’re short.", parse);
-				else
+				} else {
 					Text.Add("<i>“Was the experience satisfactory?”</i> Lucille asks, that mysterious smile playing on her lips. Still a bit shaken by whatever magic that powers the themed rooms, you merely nod. You reach down into your pouch to retrieve the coin for payment, only to realize that you’re short.", parse);
+				}
 				Text.NL();
 				Text.Add("<i>“Worry yourself not, [playername],”</i> Lucille waves away your concerns, though her sly grin in no way eases your mind. <i>“We all make the accidental slip once in a while… but do not make this a recurring occasion.”</i> She makes a sweeping gesture to her establishment, drawing your attention to the many whores working under her, to her impressive clientele.", parse);
 				Text.NL();
@@ -294,43 +288,43 @@ export namespace LucilleScenes {
 				Text.NL();
 				Text.Add("You’re troubled as she sways away, not sure what to make of this strange ‘offer’ of hers.", parse);
 				Text.Flush();
-				
-				lucille.flags["buy"] = LucilleFlags.Buy.Deal;
-				
+
+				lucille.flags.buy = LucilleFlags.Buy.Deal;
+
 				Gui.NextPrompt();
 			}
-		}
-		else {
+		} else {
 			Text.NL();
-			if(name)
+			if (name) {
 				Text.Add("<i>“I trust that [name] was to your liking?”</i> she smiles knowingly, winking.", parse);
-			else
+			} else {
 				Text.Add("<i>“I trust that the experience was to your liking?”</i> she smiles, winking. <i>“Be aware that the dream might cling for a while, but I assure you that the procedure is completely safe. You may return as many times as you wish.”</i>", parse);
+			}
 			Text.Flush();
-			
-			//[Pay][Shark]
-			let options = new Array();
+
+			// [Pay][Shark]
+			const options = new Array();
 			options.push({ nameStr : "Pay",
-				func : function() {
+				func() {
 					Text.Clear();
 					payFunc();
 				}, enabled : party.coin >= cost,
-				tooltip : Text.Parse("Pay the [coin] you owe her.", parse)
+				tooltip : Text.Parse("Pay the [coin] you owe her.", parse),
 			});
 			options.push({ nameStr : "Shark",
-				func : function() {
+				func() {
 					Text.Clear();
 					Text.Add("<i>“I’m sure you remember our deal,”</i> Lucille slowly replies at your refusal, licking her lips in anticipation. Before you can even react, you find yourself paralyzed, unable to lift even a finger as you’re lost in the hypnotic depths of Lucille’s eyes. The madame slowly sways past you, heading toward Chester by the entrance. <i>“I’ll enjoy watching this,”</i> she whispers as she passes by you, <i>“as I’m sure the other customers will as well.”</i>", parse);
 					Text.NL();
 					Text.Add("This isn’t mere allure; there’s something otherworldly behind your invisible bonds, and you find yourself completely powerless as you watch the shark-morph descends on you. Chester effortlessly lifts you off the ground, throwing you over his muscular shoulder as he takes you backstage.", parse);
 					Text.NL();
-					//TODO #Goto Shark Punishment
+					// TODO #Goto Shark Punishment
 					Text.Add("PLACEHOLDER", parse);
 					Text.Flush();
-					
+
 					Gui.NextPrompt();
 				}, enabled : true,
-				tooltip : "Refuse to pay and face the sharks instead."
+				tooltip : "Refuse to pay and face the sharks instead.",
 			});
 			Gui.SetButtonsFromList(options, false, null);
 		}

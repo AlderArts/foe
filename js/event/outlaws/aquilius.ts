@@ -1,149 +1,150 @@
 /*
  * Aquilius, Outlaw Avian healer
  */
-import * as _ from 'lodash';
+import * as _ from "lodash";
 
-import { Entity } from '../../entity';
-import { Time } from '../../time';
-import { IngredientItems } from '../../items/ingredients';
-import { WorldTime, GAME, TimeStep, WORLD, StepToHour } from '../../GAME';
-import { Gui } from '../../gui';
-import { Text } from '../../text';
-import { AquiliusFlags } from './aquilius-flags';
-import { EncounterTable } from '../../encountertable';
-import { Party } from '../../party';
-import { Jobs } from '../../job';
-import { GlobalScenes } from '../global';
-import { ItemIds, Item } from '../../item';
-import { AscheTasksScenes } from '../asche-tasks';
+import { EncounterTable } from "../../encountertable";
+import { Entity } from "../../entity";
+import { GAME, StepToHour, TimeStep, WORLD, WorldTime } from "../../GAME";
+import { Gui } from "../../gui";
+import { Item, ItemIds } from "../../item";
+import { IngredientItems } from "../../items/ingredients";
+import { Jobs } from "../../job";
+import { Party } from "../../party";
+import { Text } from "../../text";
+import { Time } from "../../time";
+import { AscheTasksScenes } from "../asche-tasks";
+import { GlobalScenes } from "../global";
+import { AquiliusFlags } from "./aquilius-flags";
 
 export class Aquilius extends Entity {
-	helpTimer : Time;
-	herbIngredient : Item;
 
-	constructor(storage? : any) {
+	public static ExtraHerbs(): Item[] {
+		return [
+			IngredientItems.Lettuce,
+			IngredientItems.SnakeOil,
+			IngredientItems.FreshGrass,
+			IngredientItems.Foxglove,
+			IngredientItems.FruitSeed,
+		];
+	}
+	public helpTimer: Time;
+	public herbIngredient: Item;
+
+	constructor(storage?: any) {
 		super();
 
 		this.ID = "aquilius";
 
 		// Character stats
 		this.name = "Aquilius";
-			
+
 		this.body.DefMale();
-		
+
 		this.SetLevelBonus();
 		this.RestFull();
-		
-		this.flags["Met"]   = AquiliusFlags.Met.NotMet;
-		this.flags["Herbs"] = AquiliusFlags.Herbs.No;
-		this.flags["Talk"]  = 0; //Bitmask
+
+		this.flags.Met   = AquiliusFlags.Met.NotMet;
+		this.flags.Herbs = AquiliusFlags.Herbs.No;
+		this.flags.Talk  = 0; // Bitmask
 		this.herbIngredient = null;
-		
+
 		this.helpTimer  = new Time();
 
-		if(storage) this.FromStorage(storage);
-	}
-	
-	static ExtraHerbs() : Item[] {
-		return [
-			IngredientItems.Lettuce,
-			IngredientItems.SnakeOil,
-			IngredientItems.FreshGrass,
-			IngredientItems.Foxglove,
-			IngredientItems.FruitSeed
-		];
+		if (storage) { this.FromStorage(storage); }
 	}
 
-	FromStorage(storage : any) {
-		if(storage.herb)
+	public FromStorage(storage: any) {
+		if (storage.herb) {
 			this.herbIngredient = ItemIds[storage.herb];
+		}
 		this.helpTimer.FromStorage(storage.Htime);
-		
+
 		this.LoadPersonalityStats(storage);
-		
+
 		// Load flags
 		this.LoadFlags(storage);
 	}
-	
-	ToStorage() {
-		var storage : any = {
-			
+
+	public ToStorage() {
+		const storage: any = {
+
 		};
-		
-		if(this.herbIngredient)
+
+		if (this.herbIngredient) {
 			storage.herb = this.herbIngredient.id;
+		}
 		storage.Htime = this.helpTimer.ToStorage();
-		
+
 		this.SavePersonalityStats(storage);
 		this.SaveFlags(storage);
-		
+
 		return storage;
 	}
-	
-	Update(step : number) {
-		super.Update(step);		
+
+	public Update(step: number) {
+		super.Update(step);
 		this.helpTimer.Dec(step);
 	}
-	
+
 	// Schedule TODO
-	IsAtLocation(location? : any) {
+	public IsAtLocation(location?: any) {
 		location = location || GAME().party.location;
-		if(location == WORLD().loc.Outlaws.Infirmary)
+		if (location == WORLD().loc.Outlaws.Infirmary) {
 			return (WorldTime().hour >= 7 && WorldTime().hour < 22);
+		}
 		return false;
 	}
-	
-	OnHerbsQuest() {
-		return this.flags["Herbs"] >= AquiliusFlags.Herbs.OnQuest;
+
+	public OnHerbsQuest() {
+		return this.flags.Herbs >= AquiliusFlags.Herbs.OnQuest;
 	}
-	OnHerbsQuestFinished() {
-		return this.flags["Herbs"] >= AquiliusFlags.Herbs.Finished;
+	public OnHerbsQuestFinished() {
+		return this.flags.Herbs >= AquiliusFlags.Herbs.Finished;
 	}
-	HelpCooldown() {
-		return new Time(0,0,0,12,0);
+	public HelpCooldown() {
+		return new Time(0, 0, 0, 12, 0);
 	}
-	QualifiesForAnyJob(entity : Entity) {
+	public QualifiesForAnyJob(entity: Entity) {
 		return this.QualifiesForHerbs(entity) ||
 			this.QualifiesForHealing(entity) ||
-			this.QualifiesForAlchemy(entity); //TODO
+			this.QualifiesForAlchemy(entity); // TODO
 	}
-	QualifiesForHealing(entity : Entity) {
+	public QualifiesForHealing(entity: Entity) {
 		return Jobs.Healer.Unlocked(entity);
 	}
-	QualifiesForAlchemy(entity : Entity) {
+	public QualifiesForAlchemy(entity: Entity) {
 		return entity.alchemyLevel >= 1;
 	}
-	QualifiesForHerbs(entity : Entity) {
+	public QualifiesForHerbs(entity: Entity) {
 		return Jobs.Ranger.Unlocked(entity);
 	}
-	SetHerb(override? : Item) {
-		var item = override || _.sample(Aquilius.ExtraHerbs());
+	public SetHerb(override?: Item) {
+		const item = override || _.sample(Aquilius.ExtraHerbs());
 		this.herbIngredient = item;
 		return item;
-	}	
+	}
 }
-
-
 
 export namespace AquiliusScenes {
 	export function FirstMeeting() {
-		let player = GAME().player;
-		let party : Party = GAME().party;
-		let aquilius = GAME().aquilius;
-		let kiakai = GAME().kiakai;
+		const player = GAME().player;
+		const party: Party = GAME().party;
+		const aquilius = GAME().aquilius;
+		const kiakai = GAME().kiakai;
 
-		var parse : any = {
-			playername : player.name
+		const parse: any = {
+			playername : player.name,
 		};
-		
-		aquilius.flags["Met"] = 1;
-		
+
+		aquilius.flags.Met = 1;
+
 		Text.Clear();
 		Text.Add("The moment you push apart the tent flaps and step into the tent’s expansive confines, it becomes readily apparent what the place is: an infirmary. Several bandaged morphs lie on the cots laid out before you, while a couple more mill amongst them, the latter making sure the former are comfortable.", parse);
 		Text.NL();
-		if(party.InParty(kiakai)) {
-			parse["name"] = kiakai.name;
-			parse["hisher"] = kiakai.hisher();
+		if (party.InParty(kiakai)) {
+			parse.name = kiakai.name;
+			parse.hisher = kiakai.hisher();
 			Text.Add("<i>“A place of healing and recovery,”</i> [name] breathes, [hisher] voice almost reverent. <i>“It is good that even in this place, there is-”</i>", parse);
 			Text.NL();
 		}
@@ -179,107 +180,106 @@ export namespace AquiliusScenes {
 		Text.NL();
 		Text.Add("With that, he walks away, leaving you to fume.", parse);
 		Text.Flush();
-		
+
 		TimeStep({minute: 30});
-		
+
 		Gui.NextPrompt();
 	}
 
 	export function Approach() {
-		let player = GAME().player;
-		let party : Party = GAME().party;
-		let aquilius = GAME().aquilius;
-		let outlaws = GAME().outlaws;
+		const player = GAME().player;
+		const party: Party = GAME().party;
+		const aquilius = GAME().aquilius;
+		const outlaws = GAME().outlaws;
 
-		var parse : any = {
-			playername : player.name
+		const parse: any = {
+			playername : player.name,
 		};
-		
+
 		Text.Clear();
-		//#If the player is on herbs quest, returns with herbs
-		if(aquilius.OnHerbsQuestFinished()) {
+		// #If the player is on herbs quest, returns with herbs
+		if (aquilius.OnHerbsQuestFinished()) {
 			Text.Add("<i>“Ah, you’re back,”</i> Aquilius says, looking up from his work as you approach. <i>“Did you have a productive outing?”</i>", parse);
 			Text.NL();
 			Text.Add("That’s a way to phrase it. You present him with the armful of flowers, roots, leaves and other assorted plant bits that constitute the results of today’s work, and he begins to sift through them like a chicken scratching at dirt, occasionally discarding a specimen that he doesn’t feel is up to par. Nevertheless, most of what you picked is good enough to satisfy the surgeon, and he gives you a nod as one of his assistants hurries over to pack the lot away.", parse);
 			Text.NL();
 			Text.Add("<i>“Plenty of sunny days of late,”</i> Aquilius remarks. <i>“We’ll spread them out to dry, they keep pretty well that way. Well, [playername], your help is very much appreciated. Keep it up, and I’m sure everyone around camp will hear of how helpful you’re being.</i>", parse);
 			Text.Flush();
-			
+
 			outlaws.relation.IncreaseStat(30, 1);
 			aquilius.relation.IncreaseStat(100, 2);
-			
-			aquilius.flags["Herbs"] = AquiliusFlags.Herbs.Known;
-			
-			//#Set timer on helping out at infirmary for the rest of the day.
+
+			aquilius.flags.Herbs = AquiliusFlags.Herbs.Known;
+
+			// #Set timer on helping out at infirmary for the rest of the day.
 			aquilius.helpTimer = aquilius.HelpCooldown();
-			
-			if(aquilius.flags["Met"] < AquiliusFlags.Met.Helped)
-				aquilius.flags["Met"] = AquiliusFlags.Met.Helped;
-			
-			var item = aquilius.herbIngredient;
+
+			if (aquilius.flags.Met < AquiliusFlags.Met.Helped) {
+				aquilius.flags.Met = AquiliusFlags.Met.Helped;
+			}
+
+			const item = aquilius.herbIngredient;
 			aquilius.herbIngredient = null;
-			
-			if(item && party.Inv().QueryNum(item)) {
+
+			if (item && party.Inv().QueryNum(item)) {
 				Text.NL();
-				parse["ingredient"] = item.sDesc();
+				parse.ingredient = item.sDesc();
 				Text.Add("You note that you have some [ingredient] with you, and remember that Aquilius was on the particular lookout for it. Would you like to give a measure of it to him?", parse);
 				Text.Flush();
-				
-				//[Yes][No]
-				var options = new Array();
+
+				// [Yes][No]
+				const options = new Array();
 				options.push({ nameStr : "Yes",
 					tooltip : Text.Parse("Yes, hand over a measure of [ingredient].", parse),
-					func : function() {
+					func() {
 						Text.Clear();
 						Text.Add("Digging about in your possessions, your hands close about a measure of [ingredient] and you hand it over to Aquilius without further ado. The surgeon looks slightly surprised at first, then quickly moves to produce a small square of waxed paper to wrap it up in.", parse);
 						Text.NL();
-						if(aquilius.Relation() >= 50)
+						if (aquilius.Relation() >= 50) {
 							Text.Add("<i>“Excellent work as always, [playername]. I knew I could count on you to go above and beyond the call of duty.”</i>", parse);
-						else
+						} else {
 							Text.Add("<i>“Oh. You actually managed to find some. I was worried that - never mind. The extra effort’s very much appreciated.”</i>", parse);
+						}
 						Text.NL();
 						Text.Add("Aquilius clicks his beak, finishes wrapping up your gift, then stows it away out of sight. <i>“Well, I promised you a little something, and it’d be remiss for me to go back on my word. Here, have this.”</i> He pushes a small portion of fragrant dried leaves and grasses into your hands, wrapped in that same waxed paper. <i>“My very own blend; you won’t find a more relaxing smoke on the face of Eden. I’m sure you’ll enjoy.”</i>", parse);
 						Text.Flush();
-						
+
 						party.Inv().RemoveItem(item);
 						party.Inv().AddItem(IngredientItems.PipeLeaf);
-						
+
 						outlaws.relation.IncreaseStat(30, 1);
 						aquilius.relation.IncreaseStat(100, 1);
-						
+
 						AquiliusScenes.Prompt();
-					}, enabled : true
+					}, enabled : true,
 				});
 				options.push({ nameStr : "No",
 					tooltip : "You have better uses for it.",
-					func : function() {
+					func() {
 						Text.Clear();
 						Text.Add("While Aquilius may be in need of it, you decide that you’d rather save the ingredient for your own ends.", parse);
 						Text.Flush();
-						
+
 						AquiliusScenes.Prompt();
-					}, enabled : true
+					}, enabled : true,
 				});
 				Gui.SetButtonsFromList(options, false, null);
-			}
-			else
+			} else {
 				AquiliusScenes.Prompt();
-		}
-		//#Else If the player is on herbs quest, returns unfinished
-		else if(aquilius.OnHerbsQuest()) {
+			}
+		} else if (aquilius.OnHerbsQuest()) {
 			Text.Add("Aquilius looks up at you, notes your empty hands, then shrugs. <i>“Still here, [playername]? I wouldn’t wait too long to head out into the woods - they can get quite dangerous at night. Best you do all the flower picking while it’s light out.”</i>", parse);
 			Text.NL();
 			Text.Add("You assure him that you’ll get him his herbs soon enough.", parse);
 			Text.Flush();
 			AquiliusScenes.Prompt();
-		}
-		else {
+		} else {
 			Text.Add("Pushing your way through the rows of cots and their occupants, you approach the surgeon. ", parse);
-			var scenes = new EncounterTable();
-			
-			var day = WorldTime().hour < 17;
-			
-			if(day) {
+			const scenes = new EncounterTable();
+
+			const day = WorldTime().hour < 17;
+
+			if (day) {
 				scenes.AddEnc(function() {
 					Text.Add("He’s currently busy with mortar and pestle, pounding away at a mixture of various grasses. As you watch, he mixes the lot with a cupful of warm water, then strains the lot with a fine cloth; the resultant foul-smelling mixture is then poured into a basin of water in which several bandages have been left to soak. Done with this task, he finally turns and pays attention to you.", parse);
 				});
@@ -292,8 +292,7 @@ export namespace AquiliusScenes {
 				scenes.AddEnc(function() {
 					Text.Add("He’s currently swabbing the operating table with a harsh-smelling mixture, based in alcohol if your nose isn’t wrong. Eyes furrowed and face grim, he doesn’t notice your approach at all, not until the last square inch has been scrubbed to satisfaction. It’s a good fifteen minutes before he’s done, but when he is, he lets out a slow sigh and turns to you.", parse);
 				});
-			}
-			else {
+			} else {
 				scenes.AddEnc(function() {
 					Text.Add("He’s currently cloistered himself in the back of the tent, leaning back in a chair with his eyes closed and wings folded as he draws deeply from a large, ornate pipe carved from hardwood. Even at this distance, you can smell the psychedelic smoke rising from it - whatever’s in there, it certainly isn’t tobacco. As you approach, though, he opens an eye to regard you, although his gaze is clearly more than a little glazed.", parse);
 				});
@@ -307,75 +306,74 @@ export namespace AquiliusScenes {
 				});
 			}
 			scenes.Get();
-			
+
 			Text.NL();
-			
-			if(day) {
-				if(aquilius.Relation() >= 75)
+
+			if (day) {
+				if (aquilius.Relation() >= 75) {
 					Text.Add("<i>“Oh, it’s you, [playername]. You may linger and watch, so long as you don’t get in anyone’s way.”</i>", parse);
-				else if(aquilius.Relation() >= 50)
+				} else if (aquilius.Relation() >= 50) {
 					Text.Add("<i>“[playername]. I trust you are healthy today? Have you come to help out?”</i>", parse);
-				else
+ } else {
 					Text.Add("<i>“[playername]. What brings you here today?”</i>", parse);
-			}
-			else {
-				if(aquilius.Relation() >= 75)
+ }
+			} else {
+				if (aquilius.Relation() >= 75) {
 					Text.Add("<i>“Welcome, [playername],”</i> Aquilius says with a cordial nod of his head. <i>“I trust that you’ve had a very safe and fruitful day? Not that I have much in the way of entertaining others, but it’s nice to have a pleasant soul to talk to.”</i>", parse);
-				else if(aquilius.Relation() >= 50)
+				} else if (aquilius.Relation() >= 50) {
 					Text.Add("<i>“It’s you, [playername]. What brings you to me at this late hour? I hope you haven’t suffered any hurts.”</i>", parse);
-				else
+ } else {
 					Text.Add("<i>“Oh. [playername]. For a moment I thought it was…”</i> Aquilius is clearly suppressing a tic in his face. <i>“No, never mind. I don’t usually get visitors at this hour. Is there something you need?”</i>", parse);
+ }
 			}
 			Text.Flush();
 			AquiliusScenes.Prompt();
 		}
 	}
 
-	//TODO
+	// TODO
 	export function Prompt() {
-		let aquilius = GAME().aquilius;
+		const aquilius = GAME().aquilius;
 
-		var parse : any = {
-			
+		const parse: any = {
+
 		};
-		
-		//[name]
-		var options = new Array();
+
+		// [name]
+		const options = new Array();
 		options.push({ nameStr : "Appearance",
 			tooltip : "Give the good surgeon a look-over.",
-			func : AquiliusScenes.Appearance, enabled : true
+			func : AquiliusScenes.Appearance, enabled : true,
 		});
-		if(AscheTasksScenes.Nightshade.IsOn() &&
+		if (AscheTasksScenes.Nightshade.IsOn() &&
 		!AscheTasksScenes.Nightshade.IsSuccess() &&
 		!AscheTasksScenes.Nightshade.HasHelpFromAquilius()) {
 			options.push({ nameStr : "Nightshade",
 				tooltip : "Ask Aquilius about the herb that Asche sent you to look for.",
-				func : AscheTasksScenes.Nightshade.AskAquiliusForHelp, enabled : true
+				func : AscheTasksScenes.Nightshade.AskAquiliusForHelp, enabled : true,
 			});
 		}
 		// DAYTIME
-		if(WorldTime().hour < 17) {
-			//Player may only help out once a day. Ish.
+		if (WorldTime().hour < 17) {
+			// Player may only help out once a day. Ish.
 			options.push({ nameStr : "Help out",
 				tooltip : "Help out at the infirmary.",
-				func : AquiliusScenes.HelpOut, enabled : !aquilius.OnHerbsQuest()
+				func : AquiliusScenes.HelpOut, enabled : !aquilius.OnHerbsQuest(),
 			});
-		}
-		// NIGHTTIME
-		else {
+		} else {
 			options.push({ nameStr : "Talk",
 				tooltip : "How about a fireside chat with the good surgeon?",
-				func : function() {
+				func() {
 					Text.Clear();
 					Text.Add("<i>“Sure, I wouldn’t mind a little company. You want to open, or let me do it?”</i>", parse);
 					Text.Flush();
-					
+
 					AquiliusScenes.TalkPrompt();
-				}, enabled : true
+				}, enabled : true,
 			});
 			options.push({ nameStr : "Smoke",
 				tooltip : "Light up with Aquilius and relax a bit.",
-				func : AquiliusScenes.Smoke, enabled : true
+				func : AquiliusScenes.Smoke, enabled : true,
 			});
 			/* TODO
 			options.push({ nameStr : "Talk",
@@ -391,58 +389,57 @@ export namespace AquiliusScenes {
 			*/
 		}
 		Gui.SetButtonsFromList(options, true, function() {
-			if(WorldTime().hour < 17) {
+			if (WorldTime().hour < 17) {
 				Gui.PrintDefaultOptions();
 				return;
 			}
-			
+
 			Text.Clear();
 			Text.Add("<i>“Farewell, now,”</i> Aquilius tells you as you get up to leave. <i>“It has gotten quite late, so be careful, wherever you may be going. In fact, I would suggest that you sleep in camp and wait for first light before leaving.”</i>", parse);
 			Text.NL();
 			Text.Add("With that, he sinks back into his chair and closes his eyes contentedly.", parse);
 			Text.Flush();
-			
+
 			Gui.NextPrompt();
 		});
 	}
 
 	export function TalkPrompt() {
-		let aquilius = GAME().aquilius;
-		
-		var parse : any = {
-			
+		const aquilius = GAME().aquilius;
+
+		const parse: any = {
+
 		};
-		
-		//[Self][Grind][War][Back]
-		var options = new Array();
+
+		// [Self][Grind][War][Back]
+		const options = new Array();
 		options.push({ nameStr : "Self",
 			tooltip : "Ask Aquilius about himself.",
-			func : AquiliusScenes.TalkSelfPrompt, enabled : true
+			func : AquiliusScenes.TalkSelfPrompt, enabled : true,
 		});
 		options.push({ nameStr : "Grind",
 			tooltip : "Make small talk about the daily grind.",
-			func : AquiliusScenes.TalkGrind, enabled : true
+			func : AquiliusScenes.TalkGrind, enabled : true,
 		});
 		options.push({ nameStr : "War",
 			tooltip : "Ask Aquilius about the war between the Crown and the guilds.",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("Aquilius doesn’t reply at first, instead staring intently into the distance just past your shoulder, as if he’s seen a ghost. Maybe he has. It’s a good half-minute before he finally moves again, taking his pipe out of his beak and blowing a slow, long stream of smoke through his nostrils.", parse);
 				Text.NL();
-				if(aquilius.flags["Talk"] & AquiliusFlags.Talk.War) {
+				if (aquilius.flags.Talk & AquiliusFlags.Talk.War) {
 					Text.Add("<i>“You want to hear about it again? Well, it’s important that kids these days learn history, else we’re doomed to repeat it. Come to think of it, learning history doesn’t necessarily mean you aren’t going to repeat it anyway. Bah, what do you want me to tell you about?”</i>", parse);
-				}
-				else {
-					aquilius.flags["Talk"] |= AquiliusFlags.Talk.War;
+				} else {
+					aquilius.flags.Talk |= AquiliusFlags.Talk.War;
 					Text.Add("<i>“Yes, I can tell you about the war,”</i> he says. <i>“Brother against brother, parent against child, king against his own. I may be not quite as young as I was then, but I still remember every single moment of it. What would you like to know?”</i>", parse);
 				}
 				Text.Flush();
-				
+
 				AquiliusScenes.TalkWarPrompt();
-			}, enabled : true
+			}, enabled : true,
 		});
 		/* TODO
-		*  
+		*
 		options.push({ nameStr : "name",
 			tooltip : "",
 			func : function() {
@@ -463,23 +460,23 @@ export namespace AquiliusScenes {
 	}
 
 	export function TalkSelfPrompt() {
-		let player = GAME().player;
-		let party : Party = GAME().party;
-		let kiakai = GAME().kiakai;
-		
-		var parse : any = {
+		const player = GAME().player;
+		const party: Party = GAME().party;
+		const kiakai = GAME().kiakai;
+
+		let parse: any = {
 			playername : player.name,
 			boygirl : kiakai.mfTrue("boy", "girl"),
 			manwoman : player.mfTrue("man", "woman"),
-			name : kiakai.name
+			name : kiakai.name,
 		};
 		parse = kiakai.ParserPronouns(parse);
-		
-		//[Past][Surgery][Outlaws][[Kiai]]
-		var options = new Array();
+
+		// [Past][Surgery][Outlaws][[Kiai]]
+		const options = new Array();
 		options.push({ nameStr : "Past",
 			tooltip : "So, where did he come from, who is he, and where is he going?",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("<i>“My boyhood?”</i> Aquilius leans forward, chin in hand, and draws on his pipe as he thinks. <i>“Can’t say it was too special. Lived in Rigard, second of four brats, always hungry, always emptying the larder and then looking for more to eat. Didn’t starve or anything, but that’s just the way kids are. You leave them alone for a moment and they turn up wanting food; I was no exception.</i>", parse);
 				Text.NL();
@@ -495,13 +492,13 @@ export namespace AquiliusScenes {
 				Text.NL();
 				Text.Add("<i>“That’s another story,”</i> Aquilius replies. <i>“If you’re really that interested, I’ll tell you. Anything else, though?”</i>", parse);
 				Text.Flush();
-				
+
 				TimeStep({minute: 30});
-			}, enabled : true
+			}, enabled : true,
 		});
 		options.push({ nameStr : "Surgery",
 			tooltip : "What does he think of his job?",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("<i>“It’s a living.”</i>", parse);
 				Text.NL();
@@ -515,7 +512,7 @@ export namespace AquiliusScenes {
 				Text.NL();
 				Text.Add("<i>“Why does anyone choose their particular profession? Most don’t even get the chance to walk away from their parents’ footsteps; if I hadn’t been drafted, I might very well have remained as a cobbler’s apprentice for the rest of my life. I do it because it’s what I’m good at, what I’ve been trained to, and what I know. That’s more than enough reason.”</i>", parse);
 				Text.NL();
-				if(party.InParty(kiakai)) {
+				if (party.InParty(kiakai)) {
 					Text.Add("<i>“But surely - surely there must be some satisfaction that you can take away from seeing the ill made whole again,”</i> [name] interjects. <i>“That the task of healing should bring both parties joy.”</i>", parse);
 					Text.NL();
 					Text.Add("<i>“Oh sure, [boygirl]. I’m not denying that there’s a sense of satisfaction there. But how’s it supposed to be any different from a cobbler taking pride in a pair of boots he or she mended, or a cook in a meal well done?”</i>", parse);
@@ -533,13 +530,13 @@ export namespace AquiliusScenes {
 				Text.NL();
 				Text.Add("<i>“What I’m trying to get at is that… well, I’m certainly not going to be taking on any airs for what I do. That’s all.”</i>", parse);
 				Text.Flush();
-				
+
 				TimeStep({minute: 30});
-			}, enabled : true
+			}, enabled : true,
 		});
 		options.push({ nameStr : "Outlaws",
 			tooltip : "How’d he end up with the Outlaws?",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("<i>“I knew Zenith from back in the civil war. Lad was with the guilds… that is, on the wrong side of the fence. Young man of fifteen, already known for his work and just itching to make his name even bigger, and the guilds just had to get it into their mind to move against the Crown and start a civil war. He really had no stake in the whole business save holding membership - back in those days, if you weren’t a member of the guilds and did business anyway, they’d rough you up and shake you down - but that was enough.”</i>", parse);
 				Text.NL();
@@ -569,14 +566,14 @@ export namespace AquiliusScenes {
 				Text.NL();
 				Text.Add("Aquilius nods. <i>“Believe it or not, it is that simple.”</i>", parse);
 				Text.Flush();
-				
+
 				TimeStep({minute: 30});
-			}, enabled : true
+			}, enabled : true,
 		});
-		if(party.InParty(kiakai, true)) { //TODO flags for this!
+		if (party.InParty(kiakai, true)) { // TODO flags for this!
 			options.push({ nameStr : kiakai.name,
 				tooltip : "So… what DOES he have against the elf, anyway?",
-				func : function() {
+				func() {
 					Text.Clear();
 					Text.Add("Since [name] isn’t with you, you can feel free to ask the question in the open. Not that talking about someone behind his or her back is a good thing, but in this case, it would only create more problems than it would solve.", parse);
 					Text.NL();
@@ -592,26 +589,26 @@ export namespace AquiliusScenes {
 					Text.NL();
 					Text.Add("<i>“Look, I went off my head over there,”</i> Aquilius says at last. <i>“I know I can’t stop people from doing stupid things, like they’ve been since the dawn of time. But if they get themselves cut up, at least I can stitch them back together. If they want to charge headlong into death, I can try and talk them out of it. But if they’re really determined… I don’t want to see another freshly dead body if I can help it, especially if it’s still walking and talking. You get me?”</i>", parse);
 					Text.Flush();
-					
+
 					TimeStep({minute: 30});
-				}, enabled : !party.InParty(kiakai)
+				}, enabled : !party.InParty(kiakai),
 			});
 		}
 		Gui.SetButtonsFromList(options, true, AquiliusScenes.TalkPrompt);
 	}
 
 	export function TalkGrind() {
-		let player = GAME().player;
-		
-		var parse : any = {
-			playername : player.name
+		const player = GAME().player;
+
+		const parse: any = {
+			playername : player.name,
 		};
-		
+
 		Text.Clear();
 		Text.Add("You ask Aquilius about how today’s work went.", parse);
 		Text.NL();
-		
-		var scenes = new EncounterTable();
+
+		let scenes = new EncounterTable();
 		scenes.AddEnc(function() {
 			Text.Add("<i>“Running an infirmary is a little like running a circus,”</i> he says. <i>“You’ve got to keep everything perfectly balanced, else the whole house of cards comes tumbling down. If you can keep it up, though, you get to see all sorts of hilarious things.”</i>", parse);
 			Text.NL();
@@ -634,8 +631,8 @@ export namespace AquiliusScenes {
 		scenes.Get();
 
 		Text.NL();
-		
-		var scenes = new EncounterTable();
+
+		scenes = new EncounterTable();
 		scenes.AddEnc(function() {
 			Text.Add("<i>“So today a new face - bit of a scruffy lass - came in to report sick with a mild fever and chills. Of course, she wasn’t <b>really</b> ill, nor was the acting very convincing. I gave her the talk that I give everyone who tries to pull this crap off on me: first time, you get a warning. Second time, your name gets sent straight to Maria, and she’ll deal with you from there on out.</i>", parse);
 			Text.NL();
@@ -676,30 +673,30 @@ export namespace AquiliusScenes {
 			Text.Add("Aquilius squints at you. <i>“I have always been honest in this regard, even if at first glance it’d be better to lie. People need time to make peace with the spirits, [playername]. Settle their affairs in this world and make preparations for the next.  And if they don’t do that… well, then they won’t be able to claim ignorance.”</i>", parse);
 		}, 1.0, function() { return true; });
 		scenes.Get();
-		
+
 		Text.Flush();
-		
+
 		TimeStep({minute: 30});
 	}
 
 	export function TalkWarPrompt() {
-		let player = GAME().player;
-		
-		var parse : any = {
-			playername : player.name
+		const player = GAME().player;
+
+		const parse: any = {
+			playername : player.name,
 		};
-		
-		//[Origins][Fighting][Free Cities][Back]
-		var options = new Array();
+
+		// [Origins][Fighting][Free Cities][Back]
+		const options = new Array();
 		options.push({ nameStr : "Origins",
 			tooltip : "How did the war get started in the first place?",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("Aquilius is silent for a long time, long enough for you to worry that you’ve sent the good surgeon into the recesses of his own head, but at long last he coughs loudly, sending his pipe clattering to the floor. Shaking his head, he picks it up with unsteady fingers and shoves it back into his beak.", parse);
 				Text.NL();
 				Text.Add("<i>“You want to know how it got started? Listen up then, for it’s going to be a long story.</i>", parse);
 				Text.NL();
-				parse["are"] = !GlobalScenes.PortalsOpen() ? "are" : "used to be";
+				parse.are = !GlobalScenes.PortalsOpen() ? "are" : "used to be";
 				Text.Add("<i>“In my father’s time, so I’m told, portals were very commonplace. People could go through one, come out on another plane and do business, then return to Eden before lunch. As you no doubt know, portals [are] pretty much non-existent these days, but they didn’t disappear all at once. Slowly, they began to get rarer and rarer, opening and closing more and more erratically.</i>", parse);
 				Text.NL();
 				Text.Add("<i>“Now, there were merchant guilds who did business between the worlds using the portals, and since Eden had plenty of them, you can imagine they’d grown quite rich and influential. They had a direct voice in the passing of laws, wielded influence in various social circles, that sort of thing - and the new rich were always at loggerheads with the old rich. If the merchants wanted one thing, you’d bet the king and the nobles would want another.</i>", parse);
@@ -718,13 +715,13 @@ export namespace AquiliusScenes {
 				Text.NL();
 				Text.Add("<i>“So there you have it, [playername]. There weren’t any good sides in that mess that was called a civil war, so if anyone tells you that they were the good guys, they’re a lying bucket of warm piss.”</i>", parse);
 				Text.Flush();
-				
+
 				TimeStep({minute: 30});
-			}, enabled : true
+			}, enabled : true,
 		});
 		options.push({ nameStr : "Fighting",
 			tooltip : "What was the fighting like?",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("<i>“What do you think? It was a civil war; those are never pretty.”</i> Aquilius puffs on his pipe. <i>“I’ll be honest; as a surgeon in training, I was in the barracks most of the time, so I didn’t see as much fighting as you’d expect. But the folks they brought in to be put together again, they had tales to tell. Oh, they had plenty to say, mostly to take their mind off the pain while I was sawing and sewing.</i>", parse);
 				Text.NL();
@@ -740,24 +737,24 @@ export namespace AquiliusScenes {
 				Text.NL();
 				Text.Add("<i>“I don’t want to dwell on it anymore,”</i> Aquilius says all of a sudden. <i>“I think you get the general idea by now, yes?”</i>", parse);
 				Text.Flush();
-				
+
 				TimeStep({minute: 30});
-			}, enabled : true
+			}, enabled : true,
 		});
 		options.push({ nameStr : "Free Cities",
 			tooltip : "Did the Free Cities get involved in the whole mess?",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("<i>“Couldn’t rightly say. Zenith’s trying to see if they’ll lend us their support now, but back then… well, that’s anyone’s guess,”</i> Aquilius replies after a moment’s thought. <i>“I know there were a number of mercenary companies hailing from them that worked one side or another - bastards always crop up like flies to a corpse when there’s trouble to make money off. Some of the free cities also proclaimed they were willing to take in refugees from the civil war - some did flee down the King’s Road, although not many were willing or able to make the trip.", parse);
 				Text.NL();
 				Text.Add("<i>“It wouldn’t surprise me if they bankrolled some of the players in the civil war, stir up some trouble to keep the king from noticing them, but that’s just my guess. Anything else?”</i>", parse);
 				Text.Flush();
 				TimeStep({minute: 5});
-			}, enabled : true
+			}, enabled : true,
 		});
 		options.push({ nameStr : "End",
 			tooltip : "So what happened in the end?",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("<i>“Well, you can see for yourself,”</i> Aquilius says, his voice completely flat and emotionless. <i>“Full humans don’t like morphs, and vice versa. Here we sit, plotting the overthrow of the Riordain line. The king has grown cold and distant, and confers with shady characters like that Majid fellow. Whispers fly that he can’t love Rhylla like he did with his first wife. The slums are still filled with those who lost their homes during the war, and those who lost their parents in the killing have only just begun to leave the orphanages in the last handful of years.</i>", parse);
 				Text.NL();
@@ -773,27 +770,27 @@ export namespace AquiliusScenes {
 				Text.NL();
 				Text.Add("He sighs, taking his pipe out of his beak and staring into the bowl as if it holds the mysteries of the universe. <i>“Nevertheless, Zenith’s going to fight. He’s like that; good boys fight for what they believe is right. When people fight, someone always ends up getting killed. The war produced enough cadavers for me to practice on back in the day, and I’d rather not have more turning up. It’s one of the reasons I’m here.”</i>", parse);
 				Text.Flush();
-				
+
 				TimeStep({minute: 30});
-			}, enabled : true
+			}, enabled : true,
 		});
 		Gui.SetButtonsFromList(options, true, function() {
 			Text.Clear();
 			Text.Add("Aquilius shrugs. He doesn’t say anything, but it’s clear he’s glad to be free of the weighty subject. <i>“Anything else you’d like to discuss, [playername]?”</i>", parse);
 			Text.Flush();
-			
+
 			AquiliusScenes.TalkPrompt();
 		});
 	}
 
 	export function Smoke() {
-		let player = GAME().player;
-		let aquilius = GAME().aquilius;
+		const player = GAME().player;
+		const aquilius = GAME().aquilius;
 
-		var parse : any = {
-			playername : player.name
+		const parse: any = {
+			playername : player.name,
 		};
-		
+
 		Text.Clear();
 		Text.Add("You wonder aloud if Aquilius wouldn’t like some company while he puffs away.", parse);
 		Text.NL();
@@ -803,10 +800,9 @@ export namespace AquiliusScenes {
 		Text.NL();
 		Text.Add("<i>“Need a light?”</i>", parse);
 		Text.NL();
-		if(Jobs.Mage.Unlocked(player)) {
+		if (Jobs.Mage.Unlocked(player)) {
 			Text.Add("Nah, you’ve got it covered. You light up the end of your cigarette with a small flame on the tip of your finger; Aquilius does the same for his pipe, and the two of you settle down in your respective chairs to savor the smoke.", parse);
-		}
-		else {
+		} else {
 			Text.Add("Sure. You watch as Aquilius concentrates a moment, then a tiny flame bursts into life on the tip of his index finger, which he holds out to you. You light your cigarette, he lights his pipe, and the two of you settle down in your respective chairs to savor the unique aroma that begins to waft through the tent.", parse);
 			Text.NL();
 			Text.Add("<i>“Not much of a magician myself,”</i> Aquilius explains, <i>“But you’ve got to admit that it’s bloody useful when you haven’t got any matches on hand.”</i>", parse);
@@ -816,8 +812,8 @@ export namespace AquiliusScenes {
 		Text.NL();
 		Text.Add("Little wonder, then, that he takes this for his nerves. A surgeon needs a steady hand.", parse);
 		Text.NL();
-		
-		var scenes = new EncounterTable();
+
+		const scenes = new EncounterTable();
 		scenes.AddEnc(function() {
 			Text.Add("Curiosity piqued, you ask him what actually goes into the stuff you’re smoking, knowing full well that he won’t give you a straight answer. As expected, Aquilius scratches his beak and looks thoughtful for a moment.", parse);
 			Text.NL();
@@ -855,7 +851,7 @@ export namespace AquiliusScenes {
 			Text.Add("<i>“As to how I figured it out… I had a lot of time in the war, and plenty of others had their own particular mixes they liked to roll. Being a lad like any other, I decided to experiment; those were hard days, and we draftees would smoke anything to pass the time. It’s been a while since then, but I’m still working on improving the blend.”</i>", parse);
 		}, 1.0, function() { return true; });
 		scenes.Get();
-		
+
 		Text.NL();
 		Text.Add("You could sit here forever, just staring off into space, but all good things must come to an end. Slow-burning as it is, your cigarette is eventually reduced to a stub, and Aquilius produces a small metal tray for you to put it out on.", parse);
 		Text.NL();
@@ -869,19 +865,20 @@ export namespace AquiliusScenes {
 		Text.NL();
 		Text.Add("<i>“Oh, I’ll be turning in soon. Although knowing my luck, chances are that some fool will lop off his or her own arm in the middle of the night and come crying to me to have it sewn back on. Such are the vagaries of life, [playername] - I’ve grown used to them.”</i>", parse);
 		Text.Flush();
-		
-		if(WorldTime().hour < 22)
+
+		if (WorldTime().hour < 22) {
 			StepToHour(22);
-		else
+		} else {
 			TimeStep({hour: 2});
-		
+		}
+
 		aquilius.relation.IncreaseStat(100, 2);
 		Gui.NextPrompt();
 	}
 
 	export function Appearance() {
-		var parse : any = {};
-		
+		const parse: any = {};
+
 		Text.Clear();
 		Text.Add("You give the good surgeon a look-over.", parse);
 		Text.NL();
@@ -890,10 +887,11 @@ export namespace AquiliusScenes {
 		Text.Add("Dressed in a thick vest of coarse cloth over a plain cotton shirt, he’s a man of simple tastes. Numerous other such vests lie stacked in a shelf near the back of the tent, which suggests that he doesn’t so much wash these as dispose of them when they get too stained. Even with the outlaws being squeezed for supplies most of the time, it stands to reason - he spends much of his time about the sick, after all. Tough cloth pants and leather boots complete the rest of his ensemble, well-worn and showing their age.", parse);
 		Text.NL();
 		Text.Add("Your eyes flicker over his, and he meets your gaze evenly, black pupils set in deep amber sclera. It’s a hard look, and he appears to be staring <i>through</i> you, giving you the impression that he’s not all quite there. With a shake of his head, he breaks the gaze and turns back to his duties. ", parse);
-		if(WorldTime().hour < 17)
+		if (WorldTime().hour < 17) {
 			Text.Add("The ornate pipe so beloved to him is in its case and wedged in the breast pocket of his shirt, a bulge on his vest betraying its presence. Within easy reach should he need a quick smoke break, a faint scent of aromatic smoke lingers about it, discernable even through the case.", parse);
-		else
+		} else {
 			Text.Add("Aquilius’ precious pipe is firmly clenched in his beak, a thin wisp of aromatic smoke rising from the bowl as he takes drags from it, the eagle-morph sighing in satisfaction each time he inhales.", parse);
+		}
 		Text.NL();
 		Text.Add("The rest of him, though, is in what might be charitably called “the prime of his life”. Aquilius’ feathers, while mostly a mixture of brown, gold and black, have begun to grey in patches; it’s most obvious in the wings that he usually keeps folded neatly on his back. Contrasting the usual hustle and bustle of the camp, the good surgeon moves with a relaxed demeanor; his hands - which while covered with feathers, are still humanlike - are steady, his motions deliberate and unhurried as he goes about his tasks with practiced ease. What vitality has left the surgeon as the years wear him down has been replaced with experience, and he’s clearly managed to leverage it to its full extent.", parse);
 		Text.NL();
@@ -902,50 +900,49 @@ export namespace AquiliusScenes {
 	}
 
 	export function HelpOut() {
-		let player = GAME().player;
-		let aquilius = GAME().aquilius;
+		const player = GAME().player;
+		const aquilius = GAME().aquilius;
 
-		var parse : any = {
-			playername : player.name
+		const parse: any = {
+			playername : player.name,
 		};
-		
+
 		Text.Clear();
 		Text.Add("You ask Aquilius if there’s anything you can do to help out around the infirmary.", parse);
 		Text.NL();
-		if(aquilius.helpTimer.Expired()) {
-			if(aquilius.flags["Met"] < AquiliusFlags.Met.Helped)
+		if (aquilius.helpTimer.Expired()) {
+			if (aquilius.flags.Met < AquiliusFlags.Met.Helped) {
 				Text.Add("Aquilius eyes you uncertainly. <i>“I’m not exactly sure, [playername]. After all, I’m ultimately responsible for those under my care, and you’re a bit of an unknown - but on the other hand, it’d be stupid of me to turn away good help. Tell you what - why don’t I get you started on the simple tasks first, then move onto the others when you prove yourself capable of not fouling up?”</i>", parse);
-			else
+			} else {
 				Text.Add("<i>“There’s always work to be done here; I’ll gladly accept any help you’re willing to offer. What did you have in mind, [playername]?”</i>", parse);
+			}
 			Text.Flush();
 			AquiliusScenes.HelpOutPrompt();
-		}
-		else if(aquilius.QualifiesForAnyJob(player)) {
+		} else if (aquilius.QualifiesForAnyJob(player)) {
 			Text.Add("<i>“Your thoughtfulness and enthusiasm are appreciated, but I’d rather not get into the habit of relying on others to do my work for me,”</i> Aquilius tells you. <i>“Come back later if you’d like to continue helping out.”</i>", parse);
 			Text.Flush();
-		}
-		else {
+		} else {
 			Text.Add("<i>“No, no, no. There’re already enough hands helping out with the menial tasks; too many people trying to do the same thing only ends up in everyone getting in each others’ way. I’m sorry, but unless you have a skilled trade to ply, we’re quite well-staffed here. The thought is appreciated - I’m personally overworked - but more hands to a job doesn’t necessarily mean less work.”</i>", parse);
 			Text.Flush();
 		}
 	}
 
-	//TODO
+	// TODO
 	export function HelpOutPrompt() {
-		let player = GAME().player;
-		let aquilius = GAME().aquilius;
-		
-		var parse : any = {
-			playername : player.name
+		const player = GAME().player;
+		const aquilius = GAME().aquilius;
+
+		const parse: any = {
+			playername : player.name,
 		};
-		
-		//[name]
-		var options = new Array();
+
+		// [name]
+		const options = new Array();
 		options.push({ nameStr : "Gather herbs",
 			tooltip : "Offer to go herb picking.",
-			func : function() {
+			func() {
 				Text.Clear();
-				if(aquilius.flags["Herbs"] < AquiliusFlags.Herbs.Known) {
+				if (aquilius.flags.Herbs < AquiliusFlags.Herbs.Known) {
 					Text.Add("<i>“This is the first time you’ve offered to go flower picking for me. Do you know what I’m looking for?”</i>", parse);
 					Text.NL();
 					Text.Add("You admit that no, you don’t.", parse);
@@ -957,33 +954,32 @@ export namespace AquiliusScenes {
 					Text.Add("<i>“One important thing you must note, [playername]. Please refrain from being overzealous in your gathering. While the forest is very kind in sharing its bounty with us, I’d rather not get too ahead and pick the usual herb patches clean. Space for cultivation is very limited -”</i> he points at the few potted plants and mushroom log in the back - <i>“and a lot of my requirements are met from gathering.”</i>", parse);
 					Text.NL();
 					Text.Add("You reassure Aquilius that you’ll be careful, and prepare to head on out.", parse);
-				}
-				else {
+				} else {
 					Text.Add("<i>“Well, I wouldn’t mind the help. I can’t keep asking Maria to keep an eye out for herbs when she’s supposed to be keeping an eye out for intruders instead; having someone dedicated to the task will take a load off everyone. Since you know what I’m generally after and what precautions to take, I won’t insult your intelligence and will just leave you to it, then.”</i>", parse);
 					Text.NL();
 					Text.Add("You give Aquilius a nod and prepare to head on out.", parse);
 				}
 				Text.NL();
-				
-				parse["ingredient"] = aquilius.SetHerb().sDesc();
-				
+
+				parse.ingredient = aquilius.SetHerb().sDesc();
+
 				Text.Add("<i>“There is one thing. Today, I’m looking out for some [ingredient] in particular. If you could get your hands on some before you come back, I’d be glad to give you a little something in return for the extra effort. Happy hunting.”</i>", parse);
 				Text.Flush();
-				
-				aquilius.flags["Herbs"] = AquiliusFlags.Herbs.OnQuest;
-				
+
+				aquilius.flags.Herbs = AquiliusFlags.Herbs.OnQuest;
+
 				TimeStep({minute: 10});
-				
+
 				Gui.NextPrompt();
-			}, enabled : aquilius.QualifiesForHerbs(player)
+			}, enabled : aquilius.QualifiesForHerbs(player),
 		});
 		options.push({ nameStr : "Tend to sick",
 			tooltip : "Offer to help out in the infirmary.",
-			func : AquiliusScenes.TendToSick, enabled : aquilius.QualifiesForHealing(player)
+			func : AquiliusScenes.TendToSick, enabled : aquilius.QualifiesForHealing(player),
 		});
 		options.push({ nameStr : "Alchemy",
 			tooltip : "Ask to help with the brewing.",
-			func : AquiliusScenes.AlchemyHelp, enabled : aquilius.QualifiesForAlchemy(player)
+			func : AquiliusScenes.AlchemyHelp, enabled : aquilius.QualifiesForAlchemy(player),
 		});
 		/* TODO
 		options.push({ nameStr : "name",
@@ -1003,30 +999,31 @@ export namespace AquiliusScenes {
 			Text.NL();
 			Text.Add("<i>“Hrmp, getting my hopes up,”</i> Aquilius grunts surlily.", parse);
 			Text.Flush();
-			
+
 			AquiliusScenes.Prompt();
 		});
 	}
 
 	// [Herbs] - Go flower picking like Aquilius asked you to.
 	export function PickHerbs() {
-		let party : Party = GAME().party;
-		let aquilius = GAME().aquilius;
-		
-		var parse : any = {
-			
+		const party: Party = GAME().party;
+		const aquilius = GAME().aquilius;
+
+		const parse: any = {
+
 		};
-		
+
 		Text.Clear();
 		Text.Add("You set off on your flower hunt, eyes peeled for anything that might interest Aquilius. Happily, your ranger’s training in the lay of the land and its environs serves you well, your sharp gaze roaming from stand to stand and patch to patch as you wander off the beaten trails of the forest in search of the herbs Aquilius needs. ", parse);
-		if(WorldTime().IsDay())
+		if (WorldTime().IsDay()) {
 			Text.Add("Shafts of sunlight pierce through the forest’s thick canopy, lighting your way as you pick your way over gnarled roots and thick undergrowth, wandering as deep as you dare without running the risk of getting lost.", parse);
-		else
+		} else {
 			Text.Add("Shaded during the day, the forest is pitch-black at night. There’s practically no natural light to be had, and even with your ranger’s training the fear of getting lost amidst the trees lurks in the back of your mind, ready to spring out at you at any moment.", parse);
+		}
 		Text.NL();
 		Text.Add("Unseen, things rustle about and above you; you do your best to ignore them and focus on the task at hand. By and large, the task proceeds at a smooth pace - while the forest does not freely give away its treasures, neither is it overly stingy to those who work hard.", parse);
-		if(party.Num() > 1) {
-			parse["comp"] = party.Num() == 2 ? party.Get(1).name :
+		if (party.Num() > 1) {
+			parse.comp = party.Num() == 2 ? party.Get(1).name :
 							"your companions";
 			Text.Add(" The fact that you have [comp] around to help doesn’t hurt, either.", parse);
 		}
@@ -1035,36 +1032,36 @@ export namespace AquiliusScenes {
 		Text.NL();
 		Text.Add("With all that nastiness behind you, you sort through today’s pickings - a medley of grasses, roots, bits of bark and the occasional odd mushroom. There’s about enough to fill a hand basket, which should be enough to appease Aquilius for a day’s worth of work; time to head back and see what he has for you.", parse);
 		Text.Flush();
-		
+
 		TimeStep({hour: 5});
-		
-		aquilius.flags["Herbs"] = AquiliusFlags.Herbs.Finished;
-		
+
+		aquilius.flags.Herbs = AquiliusFlags.Herbs.Finished;
+
 		Gui.NextPrompt();
 	}
 
 	// Tend to sick (requires healer job available)
 	export function TendToSick() {
-		let player = GAME().player;
-		let party : Party = GAME().party;
-		let aquilius = GAME().aquilius;
-		let outlaws = GAME().outlaws;
-		let kiakai = GAME().kiakai;
+		const player = GAME().player;
+		const party: Party = GAME().party;
+		const aquilius = GAME().aquilius;
+		const outlaws = GAME().outlaws;
+		const kiakai = GAME().kiakai;
 
-		var parse : any = {
-			playername : player.name
+		let parse: any = {
+			playername : player.name,
 		};
-		
-		if(aquilius.flags["Met"] < AquiliusFlags.Met.Helped)
-			aquilius.flags["Met"] = AquiliusFlags.Met.Helped;
-		
+
+		if (aquilius.flags.Met < AquiliusFlags.Met.Helped) {
+			aquilius.flags.Met = AquiliusFlags.Met.Helped;
+		}
+
 		Text.Clear();
 		Text.Add("You indicate to Aquilius that you since you know something about medicine, you wouldn’t mind helping out with the injured and infirm.", parse);
 		Text.NL();
-		if(aquilius.flags["Talk"] & AquiliusFlags.Talk.TendToSick) {
+		if (aquilius.flags.Talk & AquiliusFlags.Talk.TendToSick) {
 			Text.Add("<i>“While there’s no shortage of folk willing to do the menial jobs about these parts, we could always use an extra pair of skilled hands around,”</i> Aquilius tells you. <i>“Of course you’re more than welcome to do your share - more, if you’re so inclined.”</i>", parse);
-		}
-		else {
+		} else {
 			Text.Add("Aquilius eyes you suspiciously after hearing your offer. <i>“Well, [playername], it’s not as if I couldn’t use the help around these parts. However, you’re a new and unknown quantity when it comes to the job, and I’m ultimately responsible for my patients. Why don’t we start you off slow, explain what needs to be done about these parts, and we can see what you’re capable of?”</i>", parse);
 			Text.NL();
 			Text.Add("That sounds fair. He clearly takes his job seriously.", parse);
@@ -1074,12 +1071,12 @@ export namespace AquiliusScenes {
 			Text.Add("<i>“It doesn’t help that much of the equipment that I use here is makeshift, jury-rigged from the bits and pieces that Zenith’s people have brought to me over the months, so a lot of it doesn’t look like what most folks think it should.”</i>", parse);
 			Text.NL();
 			Text.Add("Your little tour over, he calls over his three assistants and briefly introduces you in turn, then dismisses them with a wave of his hand before turning back to you. <i>“All right, [playername]. Enough talk, let’s have at it. We’ll see what you’re made of.”</i>", parse);
-			
-			aquilius.flags["Talk"] |= AquiliusFlags.Talk.TendToSick;
+
+			aquilius.flags.Talk |= AquiliusFlags.Talk.TendToSick;
 		}
 		Text.NL();
-		
-		var scenes = new EncounterTable();
+
+		const scenes = new EncounterTable();
 		scenes.AddEnc(function() {
 			Text.Add("Today’s job is disgusting, but a daily necessity - taking out the trash. The “trash” to be disposed of is a medley of utter vileness - used bandages, cloth stained with various bodily fluids, cracked potion vials and an assortment of used sharp implements. These are carefully sealed within three sacks of rough cloth to prevent any of the fluids from seeping out, and then tied securely with cord.", parse);
 			Text.NL();
@@ -1087,7 +1084,7 @@ export namespace AquiliusScenes {
 			Text.NL();
 			Text.Add("<i>“This isn’t menial work,”</i> he replies as he douses your hands with distilled alcohol. <i>“If I just left this to anyone in the camp, who knows if they might just dump it in the forest and leave it at that. Might happen. Might not happen. But there’s always the possibility that there’s a plague brewing in that bag, and I’d rather not take chances with such a danger. I want someone who can <b>appreciate</b> the risks involved to do the burning and dumping; it’s less likely they’ll do something stupid like bury it near the water table or worse, throw it into the river. Do you understand?”</i>", parse);
 			Text.NL();
-			parse["ess"] = player.mfTrue("", "ess");
+			parse.ess = player.mfTrue("", "ess");
 			Text.Add("Aquilius is serious about this; shovel, matches and a small flask of lamp oil aside, he provides you with a smock cut from the same sackcloth his vest is. You look a little silly in the loose outfit - it looks like the sort of thing an impoverished priest[ess] might wear.", parse);
 			Text.NL();
 			Text.Add("<i>“Have fun,”</i> he says dryly. <i>“Reminder as always - the pit’s out around the back. Burn, then dump the ashes and bury the lot.”</i>", parse);
@@ -1095,10 +1092,10 @@ export namespace AquiliusScenes {
 			Text.Add("The bag isn’t too heavy, but knowing what’s in it is worrying. At least you don’t draw many stares on the way out of the camp - most are smart enough to give you a wide berth, considering what you’re lugging about with you.", parse);
 			Text.NL();
 			Text.Add("The pit Aquilius mentioned is some distance from the gates, but at least the camp is still within sight and you don’t run into any trouble on the way there. Pouring the oil on the lot, you toss a lit match onto the sack, and it lights up nicely with an intense, clean-burning flame. When the lot is reduced to a mess of foul-smelling ashes you shovel all of it into the pit, then take a moment to savor your handiwork before heading back to camp.", parse);
-			
-			var scenes = new EncounterTable();
+
+			const scenes = new EncounterTable();
 			scenes.AddEnc(function() {
-				//Nothing
+				// Nothing
 			}, 3.0, function() { return true; });
 			scenes.AddEnc(function() {
 				player.strength.IncreaseStat(35, 1);
@@ -1110,17 +1107,18 @@ export namespace AquiliusScenes {
 		}, 1.0, function() { return true; });
 		scenes.AddEnc(function() {
 			Text.Add("After some thought, Aquilius sets you to work with the rest of his assistants caring for the ill and injured on the cots. Moving the poor bastards so they don’t get bedsores from lying in one spot for too long, changing bandages, making sure everyone gets enough water, and daubing down the fevered with a thick, cool solution of his own concoction. There are a number of other tasks involved, but they all have one goal: make sure everyone makes a full recovery as quickly as possible. ", parse);
-			if(Jobs.Healer.Master(player))
+			if (Jobs.Healer.Master(player)) {
 				Text.Add("Your profound knowledge of medicine helps you through the tasks as you quickly soothe hurts and ease discomforts, going about your rounds with utmost speed.", parse);
-			else
+			} else {
 				Text.Add("Your knowledge of medicine is sufficient for you to make your rounds without needing supervision or asking too many questions, but you feel obliged to slow down a little and work carefully - Aquilius doesn’t look like the kind to tolerate mistakes.", parse);
+			}
 			Text.NL();
 			Text.Add("Despite them being under the weather, most of the injured are surprisingly lucid and good natured - lewd jokes and mild ribbing aside, a couple of the more able-bodied amongst them flail about ineffectually in botched attempts to grope you when they think you’re not looking.", parse);
 			Text.NL();
-			if(party.InParty(kiakai)) {
-				parse["name"] = kiakai.name;
+			if (party.InParty(kiakai)) {
+				parse.name = kiakai.name;
 				parse = kiakai.ParserPronouns(parse);
-				
+
 				Text.Add("<i>“May I help, too? I do know something of medicine, even without the direct use of Lady Aria’s blessings.”</i>", parse);
 				Text.NL();
 				Text.Add("You turn to find [name] looking up at you intently. The elf’s been so quiet that you’d almost forgotten [heshe] was there, and in turn, you turn to Aquilius. The surgeon looks between the two of you, then shakes his head and sighs.", parse);
@@ -1131,10 +1129,10 @@ export namespace AquiliusScenes {
 			}
 			Text.NL();
 			Text.Add("Eventually, though, all the infirm are tended to and made comfortable, and you return to the good surgeon for him to assess your work.", parse);
-			
-			var scenes = new EncounterTable();
+
+			const scenes = new EncounterTable();
 			scenes.AddEnc(function() {
-				//Nothing
+				// Nothing
 			}, 3.0, function() { return true; });
 			scenes.AddEnc(function() {
 				player.intelligence.IncreaseStat(35, 1);
@@ -1145,42 +1143,42 @@ export namespace AquiliusScenes {
 			scenes.Get();
 		}, 1.0, function() { return true; });
 		scenes.Get();
-		
+
 		Text.NL();
 		Text.Add("<i>“Decent work, [playername],”</i> Aquilius tells you, noticing your return. <i>“I expected no less from you. Well, I suppose that’ll be all for today - why don’t you go and get some rest and come back tomorrow if you want to have another go at it? I’ll still be needed around these parts for a little while longer, so don’t wait up on me.”</i>", parse);
 		Text.Flush();
-		
+
 		TimeStep({hour: 5});
-		
+
 		outlaws.relation.IncreaseStat(30, 1);
 		aquilius.relation.IncreaseStat(100, 2);
-		
-		//#Set timer on helping out at infirmary for the rest of the day.
+
+		// #Set timer on helping out at infirmary for the rest of the day.
 		aquilius.helpTimer = aquilius.HelpCooldown();
-		
+
 		Gui.NextPrompt();
 	}
 
 	export function AlchemyHelp() {
-		let aquilius = GAME().aquilius;
-		let outlaws = GAME().outlaws;
+		const aquilius = GAME().aquilius;
+		const outlaws = GAME().outlaws;
 
-		var parse : any = {
-			
+		const parse: any = {
+
 		};
-		
-		if(aquilius.flags["Met"] < AquiliusFlags.Met.Helped)
-			aquilius.flags["Met"] = AquiliusFlags.Met.Helped;
-			
+
+		if (aquilius.flags.Met < AquiliusFlags.Met.Helped) {
+			aquilius.flags.Met = AquiliusFlags.Met.Helped;
+		}
+
 		Text.Clear();
 		Text.Add("Knowing something of alchemy yourself, you offer to watch the proverbial pots so Aquilius can go about his more important tasks.", parse);
 		Text.NL();
-		if(aquilius.flags["Talk"] & AquiliusFlags.Talk.AlchemyHelp) {
+		if (aquilius.flags.Talk & AquiliusFlags.Talk.AlchemyHelp) {
 			Text.Add("<i>“Well, I guess I can trust you with the apparatus.”</i>", parse);
 			Text.NL();
 			Text.Add("You’re about to say that you’ll be careful, but he waves you off. <i>“Yes, I know you’ll be careful. Let’s get started.”</i>", parse);
-		}
-		else {
+		} else {
 			Text.Add("Aquilius gives you a long, hard look. <i>“Hmm… I don’t know…”</i>", parse);
 			Text.NL();
 			Text.Add("You promise that you’ll be careful.", parse);
@@ -1194,11 +1192,11 @@ export namespace AquiliusScenes {
 			Text.Add("And what does he make here, anyway?", parse);
 			Text.NL();
 			Text.Add("<i>“A bit of this, a bit of that as circumstances demand. Mostly, I just cook up alcohol for cleaning purposes - we go through that like a drunk with a bottle, but there’re some other popular bits and pieces, though. Come on, let me demonstrate.”</i>", parse);
-			aquilius.flags["Talk"] |= AquiliusFlags.Talk.AlchemyHelp;
+			aquilius.flags.Talk |= AquiliusFlags.Talk.AlchemyHelp;
 		}
 		Text.NL();
-		
-		var scenes = new EncounterTable();
+
+		const scenes = new EncounterTable();
 		scenes.AddEnc(function() {
 			Text.Add("Today’s task is relatively simple: the distillation of alcohol from spirits. It seems like Aquilius had been just about to get started before you came in; the reservoir is full and the burner positioned under it; all that’s required to get things started is to light the burner, which the good surgeon does posthaste.", parse);
 			Text.NL();
@@ -1219,11 +1217,11 @@ export namespace AquiliusScenes {
 			Text.NL();
 			Text.Add("<i>“Well, don’t let me get in your way. I’ll see you in a couple of hours.”</i>", parse);
 		}, 1.0, function() { return true; });
-		
-		//TODO More scenes later?
-		
+
+		// TODO More scenes later?
+
 		scenes.Get();
-		
+
 		Text.NL();
 		Text.Add("Well, nothing to do but to get to work. You do the best you can, following Aquilius’ instructions to the letter; a faint alchemical smell begins to fill the air as the mixture comes to a boil. The good surgeon himself pops in every now and then to check in on your progress; while he doesn’t say anything, there’s always a mild apprehension about him that one could very well find irritating. Sure, you can understand his tendency to worry when it comes to alchemy, but why bother delegating in the first place if he’s going to supervise you that much?", parse);
 		Text.NL();
@@ -1233,15 +1231,15 @@ export namespace AquiliusScenes {
 		Text.NL();
 		Text.Add("<i>“Yes, it’ll do. You’ve done adequately, and for that, you do have my gratitude. I’m afraid there’s not much I can pay you directly with, but everyone in the camp respects those who’re willing to do more than the minimum to scrape by. Go and get some rest, and if you still want to turn up here tomorrow, I won’t say no.”</i>", parse);
 		Text.Flush();
-		
+
 		TimeStep({hour: 5});
-		
+
 		outlaws.relation.IncreaseStat(30, 1);
 		aquilius.relation.IncreaseStat(100, 2);
-		
-		//#Set timer on helping out at infirmary for the rest of the day.
+
+		// #Set timer on helping out at infirmary for the rest of the day.
 		aquilius.helpTimer = aquilius.HelpCooldown();
-		
+
 		Gui.NextPrompt();
 	}
 }

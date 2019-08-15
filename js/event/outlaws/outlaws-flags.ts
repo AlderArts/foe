@@ -1,18 +1,18 @@
 
-let OutlawsFlags = {
+const OutlawsFlags = {
     Met : {
         NotMet     : 0,
         Met        : 1,
         Bouqet     : 2,
         Letter     : 3,
-        MetBelinda : 4
+        MetBelinda : 4,
     },
 
-    Events : { //Bitmask
+    Events : { // Bitmask
         ChowTime : 1,
         Cavalcade : 2,
-        BeatMaria : 4, //Beat maria at archery
-        FactFind : 8
+        BeatMaria : 4, // Beat maria at archery
+        FactFind : 8,
     },
 
     // Quest results
@@ -25,7 +25,7 @@ let OutlawsFlags = {
         SafeLooted       : 32,
         BlueRoses        : 64,
         ContrabandStolen : 128,
-        PerfectScore     : 256
+        PerfectScore     : 256,
     },
 
     // Quest state
@@ -34,7 +34,7 @@ let OutlawsFlags = {
         Initiated  : 1,
         Completed  : 2,
         AlaricFollowup : 3,
-        ZenithFollowup : 4
+        ZenithFollowup : 4,
     },
 };
 

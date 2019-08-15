@@ -1,90 +1,88 @@
-import * as _ from 'lodash';
+import * as _ from "lodash";
 
-import { Entity } from '../../entity';
-import { Gender } from '../../body/gender';
-import { Gui } from '../../gui';
-import { Text } from '../../text';
-import { LucilleFlags } from './lucille-flags';
-import { GAME, TimeStep } from '../../GAME';
-import { EncounterTable } from '../../encountertable';
-import { Race } from '../../body/race';
-import { TF } from '../../tf';
-import { Genitalia } from '../../body/genitalia';
-import { Color } from '../../body/color';
-import { AppendageType } from '../../body/appendage';
-import { Cock } from '../../body/cock';
-import { Capacity } from '../../body/orifice';
-import { PregnancyHandler } from '../../pregnancy';
+import { AppendageType } from "../../body/appendage";
+import { Cock } from "../../body/cock";
+import { Color } from "../../body/color";
+import { Gender } from "../../body/gender";
+import { Genitalia } from "../../body/genitalia";
+import { Capacity } from "../../body/orifice";
+import { Race } from "../../body/race";
+import { EncounterTable } from "../../encountertable";
+import { Entity } from "../../entity";
+import { GAME, TimeStep } from "../../GAME";
+import { Gui } from "../../gui";
+import { PregnancyHandler } from "../../pregnancy";
+import { Text } from "../../text";
+import { TF } from "../../tf";
+import { LucilleFlags } from "./lucille-flags";
 
 enum GryphonsState {
 	NotViewed    = 0,
 	S1WorldsEdge = 1,
 	S2Pasts      = 2,
 	S3Building   = 3,
-	S4NewLife    = 4
+	S4NewLife    = 4,
 }
 
 export class Gryphons extends Entity {
-	constructor(storage? : any) {
+	constructor(storage?: any) {
 		super();
-		
-		this.flags["State"] = GryphonsState.NotViewed;
-		
-		if(storage) this.FromStorage(storage);
+
+		this.flags.State = GryphonsState.NotViewed;
+
+		if (storage) { this.FromStorage(storage); }
 	}
 
-	Cost() {
+	public Cost() {
 		return 200;
 	}
-	First() {
-		return this.flags["State"] == GryphonsState.NotViewed;
+	public First() {
+		return this.flags.State === GryphonsState.NotViewed;
 	}
-	
-	FromStorage(storage : any) {
+
+	public FromStorage(storage: any) {
 		// Load flags
 		this.LoadFlags(storage);
 	}
-	
-	ToStorage() {
-		let storage = {};
-		
+
+	public ToStorage() {
+		const storage = {};
+
 		this.SaveFlags(storage);
-		
+
 		return storage;
 	}
 }
 
-
-
 export namespace GryphonsScenes {
-	let LucilleScenes : any;
-	export function INIT(lucilleScenes : any) {
+	let LucilleScenes: any;
+	export function INIT(lucilleScenes: any) {
 		LucilleScenes = lucilleScenes;
 	}
 
 	export function IntroEntryPoint() {
-		let player = GAME().player;
-		let gryphons = GAME().gryphons;
-		let lucille = GAME().lucille;
+		const player = GAME().player;
+		const gryphons = GAME().gryphons;
+		const lucille = GAME().lucille;
 
-		let parse : any = {
+		const parse: any = {
 			armor : player.ArmorDesc(),
-			skin : player.SkinDesc()
+			skin : player.SkinDesc(),
 		};
-		
+
 		let choice = GryphonsState.NotViewed;
 		let gender = Gender.male;
-		
-		let func = function(c : GryphonsState, gen : Gender) {
-			return function() {
+
+		const func = (c: GryphonsState, gen: Gender) => {
+			return () => {
 				choice = c;
 				gender = gen;
 				Text.Clear();
 				Gui.PrintDefaultOptions();
-			}
+			};
 		};
-		
-		Gui.Callstack.push(function() {
+
+		Gui.Callstack.push(() => {
 			Text.Add("Stripping out of your [armor], you secure it on the hook on the door, then turn your attention to the magic circle on the floor. Made to look as if it’d been gouged out of a stone slab by the claws of some powerful beast, it shimmers faintly as you step over the runes and into its center. Giving your naked form one last look-over, you close your eyes, steady yourself, and say <i>enter</i> as instructed.", parse);
 			Text.NL();
 			Text.Add("Your [skin] feels fluid and oily for a moment, oddly pliable…", parse);
@@ -92,7 +90,7 @@ export namespace GryphonsScenes {
 			Text.Add("When you reopen your eyes, reflected in the mirror before you is the spitting image of a gryphon-morph.", parse);
 			Text.NL();
 			/*
-			* TODO ? 
+			* TODO ?
 	#if PC is already a full gryphon-morph
 	Not that it changes too much about you, since you were already one, but the finer details of your body have changed a little to suit the fantasy.
 
@@ -100,7 +98,7 @@ export namespace GryphonsScenes {
 			Text.NL();
 	#converge
 			*/
-			if(gender == Gender.male) {
+			if (gender === Gender.male) {
 				Text.Add("You are a male gryphon-morph, standing tall and proud; the tops of most people’s heads would barely reach your shoulders. While your body above your chest is covered in feathers of a dun brown color, your groin and legs bear the tawny golden fur of your leonine half, the two colors highlighted by the white streaks that run across your feathers. Hard, narrow eyes gaze back at you in the mirror, their irises such a dark brown that they’re almost black; a scar across your right eye completes your grim visage. A mane of deep brown hair falls from your head and ends between your white-tipped wings, slightly wild and unkempt, and you click your short, cruel beak in satisfaction.", parse);
 				Text.NL();
 				Text.Add("Battle, hunger and survival have turned your body hard and rugged, the muscles more for use rather than show; save for the bulging pecs needed to power your wide wings, your body is more lean than large. Your arms and hands are human-like, save for the small claws that cap each finger, while your feet are digitigrade feline paws with talons that click on hard surfaces. Extending from your tailbone is a long, leonine tail, the tufted end swaying to and fro idly.", parse);
@@ -108,8 +106,7 @@ export namespace GryphonsScenes {
 				Text.Add("On your groin is a sheath that hides your cock, jet black and somewhere between ten and eleven inches long and two and a half inches thick - not counting the knot that lies near its base. Held tightly against your body by your scrotum are a pair of fist-sized testicles, and between your hard asscheeks, you have a virgin anus.", parse);
 				Text.NL();
 				Text.Add("All in all, you look hard, grim, commanding - perfectly suited for the role that you’re supposed to be playing out in this fantasy. There’s nothing left for it, now - taking a bold stride forward, you pass through the mirror’s surface, which accepts you with but a few ripples along its silvery surface.", parse);
-			}
-			else {
+			} else {
 				Text.Add("You are a female gryphon-morph, sleek and swift; standing tall on your digitigrade stance, you’re perhaps a half-head taller than the average person on the streets of Rigard. Covered from chest to legs in luxurious silvery-grey fur, your head and shoulders are clothed in soft, white feathers and down; fur and feathers alike sport small dark speckles evenly interspersed amidst your fine coat. Your hair falls between your scythe-shaped wings and down your back, tickling the base of your leonine tail and causing your tufted tail-tip to twitch of its own accord.", parse);
 				Text.NL();
 				Text.Add("Gazing at yourself in the mirror, you note that your eyes are wide with dark pupils, gleaming orbs that drink in the world about them with a curious innocence. The beak that sits under them is short, hard and graced with a sharp tip, made for killing prey and tearing meat. With the talons that protrude from your feline feet and small claws that tip your human-like hands, your entire body is a weapon in and of itself - equally suited to destruction as it is to creation.", parse);
@@ -119,219 +116,211 @@ export namespace GryphonsScenes {
 				Text.Add("All in all, you are as dangerous as you are alluring, perfectly suited for the role you’re intended to play in this chapter of the fantasy. Placing a hand on the mirror’s surface and watching the silvered glass ripple, you steady yourself and step through before you have second thoughts.", parse);
 			}
 			Text.NL();
-			if(lucille.ThemeroomFirst()) {
+			if (lucille.ThemeroomFirst()) {
 				Text.Add("It’s a strange feeling stepping through the mirror. Like entering a pool, but without getting wet.", parse);
-			}
-			else {
+			} else {
 				Text.Add("You’ll never get used to the feeling of stepping through the mirror…", parse);
 			}
-			lucille.flags["Theme"] |= LucilleFlags.Themeroom.Gryphons;
+			lucille.flags.Theme |= LucilleFlags.Themeroom.Gryphons;
 			Text.Flush();
-			
-			Gui.NextPrompt(function() {
+
+			Gui.NextPrompt(() => {
 				GryphonsScenes.SceneSelect(choice);
 			});
 		});
-		
+
 		Text.Clear();
-		
-		//TODO
-		let options = new Array();
+
+		// TODO
+		const options = new Array();
 		options.push({ nameStr : "World's Edge",
 			tooltip : "",
-			func : func(GryphonsState.S1WorldsEdge, Gender.male), enabled : true
+			func : func(GryphonsState.S1WorldsEdge, Gender.male), enabled : true,
 		});
-		if(gryphons.flags["State"] >= GryphonsState.S1WorldsEdge) {
+		if (gryphons.flags.State >= GryphonsState.S1WorldsEdge) {
 			options.push({ nameStr : "Pasts",
 				tooltip : "",
-				func : func(GryphonsState.S2Pasts, Gender.female), enabled : true
+				func : func(GryphonsState.S2Pasts, Gender.female), enabled : true,
 			});
 		}
-		if(gryphons.flags["State"] >= GryphonsState.S2Pasts) {
+		if (gryphons.flags.State >= GryphonsState.S2Pasts) {
 			options.push({ nameStr : "Building",
 				tooltip : "",
-				func : func(GryphonsState.S3Building, Gender.male), enabled : true
+				func : func(GryphonsState.S3Building, Gender.male), enabled : true,
 			});
 		}
-		if(gryphons.flags["State"] >= GryphonsState.S3Building) {
+		if (gryphons.flags.State >= GryphonsState.S3Building) {
 			options.push({ nameStr : "New life",
 				tooltip : "",
-				func : func(GryphonsState.S4NewLife, Gender.female), enabled : true
+				func : func(GryphonsState.S4NewLife, Gender.female), enabled : true,
 			});
 		}
-		
-		if(gryphons.First()) {
+
+		if (gryphons.First()) {
 			Text.Add("Carefully closing and latching the door behind you, you take a moment to examine the room you’ve stepped into. It’s not very large - perhaps the size of two combined broom closets - and various pictures of mountain vistas and rolling valleys have been hung on the walls. In what is perhaps an attempt to try and fit the room’s theme, someone’s dragged in a small boulder for you to sit on if need be.", parse);
 			Text.NL();
 			Text.Add("The rest of the room is sparsely furnished; a hook on the door on which to hang your possessions, a full-body mirror, an elaborate magic circle set into the floor, and just beside the mirror’s frame, a small dial that appears to have various settings listed at an equal number of positions. Attempts to turn the dial fail - seems like you’re going to have to play out this story from the beginning.", parse);
 			Text.NL();
 			choice = GryphonsState.S1WorldsEdge;
-			
+
 			Gui.PrintDefaultOptions();
-		}
-		else {
+		} else {
 			Text.Add("The confines of this particular theme room are a familiar sight to you by now, and you know what to do once the door is closed and latched. The only choice you really need to make is which chapter to play.", parse);
 			Text.Flush();
 			Gui.SetButtonsFromList(options, false, null);
 		}
 	}
 
-	export function SceneSelect(choice : GryphonsState) {
-		let gryphons = GAME().gryphons;
-		
-		Gui.Callstack.push(function() {
-			if(gryphons.flags["State"] < choice)
-				gryphons.flags["State"] = choice;
+	export function SceneSelect(choice: GryphonsState) {
+		const gryphons = GAME().gryphons;
+
+		Gui.Callstack.push(() => {
+			if (gryphons.flags.State < choice) {
+				gryphons.flags.State = choice;
+			}
 			Gui.PrintDefaultOptions();
 		});
-		
-		switch(choice) {
+
+		switch (choice) {
 			default:
 			case GryphonsState.S1WorldsEdge: GryphonsScenes.WorldsEdge(); break;
 			case GryphonsState.S2Pasts: GryphonsScenes.Pasts(); break;
 			case GryphonsState.S3Building: GryphonsScenes.Building(); break;
 			case GryphonsState.S4NewLife: GryphonsScenes.NewLife(); break;
-			//TODO new scenes
+			// TODO new scenes
 		}
 	}
 
-	export function Outro(gender : Gender, preg? : number) {
-		let player = GAME().player;
-		let gryphons = GAME().gryphons;
-		let parse : any = {
-			
+	export function Outro(gender: Gender, preg?: number) {
+		const player = GAME().player;
+		const gryphons = GAME().gryphons;
+		let parse: any = {
+
 		};
-		
+
 		parse = player.ParserTags(parse);
 		parse = Text.ParserPlural(parse, player.NumCocks() > 1);
-		
+
 		let TFapplied = false;
-		
+
 		Text.Clear();
 		Text.Add("As the illusion fades, you feel… odd, your gem pulsing with a strange light. A quick examination of yourself reveals that you have indeed changed, perhaps some effect of the mirror’s magic.", parse);
 		Text.NL();
-		
-		let scenes = new EncounterTable();
-		
-		let incompleteGryphonCockTF = function() {
-			if(!player.FirstCock()) return false;
-			if(!player.Genitalia().Sheath()) return true;
+
+		const scenes = new EncounterTable();
+
+		const incompleteGryphonCockTF = () => {
+			if (!player.FirstCock()) { return false; }
+			if (!player.Genitalia().Sheath()) { return true; }
 			let change = false;
-			_.each(player.AllCocks(), function(c) {
-				if(!c.Knot()) change = true;
-				if(!c.race.isRace(Race.Gryphon)) change = true;
-				if(change) return false; //break
+			_.each(player.AllCocks(), (c) => {
+				if (!c.Knot()) { change = true; }
+				if (!c.race.isRace(Race.Gryphon)) { change = true; }
+				if (change) { return false; } // break
 			});
 			return change;
-		}
-		
-		let incompleteGryphonFaceTF = function() {
-			if(!player.Ears().race.isRace(Race.Gryphon)) return true;
-			if(!player.Eyes().race.isRace(Race.Gryphon)) return true;
-			if(player.HasAntenna()) return true;
-			if(player.HasHorns()) return true;
-			if(!player.Face().race.isRace(Race.Gryphon)) return true;
+		};
+
+		const incompleteGryphonFaceTF = () => {
+			if (!player.Ears().race.isRace(Race.Gryphon)) { return true; }
+			if (!player.Eyes().race.isRace(Race.Gryphon)) { return true; }
+			if (player.HasAntenna()) { return true; }
+			if (player.HasHorns()) { return true; }
+			if (!player.Face().race.isRace(Race.Gryphon)) { return true; }
 			return false;
 		};
-		
-		let incompleteGryphonTF = function() {
-			let wings = player.HasWings();
-			let tail = player.HasTail();
-			if(!wings || (wings && !wings.race.isRace(Race.Gryphon))) return true;
-			if(tail && !tail.race.isRace(Race.Lion)) return true;
-			if(!player.Race().isRace(Race.Gryphon)) return true;
-			if(!player.Arms().race.isRace(Race.Lion)) return true;
-			if(!player.Legs().race.isRace(Race.Gryphon)) return true;
-			if(incompleteGryphonCockTF()) return true;
-			if(incompleteGryphonFaceTF()) return true;
+
+		const incompleteGryphonTF = () => {
+			const wings = player.HasWings();
+			const tail = player.HasTail();
+			if (!wings || (wings && !wings.race.isRace(Race.Gryphon))) { return true; }
+			if (tail && !tail.race.isRace(Race.Lion)) { return true; }
+			if (!player.Race().isRace(Race.Gryphon)) { return true; }
+			if (!player.Arms().race.isRace(Race.Lion)) { return true; }
+			if (!player.Legs().race.isRace(Race.Gryphon)) { return true; }
+			if (incompleteGryphonCockTF()) { return true; }
+			if (incompleteGryphonFaceTF()) { return true; }
 			return false;
 		};
-		
-		let func = function(obj : any) {
-			scenes.AddEnc(function() {
+
+		const func = (obj: any) => {
+			scenes.AddEnc(() => {
 				TFapplied = true;
 				return _.isFunction(obj.tf) ? obj.tf() : "";
 			}, obj.odds || 1, obj.cond);
 		};
-		
+
 		func({
-			tf: function() {
-				let t : string;
-				let wings = player.HasWings();
-				let tail = player.HasTail();
-				if(!wings || (wings && !wings.race.isRace(Race.Gryphon))) {
+			tf() {
+				let t: string;
+				const wings = player.HasWings();
+				const tail = player.HasTail();
+				if (!wings || (wings && !wings.race.isRace(Race.Gryphon))) {
 					t = "You feel a strange new weight on your back, a sensation of heaviness and resistance, and to your surprise, you find you’ve grown a pair of wide, powerful wings tipped with white feathers.";
-					if(wings) {
+					if (wings) {
 						t = Text.Parse("A strange sensation between your shoulders has you turning your head. It looks like your wings have changed while you were out in the fantasy - becoming broad, powerful and vaguely scythe-shaped, made for soaring.", parse);
 						wings.race = Race.Gryphon;
 						wings.color = Color.gold;
-					}
-					else {
+					} else {
 						TF.SetAppendage(player.Back(), AppendageType.wing, Race.Gryphon, Color.gold, 2);
 					}
 					player.Ears().race = Race.Feline;
 					return t;
-				}
-				else if(tail && !tail.race.isRace(Race.Lion)) {
+				} else if (tail && !tail.race.isRace(Race.Lion)) {
 					t = "A new weight at your tailbone has you turning around to investigate. Seems like you’ve managed to acquire a tail, long and leonine with a furry tuft on the end. It’s slightly prehensile, but not enough to be useful.";
-					if(tail) {
+					if (tail) {
 						t = Text.Parse("Your tail feels different. A cursory glance behind you reveals that it’s turned long and slender, capped by a furry tuft - just like the gryphon in the fantasy.", parse);
 						tail.race = Race.Lion;
 						tail.color = Color.gold;
-					}
-					else {
+					} else {
 						TF.SetAppendage(player.Back(), AppendageType.tail, Race.Gryphon, Color.gold);
 					}
 					return t;
-				}
-				else if(!player.Race().isRace(Race.Gryphon)) {
+				} else if (!player.Race().isRace(Race.Gryphon)) {
 					player.body.torso.race = Race.Gryphon;
 					return "Your skin feels different. Warmer… heavier… oh. You’ve grown a coat of tawny golden fur <i>and</i> dark brown feathers - the former covers your body from the chest down, while the latter coats your chest, shoulders, and arms. ";
-				}
-				else if(!player.Arms().race.isRace(Race.Lion)) {
+				} else if (!player.Arms().race.isRace(Race.Lion)) {
 					t = Text.Parse("Your [hand]s and arms have changed - while still human-like, your fingers are now tipped with a small set of claws. They’re not sharp enough to be useful as a weapon, but nevertheless are still a curiosity.", {hand: player.HandDesc()});
 					player.Arms().race = Race.Lion;
 					return t;
-				}
-				else if(!player.Legs().race.isRace(Race.Gryphon)) {
+				} else if (!player.Legs().race.isRace(Race.Gryphon)) {
 					t = Text.Parse("You look down and find that your lower body has changed completely - you now sport a pair of leonine and digitigrade legs and feet, capped with hooked talons. Rippling with muscle, they’re suited for both slow stalking and quick pouncing.", parse);
-					if(player.HasLegs())
+					if (player.HasLegs()) {
 						t = Text.Parse("Your stance seems to be carrying your weight a little differently, and when you look down you realize that your legs and feet have changed. They’re now leonine, digitigrade and capped with talons, rippling with muscle and suited for both slow stalking and quick movement.", parse);
+					}
 					player.Legs().race = Race.Gryphon;
 					player.Legs().count = 2;
 					return t;
-				}
-				else if(incompleteGryphonCockTF()) {
-					let parse2 : any = {};
+				} else if (incompleteGryphonCockTF()) {
+					let parse2: any = {};
 					parse2 = Text.ParserPlural(parse2, player.NumCocks() > 1);
-					let cscenes = new EncounterTable();
-					_.each(player.AllCocks(), function(c) {
-						parse2["cock"] = c.Short();
-						
-						if(!c.Knot()) {
-							cscenes.AddEnc(function() {
+					const cscenes = new EncounterTable();
+					_.each(player.AllCocks(), (c) => {
+						parse2.cock = c.Short();
+
+						if (!c.Knot()) {
+							cscenes.AddEnc(() => {
 								c.knot = 1;
 								return Text.Parse("A faint throbbing at the base of[oneof] your cock[s] has you grasping at it in surprise. You’ve grown a thick knot at the base of your [cock]!", parse2);
-							}, 1.0, function() { return true; });
+							}, 1.0, () => true);
 						}
-						if(!c.race.isRace(Race.Gryphon)) {
-							cscenes.AddEnc(function() {
+						if (!c.race.isRace(Race.Gryphon)) {
+							cscenes.AddEnc(() => {
 								c.race = Race.Gryphon;
 								c.color = Color.black;
 								return Text.Parse("With a shudder that runs through your groin and up your spine, you notice a dark patch spreading out from the base of[oneof] your cock[s]. Within moments, your [cock] resembles the one you had in the illusion...", parse2);
-							}, 1.0, function() { return true; });
+							}, 1.0, () => true);
 						}
 					});
-					if(!player.Genitalia().Sheath()) {
-						cscenes.AddEnc(function() {
+					if (!player.Genitalia().Sheath()) {
+						cscenes.AddEnc(() => {
 							player.Genitalia().SetCover(Genitalia.Cover.Sheath);
 							return Text.Parse("A faint sucking sound at your groin heralds the development of a sheath in which to hide your [cock]. Rubbing it brings out your man-meat well enough, so there’s no real concern for worry, but it still feels… different.", parse2);
-						}, 1.0, function() { return true; });
+						}, 1.0, () => true);
 					}
-					
+
 					return cscenes.Get();
-				}
-				else if(incompleteGryphonFaceTF()) {
+				} else if (incompleteGryphonFaceTF()) {
 					player.Face().race = Race.Gryphon;
 					player.Eyes().race = Race.Gryphon;
 					player.Ears().race = Race.Gryphon;
@@ -341,240 +330,237 @@ export namespace GryphonsScenes {
 				}
 			},
 			odds: 3,
-			cond: function() { return incompleteGryphonTF(); }
+			cond() { return incompleteGryphonTF(); },
 		});
-		
-		if(gender == Gender.male && player.FirstCock()) {
-			let parse2 : any = {};
+
+		if (gender === Gender.male && player.FirstCock()) {
+			let parse2: any = {};
 			parse2 = Text.ParserPlural(parse2, player.NumCocks() > 1);
-			
-			let incompleteCockSizeOne = function(c : Cock) {
-				if(c.Len() < 28) return true;
-				if(c.Thickness() < 5) return true;
+
+			const incompleteCockSizeOne = (c: Cock) => {
+				if (c.Len() < 28) { return true; }
+				if (c.Thickness() < 5) { return true; }
 				return false;
 			};
-			let incompleteCockSize = function() {
+			const incompleteCockSize = () => {
 				let changed = false;
-				_.each(player.AllCocks(), function(c) {
+				_.each(player.AllCocks(), (c) => {
 					changed = incompleteCockSizeOne(c);
-					if(changed) return false; //break
+					if (changed) { return false; } // break
 				});
 				return changed;
 			};
-		
+
 			func({
-				tf: function() {
-					let scenes = new EncounterTable();
-					_.each(player.AllCocks(), function(c) {
-						scenes.AddEnc(function() {
-							if(c.Len() < 28)
+				tf() {
+					const scenes = new EncounterTable();
+					_.each(player.AllCocks(), (c) => {
+						scenes.AddEnc(() => {
+							if (c.Len() < 28) {
 								c.length.IncreaseStat(28, 4);
-							if(c.Thickness() < 5)
+							}
+							if (c.Thickness() < 5) {
 								c.thickness.IncreaseStat(5, 1);
-							
+							}
+
 							return "Tingles of pleasure run up the length of[oneof] your shaft[s], and when you examine it, your [cock] has definitely grown a bit bigger.";
 						}, 1.0, incompleteCockSizeOne(c));
 					});
 					return scenes.Get();
 				},
 				odds: 1,
-				cond: function() { return incompleteCockSize(); }
+				cond() { return incompleteCockSize(); },
 			});
 			func({
-				tf: function() {
+				tf() {
 					player.Balls().size.IncreaseStat(7, 1);
 					return "Your scrotum feels heavier and a little tighter, and examination reveals that your balls have grown a little in size.";
 				},
 				odds: 1,
-				cond: function() { return player.HasBalls() && player.Balls().BallSize() < 7; }
+				cond() { return player.HasBalls() && player.Balls().BallSize() < 7; },
 			});
 			func({
-				tf: function() {
+				tf() {
 					player.Balls().count.base = 2;
 					player.Balls().size.IncreaseStat(5, 100);
 					return "There’s an extra, slightly dangly weight between your legs. Seems like you’ve grown a nice set of balls when you were out.";
 				},
 				odds: 1,
-				cond: function() { return !player.HasBalls(); }
+				cond() { return !player.HasBalls(); },
 			});
 			func({
-				tf: function() {
+				tf() {
 					player.Balls().cumCap.IncreaseStat(30, 2);
 					player.Balls().cumProduction.IncreaseStat(4, .75, true);
 					return "A gentle wave of pleasure runs through your balls and up into your groin. While it’s over just as quickly as it began, you can feel your balls churning with increased production.";
 				},
 				odds: 1,
-				cond: function() { return player.HasBalls() && player.Balls().cumProduction.Get() < 4 && player.Balls().cumCap.Get() < 30; }
+				cond() { return player.HasBalls() && player.Balls().cumProduction.Get() < 4 && player.Balls().cumCap.Get() < 30; },
 			});
 			func({
-				tf: function() {
+				tf() {
 					player.Balls().fertility.IncreaseStat(.9, .2);
 					return "You feel a strange tingling in your balls. While they don’t look any different, somehow you know that your seed has grown more powerful, more apt at taking root.";
 				},
 				odds: 1,
-				cond: function() { return player.HasBalls() && player.Balls().fertility.Get() < .9; }
+				cond() { return player.HasBalls() && player.Balls().fertility.Get() < .9; },
 			});
-		}
-		else if(gender == Gender.female && player.FirstVag()) { //female
-			let parse2 : any = {
-				breasts : player.FirstBreastRow().Short()
+		} else if (gender === Gender.female && player.FirstVag()) { // female
+			const parse2: any = {
+				breasts : player.FirstBreastRow().Short(),
 			};
-			let incompleteVagSize = function() {
+			const incompleteVagSize = () => {
 				let changed = false;
-				_.each(player.AllVags(), function(v) {
-					if(v.capacity.Get() < 10) changed = true;
-					if(v.minStretch.Get() < Capacity.loose) changed = true;
-					if(changed) return false; //break
+				_.each(player.AllVags(), (v) => {
+					if (v.capacity.Get() < 10) { changed = true; }
+					if (v.minStretch.Get() < Capacity.loose) { changed = true; }
+					if (changed) { return false; } // break
 				});
 				return changed;
 			};
-			let incompleteBreastSize = function() {
+			const incompleteBreastSize = () => {
 				let changed = false;
-				_.each(player.AllBreastRows(), function(b) {
-					if(b.size.Get() < 10) changed = true;
-					if(changed) return false; //break
+				_.each(player.AllBreastRows(), (b) => {
+					if (b.size.Get() < 10) { changed = true; }
+					if (changed) { return false; } // break
 				});
 				return changed;
 			};
-			let incompleteNipSize = function() {
+			const incompleteNipSize = () => {
 				let changed = false;
-				_.each(player.AllBreastRows(), function(b) {
-					if(b.nippleThickness.Get() < 2) changed = true;
-					if(b.nippleLength.Get() < 2) changed = true;
-					if(changed) return false; //break
+				_.each(player.AllBreastRows(), (b) => {
+					if (b.nippleThickness.Get() < 2) { changed = true; }
+					if (b.nippleLength.Get() < 2) { changed = true; }
+					if (changed) { return false; } // break
 				});
 				return changed;
 			};
-			
+
 			func({
-				tf: function() {
-					_.each(player.AllVags(), function(v) {
+				tf() {
+					_.each(player.AllVags(), (v) => {
 						v.capacity.IncreaseStat(10, 2);
 						v.minStretch.IncreaseStat(Capacity.loose, 1);
 					});
 					return "Feeling the last of the tingles fade in your groin, you examine yourself. While there is no outward change, a discreet check reveals that your snatch has deepened, becoming more elastic and better able to stretch.";
 				},
 				odds: 1,
-				cond: function() { return incompleteVagSize(); }
+				cond() { return incompleteVagSize(); },
 			});
 			func({
-				tf: function() {
+				tf() {
 					player.body.torso.hipSize.IncreaseStat(14, 3);
 					return "Your stance… it’s shifted. The change is slight but perceptible, changing your figure to be more motherly, giving you some much-needed room to fit things between your legs, regardless of whether they’re going in or coming out.";
 				},
 				odds: 1,
-				cond: function() { return player.body.torso.hipSize.Get() < 14; }
+				cond() { return player.body.torso.hipSize.Get() < 14; },
 			});
 			func({
-				tf: function() {
-					_.each(player.AllBreastRows(), function(b) {
-						if(b.Size() < 2) {
+				tf() {
+					_.each(player.AllBreastRows(), (b) => {
+						if (b.Size() < 2) {
 							b.size.IncreaseStat(4, 100);
 							return "A new weight on your chest draws your attention, and you swallow hard. Two small mounds sit upon your chest, the beginning of full, grand breasts…";
-						}
-						else {
+						} else {
 							b.size.IncreaseStat(10, 2);
 							return Text.Parse("An increased weight on your chest prompts you to peer down at your [breasts]. They’ve gotten fuller, firmer, more shapely - just like you had in the fantasy…", parse2);
 						}
 					});
 				},
 				odds: 1,
-				cond: function() { return incompleteBreastSize(); }
+				cond() { return incompleteBreastSize(); },
 			});
 			func({
-				tf: function() {
-					_.each(player.AllBreastRows(), function(b) {
+				tf() {
+					_.each(player.AllBreastRows(), (b) => {
 						player.FirstBreastRow().nippleThickness.IncreaseStat(2, .5);
 						player.FirstBreastRow().nippleLength.IncreaseStat(2, .5);
 					});
 					return "Your nipples tingle, stiff and erect - no, they’re not stiff, but instead have gotten bigger and perkier. Not by much, perhaps, but still all the better for suckling, tweaking and teasing.";
 				},
 				odds: 1,
-				cond: function() { return incompleteNipSize(); }
+				cond() { return incompleteNipSize(); },
 			});
 			func({
-				tf: function() {
-					let ret = player.Lactation();
+				tf() {
+					const ret = player.Lactation();
 					player.lactHandler.lactating = true;
 					player.lactHandler.FillMilk(1);
 					player.lactHandler.milkProduction.IncreaseStat(5, 1);
 					player.lactHandler.lactationRate.IncreaseStat(10, 1);
-					
-					if(ret) {
+
+					if (ret) {
 						return Text.Parse("Your milky [breasts] feel fuller and heavier than before, more tender to the touch as they increase in both production and capacity.", parse2);
-					}
-					else {
+					} else {
 						return Text.Parse("Your [breasts] tingle, a delicate sensation that starts from just behind your nipples. Prodding gently as you examine them, you blink in surprise as a bead of milk wells up on one nipple. Seems like you’ve started lactating.", parse2);
 					}
 				},
 				odds: 1,
-				cond: function() { return true; }
+				cond() { return true; },
 			});
 			func({
-				tf: function() {
+				tf() {
 					player.pregHandler.fertility.IncreaseStat(.9, .2, true);
 					return "You squirm, trying to hold back the sudden desire for cum that flares up inside you. More receptive to seed than before, your womb makes it known that it wants to be nice and full with a growing child to occupy it.";
 				},
 				odds: 1,
-				cond: function() { return true; }
+				cond() { return true; },
 			});
 			func({
-				tf: function() {
-					if(player.PregHandler().IsPregnant({slot: PregnancyHandler.Slot.Vag})) {
+				tf() {
+					if (player.PregHandler().IsPregnant({slot: PregnancyHandler.Slot.Vag})) {
 						player.PregHandler().Womb({slot: PregnancyHandler.Slot.Vag}).litterSize++;
 						return "Your baby bump is considerably bigger than it was before, the extra weight in your womb noticeable. In fact, it looks like you could fit another child in there!";
-					}
-					else {
+					} else {
 						player.PregHandler().Impregnate({
 							slot: PregnancyHandler.Slot.Vag,
 							mother: player,
 							father: gryphons,
 							race: Race.Gryphon,
 							num: 3,
-							time: 25*24,
-							force: true
+							time: 25 * 24,
+							force: true,
 						});
 						return "As you examine your midriff, a palpable wave of warmth and contentment ripples through your lower belly, spreading out into the rest of your body. There’s no apparent change, but you have an uneasy feeling…";
 					}
 				},
-				odds: preg*2,
-				cond: function() { return !incompleteGryphonTF() && preg > 0; }
+				odds: preg * 2,
+				cond() { return !incompleteGryphonTF() && preg > 0; },
 			});
 		}
-		
-		let text : string[] = [];
-		_.times(_.random(1, 4), function() {
+
+		const text: string[] = [];
+		_.times(_.random(1, 4), () => {
 			text.push(scenes.Get());
 		});
-		
-		if(TFapplied) {
-			_.each(text, function(t) {
-				if(t) {
+
+		if (TFapplied) {
+			_.each(text, (t) => {
+				if (t) {
 					Text.Add(t, parse);
 					Text.NL();
 				}
 			});
-		}
-		else {
+		} else {
 			Text.Add("Huh. You thought you’d changed, but after a thorough examination, it seems like you’re still your old self. It must be the disorienting effect of the mirror magic playing tricks on your mind…", parse);
 			Text.NL();
 		}
-		
+
 		Text.Add("Stretching your stiff limbs, you work the kinks out of your joints until you feel like you’re ready to head out into the real world once more. While you can’t have been out there for more than half an hour, it feels like much, much longer. Dressing yourself, you push open the door and leave the closet.", parse);
 		Text.Flush();
-		
-		Gui.NextPrompt(function() {
+
+		Gui.NextPrompt(() => {
 			TimeStep({hour: 3});
 			LucilleScenes.WhoreAftermath(null, gryphons.Cost());
 		});
 	}
 
-	//Chapter one - World’s Edge
+	// Chapter one - World’s Edge
 	export function WorldsEdge() {
-		let parse : any = {
-			
+		const parse: any = {
+
 		};
-		
+
 		Text.Clear();
 		Text.Add("The first thing that strikes you about your new surroundings is the air, crisp and fresh in your lungs, chilly and heavy as it runs through your fur and feathers. Gone are the stuffy confines of the room; instead, a vast expanse lies before you, land and sky stretching out in all directions. Mighty cliffs and crags thrust themselves out of the ground, snow-capped peaks rising up against the greenery of the lowlands.", parse);
 		Text.NL();
@@ -592,8 +578,8 @@ export namespace GryphonsScenes {
 		Text.NL();
 		Text.Add("A mate.", parse);
 		Text.Flush();
-		
-		Gui.NextPrompt(function() {
+
+		Gui.NextPrompt(() => {
 			Text.Clear();
 			Text.Add("It has been four days since you caught her scent in the wind, two since you determined the direction of its origin. As you once stalked raiders, now you stalk your prey; you have yet to lay eyes on her, but the sweet, musky scent tells you all you need to know. Young, fertile, and most importantly, unclaimed by another male. The hows and whys are anyone’s guess - although there are now many more lone gryphons since the fall of the tribes - but the fact that she exists is enough to drive you on with a dogged single-mindedness.", parse);
 			Text.NL();
@@ -607,8 +593,8 @@ export namespace GryphonsScenes {
 			Text.NL();
 			Text.Add("Over roots and under branches. Through the trees and out by the river. As the sun begins to sink towards the horizon, numerous glowbugs emerge from their hiding places near the water’s edge, lighting your way; your fatigue is forgotten as you follow the mysterious musk, blown downstream by the river’s movements. Hanging vines and woody lianas block your path, but they are a minor nuisance compared to your recent tribulations. Nevertheless, you offer up a short murmured prayer to the Sky Mother. The patron spirit of your kind is notoriously silent, but it can’t hurt to hope that she’s actually listening at the moment.", parse);
 			Text.Flush();
-			
-			Gui.NextPrompt(function() {
+
+			Gui.NextPrompt(() => {
 				Text.Clear();
 				Text.Add("How long have you traveled now? The sky is dark, the sun’s brilliance replaced by the moon’s softer light, and the river is beginning to narrow as one approaches the end of the valley. Your feet begin to ache, and you’re tempted to make camp for the night and get some much-needed rest.", parse);
 				Text.NL();
@@ -628,12 +614,12 @@ export namespace GryphonsScenes {
 				Text.NL();
 				Text.Add("So be it. If necessary, you will give the accounting of your life to the Sky Mother at its end, and only she may judge you. Thusly resolved, you decide on the best approach to move in for the kill.", parse);
 				Text.Flush();
-				
-				//[Undergrowth][Waterfall][Sky]
-				let options = new Array();
+
+				// [Undergrowth][Waterfall][Sky]
+				const options = new Array();
 				options.push({ nameStr : "Undergrowth",
 					tooltip : "Move from the cover of vegetation, and strike when the time is right.",
-					func : function() {
+					func() {
 						Text.Clear();
 						Text.Add("Yes… yes. That could work. The undergrowth is thick and will cover your approach; even after you leave the tree-line, reeds and rushes grow tall and thick, more than enough to hide your person. With the waterfall masking your scent, you will remain hidden so long as she does not catch sight of you.", parse);
 						Text.NL();
@@ -646,11 +632,11 @@ export namespace GryphonsScenes {
 						Text.Add("She should have trusted her instincts. By the time she notices you, it is far too late - you have your hands on your prey’s shoulders and are pressing down on her with your weight.", parse);
 						Text.NL();
 						GryphonsScenes.WorldsEdgeCaught();
-					}, enabled : true
+					}, enabled : true,
 				});
 				options.push({ nameStr : "Waterfall",
 					tooltip : "Circle around to the water’s source and take the initiative from high ground.",
-					func : function() {
+					func() {
 						Text.Clear();
 						Text.Add("You decide that a frontal approach is too risky and that it would be better to strike from where she thinks it’s safe. The cliff that the waterfall careens down may be high, but that means little to one capable of flight. Withdrawing from the water’s edge, you skirt around the clearing, making for the rise in the land; you don’t have to get up very high, just high enough to avoid notice. Ignoring the protests of your aching muscles, you dig your talons into the limestone wall and begin to climb.", parse);
 						Text.NL();
@@ -663,11 +649,11 @@ export namespace GryphonsScenes {
 						Text.Add("Droplets of water spatter against your body as you cross the stream, become one with the roar of froth and foam in your descent. She notices the sudden thinning of the water’s flow, looks up wide-eyed - but it is far too late for her to escape. Already, you’ve turned your landing into a roll, roughly hooking one arm about her waist and throwing her off-balance, pinning her down with weight and muscle alike.", parse);
 						Text.NL();
 						GryphonsScenes.WorldsEdgeCaught();
-					}, enabled : true
+					}, enabled : true,
 				});
 				options.push({ nameStr : "Sky",
 					tooltip : "Soar high and dive for the pool, making the most of speed and surprise.",
-					func : function() {
+					func() {
 						Text.Clear();
 						Text.Add("Looking around, you can’t find a path to your prey that you feel would adequately conceal your approach. While it is true that you are experienced in stalking and stealth, it will never do to underestimate your quarry, not when the crux of your plans hinges on your success here. If you fail here, who knows if you will ever be allowed a second chance, let alone one as wondrous as this…", parse);
 						Text.NL();
@@ -692,7 +678,7 @@ export namespace GryphonsScenes {
 						Text.Add("- Slowing just enough to catch her from under her arms and carry her aloft, letting your combined weight slow your landing. She shrieks in surprise and anger, a spray of cool water rising from the impact, the two of you skim the water’s surface before coming to an undignified stop amongst the lakeshore reeds. Before she can recover, you are upon her, pressing down upon her form with yours.", parse);
 						Text.NL();
 						GryphonsScenes.WorldsEdgeCaught();
-					}, enabled : true
+					}, enabled : true,
 				});
 				Gui.SetButtonsFromList(options, false, null);
 			});
@@ -700,10 +686,10 @@ export namespace GryphonsScenes {
 	}
 
 	export function WorldsEdgeCaught() {
-		let parse : any = {
-			
+		const parse: any = {
+
 		};
-		
+
 		Text.Add("Her gaze meets yours, and her eyes narrow in fury; she parts her beak to screech, and her enraged cry is beautiful death.", parse);
 		Text.NL();
 		Text.Add("You care for none of that.", parse);
@@ -736,8 +722,8 @@ export namespace GryphonsScenes {
 		Text.NL();
 		Text.Add("Already halfway out of its sheath, your cock throbs and twitches in anticipation; a hard thrust of your hips and its glistening length is fully extruded, glans, knot and all. Your body screams its desire to take her here and now on the bed of stone and mud, to fuck her senseless and fill her womb with your seed, but your father has trained you to be better than that. You’ll want to leave a good first impression, after all, if you’re going to make her want to stick around.", parse);
 		Text.Flush();
-		
-		Gui.NextPrompt(function() {
+
+		Gui.NextPrompt(() => {
 			Text.Clear();
 			Text.Add("A predatory - and perhaps lewd - gleam enters your eye as you inch up her body to straddle her waist with your legs, letting your raging, pre-oozing erection wave in her face, the tip of your glans just above her beak. You lean back a little to present it better to her, then reach down with both hands to gently knead her firm breasts. The full orbs fill your palms and then some; it’s a delight to finally have all that full, warm flesh in your hands and beneath your fingers.", parse);
 			Text.NL();
@@ -753,8 +739,8 @@ export namespace GryphonsScenes {
 			Text.NL();
 			Text.Add("Here, by the roar of the waterfall, in the light of the moon and stars alike, you claim your first mate, your queen, the first step of your grand plan for the future of your people.", parse);
 			Text.Flush();
-			
-			Gui.NextPrompt(function() {
+
+			Gui.NextPrompt(() => {
 				Text.Clear();
 				Text.Add("She whimpers in pain as you take her virginity, then cries out once more as your knot slips past her entrance; the difference between the two only makes hilting her all the more satisfying. With a savage pull of the sort usually reserved for retrieving spearheads from wyvern corpses, you withdraw, then ram into her again, your balls slapping against her delightful asscheeks. Rough and undignified, perhaps, but you’ve never had a mate yourself either, not with all your cousins spoken for. There had been talk of an exchange between tribes, but… no, that is all past. Forget it.", parse);
 				Text.NL();
@@ -782,8 +768,8 @@ export namespace GryphonsScenes {
 				Text.NL();
 				Text.Add("There will be tomorrow to deal with, but that can wait.", parse);
 				Text.Flush();
-				
-				Gui.NextPrompt(function() {
+
+				Gui.NextPrompt(() => {
 					Text.Clear();
 					Text.Add("Daylight beckons.", parse);
 					Text.NL();
@@ -795,76 +781,76 @@ export namespace GryphonsScenes {
 					Text.NL();
 					Text.Add("Well, time to try and introduce yourself properly…", parse);
 					Text.Flush();
-					
+
 					GryphonsScenes.WorldsEdgeQuestions({});
 				});
 			});
 		});
 	}
 
-	export function WorldsEdgeQuestions(opts : any) {
-		let parse : any = {
-			
+	export function WorldsEdgeQuestions(opts: any) {
+		const parse: any = {
+
 		};
-		
-		//[Name][Others][Land]
-		let options = new Array();
-		if(!opts.Name) {
+
+		// [Name][Others][Land]
+		const options = new Array();
+		if (!opts.Name) {
 			options.push({ nameStr : "Name",
 				tooltip : "What’s her name?",
-				func : function() {
+				func() {
 					opts.Name = true;
-					
+
 					Text.Clear();
 					Text.Add("She looks up blankly at your question, eyes as wide and inquiring as before, but makes no sound. You repeat your question again, slower this time, but she remains as silent as before.", parse);
 					Text.NL();
 					Text.Add("Does she have no name? That’s not right… does she even understand what a name is?", parse);
 					Text.Flush();
-					
+
 					GryphonsScenes.WorldsEdgeQuestions(opts);
-				}, enabled : true
+				}, enabled : true,
 			});
 		}
-		if(!opts.Others) {
+		if (!opts.Others) {
 			options.push({ nameStr : "Others",
 				tooltip : "Are there any other gryphons in this valley?",
-				func : function() {
+				func() {
 					opts.Others = true;
-					
+
 					Text.Clear();
 					Text.Add("She furrows her brow at your question, then shakes her head. What’s that supposed to mean? That there aren’t any others of your kind here in the valley, or that she doesn’t understand your words?", parse);
 					Text.Flush();
-					
+
 					GryphonsScenes.WorldsEdgeQuestions(opts);
-				}, enabled : true
+				}, enabled : true,
 			});
 		}
-		if(!opts.Land) {
+		if (!opts.Land) {
 			options.push({ nameStr : "Land",
 				tooltip : "Is this her land? Her territory?",
-				func : function() {
+				func() {
 					opts.Land = true;
-					
+
 					Text.Clear();
 					Text.Add("This seems to spark some recognition in her at least. She nods, then spreads an arm towards the pool and trees before lowering the gesture and gazing at you curiously. It’s more than you expected, perhaps, but still awfully vague. Why the reluctance to say anything?", parse);
 					Text.Flush();
-					
+
 					GryphonsScenes.WorldsEdgeQuestions(opts);
-				}, enabled : true
+				}, enabled : true,
 			});
 		}
-		if(options.length > 0)
+		if (options.length > 0) {
 			Gui.SetButtonsFromList(options, false, null);
-		else {
+		} else {
 			Gui.NextPrompt(GryphonsScenes.WorldsEdgeSexytimes);
 		}
 	}
 
 	export function WorldsEdgeSexytimes() {
-		let parse : any = {
-			
+		const parse: any = {
+
 		};
-		
+
 		Text.Clear();
 		Text.Add("A cold knot forms in the pit of your stomach. If she’s so perfectly formed in every way, yet at the very last turns out to be a blank simpleton… doing your best not to let your panic show, you gently take hold of your new mate’s shoulders and ask if she can even speak. She can, right? You <i>heard</i> her last night!", parse);
 		Text.NL();
@@ -912,8 +898,8 @@ export namespace GryphonsScenes {
 		Text.NL();
 		Text.Add("Well, you note to yourself with a little amusement, that’s probably why she didn’t try to sneak off or kill you in your sleep. Now that the formalities are done with, it’s time to get cleaned up before the sun gets too high.", parse);
 		Text.Flush();
-		
-		Gui.NextPrompt(function() {
+
+		Gui.NextPrompt(() => {
 			Text.Clear();
 			Text.Add("The water is colder than you remember it being, gushing down the cliff and over the rocks before crashing down into the pool. Snowmelt brought in from the peaks, far different from the muddy watering holes of your ancestral lands - the pool is deep, clear and refreshing.", parse);
 			Text.NL();
@@ -959,8 +945,8 @@ export namespace GryphonsScenes {
 			Text.NL();
 			Text.Add("You laugh, a loud, screeching sound that echoes off the waterfall cliff. No, not home. <i>A</i> home. She’ll understand in due time.", parse);
 			Text.Flush();
-			
-			Gui.NextPrompt(function() {
+
+			Gui.NextPrompt(() => {
 				GryphonsScenes.Outro(Gender.male);
 			});
 		});
@@ -968,10 +954,10 @@ export namespace GryphonsScenes {
 
 	// Chapter two - Pasts
 	export function Pasts() {
-		let parse : any = {
-			
+		const parse: any = {
+
 		};
-		
+
 		Text.Clear();
 		Text.Add("In your dream, he is everywhere.", parse);
 		Text.NL();
@@ -1011,8 +997,8 @@ export namespace GryphonsScenes {
 		Text.NL();
 		Text.Add("Ethelberd.", parse);
 		Text.Flush();
-		
-		Gui.NextPrompt(function() {
+
+		Gui.NextPrompt(() => {
 			Text.Clear();
 			Text.Add("You awake to a warm stickiness between your thighs, sweat-soaked fur, and a clear puddle on the ground - this wouldn’t have been so embarrassing if the two of you’d mated the night before, but that isn’t the case. You’ll have to clean it up… and when you get the chance, yourself as well, else he’ll tease you mercilessly over it.", parse);
 			Text.NL();
@@ -1030,8 +1016,8 @@ export namespace GryphonsScenes {
 			Text.NL();
 			Text.Add("Enough daydreaming. You’re getting hungry, and food isn’t going to find itself. Spreading your wings, you leap off the cliff’s edge in one fluid motion, and soar in search of your mate.", parse);
 			Text.Flush();
-			
-			Gui.NextPrompt(function() {
+
+			Gui.NextPrompt(() => {
 				Text.Clear();
 				Text.Add("It’s not hard to catch his scent and let your sense of smell lead you to him. He sits in the stream that flows out from your pool, a glittering ribbon of clear water that stretches away from the waterfall and winds its way through a series of rocky rapids before joining the river proper. You spot the thing he calls a “spear” lying on the stream’s bank - instead of using it to fish, he’s opted to go with nothing but his bare hands; placing his weight on his haunches as he crouches, wings folded flat against his body, he advances on his prey, arms elbow-deep in the shallows.", parse);
 				Text.NL();
@@ -1041,12 +1027,12 @@ export namespace GryphonsScenes {
 				Text.NL();
 				Text.Add("He notices your embarrassment, then rolls his shoulders and clicks his beak at you, his demeanor instantly melting into something that’s far more easygoing and playful. <i>“Wash yourself, Aurora; it simply won’t do for you to be going around like that. Let me handle the food.”</i>", parse);
 				Text.Flush();
-				
-				//[Wash][Help Out]
-				let options = new Array();
+
+				// [Wash][Help Out]
+				const options = new Array();
 				options.push({ nameStr : "Wash",
 					tooltip : "Well, if he’s willing to do all the work, you’ll just enjoy a little soak.",
-					func : function() {
+					func() {
 						Text.Clear();
 						Text.Add("Well, if he’s sure he can handle it by himself, you’ll just stay out of his way and watch.", parse);
 						Text.NL();
@@ -1069,11 +1055,11 @@ export namespace GryphonsScenes {
 						Text.Add("He’s a blur of motion when he moves, droplets of water cascading through the air and glinting in the early morning light as he holds up his latest catch. He tosses it on the bank with a flick of his hand, then strides over to you with a few easy steps and hauls you still dripping out of the water.", parse);
 						Text.NL();
 						GryphonsScenes.PastsWashed();
-					}, enabled : true
+					}, enabled : true,
 				});
 				options.push({ nameStr : "Help Out",
 					tooltip : "It’s not right that he does all the work, and you’re far from helpless. You should see what you can do to help out.",
-					func : function() {
+					func() {
 						Text.Clear();
 						Text.Add("It’s not right that he does all the work, you point out. You can work a little way downstream from him and get cleaned up at the same time. Besides, since you’ve been eating more lately, it’s probably best that the both of you bring in as much as you can, lest you devour it all.", parse);
 						Text.NL();
@@ -1086,7 +1072,7 @@ export namespace GryphonsScenes {
 						Text.Add("He calls out to you, and you see him approaching with his catch - three large trout, each about as long as your forearm. The nod of approval he gives you sets your heart racing, and you haul yourself out of the water to meet him.", parse);
 						Text.NL();
 						GryphonsScenes.PastsWashed();
-					}, enabled : true
+					}, enabled : true,
 				});
 				Gui.SetButtonsFromList(options, false, null);
 			});
@@ -1094,10 +1080,10 @@ export namespace GryphonsScenes {
 	}
 
 	export function PastsWashed() {
-		let parse : any = {
-			
+		const parse: any = {
+
 		};
-		
+
 		Text.Add("<i>“Come on,”</i> he says, shaking water out of his fur and feathers and gathering his spear. <i>“Let’s eat.”</i>", parse);
 		Text.NL();
 		Text.Add("The two of you set yourselves down on the grassy bank a little further inland and set out the catch - one for you, one for him, and the third trout in between the both of you. The taste of fresh blood is always welcome, and it blossoms on your tongue as you rip the head off with a strong, savage twist. The head is always the best part, with fewer scales than the rest of the fish itself. Definitely better than the tail, and the bones have the most delightful texture when you crush them in your beak. Almost as soon as it was in your hands, it’s gone, and you settle down to the rest of the meal at a more leisurely pace.", parse);
@@ -1148,8 +1134,8 @@ export namespace GryphonsScenes {
 		Text.NL();
 		Text.Add("It’s all right, you tell him. You don’t feel unwell at the moment. He studies you for a moment, then pulls you to your feet with a sweeping motion, not too unlike the one he used in your dream. <i>“Lead the way, then.”</i>", parse);
 		Text.Flush();
-		
-		Gui.NextPrompt(function() {
+
+		Gui.NextPrompt(() => {
 			Text.Clear();
 			Text.Add("You don’t go to the grove often. Not because it’s hard to get to - your wings carry you up the sheer cliff to the plateau well enough - but because… you just don’t want to. This high up, without the valley walls to keep moisture in, the air is drier and the grass thinner, waving in the gentle breeze that sweeps in from the clear, cloudless sky.", parse);
 			Text.NL();
@@ -1191,8 +1177,8 @@ export namespace GryphonsScenes {
 			Text.NL();
 			Text.Add("He turns his gaze inwards, taking in the tree’s rough bark, its broad crown and thick roots. Features softening slightly, he lets go of your shoulder - it still stings - and approaches the tree, standing in its shade before bowing his head.", parse);
 			Text.Flush();
-			
-			Gui.NextPrompt(function() {
+
+			Gui.NextPrompt(() => {
 				Text.Clear();
 				Text.Add("The plateau was one of those places where the earth met the sky. It was a boundary, neither the lush verdancy of the valley nor the barren beauty of the peaks, sheltered from the north wind by the crags that lay in that direction, but open to the air otherwise.", parse);
 				Text.NL();
@@ -1210,8 +1196,8 @@ export namespace GryphonsScenes {
 				Text.NL();
 				Text.Add("After all, it was not as if you were going to eat of the harvest that she died trying to keep.", parse);
 				Text.Flush();
-				
-				Gui.NextPrompt(function() {
+
+				Gui.NextPrompt(() => {
 					Text.Clear();
 					Text.Add("<i>“And these trees grew where the fruit fell?”</i> He still doesn’t stir, his head bowed, his breathing shallow.", parse);
 					Text.NL();
@@ -1225,12 +1211,12 @@ export namespace GryphonsScenes {
 					Text.NL();
 					Text.Add("What is he doing?", parse);
 					Text.Flush();
-					
-					//[Ask][Watch]
-					let options = new Array();
+
+					// [Ask][Watch]
+					const options = new Array();
 					options.push({ nameStr : "Ask",
 						tooltip : "Ask him what he’s up to.",
-						func : function() {
+						func() {
 							Text.Clear();
 							Text.Add("Your eyes dart between him and… Mother, the rest of you fidgeting nervously while you try to figure out what to do.", parse);
 							Text.NL();
@@ -1241,11 +1227,11 @@ export namespace GryphonsScenes {
 							Text.Add("There’s nothing for it, you suppose, but to stand back and wait for him to be done.", parse);
 							Text.NL();
 							GryphonsScenes.PastsRemembrance();
-						}, enabled : true
+						}, enabled : true,
 					});
 					options.push({ nameStr : "Watch",
 						tooltip : "There’s something somber about his actions. Words can wait; you should just watch.",
-						func : function() {
+						func() {
 							Text.Clear();
 							Text.Add("Your breath catching in your throat, you step up beside him; he shuffles slightly to one side, making space for you. Usually, you have to force yourself to come here and stand here before the tree, before Mother, but today is different.", parse);
 							Text.NL();
@@ -1254,7 +1240,7 @@ export namespace GryphonsScenes {
 							Text.Add("His head is still down, his beak moving, and you follow suit, feeling an urge to join him. You feel a strange presence that sends tingles running across your fur and feathers - almost like when you’re the recipient of his attention…", parse);
 							Text.NL();
 							GryphonsScenes.PastsRemembrance();
-						}, enabled : true
+						}, enabled : true,
 					});
 					Gui.SetButtonsFromList(options, false, null);
 				});
@@ -1263,10 +1249,10 @@ export namespace GryphonsScenes {
 	}
 
 	export function PastsRemembrance() {
-		let parse : any = {
-			
+		const parse: any = {
+
 		};
-		
+
 		Text.Add("At long last, he raises his eyes and takes your hand, gently leading you away from the tree and back through the ring of greenery.", parse);
 		Text.NL();
 		Text.Add("<i>“I paid my respects. It only seemed appropriate.”</i>", parse);
@@ -1303,8 +1289,8 @@ export namespace GryphonsScenes {
 		Text.NL();
 		Text.Add("He doesn’t bother correcting you. <i>“Let’s go, then.”</i>", parse);
 		Text.Flush();
-		
-		Gui.NextPrompt(function() {
+
+		Gui.NextPrompt(() => {
 			Text.Clear();
 			Text.Add("Time passes…", parse);
 			Text.NL();
@@ -1322,34 +1308,34 @@ export namespace GryphonsScenes {
 			Text.NL();
 			Text.Add("Almost of its own accord, your hand caresses the gentle, firm swell of your belly. Over the last moon or so, the dizzy spells and queasy bouts stopped, and your once sleek midriff began to grow outwards, your breasts turning tender and full. He was suitably pleased when he pronounced that you were going to be a mother, but you yourself feel so… what’s the word for it…", parse);
 			Text.Flush();
-			
-			//[Hot][Content][Worried]
-			let options = new Array();
+
+			// [Hot][Content][Worried]
+			const options = new Array();
 			options.push({ nameStr : "Hot",
 				tooltip : "",
-				func : function() {
+				func() {
 					Text.Clear();
 					Text.Add("Hot, that’s the word you were looking for. Dreamily, you think back to the night that he first came; how he took you, filled you up and made you feel so full. You love the feeling of having life growing inside of you, the faint flutters of movement inside your womb only serving to fuel your delight. You haven’t told him about those - they only started a few nights ago - but imagining your brood stirring inside you only serves to make your heart beat faster while you daydream of growing heavy with child.", parse);
 					Text.NL();
 					Text.Add("A soft moan escapes your beak, and you realize that the fingers that you were caressing your pregnant bump with have found their way into your snatch, pumping in and out as you fantasize about him seeding you over and over again, your belly growing round and ripe with each brood of gryphlets that take root in your womb. Quickly, you stop and hurriedly wipe your slick fingers on the grass before he notices.", parse);
 					Text.NL();
 					GryphonsScenes.PastsSexytimes(2);
-				}, enabled : true
+				}, enabled : true,
 			});
 			options.push({ nameStr : "Content",
 				tooltip : "",
-				func : function() {
+				func() {
 					Text.Clear();
 					Text.Add("Content, that’s the word; you feel so peaceful. The sensation of new lives growing inside of you make you feel calm and relaxed, perhaps even sleepy; you have little doubt that this feeling will only grow with time. He says it’s odd that your belly is getting this big this quickly, that there’s probably more than one in there. Even so, you aren’t worried about the prospect of such; all of this just feels so <i>right</i>, and it keeps any fears you might have had at bay.", parse);
 					Text.NL();
 					Text.Add("He’s here, and he’ll protect you and the brood of gryphlets that’s growing in your womb. That’s all you need to know.", parse);
 					Text.NL();
 					GryphonsScenes.PastsSexytimes(1);
-				}, enabled : true
+				}, enabled : true,
 			});
 			options.push({ nameStr : "Worried",
 				tooltip : "",
-				func : function() {
+				func() {
 					Text.Clear();
 					Text.Add("Worried, that’s the word you were looking for. He’s mentioned that you’re starting to show sooner than expected, whatever that means, and that you’re probably carrying more than one gryphlet. How big are you going to get? Will you get too heavy to fly? You try to imagine your belly big and round like he described, full of growing gryphlets, but no matter how you picture it you always end up looking fat and clumsy…", parse);
 					Text.NL();
@@ -1358,17 +1344,17 @@ export namespace GryphonsScenes {
 					Text.Add("No… he’s here. He’ll guide and teach you, like he has since his arrival. That, at least, is something that you don’t have to worry about, and you feel a little more comforted by the thought.", parse);
 					Text.NL();
 					GryphonsScenes.PastsSexytimes(0);
-				}, enabled : true
+				}, enabled : true,
 			});
 			Gui.SetButtonsFromList(options, false, null);
 		});
 	}
 
-	export function PastsSexytimes(preg : number) {
-		let parse : any = {
-			
+	export function PastsSexytimes(preg: number) {
+		const parse: any = {
+
 		};
-		
+
 		Text.Add("More importantly, though, will you be a good mother? Your memories of Mother are so dim and hazy that you’re not completely sure what you should do other than feeding and cleaning. Maybe it’s for the best that he wants you to help tend the saplings; you’ll have a chance to get used to having to care for something…", parse);
 		Text.NL();
 		Text.Add("You remember Mother, how she always seemed so big to you. Will your own children see you the same way? A towering, protective giantess?", parse);
@@ -1439,12 +1425,12 @@ export namespace GryphonsScenes {
 		Text.NL();
 		Text.Add("Done with your neck, he lifts his head and takes a half-step to your side to better admire you from that angle, tail swaying idly from side to side as his eyes drink in your form. Being examined like this, you can’t help but feel…", parse);
 		Text.Flush();
-		
-		//[Proud][Pleased][Shy]
-		let options = new Array();
+
+		// [Proud][Pleased][Shy]
+		const options = new Array();
 		options.push({ nameStr : "Proud",
 			tooltip : "",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("Proud, proud that you’re going to bear his gryphlets. Meeting his gaze with a playful one of your own, you lean back with hands on your broad hips and push out your belly as far as it’ll go. Does he like what he sees?", parse);
 				Text.NL();
@@ -1453,11 +1439,11 @@ export namespace GryphonsScenes {
 				Text.Add("Yes, this is what you were made for, to be a mate and mother, to be the fertile soil which will bear full, ripe fruit from his seed. He continues to rub, his hand moving closer and closer to your crotch like he did earlier on… hungrily, you push your wet pussy against his hand and half-growl, half-chirp. It doesn’t matter that you’ve already been bred; you want his cock inside you, his seed filling what remaining space in your womb that isn’t already occupied by your gryphlets. The thought of him thoroughly breeding you over and over again only makes the sensation of him teasing your folds all the more luxuriant, until you can’t take it any longer and release a squirt of girl-cum all over his fingers.", parse);
 				Text.NL();
 				GryphonsScenes.PastsSexytimes2(preg);
-			}, enabled : true
+			}, enabled : true,
 		});
 		options.push({ nameStr : "Pleased",
 			tooltip : "",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("Pleased, pleased that he appreciates you. It’s the same sensation of being watched from the very first night he entered your life, but knowing now that his gaze is protective… it makes you feel all warm and good inside. His hand slides up your tail to its base, pausing to grope and squeeze your full, firm buttcheeks one at a time; wanting more, you push into his cupped palm and rub your ass all over his fingers.", parse);
 				Text.NL();
@@ -1468,11 +1454,11 @@ export namespace GryphonsScenes {
 				Text.Add("You sing in pleasure, and it’s only because of the tree you’re leaning against that your knees don’t give way and send you to the ground. Feeling trickles of your girl-cum ooze from your pussy lips and run down his fingers, it takes you a moment for you to be able to think straight again.", parse);
 				Text.NL();
 				GryphonsScenes.PastsSexytimes2(preg);
-			}, enabled : true
+			}, enabled : true,
 		});
 		options.push({ nameStr : "Shy",
 			tooltip : "",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("Shy, shy that he won’t appreciate you the way he did when you were sleek and slender. Sensing your hesitation, he croons deeply and runs a hand down your front, following the contours of your form from your collarbone, through your cleavage, over the bump of your pregnancy and finally stopping just above your snatch.", parse);
 				Text.NL();
@@ -1489,16 +1475,16 @@ export namespace GryphonsScenes {
 				Text.Add("You try to think of something to say, but your thoughts are cut short by his fingers diving into your snatch and coming out wet and glistening.", parse);
 				Text.NL();
 				GryphonsScenes.PastsSexytimes2(preg);
-			}, enabled : true
+			}, enabled : true,
 		});
 		Gui.SetButtonsFromList(options, false, null);
 	}
 
-	export function PastsSexytimes2(preg : number) {
-		let parse : any = {
-			
+	export function PastsSexytimes2(preg: number) {
+		const parse: any = {
+
 		};
-		
+
 		Text.Add("You moan loudly, lewdly; first, when he withdraws his fingers, then again when a wave of pleasure runs upwards from your groin, your inner walls clenching down hard on empty air as they seek something to grasp, to fill you with.", parse);
 		Text.NL();
 		Text.Add("Your arousal isn’t lost on him, either - his body is preparing itself accordingly, the folds of his sheath already parted to reveal his thick, black shaft, already half-erect and getting fuller and stiffer by the second. The tantalizing musk of mating meets your nostrils as he wipes his hand off on your side, smearing your own girl-cum all over your fur.", parse);
@@ -1551,17 +1537,17 @@ export namespace GryphonsScenes {
 		Text.NL();
 		Text.Add("You get the vague feeling that he’s said something important, that you should pay extra attention to his words, but your mind and body just don’t seem to want to play nice with your intentions. Snuggling into his warm embrace, you wrap yourself around him as best as you can and drift off to sleep.", parse);
 		Text.Flush();
-		
-		Gui.NextPrompt(function() {
+
+		Gui.NextPrompt(() => {
 			GryphonsScenes.Outro(Gender.female, preg);
 		});
 	}
 
 	export function Building() {
-		let parse : any = {
-			
+		const parse: any = {
+
 		};
-		
+
 		Text.Clear();
 		Text.Add("The days are growing shorter.", parse);
 		Text.NL();
@@ -1659,8 +1645,8 @@ export namespace GryphonsScenes {
 		Text.NL();
 		Text.Add("<i>“I’ll take that as a yes, then.”</i> You give her a nip on the neck. <i>“Don’t forget to wash yourself off before you head to bed. Clean up well enough, and I might just take you properly.”</i>", parse);
 		Text.Flush();
-		
-		Gui.NextPrompt(function() {
+
+		Gui.NextPrompt(() => {
 			Text.Clear();
 			Text.Add("The next morning dawns, golden light pouring into your valley as the sun shows its face from behind the mountains. Aurora is always a pleasure to wake to, especially with her firm, voluptuous form snuggled in yours - a form that’s only grown more curvaceous with her advancing pregnancy.", parse);
 			Text.NL();
@@ -1670,22 +1656,22 @@ export namespace GryphonsScenes {
 			Text.NL();
 			Text.Add("She murmurs, and you swat her on her furry rump before stepping out into daylight. The days may have shortened, but the list of daily tasks has lengthened - and with Aurora reserving all her energy to grow her gryphlets, an ever greater proportion of the work falls on your shoulders. You look around you - your workbench, tools, even your spear - and feel…", parse);
 			Text.Flush();
-			
-			//[Satisfied][Dissatisfied]
-			let options = new Array();
+
+			// [Satisfied][Dissatisfied]
+			const options = new Array();
 			options.push({ nameStr : "Satisfied",
 				tooltip : "It’s not much, but it’s the best you could do under these circumstances.",
-				func : function() {
+				func() {
 					Text.Clear();
 					Text.Add("Satisfied. Sure, what you have to work with is really crude, but more importantly, it works. Of course, you’re not going to lie to yourself and this is the best you can do, but one step at a time - you’ve got only two pairs of hands to deal with things, and one pair is still learning.", parse);
 					Text.NL();
 					Text.Add("Surveying your handiwork once more, you allow yourself a little chirrup of contentment. Onwards and upwards, as the old saying goes.", parse);
 					Gui.PrintDefaultOptions();
-				}, enabled : true
+				}, enabled : true,
 			});
 			options.push({ nameStr : "Dissatisfied",
 				tooltip : "These are really crude, you ought to have done much better.",
-				func : function() {
+				func() {
 					Text.Clear();
 					Text.Add("Discontent. Yes, you’ve done what you can on your own, without a whole tribe at your back aiding you, but even then you can’t silence the little voice in your head that keeps on telling you more could have been done. What would your father have said if he saw this? Maybe he <i>is</i> looking down at you with as much disapproval as you’re feeling right now…", parse);
 					Text.NL();
@@ -1693,10 +1679,10 @@ export namespace GryphonsScenes {
 					Text.NL();
 					Text.Add("Heavy hangs the head on which the crown lies.", parse);
 					Gui.PrintDefaultOptions();
-				}, enabled : true
+				}, enabled : true,
 			});
-			
-			Gui.Callstack.push(function() {
+
+			Gui.Callstack.push(() => {
 				Text.NL();
 				Text.Add("As you look up from your workbench, though, something catches your eye amidst the golden dawn, and your gaze turns to the sky. Something aloft amongst the wispy clouds, but too large to be simple birds… two of them.", parse);
 				Text.NL();
@@ -1712,12 +1698,12 @@ export namespace GryphonsScenes {
 				Text.NL();
 				Text.Add("Moments pass, and by and large both silhouettes become clearer - furred and feathered like you are. You’re tempted to relax your guard, but the fact that the interlopers are gryphons like you doesn’t necessarily mean there’s less danger to be had. Yes, they’ve clearly caught your scent, and are heading straight for you - you should decide how you want to make your first impressions.", parse);
 				Text.Flush();
-				
-				//[Aggressive][Diplomatic][Thoughtful]
-				let options = new Array();
+
+				// [Aggressive][Diplomatic][Thoughtful]
+				const options = new Array();
 				options.push({ nameStr : "Aggressive",
 					tooltip : "Make it clear that if they’re here to cause trouble, you’re more than willing to fight.",
-					func : function() {
+					func() {
 						Text.Clear();
 						Text.Add("Best to meet the newcomers with a bit of deterrence, then. Planting your feet firmly on the ground, you broaden your stance, ready your spear and watch them close the distance with a stony gaze. Two of them, yes, and with a distinct deep blue color to their fur and plumage - from the northern tribes, then. Unarmed, but that doesn’t have to mean anything. They land on the shelf a little distance away from you, eyes darting between your gaze and the point of your spear.", parse);
 						Text.NL();
@@ -1735,11 +1721,11 @@ export namespace GryphonsScenes {
 						Text.NL();
 						Text.Add("<i>“Good. Maybe now we can talk reasonably.", parse);
 						Gui.PrintDefaultOptions();
-					}, enabled : true
+					}, enabled : true,
 				});
 				options.push({ nameStr : "Diplomatic",
 					tooltip : "Go for a peaceful approach, but make it clear there’s an iron fist in that velvet glove.",
-					func : function() {
+					func() {
 						Text.Clear();
 						Text.Add("They’re gryphons like you, even if from another tribe. Though the tribes have never quite agreed on much for most of their existence, maybe things can be different on a more personal level. At the very least, you think you can give them the benefit of the doubt - until they make a single false move, that is.", parse);
 						Text.NL();
@@ -1755,11 +1741,11 @@ export namespace GryphonsScenes {
 						Text.NL();
 						Text.Add("<i>“I have instructed her to hide until it is certain there is no danger.", parse);
 						Gui.PrintDefaultOptions();
-					}, enabled : true
+					}, enabled : true,
 				});
 				options.push({ nameStr : "Thoughtful",
 					tooltip : "Maybe you can make use of this situation and turn it to your advantage.",
-					func : function() {
+					func() {
 						Text.Clear();
 						Text.Add("They’re gryphons like you are, even if they’re from another tribe - at the very least, they’re not bloodthirsty wyverns out for pillage and territory. While the need for caution doesn’t escape you, there still can be some way you can turn this chance happenstance to your advantage; at the very least, some news of the remaining tribes and their fight against the wyverns would be welcome. Life is idyllic here in the valley, and it would be good to have a reminder of why you’re here in the first place.", parse);
 						Text.NL();
@@ -1781,10 +1767,10 @@ export namespace GryphonsScenes {
 						Text.NL();
 						Text.Add("You shake your head. Oh, you know how that feels well enough, but fleeing? That bears further questioning. <i>“", parse);
 						Gui.PrintDefaultOptions();
-					}, enabled : true
+					}, enabled : true,
 				});
-				
-				Gui.Callstack.push(function() {
+
+				Gui.Callstack.push(() => {
 					Text.Add(" Now, what is your business here? There are not many of our kind at the edge of the world.”</i>", parse);
 					Text.NL();
 					Text.Add("<i>“No, but there will be more in the days to come,”</i> the male replies wearily. <i>“The wyverns grow greedier by the day, as does their queen. With the plains tribes scattered, they have come after us in search of plunder.”</i>", parse);
@@ -1815,27 +1801,27 @@ export namespace GryphonsScenes {
 					Text.NL();
 					Text.Add("Or die trying. This is the edge of the world, after all; there’s nowhere left to run.", parse);
 					Text.Flush();
-					
-					Gui.NextPrompt(function() {
+
+					Gui.NextPrompt(() => {
 						GryphonsScenes.Outro(Gender.male);
 					});
 				});
-				
+
 				Gui.SetButtonsFromList(options, false, null);
-			})
-			
+			});
+
 			Gui.SetButtonsFromList(options, false, null);
 		});
 	}
 
 	export function NewLife() {
-		let player = GAME().player;
-		let parse : any = {
-			
+		const player = GAME().player;
+		const parse: any = {
+
 		};
-		
+
 		let preg = 0;
-		
+
 		Text.Clear();
 		Text.Add("You are so <i>heavy</i>.", parse);
 		Text.NL();
@@ -1849,12 +1835,12 @@ export namespace GryphonsScenes {
 		Text.NL();
 		Text.Add("It’s not going to be long now, you’re sure of that. You can’t help but wonder how holding and caring for a tiny version of you is going to work out.", parse);
 		Text.Flush();
-		
-		//[Fulfilled][Calm][Frustrated]
-		let options = new Array();
+
+		// [Fulfilled][Calm][Frustrated]
+		const options = new Array();
 		options.push({ nameStr : "Fulfilled",
 			tooltip : "",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("Cooing and chirping, you pat the prodigious swell of your pregnancy, and feel the gryphlets within respond to your touch through fur and flesh. Perhaps you should be worried, but you just feel so full, so <i>right</i>. The sense of warm bliss that spreads out from your belly and suffuses the entirety of your being leaves no doubt in your mind that this is your destiny, what you were made for. Good thing, then, that you love it so much; even after the gryphlets have been born, you can’t wait to go through it all over again. Sure, it’s not all good, but it’s so worth it.", parse);
 				Text.NL();
@@ -1863,41 +1849,41 @@ export namespace GryphonsScenes {
 				Text.Add("And of course, the very act which started it all… each time you think back to that night by your pool, you can’t help but fantasize about him, the way he took you by the water’s edge. The sensations of being plowed and bred like that for the first time…", parse);
 				Text.NL();
 				Text.Add("It’s a little while before you realize that your tongue is hanging out of your beak and your fingers wet with your own juices, and you quickly move to clean yourself up. If he catches you like this, he’ll tease you about it to no end… although maybe it isn’t so bad, considering what the teasing almost always ends up in.", parse);
-				
+
 				player.slut.IncreaseStat(75, 1);
 				preg = 2;
-				
+
 				Gui.PrintDefaultOptions();
-			}, enabled : true
+			}, enabled : true,
 		});
 		options.push({ nameStr : "Calm",
 			tooltip : "",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("Sighing, you lean back and close your eyes, wings fluttering a little as you settle down on your side. You’re not lazing around, you’re just… just taking a much needed rest. While being so swollen has had its downsides - you do miss soaring through the skies - it hasn’t been all too bad, either. He’s taken good care of you, you’ve to admit as much; and besides, lying down like this on your side, hands just holding your swollen midriff, you feel at peace.", parse);
 				Text.NL();
 				Text.Add("So at peace, in fact, that when you finally wake up, the sun is much higher in the sky and beats down upon you mercilessly. Oh no… what if he caught you like this? Him teasing you is one thing, but him being disappointed is another, and that’s much worse than the first… your mind reels for a bit until you finally get hold of your mood and thoughts. It’ll be fine. You just have to… just have to…", parse);
-				
+
 				preg = 1;
-				
+
 				Gui.PrintDefaultOptions();
-			}, enabled : true
+			}, enabled : true,
 		});
 		options.push({ nameStr : "Frustrated",
 			tooltip : "",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("Well, at least it’ll be easier to deal with than the condition you’re stuck in right now. Swollen, heavy, unable to fly, always hungry - and while those are the least of your problems, it doesn’t help that they’re practically always there, nudging at the edges of your thoughts. To make it all worse, you’ve been feeling utterly sullen for no good reason at all - he just smacks you on the tush and teases your impotent broodiness, and that just makes it… urgh! You want him, and yet you don’t want him.", parse);
 				Text.NL();
 				Text.Add("Sighing, you reach for your massively milk-swollen breasts and try to knead a little of the tenderness out of them. Unfortunately, all you manage to knead out is a little milk from your engorged nipples, which doesn’t help matters at all.", parse);
 				Text.NL();
 				Text.Add("Ooh… maybe you’ll grow into this, maybe you won’t. In the meantime, though, you need to put aside your frustrations so that you can get this job done. A monumental task - the heavier with gryphlets you become, the wilder your mood swings are - but after a few deep breaths, you think that you might just be able to keep your head on straight until he comes back. It’s always easier to think when he’s around - you don’t understand why, but it just <i>is</i>.", parse);
-				
+
 				Gui.PrintDefaultOptions();
-			}, enabled : true
+			}, enabled : true,
 		});
-		
-		Gui.Callstack.push(function() {
+
+		Gui.Callstack.push(() => {
 			Text.NL();
 			Text.Add("Your thoughts back in order, you’re about to reach for the blade and sharpening stone once more when a sharp jab of pain lances through your lower belly, one unlike anything you’ve ever experienced before. Gasping, you squeeze your eyes shut and begin to pant heavily, cursing the day he made you like this. Maybe you should just endure his teasing and lie down for the rest of the day…", parse);
 			Text.NL();
@@ -1957,8 +1943,8 @@ export namespace GryphonsScenes {
 			Text.NL();
 			Text.Add("With that, he dumps you on the sleeping shelf; you’re too exhausted to protest the rough treatment even if you wanted to, and the last thing you’re aware of before you doze off is him placing the newborn gryphlets by your side to snuggle against your warm body and soft fur.", parse);
 			Text.Flush();
-			
-			Gui.NextPrompt(function() {
+
+			Gui.NextPrompt(() => {
 				Text.Clear();
 				Text.Add("The two of you spend the rest of the day gathering fragrant windflowers. To mask the scent of its blood when he gets around to burning the creature’s corpse, he explains. You help out where you can, insisting that being out in the air and sun will help you recover far better than being cooped up in the darkness. Besides, now that he’s back, you don’t want to be away from his side for a little while.", parse);
 				Text.NL();
@@ -1984,8 +1970,8 @@ export namespace GryphonsScenes {
 				Text.NL();
 				Text.Add("<i>“There’ll be time enough for me to rest when I’m dead. Now get out the tinder.”</i> There’s that face to him when he uses that tone of voice with you, and your body moves to obey unthinkingly almost of its own accord; you set down the gryphlets, make sure they’re comfortable nestled on the grass, then move to fetch the dried moss and bark shavings. Even so, you can’t help but eye him as he digs, piling up shovelful of shovelful of dirt by his side, lean, hard muscles flexing and moving with considerable vigor…", parse);
 				Text.Flush();
-				
-				Gui.NextPrompt(function() {
+
+				Gui.NextPrompt(() => {
 					Text.Clear();
 					Text.Add("<i>“Aurora. Pay attention.”</i>", parse);
 					Text.NL();
@@ -2033,12 +2019,12 @@ export namespace GryphonsScenes {
 					Text.NL();
 					Text.Add("His face is inscrutable, his movements calm and measured. You wonder if he feels otherwise…", parse);
 					Text.Flush();
-					
-					//[Comfort][Hug][Watch]
-					let options = new Array();
+
+					// [Comfort][Hug][Watch]
+					const options = new Array();
 					options.push({ nameStr : "Comfort",
 						tooltip : "Comfort him in the way you know he likes most.",
-						func : function() {
+						func() {
 							Text.Clear();
 							Text.Add("You turn to take one last look at the gryphlets - and let your worries rest once you see them sleeping by the remains of the fire, huddled together in a tight, warm bundle. They’re sleeping very well; now to help your mate do the same.", parse);
 							Text.NL();
@@ -2096,17 +2082,17 @@ export namespace GryphonsScenes {
 							Text.NL();
 							Text.Add("You nod enthusiastically, then snuggle into his warm arms, wanting as much of his steady breathing and the powerful beating of his heart as you can get. Who cares if there is danger to be had, if these horrible leathery-skinned, furless monsters wait beyond the mountains. Together, him and you, you will destroy those who would threaten the sanctity of your valley.", parse);
 							Text.Flush();
-							
+
 							player.slut.IncreaseStat(100, 2);
-							
-							Gui.NextPrompt(function() {
+
+							Gui.NextPrompt(() => {
 								GryphonsScenes.Outro(Gender.female, preg);
 							});
-						}, enabled : true
+						}, enabled : true,
 					});
 					options.push({ nameStr : "Hug",
 						tooltip : "Give him a nice, long hug. Let him know you’re still around.",
-						func : function() {
+						func() {
 							Text.Clear();
 							Text.Add("A soft chirp escapes your beak, followed by a gentle purr in the back of your throat as you step forward and wrap your arms around him in a hug from behind, closing your eyes to better appreciate the scents and sensations of being so close to him. Besides, you know he enjoys your sleek body, too, and want him to appreciate it as much as he wants.", parse);
 							Text.NL();
@@ -2121,13 +2107,13 @@ export namespace GryphonsScenes {
 							Text.Add("While you wouldn’t have minded remaining like this for the rest of the night, he breaks the embrace at last, easing your arms from around him, sliding them across his well-built form as he pulls away from you. There’s much that remains unspoken, but even though he’s the one who’s taught you to speak properly, it’s odd that the longer you’ve been together, the more gets across without the need for words.", parse);
 							Text.NL();
 							Text.Add("Maybe one day you’ll even be able to read him as easily as he reads you.", parse);
-							
+
 							GryphonsScenes.NewLifeHugEnding();
-						}, enabled : true
+						}, enabled : true,
 					});
 					options.push({ nameStr : "Watch",
 						tooltip : "If he doesn’t want to be touched, then you’ll respect that for now…  but you’re here.",
-						func : function() {
+						func() {
 							Text.Clear();
 							Text.Add("Slowly, you shuffle closer to him, settling down on the lush, soft grass at his feet - not quite touching him but nevertheless entering his little circle of personal space, letting him <i>feel</i> your presence. Well, it’s the first time you’ve actually tried doing it on purpose, and it’s a different way from how he does it, but you think you’ve got it all figured out. Chirping softly, you gather the gryphlets into your lap, and the little ones make small, mewling noises as they snuggle into your fur, seeking warmth and comfort.", parse);
 							Text.NL();
@@ -2144,23 +2130,23 @@ export namespace GryphonsScenes {
 							Text.Add("Worrying about it won’t help any. He’s done all he can.", parse);
 							Text.NL();
 							Text.Add("<i>“I’ve tried at every point, every place I could make a difference, but it’s so hard…”</i> ", parse);
-							
+
 							GryphonsScenes.NewLifeHugEnding();
-						}, enabled : true
+						}, enabled : true,
 					});
 					Gui.SetButtonsFromList(options, false, null);
 				});
 			});
 		});
-		
+
 		Gui.SetButtonsFromList(options, false, null);
 	}
 
 	export function NewLifeHugEnding() {
-		let parse : any = {
-			
+		const parse: any = {
+
 		};
-		
+
 		Text.NL();
 		Text.Add("With a definite reluctance, he pulls away from you and sprawls out on the grass. <i>“It’s too late to get back home. We should be safe here; getting some sleep is probably a good idea. Today’s been a long day, and tomorrow will be even longer.”</i>", parse);
 		Text.NL();
@@ -2176,8 +2162,8 @@ export namespace GryphonsScenes {
 		Text.NL();
 		Text.Add("Before you know it, you’ve drifted off into darkness, the last thing on your mind his hands in your fur and feathers.", parse);
 		Text.Flush();
-		
-		Gui.NextPrompt(function() {
+
+		Gui.NextPrompt(() => {
 			GryphonsScenes.Outro(Gender.female, 0);
 		});
 	}

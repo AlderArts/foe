@@ -76,7 +76,7 @@ export class Scorpion extends Entity {
 		this.RestFull();
 	}
 
-	public DropTable = function() {
+	public DropTable = () => {
 		const drops = [];
 		if (Math.random() < 0.05) { drops.push({ it: AlchemyItems.Scorpius }); }
 		if (Math.random() < 0.5) {  drops.push({ it: IngredientItems.Stinger }); }
@@ -96,7 +96,7 @@ export class Scorpion extends Entity {
 		if (Math.random() < 0.01) { drops.push({ it: AlchemyItems.Lacertium }); }
 		if (Math.random() < 0.01) { drops.push({ it: AlchemySpecial.Nagazm }); }
 		return drops;
-	};
+	}
 
 	public Act(encounter: any, activeChar: any) {
 		// TODO: Very TEMP
@@ -117,17 +117,16 @@ export class Scorpion extends Entity {
 			Abilities.Attack.Use(encounter, this, t);
 		} else if (choice < 0.7 && Abilities.EnemySkill.Sting.enabledCondition(encounter, this)) {
 			Abilities.EnemySkill.Sting.Use(encounter, this, t);
- } else if (choice < 0.9 && Abilities.Seduction.Distract.enabledCondition(encounter, this)) {
+ 		} else if (choice < 0.9 && Abilities.Seduction.Distract.enabledCondition(encounter, this)) {
 			Abilities.Seduction.Distract.Use(encounter, this, t);
- } else {
+ 		} else {
 			Abilities.Seduction.Tease.Use(encounter, this, t);
- }
+ 		}
 	}
-
 }
 
 // FEMALE ENCOUNTER
-ScorpionScenes.LoneEnc = function() {
+ScorpionScenes.LoneEnc = () => {
 	const enemy    = new Party();
 	enemy.AddMember(new Scorpion());
 	const enc      = new Encounter(enemy);

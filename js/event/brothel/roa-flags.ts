@@ -2,7 +2,7 @@ export namespace RoaFlags {
     export enum Met {
         NotMet = 0,
         Met    = 1,
-        Sexed  = 2
+        Sexed  = 2,
     }
 
     export enum Lagon {
@@ -10,6 +10,6 @@ export namespace RoaFlags {
         Talked    = 1,
         Defeated  = 2,
         Restored  = 3,
-        SidedWith = 4
+        SidedWith = 4,
     }
 }

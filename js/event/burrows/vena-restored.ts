@@ -1,23 +1,23 @@
 import { EncounterTable } from "../../encountertable";
-import { Text } from "../../text";
-import { TimeStep, GAME } from "../../GAME";
+import { GAME, TimeStep } from "../../GAME";
 import { Gui } from "../../gui";
-import { VenaFlags } from "./vena-flags";
+import { Text } from "../../text";
 import { LagonDScenes } from "./lagon-defeated";
+import { VenaFlags } from "./vena-flags";
 
 export namespace VenaRScenes {
 
 	export function Approach() {
-		let player = GAME().player;
-		let parse : any = {
-			playername : player.name
+		const player = GAME().player;
+		const parse: any = {
+			playername : player.name,
 		};
-		
+
 		Text.Clear();
-		
-		let scenes = new EncounterTable();
-		
-		scenes.AddEnc(function() {
+
+		const scenes = new EncounterTable();
+
+		scenes.AddEnc(() => {
 			Text.Add("Vena is currently on her knees in front of her throne, with two of her many sons standing before her. Even from your angle, it is easy to see that the lucky lapins are receiving an enthusiastic blowjob from their mother. Vena alternates between each throbbing cock with blatant appreciation, sometimes even sucking on both dicks at the same time.", parse);
 			Text.NL();
 			Text.Add("As you step closer, Vena stops her ministrations to look at you. As soon as she recognizes you, she smiles. <i>“Hello, [playername],”</i> she says, beaming as she wipes a strand of pre from her lips and waving at you.", parse);
@@ -29,8 +29,8 @@ export namespace VenaRScenes {
 			Text.Add("At this, the bunnies dart away in the direction of the Pit, each of them casting you an envious glare as they pass by.", parse);
 			Text.NL();
 			Text.Add("<i>“So, what can I do for you, champion?”</i> she asks, sitting on her throne and crossing her legs.", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("Vena is seated upon her husband’s former throne, moaning softly in pleasure. The shriller cries are coming from one of the matriarch’s daughters, who is seated firmly in her mother’s lap. With the way Vena’s legs are spread, you can easily make out that the daughter has Vena’s mammoth girl-dick buried almost to the hilt inside of her, stretching her out as she enthusiastically bucks and leaps upon it.", parse);
 			Text.NL();
 			Text.Add("Vena soon spots you, and moves down to grab her daughter’s hips, lifting her off her cock while the smaller lapin squeals in protest.", parse);
@@ -40,8 +40,8 @@ export namespace VenaRScenes {
 			Text.Add("The younger rabbit passes by you as she makes her way towards the Pit, giving you an envious glare as she passes by. You note a slight limp in her steps as she goes.", parse);
 			Text.NL();
 			Text.Add("<i>“So, what can I do for you, champion?”</i> Vena asks with a smile, wiping her cock clean with a rag and crossing her legs.", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("Eyes half-closed and a blissful smile stretched across her face, Vena is leaning back in her throne. Tucked into the crook of either arm is a healthy baby lagomorph busily suckling at her huge milky breasts.", parse);
 			Text.NL();
 			Text.Add("Vena spots you and motions for you to get closer. Then she does the same for one of her daughters nearby.", parse);
@@ -49,20 +49,20 @@ export namespace VenaRScenes {
 			Text.Add("The lapin approaches her mother and takes the infant lapins, replacing her mother breastfeeding them. After a brief moment to assure they’re comfy, she leaves with her little siblings in hand.", parse);
 			Text.NL();
 			Text.Add("<i>“Hello, champion. What can I do for you?”</i> she asks, crossing her legs.", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("Seated almost imperiously upon her throne, Vena sprawls back with a satisfied grin on her face. Not unrelated, two of her vast brood of daughters are currently on their knees before her, working together to eagerly polish her massive, still half-flaccid maleness with their tongues and breasts.", parse);
 			Text.NL();
 			Text.Add("As soon as she spots you, however, she has her daughters move away. Both lagomorphs look at you as if you had just pooped their party, then run past you to join their siblings in the Pit.", parse);
 			Text.NL();
 			Text.Add("<i>“Hello, champion. What brings you here?”</i> Vena asks with a smile. The head of her cock glistens invitingly toward you, but you shake off your distraction.", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("Grunts and soft moans of pleasure fill your ears as you enter the throne room. The amazonian matriarch is squatting on her throne, head thrown back and eyes screwed shut in rapture as she bounces up and down. The form of the lucky son - or daughter - buried inside her cunt is completely smothered beneath her bountiful physique, only their legs jutting out from beneath her swollen balls betraying their presence.", parse);
 			Text.NL();
 			Text.Add("As soon as Vena spots you, though, she lifts off her child’s shaft and whispers something in their ear. The lagomorph nods and dashes past you to join their brothers and sisters in the Pit. By the time you turn to look back at Vena, she’s already sitting at her throne, cross-legged. <i>“Sorry about that. Anything I can do for you, champion?”</i>", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("Vena is leaning back in her throne, shifted slightly to sprawl over one arm and rest on her hip. One leg is lifted into the air, allowing one of the lapin’s many progeny to shift her titanic hermhood out of the way and eat out her pussy. They seem to be doing a pretty good job of it, looking at the rapturous expression on Vena’s face.", parse);
 			Text.NL();
 			Text.Add("One long ear twitches at the sound of your entrance, prompting a pleasure-glazed eye to open. Vena stares at you blindly for a few moments, and then blinks, the wits returning to her expression. With a gentle yet authoritative push, she sends her child staggering slightly back, allowing her to fold her legs back together and shift into a properly upright position.", parse);
@@ -70,8 +70,8 @@ export namespace VenaRScenes {
 			Text.Add("<i>“I’m sorry, dearie, but mommy needs to speak to the champion. Why don’t you go and play with one of your sisters in the Pit?”</i> she suggests, petting her offspring gently on their head in consolement.", parse);
 			Text.NL();
 			Text.Add("The rabbit shoots you a rather envious glance, but nods and sprints off. As their little white tail vanishes into the gloom, Vena smiles at you proudly. <i>“Welcome, champion. What may I do for you?”</i>", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("Vena is currently kneeling on the floor in front of her throne, being busily spit roasted by two of her offspring. One lucky lapin is nearly obscured by his - or maybe her - mother’s generous ass, thrusting away as if their life depends upon it. The other stands at Vena’s front, where she shamelessly gobbles down their dick.", parse);
 			Text.NL();
 			Text.Add("As Vena begins sliding back along her offspring’s cock, you enter her view. Her eyes light up and she keeps on withdrawing, popping wetly free of the rabbit dick and leaving strings of saliva behind to link it to her mouth. These break as she smiles, ignoring the disappointed squeak of her child.", parse);
@@ -85,15 +85,15 @@ export namespace VenaRScenes {
 			Text.Add("An excited squeal greets her words, and Vena’s second child darts out into view - it’s one of the herms you helped Ophelia create. Vena’s son lets out a nervous squeak and turns to flee, but is caught by his sister as she gleefully springs forward. The two siblings tumble over each other into a corner, each giggling playfully as they start to tussle to decide who gets to fuck who.", parse);
 			Text.NL();
 			Text.Add("Vena watches this display with a doting smile. <i>“Such loving siblings, aren’t they?”</i> she notes proudly, before settling herself back down upon her throne. Casually ignoring the sounds of her children fornicating, she smiles at you. <i>“Now then, what can I do for you?”</i>", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("Vena has one of her children in her lap as you enter. It takes a few moments to sort things out, but you realize that the lagomorph is standing in their huge mother’s lap, avidly humping away at her huge tits. Vena’s hands squeeze the expanses of breastflesh, a lustfully maternal smile on her face as she does her best to manipulate the flowing boobage around her offspring’s member. Her own cock throbs as it rests against her spawn’s backside, matting their tail in her pre-cum.", parse);
 			Text.NL();
 			Text.Add("The matriarch spots you and smiles happily, waving a hand in greeting before leaning forward and whispering something in her child’s ear. Reluctantly, the lapin, one of her many sons, stops his thrusting and then clambers down from Vena’s lap. Pouting, he wanders off in the direction of the Pit.", parse);
 			Text.NL();
 			Text.Add("<i>“It’s always good to see you here, [playername]; how may I help?”</i> Vena asks politely.", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("The hulking yet feminine form of Vena is practically overflowing out of her throne, one of her many daughters swept up in her arms. Such is the size difference that it looks sweet, rather than comical... well, completely comical. Somewhat less sweet is the fact Vena is patiently licking long ropes of semen from her daughter’s face, the flaccid and still dripping cock hanging over the throne’s seat suggesting where it came from.", parse);
 			Text.NL();
 			Text.Add("The lapin matriarch catches your eye as she slurps along her daughter’s chin, her expression clearly asking you to give her a minute. With a few more deft strokes of her tongue, she deems her daughter’s face sufficiently clean, smacking her lips appreciatively before helping her down out of the throne.", parse);
@@ -101,8 +101,8 @@ export namespace VenaRScenes {
 			Text.Add("<i>“There we are, sweetheart. Mommy is very impressed; you’re a wonderful little cocksucker, your brothers will be so happy with you!”</i> she chortles. <i>“Now, run along and play; mommy and the champion need to talk.”</i>", parse);
 			Text.NL();
 			Text.Add("The bunny nods her head with a pleased giggle and scurries away, whereupon Vena beckons you closer. <i>“Thank you for your patience, [playername]. Now, was there something I could help you with?”</i>", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("Vena is seated upon her throne, legs spread so that the full impressiveness of her pillar-like priapus can be easily seen. One of her countless sons is standing before her with the air of a priest before his altar, lavishing worshipful praise upon his mother’s endowment with hands and lips. His hips buck occasionally, stroking his own impressive, if substantially smaller, prick against his mother’s.", parse);
 			Text.NL();
 			Text.Add("The matriarch of the Burrows moans appreciatively as her son’s lips close demurely around her glans, nursing the fat river of pre-cum flowing from it. She stretches out a hand and pets his hair gently.", parse);
@@ -110,8 +110,8 @@ export namespace VenaRScenes {
 			Text.Add("<i>“Oh, yes, you’re doing wonderful... but mommy has to talk to [playername] now, so why don’t you run along to the Pit and show your brothers and sisters what you’ve been practicing?”</i>", parse);
 			Text.NL();
 			Text.Add("The lagomorph seems a little reluctant, but he looks up at his mother and nods his agreement before scampering away. Vena watches him go with a maternal smile, idly stroking the spot on her cock where her son was kissing her. She directs her inquisitive gaze to you, clearly waiting to hear what you wanted.", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("For once, Vena is seated alone upon her husband’s former throne, with none of her children-subjects in personal attendance. Instead, all of her attention is fixated upon a long, thick carrot she is holding in her hands. It’s a good quality orange one from some farmer’s yard, too, not one of those scrawny purple-black wild-ones, either.", parse);
 			Text.NL();
 			Text.Add("Vena certainly seems to recognize it as something to savor. Her eyes are closed in rapture as she runs her tongue along it in smooth, sensual strokes, polishing its surface with spit until it gleams in the dim light of the warren. Opening her mouth, she slowly swallows it halfway down, moaning in delight around the orifice-stretching object.", parse);
@@ -119,31 +119,31 @@ export namespace VenaRScenes {
 			Text.Add("She pushes it deeper and deeper, until it seems like the whole six or so inches is about to disappear down her gullet, then withdraws it with a sigh. Smacking her lips, she opens her eyes absently.", parse);
 			Text.NL();
 			Text.Add("When she spots you, her eyes open wider and smiles. <i>“Oh! Why, hello, [playername]. Excuse me, I was just about to enjoy a snack. Is there something that you wanted?”</i>", parse);
-		}, 1.0, function() { return true; });
-		
+		}, 1.0, () => true);
+
 		scenes.Get();
-		
+
 		Text.Flush();
-		
+
 		VenaRScenes.Prompt();
 	}
 
 	export function Prompt() {
-		let vena = GAME().vena;
-		let parse : any = {
-			
+		const vena = GAME().vena;
+		const parse: any = {
+
 		};
-		
-		let options = [];
-		
-		let judged = vena.flags["Met"] & VenaFlags.Met.Judgement;
-		if(!judged) {
+
+		const options = [];
+
+		const judged = vena.flags.Met & VenaFlags.Met.Judgement;
+		if (!judged) {
 			options.push({nameStr : "Lagon’s fate",
 				tooltip : Text.Parse("You want to talk about what’s going to happen to Lagon.", parse),
 				enabled : true,
-				func : function() {
-					vena.flags["Met"] |= VenaFlags.Met.Judgement;
-					
+				func() {
+					vena.flags.Met |= VenaFlags.Met.Judgement;
+
 					Text.Clear();
 					Text.Add("As delicately as you can, you reply that you were wondering what she’s going to do with the former king.", parse);
 					Text.NL();
@@ -159,18 +159,18 @@ export namespace VenaRScenes {
 					Text.NL();
 					Text.Add("You take a moment to remind yourself of all that Lagon has done. Drugging his wife, terrorizing and raping his own children, attacking travelers and innocents and being a stupendous jerk about all of it. With a feeling of righteous indignation, you bend your thoughts to considering the options. You aren’t sure just how well Vena will like your suggestion, but she did ask for your thoughts...", parse);
 					Text.Flush();
-					
+
 					TimeStep({minute: 5});
-					
+
 					VenaRScenes.LagonsFate({});
-				}
+				},
 			});
 		}
 		/* TODO
 		options.push({nameStr : "",
 			tooltip : Text.Parse("", parse),
 			enabled : true,
-			func : function() {
+			func : () => {
 				Text.Clear();
 				Text.Add("", parse);
 				Text.NL();
@@ -179,32 +179,32 @@ export namespace VenaRScenes {
 			}
 		});
 		*/
-		Gui.SetButtonsFromList(options, true, function() {
+		Gui.SetButtonsFromList(options, true, () => {
 			Text.Clear();
 			Text.Add("You thank the matriarch for her time, telling her you have to be on your way.", parse);
 			Text.NL();
 			Text.Add("<i>“Do return soon, champion,”</i> Vena replies sincerely. She glances around at the growing gathering of her children around the throne. <i>“Meanwhile, it seems I have other ‘petitions’ to take care of...”</i> The lagomorph queen smiles apologetically.", parse);
 			Text.Flush();
-			
+
 			TimeStep({minute: 5});
-			
+
 			Gui.NextPrompt();
 		});
 	}
 
-	export function LagonsFate(opts : any) {
-		let player = GAME().player;
-		let parse : any = {
-			playername : player.name
+	export function LagonsFate(opts: any) {
+		const player = GAME().player;
+		const parse: any = {
+			playername : player.name,
 		};
-		
-		let options = [];
-		//[Public Fuck][Kill Him][Exile][Drug Him]
-		
+
+		const options = [];
+		// [Public Fuck][Kill Him][Exile][Drug Him]
+
 		options.push({nameStr : "Public Fuck",
 			tooltip : Text.Parse("What better way to break his power than a public humiliation?", parse),
 			enabled : true,
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("You run the scenario over in your head, smirking to yourself as you nod in satisfaction. Yes, this idea feels perfect; a punishment worthy of the crimes, and yet also merciful enough that it should make Vena happy.", parse);
 				Text.NL();
@@ -228,19 +228,19 @@ export namespace VenaRScenes {
 				Text.NL();
 				Text.Add("You calmly reach out and clasp her hand, then allow her to lead the way from the throne room.", parse);
 				Text.Flush();
-				
+
 				TimeStep({minute: 15});
-				
-				Gui.NextPrompt(function() {
+
+				Gui.NextPrompt(() => {
 					LagonDScenes.Punishment();
 				});
-			}
+			},
 		});
-		if(!opts.kill) {
+		if (!opts.kill) {
 			options.push({nameStr : "Kill him",
 				tooltip : Text.Parse("It’s the easiest way to end his threat once and for all.", parse),
 				enabled : true,
-				func : function() {
+				func() {
 					Text.Clear();
 					Text.Add("Finally, you shrug your shoulders and calmly tell Vena that, in her place, knowing what Lagon did to her and to her children, you’d have him executed.", parse);
 					Text.NL();
@@ -253,18 +253,18 @@ export namespace VenaRScenes {
 					Text.Add("You sigh and nod your understanding. Quietly, you tell Vena that Lagon really doesn’t deserve a wife like her - he clearly had no idea what sort of woman he’d married. But if she really wants to preserve his life, you’ll think of some other punishment.", parse);
 					Text.Flush();
 					opts.kill = true;
-					
+
 					TimeStep({minute: 5});
-					
+
 					VenaRScenes.LagonsFate(opts);
-				}
+				},
 			});
 		}
-		if(!opts.exile) {
+		if (!opts.exile) {
 			options.push({nameStr : "Exile",
 				tooltip : Text.Parse("Banishing him from the burrows would be the cruellest kindness you can offer.", parse),
 				enabled : true,
-				func : function() {
+				func() {
 					Text.Clear();
 					Text.Add("After a moment’s thought, you tell Vena that if Lagon seems to think so little of his family, then the best punishment would be to send him away. See if being all alone out there makes him realize how wrong he was to mistreat his kin so badly.", parse);
 					Text.NL();
@@ -277,18 +277,18 @@ export namespace VenaRScenes {
 					Text.Add("Sighing softly, you confess that Vena is right; on reflection, exile would be a poor decision to make. You’ll try and think of a better punishment for him instead.", parse);
 					Text.Flush();
 					opts.exile = true;
-					
+
 					TimeStep({minute: 5});
-					
+
 					VenaRScenes.LagonsFate(opts);
-				}
+				},
 			});
 		}
-		if(!opts.drug) {
+		if (!opts.drug) {
 			options.push({nameStr : "Drug him",
 				tooltip : Text.Parse("Giving him a taste of his own medicine should work wonders.", parse),
 				enabled : true,
-				func : function() {
+				func() {
 					Text.Clear();
 					Text.Add("Smirking at the irony, you suggest to Vena that since Lagon was so eager to drug her and their children, it would be a fitting punishment indeed to dose him with some drugs in turn.", parse);
 					Text.NL();
@@ -305,14 +305,14 @@ export namespace VenaRScenes {
 					Text.Add("You’re not blind to the steel under that soft, fluffy exterior. With a soft sigh of defeat, you tell her that you’ll try and think of something else to punish Lagon with.", parse);
 					Text.Flush();
 					opts.drug = true;
-					
+
 					TimeStep({minute: 5});
-					
+
 					VenaRScenes.LagonsFate(opts);
-				}
+				},
 			});
 		}
-		
+
 		Gui.SetButtonsFromList(options, false, null);
 	}
 }

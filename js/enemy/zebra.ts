@@ -209,7 +209,7 @@ export class ZebraBrave extends Entity {
 
 }
 
-ZebraShamanScenes.Impregnate = function(mother: Entity, father: Entity, slot?: number) {
+ZebraShamanScenes.Impregnate = (mother: Entity, father: Entity, slot?: number) => {
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother,
@@ -221,7 +221,7 @@ ZebraShamanScenes.Impregnate = function(mother: Entity, father: Entity, slot?: n
 	});
 };
 
-ZebraShamanScenes.LoneEnc = function(levelbonus?: number) {
+ZebraShamanScenes.LoneEnc = (levelbonus?: number) => {
 	const enemy = new Party();
 	const zebra = new ZebraShaman(levelbonus);
 	enemy.AddMember(zebra);
@@ -250,7 +250,7 @@ ZebraShamanScenes.OnLoss = function() {
 	Text.NL();
 	Text.Add("Suddenly, the chanting stops and the fogginess dissipates, causing you to fall to the ground with a resounding 'thump'. It takes a minute or two for you to regain your senses, but when you do you realize you’ve found yourself in an entirely different part of the Highlands. ", parse);
 	if (party.Num() > 1) {
-		if (party.Num() == 2) {
+		if (party.Num() === 2) {
 			const c = party.Get(1);
 			parse.comp  = c.name;
 			parse.heshe = c.heshe();
@@ -258,8 +258,8 @@ ZebraShamanScenes.OnLoss = function() {
 			parse.comp  = "your companions";
 			parse.heshe = "they";
 		}
-		parse.isAre = party.Num() == 2 ? "is" : "are";
-		parse.notS  = party.Num() == 2 ? "s" : "";
+		parse.isAre = party.Num() === 2 ? "is" : "are";
+		parse.notS  = party.Num() === 2 ? "s" : "";
 
 		Text.Add("Thankfully, [comp] [isAre] still with you, though [heshe] look[notS] just as perplexed as you are. ", parse);
 	}
@@ -278,7 +278,7 @@ ZebraShamanScenes.Encounter = function() {
 		weapon : player.WeaponDesc(),
 	};
 
-	parse.comp = party.Num() == 2 ? party.Get(1).name : "your companions";
+	parse.comp = party.Num() === 2 ? party.Get(1).name : "your companions";
 	parse.c    = party.Num()  > 1 ? Text.Parse(" and [comp]", parse) : "";
 
 	Text.Clear();
@@ -288,8 +288,8 @@ ZebraShamanScenes.Encounter = function() {
 	Text.NL();
 	Text.Add("Slowly, your mind and sight grow fuzzier, and your body grows limp. ", parse);
 	if (party.Num() > 1) {
-		parse.s = party.Num() == 2 ? "s" : "";
-		parse.hisher = party.Num() == 2 ? party.Get(1).hisher() : "their";
+		parse.s = party.Num() === 2 ? "s" : "";
+		parse.hisher = party.Num() === 2 ? party.Get(1).hisher() : "their";
 		Text.Add("Even [comp] seem[s] to be having some trouble with [hisher] thoughts. ", parse);
 	}
 	Text.Add("As you struggle to compose yourself, you hear a faint sound in the distance. At first you can’t quite understand what it is, but gradually the sound grows louder and louder. Soon you can clearly hear the sound of chanting. Looking up, you can just barely make out a figure standing before you, quite possibly the source of your current predicament.", parse);
@@ -305,7 +305,7 @@ ZebraShamanScenes.Encounter = function() {
 	Text.Add("You’re fighting a Zebra Shaman!", parse);
 	Text.Flush();
 
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		enc.PrepCombat();
 	});
 };
@@ -321,7 +321,7 @@ ZebraShamanScenes.OnWin = function() {
 		weapon : player.WeaponDesc(),
 	};
 
-	Gui.Callstack.push(function() {
+	Gui.Callstack.push(() => {
 		Text.Clear();
 		Text.Add("The shaman collapses to his knees before you, just barely able to keep himself upright with the help of his staff. As you lower your [weapon], the shaman speaks to you. <i>“You’re quite remarkable,”</i> he grunts between labored breaths. <i>“I’ve never encountered such a strong-willed individual who could overcome my mind-bending. I... do want to apologize for my behavior, however. I had no intentions of fighting you.”</i> Oh really? That’s not how it came across to you. If he wasn’t intent on fighting or harming you, then what exactly was he doing?", parse);
 		Text.NL();
@@ -351,7 +351,7 @@ ZebraShamanScenes.OnWin = function() {
 		}
 		/* TODO
 		options.push({ nameStr : "name",
-			func : function() {
+			func : () => {
 				Text.Clear();
 				Text.Add("", parse);
 				Text.NL();
@@ -360,7 +360,7 @@ ZebraShamanScenes.OnWin = function() {
 			tooltip : ""
 		});
 		 */
-		Gui.SetButtonsFromList(options, true, function() {
+		Gui.SetButtonsFromList(options, true, () => {
 			Text.Clear();
 			Text.Add("You decide to not take advantage of the poor shaman. What’s done is done, and it would be best if your continued on your way. With all your equipment in order, you make your way over a nearby hill and leave the shaman to his own devices.", parse);
 			Text.Flush();
@@ -370,7 +370,7 @@ ZebraShamanScenes.OnWin = function() {
 	Encounter.prototype.onVictory.call(enc);
 };
 
-ZebraShamanScenes.OnWinFuckHim = function(enc: any) {
+ZebraShamanScenes.OnWinFuckHim = (enc: any) => {
 	const player = GAME().player;
 	const zebra = enc.zebra;
 
@@ -418,7 +418,7 @@ ZebraShamanScenes.OnWinFuckHim = function(enc: any) {
 	Text.Add("Now that you’re ready, you turn your attention back to the zebra. The sight would be enough to make you laugh, were you not so debilitatingly aroused. Already lost in a rut, the shaman is on his knees holding himself up with one hand, using the other to furiously pump his throbbing shaft. A small pool of pre has already formed beneath him, dripping unabashedly from his flared tip. From his current position, you have a clear sight of his black rosebud, which twitches invitingly. Licking your lips, you move in to claim your prize.", parse);
 	Text.Flush();
 
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		Text.Clear();
 		Text.Add("You position yourself behind him, giving you full access to his plump tush. With both hands, you grab his cheeks and stretch them apart to take a gander at his pucker. From the look of things, it doesn't seem like he's very experienced with anal sex. Using a finger, you prod at his back door to assess his tightness; lo and behold, you're unable to push even an inch into him. It seems that he's going to need a bit of help before you can get to the action. Not just for his sake, but for yours as well. You don't have any proper lubricant at your disposal, but that shouldn’t be a problem.", parse);
 		Text.NL();
@@ -480,7 +480,7 @@ ZebraShamanScenes.OnWinFuckHim = function(enc: any) {
 	});
 };
 
-ZebraShamanScenes.OnWinVaginal = function(enc: any) {
+ZebraShamanScenes.OnWinVaginal = (enc: any) => {
 	const player = GAME().player;
 	const zebra = enc.zebra;
 
@@ -524,7 +524,7 @@ ZebraShamanScenes.OnWinVaginal = function(enc: any) {
 	Text.Add("That's it. You need his cock, and you need it <b>now</b>.", parse);
 	Text.Flush();
 
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		Text.Clear();
 		Text.Add("Without so much as a second thought – or even an attempt to remove your clothes – you throw yourself onto the shaman, inadvertently knocking the wind out of him. You lower yourself down, bringing your face in close to his monster of a cock and hovering your rear just above his pecs. Standing at a foot and a half in length, his large shaft dwarfs most that you've come across here in Eden. It's so large, in fact, that you find yourself unable to fully wrap your fingers around it. His balls seemed to have become enlarged as well, swollen with the desire to breed. To top it all off, the tip is dripping precum like a faucet. You can't imagine you'll easily be able to take the whole thing, but that's not going to stop you from trying.", parse);
 		Text.NL();

@@ -3,18 +3,18 @@
  * Define Adrian
  *
  */
-import { Entity } from '../../entity';
-import { GetDEBUG } from '../../../app';
-import { Race } from '../../body/race';
-import { TF } from '../../tf';
-import { AppendageType } from '../../body/appendage';
-import { Color } from '../../body/color';
-import { Text } from '../../text';
-import { Gui } from '../../gui';
-import { GAME, NAV } from '../../GAME';
+import { GetDEBUG } from "../../../app";
+import { AppendageType } from "../../body/appendage";
+import { Color } from "../../body/color";
+import { Race } from "../../body/race";
+import { Entity } from "../../entity";
+import { GAME, NAV } from "../../GAME";
+import { Gui } from "../../gui";
+import { Text } from "../../text";
+import { TF } from "../../tf";
 
 export class Adrian extends Entity {
-	constructor(storage? : any) {
+	constructor(storage?: any) {
 		super();
 
 		this.ID = "adrian";
@@ -22,9 +22,9 @@ export class Adrian extends Entity {
 		// Character stats
 		this.name = "Adrian";
 
-		//this.avatar.combat = new Image();
-		//this.avatar.combat.src = "assets/img/adrian_avatar.png";
-		
+		// this.avatar.combat = new Image();
+		// this.avatar.combat.src = "assets/img/adrian_avatar.png";
+
 		this.maxHp.base        = 100;
 		this.maxSp.base        = 80;
 		this.maxLust.base      = 50;
@@ -48,54 +48,52 @@ export class Adrian extends Entity {
 		this.SetLevelBonus();
 		this.RestFull();
 
-		this.flags["Met"] = 0;
+		this.flags.Met = 0;
 
-		if(storage) this.FromStorage(storage);
+		if (storage) { this.FromStorage(storage); }
 	}
 
-	FromStorage(storage : any) {
+	public FromStorage(storage: any) {
 		this.body.FromStorage(storage.body);
 		this.LoadPersonalityStats(storage);
-	
+
 		// Load flags
 		this.LoadFlags(storage);
 	}
-	
-	ToStorage() {
-		var storage = {};
-	
+
+	public ToStorage() {
+		const storage = {};
+
 		this.SaveBodyPartial(storage, {ass: true});
 		this.SavePersonalityStats(storage);
-	
+
 		this.SaveFlags(storage);
-	
+
 		return storage;
 	}
-	
+
 	// Schedule
-	IsAtLocation(location? : any) {
+	public IsAtLocation(location?: any) {
 		return true;
 	}
-	
+
 	// Party interaction
-	Interact() {
-		let adrian = GAME().adrian;
+	public Interact() {
+		const adrian = GAME().adrian;
 		Text.Clear();
 		Text.Add("Rawr Imma horse.");
-	
-	
-		if(GetDEBUG()) {
+
+		if (GetDEBUG()) {
 			Text.NL();
-			Text.Add("DEBUG: relation: " + adrian.relation.Get(), null, 'bold');
+			Text.Add("DEBUG: relation: " + adrian.relation.Get(), null, "bold");
 			Text.NL();
-			Text.Add("DEBUG: subDom: " + adrian.subDom.Get(), null, 'bold');
+			Text.Add("DEBUG: subDom: " + adrian.subDom.Get(), null, "bold");
 			Text.NL();
-			Text.Add("DEBUG: slut: " + adrian.slut.Get(), null, 'bold');
+			Text.Add("DEBUG: slut: " + adrian.slut.Get(), null, "bold");
 			Text.NL();
 		}
-	
+
 		Text.Flush();
 		Gui.NextPrompt(NAV().PartyInteraction);
-	}	
+	}
 }
-

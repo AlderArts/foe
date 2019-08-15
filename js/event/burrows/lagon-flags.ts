@@ -4,7 +4,7 @@ export namespace LagonFlags {
         ScepterTalk = 2,
         RoaTalk     = 4,
         RegularSex  = 8,
-        BJfinger    = 16
+        BJfinger    = 16,
     }
 
     export enum Usurp {
@@ -14,10 +14,10 @@ export namespace LagonFlags {
         JailSexFirst = 8,
         NiceFlag     = 16,
         NiceFirst    = 32,
-        NiceReact    = 64
+        NiceReact    = 64,
     }
 
     export enum JailSex {
-        PitchAnal = 1
+        PitchAnal = 1,
     }
 }

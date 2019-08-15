@@ -7,7 +7,7 @@ import { SeductionAb } from "./ability/seduction";
 import { WaitAb } from "./ability/wait";
 import { WhiteAb } from "./ability/white";
 
-let Abilities = {
+const Abilities = {
     Attack : AttackAb,
     Run : RunAb,
     Wait : WaitAb,

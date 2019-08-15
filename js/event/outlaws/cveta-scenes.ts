@@ -1,70 +1,71 @@
-import * as _ from 'lodash';
+import * as _ from "lodash";
 
-import { WorldTime, GAME, TimeStep } from '../../GAME';
-import { Text } from '../../text';
-import { Gui } from '../../gui';
-import { EncounterTable } from '../../encountertable';
-import { CvetaFlags } from './cveta-flags';
-import { OutlawsFlags } from './outlaws-flags';
-import { Time } from '../../time';
-import { QuestItems } from '../../items/quest';
-import { Entity } from '../../entity';
-import { Status } from '../../statuseffect';
-import { Party } from '../../party';
-import { MomoFlags } from '../momo-flags';
-import { KrawitzFlags } from '../../loc/rigard/krawitz-flags';
-import { CvetaDateScenes } from './cveta-date';
+import { EncounterTable } from "../../encountertable";
+import { Entity } from "../../entity";
+import { GAME, TimeStep, WorldTime } from "../../GAME";
+import { Gui } from "../../gui";
+import { QuestItems } from "../../items/quest";
+import { KrawitzFlags } from "../../loc/rigard/krawitz-flags";
+import { Party } from "../../party";
+import { Status } from "../../statuseffect";
+import { Text } from "../../text";
+import { Time } from "../../time";
+import { MomoFlags } from "../momo-flags";
+import { CvetaDateScenes } from "./cveta-date";
+import { CvetaFlags } from "./cveta-flags";
+import { OutlawsFlags } from "./outlaws-flags";
 
 export namespace CvetaScenes {
-	let DreamsScenes : any;
-	export function INIT(dreamsScenes : any) {
+	let DreamsScenes: any;
+	export function INIT(dreamsScenes: any) {
 		DreamsScenes = dreamsScenes;
 	}
 
 	export function CampDesc() {
-		let cveta = GAME().cveta;
+		const cveta = GAME().cveta;
 
-		var parse : any = {
-			
+		const parse: any = {
+
 		};
-		
+
 		Text.Add("Near the back of the outlaws' camp, you can make out the modest form of Cveta's tent.", parse);
 		Text.NL();
-		if(!cveta.WakingTime())
+		if (!cveta.WakingTime()) {
 			Text.Add("The tent flaps are sealed at the moment, the songstress having set with the sun.", parse);
-		else if(cveta.PerformanceTime())
+		} else if (cveta.PerformanceTime()) {
 			Text.Add("However, you figure that Cveta will soon venture out for her twice-daily performances. It's not too late to join in if you want to listen to her play.", parse);
-		else if(cveta.InTent()) {
-			if(cveta.Violin())
+ } else if (cveta.InTent()) {
+			if (cveta.Violin()) {
 				Text.Add("Music emanates from within, but you know that Cveta is amenable to entertaining your presence should you choose to visit.", parse);
-			else
+			} else {
 				Text.Add("Music emanates from within, and you think it best that you don't disturb Cveta at her practice.", parse);
-		}
-		else
+			}
+		} else {
 			Text.Add("The tent's flaps are open, making it clear that the songstress has gone out about her daily business. Maybe you should come back later.", parse);
+ }
 		Text.NL();
 	}
 
 	export function ViolinApproach() {
-		let player = GAME().player;
-		let party : Party = GAME().party;
-		let cveta = GAME().cveta;
-		let terry = GAME().terry;
+		const player = GAME().player;
+		const party: Party = GAME().party;
+		const cveta = GAME().cveta;
+		const terry = GAME().terry;
 
-		var parse : any = {
-			playername : player.name
+		const parse: any = {
+			playername : player.name,
 		};
-		
+
 		Text.Clear();
 		Text.Add("As you’re making to leave from the fire pit with the rest of the outlaws, you hear light footsteps in the dirt behind you, and turn to find Cveta herself eating up the distance between the two of you in big strides - or at least, strides as big as her petite frame will allow.", parse);
 		Text.NL();
 		Text.Add("<i>“Excuse me, [playername]. Do you have a moment?”</i>", parse);
 		Text.Flush();
-		
-		//[Yes][No]
-		var options = new Array();
+
+		// [Yes][No]
+		const options = new Array();
 		options.push({ nameStr : "Yes",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("You ask Cveta what it is she wants.", parse);
 				Text.NL();
@@ -92,7 +93,7 @@ export namespace CvetaScenes {
 				Text.NL();
 				Text.Add("“Do you now understand how I ‘persuaded’ the guards?”</i>", parse);
 				Text.Flush();
-				
+
 				Gui.NextPrompt(function() {
 					Text.Clear();
 					Text.Add("You swallow hard, and nod.", parse);
@@ -101,25 +102,25 @@ export namespace CvetaScenes {
 					Text.NL();
 					Text.Add("“Well. The guards were not too pleased with my actions, and declared me some sort of witch in short order. If Zenith had not been near the city on some business of his own, it is likely I would be rotting in some cell at the moment - a most daunting prospect, I am sure you can agree. Nevertheless, the fact remains that I am… what is the term for it? Persona non grata within Rigard for a while, and I need someone to run this errand for me.”", parse);
 					Text.NL();
-					parse["t"] = party.InParty(terry) ? ", enough to make Terry’s eyes instinctively light up at the mere sight of it" : "";
+					parse.t = party.InParty(terry) ? ", enough to make Terry’s eyes instinctively light up at the mere sight of it" : "";
 					Text.Add("“So here it is, then.”</i> Cveta reaches into her gown and draws out a sizable pouch of coin. It’s quite heavy[t], but should one really be surprised that a “princess” has money? <i>“It is my wish that you head to the merchant street within Rigard and seek out the establishment known as ‘Rintell’s’. They have in stock a Grameria violin, although the proprietor is not informed of the instrument’s true value. He will think he is getting the upper hand of the deal, while the reverse is true; pay his asking price for violin, bow and case, and return to me with them. A simple errand.”</i>", parse);
 					Text.NL();
 					Text.Add("It certainly sounds simple enough. You tuck away the money carefully and promise Cveta that you’ll return soon with her instrument.", parse);
 					Text.NL();
 					Text.Add("<i>“Please do not tarry.”</i> Cveta raises her eyes and looks quite wistful, even as she brushes past you and is on her way. <i>“It has been a while since I have had a proper violin to practice on. Good health to you, [playername], and remain safe in these troubled times. When you have it in your possession, simply come to me after one of my performances and hand it over.”</i>", parse);
 					Text.Flush();
-					
+
 					party.coin += 500;
-					
-					cveta.flags["Met"] = CvetaFlags.Met.ViolinQ;
-					
+
+					cveta.flags.Met = CvetaFlags.Met.ViolinQ;
+
 					Gui.NextPrompt();
 				});
 			}, enabled : true,
-			tooltip : "You do have the time to hear what the songstress wants."
+			tooltip : "You do have the time to hear what the songstress wants.",
 		});
 		options.push({ nameStr : "No",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("You tell Cveta that you’ll be a little busy for the next few days. Is it important?", parse);
 				Text.NL();
@@ -127,34 +128,34 @@ export namespace CvetaScenes {
 				Text.NL();
 				Text.Add("With that, she turns and melds back into the departing crowd, quickly vanishing from sight.", parse);
 				Text.Flush();
-				cveta.violinTimer = new Time(0,0,3,0,0);
+				cveta.violinTimer = new Time(0, 0, 3, 0, 0);
 				Gui.NextPrompt();
 			}, enabled : true,
-			tooltip : "You’re a little busy right now. Can it wait?"
+			tooltip : "You’re a little busy right now. Can it wait?",
 		});
 		Gui.SetButtonsFromList(options, false, null);
 	}
 
 	export function ViolinPrompt() {
-		let player = GAME().player;
-		let party : Party = GAME().party;
-		let outlaws = GAME().outlaws;
-		let cveta = GAME().cveta;
+		const player = GAME().player;
+		const party: Party = GAME().party;
+		const outlaws = GAME().outlaws;
+		const cveta = GAME().cveta;
 
-		var parse : any = {
-			playername : player.name
+		const parse: any = {
+			playername : player.name,
 		};
-		
+
 		Text.Clear();
 		Text.Add("As you’re leaving the performance, you hear the sound of soft footsteps behind you and turn to find Cveta herself hurrying up to you as quickly as her short legs will carry her. The songstress has an expectant look about her, and you know what she’s going to ask even before the words are out of her beak:", parse);
 		Text.NL();
 		Text.Add("<i>“Did you get the violin, [playername]?”</i>", parse);
 		Text.Flush();
-		
-		//[Yes][No]
-		var options = new Array();
+
+		// [Yes][No]
+		const options = new Array();
 		options.push({ nameStr : "Yes",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("She brightens immediately. <i>“You have it? Please, hand it over.”</i>", parse);
 				Text.NL();
@@ -167,10 +168,11 @@ export namespace CvetaScenes {
 				Text.Add("<i>“You have done well, [playername], and ought to be rewarded.”</i>", parse);
 				Text.NL();
 				Text.Add("Without warning, she’s stepped forward and taken you into her embrace - or at least, as best as her tiny form can muster. You feel Cveta’s head nestling into the crook of your neck, the small mounds of her feathery breasts squashing just ", parse);
-				if(player.FirstBreastRow().Size() > 3)
+				if (player.FirstBreastRow().Size() > 3) {
 					Text.Add("below yours,", parse);
-				else
+				} else {
 					Text.Add("above your stomach,", parse);
+				}
 				Text.Add(" and she chirps before releasing her hold on your waist and stepping back, all prim, proper and distant again. She wasn’t just warm, she was <i>extra</i> warm, and so very, very nice to touch. Why does she do so little of it?", parse);
 				Text.NL();
 				Text.Add("<i>“Again, thank you for the favor, [playername]. Should you need to seek me out when I am not otherwise occupied, I would be delighted to receive your presence in my tent. For now, I must attend to the hurts of this poor thing; it could do with some attention with a wine cork. Remain in good health, and until we meet again.”</i>", parse);
@@ -179,19 +181,19 @@ export namespace CvetaScenes {
 				Text.NL();
 				Text.Add("<b>You may now visit Cveta in her tent, accessible from the outlaws’ camp.</b>", parse);
 				Text.Flush();
-				
+
 				outlaws.relation.IncreaseStat(100, 3);
-				
+
 				cveta.relation.IncreaseStat(100, 5);
-				cveta.flags["Met"] = CvetaFlags.Met.Available;
+				cveta.flags.Met = CvetaFlags.Met.Available;
 				party.Inv().RemoveItem(QuestItems.Violin);
-				
+
 				Gui.NextPrompt();
-			}, enabled : cveta.flags["Met"] >= CvetaFlags.Met.ViolinGet,
-			tooltip : "Yes, you got the violin. Here it is, in all its glory."
+			}, enabled : cveta.flags.Met >= CvetaFlags.Met.ViolinGet,
+			tooltip : "Yes, you got the violin. Here it is, in all its glory.",
 		});
 		options.push({ nameStr : "No",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("<i>“I see. Are the gate guards being an exceptionally noisome lot of late?”</i>", parse);
 				Text.NL();
@@ -201,46 +203,46 @@ export namespace CvetaScenes {
 				Text.NL();
 				Text.Add("Without waiting for a reply from you, she sweeps about and moves back into the crowd, her gown trailing behind her until it, too, vanishes from sight.", parse);
 				Text.Flush();
-				
+
 				Gui.NextPrompt();
 			}, enabled : true,
-			tooltip : "You haven’t had the opportunity to enter Rigard yet and get it for her."
+			tooltip : "You haven’t had the opportunity to enter Rigard yet and get it for her.",
 		});
 		Gui.SetButtonsFromList(options, false, null);
 	}
 
 	export function Approach() {
-		let player = GAME().player;
-		let outlaws = GAME().outlaws;
-		let cveta = GAME().cveta;
+		const player = GAME().player;
+		const outlaws = GAME().outlaws;
+		const cveta = GAME().cveta;
 
-		var parse : any = {
-			playername : player.name
+		const parse: any = {
+			playername : player.name,
 		};
-		
-		if(outlaws.BullTowerCompleted() && !(cveta.flags["Intimate"] & CvetaFlags.Intimate.Introduced)) {
+
+		if (outlaws.BullTowerCompleted() && !(cveta.flags.Intimate & CvetaFlags.Intimate.Introduced)) {
 			CvetaScenes.PostBullTowerPerformance();
-		}
-		else if(cveta.InTent()) {
+		} else if (cveta.InTent()) {
 			Text.Clear();
 			Text.Add("Brushing aside the flaps, you step into Cveta’s tent, leaving behind the hubbub of the rest of the outlaw camp. As always, the songstress is perched on her stool, the picture of elegant composure as she acknowledges your entrance with a dip of her head. The violin you bought for her rests in its case by her trunk, carefully sealed against dust and damp alike.", parse);
-			if(cveta.BlueRoses())
+			if (cveta.BlueRoses()) {
 				Text.Add(" A small pot with the stem cutting the two of you took from the estate sits by the tent’s entrance; the plant obviously well-cared for and wanting for nothing. It’ll be a while before it can bring forth any blossoms, but it certainly isn’t going to wither on Cveta’s watch.", parse);
+			}
 			Text.NL();
 			Text.Add("<i>“Welcome, [playername],”</i> she says, toning down the music from her lyre but not stopping, providing a faint musical backdrop to your conversation.", parse);
-			if(cveta.Relation() >= 80)
+			if (cveta.Relation() >= 80) {
 				Text.Add(" Noticing your approach, the songstress swiftly and seamlessly changes the tune she’s playing to one she knows is better suited to your tastes.", parse);
-			else if(cveta.Relation() >= 60)
+			} else if (cveta.Relation() >= 60) {
 				Text.Add(" The songstress raises her eyes to meet yours in acknowledgement, lingering a little longer than necessary before turning away in embarrassment.", parse);
-			else if(cveta.Relation() >= 40)
+ } else if (cveta.Relation() >= 40) {
 				Text.Add(" The songstress raises her eyes to meet yours in acknowledgement, then bows her head once more to concentrate on her playing.", parse);
+ }
 			Text.NL();
 			Text.Add("<i>“What brings you here to me today?”</i>", parse);
 			Text.Flush();
-			
+
 			CvetaScenes.Prompt();
-		}
-		else {
+		} else {
 			Text.Clear();
 			Text.Add("While Cveta isn’t in her tent at the moment, you’re pretty sure that she couldn’t have gone far. Indeed, you catch a glimpse of her signature red gown amidst the tents, and walk over to her in a few easy strides. The songstress notices your approach, and dips her head at you. <i>“[playername]. Was there something you needed?”</i>", parse);
 			Text.NL();
@@ -248,106 +250,106 @@ export namespace CvetaScenes {
 			Text.NL();
 			Text.Add("<i>“Not out in the open, if that is your wish.”</i> The skirts of her gown swishing, she quickly leads you back to her tent and ushers you in before heading under the shade herself. <i>“Now, was there something you needed?”</i>", parse);
 			Text.Flush();
-			
+
 			CvetaScenes.Prompt();
 		}
 	}
 
 	export function Prompt() {
-		let outlaws = GAME().outlaws;
-		let cveta = GAME().cveta;
+		const outlaws = GAME().outlaws;
+		const cveta = GAME().cveta;
 
-		var parse : any = {
-			
+		const parse: any = {
+
 		};
-		
-		//[Talk][Music][Play][Leave]
-		var options = new Array();
+
+		// [Talk][Music][Play][Leave]
+		const options = new Array();
 		options.push({ nameStr : "Talk",
-			func : function() {
+			func() {
 				CvetaScenes.TalkPrompt();
 			}, enabled : true,
-			tooltip : "Speak with Cveta. She’s not one for small talk, though."
+			tooltip : "Speak with Cveta. She’s not one for small talk, though.",
 		});
 		options.push({ nameStr : "Music",
-			func : function() {
+			func() {
 				CvetaScenes.MusicPrompt();
 			}, enabled : true,
-			tooltip : "Have the beautiful bird give you a private performance."
+			tooltip : "Have the beautiful bird give you a private performance.",
 		});
 		options.push({ nameStr : "Play",
-			func : function() {
+			func() {
 				CvetaScenes.PlayPrompt();
 			}, enabled : true,
-			tooltip : "Play around with Cveta. Maybe you can break that prudish attitude of hers…"
+			tooltip : "Play around with Cveta. Maybe you can break that prudish attitude of hers…",
 		});
-		if(cveta.flags["Music"] >= CvetaFlags.Music.Talked && cveta.flags["Bard"] < CvetaFlags.Bard.Taught && cveta.flags["Singer"] < CvetaFlags.Singer.Taught) {
+		if (cveta.flags.Music >= CvetaFlags.Music.Talked && cveta.flags.Bard < CvetaFlags.Bard.Taught && cveta.flags.Singer < CvetaFlags.Singer.Taught) {
 			options.push({ nameStr : "Teach",
-				func : function() {
+				func() {
 					CvetaScenes.Teach();
 				}, enabled : cveta.Relation() >= 25,
-				tooltip : "Ask Cveta if she can teach you something of her craft."
+				tooltip : "Ask Cveta if she can teach you something of her craft.",
 			});
 		}
-		if(outlaws.BullTowerCompleted()) {
+		if (outlaws.BullTowerCompleted()) {
 			options.push({ nameStr : "Get Intimate",
-				func : function() {
+				func() {
 					Text.Clear();
-					parse["rel"] = cveta.Relation() >= 80 ? ", although you can tell she’s quite flustered at all the attention, judging from the hint of unease that’s crept into her usual composed demeanor" : "";
+					parse.rel = cveta.Relation() >= 80 ? ", although you can tell she’s quite flustered at all the attention, judging from the hint of unease that’s crept into her usual composed demeanor" : "";
 					Text.Add("You remember just how warm and comfortable Cveta’s body felt against yours, and are resolved to have just another taste of that delightful touch again. The songstress is still playing away, pretending not to notice your roving eyes[rel].", parse);
 					Text.Flush();
-					
+
 					CvetaScenes.IntimatePrompt();
 				}, enabled : true,
-				tooltip : "Cveta is such a lonely bird. Things don’t need to be that way…"
+				tooltip : "Cveta is such a lonely bird. Things don’t need to be that way…",
 			});
-			
+
 			options.push({ nameStr : "Date",
-				func : function() {
+				func() {
 					CvetaDateScenes.Prompt(CvetaScenes.Prompt);
 				}, enabled : true,
-				tooltip : "Ask Cveta if she’d like to go somewhere with you."
+				tooltip : "Ask Cveta if she’d like to go somewhere with you.",
 			});
 		}
-		
+
 		/* TODO
 		options.push({ nameStr : "name",
 			func : function() {
-				
+
 			}, enabled : true,
 			tooltip : ""
 		});
 		*/
-		
-		Gui.SetButtonsFromList(options, true); //TODO Leave
+
+		Gui.SetButtonsFromList(options, true); // TODO Leave
 	}
 
 	export function Teach() {
-		let player = GAME().player;
-		let party : Party = GAME().party;
-		let outlaws = GAME().outlaws;
-		let cveta = GAME().cveta;
+		const player = GAME().player;
+		const party: Party = GAME().party;
+		const outlaws = GAME().outlaws;
+		const cveta = GAME().cveta;
 
-		var parse : any = {
-			playername : player.name
+		let parse: any = {
+			playername : player.name,
 		};
-		
-		var bardAvailable : Entity = null;
-		var singerAvailable : Entity = null;
-		for(var i = party.Num()-1; i >= 0; i--) {
-			var p = party.Get(i);
-			var bard   = p.jobs["Bard"];
-			var singer = p.jobs["Singer"];
-			if(bard   && bard.job.Available(p))   bardAvailable = p;
-			if(singer && singer.job.Available(p)) singerAvailable = p;
+
+		let bardAvailable: Entity = null;
+		let singerAvailable: Entity = null;
+		for (let i = party.Num() - 1; i >= 0; i--) {
+			const p = party.Get(i);
+			const bard   = p.jobs.Bard;
+			const singer = p.jobs.Singer;
+			if (bard   && bard.job.Available(p)) {   bardAvailable = p; }
+			if (singer && singer.job.Available(p)) { singerAvailable = p; }
 		}
-		
+
 		Text.Clear();
-		if(singerAvailable && cveta.flags["Singer"] < CvetaFlags.Singer.Taught) {
-			parse["name"] = singerAvailable.name;
-			parse["poss"] = singerAvailable.possessive();
+		if (singerAvailable && cveta.flags.Singer < CvetaFlags.Singer.Taught) {
+			parse.name = singerAvailable.name;
+			parse.poss = singerAvailable.possessive();
 			parse = singerAvailable.ParserPronouns(parse);
-			
+
 			Text.Add("Setting down her lyre by her side, Cveta studies [name] for a good ten minutes, then brightens, her entire self perking up and becoming more animated. She’s clearly eager about this.", parse);
 			Text.NL();
 			Text.Add("<i>“Yes, I can definitely impart some of my knowledge on the use of voice, [playername]. It will take some time and there is much that must be learnt from personal experience after I am done, but I can certainly give instruction on the fundamentals.”</i>", parse);
@@ -356,8 +358,8 @@ export namespace CvetaScenes {
 			Text.NL();
 			Text.Add("<i>“Well,”</i> she mutters to herself, clicking her beak. <i>“Now that I have a better idea of what I am to work with… let us see what can truly be done.”</i>", parse);
 			Text.NL();
-			parse["try"] = singerAvailable.plural() ? "try" : "tries";
-			parse["s"]   = singerAvailable.plural() ? "" : "s";
+			parse.try = singerAvailable.plural() ? "try" : "tries";
+			parse.s   = singerAvailable.plural() ? "" : "s";
 			Text.Add("The next couple of hours are filled with her demonstrating the differences in resonance when one sings from the chest, the head, or even the nose. It’s quite a bit to swallow in one sitting, but [name] [try] to follow as best as possible. Cveta doesn’t hit, slap or strike, but the edge of disappointment in the songstress’ voice stings just as badly every time [name] fail[s] to sing on-key.", parse);
 			Text.NL();
 			Text.Add("<i>“Posture is important, as your voice is alive and reflects your mind and soul. Slouch and slump, and so will your voice - and more importantly, your audience. Breathe some life into those scales, [name]. I want to see you put some effort into it.”</i>", parse);
@@ -372,19 +374,18 @@ export namespace CvetaScenes {
 			Text.NL();
 			Text.Add("<b>You now have access to the Singer job.</b>", parse);
 			Text.Flush();
-			
-			cveta.flags["Singer"] = CvetaFlags.Singer.Taught;
-			
+
+			cveta.flags.Singer = CvetaFlags.Singer.Taught;
+
 			outlaws.relation.IncreaseStat(100, 2);
-			
+
 			TimeStep({hour : 8});
 			Gui.NextPrompt();
-		}
-		else if(bardAvailable && cveta.flags["Bard"] < CvetaFlags.Bard.Taught) {
-			parse["name"] = bardAvailable.name;
-			parse["poss"] = bardAvailable.possessive();
+		} else if (bardAvailable && cveta.flags.Bard < CvetaFlags.Bard.Taught) {
+			parse.name = bardAvailable.name;
+			parse.poss = bardAvailable.possessive();
 			parse = bardAvailable.ParserPronouns(parse);
-			
+
 			Text.Add("At the request, Cveta stops playing and studies [name] for a good ten minutes, then brightens, nodding. She’s clearly eager about this, and more than willing to get started.", parse);
 			Text.NL();
 			Text.Add("<i>“It seems that you have been working hard. Since you understand the basics of harmony and rhythm, there is no need for me to go through them again and thus waste precious time. Very well, let us begin. Do understand that I am trusting you greatly by allowing you to use my instruments for these exercises.”</i>", parse);
@@ -405,67 +406,67 @@ export namespace CvetaScenes {
 			Text.NL();
 			Text.Add("<b>You now have access to the Bard job.</b>", parse);
 			Text.Flush();
-			
-			cveta.flags["Bard"] = CvetaFlags.Bard.Taught;
-			
+
+			cveta.flags.Bard = CvetaFlags.Bard.Taught;
+
 			outlaws.relation.IncreaseStat(100, 2);
-			
+
 			TimeStep({hour: 8});
 			Gui.NextPrompt();
-		}
-		else {
+		} else {
 			Text.Add("Cveta stops playing, sets down her lyre and stares off into the distance. <i>“I’m afraid ", parse);
-			if(party.Num() > 1)
+			if (party.Num() > 1) {
 				Text.Add("none of you", parse);
-			else
+			} else {
 				Text.Add("you do not", parse);
+			}
 			Text.Add(" meet the prerequisites for me to usefully instruct you in what I have to teach, alas. You do not ask to run before you can walk, fly before you can glide. While I could attempt to impart my knowledge of the musical arts this very moment, I fear it would be simply met with incomprehension due to one having a poor grasp of the basics. Perhaps you could come back another time?”</i>", parse);
 			Text.NL();
 			Text.Add("<b>You need someone with a sense of music that is a ", parse);
-			if(!singerAvailable)
+			if (!singerAvailable) {
 				Text.Add("level 3 Courtesan", parse);
-			else
+			} else {
 				Text.Add("level 5 Courtesan and level 3 Singer", parse);
+			}
 			Text.Add(" before Cveta can teach you more about music.</b>", parse);
 			Text.Flush();
-			
+
 			TimeStep({minute: 5});
-			
+
 			CvetaScenes.Prompt();
 		}
 	}
 
 	export function PlayPrompt() {
-		let player = GAME().player;
-		let cveta = GAME().cveta;
+		const player = GAME().player;
+		const cveta = GAME().cveta;
 
-		var parse : any = {
-			playername : player.name
+		const parse: any = {
+			playername : player.name,
 		};
-		
+
 		Text.Clear();
 		Text.Add("You take a long look at Cveta. The songstress is all calm and composed, distant and dignified - it’s little wonder that some might think her forever out of their reach. Not you, though.", parse);
 		Text.NL();
-		if(cveta.Relation() >= 60) {
+		if (cveta.Relation() >= 60) {
 			Text.Add("She tilts her head, feeling your gaze upon her form, then gives you a knowing nod as her eyes brighten a little.", parse);
 			Text.NL();
 		}
 		Text.Add("Well, how do you want to handle your precious, petite pet today?", parse);
 		Text.Flush();
-		
-		//[Flirt][Pet][Get Intimate][Date]
-		var options = new Array();
+
+		// [Flirt][Pet][Get Intimate][Date]
+		const options = new Array();
 		options.push({ nameStr : "Flirt",
-			func : function() {
+			func() {
 				Text.Clear();
-				if(cveta.Relation() < 40) {
+				if (cveta.Relation() < 40) {
 					Text.Add("The songstress looks you directly in the eye, both gaze and face as blank as a stone wall. <i>“Why yes, [playername]. I am acutely aware of the fact that I am quite a desirable specimen of beauty. After all, it is part of the image I am deliberately cultivating for my performances. It helps if the eyes are soothed in addition to the ears.”</i>", parse);
 					Text.NL();
 					Text.Add("Can’t she stop being so utterly serious for once? You’re trying to flirt with her, for - for Aria’s sake!", parse);
 					Text.NL();
 					Text.Add("<i>“Yes, I am aware that you are attempting to flatter me. You are scarcely the first to do so, after all; men and women alike have found the flimsiest of excuses to compliment me on my appearance, or on attributes which I either did not possess or should not have been immediately obvious within minutes of my meeting them. Flattery is a skill that needs to be honed, or at the very least do not make your attempts painfully obvious.”</i> She coughs daintily, rolling her eyes as she does so. <i>“You get points for effort, though. That was a better attempt than some not-quite-subtle propositions I received about court.”</i>", parse);
-				}
-				else if(cveta.Relation() < 70) {
+				} else if (cveta.Relation() < 70) {
 					Text.Add("Cveta sighs and stops playing for a moment to bat at you with a gloved hand, but it’s a feeble, half-hearted swipe. <i>“Please, [playername]. I am acutely aware of the fact that I am, as some used to put it, ‘a pretty little thing’. I do not need reminding.”</i>", parse);
 					Text.NL();
 					Text.Add("She may not need reminding, but it’s fun to do just that.", parse);
@@ -475,8 +476,7 @@ export namespace CvetaScenes {
 					Text.Add("<i>“Look, [playername], this is awkward.”</i>", parse);
 					Text.NL();
 					Text.Add("You smile and feign ignorance. What is? She’s probably the only one who feels awkward about a simple compliment. Seeing as there’s nothing she can - or maybe, she wants - to do about the situation, Cveta shakes her head and resumes the little ditty she was playing.", parse);
-				}
-				else {
+				} else {
 					Text.Add("Cveta fidgets uncomfortably. The large pupil of her uncovered eye darts this way and that, as if desperately seeking escape from the confines of her head; she definitely seems flightier than usual.", parse);
 					Text.NL();
 					Text.Add("And she missed a note. It’s barely noticeable, her fingers quickly compensating for the error, but yes, she clearly missed a note there. You <i>heard</i> it.", parse);
@@ -490,18 +490,18 @@ export namespace CvetaScenes {
 					Text.Add("<i>“Please, [playername]... let us talk about something else? Please?”</i>", parse);
 				}
 				Text.Flush();
-				
-				if(cveta.flirtTimer.Expired()) {
+
+				if (cveta.flirtTimer.Expired()) {
 					cveta.relation.IncreaseStat(50, 2);
-					cveta.flirtTimer = new Time(0,0,0,8,0);
+					cveta.flirtTimer = new Time(0, 0, 0, 8, 0);
 				}
 				Gui.NextPrompt(CvetaScenes.Prompt);
 			}, enabled : true,
-			tooltip : "Well, why not flirt a bit with the beautiful bird?"
+			tooltip : "Well, why not flirt a bit with the beautiful bird?",
 		});
 		options.push({ nameStr : "Pet",
 			func : CvetaScenes.Pet, enabled : true,
-			tooltip : "Cveta’s feathers are so luxuriant, you can’t help but want to show her what a pretty petite pet she is."
+			tooltip : "Cveta’s feathers are so luxuriant, you can’t help but want to show her what a pretty petite pet she is.",
 		});
 		/* TODO
 		options.push({ nameStr : "name",
@@ -517,24 +517,22 @@ export namespace CvetaScenes {
 		Gui.SetButtonsFromList(options, true, CvetaScenes.Prompt);
 	}
 
-
-
 	export function Pet() {
-		let player = GAME().player;
-		let cveta = GAME().cveta;
+		const player = GAME().player;
+		const cveta = GAME().cveta;
 
-		var parse : any = {
-			playername : player.name
+		const parse: any = {
+			playername : player.name,
 		};
-		
+
 		Text.Clear();
 		Text.Add("Eyeing Cveta’s pretty plumage and fluffy little body, you really, <i>really</i> want to touch those feathers of hers. Yes, yes, you definitely want to feel them in your fingers. What do you intend?", parse);
 		Text.Flush();
-		
-		//[Scratch][Preen][Wings]
-		var options = new Array();
+
+		// [Scratch][Preen][Wings]
+		const options = new Array();
 		options.push({ nameStr : "Scratch",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("You tell Cveta that she’s been looking quite tense of late, and you’d love to help the beautiful bird work out a little stress. The songstress stops playing, but doesn’t set down her lyre and instead closes her eyes and takes a few deep breaths, the heaving of her chest noticeable from under her gown.", parse);
 				Text.NL();
@@ -550,7 +548,7 @@ export namespace CvetaScenes {
 				Text.NL();
 				Text.Add("At last, it seems that she has enough presence of mind to set down her instrument. <i>“Do not stop, please… “</i>", parse);
 				Text.NL();
-				if(cveta.Relation() >= 50) {
+				if (cveta.Relation() >= 50) {
 					Text.Add("<i>“…I need someplace else scratched.”</i>", parse);
 					Text.NL();
 					Text.Add("As you continue to tend to the songstress, she reaches up to the satin-lined neck of her gown and picks at the buttons with her gloved hands. Bit by bit, the front of her gown gives way, revealing yet more and more of her body, the deep vermillion of her feathers paling as they approach her belly. Cveta wears no bra, the small, pert lumps of her breasts completely subsumed by her feathers; she throws upon her gown with a flourish, letting you gaze upon the gloss and shine of her glorious feathers as she settles back onto the stool.", parse);
@@ -572,15 +570,15 @@ export namespace CvetaScenes {
 				Text.NL();
 				Text.Add("<i>“Still, it was appreciated, [playername]. Finding someone you can trust to give you a good scratch is hard, and someone who will be discreet about it more so. I hope you can show yourself out, because-”</i> Cveta gestures at herself, ruffled all over from your fingers- <i>“I cannot be seen like this.”</i>", parse);
 				Text.Flush();
-				
+
 				cveta.relation.IncreaseStat(70, 3);
 				TimeStep({hour: 2});
 				Gui.NextPrompt();
 			}, enabled : true,
-			tooltip : "Give the fluffier bits of her body a good scratching. She needs to loosen up."
+			tooltip : "Give the fluffier bits of her body a good scratching. She needs to loosen up.",
 		});
 		options.push({ nameStr : "Preen",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("You tell Cveta that you’d love to help her look her best for her twice-daily performances.", parse);
 				Text.NL();
@@ -612,17 +610,17 @@ export namespace CvetaScenes {
 				Text.NL();
 				Text.Add("<i>“Wonderful, [playername]. Thank you for your help - please, leave the brush by my side, and I will deal with it once I am done. Your help has been very much appreciated, but I fear I must press upon you to show yourself out, for there is still a little more that needs to be done in preparation for this evening’s performance.”</i>", parse);
 				Text.Flush();
-				
+
 				cveta.relation.IncreaseStat(70, 3);
 				TimeStep({hour: 2});
 				Gui.NextPrompt();
 			}, enabled : true,
-			tooltip : "Help Cveta make sure she’s always looking regal and proper."
+			tooltip : "Help Cveta make sure she’s always looking regal and proper.",
 		});
 		options.push({ nameStr : "Wings",
-			func : function() {
+			func() {
 				Text.Clear();
-				if(cveta.Relation() < 50) {
+				if (cveta.Relation() < 50) {
 					Text.Add("<i>“The offer is appreciated, but I believe that I will be fine with handling them on my own,”</i> Cveta tells you. <i>“My wings are very delicate things, as you might imagine, and quite sensitive, too. A deft touch is needed.”</i>", parse);
 					Text.NL();
 					Text.Add("Yeah, you can see why she’s reluctant to let you near her wings, and it’s not just because she needs them in good condition to be able to fly. Looking at the bird-morph’s wings, each and every one of her flight feathers is the rich vermillion of her body, barred with streaks of brown and tipped with a deep violet. It’s hard resist wanting to touch them, yet at the same time it seems so certain that doing so will only damage their beauty… or that you won’t be able to resist the temptation to filch a feather.", parse);
@@ -631,16 +629,15 @@ export namespace CvetaScenes {
 					Text.NL();
 					Text.Add("You nod, and back off. She stated as much - you’ll have to get her to trust you more before she’ll let you at her back.", parse);
 					Text.Flush();
-				}
-				else {
-					var first = cveta.flags["Wings"] == 0;
-					cveta.flags["Wings"] = 1;
-					
+				} else {
+					const first = cveta.flags.Wings == 0;
+					cveta.flags.Wings = 1;
+
 					Text.Add("Wordlessly, Cveta sets down her lyre, then rolls her shoulders a few times, loosening up her muscles before spreading her wings. There’s not enough space in the tent for her to extend them fully - they look like they might stretch about one and a half times as long as she is tall if you measured them from wingtip to wingtip, but it’s hard to be certain considering how well they can fold. Each glossy feather is a slightly darker shade of vermillion than her body is, and is barred with brown and tipped with a deep, rich violet.", parse);
 					Text.NL();
 					Text.Add("The songstress doesn’t complain when you unbutton her gown and ease it off her back, her wings instinctively moving in accordance with your hands as you guide them through the slits meant to accommodate them. She certainly doesn’t seem hung up about baring her top in front of you, which is probably because most of what could be seen is hidden under her lush coat of feathers. After instructing you to grab two mirrors from her trunk, she directs you in setting them up so she can see her back.", parse);
 					Text.NL();
-					if(first) {
+					if (first) {
 						Text.Add("<i>“I presume this is your first time doing this sort of thing?”</i> Cveta asks, twisting her neck to look behind her at you.", parse);
 						Text.NL();
 						Text.Add("You admit that it is.", parse);
@@ -650,21 +647,19 @@ export namespace CvetaScenes {
 						Text.Add("Then how…?", parse);
 						Text.NL();
 						Text.Add("<i>“By hand,”</i> she replies matter-of-factly, then quickly outlines what you’re supposed to do - look for gaps in her feathers, pick out dirt, gently push back into place anything that’s misaligned, amongst a few other things. You nod, feeling reasonably secure about what you’re supposed to be doing here, and sit down on the cot behind her and set to work. Cveta watches you like a hawk for the first few minutes, then relaxes a little when you fail to make any serious mistakes.", parse);
-					}
-					else {
+					} else {
 						Text.Add("You’ve done this before, and sit down on the cot to steady yourself before you get to work. Ever mindful of her appearance, Cveta watches you for a few moments, then chirps and relaxes when she’s satisfied that you remember how to go about the task.", parse);
 					}
 					Text.NL();
 					Text.Add("Cveta’s flight feathers are long and stiff, yet smooth to the touch - your fingers glide over them as if they were oiled, and considering the soft, glossy sheen emanating from them, it wouldn’t be surprising if that happened to be the case. There isn’t much in the way of dirt or dust to pick out - as could be expected of a fastidious little thing like Cveta - but the bird-morph seems to truly enjoy someone else’s fingers in her sensitive wings.", parse);
 					Text.NL();
-					if(first) {
+					if (first) {
 						Text.Add("Come to think of it, are they really as sensitive as she says they are? Wanting to find out, you dig your fingers a little deeper, reaching to the roots of her feathers and stroking the thin, muscular membranes beneath. The effect is immediate: a small half-gasp, half-chirp escapes Cveta’s beak, followed by a soft hum of pure contentment.", parse);
-					}
-					else {
+					} else {
 						Text.Add("Knowing just what the songstress needs, you ease your fingers into her wings and begin stroking gently at the sensitive flesh beneath. Cveta hums in wordless contentment, her divine voice filling the tent’s confines as you begin to work on her flight feathers.", parse);
 					}
 					Text.Flush();
-					
+
 					Gui.NextPrompt(function() {
 						Text.Clear();
 						Text.Add("You ask her if she’s enjoying herself, and she responds by arching her back into your grasp, giving you a good feel of the slight shivers running up her spine and into her wings. Now that’s definitely a yes - you’re tempted to be a little less delicate, add a little pressure here and there, but with how finely sculpted Cveta’s wings are - how great the pressures they must bear when she’s flying, and yet how easily it is for them to be broken or damaged when mishandled - the line that divides pleasure from pain is bound to be a fine one.", parse);
@@ -673,21 +668,22 @@ export namespace CvetaScenes {
 						Text.NL();
 						Text.Add("<i>“Ohhh…”</i>", parse);
 						Text.NL();
-						parse["hisher"] = player.mfFem("his", "her");
+						parse.hisher = player.mfFem("his", "her");
 						Text.Add("At last, you think you’ve done all you can for the bird-morph, and tap her on the shoulder to let her know you’re done. Flicking open dreamy eyes that quickly snap back into focus, she studies herself in both mirrors and reaches behind her to fix a few spots you missed before turning and giving you a nod. <i>“Most satisfactory, for someone who has not been doing this for the entirety of [hisher] life.”</i>", parse);
 						Text.NL();
-						var inc = player.dexterity.IncreaseStat(40, 1);
-						if(inc)
+						const inc = player.dexterity.IncreaseStat(40, 1);
+						if (inc) {
 							Text.Add("Your fingers are aching like…well, something that aches a lot, but you have to admit, you did a good job. In fact, they’ll probably end up a little swifter and more nimble from all the exercise and contorting they’ve been through - once the soreness fades, of course.", parse);
-						else
+						} else {
 							Text.Add("Beaming, you step back and admire your handiwork. It really isn’t bad, considering how nimble your fingers were at the job. Besides, Cveta got an itch she needed scratched, so it’s all good.", parse);
+						}
 						Text.NL();
-						
+
 						cveta.relation.IncreaseStat(70, 3);
-						
-						var wings = player.HasWings();
-						
-						if(wings && wings.Feathered()) {
+
+						const wings = player.HasWings();
+
+						if (wings && wings.Feathered()) {
 							Text.Add("Slowly, shakily, Cveta gets up from the stool and shrugs her shoulders violently a few times, easing her wings back into their usual folded position on her back. When she’s done, she gives you and your own pair of wings an appraising look while she gathers up the top of her gown and folds it up neatly.", parse);
 							Text.NL();
 							Text.Add("<i>“Would you be so kind as to sit down? I wish to reciprocate the favor you have done for me.”</i>", parse);
@@ -704,37 +700,37 @@ export namespace CvetaScenes {
 						}
 						Text.Add("<i>“Well,”</i> Cveta says cheerily, putting away her top in her trunk, <i>“That is that. Please, do show yourself out when you are ready, for I am feeling somewhat…“</i> she hesitates a moment, seeking the right words. <i>“Unlike myself. Perhaps I need to lie down for a little while…”</i>", parse);
 						Text.Flush();
-						
+
 						TimeStep({hour: 2});
 						Gui.NextPrompt();
 					});
 				}
 			}, enabled : true,
-			tooltip : "Help Cveta take good care of those delicate and sensitive wings of hers."
+			tooltip : "Help Cveta take good care of those delicate and sensitive wings of hers.",
 		});
 		Gui.SetButtonsFromList(options, false, null);
 	}
 
 	export function TalkPrompt() {
-		let player = GAME().player;
-		let cveta = GAME().cveta;
+		const player = GAME().player;
+		const cveta = GAME().cveta;
 
-		var parse : any = {
-			playername : player.name
+		const parse: any = {
+			playername : player.name,
 		};
-		
-		//[Wellbeing][Chat][Herself][Back]
-		var options = new Array();
+
+		// [Wellbeing][Chat][Herself][Back]
+		const options = new Array();
 		options.push({ nameStr : "Wellbeing",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("Cveta tilts her head slightly to the side and regards you. <i>“I am in fine health and of good disposition, [playername]. Your concern is appreciated. And do you fare well yourself?”</i>", parse);
 				Text.Flush();
-				
-				//[Yes][No]
-				var options = new Array();
+
+				// [Yes][No]
+				const options = new Array();
 				options.push({ nameStr : "Yes",
-					func : function() {
+					func() {
 						Text.Clear();
 						Text.Add("You tell Cveta that things are going smoothly for you.", parse);
 						Text.NL();
@@ -742,10 +738,10 @@ export namespace CvetaScenes {
 						Text.Flush();
 						CvetaScenes.TalkPrompt();
 					}, enabled : true,
-					tooltip : "You’re doing just fine."
+					tooltip : "You’re doing just fine.",
 				});
 				options.push({ nameStr : "No",
-					func : function() {
+					func() {
 						Text.Clear();
 						Text.Add("You tell Cveta that you’ve seen better days.", parse);
 						Text.NL();
@@ -753,20 +749,19 @@ export namespace CvetaScenes {
 						Text.Flush();
 						CvetaScenes.TalkPrompt();
 					}, enabled : true,
-					tooltip : "You’ve had better days."
+					tooltip : "You’ve had better days.",
 				});
 				Gui.SetButtonsFromList(options, false, null);
 			}, enabled : true,
-			tooltip : "Ask how Cveta is doing."
+			tooltip : "Ask how Cveta is doing.",
 		});
 		options.push({ nameStr : "Chat",
-			func : function() {
+			func() {
 				Text.Clear();
-				if(cveta.Relation() < 50) {
+				if (cveta.Relation() < 50) {
 					Text.Add("<i>“I am sorry, [playername]. I do not think very much of idle, inconsequential chatter, even if your intentions in doing so are good. Please, might we find a more serious topic of conversation?”</i>", parse);
-				}
-				else {
-					var scenes = new EncounterTable();
+				} else {
+					const scenes = new EncounterTable();
 					scenes.AddEnc(function() {
 						Text.Add("<i>“I have been attempting to play nice with Maria,”</i> Cveta admits to you. <i>“Zenith believes it important that notable personages within his camp be shown to present a united front, and there is much truth in his words. The going has been slow, but we have made inroads from either side and I believe that we can meet each other in the middle, as the saying goes.”</i>", parse);
 					}, 1.0, function() { return true; });
@@ -787,8 +782,8 @@ export namespace CvetaScenes {
 						Text.NL();
 						Text.Add("<i>“Hmph. I hope I tend to display more common sense than that.”</i>", parse);
 					}, 1.0, function() { return true; });
-					
-					if(cveta.BlueRoses()) {
+
+					if (cveta.BlueRoses()) {
 						scenes.AddEnc(function() {
 							Text.Add("<i>“I miss the fruit from back home,”</i> Cveta says wistfully, her gaze distant. <i>“Delicious, delicious fruit… golden pears still wet with dew, berries that burst in the mouth and taste of the golden sun, winter melons that you could either eat raw or boil into soup. It seemed that no matter what time of year it was, there was always some delectable seasonal fruit waiting to be sampled.”</i>", parse);
 						}, 1.0, function() { return true; });
@@ -805,10 +800,10 @@ export namespace CvetaScenes {
 				}
 				Text.Flush();
 			}, enabled : true,
-			tooltip : "Just chat a bit."
+			tooltip : "Just chat a bit.",
 		});
 		options.push({ nameStr : "Herself",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("<i>“I see. Do be aware that while you are free to ask questions, [playername], I am equally free to attempt to evade them or refuse to answer outright.”</i>", parse);
 				Text.NL();
@@ -816,37 +811,38 @@ export namespace CvetaScenes {
 				Text.NL();
 				Text.Add("<i>“With that in mind,”</i> Cveta continues, <i>“Which issue of mine do you wish to take up?”</i>", parse);
 				Text.Flush();
-				
+
 				CvetaScenes.HerselfPrompt();
 			}, enabled : true,
-			tooltip : "Try to get to know the songstress a little better."
+			tooltip : "Try to get to know the songstress a little better.",
 		});
 		Gui.SetButtonsFromList(options, true, CvetaScenes.Prompt);
 	}
 
 	export function HerselfPrompt() {
-		let player = GAME().player;
-		let party : Party = GAME().party;
-		let cveta = GAME().cveta;
-		let rigard = GAME().rigard;
-		let momo = GAME().momo;
-		let miranda = GAME().miranda;
+		const player = GAME().player;
+		const party: Party = GAME().party;
+		const cveta = GAME().cveta;
+		const rigard = GAME().rigard;
+		const momo = GAME().momo;
+		const miranda = GAME().miranda;
 
-		var parse : any = {
-			playername : player.name
+		const parse: any = {
+			playername : player.name,
 		};
-		
-		//[Outlaws][Nobility][Mandate][Past][Voice][Music]
-		var options = new Array();
+
+		// [Outlaws][Nobility][Mandate][Past][Voice][Music]
+		const options = new Array();
 		options.push({ nameStr : "Outlaws",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("The songstress frowns at your question, moving to smooth out a few wrinkles on her faded gown. <i>“I believe I have already related this tale to you?”</i>", parse);
 				Text.NL();
-				if(cveta.flags["Herself"] < CvetaFlags.Herself.Outlaws)
+				if (cveta.flags.Herself < CvetaFlags.Herself.Outlaws) {
 					Text.Add("You point out to Cveta that she was quite remiss on the details that last time, when she asked you to buy a violin for her. What happened after her encounter with the gate guards?", parse);
-				else
+				} else {
 					Text.Add("You say that you’d like to hear it again. Cveta sighs, but it’s a good-natured one and she clears her throat.", parse);
+				}
 				Text.NL();
 				Text.Add("<i>“Well, as I told you, Zenith was passing by Rigard on his own business - we have our own ways into the city, after all - and happened to spot me in trouble. Gathering a few of his men, he created a small diversion in order to convince the guard to take their eyes off me for a moment, whereupon I - to use the common term for the action - booked it.”", parse);
 				Text.NL();
@@ -862,22 +858,23 @@ export namespace CvetaScenes {
 				Text.NL();
 				Text.Add("“They are a group of disgusting, decadent degenerates and it is only right that anyone with a shred of actual nobility should encourage them to get their act together, lest they lose even the thin facade of legitimacy they have left.”</i>", parse);
 				Text.NL();
-				parse["binder"] = rigard.Krawitz["F"] & KrawitzFlags.Binder ? " and the binder you stole - uh, found in his study. That was pretty damning of the man" : "";
+				parse.binder = rigard.Krawitz.F & KrawitzFlags.Binder ? " and the binder you stole - uh, found in his study. That was pretty damning of the man" : "";
 				Text.Add("Well, you can’t help but admit that there was the whole matter of Lord Krawitz[binder]. Neither can you deny that the royal twins <i>are</i> running around Rigard creating mischief, and with all the new laws against non-humans in place, let alone the inane ones that apply to everyone… ", parse);
 				Text.NL();
 				Text.Add("Oh, and the patrol by the crossroads which seems to never be able to root out any bandits, no matter how many times they receive reports of such.", parse);
 				Text.NL();
 				Text.Add("<i>“Ah, if only Father were here,”</i> Cveta says with a small sniff, pulling at the neck of her gown absent-mindedly. <i>“He would outshine each and every piece of scum Rigard could throw at him, then flog them several ways in places they did not know they had before throwing them into the stocks.”</i>", parse);
 				Text.Flush();
-				if(cveta.flags["Herself"] < CvetaFlags.Herself.Outlaws)
-					cveta.flags["Herself"] = CvetaFlags.Herself.Outlaws;
+				if (cveta.flags.Herself < CvetaFlags.Herself.Outlaws) {
+					cveta.flags.Herself = CvetaFlags.Herself.Outlaws;
+				}
 				CvetaScenes.HerselfPrompt();
 			}, enabled : true,
-			tooltip : "Ask her how she ended up with the outlaws."
+			tooltip : "Ask her how she ended up with the outlaws.",
 		});
-		if(cveta.flags["Herself"] >= CvetaFlags.Herself.Outlaws) {
+		if (cveta.flags.Herself >= CvetaFlags.Herself.Outlaws) {
 			options.push({ nameStr : "Nobility",
-				func : function() {
+				func() {
 					Text.Clear();
 					Text.Add("<i>“Mmm…”</i> Cveta’s uncovered eye flicks this way and that. <i>“Are you sure you wish to hear my opinion on this subject, [playername]? It can get quite unorthodox.”</i>", parse);
 					Text.NL();
@@ -903,13 +900,14 @@ export namespace CvetaScenes {
 					Text.NL();
 					Text.Add("“What do you think?”</i>", parse);
 					Text.Flush();
-					if(cveta.flags["Herself"] < CvetaFlags.Herself.Nobility)
-						cveta.flags["Herself"] = CvetaFlags.Herself.Nobility;
-					
-					//[Naive][Idealistic][No Comment]
-					var options = new Array();
+					if (cveta.flags.Herself < CvetaFlags.Herself.Nobility) {
+						cveta.flags.Herself = CvetaFlags.Herself.Nobility;
+					}
+
+					// [Naive][Idealistic][No Comment]
+					const options = new Array();
 					options.push({ nameStr : "Naive",
-						func : function() {
+						func() {
 							Text.Clear();
 							Text.Add("Surely, she can’t be so naive as to be blind the to the way the world really is?", parse);
 							Text.NL();
@@ -917,15 +915,15 @@ export namespace CvetaScenes {
 							Text.NL();
 							Text.Add("At length, Cveta closes her eyes and holds her breath; she’s making a clear effort to calm herself. When she speaks again, her voice is flat and measured. <i>“Forgive me, [playername]. I nearly lost my composure there, a most unseemly prospect. Please, I think it best if we continued this conversation some time else. Now, away with you.”</i>", parse);
 							Text.Flush();
-							
+
 							cveta.relation.DecreaseStat(0, 5);
 							Gui.Callstack.pop();
 							Gui.NextPrompt();
 						}, enabled : true,
-						tooltip : "Sounds like this bird is overly romantic… does she know the way the real world works?"
+						tooltip : "Sounds like this bird is overly romantic… does she know the way the real world works?",
 					});
 					options.push({ nameStr : "Idealistic",
-						func : function() {
+						func() {
 							Text.Clear();
 							Text.Add("<i>“Well, of course it is,”</i> Cveta remarks dryly. <i>“It is an ideal, and thus I do not realistically expect it to be attained by anyone without immense effort, if attaining it is possible at all. Yet all things ought to strive, [playername], and it helps and inspires when one has something in mind to strive for. Aimless wandering can hardly be expected to produce results, and time is too precious to be wasted on games of chance.”", parse);
 							Text.NL();
@@ -933,31 +931,31 @@ export namespace CvetaScenes {
 							Text.NL();
 							Gui.PrintDefaultOptions();
 						}, enabled : true,
-						tooltip : "That sounds a little idealistic."
+						tooltip : "That sounds a little idealistic.",
 					});
 					options.push({ nameStr : "No comment",
-						func : function() {
+						func() {
 							Text.Clear();
 							Text.Add("<i>“That is all right,”</i> Cveta replies. clicking her beak. <i>“The less people have to think about politics in their day-to-day lives, the better the system is working to serve them in accordance with the Mandate of the Spirits. It is like… ah, air, money, or maybe love. Perfectly unimportant when all is proper and in place, a desperately pressing need when something has gone awry.”</i>", parse);
 							Text.NL();
 							Gui.PrintDefaultOptions();
 						}, enabled : true,
-						tooltip : "You haven’t really thought about it either way."
+						tooltip : "You haven’t really thought about it either way.",
 					});
 					Gui.Callstack.push(function() {
 						Text.Add("<i>“Well then,”</i> Cveta says. <i>“Is there another subject you would like to explore?”</i>", parse);
 						Text.Flush();
-						
+
 						CvetaScenes.HerselfPrompt();
 					});
 					Gui.SetButtonsFromList(options, false, null);
 				}, enabled : true,
-				tooltip : "Ask Cveta about her curious ideas on nobility."
+				tooltip : "Ask Cveta about her curious ideas on nobility.",
 			});
 		}
-		if(cveta.flags["Herself"] >= CvetaFlags.Herself.Nobility) {
+		if (cveta.flags.Herself >= CvetaFlags.Herself.Nobility) {
 			options.push({ nameStr : "Mandate",
-				func : function() {
+				func() {
 					Text.Clear();
 					Text.Add("Cveta blinks, then composes herself. <i>“I am surprised you caught that, [playername]. The Mandate of the Spirits is but a saying from where I come from. The idea goes as such: if the monarch and aristocracy of a land rule it well and justly, their reign will be blessed with peace and prosperity.”", parse);
 					Text.NL();
@@ -965,17 +963,18 @@ export namespace CvetaScenes {
 					Text.NL();
 					Text.Add("“It may not be wholly true, but the actual truth of the legend needs not have bearing on the lessons one can take away from it. Does that answer your question?”</i>", parse);
 					Text.Flush();
-					if(cveta.flags["Herself"] < CvetaFlags.Herself.Mandate)
-						cveta.flags["Herself"] = CvetaFlags.Herself.Mandate;
+					if (cveta.flags.Herself < CvetaFlags.Herself.Mandate) {
+						cveta.flags.Herself = CvetaFlags.Herself.Mandate;
+					}
 					CvetaScenes.HerselfPrompt();
 				}, enabled : true,
-				tooltip : "What is this “Mandate of the Spirits” she speaks of?"
+				tooltip : "What is this “Mandate of the Spirits” she speaks of?",
 			});
 		}
 		options.push({ nameStr : "Past",
-			func : function() {
+			func() {
 				Text.Clear();
-				if(cveta.Relation() < 30) {
+				if (cveta.Relation() < 30) {
 					Text.Add("<i>“I do not wish to discuss it.”</i>", parse);
 					Text.NL();
 					Text.Add("Is she sure? Because-", parse);
@@ -985,8 +984,7 @@ export namespace CvetaScenes {
 					Text.Add("Actually, it <b>is</b> something you do on quite a common basis. Cveta clicks her beak in distaste, then mutters something under her breath.", parse);
 					Text.NL();
 					Text.Add("<i>“Well, others are others, I suppose. But please remember this, [playername]. If there is something I wish to tell you about my past, I will do so of my own accord.”</i>", parse);
-				}
-				else if(cveta.Relation() < 50) {
+				} else if (cveta.Relation() < 50) {
 					Text.Add("The songstress mumbles and mutters at your question, voicing her displeasure. Yet by the way her uncovered eye is flicking this way and that, her suddenly soured mood doesn’t appear to be directed at you… hopefully.", parse);
 					Text.NL();
 					Text.Add("<i>“I miss the roses.”</i>", parse);
@@ -996,8 +994,7 @@ export namespace CvetaScenes {
 					Text.Add("<i>“They were all lovely, but the blue roses were the best. Not just because of their scent or appearance, but in the way they were cultivated with extreme care in order to bring out the best in them, [playername]. Cross a blue rose with another, and it is no longer blue. They represented… generations upon generations of single-minded dedication to a craft, the passing down of the proverbial torch with the trust that it would not be cast aside.”", parse);
 					Text.NL();
 					Text.Add("“That made them so much more than oddly-colored flowers.”</i>", parse);
-				}
-				else if(cveta.Relation() < 70) {
+				} else if (cveta.Relation() < 70) {
 					Text.Add("<i>“I remember…”</i>", parse);
 					Text.NL();
 					Text.Add("Yes? What does she remember?", parse);
@@ -1007,8 +1004,7 @@ export namespace CvetaScenes {
 					Text.Add("“Mother did not like it; she said that court was no place for a child to be. That just made me all the more determined to get what I could out of those trips.”</i> The songstress pauses her music, idly strumming the strings of her lyre as she’s lost in thought, then starts up the tune again. <i>“We argued a lot. Most of our disagreements only ended because I did not want my voice to wear thin.”", parse);
 					Text.NL();
 					Text.Add("“Mother was right, though. Court is not a place for a child to be. Therefore, I could not be one while I was there. It was a lesson in and of itself, and I hope I paid enough attention.”</i>", parse);
-				}
-				else {
+				} else {
 					Text.Add("<i>“Hmm…”</i>", parse);
 					Text.NL();
 					Text.Add("Hmm?", parse);
@@ -1030,16 +1026,17 @@ export namespace CvetaScenes {
 				Text.Flush();
 				CvetaScenes.HerselfPrompt();
 			}, enabled : true,
-			tooltip : "Ask Cveta about her past."
+			tooltip : "Ask Cveta about her past.",
 		});
 		options.push({ nameStr : "Voice",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("<i>“Even I do not know much about it myself, I must confess,”</i> Cveta admits, staring into the distance past your shoulder. <i>“Father told me that it has always been in our family line, just as we have always been bird-morphs of one kind or another. Our voices manifest themselves differently in accordance to who we are - for example, one of my cousins simply commands with brute force and expects to be obeyed, while I myself prefer to be more… subtle.”</i>", parse);
 				Text.NL();
 				Text.Add("You nod, and urge her to continue. This is getting to be quite interesting. Although you must ask - if it started with one of her ancestors, certainly it has been watered down considerably since? After all, the main pretext for all the repressive laws against non-humans is the purity of the royal bloodline.", parse);
-				if(momo.flags["Met"] >= MomoFlags.Met.Camp)
+				if (momo.flags.Met >= MomoFlags.Met.Camp) {
 					Text.Add(" Then there’s the matter of Momo - her draconic heritage was diluted to the point where she was the only one in a long while to manifest some of her family’s traits. Surely something like this should have happened?", parse);
+				}
 				Text.NL();
 				Text.Add("<i>“Like nobility, inheritance is more than simply blood. If it were, then the outlaws would not need to exist,”</i> Cveta replies. <i>“It is true that what you said should have happened, yet interestingly, it has not. Some of my ancestors have suggested that such failure of our gift to diminish itself through the generations is evidence it was a divine gift from a spirit - perhaps even the Lady Aria herself, or one of her subordinates - but where they see an avenue to puff up pompously, I see only wishful thinking. I do not countenance taking pride in non-achievements like these.”</i>", parse);
 				Text.NL();
@@ -1055,7 +1052,7 @@ export namespace CvetaScenes {
 				Text.NL();
 				Text.Add("“The gate guards on duty that day were simple creatures, [playername],”</i> Cveta muses, tapping her beak. <i>“Their purposes in life were to stuff their holes and sate their hungers, their minds full of the petty power with which they tormented those who wished entrance to Rigard. It was but a simple matter to pick them apart, make a good guess as to their innermost fears and desires, and turn those against them. They feared punishment, so I made them believe that I was an important envoy from the Free Cities, and they really, really wanted to let me through if they did not want to get into trouble.”</i>", parse);
 				Text.NL();
-				if(party.InParty(miranda)) {
+				if (party.InParty(miranda)) {
 					Text.Add("<i>“Pretty words from someone who hasn’t done a day’s work of labor in her life,”</i> Miranda mutters to herself contemptuously. You throw her a meaningful glance, silencing her.", parse);
 					Text.NL();
 				}
@@ -1065,14 +1062,15 @@ export namespace CvetaScenes {
 				Text.Flush();
 				CvetaScenes.HerselfPrompt();
 			}, enabled : true,
-			tooltip : "Just what is this strange power of Cveta’s?"
+			tooltip : "Just what is this strange power of Cveta’s?",
 		});
 		options.push({ nameStr : "Music",
-			func : function() {
+			func() {
 				Text.Clear();
-				
-				if(cveta.flags["Music"] < CvetaFlags.Music.Talked)
-					cveta.flags["Music"] = CvetaFlags.Music.Talked;
+
+				if (cveta.flags.Music < CvetaFlags.Music.Talked) {
+					cveta.flags.Music = CvetaFlags.Music.Talked;
+				}
 				Text.Add("Cveta doesn’t reply immediately upon hearing your question, instead half-lidding her eyes as she thinks. Slowly, she lets the current tune fade into silence and begins anew, a little ditty springing from the strings of her lyre, sharp and lively, yet with a strange yearning, a distant longing buried in the undertones, a longing for… something, but you don’t know what.", parse);
 				Text.NL();
 				Text.Add("Then as suddenly as it begun, the music’s mood changes in quick succession, turning hard and fast, then slowing to a sad crawl. One moment it gushes like a stream swollen with spring rain, then turns immovable, stolid, forbidding the next.", parse);
@@ -1093,22 +1091,22 @@ export namespace CvetaScenes {
 				Text.Flush();
 				CvetaScenes.HerselfPrompt();
 			}, enabled : true,
-			tooltip : "Ask Cveta about her interest in music."
+			tooltip : "Ask Cveta about her interest in music.",
 		});
 		Gui.SetButtonsFromList(options, true, CvetaScenes.TalkPrompt);
 	}
 
 	export function MusicPrompt() {
-		let player = GAME().player;
-		let party : Party = GAME().party;
-		let cveta = GAME().cveta;
-		let kiakai = GAME().kiakai;
+		const player = GAME().player;
+		const party: Party = GAME().party;
+		const cveta = GAME().cveta;
+		const kiakai = GAME().kiakai;
 
-		var parse : any = {
+		let parse: any = {
 			playername : player.name,
-			skinDesc : function() { return player.SkinDesc(); }
+			skinDesc() { return player.SkinDesc(); },
 		};
-		
+
 		Text.Clear();
 		Text.Add("<i>“You would like to hear me practice?”</i> the songstress says. <i>“It will not be a proper performance, just so you know. This is the time when I choose to experiment with various styles and moods, amongst other things; it is improvisation, only worse. Composition was amongst the aspects of my craft I was merely passable in, as opposed to achieving the excellence I sought.”</i>", parse);
 		Text.NL();
@@ -1118,11 +1116,11 @@ export namespace CvetaScenes {
 		Text.NL();
 		Text.Add("<b>You will not get buffs from a private performance.</b>", parse);
 		Text.Flush();
-		
-		//[Sing][Play Lyre][Play Violin]
-		var options = new Array();
+
+		// [Sing][Play Lyre][Play Violin]
+		const options = new Array();
 		options.push({ nameStr : "Sing",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("You tell Cveta that you’d like to hear her lovely voice at work.", parse);
 				Text.NL();
@@ -1130,8 +1128,8 @@ export namespace CvetaScenes {
 				Text.NL();
 				Text.Add("You waste no time in taking a few steps back and Cveta stands, setting down her lyre on her cot before working on a few vocal exercises to warm up her voice, some familiar to you, others you don’t remember. Those take but a handful of minutes to get through, and when she’s had a moment more to collect herself and adjust her posture, the songstress parts her beak and unleashes her voice upon the confines of her tent. Without lyrics or accompaniment, the song nevertheless sweeps you along like a handful of rose petals in a gale…", parse);
 				Text.NL();
-				
-				var scenes = new EncounterTable();
+
+				const scenes = new EncounterTable();
 				scenes.AddEnc(function() {
 					Text.Add("In your mind’s eye, you envision yourself as a mighty tree, deeply rooted in the earth - perhaps even the very tree at the heart of Eden itself, strong, solid, immovable. Your bark is rough and rugged, your heartwood stronger than the finest steel. Power seeps in through your feet - no, your roots - and wells up in your body, filling you right to your crown and the tips of your branches.", parse);
 					Text.NL();
@@ -1155,8 +1153,8 @@ export namespace CvetaScenes {
 				scenes.AddEnc(function() {
 					Text.Add("You are walking over a road of burning coals, the sheer heat rising from them enough to set the air above to wavering and shimmering. Cinders and ashes leap from the ground, throw up by the wind; you do your best to ignore them and press on.", parse);
 					Text.NL();
-					if(party.InParty(kiakai)) {
-						parse["name"] = kiakai.name;
+					if (party.InParty(kiakai)) {
+						parse.name = kiakai.name;
 						parse = kiakai.ParserPronouns(parse);
 						Text.Add("You are not alone, though. [name] travels down the fiery road by your side, the elf’s bare feet quickly eating up distance with nimble, graceful steps. Yet for all this, [heshe] never seems to fall ahead or behind you, instead content to press on as your companion. Every now and then, [heshe] turns to you and says something in an encouraging tone of voice, although you can’t quite make out the words.", parse);
 						Text.NL();
@@ -1165,20 +1163,19 @@ export namespace CvetaScenes {
 					Text.NL();
 					Text.Add("How long is the road? It stretches on forever into the distance, as far as the eye can see. To either side is a sea of blank darkness, its surface inky and promising of vast depths hidden beneath. Above you, a black sky devoid of stars or moon. No, there is nothing here to distract you. If you are burned, you have no one but yourself to blame.", parse);
 					Text.NL();
-					if(Math.log(player.Spi()) >= 4) {
+					if (Math.log(player.Spi()) >= 4) {
 						Text.Add("How far do you travel? Without landmarks, telling distance is impossible. Yet your spirit surges and your steps never falter. Surely there must be something waiting for you at the end of the road…", parse);
 						Text.NL();
 						Text.Add("And indeed there is. Gradually, the path of burning coals widens to form a circular island in the middle of the inky sea. Standing in the middle of the island is a single tree of indeterminate species, and perched upon its branches is Cveta. No, it isn’t her - but someone who looks distinctly like the songstress, with burning flames where her feathers should be, red and blue and green and gold.", parse);
 						Text.NL();
 						Text.Add("The flaming creature flutters down to stand before you, then draws you into her embrace without hesitation, arms and wings wrapping about you and ushering you into the center of the inferno. You know that you are being burned alive by her immense heat, that you are being reduced to little more than a handful of black ash, but it doesn’t seem to matter…", parse);
-					}
-					else {
+					} else {
 						Text.Add("Alas, somehow, your toe catches on a wayward coal, and a lance of flame runs up your leg. The pain causes you to stagger and falter, which only means the flames finally manage to find purchase on your body, consuming you from the bottom up with wanton glee. With blackened stumps for legs, you can no longer stand, and fall upon the burning coals: your last memory of the vision is the sight of the dark waves encroaching upon the burning road, waiting for you to be fully consumed so they can carry away your ashes…", parse);
 					}
 				}, 1.0, function() { return true; });
-				
+
 				scenes.Get();
-				
+
 				Text.NL();
 				Text.Add("At length, the song fades, and reality comes rushing back to you in a dizzy spell, leaving you more than a little disoriented. Instinctively, you reach for the first thing that comes to hand to steady yourself, and it just so happens that it’s Cveta’s sash. With perfect elegance, she eases your grasp away from her clothing and transfers it to her hand, then gives you a few moments to recover.", parse);
 				Text.NL();
@@ -1192,16 +1189,16 @@ export namespace CvetaScenes {
 				Text.NL();
 				Text.Add("Ever the gracious hostess, Cveta tugs at your arm, guiding your path so you can shuffle your way out of her tent. <i>“I suggest that you do not undertake any strenuous activity for the next half-hour, please.”</i>", parse);
 				Text.Flush();
-				
+
 				TimeStep({hour: 2});
 				cveta.relation.IncreaseStat(100, 2);
-				
+
 				Gui.NextPrompt();
 			}, enabled : true,
-			tooltip : "Do you know why the caged bird sings?"
+			tooltip : "Do you know why the caged bird sings?",
 		});
 		options.push({ nameStr : "Play lyre",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("You indicate that you’d like to hear her play something on her lyre.", parse);
 				Text.NL();
@@ -1211,8 +1208,8 @@ export namespace CvetaScenes {
 				Text.NL();
 				Text.Add("<i>“Let us see what we can do with this experimental piece, then…”</i>", parse);
 				Text.NL();
-				
-				var scenes = new EncounterTable();
+
+				const scenes = new EncounterTable();
 				scenes.AddEnc(function() {
 					Text.Add("Cveta’s fingers gingerly test the strings of her lyre as if she were toeing the surface of a pool - the hesitation is brief, but it doesn’t go unnoticed.", parse);
 					Text.NL();
@@ -1254,9 +1251,9 @@ export namespace CvetaScenes {
 					Text.NL();
 					Text.Add("Cveta chirps in time with her music, a mother singing to her child - and with the way she handles her lyre, cradling the instrument against her side and on her lap, that description isn’t too far off the mark. Echoing with the soft sounds of song and string, the canvas walls of the tent seem more and more distant, more and more incorporeal…", parse);
 				}, 1.0, function() { return true; });
-				
+
 				scenes.Get();
-				
+
 				Text.NL();
 				Text.Add("The sound of Cveta’s closing notes jerks you back to the here and now, and after a moment’s pause, she sets down her lyre. <i>“I think I learned a few things back there.”</i>", parse);
 				Text.NL();
@@ -1268,17 +1265,17 @@ export namespace CvetaScenes {
 				Text.NL();
 				Text.Add("<i>“Just so. Now, if you will please excuse me, I do have a few other matters to attend to. It may not be exceedingly gracious to ask you to leave right now, but would you not mind doing so anyway?”</i>", parse);
 				Text.Flush();
-				
+
 				TimeStep({hour: 2});
 				cveta.relation.IncreaseStat(100, 2);
-				
+
 				Gui.NextPrompt();
 			}, enabled : true,
-			tooltip : "Have Cveta work those slender, nimble fingers of hers… on her lyre."
+			tooltip : "Have Cveta work those slender, nimble fingers of hers… on her lyre.",
 		});
-		if(cveta.Violin()) {
+		if (cveta.Violin()) {
 			options.push({ nameStr : "Play violin",
-				func : function() {
+				func() {
 					Text.Clear();
 					Text.Add("You tell Cveta that you’d love to hear her play the violin.", parse);
 					Text.NL();
@@ -1294,8 +1291,8 @@ export namespace CvetaScenes {
 					Text.NL();
 					Text.Add("With that, the songstress hefts the instrument to her shoulder, securing it against her chin, and begins to play, letting the music take a life of its own.", parse);
 					Text.NL();
-					
-					var scenes = new EncounterTable();
+
+					const scenes = new EncounterTable();
 					scenes.AddEnc(function() {
 						Text.Add("It’s hard to deny that bringing together musician and instrument was a good thing for everyone involved. Tuned and restored by the bird-morph’s loving hands, the instrument sounds as if it was practically made for her - Cveta appears to be experimenting with some of the more traditional classical styles today, and you recognize dribs and drabs of solo virtuoso pieces that you’ve heard before at her performances, this seamstress of sound and song piecing together a cloak of many colors in the hopes that it’ll turn out well. Like an actual cloak made this way, not all of it is very coherent or practical, but it certainly is a sight to behold.", parse);
 						Text.NL();
@@ -1307,29 +1304,29 @@ export namespace CvetaScenes {
 						Text.NL();
 						Text.Add("<i>“Well?”</i> she says. <i>“How was it?”</i>", parse);
 						Text.Flush();
-						
-						//[Great!][Bad][Eh…]
-						var options = new Array();
+
+						// [Great!][Bad][Eh…]
+						const options = new Array();
 						options.push({ nameStr : "Great!",
-							func : function() {
+							func() {
 								Text.Clear();
 								Text.Add("Cveta sniffs at your answer. <i>“You do not have to flatter me, you know. That outro was deliberately bad. Whoever ends like that and lets an audience down on their expectations? They end up feeling empty and unfulfilled, you know. I am not so full of myself that I cannot bear someone pointing out a flaw in my playing, especially when the entire point of this session is to improve.”</i>", parse);
 								Text.NL();
 								Gui.PrintDefaultOptions();
 							}, enabled : true,
-							tooltip : "Tell Cveta it was pretty good."
+							tooltip : "Tell Cveta it was pretty good.",
 						});
 						options.push({ nameStr : "Bad",
-							func : function() {
+							func() {
 								Text.Clear();
 								Text.Add("Cveta nods. <i>“Well, at least you are honest about it. Yes, I did that poorly on purpose. I suppose I should not have sought to test you, [playername], but you have not disappointed me. It gets very tiring when the only thing that comes out of another’s mouth is praise - not because it is deserved, but because one seeks to flatter.”</i>", parse);
 								Text.NL();
 								Gui.PrintDefaultOptions();
 							}, enabled : true,
-							tooltip : "No, that wasn’t acceptable, especially that last bit."
+							tooltip : "No, that wasn’t acceptable, especially that last bit.",
 						});
 						options.push({ nameStr : "Eh…",
-							func : function() {
+							func() {
 								Text.Clear();
 								Text.Add("The songstress listens to your explanation and waves it off. <i>“That you are trying to be tactful in your honesty speaks well of you, [playername], but feel free to be blunt with me, especially when it comes to the matter of critique. Now, be direct.”</i>", parse);
 								Text.NL();
@@ -1339,7 +1336,7 @@ export namespace CvetaScenes {
 								Text.NL();
 								Gui.PrintDefaultOptions();
 							}, enabled : true,
-							tooltip : "Tell the truth, but be diplomatic about it."
+							tooltip : "Tell the truth, but be diplomatic about it.",
 						});
 						Gui.SetButtonsFromList(options, false, null);
 					}, 1.0, function() { return true; });
@@ -1362,11 +1359,11 @@ export namespace CvetaScenes {
 						Text.NL();
 						Text.Add("Perhaps you should ask if she’s feeling all right… even for a sad tune, this is different from her usual fare.", parse);
 						Text.Flush();
-						
-						//[Ask][Let it be]
-						var options = new Array();
+
+						// [Ask][Let it be]
+						const options = new Array();
 						options.push({ nameStr : "Ask",
-							func : function() {
+							func() {
 								Text.Clear();
 								Text.Add("You gently reach out to tap Cveta on the shoulder, and ask if anything happened to inspire today’s performance. The bird-morph doesn’t reply at first, but eventually looks up at you and shakes her head. <i>“No, I am myself today. I merely wished to experiment with a few styles I remember hearing in the distant past. It has been so long that my memories of them are not the sharpest… I merely wished to test myself to see if I could recall them satisfactorily.”</i>", parse);
 								Text.NL();
@@ -1376,16 +1373,16 @@ export namespace CvetaScenes {
 								Text.NL();
 								Gui.PrintDefaultOptions();
 							}, enabled : true,
-							tooltip : "Question Cveta if she’s feeling all right."
+							tooltip : "Question Cveta if she’s feeling all right.",
 						});
 						options.push({ nameStr : "Let it be",
-							func : function() {
+							func() {
 								Text.Clear();
 								Text.Add("Knowing how much the songstress respects her own space, you decide to keep your concerns to yourself. After all, she’ll tell you of her own accord if and when she wants to - trying to pry words from her is harder than a yarn ball from a cat-morph, which everyone knows is almost impossible.", parse);
 								Text.NL();
 								Gui.PrintDefaultOptions();
 							}, enabled : true,
-							tooltip : "If she’s feeling out of sorts, she’ll want to keep it to herself. Respect her privacy and let her be."
+							tooltip : "If she’s feeling out of sorts, she’ll want to keep it to herself. Respect her privacy and let her be.",
 						});
 						Gui.SetButtonsFromList(options, false, null);
 						Gui.Callstack.push(function() {
@@ -1416,15 +1413,15 @@ export namespace CvetaScenes {
 						Text.NL();
 						Text.Add("<i>“Then drop by tomorrow, and I will see what I can do for you,”</i> is the genial reply. <i>“Good health to you, my friend, and fare well.”</i>", parse);
 						Text.Flush();
-						
+
 						TimeStep({hour: 2});
 						cveta.relation.IncreaseStat(100, 2);
-						
+
 						Gui.NextPrompt();
 					});
 					scenes.Get();
 				}, enabled : true,
-				tooltip : "You’re certainly able to appreciate the finer things in life. The violin, please."
+				tooltip : "You’re certainly able to appreciate the finer things in life. The violin, please.",
 			});
 		}
 		Gui.SetButtonsFromList(options, true, function() {
@@ -1436,15 +1433,15 @@ export namespace CvetaScenes {
 	}
 
 	export function MariaTalkFirst() {
-		let player = GAME().player;
-		let cveta = GAME().cveta;
+		const player = GAME().player;
+		const cveta = GAME().cveta;
 
-		var parse : any = {
-			playername : player.name
+		const parse: any = {
+			playername : player.name,
 		};
-		
-		cveta.flags["Met"] = CvetaFlags.Met.MariaTalk;
-		
+
+		cveta.flags.Met = CvetaFlags.Met.MariaTalk;
+
 		Text.Clear();
 		Text.Add("As you step into the now-familiar confines of the outlaws' camp, the first sight you see is that of Maria pacing up to you, a scowl on her face. Something's clearly set her on edge, and hopefully it isn't your presence.", parse);
 		Text.NL();
@@ -1456,13 +1453,13 @@ export namespace CvetaScenes {
 		Text.NL();
 		Text.Add("It seems that Maria wants you to try and talk some sense into whoever this “princess” is and get her to drop her airs. Do you feel up to the task?", parse);
 		Text.Flush();
-		
+
 		TimeStep({minute: 15});
-		
-		//[Yes][No]
-		var options = new Array();
+
+		// [Yes][No]
+		const options = new Array();
 		options.push({ nameStr : "Yes",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("Maria visibly sags at your assent, letting out a sigh of relief. <i>“Oh, thank the stars and spirits. Zenith may have set me to the task, but she drives me crazy. And it's not just how stuck up she is - she uses all those strange words and I can barely understand her. Wouldn't have bothered with such an odd one myself, but he thinks he can use the bird to get leverage from the Free Cities…”</i>", parse);
 				Text.NL();
@@ -1474,10 +1471,10 @@ export namespace CvetaScenes {
 				Text.NL();
 				CvetaScenes.FirstMeeting();
 			}, enabled : true,
-			tooltip : "Take on the job, no matter how momentary, of playing camp counselor."
+			tooltip : "Take on the job, no matter how momentary, of playing camp counselor.",
 		});
 		options.push({ nameStr : "No",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("You shake your head and reply that you don't have the time, either. Besides, you point out to her, considering how “convincing” she was in your first meeting, if she can't take a mere girl in hand, who else can?", parse);
 				Text.NL();
@@ -1485,18 +1482,18 @@ export namespace CvetaScenes {
 				Text.Flush();
 				Gui.NextPrompt();
 			}, enabled : true,
-			tooltip : "If Maria doesn't have the time, then neither do you."
+			tooltip : "If Maria doesn't have the time, then neither do you.",
 		});
 		Gui.SetButtonsFromList(options, false, null);
 	}
 
 	export function MariaTalkRepeat() {
-		let player = GAME().player;
+		const player = GAME().player;
 
-		var parse : any = {
-			playername : player.name
+		const parse: any = {
+			playername : player.name,
 		};
-		
+
 		Text.Clear();
 		Text.Add("<i>“Really? You're not kidding me? I was about to tell Zenith to stuff it and look after the brat himself. I've got to take the boys out on patrol today, and it's hard to hold a steady aim when you're as pissed she can make me.”</i>", parse);
 		Text.NL();
@@ -1510,21 +1507,22 @@ export namespace CvetaScenes {
 	}
 
 	export function FirstMeeting() {
-		let player = GAME().player;
-		let cveta = GAME().cveta;
+		const player = GAME().player;
+		const cveta = GAME().cveta;
 
-		var parse : any = {
-			playername : player.name
+		const parse: any = {
+			playername : player.name,
 		};
-		
-		cveta.flags["Met"] = CvetaFlags.Met.FirstMeeting;
-		
+
+		cveta.flags.Met = CvetaFlags.Met.FirstMeeting;
+
 		Text.Add("Approaching the tent Maria pointed out, the faint sound of music reaches you as you draw close, that of a slow, dolorous piece being played on a string instrument of some sort. The music is strangely haunting, and reminds you of home, your life before you picked that gem from the mirror, of better times…", parse);
 		Text.NL();
-		if(Math.log(player.Spi()) < 4)
+		if (Math.log(player.Spi()) < 4) {
 			Text.Add("Before you know it, you realize you've been standing in the same spot for a good five minutes, entranced by the strange melody emanating from the tent flaps. Wondering what just happened, you gather your wits and take the last few steps toward the tent.", parse);
-		else
+		} else {
 			Text.Add("The otherworldly melody fills you with a lingering, sad longing, but you shake off the strange mood and step up to the tent flaps.", parse);
+		}
 		Text.NL();
 		Text.Add("Remembering what Maria said about uninvited visitors, you stop at the entrance and clear your throat, loud enough to be heard from anyone within. Nothing happens for a moment or two, and then the music ends, punctuated by a quick chord.", parse);
 		Text.NL();
@@ -1544,41 +1542,41 @@ export namespace CvetaScenes {
 		Text.NL();
 		Text.Add("Yes… you're beginning to see what Maria was getting at. You'd better keep this conversation rolling, lest it lapse into awkward silence.", parse);
 		Text.Flush();
-		
-		var opts = {
+
+		const opts = {
 			wellbeing : false,
 			outlaws   : false,
 			music     : false,
-			weather   : false
+			weather   : false,
 		};
-		
+
 		CvetaScenes.FirstMeetingPrompt(opts);
 	}
 
-	export function FirstMeetingPrompt(opts : any) {
-		let player = GAME().player;
-		
-		var parse : any = {
-			playername : player.name
+	export function FirstMeetingPrompt(opts: any) {
+		const player = GAME().player;
+
+		const parse: any = {
+			playername : player.name,
 		};
-		
-		//[Wellbeing][Outlaws][Music][Weather][Give Up]
-		var options = new Array();
-		if(opts.wellbeing == false) {
+
+		// [Wellbeing][Outlaws][Music][Weather][Give Up]
+		const options = new Array();
+		if (opts.wellbeing == false) {
 			options.push({ nameStr : "Wellbeing",
-				func : function() {
+				func() {
 					opts.wellbeing = true;
 					Text.Clear();
 					Text.Add("<i>“I am doing well, thank you very much. There are areas in my life and condition that could use improvement, but all things strive.”</i>", parse);
 					Text.Flush();
 					CvetaScenes.FirstMeetingPrompt(opts);
 				}, enabled : true,
-				tooltip : "Ask how Cveta is doing."
+				tooltip : "Ask how Cveta is doing.",
 			});
 		}
-		if(opts.outlaws == false) {
+		if (opts.outlaws == false) {
 			options.push({ nameStr : "Outlaws",
-				func : function() {
+				func() {
 					opts.outlaws = true;
 					Text.Clear();
 					Text.Add("You ask Cveta what she thinks of the outlaws.", parse);
@@ -1587,12 +1585,12 @@ export namespace CvetaScenes {
 					Text.Flush();
 					CvetaScenes.FirstMeetingPrompt(opts);
 				}, enabled : true,
-				tooltip : "As what she thinks of the outlaws."
+				tooltip : "As what she thinks of the outlaws.",
 			});
 		}
-		if(opts.music == false) {
+		if (opts.music == false) {
 			options.push({ nameStr : "Music",
-				func : function() {
+				func() {
 					opts.music = true;
 					Text.Clear();
 					Text.Add("<i>“So you heard me play? It was Lady Felicia Kobert's Song without Words in A minor, opus four. Or a variant of it adapted for a solo performance, considering it was originally meant for a proper string quartet. It's quite the moving piece, when played as the composer intended.”</i>", parse);
@@ -1607,12 +1605,12 @@ export namespace CvetaScenes {
 					Text.Flush();
 					CvetaScenes.FirstMeetingPrompt(opts);
 				}, enabled : true,
-				tooltip : "Ask Cveta about the music she was playing just now."
+				tooltip : "Ask Cveta about the music she was playing just now.",
 			});
 		}
-		if(opts.weather == false) {
+		if (opts.weather == false) {
 			options.push({ nameStr : "Weather",
-				func : function() {
+				func() {
 					opts.weather = true;
 					Text.Clear();
 					Text.Add("Cveta shrugs, letting out a slight rustle as her feathers move over the fabric of her once-glorious gown.", parse);
@@ -1629,12 +1627,12 @@ export namespace CvetaScenes {
 					Text.Flush();
 					CvetaScenes.FirstMeetingPrompt(opts);
 				}, enabled : true,
-				tooltip : "A desperate fallback for the conversationally deprived, but it's got to be something to talk about, right?"
+				tooltip : "A desperate fallback for the conversationally deprived, but it's got to be something to talk about, right?",
 			});
 		}
-		if(options.length == 0) {
+		if (options.length == 0) {
 			options.push({ nameStr : "Give up",
-				func : function() {
+				func() {
 					Text.Clear();
 					Text.Add("There's nothing left. You're all out of options for making small talk, and Cveta here is remaining as uncooperative as ever. Maybe it would be best to just leave the entire bad situation and tell Maria to-", parse);
 					Text.NL();
@@ -1648,11 +1646,11 @@ export namespace CvetaScenes {
 					Text.NL();
 					Text.Add("“So, I must ask again: will you please tell me who set you up to this? Rest assured that I do not mean to castigate whoever it happens to be.”</i>", parse);
 					Text.Flush();
-					
-					//[Truth][Silence]
-					var options = new Array();
+
+					// [Truth][Silence]
+					const options = new Array();
 					options.push({ nameStr : "Truth",
-						func : function() {
+						func() {
 							Text.Clear();
 							Text.Add("You sigh and admit that Maria was getting worried about her putting on airs, and the effect it was having on some of the outlaws. Cveta listens intently to your words, then nods.", parse);
 							Text.NL();
@@ -1666,10 +1664,10 @@ export namespace CvetaScenes {
 							Text.NL();
 							CvetaScenes.FirstMeetingCont();
 						}, enabled : true,
-						tooltip : "Tell Cveta that Maria sent you to talk to her, and why."
+						tooltip : "Tell Cveta that Maria sent you to talk to her, and why.",
 					});
 					options.push({ nameStr : "Silence",
-						func : function() {
+						func() {
 							Text.Clear();
 							Text.Add("Since Cveta's already figured out someone sent you, it'd do little good to claim you just came in for a stroll of your own accord. Shrugging, you opt to stay silent, which seems to be the best way to cover for Maria. After a few moments, Cveta realizes you aren't going to spill the beans and brushes the hair away from her usually covered eye, raising her gaze to meet your own.", parse);
 							Text.NL();
@@ -1679,12 +1677,11 @@ export namespace CvetaScenes {
 							Text.NL();
 							Text.Add("<i>“… But will you not please tell me who sent you on this errand?”</i>", parse);
 							Text.NL();
-							if(Math.log(player.Spi()) >= 4) {
+							if (Math.log(player.Spi()) >= 4) {
 								Text.Add("Strange. That feeling… it's similar to what you felt when you approached Cveta's tent and heard the music she was playing, only this had a stronger quality to it. You rub your face, clearing your thoughts, and continue your silence until it's clear to Cveta that you really aren't going to surrender this information. If the bird-morph is upset by this, she certainly doesn't show it, keeping a stiff upper - right, she doesn't have lips.", parse);
 								Text.NL();
 								Text.Add("<i>“Very well. Hold your tongue, as you will. But please inform whoever sent you that in the future, he or she would be best suited to bring any grievances directly to my face instead of hiding behind a proxy.”</i> She looks askance. <i>“As for you, [playername]…  your actions speak well of you.”</i>", parse);
-							}
-							else {
+							} else {
 								Text.Add("Of course! That's what you'd been meaning to do all along! The words flow from your lips almost unbidden - Maria worrying about the “princess” putting on airs, and how she asked you to try and get Cveta to open up. After you've finished your little tale, Cveta looks satisfied and dismisses the concerns with a small wave of a gloved hand.", parse);
 								Text.NL();
 								Text.Add("<i>“So, it was her. Do not worry, [playername]. I am comfortable as who I am; since Maria's ilk and I come from very different backgrounds, it would be amiss if there were no friction at all between our kind. It will merely take some time for them to get used to me, and for me to reciprocate the favor; I believe I can effect a reconciliation over time and get them to understand the importance of decorum in dealing with others. Thank you for bringing this to my attention.”</i>", parse);
@@ -1692,23 +1689,23 @@ export namespace CvetaScenes {
 							Text.NL();
 							CvetaScenes.FirstMeetingCont();
 						}, enabled : true,
-						tooltip : "Refuse to tell Cveta Maria sent you."
+						tooltip : "Refuse to tell Cveta Maria sent you.",
 					});
 					Gui.SetButtonsFromList(options, false, null);
 				}, enabled : true,
-				tooltip : "This clearly isn't going anywhere. Cveta clearly isn't the chatty sort, and you're beating your head against a brick wall."
+				tooltip : "This clearly isn't going anywhere. Cveta clearly isn't the chatty sort, and you're beating your head against a brick wall.",
 			});
 		}
 		Gui.SetButtonsFromList(options, false, null);
 	}
 
 	export function FirstMeetingCont() {
-		let outlaws = GAME().outlaws;
-		
-		var parse : any = {
+		const outlaws = GAME().outlaws;
+
+		const parse: any = {
 			SunlightMoonlight : WorldTime().LightStr("Sunlight", "Moonlight"),
 		};
-		
+
 		Text.Add("<i>“And with that, I think this brings our introduction to an end. It has a pleasure, I assure you, despite the circumstances under which we have been acquainted,”</i> Cveta says, rising from the stool and making a sweeping gesture toward the tent flaps. <i>“Allow me to show you out.”</i>", parse);
 		Text.NL();
 		Text.Add("Always so painfully polite, isn't she? The bird-morph takes your hand in hers and practically flows toward the exit, gently but firmly making it clear that she no longer desires your presence in her tent. [SunlightMoonlight] greets your face as you step out into the open and you make to return to the main body of the outlaws' camp, but you suddenly feel Cveta's hand on your shoulder.", parse);
@@ -1719,56 +1716,56 @@ export namespace CvetaScenes {
 		Text.NL();
 		Text.Add("With that, the bird-morph retreats into her tent, and you hear the faint shuffling of string being tied from within. Seems like she doesn't want to be disturbed any further, and the reason for that becomes clear once the music begins to pick up again, its faint melody wafting through the air of the outlaws' camp.", parse);
 		Text.Flush();
-		
+
 		outlaws.relation.IncreaseStat(100, 1);
-		
+
 		TimeStep({hour: 1});
-		
+
 		Gui.NextPrompt();
 	}
 
 	export function Performance() {
-		let player = GAME().player;
-		let party : Party = GAME().party;
-		let outlaws = GAME().outlaws;
-		let cveta = GAME().cveta;
-		let kiakai = GAME().kiakai;
-		let momo = GAME().momo;
-		let terry = GAME().terry;
-		
-		var parse : any = {
+		const player = GAME().player;
+		const party: Party = GAME().party;
+		const outlaws = GAME().outlaws;
+		const cveta = GAME().cveta;
+		const kiakai = GAME().kiakai;
+		const momo = GAME().momo;
+		const terry = GAME().terry;
+
+		let parse: any = {
 			playername : player.name,
-			skinDesc : function() { return player.SkinDesc(); },
-			cocks : function() { return player.MultiCockDesc(); },
-			vagDesc : function() { return player.FirstVag().Short(); }
+			skinDesc() { return player.SkinDesc(); },
+			cocks() { return player.MultiCockDesc(); },
+			vagDesc() { return player.FirstVag().Short(); },
 		};
-		
-		var dawn = WorldTime().hour < 12;
-		
-		var scenes = new EncounterTable();
+
+		const dawn = WorldTime().hour < 12;
+
+		let scenes = new EncounterTable();
 		scenes.AddEnc(function() {
-			parse["audience"] = "outlaws coming in from their watch shift";
+			parse.audience = "outlaws coming in from their watch shift";
 		}, 1.0, function() { return true; });
 		scenes.AddEnc(function() {
-			parse["audience"] = "exiled morph nobles";
+			parse.audience = "exiled morph nobles";
 		}, 1.0, function() { return true; });
 		scenes.AddEnc(function() {
-			parse["audience"] = "a few ragtag individuals who've come for the entertainment";
+			parse.audience = "a few ragtag individuals who've come for the entertainment";
 		}, 1.0, function() { return true; });
 		scenes.AddEnc(function() {
-			parse["audience"] = "a sizeable crowd, graced by none other than Zenith himself";
+			parse.audience = "a sizeable crowd, graced by none other than Zenith himself";
 		}, 1.0, function() { return true; });
 		scenes.Get();
-		
+
 		Text.Clear();
-		parse["comp"] = party.Num() == 2 ? party.Get(1).name :
+		parse.comp = party.Num() == 2 ? party.Get(1).name :
 						party.Num() >  2 ? "your companions" : "";
-		parse["c"] = party.Num() > 1 ? Text.Parse(" and [comp]", parse) : "";
-		parse["dawn"] = dawn ? "last night's dying embers" : "the freshly lit bonfire";
+		parse.c = party.Num() > 1 ? Text.Parse(" and [comp]", parse) : "";
+		parse.dawn = dawn ? "last night's dying embers" : "the freshly lit bonfire";
 		Text.Add("Hurrying to the enormous fire pit that serves as the central gathering grounds of the outlaws' camp, you[c] arrive just in time to find Cveta seated by the edge of [dawn], warming up for the upcoming performance. A number of outlaws have gathered to hear her play, the audience this time being primarily comprised of [audience].", parse);
 		Text.NL();
-		
-		var scenes = new EncounterTable();
+
+		scenes = new EncounterTable();
 		scenes.AddEnc(function() {
 			Text.Add("Satisfied with the turnout, Cveta stands, taking a moment to dust off the seat of her gown before addressing the audience.", parse);
 			Text.NL();
@@ -1776,22 +1773,22 @@ export namespace CvetaScenes {
 			Text.NL();
 			Text.Add("With those few words, the bird-morph secures the violin you purchased for her against her shoulder and neck and begins to play, bow moving against strings in fluid, practiced movements. It quickly becomes obvious why this particular composition has been named such: the notes that emerge from Cveta's violin start off slow and languid at first, but rapidly gain in pace and energy, the bird-morph's fingers moving furiously to keep in time with the music that drives her.", parse);
 			Text.NL();
-			if(party.Num() > 1) {
-				var comp = party.GetRandom();
-				parse["name"]  = comp.name;
-				parse["heshe"] = comp.heshe();
-				parse["c"]     = Text.Parse(" cast a glance at [name], and [heshe] is utterly captivated by the tremendous energy of Cveta's music, while you yourself", parse);
+			if (party.Num() > 1) {
+				const comp = party.GetRandom();
+				parse.name  = comp.name;
+				parse.heshe = comp.heshe();
+				parse.c     = Text.Parse(" cast a glance at [name], and [heshe] is utterly captivated by the tremendous energy of Cveta's music, while you yourself", parse);
+			} else {
+				parse.c = "";
 			}
-			else
-				parse["c"] = "";
-			
+
 			Text.Add("Even as the music itself rises to a crescendo, Cveta herself seems to slow, her eyes half-lidded in sheer concentration, her breathing slow and shallow. All around her, the whirl and frenzy of maddened music, she herself the eye of the storm, calm, peaceful, perfectly centered. It's impossible not to feel the charged atmosphere building up amongst the audience; you[c] feel invigorated, energized, and ready to go out into the rest of Eden to take names and kick asses. Thunder roars in your heart and lightning flashes through your veins to the pulse of Cveta's music, and for a moment, just for a fleeting moment, you think you could gain so much strength that you could take on anyone - even Uru herself - and come out on top…", parse);
 			Text.NL();
 			Text.Add("All good things must come to an end, though, and music and storm alike begin to die down, the last few raindrops petering out as Cveta strikes the final chord with a flourish. Carefully, she sets both violin and bow back into their case, and turns to face her audience.", parse);
-			
+
 			Text.NL();
-			Text.Add("You feel stronger.", parse, 'bold');
-			
+			Text.Add("You feel stronger.", parse, "bold");
+
 			_.each(party.members, function(ent) {
 				Status.Buff(ent, {hours: 24, Str: 1.1});
 			});
@@ -1805,13 +1802,13 @@ export namespace CvetaScenes {
 			Text.NL();
 			Text.Add("Pity there isn’t a trumpet or bugle for accompaniment, but where would the outlaws get their hands on one?", parse);
 			Text.NL();
-			parse["breakfastdinner"] = dawn ? "breakfast" : "dinner";
+			parse.breakfastdinner = dawn ? "breakfast" : "dinner";
 			Text.Add("You have to admit, it's quite catchy. Several of the outlaws in the audience must agree with you, since they're following the beat in any way they can - stamping on the ground with their boots or banging their [breakfastdinner] utensils together with varied results.", parse);
 			Text.NL();
-			if(party.Num() > 1) {
-				var comp = party.GetRandom();
-				parse["name"]   = comp.name;
-				parse["hisher"] = comp.hisher();
+			if (party.Num() > 1) {
+				const comp = party.GetRandom();
+				parse.name   = comp.name;
+				parse.hisher = comp.hisher();
 				Text.Add("Even [name] has given in to the urge to follow the music, bobbing [hisher] head in time with the drums.", parse);
 				Text.NL();
 			}
@@ -1826,8 +1823,8 @@ export namespace CvetaScenes {
 			Text.Add("<i>“Thank you, Ernest,”</i> Cveta says as she carefully sets down her lyre. <i>“I believe I speak for everyone present when I say that you performed admirably just now. Please, do not trouble yourself; I will have someone else bring back your instruments.”</i> With that, she stands and takes in her cheering audience with a satisfied air.", parse);
 
 			Text.NL();
-			Text.Add("You feel tougher.", parse, 'bold');
-			
+			Text.Add("You feel tougher.", parse, "bold");
+
 			_.each(party.members, function(ent) {
 				Status.Buff(ent, {hours: 24, Sta: 1.1});
 			});
@@ -1837,8 +1834,8 @@ export namespace CvetaScenes {
 			Text.NL();
 			Text.Add("<i>“Today, I will be performing ‘The Prophet’.”</i>", parse);
 			Text.NL();
-			if(party.InParty(kiakai)) {
-				parse["name"] = kiakai.name;
+			if (party.InParty(kiakai)) {
+				parse.name = kiakai.name;
 				Text.Add("<i>“‘The Prophet’,”</i> [name] says in a hushed whisper. <i>“I would never have expected to hear that sung here, so far away from the shrine. The hymn is sacred to Lady Aria, [playername]. Please, if nothing else, show the proper respect and remain silent while she sings.”</i>", parse);
 				Text.NL();
 			}
@@ -1856,8 +1853,8 @@ export namespace CvetaScenes {
 			Text.NL();
 			Text.Add("There are no lyrics to the hymn, yet it says so much a language all can understand, even though the exact words heard differ from one to another.", parse);
 			Text.NL();
-			if(party.InParty(kiakai)) {
-				parse["name"] = kiakai.name;
+			if (party.InParty(kiakai)) {
+				parse.name = kiakai.name;
 				parse = kiakai.ParserPronouns(parse);
 				Text.Add("A soft sniffle comes from [name] beside you; it seems that [heshe], too, has heard the music calling out to [himher]. Vaguely, you wonder just what memories Cveta's music has stirred up in [himher].", parse);
 				Text.NL();
@@ -1871,8 +1868,8 @@ export namespace CvetaScenes {
 			Text.Add("Finally, the music stops, but it takes a few moments for most of the audience to register that fact. Most of them are sniffling openly, and even the most hardened of the outlaws look slightly less curmudgeonly after sitting through the performance. Taking a few deep breaths to calm her voice, Cveta slowly opens her eyes and unclasps her hands from her breast.", parse);
 
 			Text.NL();
-			Text.Add("You feel more stoic.", parse, 'bold');
-			
+			Text.Add("You feel more stoic.", parse, "bold");
+
 			_.each(party.members, function(ent) {
 				Status.Buff(ent, {hours: 24, Spi: 1.1});
 			});
@@ -1888,9 +1885,9 @@ export namespace CvetaScenes {
 			Text.NL();
 			Text.Add("A light breeze has picked up in the camp, and your gaze wanders back to Cveta. The songstress is huddled in on herself as she plays, and your eyes are drawn to the ruffled beauty of her vermillion feathers, the flow of her gown, and those long, dexterous fingers working away with both strings and pick, fingers that could easily be put to much, much better use…", parse);
 			Text.NL();
-			if(party.InParty(kiakai) || party.InParty(terry) || party.InParty(momo)) {
-				let comp : Entity = null;
-				var scenes = new EncounterTable();
+			if (party.InParty(kiakai) || party.InParty(terry) || party.InParty(momo)) {
+				let comp: Entity = null;
+				const scenes = new EncounterTable();
 				scenes.AddEnc(function() {
 					comp = kiakai;
 				}, 1.0, function() { return party.InParty(kiakai); });
@@ -1901,27 +1898,29 @@ export namespace CvetaScenes {
 					comp = momo;
 				}, 1.0, function() { return party.InParty(momo); });
 				scenes.Get();
-				parse["name"] = comp.name;
+				parse.name = comp.name;
 				parse = comp.ParserPronouns(parse);
 				Text.Add("A slow panting from beside you draws your attention, and you turn to find [name] breathing heavily, eyes slightly glazed over. [HeShe] notices you looking at [himher], and cracks a weak smile. <i>”You know, [playername]… have I ever told you how attractive you are?”</i>", parse);
 				Text.NL();
 			}
 			Text.Add("There’s no doubt about it, not with your breath growing ragged, ", parse);
-			if(player.FirstCock())
+			if (player.FirstCock()) {
 				Text.Add("[cocks] throbbing and growing painfully stiff, ", parse);
-			if(player.FirstVag())
+			}
+			if (player.FirstVag()) {
 				Text.Add("[vagDesc] becoming noticeably moist, ", parse);
+			}
 			Text.Add("and the prickling of a flush creeping over your [skinDesc] as it spreads through your body. Sure, music can set the mood, but surely it can’t go that far on its own! Yet the sweet, honeyed notes continue to gush from Cveta’s lyre, working their magic on everyone present in the audience. You can hear a few stifled groans - perhaps it’s only propriety that’s keeping some of the more raunchy outlaws from masturbating right there and then.", parse);
 			Text.NL();
 			Text.Add("The bird-morph herself is seemingly the only one unaffected by the strange qualities of her music, her eyes closed in concentration as the piece slowly comes to an end, her fingers slowing to coax out the last few chords from her lyre. With impeccable grace, Cveta sets down her lyre and stands, and there’s a definite glint of satisfaction in her eye as she surveys her handiwork.", parse);
 			Text.NL();
 			Text.Add("After sitting through all that, you definitely feel more seductive, for the lack of a better word to describe it. Well, at least until that melody gets out of your head…", parse);
-			
+
 			player.AddLustFraction(0.5);
 
 			Text.NL();
-			Text.Add("You feel more horny.", parse, 'bold');
-			
+			Text.Add("You feel more horny.", parse, "bold");
+
 			_.each(party.members, function(ent) {
 				Status.Buff(ent, {hours: 24, Lib: 1.1});
 			});
@@ -1946,8 +1945,8 @@ export namespace CvetaScenes {
 			Text.Add("Gradually, the melody begins to fade, the pause between each note lengthening, the movements of Cveta’s fingers still smooth and practiced. With great deliberation, she plucks the strings of her lyre for the final time, then closes her eyes and bows her head even as the veil begins to lift from your own thoughts, now sharp, refreshed and possessed of a clarity you’d scarcely thought possible.", parse);
 
 			Text.NL();
-			Text.Add("You feel more quick-witted.", parse, 'bold');
-			
+			Text.Add("You feel more quick-witted.", parse, "bold");
+
 			_.each(party.members, function(ent) {
 				Status.Buff(ent, {hours: 24, Int: 1.1});
 			});
@@ -1955,14 +1954,14 @@ export namespace CvetaScenes {
 		scenes.AddEnc(function() {
 			Text.Add("Once everyone is calmed - a few of the more unruly outlaws shushed into silence by their peers - Cveta stands and hefts her violin from its case, no simple undertaking for her small frame.", parse);
 			Text.NL();
-			parse["dawn"] = dawn ? "morning" : "evening";
+			parse.dawn = dawn ? "morning" : "evening";
 			Text.Add("<i>“Thank you all for being present this [dawn],”</i> she says. <i>“Today, I will be playing ‘Defiance’ by Fenris Alwyn. Do enjoy; I believe it represents well what we all feel about the excesses of Rigard.”</i>", parse);
 			Text.NL();
 			Text.Add("Without further ado, the songstress launches into a blitz of music, an explosive start that only grows more intense as tortured notes are wrung out of her violin’s strings like water out of a stone. The furious melody that results is quick and lithe, as slippery as greased lightning, and possessed of a rampant, resilient energy that seeks release by… well, practically anything, in fact. If you calm your mind and slow your breathing, you can practically <i>feel</i> it seeping into you, tying your muscles in knots, coiling tight your thoughts, waiting for sudden release.", parse);
 			Text.NL();
-			parse["comp"] = party.Num() == 2 ? party.Get(1).name :
+			parse.comp = party.Num() == 2 ? party.Get(1).name :
 							party.Num() >  2 ? "your companions" : "";
-			parse["c"] = party.Num() > 1 ? Text.Parse(", even [comp],", parse) : "";
+			parse.c = party.Num() > 1 ? Text.Parse(", even [comp],", parse) : "";
 			Text.Add("You’re not the only one to fall under the spell of Cveta’s music - practically everyone else present[c] is looking increasingly alert and wound-up. The watch and patrols aren’t going to be napping on the job today, that’s for sure.", parse);
 			Text.NL();
 			Text.Add("Your heart is pounding, your blood fire and lightning in your veins. Even Cveta herself isn’t impervious to her own performance - the songstress’ arms and fingers are a blur as she plays, and you wonder if she’s going to have to replace the strings on her violin when she’s done. Listening to Cveta, you could run forever, leap over walls and chasms, swim the mightiest ocean - and all without breaking a sweat.", parse);
@@ -1972,14 +1971,14 @@ export namespace CvetaScenes {
 			Text.Add("The sudden silence hits like a ton of bricks, a deathly quietness hanging about the fire pit like a thick blanket. Then, and only then, is the inferno in your body allowed to slow.", parse);
 
 			Text.NL();
-			Text.Add("You feel swifter.", parse, 'bold');
-			
+			Text.Add("You feel swifter.", parse, "bold");
+
 			_.each(party.members, function(ent) {
 				Status.Buff(ent, {hours: 24, Dex: 1.1});
 			});
 		}, 1.0, function() { return cveta.Violin(); });
 		scenes.AddEnc(function() {
-			parse["dawn"] = dawn ? "morning" : "evening";
+			parse.dawn = dawn ? "morning" : "evening";
 			Text.Add("It’s a little while before everyone is seated and settled down - seems like everyone in camp is a little restless this [dawn] for some reason - but at last, relative silence falls over the fire pit, and the show can go on.", parse);
 			Text.NL();
 			Text.Add("<i>“Today,”</i> Cveta announces as she stands and dusts off the seat of her gown, <i>“I will be singing ‘Golden Aeons’, by Lady Thera of the equally Golden Plains. Please, calm yourselves and enjoy what I have to offer.”</i>", parse);
@@ -1988,7 +1987,7 @@ export namespace CvetaScenes {
 			Text.NL();
 			Text.Add("Instead of the high pitch of Cveta’s usual soprano, the songstress intentionally depresses her voice, projecting forth a rich, mellow melody and letting it sweep over her audience like a wave of gold over a shoreline. It’s a salve for the ears, and you can’t help but feel more relaxed as she continues to sing, letting your aches and worries be lifted away by the tide of her music.", parse);
 			Text.NL();
-			if(party.InParty(momo)) {
+			if (party.InParty(momo)) {
 				Text.Add("<i>“She’s pretty good, don’t you think?”</i> Momo says cheerfully, her tail swaying in time with Cveta’s singing. <i>“Although you’ve got to wonder how she crams a voice like that into her itty bitty self. You think she’d appreciate a nice meal? Poor thing could definitely use some meat on her bones.”</i>", parse);
 				Text.NL();
 			}
@@ -1999,40 +1998,41 @@ export namespace CvetaScenes {
 			Text.Add("At long last, Cveta’s song begins to fade, the songstress lingering on her last few notes before letting the music trail off into nothingness. With careful deliberation, she folds in upon herself, takes a step back, then casts her gaze over her audience to survey her handiwork.", parse);
 
 			Text.NL();
-			Text.Add("You feel more charming.", parse, 'bold');
-			
+			Text.Add("You feel more charming.", parse, "bold");
+
 			_.each(party.members, function(ent) {
 				Status.Buff(ent, {hours: 24, Cha: 1.1});
 			});
 		}, 1.0, function() { return true; });
-		
+
 		scenes.Get();
-		
+
 		Text.NL();
-		parse["dawn"] = dawn ? "morning" : "evening";
+		parse.dawn = dawn ? "morning" : "evening";
 		Text.Add("<i>“I am done,”</i> the bird-morph states flatly, taking a full curtsey to a smattering of applause. <i>“Thank you for being here this [dawn].”</i> With that, she gathers herself and steps away from the fire pit, quickly slipping away into the audience and out of sight. One by one, the outlaws rise from their feet and wander off, throwing glances back to the fire pit, as if hoping there'll be an encore.", parse);
 		Text.NL();
-		parse["dawn"] = dawn ? "risen" : "set";
+		parse.dawn = dawn ? "risen" : "set";
 		Text.Add("It's with reluctance that you pry yourself from your seat and head off about your business, the melody of Cveta's music still ringing in your head. Above you, the sun has already [dawn] - goodness, has so much time really passed?", parse);
 		Text.Flush();
-		
+
 		cveta.relation.IncreaseStat(25, 2);
 		outlaws.relation.IncreaseStat(25, 1);
 		TimeStep({hour : 2});
-		
-		if(cveta.flags["Met"] >= CvetaFlags.Met.ViolinQ && cveta.flags["Met"] < CvetaFlags.Met.Available)
+
+		if (cveta.flags.Met >= CvetaFlags.Met.ViolinQ && cveta.flags.Met < CvetaFlags.Met.Available) {
 			Gui.NextPrompt(CvetaScenes.ViolinPrompt);
-		else if(cveta.flags["Met"] < CvetaFlags.Met.ViolinQ && cveta.Relation() >= 10 && cveta.violinTimer.Expired())
+		} else if (cveta.flags.Met < CvetaFlags.Met.ViolinQ && cveta.Relation() >= 10 && cveta.violinTimer.Expired()) {
 			Gui.NextPrompt(CvetaScenes.ViolinApproach);
-		else
+ } else {
 			Gui.NextPrompt();
+ }
 	}
 
-	export function DreamRoses(ravenTrigger : any) {
-		var parse : any = {
-			raven : DreamsScenes.RavenText(ravenTrigger, " and a raven perched on one of the thorny rosebushes", " and the familiar form of a raven perched on one of the rosebushes, something you should remember")
+	export function DreamRoses(ravenTrigger: any) {
+		const parse: any = {
+			raven : DreamsScenes.RavenText(ravenTrigger, " and a raven perched on one of the thorny rosebushes", " and the familiar form of a raven perched on one of the rosebushes, something you should remember"),
 		};
-		
+
 		Text.Add("Roses.", parse);
 		Text.NL();
 		Text.Add("They stretch away from you in all directions as far as the eye can see, rosebushes dotting the grassy earth, woody vines that creep along the ground, petals that drift through the air, carried in from some unknown source by the stiff breeze that blows across the fields unimpeded. Red, white and blue, roses, roses everywhere.", parse);
@@ -2050,16 +2050,15 @@ export namespace CvetaScenes {
 		Text.Add("You wake, feeling strangely saddened.", parse);
 	}
 
+	export function DreamBrood(ravenTrigger: any) {
+		const player = GAME().player;
 
-	export function DreamBrood(ravenTrigger : any) {
-		let player = GAME().player;
-
-		var parse : any = {
-			skinDesc : function() { return player.SkinDesc(); },
+		const parse: any = {
+			skinDesc() { return player.SkinDesc(); },
 			playername : player.name,
-			raven : DreamsScenes.RavenText(ravenTrigger, " Off in the distance, high above the two of you, a raven circles in the air, its dark feathers starkly contrasting against the colorful scene. You can’t quite make it out, but does it look… jealous?", " There’s that raven again, spying on the two of you from up high in the clouds, the voyeuristic little thing. You should really remember it when you wake up.")
+			raven : DreamsScenes.RavenText(ravenTrigger, " Off in the distance, high above the two of you, a raven circles in the air, its dark feathers starkly contrasting against the colorful scene. You can’t quite make it out, but does it look… jealous?", " There’s that raven again, spying on the two of you from up high in the clouds, the voyeuristic little thing. You should really remember it when you wake up."),
 		};
-		
+
 		Text.Add("<i>“Wake up, beloved.”</i>", parse);
 		Text.NL();
 		Text.Add("You groan and roll over in the grass, the warmth of gentle spring sunlight on your [skinDesc] and against your lidded eyes. A breeze blows, bringing with it the scent of wildflowers and unripe fruit.", parse);
@@ -2077,18 +2076,17 @@ export namespace CvetaScenes {
 		Text.Add("You wake in a cold sweat, feeling slightly disappointed that you didn’t manage to remember any of the song.", parse);
 	}
 
-
-	//Trigger this the next time the player attempts to approach Cveta in her tent after the quest is over, regardless of success or failure.
+	// Trigger this the next time the player attempts to approach Cveta in her tent after the quest is over, regardless of success or failure.
 	export function PostBullTowerPerformance() {
-		let player = GAME().player;
-		let outlaws = GAME().outlaws;
-		let cveta = GAME().cveta;
+		const player = GAME().player;
+		const outlaws = GAME().outlaws;
+		const cveta = GAME().cveta;
 
-		var parse : any = {
+		const parse: any = {
 			playername : player.name,
-			skin : function() { return player.SkinDesc(); }
+			skin() { return player.SkinDesc(); },
 		};
-		
+
 		Text.Clear();
 		Text.Add("Approaching the familiar sight of Cveta’s tent, you note the flaps have been thrown wide open, allowing light to pour into its interior. Almost as if someone knew you were coming and wanted to invite you in - and sure enough, Cveta appears at the entrance, beckoning you forward. She’s evidently made more of an effort to doll up today; the differences are subtle but noticeable - an extra shine to her hair, the intense gaze that her uncovered eye holds, the smoothness of her gown. You mustn’t be moving fast enough for her liking, because she steps out into the sunlight and catches hold of your arm, gently wrapping her gloved hands about it.", parse);
 		Text.NL();
@@ -2108,7 +2106,7 @@ export namespace CvetaScenes {
 		Text.NL();
 		Text.Add("Oh, all right.", parse);
 		Text.NL();
-		if(outlaws.flags["BT"] & OutlawsFlags.BullTower.BlueRoses) {
+		if (outlaws.flags.BT & OutlawsFlags.BullTower.BlueRoses) {
 			Text.Add("<i>“Before that, though, there is something else I would like to show you,”</i> she says, reaching into a corner by the entrance and drawing out something with both hands - the small pot that holds the rose plant you filched from Bull Tower. <i>“See?”</i>", parse);
 			Text.NL();
 			Text.Add("Yes, you see. On closer inspection, it’s evident that the plant is perking up, looking far less wilted than it was back in the warehouse. Goodness knows what Preston would have done with such a treasure - nothing good, that’s for sure.", parse);
@@ -2130,31 +2128,31 @@ export namespace CvetaScenes {
 		Text.NL();
 		Text.Add("Nodding silently, Cveta brings her instrument to her shoulder and begins.", parse);
 		Text.NL();
-		
-		var Stats = {
+
+		const Stats = {
 			Str : 0,
 			Spi : 1,
 			Dex : 2,
 			Cha : 3,
-			MAX_NUM : 4
+			MAX_NUM : 4,
 		};
-		var stats = [
+		const stats = [
 			player.Str(),
 			player.Spi(),
 			player.Dex(),
-			player.Cha()
+			player.Cha(),
 		];
-		
-		var maxstat = stats[Stats.Str];
-		var stat_idx = Stats.Str;
-		for(var i = 1; i < Stats.MAX_NUM; i++) {
-			if(stats[i] > maxstat) {
+
+		let maxstat = stats[Stats.Str];
+		let stat_idx = Stats.Str;
+		for (let i = 1; i < Stats.MAX_NUM; i++) {
+			if (stats[i] > maxstat) {
 				maxstat = stats[i];
 				stat_idx = i;
 			}
 		}
-		
-		if(stat_idx == Stats.Str) {
+
+		if (stat_idx == Stats.Str) {
 			Text.Add("The first impression you get from the opening verses is how <i>steady</i> they are. Unflinching, possessed of a immense power that yet lies unseen; a strong current hidden beneath a river’s calm surface, invisible to the eye yet able lift barges and roll mighty boulders.", parse);
 			Text.NL();
 			Text.Add("There are no vocals this time, just Cveta and her violin; the way she shifts and sways is as much a part of the tune as the actual music is. The songstress’ eyes are wide as she stares into empty space, alternating between torturing and coaxing the instrument into producing the low-pitched notes just so.", parse);
@@ -2172,15 +2170,13 @@ export namespace CvetaScenes {
 			Text.Add("Immortal.", parse);
 			Text.NL();
 			Text.Add("Cveta’s fingers tremble, as does her bow, but the music holds; no notes are missed, each and every one holding in tune.", parse);
-		}
-		else if(stat_idx == Stats.Spi) {
+		} else if (stat_idx == Stats.Spi) {
 			Text.Add("The first thing that strikes you about the music is how <i>large</i> it is. No, maybe large isn’t the proper word  - <i>weighty</i> would be more appropriate, for there’s definitely a sense of gravitas about the deep, somber notes that fill the tent and pour out into the daylight. It brings to mind someone larger than his or her body, someone who fills a room with their presence, someone who fills others - be it one way or the other…", parse);
 			Text.NL();
 			Text.Add("Accompanying this is a slow, rhythmic chanting, perhaps something that might be heard in a particularly pious temple. Contrasting with the timbre of the violin’s melody, the songstress’ beautiful soprano gives rise to quiet vocals - not trying to disappear or go unheard, but rather focusing the power of her voice into a smaller space such that it stands out against the strings.", parse);
 			Text.NL();
 			Text.Add("Reverent - no, perhaps even mystical; that is the outcome of the duality instrument and voice present. Images of vast skies, of stars twinkling in an eternal cosmos, of a void that stretches in all directions come to mind unbidden, a blank canvas waiting for you to fill it with life and color -", parse);
-		}
-		else if(stat_idx == Stats.Dex) {
+		} else if (stat_idx == Stats.Dex) {
 			Text.Add("The first thing you notice about the tune is how quickly it <i>rolls</i>, a magnificent vivace that skips and leaps from verse to verse like an acrobat from perch to perch. Cveta’s fingers and bow slip across the violin strings like greased quicksilver, capering hither and thither to effect her performance.", parse);
 			Text.NL();
 			Text.Add("Even the vocals, though wordless, are tongue-twisting sequences - and yet Cveta manages to enunciate each and every one of them in quick succession. They should be nonsense - you <i>know</i> they mean nothing and form no proper words, yet you can’t help but get the impression the songstress is speaking in some foreign language, that it would all make sense if only you could find the key -", parse);
@@ -2190,8 +2186,7 @@ export namespace CvetaScenes {
 			Text.Add("Thousands of feet belonging to as many people, dancing about a pole while dressed in their best colors.", parse);
 			Text.NL();
 			Text.Add("A rhythm, a beat, a quickening of one’s pulse, a sensation of limberness in wit and limb that never seems to stop.", parse);
-		}
-		else { // Cha
+		} else { // Cha
 			Text.Add("The music starts off somewhat slow and remains that way - a languid waltz that smacks of refinement and sensuality alike. There are no actual vocals this time around, but Cveta hums along to the music of her violin, the gentle caress of her voice emanating from somewhere deep within her breast. The movements of her fingers are tender and precise, coaxing the strings to produce the tones that she needs.", parse);
 			Text.NL();
 			Text.Add("In your mind’s eye, you dream of coy smiles and subtle gestures, of overwhelming self-assurance and confident gazes. A flattering outfit that obscures and leaves the imagination to fill in the gaps, more powerful than bare skin itself.", parse);
@@ -2203,12 +2198,12 @@ export namespace CvetaScenes {
 		Text.NL();
 		Text.Add("Once the final note sounds in the air, Cveta lets out the breath she’d been holding in, wings and shoulders sagging at the sudden release as she lowers her violin and set it back in its case. <i>“What do you think, [playername]? Does it suit you, who you think you are? I am not very good at words, so… I thought this would be the best way to express myself.”</i>", parse);
 		Text.Flush();
-		
-		//[Yes][No]
-		var options = new Array();
+
+		// [Yes][No]
+		const options = new Array();
 		options.push({ nameStr : "Yes",
 			tooltip : "Yes, it does quite fit you.",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("Why yes, you tell the songstress - it does sound a lot like you.", parse);
 				Text.NL();
@@ -2219,11 +2214,11 @@ export namespace CvetaScenes {
 				Text.Add("<i>“Think of a book. It is not that the words are missing, but one cannot be completely sure what has been put to paper is what is meant…”</i> she steps back and casts an appraising eye on you. <i>“Well, it is good that I achieved what I set out to do.</i>", parse);
 				Text.NL();
 				Gui.PrintDefaultOptions();
-			}, enabled : true
+			}, enabled : true,
 		});
 		options.push({ nameStr : "No",
 			tooltip : "No, that’s not how you see yourself.",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("Cveta looks a little worried for a moment, then the mood passes and her expression reasserts itself to her usual calm demeanor. <i>“Well, maybe I was wrong and misread you,”</i> she admits. <i>“But there is a difference between how one sees oneself and what one <b>is</b>. I can only read the latter, not the former.”</i>", parse);
 				Text.NL();
@@ -2232,9 +2227,9 @@ export namespace CvetaScenes {
 				Text.Add("<i>“Either that, or as I said, I misread you.”</i> She thinks a moment. <i>“It is not often that I distrust my own judgement and start to second-guess myself.</i>", parse);
 				Text.NL();
 				Gui.PrintDefaultOptions();
-			}, enabled : true
+			}, enabled : true,
 		});
-		
+
 		Gui.Callstack.push(function() {
 			Text.Add("<i>“Either way, thank you for being a good audience today.”</i>", parse);
 			Text.NL();
@@ -2252,64 +2247,64 @@ export namespace CvetaScenes {
 			Text.NL();
 			Text.Add("<b>You may proposition Cveta for more kinds of interactions from now on.</b>", parse);
 			Text.Flush();
-			
+
 			TimeStep({hour: 1});
-			
-			cveta.flags["Intimate"] |= CvetaFlags.Intimate.Introduced;
-			
+
+			cveta.flags.Intimate |= CvetaFlags.Intimate.Introduced;
+
 			Gui.NextPrompt();
 		});
-		
+
 		Gui.SetButtonsFromList(options, false, null);
 	}
 
 	export function IntimatePrompt() {
-		var parse : any = {
-			
+		const parse: any = {
+
 		};
-		
-		//[Nuzzle][Cuddle][Grope]
-		var options = new Array();
+
+		// [Nuzzle][Cuddle][Grope]
+		const options = new Array();
 		options.push({ nameStr : "Nuzzle",
 			tooltip : "She may not be able to kiss you, but this is pretty good, too.",
-			func : function() {
+			func() {
 				CvetaScenes.IntimateNuzzle();
-			}, enabled : true
+			}, enabled : true,
 		});
 		options.push({ nameStr : "Cuddle",
 			tooltip : "Embrace the beautiful bird’s warmth.",
-			func : function() {
+			func() {
 				CvetaScenes.IntimateCuddle();
-			}, enabled : true
+			}, enabled : true,
 		});
 		options.push({ nameStr : "Grope",
 			tooltip : "Yes, you want to feel more of that flesh under her feathers.",
-			func : function() {
+			func() {
 				CvetaScenes.IntimateGrope();
-			}, enabled : true
+			}, enabled : true,
 		});
-		
+
 		Gui.SetButtonsFromList(options, true, function() {
 			Text.Clear();
 			Text.Add("However, the small flirtation aside, you decide that you’re not quite in the mood for touchy-feely right now. Maybe later.", parse);
 			Text.NL();
 			Text.Add("Is it just you, or does Cveta look relieved? The expression flickers so quickly on her face that you can’t be sure it was even there…", parse);
 			Text.Flush();
-			
+
 			CvetaScenes.Prompt();
 		});
 	}
 
 	export function IntimateNuzzle() {
-		let player = GAME().player;
-		let cveta = GAME().cveta;
+		const player = GAME().player;
+		const cveta = GAME().cveta;
 
-		var parse : any = {
+		let parse: any = {
 			playername : player.name,
-			hairLong : player.Hair().Long()
+			hairLong : player.Hair().Long(),
 		};
 		parse = player.ParserTags(parse);
-		
+
 		Text.Clear();
 		Text.Add("Stepping forward, you gently move to ease Cveta’s lyre away from her; the songstress puts up a token resistance, then sighs lightly and allows you to set it by the foot of her bed. The music hasn’t stopped, though; faint as it is, she’s still humming gently in the back of her throat, and the hint of warmth in her music grows as you gather your pretty little pet up in your arms and press her against you.", parse);
 		Text.NL();
@@ -2319,7 +2314,7 @@ export namespace CvetaScenes {
 		Text.NL();
 		Text.Add("The songstress was never one for words, but her chirping and the faint fluttering of her wings tells you all you need to know. Running your fingers through Cveta’s long, flame-red hair, you press your face against her forehead and repay the favor. How she manages to always smell so clean and fresh while living amongst the outlaws may be one of Eden’s unsolved mysteries, but the warmth that she exudes, her body pressed firmly against yours, needs no explaining.", parse);
 		Text.NL();
-		if(player.HasLongHair()) {
+		if (player.HasLongHair()) {
 			Text.Add("A shift of Cveta’s head, and a gentle nibble at your [hairLong] gets your attention - still in your embrace, the songstress has one of your locks in her beak, trying to tuck it away. Is she trying to preen you? She doesn’t seem to realize what she’s doing, though, so you’re more than content to let her continue the harmless gesture.", parse);
 			Text.NL();
 		}
@@ -2331,25 +2326,25 @@ export namespace CvetaScenes {
 		Text.NL();
 		Text.Add("<i>“Yes, you do. Even if you do not know it. That may have been pleasant, but duty calls, [playername]. Work before pleasure.”</i>", parse);
 		Text.Flush();
-		
+
 		TimeStep({hour: 1});
-		
+
 		CvetaScenes.Prompt();
-		
+
 		cveta.relation.IncreaseStat(100, 2);
-		
+
 		Gui.NextPrompt();
 	}
 
 	export function IntimateCuddle() {
-		let player = GAME().player;
-		let cveta = GAME().cveta;
+		const player = GAME().player;
+		const cveta = GAME().cveta;
 
-		var parse : any = {
+		const parse: any = {
 			playername : player.name,
-			skin : function() { return player.SkinDesc(); }
+			skin() { return player.SkinDesc(); },
 		};
-		
+
 		Text.Clear();
 		Text.Add("Just a cuddle can’t hurt, can it? Can it?", parse);
 		Text.NL();
@@ -2369,10 +2364,9 @@ export namespace CvetaScenes {
 		Text.NL();
 		Text.Add("Yes?", parse);
 		Text.NL();
-		if(cveta.Relation() < 85) {
+		if (cveta.Relation() < 85) {
 			Text.Add("<i>“N-no. Never mind.”</i>", parse);
-		}
-		else {
+		} else {
 			Text.Add("A musical hum emanating from her throat, the songstress finally gives in and snuggles close, her elegance remaining unspoiled as she unabashedly shares all the warmth her body can muster.", parse);
 			Text.NL();
 			Text.Add("It feels very, very nice.", parse);
@@ -2388,32 +2382,32 @@ export namespace CvetaScenes {
 		Text.NL();
 		Text.Add("After all, just like music, a simple touch can indeed speak so much more than mere words.", parse);
 		Text.Flush();
-		
+
 		TimeStep({hour: 1});
-		
+
 		CvetaScenes.Prompt();
-		
+
 		cveta.relation.IncreaseStat(100, 2);
-		
+
 		Gui.NextPrompt();
 	}
 
 	export function IntimateGrope() {
-		let player = GAME().player;
-		let cveta = GAME().cveta;
+		const player = GAME().player;
+		const cveta = GAME().cveta;
 
-		var parse : any = {
-			playername : player.name
+		let parse: any = {
+			playername : player.name,
 		};
 		parse = player.ParserTags(parse);
-		
-		var first = !(cveta.flags["Intimate"] & CvetaFlags.Intimate.Groped);
-		
+
+		const first = !(cveta.flags.Intimate & CvetaFlags.Intimate.Groped);
+
 		Text.Clear();
-		if(cveta.Relation() >= 80) {
-			cveta.flags["Intimate"] |= CvetaFlags.Intimate.Groped;
-			
-			if(first) {
+		if (cveta.Relation() >= 80) {
+			cveta.flags.Intimate |= CvetaFlags.Intimate.Groped;
+
+			if (first) {
 				Text.Add("Cveta looks unsure at your proposition, her playing coming to an abrupt stop as she reaches up to brush away her hair from her eyes. She’s clearly trying to buy time for her to think things through, but all the time in the world won’t save her, not with the jumbled, warring thoughts and desires that must be going through her head.", parse);
 				Text.NL();
 				Text.Add("<i>“I…”</i>", parse);
@@ -2423,14 +2417,12 @@ export namespace CvetaScenes {
 				Text.Add("She sets down her instrument a little hesitantly. <i>“If this is your desire, [playername], then let us begin posthaste.”</i>", parse);
 				Text.NL();
 				Text.Add("The songstress might be reluctant now, but you’re sure she’ll change her attitude once you’re done with her.", parse);
-			}
-			else {
+			} else {
 				Text.Add("A small, contented chirp escapes Cveta’s throat as she stops playing and sets down her instrument. With a soft flutter of her wings, she closes the short distance between the two of you, then rubs her beak against your shoulder eagerly. You pat Cveta on the head and tousle her hair in return, feeling her breath quicken against your [skin].", parse);
 				Text.NL();
 				Text.Add("Well, she was never the best at expressing herself with words, so this is probably the best way to go about it.", parse);
 			}
-		}
-		else {
+		} else {
 			Text.Add("The moment the words leave your mouth, there’s an uncomfortable silence in the tent, the music coming to an abrupt stop. While Cveta doesn’t get all indignant at you bringing up the idea, she does seem quite reluctant… while you’ve done your best to break down her inhibitions, it’s not quite enough - yet.", parse);
 			Text.NL();
 			Text.Add("After all the two of you have been through together, you’re almost there. All you need to do is to nudge the songstress a little to send her careening over the edge, get a little closer to her. You’ve waited this long; a little more isn’t going to hurt.", parse);
@@ -2460,10 +2452,11 @@ export namespace CvetaScenes {
 		Text.NL();
 		Text.Add("Almost done with her petite bosom, you work away at each breast in turn with one hand, doing your best to milk her like a barn animal. There’s barely enough to grasp there, but barely is the key word here. The songstress is unable to hold back the moan that escapes her beak, rubbing the gentle concave of her midriff against you, desperate to assuage the ache that’s crept into it. It keeps her occupied while you undo the knot that keeps her sash tied, at the very least - the long vermillion ribbon of silk and satin drifts to the ground swimming and twirling, leaving you free to stick the now-free hand past her waistband and into the skirts of her gown.", parse);
 		Text.NL();
-		if(first)
+		if (first) {
 			Text.Add("Is that silk you feel beneath your fingers? You can’t see it, but you can definitely feel the exquisite fabric, sodden with her feminine honey. Silken panties… well, did you expect anything different? She <i>is</i> who she is, after all.", parse);
-		else
+		} else {
 			Text.Add("Just as you expected, Cveta’s silken panties are sopping wet; you can feel the distinctive slickness of all that pussy juice that’s causing the fabric to stick to her mound.", parse);
+		}
 		Text.Add(" At least there’s no doubt she wants it, and badly at that. Gradually, you ease up on Cveta’s chest, sliding that hand down to your pretty bird’s waist while reaching for her crotch with the one already in her skirts. She sings as you rub away, her gloved fingers digging into your back, small breasts heaving…", parse);
 		Text.NL();
 		Text.Add("…Come to think of it, you’re vaguely aware of a faint warmth growing in the songstress’ lower belly, pressed against your [skin]…", parse);
@@ -2474,16 +2467,16 @@ export namespace CvetaScenes {
 		Text.NL();
 		Text.Add("From the way her eyes are practically bulging and unfocused to her trembling legs, it seems she’s on the verge of cumming all over you. All it would take is a gentle touch in the right place to set off your petite pet - but will you do it?", parse);
 		Text.Flush();
-		
+
 		cveta.relation.IncreaseStat(100, 3);
-		
+
 		TimeStep({minute: 45});
-		
-		//[Yes][No]
-		var options = new Array();
+
+		// [Yes][No]
+		const options = new Array();
 		options.push({ nameStr : "Yes",
 			tooltip : "Screw that, she’s too far gone. Full steam ahead!",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("Stop? Screw that, even if you stopped now she’d probably just push herself over the edge anyway. A few deft strokes of your fingers against your broody bird’s pussy is all it takes to send Cveta over the edge, a series of sharp trills rising from her throat as her feminine honey overflows; her pussy lips clench, desperately seeking something to draw into her. Unable to keep standing, Cveta collapses against you, cum stains starting to spread on the skirt of her gown, and you carefully set her down on her bed.", parse);
 				Text.NL();
@@ -2495,15 +2488,15 @@ export namespace CvetaScenes {
 				Text.NL();
 				Text.Add("If she’s acting like this, there’s probably some kind of hang-up she’s having. Maybe it’s just that she’s a prude, but that would be too easy… turning that question over in your mind, you excuse yourself. There’s got to be some way you can break whatever’s holding her back…", parse);
 				Text.Flush();
-				
+
 				TimeStep({minute: 15});
-				
+
 				Gui.NextPrompt();
-			}, enabled : true
+			}, enabled : true,
 		});
 		options.push({ nameStr : "No",
 			tooltip : "Let her calm down. Pushing her too far now may make her clam up later.",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("Carefully, you withdraw your hand from Cveta’s skirts and set her down on her bed, giving her time to calm her thoughts. It takes a good while, but eventually her panting slows as the heat subsides, her gaze becoming focused once more.", parse);
 				Text.NL();
@@ -2515,11 +2508,11 @@ export namespace CvetaScenes {
 				Text.NL();
 				Text.Add("It doesn’t look like Cveta is actually pushing you away, but there’s clearly some kind of hang-up she’s having over this whole thing. There’s got to be some way you can break whatever’s holding her back… even if the opportunity may not be here just yet. Shrugging, you wipe yourself off with a nearby cloth and promise to be back later after she’s calmed herself.", parse);
 				Text.Flush();
-				
+
 				TimeStep({minute: 15});
-				
+
 				Gui.NextPrompt();
-			}, enabled : true
+			}, enabled : true,
 		});
 		Gui.SetButtonsFromList(options, false, null);
 	}

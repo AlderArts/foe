@@ -21,7 +21,7 @@ enum TargetMode {
 	Enemies     = 5,
 	AllyNotSelf = 6,
 	AllyFallen  = 7,
-	All         = 8
+	All         = 8,
 }
 
 namespace TargetMode {
@@ -48,7 +48,7 @@ export class Ability {
 	cooldown : number;
 	onCast : any[];
 	castTree : any[];
-	
+
 	constructor(name? : string) {
 		this.targetMode = TargetMode.Enemy;
 		this.name = name || "ABILITY";

@@ -1,31 +1,31 @@
 /*
- * 
+ *
  * Define Belinda
- * 
+ *
  */
-import { Entity } from '../../entity';
-import { Race } from '../../body/race';
-import { Color } from '../../body/color';
-import { WorldTime, GAME, WORLD } from '../../GAME';
+import { Color } from "../../body/color";
+import { Race } from "../../body/race";
+import { Entity } from "../../entity";
+import { GAME, WORLD, WorldTime } from "../../GAME";
 
 export namespace BelindaFlags {
 	export enum Met {
 		NotMet = 0,
-		Met    = 1
+		Met    = 1,
 	}
 }
 
 export class Belinda extends Entity {
-	constructor(storage? : any) {
+	constructor(storage?: any) {
 		super();
 
 		this.ID = "belinda";
 
 		// Character stats
 		this.name = "Belinda";
-		
+
 		this.sexlevel = 5;
-		
+
 		this.body.DefFemale();
 		this.FirstVag().virgin   = false;
 		this.Butt().virgin       = false;
@@ -35,44 +35,45 @@ export class Belinda extends Entity {
 		this.SetSkinColor(Color.black);
 		this.SetHairColor(Color.blue);
 		this.SetEyeColor(Color.green);
-		
-		this.flags["Met"]      = BelindaFlags.Met.NotMet;
 
-		if(storage) this.FromStorage(storage);
+		this.flags.Met      = BelindaFlags.Met.NotMet;
+
+		if (storage) { this.FromStorage(storage); }
 	}
 
-	Met() {
-		return this.flags["Met"] >= BelindaFlags.Met.Met;
+	public Met() {
+		return this.flags.Met >= BelindaFlags.Met.Met;
 	}
-	
-	FromStorage(storage : any) {
+
+	public FromStorage(storage: any) {
 		this.LoadPersonalityStats(storage);
 		// Load flags
 		this.LoadFlags(storage);
 	}
-	
-	ToStorage() {
-		let storage : any = {
-			
+
+	public ToStorage() {
+		const storage: any = {
+
 		};
-		
+
 		this.SavePersonalityStats(storage);
-		
+
 		this.SaveFlags(storage);
-		
+
 		return storage;
 	}
-	
-	//TODO
+
+	// TODO
 	// Schedule
-	IsAtLocation(location : any) {
+	public IsAtLocation(location: any) {
 		location = location || GAME().party.location;
-		if(location == WORLD().loc.Rigard.Brothel.brothel)
+		if (location === WORLD().loc.Rigard.Brothel.brothel) {
 			return (WorldTime().hour >= 18 || WorldTime().hour < 6);
+		}
 		return false;
-	}	
+	}
 }
 
 export namespace BelindaScenes {
 
-};
+}

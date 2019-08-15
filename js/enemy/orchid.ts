@@ -118,18 +118,18 @@ export class OrchidBoss extends BossEntity {
 		Text.Add("Orchid squirms and sways her hips.");
 		Text.NL();
 		const scenes = new EncounterTable();
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			Text.Add("<i>“Wouldn’t it be easier to just give in?”</i>");
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () =>  true);
+		scenes.AddEnc(() => {
 			Text.Add("<i>“You know you’ll lose in the end… why even fight it?”</i>");
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () =>  true);
+		scenes.AddEnc(() => {
 			Text.Add("<i>“I can’t wait to use these tentacles on you...”</i>");
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () =>  true);
+		scenes.AddEnc(() => {
 			Text.Add("<i>“I’ve got so much cum packed up, just for you!”</i>");
-		}, 1.0, function() { return true; });
+		}, 1.0, () =>  true);
 
 		scenes.Get();
 		Text.NL();
@@ -155,60 +155,60 @@ export class OrchidBoss extends BossEntity {
 			Abilities.EnemySkill.TViolate.Use(encounter, this, highlust);
 		} else if (choice < 0.1 && Abilities.EnemySkill.TSnare.enabledCondition(encounter, this)) {
 			Abilities.EnemySkill.TSnare.Use(encounter, this, t);
- } else if (choice < 0.2 && Abilities.EnemySkill.TSpray.enabledCondition(encounter, this)) {
+		} else if (choice < 0.2 && Abilities.EnemySkill.TSpray.enabledCondition(encounter, this)) {
 			Abilities.EnemySkill.TSpray.Use(encounter, this, party);
- } else if (choice < 0.3 && Abilities.EnemySkill.TVenom.enabledCondition(encounter, this)) {
+		} else if (choice < 0.3 && Abilities.EnemySkill.TVenom.enabledCondition(encounter, this)) {
 			Abilities.EnemySkill.TVenom.Use(encounter, this, t);
- } else if (choice < 0.4 && Abilities.EnemySkill.TRavage.enabledCondition(encounter, this)) {
+ 		} else if (choice < 0.4 && Abilities.EnemySkill.TRavage.enabledCondition(encounter, this)) {
 			Abilities.EnemySkill.TRavage.Use(encounter, this, t);
- } else if (choice < 0.6) { // Tease
+ 		} else if (choice < 0.6) { // Tease
 			const parse: any = {
 
 			};
 
 			const scenes = new EncounterTable();
-			scenes.AddEnc(function() {
+			scenes.AddEnc(() => {
 				Text.Add("Orchid dances back lithely, quickly escaping your reach. Her tentacles writhe and thresh about, dragging the helpless centauress close to the corrupted dryad.", parse);
 				Text.NL();
 				const scenes = new EncounterTable();
-				scenes.AddEnc(function() {
+				scenes.AddEnc(() => {
 					Text.Add("Seemingly without effort, Orchid hoists the larger deertaur into the air, roughly impaling her every hole with multiple tentacles. The four-footed forest creature moans around the plant-cocks shoved down her throat, her eyes rolling into the back of her head as the tentacles pump her full of corrupted cum, bloating her stomach.", parse);
-				}, 1.0, function() { return true; });
-				scenes.AddEnc(function() {
+				}, 1.0, () =>  true);
+				scenes.AddEnc(() => {
 					Text.Add("A large mass of plant-cocks coil together, forming a formidable tower, as thick as the corrupted dryad’s waist. Flashing you an evil grin, Orchid slams the centaur down on top of it, impaling her on at least three feet of the horse-sized plant-dildo.", parse);
 					Text.NL();
 					Text.Add("The doe is unable to do anything but moan as the mass of tentacles strains against her already considerable limits, struggling pitifully as she orgasms.", parse);
-				}, 1.0, function() { return true; });
-				scenes.AddEnc(function() {
+				}, 1.0, () =>  true);
+				scenes.AddEnc(() => {
 					Text.Add("Stringing the doe up with her limbs spread wide, Orchid lets out a throaty moan as she unloads a massive amount of semen on the centaur, painting her white with a one-man tentacle cum shower.", parse);
-				}, 1.0, function() { return true; });
+				}, 1.0, () =>  true);
 				scenes.Get();
 
 				Text.NL();
 				Text.Add("<i>“You are next!”</i> Orchid taunts, carelessly discarding the spent doe in a sticky heap.", parse);
 				Text.NL();
 
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 1.0, () =>  true);
+			scenes.AddEnc(() => {
 				Text.Add("Orchid smiles wickedly at you as she makes a large bound, jumping up beside her mother in the roots of the huge tree. <i>“See how they struggle, mommy. Can’t you help me convince them how good it will feel when I fuck them?”</i> she asks sweetly, rubbing the older dryad’s skin with her tentacles.", parse);
 				Text.NL();
 				encounter.stage = encounter.stage || 0;
-				if (encounter.stage == 0) {
+				if (encounter.stage === 0) {
 					Text.Add("<i>“D-daughter, you know not what you do!”</i> Mother Tree gasps feebly.", parse);
 					Text.NL();
 					Text.Add("<i>“Oh, I know exactly what I’m doing!”</i> the dryad replies merrily.", parse);
-				} else if (encounter.stage == 1) {
+				} else if (encounter.stage === 1) {
 					Text.Add("<i>“O-Orchid… what has… happened to you?”</i> Mother Tree moans, trying to fight the tentacles still thrusting inside her.", parse);
- } else {
+ 				} else {
 					Text.Add("<i>“Y-yes! Fuck me!”</i> Mother tree moans, completely lost in pleasure.", parse);
- }
+ 				}
 				Text.NL();
 				Text.Add("Orchid laughs maniacally as she lets her plant-cocks violate the brown-skinned milf, stretching her well beyond her limits. The voluptuous dryad cries out as she orgasms, sap spraying everywhere from her overstuffed cunny and almond nipples.", parse);
 				Text.NL();
 				Text.Add("<i>“Give in, and your pleasure shall be this a hundredfold!”</i> the dryad moans sultrily.", parse);
 				Text.NL();
 				encounter.stage++;
-			}, 1.0, function() { return true; });
+			}, 1.0, () =>  true);
 
 			scenes.Get();
 
